@@ -3,6 +3,8 @@ const { MIN_BRIDGE_SIZE, MAX_BRIDGE_SIZE } = require('./lib/constants/bridge');
  * 다리 건너기 게임 진행을 위해 입력받은 값의 유효성을 검사하는 역할을 한다.
  */
 const BridgeValidator = {
+  MIN_BRIDGE_SIZE: 3,
+  MAX_BRIDGE_SIZE: 20,
   /**
    * @param {number} bridgeSize
    */
