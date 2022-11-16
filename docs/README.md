@@ -31,20 +31,24 @@
 
 ### InputView와 OutputView에 대해서
 
-- [ ] 두 객체 모두 `woowacourse/mission-utils`를 활용한다.
+- [ ] 두 객체 모두 `woowacourse/mission-utils`를 활용하기.
+- [ ] Input의 경우 내부적으로 모든 로직을 처리하지 말고 next라는 함수를 통해서 다음 행동을 구현하게끔 로직 구성
 
 ### BrideMaker과 관련하여
 
-- [ ] BridgeMaker은 사이즈(size)와 0,1를 임의로 생성하는 함수(generateRandomNumber)를 인자로 받는다.
-- [ ] 인자로 받은 사이즈만큼 '반복'을 통해서 다리의 모양을 'U,D'로 이루어진 string 배열로 반환해야 한다.
+- [ ] BridgeMaker은 사이즈(size)와 0,1를 임의로 생성하는 함수(generateRandomNumber)를 인자로 받기.
+- [ ] 인자로 받은 사이즈만큼 '반복'을 통해서 다리의 모양을 'U,D'로 이루어진 string 배열로 반환하기.
 
 ### BridgeGame과 관련하여
 
+- [ ] Bridge를 프로퍼티로 가지고 있게끔 구현
 - [ ]
 
 ###
 
 ## 구현 전략
+
+- 자바스크립트가 함수를 일급객체로 취급한다는 점을 이용해서 다음에 실행될 함수를 넘겨서 차례대로 실행시켜볼까 싶습니다. 그렇지만 이럴 경우에 callback hell 현상이 발생할 것으로 예상됩니다.
 
 ## 후기
 
