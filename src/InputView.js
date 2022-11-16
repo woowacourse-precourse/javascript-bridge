@@ -6,13 +6,11 @@ const { Console } = require('@woowacourse/mission-utils');
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
+   * @param {object} appController 게임을 총괄하는 컨트롤러
    */
-  readBridgeSize() {
+  readBridgeSize(appController) {
     Console.readLine('\n다리의 길이를 입력해주세요.\n', bridgeSize => {
-      /**
-       * TODO: make bridge
-       */
-      // this.bridgeMaker.makeBridge();
+      appController.createBridge(bridgeSize);
     });
   },
 

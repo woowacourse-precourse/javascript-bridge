@@ -1,23 +1,34 @@
-const { Console } = require('@woowacourse/mission-utils');
+const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
+const BridgeValidator = require('./BridgeValidator');
 
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
 class App {
+  #bridgeGame;
+
+  constructor() {
+    this.#bridgeGame = new BridgeGame();
+  }
+
   play() {
     OutputView.printGameStartMessage();
     this.inputBridgeSize();
   }
 
   inputBridgeSize() {
-    InputView.readBridgeSize();
-    /**
-     * TODO:
-     * 1. validate bridge size
-     * 2. catch error & print error message
-     * 3. make bridge
-     */
+    InputView.readBridgeSize(this);
+  }
+
+  createBridge(bridgeSize) {
+    try {
+      BridgeValidator.validateBridgeSize(bridgeSize);
+      BridgeMaker.makeBridge(bridgeSize, () => {});
+    } catch (err) {
+      OutputView.printErrorMessage(err.message);
+      this.inputBridgeSize();
+    }
   }
 }
 
