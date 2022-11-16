@@ -6,20 +6,15 @@
 //  InputView의 메서드의 인자는 변경할 수 있다.
 //  사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
 
-const { Console } = require('@woowacourse/mission-utils');
-const BridgeMaker = require('./BridgeMaker');
-const Validator = require('./Validator')
+const { Console } = require("@woowacourse/mission-utils");
+const { INPUT } = require("./constants");
 
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    Console.readLine('', (input) => {
-      if (Validator.isInRange(input) && Validator.isNumber(input)) {
-        return input;
-      }
-    });
+  readBridgeSize(callback) {
+    Console.readLine(INPUT.ASK_BRIDGE_LENGTH, callback);
   },
 
   /**
