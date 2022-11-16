@@ -20,6 +20,10 @@ const OutputView = {
   printStartAnnouncement() {
     Console.print('다리 건너기 게임을 시작합니다.');
   },
+
+  printErrorMessage(error) {
+    Console.print(error);
+  },
 };
 
 module.exports = OutputView;
