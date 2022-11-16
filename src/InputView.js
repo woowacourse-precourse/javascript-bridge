@@ -3,6 +3,8 @@ const { MESSAGE_PROCESS, MESSAGE_ERROR } = require('./Constants');
 const OutputView = require('./OutputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeGame = require('./BridgeGame');
+const bridgeGame = new BridgeGame();
 
 const InputView = {
   readBridgeSize() {
@@ -11,6 +13,7 @@ const InputView = {
 
   setBridgeSize(bridgeSize) {
     this.validateBridgeSize(bridgeSize);
+    bridgeGame.setBridge(BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator));
   },
 
   validateBridgeSize(bridgeSize) {
