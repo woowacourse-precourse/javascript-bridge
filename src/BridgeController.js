@@ -1,5 +1,6 @@
 const InputView = require('./InputView');
 const bridgeValidation = require('./validation/bridgeValidation');
+const movingValidation = require('./validation/movingValidation');
 const { print } = require('./utils/MissionUtils');
 
 class BridgeController {
@@ -16,6 +17,15 @@ class BridgeController {
       if (!bridgeValidation(input)) {
         catchError('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
         return this.progressSize();
+      }
+    });
+  }
+
+  progressMoving() {
+    InputView.readMoving((input) => {
+      if (!movingValidation(input)) {
+        catchError('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+        return this.progressMoving();
       }
     });
   }
