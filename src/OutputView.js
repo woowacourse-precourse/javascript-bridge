@@ -22,7 +22,7 @@ const OutputView = {
     MissionUtils.Console.print("최종 게임 결과");
     strArry.forEach(str => MissionUtils.Console.print(str));
     MissionUtils.Console.print('');
-    MissionUtils.Console.print("최종 게임 결과: " + (isSuccess ? "성공" : "실패"));
+    MissionUtils.Console.print("게임 성공 여부: " + (isSuccess ? "성공" : "실패"));
     MissionUtils.Console.print("총 시도한 횟수: " + countTry);
   },
 
