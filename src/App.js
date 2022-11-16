@@ -1,5 +1,8 @@
+const WoowaBrigde = require("./WoowaBridge");
 class App {
-  play() {}
+  play() {
+    WoowaBrigde.play();
+  }
 }
 
 module.exports = App;
