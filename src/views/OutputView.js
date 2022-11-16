@@ -1,8 +1,9 @@
 const Console = require('../utils/Console');
+const { MESSAGE_GAME } = require('../constants/message');
 
 const OutputView = {
   printStartMessage() {
-    Console.print('다리 건너기 게임을 시작합니다.');
+    Console.print(MESSAGE_GAME.START);
   },
 
   printMap() {},

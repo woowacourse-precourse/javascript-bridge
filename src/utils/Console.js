@@ -1,17 +1,17 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
-class Console {
-  static readLine(query, callback) {
+const Console = {
+  readLine(query, callback) {
     MissionUtils.Console.readLine(query, callback);
-  }
+  },
 
-  static print(message) {
+  print(message) {
     MissionUtils.Console.print(message);
-  }
+  },
 
-  static close() {
+  close() {
     MissionUtils.Console.close();
-  }
-}
+  },
+};
 
 module.exports = Console;
