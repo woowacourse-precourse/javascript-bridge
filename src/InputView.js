@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const {
   GAME_MESSAGE,
   BRIDGE_RANGE,
@@ -18,7 +19,17 @@ const InputView = {
     Console.readLine(GAME_MESSAGE.inputLength, (userInput) => {
       const bridgeSize = Number(userInput);
       this.bridgeValidation(bridgeSize);
+      const bridgeArray = this.generateRandomNumber(bridgeSize);
+      console.log(bridgeArray);
     });
+  },
+  generateRandomNumber(size) {
+    const randomArray = [];
+    for (let count = 0; count < size; count += 1) {
+      const number = BridgeRandomNumberGenerator.generate();
+      randomArray.push(number);
+    }
+    return randomArray;
   },
 
   checkBridgeInteger(bridgeSize) {
@@ -73,7 +84,6 @@ const InputView = {
   readGameCommand() {
     Console.print(GAME_MESSAGE.retry);
     Console.readLine('', (userInput) => {
-      console.log(userInput);
       this.checkRetryLowercase(userInput);
       this.checkRetryWrong(userInput);
     });
