@@ -1,3 +1,6 @@
+const { Console } = require('@woowacourse/mission-utils');
+const { SENTENCE } = require('./Constants');
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -5,7 +8,11 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize() {
+    let bridgeLength;
+    Console.readLine(SENTENCE.LENGTH, (input) => (bridgeLength = input));
+    return Number(bridgeLength);
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.

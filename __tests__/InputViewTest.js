@@ -8,8 +8,4 @@ describe('입력 테스트', () => {
 
     expect(length).toEqual(10);
   });
-
-  test('jio', () => {
-    expect('hi').toEqual('hi');
-  });
 });
