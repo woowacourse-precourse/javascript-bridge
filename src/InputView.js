@@ -9,6 +9,7 @@ const InputView = {
    */
   readBridgeSize(){
     Console.readline("다리의 길이를 입력해주세요" , (num) => {
+      this.bridgeException(num);
       return num;
     })
   },
@@ -22,6 +23,12 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {},
+
+  bridgeException(num){
+    if(num < 3 || num > 20){
+      throw new Error("[ERROR] 다리의 길이는 3 이상 20 이하여야 합니다.");
+    }
+  }
 };
 
 module.exports = InputView;
