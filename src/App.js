@@ -6,6 +6,7 @@ const OutputView = require("./OutputView");
 class App {
     play() {
         OutputView.printHello();
+        const length = InputView.readBridgeSize();
     }
 }
 
