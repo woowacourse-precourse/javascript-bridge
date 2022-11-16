@@ -1,4 +1,3 @@
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  * 1. 프로퍼티를 추가할 수 없다.
