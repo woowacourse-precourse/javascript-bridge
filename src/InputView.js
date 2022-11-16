@@ -3,6 +3,8 @@ const {
   GAME_MESSAGE,
   BRIDGE_RANGE,
   ERROR_BRIDGE_MESSAGE,
+  SHORT_CUT,
+  ERROR_PLAYING_MESSAGE,
 } = require('./constants');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -45,8 +47,23 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(GAME_MESSAGE.move, (userInput) => {
-      console.log(userInput);
+      this.checkMoveLowercase(userInput);
+      this.checkMoveWrong(userInput);
     });
+  },
+
+  checkMoveLowercase(userInput) {
+    if (
+      userInput === SHORT_CUT.up.toLowerCase() ||
+      userInput === SHORT_CUT.down.toLowerCase()
+    ) {
+      throw new Error(ERROR_PLAYING_MESSAGE.lowercase);
+    }
+  },
+  checkMoveWrong(userInput) {
+    if (userInput !== SHORT_CUT.up && userInput !== SHORT_CUT.down) {
+      throw new Error(ERROR_PLAYING_MESSAGE.wrong);
+    }
   },
 
   /**

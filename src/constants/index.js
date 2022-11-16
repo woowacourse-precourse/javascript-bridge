@@ -28,13 +28,13 @@ const ERROR_BRIDGE_MESSAGE = Object.freeze({
 const ERROR_PLAYING_MESSAGE = Object.freeze({
   message: `이동할 칸의 입력은 ${SHORT_CUT.up} 혹은 ${SHORT_CUT.down}여야 합니다.`,
   lowercase: `${ERROR_SUBJECT} 대문자가 아닌 소문자를 입력하였습니다. ${ERROR_RULE_MESSAGE.playing}`,
-  wrong: `${ERROR_SUBJECT} ${SHORT_CUT.up} 또는 ${SHORT_CUT.down}이 아닌 다른 문자를 입력하였습니다. ${ERROR_RULE_MESSAGE.playing}`,
+  wrong: `${ERROR_SUBJECT} ${SHORT_CUT.up} 또는 ${SHORT_CUT.down}가 아닌 다른 문자를 입력하였습니다. ${ERROR_RULE_MESSAGE.playing}`,
 });
 
 const ERROR_RETRY_MESSAGE = Object.freeze({
   message: `게임 종료 여부의 입력은 ${SHORT_CUT.retry} 혹은 ${SHORT_CUT.quit}여야 합니다.`,
   lowercase: `${ERROR_SUBJECT} 대문자가 아닌 소문자를 입력하였습니다. ${ERROR_RULE_MESSAGE.retry}`,
-  wrong: `${ERROR_SUBJECT} ${SHORT_CUT.retry} 또는 ${SHORT_CUT.quit}이 아닌 다른 문자를 입력하였습니다. ${ERROR_RULE_MESSAGE.retry}`,
+  wrong: `${ERROR_SUBJECT} ${SHORT_CUT.retry} 또는 ${SHORT_CUT.quit}가 아닌 다른 문자를 입력하였습니다. ${ERROR_RULE_MESSAGE.retry}`,
 });
 
 const GAME_MESSAGE = Object.freeze({
