@@ -5,7 +5,7 @@
 랜덤하게 구성된 다리를 생성한다. 사용자는 위로 갈지 아래로 갈지 선택하여 다리를 건넌다.  
 건널 수 있는 다리를 선택하여 완주하는 것이 목표.
 
-[깃허브 저장소](https://github.com/dragonfruitlemonade/javascript-bridge)
+[깃허브 저장소](https://github.com/dragonfruitlemonade/javascript-bridge)  
 
 ## 기능 목록
 
@@ -28,10 +28,10 @@
     * [ ] 다리 이동시키기 move
     * [ ] 게임 다시 시도 retry
 ---
-* [ ] App
+* [ ] App  
 
-## 신경써야 할점
-  
+## 신경써야 할점  
+
 * [ ] InputView
     * 제공된 InputView 객체를 활용해 구현해야 한다.
     * InputView의 파일 경로는 변경할 수 있다.
@@ -58,7 +58,7 @@
     * BridgeGame에 필드(인스턴스 변수)를 추가할 수 있다.
     * BridgeGame의 파일 경로는 변경할 수 있다.
     * BridgeGame의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
-    * 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
+    * 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.  
 
 ## 기능 테스트 목록
 
