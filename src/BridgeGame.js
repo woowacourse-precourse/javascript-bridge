@@ -4,9 +4,10 @@ const { Console } = require("@woowacourse/mission-utils");
  */
 class BridgeGame {
   #tryCount;
-
-  constructor(tryCount) {
+  #gameResult;
+  constructor(tryCount, gameResult) {
     this.#tryCount = tryCount;
+    this.#gameResult = gameResult;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -27,14 +28,27 @@ class BridgeGame {
     this.#tryCount = this.#tryCount + 1;
   }
 
-  move(safeBridge, userMove) {
-    let Count = this.#tryCount;
+  pass() {
+    this.#gameResult = this.#gameResult + "O";
+  }
+  fail() {
+    this.#gameResult = this.#gameResult + "X";
+  }
 
-    if (safeBridge[this.#tryCount] === this.wordConverse(userMove)) {
-      this.tryCountUp();
-      return Count;
+  result() {
+    return this.#gameResult;
+  }
+
+  move(safeBridge, userMove) {
+    if (safeBridge[this.#tryCount] !== this.wordConverse(userMove)) {
+      this.fail();
+      return false;
     }
-    return false;
+    if (safeBridge[this.#tryCount] === this.wordConverse(userMove)) {
+      this.pass();
+      this.tryCountUp();
+      return true;
+    }
   }
 
   /**
