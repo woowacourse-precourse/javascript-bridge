@@ -4,11 +4,14 @@
 class BridgeGame {
   #bridge     // 생성된 다리 정보
   #curr       // 현재 플레이어 다리 위치
+  #isAlive    // 현재 플레이어 생존 여부
   #try        // 현재까지 시도 횟수
+
 
   constructor(bridge) {
     this.#bridge = [...bridge];
     this.#curr = 0;
+    this.#isAlive = true;
     this.#try = 1;
   }
   /**
@@ -19,6 +22,7 @@ class BridgeGame {
   move(input) {
     const result = this.#bridge[this.#curr] == input;
     this.#curr += 1;
+    this.#isAlive = result;
     return result;
   }
 
@@ -34,13 +38,26 @@ class BridgeGame {
 
   /**
    * 다리 끝에 도착 여부 반환
-   * @return {boolean} bridge의 길이와 curr의 길이가 같으면 true, 다르면 false
+   * @return {boolean} bridge의 길이와 curr의 길이가 같으면서 플레이어 생존시 true, 아니면 false
    */
   isArrived() {
-    return this.#bridge.length == this.#curr;
+    return this.#bridge.length == this.#curr && this.#isAlive;
   }
 
-  
+  stateToString() {
+    let upper = '[';
+    let down = '[';
+    for(let i=0; i<this.#curr-1; i++) {
+      upper += i!=0 ? '|' : '';
+      down += i!=0 ? '|' : '';
+      upper += this.#bridge[i] == 'U' ? ' O ' : '   ';
+      down += this.#bridge[i] == 'U' ? '   ' : ' O ';
+    }
+    upper += ']';
+    down += ']';
+    return [upper, down];
+  }
+
 }
 
 module.exports = BridgeGame;
