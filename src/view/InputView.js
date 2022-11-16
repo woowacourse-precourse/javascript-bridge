@@ -2,7 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const bridgeGame = require('../model/BridgeGame');
-const {DEFAULTS, CONSOLELINE, ERRORLINE} = require('../utils/Constants');
+const {CONSOLELINE} = require('../utils/Constants');
 const validation = require('../utils/Validation');
 const OutputView = require('./OutputView');
 
@@ -11,7 +11,6 @@ const OutputView = require('./OutputView');
  */
 
 let answer = [];
-let cnt_move = 0;
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
@@ -22,7 +21,6 @@ const InputView = {
       try{
         validation.checkBridgeSize(input);
       } catch(err){
-        MissionUtils.Console.print(ERRORLINE.BRIDGE_LENGTH_ERROR);
         return this.readBridgeSize();
       }
       this.getBridge(input);
@@ -32,28 +30,36 @@ const InputView = {
   getBridge(input){
     const bridgeAnswer = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator.generate);
     answer = bridgeAnswer;
-    this.readMoving(bridgeAnswer);
+    this.readMoving(bridgeAnswer, 0);
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(answer) {
-    cnt_move += 1;
+  readMoving(answer, move_cnt) {
     MissionUtils.Console.readLine(CONSOLELINE.MOVE_INPUT, (upOrdown) => {
       try{
         validation.checkCanMove(upOrdown);
       } catch(err){
-        MissionUtils.Console.print(ERRORLINE.MOVE_ERROR);
-        return this.readMoving(answer);
+        return this.readMoving(answer, move_cnt);
       }
       const gameLog = OutputView.printMap(answer, upOrdown);
-      if(this.restartCheck(cnt_move, gameLog)){
-        cnt_move = 0;
-        return this.readGameCommand();
-      }
-      this.readMoving(answer);
+      move_cnt += 1;
+      this.restartOrSuccess(move_cnt, gameLog)
     })
+  },
+
+  restartOrSuccess(move_cnt, gameLog){
+    if(this.restartCheck(move_cnt, gameLog)){
+      this.readGameCommand();
+    }
+    if (this.SuccessCheck(move_cnt, gameLog)){
+      MissionUtils.Console.close();
+      //success - output 처리
+    }
+    else{
+      this.readMoving(answer, move_cnt);
+    }
   },
 
   /**
@@ -64,20 +70,26 @@ const InputView = {
       try{
         validation.checkRestartOrNot(restart);
       } catch(err){
-        MissionUtils.Console.print(ERRORLINE.RESTART_ERROR);
         return this.readGameCommand();
       }
-      this.readMoving(answer);
+      restart === 'R' ? this.readMoving(answer, 0) : MissionUtils.Console.close();
     })
   },
 
   restartCheck(cnt_move, gameLog){
-    if (cnt_move == answer.length){
+    if (cnt_move == answer.length && gameLog[0][gameLog[0].length-1] !== 'O' && gameLog[1][gameLog[1].length-1] !== 'O'){
       bridgeGame.init();
       return true;
     }
     if (gameLog[0][gameLog[0].length-1] === 'X' || gameLog[1][gameLog[1].length-1] === 'X'){
       bridgeGame.init();
+      return true;
+    }
+    return false;
+  },
+
+  SuccessCheck(cnt_move, gameLog){
+    if (cnt_move == answer.length && gameLog[0][gameLog[0].length-1] !== 'X' && gameLog[1][gameLog[1].length-1] !== 'X'){
       return true;
     }
     return false;
