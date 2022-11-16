@@ -1,12 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
-
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
-   * @param {object} appController 게임을 총괄하는 컨트롤러
+   * @param {Object} appController 게임을 총괄하는 컨트롤러
    */
   readBridgeSize(appController) {
     Console.readLine('\n다리의 길이를 입력해주세요.\n', bridgeSize => {
@@ -16,7 +15,7 @@ const InputView = {
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
-   * @param {object} appController 게임을 총괄하는 컨트롤러
+   * @param {Object} appController 게임을 총괄하는 컨트롤러
    */
   readMoving(appController) {
     Console.readLine(
