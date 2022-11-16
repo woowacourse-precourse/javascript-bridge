@@ -1,0 +1,22 @@
+{
+  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "rules": {
+    "no-restricted-syntax": ["error", "BinaryExpression[operator='in']"],
+    "max-depth": ["error", 2],
+    "max-lines-per-function": ["error", 10],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "bracketSpacing": true,
+        "printWidth": 80,
+        "semi": true,
+        "trailingComma": "all",
+        "tabWidth": 2
+      }
+    ]
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  }
+}
