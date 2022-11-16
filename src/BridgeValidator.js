@@ -36,6 +36,27 @@ const BridgeValidator = {
       bridgeSize < this.MIN_BRIDGE_SIZE || bridgeSize > this.MAX_BRIDGE_SIZE
     );
   },
+
+  /**
+   *
+   * @param {string} moving
+   */
+  validateMoving(moving) {
+    if (this.isInvalidMoving(moving)) {
+      throw new Error(
+        '[ERROR] 유효하지 않은 이동입니다. U 또는 D를 입력해 주세요.',
+      );
+    }
+  },
+
+  /**
+   *
+   * @param {string} moving
+   * @returns {boolean} 유효하지 않은 이동인 경우 true, 아니면 false를 반환한다.
+   */
+  isInvalidMoving(moving) {
+    return !['U', 'D'].includes(moving);
+  },
 };
 
 module.exports = BridgeValidator;
