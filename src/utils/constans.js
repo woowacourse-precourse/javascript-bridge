@@ -13,4 +13,9 @@ const OUTPUT_MESSAGE = {
   BRIDGE_MAP: "",
 };
 
-module.exports = { INPUT_MESSAGE, OUTPUT_MESSAGE };
+const COMMAND = {
+  MOVING: { UP: "U", DOWN: "D" },
+  GAME: { RETRY: "R", QUIT: "Q" },
+};
+
+module.exports = { INPUT_MESSAGE, OUTPUT_MESSAGE, COMMAND };
