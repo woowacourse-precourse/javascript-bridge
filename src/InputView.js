@@ -5,6 +5,7 @@ const {
   ERROR_BRIDGE_MESSAGE,
   SHORT_CUT,
   ERROR_PLAYING_MESSAGE,
+  ERROR_RETRY_MESSAGE,
 } = require('./constants');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -73,7 +74,23 @@ const InputView = {
     Console.print(GAME_MESSAGE.retry);
     Console.readLine('', (userInput) => {
       console.log(userInput);
+      this.checkRetryLowercase(userInput);
+      this.checkRetryWrong(userInput);
     });
+  },
+
+  checkRetryLowercase(userInput) {
+    if (
+      userInput === SHORT_CUT.retry.toLowerCase() ||
+      userInput === SHORT_CUT.quit.toLowerCase()
+    ) {
+      throw new Error(ERROR_RETRY_MESSAGE.lowercase);
+    }
+  },
+  checkRetryWrong(userInput) {
+    if (userInput !== SHORT_CUT.retry && userInput !== SHORT_CUT.quit) {
+      throw new Error(ERROR_RETRY_MESSAGE.wrong);
+    }
   },
 };
 
