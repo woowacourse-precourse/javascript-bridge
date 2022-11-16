@@ -12,6 +12,7 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
+      MissionUtils.Console.print('');
       const bridgeGame = new BridgeGame(BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator.generate));
       this.readMoving(bridgeGame);
     });
@@ -22,13 +23,14 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     MissionUtils.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (input) => {
-      if(!bridgeGame.move(input)) {
-        this.readGameCommand();
+      const roundResult = bridgeGame.move(input);
+      OutputView.printMap(bridgeGame.stateToString());
+      if(!roundResult) {
+        this.readGameCommand(bridgeGame);
       } else if (bridgeGame.isArrived()){
-        OutputView.printResult(bridgeGame.result());
+        OutputView.printResult(bridgeGame.stateToString(), bridgeGame.isArrived(), bridgeGame.getTry());
         return null;
       } 
-      OutputView.printMap(bridgeGame.state());
       this.readMoving(bridgeGame);
     });
   },
@@ -40,8 +42,9 @@ const InputView = {
     MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (input) => {
       if(input == 'R') {
         bridgeGame.retry();
-        this.readMoving();
+        this.readMoving(bridgeGame);
       } else if(input == 'Q') {
+        OutputView.printResult(bridgeGame.stateToString(), bridgeGame.isArrived(), bridgeGame.getTry());
         return null;
       } else {
         throw new Error("[ERROR] R 혹은 Q를 입력해야 합니다.");
