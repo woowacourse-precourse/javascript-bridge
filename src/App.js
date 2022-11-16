@@ -10,6 +10,13 @@ class App {
   inputBridgeLength() {
     InputView.readBridgeSize((bridgeLength) => {
       console.log(bridgeLength);
+      this.inputReadMoving();
+    });
+  }
+
+  inputReadMoving() {
+    InputView.readMoving((move) => {
+      console.log(move);
     });
   }
 }
