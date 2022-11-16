@@ -2,6 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const ValidateSize = require("./Validation/ValidateSize");
 const ValidateMoving = require("./Validation/ValidateMoving");
+const ValidateCommand = require("./Validation/ValidateCommand");
 const { GUIDE_MSG } = require("./constants");
 
 const InputView = {
@@ -19,16 +20,18 @@ const InputView = {
       ValidateMoving(answer);
       bridgeGame.move(answer)
         ? this.readMoving(bridgeGame)
-        : this.readGameCommand();
+        : this.readGameCommand(bridgeGame);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-    Console.print("You're done!");
-    Console.close();
+  readGameCommand(bridgeGame) {
+    Console.readLine(GUIDE_MSG.RETRY_MSG, (answer) => {
+      ValidateCommand(answer);
+      bridgeGame.retry(answer) ? this.readMoving(bridgeGame) : Console.close();
+    });
   },
 };
 
