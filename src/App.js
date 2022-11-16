@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const { PRINT_MESSAGE } = require("./constant/Constant");
 const InputView = require("./InputView");
 
 class App {
@@ -5,10 +7,16 @@ class App {
   #moving;
 
   play() {
-    InputView.readBridgeSize((size) => this.getlength(size));
+    this.startGame();
   }
 
-  getlength(size) {
+  startGame() {
+    MissionUtils.Console.print(PRINT_MESSAGE.GAME_START);
+
+    InputView.readBridgeSize((size) => this.getBridgeSize(size));
+  }
+
+  getBridgeSize(size) {
     this.#length = size;
 
     InputView.readMoving((moving) => this.getMoving(moving));

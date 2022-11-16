@@ -1,23 +1,18 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { INPUT_MESSAGE } = require("./constant/Constant");
+
 const InputView = {
-  readBridgeSize(getlength) {
-    MissionUtils.Console.readLine("다리의 길이를 입력해주세요.", getlength);
+  readBridgeSize(getBridgeSize) {
+    MissionUtils.Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, getBridgeSize);
   },
 
   readMoving(getMoving) {
-    MissionUtils.Console.readLine(
-      "이동할 칸을 선택해주세요. (위: U, 아래: D)",
-      getMoving
-    );
+    MissionUtils.Console.readLine(INPUT_MESSAGE.MOVING, getMoving);
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+  readGameCommand(getGameCommand) {
+    MissionUtils.Console.readLine(INPUT_MESSAGE.GAME_COMMAND, getGameCommand);
+  },
 };
 
 module.exports = InputView;
