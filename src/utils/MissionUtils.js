@@ -7,3 +7,9 @@ function readLine(message, callback) {
 function print(...messages) {
   return messages.forEach((message) => MissionUtils.Console.print(message));
 }
+
+function close() {
+  return MissionUtils.Console.close();
+}
+
+module.exports = { readLine, print, close };
