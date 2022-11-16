@@ -19,6 +19,7 @@ const BridgeMaker = {
       bridge.push(number);
       count += 1;
     }
+
     return bridge;
   },
   changeBridgeShape(bridge) {
