@@ -5,10 +5,12 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridgeSize;
+  #bridge;
+  #moveCount;
 
   constructor(bridgeSize) {
-    this.#bridgeSize = bridgeSize;
+    this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+    this.#moveCount = 0;
   }
 
   /**
@@ -17,8 +19,13 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    const bridge = BridgeMaker.makeBridge(this.#bridgeSize, BridgeRandomNumberGenerator.generate);
-    console.log(bridge);
+    // console.log(direction, this.#bridge, this.#moveCount);
+    if (direction === this.#bridge[this.#moveCount]) {
+      this.#moveCount += 1;
+      return true;
+    }
+    this.retry();
+    return false;
   }
 
   /**

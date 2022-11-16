@@ -17,7 +17,9 @@ class App {
 
   inputReadMoving() {
     InputView.readMoving((direction) => {
-      this.bridgeGame.move(direction);
+      if (this.bridgeGame.move(direction)) {
+        this.inputReadMoving();
+      }
     });
   }
 }
