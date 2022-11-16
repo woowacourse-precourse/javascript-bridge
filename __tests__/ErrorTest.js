@@ -12,4 +12,10 @@ describe("예외 throw 테스트", () => {
       errorCheck.checkCanMove(input);
     }).toThrow("[ERROR]")
   })
+
+  test.each([[1], ['D'], [' ']])("재시작/종료 시 R나 Q가 아닌 다른 문자를 입력한 경우" , (input) => {
+    expect((input) => {
+      errorCheck.checkCanMove(input);
+    }).toThrow("[ERROR]")
+  })
 });

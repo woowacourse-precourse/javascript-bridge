@@ -14,6 +14,12 @@ class Validation{
       throw new Error(ERRORLINE.MOVE_ERROR);
     }
   }
+
+  checkRestartOrNot(input){
+    if (input !== DEFAULTS.RESTART && input !== DEFAULTS.QUIT){
+      throw new Error(ERRORLINE.RESTART_ERROR);
+    }
+  }
 }
 
 const validation = new Validation();
