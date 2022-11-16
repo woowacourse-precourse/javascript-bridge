@@ -1,22 +1,23 @@
+const BridgeGame = require('./BridgeGame');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 
 class App {
   play() {
     OutputView.printStart();
-    this.inputBridgeLength();
+    this.inputBridgeSize();
   }
 
-  inputBridgeLength() {
-    InputView.readBridgeSize((bridgeLength) => {
-      console.log(bridgeLength);
+  inputBridgeSize() {
+    InputView.readBridgeSize((length) => {
+      this.bridgeGame = new BridgeGame(length);
       this.inputReadMoving();
     });
   }
 
   inputReadMoving() {
-    InputView.readMoving((move) => {
-      console.log(move);
+    InputView.readMoving((direction) => {
+      this.bridgeGame.move(direction);
     });
   }
 }
