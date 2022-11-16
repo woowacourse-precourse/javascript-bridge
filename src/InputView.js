@@ -20,7 +20,7 @@ const InputView = {
 
   async readMoving() {
     const answer = await input('이동할 칸을 선택해주세요. (위: U, 아래: D)\n');
-    if (answer !== MOVEMENT.UP || answer !== MOVEMENT.DOWN) {
+    if (answer !== MOVEMENT.UP && answer !== MOVEMENT.DOWN) {
       return throwError('잘못된 입력입니다.');
     }
     return answer;
@@ -28,7 +28,7 @@ const InputView = {
 
   async readGameCommand() {
     const answer = await input('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n');
-    if (answer !== COMMAND.RETRY || answer !== COMMAND.QUIT) {
+    if (answer !== COMMAND.RETRY && answer !== COMMAND.QUIT) {
       return throwError('잘못된 입력입니다.')
     }
     return answer;
