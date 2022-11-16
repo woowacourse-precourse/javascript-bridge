@@ -1,21 +1,18 @@
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
-const { MOVEMENT, COMMAND } = require('./constructor.js');
+const { MOVEMENT, COMMAND, BRIDGE_SIZE } = require('./constructor.js');
 const { input, throwError } = require('./utill.js');
 
 const InputView = {
   async readBridgeSize() {
-    const MIN_BRIDGE_SIZE = 3;
-    const MAX_BRIDGE_SIZE = 20;
-
     const answer = await input('다리의 길이를 입력해주세요\n');
     if (isNaN(answer)) {
       return throwError(`숫자를 입력해주세요.`);
     } 
     
     const bridgeSize = parseInt(answer);
-    if (bridgeSize < MIN_BRIDGE_SIZE || bridgeSize > MAX_BRIDGE_SIZE) {
+    if (bridgeSize < BRIDGE_SIZE.MIN || bridgeSize > BRIDGE_SIZE.MAX) {
       return throwError(`${MIN_BRIDGE_SIZE} ~ ${MAX_BRIDGE_SIZE}까지 수를 입력해주세요.`);
     }
     return bridgeSize;
