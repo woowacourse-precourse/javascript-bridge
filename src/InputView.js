@@ -1,4 +1,6 @@
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const MissionUtils = require('@woowacourse/mission-utils');
+const BridgeMaker = require('./BridgeMaker');
 const Validate = require('./Validation');
 
 /**
@@ -18,6 +20,7 @@ const InputView = {
   validateInput(userInput) {
     try {
       Validate.sizeInput(userInput);
+      return BridgeMaker.makeBridge(userInput, BridgeRandomNumberGenerator);
     } catch (error) {
       MissionUtils.Console.print(error);
       this.readBridgeSize();
