@@ -28,4 +28,4 @@ const OutputView = {
   },
 };
 
-module.exports = OutputView;
+module.exports = { OutputView, MESSAGE_START };
