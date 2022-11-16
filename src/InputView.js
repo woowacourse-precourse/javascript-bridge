@@ -13,8 +13,12 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine(ASK_BRIDGE_LENGTH, (lengthInput) => {
-      const length = new BridgeSize(lengthInput);
+    Console.readLine(ASK_BRIDGE_LENGTH, (sizeInput) => {
+      const bridgeSize = new BridgeSize(sizeInput);
+      const size = bridgeSize.makeStringToNumber();
+
+      const generater = BridgeRandomNumberGenerator.generate;
+      const canWalkBridge = BridgeMaker.makeBridge(size, generater);
     });
   },
 
