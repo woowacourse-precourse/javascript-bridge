@@ -36,7 +36,18 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGame) {
+    MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (input) => {
+      if(input == 'R') {
+        bridgeGame.retry();
+        this.readMoving();
+      } else if(input == 'Q') {
+        return null;
+      } else {
+        throw new Error("[ERROR] R 혹은 Q를 입력해야 합니다.");
+      }
+    });
+  },
 };
 
 module.exports = InputView;
