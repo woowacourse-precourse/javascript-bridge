@@ -19,6 +19,14 @@ class BridgeGameController {
     InputValidator.validateNumber(size);
 
     this.#game.setBridge(+size);
+
+    InputView.readMoving(this.#onMovingSubmit.bind(this));
+  }
+
+  #onMovingSubmit(input) {
+    InputValidator.validateEmpty(input);
+
+    this.#game.move(input);
   }
 }
 
