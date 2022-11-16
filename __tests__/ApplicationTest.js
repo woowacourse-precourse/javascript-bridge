@@ -85,3 +85,5 @@ describe('다리 건너기 테스트', () => {
     runException(['a']);
   });
 });
+
+module.exports = { mockQuestions };
