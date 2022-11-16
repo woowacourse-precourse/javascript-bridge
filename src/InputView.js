@@ -1,3 +1,5 @@
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE, ERROR } = require('./Constants');
 const { checkBridgeSize } = require('./Validate');
@@ -13,7 +15,7 @@ const InputView = {
     Console.readLine(MESSAGE.BRIDGE_SIZE, (size) => {
       const SIZE = Number(size);
       if (checkBridgeSize(SIZE)) {
-        return SIZE;
+        BridgeMaker.makeBridge(SIZE, BridgeRandomNumberGenerator.generate);
       } else {
         throw new Error(ERROR.BRIDGE_SIZE);
       }
