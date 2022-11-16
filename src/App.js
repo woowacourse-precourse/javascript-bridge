@@ -5,7 +5,9 @@ class App {
     this.bridgeController = new BridgeController();
   }
 
-  play() {}
+  play() {
+    this.bridgeController.progressSize();
+  }
 }
 
 const app = new App();
