@@ -19,9 +19,8 @@ class App {
   }
 
   makeBridge(bridgeSize) {
-    this.bridgeGame.bridgeShape = BridgeMaker.makeBridge(
-      bridgeSize,
-      BridgeRandomNumberGenerator.generate
+    this.bridgeGame.setBridgeShape(
+      BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate)
     );
 
     this.inputMoving();
