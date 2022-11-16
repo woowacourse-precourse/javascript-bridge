@@ -16,10 +16,10 @@ const { validateBridgeLength, validateCommand } = Validation;
 
 class BridgeGame {
   #bridge;
-  #move;
+  #step;
   constructor() {
-    this.#move = 1;
-    this.#bridge = null;
+    this.#step = 0;
+    this.#bridge = [];
   }
   start() {
     OutputView.printStart();
@@ -37,13 +37,12 @@ class BridgeGame {
   move() {
     InputView.readMoving((command) => {
       const validatedCommand = validateCommand(command, ["U", "D"]);
+      const isCorrect = this.#bridge[this.#step] === validatedCommand;
+
       OutputView.printMap();
-      //틀렸을 경우
-      this.retry();
-      //맞췄을 경우
+
+      if (!isCorrect) this.retry();
       this.move();
-      //다맞췄을 경우
-      this.end();
     });
   }
 
