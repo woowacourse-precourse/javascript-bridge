@@ -36,12 +36,14 @@ class App {
       this.bridgeGame.isAnswerMovingChoice(movingCommand) &&
       !this.bridgeGame.isLastMove()
     ) {
-      this.inputMoving(); // 정답이면 inputMoving
+      this.inputMoving();
       return;
     }
     if (!this.bridgeGame.isAnswerMovingChoice(movingCommand)) {
       this.inputRetryCommand();
+      return;
     }
+    OutputView.printResult();
   }
 
   inputRetryCommand() {

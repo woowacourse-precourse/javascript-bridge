@@ -17,7 +17,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult() {
+    console.log("최종 게임 결과");
+  },
 
   printStart() {
     Console.print(OUTPUT_MESSAGE.GAME_START);
