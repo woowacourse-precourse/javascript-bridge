@@ -20,3 +20,18 @@
 - 메서드의 파라미터는 최대 3이다.
 - 함수나 메서드의 길이는 최대 10라인이 마지노선이다. 정말정말 잘게 쪼개자
 - InputView객체,OutputView객체, BridgeGame클래스,BridgeMaker가 추가됨
+
+# 기능 요구 사항(초안)
+
+### 다리의 길이 입력(다리 길이 입력 UI를 담당하는 객체), 다리의 생성(BridgeMaker)를 사용하자
+
+- 다리의 길이를 숫자로 입력받고 생성한다. InputView객체의 readBridgeSize()를 사
+  용하면 좋을 것 같다.
+- 입력을 받을 떄 오류가 나는 것을 판단하는 InputErrorView 객체를 만들자
+- InputErrorView에는 readBridgeError(), readMovingError(),
+  readGameCommandError()를 갖는다.
+- 다리의 길이를 숫자로 입력받을 수 있을 떄 발생하는 예외인 readBridgeError()
+  1. 다리 길이는 3부터 20사이 숫자다. `숫자`로 평가되고, `평가된 값`이 3부터 20
+     인 경우만 참을 반환하자.
+  2. 1)`숫자`로 평가되는지, 2)`평가된 값`이 3부터 20인지 각각 함수로 뺴자
+  3. 단위테스트를 실행하자.
