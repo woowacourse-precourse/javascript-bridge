@@ -1,3 +1,4 @@
+const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeValidator = require('./BridgeValidator');
@@ -6,6 +7,8 @@ const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
 class App {
+  #bridgeGame;
+
   play() {
     OutputView.printGameStartMessage();
     this.inputBridgeSize();
@@ -18,15 +21,31 @@ class App {
   validateBridgeSize(bridgeSizeInput) {
     try {
       BridgeValidator.validateBridgeSize(bridgeSizeInput);
-      this.makeBridge(parseInt(bridgeSizeInput, 10));
+      this.initBridgeGame(parseInt(bridgeSizeInput, 10));
     } catch (err) {
       OutputView.printErrorMessage(err.message);
       this.inputBridgeSize();
     }
   }
 
-  makeBridge(bridgeSize) {
-    BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+  initBridgeGame(bridgeSize) {
+    this.#bridgeGame = new BridgeGame(
+      BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate),
+    );
+    this.inputMoving();
+  }
+
+  inputMoving() {
+    InputView.readMoving(this);
+  }
+
+  validateMoving(moving) {
+    try {
+      BridgeValidator.validateMoving(moving);
+    } catch (err) {
+      OutputView.printErrorMessage(err.message);
+      this.inputMoving();
+    }
   }
 }
 
