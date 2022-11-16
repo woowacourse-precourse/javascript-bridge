@@ -30,6 +30,36 @@
 ---
 * [ ] App
 
+## 신경써야 할점
+  
+* [ ] InputView
+    * 제공된 InputView 객체를 활용해 구현해야 한다.
+    * InputView의 파일 경로는 변경할 수 있다.
+    * InputView의 메서드의 인자는 변경할 수 있다.
+    * 사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
+* [ ] OutputView
+    * 제공된 OutputView 객체를 활용해 구현해야 한다.
+    * OutputView의 파일 경로는 변경할 수 있다.
+    * OutputView의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
+    * 값 출력을 위해 필요한 메서드를 추가할 수 있다.
+* [ ] BridgeRandomNumberGenerator
+    * Random 값 추출은 제공된 BridgeRandomNumberGenerator의 generate()를 활용한다.
+    * BridgeRandomNumberGenerator의 코드는 변경할 수 없다.
+    * 사용 예시
+    * 다리 칸을 생성하기 위한 Random 값은 아래와 같이 추출한다.
+    * const number = generateRandomNumber();
+* [ ] BridgeMaker
+    * 제공된 BridgeMaker 객체를 활용해 구현해야 한다.
+    * BridgeMaker에 프로퍼티를 추가할 수 없다.
+    * BridgeMaker의 파일 경로는 변경할 수 없다.
+    * BridgeMaker의 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
+* [ ] BridgeGame
+    * 제공된 BridgeGame 클래스를 활용해 구현해야 한다.
+    * BridgeGame에 필드(인스턴스 변수)를 추가할 수 있다.
+    * BridgeGame의 파일 경로는 변경할 수 있다.
+    * BridgeGame의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
+    * 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
+
 ## 기능 테스트 목록
 
 ## 마무리
