@@ -6,4 +6,10 @@ describe("예외 throw 테스트", () => {
       errorCheck.checkBridgeSize(input);
     }).toThrow("[ERROR]");
   });
+
+  test.each([[1], ['R'], [' ']])("이동 시 U나 D가 아닌 다른 문자를 입력한 경우" , (input) => {
+    expect((input) => {
+      errorCheck.checkCanMove(input);
+    }).toThrow("[ERROR]")
+  })
 });

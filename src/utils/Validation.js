@@ -8,6 +8,12 @@ class Validation{
       throw new Error(ERRORLINE.BRIDGE_LENGTH_ERROR);
     }
   }
+
+  checkCanMove(input){
+    if (input !== DEFAULTS.UP || input !== DEFAULTS.DOWN){
+      throw new Error(ERRORLINE.MOVE_ERROR);
+    }
+  }
 }
 
 const validation = new Validation();
