@@ -17,12 +17,19 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(next) {
+    const message = "이동할 칸을 선택해주세요. (위: U, 아래: D)";
+    Console.readLine(message, (command) => next(command));
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    const message =
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)";
+    Console.readLine(message, (command) => next(command));
+  },
 };
 
 module.exports = InputView;
