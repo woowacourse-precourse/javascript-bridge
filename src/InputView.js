@@ -50,6 +50,25 @@ const InputView = {
       }
     );
   },
+
+  handleGameCommand(input, nowGame) {
+    if (input === "Q") {
+      OutputView.printResult(nowGame, false);
+      return;
+    }
+    nowGame.initGame();
+    this.readMoving(nowGame);
+  },
+
+  hangleGameCommandException(input, nowGame) {
+    try {
+      if (!validateGameCommand(input)) throw new Error();
+      this.handleGameCommand(input, nowGame);
+    } catch (e) {
+      MissionUtils.Console.print("[ERROR] R 또는 Q를 입력해 주세요.");
+      this.readGameCommand(nowGame);
+    }
+  },
 };
 
 function validateBridgeSize(input) {
@@ -58,6 +77,10 @@ function validateBridgeSize(input) {
 
 function validateMoving(input) {
   return input === "U" || input === "D";
+}
+
+function validateGameCommand(input) {
+  return input === "R" || input === "Q";
 }
 
 module.exports = InputView;
