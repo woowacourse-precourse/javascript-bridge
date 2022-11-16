@@ -13,8 +13,8 @@ class BridgeGame {
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
-   * 입력받은 방향(U or D)에 따라
-   * 이동 가능한 칸일 경우 true, 불가능한 칸일 경우 false를 현재 상태에 업데이트 하고 반환
+   * @param {char} input 건너기를 시도한 방향 (U or D)
+   * @return {boolean} 건너기 시도 성공시 true, 실패시 false
    */
   move(input) {
     if(this.#bridge[this.#curr.length] == input) {
@@ -33,6 +33,14 @@ class BridgeGame {
   retry() {
     this.#curr = new Array();
     this.#try += 1;
+  }
+
+  /**
+   * 다리 끝에 도착 여부 반환
+   * @return {boolean} bridge의 길이와 curr의 길이가 같으면 true, 다르면 false
+   */
+  isArrived() {
+    return this.#bridge.length == this.#curr.length;
   }
 }
 
