@@ -22,7 +22,7 @@ class App {
     this.bridgeGame.setBridgeShape(
       BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate)
     );
-
+    console.log(this.bridgeGame.getBridgeShape());
     this.inputMoving();
   }
 
@@ -31,8 +31,13 @@ class App {
   }
 
   playerMove(movingCommand) {
-    this.bridgeGame.move(movingCommand);
-    // 맞추거나 끝까지 도착하지 않으면 다시 inputMoving
+    this.bridgeGame.move();
+    if (
+      this.bridgeGame.isAnswerMovingChoice(movingCommand) &&
+      !this.bridgeGame.isLastMove()
+    ) {
+      this.inputMoving(); // 정답이면 inputMoving
+    }
   }
 }
 
