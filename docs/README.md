@@ -4,11 +4,21 @@
 
 #### start 메서드
 
-- [x] IputView로부터 size를 받아 할당.
+- [x] InputView로부터 size를 받아 할당.
 
 #### makeRandomNumber 메서드
 
 - [x] 다리 입력 받은 길이만큼 BridgeRandomNumberGenerator를 실행하여 `#bridge`에 결과를 push.
+
+#### move 메서드
+
+- [x] U,D 판단 후 일치시 `matchCount`증가
+- [x] 일치 여부 상관없이 진행 시 U,D 판단 위해 `progressIdx` 증가.
+
+#### retry 메서드
+
+- [x] 게임 진행 횟수 `#gameCount` 계산.
+- [x] 재시작, 종료 구현.
 
 ### InputView
 
@@ -20,6 +30,10 @@
 
 - [x] 사용자 입력으로 재시작 혹은 종료를 결정.
 - [x] [예외 처리] R Q 이외의 문자가 입력된 경우.
+
+- [x] `BridgeGame`의 `crossBridgeCompletely`가 true인 경우 클리어
+
+- [ ] `exitGame` 추후 출력 관련 구현 예정.
 
 ### BridgeMaker
 
