@@ -144,6 +144,7 @@ D
 - `InputView`의 파일 경로는 변경할 수 있다.
 - `InputView`의 메서드의 인자는 변경할 수 있다.
 - 사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
+- InputView 에서만 MissionUtils의 Console.readLine() 을 이용해 사용자의 입력을 받을 수 있다.
 
 ### OutputView 객체
 
@@ -157,6 +158,7 @@ D
 - `BridgeGame`의 파일 경로는 변경할 수 있다.
 - `BridgeGame`의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
 - 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
+- BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
 
 ### BridgeMaker 객체
 
