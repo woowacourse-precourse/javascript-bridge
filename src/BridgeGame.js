@@ -12,7 +12,7 @@ const Validation = require("./Validation.js");
  * 5. 메서드를 추가하거나 변경할 수 있다.
  */
 const { generate } = BridgeRandomNumberGenerator;
-const { validateBridgeLength } = Validation;
+const { validateBridgeLength, validateCommand } = Validation;
 
 class BridgeGame {
   #bridge;
@@ -35,7 +35,16 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move() {
-    InputView.readMoving((command) => {});
+    InputView.readMoving((command) => {
+      const validatedCommand = validateCommand(command, ["U", "D"]);
+      OutputView.printMap();
+      //틀렸을 경우
+      this.retry();
+      //맞췄을 경우
+      this.move();
+      //다맞췄을 경우
+      this.end();
+    });
   }
 
   /**
@@ -44,6 +53,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {}
+  end() {}
 }
 
 module.exports = BridgeGame;
