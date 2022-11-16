@@ -13,11 +13,8 @@ const Validation = {
       throw new Error(`[ERROR] 대문자로 입력해주세요`);
     }
 
-    if (userInput !== "U" || userInput !== "D") {
-      throw new Error(`[ERROR] U 또는 D 만 입력이 가능합니다.`);
-    }
-    if (userInput === "") {
-      throw new Error(`[ERROR] 아무것도 입력하지 않으셨습니다.`);
+    if (/^[U,D]/.test(userInput) === false) {
+      throw new Error(`[ERROR] U 또는 D 를 입력해주세요.`);
     }
   },
 };
