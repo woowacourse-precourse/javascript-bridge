@@ -22,4 +22,10 @@ describe("InputView 테스트", () => {
     const move = InputView.readMoving();
     expect(move).toEqual("U");
   });
+
+  test("readGameCommand 기능 테스트", () => {
+    mockQuestions(["R"]);
+    const command = InputView.readGameCommand();
+    expect(command).toEqual("R");
+  });
 });
