@@ -13,6 +13,7 @@ class App {
 
   gameProgress() {
     this.#gameCtrl.gameStart();
+    this.#gameCtrl.askBridgeSize();
   }
 
   exit() {}

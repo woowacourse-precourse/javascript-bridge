@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const Bridge = require('../Bridge');
 
 const { MESSAGE } = require('../constant/index');
 
@@ -10,7 +11,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine(MESSAGE.ASK_BRIDGE_SIZE, (bridgeSize) => {});
+    Console.readLine(MESSAGE.ASK_BRIDGE_SIZE, (size) => new Bridge(size));
   },
 
   /**
