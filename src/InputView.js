@@ -27,7 +27,12 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    print('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)');
+    readLine('', (commandInput) => {
+      callback(commandInput);
+    });
+  },
 };
 
 module.exports = InputView;
