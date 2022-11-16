@@ -9,19 +9,28 @@ const Validator = require('./Validator');
 class App {
   bridge;
 
+  constructor() {
+    this.process = [];
+  }
+
   play() {
     Console.print(GAME.START);
-    this.setBridgeSize();
+    InputView.readBridgeSize(this.setBridge.bind(this));
   }
 
-  setBridgeSize() {
-    InputView.readBridgeSize(this.makeBridge.bind(this));
-  }
-
-  makeBridge(size) {
+  setBridge(size) {
     Validator.isValidBridgeSize(size);
     const generateRandomNumber = () => BridgeRandomNumberGenerator.generate();
     this.bridge = BridgeMaker.makeBridge(size, generateRandomNumber);
+    this.askMoving();
+  }
+
+  askMoving() {
+    InputView.readMoving(this.makeMoving.bind(this));
+  }
+
+  makeMoving(moving) {
+    Validator.isValidMoving(moving);
   }
 }
 
