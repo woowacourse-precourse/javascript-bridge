@@ -2,6 +2,15 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridge     // 생성된 다리 정보
+  #curr       // 현재 플레이어의 다리 위치
+  #try        // 현재까지 시도 횟수
+
+  constructor(bridge) {
+    this.#bridge = bridge;
+    this.#curr = 0;
+    this.#try = 0;
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
