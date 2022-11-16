@@ -1,5 +1,8 @@
 const ExceptionCheck = {
   bridgeSize(bridgeSize) {
+    this.number(bridgeSize);
+  },
+  number(bridgeSize) {
     const numberRegEx = /[^0-9]/g;
 
     if (numberRegEx.test(bridgeSize))
