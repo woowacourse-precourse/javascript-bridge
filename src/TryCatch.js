@@ -1,7 +1,7 @@
 class TryCatch {
   check(methodForExcute, methodForException) {
     try {
-      methodForExcute();
+      return methodForExcute();
     } catch {
       methodForException();
     }
