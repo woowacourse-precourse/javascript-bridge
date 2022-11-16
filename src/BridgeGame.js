@@ -1,3 +1,8 @@
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
+const BridgeMaker = require("./BridgeMaker.js");
+const InputView = require("./InputView.js");
+const OutputView = require("./OutputView.js");
+const Validation = require("./Validation.js");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  * 1. 필드를 추가할 수 있다.
@@ -6,7 +11,23 @@
  * 4. 인자는 필요에 따라 추가하거나 변경할 수 있다.
  * 5. 메서드를 추가하거나 변경할 수 있다.
  */
+const { generate } = BridgeRandomNumberGenerator;
+
 class BridgeGame {
+  #bridge;
+  #move;
+  constructor() {
+    this.#move = 1;
+    this.#bridge = null;
+  }
+  start() {
+    OutputView.printStart();
+    InputView.readBridgeSize((bridgeLength) => {
+      Validation.validateBridgeLength(bridgeLength);
+      this.#bridge = BridgeMaker.makeBridge(bridgeLength, generate);
+      this.move();
+    });
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
