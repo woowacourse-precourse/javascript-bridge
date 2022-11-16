@@ -10,6 +10,12 @@ const Validator = {
     }
     return true;
   },
+  isValidMoving(input) {
+    if (input !== 'D' && input !== 'U') {
+      throw new Error(ERROR.BRIDGE_MOVING);
+    }
+    return true;
+  },
 };
 
 module.exports = Validator;

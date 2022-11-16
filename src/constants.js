@@ -1,6 +1,7 @@
 const ERROR = Object.freeze({
   BRIDGE_SIZE_RANGE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
   BRIDGE_SIZE_TYPE: '[ERROR] 다리 길이는 숫자만 입력 가능 합니다.',
+  BRIDGE_MOVING: '[ERROR] 이동은 U 또는 D만 입력 가능합니다.',
 });
 
 const GAME = Object.freeze({
