@@ -3,4 +3,8 @@ const MESSAGE = Object.freeze({
     ENTER_BRIDGE_SIZE: "다리의 길이를 입력해주세요.\n",
 });
 
-module.exports = { MESSAGE };
+const ERROR = Object.freeze({
+    BRIDGE_SIZE_OUT_BOUNDARY: "[ERROR] 3이상 20이하 사이의 숫자여야 합니다.",
+})
+
+module.exports = { MESSAGE, ERROR };
