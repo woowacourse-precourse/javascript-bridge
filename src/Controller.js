@@ -9,13 +9,8 @@ class Controller{
   startGame(){
     inputView.readBridgeSize();
   }
-
-  getBridge(input){
-    const bridgeAnswer = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator.generate);
-    this.bridgeAnswer = bridgeAnswer;
-    inputView.readMoving(this.bridgeAnswer);
-  }
 }
 
-const controller = new Controller();
-module.exports = controller;
+module.exports = Controller;
+
+//controller.getBridge(3);

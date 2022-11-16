@@ -2,9 +2,12 @@ const Controller = require('./Controller');
 
 class App {
   play() {
-    const lotto = new Controller();
-    lotto.startGame();
+    const game = new Controller();
+    game.startGame();
   }
 }
 
 module.exports = App;
+
+const app = new App();
+app.play();
