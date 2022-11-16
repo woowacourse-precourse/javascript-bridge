@@ -1,11 +1,23 @@
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
+
+const MissionUtils = require("@woowacourse/mission-utils");
+const Checking = require("./Checking")
+
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize() {
+    let BRIDGE_LENGTH = 0
+    MissionUtils.Console.readLine("",(bridgeLength) => {
+      // 유효성 검사 필요 : bridgeLength 가 숫자가 아닌 경우
+      Checking.bridgeNum(bridgeLength)
+      BRIDGE_LENGTH = bridgeLength
+      console.log(BRIDGE_LENGTH)
+    })
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
