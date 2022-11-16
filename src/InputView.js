@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { LengthConstraints } = require("./Constraints");
 
 const ASK_BRIDGE_LENGTH = "다리의 길이를 입력해주세요.\n";
 
@@ -10,7 +11,9 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine(ASK_BRIDGE_LENGTH, (length) => {});
+    Console.readLine(ASK_BRIDGE_LENGTH, (length) => {
+      new LengthConstraints(length);
+    });
   },
 
   /**
