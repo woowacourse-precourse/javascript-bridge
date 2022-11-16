@@ -1,9 +1,9 @@
 const Console = require('../utils/Console');
-const { MESSAGE_QUESTION } = require('../constants/message');
+const { MESSAGE_QUESTION } = require('../constants/messages');
 
 const InputView = {
-  readBridgeSize() {
-    Console.readLine(MESSAGE_QUESTION.BRIDGE_SIZE, rowDataOfBridgeSize => {});
+  readBridgeSize(makeBridge) {
+    Console.readLine(MESSAGE_QUESTION.BRIDGE_SIZE, makeBridge);
   },
 
   /**

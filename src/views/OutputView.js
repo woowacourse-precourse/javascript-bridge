@@ -1,5 +1,5 @@
 const Console = require('../utils/Console');
-const { MESSAGE_GAME } = require('../constants/message');
+const { MESSAGE_GAME } = require('../constants/messages');
 
 const OutputView = {
   printStartMessage() {

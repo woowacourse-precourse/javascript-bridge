@@ -1,6 +1,6 @@
 const OutputView = require('../views/OutputView');
 const InputView = require('../views/InputView');
-const Validator = require('./Validator');
+const BridgeSizeChecker = require('./BridgeSizeChecker');
 
 class GameController {
   playGame() {
@@ -8,7 +8,9 @@ class GameController {
     InputView.readBridgeSize(this.#makeBridge);
   }
 
-  #makeBridge(rowDataOfBridgeSize) {}
+  #makeBridge(rowDataOfBridgeSize) {
+    BridgeSizeChecker.check(rowDataOfBridgeSize);
+  }
 }
 
 module.exports = GameController;
