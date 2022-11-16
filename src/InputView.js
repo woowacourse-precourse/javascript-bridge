@@ -10,7 +10,7 @@ const InputView = {
    */
   readBridgeSize(appController) {
     Console.readLine('\n다리의 길이를 입력해주세요.\n', bridgeSize => {
-      appController.createBridge(bridgeSize);
+      appController.validateBridgeSize(bridgeSize);
     });
   },
 
