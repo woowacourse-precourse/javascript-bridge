@@ -10,7 +10,7 @@ class App {
 
   inputBridgeSize() {
     InputView.readBridgeSize((length) => {
-      this.bridgeGame = new BridgeGame(length);
+      this.bridgeGame = new BridgeGame(Number(length));
       this.inputReadMoving();
     });
   }
