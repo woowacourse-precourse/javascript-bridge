@@ -1,3 +1,5 @@
+const { VALUE } = require("./constant");
+
 const BridgeMaker = {
   /**
    * @param {number} size
@@ -6,10 +8,10 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
-    [...Array(size)].forEach(() => {
-      const block = generateRandomNumber.generate() === 0 ? "D" : "U";
+    for (count = 0; count < size; count++) {
+      const block = generateRandomNumber() == 0 ? VALUE.DOWN : VALUE.UP;
       bridge.push(block);
-    });
+    }
     return bridge;
   },
 };
