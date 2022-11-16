@@ -4,6 +4,17 @@ const Validator = {
       throw new Error('[ERROR] 숫자만 입력 가능합니다');
     }
   },
+
+  /**
+   * @param {number} start // 체크할 범위의 시작
+   * @param {number} end // 체크할 범위의 끝
+   * @param {number} input // 입력된 숫자
+   */
+  validateInRange(start, end, input) {
+    if (input < start || input > end) {
+      throw new Error('[ERROR] 3 ~ 20 사이의 숫자만 입력 가능합니다.');
+    }
+  },
 };
 
 module.exports = Validator;
