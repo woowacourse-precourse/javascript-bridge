@@ -18,7 +18,7 @@ const INPUT_MESSAGE = Object.freeze({
 
 const ERROR_MESSAGE = Object.freeze({
   notInRange: `${ERROR} 다리 갯수는 3개 이상, 20개 이하인 정수여야 합니다.`,
-  notUnorD: `${ERROR} U(위)와 D(아래) 이외는 입력 할 수 없습니다.`,
+  notUorD: `${ERROR} U(위)와 D(아래) 이외는 입력 할 수 없습니다.`,
   notRorQ: `${ERROR} R(재시도)와 Q(종료) 이외는 입력할 수 없습니다.`,
 });
 
