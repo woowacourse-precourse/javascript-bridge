@@ -15,6 +15,16 @@ const Validator = {
       throw new Error('[ERROR] 3 ~ 20 사이의 숫자만 입력 가능합니다.');
     }
   },
+
+  /**
+   * @param {string[]} array // 입력이 허용되는 문자의 집합
+   * @param {string} input // 입력된 숫자
+   */
+  validateContains(array, input) {
+    if (!array.includes(input)) {
+      throw new Error('[ERROR] 허용되는 문자가 아닙니다.');
+    }
+  },
 };
 
 module.exports = Validator;
