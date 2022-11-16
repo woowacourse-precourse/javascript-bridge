@@ -1,10 +1,13 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
+const BridgeMaker = require("./BridgeMaker");
 const InputView = require("./InputView");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 class BridgeGame {
   #bridgeSize;
+  #bridgeStyle;
 
   constructor() {
     this.setBridge();
@@ -12,6 +15,10 @@ class BridgeGame {
 
   setBridge() {
     this.#bridgeSize = InputView.readBridgeSize();
+    this.#bridgeStyle = BridgeMaker(
+      this.#bridgeSize,
+      BridgeRandomNumberGenerator
+    );
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
