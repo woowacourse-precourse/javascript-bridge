@@ -2,7 +2,7 @@ class App {
   play() { }
 }
 
-console.log();;;;
+console.log();;;;;;
 (function () { })();
 
 module.exports = App;
