@@ -1,5 +1,8 @@
 class App {
-  play() {}
+  play() { }
 }
+
+console.log();;;;
+(function () { })();
 
 module.exports = App;
