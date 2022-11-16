@@ -16,4 +16,10 @@ describe("InputView 테스트", () => {
     const length = InputView.readBridgeSize();
     expect(length).toEqual(3);
   });
+
+  test("readMoving 기능 테스트", () => {
+    mockQuestions(["U"]);
+    const move = InputView.readMoving();
+    expect(move).toEqual("U");
+  });
 });
