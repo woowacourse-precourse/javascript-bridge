@@ -16,8 +16,12 @@
     * [ ] 현재까지 이동한 다리의 상태를 출력 printMap()
     * [ ] 게임의 최종 결과를 출력 printResult()
 * [ ] BridgeRandomNumberGenerator
-* [ ] BridgeMaker
-* [ ] BridgeGame
+    * [ ] 변경불가
+* [ ] BridgeMaker 다리의 길이를 입력 받아서 다리를 생성해주는 역할
+    * [ ] 다리의 길이를 입력받아서 다리를 생성 makeBridge()
+* [ ] BridgeGame 다리 건너기 게임을 관리하는 클래스
+    * [ ] 다리 이동시키기 move
+    * [ ] 게임 다시 시도 retry
 * [ ] App
 
 ## 기능 테스트 목록
