@@ -22,6 +22,15 @@ const InputView = {
       this.readBridgeSize();
     }
   },
+
+  readMoving(bridgeGame) {
+    MissionUtils.Console.readLine(
+      "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+      (input) => {
+        this.handleMovingException(input, bridgeGame);
+      }
+    );
+  },
 };
 
 function validateBridgeSize(input) {
