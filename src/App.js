@@ -8,6 +8,10 @@ class App {
   }
 
   play() {
+    this.gameProgress();
+  }
+
+  gameProgress() {
     this.#gameCtrl.gameStart();
   }
 
