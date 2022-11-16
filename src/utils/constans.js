@@ -10,12 +10,18 @@ const OUTPUT_MESSAGE = {
   GAME_SUCCESS_STATUS: (isGameSuccess) =>
     `게임 성공 여부: ${isGameSuccess ? "성공" : "실패"}`,
   GAME_TRY_COUNT: (tryCount) => `총 시도한 횟수: ${tryCount}`,
-  BRIDGE_MAP: "",
+  BRIDGE_MAP: `${BRIDGE.START}| O |${BRIDGE.END}`,
 };
 
 const COMMAND = {
   MOVING: { UP: "U", DOWN: "D" },
   GAME: { RETRY: "R", QUIT: "Q" },
+};
+
+const BRIDGE = {
+  START: "[ ",
+  END: " ]",
+  DIVIDING_LINE: " | ",
 };
 
 module.exports = { INPUT_MESSAGE, OUTPUT_MESSAGE, COMMAND };
