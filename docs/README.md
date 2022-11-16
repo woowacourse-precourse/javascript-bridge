@@ -43,3 +43,6 @@
 - ERROR
   - PREFIX: [ERROR]
   - LENGTH: 다리 길이는 ${BRIDGE.MIN}부터 ${BRIDGE.MAX} 사이의 숫자여야 합니다.
+  - 숫자로 입력해야 합니다.
+  - U, D 둘 중 하나를 입력해야 합니다.
+  - R, Q 둘 중 하나를 입력해야 합니다.
