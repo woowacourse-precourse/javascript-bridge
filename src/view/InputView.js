@@ -51,11 +51,10 @@ const InputView = {
 
   restartOrSuccess(move_cnt, gameLog){
     if(this.restartCheck(move_cnt, gameLog)){
-      this.readGameCommand();
+      this.readGameCommand(gameLog);
     }
     if (this.SuccessCheck(move_cnt, gameLog)){
-      MissionUtils.Console.close();
-      //success - output 처리
+      OutputView.SuccessOutput(gameLog);
     }
     else{
       this.readMoving(answer, move_cnt);
@@ -65,24 +64,24 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(gameLog) {
     MissionUtils.Console.readLine(CONSOLELINE.RESTART_CHECK, (restart) => {
       try{
         validation.checkRestartOrNot(restart);
       } catch(err){
         return this.readGameCommand();
       }
-      restart === 'R' ? this.readMoving(answer, 0) : MissionUtils.Console.close();
+      restart === 'R' ? this.readMoving(answer, 0) : OutputView.failOutputandNomoreGame(gameLog);
     })
   },
 
   restartCheck(cnt_move, gameLog){
     if (cnt_move == answer.length && gameLog[0][gameLog[0].length-1] !== 'O' && gameLog[1][gameLog[1].length-1] !== 'O'){
-      bridgeGame.init();
+      bridgeGame.retry();
       return true;
     }
     if (gameLog[0][gameLog[0].length-1] === 'X' || gameLog[1][gameLog[1].length-1] === 'X'){
-      bridgeGame.init();
+      bridgeGame.retry();
       return true;
     }
     return false;
