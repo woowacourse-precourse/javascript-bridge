@@ -2,7 +2,6 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
 const BridgeMaker = require("./BridgeMaker.js");
 const InputView = require("./InputView.js");
 const OutputView = require("./OutputView.js");
-const Validation = require("./Validation.js");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  * 1. 필드를 추가할 수 있다.
@@ -12,20 +11,20 @@ const Validation = require("./Validation.js");
  * 5. 메서드를 추가하거나 변경할 수 있다.
  */
 const { generate } = BridgeRandomNumberGenerator;
-const { validateBridgeLength, validateCommand } = Validation;
 
 class BridgeGame {
+  #answers;
   #bridge;
   #step;
   constructor() {
+    this.#answers = [];
     this.#step = 0;
     this.#bridge = [];
   }
   start() {
     OutputView.printStart();
     InputView.readBridgeSize((bridgeLength) => {
-      const validatedLength = validateBridgeLength(bridgeLength);
-      this.#bridge = BridgeMaker.makeBridge(validatedLength, generate);
+      this.#bridge = BridgeMaker.makeBridge(bridgeLength, generate);
       this.move();
     });
   }
@@ -36,11 +35,13 @@ class BridgeGame {
    */
   move() {
     InputView.readMoving((command) => {
-      const validatedCommand = validateCommand(command, ["U", "D"]);
-      const isCorrect = this.#bridge[this.#step] === validatedCommand;
+      const isCorrect = this.#bridge[this.#step] === command;
+      this.#answers.push(command);
 
-      OutputView.printMap();
-
+      OutputView.printMap(
+        this.#answers.slice(0, step),
+        this.#bridge.slice(0, step)
+      );
       if (!isCorrect) this.retry();
       this.move();
     });
