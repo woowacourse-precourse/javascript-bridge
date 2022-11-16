@@ -24,6 +24,7 @@ const OutputView = {
     MissionUtils.Console.print('');
     MissionUtils.Console.print("게임 성공 여부: " + (isSuccess ? "성공" : "실패"));
     MissionUtils.Console.print("총 시도한 횟수: " + countTry);
+    MissionUtils.Console.close();
   },
 
   /**
