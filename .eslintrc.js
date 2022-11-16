@@ -12,5 +12,6 @@ module.exports = {
   rules: {
     quotes: ["off", "single"],
     "class-methods-use-this": "off",
+    "arrow-body-style": "off",
   },
 };
