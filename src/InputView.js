@@ -31,10 +31,24 @@ const InputView = {
       }
     );
   },
+
+  handleMovingException(input, nowGame) {
+    try {
+      if (!validateMoving(input)) throw new Error();
+      nowGame.move(input);
+    } catch (e) {
+      MissionUtils.Console.print("[ERROR] U 또는 D를 입력해 주세요.");
+      this.readMoving(nowGame);
+    }
+  },
 };
 
 function validateBridgeSize(input) {
   return input.toString().match(REGEX.SIZE_RANGE);
+}
+
+function validateMoving(input) {
+  return input === "U" || input === "D";
 }
 
 module.exports = InputView;
