@@ -1,5 +1,5 @@
 const BRIDGE_MIN_LENGTH = 3;
-const BRIDGE_MAX_LENGTH = 5;
+const BRIDGE_MAX_LENGTH = 20;
 const UP = 'U';
 const DOWN = 'D';
 
@@ -11,6 +11,9 @@ const INPUT_RETRY =
 const GAME_RESULT = '최종 게임 결과';
 const GAME_SUCCESS = '게임 성공 여부: 성공';
 const GAME_COUNT = '총 시도한 횟수: ';
+
+const ERROR_TYPE_NUMBER = '[ERROR] 숫자가 아닙니다.';
+const ERROR_RANGE = '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.';
 
 module.exports = {
   BRIDGE_MIN_LENGTH,
@@ -24,4 +27,6 @@ module.exports = {
   GAME_RESULT,
   GAME_SUCCESS,
   GAME_COUNT,
+  ERROR_TYPE_NUMBER,
+  ERROR_RANGE,
 };
