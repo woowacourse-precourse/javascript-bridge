@@ -26,12 +26,21 @@ const BRINDGE_DIRECTION = Object.freeze({
   DOWN: 'D',
 });
 
-const VIEW_FIGURE = {
+const VIEW_FIGURE = Object.freeze({
   O: 'O',
   X: 'X',
-};
+});
+
+const ERROR_MESSAGES = Object.freeze({
+  NOT_EMPTY: '[ERROR]:공백은 허용되지않습니다.',
+  NOT_NAN: '[ERROR]:NAN 타입은 허용되지 않습니다',
+  RANGE_ERROR: '[ERROR]:3~20까지의 숫자만 입력가능합니다',
+  ONLY_R_Q: '[ERROR]:R과Q만 입력가능합니다.',
+  ONLY_U_D: '[ERROR]:U와D만 입력가능합니다.',
+});
 
 module.exports = {
+  ERROR_MESSAGES,
   VIEW_FIGURE,
   BRINDGE_DIRECTION,
   GAME_PROGRESS_MESSAGES,
