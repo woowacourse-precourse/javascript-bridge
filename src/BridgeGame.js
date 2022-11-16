@@ -10,7 +10,7 @@ class BridgeGame {
 
   constructor(bridge) {
     console.log(bridge);
-    this.#bridge = [...bridge];
+    this.#bridge = bridge;
     this.#curr = 0;
     this.#isAlive = true;
     this.#try = 1;
