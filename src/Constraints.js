@@ -33,4 +33,20 @@ class SizeConstraints {
   }
 }
 
-module.exports = { SizeConstraints };
+const ERROR_NOT_ONLY_U_OR_D = "[ERROR] U 혹은 D만 입력 가능합니다.";
+
+class MoveConstraints {
+  #wantGo;
+
+  constructor(wantGo) {
+    this.#wantGo = wantGo;
+  }
+
+  checkInputUorD() {
+    if (this.#wantGo !== "U" && this.#wantGo !== "D") {
+      throw new Error(ERROR_NOT_ONLY_U_OR_D);
+    }
+  }
+}
+
+module.exports = { SizeConstraints, MoveConstraints };
