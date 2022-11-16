@@ -1,5 +1,9 @@
+const BridgeGame = require("./BridgeGame");
+
 class App {
-  play() {}
+  play() {
+    const bridgeGame = new BridgeGame();
+  }
 }
 
 module.exports = App;
