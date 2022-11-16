@@ -14,8 +14,19 @@ const InputView = {
       "다리의 길이를 입력해주세요. \n >",
       answer => bridgeSize = Number(answer)
     )
+    this.validBrideSize(bridgeSize);
 
     return bridgeSize;
+  },
+
+  validBrideSize(bridgeSize) {
+    if (bridgeSize < 3 || bridgeSize > 20) {
+      throw `[ERROR] 다리의 길이는 3이상 20이하여야 합니다.`;
+    }
+
+    if (isNaN(bridgeSize)) {
+      throw `[ERROR] 다리의 길이를 숫자로 입력해주세요.`;
+    }
   },
 
   /**
