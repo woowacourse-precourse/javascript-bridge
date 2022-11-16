@@ -3,12 +3,12 @@
  */
 class BridgeGame {
   #bridge     // 생성된 다리 정보
-  #curr       // 현재 상태 정보
+  #curr       // 현재 플레이어 다리 위치
   #try        // 현재까지 시도 횟수
 
   constructor(bridge) {
     this.#bridge = [...bridge];
-    this.#curr = new Array();
+    this.#curr = 0;
     this.#try = 1;
   }
   /**
@@ -17,12 +17,9 @@ class BridgeGame {
    * @return {boolean} 건너기 시도 성공시 true, 실패시 false
    */
   move(input) {
-    if(this.#bridge[this.#curr.length] == input) {
-      this.#curr.push(true);
-      return true;
-    }
-    this.#curr.push(false);
-    return false;
+    const result = this.#bridge[this.#curr] == input;
+    this.#curr += 1;
+    return result;
   }
 
   /**
@@ -31,7 +28,7 @@ class BridgeGame {
    * 시도 횟수 + 1
    */
   retry() {
-    this.#curr = new Array();
+    this.#state = 0;
     this.#try += 1;
   }
 
@@ -40,8 +37,10 @@ class BridgeGame {
    * @return {boolean} bridge의 길이와 curr의 길이가 같으면 true, 다르면 false
    */
   isArrived() {
-    return this.#bridge.length == this.#curr.length;
+    return this.#bridge.length == this.#curr;
   }
+
+  
 }
 
 module.exports = BridgeGame;
