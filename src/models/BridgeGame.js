@@ -31,8 +31,12 @@ class BridgeGame {
    */
   retry() {}
 
+  static #isSizeInRange(size) {
+    return size >= BRIDGE_RULE.LENGTH_MIN && size <= BRIDGE_RULE.LENGTH_MAX;
+  }
+
   static #validateSize(size) {
-    if (size < BRIDGE_RULE.LENGTH_MIN || size > BRIDGE_RULE.LENGTH_MAX) {
+    if (!BridgeGame.#isSizeInRange(size)) {
       throw new Error('[ERROR] 다리의 길이는 3이상 20이하의 숫자여야 합니다.');
     }
   }
