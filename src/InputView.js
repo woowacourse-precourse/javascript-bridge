@@ -17,14 +17,19 @@ const InputView = {
   readMoving(bridgeGame) {
     Console.readLine(GUIDE_MSG.PROGRESS_MSG, (answer) => {
       ValidateMoving(answer);
-      bridgeGame.move(answer);
+      bridgeGame.move(answer)
+        ? this.readMoving(bridgeGame)
+        : this.readGameCommand();
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.print("You're done!");
+    Console.close();
+  },
 };
 
 module.exports = InputView;

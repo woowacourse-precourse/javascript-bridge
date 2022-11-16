@@ -1,6 +1,6 @@
 const { ERROR_MSG } = require("../constants");
 
-const ValidateInput = (input) => {
+const ValidateSize = (input) => {
   CheckNotANumber(input);
   CheckInputRange(input);
 };
@@ -17,4 +17,4 @@ const CheckInputRange = (input) => {
   }
 };
 
-module.exports = ValidateInput;
+module.exports = ValidateSize;
