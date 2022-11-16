@@ -28,6 +28,10 @@ class BridgeGame {
     this.#position = position;
   }
 
+  start() {
+    InputView.readBridgeSize(this);
+  }
+
   validateMoveType(moveType) {
     const typeCheck = RegExp(/^['U' | 'D']&/);
     if (typeCheck.test(moveType))
