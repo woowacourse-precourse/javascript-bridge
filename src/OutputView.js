@@ -1,8 +1,13 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGE_PROCESS } = require('./Constants');
 
 const OutputView = {
+  printError(error) {
+    Console.print(error);
+  },
+
   printStart() {
-    Console.print('다리 건너기 게임을 시작합니다.\n')
+    Console.print(MESSAGE_PROCESS.GAME_START);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
