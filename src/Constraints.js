@@ -3,41 +3,34 @@ const ERROR_NOT_IN_RANGE = "[ERROR] 다리 길이는 3 이상 20 이하만 가�
 const ERROR_DONT_START_ZERO =
   "[ERROR] 0으로 시작하는 숫자는 입력할 수 없습니다.";
 
-class LengthConstraints {
-  #length;
+class SizeConstraints {
+  #size;
 
-  constructor(length) {
-    this.checkAllConstraints(length);
-    this.#length = length;
+  constructor(size) {
+    this.#size = size;
   }
 
-  checkAllConstraints(length) {
-    this.checkStartZero(length);
-    this.checkOnlyNumber(length);
-    this.checkNumberRange(length);
-  }
-
-  checkStartZero(length) {
-    if (length[0] === "0") {
-      throw new Error(ERROR_DONT_START_ZERO);
-    }
-  }
-
-  checkOnlyNumber(length) {
+  checkOnlyNumber() {
     const regex = /^\d+$/;
 
-    if (!regex.test(length)) {
+    if (!regex.test(this.#size)) {
       throw new Error(ERROR_NOT_ONLY_NUMBER);
     }
   }
 
-  checkNumberRange(length) {
-    const numberdLength = Number(length);
+  checkNumberRange() {
+    const numberdSize = Number(this.#size);
 
-    if (numberdLength < 3 || numberdLength > 20) {
+    if (numberdSize < 3 || numberdSize > 20) {
       throw new Error(ERROR_NOT_IN_RANGE);
+    }
+  }
+
+  checkStartZero() {
+    if (this.#size[0] === "0") {
+      throw new Error(ERROR_DONT_START_ZERO);
     }
   }
 }
 
-module.exports = { LengthConstraints };
+module.exports = { SizeConstraints };
