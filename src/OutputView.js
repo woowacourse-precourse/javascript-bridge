@@ -18,6 +18,13 @@ const OutputView = {
   printResult() {},
 
   /**
+   * 게임 시작 문구를 출력한다.
+   */
+  printGameStartMessage() {
+    Console.print('다리 건너기 게임을 시작합니다.');
+  },
+
+  /**
    * 예외 상황 시 에러 문구를 출력한다.
    * @param {string} errorMessage
    */
