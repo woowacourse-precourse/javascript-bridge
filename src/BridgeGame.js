@@ -9,6 +9,7 @@ class BridgeGame {
 
 
   constructor(bridge) {
+    console.log(bridge);
     this.#bridge = [...bridge];
     this.#curr = 0;
     this.#isAlive = true;
@@ -32,7 +33,7 @@ class BridgeGame {
    * 시도 횟수 + 1
    */
   retry() {
-    this.#state = 0;
+    this.#curr = 0;
     this.#try += 1;
   }
 
@@ -48,16 +49,26 @@ class BridgeGame {
     let upper = '[';
     let down = '[';
     for(let i=0; i<this.#curr-1; i++) {
-      upper += i!=0 ? '|' : '';
-      down += i!=0 ? '|' : '';
       upper += this.#bridge[i] == 'U' ? ' O ' : '   ';
       down += this.#bridge[i] == 'U' ? '   ' : ' O ';
+      upper += '|';
+      down += '|';
+    }
+    if (this.#isAlive) {
+      upper += this.#bridge[this.#curr-1] == 'U' ? ' O ' : '   ';
+      down += this.#bridge[this.#curr-1] == 'U' ? '   ' : ' O ';
+    }else{
+      upper += this.#bridge[this.#curr-1] == 'U' ? '   ' : ' X ';
+      down += this.#bridge[this.#curr-1] == 'U' ? ' X ' : '   ';
     }
     upper += ']';
     down += ']';
     return [upper, down];
   }
 
+  getTry() {
+    return this.#try;
+  }
 }
 
 module.exports = BridgeGame;
