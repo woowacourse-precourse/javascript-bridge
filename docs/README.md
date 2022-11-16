@@ -23,18 +23,18 @@
 ### ✅ 게임 시작 문구 출력 `OutputView.printStart()`
 - `"다리 건너기 게임을 시작합니다."`
   
-### ❌ 다리 길이 입력 `InputView.readBridgeSize()`
+### ✅ 다리 길이 입력 `InputView.readBridgeSize()`
 - 다리 길이를 입력한다.
 
-### ❌ 다리 길이 입력 값 검증
+### ✅ 다리 길이 입력 값 검증 `Bridge.vaildateSize(size)`
 - `[ERROR] 3이상 20이하 사이의 숫자여야 합니다.`
 - `[ERROR] 입력값은 숫자여야 합니다.`
 
-### ❌ 다리 생성
+### ✅ 다리 생성 `Bridge.constructor(size)`
 - 다리는 1차원 배열로 생성하며 내부 값은 'U' 또는 'D' 이다.
 - 다리 길이는 다리 길이 입력값과 같다.
 
-### ❌ 0이상 1 이하의 무작위 수를 생성한다.
+### ✅ 0이상 1 이하의 무작위 수를 생성한다. `BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate)`
   - 0 : 아래 칸을 건널 수 있다. 'D' 로 나타낸다.
   - 1 : 위 칸을 건널 수 있다. 'U' 로 나타낸다.
 
