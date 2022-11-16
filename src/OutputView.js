@@ -12,6 +12,18 @@ const OutputView = {
     });
     MissionUtils.Console.print(`[${blockString} ]`);
   },
+
+  printResult(bridgeGame, isSuccess) {
+    const result = isSuccess ? "성공" : "실페";
+    MissionUtils.Console.print("\n최종 게임 결과");
+    this.printMap(bridgeGame.getBridgeResult().upResult);
+    this.printMap(bridgeGame.getBridgeResult().downResult);
+    MissionUtils.Console.print("\n게임 성공 여부: " + result);
+    MissionUtils.Console.print(
+      "총 시도한 횟수: " + bridgeGame.getTrialNumber()
+    );
+    MissionUtils.Console.close();
+  },
 };
 
 module.exports = OutputView;
