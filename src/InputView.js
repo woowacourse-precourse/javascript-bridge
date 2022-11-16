@@ -1,20 +1,21 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
-const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+const MissionUtils = require("@woowacourse/mission-utils");
+const Validation = require("./Validation");
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
+const InputView = {
+  START_MSG: "다리 건너기 게임을 시작합니다.",
+  READ_BRIDGE_SIZE_MSG: "다리의 길이를 입력해주세요.",
+
+  readBridgeSize() {
+    MissionUtils.Console.readLine(
+      InputView.START_MSG + "\n" + InputView.READ_BRIDGE_SIZE_MSG,
+      (bridgeSize) => {
+        Validation.validateBridgeSize(bridgeSize);
+      }
+    );
+  },
+
   readMoving() {},
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand() {},
 };
 
