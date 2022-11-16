@@ -34,9 +34,7 @@ class BridgeGame {
   }
 
   validateMoveType(moveType) {
-    const typeCheck = /^[^UD]$/;
-
-    if (typeCheck.test(moveType))
+    if (moveType !== "U" && moveType !== "D")
       throw new Error(ERROR.INVALID_MOVE_TYPE);
   }
 
