@@ -10,7 +10,7 @@ class Validation{
   }
 
   checkCanMove(input){
-    if (input !== DEFAULTS.UP || input !== DEFAULTS.DOWN){
+    if (input !== DEFAULTS.UP && input !== DEFAULTS.DOWN){
       throw new Error(ERRORLINE.MOVE_ERROR);
     }
   }
