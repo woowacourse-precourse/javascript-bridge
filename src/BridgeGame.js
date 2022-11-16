@@ -24,8 +24,9 @@ class BridgeGame {
     return this.#position;
   }
 
-  setPosition(position) {
-    this.#position = position;
+  setPosition(moveType) {
+    this.validateMoveType(moveType);
+    this.#position++;
   }
 
   start() {
@@ -33,7 +34,8 @@ class BridgeGame {
   }
 
   validateMoveType(moveType) {
-    const typeCheck = RegExp(/^['U' | 'D']&/);
+    const typeCheck = /^[^UD]$/;
+
     if (typeCheck.test(moveType))
       throw new Error(ERROR.INVALID_MOVE_TYPE);
   }
