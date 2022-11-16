@@ -9,6 +9,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = this.createBridge(size, generateRandomNumber);
+    return this.changeBridgeShape(bridge);
   },
   createBridge(size, generateRandomNumber) {
     let count = 0;
@@ -19,6 +20,9 @@ const BridgeMaker = {
       count += 1;
     }
     return bridge;
+  },
+  changeBridgeShape(bridge) {
+    return bridge.map((x) => (x === 0 ? "D" : "U"));
   },
 };
 
