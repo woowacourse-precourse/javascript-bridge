@@ -3,9 +3,10 @@ const { Console } = require("@woowacourse/mission-utils");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #count;
-  constructor(count) {
-    this.#count = count;
+  #tryCount;
+
+  constructor(tryCount) {
+    this.#tryCount = tryCount;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -22,14 +23,16 @@ class BridgeGame {
     }
   }
 
-  countUp() {
-    this.#count = this.#count + 1;
+  tryCountUp() {
+    this.#tryCount = this.#tryCount + 1;
   }
 
   move(safeBridge, userMove) {
-    if (safeBridge[this.#count] === this.wordConverse(userMove)) {
-      this.countUp();
-      return true;
+    let Count = this.#tryCount;
+
+    if (safeBridge[this.#tryCount] === this.wordConverse(userMove)) {
+      this.tryCountUp();
+      return Count;
     }
     return false;
   }
