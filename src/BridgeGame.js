@@ -8,11 +8,15 @@ class BridgeGame {
   #bridge
   #position
   #moveHistory
+  #isSuccess
+  #tryCount
 
   constructor() {
     this.#position = -1;
     this.#bridge = null;
     this.#moveHistory = [];
+    this.#isSuccess = "실패";
+    this.#tryCount = 1;
   }
 
   getBridge() {
@@ -37,6 +41,22 @@ class BridgeGame {
 
   setMoveHistory(moveType) {
     this.#moveHistory.push(moveType);
+  }
+
+  getIsSuccess() {
+    return this.#isSuccess;
+  }
+
+  setIsSuccess(type) {
+    this.#isSuccess = type;
+  }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
+
+  setTryCount(amount) {
+    this.#tryCount = amount;
   }
 
   getUpDownHistory() {
@@ -119,6 +139,7 @@ class BridgeGame {
   retry() {
     this.#position = -1;
     this.#moveHistory = [];
+    this.setTryCount(this.getTryCount() + 1);
   }
 
   exit() {
