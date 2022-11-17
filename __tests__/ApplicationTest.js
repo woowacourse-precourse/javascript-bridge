@@ -86,4 +86,4 @@ describe('다리 건너기 테스트', () => {
   });
 });
 
-module.exports = { mockQuestions };
+module.exports = { mockQuestions, mockRandoms };
