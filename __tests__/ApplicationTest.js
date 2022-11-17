@@ -1,7 +1,9 @@
 /* eslint-disable max-lines-per-function */
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
+const Validation = require("../src/Validation");
 const BridgeMaker = require("../src/BridgeMaker");
+// const InputView = require("../src/InputView");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -84,5 +86,18 @@ describe("다리 건너기 테스트", () => {
 
   test("예외 테스트", () => {
     runException(["a"]);
+  });
+});
+
+
+describe("다리 길이 입력 에러 검증", () => {
+  test("다리 길이 입력테스트", () => {
+    // const inputView = InputView
+    expect(() => { 
+      const validation = new Validation();
+      validation.validateBridgeSize(21);
+      // inputView.readBridgeSize(21);
+      // expect(bridge).toEqual(["U", "D", "D"]);
+    }).toThrow("[ERROR]");
   });
 });
