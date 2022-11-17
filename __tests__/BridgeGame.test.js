@@ -115,8 +115,9 @@ describe('사용자 위치를 확인하는 메서드 테스트', () => {
   test('현재위치는 0을 반환한다.', () => {
     const bridgeGame = new BridgeGame();
     const RECEIVED = 0;
+    const FIRST_ROUND = 1;
 
-    loop(1, bridgeGame.move.bind(bridgeGame));
+    loop(FIRST_ROUND, bridgeGame.move.bind(bridgeGame));
 
     expect(bridgeGame.findUserPosition()).toEqual(RECEIVED);
   });
@@ -124,8 +125,9 @@ describe('사용자 위치를 확인하는 메서드 테스트', () => {
   test('현재위치는 1을 반환한다.', () => {
     const bridgeGame = new BridgeGame();
     const RECEIVED = 1;
+    const SECOND_ROUND = 2;
 
-    loop(2, bridgeGame.move.bind(bridgeGame));
+    loop(SECOND_ROUND, bridgeGame.move.bind(bridgeGame));
 
     expect(bridgeGame.findUserPosition()).toEqual(RECEIVED);
   });
@@ -142,8 +144,9 @@ describe('사용자가 게임을 다시 시도할 때 사용하는 메서드 테
   test('유저 포지션 위치를 null로 설정한다.', () => {
     const bridgeGame = new BridgeGame();
     const RECEIVED = null;
+    const SECOND_ROUND = 2;
 
-    loop(2, bridgeGame.move.bind(bridgeGame));
+    loop(SECOND_ROUND, bridgeGame.move.bind(bridgeGame));
 
     expect(bridgeGame.retry()).toEqual(RECEIVED);
   });
@@ -159,20 +162,22 @@ describe('다리를 끝까지 갔는지 확인하는 메서드 테스트', () =>
 
   test('배열의 길이가 3일 때 인덱스 1에 위치한다면 false를 반환한다.', () => {
     const bridgeGame = new BridgeGame();
-    const arrayLength = 3;
+    const ARRAY_LENGTH = 3;
+    const SECOND_ROUND = 2;
 
-    loop(2, bridgeGame.move.bind(bridgeGame));
+    loop(SECOND_ROUND, bridgeGame.move.bind(bridgeGame));
 
-    expect(bridgeGame.isBridgeEnd(arrayLength)).toBeFalsy();
+    expect(bridgeGame.isBridgeEnd(ARRAY_LENGTH)).toBeFalsy();
   });
 
   test('배열의 길이가 3일 때 인덱스 2에 위치한다면 true를 반환한다.', () => {
     const bridgeGame = new BridgeGame();
-    const arrayLength = 3;
+    const ARRAY_LENGTH = 3;
+    const THREE_ROUND = 3;
 
-    loop(3, bridgeGame.move.bind(bridgeGame));
+    loop(THREE_ROUND, bridgeGame.move.bind(bridgeGame));
 
-    expect(bridgeGame.isBridgeEnd(arrayLength)).toBeTruthy();
+    expect(bridgeGame.isBridgeEnd(ARRAY_LENGTH)).toBeTruthy();
   });
 
   test('인자가 숫자가 아니라면 예외를 발생한다.', () => {
