@@ -1,8 +1,8 @@
 // @ts-check
 const BridgeGame = require('./BridgeGame');
-const InputView = require('./view/InputView');
-const OutputView = require('./view/OutputView');
-const { GAME_STATUS, GAME_COMMAND } = require('./constants');
+const InputView = require('../view/InputView');
+const OutputView = require('../view/OutputView');
+const { GAME_STATUS, GAME_COMMAND } = require('../constants');
 
 class Controller {
   /** @type {number} */
