@@ -16,11 +16,11 @@ class BridgeGame {
   }
 
   getBridge() {
-    return this.#bridge;
+    return this.#bridge.getBridge();
   }
 
   setBridge(bridge) {
-    this.#bridge = bridge.getBridge();
+    this.#bridge = bridge;
   }
 
   getPosition() {
@@ -39,13 +39,40 @@ class BridgeGame {
     this.#moveHistory.push(moveType);
   }
 
+  getUpDownHistory() {
+    let upHistory = new Array(this.#position + 1).fill(" ");
+    let downHistory = new Array(this.#position + 1).fill(" ");
+    let bridge = this.#bridge.getBridge();
+
+    for (let position = 0; position <= this.#position; position++)
+      this.#moveHistory[position] === bridge[position]
+        ? this.changeUpDownHistory(upHistory, downHistory, position, "O")
+        : this.changeUpDownHistory(upHistory, downHistory, position, "X");
+
+    return [upHistory, downHistory];
+  }
+
+  changeUpDownHistory(upHistory, downHistory, position, type) {
+    if (this.#moveHistory[position] === "U")
+      upHistory[position] = type;
+    if (this.#moveHistory[position] === "D")
+      downHistory[position] = type;
+  }
+
   start() {
     InputView.readBridgeSize(this);
   }
 
   validateMoveType(moveType) {
-    if (moveType !== "U" && moveType !== "D")
-      throw new Error(ERROR.INVALID_MOVE_TYPE);
+    try {
+      if (moveType !== "U" && moveType !== "D")
+        throw new Error(ERROR.INVALID_MOVE_TYPE);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      return false;
+    }
+
+    return true;
   }
 
   vaildateBridgeSize(size) {
