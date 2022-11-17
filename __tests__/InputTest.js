@@ -19,22 +19,11 @@ test('다리 입력 오류 테스트', () => {
   });
 });
 
-/*
 test('게임 재시작,종료 입력 유효 테스트', () => {
-  regameinputlog = ['R', 'Q', 'RR', 'C', 'Z', '', 'WOWOWOWOW'];
-  regameinputlogexpected = [
-    true,
-    false,
-    false,
-    regameerr,
-    regameerr,
-    regameerr,
-    regameerr,
-  ];
-  regameinputlog.forEach((eachinput, index) => {
+  const regameinputlog = ['', 'RR', 'C', 'Z', '', 'WOWOWOWOW', 'CC', 'QQ'];
+  regameinputlog.forEach((eachlog) => {
     expect(() => {
-      InputError.reGameError(eachinput).toBe(regameinputlogexpected[index]);
-    });
+      InputError.reGameError(eachlog);
+    }).toThrow();
   });
 });
-*/
