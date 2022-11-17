@@ -109,6 +109,18 @@ describe('사용자 위치를 확인하는 메서드 테스트', () => {
     const bridgeGame = new BridgeGame();
     const RECEIVED = 0;
 
+    bridgeGame.move();
+
+    expect(bridgeGame.findUserPosition()).toEqual(RECEIVED);
+  });
+
+  test('현재위치는 1을 반환한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const RECEIVED = 1;
+
+    bridgeGame.move();
+    bridgeGame.move();
+
     expect(bridgeGame.findUserPosition()).toEqual(RECEIVED);
   });
 });
