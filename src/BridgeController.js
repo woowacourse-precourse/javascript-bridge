@@ -39,13 +39,25 @@ class BridgeController {
 
       if (passOrFail === false) {
         OutputView.printMap(bridgeGameResult);
-        this.retryOrExit(safeBridge, bridgeGameResult);
       }
       if (passOrFail === true) {
         OutputView.printMap(bridgeGameResult);
         this.userMove(safeBridge);
       }
+      this.gameEndPoint(safeBridge, bridgeGameResult);
     });
+  }
+
+  gameEndPoint(safeBridge, bridgeGameResult) {
+    if (bridgeGameResult[safeBridge.length - 1] === "O") {
+      OutputView.printResult(
+        bridgeGameResult,
+        "성공",
+        bridgeGame.getTryCount()
+      );
+      Console.close();
+      return;
+    }
   }
 }
 
