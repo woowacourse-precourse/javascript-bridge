@@ -3,7 +3,7 @@ const Validator = require('./Utils/Validator');
 const MissionUtils = require("@woowacourse/mission-utils");
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
-const { BRIDGE_REQUIREMENTS } = require('./constants');
+const { BRIDGE_REQUIREMENTS, MESSAGES } = require('./constants');
 
 class App {
   play() {
@@ -39,12 +39,18 @@ class App {
 
   gameEndCheck() {
     const lastTrace = this.game.course[this.game.course.length - 1];
-    if([BRIDGE_REQUIREMENTS.LOWER_FAILED_CODE, BRIDGE_REQUIREMENTS.UPPER_FAILED_CODE].includes(lastTrace) ||
-      this.game.course.length === this.game.bridge.length) {
-      console.log('게임 종료');
-      return MissionUtils.Console.close();
+    if([BRIDGE_REQUIREMENTS.LOWER_FAILED_CODE, BRIDGE_REQUIREMENTS.UPPER_FAILED_CODE].includes(lastTrace)) {
+      
+    }
+    if(this.game.course.length === this.game.bridge.length) {
+      return this.quitGame(MESSAGES.CLEARED.SUCESSS);
     }
     this.moveSpace();
+  }
+
+  quitGame(clear) {
+    OutputView.printResult(this.game.course, this.game.tryCount, clear);
+    MissionUtils.Console.close();
   }
 }
 
