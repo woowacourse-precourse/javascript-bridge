@@ -7,5 +7,13 @@ class Bridge {
   constructor(length) {
     this.#bridgeArray = makeBridge(length, generate);
   }
+
+  movable(index, inputDirection) {
+    return this.#bridgeArray[index] === inputDirection;
+  }
+
+  checkLength(index) {
+    return index <= this.#bridgeArray.length;
+  }
 }
 module.exports = Bridge;
