@@ -42,6 +42,8 @@ class App {
 
       this.bridgeGame.move(direction);
       OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
+
+      if (this.bridgeGame.isFail()) return Console.print('게임 실패로 이동');
     });
   }
 }
