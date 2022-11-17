@@ -39,7 +39,12 @@ class BridgeGame {
   };
 
   gameIsOver = () => {
-    if (this.#inputs.length === this.#bridge.length) return true;
+    if (this.#inputs.length !== this.#bridge.length) return false;
+    const inputLastIndex = this.#inputs.length - 1;
+    return this.#inputs[inputLastIndex] === this.#bridge[inputLastIndex];
+  };
+
+  selectFalseBridge = () => {
     const inputLastIndex = this.#inputs.length - 1;
     return this.#inputs[inputLastIndex] !== this.#bridge[inputLastIndex];
   };
@@ -52,13 +57,30 @@ class BridgeGame {
     );
     InputView.readMoving(this.move);
   };
+  makeMoveResult = () => {
+    if (this.gameIsOver()) return "GAME_OVER";
+    if (this.selectFalseBridge()) return "FALL_OFF";
+    return "KEEP_MOVE";
+  };
+  selectNextFncAfterMove = (status) => {
+    switch (status) {
+      case "GAME_OVER":
+        OutputView.printResult(this.#bridge, this.#inputs, this.#gameCount);
+        break;
+      case "FALL_OFF":
+        InputView.readGameCommand(this.retry);
+        break;
+      default:
+        InputView.readMoving(this.move);
+    }
+  };
   move = (input) => {
     Validation.validateMoveInput(input);
     const newInputArr = [...this.#inputs, input];
     this.setInput(newInputArr);
     OutputView.printMap(this.#bridge, this.#inputs);
-    if (this.gameIsOver()) InputView.readGameCommand(this.retry);
-    else InputView.readMoving(this.move);
+    const status = this.makeMoveResult();
+    this.selectNextFncAfterMove(status);
   };
 
   /**
