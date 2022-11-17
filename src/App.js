@@ -3,6 +3,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const { COMMAND } = require("./utils/constans");
 
 class App {
   constructor() {
@@ -45,7 +46,16 @@ class App {
   }
 
   inputRetryCommand() {
-    InputView.readGameCommand();
+    InputView.readGameCommand(this.playerChoiceRetry.bind(this));
+  }
+
+  playerChoiceRetry(gameCommand) {
+    if (gameCommand === COMMAND.GAME.QUIT) {
+      OutputView.printResult(this.bridgeGame.getCurrentBridgeMap());
+      return;
+    }
+    this.bridgeGame.retry();
+    this.inputMoving();
   }
 }
 
