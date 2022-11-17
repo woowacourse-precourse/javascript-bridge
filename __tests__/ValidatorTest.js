@@ -40,3 +40,13 @@ describe('Validator checkBridgeSizeRange 테스트', () => {
     });
   });
 });
+
+describe('Validator checkNumberType 테스트', () => {
+  const input = [{}, [], null, undefined, true, false];
+
+  input.forEach(inputValue => {
+    test(`${typeof inputValue} ${MESSAGE_EXCEPT}`, () => {
+      expect(() => Validator.checkNumberType(inputValue)).toThrow('[ERROR]');
+    });
+  });
+});
