@@ -1,4 +1,4 @@
-const { SizeConstraints } = require("../src/Constraints");
+const { SizeConstraints, MoveConstraints } = require("../src/Constraints");
 
 describe("제한 조건 테스트", () => {
   test("숫자가 아닌 다리 길이 입력값 테스트", () => {
