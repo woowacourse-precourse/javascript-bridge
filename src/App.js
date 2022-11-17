@@ -11,7 +11,6 @@ class App {
     readBridgeSize()
       .then((size) => {
         const bridgeGame = new BridgeGame(size);
-        console.log(bridgeGame.bridge);
         return this.progressGame(bridgeGame);
       })
       .then((gameResult) => printResult(gameResult))
@@ -27,7 +26,9 @@ class App {
       if (command === 'R') bridgeGame.retry();
     }
     if (bridgeGame.state === STATE.PROGRESS) return this.progressGame(bridgeGame);
-    return { state: bridgeGame.state, tryCount: bridgeGame.tryCount };
+    return {
+      state: bridgeGame.state, tryCount: bridgeGame.tryCount, upBridgeRoute, downBridgeRoute,
+    };
   }
 }
 

@@ -12,9 +12,14 @@ const OutputView = {
   },
 
   printResult(gameResult) {
-    const { state, tryCount } = gameResult;
+    const {
+      state, tryCount, upBridgeRoute, downBridgeRoute,
+    } = gameResult;
     const strState = STATE.FAIL === state ? '실패' : '성공';
-    Console.print(`\n게임 성공 여부: ${strState}`);
+    Console.print('최종 게임 결과');
+    Console.print(`[ ${upBridgeRoute.join(' | ')} ]`);
+    Console.print(`[ ${downBridgeRoute.join(' | ')} ]\n`);
+    Console.print(`게임 성공 여부: ${strState}`);
     Console.print(`총 시도한 횟수: ${tryCount}`);
     Console.close();
   },
