@@ -20,8 +20,9 @@ class WoowaBrigde {
 
   makeBridge() {
     const bridgeSetter = this.bridge.setOriginalBridge.bind(this.bridge);
-    const callBack = this.printTest.bind(this);
-    InputView.readBridgeSize(bridgeSetter, callBack);
+    const nextCallBack = this.printTest.bind(this);
+    const errorCallBack = this.makeBridge.bind(this);
+    InputView.readBridgeSize(bridgeSetter, nextCallBack, errorCallBack);
   }
 
   printTest() {

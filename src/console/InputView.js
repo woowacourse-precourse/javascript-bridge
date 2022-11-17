@@ -1,21 +1,21 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeRandomNumberGenerator = require("../lib/BridgeRandomNumberGenerator");
-const Validate = require("../lib/Validate");
 const Message = require("../lib/Message");
 const BridgeMaker = require("../BridgeMaker");
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const Validate = require("../lib/Validate");
+const ErrorHandler = require("../ErrorHandler")
+
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize(setBridge, printer) {
-    const generator = BridgeRandomNumberGenerator.generate;
+  generator : BridgeRandomNumberGenerator.generate,
+
+  readBridgeSize(bridgeSetter, nextCallBack, errorCallBack) {
     MissionUtils.Console.readLine(Message.BRIDGE_SIZE, (size) => {
-      Validate.errorCatch(()=>Validate.bridgeLength(size),);
-      setBridge(BridgeMaker.makeBridge(size, generator));
-      printer();
+      const validTarget = () =>Validate.bridgeLength(size)
+      const doCallBack = () => bridgeSetter(BridgeMaker.makeBridge(size, this.generator.bind(this)))
+
+      ErrorHandler.test(validTarget, doCallBack, errorCallBack)
+      nextCallBack();
     });
   },
 
