@@ -12,30 +12,42 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
+    let size;
+
     Console.readLine(ENTER_BRIDGELENGTH, (answer) => {
       console.log("입력한 다리의 길이: " + answer);
-      return answer;
+      size = answer;
     });
+
+    return size;
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
+    let moving;
+
     Console.readLine(ENTER_MOVING, (answer) => {
       console.log("선택한 이동할 칸: " + answer);
-      return answer;
+      moving = answer;
     });
+
+    return moving;
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
+    let proceed;
+
     Console.readLine(ENTER_PROCEED, (answer) => {
       console.log("선택한 게임 진행 여부: " + answer);
-      return answer;
+      proceed = answer;
     });
+
+    return proceed;
   },
 };
 
