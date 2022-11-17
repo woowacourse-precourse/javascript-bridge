@@ -2,11 +2,24 @@
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const { Console } = require('@woowacourse/mission-utils');
-const { START_MESSAGE } = require('./MESSAGES/GameMessage');
+const { START_MESSAGE, MOVE_MESSAGE } = require('./MESSAGES/GameMessage');
+const { BRIDGE_INPUT } = require('./MESSAGES/InputMessage');
 
 const OutputView = {
   printGameStart() {
     Console.print(START_MESSAGE);
+  },
+
+  printBridgeInput() {
+    Console.print(BRIDGE_INPUT);
+  },
+
+  printColumnMessage() {
+    Console.print(MOVE_MESSAGE);
+  },
+
+  printBridgeSize(Size) {
+    Console.print(Size);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
