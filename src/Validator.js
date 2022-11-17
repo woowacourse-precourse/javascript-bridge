@@ -5,6 +5,8 @@ const Validator = Object.freeze({
 
   MOVEMENT_CONDITIONS: ['U', 'D'],
 
+  BRIDGE_RANGE: { MIN: 3, MAX: 20 },
+
   ERROR_MESSAGES: {
     NOT_EMPTY: '[ERROR]:공백은 허용되지않습니다.',
     NOT_NAN: '[ERROR]:NAN 타입은 허용되지 않습니다',
@@ -32,8 +34,9 @@ const Validator = Object.freeze({
   },
 
   checkRange(input) {
-    if (input > 20 || input < 3) throw new Error(this.ERROR_MESSAGES.RANGE_ERROR);
-    else return true;
+    if (input > this.BRIDGE_RANGE.MAX || input < this.BRIDGE_RANGE.MIN) {
+      throw new Error(this.ERROR_MESSAGES.RANGE_ERROR);
+    } else return true;
   },
 });
 

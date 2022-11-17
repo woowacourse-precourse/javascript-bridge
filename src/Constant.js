@@ -1,8 +1,3 @@
-const BRIDGE_RANGE = Object.freeze({
-  MIN: 3,
-  MAX: 20,
-});
-
 const GAME_PROGRESS_MESSAGES = Object.freeze({
   RETRY: '게임을 다시 시도할지 여부를 입력해주세요.',
   MOVE: '이동할 칸을 선택해주세요.',
