@@ -11,7 +11,7 @@ class App {
 
   play() {
     OutputView.printGameStart();
-    InputView.readBridgeSize(this.#bridgeGame.setBridge);
+    InputView.readBridgeSize(this.#bridgeGame.setBridge, this.#bridgeGame.move);
   }
 }
 module.exports = App;
