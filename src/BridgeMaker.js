@@ -1,4 +1,3 @@
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { LETTER } = require("./constant");
 
 /**
@@ -19,7 +18,5 @@ const BridgeMaker = {
     return [...Array(size)].map(() => this.map[generateRandomNumber()]);
   },
 };
-
-console.log(BridgeMaker.makeBridge(4, BridgeRandomNumberGenerator.generate));
 
 module.exports = BridgeMaker;

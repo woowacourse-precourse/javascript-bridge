@@ -36,18 +36,22 @@ const InputView = {
       Validation.checkUorD(letter);
       const { correct, map, gameOver, trialTime } = this.move(letter);
       OutputView.printMap(map);
-      if (gameOver && correct) {
-        OutputView.printResult(map, MESSAGE.win, trialTime);
-        Console.close();
-        return;
-      }
-
-      if (correct) {
-        this.readMoving();
-      } else {
-        this.readGameCommand({ map, trialTime });
-      }
+      this.nextAction({ correct, map, gameOver, trialTime });
     });
+  },
+
+  nextAction({ correct, map, gameOver, trialTime }) {
+    if (gameOver && correct) {
+      this.endGame(map, MESSAGE.win, trialTime);
+    }
+
+    if (correct) {
+      this.readMoving();
+    }
+
+    if (!correct) {
+      this.readGameCommand({ map, trialTime });
+    }
   },
 
   /**
@@ -63,10 +67,15 @@ const InputView = {
       }
 
       if (letter === LETTER.quit) {
-        OutputView.printResult(map, MESSAGE.lose, trialTime);
-        Console.close();
+        this.endGame(map, MESSAGE.lose, trialTime);
       }
     });
+  },
+
+  endGame(map, result, trialTime) {
+    OutputView.printResult(map, result, trialTime);
+    Console.close();
+    return;
   },
 };
 
