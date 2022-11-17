@@ -14,9 +14,14 @@ class BridgeGame {
   #gameRound = 0;
   numberOfTrials = 1;
 
-  constructor(size) {
-    this.#bridgeSize = size;
+  start() {
+    ViewController.input.bridgeSize(this.generateBridge.bind(this));
+  }
+
+  generateBridge(size) {
+    this.#bridgeSize = parseInt(size);
     this.#bridge = makeBridge(this.#bridgeSize, generate);
+    ViewController.input.moving(this.move.bind(this));
   }
 
   /**
@@ -24,15 +29,14 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  async move() {
-    // 상수화 필요
-    const COMMAND = await ViewController.input.moving();
-    if (COMMAND === this.#bridge[this.#gameRound]) {
-      this.handleCorrectMove(COMMAND);
-    } else if (COMMAND !== this.#bridge[this.#gameRound]) {
-      this.handleWrongMove(COMMAND);
+  move(command) {
+    if (command === this.#bridge[this.#gameRound]) {
+      this.handleCorrectMove(command);
+    } else if (command !== this.#bridge[this.#gameRound]) {
+      this.handleWrongMove(command);
     }
   }
+
   handleCorrectMove(command) {
     //상수화 필요
     this.buildBridgeUsingInput(command, "O");
@@ -42,16 +46,18 @@ class BridgeGame {
       ViewController.output.result(this.numberOfTrials, "성공", [this.#upperBridge, this.#lowerBridge]);
       MissionUtils.Console.close();
     }
-    if (this.#gameRound < this.#bridgeSize) this.move();
+    if (this.#gameRound < this.#bridgeSize) ViewController.input.moving(this.move.bind(this));
   }
+
   handleWrongMove(command) {
     this.buildBridgeUsingInput(command, "X");
     ViewController.output.map(this.#upperBridge, this.#lowerBridge);
     this.#upperBridge = [];
     this.#lowerBridge = [];
     this.#gameRound = 0;
-    this.retry();
+    ViewController.input.gameCommand(this.retry.bind(this));
   }
+
   buildBridgeUsingInput(direction, result) {
     // 상수화 필요
     if (direction === "U") {
@@ -69,12 +75,11 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  async retry() {
-    const COMMAND = await ViewController.input.gameCommand();
-    if (COMMAND === "R") {
+  retry(command) {
+    if (command === "R") {
       this.numberOfTrials += 1;
-      this.move();
-    } else if (COMMAND === "Q") {
+      ViewController.input.moving(this.move.bind(this));
+    } else if (command === "Q") {
       ViewController.output.result(this.numberOfTrials, "실패", [this.#upperBridge, this.#lowerBridge]);
       MissionUtils.Console.close();
     }

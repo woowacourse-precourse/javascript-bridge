@@ -11,6 +11,7 @@ const OutputView = {
   printMap(upperBridge, lowerBridge) {
     MissionUtils.Console.print("[ " + upperBridge.join(" | ") + " ]");
     MissionUtils.Console.print("[ " + lowerBridge.join(" | ") + " ]");
+    MissionUtils.Console.print("");
   },
 
   /**
@@ -22,6 +23,7 @@ const OutputView = {
     MissionUtils.Console.print("최종 게임 결과");
     MissionUtils.Console.print("[ " + bridge[0].join(" | ") + " ]");
     MissionUtils.Console.print("[ " + bridge[1].join(" | ") + " ]");
+    MissionUtils.Console.print("");
     MissionUtils.Console.print(`게임 성공 여부: ${gameResult}`);
     MissionUtils.Console.print(`총 시도한 횟수: ${totalTrial}`);
   },

@@ -1,12 +1,9 @@
 const BridgeGame = require("./BridgeGame");
-const InputView = require("./InputView");
 
 class App {
-  async play() {
-    const BRIDGE_SIZE = await InputView.readBridgeSize();
-    const Game = new BridgeGame(BRIDGE_SIZE);
-
-    Game.move();
+  play() {
+    const Game = new BridgeGame();
+    Game.start();
   }
 }
 
