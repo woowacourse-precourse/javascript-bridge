@@ -23,7 +23,11 @@ class GameController {
         BridgeRandomNumberGenerator.generate
       );
       this.bridgeGame.setBridge(bridge);
+      this.inputStep();
     });
+  }
+  inputStep() {
+    InputView.readMoving(() => {});
   }
 }
 
