@@ -53,7 +53,7 @@ describe("출력 테스트", () => {
     });
   });
   test("결과 출력 테스트", () => {
-    OutputView.printResult(["U", "D", "U"], ["U", "D", "U"]);
+    OutputView.printResult(["U", "D", "U"], ["U", "D", "U"], 1);
     const log = getOutput(logSpy);
     expectLogContains(log, [
       "최종 게임 결과",
