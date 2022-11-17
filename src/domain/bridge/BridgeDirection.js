@@ -20,6 +20,11 @@ class BridgeDirection {
     BridgeDirection.validate(number);
     return BridgeDirection.#DIRECTION[number];
   }
+
+  static includes(direction) {
+    const { values } = Object;
+    return values(this.#DIRECTION).includes(direction);
+  }
 }
 
 module.exports = BridgeDirection;
