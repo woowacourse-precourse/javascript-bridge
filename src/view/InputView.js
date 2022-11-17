@@ -22,21 +22,6 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {},
-
-  validateBridgeSize(number) {
-    this.isNumber(number);
-    this.isRange(number);
-  },
-  isNumber(number) {
-    if (isNaN(+number)) throw new Error('[ERROR]');
-  },
-  isRange(number) {
-    if (+number < 3 || +number > 30) throw new Error('[ERROR]');
-  },
-
-  validateNext(next) {
-    if (next !== 'U' && next !== 'D') throw new Error('[ERROR]');
-  },
 };
 
 module.exports = InputView;

@@ -3,6 +3,7 @@ const BridgeGame = require('../model/BridgeGame');
 const InputView = require('../view/InputView');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const BridgeMaker = require('../BridgeMaker');
+const { validateBridgeSize, validateNext } = require('../errorHandling');
 
 class GameController {
   #bridge;
@@ -17,6 +18,7 @@ class GameController {
   }
 
   setBridge(size) {
+    validateBridgeSize.validate(size);
     this.#bridge = BridgeMaker.makeBridge(size, () =>
       BridgeRandomNumberGenerator.generate()
     );
@@ -29,6 +31,7 @@ class GameController {
   }
 
   setMoving(next) {
+    validateNext.validate(next);
     //  이동하는 로직
   }
 }
