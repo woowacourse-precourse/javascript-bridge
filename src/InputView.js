@@ -11,7 +11,8 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.", (bridgeSize) => {
-      makeBridge(bridgeSize, generate);
+      this.bridge = makeBridge(bridgeSize, generate);
+      //만든 값 저장해두기
     });
   },
 
@@ -22,6 +23,7 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (maveInput) => {
+        //총 다리 길이 중 지금 몇번째 시도인지 확인
         move(maveInput);
       }
     );
@@ -38,7 +40,10 @@ const InputView = {
       }
     );
   },
+
+  startGame() {
+    Console.print("다리 건너기 게임을 시작합니다.");
+  },
 };
-InputView.readBridgeSize();
 
 module.exports = InputView;
