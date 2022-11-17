@@ -8,4 +8,11 @@ const GAME_MESSAGE = {
   TRY_COUNT: (count) => `총 시도한 횟수: ${count}`,
 };
 
-module.exports = GAME_MESSAGE;
+const GAME_INPUT = {
+  UP: 'U',
+  DOWN: 'D',
+  RETRY: 'R',
+  QUIT: 'Q',
+};
+
+module.exports = { GAME_MESSAGE, GAME_INPUT };
