@@ -5,13 +5,13 @@
 ### 🚨 체크리스트
 
 - [o] **App play 구현** App #play
-- [o] **시작 문구 출력** InputView #startGame
-- [o] **자동으로 생성할 다리 길이를 입력 받는다. 3 이상 20 이하의 숫자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** InputView #readBridgeSize
-- [o] **입력 받은 다리를 생성한다**
-  - [o] **다리를 생성할 때 위 칸과 아래 칸 중 건널 수 있는 칸은 0과 1 중 무작위 값을 이용해서 정한다.** BridgeRandomNumberGenerator
-- [o] **라운드마다 플레이어가 이동할 칸을 입력 받는다. U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** - 예외처리 나중에 InputView #readMoving BridgeMaker #makeBridge
+- [o] **시작 문구 출력** InputView #startGame - 게임 시작 로직 같아 보여서 시작 문구 보여주는 네이밍으로 전환 필요
+- [o] **생성할 다리 길이를 입력 받는다. 3 이상 20 이하의 숫자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** InputView #readBridgeSize
+  - [o] **입력 받은 다리를 생성한다** BridgeMaker #makeBridge
+  - [o] **라운드마다 플레이어가 이동할 칸을 입력 받는다. U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** - 예외처리 나중에 InputView #readMoving
   - [o] **입력 받는 값에 맞게 이동한다.**BridgeGame #move
-    - [ ] **위아래 두 칸으로 이루어진 다리를 건너야 한다. 위아래 둘 중 하나의 칸만 건널 수 있다.** 예외처리
+    - [o] **기존 다리와 유저 인풋값을 활용하여 새로운 다리 반환한다.** BridgeMaker #makeUserBridge
+  - [ ] **count와 생성된 다리 size와 같거나 X가 출력되면 재시작 메서드 실행**BridgeGame #retry
 - [ ] **다리를 끝까지 건너면 게임이 종료된다.** OutputView #printResult
 - [ ] **게임 재시작/종료 여부를 입력 받는다. R(재시작)과 Q(종료) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** InputView #readGameCommand
 - [ ] **입력 받는 값을 판단하여 실행한다.** BridgeGame #retry
