@@ -4,6 +4,7 @@ const BridgeMaker = require('../src/BridgeMaker');
 const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
 
 const NUMBER_ERROR_TEXT = '[ERROR] 전달된 인수는 숫자 타입이 아닙니다.';
+const FUNCTION_ERROR_TEXT = '[ERROR] 전달된 인수는 함수가 아닙니다.';
 
 afterAll(() => {
   MissionUtils.Console.close();
@@ -37,5 +38,14 @@ describe('다리의 길이를 입력 받아서 다리를 생성해주는 함수 
     expect(() => {
       BridgeMaker.makeBridge(EXPECTED, generate);
     }).toThrow(NUMBER_ERROR_TEXT);
+  });
+
+  test('전달받는 두 번째 인자가 함수가 아니라면 예외를 발생한다.', () => {
+    const EXPECTED1 = 3;
+    const EXPECTED2 = [];
+
+    expect(() => {
+      BridgeMaker.makeBridge(EXPECTED1, EXPECTED2);
+    }).toThrow(FUNCTION_ERROR_TEXT);
   });
 });
