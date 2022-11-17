@@ -23,8 +23,15 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(callback) {
-    Console.readLine(INPUT_MESSAGE.MOVING_COMMAND, callback);
+  readMoving(playerMove) {
+    Console.readLine(INPUT_MESSAGE.MOVING_COMMAND, (movingCommand) => {
+      try {
+        Validation.movingCommand(movingCommand);
+        playerMove(movingCommand);
+      } catch {
+        this.readMoving(playerMove);
+      }
+    });
   },
 
   /**
