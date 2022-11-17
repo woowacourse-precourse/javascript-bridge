@@ -42,18 +42,22 @@
   - getBridge
 - BridgeGame
   - validate
+  - resetSelectedAndPlusTryCnt
   - getSelected
   - getLength
   - getResult
   - getTryCnt
+  - plusTryCnt
   - move
   - retry
+  - validateRetryInput
 
 # function
 
 - InputView
   - readBridgeSize
   - readMoving
+  - isReMoving
   - readGameCommand
 - OutputView
   - printMap
