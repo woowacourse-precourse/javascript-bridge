@@ -35,18 +35,20 @@ describe('범위 파악 함수 테스트', () => {
     expect(typeof EXPECTED === 'function').toBeTruthy();
   });
 
-  test('지정된 범위를 벗어나면 예외를 발생시킨다.', () => {
-    const checkRange = Validation.range(START, END);
-    const EXPECTED = 2;
+  test.each([0, 1, 2, 21, 22])(
+    '지정된 범위를 벗어나면 예외를 발생시킨다.',
+    (EXPECTED) => {
+      const checkRange = Validation.range(START, END);
 
-    expect(() => {
-      checkRange(EXPECTED);
-    }).toThrow(RANGE_ERROR_TEXT);
-  });
+      expect(() => {
+        checkRange(EXPECTED);
+      }).toThrow(RANGE_ERROR_TEXT);
+    },
+  );
 
   test('전달받는 인자가 숫자가 아니라면 예외를 발생한다.', () => {
     const checkRange = Validation.range(START, END);
-    const EXPECTED = '2';
+    const EXPECTED = NaN;
 
     expect(() => {
       checkRange(EXPECTED);
