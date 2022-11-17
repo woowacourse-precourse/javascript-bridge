@@ -36,7 +36,7 @@ const InputView = {
       Validation.checkUorD(letter);
       const { result, map, gameOver, trialTime } = this.move(letter);
       OutputView.printMap(map);
-      if (gameOver) {
+      if (gameOver && result) {
         OutputView.printResult(map, MESSAGE.win, trialTime);
         Console.close();
         return;
