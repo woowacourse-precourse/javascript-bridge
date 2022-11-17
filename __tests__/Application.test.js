@@ -24,3 +24,11 @@ describe('숫자 변환 함수 테스트', () => {
     }).toThrow(NUMBER_ERROR_TEXT);
   });
 });
+
+describe('배열 생성 함수 테스트', () => {
+  test('메소드 이름은 "createArray"로 정의된다.', () => {
+    const METHOD_NAME = 'createArray';
+
+    expect(Application.createArray.name).toEqual(METHOD_NAME);
+  });
+});
