@@ -28,4 +28,18 @@ describe("입력값 유효성 검사 테스트", () => {
       expect(() => Validation.movingCommand(bridgeSize)).toThrow();
     });
   });
+
+  test("게임 재시작 여부 입력 유효성 검사", () => {
+    const inputGameCommand = {
+      correct: ["R", "Q"],
+      incorrect: ["r", "   ", "", "q", "100"],
+    };
+
+    inputGameCommand.correct.forEach((bridgeSize) => {
+      expect(Validation.gameCommand(bridgeSize)).toBeUndefined();
+    });
+    inputGameCommand.incorrect.forEach((bridgeSize) => {
+      expect(() => Validation.gameCommand(bridgeSize)).toThrow();
+    });
+  });
 });
