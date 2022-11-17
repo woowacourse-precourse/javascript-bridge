@@ -18,25 +18,27 @@ const Validator = Object.freeze({
   checkSpace(input) {
     const trimedInput = input.trim();
     if (trimedInput.match(this.SPAGE_REG)) throw new Error(this.ERROR_MESSAGES_NOT_EMPTY);
-    else return true;
+    return true;
   },
 
   checkNan(input) {
     if (Number.isNaN(+input)) throw new Error(this.ERROR_MESSAGES.NOT_NAN);
-    else return true;
+    return true;
   },
 
   checkCondition(input, conditionArray, error) {
     const trimedInput = input.trim();
     if (trimedInput !== conditionArray[0] && trimedInput !== conditionArray[1]) {
       throw new Error(error);
-    } else return true;
+    }
+    return true;
   },
 
   checkRange(input) {
     if (input > this.BRIDGE_RANGE.MAX || input < this.BRIDGE_RANGE.MIN) {
       throw new Error(this.ERROR_MESSAGES.RANGE_ERROR);
-    } else return true;
+    }
+    return true;
   },
 });
 
