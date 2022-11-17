@@ -1,7 +1,7 @@
 const Constants = {
   STATE: {
-    PROGRESS: 0,
-    FAIL: 1,
+    FAIL: 0,
+    PROGRESS: 1,
     SUCCESS: 2,
   },
 };
