@@ -3,6 +3,7 @@ const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 const Validation = require('./Validation');
 
 class App {
@@ -38,6 +39,9 @@ class App {
         Console.print(errorMsg);
         return this.requestDirection();
       }
+
+      this.bridgeGame.move(direction);
+      OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
     });
   }
 }
