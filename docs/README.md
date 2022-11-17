@@ -2,23 +2,23 @@
 
 ## 기능 목록
 
-- [ ][출력] 게임 시작 문구를 출력한다.| OutputView#printStartMessage()
-- [ ][입력] 자동으로 생성할 다리 길이를 입력 받는다.| InputView#readBridgeSize()
-  - [ ][예외처리] 입력받은 값이 3 이상 20 이하 숫자가 아니면 예외 처리한다.| InputValidator#validateBridgeSize(size)
+- [ ] [출력] 게임 시작 문구를 출력한다.| OutputView#printStartMessage()
+- [ ] [입력] 자동으로 생성할 다리 길이를 입력 받는다.| InputView#readBridgeSize()
+  - [ ] [예외처리] 입력받은 값이 3 이상 20 이하 숫자가 아니면 예외 처리한다.| InputValidator#validateBridgeSize(size)
 - [ ] 다리를 생성한다.| BridgeMaker#makeBridge(size, generate)
   - [ ] 다리를 생성할 때 위 칸과 아래 칸 중 건널 수 있는 칸은 0과 1 중 무작위 값을 이용해서 정한다.| BridgeRandomNumberGenerator#generate()
-    - [ ][예외처리] 무작위 값이 0 또는 1이 아닌 경우 예외 처리한다.
-- [ ][입력] 플레이어가 이동할 칸을 선택한다.| InputView#readMoving()
-  - [ ][예외처리] 입력받은 값이 U 또는 D가 아닌 경우 예외 처리한다.| InputValidator#validateMoving()
+    - [ ] [예외처리] 무작위 값이 0 또는 1이 아닌 경우 예외 처리한다.
+- [ ] [입력] 플레이어가 이동할 칸을 선택한다.| InputView#readMoving()
+  - [ ] [예외처리] 입력받은 값이 U 또는 D가 아닌 경우 예외 처리한다.| InputValidator#validateMoving()
 - [ ] 플레이어가 칸을 이동한다.| BridgeGame#move()
-- [ ][출력] 다리 건너기 결과를 출력한다.| OutputView#printMap()
+- [ ] [출력] 다리 건너기 결과를 출력한다.| OutputView#printMap()
 - 다리를 끝까지 건너면 게임이 종료된다.
-  - [ ][출력] 게임 종료 문구를 출력한다.| OutputView#printResult()
-- [ ][입력] 다리를 건너다 실패하면 게임 재시작/종료 여부를 입력 받는다.| InputView#readGameCommand()
-  - [ ][예외처리] 입력받은 값이 R 또는 Q가 아닌 경우 예외 처리한다.| InputValidator#validateGameCommand()
+  - [ ] [출력] 게임 종료 문구를 출력한다.| OutputView#printResult()
+- [ ] [입력] 다리를 건너다 실패하면 게임 재시작/종료 여부를 입력 받는다.| InputView#readGameCommand()
+  - [ ] [예외처리] 입력받은 값이 R 또는 Q가 아닌 경우 예외 처리한다.| InputValidator#validateGameCommand()
 - [ ] 입력 받은 값이 R인 경우 게임을 재시작한다.| BridgeGame#retry()
 - [ ] 입력 받은 값이 Q인 경우 게임을 종료한다.
-  - [ ][출력] 게임 종료 문구를 출력한다.| OutputView#printResult()
+  - [ ] [출력] 게임 종료 문구를 출력한다.| OutputView#printResult()
 
 ## 추가적으로 신경 쓸 사항
 
@@ -41,7 +41,7 @@
 - 도메인 로직에 단위 테스트를 구현해야 한다. 단, UI(Console.readLine, Console.print) 로직에 대한 단위 테스트는 제외한다.
   - 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분한다.
 
-### 도메인 로직
+## 도메인 로직
 
 BridgeGame // 사용자가 칸을 이동할 때 사용하는 메서드
 
@@ -56,7 +56,13 @@ BridgeRandomNumberGenerator
 
 - generate()
 
-### UI 로직
++InputValidator
+
+- +validateBridgeSize()
+- +validateMoving()
+- +validateGameCommand()
+
+## UI 로직
 
 InputView // 사용자로부터 입력을 받는 역할을 한다.
 
@@ -66,11 +72,11 @@ InputView // 사용자로부터 입력을 받는 역할을 한다.
 
 OutputView // 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
 
-- [ ] printStartMessage() // 게임 시작 문구를 출력한다. MESSAGE.START
+- +printStartMessage() // 게임 시작 문구를 출력한다. MESSAGE.START
 - printMap() // 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
 - printResult() // 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
 
-### 상수
+## 상수
 
 const WORDS = {
 START_SIZE: 3,
