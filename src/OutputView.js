@@ -4,43 +4,11 @@ const { Console } = require('@woowacourse/mission-utils');
  */
 const OutputView = {
   /**
-   * @param {string[]} bridge // 다리
-   * @param {string[]} inputs // 플레이어의 입력
+   * @param {string} upperPart // 다리의 윗부분
+   * @param {string[]} lowerPart // 다리의 아랫부분
    */
-  printMap(bridge, inputs) {
-    const upperPart = this.makeUpperPart(bridge, inputs);
-    const lowerPart = this.makeLowerPart(bridge, inputs);
+  printMap(upperPart, lowerPart) {
     Console.print(`[ ${upperPart} ]\n[ ${lowerPart} ]`);
-  },
-
-  /**
-   * @param {string[]} bridge // 다리
-   * @param {string[]} inputs // 플레이어의 입력
-   * @return {string} // 출력할 map의 윗부분
-   */
-  makeUpperPart(bridge, inputs) {
-    const upperPart = inputs.map((e, i) => {
-      if (e !== 'U') return ' ';
-      if (e === bridge[i]) return 'O';
-      return 'X';
-    });
-
-    return upperPart.join(' | ');
-  },
-
-  /**
-   * @param {string[]} bridge // 다리
-   * @param {string[]} inputs // 플레이어의 입력
-   * @return {string} // 출력할 map의 아랫부분
-   */
-  makeLowerPart(bridge, inputs) {
-    const lowerPart = inputs.map((e, i) => {
-      if (e !== 'D') return ' ';
-      if (e === bridge[i]) return 'O';
-      return 'X';
-    });
-
-    return lowerPart.join(' | ');
   },
 
   /**

@@ -10,10 +10,9 @@ const getLogSpy = () => {
 describe('다리 건너기 출력 테스트', () => {
   test('건너기 결과를 올바른 출력물로 변환하는지 테스트', () => {
     const logSpy = getLogSpy();
-    const bridge = ['U', 'D', 'D', 'U', 'U'];
-    const inputs = ['U', 'D', 'U'];
-
-    OutputView.printMap(bridge, inputs);
+    const upperPart = 'O |   | X';
+    const lowerPart = '  | O |  ';
+    OutputView.printMap(upperPart, lowerPart);
 
     expect(logSpy).toHaveBeenCalledWith('[ O |   | X ]\n[   | O |   ]');
   });
