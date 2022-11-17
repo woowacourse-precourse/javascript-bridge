@@ -3,7 +3,7 @@ const Bulider = require('./Builder.js');
 class BridgeGame {
   #bridge;
 
-  buildBridge(size) {
+  build(size) {
     const builder = new Bulider();
 
     builder.buildBridge(size);

@@ -11,7 +11,7 @@ const InputView = {
 
   readBridgeSize(size) {
     try {
-      bridgeGame.buildBridge(size);
+      bridgeGame.build(size);
     } catch ({ message }) {
       Console.print(message);
       InputView.requestBridgeSize();
