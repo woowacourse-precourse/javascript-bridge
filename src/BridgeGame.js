@@ -35,16 +35,16 @@ class BridgeGame {
   start = () => {
     this.setInput([]);
     this.setGameCount();
-    InputView.readBridgeSize(this.getBrigeSize);
+    InputView.readBridgeSize(this.getBridgeSize);
   };
+
   gameIsOver = () => {
     if (this.#inputs.length === this.#bridge.length) return true;
     const inputLastIndex = this.#inputs.length - 1;
-    if (this.#inputs[inputLastIndex] !== this.#bridge[inputLastIndex])
-      return true;
-    return false;
+    return this.#inputs[inputLastIndex] !== this.#bridge[inputLastIndex];
   };
-  getBrigeSize = (input) => {
+
+  getBridgeSize = (input) => {
     Validation.validateIsNumber(input);
     Validation.validateBridgeRange(input);
     this.setBridge(
