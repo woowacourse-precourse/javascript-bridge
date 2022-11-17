@@ -18,7 +18,7 @@ const BridgeConverter = {
       bridge[0][idx] = "O";
       return;
     }
-    bridge[1][idx] = "X";
+    bridge[0][idx] = "X";
     return;
   },
   /**
@@ -30,7 +30,7 @@ const BridgeConverter = {
    */
   writeBridgeD(answer, idx, bridge) {
     if ("D" === answer) {
-      bridge[0][idx] = "O";
+      bridge[1][idx] = "O";
       return;
     }
     bridge[1][idx] = "X";
