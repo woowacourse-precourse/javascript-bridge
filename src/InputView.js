@@ -24,15 +24,12 @@ const InputView = {
    */
   readMoving() {
     MissionUtils.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (input) => {
-      const roundResult = this.bridgeGame.move(input);
-      OutputView.printMap(this.bridgeGame.stateToString());
-      if(!roundResult) {
-        this.readGameCommand();
-      } else if (this.bridgeGame.isArrived()){
-        OutputView.printResult(this.bridgeGame.stateToString(), this.bridgeGame.isArrived(), this.bridgeGame.getTry());
-        return null;
-      } 
-      this.readMoving();
+      const roundResult = BridgeGameController.startNewRound(this.bridgeGame, input);
+      switch (roundResult) {
+        case 0: this.readGameCommand(); break;
+        case 1: this.readMoving(); break;
+        case 2: return null;
+      }
     });
   },
 
