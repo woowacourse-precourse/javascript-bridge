@@ -58,3 +58,11 @@ test('이동할 칸 입력 유효 테스트', () => {
     }).toThrow();
   });
 });
+
+test('위가 U면 참인지 테스트', () => {
+  expect(InputError.movingError('U')).toBe(true);
+});
+
+test('아래가 D면 참인지 테스트', () => {
+  expect(InputError.movingError('D')).toBe(true);
+});
