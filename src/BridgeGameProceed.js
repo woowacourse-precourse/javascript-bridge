@@ -7,10 +7,11 @@ class BridgeGameProceed {
         OutputView.printStart();
         // 다리의 갯수 입력 3~20;
         InputView.readBridgeSize();
+        this.game();
     }
 
     game() {
-        
+        InputView.readMoving();
     }
 }
 

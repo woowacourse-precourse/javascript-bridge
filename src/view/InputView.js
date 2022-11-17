@@ -13,6 +13,7 @@ const InputView = {
   readMoving() {
     Console.readLine(INPUT_MESSAGE.PUT_NEXT_SPACE, (nextSpace) => {
       // 예외상황 확인
+      //
     });
   },
 
