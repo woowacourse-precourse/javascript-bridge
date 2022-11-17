@@ -85,7 +85,12 @@ class App {
     }
   }
 
-  askRetry() {}
+  askRetry() {
+    this.#numberOfAttempts += 1;
+    Console.readLine(MESSAGE.ASK_RETRY, (answer) => {
+      answer === ANSWER.RETRY ? this.retry() : this.printResult();
+    });
+  }
 }
 
 const app = new App();
