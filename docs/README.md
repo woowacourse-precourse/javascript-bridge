@@ -56,5 +56,9 @@ U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력할 수 있으며 올�
 - [ ] 다리 게임 진행 데이터 저장.
 
 
+### TestCase
+- [x] 다리 생성을 위한 난수 배열 생성함수 테스트
+
+
 ### Refactor
 - [x] BridgeGame 클래스에서 InputView, OutputView 분리. 게임 컨트롤러 하나 만들기.

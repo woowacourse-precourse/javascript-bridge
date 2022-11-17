@@ -1,7 +1,6 @@
 const InputView = require('../Views/InputView');
 const OutputView = require('../Views/OutputView');
 const BridgeMaker = require('../BridgeMaker');
-const { generateRandomNumber } = require('../utils/bridgeHandler');
 
 class GameController {
   constructor() {

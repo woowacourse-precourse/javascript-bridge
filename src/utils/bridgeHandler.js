@@ -4,4 +4,12 @@ const generateRandomNumber = () => {
   return BridgeRandomNumberGenerator.generate();
 };
 
-module.exports = { generateRandomNumber };
+const numberConverter = (number) => {
+  return number === 1 ? 0 : 1;
+};
+
+const convertNumberToUpDown = (number) => {
+  return number === 1 ? 'U' : 'D';
+};
+
+module.exports = { generateRandomNumber, numberConverter };
