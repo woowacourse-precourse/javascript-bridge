@@ -5,6 +5,12 @@ const { MAP, MOVE, PHRASE } = require('./config');
  */
 const OutputView = {
   /**
+   * 게임을 시작한다는 문구를 출력한다.
+   */
+  printHi() {
+    Console.print(PHRASE.START);
+  },
+  /**
    * 현재까지 이동한 다리의 상태를 생성한다.
    * @param {string[]} bridge 다리
    * @param {boolean[]} history 각 이동의 성공 여부를 기록한 배열
