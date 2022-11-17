@@ -2,6 +2,7 @@ const Validation = require('../src/Validation');
 
 const NUMBER_ERROR_TEXT = '[ERROR] 전달된 인수는 숫자 타입이 아닙니다.';
 const RANGE_ERROR_TEXT = '[ERROR] 지정한 범위의 값이 아닙니다.';
+const FUNCTION_ERROR_TEXT = '[ERROR] 전달된 인수는 함수가 아닙니다.';
 
 describe('숫자 예외 파악 함수 테스트', () => {
   test('메소드 이름은 "number"로 정의된다.', () => {
@@ -16,6 +17,14 @@ describe('숫자 예외 파악 함수 테스트', () => {
     expect(() => {
       Validation.number(EXPECTED);
     }).toThrow(NUMBER_ERROR_TEXT);
+  });
+});
+
+describe('함수 타입 체크 함수 테스트', () => {
+  test('메소드 이름은 "Fn"로 정의된다.', () => {
+    const METHOD_NAME = 'Fn';
+
+    expect(Validation.Fn.name).toEqual(METHOD_NAME);
   });
 });
 
