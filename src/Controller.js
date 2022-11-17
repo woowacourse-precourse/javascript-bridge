@@ -20,19 +20,12 @@ class Controller {
   }
 
   handleMove() {
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
-      try {
-        Validator.validateIncludes(['U', 'D'], input);
-        const { resultToString, gameStatus } = this.bridgeGame.move(input);
-        OutputView.printMap(resultToString);
-        Console.print('');
-        if (gameStatus === 2) this.handleGameEnd();
-        if (gameStatus === 1) this.handleGameOver();
-        if (gameStatus === 0) this.handleMove();
-      } catch (err) {
-        Console.print(`\n${err.message}`);
-        this.handleMove();
-      }
+    InputView.readMoving((input) => {
+      const { resultToString, gameStatus } = this.bridgeGame.move(input);
+      OutputView.printMap(resultToString);
+      if (gameStatus === 2) this.handleGameEnd();
+      if (gameStatus === 1) this.handleGameOver();
+      if (gameStatus === 0) this.handleMove();
     });
   }
 

@@ -29,9 +29,26 @@ const InputView = {
   },
 
   /**
-   * 사용자가 이동할 칸을 입력받는다.
+   * @param {function(string): void} callback 입력받은 후 실행할 함수
    */
-  readMoving() {},
+  readMoving(callback) {
+    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => this.errorHandler(
+      this.validateMoving(input, callback),
+      () => this.readMoving(callback),
+    ));
+  },
+
+  /**
+   * @param {string} input 플레이어의 입력
+   * @param {function(string): void} callback 입력받은 후 실행할 함수
+   * @return {function(): void} 에러핸들러에게 전달할 콜백함수
+   */
+  validateMoving(input, callback) {
+    return () => {
+      Validator.validateIncludes(['U', 'D'], input);
+      callback(input);
+    };
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
