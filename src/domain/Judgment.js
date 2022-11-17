@@ -3,8 +3,8 @@ class Judgment {
     return bridge.stepOn(position, direction);
   }
 
-  static checkCrossingAll() {
-
+  static checkCrossingAll({ crossingBridge, bridge }) {
+    return crossingBridge.size() === bridge.size();
   }
 }
 

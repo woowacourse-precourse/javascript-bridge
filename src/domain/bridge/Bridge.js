@@ -26,6 +26,10 @@ class Bridge {
   stepOn(index, direction) {
     return this.#panels[index].checkTempered(direction);
   }
+
+  size() {
+    return this.#panels.length;
+  }
 }
 
 module.exports = Bridge;
