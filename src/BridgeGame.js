@@ -60,6 +60,11 @@ class BridgeGame {
       InputView.readMoving(this);
     }
   }
+
+  retry(nowGame) {
+    const InputView = require("./InputView");
+    InputView.readGameCommand(nowGame);
+  }
 }
 
 module.exports = BridgeGame;
