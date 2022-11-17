@@ -14,7 +14,18 @@ class BridgeController {
 
     InputView.readBridgeSize((bridgeLength) => {
       Validation.checkBridgeLength(bridgeLength);
+
+      this.creatBridge(bridgeLength);
     });
+  }
+
+  creatBridge(bridgeLength) {
+    const safeBridge = BridgeMaker.makeBridge(
+      bridgeLength,
+      BridgeRandomNumberGenerator.generate
+    );
+
+    Console.print(safeBridge);
   }
 }
 
