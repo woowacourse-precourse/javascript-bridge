@@ -26,6 +26,10 @@ const OutputView = {
       .join(" | ")} ]`;
   },
 
+  printErrorMessage(message) {
+    Console.print(message);
+  },
+
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>

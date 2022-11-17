@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { generate } = require("./BridgeRandomNumberGenerator");
 const { INPUT_MESSAGE, LETTER, MESSAGE } = require("./constant");
 const OutputView = require("./OutputView");
 const Validation = require("./Validation");
@@ -14,14 +14,11 @@ const InputView = {
     Console.readLine(INPUT_MESSAGE.numberOfBridge, (number) => {
       try {
         Validation.checkBridgeNumber(Number(number));
-        const bridge = BridgeMaker.makeBridge(
-          Number(number),
-          BridgeRandomNumberGenerator.generate
-        );
+        const bridge = BridgeMaker.makeBridge(Number(number), generate);
         this.setBridge(bridge);
         this.readMoving();
       } catch (e) {
-        Console.print(e);
+        OutputView.printErrorMessage(e);
         this.readBridgeSize(setBridge, move, retry);
       }
     });
@@ -44,7 +41,7 @@ const InputView = {
         OutputView.printMap(map);
         this.nextAction({ correct, map, gameOver, trialTime });
       } catch (e) {
-        Console.print(e);
+        OutputView.printErrorMessage(e);
         this.readMoving();
       }
     });
@@ -58,9 +55,7 @@ const InputView = {
 
     if (correct) {
       this.readMoving();
-    }
-
-    if (!correct) {
+    } else {
       this.readGameCommand({ map, trialTime });
     }
   },
@@ -75,7 +70,7 @@ const InputView = {
         Validation.checkRorQ(letter);
         this.chooseToRetry(letter, { map, trialTime });
       } catch (e) {
-        Console.print(e);
+        OutputView.printErrorMessage(e);
         this.readGameCommand({ map, trialTime });
       }
     });
