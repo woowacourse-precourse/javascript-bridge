@@ -1,8 +1,7 @@
-// @ts-check
-
 const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const { Console } = require('@woowacourse/mission-utils');
 
 class App {
   /** @type {BridgeGame} */
@@ -41,7 +40,9 @@ class App {
   }
 
   quitGame() {
-    console.log('quit');
+    const { markingPaper, isSuccess, count } = this.#bridgeGame.getResultInfo();
+    OutputView.printResult(markingPaper, isSuccess, count);
+    Console.close();
   }
 }
 
