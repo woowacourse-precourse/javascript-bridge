@@ -1,4 +1,4 @@
-const { BRIDGE_RANGE, MOVE, RESTART, ERRORS } = require('./config.js');
+const { BRIDGE_RANGE, MOVE, RETRY, ERRORS } = require('./config.js');
 
 /**
  * 사용자로부터 받은 입력을 검증한다
@@ -18,7 +18,7 @@ const validateMove = (move) => {
 };
 
 const validateRestart = (restart) => {
-  const isRestart = restart === RESTART.RESTART || restart === RESTART.QUIT;
+  const isRestart = restart === RETRY.YES || restart === RETRY.NO;
 
   if (isRestart === false) throw Error(ERRORS.INVALID_RESTART_TYPE);
 };
