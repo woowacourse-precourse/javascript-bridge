@@ -27,7 +27,8 @@ class App {
 
   movePlayer() {
     InputView.readMoving((moving) => {
-      const { status } = this.#bridgeGame.move(moving);
+      const { status, markingPaper } = this.#bridgeGame.move(moving);
+      OutputView.printMap(markingPaper);
       this.#command[status].call(this);
     });
   }
