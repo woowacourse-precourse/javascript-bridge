@@ -15,7 +15,7 @@ class BridgeGame {
   retry() {}
 
   validateSize(size) {
-    if (this.isEmpty(size)) {
+    if (!size) {
       throw new Error(ERROR_MSG.emptyInput);
     }
 
@@ -30,10 +30,6 @@ class BridgeGame {
     if (!this.isValideBridgeSizeRange(size)) {
       throw new Error(ERROR_MSG.invalidInputRange);
     }
-  }
-
-  isEmpty(size) {
-    return !size.length;
   }
 
   hasOnlyNumber(size) {
