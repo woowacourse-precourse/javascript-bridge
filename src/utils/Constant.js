@@ -35,7 +35,7 @@ const OUTPUT_MESSAGE = {
   START: '[ ',
   END: ']',
   GAME_RESULT: '\n최종 게임 결과',
-  GAME_IS_SUCCESS: (result) => `\n게임 성공 여부: ${result}`,
+  GAME_IS_SUCCESS: (result) => `\n게임 성공 여부: ${result ? '성공' : '실패'}`,
   GAME_TRY_CNT: (tryCnt) => `총 시도한 횟수: ${tryCnt}`,
 };
 
