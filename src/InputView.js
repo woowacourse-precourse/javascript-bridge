@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { INPUT_MESSAGE } = require("./constant");
+const { INPUT_MESSAGE, LETTER, MESSAGE } = require("./constant");
 const OutputView = require("./OutputView");
 const Validation = require("./Validation");
 
@@ -33,12 +33,18 @@ const InputView = {
   readMoving() {
     Console.readLine(INPUT_MESSAGE.chooseUpOrDown, (letter) => {
       Validation.checkUorD(letter);
-      const { result, map } = this.move(letter);
+      const { result, map, gameOver, trialTime } = this.move(letter);
       OutputView.printMap(map);
+      if (gameOver) {
+        OutputView.printResult(map, MESSAGE.win, trialTime);
+        Console.close();
+        return;
+      }
+
       if (result) {
         this.readMoving();
       } else {
-        this.readGameCommand();
+        this.readGameCommand({ map, trialTime });
       }
     });
   },
@@ -46,9 +52,18 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand({ map, trialTime }) {
     Console.readLine(INPUT_MESSAGE.chooseToRetry, (letter) => {
       Validation.checkRorQ(letter);
+      if (letter === LETTER.retry) {
+        this.retry();
+        this.readMoving();
+      }
+
+      if (letter === LETTER.quit) {
+        OutputView.printResult(map, MESSAGE.lose, trialTime);
+        Console.close();
+      }
     });
   },
 };
