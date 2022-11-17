@@ -26,7 +26,7 @@
 ### ✅ 다리 길이 입력 `InputView.readBridgeSize()`
 - 다리 길이를 입력한다.
 
-### ✅ 다리 길이 입력 값 검증 `Bridge.vaildateSize(size)`
+### ✅ 다리 길이 입력 값 검증 `BridgeGame.vaildateBridgeSize(size)`
 - `[ERROR] 3이상 20이하 사이의 숫자여야 합니다.`
 - `[ERROR] 입력값은 숫자여야 합니다.`
 
