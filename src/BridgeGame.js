@@ -46,12 +46,12 @@ class BridgeGame {
 
   checkCanMoveNextStep() {
     if (this.#gameOver === true) {
-      this.retry();
+      InputView.readGameCommand();
       return;
     }
 
     if (this.#moveCount === this.#bridge.length) {
-      this.retry();
+      this.end();
       return;
     }
 
@@ -66,8 +66,9 @@ class BridgeGame {
    */
   retry() {
     this.#moveCount = 0;
-    InputView.readGameCommand();
   }
+
+  end() {}
 }
 
 module.exports = BridgeGame;
