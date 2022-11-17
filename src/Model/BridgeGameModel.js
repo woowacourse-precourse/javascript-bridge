@@ -1,4 +1,4 @@
-const { KEYWORD } = require("../constants/index.js");
+const { SIZE, KEYWORD } = require("../constants/index.js");
 const { BridgeGameSizeError } = require("../Error/index.js");
 
 const BridgeGameModel = class {
@@ -32,8 +32,8 @@ const BridgeGameModel = class {
     return data;
   }
 
-  checkBridge(brige) {
-    const length = brige.length;
+  checkBridge(bridge) {
+    const length = bridge.length;
     const { MIN_SIZE, MAX_SIZE } = SIZE;
     const isBrige = length >= MIN_SIZE && length <= MAX_SIZE;
     if (!isBrige) throw new BridgeGameSizeError();
