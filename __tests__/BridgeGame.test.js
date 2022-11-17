@@ -66,4 +66,10 @@ describe('사용자가 시작전인지 확인하는 메서드', () => {
 
     expect(bridgeGame.isBeforeStart.name).toEqual(METHOD_NAME);
   });
+
+  test('초기값은 true를 반환한다.', () => {
+    const bridgeGame = new BridgeGame();
+
+    expect(bridgeGame.isBeforeStart()).toBeTruthy();
+  });
 });
