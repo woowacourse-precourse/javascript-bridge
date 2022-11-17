@@ -9,15 +9,18 @@ class BridgeProcess {
   #inputView = InputView;
 
   start() {
-    // 데이터 받고 있으므로 controller 역할 충실
     Console.print(this.#outputView.printStart());
     this.#inputBridgeSize();
   }
 
   #inputBridgeSize() {
-    // 사용자에게 동작을 받아서 view 반복한다.
     Console.readLine(this.#outputView.printBridgeSize(), (bridgeSize) => {
-      this.#inputView.readBridgeSize(bridgeSize);
+      try {
+        this.#inputView.readBridgeSize(bridgeSize);
+      } catch (error) {
+        Console.print(error);
+        return this.#inputBridgeSize();
+      }
     });
   }
 }

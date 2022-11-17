@@ -1,3 +1,6 @@
+const { BRIDGESIZE_ERROR, BRIDGESIZE_INFO } = require('./constant');
+const ThrowError = require('./ThrowError');
+
 class BridgeSize {
   #bridgeSize;
 
@@ -5,9 +8,14 @@ class BridgeSize {
     this.#bridgeSize = bridgeSize;
   }
 
-  validation(bridgeSize) {
+  showValidateResult() {
+    return this.#validation(this.#bridgeSize);
+  }
+
+  #validation(bridgeSize) {
     const errorMessage = this.#isNumber(bridgeSize) || this.#isNumberInRange(bridgeSize);
-    console.log(errorMessage);
+    const throwError = new ThrowError(BRIDGESIZE_ERROR[errorMessage]);
+    return errorMessage ? throwError.happen() : bridgeSize;
   }
 
   #isNumber(string) {
@@ -15,7 +23,9 @@ class BridgeSize {
   }
 
   #isNumberInRange(string) {
-    return Number(string) >= 3 && Number(string) <= 20 ? false : 'RANGE';
+    return Number(string) >= BRIDGESIZE_INFO.MIN && Number(string) <= BRIDGESIZE_INFO.MAX
+      ? false
+      : 'RANGE';
   }
 }
 
