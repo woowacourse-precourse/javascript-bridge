@@ -1,3 +1,5 @@
+const { COMMAND } = require("./utils/constans");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -41,13 +43,13 @@ class BridgeGame {
   }
 
   getCurrentBridgeMap() {
-    const upsideBridgeMap = this.#makeAnswerBridgeMap("U");
-    const downsideBridgeMap = this.#makeAnswerBridgeMap("D");
+    const upsideBridgeMap = this.#makeAnswerBridgeMap(COMMAND.MOVING.UP);
+    const downsideBridgeMap = this.#makeAnswerBridgeMap(COMMAND.MOVING.DOWN);
     if (!this.isAnswerMovingChoice()) {
       upsideBridgeMap[upsideBridgeMap.length - 1] =
-        this.#movingCommand === "U" ? "X" : " ";
+        this.#movingCommand === COMMAND.MOVING.UP ? "X" : " ";
       downsideBridgeMap[downsideBridgeMap.length - 1] =
-        this.#movingCommand === "D" ? "X" : " ";
+        this.#movingCommand === COMMAND.MOVING.DOWN ? "X" : " ";
     }
     return { upsideBridgeMap, downsideBridgeMap };
   }

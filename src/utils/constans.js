@@ -3,7 +3,7 @@ const COMMAND = {
   GAME: { RETRY: "R", QUIT: "Q" },
 };
 
-const BRIDGE = {
+const BRIDGE_MAP = {
   START: "[ ",
   END: " ]",
   DIVIDING_LINE: " | ",
@@ -22,7 +22,9 @@ const OUTPUT_MESSAGE = {
     `게임 성공 여부: ${isGameSuccess ? "성공" : "실패"}`,
   GAME_TRY_COUNT: (tryCount) => `총 시도한 횟수: ${tryCount}`,
   BRIDGE_MAP: (bridgeMap) =>
-    `${BRIDGE.START}${bridgeMap.join(" | ")}${BRIDGE.END}`,
+    `${BRIDGE_MAP.START}${bridgeMap.join(BRIDGE_MAP.DIVIDING_LINE)}${
+      BRIDGE_MAP.END
+    }`,
 };
 
 module.exports = { INPUT_MESSAGE, OUTPUT_MESSAGE, COMMAND };
