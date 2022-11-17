@@ -21,17 +21,17 @@ describe('숫자 예외 파악 함수 테스트', () => {
 });
 
 describe('함수 타입 체크 함수 테스트', () => {
-  test('메소드 이름은 "Fn"로 정의된다.', () => {
-    const METHOD_NAME = 'Fn';
+  test('메소드 이름은 "func"로 정의된다.', () => {
+    const METHOD_NAME = 'func';
 
-    expect(Validation.Fn.name).toEqual(METHOD_NAME);
+    expect(Validation.func.name).toEqual(METHOD_NAME);
   });
 
   test('인수가 함수가 아니라면 예외를 발생시킨다.', () => {
     const EXPECTED = [];
 
     expect(() => {
-      Validation.Fn(EXPECTED);
+      Validation.func(EXPECTED);
     }).toThrow(FUNCTION_ERROR_TEXT);
   });
 
@@ -39,7 +39,7 @@ describe('함수 타입 체크 함수 테스트', () => {
     const EXPECTED = () => {};
 
     expect(() => {
-      Validation.Fn(EXPECTED);
+      Validation.func(EXPECTED);
     }).not.toThrow();
   });
 });
