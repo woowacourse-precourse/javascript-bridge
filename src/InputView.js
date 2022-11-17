@@ -1,5 +1,9 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { BridgeSize, MoveInput, CommandInput } = require("./utils");
+const {
+  BridgeSizeValidation,
+  MoveInputValidation,
+  CommandInputValidation,
+} = require("./Validation");
 const generater = require("./BridgeRandomNumberGenerator").generate;
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
@@ -16,8 +20,8 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(InputConstants.ASK_BRIDGE_LENGTH, (sizeInput) => {
-      const bridgeSize = new BridgeSize(sizeInput);
-      const size = bridgeSize.makeStringToNumber();
+      const bridgeSizeValidation = new BridgeSizeValidation(sizeInput);
+      const size = bridgeSizeValidation.makeStringToNumber();
       Player.updateSize(size);
 
       this.canWalkBridge = BridgeMaker.makeBridge(size, generater);
@@ -31,7 +35,7 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(InputConstants.ASK_WHERE_WANT_TO_GO, (wantGo) => {
-      new MoveInput(wantGo);
+      new MoveInputValidation(wantGo);
       const isCorrect = new BridgeGame().move(this.canWalkBridge, wantGo);
       Player.updateState(wantGo, isCorrect);
 
@@ -46,7 +50,7 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(InputConstants.ASK_RETRY_OR_QUIT, (command) => {
-      new CommandInput(command);
+      new CommandInputValidation(command);
 
       new BridgeGame().retry(command)
         ? (Player.reset(), this.readMoving(this.canWalkBridge))
