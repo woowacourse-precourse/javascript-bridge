@@ -1,4 +1,6 @@
-const { printStart, printMap, printResult } = require('./OutputView');
+const {
+  printStart, printMap, printResult, printError,
+} = require('./OutputView');
 const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { STATE } = require('./Contants');
 const BridgeGame = require('./BridgeGame');
@@ -16,7 +18,7 @@ class App {
         printResult(gameResult);
       })
       .catch((e) => {
-        console.log(e.message);
+        printError(e);
       });
   }
 

@@ -18,6 +18,11 @@ const OutputView = {
     Console.print(`총 시도한 횟수: ${tryCount}`);
     Console.close();
   },
+
+  printError(error) {
+    Console.print(error.message);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
