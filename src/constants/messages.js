@@ -12,6 +12,7 @@ const MESSAGE_ERROR = Object.freeze({
   INVALID_TYPE: `${ERROR} 잘못된 타입의 입력입니다.`,
   INVALID_FORMAT: `${ERROR} 잘못된 포맷의 입력입니다.`,
   INVALID_RANGE: `${ERROR} 잘못된 밤위의 입력입니다.`,
+  INVALID_SIZE: `${ERROR} 잘못된 길이의 다리입니다.`,
 });
 
 module.exports = {

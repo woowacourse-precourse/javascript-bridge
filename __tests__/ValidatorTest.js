@@ -34,18 +34,18 @@ describe('Validator checkStringType 테스트', () => {
   });
 });
 
-describe('Validator checkStringIncludesNumbers 테스트', () => {
+describe('Validator checkStringIncludes 테스트', () => {
   const validInput = ['123'];
   validInput.forEach(validInputValue => {
     test(`${validInputValue} ${MESSAGE_ACCEPT}`, () => {
-      expect(() => Validator.checkStringIncludesNumbers(validInputValue)).not.toThrow('[ERROR]');
+      expect(() => Validator.checkStringIncludes(validInputValue)).not.toThrow('[ERROR]');
     });
   });
 
   const inValidInput = ['', '{}', '[]', 'null', 'a1a', '1a1'];
   inValidInput.forEach(invalidInputValue => {
     test(`${invalidInputValue} ${MESSAGE_EXCEPT}`, () => {
-      expect(() => Validator.checkStringIncludesNumbers(invalidInputValue)).toThrow('[ERROR]');
+      expect(() => Validator.checkStringIncludes(invalidInputValue)).toThrow('[ERROR]');
     });
   });
 });
@@ -78,6 +78,63 @@ describe('Validator checkNumberType 테스트', () => {
   inValidInput.forEach(invalidInputValue => {
     test(`${typeof invalidInputValue} ${MESSAGE_EXCEPT}`, () => {
       expect(() => Validator.checkNumberType(invalidInputValue)).toThrow('[ERROR]');
+    });
+  });
+});
+
+describe('Validator checkArrayType 테스트', () => {
+  const validInput = [[], [1, 2, 3]];
+  validInput.forEach(validInputValue => {
+    test(`${typeof validInputValue} ${MESSAGE_ACCEPT}`, () => {
+      expect(() => Validator.checkArrayType(validInputValue)).not.toThrow('[ERROR]');
+    });
+  });
+
+  const inValidInput = [{}, null, undefined, true, false, 1, '12', NaN];
+  inValidInput.forEach(invalidInputValue => {
+    test(`${typeof invalidInputValue} ${MESSAGE_EXCEPT}`, () => {
+      expect(() => Validator.checkArrayType(invalidInputValue)).toThrow('[ERROR]');
+    });
+  });
+});
+
+describe('Validator checkBridgeSize 테스트', () => {
+  const validInput = [
+    Array.from({ length: 3 }),
+    Array.from({ length: 15 }),
+    Array.from({ length: 20 }),
+  ];
+  validInput.forEach(validInputValue => {
+    test(`${validInputValue} ${MESSAGE_ACCEPT}`, () => {
+      expect(() => Validator.checkBridgeSize(validInputValue)).not.toThrow('[ERROR]');
+    });
+  });
+
+  const inValidInput = [
+    [],
+    Array.from({ length: 1 }),
+    Array.from({ length: 2 }),
+    Array.from({ length: 21 }),
+  ];
+  inValidInput.forEach(invalidInputValue => {
+    test(`${invalidInputValue} ${MESSAGE_EXCEPT}`, () => {
+      expect(() => Validator.checkBridgeSize(invalidInputValue)).toThrow('[ERROR]');
+    });
+  });
+});
+
+describe('Validator checkBridgeIncludes 테스트', () => {
+  const validInput = [['U'], ['D'], ['U', 'D']];
+  validInput.forEach(validInputValue => {
+    test(`${validInputValue} ${MESSAGE_ACCEPT}`, () => {
+      expect(() => Validator.checkBridgeIncludes(validInputValue)).not.toThrow('[ERROR]');
+    });
+  });
+
+  const inValidInput = [[123], ['U', 123], ['U', 123, 'U'], [123, 'D', 123]];
+  inValidInput.forEach(invalidInputValue => {
+    test(`${invalidInputValue} ${MESSAGE_EXCEPT}`, () => {
+      expect(() => Validator.checkBridgeIncludes(invalidInputValue)).toThrow('[ERROR]');
     });
   });
 });
