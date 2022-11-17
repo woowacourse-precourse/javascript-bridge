@@ -3,6 +3,10 @@ const { ERROR_MESSAGES } = require('./Constant');
 const Validator = Object.freeze({
   spaceReg: /\s/g,
 
+  GAME_OPTION_CONDITIONS: ['Q', 'R'],
+
+  MOVEMENT_CONDITIONS: ['U', 'D'],
+
   checkSpace(input) {
     const trimedInput = input.trim();
     if (trimedInput.match(this.spaceReg)) throw new Error(ERROR_MESSAGES.NOT_EMPTY);
@@ -14,14 +18,11 @@ const Validator = Object.freeze({
     else return true;
   },
 
-  checkMoveInput(input) {
-    if (input !== 'D' && input !== 'U') throw new Error(ERROR_MESSAGES.ONLY_U_D);
-    else return true;
-  },
-
-  checkGameOption(input) {
-    if (input !== 'R' && input !== 'Q') throw new Error(ERROR_MESSAGES.ONLY_R_Q);
-    else return true;
+  checkCondition(input, conditionArray, error) {
+    const trimedInput = input.trim();
+    if (trimedInput !== conditionArray[0] && trimedInput !== conditionArray[1]) {
+      throw new Error(error);
+    } else return true;
   },
 
   checkRange(input) {
@@ -32,4 +33,6 @@ const Validator = Object.freeze({
 
 module.exports = Validator;
 
-console.log(Validator.checkRange('22'));
+console.log(
+  Validator.checkCondition('22', Validator.GAME_OPTION_CONDITION, ERROR_MESSAGES.ONLY_U_D),
+);
