@@ -16,10 +16,10 @@ const BridgeMaker = {
 
     for (let index = 0; index < size; index++) {
       const number = generateRandomNumber();
-      if (number === RANDOM_LOWER_BLOCK) {
+      if (number.toString() === RANDOM_LOWER_BLOCK) {
         bridge.push(LOWER_BLOCK);
       }
-      if (number === RANDOM_UPPER_BLOCK) {
+      if (number.toString() === RANDOM_UPPER_BLOCK) {
         bridge.push(UPPER_BLOCK);
       }
     }
