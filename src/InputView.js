@@ -15,7 +15,7 @@ const InputView = {
    * @param {function(string): void} callback
    */
   readMoving(callback) {
-    Console.readLine(INPUT_MESSAGE.MOVE_RANGE + NEW_LINE, callback);
+    Console.readLine(NEW_LINE + INPUT_MESSAGE.MOVE_RANGE + NEW_LINE, callback);
   },
 
   /**
@@ -23,7 +23,7 @@ const InputView = {
    * @param {function(string): void} callback
    */
   readGameCommand(callback) {
-    Console.readLine(INPUT_MESSAGE.RESTART + NEW_LINE, callback);
+    Console.readLine(NEW_LINE + INPUT_MESSAGE.RESTART + NEW_LINE, callback);
   },
 };
 
