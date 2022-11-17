@@ -22,4 +22,14 @@ describe("BridgeGameModel 클래스 테스트", () => {
       }).toThrow("[ERROR]");
     }
   );
+
+  test.each(["", "Q", "?", "-1000", "1123", "10.1", "p", "u", "d", "U1"])(
+    "메세지를 통해 유효한 user 데이터인지 확인하고 유효하지 않다면 Error를 던진다.",
+    (input) => {
+      expect(() => {
+        const bridgeGameModel = new BridgeGameModel();
+        bridgeGameModel.checkUser(input);
+      }).toThrow("[ERROR]");
+    }
+  );
 });
