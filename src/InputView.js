@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { bridgeSizeValidate } = require('./Validate');
+const { bridgeSizeValidate, moveValidate } = require('./Validate');
 
 const InputView = {
   readBridgeSize() {
@@ -16,8 +16,13 @@ const InputView = {
   },
 
   readMoving() {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (move) => {
+        try {
+          moveValidate(move);
+        } catch (e) {
+          reject(e);
+        }
         resolve(move);
       });
     });

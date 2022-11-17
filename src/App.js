@@ -14,12 +14,8 @@ class App {
         console.log(bridgeGame.bridge);
         return this.progressGame(bridgeGame);
       })
-      .then((gameResult) => {
-        printResult(gameResult);
-      })
-      .catch((e) => {
-        printError(e);
-      });
+      .then((gameResult) => printResult(gameResult))
+      .catch((e) => printError(e));
   }
 
   async progressGame(bridgeGame) {
