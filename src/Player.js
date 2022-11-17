@@ -19,7 +19,7 @@ class Player {
     if (moving === 'U') this.markU(mark);
     if (moving === 'D') this.markD(mark);
 
-    this.setNextStep();
+    return this.#markingPaper;
   }
 
   /**
@@ -44,6 +44,10 @@ class Player {
 
   getStep() {
     return this.#step;
+  }
+
+  getMarkingPaper() {
+    return this.#markingPaper;
   }
 }
 

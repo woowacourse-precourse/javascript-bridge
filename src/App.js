@@ -3,7 +3,6 @@
 const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const { STEP_STATUS } = require('./utils/const');
 
 class App {
   /** @type {BridgeGame} */
@@ -28,13 +27,16 @@ class App {
 
   movePlayer() {
     InputView.readMoving((moving) => {
-      const status = this.#bridgeGame.move(moving);
+      const { status } = this.#bridgeGame.move(moving);
       this.#command[status].call(this);
     });
   }
 
   restart() {
-    console.log('restart');
+    InputView.readGameCommand((gameCommand) => {
+      const status = this.#bridgeGame.retry(gameCommand);
+      this.#command[status].call(this);
+    });
   }
 
   quitGame() {
