@@ -1,0 +1,21 @@
+{
+  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaVersion": 13
+  },
+  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true,
+    "jest": true
+  },
+  "ignorePatterns": ["__tests__/"],
+  "rules": {
+    "no-console": "error",
+    "max-depth": ["error", 2],
+    "no-new": "off",
+    "max-lines-per-function": ["error", 10],
+    "eol-last": ["error", "always"]
+  }
+}
