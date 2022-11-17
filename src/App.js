@@ -27,7 +27,7 @@ class App {
     this.game.move(move);
     OutputView.printMap(this.game);
 
-    if (this.game.reachedEndOfBridge) OutputView.printResult(this.game);
+    if (this.game.reachedEndOfBridge && !this.game.isGameOver) OutputView.printResult(this.game);
     else if (this.game.isGameOver) this.askRetryGame();
     else this.playOneStep();
   }
