@@ -9,7 +9,7 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  GAME_RESULT_MESSAGE: "최종 게임 결과\n",
+  GAME_RESULT_MESSAGE: "최종 게임 결과",
   printNewLine() {
     console.log("");
   },
@@ -49,11 +49,9 @@ const OutputView = {
     OutputView.printMap(bridge, inputs);
     OutputView.printNewLine();
     OutputView.printIsSuccess(bridge, inputs);
-    OutputView.printGameCount(2);
-    Console.close();
+    OutputView.printGameCount(1);
+    // Console.close();
   },
 };
-
-OutputView.printMap(["U", "D", "U"], ["U", "D", "U"]);
 
 module.exports = OutputView;
