@@ -11,9 +11,15 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(userInputMessage.ENTER_BRIDGE_LENGTH, (bridgeLength) => {
-      this.validateBridgeSize(bridgeLength);
+      try {
+        this.validateBridgeSize(bridgeLength);
+      } catch (e) {
+        Console.print(e);
+        this.readBridgeSize();
+      }
+
       Console.print(bridgeLength);
-    }); 
+    });
   },
 
   validateBridgeSize(bridgeLength) {
@@ -27,7 +33,7 @@ const InputView = {
   readMoving() {
     Console.readLine(userInputMessage.ENTER_MOVE_DIRECTION, (movingDirection) => {
       Console.print(movingDirection);
-    }); 
+    });
   },
 
   /**
@@ -39,5 +45,5 @@ const InputView = {
     });
   },
 };
-
+InputView.readBridgeSize();
 module.exports = InputView;
