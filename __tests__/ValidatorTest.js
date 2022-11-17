@@ -13,7 +13,7 @@ describe("bridgeSizeCheck 테스트", () => {
     });
   });
 
-  test("유효하지 않은  숫자 테스트", () => {
+  test("유효하지 않은 숫자 테스트", () => {
     const invalidSizes = ['-1', '2', '3.8', '글자', '21', '100', '', ' '];
     invalidSizes.forEach(size => {      
       expect(() => Validator.bridgeSizeCheck(size)).toThrow();
@@ -23,7 +23,7 @@ describe("bridgeSizeCheck 테스트", () => {
 
 describe("directionCheck 테스트", () => {
   test("입력값 유효성 테스트", () => {
-    const valid = [USER_INPUT_CODE.MOVE.UPPER, USER_INPUT_CODE.MOVE.LOWER, 'u', 'd'];
+    const valid = [USER_INPUT_CODE.MOVE.UPPER, USER_INPUT_CODE.MOVE.LOWER];
     const invalid = [1, 2, 10, 0, '유', 'q', 'sda'];
     valid.forEach(value => {
       const result = Validator.directionCheck(value);
@@ -31,6 +31,20 @@ describe("directionCheck 테스트", () => {
     })
     invalid.forEach(value => {  
       expect(() => Validator.directionCheck(value)).toThrow();
+    });
+  });
+});
+
+describe("restartCheck 테스트", () => {
+  test("입력값 유효성 테스트", () => {
+    const valid = [USER_INPUT_CODE.RESTART.AGREE, USER_INPUT_CODE.RESTART.QUIT];
+    const invalid = [1, 2, 10, 0, '유', 'd', 'u'];
+    valid.forEach(value => {
+      const result = Validator.restartCheck(value);
+      expect(result).toBeUndefined();
+    })
+    invalid.forEach(value => {  
+      expect(() => Validator.restartCheck(value)).toThrow();
     });
   });
 });
