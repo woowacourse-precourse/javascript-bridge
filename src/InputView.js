@@ -34,11 +34,10 @@ const InputView = {
       OutputView.printMap(bridgeGame);
 
       if (bridgeGame.isFailMove(bridgeGame.getUpDownHistory()))
-        return this.readGameCommand();
+        return this.readGameCommand(bridgeGame);
 
       let maxPosition = bridgeGame.getBridge().length - 1;
       let position = bridgeGame.getPosition();
-
       position === maxPosition
         ? console.log('게임 끝')
         : this.readMoving(bridgeGame);
@@ -48,9 +47,12 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-    console.log("다시시도");
-  },
+  readGameCommand(bridgeGame) {
+    MissionUtils.Console.readLine(MESSAGE.ENTER_COMMAND, (command) => {
+      if (!bridgeGame.validateCommand(command))
+        return this.readGameCommand(bridgeGame)
+    });
+  }
 };
 
 module.exports = InputView;

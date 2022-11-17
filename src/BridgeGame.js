@@ -85,6 +85,17 @@ class BridgeGame {
     return true;
   }
 
+  validateCommand(command) {
+    try {
+      if (command !== "R" && command !== "Q")
+        throw new Error(ERROR.INVALID_COMMAND);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      return false;
+    }
+    return true;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
