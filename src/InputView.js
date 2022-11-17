@@ -8,8 +8,18 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine('다리의 길이를 입력해주세요.', (answer) => {
-      console.log(`다리 길이 : ${answer}`);
+      this.readBridgeSizeException(answer);
     });
+  },
+
+  readBridgeSizeException(number) {
+    try {
+      if (number < 3 || number > 21)
+        throw '[ERROR] 3 이상 20 이하의 숫자를 입력해주세요.';
+    } catch (err) {
+      Console.print(err);
+      this.readBridgeSize();
+    }
   },
 
   /**
@@ -21,11 +31,21 @@ const InputView = {
     });
   },
 
+  readMovingException(letter) {
+    const LimitedMovement = /[UD]/;
+    try {
+      if (!LimitedMovement.test(letter))
+        throw '[ERROR] 대문자 U 와 D 를 입력해주세요.';
+    } catch (err) {
+      Console.print(err);
+      this.readMoving();
+    }
+  },
+
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {},
 };
-InputView.readMoving();
-
+InputView.readBridgeSize();
 module.exports = InputView;
