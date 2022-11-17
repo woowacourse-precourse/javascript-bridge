@@ -1,10 +1,15 @@
 const BridgeGame = require('./BridgeGame');
-const { readBridgeSize } = require('./InputView');
+const { readBridgeSize, readMoving, end } = require('./InputView');
 
 class App {
   #game;
   play() {
-    readBridgeSize.call(this, this.createBridge, this.moveBridge, this.third);
+    readBridgeSize.call(
+      this,
+      this.createBridge,
+      this.moveBridge,
+      this.controlGame
+    );
   }
 
   createBridge(input) {
@@ -16,14 +21,21 @@ class App {
     const END = false;
     if (MOVE) {
       const END_CHECK = this.#game.isEnd();
-      this.#game.statusPrint();
+      if (!END_CHECK) this.#game.statusPrint();
       return END_CHECK;
     }
     this.#game.statusPrint();
     return END;
   }
 
-  third(input) {}
+  controlGame(input) {
+    if (input == 'R') {
+      this.#game.retry();
+      readMoving.call(this, this.moveBridge, this.controlGame);
+    } else {
+      end();
+    }
+  }
 }
 new App().play();
 module.exports = App;
