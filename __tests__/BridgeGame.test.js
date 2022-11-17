@@ -42,3 +42,12 @@ describe('숫자값 문자열 치환 기능 테스트', () => {
     },
   );
 });
+
+describe('사용자가 칸을 이동할 때 사용하는 메서드 테스트', () => {
+  const bridgeGame = new BridgeGame();
+  test('메소드 이름은 "move"로 정의된다.', () => {
+    const METHOD_NAME = 'move';
+
+    expect(bridgeGame.move.name).toEqual(METHOD_NAME);
+  });
+});
