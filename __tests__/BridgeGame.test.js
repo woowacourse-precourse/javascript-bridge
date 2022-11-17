@@ -143,3 +143,12 @@ describe('사용자가 게임을 다시 시도할 때 사용하는 메서드 테
     expect(bridgeGame.retry()).toEqual(RECEIVED);
   });
 });
+
+describe('다리를 끝까지 갔는지 확인하는 메서드 테스트', () => {
+  test('메소드 이름은 "isBridgeEnd"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'isBridgeEnd';
+
+    expect(bridgeGame.isBridgeEnd.name).toEqual(METHOD_NAME);
+  });
+});
