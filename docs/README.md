@@ -110,3 +110,18 @@ R
 - **BridgeRandomNumberGenerator 객체**
   - Random 값 추출은 제공된 `BridgeRandomNumberGenerator`의 `generate()`를 활용한다.
   - `BridgeRandomNumberGenerator`의 코드는 변경할 수 없다.
+
+<br>
+<br>
+
+## 기능 구현 목록
+
+- [ ] 게임 시작 문구 출력
+- [ ] 게임 종료 문구 출력
+- [ ] 생성할 다리 길이 입력
+- [ ] 입력 받은 다리 길이만큼의 다리 생성 (0, 1 무작위로)
+- [ ] 위 칸 건널 수 있는 경우 U, 아래 칸을 건널 수 있는 경우 D
+- [ ] 플레이어가 이동할 칸 입력 (U, D)
+- [ ] 이동한 칸 건널 수 있다면 O, 건널 수 없다면 X
+- [ ] 게임 재시작, 종료 여부 입력 (R, Q)
+- [ ] 총 시도한 횟수 게임 시작부터 종료할 때까지 출력
