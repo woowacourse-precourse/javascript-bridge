@@ -20,7 +20,7 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(INPUT_BRIDGE_LEN_STR, (bridgeLen) => {
-      bridgeLenValidator(bridgeLen);
+      this.bridgeLenValidator(bridgeLen);
       const bridgeGame = new BridgeGame(
         BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate)
       );
@@ -33,7 +33,7 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     MissionUtils.Console.readLine(INPUT_BRIDGE_LEN_STR, (selectBridge) => {
-      userMoveValidator(selectBridge);
+      bridgeGame.move(this.userSelectValueTreater(selectBridge));
     });
   },
 
@@ -41,11 +41,16 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {},
-};
 
-const bridgeLenValidator = (bridgeLen) => {
-  isInRange(bridgeLen);
-  isIntNumber(bridgeLen);
+  bridgeLenValidator(bridgeLen) {
+    isInRange(bridgeLen);
+    isIntNumber(bridgeLen);
+  },
+
+  userSelectValueTreater(userSelectValue) {
+    isUandD(userSelectValue);
+    return charToIntChanger(userSelectValue);
+  },
 };
 
 const isInRange = (bridgeLen) => {
@@ -60,15 +65,18 @@ const isIntNumber = (bridgeLen) => {
   }
 };
 
-const userMoveValidator = (input) => {
-  isUandD(input);
-};
-
 const isUandD = (input) => {
   if (input == "U" || input == "D") {
     return;
   }
   throw new Error(UserSelect_ERR_MESSAGE);
+};
+
+const charToIntChanger = (input) => {
+  if (input == "U") {
+    return 1;
+  }
+  return 0;
 };
 
 module.exports = InputView;
