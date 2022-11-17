@@ -70,10 +70,10 @@ describe('배열 생성 함수 테스트', () => {
   });
 });
 
-describe('범위 체크 함수 테스트', () => {
-  test('메소드 이름은 "checkRange"로 정의된다.', () => {
-    const METHOD_NAME = 'checkRange';
+describe('3 ~ 20 범위 체크 함수 테스트', () => {
+  test('메소드 이름은 "checkRangeThreeToTwenty"로 정의된다.', () => {
+    const METHOD_NAME = 'checkRangeThreeToTwenty';
 
-    expect(Application.checkRange.name).toEqual(METHOD_NAME);
+    expect(Application.checkRangeThreeToTwenty.name).toEqual(METHOD_NAME);
   });
 });
