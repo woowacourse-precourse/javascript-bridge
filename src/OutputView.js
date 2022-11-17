@@ -12,8 +12,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap() {
-    Console.print(OutputConstants.BRIDGE_STATE(Player.state[0]));
-    Console.print(OutputConstants.BRIDGE_STATE(Player.state[1]));
+    Console.print(OutputConstants.BRIDGE_STATE_MESSAGE(Player.state[0]));
+    Console.print(OutputConstants.BRIDGE_STATE_MESSAGE(Player.state[1]));
   },
 
   /**
@@ -25,8 +25,8 @@ const OutputView = {
     Console.print(OutputConstants.RESULT_MESSAGE);
     this.printMap();
     Console.print("");
-    Console.print(OutputConstants.SUCCESS_STATE(Player.gameSuccess));
-    Console.print(OutputConstants.TRYING_COUNT(Player.tryingCount));
+    Console.print(OutputConstants.SUCCESS_STATE_MESSAGE(Player.gameSuccess));
+    Console.print(OutputConstants.TRYING_COUNT_MESSAGE(Player.tryingCount));
     Console.close();
   },
 

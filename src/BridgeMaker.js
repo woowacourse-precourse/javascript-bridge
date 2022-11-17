@@ -1,4 +1,7 @@
-const { BridgeMakerConstants } = require("./constant/Constants");
+const {
+  BridgeMakerConstants,
+  PlayerInputConstants,
+} = require("./constant/Constants");
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -14,8 +17,8 @@ const BridgeMaker = {
 
     while (canWalkBridge.length < size) {
       generateRandomNumber() === BridgeMakerConstants.LOWER_BRIDGE_NUMBER
-        ? canWalkBridge.push(BridgeMakerConstants.LOWER_BRIDGE_STRING)
-        : canWalkBridge.push(BridgeMakerConstants.UPPER_BRIDGE_STRING);
+        ? canWalkBridge.push(PlayerInputConstants.LOWER_BRIDGE_STRING)
+        : canWalkBridge.push(PlayerInputConstants.UPPER_BRIDGE_STRING);
     }
 
     return canWalkBridge;

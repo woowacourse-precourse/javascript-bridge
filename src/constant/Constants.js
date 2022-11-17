@@ -7,55 +7,58 @@ const InputConstants = {
 
 const OutputConstants = {
   START_MESSAGE: "다리 건너기 게임을 시작합니다.\n",
-  BRIDGE_STATE: (state) => `[${state.join("|")}]`,
   RESULT_MESSAGE: "\n최종 게임 결과",
-  SUCCESS_STATE: (isSuccess) =>
+  BRIDGE_STATE_MESSAGE: (state) => `[${state.join("|")}]`,
+  SUCCESS_STATE_MESSAGE: (isSuccess) =>
     `게임 성공 여부: ${isSuccess ? "성공" : "실패"}`,
-  TRYING_COUNT: (tryCount) => `총 시도한 횟수: ${tryCount}`,
+  TRYING_COUNT_MESSAGE: (tryCount) => `총 시도한 횟수: ${tryCount}`,
 };
 
 const ConstraintsConstants = {
   MINIMUM_SIZE_RANGE: 3,
   MAXIMUM_SIZE_RANGE: 20,
   START_STRING_OF_SIZE: "0",
+};
+
+const ErrorConstants = {
   ERROR_NOT_ONLY_NUMBER: "[ERROR] 숫자만 입력 가능합니다.\n",
   ERROR_NOT_IN_RANGE: "[ERROR] 다리 길이는 3 이상 20 이하만 가능합니다.\n",
   ERROR_DONT_START_ZERO: "[ERROR] 0으로 시작하는 숫자는 입력할 수 없습니다.\n",
-  UPPER_BRIDGE_STRING: "U",
-  LOWER_BRIDGE_STRING: "D",
   ERROR_NOT_ONLY_U_OR_D: "[ERROR] U 혹은 D만 입력 가능합니다.",
-  RETRY_STRING: "R",
-  END_GAME_STRING: "Q",
   ERROR_NOT_ONLY_R_OR_Q: "[ERROR] R 혹은 Q만 입력 가능합니다.",
 };
 
-const BridgeGameConstants = {
-  RETRY_COMMAND: "R",
-};
-
 const BridgeMakerConstants = {
-  UPPER_BRIDGE_STRING: "U",
-  LOWER_BRIDGE_STRING: "D",
   LOWER_BRIDGE_NUMBER: 0,
 };
 
 const PlayerConstants = {
-  UPPER_BRIDGE_STRING: "U",
-  LOWER_BRIDGE_STRING: "D",
-  CORRECT_ANSWER: " O ",
-  WRONG_ANSWER: " X ",
-  EMPTY_ANSWER: "   ",
   INITIAL_TRY_NUMBER: 1,
   INCREASE_TRY_NUMBER: 1,
   GMAE_FAIL: false,
   GAME_SUCCESS: true,
 };
 
+const AnswerConstants = {
+  CORRECT_ANSWER: " O ",
+  WRONG_ANSWER: " X ",
+  EMPTY_ANSWER: "   ",
+};
+
+const PlayerInputConstants = {
+  UPPER_BRIDGE_STRING: "U",
+  LOWER_BRIDGE_STRING: "D",
+  RETRY_STRING: "R",
+  END_GAME_STRING: "Q",
+};
+
 module.exports = {
   InputConstants,
   OutputConstants,
   ConstraintsConstants,
-  BridgeGameConstants,
   BridgeMakerConstants,
   PlayerConstants,
+  AnswerConstants,
+  PlayerInputConstants,
+  ErrorConstants,
 };
