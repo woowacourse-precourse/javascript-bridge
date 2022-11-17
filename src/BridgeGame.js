@@ -32,8 +32,29 @@ class BridgeGame {
     return (this.#bridgeShape = bridgeSahpe);
   }
 
+  // 나중에 필요없을 지도? 지금 console때문에 잠시 생성
   getBridgeShape() {
     return this.#bridgeShape;
+  }
+
+  getCurrentAnswerBridgeMap() {
+    const upsideBridgeMap = this.#makeAnswerBridgeMap("U");
+    const downsideBridgeMap = this.#makeAnswerBridgeMap("D");
+    return { upsideBridgeMap, downsideBridgeMap };
+  }
+
+  #getCurrentBridgeShape() {
+    return this.#bridgeShape.slice(0, this.#currentBridgeCount);
+  }
+
+  #makeAnswerBridgeMap(upDown) {
+    return this.#getCurrentBridgeShape().map((alpabet) =>
+      alpabet === upDown ? "O" : " "
+    );
+  }
+
+  getCurrentBridgeCount() {
+    return this.#currentBridgeCount;
   }
 
   /**
