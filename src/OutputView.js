@@ -44,13 +44,13 @@ const OutputView = {
   printGameCount(time) {
     Console.print(`총 시도한 횟수: ${time}`);
   },
-  printResult(bridge, inputs) {
+  printResult(bridge, inputs, gameCount) {
     Console.print(OutputView.GAME_RESULT_MESSAGE);
     OutputView.printMap(bridge, inputs);
     OutputView.printNewLine();
     OutputView.printIsSuccess(bridge, inputs);
-    OutputView.printGameCount(1);
-    // Console.close();
+    OutputView.printGameCount(gameCount);
+    Console.close();
   },
 };
 
