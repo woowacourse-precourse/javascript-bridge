@@ -17,3 +17,11 @@ describe('숫자 예외 파악 함수 테스트', () => {
     }).toThrow(NUMBER_ERROR_TEXT);
   });
 });
+
+describe('범위 파악 함수 테스트', () => {
+  test('메소드 이름은 "range"로 정의된다.', () => {
+    const METHOD_NAME = 'range';
+
+    expect(Validation.range.name).toEqual(METHOD_NAME);
+  });
+});
