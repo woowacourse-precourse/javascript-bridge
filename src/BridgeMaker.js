@@ -21,7 +21,7 @@ const BridgeMaker = {
   },
 
   getShapeOfBridge(number) {
-    if (number === 1) {
+    if (number === 1 || number === '1') {
       return BRIDGE_CONSTANTS.up;
     }
 
