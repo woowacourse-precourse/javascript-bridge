@@ -20,14 +20,22 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(InputConstants.ASK_BRIDGE_LENGTH, (sizeInput) => {
-      const bridgeSizeValidation = new BridgeSizeValidation(sizeInput);
-      const size = bridgeSizeValidation.makeStringToNumber();
-      Player.updateSize(size);
-
-      this.canWalkBridge = BridgeMaker.makeBridge(size, generater);
-
-      this.readMoving();
+      try {
+        this.createRandomBridge(sizeInput);
+        this.readMoving();
+      } catch (err) {
+        Console.print(err);
+        this.readBridgeSize();
+      }
     });
+  },
+
+  createRandomBridge(sizeInput) {
+    const bridgeSizeValidation = new BridgeSizeValidation(sizeInput);
+    const size = bridgeSizeValidation.makeStringToNumber();
+    Player.updateSize(size);
+
+    this.canWalkBridge = BridgeMaker.makeBridge(size, generater);
   },
 
   /**
@@ -35,14 +43,24 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(InputConstants.ASK_WHERE_WANT_TO_GO, (wantGo) => {
-      new MoveInputValidation(wantGo);
-      const isCorrect = new BridgeGame().move(this.canWalkBridge, wantGo);
-      Player.updateState(wantGo, isCorrect);
-
-      OutputView.printMap();
-      if (Player.gameSuccess) OutputView.printResult();
-      else isCorrect ? this.readMoving() : this.readGameCommand();
+      try {
+        this.calculatePlayerMove(wantGo);
+      } catch (err) {
+        Console.print(err);
+        this.readMoving();
+      }
     });
+  },
+
+  calculatePlayerMove(wantGo) {
+    new MoveInputValidation(wantGo);
+
+    const isCorrect = new BridgeGame().move(this.canWalkBridge, wantGo);
+    Player.updateState(wantGo, isCorrect);
+
+    OutputView.printMap();
+    if (Player.gameSuccess) OutputView.printResult();
+    else isCorrect ? this.readMoving() : this.readGameCommand();
   },
 
   /**
@@ -50,12 +68,21 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(InputConstants.ASK_RETRY_OR_QUIT, (command) => {
-      new CommandInputValidation(command);
-
-      new BridgeGame().retry(command)
-        ? (Player.reset(), this.readMoving(this.canWalkBridge))
-        : OutputView.printResult();
+      try {
+        this.decideRetryOrQuit(command);
+      } catch (err) {
+        Console.print(err);
+        this.readGameCommand();
+      }
     });
+  },
+
+  decideRetryOrQuit(command) {
+    new CommandInputValidation(command);
+
+    new BridgeGame().retry(command)
+      ? (Player.reset(), this.readMoving(this.canWalkBridge))
+      : OutputView.printResult();
   },
 };
 
