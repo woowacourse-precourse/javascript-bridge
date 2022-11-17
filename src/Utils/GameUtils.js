@@ -1,4 +1,4 @@
-const { BRIDGE_REQUIREMENTS } = require('../constants');
+const { BRIDGE_REQUIREMENTS, USER_INPUT_CODE, MOVEMENT_LOG_CODE, OUTPUT_SYMBOLS } = require('../constants');
 
 class GameUtils {
   static courseToForm(course) {
@@ -11,28 +11,24 @@ class GameUtils {
   static #getUpperRow(course) {
     const upperRow = [];
     course.forEach(trace => {
-      if(trace === BRIDGE_REQUIREMENTS.UPPER_CODE) return upperRow.push(BRIDGE_REQUIREMENTS.PASSED_OUTPUT);
-      if(trace === BRIDGE_REQUIREMENTS.UPPER_FAILED_CODE) return upperRow.push(BRIDGE_REQUIREMENTS.FAILED_OUTPUT);
+      if(trace === MOVEMENT_LOG_CODE.PASSED.UPPER) return upperRow.push(OUTPUT_SYMBOLS.PASSED);
+      if(trace === MOVEMENT_LOG_CODE.FAILED.UPPER) return upperRow.push(OUTPUT_SYMBOLS.FAILED);
       upperRow.push(' ');
     });
-    let result = `[ ${upperRow.join(` ${BRIDGE_REQUIREMENTS.PARTITION} `)} ]`;
+    let result = `[ ${upperRow.join(` ${OUTPUT_SYMBOLS.PARTITION} `)} ]`;
     return result;
   };
 
   static #getLowerRow(course) {
     const lowerROW = [];
     course.forEach(trace => {
-      if(trace === BRIDGE_REQUIREMENTS.LOWER_CODE) return lowerROW.push(BRIDGE_REQUIREMENTS.PASSED_OUTPUT);
-      if(trace === BRIDGE_REQUIREMENTS.LOWER_FAILED_CODE) return lowerROW.push(BRIDGE_REQUIREMENTS.FAILED_OUTPUT);
+      if(trace === MOVEMENT_LOG_CODE.PASSED.LOWER) return lowerROW.push(OUTPUT_SYMBOLS.PASSED);
+      if(trace === MOVEMENT_LOG_CODE.FAILED.LOWER) return lowerROW.push(OUTPUT_SYMBOLS.FAILED);
       lowerROW.push(' ');
     });
-    let result = `[ ${lowerROW.join(` ${BRIDGE_REQUIREMENTS.PARTITION} `)} ]`;
+    let result = `[ ${lowerROW.join(` ${OUTPUT_SYMBOLS.PARTITION} `)} ]`;
     return result;
   };
-
-  static #arrayToForm(row) {
-    let form = '[ ';
-  }
 }
 
 module.exports = GameUtils;

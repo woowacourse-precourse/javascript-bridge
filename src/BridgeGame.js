@@ -1,6 +1,6 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { BRIDGE_REQUIREMENTS } = require('./constants');
+const { USER_INPUT_CODE, MOVEMENT_LOG_CODE } = require('./constants');
 
 class BridgeGame {
   constructor(size) {
@@ -11,8 +11,8 @@ class BridgeGame {
     this.tryCount += 1;
     const location = this.course.length;
     if(this.bridge[location] === direction) return this.course.push(direction);
-    if(direction === BRIDGE_REQUIREMENTS.UPPER_CODE) return this.course.push(BRIDGE_REQUIREMENTS.UPPER_FAILED_CODE);
-    if(direction === BRIDGE_REQUIREMENTS.LOWER_CODE) return this.course.push(BRIDGE_REQUIREMENTS.LOWER_FAILED_CODE);
+    if(direction === USER_INPUT_CODE.MOVE.UPPER) return this.course.push(MOVEMENT_LOG_CODE.FAILED.UPPER);
+    if(direction === USER_INPUT_CODE.MOVE.LOWER) return this.course.push(MOVEMENT_LOG_CODE.FAILED.LOWER);
   }
 
   retry() {

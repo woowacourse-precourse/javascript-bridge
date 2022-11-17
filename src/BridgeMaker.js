@@ -1,4 +1,4 @@
-const { BRIDGE_REQUIREMENTS } = require('./constants');
+const { MOVEMENT_LOG_CODE } = require('./constants');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 const BridgeMaker = {
@@ -11,8 +11,8 @@ const BridgeMaker = {
     const bridge = [];
     while(bridge.length < size) {
       const result = Number(generator());
-      if(result === BridgeRandomNumberGenerator.RANDOM_LOWER_INCLUSIVE) bridge.push(BRIDGE_REQUIREMENTS.LOWER_CODE);
-      if(result === BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE) bridge.push(BRIDGE_REQUIREMENTS.UPPER_CODE);
+      if(result === BridgeRandomNumberGenerator.RANDOM_LOWER_INCLUSIVE) bridge.push(MOVEMENT_LOG_CODE.PASSED.UPPER);
+      if(result === BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE) bridge.push(MOVEMENT_LOG_CODE.PASSED.LOWER);
     }
     return bridge;
   },
