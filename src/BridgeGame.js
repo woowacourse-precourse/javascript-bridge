@@ -24,7 +24,7 @@ class BridgeGame {
   constructor() {
     this.#answer = [];
     this.#inputs = [];
-    this.#step = 1;
+    this.#step = 0;
     this.#trial = 1;
   }
   start() {
@@ -44,16 +44,21 @@ class BridgeGame {
   move() {
     InputView.readMoving((command) => {
       this.#inputs.push(command);
+      this.#step += 1;
       OutputView.printMap(this.#answer.slice(0, this.#step), this.#inputs);
       this.moveAfter(command);
     });
   }
   moveAfter(command) {
     const isCorrect = this.#answer[this.#step - 1] === command;
-
-    this.#step += 1;
-
-    if (!isCorrect) this.retry();
+    if (!isCorrect) {
+      this.retry();
+      return;
+    }
+    if (this.#answer.length === this.#inputs.length) {
+      this.end();
+      return;
+    }
     this.move();
   }
   /**
@@ -70,7 +75,7 @@ class BridgeGame {
     });
   }
   restart() {
-    this.#step = 1;
+    this.#step = 0;
     this.#trial += 1;
     this.#inputs = [];
     this.move();
