@@ -1,9 +1,12 @@
+// @ts-check
 const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
 class Controller {
+  /** @type {number} */
   #tryCount;
+  /** @type {BridgeGame} */
   #bridgeGame;
 
   constructor() {

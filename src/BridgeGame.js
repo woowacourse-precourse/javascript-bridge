@@ -1,3 +1,4 @@
+// @ts-check
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
@@ -5,8 +6,11 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  /** @type {string[]} */
   #bridge;
+  /** @type {string[]} */
   #inputs;
+  /** @type {number} */
   #gameStatus;
 
   /**
