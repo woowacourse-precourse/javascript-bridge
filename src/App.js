@@ -35,7 +35,7 @@ class App {
 
   checkCompletion() {
     if (this.#bridgeGame.isCompletion()) {
-      this.result();
+      this.resultGame();
       return;
     }
     this.startMove();
@@ -46,17 +46,12 @@ class App {
       if (command === 'R') {
         this.replay();
       } else if (command === 'Q') {
-        this.result();
+        this.resultGame();
       }
     });
   }
 
-  replay() {
-    this.#bridgeGame.retry();
-    this.startMove();
-  }
-
-  result() {
+  resultGame() {
     console.log(this.#bridgeGame.getResult());
     console.log('결과 // 게임 종료 (성공했을 때 or 실패 후 종료)');
     this.end();
@@ -64,6 +59,11 @@ class App {
 
   end() {
     Console.close();
+  }
+
+  replay() {
+    this.#bridgeGame.retry();
+    this.startMove();
   }
 }
 
