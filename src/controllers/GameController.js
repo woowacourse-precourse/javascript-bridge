@@ -12,6 +12,12 @@ class GameController {
 
   askBridgeSize() {
     InputView.readBridgeSize();
+    this.#bridge = new Bridge();
+    console.log(this.#bridge);
+  }
+
+  makeBridgeMaker() {
+    BridgeMaker;
   }
 
   gameExit() {}

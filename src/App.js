@@ -1,20 +1,35 @@
-const GameController = require('./controllers/gameController');
+const { Console } = require('@woowacourse/mission-utils');
+const BridgeMaker = require('./BridgeMaker');
+const { generate } = require('./BridgeRandomNumberGenerator');
 
 class App {
-  #gameCtrl;
-
-  constructor() {
-    this.#gameCtrl = new GameController();
-  }
+  #size;
+  #bridge;
 
   play() {
-    this.gameProgress();
+    this.gameStart();
   }
 
-  gameProgress() {
-    this.#gameCtrl.gameStart();
-    this.#gameCtrl.askBridgeSize();
+  gameStart() {
+    Console.print('다시 건너기 게임을 시작합니다.\n');
+    this.askBridgeSize();
   }
+
+  askBridgeSize() {
+    Console.readLine('다리의 길이를 입력해주세요.\n', (size) => {
+      this.size = size;
+      this.makeBridge();
+    });
+  }
+
+  makeBridge() {
+    this.bridge = BridgeMaker.makeBridge(this.size, generate);
+    this.askMoveDirection();
+  }
+
+  askMoveDirection() {}
+
+  // gameProgress() { }
 
   exit() {}
 }
