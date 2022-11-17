@@ -1,5 +1,9 @@
+const InputView = require("../src/InputView");
+
 class App {
-  play() {}
+  play() {
+    InputView.readBridgeSize();
+  }
 }
 
 module.exports = App;
