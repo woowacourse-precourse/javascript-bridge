@@ -7,4 +7,10 @@ describe('사용자의 입력 테스트', () => {
       InputView.validateBridgeSize(input);
     }).toThrow(errorMessage.NOT_NUMBER);
   });
+
+  test.each([['-1'], ['2'], ['30']])('다리 길이 입력이 정해진 범위가 아닐 경우 예외 발생', (input) => {
+    expect(() => {
+      InputView.validateBridgeSize(input);
+    }).toThrow(errorMessage.OUT_RANGE_NUMBER);
+  });
 });
