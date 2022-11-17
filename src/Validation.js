@@ -17,6 +17,12 @@ const Validation = {
     if (!(input === 'U' || input === 'D')) {
       throw new Error('[ERROR] 이동할 칸을 선택하기 위해선 \'U\' 또는 \'D\'를 입력해야 합니다.');
     }
+  },
+
+  checkInputTryOrEnd(input) {
+    if (!(input === 'R' || input === 'Q')) {
+      throw new Error('[ERROR] 재시도하려면 \'R\'를, 종료하려면 \'Q\'를 입력해야 합니다.');
+    }
   }
 };
 
