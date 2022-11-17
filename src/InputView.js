@@ -27,7 +27,7 @@ const InputView = {
         return this.readBridgeSize(bridgeGame);
 
       bridgeGame.setBridge(new Bridge(size));
-      console.log(bridgeGame.getBridge());
+      // console.log(bridgeGame.getBridge());
       this.readMoving(bridgeGame);
     })
   },
@@ -46,7 +46,13 @@ const InputView = {
       if (bridgeGame.isFailMove(bridgeGame.getUpDownHistory()))
         return this.readGameCommand(bridgeGame);
 
-      return this.checkEndPosition(bridgeGame);
+      if (bridgeGame.isEndPosition()) {
+        bridgeGame.setIsSuccess("성공");
+        OutputView.printResult(bridgeGame);
+        return bridgeGame.exit();
+      }
+
+      return this.readMoving(bridgeGame);
     })
   },
 
@@ -57,23 +63,12 @@ const InputView = {
   readGameCommand(bridgeGame) {
     MissionUtils.Console.readLine(MESSAGE.ENTER_COMMAND, (command) => {
       if (!bridgeGame.validateCommand(command))
-        return this.readGameCommand(bridgeGame)
+        return this.readGameCommand(bridgeGame);
 
       restartType[command];
     });
   },
 
-  checkEndPosition(bridgeGame) {
-    let maxPosition = bridgeGame.getBridge().length - 1;
-    let position = bridgeGame.getPosition();
-    if (position === maxPosition) {
-      bridgeGame.setIsSuccess("성공");
-      OutputView.printResult(bridgeGame);
-      return bridgeGame.exit();
-    }
-    if (position !== maxPosition)
-      this.readMoving(bridgeGame);
-  }
 };
 
 module.exports = InputView;

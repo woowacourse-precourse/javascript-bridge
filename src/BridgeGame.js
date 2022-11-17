@@ -1,6 +1,6 @@
 const { ERROR } = require('./Messages');
-const InputView = require('./InputView');
 const MissionUtils = require('@woowacourse/mission-utils');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -60,15 +60,15 @@ class BridgeGame {
   }
 
   getUpDownHistory() {
-    let upHistory = new Array(this.#position + 1).fill(" ");
-    let downHistory = new Array(this.#position + 1).fill(" ");
+    let [upHistory, downHistory] = new Array(2).fill(0).map(() => new Array(this.#position + 1).fill(" "));
     let bridge = this.#bridge.getBridge();
 
-    for (let position = 0; position <= this.#position; position++)
-      this.#moveHistory[position] === bridge[position]
-        ? this.changeUpDownHistory(upHistory, downHistory, position, "O")
-        : this.changeUpDownHistory(upHistory, downHistory, position, "X");
-
+    for (let position = 0; position <= this.#position; position++) {
+      if (this.#moveHistory[position] === bridge[position])
+        this.changeUpDownHistory(upHistory, downHistory, position, "O");
+      if (this.#moveHistory[position] !== bridge[position])
+        this.changeUpDownHistory(upHistory, downHistory, position, "X");
+    }
     return [upHistory, downHistory];
   }
 
@@ -80,14 +80,13 @@ class BridgeGame {
   }
 
   validateMoveType(moveType) {
+    const isInvalidCommand = moveType !== "U" && moveType !== "D";
     try {
-      if (moveType !== "U" && moveType !== "D")
-        throw new Error(ERROR.INVALID_MOVE_TYPE);
+      if (isInvalidCommand) throw new Error(ERROR.INVALID_MOVE_TYPE);
     } catch (error) {
       MissionUtils.Console.print(error.message);
       return false;
     }
-
     return true;
   }
 
@@ -101,7 +100,6 @@ class BridgeGame {
       MissionUtils.Console.print(error.message);
       return false;
     }
-
     return true;
   }
 
@@ -129,6 +127,12 @@ class BridgeGame {
 
   isFailMove([upHistory, downHistory]) {
     return [...upHistory, ...downHistory].includes("X");
+  }
+
+  isEndPosition() {
+    let maxPosition = this.getBridge().length - 1;
+    let position = this.getPosition();
+    return maxPosition === position ? true : false;
   }
 
   /**
