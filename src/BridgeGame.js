@@ -1,7 +1,20 @@
+const Validation = require('./Validation');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  static replaceString(value) {
+    Validation.number(value);
+    const [TOP_NUMBER, TOP] = [0, 'D'];
+    const [BOTTOM_NUMBER, BOTTOM] = [1, 'U'];
+
+    if (value === TOP_NUMBER) return TOP;
+    if (value === BOTTOM_NUMBER) return BOTTOM;
+
+    return Validation.throwError(Validation.RANGE_ERROR_TEXT);
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
