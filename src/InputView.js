@@ -21,8 +21,8 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(InputConstants.ASK_BRIDGE_LENGTH, (sizeInput) => {
       try {
+        Console.print("");
         this.createRandomBridge(sizeInput);
-        this.readMoving();
       } catch (err) {
         Console.print(err);
         this.readBridgeSize();
@@ -36,6 +36,8 @@ const InputView = {
     Player.updateSize(size);
 
     this.canWalkBridge = BridgeMaker.makeBridge(size, generater);
+
+    this.readMoving();
   },
 
   /**
@@ -81,7 +83,7 @@ const InputView = {
     new CommandInputValidation(command);
 
     new BridgeGame().retry(command)
-      ? (Player.reset(), this.readMoving(this.canWalkBridge))
+      ? (Player.reset(), this.readMoving())
       : OutputView.printResult();
   },
 };

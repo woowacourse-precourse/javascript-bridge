@@ -13,7 +13,7 @@ const OutputView = {
    */
   printMap() {
     Console.print(OutputConstants.BRIDGE_STATE_MESSAGE(Player.state[0]));
-    Console.print(OutputConstants.BRIDGE_STATE_MESSAGE(Player.state[1]));
+    Console.print(`${OutputConstants.BRIDGE_STATE_MESSAGE(Player.state[1])}\n`);
   },
 
   /**
@@ -24,7 +24,6 @@ const OutputView = {
   printResult() {
     Console.print(OutputConstants.RESULT_MESSAGE);
     this.printMap();
-    Console.print("");
     Console.print(OutputConstants.SUCCESS_STATE_MESSAGE(Player.gameSuccess));
     Console.print(OutputConstants.TRYING_COUNT_MESSAGE(Player.tryingCount));
     Console.close();
