@@ -40,11 +40,18 @@ const InputView = {
     let moving = '';
 
     MissionUtils.Console.readLine(
-      "이동할 칸을 선택해주세요 \n >",
+      "이동할 칸을 선택해주세요 (위: U, 아래: D)\n >",
       answer => moving = answer
     )
+    this.validMoving(moving);
 
     return moving;
+  },
+  
+  validMoving(moving) {
+    if (moving !== 'D' && moving !== 'U') { // ? D와 U에 대해서도 상수선언을 하는 게 좋을지 고민해보기
+      throw `[ERROR] 위로 이동하는 키는 U, 아래로 이동하는 키는 D 입니다.`;
+    }
   },
 
   /**
