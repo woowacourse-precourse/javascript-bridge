@@ -136,7 +136,7 @@ const number = generateRandomNumber();
   - 0과 1중 무작위 값을 이용하여 건널 수 있는 칸을 정한다.
   - 위 칸을 건널 수 있는 경우 U, 아래 칸을 건널 수 있는 경우 D값으로 나타낸다.
   - 무작위 값이 0인 경우 아래 칸(D), 1인 경우 위 칸(U)이 건널 수 있는 칸이 된다.
-- [ ] feat: BridgeGame 인스턴스 생성
+- [x] feat: BridgeGame 인스턴스 생성
   - 생성한 다리를 인수로 전달한다.
   - BridgeGame 클래스 내 bridge 인스턴스 변수를 생성한다.
   - App 클래스 내 bridgeGame 인스턴스 변수를 생성한다.
