@@ -1,3 +1,7 @@
+const { Console } = require("@woowacourse/mission-utils");
+
+const MESSAGE_GET_BRIDGE_SIZE = "다리의 길이를 입력해주세요. \n";
+
 const ERROR_NOT_NUMBER = "[ERROR] 숫자를 입력해 주세요.";
 const ERROR_OUT_OF_RANGE = "[ERROR] 3~20 사이의 숫자를 입력해 주세요.";
 const ERROR_NOT_INTEGER = "[ERROR] 정수를 입력해 주세요.";
@@ -34,7 +38,27 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize() {
+    return new Promise((resolve) => {
+      this.getValidBridgeSize(resolve);
+    });
+  },
+
+  /**
+   * 다리의 길이를 입력받고 유효한 값인지 확인한다.
+   */
+  getValidBridgeSize(callback) {
+    Console.readLine(MESSAGE_GET_BRIDGE_SIZE, (userInput) => {
+      try {
+        const parsedUserInput = Number(userInput);
+        this.validateBridgeSize(parsedUserInput);
+        return callback(parsedUserInput);
+      } catch (error) {
+        Console.print(error.message);
+        this.getValidBridgeSize(callback);
+      }
+    });
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
