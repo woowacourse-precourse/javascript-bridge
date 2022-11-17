@@ -1,5 +1,6 @@
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const Validation = require("./Validation");
 
 // 게임을 진행시키는 컨트롤러
 class GameController {
@@ -12,7 +13,9 @@ class GameController {
     this.createBridge();
   }
   createBridge() {
-    InputView.readBridgeSize();
+    InputView.readBridgeSize((input) => {
+      Validation.bridgeInput(input);
+    });
   }
 }
 
