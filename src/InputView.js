@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const BridgeGame = require("./BridgeGame");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 
@@ -10,21 +11,22 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
+    let mainBridge = [];
     Console.readLine("다리의 길이를 입력해주세요.", (bridgeSize) => {
-      this.bridge = makeBridge(bridgeSize, generate);
-      //만든 값 저장해두기
+      mainBridge = makeBridge(bridgeSize, generate);
+      InputView.readMoving(mainBridge);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(mainBridge) {
+    const bridgeGame = new BridgeGame(mainBridge);
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (maveInput) => {
-        //총 다리 길이 중 지금 몇번째 시도인지 확인
-        move(maveInput);
+        bridgeGame.move(maveInput);
       }
     );
   },
