@@ -34,6 +34,10 @@ class App {
   requestDirection() {
     InputView.readMoving((direction) => {
       const { errorMsg } = Validation.checkDirection(direction);
+      if (errorMsg) {
+        Console.print(errorMsg);
+        return this.requestDirection();
+      }
     });
   }
 }
