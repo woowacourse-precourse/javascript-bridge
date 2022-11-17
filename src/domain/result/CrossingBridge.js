@@ -5,9 +5,18 @@ class CrossingBridge {
     empty: ' ',
   };
 
-  #up = [];
+  #up;
 
-  #down = [];
+  #down;
+
+  constructor() {
+    this.initialize();
+  }
+
+  initialize() {
+    this.#up = [];
+    this.#down = [];
+  }
 
   add({ direction, isSuccessed }) {
     if (isSuccessed) {
