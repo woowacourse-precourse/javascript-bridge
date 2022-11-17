@@ -1,4 +1,4 @@
-const BridgeLength = require('../src/domain/BridgeLength');
+const BridgeLength = require('../src/service/domain/BridgeLength');
 
 describe('다리 길이 테스트', () => {
   test('(다리 길이(오류) - 문자)', () => {
