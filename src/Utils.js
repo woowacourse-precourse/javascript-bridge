@@ -8,7 +8,9 @@ const Utils = Object.freeze({
   print(message) {
     Console.print(message);
   },
+  close() {
+    Console.close();
+  },
 });
 
-module.exports = Utils.input;
-module.exports = Utils.print;
+module.exports = Utils;
