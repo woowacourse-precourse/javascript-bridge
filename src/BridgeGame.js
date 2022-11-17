@@ -19,9 +19,10 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    // console.log(direction, this.#bridge, this.#moveCount);
+    console.log(direction, this.#bridge, this.#moveCount);
     if (direction === this.#bridge[this.#moveCount]) {
       this.#moveCount += 1;
+      this.checkCompletion();
       return true;
     }
     this.retry();
@@ -34,6 +35,12 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {}
+
+  checkCompletion() {
+    if (this.#bridge.length === this.#moveCount) {
+      console.log('종료');
+    }
+  }
 }
 
 module.exports = BridgeGame;
