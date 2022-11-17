@@ -8,8 +8,11 @@ describe("다리 건너기 테스트", () => {
   });
 
   test("다리 생성 UPDOWN 테스트", () => {
+    const size = 2;
     const upDownMock = jest.fn();
 
-    expect(BridgeMaker.makeBridge(1, upDownMock.mockReturnValueOnce(0))).toEqual(["U"]);
+    const upDownMocks = upDownMock.mockReturnValueOnce(0).mockReturnValueOnce(1);
+
+    expect(BridgeMaker.makeBridge(size, upDownMocks)).toEqual(["U", "D"]);
   });
 });
