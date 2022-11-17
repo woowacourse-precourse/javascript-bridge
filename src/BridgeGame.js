@@ -49,7 +49,6 @@ class BridgeGame {
   }
 
   set bridgeSize(size) {
-    // TODO: 입력받은 size가 유효한지 확인 기능 추가
     this.#bridgeSize = size;
   }
 

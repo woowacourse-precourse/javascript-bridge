@@ -1,4 +1,4 @@
-const { printStart, printMap } = require('./OutputView');
+const { printStart, printMap, printResult } = require('./OutputView');
 const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { STATE } = require('./Contants');
 const BridgeGame = require('./BridgeGame');
@@ -13,7 +13,7 @@ class App {
         return this.progressGame(bridgeGame);
       })
       .then((gameResult) => {
-        this.quitGame(gameResult);
+        printResult(gameResult);
       });
   }
 
@@ -27,11 +27,6 @@ class App {
     }
     if (bridgeGame.state === STATE.PROGRESS) return this.progressGame(bridgeGame);
     return { state: bridgeGame.state, tryCount: bridgeGame.tryCount };
-  }
-
-  quitGame(gameResult) {
-    const { state, tryCount } = gameResult;
-    console.log(state, tryCount);
   }
 }
 
