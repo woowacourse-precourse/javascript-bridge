@@ -2,15 +2,12 @@ const { SIZE, KEYWORD } = require("../constants/index.js");
 const { BridgeGameSizeError } = require("../Error/index.js");
 
 const BridgeGameModel = class {
-  #user;
-  #bridge;
-  #try;
-  constructor() {}
+  #user = [];
+  #bridge = [];
+  #try = 1;
 
   try(brige) {
-    this.#try = 1;
-    this.#bridge = brige;
-    this.#user = [];
+    this.#bridge.push(...brige);
   }
 
   retry() {
