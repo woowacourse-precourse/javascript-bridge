@@ -10,32 +10,33 @@
   - [x] 다리의 n번째 칸을 건넌다. Bridge#stepOn
   - [x] 이동할 칸이 강화유리인지 확인한다. BridgePanel#checkTempered
     - [x] (예외처리) 건널 수 있는 칸의 방향이 U 또는 D가 아닌 경우 예외처리 한다. BridgePanel#validate
+- [x] 다리를 건너온 정보를 초기화한다. CrossingBridge#initialize
 - [x] 다리를 건너온 정보를 추가한다. CrossingBridge#add
 - [x] 다리를 건너온 정보의 출력 결과를 생성한다. CrossingBridge#print
 - [x] 다리를 몇 칸 건너왔는지 출력한다. CrossingBridge#size
 - [x] 다리를 모두 건넜는지 확인한다. Judgment#checkCrossingAll
-- [ ] 게임을 재시도한다. BridgeGame#retry
+- [x] 게임을 재시도한다. BridgeGame#retry
   - [x] 시도 횟수를 증가한다. Attempt#add
 - [x] 총 시도한 횟수의 출력 결과를 생성한다. Attempt#print
 - [x] 게임 성공 여부의 출력 결과를 생성한다. Result#print
 - [x] 게임을 종료한다. BridgeGame#quit
 ## 입출력
-- [ ] (출력) 게임 시작 문구를 출력한다. OutputView#printGameStart
+- [x] (출력) 게임 시작 문구를 출력한다. OutputView#printGameStart
   - `다리 건너기 게임을 시작합니다.\n`
-- [ ] (입력) 다리 길이를 입력한다. InputView#readBridgeSize
+- [x] (입력) 다리 길이를 입력한다. InputView#readBridgeSize
   - `다리의 길이를 입력해주세요.\n`
-- [ ] (예외처리) 다리 길이가 3 이상 20 이하의 숫자가 아니면 예외 처리 한다.
-- [ ] (입력) 이동할 칸을 입력한다. InputView#readMoving
+- [x] (예외처리) 다리 길이가 3 이상 20 이하의 숫자가 아니면 예외 처리 한다.
+- [x] (입력) 이동할 칸을 입력한다. InputView#readMoving
   - `이동할 칸을 선택해주세요. (위: U, 아래: D)\n`
-- [ ] (예외처리) 이동할 칸이 U 또는 D가 아니면 예외처리 한다.
-- [ ] (출력) 플레이어가 이동한 후의 다리 건너기 결과를 출력한다. OutputView#printMap
+- [x] (예외처리) 이동할 칸이 U 또는 D가 아니면 예외처리 한다.
+- [x] (출력) 플레이어가 이동한 후의 다리 건너기 결과를 출력한다. OutputView#printMap
   - 이동할 수 있는 칸은 'O', 이동할 수 없는 칸은 'X', 선택하지 않은 칸은 ' ' 표시
   - 다리의 시작은 `[`, 다리의 끝은 `]` 다리 칸의 구분은 `|`(앞뒤 공백 포함)으로 표시
   - 현재까지 건넌 다리를 모두 출력
-- [ ] (입력) 게임의 재시작/종료 여부를 입력한다. InputView#readGameCommand
+- [x] (입력) 게임의 재시작/종료 여부를 입력한다. InputView#readGameCommand
   - `게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n`
-- [ ] (예외처리) 게임 커맨드가 U 또는 D가 아니면 예외처리 한다.
-- [ ] (출력) 최종 게임 결과를 출력한다. OutputView#printResult
+- [x] (예외처리) 게임 커맨드가 U 또는 D가 아니면 예외처리 한다.
+- [x] (출력) 최종 게임 결과를 출력한다. OutputView#printResult
   - `최종 게임 결과`
   - 다리 건너기 결과 출력
   - `게임 성공 여부: ` 성공/실패
