@@ -1,5 +1,7 @@
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
+const ViewController = require("./ViewController");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -7,9 +9,13 @@ const { generate } = require("./BridgeRandomNumberGenerator");
 class BridgeGame {
   #bridgeSize;
   #bridge;
+  #upperBridge = [];
+  #lowerBridge = [];
+  #gameRound = 0;
+  totalTrialNumber = 0;
 
-  constructor(bridgeSize) {
-    this.#bridgeSize = bridgeSize;
+  constructor(size) {
+    this.#bridgeSize = size;
     this.#bridge = makeBridge(this.#bridgeSize, generate);
   }
 
@@ -18,8 +24,39 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  async move() {
+    // 상수화 필요
+    const COMMAND = await ViewController.input.moving();
+    if (COMMAND === this.#bridge[this.#gameRound]) {
+      this.moveCorrectDirection(COMMAND);
+    } else if (COMMAND !== this.#bridge[this.#gameRound]) {
+      this.moveWrongDirection(COMMAND);
+    }
+  }
 
-  move() {}
+  moveCorrectDirection(command) {
+    this.buildBridgeUsingInput(command, "O");
+    ViewController.output.map(this.#upperBridge, this.#lowerBridge);
+    this.#gameRound += 1;
+    if (this.#gameRound < this.#bridgeSize) this.move();
+  }
+
+  moveWrongDirection(command) {
+    this.buildBridgeUsingInput(command, "X");
+    ViewController.output.map(this.#upperBridge, this.#lowerBridge);
+  }
+
+  buildBridgeUsingInput(direction, result) {
+    // 상수화 필요
+    if (direction === "U") {
+      this.#upperBridge.push(result);
+      this.#lowerBridge.push(" ");
+    }
+    if (direction === "D") {
+      this.#lowerBridge.push(result);
+      this.#upperBridge.push(" ");
+    }
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
