@@ -1,10 +1,21 @@
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 // 필드 추가 가능, 파일 경로 변경 가능, 메서드 이름 변경 불가능, 인자 변경 가능, 메서드 추가 가능
 // BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor(size) {}
+  #tryCount;
+  #bridgeMap;
+
+  constructor(size) {
+    this.#tryCount = 1;
+    this.#bridgeMap = BridgeMaker.makeBridge(
+      size,
+      BridgeRandomNumberGenerator.generate
+    );
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
