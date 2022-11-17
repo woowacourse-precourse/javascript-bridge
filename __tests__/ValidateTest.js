@@ -1,4 +1,4 @@
-const Validator = require('../src/Validator');
+const Validator = require('../src/utils/Validator');
 
 describe('예외처리 테스트', () => {
   test.each(['a', '하', '1,2,3', '', '   '])(
