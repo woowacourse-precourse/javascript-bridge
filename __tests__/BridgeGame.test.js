@@ -6,4 +6,11 @@ describe('숫자값 문자열 치환 기능 테스트', () => {
 
     expect(BridgeGame.replaceString.name).toEqual(METHOD_NAME);
   });
+
+  test('요소가 0인 경우 "D"로 치환한다.', () => {
+    const EXPECTED = 0;
+    const RECEIVED = 'D';
+
+    expect(BridgeGame.replaceString(EXPECTED)).toEqual(RECEIVED);
+  });
 });
