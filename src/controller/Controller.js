@@ -1,3 +1,5 @@
-class Controller {}
+class Controller {
+  start() {}
+}
 
-module.exports = new Controller();
+module.exports = Controller;
