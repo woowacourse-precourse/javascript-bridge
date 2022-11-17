@@ -1,11 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Notice = require("./NoticeMessage.js")
+const Input = require("./InputView.js")
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
   startgame(){
     MissionUtils.Console.print(Notice.START_GAME)
+    MissionUtils.Console.print(Notice.INPUT_BRIDGE_LENGTH)
+    Input.readBridgeSize()
   },
 
   /**
