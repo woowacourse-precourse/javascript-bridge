@@ -18,14 +18,15 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(direction) {
-    console.log(direction, this.#bridge, this.#moveCount);
-    if (direction === this.#bridge[this.#moveCount]) {
-      this.#moveCount += 1;
-      this.checkCompletion();
-      return true;
+  move() {
+    this.#moveCount += 1;
+    if (this.isCompletion()) {
+      this.complete();
     }
-    return false;
+  }
+
+  complete() {
+    console.log('종료');
   }
 
   /**
@@ -37,10 +38,13 @@ class BridgeGame {
     this.#moveCount = 0;
   }
 
-  checkCompletion() {
-    if (this.#bridge.length === this.#moveCount) {
-      console.log('종료');
-    }
+  isMove(direction) {
+    console.log(direction, this.#bridge, this.#moveCount);
+    return direction === this.#bridge[this.#moveCount];
+  }
+
+  isCompletion() {
+    return this.#bridge.length === this.#moveCount;
   }
 }
 

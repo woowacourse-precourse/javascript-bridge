@@ -23,7 +23,8 @@ class App {
 
   inputMoving() {
     InputView.readMoving((direction) => {
-      if (this.#bridgeGame.move(direction)) {
+      if (this.#bridgeGame.isMove(direction)) {
+        this.#bridgeGame.move();
         this.inputMoving();
       }
       this.inputRetry();
