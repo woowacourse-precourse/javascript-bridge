@@ -4,7 +4,7 @@ const generateRandomNumber = () => {
   return BridgeRandomNumberGenerator.generate();
 };
 
-const numberConverter = (number) => {
+const convertReverse = (number) => {
   return number === 1 ? 0 : 1;
 };
 
@@ -12,4 +12,8 @@ const convertNumberToUpDown = (number) => {
   return number === 1 ? 'U' : 'D';
 };
 
-module.exports = { generateRandomNumber, numberConverter };
+const convertNumberArrayToUpDown = (array) => {
+  array.map(convertNumberToUpDown);
+};
+
+module.exports = { generateRandomNumber, convertReverse, convertNumberArrayToUpDown };
