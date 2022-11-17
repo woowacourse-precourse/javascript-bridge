@@ -19,7 +19,7 @@ const Validation = {
     }
   },
 
-  checkInputTryOrEnd(input) {
+  checkInputRetryOrEnd(input) {
     if (!(input === 'R' || input === 'Q')) {
       throw new Error('[ERROR] 재시도하려면 \'R\'를, 종료하려면 \'Q\'를 입력해야 합니다.');
     }
