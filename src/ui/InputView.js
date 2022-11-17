@@ -1,9 +1,12 @@
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
+const BridgeGame = require('../domain/BridgeGame');
 const inputException = require('./InputException');
 const { Console } = require('@woowacourse/mission-utils');
 const { parseNumber } = require('../../lib/utils');
+
+const bridgeGame = new BridgeGame();
 
 const InputView = {
   /**
@@ -14,7 +17,7 @@ const InputView = {
       try {
         const bridgeSize = parseNumber(inputValue);
         inputException.handleBridgeSizeException(bridgeSize);
-        // console.log(inputValue);
+        bridgeGame.create(bridgeSize);
       } catch (err) {
         console.log(err);
         this.readBridgeSize();
