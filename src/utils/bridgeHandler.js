@@ -12,8 +12,17 @@ const convertNumberToUpDown = (number) => {
   return number === 1 ? 'U' : 'D';
 };
 
-const convertNumberArrayToUpDown = (array) => {
-  array.map(convertNumberToUpDown);
+const convertBlueprintToBridge = (array) => {
+  return array.map(convertNumberToUpDown);
 };
 
-module.exports = { generateRandomNumber, convertReverse, convertNumberArrayToUpDown };
+const createBlueprint = (size) => {
+  return new Array(size).fill(false);
+};
+
+module.exports = {
+  generateRandomNumber,
+  convertReverse,
+  convertBlueprintToBridge,
+  createBlueprint,
+};

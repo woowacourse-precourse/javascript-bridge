@@ -1,4 +1,8 @@
-const { convertReverse, convertBlueprintToBridge } = require('./utils/bridgeHandler');
+const {
+  convertReverse,
+  convertBlueprintToBridge,
+  createBlueprint,
+} = require('./utils/bridgeHandler');
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -11,7 +15,7 @@ const BridgeMaker = {
    */
 
   makeBridge(size, generateRandomNumber) {
-    const blueprintArray = new Array(size).fill(false);
+    const blueprintArray = createBlueprint(size);
     const blueprintFirstRow = blueprintArray.map(() => generateRandomNumber());
     const blueprintSecondRow = [...blueprintFirstRow].map(convertReverse);
 

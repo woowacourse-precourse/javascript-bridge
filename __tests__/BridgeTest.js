@@ -1,3 +1,5 @@
+const BridgeMaker = require('../src/BridgeMaker')
+const { convertReverse, convertBlueprintToBridge } = require('../src/utils/bridgeHandler');
 
 describe("다리 생성 테스트", () => {
   test("난수 배열 생성 테스트", () => {
