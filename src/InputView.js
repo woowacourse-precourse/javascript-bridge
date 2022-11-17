@@ -8,9 +8,17 @@ const InputView = {
     });
   },
 
-  readMoving() {},
+  readMoving(handleMoving) {
+    Console.readLine('이동할 칸을 선택해주세요.\n', (input) => {
+      handleMoving(input);
+    });
+  },
 
-  readGameCommand() {},
+  readGameCommand(handleGameCommand) {
+    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요.\n', (input) => {
+      handleGameCommand(input);
+    });
+  },
 };
 
 module.exports = InputView;
