@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const {
   ERROR_MESSAGE,
   INPUT_MESSAGE,
-  BRIDGE_ELEMENT,
+  RETRY_MESSAGE,
 } = require('./utils/Constant');
 const InputView = require('./Viewer/InputView');
 const OutputView = require('./Viewer/OutputView');
@@ -14,7 +14,7 @@ class BridgeGame {
   #selected;
 
   constructor() {
-    this.#selected = '';
+    this.#selected = [];
     this.tryCnt = 1;
   }
 
@@ -59,11 +59,7 @@ class BridgeGame {
    */
   move(input) {
     this.constructor.validate(input);
-    if (input === INPUT_MESSAGE.UP) {
-      this.#selected += BRIDGE_ELEMENT.UP;
-    } else if (input === INPUT_MESSAGE.DOWN) {
-      this.#selected += BRIDGE_ELEMENT.DOWN;
-    }
+    this.#selected.push(input);
   }
 
   /**
@@ -73,17 +69,17 @@ class BridgeGame {
    */
   retry(input, bridge, game) {
     this.constructor.validateRetryInput(input);
-    if (input === 'R') {
+    if (input === RETRY_MESSAGE.RETRY) {
       game.resetSelectedAndPlusTryCnt();
       InputView.readMoving(bridge, game);
-    } else if (input === 'Q') {
+    } else if (input === RETRY_MESSAGE.QUIT) {
       OutputView.printResult(bridge, game);
       Console.close();
     }
   }
 
   static validateRetryInput(input) {
-    if (input !== 'R' && input !== 'Q')
+    if (input !== RETRY_MESSAGE.RETRY && input !== RETRY_MESSAGE.QUIT)
       throw new Error('[ERROR] R 또는 Q를 입력해야합니다.');
   }
 }

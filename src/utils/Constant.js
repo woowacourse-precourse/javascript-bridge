@@ -17,9 +17,14 @@ const INPUT_MESSAGE = {
   DOWN: 'D',
 };
 
+const RETRY_MESSAGE = {
+  RETRY: 'R',
+  QUIT: 'Q',
+};
+
 const BRIDGE_ELEMENT = {
-  UP: '0',
-  DOWN: '1',
+  UP: '1',
+  DOWN: '0',
 };
 
 const OUTPUT_MESSAGE = {
@@ -38,6 +43,7 @@ module.exports = {
   MESSAGE,
   ERROR_MESSAGE,
   INPUT_MESSAGE,
+  RETRY_MESSAGE,
   BRIDGE_ELEMENT,
   OUTPUT_MESSAGE,
 };
