@@ -60,4 +60,14 @@ describe('다리 건너기 게임 테스트', () => {
       isGameOver: true,
     });
   });
+
+  test('게임 재시작 테스트', () => {
+    bridgeGame.retry();
+    const resultMap = bridgeGame.move('U');
+    expect(resultMap).toEqual({
+      upperPart: 'O',
+      lowerPart: ' ',
+      isGameOver: false,
+    });
+  });
 });
