@@ -1,16 +1,16 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const Validation = require("./Validation");
-const OutputView = require("./OutputView");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const MissionUtils = require('@woowacourse/mission-utils');
+const Validation = require('./Validation');
+const OutputView = require('./OutputView');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
-const BridgeGame = require("./BridgeGame");
+const BridgeGame = require('./BridgeGame');
 
 const InputView = {
-	START_MSG: "다리 건너기 게임을 시작합니다.\n",
-	READ_BRIDGE_SIZE_MSG: "다리의 길이를 입력해주세요.\n",
-	READ_MOVING_MSG: "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+	START_MSG: '다리 건너기 게임을 시작합니다.\n',
+	READ_BRIDGE_SIZE_MSG: '다리의 길이를 입력해주세요.\n',
+	READ_MOVING_MSG: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
 
-	readBridgeSize(START_MSG = "", READ_BRIDGE_SIZE_MSG = "") {
+	readBridgeSize(START_MSG = '', READ_BRIDGE_SIZE_MSG = '') {
 		MissionUtils.Console.readLine(
 			START_MSG + READ_BRIDGE_SIZE_MSG,
 			(bridgeSize) => {
@@ -33,11 +33,16 @@ const InputView = {
 		}
 	},
 
-	readMoving(bridgeGame, READ_MOVING_MSG = "") {
+	readMoving(bridgeGame, READ_MOVING_MSG = '') {
 		MissionUtils.Console.readLine(READ_MOVING_MSG, (moving) => {
 			InputView.handlingMovingError(bridgeGame, moving);
+
 			const currentBridge = bridgeGame.move(moving);
 			OutputView.printMap(currentBridge);
+			const isCorrect = bridgeGame.isCorrect(moving);
+			if (isCorrect) {
+				InputView.readGameCommand(bridgeGame);
+			}
 			InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 		});
 	},

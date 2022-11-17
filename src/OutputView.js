@@ -1,17 +1,17 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
 const OutputView = {
-	CORRECT_BRIDGE_ELE: " O ",
-	WRONG_BRIDGE_ELE: " x ",
-	EMPTY_BRIDGE_ELE: "   ",
+	CORRECT_BRIDGE_ELE: ' O ',
+	WRONG_BRIDGE_ELE: ' x ',
+	EMPTY_BRIDGE_ELE: '   ',
 
 	UPPER_BRIDGE: {
-		CORRECT: "UO",
-		WRONG: "UX",
+		CORRECT: 'UO',
+		WRONG: 'UX',
 	},
 	LOWER_BRIDGE: {
-		CORRECT: "DO",
-		WRONG: "DX",
+		CORRECT: 'DO',
+		WRONG: 'DX',
 	},
 
 	printMap(currentBridge) {
@@ -26,7 +26,7 @@ const OutputView = {
 		const upperMap = OutputView.convertArrToMap(upperArr);
 		const lowerMap = OutputView.convertArrToMap(lowerArr);
 
-		MissionUtils.Console.print(upperMap + "\n" + lowerMap);
+		MissionUtils.Console.print(upperMap + '\n' + lowerMap);
 	},
 
 	getOneSideArr(currentBridge, ONE_SIDE_BRIDGE) {
@@ -45,9 +45,9 @@ const OutputView = {
 	convertArrToMap(arr) {
 		const map = JSON.stringify(arr);
 
-		const quotationRegExp = new RegExp('"', "g");
-		const commaRegExp = new RegExp(",", "g");
-		return map.replace(quotationRegExp, "").replace(commaRegExp, "|");
+		const quotationRegExp = new RegExp('"', 'g');
+		const commaRegExp = new RegExp(',', 'g');
+		return map.replace(quotationRegExp, '').replace(commaRegExp, '|');
 	},
 
 	/**
