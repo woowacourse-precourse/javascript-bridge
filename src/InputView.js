@@ -4,6 +4,7 @@ const BridgeMaker = require("./BridgeMaker");
 const { Console } = require("@woowacourse/mission-utils");
 const { MANAGER } = require("./utils/constants");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const MoveSpace = require("./error/moveSpace");
 const number = BridgeRandomNumberGenerator.generate();
 
 const InputView = {
@@ -13,6 +14,7 @@ const InputView = {
       (input) => {
         new BridgeSize(input);
         BridgeMaker.getSize(input);
+        InputView.readMoving();
       }
     );
   },
@@ -20,7 +22,11 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(`\n${MANAGER.ASK_MOVE}\n`, (input) => {
+      new MoveSpace(input);
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
