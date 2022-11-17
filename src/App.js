@@ -52,6 +52,19 @@ class App {
       }
     );
   }
+
+  movePlayer(direction) {
+    const canCross = direction === Number(this.#bridge[this.#curPlace++]);
+    if (canCross) {
+      this.#bridgeMap[DIRECTION[direction]].push('O');
+    } else {
+      this.#bridgeMap[DIRECTION[direction]].push('X');
+    }
+    this.#bridgeMap[DIRECTION[(direction + 1) % 2]].push(' ');
+    this.judge(canCross);
+  }
+
+  judge(canCross) {}
 }
 
 const app = new App();
