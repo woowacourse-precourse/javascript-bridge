@@ -16,5 +16,10 @@ class App {
     const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.#model = new BridgeGame(bridge);
   }
+
+  handleMoving(moving) {
+    this.#model.move(moving);
+    OutputView.printMap(this.#model.getMap());
+  }
 }
 module.exports = App;
