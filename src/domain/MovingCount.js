@@ -1,15 +1,15 @@
 class MovingCount {
   #totalMovingCount;
-  #currentMovingCount;
+  #currentBridgeLocation;
 
   constructor() {
     this.#totalMovingCount = 0;
-    this.#currentMovingCount = 0;
+    this.#currentBridgeLocation = 0;
   }
 
   add1MovingCount() {
     this.#totalMovingCount += 1;
-    this.#currentMovingCount += 1;
+    this.#currentBridgeLocation += 1;
   }
 
   getTotalMovingCount() {
@@ -17,6 +17,6 @@ class MovingCount {
   }
 
   resetCurrentMovingCount() {
-    this.#currentMovingCount = 0;
+    this.#currentBridgeLocation = 0;
   }
 }
