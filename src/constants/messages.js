@@ -4,6 +4,7 @@ const MESSAGE_GAME = Object.freeze({
 
 const MESSAGE_QUESTION = Object.freeze({
   BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',
+  PLAYER_MOVING: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
 });
 
 const ERROR = '[ERROR]';
