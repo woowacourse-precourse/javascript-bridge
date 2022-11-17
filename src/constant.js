@@ -31,4 +31,9 @@ const LETTER = Object.freeze({
   wrong: "X",
 });
 
-module.exports = { MESSAGE, ERROR_MESSAGE, INPUT_MESSAGE, LETTER };
+const NUMBER_MAP = Object.freeze({
+  0: "D",
+  1: "U",
+});
+
+module.exports = { MESSAGE, ERROR_MESSAGE, INPUT_MESSAGE, LETTER, NUMBER_MAP };
