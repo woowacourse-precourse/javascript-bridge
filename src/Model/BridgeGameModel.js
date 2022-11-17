@@ -3,6 +3,12 @@ const BridgeGameModel = class {
   #bridge;
   #try;
   constructor() {}
+
+  try(brige) {
+    this.#try = 1;
+    this.#bridge = brige;
+    this.#user = [];
+  }
 };
 
 module.exports = BridgeGameModel;
