@@ -1,8 +1,7 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const MissionUtils = require('@woowacourse/mission-utils');
-const { printResult } = require('./OutputView');
+const Check = require('./Check');
 const OutputView = require('./OutputView');
 class BridgeGame {
   #brigeShape;
@@ -10,11 +9,13 @@ class BridgeGame {
   #uparray;
   #downarray;
   #playerInput;
+  #isGameOver;
   constructor(brigeShape) {
     this.#brigeShape = brigeShape;
     this.#index = 0;
     this.#uparray = [];
     this.#downarray = [];
+    this.#isGameOver = false;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -23,7 +24,6 @@ class BridgeGame {
    */
   move(playerInput) {
     this.#playerInput = playerInput;
-    MissionUtils.Console.print(this.#brigeShape);
     if (this.#playerInput === this.#brigeShape[this.#index]) {
       this.playerInputTrue();
     } else {
@@ -31,7 +31,7 @@ class BridgeGame {
     }
     OutputView.printMap(this.#uparray, this.#downarray);
     this.#index++;
-    if (this.#index === this.#brigeShape.length) OutputView.printResult();
+    return Check.checkIsGameOver(this.#isGameOver, this.#index, this.#brigeShape.length);
   }
 
   playerInputTrue() {
@@ -42,16 +42,18 @@ class BridgeGame {
     }
     this.#uparray.push(' ');
     this.#downarray.push('O');
-    return;
   }
+
   playerInputFalse() {
     if (this.#playerInput === 'D') {
       this.#uparray.push(' ');
       this.#downarray.push('X');
+      this.#isGameOver = true;
       return;
     }
     this.#uparray.push('X');
     this.#downarray.push(' ');
+    this.#isGameOver = true;
   }
 
   /**
@@ -59,7 +61,12 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#isGameOver = false;
+    this.#index = 0;
+    this.#uparray = [];
+    this.#downarray = [];
+  }
 }
 
 module.exports = BridgeGame;
