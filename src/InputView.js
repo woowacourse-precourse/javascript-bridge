@@ -26,7 +26,7 @@ const InputView = {
   readMoving(next) {
     const message = "이동할 칸을 선택해주세요. (위: U, 아래: D)";
     Console.readLine(message, (command) => {
-      const validatedCommand = validateCommand(command, ["U", "D"]);
+      const validatedCommand = Validation.validateCommand(command, ["U", "D"]);
       next(validatedCommand);
     });
   },
