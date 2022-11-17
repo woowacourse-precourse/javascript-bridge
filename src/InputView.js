@@ -13,7 +13,7 @@ const InputView = {
   readBridgeSize() {
     let length;
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.", (input) => {
-      // 예외 처리 구현 시 parseInt 변경
+      this.validSize(input);
       length = parseInt(input);
     });
     return length;
@@ -27,6 +27,7 @@ const InputView = {
     MissionUtils.Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (input) => {
+        this.validMoveKey(input);
         move = input;
       }
     );
@@ -41,10 +42,35 @@ const InputView = {
     MissionUtils.Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
       (input) => {
+        this.validCommandKey(input);
         command = input;
       }
     );
     return command;
+  },
+
+  validSize(input) {
+    if (isNaN(+input)) {
+      throw new Error("[ERROR] 숫자만 입력해주세요");
+    }
+    if (!(input >= 3 && input <= 20)) {
+      MissionUtils.Console.close();
+      throw new Error("[ERROR] 다리의 길이는 3~20 사이여야 합니다.");
+    }
+  },
+
+  validMoveKey(input) {
+    if (input !== "U" && input !== "D") {
+      MissionUtils.Console.close();
+      throw new Error("[ERROR] 이동할 칸은 U 혹은 D 중에 입력해야합니다.");
+    }
+  },
+
+  validCommandKey(input) {
+    if (input !== "R" && input !== "Q") {
+      MissionUtils.Console.close();
+      throw new Error("[ERROR] 게임 진행은 R 혹은 Q 중에 입력해야합니다.");
+    }
   },
 };
 
