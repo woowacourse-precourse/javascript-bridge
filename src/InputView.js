@@ -38,9 +38,13 @@ const InputView = {
 
       let maxPosition = bridgeGame.getBridge().length - 1;
       let position = bridgeGame.getPosition();
-      position === maxPosition
-        ? console.log('게임 끝')
-        : this.readMoving(bridgeGame);
+      if (position === maxPosition) {
+        bridgeGame.setIsSuccess("성공");
+        OutputView.printResult(bridgeGame);
+        return bridgeGame.exit(); w
+      }
+      if (position !== maxPosition)
+        this.readMoving(bridgeGame);
     })
   },
 
