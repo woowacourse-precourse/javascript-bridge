@@ -10,7 +10,12 @@ const InputView = {
   },
 
   readBridgeSize(size) {
-    bridgeGame.buildBridge(size);
+    try {
+      bridgeGame.buildBridge(size);
+    } catch ({ message }) {
+      Console.print(message);
+      InputView.requestBridgeSize();
+    }
   },
 
   readMoving() {},
