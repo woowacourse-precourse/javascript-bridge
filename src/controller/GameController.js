@@ -5,9 +5,10 @@ const Convertor = require('../utils/Convertor');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const PlayerInputChecker = require('./PlayerInputChecker');
+const BridgeGame = require('../models/BridgeGame');
 
 class GameController {
-  #bridge;
+  #bridgeGame;
 
   playGame() {
     OutputView.printStartMessage();
@@ -18,7 +19,9 @@ class GameController {
     BridgeChecker.checkRowDataOfBridgeSize(rowDataOfBridgeSize);
     const bridgeSize = Convertor.convertStringToDecimalNumber(rowDataOfBridgeSize);
     BridgeChecker.checkBridgeSize(bridgeSize);
-    this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator);
+    this.#bridgeGame = new BridgeGame(
+      BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate)
+    );
     this.#beginGame();
   }
 
@@ -28,6 +31,7 @@ class GameController {
 
   #movePlayer(direction) {
     PlayerInputChecker.checkDirection(direction);
+    this.#bridgeGame.move(direction);
   }
 }
 
