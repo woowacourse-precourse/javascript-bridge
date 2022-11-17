@@ -20,10 +20,11 @@ class BridgeGame {
   }
 
   checkGameEnd() {
-    for (let i = 0; i < this.#movingLog.length; i += 1) {
-      if (i === this.#bridge.length - 1 || this.#bridge[i] !== this.#movingLog[i]) {
-        return true;
-      }
+    if (this.#movingLog.length === this.#bridge.length) {
+      return true;
+    }
+    if (this.#movingLog.length > 0 && this.#bridge.at(-1) !== this.#movingLog.at(-1)) {
+      return true;
     }
 
     return false;
