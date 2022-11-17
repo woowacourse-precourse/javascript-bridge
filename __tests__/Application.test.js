@@ -85,4 +85,12 @@ describe('3 ~ 20 범위 체크 함수 테스트', () => {
       }).toThrow(RANGE_ERROR_TEXT);
     },
   );
+
+  test('인자가 숫자가 아니라면 예외를 발생한다.', () => {
+    expect(() => {
+      const EXPECTED = NaN;
+
+      Application.checkRangeThreeToTwenty(EXPECTED);
+    }).toThrow(NUMBER_ERROR_TEXT);
+  });
 });
