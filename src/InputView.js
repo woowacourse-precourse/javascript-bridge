@@ -1,4 +1,4 @@
-const input = require('./Utils');
+const Utils = require('./Utils');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -13,21 +13,21 @@ const InputView = Object.freeze({
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    input(this.GAME_INPUT_MESSAGES.BRIDGE, callback);
+    Utils.input(this.GAME_INPUT_MESSAGES.BRIDGE, callback);
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(callback) {
-    input(this.GAME_INPUT_MESSAGES.MOVE, callback);
+    Utils.input(this.GAME_INPUT_MESSAGES.MOVE, callback);
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(callback) {
-    input(this.GAME_INPUT_MESSAGES.RETRY, callback);
+    Utils.input(this.GAME_INPUT_MESSAGES.RETRY, callback);
   },
 });
 
