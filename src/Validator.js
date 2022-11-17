@@ -18,6 +18,11 @@ const Validator = Object.freeze({
     if (input !== 'D' && input !== 'U') throw new Error(ERROR_MESSAGES.ONLY_U_D);
     else return true;
   },
+
+  checkGameOption(input) {
+    if (input !== 'R' && input !== 'Q') throw new Error(ERROR_MESSAGES.ONLY_R_Q);
+    else return true;
+  },
 });
 
 module.exports = Validator;
