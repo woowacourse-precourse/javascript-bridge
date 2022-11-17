@@ -18,13 +18,16 @@ class SizeConstraints {
   checkNumberRange() {
     const numberdSize = Number(this.#size);
 
-    if (numberdSize < 3 || numberdSize > 20) {
+    if (
+      numberdSize < ConstraintsConstants.MINIMUM_SIZE_RANGE ||
+      numberdSize > ConstraintsConstants.MAXIMUM_SIZE_RANGE
+    ) {
       throw ConstraintsConstants.ERROR_NOT_IN_RANGE;
     }
   }
 
   checkStartZero() {
-    if (this.#size[0] === "0") {
+    if (this.#size[0] === ConstraintsConstants.START_STRING_OF_SIZE) {
       throw ConstraintsConstants.ERROR_DONT_START_ZERO;
     }
   }
@@ -38,7 +41,10 @@ class MoveConstraints {
   }
 
   checkInputUorD() {
-    if (this.#wantGo !== "U" && this.#wantGo !== "D") {
+    if (
+      this.#wantGo !== ConstraintsConstants.UPPER_BRIDGE_STRING &&
+      this.#wantGo !== ConstraintsConstants.LOWER_BRIDGE_STRING
+    ) {
       throw ConstraintsConstants.ERROR_NOT_ONLY_U_OR_D;
     }
   }
@@ -52,7 +58,10 @@ class CommandConstraints {
   }
 
   checkInputRorQ() {
-    if (this.#command !== "R" && this.#command !== "Q") {
+    if (
+      this.#command !== ConstraintsConstants.RETRY_STRING &&
+      this.#command !== ConstraintsConstants.END_GAME_STRING
+    ) {
       throw ConstraintsConstants.ERROR_NOT_ONLY_R_OR_Q;
     }
   }

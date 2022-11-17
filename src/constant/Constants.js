@@ -15,10 +15,17 @@ const OutputConstants = {
 };
 
 const ConstraintsConstants = {
+  MINIMUM_SIZE_RANGE: 3,
+  MAXIMUM_SIZE_RANGE: 20,
+  START_STRING_OF_SIZE: "0",
   ERROR_NOT_ONLY_NUMBER: "[ERROR] 숫자만 입력 가능합니다.\n",
   ERROR_NOT_IN_RANGE: "[ERROR] 다리 길이는 3 이상 20 이하만 가능합니다.\n",
   ERROR_DONT_START_ZERO: "[ERROR] 0으로 시작하는 숫자는 입력할 수 없습니다.\n",
+  UPPER_BRIDGE_STRING: "U",
+  LOWER_BRIDGE_STRING: "D",
   ERROR_NOT_ONLY_U_OR_D: "[ERROR] U 혹은 D만 입력 가능합니다.\n",
+  RETRY_STRING: "R",
+  END_GAME_STRING: "Q",
   ERROR_NOT_ONLY_R_OR_Q: "[ERROR] R 혹은 Q만 입력 가능합니다.\n",
 };
 
