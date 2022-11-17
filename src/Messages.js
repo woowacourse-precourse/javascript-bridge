@@ -4,6 +4,7 @@ const MESSAGE = Object.freeze({
     ENTER_MOVE_TYPE: "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
     ENTER_COMMAND: "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
     GAME_RESULT: "최종 게임 결과\n",
+    GAME_SUCCESS_STATE: "게임 성공 여부: ",
 });
 
 const ERROR = Object.freeze({
