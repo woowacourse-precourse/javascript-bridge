@@ -52,7 +52,9 @@ class App {
   }
 
   requestRestartOrQuit() {
-    InputView.readGameCommand((commandOption) => {});
+    InputView.readGameCommand((commandOption) => {
+      const { errorMsg } = Validation.checkCommandOption(commandOption);
+    });
   }
 }
 

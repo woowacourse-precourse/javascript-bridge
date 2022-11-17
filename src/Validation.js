@@ -16,6 +16,13 @@ const Validation = {
 
     return { errorMsg: '\n[ERROR] U 또는 D만 입력할 수 있습니다.' };
   },
+
+  checkCommandOption(commandOption) {
+    if (commandOption === 'R' || commandOption === 'Q')
+      return { errorMsg: undefined };
+
+    return { errorMsg: '\n[ERROR] R 또는 Q만 입력할 수 있습니다.' };
+  },
 };
 
 module.exports = Validation;
