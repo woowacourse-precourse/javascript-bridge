@@ -21,10 +21,15 @@ class App {
     this.inputMoving();
   }
   inputMoving() {
-    InputView.readMoving(this.passBridge);
+    InputView.readMoving(this.passBridge.bind(this));
   }
   passBridge(direction) {
-    console.log(direction);
+    const { upBridgeRecord, downBridgeRecord } = this.bridgeGame.move(direction);
+    this.printBridge(upBridgeRecord, downBridgeRecord);
+  }
+  printBridge(upBridgeRecord, downBridgeRecord) {
+    OutputView.printBridge(upBridgeRecord, downBridgeRecord);
+    this.inputMoving();
   }
 }
 
