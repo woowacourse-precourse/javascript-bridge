@@ -17,3 +17,5 @@ const BRIDGE_COMPONENT = {
   DIVIDER: ' | ',
   END: ' ]',
 };
+
+module.exports = { GAME_MESSAGE, INPUT_MESSAGE, BRIDGE_COMPONENT };
