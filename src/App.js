@@ -26,6 +26,14 @@ class App {
 
       const bridge = BridgeMaker.makeBridge(Number(size), generate);
       this.bridgeGame = new BridgeGame(bridge);
+
+      this.requestDirection();
+    });
+  }
+
+  requestDirection() {
+    InputView.readMoving((direction) => {
+      const { errorMsg } = Validation.checkDirection(direction);
     });
   }
 }
