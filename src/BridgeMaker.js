@@ -9,12 +9,10 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
-    Array(Number(size))
-      .fill('')
-      .forEach(() => {
-        const number = generateRandomNumber();
-        number === 0 ? bridge.push('U') : bridge.push('D');
-      });
+    Array.from(Array(size)).forEach(() => {
+      const number = generateRandomNumber();
+      number === 0 || number === '0' ? bridge.push('D') : bridge.push('U');
+    });
     return bridge;
   },
 };
