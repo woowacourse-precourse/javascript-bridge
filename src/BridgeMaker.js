@@ -8,7 +8,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
-    for (count = 0; count < size; count++) {
+    for (let count = 0; count < size; count++) {
       const block = generateRandomNumber() == 0 ? VALUE.DOWN : VALUE.UP;
       bridge.push(block);
     }
