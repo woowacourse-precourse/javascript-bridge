@@ -7,10 +7,8 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    Console.readLine("다리의 길이를 입력해주세요.", (answer) => {
-      console.log(`닉네임: ${answer}`);
-    });
+  readBridgeSize(callback) {
+    Console.readLine("다리의 길이를 입력해주세요.\n", callback);
   },
 
   /**
