@@ -51,7 +51,7 @@ class Controller {
   }
 
   #handleGameEnd() {
-    const { resultToString, gameStatus } = this.#bridgeGame.getResultMap();
+    const { resultToString, gameStatus } = this.#bridgeGame.move();
     OutputView.printResult(resultToString, gameStatus, this.#tryCount);
   }
 }

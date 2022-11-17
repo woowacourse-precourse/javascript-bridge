@@ -30,16 +30,16 @@ class BridgeGame {
    */
 
   /**
-   * @param {string} input 플레이어의 입력
+   * @param {string | null} input 플레이어의 입력
    * @return {resultMap} 출력할 map을 반환
    */
-  move(input) {
-    if (this.#inputs.length < this.#bridge.length) {
+  move(input = null) {
+    if (input && this.#inputs.length < this.#bridge.length) {
       this.#inputs.push(input);
     }
     this.#checkGameEnd();
 
-    return this.getResultMap();
+    return this.#getResultMap();
   }
 
   #checkGameEnd() {
@@ -51,7 +51,7 @@ class BridgeGame {
   /**
    * @return {resultMap} 출력할 map을 반환
    */
-  getResultMap() {
+  #getResultMap() {
     const abovePartString = `${BRIDGE.START} ${this.#makeAbovePart()} ${BRIDGE.END}`;
     const belowPartString = `${BRIDGE.START} ${this.#makeBelowPart()} ${BRIDGE.END}`;
     const resultToString = `${abovePartString}\n${belowPartString}`;
