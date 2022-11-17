@@ -46,7 +46,7 @@ class CrossingBridge {
   }
 
   size() {
-
+    return this.#up.length;
   }
 }
 
