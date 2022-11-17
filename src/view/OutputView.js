@@ -1,3 +1,5 @@
+const { OUTPUT_MESSAGE } = require('../constants/Message');
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -10,22 +12,21 @@
 const OutputView = {
   
   printMap() {},
-
   
   printResult() {
-    Console.print('최종 게임 결과');
+    Console.print(OUTPUT_MESSAGE.GAME_RESULT);
   },
 
   printWin() {
-    Console.print('게임성공 여부: 성공');
+    Console.print(OUTPUT_MESSAGE.GAME_WIN);
   },
 
   printFail() {
-    Console.print('게임성공 여부: 실패');
+    Console.print(OUTPUT_MESSAGE.GAME_FAIL);
   },
 
   printAttemptCount(countAttempt) {
-    Console.print(`총 시도한 횟수: ${countAttempt}`)
+    Console.print(OUTPUT_MESSAGE.GAME_ATTEMPT `${countAttempt}`);
   },
 };
 
