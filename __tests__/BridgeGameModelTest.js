@@ -12,4 +12,14 @@ describe("BridgeGameModel 클래스 테스트", () => {
 
     expect(bridgeGameModel.jumpDown()).toEqual({ user: ["D"], bridge: [] });
   });
+
+  test.each([["U"], ["U", "D"]])(
+    "메세지를 통해 유효한 bridge 데이터인지 확인하고 유효하지 않다면 Error를 던진다.",
+    (input) => {
+      expect(() => {
+        const bridgeGameModel = new BridgeGameModel();
+        bridgeGameModel.checkBridge(input);
+      }).toThrow("[ERROR]");
+    }
+  );
 });
