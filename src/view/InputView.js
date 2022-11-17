@@ -1,7 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const bridgeGame = require('../model/BridgeGame');
 const {CONSOLELINE} = require('../utils/Constants');
 const validation = require('../utils/Validation');
 const OutputView = require('./OutputView');
@@ -23,11 +22,11 @@ const InputView = {
       } catch(err){
         return this.readBridgeSize();
       }
-      this.getBridge(input);
+      this.getBridgeAnswer(input);
     })
   },
 
-  getBridge(input){
+  getBridgeAnswer(input){
     const bridgeAnswer = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator.generate);
     answer = bridgeAnswer;
     this.readMoving(bridgeAnswer, 0);
@@ -45,16 +44,16 @@ const InputView = {
       }
       const gameLog = OutputView.printMap(answer, upOrdown);
       move_cnt += 1;
-      this.restartOrSuccess(move_cnt, gameLog)
+      this.checkNeedtoStop(move_cnt, gameLog);
     })
   },
 
-  restartOrSuccess(move_cnt, gameLog){
-    if(this.restartCheck(move_cnt, gameLog)){
+  checkNeedtoStop(move_cnt, gameLog){
+    if(validation.isRestartRequired(move_cnt, gameLog, answer)){
       this.readGameCommand(gameLog);
     }
-    if (this.SuccessCheck(move_cnt, gameLog)){
-      OutputView.SuccessOutput(gameLog);
+    if (validation.isSuccess(move_cnt, gameLog, answer)){
+      OutputView.printResult(gameLog, CONSOLELINE.SUCCESS_RESULT, false);
     }
     else{
       this.readMoving(answer, move_cnt);
@@ -71,28 +70,9 @@ const InputView = {
       } catch(err){
         return this.readGameCommand();
       }
-      restart === 'R' ? this.readMoving(answer, 0) : OutputView.failOutputandNomoreGame(gameLog);
+      restart === 'R' ? this.readMoving(answer, 0) : OutputView.printResult(gameLog, CONSOLELINE.FAIL_RESULT, true);
     })
   },
-
-  restartCheck(cnt_move, gameLog){
-    if (cnt_move == answer.length && gameLog[0][gameLog[0].length-1] !== 'O' && gameLog[1][gameLog[1].length-1] !== 'O'){
-      bridgeGame.retry();
-      return true;
-    }
-    if (gameLog[0][gameLog[0].length-1] === 'X' || gameLog[1][gameLog[1].length-1] === 'X'){
-      bridgeGame.retry();
-      return true;
-    }
-    return false;
-  },
-
-  SuccessCheck(cnt_move, gameLog){
-    if (cnt_move == answer.length && gameLog[0][gameLog[0].length-1] !== 'X' && gameLog[1][gameLog[1].length-1] !== 'X'){
-      return true;
-    }
-    return false;
-  }
 };
 
 module.exports = InputView;
