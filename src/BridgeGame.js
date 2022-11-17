@@ -38,8 +38,20 @@ class BridgeGame {
     this.#gameResult = this.#gameResult + "X";
   }
 
+  reset() {
+    const reset = "";
+    const resetIndex = 0;
+    this.#gameResult = reset;
+    this.#indexCount = resetIndex;
+    this.#tryCount = this.#tryCount + 1;
+  }
+
   result() {
     return this.#gameResult;
+  }
+
+  getTryCount() {
+    return this.#tryCount;
   }
 
   move(safeBridge, userMove) {
