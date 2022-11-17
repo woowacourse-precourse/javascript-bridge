@@ -10,6 +10,7 @@ const OutputView = require("./OutputView");
 class BridgeGame {
   #bridge;
   #moveCount;
+  #tryCount = 0;
   #gameOver = false;
   usersMove = [];
 
@@ -32,6 +33,7 @@ class BridgeGame {
  * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
  */
   move(inputMoving) {
+    console.log(this.#bridge);
     if (this.#bridge[this.#moveCount] === inputMoving) {
       this.usersMove.push([inputMoving, 'O']);
     } else {
@@ -46,7 +48,7 @@ class BridgeGame {
 
   checkCanMoveNextStep() {
     if (this.#gameOver === true) {
-      InputView.readGameCommand();
+      InputView.readGameCommand(this.checkRetryOrEnd.bind(this));
       return;
     }
 
@@ -59,6 +61,16 @@ class BridgeGame {
     return;
   }
 
+  checkRetryOrEnd(inputRetryOrEnd) {
+    if (inputRetryOrEnd === 'R') {
+      this.retry();
+      return;
+    }
+
+    this.end();
+    return;
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
@@ -66,6 +78,12 @@ class BridgeGame {
    */
   retry() {
     this.#moveCount = 0;
+    this.#tryCount += 1;
+    this.usersMove = [];
+    this.#gameOver = false;
+
+    console.log('tryCount', this.#tryCount);
+    InputView.readMoving(this.move.bind(this));
   }
 
   end() {}
