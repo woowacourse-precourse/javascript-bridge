@@ -7,8 +7,13 @@ const Validator = Object.freeze({
     const trimedInput = input.trim();
     if (trimedInput.match(this.spaceReg)) throw new Error(ERROR_MESSAGES.NOT_EMPTY);
   },
+
+  checkNan(input) {
+    if (Number.isNaN(+input)) throw new Error(ERROR_MESSAGES.NOT_NAN);
+    else return true;
+  },
 });
 
 module.exports = Validator;
 
-console.log(Validator.checkSpace('   sa d '));
+console.log(Validator.checkNan('saN'));
