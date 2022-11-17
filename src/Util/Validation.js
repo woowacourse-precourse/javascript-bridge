@@ -1,16 +1,10 @@
 const Validation = {
   ValidCmd(cmd) {
-    if (cmd != "R" && cmd != "Q") {
-      return false;
-    }
-    return true;
+    return cmd != "R" && cmd != "Q" ? false : true;
   },
 
   ValidMove(move) {
-    if (move != "U" && move != "D") {
-      return false;
-    }
-    return true;
+    return move != "U" && move != "D" ? false : true;
   },
 
   ValidSize(input) {
@@ -18,17 +12,11 @@ const Validation = {
   },
 
   CheckNotANumber(input) {
-    if (isNaN(input)) {
-      return false;
-    }
-    return true;
+    return !isNaN(input) ? true : false;
   },
 
   CheckInputRange(input) {
-    if (+input < 3 || +input > 20) {
-      return false;
-    }
-    return true;
+    return +input < 3 || +input > 20 ? false : true;
   },
 };
 
