@@ -6,7 +6,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 
-const bridgeGame = new BridgeGame(0, "", 1);
+const bridgeGame = new BridgeGame(0, [[], []], 1);
 
 class BridgeController {
   gameStart() {
@@ -35,30 +35,31 @@ class BridgeController {
       Validation.checkMove(move);
 
       const passOrFail = bridgeGame.move(safeBridge, move);
-      const bridgeGameResult = bridgeGame.result().split("");
+      const bridgeGameResult = bridgeGame.result();
+      OutputView.printMap(bridgeGameResult);
 
       if (passOrFail === false) {
-        OutputView.printMap(bridgeGameResult);
         this.retryOrExit(safeBridge, bridgeGameResult);
       }
+
+      if (
+        passOrFail === true &&
+        bridgeGameResult[0].length === safeBridge.length
+      ) {
+        this.gameEndPoint(bridgeGameResult);
+        return Console.close();
+      }
+
       if (passOrFail === true) {
-        OutputView.printMap(bridgeGameResult);
         this.userMove(safeBridge);
       }
-      this.gameEndPoint(safeBridge, bridgeGameResult);
     });
   }
 
-  gameEndPoint(safeBridge, bridgeGameResult) {
-    if (bridgeGameResult[safeBridge.length - 1] === "O") {
-      OutputView.printResult(
-        bridgeGameResult,
-        "성공",
-        bridgeGame.getTryCount()
-      );
-      Console.close();
-      return;
-    }
+  gameEndPoint(bridgeGameResult) {
+    OutputView.lineBreak();
+
+    OutputView.printResult(bridgeGameResult, "성공", bridgeGame.getTryCount());
   }
 
   retryOrExit(safeBridge, bridgeGameResult) {
