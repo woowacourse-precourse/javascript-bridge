@@ -1,22 +1,29 @@
 const { LETTER, ERROR_MESSAGE } = require("./constant");
+const { Console } = require("@woowacourse/mission-utils");
 
 const Validation = {
   checkBridgeNumber(number) {
     if (number < 3 || number > 20 || !Number.isInteger(number)) {
-      throw new Error(ERROR_MESSAGE.notInRange);
+      Console.print(ERROR_MESSAGE.notInRange);
+      return false;
     }
+    return true;
   },
 
   checkUorD(letter) {
     if (letter !== LETTER.up && letter !== LETTER.down) {
-      throw new Error(ERROR_MESSAGE.notUorD);
+      Console.print(ERROR_MESSAGE.notUorD);
+      return false;
     }
+    return true;
   },
 
   checkRorQ(letter) {
     if (letter !== LETTER.retry && letter !== LETTER.quit) {
-      throw new Error(ERROR_MESSAGE.notRorQ);
+      Console.print(ERROR_MESSAGE.notRorQ);
+      return false;
     }
+    return true;
   },
 };
 

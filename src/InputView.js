@@ -12,13 +12,17 @@ const InputView = {
   readBridgeSize(setBridge, move, retry) {
     this.setMethods(setBridge, move, retry);
     Console.readLine(INPUT_MESSAGE.numberOfBridge, (number) => {
-      Validation.checkBridgeNumber(Number(number));
-      const bridge = BridgeMaker.makeBridge(
-        Number(number),
-        BridgeRandomNumberGenerator.generate
-      );
-      this.setBridge(bridge);
-      this.readMoving();
+      const validity = Validation.checkBridgeNumber(Number(number));
+      if (validity) {
+        const bridge = BridgeMaker.makeBridge(
+          Number(number),
+          BridgeRandomNumberGenerator.generate
+        );
+        this.setBridge(bridge);
+        this.readMoving();
+      } else {
+        this.readBridgeSize(setBridge, move, retry);
+      }
     });
   },
 
@@ -33,16 +37,21 @@ const InputView = {
   readMoving() {
     Console.readLine(INPUT_MESSAGE.chooseUpOrDown, (input) => {
       const letter = input.toUpperCase();
-      Validation.checkUorD(letter);
-      const { correct, map, gameOver, trialTime } = this.move(letter);
-      OutputView.printMap(map);
-      this.nextAction({ correct, map, gameOver, trialTime });
+      const validity = Validation.checkUorD(letter);
+      if (validity) {
+        const { correct, map, gameOver, trialTime } = this.move(letter);
+        OutputView.printMap(map);
+        this.nextAction({ correct, map, gameOver, trialTime });
+      } else {
+        this.readMoving();
+      }
     });
   },
 
   nextAction({ correct, map, gameOver, trialTime }) {
     if (gameOver && correct) {
       this.endGame(map, MESSAGE.win, trialTime);
+      return;
     }
 
     if (correct) {
@@ -60,14 +69,18 @@ const InputView = {
   readGameCommand({ map, trialTime }) {
     Console.readLine(INPUT_MESSAGE.chooseToRetry, (input) => {
       const letter = input.toUpperCase();
-      Validation.checkRorQ(letter);
-      if (letter === LETTER.retry) {
-        this.retry();
-        this.readMoving();
-      }
+      const validity = Validation.checkRorQ(letter);
+      if (validity) {
+        if (letter === LETTER.retry) {
+          this.retry();
+          this.readMoving();
+        }
 
-      if (letter === LETTER.quit) {
-        this.endGame(map, MESSAGE.lose, trialTime);
+        if (letter === LETTER.quit) {
+          this.endGame(map, MESSAGE.lose, trialTime);
+        }
+      } else {
+        this.readGameCommand({ map, trialTime });
       }
     });
   },
@@ -75,7 +88,6 @@ const InputView = {
   endGame(map, result, trialTime) {
     OutputView.printResult(map, result, trialTime);
     Console.close();
-    return;
   },
 };
 
