@@ -1,3 +1,5 @@
+const { KEYWORD } = require("../constants/index.js");
+
 const BridgeGameModel = class {
   #user;
   #bridge;
@@ -13,6 +15,13 @@ const BridgeGameModel = class {
   retry() {
     this.#try += 1;
     this.#user = [];
+  }
+
+  jumpUp() {
+    const { UP } = KEYWORD;
+    this.#user.push(UP);
+    const data = { user: this.#user, bridge: this.#bridge };
+    return data;
   }
 };
 
