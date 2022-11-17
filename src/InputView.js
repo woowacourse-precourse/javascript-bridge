@@ -10,17 +10,22 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine(
-      "다리의 길이를 입력해주세요.\n",
-      (input) =>
-        BridgeMaker.makeBridge(
-          Number(input),
-          BridgeRandomNumberGenerator.generate
-        ),
-      this.readMoving()
-    );
+    Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
+      if (!this.isValidIBridgeSize(input))
+        throw "[ERROR] 3과 20사이의 자연수가 아닙니다.";
+      BridgeMaker.makeBridge(
+        Number(input),
+        BridgeRandomNumberGenerator.generate
+      ),
+        this.readMoving();
+    });
   },
 
+  isValidIBridgeSize(input) {
+    const validInRange = input >= 3 && input <= 20;
+    if (validInRange) return input % 1 === 0;
+    return false;
+  },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
