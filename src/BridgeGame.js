@@ -24,8 +24,7 @@ class BridgeGame {
 
   /**
   * @typedef {object} resultMap
-  * @property {string} upperPart
-  * @property {string} lowerPart
+  * @property {string} resultToString
   * @property {boolean} gameStatus
   */
 
@@ -52,9 +51,12 @@ class BridgeGame {
    * @return {resultMap} 출력할 map을 반환
    */
   getResultMap() {
+    const upperPart = this.#makeUpperPart();
+    const lowerPart = this.#makeLowerPart();
+    const resultToString = `[ ${upperPart} ]\n[ ${lowerPart} ]`;
+
     return {
-      upperPart: this.#makeUpperPart(),
-      lowerPart: this.#makeLowerPart(),
+      resultToString,
       gameStatus: this.#gameStatus,
     };
   }

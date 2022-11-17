@@ -4,11 +4,10 @@ const { Console } = require('@woowacourse/mission-utils');
  */
 const OutputView = {
   /**
-   * @param {string} upperPart // 다리의 윗부분
-   * @param {string[]} lowerPart // 다리의 아랫부분
+   * @param {string} resultToString 다리 건너기 결과 문자열
    */
-  printMap(upperPart, lowerPart) {
-    Console.print(`[ ${upperPart} ]\n[ ${lowerPart} ]`);
+  printMap(resultToString) {
+    Console.print(resultToString);
   },
 
   /**

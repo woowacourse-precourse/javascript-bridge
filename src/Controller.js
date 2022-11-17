@@ -30,8 +30,8 @@ class Controller {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
       try {
         Validator.validateIncludes(['U', 'D'], input);
-        const { upperPart, lowerPart, gameStatus } = this.bridgeGame.move(input);
-        OutputView.printMap(upperPart, lowerPart);
+        const { resultToString, gameStatus } = this.bridgeGame.move(input);
+        OutputView.printMap(resultToString);
         Console.print('');
         if (gameStatus === 2) this.handleGameEnd();
         if (gameStatus === 1) this.handleGameOver();
