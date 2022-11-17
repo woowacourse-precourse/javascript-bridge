@@ -1,9 +1,15 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { bridgeSizeValidate } = require('./Validate');
 
 const InputView = {
   readBridgeSize() {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       Console.readLine('\n다리의 길이를 입력해주세요.\n', (size) => {
+        try {
+          bridgeSizeValidate(size);
+        } catch (e) {
+          reject(e);
+        }
         resolve(size);
       });
     });

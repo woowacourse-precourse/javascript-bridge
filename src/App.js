@@ -14,6 +14,9 @@ class App {
       })
       .then((gameResult) => {
         printResult(gameResult);
+      })
+      .catch((e) => {
+        console.log(e.message);
       });
   }
 
