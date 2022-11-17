@@ -132,4 +132,15 @@ describe('사용자가 게임을 다시 시도할 때 사용하는 메서드 테
 
     expect(bridgeGame.retry.name).toEqual(METHOD_NAME);
   });
+
+  test('유저 포지션 위치를 null로 설정한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const RECEIVED = null;
+
+    bridgeGame.move();
+    bridgeGame.move();
+    bridgeGame.retry();
+
+    expect(bridgeGame.findUserPosition()).toEqual(RECEIVED);
+  });
 });
