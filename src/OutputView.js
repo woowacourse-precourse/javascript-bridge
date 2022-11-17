@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridegConverter = require("./BridgeConverter");
+const Validation = require("./Validation");
 const { Console } = MissionUtils;
 
 /**
@@ -34,14 +35,24 @@ const OutputView = {
    * 2. 총 시도한 횟수와*
    * 3. 게임 맵(answer,input)을 가져와야한다.*
    * => 그럼 총 네개의 인자를 가져와야하는데 어떻게 해야할까.*
-   * 실패여부를 answer과 input을 비교하여서 계산해낼 수 있지 않을까?*
+   * 실패여부를 answer과 input을 비교하여서 계산해낼 수 있지 않을까?
    */
+
+  /**
+   * @param {string[]} answer : U와 D로 이루어진 정답을 가진 문자열 배열
+   * @param {string[]} inputs :  U와 D로 이루어진 사용자의 입력값을 가진 문자열 배열
+   * @param {number} trial : 사용자가 시도한 횟수
+   */
+
   printResult(answer, inputs, trial) {
     Console.print("최종 게임 결과");
     const bridge = BridegConverter.convertToBridge(answer, inputs);
-
-    Console.print(`게임 성공 여부: `);
-    Console.print(`총 시도한 횟수: `);
+    const stringified = bridge.map((b) => b.join(" | "));
+    Console.print(stringified.join("\n"));
+    Console.print(
+      `게임 성공 여부:${Validation.validateSucess(answer, inputs)}`
+    );
+    Console.print(`총 시도한 횟수: ${trial}`);
   },
 };
 
