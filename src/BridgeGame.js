@@ -31,15 +31,29 @@ class BridgeGame {
     this.#indexCount = this.#indexCount + 1;
   }
 
-  pass() {
-    this.#gameResult = this.#gameResult + "O";
+  pass(userMove) {
+    if (userMove === "U") {
+      this.#gameResult[0].push("O");
+      this.#gameResult[1].push(` `);
+    }
+    if (userMove === "D") {
+      this.#gameResult[0].push(` `);
+      this.#gameResult[1].push("O");
+    }
   }
-  fail() {
-    this.#gameResult = this.#gameResult + "X";
+  fail(userMove) {
+    if (userMove === "U") {
+      this.#gameResult[0].push("X");
+      this.#gameResult[1].push(` `);
+    }
+    if (userMove === "D") {
+      this.#gameResult[0].push(` `);
+      this.#gameResult[1].push("X");
+    }
   }
 
   reset() {
-    const reset = "";
+    const reset = [[], []];
     const resetIndex = 0;
     this.#gameResult = reset;
     this.#indexCount = resetIndex;
@@ -56,11 +70,11 @@ class BridgeGame {
 
   move(safeBridge, userMove) {
     if (safeBridge[this.#indexCount] !== this.wordConverse(userMove)) {
-      this.fail();
+      this.fail(userMove);
       return false;
     }
     if (safeBridge[this.#indexCount] === this.wordConverse(userMove)) {
-      this.pass();
+      this.pass(userMove);
       this.indexCountUp();
       return true;
     }
