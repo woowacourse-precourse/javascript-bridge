@@ -28,6 +28,15 @@ class BridgeGame {
   getBridgeResult() {
     return this.#bridgeResult;
   }
+
+  initGame() {
+    this.#trialNumber++;
+    this.#order = 0;
+    this.#bridgeResult = {
+      upResult: [],
+      downResult: [],
+    };
+  }
 }
 
 module.exports = BridgeGame;
