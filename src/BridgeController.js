@@ -33,6 +33,18 @@ class BridgeController {
   userMove(safeBridge) {
     InputView.readMoving((move) => {
       Validation.checkMove(move);
+
+      const passOrFail = bridgeGame.move(safeBridge, move);
+      const bridgeGameResult = bridgeGame.result().split("");
+
+      if (passOrFail === false) {
+        OutputView.printMap(bridgeGameResult);
+        this.retryOrExit(safeBridge, bridgeGameResult);
+      }
+      if (passOrFail === true) {
+        OutputView.printMap(bridgeGameResult);
+        this.userMove(safeBridge);
+      }
     });
   }
 }
