@@ -12,7 +12,11 @@ class App {
 
   play() {
     Console.print(MESSAGE.GAME_START);
-    InputView.readBridgeSize(this.bridge, this.game);
+    try {
+      InputView.readBridgeSize(this.bridge, this.game);
+    } catch (error) {
+      Console.print(error);
+    }
   }
 }
 

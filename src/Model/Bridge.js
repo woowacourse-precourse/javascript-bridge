@@ -10,7 +10,7 @@ class Bridge {
   }
 
   static validate(number) {
-    if (Number.isNaN(number)) {
+    if (Number.isNaN(Number(number))) {
       throw new Error(ERROR_MESSAGE.BRIDGE_ISNAN);
     }
     if (number < 3 || number > 20) throw new Error(ERROR_MESSAGE.BRIDGE_RANGE);
