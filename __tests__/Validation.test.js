@@ -18,6 +18,14 @@ describe('숫자 예외 파악 함수 테스트', () => {
       Validation.number(EXPECTED);
     }).toThrow(NUMBER_ERROR_TEXT);
   });
+
+  test('인수가 "20"이라면 예외를 발생시킨다.', () => {
+    const EXPECTED = '20';
+
+    expect(() => {
+      Validation.number(EXPECTED);
+    }).toThrow(NUMBER_ERROR_TEXT);
+  });
 });
 
 describe('함수 타입 체크 함수 테스트', () => {
