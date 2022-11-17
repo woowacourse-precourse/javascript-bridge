@@ -35,9 +35,7 @@ class App {
 
   renderSuccessBridge() {
     const { upstairBridge, downstairBridge } = this.#bridgeGame.getConvertedBridge();
-
-    //console.log(upstairBridge);
-    //console.log(downstairBridge);
+    OutputView.printMap(upstairBridge, downstairBridge);
     this.checkCompletion();
   }
 
@@ -45,8 +43,7 @@ class App {
     const { upstairBridge, downstairBridge } = this.#bridgeGame.getFailureBridge(
       this.#bridgeGame.getConvertedBridge(),
     );
-    console.log(upstairBridge);
-    console.log(downstairBridge);
+    OutputView.printMap(upstairBridge, downstairBridge);
   }
 
   checkCompletion() {
