@@ -20,9 +20,8 @@ const OutputView = {
    *
    */
   printMap(answer, inputs) {
-    const bridge = BridegConverter.convertToBridge(answer, inputs);
-    const stringified = bridge.map((b) => b.join(" | "));
-    Console.print(stringified.join("\n"));
+    const bridge = BridegConverter.stringifyBridge(answer, inputs);
+    Console.print(bridge);
   },
 
   /**
@@ -46,9 +45,8 @@ const OutputView = {
 
   printResult(answer, inputs, trial) {
     Console.print("최종 게임 결과");
-    const bridge = BridegConverter.convertToBridge(answer, inputs);
-    const stringified = bridge.map((b) => b.join(" | "));
-    Console.print(stringified.join("\n"));
+    const bridge = BridegConverter.stringifyBridge(answer, inputs);
+    Console.print(bridge);
     Console.print(
       `게임 성공 여부:${Validation.validateSucess(answer, inputs)}`
     );
