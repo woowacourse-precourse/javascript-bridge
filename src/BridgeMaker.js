@@ -14,11 +14,13 @@ const BridgeMaker = {
     const BRIDGE_ARRAY = [];
     let whileCount = 0;
     while (whileCount < size) {
-      BRIDGE_ARRAY.push(String(generateRandomNumber()));
+      const number = generateRandomNumber();
+      const COMMAND = String(number) === "1" ? "U" : "D";
+      BRIDGE_ARRAY.push(COMMAND);
       whileCount++;
     }
     return BRIDGE_ARRAY;
-  },
+  }
 };
 
 module.exports = BridgeMaker;
