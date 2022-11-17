@@ -54,6 +54,10 @@ class App {
   requestRestartOrQuit() {
     InputView.readGameCommand((commandOption) => {
       const { errorMsg } = Validation.checkCommandOption(commandOption);
+      if (errorMsg) {
+        Console.print(errorMsg);
+        return this.requestRestartOrQuit();
+      }
     });
   }
 }
