@@ -7,7 +7,7 @@
 
 ## UI 로직
 - [x] 게임 시작 문구를 출력한다. - OutputView#printStart()
-- [ ] 다리의 길이를 입력 받는다.
+- [x] 다리의 길이를 입력 받고 bridgeSize를 private로 BridgeGame 클래스 필드에 추가. - InputView#readBridgeSize()
 - [ ] 이동할 칸을 입력 받는다.
 - [ ] 이동하고 난 결과를 출력한다.
 
