@@ -1,3 +1,4 @@
+const Application = require('./Application');
 const Validation = require('./Validation');
 
 /**
@@ -11,12 +12,12 @@ class BridgeGame {
   }
 
   static replaceString(value) {
-    Validation.number(value);
+    const TARGET_NUMBER = Application.convertNumber(value);
     const [TOP_NUMBER, TOP] = [0, 'D'];
     const [BOTTOM_NUMBER, BOTTOM] = [1, 'U'];
 
-    if (value === TOP_NUMBER) return TOP;
-    if (value === BOTTOM_NUMBER) return BOTTOM;
+    if (TARGET_NUMBER === TOP_NUMBER) return TOP;
+    if (TARGET_NUMBER === BOTTOM_NUMBER) return BOTTOM;
 
     return Validation.throwError(Validation.RANGE_ERROR_TEXT);
   }
