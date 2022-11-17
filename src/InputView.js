@@ -11,15 +11,15 @@ const InputView = {
 
 	readBridgeSize() {
 		MissionUtils.Console.readLine(
-			InputView.START_MSG + "\n" + InputView.READ_BRIDGE_SIZE_MSG,
+			InputView.START_MSG + "\n" + InputView.READ_BRIDGE_SIZE_MSG + "\n",
 			(bridgeSize) => {
-				ExecuteBridgeSizeStep(bridgeSize);
+				InputView.executeBridgeSizeStep(bridgeSize);
 			},
 		);
 	},
 
-	ExecuteBridgeSizeStep(bridgeSize) {
-		Validation.validateBridgeSize(bridgeSize);
+	executeBridgeSizeStep(bridgeSize) {
+		InputView.handlingBridgeSizeError(bridgeSize);
 		InputView.bridge = BridgeMaker.makeBridge(
 			bridgeSize,
 			BridgeRandomNumberGenerator.generate,
@@ -27,13 +27,24 @@ const InputView = {
 		InputView.readMoving();
 	},
 
+	handlingBridgeSizeError(bridgeSize) {
+		try {
+			Validation.validateBridgeSize(bridgeSize);
+		} catch (error) {
+			MissionUtils.Console.print(error);
+			MissionUtils.Console.readLine("", (bridgeSize) => {
+				InputView.executeBridgeSizeStep(bridgeSize);
+			});
+		}
+	},
+
 	readMoving() {
 		MissionUtils.Console.readLine(InputView.READ_MOVING_MSG, (moving) => {
-			ExecuteMovingStep(moving);
+			executeMovingStep(moving);
 		});
 	},
 
-	ExecuteMovingStep(moving) {
+	executeMovingStep(moving) {
 		Validation.validateMoving(moving);
 	},
 
