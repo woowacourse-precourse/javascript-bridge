@@ -1,3 +1,5 @@
+// @ts-check
+
 const { MOVING, MARKING } = require('./utils/const');
 
 class Player {
@@ -6,7 +8,7 @@ class Player {
 
   constructor() {
     this.#step = 0;
-    this.#markingPaper = new Array(2).fill(0).map(() => []);
+    this.#markingPaper = new Array(2).fill(0).map(() => ['']);
   }
 
   /**
