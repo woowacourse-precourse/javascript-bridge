@@ -13,8 +13,8 @@ const InputView = {
   readBridgeSize() {
     Console.readLine('\n다리의 길이를 입력해주세요.\n', (size) => {
       try {
-        Validate.validateSizeRange(size);
-        const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+        Validate.validateSizeRange(Number(size));
+        const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
         InputView.readMoving(bridge);
       } catch (error) {
         OutputView.printErrorMessage(error) || InputView.readBridgeSize();
@@ -30,7 +30,7 @@ const InputView = {
       try {
         Validate.validateMovePosition(movePosition);
       } catch (error) {
-        OutputView.printErrorMessage(error) || InputView.readMoving(size);
+        OutputView.printErrorMessage(error) || InputView.readMoving(bridge);
       }
     });
   },
