@@ -8,7 +8,16 @@ class Bridge {
     this.#bridge = '';
   }
 
+  static validate(number) {
+    if (Number.isNaN(number)) {
+      throw new Error('[ERROR] 숫자를 입력하세요');
+    }
+    if (number < 3 || number > 20)
+      throw new Error('[ERROR] 3이상 20이하의 수를 입력하세요');
+  }
+
   setBridge(number) {
+    this.constructor.validate(number);
     this.#bridge = makeBridge(number, generate);
   }
 
