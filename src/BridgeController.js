@@ -10,13 +10,27 @@ const bridgeGame = new BridgeGame(0, [[], []], 1);
 
 class BridgeController {
   gameStart() {
-    OutputView.gameStart();
+    OutputView.bridgeGameStart();
+    this.getUserBridgeLength();
+  }
 
+  getUserBridgeLength() {
     InputView.readBridgeSize((bridgeLength) => {
-      Validation.checkBridgeLength(bridgeLength);
-
-      this.creatBridge(bridgeLength);
+      if (this.checkBridgeLength(bridgeLength) !== false) {
+        const bridge = this.creatBridge(bridgeLength);
+        this.getUserMove(bridge);
+      }
     });
+  }
+
+  checkBridgeLength(bridgeLength) {
+    try {
+      Validation.checkBridgeLength(bridgeLength);
+    } catch (error) {
+      Console.print(error);
+      this.getUserBridgeLength();
+      return false;
+    }
   }
 
   creatBridge(bridgeLength) {
@@ -25,15 +39,25 @@ class BridgeController {
       BridgeRandomNumberGenerator.generate
     );
 
-    this.getUserMove(bridge);
+    return bridge;
+  }
+
+  checkUserMove(move, bridge) {
+    try {
+      Validation.checkMove(move);
+    } catch (error) {
+      Console.print(error);
+      this.getUserMove(bridge);
+      return false;
+    }
   }
 
   getUserMove(bridge) {
     OutputView.lineBreak();
     InputView.readMoving((move) => {
-      Validation.checkMove(move);
-
-      this.judgementAndShow(bridge, move);
+      if (this.checkUserMove(move, bridge) !== false) {
+        this.judgementAndShow(bridge, move);
+      }
     });
   }
 
@@ -64,11 +88,21 @@ class BridgeController {
     OutputView.printResult(passBridgeResult, "성공", bridgeGame.getTryCount());
   }
 
+  checkUserRetry(userRetry, bridge, passBridgeResult) {
+    try {
+      Validation.checkRetry(userRetry);
+    } catch (error) {
+      Console.print(error);
+      this.getUserRetry(bridge, passBridgeResult);
+      return false;
+    }
+  }
+
   getUserRetry(bridge, passBridgeResult) {
     InputView.readGameCommand((userRetry) => {
-      Validation.checkRetry(userRetry);
-
-      this.judgementRetry(bridge, passBridgeResult, userRetry);
+      if (this.checkUserRetry(userRetry, bridge, passBridgeResult) !== false) {
+        this.judgementRetry(bridge, passBridgeResult, userRetry);
+      }
     });
   }
 
