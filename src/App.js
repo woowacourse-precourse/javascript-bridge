@@ -3,6 +3,10 @@ const InputView = require('./InputView.js');
 const BridgeGame = require('./BridgeGame.js');
 
 class App {
+  constructor() {
+    this.totalTrial = 0;
+  }
+
   /**
    * 게임을 시작하는 메서드
    */
@@ -19,6 +23,7 @@ class App {
    */
   async playOneStep() {
     const move = await InputView.readMoving();
+
     this.game.move(move);
     OutputView.printMap(this.game);
 
@@ -27,7 +32,15 @@ class App {
     else this.playOneStep();
   }
 
-  askRetryGame() {}
+  /**
+   * 게임을 다시 시작할지 묻는 메서드
+   */
+  async askRetryGame() {
+    const willRetry = await InputView.readGameCommand();
+
+    if (this.game.retry(willRetry)) this.playOneStep();
+    else OutputView.printResult(this.game);
+  }
 }
 
 const app = new App();
