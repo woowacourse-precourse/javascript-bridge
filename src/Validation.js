@@ -9,6 +9,7 @@ const Validation = {
     if (number < start || number > end) return false;
     return true;
   },
+
   /**
    * @param {string} length : 다리의 길이 값
    * @returns {number}
@@ -18,14 +19,16 @@ const Validation = {
       throw new Error("[ERROR] 2~20 사이의 숫자를 입력해 주세요");
     }
     const parsedLength = parseInt(length, 10);
-    if (this.isInRange(2, 20, parsedLength)) {
+    if (!this.isInRange(2, 20, parsedLength)) {
       throw new Error("[ERROR] 입력할 수 있는 숫자의 범위를 초과하였습니다.");
     }
     return parsedLength;
   },
+
   /**
    * @param {string} command : 확인이 필요한 문자열
    * @param {string[]} permission : 허가하는 문자열
+   * @return {string}
    */
   validateCommand(command, permission) {
     if (!permission.includes(command)) {
