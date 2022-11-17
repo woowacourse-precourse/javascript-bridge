@@ -18,7 +18,7 @@ const Validation = {
 
   gameCommand: (gameCommand) => {
     if (!Validation.isCorrectGameCommand(gameCommand)) {
-      throw Console.print(ERROR_MESSAGE.MOVING_COMMAND);
+      throw Console.print(ERROR_MESSAGE.GAME_COMMAND);
     }
   },
 

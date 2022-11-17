@@ -37,6 +37,7 @@ const OUTPUT_MESSAGE = {
 const ERROR_MESSAGE = {
   BRIDGE_SIZE: `[ERROR] 다리 길이는 ${BRIDGE.SIZE.MINIMUN}부터 ${BRIDGE.SIZE.MAXIMUM} 사이의 숫자여야 합니다.`,
   MOVING_COMMAND: `[ERROR] 이동할 칸 입력은 "${COMMAND.MOVING.UP}" 또는 "${COMMAND.MOVING.DOWN}"이여야 합니다.`,
+  GAME_COMMAND: `[ERROR] 게임 재시도 여부 입력은 "${COMMAND.GAME.RETRY}" 또는 "${COMMAND.GAME.QUIT}"이여야 합니다.`,
 };
 
 module.exports = {
