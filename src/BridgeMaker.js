@@ -10,10 +10,11 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const BRIDGE_ARRAY = [];
     for (let number = 0; number < size; number += 1) {
-      const ADD_RANDOM_NUMBER = generateRandomNumber.generate();
+      const ADD_RANDOM_NUMBER = generateRandomNumber();
       BRIDGE_ARRAY.push(ADD_RANDOM_NUMBER);
     }
-    return this.transForm(BRIDGE_ARRAY);
+    const BRIDGE = this.transForm(BRIDGE_ARRAY);
+    return BRIDGE;
   },
 
   transForm(array) {

@@ -20,7 +20,8 @@ const InputView = {
   validateInput(userInput) {
     try {
       Validate.sizeInput(userInput);
-      return BridgeMaker.makeBridge(userInput, BridgeRandomNumberGenerator);
+      const BUILD_BRIDGE = BridgeRandomNumberGenerator.generate;
+      return BridgeMaker.makeBridge(userInput, BUILD_BRIDGE);
     } catch (error) {
       MissionUtils.Console.print(error);
       this.readBridgeSize();
