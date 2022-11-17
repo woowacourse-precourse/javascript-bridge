@@ -51,6 +51,8 @@ const InputView = {
     MissionUtils.Console.readLine(MESSAGE.ENTER_COMMAND, (command) => {
       if (!bridgeGame.validateCommand(command))
         return this.readGameCommand(bridgeGame)
+      if (command === "Q")
+        return bridgeGame.exit();
     });
   }
 };
