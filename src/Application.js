@@ -18,6 +18,14 @@ const Application = {
     return checkRange(target);
   },
 
+  createArray(target, mapFn) {
+    const { convertNumber, checkRangeThreeToTwenty } = Application;
+
+    checkRangeThreeToTwenty(target);
+    Validation.func(mapFn);
+
+    return Array.from({ length: convertNumber(target) }, mapFn);
+  },
 };
 
 module.exports = Application;
