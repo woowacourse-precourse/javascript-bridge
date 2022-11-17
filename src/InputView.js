@@ -26,8 +26,13 @@ const InputView = {
   readMoving(move) {
     Console.readLine(INPUT_MESSAGE.chooseUpOrDown, (letter) => {
       Validation.checkUorD(letter);
-      OutputView.printMap(move(letter));
-      this.readMoving(move);
+      const { result, map } = move(letter);
+      OutputView.printMap(map);
+      if (result) {
+        this.readMoving(move);
+      } else {
+        this.readGameCommand();
+      }
     });
   },
 

@@ -14,8 +14,11 @@ class BridgeGame {
    */
   move = (letter) => {
     this.#steps.push(letter);
+    const result =
+      this.#steps[this.#steps.length - 1] ===
+      this.#bridge[this.#steps.length - 1];
     const map = this.getMap();
-    return map;
+    return { map, result };
   };
 
   getMap = () => {
