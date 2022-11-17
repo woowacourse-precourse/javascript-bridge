@@ -1,22 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const Validator = require('./Utils/Validator');
 const { MESSAGES } = require('./constants');
 
 const InputView = {
   readBridgeSize() {
-    MissionUtils.Console.readLine(MESSAGES.GAME.REQUIRE_BRIDGE_SIZE, (input) => {
-      const bridgeSize = Number(input);
-      this.bridgeSizeCheck(bridgeSize);
+    return new Promise((resolve) => {
+      MissionUtils.Console.readLine(MESSAGES.GAME.REQUIRE_BRIDGE_SIZE, (value) => {
+        const result = Number(value);
+        resolve(result);
+      });
     });
-  },
-
-  bridgeSizeCheck(size) {    
-    try {
-      Validator.bridgeSizeCheck(size);
-    } catch(err) {
-      MissionUtils.Console.print(err);
-      this.readBridgeSize();
-    }
   },
 
   readMoving() {},

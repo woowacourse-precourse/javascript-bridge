@@ -1,6 +1,8 @@
 const BRIDGE_REQUIREMENTS = Object.freeze({
   MIN_SIZE: 3,
   MAX_SIZE: 20,
+  UPPER_CODE: 'U',
+  LOWER_CODE: 'D',
 });
 
 const HEADERS = Object.freeze({
@@ -15,7 +17,7 @@ const MESSAGES = Object.freeze({
   ERROR: {
     INVALID_BRIDGE_SIZE: `${HEADERS.ERROR} 다리 길이는 ${BRIDGE_REQUIREMENTS.MIN_SIZE}부터 ${BRIDGE_REQUIREMENTS.MAX_SIZE} 사이의 숫자여야 합니다.`,
     IS_DEMICAL: `${HEADERS.ERROR} 소수가 아닌 정수를 입력해주세요.`
-  }
+  },
 });
 
 exports.MESSAGES = MESSAGES;
