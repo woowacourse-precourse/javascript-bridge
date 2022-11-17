@@ -10,14 +10,14 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const arr = Array.from({ length: size }, () => generateRandomNumber());
     arr.map((v, i) => {
-      if (arr[i] === '0') {
+      if (arr[i] === 0) {
         arr[i] = 'D';
+      } else {
+        arr[i] = 'U';
       }
-      arr[i] = 'U';
     });
     return arr;
   },
-
 };
 
 module.exports = BridgeMaker;
