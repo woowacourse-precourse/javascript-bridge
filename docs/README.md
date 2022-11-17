@@ -48,6 +48,7 @@
     * [x] 게임 성공 여부 출력 printWin()
     * [x] 게임 실패 여부 출력 printFail()
     * [x] 총 시도한 횟수 출력 printAttemptCount()
+    * [x] 게임 시작 메세지 출력 printStart()
 ---
 * [ ] BridgeRandomNumberGenerator
     * [ ] 변경불가
