@@ -1,29 +1,29 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 class BridgeGame {
   #bridge;
-  #result;
+  #map;
 
   constructor(bridge) {
     this.#bridge = bridge;
-    this.#result = [];
+    this.#map = [];
   }
 
   getBridge() {
-    this.#bridge;
+    return this.#bridge;
+  }
+
+  getMap() {
+    return this.#map;
   }
 
   move(moving) {
-    const nextBridge = this.#bridge[this.#result.length];
-    this.#result.push(moving === nextBridge);
-
-    return this.#result;
+    const nextBridge = this.#bridge[this.#map.length];
+    this.#map.push({
+      moving,
+      result: moving === nextBridge,
+    });
   }
 
-  retry() {
-    this.#result = [];
-  }
+  retry() {}
 }
 
 module.exports = BridgeGame;
