@@ -34,15 +34,15 @@ const InputView = {
     Console.readLine(INPUT_MESSAGE.chooseUpOrDown, (input) => {
       const letter = input.toUpperCase();
       Validation.checkUorD(letter);
-      const { result, map, gameOver, trialTime } = this.move(letter);
+      const { correct, map, gameOver, trialTime } = this.move(letter);
       OutputView.printMap(map);
-      if (gameOver && result) {
+      if (gameOver && correct) {
         OutputView.printResult(map, MESSAGE.win, trialTime);
         Console.close();
         return;
       }
 
-      if (result) {
+      if (correct) {
         this.readMoving();
       } else {
         this.readGameCommand({ map, trialTime });

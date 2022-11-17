@@ -19,17 +19,15 @@ class BridgeGame {
    */
   move = (letter) => {
     this.#steps.push(letter);
-    const result = this.#getResult();
+    const correct = this.#isCorrect();
     const gameOver = this.#isGameOver();
     const map = this.#getMap();
-    return { map, result, gameOver, trialTime: this.#trialTime };
+    return { map, correct, gameOver, trialTime: this.#trialTime };
   };
 
-  #getResult() {
-    return (
-      this.#steps[this.#steps.length - 1] ===
-      this.#bridge[this.#steps.length - 1]
-    );
+  #isCorrect() {
+    const lastIndex = this.#steps.length - 1;
+    return this.#steps[lastIndex] === this.#bridge[lastIndex];
   }
 
   #isGameOver() {
