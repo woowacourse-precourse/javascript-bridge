@@ -1,10 +1,10 @@
 const BridgeSize = require("./error/BridgeSize");
+const MoveSpace = require("./error/moveSpace");
+const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 
 const { Console } = require("@woowacourse/mission-utils");
 const { MANAGER } = require("./utils/constants");
-const MoveSpace = require("./error/moveSpace");
-const BridgeGame = require("./BridgeGame");
 
 let bridge = [];
 const InputView = {
@@ -24,6 +24,7 @@ const InputView = {
       new MoveSpace(direction);
       const step = new BridgeGame(stage, bridge);
       step.move(nowStep, direction);
+      if (nowStep < stage) this.readMoving(nowStep + 1, stage);
     });
   },
 
