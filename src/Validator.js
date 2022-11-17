@@ -1,4 +1,7 @@
 const Validator = {
+  /**
+   * @param {number} input // 입력된 숫자
+   */
   validateIsNumber(input) {
     if (!input.trim() || Number.isNaN(Number(input))) {
       throw new Error('[ERROR] 숫자만 입력 가능합니다');
