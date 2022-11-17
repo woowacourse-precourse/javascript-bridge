@@ -1,3 +1,8 @@
+const BRIDGE_RANGE = {
+  MIN: 3,
+  MAX: 20,
+};
+
 const MOVE = {
   UP: 'U',
   DOWN: 'D',
@@ -32,6 +37,7 @@ const ERRORS = {
 };
 
 module.exports = {
+  BRIDGE_RANGE,
   MOVE,
   MAP,
   PHRASE,
