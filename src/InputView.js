@@ -10,6 +10,24 @@ const InputView = {
     });
   },
 
+  readMoving(bridgeGame) {
+    MissionUtils.Console.readLine(
+      "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+      (input) => {
+        this.handleMovingException(input, bridgeGame);
+      }
+    );
+  },
+
+  readGameCommand(bridgeGame) {
+    MissionUtils.Console.readLine(
+      "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (input) => {
+        this.hangleGameCommandException(input, bridgeGame);
+      }
+    );
+  },
+
   handleBrideSizeException(size) {
     try {
       if (!validateBridgeSize(size)) throw new Error();
@@ -23,15 +41,6 @@ const InputView = {
     }
   },
 
-  readMoving(bridgeGame) {
-    MissionUtils.Console.readLine(
-      "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      (input) => {
-        this.handleMovingException(input, bridgeGame);
-      }
-    );
-  },
-
   handleMovingException(input, nowGame) {
     try {
       if (!validateMoving(input)) throw new Error();
@@ -40,15 +49,6 @@ const InputView = {
       MissionUtils.Console.print("[ERROR] U 또는 D를 입력해 주세요.");
       this.readMoving(nowGame);
     }
-  },
-
-  readGameCommand(bridgeGame) {
-    MissionUtils.Console.readLine(
-      "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
-      (input) => {
-        this.hangleGameCommandException(input, bridgeGame);
-      }
-    );
   },
 
   handleGameCommand(input, nowGame) {
