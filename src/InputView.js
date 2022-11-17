@@ -9,27 +9,34 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(setBridge, move) {
+  readBridgeSize(setBridge, move, retry) {
+    this.setMethods(setBridge, move, retry);
     Console.readLine(INPUT_MESSAGE.numberOfBridge, (number) => {
       Validation.checkBridgeNumber(Number(number));
       const bridge = BridgeMaker.makeBridge(
         Number(number),
         BridgeRandomNumberGenerator.generate
       );
-      setBridge(bridge);
-      this.readMoving(move);
+      this.setBridge(bridge);
+      this.readMoving();
     });
+  },
+
+  setMethods(setBridge, move, retry) {
+    this.setBridge = setBridge;
+    this.move = move;
+    this.retry = retry;
   },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(move) {
+  readMoving() {
     Console.readLine(INPUT_MESSAGE.chooseUpOrDown, (letter) => {
       Validation.checkUorD(letter);
-      const { result, map } = move(letter);
+      const { result, map } = this.move(letter);
       OutputView.printMap(map);
       if (result) {
-        this.readMoving(move);
+        this.readMoving();
       } else {
         this.readGameCommand();
       }
