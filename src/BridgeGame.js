@@ -31,6 +31,10 @@ class BridgeGame {
     return this.#userPosition;
   }
 
+  findUserPosition() {
+    return this.#userPosition;
+  }
+
   move() {
     if (this.isBeforeStart()) {
       return this.setFirstPosition();
