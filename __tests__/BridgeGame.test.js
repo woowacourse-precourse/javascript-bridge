@@ -165,4 +165,13 @@ describe('다리를 끝까지 갔는지 확인하는 메서드 테스트', () =>
 
     expect(bridgeGame.isBridgeEnd(arrayLength)).toBeFalsy();
   });
+
+  test('배열의 길이가 3일 때 인덱스 2에 위치한다면 true를 반환한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const arrayLength = 3;
+
+    loop(3, bridgeGame.move.bind(bridgeGame));
+
+    expect(bridgeGame.isBridgeEnd(arrayLength)).toBeTruthy();
+  });
 });
