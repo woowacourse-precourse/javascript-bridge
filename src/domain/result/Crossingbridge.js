@@ -42,7 +42,7 @@ class CrossingBridge {
   }
 
   print() {
-
+    return `[ ${this.#up.join(' | ')} ]\n[ ${this.#down.join(' | ')} ]`;
   }
 
   size() {
