@@ -1,15 +1,19 @@
+// @ts-check
+
 const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const { Console } = require('@woowacourse/mission-utils');
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   /** @type {BridgeGame} */
   #bridgeGame;
   #command;
+  #isSuccess;
 
   constructor() {
-    this.#command = [this.restart, this.quitGame, this.movePlayer];
+    this.#command = [this.restartGame, this.quitGame, this.continueGame];
+    this.#isSuccess = false;
   }
 
   play() {
@@ -20,19 +24,23 @@ class App {
   startGame() {
     InputView.readBridgeSize((bridgeSize) => {
       this.#bridgeGame = new BridgeGame(Number(bridgeSize));
-      this.movePlayer();
+      this.continueGame();
     });
   }
 
-  movePlayer() {
+  continueGame() {
     InputView.readMoving((moving) => {
-      const { status, markingPaper } = this.#bridgeGame.move(moving);
+      const status = this.#bridgeGame.move(moving);
+      const markingPaper = this.#bridgeGame.getMarkingPaper();
+
       OutputView.printMap(markingPaper);
+
+      this.#isSuccess = status !== 0;
       this.#command[status].call(this);
     });
   }
 
-  restart() {
+  restartGame() {
     InputView.readGameCommand((gameCommand) => {
       const status = this.#bridgeGame.retry(gameCommand);
       this.#command[status].call(this);
@@ -40,9 +48,11 @@ class App {
   }
 
   quitGame() {
-    const { markingPaper, isSuccess, count } = this.#bridgeGame.getResultInfo();
-    OutputView.printResult(markingPaper, isSuccess, count);
-    Console.close();
+    const count = this.#bridgeGame.getCount();
+    const markingPaper = this.#bridgeGame.getMarkingPaper();
+
+    OutputView.printResult(markingPaper, this.#isSuccess, count);
+    MissionUtils.Console.close();
   }
 }
 

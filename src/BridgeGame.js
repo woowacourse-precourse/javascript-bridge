@@ -1,7 +1,9 @@
+// @ts-check
+
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const Player = require('./Player');
-const { STEP_STATUS } = require('./utils/const');
+const StatusGenerator = require('./StatusGenerator');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -9,7 +11,7 @@ const { STEP_STATUS } = require('./utils/const');
 class BridgeGame {
   #bridge;
   #player;
-  #result;
+  #count;
 
   /**
    * @param {number} bridgeSize
@@ -18,31 +20,24 @@ class BridgeGame {
     const generate = BridgeRandomNumberGenerator.generate;
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, generate);
     this.#player = new Player();
-    this.#result = { count: 1, isSuccess: false };
+    this.#count = 1;
   }
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * @param {string} moving U 혹은 D
-   * @return {{status: 0 | 1 | 2, markingPaper: string[][] }} 0: Fail, 1: Success, 2: Next
+   * @return {0 | 1 | 2} 0: Fail, 1: Success, 2: Next
    */
   move(moving) {
     const currentStep = this.#player.getStep();
+
     const isCorrect = this.#bridge[currentStep] === moving;
+    const isLast = currentStep === this.#bridge.length - 1;
 
-    const markingPaper = this.#player.markOX(moving, isCorrect);
-    this.#player.setNextStep();
+    this.#player.markOX(moving, isCorrect);
+    this.#player.setStep(currentStep + 1);
 
-    if (!isCorrect) {
-      return { status: STEP_STATUS.FAILURE, markingPaper };
-    }
-
-    if (currentStep === this.#bridge.length - 1) {
-      this.#result.isSuccess = true;
-      return { status: STEP_STATUS.SUCCESS, markingPaper };
-    }
-
-    return { status: STEP_STATUS.NEXT, markingPaper };
+    return StatusGenerator.generate(isCorrect, isLast);
   }
 
   /**
@@ -53,7 +48,7 @@ class BridgeGame {
   retry(gameCommand) {
     if (gameCommand === 'R') {
       this.#player = new Player();
-      this.#result.count += 1;
+      this.#count += 1;
 
       return 2;
     }
@@ -61,11 +56,18 @@ class BridgeGame {
     return 1;
   }
 
-  getResultInfo() {
-    const { count, isSuccess } = this.#result;
-    const markingPaper = this.#player.getMarkingPaper();
+  /**
+   * @returns {number}
+   */
+  getCount() {
+    return this.#count;
+  }
 
-    return { count, isSuccess, markingPaper };
+  /**
+   * @returns  {string[][]}
+   */
+  getMarkingPaper() {
+    return this.#player.getMarkingPaper();
   }
 }
 
