@@ -2,6 +2,9 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { DIRECTION, MESSAGE, ANSWER } = require('./constant');
+const GameController = require('./controllers/GameController');
+const InputView = require('./views/InputView');
+const { readBridgeSize, gameCtrl } = require('./views/InputView');
 
 class App {
   #size;
@@ -10,11 +13,13 @@ class App {
   #numberOfAttempts;
   #bridgeMap;
   #success;
+  #gameCtrl;
 
   constructor() {
     this.init();
     this.#numberOfAttempts = 1;
     this.#success = false;
+    this.#gameCtrl = new GameController();
   }
 
   init() {
@@ -23,91 +28,109 @@ class App {
   }
 
   play() {
-    this.gameStart();
+    // this.gameStart();
+    this.#gameCtrl.gameStart();
+    this.process();
   }
 
-  gameStart() {
-    Console.print('다시 건너기 게임을 시작합니다.\n');
-    this.askBridgeSize();
+  process() {
+    const moveCallback = (direction) => {
+      const isRightChoice = this.#gameCtrl.movePlayer(direction);
+      this.#gameCtrl.printCurMap();
+      isRightChoice ? this.#gameCtrl.isDone() : this.#gameCtrl.askRetry();
+    };
+
+    const sizeCallback = (size) => {
+      this.#gameCtrl = new GameController();
+      this.#gameCtrl.makeBridge(size);
+      InputView.readMoving(moveCallback);
+    };
+
+    InputView.readBridgeSize(sizeCallback);
   }
 
-  askBridgeSize() {
-    Console.readLine('다리의 길이를 입력해주세요.\n', (size) => {
-      this.#size = Number(size);
-      this.makeBridge();
-    });
-  }
+  // gameStart() {
+  //   Console.print('다시 건너기 게임을 시작합니다.\n');
+  //   this.askBridgeSize();
+  // }
 
-  makeBridge() {
-    this.#bridge = BridgeMaker.makeBridge(this.#size, generate);
-    this.askMoveDirection();
-  }
+  // askBridgeSize() {
+  //   Console.readLine('다리의 길이를 입력해주세요.\n', (size) => {
+  //     this.#size = Number(size);
+  //     this.makeBridge();
+  //   });
+  // }
 
-  askMoveDirection() {
-    console.log(this.#bridge);
-    Console.readLine(
-      '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
-      (answer) => {
-        this.movePlayer(Number(DIRECTION[answer]));
-      }
-    );
-  }
+  // makeBridge() {
+  //   this.#bridge = BridgeMaker.makeBridge(this.#size, generate);
+  //   this.askMoveDirection();
+  // }
 
-  movePlayer(direction) {
-    const canCross = direction === Number(this.#bridge[this.#curPlace++]);
-    if (canCross) {
-      this.#bridgeMap[DIRECTION[direction]].push('O');
-    } else {
-      this.#bridgeMap[DIRECTION[direction]].push('X');
-    }
-    this.#bridgeMap[DIRECTION[(direction + 1) % 2]].push(' ');
-    this.judge(canCross);
-  }
+  // askMoveDirection() {
+  //   console.log(this.#bridge);
+  //   Console.readLine(
+  //     '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
+  //     (answer) => {
+  //       this.movePlayer(Number(DIRECTION[answer]));
+  //     }
+  //   );
+  // }
 
-  judge(canCross) {
-    this.printBridgeMap();
-    canCross ? this.isDone() : this.askRetry();
-  }
+  // movePlayer(direction) {
+  //   const canCross = direction === Number(this.#bridge[this.#curPlace++]);
+  //   if (canCross) {
+  //     this.#bridgeMap[DIRECTION[direction]].push('O');
+  //   } else {
+  //     this.#bridgeMap[DIRECTION[direction]].push('X');
+  //   }
+  //   this.#bridgeMap[DIRECTION[(direction + 1) % 2]].push(' ');
+  //   this.judge(canCross);
+  // }
 
-  printBridgeMap() {
-    const bridgeMap = Object.values(this.#bridgeMap);
-    bridgeMap.forEach((map, idx) =>
-      Console.print(`[ ${map.join(' | ')} ]${idx ? '\n' : ''}`)
-    );
-  }
+  // judge(canCross) {
+  //   this.printBridgeMap();
+  //   canCross ? this.isDone() : this.askRetry();
+  // }
 
-  isDone() {
-    if (this.#size === this.#curPlace) {
-      this.#success = true;
-      this.printResult();
-    } else {
-      this.askMoveDirection();
-    }
-  }
+  // printBridgeMap() {
+  //   const bridgeMap = Object.values(this.#bridgeMap);
+  //   bridgeMap.forEach((map, idx) =>
+  //     Console.print(`[ ${map.join(' | ')} ]${idx ? '\n' : ''}`)
+  //   );
+  // }
 
-  askRetry() {
-    this.#numberOfAttempts += 1;
-    Console.readLine(MESSAGE.ASK_RETRY, (answer) => {
-      answer === ANSWER.RETRY ? this.retry() : this.printResult();
-    });
-  }
+  // isDone() {
+  //   if (this.#size === this.#curPlace) {
+  //     this.#success = true;
+  //     this.printResult();
+  //   } else {
+  //     this.askMoveDirection();
+  //   }
+  // }
 
-  retry() {
-    this.init();
-    this.askMoveDirection();
-  }
+  // askRetry() {
+  //   this.#numberOfAttempts += 1;
+  //   Console.readLine(MESSAGE.ASK_RETRY, (answer) => {
+  //     answer === ANSWER.RETRY ? this.retry() : this.printResult();
+  //   });
+  // }
 
-  printResult() {
-    Console.print(`최종 게임 결과`);
-    this.printBridgeMap();
-    Console.print(`게임 성공 여부: ${this.#success ? '성공' : '실패'}`);
-    Console.print(`총 시도한 횟수: ${this.#numberOfAttempts}`);
-    this.exit();
-  }
+  // retry() {
+  //   this.init();
+  //   this.askMoveDirection();
+  // }
 
-  exit() {
-    Console.close();
-  }
+  // printResult() {
+  //   Console.print(`최종 게임 결과`);
+  //   this.printBridgeMap();
+  //   Console.print(`게임 성공 여부: ${this.#success ? '성공' : '실패'}`);
+  //   Console.print(`총 시도한 횟수: ${this.#numberOfAttempts}`);
+  //   this.exit();
+  // }
+
+  // exit() {
+  //   Console.close();
+  // }
 }
 
 const app = new App();
