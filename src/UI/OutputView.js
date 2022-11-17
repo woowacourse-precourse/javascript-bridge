@@ -7,9 +7,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridge, state, bridgeMaterialize) {
-    let [top, bottom] = bridgeMaterialize([], [], bridge);
-    top = top.
+  printMap(bridge) {
+    let [top, bottom] = bridge.slice();
+    const topResult = `[${top.join().replace(/,/g, ' | ')}]`;
+    const bottomResult = `[${bottom.join().replace(/,/g, ' | ')}]`;
+    return [topResult, bottomResult];
   },
 
   /**
