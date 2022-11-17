@@ -25,7 +25,7 @@ class ValidateBridgeSize {
 
   set bridgeSize(bridgeSize) {
     if (this.validate === false) throw new Error("[ERROR]");
-    this._bridgeSize = bridgeSize;
+    this._bridgeSize = Number(bridgeSize);
   }
 }
 
