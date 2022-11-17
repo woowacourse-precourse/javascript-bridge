@@ -14,6 +14,7 @@ const GAME_COUNT = '총 시도한 횟수: ';
 
 const ERROR_TYPE_NUMBER = '[ERROR] 숫자가 아닙니다.';
 const ERROR_RANGE = '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.';
+const ERROR_STRING = '[ERROR] 올바른 문자를 입력해주세요.';
 
 module.exports = {
   BRIDGE_MIN_LENGTH,
@@ -29,4 +30,5 @@ module.exports = {
   GAME_COUNT,
   ERROR_TYPE_NUMBER,
   ERROR_RANGE,
+  ERROR_STRING,
 };
