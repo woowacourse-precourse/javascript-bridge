@@ -8,13 +8,14 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
+  readBridgeSize(setBridge) {
     Console.readLine(INPUT_MESSAGE.numberOfBridge, (number) => {
       Validation.checkBridgeNumber(Number(number));
       const bridge = BridgeMaker.makeBridge(
         Number(number),
         BridgeRandomNumberGenerator.generate
       );
+      setBridge(bridge);
     });
   },
   /**
