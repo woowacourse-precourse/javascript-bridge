@@ -1,4 +1,5 @@
 const { INPUT_QUESTION } = require("./utils/Constants");
+const Validation = require("./Validation");
 const InputView = require("./InputView");
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
