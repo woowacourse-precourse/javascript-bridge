@@ -4,12 +4,13 @@
 
 ### 🚨 체크리스트
 
+- [o] **App play 구현** App #play
+- [o] **시작 문구 출력** InputView #startGame
 - [o] **자동으로 생성할 다리 길이를 입력 받는다. 3 이상 20 이하의 숫자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** InputView #readBridgeSize
-- [ ] **입력 받은 다리를 생성한다**
-  - [ ] **다리를 생성할 때 위 칸과 아래 칸 중 건널 수 있는 칸은 0과 1 중 무작위 값을 이용해서 정한다.** BridgeRandomNumberGenerator
-- [ ] **라운드마다 플레이어가 이동할 칸을 입력 받는다. U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** InputView #readMoving BridgeMaker #makeBridge
-  - [ ] **입력 받는 값에 맞게 이동한다.**BridgeGame #move
-  - [ ] **이동한 칸을 건널 수 있다면 O로 표시한다. 건널 수 없다면 X로 표시한다.** OutputView #printBridge
+- [o] **입력 받은 다리를 생성한다**
+  - [o] **다리를 생성할 때 위 칸과 아래 칸 중 건널 수 있는 칸은 0과 1 중 무작위 값을 이용해서 정한다.** BridgeRandomNumberGenerator
+- [o] **라운드마다 플레이어가 이동할 칸을 입력 받는다. U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** - 예외처리 나중에 InputView #readMoving BridgeMaker #makeBridge
+  - [o] **입력 받는 값에 맞게 이동한다.**BridgeGame #move
     - [ ] **위아래 두 칸으로 이루어진 다리를 건너야 한다. 위아래 둘 중 하나의 칸만 건널 수 있다.** 예외처리
 - [ ] **다리를 끝까지 건너면 게임이 종료된다.** OutputView #printResult
 - [ ] **게임 재시작/종료 여부를 입력 받는다. R(재시작)과 Q(종료) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** InputView #readGameCommand
