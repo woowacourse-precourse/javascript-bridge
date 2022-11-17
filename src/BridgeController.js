@@ -39,6 +39,7 @@ class BridgeController {
 
       if (passOrFail === false) {
         OutputView.printMap(bridgeGameResult);
+        this.retryOrExit(safeBridge, bridgeGameResult);
       }
       if (passOrFail === true) {
         OutputView.printMap(bridgeGameResult);
@@ -58,6 +59,17 @@ class BridgeController {
       Console.close();
       return;
     }
+  }
+
+  retryOrExit(safeBridge, bridgeGameResult) {
+    InputView.readGameCommand((retryOrExit) => {
+      Validation.checkRetry(retryOrExit);
+
+      if (bridgeGame.retry(retryOrExit) === true) {
+      }
+      if (bridgeGame.retry(retryOrExit) === false) {
+      }
+    });
   }
 }
 
