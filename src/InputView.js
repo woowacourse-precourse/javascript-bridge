@@ -1,5 +1,8 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { INPUT_MESSAGES, ERROR_MESSAGES_BRIDGE } = require('./Messages');
+const {
+  INPUT_MESSAGES,
+  ERROR_MESSAGES_BRIDGE,
+} = require('./Messages');
 const { BRIDGE_CONSTANTS } = require('./GameConstants');
 
 /**
