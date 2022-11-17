@@ -10,6 +10,7 @@ const OutputView = require("./OutputView");
 class BridgeGame {
   #bridge;
   #moveCount;
+  #gameOver = false;
   usersMove = [];
 
   start() {
@@ -35,11 +36,28 @@ class BridgeGame {
       this.usersMove.push([inputMoving, 'O']);
     } else {
       this.usersMove.push([inputMoving, 'X']);
+      this.#gameOver = true;
     } 
-    
+
     printMap(this.usersMove);
     this.#moveCount += 1;
+    this.checkCanMoveNextStep();
+  }
 
+  checkCanMoveNextStep() {
+    if (this.#gameOver === true) {
+      this.retry();
+      this.#moveCount = 0;
+      return;
+    }
+
+    if (this.#moveCount === this.#bridge.length) {
+      this.retry();
+      this.#moveCount = 0;
+      return;
+    }
+    
+    InputView.readMoving(this.move.bind(this));
     return;
   }
 
