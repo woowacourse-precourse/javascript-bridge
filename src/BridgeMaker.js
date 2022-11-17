@@ -1,7 +1,7 @@
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
-const BridgeMaker = {
+ const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
    * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
@@ -9,16 +9,16 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     let answerBridgeShape = [];
-    const selectValue = generateRandomNumber();
-    while ( answerBridgeShape.length < size){
+    while (answerBridgeShape.length < size){
+      const selectValue = generateRandomNumber();
       if(selectValue == 1){
         answerBridgeShape.push("U");
       }
       if(selectValue == 0){
         answerBridgeShape.push("D");
       }
-      return answerBridgeShape;
     }
+    return answerBridgeShape;
   },
 };
 
