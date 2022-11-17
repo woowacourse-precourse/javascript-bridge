@@ -10,11 +10,20 @@ const Validation = {
 
   checkMove(userInput) {
     if (userInput === "u" || userInput === "d") {
-      throw new Error(`[ERROR] 대문자로 입력해주세요`);
+      throw new Error(`[ERROR] 대문자로 입력해주세요.`);
     }
 
     if (/^[U,D]/.test(userInput) === false) {
       throw new Error(`[ERROR] U 또는 D 를 입력해주세요.`);
+    }
+  },
+  checkRetry(userInput) {
+    if (userInput === "r" || userInput === "q") {
+      throw new Error(`[ERROR] 대문자로 입력해주세요.`);
+    }
+
+    if (/^[R,Q]/.test(userInput) === false) {
+      throw new Error(`[ERROR] R 또는 Q를 입력해주세요.`);
     }
   },
 };
