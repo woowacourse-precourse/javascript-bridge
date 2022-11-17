@@ -73,3 +73,12 @@ describe('사용자가 시작전인지 확인하는 메서드', () => {
     expect(bridgeGame.isBeforeStart()).toBeTruthy();
   });
 });
+
+describe('첫번째 포지션을 설정하는 메소드 테스트', () => {
+  test('메소드 이름은 "setFirstPosition"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'setFirstPosition';
+
+    expect(bridgeGame.setFirstPosition.name).toEqual(METHOD_NAME);
+  });
+});
