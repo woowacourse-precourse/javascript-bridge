@@ -34,16 +34,9 @@ class App {
   }
 
   process() {
-    const moveCallback = (direction) => {
-      const isRightChoice = this.#gameCtrl.movePlayer(direction);
-      this.#gameCtrl.printCurMap();
-      isRightChoice ? this.#gameCtrl.isDone() : this.#gameCtrl.askRetry();
-    };
-
     const sizeCallback = (size) => {
-      this.#gameCtrl = new GameController();
       this.#gameCtrl.makeBridge(size);
-      InputView.readMoving(moveCallback);
+      this.#gameCtrl.nextStep();
     };
 
     InputView.readBridgeSize(sizeCallback);

@@ -1,5 +1,6 @@
 const Bridge = require('./Bridge');
 const BridgeGame = require('./BridgeGame');
+const { DIRECTION } = require('./constant');
 const Player = require('./Player');
 const OutputView = require('./views/OutputView');
 
@@ -46,6 +47,16 @@ class GameService {
       this.#player.getSuccess(),
       this.#player.getNumberOfAttempts()
     );
+  }
+
+  checkRetry(decision) {
+    this.#bridgeGame.retry(decision);
+  }
+
+  retry() {
+    this.#player.setNumberOfAttempts(this.#player.getNumberOfAttempts() + 1);
+    this.#player.initCurPlace();
+    this.#bridge.initBridgeMap();
   }
 }
 

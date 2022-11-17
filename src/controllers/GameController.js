@@ -34,13 +34,23 @@ class GameController {
   nextStep() {
     const moveCallback = (direction) => {
       const isRightChoice = this.movePlayer(direction);
+      console.log(isRightChoice);
       this.printCurMap();
-      isRightChoice ? this.isDone() : this.nextStep();
+      isRightChoice ? this.isDone() : this.askRetry();
     };
     InputView.readMoving(moveCallback);
   }
 
-  askRetry() {}
+  askRetry() {
+    console.log('여까지 옴');
+    const callback = (decision) => {
+      const shouldRetry = this.#gameService.checkRetry(decision);
+      shouldRetry
+        ? this.#gameService.retry()
+        : this.#gameService.printGameResult();
+    };
+    InputView.readGameCommand(callback);
+  }
 
   gameExit() {}
 }
