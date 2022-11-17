@@ -11,4 +11,16 @@ describe("입력값 테스트", () => {
   test("다리 길이 입력값 테스트 ( 특수문자 )", () => {
     expect(inputView.readBridgeSize("@")).toThrow(ERROR_MESSAGES.NAN);
   });
+
+  test("다리 길이 범위 테스트 (*3 ~ 20)", () => {
+    expect(inputView.readBridgeSize("2")).toThrow(ERROR_MESSAGES.BRIDGE_SIZE);
+  });
+
+  test("다리 길이 범위 테스트 (*3 ~ 20)", () => {
+    expect(inputView.readBridgeSize("21")).toThrow(ERROR_MESSAGES.BRIDGE_SIZE);
+  });
+
+  test("다리 길이 범위 테스트 (*3 ~ 20)", () => {
+    expect(inputView.readBridgeSize("3")).toBeTruthy();
+  });
 });
