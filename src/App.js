@@ -9,6 +9,7 @@ class App {
     OutputView.printStart();
     this.setBridgeGame();
   }
+
   async setBridgeGame() {
     try {
       const bridgeSize = await InputView.readBridgeSize();
@@ -21,12 +22,13 @@ class App {
       this.setBridgeGame();
     }
   }
+
   async moveSpace() {
     try {
       const direction = await InputView.readMoving();
       Validator.directionCheck(direction);
-      console.log(direction);
-      MissionUtils.Console.close();
+      this.game.move(direction);
+      OutputView.printMap(this.game.course);
     } catch(err) {
       MissionUtils.Console.print(err);
       this.moveSpace();

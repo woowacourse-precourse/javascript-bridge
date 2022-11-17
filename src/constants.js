@@ -1,10 +1,14 @@
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-
 const BRIDGE_REQUIREMENTS = Object.freeze({
   MIN_SIZE: 3,
   MAX_SIZE: 20,
+  ROW: 2,
   UPPER_CODE: 'U',
   LOWER_CODE: 'D',
+  UPPER_FAILED_CODE: 'UF',
+  LOWER_FAILED_CODE: 'LF',
+  PASSED_OUTPUT: 'O',
+  FAILED_OUTPUT: 'X',
+  PARTITION: '|',
 });
 
 const HEADERS = Object.freeze({

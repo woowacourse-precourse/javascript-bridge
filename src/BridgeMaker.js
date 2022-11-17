@@ -10,7 +10,7 @@ const BridgeMaker = {
   makeBridge(size, generator) {
     const bridge = [];
     while(bridge.length < size) {
-      const result = generator();
+      const result = Number(generator());
       if(result === BridgeRandomNumberGenerator.RANDOM_LOWER_INCLUSIVE) bridge.push(BRIDGE_REQUIREMENTS.LOWER_CODE);
       if(result === BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE) bridge.push(BRIDGE_REQUIREMENTS.UPPER_CODE);
     }
