@@ -1,14 +1,19 @@
 const BRIDGE_SPACE_TYPE = ['D', 'U'];
 
 const MOVING = {
-  D: 1,
   U: 0,
+  D: 1,
+};
+
+const COMMAND = {
+  R: 0,
+  Q: 1,
 };
 
 const STATUS = {
-  FAILURE: 0,
+  CONTINUE: 0,
   SUCCESS: 1,
-  NEXT: 2,
+  FAILURE: 2,
 };
 
 const MARKING = {
@@ -19,7 +24,8 @@ const MARKING = {
 
 Object.freeze(BRIDGE_SPACE_TYPE);
 Object.freeze(MOVING);
+Object.freeze(COMMAND);
 Object.freeze(STATUS);
 Object.freeze(MARKING);
 
-module.exports = { BRIDGE_SPACE_TYPE, MOVING, STATUS, MARKING };
+module.exports = { BRIDGE_SPACE_TYPE, MOVING, COMMAND, STATUS, MARKING };

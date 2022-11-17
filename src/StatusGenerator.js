@@ -1,7 +1,9 @@
+const { STATUS } = require('./utils/const');
+
 const StatusGenerator = {
-  FAILURE: 0,
-  SUCCESS: 1,
-  CONTINUE: 2,
+  FAILURE: STATUS.FAILURE,
+  SUCCESS: STATUS.SUCCESS,
+  CONTINUE: STATUS.CONTINUE,
 
   /**
    * @param {boolean} isCorrect

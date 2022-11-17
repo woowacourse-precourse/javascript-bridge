@@ -42,30 +42,16 @@ class BridgeGame {
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * @param {string} gameCommand
-   * @return {1 | 2} 1: Quit, 2: Restart
    */
-  retry(gameCommand) {
-    if (gameCommand === 'R') {
-      this.#player = new Player();
-      this.#count += 1;
-
-      return 2;
-    }
-
-    return 1;
+  retry() {
+    this.#player = new Player();
+    this.#count += 1;
   }
 
-  /**
-   * @returns {number}
-   */
   getCount() {
     return this.#count;
   }
 
-  /**
-   * @returns  {string[][]}
-   */
   getMarkingPaper() {
     return this.#player.getMarkingPaper();
   }
