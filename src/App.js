@@ -26,11 +26,20 @@ class App {
     InputView.readMoving((direction) => {
       if (this.#bridgeGame.isMove(direction)) {
         this.#bridgeGame.move();
+        this.renderBridge();
         this.checkCompletion();
         return;
       }
       this.failGame();
     });
+  }
+
+  renderBridge() {
+    const upstairBridge = this.#bridgeGame.getConvertedBridge('U');
+    const downstairBridge = this.#bridgeGame.getConvertedBridge('D');
+
+    console.log(upstairBridge);
+    console.log(downstairBridge);
   }
 
   checkCompletion() {
@@ -52,7 +61,6 @@ class App {
   }
 
   resultGame() {
-    console.log(this.#bridgeGame.getResult());
     console.log('결과 // 게임 종료 (성공했을 때 or 실패 후 종료)');
     this.end();
   }

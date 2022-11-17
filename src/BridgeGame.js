@@ -39,6 +39,15 @@ class BridgeGame {
   retry() {
     this.#moveCount = 0;
   }
+
+  getConvertedBridge(floor) {
+    return this.#bridge.slice(0, this.#moveCount).map((current) => {
+      if (current === floor) {
+        return 'O';
+      }
+      return ' ';
+    });
+  }
 }
 
 module.exports = BridgeGame;
