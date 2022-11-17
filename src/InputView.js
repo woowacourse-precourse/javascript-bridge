@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
+const Game = require("./BridgeGame");
+
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 /**
@@ -12,7 +13,7 @@ const UserSelect_ERR_MESSAGE = "[ERROR] 입력은 U 아니면 D여야 합니다.
 
 const INPUT_BRIDGE_LEN_STR = "다리의 길이를 입력해주세요.\n";
 
-const INPUT_USER_GO = "이동할 칸을 선택해주세요. (위: U, 아래: D)";
+const INPUT_USER_GO = "이동할 칸을 선택해주세요. (위: U, 아래: D)\n";
 
 const InputView = {
   /**
@@ -20,11 +21,12 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(INPUT_BRIDGE_LEN_STR, (bridgeLen) => {
-      this.bridgeLenValidator(bridgeLen);
-      const bridgeGame = new BridgeGame(
+      bridgeLenValidator(bridgeLen);
+
+      const bridgeGame = new Game.BridgeGame(
         BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate)
       );
-      this.readMoving(bridgeGame);
+      InputView.readMoving(bridgeGame);
     });
   },
 
@@ -32,7 +34,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgeGame) {
-    MissionUtils.Console.readLine(INPUT_BRIDGE_LEN_STR, (selectBridge) => {
+    MissionUtils.Console.readLine(INPUT_USER_GO, (selectBridge) => {
       bridgeGame.move(this.userSelectValueTreater(selectBridge));
     });
   },
@@ -42,15 +44,15 @@ const InputView = {
    */
   readGameCommand() {},
 
-  bridgeLenValidator(bridgeLen) {
-    isInRange(bridgeLen);
-    isIntNumber(bridgeLen);
-  },
-
   userSelectValueTreater(userSelectValue) {
     isUandD(userSelectValue);
     return charToIntChanger(userSelectValue);
   },
+};
+
+const bridgeLenValidator = (bridgeLen) => {
+  isInRange(bridgeLen);
+  isIntNumber(bridgeLen);
 };
 
 const isInRange = (bridgeLen) => {
