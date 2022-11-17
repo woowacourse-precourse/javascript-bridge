@@ -89,3 +89,12 @@ describe('첫번째 포지션을 설정하는 메소드 테스트', () => {
     expect(bridgeGame.setFirstPosition()).toEqual(RECEIVED);
   });
 });
+
+describe('사용자 위치를 확인하는 메서드 테스트', () => {
+  test('메소드 이름은 "findUserPosition"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'findUserPosition';
+
+    expect(bridgeGame.findUserPosition.name).toEqual(METHOD_NAME);
+  });
+});
