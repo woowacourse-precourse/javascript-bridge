@@ -76,7 +76,14 @@ class App {
     );
   }
 
-  isDone() {}
+  isDone() {
+    if (this.#size === this.#curPlace) {
+      this.#success = true;
+      this.printResult();
+    } else {
+      this.askMoveDirection();
+    }
+  }
 
   askRetry() {}
 }
