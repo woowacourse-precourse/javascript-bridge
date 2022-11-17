@@ -74,6 +74,30 @@ R
    1. 다리 통계를 받아 게임 통계를 만든다 [ ]
    2. 만들어진 게임 통계를 출력한다 [ ]
 
+### 3. 흐름의 큰 틀 잡기
+
+1. InputView.readBridgeSize
+   1. 다리 길이를 받는다
+   2. 입력값을 검증한다
+   3. BridgeGame 인스턴스를 생성한다
+      1. makeBridge 후 필드값으로 저장한다
+   4. InputView.readMoving를 호출한다
+2. InputView.readMoving
+   1. 이동할 칸을 받는다
+   2. 입력값을 검증한다
+   3. BridgeGame 인스턴스의 move 함수를 호출한다
+      1. OutputView.printMap 함수를 호출하고, 선택 배열과 죽음 여부를 인수로 전달한다
+      2. 만약 죽어있다면 this.retry 함수를 반환한다
+      3. 만약 정답 배열과 선택 배열의 길이가 같다면 this.isGameClear 함수를 반환한다
+   4. 만약 move 함수에서 반환된 값이 재시작이면 this.readGameCommand 함수를 반환한다
+   5. 만약 move 함수에서 반환된 값이 게임 클리어면 OutputView.printResult 함수를 반환한다
+   6. 자기 자신을 호출한다
+3. readGameCommand
+   1. 게임 재시도 여부를 받는다
+   2. 입력값을 검증한다
+   3. 만약 입력값이 종료이면 콘솔을 종료한다
+   4. 만약 입력값이 재시도이면 선택 배열을 초기화한 뒤 this.readMoving 함수를 호출한다
+
 ## 2. 학습 과정
 
 ### 1. 고민했던 내용들
@@ -90,7 +114,9 @@ R
 
 4. 클래스나 객체는 상호 참조가 불가능한가?
 
-5. 객체 구분
+5. 객체 구분하는 기준
+
+6. 변수 두 번 선언 vs 목적과 다른 메소드에 선언
 
 ### 2. 배운점
 
