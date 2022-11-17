@@ -40,12 +40,23 @@ const InputView = {
 
 	readMoving() {
 		MissionUtils.Console.readLine(InputView.READ_MOVING_MSG, (moving) => {
-			executeMovingStep(moving);
+			InputView.executeMovingStep(moving);
 		});
 	},
 
 	executeMovingStep(moving) {
-		Validation.validateMoving(moving);
+		InputView.handlingMovingError(moving);
+	},
+
+	handlingMovingError(moving) {
+		try {
+			Validation.validateMoving(moving);
+		} catch (error) {
+			MissionUtils.Console.print(error);
+			MissionUtils.Console.readLine("", (moving) => {
+				InputView.executeMovingStep(moving);
+			});
+		}
 	},
 
 	readGameCommand() {},
