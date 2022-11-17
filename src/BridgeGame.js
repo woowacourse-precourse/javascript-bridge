@@ -23,17 +23,17 @@ class BridgeGame {
   }
 
   checkCorrectWay(userSelectValue) {
-    console.log(userSelectValue, this.bridge[this.latestProgressCnt - 1]);
     if (userSelectValue == this.bridge[this.latestProgressCnt - 1]) {
       this.isOkWay = true;
       this.checkFinishWay();
+      return;
     }
+    this.isOkWay = false;
   }
 
   checkFinishWay() {
     if (this.latestProgressCnt == this.bridge.length) {
       this.finishGame = true;
-      return;
     }
   }
 
