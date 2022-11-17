@@ -9,7 +9,7 @@ const MAP = {
   END: ']',
   SUCCESS: ' O ',
   FAIL: ' X ',
-  EMPTY: '  ',
+  EMPTY: '   ',
 };
 
 const PHRASE = {
