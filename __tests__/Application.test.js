@@ -76,4 +76,13 @@ describe('3 ~ 20 범위 체크 함수 테스트', () => {
 
     expect(Application.checkRangeThreeToTwenty.name).toEqual(METHOD_NAME);
   });
+
+  test.each([0, 1, 2, 21, 22])(
+    '지정된 범위를 벗어나면 예외를 발생시킨다.',
+    (EXPECTED) => {
+      expect(() => {
+        Application.checkRangeThreeToTwenty(EXPECTED);
+      }).toThrow(RANGE_ERROR_TEXT);
+    },
+  );
 });
