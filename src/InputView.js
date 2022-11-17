@@ -63,11 +63,17 @@ const InputView = {
     MissionUtils.Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n >",
       answer => restartCommand = answer
-    )
+    );
+    this.validRestartCommand(restartCommand);
 
     return restartCommand;
   },
 
+  validRestartCommand(restartCommand) {
+    if (restartCommand !== 'R' && restartCommand !== 'Q') {
+      throw `[ERROR] 재시작은 R, 종료는 Q 키를 눌러주세요.`
+    }
+  }
 };
 
 module.exports = InputView;
