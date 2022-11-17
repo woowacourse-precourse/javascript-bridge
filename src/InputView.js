@@ -13,20 +13,23 @@ const InputView = {
   readBridgeSize() {
     let mainBridge = [];
     Console.readLine("다리의 길이를 입력해주세요.", (bridgeSize) => {
-      mainBridge = makeBridge(bridgeSize, generate);
-      InputView.readMoving(mainBridge);
+      mainBridge = makeBridge(bridgeSize, generate); //기준 다리
+      const bridgeGame = new BridgeGame(mainBridge);
+      InputView.readMoving(mainBridge, bridgeGame); //움직임 입력 받기
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(mainBridge) {
-    const bridgeGame = new BridgeGame(mainBridge);
+  readMoving(mainBridge, bridgeGame) {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (maveInput) => {
+        console.log("mainBridge", mainBridge)
+        console.log("bridgeGame", bridgeGame)
         bridgeGame.move(maveInput);
+        InputView.readMoving(mainBridge, bridgeGame)
       }
     );
   },
