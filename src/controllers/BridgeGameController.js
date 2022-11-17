@@ -1,13 +1,10 @@
 const BridgeGame = require('../models/BridgeGame');
 const InputValidator = require('../utils/InputValidator');
 const InputView = require('../views/InputView');
+const OutputView = require('../views/OutputView');
 
 class BridgeGameController {
-  #game;
-
-  constructor() {
-    this.#game = new BridgeGame();
-  }
+  #game = new BridgeGame();
 
   play() {
     InputView.readBridgeSize(this.#onBridgeSizeSubmit.bind(this));
@@ -27,6 +24,10 @@ class BridgeGameController {
     InputValidator.validateEmpty(input);
 
     this.#game.move(input);
+    const bridgeMap = this.#game.getMap();
+
+    OutputView.printMap(bridgeMap);
+    InputView.readMoving(this.#onMovingSubmit.bind(this));
   }
 }
 
