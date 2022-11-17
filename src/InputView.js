@@ -14,7 +14,6 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(INPUT_BRIDGE_LEN_STR, (bridgeLen) => {
-      console.log(bridgeLen);
       bridgeLenValidator(bridgeLen);
       BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
     });
