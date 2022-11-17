@@ -26,9 +26,19 @@ describe('숫자 변환 함수 테스트', () => {
 });
 
 describe('배열 생성 함수 테스트', () => {
+  const mockFn = () => {};
+
   test('메소드 이름은 "createArray"로 정의된다.', () => {
     const METHOD_NAME = 'createArray';
 
     expect(Application.createArray.name).toEqual(METHOD_NAME);
+  });
+
+  test('첫 번째 인자가 숫자로 변환이 불가능하면 예외를 발생한다.', () => {
+    const EXPECTED = 'AZ';
+
+    expect(() => {
+      Application.createArray(EXPECTED, mockFn);
+    }).toThrow(NUMBER_ERROR_TEXT);
   });
 });
