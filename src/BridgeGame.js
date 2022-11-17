@@ -37,6 +37,29 @@ class BridgeGame {
       downResult: [],
     };
   }
+
+  move(input) {
+    const InputView = require("./InputView");
+    const BridgeChecker = require("./BridgeChecker");
+    const { up, down, isEnd } = BridgeChecker.check(
+      this.#order,
+      input,
+      this.#bridge
+    );
+    this.#bridgeResult.upResult.push(up);
+    this.#bridgeResult.downResult.push(down);
+
+    OutputView.printMap(this.#bridgeResult.upResult);
+    OutputView.printMap(this.#bridgeResult.downResult);
+
+    if (isEnd) this.retry(this);
+    if (this.#bridge.length - 1 == this.#order)
+      OutputView.printResult(this, true);
+    else {
+      this.#order++;
+      InputView.readMoving(this);
+    }
+  }
 }
 
 module.exports = BridgeGame;
