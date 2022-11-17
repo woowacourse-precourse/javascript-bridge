@@ -15,4 +15,8 @@ class MovingCount {
   getTotalMovingCount() {
     return this.#totalMovingCount;
   }
+
+  resetCurrentMovingCount() {
+    this.#currentMovingCount = 0;
+  }
 }
