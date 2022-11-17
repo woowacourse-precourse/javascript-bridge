@@ -5,6 +5,11 @@ const BRIDGE_RANGE = Object.freeze({
   end: 20,
 });
 
+const NUMBER = Object.freeze({
+  zero: 0,
+  one: 1,
+});
+
 const SHORT_CUT = Object.freeze({
   up: 'U',
   down: 'D',
@@ -49,7 +54,7 @@ const GAME_RESULT = Object.freeze({
   result: '게임 성공 여부:',
   success: '성공',
   fail: '실패',
-  again: '총 시도한 횟수:',
+  attempts: '총 시도한 횟수:',
 });
 
 module.exports = {
@@ -60,4 +65,5 @@ module.exports = {
   SHORT_CUT,
   GAME_MESSAGE,
   GAME_RESULT,
+  NUMBER,
 };

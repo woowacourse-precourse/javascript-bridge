@@ -3,7 +3,7 @@ const { GAME_MESSAGE } = require('./constants');
 const InputView = require('./InputView');
 
 class App {
-  play() {
+  async play() {
     this.start();
     InputView.readBridgeSize();
     // InputView.readGameCommand();

@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const { makeBridge } = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { generate } = require('./BridgeRandomNumberGenerator');
 const {
   GAME_MESSAGE,
   BRIDGE_RANGE,
@@ -9,6 +9,7 @@ const {
   SHORT_CUT,
   ERROR_PLAYING_MESSAGE,
   ERROR_RETRY_MESSAGE,
+  NUMBER,
 } = require('./constants');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -21,12 +22,8 @@ const InputView = {
     Console.readLine(GAME_MESSAGE.inputLength, (userInput) => {
       const bridgeSize = Number(userInput);
       this.bridgeValidation(bridgeSize);
-      const bridgeArray = makeBridge(
-        bridgeSize,
-        BridgeRandomNumberGenerator.generate
-      );
-      const game = new BridgeGame(bridgeArray);
-      this.readMoving();
+      const bridge = makeBridge(bridgeSize, generate);
+      this.readMoving(bridge, NUMBER.one, NUMBER.zero);
     });
   },
 
@@ -55,10 +52,22 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(bridge, steps, numberAttempts) {
     Console.readLine(GAME_MESSAGE.move, (userInput) => {
       this.checkMoveLowercase(userInput);
       this.checkMoveWrong(userInput);
+      const bridgeGame = new BridgeGame(bridge, steps, numberAttempts);
+      bridgeGame.move(userInput);
+      const curSteps = bridgeGame.getSteps();
+      if (curSteps === bridge.length) {
+        Console.print('끝');
+      }
+      if (steps < curSteps) {
+        this.readMoving(bridge, curSteps, numberAttempts);
+      }
+      if (steps === curSteps) {
+        this.readGameCommand();
+      }
     });
   },
 
