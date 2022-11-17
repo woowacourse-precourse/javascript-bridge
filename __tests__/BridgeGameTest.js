@@ -8,6 +8,19 @@ describe("BridgeGame 테스트", () => {
         ["UD"]
     ])("다리 이동 예외 테스트", (input) => {
         const bridgeGame = new BridgeGame();
-        expect(() => bridgeGame.setPosition(input)).toThrow(ERROR.INVALID_MOVE_TYPE);
+        expect(() => {
+            bridgeGame.move(input)
+        }).toThrow(ERROR.INVALID_MOVE_TYPE);
+    });
+
+    test.each([
+        [["U", "D", "D"]],
+        [["D", "U", "D"]],
+    ])("이동 로그 테스트", (moveTypes) => {
+        const bridgeGame = new BridgeGame();
+        for (let moveType of moveTypes)
+            bridgeGame.setMoveHistory(moveType);
+
+        expect(bridgeGame.getMoveHistory()).toEqual(moveTypes);
     });
 });
