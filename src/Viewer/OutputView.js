@@ -52,10 +52,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(bridge, game) {
-    Console.print('\n최종 게임 결과');
+    Console.print(OUTPUT_MESSAGE.GAME_RESULT);
     OutputView.printMap(bridge, game);
-    Console.print(`\n게임 성공 여부: ${game.getResult(bridge)}`);
-    Console.print(`총 시도한 횟수: ${game.getTryCnt()}`);
+    Console.print(OUTPUT_MESSAGE.GAME_IS_SUCCESS(game.getResult(bridge)));
+    Console.print(OUTPUT_MESSAGE.GAME_TRY_CNT(game.getTryCnt()));
   },
 };
 

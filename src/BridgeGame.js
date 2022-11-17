@@ -1,4 +1,8 @@
-const { ERROR_MESSAGE } = require('./utils/Constant');
+const {
+  ERROR_MESSAGE,
+  INPUT_MESSAGE,
+  BRIDGE_ELEMENT,
+} = require('./utils/Constant');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -12,7 +16,7 @@ class BridgeGame {
   }
 
   static validate(input) {
-    if (input !== 'U' && input !== 'D') {
+    if (input !== INPUT_MESSAGE.UP && input !== INPUT_MESSAGE.DOWN) {
       throw new Error(ERROR_MESSAGE.LEVEL_INPUT);
     }
   }
@@ -43,10 +47,10 @@ class BridgeGame {
    */
   move(input) {
     this.constructor.validate(input);
-    if (input === 'U') {
-      this.#selected += '0';
-    } else if (input === 'D') {
-      this.#selected += '1';
+    if (input === INPUT_MESSAGE.UP) {
+      this.#selected += BRIDGE_ELEMENT.UP;
+    } else if (input === INPUT_MESSAGE.DOWN) {
+      this.#selected += BRIDGE_ELEMENT.DOWN;
     }
   }
 

@@ -6,6 +6,8 @@ const MESSAGE = {
 
 const ERROR_MESSAGE = {
   LEVEL_INPUT: '[ERROR] 이동 값은 U 또는 D를 입력하세요',
+  BRIDGE_ISNAN: '[ERROR] 숫자를 입력하세요',
+  BRIDGE_RANGE: '[ERROR] 3이상 20이하의 수를 입력하세요',
 };
 
 const INPUT_MESSAGE = {
@@ -25,6 +27,9 @@ const OUTPUT_MESSAGE = {
   EMPTY: '  ',
   START: '[ ',
   END: ']',
+  GAME_RESULT: '\n최종 게임 결과',
+  GAME_IS_SUCCESS: (result) => `\n게임 성공 여부: ${result}`,
+  GAME_TRY_CNT: (tryCnt) => `총 시도한 횟수: ${tryCnt}`,
 };
 
 module.exports = {
