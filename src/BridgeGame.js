@@ -49,23 +49,22 @@ class BridgeGame {
     });
   }
   moveAfter(command) {
-    const isCorrect = this.#answer[this.#step] === command;
+    const isCorrect = this.#answer[this.#step - 1] === command;
+
     this.#step += 1;
+
     if (!isCorrect) this.retry();
     this.move();
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   *
-   * 게임이 끝나는 경우는 몇가지가 있을까?
-   * 1. 사용자가 취소한 경우
-   * 2. 사용자가 모든 정답을 맞춘 경우
    */
   retry() {
     InputView.readGameCommand((command) => {
       if (command === "R") {
         this.restart();
+        return;
       }
       this.end();
     });
@@ -74,7 +73,7 @@ class BridgeGame {
     this.#step = 1;
     this.#trial += 1;
     this.#inputs = [];
-    this.start();
+    this.move();
   }
   end() {
     OutputView.printResult(
