@@ -4,17 +4,19 @@ const { PRINT_MESSAGE } = require("./constant/Constant");
 const InputView = require("./InputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
 
 class App {
   #size;
   #bridge;
   #moving;
+  #totalTry;
 
-  play() {
-    this.startGame();
+  constructor() {
+    this.#totalTry = 1;
   }
 
-  startGame() {
+  play() {
     MissionUtils.Console.print(PRINT_MESSAGE.GAME_START);
 
     InputView.readBridgeSize((size) => this.getBridgeSize(size));
@@ -23,8 +25,8 @@ class App {
   getBridgeSize(size) {
     this.#size = Number(size);
     this.#moving = [];
-
     MissionUtils.Console.print("");
+
     this.getBridge();
     this.selectMoving();
   }
@@ -44,11 +46,24 @@ class App {
     this.#moving.push(moving);
 
     const bridgeGame = new BridgeGame();
-    let response = bridgeGame.move(this.#moving, this.#bridge);
-    response === true ? this.selectMoving() : this.askRestart();
+    bridgeGame.move(
+      this.#moving,
+      this.#bridge,
+      this.selectMoving.bind(this),
+      this.retry.bind(this),
+      this.printResult.bind(this)
+    );
   }
 
-  askRestart() {}
+  retry() {
+    this.#totalTry += 1;
+    this.#moving = [];
+    this.selectMoving();
+  }
+
+  printResult(success) {
+    OutputView.printResult(this.#moving, this.#totalTry, success);
+  }
 }
 
 module.exports = App;

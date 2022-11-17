@@ -1,4 +1,6 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const OutputView = require("./OutputView");
+const InputView = require("./InputView");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -8,15 +10,21 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(moving, bridge) {
+  move(moving, bridge, selectMoving, retry, printResult) {
     let lastIndex = moving.length - 1;
 
-    if (moving[lastIndex] === bridge[lastIndex]) {
+    if (
+      moving.length == bridge.length &&
+      moving[lastIndex] === bridge[lastIndex]
+    ) {
+      printResult(true);
+      MissionUtils.Console.close();
+    } else if (moving[lastIndex] === bridge[lastIndex]) {
       OutputView.printMap(moving, true);
-      return true;
+      selectMoving();
     } else if (moving[lastIndex] !== bridge[lastIndex]) {
       OutputView.printMap(moving, false);
-      return false;
+      this.retry(retry, printResult);
     }
   }
 
@@ -25,7 +33,16 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(retry, printResult) {
+    InputView.readGameCommand((command) => {
+      if (command == "R") {
+        retry();
+      } else if (command == "Q") {
+        printResult(false);
+        MissionUtils.Console.close();
+      }
+    });
+  }
 }
 
 module.exports = BridgeGame;
