@@ -1,7 +1,7 @@
 // @ts-check
 const BridgeGame = require('./BridgeGame');
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const InputView = require('./view/InputView');
+const OutputView = require('./view/OutputView');
 const { GAME_STATUS, GAME_COMMAND } = require('./constants');
 
 class Controller {
