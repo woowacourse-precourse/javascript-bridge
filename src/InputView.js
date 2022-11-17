@@ -1,5 +1,4 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeMaker = require("./BridgeMaker");
 const Validation = require("./Validation");
 
 /**
@@ -9,7 +8,7 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
+  readBridgeSize(callback) {
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요.\n', (inputBridgeSize) => {
       try {
         Validation.checkBridgeSize(inputBridgeSize);
@@ -17,8 +16,7 @@ const InputView = {
         MissionUtils.Console.print(`${Error.message} \n`);
         return this.readBridgeSize();
       }
-
-      console.log(inputBridgeSize);
+      callback(inputBridgeSize);
     });
   },
 
