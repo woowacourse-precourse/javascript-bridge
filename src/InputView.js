@@ -1,9 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
 const BridgeGameController = require("./BridgeGameController");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -11,6 +9,7 @@ const InputView = {
   bridgeGame: null,
   /**
    * 다리의 길이를 입력받는다.
+   * 다리 생성후 다리 건너기로 진입
    */
   readBridgeSize() {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
