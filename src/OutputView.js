@@ -1,4 +1,4 @@
-const { MissionUtils } = require("@woowacourse/mission-utils");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -15,12 +15,12 @@ const OutputView = {
 
   printMap(bridgeMap, location, correct) {
     const map = { U: "[", D: "[" };
-    for (let i = 0; i < location - 1; i++) {
+    for (let i = 0; i < location; i++) {
       map[bridgeMap[i]] += " O |";
       map[this.reverse(bridgeMap[i])] += "   |";
     }
-    map[bridgeMap[location - 1]] += correct ? " O ]" : "   ]";
-    map[this.reverse(bridgeMap[location - 1])] += correct ? "   ]" : " X ]";
+    map[bridgeMap[location]] += correct ? " O ]" : "   ]";
+    map[this.reverse(bridgeMap[location])] += correct ? "   ]" : " X ]";
     MissionUtils.Console.print(map["U"] + "\n" + map["D"]);
   },
 
@@ -31,8 +31,10 @@ const OutputView = {
    */
   printResult(bridgeMap, location, correct, tryCount) {
     MissionUtils.Console.print("최종 게임 결과");
-    printMap(bridgeMap, location, correct);
-    MissionUtils.Console.print("게임 성공 여부: " + correct ? "성공" : "실패");
+    this.printMap(bridgeMap, location, correct);
+    MissionUtils.Console.print(
+      "게임 성공 여부: " + (correct ? "성공" : "실패")
+    );
     MissionUtils.Console.print("총 시도한 횟수: " + tryCount);
   },
 };
