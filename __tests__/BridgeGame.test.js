@@ -81,4 +81,11 @@ describe('첫번째 포지션을 설정하는 메소드 테스트', () => {
 
     expect(bridgeGame.setFirstPosition.name).toEqual(METHOD_NAME);
   });
+
+  test('유저 포지션이 null이라면 0으로 값을 세팅한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const RECEIVED = 0;
+
+    expect(bridgeGame.setFirstPosition()).toEqual(RECEIVED);
+  });
 });
