@@ -9,6 +9,12 @@ const Validation = {
       throw new Error(ErrorMsg.INVALID_INPUT_BRIDGE_SIZE_RANGE);
     }
   },
+
+  validateMoving(direction) {
+    if (['U', 'D'].includes(direction) === false) {
+      throw new Error(ErrorMsg.INVALID_INPUT_MOVING);
+    }
+  },
 };
 
 module.exports = Validation;
