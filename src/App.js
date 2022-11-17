@@ -3,11 +3,12 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { PRINT_MESSAGE } = require("./constant/Constant");
 const InputView = require("./InputView");
 const BridgeMaker = require("./BridgeMaker");
+const BridgeGame = require("./BridgeGame");
 
 class App {
   #size;
-  #moving;
   #bridge;
+  #moving;
 
   play() {
     this.startGame();
@@ -21,11 +22,13 @@ class App {
 
   getBridgeSize(size) {
     this.#size = Number(size);
+    this.#moving = [];
 
+    MissionUtils.Console.print("");
     this.getBridge();
-
-    InputView.readMoving((moving) => this.getMoving(moving));
+    this.selectMoving();
   }
+
   getBridge() {
     this.#bridge = BridgeMaker.makeBridge(
       this.#size,
@@ -33,9 +36,19 @@ class App {
     );
   }
 
-  getMoving(moving) {
-    this.#moving = moving;
+  selectMoving() {
+    InputView.readMoving((moving) => this.getMoving(moving));
   }
+
+  getMoving(moving) {
+    this.#moving.push(moving);
+
+    const bridgeGame = new BridgeGame();
+    let response = bridgeGame.move(this.#moving, this.#bridge);
+    response === true ? this.selectMoving() : this.askRestart();
+  }
+
+  askRestart() {}
 }
 
 module.exports = App;
