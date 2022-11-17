@@ -1,6 +1,6 @@
 const PlayerMove = {
-  movePossible(move, position, bridge) {
-    if (move === bridge[position]) return true;
+  movePossible(to, position, bridge) {
+    if (to === bridge[position]) return true;
     return false;
   },
 };
