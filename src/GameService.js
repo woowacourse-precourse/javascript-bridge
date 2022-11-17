@@ -1,6 +1,5 @@
 const Bridge = require('./Bridge');
 const BridgeGame = require('./BridgeGame');
-const { DIRECTION } = require('./constant');
 const Player = require('./Player');
 const OutputView = require('./views/OutputView');
 
@@ -25,7 +24,7 @@ class GameService {
       direction,
       this.#bridge.getBridge()[this.#player.getCurPlace()]
     );
-    this.#player.setCurPlace(this.#player.getCurPlace() + 1);
+    this.#player.increaseCurPlace();
     if (canCross) this.#bridge.setBridgeMap(direction, 'O');
     else this.#bridge.setBridgeMap(direction, 'X');
     return canCross;
@@ -37,8 +36,11 @@ class GameService {
   }
 
   checkGameComplete() {
-    this.#player.setSuccess();
-    return this.#bridge.getSize() === this.#player.getCurPlace();
+    if (this.#bridge.getSize() === this.#player.getCurPlace()) {
+      this.#player.setSuccess();
+      return true;
+    }
+    return false;
   }
 
   printGameResult() {
@@ -50,11 +52,11 @@ class GameService {
   }
 
   checkRetry(decision) {
-    this.#bridgeGame.retry(decision);
+    return this.#bridgeGame.retry(decision);
   }
 
   retry() {
-    this.#player.setNumberOfAttempts(this.#player.getNumberOfAttempts() + 1);
+    this.#player.increaseNumberOfAttempts();
     this.#player.initCurPlace();
     this.#bridge.initBridgeMap();
   }

@@ -13,12 +13,20 @@ class Player {
     this.#curPlace = 0;
   }
 
-  getCurPlace() {
-    return this.#curPlace;
+  increaseCurPlace() {
+    this.#curPlace += 1;
   }
 
-  setCurPlace(place) {
-    this.#curPlace = place;
+  setSuccess() {
+    this.#success = true;
+  }
+
+  increaseNumberOfAttempts() {
+    this.#numberOfAttempts += 1;
+  }
+
+  getCurPlace() {
+    return this.#curPlace;
   }
 
   getSuccess() {
@@ -28,12 +36,6 @@ class Player {
   getNumberOfAttempts() {
     return this.#numberOfAttempts;
   }
-
-  setSuccess() {
-    this.#success = true;
-  }
-
-  setNumberOfAttempts() {}
 }
 
 module.exports = Player;

@@ -42,12 +42,12 @@ class GameController {
   }
 
   askRetry() {
-    console.log('여까지 옴');
     const callback = (decision) => {
       const shouldRetry = this.#gameService.checkRetry(decision);
-      shouldRetry
-        ? this.#gameService.retry()
-        : this.#gameService.printGameResult();
+      if (shouldRetry) {
+        this.#gameService.retry();
+        this.nextStep();
+      } else this.#gameService.printGameResult();
     };
     InputView.readGameCommand(callback);
   }
