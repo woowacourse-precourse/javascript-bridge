@@ -31,19 +31,19 @@ class App {
   }
 
   playerMove(movingCommand) {
-    this.bridgeGame.move();
-    if (this.bridgeGame.isNextMove(movingCommand)) {
-      OutputView.printMap(this.bridgeGame.getCurrentAnswerBridgeMap());
+    this.bridgeGame.move(movingCommand);
+    if (this.bridgeGame.isNextMove()) {
+      OutputView.printMap(this.bridgeGame.getCurrentBridgeMap());
       this.inputMoving();
       return;
     }
-    if (!this.bridgeGame.isAnswerMovingChoice(movingCommand)) {
-      OutputView.printMap();
+    if (!this.bridgeGame.isAnswerMovingChoice()) {
+      OutputView.printMap(this.bridgeGame.getCurrentBridgeMap());
       this.inputRetryCommand();
       return;
     }
-    OutputView.printMap(this.bridgeGame.getCurrentAnswerBridgeMap());
-    OutputView.printResult(this.bridgeGame.getCurrentAnswerBridgeMap());
+    OutputView.printMap(this.bridgeGame.getCurrentBridgeMap());
+    OutputView.printResult(this.bridgeGame.getCurrentBridgeMap());
   }
 
   inputRetryCommand() {
