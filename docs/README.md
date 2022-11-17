@@ -8,8 +8,8 @@
 
 ## BridgeGame
 
-- [ ] 다리 한 칸 건너기 연산: move
-- [ ] 재시도: retry
+- [x] 다리 한 칸 건너기 연산: move
+- [x] 재시도: retry
 
 ## BridgeMaker
 
@@ -18,24 +18,18 @@
 ## InputView
 
 - [x] 사용자 입력 구현 : InputView
-- [ ] 사용자 입력 validate
+- [x] 사용자 입력 validate
 
 ## OutputView
 
 - [x] 다리 출력: printMap
-- [ ] 결과 출력: printResult
+- [x] 결과 출력: printResult
 
 ## 입출력 검증
 
 - [x] 다리 길이 입력 검증
 - [x] 사용자 게임 입력이 U/D인지 검증
 - [x] 사용자 재시작 입력이 R/Q인지 검증
-
-## 예외 처리
-
-- [ ] 다리 길이 입력 예외처리
-- [ ] 사용자 게임 입력 예외처리
-- [ ] 사용자 재시작 입력 예외처리
 
 ## 테스트 구현
 
