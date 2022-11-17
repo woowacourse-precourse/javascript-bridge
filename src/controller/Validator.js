@@ -20,6 +20,12 @@ const Validator = {
     }
   },
 
+  checkNumberType(number) {
+    if (typeof number !== 'number') {
+      throw new Error(MESSAGE_ERROR.INVALID_TYPE);
+    }
+  },
+
   checkBridgeSizeRange(bridgeSize) {
     if (bridgeSize < 3 || bridgeSize > 20) {
       throw new Error(MESSAGE_ERROR.INVALID_RANGE);

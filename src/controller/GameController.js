@@ -1,6 +1,9 @@
 const OutputView = require('../views/OutputView');
 const InputView = require('../views/InputView');
-const BridgeSizeChecker = require('./BridgeSizeChecker');
+const BridgeChecker = require('./BridgeChecker');
+const Convertor = require('../utils/Convertor');
+const BridgeMaker = require('../BridgeMaker');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 
 class GameController {
   playGame() {
@@ -9,7 +12,10 @@ class GameController {
   }
 
   #makeBridge(rowDataOfBridgeSize) {
-    BridgeSizeChecker.check(rowDataOfBridgeSize);
+    BridgeChecker.checkRowDataOfBridgeSize(rowDataOfBridgeSize);
+    const bridgeSize = Convertor.convertStringToDecimalNumber(rowDataOfBridgeSize);
+    BridgeChecker.checkBridgeSize(bridgeSize);
+    BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator);
   }
 }
 
