@@ -24,7 +24,7 @@
 
 - [ ] 기본적으로, 주어진 요구사항에 맞게 사용자 입력을 받고 출력한다.
   - `Console.readLine()`은 `InputView`에서, `Console.print()`는 `OutputView`에서만 사용한다.
-- [ ] 랜덤 값을 추출하고 이를 이용하여 다리를 생성한다.
+- [x] 랜덤 값을 추출하고 이를 이용하여 다리를 생성한다.
   - `BridgeMaker` 객체, `BridgeRandomNumberGenerator`을 이용한다.
 - [ ] 플레이어가 이동할 칸을 선택한다.
 - [ ] 게임을 재시작한다.
