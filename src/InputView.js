@@ -51,6 +51,10 @@ const InputView = {
   readGameCommand() {
     Console.readLine(ASK_RETRY_OR_QUIT, (command) => {
       new CommandInput(command);
+
+      new BridgeGame().retry(command)
+        ? (Player.reset(), this.readMoving(this.canWalkBridge))
+        : OutputView.printResult();
     });
   },
 };
