@@ -1,3 +1,4 @@
+const { BRIDGE } = require('../constants/Constants');
 const { bridgeLengthValidation } = require('../utils/BridgeValidation');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
@@ -14,7 +15,13 @@ class Bridge {
   #setBridgeMap() {
     this.#bridgeMap = BridgeMaker.makeBridge(
       this.#bridgeLength,
-      BridgeRandomNumberGenerator
+      BridgeRandomNumberGenerator.generate
     );
   }
+
+  isMovable(index, moving) {
+    return this.#bridgeMap[index] === moving;
+  }
 }
+
+module.exports = Bridge;
