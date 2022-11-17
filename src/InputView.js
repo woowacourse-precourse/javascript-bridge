@@ -11,19 +11,33 @@ const InputView = {
    */
   readBridgeSize(callback) {
     Console.readLine(INPUT_MESSAGES.bridgeSize, (size) => {
-      const bridgeSize = Number(size);
-      this.validateBridgeSize(bridgeSize, callback);
+      this.validateBridgeSize(size, callback);
     });
   },
 
-  validateBridgeSize(bridgeSize, callback) {
+  validateBridgeSize(size, callback) {
     try {
+      this.handleEmptyBrigeSizeException(size);
+      const bridgeSize = Number(size);
       this.handleBrigeSizeTypeException(bridgeSize);
       this.handleBrigeSizeOutOfRangeException(bridgeSize);
       callback(bridgeSize);
     } catch (error) {
       Console.print(error);
       this.readBridgeSize(callback);
+    }
+  },
+
+  handleEmptyBrigeSizeException(bridgeSize) {
+    const blanks = ['', ' ', '\n'];
+    blanks.forEach((blank) => {
+      if (bridgeSize === blank) {
+        throw ERROR_MESSAGES_BRIDGE.blank;
+      }
+    });
+
+    if (bridgeSize.includes(' ')) {
+      throw ERROR_MESSAGES_BRIDGE.blank;
     }
   },
 

@@ -7,6 +7,7 @@ const INPUT_MESSAGES = Object.freeze({
 });
 
 const ERROR_MESSAGES_BRIDGE = Object.freeze({
+  blank: '[ERROR] 공백은 입력되지 않습니다.',
   typeError: '[ERROR] 숫자만 입력해 주세요.',
   outOfSize: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
 });
