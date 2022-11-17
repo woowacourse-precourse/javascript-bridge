@@ -5,11 +5,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 const Player = require("./Player");
-
-const ASK_BRIDGE_LENGTH = "다리의 길이를 입력해주세요.\n";
-const ASK_WHERE_WANT_TO_GO = "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n";
-const ASK_RETRY_OR_QUIT =
-  "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n";
+const { InputConstants } = require("./constant/Constants");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -19,7 +15,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine(ASK_BRIDGE_LENGTH, (sizeInput) => {
+    Console.readLine(InputConstants.ASK_BRIDGE_LENGTH, (sizeInput) => {
       const bridgeSize = new BridgeSize(sizeInput);
       const size = bridgeSize.makeStringToNumber();
       Player.updateSize(size);
@@ -34,7 +30,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine(ASK_WHERE_WANT_TO_GO, (wantGo) => {
+    Console.readLine(InputConstants.ASK_WHERE_WANT_TO_GO, (wantGo) => {
       new MoveInput(wantGo);
       const isCorrect = new BridgeGame().move(this.canWalkBridge, wantGo);
       Player.updateState(wantGo, isCorrect);
@@ -49,7 +45,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    Console.readLine(ASK_RETRY_OR_QUIT, (command) => {
+    Console.readLine(InputConstants.ASK_RETRY_OR_QUIT, (command) => {
       new CommandInput(command);
 
       new BridgeGame().retry(command)

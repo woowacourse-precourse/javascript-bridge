@@ -1,7 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Player = require("./Player");
-
-const START_MESSAGE = "다리 건너기 게임을 시작합니다.\n";
+const { OutputConstants } = require("./constant/Constants");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -13,8 +12,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap() {
-    Console.print(`[${Player.state[0].join("|")}]`);
-    Console.print(`[${Player.state[1].join("|")}]`);
+    Console.print(OutputConstants.BRIDGE_STATE(Player.state[0]));
+    Console.print(OutputConstants.BRIDGE_STATE(Player.state[1]));
   },
 
   /**
@@ -23,17 +22,17 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult() {
-    Console.print("\n최종 게임 결과");
-    Console.print(`[${Player.state[0].join("|")}]`);
-    Console.print(`[${Player.state[1].join("|")}]`);
+    Console.print(OutputConstants.RESULT_MESSAGE);
+    Console.print(OutputConstants.BRIDGE_STATE(Player.state[0]));
+    Console.print(OutputConstants.BRIDGE_STATE(Player.state[1]));
     Console.print("");
-    Console.print(`게임 성공 여부: ${Player.gameSuccess ? "성공" : "실패"}`);
-    Console.print(`총 시도한 횟수: ${Player.tryingCount}`);
+    Console.print(OutputConstants.SUCCESS_STATE(Player.gameSuccess));
+    Console.print(OutputConstants.TRYING_COUNT(Player.tryingCount));
     Console.close();
   },
 
   printStart() {
-    Console.print(START_MESSAGE);
+    Console.print(OutputConstants.START_MESSAGE);
   },
 };
 
