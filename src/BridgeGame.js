@@ -1,5 +1,6 @@
 const { ERROR } = require('./Messages');
 const InputView = require('./InputView');
+const MissionUtils = require('@woowacourse/mission-utils');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -45,6 +46,20 @@ class BridgeGame {
   validateMoveType(moveType) {
     if (moveType !== "U" && moveType !== "D")
       throw new Error(ERROR.INVALID_MOVE_TYPE);
+  }
+
+  vaildateBridgeSize(size) {
+    try {
+      if (isNaN(size))
+        throw new Error(ERROR.BRIDGE_SIZE_NOT_NUMBER);
+      if (size < 3 || size > 20)
+        throw new Error(ERROR.BRIDGE_SIZE_OUT_BOUNDARY);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      return false;
+    }
+
+    return true;
   }
 
   /**
