@@ -3,10 +3,16 @@ const COMMAND = {
   GAME: { RETRY: "R", QUIT: "Q" },
 };
 
-const BRIDGE_MAP = {
-  START: "[ ",
-  END: " ]",
-  DIVIDING_LINE: " | ",
+const BRIDGE = {
+  MAP: {
+    START: "[ ",
+    END: " ]",
+    DIVIDING_LINE: " | ",
+  },
+  SIZE: {
+    MINIMUN: 3,
+    MAXIMUM: 20,
+  },
 };
 
 const INPUT_MESSAGE = {
@@ -23,8 +29,8 @@ const OUTPUT_MESSAGE = {
     `게임 성공 여부: ${isGameSuccess ? "성공" : "실패"}`,
   GAME_TRY_COUNT: (tryCount) => `총 시도한 횟수: ${tryCount}`,
   BRIDGE_MAP: (bridgeMap) =>
-    `${BRIDGE_MAP.START}${bridgeMap.join(BRIDGE_MAP.DIVIDING_LINE)}${
-      BRIDGE_MAP.END
+    `${BRIDGE.MAP.START}${bridgeMap.join(BRIDGE.MAP.DIVIDING_LINE)}${
+      BRIDGE.MAP.END
     }`,
 };
 
@@ -32,4 +38,10 @@ const ERROR_MESSAGE = {
   BRIDGE_SIZE: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
 };
 
-module.exports = { INPUT_MESSAGE, OUTPUT_MESSAGE, COMMAND, ERROR_MESSAGE };
+module.exports = {
+  INPUT_MESSAGE,
+  OUTPUT_MESSAGE,
+  COMMAND,
+  ERROR_MESSAGE,
+  BRIDGE,
+};

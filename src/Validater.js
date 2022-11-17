@@ -1,12 +1,17 @@
-const { ERROR_MESSAGE } = require("./utils/constans");
+const { ERROR_MESSAGE, BRIDGE } = require("./utils/constans");
 const { Console } = require("@woowacourse/mission-utils");
 
 const Validater = {
   bridgeSize: (bridgeSize) => {
-    // 3, 20 상수화?
-    if (bridgeSize < 3 || bridgeSize > 20 || Number.isNaN(bridgeSize)) {
+    if (Number.isNaN(bridgeSize) || !isCorrectBrigeSize(bridgeSize)) {
       throw Console.print(ERROR_MESSAGE.BRIDGE_SIZE);
     }
+  },
+
+  isCorrectBrigeSize(bridgeSize) {
+    return (
+      BRIDGE.SIZE.MINIMUN <= bridgeSize && bridgeSize <= BRIDGE.SIZE.MAXIMUM
+    );
   },
 };
 
