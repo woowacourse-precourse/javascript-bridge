@@ -33,8 +33,18 @@
 
 - [x] `BridgeGame`의 `crossBridgeCompletely`가 true인 경우 클리어
 
-- [ ] `exitGame` 추후 출력 관련 구현 예정.
+- [x] `exitGame` 게임 성공, 실패 후 종료 분기점에서 최종 결과 출력 및 시도 횟수를 출력하도록 함.
+
+### OutputView
+
+- [x] 입력 결과에 따른 Map 생성 및 출력
+- [x] 실패 시 Map 출력, 게임 종료 시 실패한 결과 출력
+- [x] 성공 시 Map 출력
 
 ### BridgeMaker
 
-- [x] 인자로 받은 배열의 0은 D, 1은 U로 변경하여 리턴.
+- [x] 인자로 받은 함수를 실행해 0은 D, 1은 U로 변경하여 리턴.
+
+### 유효성 검사
+
+try catch 문으로 수정 예정.
