@@ -1,5 +1,6 @@
 const { makeBridge } = require('./BridgeMaker.js');
 const { generate } = require('./BridgeRandomNumberGenerator.js');
+const { ERROR_MSG } = require('./constants/message.js');
 
 class BridgeGame {
   #bridge;
@@ -14,15 +15,15 @@ class BridgeGame {
 
   validateSize(size) {
     if (this.isEmpty(size)) {
-      throw new Error('[ERROR] 입력값이 비었습니다. 값을 입력해주세요');
+      throw new Error(ERROR_MSG.emptyInput);
     }
 
     if (!this.hasOnlyNumber(size)) {
-      throw new Error('[ERROR] 숫자가 아닌 문자를 입력했습니다. 숫자만 입력해 주세요');
+      throw new Error(ERROR_MSG.invalidInputType);
     }
 
     if (this.isStartedZero(size)) {
-      throw new Error('[ERROR] 입력값이 0으로 시작합니다. 올바른 숫자를 입력해 주세요');
+      throw new Error(ERROR_MSG.isStartedZero);
     }
   }
 
