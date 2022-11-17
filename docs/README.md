@@ -4,7 +4,7 @@
 
 ## 초기 세팅
 
-- [ ] 다리 건너기 게임 게임 관련 상수 및 문구 config.js에 명시
+- [x] 다리 건너기 게임 게임 관련 상수 및 문구 config.js에 명시
 
 ## BridgeGame
 
@@ -12,24 +12,24 @@
 - [ ] 재시도: retry
 
 ## BridgeMaker
-- [ ] 새 다리 생성: makeBridge
+
+- [x] 새 다리 생성: makeBridge
 
 ## InputView
 
-- [ ] 다리 길이 입력: readBridgeSize
-- [ ] 다리 이동 칸 입력: readMoving
-- [ ] 재시작 종료 여부 입력: readGameCommand
+- [x] 사용자 입력 구현 : InputView
+- [ ] 사용자 입력 validate
 
 ## OutputView
 
-- [ ] 다리 출력: printMap
+- [x] 다리 출력: printMap
 - [ ] 결과 출력: printResult
 
 ## 입출력 검증
 
-- [ ] 다리 길이 입력 검증
-- [ ] 사용자 게임 입력이 U/D인지 검증
-- [ ] 사용자 재시작 입력이 R/Q인지 검증
+- [x] 다리 길이 입력 검증
+- [x] 사용자 게임 입력이 U/D인지 검증
+- [x] 사용자 재시작 입력이 R/Q인지 검증
 
 ## 예외 처리
 
