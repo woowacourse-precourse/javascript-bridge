@@ -61,3 +61,4 @@ const BridgeConverter = {
     return bridge;
   },
 };
+module.exports = BridgeConverter;
