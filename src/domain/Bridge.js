@@ -8,10 +8,10 @@ class Bridge {
 
   constructor(bridgeLength) {
     this.#bridgeLength = bridgeLength;
-    this.setBridgeMap();
+    this.#setBridgeMap();
   }
 
-  setBridgeMap() {
+  #setBridgeMap() {
     this.#bridgeMap = BridgeMaker.makeBridge(
       this.#bridgeLength,
       BridgeRandomNumberGenerator
