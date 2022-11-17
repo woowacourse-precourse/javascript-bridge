@@ -8,6 +8,11 @@ const MOVE = {
   DOWN: 'D',
 };
 
+const RESTART = {
+  RESTART: 'R',
+  QUIT: 'Q',
+};
+
 const MAP = {
   START: '[',
   DELIMITER: '|',
@@ -39,6 +44,7 @@ const ERRORS = {
 module.exports = {
   BRIDGE_RANGE,
   MOVE,
+  RESTART,
   MAP,
   PHRASE,
   ERRORS,
