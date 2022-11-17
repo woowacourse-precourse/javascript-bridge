@@ -1,4 +1,5 @@
 const Builder = require('../src/Builder.js');
+const Bridge = require('../src/Bridge.js');
 const { ERROR_MSG } = require('../src/constants/message.js');
 const { BRIDGE_SIZE_MIN_RANGE, BRIDGE_SIZE_MAX_RANGE } = require('../src/constants/condition.js');
 
@@ -42,11 +43,20 @@ describe('Builder 클래스 테스트', () => {
     }
   );
 
-  test.each([['10'], ['14']])(`입력이 유효한 경우 에러가 발생하지 않는다.`, (input) => {
+  test.each([['10'], ['14']])('입력이 유효한 경우 에러가 발생하지 않는다.', (input) => {
     const builder = new Builder();
 
     expect(() => {
       builder.buildBridge(input);
     }).not.toThrow();
+  });
+
+  test('입력이 유효한 경우 Bridge클래스의 instance를 return 한다.', () => {
+    const builder = new Builder();
+    const input = '10';
+
+    const output = builder.buildBridge(input);
+
+    expect(output).toBeInstanceOf(Bridge);
   });
 });

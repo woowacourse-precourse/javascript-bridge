@@ -55,4 +55,6 @@
 
 ## 테스트 코드 🔍
 
+- [x] Builder 클래스 테스트 완료
+
 - [ ] `Application 테스트`
