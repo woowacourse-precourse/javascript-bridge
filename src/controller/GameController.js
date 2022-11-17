@@ -3,12 +3,12 @@ const BridgeGame = require('../model/BridgeGame');
 const InputView = require('../view/InputView');
 
 class GameController {
-    constructor() {
-        //
-    }
+  constructor() {
+    //
+  }
 
-    start() {
-        Console.print('다리 건너기 게임을 시작합니다.');
-        InputView.setting();
-    }
+  start() {
+    Console.print('다리 건너기 게임을 시작합니다.');
+    InputView.setting();
+  }
 }
