@@ -40,4 +40,12 @@ describe("입력 테스트", () => {
       InputView.readBridgeSize();
     }).toThrow("[ERROR] 다리 길이는 3 이상 20 이하인 숫자여야 합니다.");
   });
+
+  test("이동할 칸이 U나 P가 아닌 경우 예외 처리한다.", () => {
+    mockQuestions(["A"]);
+
+    expect(() => {
+      InputView.readMoving();
+    }).toThrow("[ERROR] 이동할 칸은 U과 P만 입력할 수 있습니다.");
+  });
 });
