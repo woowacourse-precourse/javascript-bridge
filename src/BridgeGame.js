@@ -96,6 +96,10 @@ class BridgeGame {
     this.setMoveHistory(moveType);
   }
 
+  isFailMove([upHistory, downHistory]) {
+    return [...upHistory, ...downHistory].includes("X");
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>

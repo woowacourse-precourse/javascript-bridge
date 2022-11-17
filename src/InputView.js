@@ -12,9 +12,8 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     MissionUtils.Console.readLine(MESSAGE.ENTER_BRIDGE_SIZE, (size) => {
-      if (!bridgeGame.vaildateBridgeSize(size)) {
+      if (!bridgeGame.vaildateBridgeSize(size))
         return this.readBridgeSize(bridgeGame);
-      }
 
       bridgeGame.setBridge(new Bridge(size));
       console.log(bridgeGame.getBridge());
@@ -22,7 +21,6 @@ const InputView = {
     })
 
   },
-
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
@@ -34,6 +32,9 @@ const InputView = {
 
       bridgeGame.move(moveType);
       OutputView.printMap(bridgeGame);
+
+      if (bridgeGame.isFailMove(bridgeGame.getUpDownHistory()))
+        return this.readGameCommand();
 
       let maxPosition = bridgeGame.getBridge().length - 1;
       let position = bridgeGame.getPosition();
