@@ -3,15 +3,40 @@ const Attempt = require('./result/Attempt');
 const Bridge = require('./bridge/Bridge');
 const CrossingBridge = require('./result/CrossingBridge');
 const Judgment = require('./Judgment');
+const Result = require('./result/Result');
 const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
 
 class BridgeGame {
+  static #COMMAND = {
+    retry: 'R',
+    quit: 'Q',
+  };
+
   #attempt;
 
   #bridge;
 
   #crossingBridge;
+
+  static validate(command) {
+    const { values } = Object;
+    if (!values(BridgeGame.#COMMAND).includes(command)) {
+      throw new Error('[ERROR] 존재하지 않는 커맨트 입니다.');
+    }
+  }
+
+  static isRetry(command) {
+    return command === BridgeGame.#COMMAND.retry;
+  }
+
+  static isQuit(command) {
+    return command === BridgeGame.#COMMAND.quit;
+  }
+
+  static printResult(type) {
+    return Result.print(type);
+  }
 
   execute(bridgeSize) {
     const panels = makeBridge(bridgeSize, generate);
@@ -40,8 +65,21 @@ class BridgeGame {
     return this.#crossingBridge.print();
   }
 
-  retry() {
+  printAttempt() {
+    return this.#attempt.print();
+  }
 
+  checkGameWin() {
+    return Judgment.checkCrossingAll({
+      crossingBridge: this.#crossingBridge,
+      bridge: this.#bridge,
+    });
+  }
+
+  retry() {
+    this.#crossingBridge.initialize();
+    this.#attempt.add();
+    this.start();
   }
 
   quit() {
