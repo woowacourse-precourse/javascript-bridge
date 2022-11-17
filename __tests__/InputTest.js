@@ -27,3 +27,34 @@ test('게임 재시작,종료 입력 유효 테스트', () => {
     }).toThrow();
   });
 });
+test('게임 재시작:R,게임종료 :Q 유효 테스트', () => {
+  expect(InputError.reGameError('R')).toBe(true);
+});
+
+test('게임 재시작:R,게임종료 :Q 유효 테스트', () => {
+  expect(InputError.reGameError('Q')).toBe(true);
+});
+
+test('이동할 칸 입력 유효 테스트', () => {
+  const inputlog = [
+    '41123213123421',
+    '123',
+    '2',
+    '21',
+    '',
+    '-2',
+    '-5',
+    '문자열',
+    'u',
+    'UU',
+    'UUU',
+    'd',
+    'DDD',
+    'DD',
+  ];
+  inputlog.forEach((eachlog) => {
+    expect(() => {
+      InputError.movingError(eachlog);
+    }).toThrow();
+  });
+});
