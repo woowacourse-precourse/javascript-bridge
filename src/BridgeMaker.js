@@ -14,8 +14,8 @@ const BridgeMaker = {
 
     while (currentSize < size) {
       let randomNumber = generateRandomNumber();
-      if (randomNumber === 0) bridge.push(Constant.UP);
-      else if (randomNumber === 1) bridge.push(Constant.DOWN);
+      if (randomNumber == 0) bridge.push(Constant.UP);
+      else if (randomNumber == 1) bridge.push(Constant.DOWN);
       currentSize++;
     }
 

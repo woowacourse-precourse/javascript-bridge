@@ -11,7 +11,7 @@ describe("다리 건너기 테스트", () => {
     const size = 2;
     const upDownMock = jest.fn();
 
-    const upDownMocks = upDownMock.mockReturnValueOnce(0).mockReturnValueOnce(1);
+    const upDownMocks = upDownMock.mockReturnValueOnce("0").mockReturnValueOnce("1");
 
     expect(BridgeMaker.makeBridge(size, upDownMocks)).toEqual(["U", "D"]);
   });
