@@ -69,7 +69,12 @@ class App {
     canCross ? this.isDone() : this.askRetry();
   }
 
-  printBridgeMap() {}
+  printBridgeMap() {
+    const bridgeMap = Object.values(this.#bridgeMap);
+    bridgeMap.forEach((map, idx) =>
+      Console.print(`[ ${map.join(' | ')} ]${idx ? '\n' : ''}`)
+    );
+  }
 
   isDone() {}
 
