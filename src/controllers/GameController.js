@@ -1,23 +1,19 @@
-const Bridge = require('../Bridge');
-const BridgeMaker = require('../BridgeMaker');
-const InputView = require('../views/InputView');
+const GameService = require('../gameService');
 const OutputView = require('../views/OutputView');
 
 class GameController {
-  #bridge;
+  #gameService;
+
+  constructor() {
+    this.#gameService = new GameService();
+  }
 
   gameStart() {
     OutputView.printStartMessage();
   }
 
-  askBridgeSize() {
-    InputView.readBridgeSize();
-    this.#bridge = new Bridge();
-    console.log(this.#bridge);
-  }
-
-  makeBridgeMaker() {
-    BridgeMaker;
+  makeBridge(size) {
+    this.#gameService.makeBridge(size);
   }
 
   gameExit() {}

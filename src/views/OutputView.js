@@ -1,5 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-
 const { MESSAGE } = require('../constant');
 
 /**

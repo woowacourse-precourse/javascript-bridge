@@ -1,10 +1,26 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
+const { DIRECTION, MESSAGE, ANSWER } = require('./constant');
 
 class App {
   #size;
   #bridge;
+  #curPlace;
+  #numberOfAttempts;
+  #bridgeMap;
+  #success;
+
+  constructor() {
+    this.init();
+    this.#numberOfAttempts = 1;
+    this.#success = false;
+  }
+
+  init() {
+    this.#bridgeMap = { U: [], D: [] };
+    this.#curPlace = 0;
+  }
 
   play() {
     this.gameStart();
@@ -17,21 +33,25 @@ class App {
 
   askBridgeSize() {
     Console.readLine('다리의 길이를 입력해주세요.\n', (size) => {
-      this.size = size;
+      this.#size = Number(size);
       this.makeBridge();
     });
   }
 
   makeBridge() {
-    this.bridge = BridgeMaker.makeBridge(this.size, generate);
+    this.#bridge = BridgeMaker.makeBridge(this.#size, generate);
     this.askMoveDirection();
   }
 
-  askMoveDirection() {}
-
-  // gameProgress() { }
-
-  exit() {}
+  askMoveDirection() {
+    console.log(this.#bridge);
+    Console.readLine(
+      '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
+      (answer) => {
+        this.movePlayer(Number(DIRECTION[answer]));
+      }
+    );
+  }
 }
 
 const app = new App();

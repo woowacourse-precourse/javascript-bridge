@@ -1,17 +1,22 @@
 const { Console } = require('@woowacourse/mission-utils');
-const Bridge = require('../Bridge');
-
 const { MESSAGE } = require('../constant/index');
+const GameController = require('../controllers/GameController');
+const PlayerController = require('../controllers/PlayerController');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
+  gameCtrl: new GameController(),
+  playerCtrl: new PlayerController(),
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine(MESSAGE.ASK_BRIDGE_SIZE, (size) => new Bridge(size));
+    Console.readLine(MESSAGE.ASK_BRIDGE_SIZE, (size) => {
+      this.gameCtrl.makeBridge(size);
+      // this.readMoving();
+    });
   },
 
   /**

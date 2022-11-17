@@ -8,6 +8,10 @@ class Bridge {
   }
 
   validate() {}
+
+  getSize() {
+    return this.#size;
+  }
 }
 
 module.exports = Bridge;
