@@ -17,12 +17,12 @@ const Validator = Object.freeze({
 
   checkSpace(input) {
     const trimedInput = input.trim();
-    if (trimedInput.match(this.SPAGE_REG)) throw new Error(this.ERROR_MESSAGES_NOT_EMPTY);
+    if (trimedInput.match(Validator.SPAGE_REG)) throw new Error(Validator.ERROR_MESSAGES_NOT_EMPTY);
     return true;
   },
 
   checkNan(input) {
-    if (Number.isNaN(+input)) throw new Error(this.ERROR_MESSAGES.NOT_NAN);
+    if (Number.isNaN(+input)) throw new Error(Validator.ERROR_MESSAGES.NOT_NAN);
     return true;
   },
 
@@ -35,8 +35,8 @@ const Validator = Object.freeze({
   },
 
   checkRange(input) {
-    if (input > this.BRIDGE_RANGE.MAX || input < this.BRIDGE_RANGE.MIN) {
-      throw new Error(this.ERROR_MESSAGES.RANGE_ERROR);
+    if (input > Validator.BRIDGE_RANGE.MAX || input < Validator.BRIDGE_RANGE.MIN) {
+      throw new Error(Validator.ERROR_MESSAGES.RANGE_ERROR);
     }
     return true;
   },
@@ -44,10 +44,10 @@ const Validator = Object.freeze({
 
 module.exports = Validator;
 
-console.log(
-  Validator.checkCondition(
-    '22',
-    Validator.GAME_OPTION_CONDITIONS,
-    Validator.ERROR_MESSAGES.ONLY_R_Q,
-  ),
-);
+// console.log(
+//   Validator.checkCondition(
+//     '22',
+//     Validator.GAME_OPTION_CONDITIONS,
+//     Validator.ERROR_MESSAGES.ONLY_R_Q,
+//   ),
+// );
