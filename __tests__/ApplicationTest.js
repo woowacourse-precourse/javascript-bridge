@@ -1,6 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
+const { ERROR_MESSAGES_BRIDGE } = require('../src/Messages');
+const InputView = require('../src/InputView');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -51,6 +53,36 @@ const expectBridgeOrder = (received, upside, downside) => {
   expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
+const bridgeSizeBlankException = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  const app = new App();
+
+  app.play();
+
+  expectLogContains(getOutput(logSpy), [ERROR_MESSAGES_BRIDGE.blank]);
+};
+
+const bridgeSizeTypeRunException = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  const app = new App();
+
+  app.play();
+
+  expectLogContains(getOutput(logSpy), [ERROR_MESSAGES_BRIDGE.typeError]);
+};
+
+const bridgeSizeOutOfSizeException = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  const app = new App();
+
+  app.play();
+
+  expectLogContains(getOutput(logSpy), [ERROR_MESSAGES_BRIDGE.outOfSize]);
+};
+
 describe("다리 건너기 테스트", () => {
   test("다리 생성 테스트", () => {
     const randomNumbers = ["1", "0", "0"];
@@ -83,5 +115,43 @@ describe("다리 건너기 테스트", () => {
 
   test("예외 테스트", () => {
     runException(["a"]);
+  });
+});
+
+describe('다리 길이 입력 예외 테스트', () => {
+  test('다리 길이 입력이 공백인 경우', () => {
+    bridgeSizeBlankException(['']);
+  });
+
+  test('다리 길이 입력이 공백 한칸인 경우', () => {
+    bridgeSizeBlankException([' ']);
+  });
+
+  test('다리 길이 입력이 줄바꿈인 경우', () => {
+    bridgeSizeBlankException(['\n']);
+  });
+
+  test('다리 길이 입력이 숫자 사이 공백이 있는 경우', () => {
+    bridgeSizeBlankException(['3 5']);
+  });
+
+  test('다리 길이 입력이 문자인 경우', () => {
+    bridgeSizeTypeRunException(['a']);
+  });
+
+  test('다리 길이 입력이 음수인 경우', () => {
+    bridgeSizeTypeRunException(['-15']);
+  });
+
+  test('다리 길이 입력이 소수인 경우', () => {
+    bridgeSizeTypeRunException(['10.5']);
+  });
+
+  test('입력된 다리 길이가 2인 경우', () => {
+    bridgeSizeOutOfSizeException(['2']);
+  });
+
+  test('입력된 다리 길이가 21인 경우', () => {
+    bridgeSizeOutOfSizeException(['21']);
   });
 });
