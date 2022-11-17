@@ -49,4 +49,20 @@ class MoveConstraints {
   }
 }
 
-module.exports = { SizeConstraints, MoveConstraints };
+const ERROR_NOT_ONLY_R_OR_Q = "[ERROR] R 혹은 Q만 입력 가능합니다.";
+
+class CommandConstraints {
+  #command;
+
+  constructor(command) {
+    this.#command = command;
+  }
+
+  checkInputRorQ() {
+    if (this.#command !== "R" && this.#command !== "Q") {
+      throw new Error(ERROR_NOT_ONLY_R_OR_Q);
+    }
+  }
+}
+
+module.exports = { SizeConstraints, MoveConstraints, CommandConstraints };
