@@ -17,7 +17,7 @@ class Controller {
 
   #handleMakeBridge() {
     InputView.readBridgeSize((input) => {
-      this.#bridgeGame = new BridgeGame(input);
+      this.#bridgeGame = new BridgeGame(Number(input));
       OutputView.printLineBreak();
       this.#handleMove();
     });
