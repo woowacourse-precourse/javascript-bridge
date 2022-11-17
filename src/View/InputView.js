@@ -10,13 +10,13 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    let size = 0;
     MissionUtils.Console.readLine(MESSAGE.INPUT_BRIDGE_LENGTH, (answer) => {
-      size = +answer;
+      const size = +answer;
       if (this.bridgeSizeValidate(answer)) {
         return answer;
       }
       BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+      this.readMoving();
     });
   },
 
@@ -32,7 +32,20 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
+      const move = answer;
+      if (this.moveValidate(answer)) {
+      }
+      return move;
+    });
+  },
+
+  moveValidate(move) {
+    if (!["U", "D"].includes(move)) {
+      throw new Error(ERROR.MOVE);
+    }
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
