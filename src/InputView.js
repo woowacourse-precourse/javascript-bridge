@@ -1,6 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Validation = require("./Validation");
 const OutputView = require("./OutputView");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+
 const BridgeGame = require("./BridgeGame");
 
 const InputView = {
@@ -13,7 +15,10 @@ const InputView = {
 			START_MSG + READ_BRIDGE_SIZE_MSG,
 			(bridgeSize) => {
 				InputView.handlingBridgeSizeError(bridgeSize);
-				const bridgeGame = new BridgeGame(bridgeSize);
+				const bridgeGame = new BridgeGame(
+					bridgeSize,
+					BridgeRandomNumberGenerator.generate,
+				);
 				InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 			},
 		);
@@ -33,6 +38,7 @@ const InputView = {
 			InputView.handlingMovingError(bridgeGame, moving);
 			const currentBridge = bridgeGame.move(moving);
 			OutputView.printMap(currentBridge);
+			InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 		});
 	},
 
