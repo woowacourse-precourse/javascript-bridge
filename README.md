@@ -9,7 +9,7 @@
 - [ ] InputView : 다리길이 입력
 - [ ] 입력한 다리길이 BridgeMaker로 전달
 - [ ] BridgeMaker : 다리 생성
-- [ ] 생성한 다리 BridgeGame으로 전달
+- [ ] 생성한 다리 InputView으로 전달
 
 #### 게임 플레이
 
