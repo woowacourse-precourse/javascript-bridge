@@ -7,15 +7,24 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 class App {
   constructor() {
     this.bridgeGame = new BridgeGame();
-    this.moveableOfBridge = [];
   }
 
   play() {
     OutputView.playGame();
-    this.moveableOfBridge = InputView.readBridgeSize(this.makeBridge);
+    this.inputBridgeSize();
+  }
+  inputBridgeSize() {
+    InputView.readBridgeSize(this.makeBridge.bind(this));
   }
   makeBridge(size) {
-    return BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.bridgeGame.setBridge(BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate));
+    this.inputMoving();
+  }
+  inputMoving() {
+    InputView.readMoving(this.passBridge);
+  }
+  passBridge(direction) {
+    console.log(direction);
   }
 }
 
