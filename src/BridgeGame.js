@@ -1,12 +1,12 @@
 class BridgeGame {
   #bridge;
   #map;
-  #try;
+  #tryCount;
 
   constructor(bridge) {
     this.#bridge = bridge;
     this.#map = [];
-    this.#try = 1;
+    this.#tryCount = 1;
   }
 
   getBridge() {
@@ -17,8 +17,8 @@ class BridgeGame {
     return this.#map;
   }
 
-  getTry() {
-    return this.#try;
+  getTryCount() {
+    return this.#tryCount;
   }
 
   move(moving) {
@@ -31,7 +31,7 @@ class BridgeGame {
 
   retry() {
     this.#map = [];
-    this.#try += 1;
+    this.#tryCount += 1;
   }
 }
 
