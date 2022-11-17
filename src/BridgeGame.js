@@ -20,6 +20,10 @@ class BridgeGame {
     if (!this.hasOnlyNumber(size)) {
       throw new Error('[ERROR] 숫자가 아닌 문자를 입력했습니다. 숫자만 입력해 주세요');
     }
+
+    if (this.isStartedZero(size)) {
+      throw new Error('[ERROR] 입력값이 0으로 시작합니다. 올바른 숫자를 입력해 주세요');
+    }
   }
 
   isEmpty(size) {
@@ -31,6 +35,10 @@ class BridgeGame {
       .split('')
       .map((eachLetter) => parseInt(eachLetter, 10))
       .every((number) => Number.isInteger(number));
+  }
+
+  isStartedZero(size) {
+    return size.startsWith('0');
   }
 }
 
