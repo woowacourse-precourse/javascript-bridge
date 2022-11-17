@@ -1,30 +1,26 @@
+const OutputView = require("../src/OutputView");
+const InputView = require("../src/InputView");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
-  #current;
   constructor(bridge) {
     this.#bridge = bridge;
-    this.#current = 0;
   }
+
+  transInputtoPosition(input) {
+    if (input == "U") return 1; // U -> 1
+    if (input == "D") return 0; // D -> 0
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(input) {
-    const currentState = this.#bridge[this.#current];
-    if (this.transInputtoState(input) == currentState) {
-      this.#current += 1;
-      return "O";
-    } else return "X";
-  }
+  move() {}
 
-  transInputtoState(input) {
-    if (input == "U") return 1;
-    if (input == "D") return 0;
-  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
