@@ -11,6 +11,7 @@ const {
   ERROR_RETRY_MESSAGE,
   NUMBER,
 } = require('./constants');
+const { printMap } = require('./OutputView');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -23,7 +24,8 @@ const InputView = {
       const bridgeSize = Number(userInput);
       this.bridgeValidation(bridgeSize);
       const bridge = makeBridge(bridgeSize, generate);
-      this.readMoving(bridge, NUMBER.one, NUMBER.zero);
+      console.log(bridge);
+      this.readMoving(bridge, NUMBER.zero, NUMBER.zero);
     });
   },
 
@@ -59,6 +61,8 @@ const InputView = {
       const bridgeGame = new BridgeGame(bridge, steps, numberAttempts);
       bridgeGame.move(userInput);
       const curSteps = bridgeGame.getSteps();
+      const { upBridge, downBridge } = bridgeGame.getStepResult();
+      printMap(upBridge, downBridge);
       if (curSteps === bridge.length) {
         Console.print('끝');
       }
@@ -66,7 +70,7 @@ const InputView = {
         this.readMoving(bridge, curSteps, numberAttempts);
       }
       if (steps === curSteps) {
-        this.readGameCommand();
+        this.readMoving(bridge, curSteps, numberAttempts);
       }
     });
   },
