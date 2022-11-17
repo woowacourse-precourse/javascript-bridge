@@ -6,4 +6,10 @@ describe("BridgeGameModel 클래스 테스트", () => {
 
     expect(bridgeGameModel.jumpUp()).toEqual({ user: ["U"], bridge: [] });
   });
+
+  test("유저가 'D'를 입력할 때, jumpDown 메서드로 데이터를 가공한다.", () => {
+    const bridgeGameModel = new BridgeGameModel();
+
+    expect(bridgeGameModel.jumpDown()).toEqual({ user: ["D"], bridge: [] });
+  });
 });
