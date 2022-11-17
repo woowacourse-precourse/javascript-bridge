@@ -59,3 +59,16 @@
 |`refactor:`| 코드 리팩토링 - 버그 수정과 기능 추가가 없는 코드 변경 |
 |`style:`| 코드 스타일 변경 - 포맷, 공백, 세미클론, 함수 이름변경, 줄간격 등 <br>코드에 영향을 주지 않는 내용|
 |`test:`| 테스트 코드 관련 내용 (테스트 코드 리팩토링 포함)|
+
+#### 1차 구조
+Model
+: 다리 건너기 각 기능을 구성하는 목록(다리 생성 -> 게임진행)
+- `BridgeMaker` : controller에서 다리 길이 데이터를 받아 다리 생성
+- `BridgeGame` : controller에서 사용자 응답 데이터를 받아서 게임 진행
+
+View
+- InputView : 사용자에게 입력을 받아 controller에 전달
+- OutputView : contraller에서 데이터를 받아 결과를 보여주는 부분
+
+Controller
+- App.js
