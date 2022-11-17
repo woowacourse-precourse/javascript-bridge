@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { PHRASE } = require('./config');
+const { validateBridgeSize, validateMove, validateRestart } = require('./validate');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -10,6 +11,7 @@ const InputView = {
    */
   readBridgeSize(callback) {
     Console.readLine(PHRASE.BRIDGE_LEN, (length) => {
+      validateBridgeSize(length);
       callback(budget);
     });
   },
@@ -19,6 +21,7 @@ const InputView = {
    */
   readMoving(callback) {
     Console.readLine(PHRASE.SELECT, (move) => {
+      validateMove(move);
       callback(move);
     });
   },
@@ -28,6 +31,7 @@ const InputView = {
    */
   readGameCommand(callback) {
     Console.readLine(PHRASE.RESTART, (restart) => {
+      validateRestart(restart);
       callback(restart);
     });
   },
