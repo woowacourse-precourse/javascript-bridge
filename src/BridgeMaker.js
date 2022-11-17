@@ -13,7 +13,12 @@ const BridgeMaker = {
     const movableBridgePath = [];
     while (movableBridgePath.length < size) {
       upOrDownDecider = generateRandomNumber();
+      movableBridgePath.push(this.convertNumberToAlphabet(upOrDownDecider));
     }
+  },
+
+  convertNumberToAlphabet(number) {
+    return number === 0 ? "D" : "U";
   },
 };
 
