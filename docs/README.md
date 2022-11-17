@@ -190,7 +190,7 @@ const number = generateRandomNumber();
 
 - [x] feat: 게임 성공 여부 출력
   - 성공 또는 실패를 출력한다.
-- [ ] feat: 총 시도한 횟수 출력
+- [x] feat: 총 시도한 횟수 출력
   - 첫 시도를 포함해 게임을 종료할 때까지 시도한 횟수를 출력한다.
 
 ---

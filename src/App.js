@@ -71,8 +71,8 @@ class App {
   }
 
   quit() {
-    const { isSuccess } = this.bridgeGame.getResult();
-    OutputView.printResult({ isSuccess });
+    OutputView.printResult(this.bridgeGame.getResult());
+    Console.close();
   }
 }
 

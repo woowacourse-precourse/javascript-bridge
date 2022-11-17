@@ -55,9 +55,9 @@ class BridgeGame {
   }
 
   getResult() {
-    let isSuccess = !this.isFail() && this.isLast();
+    const isSuccess = !this.isFail() && this.isLast();
 
-    return { isSuccess };
+    return { isSuccess, attempCount: this.#attemptCount };
   }
 }
 
