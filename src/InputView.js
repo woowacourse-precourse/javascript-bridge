@@ -4,6 +4,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 const InputView = {
+	bridge: [],
 	START_MSG: "다리 건너기 게임을 시작합니다.",
 	READ_BRIDGE_SIZE_MSG: "다리의 길이를 입력해주세요.",
 	READ_MOVING_MSG: "이동할 칸을 선택해주세요. (위: U, 아래: D)",
@@ -19,11 +20,22 @@ const InputView = {
 
 	ExecuteBridgeSizeStep(bridgeSize) {
 		Validation.validateBridgeSize(bridgeSize);
-		BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+		InputView.bridge = BridgeMaker.makeBridge(
+			bridgeSize,
+			BridgeRandomNumberGenerator.generate,
+		);
 		InputView.readMoving();
 	},
 
-	readMoving() {},
+	readMoving() {
+		MissionUtils.Console.readLine(InputView.READ_MOVING_MSG, (moving) => {
+			ExecuteMovingStep(moving);
+		});
+	},
+
+	ExecuteMovingStep(moving) {
+		Validation.validateMoving(moving);
+	},
 
 	readGameCommand() {},
 };
