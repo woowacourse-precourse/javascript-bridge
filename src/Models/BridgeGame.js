@@ -9,7 +9,11 @@ class BridgeGame {
   #myBridge;
 
   createBridge() {
-    const myBridge = BridgeMaker(this.size, generateRandomNumber);
+    #myBridge = BridgeMaker(this.size, generateRandomNumber);
+  }
+
+  get myBridge() {
+    return this.#myBridge;
   }
 
   /**

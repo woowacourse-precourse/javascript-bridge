@@ -1,5 +1,4 @@
-const BridgeMaker = require('../src/BridgeMaker')
-const { convertReverse, convertBlueprintToBridge, createBlueprint } = require('../src/utils/bridgeHandler');
+const { convertBlueprintToBridge, createBlueprint } = require('../src/utils/bridgeHandler');
 const {generateRandomNumber} = require('../src/utils/bridgeHandler')
 
 describe("다리 생성 테스트", () => {

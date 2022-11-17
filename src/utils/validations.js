@@ -10,7 +10,7 @@ const checkNumberValidation = (userInput) => {
 };
 
 const validateBridgeRange = (userInput) => {
-  if (userInput < 3 || userInput > 20) return;
+  if (userInput >= 3 && userInput <= 20) return;
 
   Console.close();
   throw new Error(ERROR.INVALID_RANGE);

@@ -9,4 +9,5 @@ class App {
     this.GameController.startGame();
   }
 }
+
 module.exports = App;

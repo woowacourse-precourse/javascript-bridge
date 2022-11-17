@@ -1,6 +1,5 @@
 const InputView = require('../Views/InputView');
 const OutputView = require('../Views/OutputView');
-const BridgeMaker = require('../BridgeMaker');
 
 class GameController {
   constructor() {
@@ -16,10 +15,6 @@ class GameController {
 
   selectBridgeSize() {
     this.inputView.readBridgeSize();
-  }
-
-  createBridge() {
-    const myBridge = BridgeMaker(this.size, generateRandomNumber);
   }
 }
 
