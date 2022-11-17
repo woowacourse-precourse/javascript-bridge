@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { SENTENCE } = require('../constants/Constants');
 const { bridgeLengthValidation } = require('../utils/BridgeValidation');
+const { movingValidation } = require('../utils/movingValidation');
 
 const InputView = {
   readBridgeSize() {
