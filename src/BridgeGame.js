@@ -7,6 +7,7 @@ const bridgeMaterialize = require('./utils/bridgeMaterialize');
 class BridgeGame {
   #myBridge;
   #nowState;
+  #myBridgeMaterialize;
 
   constructor(makeRandomNumber, bridgeMaker, size) {
     this.#myBridge = bridgeMaker(size, makeRandomNumber);
@@ -14,6 +15,8 @@ class BridgeGame {
   }
 
   myBridgeMaterialize() {
+    this.#myBridgeMaterialize = this.#myBridge.myBridgeMaterialize();
+    Console.print(this.#myBridgeMaterialize.join('\n'));
     return bridgeMaterialize(this.#myBridge);
   }
   /**
@@ -23,7 +26,6 @@ class BridgeGame {
    */
   async move(readMoving) {
     const input = await readMoving();
-    Console.print(input);
     if (this.#myBridge[this.#nowState] === input) return true;
     return false;
   }
@@ -38,8 +40,8 @@ class BridgeGame {
     // 결과 이용해 값 유효 여부 확인 후 로직 전개
   }
 
-  printMyBridge(printMap) {
-    printMap(this.#myBridge, this.#nowState);
+  printMyBridge(printMap, correct) {
+    printMap(this.#myBridgeMaterialize, this.#nowState, correct);
   }
 }
 
