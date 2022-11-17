@@ -6,10 +6,10 @@
   - 0은 D를, 1은 U를 반환한다.
   - [x] (예외처리) 랜덤 수가 0 또는 1이 아닌 경우 예외처리 한다. BridgeDirection#validate
 - [ ] 다리를 이동한다. BridgeGame#move
-  - [ ] 다리의 다음 칸을 건널 수 있는지 확인한다. Judgment#checkCrossingNext
-  - [ ] 다리의 n번째 칸을 건넌다. Bridge#stepOn
-  - [ ] 이동할 칸이 강화유리인지 확인한다. BridgePanel#checkTempered
-    - [ ] (예외처리) 건널 수 있는 칸의 방향이 U 또는 D가 아닌 경우 예외처리 한다. BridgePanel#validate
+  - [x] 다리의 다음 칸을 건널 수 있는지 확인한다. Judgment#checkCrossingNext
+  - [x] 다리의 n번째 칸을 건넌다. Bridge#stepOn
+  - [x] 이동할 칸이 강화유리인지 확인한다. BridgePanel#checkTempered
+    - [x] (예외처리) 건널 수 있는 칸의 방향이 U 또는 D가 아닌 경우 예외처리 한다. BridgePanel#validate
 - [ ] 다리를 건너온 정보를 추가한다. CrossingBridge#add
 - [ ] 다리를 건너온 정보의 출력 결과를 생성한다. CrossingBridge#print
 - [ ] 다리를 몇 칸 건너왔는지 출력한다. CrossingBridge#size
