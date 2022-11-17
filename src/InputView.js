@@ -11,16 +11,13 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine(Message.GET_LENGTH_OF_BRIDGE_MESSAGE, (value) => {
+    Console.readLine(Message.READ_BRIDGE_SIZE_MESSAGE, (value) => {
       const size = parseInt(value, 10);
       const bridge = BridgeMaker.makeBridge(
         size,
         BridgeRandomNumberGenerator.generate
       );
-      Console.readLine(
-        Message.SELECT_DIRECTION_MESSAGE,
-        this.readMoving.bind(this)
-      );
+      Console.readLine(Message.READ_MOVING_MESSAGE, this.readMoving.bind(this));
     });
   },
 
