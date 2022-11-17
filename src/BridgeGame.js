@@ -42,6 +42,11 @@ class BridgeGame {
     return this.#getResultMap();
   }
 
+  retry() {
+    this.#inputs = [];
+    this.#gameStatus = GAME_STATUS.PROCEEDING;
+  }
+
   #checkGameEnd() {
     if (this.#bridge.length === this.#inputs.length) {
       this.#gameStatus = GAME_STATUS.END;
@@ -88,11 +93,6 @@ class BridgeGame {
     });
 
     return belowPart.join(BRIDGE.JOIN);
-  }
-
-  retry() {
-    this.#inputs = [];
-    this.#gameStatus = GAME_STATUS.PROCEEDING;
   }
 }
 
