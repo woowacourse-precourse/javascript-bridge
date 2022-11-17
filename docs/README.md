@@ -24,7 +24,7 @@
 - 이동할 칸 입력을 받는다.
 - 게임 다시시도에 관한 입력값을 받는다.
 
-## 출력
+## 입력 & 출력
 
 - 다리길이 입력
 - 이동할 칸 선택
@@ -32,3 +32,35 @@
 - 다시시도 여부 선택
 
 - 최종 게임결과
+
+# class
+
+- Bridge
+  - validate
+  - setBridge
+  - getLength
+  - getBridge
+- BridgeGame
+  - validate
+  - getSelected
+  - getLength
+  - getResult
+  - getTryCnt
+  - move
+  - retry
+
+# function
+
+- InputView
+  - readBridgeSize
+  - readMoving
+  - readGameCommand
+- OutputView
+  - printMap
+  - printLine
+  - setMesage
+  - getMessageBody
+  - getMessageElement
+  - printResult
+- BridgeMaker
+- BridgeRandomNumber
