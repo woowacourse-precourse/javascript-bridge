@@ -66,4 +66,17 @@ describe("BridgeGame 테스트", () => {
         const bridgeGame = new BridgeGame();
         expect(bridgeGame.validateCommand(command)).toEqual(false);
     });
+
+    test("게임 리셋 테스트", () => {
+        const bridge = ["1", "0", "1"];
+        mockRandoms(bridge);
+
+        const bridgeGame = new BridgeGame();
+        bridgeGame.setBridge(new Bridge(bridge.legnth));
+        bridgeGame.retry();
+
+        expect(bridgeGame.getTryCount()).toEqual(2);
+        expect(bridgeGame.getPosition()).toEqual(-1);
+        expect(bridgeGame.getMoveHistory()).toEqual([]);
+    })
 });
