@@ -5,13 +5,21 @@ const InputView = require("../src/InputView");
  */
 class BridgeGame {
   #bridge;
+  #resultMap;
+
   constructor(bridge) {
     this.#bridge = bridge;
+    this.#resultMap;
+  }
+
+  canMove(position) {
+    if (position === this.#bridge[this.#current]) return "O";
+    return "X";
   }
 
   transInputtoPosition(input) {
-    if (input == "U") return 1; // U -> 1
-    if (input == "D") return 0; // D -> 0
+    if (input == "U") return this.fillMap(1); // U -> 1
+    if (input == "D") return this.fillMap(0); // D -> 0
   }
 
   /**
