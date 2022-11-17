@@ -8,6 +8,10 @@ class BridgeGame {
   #steps = [];
   #trialTime = 1;
 
+  setBridge = (bridge) => {
+    this.#bridge = bridge;
+  };
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -15,20 +19,29 @@ class BridgeGame {
    */
   move = (letter) => {
     this.#steps.push(letter);
-    const result =
-      this.#steps[this.#steps.length - 1] ===
-      this.#bridge[this.#steps.length - 1];
-    const gameOver = this.#bridge.length === this.#steps.length;
-    const map = this.getMap();
+    const result = this.#getResult();
+    const gameOver = this.#isGameOver();
+    const map = this.#getMap();
     return { map, result, gameOver, trialTime: this.#trialTime };
   };
 
-  getMap = () => {
+  #getResult() {
+    return (
+      this.#steps[this.#steps.length - 1] ===
+      this.#bridge[this.#steps.length - 1]
+    );
+  }
+
+  #isGameOver() {
+    return this.#bridge.length === this.#steps.length;
+  }
+
+  #getMap() {
     return this.#steps.map((step, ind) => [
       step,
       this.#bridge[ind] === step ? LETTER.correct : LETTER.wrong,
     ]);
-  };
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
@@ -38,10 +51,6 @@ class BridgeGame {
   retry = () => {
     this.#steps = [];
     this.#trialTime += 1;
-  };
-
-  setBridge = (bridge) => {
-    this.#bridge = bridge;
   };
 }
 
