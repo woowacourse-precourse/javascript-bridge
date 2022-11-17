@@ -1,14 +1,14 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { SENTENCE } = require('../constants/Constants');
-const { bridgeLengthValidation } = require('../utils/BridgeValidation');
-const { movingValidation } = require('../utils/movingValidation');
+const { BridgeLengthValidation } = require('../utils/BridgeValidation');
+const { MovingValidation } = require('../utils/movingValidation');
 
 const InputView = {
   readBridgeSize() {
     let length;
     Console.readLine(SENTENCE.bridgeLength, (inputLength) => {
       const num = Number(inputLength);
-      bridgeLengthValidation(num);
+      BridgeLengthValidation(num);
       length = num;
     });
 
@@ -18,7 +18,7 @@ const InputView = {
   readMoving() {
     let whichMoving;
     Console.readLine(SENTENCE.selectMoving, (inputMoving) => {
-      movingValidation(inputMoving);
+      MovingValidation(inputMoving);
       whichMoving = inputMoving;
     });
 
