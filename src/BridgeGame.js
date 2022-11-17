@@ -36,6 +36,14 @@ class BridgeGame {
   retry() {
     this.#tryCount += 1;
   }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
+
+  getBridgeMap() {
+    return this.#bridgeMap;
+  }
 }
 
 module.exports = BridgeGame;
