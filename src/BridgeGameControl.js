@@ -2,20 +2,25 @@ const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 const BridgeSize = require('./available-check/BridgeSize');
+const MovingCheck = require('./available-check/MovingCheck');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeGame = require('./BridgeGame');
 
 class BridgeGameControl {
   size;
   bridge;
+  userMove = '';
 
   constructor() {
-    this.bidgeSize = new BridgeSize();
+    this.bridgeSize = new BridgeSize();
+    this.movingCheck = new MovingCheck();
+    this.bridgeGame = new BridgeGame();
   };
   
   start() {
     InputView.readBridgeSize((size) => {
-      this.bidgeSize.validate(size);
+      this.bridgeSize.validate(size);
       this.size = size;
       this.makeBridge();
     });
@@ -23,8 +28,16 @@ class BridgeGameControl {
 
   makeBridge() {
     this.bridge = BridgeMaker.makeBridge(this.size, BridgeRandomNumberGenerator.generate);
-    // Console.print('ddddddd')
-    // Console.print(this.bridge)
+    this.moving();
+  };
+
+  moving() {
+    InputView.readMoving((upDown) => {
+      this.movingCheck.validate(upDown);
+      this.userMove += upDown;
+      // Console.print(this.userMove);
+      // this.bridgeGame.move(upDown);
+    });
   };
 
 };
