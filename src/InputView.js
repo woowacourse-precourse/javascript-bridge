@@ -3,6 +3,7 @@
  */
 const { Console } = require('@woowacourse/mission-utils');
 const { BRIDGE_INPUT } = require('./MESSAGES/InputMessage');
+const { RE_START_MESSAGE } = require('./MESSAGES/GameMessage');
 
 const InputView = {
   /**
@@ -14,6 +15,14 @@ const InputView = {
       bridgeSize = inputbridgeSize;
     });
     return bridgeSize;
+  },
+
+  readRegame() {
+    let reGame;
+    Console.readLine(RE_START_MESSAGE, (inputreGame) => {
+      reGame = inputreGame;
+    });
+    return reGame;
   },
 
   /**
