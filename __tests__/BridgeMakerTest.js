@@ -10,7 +10,11 @@ describe('BridgeMaker 테스트', () => {
     expect(bridgeMaker.convertDorU(1)).toEqual('U');
   });
 
-  test('입력받은 길이에 해당하는 다리 생성', () => {
-    expect(bridgeMaker.makeBridge(10, bridgeRandomNumberGenerator)).toHaveLength(10);
+  test.each([
+    [5, 5],
+    [10, 10],
+    [20, 20]
+  ])('입력받은 길이에 해당하는 다리 생성', (input, expected) => {
+    expect(bridgeMaker.makeBridge(input, bridgeRandomNumberGenerator)).toHaveLength(expected);
   });
 });
