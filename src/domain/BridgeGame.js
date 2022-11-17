@@ -1,9 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
 const Attempt = require('./result/Attempt');
 const Bridge = require('./bridge/Bridge');
+const CrossingBridge = require('./result/CrossingBridge');
+const Judgment = require('./Judgment');
 const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
-const CrossingBridge = require('./result/CrossingBridge');
 
 class BridgeGame {
   #attempt;
@@ -23,8 +24,20 @@ class BridgeGame {
     this.#crossingBridge = new CrossingBridge();
   }
 
-  move() {
+  move(direction, isPassed) {
+    this.#crossingBridge.add({ direction, isPassed });
+  }
 
+  checkPanel(direction) {
+    return Judgment.checkCrossingNext({
+      bridge: this.#bridge,
+      position: this.#crossingBridge.size(),
+      direction,
+    });
+  }
+
+  printCrossingBridge() {
+    return this.#crossingBridge.print();
   }
 
   retry() {

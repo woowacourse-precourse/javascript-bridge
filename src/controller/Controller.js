@@ -13,6 +13,26 @@ class Controller {
 
   createBridgeSize(answer) {
     this.#bridgeGame.execute(answer);
+    InputView.readMoving(this.move.bind(this));
+  }
+
+  move(answer) {
+    const isPassed = this.#bridgeGame.checkPanel(answer);
+
+    this.#bridgeGame.move(answer, isPassed);
+    this.printCrossing();
+
+    if (isPassed) {
+      this.progress();
+    }
+  }
+
+  printCrossing() {
+    OutputView.printMap(this.#bridgeGame.printCrossingBridge());
+  }
+
+  progress() {
+    InputView.readMoving(this.move.bind(this));
   }
 }
 
