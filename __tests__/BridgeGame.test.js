@@ -30,4 +30,15 @@ describe('숫자값 문자열 치환 기능 테스트', () => {
       BridgeGame.replaceString(EXPECTED);
     }).toThrow(NUMBER_ERROR_TEXT);
   });
+
+  test.each([-1, 2, 3, NaN])(
+    '인자가 0, 1을 제외한 값이라면 예외를 발생한다.',
+    (EXPECTED) => {
+      const RECEIVED = '[ERROR]';
+
+      expect(() => {
+        BridgeGame.replaceString(EXPECTED);
+      }).toThrow(RECEIVED);
+    },
+  );
 });
