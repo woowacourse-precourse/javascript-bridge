@@ -53,8 +53,9 @@ class BridgeGame {
 
   isBridgeEnd(arrayLength) {
     const MAX_INDEX_POINT = arrayLength - 1;
+    const CURRENT_INDEX = this.findUserPosition();
 
-    return MAX_INDEX_POINT === this.findUserPosition();
+    return MAX_INDEX_POINT === CURRENT_INDEX;
   }
 }
 
