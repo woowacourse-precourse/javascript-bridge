@@ -1,25 +1,28 @@
 const { GAME_RULE } = require('../constants');
 
 class BridgeMap {
-  static INIT = [[], []];
+  #upside = [];
 
-  #map = BridgeMap.INIT;
+  #downside = [];
 
   getMap() {
-    return this.#map;
+    return [this.#upside, this.#downside];
   }
 
   add(moving, isSuccess) {
-    const [upside, downside] = this.#map;
-
     if (moving === GAME_RULE.UPSIDE) {
-      upside.push(isSuccess);
-      downside.push(null);
+      this.#upside.push(isSuccess);
+      this.#downside.push(null);
       return;
     }
 
-    upside.push(null);
-    downside.push(isSuccess);
+    this.#upside.push(null);
+    this.#downside.push(isSuccess);
+  }
+
+  reset() {
+    this.#upside = [];
+    this.#downside = [];
   }
 }
 
