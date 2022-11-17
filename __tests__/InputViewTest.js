@@ -35,7 +35,7 @@ describe("readBridgeSize 테스트", () => {
   test("유저 다리 선택 입력 예외 테스트: U와 D를 입력하지 않았을 때", () => {
     mockQuestions("A");
     expect(() => {
-      InputView.readMoving(new BridgeGame([1, 1, 1]));
+      InputView.readMoving(new BridgeGame.BridgeGame([1, 1, 1]));
     }).toThrow("[ERROR]");
   });
 
