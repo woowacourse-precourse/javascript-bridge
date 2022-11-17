@@ -9,6 +9,11 @@ const BridgeGameModel = class {
     this.#bridge = brige;
     this.#user = [];
   }
+
+  retry() {
+    this.#try += 1;
+    this.#user = [];
+  }
 };
 
 module.exports = BridgeGameModel;
