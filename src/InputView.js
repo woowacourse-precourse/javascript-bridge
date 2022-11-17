@@ -12,15 +12,16 @@ const InputView = {
   readBridgeSize(setBridge, move, retry) {
     this.setMethods(setBridge, move, retry);
     Console.readLine(INPUT_MESSAGE.numberOfBridge, (number) => {
-      const validity = Validation.checkBridgeNumber(Number(number));
-      if (validity) {
+      try {
+        Validation.checkBridgeNumber(Number(number));
         const bridge = BridgeMaker.makeBridge(
           Number(number),
           BridgeRandomNumberGenerator.generate
         );
         this.setBridge(bridge);
         this.readMoving();
-      } else {
+      } catch (e) {
+        Console.print(e);
         this.readBridgeSize(setBridge, move, retry);
       }
     });
@@ -37,12 +38,13 @@ const InputView = {
   readMoving() {
     Console.readLine(INPUT_MESSAGE.chooseUpOrDown, (input) => {
       const letter = input.toUpperCase();
-      const validity = Validation.checkUorD(letter);
-      if (validity) {
+      try {
+        Validation.checkUorD(letter);
         const { correct, map, gameOver, trialTime } = this.move(letter);
         OutputView.printMap(map);
         this.nextAction({ correct, map, gameOver, trialTime });
-      } else {
+      } catch (e) {
+        Console.print(e);
         this.readMoving();
       }
     });
@@ -69,20 +71,25 @@ const InputView = {
   readGameCommand({ map, trialTime }) {
     Console.readLine(INPUT_MESSAGE.chooseToRetry, (input) => {
       const letter = input.toUpperCase();
-      const validity = Validation.checkRorQ(letter);
-      if (validity) {
-        if (letter === LETTER.retry) {
-          this.retry();
-          this.readMoving();
-        }
-
-        if (letter === LETTER.quit) {
-          this.endGame(map, MESSAGE.lose, trialTime);
-        }
-      } else {
+      try {
+        Validation.checkRorQ(letter);
+        this.chooseToRetry(letter, { map, trialTime });
+      } catch (e) {
+        Console.print(e);
         this.readGameCommand({ map, trialTime });
       }
     });
+  },
+
+  chooseToRetry(letter, { map, trialTime }) {
+    if (letter === LETTER.retry) {
+      this.retry();
+      this.readMoving();
+    }
+
+    if (letter === LETTER.quit) {
+      this.endGame(map, MESSAGE.lose, trialTime);
+    }
   },
 
   endGame(map, result, trialTime) {

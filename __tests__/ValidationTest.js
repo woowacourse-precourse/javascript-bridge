@@ -6,7 +6,9 @@ describe("예외 상황 테스트", () => {
     const numbers = [2, 40, 5.5];
 
     numbers.forEach((number) => {
-      expect(Validation.checkBridgeNumber(number)).toBeFalsy();
+      expect(() => Validation.checkBridgeNumber(number)).toThrow(
+        ERROR_MESSAGE.notInRange
+      );
     });
   });
 
@@ -14,7 +16,7 @@ describe("예외 상황 테스트", () => {
     const inputs = ["E", "9", "UD"];
 
     inputs.forEach((input) => {
-      expect(Validation.checkUorD(input)).toBeFalsy();
+      expect(() => Validation.checkUorD(input)).toThrow(ERROR_MESSAGE.notUorD);
     });
   });
 
@@ -22,7 +24,7 @@ describe("예외 상황 테스트", () => {
     const inputs = ["D", "9", "RE"];
 
     inputs.forEach((input) => {
-      expect(Validation.checkRorQ(input)).toBeFalsy();
+      expect(() => Validation.checkRorQ(input)).toThrow(ERROR_MESSAGE.notRorQ);
     });
   });
 });
