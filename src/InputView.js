@@ -31,7 +31,8 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine(INPUT_MESSAGE.chooseUpOrDown, (letter) => {
+    Console.readLine(INPUT_MESSAGE.chooseUpOrDown, (input) => {
+      const letter = input.toUpperCase();
       Validation.checkUorD(letter);
       const { result, map, gameOver, trialTime } = this.move(letter);
       OutputView.printMap(map);
@@ -53,7 +54,8 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand({ map, trialTime }) {
-    Console.readLine(INPUT_MESSAGE.chooseToRetry, (letter) => {
+    Console.readLine(INPUT_MESSAGE.chooseToRetry, (input) => {
+      const letter = input.toUpperCase();
       Validation.checkRorQ(letter);
       if (letter === LETTER.retry) {
         this.retry();
