@@ -14,14 +14,18 @@ const InputView = {
 		MissionUtils.Console.readLine(
 			START_MSG + READ_BRIDGE_SIZE_MSG,
 			(bridgeSize) => {
-				InputView.handlingBridgeSizeError(bridgeSize);
-				const bridgeGame = new BridgeGame(
-					bridgeSize,
-					BridgeRandomNumberGenerator.generate,
-				);
-				InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
+				InputView.excuteBridgeSizeStep(bridgeSize);
 			},
 		);
+	},
+
+	excuteBridgeSizeStep(bridgeSize) {
+		InputView.handlingBridgeSizeError(bridgeSize);
+		const bridgeGame = new BridgeGame(
+			bridgeSize,
+			BridgeRandomNumberGenerator.generate,
+		);
+		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 	},
 
 	handlingBridgeSizeError(bridgeSize) {
@@ -35,16 +39,20 @@ const InputView = {
 
 	readMoving(bridgeGame, READ_MOVING_MSG = '') {
 		MissionUtils.Console.readLine(READ_MOVING_MSG, (moving) => {
-			InputView.handlingMovingError(bridgeGame, moving);
-
-			const currentBridge = bridgeGame.move(moving);
-			OutputView.printMap(currentBridge);
-			const isCorrect = bridgeGame.isCorrect(moving);
-			if (isCorrect) {
-				InputView.readGameCommand(bridgeGame);
-			}
-			InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
+			InputView.excuteMovingStep(bridgeGame, moving);
 		});
+	},
+
+	excuteMovingStep(bridgeGame, moving) {
+		InputView.handlingMovingError(bridgeGame, moving);
+
+		bridgeGame.move(moving);
+		const prevCrossedBridge = bridgeGame.getPrevCrossedBridge();
+		OutputView.printMap(prevCrossedBridge);
+
+		InputView.inCaseWrong(bridgeGame, prevCrossedBridge);
+
+		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 	},
 
 	handlingMovingError(bridgeGame, moving) {
@@ -56,7 +64,17 @@ const InputView = {
 		}
 	},
 
-	readGameCommand() {},
+	inCaseWrong(bridgeGame, prevCrossedBridge) {
+		const lastBridge = prevCrossedBridge.pop();
+		const isCorrect = lastBridge === 'DO' || lastBridge === 'UO';
+		if (!isCorrect) {
+			InputView.readGameCommand(bridgeGame);
+		}
+	},
+
+	readGameCommand() {
+		console.log('실패');
+	},
 };
 
 module.exports = InputView;

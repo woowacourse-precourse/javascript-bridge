@@ -12,12 +12,11 @@ class BridgeGame {
 		const inverse = true;
 		const prevCrossedBridge = this.delPrevBridgeEle(inverse);
 		this.#bridge = [...prevCrossedBridge, ...yetCrossBridge];
-		return [...prevCrossedBridge, yetCrossBridge[0]];
 	}
 
 	updateYetcrossBridge(moving) {
 		let yetCrossBridge = this.delPrevBridgeEle();
-		const isCorrect = this.isCorrect(moving);
+		const isCorrect = yetCrossBridge[0] === moving;
 		// UO : 지나온 다리가 U이며, 정답이었던 경우
 		// UX : 지나온 다리가 U이며, 틀린 경우
 		// DO : 지나온 다리가 D이며, 정답이었던 경우
@@ -38,9 +37,10 @@ class BridgeGame {
 		return filterBridgeEle;
 	}
 
-	isCorrect(moving) {
-		const yetCrossBridge = this.delPrevBridgeEle();
-		return yetCrossBridge[0] === moving;
+	getPrevCrossedBridge() {
+		const inverse = true;
+		const prevCrossedBridge = this.delPrevBridgeEle(inverse);
+		return prevCrossedBridge;
 	}
 
 	/**

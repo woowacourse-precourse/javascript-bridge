@@ -14,13 +14,13 @@ const OutputView = {
 		WRONG: 'DX',
 	},
 
-	printMap(currentBridge) {
+	printMap(prevCrossedBridge) {
 		const upperArr = OutputView.getOneSideArr(
-			currentBridge,
+			prevCrossedBridge,
 			OutputView.UPPER_BRIDGE,
 		);
 		const lowerArr = OutputView.getOneSideArr(
-			currentBridge,
+			prevCrossedBridge,
 			OutputView.LOWER_BRIDGE,
 		);
 		const upperMap = OutputView.convertArrToMap(upperArr);
@@ -29,8 +29,8 @@ const OutputView = {
 		MissionUtils.Console.print(upperMap + '\n' + lowerMap);
 	},
 
-	getOneSideArr(currentBridge, ONE_SIDE_BRIDGE) {
-		return currentBridge.map((bridgeEle) => {
+	getOneSideArr(prevCrossedBridge, ONE_SIDE_BRIDGE) {
+		return prevCrossedBridge.map((bridgeEle) => {
 			if (bridgeEle === ONE_SIDE_BRIDGE.CORRECT) {
 				return OutputView.CORRECT_BRIDGE_ELE;
 			}
