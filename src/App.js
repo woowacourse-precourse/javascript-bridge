@@ -23,7 +23,6 @@ class App {
     this.bridgeGame.setBridgeShape(
       BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate)
     );
-    console.log(this.bridgeGame.getBridgeShape());
     this.inputMoving();
   }
 

@@ -24,22 +24,16 @@ class BridgeGame {
 
   isAnswerMovingChoice() {
     return (
-      this.#movingCommand ===
-      this.getBridgeShape()[this.#currentBridgeCount - 1]
+      this.#movingCommand === this.#bridgeShape[this.#currentBridgeCount - 1]
     );
   }
 
   #isLastMove() {
-    return this.#currentBridgeCount === this.getBridgeShape().length;
+    return this.#currentBridgeCount === this.#bridgeShape.length;
   }
 
   setBridgeShape(bridgeSahpe) {
     return (this.#bridgeShape = bridgeSahpe);
-  }
-
-  // 나중에 필요없을 지도? 지금 console때문에 잠시 생성
-  getBridgeShape() {
-    return this.#bridgeShape;
   }
 
   getCurrentBridgeMap() {
