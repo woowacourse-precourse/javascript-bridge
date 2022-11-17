@@ -17,10 +17,10 @@ const OutputView = {
     const map = { U: "[", D: "[" };
     for (let i = 0; i < location; i++) {
       map[bridgeMap[i]] += " O |";
-      map[this.reverse(bridgeMap[i])] += "   |";
+      map[OutputView.reverse(bridgeMap[i])] += "   |";
     }
     map[bridgeMap[location]] += correct ? " O ]" : "   ]";
-    map[this.reverse(bridgeMap[location])] += correct ? "   ]" : " X ]";
+    map[OutputView.reverse(bridgeMap[location])] += correct ? "   ]" : " X ]";
     MissionUtils.Console.print(map[KEY.UP] + "\n" + map[KEY.DOWN]);
   },
 
@@ -31,7 +31,7 @@ const OutputView = {
    */
   printResult(bridgeMap, location, correct, tryCount) {
     MissionUtils.Console.print(PRINT.FINISH_GAME);
-    this.printMap(bridgeMap, location, correct);
+    OutputView.printMap(bridgeMap, location, correct);
     MissionUtils.Console.print(correct ? PRINT.SUCCESS_GAME : PRINT.FAIL_GAME);
     MissionUtils.Console.print(PRINT.TOTAL_TRY + tryCount);
   },
