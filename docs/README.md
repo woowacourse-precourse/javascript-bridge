@@ -62,3 +62,4 @@ U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력할 수 있으며 올�
 
 ### Refactor
 - [x] BridgeGame 클래스에서 InputView, OutputView 분리. 게임 컨트롤러 하나 만들기.
+- [x] Bridge의  Blueprint를 만드는 함수 모듈화
