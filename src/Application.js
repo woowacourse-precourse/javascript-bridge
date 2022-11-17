@@ -9,6 +9,15 @@ const Application = {
 
     return result;
   },
+
+  checkRangeThreeToTwenty(target) {
+    const START = 3;
+    const END = 20;
+    const checkRange = Validation.range(START, END);
+
+    return checkRange(target);
+  },
+
 };
 
 module.exports = Application;
