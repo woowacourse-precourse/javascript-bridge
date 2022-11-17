@@ -1,7 +1,7 @@
 const BridgeGame = require("../src/BridgeGame");
 
-describe("다리 건너기 게임을 관리하는 클래스 테스트", () => {
-  test("사용자가 올바르게 이동했을 때 현재까지 건넌 다리 지도", () => {
+describe("현재까지 건넌 다리 지도 테스트", () => {
+  test("사용자가 올바르게 이동했을 때", () => {
     const playerChoiceMovingCommands = ["U", "D", "D", "D"];
     const upsideBridgeMap = ["O", " ", " ", " "];
     const downSideBridgeMap = [" ", "O", "O", "O"];
@@ -21,7 +21,7 @@ describe("다리 건너기 게임을 관리하는 클래스 테스트", () => {
     );
   });
 
-  test("사용자가 이동할 수 없는 칸을 선택했을 때 현재까지 건넌 다리 지도", () => {
+  test("사용자가 이동할 수 없는 칸을 선택했을 때", () => {
     const playerChoiceMovingCommands = ["U", "D", "U"];
     const upsideBridgeMap = ["O", " ", "X"];
     const downSideBridgeMap = [" ", "O", " "];
