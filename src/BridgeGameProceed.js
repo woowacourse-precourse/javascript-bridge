@@ -6,7 +6,7 @@ class BridgeGameProceed {
         // 다리 건너기 게임을 시작합니다.
         OutputView.printStart();
         // 다리의 갯수 입력 3~20;
-        InputView.readBridgeSize(3);
+        InputView.readBridgeSize();
     }
 
     game() {
