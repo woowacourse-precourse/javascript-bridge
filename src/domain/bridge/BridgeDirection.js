@@ -23,7 +23,7 @@ class BridgeDirection {
 
   static includes(direction) {
     const { values } = Object;
-    return values(this.#DIRECTION).includes(direction);
+    return values(BridgeDirection.#DIRECTION).includes(direction);
   }
 }
 
