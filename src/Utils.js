@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const Utils = {
+const Utils = Object.freeze({
   input(message, callback) {
     Console.readLine(message, callback);
   },
@@ -8,7 +8,7 @@ const Utils = {
   print(message) {
     Console.print(message);
   },
-};
+});
 
 module.exports = Utils.input;
 module.exports = Utils.print;
