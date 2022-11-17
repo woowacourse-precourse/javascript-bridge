@@ -13,13 +13,17 @@ const BridgeMaker = {
     let bridge = [];
 
     while (currentSize < size) {
-      let randomNumber = generateRandomNumber();
-      if (randomNumber == 0) bridge.push(Constant.UP);
-      else if (randomNumber == 1) bridge.push(Constant.DOWN);
+      const randomNumber = generateRandomNumber();
+      bridge.push(this.convertRandomNumbertoUpDown(randomNumber));
       currentSize++;
     }
 
     return bridge;
+  },
+
+  convertRandomNumbertoUpDown(randomNumber) {
+    if (randomNumber == 0) return "U";
+    return "D";
   },
 };
 
