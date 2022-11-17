@@ -15,7 +15,7 @@ describe('다리 건너기 게임 테스트', () => {
     expect(resultMap).toEqual({
       upperPart: 'O',
       lowerPart: ' ',
-      isGameOver: false,
+      gameStatus: 0,
     });
   });
 
@@ -24,7 +24,7 @@ describe('다리 건너기 게임 테스트', () => {
     expect(resultMap).toEqual({
       upperPart: 'O |  ',
       lowerPart: '  | O',
-      isGameOver: false,
+      gameStatus: 0,
     });
   });
 
@@ -34,7 +34,7 @@ describe('다리 건너기 게임 테스트', () => {
     expect(resultMap).toEqual({
       upperPart: 'O |   |  ',
       lowerPart: '  | O | X',
-      isGameOver: true,
+      gameStatus: 1,
     });
   });
 });
@@ -48,7 +48,7 @@ describe('다리 건너기 게임 테스트', () => {
     expect(resultMap).toEqual({
       upperPart: 'O',
       lowerPart: ' ',
-      isGameOver: false,
+      gameStatus: 0,
     });
   });
 
@@ -57,7 +57,7 @@ describe('다리 건너기 게임 테스트', () => {
     expect(resultMap).toEqual({
       upperPart: 'O | X',
       lowerPart: '  |  ',
-      isGameOver: true,
+      gameStatus: 1,
     });
   });
 
@@ -67,7 +67,7 @@ describe('다리 건너기 게임 테스트', () => {
     expect(resultMap).toEqual({
       upperPart: 'O',
       lowerPart: ' ',
-      isGameOver: false,
+      gameStatus: 0,
     });
   });
 });
