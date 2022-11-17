@@ -36,6 +36,15 @@ class App {
       InputView.readMoving(this.handleMoving.bind(this));
     }
   }
+
+  handleGameCommand(gameCommand) {
+    if (gameCommand === 'Q') {
+      OutputView.printResult(this.#model.getMap(), this.#model.getTryCount());
+    } else {
+      this.#model.retry();
+      InputView.readMoving(this.handleMoving.bind(this));
+    }
+  }
 }
 
 module.exports = App;
