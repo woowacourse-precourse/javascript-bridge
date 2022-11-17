@@ -25,25 +25,34 @@ const BridgeMaker = {
     return [bridgeTop, bridgeBottom];
   },
 
-  makeUserBridge(moveInput, count, mainBridge) {
-    const [userBridgeTop, userBridgeBottom] = [[], []];
+  makeUserBridge(moveInput, userBridge, mainBridge) {
+    const [userBridgeTop, userBridgeBottom] = userBridge;
     const [bridgeTop, bridgeBottom] = mainBridge;
-    if (moveInput === bridgeTop[count - 1]) {
+    if (moveInput === bridgeTop[userBridge[0].length]) {
       userBridgeTop.push("O");
+      userBridgeBottom.push(" ");
       console.log(userBridgeTop);
       console.log(userBridgeBottom);
-      return;
+      return [userBridgeTop, userBridgeBottom]
     }
-    if (moveInput === bridgeBottom[count - 1]) {
+    if (moveInput === bridgeBottom[userBridge[0].length]) {
+      userBridgeTop.push(" ");
       userBridgeBottom.push("O");
       console.log(userBridgeTop);
       console.log(userBridgeBottom);
-      return;
+      return [userBridgeTop, userBridgeBottom]
     }
-    if (moveInput === "U") userBridgeTop.push("X");
-    if (moveInput === "D") userBridgeBottom.push("X");
+    if (moveInput === "U") {
+      userBridgeTop.push("X");
+      userBridgeBottom.push(" ");
+    }
+    if (moveInput === "D") {
+      userBridgeTop.push(" ");
+      userBridgeBottom.push("X");
+    }
     console.log(userBridgeTop);
     console.log(userBridgeBottom);
+    return [userBridgeTop, userBridgeBottom]
   },
 };
 
