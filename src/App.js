@@ -15,6 +15,7 @@ class App {
   init(size) {
     const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.#model = new BridgeGame(bridge);
+    InputView.readMoving(this.handleMoving.bind(this));
   }
 
   handleMoving(moving) {
