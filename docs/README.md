@@ -13,7 +13,7 @@
 - [x] 다리를 건너온 정보를 추가한다. CrossingBridge#add
 - [x] 다리를 건너온 정보의 출력 결과를 생성한다. CrossingBridge#print
 - [x] 다리를 몇 칸 건너왔는지 출력한다. CrossingBridge#size
-- [ ] 다리를 모두 건넜는지 확인한다. Judgment#checkCrossingAll
+- [x] 다리를 모두 건넜는지 확인한다. Judgment#checkCrossingAll
 - [ ] 게임을 재시도한다. BridgeGame#retry
   - [ ] 시도 횟수를 증가한다. Attempt#add
 - [ ] 총 시도한 횟수의 출력 결과를 생성한다. Attempt#print
