@@ -34,7 +34,7 @@ const InputView = {
   readMoving() {
     Console.readLine(ASK_WHERE_WANT_TO_GO, (wantGo) => {
       new MoveInput(wantGo);
-      const isCorrect = new BridgeGame(this.canWalkBridge, wantGo).move();
+      const isCorrect = new BridgeGame().move(this.canWalkBridge, wantGo);
       Player.updateState(wantGo, isCorrect);
 
       OutputView.printMap();
