@@ -1,7 +1,25 @@
+const BridgeMaker = require("./BridgeMaker");
+const { generate } = require("./BridgeRandomNumberGenerator");
+const { ERROR_MSG } = require("./constants/Message");
+const InputView = require("./InputView");
+const utils = require("./Utils");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #size;
+  #bridge;
+
+  constructor() {
+    this.setBridge();
+  }
+
+  async setBridge() {
+    this.#size = await InputView.readBridgeSize();
+    this.#bridge = BridgeMaker.makeBridge(this.#size, generate);
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -18,3 +36,5 @@ class BridgeGame {
 }
 
 module.exports = BridgeGame;
+
+const a = new BridgeGame();

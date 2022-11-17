@@ -5,4 +5,8 @@ const INPUT_MSG = {
     "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
 };
 
-module.exports = { INPUT_MSG };
+const ERROR_MSG = {
+  INPUT_BRIDGE: "다리 길이는 3이상 20이하만 가능합니다.",
+};
+
+module.exports = { INPUT_MSG, ERROR_MSG };
