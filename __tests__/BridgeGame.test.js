@@ -139,8 +139,7 @@ describe('사용자가 게임을 다시 시도할 때 사용하는 메서드 테
 
     bridgeGame.move();
     bridgeGame.move();
-    bridgeGame.retry();
 
-    expect(bridgeGame.findUserPosition()).toEqual(RECEIVED);
+    expect(bridgeGame.retry()).toEqual(RECEIVED);
   });
 });
