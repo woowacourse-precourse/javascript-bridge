@@ -71,6 +71,9 @@ class App {
   }
 
   quit() {
+    const isFail = this.bridgeGame.isFail();
+    Console.print(`${!isFail ? '\n' : ''}최종 게임 결과`);
+    OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
     OutputView.printResult(this.bridgeGame.getResult());
     Console.close();
   }
