@@ -13,23 +13,30 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(InputMessage.READ_BRIDGE_SIZE_MESSAGE, (value) => {
-      const size = value;
-      const bridge = BridgeMaker.makeBridge(
-        size,
-        BridgeRandomNumberGenerator.generate
-      );
-
-      Console.readLine(
-        InputMessage.READ_MOVING_MESSAGE,
-        this.readMoving.bind(this)
-      );
+      let bridge;
+      try {
+        bridge = BridgeMaker.makeBridge(
+          value,
+          BridgeRandomNumberGenerator.generate
+        );
+      } catch (error) {
+        OutputView.print(error.message);
+        this.readBridgeSize();
+        return;
+      }
+      this.readMoving(bridge);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(value) {},
+  readMoving(bridge) {
+    Console.readLine(
+      InputMessage.READ_MOVING_MESSAGE,
+      this.readMoving.bind(this)
+    );
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
