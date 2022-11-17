@@ -16,8 +16,10 @@ class App {
     const END = false;
     if (MOVE) {
       const END_CHECK = this.#game.isEnd();
+      this.#game.statusPrint();
       return END_CHECK;
     }
+    this.#game.statusPrint();
     return END;
   }
 
