@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MAP, MOVE } = require('./config');
+const { MAP, MOVE, PHRASE } = require('./config');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -34,10 +34,18 @@ const OutputView = {
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {string[]} bridge 다리
+   * @param {boolean[]} history 각 이동의 성공 여부를 기록한 배열
    */
-  printResult() {},
+  printResult(bridge, history) {
+    const isSuccess = history.every((isSuccess) => isSuccess);
+    const result = isSuccess ? PHRASE.SUCCESS : PHRASE.FAIL;
+    const totalTry = history.length;
+
+    Console.print(`${PHRASE.RESULT}`);
+    this.printMap(bridge, history);
+    Console.print(`${result}${PHRASE.TRY}${totalTry}`);
+  },
 };
 
 module.exports = OutputView;

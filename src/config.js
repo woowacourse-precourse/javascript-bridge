@@ -9,8 +9,8 @@ const MOVE = {
 };
 
 const RETRY = {
-  RETRY: 'R',
-  QUIT: 'Q',
+  YES: 'R',
+  NO: 'Q',
 };
 
 const MAP = {
@@ -27,9 +27,9 @@ const PHRASE = {
   BRIDGE_LEN: '다리의 길이를 입력해주세요.',
   SELECT: '이동할 칸을 선택해주세요. (위: U, 아래: D)',
   RESTART: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
-  RESULT: '최종 게임 결과',
-  SUCCESS: '게임 성공 여부: 성공',
-  FAIL: '게임 성공 여부: 실패',
+  RESULT: '\n최종 게임 결과',
+  SUCCESS: '게임 성공 여부: 성공\n',
+  FAIL: '게임 성공 여부: 실패\n',
   TOTAL_TRY: '총 시도한 횟수: ',
 };
 
