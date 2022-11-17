@@ -5,8 +5,8 @@ const { bridgeLengthValidation } = require('../utils/BridgeValidation');
 const InputView = {
   readBridgeSize() {
     let length;
-    Console.readLine(SENTENCE.bridgeLength, (input) => {
-      const num = Number(input);
+    Console.readLine(SENTENCE.bridgeLength, (inputLength) => {
+      const num = Number(inputLength);
       bridgeLengthValidation(num);
       length = num;
     });
@@ -16,7 +16,11 @@ const InputView = {
 
   readMoving() {
     let whichMoving;
-    Console.readLine(SENTENCE.selectMoving, (moving) => (whichMoving = moving));
+    Console.readLine(SENTENCE.selectMoving, (inputMoving) => {
+      movingValidation(inputMoving);
+      whichMoving = inputMoving;
+    });
+
     return whichMoving;
   },
 
