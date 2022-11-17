@@ -23,10 +23,39 @@ const ConstraintsConstants = {
   ERROR_DONT_START_ZERO: "[ERROR] 0으로 시작하는 숫자는 입력할 수 없습니다.\n",
   UPPER_BRIDGE_STRING: "U",
   LOWER_BRIDGE_STRING: "D",
-  ERROR_NOT_ONLY_U_OR_D: "[ERROR] U 혹은 D만 입력 가능합니다.\n",
+  ERROR_NOT_ONLY_U_OR_D: "[ERROR] U 혹은 D만 입력 가능합니다.",
   RETRY_STRING: "R",
   END_GAME_STRING: "Q",
-  ERROR_NOT_ONLY_R_OR_Q: "[ERROR] R 혹은 Q만 입력 가능합니다.\n",
+  ERROR_NOT_ONLY_R_OR_Q: "[ERROR] R 혹은 Q만 입력 가능합니다.",
 };
 
-module.exports = { InputConstants, OutputConstants, ConstraintsConstants };
+const BridgeGameConstants = {
+  RETRY_COMMAND: "R",
+};
+
+const BridgeMakerConstants = {
+  UPPER_BRIDGE_STRING: "U",
+  LOWER_BRIDGE_STRING: "D",
+  LOWER_BRIDGE_NUMBER: 0,
+};
+
+const PlayerConstants = {
+  UPPER_BRIDGE_STRING: "U",
+  LOWER_BRIDGE_STRING: "D",
+  CORRECT_ANSWER: " O ",
+  WRONG_ANSWER: " X ",
+  EMPTY_ANSWER: "   ",
+  INITIAL_TRY_NUMBER: 1,
+  INCREASE_TRY_NUMBER: 1,
+  GMAE_FAIL: false,
+  GAME_SUCCESS: true,
+};
+
+module.exports = {
+  InputConstants,
+  OutputConstants,
+  ConstraintsConstants,
+  BridgeGameConstants,
+  BridgeMakerConstants,
+  PlayerConstants,
+};
