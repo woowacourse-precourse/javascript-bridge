@@ -70,7 +70,7 @@ const InputView = {
         this.readMoving(bridge, curSteps, numberAttempts);
       }
       if (steps === curSteps) {
-        this.readMoving(bridge, curSteps, numberAttempts);
+        this.readMoving(bridge, curSteps, numberAttempts + 1);
       }
     });
   },
