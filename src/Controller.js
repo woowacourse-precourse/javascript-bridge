@@ -62,12 +62,9 @@ class Controller {
   }
 
   handleGameEnd() {
-    const { upperPart, lowerPart } = this.bridgeGame.getResultMap();
-    Console.print('최종 게임 결과');
-    OutputView.printMap(upperPart, lowerPart);
-    Console.print('');
-    Console.print(`게임 성공 여부: ${this.bridgeGame.getGameStatus() === 1 ? '실패' : '성공'}`);
-    Console.print(`총 시도한 횟수: ${this.count}`);
+    const { resultToString } = this.bridgeGame.getResultMap();
+    const gameStatus = this.bridgeGame.getGameStatus();
+    OutputView.printResult(resultToString, gameStatus, this.count);
   }
 }
 
