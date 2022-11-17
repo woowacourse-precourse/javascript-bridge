@@ -1,3 +1,6 @@
+const { readLine } = require('./utils/ui');
+const { INPUT_MESSAGE } = require('./constants');
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -5,7 +8,11 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize(bridgeGame) {
+    readLine(INPUT_MESSAGE.BRIDGE_LENGTH, (length) => {
+      bridgeGame.getBridge().setCompoents(length);
+    });
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
