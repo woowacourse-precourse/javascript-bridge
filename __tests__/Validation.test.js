@@ -96,4 +96,12 @@ describe('에러 발생 함수 테스트', () => {
 
     expect(Validation.throwError.name).toEqual(METHOD_NAME);
   });
+
+  test('함수를 호출하면 에러를 발생시킨다.', () => {
+    const EXPECTED = '[ERROR]';
+
+    expect(() => {
+      Validation.throwError(EXPECTED);
+    }).toThrow(EXPECTED);
+  });
 });
