@@ -92,4 +92,9 @@ describe.only('TEST', () => {
         const input = new InputView();
         input.validateBridgeSize('500');
     }).toThrow('[ERROR]');
+
+    test('다음 칸 이동 입력 유효성 테스트', () => {
+        const input = new InputView();
+        input.validateBridgeSize('a');
+    }).toThrow('[ERROR]');
 });
