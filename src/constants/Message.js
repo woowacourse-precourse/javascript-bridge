@@ -10,7 +10,17 @@ const OUTPUT_MESSAGE = {
     GAME_ATTEMPT,
 }
 
+const PUT_BRIDGE_LENGTH = '다리의 길이를 입력해주세요.';
+const PUT_NEXT_SPACE = '이동할 칸을 선택해주세요. (위: U, 아래: D)';
+const PUT_RETRY_OR_NOT = '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)';
+
+const INPUT_MESSAGE = {
+    PUT_BRIDGE_LENGTH,
+    PUT_NEXT_SPACE,
+    PUT_RETRY_OR_NOT,
+}
 
 module.exports = {
     OUTPUT_MESSAGE,
+    INPUT_MESSAGE,
 }
