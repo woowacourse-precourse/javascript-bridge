@@ -23,10 +23,10 @@ const InputView = {
     Console.readLine(MESSAGE.READ_MOVE_LEVEL, (input) => {
       game.move(input);
       OutputView.printMap(bridge, game);
-      if (bridge.getLength() !== game.getLength()) {
+      if (game.getResult(bridge) && bridge.getLength() !== game.getLength()) {
         return this.readMoving(bridge, game);
       }
-      return this.readGameCommand();
+      return OutputView.printResult(bridge, game);
     });
   },
 

@@ -8,6 +8,7 @@ class BridgeGame {
 
   constructor() {
     this.#selected = '';
+    this.tryCnt = 1;
   }
 
   static validate(input) {
@@ -25,10 +26,14 @@ class BridgeGame {
   }
 
   getResult(bridge) {
-    for (let i = 0; i < bridge.getLength(); i += 1) {
+    for (let i = 0; i < this.getLength(); i += 1) {
       if (bridge.getBridge(i) !== this.getSelected(i)) return false;
     }
     return true;
+  }
+
+  getTryCnt() {
+    return this.tryCnt;
   }
 
   /**
