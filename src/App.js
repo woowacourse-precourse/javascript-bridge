@@ -4,7 +4,7 @@ const outputView = require('./ui/OutputView');
 class App {
   play() {
     outputView.printStartMessage();
-    inputView.readBridgeSize();
+    inputView.readMoving();
   }
 }
 

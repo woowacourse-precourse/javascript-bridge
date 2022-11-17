@@ -22,3 +22,11 @@ describe('handleBridgeSizeException 테스트', () => {
     }).toThrow('[ERROR]');
   });
 });
+
+describe('handleMovingException 테스트', () => {
+  test.each([[''], ['A'], ['u'], ['d']])('대문자 U 또는 대문자 D가 아니면 예외가 발생한다.', () => {
+    expect((input) => {
+      inputException.handleMovingException(input);
+    }).toThrow('[ERROR]');
+  });
+});
