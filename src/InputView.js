@@ -10,7 +10,7 @@ const InputView = {
   readBridgeSize() {
     let size = 0;
     Console.readLine('다리의 길이를 입력해주세요.', input => {
-      size = input;
+      size = Number(input);
     });
 
     return size;
