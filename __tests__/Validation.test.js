@@ -31,7 +31,7 @@ describe('함수 타입 체크 함수 테스트', () => {
     const EXPECTED = [];
 
     expect(() => {
-      Validation.number(EXPECTED);
+      Validation.Fn(EXPECTED);
     }).toThrow(FUNCTION_ERROR_TEXT);
   });
 
@@ -39,7 +39,7 @@ describe('함수 타입 체크 함수 테스트', () => {
     const EXPECTED = () => {};
 
     expect(() => {
-      Validation.number(EXPECTED);
+      Validation.Fn(EXPECTED);
     }).not.toThrow();
   });
 });
