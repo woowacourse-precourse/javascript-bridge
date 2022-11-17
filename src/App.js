@@ -1,8 +1,10 @@
 const { Console } = require("@woowacourse/mission-utils");
+const InputView = require("./InputView");
 
 class App {
   play() {
     this.printStart();
+    InputView.readBridgeSize();
   }
 
   printStart() {
