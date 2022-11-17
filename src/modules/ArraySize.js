@@ -1,16 +1,11 @@
 class ArraySize {
-  #arrUp;
-  #arrDown;
+  #arr;
 
   constructor(size) {
-    this.#arrUp = Array.from({ length: size });
-    this.#arrDown = Array.from({ length: size });
+    this.#arr = Array.from({ length: size });
   }
-  getArrUp() {
-    return this.#arrUp;
-  }
-  getArrDown() {
-    return this.#arrDown;
+  getArr() {
+    return this.#arr;
   }
 }
 
