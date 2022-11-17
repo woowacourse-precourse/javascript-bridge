@@ -18,6 +18,7 @@ class BridgeGame {
     const generate = BridgeRandomNumberGenerator.generate;
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, generate);
     this.#player = new Player();
+    this.#result = { count: 1, isSuccess: false };
   }
 
   /**
@@ -37,6 +38,7 @@ class BridgeGame {
     }
 
     if (currentStep === this.#bridge.length - 1) {
+      this.#result.isSuccess = true;
       return { status: STEP_STATUS.SUCCESS, markingPaper };
     }
 
@@ -46,15 +48,24 @@ class BridgeGame {
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * @param {string} gameCommand
-   * @return {1 | 2} 0: Restart, 1: Quit
+   * @return {1 | 2} 1: Quit, 2: Restart
    */
   retry(gameCommand) {
     if (gameCommand === 'R') {
       this.#player = new Player();
+      this.#result.count += 1;
+
       return 2;
     }
 
     return 1;
+  }
+
+  getResultInfo() {
+    const { count, isSuccess } = this.#result;
+    const markingPaper = this.#player.getMarkingPaper();
+
+    return { count, isSuccess, markingPaper };
   }
 }
 
