@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { BridgeSize, MoveInput } = require("./utils");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const generater = require("./BridgeRandomNumberGenerator").generate;
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
@@ -20,26 +20,26 @@ const InputView = {
     Console.readLine(ASK_BRIDGE_LENGTH, (sizeInput) => {
       const bridgeSize = new BridgeSize(sizeInput);
       const size = bridgeSize.makeStringToNumber();
+      Player.updateSize(size);
 
-      const generater = BridgeRandomNumberGenerator.generate;
-      const canWalkBridge = BridgeMaker.makeBridge(size, generater);
+      this.canWalkBridge = BridgeMaker.makeBridge(size, generater);
 
-      this.readMoving(canWalkBridge);
+      this.readMoving();
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(canWalkBridge) {
+  readMoving() {
     Console.readLine(ASK_WHERE_WANT_TO_GO, (wantGo) => {
       new MoveInput(wantGo);
-
-      const isCorrect = new BridgeGame(canWalkBridge, wantGo).move();
+      const isCorrect = new BridgeGame(this.canWalkBridge, wantGo).move();
       Player.updateState(wantGo, isCorrect);
 
       OutputView.printMap();
-      isCorrect ? this.readMoving(canWalkBridge) : this.readGameCommand();
+      if (Player.gameSuccess) OutputView.printResult();
+      else isCorrect ? this.readMoving() : this.readGameCommand();
     });
   },
 
