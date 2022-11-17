@@ -70,7 +70,7 @@ const InputView = {
         this.readMoving(bridge, curSteps, numberAttempts);
       }
       if (steps === curSteps) {
-        this.readMoving(bridge, curSteps, numberAttempts + 1);
+        this.readGameCommand(bridge, curSteps, numberAttempts + 1);
       }
     });
   },
@@ -92,11 +92,17 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(bridge, steps, numberAttempts) {
     Console.print(GAME_MESSAGE.retry);
     Console.readLine('', (userInput) => {
       this.checkRetryLowercase(userInput);
       this.checkRetryWrong(userInput);
+      if (userInput === 'R') {
+        this.readMoving(bridge, steps, numberAttempts);
+      }
+      if (userInput === 'Q') {
+        Console.close();
+      }
     });
   },
 
