@@ -1,14 +1,19 @@
+const { INPUT_VAL } = require("./stringsValidation");
+
 class Validation {
-  #validate(condition, message) {
+  static validate(condition, message) {
     if (!condition) {
       throw new Error(message);
     }
   }
 
-  isInRange(number) {}
+  static inputSize(number) {
+    const isInRange = number >= 3 && number <= 20;
+    this.validate(isInRange, INPUT_VAL.SIZE_ERROR);
+  }
 
-  isMovement(string) {}
+  inputMovement(string) {}
 
-  isRetry(string) {}
+  inputRetry(string) {}
 }
 module.exports = Validation;

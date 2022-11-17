@@ -13,5 +13,7 @@ module.exports = {
     quotes: ["off", "single"],
     "class-methods-use-this": "off",
     "arrow-body-style": "off",
+    "max-depth": ["error", 2],
+    "max-lines-per-function": ["error", 10],
   },
 };
