@@ -38,7 +38,7 @@ const Validation = {
   },
   validateSucess(answer, inputs) {
     for (let i = 0; i < answer.length; i++) {
-      if (answer !== inputs) return "실패";
+      if (answer[i] !== inputs[i]) return "실패";
     }
     return "성공";
   },
