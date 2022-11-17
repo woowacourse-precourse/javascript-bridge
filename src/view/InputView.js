@@ -1,3 +1,4 @@
+const WinningBridge = require('../WinningBridge');
 const { input } = require('../utils/utils');
 const { MESSAGE } = require('../utils/constants');
 /**
@@ -9,8 +10,12 @@ const InputView = {
    */
   readBridgeSize() {
     input(MESSAGE.inputBridgeSize, (size) => {
-      console.log(size);
+      //const player = new Player();
+      //player.sendBridgeSize(size);
+      new WinningBridge(Number(size));
+      // WinningBridge.validate(Number(size));
     });
+    // return this;
   },
 
   /**
