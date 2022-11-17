@@ -18,10 +18,6 @@ class BridgeGame {
     this.#gameStatus = 0;
   }
 
-  getGameStatus() {
-    return this.#gameStatus;
-  }
-
   /**
   * @typedef {object} resultMap
   * @property {string} resultToString
