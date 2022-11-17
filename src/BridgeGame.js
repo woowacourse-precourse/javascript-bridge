@@ -1,7 +1,11 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
 const BridgeMaker = require("./BridgeMaker.js");
 const InputView = require("./InputView.js");
 const OutputView = require("./OutputView.js");
+
+const { Console } = MissionUtils;
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  * 1. 필드를 추가할 수 있다.
@@ -13,47 +17,73 @@ const OutputView = require("./OutputView.js");
 const { generate } = BridgeRandomNumberGenerator;
 
 class BridgeGame {
-  #answers;
-  #bridge;
+  #answer;
+  #inputs;
   #step;
+  #trial;
   constructor() {
-    this.#answers = [];
-    this.#step = 0;
-    this.#bridge = [];
+    this.#answer = [];
+    this.#inputs = [];
+    this.#step = 1;
+    this.#trial = 1;
   }
   start() {
     OutputView.printStart();
     InputView.readBridgeSize((bridgeLength) => {
-      this.#bridge = BridgeMaker.makeBridge(bridgeLength, generate);
+      if (this.#answer.length === 0) {
+        const answer = BridgeMaker.makeBridge(bridgeLength, generate);
+        this.#answer = answer;
+      }
       this.move();
     });
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move() {
     InputView.readMoving((command) => {
-      const isCorrect = this.#bridge[this.#step] === command;
-      this.#answers.push(command);
-
-      OutputView.printMap(
-        this.#answers.slice(0, step),
-        this.#bridge.slice(0, step)
-      );
-      if (!isCorrect) this.retry();
-      this.move();
+      this.#inputs.push(command);
+      OutputView.printMap(this.#answer.slice(0, this.#step), this.#inputs);
+      this.moveAfter(command);
     });
   }
-
+  moveAfter(command) {
+    const isCorrect = this.#answer[this.#step] === command;
+    this.#step += 1;
+    if (!isCorrect) this.retry();
+    this.move();
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   *
+   * 게임이 끝나는 경우는 몇가지가 있을까?
+   * 1. 사용자가 취소한 경우
+   * 2. 사용자가 모든 정답을 맞춘 경우
    */
-  retry() {}
-  end() {}
+  retry() {
+    InputView.readGameCommand((command) => {
+      if (command === "R") {
+        this.restart();
+      }
+      this.end();
+    });
+  }
+  restart() {
+    this.#step = 1;
+    this.#trial += 1;
+    this.#inputs = [];
+    this.start();
+  }
+  end() {
+    OutputView.printResult(
+      this.#answer.slice(0, this.#step),
+      this.#inputs,
+      this.#trial
+    );
+    Console.close();
+  }
 }
 
 module.exports = BridgeGame;
