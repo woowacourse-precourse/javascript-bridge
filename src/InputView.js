@@ -12,8 +12,7 @@ const InputView = {
   readBridgeSize(bridge, game) {
     Console.readLine(MESSAGE.READ_BRIDGE_SIZE, (input) => {
       bridge.makeBridge(input);
-      InputView.readMoving(game);
-      OutputView.printMap(bridge, game);
+      this.readMoving(bridge, game);
     });
   },
 
@@ -22,7 +21,13 @@ const InputView = {
    */
   readMoving(bridge, game) {
     Console.readLine(MESSAGE.READ_MOVE_LEVEL, (input) => {
-      game.move(input, bridge);
+      game.move(input);
+
+      OutputView.printMap(bridge, game);
+      if (bridge.getLength() !== game.getLength()) {
+        return this.readMoving(bridge, game);
+      }
+      return this.readGameCommand();
     });
   },
 

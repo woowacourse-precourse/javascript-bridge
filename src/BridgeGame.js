@@ -10,10 +10,18 @@ class BridgeGame {
     this.#selected = '';
   }
 
-  validate(input) {
+  static validate(input) {
     if (input !== 'U' && input !== 'D') {
       throw new Error(ERROR_MESSAGE.LEVEL_INPUT);
     }
+  }
+
+  getSelected(i) {
+    return this.#selected[i];
+  }
+
+  getLength() {
+    return this.#selected.length;
   }
 
   /**
@@ -22,7 +30,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(input) {
-    this.validate(input);
+    this.constructor.validate(input);
     if (input === 'U') {
       this.#selected += '0';
     } else if (input === 'D') {
