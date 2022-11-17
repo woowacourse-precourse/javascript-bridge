@@ -2,9 +2,9 @@
 ## 기능
 - [ ] 다리 길이만큼 발판을 생성한다. BridgeMaker#makeBridge
   - [ ] (예외처리) 다리의 길이가 3 이상 20 이하가 아니라면 예외처리 한다. Bridge#validate
-- [ ] 랜덤 수를 통해 방향을 생성한다. BridgeDirection#generate
+- [x] 랜덤 수를 통해 방향을 생성한다. BridgeDirection#generate
   - 0은 D를, 1은 U를 반환한다.
-  - [ ] (예외처리) 랜덤 수가 0 또는 1이 아닌 경우 예외처리 한다. BridgeDirection#validate
+  - [x] (예외처리) 랜덤 수가 0 또는 1이 아닌 경우 예외처리 한다. BridgeDirection#validate
 - [ ] 다리를 이동한다. BridgeGame#move
   - [ ] 다리의 다음 칸을 건널 수 있는지 확인한다. Judgment#checkCrossingNext
   - [ ] 다리의 n번째 칸을 건넌다. Bridge#stepOn
