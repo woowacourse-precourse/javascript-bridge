@@ -1,6 +1,4 @@
-const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
-const Validator = require('./Validator');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
@@ -14,7 +12,6 @@ class Controller {
   handleMakeBridge() {
     InputView.readBridgeSize((input) => {
       this.bridgeGame = new BridgeGame(input);
-      Console.print('');
       this.handleMove();
     });
   }
@@ -30,15 +27,9 @@ class Controller {
   }
 
   handleGameOver() {
-    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (input) => {
-      try {
-        Validator.validateIncludes(['R', 'Q'], input);
-        if (input === 'R') this.handleGameRetry();
-        if (input === 'Q') this.handleGameEnd();
-      } catch (err) {
-        Console.print(`\n${err.message}`);
-        this.handleGameOver();
-      }
+    InputView.readGameCommand((input) => {
+      if (input === 'R') this.handleGameRetry();
+      if (input === 'Q') this.handleGameEnd();
     });
   }
 

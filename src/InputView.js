@@ -51,9 +51,29 @@ const InputView = {
   },
 
   /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   * @param {function(string): void} callback 입력받은 후 실행할 함수
    */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    Console.readLine(
+      '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+      (input) => this.errorHandler(
+        this.validateGameCommand(input, callback),
+        () => this.readGameCommand(callback),
+      ),
+    );
+  },
+
+  /**
+   * @param {string} input 플레이어의 입력
+   * @param {function(string): void} callback 입력받은 후 실행할 함수
+   * @return {function(): void} 에러핸들러에게 전달할 콜백함수
+   */
+  validateGameCommand(input, callback) {
+    return () => {
+      Validator.validateIncludes(['R', 'Q'], input);
+      callback(input);
+    };
+  },
 
   /**
    * @param {function(): void} callback 입력 유효성을 검증하기 위한 콜백함수
