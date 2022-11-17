@@ -2,8 +2,14 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridge = [];
-  #movingLog = [];
+  #bridge;
+  #movingLog;
+
+  constructor(bridge) {
+    this.#bridge = bridge;
+    this.#movingLog = [];
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -11,6 +17,16 @@ class BridgeGame {
    */
   move(direction) {
     this.#movingLog.push(direction);
+  }
+
+  checkGameEnd() {
+    for (let i = 0; i < this.#movingLog.length; i += 1) {
+      if (i === this.#bridge.length - 1 || this.#bridge[i] !== this.#movingLog[i]) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**
