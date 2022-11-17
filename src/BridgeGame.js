@@ -15,21 +15,13 @@ class BridgeGame {
   retry() {}
 
   validateSize(size) {
-    if (!size) {
-      throw new Error(ERROR_MSG.emptyInput);
-    }
+    if (!size) throw new Error(ERROR_MSG.emptyInput);
 
-    if (!this.hasOnlyNumber(size)) {
-      throw new Error(ERROR_MSG.invalidInputType);
-    }
+    if (!this.hasOnlyNumber(size)) throw new Error(ERROR_MSG.invalidInputType);
 
-    if (this.isStartedZero(size)) {
-      throw new Error(ERROR_MSG.isStartedZero);
-    }
+    if (this.isStartedZero(size)) throw new Error(ERROR_MSG.isStartedZero);
 
-    if (!this.isValideBridgeSizeRange(size)) {
-      throw new Error(ERROR_MSG.invalidInputRange);
-    }
+    if (!this.isValideBridgeSizeRange(size)) throw new Error(ERROR_MSG.invalidInputRange);
   }
 
   hasOnlyNumber(size) {
