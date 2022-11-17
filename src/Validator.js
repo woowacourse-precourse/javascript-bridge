@@ -23,8 +23,13 @@ const Validator = Object.freeze({
     if (input !== 'R' && input !== 'Q') throw new Error(ERROR_MESSAGES.ONLY_R_Q);
     else return true;
   },
+
+  checkRange(input) {
+    if (input > 20 || input < 3) throw new Error(ERROR_MESSAGES.RANGE_ERROR);
+    else return true;
+  },
 });
 
 module.exports = Validator;
 
-console.log(Validator.checkMoveInput('Uxcz'));
+console.log(Validator.checkRange('22'));
