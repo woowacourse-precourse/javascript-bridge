@@ -16,15 +16,15 @@ describe('숫자값 문자열 치환 기능 테스트', () => {
     expect(BridgeGame.replaceString.name).toEqual(METHOD_NAME);
   });
 
-  test('요소가 0인 경우 "D"로 치환한다.', () => {
-    const EXPECTED = 0;
+  test('요소가 "0"인 경우 "D"로 치환한다.', () => {
+    const EXPECTED = '0';
     const RECEIVED = 'D';
 
     expect(BridgeGame.replaceString(EXPECTED)).toEqual(RECEIVED);
   });
 
-  test('요소가 1인 경우 "U"로 치환한다.', () => {
-    const EXPECTED = 1;
+  test('요소가 "1"인 경우 "U"로 치환한다.', () => {
+    const EXPECTED = '1';
     const RECEIVED = 'U';
 
     expect(BridgeGame.replaceString(EXPECTED)).toEqual(RECEIVED);
