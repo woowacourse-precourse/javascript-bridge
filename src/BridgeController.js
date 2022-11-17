@@ -64,10 +64,9 @@ class BridgeController {
   retryOrExit(safeBridge, bridgeGameResult) {
     InputView.readGameCommand((retryOrExit) => {
       Validation.checkRetry(retryOrExit);
-
       if (bridgeGame.retry(retryOrExit) === true) {
-      }
-      if (bridgeGame.retry(retryOrExit) === false) {
+        bridgeGame.reset();
+        this.userMove(safeBridge);
       }
     });
   }
