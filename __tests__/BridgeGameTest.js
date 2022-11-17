@@ -41,4 +41,19 @@ describe("BridgeGame 테스트", () => {
             bridgeGame.move(moveType);
         expect(bridgeGame.getUpDownHistory()).toEqual([upHistory, downHistory]);
     });
+
+    test.each([
+        [["1", "0", "1"], ["U", "D", "D"]],
+        [["1", "0", "1"], ["U", "U"]],
+        [["1", "0", "1"], ["D"]],
+    ])("이동 실패 테스트", (bridge, moveTypes) => {
+        mockRandoms(bridge);
+        const bridgeGame = new BridgeGame();
+        bridgeGame.setBridge(new Bridge(bridge.length));
+
+        for (let moveType of moveTypes)
+            bridgeGame.move(moveType);
+
+        expect(bridgeGame.isFailMove(bridgeGame.getUpDownHistory())).toEqual(true);
+    });
 });
