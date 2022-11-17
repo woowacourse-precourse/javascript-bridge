@@ -1,5 +1,7 @@
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
+ * InputView 에서만 MissionUtils의
+ * Console.readLine() 을 이용해 사용자의 입력을 받을 수 있다.
  */
 const InputView = {
   /**
