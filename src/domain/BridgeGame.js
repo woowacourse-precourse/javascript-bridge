@@ -38,7 +38,8 @@ class BridgeGame {
   }
 
   quit() {
-
+    Console.close();
+    return this;
   }
 }
 
