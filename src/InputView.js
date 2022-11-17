@@ -11,10 +11,10 @@ const SIZE_END = 20;
 
 /**
  * @param {number} number
- * 숫자 타입이 아니면 예외를 발생시킨다.
+ * 입력된 값이 빈 값이거나 숫자 타입이 아니면 예외를 발생시킨다.
  */
 function validateIsNumber(number) {
-  if (isNaN(number)) throw new Error(ERROR_NOT_NUMBER);
+  if ((number === "") | isNaN(number)) throw new Error(ERROR_NOT_NUMBER);
 }
 /**
  * @param {number} number
@@ -76,8 +76,8 @@ const InputView = {
    */
   validateBridgeSize(size) {
     validateIsNumber(size);
-    validateIsInRange(size);
     validateIsInteger(size);
+    validateIsInRange(size);
   },
 };
 
