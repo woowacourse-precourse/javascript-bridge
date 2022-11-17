@@ -50,6 +50,12 @@ class BridgeGame {
 
     return this.#userPosition;
   }
+
+  isBridgeEnd(arrayLength) {
+    const MAX_INDEX_POINT = arrayLength - 1;
+
+    return MAX_INDEX_POINT === this.findUserPosition();
+  }
 }
 
 module.exports = BridgeGame;
