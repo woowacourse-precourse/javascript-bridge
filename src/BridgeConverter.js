@@ -60,5 +60,16 @@ const BridgeConverter = {
     }
     return bridge;
   },
+  /**
+   * @param {string[]} answer : "U"와 "D"로 이루어진 실제 정답
+   * @param {string[]} inputs : "U"와 "D"로 이루어진 사용자의 입력값
+   * @returns {string[][]}
+   */
+  stringifyBridge(answer, inputs) {
+    const bridge = this.convertToBridge(answer, inputs);
+    const bridgeUpper = `[ ${bridge[0].join(" | ")} ]`;
+    const bridgeLower = `[ ${bridge[1].join(" | ")} ]`;
+    return bridgeUpper + "\n" + bridgeLower;
+  },
 };
 module.exports = BridgeConverter;
