@@ -1,15 +1,23 @@
 const InputView = require('./InputView');
+const BridgeMaker = require('./BridgeMaker');
+const { generateRandomNumber } = require('./utils/bridgeHandler');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
+
 class BridgeGame {
   constructor() {
     this.inputView = InputView;
+    this.size = 0;
   }
 
   selectBridgeSize() {
     this.inputView.readBridgeSize();
+  }
+
+  createBridge() {
+    const myBridge = BridgeMaker(this.size, generateRandomNumber);
   }
 
   /**

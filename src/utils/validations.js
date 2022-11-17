@@ -1,4 +1,4 @@
-const { Console } = require('console');
+const { Console } = require('@woowacourse/mission-utils');
 const { ERROR } = require('./constants');
 
 const checkNumberValidation = (userInput) => {

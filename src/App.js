@@ -12,5 +12,4 @@ class App {
     this.BridgeGame.selectBridgeSize();
   }
 }
-
 module.exports = App;
