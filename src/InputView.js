@@ -4,6 +4,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
+const Player = require("./Player");
 
 const ASK_BRIDGE_LENGTH = "다리의 길이를 입력해주세요.\n";
 const ASK_WHERE_WANT_TO_GO = "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n";
@@ -35,9 +36,9 @@ const InputView = {
       new MoveInput(wantGo);
 
       const isCorrect = new BridgeGame(canWalkBridge, wantGo).move();
+      Player.updateState(wantGo, isCorrect);
 
       OutputView.printMap();
-
       isCorrect ? this.readMoving(canWalkBridge) : this.readGameCommand();
     });
   },
