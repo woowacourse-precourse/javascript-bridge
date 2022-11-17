@@ -13,7 +13,7 @@ const InputView = {
    * @param {function} next
    */
   readBridgeSize(next) {
-    const message = "다리의 길이를 입력해주세요.";
+    const message = "다리의 길이를 입력해주세요.\n";
     Console.readLine(message, (bridgeLength) => {
       const validatedLength = Validation.validateBridgeLength(bridgeLength);
       next(validatedLength);
@@ -24,7 +24,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(next) {
-    const message = "이동할 칸을 선택해주세요. (위: U, 아래: D)";
+    const message = "이동할 칸을 선택해주세요. (위: U, 아래: D)\n";
     Console.readLine(message, (command) => {
       const validatedCommand = Validation.validateCommand(command, ["U", "D"]);
       next(validatedCommand);
@@ -36,7 +36,7 @@ const InputView = {
    */
   readGameCommand(next) {
     const message =
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)";
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n";
     Console.readLine(message, (command) => next(command));
   },
 };
