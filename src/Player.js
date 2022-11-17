@@ -15,11 +15,7 @@ class Player {
    */
   markOX(moving, isCorrect) {
     const mark = isCorrect ? MARKING.CORRECT : MARKING.WRONG;
-
-    if (moving === 'U') this.markU(mark);
-    if (moving === 'D') this.markD(mark);
-
-    return this.#markingPaper;
+    moving === 'U' ? this.markU(mark) : this.markD(mark);
   }
 
   /**
@@ -38,8 +34,11 @@ class Player {
     this.#markingPaper[MOVING.D][this.#step] = mark;
   }
 
-  setNextStep() {
-    this.#step += 1;
+  /**
+   * @param {number} newStep
+   */
+  setStep(newStep) {
+    this.#step = newStep;
   }
 
   getStep() {

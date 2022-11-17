@@ -5,7 +5,7 @@ const MOVING = {
   U: 0,
 };
 
-const STEP_STATUS = {
+const STATUS = {
   FAILURE: 0,
   SUCCESS: 1,
   NEXT: 2,
@@ -19,7 +19,7 @@ const MARKING = {
 
 Object.freeze(BRIDGE_SPACE_TYPE);
 Object.freeze(MOVING);
-Object.freeze(STEP_STATUS);
+Object.freeze(STATUS);
 Object.freeze(MARKING);
 
-module.exports = { BRIDGE_SPACE_TYPE, MOVING, STEP_STATUS, MARKING };
+module.exports = { BRIDGE_SPACE_TYPE, MOVING, STATUS, MARKING };
