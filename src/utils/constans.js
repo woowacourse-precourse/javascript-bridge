@@ -21,7 +21,8 @@ const OUTPUT_MESSAGE = {
   GAME_SUCCESS_STATUS: (isGameSuccess) =>
     `게임 성공 여부: ${isGameSuccess ? "성공" : "실패"}`,
   GAME_TRY_COUNT: (tryCount) => `총 시도한 횟수: ${tryCount}`,
-  BRIDGE_MAP: `${BRIDGE.START}| O |${BRIDGE.END}`,
+  BRIDGE_MAP: (bridgeMap) =>
+    `${BRIDGE.START}${bridgeMap.join(" | ")}${BRIDGE.END}`,
 };
 
 module.exports = { INPUT_MESSAGE, OUTPUT_MESSAGE, COMMAND };

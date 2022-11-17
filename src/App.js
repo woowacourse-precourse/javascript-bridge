@@ -33,14 +33,17 @@ class App {
   playerMove(movingCommand) {
     this.bridgeGame.move();
     if (this.bridgeGame.isNextMove(movingCommand)) {
+      OutputView.printMap(this.bridgeGame.getCurrentAnswerBridgeMap());
       this.inputMoving();
       return;
     }
     if (!this.bridgeGame.isAnswerMovingChoice(movingCommand)) {
+      OutputView.printMap();
       this.inputRetryCommand();
       return;
     }
-    OutputView.printResult();
+    OutputView.printMap(this.bridgeGame.getCurrentAnswerBridgeMap());
+    OutputView.printResult(this.bridgeGame.getCurrentAnswerBridgeMap());
   }
 
   inputRetryCommand() {
