@@ -45,7 +45,7 @@ class App {
 
       if (this.bridgeGame.isFail()) return this.requestRestartOrQuit();
 
-      if (this.bridgeGame.isLast()) return Console.print('게임 종료로 이동');
+      if (this.bridgeGame.isLast()) return this.quit();
 
       return this.requestDirection();
     });
@@ -60,12 +60,19 @@ class App {
       }
 
       if (commandOption === 'R') return this.restart();
+
+      return this.quit();
     });
   }
 
   restart() {
     this.bridgeGame.retry();
     this.requestDirection();
+  }
+
+  quit() {
+    const { isSuccess } = this.bridgeGame.getResult();
+    OutputView.printResult({ isSuccess });
   }
 }
 
