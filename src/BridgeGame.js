@@ -3,50 +3,50 @@ const BridgeMaker = require("./BridgeMaker");
 
 class BridgeGame {
   #progressIdx = 0;
+  #isCorrect = false;
   #matchCount = 0;
   #bridge = [];
   #gameCount = 1;
 
   start(size) {
-    this.#bridge = BridgeMaker.makeBridge(size, this.makeRandomNumber(size));
-    console.log(this.#bridge);
-  }
-
-  makeRandomNumber(size) {
-    let tempNumberBridge = [];
-    for (let i = 0; i < size; i++) {
-      tempNumberBridge.push(RandomNumberGenerator.generate());
-    }
-    return tempNumberBridge;
+    this.#bridge = BridgeMaker.makeBridge(size, RandomNumberGenerator.generate);
+    console.log(this.#bridge); // 테스트용 필히 삭제
   }
 
   move(answer) {
-    let isCorrect = false;
-    if (
-      (answer == "U" && answer == this.#bridge[this.#progressIdx]) ||
-      (answer == "D" && answer == this.#bridge[this.#progressIdx])
-    ) {
+    this.#isCorrect = false;
+    if (this.checkInputCorrect(answer)) {
       this.#matchCount += 1;
-      isCorrect = true;
+      this.#isCorrect = true;
     }
+
     this.#progressIdx += 1;
-    return isCorrect;
+    return this.#isCorrect;
   }
 
-  getProgressIndex() {
-    return this.#progressIdx;
+  checkInputCorrect(answer) {
+    return (answer == "U" && answer == this.#bridge[this.#progressIdx]) ||
+      (answer == "D" && answer == this.#bridge[this.#progressIdx])
+      ? true
+      : false;
+  }
+
+  getIdxAndIsCorrect() {
+    return [this.#progressIdx - 1, this.#isCorrect];
   }
 
   crossBridgeCompletely() {
-    console.log(this.#bridge.length, this.#matchCount);
     return this.#bridge.length == this.#matchCount ? true : false;
+  }
+
+  getGameCount() {
+    return this.#gameCount;
   }
 
   retry(answer) {
     if (answer == "R") {
       this.#gameCount += 1;
-      this.#progressIdx = 0;
-      this.#matchCount = 0;
+      this.#progressIdx = this.#matchCount = 0;
       return true;
     }
     if (answer == "Q") return false;
