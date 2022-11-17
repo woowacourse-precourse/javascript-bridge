@@ -18,6 +18,10 @@ checkMoveString = (input) => {
   if (input !== 'U' && input !== 'D') throw new Error(ERROR_STRING);
 };
 
+checkRetryString = (input) => {
+  if (input !== 'R' && input !== 'Q') throw new Error(ERROR_STRING);
+};
+
 validateBridgeSize = (input) => {
   if (checkTypeNumber(input)) throw new Error(ERROR_TYPE_NUMBER);
   if (checkBridgeRange(input)) throw new Error(ERROR_RANGE);
@@ -26,4 +30,5 @@ validateBridgeSize = (input) => {
 module.exports = {
   validateBridgeSize,
   checkMoveString,
+  checkRetryString,
 };
