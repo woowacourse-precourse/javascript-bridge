@@ -17,10 +17,10 @@ const OutputView = {
     const map = { U: "[", D: "[" };
     for (let i = 0; i < location - 1; i++) {
       map[bridgeMap[i]] += " O |";
-      map[reverse(bridgeMap[i])] += "   |";
+      map[this.reverse(bridgeMap[i])] += "   |";
     }
     map[bridgeMap[location - 1]] += correct ? " O ]" : "   ]";
-    map[reverse(bridgeMap[location - 1])] += correct ? "   ]" : " X ]";
+    map[this.reverse(bridgeMap[location - 1])] += correct ? "   ]" : " X ]";
     MissionUtils.Console.print(map["U"] + "\n" + map["D"]);
   },
 
@@ -29,7 +29,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridgeMap, location, correct, tryCount) {
+    MissionUtils.Console.print("최종 게임 결과");
+    printMap(bridgeMap, location, correct);
+    MissionUtils.Console.print("게임 성공 여부: " + correct ? "성공" : "실패");
+    MissionUtils.Console.print("총 시도한 횟수: " + tryCount);
+  },
 };
 
 module.exports = OutputView;
