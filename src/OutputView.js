@@ -13,6 +13,8 @@ const OutputView = {
   SUCCESS_SELECT_CASE: "[ O ]",
   FAIL_SELECT_CASE: "[ X ]",
   NOT_SELECT_CASE: "[   ]",
+  SUCCESS_TERMINATION: "성공",
+  FAIL_TERMINAITION: "실패",
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -27,7 +29,8 @@ const OutputView = {
   userMovingResult(bridgePosition, userPosition) {
     if (bridgePosition === userPosition) {
       this.selectCorrectBlock(userPosition);
-    } else { // TODO: 해당 else를 쓸 것인지 말 것인지 결정하기. 
+    } else {
+      // TODO: 해당 else를 쓸 것인지 말 것인지 결정하기.
       this.selectUnCorrectBlock(userPosition);
     }
   },
@@ -40,7 +43,6 @@ const OutputView = {
     if (userPosition === this.DOWN_MOVING) {
       this.selectLowerBlock(true);
     }
-
   },
 
   selectUnCorrectBlock(userPosition) {
@@ -78,7 +80,14 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(isSuccess, tryCount) {
+    MissionUtils.Console.print(`
+      게임 성공 여부: ${
+        isSuccess === true ? this.SUCCESS_TERMINATION : this.FAIL_TERMINAITION
+      } \n
+      총 시도 횟수: ${tryCount}
+    `);
+  },
 };
 
 module.exports = OutputView;

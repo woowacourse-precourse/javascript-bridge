@@ -30,14 +30,16 @@ class BridgeGame {
   gameStart() {
     let termination = false;
     let tryCount = 1;
+    let isSuccess = false;
 
     while (!termination) {
       termination = this.playGame(userMoving);
+      isSuccess = termination === true ? true : false;
       termination = !this.retry();
       tryCount++;
     }
 
-    OutputView.printResult();
+    OutputView.printResult(isSuccess, tryCount);
   }
 
   playGame() {
