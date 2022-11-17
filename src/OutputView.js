@@ -9,6 +9,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  GAME_RESULT_MESSAGE: "최종 게임 결과\n",
+  printNewLine() {
+    console.log("");
+  },
   makeCellElement(input, idx) {
     if (this.target === input && this.bridge[idx] === input) return "O";
     if (this.target === input && this.bridge[idx] !== input) return "X";
@@ -26,7 +30,6 @@ const OutputView = {
     const lowerBridgeString = OutputView.makeBridgeString(bridge, inputs, "D");
     Console.print(upperBridgeString);
     Console.print(lowerBridgeString);
-    Console.close();
   },
 
   /**
@@ -34,7 +37,21 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printIsSuccess(bridge, inputs) {
+    const isFail = inputs.some((input, idx) => input !== bridge[idx]);
+    Console.print(`게임 성공 여부: ${isFail ? "실패" : "성공"}`);
+  },
+  printGameCount(time) {
+    Console.print(`총 시도한 횟수: ${time}`);
+  },
+  printResult(bridge, inputs) {
+    Console.print(OutputView.GAME_RESULT_MESSAGE);
+    OutputView.printMap(bridge, inputs);
+    OutputView.printNewLine();
+    OutputView.printIsSuccess(bridge, inputs);
+    OutputView.printGameCount(2);
+    Console.close();
+  },
 };
 
 OutputView.printMap(["U", "D", "U"], ["U", "D", "U"]);
