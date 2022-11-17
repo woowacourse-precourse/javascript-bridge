@@ -9,8 +9,8 @@ const OutputView = {
    */
   printMap(bridge) {
     let [top, bottom] = bridge.slice();
-    const topResult = `[${top.join().replace(/,/g, ' | ')}]`;
-    const bottomResult = `[${bottom.join().replace(/,/g, ' | ')}]`;
+    const topResult = `[ ${top.join().replace(/,/g, ' | ')} ]`;
+    const bottomResult = `[ ${bottom.join().replace(/,/g, ' | ')} ]`;
     return [topResult, bottomResult];
   },
 
