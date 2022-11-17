@@ -8,7 +8,6 @@ class BridgeGame {
   }
 
   move(direction) {
-    this.tryCount += 1;
     const location = this.course.length;
     if(this.bridge[location] === direction) return this.course.push(direction);
     if(direction === USER_INPUT_CODE.MOVE.UPPER) return this.course.push(MOVEMENT_LOG_CODE.FAILED.UPPER);
@@ -16,12 +15,13 @@ class BridgeGame {
   }
 
   retry() {
+    this.tryCount += 1;
     this.course = [];
   }
   
   setBridge(size) {
     this.bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    this.tryCount = 0;
+    this.tryCount = 1;
     this.course = [];
   }
 }
