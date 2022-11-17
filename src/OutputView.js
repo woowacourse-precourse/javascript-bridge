@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-
+const { PRINT, KEY } = require("./constants/constants");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -10,7 +10,7 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   reverse(direction) {
-    return direction === "U" ? "D" : "U";
+    return direction === KEY.UP ? KEY.DOWN : KEY.UP;
   },
 
   printMap(bridgeMap, location, correct) {
@@ -21,7 +21,7 @@ const OutputView = {
     }
     map[bridgeMap[location]] += correct ? " O ]" : "   ]";
     map[this.reverse(bridgeMap[location])] += correct ? "   ]" : " X ]";
-    MissionUtils.Console.print(map["U"] + "\n" + map["D"]);
+    MissionUtils.Console.print(map[KEY.UP] + "\n" + map[KEY.DOWN]);
   },
 
   /**
@@ -30,12 +30,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(bridgeMap, location, correct, tryCount) {
-    MissionUtils.Console.print("최종 게임 결과");
+    MissionUtils.Console.print(PRINT.FINISH_GAME);
     this.printMap(bridgeMap, location, correct);
-    MissionUtils.Console.print(
-      "게임 성공 여부: " + (correct ? "성공" : "실패")
-    );
-    MissionUtils.Console.print("총 시도한 횟수: " + tryCount);
+    MissionUtils.Console.print(correct ? PRINT.SUCCESS_GAME : PRINT.FAIL_GAME);
+    MissionUtils.Console.print(PRINT.TOTAL_TRY + tryCount);
   },
 };
 
