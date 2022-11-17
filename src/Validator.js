@@ -15,7 +15,7 @@ const Validator = {
    */
   validateInRange(start, end, input) {
     if (Number(input) < start || Number(input) > end) {
-      throw new Error('[ERROR] 3 ~ 20 사이의 숫자만 입력 가능합니다.');
+      throw new Error(`[ERROR] ${start}부터 ${end}사이의 숫자만 입력 가능합니다.`);
     }
   },
 
