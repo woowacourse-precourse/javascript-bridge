@@ -68,6 +68,13 @@ class BridgeController {
         bridgeGame.reset();
         this.userMove(safeBridge);
       }
+      if (bridgeGame.retry(retryOrExit) === false) {
+        OutputView.printResult(
+          bridgeGameResult,
+          "실패",
+          bridgeGame.getTryCount()
+        );
+      }
     });
   }
 }
