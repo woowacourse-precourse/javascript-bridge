@@ -12,20 +12,13 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     while (bridge.length < size) {
-      const randomNumbers = generateRandomNumber();
-      const shape = this.getShapeOfBridge(randomNumbers);
+      const randomNumber = generateRandomNumber();
+      const IS_UP = (randomNumber === 1 || randomNumber === '1');
+      const shape = IS_UP ? BRIDGE_CONSTANTS.up : BRIDGE_CONSTANTS.down;
       bridge.push(shape);
     }
 
     return bridge;
-  },
-
-  getShapeOfBridge(number) {
-    if (number === 1 || number === '1') {
-      return BRIDGE_CONSTANTS.up;
-    }
-
-    return BRIDGE_CONSTANTS.down;
   },
 };
 
