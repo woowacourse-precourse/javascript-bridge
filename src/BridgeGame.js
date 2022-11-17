@@ -1,7 +1,51 @@
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridge;
+  #inputs;
+  #isGameOver;
+
+  /**
+   * @param {number} size 입력받은 다리의 길이
+   */
+  constructor(size) {
+    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.#inputs = [];
+    this.#isGameOver = false;
+  }
+
+  /**
+  * @typedef {object} MoveResultMap
+  * @property {string} upperPart
+  * @property {strint} lowerPart
+  * @property {boolean} isGameOver
+  */
+
+  /**
+   * @param {string} input 플레이어의 입력
+   * @return {MoveResultMap} 출력할 map을 반환
+   */
+  move(input) {
+    this.#inputs.push(input);
+    this.checkInputsLength();
+
+    return {
+      upperPart: this.makeUpperPart(this.#bridge, this.#inputs),
+      lowerPart: this.makeLowerPart(this.#bridge, this.#inputs),
+      isGameOver: this.#isGameOver,
+    };
+  }
+
+  checkInputsLength() {
+    if (this.#bridge.length === this.#inputs.length) {
+      this.#isGameOver = true;
+    }
+  }
+
   /**
    * @param {string[]} bridge // 다리
    * @param {string[]} inputs // 플레이어의 입력
