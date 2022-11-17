@@ -44,10 +44,17 @@ describe('숫자값 문자열 치환 기능 테스트', () => {
 });
 
 describe('사용자가 칸을 이동할 때 사용하는 메서드 테스트', () => {
-  const bridgeGame = new BridgeGame();
   test('메소드 이름은 "move"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
     const METHOD_NAME = 'move';
 
     expect(bridgeGame.move.name).toEqual(METHOD_NAME);
+  });
+
+  test('메서드를 호출할 때마다 값을 증가시킨다.', () => {
+    const bridgeGame = new BridgeGame();
+    const EXPECTED = [0, 1, 2, 3];
+
+    EXPECTED.forEach((RECEIVED) => expect(bridgeGame.move()).toEqual(RECEIVED));
   });
 });
