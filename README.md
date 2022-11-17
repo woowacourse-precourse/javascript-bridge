@@ -6,17 +6,17 @@
 
 #### 다리 생성
 
-- [ ] InputView : 다리길이 입력
-- [ ] 입력한 다리길이 BridgeMaker로 전달
-- [ ] BridgeMaker : 다리 생성
-- [ ] 생성한 다리 InputView으로 전달
+- [x] InputView : 다리길이 입력
+- [x] 입력한 다리길이 BridgeMaker로 전달
+- [x] BridgeMaker : 다리 생성
+- [x] 생성한 다리 InputView으로 전달
 
 #### 게임 플레이
 
-- [ ] InputView : 이동할 방향 입력
-- [ ] 이동방향 BridgeGame으로 전달
-- [ ] BridgeGame : 생사 판단
-- [ ] 이동방향과 생사여부 InputView & OutputView에 전달
+- [x] InputView : 이동할 방향 입력
+- [x] 이동방향 BridgeGame으로 전달
+- [x] BridgeGame : 생사 판단
+- [ ] 이동방향과 생사여부 InputView에 전달
 - [ ] OutputView : 이동방향과 생사여부 출력
 - [ ] 생의 경우→ InputView : 이동 방향 추가 입력
 - [ ] 사의 경우→ InputView : 다시 도전할지 포기할지 선택
