@@ -60,4 +60,12 @@ describe('배열 생성 함수 테스트', () => {
       }).toThrow(RANGE_ERROR_TEXT);
     },
   );
+
+  test('인수를 전달하면 [1, 2, 3]을 기대한다.', () => {
+    const EXPECTED1 = '3';
+    const EXPECTED2 = (_, index) => index + 1;
+    const RECEIVED = [1, 2, 3];
+
+    expect(Application.createArray(EXPECTED1, EXPECTED2)).toStrictEqual(RECEIVED);
+  });
 });
