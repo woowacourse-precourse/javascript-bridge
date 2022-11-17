@@ -11,4 +11,10 @@ const validateBridgeSize = (bridgeSize) => {
   if (isInRange === false) throw Error(ERRORS.INVALID_BRIDGE_RANGE);
 };
 
-module.exports = { validateBridgeSize };
+const validateMove = (move) => {
+  const isMove = move === MOVE.UP || move === MOVE.DOWN;
+
+  if (isMove === false) throw Error(ERRORS.INVALID_MOVE_TYPE);
+};
+
+module.exports = { validateBridgeSize, validateMove };
