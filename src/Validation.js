@@ -36,6 +36,12 @@ const Validation = {
     }
     return command;
   },
+  validateSucess(answer, inputs) {
+    for (let i = 0; i < answer.length; i++) {
+      if (answer !== inputs) return "실패";
+    }
+    return "성공";
+  },
 };
 
 module.exports = Validation;
