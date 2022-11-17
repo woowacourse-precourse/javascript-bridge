@@ -1,6 +1,7 @@
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
 const OutputView = require("./OutputView");
+const { VALUE } = require("./constant");
 
 class BridgeGame {
   #bridge;
@@ -38,20 +39,28 @@ class BridgeGame {
     };
   }
 
+  check(input) {
+    let up = " ",
+      down = " ",
+      isEnd = false;
+    if (this.#bridge[this.#order] === input)
+      input == VALUE.UP ? (up = VALUE.SIGN_O) : (down = VALUE.SIGN_O);
+    if (this.#bridge[this.#order] !== input) {
+      input == VALUE.UP ? (up = VALUE.SIGN_X) : (down = VALUE.SIGN_X);
+      isEnd = true;
+    }
+    return { up, down, isEnd };
+  }
+
   move(input) {
-    const InputView = require("./InputView");
-    const BridgeChecker = require("./BridgeChecker");
-    const { up, down, isEnd } = BridgeChecker.check(
-      this.#order,
-      input,
-      this.#bridge
-    );
+    const { up, down, isEnd } = this.check(input);
     this.#bridgeResult.upResult.push(up);
     this.#bridgeResult.downResult.push(down);
 
     OutputView.printMap(this.#bridgeResult.upResult);
     OutputView.printMap(this.#bridgeResult.downResult);
 
+    const InputView = require("./InputView");
     if (isEnd) this.retry(this);
     if (this.#bridge.length - 1 == this.#order)
       OutputView.printResult(this, true);
