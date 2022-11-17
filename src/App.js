@@ -43,12 +43,16 @@ class App {
       this.bridgeGame.move(direction);
       OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
 
-      if (this.bridgeGame.isFail()) return Console.print('게임 실패로 이동');
+      if (this.bridgeGame.isFail()) return this.requestRestartOrQuit();
 
       if (this.bridgeGame.isLast()) return Console.print('게임 종료로 이동');
 
       return this.requestDirection();
     });
+  }
+
+  requestRestartOrQuit() {
+    InputView.readGameCommand((commandOption) => {});
   }
 }
 
