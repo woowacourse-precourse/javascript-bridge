@@ -5,6 +5,11 @@ const OutputView = require('./view/OutputView');
 
 class App {
   #bridgeGame;
+  #attempts;
+
+  constructor() {
+    this.#attempts = 1;
+  }
 
   makeGame(length) {
     this.#bridgeGame = new BridgeGame(Number(length));
@@ -27,6 +32,7 @@ class App {
       if (this.#bridgeGame.isMove(direction)) {
         this.#bridgeGame.move();
         this.renderSuccessBridge();
+        this.checkCompletion();
         return;
       }
       this.failGame();
@@ -36,7 +42,6 @@ class App {
   renderSuccessBridge() {
     const { upstairBridge, downstairBridge } = this.#bridgeGame.getConvertedBridge();
     OutputView.printMap(upstairBridge, downstairBridge);
-    this.checkCompletion();
   }
 
   renderFailureBridge() {
@@ -48,7 +53,9 @@ class App {
 
   checkCompletion() {
     if (this.#bridgeGame.isCompletion()) {
-      this.resultGame();
+      Console.print('\n최종 게임 결과');
+      this.renderSuccessBridge();
+      this.resultGame('성공');
       return;
     }
     this.startMove();
@@ -60,13 +67,15 @@ class App {
       if (command === 'R') {
         this.replay();
       } else if (command === 'Q') {
-        this.resultGame();
+        Console.print('최종 게임 결과');
+        this.renderFailureBridge();
+        this.resultGame('실패');
       }
     });
   }
 
-  resultGame() {
-    console.log('\n결과 // 게임 종료 (성공했을 때 or 실패 후 종료)');
+  resultGame(result) {
+    OutputView.printResult(result, this.#attempts);
     this.end();
   }
 
@@ -75,6 +84,7 @@ class App {
   }
 
   replay() {
+    this.#attempts += 1;
     this.#bridgeGame.retry();
     this.startMove();
   }
