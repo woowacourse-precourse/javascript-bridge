@@ -16,18 +16,27 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(InputView.BRIDGE_SIZE_QUESTION, (input) => {
       Validation.validateIsNumber(input);
+      Validation.validateBridgeRange(input);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(InputView.BRIDGE_MOVE_QUESTION, (input) => {
+      Validation.validateMoveInput(input);
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(InputView.RESTART_QUESTION, (input) => {
+      Validation.validateRestartInput(input);
+    });
+  },
 };
 
 module.exports = InputView;
