@@ -5,8 +5,7 @@ const OutputView = require('./OutputView');
 
 class Controller {
   handleGameStart() {
-    Console.print('다리 건너기 게임을 시작합니다.');
-    Console.print('');
+    OutputView.printStart();
     this.count = 1;
     this.handleMakeBridge();
   }
