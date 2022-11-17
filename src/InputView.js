@@ -23,7 +23,11 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(callbackTwo, callbackThree) {
+    MissionUtils.Console.readLine(MESSAGE.INPUT_DIRECTION, (input) => {
+      callbackTwo.call(this, input);
+      this.readGameCommand(callbackThree);
+    });
   },
 
   /**
