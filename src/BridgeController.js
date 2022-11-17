@@ -26,6 +26,14 @@ class BridgeController {
     );
 
     Console.print(safeBridge);
+
+    this.userMove(safeBridge);
+  }
+
+  userMove(safeBridge) {
+    InputView.readMoving((move) => {
+      Validation.checkMove(move);
+    });
   }
 }
 
