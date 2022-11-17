@@ -1,14 +1,14 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-class Utils {
-  static input(message, callback) {
+const Utils = {
+  input(message, callback) {
     Console.readLine(message, callback);
-  }
+  },
 
-  static print(message) {
+  print(message) {
     Console.print(message);
-  }
-}
+  },
+};
 
 module.exports = Utils.input;
 module.exports = Utils.print;
