@@ -37,4 +37,12 @@ describe('범위 파악 함수 테스트', () => {
       checkRange(EXPECTED);
     }).toThrow(RANGE_ERROR_TEXT);
   });
+
+  test('전달받는 인자가 숫자가 아니라면 예외를 발생한다.', () => {
+    const EXPECTED = '2';
+
+    expect(() => {
+      checkRange(EXPECTED);
+    }).toThrow(NUMBER_ERROR_TEXT);
+  });
 });
