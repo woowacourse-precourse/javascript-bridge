@@ -23,7 +23,7 @@ class BridgeGame {
   }
 
   /**
-  * @typedef {object} MoveResultMap
+  * @typedef {object} resultMap
   * @property {string} upperPart
   * @property {string} lowerPart
   * @property {boolean} gameStatus
@@ -31,31 +31,38 @@ class BridgeGame {
 
   /**
    * @param {string} input 플레이어의 입력
-   * @return {MoveResultMap} 출력할 map을 반환
+   * @return {resultMap} 출력할 map을 반환
    */
   move(input) {
     if (this.#inputs.length < this.#bridge.length) {
       this.#inputs.push(input);
     }
-    this.checkInputsLength();
+    this.#checkGameEnd();
 
-    return {
-      upperPart: this.makeUpperPart(),
-      lowerPart: this.makeLowerPart(),
-      gameStatus: this.#gameStatus,
-    };
+    return this.getResultMap();
   }
 
-  checkInputsLength() {
+  #checkGameEnd() {
     if (this.#bridge.length === this.#inputs.length) {
       this.#gameStatus = 2;
     }
   }
 
   /**
+   * @return {resultMap} 출력할 map을 반환
+   */
+  getResultMap() {
+    return {
+      upperPart: this.#makeUpperPart(),
+      lowerPart: this.#makeLowerPart(),
+      gameStatus: this.#gameStatus,
+    };
+  }
+
+  /**
    * @return {string} 출력할 map의 윗부분
    */
-  makeUpperPart() {
+  #makeUpperPart() {
     const upperPart = this.#inputs.map((e, i) => {
       if (e !== 'U') return ' ';
       if (e === this.#bridge[i]) return 'O';
@@ -69,7 +76,7 @@ class BridgeGame {
   /**
    * @return {string} 출력할 map의 아랫부분
    */
-  makeLowerPart() {
+  #makeLowerPart() {
     const lowerPart = this.#inputs.map((e, i) => {
       if (e !== 'D') return ' ';
       if (e === this.#bridge[i]) return 'O';
