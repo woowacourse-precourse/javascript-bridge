@@ -37,6 +37,8 @@ class App {
     let BRIDGE_LENGTH = InputView.readBridgeSize()
     // 다리 생성해야지
     let BRIDGE = BridgeMaker.makeBridge(BRIDGE_LENGTH)
+    console.log('################################APP.js')
+    console.log(BRIDGE)
     this.movePrint(BRIDGE)
 
   }
@@ -45,7 +47,6 @@ class App {
   movePrint(bridge) {
     OutputView.printMove()
     let USER_MOVE = InputView.readMoving()
-    console.log(USER_MOVE)
     const GAME = new BridgeGame()
     GAME.move()
   }
