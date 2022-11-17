@@ -29,3 +29,23 @@
 1. input check 클래스 만들기 input값으로 받는게 1)생성한 다리 길이, 이동할 칸, 재시작/종료 여부 이렇게 3가지 이기에 input클래스를 만들어 공통메서드만 놓고 거기서 상속을 해 활용하기
 2. 자동으로 생성할 다리 길이와 라운드마다 플레이어가 이동할 칸은 저장하고 있어야 한다. data어떻게 관리할지 생각
 3. 게임 결과를 출력을 해줄때 최종 게임 결과, 게임 성공 여부, 총 시도한 횟수를 모두 출력해야하기에 이 또한 data저장하고 있어야함
+
+### 미션 조건에 맞는 청사진 초안
+
+- 1.  inputView.BridegeSize()
+- ------------ 반복 ---------
+- 2.  반복구간
+- InputView.Moving()
+- BridgeGame.moving()
+- OutputView.printMap()
+- ----------까지-----------
+- if(성공시)
+  - OutputView.printResult()
+  - BridgeGame.end() // 앱종료
+- if(실패시)
+  - InputView.readGameCommand()
+  - if(다시시작)
+    - BridgeGame.retry() 2번으로 다시 가게해줌 / 데이터 일부 초기화
+  - if(끝내)
+    - OutputView.printResult()
+    - 앱종료
