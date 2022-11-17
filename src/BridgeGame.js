@@ -1,9 +1,8 @@
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { makeBridge } = require('./BridgeMaker');
 const { movePossible, getCurrentRoute } = require('./PlayerMove');
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+const { STATE } = require('./Contants');
+
 class BridgeGame {
   #bridgeSize;
 
@@ -11,34 +10,32 @@ class BridgeGame {
 
   #playerPosition;
 
-  #progress;
+  #state;
+
+  #tryCount;
 
   constructor(bridgeSize) {
     this.bridgeSize = bridgeSize;
     this.#bridge = makeBridge(bridgeSize, generate);
     this.#playerPosition = -1;
-    this.#progress = true;
+    this.#state = STATE.PROGRESS;
+    this.#tryCount = 1;
   }
 
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   move(to) {
     this.#playerPosition += 1;
     const position = this.#playerPosition;
     const possible = movePossible(to, this.#playerPosition, this.bridge);
-    this.#progress = possible;
+    if (!possible) this.#state = STATE.FAIL;
+    if (possible && this.#bridgeSize - 1 === this.#playerPosition) this.#state = STATE.SUCCESS;
     return getCurrentRoute(position, this.bridge, possible);
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+  retry() {
+    this.#playerPosition = -1;
+    this.#state = STATE.PROGRESS;
+    this.#tryCount += 1;
+  }
 
   set bridgeSize(size) {
     // TODO: 입력받은 size가 유효한지 확인 기능 추가
@@ -49,8 +46,12 @@ class BridgeGame {
     return JSON.parse(JSON.stringify(this.#bridge));
   }
 
-  get progress() {
-    return this.#progress;
+  get state() {
+    return this.#state;
+  }
+
+  get tryCount() {
+    return this.#tryCount;
   }
 }
 

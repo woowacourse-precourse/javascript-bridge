@@ -1,5 +1,6 @@
 const { printStart, printMap } = require('./OutputView');
-const { readBridgeSize, readMoving } = require('./InputView');
+const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
+const { STATE } = require('./Contants');
 const BridgeGame = require('./BridgeGame');
 
 class App {
@@ -16,7 +17,15 @@ class App {
     const to = await readMoving();
     const { upBridgeRoute, downBridgeRoute } = bridgeGame.move(to);
     printMap(upBridgeRoute, downBridgeRoute);
-    if (bridgeGame.progress) this.progressGame(bridgeGame);
+    if (bridgeGame.state === STATE.PROGRESS) this.progressGame(bridgeGame);
+    if (bridgeGame.state === STATE.FAIL) {
+      const command = await readGameCommand();
+      if (command === 'R') {
+        bridgeGame.retry();
+        this.progressGame(bridgeGame);
+      }
+      // if (command === 'Q') bridgeGame.state = STATE.END;
+    }
   }
 }
 
