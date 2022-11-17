@@ -86,3 +86,9 @@
 
 ### Object `BridgeRandomNumberGenerator`
 - 랜덤하게 0 or 1중 하나를 반환하는 객체
+
+
+
+### Class `BridgeGameController`
+- 다리 건너기 게임 진행 로직 구현 클래스
+
