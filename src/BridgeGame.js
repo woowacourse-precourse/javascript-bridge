@@ -12,11 +12,10 @@ class BridgeGame {
   constructor(makeRandomNumber, bridgeMaker, size) {
     this.#myBridge = bridgeMaker(size, makeRandomNumber);
     this.#nowState = 0;
+    this.#myBridgeMaterialize = this.myBridgeMaterialize();
   }
 
   myBridgeMaterialize() {
-    this.#myBridgeMaterialize = this.#myBridge.myBridgeMaterialize();
-    Console.print(this.#myBridgeMaterialize.join('\n'));
     return bridgeMaterialize(this.#myBridge);
   }
   /**
@@ -41,7 +40,7 @@ class BridgeGame {
   }
 
   printMyBridge(printMap, correct) {
-    printMap(this.#myBridgeMaterialize, this.#nowState, correct);
+    return printMap(this.#myBridgeMaterialize, this.#nowState, correct);
   }
 }
 
