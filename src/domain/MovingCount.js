@@ -1,0 +1,4 @@
+class MovingCount {
+  #totalMovingCount;
+  #currentMovingCount;
+}
