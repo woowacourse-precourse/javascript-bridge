@@ -1,4 +1,5 @@
-const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const { makeBridge } = require('../BridgeMaker');
+const { generate } = require('../BridgeRandomNumberGenerator');
 
 class Bridge {
   #bridge;
@@ -7,10 +8,8 @@ class Bridge {
     this.#bridge = '';
   }
 
-  makeBridge(number) {
-    for (let length = 1; length <= number; length += 1) {
-      this.#bridge += BridgeRandomNumberGenerator.generate();
-    }
+  setBridge(number) {
+    this.#bridge = makeBridge(number, generate);
   }
 
   getLength() {

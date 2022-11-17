@@ -24,6 +24,13 @@ class BridgeGame {
     return this.#selected.length;
   }
 
+  getResult(bridge) {
+    for (let i = 0; i < bridge.getLength(); i += 1) {
+      if (bridge.getBridge(i) !== this.getSelected(i)) return false;
+    }
+    return true;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>

@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { BRIDGE_ELEMENT, OUTPUT_MESSAGE } = require('./utils/Constant');
+const { BRIDGE_ELEMENT, OUTPUT_MESSAGE } = require('../utils/Constant');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
