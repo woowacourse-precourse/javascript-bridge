@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 /*
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
     제공된 BridgeMaker 객체를 활용해 구현해야 한다.
@@ -15,7 +17,7 @@ const BridgeMaker = {
     const bridgeStyle = [];
 
     for (let bridgeLine = 0; bridgeLine < bridgeSize; bridgeLine++) {
-      const randomNumber = generateRandomNumber();
+      const randomNumber = Number(generateRandomNumber());
       randomNumber === 0 ? bridgeStyle.push("D") : bridgeStyle.push("U");
     }
 
