@@ -21,14 +21,20 @@ class BridgeGameController {
   }
 
   #onMovingSubmit(input) {
-    InputValidator.validateEmpty(input);
-
-    this.#game.move(input);
+    const isCrossed = this.#game.move(input);
     const bridgeMap = this.#game.getMap();
 
     OutputView.printMap(bridgeMap);
+
+    if (!isCrossed) {
+      InputView.readGameCommand(this.#onGameCommandSubmit.bind(this));
+      return;
+    }
+
     InputView.readMoving(this.#onMovingSubmit.bind(this));
   }
+
+  #onGameCommandSubmit(input) {}
 }
 
 module.exports = BridgeGameController;

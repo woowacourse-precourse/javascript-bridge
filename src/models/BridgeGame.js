@@ -31,6 +31,8 @@ class BridgeGame {
 
     this.#map.add(input, isCrossed);
     this.#location += 1;
+
+    return isCrossed;
   }
 
   getMap() {
