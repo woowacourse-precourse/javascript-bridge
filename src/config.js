@@ -8,8 +8,8 @@ const MOVE = {
   DOWN: 'D',
 };
 
-const RESTART = {
-  RESTART: 'R',
+const RETRY = {
+  RETRY: 'R',
   QUIT: 'Q',
 };
 
@@ -44,7 +44,7 @@ const ERRORS = {
 module.exports = {
   BRIDGE_RANGE,
   MOVE,
-  RESTART,
+  RETRY,
   MAP,
   PHRASE,
   ERRORS,
