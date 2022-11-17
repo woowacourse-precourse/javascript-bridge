@@ -1,3 +1,5 @@
+const NEW_LINE = '\n';
+
 const INPUT_MESSAGE = {
   BRIDGE_LENGTH: '다리의 길이를 입력해주세요.',
   MOVE_RANGE: '이동할 칸을 선택해주세요. (위: U, 아래: D)',
@@ -23,4 +25,4 @@ Object.freeze(INPUT_MESSAGE);
 Object.freeze(OUTPUT_MESSAGE);
 Object.freeze(ERROR_MESSAGE);
 
-module.exports = { INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE };
+module.exports = { NEW_LINE, INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE };

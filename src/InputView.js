@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { INPUT_MESSAGE } = require('./utils/message');
+const { INPUT_MESSAGE, NEW_LINE } = require('./utils/message');
 
 const InputView = {
   /**
@@ -7,7 +7,7 @@ const InputView = {
    * @param {function(string): void} callback
    */
   readBridgeSize(callback) {
-    Console.readLine(INPUT_MESSAGE.BRIDGE_LENGTH, callback);
+    Console.readLine(INPUT_MESSAGE.BRIDGE_LENGTH + NEW_LINE, callback);
   },
 
   /**
@@ -15,7 +15,7 @@ const InputView = {
    * @param {function(string): void} callback
    */
   readMoving(callback) {
-    Console.readLine(INPUT_MESSAGE.MOVE_RANGE, callback);
+    Console.readLine(INPUT_MESSAGE.MOVE_RANGE + NEW_LINE, callback);
   },
 
   /**
@@ -23,7 +23,7 @@ const InputView = {
    * @param {function(string): void} callback
    */
   readGameCommand(callback) {
-    Console.readLine(INPUT_MESSAGE.RESTART, callback);
+    Console.readLine(INPUT_MESSAGE.RESTART + NEW_LINE, callback);
   },
 };
 
