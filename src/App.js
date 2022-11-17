@@ -15,10 +15,21 @@ class App {
       Validator.bridgeSizeCheck(bridgeSize);
       this.game = new BridgeGame(bridgeSize);
       console.log(this.game.bridge);
-      MissionUtils.Console.close();
+      this.moveSpace();
     } catch(err) {
       MissionUtils.Console.print(err);
       this.setBridgeGame();
+    }
+  }
+  async moveSpace() {
+    try {
+      const direction = await InputView.readMoving();
+      Validator.directionCheck(direction);
+      console.log(direction);
+      MissionUtils.Console.close();
+    } catch(err) {
+      MissionUtils.Console.print(err);
+      this.moveSpace();
     }
   }
 }
