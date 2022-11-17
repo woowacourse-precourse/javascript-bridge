@@ -14,13 +14,17 @@ class BridgeGame {
     this.#currentBridgeCount += 1;
   }
 
+  isNextMove(movingCommand) {
+    return this.isAnswerMovingChoice(movingCommand) && !this.#isLastMove();
+  }
+
   isAnswerMovingChoice(movingCommand) {
     return (
       movingCommand === this.getBridgeShape()[this.#currentBridgeCount - 1]
     );
   }
 
-  isLastMove() {
+  #isLastMove() {
     return this.#currentBridgeCount === this.getBridgeShape().length;
   }
 

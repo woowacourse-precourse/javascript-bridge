@@ -32,10 +32,7 @@ class App {
 
   playerMove(movingCommand) {
     this.bridgeGame.move();
-    if (
-      this.bridgeGame.isAnswerMovingChoice(movingCommand) &&
-      !this.bridgeGame.isLastMove()
-    ) {
+    if (this.bridgeGame.isNextMove(movingCommand)) {
       this.inputMoving();
       return;
     }
