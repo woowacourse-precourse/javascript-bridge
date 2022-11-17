@@ -33,21 +33,9 @@ const InputView = {
    */
   readMoving(callback) {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => this.errorHandler(
-      this.validateMoving(input, callback),
+      this.validateCommand(input, ['U', 'D'], callback),
       () => this.readMoving(callback),
     ));
-  },
-
-  /**
-   * @param {string} input 플레이어의 입력
-   * @param {function(string): void} callback 입력받은 후 실행할 함수
-   * @return {function(): void} 에러핸들러에게 전달할 콜백함수
-   */
-  validateMoving(input, callback) {
-    return () => {
-      Validator.validateIncludes(['U', 'D'], input);
-      callback(input);
-    };
   },
 
   /**
@@ -57,7 +45,7 @@ const InputView = {
     Console.readLine(
       '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
       (input) => this.errorHandler(
-        this.validateGameCommand(input, callback),
+        this.validateCommand(input, ['R', 'Q'], callback),
         () => this.readGameCommand(callback),
       ),
     );
@@ -65,12 +53,13 @@ const InputView = {
 
   /**
    * @param {string} input 플레이어의 입력
+   * @param {string[]} allowedSet 허용되는 입력들의 집합
    * @param {function(string): void} callback 입력받은 후 실행할 함수
    * @return {function(): void} 에러핸들러에게 전달할 콜백함수
    */
-  validateGameCommand(input, callback) {
+  validateCommand(input, allowedSet, callback) {
     return () => {
-      Validator.validateIncludes(['R', 'Q'], input);
+      Validator.validateIncludes(allowedSet, input);
       callback(input);
     };
   },
