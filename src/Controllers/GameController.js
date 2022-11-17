@@ -3,11 +3,6 @@ const OutputView = require('../Views/OutputView');
 const BridgeMaker = require('../BridgeMaker');
 const { generateRandomNumber } = require('../utils/bridgeHandler');
 
-// BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-
 class GameController {
   constructor() {
     this.outputView = OutputView;
