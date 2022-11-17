@@ -20,6 +20,14 @@ class BridgeGame {
       downResult: [],
     };
   }
+
+  getTrialNumber() {
+    return this.#trialNumber;
+  }
+
+  getBridgeResult() {
+    return this.#bridgeResult;
+  }
 }
 
 module.exports = BridgeGame;
