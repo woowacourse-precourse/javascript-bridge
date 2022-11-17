@@ -24,7 +24,10 @@ const OutputView = {
   printStart() {
     MissionUtils.Console.print("다리 건너기 게임을 시작합니다.")
     MissionUtils.Console.print("다리의 길이를 입력해주세요.")
-  }
+  },
+  printMove(){
+    MissionUtils.Console.print("이동할 칸을 선택해주세요. (위: U, 아래: D)")
+  },
 };
 
 module.exports = OutputView;

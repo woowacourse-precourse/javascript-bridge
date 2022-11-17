@@ -23,7 +23,15 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    let USER_MOVE = ''
+    MissionUtils.Console.readLine("",(userMove) => {
+      // 유효성 검사 필요 : userMove가 U,D가 아닌 경우
+      Checking.userMoveCheck(userMove)
+      USER_MOVE = userMove
+    })
+    return USER_MOVE
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
