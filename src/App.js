@@ -1,11 +1,13 @@
 const { printStart } = require('./OutputView');
 const { readBridgeSize } = require('./InputView');
+const BridgeGame = require('./BridgeGame');
 
 class App {
   play() {
     printStart();
     readBridgeSize().then((size) => {
-      console.log(size);
+      const bridgeGame = new BridgeGame(size);
+      console.log(bridgeGame.bridge);
     });
   }
 }
