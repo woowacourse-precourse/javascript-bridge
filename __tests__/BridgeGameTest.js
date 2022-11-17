@@ -6,11 +6,9 @@ describe("BridgeGame 테스트", () => {
         ["1"],
         ["A"],
         ["UD"]
-    ])("다리 이동 예외 테스트", (input) => {
+    ])("다리 이동 예외 테스트", (bridgeSize) => {
         const bridgeGame = new BridgeGame();
-        expect(() => {
-            bridgeGame.move(input)
-        }).toThrow(ERROR.INVALID_MOVE_TYPE);
+        expect(bridgeGame.vaildateBridgeSize(bridgeSize)).toEqual(false);
     });
 
     test.each([
@@ -23,4 +21,5 @@ describe("BridgeGame 테스트", () => {
 
         expect(bridgeGame.getMoveHistory()).toEqual(moveTypes);
     });
+
 });
