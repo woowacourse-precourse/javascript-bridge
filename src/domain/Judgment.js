@@ -1,6 +1,6 @@
 class Judgment {
-  static checkCrossingNext() {
-
+  static checkCrossingNext({ bridge, position, direction }) {
+    return bridge.stepOn(position, direction);
   }
 
   static checkCrossingAll() {
