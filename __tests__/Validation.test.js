@@ -45,4 +45,12 @@ describe('범위 파악 함수 테스트', () => {
       checkRange(EXPECTED);
     }).toThrow(NUMBER_ERROR_TEXT);
   });
+
+  test('정상적인 범위의 숫자 값이라면 예외를 발생시키지 않는다.', () => {
+    const EXPECTED = 3;
+
+    expect(() => {
+      checkRange(EXPECTED);
+    }).not.toThrow();
+  });
 });
