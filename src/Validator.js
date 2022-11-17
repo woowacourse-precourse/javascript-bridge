@@ -13,8 +13,13 @@ const Validator = Object.freeze({
     if (Number.isNaN(+input)) throw new Error(ERROR_MESSAGES.NOT_NAN);
     else return true;
   },
+
+  checkMoveInput(input) {
+    if (input !== 'D' && input !== 'U') throw new Error(ERROR_MESSAGES.ONLY_U_D);
+    else return true;
+  },
 });
 
 module.exports = Validator;
 
-console.log(Validator.checkNan('saN'));
+console.log(Validator.checkMoveInput('Uxcz'));
