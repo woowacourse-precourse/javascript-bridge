@@ -41,4 +41,13 @@ describe('배열 생성 함수 테스트', () => {
       Application.createArray(EXPECTED, mockFn);
     }).toThrow(NUMBER_ERROR_TEXT);
   });
+
+  test('두 번째 인자가 함수가 아니라면 예외를 발생한다.', () => {
+    const EXPECTED1 = '123';
+    const EXPECTED2 = [];
+
+    expect(() => {
+      Application.createArray(EXPECTED1, EXPECTED2);
+    }).toThrow();
+  });
 });
