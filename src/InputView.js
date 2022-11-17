@@ -1,7 +1,9 @@
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeSizeValidation = require("./Validation/BridgeSizeValidation");
+const MovingValidation = require("./validation/MovingValidation");
 
 const MESSAGE_GET_BRIDGE_SIZE = "다리의 길이를 입력해주세요. \n";
+const MESSAGE_GET_MOVING = "이동할 칸을 선택해주세요. (위: U, 아래: D) \n";
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -35,7 +37,26 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    return new Promise((resolve) => {
+      this.getValidMoving(resolve);
+    });
+  },
+
+  /**
+   * 이동할 칸을 입력받고 유효한 값인지 확인한다.
+   */
+  getValidMoving(callback) {
+    Console.readLine(MESSAGE_GET_MOVING, (userInput) => {
+      try {
+        MovingValidation.validateMoving(userInput);
+        return callback(userInput);
+      } catch (error) {
+        Console.print(error.message);
+        this.getValidMoving(callback);
+      }
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
