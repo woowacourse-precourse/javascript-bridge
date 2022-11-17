@@ -23,6 +23,13 @@ const BridgeGameModel = class {
     const data = { user: this.#user, bridge: this.#bridge };
     return data;
   }
+
+  jumpDown() {
+    const { DOWN } = KEYWORD;
+    this.#user.push(DOWN);
+    const data = { user: this.#user, bridge: this.#bridge };
+    return data;
+  }
 };
 
 module.exports = BridgeGameModel;
