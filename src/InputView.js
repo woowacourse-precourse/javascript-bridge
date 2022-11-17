@@ -38,14 +38,11 @@ const InputView = {
    */
   readGameCommand() {
     MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (input) => {
-      if(input == 'R') {
-        this.bridgeGame.retry();
-        this.readMoving(this.bridgeGame);
-      } else if(input == 'Q') {
-        OutputView.printResult(this.bridgeGame.stateToString(), this.bridgeGame.isArrived(), this.bridgeGame.getTry());
-        return null;
-      } else {
-        throw new Error("[ERROR] R 혹은 Q를 입력해야 합니다.");
+      if (!['R','Q'].includes(input)) throw new Error("[ERROR] R 혹은 Q를 입력해야 합니다.");
+      const dicision = BridgeGameController.terminate(this.bridgeGame, input);
+      switch (dicision) {
+        case 0: return null;
+        case 1: this.readMoving();
       }
     });
   },
