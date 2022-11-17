@@ -7,13 +7,15 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine('다리의 길이를 입력해주세요.', number => {
-    })
+    return Console.readLine('다리의 길이를 입력해주세요.', number => {});
+
   },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    return Console.readLine('이동할 칸을 선택해주세요..', string => {});
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
