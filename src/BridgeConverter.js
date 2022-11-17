@@ -54,7 +54,7 @@ const BridgeConverter = {
     for (let i = 0; i < inputs.length; i++) {
       if (inputs[i] === "U") {
         this.writeBridgeU(answer[i], i, bridge);
-        break;
+        continue;
       }
       this.writeBridgeD(answer[i], i, bridge);
     }
