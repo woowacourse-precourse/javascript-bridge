@@ -15,33 +15,35 @@ const OutputView = {
     this.printLine(bridge, game, BRIDGE_ELEMENT.DOWN);
   },
 
-  printLine(bridge, game, select) {
-    const message = this.setMessage(bridge, game, select);
+  printLine(bridge, game, targetElement) {
+    const message = this.setMessage(bridge, game, targetElement);
     Console.print(message);
   },
 
-  setMessage(bridge, game, dependency) {
+  setMessage(bridge, game, targetElement) {
     const length = game.getLength();
-
     let message = OUTPUT_MESSAGE.START;
-
-    for (let i = 0; i < length; i += 1) {
-      const selectedElement = game.getSelected(i);
-      const bridgeElement = bridge.getBridge(i);
-
-      if (i !== 0) message += OUTPUT_MESSAGE.LINE;
-      if (selectedElement === dependency) {
-        if (bridgeElement === selectedElement) {
-          message += OUTPUT_MESSAGE.CORRECT;
-        } else if (bridgeElement !== selectedElement) {
-          message += OUTPUT_MESSAGE.INCORRECT;
-        }
-      } else {
-        message += OUTPUT_MESSAGE.EMPTY;
-      }
-    }
-
+    message += this.getMessageBody(bridge, game, targetElement, length);
     return message + OUTPUT_MESSAGE.END;
+  },
+
+  getMessageBody(bridge, game, targetElement, length) {
+    let message = '';
+    for (let i = 0; i < length; i += 1) {
+      if (i !== 0) message += OUTPUT_MESSAGE.LINE;
+      message += this.getMessageElement(bridge, game, targetElement, i);
+    }
+    return message;
+  },
+
+  getMessageElement(bridge, game, targetElement, i) {
+    const selectedElement = game.getSelected(i);
+    const bridgeElement = bridge.getBridge(i);
+    return selectedElement !== targetElement
+      ? OUTPUT_MESSAGE.EMPTY
+      : selectedElement === bridgeElement
+      ? OUTPUT_MESSAGE.CORRECT
+      : OUTPUT_MESSAGE.INCORRECT;
   },
 
   /**
