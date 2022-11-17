@@ -17,7 +17,7 @@ const Validator = Object.freeze({
 
   checkSpace(input) {
     const trimedInput = input.trim();
-    if (trimedInput.match(Validator.SPAGE_REG)) throw new Error(Validator.ERROR_MESSAGES_NOT_EMPTY);
+    if (trimedInput.match(Validator.SPAGE_REG)) throw new Error(Validator.ERROR_MESSAGES.NOT_EMPTY);
     return true;
   },
 
@@ -32,6 +32,13 @@ const Validator = Object.freeze({
       throw new Error(error);
     }
     return true;
+  },
+
+  checkBridgeInput(input) {
+    if (Validator.checkSpace(input) && Validator.checkNan(input) && Validator.checkRange(input)) {
+      return true;
+    }
+    return '알수없는 오류';
   },
 
   checkRange(input) {
@@ -51,3 +58,5 @@ module.exports = Validator;
 //     Validator.ERROR_MESSAGES.ONLY_R_Q,
 //   ),
 // );
+
+console.log(Validator.checkSpace('1 2'));
