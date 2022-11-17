@@ -104,4 +104,11 @@ describe('사용자 위치를 확인하는 메서드 테스트', () => {
 
     expect(bridgeGame.findUserPosition()).toEqual(RECEIVED);
   });
+
+  test('현재위치는 0을 반환한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const RECEIVED = 0;
+
+    expect(bridgeGame.findUserPosition()).toEqual(RECEIVED);
+  });
 });
