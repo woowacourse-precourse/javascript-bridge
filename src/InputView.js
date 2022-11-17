@@ -4,6 +4,8 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 const ENTER_BRIDGELENGTH = "다리의 길이를 입력해주세요.";
 const ENTER_MOVING = "이동할 칸을 선택해주세요. (위: U, 아래: D)";
+const ENTER_PROCEED =
+  "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)";
 
 const InputView = {
   /**
@@ -29,7 +31,12 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(ENTER_PROCEED, (answer) => {
+      console.log("선택한 게임 진행 여부: " + answer);
+      return answer;
+    });
+  },
 };
 
 module.exports = InputView;
