@@ -7,7 +7,6 @@ const Input = require("./InputView.js")
 const OutputView = {
   startgame(){
     MissionUtils.Console.print(Notice.START_GAME)
-    MissionUtils.Console.print(Notice.INPUT_BRIDGE_LENGTH)
     Input.readBridgeSize()
   },
 
