@@ -31,7 +31,8 @@ const InputView = {
 	readMoving(bridgeGame, READ_MOVING_MSG = "") {
 		MissionUtils.Console.readLine(READ_MOVING_MSG, (moving) => {
 			InputView.handlingMovingError(bridgeGame, moving);
-			bridgeGame.move();
+			const currentBridge = bridgeGame.move(moving);
+			OutputView.printMap(currentBridge);
 		});
 	},
 
