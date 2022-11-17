@@ -59,10 +59,6 @@ class BridgeGame {
       downHistory[position] = type;
   }
 
-  start() {
-    InputView.readBridgeSize(this);
-  }
-
   validateMoveType(moveType) {
     try {
       if (moveType !== "U" && moveType !== "D")
