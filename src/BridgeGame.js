@@ -4,14 +4,37 @@ const BridgeMaker = require("./BridgeMaker");
 
 class BridgeGame {
   bridge;
-
+  latestProgressCnt;
+  isOkWay;
+  finishGame;
+  userWay;
   constructor(bridge) {
-    console.log(bridge);
+    console.log(bridge, bridge.length);
     this.bridge = bridge;
+    this.latestProgressCnt = 0;
+    this.isOkWay = false;
+    this.finishGame = false;
+    this.userWay = [];
   }
 
   move(userSelectValue) {
-    console.log(userSelectValue);
+    this.latestProgressCnt += 1;
+    this.checkCorrectWay(userSelectValue);
+  }
+
+  checkCorrectWay(userSelectValue) {
+    console.log(userSelectValue, this.bridge[this.latestProgressCnt - 1]);
+    if (userSelectValue == this.bridge[this.latestProgressCnt - 1]) {
+      this.isOkWay = true;
+      this.checkFinishWay();
+    }
+  }
+
+  checkFinishWay() {
+    if (this.latestProgressCnt == this.bridge.length) {
+      this.finishGame = true;
+      return;
+    }
   }
 
   /**

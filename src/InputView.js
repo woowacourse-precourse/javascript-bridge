@@ -3,6 +3,7 @@ const Game = require("./BridgeGame");
 
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -22,10 +23,10 @@ const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine(INPUT_BRIDGE_LEN_STR, (bridgeLen) => {
       bridgeLenValidator(bridgeLen);
-
       const bridgeGame = new Game.BridgeGame(
         BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate)
       );
+
       InputView.readMoving(bridgeGame);
     });
   },
@@ -36,17 +37,26 @@ const InputView = {
   readMoving(bridgeGame) {
     MissionUtils.Console.readLine(INPUT_USER_GO, (selectBridge) => {
       bridgeGame.move(this.userSelectValueTreater(selectBridge));
+      console.log(bridgeGame.isOkWay, bridgeGame.latestProgressCnt);
+      if (bridgeGame.finishGame) {
+        OutputView.printResult();
+      }
+      if (!bridgeGame.isOkWay) {
+        //죽었을때
+        InputView.readGameCommand(bridgeGame);
+      }
+      InputView.readMoving(bridgeGame);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGame) {},
 
   userSelectValueTreater(userSelectValue) {
     isUandD(userSelectValue);
-    return charToIntChanger(userSelectValue);
+    return userSelectValue;
   },
 };
 
@@ -72,13 +82,6 @@ const isUandD = (input) => {
     return;
   }
   throw new Error(UserSelect_ERR_MESSAGE);
-};
-
-const charToIntChanger = (input) => {
-  if (input == "U") {
-    return 1;
-  }
-  return 0;
 };
 
 module.exports = InputView;
