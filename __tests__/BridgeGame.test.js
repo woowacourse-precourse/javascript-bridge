@@ -124,3 +124,12 @@ describe('사용자 위치를 확인하는 메서드 테스트', () => {
     expect(bridgeGame.findUserPosition()).toEqual(RECEIVED);
   });
 });
+
+describe('사용자가 게임을 다시 시도할 때 사용하는 메서드 테스트', () => {
+  test('메소드 이름은 "retry"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'retry';
+
+    expect(bridgeGame.retry.name).toEqual(METHOD_NAME);
+  });
+});
