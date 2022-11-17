@@ -13,4 +13,11 @@ describe('숫자값 문자열 치환 기능 테스트', () => {
 
     expect(BridgeGame.replaceString(EXPECTED)).toEqual(RECEIVED);
   });
+
+  test('요소가 1인 경우 "U"로 치환한다.', () => {
+    const EXPECTED = 1;
+    const RECEIVED = 'U';
+
+    expect(BridgeGame.replaceString(EXPECTED)).toEqual(RECEIVED);
+  });
 });
