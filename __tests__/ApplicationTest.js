@@ -155,3 +155,15 @@ describe('다리 길이 입력 예외 테스트', () => {
     bridgeSizeOutOfSizeException(['21']);
   });
 });
+
+describe('다리 생성 테스트2', () => {
+  test('길이가 20인 다리 생성', () => {
+    const randomNumbers = ['0', '1', '1', '0', '0', '1', '1', '0', '0', '1', '1', '0', '0', '1', '1', '0', '0', '1', '1', '0'];
+    const mockGenerator = randomNumbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, jest.fn());
+
+    const bridge = BridgeMaker.makeBridge(20, mockGenerator);
+    expect(bridge).toEqual(['D', 'U', 'U', 'D', 'D', 'U', 'U', 'D', 'D', 'U', 'U', 'D', 'D', 'U', 'U', 'D', 'D', 'U', 'U', 'D']);
+  });
+});
