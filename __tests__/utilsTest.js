@@ -1,4 +1,4 @@
-const { BridgeSize, MoveInput, CommandInput } = require("./Constraints");
+const { BridgeSize, MoveInput, CommandInput } = require("../src/utils");
 
 describe("제한 조건 테스트", () => {
   test("다리 길이 입력시 유효성 검사 진행 여부 테스트", () => {
