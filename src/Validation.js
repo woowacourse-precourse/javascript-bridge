@@ -1,9 +1,12 @@
 const { ERROR_MESSAGE, BRIDGE } = require("./utils/constans");
 const { Console } = require("@woowacourse/mission-utils");
 
-const Validater = {
+const Validation = {
   bridgeSize: (bridgeSize) => {
-    if (Number.isNaN(bridgeSize) || !isCorrectBrigeSize(bridgeSize)) {
+    if (
+      Number.isNaN(bridgeSize) ||
+      !Validation.isCorrectBrigeSize(bridgeSize)
+    ) {
       throw Console.print(ERROR_MESSAGE.BRIDGE_SIZE);
     }
   },
@@ -15,4 +18,4 @@ const Validater = {
   },
 };
 
-module.exports = Validater;
+module.exports = Validation;

@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const Validater = require("./Validater");
+const Validation = require("./Validation");
 const { INPUT_MESSAGE } = require("./utils/constans");
 
 /**
@@ -12,7 +12,7 @@ const InputView = {
   readBridgeSize(makeBridge) {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (bridgeSize) => {
       try {
-        Validater.bridgeSize(Number(bridgeSize));
+        Validation.bridgeSize(Number(bridgeSize));
         makeBridge(Number(bridgeSize));
       } catch {
         this.readBridgeSize(makeBridge);
