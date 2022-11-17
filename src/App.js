@@ -64,7 +64,16 @@ class App {
     this.judge(canCross);
   }
 
-  judge(canCross) {}
+  judge(canCross) {
+    this.printBridgeMap();
+    canCross ? this.isDone() : this.askRetry();
+  }
+
+  printBridgeMap() {}
+
+  isDone() {}
+
+  askRetry() {}
 }
 
 const app = new App();
