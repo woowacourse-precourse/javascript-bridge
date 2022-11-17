@@ -13,11 +13,12 @@ const InputView = {
   readBridgeSize() {
     MissionUtils.Console.print('다리의 길이를 입력해주세요.');
     MissionUtils.Console.readLine('', (userInput) => {
-      this.validateInput(userInput);
+      const BRIDGE = this.validateBridgeInput(userInput);
+      this.readMoving(BRIDGE);
     });
   },
 
-  validateInput(userInput) {
+  validateBridgeInput(userInput) {
     try {
       Validate.sizeInput(userInput);
       const BUILD_BRIDGE = BridgeRandomNumberGenerator.generate;
@@ -31,7 +32,22 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(bridgeArray) {
+    MissionUtils.Console.print('\n이동할 칸을 선택해주세요. (위: U, 아래: D)');
+    MissionUtils.Console.readLine('', (userInput) => {
+      const USER_ANSWER = this.validateMovingInput(userInput);
+    });
+  },
+
+  validateMovingInput(userInput) {
+    try {
+      Validate.moveInput(userInput);
+      return userInput;
+    } catch (error) {
+      MissionUtils.Console.print(error);
+      this.readMoving();
+    }
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

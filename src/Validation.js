@@ -8,6 +8,12 @@ const Validate = {
       throw new Error('[ERROR] 다리 길이는 숫자로 입력해 주세요.');
     }
   },
+
+  moveInput(input) {
+    if (input !== 'U' && input !== 'D') {
+      throw new Error('[ERROR] 이동할 칸은 U 또는 D로 입력 하셔야 합니다.');
+    }
+  },
 };
 
 module.exports = Validate;
