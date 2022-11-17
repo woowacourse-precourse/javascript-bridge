@@ -23,6 +23,16 @@ const Validation = {
     }
     return parsedLength;
   },
+  /**
+   * @param {string} command : 확인이 필요한 문자열
+   * @param {string[]} permission : 허가하는 문자열
+   */
+  validateCommand(command, permission) {
+    if (!permission.includes(command)) {
+      throw new Error("[ERROR] 허용되지 않은 문자열입니다.");
+    }
+    return command;
+  },
 };
 
 module.exports = Validation;
