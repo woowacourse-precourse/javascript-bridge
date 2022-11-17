@@ -4,7 +4,7 @@ const Validation = {
 
 	validateBridgeSize(bridgeSize) {
 		const isNumber = !Number.isNaN(bridgeSize);
-		const isValidRange = 3 <= bridgeSize && bridgeSize <= 20;
+		const isValidRange = 2 < bridgeSize && bridgeSize < 21;
 		const isValid = isNumber && isValidRange;
 
 		if (!isValid) {
