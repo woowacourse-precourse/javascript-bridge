@@ -16,9 +16,15 @@ const InputView = {
       Console.print(message);
       InputView.requestBridgeSize();
     }
+
+    InputView.requestMoving();
   },
 
-  readMoving() {},
+  requestMoving() {
+    Console.readLine(REQUEST_MSG.movingDirection, InputView.readMoving);
+  },
+
+  readMoving(movingDirection) {},
 
   readGameCommand() {},
 };
