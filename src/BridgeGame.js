@@ -15,8 +15,8 @@
     this.userPickedArr.push(selectUpOrDown);
     const compareLength = this.userPickedArr.length - 1;
     this.moveIsCorrect(createBridge[compareLength], this.userPickedArr[compareLength]);
+    this.moveIsWrong(createBridge[compareLength], this.userPickedArr[compareLength]);
   }
-
 
   moveIsCorrect(createBridge, selectUpOrDown){
     if(createBridge == selectUpOrDown && selectUpOrDown == "U"){
@@ -27,6 +27,17 @@
       this.userPickedUpOrDown[0].push(" ");
       this.userPickedUpOrDown[1].push(" O ")
     }
+  }
+
+  moveIsWrong(createBridge, selectUpOrDown){
+    if(createBridge !== selectUpOrDown && selectUpOrDown == "U"){
+      this.userPickedUpOrDown[0].push(" X ");
+      this.userPickedUpOrDown[1].push(" ");
+    }
+    if(createBridge !== selectUpOrDown && selectUpOrDown == "D"){
+      this.userPickedUpOrDown[0].push(" ");
+      this.userPickedUpOrDown[1].push(" X ");
+    }  
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
