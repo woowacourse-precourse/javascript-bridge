@@ -97,4 +97,11 @@ describe('사용자 위치를 확인하는 메서드 테스트', () => {
 
     expect(bridgeGame.findUserPosition.name).toEqual(METHOD_NAME);
   });
+
+  test('첫 호출에는 null 위치에 있다.', () => {
+    const bridgeGame = new BridgeGame();
+    const RECEIVED = null;
+
+    expect(bridgeGame.findUserPosition()).toEqual(RECEIVED);
+  });
 });
