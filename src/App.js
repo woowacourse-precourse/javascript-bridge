@@ -11,7 +11,11 @@ class App {
 
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
-      Validation.checkBridgeSize(size);
+      const { errorMsg } = Validation.checkBridgeSize(size);
+      if (errorMsg) {
+        Console.print(errorMsg);
+        return this.requestBridgeSize();
+      }
     });
   }
 }
