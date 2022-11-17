@@ -44,11 +44,12 @@ const OutputView = {
    */
 
   printResult(answer, inputs, trial) {
-    Console.print("최종 게임 결과");
     const bridge = BridegConverter.stringifyBridge(answer, inputs);
+
+    Console.print("최종 게임 결과");
     Console.print(bridge);
     Console.print(
-      `게임 성공 여부:${Validation.validateSucess(answer, inputs)}`
+      `게임 성공 여부: ${Validation.validateSucess(answer, inputs)}`
     );
     Console.print(`총 시도한 횟수: ${trial}`);
   },
