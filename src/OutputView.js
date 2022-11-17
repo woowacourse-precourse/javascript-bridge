@@ -1,12 +1,13 @@
 const print = require('./Utils');
-const { GAME_PROGRESS_MESSAGES } = require('./Constant');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+  GAME_OUTPUT_MESSAGES: { START: '다리 건너기 게임을 시작합니다.' },
+
   printStart() {
-    print(GAME_PROGRESS_MESSAGES.START);
+    print(this.GAME_OUTPUT_MESSAGES.START);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
