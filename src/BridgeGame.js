@@ -10,9 +10,15 @@ class BridgeGame {
     this.#result = [];
   }
 
+  getBridge() {
+    this.#bridge;
+  }
+
   move(moving) {
     const nextBridge = this.#bridge[this.#result.length];
     this.#result.push(moving === nextBridge);
+
+    return this.#result;
   }
 
   retry() {
