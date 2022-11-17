@@ -12,6 +12,7 @@ const OutputView = {
    */
   printMap(resultToString) {
     Console.print(resultToString);
+    Console.print('');
   },
 
   /**
@@ -22,7 +23,6 @@ const OutputView = {
   printResult(resultToString, gameStatus, count) {
     Console.print('최종 게임 결과');
     OutputView.printMap(resultToString);
-    Console.print('');
     Console.print(`게임 성공 여부: ${gameStatus === 1 ? '실패' : '성공'}`);
     Console.print(`총 시도한 횟수: ${count}`);
   },
