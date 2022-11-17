@@ -2,7 +2,7 @@ class Attempt {
   #count;
 
   constructor() {
-    this.#count = 0;
+    this.#count = 1;
   }
 
   add() {
