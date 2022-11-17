@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { STATE } = require('./Contants');
 
 const OutputView = {
   printStart() {
@@ -12,7 +13,8 @@ const OutputView = {
 
   printResult(gameResult) {
     const { state, tryCount } = gameResult;
-    Console.print(`게임 성공 여부: ${state}`);
+    const strState = STATE.FAIL === state ? '실패' : '성공';
+    Console.print(`\n게임 성공 여부: ${strState}`);
     Console.print(`총 시도한 횟수: ${tryCount}`);
     Console.close();
   },
