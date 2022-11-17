@@ -1,3 +1,6 @@
+const { Console } = require('@woowacourse/mission-utils');
+
+const { GAME_RULE } = require('../constants');
 const BridgeGame = require('../models/BridgeGame');
 const InputValidator = require('../utils/InputValidator');
 const InputView = require('../views/InputView');
@@ -34,7 +37,18 @@ class BridgeGameController {
     InputView.readMoving(this.#onMovingSubmit.bind(this));
   }
 
-  #onGameCommandSubmit(input) {}
+  #onGameCommandSubmit(input) {
+    if (input === GAME_RULE.RETRY) {
+      this.#game.retry();
+      InputView.readMoving(this.#onMovingSubmit.bind(this));
+      return;
+    }
+    if (input === GAME_RULE.QUIT) {
+      Console.close();
+    }
+
+    throw new Error('[ERROR] 재시도 여부 입력값은 R 또는 Q여야 합니다.');
+  }
 }
 
 module.exports = BridgeGameController;
