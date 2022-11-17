@@ -10,12 +10,11 @@ const BridgeGame = require('./BridgeGame');
 class BridgeGameControl {
   size;
   bridge;
-  userMove = '';
+  userMove = [];
 
   constructor() {
     this.bridgeSize = new BridgeSize();
     this.movingCheck = new MovingCheck();
-    this.bridgeGame = new BridgeGame();
   };
   
   start() {
@@ -28,17 +27,38 @@ class BridgeGameControl {
 
   makeBridge() {
     this.bridge = BridgeMaker.makeBridge(this.size, BridgeRandomNumberGenerator.generate);
-    this.moving();
+    this.bridgeGame = new BridgeGame(this.bridge);
+    this.userMoving();
   };
-
-  moving() {
-    InputView.readMoving((upDown) => {
-      this.movingCheck.validate(upDown);
-      this.userMove += upDown;
-      // Console.print(this.userMove);
-      // this.bridgeGame.move(upDown);
+  
+  userMoving() {
+    InputView.readMoving((userUpDown) => {
+      this.movingCheck.validate(userUpDown);
+      Console.print(this.bridge)
+      this.userMove.push(userUpDown);
+      this.answerCheck();
+      // this.bridgeGame.move(this.userMove) ? this.repeatMoving() : Console.print('여기까지가 끝인가보오');
     });
   };
+
+  answerCheck() {
+    if (this.bridgeGame.move(this.userMove)) {
+      return this.repeatMoving();
+    }
+    return Console.print('여기까지가 끝인가보오');
+  }
+
+  repeatMoving() {
+    // 길이 검사
+    if (Number(this.size) === this.userMove.length) {
+      Console.print('모두 정답')
+      Console.close()
+    }
+    // 결과 출력
+    OutputView.printMap(this.bridge, this.userMove.length);
+    this.userMoving();
+  };
+
 
 };
 
