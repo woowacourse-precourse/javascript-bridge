@@ -11,8 +11,8 @@ const BridgeMaker = {
     const bridge = [];
     while(bridge.length < size) {
       const result = Number(generator());
-      if(result === BridgeRandomNumberGenerator.RANDOM_LOWER_INCLUSIVE) bridge.push(MOVEMENT_LOG_CODE.PASSED.UPPER);
-      if(result === BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE) bridge.push(MOVEMENT_LOG_CODE.PASSED.LOWER);
+      if(result === BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE) bridge.push(MOVEMENT_LOG_CODE.PASSED.UPPER);
+      if(result === BridgeRandomNumberGenerator.RANDOM_LOWER_INCLUSIVE) bridge.push(MOVEMENT_LOG_CODE.PASSED.LOWER);
     }
     return bridge;
   },
