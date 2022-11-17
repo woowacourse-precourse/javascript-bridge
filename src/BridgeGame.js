@@ -19,10 +19,10 @@ class BridgeGame {
   }
 
   /**
-  * @typedef {object} resultMap
-  * @property {string} resultToString
-  * @property {boolean} gameStatus
-  */
+   * @typedef {Object} resultMap
+   * @property {string} resultToString
+   * @property {number} gameStatus
+   */
 
   /**
    * @param {string} input 플레이어의 입력
