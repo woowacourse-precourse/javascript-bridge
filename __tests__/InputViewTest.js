@@ -38,4 +38,9 @@ describe("readBridgeSize 테스트", () => {
       InputView.readMoving(new BridgeGame([1, 1, 1]));
     }).toThrow("[ERROR]");
   });
+
+  test("유저 다리 선택 입력 변환 테스트", () => {
+    mockQuestions("A");
+    expect(InputView.userSelectValueTreater("U")).toEqual(1);
+  });
 });
