@@ -5,9 +5,9 @@ const MESSAGE = Object.freeze({
 });
 
 const ERROR = Object.freeze({
-    BRIDGE_SIZE_OUT_BOUNDARY: "[ERROR] 3이상 20이하 사이의 숫자여야 합니다.",
-    BRIDGE_SIZE_NOT_NUMBER: "[ERROR] 입력값은 숫자여야 합니다.",
-    INVALID_MOVE_TYPE: "[ERROR] 입력값은 U 또는 D 여야합니다."
+    BRIDGE_SIZE_OUT_BOUNDARY: "[ERROR] 3이상 20이하 사이의 숫자여야 합니다.\n",
+    BRIDGE_SIZE_NOT_NUMBER: "[ERROR] 입력값은 숫자여야 합니다.\n",
+    INVALID_MOVE_TYPE: "[ERROR] 입력값은 U 또는 D 여야합니다.\n"
 })
 
 module.exports = { MESSAGE, ERROR };
