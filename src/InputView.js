@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { INPUT_MSG, ERROR_MSG } = require("./constants/Message");
-const utils = require("./Utils");
+const { isNumber, error } = require("./Utils");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -18,15 +18,15 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   async readBridgeSize() {
-    let birdgeSize = await this.inputMethod(INPUT_MSG.BRIDGESIZE);
+    let birdgeSize = Number(await this.inputMethod(INPUT_MSG.BRIDGESIZE));
     try {
-      if (birdgeSize < 3 || birdgeSize > 20)
-        throw utils.error(ERROR_MSG.INPUT_BRIDGE);
+      if (!isNumber(birdgeSize) || !(birdgeSize >= 3 && birdgeSize <= 20))
+        throw error(ERROR_MSG.INPUT_BRIDGE);
+      return birdgeSize;
     } catch (msg) {
       console.dir(msg);
-      return (birdgeSize = this.readBridgeSize());
+      return this.readBridgeSize();
     }
-    return birdgeSize;
   },
 
   /**

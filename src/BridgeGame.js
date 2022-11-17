@@ -11,15 +11,10 @@ class BridgeGame {
   #size;
   #bridge;
 
-  constructor() {
-    this.setBridge();
-  }
-
   async setBridge() {
     this.#size = await InputView.readBridgeSize();
     this.#bridge = BridgeMaker.makeBridge(this.#size, generate);
   }
-
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -36,5 +31,3 @@ class BridgeGame {
 }
 
 module.exports = BridgeGame;
-
-const a = new BridgeGame();

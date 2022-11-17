@@ -9,4 +9,8 @@ const ERROR_MSG = {
   INPUT_BRIDGE: "다리 길이는 3이상 20이하만 가능합니다.",
 };
 
-module.exports = { INPUT_MSG, ERROR_MSG };
+const GAME_MSG = {
+  START: "다리 건너기 게임을 시작합니다.\n",
+};
+
+module.exports = { INPUT_MSG, ERROR_MSG, GAME_MSG };
