@@ -1,5 +1,8 @@
 const { SIZE, KEYWORD } = require("../constants/index.js");
-const { BridgeGameSizeError } = require("../Error/index.js");
+const {
+  BridgeGameSizeError,
+  BridgeGameMoveError,
+} = require("../Error/index.js");
 
 const BridgeGameModel = class {
   #user = [];
@@ -34,6 +37,12 @@ const BridgeGameModel = class {
     const { MIN_SIZE, MAX_SIZE } = SIZE;
     const isBrige = length >= MIN_SIZE && length <= MAX_SIZE;
     if (!isBrige) throw new BridgeGameSizeError();
+  }
+
+  checkUser(move) {
+    const { UP, DOWN } = KEYWORD;
+    const isMove = move === UP || move === DOWN;
+    if (!isMove) throw new BridgeGameMoveError();
   }
 };
 
