@@ -22,11 +22,8 @@ class BridgeGame {
   getUBlock() {
     let UBlock = [];
     for (let i = 0; i < this.#marker; i++) {
-      if (this.#bridge[i] === 'U') {
-        UBlock.push('O');
-      } else {
-        UBlock.push(' ');
-      }
+      if (this.#bridge[i] === 'U') UBlock.push('O');
+      if (this.#bridge[i] === 'D') UBlock.push(' ');
     }
     return UBlock;
   }
@@ -34,11 +31,8 @@ class BridgeGame {
   getDBlock() {
     let DBlock = [];
     for (let i = 0; i < this.#marker; i++) {
-      if (this.#bridge[i] === 'D') {
-        DBlock.push('O');
-      } else {
-        DBlock.push(' ');
-      }
+      if (this.#bridge[i] === 'D') DBlock.push('O');
+      if (this.#bridge[i] === 'U') DBlock.push(' ');
     }
     return DBlock;
   }
