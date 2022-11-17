@@ -25,7 +25,7 @@ const Validator = {
    */
   validateIncludes(allowedSet, input) {
     if (!allowedSet.includes(input)) {
-      throw new Error('[ERROR] 허용되는 문자가 아닙니다.');
+      throw new Error(`[ERROR] ${allowedSet} 중 하나의 문자만 입력 가능합니다.`);
     }
   },
 };
