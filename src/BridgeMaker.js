@@ -1,3 +1,5 @@
+// const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -8,12 +10,13 @@ const BridgeMaker = {
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
   makeBridge(size, generateRandomNumber) {
-    let bridge = Array(size).fill(0);
+    let bridge = Array(Number(size)).fill(0);
     bridge = bridge.map(() => {
-      return generateRandomNumber();
+      return generateRandomNumber() === 1 ? 'U' : 'D';
     });
     return bridge;
   },
 };
+// console.log(BridgeMaker.makeBridge(6, BridgeRandomNumberGenerator.generate));
 
 module.exports = BridgeMaker;
