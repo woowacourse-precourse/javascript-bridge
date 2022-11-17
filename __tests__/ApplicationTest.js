@@ -83,6 +83,16 @@ const bridgeSizeOutOfSizeException = (inputs) => {
   expectLogContains(getOutput(logSpy), [ERROR_MESSAGES_BRIDGE.outOfSize]);
 };
 
+const wrongMovingException = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  const app = new App();
+
+  app.play();
+
+  expectLogContains(getOutput(logSpy), [ERROR_MESSAGES_BRIDGE.wrongMoving]);
+};
+
 describe("다리 건너기 테스트", () => {
   test("다리 생성 테스트", () => {
     const randomNumbers = ["1", "0", "0"];
@@ -165,5 +175,35 @@ describe('다리 생성 테스트2', () => {
 
     const bridge = BridgeMaker.makeBridge(20, mockGenerator);
     expect(bridge).toEqual(['D', 'U', 'U', 'D', 'D', 'U', 'U', 'D', 'D', 'U', 'U', 'D', 'D', 'U', 'U', 'D', 'D', 'U', 'U', 'D']);
+  });
+});
+
+describe('이동 입력 예외 테스트', () => {
+  test('입력이 공백인 경우', () => {
+    wrongMovingException(['5', '']);
+  });
+
+  test('입력이 공백 한칸인 경우', () => {
+    wrongMovingException(['5', ' ']);
+  });
+
+  test('입력이 줄바꿈인 경우', () => {
+    wrongMovingException(['5', '\n']);
+  });
+
+  test('입력에 공백이 있는 경우', () => {
+    wrongMovingException(['5', ' U']);
+  });
+
+  test('입력이 숫자인 경우', () => {
+    wrongMovingException(['5', '3']);
+  });
+
+  test('입력이 U 또는 D가 아닌 문자인 경우', () => {
+    wrongMovingException(['5', 'Z']);
+  });
+
+  test('입력이 소문자 U인 경우', () => {
+    wrongMovingException(['5', 'u']);
   });
 });
