@@ -10,7 +10,7 @@ const bridgeGame = new BridgeGame(0, [[], []], 1);
 
 class BridgeController {
   gameStart() {
-    InputView.gameStart();
+    OutputView.gameStart();
 
     InputView.readBridgeSize((bridgeLength) => {
       Validation.checkBridgeLength(bridgeLength);
@@ -20,63 +20,70 @@ class BridgeController {
   }
 
   creatBridge(bridgeLength) {
-    const safeBridge = BridgeMaker.makeBridge(
+    const bridge = BridgeMaker.makeBridge(
       bridgeLength,
       BridgeRandomNumberGenerator.generate
     );
 
-    Console.print(safeBridge);
-
-    this.userMove(safeBridge);
+    this.getUserMove(bridge);
   }
 
-  userMove(safeBridge) {
+  getUserMove(bridge) {
+    OutputView.lineBreak();
     InputView.readMoving((move) => {
       Validation.checkMove(move);
 
-      const passOrFail = bridgeGame.move(safeBridge, move);
-      const bridgeGameResult = bridgeGame.result();
-      OutputView.printMap(bridgeGameResult);
-
-      if (passOrFail === false) {
-        this.retryOrExit(safeBridge, bridgeGameResult);
-      }
-
-      if (
-        passOrFail === true &&
-        bridgeGameResult[0].length === safeBridge.length
-      ) {
-        this.gameEndPoint(bridgeGameResult);
-        return Console.close();
-      }
-
-      if (passOrFail === true) {
-        this.userMove(safeBridge);
-      }
+      this.judgementAndShow(bridge, move);
     });
   }
 
-  gameEndPoint(bridgeGameResult) {
+  judgementAndShow(bridge, move) {
+    const passBridge = bridgeGame.move(bridge, move);
+    const passBridgeResult = bridgeGame.result();
+    OutputView.printMap(passBridgeResult);
+
+    this.passOrNot(passBridge, passBridgeResult, bridge);
+  }
+
+  passOrNot(passBridge, passBridgeResult, bridge) {
+    if (passBridge === false) {
+      this.getUserRetry(bridge, passBridgeResult);
+    }
+    if (passBridge === true && passBridgeResult[0].length === bridge.length) {
+      this.gameEndPoint(passBridgeResult);
+      return Console.close();
+    }
+    if (passBridge === true) {
+      this.getUserMove(bridge);
+    }
+  }
+
+  gameEndPoint(passBridgeResult) {
     OutputView.lineBreak();
 
-    OutputView.printResult(bridgeGameResult, "성공", bridgeGame.getTryCount());
+    OutputView.printResult(passBridgeResult, "성공", bridgeGame.getTryCount());
   }
 
-  retryOrExit(safeBridge, bridgeGameResult) {
-    InputView.readGameCommand((retryOrExit) => {
-      Validation.checkRetry(retryOrExit);
-      if (bridgeGame.retry(retryOrExit) === true) {
-        bridgeGame.reset();
-        this.userMove(safeBridge);
-      }
-      if (bridgeGame.retry(retryOrExit) === false) {
-        OutputView.printResult(
-          bridgeGameResult,
-          "실패",
-          bridgeGame.getTryCount()
-        );
-      }
+  getUserRetry(bridge, passBridgeResult) {
+    InputView.readGameCommand((userRetry) => {
+      Validation.checkRetry(userRetry);
+
+      this.judgementRetry(bridge, passBridgeResult, userRetry);
     });
+  }
+
+  judgementRetry(bridge, passBridgeResult, userRetry) {
+    if (bridgeGame.retry(userRetry) === true) {
+      bridgeGame.reset();
+      this.getUserMove(bridge);
+    }
+    if (bridgeGame.retry(userRetry) === false) {
+      OutputView.printResult(
+        passBridgeResult,
+        "실패",
+        bridgeGame.getTryCount()
+      );
+    }
   }
 }
 
