@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const Validator = require('./Validator');
+const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
 class Controller {
@@ -11,17 +12,10 @@ class Controller {
   }
 
   handleMakeBridge() {
-    Console.readLine('다리의 길이를 입력해주세요.\n', (input) => {
-      try {
-        Validator.validateIsNumber(input);
-        Validator.validateInRange(3, 20, input);
-        this.bridgeGame = new BridgeGame(input);
-        Console.print('');
-        this.handleMove();
-      } catch (err) {
-        Console.print(`\n${err.message}`);
-        this.handleMakeBridge();
-      }
+    InputView.readBridgeSize((input) => {
+      this.bridgeGame = new BridgeGame(input);
+      Console.print('');
+      this.handleMove();
     });
   }
 
