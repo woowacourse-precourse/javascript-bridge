@@ -1,3 +1,7 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const BridgeMaker = require("./BridgeMaker");
+const Validation = require("./Validation");
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -5,7 +9,18 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize() {
+    MissionUtils.Console.readLine('다리의 길이를 입력해주세요.\n', (inputBridgeSize) => {
+      try {
+        Validation.checkBridgeSize(inputBridgeSize);
+      } catch (Error) {
+        MissionUtils.Console.print(`${Error.message} \n`);
+        return this.readBridgeSize();
+      }
+
+      console.log(inputBridgeSize);
+    });
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
