@@ -13,6 +13,15 @@ class BridgeGame {
     this.#moveCount = 0;
   }
 
+  isMove(direction) {
+    console.log(direction, this.#bridge, this.#moveCount);
+    return direction === this.#bridge[this.#moveCount];
+  }
+
+  isCompletion() {
+    return this.#bridge.length === this.#moveCount;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -20,13 +29,6 @@ class BridgeGame {
    */
   move() {
     this.#moveCount += 1;
-    if (this.isCompletion()) {
-      this.complete();
-    }
-  }
-
-  complete() {
-    console.log('종료');
   }
 
   /**
@@ -37,18 +39,6 @@ class BridgeGame {
   retry() {
     this.#moveCount = 0;
   }
-
-  isMove(direction) {
-    console.log(direction, this.#bridge, this.#moveCount);
-    return direction === this.#bridge[this.#moveCount];
-  }
-
-  isCompletion() {
-    return this.#bridge.length === this.#moveCount;
-  }
 }
 
 module.exports = BridgeGame;
-
-// 다리의 길이
-//

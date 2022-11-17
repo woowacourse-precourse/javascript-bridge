@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
@@ -5,45 +6,64 @@ const OutputView = require('./view/OutputView');
 class App {
   #bridgeGame;
 
-  play() {
-    OutputView.printStart();
-    this.inputBridgeSize();
-  }
-
   makeGame(length) {
     this.#bridgeGame = new BridgeGame(Number(length));
   }
 
-  inputBridgeSize() {
+  play() {
+    OutputView.printStartGame();
+    this.makeBridge();
+  }
+
+  makeBridge() {
     InputView.readBridgeSize((length) => {
       this.makeGame(length);
-      this.inputMoving();
+      this.startMove();
     });
   }
 
-  inputMoving() {
+  startMove() {
     InputView.readMoving((direction) => {
       if (this.#bridgeGame.isMove(direction)) {
         this.#bridgeGame.move();
-        this.inputMoving();
+        this.checkCompletion();
+        return;
       }
-      this.inputRetry();
+      this.failGame();
     });
   }
 
-  inputRetry() {
+  checkCompletion() {
+    if (this.#bridgeGame.isCompletion()) {
+      this.result();
+      return;
+    }
+    this.startMove();
+  }
+
+  failGame() {
     InputView.readGameCommand((command) => {
       if (command === 'R') {
-        this.restart();
+        this.replay();
       } else if (command === 'Q') {
-        console.log('종료');
+        this.result();
       }
     });
   }
 
-  restart() {
+  replay() {
     this.#bridgeGame.retry();
-    this.inputMoving();
+    this.startMove();
+  }
+
+  result() {
+    console.log(this.#bridgeGame.getResult());
+    console.log('결과 // 게임 종료 (성공했을 때 or 실패 후 종료)');
+    this.end();
+  }
+
+  end() {
+    Console.close();
   }
 }
 
