@@ -1,14 +1,17 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { SENTENCE } = require('../constants/Constants');
+const { bridgeLengthValidation } = require('../utils/BridgeValidation');
 
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
 const InputView = {
   readBridgeSize() {
     let length;
-    Console.readLine(SENTENCE.bridgeLength, (input) => (length = input));
-    return Number(length);
+    Console.readLine(SENTENCE.bridgeLength, (input) => {
+      const num = Number(input);
+      bridgeLengthValidation(num);
+      length = num;
+    });
+
+    return length;
   },
 
   readMoving() {
@@ -17,9 +20,6 @@ const InputView = {
     return whichMoving;
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand() {},
 };
 
