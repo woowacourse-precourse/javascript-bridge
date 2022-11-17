@@ -7,8 +7,7 @@ const OutputView = {
     const result = GameUtils.courseToForm(course);
     result.forEach(row => {
       MissionUtils.Console.print(row);
-      }
-    )
+    });
   },
 
   /**

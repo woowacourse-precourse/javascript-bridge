@@ -4,6 +4,8 @@ const BRIDGE_REQUIREMENTS = Object.freeze({
   ROW: 2,
   UPPER_CODE: 'U',
   LOWER_CODE: 'D',
+  RESTART_CODE: 'R',
+  QUIT_CODE: 'Q',
   UPPER_FAILED_CODE: 'UF',
   LOWER_FAILED_CODE: 'LF',
   PASSED_OUTPUT: 'O',
@@ -20,6 +22,7 @@ const MESSAGES = Object.freeze({
     START: '다리 건너기 게임을 시작합니다.\n',
     REQUIRE_BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',
     REQUIRE_SELECT_DIRECTION: `이동할 칸을 선택해주세요. (위: ${BRIDGE_REQUIREMENTS.UPPER_CODE}, 아래: ${BRIDGE_REQUIREMENTS.LOWER_CODE})\n`,
+    REQUIRE_RESTART_COMMAND: `게임을 다시 시도할지 여부를 입력해주세요. (재시도:  ${BRIDGE_REQUIREMENTS.RESTART_CODE}, 종료: ${BRIDGE_REQUIREMENTS.QUIT_CODE})\n`,
     FINAL_GAME_RESULT: `최종 게임 결과`,
     CLEAR_STATE: `게임 성공 여부:`,
     TOTAL_TRY: `총 시도한 횟수:`,
@@ -31,7 +34,7 @@ const MESSAGES = Object.freeze({
   },
   CLEARED: {
     SUCESSS: '성공',
-    NOT: '실패',
+    FAILED: '실패',
   }
 });
 

@@ -37,10 +37,26 @@ class App {
     }
   }
 
+  async isRestart() {
+    try {
+      const command = await InputView.readGameCommand();
+      if(command === BRIDGE_REQUIREMENTS.RESTART_CODE) {
+        this.game.retry();
+        this.moveSpace();
+      }
+      if(command === BRIDGE_REQUIREMENTS.QUIT_CODE) {
+        this.quitGame(MESSAGES.CLEARED.FAILED);
+      }
+    } catch(err) {
+      MissionUtils.Console.print(err);
+      this.isRestart();
+    }
+  }
+
   gameEndCheck() {
     const lastTrace = this.game.course[this.game.course.length - 1];
     if([BRIDGE_REQUIREMENTS.LOWER_FAILED_CODE, BRIDGE_REQUIREMENTS.UPPER_FAILED_CODE].includes(lastTrace)) {
-      
+      return this.isRestart();
     }
     if(this.game.course.length === this.game.bridge.length) {
       return this.quitGame(MESSAGES.CLEARED.SUCESSS);
