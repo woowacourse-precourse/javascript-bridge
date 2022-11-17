@@ -1,13 +1,70 @@
+# 폴더 구조
+
+```python
+│  .gitignore
+│  .npmrc
+│  package-lock.json
+│  package.json
+│  README.md
+│
+├─docs
+│      README.md
+│
+├─src
+│      App.js
+│      BridgeGame.js
+│      BridgeMaker.js
+│      BridgeRandomNumberGenerator.js
+│      InputView.js
+│      OutputView.js
+│
+└─__tests__
+        ApplicationTest.js
+```
+
+# 구조
+
+### Model
+
+```javascript
+
+```
+
+### View
+
+```javascript
+1. 게임 시작 문구 출력
+2. 다리 길이 입력 기능
+3. 이동 칸수 입력 기능
+4. 이동 상태 출력 기능
+5. 게임 결과 출력 기능
+6. 게임 종료 입력 기능
+```
+
+### Controller
+
+```javascript
+1. 게임 횟수 데이터 관리 기능   (메서드 : 모델에 게임 횟수 저장 / 시작 시 횟수 초기화 / 게임 성공·실패 시 횟수 업데이트 / 게임 횟수 데이터 View에 접근 허용-get-)
+2. 다리 데이터 관리 기능        (메서드 : 모델에 다리 길이 저장 / 모델에 다리 상태 데이터 생성 / 모델에 다리 상태 데이터 저장)
+3. 이동 데이터 관리 기능        (메서드 : 모델에 이동 데이터 저장 / 모델의 다리 상태 데이터로 성공·실패 판단 / 모델에 이동 상태 출력 포맷 저장)
+4.
+
+```
+
 # 기능 목록
 
-### [InputView 객체] 입력 기능
+### [View] 입력 기능 (InputView)
 
+- 입력 받은 내역을 Controller를 통해 Model에 저장 (Model에 직접 접근하지 않도록 유의)
 - InputView 객체내에서 구현 (객체의 파일 경로 변경 가능)
 - InputView 메서드 이름 변경 불가 (인자 추가 가능)
 - 사용자 값 입력을 위한 메서드 추가 가능
 
 ```javascript
-(1) "다리 건니기 게임을 시작합니다\n" + "다리의 길이를 입력해주세요.\n"
+(1)
+다리 건너기 게임을 시작합니다.
+
+다리의 길이를 입력해주세요.\n
 ```
 
 - 다리 길이 입력값은 3부터 20 사이의 자연수
@@ -22,7 +79,7 @@
 - [ERROR] 대문자로 입력해주세요.
 - 사용자 Input에 따른 이동 결과를 출력한다.
 
-### [OutputView 객체] 출력 기능
+### [View] 출력 기능 (OutputView 객체)
 
 - OutputView 객체내에서 구현 (객체의 파일 경로 변경 가능)
 - OutputView의 메서드 이름을 변경 불가 (인자 추가 가능)
