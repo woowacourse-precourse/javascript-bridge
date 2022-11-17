@@ -10,9 +10,14 @@ const InputView = {
    */
   readBridgeSize() {
     let bridgeSize;
-    Console.readLine('다리의 길이를 입력해주세요.', (input) => {
-      validateRange(input);
-      bridgeSize = input;
+    Console.readLine('\n다리의 길이를 입력해주세요.\n', (input) => {
+      try{
+        this.validate(input);
+        bridgeSize = input;
+      }catch (e){
+        Console.print(e.message);
+        this.readBridgeSize();
+      }
     });
     return bridgeSize;
   },
@@ -27,9 +32,11 @@ const InputView = {
    */
   readGameCommand() {},
 
-  validateRange(input) {
+  validate(input) {
     if(isNaN(input) || input<3 || input >20) {
-      throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.")
+      let err = new Error("validate Error");
+      err.message = "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.";
+      throw err;
     }
   }
 };
