@@ -23,8 +23,7 @@ const OutputView = {
    */
   printResult() {
     Console.print(OutputConstants.RESULT_MESSAGE);
-    Console.print(OutputConstants.BRIDGE_STATE(Player.state[0]));
-    Console.print(OutputConstants.BRIDGE_STATE(Player.state[1]));
+    this.printMap();
     Console.print("");
     Console.print(OutputConstants.SUCCESS_STATE(Player.gameSuccess));
     Console.print(OutputConstants.TRYING_COUNT(Player.tryingCount));
