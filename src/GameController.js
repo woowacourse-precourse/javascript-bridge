@@ -13,8 +13,13 @@ class GameController {
 
   makeBridge(bridgeSize) {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-
     console.log(this.#bridge);
+    
+    InputView.readMoving(this.readTest.bind(this));
+  }
+
+  readTest(input) {
+    console.log(input);
   }
 
 
