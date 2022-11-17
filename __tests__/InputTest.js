@@ -17,15 +17,6 @@ const getLogSpy = () => {
 };
 
 describe("입력 테스트", () => {
-  test("다리 길이 테스트", () => {
-    const logSpy = getLogSpy();
-    mockQuestions(["10"]);
-
-    InputView.readBridgeSize();
-
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("10"));
-  });
-
   test("다리 길이가 숫자가 아닌 경우 예외 처리한다.", () => {
     mockQuestions(["a"]);
 
