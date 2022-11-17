@@ -47,7 +47,8 @@
    */
   retry() {
       attemptCount += 1;
+      this.userPickedArr.length = 0;
+      this.userPickedUpOrDown.length = 0;
     }
   }
-
 module.exports = BridgeGame;
