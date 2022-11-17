@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+
 const Validation = require("./Validation");
 
 /**
@@ -13,29 +14,24 @@ const InputView = {
   RESTART_QUESTION:
     "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
 
-  readBridgeSize() {
-    Console.readLine(InputView.BRIDGE_SIZE_QUESTION, (input) => {
-      Validation.validateIsNumber(input);
-      Validation.validateBridgeRange(input);
-    });
+  /**
+   ** 사용자가 다리 길이를 입력받는다.
+   */
+  readBridgeSize(getBrigeSize) {
+    Console.readLine(InputView.BRIDGE_SIZE_QUESTION, getBrigeSize);
   },
-
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    Console.readLine(InputView.BRIDGE_MOVE_QUESTION, (input) => {
-      Validation.validateMoveInput(input);
-    });
+  readMoving(move) {
+    Console.readLine(InputView.BRIDGE_MOVE_QUESTION, move);
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-    Console.readLine(InputView.RESTART_QUESTION, (input) => {
-      Validation.validateRestartInput(input);
-    });
+  readGameCommand(retry) {
+    Console.readLine(InputView.RESTART_QUESTION, retry);
   },
 };
 
