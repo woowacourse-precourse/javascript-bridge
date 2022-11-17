@@ -13,9 +13,9 @@ class App {
 
   moveBridge(input) {
     const MOVE = this.#game.move(input);
-    const END_CHECK = this.#game.isEnd();
-    const END = !END_CHECK;
+    const END = false;
     if (MOVE) {
+      const END_CHECK = this.#game.isEnd();
       return END_CHECK;
     }
     return END;

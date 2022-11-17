@@ -1,4 +1,3 @@
-const MissionUtils = require('@woowacourse/mission-utils');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 
@@ -13,7 +12,10 @@ class Bridge {
   }
 
   checkLength(index) {
-    return index <= this.#bridgeArray.length;
+    return index < this.#bridgeArray.length;
+  }
+  getbridgePart(index) {
+    return this.#bridgeArray[index];
   }
 }
 module.exports = Bridge;

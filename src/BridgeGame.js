@@ -1,4 +1,5 @@
 const Bridge = require('./Bridge');
+const { printMap } = require('./OutputView');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -17,9 +18,8 @@ class BridgeGame {
    */
   move(input) {
     const CAN_MOVE = this.#bridge.movable(this.#index, input);
-    if (CAN_MOVE) {
-      this.#index += 1;
-    }
+    printMap(this.#bridge, this.#index, CAN_MOVE);
+    this.#index += 1;
     return CAN_MOVE;
   }
   isEnd() {
