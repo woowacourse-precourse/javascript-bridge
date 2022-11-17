@@ -174,4 +174,13 @@ describe('다리를 끝까지 갔는지 확인하는 메서드 테스트', () =>
 
     expect(bridgeGame.isBridgeEnd(arrayLength)).toBeTruthy();
   });
+
+  test('인자가 숫자가 아니라면 예외를 발생한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const EXPECTED = NaN;
+
+    expect(() => {
+      bridgeGame.isBridgeEnd(EXPECTED);
+    }).toThrow(NUMBER_ERROR_TEXT);
+  });
 });
