@@ -1,9 +1,15 @@
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+// @ts-check
+
+const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
 class App {
+  /** @type {BridgeGame} */
+  #bridgeGame;
+
+  #result;
+
   play() {
     OutputView.printStart();
     this.gameStart();
@@ -11,21 +17,15 @@ class App {
 
   gameStart() {
     InputView.readBridgeSize((bridgeSize) => {
-      const bridges = this.makeBridges(bridgeSize, 2);
-      console.log(bridges);
+      this.#bridgeGame = new BridgeGame(Number(bridgeSize), 2);
+      this.movePlayer();
     });
   }
 
-  makeBridges(bridgeSize, numberOfRow) {
-    const generate = BridgeRandomNumberGenerator.generate;
-
-    let bridges = [];
-    for (let i = 0; i < numberOfRow; i++) {
-      const bridge = BridgeMaker.makeBridge(Number(bridgeSize), generate);
-      bridges.push(bridge);
-    }
-
-    return bridges;
+  movePlayer() {
+    InputView.readMoving((moving) => {
+      this.#bridgeGame.move();
+    });
   }
 }
 
