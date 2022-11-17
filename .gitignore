@@ -2,3 +2,5 @@ node_modules
 temp.js
 package.json
 package-lock.json
+.prettierrc
+.eslintrc.json
