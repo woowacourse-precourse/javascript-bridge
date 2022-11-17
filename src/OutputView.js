@@ -22,7 +22,15 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult() {
+    Console.print("\n최종 게임 결과");
+    Console.print(`[${Player.state[0].join("|")}]`);
+    Console.print(`[${Player.state[1].join("|")}]`);
+    Console.print("");
+    Console.print(`게임 성공 여부: ${Player.gameSuccess ? "성공" : "실패"}`);
+    Console.print(`총 시도한 횟수: ${Player.tryingCount}`);
+    Console.close();
+  },
 
   printStart() {
     Console.print(START_MESSAGE);
