@@ -12,9 +12,16 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     MissionUtils.Console.readLine(MESSAGE.ENTER_BRIDGE_SIZE, (size) => {
+      if (!bridgeGame.vaildateBridgeSize(size)) {
+        this.readBridgeSize(bridgeGame);
+        return;
+      }
+
       bridgeGame.setBridge(new Bridge(size));
+      console.log(bridgeGame.getBridge());
       this.readMoving(bridgeGame);
     })
+
   },
 
   /**
@@ -22,12 +29,10 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     MissionUtils.Console.readLine(MESSAGE.ENTER_MOVE_TYPE, (moveType) => {
-      bridgeGame.setPosition(moveType);
-      let maxPosition = bridgeGame.getBridge().length;
+      bridgeGame.move(moveType);
+      OutputView.printMap(bridgeGame, moveType);
+      let maxPosition = bridgeGame.getBridge().length - 1;
       let position = bridgeGame.getPosition();
-
-      console.log("position", position);
-
       if (position < maxPosition)
         this.readMoving(bridgeGame);
       if (position === maxPosition)
