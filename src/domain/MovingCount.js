@@ -11,4 +11,8 @@ class MovingCount {
     this.#totalMovingCount += 1;
     this.#currentMovingCount += 1;
   }
+
+  getTotalMovingCount() {
+    return this.#totalMovingCount;
+  }
 }
