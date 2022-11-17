@@ -1,7 +1,7 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const Player = require('./Player');
-const { STEP_STATUS, MOVING, MARKING } = require('./utils/const');
+const { STEP_STATUS } = require('./utils/const');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -9,6 +9,7 @@ const { STEP_STATUS, MOVING, MARKING } = require('./utils/const');
 class BridgeGame {
   #bridge;
   #player;
+  #result;
 
   /**
    * @param {number} bridgeSize
@@ -22,27 +23,38 @@ class BridgeGame {
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * @param {string} moving U 혹은 D
-   * @return {0 | 1 | 2} 0: Fail, 1: Success, 2: Next
+   * @return {{status: 0 | 1 | 2, markingPaper: string[][] }} 0: Fail, 1: Success, 2: Next
    */
   move(moving) {
     const currentStep = this.#player.getStep();
     const isCorrect = this.#bridge[currentStep] === moving;
 
-    this.#player.markOX(moving, isCorrect);
+    const markingPaper = this.#player.markOX(moving, isCorrect);
+    this.#player.setNextStep();
 
-    if (!isCorrect) return STEP_STATUS.FAILURE;
-    if (currentStep === this.#bridge.length - 1) return STEP_STATUS.SUCCESS;
+    if (!isCorrect) {
+      return { status: STEP_STATUS.FAILURE, markingPaper };
+    }
 
-    return STEP_STATUS.NEXT;
+    if (currentStep === this.#bridge.length - 1) {
+      return { status: STEP_STATUS.SUCCESS, markingPaper };
+    }
+
+    return { status: STEP_STATUS.NEXT, markingPaper };
   }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {string} gameCommand
+   * @return {1 | 2} 0: Restart, 1: Quit
    */
-  retry() {
-    console.log('retry');
+  retry(gameCommand) {
+    if (gameCommand === 'R') {
+      this.#player = new Player();
+      return 2;
+    }
+
+    return 1;
   }
 }
 
