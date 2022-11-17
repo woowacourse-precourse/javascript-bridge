@@ -21,13 +21,21 @@ const InputView = {
         Console.readLine('다리의 길이를 입력해주세요.\n', (number) => {
             this.validateBridgeSize(number);
             this.bridgeSize = number;
+            this.readMoving();
         });
     },
 
     /**
      * 사용자가 이동할 칸을 입력받는다.
      */
-    readMoving() {},
+    readMoving() {
+        Console.readLine(
+            '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
+            (next) => {
+                this.validateNext(next);
+            }
+        );
+    },
 
     /**
      * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
@@ -44,6 +52,12 @@ const InputView = {
     isRange(number) {
         if (+number < 3 || +number > 30) throw new Error('[ERROR]');
     },
+
+    validateNext(next) {
+        if (next !== 'U' && next !== 'D') throw new Error('[ERROR]');
+    },
 };
+
+InputView.setting();
 
 module.exports = InputView;
