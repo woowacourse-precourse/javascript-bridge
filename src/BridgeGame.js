@@ -6,10 +6,12 @@ const InputView = require('./InputView');
 class BridgeGame {
   #bridge
   #position
+  #moveHistory
 
   constructor() {
     this.#position = -1;
     this.#bridge = null;
+    this.#moveHistory = [];
   }
 
   getBridge() {
@@ -24,9 +26,16 @@ class BridgeGame {
     return this.#position;
   }
 
-  setPosition(moveType) {
-    this.validateMoveType(moveType);
-    this.#position++;
+  setPosition(amount) {
+    this.#position += amount;
+  }
+
+  getMoveHistory() {
+    return this.#moveHistory;
+  }
+
+  setMoveHistory(moveType) {
+    this.#moveHistory.push(moveType);
   }
 
   start() {
@@ -45,6 +54,8 @@ class BridgeGame {
    */
   move(moveType) {
     this.validateMoveType(moveType);
+    this.setPosition(1);
+    this.setMoveHistory(moveType);
   }
 
   /**
