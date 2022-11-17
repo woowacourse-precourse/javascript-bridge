@@ -91,6 +91,11 @@ class App {
       answer === ANSWER.RETRY ? this.retry() : this.printResult();
     });
   }
+
+  retry() {
+    this.init();
+    this.askMoveDirection();
+  }
 }
 
 const app = new App();
