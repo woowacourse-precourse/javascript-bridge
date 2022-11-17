@@ -14,9 +14,10 @@ const InputView = {
     MissionUtils.Console.readLine("",(bridgeLength) => {
       // 유효성 검사 필요 : bridgeLength 가 숫자가 아닌 경우
       Checking.bridgeNum(bridgeLength)
+      Checking.bridgeNumCheck(bridgeLength)
       BRIDGE_LENGTH = bridgeLength
-      console.log(BRIDGE_LENGTH)
     })
+    return BRIDGE_LENGTH
   },
 
   /**

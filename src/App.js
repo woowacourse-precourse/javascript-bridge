@@ -27,11 +27,19 @@
 
 const OutputView = require('./OutputView')
 const InputView = require('./InputView')
+const BridgeMaker = require('./BridgeMaker')
+const BridgeGame = require('./BridgeGame')
 
 class App {
   play() {
     OutputView.printStart()
-    InputView.readBridgeSize()
+    // 다리길이 입력받기
+    let BRIDGE_LENGTH = InputView.readBridgeSize()
+    // 다리 생성해야지
+    let BRIDGE = BridgeMaker.makeBridge(BRIDGE_LENGTH)
+    console.log(BRIDGE)
+    const GAME = new BridgeGame()
+    GAME.move()
   }
 }
 
