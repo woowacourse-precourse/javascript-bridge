@@ -1,4 +1,4 @@
-const Validator = require('../src/utils/Validator');
+const Validator = require('../../src/utils/Validator');
 
 const MESSAGE_ACCEPT = '입력은 정상적으로 동작한다.';
 const MESSAGE_EXCEPT = '입력은 예외를 발생시킨다.';
