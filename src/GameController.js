@@ -27,8 +27,12 @@ class GameController {
     });
   }
   inputStep() {
-    InputView.readMoving(() => {});
+    InputView.readMoving((input) => {
+      Validation.stepInput(input);
+      this.compareStep(input);
+    });
   }
+  compareStep(input) {}
 }
 
 module.exports = GameController;
