@@ -27,6 +27,7 @@ const InputView = {
     Console.readLine(
       "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (moving) => {
+        Check.checkMoving(moving);
         Console.print(moving);
       }
     );

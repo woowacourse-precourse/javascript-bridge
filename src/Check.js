@@ -18,6 +18,15 @@ const Check = {
       throw new Error("[ERROR] 다리 길이는 3 이상 20 이하인 숫자여야 합니다.");
     }
   },
+
+  checkMoving(moving) {
+    const UPPER_moving = "U";
+    const LOWER_moving = "D";
+
+    if (moving !== UPPER_moving && moving !== LOWER_moving) {
+      throw new Error("[ERROR] 이동할 칸은 U과 P만 입력할 수 있습니다.");
+    }
+  },
 };
 
 module.exports = Check;
