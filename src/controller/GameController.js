@@ -6,7 +6,7 @@ const BridgeMaker = require('../BridgeMaker');
 const { validateBridgeSize, validateNext } = require('../errorHandling');
 
 class GameController {
-  #bridge;
+  #game;
 
   start() {
     Console.print('다리 건너기 게임을 시작합니다.');
@@ -19,11 +19,12 @@ class GameController {
 
   setBridge(size) {
     validateBridgeSize.validate(size);
-    this.#bridge = BridgeMaker.makeBridge(size, () =>
+    const bridge = BridgeMaker.makeBridge(size, () =>
       BridgeRandomNumberGenerator.generate()
     );
-    console.log(this.#bridge);
-    this.askMoving();
+    console.log(bridge);
+    this.#game = new BridgeGame(bridge);
+    this.askMoving(size);
   }
 
   askMoving() {
@@ -32,7 +33,14 @@ class GameController {
 
   setMoving(next) {
     validateNext.validate(next);
-    //  이동하는 로직
+    const result = this.#game.move(next);
+
+    if (result === 1) {
+      console.log('성공');
+      this.askMoving();
+    } else {
+      console.log('실패');
+    }
   }
 }
 

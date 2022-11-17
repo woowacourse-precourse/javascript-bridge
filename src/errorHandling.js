@@ -12,7 +12,7 @@ const validateBridgeSize = {
 };
 
 const validateNext = {
-  validate() {
+  validate(next) {
     if (next !== 'U' && next !== 'D') throw new Error('[ERROR]');
   },
 };
