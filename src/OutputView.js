@@ -1,5 +1,4 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
 
 const OutputView = {
 	CORRECT_BRIDGE_ELE: " O ",
