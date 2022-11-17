@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -5,7 +7,12 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize() {
+    MissionUtils.Console.readLine("다리의 길이를 입력해주세요.", (answer) => {
+      const exceptNumber = /[^0-9]/;
+      if (exceptNumber.test(answer)) MissionUtils.Console.print("[ERROR]");
+    });
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.

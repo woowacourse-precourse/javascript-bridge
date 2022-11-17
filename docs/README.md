@@ -1,5 +1,5 @@
 # 1. 하드코딩
-- [ ] ApplicationTest 만을 만족하기 위한 하드코딩
+- [x] ApplicationTest 만을 만족하기 위한 하드코딩
 - [ ] 목표: 하드코딩 이후 최종 코드 완성까지 ApplicationTest를 항상 만족하기
 
 # 2. 정상 동작하도록 코딩
