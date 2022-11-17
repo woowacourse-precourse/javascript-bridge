@@ -58,3 +58,12 @@ describe('사용자가 칸을 이동할 때 사용하는 메서드 테스트', (
     EXPECTED.forEach((RECEIVED) => expect(bridgeGame.move()).toEqual(RECEIVED));
   });
 });
+
+describe('사용자가 시작전인지 확인하는 메서드', () => {
+  test('메소드 이름은 "isBeforeStart"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'isBeforeStart';
+
+    expect(bridgeGame.isBeforeStart.name).toEqual(METHOD_NAME);
+  });
+});
