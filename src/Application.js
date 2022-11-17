@@ -20,11 +20,12 @@ const Application = {
 
   createArray(target, mapFn) {
     const { convertNumber, checkRangeThreeToTwenty } = Application;
+    const userLength = convertNumber(target);
 
-    checkRangeThreeToTwenty(target);
+    checkRangeThreeToTwenty(userLength);
     Validation.func(mapFn);
 
-    return Array.from({ length: convertNumber(target) }, mapFn);
+    return Array.from({ length: userLength }, mapFn);
   },
 };
 
