@@ -1,7 +1,6 @@
-const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
-const { ERROR } = require('./Messages');
+
 class Bridge {
     #bridge
     constructor(size) {
