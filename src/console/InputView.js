@@ -7,12 +7,12 @@ const ErrorHandler = require("../ErrorHandler")
 
 
 const InputView = {
-  generator : BridgeRandomNumberGenerator.generate,
 
   readBridgeSize(bridgeSetter, nextCallBack, errorCallBack) {
+    const generator = BridgeRandomNumberGenerator.generate
     MissionUtils.Console.readLine(Message.BRIDGE_SIZE, (size) => {
-      const validTarget = () =>Validate.bridgeLength(size)
-      const doCallBack = () => bridgeSetter(BridgeMaker.makeBridge(size, this.generator.bind(this)))
+      const validTarget = () => Validate.bridgeLength(size)
+      const doCallBack = () => bridgeSetter(BridgeMaker.makeBridge(size, generator.bind(this)))
 
       ErrorHandler.test(validTarget, doCallBack, errorCallBack)
       nextCallBack();
