@@ -1,6 +1,3 @@
-// utils 말고 validation이라던지 파일명을 변경해야할듯..?
-// constraints(제한 사항)를 가져와서 "판별, 판단"하는거니까
-// 클래스명도 validation 관련해서 단어를 넣어야할 것 같음
 const {
   SizeConstraints,
   MoveConstraints,
