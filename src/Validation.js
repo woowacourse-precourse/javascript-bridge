@@ -16,6 +16,12 @@ const Validation = {
     }
   },
 
+  gameCommand: (gameCommand) => {
+    if (!Validation.isCorrectGameCommand(gameCommand)) {
+      throw Console.print(ERROR_MESSAGE.MOVING_COMMAND);
+    }
+  },
+
   isCorrectBrigeSize(bridgeSize) {
     return (
       BRIDGE.SIZE.MINIMUN <= bridgeSize && bridgeSize <= BRIDGE.SIZE.MAXIMUM
@@ -26,6 +32,12 @@ const Validation = {
     return (
       movingCommand === COMMAND.MOVING.UP ||
       movingCommand === COMMAND.MOVING.DOWN
+    );
+  },
+
+  isCorrectGameCommand(gameCommand) {
+    return (
+      gameCommand === COMMAND.GAME.RETRY || gameCommand === COMMAND.GAME.QUIT
     );
   },
 };
