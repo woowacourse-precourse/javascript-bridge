@@ -2,7 +2,7 @@
 
 ### 1. 다리길이 입력 받기 InputView.readBridgeSize()
 
-- 다리 길임 입력 메세지 출력
+- 다리 길이 입력 메세지 출력
 - 3~20의 범위를 벗어난 입력 예외처리
 - 숫자가 아닌 입력 예외처리
 
@@ -10,8 +10,8 @@
 
 - BridgeRandomNumberGenerator를 이용해 랜덤 수 생성
 - 0인 경우 D, 1인 경우 U 를 배열에 담아 리턴
-- 생성된 다리 저장 (Bridge Class를 만들어야하나?)
-- 파라미터로 배열을 담아 BridgeGame 실행
+- 생성된 다리 저장
+- 파라미터로 배열을 담아 게임 실행
 
 ### 3. 이동할 칸 입력 받기 InputView.readMoving()
 
@@ -19,7 +19,7 @@
 
 ### 4. 생성한 다리와 비교하여 결과 계산 BridgeGame.move()
 
-- correctBridge 매서드를 만들어 생성된 다리의 현재 인덱스와 입력값 비교 (Bridge Class를 만들어야하나?)
+- correctBridge 매서드를 만들어 생성된 다리의 현재 인덱스와 입력값 비교
 - 시도 횟수 증가 시키기
 
 ### 5. 결과를 통해 다리 출력
