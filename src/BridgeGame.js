@@ -1,14 +1,16 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
- const BridgeMaker = require("./BridgeMaker");
- const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
- const InputView = require("./InputView");
- const OutputView = require("./OutputView");
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const InputView = require("./InputView");
+const { printMap } = require("./OutputView");
+const OutputView = require("./OutputView");
 
 class BridgeGame {
-
   #bridge;
+  #moveCount;
+  usersMove = [];
 
   start() {
     OutputView.printStart();
@@ -19,12 +21,8 @@ class BridgeGame {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     console.log(this.#bridge);
 
-    InputView.readMoving(this.startMove.bind(this));
-  }
-
-  startMove(inputMoving) {
-    let moveCount = 0;
-    this.move(inputMoving, moveCount);
+    this.#moveCount = 0;
+    InputView.readMoving(this.move.bind(this));
   }
 
   /**
@@ -32,15 +30,17 @@ class BridgeGame {
  * <p>
  * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
  */
-  move(inputMoving, moveCount) {
-    console.log(inputMoving, moveCount);
-    if (this.#bridge[moveCount] === inputMoving) {
-      console.log('O');
-      return 'O';
-    }
+  move(inputMoving) {
+    if (this.#bridge[this.#moveCount] === inputMoving) {
+      this.usersMove.push([inputMoving, 'O']);
+    } else {
+      this.usersMove.push([inputMoving, 'X']);
+    } 
+    
+    printMap(this.usersMove);
+    this.#moveCount += 1;
 
-    console.log('X');
-    return "X";
+    return;
   }
 
   /**
