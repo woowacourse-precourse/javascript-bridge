@@ -56,4 +56,14 @@ describe("BridgeGame 테스트", () => {
 
         expect(bridgeGame.isFailMove(bridgeGame.getUpDownHistory())).toEqual(true);
     });
+
+    test.each([
+        ["1"],
+        ["D"],
+        ["ZD"],
+        ["@"],
+    ])("게임 재시작 예외 테스트", (command) => {
+        const bridgeGame = new BridgeGame();
+        expect(bridgeGame.validateCommand(command)).toEqual(false);
+    });
 });
