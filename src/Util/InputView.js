@@ -1,14 +1,19 @@
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
+const { GUIDE_MSG, ERROR_MSG } = require("./constants");
+const BridgeGame = require("../BridgeGame");
 const Validation = require("./Validation");
 const OutputView = require("./OutputView");
-const { GUIDE_MSG } = require("./constants");
 
 const InputView = {
   readBridgeSize() {
     Console.readLine(GUIDE_MSG.START_MSG, (answer) => {
-      Validation.ValidSize(answer);
-      this.startBridgeGame(answer);
+      try {
+        if (!Validation.ValidSize(answer)) throw new Error();
+        this.startBridgeGame(answer);
+      } catch (error) {
+        Console.print(ERROR_MSG.INPUT_SIZE_ERROR);
+        this.readBridgeSize();
+      }
     });
   },
 
@@ -20,8 +25,13 @@ const InputView = {
 
   readMoving(bridgeGame) {
     Console.readLine(GUIDE_MSG.PROGRESS_MSG, (answer) => {
-      Validation.ValidMove(answer);
-      this.checkBridge(answer, bridgeGame);
+      try {
+        if (!Validation.ValidMove(answer)) throw new Error();
+        this.checkBridge(answer, bridgeGame);
+      } catch (error) {
+        Console.print(ERROR_MSG.INPUT_MOVING_ERROR);
+        this.readMoving(bridgeGame);
+      }
     });
   },
 
@@ -40,12 +50,25 @@ const InputView = {
 
   readGameCommand(answer, bridgeGame) {
     OutputView.makeMap(answer, bridgeGame.getIdxAndIsCorrect());
+    this.inputGameCommand(bridgeGame);
+  },
+
+  inputGameCommand(bridgeGame) {
     Console.readLine(GUIDE_MSG.RETRY_MSG, (answer) => {
-      Validation.ValidCmd(answer);
-      bridgeGame.retry(answer)
-        ? this.restartGame(bridgeGame)
-        : this.exitGame(bridgeGame, false);
+      try {
+        if (!Validation.ValidCmd(answer)) throw new Error();
+        this.selectRestartOrQuit(answer, bridgeGame);
+      } catch (error) {
+        Console.print(ERROR_MSG.INPUT_CMD_ERROR);
+        this.readGameCommand(answer, bridgeGame);
+      }
     });
+  },
+
+  selectRestartOrQuit(answer, bridgeGame) {
+    bridgeGame.retry(answer)
+      ? this.restartGame(bridgeGame)
+      : this.exitGame(bridgeGame, false);
   },
 
   restartGame(bridgeGame) {

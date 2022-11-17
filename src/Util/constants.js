@@ -6,9 +6,9 @@ const GUIDE_MSG = {
 };
 
 const ERROR_MSG = {
-  INPUT_ERROR: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
-  INPUT_MOVING_ERROR: "[ERROR] 이동할 칸은 U 혹은 D로 입력해주세요.",
-  INPUT_CMD_ERROR: "[ERROR] 이동할 칸은 R 혹은 Q로 입력해주세요.",
+  INPUT_SIZE_ERROR: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n",
+  INPUT_MOVING_ERROR: "[ERROR] 이동할 칸은 U 혹은 D로 입력해주세요.\n",
+  INPUT_CMD_ERROR: "[ERROR] 이동할 칸은 R 혹은 Q로 입력해주세요.\n",
 };
 
 module.exports = {
