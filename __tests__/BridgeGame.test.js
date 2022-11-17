@@ -2,6 +2,13 @@ const BridgeGame = require('../src/BridgeGame');
 
 const NUMBER_ERROR_TEXT = '[ERROR] 전달된 인수는 숫자 타입이 아닙니다.';
 
+/**
+ * 전달된 인수만큼 함수를 반복 실행하는 유틸 함수이다.
+ * @param {number} length
+ * @param {function(): any} fn
+ */
+const loop = (length, fn) => Array.from({ length }).forEach(fn);
+
 describe('숫자값 문자열 치환 기능 테스트', () => {
   test('메소드 이름은 "replaceString"로 정의된다.', () => {
     const METHOD_NAME = 'replaceString';
@@ -109,7 +116,7 @@ describe('사용자 위치를 확인하는 메서드 테스트', () => {
     const bridgeGame = new BridgeGame();
     const RECEIVED = 0;
 
-    bridgeGame.move();
+    loop(1, bridgeGame.move.bind(bridgeGame));
 
     expect(bridgeGame.findUserPosition()).toEqual(RECEIVED);
   });
@@ -118,8 +125,7 @@ describe('사용자 위치를 확인하는 메서드 테스트', () => {
     const bridgeGame = new BridgeGame();
     const RECEIVED = 1;
 
-    bridgeGame.move();
-    bridgeGame.move();
+    loop(2, bridgeGame.move.bind(bridgeGame));
 
     expect(bridgeGame.findUserPosition()).toEqual(RECEIVED);
   });
@@ -137,8 +143,7 @@ describe('사용자가 게임을 다시 시도할 때 사용하는 메서드 테
     const bridgeGame = new BridgeGame();
     const RECEIVED = null;
 
-    bridgeGame.move();
-    bridgeGame.move();
+    loop(2, bridgeGame.move.bind(bridgeGame));
 
     expect(bridgeGame.retry()).toEqual(RECEIVED);
   });
@@ -150,5 +155,14 @@ describe('다리를 끝까지 갔는지 확인하는 메서드 테스트', () =>
     const METHOD_NAME = 'isBridgeEnd';
 
     expect(bridgeGame.isBridgeEnd.name).toEqual(METHOD_NAME);
+  });
+
+  test('배열의 길이가 3일 때 인덱스 1에 위치한다면 false를 반환한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const arrayLength = 3;
+
+    loop(2, bridgeGame.move.bind(bridgeGame));
+
+    expect(bridgeGame.isBridgeEnd(arrayLength)).toBeFalsy();
   });
 });
