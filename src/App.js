@@ -96,6 +96,18 @@ class App {
     this.init();
     this.askMoveDirection();
   }
+
+  printResult() {
+    Console.print(`최종 게임 결과`);
+    this.printBridgeMap();
+    Console.print(`게임 성공 여부: ${this.#success ? '성공' : '실패'}`);
+    Console.print(`총 시도한 횟수: ${this.#numberOfAttempts}`);
+    this.exit();
+  }
+
+  exit() {
+    Console.close();
+  }
 }
 
 const app = new App();
