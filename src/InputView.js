@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const Validator = require('./Validator');
-
+const { BRIDGE, GAME_COMMAND } = require('./constants');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -9,7 +9,8 @@ const InputView = {
    * @param {function(string): void} callback 입력받은 후 실행할 함수
    */
   readBridgeSize(callback) {
-    Console.readLine('다리의 길이를 입력해주세요.\n', (input) => this.errorHandler(
+    Console.print('다리의 길이를 입력해주세요.');
+    Console.readLine('', (input) => this.errorHandler(
       this.validateBridgeSize(input, callback),
       () => this.readBridgeSize(callback),
     ));
@@ -23,7 +24,7 @@ const InputView = {
   validateBridgeSize(input, callback) {
     return () => {
       Validator.validateIsNumber(input);
-      Validator.validateInRange(3, 20, input);
+      Validator.validateInRange(BRIDGE.MIN_LENGTH, BRIDGE.MAX_LENGTH, input);
       callback(input);
     };
   },
@@ -32,8 +33,9 @@ const InputView = {
    * @param {function(string): void} callback 입력받은 후 실행할 함수
    */
   readMoving(callback) {
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => this.errorHandler(
-      this.validateCommand(input, ['U', 'D'], callback),
+    Console.print(`이동할 칸을 선택해주세요. (위: ${BRIDGE.ABOVE}, 아래: ${BRIDGE.BELOW})`);
+    Console.readLine('', (input) => this.errorHandler(
+      this.validateCommand(input, [BRIDGE.ABOVE, BRIDGE.BELOW], callback),
       () => this.readMoving(callback),
     ));
   },
@@ -42,13 +44,11 @@ const InputView = {
    * @param {function(string): void} callback 입력받은 후 실행할 함수
    */
   readGameCommand(callback) {
-    Console.readLine(
-      '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
-      (input) => this.errorHandler(
-        this.validateCommand(input, ['R', 'Q'], callback),
-        () => this.readGameCommand(callback),
-      ),
-    );
+    Console.print(`게임을 다시 시도할지 여부를 입력해주세요. (재시도: ${GAME_COMMAND.RETRY}, 종료: ${GAME_COMMAND.QUIT})`);
+    Console.readLine('', (input) => this.errorHandler(
+      this.validateCommand(input, [GAME_COMMAND.RETRY, GAME_COMMAND.QUIT], callback),
+      () => this.readGameCommand(callback),
+    ));
   },
 
   /**

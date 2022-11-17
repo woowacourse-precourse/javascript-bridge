@@ -1,6 +1,7 @@
 // @ts-check
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { GAME_STATUS, BRIDGE } = require('./constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -19,7 +20,7 @@ class BridgeGame {
   constructor(size) {
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.#inputs = [];
-    this.#gameStatus = 0;
+    this.#gameStatus = GAME_STATUS.PROCEEDING;
   }
 
   /**
@@ -43,7 +44,7 @@ class BridgeGame {
 
   #checkGameEnd() {
     if (this.#bridge.length === this.#inputs.length) {
-      this.#gameStatus = 2;
+      this.#gameStatus = GAME_STATUS.END;
     }
   }
 
@@ -51,9 +52,9 @@ class BridgeGame {
    * @return {resultMap} 출력할 map을 반환
    */
   getResultMap() {
-    const upperPart = this.#makeUpperPart();
-    const lowerPart = this.#makeLowerPart();
-    const resultToString = `[ ${upperPart} ]\n[ ${lowerPart} ]`;
+    const abovePartString = `${BRIDGE.START} ${this.#makeAbovePart()} ${BRIDGE.END}`;
+    const belowPartString = `${BRIDGE.START} ${this.#makeBelowPart()} ${BRIDGE.END}`;
+    const resultToString = `${abovePartString}\n${belowPartString}`;
 
     return {
       resultToString,
@@ -64,34 +65,34 @@ class BridgeGame {
   /**
    * @return {string} 출력할 map의 윗부분
    */
-  #makeUpperPart() {
-    const upperPart = this.#inputs.map((e, i) => {
-      if (e !== 'U') return ' ';
-      if (e === this.#bridge[i]) return 'O';
-      this.#gameStatus = 1;
-      return 'X';
+  #makeAbovePart() {
+    const abovePart = this.#inputs.map((input, idx) => {
+      if (input !== BRIDGE.ABOVE) return BRIDGE.BLANK;
+      if (input === this.#bridge[idx]) return BRIDGE.MOVE_SUCCESS;
+      this.#gameStatus = GAME_STATUS.OVER;
+      return BRIDGE.MOVE_FAIL;
     });
 
-    return upperPart.join(' | ');
+    return abovePart.join(BRIDGE.JOIN);
   }
 
   /**
    * @return {string} 출력할 map의 아랫부분
    */
-  #makeLowerPart() {
-    const lowerPart = this.#inputs.map((e, i) => {
-      if (e !== 'D') return ' ';
-      if (e === this.#bridge[i]) return 'O';
-      this.#gameStatus = 1;
-      return 'X';
+  #makeBelowPart() {
+    const belowPart = this.#inputs.map((input, idx) => {
+      if (input !== BRIDGE.BELOW) return BRIDGE.BLANK;
+      if (input === this.#bridge[idx]) return BRIDGE.MOVE_SUCCESS;
+      this.#gameStatus = GAME_STATUS.OVER;
+      return BRIDGE.MOVE_FAIL;
     });
 
-    return lowerPart.join(' | ');
+    return belowPart.join(BRIDGE.JOIN);
   }
 
   retry() {
     this.#inputs = [];
-    this.#gameStatus = 0;
+    this.#gameStatus = GAME_STATUS.PROCEEDING;
   }
 }
 

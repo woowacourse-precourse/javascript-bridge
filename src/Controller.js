@@ -2,6 +2,7 @@
 const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const { GAME_STATUS, GAME_COMMAND } = require('./constants');
 
 class Controller {
   /** @type {number} */
@@ -30,16 +31,16 @@ class Controller {
     InputView.readMoving((input) => {
       const { resultToString, gameStatus } = this.#bridgeGame.move(input);
       OutputView.printMap(resultToString);
-      if (gameStatus === 2) this.#handleGameEnd();
-      if (gameStatus === 1) this.#handleGameOver();
-      if (gameStatus === 0) this.#handleMove();
+      if (gameStatus === GAME_STATUS.END) this.#handleGameEnd();
+      if (gameStatus === GAME_STATUS.OVER) this.#handleGameOver();
+      if (gameStatus === GAME_STATUS.PROCEEDING) this.#handleMove();
     });
   }
 
   #handleGameOver() {
     InputView.readGameCommand((input) => {
-      if (input === 'R') this.#handleGameRetry();
-      if (input === 'Q') this.#handleGameEnd();
+      if (input === GAME_COMMAND.RETRY) this.#handleGameRetry();
+      if (input === GAME_COMMAND.QUIT) this.#handleGameEnd();
     });
   }
 
