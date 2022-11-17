@@ -10,6 +10,8 @@ class BridgeGame {
 
   #playerPosition;
 
+  #currentRoute;
+
   #state;
 
   #tryCount;
@@ -20,6 +22,7 @@ class BridgeGame {
     this.#playerPosition = -1;
     this.#state = STATE.PROGRESS;
     this.#tryCount = 1;
+    this.#currentRoute = { upBridgeRoute: [], downBridgeRoute: [] };
   }
 
   move(to) {
@@ -27,7 +30,7 @@ class BridgeGame {
     const position = this.#playerPosition;
     const possible = movePossible(to, this.#playerPosition, this.bridge);
     this.changeState(possible, this.#bridgeSize - 1 === this.#playerPosition);
-    return getCurrentRoute(position, this.bridge, possible);
+    this.#currentRoute = getCurrentRoute(position, this.bridge, possible);
   }
 
   retry() {
@@ -62,6 +65,10 @@ class BridgeGame {
 
   get tryCount() {
     return this.#tryCount;
+  }
+
+  get currentRoute() {
+    return JSON.parse(JSON.stringify(this.#currentRoute));
   }
 }
 

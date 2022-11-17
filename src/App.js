@@ -1,6 +1,5 @@
-const {
-  printStart, printMap, printResult, printError,
-} = require('./OutputView');
+const { Console } = require('@woowacourse/mission-utils');
+const { printStart, printMap, printResult } = require('./OutputView');
 const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { STATE } = require('./Contants');
 const BridgeGame = require('./BridgeGame');
@@ -8,31 +7,40 @@ const BridgeGame = require('./BridgeGame');
 class App {
   play() {
     printStart();
-    readBridgeSize()
-      .then((size) => {
-        const bridgeGame = new BridgeGame(size);
-        return this.progressGame(bridgeGame);
-      })
-      .then((gameResult) => printResult(gameResult))
-      .catch((e) => printError(e));
+    readBridgeSize((size) => {
+      const bridgeGame = new BridgeGame(size);
+      this.progressGame(bridgeGame);
+    });
   }
 
-  async progressGame(bridgeGame) {
-    const to = await readMoving();
-    const { upBridgeRoute, downBridgeRoute } = bridgeGame.move(to);
-    printMap(upBridgeRoute, downBridgeRoute);
-    if (bridgeGame.state === STATE.FAIL) {
-      const command = await readGameCommand();
-      if (command === 'R') bridgeGame.retry();
-    }
-    if (bridgeGame.state === STATE.PROGRESS) return this.progressGame(bridgeGame);
-    return {
-      state: bridgeGame.state, tryCount: bridgeGame.tryCount, upBridgeRoute, downBridgeRoute,
-    };
+  progressGame(bridgeGame) {
+    readMoving((to) => {
+      bridgeGame.move(to);
+      const { upBridgeRoute, downBridgeRoute } = bridgeGame.currentRoute;
+      printMap(upBridgeRoute, downBridgeRoute);
+      if (bridgeGame.state === STATE.PROGRESS) this.progressGame(bridgeGame);
+      else if (bridgeGame.state === STATE.FAIL) this.pauseGame(bridgeGame);
+      else if (bridgeGame.state === STATE.SUCCESS) this.endGame(bridgeGame);
+    });
+  }
+
+  pauseGame(bridgeGame) {
+    readGameCommand((command) => {
+      if (command === 'R') {
+        bridgeGame.retry();
+        this.progressGame(bridgeGame);
+        return;
+      }
+      this.endGame(bridgeGame);
+    });
+  }
+
+  endGame(bridgeGame) {
+    printResult({
+      state: bridgeGame.state, tryCount: bridgeGame.tryCount, ...bridgeGame.currentRoute,
+    });
+    Console.close();
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;

@@ -7,13 +7,13 @@ const PlayerMove = {
   getCurrentRoute(position, bridge, possible) {
     const upBridgeRoute = new Array(position + 1).fill(' ');
     const downBridgeRoute = new Array(position + 1).fill(' ');
-    for (let i = 0; i < position + 1; i += 1) {
+    for (let i = 0; i < position + Number(possible); i += 1) {
       if (bridge[i] === 'U') upBridgeRoute[i] = 'O';
       if (bridge[i] === 'D') downBridgeRoute[i] = 'O';
     }
     if (!possible) {
-      if (bridge[position] === 'U') upBridgeRoute[position] = 'X';
-      if (bridge[position] === 'D') downBridgeRoute[position] = 'X';
+      if (bridge[position] === 'U') downBridgeRoute[position] = 'X';
+      if (bridge[position] === 'D') upBridgeRoute[position] = 'X';
     }
     return { upBridgeRoute, downBridgeRoute };
   },
