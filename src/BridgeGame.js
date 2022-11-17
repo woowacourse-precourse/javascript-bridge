@@ -6,7 +6,7 @@ class BridgeGame {
   build(size) {
     const builder = new Bulider();
 
-    builder.buildBridge(size);
+    this.#bridge = builder.buildBridge(size);
   }
 
   move() {}
