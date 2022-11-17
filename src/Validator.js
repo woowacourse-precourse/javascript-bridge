@@ -6,6 +6,7 @@ const Validator = Object.freeze({
   checkSpace(input) {
     const trimedInput = input.trim();
     if (trimedInput.match(this.spaceReg)) throw new Error(ERROR_MESSAGES.NOT_EMPTY);
+    else return true;
   },
 
   checkNan(input) {
