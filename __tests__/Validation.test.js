@@ -26,6 +26,14 @@ describe('함수 타입 체크 함수 테스트', () => {
 
     expect(Validation.Fn.name).toEqual(METHOD_NAME);
   });
+
+  test('인수가 함수가 아니라면 예외를 발생시킨다.', () => {
+    const EXPECTED = [];
+
+    expect(() => {
+      Validation.number(EXPECTED);
+    }).toThrow(FUNCTION_ERROR_TEXT);
+  });
 });
 
 describe('범위 파악 함수 테스트', () => {
