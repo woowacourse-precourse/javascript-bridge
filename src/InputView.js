@@ -51,8 +51,10 @@ const InputView = {
     MissionUtils.Console.readLine(MESSAGE.ENTER_COMMAND, (command) => {
       if (!bridgeGame.validateCommand(command))
         return this.readGameCommand(bridgeGame)
-      if (command === "Q")
+      if (command === "Q") {
+        OutputView.printResult(bridgeGame);
         return bridgeGame.exit();
+      }
       if (command === "R") {
         bridgeGame.retry();
         return this.readMoving(bridgeGame);
