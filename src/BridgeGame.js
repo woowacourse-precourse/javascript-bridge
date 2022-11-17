@@ -14,7 +14,7 @@ class BridgeGame {
   }
 
   isMove(direction) {
-    console.log(direction, this.#bridge, this.#moveCount);
+    console.log(this.#bridge);
     return direction === this.#bridge[this.#moveCount];
   }
 
@@ -40,13 +40,30 @@ class BridgeGame {
     this.#moveCount = 0;
   }
 
-  getConvertedBridge(floor) {
+  convertBridge(floor) {
     return this.#bridge.slice(0, this.#moveCount).map((current) => {
       if (current === floor) {
         return 'O';
       }
       return ' ';
     });
+  }
+
+  getConvertedBridge() {
+    const upstairBridge = this.convertBridge('U');
+    const downstairBridge = this.convertBridge('D');
+    return { upstairBridge, downstairBridge };
+  }
+
+  getFailureBridge({ upstairBridge, downstairBridge }) {
+    if (this.#bridge[this.#moveCount] === 'U') {
+      upstairBridge.push(' ');
+      downstairBridge.push('X');
+    } else if (this.#bridge[this.#moveCount] === 'D') {
+      upstairBridge.push('X');
+      downstairBridge.push(' ');
+    }
+    return { upstairBridge, downstairBridge };
   }
 }
 

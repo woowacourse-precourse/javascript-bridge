@@ -26,18 +26,25 @@ class App {
     InputView.readMoving((direction) => {
       if (this.#bridgeGame.isMove(direction)) {
         this.#bridgeGame.move();
-        this.renderBridge();
-        this.checkCompletion();
+        this.renderSuccessBridge();
         return;
       }
       this.failGame();
     });
   }
 
-  renderBridge() {
-    const upstairBridge = this.#bridgeGame.getConvertedBridge('U');
-    const downstairBridge = this.#bridgeGame.getConvertedBridge('D');
+  renderSuccessBridge() {
+    const { upstairBridge, downstairBridge } = this.#bridgeGame.getConvertedBridge();
 
+    //console.log(upstairBridge);
+    //console.log(downstairBridge);
+    this.checkCompletion();
+  }
+
+  renderFailureBridge() {
+    const { upstairBridge, downstairBridge } = this.#bridgeGame.getFailureBridge(
+      this.#bridgeGame.getConvertedBridge(),
+    );
     console.log(upstairBridge);
     console.log(downstairBridge);
   }
@@ -51,6 +58,7 @@ class App {
   }
 
   failGame() {
+    this.renderFailureBridge();
     InputView.readGameCommand((command) => {
       if (command === 'R') {
         this.replay();
@@ -61,7 +69,7 @@ class App {
   }
 
   resultGame() {
-    console.log('결과 // 게임 종료 (성공했을 때 or 실패 후 종료)');
+    console.log('\n결과 // 게임 종료 (성공했을 때 or 실패 후 종료)');
     this.end();
   }
 
