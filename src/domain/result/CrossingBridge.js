@@ -1,6 +1,6 @@
 class CrossingBridge {
   static #MARK = {
-    success: 'O',
+    pass: 'O',
     fail: 'X',
     empty: ' ',
   };
@@ -18,31 +18,15 @@ class CrossingBridge {
     this.#down = [];
   }
 
-  add({ direction, isSuccessed }) {
-    if (isSuccessed) {
-      this.#successedMark(direction);
-      return;
-    }
+  add({ direction, isPassed }) {
+    const mark = isPassed ? CrossingBridge.#MARK.pass : CrossingBridge.#MARK.fail;
 
-    this.#failedMark(direction);
-  }
-
-  #successedMark(direction) {
     if (direction === 'U') {
-      this.#marking({ up: CrossingBridge.#MARK.success });
+      this.#marking({ up: mark });
       return;
     }
 
-    this.#marking({ down: CrossingBridge.#MARK.success });
-  }
-
-  #failedMark(direction) {
-    if (direction === 'U') {
-      this.#marking({ down: CrossingBridge.#MARK.fail });
-      return;
-    }
-
-    this.#marking({ up: CrossingBridge.#MARK.fail });
+    this.#marking({ down: mark });
   }
 
   #marking({ up = CrossingBridge.#MARK.empty, down = CrossingBridge.#MARK.empty }) {
