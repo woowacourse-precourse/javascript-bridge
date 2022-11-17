@@ -11,7 +11,8 @@ const {
   ERROR_RETRY_MESSAGE,
   NUMBER,
 } = require('./constants');
-const { printMap } = require('./OutputView');
+const { printMap, printResult } = require('./OutputView');
+const { getBridgeString } = require('./Utils');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -25,7 +26,7 @@ const InputView = {
       this.bridgeValidation(bridgeSize);
       const bridge = makeBridge(bridgeSize, generate);
       console.log(bridge);
-      this.readMoving(bridge, NUMBER.zero, NUMBER.zero);
+      this.readMoving(bridge, NUMBER.zero, NUMBER.one);
     });
   },
 
@@ -62,15 +63,23 @@ const InputView = {
       bridgeGame.move(userInput);
       const curSteps = bridgeGame.getSteps();
       const { upBridge, downBridge } = bridgeGame.getStepResult();
-      printMap(upBridge, downBridge);
+      const upBridgeString = getBridgeString(upBridge);
+      const downBridgeString = getBridgeString(downBridge);
+      printMap(upBridgeString, downBridgeString);
       if (curSteps === bridge.length) {
-        Console.print('끝');
+        printResult(upBridgeString, downBridgeString, true, numberAttempts);
       }
       if (steps < curSteps) {
         this.readMoving(bridge, curSteps, numberAttempts);
       }
       if (steps === curSteps) {
-        this.readGameCommand(bridge, curSteps, numberAttempts + 1);
+        this.readGameCommand(
+          bridge,
+          curSteps,
+          numberAttempts,
+          upBridgeString,
+          downBridgeString
+        );
       }
     });
   },
@@ -92,15 +101,22 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge, steps, numberAttempts) {
+  readGameCommand(
+    bridge,
+    steps,
+    numberAttempts,
+    upBridgeString,
+    downBridgeString
+  ) {
     Console.print(GAME_MESSAGE.retry);
     Console.readLine('', (userInput) => {
       this.checkRetryLowercase(userInput);
       this.checkRetryWrong(userInput);
       if (userInput === 'R') {
-        this.readMoving(bridge, steps, numberAttempts);
+        this.readMoving(bridge, steps, numberAttempts + 1);
       }
       if (userInput === 'Q') {
+        printResult(upBridgeString, downBridgeString, false, numberAttempts);
         Console.close();
       }
     });
