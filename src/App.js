@@ -1,5 +1,5 @@
-const { printStart } = require('./OutputView');
-const { readBridgeSize } = require('./InputView');
+const { printStart, printMap } = require('./OutputView');
+const { readBridgeSize, readMoving } = require('./InputView');
 const BridgeGame = require('./BridgeGame');
 
 class App {
@@ -8,7 +8,15 @@ class App {
     readBridgeSize().then((size) => {
       const bridgeGame = new BridgeGame(size);
       console.log(bridgeGame.bridge);
+      this.progressGame(bridgeGame);
     });
+  }
+
+  async progressGame(bridgeGame) {
+    const to = await readMoving();
+    const { upBridgeRoute, downBridgeRoute } = bridgeGame.move(to);
+    printMap(upBridgeRoute, downBridgeRoute);
+    if (bridgeGame.progress) this.progressGame(bridgeGame);
   }
 }
 

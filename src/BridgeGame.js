@@ -1,6 +1,6 @@
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { makeBridge } = require('./BridgeMaker');
-const { movePossible } = require('./PlayerMove');
+const { movePossible, getCurrentRoute } = require('./PlayerMove');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -11,10 +11,13 @@ class BridgeGame {
 
   #playerPosition;
 
+  #progress;
+
   constructor(bridgeSize) {
     this.bridgeSize = bridgeSize;
     this.#bridge = makeBridge(bridgeSize, generate);
     this.#playerPosition = -1;
+    this.#progress = true;
   }
 
   /**
@@ -26,7 +29,8 @@ class BridgeGame {
     this.#playerPosition += 1;
     const position = this.#playerPosition;
     const possible = movePossible(to, this.#playerPosition, this.bridge);
-    return { position, possible };
+    this.#progress = possible;
+    return getCurrentRoute(position, this.bridge, possible);
   }
 
   /**
@@ -43,6 +47,10 @@ class BridgeGame {
 
   get bridge() {
     return JSON.parse(JSON.stringify(this.#bridge));
+  }
+
+  get progress() {
+    return this.#progress;
   }
 }
 
