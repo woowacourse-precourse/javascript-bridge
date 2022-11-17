@@ -21,6 +21,7 @@ class BridgeGame {
   #inputs;
   #step;
   #trial;
+
   constructor() {
     this.#answer = [];
     this.#inputs = [];
@@ -29,7 +30,9 @@ class BridgeGame {
   }
   start() {
     OutputView.printStart();
-    InputView.readBridgeSize((bridgeLength) => {
+
+    const self = this.start.bind(this);
+    InputView.readBridgeSize(self, (bridgeLength) => {
       if (this.#answer.length === 0) {
         const answer = BridgeMaker.makeBridge(bridgeLength, generate);
         this.#answer = answer;
@@ -42,7 +45,9 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move() {
-    InputView.readMoving((command) => {
+    const self = this.move.bind(this);
+
+    InputView.readMoving(self, (command) => {
       this.#inputs.push(command);
       this.#step += 1;
       OutputView.printMap(this.#answer.slice(0, this.#step), this.#inputs);
@@ -66,7 +71,8 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    InputView.readGameCommand((command) => {
+    const self = this.retry.bind(this);
+    InputView.readGameCommand(self, (command) => {
       if (command === "R") {
         this.restart();
         return;
