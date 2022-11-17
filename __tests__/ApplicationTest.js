@@ -88,13 +88,23 @@ describe('다리 건너기 테스트', () => {
 });
 
 describe.only('TEST', () => {
-    test('다리 개수 유효성 테스트', () => {
-        const input = new InputView();
-        input.validateBridgeSize('500');
-    }).toThrow('[ERROR]');
+    // test('다리 개수 유효성 테스트', () => {
+    //     const input = new InputView();
+    //     input.validateBridgeSize('500');
+    // }).toThrow('[ERROR]');
 
-    test('다음 칸 이동 입력 유효성 테스트', () => {
-        const input = new InputView();
-        input.validateBridgeSize('a');
-    }).toThrow('[ERROR]');
+    // test('다음 칸 이동 입력 유효성 테스트', () => {
+    //     const input = new InputView();
+    //     input.validateBridgeSize('a');
+    // }).toThrow('[ERROR]');
+
+    test('다리 생성 테스트', () => {
+        const randomNumbers = ['1', '0', '0'];
+        const mockGenerator = randomNumbers.reduce((acc, number) => {
+            return acc.mockReturnValueOnce(number);
+        }, jest.fn());
+
+        const bridge = BridgeMaker.makeBridge(3, mockGenerator);
+        expect(bridge).toEqual(['U', 'D', 'D']);
+    });
 });

@@ -58,6 +58,4 @@ const InputView = {
     },
 };
 
-InputView.setting();
-
 module.exports = InputView;
