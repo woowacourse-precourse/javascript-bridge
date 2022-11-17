@@ -1,9 +1,6 @@
 ## [4주차] 우아한테크코스 프리코스 - 다리 건너기
 
-<div style="display: flex;"><div style="display: flex; width: 100%; border-radius: 3px; border: 1px solid rgba(55, 53, 47, 0.16); background-color: transparent; padding: 16px 16px 16px 12px; color: rgb(55, 53, 47);"><div><div class="notion-record-icon notranslate notion-focusable" role="button" tabindex="0" style="user-select: none; transition: background 20ms ease-in 0s; cursor: pointer; display: flex; align-items: center; justify-content: center; height: 24px; width: 24px; border-radius: 0.25em; flex-shrink: 0;"><div style="display: flex; align-items: center; justify-content: center; height: 24px; width: 24px;"><div style="height: 16.8px; width: 16.8px; font-size: 16.8px; line-height: 1; margin-left: 0px; color: black;"><img class="notion-emoji" alt="💬" aria-label="💬" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" style="width: 100%; height: 100%; background: url(&quot;/images/emoji/twitter-emoji-spritesheet-64.d3a69865.png&quot;) 47.4576% 52.5424% / 6000% 6000%;"></div></div></div></div><div style="display: flex; flex-direction: column; min-width: 0px; margin-left: 8px; width: 100%;"><div class="notranslate" spellcheck="true" placeholder="내용을 입력하세요" data-content-editable-leaf="true" contenteditable="true" style="max-width: 100%; width: 100%; white-space: pre-wrap; word-break: break-word; caret-color: rgb(55, 53, 47); padding-left: 2px; padding-right: 2px;"><span style="font-style:italic;font-weight:600" data-token-index="0" class="notion-enable-hover">💬위아래 둘 중 하나의 칸만 건널 수 있는 다리를 끝까지 건너가는 게임이다. 3주차 공통 피드백과 추가된 요구 사항을 최대한 지키며 개발한다.</span></div><div data-block-id="528032ba-3510-4b65-9a72-2d67c708c414" class="notion-selectable notion-callout-block"></div></div></div></div>
-
-<div style="display:flex">
-<div>
+💬위아래 둘 중 하나의 칸만 건널 수 있는 다리를 끝까지 건너가는 게임이다. 3주차 공통 피드백과 추가된 요구 사항을 최대한 지키며 개발한다.
 
 ### 🚀이번 주차 목표
 
@@ -44,11 +41,6 @@
   - 재시작하면 처음에 만든 다리로 재사용한다.
   - 게임 결과의 총 시도한 횟수는 첫 시도를 포함해 게임을 종료할 때까지 시도한 횟수를 나타낸다.
 
-</div>
-</div>
-
-<div>
-
 ---
 
 ### 💻구현 기능 목록
@@ -60,9 +52,11 @@
 - 올바른 값이 아니면 예외 처리한다.
 
 **2. 길이만큼 다리를 생성한다.**
+
 **3. 라운드마다 플레이어가 이동할 칸을 입력 받는다.**
 
 - U(위 칸), D(아래 칸) 중 하나의 문자를 입력한다.
+- 소문자 입력 시
 - 올바른 값이 아니면 예외 처리한다.
 
 **4. 사용자가 이동할 때마다 다리 건너기 결과를 출력한다.**
@@ -91,4 +85,18 @@
 - 게임 성공 여부를 출력한다.
 - 총 시도한 횟수를 출력한다.
 
-</div>
+**✔ 사용자가 잘못된 값을 입력한 경우 throw문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.**
+
+---
+
+### 💥 예외 처리 목록
+
+- **다리 길이 범위는 3 이상 ~ 20 이하의 숫자여야 한다.**
+
+- **라운드마다 요구되는 이동 입력은 대문자 "U", 대문자 "D" 중 하나의 문자여야 한다.**
+
+- **게임 재시작 및 종료 여부 입력은 "R"(재시작)과 "Q"(종료) 중 하나의 문자여야 한다.**
+
+- **입력 문자는 모두 `대문자`여야 한다.**
+  - 재시도 및 종료 여부에서 `대문자`로 명시하지 않았다.
+  - 하지만 이동 관련 문자들은 대문자여야 하므로 재시작과 종료 여부도 대문자로 처리하도록 하자.
