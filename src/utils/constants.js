@@ -3,4 +3,9 @@ const MESSAGE = Object.freeze({
   SELECT_BRIDGE_SIZE: '다리의 길이를 입력해주세요.',
 });
 
-module.exports = { MESSAGE };
+const ERROR = Object.freeze({
+  NOT_A_NUMBER: '[ERROR] 다리의 길이는 숫자로 입력해야 합니다.',
+  INVALID_RANGE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+});
+
+module.exports = { MESSAGE, ERROR };

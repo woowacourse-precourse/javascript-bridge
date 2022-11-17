@@ -16,7 +16,7 @@
 - [x] 다리의 길이를 숫자로 입력받는다. <InputView>
 
   - [x] 숫자 이외의 타입이 들어오면 예외처리한다.<BridgeMaker>
-  - [ ] 범위 이외의 값이 들어오면 예외처리한다. (3 이상 20 이하)<BridgeMaker>
+  - [x] 범위 이외의 값이 들어오면 예외처리한다. (3 이상 20 이하)<BridgeMaker>
 
 - [ ] 다리의 길이만큼 0과 1 중 무작위 값을 추출해<BridgeRandomNumberGenerator> 답안을 생성한다. 1은 위(U), 0은 아래(D)로 표기한다.<BridgeMaker>
 
