@@ -34,15 +34,15 @@ class App {
     this.bridgeGame.move(movingCommand);
     OutputView.printMap(this.bridgeGame.getCurrentBridgeMap());
 
-    if (this.bridgeGame.isNextMove()) {
-      this.inputMoving();
-      return;
-    }
     if (!this.bridgeGame.isAnswerMovingChoice()) {
       this.inputRetryCommand();
       return;
     }
-    OutputView.printResult(this.sendPrintResult(true));
+    if (this.bridgeGame.isGameSuccess()) {
+      OutputView.printResult(this.sendPrintResult());
+      return;
+    }
+    this.inputMoving();
   }
 
   inputRetryCommand() {
@@ -51,16 +51,17 @@ class App {
 
   playerChoiceRetry(gameCommand) {
     if (gameCommand === COMMAND.GAME.QUIT) {
-      OutputView.printResult(this.sendPrintResult(false));
+      OutputView.printResult(this.sendPrintResult());
       return;
     }
     this.bridgeGame.retry();
     this.inputMoving();
   }
 
-  sendPrintResult(isGameSuccess) {
+  sendPrintResult() {
     const currentBridgeMap = this.bridgeGame.getCurrentBridgeMap();
     const totalTryCount = this.bridgeGame.getTotalTryCount();
+    const isGameSuccess = this.bridgeGame.isGameSuccess();
     return {
       currentBridgeMap,
       totalTryCount,

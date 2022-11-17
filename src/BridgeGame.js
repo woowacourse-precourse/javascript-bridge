@@ -18,8 +18,8 @@ class BridgeGame {
     this.#currentBridgeCount += 1;
   }
 
-  isNextMove() {
-    return this.isAnswerMovingChoice() && !this.#isLastMove();
+  isGameSuccess() {
+    return this.isAnswerMovingChoice() && this.#isLastMove();
   }
 
   isAnswerMovingChoice() {
