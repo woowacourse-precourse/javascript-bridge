@@ -10,9 +10,9 @@
   - [x] 다리의 n번째 칸을 건넌다. Bridge#stepOn
   - [x] 이동할 칸이 강화유리인지 확인한다. BridgePanel#checkTempered
     - [x] (예외처리) 건널 수 있는 칸의 방향이 U 또는 D가 아닌 경우 예외처리 한다. BridgePanel#validate
-- [ ] 다리를 건너온 정보를 추가한다. CrossingBridge#add
-- [ ] 다리를 건너온 정보의 출력 결과를 생성한다. CrossingBridge#print
-- [ ] 다리를 몇 칸 건너왔는지 출력한다. CrossingBridge#size
+- [x] 다리를 건너온 정보를 추가한다. CrossingBridge#add
+- [x] 다리를 건너온 정보의 출력 결과를 생성한다. CrossingBridge#print
+- [x] 다리를 몇 칸 건너왔는지 출력한다. CrossingBridge#size
 - [ ] 다리를 모두 건넜는지 확인한다. Judgment#checkCrossingAll
 - [ ] 게임을 재시도한다. BridgeGame#retry
   - [ ] 시도 횟수를 증가한다. Attempt#add
