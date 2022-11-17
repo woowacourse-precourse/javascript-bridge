@@ -53,6 +53,10 @@ const InputView = {
         return this.readGameCommand(bridgeGame)
       if (command === "Q")
         return bridgeGame.exit();
+      if (command === "R") {
+        bridgeGame.retry();
+        return this.readMoving(bridgeGame);
+      }
     });
   }
 };
