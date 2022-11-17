@@ -16,6 +16,15 @@ class GameController {
     this.#gameService.makeBridge(size);
   }
 
+  movePlayer(direction) {
+    this.#gameService.movePlayer(direction);
+  }
+
+  printCurMap() {
+    const curMap = this.#gameService.printCurMap();
+    OutputView.printMap(curMap, false);
+  }
+
   gameExit() {}
 }
 
