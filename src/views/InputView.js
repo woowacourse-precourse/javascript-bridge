@@ -1,5 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
+const errorMessage = require('../constants/errorMessage');
 const userInputMessage = require('../constants/userInputMessage');
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -9,8 +11,14 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(userInputMessage.ENTER_BRIDGE_LENGTH, (bridgeLength) => {
+      this.validateBridgeSize(bridgeLength);
       Console.print(bridgeLength);
     }); 
+  },
+
+  validateBridgeSize(bridgeLength) {
+    if (isNaN(bridgeLength)) throw new Error(errorMessage.NOT_NUMBER);
+    if (bridgeLength < 3 || bridgeLength > 20) throw new Error(errorMessage.OUT_RANGE_NUMBER);
   },
 
   /**
