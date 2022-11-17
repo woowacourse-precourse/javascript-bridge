@@ -11,7 +11,7 @@ const BridgeMaker = {
     const BRIDGE_ARRAY = [];
     for (let number = 0; number < size; number += 1) {
       const ADD_RANDOM_NUMBER = generateRandomNumber();
-      BRIDGE_ARRAY.push(ADD_RANDOM_NUMBER);
+      BRIDGE_ARRAY.push(String(ADD_RANDOM_NUMBER));
     }
     const BRIDGE = this.transForm(BRIDGE_ARRAY);
     return BRIDGE;
@@ -20,8 +20,8 @@ const BridgeMaker = {
   transForm(array) {
     const STRING_BRIDGE_ARRAY = [];
     for (let index = 0; index < array.length; index += 1) {
-      if (array[index] === 1) STRING_BRIDGE_ARRAY.push('U');
-      if (array[index] === 0) STRING_BRIDGE_ARRAY.push('D');
+      if (array[index] === '1') STRING_BRIDGE_ARRAY.push('U');
+      if (array[index] === '0') STRING_BRIDGE_ARRAY.push('D');
     }
     return STRING_BRIDGE_ARRAY;
   },
