@@ -1,10 +1,10 @@
-const Validator = require('./Validator');
+const Validator = require('../utils/Validator');
 
 const BridgeChecker = {
   checkRowDataOfBridgeSize(rowDataOfBridgeSize) {
     Validator.checkTruthy(rowDataOfBridgeSize);
     Validator.checkStringType(rowDataOfBridgeSize);
-    Validator.checkStringIncludes(rowDataOfBridgeSize);
+    Validator.checkRowDataOfBridgeSizeIncludes(rowDataOfBridgeSize);
   },
 
   checkBridgeSize(bridgeSize) {

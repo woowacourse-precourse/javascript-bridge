@@ -4,7 +4,7 @@ const BridgeChecker = require('./BridgeChecker');
 const Convertor = require('../utils/Convertor');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const BridgeGame = require('../models/BridgeGame');
+const PlayerInputChecker = require('./PlayerInputChecker');
 
 class GameController {
   #bridge;
@@ -23,10 +23,12 @@ class GameController {
   }
 
   #beginGame() {
-    InputView.readMoving(this.#movePlayer);
+    InputView.readMoving(this.#movePlayer.bind(this));
   }
 
-  #movePlayer(direction) {}
+  #movePlayer(direction) {
+    PlayerInputChecker.checkDirection(direction);
+  }
 }
 
 module.exports = GameController;

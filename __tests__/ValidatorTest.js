@@ -1,4 +1,4 @@
-const Validator = require('../src/controller/Validator');
+const Validator = require('../src/utils/Validator');
 
 const MESSAGE_ACCEPT = '입력은 정상적으로 동작한다.';
 const MESSAGE_EXCEPT = '입력은 예외를 발생시킨다.';
@@ -34,18 +34,22 @@ describe('Validator checkStringType 테스트', () => {
   });
 });
 
-describe('Validator checkStringIncludes 테스트', () => {
+describe('Validator checkRowDataOfBridgeSizeIncludes 테스트', () => {
   const validInput = ['123'];
   validInput.forEach(validInputValue => {
     test(`${validInputValue} ${MESSAGE_ACCEPT}`, () => {
-      expect(() => Validator.checkStringIncludes(validInputValue)).not.toThrow('[ERROR]');
+      expect(() => Validator.checkRowDataOfBridgeSizeIncludes(validInputValue)).not.toThrow(
+        '[ERROR]'
+      );
     });
   });
 
   const inValidInput = ['', '{}', '[]', 'null', 'a1a', '1a1'];
   inValidInput.forEach(invalidInputValue => {
     test(`${invalidInputValue} ${MESSAGE_EXCEPT}`, () => {
-      expect(() => Validator.checkStringIncludes(invalidInputValue)).toThrow('[ERROR]');
+      expect(() => Validator.checkRowDataOfBridgeSizeIncludes(invalidInputValue)).toThrow(
+        '[ERROR]'
+      );
     });
   });
 });
@@ -135,6 +139,38 @@ describe('Validator checkBridgeIncludes 테스트', () => {
   inValidInput.forEach(invalidInputValue => {
     test(`${invalidInputValue} ${MESSAGE_EXCEPT}`, () => {
       expect(() => Validator.checkBridgeIncludes(invalidInputValue)).toThrow('[ERROR]');
+    });
+  });
+});
+
+describe('Validator checkDirectionLength 테스트', () => {
+  const validInput = ['U', 'D'];
+  validInput.forEach(validInputValue => {
+    test(`${validInputValue} ${MESSAGE_ACCEPT}`, () => {
+      expect(() => Validator.checkDirectionLength(validInputValue)).not.toThrow('[ERROR]');
+    });
+  });
+
+  const inValidInput = ['UD', 'DU'];
+  inValidInput.forEach(invalidInputValue => {
+    test(`${invalidInputValue} ${MESSAGE_EXCEPT}`, () => {
+      expect(() => Validator.checkDirectionLength(invalidInputValue)).toThrow('[ERROR]');
+    });
+  });
+});
+
+describe('Validator checkDirectionIncludes 테스트', () => {
+  const validInput = ['U', 'D'];
+  validInput.forEach(validInputValue => {
+    test(`${validInputValue} ${MESSAGE_ACCEPT}`, () => {
+      expect(() => Validator.checkDirectionIncludes(validInputValue)).not.toThrow('[ERROR]');
+    });
+  });
+
+  const inValidInput = [1, 0, true, 'a', undefined, NaN, [], {}];
+  inValidInput.forEach(invalidInputValue => {
+    test(`${invalidInputValue} ${MESSAGE_EXCEPT}`, () => {
+      expect(() => Validator.checkDirectionIncludes(invalidInputValue)).toThrow('[ERROR]');
     });
   });
 });

@@ -14,8 +14,8 @@ const Validator = {
     }
   },
 
-  checkStringIncludes(string) {
-    if (!REG_EXP.ONLY_NUMBERS.test(string)) {
+  checkRowDataOfBridgeSizeIncludes(rowDataOfBridgeSize) {
+    if (!REG_EXP.ONLY_NUMBERS.test(rowDataOfBridgeSize)) {
       throw new Error(MESSAGE_ERROR.INVALID_FORMAT);
     }
   },
@@ -46,6 +46,18 @@ const Validator = {
 
   checkBridgeIncludes(bridge) {
     if (!bridge.every(value => value === 'U' || value === 'D')) {
+      throw new Error(MESSAGE_ERROR.INVALID_VALUE);
+    }
+  },
+
+  checkDirectionIncludes(direction) {
+    if (direction !== 'U' && direction !== 'D') {
+      throw new Error(MESSAGE_ERROR.INVALID_VALUE);
+    }
+  },
+
+  checkDirectionLength(direction) {
+    if (direction.length !== 1) {
       throw new Error(MESSAGE_ERROR.INVALID_VALUE);
     }
   },
