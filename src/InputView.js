@@ -9,7 +9,7 @@ const OutputView = require("./OutputView");
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const BRIDGELENGTH_ERR_MESSAGE =
-  "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.";
+  "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n";
 
 const USERSELECT_ERR_MESSAGE = "[ERROR] 입력은 U 아니면 D여야 합니다.\n";
 
@@ -27,10 +27,7 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT_BRIDGE_LEN_STR, (bridgeLen) => {
       try {
         bridgeLenValidator(bridgeLen);
-        const bridgeGame = new Game.BridgeGame(
-          BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator)
-        );
-        InputView.readMoving(bridgeGame);
+        InputView.readMoving(createBridgeGame(bridgeLen));
       } catch (e) {
         InputView.readBridgeSize();
       }
@@ -97,6 +94,12 @@ const InputView = {
     isUandD(userSelectValue);
     return userSelectValue;
   },
+};
+
+const createBridgeGame = (bridgeLen) => {
+  return new Game.BridgeGame(
+    BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator)
+  );
 };
 
 const bridgeLenValidator = (bridgeLen) => {
