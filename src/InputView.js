@@ -30,8 +30,12 @@ const InputView = {
                 bridgeGame.fail(move);
                 this.readGameCommand(bridgeGame);
             } else {
-                bridgeGame.move(move);
-                this.readMoving(bridgeGame);
+                if (bridgeGame.isSuccess(move)) {
+                    bridgeGame.success(move);
+                } else {
+                    bridgeGame.move(move);
+                    this.readMoving(bridgeGame);
+                }
             }
         });
     },

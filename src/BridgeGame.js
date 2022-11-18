@@ -1,3 +1,4 @@
+const { Console } = require("@woowacourse/mission-utils");
 const OutputView = require("./OutputView");
 const { STRUCTURE, MESSAGE } = require("./constant/message.js");
 
@@ -36,7 +37,7 @@ class BridgeGame {
             this.#upBridgeHistory.push(STRUCTURE.BAD);
             this.#downBridgeHistory.push(STRUCTURE.BLANK);
         }
-        if (move === "Q") {
+        if (move === "D") {
             this.#upBridgeHistory.push(STRUCTURE.BLANK);
             this.#downBridgeHistory.push(STRUCTURE.BAD);
         }
@@ -47,14 +48,27 @@ class BridgeGame {
         console.log("BridgeGame.move-----------");
         const rightUp = move === "U" && this.bridgeArray[this.bridgeCount] === "U";
 
-        if (this.bridgeCount === this.bridgeArray.length - 1) {
-            return OutputView.printResult();
-        }
-
-        this.success(rightUp);
+        this.rightMove(rightUp);
     }
 
-    success(rightUp) {
+    isSuccess(move) {
+        console.log("BridgeGame.isSuccess---------------------");
+        const rightUp = move === "U" && this.bridgeArray[this.bridgeCount] === "U";
+        console.log(this.bridgeArray[this.bridgeCount], move);
+        if (this.bridgeCount === this.bridgeArray.length - 1) {
+            if (rightUp) {
+                this.#upBridgeHistory.push(STRUCTURE.GOOD);
+                this.#downBridgeHistory.push(STRUCTURE.BLANK);
+            }
+            if (!rightUp) {
+                this.#upBridgeHistory.push(STRUCTURE.BLANK);
+                this.#downBridgeHistory.push(STRUCTURE.GOOD);
+            }
+            return true;
+        }
+    }
+
+    rightMove(rightUp) {
         if (rightUp) {
             this.#upBridgeHistory.push(STRUCTURE.GOOD);
             this.#downBridgeHistory.push(STRUCTURE.BLANK);
@@ -77,11 +91,20 @@ class BridgeGame {
         }
     }
 
+    success() {
+        console.log(MESSAGE.FINISH);
+        OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory);
+        console.log(MESSAGE.SUCCESS);
+        console.log(MESSAGE.TRY + this.#gameCount);
+        Console.close();
+    }
+
     finish() {
         console.log(MESSAGE.FINISH);
         OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory);
         console.log(MESSAGE.FAIL);
         console.log(MESSAGE.TRY + this.#gameCount);
+        Console.close();
     }
 }
 module.exports = BridgeGame;
