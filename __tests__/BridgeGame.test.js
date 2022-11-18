@@ -239,31 +239,31 @@ describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
   bridgeGame.setBridge(bridge);
   bridgeGame.move();
 
-  test('메소드 이름은 "getBridgeReuslt"로 정의된다.', () => {
-    const METHOD_NAME = 'getBridgeReuslt';
+  test('메소드 이름은 "calcBridgeReuslt"로 정의된다.', () => {
+    const METHOD_NAME = 'calcBridgeReuslt';
 
-    expect(bridgeGame.getBridgeReuslt.name).toEqual(METHOD_NAME);
+    expect(bridgeGame.calcBridgeReuslt.name).toEqual(METHOD_NAME);
   });
 
   test('"D"를 전달하면 "O"를 반환한다.', () => {
     const EXPECTED = 'D';
     const RECEIVED = 'O';
 
-    expect(bridgeGame.getBridgeReuslt(EXPECTED)).toEqual(RECEIVED);
+    expect(bridgeGame.calcBridgeReuslt(EXPECTED)).toEqual(RECEIVED);
   });
 
   test('"U"를 전달하면 "X"를 반환한다.', () => {
     const EXPECTED = 'U';
     const RECEIVED = 'X';
 
-    expect(bridgeGame.getBridgeReuslt(EXPECTED)).toEqual(RECEIVED);
+    expect(bridgeGame.calcBridgeReuslt(EXPECTED)).toEqual(RECEIVED);
   });
 
   test('대문자 U, 대문자 D를 입력을 제외한 값은 예외를 발생한다.', () => {
     const EXPECTED = 'u';
 
     expect(() => {
-      bridgeGame.getBridgeReuslt(EXPECTED);
+      bridgeGame.calcBridgeReuslt(EXPECTED);
     }).toThrow(RANGE_ERROR_TEXT);
   });
 });
