@@ -1,5 +1,6 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const OPPOSITE_DIRECTION = { U: 'D', D: 'U' };
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -18,10 +19,7 @@ class BridgeGame {
       bridgeLength,
       BridgeRandomNumberGenerator.generate
     );
-    this.#bridgeMap = {
-      U: Array(bridgeLength).fill(' '),
-      D: Array(bridgeLength).fill(' '),
-    };
+    this.#bridgeMap = { U: [], D: [] };
     this.#stepCount = 0;
     this.#status = {
       numberOfAttempts: 1,
@@ -50,10 +48,13 @@ class BridgeGame {
   }
 
   updateBridgeMap(playerMoving, isCorrect) {
+    const oppositeDirection = OPPOSITE_DIRECTION[playerMoving];
     if (isCorrect) {
-      this.#bridgeMap[playerMoving][this.#stepCount] = 'O';
+      this.#bridgeMap[playerMoving].push('O');
+      this.#bridgeMap[oppositeDirection].push(' ');
     } else {
-      this.#bridgeMap[playerMoving][this.#stepCount] = 'X';
+      this.#bridgeMap[playerMoving].push('X');
+      this.#bridgeMap[oppositeDirection].push(' ');
     }
   }
 
@@ -74,8 +75,8 @@ class BridgeGame {
   }
 
   undoOneStep() {
-    this.#bridgeMap.U[this.#stepCount] = ' ';
-    this.#bridgeMap.D[this.#stepCount] = ' ';
+    this.#bridgeMap.U.pop();
+    this.#bridgeMap.D.pop();
     this.#stepCount -= 1;
   }
 }
