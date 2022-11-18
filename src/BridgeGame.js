@@ -1,3 +1,7 @@
+const InputView = require("./InputView");
+const OutputView = require("./OutputView");
+const { printMap, printResult } = OutputView;
+const { readMoving, readGameCommand } = InputView;
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -8,10 +12,15 @@ class BridgeGame {
       ["U", ""],
       ["D", ""],
     ]);
+    this.attemptCount = 1;
   }
 
   setBridge(bridge) {
     this.bridge = bridge;
+  }
+
+  addAttemptCount() {
+    this.attemptCount++;
   }
 
   insertMoveMap(square, nowIndex) {
@@ -20,7 +29,7 @@ class BridgeGame {
     const other = square === "U" ? "D" : "U";
     this.moveMap.set(other, this.moveMap.get(other) + " ");
   }
-  
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -44,7 +53,14 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.addAttemptCount();
+    this.moveMap = new Map([
+      ["U", ""],
+      ["D", ""],
+    ]);
+    readMoving(this);
+  }
 }
 
 module.exports = BridgeGame;
