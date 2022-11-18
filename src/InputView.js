@@ -10,6 +10,9 @@ const {
   IS_INPUT_EMPTY,
   IS_INPUT_NOT_IN_RANGE
 } = require('./constants/errors/MakeBridgeError');
+const {
+  IS_MOVING_INPUT_NOT_CORRECT
+} = require('./constants/errors/MovingError');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -53,11 +56,19 @@ const InputView = {
     });
   },
 
+  checkMovingInput(input) {
+    if (input !== 'U' && input !== 'D') {
+      throw new Error(IS_MOVING_INPUT_NOT_CORRECT);
+    }
+    return true;
+  },
+
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
     Console.readLine(REQUEST_FOR_MOVING, (input) => {
+      this.checkMovingInput(input);
       console.log(input);
     });
   },
