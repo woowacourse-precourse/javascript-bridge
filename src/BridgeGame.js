@@ -16,7 +16,7 @@ class BridgeGame {
   constructor(size) {
     this.validate(size);
     this.#size = size;
-    this.#bridge = bridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.#bridge;
   }
 
   validate(size) {
@@ -24,12 +24,24 @@ class BridgeGame {
       throw new Error('[ERROR] 3 ~ 20사이의 숫자를 입력해주세요.')
     }
   }
+
+  get bridge() {
+    this.#bridge = bridgeMaker.makeBridge(this.#size, BridgeRandomNumberGenerator.generate);
+    return this.#bridge
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move() {
+    //기본 다리 형태 출력
+    
+    // 값 압력
+    // 입력값과 다리값과 비교해서 출력
+      //정답체크 따로
+      //맵에 표시 따로
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

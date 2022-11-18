@@ -5,14 +5,18 @@ const outputView = require('./outputView');
 class App {
   play() {
     outputView.printStart();
-    const bridgeSize = inputView.readBridgeSize(this.validateSize);
+    inputView.readBridgeSize(this.generateBridge)
   }
 
-  validateSize(size) {
-    return new BridgeGame(size);
+  generateBridge(size) {
+    const bridgeGame = new BridgeGame(size);
+    return outputView.printMap(bridgeGame.bridge);
   }
 
 }
+
+const app = new App();
+app.play();
 
 
 module.exports = App;
