@@ -1,5 +1,6 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+
 const OPPOSITE_DIRECTION = { U: 'D', D: 'U' };
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -68,6 +69,10 @@ class BridgeGame {
     } else {
       this.#status.isFinished = true;
     }
+  }
+
+  getBridgeMap() {
+    return { upperRow: this.#bridgeMap.U, lowerRow: this.#bridgeMap.D };
   }
 
   getStatus() {
