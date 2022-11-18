@@ -9,7 +9,7 @@ class App {
     const BRIDGE_SIZE = InputVIew.readBridgeSize();
     const BRIDGE = BridgeMaker.makeBridge(
       BRIDGE_SIZE,
-      BridgeRandomNumberGenerator.generate()
+      BridgeRandomNumberGenerator.generate
     );
     console.log('briddddddddddddddge', BRIDGE);
   }
