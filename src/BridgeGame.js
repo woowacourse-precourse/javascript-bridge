@@ -1,5 +1,3 @@
-const { GAME_OPTION } = require('./Constant');
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -7,6 +5,11 @@ class BridgeGame {
   #bridgeLengthStatus = 0;
 
   #numberOftry = 0;
+
+  #GAME_OPTION = {
+    RETRY: 'R',
+    QUIT: 'Q',
+  };
 
   incrementNumberOfTry() {
     this.#numberOftry += 1;
@@ -40,8 +43,8 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(input) {
-    if (input === GAME_OPTION.QUIT) return false;
-    if (input === GAME_OPTION.RETRY) return true;
+    if (input === this.#GAME_OPTION.QUIT) return false;
+    if (input === this.#GAME_OPTION.RETRY) return true;
   }
 }
 

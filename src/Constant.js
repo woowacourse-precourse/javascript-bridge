@@ -4,11 +4,6 @@ const GAME_RESULTS_MESSAGES = Object.freeze({
   TRY: '총 시도한 횟수',
 });
 
-const GAME_OPTION = {
-  RETRY: 'R',
-  QUIT: 'Q',
-};
-
 const BRINDGE_DIRECTION = Object.freeze({
   UP: 'U',
   DOWN: 'D',
@@ -22,6 +17,5 @@ const VIEW_FIGURE = Object.freeze({
 module.exports = {
   VIEW_FIGURE,
   BRINDGE_DIRECTION,
-  GAME_OPTION,
   GAME_RESULTS_MESSAGES,
 };
