@@ -5,7 +5,7 @@ const PrintableBridgeMaker = {
     const printableUpBridge = this.addSquareBracket(this.addSpaceLineInBridge(upBridge));
     const printableDownBridge = this.addSquareBracket(this.addSpaceLineInBridge(downBridge));
 
-    return `\n${printableUpBridge}\n${printableDownBridge}`;
+    return `${printableUpBridge}\n${printableDownBridge}\n`;
   },
 
   addSpaceLineInBridge(bridge) {

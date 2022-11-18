@@ -10,6 +10,7 @@ const BRIDGE_GAME = Object.freeze({
   INCORRECT: 'X',
   EMPTY: ' ',
   STEP: 1,
+  QUIT: 'Q',
 });
 
 const GAME_STATUS = Object.freeze({

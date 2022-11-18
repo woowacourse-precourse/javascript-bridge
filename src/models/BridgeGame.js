@@ -4,15 +4,23 @@ const { GAME_STATUS } = require('../constants/values');
 class BridgeGame {
   #bridge;
 
+  #tryCount;
+
   #gameStatus;
 
   constructor(bridge) {
     this.#bridge = bridge;
+    this.#tryCount = 1;
     this.#resetGameStatus();
   }
 
   #resetGameStatus() {
-    this.#gameStatus = { length: 0, upBridge: [], downBridge: [], status: GAME_STATUS.PLAYING };
+    this.#gameStatus = {
+      length: 0,
+      upBridge: [],
+      downBridge: [],
+      status: GAME_STATUS.PLAYING,
+    };
   }
 
   move(direction) {
@@ -47,11 +55,14 @@ class BridgeGame {
   }
 
   #setGameStatus(selectedDirection, index) {
-    if (selectedDirection[index] === 'X') {
+    if (selectedDirection[index] === BRIDGE_GAME.INCORRECT) {
       this.#gameStatus.status = GAME_STATUS.FAIL_END;
     }
 
-    if (selectedDirection[index] === 'O' && selectedDirection.length === this.#bridge.length) {
+    if (
+      selectedDirection[index] === BRIDGE_GAME.CORRECT &&
+      selectedDirection.length === this.#bridge.length
+    ) {
       this.#gameStatus.status = GAME_STATUS.SUCCESS_END;
     }
   }
@@ -61,7 +72,13 @@ class BridgeGame {
   }
 
   retry() {
+    this.#tryCount += 1;
     this.#resetGameStatus();
+  }
+
+  getResult() {
+    const successOrFailure = this.#gameStatus.status === GAME_STATUS.SUCCESS_END ? '성공' : '실패';
+    return { successOrFailure, tryCount: this.#tryCount };
   }
 }
 

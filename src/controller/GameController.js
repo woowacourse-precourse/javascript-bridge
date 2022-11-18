@@ -7,10 +7,12 @@ const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const PlayerInputChecker = require('./PlayerInputChecker');
 const BridgeGame = require('../models/BridgeGame');
 const PrintableBridgeMaker = require('../PrintableBridgeMaker');
-const { GAME_STATUS } = require('../constants/values');
+const { GAME_STATUS, BRIDGE_GAME } = require('../constants/values');
 
 class GameController {
   #bridgeGame;
+
+  #result;
 
   initializeGame() {
     OutputView.printStartMessage();
@@ -33,7 +35,8 @@ class GameController {
 
   #movePlayer(direction) {
     PlayerInputChecker.checkDirection(direction);
-    OutputView.printMap(PrintableBridgeMaker.generate(this.#bridgeGame.move(direction)));
+    this.#result = PrintableBridgeMaker.generate(this.#bridgeGame.move(direction));
+    OutputView.printMap(this.#result);
     if (this.#bridgeGame.checkGameStatus() === GAME_STATUS.PLAYING) {
       this.playGame();
 
@@ -46,17 +49,26 @@ class GameController {
   #quitGame() {
     if (this.#bridgeGame.checkGameStatus() === GAME_STATUS.FAIL_END) {
       InputView.readGameCommand(this.#restartOrQuitGame.bind(this));
+
+      return;
     }
+
+    this.#printGameResult();
   }
 
   #restartOrQuitGame(select) {
     PlayerInputChecker.checkSelect(select);
-    if (select === 'Q') {
+    if (select === BRIDGE_GAME.QUIT) {
+      this.#printGameResult();
       return;
     }
 
     this.#bridgeGame.retry();
     this.playGame();
+  }
+
+  #printGameResult() {
+    OutputView.printResult(this.#result, this.#bridgeGame.getResult());
   }
 }
 

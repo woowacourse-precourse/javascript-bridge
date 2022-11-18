@@ -10,7 +10,12 @@ const OutputView = {
     Console.print(map);
   },
 
-  printResult() {},
+  printResult(result, { successOrFailure, tryCount }) {
+    Console.print('최종 게임 결과');
+    Console.print(result);
+    Console.print(`게임 성공 여부: ${successOrFailure}`);
+    Console.print(`총 시도한 횟수: ${tryCount}`);
+  },
 };
 
 module.exports = OutputView;
