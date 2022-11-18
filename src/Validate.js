@@ -1,9 +1,9 @@
-const { KEY } = require('./Constants');
+const { KEY, BRIDGE } = require('./Constants');
 
 const Validate = {
   checkBridgeSize(size) {
-    // 다리 길이가 3 이상, 20 이하의 숫자인가?
-    if (size >= 3 && size <= 20) {
+    // 다리 길이확인
+    if (size >= BRIDGE.LENGTH_MIN && size <= BRIDGE.LENGTH_MAX) {
       return true;
     } else {
       return false;
@@ -11,6 +11,7 @@ const Validate = {
   },
 
   checkMovingKey(key) {
+    // 이동 키 확인
     if (key === KEY.UP || key === KEY.DOWN) {
       return true;
     } else {
@@ -19,6 +20,7 @@ const Validate = {
   },
 
   checkCommandKey(key) {
+    // 재시작 여부 키 확인
     if (key === KEY.RETRY || key === KEY.END) {
       return true;
     } else {
@@ -27,7 +29,8 @@ const Validate = {
   },
 
   checkUserInput(userInput, answerBridge) {
-    if (userInput.toString() == answerBridge.toString()) {
+    // 성공 여부 확인
+    if (userInput.toString() === answerBridge.toString()) {
       return true;
     } else {
       return false;
