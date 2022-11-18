@@ -28,7 +28,7 @@ const OutputView = {
 
   makeFinalOutputMap() {
     let outputMap = `[ ${OutputView.upBridge.join(' | ')} ]\n`;
-    outputMap+=`[ ${OutputView.downBridge.join(' | ')} ]\n`;
+    outputMap+=`[ ${OutputView.downBridge.join(' | ')} ]`;
     return outputMap;
   },
 
@@ -39,15 +39,18 @@ const OutputView = {
   
   printResult(userMove, failOrSuccess) {
     Console.print(MESSAGE.FINAL_MESSAGE);
-    if (failOrSuccess === '성공') {
+    if (failOrSuccess) {
       return OutputView.printMap(userMove, 'O');
     }
     return OutputView.printMap(userMove, 'X');
-    
   },
 
   printTryResult(tryCount, failOrSuccess) {
-    Console.print(`${MESSAGE.FAIL_OR_SUCCESS}${failOrSuccess}`);
+    let iscorrect = '실패';
+    if (failOrSuccess) {
+      iscorrect = '성공'
+    }
+    Console.print(`${MESSAGE.FAIL_OR_SUCCESS}${iscorrect}`);
     Console.print(`${MESSAGE.TRY_COUNT}${tryCount}`);
     Console.close();
   },

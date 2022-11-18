@@ -1,4 +1,4 @@
-const { Console } = require('@woowacourse/mission-utils');
+// const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 const BridgeSize = require('./available-check/BridgeSize');
@@ -13,7 +13,7 @@ class BridgeGameControl {
   bridge;
   userMove = [];
   tryCount = 1;
-  success;
+  success = 0;
 
   constructor() {
     this.bridgeSize = new BridgeSize();
@@ -36,7 +36,7 @@ class BridgeGameControl {
   };
   
   userMoving() {
-    Console.print(this.bridge)
+    // Console.print(this.bridge)
     InputView.readMoving((userUpDown) => {
       this.movingCheck.validate(userUpDown);
       this.userMove.push(userUpDown);
@@ -62,12 +62,12 @@ class BridgeGameControl {
 
   notAnswerMoving() {
     OutputView.printMap(this.userMove, 'X');
-    this.success = '실패'
+    this.success = 0;
     this.askRetry();
   };
 
   finalAnswer(answer) {
-    this.success = '성공'
+    this.success = 1;
     OutputView.printMap(this.userMove, answer);
     OutputView.printResult(this.userMove, answer);
     OutputView.printTryResult(this.tryCount, this.success);

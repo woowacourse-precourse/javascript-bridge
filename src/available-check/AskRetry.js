@@ -7,7 +7,7 @@ class AskRetry {
   };
 
   checkWord(command) {
-    if (command.match(/[^RQ]/g) !== null) {
+    if (command.match(/[RQ]/g) === null) {
       throw new Error(ERROR.RETRY_WORD);
     };
   };

@@ -7,7 +7,7 @@ class BridgeSize {
   };
 
   checkWord(size) {
-    if (size.match(/[^0-9]/g) !== null) {
+    if (size.match(/[0-9]/g) === null) {
       throw new Error(ERROR.SIZE_WORD);
     };
   };
