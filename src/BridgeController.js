@@ -6,7 +6,11 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 
-const bridgeGame = new BridgeGame(0, [[], []], 1);
+const bridgeGame = new BridgeGame({
+  indexCount: 0,
+  gameResult: [[], []],
+  tryCount: 1,
+});
 
 class BridgeController {
   gameStart() {
@@ -29,6 +33,7 @@ class BridgeController {
     } catch (error) {
       Console.print(error);
       this.getUserBridgeLength();
+
       return false;
     }
   }
@@ -48,6 +53,7 @@ class BridgeController {
     } catch (error) {
       Console.print(error);
       this.getUserMove(bridge);
+
       return false;
     }
   }
@@ -63,19 +69,22 @@ class BridgeController {
 
   judgementAndShow(bridge, move) {
     const passBridge = bridgeGame.move(bridge, move);
-    const passBridgeResult = bridgeGame.result();
-    OutputView.printMap(passBridgeResult);
+    const passBridgeResult = bridgeGame.getResult();
 
+    OutputView.printMap(passBridgeResult);
+    this.successGame(passBridge, passBridgeResult, bridge);
     this.passOrNot(passBridge, passBridgeResult, bridge);
   }
 
-  passOrNot(passBridge, passBridgeResult, bridge) {
-    if (passBridge === false) {
-      this.getUserRetry(bridge, passBridgeResult);
-    }
+  successGame(passBridge, passBridgeResult, bridge) {
     if (passBridge === true && passBridgeResult[0].length === bridge.length) {
       this.gameEndPoint(passBridgeResult);
       return Console.close();
+    }
+  }
+  passOrNot(passBridge, passBridgeResult, bridge) {
+    if (passBridge === false) {
+      this.getUserRetry(bridge, passBridgeResult);
     }
     if (passBridge === true) {
       this.getUserMove(bridge);
