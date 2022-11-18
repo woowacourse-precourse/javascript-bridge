@@ -48,4 +48,12 @@ describe("입력 테스트", () => {
       InputView.readMoving();
     }).toThrow("[ERROR] 이동할 칸은 U과 P만 입력할 수 있습니다.");
   });
+
+  test("게임 진행 옵션이 R이나 Q가 아닌 경우 예외 처리한다.", () => {
+    mockQuestions(["T"]);
+
+    expect(() => {
+      InputView.readGameCommand();
+    }).toThrow("[ERROR] 게임 진행 옵션은 R과 Q만 입력할 수 있습니다.");
+  });
 });
