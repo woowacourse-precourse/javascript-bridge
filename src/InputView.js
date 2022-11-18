@@ -3,7 +3,7 @@
  */
 const { Console } = require('@woowacourse/mission-utils');
 const ERROR_MESSAGES = require('./constants/ErrorMessages');
-const BREIDGE = require('./constants/constants');
+const BRIDGE = require('./constants/constants');
 
 const InputView = {
   /**
@@ -12,7 +12,6 @@ const InputView = {
   readBridgeSize() {
     Console.readLine('QUERY', (size) => {
       this.validateBridgeSize(size);
-      console.log({ size });
     });
   },
 
@@ -27,13 +26,18 @@ const InputView = {
   readGameCommand() {},
 
   validateBridgeSize(size) {
-    size = Number(size);
-    if (!Number.isInteger(size)) {
+    if (!this.isNumber(size)) {
       throw new Error(ERROR_MESSAGES.NAN);
     }
-    if (size < BREIDGE.MIN || size > BREIDGE.MAX) {
+    if (this.outOfRange(size)) {
       throw new Error(ERROR_MESSAGES.SIZE);
     }
+  },
+  isNumber(size) {
+    return Number.isInteger(size);
+  },
+  outOfRange(size) {
+    return Number(size) < BRIDGE.MIN || Number(size) > BRIDGE.MAX;
   },
 };
 
