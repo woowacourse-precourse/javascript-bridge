@@ -2,6 +2,7 @@ const InputView = require("./InputView");
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { Console } = require("@woowacourse/mission-utils");
 
 class App {
   #bridgeGame;
@@ -19,6 +20,10 @@ class App {
   }
 
   play() {}
+
+  quit() {
+    Console.close();
+  }
 
   increasePlayCount() {
     this.#playCount++;
