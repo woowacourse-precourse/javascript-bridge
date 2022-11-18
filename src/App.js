@@ -36,12 +36,13 @@ class App {
       input
     );
     if (isCorrectDirection) {
+      this.#bridge.moveCurrentPosition();
       if (this.#bridge.getIsLastPosition()) {
+        OutputView.printMap(this.#bridge.getCrossState(), true);
         console.log("다리 건너기 완료\n");
         return 0;
       }
-      this.#bridge.moveCurrentPosition();
-      console.log("다리 건너기 성공\n");
+      OutputView.printMap(this.#bridge.getCrossState(), true);
       return this.InputPositionUntilBridgeEnds();
     }
     console.log("다리 건너기 실패\n");

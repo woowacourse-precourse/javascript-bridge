@@ -11,11 +11,15 @@ class Bridge {
   }
 
   getIsLastPosition() {
-    return this.currentPosition === this.bridge.length - 1;
+    return this.currentPosition === this.bridge.length;
   }
 
   moveCurrentPosition() {
     this.currentPosition += 1;
+  }
+
+  getCrossState() {
+    return this.bridge.filter((v, i) => i < this.currentPosition);
   }
 }
 

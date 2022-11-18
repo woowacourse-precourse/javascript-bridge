@@ -9,7 +9,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(bridge, isFailed) {
+    const map = this.makeMapString(bridge);
+    if (isFailed) {
+    }
+    Console.print(`[${map[0].join("|")}]`);
+    Console.print(`[${map[1].join("|")}]`);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
@@ -20,6 +26,37 @@ const OutputView = {
 
   printStart() {
     Console.print(Guide.START);
+  },
+
+  makeMapString(bridge) {
+    const map = [];
+
+    map.push(this.makeUpMapString(bridge));
+    map.push(this.makeDownMapString(bridge));
+
+    return map;
+  },
+
+  makeUpMapString(bridge) {
+    const upMap = [];
+
+    for (let i = 0; i < bridge.length; i++) {
+      if (bridge[i] === "U") upMap.push(" O ");
+      if (bridge[i] === "D") upMap.push("   ");
+    }
+
+    return upMap;
+  },
+
+  makeDownMapString(bridge) {
+    const downMap = [];
+
+    for (let i = 0; i < bridge.length; i++) {
+      if (bridge[i] === "D") downMap.push(" O ");
+      if (bridge[i] === "U") downMap.push("   ");
+    }
+
+    return downMap;
   },
 };
 
