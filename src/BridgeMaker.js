@@ -12,15 +12,17 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     // 다리의 길이만큼의 배열 생성
     const ARRAY = new ArraySize(size);
-    let arrUp = ARRAY.getArr();
-    let arrDown = ARRAY.getArr();
     // 0,1 무작위 값 설정
-    let randomArr = ARRAY.getArr().map(
+    const randomArr = ARRAY.getArr().map(
       (element) => (element = generateRandomNumber())
     );
+    return randomArr;
+  },
+  changeRandomArray(randomArr) {
     //다리 생성
-    arrUp = randomArr.map((element) => (element === "1" ? "O" : " "));
-    arrDown = randomArr.map((element) => (element === "0" ? "O" : " "));
+    const arrUp = randomArr.map((element) => (element === "1" ? "U" : " "));
+    const arrDown = randomArr.map((element) => (element === "0" ? "D" : " "));
+    return [arrUp, arrDown];
   },
 };
 
