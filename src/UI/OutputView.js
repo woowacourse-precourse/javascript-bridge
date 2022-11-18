@@ -5,6 +5,13 @@ const { GAME_MESSAGE } = require('../constants/constants');
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+  gameStart() {
+    Console.print(GAME_MESSAGE.GAME_START);
+  },
+
+  gameResult() {
+    Console.print(GAME_MESSAGE.GAME_RESULT);
+  },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
