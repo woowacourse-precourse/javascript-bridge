@@ -11,6 +11,23 @@ class App {
     this.#bridgeGame = new BridgeGame();
     this.controller();
   }
+
+  controller() {
+    switch (this.#bridgeGame.getStatus()) {
+      case "start":
+        OutputView.printStart();
+        InputView.readBridgeSize(this.readBridgeSizeCallback);
+        break;
+      case "move":
+        InputView.readMoving(this.readMovingCallback);
+        break;
+      case "retry":
+        InputView.readGameCommand(this.readGameCommandCallback);
+        break;
+      case "end":
+        OutputView.printResult(this.#bridgeGame);
+    }
+  }
 }
 
 module.exports = App;
