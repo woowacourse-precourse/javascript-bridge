@@ -8,9 +8,14 @@ const Messages = require('./Messages');
 const InputView = {
   readBridgeSize() {
     Console.readLine(Messages.INPUT_BRIDGE_SIZE, (bridgeSize) => {
+      this.validateBridgeSize(bridgeSize);
       bridgeSize = Number(bridgeSize);
       Console.print('');
     });
+  },
+
+  validateBridgeSize(bridgeSize) {
+    if (!(bridgeSize >= 3 && bridgeSize <= 20)) throw new Error(Messages.BRIDGE_SIZE_ERROR);
   },
 
   /**
