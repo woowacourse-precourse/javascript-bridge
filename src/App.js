@@ -1,10 +1,12 @@
-const BridgeGame = require("./BridgeGame");
-const Operator = require("./operator");
+const Intercessor = require("./Intercessor");
 
 class App {
   play() {
-    Operator.startGame();
-    const bridge = Operator.bridgeMake();
+    Intercessor.startGame();
+    const bridge = Intercessor.bridgeMake();
+    Intercessor.matchMove(bridge);
+
+
   }
 }
 
