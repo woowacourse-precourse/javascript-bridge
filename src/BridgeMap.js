@@ -1,7 +1,32 @@
+const MapMaker = require('./MapMaker');
+
 class BridgeMap {
   #FIRST_MAP_SOURCE = { CORRECT: ' O ', INCORRECT: ' X ', EMPTY: '   ' };
 
   #MAP_SOURCE = { CORRECT: '| O ', INCORRECT: '| X ', EMPTY: '|   ' };
+
+  #isFirst = true;
+
+  #bridgeMap = MapMaker.makeMap();
+
+  cofirm() {
+    // const [up, down] = this.#bridgeMap;
+    console.log(this.#bridgeMap);
+  }
+
+  handleMap(boolean, input) {
+    const beforeMap = this.#bridgeMap;
+    // console.log(beforeMap, '저장된맵');
+    if (this.#isFirst) {
+      this.#bridgeMap = this.addFirstMap(boolean, input, beforeMap);
+      this.#isFirst = false;
+      return true;
+    }
+    if (!this.#isFirst) {
+      this.#bridgeMap = this.addMap(boolean, input, beforeMap);
+      return true;
+    }
+  }
 
   addFirstMap(boolean, input, beforeMap) {
     // this.#isFirst = false;
@@ -42,3 +67,15 @@ class BridgeMap {
 }
 
 module.exports = BridgeMap;
+
+const app = new BridgeMap();
+
+// console.log(up, down);
+// console.log(app.addFirstMap(true, 'D', [[], []]));
+// console.log(app.cofirm(), '시작');
+// console.log(app.confirmisFirst());
+app.handleMap(true, 'D');
+console.log(app.cofirm(), '하나추가');
+app.handleMap(false, 'U');
+console.log(app.cofirm(), '최종');
+console.log();
