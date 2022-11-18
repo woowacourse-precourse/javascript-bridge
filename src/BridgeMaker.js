@@ -33,14 +33,14 @@ const BridgeMaker = {
       userBridgeBottom.push(" ");
       console.log(userBridgeTop);
       console.log(userBridgeBottom);
-      return [userBridgeTop, userBridgeBottom]
+      return [userBridgeTop, userBridgeBottom];
     }
     if (moveInput === bridgeBottom[userBridge[0].length]) {
       userBridgeTop.push(" ");
       userBridgeBottom.push("O");
       console.log(userBridgeTop);
       console.log(userBridgeBottom);
-      return [userBridgeTop, userBridgeBottom]
+      return [userBridgeTop, userBridgeBottom];
     }
     if (moveInput === "U") {
       userBridgeTop.push("X");
@@ -52,7 +52,7 @@ const BridgeMaker = {
     }
     console.log(userBridgeTop);
     console.log(userBridgeBottom);
-    return [userBridgeTop, userBridgeBottom]
+    return [userBridgeTop, userBridgeBottom];
   },
 };
 

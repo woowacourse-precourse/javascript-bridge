@@ -1,5 +1,5 @@
 const { makeUserBridge } = require("./BridgeMaker");
-const { readGameCommand } = require('./InputView');
+const { readGameCommand } = require("./InputView");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -21,7 +21,11 @@ class BridgeGame {
       this.retry(this.mainBridge);
       return;
     }
-    this.userBridge = makeUserBridge(moveInput, this.userBridge, this.mainBridge);
+    this.userBridge = makeUserBridge(
+      moveInput,
+      this.userBridge,
+      this.mainBridge
+    );
     this.count++;
   }
 

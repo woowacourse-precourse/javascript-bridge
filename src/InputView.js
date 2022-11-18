@@ -26,10 +26,10 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (maveInput) => {
-        console.log("mainBridge", mainBridge)
-        console.log("bridgeGame", bridgeGame)
+        console.log("mainBridge", mainBridge);
+        console.log("bridgeGame", bridgeGame);
         bridgeGame.move(maveInput);
-        InputView.readMoving(mainBridge, bridgeGame)
+        InputView.readMoving(mainBridge, bridgeGame);
       }
     );
   },
@@ -43,14 +43,14 @@ const InputView = {
       (retryInput) => {
         if (retryInput === "R") {
           const newbridgeGame = new BridgeGame(mainBridge);
-          InputView.readMoving(mainBridge, newbridgeGame)
+          InputView.readMoving(mainBridge, newbridgeGame);
           return;
         }
         if (retryInput === "Q") {
-          const [bridgeTop, bridgeBottom] = mainBridge; 
-          Console.print("최종 게임 결과")
-          Console.print(bridgeTop)
-          Console.print(bridgeBottom)
+          const [bridgeTop, bridgeBottom] = mainBridge;
+          Console.print("최종 게임 결과");
+          Console.print(bridgeTop);
+          Console.print(bridgeBottom);
           return;
         }
       }
