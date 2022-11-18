@@ -13,12 +13,11 @@ const InputView = {
     Console.readLine(userInputMessage.ENTER_BRIDGE_LENGTH, (bridgeLength) => {
       try {
         this.validateBridgeSize(bridgeLength);
+        Console.print(bridgeLength);
       } catch (e) {
         Console.print(e);
         this.readBridgeSize();
       }
-
-      Console.print(bridgeLength);
     });
   },
 
@@ -32,8 +31,13 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(userInputMessage.ENTER_MOVE_DIRECTION, (movingDirection) => {
-      Console.print(movingDirection);
+      this.validateMovingDirection(movingDirection);
     });
+  },
+
+  validateMovingDirection(movingDirection) {
+    if (movingDirection !== 'U' && movingDirection !== 'D')
+      throw new Error(errorMessage.MOVE_DIRECTION);
   },
 
   /**
@@ -45,5 +49,7 @@ const InputView = {
     });
   },
 };
-InputView.readBridgeSize();
+
+InputView.readMoving();
+
 module.exports = InputView;
