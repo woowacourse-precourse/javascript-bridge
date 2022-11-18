@@ -18,9 +18,10 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', userMove => {
+  readMoving(callback) {
+    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', userMove => {
       validateUserMove(userMove);
+      callback(userMove);
     });
   },
 
