@@ -26,7 +26,12 @@ const InputView = {
   },
 
   readMoving(movingDirection) {
-    bridgeGame.move(movingDirection);
+    try {
+      bridgeGame.move(movingDirection);
+    } catch ({ message }) {
+      printMsg(message);
+      InputView.requestMoving();
+    }
   },
 
   readGameCommand() {},
