@@ -20,10 +20,12 @@
     - [ ] isValidCommand()
         R(재시작)과 Q(종료) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.
 
-- [ ] printGameStart() 
+- [x] printGameStart() 
+
     게임 시작 문구
 
 - [ ] printResult()
+
     게임 종료 문구
 
 - [ ] printMap()
