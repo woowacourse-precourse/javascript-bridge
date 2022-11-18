@@ -19,7 +19,8 @@ const { Console } = require("@woowacourse/mission-utils");
     const compareLength = this.userPickedArr.length - 1;
     this.moveIsUpCorrect(createBridge[compareLength], this.userPickedArr[compareLength]);
     this.moveIsDownCorrect(createBridge[compareLength], this.userPickedArr[compareLength]);
-    this.moveIsWrong(createBridge[compareLength], this.userPickedArr[compareLength]);
+    this.moveIsUpWrong(createBridge[compareLength], this.userPickedArr[compareLength]);
+    this.moveIsDownWrong(createBridge[compareLength], this.userPickedArr[compareLength]);
   }
 
   moveIsUpCorrect(createBridge, selectUpOrDown){
@@ -35,13 +36,13 @@ const { Console } = require("@woowacourse/mission-utils");
       this.userPickedUpOrDown[1].push("O")
     }
   }
-
-
-  moveIsWrong(createBridge, selectUpOrDown){
+  moveIsUpWrong(createBridge, selectUpOrDown){
     if(createBridge !== selectUpOrDown && selectUpOrDown == "U"){
       this.userPickedUpOrDown[0].push("X");
       this.userPickedUpOrDown[1].push(" ");
     }
+  }
+  moveIsDownWrong(createBridge, selectUpOrDown){
     if(createBridge !== selectUpOrDown && selectUpOrDown == "D"){
       this.userPickedUpOrDown[0].push(" ");
       this.userPickedUpOrDown[1].push("X");
