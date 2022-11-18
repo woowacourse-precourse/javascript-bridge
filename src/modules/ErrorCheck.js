@@ -1,7 +1,7 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 /**
  * 에러 처리
  */
-const MissionUtils = require("@woowacourse/mission-utils");
 
 // 에러 메세지 객체
 const errorObject = {
@@ -21,6 +21,15 @@ class ErrorCheck {
       MissionUtils.Console.close();
     }
   }
+  inputNumverErrorCheck(size) {
+    try {
+      if (size % 1) throw new Error(errorObject.Error2);
+    } catch (e) {
+      MissionUtils.Console.print(`[ERROR] : ${e.message}`);
+    } finally {
+      MissionUtils.Console.close();
+    }
+  }
   inputMovingErrorCheck(UD) {
     try {
       if (UD !== "U" && UD !== "D") throw new Error(errorObject.Error3);
@@ -32,7 +41,7 @@ class ErrorCheck {
   }
   inputRestartErrorCheck(RQ) {
     try {
-      if (RQ !== "U" && RQ !== "D") throw new Error(errorObject.Error4);
+      if (RQ !== "R" && RQ !== "Q") throw new Error(errorObject.Error4);
     } catch (e) {
       MissionUtils.Console.print(`[ERROR] : ${e.message}`);
     } finally {
