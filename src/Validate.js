@@ -27,7 +27,7 @@ const Validate = {
   },
 
   checkUserInput(userInput, answerBridge) {
-    if (userInput === answerBridge) {
+    if (userInput.toString() == answerBridge.toString()) {
       return true;
     } else {
       return false;

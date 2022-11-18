@@ -1,0 +1,2 @@
+ = new App();
+app.play();

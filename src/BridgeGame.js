@@ -50,6 +50,7 @@ class BridgeGame {
     this.attempts += 1;
     this.userBridge = [[], []];
     this.movingCount = 0;
+    this.userInput = [];
   }
 }
 

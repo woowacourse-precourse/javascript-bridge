@@ -43,12 +43,11 @@ const InputView = {
       } else {
         throw new Error(ERROR.MOVING_KEY);
       }
+      if (checkUserInput(bridgeGame.userInput, bridgeGame.answerBridge)) {
+        return OutputView.printResult(bridgeGame, '성공');
+      }
       if (bridgeGame.getMoveResult(key) === 'O') {
-        if (checkUserInput(bridgeGame.userInput)) {
-          OutputView.printResult(bridgeGame, '성공');
-        } else {
-          this.readMoving(bridgeGame);
-        }
+        this.readMoving(bridgeGame);
       } else {
         this.readGameCommand(bridgeGame);
       }
