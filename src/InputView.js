@@ -33,7 +33,7 @@ const InputView = {
     })
   },
   checkMovingInput(userSpace){
-    if(userSpace!=='U'||userSpace!=='D') throw "[ERROR] U,D만 가능합니다"
+    if(userSpace!=='U'||userSpace!=='D') throw "[ERROR] Only U,D accepted"
     return checkMovingInput
   },
   /**
