@@ -1,16 +1,18 @@
+const { ERROR_MESSAGE, GAME_NUMBER } = require('./utils/Constants');
+
 class Validation {
   static checkBridgeLength(bridgeLen) {
 
     if (Validation.isEmpty(bridgeLen)) {
-      throw new Error("[ERROR] 잘못된 입력값 입니다.");
+      throw new Error(ERROR_MESSAGE.form);
     }
 
     if (Validation.isNumber(bridgeLen)) {
-      throw new Error("[ERROR] 숫자가 아닌 값을 입력하였습니다. 3 이상 25 이하의 숫자를 입력해주세요.");
+      throw new Error(ERROR_MESSAGE.notNumber);
     }
 
     if (Validation.isInRange(bridgeLen)) {
-      throw new Error("[ERROR] 3 이상 20 이하의 숫자를 입력해주세요.");
+      throw new Error(ERROR_MESSAGE.range);
     }
 
   }
@@ -24,7 +26,7 @@ class Validation {
   }
 
   static isInRange(input) {
-    if (input < 3 || input > 20) return true;
+    if (input < GAME_NUMBER.min || input > GAME_NUMBER.max) return true;
   }
 
 }
