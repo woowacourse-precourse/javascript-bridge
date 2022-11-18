@@ -31,3 +31,4 @@
 
 ## OutputView
 - printMap() : InputView에서 파라미터로 넘겨준 bridgeArray를 받아서 사용자 화면에 뿌려줌
+ex) bridge가 5면 배열은 [1,1,0,1,1] 이런식으로 랜덤하게 생성됨 OutputView에서는 사용자가 U,D를 입력할 때 맞추면 O 틀리면 X로 한개씩 뿌려주는 기능이 있어야함
