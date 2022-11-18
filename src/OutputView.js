@@ -2,7 +2,7 @@
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const { Console } = require('@woowacourse/mission-utils');
-const { BRIDGE_MOVEMENT } = require("./constants");
+const { GAME } = require("./constants");
 
 const OutputView = {
   /**
@@ -14,14 +14,33 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
 
-  printMap(bridgeMoving) {
+  makeUpside(isSuccess, upMove) {
     const upSide = [];
+    for (let i = 0; i < upMove.length - 1; i += 1) {
+      upMove[i] ? upSide.push(BRIDGE_MOVEMENT.SUCCESS) : upSide.push(' ');
+    }
+    upMove[upMove.length - 1]
+      ? upSide.push(isSuccess ? BRIDGE_MOVEMENT.SUCCESS : BRIDGE_MOVEMENT.FAIL)
+      : upSide.push(" ");
+    return upSide;
+  },
+
+  makeDownside(isSuccess, downMove) {
     const downSide = [];
-    bridgeMoving.forEach((moving) => {
-      moving == BRIDGE_MOVEMENT.UP ? upSide.push("O") : upSide.push(' ');
-      moving == BRIDGE_MOVEMENT.DOWN ? downSide.push("O") : downSide.push(' ');
-    });
-    Console.print(`[ ${upSide.join(' | ')} ]`);
+    for (let i = 0; i < downMove.length - 1; i += 1) {
+      downMove[i] ? downSide.push(BRIDGE_MOVEMENT.SUCCESS) : downSide.push(' ');
+    }
+    downMove[downMove.length - 1]
+      ? downSide.push(
+          isSuccess ? BRIDGE_MOVEMENT.SUCCESS : BRIDGE_MOVEMENT.FAIL
+        )
+      : downSide.push(" ");
+    return downSide;
+  },
+
+  printMap([isSuccess, upMove, downMove]) {
+    Console.print(`[ ${this.makeUpside(isSuccess, upMove).join(" | ")} ]`);
+    Console.print(`[ ${this.makeDownside(isSuccess, downMove).join(" | ")} ]`);
   },
 
   /**
