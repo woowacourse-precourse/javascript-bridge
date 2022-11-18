@@ -1,6 +1,7 @@
 const Bridge = require('./models/Bridge');
 const BridgeGame = require('./models/BridgeGame');
 const isSuccess = require('./utils/isSuccess');
+const MovingValidation = require('./utils/MovingValidation');
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
 
@@ -20,6 +21,7 @@ class App {
   }
 
   inputMove(input) {
+    new MovingValidation(input);
     const isEnd = this.bridgeGame.move(input);
     const isWin = this.bridgeGame.isGameWin;
 

@@ -13,7 +13,8 @@ const InputView = {
       try {
         func1.call(this, input);
         InputView.readMoving.call(this, func2, func3);
-      } catch (error) {
+      }
+      catch (error) {
         MissionUtils.Console.print(error);
         MissionUtils.Console.close();
       }
@@ -25,16 +26,15 @@ const InputView = {
    */
   readMoving(func2, func3) {
     MissionUtils.Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
-      const [isEnd, isWin] = func2.call(this, input);
-
-      if (isWin) {
-        InputView.gameEnd();
+      try {
+        const [isEnd, isWin] = func2.call(this, input);
+        if (isWin) InputView.gameEnd();
+        else if (isEnd) InputView.readGameCommand.call(this, func3);
+        else InputView.readMoving.call(this, func2, func3);
       }
-      else if (isEnd) {
-        InputView.readGameCommand.call(this, func3);
-      }
-      else {
-        InputView.readMoving.call(this, func2, func3);
+      catch (error) {
+        MissionUtils.Console.print(error);
+        MissionUtils.Console.close();
       }
     });
   },
