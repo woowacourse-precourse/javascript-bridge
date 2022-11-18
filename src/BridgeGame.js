@@ -81,6 +81,7 @@ class BridgeGame {
    */
   retry() {
     this.initState();
+    this.#numberOfAttempt += 1;
     this.getMoveDirectionFromUser();
   }
 }
