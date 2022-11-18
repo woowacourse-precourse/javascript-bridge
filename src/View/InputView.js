@@ -65,7 +65,7 @@ const InputView = {
         callbackThree.call(this, input);
       } catch (err) {
         printError(err);
-        InputView.readGameCommand(callbackThree);
+        InputView.readGameCommand.bind(this)(callbackThree);
       }
     });
   },
