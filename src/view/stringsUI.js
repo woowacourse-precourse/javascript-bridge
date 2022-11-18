@@ -1,6 +1,6 @@
 const INPUT = {
   GET_SIZE: "\n다리의 길이를 입력해주세요.\n",
-  GET_MOVING: "\n이동할 칸을 선택해주세요. (위: U, 아래: D)",
+  GET_MOVING: "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
   GET_RETRY: "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
 };
 
@@ -21,8 +21,8 @@ const BRIDGE = {
   SIZE_MAX: 20,
 };
 const MOVING = {
-  UP: "U",
-  DOWN: "D",
+  U: 1,
+  D: 0,
   PASS: "O",
   FAIL: "X",
 };

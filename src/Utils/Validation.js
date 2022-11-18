@@ -12,8 +12,11 @@ class Validation {
     this.validate(isInRange, INPUT_VAL.SIZE_ERROR);
   }
 
-  inputMovement(string) {}
+  static inputMove(string) {
+    const isMove = string === "U" || string === "D";
+    this.validate(isMove, INPUT_VAL.MOVING_ERROR);
+  }
 
-  inputRetry(string) {}
+  static inputRetry(string) {}
 }
 module.exports = Validation;
