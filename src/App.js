@@ -1,5 +1,9 @@
+const OutputView = require('./OutputView');
+
 class App {
-  play() {}
+  play() {
+    OutputView.startGame();
+  }
 }
 
 module.exports = App;
