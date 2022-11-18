@@ -12,5 +12,10 @@ class Validation {
       throw ERROR_MESSAGE.MOVE_ERROR;
     }
   }
+  validateRestart(input) {
+    if (input !== "R" && input !== "Q") {
+      throw ERROR_MESSAGE.RESTART_ERROR;
+    }
+  }
 }
 module.exports = Validation;
