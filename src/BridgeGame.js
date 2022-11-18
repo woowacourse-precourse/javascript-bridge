@@ -7,6 +7,7 @@ class BridgeGame {
   #bridge = []
   #currentPosition = 0;
   #maxPosition = 0;
+  #isFinish = false;
 
   constructor(bridge) {
     BridgeValidator.checkBridge(bridge);
