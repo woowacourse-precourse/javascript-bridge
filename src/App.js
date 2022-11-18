@@ -7,9 +7,14 @@ const { printStart } = require('./View/OutputView');
 
 class App {
   #game;
+
   play() {
     printStart();
-    getInputs.bind(this)(this.createBridge, this.moveBridge, this.controlGame);
+    getInputs.bind(this)([
+      this.createBridge,
+      this.moveBridge,
+      this.controlGame,
+    ]);
   }
 
   createBridge(input) {
@@ -29,9 +34,10 @@ class App {
     ControlValidation(input);
     if (input == 'R') {
       this.#game.retry();
-      readMoving.call(this, this.moveBridge, this.controlGame);
+      readMoving.call(this, [this.moveBridge, this.controlGame]);
     } else this.gameEnd();
   }
+
   gameEnd() {
     this.#game.finalPrint();
     end();

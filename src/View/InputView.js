@@ -10,28 +10,21 @@ const MESSAGE = {
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  getInputs(callbackOne, callbackTwo, callbackThree) {
-    InputView.readBridgeSize.bind(this)(
-      callbackOne,
-      callbackTwo,
-      callbackThree
-    );
+  getInputs(callbackArr) {
+    InputView.readBridgeSize.bind(this)(callbackArr);
   },
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(callbackOne, callbackTwo, callbackThree) {
+  readBridgeSize(callbackArr) {
+    const [one, two, three] = callbackArr;
     MissionUtils.Console.readLine(MESSAGE.INPUT_LENGTH, (input) => {
       try {
-        callbackOne.call(this, input);
-        InputView.readMoving.call(this, callbackTwo, callbackThree);
+        one.call(this, input);
+        InputView.readMoving.call(this, [two, three]);
       } catch (err) {
         printError(err);
-        InputView.readBridgeSize.bind(this)(
-          callbackOne,
-          callbackTwo,
-          callbackThree
-        );
+        InputView.readBridgeSize.bind(this)(callbackArr);
       }
     });
   },
@@ -39,19 +32,16 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(callbackTwo, callbackThree) {
+  readMoving(callbackArr) {
+    const [one, two] = callbackArr;
     MissionUtils.Console.readLine(MESSAGE.INPUT_DIRECTION, (input) => {
       try {
-        const [MOVE, NOT_END] = callbackTwo.call(this, input);
-        if (MOVE) {
-          if (NOT_END)
-            InputView.readMoving.call(this, callbackTwo, callbackThree);
-        } else {
-          InputView.readGameCommand.call(this, callbackThree);
-        }
+        const [MOVE, NOT_END] = one.call(this, input);
+        if (MOVE && NOT_END) InputView.readMoving.call(this, callbackArr);
+        else InputView.readGameCommand.call(this, two);
       } catch (err) {
         printError(err);
-        InputView.readMoving.bind(this)(callbackTwo, callbackThree);
+        InputView.readMoving.bind(this)(callbackArr);
       }
     });
   },
