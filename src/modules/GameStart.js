@@ -2,6 +2,7 @@ const BridgeGame = require("../BridgeGame");
 
 class GameStart {
   #toWalkCount = 0;
+  #brigeArr = [];
   constructor(upOrDown, arrUp, arrDown) {
     const BRIDGEGAME = new BridgeGame();
     upOrDown.forEach((move) => {
@@ -10,8 +11,13 @@ class GameStart {
         ? BRIDGEGAME.move(arrUp, this.#toWalkCount, move)
         : BRIDGEGAME.move(arrDown, this.#toWalkCount, move);
       this.#toWalkCount += 1;
-      console.log(arrUp, arrDown);
     });
+    this.#brigeArr.push(arrUp);
+    this.#brigeArr.push(arrDown);
+  }
+  getBrigeArr() {
+    console.log(this.#brigeArr);
+    return this.#brigeArr;
   }
 }
 
