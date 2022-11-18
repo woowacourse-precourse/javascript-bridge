@@ -9,9 +9,11 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
   },
+  qutoes: ["error", "single"],
   rules: {
     "max-depth": ["error", 2],
     "max-lines-per-function": ["error", 10],
+
     "prettier/prettier": [
       "error",
       {
