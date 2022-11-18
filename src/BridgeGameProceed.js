@@ -1,17 +1,25 @@
+const { Console } = require('@woowacourse/mission-utils');
+
 const OutputView = require('./view/OutputView');
 const InputView = require('./view/InputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const Validation = require('./Validation');
+const BridgeGame = require('./BridgeGame');
 
 class BridgeGameProceed {
 #buildBridge
-// #count
+#round
+
+    constructor() {
+        this.BridgeGame = new BridgeGame();
+    }
 
     start() {
         OutputView.printStart();
+        this.#round = 0;
         InputView.readBridgeSize((bridgeLength) => {
-            // Validation
+            Validation.bridgeLength(bridgeLength);
             this.#buildBridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator);
             console.log(this.#buildBridge);
             this.game();
@@ -20,8 +28,8 @@ class BridgeGameProceed {
 
     game() {
         InputView.readMoving((nextStep) => {
-            // Validation
-            // OutputView.printMap(nextStep)호출
+            Validation.nextStepValue(nextStep);
+            OutputView.printMap(nextStep ,this.#buildBridge[round]);
             // #buildBridge 해당 다리 상태 저장
             // 실패했을 경우
                 // fail() 호출
@@ -34,21 +42,17 @@ class BridgeGameProceed {
     }
 
     fail() {
-        // InputView.readGameCommand(retryOrNot)
-            // retry
-                // game() 호출. 원래 사용하던 다리로 시작
-            // not
-                // OutputView.printResult()
-                // OutputView.printMap()
-                // OutputView.printFail()
-                // OutputView.printprintAttemptCount()
+        InputView.readGameCommand((retryOrNot) => {
+            this.BridgeGame.retry(retryOrNot);
+        })     
     }
 
     win() {
-        // OutputView.printResult()
+        OutputView.printResult()
         // OutputView.printMap()
-        // OutputView.printWin()
-        // OutputView.printprintAttemptCount()
+        OutputView.printWin()
+        OutputView.printAttemptCount(this.#round)
+        Console.close();
     }
 }
 
