@@ -3,8 +3,10 @@ const {Console} = require("@woowacourse/mission-utils");
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
-  up: [],
-  down: [],
+  thread: {
+    up: [],
+    down: []
+  },
 
   start () {
     Console.print("다리 건너기 게임을 시작합니다.\n");
@@ -20,20 +22,20 @@ const OutputView = {
       bridgeGame.user[bridgeGame.moveCount - 1] === bridgeGame.bridge[bridgeGame.moveCount - 1] ? "O" : "X"
     )
     if(bridgeGame.user[bridgeGame.moveCount - 1] === "U") {
-      this.up.push(result);
-      this.down.push(" ");
+      this.thread.up.push(result);
+      this.thread.down.push(" ");
     } else if (bridgeGame.user[bridgeGame.moveCount - 1] === "D") {
-      this.up.push(" ");
-      this.down.push(result);
+      this.thread.up.push(" ");
+      this.thread.down.push(result);
     }
     
-    Console.print(`[ ${this.up.join(" | ")} ]`)
-    Console.print(`[ ${this.down.join(" | ")} ]`)
+    Console.print(`[ ${this.thread.up.join(" | ")} ]`)
+    Console.print(`[ ${this.thread.down.join(" | ")} ]`)
   },
 
   clearThread() {
-    this.up = [];
-    this.down = [];
+    this.thread.up = [];
+    this.thread.down = [];
   },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
