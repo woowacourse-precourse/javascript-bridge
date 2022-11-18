@@ -14,7 +14,7 @@ class App {
     OutputView.printHi();
 
     const bridgeSize = await InputView.readBridgeSize();
-    this.game = new BridgeGame(bridgeSize);
+    this.game = new BridgeGame(+bridgeSize);
     this.playOneStep();
   }
 
