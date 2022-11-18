@@ -1,19 +1,24 @@
 const Bridge = require('./Bridge');
+const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
 class App {
+  randomBirdge;
+  bridgeGame;
+
   play() {
     OutputView.printGameStart();
     InputView.readBridgeSize(this.makeBridge, this.func2, this.func3);
   }
 
   makeBridge(input) {
-    new Bridge(Number(input));
+    this.randomBirdge = new Bridge(Number(input));
+    this.bridgeGame = new BridgeGame(this.randomBirdge);
   }
 
   func2(input) {
-    console.log(input);
+    this.bridgeGame.move(input);
   }
 
   func3(input) {

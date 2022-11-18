@@ -9,6 +9,13 @@ class Bridge {
     this.makeRandomBridge(input);
   }
 
+  checkMove(letter, index) {
+    if (this.#bridge[index] === letter) {
+      return [letter, true];
+    }
+    return [letter, false];
+  }
+
   makeRandomBridge(input) {
     const bridgeGenerator = BridgeRandomNumberGenerator.generate;
     const randomBridge = BridgeMaker.makeBridge(input, bridgeGenerator);
