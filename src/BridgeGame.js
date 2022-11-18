@@ -2,6 +2,7 @@ const OutputView = require("./OutputView");
 const InputView = require("./InputView");
 const BridgeMaker = require("./BridgeMaker");
 const generateRandomNumber = require("./BridgeRandomNumberGenerator").generate;
+const { close } = require("./utils");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -13,6 +14,11 @@ class BridgeGame {
 
   getBridgeLengthFromUser() {
     InputView.readBridgeSize(this.makeBridge.bind(this));
+  }
+
+  initState() {
+    this.#currentMap = { upperPart: [], lowerPart: [] };
+    this.#myPosition = 0;
   }
 
   makeBridge(bridgeSize) {
@@ -35,6 +41,15 @@ class BridgeGame {
    */
   move(direction) {
     // 위쪽이고 옳은 길 이면? 틀린 길 이면? 아래쪽이고 옳은 길이면? 틀린 길 이면?'
+    //console.log("이동시작", this.isValidPath(direction), this.#myPosition, this.#currentMap);
+    if (this.isValidPath(direction)) {
+      if (direction === 1) this.#currentMap.upperPart.push("O");
+      this.fillBlankUnselectedPath(Number(!direction));
+    }
+  }
+
+  fillBlankUnselectedPath(direction) {
+    direction === 1 ? this.#currentMap.upperPart.push(" ") : this.#currentMap.lowerPart.push(" ");
   }
 
   /**
