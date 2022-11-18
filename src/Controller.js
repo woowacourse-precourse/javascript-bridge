@@ -18,6 +18,10 @@ class Controller {
     return isSafe;
   }
 
+  giveAnswer(answer) {
+    this.BridgeGame.retry(answer);
+  }
+
   orderEnd() {
     OutputView.printResult();
   }

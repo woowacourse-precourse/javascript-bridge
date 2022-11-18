@@ -30,10 +30,17 @@ const FAIL = Object.freeze({
   false: "X",
 });
 
+const COMMAND = Object.freeze({
+  RETRY: "R",
+  QUIT: "Q",
+});
+
 const ERROR = Object.freeze({
   BRIDGE_SIZE: "[ERROR] 3~20 사이의 숫자만 입력 가능합니다. 다시 입력해주세요.",
   MOVE_ORDER:
     "[ERROR] 위: U, 아래: D 두 방향키에 대한 입력만 가능합니다. 다시 입력해주세요.",
+  GAMECOMMAND:
+    "[ERROR] 재시도: R, 종료: Q 두 응답에 대한 입력만 가능합니다. 다시 입력해주세요.",
 });
 
-module.exports = { MANAGER, SIZE, ORDER, SPACE, PASS, FAIL, ERROR };
+module.exports = { MANAGER, SIZE, ORDER, SPACE, PASS, FAIL, COMMAND, ERROR };

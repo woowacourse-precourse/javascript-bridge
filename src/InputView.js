@@ -6,6 +6,7 @@ const BridgeMaker = require("./BridgeMaker");
 const { Console } = require("@woowacourse/mission-utils");
 const { MANAGER } = require("./utils/constants");
 const Controller = require("./Controller");
+const GameCommand = require("./error/GameCommand");
 
 const controller = new Controller();
 let bridge = [];
@@ -36,7 +37,8 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(`\n${MANAGER.ASK_RETRY}\n`, (answer) => {
-      new MoveSpace(answer);
+      new GameCommand(answer);
+      controller.giveAnswer(answer);
     });
   },
 };
