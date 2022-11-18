@@ -10,7 +10,7 @@ class BridgeGame {
   constructor(size) {
     this.#bridge = makeBridge(size, generate);
     this.userBridge = [];
-    this.retryCount = 1;
+    this.tryCount = 1;
   }
 
   /**
@@ -63,12 +63,19 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(input) {
-    this.retryCount += 1;
+    this.tryCount += 1;
     if (input === 'R') {
       this.userBridge = [];
       return true;
     }
     return false;
+  }
+
+  getResult() {
+    const bridge = this.makeMiddleBridge();
+    const result = this.isValidateSquare() ? '성공' : '실패';
+    const count = this.tryCount;
+    return { bridge, result, count };
   }
 }
 
