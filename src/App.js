@@ -4,8 +4,7 @@ const { readBridgeSize, readMoving, end } = require('./InputView');
 class App {
   #game;
   play() {
-    readBridgeSize.call(
-      this,
+    readBridgeSize.bind(this)(
       this.createBridge,
       this.moveBridge,
       this.controlGame
