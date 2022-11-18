@@ -44,7 +44,17 @@ class App {
     if (gameState === GameState.VICTORY) this.endBridgeGame();
   }
 
-  requestRetryBridgeGame() {}
+  requestRetryBridgeGame() {
+    try {
+      const command = InputView.readGameCommand();
+      Validation.validateGameCommand(command);
+      if (command === 'R') this.retryBridgeGame();
+      if (command === 'Q') this.endBridgeGame();
+    } catch (err) {
+      Console.print(err);
+      this.requestRetryBridgeGame();
+    }
+  }
 
   retryBridgeGame() {}
 

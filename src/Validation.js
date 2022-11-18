@@ -15,6 +15,12 @@ const Validation = {
       throw new Error(ErrorMsg.INVALID_INPUT_MOVING);
     }
   },
+
+  validateGameCommand(command) {
+    if (['R', 'Q'].includes(command) === false) {
+      throw new Error(ErrorMsg.INVALID_INPUT_GAME_COMMAND);
+    }
+  },
 };
 
 module.exports = Validation;
