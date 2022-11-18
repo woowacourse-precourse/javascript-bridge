@@ -54,7 +54,25 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommandReadLineHandler(line, bridgeGame) {
+    try {
+      if (line === "Q") printResult(bridgeGame, false);
+      else if (line === "R") bridgeGame.retry();
+      else throw new Error("[ERROR] 입력은 R 또는 Q입니다.");
+    } catch (error) {
+      wConsole.print(error);
+      InputView.readGameCommand(bridgeGame);
+    }
+  },
+
+  readGameCommand(bridgeGame) {
+    wConsole.readLine(
+      "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (line) => {
+        InputView.readGameCommandReadLineHandler(line, bridgeGame);
+      }
+    );
+  },
 };
 
 module.exports = InputView;
