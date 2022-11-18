@@ -25,7 +25,19 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    let move;
+    Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
+      try{
+        this.validatePlayerMove(input);
+        move = input;
+      }catch (e){
+        Console.print(e.message);
+        this.readMoving();
+      }
+    });
+    return move;
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
@@ -36,6 +48,14 @@ const InputView = {
     if(isNaN(input) || input<3 || input >20) {
       let err = new Error("InputError : BridgeSize ");
       err.message = "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.";
+      throw err;
+    }
+  },
+
+  validatePlayerMove(input) {
+    if(input !== 'U' && input !== 'D') {
+      let err = new Error("InputError : PlayerMove ");
+      err.message = "[ERROR] (위: U, 아래: D) 를 입력해주세요.";
       throw err;
     }
   }
