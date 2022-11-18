@@ -28,7 +28,7 @@ const InputView = {
       (maveInput) => {
         console.log("mainBridge", mainBridge);
         console.log("bridgeGame", bridgeGame);
-        bridgeGame.move(maveInput);
+        bridgeGame.move(maveInput, InputView.readGameCommand);
         InputView.readMoving(mainBridge, bridgeGame);
       }
     );
