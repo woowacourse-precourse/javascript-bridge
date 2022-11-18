@@ -23,6 +23,7 @@ class App {
   }
 
   getBridgeSize(size) {
+    this.validataSize(size);
     this.#size = Number(size);
     this.#moving = [];
     MissionUtils.Console.print("");
@@ -31,6 +32,13 @@ class App {
     this.selectMoving();
   }
 
+  validataSize(size) {
+    if (isNaN(size)) {
+      throw "[ERROR]";
+    } else if (size < 3 || size > 20) {
+      throw "[ERROR]";
+    }
+  }
   getBridge() {
     this.#bridge = BridgeMaker.makeBridge(
       this.#size,
