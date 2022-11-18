@@ -4,6 +4,7 @@ class GameStart {
   #toWalkCount = 0;
   #brigeArr = [];
   #BRIDGEGAME;
+  #answer = false;
   constructor(upOrDown, arrUp, arrDown) {
     this.#BRIDGEGAME = new BridgeGame();
     this.changeOX(upOrDown, arrUp, arrDown);
@@ -13,6 +14,9 @@ class GameStart {
   getBrigeArr() {
     return this.#brigeArr;
   }
+  getAnswer() {
+    return this.#answer;
+  }
   changeOX(upOrDown, arrUp, arrDown) {
     upOrDown.some((move) => {
       // 위로 or 아래로
@@ -21,7 +25,7 @@ class GameStart {
         : this.#BRIDGEGAME.move(arrDown, this.#toWalkCount, move);
       this.#toWalkCount += 1;
       if (arrUp.includes("X") || arrDown.includes("X")) {
-        this.#BRIDGEGAME.retry(arrUp, arrDown);
+        this.#answer = this.#BRIDGEGAME.retry();
         return true;
       }
     });
