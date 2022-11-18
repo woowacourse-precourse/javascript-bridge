@@ -16,7 +16,6 @@ class CurrBridge {
   }
 
   canMove(direction, winningBridge) {
-    console.log(this.#upperBridge.length);
     const isSame = winningBridge.isSameDirection(
       direction,
       this.#upperBridge.length
@@ -40,6 +39,10 @@ class CurrBridge {
 
   getBridge() {
     return [this.#upperBridge, this.#lowerBridge];
+  }
+
+  isLast(winningBridge) {
+    return winningBridge.isSameLength(this.#upperBridge);
   }
 }
 

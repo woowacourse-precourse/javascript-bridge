@@ -31,12 +31,15 @@ class BridgeGame {
 
   move(direction) {
     this.#tryingCount += 1;
-    console.log(this.currBridge.getBridge());
     const canMove = this.currBridge.canMove(direction, this.winningBridge);
     this.currBridge.makeBridge(direction, canMove);
 
     const [upperBridge, lowerBridge] = this.currBridge.getBridge();
     this.controller.printMoving(canMove, upperBridge, lowerBridge);
+  }
+
+  isFinished() {
+    return this.currBridge.isLast(this.winningBridge);
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

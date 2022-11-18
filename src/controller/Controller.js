@@ -38,6 +38,7 @@ class Controller {
 
   printMoving(canMove, upperBridge, lowerBridge) {
     OutputView.printMap(upperBridge, lowerBridge);
+    if (this.bridgeGame.isFinished()) return this.printResult();
 
     if (canMove) this.inputMoving();
     if (!canMove) this.retry();
@@ -46,6 +47,10 @@ class Controller {
   // - 재시작 또는 종료 여부 입력 받는다.
   retry() {
     console.log('다시 시작할꺼에요?');
+  }
+
+  printResult() {
+    console.log('끝이에요!');
   }
 }
 

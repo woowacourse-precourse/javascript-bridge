@@ -26,6 +26,10 @@ class WinningBridge {
   isSameDirection(currDirection, currOrder) {
     return this.#winningBridge[currOrder] === currDirection;
   }
+
+  isSameLength(bridge) {
+    return bridge.length === this.#winningBridge.length;
+  }
 }
 
 module.exports = WinningBridge;
