@@ -48,6 +48,12 @@ class BridgeGame {
       this.retrycount++;
     }
   }
+
+  init() {
+    this.userBridge = [[], []];
+    this.count = 0;
+    this.hasNext = true;
+  }
 }
 
 module.exports = BridgeGame;
