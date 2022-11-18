@@ -15,7 +15,12 @@ const InputView = {
   readBridgeSize() {
     let mainBridge = [];
     Console.readLine("다리의 길이를 입력해주세요.", (bridgeSize) => {
-      validateInput(bridgeSize);
+      try {
+        validateInput(bridgeSize);
+      } catch(error) {
+        Console.print(error)
+        InputView.readBridgeSize();
+      }
       mainBridge = makeBridge(bridgeSize, generate); //기준 다리
       const bridgeGame = new BridgeGame(mainBridge); //인스턴스 생성
       InputView.readMoving(mainBridge, bridgeGame); //움직임 입력 받기
