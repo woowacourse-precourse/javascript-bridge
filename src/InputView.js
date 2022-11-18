@@ -19,16 +19,24 @@ const InputView = {
         const inputNum = Number(inputString);
         this.validateBridge(inputNum);
         resolve(inputNum);
-        Console.close();
       });
     })
   },
 
+  validateMove(move){
+    Console.print(move);
+    if(!(move === "U" || move ==="D")) throw new Error("[ERROR] 이동할 칸을 잘못 입력하셨습니다.");  
+  },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() { },
+
+  readMoving() {
+    return new Promise((resolve, _) => {
+      Console.readLine("이동할 칸을 선택해주세요. (위:U, 아래:D)\n", (inputMove) => {
+        this.validateMove(inputMove);
+        resolve(inputMove);
+      });
+    })
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
