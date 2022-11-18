@@ -143,18 +143,18 @@ describe('Validator checkBridgeIncludes 테스트', () => {
   });
 });
 
-describe('Validator checkDirectionLength 테스트', () => {
+describe('Validator checkPlayerInputLength 테스트', () => {
   const validInput = ['U', 'D'];
   validInput.forEach(validInputValue => {
     test(`${validInputValue} ${MESSAGE_ACCEPT}`, () => {
-      expect(() => Validator.checkDirectionLength(validInputValue)).not.toThrow('[ERROR]');
+      expect(() => Validator.checkPlayerInputLength(validInputValue)).not.toThrow('[ERROR]');
     });
   });
 
   const inValidInput = ['UD', 'DU'];
   inValidInput.forEach(invalidInputValue => {
     test(`${invalidInputValue} ${MESSAGE_EXCEPT}`, () => {
-      expect(() => Validator.checkDirectionLength(invalidInputValue)).toThrow('[ERROR]');
+      expect(() => Validator.checkPlayerInputLength(invalidInputValue)).toThrow('[ERROR]');
     });
   });
 });
@@ -171,6 +171,22 @@ describe('Validator checkDirectionIncludes 테스트', () => {
   inValidInput.forEach(invalidInputValue => {
     test(`${invalidInputValue} ${MESSAGE_EXCEPT}`, () => {
       expect(() => Validator.checkDirectionIncludes(invalidInputValue)).toThrow('[ERROR]');
+    });
+  });
+});
+
+describe('Validator checkSelectIncludes 테스트', () => {
+  const validInput = ['R', 'Q'];
+  validInput.forEach(validInputValue => {
+    test(`${validInputValue} ${MESSAGE_ACCEPT}`, () => {
+      expect(() => Validator.checkSelectIncludes(validInputValue)).not.toThrow('[ERROR]');
+    });
+  });
+
+  const inValidInput = [1, 0, true, 'a', undefined, NaN, [], {}, 'U', 'D'];
+  inValidInput.forEach(invalidInputValue => {
+    test(`${invalidInputValue} ${MESSAGE_EXCEPT}`, () => {
+      expect(() => Validator.checkSelectIncludes(invalidInputValue)).toThrow('[ERROR]');
     });
   });
 });
