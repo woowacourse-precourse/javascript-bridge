@@ -25,7 +25,7 @@ class App {
     this.#bridgeGame.move(playerMoving);
     if (this.checkIsSuccess()) {
       return OutputView.printResult(
-        this.getBridgeMap(),
+        this.#bridgeGame.getBridgeMap(),
         this.#bridgeGame.getStatus()
       );
     }
@@ -55,13 +55,9 @@ class App {
       return this.askMove();
     }
     return OutputView.printResult(
-      this.getBridgeMap(),
+      this.#bridgeGame.getBridgeMap(),
       this.#bridgeGame.getStatus()
     );
-  }
-
-  getBridgeMap() {
-    return { upperRow: this.#bridgeGame.U, lowerRow: this.#bridgeGame.D };
   }
 }
 
