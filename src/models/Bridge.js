@@ -8,6 +8,10 @@ class Bridge {
   isCrossed(moving, location) {
     return this.#data[location] === moving;
   }
+
+  size() {
+    return this.#data.length;
+  }
 }
 
 module.exports = Bridge;

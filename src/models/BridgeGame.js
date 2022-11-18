@@ -49,6 +49,10 @@ class BridgeGame {
     this.#location = 0;
   }
 
+  isWin() {
+    return this.#bridge.size() === this.#location;
+  }
+
   static #isSizeInRange(size) {
     return size >= BRIDGE_RULE.LENGTH_MIN && size <= BRIDGE_RULE.LENGTH_MAX;
   }

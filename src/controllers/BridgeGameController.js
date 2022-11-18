@@ -33,6 +33,10 @@ class BridgeGameController {
       InputView.readGameCommand(this.#onGameCommandSubmit.bind(this));
       return;
     }
+    if (this.#game.isWin()) {
+      this.#runQuit();
+      return;
+    }
 
     InputView.readMoving(this.#onMovingSubmit.bind(this));
   }
