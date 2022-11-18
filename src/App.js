@@ -9,17 +9,21 @@ class App {
 
   #bridgeSize;
   #bridge;
+  #move;
 
   constructor(){
     this.#bridgeSize = 0;
     this.#bridge = [];
+    this.#move = "s";
   }
   
   async play() {
+
     InputView.gameStart();
     this.#bridgeSize = await InputView.readBridgeSize();
     this.#bridge = makeBridge(this.#bridgeSize, generate);
     Console.print(this.#bridge);
+    this.#move = await InputView.readMoving();
 
   }
 
