@@ -13,8 +13,8 @@ const InputView = {
     let BRIDGE_LENGTH = 0
     MissionUtils.Console.readLine("",(bridgeLength) => {
       // 유효성 검사 필요 : bridgeLength 가 숫자가 아닌 경우
-      Checking.bridgeNum(bridgeLength)
-      Checking.bridgeNumCheck(bridgeLength)
+      if(Checking.bridgeNum(bridgeLength) === 'ERROR') { this.readBridgeSize() }
+      if(Checking.bridgeNumCheck(bridgeLength) === 'ERROR') {this.readBridgeSize()}
       BRIDGE_LENGTH = bridgeLength
     })
     return BRIDGE_LENGTH
@@ -27,7 +27,7 @@ const InputView = {
     let USER_MOVE = ''
     MissionUtils.Console.readLine("",(userMove) => {
       // 유효성 검사 필요 : userMove가 U,D가 아닌 경우
-      Checking.userMoveCheck(userMove)
+      if(Checking.userMoveCheck(userMove) === "ERROR") {this.readMoving()}
       USER_MOVE = userMove
     })
     return USER_MOVE
@@ -39,7 +39,7 @@ const InputView = {
   readGameCommand() {
     let USER_CHOICE = ''
     MissionUtils.Console.readLine("",(userChoice) => {
-      Checking.userRetryCheck(userChoice)
+      if(Checking.userRetryCheck(userChoice) === "ERROR") {this.readMovingg()}
       USER_CHOICE = userChoice
     })
     return USER_CHOICE
