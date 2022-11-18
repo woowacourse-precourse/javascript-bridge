@@ -94,7 +94,11 @@ class BridgeController {
   gameEndPoint(passBridgeResult) {
     OutputView.lineBreak();
 
-    OutputView.printResult(passBridgeResult, "성공", bridgeGame.getTryCount());
+    OutputView.printResult({
+      bridgeGameResult: passBridgeResult,
+      successOrFail: "성공",
+      tryCount: bridgeGame.getTryCount(),
+    });
   }
 
   checkUserRetry(userRetry, bridge, passBridgeResult) {
@@ -118,16 +122,24 @@ class BridgeController {
 
   judgementRetry(bridge, passBridgeResult, userRetry) {
     if (bridgeGame.retry(userRetry) === true) {
-      bridgeGame.reset();
-      this.getUserMove(bridge);
+      this.gameRetry(bridge);
     }
     if (bridgeGame.retry(userRetry) === false) {
-      OutputView.printResult(
-        passBridgeResult,
-        "실패",
-        bridgeGame.getTryCount()
-      );
+      this.renderResult(passBridgeResult);
     }
+  }
+
+  gameRetry(bridge) {
+    bridgeGame.reset();
+    this.getUserMove(bridge);
+  }
+
+  renderResult(passBridgeResult) {
+    OutputView.printResult({
+      bridgeGameResult: passBridgeResult,
+      successOrFail: "실패",
+      tryCount: bridgeGame.getTryCount(),
+    });
   }
 }
 
