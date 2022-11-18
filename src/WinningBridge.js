@@ -8,20 +8,23 @@ class WinningBridge {
 
   constructor(size) {
     this.#size = this.validate(size);
-    // this.WinningBridge();
   }
 
   validate(size) {
-    Validation.checkType(size);
+    Validation.checkNumberType(size);
     Validation.checkRange(size);
   }
 
   makeWinningBridge(size) {
-    const bridge = BridgeMaker.makeBridge(size, () =>
-      BridgeRandomNumberGenerator.generate()
+    this.#winningBridge = BridgeMaker.makeBridge(
+      size,
+      BridgeRandomNumberGenerator.generate
     );
-    console.log(bridge);
-    // console.log(this.#winningBridge);
+    console.log(this.#winningBridge);
+  }
+
+  isSameDirection(currDirection, currOrder) {
+    return this.#winningBridge[currOrder] === currDirection;
   }
 }
 
