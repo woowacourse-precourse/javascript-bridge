@@ -2,6 +2,16 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  validateBridgeSize(size) {
+    if (this.isInvalidBridgeSize(size)) {
+      throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+    }
+  }
+
+  isInvalidBridgeSize(size) {
+    return Number.isNaN(size) || !Number.isInteger(size) || size < 3 || size > 20;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
