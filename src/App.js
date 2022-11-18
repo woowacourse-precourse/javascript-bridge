@@ -1,8 +1,6 @@
 const BridgeGame = require("./BridgeGame");
-const BridgeMaker = require("./BridgeMaker");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
-const { generateRandomNumber } = require("./util/randomNumber");
 const { validateBrigeSize } = require("./util/validate");
 
 class App {
@@ -24,8 +22,7 @@ class App {
     const size = +sizeStr;
 
     validateBrigeSize(size);
-    this.bridgeGame.setSize(size);
-    this.bridgePath = BridgeMaker.makeBridge(size, generateRandomNumber);
+    this.bridgeGame.setSize(size).setBridge();
 
     this.proceedGame();
   }
