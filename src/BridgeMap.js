@@ -1,10 +1,7 @@
 const { MOVE_INDEX } = require('./Constants');
 
 const BridgeMap = {
-  map: [
-    ['O', ' '],
-    [' ', 'X'],
-  ],
+  map: [[], []],
   generate(answer, userMove) {
     userMove.forEach((step, index) => {
       if (answer[index] === step) {
