@@ -9,10 +9,15 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    Console.readLine(CONSOLE_MESSAGE.enterSize, (sizeStr) => {
-      validateBrigeSize(+sizeStr);
-    });
+  readBridgeSize(bridgeGame) {
+    Console.readLine(CONSOLE_MESSAGE.enterSize, (sizeStr) =>
+      InputView.enterBridgeSize(+sizeStr, bridgeGame)
+    );
+  },
+
+  enterBridgeSize(size, bridgeGame) {
+    validateBrigeSize(size);
+    bridgeGame.setSize(size);
   },
 
   /**
