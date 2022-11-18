@@ -4,7 +4,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
 const GameStart = require("./modules/GameStart");
 class App {
-  size = 0;
+  size;
   tryGame = 1;
   #answer;
   constructor() {
@@ -14,7 +14,6 @@ class App {
   play() {
     // 이동할 칸(U,D)을 입력한다.
     const upOrDown = InputView.readMoving(this.size);
-
     // 다리 생성
     const randomArr = BridgeMaker.makeBridge(
       this.size,
@@ -24,8 +23,11 @@ class App {
     // 게임 시작
     const GAMESTART = new GameStart(upOrDown, arrUp, arrDown);
     this.#answer = GAMESTART.getAnswer();
+    const bridgeArr = GAMESTART.getBrigeArr();
+    //게임 재시작
     this.restart(this.#answer);
   }
+
   restart(answer) {
     if (answer) {
       this.play();
