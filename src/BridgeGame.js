@@ -1,6 +1,7 @@
 const BridgeMaker = require("./BridgeMaker.js")
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js")
 const OutputView = require("./OutputView.js")
+const Notice = require("./NoticeMessage.js")
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -17,10 +18,15 @@ class BridgeGame {
     console.log(this.bridge)
   }
   checkBridgeCorrect(input){
-    if(this.bridge[this.number] == input){
+    if(this.bridge[this.number] === input){
       return true
     }
-
+  }
+  checkBridgeAll(trynum){
+    if(this.bridge.length === this.number){
+      const result = Notice.SUCCESS
+      OutputView.printResult(this.upside,this.downside,result, trynum)
+    }
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
