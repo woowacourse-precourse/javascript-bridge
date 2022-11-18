@@ -7,7 +7,7 @@ class BridgeGame {
     this.bridge = new Bridge();
   }
   maker () {
-    this.bridge.makeBridge(this.move.bind(this));
+    this.bridge.createPattern(this.move.bind(this));
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드

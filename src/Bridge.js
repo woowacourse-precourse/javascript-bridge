@@ -14,7 +14,7 @@ class Bridge {
     this.#history = { up: [], down: [] };
   }
 
-  makeBridge (moveGame) {
+  createPattern (moveGame) {
     InputView.readBridgeSize(moveGame, this.setPattern.bind(this), BridgeMaker.makeBridge);
   }
 
