@@ -19,7 +19,7 @@ const OutputView = {
 
   printStart() {
     MissionUtils.Console.print(MESSAGES.GAME.START);
-  },  
+  },
 };
 
 module.exports = OutputView;
