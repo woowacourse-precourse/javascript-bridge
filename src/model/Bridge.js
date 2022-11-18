@@ -21,6 +21,13 @@ class Bridge {
     return this.#downsideBridge;
   }
 
+  getLength() {
+    const lengthOrigin = this.#originalBridge.length;
+    const lengthAnother = this.#upsideBridge.length;
+
+    return lengthOrigin === lengthAnother;
+  }
+
   setResult(direction, index) {
     if (direction === "U") {
       this.setUpSideBridge(direction, index);
@@ -68,6 +75,12 @@ class Bridge {
 
   setDownsideBridgeEmpty() {
     this.#downsideBridge.push(" N ");
+  }
+
+  includesX() {
+    const upLast = this.#upsideBridge.includes(" X ");
+    const downLast = this.#downsideBridge.includes(" X ");
+    return [upLast, downLast];
   }
 }
 

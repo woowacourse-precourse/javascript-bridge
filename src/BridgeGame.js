@@ -24,7 +24,9 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
+    this.#state.tried += 1;
     const index = this.getBridge().length;
+
     this.#bridge.setResult(direction, index);
   }
   /**
@@ -32,33 +34,11 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    OutputView.printLine("리트라이입니다.");
+    
+  }
 }
 
 module.exports = BridgeGame;
 
-// setUpsideBridgeValue (direction,index) {
-//   if(direction === this.getOriginalBridge()[index]) {
-//     this.#upsideBridge.push("O");
-//   }
-//   if(direction !== this.getOriginalBridge()[index]) {
-//     this.#upsideBridge.push("X");
-//   }
-// }
-
-// setDownsideBridgeValue(direction,index) {
-//   if(direction === this.getOriginalBridge()[index]) {
-//     this.#downsideBridge.push("O");
-//   }
-//   if(direction !== this.getOriginalBridge()[index]) {
-//     this.#downsideBridge.push("X");
-//   }
-// }
-
-// setUpsideBridgeEmpty() {
-//   this.#upsideBridge.push(" ");
-// }
-
-// setDownsideBridgeEmpty() {
-//   this.#downsideBridge.push(" ")
-// }
