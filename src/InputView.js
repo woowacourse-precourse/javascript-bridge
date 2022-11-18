@@ -3,7 +3,8 @@
  */
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker=require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const OutputView=require('./OutputView')
 
 const InputView = {
   printGameStart(){
@@ -35,12 +36,12 @@ const InputView = {
    */
   readMoving(bridgeArray) {
     MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n',(userSpace)=>{
-      this.checkMovingInput(userSpace)
+      this.checkMovingInput(userSpace,bridgeArray)
     })
   },
-  checkMovingInput(userSpace){
+  checkMovingInput(userSpace,bridgeArray){
     if(userSpace!=='U'&& userSpace!=='D') throw "[ERROR] Only U,D accepted"
-    return userSpace
+    OutputView.printMap(bridgeArray)
   },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
