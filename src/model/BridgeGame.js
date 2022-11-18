@@ -22,19 +22,19 @@ class BridgeGame {
    */
   move(answer, upOrdown) {
     this.answer = answer; 
-    (answer[this.movecnt] === upOrdown) ? this.checkUporDown(upOrdown, 'O') : this.checkUporDown(upOrdown, 'X');
+    (answer[this.movecnt] === upOrdown) ? this.checkUporDown(upOrdown, DEFAULTS.CAN_MOVE) : this.checkUporDown(upOrdown, DEFAULTS.CANT_MOVE);
     this.movecnt += 1;
     return [this.upList, this.downList, this.movecnt];
   }
 
   checkUporDown(upOrdown, mark){
     if (upOrdown === DEFAULTS.UP){
-      (this.upList.length !== 0) ? this.upList.push('|', mark) : this.upList.push(mark);
-      (this.downList.length !== 0) ? this.downList.push('|', ' ') : this.downList.push(' ');
+      (this.upList.length !== 0) ? this.upList.push(DEFAULTS.SEPARATOR, mark) : this.upList.push(mark);
+      (this.downList.length !== 0) ? this.downList.push(DEFAULTS.SEPARATOR, DEFAULTS.SPACE) : this.downList.push(DEFAULTS.SPACE);
     }
     if (upOrdown === DEFAULTS.DOWN){
-      (this.upList.length !== 0) ? this.upList.push('|', ' ') : this.upList.push(' ');
-      (this.downList.length !== 0) ? this.downList.push('|', mark) : this.downList.push(mark);
+      (this.upList.length !== 0) ? this.upList.push(DEFAULTS.SEPARATOR, DEFAULTS.SPACE) : this.upList.push(DEFAULTS.SPACE);
+      (this.downList.length !== 0) ? this.downList.push(DEFAULTS.SEPARATOR, mark) : this.downList.push(mark);
     }
   }
 

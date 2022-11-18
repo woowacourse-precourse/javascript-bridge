@@ -26,11 +26,11 @@ class Validation{
   }
 
   isRestartRequired(cnt_move, gameLog, answer){
-    if (cnt_move == answer.length && gameLog[0][gameLog[0].length-1] !== 'O' && gameLog[1][gameLog[1].length-1] !== 'O'){
+    if (cnt_move == answer.length && gameLog[0][gameLog[0].length-1] !== DEFAULTS.CAN_MOVE && gameLog[1][gameLog[1].length-1] !== DEFAULTS.CAN_MOVE){
       bridgeGame.retry();
       return true;
     }
-    if (gameLog[0][gameLog[0].length-1] === 'X' || gameLog[1][gameLog[1].length-1] === 'X'){
+    if (gameLog[0][gameLog[0].length-1] === DEFAULTS.CANT_MOVE || gameLog[1][gameLog[1].length-1] === DEFAULTS.CANT_MOVE){
       bridgeGame.retry();
       return true;
     }
@@ -38,7 +38,7 @@ class Validation{
   }
 
   isSuccess(cnt_move, gameLog, answer){
-    if (cnt_move == answer.length && gameLog[0][gameLog[0].length-1] !== 'X' && gameLog[1][gameLog[1].length-1] !== 'X'){
+    if (cnt_move == answer.length && gameLog[0][gameLog[0].length-1] !== DEFAULTS.CANT_MOVE && gameLog[1][gameLog[1].length-1] !== DEFAULTS.CANT_MOVE){
       return true;
     }
     return false;

@@ -1,4 +1,3 @@
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { DEFAULTS } = require("./utils/Constants");
 
 /**

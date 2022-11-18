@@ -1,7 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const {CONSOLELINE} = require('../utils/Constants');
+const {CONSOLELINE, DEFAULTS} = require('../utils/Constants');
 const validation = require('../utils/Validation');
 const OutputView = require('./OutputView');
 
@@ -70,7 +70,7 @@ const InputView = {
       } catch(err){
         return this.readGameCommand();
       }
-      restart === 'R' ? this.readMoving(answer, 0) : OutputView.printResult(gameLog, CONSOLELINE.FAIL_RESULT, true);
+      restart === DEFAULTS.RESTART ? this.readMoving(answer, 0) : OutputView.printResult(gameLog, CONSOLELINE.FAIL_RESULT, true);
     })
   },
 };
