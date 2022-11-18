@@ -8,11 +8,19 @@ class BridgeGame {
   #bridge;
   #userPos;
   #isSuccess;
+  #userAttempt;
+  #isGameOver;
 
   constructor() {
     this.#bridge = [];
     this.#isSuccess = false;
     this.#userPos = 0;
+    this.#userAttempt = 1;
+    this.#isGameOver = false;
+  }
+
+  getGameOver() {
+    return this.#isGameOver;
   }
 
   /**
@@ -21,13 +29,14 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(userMove) {
-    console.log('현재 idx: ', this.#userPos);
     this.checkMove(this.#bridge[this.#userPos], userMove);
     if (!this.#isSuccess) {
       this.#userPos = 0;
+      this.#userAttempt++;
       return;
     }
     this.#userPos++;
+    this.isGameOver();
     return !!this.#isSuccess;
   }
 
@@ -41,11 +50,28 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#userPos = 0;
+    this.#isGameOver = false;
+  }
 
   init(bridgeSize) {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     console.log('set bridge array: ',this.#bridge);
+  }
+
+  isGameOver() {
+    if (this.#bridge.length === this.#userPos + 1) {
+      this.#isGameOver = true;
+    }
+  }
+
+  end() {
+    if (this.#isGameOver) {
+      return ['성공', this.#userAttempt];
+    } else {
+      return ['실패', this.#userAttempt-1];
+    }
   }
 }
 

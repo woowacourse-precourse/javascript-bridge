@@ -1,5 +1,6 @@
 const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 
 class App {
 
@@ -16,17 +17,28 @@ class App {
 
   userInputMove() {
     InputView.readMoving(inputMove => {
-      if (!this.bridgeGame.move(inputMove)) {
+      const isGameOver = this.bridgeGame.getGameOver();
+      const isPass = this.bridgeGame.move(inputMove);
+      if (!isPass) {
         this.userInputEnd();
-      } else {
-        this.userInputMove();
+        return;
+      } else if (isPass && isGameOver) {
+        OutputView.printResult(this.bridgeGame.end());
+        return;
       }
+      this.userInputMove();
     });
   }
 
   userInputEnd() {
-    InputView.readGameCommand();
-    // 추가 구현
+    InputView.readGameCommand(inputEnd => {
+      if (inputEnd === 'Q') {
+        OutputView.printResult(this.bridgeGame.end());
+      } else if (inputEnd === 'R') {
+        this.bridgeGame.retry();
+        this.userInputMove();
+      }
+    });
   }
 }
 
