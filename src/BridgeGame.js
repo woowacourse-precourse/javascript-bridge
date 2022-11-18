@@ -15,12 +15,10 @@ class BridgeGame {
    */
   index = 0;
   realBridge = [[], []];
-  cnt = 0;
 
   moveIsU(move) {
     this.move = move;
     if (this.move === "U") {
-      this.cnt += 1;
       if (this.bridge[this.index] === this.move) {
         this.realBridge[0].push("O");
         this.realBridge[1].push(" ");
@@ -38,7 +36,6 @@ class BridgeGame {
 
   moveIsD(move) {
     this.move = move;
-    this.cnt += 1;
     if (this.bridge[this.index] === this.move) {
       this.realBridge[1].push("O");
       this.realBridge[0].push(" ");
@@ -59,7 +56,12 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(move) {
+    this.realBridge[0].pop();
+    this.realBridge[1].pop();
+    this.index -= 1;
+    this.moveIsU(move);
+  }
 }
 
 module.exports = BridgeGame;

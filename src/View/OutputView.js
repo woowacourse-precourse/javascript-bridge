@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { MESSAGE } = require("../Utils/constant");
+const { MESSAGE, ERROR } = require("../Utils/constant");
 const BridgeGame = require("../BridgeGame");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -23,14 +23,20 @@ const OutputView = {
   },
 
   checkBridge(bridgeGame, array, bridge, size) {
-    if (this.count === size) {
+    if (
+      (bridgeGame.realBridge[0].length === size &&
+        bridgeGame.realBridge[0][bridgeGame.realBridge[0].length - 1] ===
+          "O") ||
+      (bridgeGame.realBridge[0].length === size &&
+        bridgeGame.realBridge[1][bridgeGame.realBridge[1].length - 1] === "O")
+    ) {
       return this.printResult();
     }
     if (array[0][array[0].length - 1] === "O") {
-      // 성공
-      this.count += 1;
+      this.isSucces = "성공";
       let move = "";
       MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
+        this.count += 1;
         move = answer;
         bridgeGame.moveIsU(move);
         bridgeGame.realBridge.map((x) =>
@@ -39,20 +45,12 @@ const OutputView = {
         this.checkBridge(bridgeGame, bridgeGame.realBridge, bridge, size);
       });
     }
-    if (array[0][array[0].length - 1] === "X") {
-      MissionUtils.Console.readLine(MESSAGE.INPUT_RETRY_OR_QUIT, (answer) => {
-        if (answer === "R") {
-        }
-        if (answer === "Q") {
-          this.isSucces = "실패";
-          this.printResult();
-        }
-      });
-    }
+
     if (array[1][array[1].length - 1] === "O") {
-      this.count += 1;
+      this.isSucces = "성공";
       let move = "";
       MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
+        this.count += 1;
         move = answer;
         bridgeGame.moveIsU(move);
         bridgeGame.realBridge.map((x) =>
@@ -61,15 +59,57 @@ const OutputView = {
         this.checkBridge(bridgeGame, bridgeGame.realBridge, bridge, size);
       });
     }
-    if (array[1][array[1].length - 1] === "X") {
+
+    if (array[0][array[0].length - 1] === "X") {
+      this.isSucces = "실패";
       MissionUtils.Console.readLine(MESSAGE.INPUT_RETRY_OR_QUIT, (answer) => {
+        this.retryOrQuitValidate(answer);
         if (answer === "R") {
+          let move = "";
+          MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
+            this.count += 1;
+            move = answer;
+            bridgeGame.retry(move);
+            bridgeGame.realBridge.map((x) => {
+              MissionUtils.Console.print(`[ ${x.join(" | ")} ]`);
+            });
+            this.checkBridge(bridgeGame, bridgeGame.realBridge, bridge, size);
+          });
         }
         if (answer === "Q") {
-          this.isSucces = "실패";
           this.printResult();
         }
       });
+    }
+
+    if (array[1][array[1].length - 1] === "X") {
+      this.isSucces = "실패";
+      MissionUtils.Console.readLine(MESSAGE.INPUT_RETRY_OR_QUIT, (answer) => {
+        this.retryOrQuitValidate(answer);
+        if (answer === "R") {
+          let move = "";
+          MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
+            this.count += 1;
+            move = answer;
+            bridgeGame.retry(move);
+            bridgeGame.realBridge[0].pop();
+            bridgeGame.realBridge[1].pop();
+            bridgeGame.realBridge.map((x) => {
+              MissionUtils.Console.print(`[ ${x.join(" | ")} ]`);
+            });
+            this.checkBridge(bridgeGame, bridgeGame.realBridge, bridge, size);
+          });
+        }
+        if (answer === "Q") {
+          this.printResult();
+        }
+      });
+    }
+  },
+
+  retryOrQuitValidate(answer) {
+    if (answer !== "R" && answer !== "Q") {
+      throw new Error(ERROR.RETRY_OR_QUIT);
     }
   },
 
