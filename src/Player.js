@@ -13,10 +13,9 @@ class Player {
 
   /**
    * @param {string} moving
-   * @param {boolean} isCorrect
+   * @param {string} mark O / X
    */
-  markOX(moving, isCorrect) {
-    const mark = isCorrect ? MARKING.CORRECT : MARKING.WRONG;
+  markOX(moving, mark) {
     moving === 'U' ? this.markU(mark) : this.markD(mark);
   }
 

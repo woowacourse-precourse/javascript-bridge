@@ -4,6 +4,7 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const Player = require('./Player');
 const StatusGenerator = require('./StatusGenerator');
+const { MARKING } = require('./utils/const');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -33,8 +34,9 @@ class BridgeGame {
 
     const isCorrect = this.#bridge[currentStep] === moving;
     const isLast = currentStep === this.#bridge.length - 1;
+    const mark = isCorrect ? MARKING.CORRECT : MARKING.WRONG;
 
-    this.#player.markOX(moving, isCorrect);
+    this.#player.markOX(moving, mark);
     this.#player.setStep(currentStep + 1);
 
     return StatusGenerator.generate(isCorrect, isLast);
