@@ -12,9 +12,26 @@ class App {
 
   play() {
     OutputView.start();
-    InputView.readBridgeSize(this.bridgeGame.setbridge.bind(this));
-    
+    this.initialize();
   }
+
+  initialize() {
+    InputView.readBridgeSize(this.makeBridge.bind(this));
+  }
+
+  makeBridge(bridgeSize) {
+    this.bridgeGame.setBridge(bridgeSize);
+    this.go();
+  }
+
+  go() {
+    InputView.readMoving(this.moveUser.bind(this));
+  }
+
+  moveUser(direction) {
+    this.bridgeGame.move(direction);
+  }
+
 }
 
 const app = new App();
