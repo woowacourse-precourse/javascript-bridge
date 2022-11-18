@@ -9,41 +9,6 @@ const OutputView = {
     MissionUtils.Console.print(START_STR);
   },
 
-  mapMaker(bridgeGame) {
-    if (bridgeGame.isOkWay) {
-      OutputView.drawMap(
-        bridgeGame.bridgeMap,
-        bridgeGame.bridge[bridgeGame.progressCnt - 1],
-        "O"
-      );
-    } else {
-      OutputView.drawMap(
-        bridgeGame.bridgeMap,
-        OutputView.upsideDown(bridgeGame.bridge[bridgeGame.progressCnt - 1]),
-        "X"
-      );
-    }
-    OutputView.printMap(OutputView.closeMap({ ...bridgeGame.bridgeMap }));
-  },
-
-  drawMap(bridgeMap, way, check) {
-    if (way == "U") {
-      bridgeMap.up = bridgeMap.up + ` ${check} |`;
-      bridgeMap.down = bridgeMap.down + "   |";
-      return bridgeMap;
-    }
-    bridgeMap.up = bridgeMap.up + "   |";
-    bridgeMap.down = bridgeMap.down + ` ${check} |`;
-    return bridgeMap;
-  },
-
-  upsideDown(way) {
-    if (way == "U") {
-      return "D";
-    }
-    return "U";
-  },
-
   closeMap(bridgeMap) {
     bridgeMap.up = bridgeMap.up.substring(0, bridgeMap.up.length - 1) + "]";
     bridgeMap.down =

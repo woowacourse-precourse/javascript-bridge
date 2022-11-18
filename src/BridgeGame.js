@@ -28,6 +28,7 @@ class BridgeGame {
   move(userSelectValue) {
     this.progressCnt += 1;
     this.checkCorrectWay(userSelectValue);
+    this.mapMaker();
   }
 
   checkCorrectWay(userSelectValue) {
@@ -43,6 +44,36 @@ class BridgeGame {
     if (this.progressCnt == this.bridge.length) {
       this.finishGame = true;
     }
+  }
+
+  mapMaker() {
+    if (this.isOkWay) {
+      this.drawMap(this.bridgeMap, this.bridge[this.progressCnt - 1], "O");
+    } else {
+      this.drawMap(
+        this.bridgeMap,
+        this.upsideDown(this.bridge[this.progressCnt - 1]),
+        "X"
+      );
+    }
+  }
+
+  drawMap(bridgeMap, way, check) {
+    if (way == "U") {
+      bridgeMap.up = bridgeMap.up + ` ${check} |`;
+      bridgeMap.down = bridgeMap.down + "   |";
+      return bridgeMap;
+    }
+    bridgeMap.up = bridgeMap.up + "   |";
+    bridgeMap.down = bridgeMap.down + ` ${check} |`;
+    return bridgeMap;
+  }
+
+  upsideDown(way) {
+    if (way == "U") {
+      return "D";
+    }
+    return "U";
   }
 
   /**

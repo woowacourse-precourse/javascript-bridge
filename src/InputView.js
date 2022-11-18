@@ -38,7 +38,7 @@ const InputView = {
   readMoving(bridgeGame) {
     MissionUtils.Console.readLine(INPUT_USER_GO, (selectBridge) => {
       bridgeGame.move(this.userSelectValueTreater(selectBridge));
-      OutputView.mapMaker(bridgeGame);
+      OutputView.printMap(OutputView.closeMap({ ...bridgeGame.bridgeMap }));
       if (bridgeGame.finishGame) {
         OutputView.printResult(true);
         return;
