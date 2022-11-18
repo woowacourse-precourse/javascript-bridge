@@ -1,4 +1,3 @@
-const { DIRECTION } = require('./constant');
 const Validator = require('./Validator');
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -11,7 +10,6 @@ class BridgeGame {
    */
   move(direction, bridge) {
     Validator.directionValidityCheck(direction);
-
     return direction === bridge;
   }
 

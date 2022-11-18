@@ -18,17 +18,12 @@ class GameController {
   askBridgeSize() {
     const sizeCallback = (size) => {
       try {
-        this.tryBridgeSize(size);
+        this.tryMakeBridge(size);
       } catch (error) {
         this.catchHandler(error, this.askBridgeSize);
       }
     };
     InputView.readBridgeSize(sizeCallback);
-  }
-
-  printCurMap() {
-    const curMap = this.#gameService.printCurMap();
-    OutputView.printMap(curMap, false);
   }
 
   isDone() {
@@ -39,7 +34,7 @@ class GameController {
   askDirection() {
     const directionCallback = (direction) => {
       try {
-        this.tryAskDirection(direction);
+        this.tryMovePlayer(direction);
       } catch (error) {
         this.catchHandler(error, this.askDirection);
       }
@@ -67,14 +62,14 @@ class GameController {
     this.#gameService.printGameResult();
   }
 
-  tryBridgeSize(size) {
+  tryMakeBridge(size) {
     this.#gameService.makeBridge(size);
     this.askDirection();
   }
 
-  tryAskDirection(direction) {
+  tryMovePlayer(direction) {
     const isRightChoice = this.#gameService.movePlayer(direction);
-    this.printCurMap();
+    this.#gameService.printCurMap();
     isRightChoice ? this.isDone() : this.askRetry();
   }
 

@@ -30,7 +30,7 @@ class GameService {
 
   printCurMap() {
     const curMap = this.#bridge.getBridgeMap();
-    return Object.values(curMap);
+    OutputView.printMap(curMap, false);
   }
 
   checkGameComplete() {
