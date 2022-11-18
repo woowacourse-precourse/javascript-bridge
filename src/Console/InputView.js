@@ -14,7 +14,7 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT.BRIDGE_LENGTH, (message) => {
       returnValue = message;
     });
-    BridgeValidator.checkBridgeLength(
+    BridgeValidator.checkInputBridgeLength(
       message,
       BRIDGE_LENGTH_MIN,
       BRIDGE_LENGTH_MAX,
