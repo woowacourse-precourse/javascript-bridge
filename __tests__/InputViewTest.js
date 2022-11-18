@@ -30,4 +30,10 @@ describe("InputView 객체 테스트", () => {
     expect(InputView.readMoving()).resolves.toBe("U");
     expect(spy).toHaveBeenCalledTimes(4);
   });
+
+  test("유효한 재시도 여부 값이 입력될 때까지 예외를 발생시키고 유효한 값을 반환한다.", () => {
+    mockReadLine(["2", "r", "R"]);
+    expect(InputView.readGameCommand()).resolves.toBe("R");
+    expect(spy).toHaveBeenCalledTimes(2);
+  });
 });
