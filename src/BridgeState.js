@@ -1,6 +1,6 @@
 const BridgeState = {
   userBridge: [],
-  numberOfAttempts: 0,
+  numberOfAttempts: 1,
 
   addBridgeFromUser(input) {
     return this.userBridge.push(input);

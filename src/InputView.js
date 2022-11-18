@@ -9,6 +9,7 @@ const Validate = require('./utils/Validate');
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
+  userBridge: BridgeState.userBridge,
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -31,41 +32,42 @@ const InputView = {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (movePosition) => {
       try {
         Validate.validateMovePosition(movePosition);
-        BridgeState.addBridgeFromUser(movePosition);
-        const userBridge = BridgeState.userBridge;
-        InputView.readMovingControler(size, bridge, userBridge);
+        InputView.movingControler(size, bridge, movePosition);
       } catch (error) {
         OutputView.printErrorMessage(error) || InputView.readMoving(bridge, size);
       }
     });
   },
 
-  readMovingControler(size, bridge, userBridge) {
+  movingControler(size, bridge, movePosition) {
+    BridgeState.addBridgeFromUser(movePosition);
     const bridgeGame = new BridgeGame(bridge);
-    const moveBridge = bridgeGame.move(userBridge);
+    const moveBridge = bridgeGame.move(this.userBridge);
     const drawBridge = bridgeGame.draw(moveBridge);
     OutputView.printMap(drawBridge);
-    if (drawBridge[0].includes('X') || drawBridge[1].includes('X')) {
-      return InputView.readGameCommand(bridge, size);
-    }
-    if (bridge.length === userBridge.length) return console.log('done');
-    return InputView.readMoving(bridge, size);
+    this.startNextStep(drawBridge, bridge, size);
   },
 
+  startNextStep(drawBridge, bridge, size) {
+    if (drawBridge[0].includes('X') || drawBridge[1].includes('X')) {
+      return InputView.readGameCommand(drawBridge, bridge, size);
+    }
+
+    return InputView.readMoving(bridge, size);
+  },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge, size) {
+  readGameCommand(drawBridge, bridge, size) {
     Console.readLine(
       '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
       (input) => {
         try {
           Validate.validateRetryOfQuit(input);
           if (input === 'R') {
-            new BridgeGame(bridge).retry();
+            this.userBridge = new BridgeGame(bridge).retry(this.userBridge);
             InputView.readMoving(bridge, size);
           }
-          //종료 로직 작성
         } catch (error) {
           OutputView.printErrorMessage(error) || InputView.readGameCommand(bridge, size);
         }
