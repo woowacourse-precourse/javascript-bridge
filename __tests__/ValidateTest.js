@@ -20,4 +20,8 @@ describe("Validate Object Test", () => {
   test("입력된 값이 R 또는 Q가 아닌 경우 에러를 반환한다.", () => {
     expect(() => Validate.isCorrectRetry("B")).toThrow("[ERROR]");
   });
+
+  test("전달된 값이 undefined인 경우 에러를 반환한다.", () => {
+    expect(() => Validate.isUndefined(undefined)).toThrow("[ERROR]");
+  });
 });
