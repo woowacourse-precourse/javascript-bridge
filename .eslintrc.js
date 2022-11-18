@@ -16,5 +16,6 @@ module.exports = {
     'no-undef': 0,
     'no-new': 0,
     'max-depth': ['error', 2],
+    'max-lines-per-function': ['error', 10],
   },
 };
