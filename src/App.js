@@ -1,6 +1,7 @@
 const BridgeGame = require("./BridgeGame");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const { validateBrigeSize } = require("./util/validate");
 
 class App {
   bridgeGame = null;
@@ -13,7 +14,12 @@ class App {
     this.bridgeGame = new BridgeGame();
 
     OutputView.printStart();
-    InputView.readBridgeSize(this.bridgeGame);
+    InputView.readBridgeSize(this.enterBridgeSizeByCB.bind(this));
+  }
+
+  enterBridgeSizeByCB(sizeStr) {
+    validateBrigeSize(+sizeStr);
+    this.bridgeGame.setSize(+sizeStr);
   }
 }
 
