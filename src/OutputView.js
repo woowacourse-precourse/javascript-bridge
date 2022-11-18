@@ -9,24 +9,32 @@ const OutputView = {
     MissionUtils.Console.print(START_STR);
   },
 
-  mapMaker(progressCnt, isOkWay, bridge) {
-    let bridgeMap = {
-      up: "[",
-      down: "[",
-    };
-    for (var i = 0; i <= progressCnt - 2; i++) {
-      bridgeMap = OutputView.drawMap(bridgeMap, bridge[i], "O");
-    }
-    if (isOkWay) {
-      bridgeMap = OutputView.drawMap(bridgeMap, bridge[progressCnt - 1], "O");
+  mapMaker(bridgeGame) {
+    if (bridgeGame.isOkWay) {
+      OutputView.drawMap(
+        bridgeGame.bridgeMap,
+        bridgeGame.bridge[bridgeGame.progressCnt - 1],
+        "O"
+      );
     } else {
-      bridgeMap = OutputView.drawMap(
-        bridgeMap,
-        OutputView.upsideDown(bridge[progressCnt - 1]),
+      OutputView.drawMap(
+        bridgeGame.bridgeMap,
+        OutputView.upsideDown(bridgeGame.bridge[bridgeGame.progressCnt - 1]),
         "X"
       );
     }
-    return OutputView.printMap(OutputView.closeMap(bridgeMap));
+    OutputView.printMap(OutputView.closeMap({ ...bridgeGame.bridgeMap }));
+  },
+
+  drawMap(bridgeMap, way, check) {
+    if (way == "U") {
+      bridgeMap.up = bridgeMap.up + ` ${check} |`;
+      bridgeMap.down = bridgeMap.down + "   |";
+      return bridgeMap;
+    }
+    bridgeMap.up = bridgeMap.up + "   |";
+    bridgeMap.down = bridgeMap.down + ` ${check} |`;
+    return bridgeMap;
   },
 
   upsideDown(way) {
@@ -43,21 +51,10 @@ const OutputView = {
     return bridgeMap;
   },
 
-  drawMap(bridgeMap, way, check) {
-    if (way == "U") {
-      bridgeMap.up = bridgeMap.up + ` ${check} |`;
-      bridgeMap.down = bridgeMap.down + "   |";
-      return bridgeMap;
-    }
-    bridgeMap.up = bridgeMap.up + "   |";
-    bridgeMap.down = bridgeMap.down + ` ${check} |`;
-    return bridgeMap;
-  },
-
   printMap(bridgeMap) {
     MissionUtils.Console.print(bridgeMap.up);
     MissionUtils.Console.print(bridgeMap.down);
-    return bridgeMap;
+    return;
   },
 
   /**

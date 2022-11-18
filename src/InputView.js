@@ -31,38 +31,25 @@ const InputView = {
       const bridgeGame = new Game.BridgeGame(
         BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate)
       );
-
       InputView.readMoving(bridgeGame);
     });
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
   readMoving(bridgeGame) {
     MissionUtils.Console.readLine(INPUT_USER_GO, (selectBridge) => {
       bridgeGame.move(this.userSelectValueTreater(selectBridge));
-      const userPrint = OutputView.mapMaker(
-        bridgeGame.latestProgressCnt,
-        bridgeGame.isOkWay,
-        bridgeGame.bridge
-      );
-
+      OutputView.mapMaker(bridgeGame);
       if (bridgeGame.finishGame) {
         OutputView.printResult(true);
         return;
       }
       if (!bridgeGame.isOkWay) {
-        //죽었을때
         InputView.readGameCommand(bridgeGame);
       }
       InputView.readMoving(bridgeGame);
     });
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand(bridgeGame) {
     MissionUtils.Console.readLine(INPUT_USER_DECISION, (userDecision) => {
       userDecisionValidator(userDecision);
