@@ -11,6 +11,26 @@ const InputView = {
       startGame(bridgeLength)
     );
   },
+
+  /**
+   * 사용자가 이동할 칸을 입력받는다.
+   */
+  readMoving(moveOne) {
+    Console.readLine(
+      '이동할 칸을 선택해주세요. (위: U, 아래: D)',
+      (direction) => moveOne(direction)
+    );
+  },
+
+  /**
+   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   */
+  readGameCommand(checkRetry) {
+    Console.readLine(
+      '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
+      (command) => checkRetry(command)
+    );
+  },
 };
 
 module.exports = InputView;
