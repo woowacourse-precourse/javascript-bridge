@@ -3,8 +3,7 @@ const Validation = require("../src/Validation");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
-const { makeBridge } = require("../src/BridgeMaker");
-const { bridgeGameStart } = require("../src/OutputView");
+const BridgeGame = require("../src/BridgeGame");
 
 describe(`bridgeSize 입력값 타당성 테스트`, () => {
   test.each([["0"], ["-1"], ["21"]])(
@@ -92,4 +91,46 @@ describe(`userMove 입력값 타당성 테스트`, () => {
       }).toThrow();
     }
   );
+});
+
+describe(`유저 이동 결과 판단 테스트`, () => {
+  test(`U을 입력했을 때 유저가 다리 건너기에 실패하면 이중 배열에 그 결과값을 저장한다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    bridgeGame.fail("U");
+    expect(bridgeGame.getResult()).toEqual([["X"], [` `]]);
+  });
+
+  test(`U을 입력했을 때 유저가 다리 건너기에 성공하면 이중 배열에 그 결과값을 저장한다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    bridgeGame.pass("U");
+    expect(bridgeGame.getResult()).toEqual([["O"], [` `]]);
+  });
+
+  test(`D을 입력했을 때 유저가 다리 건너기에 실패하면 이중 배열에 그 결과값을 저장한다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    bridgeGame.fail("D");
+    expect(bridgeGame.getResult()).toEqual([[` `], ["X"]]);
+  });
+
+  test(`D을 입력했을 때 유저가 다리 건너기에 성공하면 이중 배열에 그 결과값을 저장한다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    bridgeGame.pass("D");
+    expect(bridgeGame.getResult()).toEqual([[` `], ["O"]]);
+  });
+
+  test(`bridge 와 userMove를 입력 받았을 때 통과/실패 를 판단할 수 있다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    const bridge = ["U", "D", "U"];
+    const userMove = "U";
+
+    expect(bridgeGame.move(bridge, userMove)).toBeTruthy();
+  });
+
+  test(`bridge 와 userMove를 입력 받았을 때 통과/실패 를 판단할 수 있다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    const bridge = ["D", "U", "U"];
+    const userMove = "U";
+
+    expect(bridgeGame.move(bridge, userMove)).toBeFalsy();
+  });
 });
