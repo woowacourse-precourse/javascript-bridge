@@ -33,6 +33,16 @@ const Application = {
 
     return [...target];
   },
+
+  hasContain(criterions) {
+    const copiedCriterions = this.copyArray(criterions);
+
+    return function isContain(target) {
+      if (!copiedCriterions.includes(target)) {
+        Validation.throwError(Validation.RANGE_ERROR_TEXT);
+      }
+    };
+  },
 };
 
 module.exports = Application;
