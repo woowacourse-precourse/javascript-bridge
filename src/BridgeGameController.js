@@ -14,7 +14,11 @@ class BridgeGameController {
   createBridgeByUser(bridgeLength) {
     const bridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
     this.bridgeGame.bridge = bridge;
+
+    InputView.readMoving(this.movingByUser.bind(this));
   }
+
+  movingByUser(move) {}
 }
 
 module.exports = BridgeGameController;
