@@ -93,10 +93,14 @@ class App {
   }
 
   finishGameSuccess(bridge){
+    if (bridge.length === 0) return'[ERROR]'
+    if (bridge === '[ERROR]') return '[ERROR]'
     OutputView.printResult('SUCCESS',bridge,this.TRY_TIME)
   }
 
   finishGameFail(bridge) {
+    if (bridge.length === 0) return'[ERROR]'
+    if (bridge === '[ERROR]') return '[ERROR]'
     OutputView.printResult('FAIL',bridge,this.TRY_TIME)
   }
 }

@@ -3,7 +3,6 @@
  */
 
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator")
 
 const OutputView = {
   /**
@@ -14,14 +13,15 @@ const OutputView = {
 
 
   printMap(bridge_u , bridge_d) {  
-
     // bridge_u print
     let BRIDGE = []
     let BRIDGE_RESULT_U = this.printU(bridge_u)
     let BRIDGE_RESULT_D = this.printU(bridge_d)
+    if (BRIDGE_RESULT_U === '[]') return "[ERROR]"
     MissionUtils.Console.print(`${BRIDGE_RESULT_U}`)
 
     // bridge_d print
+    if (BRIDGE_RESULT_U === '[]') return "[ERROR]"
     MissionUtils.Console.print(`${BRIDGE_RESULT_D}`)
 
     BRIDGE.push(BRIDGE_RESULT_U , BRIDGE_RESULT_D)

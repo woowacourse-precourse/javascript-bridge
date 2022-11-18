@@ -58,3 +58,30 @@ test("기능 테스트 3", () => {
   });
 ```
 
+
+
+
+
+### Checking.js
+
+- 입력값을 보고 예외를 발생 시킨다
+
+```js
+    // 기존 코드
+		if (isNaN(bridge) === true) throw "[ERROR] 다리의 길이는 숫자로 입력해주세요"
+	
+		// 수정 코드
+		bridgeNum (bridge) {
+        if (isNaN(bridge) === true ) {
+            MissionUtils.Console.print("[ERROR] 다리의 길이는 숫자로 입력해주세요")
+            return "ERROR"
+        }
+    },
+    
+   // InputView.js
+   if(Checking.bridgeNum(bridgeLength) === 'ERROR') { this.readBridgeSize() }
+```
+
+Throw 로 예외를 발생시킬 시 테스트 코드 오류가 생긴다.
+
+-> ['"ERROR"'] 메시지를 출력 후 InputView.js 에서 ERROR 확인시 함수 재실행 하도록 설정
