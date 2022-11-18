@@ -1,24 +1,24 @@
 const { Console } = require('@woowacourse/mission-utils');
 
+STRUCTURE = Object.freeze({
+  FIRST: '[ ',
+  LAST: ' ]',
+  MIDDLE: ' | ',
+});
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
-  STRUCTURE: Object.freeze({
-    FIRST: '[ ',
-    LAST: ' ]',
-    MIDDLE: ' | ',
-  }),
-
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridgeMap) {
-    const { FIRST, LAST, MIDDLE } = this.STRUCTURE;
+    const { FIRST, LAST, MIDDLE } = STRUCTURE;
 
-    for (const direction of bridgeMap) {
+    for (const direction in bridgeMap) {
       Console.print(`${FIRST}${bridgeMap[direction].join(MIDDLE)}${LAST}`);
     }
   },

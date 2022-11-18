@@ -46,7 +46,7 @@ class BridgeGame {
     const unchosen = 'UD'.replace(moving, '');
 
     bridgeMap[moving].push(OBJECT[player.state]);
-    bridgeMap[unchosen].push(OBJECT[BLANK]);
+    bridgeMap[unchosen].push(OBJECT.BLANK);
   }
 
   /**

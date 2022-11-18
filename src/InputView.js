@@ -20,6 +20,7 @@ const InputView = {
     Console.readLine(MESSAGE.INPUT_BRIDGE_SIZE, (input) => {
       this.bridge = makeBridge(input, generate);
       this.bridgeGame = new BridgeGame(this.bridge);
+      this.readMoving();
     });
   },
 
