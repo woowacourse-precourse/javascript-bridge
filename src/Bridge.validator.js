@@ -15,6 +15,11 @@ class BridgeValidator {
   static checkInputNext(next) {
     this.#isBridgeUpDown(next);
   }
+  static checkPosition(cur, max) {
+    if (cur > max) {
+      throw new Error(ERROR.IS_MAX_POSITON);
+    }
+  }
 
   static #isBridgeUpDown(char) {
     if (bridgeElement != 'U' && bridgeElement != 'D') {
@@ -30,9 +35,7 @@ class BridgeValidator {
   }
   static #isCheckGap(number, min, max) {
     if (+min <= +number && +number <= +max) {
-      throw new Error(
-        `${ERROR.OUT_OF_BOUNDARY} : ${min}이상 ${max}이하`,
-      );
+      throw new Error(`${ERROR.OUT_OF_BOUNDARY} : ${min}이상 ${max}이하`);
     }
     return true;
   }

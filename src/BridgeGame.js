@@ -4,7 +4,7 @@ const BridgeValidator = require('./Bridge.validator');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridge = []
+  #bridge = [];
   #currentPosition = 0;
   #maxPosition = 0;
   #isFinish = false;
@@ -17,7 +17,15 @@ class BridgeGame {
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    */
-  move() {}
+  move(nextMoveChar) {
+    BridgeValidator.checkInputNext(nextMoveChar);
+    BridgeValidator.checkPosition(this.#currentPosition, this.#maxPosition);
+    if (nextMoveChar == this.#bridge(this.#currentPosition)) {
+      this.#currentPosition += 1;
+      return true;
+    }
+    return false;
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

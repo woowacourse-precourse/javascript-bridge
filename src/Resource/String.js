@@ -8,6 +8,7 @@ const ERROR = {
   IS_NUMBER: '[ERROR] 숫자가 아닙니다',
   OUT_OF_BOUNDARY: '[ERROR] 숫자가 다음의 범위에 없습니다.',
   IS_ARRAY: '[ERROR] 배열이 아닙니다.',
+  IS_MAX_POSITON: '[ERROR] 마지막 배열입니다.',
 };
 
 Object.freeze(INPUT);
