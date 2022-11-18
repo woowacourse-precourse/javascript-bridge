@@ -1,6 +1,7 @@
-const { Console } = require("@woowacourse/mission-utils");
 const InputView = require("./InputView");
 const BridgeMaker = require("./BridgeMaker");
+const { generate } = require("./BridgeRandomNumberGenerator");
+const { Console } = require("@woowacourse/mission-utils");
 
 class App {
   play() {
