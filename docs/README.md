@@ -91,12 +91,57 @@ appStatus를 통해 게임 진행
 
 ### Bridge Game
 
-- [] move 사용자가 칸을 이동할 때 사용하는 메서드
-  -[] 입력값에 따라 output과 retry에 전달할 return 값 배출
-  -[] move 를 사용할때마다 시도횟수도 올라 가야됨
+- [x] move 사용자가 칸을 이동할 때 사용하는 메서드
 
-- [] retry 사용자가 게임을 다시 시도할 때 사용하는 메서드
-  -[] 입력값에 따라 종료 및 게임 재시작 (처음 만들었던 다리로 재시작)
+  - [x] 입력값에 따라 만들어진 다리와 입력값을 비교하여 output과 retry에 전달할 return 값 배출 : (t/f) , input 값 , 배열 길이
+
+  - [x] 지금이 다리의 몇번째인지 알 수 있어야됨(성공시에만 다리의길이를 늘림)
+
+  - [x] move 를 사용할때마다 시도횟수도 올라 가야됨(성공 실패와 무관하게 move를 사용할때마다 올라감)
+
+- [x] retry 사용자가 게임을 다시 시도할 때 사용하는 메서드
+
+  - [x] R 게임 재시작 true (처음 만들었던 다리로 재시작)
+
+  - [x] Q 게임종료 exit false 배출
+
+- [x] bridge length status 길이를 올리고 저장하는 기능
+
+- [x] 시도횟수가 늘어나고 저장되는 기능
+
+### Bridge Map
+
+다리건너기 맵을 관리하는 클래스
+
+- [x] 자원들 상수로 구현
+
+- [x] handleMap 해당 클래스의 #isFirst 멤버변수가 true 냐 false 냐에 따라 분기를 나눠 add First Map , add map 을 실행시키는 함수
+
+- [x] add First Map boolean 과 input, 이전의 map 을 받아 맞혔을때와 못맞혔을때의 분기를 나누며 , 해당 클래스의 시작 상태 멤버변수를 false로 바꾸는 메서드
+
+- [x] addmap move의 boolean과 input , 이전의 map을 받아 맞혔을때와 못맞혔을때의 분기를 나눠 correct 와 Incorrect를 실행시키는 메서드
+
+- [x] add correct 메서드 move의 input 과 이전의 map , map소스를 받아 이용자가 맞췄을때 해당 자원을 추가하는 메서드
+
+  - [x] move 값이 true 이면 input 에 따라이동한 칸을 O로 표시한다.
+
+- [x] addIncorrect메서드 move의 input과 이전의 map 을 받아 이용자가 틀렸을때 해당 자원을 추가하는 메서드
+
+  - [x] move값이 false 이면 input에 따라 틀린 칸을 X가 나타나고 그냥 성공했다면 계속 O만 나온다.
+
+  - [x] 실패시 이전 다리의 X는 나타나지않고 실패한 다리의 X만 나옴
+
+  - [x] 인자로 (move의 t/f , input) 그리고 이전 맵을 받는다.
+
+- [x] first Map 처음 맵에 추가할때 maker로 만든 맵에 자원을 추가한다.
+
+- [] 최종 적으로 컨트롤 된 맵을 리턴하는 기능
+
+### Map Maker
+
+기본 맵을 생성하는 객체
+
+- [x] init Map 기본 맵을 생성한다. [[],[]]
 
 ## viwe
 
@@ -112,11 +157,7 @@ appStatus를 통해 게임 진행
 
 - [x] 게임 시작 메세지
 
-- [] 이동한 칸을 건널 수 있다면 O로 표시한다. 건널 수 없다면 X로 표시한다.
-
-- [] 실패시 X가 나타나고 그냥 성공했다면 계속 O만 나온다.
-
-  - [] 실패시 이전 다리의 X는 나타나지않고 실패한 다리의 X만 나옴
+- [] print Map
 
 - [] 게임의 성공과 실패를 나타내는 기능
 
