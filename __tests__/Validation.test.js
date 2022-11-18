@@ -3,6 +3,7 @@ const Validation = require('../src/Validation');
 const NUMBER_ERROR_TEXT = '[ERROR] 전달된 인수는 숫자 타입이 아닙니다.';
 const RANGE_ERROR_TEXT = '[ERROR] 지정한 범위의 값이 아닙니다.';
 const FUNCTION_ERROR_TEXT = '[ERROR] 전달된 인수는 함수가 아닙니다.';
+const VALIDATION_ARRAY_TEXT = '[ERROR] 전달된 인수는 배열 타입이 아닙니다.';
 
 describe('숫자 예외 파악 함수 테스트', () => {
   test('메소드 이름은 "number"로 정의된다.', () => {
@@ -119,5 +120,13 @@ describe('배열 파악 함수 테스트', () => {
     const METHOD_NAME = 'checkIsArray';
 
     expect(Validation.checkIsArray.name).toEqual(METHOD_NAME);
+  });
+
+  test('인수가 배열이 아니라면 예외를 발생시킨다.', () => {
+    const EXPECTED = '123';
+
+    expect(() => {
+      Validation.checkIsArray(EXPECTED);
+    }).toThrow(VALIDATION_ARRAY_TEXT);
   });
 });
