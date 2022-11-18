@@ -39,20 +39,30 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT_USER_GO, (selectBridge) => {
       bridgeGame.move(this.userSelectValueTreater(selectBridge));
       OutputView.printMap(OutputView.closeMap({ ...bridgeGame.bridgeMap }));
-      if (bridgeGame.finishGame) {
-        OutputView.printResult(true);
-        return;
-      }
-      if (!bridgeGame.isOkWay) {
-        InputView.readGameCommand(bridgeGame);
-      }
-      InputView.readMoving(bridgeGame);
+      InputView.checkisGameFinish(bridgeGame.finishGame);
+      InputView.checkIsCorrect(bridgeGame);
     });
+  },
+
+  checkIsCorrect(bridgeGame) {
+    if (!bridgeGame.isOkWay) {
+      bridgeGame.tryCnt += 1;
+      InputView.readGameCommand(bridgeGame);
+    }
+    InputView.readMoving(bridgeGame);
+  },
+
+  checkisGameFinish(finishGame) {
+    if (finishGame) {
+      OutputView.printResult(true);
+      return;
+    }
   },
 
   readGameCommand(bridgeGame) {
     MissionUtils.Console.readLine(INPUT_USER_DECISION, (userDecision) => {
       userDecisionValidator(userDecision);
+      // 여기에 계속 재귀로
     });
   },
 

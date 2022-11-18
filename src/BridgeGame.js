@@ -32,7 +32,7 @@ class BridgeGame {
   }
 
   checkCorrectWay(userSelectValue) {
-    if (userSelectValue == this.bridge[this.progressCnt - 1]) {
+    if (userSelectValue == this.bridge[this.progressCnt - this.tryCnt - 1]) {
       this.isOkWay = true;
       this.checkFinishWay();
       return;
@@ -48,14 +48,26 @@ class BridgeGame {
 
   mapMaker() {
     if (this.isOkWay) {
-      this.drawMap(this.bridgeMap, this.bridge[this.progressCnt - 1], "O");
+      this.drawCorrectWay();
     } else {
-      this.drawMap(
-        this.bridgeMap,
-        this.upsideDown(this.bridge[this.progressCnt - 1]),
-        "X"
-      );
+      this.drawFalseWay();
     }
+  }
+
+  drawCorrectWay() {
+    this.drawMap(
+      this.bridgeMap,
+      this.bridge[this.progressCnt - this.tryCnt - 1],
+      "O"
+    );
+  }
+
+  drawFalseWay() {
+    this.drawMap(
+      this.bridgeMap,
+      this.upsideDown(this.bridge[this.progressCnt - this.tryCnt - 1]),
+      "X"
+    );
   }
 
   drawMap(bridgeMap, way, check) {
