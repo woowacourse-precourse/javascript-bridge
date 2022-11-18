@@ -12,6 +12,28 @@ class App {
 
   startGame(bridgeLength) {
     this.#bridgeGame.setUp(bridgeLength);
+    this.askMove();
+  }
+
+  askMove() {
+    InputView.readMoving(this.moveOne);
+  }
+
+  moveOne(playerMoving) {
+    this.#bridgeGame.move(playerMoving);
+    if (this.checkIsFinished()) {
+      return this.askRetry();
+    }
+    return this.askMove();
+  }
+
+  checkIsFinished() {
+    const { isFinished } = this.#bridgeGame.getStatus;
+    return isFinished;
+  }
+
+  askRetry() {
+    InputView.readGameCommand(this.checkRetry);
   }
 }
 
