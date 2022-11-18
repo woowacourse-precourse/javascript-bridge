@@ -45,6 +45,24 @@ class App {
     return this.checkStatus(move);
   }
 
+  checkRetry(input) {
+    Validator.isValidInput(input);
+    if (input == GAME.RETRY) {
+      return this.makeNewGame(input);
+    }
+    return this.makeEndGame();
+  }
+
+  checkStatus(move) {
+    if (move[0] == false) {
+      return this.askRetry();
+    }
+    return this.askMoving();
+  }
+
+  askRetry() {
+    InputView.readGameCommand(this.checkRetry.bind(this));
+  }
   }
 }
 
