@@ -54,6 +54,14 @@ const InputView = {
    */
    readGameCommand(count, bridge, bridgeMap) {
     MISSIONUTILS.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", function(input) {
+      if (!isNaN(input)){
+        throw new Error("[ERROR] 재시도 여부는 알파벳으로 입력해야 합니다");
+      }
+      
+      if(input != 'R' && input != 'Q'){
+        throw new Error("[ERROR] 재시도 여부는 R 또는 Q만 입력해야 합니다.");
+      }
+      
       MISSIONUTILS.Console.print(input);
 
     });
