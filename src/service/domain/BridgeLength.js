@@ -31,10 +31,7 @@ class BridgeLength extends BridgeService {
   }
 
   #createAnwerBrideData() {
-    this.setModelFor(
-      MODEL_KEY.userBridge,
-      Array.from({ length: this.#input }, () => null)
-    );
+    this.setModelFor(MODEL_KEY.userBridge, []);
 
     return this;
   }
