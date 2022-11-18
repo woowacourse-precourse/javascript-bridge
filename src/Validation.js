@@ -18,8 +18,41 @@ class Validation {
     }
   }
 
+  static nextStep() {
+    if (Validation.isStringEmpty(value)) {
+        Console.close();
+        throw new Error('[ERROR] 값을 입력해주세요.');
+    }
+
+    if (!Validation.oneValue(value)) {
+        Console.close();
+        throw new Error('[ERROR] 1개의 값을 입력해주세요.');
+    }
+
+    if (!Validation.onlyTwoValue(value)) {
+        Console.close();
+        throw new Error('[ERROR] U 또는 D를 입력해주세요.');
+    }
+  }
+
+  static retry() {
+
+  }
+
+  static onlyTwoValue(value) {
+    return value === 'U' || value === 'D'
+  }
+
+  static oneValue(value) {
+    return value.length === 1;
+  }
+
+  static isStringEmpty(value) {
+    return value.length === 0;
+  }
+
   static isEmpty(number) {
-    return number.length === 0;
+    return number.toString().length === 0;
   }
 
   static numberNet(number) {
