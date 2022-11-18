@@ -2,6 +2,15 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #nowBridgeLength;
+
+  #numberOftry = 0;
+
+  incrementNumberOfTry() {
+    this.#numberOftry += 1;
+    console.log(this.#numberOftry);
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -16,5 +25,9 @@ class BridgeGame {
    */
   retry() {}
 }
+
+const app = new BridgeGame();
+
+console.log(app.incrementNumberOfTry());
 
 module.exports = BridgeGame;
