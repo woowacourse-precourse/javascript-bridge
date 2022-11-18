@@ -1,4 +1,3 @@
-const { Console } = require("@woowacourse/mission-utils");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -7,7 +6,7 @@ class BridgeGame {
   #gameResult;
   #tryCount;
 
-  constructor(indexCount, gameResult, tryCount) {
+  constructor({ indexCount, gameResult, tryCount }) {
     this.#indexCount = indexCount;
     this.#gameResult = gameResult;
     this.#tryCount = tryCount;
@@ -33,6 +32,7 @@ class BridgeGame {
       this.#gameResult[1].push("O");
     }
   }
+
   fail(userMove) {
     if (userMove === "U") {
       this.#gameResult[0].push("X");
@@ -45,14 +45,14 @@ class BridgeGame {
   }
 
   reset() {
-    const reset = [[], []];
+    const resetResult = [[], []];
     const resetIndex = 0;
-    this.#gameResult = reset;
+    this.#gameResult = resetResult;
     this.#indexCount = resetIndex;
     this.#tryCount = this.#tryCount + 1;
   }
 
-  result() {
+  getResult() {
     return this.#gameResult;
   }
 
