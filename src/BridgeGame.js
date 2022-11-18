@@ -1,5 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const OutputView = require("./OutputView");
+const { BRIDGE_PRINT, BRIDGE_PATH } = require("./util/bridge");
 const { generateRandomNumber } = require("./util/randomNumber");
 
 /**
@@ -28,21 +29,21 @@ class BridgeGame {
    */
   // TODO :: 리팩터링
   move(pathIdx, choice) {
-    switch (choice) {
-      case "U":
-        this.firstLineResult.push(this.checkIsAlrightPath(pathIdx, choice));
-        this.secondLineResult.push(" ");
-        break;
-      case "D":
-        this.firstLineResult.push(" ");
-        this.secondLineResult.push(this.checkIsAlrightPath(pathIdx, choice));
-        break;
+    if (choice === BRIDGE_PATH.up) {
+      this.firstLineResult.push(this.getPrintIsAlrightPath(pathIdx, choice));
+      this.secondLineResult.push(BRIDGE_PRINT.empty);
+    }
+    if (choice === BRIDGE_PATH.down) {
+      this.firstLineResult.push(BRIDGE_PRINT.empty);
+      this.secondLineResult.push(this.getPrintIsAlrightPath(pathIdx, choice));
     }
     OutputView.printMap(this.firstLineResult, this.secondLineResult);
   }
 
-  checkIsAlrightPath(index, currentPath) {
-    return this.bridgePath[index] === currentPath ? "O" : "X";
+  getPrintIsAlrightPath(index, currentPath) {
+    return this.bridgePath[index] === currentPath
+      ? BRIDGE_PRINT.correct
+      : BRIDGE_PRINT.incorrect;
   }
 
   /**
