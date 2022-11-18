@@ -1,16 +1,16 @@
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
-const { Console } = require("@woowacourse/mission-utils");
-const ERROR_MESSAGES = require("./constants/ErrorMessages");
-const BREIDGE = require("./constants/constants");
+const { Console } = require('@woowacourse/mission-utils');
+const ERROR_MESSAGES = require('./constants/ErrorMessages');
+const BREIDGE = require('./constants/constants');
 
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine("QUERY", (size) => {
+    Console.readLine('QUERY', (size) => {
       this.validateBridgeSize(size);
       console.log({ size });
     });
