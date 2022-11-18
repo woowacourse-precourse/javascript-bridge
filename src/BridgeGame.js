@@ -2,10 +2,13 @@ const Validator = require('./Validator');
 const Player = require('./Player');
 const Bridge = require('./Bridge');
 const OutputView = require('./views/OutputView');
+const Command = require('./Command');
 
 class BridgeGame {
   #player;
   #bridge;
+  #command;
+  #direction;
 
   constructor() {
     this.#player = new Player();
@@ -35,9 +38,9 @@ class BridgeGame {
     OutputView.printMap(curMap);
   }
 
-  checkCommend(decision) {
-    Validator.commandValidityCheck(decision);
-    return decision === 'R';
+  handleCommand(command) {
+    this.#command = new Command(command);
+    return this.#command.shouldRetry();
   }
 
   checkGameComplete() {

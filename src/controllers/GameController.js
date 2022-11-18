@@ -59,7 +59,7 @@ class GameController {
   }
 
   tryRetry(command) {
-    const shouldRetry = this.#bridgeGame.checkCommend(command);
+    const shouldRetry = this.#bridgeGame.handleCommand(command);
     shouldRetry ? this.retry() : this.gameOver();
   }
 
