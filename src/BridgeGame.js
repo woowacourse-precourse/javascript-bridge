@@ -7,7 +7,7 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(input, count, i, bridge, bridgeMap) {
+  move(input, count, i, bridge, bridgeMap,tryCount) {
     const INPUTVIEW = require("../src/Inputview");
     const OUTPUTVIEW = require("../src/Outputview");
     const MISSIONUTILS = require("@woowacourse/mission-utils");
@@ -15,6 +15,7 @@ class BridgeGame {
       if(i==count){
         bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
         MISSIONUTILS.Console.print("최종 게임 결과");
+        OUTPUTVIEW.printResult(bridgeMap, "성공", tryCount)
       }
       else{
         if (i == 0){
@@ -23,7 +24,7 @@ class BridgeGame {
         else{
           bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
         }
-        INPUTVIEW.readMoving(count, i+1, bridge, bridgeMap);
+        INPUTVIEW.readMoving(count, i+1, bridge, bridgeMap, tryCount);
       }    
     }
     else{
@@ -33,7 +34,7 @@ class BridgeGame {
       else{
         bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'X', bridgeMap);
       }
-      INPUTVIEW.readGameCommand(count, bridge, bridgeMap);
+      INPUTVIEW.readGameCommand(count, bridge, bridgeMap,tryCount);
     }
   }
 
@@ -42,15 +43,16 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-   retry(input, count, bridge, bridgeMap) {
+   retry(input, count, bridge, bridgeMap, tryCount) {
     const INPUTVIEW = require("../src/Inputview");
     const OUTPUTVIEW = require("../src/Outputview");
     const MISSIONUTILS = require("@woowacourse/mission-utils");
     if (input == 'R'){
-      INPUTVIEW.readMoving(count, 0, bridge, "");
+      INPUTVIEW.readMoving(count, 0, bridge, "" ,tryCount+1);
     }
     else{
       MISSIONUTILS.Console.print("실패!");
+      OUTPUTVIEW.printResult(bridgeMap, "실패", tryCount)
       MISSIONUTILS.Console.close();
     }
   }
