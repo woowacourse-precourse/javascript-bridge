@@ -21,6 +21,11 @@ const Validate = {
     if (input !== "R" && input !== "Q")
       throw new Error("[ERROR] 이동할 칸이 올바르지 않습니다.", input);
   },
+  isUndefined(input) {
+    if (input === undefined) {
+      throw new Error("[ERROR] 전달된 값이 올바르게 참조되지 않습니다.");
+    }
+  },
 };
 
 module.exports = Validate;
