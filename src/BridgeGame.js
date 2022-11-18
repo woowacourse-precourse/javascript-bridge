@@ -12,7 +12,6 @@ class BridgeGame {
   bridge;
 
   constructor(bridge) {
-    console.log(bridge, bridge.length);
     this.bridge = bridge;
     this.progressCnt = 0;
     this.tryCnt = 1;
@@ -41,7 +40,7 @@ class BridgeGame {
   }
 
   checkFinishWay() {
-    if (this.progressCnt == this.bridge.length) {
+    if (this.progressCnt - this.tryCnt + 1 == this.bridge.length) {
       this.finishGame = true;
     }
   }

@@ -22,9 +22,6 @@ const INPUT_USER_DECISION =
   "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)";
 
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
   readBridgeSize() {
     MissionUtils.Console.readLine(INPUT_BRIDGE_LEN_STR, (bridgeLen) => {
       bridgeLenValidator(bridgeLen);
@@ -74,20 +71,29 @@ const InputView = {
   readGameCommand(bridgeGame) {
     MissionUtils.Console.readLine(INPUT_USER_DECISION, (userDecision) => {
       userDecisionValidator(userDecision);
-      // 여기에 계속 재귀로
       if (userDecision == "R") {
-        bridgeGame.tryCnt += 1;
-        InputView.readMoving(bridgeGame);
+        InputView.retryGameSetter(bridgeGame);
         return;
       }
       InputView.goPrintResult(bridgeGame);
-      // 끝내면 걍 프린트 리절트
     });
   },
 
   userSelectValueTreater(userSelectValue) {
     isUandD(userSelectValue);
     return userSelectValue;
+  },
+
+  retryGameSetter(bridgeGame) {
+    bridgeGame.tryCnt += 1;
+    // 일단 현재 진행상황 가져오는건 ㄱㅊ 근데 재시도할때 틀린부분 삭제하는게 좋을듯
+    InputView.cutLastTryMap(bridgeGame.bridgeMap);
+    InputView.readMoving(bridgeGame);
+  },
+
+  cutLastTryMap(bridgeMap) {
+    bridgeMap.up = bridgeMap.up.substring(0, bridgeMap.up.length - 4);
+    bridgeMap.down = bridgeMap.down.substring(0, bridgeMap.down.length - 4);
   },
 };
 
