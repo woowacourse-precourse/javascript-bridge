@@ -50,6 +50,7 @@ const InputView = {
   readGameCommand() {
     let restart = "";
     MissionUtils.Console.readLine(messageObject.GAME_RESTART, (reOrNot) => {
+      Error.inputRestartErrorCheck(reOrNot);
       restart = reOrNot;
     });
     MissionUtils.Console.close();

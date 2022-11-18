@@ -8,6 +8,7 @@ const errorObject = {
   Error1: "잘못된 입력 값입니다. 숫자를 입력해주세요",
   Error2: "잘못된 입력 값입니다. 정수를 입력해주세요",
   Error3: "잘못된 입력 값입니다. 'U' 또는 'D'를 입력해주세요",
+  Error4: "잘못된 입력 값입니다. 'R' 또는 'Q'를 입력해주세요",
 };
 
 class ErrorCheck {
@@ -23,6 +24,15 @@ class ErrorCheck {
   inputMovingErrorCheck(UD) {
     try {
       if (UD !== "U" && UD !== "D") throw new Error(errorObject.Error3);
+    } catch (e) {
+      MissionUtils.Console.print(`[ERROR] : ${e.message}`);
+    } finally {
+      MissionUtils.Console.close();
+    }
+  }
+  inputRestartErrorCheck(RQ) {
+    try {
+      if (RQ !== "U" && RQ !== "D") throw new Error(errorObject.Error4);
     } catch (e) {
       MissionUtils.Console.print(`[ERROR] : ${e.message}`);
     } finally {
