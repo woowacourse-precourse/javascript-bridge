@@ -9,6 +9,8 @@ const BRIDGE_DETAIL = Object.freeze({
   },
   RETRY_COMMAND: "R",
   END_COMMAND: "Q",
+  MIN: 3,
+  MAX: 20,
 });
 
 const ERROR_MESSAGE = Object.freeze({
