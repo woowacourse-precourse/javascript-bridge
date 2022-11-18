@@ -1,14 +1,7 @@
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView = require('./OutputView');
+const Validate = require('./Validate');
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE, ERROR, KEY } = require('./Constants');
-const {
-  checkBridgeSize,
-  checkMovingKey,
-  checkCommandKey,
-  checkUserInput,
-} = require('./Validate');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -20,11 +13,8 @@ const InputView = {
   readBridgeSize(bridgeGame) {
     Console.readLine(MESSAGE.BRIDGE_SIZE, (size) => {
       const SIZE = Number(size);
-      if (checkBridgeSize(SIZE)) {
-        bridgeGame.answerBridge = BridgeMaker.makeBridge(
-          SIZE,
-          BridgeRandomNumberGenerator.generate
-        );
+      if (Validate.checkBridgeSize(SIZE)) {
+        bridgeGame.getAnswerBridge(SIZE);
         this.readMoving(bridgeGame);
       } else {
         throw new Error(ERROR.BRIDGE_SIZE);
