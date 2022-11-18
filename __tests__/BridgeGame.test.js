@@ -233,10 +233,22 @@ describe('다리 값을 세팅하는 메서드 테스트', () => {
 });
 
 describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
+  const bridgeGame = new BridgeGame();
+  const bridge = ['D', 'U', 'U'];
+
+  bridgeGame.setBridge(bridge);
+  bridgeGame.move();
+
   test('메소드 이름은 "getBridgeReuslt"로 정의된다.', () => {
-    const bridgeGame = new BridgeGame();
     const METHOD_NAME = 'getBridgeReuslt';
 
     expect(bridgeGame.getBridgeReuslt.name).toEqual(METHOD_NAME);
+  });
+
+  test('"D"를 전달하면 "O"를 반환한다.', () => {
+    const EXPECTED = 'D';
+    const RECEIVED = 'O';
+
+    expect(bridgeGame.getBridgeReuslt(EXPECTED)).toEqual(RECEIVED);
   });
 });
