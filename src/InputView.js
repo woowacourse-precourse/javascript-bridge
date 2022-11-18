@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const App = require('./App');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -6,20 +7,21 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
+  readBridgeSize(createBridge) {
     Console.readLine('다리의 길이를 입력해주세요.', (answer) => {
-      this.readBridgeSizeException(answer);
+      try {
+        this.readBridgeSizeException(answer, createBridge);
+      } catch (err) {
+        Console.print(err);
+        this.readBridgeSize(createBridge);
+      }
     });
   },
 
-  readBridgeSizeException(number) {
-    try {
-      if (number < 3 || number > 21)
-        throw '[ERROR] 3 이상 20 이하의 숫자를 입력해주세요.';
-    } catch (err) {
-      Console.print(err);
-      this.readBridgeSize();
-    }
+  readBridgeSizeException(number, createBridge) {
+    if (number < 3 || number > 21)
+      throw '[ERROR] 3 이상 20 이하의 숫자를 입력해주세요.';
+    else createBridge(number);
   },
 
   /**
@@ -28,14 +30,19 @@ const InputView = {
   readMoving() {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (answer) => {
       this.readMovingException(answer);
+      return answer;
     });
   },
 
   readMovingException(letter) {
     const LimitedMovement = /[UD]/;
     try {
-      if (!LimitedMovement.test(letter))
+      if (!LimitedMovement.test(letter)) {
         throw '[ERROR] 대문자 U 와 D 를 입력해주세요.';
+      } else {
+        console.log(letter);
+        return letter;
+      }
     } catch (err) {
       Console.print(err);
       this.readMoving();
@@ -47,5 +54,4 @@ const InputView = {
    */
   readGameCommand() {},
 };
-InputView.readBridgeSize();
 module.exports = InputView;

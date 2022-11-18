@@ -12,11 +12,10 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let answerArr = [];
     for (AnswerLength = 0; AnswerLength < size; AnswerLength++) {
-      if (generateRandomNumber() === 0) answerArr.push('D');
-      if (generateRandomNumber() === 1) answerArr.push('U');
+      if (generateRandomNumber() == 0) answerArr.push('D');
+      if (generateRandomNumber() == 1) answerArr.push('U');
     }
     return answerArr;
   },
 };
-BridgeMaker.makeBridge(3, 0);
 module.exports = BridgeMaker;
