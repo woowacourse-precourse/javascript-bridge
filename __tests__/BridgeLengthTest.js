@@ -32,7 +32,7 @@ describe('다리 길이 테스트', () => {
 
     bridgeLength.doAction();
 
-    expect(bridgeLength.getModelFor(MODEL_KEY.answerBridge)).toHaveLength(
+    expect(bridgeLength.getModelFor(MODEL_KEY.userBridge)).toHaveLength(
       Number(input)
     );
     expect(bridgeLength.getModelFor(MODEL_KEY.tryCount)).toEqual(1);
