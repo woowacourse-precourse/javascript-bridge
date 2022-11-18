@@ -35,10 +35,17 @@ class BridgeGame {
     this.nowPosition += 1;
     switch(true) {
       case move === 'U':
+        this.updateNowBridge(check, ' ');
         break;
       case move === 'D':
+        this.updateNowBridge(' ', check);
         break;
     }
+  }
+
+  updateNowBridge(upperState, downState) {
+    this.nowBridge[upperBridge].push(upperState);
+    this.nowBridge[downBridge].push(downState);
   }
 
   /**
