@@ -8,7 +8,7 @@ const GUIDE_MSG = {
 const ERROR_MSG = {
   INPUT_SIZE_ERROR: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n",
   INPUT_MOVING_ERROR: "[ERROR] 이동할 칸은 U 혹은 D로 입력해주세요.\n",
-  INPUT_CMD_ERROR: "[ERROR] 이동할 칸은 R 혹은 Q로 입력해주세요.\n",
+  INPUT_CMD_ERROR: "[ERROR] 재시작하려면 R, 종료하려면 Q를 입력해주세요.\n",
 };
 
 const PRINT_FINISH_MSG = "\n최종 게임 결과";

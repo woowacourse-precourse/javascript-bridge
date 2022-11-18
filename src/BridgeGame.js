@@ -2,50 +2,56 @@ const RandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
 
 class BridgeGame {
-  #progressIdx = 0;
-  #isCorrect = false;
-  #matchCount = 0;
   #bridge = [];
-  #gameCount = 1;
+
+  constructor() {
+    this.progressIdx = 0;
+    this.numberOfCorrect = 0;
+    this.isCorrect = false;
+    this.gameRunCount = 1;
+  }
 
   start(size) {
     this.#bridge = BridgeMaker.makeBridge(size, RandomNumberGenerator.generate);
   }
 
-  move(answer) {
-    this.#isCorrect = false;
-    if (this.checkInputCorrect(answer)) {
-      this.#matchCount += 1;
-      this.#isCorrect = true;
+  checkInputCorrect(answer) {
+    this.isCorrect = false;
+    if (this.move(answer)) {
+      this.numberOfCorrect += 1;
+      this.isCorrect = true;
     }
 
-    this.#progressIdx += 1;
-    return this.#isCorrect;
+    this.progressIdx += 1;
+    return this.isCorrect;
   }
 
-  checkInputCorrect(answer) {
-    return (answer == "U" && answer == this.#bridge[this.#progressIdx]) ||
-      (answer == "D" && answer == this.#bridge[this.#progressIdx])
+  move(answer) {
+    return (answer == "U" && answer == this.#bridge[this.progressIdx]) ||
+      (answer == "D" && answer == this.#bridge[this.progressIdx])
       ? true
       : false;
   }
 
-  getIdxAndIsCorrect() {
-    return [this.#progressIdx - 1, this.#isCorrect];
+  getIsCorrect() {
+    return this.isCorrect;
+  }
+  getGameRunCount() {
+    return this.gameRunCount;
   }
 
   crossBridgeCompletely() {
-    return this.#bridge.length == this.#matchCount ? true : false;
+    return this.#bridge.length == this.numberOfCorrect ? true : false;
   }
 
-  getGameCount() {
-    return this.#gameCount;
+  setInitializeCondition() {
+    this.gameRunCount += 1;
+    this.progressIdx = this.numberOfCorrect = 0;
   }
 
   retry(answer) {
     if (answer == "R") {
-      this.#gameCount += 1;
-      this.#progressIdx = this.#matchCount = 0;
+      this.initializeCondition();
       return true;
     }
     if (answer == "Q") return false;

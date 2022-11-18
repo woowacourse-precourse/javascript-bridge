@@ -11,18 +11,18 @@ const OutputView = {
     );
   },
 
-  makeMap(answer, idxAndIsCorrect) {
-    this.drawBridge(answer, idxAndIsCorrect);
+  makeMap(answer, isCorrect) {
+    this.drawBridge(answer, isCorrect);
     this.printMap();
   },
 
-  drawBridge(answer, idxAndIsCorrect) {
+  drawBridge(answer, isCorrect) {
     if (answer == "U") {
-      idxAndIsCorrect[1] ? upperBridge.push("O") : upperBridge.push("X");
+      isCorrect ? upperBridge.push("O") : upperBridge.push("X");
       lowerBridge.push(" ");
     }
     if (answer == "D") {
-      idxAndIsCorrect[1] ? lowerBridge.push("O") : lowerBridge.push("X");
+      isCorrect ? lowerBridge.push("O") : lowerBridge.push("X");
       upperBridge.push(" ");
     }
   },
@@ -37,6 +37,7 @@ const OutputView = {
     Console.print(
       `\[ ${upperBridge.join(" | ")} \]\n\[ ${lowerBridge.join(" | ")} \]\n`
     );
+    this.clearMap();
   },
 };
 

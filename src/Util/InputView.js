@@ -4,6 +4,7 @@ const BridgeGame = require("../BridgeGame");
 const Validation = require("./Validation");
 const OutputView = require("./OutputView");
 
+let bridgeGame;
 const InputView = {
   readBridgeSize() {
     Console.readLine(GUIDE_MSG.START_MSG, (answer) => {
@@ -22,79 +23,76 @@ const InputView = {
   },
 
   startBridgeGame(answer) {
-    const bridgeGame = new BridgeGame();
+    bridgeGame = new BridgeGame();
     bridgeGame.start(answer);
-    this.readMoving(bridgeGame);
+    this.readMoving();
   },
 
-  readMoving(bridgeGame) {
+  readMoving() {
     Console.readLine(GUIDE_MSG.PROGRESS_MSG, (answer) => {
-      this.inputMovingForm(answer, bridgeGame);
+      this.inputMovingForm(answer);
     });
   },
 
-  inputMovingForm(answer, bridgeGame) {
+  inputMovingForm(answer) {
     try {
       if (!Validation.ValidMove(answer)) throw new Error();
-      this.checkBridge(answer, bridgeGame);
+      this.checkBridge(answer);
     } catch (error) {
       Console.print(ERROR_MSG.INPUT_MOVING_ERROR);
-      this.readMoving(bridgeGame);
+      this.readMoving();
     }
   },
 
-  checkCrossTheBridgeCompletely(answer, bridgeGame) {
-    OutputView.makeMap(answer, bridgeGame.getIdxAndIsCorrect());
+  checkCrossTheBridgeCompletely(answer) {
+    OutputView.makeMap(answer, bridgeGame.getIsCorrect());
     bridgeGame.crossBridgeCompletely()
-      ? this.exitGame(bridgeGame, true)
-      : this.readMoving(bridgeGame);
+      ? this.exitGame(true)
+      : this.readMoving();
   },
 
-  checkBridge(answer, bridgeGame) {
-    bridgeGame.move(answer)
-      ? this.checkCrossTheBridgeCompletely(answer, bridgeGame)
-      : this.readGameCommand(answer, bridgeGame);
+  checkBridge(answer) {
+    bridgeGame.checkInputCorrect(answer)
+      ? this.checkCrossTheBridgeCompletely(answer)
+      : this.showGameCommand(answer);
   },
 
-  readGameCommand(answer, bridgeGame) {
-    OutputView.makeMap(answer, bridgeGame.getIdxAndIsCorrect());
-    this.inputGameCommand(bridgeGame);
+  showGameCommand(answer) {
+    OutputView.makeMap(answer, bridgeGame.getIsCorrect());
+    this.readGameCommand();
   },
 
-  inputGameCommand(bridgeGame) {
+  readGameCommand() {
     Console.readLine(GUIDE_MSG.RETRY_MSG, (answer) => {
-      this.inputGameCmdForm(answer, bridgeGame);
+      this.inputGameCmdForm(answer);
     });
   },
 
-  inputGameCmdForm(answer, bridgeGame) {
+  inputGameCmdForm(answer) {
     try {
       if (!Validation.ValidCmd(answer)) throw new Error();
-      this.selectRestartOrQuit(answer, bridgeGame);
+      this.selectRestartOrQuit(answer);
     } catch (error) {
       Console.print(ERROR_MSG.INPUT_CMD_ERROR);
-      this.readGameCommand(null, bridgeGame);
+      this.showGameCommand(null);
     }
   },
 
-  selectRestartOrQuit(answer, bridgeGame) {
-    bridgeGame.retry(answer)
-      ? this.restartGame(bridgeGame)
-      : this.exitGame(bridgeGame, false);
+  selectRestartOrQuit(answer) {
+    bridgeGame.retry(answer) ? this.restartGame() : this.exitGame(false);
   },
 
-  restartGame(bridgeGame) {
+  restartGame() {
     OutputView.clearMap();
-    this.readMoving(bridgeGame);
+    this.readMoving();
   },
 
-  exitGame(bridgeGame, isClear) {
+  exitGame(isClear) {
     OutputView.printResult();
-    OutputView.clearMap();
     Console.print(
       `게임 성공 여부: ${
         isClear ? SUCCESS : FAIL
-      }\n총 시도한 횟수: ${bridgeGame.getGameCount()}`
+      }\n총 시도한 횟수: ${bridgeGame.getGameRunCount()}`
     );
     Console.close();
   },
