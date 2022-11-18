@@ -1,5 +1,5 @@
 const {
-  BridgeMakerConstants,
+  MakerConstants,
   PlayerInputConstants,
 } = require("./constant/Constants");
 
@@ -16,7 +16,7 @@ const BridgeMaker = {
     let canWalkBridge = [];
 
     while (canWalkBridge.length < size) {
-      generateRandomNumber() === BridgeMakerConstants.LOWER_BRIDGE_NUMBER
+      String(generateRandomNumber()) === MakerConstants.LOWER_BRIDGE_NUMBER
         ? canWalkBridge.push(PlayerInputConstants.LOWER_BRIDGE_STRING)
         : canWalkBridge.push(PlayerInputConstants.UPPER_BRIDGE_STRING);
     }
