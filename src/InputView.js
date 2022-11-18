@@ -19,10 +19,14 @@ const InputView = {
         this.setBridge(Number(number));
         this.readMoving();
       } catch (e) {
-        OutputView.printErrorMessage(e);
-        this.readBridgeSize();
+        this.tryAgain(e, this.readBridgeSize);
       }
     });
+  },
+
+  tryAgain(e, itself) {
+    OutputView.printErrorMessage(e);
+    itself();
   },
 
   /**
@@ -37,8 +41,7 @@ const InputView = {
         OutputView.printMap(map);
         this.nextAction({ isCorrect, map, isGameOver, trialTime });
       } catch (e) {
-        OutputView.printErrorMessage(e);
-        this.readMoving();
+        this.tryAgain(e, this.readMoving);
       }
     });
   },
@@ -66,8 +69,7 @@ const InputView = {
         Validation.checkRorQ(letter);
         this.chooseToRetry(letter, { map, trialTime });
       } catch (e) {
-        OutputView.printErrorMessage(e);
-        this.readGameCommand({ map, trialTime });
+        this.tryAgain(e, this.readGameCommand);
       }
     });
   },
