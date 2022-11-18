@@ -26,10 +26,6 @@ class GameController {
     InputView.readBridgeSize(sizeCallback);
   }
 
-  movePlayer(direction) {
-    return this.#gameService.movePlayer(direction);
-  }
-
   printCurMap() {
     const curMap = this.#gameService.printCurMap();
     OutputView.printMap(curMap, false);
@@ -37,15 +33,15 @@ class GameController {
 
   isDone() {
     const isCompleted = this.#gameService.checkGameComplete();
-    isCompleted ? this.#gameService.printGameResult() : this.nextStep();
+    isCompleted ? this.#gameService.printGameResult() : this.askDirection();
   }
 
   askDirection() {
     const directionCallback = (direction) => {
       try {
-        this.tryNextStep(direction);
+        this.tryAskDirection(direction);
       } catch (error) {
-        this.catchHandler(error, this.nextStep);
+        this.catchHandler(error, this.askDirection);
       }
     };
     InputView.readMoving(directionCallback);
@@ -64,7 +60,7 @@ class GameController {
 
   retry() {
     this.#gameService.initData();
-    this.nextStep();
+    this.askDirection();
   }
 
   gameOver() {
@@ -73,16 +69,16 @@ class GameController {
 
   tryBridgeSize(size) {
     this.#gameService.makeBridge(size);
-    this.nextStep();
+    this.askDirection();
   }
 
-  askDirection(direction) {
-    const isRightChoice = this.movePlayer(direction);
+  tryAskDirection(direction) {
+    const isRightChoice = this.#gameService.movePlayer(direction);
     this.printCurMap();
     isRightChoice ? this.isDone() : this.askRetry();
   }
 
-  tryRetry() {
+  tryRetry(command) {
     const shouldRetry = this.#gameService.checkCommend(command);
     shouldRetry ? this.retry() : this.gameOver();
   }

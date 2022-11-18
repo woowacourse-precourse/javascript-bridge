@@ -11,10 +11,8 @@ class BridgeGame {
    */
   move(direction, bridge) {
     Validator.directionValidityCheck(direction);
-    const directionNumber = DIRECTION[direction];
-    const nextBridgeNumber = bridge;
 
-    return directionNumber === nextBridgeNumber;
+    return direction === bridge;
   }
 
   /**

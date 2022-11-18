@@ -6,8 +6,8 @@ const MESSAGE = Object.freeze({
 });
 
 const DIRECTION = Object.freeze({
-  U: '1',
-  D: '0',
+  U: 1,
+  D: 0,
   1: 'U',
   0: 'D',
 });

@@ -1,7 +1,6 @@
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { DIRECTION } = require('./constant');
-const Validator = require('./Validator');
 const { sizeValidityCheck } = require('./Validator');
 
 class Bridge {
@@ -34,7 +33,7 @@ class Bridge {
   }
 
   updateBridgeMap(direction, elem) {
-    const otherSide = DIRECTION[(Number(DIRECTION[direction]) + 1) % 2];
+    const otherSide = DIRECTION[(DIRECTION[direction] + 1) % 2];
     this.#bridgeMap[direction].push(elem);
     this.#bridgeMap[otherSide].push(' ');
   }
