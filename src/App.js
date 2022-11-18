@@ -28,7 +28,7 @@ class App {
     //게임 재시작
     this.restart(this.#answer);
     //출력
-    OutputView.printResult(bridgeArr, this.tryGame);
+    OutputView.printResult(bridgeArr, this.tryGame, this.#answer);
   }
 
   restart(answer) {
