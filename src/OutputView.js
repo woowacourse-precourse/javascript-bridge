@@ -1,6 +1,5 @@
-const { print } = require('./utils/ui');
-const { PRINT_MESSAGE } = require('./constants');
-const { MOVE, MOVE_RESULT } = require('./constants');
+const { print, close } = require('./utils/ui');
+const { PRINT_MESSAGE, MOVE, MOVE_RESULT } = require('./constants');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -55,7 +54,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridgeGame) {
+    print(PRINT_MESSAGE.FINAL_GAME_RESULT);
+    this.printMap(bridgeGame);
+    print(PRINT_MESSAGE.GAME_SUCCESS_OR_NOT + bridgeGame.getSuccessState());
+    print(PRINT_MESSAGE.TOTAL_GAME_COUNT + bridgeGame.getCount());
+    close();
+  },
 };
 
 module.exports = OutputView;
