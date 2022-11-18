@@ -35,10 +35,13 @@ const InputView = {
         const bridgeGame = new BridgeGame();
         const result = bridgeGame.move(moving, bridge, movingList);
         if (result[0].includes("X") || result[1].includes("X")) {
-          this.readGameCommand(attempts, bridge);
-        } else {
-          this.readMoving(bridge, result, attempts);
+          return this.readGameCommand(attempts, bridge);
         }
+        if (result[0].length === bridge.length) {
+          const SUCCESS = "성공";
+          return OutputView.printResult(SUCCESS, attempts);
+        }
+        return this.readMoving(bridge, result, attempts);
       }
     );
   },
