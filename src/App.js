@@ -5,7 +5,7 @@ const OutputView = require("./OutputView.js")
 class App {
   constructor(){
     this.game = new BridgeGame()
-    this.try = 0
+    this.try = 1
   }
   play() {
     InputView.readBridgeSize(this.makeBridge.bind(this))
@@ -29,12 +29,18 @@ class App {
   retryCommand(input){
     Validate.RetryInput(input)
     if (input == "R"){
-      this.try += 1
+      this.setGameReset()
       InputView.readMoving(this.moveCommand.bind(this))     
     }
     else if(input == "Q"){
-      OutputView.printResult(this.try)
+      OutputView.printResult(this.game.upside,this.game.downside,this.try)
     }
+  }
+  setGameReset(){
+    this.try += 1
+    this.game.upside = []
+    this.game.downside = []
+    this.game.number = 0
   }
 }
 const app = new App();
