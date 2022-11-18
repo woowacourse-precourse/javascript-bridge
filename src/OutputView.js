@@ -15,8 +15,8 @@ const OutputView = {
     const playHistory = this.printPlayHistory(gameStatus);
     const upperHistory = this.printUpperHistory(playHistory);
     const lowerHistory = this.printLowerHistory(playHistory);
-    console.log(upperHistory);
-    console.log(lowerHistory);
+    Console.print(upperHistory);
+    Console.print(lowerHistory);
     // InputView.readMoving();
   },
 
