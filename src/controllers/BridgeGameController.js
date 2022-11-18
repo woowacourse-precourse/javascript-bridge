@@ -39,18 +39,26 @@ class BridgeGameController {
 
   #onGameCommandSubmit(input) {
     if (input === GAME_RULE.RETRY) {
-      this.#game.retry();
-      InputView.readMoving(this.#onMovingSubmit.bind(this));
+      this.#runRetry();
       return;
     }
     if (input === GAME_RULE.QUIT) {
-      const bridgeMap = this.#game.getMap();
-      OutputView.printResult(bridgeMap);
-      Console.close();
+      this.#runQuit();
       return;
     }
 
     throw new Error('[ERROR] 재시도 여부 입력값은 R 또는 Q여야 합니다.');
+  }
+
+  #runRetry() {
+    this.#game.retry();
+    InputView.readMoving(this.#onMovingSubmit.bind(this));
+  }
+
+  #runQuit() {
+    const bridgeMap = this.#game.getMap();
+    OutputView.printResult(bridgeMap);
+    Console.close();
   }
 }
 
