@@ -1,6 +1,7 @@
 const BridgeGame = require('../src/BridgeGame');
 
 const NUMBER_ERROR_TEXT = '[ERROR] 전달된 인수는 숫자 타입이 아닙니다.';
+const ARRAY_ERROR_TEXT = '[ERROR] 전달된 인수는 배열 타입이 아닙니다.';
 
 /**
  * 전달된 인수만큼 함수를 반복 실행하는 유틸 함수이다.
@@ -204,6 +205,15 @@ describe('다리 값을 세팅하는 메서드 테스트', () => {
     const RECEIVED = ['U', 'D', 'D'];
 
     expect(bridgeGame.setBridge(EXPECTED)).toEqual(RECEIVED);
+  });
+
+  test('배열이 아니라면 예외를 발생한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const EXPECTED = '"U", "D", "D"';
+
+    expect(() => {
+      bridgeGame.setBridge(EXPECTED);
+    }).toThrow(ARRAY_ERROR_TEXT);
   });
 });
 
