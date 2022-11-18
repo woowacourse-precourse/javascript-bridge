@@ -5,11 +5,12 @@ const BridgeMaker = require("./BridgeMaker");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  tryCount = 0;
+  tryCount = 1;
   moveCount = 0;
   bridgeSize = 0;
   bridge = [];
   user = [];
+  status = "";
 
   getBridge() {
     return this.bridge;
@@ -42,11 +43,14 @@ class BridgeGame {
     const isCorrect = this.bridge[this.moveCount - 1] === this.user[this.moveCount - 1];
 
     if (this.moveCount === this.bridgeSize && isCorrect) {
-      return "END"
+      this.status = "END"
     } else if (this.moveCount !== this.bridgeSize && isCorrect) {
-      return "NEXT"
+      this.status = "NEXT"
+    } else if (!isCorrect) {
+      this.status = "FAIL"
     }
-    return "FAIL"
+
+    return this.status;
   }
 
   /**

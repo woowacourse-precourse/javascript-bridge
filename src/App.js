@@ -6,10 +6,11 @@ const {Console} = require("@woowacourse/mission-utils");
 class App {
   MOVE_TO_FORK_MAP = {
     END: () => {
+      OutputView.printResult(this.bridgeGame);
       Console.close();
     },
     NEXT: () => {
-      this.requestDirection();
+      this.requestDirection(this.bridgeGame);
     },
     FAIL: () => {
       this.requestIsTry();
@@ -18,6 +19,7 @@ class App {
 
   FAIL_TO_FORK_MAP = {
     Q: () => {
+      OutputView.printResult();
       Console.close();
     },
     R: () => {
