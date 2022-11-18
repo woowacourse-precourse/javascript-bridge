@@ -15,6 +15,7 @@ class BridgeGame {
     this.#downarray = [];
     this.#count = 1;
     this.#isGameOver = false;
+    this.#isWinnging = false;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -65,6 +66,12 @@ class BridgeGame {
   }
   getPrintParams() {
     return [this.#uparray, this.#downarray, this.#count];
+  }
+  setIsWinnging(boolen) {
+    this.#isWinnging = boolen;
+  }
+  getIsWinnging() {
+    return this.#isWinning;
   }
 }
 
