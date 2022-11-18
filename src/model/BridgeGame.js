@@ -29,15 +29,17 @@ class BridgeGame {
 
   checkUporDown(upOrdown, mark){
     if (upOrdown === DEFAULTS.UP){
-      (this.upList.length !== 0) ? this.upList.push(DEFAULTS.SEPARATOR, mark) : this.upList.push(mark);
-      (this.downList.length !== 0) ? this.downList.push(DEFAULTS.SEPARATOR, DEFAULTS.SPACE) : this.downList.push(DEFAULTS.SPACE);
+      this.moveRecord(this.upList, this.downList, mark);
     }
     if (upOrdown === DEFAULTS.DOWN){
-      (this.upList.length !== 0) ? this.upList.push(DEFAULTS.SEPARATOR, DEFAULTS.SPACE) : this.upList.push(DEFAULTS.SPACE);
-      (this.downList.length !== 0) ? this.downList.push(DEFAULTS.SEPARATOR, mark) : this.downList.push(mark);
+      this.moveRecord(this.downList, this.upList, mark);
     }
   }
 
+  moveRecord(recordMark, recordSpace, mark){
+    (recordMark.length !== 0) ? recordMark.push(DEFAULTS.SEPARATOR, mark) : recordMark.push(mark);
+    (recordSpace.length !== 0) ? recordSpace.push(DEFAULTS.SEPARATOR, DEFAULTS.SPACE) : recordSpace.push(DEFAULTS.SPACE);
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
