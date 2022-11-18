@@ -1,4 +1,5 @@
 const BridgeGame = require('./BridgeGame');
+const BridgeValidation = require('./Validation/BridgeValidation');
 const { readMoving, end, getInputs } = require('./View/InputView');
 
 class App {
@@ -8,6 +9,7 @@ class App {
   }
 
   createBridge(input) {
+    BridgeValidation(input);
     this.#game = new BridgeGame(input);
   }
 
