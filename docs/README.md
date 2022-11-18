@@ -199,6 +199,13 @@ const number = generateRandomNumber();
 
 ### 7️⃣ 테스트
 
+- [ ] test: App.js 테스트 코드 작성
+- [ ] test: BridgeGame.js 테스트 코드 작성
+- [ ] test: BridgeMaker.js 테스트 코드 작성
+- [ ] test: InputView.js 테스트 코드 작성
+- [ ] test: OutPutView.js 테스트 코드 작성
+- [ ] test: Validation.js 테스트 코드 작성
+
 ---
 
 ### 8️⃣ 리펙터링
