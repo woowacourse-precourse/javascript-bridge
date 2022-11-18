@@ -21,10 +21,10 @@ class BridgeGame {
    */
   move = (letter) => {
     this.#steps.push(letter);
-    const correct = this.#isCorrect();
-    const gameOver = this.#isGameOver();
+    const isCorrect = this.#isCorrect();
+    const isGameOver = this.#isGameOver();
     const map = this.#getMap();
-    return { map, correct, gameOver, trialTime: this.#trialTime };
+    return { map, isCorrect, isGameOver, trialTime: this.#trialTime };
   };
 
   #isCorrect() {

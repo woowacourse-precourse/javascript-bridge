@@ -33,9 +33,9 @@ const InputView = {
       const letter = input.toUpperCase();
       try {
         Validation.checkUorD(letter);
-        const { correct, map, gameOver, trialTime } = this.move(letter);
+        const { isCorrect, map, isGameOver, trialTime } = this.move(letter);
         OutputView.printMap(map);
-        this.nextAction({ correct, map, gameOver, trialTime });
+        this.nextAction({ isCorrect, map, isGameOver, trialTime });
       } catch (e) {
         OutputView.printErrorMessage(e);
         this.readMoving();
@@ -43,13 +43,13 @@ const InputView = {
     });
   },
 
-  nextAction({ correct, map, gameOver, trialTime }) {
-    if (gameOver && correct) {
+  nextAction({ isCorrect, map, isGameOver, trialTime }) {
+    if (isGameOver && isCorrect) {
       this.endGame(map, MESSAGE.win, trialTime);
       return;
     }
 
-    if (correct) {
+    if (isCorrect) {
       this.readMoving();
     } else {
       this.readGameCommand({ map, trialTime });
