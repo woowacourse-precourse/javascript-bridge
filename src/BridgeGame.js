@@ -33,9 +33,11 @@ class BridgeGame {
 
 	backMove() {
 		this.#currentPos--;
+		// UX인경우 원래 D이므로
 		if (this.#bridge[this.#currentPos] === 'UX') {
 			this.#bridge[this.#currentPos] = 'D';
 		}
+		// DX인경우 원래 O이므로
 		if (this.#bridge[this.#currentPos] === 'DX') {
 			this.#bridge[this.#currentPos] = 'U';
 		}
