@@ -21,6 +21,15 @@ const Validator = {
     }
   },
 
+  commandValidityCheck: (command) => {
+    try {
+      Validator.throwErrorIfHasBlank(command);
+      if (command !== 'R' && command !== 'Q') throw new Error('[ERROR]');
+    } catch (error) {
+      Console.print(error);
+    }
+  },
+
   throwErrorIfHasBlank: (string) => {
     if (string.includes(' ')) throw new Error('[ERROR]');
   },
