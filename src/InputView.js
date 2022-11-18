@@ -3,10 +3,10 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const Check = require('./Check');
-
+const INPUT_MESSAGES = require('./common/messages');
 const InputView = {
   readBridgeSize() {
-    MissionUtils.Console.readLine('다리의 길이를 입력해주세요.\n', (size) => {
+    MissionUtils.Console.readLine(`${INPUT_MESSAGES.INPUT_BRIDGESIZE}`, (size) => {
       const brige = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
       const gamePlay = new BridgeGame(brige);
       this.readMoving(gamePlay);
@@ -14,18 +14,19 @@ const InputView = {
   },
 
   readMoving(gamePlay) {
-    const playerInput = (moving) => {
-      const isGameOver = gamePlay.move(moving);
+    const playerInput = (input) => {
+      Check.isVaildInput(input);
+      const isGameOver = gamePlay.move(input);
       if (isGameOver) {
         this.readGameCommand(gamePlay);
       }
       return this.readMoving(gamePlay);
     };
-    MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래:D)\n', playerInput);
+    MissionUtils.Console.readLine(`${INPUT_MESSAGES.INPUT_MOVE}`, playerInput);
   },
 
   readGameCommand(gamePlay) {
-    MissionUtils.Console.readLine('게임을 종료합니다.게임을 재시도하려면 R, 종료하려면 Q를 눌러주세요.', (answer) => {
+    MissionUtils.Console.readLine(`${INPUT_MESSAGES.INPUT_RETRY}`, (answer) => {
       if (Check.CheckRestartGame(answer, gamePlay)) this.readMoving(gamePlay);
     });
   },
