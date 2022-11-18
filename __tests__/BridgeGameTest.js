@@ -33,4 +33,20 @@ describe('다리 게임 test', () => {
       expect(bridgeGame.isGameLose()).toBe(!(bridge[i] === choice[i]));
     }
   });
+
+  test('게임 재시도', () => {
+    const bridge = ['U', 'D', 'D', 'U', 'D'];
+    const choice = ['U', 'D', 'D', 'D'];
+    const bridgeGame = new BridgeGame(bridge);
+
+    for (let i = 0; i < choice.length; i += 1) {
+      bridgeGame.move(choice[i]);
+    }
+
+    expect(bridgeGame.isGameLose()).toBe(true);
+    bridgeGame.retry();
+    expect(bridgeGame.getMoves()).toEqual([]);
+    expect(bridgeGame.isGameLose()).toBe(false);
+    expect(bridgeGame.getTryCount()).toBe(2);
+  });
 });
