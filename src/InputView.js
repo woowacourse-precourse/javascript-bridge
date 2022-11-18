@@ -3,7 +3,7 @@ const Error = require("./ControlError");
 const BridgeMaker = require("./BridgeMaker");
 const RandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
-const bridgeGame = new BridgeGame();
+const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -13,12 +13,13 @@ const InputView = {
       "다리의 길이를 입력해주세요.\n",
       (bridgeSize) => {
         try {
-          Error.readBridgeSizeError(bridgeSize);
+          // Error.readBridgeSizeError(bridgeSize);
           const bridge = BridgeMaker.makeBridge(
             bridgeSize,
             RandomNumberGenerator.generate
           );
-          this.readMoving();
+          console.log(bridge, "생성된 다리");
+          this.readMoving(0, bridge);
         } catch (e) {
           MissionUtils.Console.print(e);
           this.readBridgeSize();
@@ -30,12 +31,16 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(nth, bridge) {
     MissionUtils.Console.readLine(
       "\n이동할 칸을 선택해주세요. (위: U, 아래: D).\n",
       (moveLocation) => {
         try {
-          Error.readMoving(moveLocation);
+          // Error.readMoving(moveLocation);
+          const bridgeGame = new BridgeGame(bridge);
+          const result = bridgeGame.move(nth, moveLocation);
+          console.log(result);
+          // OutputView.printMap(result);
         } catch (e) {
           MissionUtils.Console.print(e);
           this.readMoving();
