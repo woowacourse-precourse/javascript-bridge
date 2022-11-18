@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./Constants.js');
 const BridgeSize = require('./BridgeSize.js');
+const CrossingBridge = require('./CrossingBridge.js');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -25,7 +26,13 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(MESSAGE.INPUT_SPACE_TO_MOVE, (move) => {
-      console.log(move);
+      const crossingBridge = new CrossingBridge(move);
+      try {
+        crossingBridge.validate();
+      } catch (err) {
+        Console.print(err);
+        this.readMoving();
+      }
     });
   },
 
@@ -34,5 +41,3 @@ const InputView = {
    */
   readGameCommand() {},
 };
-
-module.exports = InputView;
