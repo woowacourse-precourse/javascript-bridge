@@ -40,6 +40,7 @@ class BridgeGame {
             this.#upBridgeHistory.push(STRUCTURE.BLANK);
             this.#downBridgeHistory.push(STRUCTURE.BAD);
         }
+        OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory);
     }
 
     move(move) {
