@@ -21,13 +21,20 @@ const InputView = {
   readMoving(bridgeGame) {
     readLine(INPUT_MESSAGE.MOVING_DIRECTION, (direction) => {
       bridgeGame.move(direction);
+      const selectionState = bridgeGame.getSelection().getState();
+      if (selectionState) {
+        return this.readMoving(bridgeGame);
+      }
+      return this.readGameCommand();
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    console.log('test end');
+  },
 };
 
 module.exports = InputView;
