@@ -5,16 +5,20 @@ class Bridge {
   #bridgeStructure;
 
   constructor(size) {
-    this.#validateSize(+size);
+    this.#validateSize(size);
     this.#size = +size;
   }
 
   #validateSize(size) {
-    if (!/\d/.test(size)) {
+    if (!/^[0-9]+$/.test(size)) {
       throw new Error(ERROR.bridge_size_error);
     }
 
-    if (size < BRIDGE.min_size || size > BRIDGE.max_size) {
+    if (size !== String(+size)) {
+      throw new Error(ERROR.bridge_size_error);
+    }
+
+    if (+size < BRIDGE.min_size || +size > BRIDGE.max_size) {
       throw new Error(ERROR.bridge_size_error);
     }
   }
