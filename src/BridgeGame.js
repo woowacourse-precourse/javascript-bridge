@@ -23,7 +23,11 @@ class BridgeGame {
   }
 
   makeBridge(size) {
-    this.bridgeModel = this.bridgeMaker.makeBridge(size, this.bridgeRandomNumberGenerator.generate);
+    this.bridgeModel = this.bridgeMaker.generateBridgeModel(
+      size,
+      this.bridgeRandomNumberGenerator.generate
+    );
+
     Console.print(this.bridgeModel.bridge);
     Console.close();
   }
