@@ -11,6 +11,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize (moveGame, setPattern, makeBridge) {
+    OutputView.printStart();
     Console.readLine(MESSAGE.inputBridgeLength, (size) => {
       try {
         setPattern(makeBridge(Number(size), generate));
