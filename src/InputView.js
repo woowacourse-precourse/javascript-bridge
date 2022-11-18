@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
+const Validator = require('./Validator');
 
 const InputView = {
   INPUT_MESSAGE: {
@@ -11,26 +12,36 @@ const InputView = {
   readBridgeSize(handleBridgeSize) {
     Console.readLine(InputView.INPUT_MESSAGE.bridgeSize, (input) => {
       try {
-        if (isNaN(input)) throw new Error('숫자를 입력해 주세요.');
+        Validator.checkBridgeSize(input);
+        handleBridgeSize(Number(input));
       } catch (e) {
         OutputView.printError(e.message);
         InputView.readBridgeSize(handleBridgeSize);
       }
-
-      const size = Number(input);
-      handleBridgeSize(size);
     });
   },
 
   readMoving(handleMoving) {
     Console.readLine(InputView.INPUT_MESSAGE.moving, (input) => {
-      handleMoving(input);
+      try {
+        Validator.checkMoving(input);
+        handleMoving(input);
+      } catch (e) {
+        OutputView.printError(e.message);
+        InputView.readMoving(handleMoving);
+      }
     });
   },
 
   readGameCommand(handleGameCommand) {
     Console.readLine(InputView.INPUT_MESSAGE.gameCommand, (input) => {
-      handleGameCommand(input);
+      try {
+        Validator.checkGameCommand(input);
+        handleGameCommand(input);
+      } catch (e) {
+        OutputView.printError(e.message);
+        InputView.readGameCommand(handleGameCommand);
+      }
     });
   },
 };
