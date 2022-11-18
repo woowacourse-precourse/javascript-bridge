@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { KEY, QUESTION, ERR } = require("./constants/constants");
+const { QUESTION } = require("../constants/constants");
+const Validation = require("../Utils/Validation");
 /**
  * 파일 경로 변경 가능 / 메서드 인자 변경 가능 / 필요 메서드 추가 가능
  */
@@ -14,7 +15,7 @@ const InputView = {
   readBridgeSize() {
     let length;
     MissionUtils.Console.readLine(QUESTION.BRIDGE_SIZE, (input) => {
-      this.validSize(input);
+      Validation.validSize(input);
       length = parseInt(input);
     });
     return length;
@@ -26,7 +27,7 @@ const InputView = {
   readMoving() {
     let move;
     MissionUtils.Console.readLine(QUESTION.MOVE_KEY, (input) => {
-      this.validMoveKey(input);
+      Validation.validMoveKey(input);
       move = input;
     });
     return move;
@@ -38,34 +39,10 @@ const InputView = {
   readGameCommand() {
     let command;
     MissionUtils.Console.readLine(QUESTION.COMMAND_KEY, (input) => {
-      this.validCommandKey(input);
+      Validation.validCommandKey(input);
       command = input;
     });
     return command;
-  },
-
-  validSize(input) {
-    if (isNaN(+input)) {
-      throw new Error(ERR.NOT_NUMBER);
-    }
-    if (!(input >= 3 && input <= 20)) {
-      MissionUtils.Console.close();
-      throw new Error(ERR.WRONG_BRIDGE_SIZE);
-    }
-  },
-
-  validMoveKey(input) {
-    if (input !== KEY.UP && input !== KEY.DOWN) {
-      MissionUtils.Console.close();
-      throw new Error(ERR.WRONG_MOVE_KEY);
-    }
-  },
-
-  validCommandKey(input) {
-    if (input !== KEY.RETRY && input !== KEY.QUIT) {
-      MissionUtils.Console.close();
-      throw new Error(ERR.WRONG_COMMAND_KEY);
-    }
   },
 };
 

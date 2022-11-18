@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { PRINT, KEY } = require("./constants/constants");
+const { PRINT, KEY } = require("../constants/constants");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -29,11 +29,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(bridgeMap, location, correct, tryCount) {
+  printResult(game, location, correct) {
     MissionUtils.Console.print(PRINT.FINISH_GAME);
-    OutputView.printMap(bridgeMap, location, correct);
+    OutputView.printMap(game.getBridgeMap(), location, correct);
     MissionUtils.Console.print(correct ? PRINT.SUCCESS_GAME : PRINT.FAIL_GAME);
-    MissionUtils.Console.print(PRINT.TOTAL_TRY + tryCount);
+    MissionUtils.Console.print(PRINT.TOTAL_TRY + game.getTryCount());
   },
 };
 
