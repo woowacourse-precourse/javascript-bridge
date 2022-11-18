@@ -9,14 +9,16 @@ const RULE = {
   MAX_SIZE: 20,
 };
 
-const ERROR = {
-  PREFIX: '[ERROR]',
-  NOT_INTEGER: '정수를 입력해주세요.',
-  NOT_IN_RANGE: `${RULE.MIN_SIZE} ~ ${RULE.MAX_SIZE}사이의 자연수를 입력해주세요.`,
-};
-
 const POSITION = {
   UPPER: 'U',
   LOWER: 'D',
 };
+
+const ERROR = {
+  PREFIX: '[ERROR]',
+  NOT_INTEGER: '정수를 입력해주세요.',
+  NOT_IN_RANGE: `${RULE.MIN_SIZE} ~ ${RULE.MAX_SIZE}사이의 자연수를 입력해주세요.`,
+  NOT_CROSSIBLE_KEY: `대문자 ${POSITION.UPPER}와 ${POSITION.LOWER} 중 하나를 입력해주세요.`,
+};
+
 module.exports = { MESSAGE, RULE, ERROR, POSITION };
