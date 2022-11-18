@@ -2,7 +2,7 @@
 
 ## 기능 목록
 
-- [ ] [출력] 게임 시작 문구를 출력한다.| OutputView#printStartMessage()
+- [x] [출력] 게임 시작 문구를 출력한다.| OutputView#printStartMessage()
 - [ ] [입력] 자동으로 생성할 다리 길이를 입력 받는다.| InputView#readBridgeSize()
   - [ ] [예외처리] 입력받은 값이 3 이상 20 이하 숫자가 아니면 예외 처리한다.| InputValidator#validateBridgeSize(bridgeSize)
 - [ ] 다리를 생성한다.| BridgeMaker#makeBridge(bridgeSize, generate)
