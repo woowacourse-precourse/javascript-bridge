@@ -2,8 +2,6 @@
 
 ## 1. `InputView`의 `readBridgeSize()`를 통해 다리의 길이를 입력받는 기능 구현
 
-- `BridgeGame`에 `create()`를 만들어서 `readBridgeSize()`를 호출한다.
-
 ## 2. `BridgeMaker`의 `makeBridge()`를 통해 다리를 생성하는 기능 구현
 
 - `BridgeRandomNumberGenerator`의 랜덤값 생성을 통하여 구현한다
