@@ -42,6 +42,14 @@ const runExceptionMoving = (inputs) => {
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
 
+const runExceptionCommand = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  InputView.readGameCommand();
+
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
+
 describe("입력 테스트", () => {
   test("다리 길이가 숫자가 아닌 경우 예외 처리한다.", () => {
     runException(["a"]);
@@ -60,10 +68,6 @@ describe("입력 테스트", () => {
   });
 
   test("게임 진행 옵션이 R이나 Q가 아닌 경우 예외 처리한다.", () => {
-    mockQuestions(["T"]);
-
-    expect(() => {
-      InputView.readGameCommand();
-    }).toThrow("[ERROR] 게임 진행 옵션은 R과 Q만 입력할 수 있습니다.");
+    runExceptionCommand(["T"]);
   });
 });

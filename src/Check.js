@@ -58,9 +58,16 @@ const Check = {
     const RESTART_COMMAND = "R";
     const END_COMMAND = "Q";
 
-    if (command !== RESTART_COMMAND && command !== END_COMMAND) {
-      throw new Error("[ERROR] 게임 진행 옵션은 R과 Q만 입력할 수 있습니다.");
+    try {
+      if (command !== RESTART_COMMAND && command !== END_COMMAND) {
+        throw new Error("[ERROR] 게임 진행 옵션은 R과 Q만 입력할 수 있습니다.");
+      }
+    } catch (e) {
+      Console.print(e.message);
+      return true;
     }
+
+    return false;
   },
 };
 
