@@ -10,7 +10,7 @@ const ERROR_MESSAGE = Object.freeze({
 
 const MODEL_KEY = Object.freeze({
   randomBridge: 'RANDOM_BRIDGE_MODEL_KEY',
-  answerBridge: 'ANSWER_BRIDGE_MODEL_KEY',
+  userBridge: 'USER_BRIDGE_MODEL_KEY',
   tryCount: 'TRY_COUNT_BRIDGE_MODEL_KEY'
 });
 
