@@ -38,8 +38,15 @@ class BridgeGame {
     this.user.push(input)
   }
   
-  isCorrect() {
-    return this.bridge[this.moveCount - 1] === this.user[this.moveCount - 1]
+  fork() {
+    const isCorrect = this.bridge[this.moveCount - 1] === this.user[this.moveCount - 1];
+
+    if (this.moveCount === this.bridgeSize && isCorrect) {
+      return "END"
+    } else if (this.moveCount !== this.bridgeSize && isCorrect) {
+      return "NEXT"
+    }
+    return "FAIL"
   }
 
   /**

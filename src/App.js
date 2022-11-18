@@ -4,47 +4,66 @@ const BridgeGame = require("./BridgeGame");
 const {Console} = require("@woowacourse/mission-utils");
 
 class App {
+  MOVE_TO_FORK_MAP = {
+    END: () => {
+      Console.close();
+    },
+    NEXT: () => {
+      this.requestDirection();
+    },
+    FAIL: () => {
+      this.requestIsTry();
+    },
+  }
+
+  FAIL_TO_FORK_MAP = {
+    Q: () => {
+      Console.close();
+    },
+    R: () => {
+      this.bridgeGame.retry();
+      OutputView.clearThread();
+      this.requestDirection();
+    }
+  }
+
   constructor() {
     this.bridgeGame = new BridgeGame();
   }
 
   play() {
     OutputView.start();
-    this.initialize();
+    this.requestBridgeSize();
   }
 
-  initialize() {
+  requestBridgeSize() {
     InputView.readBridgeSize(this.makeBridge.bind(this));
   }
 
-  makeBridge(bridgeSize) {
-    this.bridgeGame.setBridge(bridgeSize);
-    this.go();
+  makeBridge(response) {
+    this.bridgeGame.setBridge(response);
+    this.requestDirection();
   }
 
-  go() {
+  requestDirection() {
     InputView.readMoving(this.moveUser.bind(this));
   }
 
-  moveUser(direction) {
-    this.bridgeGame.move(direction);
+  moveUser(response) {
+    this.bridgeGame.move(response);
     OutputView.printMap(this.bridgeGame)
-    this.bridgeGame.isCorrect() ? this.go() : this.isRetry()
+    const status = this.bridgeGame.fork();
+    this.MOVE_TO_FORK_MAP[status]();
   }
 
-  isRetry() {
-    InputView.readGameCommand(this.temp.bind(this));
+  requestIsTry() {
+    InputView.readGameCommand(this.TryOrClose.bind(this));
   }
 
-  temp(response) {
-    if (response === "Q") {
-      Console.close();
-    } else if (response === "R") {
-      this.bridgeGame.retry();
-      OutputView.clearThread();
-      this.go();
-    }
+  TryOrClose(response) {
+    this.FAIL_TO_FORK_MAP[response]();
   }
+  
 
 }
 
