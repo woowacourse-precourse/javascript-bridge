@@ -1,4 +1,4 @@
-const BridgeLineMap = require("./ObjectMapping");
+const ObjectMapping = require("./ObjectMapping");
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -14,7 +14,7 @@ const BridgeMaker = {
     let count = 0;
     while (count < size) {
       const number = generateRandomNumber();
-      numbers.push(BridgeLineMap[number]);
+      numbers.push(ObjectMapping.BridgeLineMap[number]);
       count++;
     }
     return numbers;
