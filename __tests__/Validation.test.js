@@ -116,17 +116,17 @@ describe('에러 발생 함수 테스트', () => {
 });
 
 describe('배열 파악 함수 테스트', () => {
-  test('메소드 이름은 "checkIsArray"로 정의된다.', () => {
-    const METHOD_NAME = 'checkIsArray';
+  test('메소드 이름은 "array"로 정의된다.', () => {
+    const METHOD_NAME = 'array';
 
-    expect(Validation.checkIsArray.name).toEqual(METHOD_NAME);
+    expect(Validation.array.name).toEqual(METHOD_NAME);
   });
 
   test('인수가 배열이 아니라면 예외를 발생시킨다.', () => {
     const EXPECTED = '123';
 
     expect(() => {
-      Validation.checkIsArray(EXPECTED);
+      Validation.array(EXPECTED);
     }).toThrow(VALIDATION_ARRAY_TEXT);
   });
 
@@ -134,7 +134,7 @@ describe('배열 파악 함수 테스트', () => {
     const EXPECTED = [123];
 
     expect(() => {
-      Validation.checkIsArray(EXPECTED);
+      Validation.array(EXPECTED);
     }).not.toThrow(VALIDATION_ARRAY_TEXT);
   });
 });
