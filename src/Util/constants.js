@@ -11,7 +11,15 @@ const ERROR_MSG = {
   INPUT_CMD_ERROR: "[ERROR] 이동할 칸은 R 혹은 Q로 입력해주세요.\n",
 };
 
+const PRINT_FINISH_MSG = "\n최종 게임 결과";
+
+const SUCCESS = "성공";
+const FAIL = "실패";
+
 module.exports = {
   GUIDE_MSG,
   ERROR_MSG,
+  PRINT_FINISH_MSG,
+  SUCCESS,
+  FAIL,
 };

@@ -10,7 +10,6 @@ class BridgeGame {
 
   start(size) {
     this.#bridge = BridgeMaker.makeBridge(size, RandomNumberGenerator.generate);
-    // console.log(this.#bridge); // 테스트용 필히 삭제
   }
 
   move(answer) {
