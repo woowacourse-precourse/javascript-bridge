@@ -43,6 +43,14 @@ class App {
       this.#bridgeGame.undoOneStep();
       return this.askMove();
     }
+    return OutputView.printResult(
+      this.getBridgeMap(),
+      this.#bridgeGame.getStatus()
+    );
+  }
+
+  getBridgeMap() {
+    return { upperRow: this.#bridgeGame.U, lowerRow: this.#bridgeGame.D };
   }
 }
 
