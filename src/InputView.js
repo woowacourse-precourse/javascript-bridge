@@ -15,6 +15,7 @@ const InputView = {
 
   readMoving(game) {
     Console.readLine(REQUEST.MOVE_SPACE, (input) => {
+      InputView.validateMoving(input);
       const isContinued = game.move(input);
       if (isContinued) InputView.readMoving(game);
     });
@@ -26,6 +27,14 @@ const InputView = {
     if (!isNumberInRange(input, LENGTH_MIN, LENGTH_MAX)) {
       throw new Error(ERROR.INVALID_LENGTH);
     }
+  },
+
+  validateMoving(input) {
+    return input === 'U' || input === 'D';
+  },
+
+  validateGameCommand(input) {
+    return input === 'R' || input === 'Q';
   },
 };
 
