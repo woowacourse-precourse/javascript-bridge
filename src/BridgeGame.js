@@ -8,8 +8,18 @@ class BridgeGame {
     }
   }
 
+  validateMoving(moving) {
+    if (this.isInvalidMoving(moving)) {
+      throw new Error("[ERROR] 위로 이동하려면 U, 아래로 이동하려면 D를 입력해야 합니다.");
+    }
+  }
+
   isInvalidBridgeSize(size) {
     return Number.isNaN(size) || !Number.isInteger(size) || size < 3 || size > 20;
+  }
+
+  isInvalidMoving(moving) {
+    return moving !== "U" && moving !== "D";
   }
 
   /**
