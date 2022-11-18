@@ -36,7 +36,16 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    let USER_CHOICE = ''
+    MissionUtils.Console.readLine("",(userChoice) => {
+      // 이부분 바꿔야함
+      userChoice = 'Q'
+      Checking.userRetryCheck(userChoice)
+      USER_CHOICE = userChoice
+    })
+    return USER_CHOICE
+  },
 };
 
 module.exports = InputView;

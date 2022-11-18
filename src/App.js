@@ -56,9 +56,7 @@ class App {
     for (let i = 0 ; i < bridgeLength ; i++){
       OutputView.printMove()
       let USER_MOVE = InputView.readMoving()
-      if (GAME.move(bridge,USER_MOVE,i) === 'X' ) {
-        this.askRetry('X')
-      }
+      if (GAME.move(bridge,USER_MOVE,i) === 'X' ) return this.xCase(BRIDGE,USER_MOVE,GAME.move(bridge,USER_MOVE,i))
       BRIDGE = this.printBridge(GAME.move(bridge,USER_MOVE,i))
     }
     this.finishGameSuccess(BRIDGE)
@@ -70,13 +68,33 @@ class App {
     return OutputView.printMap(this.BRIDGE_U,this.BRIDGE_D)
   }
 
+  // retry
+  xCase(bridge,userMove,result){
+    bridge = this.askRetry(result,userMove)
+    OutputView.printRetry()
+    let USER_CHOICE = InputView.readGameCommand()
+    this.failCase(USER_CHOICE,bridge)
+  }
+
+  // failCase
+  failCase(userChoice,bridge){
+    switch(userChoice){
+      case 'Q':
+        return this.finishGameFail(bridge)
+    }
+  }
   // 게임 다시 시작
-  askRetry(result){
-    OutputView.printStart()
+  askRetry(result,userMove){
+    BridgeBuild.xBridge(result,userMove,this.BRIDGE_U,this.BRIDGE_D)
+    return OutputView.printMap(this.BRIDGE_U,this.BRIDGE_D)
   }
 
   finishGameSuccess(bridge){
     OutputView.printResult('SUCCESS',bridge,this.TRY_TIME)
+  }
+
+  finishGameFail(bridge) {
+    OutputView.printResult('FAIL',bridge,this.TRY_TIME)
   }
 }
 
