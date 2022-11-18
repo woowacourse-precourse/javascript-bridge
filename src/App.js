@@ -1,11 +1,11 @@
 const BridgeGame = require("./BridgeGame");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
-const { validateBrigeSize } = require("./util/validate");
+const { validateBrigeSize, validateMoving } = require("./util/validate");
 
 class App {
   bridgeGame = null;
-  bridgePath = null;
+  pathIdx = 0;
 
   play() {
     this.start();
@@ -33,6 +33,11 @@ class App {
 
   cbAfterReadMoving(choice) {
     validateMoving(choice);
+    const isAlright = this.bridgeGame.checkIsAlrightPath(this.pathIdx, choice);
+
+    console.log("isAlright", isAlright);
+    this.bridgeGame.move();
+    this.pathIdx += 1;
   }
 }
 
