@@ -3,6 +3,13 @@ class BridgeMap {
 
   #MAP_SOURCE = { CORRECT: '| O ', INCORRECT: '| X ', EMPTY: '|   ' };
 
+  addFirstMap(boolean, input, beforeMap) {
+    // this.#isFirst = false;
+    // console.log(boolean, input, beforeMap, 'addfristMap 확인용');
+    if (boolean) return BridgeMap.addCorrect(input, beforeMap, this.#FIRST_MAP_SOURCE);
+    if (!boolean) return BridgeMap.addIncorrect(input, beforeMap, this.#FIRST_MAP_SOURCE);
+  }
+
   addMap(boolean, input, beforeMap) {
     if (boolean) return BridgeMap.addCorrect(input, beforeMap, this.#MAP_SOURCE);
     if (!boolean) return BridgeMap.addIncorrect(input, beforeMap, this.#MAP_SOURCE);
