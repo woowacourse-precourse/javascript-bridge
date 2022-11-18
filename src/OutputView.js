@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { MESSAGES_RESULT, VALUES } = require("./constants");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -9,8 +10,11 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(upperBridge, lowerBridge) {
-    MissionUtils.Console.print("[ " + upperBridge.join(" | ") + " ]");
-    MissionUtils.Console.print("[ " + lowerBridge.join(" | ") + " ]");
+    const assembleBridge = (bridge) => {
+      return "[ " + bridge.join(" | ") + " ]";
+    };
+    MissionUtils.Console.print(assembleBridge(upperBridge));
+    MissionUtils.Console.print(assembleBridge(lowerBridge));
     MissionUtils.Console.print("");
   },
 
@@ -20,12 +24,15 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(totalTrial, gameResult, bridge) {
-    MissionUtils.Console.print("최종 게임 결과");
-    MissionUtils.Console.print("[ " + bridge[0].join(" | ") + " ]");
-    MissionUtils.Console.print("[ " + bridge[1].join(" | ") + " ]");
+    const assembleBridge = (bridge) => {
+      return "[ " + bridge.join(" | ") + " ]";
+    };
+    MissionUtils.Console.print(MESSAGES_RESULT.TITLE);
+    MissionUtils.Console.print(assembleBridge(bridge[VALUES.UPPER_BRIDGE_INDEX]));
+    MissionUtils.Console.print(assembleBridge(bridge[VALUES.LOWER_BRIDGE_INDEX]));
     MissionUtils.Console.print("");
-    MissionUtils.Console.print(`게임 성공 여부: ${gameResult}`);
-    MissionUtils.Console.print(`총 시도한 횟수: ${totalTrial}`);
+    MissionUtils.Console.print(MESSAGES_RESULT.WIN_OR_NOT + gameResult);
+    MissionUtils.Console.print(MESSAGES_RESULT.TOTAL_TRIALS + totalTrial);
   },
 };
 

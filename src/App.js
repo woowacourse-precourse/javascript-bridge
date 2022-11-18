@@ -7,6 +7,4 @@ class App {
   }
 }
 
-const appli = new App();
-appli.play();
 module.exports = App;
