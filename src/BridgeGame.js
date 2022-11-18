@@ -44,6 +44,7 @@ class BridgeGame {
     //console.log("이동시작", this.isValidPath(direction), this.#myPosition, this.#currentMap);
     if (this.isValidPath(direction)) {
       if (direction === 1) this.#currentMap.upperPart.push("O");
+      if (direction === 0) this.#currentMap.lowerPart.push("O");
       this.fillBlankUnselectedPath(Number(!direction));
     }
   }
