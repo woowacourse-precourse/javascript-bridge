@@ -10,18 +10,18 @@ const Validate = {
     }
   },
 
-  checkMovingKey(key) {
+  checkMovingKey(movingKey) {
     // 이동 키 확인
-    if (key === KEY.UP || key === KEY.DOWN) {
+    if (movingKey === KEY.UP || movingKey === KEY.DOWN) {
       return true;
     } else {
       return false;
     }
   },
 
-  checkCommandKey(key) {
+  checkCommandKey(commandKey) {
     // 재시작 여부 키 확인
-    if (key === KEY.RETRY || key === KEY.END) {
+    if (commandKey === KEY.RETRY || commandKey === KEY.END) {
       return true;
     } else {
       return false;
