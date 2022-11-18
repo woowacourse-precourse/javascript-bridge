@@ -6,8 +6,11 @@ const { Console } = require('@woowacourse/mission-utils');
 const Messages = require('./Messages');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeGame = require('./BridgeGame');
 
 const InputView = {
+  bridgeGame: new BridgeGame(),
+
   readBridgeSize() {
     Console.readLine(Messages.INPUT_BRIDGE_SIZE, (bridgeSize) => {
       this.validateBridgeSize(bridgeSize);
@@ -34,6 +37,7 @@ const InputView = {
   readMoving(bridge) {
     Console.readLine(Messages.INPUT_MOVING, (upOrDown) => {
       this.validateMoving(upOrDown);
+      const round = this.bridgeGame.move();
     });
   },
 
