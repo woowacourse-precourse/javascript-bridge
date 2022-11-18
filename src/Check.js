@@ -42,9 +42,16 @@ const Check = {
     const UPPER_moving = "U";
     const LOWER_moving = "D";
 
-    if (moving !== UPPER_moving && moving !== LOWER_moving) {
-      throw new Error("[ERROR] 이동할 칸은 U과 P만 입력할 수 있습니다.");
+    try {
+      if (moving !== UPPER_moving && moving !== LOWER_moving) {
+        throw new Error("[ERROR] 이동할 칸은 U과 P만 입력할 수 있습니다.");
+      }
+    } catch (e) {
+      Console.print(e.message);
+      return true;
     }
+
+    return false;
   },
 
   checkCommand(command) {

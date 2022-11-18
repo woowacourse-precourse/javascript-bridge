@@ -34,6 +34,14 @@ const runException = (inputs) => {
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
 
+const runExceptionMoving = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  InputView.readMoving();
+
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
+
 describe("입력 테스트", () => {
   test("다리 길이가 숫자가 아닌 경우 예외 처리한다.", () => {
     runException(["a"]);
@@ -48,11 +56,7 @@ describe("입력 테스트", () => {
   });
 
   test("이동할 칸이 U나 P가 아닌 경우 예외 처리한다.", () => {
-    mockQuestions(["A"]);
-
-    expect(() => {
-      InputView.readMoving();
-    }).toThrow("[ERROR] 이동할 칸은 U과 P만 입력할 수 있습니다.");
+    runExceptionMoving(["A"]);
   });
 
   test("게임 진행 옵션이 R이나 Q가 아닌 경우 예외 처리한다.", () => {

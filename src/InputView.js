@@ -36,7 +36,10 @@ const InputView = {
     Console.readLine(
       "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (moving) => {
-        Check.checkMoving(moving);
+        const error = Check.checkMoving(moving);
+        if (error) {
+          return this.readMoving(bridge, movingList, attempts);
+        }
         const bridgeGame = new BridgeGame();
         const result = bridgeGame.move(moving, bridge, movingList);
         if (result[0].includes("X") || result[1].includes("X")) {
