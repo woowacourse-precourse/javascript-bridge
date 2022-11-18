@@ -5,6 +5,7 @@ const { KEY } = require('./Constants');
  */
 class BridgeGame {
   answerBridge;
+  userInput = [];
   userBridge = [[], []];
   movingCount = 0;
   attempts;
@@ -19,13 +20,15 @@ class BridgeGame {
    */
   move(movingKey) {
     this.movingCount += 1;
+    this.userInput.push(movingKey);
+    const MOVE_RESULT = this.getMoveResult(movingKey);
     if (movingKey === KEY.UP) {
-      this.userBridge[0].push(this.getMoveResult(movingKey));
+      this.userBridge[0].push(MOVE_RESULT);
       this.userBridge[1].push(' ');
     }
     if (movingKey === KEY.DOWN) {
       this.userBridge[0].push(' ');
-      this.userBridge[1].push(this.getMoveResult(movingKey));
+      this.userBridge[1].push(MOVE_RESULT);
     }
     return this.userBridge;
   }
@@ -43,7 +46,11 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.attempts += 1;
+    this.userBridge = [[], []];
+    this.movingCount = 0;
+  }
 }
 
 module.exports = BridgeGame;

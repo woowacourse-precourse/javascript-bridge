@@ -25,6 +25,14 @@ const Validate = {
       return false;
     }
   },
+
+  checkUserInput(userInput, answerBridge) {
+    if (userInput === answerBridge) {
+      return true;
+    } else {
+      return false;
+    }
+  },
 };
 
 module.exports = Validate;

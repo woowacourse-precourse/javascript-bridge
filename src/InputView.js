@@ -2,8 +2,13 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView = require('./OutputView');
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE, ERROR } = require('./Constants');
-const { checkBridgeSize, checkMovingKey } = require('./Validate');
+const { MESSAGE, ERROR, KEY } = require('./Constants');
+const {
+  checkBridgeSize,
+  checkMovingKey,
+  checkCommandKey,
+  checkUserInput,
+} = require('./Validate');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -34,9 +39,18 @@ const InputView = {
     Console.readLine(MESSAGE.MOVING_KEY, (key) => {
       if (checkMovingKey(key)) {
         const USER_BRIDGE = bridgeGame.move(key);
-        OutputView.printMap(USER_BRIDGE, bridgeGame);
+        OutputView.printMap(USER_BRIDGE);
       } else {
         throw new Error(ERROR.MOVING_KEY);
+      }
+      if (bridgeGame.getMoveResult(key) === 'O') {
+        if (checkUserInput(bridgeGame.userInput)) {
+          OutputView.printResult(bridgeGame, '성공');
+        } else {
+          this.readMoving(bridgeGame);
+        }
+      } else {
+        this.readGameCommand(bridgeGame);
       }
     });
   },
@@ -44,7 +58,20 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGame) {
+    Console.readLine(MESSAGE.GAME_COMMAND, (key) => {
+      if (!checkCommandKey(key)) {
+        throw new Error(ERROR.GAME_COMMAND);
+      }
+      if (key === KEY.RETRY) {
+        bridgeGame.retry();
+        this.readMoving(bridgeGame);
+      }
+      if (key === KEY.END) {
+        OutputView.printResult(bridgeGame, '실패');
+      }
+    });
+  },
 };
 
 module.exports = InputView;
