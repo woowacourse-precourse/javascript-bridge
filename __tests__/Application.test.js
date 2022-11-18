@@ -127,6 +127,8 @@ describe('배열 복사 함수 테스트', () => {
 });
 
 describe('올바른 문자열 파악 함수 테스트', () => {
+  const INCLUDE_TARGET = ['U', 'D'];
+
   test('메소드 이름은 "hasContain "로 정의된다.', () => {
     const METHOD_NAME = 'hasContain';
 
@@ -135,11 +137,19 @@ describe('올바른 문자열 파악 함수 테스트', () => {
 
   test('대문자 U, 대문자 D를 입력을 제외한 값은 예외를 발생한다.', () => {
     expect(() => {
-      const INCLUDE_TARGET = ['U', 'D'];
       const hasContain = Application.hasContain(INCLUDE_TARGET);
       const EXPECTED = 'K';
 
       hasContain(EXPECTED);
     }).toThrow(RANGE_ERROR_TEXT);
+  });
+
+  test('대문자 U, 대문자 D를 입력을 포함한 값은 예외를 발생시키지 않는다.', () => {
+    expect(() => {
+      const hasContain = Application.hasContain(INCLUDE_TARGET);
+      const EXPECTED = 'D';
+
+      hasContain(EXPECTED);
+    }).not.toThrow(RANGE_ERROR_TEXT);
   });
 });
