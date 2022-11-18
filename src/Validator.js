@@ -12,6 +12,15 @@ const Validator = {
     }
   },
 
+  directionValidityCheck: (direction) => {
+    try {
+      Validator.throwErrorIfHasBlank(direction);
+      if (direction !== 'U' && direction !== 'D') throw new Error('[ERROR]');
+    } catch (error) {
+      Console.print(error);
+    }
+  },
+
   throwErrorIfHasBlank: (string) => {
     if (string.includes(' ')) throw new Error('[ERROR]');
   },
