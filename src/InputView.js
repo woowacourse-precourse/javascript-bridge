@@ -33,7 +33,7 @@ const InputView = {
         this.readMoving(bridgeGame);
       }
       if (bridgeGame.isFinish()) {
-        OutputView.printResult();
+        OutputView.printResult('성공');
       }
     });
   },
@@ -48,7 +48,7 @@ const InputView = {
           this.readMoving(bridgeGame);
         }
         if (input === 'Q') {
-          OutputView.printResult();
+          OutputView.printResult('실패');
         }
       }
     );

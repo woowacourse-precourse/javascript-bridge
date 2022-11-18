@@ -23,11 +23,11 @@ const OutputView = {
     Console.print(`[ ${processedDBlock} ]`);
   },
 
-  printResult() {
+  printResult(result) {
     Console.print('최종 게임 결과');
     Console.print('결과맵 다시 출력해');
 
-    Console.print(`게임 성공 여부: `);
+    Console.print(`게임 성공 여부: ${result}`);
     Console.print(`총 시도한 횟수: `);
     Console.close();
   },
