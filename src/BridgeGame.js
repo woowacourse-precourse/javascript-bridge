@@ -9,11 +9,13 @@ class BridgeGame {
   #bridge;
   #userMove;
   #playCount;
+  #isSuccess;
 
   constructor(bridge) {
     this.#bridge = bridge;
     this.#userMove = [];
     this.#playCount = 0;
+    this.#isSuccess = false;
   }
 
   initialize() {
@@ -39,7 +41,7 @@ class BridgeGame {
   }
 
   end() {
-    printResult();
+    printResult(this.#isSuccess, this.#playCount);
   }
 
   getUserCommand() {
@@ -49,10 +51,16 @@ class BridgeGame {
     });
   }
 
+  // FIXME: maximum 10 length
   checkResult() {
     const currentBridge = this.#bridge.slice(0, this.#userMove.length);
     // FIXME: change toString into different logic
     if (currentBridge.toString() === this.#userMove.toString()) {
+      if (this.#userMove.length === this.#bridge.length) {
+        this.#isSuccess = true;
+        this.end();
+        return;
+      }
       this.getUserMove();
     } else {
       this.getUserCommand();
