@@ -55,30 +55,24 @@ class BridgeGame {
   }
 
   drawCorrectWay() {
-    this.drawMap(
-      this.bridgeMap,
-      this.bridge[this.progressCnt - this.tryCnt],
-      "O"
-    );
+    this.drawMap(this.bridge[this.progressCnt - this.tryCnt], "O");
   }
 
   drawFalseWay() {
     this.drawMap(
-      this.bridgeMap,
       this.upsideDown(this.bridge[this.progressCnt - this.tryCnt]),
       "X"
     );
   }
 
-  drawMap(bridgeMap, way, check) {
+  drawMap(way, check) {
     if (way == "U") {
-      bridgeMap.up = bridgeMap.up + ` ${check} |`;
-      bridgeMap.down = bridgeMap.down + "   |";
-      return bridgeMap;
+      this.bridgeMap.up = this.bridgeMap.up + ` ${check} |`;
+      this.bridgeMap.down = this.bridgeMap.down + "   |";
+      return;
     }
-    bridgeMap.up = bridgeMap.up + "   |";
-    bridgeMap.down = bridgeMap.down + ` ${check} |`;
-    return bridgeMap;
+    this.bridgeMap.up = this.bridgeMap.up + "   |";
+    this.bridgeMap.down = this.bridgeMap.down + ` ${check} |`;
   }
 
   upsideDown(way) {

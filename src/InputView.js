@@ -45,7 +45,6 @@ const InputView = {
 
   checkIsCorrect(bridgeGame) {
     if (!bridgeGame.isOkWay) {
-      bridgeGame.tryCnt += 1;
       InputView.readGameCommand(bridgeGame);
       return;
     }
@@ -76,6 +75,12 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT_USER_DECISION, (userDecision) => {
       userDecisionValidator(userDecision);
       // 여기에 계속 재귀로
+      if (userDecision == "R") {
+        bridgeGame.tryCnt += 1;
+        InputView.readMoving(bridgeGame);
+        return;
+      }
+      InputView.goPrintResult(bridgeGame);
       // 끝내면 걍 프린트 리절트
     });
   },
