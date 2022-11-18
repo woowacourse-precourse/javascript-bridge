@@ -5,7 +5,7 @@ class App {
     this.bridgeGameController = new BridgeGameController();
   }
   play() {
-    const bridgeGame = new BridgeGame();
+    this.bridgeGameController.start();
   }
 }
 
