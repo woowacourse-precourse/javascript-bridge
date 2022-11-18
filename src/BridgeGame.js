@@ -1,20 +1,83 @@
+const BridgeMaker = require("./BridgeMaker");
+const OutputView = require("./OutputView");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+
 /**
- * 다리 건너기 게임을 관리하는 클래스
+ * 다리 건너기 게임을 관리하는 클래스, 필드 추가가 가능하다.
  */
 class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+  #selectBridge;
+  #correctBridge;
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+  constructor() {
+    this.#selectBridge = [];
+    this.#correctBridge = [];
+  }
+
+  set setCorrectBridge(correctBridge) {
+    this.#correctBridge = correctBridge;
+  }
+
+  get getCorrectBridge() {
+    return this.#correctBridge;
+  }
+
+  set setSelectBridge(selectBridge) {
+    this.#selectBridge = selectBridge;
+  }
+
+  get getSelectBridge() {
+    return this.#selectBridge;
+  }
+
+  initGame(bridgeLength) {
+    const correctSquare = BridgeMaker.makeBridge(
+      bridgeLength,
+      BridgeRandomNumberGenerator.generate
+    );
+    this.setCorrectBridge = correctSquare;
+    console.log(correctSquare);
+  }
+
+  initSelectBridge() {
+    this.setSelectBridge = [];
+  }
+
+  move(square) {
+    // 입력된 칸 값을 이용해 선택한 다리 칸 배열 만들기
+    const selectBridge = [...this.getSelectBridge, square];
+    this.setSelectBridge = selectBridge;
+    // 결과 출력하기
+    OutputView.printMap(selectBridge, this.isDie(selectBridge));
+    // 사망 여부 구하기 + 재시도 판별하기
+    if (this.isDie(selectBridge)) return this.retry();
+    // 다 건넌 경우 판별
+    if (this.isSame(selectBridge.length, this.getCorrectBridge.length))
+      return this.isGameClear();
+    return 0;
+  }
+
+  retry() {
+    // 함수 호출 시 죽었다는 의미. 따라서 재시도 = 참
+    return 1;
+  }
+
+  isDie(selectBridge) {
+    const correctBridge = this.getCorrectBridge;
+    const lastIndex = selectBridge.length - 1;
+    if (!this.isSame(selectBridge[lastIndex], correctBridge[lastIndex]))
+      return true;
+    return false;
+  }
+
+  isGameClear() {
+    return 2;
+  }
+
+  isSame(a, b) {
+    if (a === b) return true;
+    return false;
+  }
 }
 
 module.exports = BridgeGame;
