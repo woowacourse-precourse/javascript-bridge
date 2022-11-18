@@ -32,8 +32,8 @@ class BridgeGame {
   }
 
   getMoveResult() {
-    const moveResult = this.match();
-    moveResult.forEach((el) => {
+    this.match();
+    this.#move.forEach((el) => {
       this.parseResult(el);
     });
     return this.#upDownResult.map(el => el.join('|'));
