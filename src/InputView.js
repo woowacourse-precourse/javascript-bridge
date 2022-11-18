@@ -1,11 +1,13 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { Console } = require("@woowacourse/mission-utils");
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize() {
+    Console.readLine("다리의 길이를 입력해주세요.\n", (inputBridgeSize) => {
+      Console.print(inputBridgeSize);
+    });
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
