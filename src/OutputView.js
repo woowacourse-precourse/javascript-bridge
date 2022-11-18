@@ -27,7 +27,8 @@ const OutputView = {
     // FIXME: change strings into constants
     MissionUtils.Console.print('최종 게임 결과');
     OutputView.printMap();
-    MissionUtils.Console.print(`게임 성공 여부: ${isSuccess}`);
+    if (isSuccess) MissionUtils.Console.print('게임 성공 여부: 성공');
+    if (!isSuccess) MissionUtils.Console.print('게임 성공 여부: 실패');
     MissionUtils.Console.print(`총 시도한 횟수: ${playCount}`);
     MissionUtils.Console.close();
   },
