@@ -1,22 +1,35 @@
-class BridgeService {
-  #model;
+const BridgeRepository = require('../repository/BridgeRepository');
+const BridgeLength = require('./domain/BridgeLength');
+const UpDownKey = require('./domain/UpDownKey');
 
-  #OVERDING_ERROR = '[ERROR] 하위 메서드에 해당 메서드를 설정하세요';
+class BridgeService {
+  #bridgeRepository;
 
   constructor() {
-    this.#model = new Map();
+    this.#bridgeRepository = new BridgeRepository();
   }
 
-  getModelFor(key) {
-    return this.#model.get(key);
+  start(inputLength) {
+    const bridgeLength = new BridgeLength({
+      input: inputLength,
+      repo: this.#bridgeRepository
+    });
+
+    bridgeLength.doAction();
   }
 
-  setModelFor(key, value) {
-    this.#model.set(key, value);
+  recordMove(command) {
+    const upDownKey = new UpDownKey({
+      input: command,
+      repo: this.#bridgeRepository
+    });
+
+    upDownKey.doAction();
   }
 
-  doAction() {
-    throw new Error(this.#OVERDING_ERROR);
+  // test를 위한 getter
+  getRepo(key) {
+    return this.#bridgeRepository.read(key);
   }
 }
 

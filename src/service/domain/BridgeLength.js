@@ -1,16 +1,13 @@
-const BridgeService = require('../BridgeService');
+const { REGEX, ERROR_MESSAGE } = require('../../utils/constants');
 
-const { REGEX, ERROR_MESSAGE, MODEL_KEY } = require('../../utils/constants');
-const { makeBridge } = require('../../utils/BridgeMaker');
-const BridgeRandomNumberGenerator = require('../../utils/BridgeRandomNumberGenerator');
-
-class BridgeLength extends BridgeService {
+class BridgeLength {
   #input;
 
-  constructor(input) {
-    super();
+  #repo;
 
+  constructor({ input, repo }) {
     this.#input = input;
+    this.#repo = repo;
   }
 
   #getValidateData() {
@@ -21,31 +18,8 @@ class BridgeLength extends BridgeService {
     return this;
   }
 
-  #createRandomBridgeData() {
-    this.setModelFor(
-      MODEL_KEY.randomBridge,
-      makeBridge(Number(this.#input), BridgeRandomNumberGenerator.generate)
-    );
-
-    return this;
-  }
-
-  #createAnwerBrideData() {
-    this.setModelFor(MODEL_KEY.userBridge, []);
-
-    return this;
-  }
-
-  #createTryCountBridgeData() {
-    this.setModelFor(MODEL_KEY.tryCount, 1);
-
-    return this;
-  }
-
   #createBridgeData() {
-    this.#createRandomBridgeData()
-      .#createAnwerBrideData()
-      .#createTryCountBridgeData();
+    this.#repo.create(this.#input);
   }
 
   doAction() {

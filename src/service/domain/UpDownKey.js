@@ -1,13 +1,13 @@
-const BridgeService = require('../BridgeService');
 const { ERROR_MESSAGE, REGEX, MODEL_KEY } = require('../../utils/constants');
 
-class UpDownKey extends BridgeService {
+class UpDownKey {
   #input;
 
-  constructor(input) {
-    super();
+  #repo;
 
+  constructor({ input, repo }) {
     this.#input = input;
+    this.#repo = repo;
   }
 
   #getValidateData() {
@@ -19,9 +19,9 @@ class UpDownKey extends BridgeService {
   }
 
   #updateUserBridge() {
-    const oldData = this.getModelFor(MODEL_KEY.userBridge) || [];
+    const oldData = this.#repo.read(MODEL_KEY.userBridge) || [];
 
-    this.setModelFor(MODEL_KEY.userBridge, [...oldData, this.#input]);
+    this.#repo.update(MODEL_KEY.userBridge, [...oldData, this.#input]);
 
     return this;
   }
