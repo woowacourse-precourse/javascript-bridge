@@ -10,7 +10,11 @@ class App {
 
   play() {
     OutputView.printStart();
-    this.progressApp(this.#appStatus);
+    try {
+      this.progressApp(this.#appStatus);
+    } catch (e) {
+      console.log(e, 'sdasdaasdsad');
+    }
   }
 
   progressApp(appStatus) {
@@ -20,10 +24,14 @@ class App {
 
   progressBridgeMake() {
     InputView.readBridgeSize((answer) => {
-      if (Validator.checkBridgeInput(answer)) {
+      try {
+        Validator.checkBridgeInput(answer);
         this.#bridgeAnswer = +answer;
         this.#appStatus = 2;
-        console.log(this.#appStatus, typeof this.#bridgeAnswer, '확인');
+        // console.log(this.#appStatus, typeof this.#bridgeAnswer, '확인');
+        this.progressApp(this.#appStatus);
+      } catch (e) {
+        console.log(e, 'easdsadds');
         this.progressApp(this.#appStatus);
       }
     });
