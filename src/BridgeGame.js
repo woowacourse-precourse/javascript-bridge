@@ -26,7 +26,9 @@ class BridgeGame {
     if(this.bridge.length === this.number){
       const result = Notice.SUCCESS
       OutputView.printResult(this.upside,this.downside,result, trynum)
+      return false
     }
+    return true
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드

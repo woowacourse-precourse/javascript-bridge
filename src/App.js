@@ -14,24 +14,29 @@ class App {
   makeBridge(Length){
     Validate.BridgeLengthInput(Length)
     this.game.makeBridge(Length)
-    InputView.readMoving(this.moveCommand.bind(this))
+    InputView.readMoving(this.inputCommand.bind(this))
   }
-  moveCommand(input){
+  inputCommand(input){
     Validate.MoveInput(input)
    if( this.game.checkBridgeCorrect(input)){
-     this.game.move()
-     InputView.readMoving(this.moveCommand.bind(this))
+      this.moveCommand()
    }
    else if( !this.game.checkBridgeCorrect(input)){
     this.game.retry()
     InputView.readGameCommand(this.retryCommand.bind(this))
    }
   }
+  moveCommand(){
+    this.game.move()
+    if (this.game.checkBridgeAll(this.try) === true){
+      InputView.readMoving(this.inputCommand.bind(this))
+    }
+  }
   retryCommand(input){
     Validate.RetryInput(input)
     if (input == "R"){
       this.setGameReset()
-      InputView.readMoving(this.moveCommand.bind(this))     
+      InputView.readMoving(this.inputCommand.bind(this))     
     }
     else if(input == "Q"){
       const result = Notice.FAIL
