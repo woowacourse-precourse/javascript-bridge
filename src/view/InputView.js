@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Message = require('../constant/PrintConstant');
-const Validator = require('../utils/Validator');
+const BridgeSize = require('../controller/BridgeSize');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -11,7 +11,12 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(Message.INPUT_LENGTH, answer => {
-      Validator.validateSize(Number(answer));
+      try {
+        const bridgeSize = new BridgeSize(Number(answer));
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+        this.readBridgeSize();
+      }
     });
   },
 
