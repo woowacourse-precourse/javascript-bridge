@@ -33,10 +33,8 @@ class App {
 
   cbAfterReadMoving(choice) {
     validateMoving(choice);
-    const isAlright = this.bridgeGame.checkIsAlrightPath(this.pathIdx, choice);
 
-    console.log("isAlright", isAlright);
-    this.bridgeGame.move();
+    this.bridgeGame.move(this.pathIdx, choice);
     this.pathIdx += 1;
   }
 }
