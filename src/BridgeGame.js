@@ -24,6 +24,13 @@ class BridgeGame {
     return Validation.throwError(Validation.RANGE_ERROR_TEXT);
   }
 
+  static checkIncludeUandD(userInput) {
+    const INPUT_TARGET = ['U', 'D'];
+    const isIncludeUandD = Application.hasContain(INPUT_TARGET);
+
+    return isIncludeUandD(userInput);
+  }
+
   isBeforeStart() {
     return this.#userPosition === null;
   }
