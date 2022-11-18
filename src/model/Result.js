@@ -37,7 +37,7 @@ class Result {
 
 	/** @returns {boolean} */
 	isFailed() {
-		const index = this.#savedPositions.length - 1;
+		const index = this.#movedPositions.length - 1;
 		const answerPosition = this.#savedPositions[index];
 		const curPosition = this.#movedPositions[index];
 		return !answerPosition.isSame(curPosition);
