@@ -10,6 +10,12 @@ BridgeMaker가 size를 받는 이유는 게임을 재시작 하더라도 이전�
 
 ## 요구 사항 분석
 
+MVC 패턴의 관점으로 BridgeGame의 move 메소드를 분석하면 다음과 같다.
+<br/>
+InputView에서 input으로 사용자가 입력한 "U", "D"가 입력되고 Controller는 Model인 BridgeGame에 input을 전달한다.  
+BridgeGame은 input을 바탕으로 로직을 수행한 다음 데이터에 로직이 수행된 결과를 Controller에 반환한다.  
+Controller는 그 결과를 다시 OutputView로 전달하고 OutputView는 결과를 출력한다.
+
 ## 기능 목록
 
 1. 다리의 길이를 입력받는다.
