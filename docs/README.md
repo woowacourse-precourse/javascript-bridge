@@ -122,3 +122,9 @@
   - [ ] 최종 시도 Map 출력
   - [ ] 게임 성공 여부 출력
   - [ ] 게임 시도 횟수 출력
+
+> `MVC패턴`에 대해 공부하던 중 MVC패턴에 계층이 존재한다는 사실을 알게 되었고
+> 이에 따라 `Repository`라는 층을 하나 더 만들어 5계층을 구현하였다.
+
+**2차 객체 설계도**
+<img width = "800px" src = "https://user-images.githubusercontent.com/78203399/202618904-342a9ace-5d14-4af2-830e-37cf06e990e5.jpeg" />
