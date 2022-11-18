@@ -41,12 +41,17 @@ const InputView = {
    */
   readMoving(callbackTwo, callbackThree) {
     MissionUtils.Console.readLine(MESSAGE.INPUT_DIRECTION, (input) => {
-      const [MOVE, NOT_END] = callbackTwo.call(this, input);
-      if (MOVE) {
-        if (NOT_END)
-          InputView.readMoving.call(this, callbackTwo, callbackThree);
-      } else {
-        InputView.readGameCommand.call(this, callbackThree);
+      try {
+        const [MOVE, NOT_END] = callbackTwo.call(this, input);
+        if (MOVE) {
+          if (NOT_END)
+            InputView.readMoving.call(this, callbackTwo, callbackThree);
+        } else {
+          InputView.readGameCommand.call(this, callbackThree);
+        }
+      } catch (err) {
+        printError(err);
+        InputView.readMoving.bind(this)(callbackTwo, callbackThree);
       }
     });
   },

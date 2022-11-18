@@ -1,5 +1,6 @@
 const BridgeGame = require('./BridgeGame');
 const BridgeValidation = require('./Validation/BridgeValidation');
+const MoveValidation = require('./Validation/MoveValidation');
 const { readMoving, end, getInputs } = require('./View/InputView');
 
 class App {
@@ -14,6 +15,7 @@ class App {
   }
 
   moveBridge(input) {
+    MoveValidation(input);
     const MOVE = this.#game.move(input);
     const NOT_END = this.#game.isEnd() == true;
     if (MOVE && !NOT_END) this.gameEnd();
