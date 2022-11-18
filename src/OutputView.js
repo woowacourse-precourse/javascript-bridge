@@ -39,6 +39,7 @@ const OutputView = {
     Console.print('');
     Console.print(`게임 성공 여부: ${isSuccess}`);
     Console.print(`총 시도한 횟수: ${numberOfAttempts}`);
+    Console.close();
   },
 };
 
