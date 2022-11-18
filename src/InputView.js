@@ -36,7 +36,7 @@ const InputView = {
   },
 
   movingException(inputMoveUpDown) {
-    if(inputMoveUpDown!="U" || inputMoveUpDown!="D") throw new Error("[ERROR] U 혹은 D만 입력할 수 있습니다.");
+    if(inputMoveUpDown!="U" && inputMoveUpDown!="D") throw new Error("[ERROR] U 혹은 D만 입력할 수 있습니다.");
   },
 
   readGameCommand() {
@@ -48,7 +48,7 @@ const InputView = {
   },
 
   retryException(inputRetry) {
-    if(inputMoveUpDown!="R" || inputMoveUpDown!="Q") throw new Error("[ERROR] R 혹은 Q만 입력할 수 있습니다.");
+    if(inputRetry!="R" && inputRetry!="Q") throw new Error("[ERROR] R 혹은 Q만 입력할 수 있습니다.");
   },
 };
 
