@@ -3,35 +3,25 @@ const { Console } = require('@woowacourse/mission-utils');
 const Validator = {
   sizeValidityCheck: (size) => {
     const regex = /^\d+$/;
-    try {
-      Validator.throwErrorIfHasBlank(size);
-      if (!regex.test(size)) throw new Error('[ERROR]');
-      if (size < 3 || size > 20) throw new Error('[ERROR]');
-    } catch (error) {
-      Console.print(error);
+    Validator.throwErrorIfHasBlank(size);
+    if (!regex.test(size)) throw '[ERROR] 숫자를 입력해야 합니다.';
+    if (size < 3 || size > 20) {
+      throw '[ERROR] 3이상 20이하의 숫자를 입력해야 합니다.';
     }
   },
 
   directionValidityCheck: (direction) => {
-    try {
-      Validator.throwErrorIfHasBlank(direction);
-      if (direction !== 'U' && direction !== 'D') throw new Error('[ERROR]');
-    } catch (error) {
-      Console.print(error);
-    }
+    Validator.throwErrorIfHasBlank(direction);
+    if (direction !== 'U' && direction !== 'D') throw '[ERROR]';
   },
 
   commandValidityCheck: (command) => {
-    try {
-      Validator.throwErrorIfHasBlank(command);
-      if (command !== 'R' && command !== 'Q') throw new Error('[ERROR]');
-    } catch (error) {
-      Console.print(error);
-    }
+    Validator.throwErrorIfHasBlank(command);
+    if (command !== 'R' && command !== 'Q') throw '[ERROR]';
   },
 
   throwErrorIfHasBlank: (string) => {
-    if (string.includes(' ')) throw new Error('[ERROR]');
+    if (string.includes(' ')) throw '[ERROR]';
   },
 };
 
