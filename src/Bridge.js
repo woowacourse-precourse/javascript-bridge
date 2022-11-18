@@ -12,7 +12,7 @@ class Bridge {
     return this.#components.length;
   }
 
-  setCompoents(length) {
+  setComponents(length) {
     this.#components = makeBridge(length, generate);
   }
 }

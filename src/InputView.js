@@ -10,7 +10,7 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     readLine(INPUT_MESSAGE.BRIDGE_LENGTH, (length) => {
-      bridgeGame.getBridge().setCompoents(length);
+      bridgeGame.getBridge().setComponents(length);
     });
   },
 
