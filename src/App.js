@@ -1,14 +1,10 @@
 const BridgeGame = require('./BridgeGame');
-const { readBridgeSize, readMoving, end } = require('./InputView');
+const { readMoving, end, getInputs } = require('./InputView');
 
 class App {
   #game;
   play() {
-    readBridgeSize.bind(this)(
-      this.createBridge,
-      this.moveBridge,
-      this.controlGame
-    );
+    getInputs.bind(this)(this.createBridge, this.moveBridge, this.controlGame);
   }
 
   createBridge(input) {
