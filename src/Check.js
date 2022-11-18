@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { SIZE, MOVING, COMMAND } = require("./constants/values");
 
 const Check = {
   checkBridgeSize(size) {
@@ -23,11 +24,8 @@ const Check = {
   },
 
   checkRange(size) {
-    const MINIMUM_SIZE = 3;
-    const MAXIMUM_SIZE = 20;
-
     try {
-      if (size < MINIMUM_SIZE || size > MAXIMUM_SIZE) {
+      if (size < SIZE.MINIMUM || size > SIZE.MAXIMUM) {
         throw new Error(
           "[ERROR] 다리 길이는 3 이상 20 이하인 숫자여야 합니다."
         );
@@ -39,11 +37,8 @@ const Check = {
   },
 
   checkMoving(moving) {
-    const UPPER_moving = "U";
-    const LOWER_moving = "D";
-
     try {
-      if (moving !== UPPER_moving && moving !== LOWER_moving) {
+      if (moving !== MOVING.UPPER && moving !== MOVING.LOWER) {
         throw new Error("[ERROR] 이동할 칸은 U과 P만 입력할 수 있습니다.");
       }
     } catch (e) {
@@ -55,11 +50,8 @@ const Check = {
   },
 
   checkCommand(command) {
-    const RESTART_COMMAND = "R";
-    const END_COMMAND = "Q";
-
     try {
-      if (command !== RESTART_COMMAND && command !== END_COMMAND) {
+      if (command !== COMMAND.RESTART && command !== COMMAND.END) {
         throw new Error("[ERROR] 게임 진행 옵션은 R과 Q만 입력할 수 있습니다.");
       }
     } catch (e) {

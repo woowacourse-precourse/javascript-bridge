@@ -1,4 +1,5 @@
 const OutputView = require("./OutputView");
+const { MOVING } = require("./constants/values");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -10,21 +11,21 @@ class BridgeGame {
    */
   move(moving, bridge, movingList) {
     const index = movingList[0].length;
-    if (moving === "U") {
+    if (moving === MOVING.UPPER) {
       if (moving === bridge[index]) {
-        movingList[0].push("O");
-        movingList[1].push(" ");
+        movingList[0].push(MOVING.RIGHT_ANSWER);
+        movingList[1].push(MOVING.BLANK);
       } else {
-        movingList[0].push("X");
-        movingList[1].push(" ");
+        movingList[0].push(MOVING.WRONG_ANSWER);
+        movingList[1].push(MOVING.BLANK);
       }
     } else {
       if (moving === bridge[index]) {
-        movingList[1].push("O");
-        movingList[0].push(" ");
+        movingList[1].push(MOVING.RIGHT_ANSWER);
+        movingList[0].push(MOVING.BLANK);
       } else {
-        movingList[1].push("X");
-        movingList[0].push(" ");
+        movingList[1].push(MOVING.WRONG_ANSWER);
+        movingList[0].push(MOVING.BLANK);
       }
     }
 

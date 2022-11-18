@@ -4,6 +4,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
 const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
+const { MOVING, COMMAND, RESULT, CALCULATION } = require("./constants/values");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -18,7 +19,7 @@ const InputView = {
         this.readBridgeSize();
       } else {
         const bridge = BridgeMaker.makeBridge(
-          parseInt(size, 10),
+          parseInt(size, CALCULATION.DECIMAL_NUMBER),
           BridgeRandomNumberGenerator.generate
         );
         let movingList = [[], []];
@@ -41,12 +42,14 @@ const InputView = {
         }
         const bridgeGame = new BridgeGame();
         const result = bridgeGame.move(moving, bridge, movingList);
-        if (result[0].includes("X") || result[1].includes("X")) {
+        if (
+          result[0].includes(MOVING.WRONG_ANSWER) ||
+          result[1].includes(MOVING.WRONG_ANSWER)
+        ) {
           return this.readGameCommand(movingList, attempts, bridge);
         }
         if (result[0].length === bridge.length) {
-          const SUCCESS = "성공";
-          return OutputView.printResult(movingList, SUCCESS, attempts);
+          return OutputView.printResult(movingList, RESULT.SUCCESS, attempts);
         }
         return this.readMoving(bridge, result, attempts);
       }
@@ -60,23 +63,19 @@ const InputView = {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (command) => {
-        const RESTART_COMMAND = "R";
-        const END_COMMAND = "Q";
-
         const error = Check.checkCommand(command);
         if (error) {
           return this.readGameCommand(movingList, attempts, bridge);
         }
 
-        if (command === RESTART_COMMAND) {
+        if (command === COMMAND.RESTART) {
           attempts += 1;
           const bridgeGame = new BridgeGame();
           const resetMovingList = bridgeGame.retry(bridge);
           return this.readMoving(bridge, resetMovingList, attempts);
         }
-        if (command === END_COMMAND) {
-          const FAIL = "실패";
-          OutputView.printResult(movingList, FAIL, attempts);
+        if (command === COMMAND.END) {
+          OutputView.printResult(movingList, RESULT.FAIL, attempts);
         }
       }
     );
