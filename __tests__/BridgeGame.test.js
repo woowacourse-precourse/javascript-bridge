@@ -321,7 +321,18 @@ describe('출발전 판단 메서드 테스트', () => {
 
   test('유저가 아직 출발 전(null)이라면 예외를 발생한다.', () => {
     expect(() => {
-      BridgeGame.checkBeforeStart();
+      const bridgeGame = new BridgeGame();
+
+      bridgeGame.checkBeforeStart();
+    }).toThrow(POSITION_ERROR_TEXT);
+  });
+
+  test('유저가 아직 출발 전(null)이 아니라면 예외를 발생시키지 않는다.', () => {
+    expect(() => {
+      const bridgeGame = new BridgeGame();
+
+      bridgeGame.move();
+      bridgeGame.checkBeforeStart();
     }).toThrow(POSITION_ERROR_TEXT);
   });
 });
