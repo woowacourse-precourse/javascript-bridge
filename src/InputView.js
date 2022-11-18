@@ -1,5 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const App = require('./App');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -27,26 +26,22 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(answerArr, move) {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (answer) => {
-      this.readMovingException(answer);
-      return answer;
+      try {
+        this.readMovingException(answer, answerArr, move);
+      } catch (err) {
+        console.log(err);
+        this.readMoving(answerArr, move);
+      }
     });
   },
 
-  readMovingException(letter) {
+  readMovingException(letter, answerArr, move) {
     const LimitedMovement = /[UD]/;
-    try {
-      if (!LimitedMovement.test(letter)) {
-        throw '[ERROR] 대문자 U 와 D 를 입력해주세요.';
-      } else {
-        console.log(letter);
-        return letter;
-      }
-    } catch (err) {
-      Console.print(err);
-      this.readMoving();
-    }
+    if (!LimitedMovement.test(letter))
+      throw '[ERROR] 대문자 U 와 D 를 입력해주세요.';
+    else move(letter, answerArr);
   },
 
   /**
