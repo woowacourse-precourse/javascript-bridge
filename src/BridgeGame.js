@@ -5,7 +5,11 @@ const BridgeMaker = require("./BridgeMaker");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  tryCount = 0;
+  moveCount = 0;
+  bridgeSize = 0;
   bridge = [];
+  
   user = [];
 
   getBridge() {
@@ -13,11 +17,16 @@ class BridgeGame {
   }
 
   setBridge(input) {
+    this.bridgeSize = Number(input);
     this.bridge = BridgeMaker.makeBridge(
-      input, 
+      this.bridgeSize, 
       BridgeRandomNumberGenerator.generate
     );
     console.log("this.bridge", this.bridge)
+  }
+
+  getMoveCount() {
+    return this.moveCount;
   }
 
   /**
@@ -26,8 +35,13 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(input) {
+    this.moveCount += 1
     this.user.push(input)
     console.log("this.user", this.user)
+  }
+  
+  judge() {
+    return this.bridge[this.moveCount - 1] === this.user[this.moveCount - 1]
   }
 
   /**

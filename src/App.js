@@ -1,8 +1,5 @@
 const OutputView = require("./OutputView");
 const InputView = require("./InputView");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const BridgeMaker = require("./BridgeMaker");
-const {Console} = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 
 class App {
@@ -30,8 +27,8 @@ class App {
 
   moveUser(direction) {
     this.bridgeGame.move(direction);
+    OutputView.printMap(this.bridgeGame)
   }
-
 }
 
 const app = new App();
