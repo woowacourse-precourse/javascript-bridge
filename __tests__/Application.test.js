@@ -101,4 +101,10 @@ describe('배열 복사 함수 테스트', () => {
 
     expect(Application.copyArray.name).toEqual(METHOD_NAME);
   });
+
+  test('복사한 배열은 원본 배열과 참조가 다르다.', () => {
+    const EXPECTED = [1, 2, 3, 4, 5];
+
+    expect(Application.copyArray(EXPECTED) !== EXPECTED).toBeTruthy();
+  });
 });
