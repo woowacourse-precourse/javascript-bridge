@@ -3,25 +3,29 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const InputView = require("./InputView");
+const BridgeErrorCheck = require("./BridgeError");
 const Console = MissionUtils.Console;
 
 class App {
-  play() {
+  constructor() {
     Console.print("다리 건너기 게임을 시작합니다.\n");
+    this.errorCheck = new BridgeErrorCheck();
+  }
+  play() {
     return InputView.readBridgeSize(this.bridgeSizeValidate);
   }
 
   bridgeSizeValidate = (bridgeSize) => {
     const SIZE = bridgeSize;
-    return this.answerBridge(SIZE);
+    try {
+      this.errorCheck.validateBridgeSize(SIZE);
+      this.answerBridge(SIZE);
+    } catch (e) {
+      Console.print(e);
+      this.play();
+    }
+    return;
   };
-
-  bridgeValidate(bridgeArray, answerBridgeArray) {
-    return this.bridgeErrorCheck.validateBridgeArray(
-      bridgeArray,
-      answerBridgeArray
-    );
-  }
 
   answerBridge(bridgeSize) {
     const RANDOM_NUMBER_GENERATOR = BridgeRandomNumberGenerator.generate;
@@ -34,4 +38,6 @@ class App {
   }
 }
 
+const app = new App();
+app.play();
 module.exports = App;
