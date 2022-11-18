@@ -5,12 +5,12 @@ const OutputView = {
   upBridge: [],
   downBridge: [],
 
-  printError(error) {
-    Console.print(error);
-  },
-
   printStart() {
     Console.print(MESSAGE.GAME_START);
+  },
+
+  printError(error) {
+    Console.print(error);
   },
   
   printMap(userMove, answer) {
@@ -36,7 +36,7 @@ const OutputView = {
 
   makeFinalOutputMap() {
     let outputMap = `[ ${OutputView.upBridge.join(' | ')} ]\n`;
-    outputMap += `[ ${OutputView.downBridge.join(' | ')} ]`;
+    outputMap += `[ ${OutputView.downBridge.join(' | ')} ]\n`;
     return outputMap;
   },
 
