@@ -2,15 +2,20 @@
 
 ## 기능 목록
 - [x] 입력 받은 다리 길이로 다리를 생성한다. - BridgeMaker#makeBridge()
+- [ ] 입력 받은 이동할 칸으로 이동한다. - BridgeGame#move()
+- [ ] 입력 받은 이동할 칸과 다리를 비교한다. - BridgeGame#match()
+- [ ] 재시작 시 시도 횟수를 증가시킨다. - BridgeGame#retry()
+
 
 ## 예외 처리
 
 ## UI 로직
 - [x] 게임 시작 문구를 출력한다. - OutputView#printStart()
 - [x] 다리의 길이를 입력 받고 bridgeSize를 private로 BridgeGame 클래스 필드에 추가. - InputView#readBridgeSize()
-- [ ] 이동할 칸을 입력 받는다.
-- [ ] 이동하고 난 결과를 출력한다.
-
+- [ ] 이동할 칸을 입력 받는다. - InputView#readMoving()
+- [ ] 이동하고 난 결과를 출력한다. - OutputView#printMap()
+- [ ] 게임을 다시 시도할지 종료할지 여부를 입력받는다. - InputView#readGameCommand()
+- [ ] 게임의 최종 결과를 정해진 형식에 맞춰 출력한다. - OutputView#printResult()
 
 ## 기능 요구 사항
 
