@@ -1,5 +1,5 @@
 /* eslint-disable */
-const BridgeMaker = require('../src/model/BridgeMaker');
+const BridgeMaker = require('../src/BridgeMaker');
 const BridgeSize = require('../src/model/BridgeSize');
 
 describe('다리 길이 테스트', () => {
@@ -22,6 +22,6 @@ describe('다리 길이 테스트', () => {
     }, jest.fn());
 
     const bridge = BridgeMaker.makeBridge(4, mockGenerator);
-    expect(bridge).toEqual(['1', '0', '1', '1']);
+    expect(bridge).toEqual(['U', 'D', 'U', 'U']);
   });
 });
