@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Error = require("./ControlError");
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -10,6 +12,10 @@ const InputView = {
       (bridgeSize) => {
         try {
           Error.readBridgeSizeError(bridgeSize);
+          BridgeMaker.makeBridge(
+            bridgeSize,
+            BridgeRandomNumberGenerator.generate
+          );
         } catch (e) {
           MissionUtils.Console.print(e);
           this.readBridgeSize();
