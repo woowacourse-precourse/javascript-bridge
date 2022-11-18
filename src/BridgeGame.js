@@ -32,9 +32,9 @@ class BridgeGame {
     if (bridge[this.#bridgeLengthStatus] === input) {
       this.incrementBridgeLengthStatus();
       console.log(nowBridgeLength, this.#bridgeLengthStatus);
-      return [true, nowBridgeLength];
+      return [true, input];
     }
-    return [false, nowBridgeLength];
+    return [false, input];
   }
 
   /**
