@@ -1,4 +1,5 @@
 const UpDownKey = require('../src/service/domain/UpDownKey');
+const BridgeLength = require('../src/service/domain/BridgeLength');
 const { MODEL_KEY } = require('../src/utils/constants');
 
 describe('이동할 칸 입력 테스트', () => {
@@ -43,5 +44,22 @@ describe('이동할 칸 입력 테스트', () => {
     const userBridge = upDowonKey.getModelFor(MODEL_KEY.userBridge);
 
     expect(userBridge).toEqual(['D']);
+  });
+
+  test('(통합테스트(create - update)) 입력 테스트', () => {
+    const inputLength = '3';
+    const bridgeLength = new BridgeLength(inputLength);
+
+    bridgeLength.doAction();
+
+    const input = 'U';
+
+    const upDowonKey = new UpDownKey(input);
+
+    upDowonKey.doAction();
+
+    const userBridge = upDowonKey.getModelFor(MODEL_KEY.userBridge);
+
+    expect(userBridge).toEqual(['U']);
   });
 });
