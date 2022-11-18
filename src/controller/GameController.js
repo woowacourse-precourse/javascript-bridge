@@ -51,6 +51,12 @@ class GameController {
 
   #restartOrQuitGame(select) {
     PlayerInputChecker.checkSelect(select);
+    if (select === 'Q') {
+      return;
+    }
+
+    this.#bridgeGame.retry();
+    this.playGame();
   }
 }
 
