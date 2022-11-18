@@ -1,4 +1,4 @@
-## Feature List
+## 📝 Feature List
 
 - [ ] 게임 시작 문구를 출력한다.
 
@@ -14,7 +14,7 @@
 
 - [ ] 이동할 칸이 유효한지 검사한다.
 
-  - [ ] U 또는 D여야 한다.
+  - [ ] U 또는 D 여야 한다.
 
 - [ ] 다리를 건넌다.
 
@@ -24,7 +24,7 @@
 
 - [ ] 게임 재시작 여부가 유효한지 검사한다.
 
-  - [ ] Q 또는 R이여야 한다.
+  - [ ] Q 또는 R 이여야 한다.
 
 - [ ] 종료를 선택한 경우, 게임을 종료한다.
 
@@ -39,7 +39,7 @@
   - [ ] '[ERROR]'로 시작하는 에러 메시지를 출력한다.
   - [ ] 그 부분부터 입력을 다시 받는다.
 
-## IO
+## 🖥 IO
 
 출력: 게임 시작 문구
 
@@ -98,3 +98,19 @@
 게임 성공 여부: 성공
 총 시도한 횟수: 2
 ```
+
+## 🗂 Directory
+
+- 📁src
+  - 📁constant
+    - 📜Error.js
+    - 📜Bridge.js
+  - 📁error
+    - 📜InvalidInputError.js
+  - 📜App.js
+  - 📜BridgeGame.js
+  - 📜BridgeMaker.js
+  - 📜BridgeRandomNumberGenerator.js
+  - 📜InputView.js
+  - 📜OutputView.js
+  - 📜Validator.js
