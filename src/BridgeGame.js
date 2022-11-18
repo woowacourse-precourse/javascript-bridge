@@ -1,5 +1,5 @@
 const OutputView = require("./OutputView");
-const { STRUCTURE } = require("./constant/message.js");
+const { STRUCTURE, MESSAGE } = require("./constant/message.js");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -8,38 +8,46 @@ const { STRUCTURE } = require("./constant/message.js");
 class BridgeGame {
     bridgeArray;
     bridgeCount;
+    #gameCount;
     #upBridgeHistory;
     #downBridgeHistory;
 
     constructor(bridgeArray) {
         this.bridgeArray = bridgeArray;
         this.bridgeCount = 0;
+        this.#gameCount = 1;
         this.#upBridgeHistory = [];
         this.#downBridgeHistory = [];
     }
 
-    // check(move) {
-    //     if (move === "U" && this.bridgeArray[this.bridgeCount] === "D") return this.retry();
-    //     if (move === "D" && this.bridgeArray[this.bridgeCount] === "U") return this.retry();
-    // }
+    isBadMove(move) {
+        console.log("BridgeGame.isBadMove----------");
+        const badUp = move === "U" && this.bridgeArray[this.bridgeCount] === "D";
+        const badDown = move === "D" && this.bridgeArray[this.bridgeCount] === "U";
+        if (badUp || badDown) {
+            console.log("true반환함");
+            return true;
+        }
+    }
 
     move(move) {
         console.log("BridgeGame.move-----------");
-        const up = move === "U" && this.bridgeArray[this.bridgeCount] === "U";
+        this.check(move);
+        const rightUp = move === "U" && this.bridgeArray[this.bridgeCount] === "U";
 
         if (this.bridgeCount === this.bridgeArray.length - 1) {
             return OutputView.printResult();
         }
 
-        this.success(up);
+        this.success(rightUp);
     }
 
-    success(up) {
-        if (up) {
+    success(rightUp) {
+        if (rightUp) {
             this.#upBridgeHistory.push(STRUCTURE.GOOD);
             this.#downBridgeHistory.push(STRUCTURE.BLANK);
         }
-        if (!up) {
+        if (!rightUp) {
             this.#upBridgeHistory.push(STRUCTURE.BLANK);
             this.#downBridgeHistory.push(STRUCTURE.GOOD);
         }
@@ -47,10 +55,30 @@ class BridgeGame {
         this.bridgeCount++;
     }
 
-    retry() {
-        this.bridgeCount = 0;
-        this.#upBridgeHistory = [];
-        this.#downBridgeHistory = [];
+    fail(badDirection) {
+        if (badDirection) {
+            this.#upBridgeHistory.push(STRUCTURE.BAD);
+            this.#downBridgeHistory.push(STRUCTURE.BLANK);
+        }
+        if (!badDirection) {
+            this.#upBridgeHistory.push(STRUCTURE.BLANK);
+            this.#downBridgeHistory.push(STRUCTURE.BAD);
+        }
+    }
+
+    retry(answer) {
+        if (answer === "R") {
+            this.bridgeCount = 0;
+            this.#upBridgeHistory = [];
+            this.#downBridgeHistory = [];
+            this;
+            return true;
+        }
+    }
+
+    finish() {
+        console.log(MESSAGE.FAIL);
+        console.log(MESSAGE.TRY + this.#gameCount);
     }
 }
 module.exports = BridgeGame;

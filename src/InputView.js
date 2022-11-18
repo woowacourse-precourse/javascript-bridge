@@ -26,16 +26,23 @@ const InputView = {
     readMoving(bridgeGame) {
         console.log("InputView.readMoving-----------");
         Console.readLine(MESSAGE.MOVE, (move) => {
-            bridgeGame.move(move);
-            this.readMoving(bridgeGame);
+            if (bridgeGame.isBadMove(move)) {
+                this.readGameCommand(bridgeGame);
+            }
         });
     },
 
     /**
      * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
      */
-    readGameCommand() {
+    readGameCommand(bridgeGame) {
         console.log("InputView.readGameCommand-----------");
+        Console.readLine(MESSAGE.RESTART, (answer) => {
+            if (bridgeGame.retry(answer)) {
+                this.readMoving(bridgeGame);
+            }
+            bridgeGame.finish();
+        });
     },
 };
 

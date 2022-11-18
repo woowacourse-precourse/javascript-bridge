@@ -9,6 +9,10 @@ const Printer = {
     spaceLine() {
         Console.print("");
     },
+
+    restart() {
+        Console.print(MESSAGE.RESTART);
+    },
 };
 
 module.export = Printer;
