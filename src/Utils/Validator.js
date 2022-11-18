@@ -7,7 +7,7 @@ class Validator {
     Validator.#isDemical(value);
   }
   static retryCheck(value) {
-    const validValues = [USER_INPUT_CODE.RESTART.AGREE, USER_INPUT_CODE.RESTART.QUIT];
+    const validValues = [USER_INPUT_CODE.RETRY.AGREE, USER_INPUT_CODE.RETRY.QUIT];
     if(!validValues.includes(value)) throw MESSAGES.ERROR.INVALID_RETRY;
   }
   static directionCheck(value) {

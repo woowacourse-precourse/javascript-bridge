@@ -2,7 +2,7 @@ const BridgeGame = require('../src/BridgeGame');
 const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
 
 
-describe("bridgeSizeCheck 테스트", () => {
+describe("BridgeGame 테스트", () => {
   test("다리 생성 테스트", () => {
     function checkSpace(bridge) {
       const spaceType = [BridgeRandomNumberGenerator.RANDOM_LOWER_INCLUSIVE, BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE];

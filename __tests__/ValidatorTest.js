@@ -35,16 +35,16 @@ describe("directionCheck 테스트", () => {
   });
 });
 
-describe("restartCheck 테스트", () => {
+describe("retryCheck 테스트", () => {
   test("입력값 유효성 테스트", () => {
-    const valid = [USER_INPUT_CODE.RESTART.AGREE, USER_INPUT_CODE.RESTART.QUIT];
+    const valid = [USER_INPUT_CODE.RETRY.AGREE, USER_INPUT_CODE.RETRY.QUIT];
     const invalid = [1, 2, 10, 0, '유', 'd', 'u'];
     valid.forEach(value => {
-      const result = Validator.restartCheck(value);
+      const result = Validator.retryCheck(value);
       expect(result).toBeUndefined();
     })
     invalid.forEach(value => {  
-      expect(() => Validator.restartCheck(value)).toThrow();
+      expect(() => Validator.retryCheck(value)).toThrow();
     });
   });
 });

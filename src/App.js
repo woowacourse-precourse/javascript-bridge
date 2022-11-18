@@ -69,10 +69,10 @@ class App {
   }
 
   runCommand(command) {
-    if(command === USER_INPUT_CODE.RESTART.AGREE) {
+    if(command === USER_INPUT_CODE.RETRY.AGREE) {
       this.game.retry();
       this.submitDirection();
-    } else if(command === USER_INPUT_CODE.RESTART.QUIT) {
+    } else if(command === USER_INPUT_CODE.RETRY.QUIT) {
       this.quitGame(MESSAGES.CLEARED.FAILED);
     }
   }
