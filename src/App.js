@@ -16,7 +16,11 @@ class App {
       if (bridgeGame.move()) OutputView.printMap(this.currentBridge, "O");
       if (!bridgeGame.move()) {
         OutputView.printMap(this.currentBridge, "X");
-        this.currentBridge.pop();
+        if (InputView.readGameCommand() === "R") {
+          this.currentBridge = [];
+          this.moveBridge();
+        }
+        if (InputView.readGameCommand() === "Q") return;
       }
     }
   }
@@ -25,6 +29,7 @@ class App {
     Console.print("다리 건너기 게임을 시작합니다.");
     this.bridge = InputView.readBridgeSize();
     this.moveBridge();
+    
   }
 }
 

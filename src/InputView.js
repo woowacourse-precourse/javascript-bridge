@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { checkBridgeLength, checkUpOrDown } = require("./Exceptions");
+const { checkBridgeLength, checkUpOrDown, checkRetry } = require("./Exceptions");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -38,13 +38,25 @@ const InputView = {
         this.readMoving();
       }
     });
-    return move
+    return move;
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    let isRetry;
+    Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)", (answer) => {
+      try {
+        checkRetry(answer);
+        isRetry = answer; 
+      } catch (e) {
+        Console.print(e);
+        this.readGameCommand();
+      }
+    });
+    return isRetry;
+  },
 };
 
 module.exports = InputView;

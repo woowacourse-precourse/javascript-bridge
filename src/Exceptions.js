@@ -10,7 +10,14 @@ const checkUpOrDown = (answer) => {
   }
 };
 
+const checkRetry = (answer) => {
+  if (typeof answer !== "string" || !(["R", "Q"].includes(answer))) {
+    throw new Error("[ERROR] R(재시도) 또는 Q(종료)를 입력해주세요.");
+  }
+};
+
 module.exports = {
   checkBridgeLength,
   checkUpOrDown,
+  checkRetry,
 };
