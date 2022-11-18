@@ -23,10 +23,21 @@ class App {
 
   moveOne(playerMoving) {
     this.#bridgeGame.move(playerMoving);
+    if (this.checkIsSuccess()) {
+      return OutputView.printResult(
+        this.getBridgeMap(),
+        this.#bridgeGame.getStatus()
+      );
+    }
     if (this.checkIsFinished()) {
       return this.askRetry();
     }
     return this.askMove();
+  }
+
+  checkIsSuccess() {
+    const { isSuccess } = this.#bridgeGame.getStatus();
+    return isSuccess;
   }
 
   checkIsFinished() {
