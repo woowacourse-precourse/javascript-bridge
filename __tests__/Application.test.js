@@ -125,3 +125,11 @@ describe('배열 복사 함수 테스트', () => {
     }).not.toThrow(VALIDATION_ARRAY_TEXT);
   });
 });
+
+describe('올바른 문자열 파악 함수 테스트', () => {
+  test('메소드 이름은 "hasContain "로 정의된다.', () => {
+    const METHOD_NAME = 'hasContain';
+
+    expect(Application.hasContain.name).toEqual(METHOD_NAME);
+  });
+});
