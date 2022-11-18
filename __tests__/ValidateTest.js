@@ -21,4 +21,21 @@ describe('예외 테스트', () => {
       }).toThrow('[ERROR] 재시도는 R, 종료는 Q인 문자로 입력해주세요.');
     }
   );
+
+  describe('유효성 검사 통과 테스트', () => {
+    test.each(['3', '6', '10', '16', '19', '20'])('다리의 길이 입력값 통과 테스트', (input) => {
+      const result = Validate.validateSizeRange(input);
+      expect(result).toBeTruthy();
+    });
+
+    test.each(['U', 'D'])('이동할 칸 입력값 통과 테스트', (input) => {
+      const result = Validate.validateMovePosition(input);
+      expect(result).toBeTruthy();
+    });
+
+    test.each(['R', 'Q'])('재시도 혹은 종료에 대한 입력값 통과 테스트', (input) => {
+      const result = Validate.validateRetryOfQuit(input);
+      expect(result).toBeTruthy();
+    });
+  });
 });
