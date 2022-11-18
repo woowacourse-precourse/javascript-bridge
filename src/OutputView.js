@@ -9,10 +9,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridge, isFailed) {
-    const map = this.makeMapString(bridge);
-    if (isFailed) {
-    }
+  printMap(bridge, lastPosition) {
+    const map = this.makeMapString(bridge, lastPosition);
+
     Console.print(`[${map[0].join("|")}]`);
     Console.print(`[${map[1].join("|")}]`);
   },
@@ -29,6 +28,7 @@ const OutputView = {
   },
 
   makeMapString(bridge) {
+    console.log(bridge);
     const map = [];
 
     map.push(this.makeUpMapString(bridge));
@@ -41,8 +41,9 @@ const OutputView = {
     const upMap = [];
 
     for (let i = 0; i < bridge.length; i++) {
+      if (bridge[i] === "XD") upMap.push(" X ");
       if (bridge[i] === "U") upMap.push(" O ");
-      if (bridge[i] === "D") upMap.push("   ");
+      if (bridge[i] === "D" || bridge[i] === "XU") upMap.push("   ");
     }
 
     return upMap;
@@ -52,8 +53,9 @@ const OutputView = {
     const downMap = [];
 
     for (let i = 0; i < bridge.length; i++) {
+      if (bridge[i] === "XU") downMap.push(" X ");
       if (bridge[i] === "D") downMap.push(" O ");
-      if (bridge[i] === "U") downMap.push("   ");
+      if (bridge[i] === "U" || bridge[i] === "XD") downMap.push("   ");
     }
 
     return downMap;

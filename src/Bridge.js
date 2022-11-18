@@ -1,6 +1,5 @@
 class Bridge {
   currentPosition = 0;
-  crossInfo = [];
 
   constructor(bridge) {
     this.bridge = bridge;
@@ -18,8 +17,18 @@ class Bridge {
     this.currentPosition += 1;
   }
 
-  getCrossState() {
+  getCrossState(state) {
+    console.log(this.currentPosition);
+    if (state === "failed")
+      return [
+        ...this.bridge.filter((v, i) => i < this.currentPosition),
+        `X${this.bridge[this.currentPosition]}`,
+      ];
     return this.bridge.filter((v, i) => i < this.currentPosition);
+  }
+
+  resetCurrentPosition() {
+    this.currentPosition = 0;
   }
 }
 
