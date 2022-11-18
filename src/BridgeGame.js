@@ -90,19 +90,6 @@ class BridgeGame {
     return true;
   }
 
-  vaildateBridgeSize(size) {
-    try {
-      if (isNaN(size))
-        throw new Error(ERROR.BRIDGE_SIZE_NOT_NUMBER);
-      if (size < 3 || size > 20)
-        throw new Error(ERROR.BRIDGE_SIZE_OUT_BOUNDARY);
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      return false;
-    }
-    return true;
-  }
-
   validateCommand(command) {
     try {
       if (command !== "R" && command !== "Q")
