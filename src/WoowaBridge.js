@@ -5,12 +5,12 @@ const Message = require("../src/lib/Message");
 const Bridge = require("./model/Bridge");
 
 class WoowaBrigde {
-  bridge;
-  bridgeGame;
+  #bridge;
+  #bridgeGame;
 
   constructor() {
-    this.bridge = new Bridge();
-    this.birdgeGame = new BridgeGame();
+    this.#bridge = new Bridge();
+    this.#bridgeGame = new BridgeGame();
   }
 
   play() {
@@ -19,14 +19,15 @@ class WoowaBrigde {
   }
 
   makeBridge() {
-    const bridgeSetter = this.bridge.setOriginalBridge.bind(this.bridge);
-    const nextCallBack = this.printTest.bind(this);
+    const bridgeSetter = this.#bridge.setOriginalBridge.bind(this.#bridge);
+    const nextCallBack = this.upOrDown.bind(this)
     const errorCallBack = this.makeBridge.bind(this);
     InputView.readBridgeSize(bridgeSetter, nextCallBack, errorCallBack);
   }
 
-  printTest() {
-    console.log(this.bridge.getOriginalBridge());
+  upOrDown() {
+    OutputView.printLine(Message.UP_AND_DOWN)
+    this.#bridgeGame.move();
   }
 }
 
