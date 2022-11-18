@@ -28,7 +28,7 @@ class BridgeGame {
   }
 
   static isGoUp(direction) {
-    Validator.validateDirection(direction);
+    Validator.checkCorrectDirection(direction);
     if (direction === DIRECTION.up) return true;
     return false;
   }
@@ -70,8 +70,8 @@ class BridgeGame {
    */
   static canMoveNext(selectedDirection, nextDirection) {
     console.log('canMoveNext', selectedDirection, nextDirection);
-    Validator.validateDirection(selectedDirection);
-    Validator.validateDirection(nextDirection);
+    Validator.checkCorrectDirection(selectedDirection);
+    Validator.checkCorrectDirection(nextDirection);
     if (selectedDirection === nextDirection) return true;
     return false;
   }
