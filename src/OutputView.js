@@ -9,10 +9,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(inputMoves, callMove, moveResult) {
-    callMove <= 1
+  printMap(inputMoves, moveResult) {
+    inputMoves.length <= 1
       ? this.makeMap(inputMoves, moveResult)
-      : this.makeMaps(inputMoves, callMove, moveResult);
+      : this.makeMaps(inputMoves, moveResult);
   },
   makeMap(inputMoves, moveResult) {
     let upBridge = "[ ";
@@ -27,10 +27,10 @@ const OutputView = {
     }
     Console.print(`${upBridge}\n${downBridge}`);
   },
-  makeMaps(inputMoves, callMove, moveResult) {
+  makeMaps(inputMoves, moveResult) {
     let upBridge = [];
     let downBridge = [];
-    for (let i = 0; i < callMove; i++) {
+    for (let i = 0; i < inputMoves.length; i++) {
       if (inputMoves[i] === "U") {
         upBridge.push(moveResult[i]);
         downBridge.push(" ");
@@ -50,7 +50,14 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(moves, moveResult, tryCount) {
+    Console.print(MESSAGE.RESULT_MESSAGE);
+    this.printMap(moves, moveResult);
+    const isSuccess = moveResult.every((ele) => ele === "O") ? "성공" : "실패";
+    Console.print(`${MESSAGE.SUCCESS_CHECK_MESSAGE}${isSuccess}`);
+    Console.print(`${MESSAGE.TRY_COUNT_MESSAGE}${tryCount}`);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
