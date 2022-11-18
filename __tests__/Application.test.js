@@ -152,4 +152,12 @@ describe('올바른 문자열 파악 함수 테스트', () => {
       hasContain(EXPECTED);
     }).not.toThrow(RANGE_ERROR_TEXT);
   });
+
+  test('배열을 전달하지 않으면 예외를 발생시킨다.', () => {
+    expect(() => {
+      const EXPECTED = 'U';
+
+      Application.hasContain(EXPECTED);
+    }).toThrow(VALIDATION_ARRAY_TEXT);
+  });
 });
