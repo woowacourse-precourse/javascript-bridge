@@ -2,10 +2,12 @@ const BridgeGame = require('./BridgeGame');
 const BridgeValidation = require('./Validation/BridgeValidation');
 const MoveValidation = require('./Validation/MoveValidation');
 const { readMoving, end, getInputs } = require('./View/InputView');
+const { printStart } = require('./View/OutputView');
 
 class App {
   #game;
   play() {
+    printStart();
     getInputs.bind(this)(this.createBridge, this.moveBridge, this.controlGame);
   }
 
