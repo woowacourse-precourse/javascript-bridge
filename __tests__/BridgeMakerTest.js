@@ -3,7 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 describe("다리 생성 테스트", () => {
   test("다리 배열 만들기 테스트", () => {
-    const [arrUp, arrDown] = BridgeMaker.changeRandomArray(["1", "1", "0"]);
+    const [arrUp, arrDown] = BridgeMaker.changeRandomArray(["U", "U", "D"]);
     let BRIDGE = [];
     BRIDGE.push(arrUp);
     BRIDGE.push(arrDown);

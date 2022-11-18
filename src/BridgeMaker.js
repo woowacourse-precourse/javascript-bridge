@@ -16,12 +16,13 @@ const BridgeMaker = {
     const randomArr = ARRAY.getArr().map(
       (element) => (element = generateRandomNumber())
     );
-    return randomArr;
+    let newArr = randomArr.map((element) => (element === "1" ? "U" : "D"));
+    return newArr;
   },
   changeRandomArray(randomArr) {
     //다리 생성
-    const arrUp = randomArr.map((element) => (element === "1" ? "U" : " "));
-    const arrDown = randomArr.map((element) => (element === "0" ? "D" : " "));
+    const arrUp = randomArr.map((element) => (element === "U" ? "U" : " "));
+    const arrDown = randomArr.map((element) => (element === "D" ? "D" : " "));
     return [arrUp, arrDown];
   },
 };
