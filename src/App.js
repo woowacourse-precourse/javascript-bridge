@@ -4,7 +4,7 @@ class App {
   play() {
     Intercessor.startGame();
     const bridge = Intercessor.bridgeMake();
-    Intercessor.matchMove(bridge);
+    if(bridge) Intercessor.matchMove(bridge);
   }
 }
 
