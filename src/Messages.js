@@ -6,6 +6,7 @@ class Messages {
   static END_GAME = '최종 게임 결과';
 
   static BRIDGE_SIZE_ERROR = '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.';
+  static MOVING_ERROR = '[ERROR] 이동할 칸("U" 또는 "D")을 입력해주세요.';
 }
 
 module.exports = Object.freeze(Messages);
