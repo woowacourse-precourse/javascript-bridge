@@ -3,7 +3,7 @@ const BridgeGame = require('./BridgeGame.js');
 const { GameState } = require('./Constant.js');
 const InputView = require('./InputView.js');
 const OutputView = require('./OutputView.js');
-const Validation = require('./Validation.js');
+const Validator = require('./Validator.js');
 
 class App {
   #bridgeGame;
@@ -15,25 +15,25 @@ class App {
   initBridgeGame() {
     try {
       const bridgeSize = InputView.readBridgeSize();
-      Validation.validateBridgeSize(bridgeSize);
+      Validator.validateBridgeSize(bridgeSize);
       this.#bridgeGame = new BridgeGame(bridgeSize);
       this.playBridgeGame();
     } catch (err) {
-      Console.print(err);
-      this.initBridgeGame();
+      Console.print(err.message);
+      if (err instanceof TypeError || err instanceof RangeError) this.initBridgeGame();
     }
   }
 
   playBridgeGame() {
     try {
       const direction = InputView.readMoving();
-      Validation.validateMoving(direction);
+      Validator.validateMoving(direction);
       this.#bridgeGame.move(direction);
-      OutputView.printMap();
+      OutputView.printMap(this.#bridgeGame.isSuccess(), this.#bridgeGame.getMovingLog());
       this.checkBridgeGame();
     } catch (err) {
-      Console.print(err);
-      this.playBridgeGame();
+      Console.print(err.message);
+      if (err instanceof RangeError) this.playBridgeGame();
     }
   }
 
@@ -47,12 +47,12 @@ class App {
   requestRetryBridgeGame() {
     try {
       const command = InputView.readGameCommand();
-      Validation.validateGameCommand(command);
+      Validator.validateGameCommand(command);
       if (command === 'R') this.retryBridgeGame();
       if (command === 'Q') this.endBridgeGame();
     } catch (err) {
-      Console.print(err);
-      this.requestRetryBridgeGame();
+      Console.print(err.message);
+      if (err instanceof RangeError) this.requestRetryBridgeGame();
     }
   }
 

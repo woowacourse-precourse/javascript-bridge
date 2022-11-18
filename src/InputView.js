@@ -8,12 +8,19 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    let size = 0;
+    let size;
     Console.readLine('다리의 길이를 입력해주세요.', input => {
-      size = Number(input);
+      size = input;
     });
 
     return size;
+
+    // return new Promise(resolve => {
+    //   Console.readLine(query, input => {
+    //     const size = Number(input);
+    //     resolve(size);
+    //   });
+    // });
   },
 
   /**
