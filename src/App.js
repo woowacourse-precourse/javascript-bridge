@@ -14,12 +14,24 @@ class App {
     this.bridgeGame = new BridgeGame();
 
     OutputView.printStart();
-    InputView.readBridgeSize(this.enterBridgeSizeByCB.bind(this));
+    InputView.readBridgeSize(this.cbAfterReadBridgeSize.bind(this));
+
+    return this;
   }
 
-  enterBridgeSizeByCB(sizeStr) {
+  cbAfterReadBridgeSize(sizeStr) {
     validateBrigeSize(+sizeStr);
     this.bridgeGame.setSize(+sizeStr);
+
+    this.proceedGame();
+  }
+
+  proceedGame() {
+    InputView.readMoving(this.cbAfterReadMoving.bind(this));
+  }
+
+  cbAfterReadMoving(choice) {
+    console.log("choice", choice);
   }
 }
 
