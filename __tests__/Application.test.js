@@ -132,4 +132,14 @@ describe('올바른 문자열 파악 함수 테스트', () => {
 
     expect(Application.hasContain.name).toEqual(METHOD_NAME);
   });
+
+  test('대문자 U, 대문자 D를 입력을 제외한 값은 예외를 발생한다.', () => {
+    expect(() => {
+      const INCLUDE_TARGET = ['U', 'D'];
+      const hasContain = Application.hasContain(INCLUDE_TARGET);
+      const EXPECTED = 'K';
+
+      hasContain(EXPECTED);
+    }).toThrow(RANGE_ERROR_TEXT);
+  });
 });
