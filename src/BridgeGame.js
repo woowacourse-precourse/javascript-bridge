@@ -22,6 +22,16 @@ class BridgeGame {
     this.userBridge.push(square);
     return this;
   }
+
+  isValidateSquare() {
+    const bridgePiece = this.#bridge.slice(0, this.userBridge.length);
+    return JSON.stringify(this.userBridge) === JSON.stringify(bridgePiece);
+  }
+
+  isEnd() {
+    return JSON.stringify(this.userBridge) === JSON.stringify(this.#bridge);
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
