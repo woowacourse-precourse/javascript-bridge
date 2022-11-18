@@ -15,7 +15,8 @@ const InputView = {
     Console.readLine(MESSAGE.READ_BRIDGE_SIZE, (size) => {
       try {
         ValidateInput.validate(Number(size));
-        const solutionBridge = new BridgeGame(size);
+        const solutionBridge = new BridgeGame(size).makeBridge();
+        this.readMoving(solutionBridge);
       } catch (e) {
         this.readBridgeSize();
       }
@@ -25,7 +26,15 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(solutionBridge) {
+    Console.readLine(MESSAGE.READ_MOVE, (direction) => {
+      try {
+        ValidateInput.validateDirection(direction);
+      } catch (e) {
+        this.readMoving();
+      }
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

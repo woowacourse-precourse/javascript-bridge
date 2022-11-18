@@ -26,6 +26,12 @@ const ValidateInput = {
     }
   },
 
+  validateDirection(direction) {
+    if (direction !== "U" && direction !== "D") {
+      this.throwError(MESSAGE.ERROR_DIRECTION);
+    }
+  },
+
   throwError(message) {
     OutputView.printMessage(message);
     throw new Error(message);
