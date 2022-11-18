@@ -8,12 +8,8 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    return new Promise((resolve) => {
-      Console.readLine(GAME_MESSAGE.SET_BRIDGE_LENGTH, (userInput) => {
-        resolve(Number(userInput));
-      });
-    });
+  readBridgeSize(func) {
+    Console.readLine(GAME_MESSAGE.SET_BRIDGE_LENGTH, func);
   },
 
   /**
