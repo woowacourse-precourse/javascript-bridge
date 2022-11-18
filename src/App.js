@@ -1,27 +1,33 @@
 /* eslint-disable class-methods-use-this */
 const BridgeMaker = require("./BridgeMaker");
+const BridgeGame = require("./BridgeGame");
 const { Console } = require('@woowacourse/mission-utils');
-const { ERROR, GAME, INPUT, BRIDGE, BRIDGE_MOVEMENT } = require("./constants");
+const { GAME, INPUT } = require("./constants");
 const InputView = require('./InputView')
+const OutputView = require('./OutputView');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
 const Validator = require('./Validator');
 
 class App {
-  bridge;
-
   constructor() {
     this.process = [];
+    this.bridgeGame = new BridgeGame();
   }
 
   play() {
-    Console.print(GAME.START);
+    OutputView.printGameStart();
+    this.askBridgeSize();
+  }
+
+  askBridgeSize() {
     InputView.readBridgeSize(this.setBridge.bind(this));
   }
 
   setBridge(size) {
     Validator.isValidBridgeSize(size);
     const generateRandomNumber = () => BridgeRandomNumberGenerator.generate();
-    this.bridge = BridgeMaker.makeBridge(size, generateRandomNumber);
+    const bridge = BridgeMaker.makeBridge(size, generateRandomNumber);
+    this.bridgeGame.setBridge(bridge);
     this.askMoving();
   }
 
@@ -31,6 +37,14 @@ class App {
 
   makeMoving(moving) {
     Validator.isValidMoving(moving);
+    const move = this.bridgeGame.move(moving);
+    OutputView.printMap(move);
+    if (this.bridgeGame.isEnd()) {
+      return this.makeEndGame();
+    }
+    return this.checkStatus(move);
+  }
+
   }
 }
 
