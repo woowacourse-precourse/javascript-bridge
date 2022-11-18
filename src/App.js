@@ -50,6 +50,7 @@ class App {
 
   // 게임 시작
   movePrint(bridge,bridgeLength) {
+    let BRIDGE = []
     const GAME = new BridgeGame()
     // 다리의 길이만큼 move 진행
     for (let i = 0 ; i < bridgeLength ; i++){
@@ -58,20 +59,24 @@ class App {
       if (GAME.move(bridge,USER_MOVE,i) === 'X' ) {
         this.askRetry('X')
       }
-      this.printBridge(GAME.move(bridge,USER_MOVE,i))
+      BRIDGE = this.printBridge(GAME.move(bridge,USER_MOVE,i))
     }
+    this.finishGameSuccess(BRIDGE)
   }
 
   // true 출력
   printBridge(result) {
     BridgeBuild.makeBridge(result,this.BRIDGE_U,this.BRIDGE_D)
-    OutputView.printMap(this.BRIDGE_U,this.BRIDGE_D)
-    OutputView.printBridge(result)
+    return OutputView.printMap(this.BRIDGE_U,this.BRIDGE_D)
   }
 
   // 게임 다시 시작
   askRetry(result){
     OutputView.printStart()
+  }
+
+  finishGameSuccess(bridge){
+    OutputView.printResult('SUCCESS',bridge)
   }
 }
 
