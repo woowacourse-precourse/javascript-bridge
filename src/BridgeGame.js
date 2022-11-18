@@ -9,6 +9,7 @@ class BridgeGame {
   #nowState;
   #trycount;
   #isCleared;
+  #isClearedBoolean;
   #myBridgeMaterialize;
 
   constructor(makeRandomNumber, bridgeMaker, size) {
@@ -16,7 +17,8 @@ class BridgeGame {
     this.#nowState = 0;
     this.#myBridgeMaterialize = this.myBridgeMaterialize();
     this.#trycount = 0;
-    this.#isCleared = '실패';
+    this.#isClearedBoolean = true;
+    this.#isCleared = '성공';
   }
 
   myBridgeMaterialize() {
@@ -53,19 +55,33 @@ class BridgeGame {
     if (result === 'Q') return false;
   }
 
-  printMyBridge(printMap, correct) {
-    if (correct) {
-      return printMap(this.#myBridgeMaterialize, this.#nowState - 1, correct);
+  printMyBridge(printMap) {
+    if (this.#isClearedBoolean) {
+      return printMap(
+        this.#myBridgeMaterialize,
+        this.#nowState - 1,
+        this.#isClearedBoolean
+      );
     }
-    return printMap(this.#myBridgeMaterialize, this.#nowState, correct);
+    return printMap(
+      this.#myBridgeMaterialize,
+      this.#nowState,
+      this.#isClearedBoolean
+    );
   }
 
   printResultGame(resultFunction) {
     resultFunction(this.#trycount, this.#isCleared);
   }
 
-  clearGame() {
+  gameStateChangeSuccess() {
+    this.#isClearedBoolean = true;
     this.#isCleared = '성공';
+  }
+
+  gameStateChangeFailure() {
+    this.#isClearedBoolean = false;
+    this.#isCleared = '실패';
   }
 }
 
