@@ -20,9 +20,14 @@ const SPACE = Object.freeze({
   D: 1,
 });
 
-const PROGRESS = Object.freeze({
+const PASS = Object.freeze({
   true: "O",
   false: " ",
+});
+
+const FAIL = Object.freeze({
+  true: " ",
+  false: "X",
 });
 
 const ERROR = Object.freeze({
@@ -31,4 +36,4 @@ const ERROR = Object.freeze({
     "[ERROR] 위: U, 아래: D 두 방향키에 대한 입력만 가능합니다. 다시 입력해주세요.",
 });
 
-module.exports = { MANAGER, SIZE, ORDER, SPACE, PROGRESS, ERROR };
+module.exports = { MANAGER, SIZE, ORDER, SPACE, PASS, FAIL, ERROR };

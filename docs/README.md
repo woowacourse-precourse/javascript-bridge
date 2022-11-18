@@ -14,6 +14,53 @@
 2. 리팩터링 <br>
    <br>
 
+## 📋 미션 로직 설계
+
+다리길이 입력
+
+- InputView.readBridgeSize 사용자에게 다리의 길이를 입력받음.
+- 예외처리
+- Controller에게 다리 길이 를 전달.
+- Controller 는 다리 길이 정보를 BridgeGame에 전달.
+- BridgeGame은 다리 길이 정보 저장.
+- BridgeMaker, BridgeRandomNumberGenerate 사용해서 다리 만들기.
+- 만들어진 다리 정보 저장.
+
+움직임 입력
+
+- InputView.readMoving 사용자에게 움직임을 입력받음.
+- 예외처리
+- Controller 에게 움직일 방향 전달.
+- Controller 는 움직일 방향을 BridgeGame에 전달
+- move 메소드가 이동할 정보를 Controller에게 전달
+- Controller는 이동정보를 OutView에게 전달
+- OutView는 맞는 정보에 맞게 출력
+- 이후 move 메소드는 게임 진행상황을 Controller 에게 전달
+
+함정 X
+
+- 다리 끝까지 혹은 함정을 밟을때까지 InputView.readMoving 과정을 반복
+
+함정 O
+
+- Controller는 BridgeGame에 함정 밟은 정보를 알려줌.
+- Controller는 readGameCommand를 통해 재시작 응답을 받음.
+- 응답 예외처리
+- 응답정보를 Controller 에게 알려줌.
+- Controller 는 응답정보를 BridgeGame에게 전달
+
+재시작
+
+- BridgeGame은 현재까지 온 스테이지 번호를 다시 초기화, 기존 다리 정보는 유지됨.
+- BridgeGame 은 재시작 횟수 를 저장.
+- Controller 를 통해 inputView.readMoving 을 실현
+
+종료
+
+- BridgeGame은 현재까지의 정보를 Controller에게 전달
+- Controller는 OutputView.printResult 에게 정보 전달<br>
+  <br>
+
 ## 📲 기능 목록
 
 <br>

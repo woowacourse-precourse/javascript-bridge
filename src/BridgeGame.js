@@ -1,25 +1,42 @@
+const BridgeMaker = require("./BridgeMaker");
 const OutputView = require("./OutputView");
+const { SPACE } = require("./utils/constants");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  * BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
  */
 class BridgeGame {
-  #stage;
+  #size;
 
   #bridge;
 
-  constructor(stage, bridge) {
-    this.#stage = stage;
-    this.#bridge = bridge;
+  constructor() {
+    this.#size = 0;
+    this.#bridge = [];
   }
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move(nowStep, direction) {
-    OutputView.printMap(this.#bridge, nowStep, direction);
+
+  receiveSize(size) {
+    this.#size = size;
+    this.makeBridge();
+  }
+
+  makeBridge() {
+    this.#bridge = BridgeMaker.getSize(this.#size);
+  }
+
+  move(nowStep, moving) {
+    const isSafe = this.checkTrap(nowStep, moving);
+    const isEnd = this.checkEnd(nowStep);
+    return [this.#bridge, isSafe, isEnd];
+  }
+
+  checkTrap(nowStep, moving) {
+    return this.#bridge[nowStep][SPACE[moving]];
+  }
+
+  checkEnd(nowStep) {
+    return this.#size - 1 === nowStep;
   }
 
   /**

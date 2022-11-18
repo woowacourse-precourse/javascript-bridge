@@ -5,33 +5,40 @@ const BridgeMaker = require("./BridgeMaker");
 
 const { Console } = require("@woowacourse/mission-utils");
 const { MANAGER } = require("./utils/constants");
+const Controller = require("./Controller");
 
+const controller = new Controller();
 let bridge = [];
+
 const InputView = {
   readBridgeSize() {
     Console.readLine(
       `${MANAGER.NOTICE_START}\n\n${MANAGER.ASK_BRIDGE_SIZE}\n`,
-      (stage) => {
-        new BridgeSize(stage);
-        bridge = BridgeMaker.getSize(stage);
-        InputView.readMoving(0, stage);
+      (size) => {
+        new BridgeSize(size);
+        controller.giveSize(size);
+        this.readMoving(0, size);
       }
     );
   },
 
-  readMoving(nowStep, stage) {
-    Console.readLine(`\n${MANAGER.ASK_MOVE}\n`, (direction) => {
-      new MoveSpace(direction);
-      const step = new BridgeGame(stage, bridge);
-      step.move(nowStep, direction);
-      if (nowStep < stage) this.readMoving(nowStep + 1, stage);
+  readMoving(nowStep, size) {
+    Console.readLine(`\n${MANAGER.ASK_MOVE}\n`, (moving) => {
+      new MoveSpace(moving);
+      const isSafe = controller.giveMoving(nowStep, moving);
+      if (!isSafe) this.readGameCommand();
+      else if (nowStep < size) this.readMoving(nowStep + 1, size);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(`\n${MANAGER.ASK_RETRY}\n`, (answer) => {
+      new MoveSpace(answer);
+    });
+  },
 };
 
 InputView.readBridgeSize();
