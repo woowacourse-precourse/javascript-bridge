@@ -46,13 +46,13 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    if (this.bridge[this.number - 1] == "U"){
-      this.upside.push("X")
-      this.downside.push(" ")
-    }
-    else if(this.bridge[this.number - 1] == "D"){
+    if (this.bridge[this.number] == "U"){
       this.upside.push(" ")
       this.downside.push("X")
+    }
+    else if(this.bridge[this.number] == "D"){
+      this.upside.push("X")
+      this.downside.push(" ")
     }
     OutputView.printMap(this.upside,this.downside)
   }
