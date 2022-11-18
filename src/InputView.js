@@ -24,6 +24,7 @@ const InputView = {
   readMoving(BRG, turnNumber) {
     const brgGame = new BridgeGame();
     Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (inputMoveUpDown) => {
+      this.movingException(inputMoveUpDown);
       let gameContinue = brgGame.move(turnNumber, BRG, inputMoveUpDown);
       if (gameContinue > 0) this.readMoving(BRG, turnNumber + 1);
       else {
@@ -32,6 +33,10 @@ const InputView = {
       }
     })
     return;
+  },
+
+  movingException(inputMoveUpDown) {
+    if(inputMoveUpDown!="U" || inputMoveUpDown!="D") throw new Error("[ERROR] U 혹은 D만 입력할 수 있습니다.");
   },
 
   readGameCommand() {
