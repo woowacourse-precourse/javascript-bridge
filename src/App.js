@@ -7,15 +7,9 @@ const makePrintBridge = require('./utils/makePrintBridge');
 const InputView = require('./UI/InputView');
 const OutputView = require('./UI/OutputView');
 
-function check(input) {
-  return input;
-}
-
 class App {
   #myBridge;
   #myBridgeLength;
-
-  constructor() {}
 
   play() {
     OutputView.gameStart();
@@ -25,8 +19,6 @@ class App {
   getBridgeLength() {
     InputView.readBridgeSize((input) => {
       this.#myBridgeLength = input;
-      Console.print(this.#myBridgeLength);
-
       return this.makeMyBridge();
     });
   }
@@ -77,13 +69,14 @@ class App {
   }
 
   gameWin() {
-    Console.print(GAME_MESSAGE.GAME_RESULT);
+    OutputView.gameResult();
+    const resultBridge = this.#myBridge.printMyBridge(makePrintBridge);
     OutputView.printMap(resultBridge);
     this.#myBridge.printResultGame(OutputView.printResult);
   }
 
   quieGame() {
-    Console.print(GAME_MESSAGE.GAME_RESULT);
+    OutputView.gameResult();
     const resultBridge = this.#myBridge.printMyBridge(makePrintBridge);
     OutputView.printMap(resultBridge);
     this.#myBridge.printResultGame(OutputView.printResult);
