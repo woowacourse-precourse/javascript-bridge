@@ -41,7 +41,7 @@ class App {
   }
 
   checkIsFinished() {
-    const { isFinished } = this.#bridgeGame.getStatus;
+    const { isFinished } = this.#bridgeGame.getStatus();
     return isFinished;
   }
 
