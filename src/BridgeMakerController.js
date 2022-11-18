@@ -1,7 +1,13 @@
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+
 const BridgeMakerController = {
-  getSize(number) {
-    this.size = number;
-    this.getRandomNumber();
+  getSize(value) {
+    this.size = Number(value);
+    this.setBridgeData();
+  },
+  setBridgeData() {
+    BridgeMaker.makeBridge(this.size, BridgeRandomNumberGenerator);
   },
 };
 
