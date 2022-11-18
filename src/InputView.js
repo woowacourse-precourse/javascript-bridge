@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
 const BridgeMaker = require('./BridgeMaker');
-const checkPlayerMovement = require('./checkPlayerMovement');
+const checkPlayerStatus = require('./Utils/checkPlayerStatus');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -12,31 +12,36 @@ const InputView = {
   readBridgeSize(move) {
     Console.readLine('다리의 길이를 입력해주세요.\n', (size) => {
       // validation Check
-      move(BridgeMaker.initializeBridge(size));
+      const bridge = BridgeMaker.initializeBridge(size);
+      console.log(bridge);
+      move(bridge);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge, currentStage, retry) {
-    console.log(`test : ${bridge.info[currentStage]}`);
+  readMoving(bridge, input, retry) {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래 : D)\n', (move) => {
-      const isPassed = checkPlayerMovement.isPlayerPassed(move, bridge.info[currentStage], retry);
-      const isCleared = checkPlayerMovement.isPlayerCleared(bridge.size, currentStage);
-      if (!isPassed) retry(bridge); // 틀렸을 때
-      if (isCleared) OutputView.printResult(true); // 클리어 했을 때
-      this.readMoving(bridge, currentStage + 1, retry); // 둘다 아닐 때
+      // validation Check
+      input.push(move);
+      const isPassed = checkPlayerStatus.isPlayerPassed(move, bridge.info[input.length - 1]);
+      const isCleared = checkPlayerStatus.isPlayerCleared(Number(bridge.size), input.length, isPassed);
+      OutputView.printMap(input, isPassed);
+      if (isPassed && !isCleared) this.readMoving(bridge, input, retry);
+      if (isCleared) OutputView.printResult(1);
+      if (!isPassed) retry(bridge);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(Bridge, move) {
-    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q\n)', (input) => {
-      if (input === 'R') move(Bridge);
-      if (input === 'Q') OutputView.printResult(false);
+  readGameCommand(bridge, move) {
+    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (input) => {
+      // validation Check
+      if (input === 'R') move(bridge);
+      if (input === 'Q') OutputView.printResult(0);
     });
   },
 };
