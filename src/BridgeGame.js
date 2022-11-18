@@ -31,15 +31,7 @@ class BridgeGame {
   move(movingKey) {
     this.movingCount += 1;
     this.userInput.push(movingKey);
-    const MOVE_RESULT = this.getMoveResult(movingKey);
-    if (movingKey === KEY.UP) {
-      this.userBridge[0].push(MOVE_RESULT);
-      this.userBridge[1].push(' ');
-    }
-    if (movingKey === KEY.DOWN) {
-      this.userBridge[0].push(' ');
-      this.userBridge[1].push(MOVE_RESULT);
-    }
+    this.addUserBridge(movingKey);
     return this.userBridge;
   }
 
@@ -48,6 +40,18 @@ class BridgeGame {
       return 'O';
     } else {
       return 'X';
+    }
+  }
+
+  addUserBridge(movingKey) {
+    const MOVE_RESULT = this.getMoveResult(movingKey);
+    if (movingKey === KEY.UP) {
+      this.userBridge[0].push(MOVE_RESULT);
+      this.userBridge[1].push(' ');
+    }
+    if (movingKey === KEY.DOWN) {
+      this.userBridge[0].push(' ');
+      this.userBridge[1].push(MOVE_RESULT);
     }
   }
 
