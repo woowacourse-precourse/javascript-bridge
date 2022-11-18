@@ -19,14 +19,21 @@ class BridgeGameControl {
     this.bridgeSize = new BridgeSize();
     this.movingCheck = new MovingCheck();
     this.askRetryCheck = new AskRetry();
+    OutputView.printStart();
   };
   
   start() {
     InputView.readBridgeSize((size) => {
-      this.bridgeSize.validate(size);
-      this.size = size;
-      this.makeBridge();
+      this.isValidSize(this.bridgeSize.validate(size), size);
     });
+  };
+
+  isValidSize(commend, size) {
+    if (!commend) {
+      return this.start();
+    };
+    this.size = size;
+    return this.makeBridge();
   };
 
   makeBridge() {
@@ -36,13 +43,19 @@ class BridgeGameControl {
   };
   
   userMoving() {
-    // Console.print(this.bridge)
     InputView.readMoving((userUpDown) => {
-      this.movingCheck.validate(userUpDown);
-      this.userMove.push(userUpDown);
-      this.answerCheck();
+      this.isValidMoving(this.movingCheck.validate(userUpDown), userUpDown);
     });
   };
+
+  isValidMoving(commend, userUpDown) {
+    if (!commend) {
+      return this.userMoving();
+    };
+    this.userMove.push(userUpDown);
+    return this.answerCheck();
+  };
+  
 
   answerCheck() {
     switch (this.bridgeGame.move(this.userMove)) {
@@ -74,10 +87,16 @@ class BridgeGameControl {
   };
 
   askRetry() {
-    InputView.readGameCommand((command) => {
-      this.askRetryCheck.validate(command);
-      this.retryCommand(this.bridgeGame.retry(command));
+    InputView.readGameCommand((retryAnswer) => {
+      this.isValidRetry(this.askRetryCheck.validate(retryAnswer), retryAnswer);
     });
+  };
+
+  isValidRetry(commend, retryAnswer) {
+    if (!commend) {
+      return this.askRetry();
+    };
+    return this.retryCommand(this.bridgeGame.retry(retryAnswer));
   };
 
   retryCommand(command) {

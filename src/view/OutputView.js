@@ -4,6 +4,14 @@ const { MESSAGE } = require('../utiles/Constant');
 const OutputView = {
   upBridge: [],
   downBridge: [],
+
+  printError(error) {
+    Console.print(error);
+  },
+
+  printStart() {
+    Console.print(MESSAGE.GAME_START);
+  },
   
   printMap(userMove, answer) {
     OutputView.makePrintMap(userMove, userMove.length-1);

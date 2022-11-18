@@ -3,7 +3,6 @@ const { MESSAGE } = require('../utiles/Constant');
 
 const InputView = {
   readBridgeSize(callback) {
-    Console.print(MESSAGE.GAME_START);
     Console.readLine(MESSAGE.BRIDGE_SIZE, callback);
   },
   
