@@ -5,7 +5,6 @@ const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
 
 const Intercessor = {
-
   startGame() {
     OutputView.printGameStart();
   },
@@ -16,7 +15,7 @@ const Intercessor = {
       const bridgeSize = InputView.readBridgeSize();
       bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     } catch (error) {
-      OutputView.printExceptionBridgeSize(error);
+      OutputView.printException(error);
     }
     return bridge;
   },
@@ -39,7 +38,7 @@ const Intercessor = {
       }
       bridgeGame.printCurrent(moving, true);
     } catch(error){
-      console.log(error);
+      OutputView.printException(error);
     }
   }
 }
