@@ -16,17 +16,21 @@ class BridgeGame {
    */
   move(userBridge) {
     const crossBridgeResult = [];
-    userBridge.forEach((position, i) => {
-      if (position === this.#bridge[i] && position === 'U') {
-        return crossBridgeResult.push(['O', ' ']);
-      }
-      if (position === this.#bridge[i] && position === 'D') {
-        return crossBridgeResult.push([' ', 'O']);
-      }
-      if (position === 'U') return crossBridgeResult.push(['X', ' ']);
-      return crossBridgeResult.push([' ', 'X']);
+    userBridge.forEach((position, index) => {
+      this.#checkBridge(position, crossBridgeResult, index);
     });
     return crossBridgeResult;
+  }
+
+  #checkBridge(position, crossBridgeResult, index) {
+    if (position === this.#bridge[index] && position === 'U') {
+      return crossBridgeResult.push(['O', ' ']);
+    }
+    if (position === this.#bridge[index] && position === 'D') {
+      return crossBridgeResult.push([' ', 'O']);
+    }
+    if (position === 'U') return crossBridgeResult.push(['X', ' ']);
+    return crossBridgeResult.push([' ', 'X']);
   }
 
   draw(moveBridge) {
@@ -34,13 +38,13 @@ class BridgeGame {
     let downBridge = '';
 
     moveBridge.forEach((position) => {
-      upBridge = this.drawUpBridge(position, upBridge, moveBridge);
-      downBridge = this.drawDownBridge(position, downBridge, moveBridge);
+      upBridge = this.#drawUpBridge(position, upBridge, moveBridge);
+      downBridge = this.#drawDownBridge(position, downBridge, moveBridge);
     });
     return [upBridge, downBridge];
   }
 
-  drawUpBridge(position, upBridge, moveBridge) {
+  #drawUpBridge(position, upBridge, moveBridge) {
     if (position === moveBridge[0]) {
       upBridge += position[0];
     } else if (position !== moveBridge[0]) {
@@ -49,7 +53,7 @@ class BridgeGame {
     return upBridge;
   }
 
-  drawDownBridge(position, downBridge, moveBridge) {
+  #drawDownBridge(position, downBridge, moveBridge) {
     if (position === moveBridge[0]) {
       downBridge += position[1];
     } else if (position !== moveBridge[0]) {
