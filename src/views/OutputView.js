@@ -15,10 +15,8 @@ const OutputView = {
   printResult([bridgeState, isSuccess, numberOfAttempts]) {
     Console.print(MESSAGE.RESULT_NOTIFICATION);
     OutputView.printMap(bridgeState);
-    Console.print(
-      `${MESSAGE.SUCCEED_OR_FAIL}${isSuccess ? MESSAGE.SUCCESS : MESSAGE.FAIL}`
-    );
-    Console.print(`${MESSAGE.NUMBER_OF_ATTEMPTS}${numberOfAttempts}`);
+    Console.print(MESSAGE.clear(isSuccess));
+    Console.print(MESSAGE.numberOfAttempts(numberOfAttempts));
   },
 };
 

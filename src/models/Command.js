@@ -1,3 +1,4 @@
+const { COMMAND } = require('../constant');
 const Validator = require('../Validator');
 
 class Command {
@@ -9,7 +10,7 @@ class Command {
   }
 
   shouldRetry() {
-    return this.#command === 'R';
+    return this.#command === COMMAND.RETRY;
   }
 }
 

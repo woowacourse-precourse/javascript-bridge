@@ -68,7 +68,7 @@ class BridgeGame {
   }
 
   gameResult() {
-    const bridgeMap = this.#bridge.getMap();
+    const bridgeMap = Object.values(this.#bridge.getMap());
     const success = this.#player.getSuccess();
     const numberOfAttempts = this.#player.getNumberOfAttempts();
 
