@@ -10,7 +10,7 @@ const InputView = {
     Console.readLine('다리의 길이를 입력해주세요.', (size) => {
       try {
         validateBridge(Number(size));
-        const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate());
+        const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
       } catch (e) {
         this.readBridgeSize();
       }
