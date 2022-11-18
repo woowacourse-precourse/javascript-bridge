@@ -14,12 +14,22 @@ class BridgeGame {
     }
   }
 
+  validateGameCommand(gameCommand) {
+    if (this.isInvalidGameCommand(gameCommand)) {
+      throw new Error("[ERROR] 재시도하려면 R, 종료하려면 Q를 입력해야 합니다.");
+    }
+  }
+
   isInvalidBridgeSize(size) {
     return Number.isNaN(size) || !Number.isInteger(size) || size < 3 || size > 20;
   }
 
   isInvalidMoving(moving) {
     return moving !== "U" && moving !== "D";
+  }
+
+  isInvalidGameCommand(gameCommand) {
+    return gameCommand !== "R" && gameCommand !== "Q";
   }
 
   /**
