@@ -21,7 +21,11 @@ class App {
    }
    else if( !this.game.checkBridgeCorrect(input)){
     this.game.retry()
+    InputView.readGameCommand(this.retryCommand.bind(this))
    }
+  }
+  retryCommand(input){
+    
   }
 }
 const app = new App();
