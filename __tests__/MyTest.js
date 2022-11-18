@@ -4,6 +4,7 @@ const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const BridgeGame = require("../src/BridgeGame");
+const { checkRetry } = require("../src/Validation");
 
 describe(`bridgeSize 입력값 타당성 테스트`, () => {
   test.each([["0"], ["-1"], ["21"]])(
@@ -133,4 +134,33 @@ describe(`유저 이동 결과 판단 테스트`, () => {
 
     expect(bridgeGame.move(bridge, userMove)).toBeFalsy();
   });
+});
+
+describe(`재시작 입력값 타당성 테스트`, () => {
+  test.each([["r"], ["q"]])(
+    `알파벳이 UpperCase가 아닐 때 에러발생`,
+    (input) => {
+      expect((input) => {
+        Validation.checkRetry(input);
+      }).toThrow();
+    }
+  );
+
+  test.each([["3R"], ["a"], ["#"], ["Q."]])(
+    `R 또는 Q가 아닌 다른 걸 입력했을 때 에러발생`,
+    (input) => {
+      expect((input) => {
+        Validation.checkRetry(input);
+      }).toThrow();
+    }
+  );
+
+  test.each([["RR"], ["R3"], ["QQ"], ["QR"]])(
+    `2글자 이상을 입력했을 때 에러발생`,
+    (input) => {
+      expect((input) => {
+        Validation.checkRetry(input);
+      }).toThrow();
+    }
+  );
 });
