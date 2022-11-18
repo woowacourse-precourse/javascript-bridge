@@ -10,11 +10,6 @@ const InputView = {
    */
   readBridgeSize(callback) {
     Console.readLine(MESSAGE.ASK_BRIDGE_SIZE, callback);
-    // Console.readLine(MESSAGE.ASK_BRIDGE_SIZE, (size) => {
-    //   InputView.gameCtrl = new GameController();
-    //   InputView.gameCtrl.makeBridge(size);
-    //   InputView.readMoving();
-    // });
   },
 
   /**
