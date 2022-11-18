@@ -1,36 +1,38 @@
+const { ERROR } = require("./data/Constants");
+
 const Validation = {
   checkBridgeLength(userInput) {
     if (userInput < 3 || userInput > 20) {
-      throw new Error(`[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.`);
+      throw new Error(ERROR.ERROR_BRIDGE_LENGTH_RANGE);
     }
-    if (/[0-9]/g.test(userInput) === false) {
-      throw new Error(`[ERROR] 숫자만 입력이 가능합니다.`);
+    if (/^[0-9]*$/g.test(userInput) === false) {
+      throw new Error(ERROR.ERROR_BRIDGE_LENGTH_ONLY_NUM);
     }
   },
 
   checkMove(userInput) {
     if (userInput === "u" || userInput === "d") {
-      throw new Error(`[ERROR] 대문자로 입력해주세요.`);
+      throw new Error(ERROR.ERROR_BRIDGE_MOVE_UPPERCASE);
     }
 
     if (/^[U,D]/.test(userInput) === false) {
-      throw new Error(`[ERROR] U 또는 D 를 입력해주세요.`);
+      throw new Error(ERROR.ERROR_BRIDGE_MOVE_RANGE);
     }
     if (userInput.length !== 1) {
-      throw new Error(`[ERROR] U 또는 D 한 글자만 입력해주세요.`);
+      throw new Error(ERROR.ERROR_BRIDGE_MOVE_LENGTH);
     }
   },
 
   checkRetry(userInput) {
     if (userInput === "r" || userInput === "q") {
-      throw new Error(`[ERROR] 대문자로 입력해주세요.`);
+      throw new Error(ERROR.ERROR_RETRY_UPPERCASE);
     }
 
     if (/^[R,Q]/.test(userInput) === false) {
-      throw new Error(`[ERROR] R 또는 Q를 입력해주세요.`);
+      throw new Error(ERROR.ERROR_RETRY_RANGE);
     }
     if (userInput.length !== 1) {
-      throw new Error(`[ERROR] R 또는 D 한 글자만 입력해주세요.`);
+      throw new Error(ERROR.ERROR_RETRY_LENGTH);
     }
   },
 };
