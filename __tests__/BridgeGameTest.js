@@ -2,12 +2,8 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeGame = require('../src/BridgeGame');
 const { createTokens, canMoveNext } = require('../src/BridgeGame');
-const { makeBridge } = require('../src/BridgeMaker');
-const BridgeMaker = require('../src/BridgeMaker');
 const { generate } = require('../src/BridgeRandomNumberGenerator');
-const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
-const { ERROR_MESSAGES } = require('../src/constant/message');
-const OutputView = require('../src/OutputView');
+const { ERROR_MESSAGE } = require('../src/constant/message');
 
 describe('BridgeGame 클래스 테스트', () => {
   test('createTokens - 반환하는 배열 길이가 입력값과 같은지 검사', () => {
@@ -59,8 +55,8 @@ describe('BridgeGame 클래스 테스트', () => {
     const nextDirection = 'R';
 
     // Then
-    expect(BridgeGame.canMoveNext(userDirection, nextDirection)).toThrow(
-      ERROR_MESSAGES.unexpected_input
+    expect(() => BridgeGame.canMoveNext(userDirection, nextDirection)).toThrow(
+      ERROR_MESSAGE.unexpected_input
     );
   });
 
@@ -85,7 +81,7 @@ describe('BridgeGame 클래스 테스트', () => {
     // Then
     userDirectionList.forEach((userDirection) => {
       expect(() => BridgeGame.isGoUp(userDirection)).toThrow(
-        ERROR_MESSAGES.unexpected_input
+        ERROR_MESSAGE.unexpected_input
       );
     });
   });
