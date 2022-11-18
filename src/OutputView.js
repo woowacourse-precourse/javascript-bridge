@@ -29,6 +29,10 @@ const OutputView = {
 
   printStart() {
     MissionUtils.Console.print(MESSAGE.START);
+  },
+
+  printError(message) {
+    MissionUtils.Console.print(message);
   }
 };
 
