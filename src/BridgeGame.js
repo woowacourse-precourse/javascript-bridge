@@ -11,7 +11,7 @@ class BridgeGame {
 	}
 
 	move(moving) {
-		const isCorrect = this.isCorrect(moving);
+		const isCorrect = this.#bridge[this.#currentPos] === moving;
 
 		// UO : 지나온 다리가 U이며, 정답이었던 경우
 		// UX : 지나온 다리가 U이며, 틀린 경우
@@ -21,10 +21,6 @@ class BridgeGame {
 			? (this.#bridge[this.#currentPos] = moving + 'O')
 			: (this.#bridge[this.#currentPos] = moving + 'X');
 		this.#currentPos++;
-	}
-
-	isCorrect(moving) {
-		return this.#bridge[this.#currentPos] === moving;
 	}
 
 	getPrevCrossedBridge() {
