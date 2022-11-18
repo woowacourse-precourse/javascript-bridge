@@ -44,7 +44,8 @@ class App {
 
   #moveSpace(direction) {    
     this.game.move(direction);
-    OutputView.printMap(this.game.movementLog);
+    const log = this.game.getMovementLog();
+    OutputView.printMap(log);
     if(this.game.isFailed()) return this.#submitRetry();
     if(this.game.isClear()) return this.#quitGame(MESSAGES.CLEARED.SUCESS);
     this.#submitDirection();
@@ -73,8 +74,8 @@ class App {
   }
 
   #quitGame(clear) {
-    const log = this.game.movementLog;
-    const tryCount = this.game.tryCount;
+    const log = this.game.getMovementLog();
+    const tryCount = this.game.getTryCount();
     OutputView.printResult(log, tryCount, clear);
     MissionUtils.Console.close();
   }
