@@ -4,6 +4,7 @@
 - [x] 입력 받은 다리 길이로 다리를 생성한다. - BridgeMaker#makeBridge()
 - [x] 입력 받은 이동할 칸으로 이동한다. - BridgeGame#move()
 - [x] 입력 받은 이동할 칸과 다리를 비교한다. - BridgeGame#match()
+- [ ] 이동 후 건넌 결과를 얻는다 - BridgeGame#getMoveResult()
 - [ ] 재시작 시 시도 횟수를 증가시킨다. - BridgeGame#retry()
 
 
