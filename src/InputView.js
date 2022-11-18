@@ -13,12 +13,12 @@ const InputView = {
   readBridgeSize(size) {
     try {
       bridgeGame.build(size);
+
+      InputView.requestMoving();
     } catch ({ message }) {
       printMsg(message);
       InputView.requestBridgeSize();
     }
-
-    InputView.requestMoving();
   },
 
   requestMoving() {
