@@ -5,9 +5,9 @@ const Validation = require("./Validation");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
-const Controller = require("./Controller");
 
 let callMove = 0;
+let tryCount = 1;
 
 const validation = new Validation();
 const brigeGame = new BridgeGame();
@@ -47,14 +47,15 @@ const InputView = {
     Console.readLine(MESSAGE.INPUT_MOVE_MESSAGE, (inputMove) => {
       try {
         validation.validateMove(inputMove);
-        [callMove, moveResult, inputMoves] = brigeGame.move(
+        console.log("readMoving", bridge, inputMove, callMove);
+        [callMove, moveResult, moves] = brigeGame.move(
           inputMove,
           callMove,
           bridge
         );
         console.log(callMove, moveResult);
-        OutputView.printMap(inputMoves, callMove, moveResult);
-        this.checkMove(callMove, moveResult, bridge);
+        OutputView.printMap(moves, moveResult);
+        this.checkMove(moves, moveResult, bridge);
       } catch (error) {
         Console.print(error);
         this.readMoving(bridge);
@@ -62,14 +63,17 @@ const InputView = {
     });
   },
 
-  checkMove(callMove, moveResult, bridge) {
-    if (callMove === bridge.length) {
-      OutputView.printResult();
+  checkMove(moves, moveResult, bridge) {
+    if (
+      moves.length === bridge.length &&
+      moveResult[moves.length - 1] === "O"
+    ) {
+      OutputView.printResult(moves, moveResult, tryCount);
     }
-    if (moveResult[callMove - 1] === "X") {
-      this.readGameCommand();
+    if (moveResult[moves.length - 1] === "X") {
+      this.readGameCommand(moves, moveResult, bridge);
     }
-    if (moveResult[callMove - 1] === "O" && callMove < bridge.length) {
+    if (moveResult[moves.length - 1] === "O" && moves.length < bridge.length) {
       this.readMoving(bridge);
     }
   },
@@ -77,8 +81,23 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(moves, moveResult, bridge) {
     Console.readLine(MESSAGE.INPUT_RESTART_MESSAGE, (input) => {
+      try {
+        validation.validateRestart(input);
+        if (input === "R") {
+          callMove = 0;
+          tryCount++;
+          brigeGame.retry();
+          this.readMoving(bridge);
+        }
+        if (input === "Q") {
+          OutputView.printResult(moves, moveResult, tryCount);
+        }
+      } catch (error) {
+        Console.print(error);
+        this.readGameCommand(bridge);
+      }
     });
   },
 };
