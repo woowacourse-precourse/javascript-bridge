@@ -29,13 +29,13 @@ const InputView = {
       (moveInput) => {
         bridgeGame.move(moveInput);
         printMap(bridgeGame.userBridge);
-        if (!bridgeGame.hasNext && bridgeGame.count === bridgeGame.bridgeSize) {
+        if (!bridgeGame.hasNext && bridgeGame.finish) {
           printResult("게임 성공 여부: 성공");
-          printResult(`총 시도한 횟수: ${bridgeGame.count}`);
+          printResult(`총 시도한 횟수: ${bridgeGame.retrycount}`);
           return;
         }
         if (!bridgeGame.hasNext) {
-          InputView.readGameCommand(mainBridge);
+          InputView.readGameCommand(mainBridge, bridgeGame);
           return;
         }
         InputView.readMoving(mainBridge, bridgeGame);
@@ -46,13 +46,13 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(mainBridge) {
+  readGameCommand(mainBridge, bridgeGame) {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
       (retryInput) => {
         if (retryInput === "R") {
-          const newbridgeGame = new BridgeGame(mainBridge);
-          InputView.readMoving(mainBridge, newbridgeGame);
+          bridgeGame.init();
+          InputView.readMoving(mainBridge, bridgeGame);
           return;
         }
         if (retryInput === "Q") {
