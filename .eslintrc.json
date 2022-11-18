@@ -20,7 +20,8 @@
             "error",
             {
                 "useTabs": false,
-                "singleQuote": true
+                "singleQuote": true,
+                "semi": true
             }
         ]
     }
