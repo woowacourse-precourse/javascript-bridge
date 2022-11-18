@@ -6,6 +6,7 @@ const INPUT_MESSAGE = {
 
 const OUTPUT_MESSAGE = {
   GAME_START: '다리 건너기 게임을 시작합니다.',
+  BRIDGE_MAP: `${BRIDGE.START}| O |${BRIDGE.END}`,
 };
 
 const GAME_COMMANDS = {
@@ -13,4 +14,10 @@ const GAME_COMMANDS = {
   GAME: { RETRY: 'R', QUIT: 'Q' },
 };
 
-module.exports = { INPUT_MESSAGE, OUTPUT_MESSAGE, GAME_COMMANDS };
+const BRIDGE_SHAPE = {
+  START: '[ ',
+  END: ' ]',
+  DIVIDING_LINE: ' | ',
+};
+
+module.exports = { INPUT_MESSAGE, OUTPUT_MESSAGE, GAME_COMMANDS, BRIDGE_SHAPE };
