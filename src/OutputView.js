@@ -4,7 +4,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
  */
 const OutputView = {
   printOpening() {
-    MissionUtils.Console.print("다리 건너기 게임을 시작합니다.");
+    MissionUtils.Console.print("다리 건너기 게임을 시작합니다.\n");
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
@@ -15,7 +15,7 @@ const OutputView = {
     const [upperBridge, lowerBridge] = bridgeState;
 
     const upperBridgeText = `[ ${upperBridge.join(" | ")} ]`;
-    const lowerBridgeText = `[ ${lowerBridge.join(" | ")} ]`;
+    const lowerBridgeText = `[ ${lowerBridge.join(" | ")} ]\n`;
 
     MissionUtils.Console.print(upperBridgeText);
     MissionUtils.Console.print(lowerBridgeText);
