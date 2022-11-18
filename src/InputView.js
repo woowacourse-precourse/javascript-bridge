@@ -24,9 +24,17 @@ const InputView = {
    */
   readMoving(func2, func3) {
     MissionUtils.Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
-      func2.call(this, input);
-      //this.readGameCommand(func3);
-      this.readMoving(func2, func3);
+      const [isEnd, isWin] = func2.call(this, input);
+
+      if (isWin) {
+        this.gameEnd();
+      }
+      else if (isEnd) {
+        this.readGameCommand(func3);
+      }
+      else {
+        this.readMoving(func2, func3);
+      }
     });
   },
 

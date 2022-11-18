@@ -6,7 +6,8 @@ class Bridge {
 
   constructor(input) {
     this.validation(input);
-    this.makeRandomBridge(input);
+    this.#bridge = this.makeRandomBridge(input);
+    console.log(this.#bridge);
   }
 
   checkMove(letter, index) {
@@ -16,11 +17,15 @@ class Bridge {
     return [letter, false];
   }
 
+  bridgeLength() {
+    return this.#bridge.length;
+  }
+
   makeRandomBridge(input) {
     const bridgeGenerator = BridgeRandomNumberGenerator.generate;
     const randomBridge = BridgeMaker.makeBridge(input, bridgeGenerator);
 
-    this.#bridge = randomBridge;
+    return randomBridge;
   }
 
   validation(input) {

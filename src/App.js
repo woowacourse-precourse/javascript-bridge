@@ -18,7 +18,10 @@ class App {
   }
 
   func2(input) {
-    this.bridgeGame.move(input);
+    const isEnd = this.bridgeGame.move(input);
+    const isWin = this.bridgeGame.isGameWin();
+
+    return [isEnd, isWin];
   }
 
   func3(input) {
