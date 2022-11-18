@@ -21,7 +21,7 @@ class GameStart {
         : this.#BRIDGEGAME.move(arrDown, this.#toWalkCount, move);
       this.#toWalkCount += 1;
       if (arrUp.includes("X") || arrDown.includes("X")) {
-        this.#BRIDGEGAME.retry();
+        this.#BRIDGEGAME.retry(arrUp, arrDown);
         return true;
       }
     });

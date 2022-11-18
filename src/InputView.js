@@ -4,6 +4,8 @@ const ErrorCheck = require("./modules/ErrorCheck");
 const messageObject = {
   BRIGE_SIZE: "다리의 길이를 입력해주세요",
   SELECT_UORD: "이동할 칸을 선택해주세요. (위: U, 아래: D)",
+  GAME_RESTART:
+    "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
 };
 const Error = new ErrorCheck();
 
@@ -32,9 +34,9 @@ const InputView = {
     let upOrDown = [];
     let count = 0;
     while (count < size) {
-      MissionUtils.Console.readLine(messageObject.SELECT_UORD, (UD) => {
-        Error.inputMovingErrorCheck(UD);
-        upOrDown.push(UD);
+      MissionUtils.Console.readLine(messageObject.SELECT_UORD, (UpDown) => {
+        Error.inputMovingErrorCheck(UpDown);
+        upOrDown.push(UpDown);
       });
       MissionUtils.Console.close();
       count += 1;
@@ -45,7 +47,14 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    let restart = "";
+    MissionUtils.Console.readLine(messageObject.GAME_RESTART, (reOrNot) => {
+      restart = reOrNot;
+    });
+    MissionUtils.Console.close();
+    return restart === "R" ? true : false;
+  },
 };
 
 module.exports = InputView;
