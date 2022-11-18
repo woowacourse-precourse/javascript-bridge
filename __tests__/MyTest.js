@@ -179,4 +179,27 @@ describe(`입력값에 따라 재시작/종료 판단`, () => {
 
     expect(bridgeGame.retry(userInput)).toBeFalsy();
   });
+
+  test(`유저가 재시작을 입력하면 이동 정보를 담은 배열은 초기화 된다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    bridgeGame.pass("U");
+    bridgeGame.pass("U");
+    expect(bridgeGame.getResult()).toEqual([
+      ["O", "O"],
+      [` `, ` `],
+    ]);
+    bridgeGame.reset();
+
+    expect(bridgeGame.getResult()).toEqual([[], []]);
+  });
+
+  test(`유저가 재시작을 입력하면 이동 정보 배열은 초기화 되고 시도 횟수는 증가한다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+
+    bridgeGame.pass("U");
+    expect(bridgeGame.getTryCount()).toBe(1);
+
+    bridgeGame.reset();
+    expect(bridgeGame.getTryCount()).toBe(2);
+  });
 });
