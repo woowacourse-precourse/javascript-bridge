@@ -71,12 +71,14 @@ class BridgeGame {
             this.bridgeCount = 0;
             this.#upBridgeHistory = [];
             this.#downBridgeHistory = [];
-            this;
+            this.#gameCount++;
             return true;
         }
     }
 
     finish() {
+        console.log(MESSAGE.FINISH);
+        console.log("[ 여기에 지도 그리기 ]");
         console.log(MESSAGE.FAIL);
         console.log(MESSAGE.TRY + this.#gameCount);
     }

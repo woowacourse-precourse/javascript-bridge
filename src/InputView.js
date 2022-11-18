@@ -40,8 +40,9 @@ const InputView = {
         Console.readLine(MESSAGE.RESTART, (answer) => {
             if (bridgeGame.retry(answer)) {
                 this.readMoving(bridgeGame);
+            } else {
+                bridgeGame.finish();
             }
-            bridgeGame.finish();
         });
     },
 };
