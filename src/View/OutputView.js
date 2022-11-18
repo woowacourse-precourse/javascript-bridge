@@ -1,3 +1,5 @@
+const { print } = require("../utils/Io.js");
+const { OUTPUT } = require("../constants/index.js");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -15,6 +17,19 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult() {},
+
+  /**
+   * 게임이 사작했다는 문구를 출력한다.
+   */
+  printStart() {
+    const { START_BRIDGE } = OUTPUT;
+    print(START_BRIDGE);
+  },
 };
 
 module.exports = OutputView;
+
+// ? 제공된 OutputView 객체를 활용해 구현해야 한다.
+// ? OutputView의 파일 경로는 변경할 수 있다.
+// ? OutputView의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
+// ? 값 출력을 위해 필요한 메서드를 추가할 수 있다.
