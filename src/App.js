@@ -1,5 +1,6 @@
 const BridgeGame = require('./BridgeGame');
 const BridgeValidation = require('./Validation/BridgeValidation');
+const ControlValidation = require('./Validation/ControlValidation');
 const MoveValidation = require('./Validation/MoveValidation');
 const { readMoving, end, getInputs } = require('./View/InputView');
 const { printStart } = require('./View/OutputView');
@@ -25,6 +26,7 @@ class App {
   }
 
   controlGame(input) {
+    ControlValidation(input);
     if (input == 'R') {
       this.#game.retry();
       readMoving.call(this, this.moveBridge, this.controlGame);

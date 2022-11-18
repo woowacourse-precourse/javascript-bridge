@@ -61,7 +61,12 @@ const InputView = {
    */
   readGameCommand(callbackThree) {
     MissionUtils.Console.readLine(MESSAGE.INPUT_CONTROL, (input) => {
-      callbackThree.call(this, input);
+      try {
+        callbackThree.call(this, input);
+      } catch (err) {
+        printError(err);
+        InputView.readGameCommand(callbackThree);
+      }
     });
   },
   end() {
