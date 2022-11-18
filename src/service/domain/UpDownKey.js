@@ -1,18 +1,33 @@
-const { REGEX, ERROR_MESSAGE } = require('../../utils/constants');
+const BridgeService = require('../BridgeService');
+const { ERROR_MESSAGE, REGEX, MODEL_KEY } = require('../../utils/constants');
 
-class UpDownKey {
+class UpDownKey extends BridgeService {
   #input;
 
   constructor(input) {
+    super();
+
     this.#input = input;
   }
 
-  getValidateData() {
+  #getValidateData() {
     if (!REGEX.upDownKey.test(this.#input)) {
       throw new Error(ERROR_MESSAGE.upDownKey);
     }
 
-    return this.#input;
+    return this;
+  }
+
+  #updateUserBridge() {
+    const oldData = this.getModelFor(MODEL_KEY.userBridge) || [];
+
+    this.setModelFor(MODEL_KEY.userBridge, [...oldData, this.#input]);
+
+    return this;
+  }
+
+  doAction() {
+    this.#getValidateData().#updateUserBridge();
   }
 }
 
