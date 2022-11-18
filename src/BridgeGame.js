@@ -12,6 +12,7 @@ class BridgeGame {
   constructor(bridge) {
     this.#bridge = bridge;
     this.#userMove = [];
+    console.log(bridge);
   }
 
   /**
@@ -23,6 +24,10 @@ class BridgeGame {
     this.#userMove.push(step);
   }
 
+  getUserCommand() {
+    // TODO: get user command (retry or quit)
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
@@ -30,11 +35,22 @@ class BridgeGame {
    */
   retry() {}
 
+  checkResult() {
+    const currentBridge = this.#bridge.slice(0, this.#userMove.length);
+    // FIXME: change toString into different logic
+    if (currentBridge.toString() === this.#userMove.toString()) {
+      this.getUserMove();
+    } else {
+      this.getUserCommand();
+    }
+  }
+
   getUserMove() {
     InputView.readMoving((step) => {
       this.move(step);
       BridgeMap.generate(this.#bridge, this.#userMove);
       OutputView.printMap();
+      this.checkResult();
     });
   }
 
