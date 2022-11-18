@@ -22,7 +22,6 @@ class App {
     const NOT_END = this.#game.isEnd() == true;
     const END = false;
     if (MOVE && NOT_END) return NOT_END;
-    this.#game.statusPrint();
     return END;
   }
 
@@ -31,6 +30,7 @@ class App {
       this.#game.retry();
       readMoving.call(this, this.moveBridge, this.controlGame);
     } else {
+      this.#game.statusPrint();
       end();
     }
   }
