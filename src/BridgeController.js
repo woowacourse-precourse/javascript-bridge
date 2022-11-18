@@ -72,14 +72,15 @@ class BridgeController {
     const passBridgeResult = bridgeGame.getResult();
 
     OutputView.printMap(passBridgeResult);
-    this.successGame(passBridge, passBridgeResult, bridge);
-    this.passOrNot(passBridge, passBridgeResult, bridge);
+    if (this.successGame(passBridge, passBridgeResult, bridge) !== true) {
+      this.passOrNot(passBridge, passBridgeResult, bridge);
+    }
   }
 
   successGame(passBridge, passBridgeResult, bridge) {
     if (passBridge === true && passBridgeResult[0].length === bridge.length) {
       this.gameEndPoint(passBridgeResult);
-      return Console.close();
+      return true;
     }
   }
   passOrNot(passBridge, passBridgeResult, bridge) {
