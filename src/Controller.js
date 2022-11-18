@@ -23,9 +23,15 @@ class Controller {
     });
   }
 
-  retryPhase() {}
+  retryPhase() {
+    readGameCommand((input) =>
+      this.#BridgeGame.retry(input) ? this.movingPhase() : this.resultPhase()
+    );
+  }
 
-  resultPhase() {}
+  resultPhase() {
+    printResult(this.#BridgeGame.getResult());
+  }
 }
 
 module.exports = Controller;
