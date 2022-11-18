@@ -1,20 +1,56 @@
+const OutputView = require("./OutputView");
+const { STRUCTURE } = require("./constant/message.js");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
+
 class BridgeGame {
-    /**
-     * 사용자가 칸을 이동할 때 사용하는 메서드
-     * <p>
-     * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    move() {}
+    bridgeArray;
+    bridgeCount;
+    #upBridgeHistory;
+    #downBridgeHistory;
 
-    /**
-     * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-     * <p>
-     * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    retry() {}
+    constructor(bridgeArray) {
+        this.bridgeArray = bridgeArray;
+        this.bridgeCount = 0;
+        this.#upBridgeHistory = [];
+        this.#downBridgeHistory = [];
+    }
+
+    // check(move) {
+    //     if (move === "U" && this.bridgeArray[this.bridgeCount] === "D") return this.retry();
+    //     if (move === "D" && this.bridgeArray[this.bridgeCount] === "U") return this.retry();
+    // }
+
+    move(move) {
+        console.log("BridgeGame.move-----------");
+        const up = move === "U" && this.bridgeArray[this.bridgeCount] === "U";
+
+        if (this.bridgeCount === this.bridgeArray.length - 1) {
+            return OutputView.printResult();
+        }
+
+        this.success(up);
+    }
+
+    success(up) {
+        if (up) {
+            this.#upBridgeHistory.push(STRUCTURE.GOOD);
+            this.#downBridgeHistory.push(STRUCTURE.BLANK);
+        }
+        if (!up) {
+            this.#upBridgeHistory.push(STRUCTURE.BLANK);
+            this.#downBridgeHistory.push(STRUCTURE.GOOD);
+        }
+        OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory, this.bridgeArray);
+        this.bridgeCount++;
+    }
+
+    retry() {
+        this.bridgeCount = 0;
+        this.#upBridgeHistory = [];
+        this.#downBridgeHistory = [];
+    }
 }
-
 module.exports = BridgeGame;
