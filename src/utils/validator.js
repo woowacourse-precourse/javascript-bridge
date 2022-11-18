@@ -1,6 +1,8 @@
+const { Console } = require('@woowacourse/mission-utils');
 const validator = {
   checkBridgeSizeInput(input) {
-    return this.checkIsNum(input) && this.checkNumRange(input);
+    if (this.checkIsNum(input) && this.checkNumRange(input)) return;
+    throw Console.print('[ERROR] 입력한 다리 길이가 올바르지 않습니다.');
   },
 
   checkIsNum(input) {

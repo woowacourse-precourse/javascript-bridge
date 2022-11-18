@@ -5,13 +5,22 @@ const validator = require('../utils/validator');
 class Controller {
   start() {
     OutputView.printGameStart();
+    this.inputBridgeSize();
+  }
+
+  inputBridgeSize() {
     InputView.readBridgeSize(this.getBridgeSize.bind(this));
   }
 
   getBridgeSize(size) {
-    if (!validator.checkBridgeSizeInput(size))
-      throw new Error('[ERROR] 입력한 다리 길이가 올바르지 않습니다.');
+    try {
+      validator.checkBridgeSizeInput(size);
+    } catch {
+      this.inputBridgeSize();
+    }
   }
+
+  getBridgeWay() {}
 }
 
 module.exports = Controller;
