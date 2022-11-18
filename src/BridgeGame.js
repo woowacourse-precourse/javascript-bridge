@@ -6,11 +6,14 @@ class BridgeGame {
 
 	constructor(bridgeSize, generateRandomNumber) {
 		this.#bridge = BridgeMaker.makeBridge(bridgeSize, generateRandomNumber);
-		this.#currentPos = 0;
+		// 첫시작시 this.#currentPos++ 하므로 -1 시작
+		this.#currentPos = -1;
 		console.log(this.#bridge);
 	}
 
 	move(moving) {
+		this.setNextPos();
+
 		const isCorrect = this.isCorrect(moving);
 
 		// UO : 지나온 다리가 U이며, 정답이었던 경우
@@ -26,8 +29,15 @@ class BridgeGame {
 		return this.#bridge[this.#currentPos] === moving;
 	}
 
+	wasCorrect() {
+		return (
+			this.#bridge[this.#currentPos] === 'DO' ||
+			this.#bridge[this.#currentPos] === 'UO'
+		);
+	}
+
 	getPrevCrossedBridge() {
-		return this.#bridge.slice(0, this.#currentPos);
+		return this.#bridge.slice(0, this.#currentPos + 1);
 	}
 
 	retry() {
@@ -35,7 +45,6 @@ class BridgeGame {
 	}
 
 	backMove() {
-		this.setBackPos();
 		// UX인경우 원래 D이므로
 		if (this.#bridge[this.#currentPos] === 'UX') {
 			this.#bridge[this.#currentPos] = 'D';
@@ -44,6 +53,7 @@ class BridgeGame {
 		if (this.#bridge[this.#currentPos] === 'DX') {
 			this.#bridge[this.#currentPos] = 'U';
 		}
+		this.setBackPos();
 	}
 
 	setBackPos() {

@@ -53,7 +53,7 @@ const InputView = {
 		const prevCrossedBridge = bridgeGame.getPrevCrossedBridge();
 		OutputView.printMap(prevCrossedBridge);
 
-		InputView.inCaseWrong(bridgeGame, moving, prevCrossedBridge);
+		InputView.inCaseWrong(bridgeGame, prevCrossedBridge);
 
 		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 	},
@@ -67,11 +67,9 @@ const InputView = {
 		}
 	},
 
-	inCaseWrong(bridgeGame, moving, prevCrossedBridge) {
-		bridgeGame.setBackPos();
-		const isCorrect = bridgeGame.isCorrect(moving);
-		bridgeGame.setNextPos();
-		if (!isCorrect) {
+	inCaseWrong(bridgeGame, prevCrossedBridge) {
+		const wasCorrect = bridgeGame.wasCorrect();
+		if (!wasCorrect) {
 			InputView.readGameCommand(bridgeGame, prevCrossedBridge);
 		}
 	},
