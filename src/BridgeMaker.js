@@ -3,8 +3,8 @@
  */
 const BridgeMaker = {
   DIRECTION: Object.freeze({
-    0: 'U',
-    1: 'D',
+    0: 'D',
+    1: 'U',
   }),
 
   /**
