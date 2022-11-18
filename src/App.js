@@ -67,6 +67,18 @@ class App {
       this.controller();
     }
   };
+
+  #validateBridgeSize(size) {
+    return size.toString().match(REGEX.SIZE_RANGE);
+  }
+
+  #validateMoving(moving) {
+    return moving === "U" || moving === "D";
+  }
+
+  #validateGameCommand(gameCommand) {
+    return gameCommand === "R" || gameCommand === "Q";
+  }
 }
 
 module.exports = App;
