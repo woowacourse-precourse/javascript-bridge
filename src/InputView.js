@@ -7,6 +7,7 @@ const Messages = require('./Messages');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
+const OutputView = require('./OutputView');
 
 const InputView = {
   bridgeGame: new BridgeGame(),
@@ -38,11 +39,17 @@ const InputView = {
     Console.readLine(Messages.INPUT_MOVING, (upOrDown) => {
       this.validateMoving(upOrDown);
       const round = this.bridgeGame.move();
+
+      this.readMovingOrGameCommand(bridge[round - 1], upOrDown);
     });
   },
 
   validateMoving(upOrDown) {
     if (upOrDown !== 'U' && upOrDown !== 'D') throw new Error(Messages.MOVING_ERROR);
+  },
+
+  readMovingOrGameCommand(oneBridge, upOrDown) {
+    const hasCorrect = OutputView.printMap(oneBridge, upOrDown);
   },
 
   /**

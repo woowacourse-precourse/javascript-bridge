@@ -6,6 +6,9 @@ const { Console } = require('@woowacourse/mission-utils');
 const Messages = require('./Messages');
 
 const OutputView = {
+  up: [],
+  down: [],
+
   startGame() {
     Console.print(Messages.START_GAME);
   },
@@ -14,7 +17,26 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(oneBridge, upOrDown) {
+    const [up, down, upAndDown] = this.makeMap(oneBridge, upOrDown);
+    const hasCorrect = Object.values(upAndDown).includes('O');
+
+    Console.print(`[ ${up.join(' | ')} ]`);
+    Console.print(`[ ${down.join(' | ')} ]\n`);
+
+    return hasCorrect;
+  },
+
+  makeMap(oneBridge, upOrDown) {
+    let upAndDown = { U: ' ', D: ' ' };
+    if (oneBridge === upOrDown) upAndDown[upOrDown] = 'O';
+    else upAndDown[upOrDown] = 'X';
+
+    this.up.push(upAndDown['U']);
+    this.down.push(upAndDown['D']);
+
+    return [this.up, this.down, upAndDown];
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
