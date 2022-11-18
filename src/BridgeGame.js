@@ -22,11 +22,23 @@ class BridgeGame {
     let move = readMoving();
     switch(true) {
       case this.bridgeState[this.nowPosition] === move:
+        this.passBridge(move, 'O');
         break;
       default:
+        this.passBridge(move, 'X');
     }
     if (this.nowPosition === this.bridgeState.length) printResult('성공', this.nowBridge, this.tryCount);
     this.move();
+  }
+
+  passBridge(move, check) {
+    this.nowPosition += 1;
+    switch(true) {
+      case move === 'U':
+        break;
+      case move === 'D':
+        break;
+    }
   }
 
   /**
