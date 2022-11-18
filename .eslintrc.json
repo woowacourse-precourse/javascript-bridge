@@ -23,6 +23,7 @@
                 "singleQuote": true,
                 "semi": true
             }
-        ]
+        ],
+        "no-undef": "off"
     }
 }
