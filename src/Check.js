@@ -12,7 +12,7 @@ class Check {
       gamePlay.addCount();
       return true;
     }
-    throw new Error('잘못된 입력을 하였습니다.');
+    throw new Error(ERROR_MESSAGES.ERROR_INVAILD_INPUT('Q', 'R'));
   }
   static checkIsGameOver(isGameOver, index, brigeShape) {
     if (isGameOver) {
@@ -22,6 +22,10 @@ class Check {
       isGameOver = true;
       return isGameOver;
     }
+  }
+  static isVaildInput(input) {
+    if (input === 'U' || input === 'D') return;
+    throw new Error(ERROR_MESSAGES.ERROR_INVAILD_INPUT('U', 'D'));
   }
 }
 
