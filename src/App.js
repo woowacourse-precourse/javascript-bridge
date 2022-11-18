@@ -28,6 +28,45 @@ class App {
         OutputView.printResult(this.#bridgeGame);
     }
   }
+
+  readBridgeSizeCallback = (size) => {
+    try {
+      if (!this.#validateBridgeSize(size))
+        throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+      this.#bridgeGame.makeBridge(size);
+      this.#bridgeGame.setStatus("move");
+      this.controller();
+    } catch (err) {
+      MissionUtils.Console.print(err.message);
+      this.controller();
+    }
+  };
+
+  readMovingCallback = (moving) => {
+    try {
+      if (!this.#validateMoving(moving))
+        throw new Error("[ERROR] U 또는 D를 입력해 주세요.");
+      this.#bridgeGame.move(moving);
+      OutputView.printMap(this.#bridgeGame.getBridgeResult());
+      this.controller();
+    } catch (err) {
+      console.log(err);
+      MissionUtils.Console.print(err.message);
+      this.controller();
+    }
+  };
+
+  readGameCommandCallback = (gameCommand) => {
+    try {
+      if (!this.#validateGameCommand(gameCommand))
+        throw new Error("[ERROR] R 또는 Q를 입력해 주세요.");
+      this.#bridgeGame.retry(gameCommand);
+      this.controller();
+    } catch (err) {
+      MissionUtils.Console.print(err.message);
+      this.controller();
+    }
+  };
 }
 
 module.exports = App;
