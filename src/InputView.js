@@ -22,11 +22,15 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(GAME_MESSAGE.inputLength, (userInput) => {
-      const bridgeSize = Number(userInput);
-      this.bridgeValidation(bridgeSize);
-      const bridge = makeBridge(bridgeSize, generate);
-      console.log(bridge);
-      this.readMoving(bridge, NUMBER.zero, NUMBER.one);
+      try {
+        const bridgeSize = Number(userInput);
+        this.bridgeValidation(bridgeSize);
+        const bridge = makeBridge(bridgeSize, generate);
+        this.readMoving(bridge, NUMBER.zero, NUMBER.one);
+      } catch (error) {
+        Console.print(error.message);
+        this.readBridgeSize();
+      }
     });
   },
 
@@ -57,29 +61,36 @@ const InputView = {
    */
   readMoving(bridge, steps, numberAttempts) {
     Console.readLine(GAME_MESSAGE.move, (userInput) => {
-      this.checkMoveLowercase(userInput);
-      this.checkMoveWrong(userInput);
-      const bridgeGame = new BridgeGame(bridge, steps, numberAttempts);
-      bridgeGame.move(userInput);
-      const curSteps = bridgeGame.getSteps();
-      const { upBridge, downBridge } = bridgeGame.getStepResult();
-      const upBridgeString = getBridgeString(upBridge);
-      const downBridgeString = getBridgeString(downBridge);
-      printMap(upBridgeString, downBridgeString);
-      if (curSteps === bridge.length) {
-        printResult(upBridgeString, downBridgeString, true, numberAttempts);
-      }
-      if (steps < curSteps) {
-        this.readMoving(bridge, curSteps, numberAttempts);
-      }
-      if (steps === curSteps) {
-        this.readGameCommand(
-          bridge,
-          curSteps,
-          numberAttempts,
-          upBridgeString,
-          downBridgeString
-        );
+      try {
+        this.checkMoveLowercase(userInput);
+        this.checkMoveWrong(userInput);
+        const bridgeGame = new BridgeGame(bridge, steps, numberAttempts);
+        bridgeGame.move(userInput);
+        const curSteps = bridgeGame.getSteps();
+        const { upBridge, downBridge } = bridgeGame.getStepResult();
+        const upBridgeString = getBridgeString(upBridge);
+        const downBridgeString = getBridgeString(downBridge);
+        printMap(upBridgeString, downBridgeString);
+        if (curSteps === bridge.length) {
+          printResult(upBridgeString, downBridgeString, true, numberAttempts);
+          Console.close();
+          return;
+        }
+        if (steps < curSteps) {
+          this.readMoving(bridge, curSteps, numberAttempts);
+        }
+        if (steps === curSteps) {
+          this.readGameCommand(
+            bridge,
+            curSteps,
+            numberAttempts,
+            upBridgeString,
+            downBridgeString
+          );
+        }
+      } catch (error) {
+        Console.print(error.message);
+        this.readMoving(bridge, steps, numberAttempts);
       }
     });
   },
@@ -110,14 +121,25 @@ const InputView = {
   ) {
     Console.print(GAME_MESSAGE.retry);
     Console.readLine('', (userInput) => {
-      this.checkRetryLowercase(userInput);
-      this.checkRetryWrong(userInput);
-      if (userInput === 'R') {
-        this.readMoving(bridge, steps, numberAttempts + 1);
-      }
-      if (userInput === 'Q') {
-        printResult(upBridgeString, downBridgeString, false, numberAttempts);
-        Console.close();
+      try {
+        this.checkRetryLowercase(userInput);
+        this.checkRetryWrong(userInput);
+        if (userInput === 'R') {
+          this.readMoving(bridge, steps, numberAttempts + 1);
+        }
+        if (userInput === 'Q') {
+          printResult(upBridgeString, downBridgeString, false, numberAttempts);
+          Console.close();
+        }
+      } catch (error) {
+        Console.print(error.message);
+        this.readGameCommand(
+          bridge,
+          steps,
+          numberAttempts,
+          upBridgeString,
+          downBridgeString
+        );
       }
     });
   },

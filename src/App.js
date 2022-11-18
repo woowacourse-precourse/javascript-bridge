@@ -6,9 +6,7 @@ const { printMap } = require('./OutputView');
 class App {
   async play() {
     this.start();
-    // printMap(['U', 'U', 'D', 'U'], 2, true);
     InputView.readBridgeSize();
-    // InputView.readGameCommand();
   }
 
   start() {

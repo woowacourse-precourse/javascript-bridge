@@ -11,7 +11,6 @@ class BridgeGame {
   #isAnswer;
 
   constructor(bridge, steps, numberAttempts) {
-    console.log(bridge, steps, numberAttempts);
     this.#bridge = bridge;
     this.#steps = steps;
     this.#numberAttempts = numberAttempts;

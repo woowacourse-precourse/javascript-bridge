@@ -12,9 +12,9 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     for (let count = 0; count < size; count += 1) {
-      const number = generateRandomNumber();
-      if (number === 0) bridge.push(SHORT_CUT.up);
-      if (number === 1) bridge.push(SHORT_CUT.down);
+      const number = Number(generateRandomNumber());
+      if (number === 1) bridge.push(SHORT_CUT.up);
+      if (number === 0) bridge.push(SHORT_CUT.down);
     }
     return bridge;
   },
