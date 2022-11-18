@@ -1,7 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { UP, DOWN, EMPTY } = require("./Utils");
-
-const MESSAGE_START = "다리 건너기 게임을 시작합니다.";
+const { BRIDGE_UP, BRIDGE_DOWN, MARKING_EMPTY, MESSAGE_GAME_START } = require("./Utils");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -34,11 +32,11 @@ const OutputView = {
   setCurrentMap(moving, marking) {
     this.markMap(moving, marking);
     switch (moving) {
-      case UP:
-        this.markMap(DOWN, EMPTY);
+      case BRIDGE_UP:
+        this.markMap(BRIDGE_DOWN, MARKING_EMPTY);
         break;
-      case DOWN:
-        this.markMap(UP, EMPTY);
+      case BRIDGE_DOWN:
+        this.markMap(BRIDGE_UP, MARKING_EMPTY);
         break;
     }
   },
@@ -50,7 +48,7 @@ const OutputView = {
    */
   printMap(moving, marking) {
     this.setCurrentMap(moving, marking);
-    Console.print(`${this.currentMap[UP]}\n${this.currentMap[DOWN]}`);
+    Console.print(`${this.currentMap[BRIDGE_UP]}\n${this.currentMap[BRIDGE_DOWN]}`);
   },
 
   /**
@@ -64,8 +62,8 @@ const OutputView = {
    * 게임 시작 안내 문구를 출력한다.
    */
   printStart() {
-    Console.print(MESSAGE_START);
+    Console.print(MESSAGE_GAME_START);
   },
 };
 
-module.exports = { OutputView, MESSAGE_START };
+module.exports = OutputView;

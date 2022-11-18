@@ -1,4 +1,4 @@
-const { UP, DOWN } = require("./Utils");
+const { BRIDGE_UP, BRIDGE_DOWN } = require("./Utils");
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -12,8 +12,8 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridge = Array.from({ length: size }, () => {
       const number = generateRandomNumber();
-      if (number) return UP;
-      return DOWN;
+      if (number) return BRIDGE_UP;
+      return BRIDGE_DOWN;
     });
     return bridge;
   },

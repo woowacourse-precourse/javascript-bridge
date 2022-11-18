@@ -1,6 +1,9 @@
-const { UP, DOWN, ERROR_NOT_UPPER_CASE } = require("../Utils");
-
-const ERROR_UNEXPECTED_MOVING = "[ERROR] U 또는 D를 입력해 주세요.";
+const {
+  BRIDGE_UP,
+  BRIDGE_DOWN,
+  ERROR_NOT_UPPER_CASE,
+  ERROR_UNEXPECTED_MOVING,
+} = require("../Utils");
 
 const MovingValidation = {
   /**
@@ -18,7 +21,8 @@ const MovingValidation = {
    * @throws
    */
   validateIsExpected(string) {
-    if (![UP, DOWN].includes(string)) throw new Error(ERROR_UNEXPECTED_MOVING);
+    if (![BRIDGE_UP, BRIDGE_DOWN].includes(string))
+      throw new Error(ERROR_UNEXPECTED_MOVING);
   },
 
   /**

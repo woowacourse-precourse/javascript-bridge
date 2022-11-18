@@ -2,11 +2,11 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeSizeValidation = require("./Validation/BridgeSizeValidation");
 const MovingValidation = require("./validation/MovingValidation");
 const GameCommandValidation = require("./validation/GameCommandValidation");
-
-const MESSAGE_GET_BRIDGE_SIZE = "다리의 길이를 입력해주세요. \n";
-const MESSAGE_GET_MOVING = "이동할 칸을 선택해주세요. (위: U, 아래: D) \n";
-const MESSAGE_GET_GAME_COMMAND =
-  "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q) \n";
+const {
+  MESSAGE_GET_BRIDGE_SIZE,
+  MESSAGE_GET_MOVING,
+  MESSAGE_GET_GAME_COMMAND,
+} = require("./Utils");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
