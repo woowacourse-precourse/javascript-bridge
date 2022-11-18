@@ -1,8 +1,9 @@
-const { readBridgeSize, startGame, readMoving } = require("./InputView");
+const { readBridgeSize } = require("./InputView");
+const { printResult } = require("./OutputView");
 
 class App {
   play() {
-    startGame();
+    printResult("다리 건너기 게임을 시작합니다.");
     readBridgeSize();
   }
 }
