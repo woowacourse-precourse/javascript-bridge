@@ -1,23 +1,58 @@
-const { Console } = require("@woowacourse/mission-utils");
-const CONSTANT = require('../constants.js');
+const { Console } = require('@woowacourse/mission-utils');
+const CONSTANT = require('../constants/Constant.js');
 
 const OutputView = {
-
   printStart() {
     Console.print('다리 건너기 게임을 시작합니다.');
-  }
+  },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridge) {
-    const upperResult = '';
-    const lowerResult = '';
+    let [upperResult, lowerResult] = this.getResultStr(bridge);
+
+    upperResult += ']';
+    lowerResult += ']';
+
+    Console.print(`${upperResult}\n${lowerResult}`);
+  },
+
+  getResultStr(bridge) {
+    let upperResult = '[';
+    let lowerResult = '[';
+
+    bridge.currentPos.forEach((pos, index) => {
+      upperResult += this.addUpperResultStr(bridge, pos, index);
+      lowerResult += this.addLowerResultStr(bridge, pos, index);
+    });
+
+    return [upperResult, lowerResult];
+  },
+
+  addUpperResultStr(bridge, pos, index) {
+    let result = '';
+
     const { DIRECTION } = CONSTANT;
-    bridge.currentPos.forEach(pos => {
-      if (pos === DIRECTION.UP)
-    })
+    
+    result += index === 0 ? '' : '|';
+    if (pos === DIRECTION.UP) result += bridge.cellValidator(index) ? ' O ' : ' X ';
+    else result += '   ';
+    
+    return result;
+  },
+
+  addLowerResultStr(bridge, pos, index) {
+    let result = '';
+
+    const { DIRECTION } = CONSTANT;
+    
+    result += index === 0 ? '' : '|';
+    if (pos === DIRECTION.DOWN) result += bridge.cellValidator(index) ? ' O ' : ' X ';
+    else result += '   ';
+    
+    return result;
   },
 
   /**
@@ -25,7 +60,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridge) {
+    this.printMap(bridge);
+  },
 };
 
 module.exports = OutputView;
