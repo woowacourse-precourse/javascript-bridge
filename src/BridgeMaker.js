@@ -15,14 +15,15 @@ const BridgeMaker = {
 
     for (let i = 0; i < size; i++) {
       const number = generateRandomNumber();
-      topArray.push(number == 0 ? 'D' : 'U');
-      bottomArray.push(number == 0 ? 'U' : 'D');
+
+      topArray.push(number == 1 ? 'U' : 'X');
+      bottomArray.push(number == 0 ? 'D' : 'X');
     }
 
     array[0] = topArray;
     array[1] = bottomArray;
 
-    return array;
+    return [...array];
   },
 };
 
