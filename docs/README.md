@@ -200,6 +200,7 @@ const number = generateRandomNumber();
 ### 7️⃣ 테스트
 
 - [ ] test: App.js 테스트 코드 작성
+  - Console.print() 테스트 코드를 작성한다.
 - [ ] test: BridgeGame.js 테스트 코드 작성
 - [ ] test: BridgeMaker.js 테스트 코드 작성
 - [ ] test: InputView.js 테스트 코드 작성
