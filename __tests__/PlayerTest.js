@@ -34,4 +34,12 @@ describe("플레이어 상태 테스트", () => {
     Player.updateSize(3);
     expect(Player.size).toBe(3);
   });
+
+  test("게임 성공 여부 업데이트 테스트", () => {
+    Player.playerAns = [true, true, true];
+    Player.size = 3;
+
+    Player.checkGameSuccess();
+    expect(Player.gameSuccess).toBe(true);
+  });
 });
