@@ -11,28 +11,27 @@ class BridgeGame {
   constructor(bridge) {
     this.#bridge = bridge;
     this.#currentIdx = 0;
-    this.#resultMap;
+    this.#resultMap = [[], []]; // 0 ≒ D , 1 ≒ U
   }
 
-  fillMap(position) {
-    const result = this.canMove(position);
+  transInputtoPosition(input) {
+    if (input == "U") return this.canMove(1); // U -> 1
+    if (input == "D") return this.canMove(0); // D -> 0
+  }
 
-    this.#resultMap[position].push(result);
+  canMove(position) {
+    if (position === Number(this.#bridge[this.#currentIdx]))
+      return this.fillResultMap(position, "O");
+    return this.fillResultMap(position, "X");
+  }
+
+  fillResultMap(position, str) {
+    this.#resultMap[position].push(str);
     this.#resultMap[Number(!position)].push(" ");
 
     OutputView.printMap(this.#resultMap);
 
-    result == "O" ? this.move() : this.stop();
-  }
-
-  canMove(position) {
-    if (position === this.#bridge[this.#current]) return "O";
-    return "X";
-  }
-
-  transInputtoPosition(input) {
-    if (input == "U") return this.fillMap(1); // U -> 1
-    if (input == "D") return this.fillMap(0); // D -> 0
+    str == "O" ? this.move() : this.stop();
   }
 
   /**
