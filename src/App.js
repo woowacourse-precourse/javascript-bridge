@@ -1,10 +1,9 @@
-const inputView = require('./ui/InputView');
-const outputView = require('./ui/OutputView');
+const BridgeGame = require('./BridgeGame');
+const ViewManager = require('./ViewManager');
 
 class App {
   play() {
-    outputView.printStartMessage();
-    inputView.readMoving();
+    new ViewManager(new BridgeGame()).start();
   }
 }
 
