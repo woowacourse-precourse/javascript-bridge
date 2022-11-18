@@ -310,3 +310,11 @@ describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
     }).toThrow(RANGE_ERROR_TEXT);
   });
 });
+
+describe('출발전 판단 메서드 테스트', () => {
+  test('메소드 이름은 "checkBeforeStart"로 정의된다.', () => {
+    const METHOD_NAME = 'checkBeforeStart';
+
+    expect(BridgeGame.checkBeforeStart.name).toEqual(METHOD_NAME);
+  });
+});
