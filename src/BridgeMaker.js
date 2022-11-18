@@ -11,12 +11,7 @@
     let answerBridgeShape = [];
     while (answerBridgeShape.length < size){
       const selectValue = generateRandomNumber();
-      if(selectValue == 1){
-        answerBridgeShape.push("U");
-      }
-      if(selectValue == 0){
-        answerBridgeShape.push("D");
-      }
+      String(selectValue) == '1' ? answerBridgeShape.push('U') : answerBridgeShape.push('D');
     }
     return answerBridgeShape;
   },
