@@ -3,6 +3,12 @@ const STATE = Object.freeze({
   DEAD: 0,
 });
 
+const OBJECT = Object.freeze({
+  [STATE.ALIVE]: 'O',
+  [STATE.DEAD]: 'X',
+  BLANK: ' ',
+});
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -10,6 +16,11 @@ class BridgeGame {
   player = {
     state: STATE.ALIVE,
     position: -1,
+  };
+
+  bridgeMap = {
+    U: [],
+    D: [],
   };
 
   constructor(bridge) {
@@ -28,6 +39,14 @@ class BridgeGame {
     if (moving !== bridge[player.position]) {
       player.state = STATE.DEAD;
     }
+  }
+
+  drawMap(moving) {
+    const { bridgeMap, player } = this;
+    const unchosen = 'UD'.replace(moving, '');
+
+    bridgeMap[moving].push(OBJECT[player.state]);
+    bridgeMap[unchosen].push(OBJECT[BLANK]);
   }
 
   /**
