@@ -6,7 +6,7 @@ class BridgeGame {
   #RetryCount;
 
   constructor() {
-    this.#RetryCount = 0;
+    this.#RetryCount = 1;
     InputView.readBridgeSize(this?.move);
   }
 
@@ -15,8 +15,8 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move = (Bridge) => {
-    InputView.readMoving(Bridge, 0, this?.retry);
+  move = (bridge) => {
+    InputView.readMoving(bridge, [], this?.retry);
   };
 
   /**
@@ -24,8 +24,8 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry = (Bridge) => {
-    InputView.readGameCommand(Bridge, this?.move);
+  retry = (bridge) => {
+    InputView.readGameCommand(bridge, this?.move);
   };
 }
 
