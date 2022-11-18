@@ -18,8 +18,14 @@ const OutputView = {
 	RETRY_COUNT_MSG: '총 시도한 횟수 : ',
 
 	printMap(prevCrossedBridge) {
-		const upperMap = OutputView.getOneSideMap(prevCrossedBridge, UPPER_BRIDGE);
-		const lowerMap = OutputView.getOneSideMap(prevCrossedBridge, LOWER_BRIDGE);
+		const upperMap = OutputView.getOneSideMap(
+			prevCrossedBridge,
+			OutputView.UPPER_BRIDGE,
+		);
+		const lowerMap = OutputView.getOneSideMap(
+			prevCrossedBridge,
+			OutputView.LOWER_BRIDGE,
+		);
 
 		MissionUtils.Console.print(upperMap + '\n' + lowerMap);
 	},
@@ -27,7 +33,7 @@ const OutputView = {
 	getOneSideMap(prevCrossedBridge, ONE_SIDE_BRIDGE) {
 		const oneSideArr = OutputView.getOneSideArr(
 			prevCrossedBridge,
-			OutputView[ONE_SIDE_BRIDGE],
+			ONE_SIDE_BRIDGE,
 		);
 		const oneSideMap = OutputView.convertArrToMap(oneSideArr);
 		return oneSideMap;
