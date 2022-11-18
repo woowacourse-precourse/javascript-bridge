@@ -39,6 +39,10 @@ class App {
   temp(response) {
     if (response === "Q") {
       Console.close();
+    } else if (response === "R") {
+      this.bridgeGame.retry();
+      OutputView.clearThread();
+      this.go();
     }
   }
 

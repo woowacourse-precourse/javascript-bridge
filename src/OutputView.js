@@ -30,8 +30,11 @@ const OutputView = {
     Console.print(`[ ${this.up.join(" | ")} ]`)
     Console.print(`[ ${this.down.join(" | ")} ]`)
   },
-  // 업 다운을 내부 변수로 해주면 매번 초기화되서 안됨 다음 회차 입력에 정보사라짐
 
+  clearThread() {
+    this.up = [];
+    this.down = [];
+  },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
