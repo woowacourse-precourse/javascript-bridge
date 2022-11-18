@@ -16,11 +16,6 @@ class BridgeGame {
     this.#gameState = "";
   }
 
-  transInputtoPosition(input) {
-    if (input == "U") return this.canMove(1); // U -> 1
-    if (input == "D") return this.canMove(0); // D -> 0
-  }
-
   canMove(position) {
     if (position === Number(this.#bridge[this.#currentIdx]))
       return this.fillMap(position, "O");
@@ -28,8 +23,9 @@ class BridgeGame {
   }
 
   fillMap(position, str) {
-    this.#bridgeMap[position].push(str);
-    this.#bridgeMap[Number(!position)].push(" ");
+    const positionNumber = position == "U" ? 1 : 0;
+    this.#bridgeMap[positionNumber].push(str);
+    this.#bridgeMap[Number(!positionNumber)].push(" ");
 
     str == "O" ? this.move() : this.stop();
   }
