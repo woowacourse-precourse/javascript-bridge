@@ -27,7 +27,9 @@ const InputView = {
         console.log("InputView.readMoving-----------");
         Console.readLine(MESSAGE.MOVE, (move) => {
             if (bridgeGame.isBadMove(move)) {
+                bridgeGame.fail(move);
                 this.readGameCommand(bridgeGame);
+            } else {
             }
         });
     },

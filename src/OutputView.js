@@ -25,7 +25,6 @@ const OutputView = {
      */
     printResult() {
         console.log("결과출력");
-        Console.close();
     },
 };
 

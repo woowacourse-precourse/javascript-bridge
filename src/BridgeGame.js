@@ -30,9 +30,20 @@ class BridgeGame {
         }
     }
 
+    fail(move) {
+        console.log("BridgeGame.fail--------------");
+        if (move === "U") {
+            this.#upBridgeHistory.push(STRUCTURE.BAD);
+            this.#downBridgeHistory.push(STRUCTURE.BLANK);
+        }
+        if (move === "Q") {
+            this.#upBridgeHistory.push(STRUCTURE.BLANK);
+            this.#downBridgeHistory.push(STRUCTURE.BAD);
+        }
+    }
+
     move(move) {
         console.log("BridgeGame.move-----------");
-        this.check(move);
         const rightUp = move === "U" && this.bridgeArray[this.bridgeCount] === "U";
 
         if (this.bridgeCount === this.bridgeArray.length - 1) {
@@ -55,17 +66,6 @@ class BridgeGame {
         this.bridgeCount++;
     }
 
-    fail(badDirection) {
-        if (badDirection) {
-            this.#upBridgeHistory.push(STRUCTURE.BAD);
-            this.#downBridgeHistory.push(STRUCTURE.BLANK);
-        }
-        if (!badDirection) {
-            this.#upBridgeHistory.push(STRUCTURE.BLANK);
-            this.#downBridgeHistory.push(STRUCTURE.BAD);
-        }
-    }
-
     retry(answer) {
         if (answer === "R") {
             this.bridgeCount = 0;
@@ -78,7 +78,7 @@ class BridgeGame {
 
     finish() {
         console.log(MESSAGE.FINISH);
-        console.log("[ 여기에 지도 그리기 ]");
+        OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory);
         console.log(MESSAGE.FAIL);
         console.log(MESSAGE.TRY + this.#gameCount);
     }
