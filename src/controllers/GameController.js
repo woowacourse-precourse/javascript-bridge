@@ -1,6 +1,7 @@
 const GameService = require('../gameService');
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
+const { MESSAGE } = require('../constant');
 
 class GameController {
   #gameService;
@@ -10,7 +11,19 @@ class GameController {
   }
 
   gameStart() {
-    OutputView.printStartMessage();
+    OutputView.printMessage(MESSAGE.START_NOTIFICATION);
+    this.askBridgeSize();
+  }
+
+  askBridgeSize() {
+    const sizeCallback = (size) => {
+      try {
+        this.tryBridgeSize(size);
+      } catch (error) {
+        this.catchHandler(error, this.askBridgeSize);
+      }
+    };
+    InputView.readBridgeSize(sizeCallback);
   }
 
   makeBridge(size) {
@@ -32,27 +45,56 @@ class GameController {
   }
 
   nextStep() {
-    const moveCallback = (direction) => {
-      const isRightChoice = this.movePlayer(direction);
-      console.log(isRightChoice);
-      this.printCurMap();
-      isRightChoice ? this.isDone() : this.askRetry();
+    const directionCallback = (direction) => {
+      try {
+        this.tryNextStep(direction);
+      } catch (error) {
+        this.catchHandler(error, this.nextStep);
+      }
     };
-    InputView.readMoving(moveCallback);
+    InputView.readMoving(directionCallback);
   }
 
   askRetry() {
-    const callback = (decision) => {
-      const shouldRetry = this.#gameService.checkRetry(decision);
-      if (shouldRetry) {
-        this.#gameService.retry();
-        this.nextStep();
-      } else this.#gameService.printGameResult();
+    const commandCallback = (command) => {
+      try {
+        this.tryRetry(command);
+      } catch (error) {
+        this.catchHandler(error, this.askRetry);
+      }
     };
-    InputView.readGameCommand(callback);
+    InputView.readGameCommand(commandCallback);
   }
 
-  gameExit() {}
+  retry() {
+    this.#gameService.initData();
+    this.nextStep();
+  }
+
+  gameOver() {
+    this.#gameService.printGameResult();
+  }
+
+  tryBridgeSize(size) {
+    this.makeBridge(size);
+    this.nextStep();
+  }
+
+  tryNextStep(direction) {
+    const isRightChoice = this.movePlayer(direction);
+    this.printCurMap();
+    isRightChoice ? this.isDone() : this.askRetry();
+  }
+
+  tryRetry() {
+    const shouldRetry = this.#gameService.checkCommend(command);
+    shouldRetry ? this.retry() : this.gameOver();
+  }
+
+  catchHandler(error, reInput) {
+    OutputView.printMessage(error);
+    reInput();
+  }
 }
 
 module.exports = GameController;
