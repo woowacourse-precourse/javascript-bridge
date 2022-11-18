@@ -8,7 +8,7 @@ class App {
   }
 
   play() {
-    this.#gameController.playGame();
+    this.#gameController.initializeGame();
   }
 }
 

@@ -50,14 +50,14 @@ const Validator = {
     }
   },
 
-  checkDirectionIncludes(direction) {
-    if (direction !== 'U' && direction !== 'D') {
+  checkDirectionLength(direction) {
+    if (direction.length !== 1) {
       throw new Error(MESSAGE_ERROR.INVALID_VALUE);
     }
   },
 
-  checkDirectionLength(direction) {
-    if (direction.length !== 1) {
+  checkDirectionIncludes(direction) {
+    if (direction !== 'U' && direction !== 'D') {
       throw new Error(MESSAGE_ERROR.INVALID_VALUE);
     }
   },

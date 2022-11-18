@@ -1,8 +1,4 @@
-const PRINTABLE_BRIDGE = Object.freeze({
-  BEGIN: '[ ',
-  END: ' ]',
-  SPACE_LINE: ' | ',
-});
+const { PRINTABLE_BRIDGE } = require('./constants/values');
 
 const PrintableBridgeMaker = {
   generate({ upBridge, downBridge }) {

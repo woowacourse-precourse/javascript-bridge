@@ -7,33 +7,39 @@ const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const PlayerInputChecker = require('./PlayerInputChecker');
 const BridgeGame = require('../models/BridgeGame');
 const PrintableBridgeMaker = require('../PrintableBridgeMaker');
+const { GAME_STATUS } = require('../constants/values');
 
 class GameController {
   #bridgeGame;
 
-  playGame() {
+  initializeGame() {
     OutputView.printStartMessage();
-    InputView.readBridgeSize(this.#initializeGame.bind(this));
+    InputView.readBridgeSize(this.#makeBridge.bind(this));
   }
 
-  #initializeGame(rowDataOfBridgeSize) {
+  #makeBridge(rowDataOfBridgeSize) {
     BridgeChecker.checkRowDataOfBridgeSize(rowDataOfBridgeSize);
     const bridgeSize = Convertor.convertStringToDecimalNumber(rowDataOfBridgeSize);
     BridgeChecker.checkBridgeSize(bridgeSize);
     this.#bridgeGame = new BridgeGame(
       BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate)
     );
-    this.#beginGame();
+    this.#playGame();
   }
 
-  #beginGame() {
+  #playGame() {
     InputView.readMoving(this.#movePlayer.bind(this));
   }
 
   #movePlayer(direction) {
     PlayerInputChecker.checkDirection(direction);
     OutputView.printMap(PrintableBridgeMaker.generate(this.#bridgeGame.move(direction)));
+    if (this.#bridgeGame.checkGameStatus() === GAME_STATUS.PLAYING) {
+      this.#playGame();
+    }
   }
+
+  #selectRestartOrQuitGame() {}
 }
 
 module.exports = GameController;

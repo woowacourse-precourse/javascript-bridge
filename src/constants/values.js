@@ -12,7 +12,20 @@ const BRIDGE_GAME = Object.freeze({
   STEP: 1,
 });
 
+const GAME_STATUS = Object.freeze({
+  PLAYING: 1,
+  END: 0,
+});
+
+const PRINTABLE_BRIDGE = Object.freeze({
+  BEGIN: '[ ',
+  END: ' ]',
+  SPACE_LINE: ' | ',
+});
+
 module.exports = {
   REG_EXP,
   BRIDGE_GAME,
+  GAME_STATUS,
+  PRINTABLE_BRIDGE,
 };

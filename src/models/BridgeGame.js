@@ -1,4 +1,5 @@
 const { BRIDGE_GAME } = require('../constants/values');
+const { GAME_STATUS } = require('../constants/values');
 
 class BridgeGame {
   #bridge;
@@ -11,7 +12,7 @@ class BridgeGame {
   }
 
   #resetGameStatus() {
-    this.#gameStatus = { length: 0, upBridge: [], downBridge: [] };
+    this.#gameStatus = { length: 0, upBridge: [], downBridge: [], status: GAME_STATUS.PLAYING };
   }
 
   move(direction) {
@@ -32,13 +33,20 @@ class BridgeGame {
   }
 
   #updateBridge(direction) {
-    return direction === this.#bridge[this.#gameStatus.length]
-      ? BRIDGE_GAME.CORRECT
-      : BRIDGE_GAME.INCORRECT;
+    if (direction === this.#bridge[this.#gameStatus.length]) {
+      return BRIDGE_GAME.CORRECT;
+    }
+
+    this.#gameStatus.status = GAME_STATUS.END;
+    return BRIDGE_GAME.INCORRECT;
   }
 
   #makeUnselectedDirection(direction) {
     return direction === BRIDGE_GAME.INPUT_U ? BRIDGE_GAME.DOWN_BRIDGE : BRIDGE_GAME.UP_BRIDGE;
+  }
+
+  checkGameStatus() {
+    return this.#gameStatus.status;
   }
 
   /**
