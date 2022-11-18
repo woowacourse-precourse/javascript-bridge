@@ -38,7 +38,7 @@ const InputView = {
       try {
         const [MOVE, NOT_END] = one.call(this, input);
         if (MOVE && NOT_END) InputView.readMoving.call(this, callbackArr);
-        else InputView.readGameCommand.call(this, two);
+        if (!MOVE) InputView.readGameCommand.call(this, two);
       } catch (err) {
         printError(err);
         InputView.readMoving.bind(this)(callbackArr);
