@@ -18,6 +18,8 @@ class App {
   async play() {
     InputView.gameStart();
     this.#bridgeSize = await InputView.readBridgeSize();
+    this.#bridge = makeBridge(this.#bridgeSize, generate);
+    Console.print(this.#bridge);
 
   }
 
