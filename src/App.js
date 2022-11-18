@@ -23,6 +23,7 @@ class App {
 
   moveOne(playerMoving) {
     this.#bridgeGame.move(playerMoving);
+    OutputView.printMap(this.#bridgeGame.getBridgeMap());
     if (this.checkIsSuccess()) {
       return OutputView.printResult(
         this.#bridgeGame.getBridgeMap(),
