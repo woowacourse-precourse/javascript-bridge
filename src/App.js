@@ -63,9 +63,9 @@ class App {
     InputView.readGameCommand((command) => {
       if (command === 'R') {
         this.replay();
-      } else if (command === 'Q') {
-        this.resultGame('실패');
+        return;
       }
+      this.resultGame('실패');
     });
   }
 
