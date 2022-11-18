@@ -12,18 +12,18 @@ class BridgeGame {
    */
 
   move(moving, block) {
-    if(moving !== "U" || moving !== "D") throw "U 또는 D가 아님";
-    if(moving === block) return true;
+    if (moving !== "U" || moving !== "D") throw "U 또는 D가 아님";
+    if (moving === block) return true;
     return false;
   }
 
-  printOX(mark){
-    if(mark == true) return " O ";
+  printOX(mark) {
+    if (mark == true) return " O ";
     return " X ";
   }
 
-  markTrack(moving, bool){
-    if(moving === "U"){
+  markTrack(moving, bool) {
+    if (moving === "U") {
       this.#upperTrack = this.printOX(bool);
       this.#lowerTrack = "   ";
     }
@@ -31,11 +31,9 @@ class BridgeGame {
     this.#lowerTrack = this.printOX(bool);
   }
 
-  constructMap(){
-    
-  }
+  constructMap() {}
 
-  printCurrent(moving, bool){
+  printCurrent(moving, bool) {
     this.markTrack(moving, bool);
     this.constructMap();
   }
@@ -45,9 +43,7 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {
-    
-  }
+  retry() {}
 }
 
 module.exports = BridgeGame;

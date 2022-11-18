@@ -13,34 +13,37 @@ const Intercessor = {
     let bridge;
     try {
       const bridgeSize = InputView.readBridgeSize();
-      bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+      bridge = BridgeMaker.makeBridge(
+        bridgeSize,
+        BridgeRandomNumberGenerator.generate
+      );
     } catch (error) {
       OutputView.printException(error);
     }
     return bridge;
   },
 
-  matchMove(bridge){
-    for(let i = 0; i < bridge.length; i++){
-      if(!this.matchOneStep(bridge[i])) return false;
+  matchMove(bridge) {
+    for (let i = 0; i < bridge.length; i++) {
+      if (!this.matchOneStep(bridge[i])) return false;
     }
     return true;
   },
 
-  matchOneStep(block){
+  matchOneStep(block) {
     let moving;
     const bridgeGame = new BridgeGame();
-    try{
+    try {
       moving = InputView.readMoving();
-      if(!bridgeGame.move(moving, block)) {
+      if (!bridgeGame.move(moving, block)) {
         bridgeGame.printCurrent(moving, false);
         return false;
       }
       bridgeGame.printCurrent(moving, true);
-    } catch(error){
+    } catch (error) {
       OutputView.printException(error);
     }
-  }
-}
+  },
+};
 
 module.exports = Intercessor;

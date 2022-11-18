@@ -20,15 +20,19 @@ const OutputView = {
    */
   printResult() {},
 
-  printException(error){
-    if(error=="숫자가 아님"){
+  printException(error) {
+    if (error == "숫자가 아님") {
       MissionUtils.Console.print("[ERROR] 다리의 길이는 숫자여야 합니다.");
     }
-    if(error=="범위 에러"){
-      MissionUtils.Console.print("[ERROR] 다리의 길이는 3에서 20 사이의 숫자여야 합니다.");
+    if (error == "범위 에러") {
+      MissionUtils.Console.print(
+        "[ERROR] 다리의 길이는 3에서 20 사이의 숫자여야 합니다."
+      );
     }
-    if(error=="U 또는 D가 아님"){
-      MissionUtils.Console.print("[ERROR] 이동할 칸 입력은 U 또는 D여야 합니다.");
+    if (error == "U 또는 D가 아님") {
+      MissionUtils.Console.print(
+        "[ERROR] 이동할 칸 입력은 U 또는 D여야 합니다."
+      );
     }
   },
 };
