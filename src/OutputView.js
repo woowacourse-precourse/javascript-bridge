@@ -10,7 +10,7 @@ const OutputView = {
    */
   printMap(bridgeMap) {
     Console.print(
-      `[ ${bridgeMap[1].join(" | ")} ]\n[ ${bridgeMap[0].join(" | ")} ]`
+      `[ ${bridgeMap[1].join(" | ")} ]\n[ ${bridgeMap[0].join(" | ")} ]\n`
     );
   },
   /**
