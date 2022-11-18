@@ -14,8 +14,8 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size }, () => generateRandomNumber()).map((number) => {
-      if (number === this.LOWER_BRIDGE_NUMBER) return this.LOWER_BRIDGE_LETTER;
-      if (number === this.UPPER_BRIDGE_NUMBER) return this.UPPER_BRIDGE_LETTER;
+      if (Number(number) === this.LOWER_BRIDGE_NUMBER) return this.LOWER_BRIDGE_LETTER;
+      if (Number(number) === this.UPPER_BRIDGE_NUMBER) return this.UPPER_BRIDGE_LETTER;
     });
   },
 };
