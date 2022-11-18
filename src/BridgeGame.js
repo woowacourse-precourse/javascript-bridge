@@ -1,7 +1,17 @@
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeMaker = require("./BridgeMaker");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridge;
+
+  constructor(size) {
+    this.validateBridgeSize(size);
+    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+  }
+
   validateBridgeSize(size) {
     if (this.isInvalidBridgeSize(size)) {
       throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
