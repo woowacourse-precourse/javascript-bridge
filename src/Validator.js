@@ -19,6 +19,20 @@ class Validator {
     }
     return true;
   }
+
+  static checkStep (step) {
+    if (!['U', 'D'].includes(step)) {
+      throw new Error(ERROR_MESSAGE.checkStepCorrect);
+    }
+    return true;
+  }
+
+  static checkRetry (retry) {
+    if (!['R', 'Q'].includes(retry)) {
+      throw new Error(ERROR_MESSAGE.checkRetryCorrect);
+    }
+    return true;
+  }
 }
 
 module.exports = Validator;
