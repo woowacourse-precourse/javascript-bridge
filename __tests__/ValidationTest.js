@@ -18,4 +18,13 @@ describe('input 유효성 테스트', () => {
 			}).toThrow('[ERROR] 이동할 칸은 대문자 D 또는 대문자 U 입니다.');
 		},
 	);
+
+	test.each([['2'], ['21'], ['-1'], ['r']])(
+		'command가 R 또는 Q가아니면 예외 발생',
+		() => {
+			expect((cmd) => {
+				Validation.validateCmd(cmd);
+			}).toThrow('[ERROR] 재시작 여부는 대문자 R 또는 대문자 Q 입니다.');
+		},
+	);
 });
