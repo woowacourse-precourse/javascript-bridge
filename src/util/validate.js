@@ -7,4 +7,10 @@ function validateBrigeSize(size) {
   return true;
 }
 
-module.exports = { validateBrigeSize };
+function validateMoving(choice) {
+  if (choice === "U" || choice === "D") return true;
+
+  throw new Error(ERROR_MESSAGE.choice);
+}
+
+module.exports = { validateBrigeSize, validateMoving };

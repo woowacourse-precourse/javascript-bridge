@@ -31,6 +31,7 @@ class App {
   }
 
   cbAfterReadMoving(choice) {
+    validateMoving(choice);
     console.log("choice", choice);
   }
 }
