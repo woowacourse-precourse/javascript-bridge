@@ -9,7 +9,7 @@ class App {
 
   play() {
     OutputView.printStartMessage();
-    InputView.readBridgeSize(this.startGame);
+    InputView.readBridgeSize(this.startGame.bind(this));
   }
 
   startGame(bridgeLength) {
@@ -18,7 +18,7 @@ class App {
   }
 
   askMove() {
-    InputView.readMoving(this.moveOne);
+    InputView.readMoving(this.moveOne.bind(this));
   }
 
   moveOne(playerMoving) {
@@ -46,7 +46,7 @@ class App {
   }
 
   askRetry() {
-    InputView.readGameCommand(this.checkRetry);
+    InputView.readGameCommand(this.checkRetry.bind(this));
   }
 
   checkRetry(command) {
