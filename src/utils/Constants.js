@@ -11,6 +11,10 @@ const BRIDGE = {
     up: 1,
     down: 0,
   },
+  game: {
+    retry: 'R',
+    quit: 'Q',
+  },
 };
 
 module.exports = BRIDGE;

@@ -44,7 +44,13 @@ const InputView = {
    */
   readGameCommand(func3) {
     MissionUtils.Console.readLine('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (input) => {
-      func3.call(this, input);
+      try {
+        func3.call(this, input);
+      }
+      catch (error) {
+        MissionUtils.Console.print(error);
+        MissionUtils.Console.close();
+      }
     });
   },
 

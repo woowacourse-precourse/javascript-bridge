@@ -2,6 +2,7 @@ const Bridge = require('./models/Bridge');
 const BridgeGame = require('./models/BridgeGame');
 const isSuccess = require('./utils/isSuccess');
 const MovingValidation = require('./utils/MovingValidation');
+const RetryValidation = require('./utils/RetryValidation');
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
 
@@ -34,6 +35,7 @@ class App {
   }
 
   inputRetry(input) {
+    new RetryValidation(input);
     if (input === 'R') {
       this.bridgeGame.retry();
       InputView.readMoving.call(this, this.inputMove, this.inputRetry);
