@@ -3,6 +3,11 @@ class BridgeMap {
 
   #MAP_SOURCE = { CORRECT: '| O ', INCORRECT: '| X ', EMPTY: '|   ' };
 
+  addMap(boolean, input, beforeMap) {
+    if (boolean) return BridgeMap.addCorrect(input, beforeMap, this.#MAP_SOURCE);
+    if (!boolean) return BridgeMap.addIncorrect(input, beforeMap, this.#MAP_SOURCE);
+  }
+
   static addCorrect(input, beforeMap, mapSource) {
     // console.log(input, beforeMap, mapSource, 'addCorrect 확인용');
     const [up, down] = beforeMap;
