@@ -1,16 +1,20 @@
 const OutputView = require('./view/OutputView');
 const InputView = require('./view/InputView');
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 class BridgeGameProceed {
-// #buildBridge
+#buildBridge
 // #count
 
     start() {
         OutputView.printStart();
         InputView.readBridgeSize((bridgeLength) => {
             // Validation
-            // BridgeMaker(bridgeLength) 호출, #buildBridge 에 다리 저장?
+            this.#buildBridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator);
+            console.log(this.#buildBridge);
         });
+        
         this.game();
     }
 
