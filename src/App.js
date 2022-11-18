@@ -11,6 +11,10 @@ class App {
   makeBridge(Length){
     Validate.BridgeLengthInput(Length)
     this.game.makeBridge(Length)
+    InputView.readMoving(this.moveCommand.bind(this))
+  }
+  moveCommand(input){
+    console.log(input)
   }
 }
 const app = new App();
