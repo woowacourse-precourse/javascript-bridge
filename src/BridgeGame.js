@@ -1,26 +1,61 @@
 const Validator = require('./Validator');
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+const Player = require('./Player');
+const Bridge = require('./Bridge');
+const OutputView = require('./views/OutputView');
+
 class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move(direction, bridge) {
-    Validator.directionValidityCheck(direction);
-    return direction === bridge;
+  #player;
+  #bridge;
+
+  constructor() {
+    this.#player = new Player();
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry(decision) {
+  makeBridge(size) {
+    this.#bridge = new Bridge(size);
+  }
+
+  move(direction) {
+    Validator.directionValidityCheck(direction);
+    const canCross =
+      direction === this.#bridge.getBridge()[this.#player.getCurPlace()];
+    this.#player.increaseCurPlace();
+    if (canCross) this.#bridge.updateBridgeMap(direction, 'O');
+    else this.#bridge.updateBridgeMap(direction, 'X');
+
+    return canCross;
+  }
+
+  printCurMap() {
+    const curMap = Object.values(this.#bridge.getBridgeMap());
+    OutputView.printMap(curMap);
+  }
+
+  checkCommend(decision) {
     Validator.commandValidityCheck(decision);
     return decision === 'R';
+  }
+
+  checkGameComplete() {
+    if (this.#bridge.getSize() === this.#player.getCurPlace()) {
+      this.#player.setSuccess();
+      return true;
+    }
+    return false;
+  }
+
+  initData() {
+    this.#player.increaseNumberOfAttempts();
+    this.#player.initCurPlace();
+    this.#bridge.initBridgeMap();
+  }
+
+  printGameResult() {
+    OutputView.printResult(
+      Object.values(this.#bridge.getBridgeMap()),
+      this.#player.getSuccess(),
+      this.#player.getNumberOfAttempts()
+    );
   }
 }
 

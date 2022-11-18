@@ -1,13 +1,13 @@
-const GameService = require('../gameService');
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 const { MESSAGE } = require('../constant');
+const BridgeGame = require('../BridgeGame');
 
 class GameController {
-  #gameService;
+  #bridgeGame;
 
   constructor() {
-    this.#gameService = new GameService();
+    this.#bridgeGame = new BridgeGame();
   }
 
   gameStart() {
@@ -27,8 +27,8 @@ class GameController {
   }
 
   isDone() {
-    const isCompleted = this.#gameService.checkGameComplete();
-    isCompleted ? this.#gameService.printGameResult() : this.askDirection();
+    const isCompleted = this.#bridgeGame.checkGameComplete();
+    isCompleted ? this.#bridgeGame.printGameResult() : this.askDirection();
   }
 
   askDirection() {
@@ -54,27 +54,27 @@ class GameController {
   }
 
   retry() {
-    this.#gameService.initData();
+    this.#bridgeGame.initData();
     this.askDirection();
   }
 
   gameOver() {
-    this.#gameService.printGameResult();
+    this.#bridgeGame.printGameResult();
   }
 
   tryMakeBridge(size) {
-    this.#gameService.makeBridge(size);
+    this.#bridgeGame.makeBridge(size);
     this.askDirection();
   }
 
   tryMovePlayer(direction) {
-    const isRightChoice = this.#gameService.movePlayer(direction);
-    this.#gameService.printCurMap();
+    const isRightChoice = this.#bridgeGame.move(direction);
+    this.#bridgeGame.printCurMap();
     isRightChoice ? this.isDone() : this.askRetry();
   }
 
   tryRetry(command) {
-    const shouldRetry = this.#gameService.checkCommend(command);
+    const shouldRetry = this.#bridgeGame.checkCommend(command);
     shouldRetry ? this.retry() : this.gameOver();
   }
 
