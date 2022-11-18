@@ -16,10 +16,18 @@ class BridgeGame {
   move(userUpDown) {
     let lastUpDownIndex = userUpDown.length - 1;
     if (this.#bridge[lastUpDownIndex] === userUpDown[lastUpDownIndex]) {
-      return 1;
+      return this.moveLengthCheck(userUpDown.length);
     };
 
     return 0;
+  };
+
+  moveLengthCheck(userMoveLength) {
+    if (userMoveLength === this.#bridge.length) {
+      return 2;
+    };
+
+    return 1;
   };
 
   /**

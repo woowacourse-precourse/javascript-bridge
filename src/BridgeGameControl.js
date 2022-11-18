@@ -32,31 +32,38 @@ class BridgeGameControl {
   };
   
   userMoving() {
+    Console.print(this.bridge)
     InputView.readMoving((userUpDown) => {
       this.movingCheck.validate(userUpDown);
-      Console.print(this.bridge)
       this.userMove.push(userUpDown);
       this.answerCheck();
-      // this.bridgeGame.move(this.userMove) ? this.repeatMoving() : Console.print('여기까지가 끝인가보오');
     });
   };
 
   answerCheck() {
-    if (this.bridgeGame.move(this.userMove)) {
-      return this.repeatMoving();
-    }
-    return Console.print('여기까지가 끝인가보오');
-  }
+    switch (this.bridgeGame.move(this.userMove)) {
+      case 0:
+        return this.notAnswerMoving();
+      case 1:
+        return this.repeatMoving();
+      case 2:
+        return this.finalAnswer();
+    };
+  };
 
   repeatMoving() {
-    // 길이 검사
-    if (Number(this.size) === this.userMove.length) {
-      Console.print('모두 정답')
-      Console.close()
-    }
-    // 결과 출력
-    OutputView.printMap(this.bridge, this.userMove.length);
+    OutputView.printMap(this.userMove, 'O');
     this.userMoving();
+  };
+
+  notAnswerMoving() {
+    OutputView.printMap(this.userMove, 'X');
+    //재시도 묻기
+  };
+
+  finalAnswer() {
+    OutputView.printMap(this.userMove, 'O');
+    OutputView.printResult(this.userMove, 'O');
   };
 
 
