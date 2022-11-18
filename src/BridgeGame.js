@@ -30,7 +30,10 @@ class BridgeGame {
 
     this.#tryingCount += 1;
     const canMove = this.currBridge.canMove(direction, this.winningBridge);
-    console.log(canMove);
+    this.currBridge.makeBridge(direction, canMove);
+
+    const [upperBridge, lowerBridge] = this.currBridge.getBridge();
+    this.controller.printMoving(upperBridge, lowerBridge);
   }
 
   /**

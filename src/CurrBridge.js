@@ -2,7 +2,8 @@ const Validation = require('./utils/Validation');
 
 class CurrBridge {
   #direction;
-  #order = -1; // 현재 칸이 몇 번째 칸인지
+  #upperBridge = [];
+  #lowerBridge = [];
 
   constructor(direction) {
     this.#direction = this.validate(direction);
@@ -15,9 +16,29 @@ class CurrBridge {
   }
 
   canMove(direction, winningBridge) {
-    this.#order += 1;
-    const isSame = winningBridge.isSameDirection(direction, this.#order);
+    const isSame = winningBridge.isSameDirection(
+      direction,
+      this.#upperBridge.length
+    );
+
     return isSame;
+  }
+
+  makeBridge(direction, canMove) {
+    if (direction === 'U') {
+      if (canMove) this.#upperBridge.push('O');
+      if (!canMove) this.#upperBridge.push('X');
+      this.#lowerBridge.push(' ');
+    }
+    if (direction === 'D') {
+      if (canMove) this.#lowerBridge.push('O');
+      if (!canMove) this.#lowerBridge.push('X');
+      this.#upperBridge.push(' ');
+    }
+  }
+
+  getBridge() {
+    return [this.#upperBridge, this.#lowerBridge];
   }
 }
 
