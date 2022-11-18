@@ -53,6 +53,11 @@ const InputView = {
       return InputView.readGameCommand(drawBridge, bridge, size);
     }
 
+    if (bridge.length === this.userBridge.length) {
+      const attemps = BridgeState.numberOfAttempts;
+      return OutputView.printResult(drawBridge, '성공', attemps);
+    }
+
     return InputView.readMoving(bridge, size);
   },
   /**
@@ -67,6 +72,10 @@ const InputView = {
           if (input === 'R') {
             this.userBridge = new BridgeGame(bridge).retry(this.userBridge);
             InputView.readMoving(bridge, size);
+          }
+          if (input === 'Q') {
+            const attemps = BridgeState.numberOfAttempts;
+            OutputView.printResult(drawBridge, '실패', attemps);
           }
         } catch (error) {
           OutputView.printErrorMessage(error) || InputView.readGameCommand(bridge, size);
