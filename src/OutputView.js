@@ -9,8 +9,8 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridge, lastPosition) {
-    const map = this.makeMapString(bridge, lastPosition);
+  printMap(bridge) {
+    const map = this.makeMapString(bridge);
 
     Console.print(`[${map[0].join("|")}]`);
     Console.print(`[${map[1].join("|")}]`);
@@ -21,14 +21,22 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridge, state, totalTrial) {
+    const map = this.makeMapString(bridge);
+
+    Console.print(`\n${Guide.END}`);
+    Console.print(`[${map[0].join("|")}]`);
+    Console.print(`[${map[1].join("|")}]\n`);
+    Console.print(`${Guide.SUCCESS_RESULT}${state}`);
+    Console.print(`${Guide.TOTAL_TRIAL}${totalTrial}`);
+    Console.close();
+  },
 
   printStart() {
     Console.print(Guide.START);
   },
 
   makeMapString(bridge) {
-    console.log(bridge);
     const map = [];
 
     map.push(this.makeUpMapString(bridge));

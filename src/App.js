@@ -46,8 +46,11 @@ class App {
 
     if (this.#bridge.getIsLastPosition()) {
       OutputView.printMap(this.#bridge.getCrossState("success"));
-      console.log("다리 건너기 완료\n");
-      return 0;
+      return OutputView.printResult(
+        this.#bridge.getCrossState("success"),
+        "성공",
+        this.bridgeGame.totalTrial
+      );
     }
 
     OutputView.printMap(this.#bridge.getCrossState("success"));
@@ -55,7 +58,6 @@ class App {
   }
 
   stopMoving() {
-    console.log("다리 건너기 실패\n");
     OutputView.printMap(this.#bridge.getCrossState("failed"));
     InputView.readGameCommand(this.judgeIsUserWantRestart.bind(this));
   }
@@ -68,7 +70,11 @@ class App {
       return this.InputPositionUntilBridgeEnds();
     }
     if (input === "Q") {
-      console.log("게임이 종료됐습니다.");
+      OutputView.printResult(
+        this.#bridge.getCrossState("failed"),
+        "실패",
+        this.bridgeGame.totalTrial
+      );
       Console.close();
     }
   }

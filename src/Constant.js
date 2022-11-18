@@ -6,7 +6,7 @@ const Question = Object.freeze({
 
 const Guide = Object.freeze({
   START: "다리 건너기 게임을 시작합니다.\n\n",
-  END: "최종 게임 결과\n",
+  END: "최종 게임 결과",
   SUCCESS_RESULT: "게임 성공 여부: ",
   TOTAL_TRIAL: "총 시도한 횟수: ",
 });

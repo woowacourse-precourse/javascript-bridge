@@ -18,7 +18,6 @@ class Bridge {
   }
 
   getCrossState(state) {
-    console.log(this.currentPosition);
     if (state === "failed")
       return [
         ...this.bridge.filter((v, i) => i < this.currentPosition),
