@@ -12,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridge = Array(Number(size)).fill(0);
     bridge = bridge.map(() => {
-      return generateRandomNumber() === 1 ? 'U' : 'D';
+      return String(generateRandomNumber()) === '1' ? 'U' : 'D';
     });
     return bridge;
   },
