@@ -27,6 +27,9 @@ const OutputView = {
     MissionUtils.Console.print(`게임 성공 여부: ${RESULT}`);
     MissionUtils.Console.print(`총 시도한 횟수: ${count}`);
   },
+  printError(error) {
+    MissionUtils.Console.print(error);
+  },
 };
 
 module.exports = OutputView;

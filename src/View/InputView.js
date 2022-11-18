@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { printError } = require('./OutputView');
 const MESSAGE = {
   INPUT_LENGTH: '\n다리의 길이를 입력해주세요. \n',
   INPUT_DIRECTION: '\n이동할 칸을 선택해주세요. (위: U, 아래: D) \n',
@@ -21,8 +22,17 @@ const InputView = {
    */
   readBridgeSize(callbackOne, callbackTwo, callbackThree) {
     MissionUtils.Console.readLine(MESSAGE.INPUT_LENGTH, (input) => {
-      callbackOne.call(this, input);
-      InputView.readMoving.call(this, callbackTwo, callbackThree);
+      try {
+        callbackOne.call(this, input);
+        InputView.readMoving.call(this, callbackTwo, callbackThree);
+      } catch (err) {
+        printError(err);
+        InputView.readBridgeSize.bind(this)(
+          callbackOne,
+          callbackTwo,
+          callbackThree
+        );
+      }
     });
   },
 
