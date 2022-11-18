@@ -11,7 +11,6 @@ class App {
       BRIDGE_SIZE,
       BridgeRandomNumberGenerator.generate
     );
-    console.log('briddddddddddddddge', BRIDGE);
   }
 }
 

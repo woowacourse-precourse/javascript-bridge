@@ -23,7 +23,18 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    let U_or_D;
+    MissionUtils.Console.readLine(
+      '이동할 칸을 선택해주세요. (위: U, 아래: D)',
+      (answer) => {
+        U_or_D = answer;
+      }
+    );
+    if (U_or_D !== 'U' || U_or_D !== 'D') {
+      throw new Error('[ERROR] 이동할 칸은 U와 D만 입력가능합니다.');
+    }
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
