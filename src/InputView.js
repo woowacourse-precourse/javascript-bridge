@@ -61,6 +61,11 @@ const InputView = {
       (input) => {
         try {
           Validate.validateRetryOfQuit(input);
+          if (input === 'R') {
+            new BridgeGame(bridge).retry();
+            InputView.readMoving(bridge, size);
+          }
+          //종료 로직 작성
         } catch (error) {
           OutputView.printErrorMessage(error) || InputView.readGameCommand(bridge, size);
         }
