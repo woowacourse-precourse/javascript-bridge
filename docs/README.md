@@ -13,10 +13,8 @@
 - [x] retry
   - try의 값을 +1 한다.
   - user 데이터를 초기화한다.
-- [x] jumpUp
-  - 유저의 위치 데이터를 앞방향 위로 점프한다.
-- [x] jumpDown
-  - 유저의 위치 데이터를 앞방향 아래로 점프한다.
+- [x] jump
+  - 유저가 점프한 후 위치 데이터를 갱신한다.
 - [x] checkBridge
   - 메세지를 통해 유효한 bridge 데이터인지 확인하고 유효하지 않다면 Error를 던진다.
 - [x] checkUser

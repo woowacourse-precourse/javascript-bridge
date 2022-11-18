@@ -25,6 +25,8 @@ const constants = Object.freeze({
   HASH: {
     1: "U",
     0: "D",
+    U: "U",
+    D: "D",
   },
 });
 

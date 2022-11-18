@@ -1,4 +1,4 @@
-const { SIZE, KEYWORD } = require("../constants/index.js");
+const { SIZE, KEYWORD, HASH } = require("../constants/index.js");
 const {
   BridgeGameSizeError,
   BridgeGameMoveError,
@@ -18,16 +18,8 @@ const BridgeGameModel = class {
     this.#user = [];
   }
 
-  jumpUp() {
-    const { UP } = KEYWORD;
-    this.#user.push(UP);
-    const data = { user: this.#user, bridge: this.#bridge };
-    return data;
-  }
-
-  jumpDown() {
-    const { DOWN } = KEYWORD;
-    this.#user.push(DOWN);
+  jump(move) {
+    this.#user.push(HASH[move]);
     const data = { user: this.#user, bridge: this.#bridge };
     return data;
   }
