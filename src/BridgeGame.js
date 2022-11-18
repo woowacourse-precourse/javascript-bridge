@@ -37,10 +37,9 @@ class BridgeGame {
   move(input) {
     this.moveCount += 1
     this.user.push(input)
-    console.log("this.user", this.user)
   }
   
-  judge() {
+  isCorrect() {
     return this.bridge[this.moveCount - 1] === this.user[this.moveCount - 1]
   }
 

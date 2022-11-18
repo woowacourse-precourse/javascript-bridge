@@ -28,7 +28,13 @@ class App {
   moveUser(direction) {
     this.bridgeGame.move(direction);
     OutputView.printMap(this.bridgeGame)
+    this.bridgeGame.isCorrect() ? this.go() : this.isRetry()
   }
+
+  isRetry() {
+    InputView.readGameCommand(this.makeBridge.bind(this));
+  }
+
 }
 
 const app = new App();

@@ -16,23 +16,21 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridgeGame) {
-    
-    for(let i = 0; i < bridgeGame.moveCount; i++) {
-      const result = (
-        bridgeGame.user[bridgeGame.moveCount - 1] === bridgeGame.bridge[bridgeGame.moveCount - 1] ? "O" : "X"
-      )
-
-      if(bridgeGame.user[bridgeGame.moveCount - 1] === "U") {
-        this.up.push(result);
-        this.down.push(" ");
-      } else if (bridgeGame.user[bridgeGame.moveCount - 1] === "D") {
-        this.up.push(" ");
-        this.down.push(result);
-      }
+    const result = (
+      bridgeGame.user[bridgeGame.moveCount - 1] === bridgeGame.bridge[bridgeGame.moveCount - 1] ? "O" : "X"
+    )
+    if(bridgeGame.user[bridgeGame.moveCount - 1] === "U") {
+      this.up.push(result);
+      this.down.push(" ");
+    } else if (bridgeGame.user[bridgeGame.moveCount - 1] === "D") {
+      this.up.push(" ");
+      this.down.push(result);
     }
-    Console.print(`[ ${this.up.join("|")} ]`)
-    Console.print(`[ ${this.down.join("|")} ]`)
+    
+    Console.print(`[ ${this.up.join(" | ")} ]`)
+    Console.print(`[ ${this.down.join(" | ")} ]`)
   },
+  // 업 다운을 내부 변수로 해주면 매번 초기화되서 안됨 다음 회차 입력에 정보사라짐
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
