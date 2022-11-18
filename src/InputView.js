@@ -12,6 +12,7 @@ const InputView = {
 	WRONG_MSG: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
 	RETRY: 'R',
 	QUIT: 'Q',
+	RETRY_COUNT: 1,
 
 	readBridgeSize(START_MSG = '', READ_BRIDGE_SIZE_MSG = '') {
 		MissionUtils.Console.readLine(
@@ -101,11 +102,16 @@ const InputView = {
 
 	retryStep(bridgeGame) {
 		bridgeGame.retry();
+		InputView.RETRY_COUNT++;
 		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 	},
 
 	quitStep(bridgeGame, prevCrossedBridge) {
-		OutputView.printResult(bridgeGame, prevCrossedBridge);
+		OutputView.printResult(
+			bridgeGame,
+			prevCrossedBridge,
+			InputView.RETRY_COUNT,
+		);
 	},
 };
 

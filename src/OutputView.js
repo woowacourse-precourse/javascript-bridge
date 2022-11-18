@@ -13,6 +13,9 @@ const OutputView = {
 		CORRECT: 'DO',
 		WRONG: 'DX',
 	},
+	RESULT_MSG: '최종 게임 결과',
+	SUCESS_OR_FAIL_MSG: '게임 성공 여부: ',
+	RETRY_COUNT_MSG: '총 시도한 횟수 : ',
 
 	printMap(prevCrossedBridge) {
 		const upperArr = OutputView.getOneSideArr(
@@ -50,12 +53,14 @@ const OutputView = {
 		return map.replace(quotationRegExp, '').replace(commaRegExp, '|');
 	},
 
-	/**
-	 * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-	 * <p>
-	 * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-	 */
-	printResult() {},
+	printResult(bridgeGame, prevCrossedBridge, RETRY_COUNT) {
+		MissionUtils.Console.print(OutputView.RESULT_MSG);
+		OutputView.printMap(prevCrossedBridge);
+		const successOrFail = bridgeGame.wasCorrect() ? '성공' : '실패';
+
+		MissionUtils.Console.print(OutputView.SUCESS_OR_FAIL_MSG + successOrFail);
+		MissionUtils.Console.print(OutputView.RETRY_COUNT_MSG + RETRY_COUNT);
+	},
 };
 
 module.exports = OutputView;
