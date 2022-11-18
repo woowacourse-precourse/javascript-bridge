@@ -24,6 +24,7 @@ class BridgeGame {
   makeBridge(bridgeSize) {
     this.#validPath = BridgeMaker.makeBridge(bridgeSize);
     // 유효성 검사
+    console.log(this.#validPath);
     this.getMoveDirectionFromUser();
   }
 
@@ -47,6 +48,13 @@ class BridgeGame {
       if (direction === 0) this.#currentMap.lowerPart.push("O");
       this.fillBlankUnselectedPath(Number(!direction));
     }
+    if (!this.isValidPath(direction)) {
+      this.askUserRestart();
+    }
+  }
+
+  askUserRestart() {
+    InputView.readGameCommand(this.updateRestartOrNot.bind(this));
   }
 
   fillBlankUnselectedPath(direction) {
