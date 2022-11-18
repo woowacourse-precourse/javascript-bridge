@@ -28,6 +28,34 @@ class BridgeGame {
     return this.#userBridge;
   }
 
+  draw() {
+    let upBridge = '';
+    let downBridge = '';
+
+    this.#userBridge.forEach((position) => {
+      upBridge = this.drawUpBridge(position, upBridge);
+      downBridge = this.drawDownBridge(position, downBridge);
+    });
+    return [upBridge, downBridge];
+  }
+
+  drawUpBridge(position, upBridge) {
+    if (position === this.#userBridge[0]) {
+      upBridge += position[0];
+    } else if (position !== this.#userBridge[0]) {
+      upBridge += ` | ${position[0]}`;
+    }
+    return upBridge;
+  }
+
+  drawDownBridge(position, downBridge) {
+    if (position === this.#userBridge[0]) {
+      downBridge += position[1];
+    } else if (position !== this.#userBridge[0]) {
+      downBridge += ` | ${position[1]}`;
+    }
+    return downBridge;
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>

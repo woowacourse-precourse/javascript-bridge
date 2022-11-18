@@ -2,6 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeState = require('./BridgeState');
 const OutputView = require('./OutputView');
 const Validate = require('./utils/Validate');
 /**
@@ -30,32 +31,36 @@ const InputView = {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (movePosition) => {
       try {
         Validate.validateMovePosition(movePosition);
-        const moveBridge = new BridgeGame(bridge).move(movePosition);
-        OutputView.printMap(moveBridge, size - bridge.length);
-        InputView.readMovingControler(moveBridge, size, bridge);
+        BridgeState.addBridgeFromUser(movePosition);
+        const userBridge = BridgeState.userBridge;
+        InputView.readMovingControler(size, bridge, userBridge);
       } catch (error) {
         OutputView.printErrorMessage(error) || InputView.readMoving(bridge, size);
       }
     });
   },
 
-  readMovingControler(moveBridge, size, bridge) {
-    if (moveBridge[0] === 'X' || moveBridge[1] === 'X') return InputView.readGameCommand();
-
+  readMovingControler(size, bridge, userBridge) {
+    const bridgeGame = new BridgeGame(bridge);
+    const moveBridge = bridgeGame.move(userBridge);
+    const drawBridge = bridgeGame.draw(moveBridge);
+    OutputView.printMap(drawBridge);
+    console.log(drawBridge[0]);
+    if (drawBridge[0].includes('X') || drawBridge[1].includes('X'))
+      return InputView.readGameCommand(bridge, size);
     if (bridge.length - 1 === 0) return console.log('done');
-    bridge.shift();
-    InputView.readMoving(bridge, size);
+    return InputView.readMoving(bridge, size);
   },
+
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(bridge, size) {
     Console.readLine(
       '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
       (input) => {
         try {
           Validate.validateRetryOfQuit(input);
-          console.log(input);
         } catch (error) {
           OutputView.printErrorMessage(error) || InputView.readGameCommand();
         }
