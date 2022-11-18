@@ -28,8 +28,8 @@ const ErrorConstants = {
   ERROR_NOT_ONLY_R_OR_Q: "\n[ERROR] R 혹은 Q만 입력 가능합니다.\n",
 };
 
-const BridgeMakerConstants = {
-  LOWER_BRIDGE_NUMBER: 0,
+const MakerConstants = {
+  LOWER_BRIDGE_NUMBER: "0",
 };
 
 const PlayerConstants = {
@@ -56,7 +56,7 @@ module.exports = {
   InputConstants,
   OutputConstants,
   ConstraintsConstants,
-  BridgeMakerConstants,
+  MakerConstants,
   PlayerConstants,
   AnswerConstants,
   PlayerInputConstants,
