@@ -51,7 +51,13 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(userInputMessage.ENTER_RESTART, (restartOrEnd) => {
-      this.validateGameCommand(restartOrEnd);
+      try {
+        this.validateGameCommand(restartOrEnd);
+        Console.print(restartOrEnd);
+      } catch (e) {
+        Console.print(e);
+        this.readGameCommand();
+      }
     });
   },
 
