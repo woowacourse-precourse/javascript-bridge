@@ -1,9 +1,10 @@
-const { printStartMsg } = require('./OutputView.js');
+const { printMsg } = require('./OutputView.js');
 const { requestBridgeSize } = require('./InputView.js');
+const { GAME_MSG } = require('./constants/message.js');
 
 class App {
   play() {
-    printStartMsg();
+    printMsg(GAME_MSG.start);
     requestBridgeSize();
   }
 }
