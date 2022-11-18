@@ -12,12 +12,17 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     Console.readLine(MESSAGE.BRIDGE_SIZE, (size) => {
-      const SIZE = Number(size);
-      if (Validate.checkBridgeSize(SIZE)) {
-        bridgeGame.getAnswerBridge(SIZE);
-        this.readMoving(bridgeGame);
-      } else {
-        throw new Error(ERROR.BRIDGE_SIZE);
+      try {
+        const SIZE = Number(size);
+        if (Validate.checkBridgeSize(SIZE)) {
+          bridgeGame.getAnswerBridge(SIZE);
+          this.readMoving(bridgeGame);
+        } else {
+          throw new Error(ERROR.BRIDGE_SIZE);
+        }
+      } catch (error) {
+        OutputView.printError(error.message);
+        this.readBridgeSize(bridgeGame);
       }
     });
   },
@@ -27,13 +32,20 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     Console.readLine(MESSAGE.MOVING_KEY, (key) => {
-      if (checkMovingKey(key)) {
-        const USER_BRIDGE = bridgeGame.move(key);
-        OutputView.printMap(USER_BRIDGE);
-      } else {
-        throw new Error(ERROR.MOVING_KEY);
+      try {
+        if (Validate.checkMovingKey(key)) {
+          const USER_BRIDGE = bridgeGame.move(key);
+          OutputView.printMap(USER_BRIDGE);
+        } else {
+          throw new Error(ERROR.MOVING_KEY);
+        }
+      } catch (error) {
+        OutputView.printError(error.message);
+        this.readMoving(bridgeGame);
       }
-      if (checkUserInput(bridgeGame.userInput, bridgeGame.answerBridge)) {
+      if (
+        Validate.checkUserInput(bridgeGame.userInput, bridgeGame.answerBridge)
+      ) {
         return OutputView.printResult(bridgeGame, '성공');
       }
       if (bridgeGame.getMoveResult(key) === 'O') {
@@ -49,8 +61,12 @@ const InputView = {
    */
   readGameCommand(bridgeGame) {
     Console.readLine(MESSAGE.GAME_COMMAND, (key) => {
-      if (!checkCommandKey(key)) {
-        throw new Error(ERROR.GAME_COMMAND);
+      try {
+        if (!Validate.checkCommandKey(key)) {
+          throw new Error(ERROR.GAME_COMMAND);
+        }
+      } catch (error) {
+        OutputView.printError(error.message);
       }
       if (key === KEY.RETRY) {
         bridgeGame.retry();
