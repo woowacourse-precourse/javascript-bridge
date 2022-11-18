@@ -16,21 +16,26 @@ const InputView = {
       this.checkBridgeSizeInput(bridgeLength)
     })
   },
+
   checkBridgeSizeInput(bridgeLength){
     if(bridgeLength<3 || bridgeLength>20) throw "[ERROR] range error occured"
     if(bridgeLength.match(/[a-zA-z]/g)|| bridgeLength.match([/ㄱ-ㅎ|ㅏ-ㅣ|가-힣/g])) throw "[ERROR] The string can not be accepted"
     if(bridgeLength.match([/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g])) throw "[ERROR] The string can not be accepted"
     if(bridgeLength<0) throw "[ERROR] The Negative number can't be accepted"
+    return bridgeLength
   },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridgeLength) {
+  readMoving() {
     MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n',(userSpace)=>{
-      return userSpace
+      this.checkMovingInput(userSpace)
     })
   },
-
+  checkMovingInput(userSpace){
+    if(userSpace!=='U'||userSpace!=='D') throw "[ERROR] U,D만 가능합니다"
+    return checkMovingInput
+  },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
