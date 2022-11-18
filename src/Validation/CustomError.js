@@ -3,3 +3,4 @@ class CustomError extends Error {
     super(`[ERROR] ${msg}`);
   }
 }
+module.exports = CustomError;
