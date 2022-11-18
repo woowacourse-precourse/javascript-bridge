@@ -11,8 +11,9 @@ const OutputView = {
    */
   printMap(userBridge) {
     const [userBridgeTop, userBridgeBottom] = userBridge;
-    Console.print(userBridgeTop);
-    Console.print(userBridgeBottom);
+
+    Console.print("[ " + userBridgeTop.join(" | ") + " ]");
+    Console.print("[ " + userBridgeBottom.join(" | ") + " ]");
   },
 
   /**
