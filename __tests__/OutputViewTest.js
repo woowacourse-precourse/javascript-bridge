@@ -30,4 +30,14 @@ describe("OutputView 객체 테스트", () => {
     OutputView.printMap("D", "X");
     expect(logSpy).toHaveBeenCalledWith(`[ O | O |   ]\n[   |   | X ]`);
   });
+
+  test("게임 결과를 출력한다.", () => {
+    OutputView.printResult("성공", 2);
+    expect(logSpy).not.toHaveBeenCalledWith(
+      expect.stringContaining(`게임 성공 여부 : 성공\n총 시도한 횟수: 2`)
+    );
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(`게임 성공 여부: 성공\n총 시도한 횟수: 2`)
+    );
+  });
 });
