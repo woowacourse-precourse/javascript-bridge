@@ -4,7 +4,7 @@
 ## 진행도
 [O] 입력값들 입력받고 에러처리해주는 기능구현
 
-## 입력
+## InputView
 - printGameStart() : 다리 건너기 게임을 시작합니다.
 - readBridgeSize() : 다리의 길이를 입력받는다. 3~20이하 숫자만 허용 나머지는 에러처리를 한다
 -> checkBridgeSizeInput() : 다리 길이 입력 값 에러 확인하는 함수
@@ -14,6 +14,11 @@
 
 - readGameCommand() : 게임 재시작/종료 여부를 입력받는 함수 R,Q가 아닌 값은 에러처리를 한다
 -> checkReadGameInput() : 게임 재시작/종류 입력 값 에러처리 함수
+
+- randomBridge() : bridge의 길이와 RandomNumberGenerator함수를 BridgeMaker의 파라미터로 보내준다
+-> 오류처리 없음
+
+---
 
 ## 에러처리
 
