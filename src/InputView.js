@@ -41,10 +41,7 @@ const InputView = {
   readGameCommand() {
     Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도:R, 종료:Q)", (value) => {
       this.gameRestart(value);
-      if(value == 'Q'){
-        OutputView.printResult();
-        Console.close();
-      }
+      this.gameFail(value);
     })
   },
   gameRestart(value){
@@ -53,6 +50,12 @@ const InputView = {
       this.readMoving();
     }
   },
+  gameFail(value){
+    if(value == 'Q'){
+      OutputView.printResult();
+      Console.close();
+    }
+  }
 }
 
 module.exports = InputView;
