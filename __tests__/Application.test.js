@@ -116,4 +116,12 @@ describe('배열 복사 함수 테스트', () => {
       Application.copyArray(EXPECTED);
     }).toThrow(VALIDATION_ARRAY_TEXT);
   });
+
+  test('전달받은 인자가 배열이라면 예외를 발생시키지 않는다.', () => {
+    expect(() => {
+      const EXPECTED = [1];
+
+      Application.copyArray(EXPECTED);
+    }).not.toThrow(VALIDATION_ARRAY_TEXT);
+  });
 });
