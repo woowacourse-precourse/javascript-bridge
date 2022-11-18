@@ -1,4 +1,9 @@
-const { BRIDGE_SIZE_MIN_RANGE, BRIDGE_SIZE_MAX_RANGE } = require('./condition.js');
+const {
+  BRIDGE_SIZE_MIN_RANGE,
+  BRIDGE_SIZE_MAX_RANGE,
+  UPSIDE_SYMBOL,
+  DOWNSIDE_SYMBOL,
+} = require('./condition.js');
 
 const GAME_MSG = {
   start: '다리 건너기 게임을 시작합니다.',
@@ -6,7 +11,7 @@ const GAME_MSG = {
 
 const REQUEST_MSG = {
   bridgeSize: '\n다리의 길이를 입력해주세요.\n',
-  movingDirection: `\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n`,
+  movingDirection: `\n이동할 칸을 선택해주세요. (위: ${UPSIDE_SYMBOL}, 아래: ${DOWNSIDE_SYMBOL})\n`,
 };
 
 const ERROR_MSG = {
