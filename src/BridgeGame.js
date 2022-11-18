@@ -23,6 +23,7 @@ class BridgeGame {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     console.log(this.#bridge);
 
+    this.#tryCount += 1;
     this.#moveCount = 0;
     InputView.readMoving(this.move.bind(this));
   }
@@ -86,7 +87,9 @@ class BridgeGame {
     InputView.readMoving(this.move.bind(this));
   }
 
-  end() {}
+  end() {
+    OutputView.printResult(this.usersMove, this.#gameOver, this.#tryCount);
+  }
 }
 
 module.exports = BridgeGame;
