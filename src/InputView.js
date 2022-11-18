@@ -7,11 +7,11 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(makeBridge, func2, func3) {
+  readBridgeSize(func1, func2, func3) {
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요.\n', (input) => {
       try {
-        makeBridge.call(this, input);
-        this.readMoving(func2, func3);
+        func1.call(this, input);
+        InputView.readMoving.call(this, func2, func3);
       } catch (error) {
         MissionUtils.Console.print(error);
         MissionUtils.Console.close();
@@ -27,13 +27,13 @@ const InputView = {
       const [isEnd, isWin] = func2.call(this, input);
 
       if (isWin) {
-        this.gameEnd();
+        InputView.gameEnd();
       }
       else if (isEnd) {
-        this.readGameCommand(func2, func3);
+        InputView.readGameCommand.call(this, func3);
       }
       else {
-        this.readMoving(func2, func3);
+        InputView.readMoving.call(this, func2, func3);
       }
     });
   },
@@ -41,15 +41,9 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(func2, func3) {
+  readGameCommand(func3) {
     MissionUtils.Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (input) => {
-      const isRetry = func3.call(this, input);
-      if (isRetry) {
-        this.readMoving(func2, func3);
-      }
-      else {
-        this.gameEnd();
-      }
+      func3.call(this, input);
     });
   },
 

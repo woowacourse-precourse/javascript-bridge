@@ -9,7 +9,7 @@ class App {
 
   play() {
     OutputView.printGameStart();
-    InputView.readBridgeSize(this.makeBridge, this.inputMove, this.inputRetry);
+    InputView.readBridgeSize.call(this, this.makeBridge, this.inputMove, this.inputRetry);
   }
 
   makeBridge(input) {
@@ -28,9 +28,17 @@ class App {
   }
 
   inputRetry(input) {
-    const isRetry = this.bridgeGame.retry(input);
+    if (input === 'R') {
+      this.bridgeGame.retry();
+      InputView.readMoving.call(this, this.inputMove, this.inputRetry)
+    }
+    else {
+      this.finishGame()
+    }
+  }
 
-    return isRetry;
+  finishGame() {
+    InputView.gameEnd();
   }
 }
 
