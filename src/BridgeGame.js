@@ -8,10 +8,11 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  bridgeStore;
+
   constructor(welcomeMessage = '다리 건너기 게임을 시작합니다.', bridgeSizeMessage = '다리의 길이를 입력해주세요.') {
     this.welcomeMessage = welcomeMessage;
     this.bridgeSizeMessage = bridgeSizeMessage;
-    this.bridgeStore = new BridgeStore();
   }
 
   /**
@@ -30,7 +31,7 @@ class BridgeGame {
 
   runGame(bridgeSize) {
     const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-    const bridgeStore = new BridgeStore(bridge);
+    this.bridgeStore = new BridgeStore(bridge);
   }
 
   init() {
