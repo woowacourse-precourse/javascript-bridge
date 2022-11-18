@@ -29,4 +29,9 @@ describe("플레이어 상태 테스트", () => {
       ["   ", "   ", " O ", " X "],
     ]);
   });
+
+  test("다리 길이 업데이트 테스트", () => {
+    Player.updateSize(3);
+    expect(Player.size).toBe(3);
+  });
 });
