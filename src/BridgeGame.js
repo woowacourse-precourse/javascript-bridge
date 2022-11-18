@@ -1,5 +1,6 @@
 const InputView = require('./InputView');
 const BridgeMap = require('./BridgeMap');
+const OutputView = require('./OutputView');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -33,6 +34,7 @@ class BridgeGame {
     InputView.readMoving((step) => {
       this.move(step);
       BridgeMap.generate(this.#bridge, this.#userMove);
+      OutputView.printMap();
     });
   }
 
