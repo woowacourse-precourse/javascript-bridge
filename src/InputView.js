@@ -18,13 +18,22 @@ const InputView = {
 		MissionUtils.Console.readLine(
 			START_MSG + READ_BRIDGE_SIZE_MSG,
 			(bridgeSize) => {
-				InputView.excuteBridgeSizeStep(bridgeSize);
+				InputView.handlingBridgeSizeError(bridgeSize);
 			},
 		);
 	},
 
+	handlingBridgeSizeError(bridgeSize) {
+		try {
+			Validation.validateBridgeSize(bridgeSize);
+			InputView.excuteBridgeSizeStep(bridgeSize);
+		} catch (error) {
+			MissionUtils.Console.print(error);
+			InputView.readBridgeSize();
+		}
+	},
+
 	excuteBridgeSizeStep(bridgeSize) {
-		InputView.handlingBridgeSizeError(bridgeSize);
 		const bridgeGame = new BridgeGame(
 			bridgeSize,
 			BridgeRandomNumberGenerator.generate,
@@ -32,74 +41,67 @@ const InputView = {
 		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 	},
 
-	handlingBridgeSizeError(bridgeSize) {
-		try {
-			Validation.validateBridgeSize(bridgeSize);
-		} catch (error) {
-			MissionUtils.Console.print(error);
-			InputView.readBridgeSize();
-		}
-	},
-
 	readMoving(bridgeGame, READ_MOVING_MSG = '') {
 		MissionUtils.Console.readLine(READ_MOVING_MSG, (moving) => {
-			InputView.excuteMovingStep(bridgeGame, moving);
+			InputView.handlingMovingError(bridgeGame, moving);
 		});
-	},
-
-	excuteMovingStep(bridgeGame, moving) {
-		InputView.handlingMovingError(bridgeGame, moving);
-		bridgeGame.move(moving);
-		const prevCrossedBridge = bridgeGame.getPrevCrossedBridge();
-		OutputView.printMap(prevCrossedBridge);
-
-		InputView.inCaseCorrectOrWrong(bridgeGame, prevCrossedBridge);
 	},
 
 	handlingMovingError(bridgeGame, moving) {
 		try {
 			Validation.validateMoving(moving);
+			InputView.excuteMovingStep(bridgeGame, moving);
 		} catch (error) {
 			MissionUtils.Console.print(error);
 			InputView.readMoving(bridgeGame);
 		}
 	},
 
-	inCaseCorrectOrWrong(bridgeGame, prevCrossedBridge) {
-		const wasCorrect = bridgeGame.wasCorrect();
-		const isEnd = bridgeGame.isEnd();
-		if (!wasCorrect) {
-			InputView.readGameCommand(bridgeGame, prevCrossedBridge);
+	excuteMovingStep(bridgeGame, moving) {
+		bridgeGame.move(moving);
+		const prevCrossedBridge = bridgeGame.getPrevCrossedBridge();
+		OutputView.printMap(prevCrossedBridge);
+
+		InputView.inCaseWrongOrEnd(bridgeGame, prevCrossedBridge);
+	},
+
+	inCaseWrongOrEnd(bridgeGame, prevCrossedBridge) {
+		if (!bridgeGame.wasCorrect()) {
+			InputView.readGameCommand(
+				bridgeGame,
+				prevCrossedBridge,
+				InputView.WRONG_MSG,
+			);
 		}
-		if (wasCorrect && isEnd) {
+		if (bridgeGame.wasCorrect() && bridgeGame.isEnd()) {
 			InputView.quitStep(bridgeGame, prevCrossedBridge);
 			return;
 		}
 		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 	},
 
-	readGameCommand(bridgeGame, prevCrossedBridge) {
-		MissionUtils.Console.readLine(InputView.WRONG_MSG, (cmd) => {
-			InputView.excuteWrongStep(bridgeGame, cmd, prevCrossedBridge);
+	readGameCommand(bridgeGame, prevCrossedBridge, WRONG_MSG = '') {
+		MissionUtils.Console.readLine(WRONG_MSG, (cmd) => {
+			InputView.handlingCommandError(bridgeGame, cmd, prevCrossedBridge);
 		});
-	},
-
-	excuteWrongStep(bridgeGame, cmd, prevCrossedBridge) {
-		InputView.handlingCommandError(bridgeGame, cmd, prevCrossedBridge);
-		if (cmd === InputView.RETRY) {
-			InputView.retryStep(bridgeGame);
-		}
-		if (cmd === InputView.QUIT) {
-			InputView.quitStep(bridgeGame, prevCrossedBridge);
-		}
 	},
 
 	handlingCommandError(bridgeGame, cmd, prevCrossedBridge) {
 		try {
 			Validation.validateCmd(cmd);
+			InputView.excuteWrongStep(bridgeGame, cmd, prevCrossedBridge);
 		} catch (error) {
 			MissionUtils.Console.print(error);
 			InputView.readGameCommand(bridgeGame, prevCrossedBridge);
+		}
+	},
+
+	excuteWrongStep(bridgeGame, cmd, prevCrossedBridge) {
+		if (cmd === InputView.RETRY) {
+			InputView.retryStep(bridgeGame);
+		}
+		if (cmd === InputView.QUIT) {
+			InputView.quitStep(bridgeGame, prevCrossedBridge);
 		}
 	},
 
