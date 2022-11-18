@@ -50,14 +50,20 @@ const Validator = {
     }
   },
 
-  checkDirectionLength(direction) {
-    if (direction.length !== 1) {
+  checkPlayerInputLength(input) {
+    if (input.length !== 1) {
       throw new Error(MESSAGE_ERROR.INVALID_VALUE);
     }
   },
 
   checkDirectionIncludes(direction) {
     if (direction !== 'U' && direction !== 'D') {
+      throw new Error(MESSAGE_ERROR.INVALID_VALUE);
+    }
+  },
+
+  checkSelectIncludes(select) {
+    if (select !== 'R' && select !== 'Q') {
       throw new Error(MESSAGE_ERROR.INVALID_VALUE);
     }
   },

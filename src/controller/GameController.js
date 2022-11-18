@@ -49,7 +49,9 @@ class GameController {
     }
   }
 
-  #restartOrQuitGame(select) {}
+  #restartOrQuitGame(select) {
+    PlayerInputChecker.checkSelect(select);
+  }
 }
 
 module.exports = GameController;
