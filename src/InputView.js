@@ -3,6 +3,7 @@ const BridgeGame = require("./BridgeGame");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { printResult, printMap } = require("./OutputView");
+const { validateInput } = require("./Validator");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -14,6 +15,7 @@ const InputView = {
   readBridgeSize() {
     let mainBridge = [];
     Console.readLine("다리의 길이를 입력해주세요.", (bridgeSize) => {
+      validateInput(bridgeSize);
       mainBridge = makeBridge(bridgeSize, generate); //기준 다리
       const bridgeGame = new BridgeGame(mainBridge); //인스턴스 생성
       InputView.readMoving(mainBridge, bridgeGame); //움직임 입력 받기
