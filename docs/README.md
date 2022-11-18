@@ -6,8 +6,8 @@
 
 - #### _makeBridge(size, generateRandomNumber)_
 
-  - [ ] 다리의 길이를 입력받아서 다리를 생성한다.
-  - [ ] 랜덤 숫자가 0인 경우 D, 1인 경우 U로 나타낸다.
+  - [x] 다리의 길이를 입력받아서 다리를 생성한다.
+  - [x] 랜덤 숫자가 0인 경우 D, 1인 경우 U로 나타낸다.
 
 ### BridgeRandomNumberGenerator
 
