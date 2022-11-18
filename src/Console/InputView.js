@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { INPUT } = require('../Resource');
+const { INPUT, BRIDGE_LENGTH_MIN, BRIDGE_LENGTH_MAX } = require('../Resource');
+const BridgeValidator = require('../Bridge.validator');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -13,6 +14,11 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT.BRIDGE_LENGTH, (message) => {
       returnValue = message;
     });
+    BridgeValidator.checkBridgeLength(
+      message,
+      BRIDGE_LENGTH_MIN,
+      BRIDGE_LENGTH_MAX,
+    );
     return returnValue;
   },
 

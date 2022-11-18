@@ -1,0 +1,7 @@
+const BRIDGE_LENGTH_MIN = 3;
+const BRIDGE_LENGTH_MAX = 20;
+
+Object.freeze(BRIDGE_LENGTH_MIN);
+Object.freeze(BRIDGE_LENGTH_MAX);
+
+module.exports = { BRIDGE_LENGTH_MAX, BRIDGE_LENGTH_MIN };
