@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+
 class BridgeGame {
   move(moving, bridge) {
     if (moving[moving.length - 1] === bridge[moving.length - 1]) {
