@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { PASS, FAIL } = require("./utils/constants");
+const { PASS, FAIL, RESULT } = require("./utils/constants");
 
 const OutputView = {
   /**
@@ -12,6 +12,7 @@ const OutputView = {
     const nowMap = OutputView.makeMap(bridge, nowStep, isSafe);
     Console.print(`[ ${nowMap[0].join(" | ")} ]`);
     Console.print(`[ ${nowMap[1].join(" | ")} ]`);
+    return nowMap;
   },
 
   makeMap(bridge, nowStep, isSafe) {
@@ -31,12 +32,14 @@ const OutputView = {
     return [FAIL[bridge[nowStep][0]], FAIL[bridge[nowStep][1]]];
   },
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult() {},
+  printResult(nowMap, retryCnt, isSuccess) {
+    Console.print(`\n종 게임 결과`);
+    Console.print(`[ ${nowMap[0].join(" | ")} ]`);
+    Console.print(`[ ${nowMap[1].join(" | ")} ]`);
+    Console.print(`\n게임 성공 여부: ${RESULT[isSuccess]}`);
+    Console.print(`총 시도한 횟수: ${retryCnt}`);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;

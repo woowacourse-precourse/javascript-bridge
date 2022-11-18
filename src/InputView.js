@@ -1,15 +1,12 @@
 const BridgeSize = require("./error/BridgeSize");
 const MoveSpace = require("./error/moveSpace");
-const BridgeGame = require("./BridgeGame");
-const BridgeMaker = require("./BridgeMaker");
-
-const { Console } = require("@woowacourse/mission-utils");
-const { MANAGER } = require("./utils/constants");
 const Controller = require("./Controller");
 const GameCommand = require("./error/GameCommand");
 
+const { Console } = require("@woowacourse/mission-utils");
+const { MANAGER } = require("./utils/constants");
+
 const controller = new Controller();
-let bridge = [];
 
 const InputView = {
   readBridgeSize() {
@@ -27,18 +24,16 @@ const InputView = {
     Console.readLine(`\n${MANAGER.ASK_MOVE}\n`, (moving) => {
       new MoveSpace(moving);
       const isSafe = controller.giveMoving(nowStep, moving);
-      if (!isSafe) this.readGameCommand();
+      if (!isSafe) this.readGameCommand(size);
       else if (nowStep < size) this.readMoving(nowStep + 1, size);
     });
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {
+  readGameCommand(size) {
     Console.readLine(`\n${MANAGER.ASK_RETRY}\n`, (answer) => {
       new GameCommand(answer);
-      controller.giveAnswer(answer);
+      const result = controller.giveAnswer(answer);
+      if (result) this.readMoving(0, size);
     });
   },
 };

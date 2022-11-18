@@ -3,8 +3,11 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 
 class Controller {
+  #nowMap;
+
   constructor() {
     this.BridgeGame = new BridgeGame();
+    this.#nowMap = [];
   }
 
   giveSize(size) {
@@ -13,17 +16,22 @@ class Controller {
 
   giveMoving(nowStep, moving) {
     const [bridge, isSafe, isEnd] = this.BridgeGame.move(nowStep, moving);
-    OutputView.printMap(bridge, nowStep, isSafe);
-    if (isEnd) orderEnd();
+    this.#nowMap = OutputView.printMap(bridge, nowStep, isSafe);
+    if (isEnd) {
+      const retryCnt = this.BridgeGame.letEnd();
+      this.orderEnd(this.#nowMap, retryCnt, true);
+    }
     return isSafe;
   }
 
   giveAnswer(answer) {
-    this.BridgeGame.retry(answer);
+    const [order, retryCnt] = this.BridgeGame.retry(answer);
+    if (order) return true;
+    else this.orderEnd(retryCnt, false);
   }
 
-  orderEnd() {
-    OutputView.printResult();
+  orderEnd(retryCnt, isSuccess) {
+    OutputView.printResult(this.#nowMap, retryCnt, isSuccess);
   }
 }
 
