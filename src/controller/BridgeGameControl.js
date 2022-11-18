@@ -1,12 +1,12 @@
-const { ANSWER } = require('./utiles/Constant');
-const InputView = require('./view/InputView');
-const OutputView = require('./view/OutputView');
-const BridgeSize = require('./available-check/BridgeSize');
-const MovingCheck = require('./available-check/MovingCheck');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const BridgeGame = require('./BridgeGame');
-const AskRetry = require('./available-check/AskRetry');
+const { ANSWER } = require('../utiles/Constant');
+const InputView = require('../view/InputView');
+const OutputView = require('../view/OutputView');
+const BridgeSize = require('../models/BridgeSize');
+const MovingCheck = require('../models/MovingCheck');
+const BridgeMaker = require('../BridgeMaker');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const BridgeGame = require('../models/BridgeGame');
+const AskRetry = require('../models/AskRetry');
 
 class BridgeGameControl {
   size;

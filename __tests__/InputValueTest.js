@@ -1,6 +1,6 @@
-const BridgeSize = require('../src/available-check/BridgeSize');
-const MovingCheck = require('../src/available-check/MovingCheck');
-const AskRetry = require('../src/available-check/AskRetry');
+const BridgeSize = require('../src/models/BridgeSize');
+const MovingCheck = require('../src/models/MovingCheck');
+const AskRetry = require('../src/models/AskRetry');
 
 describe('다리 길이값 에러 테스트', () => {
   test('3~20 사이의 수가 아닌 경우', () => {
