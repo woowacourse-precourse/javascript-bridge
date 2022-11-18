@@ -25,9 +25,16 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(command) {
+  move = (command) => {
     // TODO: command확인
-  }
+    if (this.bridgeStore.isMovable(this.moveCount, command)) {
+      this.moveCount += 1;
+    }
+
+    if (!this.bridgeStore.isSameWithBridgeLength(this.moveCount)) {
+      InputView.readMoving(this.movingMessage, this.move);
+    }
+  };
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
@@ -42,9 +49,13 @@ class BridgeGame {
     this.bridgeStore = new BridgeStore(bridge);
   }
 
-  runGame(bridgeSize) {
+  runGame = (bridgeSize) => {
     this.createBridge(bridgeSize);
-  }
+
+    // while (!this.bridgeStore.isSameWithBridgeLength(this.moveCount)) {
+    InputView.readMoving(this.movingMessage, this.move);
+    // }
+  };
 
   init() {
     OutputView.print(this.welcomeMessage);
