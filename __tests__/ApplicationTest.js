@@ -80,8 +80,34 @@ describe("다리 건너기 테스트", () => {
     ]);
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
+});
 
-  test("예외 테스트", () => {
-    runException(["a"]);
+// 여러개 붙여서 하기
+describe("실패 케이스", () => {
+  test("기능 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "1", "1"]);
+    mockQuestions(["3", "D", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[   ]",
+      "[ X ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
   });
+});
+
+describe("예외 처리 케이스", () => {
+  test.each([["a"], ["2"], ["21"], ["-1"]])(
+    '사이즈 입력 예외 "%s"',
+    (input) => {
+      runException([input]);
+    }
+  );
 });
