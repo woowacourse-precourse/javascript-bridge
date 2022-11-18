@@ -1,6 +1,7 @@
 const Validation = {
 	BRIDGE_SIZE_ERROR_MSG: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
 	MOVING_ERROR_MSG: '[ERROR] 이동할 칸은 대문자 D 또는 대문자 U 입니다.',
+	CMD_ERROR_MSG: '[ERROR] 재시작 여부는 대문자 R 또는 대문자 Q 입니다.',
 
 	validateBridgeSize(bridgeSize) {
 		const isNumber = !Number.isNaN(bridgeSize);
@@ -16,6 +17,13 @@ const Validation = {
 		const isValid = moving === 'D' || moving === 'U';
 		if (!isValid) {
 			throw new Error(Validation.MOVING_ERROR_MSG);
+		}
+	},
+
+	validateCmd(cmd) {
+		const isValid = cmd === 'R' || cmd === 'Q';
+		if (!isValid) {
+			throw new Error(Validation.CMD_ERROR_MSG);
 		}
 	},
 };
