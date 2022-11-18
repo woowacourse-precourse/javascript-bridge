@@ -239,6 +239,16 @@ describe('다리 정보를 가져오는 메소드 테스트', () => {
 
     expect(bridgeGame.getBridge.name).toEqual(METHOD_NAME);
   });
+
+  test('["U", "D", "D"]을 할당하면 할당된 값을 갖고온다.', () => {
+    const bridgeGame = new BridgeGame();
+    const bridgeInfo = ['U', 'D', 'D'];
+    const RECEIVED = ['U', 'D', 'D'];
+
+    bridgeGame.setBridge(bridgeInfo);
+
+    expect(bridgeGame.getBridge()).toEqual(RECEIVED);
+  });
 });
 
 describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
