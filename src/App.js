@@ -63,6 +63,19 @@ class App {
   askRetry() {
     InputView.readGameCommand(this.checkRetry.bind(this));
   }
+
+  makeNewGame() {
+    this.bridgeGame.retry();
+    this.askMoving();
+  }
+
+  makeEndGame() {
+    const end = this.bridgeGame.quit();
+    OutputView.printResult();
+    OutputView.printMap(end.move);
+    OutputView.printSucessOrFail(end.isSuccess);
+    OutputView.printTryCount(end.gameCount);
+    Console.close();
   }
 }
 
