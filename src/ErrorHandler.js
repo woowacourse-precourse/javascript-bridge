@@ -1,10 +1,12 @@
+const OutputView = require("../src/console/OutputView")
+
 class ErrorHandler {
     static test(validTarget, callback , errorCallback){
         try {
             validTarget()
             callback()
         } catch(error) {
-            console.log(error.message)
+            OutputView.printLine(error.message)
             errorCallback()
         }
     }
