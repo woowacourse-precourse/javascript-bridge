@@ -1,9 +1,11 @@
 const InputView = require("./InputView.js")
 const Validate = require("./Validate.js")
 const BridgeGame = require("./BridgeGame.js")
+const OutputView = require("./OutputView.js")
 class App {
   constructor(){
     this.game = new BridgeGame()
+    this.try = 0
   }
   play() {
     InputView.readBridgeSize(this.makeBridge.bind(this))
@@ -25,7 +27,14 @@ class App {
    }
   }
   retryCommand(input){
-    
+    Validate.RetryInput(input)
+    if (input == "R"){
+      this.try += 1
+      InputView.readMoving(this.moveCommand.bind(this))     
+    }
+    else if(input == "Q"){
+      OutputView.printResult(this.try)
+    }
   }
 }
 const app = new App();
