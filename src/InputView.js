@@ -1,5 +1,4 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { generate } = require('./BridgeRandomNumberGenerator');
 const MESSAGE = {
   INPUT_LENGTH: '\n다리의 길이를 입력해주세요. \n',
   INPUT_DIRECTION: '\n이동할 칸을 선택해주세요. (위: U, 아래: D) \n',
@@ -25,9 +24,11 @@ const InputView = {
    */
   readMoving(callbackTwo, callbackThree) {
     MissionUtils.Console.readLine(MESSAGE.INPUT_DIRECTION, (input) => {
-      if (callbackTwo.call(this, input))
-        InputView.readMoving.call(this, callbackTwo, callbackThree);
-      else {
+      const [MOVE, NOT_END] = callbackTwo.call(this, input);
+      if (MOVE) {
+        if (NOT_END)
+          InputView.readMoving.call(this, callbackTwo, callbackThree);
+      } else {
         InputView.readGameCommand.call(this, callbackThree);
       }
     });
