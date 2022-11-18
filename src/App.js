@@ -1,10 +1,13 @@
 const BridgeGame = require("./BridgeGame");
+const BridgeMaker = require("./BridgeMaker");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const { generateRandomNumber } = require("./util/randomNumber");
 const { validateBrigeSize } = require("./util/validate");
 
 class App {
   bridgeGame = null;
+  bridgePath = null;
 
   play() {
     this.start();
@@ -15,13 +18,14 @@ class App {
 
     OutputView.printStart();
     InputView.readBridgeSize(this.cbAfterReadBridgeSize.bind(this));
-
-    return this;
   }
 
   cbAfterReadBridgeSize(sizeStr) {
-    validateBrigeSize(+sizeStr);
-    this.bridgeGame.setSize(+sizeStr);
+    const size = +sizeStr;
+
+    validateBrigeSize(size);
+    this.bridgeGame.setSize(size);
+    this.bridgePath = BridgeMaker.makeBridge(size, generateRandomNumber);
 
     this.proceedGame();
   }
@@ -32,7 +36,6 @@ class App {
 
   cbAfterReadMoving(choice) {
     validateMoving(choice);
-    console.log("choice", choice);
   }
 }
 
