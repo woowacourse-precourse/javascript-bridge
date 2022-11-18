@@ -1,4 +1,9 @@
 const BridgeMaker = {
+  BRIDGE_MAP: {
+    0: 'D',
+    1: 'U',
+  },
+
   /**
    * @param {number} size 다리의 길이
    * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
@@ -8,7 +13,7 @@ const BridgeMaker = {
     const bridge = [];
     for (let i = 0; i < size; i++) {
       const randomNumber = generateRandomNumber();
-      bridge.push('DU'[randomNumber]);
+      bridge.push(BridgeMaker.BRIDGE_MAP[randomNumber]);
     }
 
     return bridge;
