@@ -16,9 +16,16 @@ describe("InputView 테스트",()=>{
       new InputView.readBridgeSize([-1,-2,-4,-40,-20,-10])
     }).toThrow("[ERROR] The Negative number can't be accepted")
   })
+
   test("U,D가 아닐 때 에러가 발생한다.",()=>{
     expect(()=>{
       new InputView.readMoving([1,'a','ㅈ','-',-1,'+'])
     }).toThrow("[ERROR] Only U,D accepted")
+  })
+
+  test("R,Q가 아닐 때 에러가 발생한다.",()=>{
+    expect(()=>{
+      new InputView.readGameCommand([1,'a','ㅈ','-',-1,'+'])
+    }).toThrow("[ERROR] Only R,Q accepted")
   })
 })
