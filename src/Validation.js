@@ -26,7 +26,7 @@ const Validation = {
     if (userInput === "r" || userInput === "q") {
       throw new Error(ERROR.ERROR_RETRY_UPPERCASE);
     }
-    if (/^[R,Q]/.test(userInput) === false) {
+    if (/^[R|Q]/.test(userInput) === false) {
       throw new Error(ERROR.ERROR_RETRY_RANGE);
     }
     if (userInput.length !== 1) {
