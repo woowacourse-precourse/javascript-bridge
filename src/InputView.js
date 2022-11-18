@@ -27,7 +27,7 @@ const InputView = {
     Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D", (selectUpOrDown) => {
       isAnswerOrWrong.move(this.createBridge, selectUpOrDown);
       this.readMoving();
-      OutputView.printResult(`[${userBridgeCorrect[0].join('|')}]`,`[${userBridgeCorrect[1].join('|')}]`);
+      OutputView.printResult(`[ ${userBridgeCorrect[0].join(" | ")} ]`,`[ ${userBridgeCorrect[1].join(" | ")} ]`);
       this.readGameCommand();
     });
   },
