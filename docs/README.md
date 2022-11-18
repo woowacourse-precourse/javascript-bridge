@@ -22,9 +22,9 @@
 - [ ] retry: 사용자가 게임을 다시 시도할 때 사용하는 메서드
 
 ## BridgeMake
-- [ ] MakdeBridge(size, generateRandomNumber): 다리의 길이, 무작위 값을 생성하는 함수
+- [x] MakdeBridge(size, generateRandomNumber): 다리의 길이, 무작위 값을 생성하는 함수
   - [x] 윗칸이면 U, 아랫칸이면 D로 표시하여 반환한다.
-  - [ ] size는 0보다 커야한다.
+  - [x] size는 0보다 커야한다.
 
 ## InputView
 - [x] readBridgeSize: 다리의 길이를 입력받는다.
