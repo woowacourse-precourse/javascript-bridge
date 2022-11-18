@@ -30,16 +30,11 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
 
-  readGameCommand(stopCallBack, retryCallBack) {
+  readGameCommand(callBack) {
     Console.readLine(
       "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q) \n",
       (endKey) => {
-        if (endKey === "R") {
-          return retryCallBack();
-        }
-        if (endKey === "Q") {
-          return stopCallBack();
-        }
+        return callBack(endKey);
       }
     );
   }
