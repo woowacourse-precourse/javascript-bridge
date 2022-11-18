@@ -197,6 +197,14 @@ describe('다리 값을 세팅하는 메서드 테스트', () => {
 
     expect(bridgeGame.setBridge.name).toEqual(METHOD_NAME);
   });
+
+  test('["U", "D", "D"]을 할당하면 할당된 값이 들어있다.', () => {
+    const bridgeGame = new BridgeGame();
+    const EXPECTED = ['U', 'D', 'D'];
+    const RECEIVED = ['U', 'D', 'D'];
+
+    expect(bridgeGame.setBridge(EXPECTED)).toEqual(RECEIVED);
+  });
 });
 
 describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
