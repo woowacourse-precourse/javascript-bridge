@@ -72,7 +72,8 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT_USER_DECISION, (userDecision) => {
       userDecisionValidator(userDecision);
       if (userDecision == "R") {
-        InputView.retryGameSetter(bridgeGame);
+        bridgeGame.retry();
+        InputView.readMoving(bridgeGame);
         return;
       }
       InputView.goPrintResult(bridgeGame);
@@ -82,18 +83,6 @@ const InputView = {
   userSelectValueTreater(userSelectValue) {
     isUandD(userSelectValue);
     return userSelectValue;
-  },
-
-  retryGameSetter(bridgeGame) {
-    bridgeGame.tryCnt += 1;
-    // 일단 현재 진행상황 가져오는건 ㄱㅊ 근데 재시도할때 틀린부분 삭제하는게 좋을듯
-    InputView.cutLastTryMap(bridgeGame.bridgeMap);
-    InputView.readMoving(bridgeGame);
-  },
-
-  cutLastTryMap(bridgeMap) {
-    bridgeMap.up = bridgeMap.up.substring(0, bridgeMap.up.length - 4);
-    bridgeMap.down = bridgeMap.down.substring(0, bridgeMap.down.length - 4);
   },
 };
 
