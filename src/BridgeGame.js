@@ -13,6 +13,7 @@ class BridgeGame {
   #bridge;
   #player;
   #count;
+  #isSuccess;
 
   /**
    * @param {number} bridgeSize
@@ -22,6 +23,7 @@ class BridgeGame {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, generate);
     this.#player = new Player();
     this.#count = 1;
+    this.#isSuccess = false;
   }
 
   /**
@@ -32,12 +34,13 @@ class BridgeGame {
   move(moving) {
     const currentStep = this.#player.getStep();
 
-    const isCorrect = this.#bridge[currentStep] === moving;
+    const isCorrect = moving === this.#bridge[currentStep];
     const isLast = currentStep === this.#bridge.length - 1;
     const mark = isCorrect ? MARKING.CORRECT : MARKING.WRONG;
 
     this.#player.markOX(moving, mark);
     this.#player.setStep(currentStep + 1);
+    this.#isSuccess = isCorrect && isLast;
 
     return StatusGenerator.generate(isCorrect, isLast);
   }
@@ -50,8 +53,12 @@ class BridgeGame {
     this.#count += 1;
   }
 
-  getCount() {
-    return this.#count;
+  getResultInfo() {
+    const count = this.#count;
+    const markingPaper = this.getMarkingPaper();
+    const isSuccess = this.#isSuccess;
+
+    return { count, markingPaper, isSuccess };
   }
 
   getMarkingPaper() {
