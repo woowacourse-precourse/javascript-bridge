@@ -14,7 +14,7 @@ class BridgeProcess {
 
   start() {
     Console.print(this.#outputView.printStart());
-    this.#inputBridgeSize();
+    this.#inputGameCommand();
   }
 
   #inputBridgeSize() {
@@ -34,7 +34,7 @@ class BridgeProcess {
 
   #inputGameCommand() {
     Console.readLine(PRINTGAMECOMMAND, (command) => {
-      const isCommand = this.#inputView.readMoving(command);
+      const isCommand = this.#inputView.readGameCommand(command);
       isCommand ? '맞아' : this.#inputGameCommand();
     });
   }
