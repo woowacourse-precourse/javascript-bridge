@@ -15,7 +15,7 @@ const Validate = {
 
   validateRetryOfQuit(input) {
     if (input !== 'R' && input !== 'Q') {
-      throw new Error('[ERROR] 재시도는 R, 종료는 D인 문자로 입력해주세요.');
+      throw new Error('[ERROR] 재시도는 R, 종료는 Q인 문자로 입력해주세요.');
     }
     return true;
   },

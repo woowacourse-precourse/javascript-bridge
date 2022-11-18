@@ -5,11 +5,11 @@ const BridgeState = require('./BridgeState');
  */
 class BridgeGame {
   #bridge;
-  #userBridge;
+  #crossResult;
 
   constructor(bridge) {
     this.#bridge = bridge;
-    this.#userBridge = [];
+    this.#crossResult = [];
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -19,20 +19,20 @@ class BridgeGame {
   move(userBridge) {
     userBridge.forEach((position, i) => {
       if (position === this.#bridge[i] && position === 'U') {
-        return this.#userBridge.push(['O', ' ']);
+        return this.#crossResult.push(['O', ' ']);
       } else if (position === this.#bridge[i] && position === 'D') {
-        return this.#userBridge.push([' ', 'O']);
-      } else if (position === 'U') return this.#userBridge.push(['X', ' ']);
-      return this.#userBridge.push([' ', 'X']);
+        return this.#crossResult.push([' ', 'O']);
+      } else if (position === 'U') return this.#crossResult.push(['X', ' ']);
+      return this.#crossResult.push([' ', 'X']);
     });
-    return this.#userBridge;
+    return this.#crossResult;
   }
 
   draw() {
     let upBridge = '';
     let downBridge = '';
 
-    this.#userBridge.forEach((position) => {
+    this.#crossResult.forEach((position) => {
       upBridge = this.drawUpBridge(position, upBridge);
       downBridge = this.drawDownBridge(position, downBridge);
     });
@@ -40,18 +40,18 @@ class BridgeGame {
   }
 
   drawUpBridge(position, upBridge) {
-    if (position === this.#userBridge[0]) {
+    if (position === this.#crossResult[0]) {
       upBridge += position[0];
-    } else if (position !== this.#userBridge[0]) {
+    } else if (position !== this.#crossResult[0]) {
       upBridge += ` | ${position[0]}`;
     }
     return upBridge;
   }
 
   drawDownBridge(position, downBridge) {
-    if (position === this.#userBridge[0]) {
+    if (position === this.#crossResult[0]) {
       downBridge += position[1];
-    } else if (position !== this.#userBridge[0]) {
+    } else if (position !== this.#crossResult[0]) {
       downBridge += ` | ${position[1]}`;
     }
     return downBridge;

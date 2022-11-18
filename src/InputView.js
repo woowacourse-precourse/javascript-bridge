@@ -45,10 +45,10 @@ const InputView = {
     const moveBridge = bridgeGame.move(userBridge);
     const drawBridge = bridgeGame.draw(moveBridge);
     OutputView.printMap(drawBridge);
-    console.log(drawBridge[0]);
-    if (drawBridge[0].includes('X') || drawBridge[1].includes('X'))
+    if (drawBridge[0].includes('X') || drawBridge[1].includes('X')) {
       return InputView.readGameCommand(bridge, size);
-    if (bridge.length - 1 === 0) return console.log('done');
+    }
+    if (bridge.length === userBridge.length) return console.log('done');
     return InputView.readMoving(bridge, size);
   },
 
@@ -62,7 +62,7 @@ const InputView = {
         try {
           Validate.validateRetryOfQuit(input);
         } catch (error) {
-          OutputView.printErrorMessage(error) || InputView.readGameCommand();
+          OutputView.printErrorMessage(error) || InputView.readGameCommand(bridge, size);
         }
       }
     );
