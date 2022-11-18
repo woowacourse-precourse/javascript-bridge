@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView = require('./OutputView');
@@ -15,7 +16,7 @@ const InputView = {
       try {
         Validate.validateSizeRange(Number(size));
         const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
-        InputView.readMoving(bridge);
+        InputView.readMoving(bridge, size);
       } catch (error) {
         OutputView.printErrorMessage(error) || InputView.readBridgeSize();
       }
@@ -25,12 +26,13 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge) {
+  readMoving(bridge, size) {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (movePosition) => {
       try {
         Validate.validateMovePosition(movePosition);
+        const moveBridge = new BridgeGame(bridge).move(movePosition);
       } catch (error) {
-        OutputView.printErrorMessage(error) || InputView.readMoving(bridge);
+        OutputView.printErrorMessage(error) || InputView.readMoving(bridge, size);
       }
     });
   },
