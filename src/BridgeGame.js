@@ -1,36 +1,60 @@
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
-const OutputView = require("./OutputView");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { VALUE } = require("./constant");
 
 class BridgeGame {
-  #bridge;
+  #status;
   #order;
   #trialNumber;
+  #bridge;
   #bridgeResult;
+  #isSuccess;
 
-  constructor(size) {
-    this.#bridge = BridgeMaker.makeBridge(
-      size,
-      BridgeRandomNumberGenerator.generate
-    );
+  constructor() {
+    this.#status = "start";
     this.#order = 0;
     this.#trialNumber = 1;
+    this.#bridge = [];
     this.#bridgeResult = {
       upResult: [],
       downResult: [],
     };
+    this.#isSuccess = false;
   }
 
-  getTrialNumber() {
-    return this.#trialNumber;
+  getStatus() {
+    return this.#status;
   }
 
   getBridgeResult() {
     return this.#bridgeResult;
   }
 
+  getIsSuccess() {
+    return this.#isSuccess;
+  }
+
+  getTrialNumber() {
+    return this.#trialNumber;
+  }
+
+  setStatus(newStatus) {
+    this.#status = newStatus;
+  }
+
+  setIsSuccess(newIsSuccess) {
+    this.#isSuccess = newIsSuccess;
+  }
+
+  makeBridge(size) {
+    this.#bridge = BridgeMaker.makeBridge(
+      size,
+      BridgeRandomNumberGenerator.generate
+    );
+  }
+
   initGame() {
+    this.setStatus("move");
     this.#trialNumber++;
     this.#order = 0;
     this.#bridgeResult = {
@@ -48,6 +72,7 @@ class BridgeGame {
     if (this.#bridge[this.#order] !== input) {
       input == VALUE.UP ? (up = VALUE.SIGN_X) : (down = VALUE.SIGN_X);
       isEnd = true;
+      this.setIsSuccess(false);
     }
     return { up, down, isEnd };
   }
@@ -57,22 +82,23 @@ class BridgeGame {
     this.#bridgeResult.upResult.push(up);
     this.#bridgeResult.downResult.push(down);
 
-    OutputView.printMap(this.#bridgeResult.upResult);
-    OutputView.printMap(this.#bridgeResult.downResult);
+    if (isEnd) this.setStatus("retry");
 
-    const InputView = require("./InputView");
-    if (isEnd) this.retry(this);
-    if (this.#bridge.length - 1 == this.#order)
-      OutputView.printResult(this, true);
-    else {
-      this.#order++;
-      InputView.readMoving(this);
+    if (this.#bridge.length - 1 == this.#order) {
+      this.setIsSuccess(true);
+      this.setStatus("end");
     }
+    this.#order++;
   }
 
-  retry(nowGame) {
-    const InputView = require("./InputView");
-    InputView.readGameCommand(nowGame);
+  retry(input) {
+    if (input === "R") {
+      this.initGame();
+      this.setStatus("move");
+      return;
+    }
+
+    this.setStatus("end");
   }
 }
 
