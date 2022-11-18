@@ -103,6 +103,7 @@ class BridgeController {
     } catch (error) {
       Console.print(error);
       this.getUserRetry(bridge, passBridgeResult);
+
       return false;
     }
   }

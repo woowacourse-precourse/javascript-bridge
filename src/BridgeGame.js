@@ -60,12 +60,12 @@ class BridgeGame {
     return this.#tryCount;
   }
 
-  move(safeBridge, userMove) {
-    if (safeBridge[this.#indexCount] !== userMove) {
+  move(bridge, userMove) {
+    if (bridge[this.#indexCount] !== userMove) {
       this.fail(userMove);
       return false;
     }
-    if (safeBridge[this.#indexCount] === userMove) {
+    if (bridge[this.#indexCount] === userMove) {
       this.pass(userMove);
       this.indexCountUp();
       return true;

@@ -9,6 +9,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     let count = 1;
+    let bridge = [];
     while (size >= count) {
       const number = String(generateRandomNumber());
       if (number === "1") {

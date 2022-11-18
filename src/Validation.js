@@ -1,9 +1,9 @@
 const Validation = {
   checkBridgeLength(userInput) {
     if (userInput < 3 || userInput > 20) {
-      throw new Error(`[ERROR] 다리길이는 3이상 20이하 까지 가능합니다.`);
+      throw new Error(`[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.`);
     }
-    if (/^[0-9]*$/g.test(String(userInput)) === false) {
+    if (/[0-9]/g.test(userInput) === false) {
       throw new Error(`[ERROR] 숫자만 입력이 가능합니다.`);
     }
   },
