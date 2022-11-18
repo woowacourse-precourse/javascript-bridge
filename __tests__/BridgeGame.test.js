@@ -232,6 +232,15 @@ describe('다리 값을 세팅하는 메서드 테스트', () => {
   });
 });
 
+describe('다리 정보를 가져오는 메소드 테스트', () => {
+  test('메소드 이름은 "getBridge"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'getBridge';
+
+    expect(bridgeGame.getBridge.name).toEqual(METHOD_NAME);
+  });
+});
+
 describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
   const bridgeGame = new BridgeGame();
   const bridge = ['D', 'U', 'U'];
