@@ -11,9 +11,15 @@ const BridgeGameStatus = require('./BridgeGameStatus');
 class BridgeGame {
   #bridge;
 
-  #map = new BridgeMap();
+  #map;
 
-  #status = new BridgeGameStatus();
+  #status;
+
+  start() {
+    this.#map = new BridgeMap();
+    this.#status = new BridgeGameStatus();
+    this.#status.increaseTryCount();
+  }
 
   setBridge(size) {
     BridgeGame.#validateSize(size);

@@ -7,9 +7,11 @@ const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
 class BridgeGameController {
-  #game = new BridgeGame();
+  #game;
 
   play() {
+    this.#game = new BridgeGame();
+    this.#game.start();
     InputView.readBridgeSize(this.#onBridgeSizeSubmit.bind(this));
   }
 
