@@ -94,3 +94,11 @@ describe('3 ~ 20 범위 체크 함수 테스트', () => {
     }).toThrow(NUMBER_ERROR_TEXT);
   });
 });
+
+describe('배열 복사 함수 테스트', () => {
+  test('메소드 이름은 "copyArray"로 정의된다.', () => {
+    const METHOD_NAME = 'copyArray';
+
+    expect(Application.copyArray.name).toEqual(METHOD_NAME);
+  });
+});
