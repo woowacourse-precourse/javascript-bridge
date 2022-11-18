@@ -51,11 +51,15 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(userInputMessage.ENTER_RESTART, (restartOrEnd) => {
-      Console.print(restartOrEnd);
+      this.validateGameCommand(restartOrEnd);
     });
+  },
+
+  validateGameCommand(restartOrEnd) {
+    if (restartOrEnd !== 'R' && restartOrEnd !== 'Q') throw new Error(errorMessage.RESTART);
   },
 };
 
-InputView.readMoving();
+InputView.readGameCommand();
 
 module.exports = InputView;
