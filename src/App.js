@@ -9,7 +9,12 @@ class App {
 
   play() {
     OutputView.printGameStart();
-    InputView.readBridgeSize.call(this, this.makeBridge, this.inputMove, this.inputRetry);
+    InputView.readBridgeSize.call(
+      this,
+      this.makeBridge,
+      this.inputMove,
+      this.inputRetry
+    );
   }
 
   makeBridge(input) {
@@ -24,21 +29,35 @@ class App {
     const result = this.bridgeGame.result;
     OutputView.printMap(result);
 
+    if (isWin) {
+      this.finishGame(true);
+    }
+
     return [isEnd, isWin];
   }
 
   inputRetry(input) {
     if (input === 'R') {
       this.bridgeGame.retry();
-      InputView.readMoving.call(this, this.inputMove, this.inputRetry)
-    }
-    else {
-      this.finishGame()
+      InputView.readMoving.call(this, this.inputMove, this.inputRetry);
+    } else {
+      this.finishGame(false);
+      InputView.gameEnd();
     }
   }
 
-  finishGame() {
-    InputView.gameEnd();
+  finishGame(status) {
+    const result = this.bridgeGame.result;
+    const gameStatus = this.isWin(status);
+    const totalGame = this.bridgeGame.totalGame;
+    OutputView.printResult(result, gameStatus, totalGame);
+  }
+
+  isWin(status) {
+    if (status === true) {
+      return '성공';
+    }
+    return '실패';
   }
 }
 

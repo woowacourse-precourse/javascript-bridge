@@ -7,7 +7,6 @@ class Bridge {
   constructor(input) {
     this.validation(input);
     this.#bridge = this.makeRandomBridge(input);
-    console.log(this.#bridge);
   }
 
   checkMove(letter, index) {
