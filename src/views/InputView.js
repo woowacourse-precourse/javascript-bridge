@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { REQUEST_MSG } = require('./constants/message.js');
+const { REQUEST_MSG } = require('../constants/message.js');
 const { printMsg } = require('./OutputView.js');
-const BridgeGame = require('./BridgeGame.js');
+const BridgeGame = require('../BridgeGame.js');
 
 const bridgeGame = new BridgeGame();
 

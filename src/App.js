@@ -1,5 +1,5 @@
-const { printMsg } = require('./OutputView.js');
-const { requestBridgeSize } = require('./InputView.js');
+const { printMsg } = require('./views/OutputView.js');
+const { requestBridgeSize } = require('./views/InputView.js');
 const { GAME_MSG } = require('./constants/message.js');
 
 class App {
