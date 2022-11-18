@@ -13,8 +13,9 @@ const CONSTANT = {
     SIZE_WORD: '[ERROR] 숫자 이외의 문자를 입력하면 안됩니다.',
     SIZE_RANGE: '[ERROR] 3~20 사이의 수를 입력해야 합니다.',
     UPDOWN_WORD: '[ERROR] U 또는 D만 입력 가능합니다.',
+    UPDOWN_LENGTH: '[ERROR] U 또는 D 한 글자만 입력해야 합니다.',
     RETRY_WORD: '[ERROR] Q 또는 R만 입력 가능합니다.',
-    RETRY_LENGTH: '[ERROR] 한 글자만 입력해야 합니다.'
+    RETRY_LENGTH: '[ERROR] Q 또는 R 한 글자만 입력해야 합니다.'
   },
 };
 

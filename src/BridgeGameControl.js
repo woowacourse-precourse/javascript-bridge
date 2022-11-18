@@ -63,7 +63,6 @@ class BridgeGameControl {
   notAnswerMoving() {
     OutputView.printMap(this.userMove, 'X');
     this.success = '실패'
-    //재시도 묻기
     this.askRetry();
   };
 
@@ -82,20 +81,14 @@ class BridgeGameControl {
   };
 
   retryCommand(command) {
-    // R일때 재시도
     if (command) {
       this.userMove = [];
       this.tryCount += 1;
-      // Console.print(this.userMove);
-      // Console.print(this.tryCount);
       return this.userMoving();
     };
-
-    // Q일때 종료
     OutputView.printResult(this.userMove, this.success);
     OutputView.printTryResult(this.tryCount, this.success);
   };
-
 };
 
 module.exports = BridgeGameControl;
