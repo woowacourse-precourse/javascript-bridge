@@ -15,6 +15,8 @@ const InputView = {
 
       Console.print('');
       const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+
+      this.readMoving(bridge);
     });
   },
 
@@ -25,7 +27,9 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(bridge) {
+    Console.readLine(Messages.INPUT_UP_OR_DOWN, (upOrDown) => {});
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
