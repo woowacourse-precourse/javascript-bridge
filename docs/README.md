@@ -1,7 +1,7 @@
 # 다리 건너기
 
 ## 기능 목록
-- [ ] 입력 받은 다리 길이로 다리를 생성한다. - BridgeMaker#makeBridge()
+- [x] 입력 받은 다리 길이로 다리를 생성한다. - BridgeMaker#makeBridge()
 
 ## 예외 처리
 
