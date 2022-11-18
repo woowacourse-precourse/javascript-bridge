@@ -68,6 +68,10 @@ class BridgeGame {
       this.#gameStatus.isFinished = true;
     }
   }
+
+  getGameStatus() {
+    return this.#gameStatus;
+  }
 }
 
 module.exports = BridgeGame;
