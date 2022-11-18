@@ -1,8 +1,8 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
+const { isNumberInRange } = require('./lib/Utils');
 const { ERROR, REQUEST } = require('./constants/Message');
 const { LENGTH_MIN, LENGTH_MAX } = require('./constants/Range');
-const { isNumberInRange } = require('./lib/Utils');
 
 const InputView = {
   readBridgeSize() {
@@ -18,10 +18,23 @@ const InputView = {
       InputView.validateMoving(input);
       const isContinued = game.move(input);
       if (isContinued) InputView.readMoving(game);
+
+      if (game.isFailed()) {
+        InputView.readGameCommand(game);
+        return;
+      }
     });
   },
 
-  readGameCommand() {},
+  readGameCommand(game) {
+    Console.readLine(REQUEST.GAME_RESTART, (input) => {
+      InputView.validateGameCommand(input);
+      if (input === 'R') {
+        game.retry();
+        InputView.readMoving(game);
+      }
+    });
+  },
 
   validateLength(input) {
     if (!isNumberInRange(input, LENGTH_MIN, LENGTH_MAX)) {
