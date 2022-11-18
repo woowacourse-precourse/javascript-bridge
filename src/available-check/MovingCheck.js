@@ -19,7 +19,7 @@ class MovingCheck {
   };
 
   checkWord(move) {
-    if (move.match(/[UD]/g) === null) {
+    if (!move.match(/[UD]/g)) {
       throw (ERROR.UPDOWN_WORD);
     };
   };

@@ -19,7 +19,7 @@ class AskRetry {
   };
 
   checkWord(command) {
-    if (command.match(/[RQ]/g) === null) {
+    if (!command.match(/[RQ]/g)) {
       throw (ERROR.RETRY_WORD);
     };
   };
