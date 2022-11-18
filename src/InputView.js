@@ -7,7 +7,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(generateBridge) {
-    readLine("다리의 길이를 입력해주세요.", bridgeSize => {
+    readLine("다리의 길이를 입력해주세요.\n", bridgeSize => {
       generateBridge(bridgeSize);
     });
   },
@@ -15,8 +15,10 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)", beMovedDirection => {});
+  readMoving(callBack) {
+    readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", beMovedDirection => {
+      beMovedDirection === "U" ? callBack(1) : callBack(0);
+    });
   },
 
   /**
