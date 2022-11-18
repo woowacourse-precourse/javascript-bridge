@@ -40,8 +40,14 @@ const OutputView = {
       });
     }
     if (array[0][array[0].length - 1] === "X") {
-      this.isSucces = "실패";
-      this.printResult();
+      MissionUtils.Console.readLine(MESSAGE.INPUT_RETRY_OR_QUIT, (answer) => {
+        if (answer === "R") {
+        }
+        if (answer === "Q") {
+          this.isSucces = "실패";
+          this.printResult();
+        }
+      });
     }
     if (array[1][array[1].length - 1] === "O") {
       this.count += 1;
@@ -56,8 +62,14 @@ const OutputView = {
       });
     }
     if (array[1][array[1].length - 1] === "X") {
-      this.isSucces = "실패";
-      this.printResult();
+      MissionUtils.Console.readLine(MESSAGE.INPUT_RETRY_OR_QUIT, (answer) => {
+        if (answer === "R") {
+        }
+        if (answer === "Q") {
+          this.isSucces = "실패";
+          this.printResult();
+        }
+      });
     }
   },
 
