@@ -12,39 +12,41 @@ const OutputView = require("./OutputView");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 class BridgeGame {
+  #tryCount;
+  #termination;
   #bridgeSize;
-  #bridgeStyle;
+  #bridge;
 
-  constructor() {
-    this.setBridge();
+  constructor() { // constructor -> init으로 메소드 실행 옮겨주기 
+    this.#tryCount = 0;
   }
-
-  setBridge() {
+  
+  init() {
     this.#bridgeSize = InputView.readBridgeSize();
-    this.#bridgeStyle = BridgeMaker.makeBridge(
+    this.#bridge = BridgeMaker.makeBridge(
       this.#bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
+    this.#termination = this.#bridgeSize === undefined ? true : false;
   }
 
   gameStart() {
     let userMoving = []; // TODO: 어떤걸 move로 쓰고 어떤 걸 moving으로 쓸지 정해야 함
-    let termination = false;
-    let tryCount = 0;
 
-    while (!termination) {
+    while (!this.#termination) {
       userMoving = [];
-      tryCount++;
-      termination = this.playGame(userMoving);
-      if (!termination) {
+      this.#termination = this.playGame(userMoving);
+      if (!this.#termination) {
         termination = !this.retry();
       }
     }
 
-    OutputView.printResult(this.#bridgeStyle, userMoving, tryCount);
+    OutputView.printResult(this.#bridge, userMoving, this.#tryCount);
   }
 
   playGame(userMoving) { 
+    this.#tryCount++;
+
     for (let round = 0; round < this.#bridgeSize; round++) {
       const isCorrectMoving = this.move(userMoving, round);
       if (!isCorrectMoving) {
@@ -63,7 +65,7 @@ class BridgeGame {
     const moving = InputView.readMoving();
     const isCorrectMoving = this.checkMoving(userMoving);
     userMoving.push(moving);
-    OutputView.printMap(this.#bridgeStyle, userMoving);
+    OutputView.printMap(this.#bridge, userMoving);
 
     return isCorrectMoving;
   }
@@ -71,7 +73,7 @@ class BridgeGame {
   checkMoving(userMoving) {
     const currRound = userMoving.length - 1;
     
-    if (this.#bridgeStyle[currRound] !== userMoving[currRound]) {
+    if (this.#bridge[currRound] !== userMoving[currRound]) {
       return false;
     }
 
