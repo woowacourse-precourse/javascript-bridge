@@ -11,17 +11,15 @@ const BridgeMaker = {
     const [bridgeTop, bridgeBottom] = [[], []];
     for (let i = 0; i < size; i++) {
       const number = generateRandomNumber();
-      if (number) {
+      if (number === 1) {
         bridgeTop.push("U");
         bridgeBottom.push("X");
       }
-      if (!number) {
+      if (number === 0) {
         bridgeTop.push("X");
         bridgeBottom.push("D");
       }
     }
-    console.log(bridgeTop);
-    console.log(bridgeBottom);
     return [bridgeTop, bridgeBottom];
   },
 
