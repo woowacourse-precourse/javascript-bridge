@@ -1,5 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
-
 const Validator = {
   sizeValidityCheck: (size) => {
     const regex = /^\d+$/;

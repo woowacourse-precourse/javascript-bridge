@@ -1,102 +1,87 @@
+const BridgeGame = require('./BridgeGame');
+const { MESSAGE } = require('./constant');
 const GameController = require('./controller/GameController');
 const InputView = require('./views/InputView');
 
 class App {
-  #gameCtrl;
+  #bridgeGame;
 
   constructor() {
     this.#gameCtrl = new GameController();
+    this.#bridgeGame = new BridgeGame();
   }
 
   play() {
-    this.process();
+    this.gameStart();
   }
 
-  process() {
-    this.#gameCtrl.gameStart();
+  gameStart() {
+    this.#bridgeGame.printMessage(MESSAGE.START_NOTIFICATION);
     this.askBridgeSize();
   }
 
   askBridgeSize() {
-    const sizeCallback = (size) => {
+    InputView.readBridgeSize((size) => {
       try {
-        this.#gameCtrl.handleSize(size);
-        this.askDirection();
+        this.handleSize(size);
       } catch (errorMessage) {
-        this.sizeErrorHandler(errorMessage);
+        this.#bridgeGame.printMessage(errorMessage);
+        this.askBridgeSize();
       }
-    };
-    InputView.readBridgeSize(sizeCallback);
+    });
   }
 
   askDirection() {
-    const directionCallback = (direction) => {
+    InputView.readMoving((direction) => {
       try {
-        this.#gameCtrl.handleDirection(direction);
-        const successful = this.#gameCtrl.move(direction);
-        this.#gameCtrl.printCurMap();
-        if (successful) {
-          this.#gameCtrl.isAllCrossed()
-            ? this.#gameCtrl.printGameResult()
-            : this.askDirection();
-        } else {
-          this.askRetry();
-        }
+        this.handleDirection(direction);
       } catch (errorMessage) {
-        this.directionErrorHandler(errorMessage);
+        this.#bridgeGame.printMessage(errorMessage);
+        this.askDirection();
       }
-    };
-    InputView.readMoving(directionCallback);
+    });
   }
 
   askRetry() {
-    const commandCallback = (command) => {
+    InputView.readGameCommand((command) => {
       try {
-        const shouldRetry = this.#gameCtrl.handleCommand(command);
-        if (shouldRetry) {
-          this.#gameCtrl.retry();
-          this.askDirection();
-        } else {
-          this.#gameCtrl.gameOver();
-        }
+        this.handleCommand(command);
       } catch (errorMessage) {
-        this.retryErrorHandler(errorMessage);
+        this.#bridgeGame.printMessage(errorMessage);
+        this.askRetry();
       }
-    };
-    InputView.readGameCommand(commandCallback);
+    });
   }
 
-  sizeErrorHandler(errorMessage) {
-    this.#gameCtrl.printMessage(errorMessage);
-    this.askBridgeSize();
-  }
-
-  directionErrorHandler(errorMessage) {
-    this.#gameCtrl.printMessage(errorMessage);
+  handleSize(size) {
+    this.#bridgeGame.makeBridge(size);
     this.askDirection();
   }
 
-  retryErrorHandler(errorMessage) {
-    this.#gameCtrl.printMessage(errorMessage);
-    this.askRetry();
+  handleDirection(direction) {
+    this.#bridgeGame.handleDirection(direction);
+    const successful = this.#bridgeGame.move(direction);
+    this.#bridgeGame.printCurMap();
+
+    successful ? this.doseUserClear() : this.askRetry();
   }
 
-  // tryMakeBridge(size) {
-  //   this.#bridgeGame.makeBridge(size);
-  //   this.askDirection();
-  // }
+  doseUserClear() {
+    this.#bridgeGame.checkGameComplete()
+      ? this.#bridgeGame.printGameResult()
+      : this.askDirection();
+  }
 
-  // tryMovePlayer(direction) {
-  //   this.#bridgeGame.handleDirection(direction);
-  //   const isRightChoice = this.#bridgeGame.move(direction);
-  //   this.#bridgeGame.printCurMap();
-  //   isRightChoice ? this.isAllCrossed() : this.askRetry();
-  // }
-
-  // tryRetry(command) {
-  //   const shouldRetry = this.#bridgeGame.retry(command);
-  //   shouldRetry ? this.retry() : this.gameOver();
-  // }
+  handleCommand(command) {
+    const shouldRetry = this.#bridgeGame.retry(command);
+    if (shouldRetry) {
+      this.#bridgeGame.increaseNumberOfAttempts();
+      this.#bridgeGame.initPlayData();
+      this.askDirection();
+    } else {
+      this.#bridgeGame.printGameResult();
+    }
+  }
 }
 
 const app = new App();
