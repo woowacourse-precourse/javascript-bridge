@@ -1,13 +1,16 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
- const { BRIDGE_MOVEMENT } = require("./constants");
+const { BRIDGE_MOVEMENT } = require("./constants");
 
 class BridgeGame {
   #bridge;
 
   #bridgeAttempt;
 
+  #gameSuccess;
+
+  #gameCount;
 
   #upSide = [];
 
@@ -15,6 +18,7 @@ class BridgeGame {
 
   constructor() {
     this.#bridgeAttempt = 0;
+    this.#gameCount = 1;
     this.isSuccess = false;
   }
 
@@ -44,6 +48,8 @@ class BridgeGame {
     return [this.#gameSuccess, this.#upSide, this.#downSide];
   }
 
+  isEnd() {
+    return this.#bridge.length == this.#bridgeAttempt;
   }
 
   /**
@@ -56,6 +62,13 @@ class BridgeGame {
     this.#upSide = [];
     this.#downSide = [];
     this.#gameCount += 1;
+  }
+
+  quit() {
+    const isSuccess = this.#bridge.length == this.#bridgeAttempt;
+    const gameCount = this.#gameCount
+    const move = [this.#gameSuccess, this.#upSide, this.#downSide];
+    return { move, isSuccess, gameCount };
   }
 }
 
