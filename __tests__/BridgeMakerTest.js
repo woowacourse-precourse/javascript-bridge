@@ -22,4 +22,20 @@ describe("다리 생성 테스트", () => {
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
     expect(bridge).toEqual(["D", "U", "D"]);
   });
+
+  test("다리의 길이가 20 보다 클때 에러 처리 테스트", () => {
+    const mockGenerator = () => 0;
+
+    expect(() => {
+      BridgeMaker.makeBridge(21, mockGenerator);
+    }).toThrow("[ERROR] 다리의 길이는 3~20 사이의 숫자여야 합니다.");
+  });
+
+  test("다리의 길이가 3보다 작을때 에러 처리 테스트", () => {
+    const mockGenerator = () => 0;
+
+    expect(() => {
+      BridgeMaker.makeBridge(1, mockGenerator);
+    }).toThrow("[ERROR] 다리의 길이는 3~20 사이의 숫자여야 합니다.");
+  });
 });
