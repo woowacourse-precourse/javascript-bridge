@@ -34,7 +34,7 @@ class App {
     InputView.readMoving((direction) => {
       if (this.#bridgeGame.isMove(direction)) {
         this.#bridgeGame.move();
-        this.renderSuccessBridge();
+        this.renderBridge('성공');
         this.checkCompletion();
         return;
       }
@@ -42,22 +42,16 @@ class App {
     });
   }
 
-  renderSuccessBridge() {
-    const { upstairBridge, downstairBridge } = this.#bridgeGame.getConvertedBridge();
-    OutputView.printMap(upstairBridge, downstairBridge);
-  }
-
-  renderFailureBridge() {
-    const { upstairBridge, downstairBridge } = this.#bridgeGame.getFailureBridge(
-      this.#bridgeGame.getConvertedBridge(),
-    );
-    OutputView.printMap(upstairBridge, downstairBridge);
+  renderBridge(result) {
+    let convertedBridge = this.#bridgeGame.getConvertedBridge();
+    if (result === '실패') {
+      convertedBridge = this.#bridgeGame.getFailureBridge(convertedBridge);
+    }
+    OutputView.printMap(convertedBridge);
   }
 
   checkCompletion() {
     if (this.#bridgeGame.isCompletion()) {
-      Console.print('\n최종 게임 결과');
-      this.renderSuccessBridge();
       this.resultGame('성공');
       return;
     }
@@ -65,19 +59,19 @@ class App {
   }
 
   failGame() {
-    this.renderFailureBridge();
+    this.renderBridge('실패');
     InputView.readGameCommand((command) => {
       if (command === 'R') {
         this.replay();
       } else if (command === 'Q') {
-        Console.print('최종 게임 결과');
-        this.renderFailureBridge();
         this.resultGame('실패');
       }
     });
   }
 
   resultGame(result) {
+    Console.print('최종 게임 결과');
+    this.renderBridge(result);
     OutputView.printResult(result, this.#attempts);
     this.end();
   }
