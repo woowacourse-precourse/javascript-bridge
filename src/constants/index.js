@@ -10,6 +10,12 @@ const NUMBER = Object.freeze({
   one: 1,
 });
 
+const GAME_STRING = Object({
+  success: 'O',
+  normal: ' ',
+  fail: 'X',
+});
+
 const SHORT_CUT = Object.freeze({
   up: 'U',
   down: 'D',
@@ -58,6 +64,7 @@ const GAME_RESULT = Object.freeze({
 });
 
 module.exports = {
+  GAME_STRING,
   ERROR_BRIDGE_MESSAGE,
   ERROR_PLAYING_MESSAGE,
   ERROR_RETRY_MESSAGE,

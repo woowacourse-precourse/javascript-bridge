@@ -26,6 +26,7 @@ const InputView = {
         const bridgeSize = Number(userInput);
         this.bridgeValidation(bridgeSize);
         const bridge = makeBridge(bridgeSize, generate);
+        console.log(bridge);
         this.readMoving(bridge, NUMBER.zero, NUMBER.one);
       } catch (error) {
         Console.print(error.message);
@@ -67,7 +68,7 @@ const InputView = {
         const bridgeGame = new BridgeGame(bridge, steps, numberAttempts);
         bridgeGame.move(userInput);
         const curSteps = bridgeGame.getSteps();
-        const { upBridge, downBridge } = bridgeGame.getStepResult();
+        const { upBridge, downBridge } = bridgeGame.getMoveResult();
         const upBridgeString = getBridgeString(upBridge);
         const downBridgeString = getBridgeString(downBridge);
         printMap(upBridgeString, downBridgeString);

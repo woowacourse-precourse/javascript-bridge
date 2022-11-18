@@ -1,13 +1,18 @@
-const { NUMBER } = require('./constants');
+/* eslint-disable operator-linebreak */
+const { SHORT_CUT, GAME_STRING } = require('./constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
+
   #steps;
+
   #numberAttempts;
+
   #answer;
+
   #isAnswer;
 
   constructor(bridge, steps, numberAttempts) {
@@ -33,30 +38,54 @@ class BridgeGame {
     return this.#steps;
   }
 
-  getStepResult() {
-    const curBridge = this.#bridge.slice(0, this.#steps);
-    const upBridge = this.createBridgeStringArray(curBridge, 'U');
-    const downBridge = this.createBridgeStringArray(curBridge, 'D');
-    if (!this.#isAnswer && this.#answer === 'U') {
-      upBridge.push('X');
-      downBridge.push(' ');
-    }
-    if (!this.#isAnswer && this.#answer === 'D') {
-      upBridge.push(' ');
-      downBridge.push('X');
+  getMoveResult() {
+    const { upBridge, downBridge } = this.createBridgeStringArray();
+    return { upBridge, downBridge };
+  }
+
+  createBridgeStringArray() {
+    const upBridge = this.createSucceseArray(SHORT_CUT.up);
+    const downBridge = this.createSucceseArray(SHORT_CUT.down);
+    if (!this.#isAnswer) {
+      const fail = this.createFailArray(upBridge, downBridge);
+      return { upBridge: fail.upBridge, downBridge: fail.downBridge };
     }
     return { upBridge, downBridge };
   }
 
-  createBridgeStringArray(curBridge, kind) {
+  createSucceseArray(kind) {
+    const curBridge = this.#bridge.slice(0, this.#steps);
     const bridgeString = curBridge.map((item) => {
-      if (item === kind) return 'O';
-      return ' ';
+      if (item === kind) return GAME_STRING.success;
+      return GAME_STRING.normal;
     });
     return bridgeString;
   }
 
-  createBridgeString;
+  createFailArray(upBridge, downBridge) {
+    if (this.#answer === SHORT_CUT.up) {
+      const { upBridge: failUpBridge, downBridge: failDownBridge } =
+        BridgeGame.createUpBridgeFailArray(upBridge, downBridge);
+      return { upBridge: failUpBridge, downBridge: failDownBridge };
+    }
+    const { upBridge: failUpBridge, downBridge: failDownBridge } =
+      BridgeGame.createDownBridgeFailArray(upBridge, downBridge);
+    return { upBridge: failUpBridge, downBridge: failDownBridge };
+  }
+
+  static createUpBridgeFailArray(upBridge, downBridge) {
+    return {
+      upBridge: [...upBridge, GAME_STRING.fail],
+      downBridge: [...downBridge, GAME_STRING.normal],
+    };
+  }
+
+  static createDownBridgeFailArray(upBridge, downBridge) {
+    return {
+      upBridge: [...upBridge, GAME_STRING.normal],
+      downBridge: [...downBridge, GAME_STRING.fail],
+    };
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
