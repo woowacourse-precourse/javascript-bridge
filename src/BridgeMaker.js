@@ -3,6 +3,7 @@
  */
 // 프로퍼티를 추가할 수 없다.
 // 파일의 경로 변경 불가
+
 // 메서드의 시그니처(인자,이름)와 반환 타입은 변경 불가
 const BridgeMaker = {
   /**
@@ -14,8 +15,8 @@ const BridgeMaker = {
     const BRIDGE_ARRAY = [];
     let whileCount = 0;
     while (whileCount < size) {
-      const number = generateRandomNumber();
-      const COMMAND = String(number) === "1" ? "U" : "D";
+      const RANDOM_NUMBER = generateRandomNumber();
+      const COMMAND = String(RANDOM_NUMBER) === "1" ? "U" : "D";
       BRIDGE_ARRAY.push(COMMAND);
       whileCount++;
     }
