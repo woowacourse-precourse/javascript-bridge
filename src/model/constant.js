@@ -14,4 +14,10 @@ const MOVEMENT_ERROR = {
   CORRECT: '[ERROR] 아래로 건너는 경우는 U, 위로 건너는 경우는 D로 입력해주세요.',
 };
 
-module.exports = { BRIDGESIZE_ERROR, BRIDGESIZE_INFO, MOVEMENT_ERROR };
+const COMMAND_ERROR = {
+  ALPHABET: '[ERROR] 진행 여부는 영어여야 합니다.',
+  UPPERCASE: '[ERROR] 진행 여부는 대문자여야 합니다.',
+  CORRECT: '[ERROR] 재시도는 R, 종료는 Q로 입력해주세요.',
+};
+
+module.exports = { BRIDGESIZE_ERROR, BRIDGESIZE_INFO, MOVEMENT_ERROR, COMMAND_ERROR };
