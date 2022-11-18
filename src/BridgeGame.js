@@ -25,25 +25,22 @@ class BridgeGame {
     return bridgeMaterialize(this.#myBridge);
   }
 
-  async move(readMoving) {
-    const input = await readMoving();
+  move(input) {
     if (this.#myBridge[this.#nowState] === input) {
       this.#nowState += 1;
       return true;
     }
-
     return false;
   }
 
-  async retry(readGameCommand) {
+  retry(input) {
     this.#trycount += 1;
-    const result = await readGameCommand();
     // 결과 이용해 값 유효 여부 확인 후 로직 전개
-    if (result === 'R') {
+    if (input === 'R') {
       this.#nowState = 0;
       return true;
     }
-    if (result === 'Q') return false;
+    if (input === 'Q') return false;
   }
 
   printMyBridge(printMap) {
