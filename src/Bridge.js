@@ -15,6 +15,7 @@ class Bridge {
   }
 
   createPattern (moveGame) {
+    OutputView.printStart();
     InputView.readBridgeSize(moveGame, this.setPattern.bind(this), BridgeMaker.makeBridge);
   }
 
