@@ -1,5 +1,12 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { BRIDGE_UP, BRIDGE_DOWN, MARKING_EMPTY, MESSAGE_GAME_START } = require("./Utils");
+const {
+  BRIDGE_UP,
+  BRIDGE_DOWN,
+  MARKING_EMPTY,
+  MESSAGE_GAME_START,
+  MESSAGE_GAME_END,
+  MESSAGE_PLAY_COUNT,
+} = require("./Utils");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -56,7 +63,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(gameResult, playCount) {
+    Console.print(
+      `${MESSAGE_GAME_END}: ${gameResult}\n${MESSAGE_PLAY_COUNT}: ${playCount}`
+    );
+  },
 
   /**
    * 게임 시작 안내 문구를 출력한다.
