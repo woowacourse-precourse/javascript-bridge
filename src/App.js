@@ -1,8 +1,8 @@
-const BridgeView = require('./view/bridge');
+const BridgeView = require('./view/BridgeView');
 const BridgeModel = require('./model/BridgeModel');
 const BridgeCtrl = require('./controller/bridge');
-const ConsoleInputView = require('./view/network/ConsoleInputView');
-const ConsoleOutputView = require('./view/network/ConsoleOutputView');
+const ConsoleInputView = require('./view/console/ConsoleInputView');
+const ConsoleOutputView = require('./view/console/ConsoleOutputView');
 
 const App = class {
   constructor() {
