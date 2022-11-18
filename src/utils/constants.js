@@ -8,7 +8,14 @@ const ERROR_MESSAGE = Object.freeze({
   upDownKey: '[ERROR] U 또는 D 문자만 입력 가능합니다.'
 });
 
+const MODEL_KEY = Object.freeze({
+  randomBridge: 'RANDOM_BRIDGE_MODEL_KEY',
+  answerBridge: 'ANSWER_BRIDGE_MODEL_KEY',
+  tryCount: 'TRY_COUNT_BRIDGE_MODEL_KEY'
+});
+
 module.exports = {
   REGEX,
-  ERROR_MESSAGE
+  ERROR_MESSAGE,
+  MODEL_KEY
 };
