@@ -23,7 +23,19 @@ class BridgeGame {
     return false;
   }
 
-  retry() {}
+  retry() {
+    this.#position = 0;
+    this.#attempts += 1;
+    this.#failed = false;
+  }
+
+  isFailed() {
+    return this.#failed;
+  }
+
+  getAttempts() {
+    return this.#attempts;
+  }
 }
 
 module.exports = BridgeGame;
