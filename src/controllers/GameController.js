@@ -26,10 +26,6 @@ class GameController {
     InputView.readBridgeSize(sizeCallback);
   }
 
-  makeBridge(size) {
-    this.#gameService.makeBridge(size);
-  }
-
   movePlayer(direction) {
     return this.#gameService.movePlayer(direction);
   }
@@ -44,7 +40,7 @@ class GameController {
     isCompleted ? this.#gameService.printGameResult() : this.nextStep();
   }
 
-  nextStep() {
+  askDirection() {
     const directionCallback = (direction) => {
       try {
         this.tryNextStep(direction);
@@ -76,11 +72,11 @@ class GameController {
   }
 
   tryBridgeSize(size) {
-    this.makeBridge(size);
+    this.#gameService.makeBridge(size);
     this.nextStep();
   }
 
-  tryNextStep(direction) {
+  askDirection(direction) {
     const isRightChoice = this.movePlayer(direction);
     this.printCurMap();
     isRightChoice ? this.isDone() : this.askRetry();
