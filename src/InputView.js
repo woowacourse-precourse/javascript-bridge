@@ -33,8 +33,10 @@ const InputView = {
     let count = 0;
     while (count < size) {
       MissionUtils.Console.readLine(messageObject.SELECT_UORD, (UD) => {
+        Error.inputMovingErrorCheck(UD);
         upOrDown.push(UD);
       });
+      MissionUtils.Console.close();
       count += 1;
     }
     return upOrDown;
