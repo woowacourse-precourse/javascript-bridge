@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const { BRIDGE_MESSAGE } = require('../constants');
+const { BRIDGE_MESSAGE, GAME_MESSAGE } = require('../constants');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -40,7 +40,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridgeMap) {
+    Console.print(GAME_MESSAGE.RESULT_TITLE);
+    OutputView.printMap(bridgeMap);
+    Console.print('');
+    Console.print(GAME_MESSAGE.SUCCESS_OPTION);
+    Console.print(GAME_MESSAGE.TRY_COUNT);
+  },
 };
 
 module.exports = OutputView;

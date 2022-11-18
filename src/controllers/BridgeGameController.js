@@ -44,7 +44,10 @@ class BridgeGameController {
       return;
     }
     if (input === GAME_RULE.QUIT) {
+      const bridgeMap = this.#game.getMap();
+      OutputView.printResult(bridgeMap);
       Console.close();
+      return;
     }
 
     throw new Error('[ERROR] 재시도 여부 입력값은 R 또는 Q여야 합니다.');
