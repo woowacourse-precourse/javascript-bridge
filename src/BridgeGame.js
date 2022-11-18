@@ -7,12 +7,16 @@ const bridgeMaterialize = require('./utils/bridgeMaterialize');
 class BridgeGame {
   #myBridge;
   #nowState;
+  #trycount;
+  #isCleared;
   #myBridgeMaterialize;
 
   constructor(makeRandomNumber, bridgeMaker, size) {
     this.#myBridge = bridgeMaker(size, makeRandomNumber);
     this.#nowState = 0;
     this.#myBridgeMaterialize = this.myBridgeMaterialize();
+    this.#trycount = 0;
+    this.#isCleared = '실패';
   }
 
   myBridgeMaterialize() {
@@ -39,6 +43,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   async retry(readGameCommand) {
+    this.#trycount += 1;
     const result = await readGameCommand();
     // 결과 이용해 값 유효 여부 확인 후 로직 전개
     if (result === 'R') {
@@ -53,6 +58,14 @@ class BridgeGame {
       return printMap(this.#myBridgeMaterialize, this.#nowState - 1, correct);
     }
     return printMap(this.#myBridgeMaterialize, this.#nowState, correct);
+  }
+
+  printResultGame(resultFunction) {
+    resultFunction(this.#trycount, this.#isCleared);
+  }
+
+  clearGame() {
+    this.#isCleared = '성공';
   }
 }
 
