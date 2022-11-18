@@ -1,5 +1,6 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const Bridge = require('../src/model/Bridge');
 const BridgeMaker = require("../src/BridgeMaker");
+const { ERROR } = require('../src/Error');
 
 describe("Bridge 테스트", () => {
     test.each([
@@ -14,5 +15,15 @@ describe("Bridge 테스트", () => {
 
         const bridge = BridgeMaker.makeBridge(3, mockGenerator);
         expect(bridge).toEqual(expectedBridge);
+    });
+
+    test.each([
+        [["1"], ERROR.BRIDGE_SIZE_OUT_BOUNDARY],
+        [["2"], ERROR.BRIDGE_SIZE_OUT_BOUNDARY],
+        [["21"], ERROR.BRIDGE_SIZE_OUT_BOUNDARY],
+        [["A"], ERROR.BRIDGE_SIZE_NOT_NUMBER],
+        [["UD"], ERROR.BRIDGE_SIZE_NOT_NUMBER]
+    ])("다리 길이 입력 예외 테스트", (bridgeSize, ERROR) => {
+        expect(() => { new Bridge(bridgeSize); }).toThrow(ERROR);
     });
 });

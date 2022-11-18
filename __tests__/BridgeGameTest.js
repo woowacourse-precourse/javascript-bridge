@@ -1,6 +1,7 @@
-const Bridge = require("../src/Bridge");
-const BridgeGame = require("../src/BridgeGame");
+const Bridge = require("../src/model/Bridge");
+const BridgeGame = require("../src/model/BridgeGame");
 const MissionUtils = require("@woowacourse/mission-utils");
+const { ERROR } = require('../src/Error');
 
 const mockRandoms = (numbers) => {
     MissionUtils.Random.pickNumberInRange = jest.fn();
@@ -10,15 +11,6 @@ const mockRandoms = (numbers) => {
 };
 
 describe("BridgeGame 테스트", () => {
-    test.each([
-        ["1"],
-        ["A"],
-        ["UD"]
-    ])("다리 이동 예외 테스트", (bridgeSize) => {
-        const bridgeGame = new BridgeGame();
-        expect(bridgeGame.vaildateBridgeSize(bridgeSize)).toEqual(false);
-    });
-
     test.each([
         [["U", "D", "D"]],
         [["D", "U", "D"]],
@@ -32,8 +24,8 @@ describe("BridgeGame 테스트", () => {
 
     test.each([
         [["1", "0", "1"], ["U", "D"], ["O", " "], [" ", "O"]],
-        [["1", "0", "1"], ["U", "D", "D"], ["O", " ", " "], [" ", "O", "X"]],
-    ])("이동 로그 데이터 반환 테스트", (bridge, moveTypes, upHistory, downHistory) => {
+        [["1", "0", "1"], ["U", "D", "U"], ["O", " ", "O"], [" ", "O", " "]],
+    ])("이동 로그 출력 반환 테스트", (bridge, moveTypes, upHistory, downHistory) => {
         mockRandoms(bridge);
         const bridgeGame = new BridgeGame();
         bridgeGame.setBridge(new Bridge(bridge.length));
@@ -50,11 +42,10 @@ describe("BridgeGame 테스트", () => {
         mockRandoms(bridge);
         const bridgeGame = new BridgeGame();
         bridgeGame.setBridge(new Bridge(bridge.length));
-
-        for (let moveType of moveTypes)
-            bridgeGame.move(moveType);
-
-        expect(bridgeGame.isFailMove(bridgeGame.getUpDownHistory())).toEqual(true);
+        expect(() => {
+            for (let moveType of moveTypes)
+                bridgeGame.move(moveType);
+        }).toThrow(ERROR.FAIL_MOVE);
     });
 
     test.each([
@@ -64,7 +55,7 @@ describe("BridgeGame 테스트", () => {
         ["@"],
     ])("게임 재시작 예외 테스트", (command) => {
         const bridgeGame = new BridgeGame();
-        expect(bridgeGame.validateCommand(command)).toEqual(false);
+        expect(() => { bridgeGame.validateCommand(command) }).toThrow(ERROR.INVALID_COMMAND);
     });
 
     test("게임 리셋 테스트", () => {
@@ -72,7 +63,6 @@ describe("BridgeGame 테스트", () => {
         mockRandoms(bridge);
 
         const bridgeGame = new BridgeGame();
-        bridgeGame.setBridge(new Bridge(bridge.legnth));
         bridgeGame.retry();
 
         expect(bridgeGame.getTryCount()).toEqual(2);
