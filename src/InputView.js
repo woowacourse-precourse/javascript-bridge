@@ -1,5 +1,6 @@
 const BRIDGE_RANDOM_NUMBER_GENERATOR = require("../src/BridgeRandomNumberGenerator");
 const BRIDGE_MAKER = require("../src/BridgeMaker");
+const BRIDGE_GAME = require("../src/BridgeGame");
 const MISSIONUTILS = require("@woowacourse/mission-utils");
 
 /**
@@ -23,7 +24,7 @@ const InputView = {
       
       const bridge = BRIDGE_MAKER.makeBridge(input,BRIDGE_RANDOM_NUMBER_GENERATOR.generate());
       MISSIONUTILS.Console.print(bridge);
-      InputView.readMoving();
+      InputView.readMoving(input, 0, bridge, "");
     });
 
   },
@@ -31,7 +32,7 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(count, i, bridge, bridgeMap) {
     MISSIONUTILS.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", function(input) {
       if (!isNaN(input)){
         throw new Error("[ERROR] 이동할 칸은 알파벳으로 선택해야 합니다");
@@ -41,8 +42,10 @@ const InputView = {
         throw new Error("[ERROR] 이동할 칸은 U 또는 D만 선택해야 합니다.");
       }
       
-      MISSIONUTILS.Console.print(input);
+      var temp = new BRIDGE_GAME;
+      temp.move(input, count, i, bridge, bridgeMap);
     });
+
 
   },
 

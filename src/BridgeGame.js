@@ -7,7 +7,35 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move(input, count, i, bridge, bridgeMap) {
+    const INPUTVIEW = require("../src/Inputview");
+    const OUTPUTVIEW = require("../src/Outputview");
+    const MISSIONUTILS = require("@woowacourse/mission-utils");
+    if (bridge[i] == input){
+      if(i==count){
+        bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
+        MISSIONUTILS.Console.print("최종 게임 결과");
+      }
+      else{
+        if (i == 0){
+          bridgeMap = OUTPUTVIEW.printMapFirst(bridge, 'O');
+        }
+        else{
+          bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
+        }
+        INPUTVIEW.readMoving(count, i+1, bridge, bridgeMap);
+      }    
+    }
+    else{
+      if (i == 0){
+        bridgeMap = OUTPUTVIEW.printMapFirst(bridge, 'X');
+      }
+      else{
+        bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'X', bridgeMap);
+      }
+      INPUTVIEW.readGameCommand(count, bridge, bridgeMap);
+    }
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
