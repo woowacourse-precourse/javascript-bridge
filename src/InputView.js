@@ -33,6 +33,14 @@ const InputView = {
    */
   readMoving() {
     MISSIONUTILS.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", function(input) {
+      if (!isNaN(input)){
+        throw new Error("[ERROR] 이동할 칸은 알파벳으로 선택해야 합니다");
+      }
+      
+      if(input != 'U' && input != 'D'){
+        throw new Error("[ERROR] 이동할 칸은 U 또는 D만 선택해야 합니다.");
+      }
+      
       MISSIONUTILS.Console.print(input);
     });
 
