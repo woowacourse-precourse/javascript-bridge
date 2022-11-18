@@ -7,6 +7,7 @@ class BridgeGame {
   #bridgeSize;
   #bridge;
   #move = [];
+  #upDownResult = [[], []];
   
   constructor(bridgeSize) {
     this.#bridgeSize = bridgeSize;
@@ -28,6 +29,35 @@ class BridgeGame {
       }
       return [el, false];
     });
+  }
+
+  getMoveResult() {
+    const moveResult = this.match();
+    moveResult.forEach((el) => {
+      this.parseResult(el);
+    });
+    return this.#upDownResult.map(el => el.join('|'));
+  }
+
+  parseResult(el) {
+    const [upOrDown, matchBoolean] = el;
+    if (matchBoolean) {
+      if (upOrDown === 'U') {
+        this.#upDownResult[0].push(' O ');
+        this.#upDownResult[1].push('   ');
+      } else {
+        this.#upDownResult[0].push('   ');
+        this.#upDownResult[1].push(' O ');
+      }
+    } else {
+      if (upOrDown === 'U') {
+        this.#upDownResult[0].push(' X ');
+        this.#upDownResult[1].push('   ');
+      } else {
+        this.#upDownResult[0].push('   ');
+        this.#upDownResult[1].push(' X ')
+      }
+    }
   }
 
   /**
