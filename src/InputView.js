@@ -26,7 +26,7 @@ const InputView = {
 
   readGameCommand(gamePlay) {
     MissionUtils.Console.readLine('게임을 종료합니다.게임을 재시도하려면 R, 종료하려면 Q를 눌러주세요.', (answer) => {
-      Check.CheckRestartGame(answer, gamePlay);
+      if (Check.CheckRestartGame(answer, gamePlay)) this.readMoving(gamePlay);
     });
   },
 };
