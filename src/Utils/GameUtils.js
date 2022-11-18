@@ -13,7 +13,7 @@ class GameUtils {
     course.forEach(trace => {
       if(trace === MOVEMENT_LOG_CODE.PASSED.UPPER) return upperRow.push(OUTPUT_SYMBOLS.PASSED);
       if(trace === MOVEMENT_LOG_CODE.FAILED.UPPER) return upperRow.push(OUTPUT_SYMBOLS.FAILED);
-      upperRow.push(' ');
+      upperRow.push(OUTPUT_SYMBOLS.BLANK);
     });
     let result = `[ ${upperRow.join(` ${OUTPUT_SYMBOLS.PARTITION} `)} ]`;
     return result;
@@ -24,7 +24,7 @@ class GameUtils {
     course.forEach(trace => {
       if(trace === MOVEMENT_LOG_CODE.PASSED.LOWER) return lowerROW.push(OUTPUT_SYMBOLS.PASSED);
       if(trace === MOVEMENT_LOG_CODE.FAILED.LOWER) return lowerROW.push(OUTPUT_SYMBOLS.FAILED);
-      lowerROW.push(' ');
+      lowerROW.push(OUTPUT_SYMBOLS.BLANK);
     });
     let result = `[ ${lowerROW.join(` ${OUTPUT_SYMBOLS.PARTITION} `)} ]`;
     return result;
