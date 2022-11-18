@@ -6,7 +6,6 @@ const INPUT_MESSAGE = {
 
 const OUTPUT_MESSAGE = {
   GAME_START: '다리 건너기 게임을 시작합니다.',
-  BRIDGE_MAP: `${BRIDGE.START}| O |${BRIDGE.END}`,
 };
 
 const GAME_COMMANDS = {
