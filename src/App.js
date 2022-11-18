@@ -23,7 +23,7 @@ class App {
         this.#gameCtrl.handleSize(size);
         this.askDirection();
       } catch (errorMessage) {
-        this.catchHandler(errorMessage, this.askBridgeSize);
+        this.sizeErrorHandler(errorMessage);
       }
     };
     InputView.readBridgeSize(sizeCallback);
@@ -43,7 +43,7 @@ class App {
           this.askRetry();
         }
       } catch (errorMessage) {
-        this.catchHandler(errorMessage, this.askDirection);
+        this.directionErrorHandler(errorMessage);
       }
     };
     InputView.readMoving(directionCallback);
@@ -60,10 +60,25 @@ class App {
           this.#gameCtrl.gameOver();
         }
       } catch (errorMessage) {
-        this.catchHandler(errorMessage, this.askRetry);
+        this.retryErrorHandler(errorMessage);
       }
     };
     InputView.readGameCommand(commandCallback);
+  }
+
+  sizeErrorHandler(errorMessage) {
+    this.#gameCtrl.printMessage(errorMessage);
+    this.askBridgeSize();
+  }
+
+  directionErrorHandler(errorMessage) {
+    this.#gameCtrl.printMessage(errorMessage);
+    this.askDirection();
+  }
+
+  retryErrorHandler(errorMessage) {
+    this.#gameCtrl.printMessage(errorMessage);
+    this.askRetry();
   }
 
   // tryMakeBridge(size) {
@@ -82,11 +97,6 @@ class App {
   //   const shouldRetry = this.#bridgeGame.retry(command);
   //   shouldRetry ? this.retry() : this.gameOver();
   // }
-
-  catchHandler(error, reInput) {
-    this.#gameCtrl.printMessage(error);
-    reInput();
-  }
 }
 
 const app = new App();
