@@ -4,12 +4,6 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { GAME_MESSAGE } = require('./constants/constants');
 const makePrintBridge = require('./utils/makePrintBridge');
-const { printResult, printMap } = require('./UI/OutputView');
-const {
-  readBridgeSize,
-  readMoving,
-  readGameCommand,
-} = require('./UI/InputView');
 const InputView = require('./UI/InputView');
 const OutputView = require('./UI/OutputView');
 
@@ -44,6 +38,56 @@ class App {
       BridgeMaker.makeBridge,
       this.#myBridgeLength
     );
+    return this.moveBridge();
+  }
+
+  moveBridge() {
+    InputView.readMoving((input) => {
+      const move = this.#myBridge.move(input);
+      if (!move) return this.moveNotCorrect();
+      return this.moveCorrect();
+    });
+  }
+
+  moveCorrect() {
+    const resultBridge = this.#myBridge.printMyBridge(makePrintBridge);
+    OutputView.printMap(resultBridge);
+    if (this.#myBridge.isFinishedGame()) {
+      return this.gameWin();
+    }
+    return this.moveBridge();
+  }
+
+  moveNotCorrect() {
+    this.#myBridge.gameStateChangeFailure();
+    const resultBridge = this.#myBridge.printMyBridge(makePrintBridge);
+    OutputView.printMap(resultBridge);
+    return this.getRetryInput();
+  }
+
+  getRetryInput() {
+    InputView.readGameCommand((input) => {
+      const retry = this.#myBridge.retry(input);
+      if (retry) {
+        this.#myBridge.gameStateChangeSuccess();
+        return this.moveBridge();
+      }
+      return this.quieGame();
+    });
+  }
+
+  gameWin() {
+    Console.print(GAME_MESSAGE.GAME_RESULT);
+    OutputView.printMap(resultBridge);
+    this.#myBridge.printResultGame(OutputView.printResult);
+  }
+
+  quieGame() {
+    Console.print(GAME_MESSAGE.GAME_RESULT);
+    const resultBridge = this.#myBridge.printMyBridge(makePrintBridge);
+    OutputView.printMap(resultBridge);
+    this.#myBridge.printResultGame(OutputView.printResult);
+    Console.close();
   }
 }
 
