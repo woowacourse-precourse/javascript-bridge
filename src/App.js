@@ -15,6 +15,8 @@ class App {
     let randomArr = ARRAY.getArr().map(
       (e) => (e = BridgeRandomNumberGenerator.generate())
     );
+    // 이동할 칸(U,D)을 입력한다.
+    const upOrDown = InputView.readMoving(size);
   }
 }
 
