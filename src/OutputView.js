@@ -31,8 +31,8 @@ const OutputView = {
     return;
   },
 
-  printError() {
-    throw new Error("[ERROR]");
+  justPrint(message) {
+    return Console.print(message);
   }
 };
 
