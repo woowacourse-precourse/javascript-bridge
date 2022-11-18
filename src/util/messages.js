@@ -10,4 +10,8 @@ const ERROR_MESSAGE = {
   choice: "[ERROR] 올바르지 못한 칸 입력입니다.",
 };
 
-module.exports = { CONSOLE_MESSAGE, ERROR_MESSAGE };
+const PROCCESS_MESSAGE = {
+  pathByNumber: "[ERROR] 올바르지 못한 수가 인자로 전달되었습니다.",
+};
+
+module.exports = { CONSOLE_MESSAGE, ERROR_MESSAGE, PROCCESS_MESSAGE };
