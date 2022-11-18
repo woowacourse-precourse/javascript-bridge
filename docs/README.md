@@ -19,7 +19,8 @@
 
     - [o] **게임 재시작/종료 여부를 입력 받는다. R(재시작)과 Q(종료) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** InputView #readGameCommand
     - [o] **재시작해도 처음에 만든 다리로 재사용한다.** InputView #readMoving
-    - [ ] **도착 할 때 까지 다시 물어보기 반복**InputView #readMoving
+    - [o] **재시작 카운트 증가 및 초기값 재설정.** BridgeGame #init
+    - [o] **도착 할 때 까지 다시 물어보기 반복**InputView #readMoving
 
 - [o] **다리를 끝까지 건너면 게임이 종료된다.** OutputView #printResult
 - [o] **게임 결과의 총 시도한 횟수는 첫 시도를 포함해 게임을 종료할 때까지 시도한 횟수를 나타낸다.** OutputView #printResult
