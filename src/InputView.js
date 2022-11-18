@@ -22,6 +22,7 @@ const InputView = {
   readMoving(bridgeGame) {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (moveAnswer) => {
       bridgeGame.move(moveAnswer);
+      const matchMoveResult = bridgeGame.match();
     });
   },
 

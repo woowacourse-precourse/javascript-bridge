@@ -3,7 +3,7 @@
 ## 기능 목록
 - [x] 입력 받은 다리 길이로 다리를 생성한다. - BridgeMaker#makeBridge()
 - [x] 입력 받은 이동할 칸으로 이동한다. - BridgeGame#move()
-- [ ] 입력 받은 이동할 칸과 다리를 비교한다. - BridgeGame#match()
+- [x] 입력 받은 이동할 칸과 다리를 비교한다. - BridgeGame#match()
 - [ ] 재시작 시 시도 횟수를 증가시킨다. - BridgeGame#retry()
 
 

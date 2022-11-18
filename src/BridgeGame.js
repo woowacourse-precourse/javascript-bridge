@@ -21,6 +21,15 @@ class BridgeGame {
     this.#move.push(moveAnswer);
   }
 
+  match() {
+    return this.#move.map((el, index) => {
+      if (el === this.#bridge[index]) {
+        return [el, true];
+      }
+      return [el, false];
+    });
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
