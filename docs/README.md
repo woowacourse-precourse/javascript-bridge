@@ -2,6 +2,9 @@
 
 ## 순서도
 
+![bridgeGameFlowChart](https://user-images.githubusercontent.com/87527736/202632972-db8c7ece-f192-4255-8dc1-31ff97af0357.png)
+
+
 ## 기능 목록
 
 순서도를 기반으로 중요 기능 목록을 작성하였다.
