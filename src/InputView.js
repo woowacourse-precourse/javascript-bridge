@@ -40,7 +40,7 @@ const InputView = {
           const bridgeGame = new BridgeGame(bridge);
           const result = bridgeGame.move(nth, moveLocation);
           console.log(result);
-          // OutputView.printMap(result);
+          OutputView.printMap(result);
         } catch (e) {
           MissionUtils.Console.print(e);
           this.readMoving();

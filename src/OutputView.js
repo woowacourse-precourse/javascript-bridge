@@ -9,7 +9,28 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  printMap(result) {
+    let printUp = "[";
+    result.forEach((nth, i) => {
+      if (nth[i][0] === "U") printUp += ` ${result[i][1]} `;
+      else printUp += "   ";
+      if (i === result.length - 1) printUp += "]";
+      else printUp += "|";
+    });
+    MissionUtils.Console.print(printUp);
+    this.printMapDown(result);
+  },
 
+  printMapDown(result) {
+    let printDown = "[";
+    result.forEach((nth, i) => {
+      if (nth[i][0] === "D") printDown += ` ${result[i][1]} `;
+      else printDown += "   ";
+      if (i === result.length - 1) printDown += "]";
+      else printDown += "|";
+    });
+    MissionUtils.Console.print(printDown);
+  },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>

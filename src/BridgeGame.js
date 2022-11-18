@@ -20,6 +20,8 @@ class BridgeGame {
       this.#gameResult.push(new Array(moveLocation, "O"));
       return this.#gameResult;
     }
+    this.#gameResult.push(new Array(moveLocation, "X"));
+    return this.#gameResult;
   }
 
   /**
