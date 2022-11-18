@@ -7,6 +7,8 @@ const Validation = require('./Validation');
 class BridgeGame {
   #userPosition;
 
+  #bridge;
+
   constructor() {
     this.#userPosition = null;
   }
@@ -59,6 +61,15 @@ class BridgeGame {
     const CURRENT_INDEX = this.findUserPosition();
 
     return MAX_INDEX_POINT === CURRENT_INDEX;
+  }
+
+  setBridge(bridgeResult) {
+    const copiedBridgeResult = Application.copyArray(bridgeResult);
+
+    Application.checkRangeThreeToTwenty(copiedBridgeResult.length);
+    this.#bridge = copiedBridgeResult;
+
+    return copiedBridgeResult;
   }
 }
 
