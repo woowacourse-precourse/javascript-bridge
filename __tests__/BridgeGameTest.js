@@ -7,4 +7,12 @@ describe("BridgeGame 클래스 테스트", () => {
     expect(bridgeGame.move("D")).toBe("O");
     expect(bridgeGame.move("D")).toBe("X");
   });
+
+  test("다리 건너기 성공했는지 판단하는 기능", () => {
+    const bridgeGame = new BridgeGame(["U", "D"]);
+    bridgeGame.move("U");
+    expect(bridgeGame.isAllPassed()).toBe(false);
+    bridgeGame.move("D");
+    expect(bridgeGame.isAllPassed()).toBe(true);
+  });
 });
