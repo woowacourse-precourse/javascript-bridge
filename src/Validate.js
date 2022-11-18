@@ -8,6 +8,11 @@ const Validate = {
             throw Error.BRIDGE_INPUT_ERROR
         }
     },
+    MoveInput(input){
+        if(input != "U" || "D"){
+            throw Error.BRIDGE_INPUT_ERROR
+        }
+    }
   };
   
   module.exports = Validate;
