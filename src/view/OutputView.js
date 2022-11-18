@@ -38,19 +38,21 @@ const OutputView = {
     OutputView.upBridge = [];
     OutputView.downBridge = [];
   },
-
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult(userMove, answer) {
+  
+  printResult(userMove, failOrSuccess) {
     Console.print(MESSAGE.FINAL_MESSAGE);
-    OutputView.printMap(userMove, answer);
-    Console.print(MESSAGE.FAIL_OR_SUCCESS);
-    Console.print(MESSAGE.TRY_COUNT);
-    Console.close();
+    if (failOrSuccess === '성공') {
+      return OutputView.printMap(userMove, 'O');
+    }
+    return OutputView.printMap(userMove, 'X');
+    
   },
+
+  printTryResult(tryCount, failOrSuccess) {
+    Console.print(`${MESSAGE.FAIL_OR_SUCCESS}${failOrSuccess}`);
+    Console.print(`${MESSAGE.TRY_COUNT}${tryCount}`);
+    Console.close();
+  }
 };
 
 module.exports = OutputView;
