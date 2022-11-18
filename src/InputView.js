@@ -2,7 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const { printResult } = require("./OutputView");
+const { printResult, printMap } = require("./OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -27,10 +27,8 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (moveInput) => {
-        // console.log("mainBridge", mainBridge);
-        // console.log("bridgeGame", bridgeGame);
-        bridgeGame.move(moveInput); //클래스 내부에서 움직임
-
+        bridgeGame.move(moveInput);
+        printMap(bridgeGame.userBridge);
         if (!bridgeGame.hasNext && bridgeGame.count === bridgeGame.bridgeSize) {
           printResult("게임 성공 여부: 성공");
           printResult(`총 시도한 횟수: ${bridgeGame.count}`);
