@@ -31,6 +31,13 @@ class BridgeGame {
     return isIncludeUandD(userInput);
   }
 
+  static checkIncludeRandQ(userInput) {
+    const INPUT_TARGET = ['R', 'Q'];
+    const isIncludeRandQ = Application.hasContain(INPUT_TARGET);
+
+    return isIncludeRandQ(userInput);
+  }
+
   isBeforeStart() {
     return this.#userPosition === null;
   }
