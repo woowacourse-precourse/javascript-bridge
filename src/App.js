@@ -9,7 +9,7 @@ class App {
 
   play() {
     OutputView.printGameStart();
-    InputView.readBridgeSize(this.makeBridge, this.func2, this.func3);
+    InputView.readBridgeSize(this.makeBridge, this.inputMove, this.func3);
   }
 
   makeBridge(input) {
@@ -17,9 +17,12 @@ class App {
     this.bridgeGame = new BridgeGame(this.randomBirdge);
   }
 
-  func2(input) {
+  inputMove(input) {
     const isEnd = this.bridgeGame.move(input);
     const isWin = this.bridgeGame.isGameWin();
+
+    const result = this.bridgeGame.result;
+    OutputView.printMap(result);
 
     return [isEnd, isWin];
   }
