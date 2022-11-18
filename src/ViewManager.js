@@ -15,6 +15,7 @@ class ViewManager {
     InputView.readBridgeSize(GAME_QUESTION.size, this.#readBridgeSizeCallback);
   }
 
+  // 화살표 함수로 작성한 이유: 클래스 메서드는 기본적으로 클래스를 바인딩하지 않는다.
   #readBridgeSizeCallback = (input) => {
     try {
       this.#game.create(parseNumber(input));
@@ -26,7 +27,9 @@ class ViewManager {
 
   #readMovingCallback = (input) => {
     try {
-      this.#game.move(input);
+      const { status, result } = this.#game.move(input);
+      OutputView.printMap(status);
+      InputView.readMoving(GAME_QUESTION.moving, this.#readMovingCallback);
     } catch (err) {
       throw err;
     }
