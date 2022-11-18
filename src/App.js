@@ -7,8 +7,13 @@ const OutputView = require("./OutputView");
 class App {
   play() {
     OutputView.startGame();
-    const bridgeSize = InputView.readBridgeSize();
-    const str = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+    try{
+      const bridgeSize = InputView.readBridgeSize();
+      const str = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+    }catch(error){
+      OutputView.printExceptionBridgeSize(error);
+    }
+    
   }
 }
 
