@@ -20,11 +20,10 @@ class Validate {
       throw new Error(`${Message.ERROR.PREFIX} ${Message.ERROR.MAXLENGT}`);
     }
   }
-  static errorCatch(validate, callBack) {
-    try {
-      validate();
-    } catch {
-      callBack();
+
+  static bridgeDirection(diredtion) {
+    if (diredtion !== "U" && diredtion !=="D") {
+      throw new Error(`${Message.ERROR.PREFIX} ${Message.ERROR.DIRECTION}`)
     }
   }
 }

@@ -13,6 +13,10 @@ class WoowaBrigde {
     this.#bridgeGame = new BridgeGame();
   }
 
+  getBridge() {
+    return this.getBridge()
+  }
+
   play() {
     OutputView.printLine(Message.GAME_START);
     this.makeBridge();
@@ -26,8 +30,9 @@ class WoowaBrigde {
   }
 
   upOrDown() {
-    OutputView.printLine(Message.UP_AND_DOWN)
-    this.#bridgeGame.move();
+    const nextCallBack = () => this.#bridgeGame.move(this.getBridge()).bind(this)
+    const errorCallBack = () => this.upOrDown.bind(this)
+    InputView.readMoving(nextCallBack , errorCallBack);
   }
 }
 

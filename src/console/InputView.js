@@ -22,7 +22,12 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(nextCallBack , errorCallBack) {
+    MissionUtils.Console.readLine(Message.BRIDGE_DIRECTION ,(direction) => {
+      const validTarget = () => Validate.bridgeDirection(direction)
+      ErrorHandler.test(validTarget, nextCallBack , errorCallBack)
+    })
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
