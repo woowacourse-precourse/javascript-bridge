@@ -9,6 +9,8 @@ const GAME_COMMAND_RETRY = "R";
 const GAME_COMMAND_QUIT = "Q";
 
 const MESSAGE_GAME_START = "다리 건너기 게임을 시작합니다.";
+const MESSAGE_GAME_END = "게임 성공 여부";
+const MESSAGE_PLAY_COUNT = "총 시도한 횟수";
 
 const MESSAGE_GET_BRIDGE_SIZE = "다리의 길이를 입력해주세요. \n";
 const MESSAGE_GET_MOVING = "이동할 칸을 선택해주세요. (위: U, 아래: D) \n";
@@ -36,6 +38,8 @@ module.exports = {
   GAME_COMMAND_RETRY,
   GAME_COMMAND_QUIT,
   MESSAGE_GAME_START,
+  MESSAGE_GAME_END,
+  MESSAGE_PLAY_COUNT,
   MESSAGE_GET_BRIDGE_SIZE,
   MESSAGE_GET_MOVING,
   MESSAGE_GET_GAME_COMMAND,
