@@ -1,5 +1,6 @@
 const BridgeSize = require('../model/BridgeSize');
 const { Console } = require('@woowacourse/mission-utils');
+const MovementVadlidation = require('../model/MovementValidaion');
 
 // view는 받아오는 데이터에 따라 처리가 다를 때만 model를 불러온다
 
@@ -23,7 +24,14 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(movement) {
+    try {
+      return new MovementVadlidation(movement).showValidationResult();
+    } catch (error) {
+      Console.print(error);
+      return false;
+    }
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

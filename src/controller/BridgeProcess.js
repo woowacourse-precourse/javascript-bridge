@@ -4,7 +4,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const { PRINTBRIDGESIZE, PRINTMOVEMENT } = require('../view/Message');
 const BridgeMaker = require('../BridgeMaker');
 const { generate } = require('../model/BridgeRandomNumberGenerator');
-const MovementVadlidation = require('../model/Movement');
+const MovementVadlidation = require('../model/MovementValidaion');
 
 // 명심하기! controller는 데이터를 받거나 사용자에게 동작을 받으면 model 또는 view를 변경
 
@@ -27,8 +27,10 @@ class BridgeProcess {
 
   #inputMovement() {
     Console.readLine(PRINTMOVEMENT, (movement) => {
-      Console.print(movement);
+      const isMovement = this.#inputView.readMoving(movement);
+      isMovement ? '맞아' : this.#inputMovement();
     });
   }
 }
+
 module.exports = BridgeProcess;
