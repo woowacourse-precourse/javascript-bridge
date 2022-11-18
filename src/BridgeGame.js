@@ -11,6 +11,10 @@ class BridgeGame {
     this.#player = new Player();
   }
 
+  printMessage(message) {
+    OutputView.printMessage(message);
+  }
+
   makeBridge(size) {
     this.#bridge = new Bridge(size);
   }
@@ -44,8 +48,11 @@ class BridgeGame {
     return false;
   }
 
-  initData() {
+  increaseNumberOfAttempts() {
     this.#player.increaseNumberOfAttempts();
+  }
+
+  initPlayData() {
     this.#player.initCurPlace();
     this.#bridge.initBridgeMap();
   }

@@ -1,5 +1,4 @@
 const InputView = require('../views/InputView');
-const OutputView = require('../views/OutputView');
 const { MESSAGE } = require('../constant');
 const BridgeGame = require('../BridgeGame');
 
@@ -11,7 +10,7 @@ class GameController {
   }
 
   gameStart() {
-    OutputView.printMessage(MESSAGE.START_NOTIFICATION);
+    this.#bridgeGame.printMessage(MESSAGE.START_NOTIFICATION);
     this.askBridgeSize();
   }
 
@@ -19,24 +18,19 @@ class GameController {
     const sizeCallback = (size) => {
       try {
         this.tryMakeBridge(size);
-      } catch (error) {
-        this.catchHandler(error, this.askBridgeSize);
+      } catch (errorMessage) {
+        this.catchHandler(errorMessage, this.askBridgeSize);
       }
     };
     InputView.readBridgeSize(sizeCallback);
-  }
-
-  isDone() {
-    const isCompleted = this.#bridgeGame.checkGameComplete();
-    isCompleted ? this.#bridgeGame.printGameResult() : this.askDirection();
   }
 
   askDirection() {
     const directionCallback = (direction) => {
       try {
         this.tryMovePlayer(direction);
-      } catch (error) {
-        this.catchHandler(error, this.askDirection);
+      } catch (errorMessage) {
+        this.catchHandler(errorMessage, this.askDirection);
       }
     };
     InputView.readMoving(directionCallback);
@@ -46,20 +40,11 @@ class GameController {
     const commandCallback = (command) => {
       try {
         this.tryRetry(command);
-      } catch (error) {
-        this.catchHandler(error, this.askRetry);
+      } catch (errorMessage) {
+        this.catchHandler(errorMessage, this.askRetry);
       }
     };
     InputView.readGameCommand(commandCallback);
-  }
-
-  retry() {
-    this.#bridgeGame.initData();
-    this.askDirection();
-  }
-
-  gameOver() {
-    this.#bridgeGame.printGameResult();
   }
 
   tryMakeBridge(size) {
@@ -70,7 +55,7 @@ class GameController {
   tryMovePlayer(direction) {
     const isRightChoice = this.#bridgeGame.move(direction);
     this.#bridgeGame.printCurMap();
-    isRightChoice ? this.isDone() : this.askRetry();
+    isRightChoice ? this.isAllCrossed() : this.askRetry();
   }
 
   tryRetry(command) {
@@ -79,8 +64,23 @@ class GameController {
   }
 
   catchHandler(error, reInput) {
-    OutputView.printMessage(error);
+    this.#bridgeGame.printMessage(error);
     reInput();
+  }
+
+  isAllCrossed() {
+    const isComplete = this.#bridgeGame.checkGameComplete();
+    isComplete ? this.#bridgeGame.printGameResult() : this.askDirection();
+  }
+
+  retry() {
+    this.#bridgeGame.increaseNumberOfAttempts();
+    this.#bridgeGame.initPlayData();
+    this.askDirection();
+  }
+
+  gameOver() {
+    this.#bridgeGame.printGameResult();
   }
 }
 
