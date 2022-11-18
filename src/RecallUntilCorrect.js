@@ -6,7 +6,7 @@ const RecallUntilCorrect = {
     let BRIDGE_SIZE;
     while(recallUntilCorrect){
       BRIDGE_SIZE = InputView.readBridgeSize();
-      recallUntilCorrect = ValidCheck.bridgeIsInRange(BRIDGE_SIZE);
+      recallUntilCorrect = ValidCheck.BridgeSizeValidCheck(BRIDGE_SIZE);
     }
     return BRIDGE_SIZE;
   }
