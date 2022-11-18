@@ -62,7 +62,7 @@ class BridgeGame {
    * 모든 다리를 건넜는지 반환하는 메소드
    */
   #isFinished() {
-    const bridgeLength = this.bridge.bridgeLength();
+    const bridgeLength = this.bridge.bridgeLength;
 
     if (bridgeLength === this.#index) {
       return true;

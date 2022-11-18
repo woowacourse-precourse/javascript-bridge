@@ -17,7 +17,7 @@ class Bridge {
     return [letter, false];
   }
 
-  bridgeLength() {
+  get bridgeLength() {
     return this.#bridge.length;
   }
 
@@ -29,11 +29,11 @@ class Bridge {
   }
 
   validation(input) {
-    this.validForm(input);
-    this.validRange(input);
+    this.#validForm(input);
+    this.#validRange(input);
   }
 
-  validForm(input) {
+  #validForm(input) {
     const reg = /^[0-9]+$/;
 
     if (!reg.test(input)) {
@@ -41,7 +41,7 @@ class Bridge {
     }
   }
 
-  validRange(input) {
+  #validRange(input) {
     if (input < BRIDGE.length.minimum || BRIDGE.length.maximum < input) {
       throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
     }
