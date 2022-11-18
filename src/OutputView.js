@@ -21,7 +21,7 @@ const OutputView = {
       this.UP.push('   ');
       this.DOWN.push(' O ');
     }
-    MissionUtils.Console.print(`\n[${this.UP}]\n[${this.DOWN}]`);
+    MissionUtils.Console.print(`\n[${this.UP.join('|')}]\n[${this.DOWN.join('|')}]`);
   },
 
   /**
