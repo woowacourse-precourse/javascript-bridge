@@ -12,6 +12,10 @@ const OutputView = {
     false: 'X',
   },
 
+  printError(errorMessage) {
+    Console.print(`[ERROR] ${errorMessage}`);
+  },
+
   printStart() {
     Console.print(OutputView.START_MESSAGE);
   },
