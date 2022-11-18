@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const InputView = require("./InputView");
+const { OUTPUT } = require("./constants/messages");
 
 class App {
   play() {
@@ -8,7 +9,7 @@ class App {
   }
 
   printStart() {
-    Console.print("다리 건너기 게임을 시작합니다.\n");
+    Console.print(`${OUTPUT.START}${OUTPUT.LINE}`);
   }
 }
 
