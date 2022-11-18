@@ -315,8 +315,9 @@ describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
 describe('출발전 판단 메서드 테스트', () => {
   test('메소드 이름은 "checkBeforeStart"로 정의된다.', () => {
     const METHOD_NAME = 'checkBeforeStart';
+    const bridgeGame = new BridgeGame();
 
-    expect(BridgeGame.checkBeforeStart.name).toEqual(METHOD_NAME);
+    expect(bridgeGame.checkBeforeStart.name).toEqual(METHOD_NAME);
   });
 
   test('유저가 아직 출발 전(null)이라면 예외를 발생한다.', () => {
