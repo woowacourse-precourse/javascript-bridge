@@ -15,5 +15,6 @@ module.exports = {
     'class-methods-use-this': 0,
     'no-undef': 0,
     'no-new': 0,
+    'max-depth': ['error', 2],
   },
 };
