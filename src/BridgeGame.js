@@ -6,12 +6,12 @@ const InputView = require("../src/InputView");
 class BridgeGame {
   #bridge;
   #currentIdx;
-  #resultMap;
+  #bridgeMap;
 
   constructor(bridge) {
     this.#bridge = bridge;
     this.#currentIdx = 0;
-    this.#resultMap = [[], []]; // 0 ≒ D , 1 ≒ U
+    this.#bridgeMap = [[], []]; // 0 ≒ D , 1 ≒ U
   }
 
   transInputtoPosition(input) {
@@ -21,15 +21,15 @@ class BridgeGame {
 
   canMove(position) {
     if (position === Number(this.#bridge[this.#currentIdx]))
-      return this.fillResultMap(position, "O");
-    return this.fillResultMap(position, "X");
+      return this.fillMap(position, "O");
+    return this.fillMap(position, "X");
   }
 
-  fillResultMap(position, str) {
-    this.#resultMap[position].push(str);
-    this.#resultMap[Number(!position)].push(" ");
+  fillMap(position, str) {
+    this.#bridgeMap[position].push(str);
+    this.#bridgeMap[Number(!position)].push(" ");
 
-    OutputView.printMap(this.#resultMap);
+    OutputView.printMap(this.#bridgeMap);
 
     str == "O" ? this.move() : this.stop();
   }
@@ -48,8 +48,8 @@ class BridgeGame {
     InputView.readGameCommand();
   }
 
-  getResultMap() {
-    return this.#resultMap;
+  getBridgeMap() {
+    return this.#bridgeMap;
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
