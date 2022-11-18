@@ -8,31 +8,11 @@ const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
 
 class BridgeGame {
-  static #COMMAND = {
-    retry: 'R',
-    quit: 'Q',
-  };
-
   #attempt;
 
   #bridge;
 
   #crossingBridge;
-
-  static validate(command) {
-    const { values } = Object;
-    if (!values(BridgeGame.#COMMAND).includes(command)) {
-      throw new Error('[ERROR] 존재하지 않는 커맨트 입니다.');
-    }
-  }
-
-  static isRetry(command) {
-    return command === BridgeGame.#COMMAND.retry;
-  }
-
-  static isQuit(command) {
-    return command === BridgeGame.#COMMAND.quit;
-  }
 
   static printResult(type) {
     return Result.print(type);
