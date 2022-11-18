@@ -3,6 +3,42 @@
 - [] 리드미에 정리한 요구사항 및 입출력 양식을 잘 지키면서 구현한다.
 - [] 구현 후 제출 전 요구사항 및 입출력 양식을 따라가면서 지켰는지 확인한다.
 - [] 통합 테스트를 구현한다.
+- [x] View에서 입출력을 받는 방식에 대해 다형성을 구현한다.
+  - View에서 InputView와 OutputView를 inject 받게끔 구현한다.
+  - InputView, OutputView가 콘솔이 아닌 다른 채널에서 입출력을 받을 수 있게끔 다형성을 구현하기 위해 ConsoleInputView와 OutputView를 만든다.
+  - View에서 InputView와 OutputView를 DI받을 때 ConsoleInputView, ConsoleOutputView를 inject한다.
+
+```js
+// View에서 InputView와 OutputView를 inject받는다
+// 이로써 서로 다른 InputView와 OutputView를 사용할 수 있다.
+const GameView = class extends IGameView {
+  constructor(inputView, outputView) {
+    super();
+    this.inputView = inputView;
+    this.outputView = outputView;
+    if (this.constructor === GameView) {
+      throw new Error(ERROR_MESSAGE.abstract_class);
+    }
+  }
+  ...
+}
+
+// InputView, OutputView는 인터페이스다
+const InputView = {
+  ...
+}
+
+// InputView를 상속받아 콘솔로부터 입출력할 때를 처리한다.
+// 다형성을 구현하는 것이다.
+const ConsoleInputView = class extends InputView {
+  ...
+}
+
+// ConsoleInputView, ConsoleOutput을 DI를 한다.
+// 이로써 다른 채널로부터 Input, Output을 받더라도 DI받는 객체만 변경하면 된다.
+GameView(new ConsoleInputView(), new ConsoleOutputView());
+```
+
 - [] 피어리뷰 때 보았던 좋은 코드들을 적용한다.
 
   - [] 김의천님의 `printTemplate` 메소드

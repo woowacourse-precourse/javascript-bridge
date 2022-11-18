@@ -3,7 +3,7 @@ const IGameView = require('./IGameView');
 const { ERROR_MESSAGE } = require('../constants');
 
 const GameView = class extends IGameView {
-  constructor() {
+  constructor(inputView, outputView) {
     super();
     if (this.constructor === GameView) {
       throw new Error(ERROR_MESSAGE.abstract_class);
