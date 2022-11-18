@@ -80,14 +80,4 @@ describe("다리 건너기 테스트", () => {
     ]);
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
-
-  test("예외 테스트", () => {
-    runException(["a"]);
-  });
-  test("예외 테스트 - 길이가 범위를 벗어난 경우", () => {
-    runException(["2","3"]);
-  });
-  test("예외 테스트 - 길이가 범위를 벗어난 경우", () => {
-    runException(["22","21","20"]);
-  });
 });
