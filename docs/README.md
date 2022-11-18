@@ -3,7 +3,7 @@
 ## 기능 목록
 
 - [x] [출력] 게임 시작 문구를 출력한다.| OutputView#printStartMessage()
-- [ ] [입력] 자동으로 생성할 다리 길이를 입력 받는다.| InputView#readBridgeSize()
+- [x] [입력] 자동으로 생성할 다리 길이를 입력 받는다.| InputView#readBridgeSize()
   - [ ] [예외처리] 입력받은 값이 3 이상 20 이하 숫자가 아니면 예외 처리한다.| InputValidator#validateBridgeSize(bridgeSize)
 - [ ] 다리를 생성한다.| BridgeMaker#makeBridge(bridgeSize, generate)
   - [ ] 다리를 생성할 때 위 칸과 아래 칸 중 건널 수 있는 칸은 0과 1 중 무작위 값을 이용해서 정한다.| BridgeRandomNumberGenerator#generate()
