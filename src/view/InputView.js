@@ -1,4 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
+const BridgeDirection = require('../domain/bridge/BridgeDirection');
+const BridgeSize = require('../domain/bridge/BridgeSize');
+const GameCommand = require('../domain/GameCommand');
 
 const InputView = {
   message(type) {
@@ -10,15 +13,39 @@ const InputView = {
   },
 
   readBridgeSize(callback) {
-    Console.readLine(this.message('INPUT_BRIDGE_SIZE'), callback);
+    Console.readLine(this.message('INPUT_BRIDGE_SIZE'), (size) => {
+      try {
+        BridgeSize.validate(size);
+        callback(size);
+      } catch (error) {
+        Console.print(error.message);
+        InputView.readBridgeSize(callback);
+      }
+    });
   },
 
   readMoving(callback) {
-    Console.readLine(this.message('INPUT_MOVING'), callback);
+    Console.readLine(this.message('INPUT_MOVING'), (direction) => {
+      try {
+        BridgeDirection.validate(direction);
+        callback(direction);
+      } catch (error) {
+        Console.print(error.message);
+        InputView.readMoving(callback);
+      }
+    });
   },
 
   readGameCommand(callback) {
-    Console.readLine(this.message('INPUT_GAME_COMMAND'), callback);
+    Console.readLine(this.message('INPUT_GAME_COMMAND'), (answer) => {
+      try {
+        GameCommand.validate(answer);
+        callback(answer);
+      } catch (error) {
+        Console.print(error.message);
+        InputView.readGameCommand(callback);
+      }
+    });
   },
 };
 
