@@ -39,4 +39,57 @@
 
 - [x] 예외상황 발생 시, 종료하지 말고 다시 입력받아야 한다!
 
-## 
+ <br />
+
+## :file_folder: 파일 구조
+```
+src
+ ┣ controller
+ ┃ ┗ BridgeGameControl.js
+ ┣ models
+ ┃ ┣ AskRetry.js
+ ┃ ┣ BridgeGame.js
+ ┃ ┣ BridgeSize.js
+ ┃ ┗ MovingCheck.js
+ ┣ utiles
+ ┃ ┗ Constant.js
+ ┣ view
+ ┃ ┣ InputView.js
+ ┃ ┗ OutputView.js
+ ┣ App.js
+ ┣ BridgeMaker.js
+ ┗ BridgeRandomNumberGenerator.js
+```
+
+ <br />
+
+## :sparkles: 각 파일의 기능
+### App.js
+- 애플리케이션 실행( = 시동)
+- BridgeGameControl.start()로 다리 건너기 프로그램 실행
+
+### controller/BridgeGameControl.js
+- 다리 건너기 프로그램이 순서대로 진행하도록 컨트롤
+
+### models/BridgeGame.js
+- 움직임에 대한 정답 검사 및 재시작 입력 분류
+
+### models/AskRetry.js, BridgeSize.js, MoveingCheck.js
+- 입력값에 대한 유효성 검사
+
+### view/InputView.js
+- 다리 길이, 움직임, 재시작 값 입력받는 기능
+
+### view/OutputView.js
+- 시작 멘트, 에러 메시지, 다리 모양, 최종 결과를 출력하는 기능
+
+### utils/Constant.js
+- 상수들의 집합
+
+### BridgeMaker.js, BridgeRandomNumberGenerator.js
+- 랜덤 다리를 생성하는 기능
+
+ <br />
+
+## :white_check_mark: 테스트 목록
+
