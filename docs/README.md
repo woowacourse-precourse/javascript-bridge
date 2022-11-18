@@ -3,6 +3,8 @@
 
 ## 진행도
 [O] 입력값들 입력받고 에러처리해주는 기능구현
+[O] 입력한 수만큼 다리를 생성해준뒤 배열로 return 해주는 기능구현
+[] 
 
 ## InputView
 - printGameStart() : 다리 건너기 게임을 시작합니다.
@@ -26,3 +28,6 @@
 - readBridegeSize() - 음수,문자,범위에서 벗어나는 수 에러처리
 - readMoving() : U,D가 아닌 모든 것들 에러처리
 - readGameCommand() : R,Q가 아닌 값 에러처리
+
+## OutputView
+- printMap() : InputView에서 파라미터로 넘겨준 bridgeArray를 받아서 사용자 화면에 뿌려줌
