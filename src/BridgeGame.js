@@ -1,11 +1,11 @@
 class BridgeGame {
   #bridge;
-  #map;
+  #moveList;
   #tryCount;
 
   constructor(bridge) {
     this.#bridge = bridge;
-    this.#map = [];
+    this.#moveList = [];
     this.#tryCount = 1;
   }
 
@@ -13,8 +13,8 @@ class BridgeGame {
     return this.#bridge;
   }
 
-  getMap() {
-    return this.#map;
+  getMoveList() {
+    return this.#moveList;
   }
 
   getTryCount() {
@@ -22,15 +22,15 @@ class BridgeGame {
   }
 
   move(moving) {
-    const nextBridge = this.#bridge[this.#map.length];
-    this.#map.push({
+    const nextBridge = this.#bridge[this.#moveList.length];
+    this.#moveList.push({
       moving,
       result: moving === nextBridge,
     });
   }
 
   retry() {
-    this.#map = [];
+    this.#moveList = [];
     this.#tryCount += 1;
   }
 }

@@ -20,17 +20,17 @@ class App {
 
   handleMoving(moving) {
     this.#model.move(moving);
-    OutputView.printMap(this.#model.getMap());
+    OutputView.printMap(this.#model.getMoveList());
     this.handleResult();
   }
 
   handleResult() {
-    const map = this.#model.getMap();
-    const latestResult = map[map.length - 1].result;
+    const moveList = this.#model.getMoveList();
+    const lastMoveResult = moveList[moveList.length - 1].result;
 
-    if (latestResult === true && map.length === this.#model.getBridge().length) {
-      OutputView.printResult(map, this.#model.getTryCount());
-    } else if (latestResult === false) {
+    if (lastMoveResult === true && moveList.length === this.#model.getBridge().length) {
+      OutputView.printResult(moveList, this.#model.getTryCount());
+    } else if (lastMoveResult === false) {
       InputView.readGameCommand(this.handleGameCommand.bind(this));
     } else {
       InputView.readMoving(this.handleMoving.bind(this));
@@ -39,7 +39,7 @@ class App {
 
   handleGameCommand(gameCommand) {
     if (gameCommand === 'Q') {
-      OutputView.printResult(this.#model.getMap(), this.#model.getTryCount());
+      OutputView.printResult(this.#model.getMoveList(), this.#model.getTryCount());
     } else {
       this.#model.retry();
       InputView.readMoving(this.handleMoving.bind(this));
