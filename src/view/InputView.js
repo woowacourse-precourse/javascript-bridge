@@ -3,13 +3,13 @@ const {
   BridgeSizeValidation,
   MoveInputValidation,
   CommandInputValidation,
-} = require("./Validation");
-const generator = require("./BridgeRandomNumberGenerator").generate;
-const BridgeMaker = require("./BridgeMaker");
-const BridgeGame = require("./BridgeGame");
+} = require("../Validation");
+const generator = require("../BridgeRandomNumberGenerator").generate;
+const BridgeMaker = require("../BridgeMaker");
+const BridgeGame = require("../BridgeGame");
 const OutputView = require("./OutputView");
-const Player = require("./Player");
-const { MESSAGE } = require("./constant/Constants");
+const Player = require("../Player");
+const { MESSAGE } = require("../constant/Constants");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
