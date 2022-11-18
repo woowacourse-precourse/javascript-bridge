@@ -1,4 +1,4 @@
-const ErrorMessage = require("./ErrorMessage");
+const ErrorMessage = require("../messages/ErrorMessage");
 
 class Validator {
   static isInteger(input) {

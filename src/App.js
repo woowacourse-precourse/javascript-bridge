@@ -1,6 +1,6 @@
-const InputView = require("./InputView");
-const InputMessage = require("./InputMessage");
-const OutputView = require("./OutputView");
+const InputView = require("./views/InputView");
+const InputMessage = require("./messages/InputMessage");
+const OutputView = require("./views/OutputView");
 
 class App {
   play() {

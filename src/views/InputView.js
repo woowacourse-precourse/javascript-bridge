@@ -1,9 +1,9 @@
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
-const { makeBridge } = require("./BridgeMaker");
-const { generate } = require("./BridgeRandomNumberGenerator");
-const InputMessage = require("./InputMessage");
-const OutputView = require("./OutputView");
+const BridgeGame = require("../bridge/BridgeGame");
+const { makeBridge } = require("../BridgeMaker");
+const { generate } = require("../bridge/BridgeRandomNumberGenerator");
+const InputMessage = require("../messages/InputMessage");
+const OutputView = require("../views/OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -34,6 +34,10 @@ const InputView = {
     Console.readLine(InputMessage.READ_MOVING_MESSAGE, (value) => {
       const direction = value;
       bridgeGame.move(direction);
+      if (!bridgeGame.getIsGameEnded()) {
+        this.readMoving(bridgeGame);
+        return;
+      }
     });
   },
 
