@@ -25,7 +25,11 @@ class BridgeGame {
    */
   async move(readMoving) {
     const input = await readMoving();
-    if (this.#myBridge[this.#nowState] === input) return true;
+    if (this.#myBridge[this.#nowState] === input) {
+      this.#nowState += 1;
+      return true;
+    }
+
     return false;
   }
 
@@ -34,12 +38,20 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(readGameCommand) {
-    const result = readGameCommand();
+  async retry(readGameCommand) {
+    const result = await readGameCommand();
     // 결과 이용해 값 유효 여부 확인 후 로직 전개
+    if (result === 'R') {
+      this.#nowState = 0;
+      return true;
+    }
+    if (result === 'Q') return false;
   }
 
   printMyBridge(printMap, correct) {
+    if (correct) {
+      return printMap(this.#myBridgeMaterialize, this.#nowState - 1, correct);
+    }
     return printMap(this.#myBridgeMaterialize, this.#nowState, correct);
   }
 }
