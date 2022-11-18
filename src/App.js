@@ -1,13 +1,12 @@
 const BridgeGame = require('./BridgeGame');
 const { MESSAGE } = require('./constant');
-const GameController = require('./controller/GameController');
 const InputView = require('./views/InputView');
+const OutputView = require('./views/OutputView');
 
 class App {
   #bridgeGame;
 
   constructor() {
-    this.#gameCtrl = new GameController();
     this.#bridgeGame = new BridgeGame();
   }
 
@@ -16,7 +15,7 @@ class App {
   }
 
   gameStart() {
-    this.#bridgeGame.printMessage(MESSAGE.START_NOTIFICATION);
+    OutputView.printMessage(MESSAGE.START_NOTIFICATION);
     this.askBridgeSize();
   }
 
@@ -25,7 +24,7 @@ class App {
       try {
         this.handleSize(size);
       } catch (errorMessage) {
-        this.#bridgeGame.printMessage(errorMessage);
+        OutputView.printMessage(errorMessage);
         this.askBridgeSize();
       }
     });
@@ -36,7 +35,7 @@ class App {
       try {
         this.handleDirection(direction);
       } catch (errorMessage) {
-        this.#bridgeGame.printMessage(errorMessage);
+        OutputView.printMessage(errorMessage);
         this.askDirection();
       }
     });
@@ -47,7 +46,7 @@ class App {
       try {
         this.handleCommand(command);
       } catch (errorMessage) {
-        this.#bridgeGame.printMessage(errorMessage);
+        OutputView.printMessage(errorMessage);
         this.askRetry();
       }
     });
@@ -61,14 +60,14 @@ class App {
   handleDirection(direction) {
     this.#bridgeGame.handleDirection(direction);
     const successful = this.#bridgeGame.move(direction);
-    this.#bridgeGame.printCurMap();
+    OutputView.printMap(this.#bridgeGame.curMap());
 
     successful ? this.doseUserClear() : this.askRetry();
   }
 
   doseUserClear() {
-    this.#bridgeGame.checkGameComplete()
-      ? this.#bridgeGame.printGameResult()
+    this.#bridgeGame.gameComplete()
+      ? OutputView.printResult(this.#bridgeGame.gameResult())
       : this.askDirection();
   }
 
@@ -79,7 +78,7 @@ class App {
       this.#bridgeGame.initPlayData();
       this.askDirection();
     } else {
-      this.#bridgeGame.printGameResult();
+      OutputView.printResult(this.#bridgeGame.gameResult());
     }
   }
 }

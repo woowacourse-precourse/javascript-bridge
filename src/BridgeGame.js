@@ -14,10 +14,6 @@ class BridgeGame {
     this.#player = new Player();
   }
 
-  printMessage(message) {
-    OutputView.printMessage(message);
-  }
-
   makeBridge(size) {
     this.#bridge = new Bridge(size);
   }
@@ -30,19 +26,18 @@ class BridgeGame {
   }
 
   move() {
+    const successful = this.#direction.getSuccessful();
     this.#player.increaseCurPlace();
-    if (this.#direction.getSuccessful()) {
-      this.#bridge.updateMap(this.#direction.getDirection(), 'O');
-    } else {
-      this.#bridge.updateMap(this.#direction.getDirection(), 'X');
-    }
 
-    return this.#direction.getSuccessful();
+    successful
+      ? this.#bridge.updateMap(this.#direction.getDirection(), 'O')
+      : this.#bridge.updateMap(this.#direction.getDirection(), 'X');
+
+    return successful;
   }
 
-  printCurMap() {
-    const curMap = Object.values(this.#bridge.getMap());
-    OutputView.printMap(curMap);
+  curMap() {
+    return Object.values(this.#bridge.getMap());
   }
 
   retry(command) {
@@ -50,7 +45,7 @@ class BridgeGame {
     return this.#command.shouldRetry();
   }
 
-  checkGameComplete() {
+  gameComplete() {
     if (this.#bridge.getSize() === this.#player.getCurPlace()) {
       this.#player.setSuccess();
       return true;
@@ -67,12 +62,12 @@ class BridgeGame {
     this.#bridge.initMap();
   }
 
-  printGameResult() {
-    OutputView.printResult(
+  gameResult() {
+    return [
       Object.values(this.#bridge.getMap()),
       this.#player.getSuccess(),
-      this.#player.getNumberOfAttempts()
-    );
+      this.#player.getNumberOfAttempts(),
+    ];
   }
 }
 
