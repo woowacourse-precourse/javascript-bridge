@@ -1,4 +1,4 @@
-const { BRIDGE_REQUIREMENTS, USER_INPUT_CODE, MOVEMENT_LOG_CODE, OUTPUT_SYMBOLS } = require('../constants');
+const { MOVEMENT_LOG_CODE, OUTPUT_SYMBOLS } = require('../constants');
 
 class GameUtils {
   static courseToForm(course) {
