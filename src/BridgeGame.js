@@ -4,23 +4,28 @@ const { Console } = require('@woowacourse/mission-utils');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor({ bridge, bridgeMaker }, { outputView, inputView }) {
-    this.bridge = bridge;
+  constructor({ bridgeModel, bridgeMaker }, { outputView, inputView }) {
+    this.bridgeModel = bridgeModel;
     this.bridgeMaker = bridgeMaker;
     this.outputView = outputView;
     this.inputView = inputView;
-
     this.start();
+    this.askBridgeSize();
   }
 
   start() {
     this.outputView.printStartMessage();
-    Console.close();
   }
 
-  ask() {}
+  askBridgeSize() {
+    this.inputView.readBridgeSize(this.makeBridge.bind(this));
+  }
 
-  makeBridge() {}
+  makeBridge(size) {
+    this.bridgeModel.setBridge(size);
+    Console.print(this.bridgeModel.bridge);
+    Console.close();
+  }
 
   print() {}
   /**
