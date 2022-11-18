@@ -8,7 +8,7 @@ class BridgeGame {
 
   #bridgeMap;
 
-  #correctStep;
+  #stepCount;
 
   #status;
 
@@ -22,7 +22,7 @@ class BridgeGame {
       U: Array(bridgeLength).fill(' '),
       D: Array(bridgeLength).fill(' '),
     };
-    this.#correctStep = 0;
+    this.#stepCount = 0;
     this.#status = {
       numberOfAttempts: 1,
       isSuccess: false,
@@ -43,7 +43,7 @@ class BridgeGame {
   }
 
   isCorrectStep(playerMoving) {
-    if (this.#bridgeAnswer[this.#correctStep] === playerMoving) {
+    if (this.#bridgeAnswer[this.#stepCount] === playerMoving) {
       return true;
     }
     return false;
@@ -51,16 +51,16 @@ class BridgeGame {
 
   updateBridgeMap(playerMoving, isCorrect) {
     if (isCorrect) {
-      this.#bridgeMap[playerMoving][this.#correctStep] = 'O';
+      this.#bridgeMap[playerMoving][this.#stepCount] = 'O';
     } else {
-      this.#bridgeMap[playerMoving][this.#correctStep] = 'X';
+      this.#bridgeMap[playerMoving][this.#stepCount] = 'X';
     }
   }
 
   updateStatus(isCorrect) {
+    this.#stepCount += 1;
     if (isCorrect) {
-      this.#correctStep += 1;
-      if (this.#correctStep === this.#bridgeAnswer.length) {
+      if (this.#stepCount === this.#bridgeAnswer.length) {
         this.#status.isSuccess = true;
         this.#status.isFinished = true;
       }
