@@ -19,4 +19,10 @@ describe('사용자의 입력 테스트', () => {
       InputView.validateMovingDirection(input);
     }).toThrow(errorMessage.MOVE_DIRECTION);
   });
+
+  test.each([['restart'], ['r'], ['q']])("게임의 재시도 입력이 'R' 또는 'Q'가 아닐 경우 예외 발생" , (input) => {
+    expect(() => {
+      InputView.validateGameCommand(input);
+    }).toThrow(errorMessage.RESTART);
+  });
 });
