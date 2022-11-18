@@ -2,6 +2,8 @@ const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./Constants.js');
 const BridgeSize = require('./BridgeSize.js');
 const CrossingBridge = require('./CrossingBridge.js');
+const RandomNumber = require('./BridgeRandomNumberGenerator');
+const BridgeMaker = require('./BridgeMaker');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -14,6 +16,8 @@ const InputView = {
       const bridgeSize = new BridgeSize(size);
       try {
         bridgeSize.validate();
+        const crossableBridge = BridgeMaker.makeBridge(size, RandomNumber.generate);
+        this.readMoving(crossableBridge);
       } catch (err) {
         Console.print(err);
         this.readBridgeSize();
@@ -24,7 +28,7 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(crossableBridge) {
     Console.readLine(MESSAGE.INPUT_SPACE_TO_MOVE, (move) => {
       const crossingBridge = new CrossingBridge(move);
       try {
@@ -41,3 +45,5 @@ const InputView = {
    */
   readGameCommand() {},
 };
+
+InputView.readBridgeSize();
