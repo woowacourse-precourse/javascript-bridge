@@ -10,6 +10,8 @@ const InputView = {
 	READ_BRIDGE_SIZE_MSG: '다리의 길이를 입력해주세요.\n',
 	READ_MOVING_MSG: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
 	WRONG_MSG: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+	RETRY: 'R',
+	QUIT: 'Q',
 
 	readBridgeSize(START_MSG = '', READ_BRIDGE_SIZE_MSG = '') {
 		MissionUtils.Console.readLine(
@@ -65,6 +67,8 @@ const InputView = {
 		}
 	},
 
+	moveAndPrintMap() {},
+
 	inCaseWrong(bridgeGame, prevCrossedBridge) {
 		const lastBridge = prevCrossedBridge.pop();
 		const isCorrect = lastBridge === 'DO' || lastBridge === 'UO';
@@ -81,10 +85,10 @@ const InputView = {
 
 	excuteWrongStep(bridgeGame, cmd, prevCrossedBridge) {
 		InputView.handlingCommandError(bridgeGame, cmd, prevCrossedBridge);
-		if (cmd === 'R') {
+		if (cmd === InputView.RETRY) {
 			InputView.retryStep(bridgeGame);
 		}
-		if (cmd === 'Q') {
+		if (cmd === InputView.QUIT) {
 			InputView.quitStep(bridgeGame, prevCrossedBridge);
 		}
 	},
