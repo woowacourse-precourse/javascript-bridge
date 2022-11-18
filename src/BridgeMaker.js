@@ -11,8 +11,14 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
     while(size > bridge.length) {
-      Console.print(generateRandomNumber);
-      bridge.push(generateRandomNumber);
+      switch(generateRandomNumber()) {
+        case '1':
+          bridge.push('U');
+          break;
+        case '0':
+          bridge.push('D');
+          break;
+      }
     }
     return bridge;
   },
