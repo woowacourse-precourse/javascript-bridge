@@ -1,4 +1,5 @@
 const BridgeGame = require('../src/BridgeGame');
+const BridgeState = require('../src/BridgeState');
 
 describe('Bridge Game Move Test', () => {
   describe('사용자의 입력값이 일치할 경우', () => {
@@ -97,5 +98,37 @@ describe('Bridge Game draw Test', () => {
       const result = bridgeGame.draw(moveBridge);
       expect(result).toEqual(['O | X', '  |  ']);
     });
+  });
+});
+
+describe('Bridge Game reTry Test', () => {
+  test.each([['U'], ['U', 'D'], ['U', 'D', 'D']])('', () => {
+    const bridgeGame = new BridgeGame(['U', 'D', 'U']);
+    const userBridge = ['U'];
+    const result = bridgeGame.retry(userBridge);
+    expect(result).toEqual([]);
+  });
+
+  test('시도 횟수 테스트', () => {
+    BridgeState.numberOfAttempts = 1;
+    const bridgeGame = new BridgeGame(['U', 'D', 'U']);
+    const userBridge = ['U'];
+    bridgeGame.retry(userBridge);
+
+    const result = BridgeState.numberOfAttempts;
+    expect(result).toBe(2);
+  });
+
+  test('시도 횟수 테스트', () => {
+    BridgeState.numberOfAttempts = 1;
+    const bridgeGame = new BridgeGame(['U', 'D', 'U']);
+    const userBridge = ['U'];
+
+    for (let i = 0; i < 5; i++) {
+      bridgeGame.retry(userBridge);
+    }
+
+    const result = BridgeState.numberOfAttempts;
+    expect(result).toBe(6);
   });
 });
