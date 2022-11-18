@@ -129,4 +129,12 @@ describe('배열 파악 함수 테스트', () => {
       Validation.checkIsArray(EXPECTED);
     }).toThrow(VALIDATION_ARRAY_TEXT);
   });
+
+  test('인수가 배열이라면 예외를 시키지 않는다.', () => {
+    const EXPECTED = [123];
+
+    expect(() => {
+      Validation.checkIsArray(EXPECTED);
+    }).not.toThrow(VALIDATION_ARRAY_TEXT);
+  });
 });
