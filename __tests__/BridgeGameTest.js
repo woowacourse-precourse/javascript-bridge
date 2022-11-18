@@ -12,4 +12,15 @@ describe("BridgeGame 테스트", () => {
     });
     expect(output.bridgeMap).toEqual(outputBridge);
   });
+
+  test("다리 진행 테스트: 다리 건너기 실패", () => {
+    const answers = ["U", "U", "D"];
+    const outputBridge = { up: "[ O | O |   |", down: "[   |   | X |" };
+
+    const output = new Game.BridgeGame(["U", "U", "U"]);
+    answers.map((e) => {
+      output.move(e);
+    });
+    expect(output.bridgeMap).toEqual(outputBridge);
+  });
 });
