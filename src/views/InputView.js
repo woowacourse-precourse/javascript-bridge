@@ -31,7 +31,13 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(userInputMessage.ENTER_MOVE_DIRECTION, (movingDirection) => {
-      this.validateMovingDirection(movingDirection);
+      try {
+        this.validateMovingDirection(movingDirection);
+        Console.print(movingDirection);
+      } catch (e) {
+        Console.print(e);
+        this.readMoving();
+      }
     });
   },
 
