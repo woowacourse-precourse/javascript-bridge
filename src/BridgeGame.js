@@ -42,7 +42,18 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+   retry(input, count, bridge, bridgeMap) {
+    const INPUTVIEW = require("../src/Inputview");
+    const OUTPUTVIEW = require("../src/Outputview");
+    const MISSIONUTILS = require("@woowacourse/mission-utils");
+    if (input == 'R'){
+      INPUTVIEW.readMoving(count, 0, bridge, "");
+    }
+    else{
+      MISSIONUTILS.Console.print("실패!");
+      MISSIONUTILS.Console.close();
+    }
+  }
 }
 
 module.exports = BridgeGame;

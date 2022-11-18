@@ -62,7 +62,8 @@ const InputView = {
         throw new Error("[ERROR] 재시도 여부는 R 또는 Q만 입력해야 합니다.");
       }
       
-      MISSIONUTILS.Console.print(input);
+      var temp = new BRIDGE_GAME;
+      temp.retry(input, count, bridge, bridgeMap);
 
     });
   },
