@@ -2,10 +2,14 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const {
+  REQUEST_FOR_BRIDGE_LENGTH,
+  REQUEST_FOR_MOVING
+} = require('./constants/requests/requests');
+const {
   IS_INPUT_NOT_NUMBER,
   IS_INPUT_EMPTY,
   IS_INPUT_NOT_IN_RANGE
-} = require('./constants/error/MakeBridgeError');
+} = require('./constants/errors/MakeBridgeError');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -42,16 +46,21 @@ const InputView = {
    */
 
   readBridgeSize() {
-    return Console.readLine('다리의 길이를 입력해주세요.\n', (input) => {
+    Console.readLine(REQUEST_FOR_BRIDGE_LENGTH, (input) => {
       this.checkBridgeLengthInput(input);
       BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator.generate);
+      return this.readMoving();
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(REQUEST_FOR_MOVING, (input) => {
+      console.log(input);
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
