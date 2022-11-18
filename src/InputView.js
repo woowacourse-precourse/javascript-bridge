@@ -40,7 +40,7 @@ const InputView = {
       this.validateMoving(upOrDown);
       const round = this.bridgeGame.move();
 
-      this.readMovingOrGameCommand(bridge[round - 1], upOrDown);
+      this.readMovingOrGameCommand(bridge, upOrDown);
     });
   },
 
@@ -48,8 +48,8 @@ const InputView = {
     if (upOrDown !== 'U' && upOrDown !== 'D') throw new Error(Messages.MOVING_ERROR);
   },
 
-  readMovingOrGameCommand(oneBridge, upOrDown) {
-    const hasCorrect = OutputView.printMap(oneBridge, upOrDown);
+  readMovingOrGameCommand(bridge, upOrDown) {
+    const hasCorrect = OutputView.printMap(bridge[round - 1], upOrDown);
   },
 
   /**
