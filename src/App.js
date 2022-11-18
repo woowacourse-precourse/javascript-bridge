@@ -9,10 +9,10 @@ class App {
 
   play() {
     OutputView.printStart();
-    InputView.readBridgeSize(this.init.bind(this));
+    InputView.readBridgeSize(this.handleBridgeSize.bind(this));
   }
 
-  init(size) {
+  handleBridgeSize(size) {
     const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.#model = new BridgeGame(bridge);
     InputView.readMoving(this.handleMoving.bind(this));
