@@ -1,6 +1,4 @@
 const Bridge = require('./Bridge');
-const OutputView = require('./OutputView');
-const { printMap, printResult } = require('./OutputView');
 const Result = require('./Result');
 
 /**
