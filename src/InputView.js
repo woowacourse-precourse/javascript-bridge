@@ -24,7 +24,7 @@ const InputView = {
       
       const bridge = BRIDGE_MAKER.makeBridge(input,BRIDGE_RANDOM_NUMBER_GENERATOR.generate());
       MISSIONUTILS.Console.print(bridge);
-      InputView.readMoving(input, 0, bridge, "", 1);
+      InputView.readMoving(input-1, 0, bridge, "", 1);
     });
 
   },

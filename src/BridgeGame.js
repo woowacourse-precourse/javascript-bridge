@@ -11,30 +11,45 @@ class BridgeGame {
     const INPUTVIEW = require("../src/Inputview");
     const OUTPUTVIEW = require("../src/Outputview");
     const MISSIONUTILS = require("@woowacourse/mission-utils");
-    if (bridge[i] == input){
-      if(i==count){
+    
+    if(i==count){
+      if (bridge[i] == input){
         bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
         MISSIONUTILS.Console.print("최종 게임 결과");
         OUTPUTVIEW.printResult(bridgeMap, "성공", tryCount)
+        MISSIONUTILS.Console.close();
+        return;
       }
       else{
         if (i == 0){
-          bridgeMap = OUTPUTVIEW.printMapFirst(bridge, 'O');
+          bridgeMap = OUTPUTVIEW.printMapFirst(bridge, 'X');
         }
         else{
-          bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
+          bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'X', bridgeMap);
         }
-        INPUTVIEW.readMoving(count, i+1, bridge, bridgeMap, tryCount);
-      }    
+        INPUTVIEW.readGameCommand(count, bridge, bridgeMap,tryCount);
+      }
     }
     else{
-      if (i == 0){
-        bridgeMap = OUTPUTVIEW.printMapFirst(bridge, 'X');
-      }
+      if (bridge[i] == input){
+          if (i == 0){
+            bridgeMap = OUTPUTVIEW.printMapFirst(bridge, 'O');
+          }
+          else{
+            bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
+          }
+          INPUTVIEW.readMoving(count, i+1, bridge, bridgeMap, tryCount);
+      }    
+      
       else{
-        bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'X', bridgeMap);
+        if (i == 0){
+          bridgeMap = OUTPUTVIEW.printMapFirst(bridge, 'X');
+        }
+        else{
+          bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'X', bridgeMap);
+        }
+        INPUTVIEW.readGameCommand(count, bridge, bridgeMap,tryCount);
       }
-      INPUTVIEW.readGameCommand(count, bridge, bridgeMap,tryCount);
     }
   }
 
