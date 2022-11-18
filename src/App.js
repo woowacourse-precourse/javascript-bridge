@@ -10,11 +10,7 @@ class App {
 
   play() {
     OutputView.printStart();
-    try {
-      this.progressApp(this.#appStatus);
-    } catch (e) {
-      console.log(e, 'sdasdaasdsad');
-    }
+    this.progressApp(this.#appStatus);
   }
 
   progressApp(appStatus) {
@@ -28,10 +24,9 @@ class App {
         Validator.checkBridgeInput(answer);
         this.#bridgeAnswer = +answer;
         this.#appStatus = 2;
-        // console.log(this.#appStatus, typeof this.#bridgeAnswer, '확인');
         this.progressApp(this.#appStatus);
       } catch (e) {
-        console.log(e, 'easdsadds');
+        console.log(e, '예외발생');
         this.progressApp(this.#appStatus);
       }
     });
