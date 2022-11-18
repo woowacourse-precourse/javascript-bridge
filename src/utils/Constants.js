@@ -1,16 +1,11 @@
 const DEFAULTS = Object.freeze({
-  START_RANGE_cnt : 3,
-  END_RANGE_cnt : 20,
-  UP : 'U',
-  DOWN : 'D',
-  UP_cnt : 1,
-  DOWN_cnt : 0,
-  CAN_MOVE : 'O',
-  CANT_MOVE : 'X',
+  START_RANGE_cnt : 3, END_RANGE_cnt : 20,
+  UP : 'U', DOWN : 'D',
+  UP_cnt : 1, DOWN_cnt : 0,
+  CAN_MOVE : 'O', CANT_MOVE : 'X',
   SEPARATOR : '|',
   SPACE : ' ',
-  RESTART : 'R',
-  QUIT : 'Q',
+  RESTART : 'R', QUIT : 'Q',
 });
 
 const CONSOLELINE = Object.freeze({
