@@ -8,6 +8,11 @@
 
 #### model
 
+<figure style="margin: 1rem auto; max-width: 35rem;">
+    <img src="./models.jpg" alt="img"/>
+    <figcaption style="text-align:center; font-size:0.8em; color:gray;">모델 구조</figcaption>
+</figure>
+
 - Result
 	- [ ] `isCompelete()`
 	- [ ] `isFailed()`
