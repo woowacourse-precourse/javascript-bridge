@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { REQUEST_MSG } = require('./constants/message.js');
+const { printMsg } = require('./OutputView.js');
 const BridgeGame = require('./BridgeGame.js');
 
 const bridgeGame = new BridgeGame();
@@ -13,7 +14,7 @@ const InputView = {
     try {
       bridgeGame.build(size);
     } catch ({ message }) {
-      Console.print(message);
+      printMsg(message);
       InputView.requestBridgeSize();
     }
 
