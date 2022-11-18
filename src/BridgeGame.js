@@ -29,7 +29,8 @@ class BridgeGame {
     this.currBridge = new CurrBridge(direction);
 
     this.#tryingCount += 1;
-    this.winningBridge.compare(direction);
+    const canMove = this.currBridge.canMove(direction, this.winningBridge);
+    console.log(canMove);
   }
 
   /**
