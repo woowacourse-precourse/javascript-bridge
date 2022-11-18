@@ -2,6 +2,8 @@ const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
 
+const RETRY_OR_NOT = { R: true, Q: false };
+
 class App {
   #bridgeGame = new BridgeGame();
 
@@ -34,6 +36,13 @@ class App {
 
   askRetry() {
     InputView.readGameCommand(this.checkRetry);
+  }
+
+  checkRetry(command) {
+    if (RETRY_OR_NOT[command]) {
+      this.#bridgeGame.undoOneStep();
+      return this.askMove();
+    }
   }
 }
 
