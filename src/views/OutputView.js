@@ -34,6 +34,12 @@ const OutputView = {
     Console.print(GAME_MESSAGE.SUCCESS_OPTION + OutputUtils.convertWinMessage(isWin));
     Console.print(GAME_MESSAGE.TRY_COUNT + tryCount);
   },
+
+  printError(message) {
+    Console.print('');
+    Console.print(message);
+    Console.print('');
+  },
 };
 
 module.exports = OutputView;

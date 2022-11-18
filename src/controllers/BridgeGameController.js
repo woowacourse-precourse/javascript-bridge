@@ -16,44 +16,54 @@ class BridgeGameController {
   }
 
   #onBridgeSizeSubmit(size) {
-    InputValidator.validateEmpty(size);
-    InputValidator.validateSpace(size);
-    InputValidator.validateNumber(size);
-
-    this.#game.setBridge(+size);
-
-    InputView.readMoving(this.#onMovingSubmit.bind(this));
+    try {
+      InputValidator.validateSize(size);
+      this.#game.setBridge(+size);
+      InputView.readMoving(this.#onMovingSubmit.bind(this));
+    } catch (e) {
+      OutputView.printError(e);
+      InputView.readBridgeSize(this.#onBridgeSizeSubmit.bind(this));
+    }
   }
 
-  #onMovingSubmit(input) {
-    const isCrossed = this.#game.move(input);
-    const bridgeMap = this.#game.getMap();
+  #onMovingSubmit(command) {
+    try {
+      InputValidator.validateMovingCommand(command);
 
-    OutputView.printMap(bridgeMap);
+      const isCrossed = this.#game.move(command);
+      const bridgeMap = this.#game.getMap();
 
-    if (!isCrossed) {
+      OutputView.printMap(bridgeMap);
+
+      if (!isCrossed) {
+        InputView.readGameCommand(this.#onGameCommandSubmit.bind(this));
+        return;
+      }
+      if (this.#game.isWin()) {
+        this.#runQuit();
+        return;
+      }
+
+      InputView.readMoving(this.#onMovingSubmit.bind(this));
+    } catch (e) {
+      OutputView.printError(e);
+      InputView.readMoving(this.#onMovingSubmit.bind(this));
+    }
+  }
+
+  #onGameCommandSubmit(command) {
+    try {
+      InputValidator.validateGameCommand(command);
+      if (command === GAME_RULE.RETRY) {
+        this.#runRetry();
+      }
+      if (command === GAME_RULE.QUIT) {
+        this.#runQuit();
+      }
+    } catch (e) {
+      OutputView.printError(e);
       InputView.readGameCommand(this.#onGameCommandSubmit.bind(this));
-      return;
     }
-    if (this.#game.isWin()) {
-      this.#runQuit();
-      return;
-    }
-
-    InputView.readMoving(this.#onMovingSubmit.bind(this));
-  }
-
-  #onGameCommandSubmit(input) {
-    if (input === GAME_RULE.RETRY) {
-      this.#runRetry();
-      return;
-    }
-    if (input === GAME_RULE.QUIT) {
-      this.#runQuit();
-      return;
-    }
-
-    throw new Error('[ERROR] 재시도 여부 입력값은 R 또는 Q여야 합니다.');
   }
 
   #runRetry() {

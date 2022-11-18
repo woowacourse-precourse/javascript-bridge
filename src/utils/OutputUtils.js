@@ -2,11 +2,10 @@ const { BRIDGE_MESSAGE, GAME_MESSAGE } = require('../constants');
 
 const OutputUtils = {
   convertMapMessage(square) {
-    if (square === null) return BRIDGE_MESSAGE.NOT_SELECTED;
     if (square === true) return BRIDGE_MESSAGE.CROSSABLE;
     if (square === false) return BRIDGE_MESSAGE.UNCROSSABLE;
 
-    throw new Error('[ERROR]');
+    return BRIDGE_MESSAGE.NOT_SELECTED;
   },
 
   stringifyMap(bridgeSide) {
