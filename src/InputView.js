@@ -4,7 +4,7 @@ const {
   MoveInputValidation,
   CommandInputValidation,
 } = require("./Validation");
-const generater = require("./BridgeRandomNumberGenerator").generate;
+const generator = require("./BridgeRandomNumberGenerator").generate;
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
@@ -35,7 +35,7 @@ const InputView = {
     const size = bridgeSizeValidation.makeStringToNumber();
     Player.updateSize(size);
 
-    this.canWalkBridge = BridgeMaker.makeBridge(size, generater);
+    this.canWalkBridge = BridgeMaker.makeBridge(size, generator);
 
     this.readMoving();
   },
