@@ -2,6 +2,7 @@ const { BRIDGE_START, BRIDGE_END } = require('./MESSAGES/NumberMessage');
 const {
   BRIDGE_INPUT_ERROR,
   REGAME_INPUT_ERROR,
+  MOVE_INPUT_ERROR,
 } = require('./MESSAGES/InputMessage');
 
 const InputErrorView = {
@@ -20,6 +21,13 @@ const InputErrorView = {
       return true;
     }
     throw REGAME_INPUT_ERROR;
+  },
+
+  movingError(move) {
+    if (move === 'U' || move === 'D') {
+      return true;
+    }
+    throw MOVE_INPUT_ERROR;
   },
 };
 
