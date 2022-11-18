@@ -15,11 +15,8 @@ const BridgeMaker = {
     const bridge = [];
     for (let x = 0; x < size; x++) {
       const randomNumbers = generateRandomNumber();
-      const IS_UP = randomNumbers === 1;
-      const IS_DOWN = randomNumbers === 0;
-
-      if (IS_UP) bridge.push(UP);
-      if (IS_DOWN) bridge.push(DOWN);
+      if (randomNumbers == '1') bridge.push(UP);
+      if (randomNumbers == '0') bridge.push(DOWN);
     }
     return bridge;
   },
