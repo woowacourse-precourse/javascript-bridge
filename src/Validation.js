@@ -3,4 +3,14 @@ const isValidateBridgeSize = (size) => {
   return regExp.test(size);
 };
 
-module.exports = { isValidateBridgeSize };
+const isValidateRoundInput = (input) => {
+  const regExp = /U|D/;
+  return regExp.test(input);
+};
+
+const isValidateRetryInput = (input) => {
+  const regExp = /R|Q/;
+  return regExp.test(input);
+};
+
+module.exports = { isValidateBridgeSize, isValidateRoundInput, isValidateRetryInput };
