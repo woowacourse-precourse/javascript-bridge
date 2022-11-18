@@ -14,7 +14,7 @@
 - [x] 게임 시작 문구를 출력한다. - OutputView#printStart()
 - [x] 다리의 길이를 입력 받고 bridgeSize를 private로 BridgeGame 클래스 필드에 추가. - InputView#readBridgeSize()
 - [x] 이동할 칸을 입력 받는다. - InputView#readMoving()
-- [ ] 이동하고 난 결과를 출력한다. - OutputView#printMap()
+- [x] 이동하고 난 결과를 출력한다. - OutputView#printMap()
 - [ ] 게임을 다시 시도할지 종료할지 여부를 입력받는다. - InputView#readGameCommand()
 - [ ] 게임의 최종 결과를 정해진 형식에 맞춰 출력한다. - OutputView#printResult()
 
