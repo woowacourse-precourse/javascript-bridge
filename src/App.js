@@ -59,27 +59,32 @@ class App {
 
   handleDirection(direction) {
     this.#bridgeGame.handleDirection(direction);
-    const successful = this.#bridgeGame.move(direction);
-    OutputView.printMap(this.#bridgeGame.curMap());
+    const successful = this.#bridgeGame.move();
+    const curMap = this.#bridgeGame.curMap();
+    OutputView.printMap(curMap);
 
-    successful ? this.doseUserClear() : this.askRetry();
+    successful ? this.doseUserWin() : this.askRetry();
   }
 
-  doseUserClear() {
-    this.#bridgeGame.gameComplete()
-      ? OutputView.printResult(this.#bridgeGame.gameResult())
-      : this.askDirection();
+  doseUserWin() {
+    const userWin = this.#bridgeGame.gameComplete();
+    const gameResult = this.#bridgeGame.gameResult();
+
+    userWin ? OutputView.printResult(gameResult) : this.askDirection;
   }
 
   handleCommand(command) {
     const shouldRetry = this.#bridgeGame.retry(command);
-    if (shouldRetry) {
-      this.#bridgeGame.increaseNumberOfAttempts();
-      this.#bridgeGame.initPlayData();
-      this.askDirection();
-    } else {
-      OutputView.printResult(this.#bridgeGame.gameResult());
-    }
+    const gameResult = this.#bridgeGame.gameResult();
+
+    shouldRetry ? this.retry() : OutputView.printResult(gameResult);
+  }
+
+  retry() {
+    this.#bridgeGame.increaseNumberOfAttempts();
+    this.#bridgeGame.initPlayData();
+
+    this.askDirection();
   }
 }
 

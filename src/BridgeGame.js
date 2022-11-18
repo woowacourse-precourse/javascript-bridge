@@ -1,6 +1,5 @@
 const Player = require('./models/Player');
 const Bridge = require('./models/Bridge');
-const OutputView = require('./views/OutputView');
 const Command = require('./models/Command');
 const Direction = require('./models/Direction');
 
