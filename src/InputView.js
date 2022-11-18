@@ -1,4 +1,4 @@
-const OutputView = require("./OutputView");
+const { OutputView } = require("./OutputView");
 const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGE } = require("./constants");
 const Validation = require("./Validation");
@@ -9,14 +9,17 @@ const BridgeGame = require("./BridgeGame");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
+let callMove = 0;
+const validation = new Validation();
+const brigeGame = new BridgeGame();
+
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-
   readBridgeSize() {
     // 입력받고 난 다음 할 내용들 다 입출력하고
-    const validation = new Validation();
+
     Console.readLine(MESSAGE.INPUT_BRIDGE_LENGTH_MESSAGE, (bridgeLength) => {
       try {
         validation.validateBridgeLength(bridgeLength);
@@ -32,15 +35,19 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgeLength) {
-    const validation = new Validation();
-    Console.readLine(MESSAGE.INPUT_MOVE_MESSAGE, (move) => {
+    const bridge = BridgeMaker.makeBridge(
+      bridgeLength,
+      BridgeRandomNumberGenerator.generate
+    );
+    Console.readLine(MESSAGE.INPUT_MOVE_MESSAGE, (inputMove) => {
       try {
-        validation.validateMove(move);
-        const bridge = BridgeMaker.makeBridge(
-          bridgeLength,
-          BridgeRandomNumberGenerator.generate
-        );
-        BridgeGame.move();
+        validation.validateMove(inputMove);
+        [callMove, moveResult] = brigeGame.move(inputMove, callMove, bridge);
+        moveResult === "X"
+          ? this.readGameCommand()
+          : callMove === bridgeLength
+          ? OutputView.printResult()
+          : this.readMoving(bridgeLength);
       } catch (error) {
         Console.print(error);
         this.readMoving(bridgeLength);
