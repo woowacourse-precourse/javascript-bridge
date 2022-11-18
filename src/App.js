@@ -34,7 +34,7 @@ const BridgeGame = require('./BridgeGame')
 class App {
 
   constructor() {
-    this.BRIDGE_RESULT = []
+    this.TRY_TIME = 1
     this.BRIDGE_U = []
     this.BRIDGE_D = []
   }
@@ -76,7 +76,7 @@ class App {
   }
 
   finishGameSuccess(bridge){
-    OutputView.printResult('SUCCESS',bridge)
+    OutputView.printResult('SUCCESS',bridge,this.TRY_TIME)
   }
 }
 
