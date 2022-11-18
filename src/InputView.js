@@ -23,7 +23,11 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(MESSAGE.INPUT_SPACE_TO_MOVE, (move) => {
+      console.log(move);
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
