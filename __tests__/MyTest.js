@@ -66,3 +66,30 @@ describe(`다리를 생성기능 테스트`, () => {
     expect(String(BridgeRandomNumberGenerator.generate())).toMatch(/0|1/);
   });
 });
+describe(`userMove 입력값 타당성 테스트`, () => {
+  test.each([["u"], ["d"]])(
+    `알파벳이 UpperCase가 아닐 때 에러발생`,
+    (input) => {
+      expect((input) => {
+        Validation.checkMove(input);
+      }).toThrow();
+    }
+  );
+
+  test.each([["#d"], ["a"], ["1d"], ["3U"], ["123"]])(
+    `U 또는 D 가 아닌 다른 걸 입력했을 때 에러발생`,
+    (input) => {
+      expect((input) => {
+        Validation.checkMove(input);
+      }).toThrow();
+    }
+  );
+  test.each([["DD"], ["UU"], ["Ud"], ["U3"], ["U%"]])(
+    `2글자 이상을 입력했을 때 에러발생`,
+    (input) => {
+      expect((input) => {
+        Validation.checkMove(input);
+      }).toThrow();
+    }
+  );
+});
