@@ -10,6 +10,8 @@ const MESSAGE = {
   FAIL: "실패",
 
   ERROR_SIZE: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
+  ERROR_NUMBER: "[ERROR] 숫자를 넣어주세요.",
+  ERROR_INTEGER: "[ERROR] 정수를 넣어주세요.",
 };
 
 module.exports = { MESSAGE };

@@ -13,7 +13,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(MESSAGE.READ_BRIDGE_SIZE, (size) => {
       try {
-        ValidateInput.validate(size);
+        ValidateInput.validate(Number(size));
       } catch (e) {
         this.readBridgeSize();
       }
