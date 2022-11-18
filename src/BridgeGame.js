@@ -71,6 +71,10 @@ class BridgeGame {
 
     return copiedBridgeResult;
   }
+
+  getBridge() {
+    return this.#bridge;
+  }
 }
 
 module.exports = BridgeGame;
