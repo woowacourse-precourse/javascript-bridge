@@ -5,6 +5,7 @@ class BridgeGame {
 
 	constructor(bridgeSize, generateRandomNumber) {
 		this.#bridge = BridgeMaker.makeBridge(bridgeSize, generateRandomNumber);
+		console.log(this.#bridge);
 	}
 
 	move(moving) {
@@ -43,12 +44,24 @@ class BridgeGame {
 		return prevCrossedBridge;
 	}
 
-	/**
-	 * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-	 * <p>
-	 * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-	 */
-	retry() {}
+	retry() {
+		const prevCrossedBridge = this.backMove();
+		const yetCrossBridge = this.delPrevBridgeEle();
+		this.#bridge = [...prevCrossedBridge, ...yetCrossBridge];
+	}
+
+	backMove() {
+		const inverse = true;
+		let prevCrossedBridge = this.delPrevBridgeEle(inverse);
+		const currentBridgeEle = prevCrossedBridge.pop();
+		if (currentBridgeEle === 'UX') {
+			prevCrossedBridge.push('D');
+		}
+		if (currentBridgeEle === 'DX') {
+			prevCrossedBridge.push('U');
+		}
+		return prevCrossedBridge;
+	}
 }
 
 module.exports = BridgeGame;

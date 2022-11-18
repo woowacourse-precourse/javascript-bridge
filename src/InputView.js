@@ -73,14 +73,18 @@ const InputView = {
 		}
 	},
 
-	readGameCommand() {
+	readGameCommand(bridgeGame) {
 		MissionUtils.Console.readLine(InputView.WRONG_MSG, (cmd) => {
-			InputView.excuteWrongStep(cmd);
+			InputView.excuteWrongStep(bridgeGame, cmd);
 		});
 	},
 
-	excuteWrongStep(cmd) {
+	excuteWrongStep(bridgeGame, cmd) {
 		Validation.validateCmd(cmd);
+		if (cmd === 'R') {
+			bridgeGame.retry();
+			InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
+		}
 	},
 };
 
