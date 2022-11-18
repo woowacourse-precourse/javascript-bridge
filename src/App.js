@@ -1,9 +1,9 @@
 const OutputView = require("./OutputView");
 const InputView = require("./InputView");
 const BridgeGame = require("./BridgeGame");
-const {Console} = require("@woowacourse/mission-utils");
-const validator = require("./utils")
-
+const { Console } = require("@woowacourse/mission-utils");
+const validator = require("./utils");
+const { ERROR_MESSAGE } = require("./constants");
 class App {
   MOVE_TO_FORK_MAP = {
     END: () => {
@@ -16,7 +16,7 @@ class App {
     FAIL: () => {
       this.requestIsTry();
     },
-  }
+  };
 
   FAIL_TO_FORK_MAP = {
     Q: () => {
@@ -27,8 +27,8 @@ class App {
       this.bridgeGame.retry();
       OutputView.clearThread();
       this.requestDirection();
-    }
-  }
+    },
+  };
 
   constructor() {
     this.bridgeGame = new BridgeGame();
@@ -44,17 +44,17 @@ class App {
   }
 
   makeBridge(response) {
-    if (validator.isNotSize(response)) {
-      Console.print("[ERROR] 사이즈는 3 ~ 20 사이입니다.");
+    if (validator.isOverSize(response)) {
+      Console.print(ERROR_MESSAGE.SIZE_RANGE);
       Console.close();
-      // throw new Error("[ERROR] 사이즈는 3 ~ 20 사이입니다.");
-    };
-    if (validator.isInteger(response)) {
-      Console.print("[ERROR] 사이즈는 정수여야 합니다.");
+      return;
+    }
+    if (!validator.isInteger(response)) {
+      Console.print(ERROR_MESSAGE.SIZE_INTEGER);
       Console.close();
-      // throw new Error("[ERROR] 사이즈는 정수여야 합니다.");
-    };
-    
+      return;
+    }
+
     this.bridgeGame.setBridge(response);
     this.requestDirection();
   }
@@ -65,12 +65,12 @@ class App {
 
   moveUser(response) {
     if (validator.isNotUorD(response)) {
-      // throw new Error("[ERROR] 이동은 U, D만 가능합니다.");
-      Console.print("[ERROR] 이동은 U, D만 가능합니다.");
+      Console.print(ERROR_MESSAGE.OPERATION_MOVE);
       Console.close();
+      return;
     }
     this.bridgeGame.move(response);
-    OutputView.printMap(this.bridgeGame)
+    OutputView.printMap(this.bridgeGame);
     const status = this.bridgeGame.fork();
     this.MOVE_TO_FORK_MAP[status]();
   }
@@ -81,16 +81,15 @@ class App {
 
   TryOrClose(response) {
     if (validator.isNotRorQ(response)) {
-      // throw new Error("[ERROR] 입력은 R, Q만 가능합니다.");
-      Console.print("[ERROR] 입력은 R, Q만 가능합니다.");
+      Console.print(ERROR_MESSAGE.OPERATION_GAME_COMMAND);
       Console.close();
+      return;
     }
     this.FAIL_TO_FORK_MAP[response]();
   }
-
 }
 
-// const app = new App();
-// app.play();
+const app = new App();
+app.play();
 
 module.exports = App;

@@ -1,8 +1,10 @@
+const {OPERATION_KEY, LIMIT} = require('./constants')
+
 const validator = {
-  isNotSize: (input) => !(input >= 3 && input <= 20),
-  isInteger: (input) => Number.isInteger(input),
-  isNotUorD: (input) => !(input === "U" || input === "D"),
-  isNotRorQ: (input) => !(input === "R" || input === "Q")
+  isOverSize: (input) => !(Number(input) >= LIMIT.MIN_VALUE && Number(input) <= LIMIT.MAX_VALUE),
+  isInteger: (input) => Number.isInteger(Number(input)),
+  isNotUorD: (input) => !(input === OPERATION_KEY.UP || input === OPERATION_KEY.DOWN),
+  isNotRorQ: (input) => !(input === OPERATION_KEY.RETRY || input === OPERATION_KEY.QUIT)
 }
 
 module.exports = validator;

@@ -1,3 +1,5 @@
+const {OPERATION_KEY} = require('./constants')
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -11,7 +13,7 @@ const BridgeMaker = {
     let route = [];
     for (let i = 0; i < size; i++) {
       const number = Number(generateRandomNumber());
-      route.push(number ? 'U' : 'D');
+      route.push(number ? OPERATION_KEY.UP : OPERATION_KEY.DOWN);
     }
 
     return route
