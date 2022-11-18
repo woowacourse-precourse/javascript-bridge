@@ -7,7 +7,7 @@ class Validation {
       throw new Error(message);
     } catch (e) {
       Console.print(e.message);
-      return false;
+      return true;
     }
   }
 
@@ -17,23 +17,25 @@ class Validation {
       printNewLine();
       return Validation.showErrorMessage('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
     }
-    return true;
+    return false;
   }
 
   static checkRoundInput(input) {
     const regExp = /U|D/;
     if (!regExp.test(input)) {
       printNewLine();
-      Validation.showErrorMessage('[ERROR] 입력값은 문자 "U"이거나 "D"여야 합니다.');
+      return Validation.showErrorMessage('[ERROR] 입력값은 문자 "U"이거나 "D"여야 합니다.');
     }
+    return false;
   }
 
   static checkRetryInput(input) {
     const regExp = /R|Q/;
     if (!regExp.test(input)) {
       printNewLine();
-      Validation.showErrorMessage('[ERROR] 입력값은 문자 "R"이거나 "Q"여야 합니다.');
+      return Validation.showErrorMessage('[ERROR] 입력값은 문자 "R"이거나 "Q"여야 합니다.');
     }
+    return false;
   }
 }
 
