@@ -40,12 +40,18 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(bridgeMap) {
+  convertWinMessage(isWin) {
+    if (isWin) return GAME_MESSAGE.SUCCESS;
+
+    return GAME_MESSAGE.FAIL;
+  },
+
+  printResult(bridgeMap, isWin, tryCount) {
     Console.print(GAME_MESSAGE.RESULT_TITLE);
     OutputView.printMap(bridgeMap);
     Console.print('');
-    Console.print(GAME_MESSAGE.SUCCESS_OPTION);
-    Console.print(GAME_MESSAGE.TRY_COUNT);
+    Console.print(GAME_MESSAGE.SUCCESS_OPTION + OutputView.convertWinMessage(isWin));
+    Console.print(GAME_MESSAGE.TRY_COUNT + tryCount);
   },
 };
 

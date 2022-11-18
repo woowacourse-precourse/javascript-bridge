@@ -60,8 +60,8 @@ class BridgeGameController {
   }
 
   #runQuit() {
-    const bridgeMap = this.#game.getMap();
-    OutputView.printResult(bridgeMap);
+    const { bridgeMap, isWin, tryCount } = this.#game.quit();
+    OutputView.printResult(bridgeMap, isWin, tryCount);
     Console.close();
   }
 }

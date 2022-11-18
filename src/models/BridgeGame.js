@@ -3,6 +3,7 @@ const Bridge = require('./Bridge');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const BridgeMap = require('./BridgeMap');
+const BridgeGameStatus = require('./BridgeGameStatus');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -12,7 +13,7 @@ class BridgeGame {
 
   #map = new BridgeMap();
 
-  #location = 0;
+  #status = new BridgeGameStatus();
 
   setBridge(size) {
     BridgeGame.#validateSize(size);
@@ -27,16 +28,20 @@ class BridgeGame {
    */
   move(input) {
     BridgeGame.#validateMoving(input);
-    const isCrossed = this.#bridge.isCrossed(input, this.#location);
+    const isCrossed = this.#bridge.isCrossed(input, this.#status.getLocation());
 
     this.#map.add(input, isCrossed);
-    this.#location += 1;
+    this.#status.increaseLocation();
 
     return isCrossed;
   }
 
   getMap() {
     return this.#map;
+  }
+
+  isWin() {
+    return this.#status.isWin(this.#bridge.size());
   }
 
   /**
@@ -46,11 +51,16 @@ class BridgeGame {
    */
   retry() {
     this.#map.reset();
-    this.#location = 0;
+    this.#status.resetLocation();
+    this.#status.increaseTryCount();
   }
 
-  isWin() {
-    return this.#bridge.size() === this.#location;
+  quit() {
+    const bridgeMap = this.getMap();
+    const isWin = this.isWin();
+    const tryCount = this.#status.getTryCount();
+
+    return { bridgeMap, isWin, tryCount };
   }
 
   static #isSizeInRange(size) {
