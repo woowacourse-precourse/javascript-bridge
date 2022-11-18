@@ -49,14 +49,11 @@ const InputView = {
 
 	excuteMovingStep(bridgeGame, moving) {
 		InputView.handlingMovingError(bridgeGame, moving);
-
 		bridgeGame.move(moving);
 		const prevCrossedBridge = bridgeGame.getPrevCrossedBridge();
 		OutputView.printMap(prevCrossedBridge);
 
-		InputView.inCaseWrong(bridgeGame, prevCrossedBridge);
-
-		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
+		InputView.inCaseCorrectOrWrong(bridgeGame, prevCrossedBridge);
 	},
 
 	handlingMovingError(bridgeGame, moving) {
@@ -68,11 +65,17 @@ const InputView = {
 		}
 	},
 
-	inCaseWrong(bridgeGame, prevCrossedBridge) {
+	inCaseCorrectOrWrong(bridgeGame, prevCrossedBridge) {
 		const wasCorrect = bridgeGame.wasCorrect();
+		const isEnd = bridgeGame.isEnd();
 		if (!wasCorrect) {
 			InputView.readGameCommand(bridgeGame, prevCrossedBridge);
 		}
+		if (wasCorrect && isEnd) {
+			InputView.quitStep(bridgeGame, prevCrossedBridge);
+			return;
+		}
+		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 	},
 
 	readGameCommand(bridgeGame, prevCrossedBridge) {
@@ -112,6 +115,7 @@ const InputView = {
 			prevCrossedBridge,
 			InputView.RETRY_COUNT,
 		);
+		MissionUtils.Console.close();
 	},
 };
 

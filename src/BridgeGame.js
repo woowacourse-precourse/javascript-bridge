@@ -8,7 +8,6 @@ class BridgeGame {
 		this.#bridge = BridgeMaker.makeBridge(bridgeSize, generateRandomNumber);
 		// 첫시작시 this.#currentPos++ 하므로 -1 시작
 		this.#currentPos = -1;
-		console.log(this.#bridge);
 	}
 
 	move(moving) {
@@ -34,6 +33,10 @@ class BridgeGame {
 			this.#bridge[this.#currentPos] === 'DO' ||
 			this.#bridge[this.#currentPos] === 'UO'
 		);
+	}
+
+	isEnd() {
+		return this.#bridge.length === this.#currentPos + 1;
 	}
 
 	getPrevCrossedBridge() {
