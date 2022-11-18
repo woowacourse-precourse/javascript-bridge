@@ -41,7 +41,7 @@ class BridgeGame {
     this.#tryCount += 1;
   }
 
-  statusPrint() {
+  finalPrint() {
     this.#result.printFinalResult(this.#tryCount);
   }
 }

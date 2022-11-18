@@ -33,7 +33,7 @@ class App {
     } else this.gameEnd();
   }
   gameEnd() {
-    this.#game.statusPrint();
+    this.#game.finalPrint();
     end();
   }
 }
