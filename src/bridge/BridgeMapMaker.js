@@ -27,7 +27,7 @@ const BridgeMapMaker = {
       this.map[this.up].push(`${point} ${isPlaceToPass} ]`);
       return;
     }
-    this.map[this.up].push(`${point}  ]`);
+    this.map[this.up].push(`${point}   ]`);
   },
 
   mapDownBlock(direction, isPlaceToPass, distance) {

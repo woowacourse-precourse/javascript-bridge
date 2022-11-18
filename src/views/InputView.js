@@ -33,7 +33,13 @@ const InputView = {
   readMoving(bridgeGame) {
     Console.readLine(InputMessage.READ_MOVING_MESSAGE, (value) => {
       const direction = value;
-      bridgeGame.move(direction);
+      try {
+        bridgeGame.move(direction);
+      } catch (error) {
+        OutputView.print(error.message);
+        this.readMoving(bridgeGame);
+        return;
+      }
       if (!bridgeGame.getIsGameEnded()) {
         this.readMoving(bridgeGame);
         return;

@@ -1,5 +1,6 @@
 const BridgeMapMaker = require("./BridgeMapMaker");
 const OutputView = require("../views/OutputView");
+const Validator = require("../utils/Validator");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -28,6 +29,7 @@ class BridgeGame {
   }
 
   move(direction) {
+    Validator.isValidDirection(direction);
     if (this.#distance === this.#bridge.length - 1) {
       this.#isGameEnded = true;
     }
