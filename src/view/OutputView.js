@@ -36,7 +36,7 @@ const OutputView = {
 
   makeFinalOutputMap() {
     let outputMap = `[ ${OutputView.upBridge.join(' | ')} ]\n`;
-    outputMap+=`[ ${OutputView.downBridge.join(' | ')} ]`;
+    outputMap += `[ ${OutputView.downBridge.join(' | ')} ]`;
     return outputMap;
   },
 

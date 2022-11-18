@@ -1,4 +1,3 @@
-// const { Console } = require('@woowacourse/mission-utils');
 const { ANSWER } = require('./utiles/Constant');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
