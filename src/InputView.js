@@ -1,7 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker = require("./BridgeMaker");
+const OutputView = require("./OutputView");
 const wConsole = MissionUtils.Console;
 const { makeBridge } = BridgeMaker;
+const { printResult } = OutputView;
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { generate } = BridgeRandomNumberGenerator;
 
@@ -12,10 +14,11 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
+
   readBridgeSizeReadLineHandler(line, bridgeGame) {
     try {
       const size = parseInt(line);
-      if (!/^\d+$/.test(line) || isNaN(line) || size < 3 || 20 < size)
+      if (!/^\d+$/.test(line)|| isNaN(line) || size < 3 || 20 < size)
         throw new Error("[ERROR] 입력은  3부터 20 사이 숫자여야 합니다.");
       bridgeGame.setBridge(makeBridge(size, generate));
       InputView.readMoving(bridgeGame);
@@ -34,6 +37,7 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
+
   readMovingReadLineHandler(line, bridgeGame) {
     try {
       if (["U", "D"].includes(line)) bridgeGame.move(line);
@@ -54,6 +58,7 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
+
   readGameCommandReadLineHandler(line, bridgeGame) {
     try {
       if (line === "Q") printResult(bridgeGame, false);

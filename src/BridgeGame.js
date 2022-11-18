@@ -19,10 +19,6 @@ class BridgeGame {
     this.bridge = bridge;
   }
 
-  addAttemptCount() {
-    this.attemptCount++;
-  }
-
   insertMoveMap(square, nowIndex) {
     const match = this.bridge[nowIndex] === square ? "O" : "X";
     this.moveMap.set(square, this.moveMap.get(square) + match);
@@ -30,11 +26,23 @@ class BridgeGame {
     this.moveMap.set(other, this.moveMap.get(other) + " ");
   }
 
+  getMoveMap() {
+    return this.moveMap;
+  }
+
+  getAttemptCount() {
+    return this.attemptCount;
+  }
+
+  addAttemptCount() {
+    this.attemptCount++;
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+
   move(square) {
     const nowIndex = this.moveMap.get("U").length;
     this.insertMoveMap(square, nowIndex);
