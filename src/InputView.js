@@ -41,9 +41,14 @@ const InputView = {
 
   readGameCommand() {
     Console.readLine("\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (inputRetry) => {
+      this.retryException(inputRetry);
       if (inputRetry == "R") return true;
       if (inputRetry == "Q") return false;
     });
+  },
+
+  retryException(inputRetry) {
+    if(inputMoveUpDown!="R" || inputMoveUpDown!="Q") throw new Error("[ERROR] R 혹은 Q만 입력할 수 있습니다.");
   },
 };
 
