@@ -1,7 +1,7 @@
 const { BRIDGE_SIZE_MIN_RANGE, BRIDGE_SIZE_MAX_RANGE } = require('./constants/condition.js');
 const { ERROR_MSG } = require('./constants/message.js');
 const { makeBridge } = require('./BridgeMaker.js');
-const { generate } = require('./BridgeRandomNumberGenerator.js');
+const { generate } = require('./utils/BridgeRandomNumberGenerator.js');
 const Bridge = require('./Bridge.js');
 
 class Bulider {
