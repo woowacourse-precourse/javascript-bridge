@@ -13,10 +13,15 @@ const InputView = {
 
   readBridgeSize() {
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요\n',(bridgeLength)=>{
-      this.readMoving(bridgeLength)
+      this.checkBridgeSizeInput(bridgeLength)
     })
   },
-
+  checkBridgeSizeInput(bridgeLength){
+    if(bridgeLength<3 || bridgeLength>20) throw "[ERROR] range error occured"
+    if(bridgeLength.match(/[a-zA-z]/g)|| bridgeLength.match([/ㄱ-ㅎ|ㅏ-ㅣ|가-힣/g])) throw "[ERROR] The string can not be accepted"
+    if(bridgeLength.match([/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g])) throw "[ERROR] The string can not be accepted"
+    if(bridgeLength<0) throw "[ERROR] The Negative number can't be accepted"
+  },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
