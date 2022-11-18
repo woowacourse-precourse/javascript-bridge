@@ -1,4 +1,5 @@
 // const { Console } = require('@woowacourse/mission-utils');
+const { ANSWER } = require('./utiles/Constant');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 const BridgeSize = require('./available-check/BridgeSize');
@@ -58,23 +59,23 @@ class BridgeGameControl {
   
 
   answerCheck() {
-    switch (this.bridgeGame.move(this.userMove)) {
+    switch(this.bridgeGame.move(this.userMove)) {
       case 0:
         return this.notAnswerMoving();
       case 1:
         return this.repeatMoving();
       case 2:
-        return this.finalAnswer('O');
+        return this.finalAnswer(ANSWER.OK);
     };
   };
 
   repeatMoving() {
-    OutputView.printMap(this.userMove, 'O');
+    OutputView.printMap(this.userMove, ANSWER.OK);
     this.userMoving();
   };
 
   notAnswerMoving() {
-    OutputView.printMap(this.userMove, 'X');
+    OutputView.printMap(this.userMove, ANSWER.NO);
     this.success = 0;
     this.askRetry();
   };

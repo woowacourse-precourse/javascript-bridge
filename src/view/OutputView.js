@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE } = require('../utiles/Constant');
+const { UP, DOWN, ANSWER, MESSAGE } = require('../utiles/Constant');
 
 const OutputView = {
   upBridge: [],
@@ -24,14 +24,14 @@ const OutputView = {
 
   makePrintMap(userMove, userMoveLength) {
     for (let i = 0; i < userMoveLength; i++) {
-      OutputView.upBridge.push(userMove[i] === 'U' ? 'O' : ' ');
-      OutputView.downBridge.push(userMove[i] === 'D' ? 'O' : ' ');
+      OutputView.upBridge.push(userMove[i] === UP ? ANSWER.OK : ANSWER.BLANK);
+      OutputView.downBridge.push(userMove[i] === DOWN ? ANSWER.OK : ANSWER.BLANK);
     };
   },
 
   makeMapLastItem(lastAnswer, answer) {
-    OutputView.upBridge.push(lastAnswer === 'U' ? answer : ' ');
-    OutputView.downBridge.push(lastAnswer === 'D' ? answer : ' ');
+    OutputView.upBridge.push(lastAnswer === UP ? answer : ANSWER.BLANK);
+    OutputView.downBridge.push(lastAnswer === DOWN ? answer : ANSWER.BLANK);
   },
 
   makeFinalOutputMap() {
@@ -48,16 +48,16 @@ const OutputView = {
   printResult(userMove, failOrSuccess) {
     Console.print(MESSAGE.FINAL_MESSAGE);
     if (failOrSuccess) {
-      return OutputView.printMap(userMove, 'O');
+      return OutputView.printMap(userMove, ANSWER.OK);
     }
-    return OutputView.printMap(userMove, 'X');
+    return OutputView.printMap(userMove, ANSWER.NO);
   },
 
   printTryResult(tryCount, failOrSuccess) {
-    let iscorrect = '실패';
+    let iscorrect = ANSWER.FAIL;
     if (failOrSuccess) {
-      iscorrect = '성공'
-    }
+      iscorrect = ANSWER.SUCCESS;
+    };
     Console.print(`${MESSAGE.FAIL_OR_SUCCESS}${iscorrect}`);
     Console.print(`${MESSAGE.TRY_COUNT}${tryCount}`);
     Console.close();

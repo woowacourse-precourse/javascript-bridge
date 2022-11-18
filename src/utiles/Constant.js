@@ -1,4 +1,7 @@
 const CONSTANT = {
+  UP: 'U',
+  DOWN: 'D',
+
   MESSAGE: {
     GAME_START: '다리 건너기 게임을 시작합니다.',
     BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',
@@ -16,6 +19,14 @@ const CONSTANT = {
     UPDOWN_LENGTH: '[ERROR] U 또는 D 한 글자만 입력해야 합니다.\n',
     RETRY_WORD: '[ERROR] Q 또는 R만 입력 가능합니다.\n',
     RETRY_LENGTH: '[ERROR] Q 또는 R 한 글자만 입력해야 합니다.\n'
+  },
+
+  ANSWER: {
+    OK: 'O',
+    NO: 'X',
+    BLANK: ' ',
+    SUCCESS: '성공',
+    FAIL: '실패',
   },
 };
 
