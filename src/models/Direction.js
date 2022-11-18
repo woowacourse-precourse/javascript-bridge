@@ -1,4 +1,4 @@
-const Validator = require('./Validator');
+const Validator = require('../Validator');
 
 class Direction {
   #direction;
@@ -10,6 +10,10 @@ class Direction {
 
   getDirection() {
     return this.#direction;
+  }
+
+  getCanCross(curRightCell) {
+    return this.#direction === curRightCell;
   }
 }
 

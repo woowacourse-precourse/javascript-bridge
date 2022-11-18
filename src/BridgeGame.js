@@ -1,8 +1,8 @@
-const Validator = require('./Validator');
-const Player = require('./Player');
-const Bridge = require('./Bridge');
+const Player = require('./models/Player');
+const Bridge = require('./models/Bridge');
 const OutputView = require('./views/OutputView');
-const Command = require('./Command');
+const Command = require('./models/Command');
+const Direction = require('./models/Direction');
 
 class BridgeGame {
   #player;
@@ -22,23 +22,27 @@ class BridgeGame {
     this.#bridge = new Bridge(size);
   }
 
-  move(direction) {
-    Validator.directionValidityCheck(direction);
-    const canCross =
-      direction === this.#bridge.getBridge()[this.#player.getCurPlace()];
+  handleDirection(direction) {
+    this.#direction = new Direction(direction);
+  }
+
+  move() {
+    const canCross = this.#direction.getCanCross(
+      this.#bridge.getBridge()[this.#player.getCurPlace()]
+    );
     this.#player.increaseCurPlace();
-    if (canCross) this.#bridge.updateBridgeMap(direction, 'O');
-    else this.#bridge.updateBridgeMap(direction, 'X');
+    if (canCross) this.#bridge.updateMap(this.#direction.getDirection(), 'O');
+    else this.#bridge.updateMap(this.#direction.getDirection(), 'X');
 
     return canCross;
   }
 
   printCurMap() {
-    const curMap = Object.values(this.#bridge.getBridgeMap());
+    const curMap = Object.values(this.#bridge.getMap());
     OutputView.printMap(curMap);
   }
 
-  handleCommand(command) {
+  retry(command) {
     this.#command = new Command(command);
     return this.#command.shouldRetry();
   }
@@ -57,12 +61,12 @@ class BridgeGame {
 
   initPlayData() {
     this.#player.initCurPlace();
-    this.#bridge.initBridgeMap();
+    this.#bridge.initMap();
   }
 
   printGameResult() {
     OutputView.printResult(
-      Object.values(this.#bridge.getBridgeMap()),
+      Object.values(this.#bridge.getMap()),
       this.#player.getSuccess(),
       this.#player.getNumberOfAttempts()
     );

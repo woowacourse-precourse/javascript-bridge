@@ -53,13 +53,14 @@ class GameController {
   }
 
   tryMovePlayer(direction) {
+    this.#bridgeGame.handleDirection(direction);
     const isRightChoice = this.#bridgeGame.move(direction);
     this.#bridgeGame.printCurMap();
     isRightChoice ? this.isAllCrossed() : this.askRetry();
   }
 
   tryRetry(command) {
-    const shouldRetry = this.#bridgeGame.handleCommand(command);
+    const shouldRetry = this.#bridgeGame.retry(command);
     shouldRetry ? this.retry() : this.gameOver();
   }
 
