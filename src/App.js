@@ -54,12 +54,34 @@ class App {
     this.#moving.push(moving);
 
     const bridgeGame = new BridgeGame();
-    bridgeGame.move(
-      this.#moving,
-      this.#bridge,
-      this.selectMoving.bind(this),
-      this.retry.bind(this),
-      this.printResult.bind(this)
+    let response = bridgeGame.move(this.#moving, this.#bridge);
+    this.checkResponse(response, bridgeGame);
+  }
+  checkResponse(response, bridgeGame) {
+    if (response == "Done") {
+      this.responseDone();
+    } else if (response == "Correct") {
+      this.responseCorrect();
+    } else if (response == "Incorrect") {
+      this.responseIncorrect(bridgeGame);
+    }
+  }
+  responseDone() {
+    OutputView.printMap(this.#moving, true);
+    this.printResult(true);
+  }
+  responseCorrect() {
+    OutputView.printMap(this.#moving, true);
+    this.selectMoving();
+  }
+  responseIncorrect(bridgeGame) {
+    OutputView.printMap(this.#moving, false);
+    InputView.readGameCommand((command) =>
+      bridgeGame.retry(
+        command,
+        this.retry.bind(this),
+        this.printResult.bind(this)
+      )
     );
   }
 
