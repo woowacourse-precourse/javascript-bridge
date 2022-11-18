@@ -46,7 +46,16 @@ class BridgeGame {
     return DBlock;
   }
 
-  retry() {}
+  isFinish() {
+    if (this.#marker === this.#bridge.length) {
+      return true;
+    }
+    return false;
+  }
+
+  retry() {
+    this.#marker = 0;
+  }
 }
 
 module.exports = BridgeGame;

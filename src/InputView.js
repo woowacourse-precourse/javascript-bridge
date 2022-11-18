@@ -28,6 +28,13 @@ const InputView = {
       if (UBlock.includes('X') || DBlock.includes('X')) {
         this.readGameCommand(bridgeGame);
       }
+
+      if (!bridgeGame.isFinish()) {
+        this.readMoving(bridgeGame);
+      }
+      if (bridgeGame.isFinish()) {
+        OutputView.printResult();
+      }
     });
   },
 
