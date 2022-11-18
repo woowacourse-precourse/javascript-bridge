@@ -6,10 +6,6 @@ const IGameView = class {
   output(message) {
     throw Error('메서드구현필요');
   }
-
-  close() {
-    throw Error('메서드구현필요');
-  }
 };
 
 module.exports = IGameView;
