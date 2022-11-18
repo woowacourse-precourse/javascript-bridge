@@ -1,42 +1,49 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
+ const { BRIDGE_MOVEMENT } = require("./constants");
 
 class BridgeGame {
   #bridge;
 
-  #attempt;
+  #bridgeAttempt;
+
+
+  #upSide = [];
+
+  #downSide = [];
 
   constructor() {
-    this.#attempt = 0;
+    this.#bridgeAttempt = 0;
+    this.isSuccess = false;
   }
 
   setBridge(bridge) {
     this.#bridge = bridge;
   }
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   * return : {U: [], D:[]} 이런 형태로
-   */
 
-  initializeResult() {
-    if (this.#attempt == 0) {
-      return [];
-    }
-    return [...this.#bridge].slice(0, this.#attempt);
+  moveUpside() {
+    this.#upSide.push(1);
+    this.#downSide.push(0);
+  }
+
+  moveDownSide() {
+    this.#downSide.push(1);
+    this.#upSide.push(0);
+  }
+
+  #setGameStatus(moving) {
+    this.#gameSuccess = moving == this.#bridge[this.#bridgeAttempt - 1];
   }
 
   move(moving) {
-    const result = this.initializeResult();
-    if (this.#bridge[this.#attempt] == moving) {
-      result.push(moving);
-      this.#attempt += 1;
-      return result;
-    }
-    result.push(0);
-    return result;
+    moving == BRIDGE_MOVEMENT.UP ? this.moveUpside() : this.moveDownSide();
+    this.#bridgeAttempt += 1;
+    this.#setGameStatus(moving);
+
+    return [this.#gameSuccess, this.#upSide, this.#downSide];
+  }
+
   }
 
   /**
