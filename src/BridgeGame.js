@@ -1,4 +1,3 @@
-const App = require("./App");
 const InputView = require("./InputView");
 
 /**

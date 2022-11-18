@@ -20,7 +20,7 @@ const BridgeMaker = {
     return newArr;
   },
   changeRandomArray(randomArr) {
-    //다리 생성
+    //다리 배열 생성
     const arrUp = randomArr.map((element) => (element === "U" ? "U" : " "));
     const arrDown = randomArr.map((element) => (element === "D" ? "D" : " "));
     return [arrUp, arrDown];
