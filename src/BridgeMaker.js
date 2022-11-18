@@ -2,6 +2,8 @@
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
 const BridgeMaker = {
+  UPPER_SIDE_AVAILABLE: 'U',
+  LOWER_SIDE_AVAILABLE: 'D',
   /**
    * @param {number} size 다리의 길이
    * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
@@ -9,7 +11,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = Array.from({ length: size })
-      .map(() => (generateRandomNumber() ? 'U' : 'D'));
+      .map(() => (generateRandomNumber() ? this.UPPER_SIDE_AVAILABLE : this.LOWER_SIDE_AVAILABLE));
 
     return bridge;
   },
