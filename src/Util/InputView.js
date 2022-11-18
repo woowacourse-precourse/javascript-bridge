@@ -90,6 +90,7 @@ const InputView = {
 
   exitGame(bridgeGame, isClear) {
     OutputView.printResult();
+    OutputView.clearMap();
     Console.print(
       `게임 성공 여부: ${
         isClear ? SUCCESS : FAIL
