@@ -14,13 +14,14 @@
 </figure>
 
 - Result
-	- [ ] `isCompelete()`
-	- [ ] `isFailed()`
-	- [ ] `stringify()`
+	- [x] `isCompelete()`
+	- [x] `isFailed()`
+	- [x] `stringify()`
 - Bridge
-	- [ ] `currentResult()`
+	- [x] `currentResult()`
 - Position
-	- [ ] `isSame()`
+	- [x] `isSame()`
+	- [x] `getIndex()`
 
 #### View
 
@@ -39,7 +40,9 @@
 - 주어진 상황에서 생각을 시작하기 보다는 기존 나의 방법(클라이언트 프로그래머가 메시지를 전달 그 후에 정보 전문가가 메시지 처리)대로 설계한 다음에 차이점을 비교해나가고 끼워 맞춘다.
 - 다른 코드들을 파악할 때에도 도메인들과 메시지 과정을 그려보면 쉽게 이해가 된다.
 - controller, model, view로 추상화된 것이다.
-
+- Position을 다형성으로 PositionTwo, Three ..이렇게 나누려 했지만 Strategy패턴이 적용하기엔 기능이 모두 똑같다.
+- Result stringify 작성하다가 JSDocs의 도움 받았다. 이게 바로 타입의 위대함?
+- Model 전부 작성까지 3시간 10분
 
 
 ## ✔️ 요구사항
