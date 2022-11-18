@@ -17,7 +17,7 @@ class BridgeGame {
   setUp(bridgeLength) {
     // TODO: validation of bridge length
     this.#bridgeAnswer = BridgeMaker.makeBridge(
-      bridgeLength,
+      Number(bridgeLength),
       BridgeRandomNumberGenerator.generate
     );
     this.#bridgeMap = { U: [], D: [] };
