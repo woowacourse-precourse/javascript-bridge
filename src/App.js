@@ -1,11 +1,9 @@
 const OutputView = require("./OutputView.js");
-const InputView = require("./InputView.js");
-const ValidCheck = require("./ValidCheck.js");
+const RecallUntilCorrect = require("./RecallUntilCorrect");
 class App {
   play() {
     OutputView.printGameStart();
-    const BRIDGE_SIZE = InputView.readBridgeSize();
-    ValidCheck.bridgeIsInRange(BRIDGE_SIZE);
+    const BRIDGE_SIZE = RecallUntilCorrect.RecallReadBridgeSize(true);
   }
 }
 
