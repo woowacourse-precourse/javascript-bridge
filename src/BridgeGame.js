@@ -10,7 +10,7 @@ class BridgeGame {
 
   #correctStep;
 
-  #gameStatus;
+  #status;
 
   setUp(bridgeLength) {
     // TODO: validation of bridge length
@@ -23,7 +23,7 @@ class BridgeGame {
       D: Array(bridgeLength).fill(' '),
     };
     this.#correctStep = 0;
-    this.#gameStatus = {
+    this.#status = {
       numberOfAttempts: 1,
       isSuccess: false,
       isFinished: false,
@@ -39,7 +39,7 @@ class BridgeGame {
     // TODO: validation of player moving
     const isCorrect = this.isCorrectStep(playerMoving);
     this.updateBridgeMap(playerMoving, isCorrect);
-    this.updateGameStatus(isCorrect);
+    this.updateStatus(isCorrect);
   }
 
   isCorrectStep(playerMoving) {
@@ -57,20 +57,20 @@ class BridgeGame {
     }
   }
 
-  updateGameStatus(isCorrect) {
+  updateStatus(isCorrect) {
     if (isCorrect) {
       this.#correctStep += 1;
       if (this.#correctStep === this.#bridgeAnswer.length) {
-        this.#gameStatus.isSuccess = true;
-        this.#gameStatus.isFinished = true;
+        this.#status.isSuccess = true;
+        this.#status.isFinished = true;
       }
     } else {
-      this.#gameStatus.isFinished = true;
+      this.#status.isFinished = true;
     }
   }
 
-  getGameStatus() {
-    return this.#gameStatus;
+  getStatus() {
+    return this.#status;
   }
 }
 
