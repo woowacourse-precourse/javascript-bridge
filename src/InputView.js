@@ -2,9 +2,9 @@ const { Console } = require("@woowacourse/mission-utils");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
-const isAnswerOrWrong = new BridgeGame;
+const bridgeGame = new BridgeGame;
 const OutputView = require("./OutputView");
-const userBridgeCorrect = isAnswerOrWrong.userPickedUpOrDown;
+const userBridgeCorrect = bridgeGame.userPickedUpOrDown;
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -25,7 +25,7 @@ const InputView = {
    */
   readMoving() {
     Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D", (selectUpOrDown) => {
-      isAnswerOrWrong.move(this.createBridge, selectUpOrDown);
+      bridgeGame.move(this.createBridge, selectUpOrDown);
       this.readMoving();
       OutputView.printResult(`[ ${userBridgeCorrect[0].join(" | ")} ]`,`[ ${userBridgeCorrect[1].join(" | ")} ]`);
       this.readGameCommand();
