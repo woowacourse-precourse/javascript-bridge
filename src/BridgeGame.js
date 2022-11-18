@@ -90,6 +90,17 @@ class BridgeGame {
   getBridge() {
     return this.#bridge;
   }
+
+  calcBridgeReuslt(userInput) {
+    this.checkBeforeStart();
+    BridgeGame.checkIncludeUandD(userInput);
+
+    const userPosition = this.findUserPosition();
+    const bridge = this.getBridge();
+    const [CORRECT, INCORRECT] = ['O', 'X'];
+
+    return bridge[userPosition] === userInput ? CORRECT : INCORRECT;
+  }
 }
 
 module.exports = BridgeGame;
