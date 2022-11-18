@@ -4,6 +4,8 @@ const CurrBridge = require('./CurrBridge');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #tryingCount = 1;
+
   constructor(controller) {
     this.controller = controller;
     this.winningBridge;
@@ -25,6 +27,9 @@ class BridgeGame {
    */
   move(direction) {
     this.currBridge = new CurrBridge(direction);
+
+    this.#tryingCount += 1;
+    this.winningBridge.compare(direction);
   }
 
   /**
