@@ -2,7 +2,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Game = require("./BridgeGame");
 
 const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeRandomNumberGenerator =
+  require("./BridgeRandomNumberGenerator").generate;
 const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -10,9 +11,9 @@ const OutputView = require("./OutputView");
 const BRIDGELENGTH_ERR_MESSAGE =
   "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.";
 
-const USERSELECT_ERR_MESSAGE = "[ERROR] 입력은 U 아니면 D여야 합니다.";
+const USERSELECT_ERR_MESSAGE = "[ERROR] 입력은 U 아니면 D여야 합니다.\n";
 
-const USERDECISION_ERR_MESSAGE = "[ERROR] 입력은 R 아니면 Q여야 합니다.";
+const USERDECISION_ERR_MESSAGE = "[ERROR] 입력은 R 아니면 Q여야 합니다.\n";
 
 const INPUT_BRIDGE_LEN_STR = "다리의 길이를 입력해주세요.\n";
 
@@ -24,19 +25,27 @@ const INPUT_USER_DECISION =
 const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine(INPUT_BRIDGE_LEN_STR, (bridgeLen) => {
-      bridgeLenValidator(bridgeLen);
-      const bridgeGame = new Game.BridgeGame(
-        BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate)
-      );
-      InputView.readMoving(bridgeGame);
+      try {
+        bridgeLenValidator(bridgeLen);
+        const bridgeGame = new Game.BridgeGame(
+          BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator)
+        );
+        InputView.readMoving(bridgeGame);
+      } catch (e) {
+        InputView.readBridgeSize();
+      }
     });
   },
 
   readMoving(bridgeGame) {
     MissionUtils.Console.readLine(INPUT_USER_GO, (selectBridge) => {
-      bridgeGame.move(this.userSelectValueTreater(selectBridge));
-      OutputView.printMap(OutputView.closeMap({ ...bridgeGame.bridgeMap }));
-      InputView.checkIsCorrect(bridgeGame);
+      try {
+        bridgeGame.move(this.userSelectValueTreater(selectBridge));
+        OutputView.printMap(OutputView.closeMap({ ...bridgeGame.bridgeMap }));
+        InputView.checkIsCorrect(bridgeGame);
+      } catch (e) {
+        this.readMoving(bridgeGame);
+      }
     });
   },
 
@@ -70,13 +79,17 @@ const InputView = {
 
   readGameCommand(bridgeGame) {
     MissionUtils.Console.readLine(INPUT_USER_DECISION, (userDecision) => {
-      userDecisionValidator(userDecision);
-      if (userDecision == "R") {
-        bridgeGame.retry();
-        InputView.readMoving(bridgeGame);
-        return;
+      try {
+        userDecisionValidator(userDecision);
+        if (userDecision == "R") {
+          bridgeGame.retry();
+          InputView.readMoving(bridgeGame);
+          return;
+        }
+        InputView.goPrintResult(bridgeGame);
+      } catch (e) {
+        this.readGameCommand(bridgeGame);
       }
-      InputView.goPrintResult(bridgeGame);
     });
   },
 
@@ -93,13 +106,13 @@ const bridgeLenValidator = (bridgeLen) => {
 
 const isInRange = (bridgeLen) => {
   if (bridgeLen > 20 || bridgeLen < 3) {
-    throw new Error(BRIDGELENGTH_ERR_MESSAGE);
+    throw OutputView.printError(BRIDGELENGTH_ERR_MESSAGE);
   }
 };
 
 const isIntNumber = (bridgeLen) => {
   if (isNaN(parseInt(bridgeLen)) || !Number.isInteger(parseFloat(bridgeLen))) {
-    throw new Error(BRIDGELENGTH_ERR_MESSAGE);
+    throw OutputView.printError(BRIDGELENGTH_ERR_MESSAGE);
   }
 };
 
@@ -107,14 +120,14 @@ const isUandD = (input) => {
   if (input == "U" || input == "D") {
     return;
   }
-  throw new Error(USERSELECT_ERR_MESSAGE);
+  throw OutputView.printError(USERSELECT_ERR_MESSAGE);
 };
 
 const userDecisionValidator = (input) => {
   if (input == "R" || input == "Q") {
     return;
   }
-  throw new Error(USERDECISION_ERR_MESSAGE);
+  throw OutputView.printError(USERDECISION_ERR_MESSAGE);
 };
 
 module.exports = InputView;

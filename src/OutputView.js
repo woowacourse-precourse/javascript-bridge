@@ -44,6 +44,10 @@ const OutputView = {
     MissionUtils.Console.print(END_CNT + tryCnt);
     MissionUtils.Console.close();
   },
+
+  printError(errMsg) {
+    MissionUtils.Console.print(errMsg);
+  },
 };
 
 module.exports = OutputView;
