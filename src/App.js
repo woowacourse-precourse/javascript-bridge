@@ -1,6 +1,7 @@
 const InputView = require("./InputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeGame = require("./BridgeGame");
 class App {
   play() {
     // 다리의 길이 & 시도 횟수
@@ -16,6 +17,17 @@ class App {
       BridgeRandomNumberGenerator.generate
     );
     const [arrUp, arrDown] = BridgeMaker.changeRandomArray(randomArr);
+    // 게임 시작
+    const BRIDGEGAME = new BridgeGame();
+    let toWalkCount = 0;
+    upOrDown.forEach((move) => {
+      // 위로 or 아래로
+      let success =
+        move === "U"
+          ? BRIDGEGAME.move(arrUp, toWalkCount, move)
+          : BRIDGEGAME.move(arrDown, toWalkCount, move);
+      toWalkCount += 1;
+    });
   }
 }
 
