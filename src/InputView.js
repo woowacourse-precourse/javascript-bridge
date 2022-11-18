@@ -50,6 +50,8 @@ const InputView = {
         const RESTART_COMMAND = "R";
         const END_COMMAND = "Q";
 
+        Check.checkCommand(command);
+
         if (command === RESTART_COMMAND) {
           // 재시도
         }
