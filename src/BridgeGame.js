@@ -1,8 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
+const CallView = require("./CallView");
 const Console = MissionUtils.Console;
-// inputView, outputView 사용 불가
+
 class BridgeGame {
   #current_bridge = 0;
   #try_count = 1;
@@ -11,16 +10,19 @@ class BridgeGame {
   #ANSWER_BRIDGE_ARRAY;
 
   constructor(ANSWER_BRIDGE_ARRAY) {
+    this.CallView = new CallView();
     this.#ANSWER_BRIDGE_ARRAY = ANSWER_BRIDGE_ARRAY;
-    console.log(this.#ANSWER_BRIDGE_ARRAY, "construct");
   }
 
   move() {
-    console.log("hi");
     this.#game_state = false;
-    InputView.readMoving(this.checkBridgeNumber);
+    this.CallView.readMove(this.commandValidate);
   }
 
+  commandValidate = (command) => {
+    const COMMAND = command;
+    return this.checkBridgeNumber(COMMAND);
+  };
   checkBridgeNumber = (COMMAND) => {
     const INDEX = this.#current_bridge;
     if (COMMAND === this.#ANSWER_BRIDGE_ARRAY[INDEX]) {
@@ -39,8 +41,16 @@ class BridgeGame {
       this.changeCommandNumber(COMMAND);
     this.#bridge_map[COMMAND_NUMBER].push("O");
     this.#bridge_map[REST_ARRAY_NUMBER].push(" ");
-    OutputView.printMap(this.#bridge_map);
+    this.CallView.currentMap(this.#bridge_map);
     return this.currentBridge();
+  }
+
+  currentBridge() {
+    if (this.#current_bridge === this.#ANSWER_BRIDGE_ARRAY.length - 1) {
+      return this.complateGame();
+    }
+    this.#current_bridge += 1;
+    return this.move();
   }
 
   crossPush(COMMAND) {
@@ -48,20 +58,33 @@ class BridgeGame {
       this.changeCommandNumber(COMMAND);
     this.#bridge_map[COMMAND_NUMBER].push("X");
     this.#bridge_map[REST_ARRAY_NUMBER].push(" ");
-    OutputView.printMap(this.#bridge_map);
+    this.CallView.currentMap(this.#bridge_map);
     return this.failGame();
   }
+  complateGame() {
+    this.#game_state = true;
+    this.CallView.resultPrint(
+      this.#bridge_map,
+      this.#try_count,
+      this.#game_state
+    );
+    return Console.close();
+  }
   failGame() {
-    return InputView.readGameCommand(this.stop, this.retry);
+    return this.CallView.readCommand(this.stop, this.retry);
   }
   retry = () => {
     this.#bridge_map = [[], []];
     this.#current_bridge = 0;
-    console.log("retry", this.#bridge_map, this.#current_bridge);
+    this.#try_count += 1;
     return this.move();
   };
   stop = () => {
-    OutputView.printResult(this.#bridge_map, this.#try_count, this.#game_state);
+    this.CallView.resultPrint(
+      this.#bridge_map,
+      this.#try_count,
+      this.#game_state
+    );
     return Console.close();
   };
 }
