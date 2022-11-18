@@ -43,7 +43,7 @@ class App {
     // 다리길이 입력받기
     let BRIDGE_LENGTH = InputView.readBridgeSize()
     // 다리 생성해야지
-    let BRIDGE = BridgeMaker.makeBridge(BRIDGE_LENGTH)
+    let BRIDGE = BridgeMaker.makeTestBridge(BRIDGE_LENGTH)
     this.movePrint(BRIDGE,BRIDGE_LENGTH)
     
   }
@@ -81,6 +81,9 @@ class App {
     switch(userChoice){
       case 'Q':
         return this.finishGameFail(bridge)
+      case 'R':
+        this.TRY_TIME += 1
+        return this.movePrint()
     }
   }
   // 게임 다시 시작

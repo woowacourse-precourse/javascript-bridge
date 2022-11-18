@@ -39,8 +39,6 @@ const InputView = {
   readGameCommand() {
     let USER_CHOICE = ''
     MissionUtils.Console.readLine("",(userChoice) => {
-      // 이부분 바꿔야함
-      userChoice = 'Q'
       Checking.userRetryCheck(userChoice)
       USER_CHOICE = userChoice
     })

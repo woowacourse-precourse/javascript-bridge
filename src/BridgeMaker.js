@@ -17,18 +17,35 @@ const BridgeMaker = {
     // 위 칸을 건널 수 있는 경우 U, 아래 칸을 건널 수 있는 경우 D값으로 나타낸다.
     // 무작위 값이 0인 경우 아래 칸, 1인 경우 위 칸이 건널 수 있는 칸이 된다.
     
+    let BRIDGE = []    
+    for (let i = 0 ; i < size ; i ++) {
+      this.makeBridgePush(BRIDGE,generateRandomNumber())
+    }
+    console.log(BRIDGE)
+    return BRIDGE
+  },
+
+  makeBridgePush(bridge, number) {
+    switch(number){
+      case '1':
+        bridge.push('U')
+        return 
+      case '0':
+        bridge.push('D')
+        return 
+    }
+  },
+
+  makeTestBridge(size){
     let BRIDGE = []
     let BRIDGE_U = []
     let BRIDGE_D = []
-
-    
     for (let i = 0 ; i < size ; i ++) {
       this.bridgePush(BRIDGE_U,BRIDGE_D)
     }
     BRIDGE.push(BRIDGE_U, BRIDGE_D)
     return BRIDGE
   },
-
   bridgePush(u_array , d_array){
     const NUMBER = BridgeRandomNumberGenerator.generate()
     switch(NUMBER){
