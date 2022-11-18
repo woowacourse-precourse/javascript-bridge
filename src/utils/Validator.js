@@ -1,5 +1,6 @@
 const BridgeGame = require("../bridge/BridgeGame");
 const ErrorMessage = require("../messages/ErrorMessage");
+const Directions = require("./Directions");
 
 class Validator {
   static isInteger(input) {
@@ -10,8 +11,8 @@ class Validator {
 
   static isValidDirection(direction) {
     if (
-      direction !== BridgeGame.UP_DIRECTION &&
-      direction !== BridgeGame.DOWN_DIRECTION
+      direction !== Directions.UP_DIRECTION &&
+      direction !== Directions.DOWN_DIRECTION
     )
       throw new Error(ErrorMessage.NOT_VALID_DIRECTION);
   }

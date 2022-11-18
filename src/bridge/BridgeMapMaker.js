@@ -1,17 +1,18 @@
+const Directions = require("../utils/Directions");
 const BridgeGame = require("./BridgeGame");
 
 const BridgeMapMaker = {
   map: [[], []],
   up: 0,
   down: 1,
-  makeMap(direction, isPlaceToPass, lengthOfBridge) {
+  makeMap(direction, isPlaceToPass, distance) {
     for (let i = 0; i < 2; i++) {
       const mapDirection = i % 2;
       if (mapDirection === this.up) {
-        this.mapUpBlock(direction, isPlaceToPass, lengthOfBridge);
+        this.mapUpBlock(direction, isPlaceToPass, distance);
         continue;
       }
-      this.mapDownBlock(direction, isPlaceToPass, lengthOfBridge);
+      this.mapDownBlock(direction, isPlaceToPass, distance);
     }
 
     return this.map;
@@ -25,7 +26,7 @@ const BridgeMapMaker = {
       return value;
     });
 
-    if (direction === BridgeGame.UP_DIRECTION) {
+    if (direction === Directions.UP_DIRECTION) {
       this.map[this.up].push(`${point} ${isPlaceToPass} ]`);
       return;
     }
@@ -40,7 +41,7 @@ const BridgeMapMaker = {
       return value;
     });
 
-    if (direction === BridgeGame.DOWN_DIRECTION) {
+    if (direction === Directions.DOWN_DIRECTION) {
       this.map[this.down].push(`${point} ${isPlaceToPass} ]`);
       return;
     }
