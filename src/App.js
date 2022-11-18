@@ -1,5 +1,5 @@
 const GameController = require('./controllers/GameController');
-const InputView = require('./views/InputView');
+const OutputView = require('./views/OutputView');
 
 class App {
   #gameCtrl;
@@ -10,16 +10,36 @@ class App {
 
   play() {
     this.#gameCtrl.gameStart();
-    this.process();
   }
 
-  process() {
-    const sizeCallback = (size) => {
+  sizeCallback(size) {
+    try {
       this.#gameCtrl.makeBridge(size);
       this.#gameCtrl.nextStep();
-    };
+    } catch (error) {
+      OutputView.printMessage(error);
+      this.#gameCtrl.askBridgeSize();
+    }
+  }
 
-    InputView.readBridgeSize(sizeCallback);
+  directionCallback(direction) {
+    try {
+      const isRightChoice = this.movePlayer(direction);
+      this.#gameCtrl.printCurMap();
+      isRightChoice ? this.#gameCtrl.isDone() : this.#gameCtrl.askRetry();
+    } catch (error) {
+      OutputView.printMessage(error);
+      this.#gameCtrl.nextStep();
+    }
+  }
+
+  retryCommandCallback(command) {
+    try {
+      this.#gameCtrl.checkRetry(command);
+    } catch (error) {
+      OutputView.printMessage(error);
+      this.#gameCtrl.askRetry();
+    }
   }
 }
 
