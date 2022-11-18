@@ -21,3 +21,29 @@
   - [ ] R 혹은 Q가 아닌 다른 값이 입력되었다면 `[ERROR] R(재시도)와 Q(종료) 중 하나의 문자를 입력할 수 있습니다.` 문구로 예외처리한다.
 - [ ] 만약 종료하거나 다리 건너기가 성공했을 경우 `최종 게임 결과`, `게임 성공 여부`, `총 시도한 횟수`를 출력한다.
 - [ ] 만약 다시한다면 기존에 랜덤으로 생성된 값으로 다시 다리 건너기를 시도한다.
+
+## 개발 시 필요한 목록
+
+- [x] prepare-commit-msg 규칙 등록
+
+  - 커밋 컨벤션에 맞추기 위해 `.git/hooks` 기능을 사용한다.
+  - `prepare-commit-msg.sample` 파일에 아래 코드를 작성한 뒤 `prepare-commit-msg`로 파일명을 변경하여 사용한다.
+  - ```bash
+      #!/bin/bash
+
+      firstLine=`head -2 $1 | tail -1`
+      if [[ $firstLine == \#* ]]; then # Testing that the file starts with a comment, not yet a real commit ;)
+        echo '<type>(<component>): <subject>' > .prepare-commit-msg-temp
+        echo '' >> .prepare-commit-msg-temp
+        echo '<body>' >> .prepare-commit-msg-temp
+        echo '' >> .prepare-commit-msg-temp
+        echo '# types: feat, fix, docs, style, refactor, test, chore(mantean)' >> .prepare-commit-msg-temp
+
+        { cat .prepare-commit-msg-temp; cat $1; } > .prepare-commit-msg-temp2
+        cat .prepare-commit-msg-temp2 > $1
+        rm .prepare-commit-msg-temp .prepare-commit-msg-temp2
+      fi
+    ```
+
+- [ ] eslint airbnb 규칙 등록
+- [ ] prettier 설정
