@@ -1,6 +1,9 @@
-const { RETRY, QUIT, ERROR_NOT_UPPER_CASE } = require("../Utils");
-
-const ERROR_UNEXPECTED_GAME_COMMAND = "[ERROR] R 또는 Q를 입력해 주세요.";
+const {
+  GAME_COMMAND_RETRY,
+  GAME_COMMAND_QUIT,
+  ERROR_NOT_UPPER_CASE,
+  ERROR_UNEXPECTED_GAME_COMMAND,
+} = require("../Utils");
 
 const GameCommandValidation = {
   /**
@@ -18,7 +21,8 @@ const GameCommandValidation = {
    * @throws
    */
   validateIsExpected(string) {
-    if (![RETRY, QUIT].includes(string)) throw new Error(ERROR_UNEXPECTED_GAME_COMMAND);
+    if (![GAME_COMMAND_RETRY, GAME_COMMAND_QUIT].includes(string))
+      throw new Error(ERROR_UNEXPECTED_GAME_COMMAND);
   },
 
   /**

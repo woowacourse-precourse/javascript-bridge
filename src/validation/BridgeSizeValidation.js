@@ -1,9 +1,10 @@
-const ERROR_NOT_NUMBER = "[ERROR] 숫자를 입력해 주세요.";
-const ERROR_OUT_OF_RANGE = "[ERROR] 3~20 사이의 숫자를 입력해 주세요.";
-const ERROR_NOT_INTEGER = "[ERROR] 정수를 입력해 주세요.";
-
-const SIZE_START = 3;
-const SIZE_END = 20;
+const {
+  BRIDGE_SIZE_START,
+  BRIDGE_SIZE_END,
+  ERROR_NOT_NUMBER,
+  ERROR_OUT_OF_RANGE,
+  ERROR_NOT_INTEGER,
+} = require("../Utils");
 
 const BridgeSizeValidation = {
   /**
@@ -19,7 +20,8 @@ const BridgeSizeValidation = {
    * 범위 안의 숫자가 아니면 예외를 발생시킨다.
    */
   validateIsInRange(number) {
-    if ((number < SIZE_START) | (number > SIZE_END)) throw new Error(ERROR_OUT_OF_RANGE);
+    if ((number < BRIDGE_SIZE_START) | (number > BRIDGE_SIZE_END))
+      throw new Error(ERROR_OUT_OF_RANGE);
   },
 
   /**
