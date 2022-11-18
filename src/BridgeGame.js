@@ -37,8 +37,11 @@ class BridgeGame {
   }
 
   checkBridge(moving) {
-    if (this.#bridge[this.#crossBridge[0].length] === moving) return true;
-    return false;
+    if (this.#bridge[this.#crossBridge[0].length] === moving) {
+      if (this.#crossBridge[0].length + 1 === this.#bridge.length) return 2;
+      return 1;
+    }
+    return 0;
   }
 
   /**
