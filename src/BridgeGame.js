@@ -32,6 +32,31 @@ class BridgeGame {
     return JSON.stringify(this.userBridge) === JSON.stringify(this.#bridge);
   }
 
+  makeMiddleBridge() {
+    const upBridge = [];
+    const downBridge = [];
+    this.userBridge.forEach((square) => {
+      if (square === 'U') {
+        upBridge.push('O');
+        downBridge.push(' ');
+        return;
+      }
+      upBridge.push(' ');
+      downBridge.push('O');
+    });
+    if (!this.isValidateSquare()) {
+      if (this.userBridge[upBridge.length - 1] === 'U') {
+        upBridge[upBridge.length - 1] = 'X';
+        return { upBridge, downBridge };
+      }
+      if (this.userBridge[downBridge.length - 1] === 'D') {
+        downBridge[downBridge.length - 1] = 'X';
+        return { upBridge, downBridge };
+      }
+    }
+    return { upBridge, downBridge };
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
