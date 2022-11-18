@@ -42,4 +42,13 @@ describe("플레이어 상태 테스트", () => {
     Player.checkGameSuccess();
     expect(Player.gameSuccess).toBe(true);
   });
+
+  test("게임 재시작 테스트", () => {
+    Player.reset();
+
+    expect(Player.state).toStrictEqual([[], []]);
+    expect(Player.movingArr).toStrictEqual([]);
+    expect(Player.playerAns).toStrictEqual([]);
+    expect(Player.tryingCount).toBe(2);
+  });
 });
