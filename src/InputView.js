@@ -30,8 +30,6 @@ const InputView = {
           bridgeLength,
           BridgeRandomNumberGenerator.generate
         );
-
-        console.log(bridge);
         this.readMoving(bridge);
       } catch (error) {
         Console.print(error);
@@ -47,13 +45,7 @@ const InputView = {
     Console.readLine(MESSAGE.INPUT_MOVE_MESSAGE, (inputMove) => {
       try {
         validation.validateMove(inputMove);
-        console.log("readMoving", bridge, inputMove, callMove);
-        [callMove, moveResult, moves] = brigeGame.move(
-          inputMove,
-          callMove,
-          bridge
-        );
-        console.log(callMove, moveResult);
+        [callMove, moveResult, moves] = brigeGame.move(inputMove, callMove, bridge);
         OutputView.printMap(moves, moveResult);
         this.checkMove(moves, moveResult, bridge);
       } catch (error) {

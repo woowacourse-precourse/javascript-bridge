@@ -15,8 +15,7 @@ const OutputView = {
       : this.makeMaps(inputMoves, moveResult);
   },
   makeMap(inputMoves, moveResult) {
-    let upBridge = "[ ";
-    let downBridge = "[ ";
+    let upBridge, downBridge = ["[ ", "[ "];
     if (inputMoves[0] === "U") {
       upBridge += moveResult[0] + " ]";
       downBridge += "  ]";
@@ -28,20 +27,14 @@ const OutputView = {
     Console.print(`${upBridge}\n${downBridge}`);
   },
   makeMaps(inputMoves, moveResult) {
-    let upBridge = [];
-    let downBridge = [];
+    let upBridge = []; let downBridge = [];
     for (let i = 0; i < inputMoves.length; i++) {
       if (inputMoves[i] === "U") {
-        upBridge.push(moveResult[i]);
-        downBridge.push(" ");
-      }
-      if (inputMoves[i] === "D") {
-        downBridge.push(moveResult[i]);
-        upBridge.push(" ");
-      }
-    }
-    upBridge = upBridge.join(" | ");
-    downBridge = downBridge.join(" | ");
+        upBridge.push(moveResult[i]); downBridge.push(" ");
+      } if (inputMoves[i] === "D") {
+        downBridge.push(moveResult[i]); upBridge.push(" ");
+      }}
+    upBridge = upBridge.join(" | "); downBridge = downBridge.join(" | ");
     Console.print(`${"[ " + upBridge + " ]"}\n${"[ " + downBridge + " ]"}`);
   },
 
