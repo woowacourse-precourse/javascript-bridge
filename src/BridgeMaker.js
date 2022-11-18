@@ -12,8 +12,8 @@ const BridgeMaker = {
     const bridge = [];
     for (let count = 0; count < size; count += 1) {
       const number = generateRandomNumber();
-      if (number === 1) bridge.push('U');
-      if (number === 0) bridge.push('D');
+      if (Number(number) === 1) bridge.push('U');
+      if (Number(number) === 0) bridge.push('D');
     }
     return bridge;
   },
