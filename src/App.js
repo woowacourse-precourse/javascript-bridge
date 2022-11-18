@@ -1,11 +1,14 @@
-const inputView = require("./InputView");
-const outputView = require("./OutputView");
+const InputView = require("./InputView");
+const OutputView = require("./OutputView");
+const { MESSAGE } = require("../constants/Message");
 
 class App {
   constructor() {
-    outputView.printGameStart();
+    OutputView.printMessage(MESSAGE.START);
   }
-  play() {}
+  play() {
+    InputView.readBridgeSize();
+  }
 }
 
 const app = new App();
