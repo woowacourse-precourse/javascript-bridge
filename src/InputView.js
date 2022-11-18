@@ -53,7 +53,7 @@ const InputView = {
 		const prevCrossedBridge = bridgeGame.getPrevCrossedBridge();
 		OutputView.printMap(prevCrossedBridge);
 
-		InputView.inCaseWrong(bridgeGame, prevCrossedBridge);
+		InputView.inCaseWrong(bridgeGame, moving, prevCrossedBridge);
 
 		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 	},
@@ -67,11 +67,10 @@ const InputView = {
 		}
 	},
 
-	moveAndPrintMap() {},
-
-	inCaseWrong(bridgeGame, prevCrossedBridge) {
-		const lastBridge = prevCrossedBridge.pop();
-		const isCorrect = lastBridge === 'DO' || lastBridge === 'UO';
+	inCaseWrong(bridgeGame, moving, prevCrossedBridge) {
+		bridgeGame.setBackPos();
+		const isCorrect = bridgeGame.isCorrect(moving);
+		bridgeGame.setNextPos();
 		if (!isCorrect) {
 			InputView.readGameCommand(bridgeGame, prevCrossedBridge);
 		}
@@ -107,7 +106,9 @@ const InputView = {
 		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 	},
 
-	quitStep() {},
+	quitStep(bridgeGame, prevCrossedBridge) {
+		OutputView.printResult(bridgeGame, prevCrossedBridge);
+	},
 };
 
 module.exports = InputView;
