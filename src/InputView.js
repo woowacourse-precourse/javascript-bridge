@@ -20,8 +20,8 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(callback) {
-    Console.readLine(READ_MOVING, callback);
+  readMoving(setGamePiece) {
+    Console.readLine(READ_MOVING, setGamePiece);
   },
 
   /**
