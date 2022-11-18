@@ -167,11 +167,12 @@ Q
     - `InputView` 객체의 `readBridgeSize()` 메서드에서 입력받는다.
     - `readBridgeSize()` 콜백함수 `validateBridgeSize`를 인수로 받는다.
 
-- [ ] 다리 길이 입력의 예외 처리하기
+- [x] 다리 길이 입력의 예외 처리하기
 
     - 3 이상 20 이하의 숫자가 아니라면 예외 처리한다.
+    - `BridgeGame` 클래스에서 유효한 숫자인지 확인하고 `BridgeError` 객체에서 에러를 처리한다.
 
-    ```bash
+    ```text
     // 예외 1. 3 미만의 숫자 입력
     1
 
