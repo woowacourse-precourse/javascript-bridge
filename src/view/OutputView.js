@@ -1,3 +1,5 @@
+const { PRINTSTARTGAME } = require('./Message');
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -6,14 +8,7 @@ const OutputView = {
    * 개임 시작 문구
    */
   printStart() {
-    return '다리 건너기 게임을 시작합니다.';
-  },
-
-  /**
-   * 다리 길이 입력하는 문구를 출력한다.
-   */
-  printBridgeSize() {
-    return '다리의 길이를 입력해주세요.\n';
+    return PRINTSTARTGAME;
   },
 
   /**
