@@ -14,8 +14,7 @@ const Validation = {
     if (userInput === "u" || userInput === "d") {
       throw new Error(ERROR.ERROR_BRIDGE_MOVE_UPPERCASE);
     }
-
-    if (/^[U,D]/.test(userInput) === false) {
+    if (/^[U|D]/.test(userInput) === false) {
       throw new Error(ERROR.ERROR_BRIDGE_MOVE_RANGE);
     }
     if (userInput.length !== 1) {
@@ -27,7 +26,6 @@ const Validation = {
     if (userInput === "r" || userInput === "q") {
       throw new Error(ERROR.ERROR_RETRY_UPPERCASE);
     }
-
     if (/^[R,Q]/.test(userInput) === false) {
       throw new Error(ERROR.ERROR_RETRY_RANGE);
     }
