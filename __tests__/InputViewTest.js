@@ -1,7 +1,7 @@
 const InputView = require("../src/InputView");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeGame = require("../src/BridgeGame");
+const Game = require("../src/BridgeGame");
 
 const mockQuestions = (answer) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -35,12 +35,7 @@ describe("readBridgeSize 테스트", () => {
   test("유저 다리 선택 입력 예외 테스트: U와 D를 입력하지 않았을 때", () => {
     mockQuestions("A");
     expect(() => {
-      InputView.readMoving(new BridgeGame.BridgeGame([1, 1, 1]));
+      InputView.readMoving(new Game.BridgeGame(["U", "U", "U"]));
     }).toThrow("[ERROR]");
-  });
-
-  test("유저 다리 선택 입력 변환 테스트", () => {
-    mockQuestions("A");
-    expect(InputView.userSelectValueTreater("U")).toEqual(1);
   });
 });
