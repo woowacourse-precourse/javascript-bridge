@@ -1,18 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class BridgeGame {
   move(moving, bridge) {
-    let lastIndex = moving.length - 1;
-
-    if (
-      moving.length == bridge.length &&
-      moving[lastIndex] === bridge[lastIndex]
-    ) {
-      return "Done";
-    } else if (moving[lastIndex] === bridge[lastIndex]) {
-      return "Correct";
-    } else if (moving[lastIndex] !== bridge[lastIndex]) {
-      return "Incorrect";
+    if (moving[moving.length - 1] === bridge[moving.length - 1]) {
+      return moving.length == bridge.length ? "Done" : "Correct";
     }
+    return "Incorrect";
   }
 
   retry(command, retry, printResult) {

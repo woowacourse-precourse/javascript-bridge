@@ -7,13 +7,15 @@ const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 
 class App {
-  #size;
+  #bridgeSize;
   #bridge;
   #moving;
   #totalTry;
 
   constructor() {
     this.#totalTry = 1;
+    this.#moving = [];
+    this.bridgeGame = new BridgeGame();
   }
 
   play() {
@@ -23,29 +25,27 @@ class App {
   }
 
   getBridgeSize(size) {
-    this.validataSize(size);
-    this.#size = Number(size);
-    this.#moving = [];
     MissionUtils.Console.print("");
 
+    this.validateSize(size);
     this.getBridge();
     this.selectMoving();
   }
 
-  validataSize(size) {
+  validateSize(size) {
     if (isNaN(size)) {
       throw "[ERROR]";
     } else if (size < 3 || size > 20) {
       throw "[ERROR]";
     }
+    this.#bridgeSize = Number(size);
   }
   getBridge() {
     this.#bridge = BridgeMaker.makeBridge(
-      this.#size,
+      this.#bridgeSize,
       BridgeRandomNumberGenerator
     );
   }
-
   selectMoving() {
     InputView.readMoving((moving) => this.getMoving(moving));
   }
@@ -53,17 +53,16 @@ class App {
   getMoving(moving) {
     this.#moving.push(moving);
 
-    const bridgeGame = new BridgeGame();
-    let response = bridgeGame.move(this.#moving, this.#bridge);
-    this.checkResponse(response, bridgeGame);
+    let response = this.bridgeGame.move(this.#moving, this.#bridge);
+    this.checkResponse(response);
   }
-  checkResponse(response, bridgeGame) {
+  checkResponse(response) {
     if (response == "Done") {
       this.responseDone();
     } else if (response == "Correct") {
       this.responseCorrect();
     } else if (response == "Incorrect") {
-      this.responseIncorrect(bridgeGame);
+      this.responseIncorrect(this.bridgeGame);
     }
   }
   responseDone() {
