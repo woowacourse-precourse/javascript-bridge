@@ -1,7 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { MESSAGE, ERROR, BRIDGE } = require("../Utils/constant");
-const BridgeRandomNumberGenerator = require("../Utils/BridgeRandomNumberGenerator");
+const Random = require("../Utils/BridgeRandomNumberGenerator");
 const BridgeMaker = require("../BridgeMaker");
+const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -10,13 +11,13 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
+    let size = 0;
     MissionUtils.Console.readLine(MESSAGE.INPUT_BRIDGE_LENGTH, (answer) => {
-      const size = +answer;
+      size = +answer;
       if (this.bridgeSizeValidate(answer)) {
-        return answer;
       }
-      BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-      this.readMoving();
+      this.bridge = BridgeMaker.makeBridge(size, Random.generate); //bridge
+      this.readMoving(this.bridge, size);
     });
   },
 
@@ -32,12 +33,13 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(bridge, size) {
+    let move = "";
     MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
-      const move = answer;
+      move = answer;
       if (this.moveValidate(answer)) {
       }
-      return move;
+      OutputView.printMap(bridge, size, move);
     });
   },
 

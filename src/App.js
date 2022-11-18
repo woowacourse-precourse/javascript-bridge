@@ -5,7 +5,7 @@ class App {
     OutputView.printStart();
   }
   play() {
-    InputView.readBridgeSize();
+    this.bridge = InputView.readBridgeSize();
   }
 }
 const app = new App();
