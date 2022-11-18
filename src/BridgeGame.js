@@ -24,17 +24,20 @@ class BridgeGame {
 
   handleDirection(direction) {
     this.#direction = new Direction(direction);
+    this.#direction.setSuccessful(
+      this.#bridge.getBridge()[this.#player.getCurPlace()]
+    );
   }
 
   move() {
-    const canCross = this.#direction.getCanCross(
-      this.#bridge.getBridge()[this.#player.getCurPlace()]
-    );
     this.#player.increaseCurPlace();
-    if (canCross) this.#bridge.updateMap(this.#direction.getDirection(), 'O');
-    else this.#bridge.updateMap(this.#direction.getDirection(), 'X');
+    if (this.#direction.getSuccessful()) {
+      this.#bridge.updateMap(this.#direction.getDirection(), 'O');
+    } else {
+      this.#bridge.updateMap(this.#direction.getDirection(), 'X');
+    }
 
-    return canCross;
+    return this.#direction.getSuccessful();
   }
 
   printCurMap() {

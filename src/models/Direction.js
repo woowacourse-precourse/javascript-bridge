@@ -2,6 +2,7 @@ const Validator = require('../Validator');
 
 class Direction {
   #direction;
+  #successful;
 
   constructor(direction) {
     Validator.directionValidityCheck(direction);
@@ -12,8 +13,12 @@ class Direction {
     return this.#direction;
   }
 
-  getCanCross(curRightCell) {
-    return this.#direction === curRightCell;
+  setSuccessful(curRightCell) {
+    this.#successful = this.#direction === curRightCell;
+  }
+
+  getSuccessful() {
+    return this.#successful;
   }
 }
 
