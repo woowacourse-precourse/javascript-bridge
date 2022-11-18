@@ -1,4 +1,4 @@
-const WinningBridge = require('../WinningBridge');
+// const WinningBridge = require('../WinningBridge');
 const { input } = require('../utils/utils');
 const { MESSAGE } = require('../utils/constants');
 /**
@@ -8,14 +8,8 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    input(MESSAGE.inputBridgeSize, (size) => {
-      //const player = new Player();
-      //player.sendBridgeSize(size);
-      new WinningBridge(Number(size));
-      // WinningBridge.validate(Number(size));
-    });
-    // return this;
+  readBridgeSize(callback) {
+    input(MESSAGE.inputBridgeSize, callback);
   },
 
   /**
