@@ -25,6 +25,7 @@ const OutputView = {
     this.printMap(movingList);
     Console.print(`\n게임 성공 여부: ${result}`);
     Console.print(`총 시도한 횟수: ${attempts}`);
+    Console.close();
   },
 };
 
