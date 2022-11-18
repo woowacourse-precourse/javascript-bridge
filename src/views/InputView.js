@@ -10,10 +10,9 @@ const InputView = {
     Console.readLine(MESSAGE_QUESTION.PLAYER_MOVING, movePlayer);
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+  readGameCommand(restartOrQuitGame) {
+    Console.readLine(MESSAGE_QUESTION.RESTART_OR_QUIT, restartOrQuitGame);
+  },
 };
 
 module.exports = InputView;

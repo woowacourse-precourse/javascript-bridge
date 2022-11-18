@@ -21,6 +21,10 @@ class BridgeGame {
     const unselectedDirection = this.#makeUnselectedDirection(direction);
     this.#gameStatus[unselectedDirection].push(BRIDGE_GAME.EMPTY);
     this.#gameStatus.length += BRIDGE_GAME.STEP;
+    this.#setGameStatus(
+      this.#gameStatus[selectedDirection],
+      this.#gameStatus[selectedDirection].length - 1
+    );
 
     return {
       upBridge: this.#gameStatus.upBridge,
@@ -33,16 +37,23 @@ class BridgeGame {
   }
 
   #updateBridge(direction) {
-    if (direction === this.#bridge[this.#gameStatus.length]) {
-      return BRIDGE_GAME.CORRECT;
-    }
-
-    this.#gameStatus.status = GAME_STATUS.END;
-    return BRIDGE_GAME.INCORRECT;
+    return direction === this.#bridge[this.#gameStatus.length]
+      ? BRIDGE_GAME.CORRECT
+      : BRIDGE_GAME.INCORRECT;
   }
 
   #makeUnselectedDirection(direction) {
     return direction === BRIDGE_GAME.INPUT_U ? BRIDGE_GAME.DOWN_BRIDGE : BRIDGE_GAME.UP_BRIDGE;
+  }
+
+  #setGameStatus(selectedDirection, index) {
+    if (selectedDirection[index] === 'X') {
+      this.#gameStatus.status = GAME_STATUS.FAIL_END;
+    }
+
+    if (selectedDirection[index] === 'O' && selectedDirection.length === this.#bridge.length) {
+      this.#gameStatus.status = GAME_STATUS.SUCCESS_END;
+    }
   }
 
   checkGameStatus() {

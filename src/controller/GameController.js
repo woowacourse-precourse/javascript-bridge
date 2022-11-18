@@ -24,10 +24,10 @@ class GameController {
     this.#bridgeGame = new BridgeGame(
       BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate)
     );
-    this.#playGame();
+    this.playGame();
   }
 
-  #playGame() {
+  playGame() {
     InputView.readMoving(this.#movePlayer.bind(this));
   }
 
@@ -35,11 +35,21 @@ class GameController {
     PlayerInputChecker.checkDirection(direction);
     OutputView.printMap(PrintableBridgeMaker.generate(this.#bridgeGame.move(direction)));
     if (this.#bridgeGame.checkGameStatus() === GAME_STATUS.PLAYING) {
-      this.#playGame();
+      this.playGame();
+
+      return;
+    }
+
+    this.#quitGame();
+  }
+
+  #quitGame() {
+    if (this.#bridgeGame.checkGameStatus() === GAME_STATUS.FAIL_END) {
+      InputView.readGameCommand(this.#restartOrQuitGame.bind(this));
     }
   }
 
-  #selectRestartOrQuitGame() {}
+  #restartOrQuitGame(select) {}
 }
 
 module.exports = GameController;

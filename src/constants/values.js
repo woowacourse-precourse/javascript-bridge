@@ -14,7 +14,8 @@ const BRIDGE_GAME = Object.freeze({
 
 const GAME_STATUS = Object.freeze({
   PLAYING: 1,
-  END: 0,
+  SUCCESS_END: 0,
+  FAIL_END: -1,
 });
 
 const PRINTABLE_BRIDGE = Object.freeze({
