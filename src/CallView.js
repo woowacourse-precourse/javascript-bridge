@@ -26,6 +26,9 @@ class CallView {
   resultPrint(map, tryCount, gameState) {
     return this.OutputView.printResult(map, tryCount, gameState);
   }
+  justPrint(message) {
+    return this.OutputView.justPrint(message);
+  }
 }
 
 module.exports = CallView;
