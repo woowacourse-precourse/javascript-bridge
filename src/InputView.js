@@ -63,10 +63,11 @@ const InputView = {
           return;
         }
         if (retryInput === "Q") {
-          const [bridgeTop, bridgeBottom] = mainBridge;
-          Console.print("최종 게임 결과");
-          Console.print(bridgeTop);
-          Console.print(bridgeBottom);
+          printResult("최종 게임 결과");
+          printMap(bridgeGame.userBridge)
+          printResult("게임 성공 여부: 실패");
+          printResult(`총 시도한 횟수: ${bridgeGame.retrycount - 1}`);
+          Console.close();
           return;
         }
       }
