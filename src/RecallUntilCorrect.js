@@ -2,11 +2,11 @@ const InputView = require("./InputView.js");
 const ValidCheck = require("./ValidCheck.js");
 const RecallUntilCorrect = {
     
-  RecallReadBridgeSize(recallUntilCorrect){
+  recallReadBridgeSize(recallUntilCorrect){
     let BRIDGE_SIZE;
     while(recallUntilCorrect){
       BRIDGE_SIZE = InputView.readBridgeSize();
-      recallUntilCorrect = ValidCheck.BridgeSizeValidCheck(BRIDGE_SIZE);
+      recallUntilCorrect = ValidCheck.bridgeSizeValidCheck(BRIDGE_SIZE);
     }
     return BRIDGE_SIZE;
   }

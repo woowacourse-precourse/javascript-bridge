@@ -1,11 +1,11 @@
 const OutputView = require("./OutputView.js");
 const MissionUtils = require("@woowacourse/mission-utils");
 const ValidCheck = {
-  BridgeSizeValidCheck(bridgeSize){
-    this.IsInRange(bridgeSize);
-    this.SizeIsNumber(bridgeSize);
+  bridgeSizeValidCheck(bridgeSize){
+    this.isInRange(bridgeSize);
+    this.sizeIsNumber(bridgeSize);
   },
-  IsInRange(bridgeSize){
+  isInRange(bridgeSize){
     if (bridgeSize<3 || bridgeSize>20) {
       try{
         throw new Error();
@@ -17,7 +17,7 @@ const ValidCheck = {
       return false;
     }
   },
-  SizeIsNumber(bridgeSize){
+  sizeIsNumber(bridgeSize){
     const IS_NOT_NUMBER = /\D/g;
     if(IS_NOT_NUMBER.test(bridgeSize)){
       try{
