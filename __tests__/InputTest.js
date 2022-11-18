@@ -16,29 +16,35 @@ const getLogSpy = () => {
   return logSpy;
 };
 
+const getOutput = (logSpy) => {
+  return [...logSpy.mock.calls].join("");
+};
+
+const expectLogContains = (received, logs) => {
+  logs.forEach((log) => {
+    expect(received).toEqual(expect.stringContaining(log));
+  });
+};
+
+const runException = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  InputView.readBridgeSize();
+
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
+
 describe("입력 테스트", () => {
   test("다리 길이가 숫자가 아닌 경우 예외 처리한다.", () => {
-    mockQuestions(["a"]);
-
-    expect(() => {
-      InputView.readBridgeSize();
-    }).toThrow("[ERROR] 다리 길이는 숫자여야 합니다.");
+    runException(["a"]);
   });
 
   test("다리 길이가 3보다 작은 숫자인 경우 예외 처리한다.", () => {
-    mockQuestions(["2"]);
-
-    expect(() => {
-      InputView.readBridgeSize();
-    }).toThrow("[ERROR] 다리 길이는 3 이상 20 이하인 숫자여야 합니다.");
+    runException(["2"]);
   });
 
   test("다리 길이가 20보다 큰 숫자인 경우 예외 처리한다.", () => {
-    mockQuestions(["21"]);
-
-    expect(() => {
-      InputView.readBridgeSize();
-    }).toThrow("[ERROR] 다리 길이는 3 이상 20 이하인 숫자여야 합니다.");
+    runException(["21"]);
   });
 
   test("이동할 칸이 U나 P가 아닌 경우 예외 처리한다.", () => {

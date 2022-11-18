@@ -1,12 +1,24 @@
+const { Console } = require("@woowacourse/mission-utils");
+
 const Check = {
-  checkBrideSize(size) {
-    this.checkNumber(size);
-    this.checkRange(size);
+  checkBridgeSize(size) {
+    const number = this.checkNumber(size);
+    const range = this.checkRange(size);
+
+    if (number || range) {
+      return true;
+    }
+    return false;
   },
 
   checkNumber(size) {
-    if (isNaN(size)) {
-      throw new Error("[ERROR] 다리 길이는 숫자여야 합니다.");
+    try {
+      if (isNaN(size)) {
+        throw new Error("[ERROR] 다리 길이는 숫자여야 합니다.");
+      }
+    } catch (e) {
+      Console.print(e.message);
+      return true;
     }
   },
 
@@ -14,8 +26,15 @@ const Check = {
     const MINIMUM_SIZE = 3;
     const MAXIMUM_SIZE = 20;
 
-    if (size < MINIMUM_SIZE || size > MAXIMUM_SIZE) {
-      throw new Error("[ERROR] 다리 길이는 3 이상 20 이하인 숫자여야 합니다.");
+    try {
+      if (size < MINIMUM_SIZE || size > MAXIMUM_SIZE) {
+        throw new Error(
+          "[ERROR] 다리 길이는 3 이상 20 이하인 숫자여야 합니다."
+        );
+      }
+    } catch (e) {
+      Console.print(e.message);
+      return true;
     }
   },
 
