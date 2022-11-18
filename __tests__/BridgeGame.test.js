@@ -334,6 +334,6 @@ describe('출발전 판단 메서드 테스트', () => {
 
       bridgeGame.move();
       bridgeGame.checkBeforeStart();
-    }).toThrow(POSITION_ERROR_TEXT);
+    }).not.toThrow(POSITION_ERROR_TEXT);
   });
 });
