@@ -1,7 +1,5 @@
-const BridgeSize = require('../model/BridgeSize');
 const { Console } = require('@woowacourse/mission-utils');
-const MovementVadlidation = require('../model/MovementValidaion');
-const GameCommandValidation = require('../model/GameCommandValidation');
+const ObjectToValidate = require('../model/ObjectToValidate');
 
 // view는 받아오는 데이터에 따라 처리가 다를 때만 model를 불러온다
 
@@ -15,7 +13,8 @@ const InputView = {
 
   readBridgeSize(bridgeSize) {
     try {
-      return new BridgeSize(bridgeSize).showValidateResult();
+      const infomation = ObjectToValidate.bridgeSize;
+      return infomation.checkValidation(bridgeSize, infomation.minimum, infomation.maximum);
     } catch (error) {
       Console.print(error);
       return false;
@@ -27,7 +26,8 @@ const InputView = {
    */
   readMoving(movement) {
     try {
-      return new MovementVadlidation(movement).showValidationResult();
+      const infomation = ObjectToValidate.movement;
+      return infomation.checkValidation(movement, [infomation.up, infomation.down]);
     } catch (error) {
       Console.print(error);
       return false;
@@ -39,7 +39,8 @@ const InputView = {
    */
   readGameCommand(command) {
     try {
-      return new GameCommandValidation(command).showValidationResult();
+      const infomation = ObjectToValidate.command;
+      return infomation.checkValidation(command, [infomation.quit, infomation.restart]);
     } catch (error) {
       Console.print(error);
       return false;
