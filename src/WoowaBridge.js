@@ -10,11 +10,15 @@ class WoowaBrigde {
 
   constructor() {
     this.#bridge = new Bridge();
-    this.#bridgeGame = new BridgeGame();
+    this.#bridgeGame = new BridgeGame(this.#bridge);
   }
 
   getBridge() {
-    return this.getBridge()
+    return this.#bridge;
+  }
+
+  getBridgeGame() {
+    return this.#bridgeGame;
   }
 
   play() {
@@ -24,15 +28,21 @@ class WoowaBrigde {
 
   makeBridge() {
     const bridgeSetter = this.#bridge.setOriginalBridge.bind(this.#bridge);
-    const nextCallBack = this.upOrDown.bind(this)
+    const nextCallBack = this.upOrDown.bind(this);
     const errorCallBack = this.makeBridge.bind(this);
     InputView.readBridgeSize(bridgeSetter, nextCallBack, errorCallBack);
   }
 
   upOrDown() {
-    const nextCallBack = () => this.#bridgeGame.move(this.getBridge()).bind(this)
-    const errorCallBack = () => this.upOrDown.bind(this)
-    InputView.readMoving(nextCallBack , errorCallBack);
+    const doCallBack = this.#bridgeGame.move.bind(this.#bridgeGame);
+    const nextCallBack = this.showCurrentState.bind(this);
+    const errorCallBack = this.upOrDown.bind(this);
+    InputView.readMoving(doCallBack, nextCallBack, errorCallBack);
+  }
+
+  showCurrentState() {
+    const [upside, downside] = this.#bridge.getResult();
+    OutputView.printMap(upside, downside);
   }
 }
 

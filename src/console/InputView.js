@@ -3,18 +3,17 @@ const BridgeRandomNumberGenerator = require("../lib/BridgeRandomNumberGenerator"
 const Message = require("../lib/Message");
 const BridgeMaker = require("../BridgeMaker");
 const Validate = require("../lib/Validate");
-const ErrorHandler = require("../ErrorHandler")
-
+const ErrorHandler = require("../ErrorHandler");
 
 const InputView = {
-
   readBridgeSize(bridgeSetter, nextCallBack, errorCallBack) {
-    const generator = BridgeRandomNumberGenerator.generate
-    MissionUtils.Console.readLine(Message.BRIDGE_SIZE, (size) => {
-      const validTarget = () => Validate.bridgeLength(size)
-      const doCallBack = () => bridgeSetter(BridgeMaker.makeBridge(size, generator.bind(this)))
+    const generator = BridgeRandomNumberGenerator.generate;
 
-      ErrorHandler.test(validTarget, doCallBack, errorCallBack)
+    MissionUtils.Console.readLine(Message.BRIDGE_SIZE, (size) => {
+      const validTarget = () => Validate.bridgeLength(size);
+      const doCallBack = () => bridgeSetter(BridgeMaker.makeBridge(size, generator.bind(this)));
+      ErrorHandler.test(validTarget, doCallBack ,errorCallBack);
+
       nextCallBack();
     });
   },
@@ -22,11 +21,13 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(nextCallBack , errorCallBack) {
-    MissionUtils.Console.readLine(Message.BRIDGE_DIRECTION ,(direction) => {
-      const validTarget = () => Validate.bridgeDirection(direction)
-      ErrorHandler.test(validTarget, nextCallBack , errorCallBack)
-    })
+  readMoving(doCallBack, nextCallBack, errorCallBack) {
+    MissionUtils.Console.readLine(Message.BRIDGE_DIRECTION, (direction) => {
+      const validTarget = () => Validate.bridgeDirection(direction);
+      const callBack = () => doCallBack(direction)
+      ErrorHandler.test(validTarget, callBack, errorCallBack);
+      nextCallBack(direction);
+    });
   },
 
   /**

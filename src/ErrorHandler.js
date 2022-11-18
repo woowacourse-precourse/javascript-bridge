@@ -1,14 +1,14 @@
-const OutputView = require("../src/console/OutputView")
+const OutputView = require("../src/console/OutputView");
 
 class ErrorHandler {
-    static test(validTarget, callback , errorCallback){
-        try {
-            validTarget()
-            callback()
-        } catch(error) {
-            OutputView.printLine(error.message)
-            errorCallback()
-        }
+  static test(validTarget, doCallBack, errorCallback) {
+    try {
+      validTarget();
+      doCallBack();
+    } catch (error) {
+      OutputView.printLine(error.message);
+      errorCallback();
     }
+  }
 }
-module.exports = ErrorHandler
+module.exports = ErrorHandler;

@@ -1,7 +1,7 @@
 class Bridge {
   #originalBridge;
   #upsideBridge = [];
-  #downsideBridge =[];
+  #downsideBridge = [];
 
   constructor() {}
 
@@ -14,57 +14,60 @@ class Bridge {
   }
 
   getUpsideBridge() {
-    return this.#upsideBridge
+    return this.#upsideBridge;
   }
 
   getDownsideBridge() {
-    return this.#downsideBridge
+    return this.#downsideBridge;
   }
 
-  getResult (direction,index) {
+  setResult(direction, index) {
     if (direction === "U") {
-      this.setUpSideBridge(direction,index)
+      this.setUpSideBridge(direction, index);
     }
     if (direction === "D") {
-      this.setDownSideBridge(direction,index)
+      this.setDownSideBridge(direction, index);
     }
-    return [this.getUpsideBridge() , this.getDownsideBridge()]
   }
 
-  setUpSideBridge(direction,index) {
-    this.setUpsideBridgeValue(direction,index);
+  getResult() {
+    return [this.getUpsideBridge(), this.getDownsideBridge()];
+  }
+
+  setUpSideBridge(direction, index) {
+    this.setUpsideBridgeValue(direction, index);
     this.setDownsideBridgeEmpty();
   }
 
-  setDownSideBridge(direction,index) {
-    this.setDownsideBridgeValue(direction,index);
+  setDownSideBridge(direction, index) {
+    this.setDownsideBridgeValue(direction, index);
     this.setUpsideBridgeEmpty();
   }
 
-  setUpsideBridgeValue (direction,index) {
-    if(direction === this.getOriginalBridge()[index]) {
-      this.#upsideBridge.push("O");
+  setUpsideBridgeValue(direction, index) {
+    if (direction === this.#originalBridge[index]) {
+      this.#upsideBridge.push(" O ");
     }
-    if(direction !== this.getOriginalBridge()[index]) {
-      this.#upsideBridge.push("X");
+    if (direction !== this.#originalBridge[index]) {
+      this.#upsideBridge.push(" X ");
     }
   }
 
-  setDownsideBridgeValue(direction,index) {
-    if(direction === this.getOriginalBridge()[index]) {
-      this.#downsideBridge.push("O");
+  setDownsideBridgeValue(direction, index) {
+    if (direction === this.getOriginalBridge()[index]) {
+      this.#downsideBridge.push(" O ");
     }
-    if(direction !== this.getOriginalBridge()[index]) {
-      this.#downsideBridge.push("X");
+    if (direction !== this.getOriginalBridge()[index]) {
+      this.#downsideBridge.push(" X ");
     }
   }
 
   setUpsideBridgeEmpty() {
-    this.#upsideBridge.push(" ");
+    this.#upsideBridge.push(" N ");
   }
 
   setDownsideBridgeEmpty() {
-    this.#downsideBridge.push(" ")
+    this.#downsideBridge.push(" N ");
   }
 }
 

@@ -1,27 +1,32 @@
-const OutputView = require("../src/console/OutputView")
-
+const OutputView = require("../src/console/OutputView");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridge;
   #state = {
-    tried : 0,
-    gameOver : false
+    tried: 0,
+    gameOver: false,
+  };
+
+  constructor(bridge) {
+    this.#bridge = bridge;
   }
 
-  constructor() {}
+  getBridge() {
+    return this.#bridge.getUpsideBridge();
+  }
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(bridge) {
-
-    OutputView.printLine("시작했습니다.")
+  move(direction) {
+    const index = this.getBridge().length;
+    this.#bridge.setResult(direction, index);
   }
-
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
@@ -31,3 +36,29 @@ class BridgeGame {
 }
 
 module.exports = BridgeGame;
+
+// setUpsideBridgeValue (direction,index) {
+//   if(direction === this.getOriginalBridge()[index]) {
+//     this.#upsideBridge.push("O");
+//   }
+//   if(direction !== this.getOriginalBridge()[index]) {
+//     this.#upsideBridge.push("X");
+//   }
+// }
+
+// setDownsideBridgeValue(direction,index) {
+//   if(direction === this.getOriginalBridge()[index]) {
+//     this.#downsideBridge.push("O");
+//   }
+//   if(direction !== this.getOriginalBridge()[index]) {
+//     this.#downsideBridge.push("X");
+//   }
+// }
+
+// setUpsideBridgeEmpty() {
+//   this.#upsideBridge.push(" ");
+// }
+
+// setDownsideBridgeEmpty() {
+//   this.#downsideBridge.push(" ")
+// }
