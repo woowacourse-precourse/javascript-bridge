@@ -28,27 +28,50 @@
 const OutputView = require('./OutputView')
 const InputView = require('./InputView')
 const BridgeMaker = require('./BridgeMaker')
+const BridgeBuild = require('./BridgeBuild')
 const BridgeGame = require('./BridgeGame')
 
 class App {
+
+  constructor() {
+    this.BRIDGE_RESULT = []
+    this.BRIDGE_U = []
+    this.BRIDGE_D = []
+  }
   play() {
     OutputView.printStart()
     // 다리길이 입력받기
     let BRIDGE_LENGTH = InputView.readBridgeSize()
     // 다리 생성해야지
     let BRIDGE = BridgeMaker.makeBridge(BRIDGE_LENGTH)
-    console.log('################################APP.js')
-    console.log(BRIDGE)
-    this.movePrint(BRIDGE)
-
+    this.movePrint(BRIDGE,BRIDGE_LENGTH)
+    
   }
 
   // 게임 시작
-  movePrint(bridge) {
-    OutputView.printMove()
-    let USER_MOVE = InputView.readMoving()
+  movePrint(bridge,bridgeLength) {
     const GAME = new BridgeGame()
-    GAME.move()
+    // 다리의 길이만큼 move 진행
+    for (let i = 0 ; i < bridgeLength ; i++){
+      OutputView.printMove()
+      let USER_MOVE = InputView.readMoving()
+      if (GAME.move(bridge,USER_MOVE,i) === 'X' ) {
+        this.askRetry('X')
+      }
+      this.printBridge(GAME.move(bridge,USER_MOVE,i))
+    }
+  }
+
+  // true 출력
+  printBridge(result) {
+    BridgeBuild.makeBridge(result,this.BRIDGE_U,this.BRIDGE_D)
+    OutputView.printMap(this.BRIDGE_U,this.BRIDGE_D)
+    OutputView.printBridge(result)
+  }
+
+  // 게임 다시 시작
+  askRetry(result){
+    OutputView.printStart()
   }
 }
 
