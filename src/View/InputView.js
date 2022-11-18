@@ -1,4 +1,5 @@
-const { read, print } = require("../utils/Io.js");
+const { continueAfterCatchError } = require("../utils/Misc.js");
+const { read } = require("../utils/Io.js");
 const { INPUT } = require("../constants/index.js");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -9,28 +10,19 @@ const InputView = {
    */
   readBridgeSize(callback) {
     const { READ_BRIDGE } = INPUT;
-    read(READ_BRIDGE, (size) => {
-      try {
-        callback(size);
-      } catch (error) {
-        print(error);
-        this.readBridgeSize(callback);
-      }
-    });
+    read(READ_BRIDGE, (size) =>
+      continueAfterCatchError(size, callback, this.readBridgeSize.bind(this))
+    );
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    read(MOVING_BRIDGE, (move) => {
-      try {
-        callback(move);
-      } catch (error) {
-        print(error);
-        this.readMoving(callback);
-      }
-    });
+  readMoving(callback) {
+    const { MOVING_BRIDGE } = INPUT;
+    read(MOVING_BRIDGE, (move) =>
+      continueAfterCatchError(move, callback, this.readMoving.bind(this))
+    );
   },
 
   /**
