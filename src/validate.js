@@ -18,7 +18,6 @@ const validateMove = (move) => {
 };
 
 const validateRestart = (restart) => {
-  console.log("Restart is=" +restart);
   const isRestart = restart === RETRY.YES || restart === RETRY.NO;
 
   if (isRestart === false) throw Error(ERRORS.INVALID_RESTART_TYPE);
