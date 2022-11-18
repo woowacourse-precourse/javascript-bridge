@@ -8,7 +8,7 @@ const InputView = {
    */
   readBridgeSize() {
     const bridgeSize = new Promise((resolve) => {
-      MissionUtils.Console.readLine('다리의 길이를 입력해주세요.', (answer) => resolve(answer));
+      MissionUtils.Console.readLine('다리의 길이를 입력해주세요.\n', (answer) => resolve(answer));
     });
     return bridgeSize;
   },

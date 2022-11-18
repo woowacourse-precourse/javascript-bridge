@@ -1,11 +1,12 @@
 const { readBridgeSize } = require('../view/InputView');
+const { printGameStart } = require('../view/OutputView');
 
 class GameManager {
   #bridgeSize;
 
   async execute() {
+    printGameStart();
     this.#bridgeSize = await readBridgeSize();
-    console.log(this.#bridgeSize);
   }
 }
 module.exports = GameManager;
