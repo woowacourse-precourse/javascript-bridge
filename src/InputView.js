@@ -28,7 +28,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridge) {
-    Console.readLine(Messages.INPUT_UP_OR_DOWN, (upOrDown) => {
+    Console.readLine(Messages.INPUT_MOVING, (upOrDown) => {
       this.validateMoving(upOrDown);
     });
   },
