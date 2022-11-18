@@ -9,6 +9,16 @@ const InputView = {
    */
   readBridgeSize() {
     MISSIONUTILS.Console.readLine("다리의 길이를 입력해주세요\n", function(input) {
+      if (isNaN(input)){
+        throw new Error("[ERROR] 다리의 길이는 숫자만 입력 가능합니다");
+      }
+      
+      input = Number(input);
+    
+      if(input<3 || input>20){
+        throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+      }
+      
       MISSIONUTILS.Console.print(input);
     });
 
