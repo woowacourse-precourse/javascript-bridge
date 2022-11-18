@@ -1,4 +1,4 @@
-const GameCtrl = require('./GameCtrl');
+const GameCtrl = require('../GameCtrl');
 
 const BridgeCtrl = class extends GameCtrl {
   constructor(view, model) {

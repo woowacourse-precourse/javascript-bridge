@@ -1,6 +1,6 @@
 const BridgeView = require('./view/bridge');
 const BridgeModel = require('./model/BridgeModel');
-const BridgeCtrl = require('./controller/BridgeCtrl');
+const BridgeCtrl = require('./controller/bridge');
 
 const App = class {
   constructor() {
