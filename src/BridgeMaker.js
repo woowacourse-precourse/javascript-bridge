@@ -10,8 +10,10 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     for(let i=0; i<size; i++) {
-      const newRandomNumber = generateRandomNumber;
+      const newRandomNumber = generateRandomNumber.generate();
+      bridge.push(newRandomNumber)
     }
+    console.log(bridge)
   },
 };
 
