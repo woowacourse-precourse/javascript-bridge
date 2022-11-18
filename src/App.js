@@ -1,5 +1,5 @@
 const BridgeGame = require('./BridgeGame');
-const { readMoving, end, getInputs } = require('./InputView');
+const { readMoving, end, getInputs } = require('./View/InputView');
 
 class App {
   #game;

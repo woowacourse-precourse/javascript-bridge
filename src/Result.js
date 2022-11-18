@@ -1,4 +1,4 @@
-const { printMap, printResult } = require('./OutputView');
+const { printMap, printResult } = require('./View/OutputView');
 
 class Result {
   #result;
