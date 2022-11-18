@@ -29,17 +29,34 @@ class Validation {
         throw new Error('[ERROR] 1개의 값을 입력해주세요.');
     }
 
-    if (!Validation.onlyTwoValue(value)) {
+    if (!Validation.nextStepValue(value)) {
         Console.close();
         throw new Error('[ERROR] U 또는 D를 입력해주세요.');
     }
   }
 
   static retry() {
+    if (Validation.isStringEmpty(value)) {
+        Console.close();
+        throw new Error('[ERROR] 값을 입력해주세요.');
+    }
 
+    if (!Validation.oneValue(value)) {
+        Console.close();
+        throw new Error("[ERROR] 1개의 값을 입력해주세요.");
+    }
+
+    if (!Validation.retryOrNotValue(value)) {
+      Console.close();
+      throw new Error("[ERROR] R 또는 Q를 입력해주세요.");
+    }
   }
 
-  static onlyTwoValue(value) {
+  static retryOrNotValue(value) {
+    return value === 'R' || value === 'Q'
+  }
+
+  static nextStepValue(value) {
     return value === 'U' || value === 'D'
   }
 
