@@ -17,6 +17,7 @@
     "no-restricted-globals": "off",
     "no-new": "off",
     "no-undef": "off",
+    "no-throw-literal": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
