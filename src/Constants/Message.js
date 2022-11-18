@@ -7,6 +7,7 @@ const INPUT_MSG = {
 
 const ERROR_MSG = {
   INPUT_BRIDGE: "다리 길이는 3이상 20이하만 가능합니다.",
+  INPUT_MOVING: "U랑 D만 입력할수있습니다. ",
 };
 
 const GAME_MSG = {

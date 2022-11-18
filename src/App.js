@@ -7,6 +7,7 @@ class App {
     Console.print(GAME_MSG.START);
     const bridgeGame = new BridgeGame();
     await bridgeGame.setBridge();
+    await bridgeGame.move();
   }
 }
 

@@ -32,7 +32,18 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  async readMoving() {
+    let moving = await this.inputMethod(INPUT_MSG.MOVING);
+    try {
+      if (moving !== "U" && moving !== "D") {
+        throw error(ERROR_MSG.INPUT_MOVING);
+      }
+      return moving;
+    } catch (msg) {
+      console.dir(msg);
+      return this.readMoving();
+    }
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
