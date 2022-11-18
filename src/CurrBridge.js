@@ -5,9 +5,9 @@ class CurrBridge {
   #upperBridge = [];
   #lowerBridge = [];
 
-  constructor(direction) {
-    this.#direction = this.validate(direction);
-  }
+  // constructor(direction) {
+  //   this.#direction = this.validate(direction);
+  // }
 
   validate(direction) {
     Validation.checkStringType(direction);
@@ -16,6 +16,7 @@ class CurrBridge {
   }
 
   canMove(direction, winningBridge) {
+    console.log(this.#upperBridge.length);
     const isSame = winningBridge.isSameDirection(
       direction,
       this.#upperBridge.length

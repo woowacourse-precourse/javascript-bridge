@@ -14,6 +14,7 @@ const OutputView = {
   printMap(upperBridge, lowerBridge) {
     print('[ ' + upperBridge.join(' | ') + ' ]');
     print('[ ' + lowerBridge.join(' | ') + ' ]');
+    print('');
   },
 
   /**

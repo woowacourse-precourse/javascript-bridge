@@ -1,4 +1,5 @@
 const BridgeGame = require('../BridgeGame');
+// const CurrBridge = require('../CurrBridge');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const { MESSAGE } = require('../utils/constants');
@@ -6,6 +7,7 @@ const { MESSAGE } = require('../utils/constants');
 class Controller {
   constructor() {
     this.bridgeGame = new BridgeGame(this);
+    // this.currBridge = new currBridge(this);
   }
 
   // - 다리의 길이 입력 받는다.
@@ -30,13 +32,21 @@ class Controller {
   }
 
   move(direction) {
+    this.bridgeGame.validate(direction);
     this.bridgeGame.move(direction);
   }
 
-  printMoving(upperBridge, lowerBridge) {
+  printMoving(canMove, upperBridge, lowerBridge) {
     OutputView.printMap(upperBridge, lowerBridge);
+
+    if (canMove) this.inputMoving();
+    if (!canMove) this.retry();
   }
+
   // - 재시작 또는 종료 여부 입력 받는다.
+  retry() {
+    console.log('다시 시작할꺼에요?');
+  }
 }
 
 module.exports = Controller;
