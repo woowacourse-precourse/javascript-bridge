@@ -1,7 +1,7 @@
-const Bridge = require('./Bridge');
-const BridgeGame = require('./BridgeGame');
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const Bridge = require('./models/Bridge');
+const BridgeGame = require('./models/BridgeGame');
+const InputView = require('./views/InputView');
+const OutputView = require('./views/OutputView');
 
 class App {
   randomBirdge;
