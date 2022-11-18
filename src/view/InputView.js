@@ -34,7 +34,7 @@ const InputView = {
     new BridgeSizeValidation(sizeInput);
 
     const size = Number(sizeInput);
-    Player.updateSize(size);
+    Player.getSize(size);
     this.canWalkBridge = BridgeMaker.makeBridge(size, generator);
 
     this.readMoving();

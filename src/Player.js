@@ -53,7 +53,7 @@ const Player = {
     }
   },
 
-  updateSize(size) {
+  getSize(size) {
     this.size = size;
   },
 
