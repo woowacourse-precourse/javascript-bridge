@@ -1,5 +1,5 @@
 ## 🎖️ 기능 목록
-- [ ] readBridgeSize()
+- [x] readBridgeSize()
 
     자동으로 생성할 다리 길이를 입력 받는다.
 
@@ -20,7 +20,7 @@
     - [ ] isValidCommand()
         R(재시작)과 Q(종료) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.
 
-- [ ] printStartGame() 
+- [ ] printGameStart() 
     게임 시작 문구
 
 - [ ] printResult()
