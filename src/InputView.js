@@ -9,10 +9,16 @@ const InputView = {
   
   readBridgeSize() {
     Console.readLine("\n다리의 길이를 입력해주세요.\n", (inputBridgeSize) => {
+      this.bridgeSizeException(inputBridgeSize);
       bridge = BridgeMaker.makeBridge(inputBridgeSize, BridgeRandomNumberGenerator.generate);
       InputView.readMoving(bridge, 0, 1);
       return bridge;
     });
+  },
+
+  bridgeSizeException(inputBridgeSize) {
+    if (isNaN(inputBridgeSize)) throw new Error("[ERROR] 문자를 입력하실 수 없습니다.");
+    if(inputBridgeSize<3 || inputBridgeSize>20) throw new Error("[ERROR] 3이상 20이하의 수만 입력할 수 있습니다.");
   },
 
   readMoving(BRG, turnNumber) {
