@@ -35,6 +35,14 @@ class BridgeGame {
     return this.#userPosition === null;
   }
 
+  checkBeforeStart() {
+    const POSITION_ERROR_TEXT = '[ERROR] 플레이가 아직 이동하지 않았습니다.';
+
+    if (this.isBeforeStart()) {
+      Validation.throwError(POSITION_ERROR_TEXT);
+    }
+  }
+
   setFirstPosition() {
     this.#userPosition = 0;
 
