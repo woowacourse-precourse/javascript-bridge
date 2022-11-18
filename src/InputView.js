@@ -40,17 +40,24 @@ const InputView = {
     throw "[ERROR]";
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {
-    MissionUtils.Console.readLine(
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
-      (regame) => {
-        // regame validate하기 성공했다면 해당 값을 리턴
-      }
-    );
-  },
+  // /**
+  //  * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+  //  */
+  // readGameCommand() {
+  //   MissionUtils.Console.readLine(
+  //     "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+  //     (regame) => {
+  //       const gameCommand = this.readGameCommandValidate(regame)
+  //     }
+  //   );
+  // },
+
+  // readGameCommandValidate(regame) {
+  //   if (regame === "R" || regame === "Q") {
+  //     return regame;
+  //   }
+  //   throw "[ERROR]";
+  // }
 };
 
 module.exports = InputView;
