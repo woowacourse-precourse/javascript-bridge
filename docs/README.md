@@ -11,11 +11,11 @@
   - [o] **라운드마다 플레이어가 이동할 칸을 입력 받는다. U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** - 예외처리 나중에 InputView #readMoving
   - [o] **입력 받는 값에 맞게 이동한다.**BridgeGame #move
     - [o] **기존 다리와 유저 인풋값을 활용하여 새로운 다리 반환한다.** BridgeMaker #makeUserBridge
-  - [ ] **count와 생성된 다리 size와 같거나 X가 출력되면 재시작 메서드 실행**BridgeGame #retry
-- [ ] **다리를 끝까지 건너면 게임이 종료된다.** OutputView #printResult
-- [ ] **게임 재시작/종료 여부를 입력 받는다. R(재시작)과 Q(종료) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** InputView #readGameCommand
-- [ ] **입력 받는 값을 판단하여 실행한다.** BridgeGame #retry
-  - [ ] **재시작해도 처음에 만든 다리로 재사용한다.** OutputView #printMap
+  - [o] **count와 생성된 다리 size와 같거나 X가 출력되면 재시작 메서드 실행**BridgeGame #retry
+- [o] **다리를 끝까지 건너면 게임이 종료된다.** BridgeGame #retry
+- [o] **게임 재시작/종료 여부를 입력 받는다. R(재시작)과 Q(종료) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** InputView #readGameCommand
+- [o] **입력 받는 값을 판단하여 실행한다.** InputView #readMoving
+  - [o] **재시작해도 처음에 만든 다리로 재사용한다.** InputView #readMoving
   - [ ] **게임 결과의 총 시도한 횟수는 첫 시도를 포함해 게임을 종료할 때까지 시도한 횟수를 나타낸다.** OutputView #tryCount
   - [ ] **시도한 횟수 파악하는 함수.** BridgeGame #tryCounter
 - [ ] **사용자가 잘못된 값을 입력한 경우 `throw`문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.**
