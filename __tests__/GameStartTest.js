@@ -12,14 +12,14 @@ describe("다리 O/X 판별 테스트", () => {
       [" ", " ", " "],
     ]);
   });
-  test(`arrUp : 'O', 'U' ,'O' || arrDown : " ", "X", " " `, () => {
+  test(`arrUp : 'O', 'U' ,'U' || arrDown : " ", "X", " " `, () => {
     const GAMESTART = new GameStart(
       ["U", "D", "U"],
       ["U", "U", "U"],
       [" ", " ", " "]
     );
     expect(GAMESTART.getBrigeArr()).toMatchObject([
-      ["O", "U", "O"],
+      ["O", "U", "U"],
       [" ", "X", " "],
     ]);
   });
