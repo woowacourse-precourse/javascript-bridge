@@ -12,4 +12,10 @@ const validateBridge = (size) => {
   }
 };
 
-module.exports = { validateBridge };
+const validateMove = (move) => {
+  if (/[^UD]/.test(move)) {
+    throw new Error();
+  }
+};
+
+module.exports = { validateBridge, validateMove };

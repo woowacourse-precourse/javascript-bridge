@@ -1,7 +1,8 @@
-const { Console } = require('@woowacourse/mission-utils');
-const { validateBridge } = require('./utils/validate');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { Console } = require('@woowacourse/mission-utils');
+const { validateBridge, validateMove } = require('./utils/validate');
+
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
@@ -24,7 +25,7 @@ const InputView = {
   readMoving() {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (move) => {
       try {
-        //입력값 검증
+        validateMove(move);
       } catch (e) {
         this.readMoving();
       }
