@@ -31,9 +31,8 @@ const InputView = {
       try {
         Validate.validateMovePosition(movePosition);
         const moveBridge = new BridgeGame(bridge).move(movePosition);
-        const bridgePositon = size - bridge.length;
-        OutputView.printMap(moveBridge, bridgePositon);
-        this.readMovingControler(moveBridge, size, bridge);
+        OutputView.printMap(moveBridge, size - bridge.length);
+        InputView.readMovingControler(moveBridge, size, bridge);
       } catch (error) {
         OutputView.printErrorMessage(error) || InputView.readMoving(bridge, size);
       }
@@ -41,17 +40,28 @@ const InputView = {
   },
 
   readMovingControler(moveBridge, size, bridge) {
-    if (moveBridge[0] === 'X' || moveBridge[1] === 'X') {
-      InputView.readGameCommand();
-    }
-    if (bridge.length - 1 === 0) console.log('done');
+    if (moveBridge[0] === 'X' || moveBridge[1] === 'X') return InputView.readGameCommand();
+
+    if (bridge.length - 1 === 0) return console.log('done');
     bridge.shift();
     InputView.readMoving(bridge, size);
   },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(
+      '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+      (input) => {
+        try {
+          Validate.validateRetryOfQuit(input);
+          console.log(input);
+        } catch (error) {
+          OutputView.printErrorMessage(error) || InputView.readGameCommand();
+        }
+      }
+    );
+  },
 };
 
 module.exports = InputView;
