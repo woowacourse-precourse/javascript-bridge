@@ -3,11 +3,9 @@ const InputView = require('./InputView');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #RetryCount;
-
   constructor() {
-    this.#RetryCount = 1;
-    InputView.readBridgeSize(this?.move);
+    const retryCount = 0;
+    InputView.readBridgeSize(this?.move, retryCount);
   }
 
   /**
@@ -15,8 +13,9 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move = (bridge) => {
-    InputView.readMoving(bridge, [], this?.retry);
+  move = (gameInfo) => {
+    gameInfo.retryCount += 1;
+    InputView.readMoving(gameInfo, [], this?.retry);
   };
 
   /**
@@ -24,8 +23,8 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry = (bridge) => {
-    InputView.readGameCommand(bridge, this?.move);
+  retry = (gameInfo, result) => {
+    InputView.readGameCommand(gameInfo, result, this?.move);
   };
 }
 
