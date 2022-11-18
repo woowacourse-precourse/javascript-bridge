@@ -27,23 +27,27 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  // TODO :: 리팩터링
-  move(pathIdx, choice) {
-    if (choice === BRIDGE_PATH.up) {
-      this.firstLineResult.push(this.getPrintIsAlrightPath(pathIdx, choice));
-      this.secondLineResult.push(BRIDGE_PRINT.empty);
-    }
-    if (choice === BRIDGE_PATH.down) {
-      this.firstLineResult.push(BRIDGE_PRINT.empty);
-      this.secondLineResult.push(this.getPrintIsAlrightPath(pathIdx, choice));
-    }
+  move(choice, isAlrightPath) {
+    this.firstLineResult.push(
+      choice === BRIDGE_PATH.up
+        ? this.getPrintIsAlrightPath(isAlrightPath)
+        : BRIDGE_PRINT.empty
+    );
+    this.secondLineResult.push(
+      choice === BRIDGE_PATH.down
+        ? this.getPrintIsAlrightPath(isAlrightPath)
+        : BRIDGE_PRINT.empty
+    );
+
     OutputView.printMap(this.firstLineResult, this.secondLineResult);
   }
 
-  getPrintIsAlrightPath(index, currentPath) {
-    return this.bridgePath[index] === currentPath
-      ? BRIDGE_PRINT.correct
-      : BRIDGE_PRINT.incorrect;
+  getIsAlrightPath(index, currentPath) {
+    return this.bridgePath[index] === currentPath;
+  }
+
+  getPrintIsAlrightPath(isAlrightPath) {
+    return isAlrightPath ? BRIDGE_PRINT.correct : BRIDGE_PRINT.incorrect;
   }
 
   /**
@@ -52,6 +56,8 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {}
+
+  end() {}
 }
 
 module.exports = BridgeGame;
