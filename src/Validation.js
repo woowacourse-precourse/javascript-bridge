@@ -8,6 +8,11 @@ class Validation {
     if (Validation.isNumber(bridgeLen)) {
       throw new Error("[ERROR] 숫자가 아닌 값을 입력하였습니다. 3 이상 25 이하의 숫자를 입력해주세요.");
     }
+
+    if (Validation.isInRange(bridgeLen)) {
+      throw new Error("[ERROR] 3 이상 20 이하의 숫자를 입력해주세요.");
+    }
+
   }
 
   static isEmpty(input) {
@@ -17,6 +22,11 @@ class Validation {
   static isNumber(input ) {
     return isNaN(input);
   }
+
+  static isInRange(input) {
+    if (input < 3 || input > 20) return true;
+  }
+
 }
 
 
