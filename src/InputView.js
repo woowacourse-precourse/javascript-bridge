@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Notice = require("./NoticeMessage.js")
-const Validate = require("./Validate.js")
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
