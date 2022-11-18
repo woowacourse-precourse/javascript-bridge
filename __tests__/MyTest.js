@@ -164,3 +164,19 @@ describe(`재시작 입력값 타당성 테스트`, () => {
     }
   );
 });
+
+describe(`입력값에 따라 재시작/종료 판단`, () => {
+  test(`유저가 R을 입력하면 true를 반환한다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    const userInput = "R";
+
+    expect(bridgeGame.retry(userInput)).toBeTruthy();
+  });
+
+  test(`유저가 Q을 입력하면 false를 반환한다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    const userInput = "Q";
+
+    expect(bridgeGame.retry(userInput)).toBeFalsy();
+  });
+});
