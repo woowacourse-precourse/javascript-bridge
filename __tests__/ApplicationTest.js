@@ -1,6 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
+const InputView = require("../src/InputView");
+const OutputView = require("../src/OutputView");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -52,6 +54,13 @@ const expectBridgeOrder = (received, upside, downside) => {
 };
 
 describe("다리 건너기 테스트", () => {
+  test("게임 시작 문구 출력 테스트", () => {
+    const log = "다리 건너기 게임을 시작합니다.";
+    const logSpy = getLogSpy();
+    OutputView.startGame();
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+  });
+
   test("다리 생성 테스트", () => {
     const randomNumbers = ["1", "0", "0"];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
