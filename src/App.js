@@ -24,9 +24,9 @@ class App {
         Validator.checkBridgeInput(answer);
         this.#bridgeAnswer = +answer;
         this.#appStatus = 2;
-        this.progressApp(this.#appStatus);
       } catch (e) {
         console.log(e, '예외발생');
+      } finally {
         this.progressApp(this.#appStatus);
       }
     });
