@@ -1,3 +1,5 @@
+const BRIDGE = require("./utils/Constants");
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -19,10 +21,10 @@ const BridgeMaker = {
   },
 
   bridgeConverter(number) {
-    if (number === 1) {
-      return 'U';
+    if (number === BRIDGE.code.up) {
+      return BRIDGE.letter.up;
     }
-    return 'D';
+    return BRIDGE.letter.down;
   },
 };
 

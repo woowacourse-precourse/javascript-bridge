@@ -1,5 +1,6 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const BRIDGE = require('../utils/Constants');
 
 class Bridge {
   #bridge;
@@ -41,7 +42,7 @@ class Bridge {
   }
 
   validRange(input) {
-    if (input < 3 || 20 < input) {
+    if (input < BRIDGE.length.minimum || BRIDGE.length.maximum < input) {
       throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
     }
   }

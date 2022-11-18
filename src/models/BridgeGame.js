@@ -1,3 +1,5 @@
+const ResultStringConverter = require("../utils/ResultStringConverter");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -10,8 +12,9 @@ class BridgeGame {
     this.bridge = bridge;
   }
 
-  get result() {
-    return this.#result;
+  get resultString() {
+    const convertedResult = ResultStringConverter.convertResult(this.#result);
+    return convertedResult;
   }
 
   get totalGame() {
@@ -28,7 +31,7 @@ class BridgeGame {
     this.#result.push(check);
     this.#index += 1;
 
-    if (this.isFinished() || !this.isMovable()) {
+    if (this.#isFinished() || !this.#isMovable()) {
       return true;
     }
     return false;
@@ -48,8 +51,8 @@ class BridgeGame {
   /**
    * 게임을 승리했는지 반환하는 메소드
    */
-  isGameWin() {
-    if (this.isFinished() && this.isMovable()) {
+  get isGameWin() {
+    if (this.#isFinished() && this.#isMovable()) {
       return true;
     }
     return false;
@@ -58,7 +61,7 @@ class BridgeGame {
   /**
    * 모든 다리를 건넜는지 반환하는 메소드
    */
-  isFinished() {
+  #isFinished() {
     const bridgeLength = this.bridge.bridgeLength();
 
     if (bridgeLength === this.#index) {
@@ -71,7 +74,7 @@ class BridgeGame {
   /**
    * 마지막 입력에 이동할 수 있는 다리인지 반환하는 메소드
    */
-  isMovable() {
+  #isMovable() {
     const lastMoving = this.#result[this.#result.length - 1];
     const isMovableBridge = lastMoving[1];
 

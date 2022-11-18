@@ -1,5 +1,6 @@
 const Bridge = require('./models/Bridge');
 const BridgeGame = require('./models/BridgeGame');
+const isSuccess = require('./utils/isSuccess');
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
 
@@ -9,12 +10,8 @@ class App {
 
   play() {
     OutputView.printGameStart();
-    InputView.readBridgeSize.call(
-      this,
-      this.makeBridge,
-      this.inputMove,
-      this.inputRetry
-    );
+    const funcList = [this.makeBridge, this.inputMove, this.inputRetry];
+    InputView.readBridgeSize.call(this, funcList);
   }
 
   makeBridge(input) {
@@ -24,14 +21,12 @@ class App {
 
   inputMove(input) {
     const isEnd = this.bridgeGame.move(input);
-    const isWin = this.bridgeGame.isGameWin();
+    const isWin = this.bridgeGame.isGameWin;
 
-    const result = this.bridgeGame.result;
-    OutputView.printMap(result);
+    const resultString = this.bridgeGame.resultString;
+    OutputView.printMap(resultString);
 
-    if (isWin) {
-      this.finishGame(true);
-    }
+    if (isWin) this.finishGame(true);
 
     return [isEnd, isWin];
   }
@@ -47,17 +42,10 @@ class App {
   }
 
   finishGame(status) {
-    const result = this.bridgeGame.result;
-    const gameStatus = this.isWin(status);
+    const resultString = this.bridgeGame.resultString;
+    const gameStatus = isSuccess(status);
     const totalGame = this.bridgeGame.totalGame;
-    OutputView.printResult(result, gameStatus, totalGame);
-  }
-
-  isWin(status) {
-    if (status === true) {
-      return '성공';
-    }
-    return '실패';
+    OutputView.printResult(resultString, gameStatus, totalGame);
   }
 }
 

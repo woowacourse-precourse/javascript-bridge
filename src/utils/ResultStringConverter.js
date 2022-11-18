@@ -1,3 +1,5 @@
+const BRIDGE = require("./Constants");
+
 const ResultStringConverter = {
   convertResult(arr) {
     let resultStringArr = [['['], ['[']];
@@ -13,10 +15,10 @@ const ResultStringConverter = {
 
   checkUpDown(item, resultStringArr) {
     const isMovable = item[1];
-    if (item[0] === 'U') {
+    if (item[0] === BRIDGE.letter.up) {
       resultStringArr = this.convertUp(resultStringArr, isMovable);
     }
-    if (item[0] === 'D') {
+    if (item[0] === BRIDGE.letter.down) {
       resultStringArr = this.convertDown(resultStringArr, isMovable);
     }
 

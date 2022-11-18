@@ -7,7 +7,8 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(func1, func2, func3) {
+  readBridgeSize(funcList) {
+    const [func1, func2, func3] = funcList;
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요.\n', (input) => {
       try {
         func1.call(this, input);
