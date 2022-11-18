@@ -70,6 +70,7 @@ class BridgeGame {
    */
   retry() {
     this.#retryCount += 1;
+    this.#bridgeMap = [[], []];
   }
 }
 
