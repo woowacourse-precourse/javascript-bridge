@@ -1,4 +1,5 @@
 const ERROR = "[ERROR]";
+const NEW_LINE = "\n";
 
 const MESSAGE = Object.freeze({
   gameStart: "다리 건너기 게임을 시작합니다.",
@@ -10,10 +11,10 @@ const MESSAGE = Object.freeze({
 });
 
 const INPUT_MESSAGE = Object.freeze({
-  numberOfBridge: "다리의 길이를 입력해주세요.",
-  chooseUpOrDown: "이동할 칸을 선택해주세요. (위: U, 아래: D)",
+  numberOfBridge: "다리의 길이를 입력해주세요." + NEW_LINE,
+  chooseUpOrDown: "이동할 칸을 선택해주세요. (위: U, 아래: D)" + NEW_LINE,
   chooseToRetry:
-    "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
+    "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)" + NEW_LINE,
 });
 
 const ERROR_MESSAGE = Object.freeze({

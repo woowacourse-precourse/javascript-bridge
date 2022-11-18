@@ -23,7 +23,7 @@ class BridgeGame {
     this.#steps.push(letter);
     const isCorrect = this.#isCorrect();
     const isGameOver = this.#isGameOver();
-    const map = this.#getMap();
+    const map = this.#makeMap();
     return { map, isCorrect, isGameOver, trialTime: this.#trialTime };
   };
 
@@ -36,7 +36,7 @@ class BridgeGame {
     return this.#bridge.length === this.#steps.length;
   }
 
-  #getMap() {
+  #makeMap() {
     return this.#steps.map((step, ind) => [
       step,
       this.#bridge[ind] === step ? LETTER.correct : LETTER.wrong,
