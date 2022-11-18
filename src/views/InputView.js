@@ -25,7 +25,9 @@ const InputView = {
     Console.readLine(REQUEST_MSG.movingDirection, InputView.readMoving);
   },
 
-  readMoving(movingDirection) {},
+  readMoving(movingDirection) {
+    bridgeGame.move(movingDirection);
+  },
 
   readGameCommand() {},
 };

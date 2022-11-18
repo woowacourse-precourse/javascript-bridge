@@ -1,7 +1,13 @@
 const Bulider = require('./Builder.js');
+const Player = require('./Player.js');
 
 class BridgeGame {
   #bridge;
+  #player;
+
+  constructor() {
+    this.#player = new Player();
+  }
 
   build(size) {
     const builder = new Bulider();
@@ -9,7 +15,9 @@ class BridgeGame {
     this.#bridge = builder.buildBridge(size);
   }
 
-  move() {}
+  move(movingDirection) {
+    this.#player.addDirection(movingDirection);
+  }
 
   retry() {}
 }
