@@ -9,7 +9,7 @@ class App {
 
   play() {
     OutputView.printGameStart();
-    InputView.readBridgeSize(this.makeBridge, this.inputMove, this.func3);
+    InputView.readBridgeSize(this.makeBridge, this.inputMove, this.inputRetry);
   }
 
   makeBridge(input) {
@@ -27,8 +27,10 @@ class App {
     return [isEnd, isWin];
   }
 
-  func3(input) {
-    console.log(input);
+  inputRetry(input) {
+    const isRetry = this.bridgeGame.retry(input);
+
+    return isRetry;
   }
 }
 

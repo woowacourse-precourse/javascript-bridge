@@ -23,14 +23,14 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(func2, func3) {
-    MissionUtils.Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
+    MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
       const [isEnd, isWin] = func2.call(this, input);
 
       if (isWin) {
         this.gameEnd();
       }
       else if (isEnd) {
-        this.readGameCommand(func3);
+        this.readGameCommand(func2, func3);
       }
       else {
         this.readMoving(func2, func3);
@@ -41,10 +41,15 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(func3) {
-    MissionUtils.Console.readLine('test3\n', (input) => {
-      func3.call(this, input);
-      this.gameEnd();
+  readGameCommand(func2, func3) {
+    MissionUtils.Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (input) => {
+      const isRetry = func3.call(this, input);
+      if (isRetry) {
+        this.readMoving(func2, func3);
+      }
+      else {
+        this.gameEnd();
+      }
     });
   },
 

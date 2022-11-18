@@ -4,6 +4,7 @@
 class BridgeGame {
   #index = 0;
   #result = [];
+  #totalGame = 1;
 
   constructor(bridge) {
     this.bridge = bridge;
@@ -33,7 +34,15 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(input) {
+    if (input === 'R') {
+      this.#index = 0;
+      this.#result = [];
+      this.#totalGame += 1;
+      return true;
+    }
+    return false;
+  }
 
   /**
    * 게임을 승리했는지 반환하는 메소드
