@@ -37,14 +37,15 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
-        const gameState = this.Game.transInputtoPosition(input);
+        this.Game.canMove(input);
+        const gameState = this.Game.getGameState();
         const bridgeMap = this.Game.getBridgeMap();
         OutputView.printMap(bridgeMap);
         if (gameState == "O") {
           return this.readMoving();
         }
         if (gameState == "성공") {
-          OutputView.printResult(
+          return OutputView.printResult(
             this.Game.getBridgeMap(),
             gameState,
             this.Game.getRetryCount()
