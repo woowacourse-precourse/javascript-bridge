@@ -32,8 +32,15 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(upside, downside, trynum) {
-    console.log(trynum)
+  printResult(upside, downside, status, trynum) {
+    const printupside = this.makePrintable(upside)
+    const printdownside = this.makePrintable(downside) + "\n"
+    MissionUtils.Console.print(Notice.RESULT_GAME)
+    MissionUtils.Console.print(printupside)
+    MissionUtils.Console.print(printdownside)
+    MissionUtils.Console.print(Notice.SUCCES_NOT + status)
+    MissionUtils.Console.print(Notice.TRY_NUM + trynum)
+    MissionUtils.Console.close()
   },
 };
 

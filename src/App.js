@@ -2,6 +2,7 @@ const InputView = require("./InputView.js")
 const Validate = require("./Validate.js")
 const BridgeGame = require("./BridgeGame.js")
 const OutputView = require("./OutputView.js")
+const Notice = require("./NoticeMessage.js")
 class App {
   constructor(){
     this.game = new BridgeGame()
@@ -33,7 +34,8 @@ class App {
       InputView.readMoving(this.moveCommand.bind(this))     
     }
     else if(input == "Q"){
-      OutputView.printResult(this.game.upside,this.game.downside,this.try)
+      const result = Notice.FAIL
+      OutputView.printResult(this.game.upside,this.game.downside,result, this.try)
     }
   }
   setGameReset(){
