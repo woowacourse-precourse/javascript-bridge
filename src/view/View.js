@@ -21,7 +21,8 @@ class View {
 
   #getBridgeSize() {
     return (size) => {
-      BridgeSizeValidator.validate(size);
+      const bridgeSizeValidator = new BridgeSizeValidator();
+      bridgeSizeValidator.validate(size);
       this.#gameController.inputBridge(size);
     };
   }
