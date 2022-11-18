@@ -1,7 +1,8 @@
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
-const generate = require('./BridgeRandomNumberGenerator');
+const { generate } = require('./BridgeRandomNumberGenerator');
+const { flagBridge } = require('./MESSAGES/NumberMessage');
 
 const BridgeMaker = {
   /**
@@ -15,16 +16,13 @@ const BridgeMaker = {
     this.Bridge.splice(0, this.Bridge.length);
   },
 
-  generateRandomNumber() {
-    return generate();
-  },
-
   makeBridge(size, generateRandomNumber) {
-    this.initBridge();
+    const Bridge = [];
     for (let i = 0; i < size; i += 1) {
-      this.Bridge.push(generateRandomNumber());
+      const randomNum = generateRandomNumber();
+      Bridge.push(flagBridge(randomNum));
     }
-    return this.Bridge;
+    return Bridge;
   },
 };
 
