@@ -11,7 +11,7 @@ const {
   ERROR_RETRY_MESSAGE,
   NUMBER,
 } = require('./constants');
-const { printMap, printResult } = require('./OutputView');
+const { printMap, printResult, getMap } = require('./OutputView');
 const { getBridgeString } = require('./Utils');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -72,8 +72,9 @@ const InputView = {
         const upBridgeString = getBridgeString(upBridge);
         const downBridgeString = getBridgeString(downBridge);
         printMap(upBridgeString, downBridgeString);
+        const bridgeResult = getMap(upBridgeString, downBridgeString);
         if (curSteps === bridge.length) {
-          printResult(upBridgeString, downBridgeString, true, numberAttempts);
+          printResult(bridgeResult, true, numberAttempts);
           Console.close();
           return;
         }
@@ -81,13 +82,7 @@ const InputView = {
           this.readMoving(bridge, curSteps, numberAttempts);
         }
         if (steps === curSteps) {
-          this.readGameCommand(
-            bridge,
-            curSteps,
-            numberAttempts,
-            upBridgeString,
-            downBridgeString
-          );
+          this.readGameCommand(bridge, curSteps, numberAttempts, bridgeResult);
         }
       } catch (error) {
         Console.print(error.message);
@@ -113,13 +108,7 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(
-    bridge,
-    steps,
-    numberAttempts,
-    upBridgeString,
-    downBridgeString
-  ) {
+  readGameCommand(bridge, steps, numberAttempts, bridgeResult) {
     Console.print(GAME_MESSAGE.retry);
     Console.readLine('', (userInput) => {
       try {
@@ -129,18 +118,12 @@ const InputView = {
           this.readMoving(bridge, steps, numberAttempts + 1);
         }
         if (userInput === 'Q') {
-          printResult(upBridgeString, downBridgeString, false, numberAttempts);
+          printResult(bridgeResult, false, numberAttempts);
           Console.close();
         }
       } catch (error) {
         Console.print(error.message);
-        this.readGameCommand(
-          bridge,
-          steps,
-          numberAttempts,
-          upBridgeString,
-          downBridgeString
-        );
+        this.readGameCommand(bridge, steps, numberAttempts, bridgeResult);
       }
     });
   },
