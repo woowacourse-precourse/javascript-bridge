@@ -1,6 +1,7 @@
 const OutputView = require('../view/OutputView');
 const InputView = require('../view/InputView');
 const BridgeGame = require('../domain/BridgeGame');
+const GameCommand = require('../domain/GameCommand');
 
 class Controller {
   #bridgeGame;
@@ -52,12 +53,12 @@ class Controller {
   }
 
   retryOrQuit(answer) {
-    BridgeGame.validate(answer);
-    if (BridgeGame.isRetry(answer)) {
+    GameCommand.validate(answer);
+    if (GameCommand.isRetry(answer)) {
       this.#bridgeGame.retry();
       InputView.readMoving(this.move.bind(this));
     }
-    if (BridgeGame.isQuit(answer)) {
+    if (GameCommand.isQuit(answer)) {
       this.printGameResult('fail');
       BridgeGame.quit();
     }
