@@ -1,6 +1,9 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
+// BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
+// BridgeGame에 필드(인스턴스 변수)를 추가할 수 있다
+// 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
 class BridgeGame {
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
