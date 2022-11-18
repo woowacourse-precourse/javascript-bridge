@@ -1,7 +1,7 @@
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const { Console } = require('@woowacourse/mission-utils');
-const { PRINTBRIDGESIZE, PRINTMOVEMENT } = require('../view/Message');
+const { PRINTBRIDGESIZE, PRINTMOVEMENT, PRINTGAMECOMMAND } = require('../view/Message');
 const BridgeMaker = require('../BridgeMaker');
 const { generate } = require('../model/BridgeRandomNumberGenerator');
 const MovementVadlidation = require('../model/MovementValidaion');
@@ -29,6 +29,13 @@ class BridgeProcess {
     Console.readLine(PRINTMOVEMENT, (movement) => {
       const isMovement = this.#inputView.readMoving(movement);
       isMovement ? '맞아' : this.#inputMovement();
+    });
+  }
+
+  #inputGameCommand() {
+    Console.readLine(PRINTGAMECOMMAND, (command) => {
+      const isCommand = this.#inputView.readMoving(command);
+      isCommand ? '맞아' : this.#inputGameCommand();
     });
   }
 }
