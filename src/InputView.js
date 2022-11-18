@@ -11,7 +11,12 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine("다리 길이 입력", (bridgeLength) => {
-      validation.isValidLength(bridgeLength);
+      try {
+        validation.isValidLength(bridgeLength);
+      } catch (e) {
+        Console.print(e);
+        this.readBridgeSize();
+      }
     });
   },
 
