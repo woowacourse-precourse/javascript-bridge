@@ -9,6 +9,14 @@ const BridgeRandomNumberGenerator = {
       BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE
     );
   },
+
+  createRandomLocation(size) {
+    const randomLocations = [];
+    for (let i = 0; i < size; i++) {
+      randomLocations.push(this.generate());
+    }
+    return randomLocations;
+  },
 };
 
 module.exports = BridgeRandomNumberGenerator;
