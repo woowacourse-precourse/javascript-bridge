@@ -10,6 +10,10 @@ const OutputView = {
     Console.print(START_MESSAGE);
   },
 
+  printUserMove(Move) {
+    Console.print(Move);
+  },
+
   printBridgeInput() {
     Console.print(BRIDGE_INPUT);
   },
