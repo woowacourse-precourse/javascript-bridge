@@ -18,10 +18,6 @@ class BridgeSizeValidation {
     sizeConstraints.checkNumberRange();
     sizeConstraints.checkStartZero();
   }
-
-  makeStringToNumber() {
-    return Number(this.#size);
-  }
 }
 
 class MoveInputValidation {
