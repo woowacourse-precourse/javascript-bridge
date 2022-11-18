@@ -3,13 +3,16 @@ const REG_EXP = Object.freeze({
 });
 
 const BRIDGE_GAME = Object.freeze({
+  ONE_STRING: '1',
   INPUT_U: 'U',
+  INPUT_D: 'D',
   UP_BRIDGE: 'upBridge',
   DOWN_BRIDGE: 'downBridge',
   CORRECT: 'O',
   INCORRECT: 'X',
   EMPTY: ' ',
   STEP: 1,
+  RESTART: 'R',
   QUIT: 'Q',
 });
 

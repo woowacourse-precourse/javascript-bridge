@@ -17,8 +17,17 @@ const MESSAGE_ERROR = Object.freeze({
   INVALID_SIZE: `${ERROR} 잘못된 길이의 다리입니다.`,
 });
 
+const MESSAGE_RESULT = Object({
+  SUCCESS: '성공',
+  FAILURE: '실패',
+  HEAD: '최종 게임 결과',
+  SUCCESS_OR_FAILURE: '게임 성공 여부:',
+  TRY_COUNT: '총 시도한 횟수:',
+});
+
 module.exports = {
   MESSAGE_GAME,
   MESSAGE_QUESTION,
   MESSAGE_ERROR,
+  MESSAGE_RESULT,
 };

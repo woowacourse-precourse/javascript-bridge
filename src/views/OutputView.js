@@ -1,5 +1,5 @@
 const Console = require('../utils/Console');
-const { MESSAGE_GAME } = require('../constants/messages');
+const { MESSAGE_GAME, MESSAGE_RESULT } = require('../constants/messages');
 
 const OutputView = {
   printStartMessage() {
@@ -11,10 +11,10 @@ const OutputView = {
   },
 
   printResult(result, { successOrFailure, tryCount }) {
-    Console.print('최종 게임 결과');
+    Console.print(`${MESSAGE_RESULT.HEAD}\n`);
     Console.print(result);
-    Console.print(`게임 성공 여부: ${successOrFailure}`);
-    Console.print(`총 시도한 횟수: ${tryCount}`);
+    Console.print(`${MESSAGE_RESULT.SUCCESS_OR_FAILURE} ${successOrFailure}\n`);
+    Console.print(`${MESSAGE_RESULT.TRY_COUNT} ${tryCount}`);
   },
 };
 

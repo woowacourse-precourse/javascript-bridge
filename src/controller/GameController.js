@@ -3,16 +3,16 @@ const InputView = require('../views/InputView');
 const BridgeChecker = require('./BridgeChecker');
 const Convertor = require('../utils/Convertor');
 const BridgeMaker = require('../BridgeMaker');
-const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const PlayerInputChecker = require('./PlayerInputChecker');
 const BridgeGame = require('../models/BridgeGame');
-const PrintableBridgeMaker = require('../PrintableBridgeMaker');
+const PrintableBridgeMaker = require('../models/PrintableBridgeMaker');
 const { GAME_STATUS, BRIDGE_GAME } = require('../constants/values');
+const Console = require('../utils/Console');
 
 class GameController {
   #bridgeGame;
 
-  #result;
+  #printableBridgeMaker;
 
   initializeGame() {
     OutputView.printStartMessage();
@@ -20,26 +20,36 @@ class GameController {
   }
 
   #makeBridge(rowDataOfBridgeSize) {
-    BridgeChecker.checkRowDataOfBridgeSize(rowDataOfBridgeSize);
+    try {
+      BridgeChecker.checkRowDataOfBridgeSize(rowDataOfBridgeSize);
+    } catch (e) {
+      Console.print(e);
+    }
     const bridgeSize = Convertor.convertStringToDecimalNumber(rowDataOfBridgeSize);
-    BridgeChecker.checkBridgeSize(bridgeSize);
+    try {
+      BridgeChecker.checkBridgeSize(bridgeSize);
+    } catch (e) {
+      Console.print(e);
+    }
     this.#bridgeGame = new BridgeGame(
-      BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate)
+      BridgeMaker.makeBridge(bridgeSize, Convertor.convertRandomNumberToString)
     );
-    this.playGame();
+    this.#printableBridgeMaker = new PrintableBridgeMaker();
+
+    this.#playGame();
   }
 
-  playGame() {
+  #playGame() {
     InputView.readMoving(this.#movePlayer.bind(this));
   }
 
   #movePlayer(direction) {
     PlayerInputChecker.checkDirection(direction);
-    this.#result = PrintableBridgeMaker.generate(this.#bridgeGame.move(direction));
-    OutputView.printMap(this.#result);
+    const moveResult = this.#bridgeGame.move(direction);
+    this.#printableBridgeMaker.generate(moveResult);
+    OutputView.printMap(this.#printableBridgeMaker.getPrintableBridge());
     if (this.#bridgeGame.checkGameStatus() === GAME_STATUS.PLAYING) {
-      this.playGame();
-
+      this.#playGame();
       return;
     }
 
@@ -49,7 +59,6 @@ class GameController {
   #quitGame() {
     if (this.#bridgeGame.checkGameStatus() === GAME_STATUS.FAIL_END) {
       InputView.readGameCommand(this.#restartOrQuitGame.bind(this));
-
       return;
     }
 
@@ -64,11 +73,16 @@ class GameController {
     }
 
     this.#bridgeGame.retry();
-    this.playGame();
+    this.#playGame();
   }
 
   #printGameResult() {
-    OutputView.printResult(this.#result, this.#bridgeGame.getResult());
+    OutputView.printResult(
+      this.#printableBridgeMaker.getPrintableBridge(),
+      this.#bridgeGame.getResult()
+    );
+
+    Console.close();
   }
 }
 

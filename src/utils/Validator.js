@@ -1,7 +1,12 @@
 const { MESSAGE_ERROR } = require('../constants/messages');
 const { REG_EXP } = require('../constants/values');
+const { BRIDGE_GAME } = require('../constants/values');
+const Console = require('./Console');
 
 const Validator = {
+  MIN_BRIDGE_SIZE: 3,
+  MAX_BRIDGE_SIZE: 20,
+
   checkTruthy(truthy) {
     if (!truthy) {
       throw new Error(MESSAGE_ERROR.INVALID_VALUE);
@@ -27,7 +32,7 @@ const Validator = {
   },
 
   checkBridgeSizeRange(bridgeSize) {
-    if (bridgeSize < 3 || bridgeSize > 20) {
+    if (bridgeSize < this.MIN_BRIDGE_SIZE || bridgeSize > this.MAX_BRIDGE_SIZE) {
       throw new Error(MESSAGE_ERROR.INVALID_RANGE);
     }
   },
@@ -39,13 +44,13 @@ const Validator = {
   },
 
   checkBridgeSize(bridge) {
-    if (bridge.length < 3 || bridge.length > 20) {
+    if (bridge.length < this.MIN_BRIDGE_SIZE || bridge.length > this.MAX_BRIDGE_SIZE) {
       throw new Error(MESSAGE_ERROR.INVALID_RANGE);
     }
   },
 
   checkBridgeIncludes(bridge) {
-    if (!bridge.every(value => value === 'U' || value === 'D')) {
+    if (!bridge.every(value => value === BRIDGE_GAME.INPUT_U || value === BRIDGE_GAME.INPUT_D)) {
       throw new Error(MESSAGE_ERROR.INVALID_VALUE);
     }
   },
@@ -57,13 +62,13 @@ const Validator = {
   },
 
   checkDirectionIncludes(direction) {
-    if (direction !== 'U' && direction !== 'D') {
+    if (direction !== BRIDGE_GAME.INPUT_U && direction !== BRIDGE_GAME.INPUT_D) {
       throw new Error(MESSAGE_ERROR.INVALID_VALUE);
     }
   },
 
   checkSelectIncludes(select) {
-    if (select !== 'R' && select !== 'Q') {
+    if (select !== BRIDGE_GAME.RESTART && select !== BRIDGE_GAME.QUIT) {
       throw new Error(MESSAGE_ERROR.INVALID_VALUE);
     }
   },

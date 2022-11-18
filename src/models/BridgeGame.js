@@ -1,5 +1,5 @@
-const { BRIDGE_GAME } = require('../constants/values');
-const { GAME_STATUS } = require('../constants/values');
+const { BRIDGE_GAME, GAME_STATUS } = require('../constants/values');
+const { MESSAGE_RESULT } = require('../constants/messages');
 
 class BridgeGame {
   #bridge;
@@ -77,7 +77,11 @@ class BridgeGame {
   }
 
   getResult() {
-    const successOrFailure = this.#gameStatus.status === GAME_STATUS.SUCCESS_END ? '성공' : '실패';
+    const successOrFailure =
+      this.#gameStatus.status === GAME_STATUS.SUCCESS_END
+        ? MESSAGE_RESULT.SUCCESS
+        : MESSAGE_RESULT.FAILURE;
+
     return { successOrFailure, tryCount: this.#tryCount };
   }
 }
