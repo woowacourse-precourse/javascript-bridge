@@ -310,6 +310,15 @@ describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
       bridgeGame.calcBridgeReuslt(EXPECTED);
     }).toThrow(RANGE_ERROR_TEXT);
   });
+
+  test('유저가 아직 출발 전(null)이라면 예외를 발생한다.', () => {
+    expect(() => {
+      const EXPECTED = 'U';
+
+      bridgeGame.retry();
+      bridgeGame.calcBridgeReuslt(EXPECTED);
+    }).toThrow(POSITION_ERROR_TEXT);
+  });
 });
 
 describe('출발전 판단 메서드 테스트', () => {
