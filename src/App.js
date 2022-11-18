@@ -1,5 +1,10 @@
+const Process = require('./Process');
+
 class App {
-  play() {}
+  play() {
+    const process = new Process();
+    process.start();
+  }
 }
 
 module.exports = App;
