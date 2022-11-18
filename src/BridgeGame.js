@@ -1,9 +1,23 @@
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeMaker = require("./BridgeMaker");
 const OutputView = require("./OutputView");
-const { MOVING } = require("./constants/values");
+const { MOVING, CALCULATION } = require("./constants/values");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  /**
+   * 사용자가 다리를 이용할 수 있도록 준비하는 메서드
+   */
+  ready(size) {
+    const bridge = BridgeMaker.makeBridge(
+      parseInt(size, CALCULATION.DECIMAL_NUMBER),
+      BridgeRandomNumberGenerator.generate
+    );
+
+    return bridge;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
