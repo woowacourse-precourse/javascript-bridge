@@ -17,7 +17,19 @@ const validateMovingValue = userInput => {
     throw new Error(`${prefix} 이동할 칸은 문자 'U'(위), 'D'(아래) 중 하나여야 합니다.`);
 };
 
+const validateEndValue = userInput => {
+  if (typeof userInput !== 'string')
+    throw new Error(`${prefix} 'R'(재시도), 'Q'(종료) 중 하나의 문자만 입력해주세요!`);
+
+  if (userInput == 'r' || userInput == 'q')
+    throw new Error(`${prefix} 입력값은 대문자여야 합니다.`);
+
+  if (userInput != 'U' && userInput != 'D')
+    throw new Error(`${prefix} 이동할 칸은 문자 'R'(재시도), 'Q'(종료) 중 하나여야 합니다.`);
+};
+
 module.exports = {
   validateBridgeLength,
   validateMovingValue,
+  validateEndValue
 };
