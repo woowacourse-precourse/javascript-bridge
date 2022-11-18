@@ -7,5 +7,10 @@ class Validation {
       throw ERROR_MESSAGE.BRIDGELENGTH_ERROR;
     }
   }
+  validateMove(input) {
+    if (input !== "U" && input !== "D") {
+      throw ERROR_MESSAGE.MOVE_ERROR;
+    }
+  }
 }
 module.exports = Validation;

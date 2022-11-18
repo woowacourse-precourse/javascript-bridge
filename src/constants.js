@@ -11,6 +11,7 @@ const MESSAGE = Object.freeze({
 
 const ERROR_MESSAGE = Object.freeze({
   BRIDGELENGTH_ERROR: "[ERROR] 다리 길이는 3이상 20이하의 숫자이어야 합니다.",
+  MOVE_ERROR: "이동할 칸은 U 혹은 D중 하나의 문자를 입력할 수 있습니다.",
 });
 
 module.exports = { MESSAGE, ERROR_MESSAGE };
