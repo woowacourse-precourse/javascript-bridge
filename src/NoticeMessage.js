@@ -4,7 +4,7 @@ const NOTICE_MESSAGE = {
     SELECT_MOVE : "이동할 칸을 선택해 주세요. (위: U, 아래: D)\n",
     START_PRINT : "[ ",
     NEXT_STEP : " | ",
-    END_PRINT : " ]\n"
+    END_PRINT : " ]"
    
 };
 

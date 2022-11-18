@@ -22,7 +22,9 @@ const OutputView = {
    */
   printMap(upside, downside) {
     const printupside = this.makePrintable(upside)
-    const printdownside = this.makePrintable(downside)
+    const printdownside = this.makePrintable(downside) + "\n"
+    MissionUtils.Console.print(printupside)
+    MissionUtils.Console.print(printdownside)
   },
 
   /**
