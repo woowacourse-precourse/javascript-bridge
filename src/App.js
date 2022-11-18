@@ -4,17 +4,15 @@ const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const MissionUtils = require('@woowacourse/mission-utils');
-const { COMMAND, STATUS } = require('./utils/const');
+const { COMMAND } = require('./utils/const');
 
 class App {
   /** @type {BridgeGame} */
   #bridgeGame;
   #commands;
-  #isSuccess;
 
   constructor() {
     this.#commands = [this.continueGame, this.quitGame, this.restartGame];
-    this.#isSuccess = false;
   }
 
   play() {
@@ -33,10 +31,8 @@ class App {
     InputView.readMoving((moving) => {
       const status = this.#bridgeGame.move(moving);
       const markingPaper = this.#bridgeGame.getMarkingPaper();
-
       OutputView.printMap(markingPaper);
 
-      this.#isSuccess = status === STATUS.SUCCESS;
       this.#commands[status].call(this);
     });
   }
@@ -51,10 +47,8 @@ class App {
   }
 
   quitGame() {
-    const count = this.#bridgeGame.getCount();
-    const markingPaper = this.#bridgeGame.getMarkingPaper();
-
-    OutputView.printResult(markingPaper, this.#isSuccess, count);
+    const { count, isSuccess, markingPaper } = this.#bridgeGame.getResultInfo();
+    OutputView.printResult(markingPaper, isSuccess, count);
     MissionUtils.Console.close();
   }
 }
