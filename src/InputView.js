@@ -1,41 +1,37 @@
 const { Console } = require('@woowacourse/mission-utils');
+const OutputView = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const makeBridge = BridgeMaker.makeBridge;
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const generate = BridgeRandomNumberGenerator.generate;
 
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
 const InputView = {
   readBridgeSize() {
     Console.readLine('다리의 길이를 입력해 주세요.', (num) => {
       is3To20(num);
+
       const bridge = makeBridge(num, generate);
-      this.readMoving(bridge);
+      const bridgeGame = new BridgeGame(bridge);
+
+      this.readMoving(bridgeGame);
     });
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving(bridge) {
-    const bridgeGame = new BridgeGame(bridge);
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (uOrD) => {
-      isUorD(uOrD);
-      bridgeGame.move(uOrD);
+  readMoving(bridgeGame) {
+    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
+      isUorD(input);
+
+      const [UBlock, DBlock] = bridgeGame.move(input);
+      OutputView.printMap(UBlock, DBlock);
     });
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {
+  readGameCommand(bridgeGame) {
     Console.readLine(
       '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
-      (rOrQ) => {
-        isRorQ(rOrQ);
+      (input) => {
+        isRorQ(input);
       }
     );
   },
