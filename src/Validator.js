@@ -13,6 +13,11 @@ class Validator {
     this.throwException(InvalidInputError, ERROR_MESSAGE.SPACE);
   }
 
+  static validateCommand(command) {
+    if (this.isValidCommand(command)) return;
+    this.throwException(InvalidInputError, ERROR_MESSAGE.COMMAND);
+  }
+
   static throwException(Error, message) {
     throw new Error(message);
   }
@@ -24,6 +29,11 @@ class Validator {
   static isValidSpace(space) {
     const spaceList = [BRIDGE.UP, BRIDGE.DOWN];
     return spaceList.includes(space);
+  }
+
+  static isValidCommand(command) {
+    const commandList = [COMMAND.QUIT, COMMAND.RESTART];
+    return commandList.includes(command);
   }
 }
 
