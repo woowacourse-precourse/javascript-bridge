@@ -253,27 +253,24 @@ describe('다리 정보를 가져오는 메소드 테스트', () => {
 
 describe('사용자 입력 "U", "D" 판단 메서드 테스트', () => {
   test('메소드 이름은 "checkIncludeUandD"로 정의된다.', () => {
-    const bridgeGame = new BridgeGame();
     const METHOD_NAME = 'checkIncludeUandD';
 
-    expect(bridgeGame.checkIncludeUandD.name).toEqual(METHOD_NAME);
+    expect(BridgeGame.checkIncludeUandD.name).toEqual(METHOD_NAME);
   });
 
   test('대문자 U, 대문자 D를 입력을 제외한 값은 예외를 발생한다.', () => {
     expect(() => {
-      const bridgeGame = new BridgeGame();
       const EXPECTED = 'K';
 
-      bridgeGame.checkIncludeUandD(EXPECTED);
+      BridgeGame.checkIncludeUandD(EXPECTED);
     }).toThrow(RANGE_ERROR_TEXT);
   });
 
   test('대문자 U, 대문자 D를 입력을 포함한 값은 예외를 발생시키지 않는다.', () => {
     expect(() => {
-      const bridgeGame = new BridgeGame();
       const EXPECTED = 'D';
 
-      bridgeGame.checkIncludeUandD(EXPECTED);
+      BridgeGame.checkIncludeUandD(EXPECTED);
     }).not.toThrow(RANGE_ERROR_TEXT);
   });
 });
