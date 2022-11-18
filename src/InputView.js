@@ -4,11 +4,15 @@ const OutputView = require("./OutputView");
 const Validation = require("./Validation");
 
 const InputView = {
+  setMethods(setBridge, move, retry) {
+    this.setBridge = setBridge;
+    this.move = move;
+    this.retry = retry;
+  },
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(setBridge, move, retry) {
-    this.setMethods(setBridge, move, retry);
+  readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.numberOfBridge, (number) => {
       try {
         Validation.checkBridgeNumber(Number(number));

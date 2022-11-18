@@ -11,12 +11,15 @@ class App {
 
   play() {
     OutputView.printGameStart();
-    InputView.readBridgeSize(
+    InputView.setMethods(
       this.#bridgeGame.setBridge,
       this.#bridgeGame.move,
       this.#bridgeGame.retry
     );
+    InputView.readBridgeSize();
   }
 }
+
+new App().play();
 
 module.exports = App;
