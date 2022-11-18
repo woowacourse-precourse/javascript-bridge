@@ -8,9 +8,9 @@ class Bulider {
   buildBridge(size) {
     this.#validateSize(size);
 
-    const direcionSymbols = makeBridge(Number(size), generate);
+    const directionSymbols = makeBridge(Number(size), generate);
 
-    return new Bridge(direcionSymbols);
+    return new Bridge(directionSymbols);
   }
 
   #validateSize(size) {
