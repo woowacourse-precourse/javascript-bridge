@@ -12,7 +12,7 @@ const InputView = {
         try {
           validate(input);
           resolve(input);
-        } catch (e) {1
+        } catch (e) {
           Console.print(e.message);
           this.fetchWithConsoleRead(phrase, validate).then(resolve);
         }
@@ -22,39 +22,22 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    // return new Promise((resolve) =>
-    //   Console.readLine(PHRASE.BRIDGE_LEN, (length) => {
-    //     validateBridgeSize(length);
-    //     resolve(length);
-    //   }),
-    // );
-    const temp = this.fetchWithConsoleRead(PHRASE.BRIDGE_LEN, validateBridgeSize);
-    return temp;
+  async readBridgeSize() {
+    return await this.fetchWithConsoleRead(PHRASE.BRIDGE_LEN, validateBridgeSize);
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    return new Promise((resolve) =>
-      Console.readLine(PHRASE.SELECT, (move) => {
-        validateMove(move);
-        resolve(move);
-      }),
-    );
+  async readMoving() {
+    return await this.fetchWithConsoleRead(PHRASE.SELECT, validateMove);
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-    return new Promise((resolve) =>
-      Console.readLine(PHRASE.RESTART, (retry) => {
-        validateRestart(retry);
-        resolve(retry === RETRY.YES);
-      }),
-    );
+  async readGameCommand() {
+    return (await this.fetchWithConsoleRead(PHRASE.RESTART, validateRestart)) === RETRY.YES;
   },
 };
 
