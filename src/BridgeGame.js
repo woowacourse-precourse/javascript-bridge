@@ -80,25 +80,14 @@ class BridgeGame {
   }
 
   validateMoveType(moveType) {
-    const isInvalidCommand = moveType !== "U" && moveType !== "D";
-    try {
-      if (isInvalidCommand) throw new Error(ERROR.INVALID_MOVE_TYPE);
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      return false;
-    }
-    return true;
+    if (moveType !== "U" && moveType !== "D")
+      throw new Error(ERROR.INVALID_MOVE_TYPE);
+
   }
 
   validateCommand(command) {
-    try {
-      if (command !== "R" && command !== "Q")
-        throw new Error(ERROR.INVALID_COMMAND);
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      return false;
-    }
-    return true;
+    if (command !== "R" && command !== "Q")
+      throw new Error(ERROR.INVALID_COMMAND);
   }
 
   /**
@@ -110,16 +99,23 @@ class BridgeGame {
     this.validateMoveType(moveType);
     this.setPosition(1);
     this.setMoveHistory(moveType);
+    this.isFailMove(this.getUpDownHistory());
   }
 
   isFailMove([upHistory, downHistory]) {
-    return [...upHistory, ...downHistory].includes("X");
+    if ([...upHistory, ...downHistory].includes("X"))
+      throw new Error(ERROR.FAIL_MOVE);
   }
 
   isEndPosition() {
     let maxPosition = this.getBridge().length - 1;
     let position = this.getPosition();
-    return maxPosition === position ? true : false;
+
+    if (maxPosition === position) {
+      this.setIsSuccess("성공");
+      return true;
+    }
+    return false;
   }
 
   /**
