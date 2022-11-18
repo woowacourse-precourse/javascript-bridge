@@ -12,12 +12,10 @@ const OutputView = {
    printMap(i, bridge, check, bridgeMap){  
     if (check == 'O'){
       if (bridge[i] == 'U'){
-        MISSIONUTILS.Console.print("위");
         bridgeMap[0] += "| O ";
         bridgeMap[1] += "|   ";
       }
       else{
-        MISSIONUTILS.Console.print("아래");
         bridgeMap[0] += "|   ";
         bridgeMap[1] += "| O ";
       }
@@ -77,6 +75,7 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
    printResult(bridgeMap, result, tryCount) {
+    MISSIONUTILS.Console.print("");
     MISSIONUTILS.Console.print("최종 게임 결과");
 
     MISSIONUTILS.Console.print(bridgeMap[0]+"]");

@@ -15,7 +15,6 @@ class BridgeGame {
     if(i==count){
       if (bridge[i] == input){
         bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
-        MISSIONUTILS.Console.print("최종 게임 결과");
         OUTPUTVIEW.printResult(bridgeMap, "성공", tryCount)
         MISSIONUTILS.Console.close();
         return;
@@ -66,7 +65,6 @@ class BridgeGame {
       INPUTVIEW.readMoving(count, 0, bridge, "" ,tryCount+1);
     }
     else{
-      MISSIONUTILS.Console.print("실패!");
       OUTPUTVIEW.printResult(bridgeMap, "실패", tryCount)
       MISSIONUTILS.Console.close();
     }

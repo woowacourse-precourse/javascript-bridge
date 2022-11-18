@@ -33,7 +33,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(count, i, bridge, bridgeMap, tryCount) {
-    MISSIONUTILS.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", function(input) {
+    MISSIONUTILS.Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", function(input) {
       if (!isNaN(input)){
         throw new Error("[ERROR] 이동할 칸은 알파벳으로 선택해야 합니다");
       }
@@ -53,7 +53,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
    readGameCommand(count, bridge, bridgeMap, tryCount) {
-    MISSIONUTILS.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", function(input) {
+    MISSIONUTILS.Console.readLine("\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", function(input) {
       if (!isNaN(input)){
         throw new Error("[ERROR] 재시도 여부는 알파벳으로 입력해야 합니다");
       }
