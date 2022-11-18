@@ -20,11 +20,13 @@ const OutputView = {
     // InputView.readMoving();
   },
 
-  printPlayHistory(gameStatus) {
+  printPlayHistory({ bridge, currentPosition, liveOrDie }) {
     const playHistory = [];
-    for (let step = 0; step <= gameStatus.currentPosition; step += 1) {
-      if (gameStatus.bridge[step]) playHistory.push(['O', ' ']);
-      if (!gameStatus.bridge[step]) playHistory.push([' ', 'O']);
+    for (let step = 0; step <= currentPosition; step += 1) {
+      if (bridge[step] === 'U' && liveOrDie) playHistory.push(['O', ' ']);
+      if (bridge[step] === 'D' && liveOrDie) playHistory.push([' ', 'O']);
+      if (bridge[step] === 'U' && !liveOrDie) playHistory.push(['X', ' ']);
+      if (bridge[step] === 'D' && !liveOrDie) playHistory.push([' ', 'X']);
     }
     return playHistory;
   },
