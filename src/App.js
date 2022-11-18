@@ -1,8 +1,10 @@
+const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 
 class App {
-  play() {
+  async play() {
     OutputView.printStartMessage();
+    const bridgesize = await InputView.readBridgeSize();
   }
 }
 
