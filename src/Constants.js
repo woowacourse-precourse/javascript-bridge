@@ -14,4 +14,8 @@ const ERROR = {
   NOT_IN_RANGE: `${RULE.MIN_SIZE} ~ ${RULE.MAX_SIZE}사이의 자연수를 입력해주세요.`,
 };
 
-module.exports = { MESSAGE, RULE, ERROR };
+const POSITION = {
+  UPPER: 'U',
+  LOWER: 'D',
+};
+module.exports = { MESSAGE, RULE, ERROR, POSITION };
