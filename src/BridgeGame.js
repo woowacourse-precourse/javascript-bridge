@@ -1,10 +1,22 @@
+const { Console } = require('@woowacourse/mission-utils');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor() {}
+  constructor({ bridge, bridgeMaker }, { outputView, inputView }) {
+    this.bridge = bridge;
+    this.bridgeMaker = bridgeMaker;
+    this.outputView = outputView;
+    this.inputView = inputView;
 
-  start() {}
+    this.start();
+  }
+
+  start() {
+    this.outputView.printStartMessage();
+    Console.close();
+  }
 
   ask() {}
 
