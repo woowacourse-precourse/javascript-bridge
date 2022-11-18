@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const OutputView = require("../src/OutputView");
 const BridgeMaker = require("../src/BridgeMaker");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const BridgeGame = require("../src/BridgeGame");
@@ -36,7 +37,22 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
-        this.Game.transInputtoPosition(input);
+        const gameState = this.Game.transInputtoPosition(input);
+        const bridgeMap = this.Game.getBridgeMap();
+        OutputView.printMap(bridgeMap);
+        if (gameState == "O") {
+          return this.readMoving();
+        }
+        if (gameState == "성공") {
+          OutputView.printResult(
+            this.Game.getBridgeMap(),
+            gameState,
+            this.Game.getRetryCount()
+          );
+        }
+        if (gameState == "X") {
+          return this.readGameCommand("실패");
+        }
       }
     );
   },
@@ -44,12 +60,21 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(result) {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
-        if (input == "R") return this.Game.retry();
-        if (input == "Q") return this.Game.end("실패");
+        if (input == "R") {
+          this.Game.retry();
+          return this.readMoving();
+        }
+        if (input == "Q") {
+          return OutputView.printResult(
+            this.Game.getBridgeMap(),
+            result,
+            this.Game.getRetryCount()
+          );
+        }
       }
     );
   },
