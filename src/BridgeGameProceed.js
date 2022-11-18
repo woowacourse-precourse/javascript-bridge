@@ -2,6 +2,7 @@ const OutputView = require('./view/OutputView');
 const InputView = require('./view/InputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const Validation = require('./Validation');
 
 class BridgeGameProceed {
 #buildBridge
@@ -13,9 +14,8 @@ class BridgeGameProceed {
             // Validation
             this.#buildBridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator);
             console.log(this.#buildBridge);
+            this.game();
         });
-        
-        this.game();
     }
 
     game() {

@@ -50,9 +50,6 @@
     * [x] 총 시도한 횟수 출력 printAttemptCount()
     * [x] 게임 시작 메세지 출력 printStart()
 ---
-* [ ] BridgeRandomNumberGenerator
-    * [ ] 변경불가
----
 * [ ] BridgeMaker 다리의 길이를 입력 받아서 다리를 생성해주는 역할
     * [ ] 다리의 길이를 입력받아서 다리를 생성 makeBridge()
 ---

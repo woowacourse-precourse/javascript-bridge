@@ -13,7 +13,7 @@ const OUTPUT_MESSAGE = {
 }
 
 const PUT_BRIDGE_LENGTH = '다리의 길이를 입력해주세요.\n';
-const PUT_NEXT_SPACE = '\n이동할 칸을 선택해주세요. (위: U, 아래: D)';
+const PUT_NEXT_SPACE = '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n';
 const PUT_RETRY_OR_NOT = '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)';
 
 const INPUT_MESSAGE = {
