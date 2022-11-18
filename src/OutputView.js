@@ -9,16 +9,8 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridge, index, bool) {
-    const UP = 'U';
-    const DOWN = 'D';
-    let string = OutputView.makeOneLine(bridge, UP, index);
-    string += OutputView.addLastOne(bridge.getbridgePart(index), bool, UP);
-    string += '\n';
-    string += OutputView.makeOneLine(bridge, DOWN, index);
-    string += OutputView.addLastOne(bridge.getbridgePart(index), bool, DOWN);
-    MissionUtils.Console.print(string + '\n');
-    return string;
+  printMap(result) {
+    MissionUtils.Console.print(result);
   },
 
   /**
@@ -32,25 +24,6 @@ const OutputView = {
     MissionUtils.Console.print(result);
     MissionUtils.Console.print(`게임 성공 여부: ${RESULT}`);
     MissionUtils.Console.print(`총 시도한 횟수: ${count}`);
-  },
-
-  makeOneLine(bridge, right, index) {
-    string = '[';
-    for (let x = 0; x < index; x++) {
-      const direction = bridge.getbridgePart(x);
-      if (direction === right) string += ' O ';
-      else string += '   ';
-      string += '|';
-    }
-    return string;
-  },
-  addLastOne(last, bool, direction) {
-    if (bool) {
-      if (direction == last) return ' O ]';
-      return '   ]';
-    }
-    if (direction == last) return '   ]';
-    return ' X ]';
   },
 };
 

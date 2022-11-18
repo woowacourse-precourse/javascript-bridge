@@ -1,7 +1,7 @@
-const MissionUtils = require('@woowacourse/mission-utils');
 const Bridge = require('./Bridge');
 const OutputView = require('./OutputView');
 const { printMap, printResult } = require('./OutputView');
+const Result = require('./Result');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -9,9 +9,8 @@ const { printMap, printResult } = require('./OutputView');
 class BridgeGame {
   #bridge;
   #index;
-  #status;
-  #tryCount;
   #result;
+  #tryCount;
   constructor(length) {
     this.#bridge = new Bridge(length);
     this.#index = 0;
@@ -24,11 +23,12 @@ class BridgeGame {
    */
   move(input) {
     const CAN_MOVE = this.#bridge.movable(this.#index, input);
-    this.#status = CAN_MOVE;
-    this.#result = printMap(this.#bridge, this.#index, CAN_MOVE);
+    this.#result = new Result(this.#bridge, this.#index, CAN_MOVE);
+    this.#result.print();
     this.#index += 1;
     return CAN_MOVE;
   }
+
   isEnd() {
     return this.#bridge.checkLength(this.#index);
   }
@@ -44,7 +44,7 @@ class BridgeGame {
   }
 
   statusPrint() {
-    printResult(this.#result, this.#tryCount, this.#status);
+    this.#result.printFinalResult(this.#tryCount);
   }
 }
 
