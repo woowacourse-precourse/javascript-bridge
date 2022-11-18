@@ -13,12 +13,12 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
     for(let idx=0; idx<size; idx++){
-      const randum = generateRandomNumber()
-      if(randum === 1) bridge.push('U')
-      if(randum === 0) bridge.push('D')
+      const randomNumber = Number(generateRandomNumber())
+      console.log(randomNumber)
+      if(randomNumber === 1) bridge.push('U')
+      if(randomNumber === 0) bridge.push('D')
     }
     return bridge;
   },
 };
-
 module.exports = BridgeMaker;
