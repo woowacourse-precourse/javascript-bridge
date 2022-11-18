@@ -4,12 +4,12 @@
   "description": "우아한테크코스 프리코스 다리 건너기 게임 미션",
   "dependencies": {
     "@woowacourse/mission-utils": "^1.0.6",
-    "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.2"
   },
   "devDependencies": {
     "eslint": "^8.27.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-prettier": "^4.2.1",
