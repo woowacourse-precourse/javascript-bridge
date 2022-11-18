@@ -7,6 +7,10 @@ const CONSTANT = {
   RESTART: {
     QUIT: 'Q',
     RESTART: 'R'
+  },
+
+  RESULT: {
+
   }
 }
 

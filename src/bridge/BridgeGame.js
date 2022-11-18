@@ -8,10 +8,16 @@ class BridgeGame {
 
   #isPlaying;
 
+  #isSuccess;
+
+  #attempt;
+
   constructor() {
     this.#bridge = [];
     this.#currentPos = [];
     this.#isPlaying = true;
+    this.#isSuccess = false;
+    this.#attempt = 1;
   }
 
   setBridge(size) {
@@ -24,6 +30,14 @@ class BridgeGame {
 
   cellValidator(index) {
     return this.#currentPos[index] === this.#bridge[index];
+  }
+
+  detectWinner() {
+    return (this.#currentPos.length === this.#bridge.length) && this.#isPlaying;
+  }
+
+  setSuccessState() {
+    this.#isSuccess = JSON.stringify(this.#bridge) === JSON.stringify(this.#currentPos);
   }
 
   /**
@@ -44,14 +58,23 @@ class BridgeGame {
     return this.#currentPos;
   }
 
+  get isSuccess() {
+    return this.#isSuccess;
+  }
+
+  get attempt() {
+    return this.#attempt;
+  }
+  
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#currentPos.pop();
+    this.#currentPos = [];
     this.#isPlaying = true;
+    this.#attempt += 1;
   }
 }
 
