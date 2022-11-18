@@ -27,6 +27,12 @@ const Application = {
 
     return Array.from({ length: userLength }, mapFn);
   },
+
+  copyArray(target) {
+    Validation.array(target);
+
+    return [...target];
+  },
 };
 
 module.exports = Application;
