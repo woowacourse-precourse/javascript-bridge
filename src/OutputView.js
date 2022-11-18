@@ -22,7 +22,7 @@ const OutputView = {
 
   printPlayHistory(gameStatus) {
     const playHistory = [];
-    for (let step = 0; step < gameStatus.currentPosition; step += 1) {
+    for (let step = 0; step <= gameStatus.currentPosition; step += 1) {
       if (gameStatus.bridge[step]) playHistory.push(['O', ' ']);
       if (!gameStatus.bridge[step]) playHistory.push([' ', 'O']);
     }
