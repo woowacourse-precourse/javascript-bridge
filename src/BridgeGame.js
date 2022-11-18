@@ -15,7 +15,7 @@ class BridgeGame {
     console.log(bridge, bridge.length);
     this.bridge = bridge;
     this.progressCnt = 0;
-    this.tryCnt = 0;
+    this.tryCnt = 1;
     this.isOkWay = false;
     this.finishGame = false;
     this.userWay = [];
@@ -32,7 +32,7 @@ class BridgeGame {
   }
 
   checkCorrectWay(userSelectValue) {
-    if (userSelectValue == this.bridge[this.progressCnt - this.tryCnt - 1]) {
+    if (userSelectValue == this.bridge[this.progressCnt - this.tryCnt]) {
       this.isOkWay = true;
       this.checkFinishWay();
       return;
@@ -57,7 +57,7 @@ class BridgeGame {
   drawCorrectWay() {
     this.drawMap(
       this.bridgeMap,
-      this.bridge[this.progressCnt - this.tryCnt - 1],
+      this.bridge[this.progressCnt - this.tryCnt],
       "O"
     );
   }
@@ -65,7 +65,7 @@ class BridgeGame {
   drawFalseWay() {
     this.drawMap(
       this.bridgeMap,
-      this.upsideDown(this.bridge[this.progressCnt - this.tryCnt - 1]),
+      this.upsideDown(this.bridge[this.progressCnt - this.tryCnt]),
       "X"
     );
   }

@@ -39,7 +39,6 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT_USER_GO, (selectBridge) => {
       bridgeGame.move(this.userSelectValueTreater(selectBridge));
       OutputView.printMap(OutputView.closeMap({ ...bridgeGame.bridgeMap }));
-      InputView.checkisGameFinish(bridgeGame.finishGame);
       InputView.checkIsCorrect(bridgeGame);
     });
   },
@@ -48,21 +47,36 @@ const InputView = {
     if (!bridgeGame.isOkWay) {
       bridgeGame.tryCnt += 1;
       InputView.readGameCommand(bridgeGame);
-    }
-    InputView.readMoving(bridgeGame);
-  },
-
-  checkisGameFinish(finishGame) {
-    if (finishGame) {
-      OutputView.printResult(true);
       return;
     }
+    InputView.checkisGameFinish(bridgeGame);
+    return;
+  },
+
+  checkisGameFinish(bridgeGame) {
+    if (bridgeGame.isOkWay && bridgeGame.finishGame) {
+      InputView.goPrintResult(bridgeGame);
+      return;
+    }
+    if (bridgeGame.isOkWay && !bridgeGame.finishGame) {
+      InputView.readMoving(bridgeGame);
+      return;
+    }
+  },
+
+  goPrintResult(bridgeGame) {
+    OutputView.printResult(
+      bridgeGame.finishGame,
+      bridgeGame.bridgeMap,
+      bridgeGame.tryCnt
+    );
   },
 
   readGameCommand(bridgeGame) {
     MissionUtils.Console.readLine(INPUT_USER_DECISION, (userDecision) => {
       userDecisionValidator(userDecision);
       // 여기에 계속 재귀로
+      // 끝내면 걍 프린트 리절트
     });
   },
 
