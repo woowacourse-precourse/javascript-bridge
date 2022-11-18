@@ -15,6 +15,18 @@ class BridgeMap {
     }
     return [up, down];
   }
+
+  static addIncorrect(input, beforeMap, mapSource) {
+    const [up, down] = beforeMap;
+    if (input === 'D') {
+      down.push(mapSource.INCORRECT);
+      up.push(mapSource.CORRECT);
+    } else {
+      down.push(mapSource.CORRECT);
+      up.push(mapSource.INCORRECT);
+    }
+    return [up, down];
+  }
 }
 
 module.exports = BridgeMap;
