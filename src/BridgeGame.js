@@ -51,7 +51,8 @@ class BridgeGame {
   }
 
   setFirstPosition() {
-    this.#userPosition = 0;
+    const ZERO = 0;
+    this.#userPosition = ZERO;
 
     return this.#userPosition;
   }
@@ -65,7 +66,8 @@ class BridgeGame {
       return this.setFirstPosition();
     }
 
-    this.#userPosition += 1;
+    const INCREASE = 1;
+    this.#userPosition = this.findUserPosition() + INCREASE;
 
     return this.#userPosition;
   }
@@ -79,7 +81,8 @@ class BridgeGame {
   isBridgeEnd(arrayLength) {
     Validation.number(arrayLength);
 
-    const MAX_INDEX_POINT = arrayLength - 1;
+    const ONE = 1;
+    const MAX_INDEX_POINT = arrayLength - ONE;
     const CURRENT_INDEX = this.findUserPosition();
 
     return MAX_INDEX_POINT === CURRENT_INDEX;
@@ -87,8 +90,10 @@ class BridgeGame {
 
   setBridge(bridgeResult) {
     const copiedBridgeResult = Application.copyArray(bridgeResult);
+    const bridgelength = copiedBridgeResult.length;
 
-    Application.checkRangeThreeToTwenty(copiedBridgeResult.length);
+    Application.checkRangeThreeToTwenty(bridgelength);
+
     this.#bridge = copiedBridgeResult;
 
     return copiedBridgeResult;
