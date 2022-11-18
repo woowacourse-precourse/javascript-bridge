@@ -267,6 +267,15 @@ describe('사용자 입력 "U", "D" 판단 메서드 테스트', () => {
       bridgeGame.checkIncludeUandD(EXPECTED);
     }).toThrow(RANGE_ERROR_TEXT);
   });
+
+  test('대문자 U, 대문자 D를 입력을 포함한 값은 예외를 발생시키지 않는다.', () => {
+    expect(() => {
+      const bridgeGame = new BridgeGame();
+      const EXPECTED = ['D'];
+
+      bridgeGame.checkIncludeUandD(EXPECTED);
+    }).not.toThrow(RANGE_ERROR_TEXT);
+  });
 });
 
 describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
