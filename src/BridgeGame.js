@@ -1,3 +1,7 @@
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { GameState } = require('./Constant.js');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -5,8 +9,8 @@ class BridgeGame {
   #bridge;
   #movingLog;
 
-  constructor(bridge) {
-    this.#bridge = bridge;
+  constructor(bridgeSize) {
+    this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     this.#movingLog = [];
   }
 
@@ -19,15 +23,15 @@ class BridgeGame {
     this.#movingLog.push(direction);
   }
 
-  checkGameEnd() {
-    if (this.#movingLog.length === this.#bridge.length) {
-      return true;
+  getGameState() {
+    if (this.#movingLog.length < 1) {
+      return GameState.IDLE;
     }
-    if (this.#movingLog.length > 0 && this.#bridge.at(-1) !== this.#movingLog.at(-1)) {
-      return true;
+    if (this.#bridge.at(-1) === this.#movingLog.at(-1)) {
+      return this.#bridge.length === this.#movingLog.length ? GameState.VICTORY : GameState.PLAYING;
     }
 
-    return false;
+    return GameState.GAME_OVER;
   }
 
   /**
