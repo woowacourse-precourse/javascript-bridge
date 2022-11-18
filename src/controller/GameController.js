@@ -1,12 +1,13 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('../model/BridgeGame');
 const InputView = require('../view/InputView');
-const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const BridgeMaker = require('../BridgeMaker');
 const { validateBridgeSize, validateNext } = require('../errorHandling');
 
 class GameController {
-  #game;
+  constructor() {
+    this.game = new BridgeGame();
+  }
 
   start() {
     Console.print('다리 건너기 게임을 시작합니다.');
@@ -19,12 +20,8 @@ class GameController {
 
   setBridge(size) {
     validateBridgeSize.validate(size);
-    const bridge = BridgeMaker.makeBridge(size, () =>
-      BridgeRandomNumberGenerator.generate()
-    );
-    console.log(bridge);
-    this.#game = new BridgeGame(bridge);
-    this.askMoving(size);
+    this.game.setBridge(size);
+    this.askMoving();
   }
 
   askMoving() {
