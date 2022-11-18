@@ -1,12 +1,15 @@
+const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView');
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #Bridge;
 
-  start() {
+  #CurrnentStage;
+
+  constructor() {
+    this.#CurrnentStage = 0;
     this.#Bridge = InputView.readBridgeSize();
   }
   /**
@@ -25,5 +28,4 @@ class BridgeGame {
 }
 
 const game = new BridgeGame();
-game.start();
 module.exports = BridgeGame;

@@ -10,16 +10,18 @@ const BridgeMaker = {
    */
   initializeBridge(size) {
     const generatedNumbers = Array.from({ length: size }, () => [generate()]);
-    this.makeBridge(size, generatedNumbers);
+    return this.makeBridge(size, generatedNumbers);
   },
 
   makeBridge(size, generateRandomNumber) {
+    generateRandomNumber.forEach((stage) => {
+      const generated = stage[0];
+      if (generated) stage.push(0);
+      if (!generated) stage.push(1);
+    });
     const Bridge = {
       size: size,
-      info: generateRandomNumber.forEach((level) => {
-        if (level[0]) level.push(0);
-        if (!level[0]) level.push(1);
-      }),
+      info: generateRandomNumber,
     };
     return Bridge;
   },
