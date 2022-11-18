@@ -56,7 +56,10 @@ class App {
     }
   }
 
-  retryBridgeGame() {}
+  retryBridgeGame() {
+    this.#bridgeGame.retry();
+    this.playBridgeGame();
+  }
 
   endBridgeGame() {}
 }
