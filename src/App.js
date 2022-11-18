@@ -14,6 +14,7 @@ class App {
     InputView.readMoving(this.moveCommand.bind(this))
   }
   moveCommand(input){
+    Validate.MoveInput(input)
    if( this.game.checkBridgeCorrect(input)){
      this.game.move()
      InputView.readMoving(this.moveCommand.bind(this))

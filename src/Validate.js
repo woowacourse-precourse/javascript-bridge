@@ -9,8 +9,8 @@ const Validate = {
         }
     },
     MoveInput(input){
-        if(input != "U" || "D"){
-            throw Error.BRIDGE_INPUT_ERROR
+        if(input != "U" && input != "D"){
+            throw Error.BRIDGE_MOVE_ERROR
         }
     }
   };
