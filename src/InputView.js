@@ -8,9 +8,14 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(func1, func2, func3) {
-    MissionUtils.Console.readLine('test1', (input) => {
-      func1.call(this, input);
-      this.readMoving(func2, func3);
+    MissionUtils.Console.readLine('test1\n', (input) => {
+      try {
+        func1.call(this, input);
+        this.readMoving(func2, func3);
+      } catch (error) {
+        MissionUtils.Console.print(error);
+        MissionUtils.Console.close();
+      }
     });
   },
 
@@ -18,7 +23,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(func2, func3) {
-    MissionUtils.Console.readLine('test2', (input) => {
+    MissionUtils.Console.readLine('test2\n', (input) => {
       func2.call(this, input);
       this.readGameCommand(func3);
     });
@@ -28,7 +33,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(func3) {
-    MissionUtils.Console.readLine('test3', (input) => {
+    MissionUtils.Console.readLine('test3\n', (input) => {
       func3.call(this, input);
       this.gameEnd();
     });

@@ -1,3 +1,4 @@
+const Bridge = require('./Bridge');
 const InputView = require('./InputView');
 
 class App {
@@ -6,7 +7,7 @@ class App {
   }
 
   func1(input) {
-    console.log(input);
+    new Bridge(Number(input));
   }
 
   func2(input) {
