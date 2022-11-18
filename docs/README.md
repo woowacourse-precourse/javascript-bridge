@@ -2,6 +2,8 @@
 
 ### BridgeGame 클래스
 
+- [x] 필드 개수 줄이기.
+
 #### start 메서드
 
 - [x] InputView로부터 size를 받아 할당.
@@ -39,6 +41,7 @@
 
 - [x] 입력 결과에 따른 Map 생성 및 출력
 - [x] 실패 시 Map 출력, 게임 종료 시 실패한 결과 출력
+  - [x] 실패 후 U,D를 입력 시 push가 되는 오류 fix.
 - [x] 성공 시 Map 출력
 
 ### BridgeMaker
