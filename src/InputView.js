@@ -51,7 +51,7 @@ const InputView = {
 		const prevCrossedBridge = bridgeGame.getPrevCrossedBridge();
 		OutputView.printMap(prevCrossedBridge);
 
-		InputView.inCaseWrong(bridgeGame, prevCrossedBridge);
+		InputView.inCaseWrong(bridgeGame, moving, prevCrossedBridge);
 
 		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 	},
@@ -65,27 +65,35 @@ const InputView = {
 		}
 	},
 
-	inCaseWrong(bridgeGame, prevCrossedBridge) {
-		const lastBridge = prevCrossedBridge.pop();
-		const isCorrect = lastBridge === 'DO' || lastBridge === 'UO';
+	inCaseWrong(bridgeGame, moving, prevCrossedBridge) {
+		const isCorrect = bridgeGame.isCorrect(moving);
 		if (!isCorrect) {
-			InputView.readGameCommand(bridgeGame);
+			InputView.readGameCommand(bridgeGame, prevCrossedBridge);
 		}
 	},
 
-	readGameCommand(bridgeGame) {
+	readGameCommand(bridgeGame, prevCrossedBridge) {
 		MissionUtils.Console.readLine(InputView.WRONG_MSG, (cmd) => {
-			InputView.excuteWrongStep(bridgeGame, cmd);
+			InputView.excuteWrongStep(bridgeGame, cmd, prevCrossedBridge);
 		});
 	},
 
-	excuteWrongStep(bridgeGame, cmd) {
+	excuteWrongStep(bridgeGame, cmd, prevCrossedBridge) {
 		Validation.validateCmd(cmd);
 		if (cmd === 'R') {
-			bridgeGame.retry();
-			InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
+			InputView.retryStep(bridgeGame);
+		}
+		if (cmd === 'Q') {
+			InputView.quitStep();
 		}
 	},
+
+	retryStep(bridgeGame) {
+		bridgeGame.retry();
+		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
+	},
+
+	quitStep() {},
 };
 
 module.exports = InputView;
