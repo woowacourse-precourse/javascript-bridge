@@ -4,4 +4,11 @@ const ErrorMsg = Object.freeze({
   INVALID_INPUT_MOVING: '[ERROR] 입력은 U 혹은 D여야 합니다.',
 });
 
-module.exports = { ErrorMsg };
+const GameState = Object.freeze({
+  IDLE: 0,
+  PLAYING: 1,
+  GAME_OVER: 2,
+  VICTORY: 3,
+});
+
+module.exports = { ErrorMsg, GameState };
