@@ -13,8 +13,8 @@ class Direction {
     return this.#direction;
   }
 
-  setSuccessful(curRightCell) {
-    this.#successful = this.#direction === curRightCell;
+  setSuccessful(nextCellDirection) {
+    this.#successful = this.#direction === nextCellDirection;
   }
 
   getSuccessful() {

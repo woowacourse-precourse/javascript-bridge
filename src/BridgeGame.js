@@ -18,38 +18,44 @@ class BridgeGame {
   }
 
   handleDirection(direction) {
+    const nextCellDirection =
+      this.#bridge.getBridge()[this.#player.getCurPlace()];
+
     this.#direction = new Direction(direction);
-    this.#direction.setSuccessful(
-      this.#bridge.getBridge()[this.#player.getCurPlace()]
-    );
+    this.#direction.setSuccessful(nextCellDirection);
   }
 
   move() {
-    const successful = this.#direction.getSuccessful();
+    const successfulMove = this.#direction.getSuccessful();
+    const direction = this.#direction.getDirection();
     this.#player.increaseCurPlace();
+    successfulMove
+      ? this.#bridge.updateMap(direction, 'O')
+      : this.#bridge.updateMap(direction, 'X');
 
-    successful
-      ? this.#bridge.updateMap(this.#direction.getDirection(), 'O')
-      : this.#bridge.updateMap(this.#direction.getDirection(), 'X');
-
-    return successful;
+    return successfulMove;
   }
 
   curMap() {
-    return Object.values(this.#bridge.getMap());
+    const curMapState = Object.values(this.#bridge.getMap());
+
+    return curMapState;
   }
 
   retry(command) {
     this.#command = new Command(command);
+
     return this.#command.shouldRetry();
   }
 
   gameComplete() {
-    if (this.#bridge.getSize() === this.#player.getCurPlace()) {
+    const bridgeSize = this.#bridge.getSize();
+    const curPlace = this.#player.getCurPlace();
+    if (bridgeSize === curPlace) {
       this.#player.setSuccess();
-      return true;
     }
-    return false;
+
+    return bridgeSize === curPlace;
   }
 
   increaseNumberOfAttempts() {
@@ -62,11 +68,11 @@ class BridgeGame {
   }
 
   gameResult() {
-    return [
-      Object.values(this.#bridge.getMap()),
-      this.#player.getSuccess(),
-      this.#player.getNumberOfAttempts(),
-    ];
+    const bridgeMap = this.#bridge.getMap();
+    const success = this.#player.getSuccess();
+    const numberOfAttempts = this.#player.getNumberOfAttempts();
+
+    return [bridgeMap, success, numberOfAttempts];
   }
 }
 

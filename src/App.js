@@ -2,6 +2,7 @@ const BridgeGame = require('./BridgeGame');
 const { MESSAGE } = require('./constant');
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
+const { Console } = require('@woowacourse/mission-utils');
 
 class App {
   #bridgeGame;
@@ -23,31 +24,9 @@ class App {
     InputView.readBridgeSize((size) => {
       try {
         this.handleSize(size);
-      } catch (errorMessage) {
-        OutputView.printMessage(errorMessage);
+      } catch (exceptionMessage) {
+        OutputView.printMessage(exceptionMessage);
         this.askBridgeSize();
-      }
-    });
-  }
-
-  askDirection() {
-    InputView.readMoving((direction) => {
-      try {
-        this.handleDirection(direction);
-      } catch (errorMessage) {
-        OutputView.printMessage(errorMessage);
-        this.askDirection();
-      }
-    });
-  }
-
-  askRetry() {
-    InputView.readGameCommand((command) => {
-      try {
-        this.handleCommand(command);
-      } catch (errorMessage) {
-        OutputView.printMessage(errorMessage);
-        this.askRetry();
       }
     });
   }
@@ -57,27 +36,49 @@ class App {
     this.askDirection();
   }
 
+  askDirection() {
+    InputView.readMoving((direction) => {
+      try {
+        this.handleDirection(direction);
+      } catch (exceptionMessage) {
+        OutputView.printMessage(exceptionMessage);
+        this.askDirection();
+      }
+    });
+  }
+
   handleDirection(direction) {
     this.#bridgeGame.handleDirection(direction);
-    const successful = this.#bridgeGame.move();
-    const curMap = this.#bridgeGame.curMap();
-    OutputView.printMap(curMap);
+    const successfulMove = this.#bridgeGame.move();
+    const curMapState = this.#bridgeGame.curMap();
+    OutputView.printMap(curMapState);
 
-    successful ? this.doseUserWin() : this.askRetry();
+    successfulMove ? this.doseUserWin() : this.askRetry();
   }
 
   doseUserWin() {
     const userWin = this.#bridgeGame.gameComplete();
     const gameResult = this.#bridgeGame.gameResult();
 
-    userWin ? OutputView.printResult(gameResult) : this.askDirection;
+    userWin ? this.gameOver(gameResult) : this.askDirection();
+  }
+
+  askRetry() {
+    InputView.readGameCommand((command) => {
+      try {
+        this.handleCommand(command);
+      } catch (exceptionMessage) {
+        OutputView.printMessage(exceptionMessage);
+        this.askRetry();
+      }
+    });
   }
 
   handleCommand(command) {
     const shouldRetry = this.#bridgeGame.retry(command);
     const gameResult = this.#bridgeGame.gameResult();
 
-    shouldRetry ? this.retry() : OutputView.printResult(gameResult);
+    shouldRetry ? this.retry() : this.gameOver(gameResult);
   }
 
   retry() {
@@ -85,6 +86,11 @@ class App {
     this.#bridgeGame.initPlayData();
 
     this.askDirection();
+  }
+
+  gameOver(gameResult) {
+    OutputView.printResult(gameResult);
+    Console.close();
   }
 }
 
