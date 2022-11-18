@@ -15,8 +15,7 @@ const InputView = {
         InputView.readMoving.call(this, func2, func3);
       }
       catch (error) {
-        MissionUtils.Console.print(error);
-        MissionUtils.Console.close();
+        InputView.inputError(error);
       }
     });
   },
@@ -33,8 +32,7 @@ const InputView = {
         else InputView.readMoving.call(this, func2, func3);
       }
       catch (error) {
-        MissionUtils.Console.print(error);
-        MissionUtils.Console.close();
+        InputView.inputError(error);
       }
     });
   },
@@ -48,8 +46,7 @@ const InputView = {
         func3.call(this, input);
       }
       catch (error) {
-        MissionUtils.Console.print(error);
-        MissionUtils.Console.close();
+        InputView.inputError(error);
       }
     });
   },
@@ -57,6 +54,11 @@ const InputView = {
   gameEnd() {
     MissionUtils.Console.close();
   },
+
+  inputError(error) {
+    MissionUtils.Console.print(error);
+    MissionUtils.Console.close();
+  }
 };
 
 module.exports = InputView;
