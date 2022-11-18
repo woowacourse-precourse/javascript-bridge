@@ -24,6 +24,18 @@ const OutputView = {
     MissionUtils.Console.print(`\n[${this.UP.join('|')}]\n[${this.DOWN.join('|')}]`);
   },
 
+  printIncorrect(userAnswer) {
+    if (userAnswer === 'U') {
+      this.UP.push(' X ');
+      this.DOWN.push('   ');
+    }
+    if (userAnswer === 'D') {
+      this.UP.push('   ');
+      this.DOWN.push(' X ');
+    }
+    MissionUtils.Console.print(`\n[${this.UP.join('|')}]\n[${this.DOWN.join('|')}]`);
+  },
+
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
