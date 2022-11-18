@@ -4,23 +4,25 @@
 
 - [x] [출력] 게임 시작 문구를 출력한다.| OutputView#printStartMessage()
 - [x] [입력] 자동으로 생성할 다리 길이를 입력 받는다.| InputView#readBridgeSize()
-  - [ ] [예외처리] 입력받은 값이 3 이상 20 이하 숫자가 아니면 예외 처리한다.| InputValidator#validateBridgeSize(bridgeSize)
+  - [x] [예외처리] 입력 받은 값이 3 이상 20 이하 숫자가 아니면 예외 처리한다.| InputValidator#validateBridgeSize(bridgeSize)
 - [ ] 다리를 생성한다.| BridgeMaker#makeBridge(bridgeSize, generate)
   - [ ] 다리를 생성할 때 위 칸과 아래 칸 중 건널 수 있는 칸은 0과 1 중 무작위 값을 이용해서 정한다.| BridgeRandomNumberGenerator#generate()
     - [ ] [예외처리] 무작위 값이 0 또는 1이 아닌 경우 예외 처리한다.
 - [ ] [입력] 플레이어가 이동할 칸을 선택한다.| InputView#readMoving()
-  - [ ] [예외처리] 입력받은 값이 U 또는 D가 아닌 경우 예외 처리한다.| InputValidator#validateMoving(moving)
+  - [ ] [예외처리] 입력 받은 값이 U 또는 D가 아닌 경우 예외 처리한다.| InputValidator#validateMoving(moving)
 - [ ] 플레이어가 칸을 이동한다.| BridgeGame#move()
 - [ ] [출력] 다리 건너기 결과를 출력한다.| OutputView#printMap()
 - 다리를 끝까지 건너면 게임이 종료된다.
   - [ ] [출력] 게임 종료 문구를 출력한다.| OutputView#printResult()
 - [ ] [입력] 다리를 건너다 실패하면 게임 재시작/종료 여부를 입력 받는다.| InputView#readGameCommand()
-  - [ ] [예외처리] 입력받은 값이 R 또는 Q가 아닌 경우 예외 처리한다.| InputValidator#validateGameCommand(gameCommand)
+  - [ ] [예외처리] 입력 받은 값이 R 또는 Q가 아닌 경우 예외 처리한다.| InputValidator#validateGameCommand(gameCommand)
 - [ ] 입력 받은 값이 R인 경우 게임을 재시작한다.| BridgeGame#retry()
 - [ ] 입력 받은 값이 Q인 경우 게임을 종료한다.
   - [ ] [출력] 게임 종료 문구를 출력한다.| OutputView#printResult()
 
 ## 추가적으로 신경 쓸 사항
+
+- [ ] 검증 파일을 나눈 것 처럼 예외처리 파일도 나눌 건지 고민 필요.
 
 기능 요구 사항
 
@@ -98,7 +100,7 @@ MOVING: `[ERROR] ${WORDS.UP} 또는 ${WORDS.DOWN}여야 합니다.`,
 GAME_COMMAND: `[ERROR] ${WORDS.RETRY} 또는 ${WORDS.QUIT}여야 합니다.`,
 },
 INPUT: {
-BRIDGE_LENGTH: "다리의 길이를 입력해주세요.",
+BRIDGE_SIZE: "다리의 길이를 입력해주세요.",
 MOVING: `이동할 칸을 선택해주세요. (위: ${WORDS.UP}, 아래: ${WORDS.DOWN})`,
 RESTART: `게임을 다시 시도할지 여부를 입력해주세요. (재시도: ${WORDS.RETRY}, 종료: ${WORDS.QUIT})`,
 },
