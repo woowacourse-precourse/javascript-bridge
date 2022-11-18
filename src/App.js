@@ -14,7 +14,13 @@ class App {
     InputView.readMoving(this.moveCommand.bind(this))
   }
   moveCommand(input){
-    console.log(input)
+   if( this.game.checkBridgeCorrect(input)){
+     this.game.move()
+     InputView.readMoving(this.moveCommand.bind(this))
+   }
+   else if( !this.game.checkBridgeCorrect(input)){
+    this.game.retry()
+   }
   }
 }
 const app = new App();
