@@ -1,3 +1,4 @@
+const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const { readBridgeSize, readMoving, end } = require('./InputView');
 
@@ -18,12 +19,9 @@ class App {
 
   moveBridge(input) {
     const MOVE = this.#game.move(input);
+    const NOT_END = this.#game.isEnd() == true;
     const END = false;
-    if (MOVE) {
-      const END_CHECK = this.#game.isEnd();
-      if (!END_CHECK) this.#game.statusPrint();
-      return END_CHECK;
-    }
+    if (MOVE && NOT_END) return NOT_END;
     this.#game.statusPrint();
     return END;
   }
