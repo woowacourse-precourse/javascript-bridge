@@ -16,10 +16,10 @@ class BridgeGame {
     this.#gameState = "";
   }
 
-  canMove(position) {
-    if (position === Number(this.#bridge[this.#currentIdx]))
-      return this.fillMap(position, "O");
-    return this.fillMap(position, "X");
+  canMove(input) {
+    if (input === this.#bridge[this.#currentIdx])
+      return this.fillMap(input, "O");
+    return this.fillMap(input, "X");
   }
 
   fillMap(position, str) {
