@@ -23,6 +23,10 @@ class Bridge {
 	currentResult() {
 		return new Result(this, this.#savedPositions, this.#movedPositions);
 	}
+
+	emptyPositions() {
+		this.#movedPositions.splice(0, this.#movedPositions.length);
+	}
 }
 
 module.exports = Bridge;
