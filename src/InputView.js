@@ -13,15 +13,19 @@ const InputView = {
       this.validateBridgeSize(bridgeSize);
       bridgeSize = Number(bridgeSize);
 
-      Console.print('');
-      const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-
-      this.readMoving(bridge);
+      this.bridgeMaker(bridgeSize);
     });
   },
 
   validateBridgeSize(bridgeSize) {
     if (!(bridgeSize >= 3 && bridgeSize <= 20)) throw new Error(Messages.BRIDGE_SIZE_ERROR);
+  },
+
+  bridgeMaker(bridgeSize) {
+    Console.print('');
+    const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+
+    this.readMoving(bridge);
   },
 
   /**
