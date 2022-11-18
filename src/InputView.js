@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const { isNumberInRange } = require('./lib/Utils');
 const { ERROR, REQUEST } = require('./constants/Message');
-const { LENGTH_MIN, LENGTH_MAX } = require('./constants/Range');
+const RANGE = require('./constants/Range');
 const COMMAND = require('./constants/Command');
 
 const InputView = {
@@ -38,13 +38,13 @@ const InputView = {
   },
 
   validateLength(input) {
-    if (!isNumberInRange(input, LENGTH_MIN, LENGTH_MAX)) {
+    if (!isNumberInRange(input, RANGE.LENGTH_MIN, RANGE.LENGTH_MAX)) {
       throw new Error(ERROR.INVALID_LENGTH);
     }
   },
 
   validateMoving(input) {
-    return input === COMMAND.UP || input === COMMAND.DOWN;
+    return input === COMMAND.MOVE_UP || input === COMMAND.MOVE_DOWN;
   },
 
   validateGameCommand(input) {

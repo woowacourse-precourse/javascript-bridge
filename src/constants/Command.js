@@ -1,7 +1,7 @@
-const UP = 'U';
-const DOWN = 'D';
+const MOVE_UP = 'U';
+const MOVE_DOWN = 'D';
 
 const GAME_RETRY = 'R';
 const GAME_QUIT = 'Q';
 
-module.exports = { UP, DOWN, GAME_RETRY, GAME_QUIT };
+module.exports = { MOVE_UP, MOVE_DOWN, GAME_RETRY, GAME_QUIT };

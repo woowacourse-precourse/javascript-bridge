@@ -5,9 +5,10 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     for (let i = 0; i < size; i += 1) {
-      const random = generateRandomNumber();
       bridge.push(
-        random === RANDOM_UPPER_INCLUSIVE ? COMMAND.UP : COMMAND.DOWN
+        generateRandomNumber() === RANDOM_UPPER_INCLUSIVE
+          ? COMMAND.MOVE_UP
+          : COMMAND.MOVE_DOWN
       );
     }
 
