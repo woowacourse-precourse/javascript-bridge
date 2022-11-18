@@ -22,7 +22,8 @@ const InputView = {
         Validate.isCorrectMove(input);
         const result = bridgeGame.move(input);
         if (result === 1) return this.readGameCommand(bridgeGame);
-        if (result === 2) return OutputView.printResult();
+        if (result === 2)
+          return OutputView.printResult(bridgeGame.getSelectBridge);
         this.readMoving(bridgeGame);
       }
     );
