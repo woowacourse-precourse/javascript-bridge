@@ -189,3 +189,12 @@ describe('다리를 끝까지 갔는지 확인하는 메서드 테스트', () =>
     }).toThrow(NUMBER_ERROR_TEXT);
   });
 });
+
+describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
+  test('메소드 이름은 "getBridgeReuslt"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'getBridgeReuslt';
+
+    expect(bridgeGame.getBridgeReuslt.name).toEqual(METHOD_NAME);
+  });
+});
