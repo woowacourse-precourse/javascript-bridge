@@ -1,7 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const {CONSOLELINE, DEFAULTS} = require('../utils/Constants');
+const { CONSOLELINE, DEFAULTS } = require('../utils/Constants');
 const validation = require('../utils/Validation');
 const OutputView = require('./OutputView');
 
@@ -15,18 +15,18 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
 
-  readBridgeSize(){
+  readBridgeSize() {
     MissionUtils.Console.readLine(CONSOLELINE.BRIDGE_LENGTH_INPUT, (input) => {
-      try{
+      try {
         validation.checkBridgeSize(input);
-      } catch(err){
+      } catch (err) {
         return this.readBridgeSize();
       }
       this.getBridgeAnswer(input);
-    })
+    });
   },
 
-  getBridgeAnswer(input){
+  getBridgeAnswer(input) {
     const bridgeAnswer = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator.generate);
     answer = bridgeAnswer;
     this.readMoving(bridgeAnswer, 0);
@@ -37,25 +37,24 @@ const InputView = {
    */
   readMoving(answer, move_cnt) {
     MissionUtils.Console.readLine(CONSOLELINE.MOVE_INPUT, (upOrdown) => {
-      try{
+      try {
         validation.checkCanMove(upOrdown);
-      } catch(err){
+      } catch (err) {
         return this.readMoving(answer, move_cnt);
       }
       const gameLog = OutputView.printMap(answer, upOrdown);
       move_cnt += 1;
       this.checkNeedtoStop(move_cnt, gameLog);
-    })
+    });
   },
 
-  checkNeedtoStop(move_cnt, gameLog){
-    if(validation.isRestartRequired(move_cnt, gameLog, answer)){
+  checkNeedtoStop(move_cnt, gameLog) {
+    if (validation.isRestartRequired(move_cnt, gameLog, answer)) {
       this.readGameCommand(gameLog);
     }
-    if (validation.isSuccess(move_cnt, gameLog, answer)){
+    if (validation.isSuccess(move_cnt, gameLog, answer)) {
       OutputView.printResult(gameLog, CONSOLELINE.SUCCESS_RESULT, false);
-    }
-    else{
+    } else {
       this.readMoving(answer, move_cnt);
     }
   },
@@ -65,13 +64,15 @@ const InputView = {
    */
   readGameCommand(gameLog) {
     MissionUtils.Console.readLine(CONSOLELINE.RESTART_CHECK, (restart) => {
-      try{
+      try {
         validation.checkRestartOrNot(restart);
-      } catch(err){
+      } catch (err) {
         return this.readGameCommand();
       }
-      restart === DEFAULTS.RESTART ? this.readMoving(answer, 0) : OutputView.printResult(gameLog, CONSOLELINE.FAIL_RESULT, true);
-    })
+      restart === DEFAULTS.RESTART
+        ? this.readMoving(answer, 0)
+        : OutputView.printResult(gameLog, CONSOLELINE.FAIL_RESULT, true);
+    });
   },
 };
 

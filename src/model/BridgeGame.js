@@ -1,15 +1,15 @@
-const { DEFAULTS } = require("../utils/Constants");
+const { DEFAULTS } = require('../utils/Constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor(){
+  constructor() {
     this.init();
     this.restartcnt = 1;
   }
 
-  init(){
+  init() {
     this.upList = [];
     this.downList = [];
     this.answer = [];
@@ -21,24 +21,30 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(answer, upOrdown) {
-    this.answer = answer; 
-    (answer[this.movecnt] === upOrdown) ? this.checkUporDown(upOrdown, DEFAULTS.CAN_MOVE) : this.checkUporDown(upOrdown, DEFAULTS.CANT_MOVE);
+    this.answer = answer;
+    answer[this.movecnt] === upOrdown
+      ? this.checkUporDown(upOrdown, DEFAULTS.CAN_MOVE)
+      : this.checkUporDown(upOrdown, DEFAULTS.CANT_MOVE);
     this.movecnt += 1;
     return [this.upList, this.downList, this.movecnt];
   }
 
-  checkUporDown(upOrdown, mark){
-    if (upOrdown === DEFAULTS.UP){
+  checkUporDown(upOrdown, mark) {
+    if (upOrdown === DEFAULTS.UP) {
       this.moveRecord(this.upList, this.downList, mark);
     }
-    if (upOrdown === DEFAULTS.DOWN){
+    if (upOrdown === DEFAULTS.DOWN) {
       this.moveRecord(this.downList, this.upList, mark);
     }
   }
 
-  moveRecord(recordMark, recordSpace, mark){
-    (recordMark.length !== 0) ? recordMark.push(DEFAULTS.SEPARATOR, mark) : recordMark.push(mark);
-    (recordSpace.length !== 0) ? recordSpace.push(DEFAULTS.SEPARATOR, DEFAULTS.SPACE) : recordSpace.push(DEFAULTS.SPACE);
+  moveRecord(recordMark, recordSpace, mark) {
+    recordMark.length !== 0
+      ? recordMark.push(DEFAULTS.SEPARATOR, mark)
+      : recordMark.push(mark);
+    recordSpace.length !== 0
+      ? recordSpace.push(DEFAULTS.SEPARATOR, DEFAULTS.SPACE)
+      : recordSpace.push(DEFAULTS.SPACE);
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
