@@ -2,7 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const BridgePrint = require('./BridgePrint');
 class Check {
   static CheckRestartGame(answer, gamePlay) {
-    if (answer === 'Q') {
+    if (answer === 'Q' || gamePlay.isWinning()) {
       BridgePrint.printResult(gamePlay);
       MissionUtils.Console.close();
       return;
@@ -19,6 +19,7 @@ class Check {
       return isGameOver;
     }
     if (index === brigeShape) {
+      if (isGameOver === false) this.setIsWinnging(true);
       isGameOver = true;
       return isGameOver;
     }
