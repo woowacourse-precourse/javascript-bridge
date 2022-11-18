@@ -1,4 +1,5 @@
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const BridgeMaker = require('../BridgeMaker');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -25,12 +26,10 @@ class BridgeGame {
    */
   move(next) {
     this.#time += 1;
-    console.log(this.#time);
-    if (next !== this.#bridge[this.#time - 1]) {
-      return 0;
-    } else {
-      return 1;
-    }
+    if (this.#time === this.#bridge.length) return 2;
+    if (next !== this.#bridge[this.#time - 1]) return 0;
+
+    return 1;
   }
 
   /**
