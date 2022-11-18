@@ -1,6 +1,7 @@
 const OutputView = require("./OutputView");
 const InputView = require("./InputView");
 const BridgeGame = require("./BridgeGame");
+const {Console} = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
@@ -32,7 +33,13 @@ class App {
   }
 
   isRetry() {
-    InputView.readGameCommand(this.makeBridge.bind(this));
+    InputView.readGameCommand(this.temp.bind(this));
+  }
+
+  temp(response) {
+    if (response === "Q") {
+      Console.close();
+    }
   }
 
 }
