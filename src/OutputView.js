@@ -1,4 +1,4 @@
-const { MissionUtils } = require("@woowacourse/mission-utils");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 /*
   * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -10,9 +10,12 @@ const { MissionUtils } = require("@woowacourse/mission-utils");
 const OutputView = {
   UP_MOVING: "U",
   DOWN_MOVING: "D",
-  SUCCESS_SELECT_CASE: "[ O ]",
-  FAIL_SELECT_CASE: "[ X ]",
-  NOT_SELECT_CASE: "[   ]",
+  OPEN_PARENTHESIS: "[",
+  CLOSE_PARENTHESIS: "]",
+  MIDDLE_PARENTHESIS: "|",
+  SUCCESS_SELECT_CASE: " O ",
+  FAIL_SELECT_CASE: " X ",
+  NOT_SELECT_CASE: "   ",
   SUCCESS_TERMINATION: "성공",
   FAIL_TERMINAITION: "실패",
   /**
@@ -21,58 +24,43 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridgeStyle, userMoving) {
+    let upperBlock = this.OPEN_PARENTHESIS;
+    let lowerBlock = this.OPEN_PARENTHESIS;
+
     for (let bridgeLine = 0; bridgeLine < userMoving.length; bridgeLine++) {
-      this.userMovingResult(bridgeStyle[bridgeLine], userMoving[bridgeLine]);
-    }
-  },
+      if (bridgeStyle[bridgeLine] === userMoving[bridgeLine]) {
+        if (userMoving[bridgeLine] === this.UP_MOVING) {
+          upperBlock += this.SUCCESS_SELECT_CASE;
+          lowerBlock += this.NOT_SELECT_CASE;
+        }
 
-  userMovingResult(bridgePosition, userPosition) {
-    if (bridgePosition === userPosition) {
-      this.selectCorrectBlock(userPosition);
-    } else {
-      // TODO: 해당 else를 쓸 것인지 말 것인지 결정하기.
-      this.selectUnCorrectBlock(userPosition);
-    }
-  },
+        if (userMoving[bridgeLine] === this.DOWN_MOVING) {
+          upperBlock += this.NOT_SELECT_CASE;
+          lowerBlock += this.SUCCESS_SELECT_CASE;
+        }
+      } else {
+        if (userMoving[bridgeLine] === this.UP_MOVING) {
+          upperBlock += this.FAIL_SELECT_CASE;
+          lowerBlock += this.NOT_SELECT_CASE;
+        }
 
-  selectCorrectBlock(userPosition) {
-    if (userPosition === this.UP_MOVING) {
-      this.selectUpperBlock(true);
-    }
+        if (userMoving[bridgeLine] === this.DOWN_MOVING) {
+          upperBlock += this.NOT_SELECT_CASE;
+          lowerBlock += this.FAIL_SELECT_CASE;
+        }
+      }
 
-    if (userPosition === this.DOWN_MOVING) {
-      this.selectLowerBlock(true);
-    }
-  },
-
-  selectUnCorrectBlock(userPosition) {
-    if (userPosition === this.UP_MOVING) {
-      this.selectUpperBlock(false);
+      if (bridgeLine !== userMoving.length - 1) {
+        upperBlock += this.MIDDLE_PARENTHESIS;
+        lowerBlock += this.MIDDLE_PARENTHESIS;
+      }
     }
 
-    if (userPosition === this.DOWN_MOVING) {
-      this.selectLowerBlock(false);
-    }
-  },
+    upperBlock += this.CLOSE_PARENTHESIS;
+    lowerBlock += this.CLOSE_PARENTHESIS;
 
-  selectUpperBlock(isCorrect) {
-    if (isCorrect) {
-      MissionUtils.Console.print(this.SUCCESS_SELECT_CASE);
-      MissionUtils.Console.print(this.NOT_SELECT_CASE);
-    } else {
-      MissionUtils.Console.print(this.FAIL_SELECT_CASE);
-      MissionUtils.Console.print(this.NOT_SELECT_CASE);
-    }
-  },
-
-  selectLowerBlock(isCorrect) {
-    if (isCorrect) {
-      MissionUtils.Console.print(this.NOT_SELECT_CASE);
-      MissionUtils.Console.print(this.SUCCESS_SELECT_CASE);
-    } else {
-      MissionUtils.Console.print(this.NOT_SELECT_CASE);
-      MissionUtils.Console.print(this.FAIL_SELECT_CASE);
-    }
+    MissionUtils.Console.print(`${upperBlock}\n`);
+    MissionUtils.Console.print(`${lowerBlock}\n`);
   },
 
   /**
@@ -80,13 +68,23 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(isSuccess, tryCount) {
-    MissionUtils.Console.print(`
-      게임 성공 여부: ${
-        isSuccess === true ? this.SUCCESS_TERMINATION : this.FAIL_TERMINAITION
-      } \n
-      총 시도 횟수: ${tryCount}
-    `);
+  printResult(bridgeStyle, userMoving, tryCount) {
+    MissionUtils.Console.print(`최종 게임 결과`);
+    this.printMap(bridgeStyle, userMoving);
+    MissionUtils.Console.print(
+      `게임 성공 여부: ${this.isSuccess(bridgeStyle, userMoving)}\n`
+    );
+    MissionUtils.Console.print(`총 시도한 횟수: ${tryCount}`);
+  },
+
+  isSuccess(bridgeStyle, userMoving) {
+    // TODO: 함수명 변경
+    const bridgeString = bridgeStyle.join("");
+    const userString = userMoving.join("");
+
+    return bridgeString === userString
+      ? this.SUCCESS_TERMINATION
+      : this.FAIL_TERMINAITION;
   },
 };
 

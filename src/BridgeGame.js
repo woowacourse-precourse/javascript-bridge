@@ -21,29 +21,30 @@ class BridgeGame {
 
   setBridge() {
     this.#bridgeSize = InputView.readBridgeSize();
-    this.#bridgeStyle = BridgeMaker(
+    this.#bridgeStyle = BridgeMaker.makeBridge(
       this.#bridgeSize,
-      BridgeRandomNumberGenerator
+      BridgeRandomNumberGenerator.generate
     );
   }
 
   gameStart() {
+    let userMoving = []; // TODO: 어떤걸 move로 쓰고 어떤 걸 moving으로 쓸지 정해야 함
     let termination = false;
-    let tryCount = 1;
-    let isSuccess = false;
+    let tryCount = 0;
 
     while (!termination) {
-      termination = this.playGame(userMoving);
-      isSuccess = termination === true ? true : false;
-      termination = !this.retry();
+      userMoving = [];
       tryCount++;
+      termination = this.playGame(userMoving);
+      if (!termination) {
+        termination = !this.retry();
+      }
     }
 
-    OutputView.printResult(isSuccess, tryCount);
+    OutputView.printResult(this.#bridgeStyle, userMoving, tryCount);
   }
 
-  playGame() {
-    const userMoving = []; // TODO: 어떤걸 move로 쓰고 어떤 걸 moving으로 쓸지 정해야 함
+  playGame(userMoving) { 
     for (let round = 0; round < this.#bridgeSize; round++) {
       const isCorrectMoving = this.move(userMoving, round);
       if (!isCorrectMoving) {
