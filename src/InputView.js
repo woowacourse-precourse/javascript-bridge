@@ -24,6 +24,10 @@ const InputView = {
 
       const [UBlock, DBlock] = bridgeGame.move(input);
       OutputView.printMap(UBlock, DBlock);
+
+      if (UBlock.includes('X') || DBlock.includes('X')) {
+        this.readGameCommand(bridgeGame);
+      }
     });
   },
 
@@ -32,6 +36,13 @@ const InputView = {
       '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
       (input) => {
         isRorQ(input);
+        if (input === 'R') {
+          bridgeGame.retry();
+          this.readMoving(bridgeGame);
+        }
+        if (input === 'Q') {
+          OutputView.printResult();
+        }
       }
     );
   },
