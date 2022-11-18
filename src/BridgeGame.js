@@ -21,23 +21,23 @@
 
   moveIsCorrect(createBridge, selectUpOrDown){
     if(createBridge == selectUpOrDown && selectUpOrDown == "U"){
-      this.userPickedUpOrDown[0].push(" O ");
+      this.userPickedUpOrDown[0].push("O");
       this.userPickedUpOrDown[1].push(" ");
     }
     if(createBridge == selectUpOrDown && selectUpOrDown == "D"){
       this.userPickedUpOrDown[0].push(" ");
-      this.userPickedUpOrDown[1].push(" O ")
+      this.userPickedUpOrDown[1].push("O")
     }
   }
 
   moveIsWrong(createBridge, selectUpOrDown){
     if(createBridge !== selectUpOrDown && selectUpOrDown == "U"){
-      this.userPickedUpOrDown[0].push(" X ");
+      this.userPickedUpOrDown[0].push("X");
       this.userPickedUpOrDown[1].push(" ");
     }
     if(createBridge !== selectUpOrDown && selectUpOrDown == "D"){
       this.userPickedUpOrDown[0].push(" ");
-      this.userPickedUpOrDown[1].push(" X ");
+      this.userPickedUpOrDown[1].push("X");
     }  
   }
   /**
