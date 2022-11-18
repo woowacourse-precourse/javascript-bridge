@@ -35,7 +35,7 @@ class App {
   }
 
   play() {
-    OutputView.start();
+    OutputView.printStart();
     this.requestBridgeSize();
   }
 
@@ -90,7 +90,7 @@ class App {
 
 }
 
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();
 
 module.exports = App;

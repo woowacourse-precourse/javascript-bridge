@@ -1,4 +1,6 @@
 const {Console} = require("@woowacourse/mission-utils");
+const {MESSAGE} = require('./constants');
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -8,8 +10,8 @@ const OutputView = {
     down: []
   },
 
-  start () {
-    Console.print("다리 건너기 게임을 시작합니다.\n");
+  printStart () {
+    Console.print(MESSAGE.START);
   },
   
   /**
@@ -45,11 +47,11 @@ const OutputView = {
   printResult(bridgeGame) {
     const result = bridgeGame.status === "END" ? "성공" : "실패" 
 
-    Console.print(`최종 게임 결과`)
+    Console.print(MESSAGE.RESULT_INFO)
     Console.print(`[ ${this.thread.up.join(" | ")} ]`)
     Console.print(`[ ${this.thread.down.join(" | ")} ]`)
-    Console.print(`\n게임 성공 여부: ${result}`)
-    Console.print(`총 시도한 횟수: ${bridgeGame.tryCount}`)
+    Console.print(MESSAGE.RESULT_IS_SUCCESS(result))
+    Console.print(MESSAGE.RESULT_TRY_COUNT(bridgeGame.tryCount))
   },
 };
 
