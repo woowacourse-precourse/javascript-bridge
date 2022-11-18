@@ -72,6 +72,12 @@ class BridgeGame {
   getStatus() {
     return this.#status;
   }
+
+  undoOneStep() {
+    this.#bridgeMap.U[this.#stepCount] = ' ';
+    this.#bridgeMap.D[this.#stepCount] = ' ';
+    this.#stepCount -= 1;
+  }
 }
 
 module.exports = BridgeGame;
