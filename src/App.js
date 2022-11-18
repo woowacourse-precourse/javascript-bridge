@@ -1,7 +1,8 @@
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
+const BridgeGame = require('./BridgeGame.js');
+
 class App {
   play() {
-    console.log(BridgeRandomNumberGenerator.generate());
+    const bridgeGame = new BridgeGame();
   }
 }
 
