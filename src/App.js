@@ -1,12 +1,15 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame.js');
+const BridgeMaker = require('./BridgeMaker.js');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator.js');
 const { GameState } = require('./Constant.js');
 const InputView = require('./InputView.js');
 const OutputView = require('./OutputView.js');
 const Validator = require('./Validator.js');
 
 class App {
-  #bridgeGame;
+  bridge;
+  bridgeGame;
 
   play() {
     this.initBridgeGame();
@@ -16,7 +19,8 @@ class App {
     try {
       const bridgeSize = InputView.readBridgeSize();
       Validator.validateBridgeSize(bridgeSize);
-      this.#bridgeGame = new BridgeGame(bridgeSize);
+      this.bridge = BridgeMaker.makeBridge(+bridgeSize, BridgeRandomNumberGenerator.generate);
+      this.bridgeGame = new BridgeGame(this.bridge);
       this.playBridgeGame();
     } catch (err) {
       Console.print(err.message);
@@ -28,8 +32,8 @@ class App {
     try {
       const direction = InputView.readMoving();
       Validator.validateMoving(direction);
-      this.#bridgeGame.move(direction);
-      OutputView.printMap(this.#bridgeGame.isSuccess(), this.#bridgeGame.getMovingLog());
+      this.bridgeGame.move(direction);
+      OutputView.printMap(this.bridge, this.bridgeGame.getMovingLog());
       this.checkBridgeGame();
     } catch (err) {
       Console.print(err.message);
@@ -38,7 +42,7 @@ class App {
   }
 
   checkBridgeGame() {
-    const gameState = this.#bridgeGame.getGameState();
+    const gameState = this.bridgeGame.getGameState();
     if (gameState === GameState.PLAYING) this.playBridgeGame();
     if (gameState === GameState.GAME_OVER) this.requestRetryBridgeGame();
     if (gameState === GameState.VICTORY) this.endBridgeGame();
@@ -57,11 +61,18 @@ class App {
   }
 
   retryBridgeGame() {
-    this.#bridgeGame.retry();
+    this.bridgeGame.retry();
     this.playBridgeGame();
   }
 
-  endBridgeGame() {}
+  endBridgeGame() {
+    OutputView.printResult(
+      this.bridge,
+      this.bridgeGame.getMovingLog(),
+      this.bridgeGame.getTryCount(),
+    );
+    Console.close();
+  }
 }
 
 module.exports = App;

@@ -1,5 +1,3 @@
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { GameState } = require('./Constant.js');
 
 /**
@@ -8,12 +6,12 @@ const { GameState } = require('./Constant.js');
 class BridgeGame {
   #bridge;
   #movingLog;
-  #count;
+  #tryCount;
 
-  constructor(bridgeSize) {
-    this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+  constructor(bridge) {
+    this.#bridge = bridge;
     this.#movingLog = [];
-    this.#count = 1;
+    this.#tryCount = 1;
   }
 
   /**
@@ -29,11 +27,22 @@ class BridgeGame {
     if (this.#movingLog.length < 1) {
       return GameState.IDLE;
     }
-    if (this.#bridge.at(-1) === this.#movingLog.at(-1)) {
-      return this.#bridge.length === this.#movingLog.length ? GameState.VICTORY : GameState.PLAYING;
+    if (this.#movingLog.length < this.#bridge.length) {
+      return GameState.PLAYING;
+    }
+    if (this.#bridge[this.#bridge.length - 1] === this.#movingLog[this.#movingLog.length - 1]) {
+      return GameState.VICTORY;
     }
 
     return GameState.GAME_OVER;
+  }
+
+  getMovingLog() {
+    return this.#movingLog;
+  }
+
+  getTryCount() {
+    return this.#tryCount;
   }
 
   /**
@@ -42,7 +51,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#count += 1;
+    this.#tryCount += 1;
     this.#movingLog = [];
   }
 }
