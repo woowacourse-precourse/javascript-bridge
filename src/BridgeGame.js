@@ -8,9 +8,9 @@ class BridgeGame {
   #bridge;
   #moveCount;
 
-  constructor(bridgeSize) {
-    this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-    this.#moveCount = 0;
+  constructor(bridge, moveCount) {
+    this.#bridge = bridge;
+    this.#moveCount = moveCount;
   }
 
   isMove(direction) {
