@@ -8,6 +8,8 @@ const Validator = require("../utils/Validator");
 class BridgeGame {
   static NOT_PASS = "X";
   static PASS = "O";
+  static UP_DIRECTION = "U";
+  static DOWN_DIRECTION = "D";
 
   #bridge;
   #numberOfAttemps = 0;
