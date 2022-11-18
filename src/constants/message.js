@@ -21,6 +21,7 @@ const ERROR_MSG = {
   invalidInputRange:
     '[ERROR] 유효하지 않은 입력 범위입니다. ' +
     `${BRIDGE_SIZE_MIN_RANGE} ~ ${BRIDGE_SIZE_MAX_RANGE} 사이의 값을 입력해주세요.`,
+  invalidDirection: `[ERROR] 유효하지 않은 이동방향입니다. (위: ${UPSIDE_SYMBOL}, 아래: ${DOWNSIDE_SYMBOL}) 를 입력해주세요`,
 };
 
 module.exports = {
