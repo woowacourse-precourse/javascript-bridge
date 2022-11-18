@@ -11,12 +11,20 @@ const BridgeMaker = {
     const bridge = [];
 
     while (size > 0) {
-      bridge.push(0);
+      bridge.push(generateRandomNumber());
       size -= 1;
     }
 
-    return bridge.map((stage) => stage + generateRandomNumber());
+    return new BridgeModel(bridge);
   },
 };
+
+class BridgeModel {
+  constructor(bridge) {
+    this.bridge = bridge;
+  }
+
+  move() {}
+}
 
 module.exports = BridgeMaker;

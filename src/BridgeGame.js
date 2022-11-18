@@ -4,8 +4,9 @@ const { Console } = require('@woowacourse/mission-utils');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor({ bridgeModel, bridgeMaker }, { outputView, inputView }) {
-    this.bridgeModel = bridgeModel;
+  bridgeModel;
+  constructor({ BridgeRandomNumberGenerator, bridgeMaker }, { outputView, inputView }) {
+    this.bridgeRandomNumberGenerator = BridgeRandomNumberGenerator;
     this.bridgeMaker = bridgeMaker;
     this.outputView = outputView;
     this.inputView = inputView;
@@ -22,7 +23,7 @@ class BridgeGame {
   }
 
   makeBridge(size) {
-    this.bridgeModel.setBridge(size);
+    this.bridgeModel = this.bridgeMaker.makeBridge(size, this.bridgeRandomNumberGenerator.generate);
     Console.print(this.bridgeModel.bridge);
     Console.close();
   }

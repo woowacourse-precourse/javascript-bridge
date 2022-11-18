@@ -1,13 +1,13 @@
-const BridgeModel = require('./BridgeModel');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 class App {
   play() {
     const models = {
-      bridgeModel: new BridgeModel(),
+      BridgeRandomNumberGenerator: BridgeRandomNumberGenerator,
       bridgeMaker: BridgeMaker,
     };
 
