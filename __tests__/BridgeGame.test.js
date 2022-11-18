@@ -190,6 +190,15 @@ describe('다리를 끝까지 갔는지 확인하는 메서드 테스트', () =>
   });
 });
 
+describe('다리 값을 세팅하는 메서드 테스트', () => {
+  test('메소드 이름은 "setBridge"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'setBridge';
+
+    expect(bridgeGame.setBridge.name).toEqual(METHOD_NAME);
+  });
+});
+
 describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
   test('메소드 이름은 "getBridgeReuslt"로 정의된다.', () => {
     const bridgeGame = new BridgeGame();
