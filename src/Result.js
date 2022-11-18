@@ -1,12 +1,21 @@
 const { printMap, printResult } = require('./View/OutputView');
-
+const UP = 'U';
+const DOWN = 'D';
+const STRING_MAKER = {
+  BRACKET: {
+    OPEN: '[',
+    CLOSE: ']',
+  },
+  SLASH: '|',
+  EMPTY: '   ',
+  RIGHT: ' O ',
+  WRONG: ' X ',
+};
 class Result {
   #result;
   #status;
   constructor(bridge, index, bool) {
     this.#status = bool;
-    const UP = 'U';
-    const DOWN = 'D';
     this.#result = this.makeOneLine(bridge, UP, index);
     this.#result += this.addLastOne(bridge.getbridgePart(index), bool, UP);
     this.#result += '\n';
@@ -16,23 +25,25 @@ class Result {
   }
 
   makeOneLine(bridge, right, index) {
-    let string = '[';
+    let string = STRING_MAKER.BRACKET.OPEN;
     for (let x = 0; x < index; x++) {
       const direction = bridge.getbridgePart(x);
-      if (direction === right) string += ' O ';
-      else string += '   ';
-      string += '|';
+      if (direction === right) string += STRING_MAKER.RIGHT;
+      else string += STRING_MAKER.EMPTY;
+      string += STRING_MAKER.SLASH;
     }
     return string;
   }
 
   addLastOne(last, bool, direction) {
     if (bool) {
-      if (direction == last) return ' O ]';
-      return '   ]';
+      if (direction == last)
+        return STRING_MAKER.RIGHT + STRING_MAKER.BRACKET.CLOSE;
+      return STRING_MAKER.EMPTY + STRING_MAKER.BRACKET.CLOSE;
     }
-    if (direction == last) return '   ]';
-    return ' X ]';
+    if (direction == last)
+      return STRING_MAKER.EMPTY + STRING_MAKER.BRACKET.CLOSE;
+    return STRING_MAKER.WRONG + STRING_MAKER.BRACKET.CLOSE;
   }
   print() {
     printMap(this.#result);
