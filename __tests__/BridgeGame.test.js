@@ -251,4 +251,11 @@ describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
 
     expect(bridgeGame.getBridgeReuslt(EXPECTED)).toEqual(RECEIVED);
   });
+
+  test('"U"를 전달하면 "X"를 반환한다.', () => {
+    const EXPECTED = 'U';
+    const RECEIVED = 'X';
+
+    expect(bridgeGame.getBridgeReuslt(EXPECTED)).toEqual(RECEIVED);
+  });
 });
