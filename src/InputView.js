@@ -31,7 +31,8 @@ const InputView = {
       (moving) => {
         Check.checkMoving(moving);
         const bridgeGame = new BridgeGame();
-        bridgeGame.move(moving, bridge, movingList);
+        const result = bridgeGame.move(moving, bridge, movingList);
+        return this.readMoving(bridge, result);
       }
     );
   },
