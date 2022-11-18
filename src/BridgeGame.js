@@ -8,11 +8,16 @@ const { printResult, printMap } = require('./OutputView');
 class BridgeGame {
   #bridge;
   #userMove;
+  #playCount;
 
   constructor(bridge) {
     this.#bridge = bridge;
     this.#userMove = [];
-    console.log(bridge);
+    this.#playCount = 0;
+  }
+
+  initialize() {
+    this.#userMove = [];
   }
 
   /**
@@ -29,7 +34,9 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.start();
+  }
 
   end() {
     printResult();
@@ -62,6 +69,9 @@ class BridgeGame {
   }
 
   start() {
+    console.log(this.#bridge);
+    this.#playCount += 1;
+    this.initialize();
     this.getUserMove();
   }
 }

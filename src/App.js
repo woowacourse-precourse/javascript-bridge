@@ -15,6 +15,7 @@ class App {
   }
 }
 
+// FIXME: remove this instance
 const app = new App();
 app.play();
 
