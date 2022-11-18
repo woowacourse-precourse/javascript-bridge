@@ -11,7 +11,20 @@ class BridgeGame {
       this.#marker += 1;
       return [this.getUBlock(), this.getDBlock()];
     } else {
-      return [['틀린'], ['방향']];
+      return this.wrongStep(nextStep, this.getUBlock(), this.getDBlock());
+    }
+  }
+
+  wrongStep(nextStep, UBlock, DBlock) {
+    if (nextStep === 'U') {
+      UBlock.push('X');
+      DBlock.push(' ');
+      return [UBlock, DBlock];
+    }
+    if (nextStep === 'D') {
+      UBlock.push(' ');
+      DBlock.push('X');
+      return [UBlock, DBlock];
     }
   }
 
