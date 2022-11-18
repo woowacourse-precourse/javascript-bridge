@@ -54,7 +54,7 @@ const MESSAGES = Object.freeze({
     IS_NOT_NUMBER: `${HEADERS.ERROR} 숫자를 입력해주세요`
   },
   CLEARED: {
-    SUCESSS: '성공',
+    SUCESS: '성공',
     FAILED: '실패',
   }
 });

@@ -44,14 +44,9 @@ class App {
 
   #moveSpace(direction) {    
     this.game.move(direction);
-    OutputView.printMap(this.game.course);
-    this.#gameEndCheck();
-  }
-
-  #gameEndCheck() {
-    const lastTrace = this.game.course[this.game.course.length - 1];
-    if([MOVEMENT_LOG_CODE.FAILED.UPPER, MOVEMENT_LOG_CODE.FAILED.LOWER].includes(lastTrace)) return this.#submitRetry();
-    if(this.game.course.length === this.game.bridge.length) return this.#quitGame(MESSAGES.CLEARED.SUCESSS);
+    OutputView.printMap(this.game.movementLog);
+    if(this.game.isFailed()) return this.#submitRetry();
+    if(this.game.isClear()) return this.#quitGame(MESSAGES.CLEARED.SUCESS);
     this.#submitDirection();
   }
 
@@ -78,7 +73,9 @@ class App {
   }
 
   #quitGame(clear) {
-    OutputView.printResult(this.game.course, this.game.tryCount, clear);
+    const log = this.game.movementLog;
+    const tryCount = this.game.tryCount;
+    OutputView.printResult(log, tryCount, clear);
     MissionUtils.Console.close();
   }
 }

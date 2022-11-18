@@ -3,16 +3,16 @@ const { MESSAGES } = require('./constants');
 const GameUtils = require('./Utils/GameUtils');
 
 const OutputView = {
-  printMap(course) {
-    const result = GameUtils.courseToForm(course);
+  printMap(log) {
+    const result = GameUtils.logToForm(log);
     result.forEach(row => {
       MissionUtils.Console.print(row);
     });
   },
 
-  printResult(result, count, clear) { 
+  printResult(log, count, clear) { 
     MissionUtils.Console.print(MESSAGES.GAME.FINAL_GAME_RESULT);
-    OutputView.printMap(result);
+    OutputView.printMap(log);
     MissionUtils.Console.print(`${MESSAGES.GAME.CLEAR_STATE} ${clear}`);
     MissionUtils.Console.print(`${MESSAGES.GAME.TOTAL_TRY} ${count}`);
   },
