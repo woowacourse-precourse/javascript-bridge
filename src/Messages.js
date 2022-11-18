@@ -1,3 +1,6 @@
+/**
+ * 출력 문구들을 저장하고 있는 객체
+ */
 const MESSAGE = Object.freeze({
     START: "다리 건너기 게임을 시작합니다.\n",
     ENTER_BRIDGE_SIZE: "다리의 길이를 입력해주세요.\n",
@@ -8,12 +11,4 @@ const MESSAGE = Object.freeze({
     GAME_TRY_COUNT: "총 시도한 횟수: "
 });
 
-const ERROR = Object.freeze({
-    BRIDGE_SIZE_OUT_BOUNDARY: "[ERROR] 3이상 20이하 사이의 숫자여야 합니다.\n",
-    BRIDGE_SIZE_NOT_NUMBER: "[ERROR] 입력값은 숫자여야 합니다.\n",
-    INVALID_MOVE_TYPE: "[ERROR] 입력값은 U 또는 D 여야합니다.\n",
-    INVALID_COMMAND: '[ERROR] 입력값은 R 또는 Q 여야합니다.\n',
-    FAIL_MOVE: '[ERROR] 건널 수 없는 곳 입니다.\n'
-})
-
-module.exports = { MESSAGE, ERROR };
+module.exports = { MESSAGE };
