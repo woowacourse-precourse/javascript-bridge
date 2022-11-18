@@ -24,7 +24,7 @@ const InputView = {
         throw error(ERROR_MSG.INPUT_BRIDGE);
       return birdgeSize;
     } catch (msg) {
-      console.dir(msg);
+      console.log(msg.message);
       return this.readBridgeSize();
     }
   },
@@ -35,12 +35,10 @@ const InputView = {
   async readMoving() {
     const moving = await this.inputMethod(INPUT_MSG.MOVING);
     try {
-      if (moving !== "U" && moving !== "D") {
-        throw error(ERROR_MSG.INPUT_MOVING);
-      }
+      if (moving !== "U" && moving !== "D") throw error(ERROR_MSG.INPUT_MOVING);
       return moving;
     } catch (msg) {
-      console.dir(msg);
+      console.log(msg.message);
       return this.readMoving();
     }
   },
@@ -48,7 +46,18 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  async readGameCommand() {
+    const command = await this.inputMethod(INPUT_MSG.GAMECOMMAND);
+    try {
+      if (command !== "R" && command !== "Q") {
+        throw error(ERROR_MSG.INPUT_GAMECOMMAND);
+      }
+      return command;
+    } catch (msg) {
+      console.log(msg.message);
+      return this.readGameCommand();
+    }
+  },
 };
 
 module.exports = InputView;
