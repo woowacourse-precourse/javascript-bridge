@@ -12,4 +12,14 @@ describe('다리 게임 test', () => {
     bridgeGame.move('U');
     expect(bridgeGame.isMovesPossible()).toEqual([true, true, false]);
   });
+
+  test('게임 승리 판단', () => {
+    const bridge = ['U', 'D', 'D', 'U', 'D'];
+    const bridgeGame = new BridgeGame(bridge);
+
+    for (let i = 0; i < bridge.length; i += 1) {
+      bridgeGame.move(bridge[i]);
+      expect(bridgeGame.isGameWin()).toBe(i === bridge.length - 1);
+    }
+  });
 });
