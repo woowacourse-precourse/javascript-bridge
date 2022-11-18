@@ -7,10 +7,10 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(func1, func2, func3) {
-    MissionUtils.Console.readLine('test1\n', (input) => {
+  readBridgeSize(makeBridge, func2, func3) {
+    MissionUtils.Console.readLine('다리의 길이를 입력해주세요.\n', (input) => {
       try {
-        func1.call(this, input);
+        makeBridge.call(this, input);
         this.readMoving(func2, func3);
       } catch (error) {
         MissionUtils.Console.print(error);
@@ -23,7 +23,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(func2, func3) {
-    MissionUtils.Console.readLine('test2\n', (input) => {
+    MissionUtils.Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
       func2.call(this, input);
       this.readGameCommand(func3);
     });

@@ -1,12 +1,14 @@
 const Bridge = require('./Bridge');
 const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 
 class App {
   play() {
-    InputView.readBridgeSize(this.func1, this.func2, this.func3);
+    OutputView.printGameStart();
+    InputView.readBridgeSize(this.makeBridge, this.func2, this.func3);
   }
 
-  func1(input) {
+  makeBridge(input) {
     new Bridge(Number(input));
   }
 
