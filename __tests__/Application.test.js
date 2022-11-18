@@ -1,6 +1,7 @@
 const Application = require('../src/Application');
 
 const NUMBER_ERROR_TEXT = '[ERROR] 전달된 인수는 숫자 타입이 아닙니다.';
+const VALIDATION_ARRAY_TEXT = '[ERROR] 전달된 인수는 배열 타입이 아닙니다.';
 const RANGE_ERROR_TEXT = '[ERROR] 지정한 범위의 값이 아닙니다.';
 
 describe('숫자 변환 함수 테스트', () => {
@@ -106,5 +107,13 @@ describe('배열 복사 함수 테스트', () => {
     const EXPECTED = [1, 2, 3, 4, 5];
 
     expect(Application.copyArray(EXPECTED) !== EXPECTED).toBeTruthy();
+  });
+
+  test('전달받은 인자가 배열이 아니라면 예외를 발생한다.', () => {
+    expect(() => {
+      const EXPECTED = 1;
+
+      Application.copyArray(EXPECTED);
+    }).toThrow(VALIDATION_ARRAY_TEXT);
   });
 });
