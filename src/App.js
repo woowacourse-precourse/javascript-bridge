@@ -4,6 +4,7 @@ const OutputView = require("./OutputView");
 const InputView = require("./InputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const Validate = require("./Validate");
 const { Console } = require("@woowacourse/mission-utils");
 
 class App {
@@ -20,6 +21,8 @@ class App {
   }
 
   setBridge(size) {
+    Validate.bridgeSize(size);
+
     this.#bridge = new Bridge(
       BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate)
     );
@@ -28,10 +31,12 @@ class App {
   }
 
   InputPositionUntilBridgeEnds() {
-    InputView.readMoving(this.judgeIsNextDirectionCorrect.bind(this));
+    InputView.readMoving(this.getNextDirectionFromUser.bind(this));
   }
 
-  judgeIsNextDirectionCorrect(input) {
+  getNextDirectionFromUser(input) {
+    Validate.move(input);
+
     const isNextDirectionCorrect = this.bridgeGame.move(
       this.#bridge.getCorrectDirection(),
       input
@@ -59,10 +64,10 @@ class App {
 
   stopMoving() {
     OutputView.printMap(this.#bridge.getCrossState("failed"));
-    InputView.readGameCommand(this.judgeIsUserWantRestart.bind(this));
+    InputView.readGameCommand(this.getIsUserWantRestart.bind(this));
   }
 
-  judgeIsUserWantRestart(input) {
+  getIsUserWantRestart(input) {
     if (input === "R") {
       this.bridgeGame.retry(
         this.#bridge.resetCurrentPosition.bind(this.#bridge)

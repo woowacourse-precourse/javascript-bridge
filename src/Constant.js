@@ -11,4 +11,11 @@ const Guide = Object.freeze({
   TOTAL_TRIAL: "총 시도한 횟수: ",
 });
 
-module.exports = { Question, Guide };
+const ErrorMsg = Object.freeze({
+  NOT_NUMBER: "[ERROR] 숫자를 입력해주세요!",
+  OUT_OF_RANGE: "[ERROR] 다리의 길이는 3 ~ 20의 범위로만 입력 가능합니다!",
+  NOT_MOVE_COMMAND: "[ERROR] 이동할 칸은 U, D로만 입력 가능합니다!",
+  NOT_RESTART_COMMAND: "[ERROR] 재시작 결정은 R, Q로만 입력 가능합니다!",
+});
+
+module.exports = { Question, Guide, ErrorMsg };
