@@ -1,15 +1,16 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-
-const InputView = require('./InputView');
+const BridgePrint = require('./BridgePrint');
 class Check {
   static CheckRestartGame(answer, gamePlay) {
     if (answer === 'Q') {
+      BridgePrint.printResult(gamePlay);
       MissionUtils.Console.close();
       return;
     }
     if (answer === 'R') {
       gamePlay.retry();
-      InputView.readBridgeSize(gamePlay);
+      gamePlay.addCount();
+      return true;
     }
     throw new Error('잘못된 입력을 하였습니다.');
   }
