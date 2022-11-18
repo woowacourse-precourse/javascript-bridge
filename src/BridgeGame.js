@@ -5,6 +5,10 @@ class BridgeGame {
     this.#bridge = bridge;
   }
 
+  isAccord(direction) {
+    return direction === this.#bridge[0];
+  }
+
   move() {}
 
   /**

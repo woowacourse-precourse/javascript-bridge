@@ -20,7 +20,10 @@ class Process {
     InputView.readMoving(this);
   }
 
-  move(input) {}
+  move(input) {
+    if (this.#game.isAccord(input)) this.#game.move();
+    else InputView.readGameCommand(this);
+  }
 }
 
 module.exports = Process;
