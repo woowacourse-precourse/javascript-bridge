@@ -1,8 +1,4 @@
-const {
-  ConstraintsConstants,
-  PlayerInputConstants,
-  ErrorConstants,
-} = require("./constant/Constants");
+const { CONSTRAINTS, COMMAND, ERROR } = require("./constant/Constants");
 
 class SizeConstraints {
   #size;
@@ -15,7 +11,7 @@ class SizeConstraints {
     const regex = /^\d+$/;
 
     if (!regex.test(this.#size)) {
-      throw ErrorConstants.ERROR_NOT_ONLY_NUMBER;
+      throw ERROR.ERROR_NOT_ONLY_NUMBER;
     }
   }
 
@@ -23,16 +19,16 @@ class SizeConstraints {
     const numberdSize = Number(this.#size);
 
     if (
-      numberdSize < ConstraintsConstants.MINIMUM_SIZE_RANGE ||
-      numberdSize > ConstraintsConstants.MAXIMUM_SIZE_RANGE
+      numberdSize < CONSTRAINTS.MINIMUM_SIZE_RANGE ||
+      numberdSize > CONSTRAINTS.MAXIMUM_SIZE_RANGE
     ) {
-      throw ErrorConstants.ERROR_NOT_IN_RANGE;
+      throw ERROR.ERROR_NOT_IN_RANGE;
     }
   }
 
   checkStartZero() {
-    if (this.#size[0] === ConstraintsConstants.START_STRING_OF_SIZE) {
-      throw ErrorConstants.ERROR_DONT_START_ZERO;
+    if (this.#size[0] === CONSTRAINTS.START_STRING_OF_SIZE) {
+      throw ERROR.ERROR_DONT_START_ZERO;
     }
   }
 }
@@ -46,10 +42,10 @@ class MoveConstraints {
 
   checkInputUorD() {
     if (
-      this.#wantGo !== PlayerInputConstants.UPPER_BRIDGE_STRING &&
-      this.#wantGo !== PlayerInputConstants.LOWER_BRIDGE_STRING
+      this.#wantGo !== COMMAND.UPPER_BRIDGE_STRING &&
+      this.#wantGo !== COMMAND.LOWER_BRIDGE_STRING
     ) {
-      throw ErrorConstants.ERROR_NOT_ONLY_U_OR_D;
+      throw ERROR.ERROR_NOT_ONLY_U_OR_D;
     }
   }
 }
@@ -63,10 +59,10 @@ class CommandConstraints {
 
   checkInputRorQ() {
     if (
-      this.#command !== PlayerInputConstants.RETRY_STRING &&
-      this.#command !== PlayerInputConstants.END_GAME_STRING
+      this.#command !== COMMAND.RETRY_STRING &&
+      this.#command !== COMMAND.END_GAME_STRING
     ) {
-      throw ErrorConstants.ERROR_NOT_ONLY_R_OR_Q;
+      throw ERROR.ERROR_NOT_ONLY_R_OR_Q;
     }
   }
 }

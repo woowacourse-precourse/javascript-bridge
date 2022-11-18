@@ -1,16 +1,12 @@
-const {
-  AnswerConstants,
-  PlayerInputConstants,
-  PlayerConstants,
-} = require("./constant/Constants");
+const { ANSWER, COMMAND, PLAYER } = require("./constant/Constants");
 
 const Player = {
   size: null,
   movingArr: [],
   state: [[], []],
-  tryingCount: PlayerConstants.INITIAL_TRY_NUMBER,
+  tryingCount: PLAYER.INITIAL_TRY_NUMBER,
   playerAns: [],
-  gameSuccess: PlayerConstants.GMAE_FAIL,
+  gameSuccess: PLAYER.GMAE_FAIL,
 
   updateState(wantGo, isCorrect) {
     this.calculateBridgeState(wantGo, isCorrect);
@@ -30,30 +26,30 @@ const Player = {
   },
 
   checkUpperBridgeCorrect(wantGo, isCorrect) {
-    if (wantGo === PlayerInputConstants.UPPER_BRIDGE_STRING && isCorrect) {
-      this.state[0].push(AnswerConstants.CORRECT_ANSWER);
-      this.state[1].push(AnswerConstants.EMPTY_ANSWER);
+    if (wantGo === COMMAND.UPPER_BRIDGE_STRING && isCorrect) {
+      this.state[0].push(ANSWER.CORRECT_ANSWER);
+      this.state[1].push(ANSWER.EMPTY_ANSWER);
     }
   },
 
   checkUpperBridgeWrong(wantGo, isCorrect) {
-    if (wantGo === PlayerInputConstants.UPPER_BRIDGE_STRING && !isCorrect) {
-      this.state[0].push(AnswerConstants.WRONG_ANSWER);
-      this.state[1].push(AnswerConstants.EMPTY_ANSWER);
+    if (wantGo === COMMAND.UPPER_BRIDGE_STRING && !isCorrect) {
+      this.state[0].push(ANSWER.WRONG_ANSWER);
+      this.state[1].push(ANSWER.EMPTY_ANSWER);
     }
   },
 
   checkLowerBridgeCorrect(wantGo, isCorrect) {
-    if (wantGo === PlayerInputConstants.LOWER_BRIDGE_STRING && isCorrect) {
-      this.state[0].push(AnswerConstants.EMPTY_ANSWER);
-      this.state[1].push(AnswerConstants.CORRECT_ANSWER);
+    if (wantGo === COMMAND.LOWER_BRIDGE_STRING && isCorrect) {
+      this.state[0].push(ANSWER.EMPTY_ANSWER);
+      this.state[1].push(ANSWER.CORRECT_ANSWER);
     }
   },
 
   checkLowerBridgeWrong(wantGo, isCorrect) {
-    if (wantGo === PlayerInputConstants.LOWER_BRIDGE_STRING && !isCorrect) {
-      this.state[0].push(AnswerConstants.EMPTY_ANSWER);
-      this.state[1].push(AnswerConstants.WRONG_ANSWER);
+    if (wantGo === COMMAND.LOWER_BRIDGE_STRING && !isCorrect) {
+      this.state[0].push(ANSWER.EMPTY_ANSWER);
+      this.state[1].push(ANSWER.WRONG_ANSWER);
     }
   },
 
@@ -66,7 +62,7 @@ const Player = {
       this.playerAns.length === this.size &&
       !this.playerAns.includes(false)
     ) {
-      this.gameSuccess = PlayerConstants.GAME_SUCCESS;
+      this.gameSuccess = PLAYER.GAME_SUCCESS;
     }
   },
 
@@ -74,7 +70,7 @@ const Player = {
     this.state = [[], []];
     this.movingArr = [];
     this.playerAns = [];
-    this.tryingCount += PlayerConstants.INCREASE_TRY_NUMBER;
+    this.tryingCount += PLAYER.INCREASE_TRY_NUMBER;
   },
 };
 
