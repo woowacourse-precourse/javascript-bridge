@@ -150,3 +150,81 @@ Q
   - [] 이외 필요한 클래스(또는 객체)와 메서드는 자유롭게 구현할 수 있다.
   - [] InputView 에서만 MissionUtils의 Console.readLine() 을 이용해 사용자의 입력을 받을 수 있다.
   - [] BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
+
+<br />
+
+# 초기 제공되는 객체
+
+## InputView 객체
+
+- [] 제공된 InputView 객체를 활용해 구현해야 한다.
+- [] InputView의 파일 경로는 변경할 수 있다.
+- [] InputView의 메서드의 인자는 변경할 수 있다.
+- [] 사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
+
+```js
+const InputView = {
+  readBridgeSize() {},
+
+  readMoving() {},
+
+  readGameCommand() {},
+};
+```
+
+## OutputView 객체
+
+- [] 제공된 OutputView 객체를 활용해 구현해야 한다.
+- [] OutputView의 파일 경로는 변경할 수 있다.
+- [] OutputView의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
+- [] 값 출력을 위해 필요한 메서드를 추가할 수 있다.
+
+```js
+const OutputView = {
+  printMap() {},
+
+  printResult() {},
+};
+```
+
+## BridgeGame 클래스
+
+- [] 제공된 BridgeGame 클래스를 활용해 구현해야 한다.
+- [] BridgeGame에 필드(인스턴스 변수)를 추가할 수 있다.
+- []BridgeGame의 파일 경로는 변경할 수 있다.
+- [] BridgeGame의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
+- [] 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
+
+```js
+class BridgeGame {
+  move() {}
+
+  retry() {}
+}
+```
+
+## BridgeMaker 객체
+
+- [] 제공된 BridgeMaker 객체를 활용해 구현해야 한다.
+- [] BridgeMaker에 프로퍼티를 추가할 수 없다.
+- [] BridgeMaker의 파일 경로는 변경할 수 없다.
+- [] BridgeMaker의 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
+
+```js
+const BridgeMaker = {
+  makeBridge(size, generateRandomNumber) {},
+};
+```
+
+## BridgeRandomNumberGenerator 객체
+
+- [] Random 값 추출은 제공된 BridgeRandomNumberGenerator의 generate()를 활용한다.
+- [] BridgeRandomNumberGenerator의 코드는 변경할 수 없다.
+
+### 사용 예시
+
+다리 칸을 생성하기 위한 Random 값은 아래와 같이 추출한다.
+
+```js
+const number = generateRandomNumber();
+```
