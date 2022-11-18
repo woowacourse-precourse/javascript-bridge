@@ -251,6 +251,15 @@ describe('다리 정보를 가져오는 메소드 테스트', () => {
   });
 });
 
+describe('사용자 입력 "U", "D" 판단 메서드 테스트', () => {
+  test('메소드 이름은 "checkIncludeUandD"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'checkIncludeUandD';
+
+    expect(bridgeGame.checkIncludeUandD.name).toEqual(METHOD_NAME);
+  });
+});
+
 describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
   const bridgeGame = new BridgeGame();
   const bridge = ['D', 'U', 'U'];
