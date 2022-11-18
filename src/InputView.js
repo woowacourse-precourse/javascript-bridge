@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./Constants.js');
-
+const BridgeSize = require('./BridgeSize.js');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -10,7 +10,13 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(MESSAGE.INPUT_SIZE, (size) => {
-      console.log(size);
+      const bridgeSize = new BridgeSize(size);
+      try {
+        bridgeSize.validate();
+      } catch (err) {
+        Console.print(err);
+        this.readBridgeSize();
+      }
     });
   },
 
