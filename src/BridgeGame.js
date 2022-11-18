@@ -22,7 +22,7 @@ class BridgeGame {
       this.bridgeSize, 
       BridgeRandomNumberGenerator.generate
     );
-    console.log("this.bridge", this.bridge)
+    // console.log("this.bridge", this.bridge)
   }
 
   getMoveCount() {
@@ -43,6 +43,7 @@ class BridgeGame {
     const isCorrect = this.bridge[this.moveCount - 1] === this.user[this.moveCount - 1];
 
     if (this.moveCount === this.bridgeSize && isCorrect) {
+      // console.log(this.moveCount, this.bridgeSize)
       this.status = "END"
     } else if (this.moveCount !== this.bridgeSize && isCorrect) {
       this.status = "NEXT"

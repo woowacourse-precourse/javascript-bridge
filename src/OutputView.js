@@ -30,7 +30,7 @@ const OutputView = {
     }
     
     Console.print(`[ ${this.thread.up.join(" | ")} ]`)
-    Console.print(`[ ${this.thread.down.join(" | ")} ]`)
+    Console.print(`[ ${this.thread.down.join(" | ")} ]\n`)
   },
 
   clearThread() {
@@ -44,6 +44,10 @@ const OutputView = {
    */
   printResult(bridgeGame) {
     const result = bridgeGame.status === "END" ? "성공" : "실패" 
+
+    Console.print(`최종 게임 결과`)
+    Console.print(`[ ${this.thread.up.join(" | ")} ]`)
+    Console.print(`[ ${this.thread.down.join(" | ")} ]`)
     Console.print(`\n게임 성공 여부: ${result}`)
     Console.print(`총 시도한 횟수: ${bridgeGame.tryCount}`)
   },
