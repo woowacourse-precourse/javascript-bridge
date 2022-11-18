@@ -31,10 +31,10 @@ const InputView = {
   },
 
   createRandomBridge(sizeInput) {
-    const bridgeSizeValidation = new BridgeSizeValidation(sizeInput);
-    const size = bridgeSizeValidation.makeStringToNumber();
-    Player.updateSize(size);
+    new BridgeSizeValidation(sizeInput);
 
+    const size = Number(sizeInput);
+    Player.updateSize(size);
     this.canWalkBridge = BridgeMaker.makeBridge(size, generator);
 
     this.readMoving();
@@ -57,12 +57,27 @@ const InputView = {
   calculatePlayerMove(wantGo) {
     new MoveInputValidation(wantGo);
 
-    const isCorrect = new BridgeGame().move(this.canWalkBridge, wantGo);
-    Player.updateState(wantGo, isCorrect);
+    this.isCorrect = new BridgeGame().move(this.canWalkBridge, wantGo);
+    Player.updateState(wantGo, this.isCorrect);
 
     OutputView.printMap();
-    if (Player.gameSuccess) OutputView.printResult();
-    else isCorrect ? this.readMoving() : this.readGameCommand();
+    this.checkGameSuccess();
+  },
+
+  checkGameSuccess() {
+    if (Player.gameSuccess) {
+      return OutputView.printResult();
+    }
+
+    return this.checkCorrectAnswer();
+  },
+
+  checkCorrectAnswer() {
+    if (this.isCorrect) {
+      return this.readMoving();
+    }
+
+    return this.readGameCommand();
   },
 
   /**
@@ -82,9 +97,16 @@ const InputView = {
   decideRetryOrQuit(command) {
     new CommandInputValidation(command);
 
-    new BridgeGame().retry(command)
-      ? (Player.reset(), this.readMoving())
-      : OutputView.printResult();
+    this.checkCommand(command);
+  },
+
+  checkCommand(command) {
+    if (new BridgeGame().retry(command)) {
+      Player.reset();
+      return this.readMoving();
+    }
+
+    return OutputView.printResult();
   },
 };
 
