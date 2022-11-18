@@ -1,7 +1,18 @@
+const OutputView = require("./OutputView");
+const InputView = require("./InputView");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
+ * 필드(인스턴스 변수)를 추가할 수 있음
+ * 파일경로 변경가능
+ * 인자는 필요에따라 추가/변경할 수 있음
+ * 메소드 추가/변경할 수 있음
  */
 class BridgeGame {
+  start() {
+    OutputView.printStart();
+    InputView.readBridgeSize();
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
