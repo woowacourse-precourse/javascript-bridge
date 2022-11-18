@@ -14,7 +14,6 @@ const InputView = {
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (size) => {
       const error = Check.checkBridgeSize(size);
-      Console.print(error);
       if (error) {
         this.readBridgeSize();
       } else {
