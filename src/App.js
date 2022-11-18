@@ -52,7 +52,7 @@ class App {
 
   checkRetry(command) {
     if (RETRY_OR_NOT[command]) {
-      this.#bridgeGame.undoOneStep();
+      this.#bridgeGame.retry();
       return this.askMove();
     }
     return OutputView.printResult(
