@@ -1,7 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const MESSAGE = {
-  START: '다리 건너기 게임을 시작합니다.',
   INPUT_LENGTH: '\n다리의 길이를 입력해주세요. \n',
   INPUT_DIRECTION: '\n이동할 칸을 선택해주세요. (위: U, 아래: D) \n',
   INPUT_CONTROL:
