@@ -3,10 +3,10 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const Check = require('./Check');
-const INPUT_MESSAGES = require('./common/messages');
+const { INPUT_MESSAGES } = require('./common/messages');
 const InputView = {
   readBridgeSize() {
-    MissionUtils.Console.readLine(`${INPUT_MESSAGES.INPUT_BRIDGESIZE}`, (size) => {
+    MissionUtils.Console.readLine(`${INPUT_MESSAGES.INPUT_BRIDGESIZE}\n`, (size) => {
       const brige = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
       const gamePlay = new BridgeGame(brige);
       this.readMoving(gamePlay);
