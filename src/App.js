@@ -3,6 +3,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
 const GameStart = require("./modules/GameStart");
+const OutputView = require("./OutputView");
 class App {
   size;
   tryGame = 1;
@@ -26,6 +27,8 @@ class App {
     const bridgeArr = GAMESTART.getBrigeArr();
     //게임 재시작
     this.restart(this.#answer);
+    //출력
+    OutputView.printResult(bridgeArr, this.tryGame);
   }
 
   restart(answer) {
