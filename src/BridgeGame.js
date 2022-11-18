@@ -3,23 +3,25 @@ const InputView = require("./InputView");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #track = [];
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(bridge) {
-    for(let i = 0; i < bridge.length; i++){
-      const moving = InputView.readMoving();
-      const result = this.oneMoveCheck(moving, bridge[i]);
-      if(!result) this.retry();
+  move(bridge, moving) {
+    if(moving == bridge[i]){
+      this.#track.push(moving);
+      this.constructMap();
+    }else{
     }
   }
 
-  oneMoveCheck(moving, space){
-    if(moving === space) return true;
-    return false;
+  constructMap(){
+    this.#track
+    
   }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
