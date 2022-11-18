@@ -28,4 +28,24 @@ describe('Bridge Game Test', () => {
       expect(result).toEqual([[' ', 'X']]);
     });
   });
+
+  describe('사용자의 입력값이 처음이 아닌 경우', () => {
+    test('2번째 사용자의 입력값이 일치하는 경우 Test', () => {
+      const bridgeGame = new BridgeGame(['U', 'D', 'U']);
+      const result = bridgeGame.move(['U', 'D']);
+      expect(result).toEqual([
+        ['O', ' '],
+        [' ', 'O'],
+      ]);
+    });
+
+    test('2번째 사용자의 입력값이 일치하지 않는 경우 Test', () => {
+      const bridgeGame = new BridgeGame(['U', 'D', 'U']);
+      const result = bridgeGame.move(['U', 'U']);
+      expect(result).toEqual([
+        ['O', ' '],
+        ['X', ' '],
+      ]);
+    });
+  });
 });
