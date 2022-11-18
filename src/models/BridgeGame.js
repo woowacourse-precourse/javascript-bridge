@@ -1,4 +1,4 @@
-const ResultStringConverter = require("../utils/ResultStringConverter");
+const Utilities = require("../utils/Utilities");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -13,7 +13,7 @@ class BridgeGame {
   }
 
   get resultString() {
-    const convertedResult = ResultStringConverter.convertResult(this.#result);
+    const convertedResult = Utilities.convertResultToString(this.#result);
     return convertedResult;
   }
 

@@ -1,18 +1,27 @@
 const BRIDGE = require("./Constants");
 
-const ResultStringConverter = {
-  convertResult(arr) {
+const Utilities = {
+  isSuccess(status) {
+    if (status === true) {
+      return '성공';
+    }
+    return '실패';
+  },
+
+  convertResultToString(arr) {
     let resultStringArr = [['['], ['[']];
     arr.forEach((item) => {
-      resultStringArr = this.checkUpDown(item, resultStringArr);
+      resultStringArr = ResultStringConverter.checkUpDown(item, resultStringArr);
     });
 
-    const convertedResultArr = this.convertLast(resultStringArr);
-    const resultString = this.convertToString(convertedResultArr);
+    const convertedResultArr = ResultStringConverter.convertLast(resultStringArr);
+    const resultString = ResultStringConverter.convertToString(convertedResultArr);
 
     return resultString;
   },
+};
 
+const ResultStringConverter = {
   checkUpDown(item, resultStringArr) {
     const isMovable = item[1];
     if (item[0] === BRIDGE.letter.up) {
@@ -63,4 +72,4 @@ const ResultStringConverter = {
   },
 };
 
-module.exports = ResultStringConverter;
+module.exports = Utilities;

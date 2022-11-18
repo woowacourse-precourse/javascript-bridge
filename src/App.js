@@ -1,10 +1,14 @@
 const Bridge = require('./models/Bridge');
 const BridgeGame = require('./models/BridgeGame');
-const isSuccess = require('./utils/isSuccess');
+
 const MovingValidation = require('./utils/MovingValidation');
 const RetryValidation = require('./utils/RetryValidation');
+const Utilities = require('./utils/Utilities');
+const BRIDGE = require('./utils/Constants');
+
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
+
 
 class App {
   randomBirdge;
@@ -36,7 +40,7 @@ class App {
 
   inputRetry(input) {
     new RetryValidation(input);
-    if (input === 'R') {
+    if (input === BRIDGE.game.retry) {
       this.bridgeGame.retry();
       InputView.readMoving.call(this, this.inputMove, this.inputRetry);
     } else {
@@ -47,7 +51,7 @@ class App {
 
   finishGame(status) {
     const resultString = this.bridgeGame.resultString;
-    const gameStatus = isSuccess(status);
+    const gameStatus = Utilities.isSuccess(status);
     const totalGame = this.bridgeGame.totalGame;
     OutputView.printResult(resultString, gameStatus, totalGame);
   }
