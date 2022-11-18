@@ -1,4 +1,5 @@
-const InputView = require("./InputView");
+const OutputView = require("./OutputView");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -12,30 +13,44 @@ class BridgeGame {
    */
 
   move(moving, block) {
-    if (moving !== "U" || moving !== "D") throw "U 또는 D가 아님";
+    if (moving !== "U" && moving !== "D") throw "U 또는 D가 아님";
     if (moving === block) return true;
     return false;
   }
 
-  printOX(mark) {
+  markOX(mark) {
     if (mark == true) return " O ";
     return " X ";
   }
 
   markTrack(moving, bool) {
     if (moving === "U") {
-      this.#upperTrack = this.printOX(bool);
-      this.#lowerTrack = "   ";
+      this.#upperTrack.push(this.markOX(bool));
+      this.#lowerTrack.push("   ");
+      return;
     }
-    this.#upperTrack = "   ";
-    this.#lowerTrack = this.printOX(bool);
+    this.#upperTrack.push("   ");
+    this.#lowerTrack.push(this.markOX(bool));
   }
 
-  constructMap() {}
+  printLine(track) {
+    let line = "[";
+    for(let i = 0; i < track.length; i++){
+      line += track[i];
+      if(i == track.length - 1){
+        line += "]"
+        break;
+      }
+      line += "|";
+    }
+    return line;
+  }
 
   printCurrent(moving, bool) {
     this.markTrack(moving, bool);
-    this.constructMap();
+    const upperTrack = this.printLine(this.#upperTrack);
+    const lowerTrack = this.printLine(this.#lowerTrack);
+    return [lowerTrack, upperTrack];
   }
 
   /**

@@ -24,26 +24,27 @@ const Intercessor = {
   },
 
   matchMove(bridge) {
+    const bridgeGame = new BridgeGame();
     for (let i = 0; i < bridge.length; i++) {
-      if (!this.matchOneStep(bridge[i])) return false;
+      if (!this.matchOneStep(bridge[i], bridgeGame)) return false;
     }
     return true;
   },
 
-  matchOneStep(block) {
-    let moving;
-    const bridgeGame = new BridgeGame();
+  matchOneStep(block, bridgeGame) {
     try {
-      moving = InputView.readMoving();
+      const moving = InputView.readMoving();
       if (!bridgeGame.move(moving, block)) {
-        bridgeGame.printCurrent(moving, false);
+        OutputView.printMap(bridgeGame.printCurrent(moving, false));
         return false;
       }
-      bridgeGame.printCurrent(moving, true);
+      OutputView.printMap(bridgeGame.printCurrent(moving, true));
     } catch (error) {
       OutputView.printException(error);
     }
+    return true;
   },
+
 };
 
 module.exports = Intercessor;
