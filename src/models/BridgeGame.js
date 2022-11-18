@@ -11,24 +11,27 @@ class BridgeGame {
   }
 
   #resetGameStatus() {
-    this.#gameStatus = { length: 0, upBridge: '', downBridge: '' };
+    this.#gameStatus = { length: 0, upBridge: [], downBridge: [] };
   }
 
   move(direction) {
     const selectedDirection = this.#makeSelectedDirection(direction);
-    this.#gameStatus[selectedDirection] = this.#crossBridge(direction);
+    this.#gameStatus[selectedDirection].push(this.#updateBridge(direction));
     const unselectedDirection = this.#makeUnselectedDirection(direction);
-    this.#gameStatus[unselectedDirection] = BRIDGE_GAME.EMPTY;
+    this.#gameStatus[unselectedDirection].push(BRIDGE_GAME.EMPTY);
     this.#gameStatus.length += BRIDGE_GAME.STEP;
 
-    return this.#gameStatus;
+    return {
+      upBridge: this.#gameStatus.upBridge,
+      downBridge: this.#gameStatus.downBridge,
+    };
   }
 
   #makeSelectedDirection(direction) {
     return direction === BRIDGE_GAME.INPUT_U ? BRIDGE_GAME.UP_BRIDGE : BRIDGE_GAME.DOWN_BRIDGE;
   }
 
-  #crossBridge(direction) {
+  #updateBridge(direction) {
     return direction === this.#bridge[this.#gameStatus.length]
       ? BRIDGE_GAME.CORRECT
       : BRIDGE_GAME.INCORRECT;

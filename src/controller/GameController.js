@@ -6,6 +6,7 @@ const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const PlayerInputChecker = require('./PlayerInputChecker');
 const BridgeGame = require('../models/BridgeGame');
+const PrintableBridgeMaker = require('../PrintableBridgeMaker');
 
 class GameController {
   #bridgeGame;
@@ -31,7 +32,7 @@ class GameController {
 
   #movePlayer(direction) {
     PlayerInputChecker.checkDirection(direction);
-    this.#bridgeGame.move(direction);
+    OutputView.printMap(PrintableBridgeMaker.generate(this.#bridgeGame.move(direction)));
   }
 }
 

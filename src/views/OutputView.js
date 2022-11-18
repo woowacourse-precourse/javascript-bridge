@@ -6,7 +6,9 @@ const OutputView = {
     Console.print(MESSAGE_GAME.START);
   },
 
-  printMap() {},
+  printMap(map) {
+    Console.print(map);
+  },
 
   printResult() {},
 };
