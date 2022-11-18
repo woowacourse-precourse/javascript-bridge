@@ -5,6 +5,7 @@ const BridgeGame = require("../BridgeGame");
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+  isSucces: "성공",
   count: 1,
   printStart() {
     MissionUtils.Console.print(MESSAGE.GAME_START);
@@ -39,6 +40,7 @@ const OutputView = {
       });
     }
     if (array[0][array[0].length - 1] === "X") {
+      this.isSucces = "실패";
       this.printResult();
     }
     if (array[1][array[1].length - 1] === "O") {
@@ -54,6 +56,7 @@ const OutputView = {
       });
     }
     if (array[1][array[1].length - 1] === "X") {
+      this.isSucces = "실패";
       this.printResult();
     }
   },
@@ -64,7 +67,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult() {
-    MissionUtils.Console.print(`시도 횟수: ${this.count}`);
+    MissionUtils.Console.print(`게임 성공 여부: ${this.isSucces}`);
+    MissionUtils.Console.print(`총 시도한 횟수: ${this.count}`);
     MissionUtils.Console.close();
   },
 };
