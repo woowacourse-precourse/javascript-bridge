@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { printResult } = require('./OutputView');
 
 const { Console } = MissionUtils;
 
@@ -9,9 +10,15 @@ class BridgeGame {
 
   #bridge;
 
+  #gameTryCount;
+
+  #gameComplete;
+
   constructor() {
     if (instance) return instance;
     this.#bridge = [];
+    this.#gameTryCount = 1;
+    this.#gameComplete = false;
     this.init();
   }
 
@@ -43,6 +50,10 @@ class BridgeGame {
       return true;
     }
     Console.close();
+  }
+
+  printResult() {
+    printResult(this.#gameComplete, this.#gameTryCount);
   }
 }
 
