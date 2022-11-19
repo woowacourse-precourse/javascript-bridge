@@ -4,6 +4,8 @@ const OutputView = require('./OutputView.js');
 const BridgeMaker = require('./BridgeMaker.js');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator.js');
 const Bridge = require('./model/Bridge.js');
+const { isCollectBridgeLength } = require('./utils/validator.js');
+const { Console } = require('@woowacourse/mission-utils');
 
 class BridgeGameController {
   constructor() {
@@ -16,11 +18,17 @@ class BridgeGameController {
   }
 
   createBridgeByUser(bridgeLength) {
-    this.bridge.setData('length', bridgeLength);
-    const blueprint = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
-    this.bridge.setData('blueprint', blueprint);
+    try {
+      isCollectBridgeLength(bridgeLength);
 
-    InputView.readMoving(this.movingByUser.bind(this));
+      this.bridge.setData('length', bridgeLength);
+      const blueprint = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
+      this.bridge.setData('blueprint', blueprint);
+
+      InputView.readMoving(this.movingByUser.bind(this));
+    } catch (error) {
+      Console.print(error);
+    }
   }
 
   movingByUser(move) {
@@ -31,7 +39,7 @@ class BridgeGameController {
       InputView.readGameCommand(this.askWantRetry.bind(this));
     } else {
       if (this.bridge.data.turn >= this.bridge.data.length) {
-        OutputView.printResult(true, this.bridgeGame.retryCount);
+        OutputView.printResult(true, this.bridgeGame.retryCount, this.bridge);
       } else InputView.readMoving(this.movingByUser.bind(this));
     }
   }
