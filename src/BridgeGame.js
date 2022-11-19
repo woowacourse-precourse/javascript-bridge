@@ -60,6 +60,17 @@ class BridgeGame {
     this.#moveResult = VALUE.FAILURE;
   }
 
+  setBridgeForm(input) {
+    if (input === KEYS.UP) {
+      this.#bridgeUpper.push(this.#moveResult);
+      this.#bridgeLower.push(VALUE.EMPTY);
+      return;
+    }
+    this.#bridgeUpper.push(VALUE.EMPTY);
+    this.#bridgeLower.push(this.#moveResult);
+    return;
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
