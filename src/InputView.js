@@ -1,21 +1,28 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { Console } = require("@woowacourse/mission-utils");
+const Validator = require("./Validator.js");
+const InfoMessages = require("./constants/InfoMessages.js");
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  readBridgeSize(callback) {
+    Console.readLine(InfoMessages.ENTER_BRIDGE_SIZE, (size) => {
+      Validator.checkSizeInput(size);
+      callback(size);
+    });
+  },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+  readMoving(callback) {
+    Console.readLine(InfoMessages.ENTER_MOVEMENT_DIRECTION, (direction) => {
+      Validator.checkDirectionInput(direction);
+      callback(direction);
+    });
+  },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    Console.readLine(InfoMessages.RESTART_OR_QUIT, (command) => {
+      Validator.checkCommandInput(command);
+      callback(command);
+    });
+  },
 };
 
 module.exports = InputView;
