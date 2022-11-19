@@ -6,7 +6,7 @@
 
 ## 🥇BridgeGame
 
-- [ ] 다리를 생성하는 기능
+- [x] 다리를 생성하는 기능
   - [x] 랜덤으로 숫자를 1개 생성하는 기능 (BridgeRandomNumberGenerator)
   - [x] 받은 숫자만큼 다리를 생성하는 기능(BridgeMaker)
 - [ ] 이동하는 기능
