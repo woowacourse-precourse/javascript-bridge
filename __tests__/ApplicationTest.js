@@ -129,4 +129,10 @@ describe("다리 건너기 테스트", () => {
     const result = bridge.retry("R");
     expect(result).toEqual(true);
   });
+
+  test("게임 재시도 입력 값 예외 처리 테스트", () => {
+    expect(() => {
+      Error.readGameCommand("K");
+    }).toThrow("[ERROR]");
+  });
 });
