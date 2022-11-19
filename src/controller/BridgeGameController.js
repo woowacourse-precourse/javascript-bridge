@@ -19,6 +19,12 @@ class BrideGameController {
     this.generateBridgeGame(size);
     InputView.readMoving(this.handleAnswerCheckPhase);
   }
+
+  generateBridgeGame(size) {
+    this.#bridgeGame = new BridgeGame(
+      new Bridge(BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate))
+    );
+  }
 }
 
 module.exports = BrideGameController;
