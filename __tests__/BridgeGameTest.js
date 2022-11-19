@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const Bridge = require('../src/Bridge');
 const BridgeGame = require('../src/controller/BridgeGame');
 
 const mockRandoms = (numbers) => {
@@ -8,7 +9,7 @@ const mockRandoms = (numbers) => {
 
 describe('다리 건너기 게임 테스트', () => {
   mockRandoms(['1', '0', '1']);
-  const bridgeGame = new BridgeGame(3);
+  const bridgeGame = new BridgeGame(new Bridge(3));
 
   test('다리 건너기 테스트', () => {
     const resultMap = bridgeGame.move('U');
@@ -37,7 +38,7 @@ describe('다리 건너기 게임 테스트', () => {
 
 describe('다리 건너기 게임 테스트', () => {
   mockRandoms(['1', '0', '1']);
-  const bridgeGame = new BridgeGame(3);
+  const bridgeGame = new BridgeGame(new Bridge(3));
 
   test('다리 건너기 테스트', () => {
     const resultMap = bridgeGame.move('U');

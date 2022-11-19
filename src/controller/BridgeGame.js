@@ -1,10 +1,13 @@
 // @ts-check
-const Bridge = require('../Bridge');
 const { GAME_STATUS } = require('../constants');
 
 /**
- * 다리 건너기 게임을 관리하는 클래스
+ * @typedef {Object} Bridge
+ * @property {function(string, number): boolean} compare
+ * @property {function(number): boolean} canMoveMore
+ * @property {function(string[]): string} getMoveResult
  */
+
 class BridgeGame {
   /** @type {Bridge} */
   #bridge;
@@ -14,10 +17,10 @@ class BridgeGame {
   #gameStatus;
 
   /**
-   * @param {number} size 입력받은 다리의 길이
+   * @param {Bridge} bridgeInstance Bridge 클래스의 인스턴스
    */
-  constructor(size) {
-    this.#bridge = new Bridge(size);
+  constructor(bridgeInstance) {
+    this.#bridge = bridgeInstance;
     this.#inputs = [];
     this.#gameStatus = GAME_STATUS.PROCEEDING;
   }

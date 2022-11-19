@@ -1,4 +1,5 @@
 // @ts-check
+const Bridge = require('../Bridge');
 const BridgeGame = require('./BridgeGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
@@ -21,7 +22,8 @@ class Controller {
 
   #handleMakeBridge() {
     InputView.readBridgeSize((input) => {
-      this.#bridgeGame = new BridgeGame(Number(input));
+      const bridge = new Bridge(Number(input));
+      this.#bridgeGame = new BridgeGame(bridge);
       OutputView.printLineBreak();
       this.#handleMove();
     });
