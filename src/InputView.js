@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const Bridge = require("./Bridge");
+const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -50,10 +51,16 @@ const InputView = {
       (movement) => {
         this.checkMovement(movement);
         bridgeGame.move(movement, bridge);
-        bridgeGame.setRound();
-        bridgeGame.getCross() === true
-          ? this.readMoving(bridge, bridgeGame)
-          : this.readGameCommand(bridge, bridgeGame);
+
+        if (bridgeGame.getCross()) {
+          if (bridgeGame.getSuccess()) {
+            OutputView.printResult(bridgeGame);
+          } else {
+            this.readMoving(bridge, bridgeGame);
+          }
+        } else {
+          this.readGameCommand(bridge, bridgeGame);
+        }
       }
     );
   },
@@ -73,8 +80,12 @@ const InputView = {
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (restart) => {
         this.checkRestart(restart);
-        bridgeGame.retry(restart);
-        this.readMoving(bridge, bridgeGame);
+        if (restart === "R") {
+          bridgeGame.retry(restart);
+          this.readMoving(bridge, bridgeGame);
+        } else if (restart === "Q") {
+          OutputView.printResult(bridgeGame);
+        }
       }
     );
   },

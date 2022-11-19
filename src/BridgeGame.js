@@ -1,3 +1,5 @@
+const OutputView = require("./OutputView");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -5,8 +7,26 @@ class BridgeGame {
   constructor() {
     this.round = 0;
     this.crossing = true;
+    this.success = false;
+    this.attempt = 1;
     this.upResult = [];
     this.downResult = [];
+  }
+
+  setSuccess() {
+    this.success = true;
+  }
+
+  getSuccess() {
+    return this.success;
+  }
+
+  setAttempt() {
+    this.attempt++;
+  }
+
+  getAttempt() {
+    return this.attempt;
   }
 
   setCross(cross) {
@@ -78,6 +98,7 @@ class BridgeGame {
       } else {
         this.setUpResult(false, round, false);
         this.downResult.push("   ");
+        this.setCross(false);
       }
     } else if (movement === "D") {
       if (movement == bridgeUD[round]) {
@@ -86,11 +107,18 @@ class BridgeGame {
       } else {
         this.setDownResult(false, round, false);
         this.upResult.push("   ");
+        this.setCross(false);
       }
     }
 
-    console.log(this.getUpResult());
-    console.log(this.getDownResult());
+    this.setRound();
+
+    if (bridgeUD.length == this.getRound() && this.getCross() == true) {
+      console.log("su");
+      this.setSuccess();
+    }
+
+    OutputView.printMap(this.getUpResult(), this.getDownResult());
   }
 
   /**
@@ -109,8 +137,7 @@ class BridgeGame {
   retry(restart) {
     if (restart === "R") {
       this.reset();
-    } else if (restart === "Q") {
-      console.log("Q");
+      this.setAttempt();
     }
   }
 }
