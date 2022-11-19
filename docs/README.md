@@ -79,3 +79,25 @@
 
 # 📌 기능 구현
 
+## Controllers/
+  * 다리에 대한 상태를 랜덤으로 설정하게 0,1을 반환하는 기능을 담당 - `BridgeRandomNumberGenerator`
+
+## Views/
+  * 사용자에게 입력 받을 수에 대한 설명과 입력받은 수를 반환을 담당 - `inputView`
+  * 사용자에게 다리의 상태와 최종결과 값을 출력하는 기능을 담당 - `OutputView`
+
+## App(Class)
+  * 다리게임을 실행을 담당 - `play`
+
+## BridgeGame(Class)
+  * 사용자의 입력값을 받아 어느 다리로 움직이는 기능을 담당-`move`
+  * 움직이는 다리의 위치를 특정하고 현재 다리를 업데이트를 호출하는 기능을 담당- `passBridge`
+  * 현재 다리에 대한 상태르 업데이트하는 기능을 담당 - `updateNowBridge`
+  * 현재 다리게임에 실패하여 재시작하는 기능을 담당- `retry`
+  * 진행 중이던 다리게임에 대한 내용을 초기화 하는 기능을 담당- `clear`
+
+## BridgeMaker
+  * 다리의 크기와 다리변수를 생성하는 함수를 통해 다리를 생성하는 기능을 담당 -`makeBridge`
+## Validate
+  * 다리 크기에 대한 입력의 유효성을 검증하는 기능을 담당 -`isValidateInputBridgeSize`
+
