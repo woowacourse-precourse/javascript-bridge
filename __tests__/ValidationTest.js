@@ -7,5 +7,11 @@ describe('입력 테스트', () => {
       }).toThrow();
     }
   );
+  
+  test.each([['R'], ['Q'], ['d'],['u']])('이동 할 칸 입력에 대한 예외 처리', (input) => {
+    expect(() => {
+      validateMove(input);
+    }).toThrow();
+  });
 
 });
