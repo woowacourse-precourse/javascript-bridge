@@ -33,8 +33,7 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridge, input, cur_loc) {
-    console.log(bridge, input, cur_loc)
+  printMap(bridge, input, cur_loc) {    
     print_obj = {"U" : "[", "D" : "["}    
     print_obj = print_history(print_obj, cur_loc, bridge)
     print_obj = print_last(print_obj, bridge[cur_loc], input)
@@ -56,7 +55,7 @@ const OutputView = {
       this.printMap(bridge, bridge[final_loc] === "D"? "U" : "D", final_loc)
       MissionUtils.Console.print(`게임 성공 여부: 실패`);
     }    
-    final_output(retry_cnt)
+    final_output(retry_cnt+1)
   },
 };
 

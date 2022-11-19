@@ -11,8 +11,8 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     bridge = []
     for (let i = 0; i < size; i++){
-      temp = generateRandomNumber.generate()      
-      temp = temp === 1 ? "U" : "D"
+      temp = generateRandomNumber()
+      temp = temp == 1 ? "U" : "D"
       bridge.push(temp)      
     }            
     return bridge

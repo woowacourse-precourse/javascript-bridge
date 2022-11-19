@@ -11,12 +11,14 @@ const InputView = {
   * 다리의 길이를 입력받는다.
   */
    readBridgeSize() {
-    MissionUtils.Console.readLine('다리의 길이를 입력해주세요.', (bridge_len) => {
+    MissionUtils.Console.readLine('다리의 길이를 입력해주세요.', (bridge_len) => {            
       if(bridge_len<3 || bridge_len>20){
         throw new Error(`[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.`)
+      } else if (isNaN(parseInt(bridge_len))){        
+        MissionUtils.Console.print(`[ERROR]`);MissionUtils.Console.close()        
       }
       MissionUtils.Console.print(`${bridge_len}`);
-      Game_Bridge = BridgeMaker.makeBridge(bridge_len, randnum_gen)             
+      Game_Bridge = BridgeMaker.makeBridge(bridge_len, randnum_gen.generate)             
       this.readMoving(Game_Bridge, 0, 0)
     });
   },
