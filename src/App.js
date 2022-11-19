@@ -3,6 +3,7 @@ const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { MissionUtils } = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
@@ -17,6 +18,18 @@ class App {
 
     // TODO: 이후 과정을 파라메터로 넘겨주기
     InputView.readMoving();
+  }
+
+  processAfterMove(direction) {
+    this.game.move(direction);
+    OutputView.printMap(this.game);
+
+
+  }
+
+  finish() {
+    OutputView.printResult(this.game);
+    MissionUtils.Console.close();
   }
 }
 
