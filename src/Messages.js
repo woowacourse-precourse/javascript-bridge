@@ -11,4 +11,4 @@ const MESSAGE = Object.freeze({
     GAME_TRY_COUNT: "총 시도한 횟수: "
 });
 
-module.exports = { MESSAGE };
+module.exports = MESSAGE;
