@@ -3,13 +3,13 @@ const {
   EXCEPTION_MESSAGE,
   CAN_NOT_INCLUDES,
   BRIDGE_SIZE,
+  REGEX,
 } = require('./constant');
 
 const Validator = {
   sizeValidityCheck: (size) => {
-    const regex = /^\d+$/;
     Validator.throwErrorIfHasBlank(size);
-    if (!regex.test(size)) throw EXCEPTION_MESSAGE.NUMBER;
+    if (!REGEX.NUMBER.test(size)) throw EXCEPTION_MESSAGE.NUMBER;
     if (size < BRIDGE_SIZE.MIN || size > BRIDGE_SIZE.MAX) {
       throw EXCEPTION_MESSAGE.SIZE;
     }

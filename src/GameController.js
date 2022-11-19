@@ -1,22 +1,14 @@
 const BridgeGame = require('./BridgeGame');
 const { MESSAGE } = require('./constant');
-const InputView = require('./views/InputView');
-const OutputView = require('./views/OutputView');
 const { Console } = require('@woowacourse/mission-utils');
-const GameController = require('./GameController');
+const OutputView = require('./views/OutputView');
+const InputView = require('./views/InputView');
 
-class App {
-  #gameCtrl;
+class GameController {
   #bridgeGame;
 
   constructor() {
-    this.#gameCtrl = new GameController();
     this.#bridgeGame = new BridgeGame();
-  }
-
-  play() {
-    // this.gameStart();
-    this.#gameCtrl.gameStart();
   }
 
   gameStart() {
@@ -98,7 +90,4 @@ class App {
   }
 }
 
-const app = new App();
-app.play();
-
-module.exports = App;
+module.exports = GameController;
