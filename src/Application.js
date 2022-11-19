@@ -53,6 +53,12 @@ const Application = {
 
     return Validation.throwError(Validation.RANGE_ERROR_TEXT);
   },
+
+  getArrayLength(target) {
+    Validation.array(target);
+
+    return target.length;
+  },
 };
 
 module.exports = Application;
