@@ -29,12 +29,12 @@
 ## UI Logic
 - [x] Implement class that receives input from user
   - [x] Function that receives size of bridge
-    - [ ] Throw error when input is NaN
-    - [ ] Throw error when input is less than 1
+    - [x] Throw error when input is NaN
+    - [x] Throw error when input is less than 1
   - [x] Function that receives which cell to move to
-    - [ ] Throw error when input isn't 'U' or 'D'
+    - [x] Throw error when input isn't 'U' or 'D'
   - [x] Function that receives whether game should restart or not
-    - [ ] Throw error when input isn't 'Q' or 'R'
+    - [x] Throw error when input isn't 'Q' or 'R'
 
 - [x] Implement class that print output to user
   - [x] Function that prints current position of user
