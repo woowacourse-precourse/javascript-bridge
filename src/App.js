@@ -10,7 +10,9 @@ class App {
     this.BridgeGame = new BridgeGame(this.BridgeView,  this.BridgeModel);
   }
 
-  play() {}
+  play() {
+    this.BridgeGame.start()
+  }
 }
 
 const app = new App()
