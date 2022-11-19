@@ -1,12 +1,12 @@
-const { MESSAGE } = require('./Constants.js');
-const BridgeSize = require('./Validate/BridgeSize.js');
-const CrossingBridge = require('./Validate/CrossingBridge.js');
-const RandomNumber = require('./BridgeRandomNumberGenerator');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeGame = require('./BridgeGame.js');
-const Retry = require('./Validate/Retry.js');
+const { MESSAGE } = require('../Constants.js');
+const BridgeSize = require('../Validate/BridgeSize.js');
+const CrossingBridge = require('../Validate/CrossingBridge.js');
+const RandomNumber = require('../BridgeRandomNumberGenerator');
+const BridgeMaker = require('../BridgeMaker');
+const BridgeGame = require('../BridgeGame.js');
+const Retry = require('../Validate/Retry.js');
 const OutputView = require('./OutputView.js');
-const { playerInput, printMessage, close } = require('./Utils.js');
+const { playerInput, printMessage, close } = require('../Utils.js');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
