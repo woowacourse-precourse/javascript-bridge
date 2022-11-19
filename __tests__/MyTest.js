@@ -94,7 +94,7 @@ describe(`userMove 입력값 타당성 테스트`, () => {
   );
 });
 
-describe(`유저 이동 결과 판단 테스트`, () => {
+describe(`유저 이동 결과 판단 및 결과를 배열에 저장 테스트`, () => {
   test(`U을 입력했을 때 유저가 다리 건너기에 실패하면 이중 배열에 그 결과값을 저장한다.`, () => {
     const bridgeGame = new BridgeGame(0, [[], []], 1);
     bridgeGame.fail("U");
