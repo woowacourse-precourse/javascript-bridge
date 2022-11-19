@@ -1,9 +1,8 @@
 const { Console } = require('@woowacourse/mission-utils');
-const BridgeGame = require('./BridgeGame');
 
 const COMMAND = require('./Constants/contant');
 const { INPUT_MESSAGE } = require('./Constants/message');
-const { initBridge, selectSpace, moveProcess } = require('./GameController');
+const { initBridge, canNotMove, canMoveNext } = require('./GameController');
 const { printResult } = require('./OutputView');
 const Validator = require('./Validator');
 
@@ -33,8 +32,11 @@ const InputView = {
     // 이동할 칸 선택
     Console.readLine(INPUT_MESSAGE.move, (direction) => {
       try {
-        selectSpace(game, direction);
-        moveProcess(game, direction);
+        if (canNotMove(game, direction)) {
+          this.readGameCommand(game);
+        } else if (canMoveNext(game)) {
+          this.readMoving(game);
+        }
       } catch (err) {
         Console.print(err);
         this.readMoving(game);
@@ -46,7 +48,6 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(game) {
-    console.log('readGamecommand');
     Console.readLine(INPUT_MESSAGE.retry, (command) => {
       Validator.checkCorrectCommand(command);
       if (command === COMMAND.retry) {

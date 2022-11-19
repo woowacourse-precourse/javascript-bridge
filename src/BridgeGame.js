@@ -11,10 +11,13 @@ class BridgeGame {
 
   #retry;
 
+  #step;
+
   constructor(bridge) {
     this.#bridge = bridge;
     this.#retry = 1;
     this.#records = [];
+    this.#step = 0;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -25,6 +28,7 @@ class BridgeGame {
   move(direction) {
     Validator.checkCorrectDirection(direction);
     const dir = BridgeGame.isGoUp(direction) ? DIRECTION.up : DIRECTION.down;
+    this.#step += 1;
     return this.recordDirection(dir);
   }
 
@@ -75,22 +79,6 @@ class BridgeGame {
   }
 
   /**
-   * 유저가 입력한 다리가 건널 수 있는지 검사
-   */
-  static canMoveNext(selectedDirection, nextDirection) {
-    console.log('canMoveNext', selectedDirection, nextDirection);
-    Validator.checkCorrectDirection([selectedDirection, nextDirection]);
-    if (BridgeGame.canCrossBridge(selectedDirection, nextDirection))
-      return true;
-    return false;
-  }
-
-  static canCrossBridge(selectedDirection, nextDirection) {
-    if (selectedDirection === nextDirection) return true;
-    return false;
-  }
-
-  /**
    * 현재 이동한 횟수를 반환하는 함수
    */
   getCurrentDistance() {
@@ -126,6 +114,11 @@ class BridgeGame {
     return false;
   }
 
+  isEndOfBridge2() {
+    if (this.#step === this.#bridge.length) return true;
+    return false;
+  }
+
   /**
    * 게임 재시도 횟수 출력
    */
@@ -155,6 +148,15 @@ class BridgeGame {
     )
       return '성공';
     return '실패';
+  }
+
+  isSameDirection() {
+    if (
+      this.#records[this.getCurrentDistance()] ===
+      this.#bridge[this.getCurrentDistance()]
+    )
+      return true;
+    return false;
   }
 }
 
