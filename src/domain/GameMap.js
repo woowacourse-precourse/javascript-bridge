@@ -37,6 +37,13 @@ class GameMap {
     }
   }
 
+  isGameSuccess(userLocation) {
+    if (!this.#gameOver && this.#CorretBridge.length === userLocation) {
+      return true;
+    }
+    return false;
+  }
+
   drawBridge(moveCommand, userLocation) {
     if (userLocation !== 0) {
       this.appendVerticalLine();

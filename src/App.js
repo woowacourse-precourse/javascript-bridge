@@ -38,6 +38,16 @@ class App {
       this.validator.checkMoveCommand(moveCommand);
       OutputView.printMap(this.bridgeGame.drawBridgeMap(moveCommand));
       this.bridgeGame.move();
+
+      if (this.checkGameSuccess()) {
+        OutputView.printResult(
+          this.bridgeGame.getUserGameMap(),
+          this.bridgeGame.checkGameOver(),
+          this.bridgeGame.getUserTryCount()
+        );
+        return OutputView.exit();
+      }
+
       if (this.checkGameOver()) {
         this.requestGameOverCommand();
         return;
@@ -49,9 +59,12 @@ class App {
     }
   }
 
+  checkGameSuccess() {
+    return this.bridgeGame.checkGameSuccess();
+  }
+
   checkGameOver() {
-    const isGameOver = this.bridgeGame.checkGameOver();
-    return isGameOver;
+    return this.bridgeGame.checkGameOver();
   }
 
   requestGameOverCommand() {

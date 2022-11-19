@@ -56,6 +56,10 @@ class BridgeGame {
     this.decreaseUserLocation();
   }
 
+  checkGameSuccess() {
+    return this.gameMap.isGameSuccess(this.getUserLocation());
+  }
+
   increaseTryCount() {
     this.user.increaseCount();
   }
@@ -64,7 +68,7 @@ class BridgeGame {
   }
 
   getUserGameMap() {
-    return this.gameMap.currentUserBridgeMap();
+    return this.gameMap.currentUserBridgeMap(this.getUserLocation());
   }
 }
 
