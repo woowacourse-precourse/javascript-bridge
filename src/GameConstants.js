@@ -3,12 +3,12 @@ const BRIDGE_CONSTANTS = Object.freeze({
   maxSize: 20,
   up: 'U',
   down: 'D',
-  select: ' O ',
   notSelect: '   ',
   dividingLine: '|',
   shapeOfBeginning: '[',
   shapeOfEnd: ']',
-  fail: ' X ',
+  success: ' O ',
+  failure: ' X ',
 });
 
 module.exports = { BRIDGE_CONSTANTS };

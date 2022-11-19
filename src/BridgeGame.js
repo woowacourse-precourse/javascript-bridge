@@ -40,31 +40,33 @@ class BridgeGame {
     const answerShape = this.#bridgeAnswer[index];
     const IS_MOVE = (moving === answerShape);
 
-    if (IS_MOVE) {
-      this.moveSuccess(answerShape);
+    if (moving === BRIDGE_CONSTANTS.up) {
+      this.selectUp(IS_MOVE);
       return IS_MOVE;
     }
 
-    this.moveFail(moving);
+    this.selectDown(IS_MOVE);
     return IS_MOVE;
   }
 
-  moveSuccess(answerShape) {
-    if (answerShape === BRIDGE_CONSTANTS.up) {
-      this.eachMapPush(BRIDGE_CONSTANTS.select, BRIDGE_CONSTANTS.notSelect);
+  selectUp(IS_MOVE) {
+    this.#downMap.push(BRIDGE_CONSTANTS.notSelect);
+    if (IS_MOVE) {
+      this.#upMap.push(BRIDGE_CONSTANTS.success);
       return;
     }
 
-    this.eachMapPush(BRIDGE_CONSTANTS.notSelect, BRIDGE_CONSTANTS.select);
+    this.#upMap.push(BRIDGE_CONSTANTS.failure);
   }
 
-  moveFail(moving) {
-    if (moving === BRIDGE_CONSTANTS.up) {
-      this.eachMapPush(BRIDGE_CONSTANTS.fail, BRIDGE_CONSTANTS.notSelect);
+  selectDown(IS_MOVE) {
+    this.#upMap.push(BRIDGE_CONSTANTS.notSelect);
+    if (IS_MOVE) {
+      this.#downMap.push(BRIDGE_CONSTANTS.success);
       return;
     }
 
-    this.eachMapPush(BRIDGE_CONSTANTS.notSelect, BRIDGE_CONSTANTS.fail);
+    this.#downMap.push(BRIDGE_CONSTANTS.failure);
   }
 
   /**
