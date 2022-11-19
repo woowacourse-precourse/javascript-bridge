@@ -12,8 +12,8 @@ class Bridge {
     }
   }
 
-  checkPassable(bridgePosition, bridgeIndex) {
-    return this.#bridge[bridgeIndex] === bridgePosition;
+  getPassableBridge(position) {
+    return this.#bridge[position];
   }
 }
 
