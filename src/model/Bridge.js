@@ -1,33 +1,24 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { makeBridge } = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 
 class Bridge {
   #bridgeSize;
 
-  #up = [];
-
-  #down = [];
+  #bridge;
 
   constructor(bridgeSize) {
     this.#bridgeSize = bridgeSize;
-    this.generateNumbers();
+    this.#bridge = makeBridge(bridgeSize, this.generateRandomNumber);
   }
 
-  generateNumbers() {
-    for (let index = 0; index < this.#bridgeSize; index += 1) {
-      const generatedPlace = BridgeRandomNumberGenerator.generate(); // 0이면 위, 1이면 아래
-      this.pushToArray(generatedPlace === 0);
-    }
-  }
-
-  pushToArray(bool) {
-    this.#up.push(bool);
-    this.#down.push(!bool);
+  generateRandomNumber() {
+    const generatedPlace = BridgeRandomNumberGenerator.generate(); // 0이면 위, 1이면 아래
+    return generatedPlace;
   }
 
   print() {
-    MissionUtils.Console.print(JSON.stringify(this.#up).replaceAll(',', ' | '));
-    MissionUtils.Console.print(JSON.stringify(this.#down).replaceAll(',', ' | '));
+    MissionUtils.Console.print(JSON.stringify(this.#bridge));
   }
 }
 module.exports = Bridge;
