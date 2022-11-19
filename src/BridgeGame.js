@@ -30,6 +30,7 @@ class BridgeGame {
     }
 
     OutputView.printMap(movingList);
+    return movingList;
   }
 
   /**
