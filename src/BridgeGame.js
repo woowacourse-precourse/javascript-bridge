@@ -68,6 +68,10 @@ class BridgeGame {
     }
   }
 
+  /**
+   * 클래스에 대한 내용을 정리하는 기능을 담당하는 함수
+   * tryCount를 1올릴고 게임의 상태를 초기화한다.
+   */
   clear() {
     this.tryCount += 1;
     this.nowPosition = 0;
