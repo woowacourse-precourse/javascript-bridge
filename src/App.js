@@ -16,7 +16,11 @@ class App {
     size = Number(size);
     validBridgeSize(size);
     this.#bridge = makeBridge(size, BridgeRandomNumberGenerator.generate);
+
+    InputView.readMoving(this.requestMoveUpOrDown(this));
   }
+
+  requestMoveUpOrDown(answer) {}
 }
 
 const app = new App();

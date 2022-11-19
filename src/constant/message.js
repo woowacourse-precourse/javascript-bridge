@@ -3,6 +3,7 @@ const MESSAGE = {
 
   REQUEST: {
     BRIDGE_SIZE: "다리의 길이를 입력해주세요.",
+    SELECT_MOVE_TO_UP_OR_DOWN: "이동할 칸을 선택해주세요. (위: U, 아래: D)",
   },
 
   ERROR: {
