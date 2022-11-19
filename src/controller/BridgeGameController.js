@@ -25,6 +25,14 @@ class BrideGameController {
       new Bridge(BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate))
     );
   }
+
+  handleAnswerCheckPhase(direction) {
+    OutputView.printMap(this.#bridgeGame.getResult());
+    if(this.#bridgeGame.isAnswer(direction)) {
+      this.handleGameEndPhase();
+    }
+    InputView.readGameCommand(this.handleGameRetryPhase);
+  }
 }
 
 module.exports = BrideGameController;
