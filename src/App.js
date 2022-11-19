@@ -13,12 +13,11 @@ class App {
   play() {
     OutputView.printStart();
 
-    InputView.startInteraction.bind(this)([this.createBridge]);
+    InputView.startInteraction.bind(this)([this.createBridgeGame]);
   }
 
-  createBridge(input) {
+  createBridgeGame(input) {
     // Validation
-    console.log('createBridege');
     this.game = new BridgeGame(input);
   }
 }
