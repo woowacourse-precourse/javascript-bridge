@@ -5,7 +5,6 @@ const MoveValidation = require('./Validation/MoveValidation');
 const {
   readMoving,
   end,
-  getInputs,
   readGameCommand,
   readBridgeSize,
 } = require('./View/InputView');
@@ -15,6 +14,7 @@ const {
   printResult,
   printMap,
 } = require('./View/OutputView');
+
 class App {
   #game;
 

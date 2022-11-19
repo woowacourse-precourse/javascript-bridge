@@ -1,5 +1,4 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { printError } = require('./OutputView');
 const MESSAGE = {
   INPUT_LENGTH: '\n다리의 길이를 입력해주세요. \n',
   INPUT_DIRECTION: '\n이동할 칸을 선택해주세요. (위: U, 아래: D) \n',

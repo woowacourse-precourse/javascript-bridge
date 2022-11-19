@@ -1,4 +1,3 @@
-const MissionUtils = require('@woowacourse/mission-utils');
 const UP = 'U';
 const DOWN = 'D';
 

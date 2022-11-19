@@ -49,10 +49,6 @@ class BridgeGame {
     this.#index = 0;
     this.#tryCount += 1;
   }
-
-  finalPrint() {
-    this.#result.printFinalResult(this.#tryCount);
-  }
 }
 
 module.exports = BridgeGame;
