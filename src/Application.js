@@ -15,14 +15,13 @@ const Application = {
     const END = 20;
     const checkRange = Validation.range(START, END);
 
-    checkRange(target);
+    checkRange(Application.convertNumber(target));
   },
 
   createArray(target, mapFn) {
-    const { convertNumber, checkRangeThreeToTwenty } = Application;
+    const { convertNumber } = Application;
     const userLength = convertNumber(target);
 
-    checkRangeThreeToTwenty(userLength);
     Validation.func(mapFn);
 
     return Array.from({ length: userLength }, mapFn);
