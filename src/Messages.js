@@ -1,5 +1,5 @@
 const GAME_MESSAGES = Object.freeze({
-  gameStart: '다리 건너기 게임을 시작합니다.',
+  start: '다리 건너기 게임을 시작합니다.',
   result: '\n최종 게임 결과',
   successOrFailure: '\n게임 성공 여부: ',
   totalAttempts: '총 시도한 횟수: ',

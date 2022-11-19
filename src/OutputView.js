@@ -7,7 +7,7 @@ const { BRIDGE_CONSTANTS } = require('./GameConstants');
  */
 const OutputView = {
   printStartMessage() {
-    Console.print(GAME_MESSAGES.gameStart);
+    Console.print(GAME_MESSAGES.start);
   },
 
   /**
