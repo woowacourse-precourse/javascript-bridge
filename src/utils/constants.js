@@ -4,6 +4,8 @@ const READ_MOVING = '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\
 const READ_GAME_COMMAND = '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)';
 
 const BRIDGE = Object.freeze({
+  start_position: 0,
+  position_unit: 1,
   min_size: 3,
   max_size: 20,
 });
