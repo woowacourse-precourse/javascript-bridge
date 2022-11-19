@@ -12,37 +12,37 @@ class BridgeGameController {
   }
 
   run() {
-    readBridgeSize((input) => (isValidBridgeSize(input) ? this.create(input) : this.run()));
+    readBridgeSize((input) => (isValidBridgeSize(input) ? this.#create(input) : this.run()));
   }
 
-  create(size) {
+  #create(size) {
     this.#BridgeGame = new BridgeGame(size);
     printNewLine();
-    this.checkRound();
+    this.#checkRound();
   }
 
-  checkRound() {
-    readMoving((input) => (isValidRound(input) ? this.startRound(input) : this.checkRound()));
+  #checkRound() {
+    readMoving((input) => (isValidRound(input) ? this.#startRound(input) : this.#checkRound()));
   }
 
-  startRound(space) {
+  #startRound(space) {
     const spaceExistence = this.#BridgeGame.move(space).isRightSpace();
     printMap(this.#BridgeGame.makeBridgeFormat());
     if (this.#BridgeGame.isEnd()) {
-      return this.result();
+      return this.#result();
     }
-    return spaceExistence ? this.checkRound() : this.checkRetry();
+    return spaceExistence ? this.#checkRound() : this.#checkRetry();
   }
 
-  checkRetry() {
-    readGameCommand((input) => (isValidRetry(input) ? this.retry(input) : this.checkRetry()));
+  #checkRetry() {
+    readGameCommand((input) => (isValidRetry(input) ? this.#retry(input) : this.#checkRetry()));
   }
 
-  retry(input) {
-    return this.#BridgeGame.retry(input) ? this.checkRound() : this.result();
+  #retry(input) {
+    return this.#BridgeGame.retry(input) ? this.#checkRound() : this.#result();
   }
 
-  result() {
+  #result() {
     printResult(this.#BridgeGame.getResult());
   }
 }

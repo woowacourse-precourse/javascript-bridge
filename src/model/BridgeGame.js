@@ -2,6 +2,7 @@ const { generate } = require('../BridgeRandomNumberGenerator');
 const { makeBridge } = require('../BridgeMaker');
 const { BRIDGE, SUCCESS, FAILURE } = require('../constants/Bridge');
 const { COMMAND } = require('../constants/Messages');
+const { ZERO, ONE } = require('../constants/Number');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -15,7 +16,7 @@ class BridgeGame {
       up: [],
       down: [],
     };
-    this.tryCount = 1;
+    this.tryCount = ONE;
   }
 
   /**
@@ -26,23 +27,25 @@ class BridgeGame {
   move(space) {
     this.userBridge.command.push(space);
     const spaceResult = this.isRightSpace(space) ? BRIDGE.correct : BRIDGE.wrong;
-    return space === COMMAND.up ? this.makeUpBridge(spaceResult) : this.makeDownBridge(spaceResult);
+    return space === COMMAND.up
+      ? this.#makeUpBridge(spaceResult)
+      : this.#makeDownBridge(spaceResult);
   }
 
-  makeUpBridge(spaceResult) {
+  #makeUpBridge(spaceResult) {
     this.userBridge.up.push(spaceResult);
     this.userBridge.down.push(BRIDGE.blank);
     return this;
   }
 
-  makeDownBridge(spaceResult) {
+  #makeDownBridge(spaceResult) {
     this.userBridge.up.push(BRIDGE.blank);
     this.userBridge.down.push(spaceResult);
     return this;
   }
 
   isRightSpace() {
-    const bridgePiece = this.#bridge.slice(0, this.userBridge.command.length);
+    const bridgePiece = this.#bridge.slice(ZERO, this.userBridge.command.length);
     return JSON.stringify(this.userBridge.command) === JSON.stringify(bridgePiece);
   }
 
@@ -64,14 +67,14 @@ class BridgeGame {
    */
   retry(input) {
     if (input === COMMAND.retry) {
-      this.tryCount += 1;
-      this.initializeUserBridge();
+      this.tryCount += ONE;
+      this.#initializeUserBridge();
       return true;
     }
     return false;
   }
 
-  initializeUserBridge() {
+  #initializeUserBridge() {
     this.userBridge.command = [];
     this.userBridge.up = [];
     this.userBridge.down = [];
