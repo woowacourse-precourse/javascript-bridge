@@ -22,6 +22,10 @@ class Bridge {
   isMovable(index, moving) {
     return this.#bridgeMap[index] === moving;
   }
+
+  partialBridgeMap(index) {
+    return this.#bridgeMap.slice(0, index);
+  }
 }
 
 module.exports = Bridge;
