@@ -4,7 +4,7 @@
 class BridgeGame {
   #bridgeLengthStatus = 0;
 
-  #numberOftry = 0;
+  #numberOftry = 1;
 
   #GAME_OPTION = {
     RETRY: 'R',
@@ -41,7 +41,6 @@ class BridgeGame {
   move(input, bridge) {
     console.log(this.#bridgeLengthStatus, '지금다리길이');
     const nowBridgeLength = this.#bridgeLengthStatus;
-    this.incrementNumberOfTry();
     if (bridge[this.#bridgeLengthStatus] === input) {
       this.incrementBridgeLengthStatus();
       console.log(nowBridgeLength, this.#bridgeLengthStatus);
