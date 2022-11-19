@@ -187,3 +187,11 @@ describe('아이템 치환 함수 테스트', () => {
     }).toThrow(RANGE_ERROR_TEXT);
   });
 });
+
+describe('배열 길이 반환 함수 테스트', () => {
+  test('메소드 이름은 "getArrayLength "로 정의된다.', () => {
+    const METHOD_NAME = 'getArrayLength';
+
+    expect(Application.getArrayLength.name).toEqual(METHOD_NAME);
+  });
+});
