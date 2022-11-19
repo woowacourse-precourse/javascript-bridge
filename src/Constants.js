@@ -34,12 +34,12 @@ const UNIT = {
 };
 
 const ERROR = {
-  BRIDGE_SIZE_IS_NAN: "다리 길이는 숫자로 입력해주세요.",
-  BRIDGE_SIZE_RANGE: "다리 길이는 3 이상 20 이하의 숫자를 입력해주세요.",
+  BRIDGE_SIZE_IS_NAN: "[ERROR] 다리 길이는 숫자로 입력해주세요.",
+  BRIDGE_SIZE_RANGE: "[ERROR] 다리 길이는 3 이상 20 이하의 숫자를 입력해주세요.",
   MOVING_DIRECTION:
-    "이동할 칸은 U(위 칸)와 D(아래 칸)중 하나의 문자를 입력해주세요.",
+    "[ERROR] 이동할 칸은 U(위 칸)와 D(아래 칸)중 하나의 문자를 입력해주세요.",
   GAME_COMMAND:
-    "게임 재시작 여부는 R(재시작)과 Q(종료) 중 하나의 문자를 입력해주세요.",
+    "[ERROR] 게임 재시작 여부는 R(재시작)과 Q(종료) 중 하나의 문자를 입력해주세요.",
 };
 
 module.exports = { MESSAGE, GAME, BRIDGE, UNIT, ERROR };
