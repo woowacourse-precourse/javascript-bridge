@@ -28,6 +28,10 @@ const OutputView = {
     return `[ ${line.join(' | ')} ]`;
   },
 
+  printIntro() {
+    Console.print('다리 건너기 게임을 시작합니다.\n');
+  },
+
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>

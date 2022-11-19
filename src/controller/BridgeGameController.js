@@ -12,6 +12,7 @@ class BridgeGameController {
   #bridgeGame;
 
   start() {
+    OutputView.printIntro();
     this.initBridgeGame();
   }
 
