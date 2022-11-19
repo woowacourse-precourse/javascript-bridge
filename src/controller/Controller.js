@@ -55,7 +55,7 @@ class Controller {
   getMovingResult(bridgeWay, userSelect) {
     let [bridgeSize, userInputLength] = [bridgeWay.length, userSelect.length];
     if (userInputLength < bridgeSize) this.inputUserMoving();
-    this.#BridgeGame.move(bridgeWay, userSelect, userInputLength);
+    let result = this.#BridgeGame.move(bridgeWay, userSelect, userInputLength);
   }
 }
 
