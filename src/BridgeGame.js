@@ -18,6 +18,9 @@ class BridgeGame {
 
   move(movingDirection) {
     this.#validateDirection(movingDirection);
+
+    const playerPosition = this.#movementLog.length;
+    const isCrossable = this.#bridge.isCrossable(playerPosition, movingDirection);
   }
 
   retry() {}
