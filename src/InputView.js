@@ -23,6 +23,7 @@ const InputView = {
       if (isContinued) InputView.readMoving(game);
 
       if (game.isFailed()) InputView.readGameCommand(game);
+      if (game.isFinished()) OutputView.printResult(game);
     });
   },
 
