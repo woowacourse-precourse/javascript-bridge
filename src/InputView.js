@@ -16,36 +16,27 @@ const InputView = {
 
   async readBridgeSize() {
     const answer = await this.readText("다리의 길이를 입력해주세요.\n");
-    return Number(answer)
+    return Number(answer);
   },
-
-  
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   async readMoving() {
-    const answer = await this.readText("이동할 칸을 선택해주세요. (위: U, 아래: D)\n");
-    return answer
+    const answer = await this.readText(
+      "이동할 칸을 선택해주세요. (위: U, 아래: D)\n"
+    );
+    return answer;
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-    MissionUtils.Console.readLine(
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
-      (regame) => {
-        const gameCommand = this.readGameCommandValidate(regame);
-      }
+  async readGameCommand() {
+    const regame = await this.readText(
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n"
     );
-  },
-
-  readGameCommandValidate(regame) {
-    if (regame === "R" || regame === "Q") {
-      return regame;
-    }
-    throw "[ERROR]";
+    return regame;
   },
 };
 

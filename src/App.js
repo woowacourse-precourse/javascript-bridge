@@ -17,10 +17,15 @@ class App {
       moving = await InputView.readMoving();
       this.movingValidate(moving);
     }
-    
+
+    let regame = null;
+    while (regame !== "Q" && regame !== "R") {
+      regame = await InputView.readGameCommand();
+      this.gameCommandValidate(regame);
+    }
   }
 
-  async bridgeSizeValidate(number) {
+  bridgeSizeValidate(number) {
     try {
       if (3 <= number && number <= 20) {
         return number;
@@ -32,12 +37,24 @@ class App {
     }
   }
 
-  async movingValidate(move) {
+  movingValidate(move) {
     try {
       if (move === "U" || move === "D") {
         return move;
       } else {
         throw "[ERROR] 이동할 칸은 U나 D만 입력 가능합니다.";
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  gameCommandValidate(regame) {
+    try {
+      if (regame === "R" || regame === "Q") {
+        return regame;
+      } else {
+        throw "[ERROR] 재시작(R)과 그만둠(Q) 중 하나만 선택 가능합니다.";
       }
     } catch (err) {
       console.log(err);
