@@ -6,14 +6,14 @@ const BridgeMaker = require("../BridgeMaker");
 const Validate = require("../lib/Validate");
 const ErrorHandler = require("../ErrorHandler");
 
+const generator = BridgeRandomNumberGenerator.generate;
 const InputView = {
   readBridgeSize(setBridge, nextCallBack, errorCallBack) {
-    const generator = BridgeRandomNumberGenerator.generate;
-
     MissionUtils.Console.readLine(Message.BRIDGE_SIZE, (size) => {
       const target = () => Validate.bridgeLength(size.toUpperCase());
       const doCallBack = () =>
-        setBridge(BridgeMaker.makeBridge(size, generator.bind(this)));
+        setBridge(BridgeMaker.makeBridge(size, generator));
+
       ErrorHandler.test(target, doCallBack, errorCallBack);
       nextCallBack();
     });
@@ -26,6 +26,7 @@ const InputView = {
     MissionUtils.Console.readLine(Message.BRIDGE_DIRECTION, (direction) => {
       const target = () => Validate.bridgeDirection(direction.toUpperCase());
       const callBack = () => moveCallback(direction);
+
       ErrorHandler.test(target, callBack, errorCallBack);
       printCallback();
     });
@@ -37,6 +38,7 @@ const InputView = {
   readGameCommand(reset, printResult, errorCallBakc) {
     MissionUtils.Console.readLine(Message.REPLAY, (answer) => {
       const target = () => Validate.restart(answer);
+
       ErrorHandler.testSimple(target, errorCallBakc);
       if (answer === Constant.RETRY.REPLAY) reset();
       if (answer === Constant.RETRY.QUIT) printResult();
