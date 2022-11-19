@@ -54,14 +54,16 @@ class App {
   roundRetryBranch(retryInput) {
     try {
       InputValidate.validateRetry(retryInput);
-      const dicision = BridgeGameController.terminate(this.bridgeGame, retryInput);
-      switch (dicision) {
-        case 0: return null;
-        case 1: InputView.readMoving(this.roundInputBranch);
-      }
+      this.terminateBranch(BridgeGameController.terminate(this.bridgeGame, retryInput));
     } catch(e) {
       MissionUtils.Console.print(e.message);
       InputView.readGameCommand(this.roundRetryBranch);
+    }
+  }
+
+  terminateBranch(dicision) {
+    if (dicision == 1) {
+      InputView.readMoving(this.roundInputBranch);
     }
   }
 }
