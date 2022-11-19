@@ -67,6 +67,15 @@ class BridgeGame {
     }
     return false;
   }
+
+  checkMoveSuccess() {
+    if (
+      this.#moveState[0].includes(' X ') || 
+      this.#moveState[1].includes(' X ')
+    ) return false;
+    return true;
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
