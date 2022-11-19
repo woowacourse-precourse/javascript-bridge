@@ -4,10 +4,10 @@ const { ERROR_MSG } = require('./constants/message.js');
 
 class BridgeGame {
   #bridge;
-  #movementLog;
+  #movementLogs;
 
   constructor() {
-    this.#movementLog = [];
+    this.#movementLogs = [];
   }
 
   build(size) {
@@ -19,14 +19,14 @@ class BridgeGame {
   move(movingDirection) {
     this.#validateDirection(movingDirection);
 
-    const playerPosition = this.#movementLog.length; // 필드 round 대체 고민중...
+    const playerPosition = this.#movementLogs.length; // 필드 round 대체 고민중...
     const isCrossable = this.#bridge.isCrossable(playerPosition, movingDirection);
 
     this.saveMovementLog(isCrossable, movingDirection);
   }
 
   saveMovementLog(isCrossable, movingDirection) {
-    this.#movementLog.push({ isCrossable, movingDirection });
+    this.#movementLogs.push({ isCrossable, movingDirection });
   }
 
   retry() {}
