@@ -17,7 +17,7 @@ class App {
   #start(bridgeGame) {
     const nextMoveChar = InputView.readMoving();
     bridgeGame.move(nextMoveChar);
-    OutputView.printMap(bridgeGame.bridgeAnswers);
+    OutputView.printMap(bridgeGame);
     if (bridgeGame.isFinish) {
       const gameCommand = InputView.readGameCommand();
       OutputView.printResult();

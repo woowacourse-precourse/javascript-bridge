@@ -11,10 +11,10 @@ const OutputView = {
    * @param {string[]} bridge bridge를 받습니다.
    */
   printMap(bridgeGame) {
-    BridgeValidator.checkBridgeAnswer(bridgeGame.bridgeAnswer);
+    BridgeValidator.checkBridgeAnswer(bridgeGame.bridgeAnswers);
     BridgeValidator.checkBridge(bridgeGame.bridge);
-    printBridgeByPosition(bridgeGame.bridgeAnswer, bridgeGame.bridge, 'U');
-    printBridgeByPosition(bridgeGame.bridgeAnswer, bridgeGame.bridge, 'D');
+    printBridgeByPosition(bridgeGame.bridgeAnswers, bridgeGame.bridge, 'U');
+    printBridgeByPosition(bridgeGame.bridgeAnswers, bridgeGame.bridge, 'D');
   },
 
   printBridgeByPosition(bridgeAnswer, bridge, position) {
