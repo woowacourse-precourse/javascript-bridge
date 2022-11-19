@@ -1,6 +1,7 @@
 const BridgeMaker = require("../src/BridgeMaker");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const GameController = require("../src/Controller/GameController");
+const BridgeGame = require("../src/Model/BridgeGame");
 
 const ExceptionHandler = require("../src/utils/ExceptionHandler");
 
@@ -29,6 +30,22 @@ describe("다리 건너기 테스트", () => {
     expect(() => {
       validateTest(size);
     }).toThrow("[ERROR] 3부터 20 사이의 숫자를 입력해주세요.");
+  });
+
+  test("게임 진행 다리 생성 테스트", () => {
+    const bridgeGame = new BridgeGame(1);
+    bridgeGame.answerBridge = ["U"];
+
+    expect(bridgeGame.createUpDownBridges("U")).toEqual(["[ O ]", "[   ]"]);
+  });
+
+  test("게임 진행 다리 연장 테스트", () => {
+    const bridgeGame = new BridgeGame(2);
+    bridgeGame.answerBridge = ["U", "U"];
+
+    bridgeGame.createBridges("U");
+
+    expect(bridgeGame.extendUpDownBridges("U")).toEqual(["[ O | O ]", "[   |   ]"]);
   });
 });
 //  "[ERROR] 3부터 20 사이의 숫자를 입력해주세요."
