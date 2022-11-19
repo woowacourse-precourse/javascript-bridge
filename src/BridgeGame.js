@@ -24,7 +24,6 @@ class BridgeGame {
   makeBridge(bridgeSize) {
     this.#validPath = BridgeMaker.makeBridge(bridgeSize);
     // 유효성 검사
-    console.log(this.#validPath);
     this.getMoveDirectionFromUser();
   }
 
@@ -41,12 +40,14 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    // 위쪽이고 옳은 길 이면? 틀린 길 이면? 아래쪽이고 옳은 길이면? 틀린 길 이면?'
-    //console.log("이동시작", this.isValidPath(direction), this.#myPosition, this.#currentMap);
     if (this.isValidPath(direction)) {
-      if (direction === 1) this.#currentMap.upperPart.push("O");
-      if (direction === 0) this.#currentMap.lowerPart.push("O");
+      if (direction === 1) this.#currentMap.upperPart.push(" O ");
+      if (direction === 0) this.#currentMap.lowerPart.push(" O ");
       this.fillBlankUnselectedPath(Number(!direction));
+
+      this.#myPosition += 1;
+      this.showMovedPath();
+      this.getMoveDirectionFromUser();
     }
     if (!this.isValidPath(direction)) {
       this.askUserRestart();
@@ -63,7 +64,9 @@ class BridgeGame {
   }
 
   fillBlankUnselectedPath(direction) {
-    direction === 1 ? this.#currentMap.upperPart.push(" ") : this.#currentMap.lowerPart.push(" ");
+    direction === 1
+      ? this.#currentMap.upperPart.push("   ")
+      : this.#currentMap.lowerPart.push("   ");
   }
 
   quit() {
