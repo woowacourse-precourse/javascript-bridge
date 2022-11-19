@@ -3,6 +3,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const ValidateBridgeSize = require("./ValidateBridgeSize");
 const ValidateMoving = require("./ValidateMoving");
+const ValidateGameCommand = require("./ValidateGameCommand");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 const GameInfo = require("./GameInfo");
@@ -11,29 +12,30 @@ const GameInfo = require("./GameInfo");
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  gameInfo: GameInfo,
-
   validateBridgeSize: null,
 
   validateMoving: null,
 
-  bridgeGame: null,
+  validateGameCommand: null,
 
   messageOfInputSize: "다리의 길이를 입력해주세요.\n",
 
-  messageOfInputMoving: "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+  messageOfInputMoving: "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
     Console.readLine(this.messageOfInputSize, (bridgeSize) => {
       this.validateBridgeSize = new ValidateBridgeSize(bridgeSize);
-      this.gameInfo.bridge = BridgeMaker
+      GameInfo.bridge = BridgeMaker
         .makeBridge(this.validateBridgeSize.bridgeSize, BridgeRandomNumberGenerator);
-      console.log(this.gameInfo);
-      this.bridgeGame = new BridgeGame(this.gameInfo);
-      this.readMoving();
+      this.playGame();
     });
+  },
+
+  playGame() {
+    BridgeGame.initializeGameInfo();
+    this.readMoving();
   },
 
   /**
@@ -42,20 +44,29 @@ const InputView = {
   readMoving() {
     Console.readLine(this.messageOfInputMoving, (moving) => {
       this.validateMoving = new ValidateMoving(moving);
-      this.bridgeGame.move(this.validateMoving.moving);
-      OutputView.moveBridge = this.bridgeGame.getMoveBridge();
+      BridgeGame.move(this.validateMoving.moving);
+      OutputView.moveBridge = BridgeGame.getMoveBridge();
       OutputView.printMap();
-      if (this.bridgeGame.getPosition() !== this.validateBridgeSize.bridgeSize - 1) {
+      const moveBridge = BridgeGame.getMoveBridge();
+      if (moveBridge[0].concat(moveBridge[1]).includes("X")) return this.readGameCommand();
+      if (BridgeGame.getPosition() !== this.validateBridgeSize.bridgeSize - 1) {
         return this.readMoving();
       }
-      else Console.close();
+      GameInfo.gameResult = "성공";
+      return OutputView.printResult();
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() { },
+  readGameCommand() {
+    Console.readLine("\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (gameCommand) => {
+      this.validateGameCommand = new ValidateGameCommand(gameCommand);
+      GameInfo.gameCommand = this.validateGameCommand.gameCommand;
+      return (BridgeGame.retry()) ? this.playGame() : OutputView.printResult()
+    });
+  },
 };
 
 module.exports = InputView;
