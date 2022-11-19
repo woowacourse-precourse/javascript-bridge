@@ -59,6 +59,13 @@ describe('문자열 숫자 치환 기능 테스트', () => {
 
     expect(BridgeGame.replaceNumber.name).toEqual(METHOD_NAME);
   });
+
+  test('요소가 "U"인 경우 0으로 치환한다.', () => {
+    const EXPECTED = 'U';
+    const RECEIVED = 0;
+
+    expect(BridgeGame.replaceNumber(EXPECTED)).toEqual(RECEIVED);
+  });
 });
 
 describe('사용자가 칸을 이동할 때 사용하는 메서드 테스트', () => {
