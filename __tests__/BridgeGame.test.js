@@ -496,9 +496,10 @@ describe('위치 기록 가져오는 메서드 테스트', () => {
   });
 
   test('길이가 2인 배열을 반환한다.', () => {
+    const EXPECTED = bridgeGame.getPositionLog().length;
     const RECEIVED = 2;
 
-    expect(bridgeGame.getPositionLog()).toEqual(RECEIVED);
+    expect(EXPECTED).toEqual(RECEIVED);
   });
 
   test('첫번째 요소는 [[0, 0], "O"]을 반환한다.', () => {
