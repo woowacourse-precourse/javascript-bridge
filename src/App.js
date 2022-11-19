@@ -30,11 +30,16 @@ class App {
 
   requestMovingInput() {
     InputView.readMoving(this.userDecideGoToUpOrDown.bind(this));
-    this.userDecideGoToUpOrDown();
   }
 
   userDecideGoToUpOrDown(userInputMoving) {
-    this.bridgeGame.stackOfUserMovingInput(userInputMoving);
+    try {
+      InputVaildation.ofMove(userInputMoving);
+      this.bridgeGame.stackOfUserMovingInput(userInputMoving);
+    } catch {
+      OutputView.printWorngInputOfMoving();
+      this.requestMovingInput();
+    }
   }
 }
 
