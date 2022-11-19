@@ -1,6 +1,6 @@
 const BridgeRepository = require('../repository/BridgeRepository');
 const BridgeCheck = require('./domain/BridgeCheck');
-const BridgeLength = require('./domain/BridgeLength');
+const BridgeStart = require('./domain/BridgeStart');
 const BridgeRestart = require('./domain/BridgeRestart');
 const UpDownKey = require('./domain/UpDownKey');
 
@@ -12,12 +12,12 @@ class BridgeService {
   }
 
   start(inputLength) {
-    const bridgeLength = new BridgeLength({
+    const bridgeStart = new BridgeStart({
       input: inputLength,
       repo: this.#bridgeRepository
     });
 
-    bridgeLength.doAction();
+    bridgeStart.doAction();
   }
 
   recordMove(command) {

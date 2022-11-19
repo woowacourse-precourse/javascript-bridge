@@ -1,4 +1,4 @@
-class BridgeLength {
+class BridgeStart {
   #input;
 
   #repo;
@@ -17,4 +17,4 @@ class BridgeLength {
   }
 }
 
-module.exports = BridgeLength;
+module.exports = BridgeStart;
