@@ -1,6 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require ('./BridgeGame');
-const MESSAGE = require('./constants/messages');
+const OutputView = require ('./OutputView');
+const { ERROR, MESSAGE } = require('./constants/messages');
+const { STATUS } = require('./constants/values');
+const { KEYS } = require('./constants/keys');
 const Validate = require('./utils/validation');
 
 /**
@@ -11,7 +14,7 @@ const Validate = require('./utils/validation');
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    MissionUtils.Console.readLine(MESSAGE.READ_USER_INPUT_SIZE, (input) => {
+    MissionUtils.Console.readLine(`${MESSAGE.READ_USER_INPUT_SIZE}`, (input) => {
       this.handleBridgeSizeException(input);
     });
   },
@@ -45,7 +48,7 @@ const Validate = require('./utils/validation');
       const bridgeGame = new BridgeGame(size);
       this.readMoving(bridgeGame);
     } catch (error) {
-      MissionUtils.Console.print(MESSAGE.ERROR.USER_INPUT_BRIDGE_SIZE_INVALID);
+      MissionUtils.Console.print(ERROR.USER_INPUT_BRIDGE_SIZE_INVALID);
       this.readBridgeSize();
     }
   },
@@ -57,7 +60,7 @@ const Validate = require('./utils/validation');
       OutputView.printMap(moveResult[0], moveResult[1]);
       this.handleGameStatus(moveResult[2], game);
     } catch (error) {
-      MissionUtils.Console.print(MESSAGE.ERROR.USER_INPUT_MOVING_KEY_INVALID);
+      MissionUtils.Console.print(ERROR.USER_INPUT_MOVING_KEY_INVALID);
       this.readMoving(game);
     }
   },
@@ -69,6 +72,7 @@ const Validate = require('./utils/validation');
     }
     if (status === STATUS.FAIL) {
       this.readGameCommand(game);
+      return;
     }
     if (status === STATUS.NEXT) {
       this.readMoving(game);
@@ -80,7 +84,7 @@ const Validate = require('./utils/validation');
       Validate.gameCommand(command);
       this.handleGameCommand(command, game);
     } catch (error) {
-      MissionUtils.Console.print(MESSAGE.ERROR.USER_INPUT_GAME_COMMAND_INVALID);
+      MissionUtils.Console.print(ERROR.USER_INPUT_GAME_COMMAND_INVALID);
       this.readGameCommand(game);
     }
   },
