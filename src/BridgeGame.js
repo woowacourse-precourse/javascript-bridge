@@ -1,24 +1,25 @@
-const Player = require('./models/Player');
 const { MAP_ELEMENT } = require('./constant');
 const BridgeMap = require('./models/BridgeMap');
 const { retryOrQuit, successfullyMove } = require('./HandleCommand');
 
 class BridgeGame {
   #bridge;
-  #player;
+  #curPlace;
+  #numberOfAttempts;
+  #success;
   #bridgeMap;
 
   constructor(bridge) {
     this.#bridge = bridge;
-    console.log(this.#bridge);
-    this.#player = new Player();
+    this.#curPlace = 0;
+    this.#numberOfAttempts = 1;
+    this.#success = false;
     this.#bridgeMap = new BridgeMap();
   }
 
   move(direction) {
-    const nextCell = this.#bridge[this.#player.getCurPlace()];
+    const nextCell = this.#bridge[this.#curPlace++];
     const successful = successfullyMove(direction, nextCell);
-    this.#player.increaseCurPlace();
 
     return successful;
   }
@@ -37,29 +38,26 @@ class BridgeGame {
 
   gameComplete() {
     const bridgeSize = this.#bridge.length;
-    const curPlace = this.#player.getCurPlace();
-    if (bridgeSize === curPlace) {
-      this.#player.setSuccess();
+    if (bridgeSize === this.#curPlace) {
+      this.#success = true;
     }
 
-    return bridgeSize === curPlace;
+    return bridgeSize === this.#curPlace;
   }
 
   increaseNumberOfAttempts() {
-    this.#player.increaseNumberOfAttempts();
+    this.#numberOfAttempts += 1;
   }
 
   initPlayData() {
-    this.#player.initCurPlace();
+    this.#curPlace = 0;
     this.#bridgeMap.initMap();
   }
 
   gameResult() {
     const bridgeMap = Object.values(this.#bridgeMap.getMap());
-    const success = this.#player.getSuccess();
-    const numberOfAttempts = this.#player.getNumberOfAttempts();
 
-    return [bridgeMap, success, numberOfAttempts];
+    return [bridgeMap, this.#success, this.#numberOfAttempts];
   }
 }
 
