@@ -1,4 +1,4 @@
-const { ErrorMsg } = require("./Constant");
+const { ErrorMsg } = require("../constants/Constant");
 
 const Validate = {
   bridgeSize(input) {

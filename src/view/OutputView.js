@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { Guide } = require("./Constant");
+const { Guide } = require("../constants/Constant");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -27,7 +27,7 @@ const OutputView = {
     Console.print(`\n${Guide.END}`);
     Console.print(`[${map[0].join("|")}]`);
     Console.print(`[${map[1].join("|")}]\n`);
-    Console.print(`${Guide.SUCCESS_RESULT}${state}`);
+    Console.print(`${Guide.Game_RESULT}${state}`);
     Console.print(`${Guide.TOTAL_TRIAL}${totalTrial}`);
     Console.close();
   },
