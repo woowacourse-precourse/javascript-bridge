@@ -34,7 +34,6 @@ class BridgeGame {
     this.#status = this.#bridge.movable(this.#index, input);
     this.#result = ResultMaker(this.#bridge, this.#index, this.#status);
     this.#index += 1;
-    return this.#status;
   }
 
   isEnd() {

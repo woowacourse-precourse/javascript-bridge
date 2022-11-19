@@ -37,11 +37,11 @@ class App {
   moveBridge(input) {
     try {
       MoveValidation(input);
-      const MOVE = this.#game.move(input);
+      this.#game.move(input);
       printMap(this.#game.result);
-      if (MOVE && !this.#game.isEnd()) this.gameEnd();
-      if (MOVE && this.#game.isEnd()) readMoving.bind(this)(this.moveBridge);
-      if (!MOVE) readGameCommand.bind(this)(this.controlGame);
+      if (this.#game.status && !this.#game.isEnd()) this.gameEnd();
+      if (this.#game.status && this.#game.isEnd()) readMoving.bind(this)(this.moveBridge);
+      if (!this.#game.status) readGameCommand.bind(this)(this.controlGame);
     } catch (err) {
       this.errorHandler(err);
     }
