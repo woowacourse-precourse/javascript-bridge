@@ -1,0 +1,15 @@
+const START_MESSAGE = "다리 건너기 게임을 시작합니다.\n";
+const MOVE_MESSAGE = "이동할 칸을 선택해주세요. (위: U, 아래: D)\n";
+const RESTART_END_GAME_MESSAGE =
+  "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n";
+const RESULT_GAME_MESSAGE = "최종 게임 결과\n";
+const SUCCESS_FAIL_MESSAGE = "게임 성공 여부:";
+const TOTAL_TRY_MESSAGE = "총 시도한 횟수:";
+module.exports = {
+  START_MESSAGE: START_MESSAGE,
+  MOVE_MESSAGE: MOVE_MESSAGE,
+  RESTART_END_GAME_MESSAGE: RESTART_END_GAME_MESSAGE,
+  RESULT_GAME_MESSAGE: RESULT_GAME_MESSAGE,
+  SUCCESS_FAIL_MESSAGE: SUCCESS_FAIL_MESSAGE,
+  TOTAL_TRY_MESSAGE: TOTAL_TRY_MESSAGE,
+};
