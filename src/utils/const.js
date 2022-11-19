@@ -5,15 +5,16 @@ const BRIDGE = {
 
 const BRIDGE_SPACE_TYPE = ['D', 'U'];
 
+const RETRY = 'R';
+const QUIT = 'Q';
+
+const COMMAND_TYPE = [RETRY, QUIT];
+const COMMAND = { RETRY, QUIT };
+
 const MOVING = {
   U: 0,
   D: 1,
 };
-
-const RETRY = 'R';
-const QUIT = 'Q';
-
-const COMMAND = { RETRY, QUIT };
 
 const STATUS = {
   CONTINUE: 0,
@@ -30,6 +31,7 @@ const MARKING = {
 Object.freeze(BRIDGE);
 Object.freeze(BRIDGE_SPACE_TYPE);
 Object.freeze(MOVING);
+Object.freeze(COMMAND_TYPE);
 Object.freeze(COMMAND);
 Object.freeze(STATUS);
 Object.freeze(MARKING);
@@ -38,6 +40,7 @@ module.exports = {
   BRIDGE,
   BRIDGE_SPACE_TYPE,
   MOVING,
+  COMMAND_TYPE,
   COMMAND,
   STATUS,
   MARKING,
