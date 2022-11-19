@@ -34,12 +34,17 @@ class App {
   }
 
   roundInputBranch(directionInput) {
-    if (!['U','D'].includes(directionInput)) throw new Error("[ERROR] U 혹은 D를 입력해야 합니다.");
-    const roundResult = BridgeGameController.startNewRound(this.bridgeGame, directionInput);
-    switch (roundResult) {
-      case 0: InputView.readGameCommand(this.roundRetryBranch); break;
-      case 1: InputView.readMoving(this.roundInputBranch); break;
-      case 2: return null;
+    try {
+      InputValidate.validateDirection(directionInput);
+      const roundResult = BridgeGameController.startNewRound(this.bridgeGame, directionInput);
+      switch (roundResult) {
+        case 0: InputView.readGameCommand(this.roundRetryBranch); break;
+        case 1: InputView.readMoving(this.roundInputBranch); break;
+        case 2: return null;
+      }
+    } catch(e) {
+      MissionUtils.Console.print(e.message);
+      InputView.readMoving(this.roundInputBranch);
     }
   }
 
