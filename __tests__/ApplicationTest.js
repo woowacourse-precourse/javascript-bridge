@@ -287,7 +287,7 @@ describe('다리 건너기 결과 출력 테스트 (재시작X)', () => {
   test('다리를 건너다 실패한 경우', () => {
     const logSpy = getLogSpy();
     mockRandoms(['0', '0', '1', '0', '0', '1']);
-    mockQuestions(['6', 'D', 'D', 'U', 'D', 'U']);
+    mockQuestions(['6', 'D', 'D', 'U', 'D', 'U', 'Q']);
 
     const app = new App();
     app.play();
