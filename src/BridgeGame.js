@@ -43,7 +43,9 @@ class BridgeGame {
     const upper = this.getSingleResultArray(MOVE.UP, proceeded);
     const lower = this.getSingleResultArray(MOVE.DOWN, proceeded);
 
-    if (this.isFailed()) return this.getFailedMarkedResultArray(upper, lower);
+    if (this.isFailed()) {
+      return this.getFailedMarkedResultArray({ upper, lower });
+    }
     return { upper, lower };
   }
 
@@ -58,16 +60,16 @@ class BridgeGame {
     );
   }
 
-  getFailedMarkedResultArray(preUpper, preLower) {
-    const upper = preUpper;
-    const lower = preLower;
+  getFailedMarkedResultArray(resultArrays) {
+    const { upper, lower } = resultArrays;
     if (this.#bridge[this.#position] === MOVE.UP) {
       lower[this.#position] = MOVE.INCORRECT;
+      upper[this.#position] = MOVE.NO_VISITED;
     }
     if (this.#bridge[this.#position] === MOVE.DOWN) {
       upper[this.#position] = MOVE.INCORRECT;
+      lower[this.#position] = MOVE.NO_VISITED;
     }
-
     return { upper, lower };
   }
 }
