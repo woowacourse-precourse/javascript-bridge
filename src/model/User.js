@@ -7,20 +7,8 @@ class User {
     this.#tryCount = 1;
   }
 
-  setLocation() {
+  increaseLocation() {
     this.#location += 1;
-  }
-
-  getLocation() {
-    return this.#location;
-  }
-
-  setTryCount() {
-    this.#tryCount += 1;
-  }
-
-  getTryCount() {
-    return this.#tryCount;
   }
 
   increaseCount() {
@@ -29,6 +17,14 @@ class User {
 
   decreaseLocation() {
     this.#location -= 1;
+  }
+
+  getLocation() {
+    return this.#location;
+  }
+
+  getTryCount() {
+    return this.#tryCount;
   }
 }
 

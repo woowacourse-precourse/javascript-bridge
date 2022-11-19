@@ -42,7 +42,7 @@ class BridgeGame {
   }
 
   move() {
-    this.user.setLocation();
+    this.user.increaseLocation();
   }
 
   retry() {
