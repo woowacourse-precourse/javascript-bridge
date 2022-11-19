@@ -1,9 +1,9 @@
-const InputView = require("./View/InputView");
-const OutputView = require("./View/OutputView");
-const { makeBridge } = require("./BridgeMaker");
-const BridgeGame = require("./BridgeGame");
-const { generate } = require("./BridgeRandomNumberGenerator");
-const { GAME, MESSAGE } = require("./Constants");
+const InputView = require("../View/InputView");
+const OutputView = require("../View/OutputView");
+const { makeBridge } = require("../BridgeMaker");
+const BridgeGame = require("../BridgeGame");
+const { generate } = require("../BridgeRandomNumberGenerator");
+const { GAME, MESSAGE } = require("../Constants");
 
 class App {
   constructor() {
