@@ -30,6 +30,7 @@ class BridgeGame {
 
   /**
    * 게임의 종료 여부를 판단하는 메서드
+   * @returns {boolean} 게임이 종료되면 true, 아니면 false를 반환한다.
    */
   isGameOver() {
     const { isCorrect } = this.#moveHistory[this.#moveHistory.length - 1];
