@@ -23,7 +23,6 @@ class BridgeGame {
   }
 
   makeBridge(size) {
-    //TODO: makeBridgeModel로 수정 (make 통일)
     this.bridgeModel = this.bridgeMaker.generateBridgeModel(
       size,
       this.bridgeRandomNumberGenerator.generate
