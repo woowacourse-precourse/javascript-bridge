@@ -52,6 +52,12 @@ class BridgeGame {
     }
   }
 
+  /**
+   * 
+   * @param {U에 해당하는 다리 상태를 업데이트 하는 값} upperState 
+   * @param {D에 해당하는 다리 상태를 업데이트 하는 값} downState 
+   * 현재 게임에서의 다리 상태를 업데이트하는 기능을 담당하는 함수이다.
+   */
   updateNowBridge(upperState, downState) {
     this.nowBridge.upperBridge.push(upperState);
     this.nowBridge.downBridge.push(downState);
