@@ -40,6 +40,20 @@ describe('다리 건너기 게임 테스트', () => {
     bridgeGame.move();
     expect(bridgeGame.isMove('D')).toBeFalsy();
   });
+
+  test('위쪽 다리 모양으로 변환한다.', () => {
+    const bridgeGame = makeBridgeGame(['U', 'D'], 2);
+    const upsideBridge = bridgeGame.convertBridge('U');
+
+    expect(upsideBridge).toEqual(['O', ' ']);
+  });
+
+  test('아래쪽 다리 모양으로 변환한다.', () => {
+    const bridgeGame = makeBridgeGame(['U', 'D'], 2);
+    const downsideBridge = bridgeGame.convertBridge('D');
+
+    expect(downsideBridge).toEqual([' ', 'O']);
+  });
 });
 
 module.exports = { mockGenerator };
