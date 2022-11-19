@@ -9,9 +9,15 @@ const InputView = {
    */
   readBridgeSize(app) {
     MissionUtils.Console.readLine(MESSAGE.INPUTBRIDGELENGTH, (input) => {
-      this.validateBridgeSize(input);
+      try  {
+        this.validateBridgeSize(input);
+        return app.initGame(input);
+      } catch {
+        MissionUtils.Console.print(ERROR.LENGTH);
+        this.readBridgeSize(app);
+      }
       // return input;
-      return app.initGame(input);
+      // return app.initGame(input);
     }); 
   },
 
@@ -29,9 +35,16 @@ const InputView = {
    */
   readMoving(app) {
     MissionUtils.Console.readLine(MESSAGE.INPUTMOVINGLOCATION, (input) => {
-      this.validateMove(input);
+      try {
+        this.validateMove(input);
+        return app.proceedGame(input);
+      } catch {
+        MissionUtils.Console.print(ERROR.MOVE);
+        this.readMoving(app);
+      }
+      // this.validateMove(input);
       // return input;
-      return app.proceedGame(input);
+      // return app.proceedGame(input);
     });
   },
 
@@ -44,10 +57,18 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(app) {
     MissionUtils.Console.readLine(MESSAGE.INPUTRETRYORQUIT, (input) => {
-      this.validateRetry(input);
-      return input;
+      try {      
+        this.validateRetry(input);
+        return app.retryOrTerminate(input);
+      } catch (error) {
+        MissionUtils.Console.print(ERROR.RETRY);
+        this.readGameCommand(app);
+      }
+      // this.validateRetry(input);
+      // return input;
+      // return app.retryOrTerminate(input);
     });
   },
 
