@@ -30,10 +30,20 @@ const MOVEMENT_RESULT = Object.freeze({
   WRONG: -1,
   ERROR: -2,
 });
+const BRIDGE_SIDE = Object.freeze({
+  UP: 1,
+  DOWN: 0,
+});
 const BRIDGE_SIZE = Object.freeze({
   LOWER_INCLUSIVE: 3,
   UPPER_INCLUSIVE: 20,
 });
 module.exports = Object.freeze({
-  MESSAGE, MOVEMENT, TOTAL_RESULT, MOVEMENT_RESULT, BRIDGE_BLOCK, BRIDGE_SIZE,
+  MESSAGE,
+  MOVEMENT,
+  TOTAL_RESULT,
+  MOVEMENT_RESULT,
+  BRIDGE_BLOCK,
+  BRIDGE_SIZE,
+  BRIDGE_SIDE,
 });
