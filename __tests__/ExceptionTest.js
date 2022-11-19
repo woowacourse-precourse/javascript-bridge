@@ -1,8 +1,9 @@
 /* eslint-disable max-lines-per-function */
+const Exception = require('../src/utils/Exception');
 const Validator = require('../src/utils/Validator');
 
 const runException = (validatorMethod, inputData) => {
-  expect(() => validatorMethod(inputData)).toThrow();
+  expect(() => validatorMethod(inputData)).toThrow('[ERROR]');
 };
 
 describe('사용자 입력 형식 예외 테스트', () => {
@@ -33,4 +34,18 @@ describe('사용자 입력 형식 예외 테스트', () => {
       runException(Validator.finalGame, command);
     },
   );
+
+  test('예외가 발생하면 false를 반환한다.', () => {
+    const bridgeLength = 'a';
+    const result = Exception.isThrow(Validator.bridgeSize, bridgeLength);
+
+    expect(result).toBeFalsy();
+  });
+
+  test('예외가 발생하지 않으면 true를 반환한다.', () => {
+    const bridgeLength = '4';
+    const result = Exception.isThrow(Validator.bridgeSize, bridgeLength);
+
+    expect(result).toBeTruthy();
+  });
 });
