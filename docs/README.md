@@ -40,3 +40,7 @@ MissionUtils 라이브러리에서 제공하는 Console API를 사용하여 구�
 
 과제 진행 요구 사항
 
+미션은 javascript-bridge 저장소를 Fork & Clone해 시작한다
+기능을 구현하기 전 docs/README.md에 구현할 기능 목록을 정리해 추가한다
+Git의 커밋 단위는 앞 단계에서 docs/README.md에 정리한 기능 목록 단위로 추가한다
+과제 진행 및 제출 방법은 프리코스 과제 제출 문서를 참고한다
