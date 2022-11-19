@@ -28,7 +28,7 @@ class BridgeGameController {
     OutputView.printMap(this.bridge);
 
     if (this.bridge.data.turn >= this.bridge.data.length) {
-      OutputView.printMap(this.bridge);
+        OutputView.printResult(true, this.bridgeGame.retryCount, this.bridge);
     } else InputView.readMoving(this.movingByUser.bind(this));
   }
 }
