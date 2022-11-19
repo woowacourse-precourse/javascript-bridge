@@ -84,7 +84,7 @@ const InputView = {
       this.readMoving();
       return;
     }
-    //최종출력
+    OutputView.printResult(this.bridgeGame.returnUpDownTryCountArray(this.bridge.getBridge()));
   },
 
   bridgeMoveRetry(error) {
