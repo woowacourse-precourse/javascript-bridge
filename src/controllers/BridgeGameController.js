@@ -57,7 +57,9 @@ class BridgeGameController {
     this.printMap(bridgeMap);
   }
 
-  printMap(bridgeMap) {}
+  printMap(bridgeMap) {
+    OutputView.printMap(bridgeMap);
+  }
 }
 
 module.exports = BridgeGameController;
