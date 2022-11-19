@@ -215,9 +215,10 @@ const number = generateRandomNumber();
   - isLast 메서드 테스트 코드를 작성한다.
   - retry 메서드 테스트 코드를 작성한다.
   - getResult 메서드 테스트 코드를 작성한다.
-- [ ] test: BridgeMaker.js 테스트 코드 작성
+- [x] test: BridgeMaker.js 테스트 코드 작성
   - 무작위 값을 생성해주는 함수 호출 테스트 코드를 작성을 작성한다.
   - 반환값 길이 테스트 코드를 작성한다.
+  - 반환값 테스트 코드를 작성한다.
 - [ ] test: InputView.js 테스트 코드 작성
 - [ ] test: OutPutView.js 테스트 코드 작성
 - [ ] test: Validation.js 테스트 코드 작성
