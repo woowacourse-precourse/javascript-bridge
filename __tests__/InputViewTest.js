@@ -12,7 +12,7 @@ describe("다리 길이 입력 예외 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  test("U 혹은 R 이 아닌 값을 입력할 경우 예외가 발생한다.", () => {
+  test("U 혹은 D 이 아닌 값을 입력할 경우 예외가 발생한다.", () => {
     expect(() => {
       InputView.moveValidate("y");
     }).toThrow("[ERROR]");
