@@ -7,7 +7,7 @@ const {
 } = require('./lib/bridgeSizeInputUtils');
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-
+const Bridge = require('./Bridge');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -19,7 +19,9 @@ const InputView = {
     Console.readLine(MESSAGE.INPUT_BRIDGE_SIZE, (size) => {
       try {
         this.bridgeSizeErrorCheck(size);
-      } catch (error) {}
+      } catch (error) {
+        this.bridgeSizeRetry(error);
+      }
     });
   },
   /**
@@ -40,6 +42,11 @@ const InputView = {
   bridgeSizeGo(size) {
     this.bridge = new Bridge(BridgeMaker.makeBridge(size, generate));
     this.readMoving();
+  },
+
+  bridgeSizeRetry(error) {
+    Console.print(error);
+    this.readBridgeSize();
   },
 };
 
