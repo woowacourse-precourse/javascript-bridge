@@ -59,7 +59,12 @@ const InputView = {
   readGameCommand() {
     Console.readLine(MESSAGE.INPUT_WANT_RETRY, (input) => {
       const retry = new Retry(input);
-      retry.validate();
+      try {
+        retry.validate();
+      } catch (err) {
+        Console.print(err);
+        this.readGameCommand();
+      }
     });
   },
 };
