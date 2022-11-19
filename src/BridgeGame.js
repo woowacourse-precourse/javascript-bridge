@@ -9,9 +9,9 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  static move(moving) {
+  static move() {
     GameInfo.position += 1;
-    GameInfo.gameStat.push(moving);
+    GameInfo.gameStat.push(GameInfo.currentMove);
     this.moveBridge();
   }
 
@@ -24,8 +24,14 @@ class BridgeGame {
   }
 
   static pushMoveBridge(input) {
-    GameInfo.moveBridge[GameInfo.indexingArray.indexOf(GameInfo.gameStat[GameInfo.position])].push(input);
-    GameInfo.moveBridge[(GameInfo.indexingArray.indexOf(GameInfo.gameStat[GameInfo.position]) + 1) % 2].push(" ");
+    GameInfo.moveBridge[
+      GameInfo.indexingArray
+        .indexOf(GameInfo.gameStat[GameInfo.position])
+    ].push(input);
+    GameInfo.moveBridge[
+      (GameInfo.indexingArray
+        .indexOf(GameInfo.gameStat[GameInfo.position]) + 1) % 2
+    ].push(" ");
   }
 
   static initializeGameInfo() {
@@ -45,6 +51,14 @@ class BridgeGame {
 
   static getNumberOfPlayGames() {
     return GameInfo.numberOfPlayGames;
+  }
+
+  static isFailure() {
+    return (
+      GameInfo.moveBridge[0]
+        .concat(GameInfo.moveBridge[1])
+        .includes("X")
+    );
   }
 
   /**
