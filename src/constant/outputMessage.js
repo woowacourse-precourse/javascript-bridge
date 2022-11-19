@@ -3,7 +3,6 @@ const TOTAL_ATTEMPT = (attemptNumber) => { return `총 시도한 횟수: ${attem
 const BRIDGE_START = '다리 건너기 게임을 시작합니다.';
 const SUCCESS_GAME = '게임 성공 여부: 성공'
 const FAIL_GAME = '게임 성공 여부: 실패'
-const GAME_COUNT = (count) => { return `총 시도한 횟수: ${count}`};
 
 module.exports = {
     GAME_RESULT,
@@ -11,5 +10,4 @@ module.exports = {
     BRIDGE_START,
     SUCCESS_GAME,
     FAIL_GAME,
-    GAME_COUNT
 }
