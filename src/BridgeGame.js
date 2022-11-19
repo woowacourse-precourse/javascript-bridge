@@ -23,7 +23,7 @@ class BridgeGame {
     return " X ";
   }
 
-  markTrack(moving, bool) {
+  markElements(moving, bool) {
     if (moving === "U") {
       this.#upperTrack.push(this.markOX(bool));
       this.#lowerTrack.push("   ");
@@ -33,7 +33,7 @@ class BridgeGame {
     this.#lowerTrack.push(this.markOX(bool));
   }
 
-  printLine(track) {
+  makeLine(track) {
     let line = "[";
     for(let i = 0; i < track.length; i++){
       line += track[i];
@@ -46,10 +46,10 @@ class BridgeGame {
     return line;
   }
 
-  printCurrent(moving, bool) {
-    this.markTrack(moving, bool);
-    const upperTrack = this.printLine(this.#upperTrack);
-    const lowerTrack = this.printLine(this.#lowerTrack);
+  printReady(moving, bool) {
+    this.markElements(moving, bool);
+    const upperTrack = this.makeLine(this.#upperTrack);
+    const lowerTrack = this.makeLine(this.#lowerTrack);
     return [lowerTrack, upperTrack];
   }
 

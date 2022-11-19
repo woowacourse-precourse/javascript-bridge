@@ -35,10 +35,10 @@ const Intercessor = {
     try {
       const moving = InputView.readMoving();
       if (!bridgeGame.move(moving, block)) {
-        OutputView.printMap(bridgeGame.printCurrent(moving, false));
+        OutputView.printMap(bridgeGame.printReady(moving, false));
         return false;
       }
-      OutputView.printMap(bridgeGame.printCurrent(moving, true));
+      OutputView.printMap(bridgeGame.printReady(moving, true));
     } catch (error) {
       OutputView.printException(error);
     }
