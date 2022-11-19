@@ -45,8 +45,8 @@ class App {
       this.#moveStatement = this.#brdigeGame.move(this.#moveAnswer, this.#bridge);
       if (this.#moveStatement) {
         this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
-        // OutputView.printMap(this.#bridgeMap.getMap());
-        this.#bridgeMap.cofirm();
+        OutputView.printMap(this.#bridgeMap.getMap());
+
         // if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
         // }
         if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
@@ -58,8 +58,7 @@ class App {
       if (!this.#moveStatement) {
         this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
         this.#appStatus = 5;
-        // OutputView.printMap(this.#bridgeMap.getMap());
-        this.#bridgeMap.cofirm();
+        OutputView.printMap(this.#bridgeMap.getMap());
         return this.progressRetryGame();
       }
     }
