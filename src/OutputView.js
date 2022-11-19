@@ -2,8 +2,16 @@
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const { Console } = require('@woowacourse/mission-utils');
-const { START_MESSAGE, MOVE_MESSAGE } = require('./MESSAGES/GameMessage');
-const { BRIDGE_INPUT } = require('./MESSAGES/InputMessage');
+const {
+  START_MESSAGE,
+  MOVE_MESSAGE,
+  END_MESSAGE,
+  END_FAIL_MESSAGE,
+  END_SUCCESS_MESSAGE,
+  GAME_COUNT_MESSAGE,
+  MOVE_INPUT_ERROR,
+} = require('./MESSAGES/GameMessage');
+const { BRIDGE_INPUT, BRIDGE_INPUT_ERROR } = require('./MESSAGES/InputMessage');
 
 const OutputView = {
   printGameStart() {
@@ -12,6 +20,14 @@ const OutputView = {
 
   printUserMove(Move) {
     Console.print(Move);
+  },
+
+  printBridgeSizeErr() {
+    Console.print(BRIDGE_INPUT_ERROR);
+  },
+
+  printUserMoveErr() {
+    Console.print(MOVE_INPUT_ERROR);
   },
 
   printBridgeInput() {
@@ -41,7 +57,26 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(gameobj, gamecount, isWinorFail) {
+    if (isWinorFail) {
+      this.printWinResult(gamecount);
+    } else {
+      this.printLoseResult(gamecount);
+    }
+    Console.close();
+  },
+
+  printWinResult(gameCount) {
+    Console.print(END_MESSAGE);
+    Console.print(END_SUCCESS_MESSAGE);
+    Console.print(GAME_COUNT_MESSAGE + gameCount);
+  },
+
+  printLoseResult(gameCount) {
+    Console.print(END_MESSAGE);
+    Console.print(END_FAIL_MESSAGE);
+    Console.print(GAME_COUNT_MESSAGE + gameCount);
+  },
 };
 
 module.exports = OutputView;
