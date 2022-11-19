@@ -14,6 +14,11 @@ class BrideGameController {
     OutputView.printIntialMessage();
     InputView.readBridgeSize(this.handleGameStartPhase);
   }
+
+  handleGameStartPhase(size) {
+    this.generateBridgeGame(size);
+    InputView.readMoving(this.handleAnswerCheckPhase);
+  }
 }
 
 module.exports = BrideGameController;
