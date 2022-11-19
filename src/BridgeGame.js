@@ -93,14 +93,12 @@ class BridgeGame {
   gameRestartOrOver = (input) => {
     if (input === 'R') {
       this.#tryCount += 1;
+      OutputView.movingLog = [];
       this.move();
     } else if (input === 'Q') {
       OutputView.printResult('실패', this.#tryCount);
     }
   };
 }
-
-const temp = new BridgeGame();
-temp.start();
 
 module.exports = BridgeGame;
