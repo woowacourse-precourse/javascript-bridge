@@ -6,7 +6,7 @@ class BridgeGame {
   #gameResult;
   #tryCount;
 
-  constructor({ indexCount, gameResult, tryCount }) {
+  constructor(indexCount, gameResult, tryCount) {
     this.#indexCount = indexCount;
     this.#gameResult = gameResult;
     this.#tryCount = tryCount;
@@ -16,11 +16,6 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  //여기서 반복문
-
-  indexCountUp() {
-    this.#indexCount = this.#indexCount + 1;
-  }
 
   pass(userMove) {
     if (userMove === "U") {
@@ -60,6 +55,10 @@ class BridgeGame {
     return this.#tryCount;
   }
 
+  indexCountUp() {
+    this.#indexCount = this.#indexCount + 1;
+  }
+
   move(bridge, userMove) {
     if (bridge[this.#indexCount] !== userMove) {
       this.fail(userMove);
@@ -77,11 +76,11 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(retryOrExit) {
-    if (retryOrExit === "R") {
+  retry(retryOrGiveUp) {
+    if (retryOrGiveUp === "R") {
       return true;
     }
-    if (retryOrExit === "Q") {
+    if (retryOrGiveUp === "Q") {
       return false;
     }
   }
