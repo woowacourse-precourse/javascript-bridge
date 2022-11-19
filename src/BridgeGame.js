@@ -1,8 +1,10 @@
 const GameProgress = require('./IO/GameProgress');
 const InputView = require('./IO/InputView');
+const OutputView = require('./IO/OutputView');
 const BridgeError = require('./Error/BridgeError');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -44,24 +46,32 @@ class BridgeGame {
     this.move();
   };
 
-  validateBridgeMove = (input) => {
-    const IS_VALID_MOVING = /^U|D$/.test(input);
-    BridgeError.throwErrorHandler(this.#bridgeErrorMessages[1], !IS_VALID_MOVING);
-    // print the result after moving...
-    if (this.#bridgeMoveCount < this.#bridge.length) {
-      this.#bridgeMoveCount += 1;
-      InputView.readMoving(this.validateBridgeMove);
-    }
-  };
-
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move() {
-    this.#bridgeMoveCount = 1;
+    this.#bridgeMoveCount = 0;
     InputView.readMoving(this.validateBridgeMove);
   }
+
+  validateBridgeMove = (input) => {
+    const IS_VALID_MOVING = /^U|D$/.test(input);
+    BridgeError.throwErrorHandler(this.#bridgeErrorMessages[1], !IS_VALID_MOVING);
+    OutputView.printMap(this.#bridge, this.#bridgeMoveCount, input);
+    this.moveNext(input);
+  };
+
+  moveNext = (input) => {
+    this.#bridgeMoveCount += 1;
+    if (input !== this.#bridge[this.#bridgeMoveCount - 1]) {
+      // retry
+    } else if (this.#bridgeMoveCount < this.#bridge.length) {
+      InputView.readMoving(this.validateBridgeMove);
+    } else if (this.#bridgeMoveCount === this.#bridge.length) {
+      // end
+    }
+  };
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
@@ -69,5 +79,8 @@ class BridgeGame {
    */
   retry() {}
 }
+
+const temp = new BridgeGame();
+temp.start();
 
 module.exports = BridgeGame;
