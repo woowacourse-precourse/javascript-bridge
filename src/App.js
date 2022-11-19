@@ -4,10 +4,10 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
 const {
-  MARKING_PASS,
+  MARKING_FAIL,
   MESSAGE_GAME_SUCCESS,
   MESSAGE_GAME_FAILURE,
-  GAME_COMMAND_RETRY,
+  GAME_COMMAND_QUIT,
 } = require("./Utils");
 const { Console } = require("@woowacourse/mission-utils");
 
@@ -31,11 +31,10 @@ class App {
     const moving = await InputView.readMoving();
     const moveResult = this.#bridgeGame.move(moving);
     OutputView.printMap(moving, moveResult);
-    if (moveResult === MARKING_PASS) {
-      this.quitIfAllBridgePassed();
-      return this.progress();
-    }
-    this.replayOrQuit();
+    if (moveResult === MARKING_FAIL) return this.replayOrQuit();
+    if (this.#bridgeGame.isAllPassed())
+      return this.printResultAndQuit(MESSAGE_GAME_SUCCESS);
+    this.progress();
   }
 
   async play() {
@@ -46,24 +45,17 @@ class App {
 
   async replayOrQuit() {
     const gameCommand = await InputView.readGameCommand();
-    if (gameCommand === GAME_COMMAND_RETRY) {
-      this.increasePlayCount();
-      this.#bridgeGame.retry();
-      OutputView.retry();
-      this.progress;
-    }
-    this.printResultAndQuit(MESSAGE_GAME_FAILURE);
+    if (gameCommand === GAME_COMMAND_QUIT)
+      return this.printResultAndQuit(MESSAGE_GAME_FAILURE);
+    this.increasePlayCount();
+    this.#bridgeGame.retry();
+    OutputView.retry();
+    this.progress();
   }
 
   printResultAndQuit(endMessage) {
     OutputView.printResult(endMessage, this.#playCount);
     Console.close();
-  }
-
-  quitIfAllBridgePassed() {
-    if (this.#bridgeGame.isAllPassed()) {
-      this.printResultAndQuit(MESSAGE_GAME_SUCCESS);
-    }
   }
 
   increasePlayCount() {
