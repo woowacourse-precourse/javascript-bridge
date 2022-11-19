@@ -7,6 +7,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 class App {
     COUNT = 0;
     BRIDGE = [];
+    GAME = new BridgeGame();
 
     play() {
         this.start();
@@ -21,7 +22,11 @@ class App {
             length,
             BridgeRandomNumberGenerator
         );
+        this.GAME.set(this.BRIDGE);
     }
+    // async move() {
+    //     const direction = await InputView.readMoving();
+    // }
 }
 
 module.exports = App;

@@ -35,9 +35,30 @@ const InputView = {
     },
     /**
      * 사용자가 이동할 칸을 입력받는다.
+     * @returns {Promise}
      */
-    readMoving() {},
-
+    readMoving() {
+        return new Promise((resolve, reject) => {
+            MissionUtils.Console(
+                readLine(
+                    "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+                    (input) => {
+                        resolve(this.checkMoving(input));
+                    }
+                )
+            );
+        });
+    },
+    /**
+     * 이동할 칸에 대한 검사
+     * @param {string} input
+     * @return {number}
+     */
+    checkMoving(input) {
+        if (input !== "U" && input !== "D")
+            throw new Error("[ERROR] 입력은 U, D로만 가능합니다.");
+        return input === "U" ? 0 : 1;
+    },
     /**
      * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
      */
