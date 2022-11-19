@@ -448,3 +448,12 @@ describe('위치 파악 메서드 테스트', () => {
     }).toThrow(POSITION_ERROR_TEXT);
   });
 });
+
+describe('위치 기록 저장 메서드 테스트', () => {
+  test('메소드 이름은 "setPositionLog"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'setPositionLog';
+
+    expect(bridgeGame.setPositionLog.name).toEqual(METHOD_NAME);
+  });
+});
