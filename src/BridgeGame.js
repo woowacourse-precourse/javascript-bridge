@@ -1,4 +1,4 @@
-const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -11,15 +11,25 @@ class BridgeGame {
    */
   move(inputLetter, answerArr) {
     if (this.count < answerArr.length) {
-      if (inputLetter === answerArr[this.count]) {
-        InputView.count++;
-        console.log('정답');
-      }
-      if (inputLetter !== answerArr[this.count]) {
-        this.count++;
-        console.log('탈락!');
-      }
+      if (inputLetter === answerArr[this.count])
+        return this.moveIfCorrect(inputLetter);
+      if (inputLetter !== answerArr[this.count])
+        return this.moveIfWrong(inputLetter);
     }
+  }
+
+  moveIfCorrect(inputLetter) {
+    this.count++;
+    console.log('정답');
+    this.answer = true;
+    OutputView.printMap(this.answer, inputLetter);
+  }
+
+  moveIfWrong(inputLetter) {
+    this.count++;
+    console.log('탈락!');
+    this.answer = false;
+    OutputView.printMap(this.answer, inputLetter);
   }
 
   /**
