@@ -30,24 +30,21 @@ const InputView = {
    */
   readMoving(callbackArr) {
     const [moveForward, ...rest] = callbackArr;
-
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (userInput) => {
-      const canMoveForward = moveForward.call(this, userInput);
-
-      if (canMoveForward) {
-        InputView.readMoving.bind(this)(callbackArr);
-      }
-
-      InputView.readGameCommand.call(this, rest);
+      const [canMoveForward, isGameEnd] = moveForward.call(this, userInput);
+      if (!isGameEnd && canMoveForward) InputView.readMoving.bind(this)(callbackArr);
+      if (!canMoveForward) InputView.readGameCommand.call(this, rest);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (userInput) => {
-      this.gameCommand = Number(userInput);
+  readGameCommand(callbackArr) {
+    const [gameControl] = callbackArr;
+
+    Console.readLine('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (userInput) => {
+      gameControl.call(this, userInput);
     });
   },
 

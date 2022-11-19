@@ -28,15 +28,22 @@ class Result {
   addSuffix(lastFragment, canMoveForward, rightDirection) {
     if (canMoveForward) {
       if (rightDirection === lastFragment) return ' O ]';
+
       return '   ]';
     }
 
-    if (rightDirection === lastFragment) return ' X ]';
+    if (rightDirection === 'D' && lastFragment === 'U') return ' X ]';
+    if (rightDirection === 'U' && lastFragment === 'D') return ' X ]';
+
     return '   ]';
   }
 
   print() {
     printMap(this.result);
+  }
+
+  printResult(tryCount) {
+    printResult(this.result, tryCount, this.canMoveForward);
   }
 }
 

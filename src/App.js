@@ -36,6 +36,7 @@ class App {
   }
 
   gameEnd() {
+    this.game.printResult();
     InputView.close();
   }
 }
