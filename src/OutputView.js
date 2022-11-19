@@ -30,6 +30,7 @@ const OutputView = {
     const lowerBridgeString = OutputView.makeBridgeString(bridge, inputs, "D");
     Console.print(upperBridgeString);
     Console.print(lowerBridgeString);
+    OutputView.printNewLine();
   },
 
   /**
@@ -47,7 +48,6 @@ const OutputView = {
   printResult(bridge, inputs, gameCount) {
     Console.print(OutputView.GAME_RESULT_MESSAGE);
     OutputView.printMap(bridge, inputs);
-    OutputView.printNewLine();
     OutputView.printIsSuccess(bridge, inputs);
     OutputView.printGameCount(gameCount);
     Console.close();
