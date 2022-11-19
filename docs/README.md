@@ -79,8 +79,6 @@
 
 # 📌 기능 구현
 
-## Controllers/
-  * 다리에 대한 상태를 랜덤으로 설정하게 0,1을 반환하는 기능을 담당 - `BridgeRandomNumberGenerator`
 
 ## Views/
   * 사용자에게 입력 받을 수에 대한 설명과 입력받은 수를 반환을 담당 - `inputView`
@@ -98,6 +96,10 @@
 
 ## BridgeMaker
   * 다리의 크기와 다리변수를 생성하는 함수를 통해 다리를 생성하는 기능을 담당 -`makeBridge`
+
+## BridgeRandomNumberGenerator
+  * 다리에 대한 상태를 랜덤으로 설정하게 0,1을 반환하는 기능을 담당 - `BridgeRandomNumberGenerator`
+  
 ## Validate
   * 다리 크기에 대한 입력의 유효성을 검증하는 기능을 담당 -`isValidateInputBridgeSize`
 
