@@ -31,14 +31,14 @@ class App {
   }
 
   getUserMoving() {
-    readMoving((userInput) => {
-      checkMoveString(userInput);
-      this.moveBridge(userInput);
+    readMoving((userMove) => {
+      checkMoveString(userMove);
+      this.moveBridge(userMove);
     });
   }
 
-  moveBridge(userInput) {
-    const move = this.bridgeGame.move(this.bridge, userInput);
+  moveBridge(userMove) {
+    const move = this.bridgeGame.move(this.bridge, userMove);
     const upBridge = this.bridgeGame.getupBridge();
     const downBridge = this.bridgeGame.getDownBridge();
     move;
