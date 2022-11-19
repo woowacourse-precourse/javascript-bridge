@@ -8,8 +8,8 @@ const { generateRandomNumber } = require('../utils/bridgeHandler');
 class BridgeGame {
   #myBridge;
 
-  createBridge() {
-    #myBridge = BridgeMaker(this.size, generateRandomNumber);
+  createBridge(size) {
+    this.#myBridge = BridgeMaker.makeBridge(size, generateRandomNumber);
   }
 
   get myBridge() {

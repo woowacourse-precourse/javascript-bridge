@@ -1,29 +1,30 @@
+const BridgeGame = require('../Models/BridgeGame');
 const InputView = require('../Views/InputView');
 const OutputView = require('../Views/OutputView');
 
 class GameController {
+  #size;
+
   constructor() {
     this.outputView = OutputView;
     this.inputView = InputView;
-    this.size = 0;
+    this.bridgeGame = new BridgeGame();
   }
 
   startGame() {
     this.outputView.printStart();
-    this.selectBridgeSize();
+    this.inputBridgeSize();
   }
 
-  selectBridgeSize() {
+  inputBridgeSize() {
     this.inputView.readBridgeSize((userInput) => {
-      const size = this.inputView.getBridegeSize(userInput);
-      console.log('size is ', size);
-      this.nextStep();
+      this.#size = this.inputView.getBridegeSize(userInput);
+      this.buildBridge();
     });
   }
 
-  nextStep() {
-    console.log(123);
-    Console.close();
+  buildBridge() {
+    this.bridgeGame.createBridge(this.size);
   }
 }
 

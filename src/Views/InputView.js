@@ -4,6 +4,10 @@ const { validateBridgeSize } = require('../utils/validations');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
+ * 제공된 InputView 객체를 활용해 구현해야 한다.
+ * InputView의 파일 경로는 변경할 수 있다.
+ * InputView의 메서드의 인자는 변경할 수 있다.
+ * 사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
  */
 const InputView = {
   /**
@@ -18,8 +22,7 @@ const InputView = {
   },
 
   getBridegeSize(size) {
-    console.log(1);
-    return size;
+    return Number(size);
   },
 
   /**
