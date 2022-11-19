@@ -12,8 +12,8 @@ class Bridge {
     }
   }
 
-  getPassableBridge(position) {
-    return this.#bridge[position];
+  isMovable(position, direction) {
+    return this.#bridge[position] === direction;
   }
 }
 
