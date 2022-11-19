@@ -40,3 +40,15 @@ class CheckUserMove{
         }
     } 
 }
+
+class CheckWhetherGameRunning{
+    #value
+    constructor(value){
+        this.#value = value;
+        validate(value);
+    }
+
+    validate(value){
+
+    }
+}
