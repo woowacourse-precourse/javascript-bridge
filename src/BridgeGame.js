@@ -13,30 +13,20 @@ class BridgeGame {
     this.#userPosition = null;
   }
 
-  static replace(target, item1, item2) {
-    const [COMPARISON_TARGET_1, RETURN_TARGET_1] = item1;
-    const [COMPARISON_TARGET_2, RETURN_TARGET_2] = item2;
-
-    if (target === COMPARISON_TARGET_1) return RETURN_TARGET_1;
-    if (target === COMPARISON_TARGET_2) return RETURN_TARGET_2;
-
-    return Validation.throwError(Validation.RANGE_ERROR_TEXT);
-  }
-
   static replaceString(numberValue) {
     const TARGET_NUMBER = Application.convertNumber(numberValue);
     const REPLCE_ITME_1 = [0, 'D'];
     const REPLCE_ITME_2 = [1, 'U'];
 
-    return BridgeGame.replace(TARGET_NUMBER, REPLCE_ITME_1, REPLCE_ITME_2);
+    return Application.replace(TARGET_NUMBER, REPLCE_ITME_1, REPLCE_ITME_2);
   }
 
   static replaceNumber(stringValue) {
-    const TARGET_NUMBER = stringValue;
+    const TARGET_STRING = stringValue;
     const REPLCE_ITME_1 = ['D', 1];
     const REPLCE_ITME_2 = ['U', 0];
 
-    return BridgeGame.replace(TARGET_NUMBER, REPLCE_ITME_1, REPLCE_ITME_2);
+    return Application.replace(TARGET_STRING, REPLCE_ITME_1, REPLCE_ITME_2);
   }
 
   static checkIncludeUandD(userInput) {
