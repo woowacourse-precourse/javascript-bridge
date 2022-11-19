@@ -62,11 +62,9 @@ const InputView = {
     BridgeGame.move();
     OutputView.printMap();
     if (BridgeGame.isFailure()) return this.readGameCommand();
-    if (BridgeGame.getPosition() !== GameInfo.bridgeSize - 1) {
-      return this.readMoving();
-    }
-    GameInfo.gameResult = "성공";
-    return OutputView.printResult();
+
+    return (BridgeGame.getPosition() !== GameInfo.bridgeSize - 1) ?
+      this.readMoving() : OutputView.printSuccess();
   },
 
   /**
