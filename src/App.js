@@ -16,22 +16,36 @@ class App {
     this.getMove();
   }
 
-  getMove(){
+  getMove() {
     InputView.readMoving(this);
   }
 
+  // getCommand() {
+  //   InputView.readGameCommand(this);
+  // }
+  
   proceedGame(input) {
     this.#userInput.push(input);
     this.printBridge();
-    
-    // const calcResult = this.#bridge.move(this.#userInput);
-
+    this.calcBridge();
   }
 
   printBridge() {
     const result = this.#bridge.makeBridgeString(this.#userInput);
     OutputView.printMap(result);
   }
+
+  calcBridge() {
+    const result = this.#bridge.move(this.#userInput);
+    if (result) {
+      this.getMove();
+    } else {
+      console.log('Game Over');
+      // this.#userInput = [];
+      // this.getCommand();
+    }
+  }
+  
 }
 
 const app = new App();
