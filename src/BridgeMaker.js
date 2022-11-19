@@ -6,7 +6,9 @@ const BridgeMaker = {
     const bridge = [];
     for (let i = 0; i < size; i += 1) {
       bridge.push(
-        generateRandomNumber() === RANDOM_UPPER_INCLUSIVE ? MOVE.UP : MOVE.DOWN
+        Number(generateRandomNumber()) === RANDOM_UPPER_INCLUSIVE
+          ? MOVE.UP
+          : MOVE.DOWN
       );
     }
 
