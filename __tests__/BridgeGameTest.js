@@ -10,7 +10,7 @@ describe('BridgeGame 테스트', () => {
       bridgeGame.move(moving);
     });
 
-    expect(bridgeGame.isSuccessMove()).toBeTruthy();
+    expect(bridgeGame.canMove()).toBeTruthy();
   });
 
   test('이동 실패 테스트', () => {
@@ -21,7 +21,7 @@ describe('BridgeGame 테스트', () => {
       bridgeGame.move(moving);
     });
 
-    expect(bridgeGame.isSuccessMove()).toBeFalsy();
+    expect(bridgeGame.canMove()).toBeFalsy();
   });
 
   test('생성된 다리와 건넌 다리의 길이가 일치 테스트', () => {

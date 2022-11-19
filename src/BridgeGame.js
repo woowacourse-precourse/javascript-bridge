@@ -21,7 +21,7 @@ class BridgeGame {
     this.#attempt += 1;
   }
 
-  isSuccessMove() {
+  canMove() {
     const index = this.#movingBridge.length - 1;
     return this.#movingBridge[index] === this.#bridge[index];
   }
