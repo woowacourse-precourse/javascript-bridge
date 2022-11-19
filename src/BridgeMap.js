@@ -49,7 +49,6 @@ class BridgeMap {
   }
 
   addCorrect(input, mapSource) {
-    // console.log(input, beforeMap, mapSource, 'addCorrect 확인용');
     const beforeMap = this.#bridgeMap;
     const [up, down] = beforeMap;
     if (input === 'D') {
@@ -77,15 +76,3 @@ class BridgeMap {
 }
 
 module.exports = BridgeMap;
-
-const app = new BridgeMap();
-
-// console.log(up, down);
-// console.log(app.addFirstMap(true, 'D', [[], []]));
-// // console.log(app.cofirm(), '시작');
-// // console.log(app.confirmisFirst());
-// app.handleMap(true, 'D');
-// console.log(app.cofirm(), '하나추가');
-app.handleMap(false, 'U');
-console.log(app.cofirm(), '최종');
-// console.log();

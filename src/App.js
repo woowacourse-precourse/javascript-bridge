@@ -43,15 +43,11 @@ class App {
     if (appStatus === 3) return this.progressBridgeMove();
     if (appStatus === 4) {
       this.#moveStatement = this.#brdigeGame.move(this.#moveAnswer, this.#bridge);
-      console.log(this.#brdigeGame.getBridgeLengthStatus(), this.#bridge, '확인');
-      console.log(this.#moveStatement);
       if (this.#moveStatement) {
         this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
         // OutputView.printMap(this.#bridgeMap.getMap());
-        console.log(this.#brdigeGame.getBridgeLengthStatus(), this.#gameEndConditionValue, '비교');
         this.#bridgeMap.cofirm();
         // if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
-        //   console.log('끝');
         // }
         if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
           this.#gameEndBoolean = true;
@@ -107,6 +103,8 @@ class App {
       }
     });
   }
+
+  validAssign(answer, Validator) {}
 
   progressRetryGame() {
     InputView.readGameCommand((answer) => {

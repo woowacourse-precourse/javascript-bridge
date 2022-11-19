@@ -37,7 +37,6 @@ const Validator = Object.freeze({
 
   checkCondition(input, conditionArray, error) {
     const trimedInput = input.trim();
-    console.log(conditionArray[1]);
     if (trimedInput !== conditionArray[0] && trimedInput !== conditionArray[1]) {
       throw new Error(error);
     }
@@ -60,15 +59,3 @@ const Validator = Object.freeze({
 });
 
 module.exports = Validator;
-
-// console.log(
-//   Validator.checkCondition(
-//     '22',
-//     Validator.GAME_OPTION_CONDITIONS,
-//     Validator.ERROR_MESSAGES.ONLY_R_Q,
-//   ),
-// );
-
-// console.log(Validator.checkSpace('1 2'));
-
-// console.log(Validator.confirmOfCondition('D', 'move'));

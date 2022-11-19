@@ -25,12 +25,10 @@ class BridgeGame {
 
   incrementNumberOfTry() {
     this.#numberOftry += 1;
-    console.log(this.#numberOftry);
   }
 
   incrementBridgeLengthStatus() {
     this.#bridgeLengthStatus += 1;
-    console.log(this.#bridgeLengthStatus, '브릿지스테이터스');
   }
 
   /**
@@ -39,11 +37,8 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(input, bridge) {
-    console.log(this.#bridgeLengthStatus, '지금다리길이');
-    const nowBridgeLength = this.#bridgeLengthStatus;
     if (bridge[this.#bridgeLengthStatus] === input) {
       this.incrementBridgeLengthStatus();
-      console.log(nowBridgeLength, this.#bridgeLengthStatus);
       return true;
     }
     return false;

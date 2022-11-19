@@ -35,7 +35,3 @@ const OutputView = Object.freeze({
 });
 
 module.exports = OutputView;
-
-console.log(OutputView.printMap(mockMap));
-
-console.log(OutputView.printResult(mockMap, 5, true));

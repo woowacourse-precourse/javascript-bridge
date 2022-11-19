@@ -23,5 +23,3 @@ const BridgeMaker = Object.freeze({
 });
 
 module.exports = BridgeMaker;
-
-console.log(BridgeMaker.makeBridge(20));
