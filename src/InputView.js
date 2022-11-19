@@ -12,6 +12,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(MESSAGE.INPUT_BRIDGE_LENGTH, (inputBridgeSize) => {
       Validate.isNumber(inputBridgeSize);
+      Validate.checkLength(inputBridgeSize);
 
       // console.log(inputBridgeSize);
     });
