@@ -64,6 +64,7 @@ class App {
     printResult(this.#game.result, this.#game.tryCount, this.#game.status);
     end();
   }
+  
   errorHandler(err) {
     printError(err);
     if (err.name === ERROR_NAME.BRIDGE)

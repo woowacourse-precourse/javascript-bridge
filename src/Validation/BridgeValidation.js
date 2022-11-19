@@ -5,6 +5,7 @@ module.exports = function bridgeValidate(input) {
   checkLength(input);
   isNumber(input);
 };
+
 function checkLength(input) {
   if (input < 3 || input > 20) {
     throw new CustomError(
@@ -13,6 +14,7 @@ function checkLength(input) {
     );
   }
 }
+
 function isNumber(input) {
   const check = /^[0-9]+$/;
   if (!check.test(input)) {

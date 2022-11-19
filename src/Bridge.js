@@ -14,6 +14,7 @@ class Bridge {
   checkLength(index) {
     return index < this.#bridgeArray.length;
   }
+
   getbridgePart(index) {
     return this.#bridgeArray[index];
   }

@@ -19,6 +19,7 @@ const OutputView = {
   printStart() {
     MissionUtils.Console.print(MESSAGE.START);
   },
+
   printMap(result) {
     MissionUtils.Console.print(result);
   },
@@ -35,6 +36,7 @@ const OutputView = {
     MissionUtils.Console.print(`${MESSAGE.IS_SUCCESS}${RESULT}`);
     MissionUtils.Console.print(`${MESSAGE.TRY_COUNT}${count}`);
   },
+
   printError(error) {
     MissionUtils.Console.print(error);
   },
