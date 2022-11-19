@@ -62,25 +62,26 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridge) {
-    Console.readLine(Messages.INPUT_RESTART_OR_END, (restartOrEnd) => {
-      this.validateGameCommand(restartOrEnd);
+    Console.readLine(Messages.INPUT_RESTART_OR_END, (restartOrQuit) => {
+      this.validateGameCommand(restartOrQuit);
       const totalCount = this.bridgeGame.countTry();
-      this.restartOrQuit(bridge, restartOrEnd, totalCount);
+      this.restartOrQuit(bridge, restartOrQuit, totalCount);
     });
   },
 
-  validateGameCommand(restartOrEnd) {
-    if (restartOrEnd !== 'R' && restartOrEnd !== 'Q') throw new Error(Messages.GAME_COMMAND_ERROR);
+  validateGameCommand(restartOrQuit) {
+    if (restartOrQuit !== 'R' && restartOrQuit !== 'Q')
+      throw new Error(Messages.GAME_COMMAND_ERROR);
   },
 
-  restartOrQuit(bridge, restartOrEnd, totalCount) {
-    if (restartOrEnd === 'R') {
+  restartOrQuit(bridge, restartOrQuit, totalCount) {
+    if (restartOrQuit === 'R') {
       this.bridgeGame.retry();
       OutputView.up = [];
       OutputView.down = [];
 
       this.readMoving(bridge);
-    } else if (restartOrEnd === 'Q') OutputView.printResult(totalCount);
+    } else if (restartOrQuit === 'Q') OutputView.printResult(totalCount);
   },
 };
 
