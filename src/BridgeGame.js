@@ -13,7 +13,7 @@ class BridgeGame {
   moveCount;
 
   // TODO: 메세지들 많아짐, 정리
-  constructor(welcomeMessage = '다리 건너기 게임을 시작합니다.', bridgeSizeMessage = '다리의 길이를 입력해주세요.', movingMessage = '이동할 칸을 선택해주세요. (위: U, 아래: D)') {
+  constructor(welcomeMessage = '다리 건너기 게임을 시작합니다.', bridgeSizeMessage = '다리의 길이를 입력해주세요.\n', movingMessage = '이동할 칸을 선택해주세요. (위: U, 아래: D)\n') {
     this.welcomeMessage = welcomeMessage;
     this.bridgeSizeMessage = bridgeSizeMessage;
     this.movingMessage = movingMessage;
