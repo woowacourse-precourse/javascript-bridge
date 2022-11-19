@@ -16,8 +16,14 @@ const MODEL_KEY = Object.freeze({
   tryCount: 'TRY_COUNT_BRIDGE_MODEL_KEY'
 });
 
+const UPDOWN_INDEX = Object.freeze({
+  U: 0,
+  D: 1
+});
+
 module.exports = {
   REGEX,
   ERROR_MESSAGE,
-  MODEL_KEY
+  MODEL_KEY,
+  UPDOWN_INDEX
 };
