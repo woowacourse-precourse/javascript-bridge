@@ -34,7 +34,7 @@ class BridgeGame {
 
   #judgeRound() {
     return {
-      sucess: this.#round === this.#bridge.length - 1,
+      sucess: this.#bridge.join('') === this.#inputs.map(({ move }) => move).join(''),
       process: this.#roundMoveable && this.#bridge.length - 1 > this.#round,
     };
   }

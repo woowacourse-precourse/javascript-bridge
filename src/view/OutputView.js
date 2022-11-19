@@ -8,7 +8,7 @@ const OutputView = {
    * 개임 시작 문구
    */
   printStart() {
-    return PRINTSTARTGAME;
+    Console.print(PRINTSTARTGAME);
   },
 
   /**

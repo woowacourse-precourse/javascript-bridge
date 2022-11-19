@@ -48,6 +48,7 @@ class BridgeProcess {
     [
       { sucess: true, process: false },
       (sucess, match) => {
+        console.log(sucess, match);
         this.#printFinalResult(sucess, match);
       },
     ],
