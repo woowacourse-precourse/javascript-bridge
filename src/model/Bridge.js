@@ -9,12 +9,7 @@ class Bridge {
 
   constructor(bridgeSize) {
     this.#bridgeSize = bridgeSize;
-    this.#bridge = makeBridge(bridgeSize, this.generateRandomNumber);
-  }
-
-  generateRandomNumber() {
-    const generatedPlace = BridgeRandomNumberGenerator.generate(); // 0이면 위, 1이면 아래
-    return generatedPlace;
+    this.#bridge = makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate());
   }
 
   print() {
