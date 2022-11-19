@@ -23,6 +23,15 @@ class GameController {
     this.#bridgeGame.makeBridge();
     this.readDirection();
   }
+
+  readDirection() {
+    InputView.readMoving(this.setMoving.bind(this));
+  }
+
+  setMoving(direction) {
+    this.#bridgeGame.move(direction);
+    this.showBridge();
+  }
 }
 
 const gc = new GameController();

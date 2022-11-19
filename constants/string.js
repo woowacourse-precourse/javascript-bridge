@@ -6,6 +6,8 @@ const STRING = Object.freeze({
   X: 'X',
   VERTICAL_BAR: ' | ',
   SPACE: ' ',
+  LEFT_BAR: '[',
+  RIGHT_BAR: ']',
 });
 
 module.exports = STRING;
