@@ -12,13 +12,13 @@ const OutputView = {
   printMap(bridgeAnswer, bridge) {
     BridgeValidator.checkBridgeAnswer(bridgeAnswer);
     BridgeValidator.checkBridge(bridge);
-    printBridgeByPosition(bridgeAnswer, bridge, 'U')
-    printBridgeByPosition(bridgeAnswer, bridge, 'D')
+    printBridgeByPosition(bridgeAnswer, bridge, 'U');
+    printBridgeByPosition(bridgeAnswer, bridge, 'D');
   },
 
   printBridgeByPosition(bridgeAnswer, bridge, position) {
-    const bridgeByPosition = bridgeAnswer.map((bridgeAnswerElement, index) => 
-    bridge[index] == position ? bridgeAnswerElement : " "
+    const bridgeByPosition = bridgeAnswer.map((bridgeAnswerElement, index) =>
+      bridge[index] == position ? bridgeAnswerElement : ' ',
     );
     const bridgeString = bridgeByPosition.join(' | ');
     MissionUtils.Console.readLine(`[ ${bridgeString} ]`);

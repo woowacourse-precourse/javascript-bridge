@@ -10,6 +10,7 @@ class BridgeGame {
   #currentPosition = 0;
   #maxPosition = 0;
   #isFinish = false;
+  #try = 1;
 
   constructor(bridge) {
     BridgeValidator.checkBridge(bridge, BRIDGE_LENGTH_MIN, BRIDGE_LENGTH_MIN);
@@ -41,11 +42,16 @@ class BridgeGame {
 
   moveNextFalse() {
     this.#bridgeAnswers.push('X');
+    this.#isFinish = true;
     return false;
   }
 
   get bridgeAnswers() {
     return this.#bridgeAnswers;
+  }
+
+  get isFinish() {
+    return this.#isFinish;
   }
 
   /**
