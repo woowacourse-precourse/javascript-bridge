@@ -17,6 +17,7 @@ class BridgeGame {
 
   move(nth, moveLocation) {
     if (this.#bridge[nth] === moveLocation) {
+      console.log(this.#gameResult, "게임 결과 배열 ");
       this.#gameResult.push(new Array(moveLocation, "O"));
       return this.#gameResult;
     }

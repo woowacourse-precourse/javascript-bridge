@@ -12,7 +12,7 @@ const OutputView = {
   printMap(result) {
     let printUp = "[";
     result.forEach((nth, i) => {
-      if (nth[i][0] === "U") printUp += ` ${result[i][1]} `;
+      if (nth[0] === "U") printUp += ` ${nth[1]} `;
       else printUp += "   ";
       if (i === result.length - 1) printUp += "]";
       else printUp += "|";
@@ -24,7 +24,7 @@ const OutputView = {
   printMapDown(result) {
     let printDown = "[";
     result.forEach((nth, i) => {
-      if (nth[i][0] === "D") printDown += ` ${result[i][1]} `;
+      if (nth[0] === "D") printDown += ` ${nth[1]} `;
       else printDown += "   ";
       if (i === result.length - 1) printDown += "]";
       else printDown += "|";
@@ -36,7 +36,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult() {
+    console.log("다리 다 건넘!");
+  },
 
   printGameStart() {
     MissionUtils.Console.print("다리 건너기 게임을 시작합니다.\n");
