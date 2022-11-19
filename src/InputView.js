@@ -1,5 +1,10 @@
 const { Console } = require("@woowacourse/mission-utils");
 const ERROR = require("../utils/constant");
+const BridgeMaker = require("./BridgeMaker");
+const { generate } = require("./BridgeRandomNumberGenerator");
+const BridgeGame = require("./BridgeGame");
+
+const bridgeGame = new BridgeGame();
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -10,24 +15,76 @@ const InputView = {
    */
 
   readBridgeSize() {
-    let result;
+    let randomBridge;
 
     Console.print("다리 건너기 게임을 시작합니다.\n");
     Console.readLine("다리의 길이를 입력해주세요.\n", (aNumber) => {
       if (isNaN(aNumber)) {
         throw new Error(ERROR.NOT_A_NUMBER);
       }
-      result = Number(aNumber);
+      randomBridge = BridgeMaker.makeBridge(Number(aNumber), () => generate());
+      Console.print(randomBridge);
+      this.readMoving(randomBridge);
     });
-
-    BridgeMaker.makeBridge(result, () => generate());
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (command) => {});
+
+  nextStep(randomBridge, upperBridge, lowerBridge) {
+    Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (command) => {
+      if (command !== "U" && command !== "D") throw new Error(ERROR.UP_DOWN_COMMAND);
+      if (randomBridge[bridgeGame.index] === command) {
+        if (command === "U") {
+          upperBridge.push("O");
+          lowerBridge.push(" ");
+          bridgeGame.increaseIndex();
+          //OutPutView
+          Console.print(upperBridge);
+          Console.print(lowerBridge);
+          //
+          this.nextStep(randomBridge, upperBridge, lowerBridge);
+        }
+        if (command === "D") {
+          upperBridge.push(" ");
+          lowerBridge.push("O");
+          bridgeGame.increaseIndex();
+          //OutPutView
+          Console.print(upperBridge);
+          Console.print(lowerBridge);
+          //
+          this.nextStep(randomBridge, upperBridge, lowerBridge);
+        }
+      } else {
+        if (command === "U") {
+          upperBridge.push("X");
+          lowerBridge.push(" ");
+          //OutPutView
+          Console.print(upperBridge);
+          Console.print(lowerBridge);
+          //
+          this.readGameCommand();
+          bridgeGame.retry();
+        }
+        if (command === "D") {
+          upperBridge.push(" ");
+          lowerBridge.push("X");
+          //OutPutView
+          Console.print(upperBridge);
+          Console.print(lowerBridge);
+          //
+          this.readGameCommand();
+          bridgeGame.retry();
+        }
+      }
+    });
+  },
+
+  readMoving(randomBridge) {
+    const upperBridge = [];
+    const lowerBridge = [];
+    this.nextStep(randomBridge, upperBridge, lowerBridge);
   },
 
   /**

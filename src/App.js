@@ -5,7 +5,8 @@ const { Console } = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    InputView.readBridgeSize();
+    const randomBridge = InputView.readBridgeSize();
+    // InputView.readMoving(randomBridge);
   }
 }
 
