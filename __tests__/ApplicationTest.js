@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
+const InputView = require("../src/InputView");
 const BridgeMaker = require("../src/BridgeMaker");
 
 const mockQuestions = (answers) => {
@@ -34,6 +35,22 @@ const runException = (inputs) => {
   const app = new App();
 
   app.play();
+
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
+
+const runBridgeSizeException = (size) => {
+  mockQuestions([size]);
+  const logSpy = getLogSpy();
+  InputView.readBridgeSize();
+
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
+
+const runReadMovingException = () => {
+  mockQuestions(["M"]);
+  const logSpy = getLogSpy();
+  InputView.readMoving(0, []);
 
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
@@ -83,5 +100,13 @@ describe("다리 건너기 테스트", () => {
 
   test("예외 테스트", () => {
     runException(["a"]);
+  });
+  // 다리 사이즈가 3 ~ 20 사이의 수가 아니면 ERROR.
+  test("다리 사이즈 예외 테스트", () => {
+    runBridgeSizeException(1);
+  });
+
+  test("이동 칸 입력 예외 테스트", () => {
+    runReadMovingException(1);
   });
 });
