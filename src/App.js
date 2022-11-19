@@ -4,6 +4,7 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./views/OutputView');
 const BridgeValidation = require('./validations/Bridge');
+const MoveValidation = require('./validations/Move');
 
 class App {
   game;
@@ -14,14 +15,17 @@ class App {
   play() {
     OutputView.printStart();
 
-    InputView.startInteraction.bind(this)([this.createBridgeGame]);
+    InputView.startInteraction.bind(this)([this.createBridgeGame, this.moveForward]);
   }
 
   createBridgeGame(input) {
-    // Validation
     BridgeValidation.isValidSize(input);
 
     this.game = new BridgeGame(input);
+  }
+
+  moveForward(input) {
+    MoveValidation.validate(input);
   }
 }
 
