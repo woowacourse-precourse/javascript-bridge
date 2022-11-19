@@ -179,9 +179,117 @@ Throw 로 예외를 발생시킬 시 테스트 코드 오류가 생긴다.
 
 
 
+### 출력문 리팩토링
+
+> 기존 코드
+
+```js
+// App.js
+      if (GAME.move(bridge,USER_MOVE,i) === 'X' ) return this.xCase(BRIDGE,USER_MOVE,GAME.move(bridge,USER_MOVE,i))
+      BRIDGE = this.printBridge(GAME.move(bridge,USER_MOVE,i))
+    }
+    this.finishGameSuccess(BRIDGE)
+  }
+
+  // true 출력
+	@@ -80,7 +80,7 @@ class App {
+  failCase(userChoice,bridge){
+    switch(userChoice){
+      case 'Q':
+        return this.finishGameFail(bridge)
+      case 'R':
+        this.TRY_TIME += 1
+        return this.movePrint()
+	@@ -92,16 +92,10 @@ class App {
+    return OutputView.printMap(this.BRIDGE_U,this.BRIDGE_D)
+  }
+
+  finishGameSuccess(bridge){
+    if (bridge.length === 0) return'[ERROR]'
+    if (bridge === '[ERROR]') return '[ERROR]'
+    OutputView.printResult('SUCCESS',bridge,this.TRY_TIME)
+  }
+
+  finishGameFail(bridge) {
+    if (bridge.length === 0) return'[ERROR]'
+    if (bridge === '[ERROR]') return '[ERROR]'
+    OutputView.printResult('FAIL',bridge,this.TRY_TIME)
+  }
+}
+    
+// OutputView
+printResult(RESULT , bridge , try_time) {
+    if (RESULT === 'SUCCESS') { this.printSuccess(bridge,try_time) }
+    if (RESULT === 'FAIL') {this.printFail(bridge,try_time)}
+  },
+
+  printSuccess(bridge,try_time){
+    MissionUtils.Console.print("최종 게임 결과")
+    MissionUtils.Console.print(`${bridge[0]}`)
+    MissionUtils.Console.print(`${bridge[1]}`)
+    MissionUtils.Console.print("게임 성공 여부: 성공")
+    MissionUtils.Console.print(`총 시도한 횟수: ${try_time}`)
+
+  },
+
+  printFail(bridge,try_time){
+    MissionUtils.Console.print("최종 게임 결과")
+    MissionUtils.Console.print(`${bridge[0]}`)
+    MissionUtils.Console.print(`${bridge[1]}`)
+    MissionUtils.Console.print("게임 성공 여부: 실패")
+    MissionUtils.Console.print(`총 시도한 횟수: ${try_time}`)
+  },
+```
 
 
 
+> 변경 코드
+
+
+
+```js
+// App.js
+      if (GAME.move(bridge,USER_MOVE,i) === 'X' ) return this.xCase(BRIDGE,USER_MOVE,GAME.move(bridge,USER_MOVE,i))
+      BRIDGE = this.printBridge(GAME.move(bridge,USER_MOVE,i))
+    }
+    this.finishGame(BRIDGE,'성공')
+  }
+
+  // true 출력
+	@@ -80,7 +80,7 @@ class App {
+  failCase(userChoice,bridge){
+    switch(userChoice){
+      case 'Q':
+        return this.finishGame(bridge,'실패')
+      case 'R':
+        this.TRY_TIME += 1
+        return this.movePrint()
+	@@ -92,16 +92,10 @@ class App {
+    return OutputView.printMap(this.BRIDGE_U,this.BRIDGE_D)
+  }
+
+  finishGame(bridge,result) {
+    if (bridge.length === 0) return'[ERROR]'
+    if (bridge === '[ERROR]') return '[ERROR]'
+    OutputView.printResult(result,bridge,this.TRY_TIME)
+  }
+}
+    
+// OutputView.js
+  printResult(RESULT , bridge , try_time) {
+    MissionUtils.Console.print("최종 게임 결과")
+    MissionUtils.Console.print(`${bridge[0]}`)
+    MissionUtils.Console.print(`${bridge[1]}`)
+    MissionUtils.Console.print(`게임 성공 여부: ${RESULT}`)
+    MissionUtils.Console.print(`총 시도한 횟수: ${try_time}`)
+  },
+```
+
+- 기존 코드의 출력문에서는 게임 결과에 따라 '성공' || '실패' 로 나누어서 출력문을 따로 설정하였습니다.
+
+  그 결과 코드가 중복이 되었고 재사용성이 떨어지는 단점을 확인하였습니다
+
+  게임의 결과를 변수로 두어 사용함으로써, 나누어져있던 코드를 합치고 재사용성을 키울 수 있었습니다.
 
 
 
