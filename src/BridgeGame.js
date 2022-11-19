@@ -23,6 +23,25 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() { }
+
+  /**
+   * 현재 다리를 올바르게 건너고 있는지를 판단하는 함수
+   * @returns {boolean} 현재 다리를 올바르게 건너고 있는지 여부
+   */
+  isGoingCorrect() {
+    for (let i = 0; i < this.passed.length; i++) {
+      if (this.passed[i] !== this.#path[i]) return false;
+    }
+    return true;
+  }
+
+  /**
+   * 현재 다리를 완전히 건넜는지 판단하는 함수
+   * @returns {boolean} 다리를 완전히 건넜는지 여부
+   */
+  crossedAll() {
+    return this.isGoingCorrect() && (this.passed.length === this.#path.length);
+  }
 }
 
 module.exports = BridgeGame;
