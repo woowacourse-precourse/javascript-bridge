@@ -3,6 +3,8 @@ const BRIDGE_SIZE_MAX_RANGE = 20;
 const DOWNSIDE_SYMBOL_NUM = 0;
 const DOWNSIDE_SYMBOL = 'D';
 const UPSIDE_SYMBOL = 'U';
+const RESTART_TRIGGER = 'R';
+const QUIT_TRIGGER = 'Q';
 
 module.exports = {
   BRIDGE_SIZE_MIN_RANGE,
@@ -10,4 +12,6 @@ module.exports = {
   DOWNSIDE_SYMBOL_NUM,
   DOWNSIDE_SYMBOL,
   UPSIDE_SYMBOL,
+  RESTART_TRIGGER,
+  QUIT_TRIGGER,
 };
