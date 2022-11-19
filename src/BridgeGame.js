@@ -3,9 +3,12 @@
  */
 const OutputView = require("./OutputView");
 const InputView = require("./InputView");
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 class BridgeGame {
   constructor() {
+    this.bridge = [];
     this.size = 0;
   }
 
@@ -17,6 +20,13 @@ class BridgeGame {
 
   bridgeSize() {
     this.size = InputView.readBridgeSize();
+  }
+
+  createBridge() {
+    this.bridge = BridgeMaker.makeBridge(
+      this.size,
+      BridgeRandomNumberGenerator.generate
+    );
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
