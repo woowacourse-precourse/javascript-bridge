@@ -33,6 +33,7 @@ class BridgeGame {
       return this.progressMove(input);
     }
     if (input === 'R' || input === 'Q') {
+      return this.progressRetryOrQuit(input);
     }
   }
 
@@ -41,6 +42,15 @@ class BridgeGame {
     this.increamentMoveCount();
     this.compareMoveInput(input, moveCount);
     this.compareMove(input, moveCount, this.#mapList);
+  }
+
+  progressRetryOrQuit(input) {
+    if (input === 'Q') {
+      return this.finish(this.#mapList, '실패', this.#totalCount);
+    }
+
+    this.retry(input, this.#mapList);
+    this.increamentTotalCount();
   }
 
   compareMoveInput(input, index) {
