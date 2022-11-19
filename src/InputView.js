@@ -52,13 +52,10 @@ const InputView = {
       const error = Check.checkCommand(command);
       if (error) return this.readGameCommand(bridgeGame);
 
-      if (command === COMMAND.RESTART) {
-        bridgeGame.retry();
-        return this.readMoving(bridgeGame, size);
-      }
-      if (command === COMMAND.END) {
-        return bridgeGame.finish(RESULT.FAIL);
-      }
+      if (command === COMMAND.END) return bridgeGame.finish(RESULT.FAIL);
+
+      bridgeGame.retry();
+      return this.readMoving(bridgeGame, size);
     });
   },
 };
