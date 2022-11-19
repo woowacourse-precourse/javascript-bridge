@@ -11,10 +11,10 @@ const OutputView = {
      * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      * 메서드도 추가할 수 있다.
      */
-    printMap(upBridge, downBridge, bridgeArray) {
+    printMap(upBridge, downBridge) {
         console.log("OutputView.printMap-----------");
-        console.log("[" + upBridge.join("|") + "]");
-        console.log("[" + downBridge.join("|") + "]");
+        Console.print(STRUCTURE.ENTRANCE + upBridge.join(STRUCTURE.LINK) + STRUCTURE.EXIT);
+        Console.print(STRUCTURE.ENTRANCE + downBridge.join(STRUCTURE.LINK) + STRUCTURE.EXIT);
     },
 
     /**
@@ -26,6 +26,8 @@ const OutputView = {
     printResult() {
         console.log("결과출력");
     },
+
+    printFail() {},
 };
 
 module.exports = OutputView;

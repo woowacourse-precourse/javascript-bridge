@@ -3,6 +3,7 @@ const { MESSAGE } = require("./constant/message.js");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker.js");
 const BridgeGame = require("./BridgeGame");
+const Validation = require("./Validation.js");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -14,8 +15,8 @@ const InputView = {
     readBridgeSize() {
         console.log("InputView.readBridgeSize-----------");
         Console.readLine(MESSAGE.SIZE, (size) => {
+            Validation.checkSizeInput(size);
             const bridgeGame = new BridgeGame(makeBridge(size, generate));
-            console.log(bridgeGame.bridgeArray);
             this.readMoving(bridgeGame);
         });
     },
@@ -26,12 +27,13 @@ const InputView = {
     readMoving(bridgeGame) {
         console.log("InputView.readMoving-----------");
         Console.readLine(MESSAGE.MOVE, (move) => {
+            Validation.checkMoveInput(move);
             if (bridgeGame.isBadMove(move)) {
-                bridgeGame.fail(move);
+                bridgeGame.showFail(move);
                 this.readGameCommand(bridgeGame);
             } else {
                 if (bridgeGame.isSuccess(move)) {
-                    bridgeGame.success(move);
+                    bridgeGame.showSuccess(move);
                 } else {
                     bridgeGame.move(move);
                     this.readMoving(bridgeGame);
@@ -46,10 +48,11 @@ const InputView = {
     readGameCommand(bridgeGame) {
         console.log("InputView.readGameCommand-----------");
         Console.readLine(MESSAGE.RESTART, (answer) => {
+            Validation.checkRestartInput(answer);
             if (bridgeGame.retry(answer)) {
                 this.readMoving(bridgeGame);
             } else {
-                bridgeGame.finish();
+                bridgeGame.showFinish();
             }
         });
     },
