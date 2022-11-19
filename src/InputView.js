@@ -85,7 +85,27 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    Console.readLine(INPUT_MESSAGES.retry, (command) => {
+      this.validateGameCommand(command, callback);
+    });
+  },
+
+  validateGameCommand(command, callback) {
+    try {
+      this.hanldeWrongCommandException(command);
+      callback(command);
+    } catch (error) {
+      Console.print(error);
+      this.readGameCommand(callback);
+    }
+  },
+
+  hanldeWrongCommandException(command) {
+    if (command !== BRIDGE_CONSTANTS.retry && command !== BRIDGE_CONSTANTS.quit) {
+      throw ERROR_MESSAGES_BRIDGE.wrongCommand;
+    }
+  },
 };
 
 module.exports = InputView;

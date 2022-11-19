@@ -4,6 +4,7 @@ const OutputView = require('./OutputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
+const { BRIDGE_CONSTANTS } = require('./GameConstants');
 
 class GameController {
   constructor() {
@@ -32,11 +33,7 @@ class GameController {
       if (IS_MOVE) {
         this.move(index + 1);
       } else {
-        // 게임 탈락
-        this.failureResult();
-
-        // 재시도 묻기
-        return;
+        this.retryOrQuit();
       }
     };
 
@@ -59,6 +56,19 @@ class GameController {
     const maps = this.game.getMaps();
     this.outputView.printResult(maps, false, 1);
     this.end();
+  }
+
+  retryOrQuit() {
+    const onDeliveryCommand = (command) => {
+      if (command === BRIDGE_CONSTANTS.retry) {
+        this.game.retry(command);
+      } else {
+        this.failureResult();
+        this.end();
+      }
+    };
+
+    this.inputView.readGameCommand(onDeliveryCommand);
   }
 
   end() {

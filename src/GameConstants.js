@@ -9,6 +9,8 @@ const BRIDGE_CONSTANTS = Object.freeze({
   shapeOfEnd: ']',
   success: ' O ',
   failure: ' X ',
+  retry: 'R',
+  quit: 'Q',
 });
 
 module.exports = { BRIDGE_CONSTANTS };
