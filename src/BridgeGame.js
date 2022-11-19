@@ -2,7 +2,7 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridgeArray = Array.from({ length: 2 }, () => []);
+  #array = Array.from({ length: 2 }, () => []);
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -17,7 +17,7 @@ class BridgeGame {
         this.moveDownSide(bridge);
         break;
     }
-    return [this.#array[0], this.#array[1]];
+    return [this.#array[0], this.#array[1], this.#rightAnswer];
   }
 
   moveUpSide(bridge) {
@@ -35,21 +35,25 @@ class BridgeGame {
   moveRightUp() {
     this.#array[0].push(" O ");
     this.#array[1].push("   ");
+    this.#rightAnswer = true;
   }
 
   moveWrongUp() {
     this.#array[0].push("   ");
     this.#array[1].push(" X ");
+    this.#rightAnswer = false;
   }
 
   moveWrongDown() {
     this.#array[0].push(" X ");
     this.#array[1].push("   ");
+    this.#rightAnswer = false;
   }
 
   moveRightDown() {
     this.#array[0].push("   ");
     this.#array[1].push(" O ");
+    this.#rightAnswer = true;
   }
 
   /**
