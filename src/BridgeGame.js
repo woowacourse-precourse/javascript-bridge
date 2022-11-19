@@ -11,6 +11,10 @@ class BridgeGame {
     QUIT: 'Q',
   };
 
+  getNumberOfTry() {
+    return this.#numberOftry;
+  }
+
   incrementNumberOfTry() {
     this.#numberOftry += 1;
     console.log(this.#numberOftry);
