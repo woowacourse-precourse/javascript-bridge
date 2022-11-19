@@ -14,11 +14,20 @@ const ERROR_MSG = Object.freeze({
   invalidPosition: '[ERROR] 위: U, 아래: D 를 입력해주세요.'
 });
 
+const MAP_STATE = Object.freeze({
+  prefix: '[',
+  success: ' O ',
+  fail: ' X ',
+  empty: '   ',
+  postfix: ']'
+});
+
 module.exports = {
   OUTPUT_MSG,
   QUESTIONS,
   ERROR_MSG,
   MAX_BRIDGE_SIZE,
   MIN_BRIDGE_SIZE,
-  POSITIONS
+  POSITIONS,
+  MAP_STATE
 };

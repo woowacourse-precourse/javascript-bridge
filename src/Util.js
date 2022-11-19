@@ -1,4 +1,4 @@
-const { MIN_BRIDGE_SIZE, MAX_BRIDGE_SIZE } = require('./constants');
+const { MIN_BRIDGE_SIZE, MAX_BRIDGE_SIZE, POSITIONS } = require('./constants');
 
 const validateBridgeSize = len => {
   if (isNaN(+len)) return false;
