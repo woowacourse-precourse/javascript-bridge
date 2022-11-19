@@ -53,7 +53,7 @@ class BridgeValidator {
     return true;
   }
   static #isArray(array) {
-    if (Array.isArray(array)) {
+    if (!Array.isArray(array)) {
       throw new Error(ERROR.IS_ARRAY);
     }
     return true;
