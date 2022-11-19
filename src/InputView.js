@@ -27,6 +27,7 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     readLine(INPUT_MESSAGE.MOVING_DIRECTION, (direction) => {
+      validation.moveCommand(direction, MOVE.DIRECTION_UP, MOVE.DIRECTION_DOWN);
       bridgeGame.move(direction);
       if (this.isGameSuccess(bridgeGame)) return bridgeGame.successGameQuit();
       if (bridgeGame.getSelection().getState())
@@ -50,9 +51,14 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridgeGame) {
-    readLine(INPUT_MESSAGE.RESTART_OR_QUIT, (command) =>
-      bridgeGame.retry(command)
-    );
+    readLine(INPUT_MESSAGE.RETRY_OR_QUIT, (command) => {
+      validation.retryOrQuitCommand(
+        command,
+        RETRY_OR_QUIT.RETRY,
+        RETRY_OR_QUIT.QUIT
+      );
+      bridgeGame.retry(command);
+    });
   },
 };
 
