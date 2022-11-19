@@ -12,8 +12,8 @@ describe('다리 길이값 에러 테스트', () => {
     });
   });
 
-  test('숫자가 아닌 경우', () => {
-    const sizeValue = [' ', 'a', `\n`, 'BD'];
+  test('숫자가 아닌 입력이 포함된 경우 (소수점 입력 포함)', () => {
+    const sizeValue = [' ', 'a', `\n`, 'BD', '3.0', '10.25', '5.000000001'];
     const size = new BridgeSizeCheck();
 
     sizeValue.forEach(value => {

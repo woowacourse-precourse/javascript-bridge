@@ -19,7 +19,7 @@ class BridgeSizeCheck {
   };
 
   checkWord(size) {
-    if (!size.match(/[0-9]/g)) {
+    if (size.match(/[^0-9]/g)) {
       throw (ERROR.SIZE_WORD);
     };
   };
