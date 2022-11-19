@@ -14,13 +14,21 @@ const InputView = {
     Console.readLine("다리의 길이를 입력해주세요.\n", (size) => {
       Validation.isVaildBridgeSize(size);
       BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+      this.readMoving();
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(
+      "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+      (block) => {
+        Console.print(block);
+      }
+    );
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
