@@ -5,6 +5,8 @@ class App {
     console.log(SIZE);
     const MOVE = await InputView.readMoving();
     console.log(MOVE);
+    const RESTART_OR_END = await InputView.readGameCommand();
+    console.log(RESTART_OR_END);
   }
 }
 
