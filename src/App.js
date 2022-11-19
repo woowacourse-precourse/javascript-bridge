@@ -34,11 +34,11 @@ class App {
 
   progressApp(appStatus) {
     if (appStatus === 1) return this.questionBridgeMake();
-    if (appStatus === 2) return this.progressBridgeMake();
+    if (appStatus === 2) return this.runBridgeMake();
     if (appStatus === 3) return this.questionBridgeMove();
-    if (appStatus === 4) return this.progressBridgeMove();
+    if (appStatus === 4) return this.runBridgeMove();
     if (this.#appStatus === 5) return this.questionGameRetry();
-    if (this.#appStatus === 6) return this.progressGameRetry();
+    if (this.#appStatus === 6) return this.runGameRetry();
     return this.progressApp(this.#appStatus);
   }
 
@@ -56,7 +56,7 @@ class App {
     });
   }
 
-  progressBridgeMake() {
+  runBridgeMake() {
     this.#appStatus = 3;
     this.#bridge = BridgeMaker.makeBridge(this.#bridgeAnswer);
     this.#gameEndConditionValue = this.#bridge.length;
@@ -77,7 +77,7 @@ class App {
     });
   }
 
-  progressBridgeMove() {
+  runBridgeMove() {
     this.#moveStatement = this.#brdigeGame.move(this.#moveAnswer, this.#bridge);
     if (this.#moveStatement) return this.progressMovementTrue();
     return this.progressMovementFalse();
@@ -120,7 +120,7 @@ class App {
     });
   }
 
-  progressGameRetry() {
+  runGameRetry() {
     if (this.#gameOptionStatus) {
       this.retryApp();
       this.#appStatus = 3;
