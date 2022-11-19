@@ -38,7 +38,12 @@ class BridgeGame {
       : (this.#upResultArr.push(' '), this.#downResultArr.push(selectResult));
   }
 
-  retry() {}
+  retry() {
+    this.#isSameChar = [];
+    this.#upResultArr = [];
+    this.#downResultArr = [];
+    this.#isGameOver = false;
+  }
 }
 
 module.exports = BridgeGame;

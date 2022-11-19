@@ -31,11 +31,12 @@ class Controller {
     } catch {
       this.inputBridgeSize();
     }
-    this.#bridgeWay = BridgeMaker.makeBridge(
-      size,
-      BridgeRandomNumberGenerator.generate
-    );
+    this.getBridge(size, BridgeRandomNumberGenerator.generate);
     this.inputUserMoving();
+  }
+
+  getBridge(size, generater) {
+    this.#bridgeWay = BridgeMaker.makeBridge(size, generater);
   }
 
   inputUserMoving() {
@@ -73,6 +74,9 @@ class Controller {
     } catch {
       this.inputGameOver();
     }
+    this.#BridgeGame.retry();
+    this.#userSelect = [];
+    this.inputUserMoving();
   }
 }
 
