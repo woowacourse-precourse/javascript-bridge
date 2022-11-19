@@ -29,14 +29,14 @@ class BridgeGame {
 
   #drawMap() {
     const resultArray = this.#makeResultArray();
-    return [LETTER.up, LETTER.down].map((upOrDown) =>
-      `[ ${resultArray
-        .map((step) => {
-          const [move, isCorrect] = step;
-          return move === upOrDown ? isCorrect : " ";
-        })
-        .join(BAR)} ]`.join(NEW_LINE)
-    );
+    return [LETTER.up, LETTER.down]
+      .map(
+        (upOrDown) =>
+          `[ ${resultArray
+            .map((result) => (result[0] === upOrDown ? result[1] : " "))
+            .join(BAR)} ]`
+      )
+      .join(NEW_LINE);
   }
 
   #isCorrect() {
