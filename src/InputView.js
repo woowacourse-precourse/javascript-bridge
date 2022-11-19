@@ -10,7 +10,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(MESSAGE_INPUT_BRIDGE_LENGTH, (length) => {
       BridgeMaker.makeBridge(length, generate);
-      console.log(GAME_MANAGER.getBridge());
+      Console.print(GAME_MANAGER.getBridge());
       InputView.readMoving();
     });
   },
@@ -18,7 +18,7 @@ const InputView = {
   readMoving() {
     Console.readLine(MESSAGE_NEXT_MOVING_INPUT, (direction) => {
       GAME_MANAGER.move(direction)
-        ? console.log('move!') : this.readGameCommand();
+        ? this.readMoving() : this.readGameCommand();
     });
   },
 
@@ -26,6 +26,8 @@ const InputView = {
     Console.readLine(MESSAGE_RETRY, (command) => {
       if (GAME_MANAGER.retry(command)) {
         this.readMoving();
+      } else {
+        GAME_MANAGER.printResult();
       }
     });
   },
