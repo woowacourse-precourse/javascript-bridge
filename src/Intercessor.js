@@ -74,8 +74,6 @@ const Intercessor = {
       OutputView.printResult("실패", count, this.gameMap);
     }
   }
-  
-
 };
 
 module.exports = Intercessor;

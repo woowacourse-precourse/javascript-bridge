@@ -119,5 +119,34 @@ describe("다리 건너기 테스트", () => {
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
-  })
+  });
+
+  test("재시작 확인 테스트", () => {
+    mockQuestions(["R"]);
+    const retry = Intercessor.checkRetry();
+    expect(retry).toBe(true);
+  });
+
+  test("실패 게임 후 종료 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "0"]);
+    mockQuestions(["3", "U", "D", "U", "Q"]);
+    const messages = [
+      "최종 게임 결과",
+      "[ O |   | X ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ];
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("실패 게임 후 재시작 2회 후 성공 테스트", () => {
+    mockQuestions(["R"]);
+  });
 });
