@@ -21,13 +21,13 @@ class App {
     try {
       Validation.checkBridgeNumber(Number(number));
       this.#bridgeGame.setBridge(Number(number));
-      InputView.readMoving(this.actWithUserStepInput.bind(this));
+      InputView.readMoving(this.actWithUserMoveInput.bind(this));
     } catch (e) {
       OutputView.printErrorMessage(e);
     }
   }
 
-  actWithUserStepInput(input) {
+  actWithUserMoveInput(input) {
     const letter = input.toUpperCase();
     try {
       Validation.checkUorD(letter);
@@ -46,26 +46,26 @@ class App {
     }
 
     if (isCorrect) {
-      InputView.readMoving(this.actWithUserStepInput.bind(this));
+      InputView.readMoving(this.actWithUserMoveInput.bind(this));
     } else {
-      InputView.readGameCommand(this.actWithUserRetryInput.bind(this));
+      InputView.readGameCommand(this.actWithUserCommandInput.bind(this));
     }
   }
 
-  actWithUserRetryInput(input) {
+  actWithUserCommandInput(input) {
     const letter = input.toUpperCase();
     try {
       Validation.checkRorQ(letter);
-      this.chooseToRetry(letter);
+      this.actWithCommand(letter);
     } catch (e) {
       OutputView.printErrorMessage(e);
     }
   }
 
-  chooseToRetry(letter) {
+  actWithCommand(letter) {
     if (letter === LETTER.retry) {
       this.#bridgeGame.retry();
-      InputView.readMoving(this.actWithUserStepInput.bind(this));
+      InputView.readMoving(this.actWithUserMoveInput.bind(this));
     }
 
     if (letter === LETTER.quit) {
@@ -80,4 +80,5 @@ class App {
   }
 }
 
+new App().play();
 module.exports = App;

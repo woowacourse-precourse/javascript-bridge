@@ -7,7 +7,7 @@ const { LETTER } = require("./constant");
  */
 class BridgeGame {
   #bridge;
-  #steps = [];
+  #moves = [];
   #trialTime = 1;
 
   setBridge = (number) => {
@@ -20,7 +20,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move = (letter) => {
-    this.#steps.push(letter);
+    this.#moves.push(letter);
     const isCorrect = this.#isCorrect();
     const isGameOver = this.#isGameOver();
     const map = this.#makeMap();
@@ -28,18 +28,18 @@ class BridgeGame {
   };
 
   #isCorrect() {
-    const lastIndex = this.#steps.length - 1;
-    return this.#steps[lastIndex] === this.#bridge[lastIndex];
+    const lastIndex = this.#moves.length - 1;
+    return this.#moves[lastIndex] === this.#bridge[lastIndex];
   }
 
   #isGameOver() {
-    return this.#bridge.length === this.#steps.length;
+    return this.#bridge.length === this.#moves.length;
   }
 
   #makeMap() {
-    return this.#steps.map((step, ind) => [
-      step,
-      this.#bridge[ind] === step ? LETTER.correct : LETTER.wrong,
+    return this.#moves.map((move, ind) => [
+      move,
+      this.#bridge[ind] === move ? LETTER.correct : LETTER.wrong,
     ]);
   }
 
@@ -53,7 +53,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry = () => {
-    this.#steps = [];
+    this.#moves = [];
     this.#trialTime += 1;
   };
 }

@@ -13,18 +13,18 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(actWithUserStepInput) {
+  readMoving(actWithUserMoveInput) {
     Console.readLine(INPUT_MESSAGE.chooseUpOrDown, (input) => {
-      actWithUserStepInput(input);
+      actWithUserMoveInput(input);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(actWithUserRetryInput) {
+  readGameCommand(actWithUserCommandInput) {
     Console.readLine(INPUT_MESSAGE.chooseToRetry, (input) => {
-      actWithUserRetryInput(input);
+      actWithUserCommandInput(input);
     });
   },
 };
