@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { ERROR, COMMAND } = require("../constants");
+const { ERROR, COMMAND, ISALLOW } = require("../constants");
 
 class GameCommand {
   #input;
@@ -11,10 +11,10 @@ class GameCommand {
   checkInput() {
     try {
       if (this.isAllowOrder()) throw new Error();
-      return true;
+      return ISALLOW.TRUE;
     } catch (e) {
       Console.print(ERROR.GAMECOMMAND);
-      return false;
+      return ISALLOW.FALSE;
     }
   }
 

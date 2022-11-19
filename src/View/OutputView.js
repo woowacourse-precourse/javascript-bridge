@@ -14,8 +14,9 @@ const OutputView = {
 
   printResult(nowMap, attemptCnt, isSuccess) {
     Console.print(`\n최종 게임 결과`);
-    Console.print(`[ ${nowMap[0].join(" | ")} ]`);
-    Console.print(`[ ${nowMap[1].join(" | ")} ]`);
+    nowMap.forEach((bridge) => {
+      Console.print(`[ ${bridge.join(" | ")} ]`);
+    });
     Console.print(`\n게임 성공 여부: ${RESULT[isSuccess]}`);
     Console.print(`총 시도한 횟수: ${attemptCnt}`);
     Console.close();

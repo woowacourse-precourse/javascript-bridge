@@ -1,17 +1,17 @@
 const BridgeMaker = require("../BridgeMaker");
-const { SPACE } = require("../utils/constants");
+const { SPACE, PASS } = require("../utils/constants");
 
 class ProductionModel {
   makeBridge(size) {
-    return BridgeMaker.getSize(size);
+    return BridgeMaker.getBridge(size);
   }
 
   makeMap(nowMap, movingProcess) {
     const direction = Object.keys(SPACE);
     movingProcess.forEach((moving) => {
       const trapZone = direction.filter((space) => space !== moving)[0];
-      nowMap[SPACE[moving]].push("O");
-      nowMap[SPACE[trapZone]].push(" ");
+      nowMap[SPACE[moving]].push(PASS.true);
+      nowMap[SPACE[trapZone]].push(PASS.false);
     });
     return nowMap;
   }

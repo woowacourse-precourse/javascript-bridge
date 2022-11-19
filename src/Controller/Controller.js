@@ -4,6 +4,7 @@ const MoveSpace = require("../utils/validator/MoveSpace");
 const GameCommand = require("../utils/validator/GAMECOMMAND");
 const OutputView = require("../View/OutputView");
 const InputView = require("../View/InputView");
+const { RESULT } = require("../utils/constants");
 
 class Controller {
   #BridgeGame;
@@ -47,10 +48,8 @@ class Controller {
     const nowStep = this.#BridgeGame.checkNowStep();
     OutputView.printMap(bridge, nowStep, isSafe);
     if (!isSafe) this.getAnswer();
-    else {
-      if (isEnd) this.orderEnd(true);
-      else this.getMoving();
-    }
+    else if (isEnd) this.orderEnd(RESULT.TRUE);
+    else this.getMoving();
   }
 
   getAnswer() {
@@ -64,9 +63,8 @@ class Controller {
   }
 
   giveAnswer(answer) {
-    const order = this.#BridgeGame.retry(answer);
-    if (order) this.getMoving();
-    else this.orderEnd(false);
+    if (this.#BridgeGame.retry(answer)) this.getMoving();
+    else this.orderEnd(RESULT.FALSE);
   }
 
   orderEnd(isSuccess) {

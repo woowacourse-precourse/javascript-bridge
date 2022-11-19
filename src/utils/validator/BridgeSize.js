@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { SIZE, ERROR } = require("../constants");
+const { SIZE, ERROR, ISALLOW } = require("../constants");
 
 class BridgeSize {
   #input;
@@ -11,10 +11,10 @@ class BridgeSize {
   checkInput() {
     try {
       if (this.isAllowNumber() || this.isAllowRange()) throw new Error();
-      return true;
+      return ISALLOW.TRUE;
     } catch (error) {
       Console.print(ERROR.BRIDGE_SIZE);
-      return false;
+      return ISALLOW.FALSE;
     }
   }
 

@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { ORDER, ERROR } = require("../constants");
+const { ORDER, ERROR, ISALLOW } = require("../constants");
 
 class MoveSpace {
   #input;
@@ -11,10 +11,10 @@ class MoveSpace {
   checkInput() {
     try {
       if (this.isAllowOrder()) throw new Error();
-      return true;
+      return ISALLOW.TRUE;
     } catch (e) {
       Console.print(ERROR.MOVE_ORDER);
-      return false;
+      return ISALLOW.FALSE;
     }
   }
 

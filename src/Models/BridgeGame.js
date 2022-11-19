@@ -1,6 +1,6 @@
 const ProductionModel = require("./productionModel");
 
-const { SPACE, COMMAND } = require("../utils/constants");
+const { SPACE, COMMAND, ORDER, MARK } = require("../utils/constants");
 
 class BridgeGame {
   #size;
@@ -37,14 +37,10 @@ class BridgeGame {
     return [this.#currentMap, isSafe, isEnd];
   }
 
-  giveMovingProcess() {
-    return this.#movingProcess;
-  }
-
   markTrap() {
     const nowStep = this.checkNowStep();
     const currentSpace = this.#movingProcess.pop();
-    this.#currentMap[SPACE[currentSpace]][nowStep] = "X";
+    this.#currentMap[SPACE[currentSpace]][nowStep] = MARK.TRAP;
   }
 
   checkNowStep() {
@@ -63,8 +59,8 @@ class BridgeGame {
     if (answer === COMMAND.RETRY) {
       this.#movingProcess = [];
       this.#attemptCnt += 1;
-      return true;
-    } else if (answer === COMMAND.QUIT) return false;
+      return ORDER.RETRY;
+    } else if (answer === COMMAND.QUIT) return ORDER.QUIT;
   }
 
   checkMap() {

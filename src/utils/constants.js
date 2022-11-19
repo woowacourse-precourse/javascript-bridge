@@ -13,11 +13,17 @@ const SIZE = Object.freeze({
 const ORDER = Object.freeze({
   DOWN: "D",
   UP: "U",
+  RETRY: true,
+  QUIT: false,
 });
 
 const SPACE = Object.freeze({
   D: 1,
   U: 0,
+});
+
+const MARK = Object.freeze({
+  TRAP: "X",
 });
 
 const PASS = Object.freeze({
@@ -38,6 +44,13 @@ const COMMAND = Object.freeze({
 const RESULT = Object.freeze({
   true: "성공",
   false: "실패",
+  TRUE: true,
+  FALSE: false,
+});
+
+const ISALLOW = Object.freeze({
+  TRUE: true,
+  FALSE: false,
 });
 
 const ERROR = Object.freeze({
@@ -53,9 +66,11 @@ module.exports = {
   ORDER,
   SIZE,
   SPACE,
+  MARK,
   PASS,
   FAIL,
   COMMAND,
   RESULT,
+  ISALLOW,
   ERROR,
 };
