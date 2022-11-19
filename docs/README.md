@@ -209,6 +209,7 @@ const number = generateRandomNumber();
   - app.restart() 테스트 코드를 작성한다.
   - app.quit() 테스트 코드를 작성한다.
 - [ ] test: BridgeGame.js 테스트 코드 작성
+  - move 메서드 테스트 코드를 작성한다.
 - [ ] test: BridgeMaker.js 테스트 코드 작성
 - [ ] test: InputView.js 테스트 코드 작성
 - [ ] test: OutPutView.js 테스트 코드 작성
