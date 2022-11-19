@@ -3,13 +3,13 @@ const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./view/OutputView');
 const InputView = require('./view/InputView');
 const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeRandomNumberGenerator  = require('./BridgeRandomNumberGenerator');
 const Validation = require('./Validation');
 const BridgeGame = require('./BridgeGame');
 
 class BridgeGameProceed {
-#buildBridge
-#round
+#bridge
+// #round
 
     constructor() {
         this.BridgeGame = new BridgeGame();
@@ -17,19 +17,18 @@ class BridgeGameProceed {
 
     start() {
         OutputView.printStart();
-        this.#round = 0;
         InputView.readBridgeSize((bridgeLength) => {
-            Validation.bridgeLength(bridgeLength);
-            this.#buildBridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator);
-            console.log(this.#buildBridge);
+            // Validation.bridgeLength(bridgeLength);
+            this.#bridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
+            console.log(this.#bridge);
             this.game();
         });
     }
 
     game() {
         InputView.readMoving((nextStep) => {
-            Validation.nextStepValue(nextStep);
-            OutputView.printMap(nextStep ,this.#buildBridge[round]);
+            // Validation.nextStepValue(nextStep);
+            // OutputView.printMap(nextStep ,this.#buildBridge[round]);
             // #buildBridge 해당 다리 상태 저장
             // 실패했을 경우
                 // fail() 호출
@@ -41,19 +40,19 @@ class BridgeGameProceed {
         });
     }
 
-    fail() {
-        InputView.readGameCommand((retryOrNot) => {
-            this.BridgeGame.retry(retryOrNot);
-        })     
-    }
+    // fail() {
+    //     InputView.readGameCommand((retryOrNot) => {
+    //         this.BridgeGame.retry(retryOrNot);
+    //     })     
+    // }
 
-    win() {
-        OutputView.printResult()
-        // OutputView.printMap()
-        OutputView.printWin()
-        OutputView.printAttemptCount(this.#round)
-        Console.close();
-    }
+    // win() {
+    //     OutputView.printResult()
+    //     // OutputView.printMap()
+    //     OutputView.printWin()
+    //     OutputView.printAttemptCount(this.#round)
+    //     Console.close();
+    // }
 }
 
 let a = new BridgeGameProceed();
