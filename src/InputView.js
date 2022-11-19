@@ -24,21 +24,9 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    MissionUtils.Console.readLine(
-      "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      (move) => {
-        // move validate 하기 validate에 성공했다면 해당 값을 리턴
-        const moving = this.readMovingValidate(move);
-      }
-    );
-  },
-
-  readMovingValidate(move) {
-    if (move === "U" || move === "D") {
-      return move;
-    }
-    throw "[ERROR]";
+  async readMoving() {
+    const answer = await this.readText("이동할 칸을 선택해주세요. (위: U, 아래: D)\n");
+    return answer
   },
 
   /**
