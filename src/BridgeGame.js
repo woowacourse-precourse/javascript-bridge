@@ -92,6 +92,7 @@ class BridgeGame {
   }
 
   quit() {
+    OutputView.printResult(this.#currentMap);
     this.close();
   }
 
