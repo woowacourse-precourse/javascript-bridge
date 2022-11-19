@@ -38,16 +38,19 @@ class App {
     if (appStatus === 3) return this.progressBridgeMove();
     if (appStatus === 4) {
       this.#moveStatement = this.#brdigeGame.move(this.#moveAnswer, this.#bridge);
+      console.log(this.#moveAnswer, this.#bridge, '확인');
       console.log(this.#moveStatement);
       if (this.#moveStatement) {
-        this.#bridgeMap.handleMap(this.#moveStatement, this.#bridge);
-        OutputView.printMap(this.#bridgeMap.getMap());
+        this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
+        // OutputView.printMap(this.#bridgeMap.getMap());
+        this.#bridgeMap.cofirm();
         return this.progressBridgeMove();
       }
       if (!this.#moveStatement) {
-        this.#bridgeMap.handleMap(this.#moveStatement, this.#bridge);
+        this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
         this.#appStatus = 5;
-        OutputView.printMap(this.#bridgeMap.getMap());
+        // OutputView.printMap(this.#bridgeMap.getMap());
+        this.#bridgeMap.cofirm();
         return this.progressRetryGame();
       }
     }
