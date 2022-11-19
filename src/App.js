@@ -39,9 +39,8 @@ class App {
       MoveValidation(input);
       const MOVE = this.#game.move(input);
       printMap(this.#game.result);
-      const NOT_END = this.#game.isEnd() == true;
-      if (MOVE && !NOT_END) this.gameEnd();
-      if (MOVE && NOT_END) readMoving.bind(this)(this.moveBridge);
+      if (MOVE && !this.#game.isEnd()) this.gameEnd();
+      if (MOVE && this.#game.isEnd()) readMoving.bind(this)(this.moveBridge);
       if (!MOVE) readGameCommand.bind(this)(this.controlGame);
     } catch (err) {
       this.errorHandler(err);
@@ -64,7 +63,7 @@ class App {
     printResult(this.#game.result, this.#game.tryCount, this.#game.status);
     end();
   }
-  
+
   errorHandler(err) {
     printError(err);
     if (err.name === ERROR_NAME.BRIDGE)
