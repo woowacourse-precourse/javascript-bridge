@@ -6,7 +6,7 @@
 - [x] 입력 받은 이동할 칸으로 이동하여 이동한 상태를 반환한다. - BridgeGame#move()
 - [x] 이동에 성공했는지 확인한다. - BridgeGame#checkMoveSuccess()
 - [x] 이동할 다리가 얼마나 남았는지 확인한다. - BridgeGame#checkRemainBridge()
-- [ ] 재시작 시 시도 횟수를 증가시킨다. - BridgeGame#retry()
+- [x] 재시작 시 copyBridge와 moveState를 초기화 시키고 시도 횟수를 증가시킨다. - BridgeGame#retry()
 
 
 ## 예외 처리
