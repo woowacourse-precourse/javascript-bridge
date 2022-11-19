@@ -1,6 +1,8 @@
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
+const MissionUtils = require('@woowacourse/mission-utils');
+
+const { Console } = MissionUtils;
+const { MESSAGE_SUCCESS_BOOLEAN, MESSAGE_TRY_COUNT } = require('./constants');
+
 const OutputView = {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
@@ -14,7 +16,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(gameComplete, gameTryCount) {
+    const RESULT = gameComplete ? '성공' : '실패';
+    Console.print(`${MESSAGE_SUCCESS_BOOLEAN}${RESULT}`);
+    Console.print(`${MESSAGE_TRY_COUNT}${gameTryCount}`);
+  },
 };
 
 module.exports = OutputView;
