@@ -11,29 +11,34 @@ const InputView = {
    */
   readBridgeSize(handler) {
     MissionUtils.Console.readLine(MESSAGES_INPUT.BRIDGE_SIZE, (userInput) => {
-      try {
-        checkBridgeSize(userInput);
-        handler(userInput);
-      } catch (error) {
-        MissionUtils.Console.print(error);
-        InputView.readBridgeSize(handler);
-      }
+      InputView.sizeHandler(handler, userInput);
     });
   },
-
+  sizeHandler(callBack, userInput) {
+    try {
+      checkBridgeSize(userInput);
+      callBack(userInput);
+    } catch (error) {
+      MissionUtils.Console.print(error);
+      this.readBridgeSize(callBack);
+    }
+  },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(handler) {
     MissionUtils.Console.readLine(MESSAGES_INPUT.MOVE, (userInput) => {
-      try {
-        checkMoves(userInput);
-        handler(userInput);
-      } catch (error) {
-        MissionUtils.Console.print(error);
-        InputView.readMoving(handler);
-      }
+      InputView.moveHandler(handler, userInput);
     });
+  },
+  moveHandler(callBack, userInput) {
+    try {
+      checkMoves(userInput);
+      callBack(userInput);
+    } catch (error) {
+      MissionUtils.Console.print(error);
+      this.readMoving(callBack);
+    }
   },
 
   /**
@@ -41,14 +46,17 @@ const InputView = {
    */
   readGameCommand(handler) {
     MissionUtils.Console.readLine(MESSAGES_INPUT.COMMAND, (userInput) => {
-      try {
-        checkGameCommand(userInput);
-      } catch (error) {
-        MissionUtils.Console.print(error);
-        InputView.readGameCommand(handler);
-      }
-      handler(userInput);
+      InputView.commandHandler(handler, userInput);
     });
+  },
+  commandHandler(callBack, userInput) {
+    try {
+      checkGameCommand(userInput);
+      callBack(userInput);
+    } catch (error) {
+      MissionUtils.Console.print(error);
+      this.readGameCommand(callBack);
+    }
   },
 };
 

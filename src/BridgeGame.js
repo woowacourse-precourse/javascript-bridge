@@ -43,9 +43,7 @@ class BridgeGame {
     ViewController.output.map(this.#upperBridge, this.#lowerBridge);
     this.#gameRound += 1;
     if (this.#gameRound === this.#bridgeSize) {
-      const RESULT_BRIDGE = [this.#upperBridge, this.#lowerBridge];
-      ViewController.output.result(this.#numberOfTrials, GAME_UTILS.GAME_RESULT_WIN, RESULT_BRIDGE);
-      MissionUtils.Console.close();
+      this.#gameOver();
     }
     if (this.#gameRound < this.#bridgeSize) ViewController.input.moving(this.#move.bind(this));
   }
@@ -69,6 +67,16 @@ class BridgeGame {
       this.#upperBridge.push(GAME_UTILS.MARK_UNCHOSEN_BRIDGE);
     }
   }
+
+  #gameOver() {
+    const RESULT_BRIDGE = [this.#upperBridge, this.#lowerBridge];
+    if (this.#gameRound === this.#bridgeSize) {
+      ViewController.output.result(this.#numberOfTrials, GAME_UTILS.GAME_RESULT_WIN, RESULT_BRIDGE);
+    } else if (this.#gameRound !== this.#bridgeSize) {
+      ViewController.output.result(this.#numberOfTrials, GAME_UTILS.GAME_RESULT_LOSE, RESULT_BRIDGE);
+    }
+    MissionUtils.Console.close();
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
@@ -79,9 +87,7 @@ class BridgeGame {
       this.#numberOfTrials += 1;
       ViewController.input.moving(this.#move.bind(this));
     } else if (command === GAME_UTILS.COMMAND_QUIT) {
-      const CURRENT_BRIDGE = [this.#upperBridge, this.#lowerBridge];
-      ViewController.output.result(this.#numberOfTrials, GAME_UTILS.GAME_RESULT_LOSE, CURRENT_BRIDGE);
-      MissionUtils.Console.close();
+      this.#gameOver();
     }
   }
 }
