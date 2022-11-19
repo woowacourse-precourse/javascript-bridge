@@ -23,7 +23,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(array) {
+    Console.print(MESSAGE.OUTPUT_TEXT);
+    this.printMap([array[0], array[1]]);
+    Console.print(MESSAGE.OUTPUT_RESULT(array[2], array[3]));
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
