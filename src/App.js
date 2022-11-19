@@ -1,6 +1,11 @@
 const BridgeGame = require("./BridgeGame");
 const { readBridgeSize, readGameCommand, readMoving } = require("./InputView");
-const OutputView = require("./OutputView");
+const {
+  printErrorMessage,
+  printGameStart,
+  printMap,
+  printResult,
+} = require("./OutputView");
 const { checkBridgeNumber, checkRorQ, checkUorD } = require("./Validation");
 const { LETTER, MESSAGE } = require("./constant");
 const { Console } = require("@woowacourse/mission-utils");
@@ -13,7 +18,7 @@ class App {
   }
 
   play() {
-    OutputView.printGameStart();
+    printGameStart();
     readBridgeSize(this.actWithBridgeNumber.bind(this));
   }
 
@@ -23,7 +28,7 @@ class App {
       this.#bridgeGame.setBridge(Number(number));
       readMoving(this.actWithUserMoveInput.bind(this));
     } catch (e) {
-      OutputView.printErrorMessage(e);
+      printErrorMessage(e);
       readBridgeSize(this.actWithBridgeNumber.bind(this));
     }
   }
@@ -33,10 +38,10 @@ class App {
     try {
       checkUorD(letter);
       const { map, isCorrect, isGameOver } = this.#bridgeGame.move(letter);
-      OutputView.printMap(map);
+      printMap(map);
       this.actWithResult({ isCorrect, isGameOver });
     } catch (e) {
-      OutputView.printErrorMessage(e);
+      printErrorMessage(e);
     }
   }
 
@@ -59,7 +64,7 @@ class App {
       checkRorQ(letter);
       this.actWithCommand(letter);
     } catch (e) {
-      OutputView.printErrorMessage(e);
+      printErrorMessage(e);
     }
   }
 
@@ -76,9 +81,11 @@ class App {
 
   endGame(result) {
     const { map, trialTime } = this.#bridgeGame.getResult();
-    OutputView.printResult(map, result, trialTime);
+    printResult(map, result, trialTime);
     Console.close();
   }
 }
+
+new App().play();
 
 module.exports = App;

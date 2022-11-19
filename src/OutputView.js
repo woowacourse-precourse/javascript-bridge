@@ -27,7 +27,7 @@ const OutputView = {
    */
   printResult(map, result, trialTime) {
     Console.print(MESSAGE.finalResult);
-    this.printMap(map);
+    Console.print(map);
     Console.print(MESSAGE.winOrLose + result);
     Console.print(MESSAGE.trialTime + trialTime);
   },
