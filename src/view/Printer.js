@@ -3,10 +3,10 @@ const Message = require("../lib/Message");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class Printer {
-  #bridgeGame2;
+  #bridgeGame;
 
-  constructor(bridgeGame2) {
-    this.#bridgeGame2 = bridgeGame2;
+  constructor(bridgeGame) {
+    this.#bridgeGame = bridgeGame;
   }
 
   printEndResult(bridges, gameState) {

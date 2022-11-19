@@ -1,8 +1,8 @@
-const BridgeGame = require("./model/BridgeGame");
-const OutputView = require("../src/console/OutputView");
-const InputView = require("../src/console/InputView");
-const Message = require("../src/lib/Message");
-const Bridge = require("./model/Bridge");
+const BridgeGame = require("./BridgeGame");
+const OutputView = require("../console/OutputView");
+const InputView = require("../console/InputView");
+const Message = require("../lib/Message");
+const Bridge = require("./Bridge");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class WoowaBrigde {

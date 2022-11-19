@@ -1,97 +1,70 @@
 const Constant = require("../lib/Constant");
 
 class Bridge {
-  #woowaBridge;
+  #bridgeGame;
   #originalBridge;
   #upsideBridge = [];
   #downsideBridge = [];
 
-  constructor(woowaBridge) {
-    this.#woowaBridge = woowaBridge;
+  constructor(bridgeGame) {
+    this.#bridgeGame = bridgeGame;
   }
 
-  getOriginalBridge() {
-    return this.#originalBridge;
+  getCurrentBridge() {
+    return this.#upsideBridge;
+  }
+
+  getBridges() {
+    return [this.#upsideBridge, this.#downsideBridge];
   }
 
   setOriginalBridge(bridge) {
     this.#originalBridge = bridge;
   }
 
-  getUpsideBridge() {
-    return this.#upsideBridge;
+  setAllBridgeEmpty() {
+    (this.#upsideBridge = []), (this.#downsideBridge = []);
   }
 
-  getDownsideBridge() {
-    return this.#downsideBridge;
-  }
-
-  getLength() {
-    const lengthOrigin = this.#originalBridge.length;
-    const lengthAnother = this.#upsideBridge.length;
-    return lengthOrigin === lengthAnother;
-  }
-
-  setResult(direction, index) {
-    if (direction === Constant.DIRECTION.UP) {
-      this.setUpSideBridge(direction, index);
-    }
-    if (direction === Constant.DIRECTION.DOWN) {
-      this.setDownSideBridge(direction, index);
-    }
-  }
-
-  getResult() {
-    return [this.getUpsideBridge(), this.getDownsideBridge()];
-  }
-
-  setUpSideBridge(direction, index) {
-    this.setUpsideBridgeValue(direction, index);
-    this.setDownsideBridgeEmpty();
-  }
-
-  setDownSideBridge(direction, index) {
-    this.setDownsideBridgeValue(direction, index);
-    this.setUpsideBridgeEmpty();
-  }
-
-  setUpsideBridgeValue(direction, index) {
+  moveUpside(direction, index) {
     if (direction === this.#originalBridge[index]) {
       this.#upsideBridge.push(Constant.DIRECTION.POSSIBLE);
     }
     if (direction !== this.#originalBridge[index]) {
       this.#upsideBridge.push(Constant.DIRECTION.IMPOSSIBLE);
     }
+    this.moveOthersideEmpty(direction);
   }
 
-  setDownsideBridgeValue(direction, index) {
-    if (direction === this.getOriginalBridge()[index]) {
+  moveDownside(direction, index) {
+    if (direction === this.#originalBridge[index]) {
       this.#downsideBridge.push(Constant.DIRECTION.POSSIBLE);
     }
-    if (direction !== this.getOriginalBridge()[index]) {
+    if (direction !== this.#originalBridge[index]) {
       this.#downsideBridge.push(Constant.DIRECTION.IMPOSSIBLE);
+    }
+    this.moveOthersideEmpty(direction);
+  }
+
+  moveOthersideEmpty(direction) {
+    if (direction === Constant.DIRECTION.UP) {
+      this.#downsideBridge.push(Constant.DIRECTION.EMPTY);
+    }
+    if (direction === Constant.DIRECTION.DOWN) {
+      this.#upsideBridge.push(Constant.DIRECTION.EMPTY);
     }
   }
 
-  setUpsideBridgeEmpty() {
-    this.#upsideBridge.push(Constant.DIRECTION.EMPTY);
-  }
-
-  setDownsideBridgeEmpty() {
-    this.#downsideBridge.push(Constant.DIRECTION.EMPTY);
-  }
-
-  includesX() {
+  haveXvalue() {
     const upX = this.#upsideBridge.includes(Constant.DIRECTION.IMPOSSIBLE);
     const downX = this.#downsideBridge.includes(Constant.DIRECTION.IMPOSSIBLE);
     return upX || downX;
   }
 
-  setInitialValue(setter) {
-    this.#upsideBridge = [];
-    this.#downsideBridge = [];
-    setter();
-    this.#woowaBridge.upOrDown();
+  isGameEnd() {
+    const lengthOrigin = this.#originalBridge.length;
+    const lengthAnother = this.#upsideBridge.length;
+    return lengthOrigin === lengthAnother;
   }
 }
 
