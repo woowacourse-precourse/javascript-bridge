@@ -22,7 +22,8 @@ class BridgeGame {
    */
   move() {
     const updateMove = (direction) => {
-      console.log(direction);
+      const [isRight, isDone] = this.model.stepForward(direction);
+      console.log(isRight, isDone);
     }
     this.view.getWhereToGo(updateMove);
   }
@@ -30,7 +31,7 @@ class BridgeGame {
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    */
   retry() {}
-  
+
 }
 
 module.exports = BridgeGame;
