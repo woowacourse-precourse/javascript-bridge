@@ -11,7 +11,6 @@ class BridgeGame {
   }
 
   isMove(direction) {
-    console.log(this.#bridge);
     return direction === this.#bridge[this.#moveCount];
   }
 
