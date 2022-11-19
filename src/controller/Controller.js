@@ -103,11 +103,7 @@ class Controller {
       this.inputUserMoving();
     }
     if (gameOverSelect === 'Q') {
-      this.printGameResult(
-        this.#movingResult,
-        this.#attemptsNum,
-        this.#isSuccess
-      );
+      this.printGameResult();
     }
   }
 
