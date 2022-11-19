@@ -7,15 +7,14 @@ const Validate = require("../lib/Validate");
 const ErrorHandler = require("../ErrorHandler");
 
 const InputView = {
-  readBridgeSize(bridgeSetter, nextCallBack, errorCallBack) {
+  readBridgeSize(setBridge, nextCallBack, errorCallBack) {
     const generator = BridgeRandomNumberGenerator.generate;
 
     MissionUtils.Console.readLine(Message.BRIDGE_SIZE, (size) => {
-      const validTarget = () => Validate.bridgeLength(size.toUpperCase());
+      const target = () => Validate.bridgeLength(size.toUpperCase());
       const doCallBack = () =>
-        bridgeSetter(BridgeMaker.makeBridge(size, generator.bind(this)));
-      ErrorHandler.test(validTarget, doCallBack, errorCallBack);
-
+        setBridge(BridgeMaker.makeBridge(size, generator.bind(this)));
+      ErrorHandler.test(target, doCallBack, errorCallBack);
       nextCallBack();
     });
   },
@@ -23,13 +22,12 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(doCallBack, nextCallBack, errorCallBack) {
+  readMoving(moveCallback, printCallback, errorCallBack) {
     MissionUtils.Console.readLine(Message.BRIDGE_DIRECTION, (direction) => {
-      const validTarget = () =>
-        Validate.bridgeDirection(direction.toUpperCase());
-      const callBack = () => doCallBack(direction);
-      ErrorHandler.test(validTarget, callBack, errorCallBack);
-      nextCallBack(direction);
+      const target = () => Validate.bridgeDirection(direction.toUpperCase());
+      const callBack = () => moveCallback(direction);
+      ErrorHandler.test(target, callBack, errorCallBack);
+      printCallback();
     });
   },
 
@@ -38,8 +36,8 @@ const InputView = {
    */
   readGameCommand(reset, printResult, errorCallBakc) {
     MissionUtils.Console.readLine(Message.REPLAY, (answer) => {
-      const validTarget = () => Validate.restart(answer);
-      ErrorHandler.testSimple(validTarget, errorCallBakc);
+      const target = () => Validate.restart(answer);
+      ErrorHandler.testSimple(target, errorCallBakc);
       if (answer === Constant.RETRY.REPLAY) reset();
       if (answer === Constant.RETRY.QUIT) printResult();
     });
