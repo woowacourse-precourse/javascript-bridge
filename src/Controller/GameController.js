@@ -1,4 +1,4 @@
-const OutputView = require("../Views/OutputView");
+const OutputView = require("../View/OutputView");
 const { Console } = require("@woowacourse/mission-utils");
 const { SUCCESS, FAIL } = require("../Messages/constants");
 const BridgeGame = require("../Model/BridgeGame");
