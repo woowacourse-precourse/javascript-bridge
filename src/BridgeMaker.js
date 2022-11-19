@@ -13,7 +13,9 @@ const BridgeMaker = {
     if (Validator.validatorBridgeLength(size)) {
       return Array.from(
         { length: size },
-        () => (Number(generateRandomNumber()) ? GAME_CONSTANTS.upStair : GAME_CONSTANTS.downStair),
+        () => (generateRandomNumber()
+          ? GAME_CONSTANTS.upStair
+          : GAME_CONSTANTS.downStair),
       );
     }
   },
