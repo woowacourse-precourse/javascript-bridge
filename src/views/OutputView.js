@@ -1,7 +1,14 @@
 const { Console } = require('@woowacourse/mission-utils');
+const TemplateMaker = require('../utils/TemplateMaker.js');
 
 const OutputView = {
-  printMap() {},
+  printMap(log) {
+    const templates = TemplateMaker.getLogTemplates(log);
+
+    templates.forEach((template) => {
+      Console.print(template);
+    });
+  },
 
   printResult() {},
 

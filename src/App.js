@@ -1,6 +1,7 @@
 const { GAME_MSG } = require('./constants/message.js');
 const { printMsg } = require('./views/OutputView.js');
 const InputView = require('./views/InputView.js');
+const OutputView = require('./views/OutputView.js');
 const BridgeGame = require('./BridgeGame.js');
 
 class App {
@@ -34,6 +35,9 @@ class App {
   tryMovePlayer(movingDirection) {
     try {
       this.bridgeGame.move(movingDirection);
+
+      const movementLogs = this.bridgeGame.getMovementLogs();
+      OutputView.printMap(movementLogs);
     } catch ({ message }) {
       this.reRequestMovingDirection(message);
     }

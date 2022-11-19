@@ -42,6 +42,10 @@ class BridgeGame {
   #isValidDirectionSymbol(direction) {
     return direction === DOWNSIDE_SYMBOL || direction === UPSIDE_SYMBOL;
   }
+
+  getMovementLogs() {
+    return this.#movementLogs;
+  }
 }
 
 module.exports = BridgeGame;
