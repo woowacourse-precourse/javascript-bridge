@@ -21,7 +21,13 @@ const OutputView = {
     );
   },
 
-  printResult() {},
+  printResult(movingResult, attemptsNum, isSuccess) {
+    Console.print(GAME_MESSAGE.GAME_RESULT);
+    this.printMap(movingResult);
+    Console.print(GAME_MESSAGE.GAME_STATUS + (isSuccess ? '성공' : '실패'));
+    Console.print(GAME_MESSAGE.GAME_ATTEMPTS + attemptsNum);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;

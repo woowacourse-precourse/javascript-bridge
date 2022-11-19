@@ -9,11 +9,17 @@ class Controller {
   #bridgeWay;
   #userSelect;
   #BridgeGame;
+  #movingResult;
+  #attemptsNum;
+  #isSuccess;
 
   constructor() {
     this.#bridgeWay;
     this.#userSelect = [];
     this.#BridgeGame = new BridgeGame();
+    this.#movingResult;
+    this.#attemptsNum = 1;
+    this.#isSuccess = false;
   }
 
   start() {
@@ -55,9 +61,13 @@ class Controller {
 
   getMovingResult(bridgeWay, userSelect) {
     let [bridgeSize, userInputLength] = [bridgeWay.length, userSelect.length];
-    let result = this.#BridgeGame.move(bridgeWay, userSelect, userInputLength);
-    OutputView.printMap(result);
-    this.checkIsGameOver(result, bridgeSize, userInputLength);
+    this.#movingResult = this.#BridgeGame.move(
+      bridgeWay,
+      userSelect,
+      userInputLength
+    );
+    OutputView.printMap(this.#movingResult);
+    this.checkIsGameOver(this.#movingResult, bridgeSize, userInputLength);
   }
 
   checkIsGameOver(result, bridgeSize, userInputLength) {
@@ -66,6 +76,10 @@ class Controller {
       return;
     }
     if (userInputLength < bridgeSize) this.inputUserMoving();
+    if (userInputLength === bridgeSize) {
+      this.#isSuccess = true;
+      this.printGameResult();
+    }
   }
 
   inputGameOver() {
@@ -78,9 +92,31 @@ class Controller {
     } catch {
       this.inputGameOver();
     }
-    this.#BridgeGame.retry();
-    this.#userSelect = [];
-    this.inputUserMoving();
+    this.runSelectResult(gameOverSelect);
+  }
+
+  runSelectResult(gameOverSelect) {
+    if (gameOverSelect === 'R') {
+      this.#BridgeGame.retry();
+      this.#userSelect = [];
+      this.#attemptsNum += 1;
+      this.inputUserMoving();
+    }
+    if (gameOverSelect === 'Q') {
+      this.printGameResult(
+        this.#movingResult,
+        this.#attemptsNum,
+        this.#isSuccess
+      );
+    }
+  }
+
+  printGameResult() {
+    OutputView.printResult(
+      this.#movingResult,
+      this.#attemptsNum,
+      this.#isSuccess
+    );
   }
 }
 
