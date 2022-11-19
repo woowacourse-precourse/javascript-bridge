@@ -33,6 +33,15 @@ class BrideGameController {
     }
     InputView.readGameCommand(this.handleGameRetryPhase);
   }
+
+  handleGameEndPhase() {
+    if(this.#bridgeGame.isGameEnd()) {
+      OutputView.printResult();
+      return;
+    }
+    this.#bridgeGame.move();
+    InputView.readMoving(this.handleAnswerCheckPhase);
+  }
 }
 
 module.exports = BrideGameController;
