@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const GameError = require('./Error/GameError');
 const {
   ERROR_MESSAGE,
   INPUT_MESSAGE,
@@ -20,7 +21,7 @@ class BridgeGame {
 
   static validate(input) {
     if (input !== INPUT_MESSAGE.UP && input !== INPUT_MESSAGE.DOWN) {
-      throw new Error(ERROR_MESSAGE.LEVEL_INPUT);
+      throw new GameError(ERROR_MESSAGE.LEVEL_INPUT);
     }
   }
 
@@ -80,7 +81,7 @@ class BridgeGame {
 
   static validateRetryInput(input) {
     if (input !== RETRY_MESSAGE.RETRY && input !== RETRY_MESSAGE.QUIT)
-      throw new Error('[ERROR] R 또는 Q를 입력해야합니다.');
+      throw new GameError(ERROR_MESSAGE.RETRY_INPUT);
   }
 }
 

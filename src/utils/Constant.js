@@ -7,7 +7,8 @@ const MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  LEVEL_INPUT: '[ERROR] 이동 값은 U 또는 D를 입력하세요',
+  RETRY_INPUT: 'R 또는 Q를 입력해야합니다.',
+  LEVEL_INPUT: '이동 값은 U 또는 D를 입력하세요',
   BRIDGE_ISNAN: '숫자를 입력하세요',
   BRIDGE_RANGE: '3이상 20이하의 수를 입력하세요',
 });
