@@ -4,7 +4,7 @@
 
 ## 파일 구조
 
-![week_4_file](https://user-images.githubusercontent.com/87642422/202839326-32407149-a51d-4e60-9adb-33bab894ac4c.PNG)
+![week_4_file](https://user-images.githubusercontent.com/87642422/202858404-86dd64a4-853a-4ae1-8c06-a58f93802f10.PNG)
 
 ```
 📦src
