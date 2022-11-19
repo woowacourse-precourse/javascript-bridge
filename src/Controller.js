@@ -10,28 +10,22 @@ class Controller {
     this.#bridgeGame.setGameCount();
   }
   selectNextFncAfterMove = (status) => {
-    switch (status) {
-      case "GAME_OVER":
-        const { bridge, inputs, gameCount } = this.#bridgeGame.getState();
-        OutputView.printResult(bridge, inputs, gameCount);
-        break;
-      case "FALL_OFF":
-        InputView.readGameCommand(this.readGameCommendCallbackFnc);
-        break;
-      default:
-        InputView.readMoving(this.readMoveCallbackFnc);
+    if (status === "GAME_OVER") {
+      const { bridge, inputs, gameCount } = this.#bridgeGame.getState();
+      return OutputView.printResult(bridge, inputs, gameCount);
     }
+    if (status === "FALL_OFF") {
+      return InputView.readGameCommand(this.readGameCommendCallbackFnc);
+    }
+    InputView.readMoving(this.readMoveCallbackFnc);
   };
   selectNextFncAfterRetry = (status) => {
-    switch (status) {
-      case "QUIT":
-        const { bridge, inputs, gameCount } = this.#bridgeGame.getState();
-        OutputView.printResult(bridge, inputs, gameCount);
-        break;
-      default:
-        this.#bridgeGame.setGameCount();
-        InputView.readMoving(this.readMoveCallbackFnc);
+    if (status === "QUIT") {
+      const { bridge, inputs, gameCount } = this.#bridgeGame.getState();
+      return OutputView.printResult(bridge, inputs, gameCount);
     }
+    this.#bridgeGame.setGameCount();
+    InputView.readMoving(this.readMoveCallbackFnc);
   };
   readGameCommendCallbackFnc = (input) => {
     const retryStatus = this.#bridgeGame.retry(input);
@@ -39,6 +33,7 @@ class Controller {
   };
   readBridgeSizeCallbackFnc = (input) => {
     this.#bridgeGame.bridge(input);
+    console.log("");
     InputView.readMoving(this.readMoveCallbackFnc);
   };
   readMoveCallbackFnc = (input) => {
