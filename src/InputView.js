@@ -7,6 +7,8 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame.js');
 const { currentPosition } = require('./Utils.js');
 const Retry = require('./Retry.js');
+const OutputView = require('./OutputView.js');
+const { printResult } = require('./OutputView.js');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -40,11 +42,15 @@ const InputView = {
       try {
         crossingBridge.validate();
         const bridgeGame = new BridgeGame(move, currentPosition, crossableBridgeList);
-        currentPosition += 1;
-        bridgeGame.move();
+        const { upper, lower } = bridgeGame.move();
         if (move !== crossableBridgeList[currentPosition]) {
-          this.readGameCommand();
+          this.readGameCommand(currentPosition, crossableBridgeList, upper, lower);
         }
+        if (currentPosition === crossableBridgeList.length - 1 && move === crossableBridgeList[currentPosition]) {
+          OutputView.printResult(upper, lower);
+          return 0;
+        }
+        currentPosition += 1;
         this.readMoving(currentPosition, crossableBridgeList);
       } catch (err) {
         Console.print(err);
@@ -56,17 +62,24 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(currentPosition, crossableBridgeList, upper, lower) {
     Console.readLine(MESSAGE.INPUT_WANT_RETRY, (input) => {
+      currentPosition = 0;
       const retry = new Retry(input);
       try {
         retry.validate();
+        if (input === 'R') {
+          this.readMoving(currentPosition, crossableBridgeList);
+        }
+        if (input === 'Q') {
+          OutputView.printResult(upper, lower);
+        }
       } catch (err) {
         Console.print(err);
-        this.readGameCommand();
+        this.readGameCommand(currentPosition, crossableBridgeList);
       }
     });
   },
 };
 
-InputView.readGameCommand();
+InputView.readBridgeSize();

@@ -54,6 +54,7 @@ class BridgeGame {
     const upper = `[ ${upperList.join(' | ')} ]`;
     const lower = `[ ${lowerList.join(' | ')} ]`;
     OutputView.printMap(upper, lower);
+    return { upper, lower };
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
