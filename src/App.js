@@ -1,7 +1,7 @@
 const BridgeGame = require("./BridgeGame");
-const InputView = require("./InputView");
+const { readBridgeSize, readGameCommand, readMoving } = require("./InputView");
 const OutputView = require("./OutputView");
-const Validation = require("./Validation");
+const { checkBridgeNumber, checkRorQ, checkUorD } = require("./Validation");
 const { LETTER, MESSAGE } = require("./constant");
 const { Console } = require("@woowacourse/mission-utils");
 
@@ -14,48 +14,49 @@ class App {
 
   play() {
     OutputView.printGameStart();
-    InputView.readBridgeSize(this.actWithBridgeNumber.bind(this));
+    readBridgeSize(this.actWithBridgeNumber.bind(this));
   }
 
   actWithBridgeNumber(number) {
     try {
-      Validation.checkBridgeNumber(Number(number));
+      checkBridgeNumber(Number(number));
       this.#bridgeGame.setBridge(Number(number));
-      InputView.readMoving(this.actWithUserMoveInput.bind(this));
+      readMoving(this.actWithUserMoveInput.bind(this));
     } catch (e) {
       OutputView.printErrorMessage(e);
+      readBridgeSize(this.actWithBridgeNumber.bind(this));
     }
   }
 
   actWithUserMoveInput(input) {
     const letter = input.toUpperCase();
     try {
-      Validation.checkUorD(letter);
-      const { isCorrect, map, isGameOver } = this.#bridgeGame.move(letter);
+      checkUorD(letter);
+      const { map, isCorrect, isGameOver } = this.#bridgeGame.move(letter);
       OutputView.printMap(map);
-      this.nextAction({ isCorrect, map, isGameOver });
+      this.actWithResult({ isCorrect, isGameOver });
     } catch (e) {
       OutputView.printErrorMessage(e);
     }
   }
 
-  nextAction({ isCorrect, isGameOver }) {
+  actWithResult({ isCorrect, isGameOver }) {
     if (isGameOver && isCorrect) {
       this.endGame(MESSAGE.win);
       return;
     }
 
     if (isCorrect) {
-      InputView.readMoving(this.actWithUserMoveInput.bind(this));
+      readMoving(this.actWithUserMoveInput.bind(this));
     } else {
-      InputView.readGameCommand(this.actWithUserCommandInput.bind(this));
+      readGameCommand(this.actWithUserCommandInput.bind(this));
     }
   }
 
   actWithUserCommandInput(input) {
     const letter = input.toUpperCase();
     try {
-      Validation.checkRorQ(letter);
+      checkRorQ(letter);
       this.actWithCommand(letter);
     } catch (e) {
       OutputView.printErrorMessage(e);
@@ -65,7 +66,7 @@ class App {
   actWithCommand(letter) {
     if (letter === LETTER.retry) {
       this.#bridgeGame.retry();
-      InputView.readMoving(this.actWithUserMoveInput.bind(this));
+      readMoving(this.actWithUserMoveInput.bind(this));
     }
 
     if (letter === LETTER.quit) {
@@ -80,5 +81,4 @@ class App {
   }
 }
 
-new App().play();
 module.exports = App;

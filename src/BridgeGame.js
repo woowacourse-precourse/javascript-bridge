@@ -56,7 +56,7 @@ class BridgeGame {
   }
 
   getResult() {
-    return { map: this.#makeMap(), trialTime: this.#trialTime };
+    return { map: this.#drawMap(), trialTime: this.#trialTime };
   }
 
   /**
