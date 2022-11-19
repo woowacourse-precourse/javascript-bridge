@@ -1,17 +1,36 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 const Validate = {
+  isCorrectBridgeLength(input) {
+    return (
+      this.isNumber(input) &&
+      this.isBiggerThanMaxLength(input) &&
+      this.isLowerThanMinLength(input)
+    );
+  },
   isNumber(input) {
     const redex = /[^0-9]/g;
-    if (input.match(redex))
-      throw new Error("[ERROR] 다리 길이가 숫자가 아닙니다.", input);
+    if (input.match(redex)) {
+      MissionUtils.Console.print("[ERROR] 입력값이 숫자가 아닙니다.", input);
+      return false;
+    }
+    return true;
   },
-  isBigger(input) {
+  isLowerThanMaxLength(input) {
     const number = parseInt(input);
-    if (number > 20) throw new Error("[ERROR] 다리 길이가 너무 큽니다.", input);
+    if (number > 20) {
+      MissionUtils.Console.print("[ERROR] 입력값이 너무 큽니다.", input);
+      return false;
+    }
+    return true;
   },
-  isLower(input) {
+  isBiggerThanMinLength(input) {
     const number = parseInt(input);
-    if (number < 3)
-      throw new Error("[ERROR] 다리 길이가 너무 작습니다.", input);
+    if (number < 3) {
+      MissionUtils.Console.print("[ERROR] 입력값이 너무 작습니다.", input);
+      return false;
+    }
+    return true;
   },
   isCorrectMove(input) {
     if (input !== "U" && input !== "D")
