@@ -9,6 +9,8 @@ const Validation = {
     return elem1 === elem2;
   },
   isInRange(start, end, number) {
+    if (end < start)
+      throw new Error("[ERROR] end는 start보다 항상 크거나 같아야 합니다.");
     if (number < start || number > end) return false;
     return true;
   },
