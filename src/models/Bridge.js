@@ -15,6 +15,10 @@ class Bridge {
   get bridgeArr() {
     return this.bridgeArr;
   }
+
+  getBridgeFragmentByIndex(index) {
+    return this.bridgeArr[index];
+  }
 }
 
 module.exports = Bridge;
