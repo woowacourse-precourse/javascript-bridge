@@ -6,6 +6,7 @@ const { validateBrigeSize, validateMoving } = require("./util/validate");
 class App {
   bridgeGame = null;
   pathIdx = 0;
+  tryCount = 0;
 
   play() {
     this.start();
@@ -38,16 +39,28 @@ class App {
       this.pathIdx++,
       choice
     );
-    this.bridgeGame.move(choice, isAlrightPath);
 
+    this.bridgeGame.move(choice, isAlrightPath);
+    this.goNextStepAfterReadMoving(isAlrightPath);
+  }
+
+  goNextStepAfterReadMoving(isAlrightPath) {
     if (this.checkEndGame(isAlrightPath)) {
-      return this.bridgeGame.end();
+      return this.stopGame();
     }
     return this.proceedGame();
   }
 
   checkEndGame(isAlrightPath) {
     return !isAlrightPath || this.pathIdx >= this.bridgeGame.size;
+  }
+
+  stopGame() {
+    InputView.readGameCommand(this.cbAfterStopGame.bind(this));
+  }
+
+  cbAfterStopGame(choice) {
+    console.log("choice", choice);
   }
 }
 
