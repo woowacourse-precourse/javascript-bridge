@@ -5,7 +5,14 @@ const Bridge = require('../Bridge');
 class BridgeModel {
 
   constructor() {
+    this.tryCount = 1;
     this.moveCount = 0;
+    this.isRight = false;
+  }
+
+  updateState(direction, isRight) {
+    this.moveCount++;
+    this.isRight = isRight;
   }
 
   buildBridge(length) {
@@ -17,7 +24,7 @@ class BridgeModel {
 
   stepForward(direction) {
     const [isRight, isDone] = this.bridge.checkAnswer(this.moveCount, direction);
-    this.moveCount++;
+    updateState(direction, isRight);
     return [isRight, isDone];
   }
 
