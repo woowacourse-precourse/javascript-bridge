@@ -477,3 +477,12 @@ describe('위치 기록 저장 메서드 테스트', () => {
     }).toThrow(POSITION_ERROR_TEXT);
   });
 });
+
+describe('위치 기록 가져오는 메서드 테스트', () => {
+  test('메소드 이름은 "getPositionLog"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'getPositionLog';
+
+    expect(bridgeGame.getPositionLog.name).toEqual(METHOD_NAME);
+  });
+});
