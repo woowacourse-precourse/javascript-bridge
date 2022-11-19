@@ -61,7 +61,12 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#array[0] = this.#array[0].slice(0, this.#array[0].length - 1);
+    this.#array[1] = this.#array[1].slice(0, this.#array[1].length - 1);
+    this.#rightAnswer = false;
+    return [this.#array[0], this.#array[1], this.#rightAnswer];
+  }
 }
 
 module.exports = BridgeGame;

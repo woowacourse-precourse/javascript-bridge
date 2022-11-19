@@ -45,7 +45,7 @@ class Controller {
     try {
       this.validation.isUpOrDown(square);
       this.checkCurrentStatus(sqaure);
-      this.checkGameFinished();
+      this.checkGameFinished() ? this.endGame() : this.getMovingDirection();
     } catch (error) {
       Console.print(error);
       this.getMovingDirection();
@@ -78,6 +78,11 @@ class Controller {
     OutputView.printMap(this.#currentBridge);
     OutputView.printResult(this.#try, false);
     Console.close;
+  }
+
+  retryGame() {
+    this.bridgeGame.retry();
+    this.getMovingDirection();
   }
 
   quitGame() {
