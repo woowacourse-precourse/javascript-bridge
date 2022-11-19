@@ -1,20 +1,21 @@
 const catchError = require('../utils/catchError');
+const { ERROR_MESSAGE, USER_TEXT, BOOLEAN } = require('../constant/contant');
 
 function movingValidation(movingInput) {
-  if (movingInput !== 'U' && movingInput !== 'D') {
-    return false;
+  if (movingInput !== USER_TEXT.UP && movingInput !== USER_TEXT.DOWN) {
+    return BOOLEAN.FALSE;
   }
 
-  return true;
+  return BOOLEAN.TRUE;
 }
 
 function checkRetryMoving(input) {
   if (!movingValidation(input)) {
-    catchError('[ERROR] 다리 이동은 U혹은 D인 문자여야 합니다.');
-    return false;
+    catchError(ERROR_MESSAGE.MOVING);
+    return BOOLEAN.FALSE;
   }
 
-  return true;
+  return BOOLEAN.TRUE;
 }
 
 module.exports = { movingValidation, checkRetryMoving };

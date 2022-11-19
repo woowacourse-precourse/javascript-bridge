@@ -4,7 +4,11 @@ const { checkRetryMoving } = require('./validation/movingValidation');
 const { checkRetryCommand } = require('./validation/commandValidation');
 const { generate } = require('./utils/BridgeRandomNumberGenerator');
 const { print } = require('./utils/MissionUtils');
+const { INPUT_TEXT } = require('./constant/contant');
 
+/**
+ * 다리 건너기 게임을 진행하는 클래스
+ */
 class BridgeController {
   constructor() {
     this.bridgeGame = new BridgeGame(
@@ -19,7 +23,7 @@ class BridgeController {
   }
 
   #initPrint() {
-    print('다리 건너기 게임을 시작합니다.');
+    print(INPUT_TEXT.GAME_START);
   }
 
   progressSize() {

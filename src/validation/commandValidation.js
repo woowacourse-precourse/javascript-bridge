@@ -1,20 +1,21 @@
 const catchError = require('../utils/catchError');
+const { ERROR_MESSAGE, USER_TEXT, BOOLEAN } = require('../constant/contant');
 
 function commandValidation(commandInput) {
-  if (commandInput !== 'Q' && commandInput !== 'R') {
-    return false;
+  if (commandInput !== USER_TEXT.QUIT && commandInput !== USER_TEXT.RESTART) {
+    return BOOLEAN.FALSE;
   }
 
-  return true;
+  return BOOLEAN.TRUE;
 }
 
 function checkRetryCommand(input) {
   if (!commandValidation(input)) {
-    catchError('[ERROR] 재시작,종료 R혹은 Q인 문자여야 합니다.');
-    return false;
+    catchError(ERROR_MESSAGE.COMMAND);
+    return BOOLEAN.FALSE;
   }
 
-  return true;
+  return BOOLEAN.TRUE;
 }
 
 module.exports = { commandValidation, checkRetryCommand };

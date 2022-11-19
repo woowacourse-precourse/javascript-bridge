@@ -1,4 +1,5 @@
 const { print } = require('./utils/MissionUtils');
+const { OUTPUT_TEXT } = require('./constant/contant');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -10,9 +11,12 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(mapList) {
-    const up = mapList.up.join(' | ');
-    const down = mapList.down.join(' | ');
-    return print(`[ ${up} ]`, `[ ${down} ]`);
+    const up = mapList.up.join(OUTPUT_TEXT.DIVISION);
+    const down = mapList.down.join(OUTPUT_TEXT.DIVISION);
+    return print(
+      OUTPUT_TEXT.BRIDGE_RESULT(up),
+      OUTPUT_TEXT.BRIDGE_RESULT(down)
+    );
   },
 
   /**
@@ -20,11 +24,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(mapList, successOrNot, totalResult) {
-    print('\n최종 게임 결과');
+  printResult(mapList, successResult, totalResult) {
+    print(OUTPUT_TEXT.GAME_RESULT);
     this.printMap(mapList);
-    print(`\n게임 성공 여부: ${successOrNot}`);
-    print(`총 시도한 횟수: ${totalResult}`);
+    print(OUTPUT_TEXT.SUCESS_RESULT(successResult));
+    print(OUTPUT_TEXT.TOTAL_COUNT(totalResult));
   },
 };
 

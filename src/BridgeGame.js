@@ -1,4 +1,5 @@
 const { close } = require('./utils/MissionUtils');
+const { USER_TEXT, GAME_TEXT, NUMBER, BOOLEAN } = require('./constant/contant');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -18,21 +19,21 @@ class BridgeGame {
     this.#bridgeList = [];
     this.#mapList = { up: [], down: [] };
 
-    this.#totalCount = 1;
-    this.#moveCount = 0;
+    this.#totalCount = NUMBER.ONE;
+    this.#moveCount = NUMBER.ZERO;
   }
 
   initRetry() {
-    this.#moveCount = 0;
+    this.#moveCount = NUMBER.ZERO;
     this.#mapList.up = [];
     this.#mapList.down = [];
   }
 
   progress(input) {
-    if (input === 'U' || input === 'D') {
+    if (input === USER_TEXT.UP || input === USER_TEXT.DOWN) {
       return this.progressMove(input);
     }
-    if (input === 'R' || input === 'Q') {
+    if (input === USER_TEXT.RESTART || input === USER_TEXT.QUIT) {
       return this.progressRetryOrQuit(input);
     }
   }
@@ -45,8 +46,8 @@ class BridgeGame {
   }
 
   progressRetryOrQuit(input) {
-    if (input === 'Q') {
-      return this.finish(this.#mapList, '실패', this.#totalCount);
+    if (input === USER_TEXT.QUIT) {
+      return this.finish(this.#mapList, GAME_TEXT.FAIL, this.#totalCount);
     }
 
     this.retry(input, this.#mapList);
@@ -55,10 +56,10 @@ class BridgeGame {
 
   compareMoveInput(input, index) {
     if (this.#bridgeList[index] === input) {
-      return this.setMapList(input, 'O');
+      return this.setMapList(input, GAME_TEXT.O);
     }
 
-    return this.setMapList(input, 'X');
+    return this.setMapList(input, GAME_TEXT.X);
   }
 
   compareMove(input, index, mapList) {
@@ -76,7 +77,7 @@ class BridgeGame {
   move(mapList) {
     this.outputView.printMap(mapList);
     if (this.checkSuccessGame()) {
-      return this.finish(this.#mapList, '성공', this.#totalCount);
+      return this.finish(this.#mapList, GAME_TEXT.SUCCESS, this.#totalCount);
     }
     this.progressMoving();
   }
@@ -87,7 +88,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(input, mapList) {
-    if (input === 'R') {
+    if (input === USER_TEXT.RESTART) {
       this.initRetry();
       return this.progressMoving();
     }
@@ -103,18 +104,18 @@ class BridgeGame {
 
   checkSuccessGame() {
     if (this.#bridgeList.length !== this.#moveCount) {
-      return false;
+      return BOOLEAN.FALSE;
     }
 
-    return true;
+    return BOOLEAN.TRUE;
   }
 
   setMapList(input, stingOX) {
-    if (input === 'U') {
-      return this.addMapList(stingOX, ' ');
+    if (input === USER_TEXT.UP) {
+      return this.addMapList(stingOX, GAME_TEXT.SPACE);
     }
-    if (input === 'D') {
-      return this.addMapList(' ', stingOX);
+    if (input === USER_TEXT.DOWN) {
+      return this.addMapList(GAME_TEXT.SPACE, stingOX);
     }
   }
 
@@ -124,11 +125,11 @@ class BridgeGame {
   }
 
   increamentMoveCount() {
-    return (this.#moveCount += 1);
+    return (this.#moveCount += NUMBER.ONE);
   }
 
   increamentTotalCount() {
-    return (this.#totalCount += 1);
+    return (this.#totalCount += NUMBER.ONE);
   }
 
   setBridgeList(list) {

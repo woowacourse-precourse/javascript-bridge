@@ -1,21 +1,22 @@
 const catchError = require('../utils/catchError');
+const { ERROR_MESSAGE, NUMBER, BOOLEAN } = require('../constant/contant');
 
 function bridgeValidation(bridgeInput) {
-  const bridgeNumber = Number(bridgeInput);
-  if (bridgeNumber < 3 || bridgeNumber > 20 || Number.isNaN(bridgeNumber)) {
-    return false;
+  const bridge = Number(bridgeInput);
+  if (bridge < NUMBER.THREE || bridge > NUMBER.TWENTY || Number.isNaN(bridge)) {
+    return BOOLEAN.FALSE;
   }
 
-  return true;
+  return BOOLEAN.TRUE;
 }
 
 function checkRetryBridge(input) {
   if (!bridgeValidation(input)) {
-    catchError('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
-    return false;
+    catchError(ERROR_MESSAGE.BRIDGE);
+    return BOOLEAN.FALSE;
   }
 
-  return true;
+  return BOOLEAN.TRUE;
 }
 
 module.exports = { bridgeValidation, checkRetryBridge };
