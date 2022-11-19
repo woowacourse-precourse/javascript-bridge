@@ -23,12 +23,24 @@ class App {
     this.game.move(direction);
     OutputView.printMap(this.game);
 
-    // TODO: 게임 재시작 및 종료 이후 과정을 파라미터에 넘겨주자.
-    (this.game.isGoingCorrect()) ? this.handleCorrectCase() : InputView.readGameCommand();
+    (this.game.isGoingCorrect()) ? this.handleCorrectCase() : InputView.readGameCommand(this.handleGameCommand);
   }
 
   handleCorrectCase() {
     (this.game.crossedAll()) ? this.finish() : InputView.readMoving(this.proceedAfterMove);
+  }
+
+  handleGameCommand(command) {
+    switch (command) {
+      case "R":
+        this.game.retry();
+        InputView.readMoving(this.proceedAfterMove);
+        break;
+
+      case "Q":
+        this.finish();
+        break;
+    }
   }
 
   finish() {
