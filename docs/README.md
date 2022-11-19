@@ -2,9 +2,10 @@
 
 ## 기능 목록
 - [x] 입력 받은 다리 길이로 다리를 생성한다. - BridgeMaker#makeBridge()
-- [x] 입력 받은 이동할 칸으로 이동한다. - BridgeGame#move()
 - [x] 입력 받은 이동할 칸과 다리를 비교한다. - BridgeGame#match()
-- [x] 이동 후 건넌 결과를 얻는다 - BridgeGame#getMoveResult()
+- [x] 입력 받은 이동할 칸으로 이동하여 이동한 상태를 반환한다. - BridgeGame#move()
+- [ ] 이동에 성공했는지 확인한다. - BridgeGame#checkMoveSuccess()
+- [ ] 이동할 다리가 얼마나 남았는지 확인한다. - BridgeGame#checkRemainGame()
 - [ ] 재시작 시 시도 횟수를 증가시킨다. - BridgeGame#retry()
 
 

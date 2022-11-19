@@ -6,56 +6,57 @@ const BridgeRanDomNumber = require('./BridgeRandomNumberGenerator');
 class BridgeGame {
   #bridgeSize;
   #bridge;
-  #move = [];
-  #upDownResult = [[], []];
+  #copyBridge;
+  #moveState = [[], []];
   
   constructor(bridgeSize) {
     this.#bridgeSize = bridgeSize;
     this.#bridge = this.generateBridge();
+    this.#copyBridge = this.#bridge.slice();
   }
+  
+  generateBridge() {
+    return BridgeMaker.makeBridge(this.#bridgeSize, BridgeRanDomNumber.generate);
+  }
+  
+  match(moveAnswer) {
+    if (this.#copyBridge[0] === moveAnswer) {
+      this.#copyBridge.shift()
+      return [moveAnswer, true];
+    } else {
+      this.#copyBridge.shift()
+      return [moveAnswer, false];
+    }
+  }
+  
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moveAnswer) {
-    this.#move.push(moveAnswer);
+    const matchResult = this.match(moveAnswer);
+    this.parseResult(matchResult);
+    return this.#moveState;
   }
 
-  match() {
-    return this.#move.map((el, index) => {
-      if (el === this.#bridge[index]) {
-        return [el, true];
-      }
-      return [el, false];
-    });
-  }
-
-  getMoveResult() {
-    this.match();
-    this.#move.forEach((el) => {
-      this.parseResult(el);
-    });
-    return this.#upDownResult.map(el => el.join('|'));
-  }
-
-  parseResult(el) {
-    const [upOrDown, matchBoolean] = el;
+  parseResult(matchResult) {
+    const [upOrDown, matchBoolean] = matchResult;
     if (matchBoolean) {
       if (upOrDown === 'U') {
-        this.#upDownResult[0].push(' O ');
-        this.#upDownResult[1].push('   ');
+        this.#moveState[0].push(' O ');
+        this.#moveState[1].push('   ');
       } else {
-        this.#upDownResult[0].push('   ');
-        this.#upDownResult[1].push(' O ');
+        this.#moveState[0].push('   ');
+        this.#moveState[1].push(' O ');
       }
     } else {
       if (upOrDown === 'U') {
-        this.#upDownResult[0].push(' X ');
-        this.#upDownResult[1].push('   ');
+        this.#moveState[0].push(' X ');
+        this.#moveState[1].push('   ');
       } else {
-        this.#upDownResult[0].push('   ');
-        this.#upDownResult[1].push(' X ')
+        this.#moveState[0].push('   ');
+        this.#moveState[1].push(' X ')
       }
     }
   }
@@ -66,10 +67,6 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {}
-
-  generateBridge() {
-    return BridgeMaker.makeBridge(this.#bridgeSize, BridgeRanDomNumber.generate);
-  }
 }
 
 module.exports = BridgeGame;
