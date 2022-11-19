@@ -16,4 +16,9 @@ const GAME_INPUT = {
   QUIT: 'Q',
 };
 
-module.exports = { GAME_MESSAGE, GAME_INPUT };
+ERROR_MESSAGE = {
+  INVALID_LENGTH: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+  INVALID_MOVE: '[ERROR] U와 D중 한 글자만 입력해 주세요.',
+};
+
+module.exports = { GAME_MESSAGE, GAME_INPUT, ERROR_MESSAGE };
