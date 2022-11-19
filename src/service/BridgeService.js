@@ -52,11 +52,6 @@ class BridgeService {
 
     bridgeRestart.doAction();
   }
-
-  // test를 위한 getter
-  getRepo(key) {
-    return this.#bridgeRepository.read(key);
-  }
 }
 
 module.exports = BridgeService;
