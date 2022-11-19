@@ -33,7 +33,23 @@ class App {
 
       // 현재까지 이동한 다리 상태
       this.printCurrBridgeState(upperBridge, lowerBridge);
+
+      if (canCross) {
+        if (this.isLastPosition(upperBridge)) {
+          this.quit();
+          return;
+        }
+
+        this.requestMoving();
+        return;
+      }
+
+      this.requestGameCommand();
     });
+  }
+
+  isLastPosition(playerBridge) {
+    return playerBridge.length >= this.bridgeSize;
   }
 
   printCurrBridgeState(upperBridge, lowerBridge) {
