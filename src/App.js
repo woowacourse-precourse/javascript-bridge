@@ -2,7 +2,8 @@ const InputView = require("./InputView");
 
 class App {
   play() {
-    let bridge = InputView.readBridgeSize();
+    let tryCount = 1;
+    let bridge = InputView.readBridgeSize(tryCount);
   }
 }
 

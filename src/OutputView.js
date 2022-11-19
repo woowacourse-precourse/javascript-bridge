@@ -31,12 +31,12 @@ const OutputView = {
     return;
   },
 
-  printResult(gameLength, bridge, moveUpDown, tf) {
+  printResult(gameLength, bridge, moveUpDown, tf, tryCount) {
     Console.print("\n최종 게임 결과");
     this.printMap(gameLength, bridge, moveUpDown, tf);
     if (tf) Console.print("\n게임 성공 여부: 성공");
     if (!tf) Console.print("\n게임 성공 여부: 실패");
-    Console.print("총 시도한 횟수: 1"); // 시도 횟수ㅜㅜㅜ
+    Console.print("총 시도한 횟수: " + tryCount);
     return;
   },
 };
