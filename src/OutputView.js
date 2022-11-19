@@ -17,7 +17,6 @@ const OutputView = {
 
   bridgeGameStart() {
     Console.print(OUTPUT.SEND_GAME_START);
-    this.lineBreak();
   },
 
   paintToStadard(arr) {
@@ -26,9 +25,7 @@ const OutputView = {
 
   printMap(bridgeGameResult) {
     Console.print(`[ ${this.paintToStadard(bridgeGameResult[0])} ]`);
-    Console.print(`[ ${this.paintToStadard(bridgeGameResult[1])} ]`);
-
-    this.lineBreak();
+    Console.print(`[ ${this.paintToStadard(bridgeGameResult[1])} ]\n`);
   },
 
   /**
@@ -36,13 +33,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult({ bridgeGameResult, successOrFail, tryCount }) {
+  printResult(bridgeGameResult, successOrFail, tryCount) {
     Console.print(OUTPUT.SEND_GAME_RESULT);
 
     this.printMap(bridgeGameResult);
-    Console.print(``);
 
-    Console.print(`${OUTPUT.SEND_GAME_SUCCESS_FAIL}${successOrFail}\n`);
+    Console.print(`${OUTPUT.SEND_GAME_SUCCESS_FAIL}${successOrFail}`);
     Console.print(`${OUTPUT.SEND_GAME_TRY_COUNT}${tryCount}\n`);
     Console.close();
     return;

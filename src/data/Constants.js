@@ -18,8 +18,8 @@ const INPUT = Object.freeze({
 });
 
 const OUTPUT = Object.freeze({
-  SEND_GAME_START: `다리 건너기 게임을 시작합니다.`,
-  SEND_GAME_RESULT: `최종 게임 결과\n`,
+  SEND_GAME_START: `다리 건너기 게임을 시작합니다.\n`,
+  SEND_GAME_RESULT: `최종 게임 결과`,
   SEND_GAME_SUCCESS_FAIL: `게임 성공 여부: `,
   SEND_GAME_TRY_COUNT: `총 시도한 횟수: `,
 });
