@@ -5,15 +5,20 @@
 // console.log(test223.number);
 const outputFunction = require('../src/OutputView');
 const inputFunction = require('../src/InputView');
+const BridgeGame = require('../src/BridgeGame');
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
+  constructor() {
+    this.data;
+  }
   play() {
-    //게임 시작했다는 문구 보내고
-    //다리의 길이를 입력해주세요 문구 보내고
-    //사용자가 숫자 3 ~20 숫자 입력
     outputFunction.printStart();
-    inputFunction.readBridgeSize();
-    //사용자한테 숫자 받고 BridgeGame로 숫자 전달하기 new BridgeGame()
+    const bridgeGame = new BridgeGame();
+    MissionUtils.Console.readLine('다리의 길이를 입력해주세요.', (answer) => {
+      let bridge = inputFunction.readBridgeSize(answer); // 다리 만들어서 보줘
+      bridgeGame.bridgeMake(bridge);
+    });
   }
 }
 

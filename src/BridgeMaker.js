@@ -12,9 +12,13 @@ const BridgeMaker = {
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
   makeBridge(size, generateRandomNumber) {
-    //여기에 다리의 길이와 맞는 다리위치 인자로 받아 1,0에 따른 U, D 리턴 해주기
-    //사용자가 입력한 번호와, 여기서 만들어져있는 함수 보내기
-    //그리고 1,0에 따라 U나 P리턴
+    const bridge = [];
+    while (size > 0) {
+      const randomNum = generateRandomNumber() === 1 ? 'U' : 'D';
+      bridge.push(randomNum);
+      size--;
+    }
+    return bridge;
   },
 };
 
