@@ -1,29 +1,29 @@
 const ValidationCheck = require("../src/VaildationCheck");
-const dataType = require("../src/utils/const/dataType");
+const varType = require("../src/utils/const/varType");
 
 const Validate = new ValidationCheck();
 
 describe("1. 값의 타입이 정확한가? ", () => {
   const testCase_1_fail = [
-    { testId: "1-1", param: [dataType.string, 1] },
-    { testId: "1-2", param: [dataType.array, { a: 1, b: 2 }] },
-    { testId: "1-3", param: [dataType.number, "hello"] },
+    { testId: "1-1", param: [varType.string, 1] },
+    { testId: "1-2", param: [varType.array, { a: 1, b: 2 }] },
+    { testId: "1-3", param: [varType.number, "hello"] },
   ];
   test.each(testCase_1_fail)(
     "$testId. 값의 타입이 정확하지 않을 때, $param",
     ({ param }) => {
-      expect(() => Validate.isExactDataType(...param)).toThrow();
+      expect(() => Validate.isExactVarType(...param)).toThrow();
     }
   );
 
   const testCase_1_pass = [
-    { testId: "1-4", param: [dataType.string, "thisIsString"] },
-    { testId: "1-5", param: [dataType.array, [1, 2, 3]] },
+    { testId: "1-4", param: [varType.string, "thisIsString"] },
+    { testId: "1-5", param: [varType.array, [1, 2, 3]] },
   ];
   test.each(testCase_1_pass)(
     "$testId. 값의 타입이 정확할 때, $param",
     ({ param }) => {
-      expect(Validate.isExactDataType(...param)).toBe(true);
+      expect(Validate.isExactVarType(...param)).toBe(true);
     }
   );
 });
