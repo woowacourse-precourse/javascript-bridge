@@ -36,12 +36,10 @@ class App {
     if (appStatus === 1) return this.questionBridgeMake();
     if (appStatus === 2) return this.progressBridgeMake();
     if (appStatus === 3) return this.questionBridgeMove();
-    if (appStatus === 4) {
-      this.#moveStatement = this.#brdigeGame.move(this.#moveAnswer, this.#bridge);
-      return this.progressBridgeMove();
-    }
+    if (appStatus === 4) return this.progressBridgeMove();
     if (this.#appStatus === 5) return this.questionGameRetry();
     if (this.#appStatus === 6) return this.progressGameRetry();
+    return this.progressApp(this.#appStatus);
   }
 
   questionBridgeMake() {
@@ -80,6 +78,7 @@ class App {
   }
 
   progressBridgeMove() {
+    this.#moveStatement = this.#brdigeGame.move(this.#moveAnswer, this.#bridge);
     if (this.#moveStatement) return this.progressMovementTrue();
     return this.progressMovementFalse();
   }
