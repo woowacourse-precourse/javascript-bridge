@@ -1,7 +1,7 @@
 const InputView = require("./View/InputView");
 const MissionUtils = require("@woowacourse/mission-utils");
 const OutputView = require("./View/OutputView");
-const { GAME } = require("./Constants");
+const { GAME, BRIDGE, UNIT } = require("./Constants");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -19,14 +19,33 @@ class BridgeGame {
    */
   move(direction) {
     const canCross = this.isSameDirection(direction);
-
     this.isSuccess = canCross ? GAME.SUCCESS : GAME.FAIL;
+
+    this.makePlayerBridgeState(direction, canCross);
+
+    return [canCross, this.playerUpperBridge, this.playerLowerBridge];
   }
 
   isSameDirection(direction) {
     const currPosition = this.playerUpperBridge.length;
 
     return this.computerBridge[currPosition] === direction;
+  }
+
+  makePlayerBridgeState(direction, canCross) {
+    if (direction === BRIDGE.UPPER) {
+      canCross
+        ? this.playerUpperBridge.push(BRIDGE.POSSIBLE_SIGN)
+        : this.playerUpperBridge.push(BRIDGE.IMPOSSIBLE_SIGN);
+      this.playerLowerBridge.push(UNIT.BLANK);
+    }
+
+    if (direction === BRIDGE.LOWER) {
+      canCross
+        ? this.playerLowerBridge.push(BRIDGE.POSSIBLE_SIGN)
+        : this.playerLowerBridge.push(BRIDGE.IMPOSSIBLE_SIGN);
+      this.playerUpperBridge.push(UNIT.BLANK);
+    }
   }
 
   /**
