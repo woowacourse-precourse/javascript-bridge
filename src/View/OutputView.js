@@ -16,14 +16,14 @@ const OutputView = {
     );
   },
 
-  makeMap(answer, isCorrect) {
-    this.drawBridge(answer, isCorrect);
+  makeMap(input, isCorrect) {
+    this.drawBridge(input, isCorrect);
     this.printMap();
   },
 
-  drawBridge(answer, isCorrect) {
-    if (answer == INPUT_UP) this.drawUpside(isCorrect);
-    if (answer == INPUT_DOWN) this.drawDownside(isCorrect);
+  drawBridge(input, isCorrect) {
+    if (input == INPUT_UP) this.drawUpside(isCorrect);
+    if (input == INPUT_DOWN) this.drawDownside(isCorrect);
   },
 
   drawUpside(isCorrect) {

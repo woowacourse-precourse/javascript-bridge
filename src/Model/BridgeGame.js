@@ -16,9 +16,9 @@ class BridgeGame {
     this.#bridge = BridgeMaker.makeBridge(size, RandomNumberGenerator.generate);
   }
 
-  checkInputCorrect(answer) {
+  checkInputCorrect(input) {
     this.isCorrect = false;
-    if (this.move(answer)) this.progressOneStep();
+    if (this.move(input)) this.progressOneStep();
 
     this.progressIdx += 1;
     return this.isCorrect;
@@ -29,10 +29,10 @@ class BridgeGame {
     this.isCorrect = true;
   }
 
-  move(answer) {
+  move(input) {
     return (
-      (answer == "U" && answer == this.#bridge[this.progressIdx]) ||
-      (answer == "D" && answer == this.#bridge[this.progressIdx])
+      (input == "U" && input == this.#bridge[this.progressIdx]) ||
+      (input == "D" && input == this.#bridge[this.progressIdx])
     );
   }
 
@@ -52,12 +52,12 @@ class BridgeGame {
     this.progressIdx = this.numberOfCorrect = 0;
   }
 
-  retry(answer) {
-    if (answer == "R") {
+  retry(input) {
+    if (input == "R") {
       this.setInitializeCondition();
       return true;
     }
-    if (answer == "Q") return false;
+    if (input == "Q") return false;
   }
 }
 

@@ -1,21 +1,22 @@
 const ValidCmd = (cmd) => {
-  return cmd != "R" && cmd != "Q" ? false : true;
+  if (cmd != "R" && cmd != "Q") throw new Error();
 };
 
 const ValidMove = (move) => {
-  return move != "U" && move != "D" ? false : true;
+  if (move != "U" && move != "D") throw new Error();
 };
 
 const ValidSize = (input) => {
-  return CheckNotANumber(input) && CheckInputRange(input);
+  CheckNotANumber(input);
+  CheckInputRange(input);
 };
 
 const CheckNotANumber = (input) => {
-  return !isNaN(input) ? true : false;
+  if (isNaN(input)) throw new Error();
 };
 
 const CheckInputRange = (input) => {
-  return +input < 3 || +input > 20 ? false : true;
+  if (+input < 3 || +input > 20) throw new Error();
 };
 
 module.exports = {

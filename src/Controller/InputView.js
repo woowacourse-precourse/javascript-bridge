@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const GameController = require("./GameController");
+const GameController = require("../Controller/GameController");
 const { GUIDE_MSG, ERROR_MSG } = require("../Messages/constants");
 const {
   ValidCmd,
@@ -16,15 +16,11 @@ const InputView = {
 
   inputSizeForm(answer) {
     try {
-      this.checkInputSize(answer);
+      ValidSize(answer);
       this.startBridgeGame(answer);
     } catch (error) {
       this.printMsgAndReadSizeAgain();
     }
-  },
-
-  checkInputSize(answer) {
-    if (!ValidSize(answer)) throw new Error();
   },
 
   printMsgAndReadSizeAgain() {
@@ -45,15 +41,11 @@ const InputView = {
 
   inputMovingForm(answer) {
     try {
-      this.checkInputMove(answer);
+      ValidMove(answer);
       this.checkBridge(answer);
     } catch (error) {
       this.printMsgAndReadMovingAgain();
     }
-  },
-
-  checkInputMove(answer) {
-    if (!ValidMove(answer)) throw new Error();
   },
 
   printMsgAndReadMovingAgain() {
@@ -87,15 +79,11 @@ const InputView = {
 
   inputGameCmdForm(answer) {
     try {
-      this.checkInputCmd(answer);
+      ValidCmd(answer);
       this.selectRestartOrQuit(answer);
     } catch (error) {
       this.printMsgAndInputCmdAgain();
     }
-  },
-
-  checkInputCmd(answer) {
-    if (!ValidCmd(answer)) throw new Error();
   },
 
   printMsgAndInputCmdAgain() {
