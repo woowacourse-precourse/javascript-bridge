@@ -35,9 +35,19 @@ const InputView = {
         const bridgeGame = new BridgeGame();
         this.gameStatus.liveOrDie = bridgeGame.move(direction, this.gameStatus);
         if (this.gameStatus.liveOrDie) {
-          OutputView.printMap(this.gameStatus);
-          this.gameStatus.currentPosition += 1;
-          this.readMoving();
+          if (
+            this.gameStatus.bridge.length - 1 ===
+            this.gameStatus.currentPosition
+          )
+            OutputView.printResult(this.gameStatus);
+          if (
+            this.gameStatus.bridge.length - 1 !==
+            this.gameStatus.currentPosition
+          ) {
+            OutputView.printMap(this.gameStatus);
+            this.gameStatus.currentPosition += 1;
+            this.readMoving();
+          }
         }
         if (!this.gameStatus.liveOrDie) {
           this.readGameCommand();
