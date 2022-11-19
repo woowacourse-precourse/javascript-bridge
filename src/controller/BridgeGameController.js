@@ -1,4 +1,3 @@
-
 const Bridge = require("../model/Bridge");
 const OutputView = require('../view/OutputView');
 const { ERROR_HANDLING } = require("../Error");
@@ -15,7 +14,6 @@ class BridgeGameController {
     makeBridge(bridgeGame, size) {
         try {
             bridgeGame.setBridge(new Bridge(size));
-            // console.log(bridgeGame.getBridge()); // 답안 확인용 코드
         } catch (error) {
             ERROR_HANDLING[error.message](bridgeGame, error.message);
         }

@@ -8,27 +8,28 @@ const ERROR = Object.freeze({
     INVALID_COMMAND: '[ERROR] 입력값은 R 또는 Q 여야합니다.\n',
     FAIL_MOVE: '[ERROR] 건널 수 없는 곳 입니다.\n'
 });
+const ErrorView = require('./view/ErrorView');
 
 /**
  * 에러 타입에 따라 실행해야할 에러 핸들링 메서드들
  */
 const ERROR_HANDLING = Object.freeze({
     "[ERROR] 3이상 20이하 사이의 숫자여야 합니다.\n": (bridgeGame, message) => {
-        const OutputView = require('./view/OutputView');
+        const ErrorView = require('./view/ErrorView');
         const InputView = require('./view/InputView');
-        OutputView.printError(message);
+        ErrorView.printError(message);
         InputView.readBridgeSize(bridgeGame);
     },
     "[ERROR] 입력값은 숫자여야 합니다.\n": (bridgeGame, message) => {
-        const OutputView = require('./view/OutputView');
+        const ErrorView = require('./view/ErrorView');
         const InputView = require('./view/InputView');
-        OutputView.printError(message);
+        ErrorView.printError(message);
         InputView.readBridgeSize(bridgeGame);
     },
     "[ERROR] 입력값은 U 또는 D 여야합니다.\n": (bridgeGame, message) => {
-        const OutputView = require('./view/OutputView');
+        const ErrorView = require('./view/ErrorView');
         const InputView = require('./view/InputView');
-        OutputView.printError(message);
+        ErrorView.printError(message);
         InputView.readMoving(bridgeGame);
     },
     '[ERROR] 건널 수 없는 곳 입니다.\n': (bridgeGame) => {
@@ -38,9 +39,9 @@ const ERROR_HANDLING = Object.freeze({
         InputView.readGameCommand(bridgeGame);
     },
     '[ERROR] 입력값은 R 또는 Q 여야합니다.\n': (bridgeGame, message) => {
-        const OutputView = require('./view/OutputView');
+        const ErrorView = require('./view/ErrorView');
         const InputView = require('./view/InputView');
-        OutputView.printError(message);
+        ErrorView.printError(message);
         InputView.readGameCommand(bridgeGame);
     }
 });
