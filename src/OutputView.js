@@ -23,9 +23,9 @@ const OutputView = {
     Console.print(`[ ${processedDBlock} ]`);
   },
 
-  printResult(result) {
+  printResult(result, blocks) {
     Console.print('최종 게임 결과');
-    Console.print('결과맵 다시 출력해');
+    this.printMap(blocks[0], blocks[1]);
 
     Console.print(`게임 성공 여부: ${result}`);
     Console.print(`총 시도한 횟수: `);

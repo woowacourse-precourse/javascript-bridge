@@ -26,19 +26,19 @@ const InputView = {
       OutputView.printMap(UBlock, DBlock);
 
       if (UBlock.includes('X') || DBlock.includes('X')) {
-        this.readGameCommand(bridgeGame);
+        this.readGameCommand(bridgeGame, [UBlock, DBlock]);
       }
 
       if (!bridgeGame.isFinish()) {
         this.readMoving(bridgeGame);
       }
       if (bridgeGame.isFinish()) {
-        OutputView.printResult('성공');
+        OutputView.printResult('성공', [UBlock, DBlock]);
       }
     });
   },
 
-  readGameCommand(bridgeGame) {
+  readGameCommand(bridgeGame, blocks) {
     Console.readLine(
       '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
       (input) => {
@@ -48,7 +48,7 @@ const InputView = {
           this.readMoving(bridgeGame);
         }
         if (input === 'Q') {
-          OutputView.printResult('실패');
+          OutputView.printResult('실패', blocks);
         }
       }
     );
