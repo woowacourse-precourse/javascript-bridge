@@ -1,0 +1,19 @@
+const { Console } = require("@woowacourse/mission-utils");
+const BridgeMaker = require("../BridgeMaker");
+const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
+const Bridge = require("../models/Bridge");
+const BridgeGame = require("../models/BridgeGame");
+const InputView = require("../views/InputView");
+const OutputView = require("../views/OutputView");
+
+
+class BrideGameController {
+  #bridgeGame;
+
+  start() {
+    OutputView.printIntialMessage();
+    InputView.readBridgeSize(this.handleGameStartPhase);
+  }
+}
+
+module.exports = BrideGameController;
