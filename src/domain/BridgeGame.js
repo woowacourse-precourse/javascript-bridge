@@ -3,9 +3,6 @@ const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const User = require('../model/User');
 const GameMap = require('../model/GameMap');
 
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 class BridgeGame {
   constructor() {
     this.user = new User();
@@ -20,8 +17,16 @@ class BridgeGame {
   }
 
   setupGameMap(gameMap) {
-    this.gameMap.setGameMap(gameMap);
-    console.log(this.gameMap.getBridgeMap()); // 게임 맵 디버깅용
+    this.gameMap.setCorretBridge(gameMap);
+    console.log(this.gameMap.getCorretBridge(), '\n'); // 게임 맵 디버깅용
+  }
+
+  drawBridgeMap(moveCommand) {
+    return this.gameMap.drawBridge(moveCommand, this.getUserLocation());
+  }
+
+  getUserLocation() {
+    return this.user.getLocation();
   }
 
   /**
