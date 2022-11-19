@@ -14,6 +14,7 @@ const GAME = Object.freeze({
 });
 
 const SENTENCE = Object.freeze({
+  newLine: '\n',
   start: '다리 건너기 게임을 시작합니다.',
   bridgeLength: '다리의 길이를 입력해주세요.',
   selectMoving: `이동할 칸을 선택해주세요. (위: ${BRIDGE.up}, 아래: ${BRIDGE.down})`,
@@ -24,7 +25,7 @@ const RESULT = Object.freeze({
   correct: 'O',
   incorrect: 'X',
   blank: ' ',
-  sentence: '최종 게임 결과',
+  final: '최종 게임 결과',
   openBracket: '[',
   closeBracket: ']',
   divider: ' | ',
