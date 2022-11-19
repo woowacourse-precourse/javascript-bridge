@@ -57,6 +57,7 @@ class BridgeGame {
 
   retry(command) {
     if (command === 'R') {
+      this.#gameTryCount += 1;
       this.init();
       return true;
     }
