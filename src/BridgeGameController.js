@@ -11,6 +11,4 @@ class BridgeGameController {
   }
 }
 
-//const bridgeGameController = new BridgeGameController();
-
 module.exports = BridgeGameController;
