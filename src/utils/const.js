@@ -10,10 +10,10 @@ const MOVING = {
   D: 1,
 };
 
-const COMMAND = {
-  R: 0,
-  Q: 1,
-};
+const RETRY = 'R';
+const QUIT = 'Q';
+
+const COMMAND = { RETRY, QUIT };
 
 const STATUS = {
   CONTINUE: 0,

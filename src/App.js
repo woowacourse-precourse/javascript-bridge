@@ -4,7 +4,6 @@ const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const MissionUtils = require('@woowacourse/mission-utils');
-const { COMMAND } = require('./utils/const');
 
 class App {
   /** @type {BridgeGame} */
@@ -50,10 +49,8 @@ class App {
   restartGame() {
     InputView.readGameCommand((gameCommand) => {
       try {
-        const command = COMMAND[gameCommand];
-        if (command === COMMAND.R) this.#bridgeGame.retry();
-
-        this.#commands[command].call(this);
+        const status = this.#bridgeGame.retry(gameCommand);
+        this.#commands[status].call(this);
       } catch (error) {
         MissionUtils.Console.print(error.message);
         this.restartGame();

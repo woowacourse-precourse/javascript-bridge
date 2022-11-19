@@ -3,7 +3,7 @@
 const Bridge = require('./Bridge');
 const Player = require('./Player');
 const StatusGenerator = require('./StatusGenerator');
-const { MARKING } = require('./utils/const');
+const { MARKING, COMMAND } = require('./utils/const');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -31,7 +31,6 @@ class BridgeGame {
    */
   move(moving) {
     const currentStep = this.#player.getStep();
-
     const isCorrect = this.#bridge.isCorrect(moving, currentStep);
     const isLast = this.#bridge.isLast(currentStep);
     const mark = isCorrect ? MARKING.CORRECT : MARKING.WRONG;
@@ -45,10 +44,17 @@ class BridgeGame {
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
+   * @param {string} gameCommand
+   * @return {0 | 1}
    */
-  retry() {
-    this.#player = new Player();
-    this.#count += 1;
+  retry(gameCommand) {
+    if (gameCommand === COMMAND.RETRY) {
+      this.#player = new Player();
+      this.#count += 1;
+      return 0;
+    }
+
+    return 1;
   }
 
   getResultInfo() {
