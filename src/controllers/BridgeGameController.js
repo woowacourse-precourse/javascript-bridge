@@ -78,7 +78,13 @@ class BridgeGameController {
     InputView.readGameCommand(onReadGameCommand);
   }
 
-  excuteGameCommand(gameCommand) {}
+  excuteGameCommand(gameCommand) {
+    const isRetry = gameCommand === GAME.RETRY;
+    if (isRetry) {
+      this.#bridgeGame.retry();
+      return this.readMoving();
+    }
+  }
 }
 
 module.exports = BridgeGameController;
