@@ -4,6 +4,7 @@ const InputView = require("../view/InputView");
 const BridgeMaker = require("../BridgeMaker");
 const { RETRY } = require("../view/stringsUI");
 const Player = require("../model/Player");
+const Bridge = require("../model/Bridge");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -30,10 +31,8 @@ class BridgeGame {
   }
 
   createBridgeModel(size) {
-    this.bridgeModel = BridgeMaker.makeBridge({
-      size,
-      generateRandomNumber: this.generateRandomNumber,
-    });
+    const bridgeArr = BridgeMaker.makeBridge(size, this.generateRandomNumber);
+    this.bridgeModel = new Bridge(bridgeArr);
     this.getPlayerMove();
   }
 

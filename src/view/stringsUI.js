@@ -20,6 +20,8 @@ const OUTPUT = {
 const BRIDGE = {
   SIZE_MIN: 3,
   SIZE_MAX: 20,
+  1: "U",
+  0: "D",
 };
 const MOVING = {
   U: 1,
