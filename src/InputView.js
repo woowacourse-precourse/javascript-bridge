@@ -34,8 +34,7 @@ const InputView = {
   readMoving() {
     Console.readLine(MESSAGE.INPUT_BRIDGE_MOVE, (move) => {
       try {
-        this.bridgeMoveGo(move);
-        this.bridgeMoveOneMore();
+        this.bridgeMoveGo(move, this.bridgeMoveOneMore);
       } catch (error) {
         this.bridgeMoveRetry(error);
       }
@@ -71,12 +70,14 @@ const InputView = {
     this.readBridgeSize();
   },
 
-  bridgeMoveGo(move) {
+  bridgeMoveGo(move, callback) {
     this.bridgeGame.move(move, this.bridge.getBridge());
     OutputView.printMap(this.bridgeGame.returnUpDownArray());
     if (!this.bridgeGame.checkX()) {
       this.readGameCommand();
+      return;
     }
+    callback.call(InputView);
   },
 
   bridgeMoveOneMore() {
