@@ -4,7 +4,7 @@ const OutputView = require('./OutputView.js');
 const BridgeMaker = require('./BridgeMaker.js');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator.js');
 const Bridge = require('./model/Bridge.js');
-const { isCollectBridgeLength, isValidateMoveInput } = require('./utils/validator.js');
+const { isCollectBridgeLength, isValidateMoveInput, isValidateRetryInput } = require('./utils/validator.js');
 const { Console } = require('@woowacourse/mission-utils');
 
 class BridgeGameController {
@@ -46,6 +46,7 @@ class BridgeGameController {
   }
 
   askWantRetry(answer) {
+    isValidateRetryInput(answer);
     if (answer === 'R') {
       this.bridgeGame.retry(this.bridge);
       this.bridgeGame.retryCount += 1;

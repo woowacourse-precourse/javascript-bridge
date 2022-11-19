@@ -15,4 +15,12 @@ const isValidateMoveInput = (number) => {
   }
 };
 
-module.exports = { isCollectBridgeLength, isValidateMoveInput };
+const isValidateRetryInput = (number) => {
+  const moveInputRegex = /^[R|Q]$/g;
+  if (!number.match(moveInputRegex)) {
+    Console.close();
+    throw new Error('R 또는 Q 문자만 입력이 가능합니다.');
+  }
+};
+
+module.exports = { isCollectBridgeLength, isValidateMoveInput, isValidateRetryInput };
