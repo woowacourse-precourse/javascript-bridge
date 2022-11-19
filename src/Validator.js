@@ -22,5 +22,14 @@ const Validator = {
     const movementIsValid = movement === 'U' || movement === 'D';
     if (!movementIsValid) throw new Error(MESSAGE.ERROR_NOT_U_OR_D);
   },
+
+  /**
+   * 사용자 재시작 or 종료에 대한 입력값을 검증
+   * @param {string} command input으로 들어온 사용자의 재시작 여부
+   */
+  commandValidate(command) {
+    const commandIsValid = command === 'R' || command === 'Q';
+    if (!commandIsValid) throw new Error(MESSAGE.ERROR_NOT_R_OR_Q);
+  },
 };
 module.exports = Validator;
