@@ -22,8 +22,12 @@ class App {
 
   startGame() {
     InputView.readBridgeSize((bridgeSize) => {
-      this.#bridgeGame = new BridgeGame(Number(bridgeSize));
-      this.continueGame();
+      try {
+        this.#bridgeGame = new BridgeGame(bridgeSize);
+        this.continueGame();
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
     });
   }
 
