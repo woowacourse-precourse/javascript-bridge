@@ -5,6 +5,7 @@ const OutputView = require("./OutputView");
 class BridgeGame {
   play() {
     OutputView.startSentence();
+    OutputView.lengthBridgeSentence();
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
