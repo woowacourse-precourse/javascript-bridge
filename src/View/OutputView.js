@@ -38,5 +38,9 @@ const OutputView = {
   printStart() {
     Console.print(MESSAGE.START_GAME);
   },
+
+  close() {
+    Console.close();
+  },
 };
 module.exports = OutputView;
