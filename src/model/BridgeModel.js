@@ -36,16 +36,15 @@ class BridgeModel {
   }
 
   paintMap(direction, isRight) {
-    this.map.forEach((path) => path.push(' '));
-    this.map[DIRECTION[direction]].pop();
-    switch(isRight){
-      case(true):
-        return this.map[DIRECTION[direction]].push('O');
-      default:
-        return this.map[DIRECTION[direction]].push('X');    
+    if( direction === DIRECTION.UP ) {
+      this.map[0].push(isRight ? 'O' : 'X');
+      this.map[1].push(' ');
     }
+    if( direction === DIRECTION.DOWN ) {
+      this.map[1].push(isRight ? 'O' : 'X');
+      this.map[0].push(' ');
+    } 
   }
-
 }
 
 module.exports = BridgeModel;

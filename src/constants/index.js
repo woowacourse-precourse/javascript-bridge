@@ -14,6 +14,8 @@ module.exports = {
     D: 1,
     0: 'D',
     1: 'U',
+    UP: 'U',
+    DOWN: 'D',
   }),
   TYPE : Object.freeze({
     SIZE : 'SIZE',
