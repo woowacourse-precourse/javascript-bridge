@@ -31,7 +31,7 @@ const InputView = {
   readGameCommand(bridgeGamePresenter) {
     Console.readLine(INPUT.GET_RETRY, (retry) => {
       Validation.inputRetry(retry);
-      bridgeGamePresenter.checkRetry(retry);
+      bridgeGamePresenter.checkRetryInput(retry);
     });
   },
 };

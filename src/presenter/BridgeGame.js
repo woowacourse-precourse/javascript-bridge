@@ -68,25 +68,25 @@ class BridgeGame {
   }
 
   checkNextMove() {
-    if (this.isNext()) {
-      this.getPlayerMove();
-    } else {
-      InputView.readGameCommand(this);
+    const { isFinish, isMove } = this.getMoveFinishBooleans();
+    if (!isFinish) {
+      return this.checkNextInput(isMove);
     }
+    return this.quit();
   }
 
-  isNext() {
-    const currPlayerIndex = this.playerModel.inputArr.length - 1;
-    const isFinish = this.bridgeModel.length === currPlayerIndex + 1;
-    const currMove = this.playerModel.inputArr[currPlayerIndex];
-    return !isFinish && currMove.isMove;
+  checkNextInput(isMove) {
+    if (isMove) {
+      return this.getPlayerMove();
+    }
+    return InputView.readGameCommand(this);
   }
 
-  isSuccess() {
+  getMoveFinishBooleans() {
     const currPlayerIndex = this.playerModel.inputArr.length - 1;
-    const isFinish = this.bridgeModel.length === currPlayerIndex + 1;
-    const currMove = this.playerModel.inputArr[currPlayerIndex];
-    return isFinish && currMove.isMove;
+    const isFinish = this.bridgeModel.createdArr.length === currPlayerIndex + 1;
+    const { isMove } = this.playerModel.inputArr[currPlayerIndex];
+    return { isFinish, isMove };
   }
 
   /**
@@ -100,7 +100,7 @@ class BridgeGame {
     this.getPlayerMove();
   }
 
-  checkRetry(retry) {
+  checkRetryInput(retry) {
     if (RETRY[retry]) {
       this.retry();
     } else {
@@ -109,10 +109,11 @@ class BridgeGame {
   }
 
   quit() {
-    const playerResult = this.isSuccess();
+    const { isFinish, isMove } = this.getMoveFinishBooleans();
+    const isSuccess = isFinish && isMove;
     OutputView.printResult({
       resultMap: this.playerModel.bridgeMap,
-      playerResult,
+      isSuccess,
       totalTrial: this.totalTrial,
     });
   }
