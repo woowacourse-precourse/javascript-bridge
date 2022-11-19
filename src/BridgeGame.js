@@ -4,7 +4,10 @@ const { Console } = require('@woowacourse/mission-utils');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #retryCount;
+
   constructor() {
+    this.#retryCount = 1;
     this.welcomeMessage();
   }
 
@@ -56,6 +59,13 @@ class BridgeGame {
     bridge.retry();
   }
 
+  get retryCount() {
+    return this.#retryCount;
+  }
+
+  set retryCount(value) {
+    this.#retryCount = value;
+  }
 }
 
 module.exports = BridgeGame;

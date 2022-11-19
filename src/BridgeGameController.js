@@ -37,6 +37,11 @@ class BridgeGameController {
   }
 
   askWantRetry(answer) {
+    if (answer === 'R') {
+      this.bridgeGame.retry(this.bridge);
+      this.bridgeGame.retryCount += 1;
+      InputView.readMoving(this.movingByUser.bind(this));
+    } 
   }
 }
 
