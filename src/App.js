@@ -15,17 +15,19 @@ class App {
 
     const bridge = BridgeMaker.makeBridge(bridgeSize, generate);
 
-    // let moving = null;
-    // while (moving !== "D" && moving !== "U") {
-    //   moving = await InputView.readMoving();
-    //   this.movingValidate(moving);
-    // }
+    let moving = null;
+    while (moving !== "D" && moving !== "U") {
+      moving = await InputView.readMoving();
+      this.movingValidate(moving);
+    }
 
-    // let regame = null;
-    // while (regame !== "Q" && regame !== "R") {
-    //   regame = await InputView.readGameCommand();
-    //   this.gameCommandValidate(regame);
-    // }
+    let regame = null;
+    while (regame !== "Q" && regame !== "R") {
+      regame = await InputView.readGameCommand();
+      this.gameCommandValidate(regame);
+    }
+
+    
   }
 
   bridgeSizeValidate(number) {

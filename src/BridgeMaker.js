@@ -23,7 +23,6 @@ const BridgeMaker = {
     let finalBridge = [];
     let temp = "";
     for (let i = 0; i < 2; i++) {
-      console.log(bridge[i])
       temp = bridge[i].replace(/0/g, "X");
       temp = temp.replace(/1/g, "O");
       finalBridge.push(temp);
