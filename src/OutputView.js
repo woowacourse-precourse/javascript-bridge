@@ -10,6 +10,7 @@ const OutputView = {
     const { upper, lower } = resultArrays;
     OutputView.printSingleMap(upper);
     OutputView.printSingleMap(lower);
+    Console.print('');
   },
 
   printSingleMap(resultArray) {
@@ -20,7 +21,17 @@ const OutputView = {
     );
   },
 
-  printResult() {},
+  printResult(game) {
+    Console.print(NOTICE.FINAL_RESULT);
+    OutputView.printMap(game.getResultArray());
+    Console.print(
+      `${NOTICE.GAME_SUCCESS}${
+        game.isFailed() ? RESULT.FAILURE : RESULT.SUCCESS
+      }`
+    );
+    Console.print(`${NOTICE.TOTAL_ATTEMPT}${game.getAttempts()}`);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
