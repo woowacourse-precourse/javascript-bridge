@@ -1,7 +1,4 @@
-const UPSIDE_NUMBER = "1";
-const DOWNSIDE_NUMBER = "0";
-const UPSIDE_STRING = "U";
-const DOWNSIDE_STRING = "D";
+const { MOVING } = require("./constants/Values");
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -20,8 +17,8 @@ const BridgeMaker = {
     for(let index = 0; index < size; index++) {
       const number = generateRandomNumber();
       bridgeNumbers.push(number);
-      if(bridgeNumbers[index] === UPSIDE_NUMBER) bridgeStrings.push(UPSIDE_STRING);
-      if(bridgeNumbers[index] === DOWNSIDE_NUMBER) bridgeStrings.push(DOWNSIDE_STRING);
+      if(bridgeNumbers[index] === MOVING.UPSIDE_NUMBER) bridgeStrings.push(MOVING.UPSIDE_STRING);
+      if(bridgeNumbers[index] === MOVING.DOWNSIDE_NUMBER) bridgeStrings.push(MOVING.DOWNSIDE_STRING);
     }
     return bridgeStrings;
   }
