@@ -86,9 +86,11 @@ class App {
         return this.movePrint()
     }
   }
-  // 게임 다시 시작
+
   askRetry(result,userMove){
-    BridgeBuild.xBridge(result,userMove,this.BRIDGE_U,this.BRIDGE_D)
+    // [result,userMove]
+    const RESULT_USERMOVE = [result,userMove]
+    BridgeBuild.xBridge(RESULT_USERMOVE,this.BRIDGE_U,this.BRIDGE_D)
     return OutputView.printMap(this.BRIDGE_U,this.BRIDGE_D)
   }
 
