@@ -5,6 +5,7 @@ const InputValidator = require('./InputValidator');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const command = require('./util/command');
+const View = require('./View');
 
 class App {
   constructor() {
@@ -48,6 +49,7 @@ class App {
           this.bridgeGame.gameStatus,
           this.bridgeGame.gameCount
         );
+        View.close();
       }
       if (result === 'MOVE') {
         InputView.readMoving(this.handleInputStep.bind(this));
@@ -74,6 +76,7 @@ class App {
           this.bridgeGame.gameStatus,
           this.bridgeGame.gameCount
         );
+        View.close();
       }
       if (input === command.GAME_RESTART) {
         this.bridgeGame.retry();
