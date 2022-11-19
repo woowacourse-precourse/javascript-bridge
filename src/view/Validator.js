@@ -35,7 +35,19 @@ class Validator {
     }
   }
 
-  invalidMoveCommand() {}
+  checkMoveCommand(userInput) {
+    this.emptyInput(userInput);
+    this.invalidMoveCommand(userInput);
+  }
+
+  invalidMoveCommand(moveCommand) {
+    const regExp = /^U{1}$|^D{1}$/;
+    const isValidCommand = regExp.test(moveCommand);
+    if (!isValidCommand) {
+      throw ERROR_TYPE.move;
+    }
+  }
+
   invalidRetryCommand() {}
 }
 
