@@ -19,13 +19,17 @@ class App {
     InputView.readMoving(inputMove => {
       const isSuccess = this.bridgeGame.move(inputMove);
       const isGameOver = this.bridgeGame.getGameOver();
+      const bridgeMap = this.bridgeGame.getBridgeMap();
       if (!isSuccess) {
+        OutputView.printMap(bridgeMap);
         this.userInputEnd();
         return;
       } else if (isSuccess && isGameOver) {
-        OutputView.printResult(this.bridgeGame.end());
+        OutputView.printMap(bridgeMap);
+        OutputView.printResult(this.bridgeGame.end(), bridgeMap);
         return;
       }
+      OutputView.printMap(bridgeMap);
       this.userInputMove();
     });
   }
@@ -33,7 +37,8 @@ class App {
   userInputEnd() {
     InputView.readGameCommand(inputEnd => {
       if (inputEnd === 'Q') {
-        OutputView.printResult(this.bridgeGame.end());
+        const bridgeMap = this.bridgeGame.getBridgeMap();
+        OutputView.printResult(this.bridgeGame.end(), bridgeMap);
       } else if (inputEnd === 'R') {
         this.bridgeGame.retry();
         this.userInputMove();

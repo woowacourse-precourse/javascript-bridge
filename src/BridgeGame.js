@@ -10,6 +10,8 @@ class BridgeGame {
   #isSuccess;
   #userAttempt;
   #isGameOver;
+  #bridgeMap1;
+  #bridgeMap2;
 
   constructor() {
     this.#bridge = [];
@@ -17,10 +19,16 @@ class BridgeGame {
     this.#userPos = 0;
     this.#userAttempt = 1;
     this.#isGameOver = false;
+    this.#bridgeMap1 = [];
+    this.#bridgeMap2 = [];
   }
 
   getGameOver() {
     return this.#isGameOver;
+  }
+
+  getBridgeMap() {
+    return [this.#bridgeMap1, this.#bridgeMap2];
   }
 
   /**
@@ -31,9 +39,11 @@ class BridgeGame {
   move(userMove) {
     this.checkMove(this.#bridge[this.#userPos], userMove);
     if (!this.#isSuccess) {
+      this.bridgeMap(this.#bridge[this.#userPos], userMove);
       this.#userPos = 0;
       return;
     }
+    this.bridgeMap(this.#bridge[this.#userPos], userMove);
     this.#userPos++;
     return !!this.#isSuccess;
   }
@@ -46,6 +56,22 @@ class BridgeGame {
     }
   }
 
+  bridgeMap(bridge, userMove) {
+    if (bridge === 'U' && userMove === 'U') {
+      this.#bridgeMap1.push(' O ');
+      this.#bridgeMap2.push('   ');
+    } else if (bridge === 'U' && userMove === 'D') {
+      this.#bridgeMap1.push('   ');
+      this.#bridgeMap2.push(' X ');
+    } else if (bridge === 'D' && userMove === 'D') {
+      this.#bridgeMap1.push('   ');
+      this.#bridgeMap2.push(' O ');
+    } else if (bridge === 'D' && userMove === 'U') {
+      this.#bridgeMap1.push(' X ');
+      this.#bridgeMap2.push('   ');
+    }
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
@@ -55,6 +81,8 @@ class BridgeGame {
     this.#userPos = 0;
     this.#isGameOver = false;
     this.#userAttempt++;
+    this.#bridgeMap1 = [];
+    this.#bridgeMap2 = [];
   }
 
   init(bridgeSize) {
