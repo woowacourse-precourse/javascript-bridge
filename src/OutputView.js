@@ -48,8 +48,6 @@ const OutputView = {
     upper_text += ']';
     lower_text += ']';
 
-    // console.log(upper_text);
-    // console.log(lower_text);
     MissionUtils.Console.print(upper_text);
     MissionUtils.Console.print(lower_text);
   },
@@ -59,8 +57,15 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(moving_list, last_uncorrect_move) {
-    console.log('llllllllllllist and move', moving_list, last_uncorrect_move);
+  printResult(moving_list, success, retry) {
+    MissionUtils.Console.print('최종 게임 결과');
+    this.printMap(moving_list);
+    if (success) {
+      MissionUtils.Console.print('게임 성공 여부: 성공');
+    } else {
+      MissionUtils.Console.print('게임 성공 여부: 실패');
+    }
+    MissionUtils.Console.print(`총 시도한 횟수: ${retry}`);
   },
 };
 

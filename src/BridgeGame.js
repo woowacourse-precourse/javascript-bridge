@@ -30,7 +30,7 @@ class BridgeGame {
         // this.retry();
       }
     }
-    // OutputView.printResult();
+    OutputView.printResult(this.current_moving, true, this.try);
   }
 
   /**
