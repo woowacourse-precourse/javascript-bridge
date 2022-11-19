@@ -13,7 +13,7 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(Message.BRIDGE_LENGTH, (input) => {
-      CheckError.checkBridgeLength();
+      CheckError.checkBridgeLength(input);
     });
   },
 
