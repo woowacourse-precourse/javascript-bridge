@@ -10,38 +10,37 @@ class BridgeMap {
   #bridgeMap = MapMaker.makeMap();
 
   cofirm() {
-    // const [up, down] = this.#bridgeMap;
-    console.log(this.#bridgeMap);
+    const [up, down] = this.#bridgeMap;
+    console.log(`[${up.join('')}]\n[${down.join('')}]`);
   }
 
   handleMap(boolean, input) {
-    const beforeMap = this.#bridgeMap;
     // console.log(beforeMap, '저장된맵');
     if (this.#isFirst) {
-      this.#bridgeMap = this.addFirstMap(boolean, input, beforeMap);
+      this.#bridgeMap = this.addMap(boolean, input);
       this.#isFirst = false;
       return true;
     }
     if (!this.#isFirst) {
-      this.#bridgeMap = this.addMap(boolean, input, beforeMap);
+      this.#bridgeMap = this.addMap(boolean, input);
       return true;
     }
   }
 
-  addFirstMap(boolean, input, beforeMap) {
-    // this.#isFirst = false;
-    // console.log(boolean, input, beforeMap, 'addfristMap 확인용');
-    if (boolean) return BridgeMap.addCorrect(input, beforeMap, this.#FIRST_MAP_SOURCE);
-    if (!boolean) return BridgeMap.addIncorrect(input, beforeMap, this.#FIRST_MAP_SOURCE);
+  addMap(boolean, input) {
+    if (this.#isFirst) {
+      if (boolean) return this.addCorrect(input, this.#FIRST_MAP_SOURCE);
+      if (!boolean) return this.addIncorrect(input, this.#FIRST_MAP_SOURCE);
+    }
+    if (!this.#isFirst) {
+      if (boolean) return this.addCorrect(input, this.#MAP_SOURCE);
+      if (!boolean) return this.addIncorrect(input, this.#MAP_SOURCE);
+    }
   }
 
-  addMap(boolean, input, beforeMap) {
-    if (boolean) return BridgeMap.addCorrect(input, beforeMap, this.#MAP_SOURCE);
-    if (!boolean) return BridgeMap.addIncorrect(input, beforeMap, this.#MAP_SOURCE);
-  }
-
-  static addCorrect(input, beforeMap, mapSource) {
+  addCorrect(input, mapSource) {
     // console.log(input, beforeMap, mapSource, 'addCorrect 확인용');
+    const beforeMap = this.#bridgeMap;
     const [up, down] = beforeMap;
     if (input === 'D') {
       up.push(mapSource.EMPTY);
@@ -53,7 +52,8 @@ class BridgeMap {
     return [up, down];
   }
 
-  static addIncorrect(input, beforeMap, mapSource) {
+  addIncorrect(input, mapSource) {
+    const beforeMap = this.#bridgeMap;
     const [up, down] = beforeMap;
     if (input === 'D') {
       down.push(mapSource.INCORRECT);
