@@ -30,7 +30,7 @@ class App {
       this.userInputEnd();
       return;
     } else if (isPass && isGameOver) {
-      OutputView.printResult(this.bridgeGame.end(), bridgeMap);
+      OutputView.printResult(this.bridgeGame.endMessage(), bridgeMap);
       return;
     }
     this.userInputMove();
@@ -40,11 +40,11 @@ class App {
     InputView.readGameCommand(inputEnd => {
       if (inputEnd === 'Q') {
         const bridgeMap = this.bridgeGame.getBridgeMap();
-        OutputView.printResult(this.bridgeGame.end(), bridgeMap);
-      } else if (inputEnd === 'R') {
-        this.bridgeGame.retry();
-        this.userInputMove();
+        OutputView.printResult(this.bridgeGame.endMessage(), bridgeMap);
+        return;
       }
+      this.bridgeGame.retry();
+      this.userInputMove();
     });
   }
 }
