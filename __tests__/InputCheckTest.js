@@ -4,7 +4,7 @@ const RetryCheck = require('../src/models/RetryCheck');
 
 describe('다리 길이값 에러 테스트', () => {
   test('3~20 사이의 수가 아닌 경우', () => {
-    const sizeValue = [0, 1, 2, 3, 21, 30];
+    const sizeValue = ['0', '1', '2', '21', '30'];
     const size = new BridgeSizeCheck();
 
     sizeValue.forEach(value => {
