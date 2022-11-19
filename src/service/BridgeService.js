@@ -1,4 +1,5 @@
 const BridgeRepository = require('../repository/BridgeRepository');
+const BridgeCheck = require('./domain/BridgeCheck');
 const BridgeLength = require('./domain/BridgeLength');
 const UpDownKey = require('./domain/UpDownKey');
 
@@ -25,6 +26,22 @@ class BridgeService {
     });
 
     upDownKey.doAction();
+  }
+
+  getMoveResult() {
+    const bridgeCheck = new BridgeCheck({
+      repo: this.#bridgeRepository
+    });
+
+    return bridgeCheck.getUserBridgeState();
+  }
+
+  getGameResult() {
+    const bridgeCheck = new BridgeCheck({
+      repo: this.#bridgeRepository
+    });
+
+    return bridgeCheck.getGameState();
   }
 
   // test를 위한 getter
