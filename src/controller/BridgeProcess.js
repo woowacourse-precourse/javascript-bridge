@@ -62,7 +62,9 @@ class BridgeProcess {
     });
   }
 
-  #printFinalResult() {}
+  #printFinalResult(sucess, match) {
+    this.#outputView.printResult(sucess, this.#gameReport.totalTry, match);
+  }
 }
 
 module.exports = BridgeProcess;
