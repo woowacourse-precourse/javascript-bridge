@@ -479,10 +479,25 @@ describe('위치 기록 저장 메서드 테스트', () => {
 });
 
 describe('위치 기록 가져오는 메서드 테스트', () => {
+  const bridgeGame = new BridgeGame();
+  const POSITION_LOG_1 = [[0, 0], 'O'];
+  const POSITION_LOG_2 = [[0, 1], 'X'];
+
+  bridgeGame.move();
+  bridgeGame.setPositionLog(...POSITION_LOG_1);
+
+  bridgeGame.move();
+  bridgeGame.setPositionLog(...POSITION_LOG_2);
+
   test('메소드 이름은 "getPositionLog"로 정의된다.', () => {
-    const bridgeGame = new BridgeGame();
     const METHOD_NAME = 'getPositionLog';
 
     expect(bridgeGame.getPositionLog.name).toEqual(METHOD_NAME);
+  });
+
+  test('길이가 2인 배열을 반환한다.', () => {
+    const RECEIVED = 2;
+
+    expect(bridgeGame.getPositionLog()).toEqual(RECEIVED);
   });
 });
