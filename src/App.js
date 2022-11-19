@@ -8,9 +8,8 @@ const BridgeGameController = require("./BridgeGameController");
 class App {
   bridgeGame = null;
 
-  /**
-   * 입력 실패시 해당 단계의 함수 재귀 호출을 위한 this 바인딩
-   */
+  
+  // 함수 재귀 호출을 위한 this 바인딩
   constructor() {
     this.roundStartBranch = this.roundStartBranch.bind(this);
     this.roundInputBranch = this.roundInputBranch.bind(this);
