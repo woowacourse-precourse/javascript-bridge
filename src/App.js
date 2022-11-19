@@ -8,7 +8,7 @@ const {
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { makeBridge } = require('./BridgeMaker');
-const { printMap } = require('./OutputView');
+const { printMap, printResult } = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
 
 class App {
@@ -68,11 +68,12 @@ class App {
   }
 
   retryGame() {
-    console.log('재시작');
+    this.bridgeGame.init();
+    this.getUserMoving();
   }
 
   quitGame() {
-    console.log('종료');
+    printResult();
   }
 }
 
