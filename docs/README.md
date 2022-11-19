@@ -35,19 +35,28 @@
 
 # class
 
+## Model
+
 - Bridge
   - validate
   - setBridge
   - getLength
   - getBridge
+- Try
+  - validate
+  - getTryCnt
+  - addTryCnt
+- Selected
+  - validate
+  - getSelected
+  - getLength
+
+## Controller
+
 - BridgeGame
   - validate
   - resetSelectedAndPlusTryCnt
-  - getSelected
-  - getLength
   - getResult
-  - getTryCnt
-  - plusTryCnt
   - move
   - retry
   - validateRetryInput
