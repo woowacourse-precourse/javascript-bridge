@@ -524,4 +524,12 @@ describe('다리 이동 로그 메소드 테스트', () => {
 
     expect(bridgeGame.getBridgeLog.name).toEqual(METHOD_NAME);
   });
+
+  test('유저가 아직 출발 전이라면 예외를 발생한다.', () => {
+    expect(() => {
+      const bridgeGame = new BridgeGame();
+
+      bridgeGame.getBridgeLog();
+    }).toThrow(POSITION_ERROR_TEXT);
+  });
 });
