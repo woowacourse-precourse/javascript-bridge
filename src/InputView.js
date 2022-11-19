@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { MESSAGE } = require('./constant/Constant');
+const { MESSAGE, REQUIREMENT, ERROR } = require('./constant/Constant');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -9,9 +9,18 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(MESSAGE.INPUTBRIDGELENGTH, (input) => {
-      this.validateBridgeSize(); // 예외처리 추가 예정
+      this.validateBridgeSize(input);
       return input;
     }); 
+  },
+
+  validateBridgeSize(input) {
+    if (Number.isNaN(Number(input))) {
+      throw new Error(ERROR.LENGTH);
+    }
+    if (Number(input) < REQUIREMENT.MINLEN || Number(input) > REQUIREMENT.MAXLEN) {
+      throw new Error(ERROR.LENGTH);
+    }
   },
 
   /**
