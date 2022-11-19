@@ -1,10 +1,9 @@
 const OutputView = require("./View/OutputView");
 const InputView = require("./View/InputView");
 class App {
-  constructor() {
-    OutputView.printStart();
-  }
+  constructor() {}
   play() {
+    OutputView.printStart();
     this.bridge = InputView.readBridgeSize();
   }
 }

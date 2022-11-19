@@ -5,7 +5,7 @@ const BridgeGame = require("../BridgeGame");
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
-  isSucces: "성공",
+  isSucces: MESSAGE.SUCCESS,
   count: 1,
   printStart() {
     MissionUtils.Console.print(MESSAGE.GAME_START);
@@ -30,13 +30,11 @@ const OutputView = {
       (bridgeGame.realBridge[0].length === size &&
         bridgeGame.realBridge[1][bridgeGame.realBridge[1].length - 1] === "O")
     ) {
-      return this.printResult();
+      return this.printResult(bridgeGame);
     }
     if (array[0][array[0].length - 1] === "O") {
-      this.isSucces = "성공";
       let move = "";
       MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
-        this.count += 1;
         move = answer;
         bridgeGame.moveIsU(move);
         bridgeGame.realBridge.map((x) =>
@@ -47,10 +45,8 @@ const OutputView = {
     }
 
     if (array[1][array[1].length - 1] === "O") {
-      this.isSucces = "성공";
       let move = "";
       MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
-        this.count += 1;
         move = answer;
         bridgeGame.moveIsU(move);
         bridgeGame.realBridge.map((x) =>
@@ -61,13 +57,12 @@ const OutputView = {
     }
 
     if (array[0][array[0].length - 1] === "X") {
-      this.isSucces = "실패";
       MissionUtils.Console.readLine(MESSAGE.INPUT_RETRY_OR_QUIT, (answer) => {
         this.retryOrQuitValidate(answer);
         if (answer === "R") {
+          this.count += 1;
           let move = "";
           MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
-            this.count += 1;
             move = answer;
             bridgeGame.retry(move);
             bridgeGame.realBridge.map((x) => {
@@ -77,19 +72,19 @@ const OutputView = {
           });
         }
         if (answer === "Q") {
-          this.printResult();
+          this.isSucces = MESSAGE.FAIL;
+          this.printResult(bridgeGame);
         }
       });
     }
 
     if (array[1][array[1].length - 1] === "X") {
-      this.isSucces = "실패";
       MissionUtils.Console.readLine(MESSAGE.INPUT_RETRY_OR_QUIT, (answer) => {
         this.retryOrQuitValidate(answer);
         if (answer === "R") {
+          this.count += 1;
           let move = "";
           MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
-            this.count += 1;
             move = answer;
             bridgeGame.retry(move);
             bridgeGame.realBridge[0].pop();
@@ -101,7 +96,8 @@ const OutputView = {
           });
         }
         if (answer === "Q") {
-          this.printResult();
+          this.isSucces = MESSAGE.FAIL;
+          this.printResult(bridgeGame);
         }
       });
     }
@@ -118,9 +114,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {
-    MissionUtils.Console.print(`게임 성공 여부: ${this.isSucces}`);
-    MissionUtils.Console.print(`총 시도한 횟수: ${this.count}`);
+  printResult(bridgeGame) {
+    MissionUtils.Console.print(MESSAGE.RESULT);
+    bridgeGame.realBridge.map((x) => {
+      MissionUtils.Console.print(`[ ${x.join(" | ")} ]`);
+    });
+    MissionUtils.Console.print(MESSAGE.isSucces(this.isSucces));
+    MissionUtils.Console.print(MESSAGE.printCount(this.count));
     MissionUtils.Console.close();
   },
 };
