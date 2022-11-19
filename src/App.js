@@ -2,10 +2,11 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { GAME_MESSAGE } = require('./constants/constants');
 const makePrintBridge = require('./utils/makePrintBridge');
 const InputView = require('./UI/InputView');
 const OutputView = require('./UI/OutputView');
+const validCheck = require('./utils/validCheck');
+const { ERROR_MESSAGE } = require('./constants/constants');
 
 class App {
   #myBridge;
@@ -18,8 +19,15 @@ class App {
 
   getBridgeLength() {
     InputView.readBridgeSize((input) => {
-      this.#myBridgeLength = input;
-      return this.makeMyBridge();
+      try {
+        if (!validCheck.bridgeLength(input))
+          throw new Error(ERROR_MESSAGE.INVALID_LENGTH);
+        this.#myBridgeLength = input;
+        return this.makeMyBridge();
+      } catch (err) {
+        OutputView.lengthInputError();
+        this.getBridgeLength();
+      }
     });
   }
 
@@ -35,9 +43,16 @@ class App {
 
   moveBridge() {
     InputView.readMoving((input) => {
-      const move = this.#myBridge.move(input);
-      if (!move) return this.moveNotCorrect();
-      return this.moveCorrect();
+      try {
+        if (!validCheck.moveInput(input))
+          throw new Error(ERROR_MESSAGE.INVALID_MOVE);
+        const move = this.#myBridge.move(input);
+        if (!move) return this.moveNotCorrect();
+        return this.moveCorrect();
+      } catch (err) {
+        OutputView.moveInputError();
+        return this.moveBridge();
+      }
     });
   }
 
@@ -59,12 +74,19 @@ class App {
 
   getRetryInput() {
     InputView.readGameCommand((input) => {
-      const retry = this.#myBridge.retry(input);
-      if (retry) {
-        this.#myBridge.gameStateChangeSuccess();
-        return this.moveBridge();
+      try {
+        if (!validCheck.quitInput(input))
+          throw new Error(ERROR_MESSAGE.INVALID_QUIT);
+        const retry = this.#myBridge.retry(input);
+        if (retry) {
+          this.#myBridge.gameStateChangeSuccess();
+          return this.moveBridge();
+        }
+        return this.quieGame();
+      } catch (err) {
+        OutputView.quitInputError();
+        return this.getRetryInput();
       }
-      return this.quieGame();
     });
   }
 
