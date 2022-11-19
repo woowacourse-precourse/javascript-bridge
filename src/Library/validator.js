@@ -16,6 +16,7 @@ const Validator = {
     if (IsNaturalNumber(bridgeLength) === false || bridgeLength < 21) {
       ErrorHandler.inputError("bridge");
     }
+    return true;
   },
 };
 

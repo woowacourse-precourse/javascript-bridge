@@ -8,8 +8,7 @@
 
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
-const BridgeMaker = require("../BridgeMaker");
+const Validator = require("../Library/Validator.js");
 
 const InputView = {
   /**
@@ -18,8 +17,10 @@ const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine(
       "다리의 길이를 입력해주세요.\n",
-      (bridgeLen) => {
-        const BRIDGE_LEN = len;
+      (bridgeLength) => {
+        if (Validator.IsBridgeLength(bridgeLength)) {
+          return parseInt(bridgeLength);
+        }
         // bridgeLen입력값을 Controller에서 검증한 후 --> BridegMaker로 다리를 만들어서 Model이용 --> Model에서 bridge길이 및 만들어진 다리 정보를 저장
       }
     );

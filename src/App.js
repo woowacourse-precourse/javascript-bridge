@@ -1,9 +1,15 @@
-const InputView = require("./View/InputView.js");
+const Game = require("./Model/Game");
 
 class App {
+  constructor() {
+    this.game = new Game();
+  }
   play() {
-    const input = InputView.readBridgeSize();
-    console.log("다리 길이는 ", input);
+    this.createGame();
+  }
+
+  createGame() {
+    this.game.gameStartPoint();
   }
 }
 
