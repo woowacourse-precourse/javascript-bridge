@@ -5,6 +5,8 @@ const SETTING = {
   MOVING_DOWN: 'D',
   GAME_RESTART: 'R',
   GAME_QUIT: 'Q',
+  CAN_MOVE: 'O',
+  CANT_MOVE: 'X',
 };
 
-module.exports = SETTING;
+module.exports = Object.freeze(SETTING);

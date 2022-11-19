@@ -4,4 +4,4 @@ const ERROR = {
   GAME_COMMAND: '[ERROR] 게임 재시작은 "R", 종료는 "Q"를 입력해야 합니다.',
 };
 
-module.exports = ERROR;
+module.exports = Object.freeze(ERROR);
