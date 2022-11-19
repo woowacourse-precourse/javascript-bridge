@@ -29,7 +29,9 @@ class BridgeGame {
     this.#movementLogs.push({ isCrossable, movingDirection });
   }
 
-  retry() {}
+  retry(gameCommand) {
+    this.#validateGameCommand(gameCommand);
+  }
 
   #validateDirection(direction) {
     if (!direction) throw new Error(ERROR_MSG.emptyInput);
@@ -41,6 +43,10 @@ class BridgeGame {
 
   #isValidDirectionSymbol(direction) {
     return direction === DOWNSIDE_SYMBOL || direction === UPSIDE_SYMBOL;
+  }
+
+  #validateGameCommand(gameCommand) {
+    if (!gameCommand) throw new Error(ERROR_MSG.emptyInput);
   }
 
   isMoved() {
