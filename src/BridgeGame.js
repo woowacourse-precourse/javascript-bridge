@@ -1,11 +1,9 @@
 // @ts-check
 
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const Bridge = require('./Bridge');
 const Player = require('./Player');
 const StatusGenerator = require('./StatusGenerator');
-const { MARKING, BRIDGE } = require('./utils/const');
-const Validator = require('./utils/Validator');
+const { MARKING } = require('./utils/const');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -20,21 +18,10 @@ class BridgeGame {
    * @param {string} bridgeSize
    */
   constructor(bridgeSize) {
-    this.validate(bridgeSize);
-    const generate = BridgeRandomNumberGenerator.generate;
-    this.#bridge = BridgeMaker.makeBridge(Number(bridgeSize), generate);
+    this.#bridge = new Bridge(bridgeSize);
     this.#player = new Player();
     this.#count = 1;
     this.#isSuccess = false;
-  }
-
-  /**
-   *
-   * @param {string} bridgeSize
-   */
-  validate(bridgeSize) {
-    Validator.validateNaN(bridgeSize);
-    Validator.validateNumberBound(Number(bridgeSize), BRIDGE.MIN, BRIDGE.MAX);
   }
 
   /**
@@ -45,8 +32,8 @@ class BridgeGame {
   move(moving) {
     const currentStep = this.#player.getStep();
 
-    const isCorrect = moving === this.#bridge[currentStep];
-    const isLast = currentStep === this.#bridge.length - 1;
+    const isCorrect = this.#bridge.isCorrect(moving, currentStep);
+    const isLast = this.#bridge.isLast(currentStep);
     const mark = isCorrect ? MARKING.CORRECT : MARKING.WRONG;
 
     this.#player.markOX(moving, mark);
