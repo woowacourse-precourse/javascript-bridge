@@ -4,24 +4,24 @@ module.exports = {
     commonjs: true,
     es2021: true,
   },
-  extends: ["airbnb-base", "plugin:prettier/recommended"],
+  extends: ['airbnb-base', 'plugin:prettier/recommended'],
   overrides: [],
   parserOptions: {
-    ecmaVersion: "latest",
+    ecmaVersion: 'latest',
   },
-  qutoes: ["error", "single"],
+  qutoes: ['error', 'single'],
   rules: {
-    "max-depth": ["error", 2],
-    "max-lines-per-function": ["error", 10],
+    'max-depth': ['error', 2],
+    'max-lines-per-function': ['error', 10],
 
-    "prettier/prettier": [
-      "error",
+    'prettier/prettier': [
+      'error',
       {
-        endOfLine: "auto",
+        endOfLine: 'auto',
         bracketSpacing: true,
-        printWidth: 80,
+        printWidth: 100,
         semi: true,
-        trailingComma: "all",
+        trailingComma: 'all',
         tabWidth: 2,
       },
     ],

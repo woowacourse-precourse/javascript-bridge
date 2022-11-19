@@ -24,7 +24,7 @@ const validateEndValue = userInput => {
   if (userInput == 'r' || userInput == 'q')
     throw new Error(`${prefix} 입력값은 대문자여야 합니다.`);
 
-  if (userInput != 'U' && userInput != 'D')
+  if (userInput != 'R' && userInput != 'Q')
     throw new Error(`${prefix} 이동할 칸은 문자 'R'(재시도), 'Q'(종료) 중 하나여야 합니다.`);
 };
 

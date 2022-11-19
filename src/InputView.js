@@ -1,6 +1,7 @@
 const { readLine } = require('./Utils');
 const BridgeGame = require('./BridgeGame');
-const { validateBridgeLength, validateMovingValue } = require('./Validation');
+const { validateBridgeLength, validateMovingValue, validateEndValue } = require('./Validation');
+const OutputView = require('./OutputView');
 
 const bg = new BridgeGame();
 /**
@@ -26,22 +27,24 @@ const InputView = {
   readMoving(input) {
     validateMovingValue(input);
 
-    if (bg.move(input))
+    if (bg.move(input)) {
+      OutputView.printMap(bg);
       return readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', this.readMoving.bind(this));
-
+    }
+    OutputView.printMap(bg);
     readLine(
       '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
       this.readGameCommand
     );
   },
-
-  isEnd() {},
-
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(input) {
-    console.log('gg!');
+    validateEndValue(input);
+
+    if (bg.retry(input)) console.log('재시도!');
+    else OutputView.printResult();
   }
 };
 

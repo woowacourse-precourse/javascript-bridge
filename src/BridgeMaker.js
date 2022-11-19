@@ -9,22 +9,15 @@ const BridgeMaker = {
    */
 
   makeBridge(size, generateRandomNumber) {
-    const array = new Array(2);
-    const topArray = [],
-      bottomArray = [];
+    const array = [];
 
     for (let i = 0; i < size; i++) {
       const number = generateRandomNumber();
-
-      topArray.push(number == 1 ? 'U' : 'X');
-      bottomArray.push(number == 0 ? 'D' : 'X');
+      array.push(number == 1 ? 'U' : 'D');
     }
 
-    array[0] = topArray;
-    array[1] = bottomArray;
-
     return [...array];
-  },
+  }
 };
 
 module.exports = BridgeMaker;

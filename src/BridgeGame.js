@@ -23,13 +23,20 @@ class BridgeGame {
     this.bottom = '';
   }
 
-  buildResult() {
+  showResult() {
+    return `[${this.top}]\n[${this.bottom}]\n`;
+  }
+
+  buildResult(flag) {
     const len = this.#userInputArray.length;
     const value = this.#userInputArray[len - 1];
+    const ox = flag ? ' O ' : ' X ';
 
     if (value == 'U') {
       this.top =
-        len == 1 ? this.buildTextResult(this.top, ' O ') : this.buildTextResult(this.top, '| O ');
+        len == 1
+          ? this.buildTextResult(this.top, `${ox}`)
+          : this.buildTextResult(this.top, `|${ox}`);
       this.bottom =
         len == 1
           ? this.buildTextResult(this.bottom, '   ')
@@ -39,11 +46,9 @@ class BridgeGame {
         len == 1 ? this.buildTextResult(this.top, '   ') : this.buildTextResult(this.top, '|   ');
       this.bottom =
         len == 1
-          ? this.buildTextResult(this.bottom, ' O ')
-          : this.buildTextResult(this.bottom, '| O ');
+          ? this.buildTextResult(this.bottom, `${ox}`)
+          : this.buildTextResult(this.bottom, `|${ox}`);
     }
-
-    return `[${this.top}]\n[${this.bottom}]\n`;
   }
 
   buildTextResult(totalText, text) {
@@ -59,7 +64,6 @@ class BridgeGame {
 
   isMove(input) {
     const currentIndex = this.#userInputArray.length;
-    console.log(currentIndex);
     return this.#bridge[currentIndex] == input;
   }
 
@@ -69,9 +73,10 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(input) {
-    if (this.isMove(input)) {
-      this.#userInputArray.push(input);
-      console.log(this.#userInputArray.length == this.#size);
+    const flag = this.isMove(input);
+    this.#userInputArray.push(input);
+    this.buildResult(flag);
+    if (flag) {
       return !(this.#userInputArray.length == this.#size);
     }
 
@@ -83,9 +88,14 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {
-    this.#tryCount += 1;
-    this.#userInputArray = [];
+  retry(input) {
+    if (input == 'R') {
+      this.#tryCount += 1;
+      this.#userInputArray = [];
+      return true;
+    }
+
+    return false;
   }
 }
 
