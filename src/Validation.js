@@ -14,6 +14,12 @@ const Validate = {
       throw new Error('[ERROR] 이동할 칸은 U 또는 D로 입력 하셔야 합니다.');
     }
   },
+
+  retryOrEnd(input) {
+    if (input !== 'R' && input !== 'Q') {
+      throw new Error('[ERROR] 재시작 하려면 R, 종료하려면 Q를 입력하셔야 합니다.');
+    }
+  },
 };
 
 module.exports = Validate;
