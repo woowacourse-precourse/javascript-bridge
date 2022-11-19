@@ -5,6 +5,7 @@ const generateRandomNumber = require("./BridgeRandomNumberGenerator").generate;
 const { close } = require("./utils/utils");
 const BridgegLengthValidator = require("./utils/BridgeLengthValidator");
 const DirectionValidator = require("./utils/DirectionValidator");
+const { STATE } = require("./constants/constants");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -53,32 +54,29 @@ class BridgeGame {
   move(direction) {
     DirectionValidator.validate(direction);
     if (this.isValidPath(direction)) {
-      if (direction === "U") {
-        this.#currentMap.upperPart.push(" O ");
-        this.fillBlankUnselectedPath(0);
-      }
-      if (direction === "D") {
-        this.#currentMap.lowerPart.push(" O ");
-        this.fillBlankUnselectedPath(1);
-      }
-      this.moveMyPositionForward();
+      this.moveMyPositionForward(direction, STATE.VALID.symbol);
+      this.updateMyPositionForward();
       this.getMoveDirectionFromUser();
       return;
     }
-    if (direction === "U") {
-      this.#currentMap.upperPart.push(" X ");
-      this.fillBlankUnselectedPath(0);
-    }
-    if (direction === "D") {
-      this.#currentMap.lowerPart.push(" X ");
-      this.fillBlankUnselectedPath(1);
-    }
-    this.showMovedPath();
+    this.moveMyPositionForward(direction, STATE.NOT_VALID.symbol);
     this.askUserRestart();
   }
 
-  moveMyPositionForward() {
+  updateMyPositionForward() {
     this.#myPosition += 1;
+  }
+
+  moveMyPositionForward(direction, symbol) {
+    if (direction === "U") {
+      this.#currentMap.upperPart.push(symbol);
+      this.fillBlankUnselectedPath(0);
+    }
+    if (direction === "D") {
+      this.#currentMap.lowerPart.push(symbol);
+      this.fillBlankUnselectedPath(1);
+    }
+    this.showMovedPath();
   }
 
   askUserRestart() {
