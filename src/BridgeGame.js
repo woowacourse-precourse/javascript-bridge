@@ -43,6 +43,12 @@ class BridgeGame {
     return direction === DOWNSIDE_SYMBOL || direction === UPSIDE_SYMBOL;
   }
 
+  isMoved() {
+    const lastLog = this.#movementLogs[this.#movementLogs.length - 1];
+
+    return lastLog.isCrossable;
+  }
+
   getMovementLogs() {
     return this.#movementLogs;
   }

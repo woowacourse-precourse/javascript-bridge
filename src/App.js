@@ -38,10 +38,18 @@ class App {
 
       const movementLogs = this.bridgeGame.getMovementLogs();
       OutputView.printMap(movementLogs);
+
+      if (!this.bridgeGame.isMoved()) return this.requestRetryOrQuit();
     } catch ({ message }) {
       this.reRequestMovingDirection(message);
     }
   }
+
+  requestRetryOrQuit() {
+    InputView.readGameCommand(this.retryProcess.bind(this));
+  }
+
+  retryProcess(gameCommand) {}
 
   reRequestBridgeSize(message) {
     printMsg(message);

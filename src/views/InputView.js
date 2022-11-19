@@ -10,7 +10,9 @@ const InputView = {
     Console.readLine(REQUEST_MSG.movingDirection, callback);
   },
 
-  readGameCommand() {},
+  readGameCommand(callback) {
+    Console.readLine(REQUEST_MSG.retryOrQuit, callback);
+  },
 };
 
 module.exports = InputView;
