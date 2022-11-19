@@ -48,6 +48,8 @@ const REGEX = Object.freeze({
 
 const CAN_NOT_INCLUDES = ' ';
 
+const OTHERSIDE_ELEMENT = ' ';
+
 module.exports = {
   MESSAGE,
   DIRECTION,
@@ -57,4 +59,5 @@ module.exports = {
   BRIDGE_SIZE,
   REGEX,
   MAP_ELEMENT,
+  OTHERSIDE_ELEMENT,
 };

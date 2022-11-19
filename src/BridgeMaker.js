@@ -15,9 +15,9 @@ const BridgeMaker = {
     const bridge = [];
     while (bridge.length < size) {
       const randomNumber = generateRandomNumber();
-      if (randomNumber === DIRECTION.U) bridge.push(COMMAND.UP);
-      else bridge.push(COMMAND.DOWN);
+      bridge.push(DIRECTION[randomNumber]);
     }
+
     return bridge;
   },
 };
