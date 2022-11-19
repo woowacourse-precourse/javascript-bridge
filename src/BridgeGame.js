@@ -21,10 +21,21 @@ class BridgeGame {
    */
   #Upbridge;
   #Downbridge;
+  #gameCount;
   constructor() {
     this.#Upbridge = [];
     this.#Downbridge = [];
+    this.#gameCount = 0;
   }
+
+  setCount() {
+    return (this.#gameCount += 1);
+  }
+
+  getCount() {
+    return this.#gameCount;
+  }
+
   removeBridge() {
     this.#Downbridge.splice(0, this.#Downbridge.length);
     this.#Upbridge.splice(0, this.#Upbridge);
