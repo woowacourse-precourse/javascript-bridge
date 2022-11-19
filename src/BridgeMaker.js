@@ -12,13 +12,13 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     validate(size, isBridgeSize);
 
-    const BRIDGE_BLOCK_MAP = Object.freeze([
-      BRIDGE.LOWER_BLOCK,
-      BRIDGE.UPPER_BLOCK,
+    const MOVING_MAP = Object.freeze([
+      BRIDGE.MOVING_LOWER,
+      BRIDGE.MOVING_UPPER,
     ]);
     const bridgeNumber = Array.from({ length: size }, generateRandomNumber);
 
-    return bridgeNumber.map((number) => BRIDGE_BLOCK_MAP[number]);
+    return bridgeNumber.map((number) => MOVING_MAP[number]);
   },
 };
 

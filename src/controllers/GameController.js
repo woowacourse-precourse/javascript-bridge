@@ -4,7 +4,11 @@ const InputView = require('../views/InputView');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 
+const BridgeGame = require('../models/BridgeGame');
+
 class GameContoller {
+  #bridgeGame;
+
   start() {
     OutputView.printStarting();
     this.inputBridgeSize();
@@ -19,7 +23,17 @@ class GameContoller {
       size,
       BridgeRandomNumberGenerator.generate,
     );
-    console.log(bridge);
+    this.#bridgeGame = new BridgeGame(bridge);
+
+    this.inputMoving();
+  }
+
+  inputMoving() {
+    InputView.readMoving(this.onInputMoving.bind(this));
+  }
+
+  onInputMoving(moving) {
+    this.#bridgeGame.move(moving);
   }
 }
 
