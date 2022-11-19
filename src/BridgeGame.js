@@ -1,4 +1,14 @@
 const { checkBridgeMove, printBridgeMoveError } = require('./lib/bridgeGameUtils');
+const {
+  RETRY,
+  FAIL,
+  SUCCESS,
+  DOWN,
+  UP,
+  SUCCESS_SHAPE,
+  FAIL_SHAPE,
+  BLANK,
+} = require('./lib/constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -27,7 +37,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(ask) {
-    if (ask === 'R') {
+    if (ask === RETRY) {
       this.clean();
       this.#tryCount += 1;
       return true;
@@ -36,40 +46,40 @@ class BridgeGame {
   }
 
   addUpDown(move, answer) {
-    if (move === 'U') {
-      this.#down.push(' ');
+    if (move === UP) {
+      this.#down.push(BLANK);
       this.addUp(move, answer);
     }
-    if (move === 'D') {
-      this.#up.push(' ');
+    if (move === DOWN) {
+      this.#up.push(BLANK);
       this.addDown(move, answer);
     }
   }
 
   addUp(move, answer) {
     if (answer[this.#route.length - 1] === move) {
-      this.#up.push('O');
+      this.#up.push(SUCCESS_SHAPE);
       return;
     }
     if (answer[this.#route.length - 1] !== move) {
-      this.#up.push('X');
+      this.#up.push(FAIL_SHAPE);
       return;
     }
   }
 
   addDown(move, answer) {
     if (answer[this.#route.length - 1] === move) {
-      this.#down.push('O');
+      this.#down.push(SUCCESS_SHAPE);
       return;
     }
     if (answer[this.#route.length - 1] !== move) {
-      this.#down.push('X');
+      this.#down.push(FAIL_SHAPE);
       return;
     }
   }
 
   checkX() {
-    if (this.#up.includes('X') || this.#down.includes('X')) {
+    if (this.#up.includes(FAIL_SHAPE) || this.#down.includes(FAIL_SHAPE)) {
       return false;
     }
     return true;
@@ -114,10 +124,10 @@ class BridgeGame {
   returnSuccessFail(answer) {
     if (this.lengthCompare(answer)) {
       if (this.checkX()) {
-        return '성공';
+        return SUCCESS;
       }
     }
-    return '실패';
+    return FAIL;
   }
 }
 
