@@ -12,8 +12,26 @@ const OutputView = require('./OutputView');
 const InputView = {
   bridgeGame: new BridgeGame(),
 
+  wrappingInput(message, callback) {
+    Console.readLine(
+      message,
+      this.wrappingLogic(callback, () => this.wrappingInput(message, callback))
+    );
+  },
+
+  wrappingLogic(logicFunction, errorFunction) {
+    return (input) => {
+      try {
+        logicFunction(input);
+      } catch (e) {
+        Console.print(e.message);
+        errorFunction(e);
+      }
+    };
+  },
+
   readBridgeSize() {
-    Console.readLine(Messages.INPUT_BRIDGE_SIZE, (bridgeSize) => {
+    this.wrappingInput(Messages.INPUT_BRIDGE_SIZE, (bridgeSize) => {
       this.validateBridgeSize(bridgeSize);
       bridgeSize = Number(bridgeSize);
 
@@ -36,7 +54,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridge) {
-    Console.readLine(Messages.INPUT_MOVING, (upOrDown) => {
+    this.wrappingInput(Messages.INPUT_MOVING, (upOrDown) => {
       this.validateMoving(upOrDown);
       const round = this.bridgeGame.move();
 
@@ -52,7 +70,7 @@ const InputView = {
     const hasCorrect = OutputView.printMap(bridge[round - 1], upOrDown);
 
     if (!hasCorrect) this.readGameCommand(bridge);
-    if (round === bridge.length) {
+    if (round === bridge.length && hasCorrect) {
       const totalCount = this.bridgeGame.countTry();
       OutputView.printResult(totalCount, hasCorrect);
     } else this.readMoving(bridge);
@@ -62,7 +80,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridge) {
-    Console.readLine(Messages.INPUT_RESTART_OR_END, (restartOrQuit) => {
+    this.wrappingInput(Messages.INPUT_RESTART_OR_END, (restartOrQuit) => {
       this.validateGameCommand(restartOrQuit);
       const totalCount = this.bridgeGame.countTry();
       this.restartOrQuit(bridge, restartOrQuit, totalCount);
