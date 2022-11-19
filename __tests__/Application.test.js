@@ -235,4 +235,13 @@ describe('배열 범위 추출 함수 테스트', () => {
       Application.extractArrayRange(EXPECTED1, EXPECTED2, EXPECTED3);
     }).toThrow(NUMBER_ERROR_TEXT);
   });
+
+  test('0부터 2개의 요소를 추출하여 반환값으로 [1, 2]을 기대한다.', () => {
+    const EXPECTED1 = [1, 2, 3, 4, 5];
+    const EXPECTED2 = 0;
+    const EXPECTED3 = 2;
+    const RECEIVED = [1, 2];
+
+    expect(Application.extractArrayRange(EXPECTED1, EXPECTED2, EXPECTED3)).toEqual(RECEIVED);
+  });
 });
