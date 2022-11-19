@@ -1,5 +1,14 @@
+const { readBridgeSize } = require("./views/InputView");
+const { generate } = require("./utils/BridgeRandomNumberGenerator");
+const { makeBridge } = require("./BridgeMaker");
 class App {
-  play() {}
+  constructor() {}
+
+  play() {
+    readBridgeSize();
+  }
 }
 
-module.exports = App;
+let app = new App();
+app.play();
+// module.exports = App;
