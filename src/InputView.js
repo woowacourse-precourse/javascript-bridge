@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const Validation = require("./Validation");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -8,7 +9,12 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (lengthInput) => {
-      return lengthInput;
+      try {
+        if (Validation.checkBridgeSize(lengthInput)) return lengthInput;
+      } catch {
+        Console.print("\n[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+        this.readBridgeSize();
+      }
     });
   },
 

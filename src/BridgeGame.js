@@ -1,10 +1,16 @@
 const OutputView = require("./OutputView");
+const InputView = require("./InputView");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   startGame() {
     OutputView.printStart();
+    this.createBridge();
+  }
+
+  createBridge() {
+    InputView.readBridgeSize();
   }
   /**
    *
