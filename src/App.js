@@ -57,6 +57,7 @@ class App {
     if (this.#appStatus === 5) return this.progressRetryGame();
     if (this.#appStatus === 6) {
       if (this.#gameOptionStatus) {
+        this.retryApp();
         this.#appStatus = 3;
         return this.progressApp(this.#appStatus);
       }
@@ -110,6 +111,11 @@ class App {
         this.progressApp(this.#appStatus);
       }
     });
+  }
+
+  retryApp() {
+    this.#brdigeGame.initBridgeLengthStatus();
+    this.#bridgeMap.initBridgeMap();
   }
 }
 
