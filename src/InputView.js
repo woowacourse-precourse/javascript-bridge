@@ -8,40 +8,33 @@ const InputView = {
   MOVING: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
 
   async readBridgeSize() {
-    const bridgeSize = await new Promise(number => {
-      Console.readLine(this.BRIDGE_SIZE, number);
+    const bridgeSize = await new Promise(answer => {
+      Console.readLine(this.BRIDGE_SIZE, answer);
     });
     this.validateBridgeSize(bridgeSize);
     return bridgeSize;
   },
 
-  validateBridgeSize(number) {
-    if (/[^0-9]/g.test(number)) {
+  validateBridgeSize(answer) {
+    if (/[^0-9]/g.test(answer)) {
       throw new Error('[ERROR] 다리 길이는 숫자로 입력해야합니다.');
     }
-    if (Number(number) < 3 || Number(number) > 20) {
+    if (Number(answer) < 3 || Number(answer) > 20) {
       throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
     }
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {
-    Console.readLine(this.MOVING, (number) => {
-      this.validateBridgeSize(number);
+  async readMoving() {
+    const moving = await new Promise(answer => {
+      Console.readLine(this.MOVING, answer);
     });
+    this.validateMoving(moving);
+    return moving;
   },
 
-  // 숫자는 문자열로 들어온다.
-  validateMoving(number) {
-    // 문자열에서 0-9까지 검사함
-    if (/[^0-9]/g.test(number)) {
-      throw new Error('[ERROR] 다리 길이는 숫자로 입력해야합니다.');
-    }
-
-    if (Number(number) < 3 || Number(number) > 20) {
-      throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+  validateMoving(answer) {
+    if (answer !== 'U' || answer !== 'D') {
+      throw new Error('[ERROR] 위 칸은 U, 아래 칸은 D로 입력해야 합니다.');
     }
   },
 
