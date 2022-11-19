@@ -45,6 +45,7 @@ class BridgeGame {
    */
   move(direction) {
     this.bridgeModel.move(direction);
+    this.outputView.printMap(this.bridgeModel.trialList);
 
     //!: 출력 확인
     Console.print(`move 결과: ${this.bridgeModel.trialList[0].result}`);
