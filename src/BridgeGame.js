@@ -81,6 +81,13 @@ class BridgeGame {
     str = str.replaceAll(',', '|');
     return str;
   }
+
+  lengthCompare(answer) {
+    if (answer.length !== this.#route.length) {
+      return false;
+    }
+    return true;
+  }
 }
 
 module.exports = BridgeGame;
