@@ -9,9 +9,10 @@ const GAME_MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  EMPTY_ERROR: "[ERROR] 공백이 아닌 값을 입력해주세요.",
-  TYPE_ERROR: "[ERROR] 숫자를 입력해주세요.",
-  RANGE_ERROR: "[ERROR] 3~20 범위의 값만 입력해주세요.",
+  PREFIX: "[ERROR] ",
+  EMPTY_ERROR: "공백이 아닌 값을 입력해주세요.",
+  TYPE_ERROR: "숫자를 입력해주세요.",
+  RANGE_ERROR: "3~20 범위의 값만 입력해주세요.",
 });
 
 module.exports = { BRIDGE_VALUE, GAME_MESSAGE, ERROR_MESSAGE };
