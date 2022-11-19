@@ -53,6 +53,14 @@ describe('숫자값 문자열 치환 기능 테스트', () => {
   );
 });
 
+describe('문자열 숫자 치환 기능 테스트', () => {
+  test('메소드 이름은 "replaceNumber"로 정의된다.', () => {
+    const METHOD_NAME = 'replaceNumber';
+
+    expect(BridgeGame.replaceNumber.name).toEqual(METHOD_NAME);
+  });
+});
+
 describe('사용자가 칸을 이동할 때 사용하는 메서드 테스트', () => {
   test('메소드 이름은 "move"로 정의된다.', () => {
     const bridgeGame = new BridgeGame();
