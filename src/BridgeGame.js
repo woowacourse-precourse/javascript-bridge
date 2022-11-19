@@ -28,7 +28,7 @@ class BridgeGame {
       this.#upperTrack.push(this.markOX(bool));
       this.#lowerTrack.push("   ");
       return;
-    }
+    } 
     this.#upperTrack.push("   ");
     this.#lowerTrack.push(this.markOX(bool));
   }
@@ -46,8 +46,8 @@ class BridgeGame {
     return line;
   }
 
-  combineTracks(moving, bool) {
-    this.markElements(moving, bool);
+  combineTracks(moving, pass) {
+    this.markElements(moving, pass);
     const upperTrack = this.makeLine(this.#upperTrack);
     const lowerTrack = this.makeLine(this.#lowerTrack);
     return [lowerTrack, upperTrack];

@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
 const BridgeGame = require("../src/BridgeGame");
+const Intercessor = require("../src/Intercessor");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -90,5 +91,11 @@ describe("다리 건너기 테스트", () => {
     const bridgeGame = new BridgeGame();
     const bool = bridgeGame.move("U", "D");
     expect(bool).toBe(false);
-  })
+  });
+
+  test("현재 이동 기록 테스트", () => {
+    const bridgeGame = new BridgeGame();
+    const gameMap = bridgeGame.combineTracks("D", true);
+    expect(gameMap).toEqual(["[ O ]", "[   ]"]);
+  });
 });
