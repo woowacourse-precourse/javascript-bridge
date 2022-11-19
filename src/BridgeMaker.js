@@ -1,4 +1,5 @@
 const Validator = require('./Validator');
+const { GAME_CONSTANTS } = require('./utils/constants');
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -12,7 +13,7 @@ const BridgeMaker = {
     if (Validator.validatorBridgeLength(size)) {
       return Array.from(
         { length: size },
-        () => (Number(generateRandomNumber()) ? 'U' : 'D'),
+        () => (Number(generateRandomNumber()) ? GAME_CONSTANTS.upStair : GAME_CONSTANTS.downStair),
       );
     }
   },
