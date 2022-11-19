@@ -4,9 +4,20 @@ const App = require('../src/App');
 const BridgeGame = require('../src/BridgeGame');
 
 let crossingOrder = [];
+let bridge = ['U', 'D', 'D', 'U'];
 
 const moveMockFn = jest.fn((direction) => {
   crossingOrder.push([direction, direction === 'U' ? 0 : 1]);
+});
+
+const isFailMockFn = jest.fn(() => {
+  const idx = crossingOrder.length - 1;
+
+  return bridge[idx] !== crossingOrder[idx][0];
+});
+
+const isLastMockFn = jest.fn(() => {
+  return bridge.length === crossingOrder.length;
 });
 
 describe('move 메서드 테스트', () => {
@@ -169,14 +180,6 @@ describe('getBridgeCrossingResult 메서드 테스트', () => {
 });
 
 describe('isFail 메서드 테스트', () => {
-  let bridge = ['U', 'D', 'D', 'U'];
-
-  const isFailMockFn = jest.fn(() => {
-    const idx = crossingOrder.length - 1;
-
-    return bridge[idx] !== crossingOrder[idx][0];
-  });
-
   test.each([[['U', 'D', 'U']], [['U', 'D', 'D', 'D']]])(
     'crossingOrder 배열의 마지막 요소의 문자열 방향과 같은 위치의 bridge 요소가 다르다면 true를 반환한다.',
     (array) => {
@@ -191,5 +194,21 @@ describe('isFail 메서드 테스트', () => {
     ['U', 'D', 'D', 'U'].forEach((dircetion) => moveMockFn(dircetion));
 
     expect(isFailMockFn()).toBeFalsy();
+    crossingOrder = [];
+  });
+});
+
+describe('isLast 메서드 테스트', () => {
+  test('#bridge의 길이와 #crossingOrder의 길이가 다르다면 false를 반환한다.', () => {
+    ['U', 'D', 'D'].forEach((dircetion) => moveMockFn(dircetion));
+
+    expect(isLastMockFn()).toBeFalsy();
+    crossingOrder = [];
+  });
+
+  test('#bridge의 길이와 #crossingOrder의 길이가 다르다면 false를 반환한다.', () => {
+    ['U', 'D', 'D', 'U'].forEach((dircetion) => moveMockFn(dircetion));
+
+    expect(isLastMockFn()).toBeTruthy();
   });
 });
