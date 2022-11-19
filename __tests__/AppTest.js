@@ -274,7 +274,27 @@ describe('재시작 또는 종료 입력에 따른 함수 호출 테스트', () 
     });
 
     app.requestRestartOrQuit();
+  });
+});
 
-    console.log(quitSpy.mock);
+describe('app.restart() 테스트', () => {
+  const bridgeGame = new BridgeGame(['U', 'D', 'U']);
+  const app = new App();
+  app.bridgeGame = bridgeGame;
+
+  test('BridgeGame 클래스의 retry() 메서드가 호출된다.', () => {
+    const retrySpy = jest.spyOn(bridgeGame, 'retry');
+
+    app.restart();
+
+    expect(retrySpy).toBeCalledTimes(1);
+  });
+
+  test('App 클래스의 requestDirection() 메서드가 호출된다.', () => {
+    const directionSpy = jest.spyOn(app, 'requestDirection');
+
+    app.restart();
+
+    expect(directionSpy).toBeCalledTimes(1);
   });
 });

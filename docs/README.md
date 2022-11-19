@@ -206,6 +206,7 @@ const number = generateRandomNumber();
   - 이동할 방향을 입력 후 다리 건너기 결과 맵을 출력하는 함수의 호출 테스트 코드를 작성한다.
   - bridgeGame 결과에 따른 함수 호출 테스트 코드를 작성한다.
   - 재시작 또는 종료 입력에 따른 함수 호출 테스트 코드를 작성한다.
+  - app.restart() 테스트 코드를 작성한다.
 - [ ] test: BridgeGame.js 테스트 코드 작성
 - [ ] test: BridgeMaker.js 테스트 코드 작성
 - [ ] test: InputView.js 테스트 코드 작성
