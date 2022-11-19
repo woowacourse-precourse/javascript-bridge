@@ -2,7 +2,7 @@
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const { Console } = require("@woowacourse/mission-utils");
-const { validateBridgeSize, validateUserMove, validateUserEnd } = require("./InputModel");
+const { validateBridgeSize, validateUserMove, validateUserEnd } = require("./ValidateInput");
 const OutputView = require("./OutputView");
 
 const InputView = {
