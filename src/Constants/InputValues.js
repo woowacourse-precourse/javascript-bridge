@@ -13,8 +13,14 @@ const INPUT_RETRY = {
   quit: 'Q',
 };
 
+const INPUT_TYPE = {
+  move: 'MOVE',
+  retry: 'RETRY',
+};
+
 module.exports = {
   INPUT_CHAR,
   INPUT_NUM,
   INPUT_RETRY,
+  INPUT_TYPE,
 };

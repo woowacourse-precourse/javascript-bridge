@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { INPUT_MESSAGE } = require('./Constants/Message');
-const { INPUT_RETRY } = require('./Constants/InputValues');
+const { INPUT_RETRY, INPUT_TYPE } = require('./Constants/InputValues');
+const { checkBridgeSize, checkCorrectCharactor, checkCorrectCommand } = require('./Utils/Validation');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { makeBridge } = require('./BridgeMaker');
 const { printMap, printResult } = require('./OutputView');
@@ -16,7 +17,7 @@ const InputView = {
    */
   readBridgeSize(move, retryCount) {
     Console.readLine(INPUT_MESSAGE.start, (size) => {
-      // validation Check
+      this.sizeValidation(size);
       const bridge = makeBridge(size, generate);
       const gameInfo = {
         bridge,
@@ -26,12 +27,16 @@ const InputView = {
     });
   },
 
+  sizeValidation(size) {
+    checkBridgeSize(size);
+  },
+
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(gameInfo, input, retry) {
     Console.readLine(INPUT_MESSAGE.move, (move) => {
-      // validation Check
+      this.moveValidation(move, INPUT_TYPE.move);
       input.push(move);
       const pass = isPlayerPassed(move, gameInfo.bridge[input.length - 1]);
       const clear = isPlayerCleared(gameInfo.bridge.length, input.length, pass);
@@ -45,15 +50,25 @@ const InputView = {
     });
   },
 
+  moveValidation(move, type) {
+    checkCorrectCharactor(move);
+    checkCorrectCommand(move, type);
+  },
+
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(gameInfo, result, move) {
-    Console.readLine(INPUT_MESSAGE.retry, (input) => {
-      // validation Check
-      if (input === INPUT_RETRY.restart) move(gameInfo);
-      if (input === INPUT_RETRY.quit) printResult(gameInfo.retryCount, 0, result);
+    Console.readLine(INPUT_MESSAGE.retry, (command) => {
+      this.retryValidation(command, INPUT_TYPE.retry);
+      if (command === INPUT_RETRY.restart) move(gameInfo);
+      if (command === INPUT_RETRY.quit) printResult(gameInfo.retryCount, 0, result);
     });
+  },
+
+  retryValidation(command, type) {
+    checkCorrectCharactor(command);
+    checkCorrectCommand(command, type);
   },
 };
 
