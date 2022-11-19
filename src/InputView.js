@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
+ * 파라미터로 전달받은 함수를 readLine의 콜백함수에서 실행한다.
  */
 const InputView = {
   /**
