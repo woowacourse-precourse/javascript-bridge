@@ -13,9 +13,4 @@ const STATUS = {
   NEXT: 'next'
 };
 
-const RESULT = {
-  GAME_SUCCESS: '성공',
-  GAME_FAILURE: '실패'
-};
-
-module.exports = { VALUE, STATUS, RESULT };
+module.exports = { VALUE, STATUS, };
