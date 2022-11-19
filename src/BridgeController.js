@@ -23,6 +23,7 @@ class BridgeController {
         return this.progressSize();
       }
 
+      this.setBridgeGameList(input);
       return this.progressMoving();
     });
   }
@@ -41,6 +42,11 @@ class BridgeController {
         return this.progressCommand();
       }
     });
+  }
+
+  setBridgeGameList(input) {
+    const bridgeList = this.bridgeMaker.makeBridge(Number(input), generate);
+    this.bridgeGame.setBridgeList(bridgeList);
   }
 }
 
