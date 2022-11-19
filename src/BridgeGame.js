@@ -67,6 +67,13 @@ class BridgeGame {
     }
     return true;
   }
+
+  returnStringArray(arr) {
+    str = `[ ${arr.join(' , ')} ]`;
+    str = str.replaceAll("'", ' ');
+    str = str.replaceAll(',', '|');
+    return str;
+  }
 }
 
 module.exports = BridgeGame;
