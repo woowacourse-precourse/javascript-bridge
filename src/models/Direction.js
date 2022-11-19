@@ -2,23 +2,17 @@ const Validator = require('../Validator');
 
 class Direction {
   #direction;
-  #successful;
+  #nextCellDirection;
 
-  constructor(direction) {
+  constructor(direction, nextCellDirection) {
     Validator.directionValidityCheck(direction);
     this.#direction = direction;
+    this.#nextCellDirection = nextCellDirection;
+    this.successfulMove();
   }
 
-  getDirection() {
-    return this.#direction;
-  }
-
-  setSuccessful(nextCellDirection) {
-    this.#successful = this.#direction === nextCellDirection;
-  }
-
-  getSuccessful() {
-    return this.#successful;
+  successfulMove() {
+    return this.#direction === this.#nextCellDirection;
   }
 }
 
