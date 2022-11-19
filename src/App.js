@@ -21,7 +21,7 @@ class App {
 
   #moveStatement;
 
-  #gameStaus;
+  #gameOptionStatus;
 
   play() {
     OutputView.printStart();
@@ -52,12 +52,12 @@ class App {
     }
     if (this.#appStatus === 5) return this.progressRetryGame();
     if (this.#appStatus === 6) {
-      if (this.#gameStaus) return this.initApp();
-      if (!this.#gameStaus) {
+      if (this.#gameOptionStatus) return this.initApp();
+      if (!this.#gameOptionStatus) {
         OutputView.printResult(
           this.#bridgeMap.getMap(),
           this.#brdigeGame.getNumberOfTry(),
-          this.#gameStaus,
+          this.#gameOptionStatus,
         );
       }
     }
@@ -95,7 +95,7 @@ class App {
     InputView.readGameCommand((answer) => {
       try {
         Validator.confirmOfCondition(answer, 'option');
-        this.#gameStaus = this.#brdigeGame.retry(answer);
+        this.#gameOptionStatus = this.#brdigeGame.retry(answer);
         this.#appStatus = 6;
       } catch (e) {
         console.log(e, '예외발생');
