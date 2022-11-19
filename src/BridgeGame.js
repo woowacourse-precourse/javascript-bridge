@@ -128,6 +128,10 @@ class BridgeGame {
     this.#checkSet = [];
     this.inputMoving();
   }
+
+  play() {
+    this.start();
+  }
 }
 
 module.exports = BridgeGame;
