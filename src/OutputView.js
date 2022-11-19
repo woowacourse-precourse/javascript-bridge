@@ -18,7 +18,7 @@ const OutputView = {
         let print = [[], []];
         for (let i in result) {
             let pos = result[i].slice(0, 1) === "D" ? 1 : 0;
-            let value = result[i].at(-1);
+            let value = result[i].at(-1) === "X" ? "X" : "O";
             print[pos].push(value);
             print[pos === 0 ? 1 : 0].push(" ");
         }
