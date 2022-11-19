@@ -7,6 +7,7 @@ class Messages {
 
   static BRIDGE_SIZE_ERROR = '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.';
   static MOVING_ERROR = '[ERROR] 이동할 칸("U" 또는 "D")을 입력해주세요.';
+  static GAME_COMMAND_ERROR = '[ERROR] 재시작 또는 종료("R" 또는 "Q")를 입력해주세요.';
 }
 
 module.exports = Object.freeze(Messages);

@@ -63,8 +63,13 @@ const InputView = {
    */
   readGameCommand(bridge) {
     Console.readLine(Messages.INPUT_RESTART_OR_END, (restartOrEnd) => {
+      this.validateGameCommand(restartOrEnd);
       const totalCount = this.bridgeGame.countTry();
     });
+  },
+
+  validateGameCommand(restartOrEnd) {
+    if (restartOrEnd !== 'R' && restartOrEnd !== 'Q') throw new Error(Messages.GAME_COMMAND_ERROR);
   },
 };
 
