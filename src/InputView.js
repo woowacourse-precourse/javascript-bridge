@@ -7,10 +7,11 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
+  readBridgeSize(next) {
     MissionUtils.Console.readLine(MESSAGE.INPUTBRIDGELENGTH, (input) => {
       this.validateBridgeSize(input);
-      return input;
+      // return input;
+      next(input);
     }); 
   },
 
@@ -26,10 +27,11 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(next, bridgeGame) {
     MissionUtils.Console.readLine(MESSAGE.INPUTMOVINGLOCATION, (input) => {
       this.validateMove(input);
-      return input;
+      // return input;
+      next(input, bridgeGame);
     });
   },
 
