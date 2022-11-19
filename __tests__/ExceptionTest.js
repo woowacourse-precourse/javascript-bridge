@@ -2,10 +2,12 @@ const { bridgeSizeValidator, directionValidator } = require('../src/Validator');
 
 describe('예외 테스트', () => {
   test.each([
-    ['03', false],
+    ['03', true],
     ['a', false],
     [' 3', false],
     ['3.3', false],
+    ['7', true],
+    ['10', true],
     [' ', false],
     ['18', true],
   ])('숫자 예외 테스트(자연수만)', (input, result) => {
