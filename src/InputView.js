@@ -1,5 +1,6 @@
 const OutputView = require('./OutputView');
 const Validate = require('./Validate');
+const InputValueControl = require('./InputValueControl');
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./Constants');
 
@@ -12,9 +13,7 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     Console.readLine(MESSAGE.BRIDGE_SIZE, (size) => {
-      const SIZE = Number(size);
-      if (Validate.checkBridgeSize(SIZE)) {
-        bridgeGame.getAnswerBridge(SIZE);
+      if (InputValueControl.bridgeSize(size, bridgeGame)) {
         this.readMoving(bridgeGame);
       } else {
         this.readBridgeSize(bridgeGame);
@@ -27,20 +26,14 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     Console.readLine(MESSAGE.MOVING_KEY, (key) => {
-      if (Validate.checkMovingKey(key)) {
-        bridgeGame.move(key);
-        OutputView.printMap(bridgeGame.getUserBridge());
-      } else {
-        this.readMoving(bridgeGame);
+      if (!InputValueControl.movingKey(key, bridgeGame)) {
+        return this.readMoving(bridgeGame);
       }
-      if (bridgeGame.isSuccess()) {
-        return OutputView.printResult(bridgeGame, '성공');
+      if (InputValueControl.checkSuccess(bridgeGame)) return;
+      if (InputValueControl.checkMoveResult(key, bridgeGame)) {
+        return this.readMoving(bridgeGame);
       }
-      if (bridgeGame.getMoveResult(key) === 'O') {
-        this.readMoving(bridgeGame);
-      } else {
-        this.readGameCommand(bridgeGame);
-      }
+      return this.readGameCommand(bridgeGame);
     });
   },
 
@@ -49,13 +42,8 @@ const InputView = {
    */
   readGameCommand(bridgeGame) {
     Console.readLine(MESSAGE.GAME_COMMAND, (key) => {
-      if (!Validate.checkCommandKey(key)) {
-        return this.readGameCommand(bridgeGame);
-      }
-      if (bridgeGame.isRetry(key)) {
+      if (InputValueControl.gameCommand(key, bridgeGame)) {
         this.readMoving(bridgeGame);
-      } else {
-        OutputView.printResult(bridgeGame, '실패');
       }
     });
   },
