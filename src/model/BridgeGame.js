@@ -6,13 +6,11 @@ const MissionUtils = require('@woowacourse/mission-utils');
  */
 class BridgeGame {
   #bridge
-  #position
   #moveHistory
   #isSuccess
   #tryCount
 
   constructor() {
-    this.#position = -1;
     this.#bridge = null;
     this.#moveHistory = [];
     this.#isSuccess = "실패";
@@ -33,22 +31,6 @@ class BridgeGame {
    */
   setBridge(bridge) {
     this.#bridge = bridge;
-  }
-
-  /**
-   * 현재 위치를 반환하는 메서드
-   * @returns {number} 현재 위치, 처음 위치는 0 이다.
-   */
-  getPosition() {
-    return this.#position;
-  }
-
-  /**
-   * 현재 위치를 재할당하는 메서드
-   * @param {number} amount 이동할 횟수
-   */
-  setPosition(amount) {
-    this.#position += amount;
   }
 
   /**
@@ -100,36 +82,51 @@ class BridgeGame {
   }
 
   /**
-   * 이동 경로 데이터로 위, 이동 진행 상황 배열을 반환하는 메서드
-   * <p>
-   * 이동에 성공하면 O, 실패하면 X
-   * @returns {[string[], string[]]} 위 이동 경로, 아래 이동 경로
-   */
-  getUpDownHistory() {
-    let [upHistory, downHistory] = new Array(2).fill(0).map(() => new Array(this.#position + 1).fill(" "));
-    let bridge = this.#bridge.getBridge();
-
-    for (let position = 0; position <= this.#position; position++) {
-      if (this.#moveHistory[position] === bridge[position])
-        this.changeUpDownHistory(upHistory, downHistory, position, "O");
-      if (this.#moveHistory[position] !== bridge[position])
-        this.changeUpDownHistory(upHistory, downHistory, position, "X");
-    }
-    return [upHistory, downHistory];
+ * 현재 위치를 반환하는 메서드
+ * @returns {number} 현재 위치, 처음 위치는 0 이다.
+ */
+  getPosition() {
+    return this.#moveHistory.length - 1;
   }
 
   /**
-   * 🔴 파라미터 4개로 수정 필요한 메서드
-   * @param {*} upHistory 
-   * @param {*} downHistory 
-   * @param {*} position 
-   * @param {*} type 
+   * 다리의 끝 위치를 반환하는 메서드
+   * @returns 
    */
-  changeUpDownHistory(upHistory, downHistory, position, type) {
+  getEndPosition() {
+    return this.getBridge().length - 1;
+  }
+
+  /**
+   * 이동 경로 데이터로 위, 이동 진행 상황 배열을 반환하는 메서드
+   * <p>
+   * 이동에 성공하면 O, 실패하면 X
+   * @returns {[string[], string[]]} 위 다리 이동 경로, 아래 다리 이동 경로
+   */
+  getUpDownHistory() {
+    let upDownHistory = new Array(2).fill(0).map(() => new Array(this.#moveHistory.length).fill(" "));
+    let bridge = this.#bridge.getBridge();
+
+    for (let position = 0; position < this.#moveHistory.length; position++) {
+      if (this.#moveHistory[position] === bridge[position])
+        this.changeUpDownHistory(upDownHistory, position, "O");
+      if (this.#moveHistory[position] !== bridge[position])
+        this.changeUpDownHistory(upDownHistory, position, "X");
+    }
+    return [upDownHistory[0], upDownHistory[1]];
+  }
+
+  /**
+   * 
+   * @param {string[2][]} upDownHistory 위 다리의 이동 경로는 upDownHistory[0], 아래 다리의 이동경로는 upDownHistory[1] 
+   * @param {number} position 현재 위치
+   * @param {*} type 성공적으로 지났으면 O, 실패했으면 X
+   */
+  changeUpDownHistory(upDownHistory, position, type) {
     if (this.#moveHistory[position] === "U")
-      upHistory[position] = type;
+      upDownHistory[0][position] = type;
     if (this.#moveHistory[position] === "D")
-      downHistory[position] = type;
+      upDownHistory[1][position] = type;
   }
 
   /**
@@ -156,11 +153,9 @@ class BridgeGame {
    */
   move(moveType) {
     this.validateMoveType(moveType);
-    this.setPosition(1);
     this.setMoveHistory(moveType);
     this.isFailMove(this.getUpDownHistory());
   }
-
 
   /**
    * 건너는데 실패했는지 확인하는 메서드
@@ -176,10 +171,7 @@ class BridgeGame {
    * @returns {boolean} 성공 시 true, 실패 시 false
    */
   isEndPosition() {
-    let maxPosition = this.getBridge().length - 1;
-    let position = this.getPosition();
-
-    if (maxPosition === position) {
+    if (this.getPosition() === this.getEndPosition()) {
       this.setIsSuccess("성공");
       return true;
     }
@@ -192,7 +184,6 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#position = -1;
     this.#moveHistory = [];
     this.setTryCount(this.getTryCount() + 1);
   }

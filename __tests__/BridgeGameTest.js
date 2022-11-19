@@ -66,7 +66,6 @@ describe("BridgeGame 테스트", () => {
         bridgeGame.retry();
 
         expect(bridgeGame.getTryCount()).toEqual(2);
-        expect(bridgeGame.getPosition()).toEqual(-1);
         expect(bridgeGame.getMoveHistory()).toEqual([]);
     })
 });
