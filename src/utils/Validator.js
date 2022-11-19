@@ -1,4 +1,4 @@
-const { ErrorMsg } = require('./Constant.js');
+const { ErrorMsg } = require('../constants/Constant.js');
 
 class Validator {
   static #nullCheck(value) {

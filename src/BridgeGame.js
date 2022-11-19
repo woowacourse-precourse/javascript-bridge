@@ -1,4 +1,4 @@
-const { GameState } = require('./Constant.js');
+const { GameState } = require('./constants/Constant.js');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
