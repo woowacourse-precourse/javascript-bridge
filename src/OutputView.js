@@ -47,7 +47,7 @@ const OutputView = {
       return '   ]'
     }
     if(GameStatus.bridge[GameStatus.step] !== nextMove) {
-      GameStatus.success = false;
+      GameStatus.alive = false;
       return ' X ]'
     }
     return ' O ]'
@@ -62,8 +62,8 @@ const OutputView = {
     Console.print('\n최종 게임 결과')
     GameStatus.step -= 1;
     this.printMap(GameStatus.lastMove);
-    Console.print('\n게임 성공 여부: ' + SUCCESS[GameStatus.success])
-    Console.print('총 시도한 횟수: ' + GameStatus.stage)
+    Console.print('\n게임 성공 여부: ' + SUCCESS[GameStatus.alive])
+    Console.print('총 시도한 횟수: ' + GameStatus.tried)
     Console.close();
   },
 

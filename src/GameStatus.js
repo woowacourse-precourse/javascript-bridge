@@ -1,7 +1,7 @@
 const GameStatus = {
   step: 0,
-  stage: 1,
-  success: true,
+  tried: 1,
+  alive: true,
   size: 0,
   lastMove: 0,
   bridge: [],

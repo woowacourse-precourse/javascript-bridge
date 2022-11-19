@@ -1,17 +1,11 @@
-const { Console } = require("@woowacourse/mission-utils");
 const GameStatus = require("./GameStatus.js");
-const OutputView = require("./OutputView.js");
 
 const GameUtils = {
-  init(retry) {
+  init() {
     GameStatus.step = 0;
-    GameStatus.stage += 1;
-    GameStatus.success = true;
-    if(retry === 'Q') {
-      OutputView.printResult();
-    }
+    GameStatus.tried = 1;
+    GameStatus.alive = true;
   },
-
 }
 
 module.exports = GameUtils

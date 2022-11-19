@@ -6,8 +6,8 @@ const BridgeMaker = require("./BridgeMaker.js")
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
 const OutputView = require("./OutputView.js");
 const { printSizeError, printMoveError, printRetryError } = require("./OutputView.js");
+const GameUtils = require("./GameUtils.js");
 
-const validMove = ['U', 'D']
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -37,8 +37,7 @@ const InputView = {
       try {
         const nextMove = new MovingValid(answer).getMove()
         const bridgeGame = new BridgeGame(nextMove)
-        const success = bridgeGame.move(nextMove)
-        if(success === false) return this.readGameCommand();
+        if(bridgeGame.move(nextMove) === false) return this.readGameCommand();
         if(GameStatus.size === GameStatus.step) return OutputView.printResult();
         return this.readMoving();
       } catch (e) {
@@ -55,16 +54,15 @@ const InputView = {
   readGameCommand() {
     Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (answer => {
       try {
-      const retry = new RetryValid(answer).getRetry()
+        const retry = new RetryValid(answer).getRetry();
+        const bridgeGame = new BridgeGame();
         if(retry === 'Q') {
           return OutputView.printResult();
         }
-        GameStatus.step = 0;
-        GameStatus.stage += 1;
-        GameStatus.success = true;
+        bridgeGame.retry();
         return this.readMoving();
       } catch (e) {
-        printRetryError()
+        printRetryError();
         return this.readGameCommand();
       }
     }))
