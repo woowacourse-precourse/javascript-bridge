@@ -22,7 +22,6 @@ class App {
       const generateRandomNumber = generate;
       validateBridgeSize(size);
       this.bridge = makeBridge(size, generateRandomNumber);
-
       this.moveBridge();
     });
   }
@@ -35,7 +34,17 @@ class App {
       checkMoveString(userInput);
       move;
       printMap(upBridge, downBridge);
+      this.checkContinue(move);
     });
+  }
+
+  checkContinue(move) {
+    if (move === true) this.moveBridge();
+    if (move === false) this.failAnswer();
+  }
+
+  failAnswer() {
+    console.log('틀렸습니다.');
   }
 }
 
