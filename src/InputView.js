@@ -7,16 +7,20 @@ InputView의 메서드의 인자는 변경할 수 있다.
 사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다. 
 */
 const MissionUtils = require('@woowacourse/mission-utils');
+const BridgeGame = require('../src/BridgeGame');
+const BridgeMaker = require('../src/BridgeMaker');
+const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
 
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    MissionUtils.Console.readLine('다리의 길이를 입력해주세요.', (answer) => {
-      //숫자를 입력받고 다리만드는 함수로 보내기
-      console.log(answer, '이게 맞니?');
-    });
+  readBridgeSize(answer) {
+    const bridg = BridgeMaker.makeBridge(
+      answer,
+      BridgeRandomNumberGenerator.generate
+    );
+    return bridg;
   },
 
   /**
