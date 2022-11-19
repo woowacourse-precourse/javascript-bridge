@@ -10,14 +10,6 @@ const GameView = class extends IGameView {
       throw new Error(ERROR_MESSAGE.abstract_class);
     }
   }
-
-  input(message, callback) {
-    this.inputView.input(message, callback);
-  }
-
-  output(message) {
-    this.outputView.output(message);
-  }
 };
 
 module.exports = GameView;

@@ -10,12 +10,14 @@ const BridgeCtrl = class extends GameCtrl {
 
   // 게임 진행
   // 1. 다리 길이 입력받기 ✅
-  // 2. 다리 생성하기
+  // 2. 다리 생성하기 ✅
+  // 3.
   gameProcess() {
-    this.view.output(GAME_MESSAGE.start);
-    this.view.input(GAME_MESSAGE.input_size, (bridgeSize) => {
-      this.model.createBridge(Number(bridgeSize));
-    });
+    const { inputView, outputView } = this.view;
+
+    outputView.printGameStart();
+    const onCreateBridge = (bridgeSize) => this.model.createBridge(Number(bridgeSize));
+    inputView.readBridgeSize(onCreateBridge);
   }
 
   // 게임 종료
