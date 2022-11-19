@@ -1,5 +1,5 @@
-const { readMoving, readGameCommand } = require('./InputView');
-const { printMap, printResult } = require('./OutputView');
+const { readMoving, readGameCommand } = require('./Views/InputView');
+const { printMap, printResult } = require('./Views/OutputView');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
