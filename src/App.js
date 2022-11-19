@@ -27,26 +27,37 @@ class App {
         this.continueGame();
       } catch (error) {
         MissionUtils.Console.print(error.message);
+        this.startGame();
       }
     });
   }
 
   continueGame() {
     InputView.readMoving((moving) => {
-      const status = this.#bridgeGame.move(moving);
-      const markingPaper = this.#bridgeGame.getMarkingPaper();
-      OutputView.printMap(markingPaper);
+      try {
+        const status = this.#bridgeGame.move(moving);
+        const markingPaper = this.#bridgeGame.getMarkingPaper();
+        OutputView.printMap(markingPaper);
 
-      this.#commands[status].call(this);
+        this.#commands[status].call(this);
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+        this.continueGame();
+      }
     });
   }
 
   restartGame() {
     InputView.readGameCommand((gameCommand) => {
-      const command = COMMAND[gameCommand];
-      if (command === COMMAND.R) this.#bridgeGame.retry();
+      try {
+        const command = COMMAND[gameCommand];
+        if (command === COMMAND.R) this.#bridgeGame.retry();
 
-      this.#commands[command].call(this);
+        this.#commands[command].call(this);
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+        this.restartGame();
+      }
     });
   }
 
