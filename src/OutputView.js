@@ -27,8 +27,10 @@ const OutputView = {
   printResult(mapList, successResult, totalResult) {
     print(OUTPUT_TEXT.GAME_RESULT);
     this.printMap(mapList);
-    print(OUTPUT_TEXT.SUCESS_RESULT(successResult));
-    print(OUTPUT_TEXT.TOTAL_COUNT(totalResult));
+    print(
+      OUTPUT_TEXT.SUCESS_RESULT(successResult),
+      OUTPUT_TEXT.TOTAL_COUNT(totalResult)
+    );
   },
 };
 
