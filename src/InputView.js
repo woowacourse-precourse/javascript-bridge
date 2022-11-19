@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const {CheckBridgeSizeException, CheckUserMove, CheckWhetherGameRunning} = require("./Exception");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
@@ -15,13 +16,23 @@ const InputView = {
    */
   readBridgeSize(){
     Console.readLine("다리의 길이를 입력해주세요" , (num) => {
-      this.createRandomBridge(num);
+      this.checkFunctionExceptions(num);
     });
   },
 
   createRandomBridge(num){
     this.createBridge = makeBridge(num, generate);
     this.readMoving();
+  },
+
+  checkFunctionExceptions(num){
+    try{
+      new CheckBridgeSizeException(num);
+      this.createRandomBridge(num);
+    } catch(err){
+      Console.print(err);
+      this.readBridgeSize();
+    }
   },
 
   /**
