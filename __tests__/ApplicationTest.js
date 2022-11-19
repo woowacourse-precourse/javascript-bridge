@@ -135,4 +135,35 @@ describe("다리 건너기 테스트", () => {
       Error.readGameCommand("K");
     }).toThrow("[ERROR]");
   });
+
+  test("기능 테스트2", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "1", "1"]); // 랜덤 숫자 생성.
+    mockQuestions(["4", "U", "D", "U", "D"]); // 사이즈 + 이동칸 입력.
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, ["[ O |   | O |   ]", "[   | O |   | X ]"]);
+    expectBridgeOrder(log, "[ O |   | O | X ]", "[   | O |   | X ]");
+  });
+
+  test("기능 테스트3", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "1", "1"]); // 랜덤 숫자 생성.
+    mockQuestions(["4", "U", "D", "U", "D", "R", "U", "D", "U", "U"]); // 사이즈 + 이동칸 입력.
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ O |   | O |   ]",
+      "[   | O |   | X ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O | X ]", "[   | O |   | X ]");
+  });
 });
