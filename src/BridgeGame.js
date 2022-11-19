@@ -60,6 +60,13 @@ class BridgeGame {
       return;
     }
   }
+
+  checkX() {
+    if (this.#up.includes('X') || this.#down.includes('X')) {
+      return false;
+    }
+    return true;
+  }
 }
 
 module.exports = BridgeGame;
