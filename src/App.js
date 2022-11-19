@@ -38,7 +38,11 @@ class App {
     this.replayOrQuit();
   }
 
-  play() {}
+  async play() {
+    OutputView.printStart();
+    await this.initiate();
+    this.progress();
+  }
 
   async replayOrQuit() {
     const gameCommand = await InputView.readGameCommand();
