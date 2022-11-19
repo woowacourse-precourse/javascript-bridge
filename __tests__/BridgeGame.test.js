@@ -456,4 +456,15 @@ describe('위치 기록 저장 메서드 테스트', () => {
 
     expect(bridgeGame.setPositionLog.name).toEqual(METHOD_NAME);
   });
+
+  test('[[0, 0], "O"] 반환을 기대한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const BRIDGE_REUSLT = 'O';
+    const POSITION_INDEX = [0, 0];
+    const RECEIVED = [[0, 0], 'O'];
+
+    bridgeGame.move();
+
+    expect(bridgeGame.setPositionLog(POSITION_INDEX, BRIDGE_REUSLT)).toEqual(RECEIVED);
+  });
 });
