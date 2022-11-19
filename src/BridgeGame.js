@@ -7,6 +7,7 @@ const { REQUIREMENT } = require('./constant/Constant');
  */
 class BridgeGame {
   #bridge;
+  
   constructor(bridgeLength) {
     this.#bridge = makeBridge(bridgeLength, this.generateRandomNumber);
     console.log(this.#bridge);

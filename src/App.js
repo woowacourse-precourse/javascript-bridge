@@ -3,14 +3,15 @@ const InputView = require('./InputView');
 const BridgeGame = require('./BridgeGame');
 
 class App {
+  #bridge;
 
   play() {
     OutputView.printInit();
-    InputView.readBridgeSize(this.initGame);
+    InputView.readBridgeSize(this);
   }
 
   initGame(bridgeLength) {
-    new BridgeGame(bridgeLength);
+    this.#bridge = new BridgeGame(bridgeLength);
   }
 
 }
