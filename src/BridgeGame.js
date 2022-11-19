@@ -16,6 +16,10 @@ class BridgeGame {
     this.#user.push(move);
   }
 
+  getUserStatus() {
+    return this.#user;
+  }
+
   isEnd(move) {
     const current = this.#user.length - 1;
     if (this.#bridge[current] !== move) return true;

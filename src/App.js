@@ -39,11 +39,13 @@ class App {
   }
 
   playGame(move) {
+    this.bridgeGame.move(move);
+    const status = this.bridgeGame.getUserStatus();
+
     if (this.bridgeGame.isEnd(move)) {
       InputView.readGameCommand(this.getRetry.bind(this));
       return;
     }
-    this.bridgeGame.move(move);
     InputView.readMoving(this.getMoveInput.bind(this));
   }
 }
