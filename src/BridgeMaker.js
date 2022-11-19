@@ -13,9 +13,10 @@ const BridgeMaker = {
     const bridge = [];
     while (bridge.length < size) {
       const number = generateRandomNumber();
-      const direction = this.numberToUpDown(number);
+      const direction = this.numberToUpDown(number+"");
       bridge.push(direction);
     }
+    console.log(bridge);
     return bridge;
   },
 

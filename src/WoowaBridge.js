@@ -3,14 +3,15 @@ const OutputView = require("../src/console/OutputView");
 const InputView = require("../src/console/InputView");
 const Message = require("../src/lib/Message");
 const Bridge = require("./model/Bridge");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class WoowaBrigde {
   #bridge;
   #bridgeGame;
 
   constructor() {
-    this.#bridge = new Bridge();
-    this.#bridgeGame = new BridgeGame(this.#bridge);
+    this.#bridge = new Bridge(this);
+    this.#bridgeGame = new BridgeGame(this.#bridge, this);
   }
 
   getBridge() {
@@ -50,11 +51,25 @@ class WoowaBrigde {
   }
 
   gameContinue() {
-    const [upSideFalse, downSideFalse] = this.#bridge.includesX();
+    const isX = this.#bridge.includesX();
 
-    if (!upSideFalse && !downSideFalse) this.upOrDown();
-    if (upSideFalse || downSideFalse) this.#bridgeGame.retry();
-    if (this.#bridge.getLength()) this.#bridgeGame.retry();
+    if (isX) return this.#bridgeGame.retry();
+    if (this.#bridge.getLength()) return this.finalResult();
+    if (!isX) return this.upOrDown();
+  }
+  setWindOrLoss() {
+    if (!this.#bridge.includesX()) {
+      this.#bridgeGame.setState("성공");
+    }
+  }
+
+  finalResult() {
+    this.setWindOrLoss();
+    const gameState = this.#bridgeGame.getState();
+    const [upside, downside] = this.#bridge.getResult();
+
+    OutputView.printResult(gameState, upside, downside);
+    MissionUtils.Console.close();
   }
 }
 

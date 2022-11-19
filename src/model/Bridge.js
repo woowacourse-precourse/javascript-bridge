@@ -1,9 +1,12 @@
 class Bridge {
+  #woowaBridge;
   #originalBridge;
   #upsideBridge = [];
   #downsideBridge = [];
 
-  constructor() {}
+  constructor(woowaBridge) {
+    this.#woowaBridge = woowaBridge;
+  }
 
   getOriginalBridge() {
     return this.#originalBridge;
@@ -24,7 +27,6 @@ class Bridge {
   getLength() {
     const lengthOrigin = this.#originalBridge.length;
     const lengthAnother = this.#upsideBridge.length;
-
     return lengthOrigin === lengthAnother;
   }
 
@@ -80,7 +82,14 @@ class Bridge {
   includesX() {
     const upLast = this.#upsideBridge.includes(" X ");
     const downLast = this.#downsideBridge.includes(" X ");
-    return [upLast, downLast];
+    return upLast || downLast;
+  }
+
+  setInitialValue(setter) {
+    this.#upsideBridge = [];
+    this.#downsideBridge = [];
+    setter();
+    this.#woowaBridge.upOrDown();
   }
 }
 

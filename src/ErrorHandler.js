@@ -10,5 +10,14 @@ class ErrorHandler {
       errorCallback();
     }
   }
+
+  static testSimple(validTarget, errorCallBack) {
+    try {
+      validTarget();
+    } catch (error) {
+      OutputView.printLine(error.message);
+      errorCallBack();
+    }
+  }
 }
 module.exports = ErrorHandler;

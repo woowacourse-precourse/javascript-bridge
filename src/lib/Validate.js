@@ -22,8 +22,14 @@ class Validate {
   }
 
   static bridgeDirection(diredtion) {
-    if (diredtion !== "U" && diredtion !=="D") {
-      throw new Error(`${Message.ERROR.PREFIX} ${Message.ERROR.DIRECTION}`)
+    if (diredtion !== "U" && diredtion !== "D") {
+      throw new Error(`${Message.ERROR.PREFIX} ${Message.ERROR.DIRECTION}`);
+    }
+  }
+
+  static restart(answer) {
+    if (answer !== "R" && answer !== "Q") {
+      throw new Error(`${Message.ERROR.PREFIX} ${Message.ERROR.RESTART}`);
     }
   }
 }

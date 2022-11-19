@@ -10,9 +10,10 @@ const InputView = {
     const generator = BridgeRandomNumberGenerator.generate;
 
     MissionUtils.Console.readLine(Message.BRIDGE_SIZE, (size) => {
-      const validTarget = () => Validate.bridgeLength(size);
-      const doCallBack = () => bridgeSetter(BridgeMaker.makeBridge(size, generator.bind(this)));
-      ErrorHandler.test(validTarget, doCallBack ,errorCallBack);
+      const validTarget = () => Validate.bridgeLength(size.toUpperCase());
+      const doCallBack = () =>
+        bridgeSetter(BridgeMaker.makeBridge(size, generator.bind(this)));
+      ErrorHandler.test(validTarget, doCallBack, errorCallBack);
 
       nextCallBack();
     });
@@ -23,8 +24,9 @@ const InputView = {
    */
   readMoving(doCallBack, nextCallBack, errorCallBack) {
     MissionUtils.Console.readLine(Message.BRIDGE_DIRECTION, (direction) => {
-      const validTarget = () => Validate.bridgeDirection(direction);
-      const callBack = () => doCallBack(direction)
+      const validTarget = () =>
+        Validate.bridgeDirection(direction.toUpperCase());
+      const callBack = () => doCallBack(direction);
       ErrorHandler.test(validTarget, callBack, errorCallBack);
       nextCallBack(direction);
     });
@@ -33,7 +35,14 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(reset, printResult, errorCallBakc) {
+    MissionUtils.Console.readLine(Message.REPLAY, (answer) => {
+      const validTarget = () => Validate.restart(answer);
+      ErrorHandler.testSimple(validTarget, errorCallBakc);
+      if (answer === "R") reset();
+      if (answer === "Q") printResult();
+    });
+  },
 };
 
 module.exports = InputView;

@@ -8,8 +8,8 @@ const Constant = Object.freeze({
   DIRECTION: {
     UP: "U",
     DOWN: "D",
-    ONE: 1,
-    ZERO: 0,
+    ONE: "1",
+    ZERO: "0",
   },
 });
 
