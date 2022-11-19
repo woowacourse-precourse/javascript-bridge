@@ -37,7 +37,7 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  isUorD(string) {
+  checkMovement(string) {
     if (!(string === "U" || string === "D")) {
       throw new Error("[ERROR] U나 D");
     }
@@ -47,7 +47,7 @@ const InputView = {
     MissionUtils.Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (movement) => {
-        this.isUorD(movement);
+        this.checkMovement(movement);
         bridgeGame.move(movement, bridge);
         bridgeGame.setRound();
         this.readMoving(bridge, bridgeGame);
