@@ -66,7 +66,7 @@ class App {
           this.bridgeGame.checkGameOver(),
           this.bridgeGame.getUserTryCount()
         );
-        return OutputView.gameClose();
+        return OutputView.exit();
       }
 
       if (retryCommand === 'R') {
