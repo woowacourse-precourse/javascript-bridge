@@ -19,12 +19,16 @@ class Bridge {
     );
   }
 
-  isMovable(index, moving) {
+  isMovable(moving, index) {
     return this.#bridgeMap[index] === moving;
   }
 
-  partialBridgeMap(index) {
-    return this.#bridgeMap.slice(0, index);
+  getBridgeLength() {
+    return this.#bridgeLength;
+  }
+
+  getPartialBridgeMap(index) {
+    return this.#bridgeMap.slice(0, index + 1);
   }
 }
 
