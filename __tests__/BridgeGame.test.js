@@ -388,4 +388,15 @@ describe('위치 파악 메서드 테스트', () => {
 
     expect(bridgeGame.getPositionIndex(EXPECTED)).toEqual(RECEIVED);
   });
+
+  test('아래 칸으로 두번 이동하면 [1, 1]을 반환한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const EXPECTED = 'D';
+    const RECEIVED = [1, 1];
+
+    bridgeGame.move();
+    bridgeGame.move();
+
+    expect(bridgeGame.getPositionIndex(EXPECTED)).toEqual(RECEIVED);
+  });
 });
