@@ -1,4 +1,4 @@
-const BridgeGame = require('../src/BridgeGame');
+const BridgeGame = require('../src/domain/BridgeGame');
 
 describe('다리 게임 test', () => {
   test('가능한 움직임인지 판단하는 기능', () => {

@@ -1,4 +1,4 @@
-const OutputView = require('../src/OutputView');
+const OutputView = require('../src/view/OutputView');
 
 describe('Ouput View 테스트', () => {
   test('다리 한 줄을 조건에 따라 생성', () => {
