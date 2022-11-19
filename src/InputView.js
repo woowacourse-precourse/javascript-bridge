@@ -32,10 +32,16 @@ const InputView = {
 
   readGameCommand() {
     return new Promise(resolve => {
-      Console.readLine(INPUT_MESSAGE.READ_GAME_COMMAND, game => {
-        resolve(game);
+      Console.readLine(INPUT_MESSAGE.READ_GAME_COMMAND, restart => {
+        const VALIDATION = this.vadlidateGameCommand(restart);
+        resolve(VALIDATION);
       });
     });
+  },
+
+  vadlidateGameCommand(restart) {
+    if (restart === 'R' || restart === 'Q') return restart;
+    throw new Error(ERROR_MESSAGE.RESTART_ERROR);
   },
 };
 
