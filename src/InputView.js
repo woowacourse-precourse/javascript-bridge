@@ -52,7 +52,7 @@ const InputView = {
     /**
      * 이동할 칸에 대한 검사
      * @param {string} input
-     * @return {number}
+     * @returns {number}
      */
     checkMoving(input) {
         if (input !== "U" && input !== "D")
