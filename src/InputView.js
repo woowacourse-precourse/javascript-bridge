@@ -1,4 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
+const BridgeGame = require('./BridgeGame');
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -39,9 +41,10 @@ const InputView = {
 
   readMovingException(letter, answerArr, move) {
     const LimitedMovement = /[UD]/;
-    if (!LimitedMovement.test(letter))
-      throw '[ERROR] 대문자 U 와 D 를 입력해주세요.';
-    else move(letter, answerArr);
+    if (LimitedMovement.test(letter)) {
+      const bridgeGame = new BridgeGame();
+      return bridgeGame.move(letter, answerArr);
+    } else throw '[ERROR] 대문자 U 와 D 를 입력해주세요.';
   },
 
   /**
