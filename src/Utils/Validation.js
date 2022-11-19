@@ -9,6 +9,7 @@ class Validation {
     if (!(input >= 3 && input <= 20)) {
       throw ERR.WRONG_BRIDGE_SIZE;
     }
+    return parseInt(input);
   }
 
   static validMoveKey(input) {

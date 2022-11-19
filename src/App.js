@@ -2,8 +2,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Controller = require("./Controller");
 class App {
   play() {
-    const constroller = new Controller();
-    constroller.start();
+    const controller = new Controller();
+    controller.setting();
+    controller.start();
   }
 }
 

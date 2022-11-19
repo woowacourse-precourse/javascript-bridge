@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { PRINT, KEY } = require("./constants/constants");
 
+const Validation = require("./Utils/Validation");
 const BridgeGame = require("./BridgeGame");
 const { printResult, printMap } = require("./View/OutputView");
 const InputView = require("./View/InputView");
@@ -8,13 +9,22 @@ const InputView = require("./View/InputView");
 class Controller {
   #correct;
   #command;
+  #size;
+
+  setting() {
+    try {
+      MissionUtils.Console.print(PRINT.START_GAME);
+      this.#size = InputView.readBridgeSize();
+    } catch (e) {
+      MissionUtils.Console.print(e);
+      // this.setting();
+    }
+  }
 
   start() {
-    MissionUtils.Console.print(PRINT.START_GAME);
-    const size = InputView.readBridgeSize();
-    const game = new BridgeGame(size);
+    const game = new BridgeGame(this.#size);
     const location = -1;
-    this.play(game, size, location);
+    this.play(game, this.#size, location);
   }
 
   play(game, size, location) {
