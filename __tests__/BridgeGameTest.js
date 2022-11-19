@@ -3,7 +3,7 @@ const App = require('../src/App');
 const BridgeGame = require('../src/BridgeGame');
 const { createTokens, canMoveNext } = require('../src/BridgeGame');
 const { generate } = require('../src/BridgeRandomNumberGenerator');
-const { ERROR_MESSAGE } = require('../src/constant/message');
+const { ERROR_MESSAGE } = require('../src/Constants/message');
 
 describe('BridgeGame 클래스 테스트', () => {
   test('createTokens - 반환하는 배열 길이가 입력값과 같은지 검사', () => {
@@ -86,16 +86,14 @@ describe('BridgeGame 클래스 테스트', () => {
     });
   });
 
-  test('makeNewDirectionRecord - 올바른 이동 기록을 반환하는지 검사', () => {
+  test('addDirection - 올바른 이동 기록을 반환하는지 검사', () => {
     // Given
     const userDirection = 'D';
     const records = ['U', 'D'];
 
     // When
-    const newRecords = BridgeGame.makeNewDirectionRecord(
-      userDirection,
-      records
-    );
+    const newRecords = BridgeGame.addDirection(userDirection, records);
+
     const nextRecords = ['U', 'D', 'D'];
     // Then
     expect(newRecords).toEqual(nextRecords);
