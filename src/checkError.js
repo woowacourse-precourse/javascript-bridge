@@ -5,6 +5,7 @@ const CheckError = {
   checkBridgeLength(input) {
     try {
       if (isNaN(input)) throw new Error("[ERROR] 숫자만 입력하세요.");
+      if (input < 3 || input > 20) throw new Error("[ERROR] 3~20 숫자를 입력하세요");
     } catch (error) {
       MissionUtils.Console.print(error.message);
     }
