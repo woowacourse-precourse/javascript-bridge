@@ -23,18 +23,15 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgeGame) {
-    Console.readLine(
-      `${OUTPUT.LINE}${INPUT.MOVING}${OUTPUT.LINE}`,
-      (moving) => {
-        const error = Check.hasMoving(moving);
-        if (error) return this.readMoving(bridgeGame);
+    Console.readLine(`${INPUT.MOVING}${OUTPUT.LINE}`, (moving) => {
+      const error = Check.hasMoving(moving);
+      if (error) return this.readMoving(bridgeGame);
 
-        bridgeGame.move(moving);
-        if (bridgeGame.hasWrong()) return this.readGameCommand(bridgeGame);
-        if (bridgeGame.hasAll()) return bridgeGame.finish(RESULT.SUCCESS);
-        return this.readMoving(bridgeGame);
-      }
-    );
+      bridgeGame.move(moving);
+      if (bridgeGame.hasWrong()) return this.readGameCommand(bridgeGame);
+      if (bridgeGame.hasAll()) return bridgeGame.finish(RESULT.SUCCESS);
+      return this.readMoving(bridgeGame);
+    });
   },
 
   /**

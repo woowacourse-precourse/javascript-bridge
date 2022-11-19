@@ -3,6 +3,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
 const OutputView = require("./OutputView");
 const { MOVING, CALCULATION } = require("./constants/values");
+const { OUTPUT } = require("./constants/messages");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -26,6 +27,7 @@ class BridgeGame {
     );
 
     this.#bridge = bridge;
+    Console.print(OUTPUT.BLANK);
   }
 
   /**

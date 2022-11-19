@@ -14,6 +14,7 @@ const OutputView = {
     const lowerList = movingList[1].join(" | ");
     Console.print(`[ ${upperList} ]`);
     Console.print(`[ ${lowerList} ]`);
+    Console.print(OUTPUT.BLANK);
   },
 
   /**
@@ -22,9 +23,9 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(movingList, result, attempts) {
-    Console.print(`${OUTPUT.LINE}${OUTPUT.RESULT}`);
+    Console.print(`${OUTPUT.RESULT}`);
     this.printMap(movingList);
-    Console.print(`${OUTPUT.LINE}${OUTPUT.SUCCESS(result)}`);
+    Console.print(OUTPUT.SUCCESS(result));
     Console.print(`${OUTPUT.ATTEMPTS(attempts)}`);
   },
 };

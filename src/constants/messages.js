@@ -4,6 +4,7 @@ const OUTPUT = {
   SUCCESS: (result) => `게임 성공 여부: ${result}`,
   ATTEMPTS: (attempts) => `총 시도한 횟수: ${attempts}`,
   LINE: "\n",
+  BLANK: " ",
 };
 
 const INPUT = {
