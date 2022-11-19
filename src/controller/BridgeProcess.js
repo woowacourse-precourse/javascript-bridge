@@ -37,9 +37,9 @@ class BridgeProcess {
   }
 
   #printMovement(movement) {
-    const match = this.#gameReport.move(movement);
-    this.#inputMovement(match);
+    const [match, { sucess, process }] = this.#gameReport.move(movement);
     this.#outputView.printMap(match);
+    sucess || !process ? this.#printFinalResult(sucess) : this.#inputMovement();
   }
 
   #inputGameCommand() {
@@ -47,6 +47,10 @@ class BridgeProcess {
       const isCommand = this.#inputView.readGameCommand(command);
       isCommand ? '맞아' : this.#inputGameCommand();
     });
+  }
+
+  #printFinalResult(sucess) {
+    console.log(sucess);
   }
 }
 

@@ -8,9 +8,11 @@ class BridgeGame {
   #bridge = [];
   #round = -1;
   #inputs = [];
+  #roundMoveable = false;
 
   makeBridgeInfo(bridgeSize) {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, generate);
+    console.log(this.#bridge);
   }
 
   /**
@@ -19,14 +21,21 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(movement) {
-    const roundMoveable = this.#moveRound(movement);
-    this.#inputs.push({ move: movement, moveable: roundMoveable ? true : false });
-    return this.#inputs;
+    this.#roundMoveable = this.#moveRound(movement);
+    this.#inputs.push({ move: movement, moveable: this.#roundMoveable ? true : false });
+    return [this.#inputs, this.#judgeRound()];
   }
 
   #moveRound(movement) {
     this.#round += 1;
     return this.#bridge[this.#round] === movement;
+  }
+
+  #judgeRound() {
+    return {
+      sucess: this.#round === this.#bridge.length - 1,
+      process: this.#roundMoveable && this.#bridge.length > this.#round,
+    };
   }
 
   /**
