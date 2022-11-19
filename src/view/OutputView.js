@@ -1,9 +1,6 @@
-const { OUTPUT_MESSAGES } = require('../constants/messages');
+const { OUTPUT_MESSAGES, ERROR_MESSAGES } = require('../constants/messages');
 const { print } = require('../utils/missionUtil');
 
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
 const OutputView = {
   printStart() {
     const { gameStart } = OUTPUT_MESSAGES;
@@ -14,7 +11,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+
+  drawBridge(bridgeGame, answer) {
+    // 여기서 다리를 그리자
+    // 사용자가 고른 다리면 O 또는 X 표시, 안 골랐으면 공백 3칸을 추가한다.
+  },
+
+  printMap(bridgeGame, answer) {},
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
@@ -22,6 +25,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult() {},
+
+  printError(errorType) {
+    print(ERROR_MESSAGES[errorType]);
+  },
 };
 
 module.exports = OutputView;
