@@ -17,6 +17,10 @@ class Bridge {
   move() {
     this.#currentDirection += 1;
   }
+
+  initializeCurrentDirection() {
+    this.#currentDirection = 0;
+  }
 }
 
 module.exports = Bridge;
