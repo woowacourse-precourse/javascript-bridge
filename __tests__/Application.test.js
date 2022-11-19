@@ -177,4 +177,15 @@ describe('아이템 치환 함수 테스트', () => {
 
     expect(Application.replace(TARGET_STRING, REPLCE_ITME_1, REPLCE_ITME_2)).toEqual(RECEIVED);
   });
+
+  test('아무것도 일치하지 않는다면 예외를 발생시킨다.', () => {
+    expect(() => {
+      const TARGET_STRING = 'K';
+      const REPLCE_ITME_1 = ['D', 1];
+      const REPLCE_ITME_2 = ['U', 0];
+      const RECEIVED = 1;
+
+      expect(Application.replace(TARGET_STRING, REPLCE_ITME_1, REPLCE_ITME_2)).toEqual(RECEIVED);
+    }).toThrow(RANGE_ERROR_TEXT);
+  });
 });
