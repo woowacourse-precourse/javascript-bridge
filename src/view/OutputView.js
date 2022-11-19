@@ -1,17 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
-const {
-  GAME_MESSAGE,
-  BRIDGE_COMPONENT,
-  INPUT_MESSAGE,
-} = require('../utils/gameMessage');
+const { GAME_MESSAGE, BRIDGE_COMPONENT } = require('../utils/gameMessage');
 
 const OutputView = {
   printGameStart() {
     Console.print(GAME_MESSAGE.GAME_START);
-  },
-
-  PrintGameSelect() {
-    Console.print(INPUT_MESSAGE.SELECT_RETRY);
   },
 
   printMap(movingResult) {
