@@ -2,13 +2,13 @@ const { COMMAND } = require('./constant');
 const Validator = require('./Validator');
 
 const HandleCommand = {
-  direction: (direction, nextCellDirection) => {
+  successfullyMove: (direction, nextCellDirection) => {
     Validator.directionValidityCheck(direction);
 
     return direction === nextCellDirection;
   },
 
-  retry: (command) => {
+  retryOrQuit: (command) => {
     Validator.commandValidityCheck(command);
 
     return command === COMMAND.RETRY;
