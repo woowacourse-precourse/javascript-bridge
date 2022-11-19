@@ -17,8 +17,8 @@ const OutputView = {
    */
   printResult() {},
 
-  printError(e) {
-    Console.print(e);
+  printError(errorMessage) {
+    Console.print(errorMessage);
   },
 };
 
