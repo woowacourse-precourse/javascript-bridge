@@ -29,6 +29,7 @@ const OutputView = {
    */
   printResult(isComplete, tryCount) {
     Console.print(CONSOLE_MESSAGE.finalCompleteNTry(isComplete, tryCount));
+    Console.close();
   },
 };
 
