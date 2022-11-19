@@ -83,16 +83,20 @@ class BridgeGame {
    */
   hasWrong() {
     const movingItems = Object.values(this.#movingList).flat();
-    const result = movingItems.includes(MOVING.WRONG_ANSWER);
-    return result;
+    if (movingItems.includes(MOVING.WRONG_ANSWER)) {
+      return true;
+    }
+    return false;
   }
 
   /**
    * 다리를 모두 건넜을 때 사용하는 메서드
    */
   hasAll() {
-    const result = this.#movingList.upper.length === this.#bridge.length;
-    return result;
+    if (this.#movingList.upper.length === this.#bridge.length) {
+      return true;
+    }
+    return false;
   }
 
   /**
