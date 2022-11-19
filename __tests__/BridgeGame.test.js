@@ -507,4 +507,11 @@ describe('위치 기록 가져오는 메서드 테스트', () => {
 
     expect(EXPECTED).toEqual(RECEIVED);
   });
+
+  test('두번째 요소는 [[0, 1], "X"]을 반환한다.', () => {
+    const RECEIVED = [[0, 1], 'X'];
+    const EXPECTED = bridgeGame.getPositionLog()[1];
+
+    expect(EXPECTED).toEqual(RECEIVED);
+  });
 });
