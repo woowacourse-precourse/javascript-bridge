@@ -12,6 +12,7 @@ const GAME_MSG = {
 const REQUEST_MSG = {
   bridgeSize: '\n다리의 길이를 입력해주세요.\n',
   movingDirection: `\n이동할 칸을 선택해주세요. (위: ${UPSIDE_SYMBOL}, 아래: ${DOWNSIDE_SYMBOL})\n`,
+  retryOrQuit: '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
 };
 
 const ERROR_MSG = {
