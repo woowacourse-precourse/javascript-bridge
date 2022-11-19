@@ -25,8 +25,6 @@ class Bridge {
     this.#down.push(!bool);
   }
 
-
-
   print() {
     MissionUtils.Console.print(JSON.stringify(this.#up).replaceAll(',', ' | '));
     MissionUtils.Console.print(JSON.stringify(this.#down).replaceAll(',', ' | '));
