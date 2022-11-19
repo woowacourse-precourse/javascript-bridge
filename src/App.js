@@ -1,6 +1,7 @@
 const InputView = require("./InputView");
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const {generate} = require("./BridgeRandomNumberGenerator");
+const BridgeMaker = require("./BridgeMaker");
 
 class App {
   async play() {
@@ -12,17 +13,19 @@ class App {
       this.bridgeSizeValidate(bridgeSize);
     }
 
-    let moving = null;
-    while (moving !== "D" && moving !== "U") {
-      moving = await InputView.readMoving();
-      this.movingValidate(moving);
-    }
+    const bridge = BridgeMaker.makeBridge(bridgeSize, generate);
 
-    let regame = null;
-    while (regame !== "Q" && regame !== "R") {
-      regame = await InputView.readGameCommand();
-      this.gameCommandValidate(regame);
-    }
+    // let moving = null;
+    // while (moving !== "D" && moving !== "U") {
+    //   moving = await InputView.readMoving();
+    //   this.movingValidate(moving);
+    // }
+
+    // let regame = null;
+    // while (regame !== "Q" && regame !== "R") {
+    //   regame = await InputView.readGameCommand();
+    //   this.gameCommandValidate(regame);
+    // }
   }
 
   bridgeSizeValidate(number) {
