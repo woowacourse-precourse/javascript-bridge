@@ -9,11 +9,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    return new Promise((resolve) => {
-      Console.readLine(MESSAGE.REQUEST.BRIDGE_SIZE + "\n", (size) => {
-        resolve(size);
-      });
-    });
+    Console.readLine(MESSAGE.REQUEST.BRIDGE_SIZE + "\n", (size) => {});
   },
 
   /**

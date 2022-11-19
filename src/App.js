@@ -1,10 +1,12 @@
+const BridgeMaker = require("./BridgeMaker");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const validBridgeSize = require("./validation/validBridgeSize");
 
 class App {
-  async play() {
+  play() {
     OutputView.printStartMessage();
-    const bridgesize = await InputView.readBridgeSize();
+    InputView.readBridgeSize();
   }
 }
 
