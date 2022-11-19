@@ -6,14 +6,23 @@ const GameInfo = require("./GameInfo");
 const OutputView = {
   moveBridge: null,
 
+  startGame() {
+    Console.print("다리 건너기 게임을 시작합니다.");
+  },
+
+  printError(message) {
+    Console.print(message);
+  },
+
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap() {
-    Console.print(`[ ${this.moveBridge[0].join(' | ')} ]`);
-    Console.print(`[ ${this.moveBridge[1].join(' | ')} ]`);
+    GameInfo.moveBridge.forEach((bridge) => {
+      Console.print(`[ ${bridge.join(' | ')} ]`);
+    });
   },
 
   /**
