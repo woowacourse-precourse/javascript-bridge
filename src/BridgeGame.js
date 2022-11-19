@@ -3,6 +3,7 @@ const InputView = require('./InputView');
 const BridgeSizeValidator = require('./validator/BridgeSizeValidator');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const MovingValidator = require('./validator/MovingValidator');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -36,6 +37,20 @@ class BridgeGame {
   setBridgeRandomNumber() {
     const bridgeRandomNumber = () => BridgeRandomNumberGenerator.generate();
     this.#bridgeSet = BridgeMaker.makeBridge(this.#bridgeSize, bridgeRandomNumber);
+    this.inputMoving();
+  }
+
+  inputMoving() {
+    InputView.readMoving(this.validateMoving.bind(this));
+  }
+
+  validateMoving(moving) {
+    try {
+      new MovingValidator(moving);
+    } catch (error) {
+      Console.print(error);
+      this.inputMoving();
+    }
   }
 
   /**
