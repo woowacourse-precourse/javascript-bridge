@@ -1,5 +1,3 @@
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator =  require("./BridgeRandomNumberGenerator");
 const MissionUtils = require("@woowacourse/mission-utils");
 const Validate = require("./Validate");
 const { INPUT_MESSAGE } = require("./Utils");
@@ -12,15 +10,18 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(INPUT_MESSAGE.INPUT_BRIDGE_LENGTH, (size) => {
-      return BridgeMaker.makeBridge(Validate.validateBridgeLength(size), 
-        BridgeRandomNumberGenerator.generate());
+      return Validate.validateBridgeLength(size);
     })
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    MissionUtils.Console.readLine(INPUT_MESSAGE.CHOICE_SPACE_TO_MOVE, (move) => {
+      return Validate.validateMoving(move);
+    })
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
