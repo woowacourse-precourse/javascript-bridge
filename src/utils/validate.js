@@ -14,6 +14,7 @@ const validateBridge = (size) => {
 
 const validateMove = (move) => {
   if (/[^UD]/.test(move)) {
+    Console.print('[ERROR] 이동할 칸은 U 또는 D로 입력해야 합니다.');
     throw new Error();
   }
 };
