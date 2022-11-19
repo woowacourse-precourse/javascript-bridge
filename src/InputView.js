@@ -6,6 +6,7 @@ const RandomNumber = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame.js');
 const { currentPosition } = require('./Utils.js');
+const Retry = require('./Retry.js');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -57,9 +58,10 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(MESSAGE.INPUT_WANT_RETRY, (input) => {
-      console.log(input);
+      const retry = new Retry(input);
+      retry.validate();
     });
   },
 };
 
-InputView.readBridgeSize();
+InputView.readGameCommand();

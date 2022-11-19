@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { ERROR, RULE, POSITION } = require('./Constants');
+const { ERROR, RULE, POSITION, RETRY_OR_EXIT } = require('./Constants');
 
 const throwErrorMessage = (message) => {
   throw new Error(`${ERROR.PREFIX} ${message}`);
@@ -25,4 +25,12 @@ const checkHasCrossibleKey = (key) => {
   }
 };
 
-module.exports = { checkIsInteger, checkSizeInRange, checkHasCrossibleKey };
+const checkHasKey = (key) => {
+  if (!RETRY_OR_EXIT.includes(key)) {
+    throwErrorMessage(ERROR.NOT_KEY);
+  }
+};
+
+let currentPosition = 0;
+
+module.exports = { checkIsInteger, checkSizeInRange, checkHasCrossibleKey, currentPosition, checkHasKey };

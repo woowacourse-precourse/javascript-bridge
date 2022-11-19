@@ -15,11 +15,14 @@ const POSITION = {
   LOWER: 'D',
 };
 
+const RETRY_OR_EXIT = ['R', 'Q'];
+
 const ERROR = {
   PREFIX: '[ERROR]',
   NOT_INTEGER: '정수를 입력해주세요.',
   NOT_IN_RANGE: `${RULE.MIN_SIZE} ~ ${RULE.MAX_SIZE}사이의 자연수를 입력해주세요.`,
   NOT_CROSSIBLE_KEY: `대문자 ${POSITION.UPPER}와 ${POSITION.LOWER} 중 하나를 입력해주세요.`,
+  NOT_KEY: `대문자 ${RETRY_OR_EXIT[0]}와 ${RETRY_OR_EXIT[1]}중 하나를 입력해주세요`,
 };
 
-module.exports = { MESSAGE, RULE, ERROR, POSITION };
+module.exports = { MESSAGE, RULE, ERROR, POSITION, RETRY_OR_EXIT };
