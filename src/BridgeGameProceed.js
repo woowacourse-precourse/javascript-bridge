@@ -18,7 +18,8 @@ class BridgeGameProceed {
     start() {
         OutputView.printStart();
         InputView.readBridgeSize((bridgeLength) => {
-            // Validation.bridgeLength(bridgeLength);
+            Console.print('');
+            Validation.bridgeLength(bridgeLength);
             this.#bridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
             console.log(this.#bridge);
             this.game();
