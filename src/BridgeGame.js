@@ -18,15 +18,17 @@ class BridgeGame {
 
   move(direction) {
     const bridge = this.#bridge.getBridge();
-    const nextCellIndex = this.#player.getCurPlace();
-    const nextCellDirection = bridge[nextCellIndex];
+    const nextCellDirection = bridge[this.#player.getCurPlace()];
     const successfulMove = new Direction(direction, nextCellDirection);
     this.#player.increaseCurPlace();
-    successfulMove
-      ? this.#bridge.updateMap(direction, MAP_ELEMENT.CROSS)
-      : this.#bridge.updateMap(direction, MAP_ELEMENT.FAIL);
 
     return successfulMove;
+  }
+
+  drawMap(successful, direction) {
+    successful
+      ? this.#bridge.updateMap(direction, MAP_ELEMENT.CROSS)
+      : this.#bridge.updateMap(direction, MAP_ELEMENT.FAIL);
   }
 
   curMap() {

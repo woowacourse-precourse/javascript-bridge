@@ -45,6 +45,7 @@ class GameController {
 
   handleDirection(direction) {
     const successfulMove = this.#bridgeGame.move(direction);
+    this.#bridgeGame.drawMap(direction, successfulMove);
     const curMapState = this.#bridgeGame.curMap();
     OutputView.printMap(curMapState);
 
