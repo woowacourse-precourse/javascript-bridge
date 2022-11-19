@@ -92,7 +92,7 @@ class App {
         this.#bridgeAnswer = +answer;
         this.#appStatus = 2;
       } catch (e) {
-        console.log(e, '예외발생');
+        Utils.print(e);
       } finally {
         this.progressApp(this.#appStatus);
       }
@@ -106,7 +106,7 @@ class App {
         this.#moveAnswer = answer;
         this.#appStatus = 4;
       } catch (e) {
-        console.log(e, '예외발생');
+        Utils.print(e);
       } finally {
         this.progressApp(this.#appStatus);
       }
@@ -120,7 +120,7 @@ class App {
         this.#gameOptionStatus = this.#brdigeGame.retry(answer);
         this.#appStatus = 6;
       } catch (e) {
-        console.log(e, '예외발생');
+        Utils.print(e);
       } finally {
         this.progressApp(this.#appStatus);
       }
