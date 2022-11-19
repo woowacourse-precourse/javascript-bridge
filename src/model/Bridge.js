@@ -10,7 +10,7 @@ class Bridge {
     this.bridgeMap = { upper: [], lower: [] };
   }
 
-  crossBridge(bridgeIndex, selectedMove) {
+  crossBridge({ bridgeIndex, selectedMove }) {
     const isMove = this.createdBridge[bridgeIndex] === MOVING[selectedMove];
     return isMove;
   }
