@@ -5,12 +5,19 @@ const Message = require("../src/lib/Message");
 const Bridge = require("../src/model/Bridge");
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
-const {run} = require("jest");
+
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
   logSpy.mockClear();
   return logSpy;
+};
+
+const testRandom = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
 };
 
 const getOutput = (logSpy) => {
@@ -73,8 +80,57 @@ describe("브릿지 다리 생성 테스트", () => {
   test.each([["E"],["0.5"],["-5"],["2"],["21"],["2+3"]])("잘못된 길이는 오류를 냅니다." , (input)=>{
     runException([input])
   })
-
-
 });
 
-describe("브릿지 이동 테스트", () => {});
+describe("브릿지 이동 테스트", () => {
+  test("숫자 1은 U , 0은 D가 나옵니다." ,()=>{
+    const length = ["5"]
+    setTestInvOnce(length);
+
+    const direction = ["1","1","1","1","0"]
+    const result = ["U","U","U","U","D"]
+    testRandom(direction);
+
+    const bridgeGame = new BridgeGame();
+    bridgeGame.play();
+
+    const bridge = bridgeGame.getBridge().getOriginalBridge();
+
+    bridge.forEach((direction,index) => {
+      expect(direction).toEqual(result[index])
+    } )
+  })
+
+  test.each([["3", "f"],["3", "1"],["3", "ㄱ"],["3", "!"],["3", " "]])("잘못된 방향 입력은 예외를발생시킵니다." , (input, direction)=>{
+    runException([input,direction])
+  })
+
+  test("정답이 아니면 X 가 표시됩니다." ,()=>{
+    const length = ["3","D"]
+    setTestInvOnce(length);
+
+    const direction = ["1","1","1"]
+    testRandom(direction);
+
+    const bridgeGame = new BridgeGame();
+    bridgeGame.play();
+
+    const [up,down] = bridgeGame.getBridge().getBridges()
+
+    expect(down).toContain(" X ")
+  })
+  test("입력하지 않은 칸은 빈칸입니다.." ,()=>{
+    const length = ["3","D"]
+    setTestInvOnce(length);
+
+    const direction = ["1","1","1"]
+    testRandom(direction);
+
+    const bridgeGame = new BridgeGame();
+    bridgeGame.play();
+
+    const [up,down] = bridgeGame.getBridge().getBridges()
+
+    expect(up).toContain(" N ")
+  })
+});

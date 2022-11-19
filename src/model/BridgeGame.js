@@ -19,6 +19,11 @@ class BridgeGame {
     this.#printer = new Printer(this);
   }
 
+  play() {
+    this.#printer.sayHello();
+    this.makeBridge();
+  }
+
   setState(result) {
     this.#state.isWin = result;
   }
@@ -29,11 +34,6 @@ class BridgeGame {
 
   getState() {
     return this.#state;
-  }
-
-  play() {
-    this.#printer.sayHello();
-    this.makeBridge();
   }
 
   makeBridge() {
