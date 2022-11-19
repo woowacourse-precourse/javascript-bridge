@@ -6,14 +6,16 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = {
     /**
      * 다리의 길이를 입력받는다.
-     * @returns {number}
+     * @returns {Promise}
      */
     readBridgeSize() {
-        MissionUtils.Console.readLine(
-            "다리의 길이를 입력해주세요.\n",
-            (input) => {
-                return this.checkBridgeSize(input);
-            }
+        return new Promise((resolve, reject) =>
+            MissionUtils.Console.readLine(
+                "다리의 길이를 입력해주세요.\n",
+                (input) => {
+                    resolve(this.checkBridgeSize(input));
+                }
+            )
         );
     },
     /**
