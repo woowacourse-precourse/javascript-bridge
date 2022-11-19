@@ -39,28 +39,51 @@ class BridgeProcess {
   #printMovement(movement) {
     const [match, { sucess, process }] = this.#gameReport.move(movement);
     this.#outputView.printMap(match);
-    sucess
-      ? this.#printFinalResult(sucess, match)
-      : process
-      ? this.#inputMovement()
-      : this.#inputGameCommand(match);
+    [...this.#movementOptions].filter(([key, value]) =>
+      key.sucess === sucess && key.process === process ? value(sucess, match) : ''
+    );
   }
+
+  #movementOptions = new Map([
+    [
+      { sucess: true, process: false },
+      (sucess, match) => {
+        this.#printFinalResult(sucess, match);
+      },
+    ],
+    [
+      { sucess: false, process: true },
+      () => {
+        this.#inputMovement();
+      },
+    ],
+    [
+      { sucess: false, process: false },
+      () => {
+        this.#inputGameCommand();
+      },
+    ],
+  ]);
 
   #inputGameCommand(match) {
     Console.readLine(PRINTGAMECOMMAND, (command) => {
       const isCommand = this.#inputView.readGameCommand(command);
-      if (isCommand) {
-        if (isCommand === 'R') {
-          this.#inputMovement();
-          this.#gameReport.retry();
-        } else {
-          this.#printFinalResult(false, match);
-        }
-      } else {
-        this.#inputGameCommand();
-      }
+      this.#commandOptions[isCommand](match);
     });
   }
+
+  #commandOptions = {
+    R: () => {
+      this.#inputMovement();
+      this.#gameReport.retry();
+    },
+    Q: (match) => {
+      this.#printFinalResult(false, match);
+    },
+    false: () => {
+      this.#inputGameCommand();
+    },
+  };
 
   #printFinalResult(sucess, match) {
     this.#outputView.printResult(sucess, this.#gameReport.totalTry, match);
