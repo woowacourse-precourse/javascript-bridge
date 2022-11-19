@@ -22,7 +22,7 @@ const InputView = {
         throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
       }
       
-      const bridge = BRIDGE_MAKER.makeBridge(input,BRIDGE_RANDOM_NUMBER_GENERATOR.generate());
+      const bridge = BRIDGE_MAKER.makeBridge(input,BRIDGE_RANDOM_NUMBER_GENERATOR.generate);
       MISSIONUTILS.Console.print(bridge);
       InputView.readMoving(input-1, 0, bridge, "", 1);
     });
