@@ -15,7 +15,7 @@ const BridgeMaker = Object.freeze({
       .fill(null)
       .map(() => {
         const number = generateRandomNumber();
-        if (number === 0) return BRINDGE_DIRECTION.DOWN;
+        if (Number(number) === 0) return BRINDGE_DIRECTION.DOWN;
         return BRINDGE_DIRECTION.UP;
       });
     return bridge;
