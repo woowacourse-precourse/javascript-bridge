@@ -15,14 +15,40 @@ class BridgeGame {
    */
   constructor() {
     this.data = [];
+    this.copy = [];
+    this.bridegeUp = [];
+    this.bridegeDown = [];
   }
   bridgeMake(answer) {
-    this.data = answer;
-    console.log(this.data);
+    this.data = [...answer];
+    this.copy = [...answer];
   }
-  move() {
-    //다리 만들어졌으면
-    //사용자한테 U,P 선택하라는 문구 출력
+  move(answer) {
+    this.blankAdd();
+    let result = false;
+    if (this.copy[0] === answer) {
+      answer === 'U'
+        ? (this.bridegeUp.push('O'), this.bridegeDown.push(' '))
+        : (this.bridegeUp.push(' '), this.bridegeDown.push('O'));
+      this.copy.shift();
+      result = true;
+      console.log(this.bridegeUp, this.bridegeDown);
+
+      return result;
+    }
+    if (this.copy[0] !== answer) {
+      answer === 'U'
+        ? (this.bridegeUp.push('X'), this.bridegeDown.push(' '))
+        : (this.bridegeUp.push(' '), this.bridegeDown.push('X'));
+      return result;
+    }
+  }
+  check(booleans) {}
+  blankAdd() {
+    if (this.bridegeUp.length > 0) {
+      this.bridegeUp.push('|'), this.bridegeDown.push('|');
+    }
+    return;
   }
 
   /**
