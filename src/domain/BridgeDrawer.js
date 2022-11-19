@@ -24,6 +24,19 @@ class BridgeDrawer {
     const direction = this.#gameStatus.bridge[bridgeLastIndex];
     this.#bridgeDrawing[direction][bridgeLastIndex] = BRIDGE.FAIL_SIGN;
   }
+
+  #convertBridgeGridToDrawing() {
+    const directions = [COMMAND.MOVING_UP, COMMAND.MOVING_DOWN];
+    directions.forEach((currentDirection) => {
+      this.#bridgeDrawing[currentDirection] = `[${this.#bridgeDrawing[currentDirection].join(
+        '|'
+      )}]`;
+    });
+
+    this.#bridgeDrawing = Trimmer.templateTrim(`
+      ${this.#bridgeDrawing[COMMAND.MOVING_UP]}
+      ${this.#bridgeDrawing[COMMAND.MOVING_DOWN]}`);
+  }
 }
 
 module.exports = BridgeDrawer;
