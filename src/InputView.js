@@ -34,7 +34,7 @@ const Validate = require('./utils/validation');
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(game) {
     MissionUtils.Console.readLine(MESSAGE.READ_USER_INPUT_COMMAND,
       (input) => {
         this.handleGameCommandException(input, game);
