@@ -9,11 +9,14 @@ class BridgeValidator {
     this.#isArray(bridge);
     this.checkInputBridgeLength(bridge.lenght, min, max);
     bridge.forEach((bridgeElement) => {
-      this.#isBridgeUpDown(bridgeElement);
+      this.checkInputNext(bridgeElement);
     });
   }
   static checkInputNext(next) {
-    this.#isBridgeUpDown(next);
+    if (bridgeElement != 'U' && bridgeElement != 'D') {
+      throw new Error(ERROR.IS_BRIDGE_UP_DOWN);
+    }
+    return true;
   }
   static checkFinish(cur, max) {
     if(cur == max) {
@@ -27,13 +30,10 @@ class BridgeValidator {
       throw new Error(ERROR.IS_MAX_POSITON);
     }
   }
-
-  static #isBridgeUpDown(char) {
-    if (bridgeElement != 'U' && bridgeElement != 'D') {
-      throw new Error(ERROR.IS_BRIDGE_UP_DOWN);
-    }
-    return true;
+  static checkBridgeAnswer(bridgeAnswer) {
+    this.#isArray(bridgeAnswer);
   }
+
   static #isNumber(number) {
     if (isNaN(+number)) {
       throw new Error(ERROR.IS_NUMBER);
