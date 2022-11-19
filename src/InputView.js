@@ -1,21 +1,28 @@
+const MissionUtils = require('@woowacourse/mission-utils');
+const { MESSAGE_INPUT_BRIDGE_LENGTH, MESSAGE_NEXT_MOVING_INPUT, MESSAGE_RETRY } = require('./constants');
+
+const { Console } = MissionUtils;
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  readBridgeSize() {
+    Console.readLine(MESSAGE_INPUT_BRIDGE_LENGTH, (length) => {
+    });
+  },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(MESSAGE_NEXT_MOVING_INPUT, (direction) => {
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+    });
+  },
+
+  readGameCommand() {
+    Console.readLine(MESSAGE_RETRY, (command) => {
+
+    });
+  },
 };
 
 module.exports = InputView;
