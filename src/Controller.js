@@ -34,6 +34,7 @@ class Controller {
 
   movingDirectionForm(square) {
     try {
+      this.validation.isUpOrDown(square);
       Console.print(square);
     } catch (error) {
       Console.print(error);
