@@ -22,3 +22,26 @@ describe("다리 길이 player 입력 테스트", () => {
     }
   );
 });
+
+describe.only("이동할 칸 player 입력 테스트", () => {
+  test.each([["0"], ["/"], [25]])(
+    "이동할 칸이 알파벳이 아닌 경우 false 반환",
+    (input) => {
+      expect(Validation.isValidMovingType(input)).toBe(false);
+    }
+  );
+
+  test.each([[""], ["DDDD"], ["UU"]])(
+    "이동할 칸은 한 개의 문자열을 입력하지 아닌 경우 false 반환",
+    (input) => {
+      expect(Validation.isValidMovingLength(input)).toBe(false);
+    }
+  );
+
+  test.each([["U"], ["D"]])(
+    "이동할 칸을 U 또는 D를 입력한 경우 true 반환",
+    (input) => {
+      expect(Validation.isValidMoving(input)).toBe(true);
+    }
+  );
+});
