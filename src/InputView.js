@@ -28,11 +28,17 @@ const InputView = {
    */
   readMoving() {
     MissionUtils.Console.readLine(MESSAGE.INPUTMOVINGLOCATION, (input) => {
-      this.validateMove(input); // 예외처리 추가 예정
+      this.validateMove(input);
       return input;
     });
   },
 
+  validateMove(input) {
+    if (input !== REQUIREMENT.UP && input !== REQUIREMENT.DOWN) {
+      throw new Error(ERROR.MOVE);
+    }
+  },
+  
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
