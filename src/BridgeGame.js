@@ -27,6 +27,11 @@ class BridgeGame {
     if (this.bridge.isCurrentDirection(direction)) return true;
     return false;
   }
+
+  isGameEnd() {
+    if (this.bridge.isBridgeEnd()) return true;
+    return false;
+  }
 }
 
 module.exports = BridgeGame;
