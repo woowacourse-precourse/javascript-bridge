@@ -33,13 +33,9 @@ class App {
   }
 
   progressApp(appStatus) {
-    if (appStatus === 1) return this.progressBridgeMake();
-    if (appStatus === 2) {
-      this.#appStatus = 3;
-      this.#bridge = BridgeMaker.makeBridge(this.#bridgeAnswer);
-      this.#gameEndConditionValue = this.#bridge.length;
-      return this.progressBridgeMove();
-    }
+    if (appStatus === 1) return this.questionBridgeMake();
+    if (appStatus === 2) return this.progressBridgeMake();
+
     if (appStatus === 3) return this.progressBridgeMove();
     if (appStatus === 4) {
       this.#moveStatement = this.#brdigeGame.move(this.#moveAnswer, this.#bridge);
@@ -75,7 +71,7 @@ class App {
     }
   }
 
-  progressBridgeMake() {
+  questionBridgeMake() {
     InputView.readBridgeSize((answer) => {
       try {
         Validator.checkBridgeInput(answer);
@@ -87,6 +83,13 @@ class App {
         this.progressApp(this.#appStatus);
       }
     });
+  }
+
+  progressBridgeMake() {
+    this.#appStatus = 3;
+    this.#bridge = BridgeMaker.makeBridge(this.#bridgeAnswer);
+    this.#gameEndConditionValue = this.#bridge.length;
+    return this.progressBridgeMove();
   }
 
   progressBridgeMove() {
