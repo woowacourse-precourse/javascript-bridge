@@ -26,6 +26,10 @@ class User {
   increaseCount() {
     this.#tryCount += 1;
   }
+
+  decreaseLocation() {
+    this.#location -= 1;
+  }
 }
 
 module.exports = User;
