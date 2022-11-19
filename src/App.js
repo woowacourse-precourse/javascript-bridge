@@ -3,32 +3,27 @@ const OutputView = require("./View/OutputView");
 const { makeBridge } = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const MissionUtils = require("@woowacourse/mission-utils");
+const { GAME, MESSAGE } = require("./Constants");
 
 class App {
   constructor() {
     this.bridgeGame = null;
+    this.bridgeSize = 0;
   }
 
   play() {
-    OutputView.printStart();
+    OutputView.printMsg(MESSAGE.GAME_START);
     this.requestBridgeSize();
   }
 
   requestBridgeSize() {
     InputView.readBridgeSize((bridgeSize) => {
+      this.bridgeSize = bridgeSize;
       const bridge = makeBridge(bridgeSize, generate);
       this.bridgeGame = new BridgeGame(bridge);
 
-      MissionUtils.Console.print(bridge);
       this.requestMoving();
     });
-  }
-
-  requestMoving() {
-    InputView.readMoving((input) => {
-      
-    })
   }
 }
 
