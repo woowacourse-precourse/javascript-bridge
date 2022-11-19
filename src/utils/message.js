@@ -15,9 +15,9 @@ const OUTPUT_MESSAGE = {
 };
 
 const ERROR_MESSAGE = {
-  BRIDGE_LENGTH: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
-  MOVE: '[ERROR] U(위 칸) 혹은 D(아래 칸) 중 하나의 문자만 입력할 수 있습니다.',
-  RETRY: '[ERROR] R(재시작) 혹은 Q(종료) 중 하나의 문자만 입력할 수 있습니다.',
+  BOUND: '[ERROR] 올바른 크기의 숫자를 입력해주세요.',
+  NAN: '[ERROR] 숫자만 입력할 수 있습니다.',
+  WRONG: '[ERROR] 올바른 문자를 입력해주세요.',
 };
 
 Object.freeze(INPUT_MESSAGE);
