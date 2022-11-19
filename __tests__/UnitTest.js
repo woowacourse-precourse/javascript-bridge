@@ -17,6 +17,12 @@ describe('Vaildator 단위 테스트', () => {
     expect(InputVaildator.isVaildLength('-1')).toEqual(false);
     expect(InputVaildator.isVaildLength('0')).toEqual(false);
   });
+
+  test('다음 다리 건너기 입력이 유효한 값인지 판단하는 기능', () => {
+    expect(InputVaildator.isVaildStep('U')).toEqual(true);
+    expect(InputVaildator.isVaildStep('D')).toEqual(true);
+    expect(InputVaildator.isVaildStep('Z')).toEqual(false);
+  });
 });
 
 describe('BridgeMaker 단위 테스트', () => {
