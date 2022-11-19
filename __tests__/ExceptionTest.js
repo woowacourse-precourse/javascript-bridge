@@ -1,9 +1,10 @@
 /* eslint-disable max-lines-per-function */
+const { ERROR_MESSAGE_HEADER } = require('../src/utils/Constant');
 const Exception = require('../src/utils/Exception');
 const Validator = require('../src/utils/Validator');
 
 const runException = (validatorMethod, inputData) => {
-  expect(() => validatorMethod(inputData)).toThrow('[ERROR]');
+  expect(() => validatorMethod(inputData)).toThrow(ERROR_MESSAGE_HEADER);
 };
 
 describe('사용자 입력 형식 예외 테스트', () => {
