@@ -7,7 +7,6 @@ const { MAP_ELEMENT } = require('./constant');
 class BridgeGame {
   #player;
   #bridge;
-  #command;
   #direction;
 
   constructor() {
@@ -45,9 +44,9 @@ class BridgeGame {
   }
 
   retry(command) {
-    this.#command = new Command(command);
+    const shouldRetry = new Command(command);
 
-    return this.#command.shouldRetry();
+    return shouldRetry;
   }
 
   gameComplete() {

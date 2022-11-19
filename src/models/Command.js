@@ -7,6 +7,7 @@ class Command {
   constructor(command) {
     Validator.commandValidityCheck(command);
     this.#command = command;
+    this.shouldRetry();
   }
 
   shouldRetry() {
