@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Check = require("./Check");
-const { MOVING, COMMAND, RESULT } = require("./constants/values");
+const { COMMAND, RESULT } = require("./constants/values");
 const { OUTPUT, INPUT } = require("./constants/messages");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -43,7 +43,6 @@ const InputView = {
       if (error) return this.readGameCommand(bridgeGame);
 
       if (command === COMMAND.END) return bridgeGame.finish(RESULT.FAIL);
-
       bridgeGame.retry();
       return this.readMoving(bridgeGame);
     });

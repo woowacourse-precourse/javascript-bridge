@@ -25,8 +25,8 @@ class BridgeGame {
       parseInt(size, CALCULATION.DECIMAL_NUMBER),
       BridgeRandomNumberGenerator.generate
     );
-
     this.#bridge = bridge;
+
     Console.print(OUTPUT.BLANK);
   }
 
@@ -37,12 +37,8 @@ class BridgeGame {
    */
   move(moving) {
     const currentIndex = this.#movingList[0].length;
-
-    if (moving === MOVING.UPPER) {
-      return this.moveToUpper(moving, currentIndex);
-    } else {
-      return this.moveToLower(moving, currentIndex);
-    }
+    if (moving === MOVING.UPPER) return this.moveToUpper(moving, currentIndex);
+    return this.moveToLower(moving, currentIndex);
   }
 
   /**
