@@ -16,13 +16,16 @@ class BridgeGame {
   }
 
   static moveBridge() {
-    if (GameInfo.bridge[GameInfo.position] === GameInfo.gameStat[GameInfo.position]) {
-      GameInfo.moveBridge[GameInfo.indexingArray.indexOf(GameInfo.gameStat[GameInfo.position])].push("O");
-      GameInfo.moveBridge[(GameInfo.indexingArray.indexOf(GameInfo.gameStat[GameInfo.position]) + 1) % 2].push(" ");
-    } else {
-      GameInfo.moveBridge[GameInfo.indexingArray.indexOf(GameInfo.gameStat[GameInfo.position])].push("X");
-      GameInfo.moveBridge[(GameInfo.indexingArray.indexOf(GameInfo.gameStat[GameInfo.position]) + 1) % 2].push(" ");
-    }
+    return (this.isValidMove()) ? this.pushMoveBridge("O") : this.pushMoveBridge("X");
+  }
+
+  static isValidMove() {
+    return GameInfo.bridge[GameInfo.position] === GameInfo.gameStat[GameInfo.position];
+  }
+
+  static pushMoveBridge(input) {
+    GameInfo.moveBridge[GameInfo.indexingArray.indexOf(GameInfo.gameStat[GameInfo.position])].push(input);
+    GameInfo.moveBridge[(GameInfo.indexingArray.indexOf(GameInfo.gameStat[GameInfo.position]) + 1) % 2].push(" ");
   }
 
   static initializeGameInfo() {
