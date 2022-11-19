@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { UP, DOWN, ANSWER, MESSAGE } = require('../utiles/Constant');
+const { ANSWER, MESSAGE } = require('../utiles/Constant');
+const MakeMap = require('../models/MakeMap');
 
 const OutputView = {
   upBridge: [],
@@ -13,36 +14,9 @@ const OutputView = {
     Console.print(error);
   },
   
-  printMap(userMove, answer) {
-    OutputView.makePrintMap(userMove, userMove.length-1);
-    OutputView.makeMapLastItem(userMove[userMove.length-1], answer);
-
-    Console.print(OutputView.makeFinalOutputMap());
-
-    OutputView.printMapClear();
-  },
-
-  makePrintMap(userMove, userMoveLength) {
-    for (let i = 0; i < userMoveLength; i++) {
-      OutputView.upBridge.push(userMove[i] === UP ? ANSWER.OK : ANSWER.BLANK);
-      OutputView.downBridge.push(userMove[i] === DOWN ? ANSWER.OK : ANSWER.BLANK);
-    };
-  },
-
-  makeMapLastItem(lastAnswer, answer) {
-    OutputView.upBridge.push(lastAnswer === UP ? answer : ANSWER.BLANK);
-    OutputView.downBridge.push(lastAnswer === DOWN ? answer : ANSWER.BLANK);
-  },
-
-  makeFinalOutputMap() {
-    let outputMap = `[ ${OutputView.upBridge.join(' | ')} ]\n`;
-    outputMap += `[ ${OutputView.downBridge.join(' | ')} ]\n`;
-    return outputMap;
-  },
-
-  printMapClear() {
-    OutputView.upBridge = [];
-    OutputView.downBridge = [];
+  printMap(userMove, isCorrect) {
+    MakeMap.makePrintMap(userMove, isCorrect);
+    Console.print(MakeMap.makeFinalOutputMap());
   },
   
   printResult(userMove, failOrSuccess) {
