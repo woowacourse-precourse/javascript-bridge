@@ -35,17 +35,15 @@ class BridgeGame {
   }
 
   getMap() {
-    const passedMap = this.#bridge.getPassedMap(this.#position);
-    return `[ ${passedMap.join(" | ")} ]`;
+    return this.#bridge.getPassedMap(this.#position);
   }
 
   getFailMap(direction) {
-    const failMap = this.#bridge.getFailMap(this.#position, direction);
-    return `[ ${failMap.join(" | ")} ]`;
+    return this.#bridge.getFailMap(this.#position, direction);
   }
 
   isSuccess() {
-    this.#bridge.isLastStep(this.#position);
+    return this.#bridge.isLastStep(this.#position);
   }
 }
 
