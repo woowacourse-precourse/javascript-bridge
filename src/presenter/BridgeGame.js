@@ -2,8 +2,8 @@ const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const OutputView = require("../view/OutputView");
 const InputView = require("../view/InputView");
 const BridgeMaker = require("../BridgeMaker");
-const { MOVING, RETRY } = require("../view/stringsUI");
-const Console = require("../utils/Console");
+const { RETRY } = require("../view/stringsUI");
+const Player = require("../model/Player");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -11,12 +11,12 @@ const Console = require("../utils/Console");
 class BridgeGame {
   bridgeModel;
 
-  playerMap;
+  playerModel;
 
   totalTrial;
 
   constructor() {
-    this.playerMap = [];
+    this.playerModel = new Player();
     this.totalTrial = 1;
   }
 
@@ -52,20 +52,41 @@ class BridgeGame {
    */
   move(selectedMove) {
     const isMove = this.bridgeModel.crossBridge({
-      bridgeIndex: this.playerMap.length,
+      bridgeIndex: this.playerModel.inputArr.length,
       selectedMove,
     });
-    this.playerMap.push({ selectedMove, isMove });
-    OutputView.printMap(this, this.playerMap);
+    this.playerModel.inputArr.push({ selectedMove, isMove });
+    this.createPlayerBridgeMap();
+  }
+
+  createPlayerBridgeMap() {
+    this.playerModel.createBridgeMap(this);
+  }
+
+  printMove() {
+    OutputView.printMap(this, this.playerModel.bridgeMap);
   }
 
   checkNextMove() {
-    const currMove = this.playerMap[this.playerMap.length - 1];
-    if (currMove.isMove) {
+    if (this.isNext()) {
       this.getPlayerMove();
     } else {
       InputView.readGameCommand(this);
     }
+  }
+
+  isNext() {
+    const currPlayerIndex = this.playerModel.inputArr.length - 1;
+    const isFinish = this.bridgeModel.length === currPlayerIndex + 1;
+    const currMove = this.playerModel.inputArr[currPlayerIndex];
+    return !isFinish && currMove.isMove;
+  }
+
+  isSuccess() {
+    const currPlayerIndex = this.playerModel.inputArr.length - 1;
+    const isFinish = this.bridgeModel.length === currPlayerIndex + 1;
+    const currMove = this.playerModel.inputArr[currPlayerIndex];
+    return isFinish && currMove.isMove;
   }
 
   /**
@@ -75,7 +96,7 @@ class BridgeGame {
    */
   retry() {
     this.totalTrial += 1;
-    this.playerMap = [];
+    this.playerModel.resetPlayer();
     this.getPlayerMove();
   }
 
@@ -88,7 +109,12 @@ class BridgeGame {
   }
 
   quit() {
-    OutputView.printResult();
+    const playerResult = this.isSuccess();
+    OutputView.printResult({
+      resultMap: this.playerModel.bridgeMap,
+      playerResult,
+      totalTrial: this.totalTrial,
+    });
   }
 }
 

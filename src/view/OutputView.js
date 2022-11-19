@@ -1,4 +1,4 @@
-const MapMaker = require("../model/MapMaker");
+const MapMaker = require("../MapMaker");
 const Console = require("../utils/Console");
 const { OUTPUT } = require("./stringsUI");
 
@@ -14,8 +14,7 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridgeGamePresenter, playerMap) {
-    const { upperBridge, lowerBridge } = new MapMaker(playerMap);
+  printMap(bridgeGamePresenter, { upperBridge, lowerBridge }) {
     Console.print(upperBridge.join(" "));
     Console.print(lowerBridge.join(" "));
     bridgeGamePresenter.checkNextMove();
@@ -26,7 +25,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {
+  printResult({ resultMap, playerResult, totalTrial }) {
+    Console.print(OUTPUT.RESULT);
+    Console.print(resultMap.upperBridge.join(" "));
+    Console.print(resultMap.lowerBridge.join(" "));
+    Console.print(OUTPUT.printSuccessResult(playerResult));
+    Console.print(OUTPUT.printTrialResult(totalTrial));
+
     Console.close();
   },
 };

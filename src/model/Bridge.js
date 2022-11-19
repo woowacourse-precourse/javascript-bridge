@@ -1,17 +1,14 @@
 const { MOVING } = require("../view/stringsUI");
 
 class Bridge {
-  createdBridge;
+  createdArr;
 
-  bridgeMap;
-
-  constructor(createdBridge) {
-    this.createdBridge = createdBridge;
-    this.bridgeMap = { upper: [], lower: [] };
+  constructor(createdArr) {
+    this.createdArr = createdArr;
   }
 
   crossBridge({ bridgeIndex, selectedMove }) {
-    const isMove = this.createdBridge[bridgeIndex] === MOVING[selectedMove];
+    const isMove = this.createdArr[bridgeIndex] === MOVING[selectedMove];
     return isMove;
   }
 }

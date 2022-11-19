@@ -1,18 +1,18 @@
-const { MAP } = require("../view/stringsUI");
+const { MAP } = require("./view/stringsUI");
 
 class MapMaker {
   upperBridge;
 
   lowerBridge;
 
-  constructor(playerMap) {
+  constructor(playerArr) {
     this.upperBridge = [];
     this.lowerBridge = [];
-    this.createMap(playerMap);
+    this.createMap(playerArr);
   }
 
-  createMap(playerMap) {
-    playerMap.forEach((playerAction, index) => {
+  createMap(playerArr) {
+    playerArr.forEach((playerAction, index) => {
       this.divideBridge(index);
       this.createBridgeMap(playerAction);
     });

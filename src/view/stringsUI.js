@@ -10,7 +10,7 @@ const OUTPUT = {
   RESULT: "최종 게임 결과",
   printSuccessResult(result) {
     const resultString = result ? "성공" : "실패";
-    return `게임 성공 여부: ${resultString}`;
+    return `\n게임 성공 여부: ${resultString}`;
   },
   printTrialResult(trial) {
     return `총 시도한 횟수: ${trial}`;
