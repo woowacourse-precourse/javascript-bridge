@@ -371,11 +371,21 @@ describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
   });
 });
 
-describe('위치 파악 메서드', () => {
+describe('위치 파악 메서드 테스트', () => {
   test('메소드 이름은 "getPositionIndex"로 정의된다.', () => {
     const bridgeGame = new BridgeGame();
     const METHOD_NAME = 'getPositionIndex';
 
     expect(bridgeGame.getPositionIndex.name).toEqual(METHOD_NAME);
+  });
+
+  test('위 칸으로 한번 이동하면 [0, 0]을 반환한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const EXPECTED = 'U';
+    const RECEIVED = [0, 0];
+
+    bridgeGame.move();
+
+    expect(bridgeGame.getPositionIndex(EXPECTED)).toEqual(RECEIVED);
   });
 });
