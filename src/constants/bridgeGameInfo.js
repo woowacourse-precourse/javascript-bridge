@@ -7,6 +7,7 @@ const BRIDGE_GAME = Object.freeze({
   down: 'D',
   quit: 'Q',
   retry: 'R',
+  verticalBar: '|',
 });
 
 module.exports = {

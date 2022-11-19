@@ -1,5 +1,4 @@
 const { BRIDGE_GAME } = require('../constants/bridgeGameInfo');
-const { o, x } = BRIDGE_GAME;
 
 const REPEAT_COUNT = 3;
 
@@ -43,12 +42,10 @@ class GameMap {
 
   drawBridge(moveCommand, userLocation) {
     if (userLocation !== 0) {
-      this.appendVerticalLine();
+      this.appendVerticalBar();
     }
-
     const oxPattern = this.selectOXpattern(moveCommand, userLocation);
     const selectBridge = this.selectUpOrDownBridge(moveCommand, userLocation);
-
     selectBridge.push(` ${oxPattern} `);
     this.appendEmptySpace(selectBridge);
 
@@ -68,6 +65,7 @@ class GameMap {
   }
 
   selectOXpattern(moveCommand, userLocation) {
+    const { o, x } = BRIDGE_GAME;
     const isPossibleNext = this.#CorretBridge[userLocation] === moveCommand;
     if (isPossibleNext) {
       return o;
@@ -76,9 +74,10 @@ class GameMap {
     return x;
   }
 
-  appendVerticalLine() {
-    this.#upperBridge.push('|');
-    this.#lowerBridge.push('|');
+  appendVerticalBar() {
+    const { verticalBar } = BRIDGE_GAME;
+    this.#upperBridge.push(verticalBar);
+    this.#lowerBridge.push(verticalBar);
   }
 
   appendEmptySpace(selectBridge) {
