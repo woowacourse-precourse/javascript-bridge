@@ -12,39 +12,39 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(nextMove) {
-    const output = []
+    const output = [];
     GameStatus.lastMove = nextMove;
-    output.push(this.makeOutput(0, nextMove))
-    output.push(this.makeOutput(1, nextMove))
-    Console.print(output[0].join(''))
-    Console.print(output[1].join(''))
+    output.push(this.makeOutput(0, nextMove));
+    output.push(this.makeOutput(1, nextMove));
+    Console.print(output[0].join(''));
+    Console.print(output[1].join(''));
   },
 
   makeOutput(upOrDown, nextMove) {
-    const output = ['[']
+    const output = ['['];
     for(let i=0; i<GameStatus.step; i++){
-      output.push(this.alreadyPass(upOrDown, i))
-    }
-    output.push(this.makeNextMoveOutput(upOrDown, nextMove))
+      output.push(this.alreadyPass(upOrDown, i));
+    };
+    output.push(this.makeNextMoveOutput(upOrDown, nextMove));
     return output;
   },
 
   alreadyPass(upOrDown, i) {
     if(GameStatus.bridge[i] === MOVE_VALID[upOrDown]) {
-      return ' O |'
-    }
-    return '   |'
+      return ' O |';
+    };
+    return '   |';
   },
 
   makeNextMoveOutput(upOrDown, nextMove) {
     if(MOVE_VALID[upOrDown] !== nextMove) {
-      return '   ]'
+      return '   ]';
     }
     if(GameStatus.bridge[GameStatus.step] !== nextMove) {
       GameStatus.alive = false;
-      return ' X ]'
+      return ' X ]';
     }
-    return ' O ]'
+    return ' O ]';
   },
 
   /**
@@ -53,16 +53,16 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult() {
-    Console.print(OUTPUT_MESSAGE.HEADER)
+    Console.print(OUTPUT_MESSAGE.HEADER);
     GameStatus.step -= 1;
     this.printMap(GameStatus.lastMove);
-    Console.print(OUTPUT_MESSAGE.SUCCESS + SUCCESS[GameStatus.alive])
-    Console.print(OUTPUT_MESSAGE.TRIED + GameStatus.tried)
+    Console.print(OUTPUT_MESSAGE.SUCCESS + SUCCESS[GameStatus.alive]);
+    Console.print(OUTPUT_MESSAGE.TRIED + GameStatus.tried);
     Console.close();
   },
 
   printError(error) {
-    Console.print(error.message)
+    Console.print(error.message);
   },
 };
 

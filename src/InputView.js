@@ -1,12 +1,11 @@
-const { Console } = require("@woowacourse/mission-utils");
-const { BridgeSizeValid, MovingValid, RetryValid } = require("./InputValid.js");
-const BridgeGame = require("./BridgeGame.js")
-const { GameStatus } = require("./GameUtils.js")
 const BridgeMaker = require("./BridgeMaker.js")
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
 const OutputView = require("./OutputView.js");
-const { printError } = require("./OutputView.js");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
+const { Console } = require("@woowacourse/mission-utils");
+const { GameStatus } = require("./GameUtils.js")
 const { INPUT_MESSAGE } = require("./Constants");
+const BridgeGame = require("./BridgeGame.js")
+const { BridgeSizeValid, MovingValid, RetryValid } = require("./InputValid.js");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -23,9 +22,9 @@ const InputView = {
           .makeBridge(GameStatus.size, BridgeRandomNumberGenerator.generate);
         return this.readMoving();
       } catch (error) {
-        printError(error);
+        OutputView.printError(error);
         return this.readBridgeSize();
-      }
+      };
     }));
   },
 
@@ -41,9 +40,9 @@ const InputView = {
         if(GameStatus.size === GameStatus.step) return OutputView.printResult();
         return this.readMoving();
       } catch (error) {
-        printError(error)
+        OutputView.printError(error)
         return this.readMoving();
-      }
+      };
     }));
   },
 
@@ -58,11 +57,11 @@ const InputView = {
         bridgeGame.retry(isRetry);
         return this.readMoving();
       } catch (error) {
-        printError(error);
+        OutputView.printError(error);
         return this.readGameCommand();
-      }
+      };
     }));
   },
 };
 
-module.exports = { InputView, GameStatus };
+module.exports = InputView;
