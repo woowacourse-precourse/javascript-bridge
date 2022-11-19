@@ -33,7 +33,7 @@ class App {
   requestMoving() {
     InputView.readMoving((direction) => {
       this.validate.checkMovingDirection(direction);
-      
+
       const [canCross, upperBridge, lowerBridge] =
         this.bridgeGame.move(direction);
 
@@ -64,8 +64,10 @@ class App {
   }
 
   requestGameCommand() {
-    InputView.readGameCommand((input) => {
-      if (input === GAME.REPLAY) {
+    InputView.readGameCommand((command) => {
+      this.validate.checkGameCommand(command);
+      
+      if (command === GAME.REPLAY) {
         this.bridgeGame.retry();
         this.requestMoving();
 

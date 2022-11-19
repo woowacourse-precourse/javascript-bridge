@@ -7,8 +7,13 @@ class Validate {
   }
 
   checkMovingDirection(direction) {
-    if (direction !== "U" || direction !== "D")
+    if (direction == "U" || direction !== "D")
       throw new Error(ERROR.MOVING_DIRECTION);
+  }
+
+  checkGameCommand(command) {
+    if (!(command === "R" || command === "Q"))
+      throw new Error(ERROR.GAME_COMMAND);
   }
 }
 
