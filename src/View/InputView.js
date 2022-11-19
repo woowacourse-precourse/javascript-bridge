@@ -12,6 +12,7 @@ const { Console } = MissionUtils;
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
+   * @param {function} callback 다리의 길이를 입력받은후의 기능을 구현한 함수
    */
   readBridgeSize(callback) {
     Console.readLine(MESSAGE.ASK_BRIDGE_SIZE, (bridgeSize) => callback(bridgeSize));
@@ -19,6 +20,7 @@ const InputView = {
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
+   * @param {function} callback 이동할 칸을 입력받은후의 기능을 구현한 함수
    */
   readMoving(callback) {
     Console.readLine(MESSAGE.ASK_MOVING, (moving) => callback(moving));
@@ -26,6 +28,7 @@ const InputView = {
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   * @param {function} callback 재시도 여부를 입력받은후의 기능을 구현한 함수
    */
   readGameCommand(callback) {
     Console.readLine(MESSAGE.ASK_GAME_COMMAND, (command) => callback(command));
