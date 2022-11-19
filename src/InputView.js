@@ -47,7 +47,8 @@ const InputView = {
           this.readGameCommand(currentPosition, crossableBridgeList, upper, lower);
         }
         if (currentPosition === crossableBridgeList.length - 1 && move === crossableBridgeList[currentPosition]) {
-          OutputView.printResult(upper, lower);
+          const isSuccess = '성공';
+          OutputView.printResult(upper, lower, isSuccess);
           return 0;
         }
         currentPosition += 1;
@@ -72,7 +73,9 @@ const InputView = {
           this.readMoving(currentPosition, crossableBridgeList);
         }
         if (input === 'Q') {
-          OutputView.printResult(upper, lower);
+          const isSuccess = '실패';
+          OutputView.printResult(upper, lower, isSuccess);
+          Console.close();
         }
       } catch (err) {
         Console.print(err);
