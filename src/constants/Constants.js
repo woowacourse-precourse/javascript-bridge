@@ -3,6 +3,7 @@ const BRIDGE = Object.freeze({
   max: 20,
   up: 'U',
   down: 'D',
+  width: 2,
 });
 
 const GAME = Object.freeze({
@@ -20,10 +21,13 @@ const SENTENCE = Object.freeze({
 });
 
 const RESULT = Object.freeze({
+  correct: 'O',
+  incorrect: 'X',
+  blank: ' ',
   sentence: '최종 게임 결과',
   openBracket: '[',
   closeBracket: ']',
-  divider: '|',
+  divider: ' | ',
   isClear: '게임 성공 여부: ',
   tryCount: '총 시도한 횟수: ',
 });
