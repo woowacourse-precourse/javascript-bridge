@@ -51,7 +51,7 @@ class BridgeGame {
    */
   retry() {
     this.#tryingCount += 1;
-    console.log(this.#tryingCount);
+    this.currBridge.delete();
   }
 }
 

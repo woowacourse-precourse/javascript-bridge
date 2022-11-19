@@ -48,12 +48,17 @@ class Controller {
 
   // - 재시작 또는 종료 여부 입력 받는다.
   inputGameCommand() {
-    InputView.readGameCommand(this.retry.bind(this));
+    InputView.readGameCommand(this.configCommand.bind(this));
   }
 
-  retry(command) {
-    if (command === 'R') this.bridgeGame.retry();
+  configCommand(command) {
+    if (command === 'R') this.retry();
     if (command === 'Q') this.getResult();
+  }
+
+  retry() {
+    this.bridgeGame.retry();
+    this.inputMoving();
   }
 
   getResult() {
