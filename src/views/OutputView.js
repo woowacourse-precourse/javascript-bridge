@@ -14,7 +14,7 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(trials) {
-    const [upperSide, lowerSide] = this.getMap(trials);
+    const [upperSide, lowerSide] = this.getBridgeMap(trials);
     Console.print(upperSide);
     Console.print(lowerSide);
   },
@@ -47,7 +47,7 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(bridgeModel) {
-    const [bridgeUpperSide, bridgeLowerSide] = this.getMap(bridgeModel.trials);
+    const [bridgeUpperSide, bridgeLowerSide] = this.getBridgeMap(bridgeModel.trials);
     const trialCount = bridgeModel.trialCount;
     const status = bridgeModel.status;
     Console.print(

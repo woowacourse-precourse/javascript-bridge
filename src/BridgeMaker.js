@@ -1,5 +1,3 @@
-const BridgeModel = require('./BridgeModel');
-
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -14,15 +12,12 @@ const BridgeMaker = {
     const bridge = [];
 
     while (size > 0) {
-      bridge.push(this.getDirection(generateRandomNumber));
+      const direction = generateRandomNumber() === 1 ? 'U' : 'D';
+      bridge.push(direction);
       size -= 1;
     }
 
     return bridge;
-  },
-
-  getDirection(generateRandomNumber) {
-    return generateRandomNumber() === 1 ? 'U' : 'D';
   },
 };
 module.exports = BridgeMaker;

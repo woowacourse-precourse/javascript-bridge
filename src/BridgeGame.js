@@ -4,9 +4,12 @@ const GAME_SIGNATURE = require('./utils/constant');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  bridgeModel;
-  constructor({ BridgeRandomNumberGenerator, bridgeMaker }, { outputView, inputView }) {
-    this.bridgeRandomNumberGenerator = BridgeRandomNumberGenerator;
+  constructor(
+    { bridgeRandomNumberGenerator, bridgeMaker, bridgeModel },
+    { outputView, inputView }
+  ) {
+    this.bridgeModel = bridgeModel;
+    this.bridgeRandomNumberGenerator = bridgeRandomNumberGenerator;
     this.bridgeMaker = bridgeMaker;
     this.outputView = outputView;
     this.inputView = inputView;
@@ -23,7 +26,8 @@ class BridgeGame {
   }
 
   makeBridge(size) {
-    this.bridgeModel(this.bridgeMaker.makeBridge(size, bridgeRandomNumberGenerator.generator));
+    const bridge = this.bridgeMaker.makeBridge(size, this.bridgeRandomNumberGenerator.generate);
+    this.bridgeModel.setBridge(bridge);
 
     console.log(`makeBridge 결과: ${this.bridgeModel.bridge}`);
     this.askMoveDirection();
