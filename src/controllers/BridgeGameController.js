@@ -3,7 +3,7 @@ const OutputView = require('../views/OutputView');
 const { Console } = require('@woowacourse/mission-utils');
 const InputValidator = require('../utils/InputValidator');
 const BridgeMaker = require('../BridgeMaker');
-const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const { generate } = require('../BridgeRandomNumberGenerator');
 const { BRIDGE, GAME } = require('../utils/constants');
 
 class BridgeGameController {
@@ -31,7 +31,7 @@ class BridgeGameController {
   }
 
   makeBridgePattern(bridgeSize) {
-    const bridgePattern = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+    const bridgePattern = BridgeMaker.makeBridge(bridgeSize, generate);
     this.createBridge(bridgeSize, [...bridgePattern]);
   }
 
