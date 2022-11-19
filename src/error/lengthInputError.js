@@ -12,7 +12,7 @@ const notNumber = (input) => {
 
 const lengthCheck = (input) => {
     if (Number(input) < 3 || Number(input) > 20) {
-        throw new Error('[ERROR] 3 이상 20 이하의 ㅅ수자를 입력해주세요.');
+        throw new Error('[ERROR] 3 이상 20 이하의 숫자를 입력해주세요.');
     }
 }
 

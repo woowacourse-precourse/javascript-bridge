@@ -16,6 +16,8 @@ class BridgeGame {
     if (userInput !== bridge[count]) {
       this.retry(count, bridge);
     }
+
+    
   }
 
   /**
