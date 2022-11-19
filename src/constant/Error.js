@@ -1,5 +1,5 @@
 const ERROR_MESSAGE = Object.freeze({
-  BRIDGE_LENGTH: '[ERROR] 3 이상 20 이하의 숫자가 아닙니다.',
+  BRIDGE_SIZE: '[ERROR] 3 이상 20 이하의 숫자가 아닙니다.',
   SPACE: '[ERROR] U 또는 D 가 아닙니다. (대문자 확인)',
   COMMAND: '[ERROR] Q 또는 R 이 아닙니다. (대문자 확인)'
 });
