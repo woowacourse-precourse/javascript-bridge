@@ -32,7 +32,9 @@ class BridgeGameControl {
     if (!commend) {
       return this.start();
     };
+
     this.size = size;
+    InputView.lineInterval();
     return this.makeBridge();
   };
 
@@ -52,6 +54,7 @@ class BridgeGameControl {
     if (!commend) {
       return this.userMoving();
     };
+
     this.userMove.push(userUpDown);
     return this.answerCheck();
   };
@@ -104,6 +107,7 @@ class BridgeGameControl {
       this.tryCount += 1;
       return this.userMoving();
     };
+    
     OutputView.printResult(this.userMove, this.success, this.tryCount);
   };
 };
