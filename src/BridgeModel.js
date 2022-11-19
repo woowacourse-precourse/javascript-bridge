@@ -3,6 +3,7 @@ const GAME_SIGNATURE = require('./utils/constant');
 class BridgeModel {
   constructor(bridge) {
     this.bridge = bridge;
+    this.trialCount = 1;
     this.trials = [];
     this.status = GAME_SIGNATURE.gameOn;
   }
@@ -17,11 +18,15 @@ class BridgeModel {
 
     if (lastTrial.result === GAME_SIGNATURE.pass && this.trials.length === this.bridge.length) {
       this.status = GAME_SIGNATURE.gameSuccess;
+      return;
     }
 
     if (lastTrial.result === GAME_SIGNATURE.fail) {
       this.status = GAME_SIGNATURE.gameFail;
+      return;
     }
+
+    this.status = GAME_SIGNATURE.gameOn;
   }
 
   getStage() {

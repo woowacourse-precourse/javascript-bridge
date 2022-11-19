@@ -1,6 +1,4 @@
-const { Console } = require('@woowacourse/mission-utils');
 const GAME_SIGNATURE = require('./utils/constant');
-const { askRestart } = require('./utils/message');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -30,8 +28,8 @@ class BridgeGame {
       size,
       this.bridgeRandomNumberGenerator.generate
     );
-    //!: 출력 확인
-    Console.print(`makeBridge 결과: ${this.bridgeModel.bridge}`);
+
+    console.log(`makeBridge 결과: ${this.bridgeModel.bridge}`);
     this.askMoveDirection();
   }
 
@@ -39,7 +37,6 @@ class BridgeGame {
     this.inputView.readMoving(this.move.bind(this));
   }
 
-  print() {}
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -51,16 +48,40 @@ class BridgeGame {
 
     if (this.bridgeModel.status === GAME_SIGNATURE.gameOn) {
       this.askMoveDirection();
-    } else if (this.bridgeModel.status === GAME_SIGNATURE.gameFail) {
-      this.askRetry();
-    } else if (this.bridgeModel.status === GAME_SIGNATURE.gameSuccess) {
+      return;
+    }
+
+    if (this.bridgeModel.status === GAME_SIGNATURE.gameFail) {
+      this.gameCommand();
+      return;
+    }
+
+    if (this.bridgeModel.status === GAME_SIGNATURE.gameSuccess) {
       this.end();
+      return;
     }
   }
 
-  end() {}
+  end() {
+    this.outputView.printResult();
+  }
 
-  askRetry() {}
+  gameCommand() {
+    this.inputView.readGameCommand(this.handleCommand.bind(this));
+  }
+
+  handleCommand(command) {
+    if (command === 'R') {
+      this.bridgeModel.trialCount += 1;
+      this.bridgeModel.trials = [];
+      this.askMoveDirection();
+      return;
+    }
+
+    if (command === 'D') {
+      this.end();
+    }
+  }
 
   resetMove() {}
 
