@@ -2,13 +2,17 @@ const { BRIDGE_GAME } = require('../constants/bridgeGameInfo');
 const { o, x } = BRIDGE_GAME;
 
 const REPEAT_COUNT = 3;
-const REMOVE_COUNT = 2;
 
 class GameMap {
   #CorretBridge;
   #upperBridge = [];
   #lowerBridge = [];
   #gameOver = false;
+
+  initBridge() {
+    this.#lowerBridge = [];
+    this.#upperBridge = [];
+  }
 
   setCorretBridge(gameMap) {
     this.#CorretBridge = gameMap;
@@ -28,13 +32,6 @@ class GameMap {
 
   getCorretGameMap() {
     return this.#CorretBridge;
-  }
-
-  setPrevBridge() {
-    for (let i = 0; i < REMOVE_COUNT; i++) {
-      this.#lowerBridge.pop();
-      this.#upperBridge.pop();
-    }
   }
 
   isGameSuccess(userLocation) {

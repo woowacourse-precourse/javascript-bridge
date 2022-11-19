@@ -18,7 +18,7 @@ class BridgeGame {
 
   setupGameMap(gameMap) {
     this.gameMap.setCorretBridge(gameMap);
-    console.log(this.gameMap.getCorretBridge(), '\n'); // 게임 맵 디버깅용
+    // console.log(this.gameMap.getCorretBridge(), '\n'); // 게임 맵 디버깅용
   }
 
   drawBridgeMap(moveCommand) {
@@ -50,10 +50,10 @@ class BridgeGame {
   }
 
   setupRetryGame() {
-    this.gameMap.setPrevBridge();
+    this.gameMap.initBridge();
     this.gameMap.setRetryGame();
     this.increaseTryCount();
-    this.decreaseUserLocation();
+    this.initUserLocation();
   }
 
   checkGameSuccess() {
@@ -63,8 +63,9 @@ class BridgeGame {
   increaseTryCount() {
     this.user.increaseCount();
   }
-  decreaseUserLocation() {
-    this.user.decreaseLocation();
+
+  initUserLocation() {
+    this.user.initLocation();
   }
 
   getUserGameMap() {

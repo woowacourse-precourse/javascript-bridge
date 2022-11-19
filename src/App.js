@@ -72,12 +72,10 @@ class App {
       if (retryCommand === quit) {
         return this.exitGame();
       }
-
       if (retryCommand === retry) {
         this.bridgeGame.retry();
         this.getBridgeMovementDirection();
       }
-
       this.validator.checkRetryCommand(retryCommand);
       this.requestGameOverCommand();
     } catch (errorType) {

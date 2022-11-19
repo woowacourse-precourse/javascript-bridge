@@ -15,8 +15,8 @@ class User {
     this.#tryCount += 1;
   }
 
-  decreaseLocation() {
-    this.#location -= 1;
+  initLocation() {
+    this.#location = 0;
   }
 
   getLocation() {
