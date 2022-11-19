@@ -1,6 +1,7 @@
 const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const { GAME_CONSTANTS } = require('./utils/constants');
 
 class Bridge {
   #pattern;
@@ -30,22 +31,24 @@ class Bridge {
 
   moveMap (retryGame, chooseStep) {
     if (this.#pattern[this.#distance] !== chooseStep) {
-      if (chooseStep === 'U') {
-        this.#history.up.push('X');
-        this.#history.down.push(' ');
-      } else {
-        this.#history.up.push(' ');
-        this.#history.down.push('X');
+      if (chooseStep === GAME_CONSTANTS.upStair) {
+        this.#history.up.push(GAME_CONSTANTS.notPath);
+        this.#history.down.push(GAME_CONSTANTS.empty);
+      }
+      if (chooseStep === GAME_CONSTANTS.downStair) {
+        this.#history.up.push(GAME_CONSTANTS.empty);
+        this.#history.down.push(GAME_CONSTANTS.notPath);
       }
       OutputView.printMap(this.#history);
       return retryGame();
     }
-    if (chooseStep === 'U') {
-      this.#history.up.push('O');
-      this.#history.down.push(' ');
-    } else {
-      this.#history.up.push(' ');
-      this.#history.down.push('O');
+    if (chooseStep === GAME_CONSTANTS.upStair) {
+      this.#history.up.push(GAME_CONSTANTS.goPath);
+      this.#history.down.push(GAME_CONSTANTS.empty);
+    }
+    if (chooseStep === GAME_CONSTANTS.downStair) {
+      this.#history.up.push(GAME_CONSTANTS.empty);
+      this.#history.down.push(GAME_CONSTANTS.goPath);
     }
     OutputView.printMap(this.#history);
     this.#distance += 1;
