@@ -8,7 +8,9 @@ const InputValidate =  {
     if (!['U','D'].includes(directionInput)) throw new Error("[ERROR] U 혹은 D를 입력해야 합니다.");
   },
 
-
+  validateRetry(retryInput) {
+    if (!['R','Q'].includes(retryInput)) throw new Error("[ERROR] R 혹은 Q를 입력해야 합니다.");
+  }
 }
 
 module.exports = InputValidate;

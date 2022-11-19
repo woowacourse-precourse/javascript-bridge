@@ -27,7 +27,7 @@ class App {
       InputValidate.validateBridgeLength(bridgeLengthInput);
       this.bridgeGame = BridgeGameController.makeNewBridgeGame(bridgeLengthInput);
       InputView.readMoving(this.roundInputBranch);
-    } catch (e) {
+    } catch(e) {
       MissionUtils.Console.print(e.message);
       InputView.readBridgeSize(this.roundStartBranch);
     }
@@ -49,11 +49,16 @@ class App {
   }
 
   roundRetryBranch(retryInput) {
-    if (!['R','Q'].includes(retryInput)) throw new Error("[ERROR] R 혹은 Q를 입력해야 합니다.");
-    const dicision = BridgeGameController.terminate(this.bridgeGame, retryInput);
-    switch (dicision) {
-      case 0: return null;
-      case 1: InputView.readMoving(this.roundInputBranch);
+    try {
+      InputValidate.validateRetry(retryInput);
+      const dicision = BridgeGameController.terminate(this.bridgeGame, retryInput);
+      switch (dicision) {
+        case 0: return null;
+        case 1: InputView.readMoving(this.roundInputBranch);
+      }
+    } catch(e) {
+      MissionUtils.Console.print(e.message);
+      InputView.readGameCommand(this.roundRetryBranch);
     }
   }
 }
