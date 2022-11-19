@@ -19,4 +19,4 @@ function closeWithError(printStr) {
   Console.close();
 }
 
-module.exports = { validateBrigeSize, validateMoving };
+module.exports = { validateBrigeSize, validateMoving, closeWithError };

@@ -85,3 +85,13 @@ describe("다리 건너기 테스트", () => {
     runException(["a"]);
   });
 });
+
+describe("(추가) 비지니스 로직 예외 테스트", () => {
+  test("예외 테스트", () => {
+    runException(["3.1"]);
+  });
+});
+
+// app.onReadMoving("1");
+// app.onReadMoving();
+// app.onStopGame();

@@ -1,5 +1,6 @@
 const { BRIDGE_PATH } = require("./util/bridge");
 const { PROCCESS_MESSAGE } = require("./util/messages");
+const { closeWithError } = require("./util/validate");
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -24,7 +25,7 @@ const BridgeMaker = {
     if (number === 0 || number === "0") return BRIDGE_PATH.down;
     if (number === 1 || number === "1") return BRIDGE_PATH.up;
 
-    throw new Error(PROCCESS_MESSAGE.pathByNumber);
+    return closeWithError(PROCCESS_MESSAGE.pathByNumber);
   },
 };
 
