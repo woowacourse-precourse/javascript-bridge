@@ -8,6 +8,8 @@ const {
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const Bridge = require('./Bridge');
+const BridgeGame = require('./BridgeGame');
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -41,6 +43,7 @@ const InputView = {
 
   bridgeSizeGo(size) {
     this.bridge = new Bridge(BridgeMaker.makeBridge(size, generate));
+    this.bridgeGame = new BridgeGame();
     this.readMoving();
   },
 
