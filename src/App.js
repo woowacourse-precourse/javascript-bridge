@@ -13,6 +13,8 @@ class App {
 
   #bridge;
 
+  #successCount;
+
   #brdigeGame = new BridgeGame();
 
   #moveAnswer;
@@ -33,17 +35,29 @@ class App {
     if (appStatus === 2) {
       this.#appStatus = 3;
       this.#bridge = BridgeMaker.makeBridge(this.#bridgeAnswer);
+      this.#successCount = this.#bridge.length;
       return this.progressBridgeMove();
     }
     if (appStatus === 3) return this.progressBridgeMove();
     if (appStatus === 4) {
       this.#moveStatement = this.#brdigeGame.move(this.#moveAnswer, this.#bridge);
-      console.log(this.#moveAnswer, this.#bridge, '확인');
+      console.log(this.#brdigeGame.getBridgeLengthStatus(), this.#bridge, '확인');
       console.log(this.#moveStatement);
       if (this.#moveStatement) {
         this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
         // OutputView.printMap(this.#bridgeMap.getMap());
+        console.log(this.#brdigeGame.getBridgeLengthStatus(), this.#successCount, '비교');
         this.#bridgeMap.cofirm();
+        // if (this.#successCount === this.#brdigeGame.getBridgeLengthStatus()) {
+        //   console.log('끝');
+        // }
+        if (this.#successCount === this.#brdigeGame.getBridgeLengthStatus()) {
+          return OutputView.printResult(
+            this.#bridgeMap.getMap(),
+            this.#brdigeGame.getNumberOfTry(),
+            this.#gameOptionStatus,
+          );
+        }
         return this.progressBridgeMove();
       }
       if (!this.#moveStatement) {
