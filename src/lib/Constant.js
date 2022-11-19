@@ -23,6 +23,7 @@ const Constant = Object.freeze({
     LOSS: "실패",
     DEFAULT: 1,
   },
+
 });
 
 module.exports = Constant;
