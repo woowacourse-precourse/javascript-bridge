@@ -245,3 +245,36 @@ describe('bridgeGame 결과에 따른 함수 호출', () => {
     expect(spyArr[idx]).toHaveBeenCalledTimes(times);
   });
 });
+
+describe('재시작 또는 종료 입력에 따른 함수 호출 테스트', () => {
+  test('R를 입력하면 재시작 함수를 호출한다.', () => {
+    const restartSpy = jest.spyOn(app, 'restart');
+
+    Console.readLine = jest.fn();
+    Console.readLine.mockImplementationOnce((_, callback) => {
+      callback('R');
+    });
+
+    app.requestRestartOrQuit();
+
+    expect(restartSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test('Q를 입력하면 종료 함수를 호출한다.', () => {
+    const quitSpy = jest.spyOn(app, 'quit');
+
+    const bridgeGame = new BridgeGame(['U', 'D', 'D']);
+    app.bridgeGame = bridgeGame;
+
+    bridgeGame.move('D');
+
+    Console.readLine = jest.fn();
+    Console.readLine.mockImplementationOnce((_, callback) => {
+      callback('Q');
+    });
+
+    app.requestRestartOrQuit();
+
+    console.log(quitSpy.mock);
+  });
+});
