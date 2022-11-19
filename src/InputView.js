@@ -11,11 +11,15 @@ const InputView = {
    */
   readBridgeSize(game) {
     Console.readLine(QUESTIONS.bridgeSize, len => {
-      if (!validateBridgeSize(len)) {
-        throw new Error(ERROR_MSG.invalidBridgeSize);
+      try {
+        if (!validateBridgeSize(len))
+          throw new Error(ERROR_MSG.invalidBridgeSize);
+        game.size = +len;
+        game.makeBridge();
+      } catch (error) {
+        Console.print(error.message);
+        this.readBridgeSize(game);
       }
-      game.size = +len;
-      game.makeBridge();
     });
   },
 
