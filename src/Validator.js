@@ -1,4 +1,6 @@
-const { BRIDGE_SIZE, MESSAGE } = require('./Constants');
+const {
+  BRIDGE_SIZE, MESSAGE, MOVEMENT, COMMAND,
+} = require('./Constants');
 
 const Validator = {
   /**
@@ -19,7 +21,7 @@ const Validator = {
    * @param {string} movement input으로 들어온 사용자의 움직임
    */
   movingValidate(movement) {
-    const movementIsValid = movement === 'U' || movement === 'D';
+    const movementIsValid = movement === MOVEMENT.UP || movement === MOVEMENT.DOWN;
     if (!movementIsValid) throw new Error(MESSAGE.ERROR_NOT_U_OR_D);
   },
 
@@ -28,7 +30,7 @@ const Validator = {
    * @param {string} command input으로 들어온 사용자의 재시작 여부
    */
   commandValidate(command) {
-    const commandIsValid = command === 'R' || command === 'Q';
+    const commandIsValid = command === COMMAND.RETRY || command === COMMAND.QUIT;
     if (!commandIsValid) throw new Error(MESSAGE.ERROR_NOT_R_OR_Q);
   },
 };
