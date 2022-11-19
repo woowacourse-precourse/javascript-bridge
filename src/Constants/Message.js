@@ -12,7 +12,7 @@ const ERROR_MSG = {
 };
 
 const GAME_MSG = {
-  START: "다리 건너기 게임을 시작합니다.\n",
+  START: "다리 건너기 게임을 시작합니다.",
   END: "최종 게임 결과",
   PRINT_RESULT: "게임 성공 여부: ",
   TRUE: "성공",

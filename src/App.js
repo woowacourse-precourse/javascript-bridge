@@ -7,31 +7,46 @@ const OutputView = require("./OutputView");
 class App {
   #bridgeGame;
   #retryCount;
+
   constructor() {
     this.#retryCount = 1;
   }
+
+  // play() {
+  //   (async () => await this._play())();
+  //   Console.print("!!!");
+  // }
+
   async play() {
     Console.print(GAME_MSG.START);
-    await this.createBridgeGame();
-    const reuslt = await this.playBridgeGame();
-    OutputView.printResult(reuslt, this.#retryCount);
+    const size = await InputView.readBridgeSize();
+    Console.print(size);
+    this.createBridgeGame(size);
+    const result = await this.playBridgeGame();
+    OutputView.printResult(
+      result,
+      this.#retryCount,
+      this.#bridgeGame.getBridge()
+    );
     Console.close();
   }
 
-  async createBridgeGame() {
+  createBridgeGame(size) {
     this.#bridgeGame = new BridgeGame();
-    await this.#bridgeGame.setBridge();
+    this.#bridgeGame.setBridge(size);
   }
 
   async playBridgeGame() {
-    while (true) {
-      const isSuccess = await this.#bridgeGame.move();
-      if (isSuccess === 0) {
-        if ((await InputView.readGameCommand()) === "Q") return false;
-        this.#retryCount = this.#bridgeGame.retry(this.#retryCount);
-      }
-      if (isSuccess === 2) return true;
+    const moving = await InputView.readMoving();
+    const [isSuccess, crossBridge] = this.#bridgeGame.move(moving);
+    OutputView.printMap(crossBridge);
+    if (isSuccess === 0) {
+      const command = await InputView.readGameCommand();
+      if (command === "Q") return false;
+      this.#retryCount = this.#bridgeGame.retry(this.#retryCount);
     }
+    if (isSuccess === 2) return true;
+    await this.playBridgeGame();
   }
 }
 

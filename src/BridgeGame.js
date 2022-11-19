@@ -1,7 +1,5 @@
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -14,19 +12,16 @@ class BridgeGame {
     this.#crossBridge = [[], []];
   }
 
-  async setBridge() {
-    const size = await InputView.readBridgeSize();
+  setBridge(size) {
     this.#bridge = BridgeMaker.makeBridge(size, generate);
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    */
-  async move() {
-    const moving = await InputView.readMoving();
+  move(moving) {
     const isSuccess = this.checkBridge(moving);
     this.updateBirdge(isSuccess);
-    OutputView.printMap(this.#crossBridge);
-    return isSuccess;
+    return [isSuccess, this.#crossBridge];
   }
 
   updateBirdge(isSuccess) {
@@ -42,6 +37,10 @@ class BridgeGame {
       return 1;
     }
     return 0;
+  }
+
+  getBridge() {
+    return [[...this.#crossBridge[0]], [...this.#crossBridge[1]]];
   }
 
   /**
