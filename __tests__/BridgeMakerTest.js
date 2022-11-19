@@ -11,6 +11,6 @@ describe('다리 만들기 테스트', () => {
   test('다리 생성 시 랜덤으로 생성된 배열의 요소는 U와 D로 한정된다.', () => {
     const testBridge = BridgeMaker.makeBridge(5,BridgeRandomNumberGenerator.generate);
     const uniqueTestBridgeSet = new Set(testBridge);
-    expect(uniqueTestBridgeSet.size).toEqual(2);
+    expect(uniqueTestBridgeSet.size < 3).toBeTruthy();
   })
 });
