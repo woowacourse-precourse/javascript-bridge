@@ -1,16 +1,16 @@
 const command = require('./util/command');
 
-const InputVaildator = {
-  isVaildLength(input) {
+const InputValidator = {
+  isValidLength(input) {
     if (!Number.isInteger(+input)) {
       return false;
     }
     return +input > 0;
   },
 
-  isVaildStep(input) {
+  isValidStep(input) {
     return input === command.UP || input === command.DOWN;
   },
 };
 
-module.exports = InputVaildator;
+module.exports = InputValidator;
