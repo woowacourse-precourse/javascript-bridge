@@ -12,6 +12,7 @@ class BridgeGame {
    */
   move(nextMove) {
     OutputView.printMap(nextMove)
+    GameStatus.step += 1;
     return GameStatus.success;
   }
 

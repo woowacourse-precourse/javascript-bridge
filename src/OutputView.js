@@ -26,8 +26,8 @@ const OutputView = {
     return output;
   },
 
-  alreadyPass(upOrDown) {
-    if(GameStatus.bridge[GameStatus.step] === upOrDown) {
+  alreadyPass(upOrDown, i) {
+    if(GameStatus.bridge[i] === upOrDown) {
       return ' O |'
     }
     return '   |'

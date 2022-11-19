@@ -18,6 +18,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine('다리 건너기 게임을 시작합니다.\n\n다리의 길이를 입력해주세요.\n', (answer => {
       const inputSize = new BridgeSizeValid(answer).getSize()
+      GameStatus.size = Number(inputSize);
       GameStatus.bridge = BridgeMaker
         .makeBridge(inputSize, BridgeRandomNumberGenerator).slice();
       console.log(GameStatus.bridge)
@@ -32,13 +33,14 @@ const InputView = {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (answer => {
       const nextMove = new MovingValid(answer).getMove()
       const bridgeGame = new BridgeGame(nextMove)
-      const success = bridgeGame.move(validMove.indexOf(nextMove))
-      if(success === false) {
-        this.readGameCommand();
-      }
+      const moveByNum = validMove.indexOf(nextMove)
+      const success = bridgeGame.move(moveByNum)
+      if(success === false) this.readGameCommand(moveByNum);
+      if(GameStatus.size === GameStatus.step) return OutputView.printResult(moveByNum);
       this.readMoving();
     }))
   },
+
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
@@ -50,7 +52,7 @@ const InputView = {
       GameStatus.stage += 1;
       GameStatus.success = true;
       if(retry === 'Q') {
-        return OutputView.printResult();
+        return OutputView.printResult(moveByNum);
       }
       return this.readMoving();
     }))
