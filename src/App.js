@@ -41,12 +41,13 @@ class App {
       console.log(this.#moveStatement);
       if (this.#moveStatement) {
         this.#bridgeMap.handleMap(this.#moveStatement, this.#bridge);
-        // this.#nowBridgeLength = this.#brdigeGame.getNumberOfTry();
+        OutputView.printMap(this.#bridgeMap.getMap());
         return this.progressBridgeMove();
       }
       if (!this.#moveStatement) {
         this.#bridgeMap.handleMap(this.#moveStatement, this.#bridge);
         this.#appStatus = 5;
+        OutputView.printMap(this.#bridgeMap.getMap());
         return this.progressRetryGame();
       }
     }
