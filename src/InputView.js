@@ -76,7 +76,7 @@ const InputView = {
         }
       } catch (err) {
         Console.print(err);
-        this.readGameCommand(currentPosition, crossableBridgeList);
+        this.readGameCommand(currentPosition, crossableBridgeList, upper, lower);
       }
     });
   },
