@@ -8,11 +8,16 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
+  bridgeSize:0,
+
   readBridgeSize() {
-    return Console.readLine('다리의 길이를 입력해주세요.', (size) => {
+    Console.readLine('다리의 길이를 입력해주세요.', (size) => {
       checkBridgeSize(size);
+      bridgeSize = size;
     });
+    return this.bridgeSize;
   },
+
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
