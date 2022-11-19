@@ -18,23 +18,25 @@ const OutputView = {
   },
 
   printUpBridge(position, bridge, answer) {
-    const upBridge = bridge.slice(0, position).map((cell) => {
-      if (cell === "U" && answer === "U") return "O";
-      if (cell !== "U" && answer === "U") return "X";
+    const upBridge = bridge.slice(0, position).map((cell) => (cell === "U" ? "O" : " "));
 
-      return " ";
-    });
+    if (bridge[position] === "U" && answer === "U") upBridge.push("O");
+
+    if (bridge[position] !== "U" && answer === "U") upBridge.push("X");
+
+    if (answer !== "U") upBridge.push(" ");
 
     return `[ ${upBridge.join(" | ")} ]`;
   },
 
   printDownBridge(position, bridge, answer) {
-    const downBridge = bridge.slice(0, position).map((cell) => {
-      if (cell === "D" && answer === "D") return "O";
-      if (cell !== "D" && answer === "D") return "X";
+    const downBridge = bridge.slice(0, position).map((cell) => (cell === "D" ? "O" : " "));
 
-      return " ";
-    });
+    if (bridge[position] === "D" && answer === "D") downBridge.push("O");
+
+    if (bridge[position] !== "D" && answer === "D") downBridge.push("X");
+
+    if (answer !== "D") downBridge.push(" ");
 
     return `[ ${downBridge.join(" | ")} ]`;
   },
@@ -44,7 +46,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(position, bridge) {
+    Console.print(MESSAGE.GAME_RESULT);
+    this.printMap(position, bridge, answer);
+  },
 };
 
 module.exports = OutputView;
