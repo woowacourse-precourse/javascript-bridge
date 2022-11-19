@@ -10,7 +10,7 @@ const InputView = {
   readBridgeSize(bridgeGame) {
     inputUserValue(GAME_MESSAGE.INPUT_BRIDGE_LENGTH, (length) => {
       isBridgeLengthValid(length);
-      bridgeGame.createBridge(length);
+      bridgeGame.createBridge(Number(length));
     });
   },
 

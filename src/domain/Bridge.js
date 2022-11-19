@@ -1,4 +1,3 @@
-const { Random } = require("@woowacourse/mission-utils");
 class Bridge {
   #length;
   #map;
@@ -6,7 +5,6 @@ class Bridge {
   constructor(length, map) {
     this.#length = length;
     this.#map = map;
-    console.log(this.#length);
   }
 }
 
