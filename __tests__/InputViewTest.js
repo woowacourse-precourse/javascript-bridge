@@ -1,6 +1,6 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 const InputView = require('../src/InputView');
-const App = require("../src/App");
+const App = require('../src/App');
 const { MESSAGE } = require('../src/constants/messages');
 
 describe('InputView 기능 테스트', () => {
@@ -8,24 +8,24 @@ describe('InputView 기능 테스트', () => {
     runBridgeSizeException(['string']);
     runBridgeSizeException(['105']);
     runBridgeSizeException(['1']);
-  })
+  });
 
   test('이동 방향 입력 시 유효하지 않은 값을 입력하면 예외가 발생한다.', () => {
     const logSpy = getLogSpy();
     mockQuestions(['3', 'Up']);
     const app = new App();
     app.play();
-    expectLogContains(getOutput(logSpy), ["[ERROR]"]);
-  })
+    expectLogContains(getOutput(logSpy), ['[ERROR]']);
+  });
 
   test('게임 커맨드 입력 시 유효하지 않은 값을 입력하면 예외가 발생한다', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1','0','1']);
-    mockQuestions(['3', 'U' ,'U','Quit']);
+    mockRandoms(['1', '0', '1']);
+    mockQuestions(['3', 'U', 'U', 'Quit']);
     const app = new App();
     app.play();
-    expectLogContains(getOutput(logSpy), ["[ERROR]"]);
-  })
+    expectLogContains(getOutput(logSpy), ['[ERROR]']);
+  });
 });
 
 const mockQuestions = (answers) => {
@@ -45,7 +45,7 @@ const mockRandoms = (numbers) => {
 };
 
 const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
   return logSpy;
 };
@@ -57,7 +57,7 @@ const expectLogContains = (received, logs) => {
 };
 
 const getOutput = (logSpy) => {
-  return [...logSpy.mock.calls].join("");
+  return [...logSpy.mock.calls].join('');
 };
 
 const runBridgeSizeException = (inputs) => {
@@ -67,7 +67,5 @@ const runBridgeSizeException = (inputs) => {
 
   app.play();
 
-  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
-};  
-
-
+  expectLogContains(getOutput(logSpy), ['[ERROR]']);
+};
