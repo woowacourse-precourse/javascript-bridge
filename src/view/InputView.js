@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { READ_BRIDGE_SIZE, READ_MOVING } = require('../util/constant');
-const { isBridgeSizeValid } = require('../util/validation');
+const { isBridgeSizeValid, isUserMovingInputValid } = require('../util/validation');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -23,7 +23,10 @@ const InputView = {
    */
   readMoving() {
     const moving = new Promise((resolve) => {
-      MissionUtils.Console.readLine(READ_MOVING, (answer) => resolve(answer));
+      MissionUtils.Console.readLine(READ_MOVING, (answer) => {
+        isUserMovingInputValid(answer);
+        return resolve(answer);
+      });
     });
     return moving;
   },
