@@ -7,11 +7,11 @@ class CheckBridgeSizeException{
 
     validate(size){
         this.checkBridgeSize(size);
-        this.checkBridgeSize(size);
+        this.checkBridgeNum(size);
     }
 
     checkBridgeSize(size){
-        if(size > 20 || size < 3){
+        if(size > 20 && size < 3){
             throw new Error("[ERROR] 다리의 길이는 3초과 20미만이여야 합니다.");
         }
     }
@@ -35,7 +35,7 @@ class CheckUserMove{
     }
 
     CheckInputString(SelectUpOrDown){
-        if(SelectUpOrDown !== "U" || SelectUpOrDown !== "D"){
+        if(SelectUpOrDown !== "U" && SelectUpOrDown !== "D"){
             throw new Error("[ERROR] U(위) 또는 D(아래)을 입력해주세요.");
         }
     } 
@@ -52,7 +52,7 @@ class CheckWhetherGameRunning{
         this.CheckInputValue(value)
     }
     CheckInputValue(value){
-        if(value !== "Q" || value !== "R"){
+        if(value !== "Q" && value !== "R"){
             throw new Error("[ERROR] Q(종료) 또는 R(재시작)을 입력해주세요. ");
         }
     }
