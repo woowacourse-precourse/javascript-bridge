@@ -2,7 +2,11 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('../model/BridgeGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const { validateBridgeSize, validateNext } = require('../errorHandling');
+const {
+  validateBridgeSize,
+  validateNext,
+  validateGameCommand,
+} = require('../errorHandling');
 
 class GameController {
   constructor() {
@@ -38,8 +42,16 @@ class GameController {
     if (isSuccess) {
       this.game.isEnd() ? Console.close() : this.askMoving();
     } else {
-      Console.close();
+      this.askGameCommand();
     }
+  }
+
+  askGameCommand() {
+    InputView.readGameCommand(this.setGameCommand.bind(this));
+  }
+
+  setGameCommand(gameCommand) {
+    validateGameCommand.validate(gameCommand);
   }
 }
 

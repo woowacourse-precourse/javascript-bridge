@@ -17,4 +17,10 @@ const validateNext = {
   },
 };
 
-module.exports = { validateBridgeSize, validateNext };
+const validateGameCommand = {
+  validate(next) {
+    if (next !== 'R' && next !== 'Q') throw new Error('[ERROR]');
+  },
+};
+
+module.exports = { validateBridgeSize, validateNext, validateGameCommand };
