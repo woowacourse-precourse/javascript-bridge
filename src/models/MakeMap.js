@@ -1,33 +1,44 @@
-const { UP, DOWN, ANSWER } = require('../utiles/Constant');
+const { UP, ANSWER } = require('../utiles/Constant');
 
 const MakeMap = {
-  upBridge: [],
-  downBridge: [],
+  bridge: [[ ], [ ]],
 
-  makePrintMap(userMove, isCorrect) {
-    for (let i = 0; i < userMove.length-1; i++) {
-      MakeMap.upBridge.push(userMove[i] === UP ? ANSWER.OK : ANSWER.BLANK);
-      MakeMap.downBridge.push(userMove[i] === DOWN ? ANSWER.OK : ANSWER.BLANK);
+  makePrintMap(userMove, isOX) {
+    for (let i = 0; i < userMove.length - 1; i++) {
+      MakeMap.pushEachBridge(userMove[i], ANSWER.OK);
     };
 
-    MakeMap.makeMapLastItem(userMove[userMove.length-1], isCorrect);
+    return MakeMap.makeMapLastItem(userMove[userMove.length - 1], isOX);
   },
 
-  makeMapLastItem(lastAnswer, answer) {
-    MakeMap.upBridge.push(lastAnswer === UP ? answer : ANSWER.BLANK);
-    MakeMap.downBridge.push(lastAnswer === DOWN ? answer : ANSWER.BLANK);
+  makeMapLastItem(lastAnswer, isOX) {
+    MakeMap.pushEachBridge(lastAnswer, isOX);
+    return MakeMap.makeFinalOutputMap()
+  },
+
+  pushEachBridge(userMove, isOX) {
+    if (userMove === UP) {
+      MakeMap.bridge[0].push(isOX);
+      return MakeMap.bridge[1].push(ANSWER.BLANK);
+    };
+
+    MakeMap.bridge[0].push(ANSWER.BLANK);
+    return MakeMap.bridge[1].push(isOX);
   },
 
   makeFinalOutputMap() {
-    let outputMap = `[ ${MakeMap.upBridge.join(' | ')} ]\n`;
-    outputMap += `[ ${MakeMap.downBridge.join(' | ')} ]\n`;
+    let outputMap = '';
+
+    MakeMap.bridge.forEach(upDownBridge => {
+      outputMap += `[ ${upDownBridge.join(' | ')} ]\n`;
+    });
+
     MakeMap.printMapClear();
     return outputMap;
   },
 
   printMapClear() {
-    MakeMap.upBridge = [];
-    MakeMap.downBridge = [];
+    MakeMap.bridge = [[ ], [ ]];
   },
 };
 

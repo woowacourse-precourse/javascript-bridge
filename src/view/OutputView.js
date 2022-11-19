@@ -3,9 +3,6 @@ const { ANSWER, MESSAGE } = require('../utiles/Constant');
 const MakeMap = require('../models/MakeMap');
 
 const OutputView = {
-  upBridge: [],
-  downBridge: [],
-
   printStart() {
     Console.print(MESSAGE.GAME_START);
   },
@@ -14,16 +11,15 @@ const OutputView = {
     Console.print(error);
   },
   
-  printMap(userMove, isCorrect) {
-    MakeMap.makePrintMap(userMove, isCorrect);
-    Console.print(MakeMap.makeFinalOutputMap());
+  printMap(userMove, isOX) {
+    Console.print(MakeMap.makePrintMap(userMove, isOX));
   },
   
   printResult(userMove, failOrSuccess, tryCount) {
-    let answer = (failOrSuccess === ANSWER.SUCCESS) ? ANSWER.OK : ANSWER.NO;
+    const isOkOrNo = (failOrSuccess === ANSWER.SUCCESS) ? ANSWER.OK : ANSWER.NO;
 
     Console.print(MESSAGE.FINAL_MESSAGE);
-    OutputView.printMap(userMove, answer);
+    OutputView.printMap(userMove, isOkOrNo);
     Console.print(`${MESSAGE.FAIL_OR_SUCCESS}${failOrSuccess}`);
     Console.print(`${MESSAGE.TRY_COUNT}${tryCount}`);
     Console.close();
