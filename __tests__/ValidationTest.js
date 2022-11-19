@@ -13,5 +13,10 @@ describe('입력 테스트', () => {
       validateMove(input);
     }).toThrow();
   });
-
+  
+  test.each([['D'], ['U'], ['r'],['q']])('게임 재시작 입력에 대한 예외 처리', (input) => {
+    expect(() => {
+      validateRetry(input);
+    }).toThrow();
+  });
 });
