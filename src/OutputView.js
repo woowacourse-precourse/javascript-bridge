@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { BRIDGE_START, FAIL_GAME, GAME_COUNT } = require('./constant/outputMessage');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -22,6 +23,16 @@ const OutputView = {
     MissionUtils.Console.print();
     MissionUtils.Console.close();
   },
+
+  printStart() {
+    MissionUtils.Console.print(BRIDGE_START);
+  },
+
+  printFailResult(count) {
+    MissionUtils.Console.print(FAIL_GAME);
+    MissionUtils.Console.print(GAME_COUNT(count));
+    MissionUtils.Console.close();
+  }
 };
 
 module.exports = OutputView;
