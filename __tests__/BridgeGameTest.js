@@ -72,6 +72,15 @@ describe('다리 건너기 게임 테스트', () => {
     expect(failBridge.upsideBridge).toEqual([' ', 'O', 'X']);
     expect(failBridge.downsideBridge).toEqual(['O', ' ', ' ']);
   });
+
+  test('다리를 모두 건넜는지 확인한다.', () => {
+    const bridgeGame = makeBridgeGame(['U', 'U'], 0);
+
+    bridgeGame.move();
+    expect(bridgeGame.isCompletion()).toBeFalsy();
+    bridgeGame.move();
+    expect(bridgeGame.isCompletion()).toBeTruthy();
+  });
 });
 
 module.exports = { mockGenerator };
