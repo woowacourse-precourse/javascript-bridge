@@ -15,7 +15,7 @@ const InputView = {
       "다리의 길이를 입력해주세요.\n",
       (bridgeSize) => {
         try {
-          // Error.readBridgeSizeError(bridgeSize);
+          Error.readBridgeSizeError(bridgeSize);
           const bridge = BridgeMaker.makeBridge(
             bridgeSize,
             RandomNumberGenerator.generate
@@ -39,7 +39,7 @@ const InputView = {
       "\n이동할 칸을 선택해주세요. (위: U, 아래: D).\n",
       (moveLocation) => {
         try {
-          // Error.readMoving(moveLocation);
+          Error.readMoving(moveLocation);
           const result = bridgeGame.move(nth, moveLocation);
           console.log(result);
           OutputView.printMap(result);
@@ -73,7 +73,7 @@ const InputView = {
       "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (retryOrNot) => {
         try {
-          // Error.readGameCommand(retryOrNot);
+          Error.readGameCommand(retryOrNot);
           if (bridgeGame.retry(retryOrNot)) this.readMoving(0, bridge);
           // 재시도를 안할 시,
           else
@@ -84,7 +84,7 @@ const InputView = {
             );
         } catch (e) {
           MissionUtils.Console.print(e);
-          this.readGameCommand();
+          this.readGameCommand(bridge, result);
         }
       }
     );
