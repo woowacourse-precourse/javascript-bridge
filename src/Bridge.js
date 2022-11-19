@@ -22,11 +22,10 @@ class Bridge {
   }
 
   moveMap (retryGame, chooseStep) {
-    if (this.bridgeMap.checkPath(chooseStep)) {
-      OutputView.printMap(this.bridgeMap.record(chooseStep));
+    OutputView.printMap(this.bridgeMap.getPathHistory(chooseStep));
+    if (!this.bridgeMap.checkPath(chooseStep)) {
       return retryGame();
     }
-    OutputView.printMap(this.bridgeMap.record(chooseStep));
     if (this.bridgeMap.isEndGame()) {
       return console.log('게임 종료');
     }
