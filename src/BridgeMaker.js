@@ -18,7 +18,7 @@ const BridgeMaker = Object.freeze({
         if (number === 0) return BRINDGE_DIRECTION.DOWN;
         return BRINDGE_DIRECTION.UP;
       });
-    console.log(bridge);
+    return bridge;
   },
 });
 
