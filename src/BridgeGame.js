@@ -30,7 +30,7 @@ class BridgeGame {
   }
 
   retry(command) {
-    return retryOrQuit(command);
+    return doseUserChooseRetry(command);
   }
 
   gameComplete() {

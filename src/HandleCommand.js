@@ -8,7 +8,7 @@ const HandleCommand = {
     return direction === nextCellDirection;
   },
 
-  retryOrQuit: (command) => {
+  doseUserChooseRetry: (command) => {
     Validator.commandValidityCheck(command);
 
     return command === COMMAND.RETRY;
