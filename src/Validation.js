@@ -40,6 +40,10 @@ const Validation = {
       throw new Error("[ERROR 이동할 칸은 한 개의 문자열을 입력해야 합니다.");
     }
 
+    if (!this.isValidMovingCase(input)) {
+      throw new Error("[ERROR] 이동할 칸은 대문자로 입력해야 합니다.");
+    }
+
     if (!this.isValidMoving(input)) {
       throw new Error("[ERROR] 이동할 칸은 U 또는 D를 입력해야 합니다.");
     }
@@ -52,6 +56,10 @@ const Validation = {
 
   isValidMovingLength(input) {
     return input.length === 1;
+  },
+
+  isValidMovingCase(input) {
+    return 65 <= input.charCodeAt() && input.charCodeAt() <= 90;
   },
 
   isValidMoving(input) {
