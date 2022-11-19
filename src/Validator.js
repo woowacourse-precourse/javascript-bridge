@@ -2,7 +2,7 @@ const { ERROR } = require('./utils/constant');
 
 const bridgeSizeValidator = {
   isNumber(size) {
-    return /^[1-9][^.]/g.test(size);
+    return /^[0-9]+$/.test(size);
   },
 
   isValidRange(size) {
