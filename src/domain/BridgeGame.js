@@ -50,7 +50,6 @@ class BridgeGame {
   }
 
   setupRetryGame() {
-    // 리트라이 할 때 세팅 다시하는 곳
     this.gameMap.setPrevBridge();
     this.gameMap.setRetryGame();
     this.increaseTryCount();
@@ -62,6 +61,10 @@ class BridgeGame {
   }
   decreaseUserLocation() {
     this.user.decreaseLocation();
+  }
+
+  getUserGameMap() {
+    return this.gameMap.currentUserBridgeMap();
   }
 }
 

@@ -62,7 +62,7 @@ class App {
     try {
       if (retryCommand === 'Q') {
         OutputView.printResult(
-          '여기에 유저가 현재까지 건넌 다리 넣어야함\n',
+          this.bridgeGame.getUserGameMap(),
           this.bridgeGame.checkGameOver(),
           this.bridgeGame.getUserTryCount()
         );
@@ -71,7 +71,6 @@ class App {
 
       if (retryCommand === 'R') {
         this.bridgeGame.retry();
-        // 이전 입력값 위치에 값 지우기
         this.getBridgeMovementDirection();
       }
 
