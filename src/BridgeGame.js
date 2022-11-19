@@ -9,8 +9,11 @@ class BridgeGame {
 
   #bridge;
 
+  #PositionLog;
+
   constructor() {
     this.#userPosition = null;
+    this.#PositionLog = new Map();
   }
 
   static replaceString(numberValue) {
@@ -126,6 +129,17 @@ class BridgeGame {
     this.checkBeforeStart();
 
     return [TOP_BOTTOM_INDEX, MOVE_INDEX];
+  }
+
+  setPositionLog(positionIndex, bridgeResult) {
+    this.checkBeforeStart();
+
+    const USER_POSITION = this.findUserPosition();
+    const positionLog = [positionIndex, bridgeResult];
+
+    this.#PositionLog.set(USER_POSITION, positionLog);
+
+    return positionLog;
   }
 }
 
