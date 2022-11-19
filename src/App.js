@@ -3,7 +3,7 @@ const InputView = require('./views/InputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./views/OutputView');
-const bridgeValidation = require('./validations/Bridge');
+const BridgeValidation = require('./validations/Bridge');
 
 class App {
   game;
@@ -19,7 +19,7 @@ class App {
 
   createBridgeGame(input) {
     // Validation
-    bridgeValidation.isValidSize(input);
+    BridgeValidation.isValidSize(input);
 
     this.game = new BridgeGame(input);
   }
