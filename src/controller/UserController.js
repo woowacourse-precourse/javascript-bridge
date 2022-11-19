@@ -5,6 +5,14 @@ class UserController {
     this.mainController = mainController;
     this.userModel = new UserModel();
   }
+
+  getTryCount() {
+    return this.userModel.getTryCount();
+  }
+
+  increaseTryCount() {
+    this.userModel.increaseTryCount();
+  }
 }
 
 module.exports = UserController;
