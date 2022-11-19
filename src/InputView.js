@@ -2,7 +2,7 @@
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE, ERROR_MESSAGE } = require('./constant/constant');
+const { MESSAGE, ERROR_MESSAGE, REGEXP } = require('./constant/constant');
 
 const InputView = {
   /**
@@ -27,14 +27,12 @@ const InputView = {
   readGameCommand() {},
 
   validate(length) {
-    const CHECK_NUMBER = /^[0-9]*$/;
-    const CHECK_START_NUMBER = /^0/;
     try {
-      if (!CHECK_NUMBER.test(length)) {
+      if (!REGEXP.CHECK_NUMBER.test(length)) {
         throw new Error(ERROR_MESSAGE.INVALID_LENGTH_NUMBER);
       }
 
-      if (CHECK_START_NUMBER.test(length)) {
+      if (REGEXP.CHECK_START_NUMBER.test(length)) {
         throw new Error(ERROR_MESSAGE.START_ZERO);
       }
 

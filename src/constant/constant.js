@@ -27,9 +27,15 @@ const BRIDGE = {
   END: ' ]',
 };
 
+const REGEXP = {
+  CHECK_NUMBER: /^[0-9]*$/,
+  CHECK_START_NUMBER: /^0/,
+};
+
 module.exports = {
   MESSAGE,
   ERROR_MESSAGE,
   GAME_RESULT,
   BRIDGE,
+  REGEXP,
 };
