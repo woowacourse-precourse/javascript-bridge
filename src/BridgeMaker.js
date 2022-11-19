@@ -1,3 +1,4 @@
+const { BRIDGE_PATH } = require("./util/bridge");
 const { PROCCESS_MESSAGE } = require("./util/messages");
 
 /**
@@ -20,8 +21,8 @@ const BridgeMaker = {
   },
 
   getPathByNumber(number) {
-    if (number === 0) return "U";
-    if (number === 1) return "D";
+    if (number === 0 || number === "0") return BRIDGE_PATH.down;
+    if (number === 1 || number === "1") return BRIDGE_PATH.up;
 
     throw new Error(PROCCESS_MESSAGE.pathByNumber);
   },
