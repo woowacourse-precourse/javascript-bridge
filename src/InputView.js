@@ -63,11 +63,13 @@ const InputView = {
       this.readMoving(bridgeArray);
       return (this.INDEX += 1);
     }
-    if (bridgeArray[this.INDEX] !== userAnswer) {
-      this.INDEX = 0;
-      this.BRIDGE_GAME.fail(userAnswer);
-      this.readGameCommand(bridgeArray);
-    }
+    this.fail(userAnswer, bridgeArray);
+  },
+
+  fail(userAnswer, bridgeArray) {
+    this.INDEX = 0;
+    this.BRIDGE_GAME.fail(userAnswer);
+    this.readGameCommand(bridgeArray);
   },
 
   /**
