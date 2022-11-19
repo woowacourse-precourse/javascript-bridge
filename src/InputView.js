@@ -24,7 +24,8 @@ const InputView = {
         bridgeSize.validate();
         const crossableBridge = BridgeMaker.makeBridge(size, RandomNumber.generate);
         const currentPosition = 0;
-        this.readMoving(currentPosition, crossableBridge);
+        const cnt = 1;
+        this.readMoving(currentPosition, crossableBridge, cnt);
       } catch (err) {
         Console.print(err);
         this.readBridgeSize();
@@ -35,7 +36,7 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(currentPosition, crossableBridge) {
+  readMoving(currentPosition, crossableBridge, cnt) {
     Console.readLine(MESSAGE.INPUT_SPACE_TO_MOVE, (move) => {
       const crossingBridge = new CrossingBridge(move);
       const crossableBridgeList = crossableBridge;
@@ -44,18 +45,18 @@ const InputView = {
         const bridgeGame = new BridgeGame(move, currentPosition, crossableBridgeList);
         const { upper, lower } = bridgeGame.move();
         if (move !== crossableBridgeList[currentPosition]) {
-          this.readGameCommand(currentPosition, crossableBridgeList, upper, lower);
+          this.readGameCommand(currentPosition, crossableBridgeList, upper, lower, cnt);
         }
         if (currentPosition === crossableBridgeList.length - 1 && move === crossableBridgeList[currentPosition]) {
           const isSuccess = '성공';
-          OutputView.printResult(upper, lower, isSuccess);
+          OutputView.printResult(upper, lower, isSuccess, cnt);
           return 0;
         }
         currentPosition += 1;
-        this.readMoving(currentPosition, crossableBridgeList);
+        this.readMoving(currentPosition, crossableBridgeList, cnt);
       } catch (err) {
         Console.print(err);
-        this.readMoving(currentPosition, crossableBridgeList);
+        this.readMoving(currentPosition, crossableBridgeList, cnt);
       }
     });
   },
@@ -63,23 +64,24 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(currentPosition, crossableBridgeList, upper, lower) {
+  readGameCommand(currentPosition, crossableBridgeList, upper, lower, cnt) {
     Console.readLine(MESSAGE.INPUT_WANT_RETRY, (input) => {
       currentPosition = 0;
       const retry = new Retry(input);
       try {
         retry.validate();
         if (input === 'R') {
-          this.readMoving(currentPosition, crossableBridgeList);
+          cnt += 1;
+          this.readMoving(currentPosition, crossableBridgeList, cnt);
         }
         if (input === 'Q') {
           const isSuccess = '실패';
-          OutputView.printResult(upper, lower, isSuccess);
+          OutputView.printResult(upper, lower, isSuccess, cnt);
           Console.close();
         }
       } catch (err) {
         Console.print(err);
-        this.readGameCommand(currentPosition, crossableBridgeList, upper, lower);
+        this.readGameCommand(currentPosition, crossableBridgeList, upper, lower, cnt);
       }
     });
   },
