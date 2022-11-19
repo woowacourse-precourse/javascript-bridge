@@ -1,8 +1,5 @@
 const { SIZE, KEYWORD, HASH } = require("../constants/index.js");
-const {
-  BridgeGameSizeError,
-  BridgeGameMoveError,
-} = require("../Error/index.js");
+const { BridgeGameSizeError, BridgeGameMoveError } = require("../Error/index.js");
 
 const BridgeGameModel = class {
   #user = [];
@@ -22,6 +19,10 @@ const BridgeGameModel = class {
     this.#user.push(HASH[move]);
     const data = { user: this.#user, bridge: this.#bridge };
     return data;
+  }
+
+  isEndGame() {
+    return this.#user.length === this.#bridge.length;
   }
 
   checkBridge(bridge) {
