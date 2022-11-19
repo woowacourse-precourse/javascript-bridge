@@ -6,9 +6,9 @@ class BridgeGame {
   };
   
   move(userUpDown) {
-    let userLastUpDownIndex = userUpDown.length;
-    if (this.#bridge[userLastUpDownIndex - 1] === userUpDown[userLastUpDownIndex - 1]) {
-      return this.moveLengthCheck(userLastUpDownIndex);
+    let userMoveLength = userUpDown.length;
+    if (this.#bridge[userMoveLength - 1] === userUpDown[userMoveLength - 1]) {
+      return this.moveLengthCheck(userMoveLength);
     };
 
     return 0;
