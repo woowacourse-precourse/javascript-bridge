@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { BRIDGE_INPUT_MESSAGES } = require("../constants/messages");
+const { BRIDGE_INPUT_MESSAGES } = require("../constants/Messages");
 
 const InputView = {
   /**

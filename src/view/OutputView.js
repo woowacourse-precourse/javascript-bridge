@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { BRIDGE_INPUT_MESSAGES } = require("../constants/messages");
+const { BRIDGE_INPUT_MESSAGES } = require("../constants/Messages");
 
 const OutputView = {
   // 첫 시작 메세지를 출력한다.
