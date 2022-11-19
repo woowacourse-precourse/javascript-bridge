@@ -7,13 +7,13 @@ class BridgeGame {
   #tryingCount = 1;
 
   constructor() {
-    this.winningBridge;
+    this.winningBridge = new WinningBridge();
     this.currBridge = new CurrBridge();
   }
 
   // 사용자가 건널 다리를 만드는 메서드
   makeWinningBridge(size) {
-    this.winningBridge = new WinningBridge(size);
+    this.winningBridge.validate(size);
     this.winningBridge.makeWinningBridge(size);
   }
 

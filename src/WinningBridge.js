@@ -3,12 +3,7 @@ const Validation = require('./utils/Validation');
 const BridgeMaker = require('./BridgeMaker');
 
 class WinningBridge {
-  #size;
   #winningBridge;
-
-  constructor(size) {
-    this.#size = this.validate(size);
-  }
 
   validate(size) {
     Validation.checkNumberType(size);
