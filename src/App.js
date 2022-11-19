@@ -1,6 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { START_GAME } = require('./Constants');
-const { validateBridgeSize, checkMoveString } = require('./Validate');
+const {
+  validateBridgeSize,
+  checkMoveString,
+  checkRetryString,
+} = require('./Validate');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { makeBridge } = require('./BridgeMaker');
@@ -44,11 +48,13 @@ class App {
 
   checkContinue(move) {
     if (move === true) this.getUserMoving();
-    if (move === false) this.failAnswer();
+    if (move === false) this.getUserRetry();
   }
 
-  failAnswer() {
-    console.log('틀렸습니다.');
+  getUserRetry() {
+    readGameCommand((userRetry) => {
+      checkRetryString(userRetry);
+    });
   }
 }
 
