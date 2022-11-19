@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = require("./InputView");
+const InputValidate = require("./InputValidate");
 const OutputView = require("./OutputView");
 const BridgeGameController = require("./BridgeGameController");
 
@@ -7,6 +8,9 @@ const BridgeGameController = require("./BridgeGameController");
 class App {
   bridgeGame = null;
 
+  /**
+   * 입력 실패시 해당 단계의 함수 재귀 호출을 위한 this 바인딩
+   */
   constructor() {
     this.roundStartBranch = this.roundStartBranch.bind(this);
     this.roundInputBranch = this.roundInputBranch.bind(this);
@@ -20,7 +24,8 @@ class App {
 
   roundStartBranch(bridgeLengthInput) {
     try {
-      this.bridgeGame = BridgeGameController.makeNewBridgeGame(InputView.validateBridgeLength(bridgeLengthInput));
+      InputValidate.validateBridgeLength(bridgeLengthInput);
+      this.bridgeGame = BridgeGameController.makeNewBridgeGame(bridgeLengthInput);
       InputView.readMoving(this.roundInputBranch);
     } catch (e) {
       MissionUtils.Console.print(e.message);
