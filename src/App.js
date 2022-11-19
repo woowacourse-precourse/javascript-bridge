@@ -27,7 +27,7 @@ class App {
     try {
       BridgeValidation(input);
       this.#game = new BridgeGame(input);
-      readMoving.call(this, this.moveBridge);
+      readMoving.bind(this)(this.moveBridge);
     } catch (err) {
       printError(err);
       readBridgeSize.bind(this)(this.createBridge);

@@ -14,7 +14,7 @@ const InputView = {
    */
   readBridgeSize(callback) {
     MissionUtils.Console.readLine(MESSAGE.INPUT_LENGTH, (input) => {
-      callback.call(this, input);
+      callback.bind(this)(input);
     });
   },
 
@@ -23,7 +23,7 @@ const InputView = {
    */
   readMoving(callback) {
     MissionUtils.Console.readLine(MESSAGE.INPUT_DIRECTION, (input) => {
-      callback.call(this, input);
+      callback.bind(this)(input);
     });
   },
 
@@ -32,7 +32,7 @@ const InputView = {
    */
   readGameCommand(callback) {
     MissionUtils.Console.readLine(MESSAGE.INPUT_CONTROL, (input) => {
-      callback.call(this, input);
+      callback.bind(this)(input);
     });
   },
 
