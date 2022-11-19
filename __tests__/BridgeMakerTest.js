@@ -4,9 +4,9 @@ const { generate } = require('../src/BridgeRandomNumberGenerator');
 const ERROR_MESSAGE = require('../src/utils/ErrorMessage');
 
 describe('다리 생성 테스트', () => {
-  test.each([[['1', '0', '0'], 3, ['U', 'D', 'D']],
-    [['1', '1', '0', '0'], 4, ['U', 'U', 'D', 'D']],
-    [['1', '0', '0', '1', '1'], 5, ['U', 'D', 'D', 'U', 'U']]])(
+  test.each([[[1, 0, 0], 3, ['U', 'D', 'D']],
+    [[1, 1, 0, 0], 4, ['U', 'U', 'D', 'D']],
+    [[1, 0, 0, 1, 1], 5, ['U', 'D', 'D', 'U', 'U']]])(
     '다리 생성 테스트',
     (random, input, result) => {
       const randomNumbers = random;
