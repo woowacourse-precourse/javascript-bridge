@@ -22,8 +22,8 @@ class BridgeGame {
     }
 
     isBadMove(move) {
-        console.log("BridgeGame.isBadMove----------");
-        console.log(this.#bridgeArray);
+        // console.log("BridgeGame.isBadMove----------");
+        // console.log(this.#bridgeArray);
         const badUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.DOWN;
         const badDown = move === KEY.DOWN && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
         if (badUp || badDown) {
@@ -32,7 +32,7 @@ class BridgeGame {
     }
 
     showFail(move) {
-        console.log("BridgeGame.showFail--------------");
+        // console.log("BridgeGame.showFail--------------");
         if (move === KEY.UP) {
             this.#upBridgeHistory.push(STRUCTURE.BAD);
             this.#downBridgeHistory.push(STRUCTURE.BLANK);
@@ -45,13 +45,13 @@ class BridgeGame {
     }
 
     move(move) {
-        console.log("BridgeGame.move-----------");
+        // console.log("BridgeGame.move-----------");
         const up = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
         this.goodMove(up);
     }
 
     isSuccess(move) {
-        console.log("BridgeGame.isSuccess---------------------");
+        // console.log("BridgeGame.isSuccess---------------------");
         const up = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
         if (this.#bridgeCount === this.#bridgeArray.length - 1) {
             this.addGoodHistory(up);
@@ -90,18 +90,18 @@ class BridgeGame {
     }
 
     showSuccess() {
-        console.log(MESSAGE.FINISH);
+        Console.print(MESSAGE.FINISH);
         OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory);
-        console.log(MESSAGE.SUCCESS);
-        console.log(MESSAGE.TRY + this.#gameCount);
+        Console.print(MESSAGE.SUCCESS);
+        Console.print(MESSAGE.TRY + this.#gameCount);
         Console.close();
     }
 
     showFinish() {
-        console.log(MESSAGE.FINISH);
+        Console.print(MESSAGE.FINISH);
         OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory);
-        console.log(MESSAGE.FAIL);
-        console.log(MESSAGE.TRY + this.#gameCount);
+        Console.print(MESSAGE.FAIL);
+        Console.print(MESSAGE.TRY + this.#gameCount);
         Console.close();
     }
 }

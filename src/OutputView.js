@@ -1,4 +1,4 @@
-const { STRUCTURE } = require("./constant/message.js");
+const { MESSAGE, STRUCTURE } = require("./constant/message.js");
 const { Console } = require("@woowacourse/mission-utils");
 
 /**
@@ -12,9 +12,10 @@ const OutputView = {
      * 메서드도 추가할 수 있다.
      */
     printMap(upBridge, downBridge) {
-        console.log("OutputView.printMap-----------");
+        // console.log("OutputView.printMap-----------");
         Console.print(STRUCTURE.ENTRANCE + upBridge.join(STRUCTURE.LINK) + STRUCTURE.EXIT);
         Console.print(STRUCTURE.ENTRANCE + downBridge.join(STRUCTURE.LINK) + STRUCTURE.EXIT);
+        Console.print("");
     },
 
     /**
@@ -27,7 +28,13 @@ const OutputView = {
         console.log("결과출력");
     },
 
-    printFail() {},
+    printStart() {
+        Console.print(MESSAGE.START);
+    },
+
+    printSpaceLine() {
+        Console.print("");
+    },
 };
 
 module.exports = OutputView;
