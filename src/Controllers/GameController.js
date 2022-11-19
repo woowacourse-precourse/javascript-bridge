@@ -30,9 +30,13 @@ class GameController {
     this.inputView.readMoving((userInput) => {
       const select = this.inputView.getUserMoving(userInput);
       this.bridgeGame.move(select);
-      console.log('done');
+      const alive = this.bridgeGame.checkAlive();
+      if (alive) return this.selectMoving();
+      this.askRetry();
     });
   }
+
+  askRetry() {}
 }
 
 module.exports = GameController;

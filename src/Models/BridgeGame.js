@@ -7,7 +7,8 @@ const { generateRandomNumber } = require('../utils/bridgeHandler');
 
 class BridgeGame {
   #myBridge;
-  #round;
+  #round = 0;
+  #alive;
 
   createBridge(size) {
     this.#myBridge = BridgeMaker.makeBridge(size, generateRandomNumber);
@@ -18,9 +19,21 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(select) {
-    if (select === 'U') {
+  move(select, selectMoving) {
+    console.log(this.#myBridge);
+    console.log('!!round : ', this.#round);
+    console.log('!!solution : ', this.#myBridge[this.#round]);
+    this.#alive = this.checkAlive();
+
+    if (this.#round === this.#myBridge.length - 1) {
+      console.log('WIN');
+      throw new Error('WIN!!');
     }
+    this.#round += 1;
+  }
+
+  checkAvlie(select) {
+    return select === this.#myBridge[this.#round] ? true : false;
   }
 
   /**
@@ -28,7 +41,9 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#round = 0;
+  }
 }
 
 module.exports = BridgeGame;
