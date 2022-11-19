@@ -15,44 +15,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(index, IS_MOVE, bridgeAnswer) {
-    const upMap = ['['];
-    const downMap = ['['];
-    for (let i = 0; i < index; i += 1) {
-      const shape = bridgeAnswer[i];
-      if (shape === BRIDGE_CONSTANTS.up) {
-        upMap.push(' O |');
-        downMap.push('   |');
-      } else {
-        upMap.push('   |');
-        downMap.push(' O |');
-      }
-    }
-
-    const lastShape = bridgeAnswer[index];
-    if (IS_MOVE) {
-      if (lastShape === BRIDGE_CONSTANTS.up) {
-        upMap.push(' O ');
-        downMap.push('   ');
-      } else {
-        upMap.push('   ');
-        downMap.push(' O ');
-      }
-    } else {
-      if (lastShape === BRIDGE_CONSTANTS.up) {
-        upMap.push('   ');
-        downMap.push(' X ');
-      } else {
-        upMap.push(' X ');
-        downMap.push('   ');
-      }
-    }
-
-    upMap.push(']');
-    downMap.push(']');
-
-    Console.print(upMap.join(''));
-    Console.print(downMap.join(''));
+  printMap(maps) {
+    const upMap = maps[0].join('') + BRIDGE_CONSTANTS.shapeOfEnd;
+    const downMap = maps[1].join('') + BRIDGE_CONSTANTS.shapeOfEnd;
+    Console.print(upMap);
+    Console.print(downMap);
   },
 
   /**

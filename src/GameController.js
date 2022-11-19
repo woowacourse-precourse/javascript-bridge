@@ -27,8 +27,8 @@ class GameController {
   move(index) {
     const onDeliveryMoving = (moving) => {
       const IS_MOVE = this.game.move(moving, index);
-      const bridgeAnswer = this.game.getBridgeAnswer();
-      this.outputView.printMap(index, IS_MOVE, bridgeAnswer);
+      const maps = this.game.getMaps();
+      this.outputView.printMap(maps);
       if (IS_MOVE) { // 이동했다면 다음 것도 입력
         this.move(index + 1);
       } else {
