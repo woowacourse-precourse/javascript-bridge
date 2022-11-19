@@ -44,7 +44,14 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    Console.readLine(MESSAGES.INPUT_RETRY, (check) => {});
+    Console.readLine(MESSAGES.INPUT_RETRY, (command) => {
+      // TODO command validation check
+      if (command === 'Q') Console.close();
+      else {
+        bridgeGame.retry();
+        this.readMoving();
+      }
+    });
   },
 };
 
