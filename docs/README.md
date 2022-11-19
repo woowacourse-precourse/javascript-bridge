@@ -69,22 +69,22 @@
     - [x] 다시시도 횟수를 늘리는 기능
     - [x] 리트라이를 하는 기능
 
-      - 포지션 초기화
-      - 시도횟수 증가
+  - [ ] 다리와 플레이어의 상호작용을 책임지는 객체#BridgeInteractPlayer
 
-    - [ ] 다리와 플레이어의 상호작용을 책임지는 객체#BridgeInteractPlayer
-      - [ ] 다리에서 플레이어가 움직이는 결과를 연산하는 기능#movePlayerBridge
-    - [ ] 다리건너기 게임의 다리 출력 모양을 계산하는 객체 #BridgeGameShape
-      - [ ] 다리건너기 게임의 중간 결과를 문자열로 반환하는 기능#getCurrentBridgeGameShape
+    - [ ] 다리에서 플레이어가 움직이는 결과를 연산하는 기능#movePlayerBridge
+
+  - [ ] 다리건너기 게임의 다리 출력 모양을 계산하는 객체 #BridgeGameShape
+
+    - [ ] 다리건너기 게임의 중간 결과를 문자열로 반환하는 기능#getCurrentBridgeGameShape
 
   - [ ] 다리 건너기 게임 #**BridgeGame**
 
-    - [ ] 다리와 플레이어를 만드는 기능 #init
+    - [x] 다리와 플레이어를 만드는 기능 #init
     - [ ] 다리 건너기 게임을 시작하는 기능 #start
     - [ ] 다리를 건너는 기능 #move
     - [ ] 게임을 다시 시작하는 기능 #retry
 
-  - [ ] 사용자 입력을 받는 기능 #InputView
+  - [ ] 사용자 받는 기능 #InputView
     - [ ] 다리의 길이를 숫자로 입력받는 기능#readBridgeSize
       - 3~20 사이 숫자 입력 가능
     - [ ] 플레이어가 이동할 칸을 입력 받는 기능 #readMoving
