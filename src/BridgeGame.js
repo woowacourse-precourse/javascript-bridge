@@ -1,4 +1,4 @@
-const OutputView = require('./InputView');
+const InputView = require('./InputView');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -10,14 +10,15 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(inputLetter, answerArr) {
-    while (this.count < answerArr.length) {
+    if (this.count < answerArr.length) {
       if (inputLetter === answerArr[this.count]) {
+        InputView.count++;
         console.log('정답');
       }
       if (inputLetter !== answerArr[this.count]) {
+        this.count++;
         console.log('탈락!');
       }
-      this.count++;
     }
   }
 

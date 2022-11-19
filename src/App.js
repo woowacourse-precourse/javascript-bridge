@@ -1,19 +1,16 @@
 const InputView = require('./InputView');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 class App {
   play() {
-    InputView.readBridgeSize(this.createBridge);
+    this.letter = InputView.readBridgeSize();
   }
 
-  createBridge(number) {
-    BridgeMaker.makeBridge(number, BridgeRandomNumberGenerator.generate);
-    InputView.readMoving(BridgeMaker.answerArr);
-  }
+  desideMove() {}
 
   movement() {
     console.log('돌아왔다!');
+    console.log(letter);
+    console.log(answerArr);
   }
 }
 const app = new App();
