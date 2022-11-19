@@ -10,7 +10,8 @@ const QUESTIONS = Object.freeze({
   movePosition: '이동할 칸을 선택해주세요. (위: U, 아래: D)'
 });
 const ERROR_MSG = Object.freeze({
-  invalidBridgeSize: `[ERROR] 다리 길이는 ${MIN_BRIDGE_SIZE} 이상 ${MAX_BRIDGE_SIZE}이하의 숫자를 입력해주세요`
+  invalidBridgeSize: `[ERROR] 다리 길이는 ${MIN_BRIDGE_SIZE} 이상 ${MAX_BRIDGE_SIZE}이하의 숫자를 입력해주세요`,
+  invalidPosition: '[ERROR] 위: U, 아래: D 를 입력해주세요.'
 });
 
 module.exports = {

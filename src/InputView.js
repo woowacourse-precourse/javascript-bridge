@@ -26,7 +26,18 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(game) {
+    Console.readLine(QUESTIONS.movePosition, position => {
+      try {
+        if (!validatePosition(position))
+          throw new Error(ERROR_MSG.invalidPosition);
+        game.move(position);
+      } catch (error) {
+        Console.print(error.message);
+        this.readMoving(game);
+      }
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

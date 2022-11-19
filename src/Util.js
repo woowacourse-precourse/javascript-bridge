@@ -6,4 +6,9 @@ const validateBridgeSize = len => {
   return true;
 };
 
-module.exports = { validateBridgeSize };
+const validatePosition = position => {
+  if (!POSITIONS.includes(position)) return false;
+  return true;
+};
+
+module.exports = { validateBridgeSize, validatePosition };
