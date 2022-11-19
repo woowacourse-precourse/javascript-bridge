@@ -81,6 +81,13 @@ describe('다리 건너기 게임 테스트', () => {
     bridgeGame.move();
     expect(bridgeGame.isCompletion()).toBeTruthy();
   });
+
+  test('이동 횟수를 초기화한다.', () => {
+    const bridgeGame = makeBridgeGame(['D', 'D', 'U'], 3);
+    bridgeGame.retry();
+
+    expect(bridgeGame.getMoveCount()).toEqual(0);
+  });
 });
 
 module.exports = { mockGenerator };
