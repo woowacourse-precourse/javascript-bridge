@@ -1,4 +1,5 @@
 const Bridge = require('./domain/Bridge');
+const BridgeResult = require('./domain/BridgeResult');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -6,9 +7,11 @@ const Bridge = require('./domain/Bridge');
 class BridgeGame {
   #bridge;
   #player = { movings: [] };
+  #bridgeResult;
 
   createBridge(bridgeSize, bridgePattern) {
     this.#bridge = new Bridge(bridgeSize, bridgePattern);
+    this.#bridgeResult = new BridgeResult(bridgeSize);
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -18,6 +21,7 @@ class BridgeGame {
   move(moving) {
     this.#player.movings.push(moving);
     const { bridgeMap, checking } = this.#bridge.match(this.#player.movings);
+    this.#bridgeResult.save(bridgeMap);
     return { bridgeMap, checking };
   }
 
@@ -28,6 +32,11 @@ class BridgeGame {
    */
   retry() {
     this.#player.movings = [];
+  }
+
+  quit() {
+    this.#bridgeResult.checkSuccess();
+    return this.#bridgeResult.getResult();
   }
 }
 
