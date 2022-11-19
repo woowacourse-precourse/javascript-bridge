@@ -1,12 +1,13 @@
 const Bulider = require('./Builder.js');
-const Player = require('./Player.js');
+const { DOWNSIDE_SYMBOL, UPSIDE_SYMBOL } = require('./constants/condition.js');
+const { ERROR_MSG } = require('./constants/message.js');
 
 class BridgeGame {
   #bridge;
-  #player;
+  #movementLog;
 
   constructor() {
-    this.#player = new Player();
+    this.#movementLog = [];
   }
 
   build(size) {
@@ -16,10 +17,22 @@ class BridgeGame {
   }
 
   move(movingDirection) {
-    this.#player.addDirection(movingDirection);
+    this.#validateDirection(movingDirection);
   }
 
   retry() {}
+
+  #validateDirection(direction) {
+    if (!direction) throw new Error(ERROR_MSG.emptyInput);
+
+    if (!this.#isValidDirectionSymbol(direction)) {
+      throw new Error(ERROR_MSG.invalidDirection);
+    }
+  }
+
+  #isValidDirectionSymbol(direction) {
+    return direction === DOWNSIDE_SYMBOL || direction === UPSIDE_SYMBOL;
+  }
 }
 
 module.exports = BridgeGame;
