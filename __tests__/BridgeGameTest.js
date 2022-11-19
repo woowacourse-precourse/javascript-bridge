@@ -41,18 +41,26 @@ describe('다리 건너기 게임 테스트', () => {
     expect(bridgeGame.isMove('D')).toBeFalsy();
   });
 
-  test('위쪽 다리 모양으로 변환한다.', () => {
-    const bridgeGame = makeBridgeGame(['U', 'D'], 2);
+  test('현재 이동까지 성공한 위쪽 다리 모양을 변환한다.', () => {
+    const bridgeGame = makeBridgeGame(['U', 'D', 'U'], 2);
     const upsideBridge = bridgeGame.convertBridge('U');
 
     expect(upsideBridge).toEqual(['O', ' ']);
   });
 
-  test('아래쪽 다리 모양으로 변환한다.', () => {
-    const bridgeGame = makeBridgeGame(['U', 'D'], 2);
+  test('현재 이동까지 성공한 아래쪽 다리 모양을 변환한다.', () => {
+    const bridgeGame = makeBridgeGame(['U', 'D', 'U'], 2);
     const downsideBridge = bridgeGame.convertBridge('D');
 
     expect(downsideBridge).toEqual([' ', 'O']);
+  });
+
+  test('현재 이동까지 성공한 위,아래 다리 모양을 변환하여 한 번에 받아온다.', () => {
+    const bridgeGame = makeBridgeGame(['D', 'U', 'U', 'D'], 3);
+    const { upsideBridge, downsideBridge } = bridgeGame.getConvertedBridge();
+
+    expect(upsideBridge).toEqual([' ', 'O', 'O']);
+    expect(downsideBridge).toEqual(['O', ' ', ' ']);
   });
 });
 
