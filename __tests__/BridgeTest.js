@@ -1,10 +1,11 @@
-const BridgeGame = require("../src/BridgeGame");
+const BridgeGame = require("../src/model/BridgeGame");
 const OutpuyView = require("../src/console/OutputView");
 const InputView = require("../src/console/InputView");
 const Message = require("../src/lib/Message");
 const Bridge = require("../src/model/Bridge");
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
+const {run} = require("jest");
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -49,48 +50,31 @@ describe("브릿지 다리 생성 테스트", () => {
     const bridgeGame = new BridgeGame();
     bridgeGame.play();
 
-    const [one, two] = bridgeGame.bridge
-    expect(woowaBridge.bridge.getOriginalBridge().length).toBe(5);
-    expect(
-      woowaBridge.bridge.getOriginalBridge().length
-    ).not.toBeGreaterThanOrEqual(6);
-    expect(
-      woowaBridge.bridge.getOriginalBridge().length
-    ).not.toBeLessThanOrEqual(2);
+    const bridge = bridgeGame.getBridge().getOriginalBridge();
+
+    expect(bridge.length).toBe(5);
+    expect(bridge.length).toBeGreaterThanOrEqual(3)
+    expect(bridge.length).toBeLessThanOrEqual(20)
   });
 
   test("브짓지는 U와 D를 원소로 가집니다.", () => {
     const length = ["10"];
     setTestInvOnce(length);
 
-    const woowaBridge = new WoowaBridge();
-    woowaBridge.play();
-    expect(woowaBridge.bridge.getOriginalBridge()).toContain("U", "D");
-    expect(woowaBridge.bridge.getOriginalBridge()).toContainEqual("U", "D");
-    expect(woowaBridge.bridge.getOriginalBridge()).not.toContain(/\d/);
+    const bridgeGame = new BridgeGame();
+    bridgeGame.play();
+    const bridge = bridgeGame.getBridge().getOriginalBridge();
+
+    expect(bridge).toContain("U", "D");
+    expect(bridge).toContainEqual("U", "D");
+    expect(bridge).not.toContain(/\d/);
   });
 
-  test("길이입력에 문자가 들어가면 예외가 발생합니다.", () => {
-    runException(["E"]);
-  });
+  test.each([["E"],["0.5"],["-5"],["2"],["21"],["2+3"]])("잘못된 길이는 오류를 냅니다." , (input)=>{
+    runException([input])
+  })
 
-  test("길이입력에 소수점이 들어가면 예외가 발생합니다.", () => {
-    runException(["0.5"]);
-  });
 
-  test("길이입력에 음수가 들어가면 예외가 발생합니다.", () => {
-    runException(["-5"]);
-  });
-
-  test("길이가 범위를 벗어나면 예외가 발생합니다.", () => {
-    runException(["2"]);
-    runException(["21"]);
-  });
-
-  test("길이 입력에 계산식을 입력할 수 없습니다.", () => {
-    runException(["2+3"]);
-    runException([+"2+3"]);
-  });
 });
 
 describe("브릿지 이동 테스트", () => {});
