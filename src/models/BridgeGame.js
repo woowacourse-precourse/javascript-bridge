@@ -28,6 +28,10 @@ class BridgeGame {
     if (this.#bridge.isBridgeEnd()) return true;
     return false;
   }
+
+  getResult() {
+    return this.#result;
+  }
 }
 
 module.exports = BridgeGame;
