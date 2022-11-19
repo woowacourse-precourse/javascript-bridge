@@ -87,12 +87,15 @@ const InputView = {
       Validate.retryOrEnd(userInput);
       if (userInput === 'R') {
         this.COUNT += 1;
-        this.readMoving(this.BRIDGE_GAME.retry(userInput, bridgeArray, this.COUNT));
+        OutputView.removeArray();
+        this.readMoving(bridgeArray);
       }
       if (userInput === 'Q') this.BRIDGE_GAME.retry(userInput, bridgeArray, this.COUNT);
     } catch (error) {
       MissionUtils.Console.print(error);
-      this.readGameCommand();
+      this.INDEX = 0;
+      OutputView.removeArray();
+      this.readGameCommand(bridgeArray);
     }
   },
 };
