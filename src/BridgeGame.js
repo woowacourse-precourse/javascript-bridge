@@ -7,7 +7,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 class BridgeGame {
   #bridge;
   #userPos;
-  #isSuccess;
+  #isPass;
   #userAttempt;
   #isGameOver;
   #bridgeMap1;
@@ -15,7 +15,7 @@ class BridgeGame {
 
   constructor() {
     this.#bridge = [];
-    this.#isSuccess = false;
+    this.#isPass = false;
     this.#userPos = 0;
     this.#userAttempt = 1;
     this.#isGameOver = false;
@@ -38,21 +38,19 @@ class BridgeGame {
    */
   move(userMove) {
     this.checkMove(this.#bridge[this.#userPos], userMove);
-    if (!this.#isSuccess) {
-      this.bridgeMap(this.#bridge[this.#userPos], userMove);
+    if (!this.#isPass) {
       this.#userPos = 0;
       return;
     }
-    this.bridgeMap(this.#bridge[this.#userPos], userMove);
     this.#userPos++;
-    return !!this.#isSuccess;
+    return !!this.#isPass;
   }
 
   checkMove(bridge, userMove) {
-    console.log('체크: 현재 bridge',bridge,'현재 user', userMove);
-    this.#isSuccess = bridge === userMove;
+    this.#isPass = bridge === userMove;
+    this.bridgeMap(bridge, userMove);
     if (this.isGameOver()) {
-      this.#isGameOver = !!this.#isSuccess;
+      this.#isGameOver = !!this.#isPass;
     }
   }
 
@@ -97,7 +95,7 @@ class BridgeGame {
   }
 
   end() {
-    if (this.#isSuccess) {
+    if (this.#isPass) {
       return ['성공', this.#userAttempt];
     } else {
       return ['실패', this.#userAttempt];

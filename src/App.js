@@ -17,19 +17,19 @@ class App {
 
   userInputMove() {
     InputView.readMoving(inputMove => {
-      const isSuccess = this.bridgeGame.move(inputMove);
+      const isPass = this.bridgeGame.move(inputMove);
       const isGameOver = this.bridgeGame.getGameOver();
       const bridgeMap = this.bridgeGame.getBridgeMap();
-      this.toDoNext(isSuccess, isGameOver, bridgeMap);
+      this.toDoNext(isPass, isGameOver, bridgeMap);
     });
   }
 
-  toDoNext(isSuccess, isGameOver, bridgeMap) {
+  toDoNext(isPass, isGameOver, bridgeMap) {
     OutputView.printMap(bridgeMap);
-    if (!isSuccess) {
+    if (!isPass) {
       this.userInputEnd();
       return;
-    } else if (isSuccess && isGameOver) {
+    } else if (isPass && isGameOver) {
       OutputView.printResult(this.bridgeGame.end(), bridgeMap);
       return;
     }
