@@ -40,6 +40,6 @@
 
 ## 테스트 구현
 
-- [ ] BridgeGame 테스트
-- [ ] BridgeMaker 테스트
-- [ ] InputView 예외처리 테스트
+- [x] BridgeGame 테스트
+- [x] BridgeMaker 테스트
+- [x] InputView 예외처리 테스트
