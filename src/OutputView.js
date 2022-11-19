@@ -66,6 +66,18 @@ const OutputView = {
     Console.print('총 시도한 횟수: ' + GameStatus.stage)
     Console.close();
   },
+
+  printSizeError() {
+    Console.print('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.')
+  },
+
+  printMoveError() {
+    Console.print("[ERROR] 이동할 칸은 'U' 또는 'D' 여야 합니다.")
+  },
+
+  printRetryError() {
+    Console.print("[ERROR] 게임 재시작/종료 여부는 'R' 또는 'Q' 여야 합니다.")
+  }
 };
 
 module.exports = OutputView;

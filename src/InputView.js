@@ -5,6 +5,7 @@ const GameStatus = require("./GameStatus.js")
 const BridgeMaker = require("./BridgeMaker.js")
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
 const OutputView = require("./OutputView.js");
+const { printSizeError, printMoveError, printRetryError } = require("./OutputView.js");
 
 const validMove = ['U', 'D']
 /**
@@ -15,14 +16,16 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine('다리 건너기 게임을 시작합니다.\n\n다리의 길이를 입력해주세요.\n', (answer => {
-      GameStatus.size = new BridgeSizeValid(answer).getSize();
-      GameStatus.bridge = BridgeMaker
-        .makeBridge(GameStatus.size, BridgeRandomNumberGenerator.generate).slice();
-
-      console.log(GameStatus)
-
-      this.readMoving();
+    Console.readLine('다리의 길이를 입력해주세요.\n', (answer => {
+      try {
+        GameStatus.size = new BridgeSizeValid(answer).getSize();
+        GameStatus.bridge = BridgeMaker
+          .makeBridge(GameStatus.size, BridgeRandomNumberGenerator.generate).slice();
+        return this.readMoving();
+      } catch (e) {
+        printSizeError()
+        return this.readBridgeSize();
+      }
     }))
   },
 
@@ -31,12 +34,17 @@ const InputView = {
    */
   readMoving() {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (answer => {
-      const nextMove = new MovingValid(answer).getMove()
-      const bridgeGame = new BridgeGame(nextMove)
-      const success = bridgeGame.move(nextMove)
-      if(success === false) return this.readGameCommand();
-      if(GameStatus.size === GameStatus.step) return OutputView.printResult();
-      this.readMoving();
+      try {
+        const nextMove = new MovingValid(answer).getMove()
+        const bridgeGame = new BridgeGame(nextMove)
+        const success = bridgeGame.move(nextMove)
+        if(success === false) return this.readGameCommand();
+        if(GameStatus.size === GameStatus.step) return OutputView.printResult();
+        return this.readMoving();
+      } catch (e) {
+        printMoveError()
+        return this.readMoving();
+      }
     }))
   },
 
@@ -46,14 +54,19 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (answer => {
+      try {
       const retry = new RetryValid(answer).getRetry()
-      if(retry === 'Q') {
-        return OutputView.printResult();
+        if(retry === 'Q') {
+          return OutputView.printResult();
+        }
+        GameStatus.step = 0;
+        GameStatus.stage += 1;
+        GameStatus.success = true;
+        return this.readMoving();
+      } catch (e) {
+        printRetryError()
+        return this.readGameCommand();
       }
-      GameStatus.step = 0;
-      GameStatus.stage += 1;
-      GameStatus.success = true;
-      return this.readMoving();
     }))
   },
 };
