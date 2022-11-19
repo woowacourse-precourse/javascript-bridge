@@ -18,7 +18,8 @@ class BridgeGame {
     OutputView.startSentence();
     OutputView.lengthBridgeSentence();
     this.bridgeSize();
-    this.readMove();
+    this.createBridge();
+    this.move();
   }
 
   bridgeSize() {
@@ -37,9 +38,12 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move() {
-    this.readMove();
-    this.pushXOrO(i);
-    this.blankPush();
+    for (let i = 0; i < this.size; i++) {
+      this.readMove();
+      this.pushXOrO(i);
+      this.blankPush();
+      OutputView.printMap(this.bridgeResult);
+    }
   }
 
   readMove() {
@@ -50,6 +54,11 @@ class BridgeGame {
   pushXOrO(i) {
     if (this.moving === "U") this.bridgeResult[0].push(this.returnXOrO(i));
     if (this.moving === "D") this.bridgeResult[1].push(this.returnXOrO(i));
+  }
+
+  returnXOrO(i) {
+    if (this.moving === this.bridge[i]) return "O";
+    else return "X";
   }
 
   blankPush() {
