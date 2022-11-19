@@ -34,6 +34,7 @@ const UNIT = {
 };
 
 const ERROR = {
+  IS_NAN: "다리 길이는 숫자로 입력해주세요.",
   BRIDGE_SIZE: "다리 길이는 3 이상 20 이하의 숫자를 입력해주세요.",
   MOVING_DIRECTION:
     "이동할 칸은 U(위 칸)와 D(아래 칸)중 하나의 문자를 입력해주세요.",
