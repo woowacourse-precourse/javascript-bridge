@@ -19,7 +19,7 @@
         
         생성한 번호에 따라서 up과 down 배열에 true 혹은 false을 추가한다.
 
-- [ ] readMoving()
+- [x] readMoving()
     라운드마다 플레이어가 이동할 칸을 입력 받는다.
     
     - [ ] isValidMovingNumber()
