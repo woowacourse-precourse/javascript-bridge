@@ -16,10 +16,10 @@ class App {
     this.bridgeGame = new BridgeGame();
 
     OutputView.printStart();
-    InputView.readBridgeSize(this.cbAfterReadBridgeSize.bind(this));
+    InputView.readBridgeSize(this.onReadBridgeSize.bind(this));
   }
 
-  cbAfterReadBridgeSize(sizeStr) {
+  onReadBridgeSize(sizeStr) {
     const size = +sizeStr;
 
     validateBrigeSize(size);
@@ -29,10 +29,10 @@ class App {
   }
 
   proceedGame() {
-    InputView.readMoving(this.cbAfterReadMoving.bind(this));
+    InputView.readMoving(this.onReadMoving.bind(this));
   }
 
-  cbAfterReadMoving(choice) {
+  onReadMoving(choice) {
     validateMoving(choice);
 
     const isAlrightPath = this.bridgeGame.getIsAlrightPath(choice);
@@ -53,10 +53,10 @@ class App {
   }
 
   stopGame() {
-    InputView.readGameCommand(this.cbAfterStopGame.bind(this));
+    InputView.readGameCommand(this.onStopGame.bind(this));
   }
 
-  cbAfterStopGame(choice) {
+  onStopGame(choice) {
     if (choice === GAME_PROCEED.retry) {
       this.bridgeGame.retry();
       this.tryCount += 1;
