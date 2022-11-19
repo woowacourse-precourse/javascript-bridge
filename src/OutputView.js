@@ -55,6 +55,60 @@ const OutputView = {
     console.log(currentBridge[1]);
   },
 
+  printWrongMap(step, locations) {
+    const currentBridge = ["[", "["];
+    if (step === 0) {
+      if (locations[0] === 0) {
+        currentBridge[0] += "   ]";
+        currentBridge[1] += " X ]";
+      }
+
+      if (locations[0] === 1) {
+        currentBridge[0] += " X ]";
+        currentBridge[1] += "   ]";
+      }
+      console.log(currentBridge[0]);
+      console.log(currentBridge[1]);
+      return;
+    }
+
+    for (let i = 0; i < step; i++) {
+      if (i === step - 1) {
+        if (locations[i] === 0) {
+          currentBridge[0] += "   |";
+          currentBridge[1] += " X |";
+        }
+        if (locations[i] === 1) {
+          currentBridge[0] += "   |";
+          currentBridge[1] += " X |";
+        }
+        break;
+      }
+      if (locations[i] === 0) {
+        currentBridge[0] += "   |";
+        currentBridge[1] += " O |";
+      }
+      if (locations[i] === 1) {
+        currentBridge[0] += "   |";
+        currentBridge[1] += " O |";
+      }
+    }
+    currentBridge[0] = currentBridge[0].substring(
+      0,
+      currentBridge[0].length - 1
+    );
+    currentBridge[1] = currentBridge[1].substring(
+      0,
+      currentBridge[1].length - 1
+    );
+
+    currentBridge[0] += "]";
+    currentBridge[1] += "]";
+
+    console.log(currentBridge[0]);
+    console.log(currentBridge[1]);
+  },
+
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>

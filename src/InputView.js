@@ -45,6 +45,7 @@ const InputView = {
         this.readMoving(locations, size);
         return;
       }
+      OutputView.printWrongMap(this.step + 1, locations);
       console.log("wrong");
     });
   },
