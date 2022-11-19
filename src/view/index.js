@@ -1,0 +1,1 @@
+module.exports = BridgeView = require("./BridgeView");

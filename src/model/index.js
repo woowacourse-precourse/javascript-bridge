@@ -1,0 +1,1 @@
+module.exports = BridgeModel = require('./BridgeModel');
