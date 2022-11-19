@@ -25,11 +25,37 @@ class App {
         this.GAME.set(this.BRIDGE);
         this.move();
     }
+    /**
+     * 사용자로부터 이동 입력을 받아 이동 처리
+     */
     async move() {
         const direction = await InputView.readMoving();
         let result = this.GAME.move(direction);
         OutputView.printMap(result);
+        this.judge(result);
     }
+    /**
+     * 입력 결과에 따라 추가 진행인지 완료인지 재시작인지 판별
+     * @param {string[]} result
+     */
+    judge(result) {
+        if (result.at(-1).length === 2) this.retry();
+        else if (result.length === this.BRIDGE.length) this.end(0);
+        else this.move();
+    }
+    /**
+     * 실패 후 재시도에 대한 입력을 받아 처리
+     */
+    async retry() {
+        const answer = await InputView.readGameCommand();
+        let result = this.GAME.retry(answer);
+        if (result) this.move();
+        else this.end(1);
+    }
+    /**
+     * 게임 종료 후 결과 출력
+     */
+    end() {}
 }
 
 module.exports = App;

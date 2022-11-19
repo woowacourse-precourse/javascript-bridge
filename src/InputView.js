@@ -59,8 +59,28 @@ const InputView = {
     },
     /**
      * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+     * @returns {Promise}
      */
-    readGameCommand() {},
+    readGameCommand() {
+        return new Promise((resolve, reject) => {
+            MissionUtils.Console.readLine(
+                "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+                (input) => {
+                    resolve(this.checkGameCommand(input));
+                }
+            );
+        });
+    },
+    /**
+     * 재시도 입력에 대한 검사
+     * @param {string} input
+     * @returns {number}
+     */
+    checkGameCommand(input) {
+        if (input !== "R" && input !== "Q")
+            throw new Error("[ERROR] 입력은 R, Q로만 가능합니다.");
+        return input === "R" ? 0 : 1;
+    },
 };
 
 module.exports = InputView;
