@@ -3,11 +3,14 @@ const { BRIDGE_INPUT_MESSAGES } = require("../constants/messages");
 
 const InputView = {
   /**
-   * 사용자로부터 생성할 다리의 길이를 입력받는다.
+   * 사용자로부터 다리 길이를 입력받는다.
    * @param callbackFunction {callbackFunction}
+   * @param controller {object}
    */
-  readBridgeSize(callbackFunction) {
-    Console.readLine(BRIDGE_INPUT_MESSAGES.INPUT, callbackFunction);
+  readBridgeSize(callbackFunction, controller) {
+    Console.readLine(BRIDGE_INPUT_MESSAGES.INPUT, (bridgeLengthInput) =>
+      callbackFunction(bridgeLengthInput, controller)
+    );
   },
 
   /**
