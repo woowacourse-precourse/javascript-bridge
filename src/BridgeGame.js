@@ -13,23 +13,54 @@ class BridgeGame {
   #size;
   #bridge;
   #tryCount;
-  #resultArray;
+  #userInputArray;
+  #result;
 
   constructor() {
     this.#tryCount = 1;
+    this.#result = '';
+    this.top = '';
+    this.bottom = '';
+  }
+
+  buildResult() {
+    const len = this.#userInputArray.length;
+    const value = this.#userInputArray[len - 1];
+
+    if (value == 'U') {
+      this.top =
+        len == 1 ? this.buildTextResult(this.top, ' O ') : this.buildTextResult(this.top, '| O ');
+      this.bottom =
+        len == 1
+          ? this.buildTextResult(this.bottom, '   ')
+          : this.buildTextResult(this.bottom, '|   ');
+    } else {
+      this.top =
+        len == 1 ? this.buildTextResult(this.top, '   ') : this.buildTextResult(this.top, '|   ');
+      this.bottom =
+        len == 1
+          ? this.buildTextResult(this.bottom, ' O ')
+          : this.buildTextResult(this.bottom, '| O ');
+    }
+
+    return `[${this.top}]\n[${this.bottom}]\n`;
+  }
+
+  buildTextResult(totalText, text) {
+    return (totalText += text);
   }
 
   setGame(size) {
     this.#size = size;
     this.#bridge = BridgeMaker.makeBridge(this.#size, generate);
-    this.#resultArray = [];
+    this.#userInputArray = [];
     console.log(this.#bridge);
   }
 
   isMove(input) {
-    const currentIndex = this.#resultArray.length;
-    // console.log(currentIndex);
-    return this.#bridge[movingMap[input]][currentIndex] == input;
+    const currentIndex = this.#userInputArray.length;
+    console.log(currentIndex);
+    return this.#bridge[currentIndex] == input;
   }
 
   /**
@@ -39,9 +70,9 @@ class BridgeGame {
    */
   move(input) {
     if (this.isMove(input)) {
-      this.#resultArray.push(input);
-      console.log(this.#resultArray);
-      return !(this.#resultArray == this.#size);
+      this.#userInputArray.push(input);
+      console.log(this.#userInputArray.length == this.#size);
+      return !(this.#userInputArray.length == this.#size);
     }
 
     return false;
@@ -52,7 +83,10 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#tryCount += 1;
+    this.#userInputArray = [];
+  }
 }
 
 module.exports = BridgeGame;
