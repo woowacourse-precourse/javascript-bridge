@@ -2,10 +2,21 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 const OutputView = require("./OutputView");
+const InputView = require("./InputView");
+
 class BridgeGame {
+  constructor() {
+    this.size = 0;
+  }
+
   play() {
     OutputView.startSentence();
     OutputView.lengthBridgeSentence();
+    this.bridgeSize();
+  }
+
+  bridgeSize() {
+    this.size = InputView.readBridgeSize();
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
