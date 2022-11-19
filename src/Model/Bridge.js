@@ -1,7 +1,7 @@
 const STRING = require('../../constants/string');
 
 class Bridge {
-  static initBridge(size) {
+  static init(size) {
     const bridges = {};
 
     STRING.DIRECTIONS.forEach((direction) => {

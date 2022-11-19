@@ -32,6 +32,13 @@ class GameController {
     this.#bridgeGame.move(direction);
     this.showBridge();
   }
+
+  showBridge() {
+    const bridgeMap = this.#bridgeGame.showBridgeResult();
+
+    OutputView.printMap(bridgeMap);
+    this.checkCanRead();
+  }
 }
 
 const gc = new GameController();
