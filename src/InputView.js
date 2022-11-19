@@ -6,8 +6,10 @@ const {
   SHORT_CUT,
   ERROR_PLAYING_MESSAGE,
   ERROR_RETRY_MESSAGE,
+  GAME_BOOLEAN,
 } = require('./constants');
 const { printMap, printResult } = require('./OutputView');
+const { readLine } = require('./Utils');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -16,7 +18,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(bridgeGame) {
-    Console.readLine(GAME_MESSAGE.inputLength, (userInput) => {
+    readLine(GAME_MESSAGE.inputLength, (userInput) => {
       try {
         this.bridgeSize(userInput, bridgeGame);
       } catch (error) {
@@ -59,7 +61,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgeGame) {
-    Console.readLine(GAME_MESSAGE.move, (userInput) => {
+    readLine(GAME_MESSAGE.move, (userInput) => {
       try {
         this.getMoving(userInput, bridgeGame);
       } catch (error) {
@@ -78,22 +80,18 @@ const InputView = {
   },
 
   getMoveNext(bridgeGame) {
-    const isFinish = this.getGameFinish(bridgeGame);
+    const isFinish = bridgeGame.isFinish();
     if (isFinish) {
-      Console.close();
+      this.getGameFinish(bridgeGame);
       return;
     }
     this.getGameNext(bridgeGame);
   },
   getGameFinish(bridgeGame) {
-    const isFinish = bridgeGame.isFinish();
-    if (isFinish) {
-      const bridgeResult = bridgeGame.getMap();
-      const numberAttempts = bridgeGame.getAttempts();
-      printResult(bridgeResult, true, numberAttempts);
-      return true;
-    }
-    return false;
+    const bridgeResult = bridgeGame.getMap();
+    const numberAttempts = bridgeGame.getAttempts();
+    printResult(bridgeResult, GAME_BOOLEAN.success, numberAttempts);
+    Console.close();
   },
   getGameNext(bridgeGame) {
     const isAnswer = bridgeGame.isAnswer();
@@ -124,7 +122,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridgeGame) {
-    Console.readLine(GAME_MESSAGE.retry, (userInput) => {
+    readLine(GAME_MESSAGE.retry, (userInput) => {
       try {
         this.getRetry(userInput, bridgeGame);
       } catch (error) {
@@ -140,17 +138,17 @@ const InputView = {
       this.showReStart(bridgeGame);
     }
     if (userInput === SHORT_CUT.quit) {
-      this.showQuit();
+      this.showQuit(bridgeGame);
     }
   },
   showReStart(bridgeGame) {
-    bridgeGame.setAttempts();
+    bridgeGame.retry();
     this.readMoving(bridgeGame);
   },
   showQuit(bridgeGame) {
     const bridgeResult = bridgeGame.getMap();
     const numberAttempts = bridgeGame.getAttempts();
-    printResult(bridgeResult, false, numberAttempts);
+    printResult(bridgeResult, GAME_BOOLEAN.fail, numberAttempts);
     Console.close();
   },
   retryValidation(userInput) {

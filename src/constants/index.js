@@ -10,10 +10,16 @@ const NUMBER = Object.freeze({
   one: 1,
 });
 
+const GAME_BOOLEAN = Object({
+  success: true,
+  fail: false,
+});
+
 const GAME_STRING = Object({
   success: 'O',
   normal: ' ',
   fail: 'X',
+  empty: '',
 });
 
 const SHORT_CUT = Object.freeze({
@@ -66,6 +72,7 @@ const GAME_RESULT = Object.freeze({
 module.exports = {
   GAME_STRING,
   ERROR_BRIDGE_MESSAGE,
+  GAME_BOOLEAN,
   ERROR_PLAYING_MESSAGE,
   ERROR_RETRY_MESSAGE,
   BRIDGE_RANGE,
