@@ -98,4 +98,26 @@ describe("다리 건너기 테스트", () => {
     const gameMap = bridgeGame.combineTracks("D", true);
     expect(gameMap).toEqual(["[ O ]", "[   ]"]);
   });
+
+  test("전체 이동 후 출력 테스트", () => {
+    const bridge = ["U", "D", "U", "D", "U"];
+    const messages = [
+      "[ O ]",
+      "[   ]",
+      "[ O |   ]",
+      "[   | O ]",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "[ O |   | O |   ]",
+      "[   | O |   | O ]",
+      "[ O |   | O |   |   ]",
+      "[   | O |   | O | X ]",
+    ]
+    mockQuestions(["U", "D", "U", "D", "D"]);
+    const logSpy = getLogSpy();
+    Intercessor.matchMove(bridge);
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  })
 });
