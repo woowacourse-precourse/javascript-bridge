@@ -1,8 +1,8 @@
-const MainBridgeController = require("./controller/MainBridgeController");
+const MainController = require("./controller/MainController");
 
 class App {
   play() {
-    new MainBridgeController().init();
+    new MainController().init();
   }
 }
 

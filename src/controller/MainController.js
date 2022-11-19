@@ -2,7 +2,7 @@ const BridgeController = require("./BridgeController");
 const BridgeGameController = require("./BridgeGameController");
 const UserController = require("./UserController");
 
-class MainBridgeController {
+class MainController {
   constructor() {
     this.bridgeController = new BridgeController(this);
     this.bridgeGameController = new BridgeGameController(this);
@@ -12,4 +12,4 @@ class MainBridgeController {
   init() {}
 }
 
-module.exports = MainBridgeController;
+module.exports = MainController;
