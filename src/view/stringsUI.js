@@ -23,8 +23,18 @@ const BRIDGE = {
 const MOVING = {
   U: 1,
   D: 0,
+  [true]: "PASS",
+  [false]: "FAIL",
+};
+const MAP = {
+  UPPER: "U",
+  LOWER: "L",
+  WRAPPER_LEFT: "[",
+  WRAPPER_RIGHT: "]",
+  DIVIDER: "|",
   PASS: "O",
   FAIL: "X",
+  NONE: " ",
 };
 
 module.exports = {
@@ -32,4 +42,5 @@ module.exports = {
   OUTPUT,
   BRIDGE,
   MOVING,
+  MAP,
 };

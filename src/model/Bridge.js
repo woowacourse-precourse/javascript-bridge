@@ -12,7 +12,7 @@ class Bridge {
 
   crossBridge({ bridgeIndex, selectedMove }) {
     const isMove = this.createdBridge[bridgeIndex] === MOVING[selectedMove];
-    return isMove;
+    return MOVING[isMove];
   }
 }
 module.exports = Bridge;
