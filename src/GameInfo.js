@@ -5,6 +5,8 @@ const GameInfo = {
 
   gameStat: null,
 
+  bridgeSize: 0,
+
   bridge: null,
 
   indexingArray: ["U", "D"],
