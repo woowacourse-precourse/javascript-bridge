@@ -1,21 +1,24 @@
+const { Console } = require('@woowacourse/mission-utils');
+
+
 class BridgeGame {
   constructor() {
-    
+
   }
   
   move() {
 
   }
 
-  retry(value) {
-    // if (value === "R") return this.game();
-    // if (value === "D") {
-    //   OutputView.printResult();
-    //   // 진행된 맵 호출
-    //   OutputView.printFail();
-    //   OutputView.printAttemptCount(this.#round);
-    //   Console.close();
-    // }
+  retry(retryOrNot, result) {
+    if (retryOrNot === "R") return this.game();
+    if (retryOrNot === "D") {
+      OutputView.printResult();
+      Console.print(result);
+      OutputView.printFail();
+      // OutputView.printAttemptCount(this.#round);
+      Console.close();
+    }
   }
 
   

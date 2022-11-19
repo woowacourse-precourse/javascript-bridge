@@ -6,13 +6,17 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator  = require('./BridgeRandomNumberGenerator');
 const Validation = require('./Validation');
 const BridgeGame = require('./BridgeGame');
+const PlayersMap = require('./PlayersMap');
 
 class BridgeGameProceed {
-#bridge
-// #round
+#winBridge
+
+#playersBridge
 
     constructor() {
         this.BridgeGame = new BridgeGame();
+        this.PlayersMap = new PlayersMap();
+        this.#playersBridge = [];
     }
 
     start() {
@@ -20,40 +24,44 @@ class BridgeGameProceed {
         InputView.readBridgeSize((bridgeLength) => {
             Console.print('');
             Validation.bridgeLength(bridgeLength);
-            this.#bridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
-            console.log(this.#bridge);
+            this.#winBridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
+            console.log(this.#winBridge);
             this.game();
         });
     }
 
     game() {
         InputView.readMoving((nextStep) => {
-            // Validation.nextStepValue(nextStep);
-            // OutputView.printMap(nextStep ,this.#buildBridge[round]);
-            // #buildBridge 해당 다리 상태 저장
-            // 실패했을 경우
-                // fail() 호출
-            // 성공했을 경우
-                // 끝까지 도달한 경우
-                    // win() 호출
-                // 다리가 남은 경우
-                    // game() 호출
+            this.#playersBridge.push(nextStep);
+            Console.print(this.#playersBridge)
+
+            const result = this.PlayersMap.show(this.#playersBridge, this.#winBridge)
+            Console.print(result);
+            if (result.includes('X')) {
+                this.fail(result);
+            }
+            
+            if (this.#playersBridge.length === this.#winBridge.length) {
+                this.win(result);
+            }
+
+            this.game();
         });
     }
 
-    // fail() {
-    //     InputView.readGameCommand((retryOrNot) => {
-    //         this.BridgeGame.retry(retryOrNot);
-    //     })     
-    // }
+    fail(result) {
+        InputView.readGameCommand((retryOrNot) => {
+            this.BridgeGame.retry(retryOrNot, result);
+        })     
+    }
 
-    // win() {
-    //     OutputView.printResult()
-    //     // OutputView.printMap()
-    //     OutputView.printWin()
-    //     OutputView.printAttemptCount(this.#round)
-    //     Console.close();
-    // }
+    win(result) {
+        OutputView.printResult()
+        OutputView.printMap()
+        OutputView.printWin()
+        // OutputView.printAttemptCount(this.#round)
+        Console.close();
+    }
 }
 
 let a = new BridgeGameProceed();

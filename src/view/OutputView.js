@@ -23,9 +23,9 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.GAME_FAIL);
   },
 
-  printAttemptCount(countAttempt) {
-    Console.print(OUTPUT_MESSAGE.GAME_ATTEMPT`${countAttempt}`);
-  },
+  // printAttemptCount(countAttempt) {
+  //   Console.print(OUTPUT_MESSAGE.GAME_ATTEMPT`${countAttempt}`);
+  // },
 };
 
 module.exports = OutputView;
