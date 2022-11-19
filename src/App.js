@@ -20,18 +20,20 @@ class App {
       const isSuccess = this.bridgeGame.move(inputMove);
       const isGameOver = this.bridgeGame.getGameOver();
       const bridgeMap = this.bridgeGame.getBridgeMap();
-      if (!isSuccess) {
-        OutputView.printMap(bridgeMap);
-        this.userInputEnd();
-        return;
-      } else if (isSuccess && isGameOver) {
-        OutputView.printMap(bridgeMap);
-        OutputView.printResult(this.bridgeGame.end(), bridgeMap);
-        return;
-      }
-      OutputView.printMap(bridgeMap);
-      this.userInputMove();
+      this.toDoNext(isSuccess, isGameOver, bridgeMap);
     });
+  }
+
+  toDoNext(isSuccess, isGameOver, bridgeMap) {
+    OutputView.printMap(bridgeMap);
+    if (!isSuccess) {
+      this.userInputEnd();
+      return;
+    } else if (isSuccess && isGameOver) {
+      OutputView.printResult(this.bridgeGame.end(), bridgeMap);
+      return;
+    }
+    this.userInputMove();
   }
 
   userInputEnd() {
