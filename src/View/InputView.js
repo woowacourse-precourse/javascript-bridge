@@ -8,7 +8,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    MissionUtils.Console.readLine(MESSAGE.INPUT_LENGTH, callback);
+    MissionUtils.Console.readLine(MESSAGE.INPUT_BRIDGE_LENGTH, callback);
   },
 
   /**
