@@ -2,12 +2,13 @@ const { BRIDGE_GAME } = require('../constants/bridgeGameInfo');
 const { o, x } = BRIDGE_GAME;
 
 const REPEAT_COUNT = 3;
+const REMOVE_COUNT = 2;
 
 class GameMap {
   #CorretBridge; // 정답 맵
   #upperBridge = [];
   #lowerBridge = [];
-  #fail = false;
+  #gameOver = false;
 
   setCorretBridge(gameMap) {
     this.#CorretBridge = gameMap;
@@ -18,19 +19,23 @@ class GameMap {
   }
 
   isGameOver() {
-    return this.#fail;
+    return this.#gameOver;
   }
 
   setRetryGame() {
-    this.#fail = false;
+    this.#gameOver = false;
   }
 
   getCorretGameMap() {
     return this.#CorretBridge;
   }
 
-  removePattern() {
+  setPrevBridge() {
     // 사용자가 리트라이 했을 때 이전 값 지워야함. 유저 위치도 이동시켰다면 1 감소해야함
+    for (let i = 0; i < REMOVE_COUNT; i++) {
+      this.#lowerBridge.pop();
+      this.#upperBridge.pop();
+    }
   }
 
   drawBridge(moveCommand, userLocation) {
@@ -64,7 +69,7 @@ class GameMap {
     if (isPossibleNext) {
       return o;
     }
-    this.#fail = true; // 나중에 user 클래스로 옮겨야 될 것 같은..?
+    this.#gameOver = true; // 나중에 user 클래스로 옮겨야 될 것 같은..?
     return x;
   }
 
