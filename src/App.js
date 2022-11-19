@@ -52,8 +52,8 @@ class App {
   finishGame(status) {
     const resultString = this.bridgeGame.resultString;
     const gameStatus = Utilities.isSuccess(status);
-    const totalGame = this.bridgeGame.totalGame;
-    OutputView.printResult(resultString, gameStatus, totalGame);
+    const totalGameString = this.bridgeGame.totalGameString;
+    OutputView.printResult(resultString, gameStatus, totalGameString);
   }
 }
 

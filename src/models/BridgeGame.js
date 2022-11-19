@@ -17,8 +17,8 @@ class BridgeGame {
     return convertedResult;
   }
 
-  get totalGame() {
-    return this.#totalGame;
+  get totalGameString() {
+    return `총 시도한 횟수: ${this.#totalGame}`;
   }
 
   /**
