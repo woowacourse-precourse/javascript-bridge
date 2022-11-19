@@ -15,7 +15,7 @@
 
 - [x] 다리길이가 3에서 20사이인지 확인한다. - InputView#checkBridgeLength()
 - [x] 이동할 칸 입력이 U 또는 D인지 확인한다. - InputView#checkMoveInput()
-- [ ] 개임 재시작 혹은 종료 여부 입력이 R 또는 Q인지 확인한다. - InputView#checkRestartInput()
+- [x] 개임 재시작 혹은 종료 여부 입력이 R 또는 Q인지 확인한다. - InputView#checkRestartInput()
 
 ## UI 로직
 - [x] 게임 시작 문구를 출력한다. - OutputView#printStart()

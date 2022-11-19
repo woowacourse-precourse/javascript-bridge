@@ -1,7 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./OutputView');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -37,6 +36,7 @@ const InputView = {
    */
   readGameCommand(bridgeGame) {
     Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (retryAnswer) => {
+      if (this.checkRestartInput(retryAnswer)) return this.readGameCommand(bridgeGame);
       if (retryAnswer === 'R') {
         bridgeGame.retry();
         return this.readMoving(bridgeGame);
@@ -53,7 +53,7 @@ const InputView = {
       return this.readBridgeSize();
     }
   },
-  checkMoveInput (moveAnswer) {
+  checkMoveInput(moveAnswer) {
     try {
       if (!(moveAnswer === 'U' || moveAnswer === 'D')) 
         throw new Error("[ERROR] U와 D중 하나의 문자를 입력해주세요.");
@@ -61,7 +61,16 @@ const InputView = {
       Console.print(err);
       return true;
     }
-  }
+  },
+  checkRestartInput(retryAnswer) {
+    try {
+      if (!(retryAnswer === 'R' || retryAnswer === 'Q')) 
+        throw new Error("[ERROR] R과 Q중 하나의 문자를 입력해주세요.");
+    } catch (err) {
+      Console.print(err);
+      return true;
+    }
+  },
 };
 
 module.exports = InputView;
