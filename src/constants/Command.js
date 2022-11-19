@@ -1,7 +1,11 @@
-const MOVE_UP = 'U';
-const MOVE_DOWN = 'D';
+const MOVE = {
+  UP: 'U',
+  DOWN: 'D',
+  CORRECT: 'O',
+  INCORRECT: 'X',
+};
 
 const GAME_RETRY = 'R';
 const GAME_QUIT = 'Q';
 
-module.exports = { MOVE_UP, MOVE_DOWN, GAME_RETRY, GAME_QUIT };
+module.exports = { MOVE, GAME_RETRY, GAME_QUIT };

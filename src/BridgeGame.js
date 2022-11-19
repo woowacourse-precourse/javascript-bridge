@@ -1,6 +1,6 @@
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const { MOVE_UP, NO_VISITED, MOVE_DOWN } = require('./constants/Command');
+const { MOVE } = require('./constants/Command');
 
 class BridgeGame {
   #bridge;
@@ -41,11 +41,11 @@ class BridgeGame {
   getResultStringArray() {
     const proceeded = this.#bridge.slice(0, this.#position);
     const result = proceeded.map((space) =>
-      space === MOVE_UP ? MOVE_UP : MOVE_DOWN
+      space === MOVE.UP ? MOVE.UP : MOVE.DOWN
     );
     if (this.isFailed()) {
       result[this.#position] =
-        this.#bridge[this.#position] === MOVE_UP ? MOVE_DOWN : MOVE_UP;
+        this.#bridge[this.#position] === MOVE.UP ? MOVE.DOWN : MOVE.UP;
     }
 
     return result;

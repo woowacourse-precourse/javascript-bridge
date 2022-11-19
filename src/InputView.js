@@ -3,7 +3,7 @@ const BridgeGame = require('./BridgeGame');
 const { isNumberInRange } = require('./lib/Utils');
 const { ERROR, REQUEST } = require('./constants/Message');
 const RANGE = require('./constants/Range');
-const COMMAND = require('./constants/Command');
+const { MOVE, GAME_RETRY, GAME_QUIT } = require('./constants/Command');
 
 const InputView = {
   readBridgeSize() {
@@ -30,7 +30,7 @@ const InputView = {
   readGameCommand(game) {
     Console.readLine(REQUEST.GAME_RETRY, (input) => {
       InputView.validateGameCommand(input);
-      if (input === COMMAND.GAME_RETRY) {
+      if (input === GAME_RETRY) {
         game.retry();
         InputView.readMoving(game);
       }
@@ -44,11 +44,11 @@ const InputView = {
   },
 
   validateMoving(input) {
-    return input === COMMAND.MOVE_UP || input === COMMAND.MOVE_DOWN;
+    return input === MOVE.UP || input === MOVE.DOWN;
   },
 
   validateGameCommand(input) {
-    return input === COMMAND.GAME_RETRY || input === COMMAND.GAME_QUIT;
+    return input === GAME_RETRY || input === GAME_QUIT;
   },
 };
 
