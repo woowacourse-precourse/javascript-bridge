@@ -8,12 +8,35 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
  */
 class BridgeGame {
   #bridge;
+  #playerAt = 0;
+  #trialCount = 1;
+  #moveResult;
+  #bridgeUpper = [];
+  #bridgeLower = [];
+  #gameWin;
+  #gameStatus;
 
   constructor(size) {
     this.#bridge = BridgeMaker.makeBridge(
       size,
       BridgeRandomNumberGenerator.generate
     );
+  }
+
+  getTrialCount() {
+    return this.#trialCount;
+  }
+
+  getGameWin() {
+    return this.#gameWin;
+  }
+
+  getBridgeUpper() {
+    return this.#bridgeUpper;
+  }
+
+  getBridgeLower() {
+    return this.#bridgeLower;
   }
 
   /**
