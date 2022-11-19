@@ -2,7 +2,7 @@
  * 다리 건너기 게임을 관리하는 클래스
  * InputView, OutputView 사용 X
  */
-const { ERROR, BUTTON } = require("./Utils/constant");
+const { BUTTON } = require('./Utils/constant');
 class BridgeGame {
   constructor(bridge, size, move) {
     this.bridge = bridge;
@@ -19,17 +19,14 @@ class BridgeGame {
 
   moveIsU(move) {
     this.move = move;
-    if (![BUTTON.UP, BUTTON.DOWN].includes(this.move)) {
-      throw new Error(ERROR.MOVE);
-    }
     if (this.move === BUTTON.UP) {
       if (this.bridge[this.index] === this.move) {
-        this.realBridge[0].push("O");
-        this.realBridge[1].push(" ");
+        this.realBridge[0].push('O');
+        this.realBridge[1].push(' ');
       }
       if (this.bridge[this.index] !== this.move) {
-        this.realBridge[0].push("X");
-        this.realBridge[1].push(" ");
+        this.realBridge[0].push('X');
+        this.realBridge[1].push(' ');
       }
       this.getRealBridge();
     }
@@ -41,12 +38,12 @@ class BridgeGame {
   moveIsD(move) {
     this.move = move;
     if (this.bridge[this.index] === this.move) {
-      this.realBridge[1].push("O");
-      this.realBridge[0].push(" ");
+      this.realBridge[1].push('O');
+      this.realBridge[0].push(' ');
     }
     if (this.bridge[this.index] !== this.move) {
-      this.realBridge[1].push("X");
-      this.realBridge[0].push(" ");
+      this.realBridge[1].push('X');
+      this.realBridge[0].push(' ');
     }
     this.getRealBridge();
   }
