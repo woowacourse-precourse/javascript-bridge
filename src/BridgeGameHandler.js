@@ -11,6 +11,16 @@ class BridgeGameHandler {
     OutputView.printStartGame();
     readBridgeSize(() => this.setBridge());
   }
+
+  setBridge(size) {
+    try {
+      bridgeSizeValidator.isBridgeSizeValid(size);
+      this.#bridge = makeBridge(size, generate());
+    } catch (errorMessage) {
+      OutputView.printError(errorMessage);
+      readBridgeSize(readBridgeSize(() => this.setBridge));
+    }
+  }
 }
 
 module.exports = BridgeGameHandler;
