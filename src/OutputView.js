@@ -19,13 +19,13 @@ const OutputView = {
     Console.print(OUTPUT.SEND_GAME_START);
   },
 
-  paintToStadard(arr) {
+  convertToStandard(arr) {
     return arr.join(` | `).split(`,`);
   },
 
   printMap(bridgeGameResult) {
-    Console.print(`[ ${this.paintToStadard(bridgeGameResult[0])} ]`);
-    Console.print(`[ ${this.paintToStadard(bridgeGameResult[1])} ]\n`);
+    Console.print(`[ ${this.convertToStandard(bridgeGameResult[0])} ]`);
+    Console.print(`[ ${this.convertToStandard(bridgeGameResult[1])} ]\n`);
   },
 
   /**
