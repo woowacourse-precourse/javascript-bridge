@@ -5,10 +5,10 @@ const BridgeGame = require('./BridgeGame');
 class App {
   constructor() {
     this.bridgeGame = new BridgeGame();
-    OutputView.printStart();
   }
 
   play() {
+    OutputView.printStart();
     InputView.readBridgeSize(this.bridgeGame);
   }
 }

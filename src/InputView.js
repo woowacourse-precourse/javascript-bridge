@@ -1,7 +1,7 @@
 const OutputView = require('./OutputView');
 const Validate = require('./Validate');
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE, ERROR, KEY } = require('./Constants');
+const { MESSAGE } = require('./Constants');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -28,12 +28,12 @@ const InputView = {
   readMoving(bridgeGame) {
     Console.readLine(MESSAGE.MOVING_KEY, (key) => {
       if (Validate.checkMovingKey(key)) {
-        const USER_BRIDGE = bridgeGame.move(key);
-        OutputView.printMap(USER_BRIDGE);
+        bridgeGame.move(key);
+        OutputView.printMap(bridgeGame.getUserBridge());
       } else {
         this.readMoving(bridgeGame);
       }
-      if (Validate.checkUserInput(bridgeGame)) {
+      if (bridgeGame.isSuccess()) {
         return OutputView.printResult(bridgeGame, '성공');
       }
       if (bridgeGame.getMoveResult(key) === 'O') {
@@ -52,8 +52,7 @@ const InputView = {
       if (!Validate.checkCommandKey(key)) {
         return this.readGameCommand(bridgeGame);
       }
-      if (Validate.isRetry(key)) {
-        bridgeGame.retry();
+      if (bridgeGame.isRetry(key)) {
         this.readMoving(bridgeGame);
       } else {
         OutputView.printResult(bridgeGame, '실패');
