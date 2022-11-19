@@ -23,6 +23,11 @@ const ERROR_MESSAGE = Object.freeze({
   notRorQ: `${ERROR} R(재시도)와 Q(종료) 이외는 입력할 수 없습니다.`,
 });
 
+const NUMBER_RANGE = Object.freeze({
+  min: 3,
+  max: 20,
+});
+
 const LETTER = Object.freeze({
   up: "U",
   down: "D",
@@ -32,9 +37,17 @@ const LETTER = Object.freeze({
   wrong: "X",
 });
 
-const NUMBER_MAP = Object.freeze({
+const BRIDGE_MAP = Object.freeze({
   0: "D",
   1: "U",
 });
 
-module.exports = { MESSAGE, ERROR_MESSAGE, INPUT_MESSAGE, LETTER, NUMBER_MAP };
+module.exports = {
+  MESSAGE,
+  ERROR_MESSAGE,
+  INPUT_MESSAGE,
+  LETTER,
+  BRIDGE_MAP,
+  NUMBER_RANGE,
+  NEW_LINE,
+};

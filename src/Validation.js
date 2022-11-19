@@ -1,8 +1,12 @@
-const { LETTER, ERROR_MESSAGE } = require("./constant");
+const { LETTER, ERROR_MESSAGE, NUMBER_RANGE } = require("./constant");
 
 const Validation = {
   checkBridgeNumber(number) {
-    if (number < 3 || number > 20 || !Number.isInteger(number)) {
+    if (
+      number < NUMBER_RANGE.min ||
+      number > NUMBER_RANGE.max ||
+      !Number.isInteger(number)
+    ) {
       throw ERROR_MESSAGE.notInRange;
     }
   },
