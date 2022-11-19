@@ -7,7 +7,6 @@ const ErrorMsg = Object.freeze({
 });
 
 const GameState = Object.freeze({
-  IDLE: 0,
   PLAYING: 1,
   GAME_OVER: 2,
   VICTORY: 3,

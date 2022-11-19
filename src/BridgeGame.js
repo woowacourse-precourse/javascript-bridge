@@ -24,17 +24,14 @@ class BridgeGame {
   }
 
   getGameState() {
-    if (this.#movingLog.length < 1) {
-      return GameState.IDLE;
+    if (this.#movingLog[this.#movingLog.length - 1] !== this.#bridge[this.#movingLog.length - 1]) {
+      return GameState.GAME_OVER;
     }
     if (this.#movingLog.length < this.#bridge.length) {
       return GameState.PLAYING;
     }
-    if (this.#bridge[this.#bridge.length - 1] === this.#movingLog[this.#movingLog.length - 1]) {
-      return GameState.VICTORY;
-    }
 
-    return GameState.GAME_OVER;
+    return GameState.VICTORY;
   }
 
   getMovingLog() {
