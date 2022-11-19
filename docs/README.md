@@ -49,7 +49,112 @@
 
 - [x] 💥 사용자가 잘못된 값을 입력한 경우 throw문을 사용해 예외를 발생시킵니다.
   - [x] 🖨 "[ERROR]"로 시작하는 에러 메시지를 출력합니다.
+  - [x] 에러 메세지 출력 후 에러 발생 부분부터 다시 입력을 받습니다.
 
+# 클래스 및 객체 기능 목록
+
+- InputView 객체
+  - 사용자의 값 입력 받는 기능을 수행합니다.
+  - App 클래스의 play 메서드로 실행됩니다.
+  
+  - readBridgeSize
+    - 다리 길이를 입력받습니다.
+    - ValidateBridgeSize 클래스를 통해 입력값의 유효성을 판단하고, 에러를 발생합니다.
+      - 만약 에러가 발생되었다면, 에러 문구를 출력하고 readBridgeSize 메서드를 호출합니다.
+    - BridgeMaker를 통해 다리를 생성합니다.
+
+  - playGame
+    - 게임에 필요한 정보들을 초기화해주는 BridgeGame.initializeGameInfo를 호출하는 메서드입니다.
+
+  - readMoving
+    - 이동할 칸을 입력받습니다.
+    - ValidateMoving 클래스를 통해 입력값의 유효성을 판단하고, 에러를 발생합니다.
+      - 만약 에러가 발생되었다면, 에러 문구를 출력하고 readMoving 메서드를 호출합니다.
+  
+  - moveBridge
+    - 다리를 이동하기 위해 BridgeGame 클래스의 move메서드를 호출합니다.
+    - 현재 진행 상황을 출력하기 위해 OutputView 객체의 printMap을 호출합니다.
+    - 만약, 다리를 건너는 데 실패했다면, readGameCommand 메서드를 호출합니다.
+    - 다리를 건너는 데 실패하지는 않았지만, 아직 게임 도중이라면, readMoving 메서드를 호출합니다.
+    - 다리를 건너는 데 성공했다면, OutputView 메서드의 printSuccess 메서드를 호출합니다.
+
+  - readGameCommand
+    - 재시작 여부를 입력받습니다.
+    - ValidateGameCommand 클래스를 통해 입력값의 유효성을 판단하고, 에러를 발생합니다.
+      - 만약 에러가 발생되었다면, 에러 문구를 출력하고 readGameCommand 메서드를 호출합니다.
+    - BridgeGame 클래스의 retry 메서드 반환값에 따라 playGame을 호출하거나 OutputView 객체의 printResult 메서드를 호출합니다.
+
+- OutputView 객체
+  - printMessage
+    - 인자로 받은 메세지를 출력합니다.
+
+  - printMap
+    - 현재 진행중인 게임의 다리 상황을 출력합니다.
+
+  - printSuccess
+    - "성공"을 출력하기 위해 GameInfo객체의 gameResult 프로퍼티 값을 "성공"으로 변경합니다.
+    - printResult 메서드를 호출합니다.
+
+  - printResult
+    - 최종 게임 결과를 출력합니다.
+
+- BridgeGame 클래스
+  - move
+    - 위치를 1 증가시킵니다.
+    - 현재 입력받은 이동할 칸을 gameStat에 담아줍니다.
+    - moveBridge를 호출합니다.
+
+  - moveBridge
+    - isValidMove 메서드의 반환값에 따라 pushMoveBridge 메서드의 입력값을 다르게 호출합니다.
+    
+  - pushMoveBridge
+    - moveBridge는 두 개의 1차원 배열을 가지는 2차원 배열입니다. 이 배열의 인덱스에 알맞게 값을 넣어줍니다.
+    - 인덱스가 [0, 1]로 구성되어 있어, indexOf 메서드를 통해 1이 나온다면, (1 + 1) % 2 ==> 0을 해주어 인덱스를 맞춰줍니다
+
+  - initializeGameInfo
+    - GameInfo 객체의 값들을 게임의 시작 상태로 초기화합니다.
+    - 단, numberOfPlayGames 프로퍼티는 1 증가시켜줍니다.
+
+  - isFailure
+    - 만약 현재 상태에서 "X"가 존재한다면, true를 반환합니다.
+
+- Validate (BridgeSize, GameCommand, Moving) 클래스
+  - 입력값이 유효한지 판단하고, 유효하지 않다면 에러를 발생합니다.
+
+- GameInfo 객체
+  - 다리 건너기 게임에 대한 정보들을 포함합니다.
+
+  - gameStat
+    - 현재까지 이동한 칸의 값의 배열을 가집니다.
+
+  - bridgeSize
+    - 입력받은 다리 길이의 값을 가집니다.
+  
+  - bridge
+    - BridgeMaker 클래스로 생성된 다리 배열을 가집니다.
+
+  - indexingArray
+    - "U", "D"가 입력값으로 들어올 때, 인덱스를 찾아주기 위해 저장해놓은 값입니다.
+
+  - moveBridge
+    - 위 칸과 아래 칸을 저장할 2차원 배열을 가집니다.
+
+  - position
+    - 현재 위치의 인덱스를 가집니다. 초기값은 -1입니다.
+
+  - currentMove
+    - 현재 입력받은 이동할 칸을 값으로 가집니다.
+
+  - gameCommand
+    - 재시작 여부를 입력받은 값을 가집니다.
+
+  - numberOfPlayGames
+    - 현재 총 시도한 판 수를 값으로 가집니다.
+
+  - gameResult
+    - 현재 게임 성공 여부를 값으로 가집니다.
+    - 초기 값은 "실패"이며, 게임 클리어 시 "성공" 값을 가지게 됩니다.
+    
 # 과정
 
 ## 과정 설계
