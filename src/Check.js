@@ -3,9 +3,9 @@ const { SIZE, MOVING, COMMAND } = require("./constants/values");
 const { ERROR } = require("./constants/messages");
 
 const Check = {
-  checkBridgeSize(size) {
-    const number = this.checkNumber(size);
-    const range = this.checkRange(size);
+  hasCorrectSize(size) {
+    const number = this.hasNumber(size);
+    const range = this.hasInRange(size);
 
     if (number || range) {
       return true;
@@ -13,7 +13,7 @@ const Check = {
     return false;
   },
 
-  checkNumber(size) {
+  hasNumber(size) {
     try {
       if (isNaN(size)) {
         throw new Error(ERROR.NUMBER);
@@ -24,7 +24,7 @@ const Check = {
     }
   },
 
-  checkRange(size) {
+  hasInRange(size) {
     try {
       if (size < SIZE.MINIMUM || size > SIZE.MAXIMUM) {
         throw new Error(ERROR.RANGE);
@@ -35,7 +35,7 @@ const Check = {
     }
   },
 
-  checkMoving(moving) {
+  hasMoving(moving) {
     try {
       if (moving !== MOVING.UPPER && moving !== MOVING.LOWER) {
         throw new Error(ERROR.MOVING);
@@ -48,7 +48,7 @@ const Check = {
     return false;
   },
 
-  checkCommand(command) {
+  hasCommand(command) {
     try {
       if (command !== COMMAND.RESTART && command !== COMMAND.END) {
         throw new Error(ERROR.COMMAND);

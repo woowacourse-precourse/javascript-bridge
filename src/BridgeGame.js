@@ -83,7 +83,7 @@ class BridgeGame {
   /**
    * 다리를 잘못 건넜을 때 사용하는 메서드
    */
-  getWrong() {
+  hasWrong() {
     const result = this.#movingList.flat().includes(MOVING.WRONG_ANSWER);
     return result;
   }
@@ -91,7 +91,7 @@ class BridgeGame {
   /**
    * 다리를 모두 건넜을 때 사용하는 메서드
    */
-  getAll() {
+  hasAll() {
     const result = this.#movingList[0].length === this.#bridge.length;
     return result;
   }

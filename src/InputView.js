@@ -11,7 +11,7 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     Console.readLine(`${INPUT.SIZE}${OUTPUT.LINE}`, (size) => {
-      const error = Check.checkBridgeSize(size);
+      const error = Check.hasCorrectSize(size);
       if (error) return this.readBridgeSize(bridgeGame);
 
       bridgeGame.ready(size);
@@ -26,12 +26,12 @@ const InputView = {
     Console.readLine(
       `${OUTPUT.LINE}${INPUT.MOVING}${OUTPUT.LINE}`,
       (moving) => {
-        const error = Check.checkMoving(moving);
+        const error = Check.hasMoving(moving);
         if (error) return this.readMoving(bridgeGame);
 
         bridgeGame.move(moving);
-        if (bridgeGame.getWrong()) return this.readGameCommand(bridgeGame);
-        if (bridgeGame.getAll()) return bridgeGame.finish(RESULT.SUCCESS);
+        if (bridgeGame.hasWrong()) return this.readGameCommand(bridgeGame);
+        if (bridgeGame.hasAll()) return bridgeGame.finish(RESULT.SUCCESS);
         return this.readMoving(bridgeGame);
       }
     );
@@ -42,7 +42,7 @@ const InputView = {
    */
   readGameCommand(bridgeGame) {
     Console.readLine(`${INPUT.COMMAND}${OUTPUT.LINE}`, (command) => {
-      const error = Check.checkCommand(command);
+      const error = Check.hasCommand(command);
       if (error) return this.readGameCommand(bridgeGame);
 
       if (command === COMMAND.END) return bridgeGame.finish(RESULT.FAIL);
