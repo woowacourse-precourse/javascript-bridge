@@ -1,6 +1,7 @@
-const BridgeGame = require("./BridgeGame");
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
+const BridgeGame = require('./BridgeGame');
+const InputVaildation = require('./InputValidation');
+const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 
 class App {
   constructor() {
@@ -9,18 +10,32 @@ class App {
 
   play() {
     OutputView.printGameStartMsg();
+    this.requestBridgeLength();
+  }
+
+  requestBridgeLength() {
     InputView.readBridgeSize(this.startBridgeGame.bind(this));
   }
 
   startBridgeGame(userInputOfBridegeLength) {
-    this.bridgeGame.generateOfBridgeGamePassword(userInputOfBridegeLength);
+    try {
+      InputVaildation.ofBridgeLength(userInputOfBridegeLength);
+      this.bridgeGame.generateOfBridgeGamePassword(userInputOfBridegeLength);
+      this.requestMovingInput();
+    } catch {
+      OutputView.printWrongInputOfBridgeLength();
+      this.requestBridgeLength();
+    }
+  }
+
+  requestMovingInput() {
     InputView.readMoving(this.userDecideGoToUpOrDown.bind(this));
+    this.userDecideGoToUpOrDown();
   }
 
   userDecideGoToUpOrDown(userInputMoving) {
     this.bridgeGame.stackOfUserMovingInput(userInputMoving);
   }
-
 }
 
 const app = new App();
