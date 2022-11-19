@@ -49,7 +49,9 @@ class App {
     InputView.readGameCommand(this.retryProcess.bind(this));
   }
 
-  retryProcess(gameCommand) {}
+  retryProcess(gameCommand) {
+    this.bridgeGame.retry(gameCommand);
+  }
 
   reRequestBridgeSize(message) {
     printMsg(message);

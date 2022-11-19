@@ -1,5 +1,10 @@
 const Bulider = require('./Builder.js');
-const { DOWNSIDE_SYMBOL, UPSIDE_SYMBOL } = require('./constants/condition.js');
+const {
+  DOWNSIDE_SYMBOL,
+  UPSIDE_SYMBOL,
+  QUIT_TRIGGER,
+  RESTART_TRIGGER,
+} = require('./constants/condition.js');
 const { ERROR_MSG } = require('./constants/message.js');
 
 class BridgeGame {
@@ -47,6 +52,14 @@ class BridgeGame {
 
   #validateGameCommand(gameCommand) {
     if (!gameCommand) throw new Error(ERROR_MSG.emptyInput);
+
+    if (!this.#isValidTrigger) {
+      throw new Error(ERROR_MSG.inValidTrigger);
+    }
+  }
+
+  #isValidTrigger(gameCommand) {
+    return gameCommand === QUIT_TRIGGER || gameCommand === RESTART_TRIGGER;
   }
 
   isMoved() {
