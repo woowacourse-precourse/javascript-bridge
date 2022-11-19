@@ -4,8 +4,13 @@ const App = require('../src/App');
 const BridgeGame = require('../src/BridgeGame');
 const BridgeMaker = require('../src/BridgeMaker');
 const { generate } = require('../src/BridgeRandomNumberGenerator');
+const Validation = require('../src/Validation');
 
 const app = new App();
+
+afterEach(() => {
+  Console.close();
+});
 
 describe('Console.print() 테스트', () => {
   const printFnSpy = jest.spyOn(Console, 'print');
@@ -96,6 +101,60 @@ describe('Console.print() 테스트', () => {
   });
 });
 
+describe('사용자 입력값에 대한 유효성 검사 함수 호출 테스트', () => {
+  const checkBridgeSizeSpy = jest.spyOn(Validation, 'checkBridgeSize');
+  const checkDirectionSpy = jest.spyOn(Validation, 'checkDirection');
+  const checkCommandOptionSpy = jest.spyOn(Validation, 'checkCommandOption');
+
+  test('사용자가 size를 입력하면 size에 대한 유효성 검사 함수가 호출된다.', () => {
+    Console.readLine = jest.fn();
+    Console.readLine.mockImplementationOnce((_, callBack) => {
+      callBack(10);
+    });
+
+    checkBridgeSizeSpy.mockClear();
+
+    app.requestBridgeSize();
+
+    expect(checkBridgeSizeSpy).toHaveBeenCalled();
+    expect(checkBridgeSizeSpy).toHaveBeenNthCalledWith(1, 10);
+
+    checkBridgeSizeSpy.mockClear();
+  });
+
+  test('사용자가 이동할 방향을 입력하면 방향에 대한 유효성 검사 함수가 호출된다.', () => {
+    Console.readLine = jest.fn();
+    Console.readLine.mockImplementationOnce((_, callBack) => {
+      callBack('U');
+    });
+
+    checkDirectionSpy.mockClear();
+
+    app.requestDirection();
+
+    expect(checkDirectionSpy).toHaveBeenCalled();
+    expect(checkDirectionSpy).toHaveBeenNthCalledWith(1, 'U');
+
+    checkDirectionSpy.mockClear();
+  });
+
+  test('사용자가 옵션을 입력하면 옵션에 대한 유효성 검사 함수가 호출된다.', () => {
+    Console.readLine = jest.fn();
+    Console.readLine.mockImplementationOnce((_, callBack) => {
+      callBack('R');
+    });
+
+    checkCommandOptionSpy.mockClear();
+
+    app.requestRestartOrQuit();
+
+    expect(checkCommandOptionSpy).toHaveBeenCalled();
+    expect(checkCommandOptionSpy).toHaveBeenNthCalledWith(1, 'R');
+
+    checkCommandOptionSpy.mockClear();
+  });
+});
+
 describe('다리 생성 함수 호출 테스트', () => {
   const makerSpy = jest.spyOn(BridgeMaker, 'makeBridge');
 
@@ -104,6 +163,8 @@ describe('다리 생성 함수 호출 테스트', () => {
     Console.readLine.mockImplementationOnce((_, callBack) => {
       callBack('3');
     });
+
+    makerSpy.mockClear();
 
     app.requestBridgeSize();
 
@@ -119,8 +180,6 @@ describe('다리 생성 함수 호출 테스트', () => {
     });
 
     app.requestBridgeSize();
-
-    console.log(makerSpy);
 
     expect(makerSpy).toHaveBeenCalledWith(12, generate);
 
