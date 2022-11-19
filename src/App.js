@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { OUTPUT_MESSAGE, GAME_RULE } = require('./utils/Constant');
+const { OUTPUT_MESSAGE, GAME_RULE, COMMAND } = require('./utils/Constant');
 const Exception = require('./utils/Exception');
 const Validator = require('./utils/Validator');
 const InputView = require('./view/InputView');
@@ -89,7 +89,7 @@ class App {
   }
 
   failGame(command) {
-    if (command === GAME_RULE.RETRY_COMMAND) {
+    if (command === COMMAND.RETRY) {
       this.replay();
       return;
     }

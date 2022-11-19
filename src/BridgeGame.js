@@ -1,4 +1,4 @@
-const { GAME_RULE } = require('./utils/Constant');
+const { GAME_RULE, COMMAND } = require('./utils/Constant');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -48,16 +48,16 @@ class BridgeGame {
   }
 
   getConvertedBridge() {
-    const upsideBridge = this.convertBridge(GAME_RULE.UPSIDE_COMMAND);
-    const downsideBridge = this.convertBridge(GAME_RULE.DOWNSIDE_COMMAND);
+    const upsideBridge = this.convertBridge(COMMAND.UPSIDE);
+    const downsideBridge = this.convertBridge(COMMAND.DOWNSIDE);
     return { upsideBridge, downsideBridge };
   }
 
   getFailureBridge({ upsideBridge, downsideBridge }) {
-    if (this.#bridge[this.#moveCount] === GAME_RULE.UPSIDE_COMMAND) {
+    if (this.#bridge[this.#moveCount] === COMMAND.UPSIDE) {
       upsideBridge.push(GAME_RULE.BLANK);
       downsideBridge.push(GAME_RULE.FAIL);
-    } else if (this.#bridge[this.#moveCount] === GAME_RULE.DOWNSIDE_COMMAND) {
+    } else if (this.#bridge[this.#moveCount] === COMMAND.DOWNSIDE) {
       upsideBridge.push(GAME_RULE.FAIL);
       downsideBridge.push(GAME_RULE.BLANK);
     }

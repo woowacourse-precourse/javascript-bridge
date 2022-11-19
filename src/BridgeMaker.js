@@ -1,4 +1,4 @@
-const { GAME_RULE } = require('./utils/Constant');
+const { GAME_RULE, COMMAND } = require('./utils/Constant');
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -13,9 +13,9 @@ const BridgeMaker = {
     const bridge = Array.from({ length: size }, () => generateRandomNumber());
     return bridge.map((randomNumber) => {
       if (String(randomNumber) === GAME_RULE.UPSIDE) {
-        return GAME_RULE.UPSIDE_COMMAND;
+        return COMMAND.UPSIDE;
       }
-      return GAME_RULE.DOWNSIDE_COMMAND;
+      return COMMAND.DOWNSIDE;
     });
   },
 };

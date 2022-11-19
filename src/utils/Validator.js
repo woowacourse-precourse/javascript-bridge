@@ -3,6 +3,7 @@ const {
   ERROR_MESSAGE_DIRECTION,
   ERROR_MESSAGE_FINAL_GAME,
   GAME_RULE,
+  COMMAND,
 } = require('./Constant');
 const Exception = require('./Exception');
 
@@ -17,13 +18,13 @@ const Validator = {
   },
 
   direction(command) {
-    if (command !== GAME_RULE.UPSIDE_COMMAND && command !== GAME_RULE.DOWNSIDE_COMMAND) {
+    if (command !== COMMAND.UPSIDE && command !== COMMAND.DOWNSIDE) {
       Exception.throw(ERROR_MESSAGE_DIRECTION.NOT_VALID_COMMAND);
     }
   },
 
   finalGame(command) {
-    if (command !== GAME_RULE.RETRY_COMMAND && command !== GAME_RULE.END_COMMAND) {
+    if (command !== COMMAND.RETRY && command !== COMMAND.END) {
       Exception.throw(ERROR_MESSAGE_FINAL_GAME.NOT_VALID_COMMAND);
     }
   },
