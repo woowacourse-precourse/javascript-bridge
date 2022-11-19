@@ -1,6 +1,6 @@
 1. [V] MESSAGE 상수
 2. BridgeRandomNumberGenerator: 생성한 다리값 [0, 1] => 이 객체는 수정하지 않는다.
-3. BridgeMaker: 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
+3. [V]BridgeMaker: 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
    3-1. makeBridge(): 0이면 'D' 1이면 'U' 배열을 생성
 4. InputView: 플레이어에게서 이동할 칸을 입력받는다.
    4-1. readBridgeSize(): 다리의 길이를 입력받는다.
