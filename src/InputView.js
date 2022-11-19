@@ -38,7 +38,7 @@ const InputView = {
     const validateEndCommand = (inputs) =>
       Validation.validateCommand(inputs, ["R", "Q"]);
 
-    Console.readLine(message, withError(current, next));
+    Console.readLine(message, withError(validateEndCommand, current, next));
   },
 };
 
