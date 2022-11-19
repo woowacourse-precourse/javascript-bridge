@@ -23,6 +23,10 @@ const OutputView = {
   printStart() {
     Console.print(this.START);
   },
+
+  printError(error) {
+    Console.print(error);
+  },
 };
 
 module.exports = OutputView;
