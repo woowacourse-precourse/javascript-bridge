@@ -3,6 +3,8 @@ const BRIDGE_GAME = Object.freeze({
   maxSize: 20,
   up: 'U',
   down: 'D',
+  o: 'O',
+  x: 'X',
 });
 
 module.exports = {
