@@ -28,6 +28,13 @@ const RANGE = Object.freeze({
   max: 25,
 });
 
+// 아래칸 = D = 0
+// 위칸 = U = 1
+const SPACE = Object.freeze({
+  0: 'D',
+  1: 'U',
+});
+
 const CHOICE = Object.freeze({
   replay: 'R',
   exit: 'Q',
@@ -38,5 +45,6 @@ module.exports = {
   ERROR_MESSAGE,
   REGEX,
   RANGE,
+  SPACE,
   CHOICE,
 };
