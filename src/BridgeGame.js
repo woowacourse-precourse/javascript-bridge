@@ -47,6 +47,34 @@ class BridgeGame {
   crossedAll() {
     return this.isGoingCorrect() && (this.passed.length === this.#path.length);
   }
+
+  /**
+   * 현재 지나온 길의 위나 아래에 대해 O, X, 혹은 공백 비교 결과를 반환하는 함수
+   * @param {string} side 현재 보고 있는 길(U or D)
+   * @returns {string[]} 결과 문자열
+   */
+  getComparisonResultArray(side) {
+    let results = [];
+    for (let i = 0; i < this.passed.length; i++) {
+      const CURRENT_RESULT = this.getComparisonResultByIndex(side, i);
+      results.push(CURRENT_RESULT);
+    }
+
+    return results;
+  }
+
+  /**
+   * 현재 지나온 길의 특정 인덱스에 대해 O, X, 혹은 공백을 반환하는 함수
+   * @param {string} side 현재 보고 있는 길(U or D)
+   * @param {number} index 현재 보고 있는 길의 인덱스
+   * @returns {string} 비교 결과(O, X, or space)
+   */
+  getComparisonResultByIndex(side, index) {
+    if (this.passed[index] === side) {
+      return (this.passed[index] === this.#path[index]) ? "O" : "X";
+    }
+    return " "; // 해당 위치를 건너지 않았다면 빈칸
+  }
 }
 
 module.exports = BridgeGame;

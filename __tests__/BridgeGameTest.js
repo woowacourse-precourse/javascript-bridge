@@ -54,3 +54,20 @@ describe("retry 테스트", () => {
         expect(GAME.crossedAll()).toBe(true);
     })
 })
+
+describe("문자열 표시 테스트", () => {
+    const GAME = new BridgeGame(["U", "D", "D"]);
+    GAME.move("U");
+    GAME.move("D");
+    GAME.move("U");
+
+    test("윗줄 테스트", () => {
+        const RESULT = GAME.getComparisonResultArray("U");
+        expect(RESULT).toEqual(["O", " ", "X"]);
+    })
+
+    test("아랫줄 테스트", () => {
+        const RESULT = GAME.getComparisonResultArray("D");
+        expect(RESULT).toEqual([" ", "O", " "]);
+    })
+})
