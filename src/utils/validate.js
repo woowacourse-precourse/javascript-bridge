@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE, BRIDGE_VALUE } = require("../constants");
+const { ERROR_MESSAGE, BRIDGE_VALUE, MOVE_VALUE } = require("../constants");
 const AppError = require("../errors/AppError");
 
 const isBridgeLengthValid = (value) => {
@@ -9,6 +9,7 @@ const isBridgeLengthValid = (value) => {
 
 const isMoveValid = (value) => {
   if (isEmptyInput(value)) throw new AppError(ERROR_MESSAGE.EMPTY_ERROR);
+  if (!isAlphabetValid(value)) throw new AppError(ERROR_MESSAGE.ALPHABET_ERROR);
 };
 
 const isEmptyInput = (value) => !value;
@@ -17,5 +18,8 @@ const isNumberType = (value) => !Number.isNaN(Number(value));
 
 const isRangeValid = (value) =>
   BRIDGE_VALUE.MIN <= value && value <= BRIDGE_VALUE.MAX;
+
+const isAlphabetValid = (value) =>
+  value === MOVE_VALUE.UP || value === MOVE_VALUE.DOWN;
 
 module.exports = { isBridgeLengthValid, isMoveValid };
