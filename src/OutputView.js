@@ -1,12 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const GameStatus = require("./GameStatus")
-
-const validMove = ['U', 'D']
-
-const SUCCESS = {
-  true: '성공',
-  false: '실패',
-}
+const { GameStatus } = require("./GameUtils")
+const { OUTPUT_MESSAGE, SUCCESS, MOVE_VALID } = require("./Constants")
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -36,14 +30,14 @@ const OutputView = {
   },
 
   alreadyPass(upOrDown, i) {
-    if(GameStatus.bridge[i] === validMove[upOrDown]) {
+    if(GameStatus.bridge[i] === MOVE_VALID[upOrDown]) {
       return ' O |'
     }
     return '   |'
   },
 
   makeNextMoveOutput(upOrDown, nextMove) {
-    if(validMove[upOrDown] !== nextMove) {
+    if(MOVE_VALID[upOrDown] !== nextMove) {
       return '   ]'
     }
     if(GameStatus.bridge[GameStatus.step] !== nextMove) {
@@ -59,25 +53,17 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult() {
-    Console.print('\n최종 게임 결과')
+    Console.print(OUTPUT_MESSAGE.HEADER)
     GameStatus.step -= 1;
     this.printMap(GameStatus.lastMove);
-    Console.print('\n게임 성공 여부: ' + SUCCESS[GameStatus.alive])
-    Console.print('총 시도한 횟수: ' + GameStatus.tried)
+    Console.print(OUTPUT_MESSAGE.SUCCESS + SUCCESS[GameStatus.alive])
+    Console.print(OUTPUT_MESSAGE.TRIED + GameStatus.tried)
     Console.close();
   },
 
-  printSizeError() {
-    Console.print('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.')
+  printError(error) {
+    Console.print(error.message)
   },
-
-  printMoveError() {
-    Console.print("[ERROR] 이동할 칸은 'U' 또는 'D' 여야 합니다.")
-  },
-
-  printRetryError() {
-    Console.print("[ERROR] 게임 재시작/종료 여부는 'R' 또는 'Q' 여야 합니다.")
-  }
 };
 
 module.exports = OutputView;

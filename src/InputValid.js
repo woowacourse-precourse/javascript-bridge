@@ -1,4 +1,4 @@
-const OutputView = require("./OutputView");
+const { ERROR_MESSAGE, MOVE_VALID, RETRY_VALID } = require("./Constants");
 
 class BridgeSizeValid {
   #answer;
@@ -10,13 +10,13 @@ class BridgeSizeValid {
 
   validate(answer) {
     if (Number.isNaN(answer) === true) {
-      throw new Error('[ERROR] 숫자 아님');
+      throw new Error(ERROR_MESSAGE.SIZE);
     }
     if (answer%1!==0) {
-      throw new Error('[ERROR] 정수 아님');
+      throw new Error(ERROR_MESSAGE.SIZE);
     }
     if (answer<3 || answer>20) {
-      throw new Error('[ERROR] 범위 밖임');
+      throw new Error(ERROR_MESSAGE.SIZE);
     }
   }
 
@@ -24,6 +24,7 @@ class BridgeSizeValid {
     return this.#answer;
   }
 }
+
 
 class MovingValid {
   #answer;
@@ -34,10 +35,8 @@ class MovingValid {
   }
 
   validate(answer) {
-    const MOVE_VALID = ['U', 'D']
-    
     if(!MOVE_VALID.includes(answer)) {
-      throw new Error('[ERROR] 유효하지 않은 입력');
+      throw new Error(ERROR_MESSAGE.MOVE);
     }
   }
 
@@ -45,6 +44,7 @@ class MovingValid {
     return this.#answer;
   }
 }
+
 
 class RetryValid {
   #answer;
@@ -55,10 +55,8 @@ class RetryValid {
   }
 
   validate(answer) {
-    const RETRY_VALID = ['R', 'Q']
-    
     if(!RETRY_VALID.includes(answer)) {
-      throw new Error('[ERROR] 유효하지 않은 입력');
+      throw new Error(ERROR_MESSAGE.RETRY);
     }
   }
 

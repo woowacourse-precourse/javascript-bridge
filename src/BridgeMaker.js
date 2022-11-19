@@ -1,4 +1,5 @@
-const validMove = ['D', 'U']
+const { MOVE_VALID } = require("./Constants")
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -12,7 +13,7 @@ const BridgeMaker = {
     return new Array(size)
       .fill('')
       .map(() => {
-        return validMove[Number(generateRandomNumber())]
+        return MOVE_VALID[Number(generateRandomNumber())^1]
       });
   },
 };
