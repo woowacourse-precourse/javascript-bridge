@@ -25,6 +25,26 @@ class App {
       this.requestMoving();
     });
   }
+
+  requestMoving() {
+    InputView.readMoving((direction) => {
+      const [canCross, upperBridge, lowerBridge] =
+        this.bridgeGame.move(direction);
+
+      // 현재까지 이동한 다리 상태
+      this.printCurrBridgeState(upperBridge, lowerBridge);
+    });
+  }
+
+  printCurrBridgeState(upperBridge, lowerBridge) {
+    OutputView.printMap(upperBridge, lowerBridge);
+  }
+
+  requestGameCommand() {
+    InputView.readGameCommand((input) => {});
+  }
+
+  quit() {}
 }
 
 const app = new App();
