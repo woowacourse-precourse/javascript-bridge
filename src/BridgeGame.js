@@ -76,6 +76,16 @@ class BridgeGame {
   getTrialCount() {
     return this.#trialCount;
   }
+
+  getMap(line) {
+    const marks = this.#movings.map((moving, index) => {
+      if (moving === line && this.#bridge[index] === line) return "O";
+      if (moving === line && this.#bridge[index] !== line) return "X";
+      return " ";
+    });
+    const map = `[ ${marks.join(" | ")} ]`;
+    return map;
+  }
 }
 
 module.exports = BridgeGame;
