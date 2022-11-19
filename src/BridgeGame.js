@@ -64,6 +64,14 @@ class BridgeGame {
     this.#movings = [];
     this.#trialCount += 1;
   }
+
+  getResult() {
+    const hasMovedCorrectly = this.#movings.every((moving, index) => moving === this.#bridge[index]);
+    const hasMovedAllBridge = this.#movings.length === this.#bridge.length;
+    if (!hasMovedCorrectly) return "실패";
+    if (hasMovedCorrectly && hasMovedAllBridge) return "성공";
+    if (hasMovedCorrectly && !hasMovedAllBridge) return "진행중";
+  }
 }
 
 module.exports = BridgeGame;
