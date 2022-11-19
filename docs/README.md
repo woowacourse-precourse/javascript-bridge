@@ -201,8 +201,9 @@ const number = generateRandomNumber();
 
 - [ ] test: App.js 테스트 코드 작성
   - Console.print() 테스트 코드를 작성한다.
-  - 다리 생성 함수 호출 테스트 코드를 작성한다.
-  - 사용자 입력값에 대한 유효성 검사 함수 호출 테스트 코드를 작성한다.
+  - 사용자 입력값에 대한 유효성 검사 함수의 호출 테스트 코드를 작성한다.
+  - 다리 생성 함수의 호출 테스트 코드를 작성한다.
+  - 이동할 방향을 입력 후 다리 건너기 결과 맵을 출력하는 함수의 호출 테스트 코드를 작성한다.
 - [ ] test: BridgeGame.js 테스트 코드 작성
 - [ ] test: BridgeMaker.js 테스트 코드 작성
 - [ ] test: InputView.js 테스트 코드 작성

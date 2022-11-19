@@ -4,6 +4,7 @@ const App = require('../src/App');
 const BridgeGame = require('../src/BridgeGame');
 const BridgeMaker = require('../src/BridgeMaker');
 const { generate } = require('../src/BridgeRandomNumberGenerator');
+const OutputView = require('../src/OutputView');
 const Validation = require('../src/Validation');
 
 const app = new App();
@@ -25,8 +26,8 @@ describe('Console.print() 테스트', () => {
 
   test('bridgeSize 에러 메시지 출력 테스트 - 숫자가 아닐 경우', () => {
     Console.readLine = jest.fn();
-    Console.readLine.mockImplementationOnce((_, callBack) => {
-      callBack('a');
+    Console.readLine.mockImplementationOnce((_, callback) => {
+      callback('a');
     });
 
     app.requestBridgeSize();
@@ -42,8 +43,8 @@ describe('Console.print() 테스트', () => {
     'bridgeSize 에러 메시지 출력 테스트 - size가 %d인 경우',
     (size) => {
       Console.readLine = jest.fn();
-      Console.readLine.mockImplementationOnce((_, callBack) => {
-        callBack(size);
+      Console.readLine.mockImplementationOnce((_, callback) => {
+        callback(size);
       });
 
       app.requestBridgeSize();
@@ -73,8 +74,8 @@ describe('Console.print() 테스트', () => {
 
   test('commandOption 에러 메시지 출력 테스트 - Q 또는 R이 아닐 경우', () => {
     Console.readLine = jest.fn();
-    Console.readLine.mockImplementationOnce((_, callBack) => {
-      callBack('w');
+    Console.readLine.mockImplementationOnce((_, callback) => {
+      callback('w');
     });
 
     app.requestRestartOrQuit();
@@ -108,8 +109,8 @@ describe('사용자 입력값에 대한 유효성 검사 함수 호출 테스트
 
   test('사용자가 size를 입력하면 size에 대한 유효성 검사 함수가 호출된다.', () => {
     Console.readLine = jest.fn();
-    Console.readLine.mockImplementationOnce((_, callBack) => {
-      callBack(10);
+    Console.readLine.mockImplementationOnce((_, callback) => {
+      callback(10);
     });
 
     checkBridgeSizeSpy.mockClear();
@@ -124,8 +125,8 @@ describe('사용자 입력값에 대한 유효성 검사 함수 호출 테스트
 
   test('사용자가 이동할 방향을 입력하면 방향에 대한 유효성 검사 함수가 호출된다.', () => {
     Console.readLine = jest.fn();
-    Console.readLine.mockImplementationOnce((_, callBack) => {
-      callBack('U');
+    Console.readLine.mockImplementationOnce((_, callback) => {
+      callback('U');
     });
 
     checkDirectionSpy.mockClear();
@@ -140,8 +141,8 @@ describe('사용자 입력값에 대한 유효성 검사 함수 호출 테스트
 
   test('사용자가 옵션을 입력하면 옵션에 대한 유효성 검사 함수가 호출된다.', () => {
     Console.readLine = jest.fn();
-    Console.readLine.mockImplementationOnce((_, callBack) => {
-      callBack('R');
+    Console.readLine.mockImplementationOnce((_, callback) => {
+      callback('R');
     });
 
     checkCommandOptionSpy.mockClear();
@@ -160,8 +161,8 @@ describe('다리 생성 함수 호출 테스트', () => {
 
   test('BridgeMaker의 makeBridge 메서드가 호출되어 size에 맞는 다리가 생성된다.', () => {
     Console.readLine = jest.fn();
-    Console.readLine.mockImplementationOnce((_, callBack) => {
-      callBack('3');
+    Console.readLine.mockImplementationOnce((_, callback) => {
+      callback('3');
     });
 
     makerSpy.mockClear();
@@ -175,8 +176,8 @@ describe('다리 생성 함수 호출 테스트', () => {
 
   test('BridgeMaker의 makeBrige 메서드는 다리의 size와 랜덤 숫자 생성 함수를 인자로 받는다.', () => {
     Console.readLine = jest.fn();
-    Console.readLine.mockImplementationOnce((_, callBack) => {
-      callBack('12');
+    Console.readLine.mockImplementationOnce((_, callback) => {
+      callback('12');
     });
 
     app.requestBridgeSize();
@@ -185,4 +186,34 @@ describe('다리 생성 함수 호출 테스트', () => {
 
     makerSpy.mockClear();
   });
+});
+
+describe('다리 건너기 결과 맵을 출력하는 함수 호출 테스트', () => {
+  const printMapSpy = jest.spyOn(OutputView, 'printMap');
+
+  test.each([
+    [['U'], 1],
+    [['U', 'D', 'D'], 3],
+    [['U', 'D', 'D', 'U', 'D', 'U'], 6],
+  ])(
+    '%p 순서대로 입력하면 %d만큼 다리 건너기 걸과 맵을 출력하는 함수가 호출된다.',
+    (array, times) => {
+      Console.readLine = jest.fn();
+
+      array.reduce((acc, cur) => {
+        return acc.mockImplementationOnce((_, callback) => {
+          callback(cur);
+        });
+      }, Console.readLine);
+
+      printMapSpy.mockClear();
+
+      const app = new App();
+      app.bridgeGame = new BridgeGame(['U', 'D', 'D', 'U', 'D', 'U', 'U']);
+
+      app.requestDirection();
+
+      expect(printMapSpy).toHaveBeenCalledTimes(times);
+    }
+  );
 });
