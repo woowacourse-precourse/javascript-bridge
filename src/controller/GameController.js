@@ -30,8 +30,16 @@ class GameController {
 
   setMoving(next) {
     validateNext.validate(next);
-    this.game.move(next);
-    this.game.isEnd() ? Console.close() : this.askMoving();
+
+    const isSuccess = this.game.move(next);
+
+    OutputView.printMap(this.game.getMap(), isSuccess);
+
+    if (isSuccess) {
+      this.game.isEnd() ? Console.close() : this.askMoving();
+    } else {
+      Console.close();
+    }
   }
 }
 
