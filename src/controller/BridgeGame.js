@@ -13,7 +13,6 @@ class BridgeGame {
 
   makeBridgeInfo(bridgeSize) {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, generate);
-    console.log(this.#bridge);
   }
 
   /**

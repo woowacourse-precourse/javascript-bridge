@@ -60,8 +60,8 @@ class BridgeProcess {
     ],
     [
       { sucess: false, process: false },
-      () => {
-        this.#inputGameCommand();
+      (_, match) => {
+        this.#inputGameCommand(match);
       },
     ],
   ]);
