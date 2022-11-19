@@ -25,7 +25,7 @@ class BridgeGame {
     BridgeValidator.checkInputNext(nextMoveChar);
     BridgeValidator.checkPosition(this.#currentPosition, this.#maxPosition);
 
-    if (nextMoveChar == this.#bridge(this.#currentPosition)) {
+    if (nextMoveChar == this.#bridge[this.#currentPosition]) {
       return this.moveNextTrue();
     }
     return this.moveNextFalse();
