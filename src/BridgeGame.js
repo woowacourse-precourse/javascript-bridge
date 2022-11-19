@@ -72,6 +72,10 @@ class BridgeGame {
     if (hasMovedCorrectly && hasMovedAllBridge) return "성공";
     if (hasMovedCorrectly && !hasMovedAllBridge) return "진행중";
   }
+
+  getTrialCount() {
+    return this.#trialCount;
+  }
 }
 
 module.exports = BridgeGame;
