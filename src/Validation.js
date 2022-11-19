@@ -1,7 +1,7 @@
 const { LETTER, ERROR_MESSAGE, NUMBER_RANGE } = require("./constant");
 
 const Validation = {
-  checkBridgeNumber(number) {
+  validateBridgeNumber(number) {
     if (
       number < NUMBER_RANGE.min ||
       number > NUMBER_RANGE.max ||
@@ -11,13 +11,13 @@ const Validation = {
     }
   },
 
-  checkUorD(letter) {
+  validateMoveInput(letter) {
     if (letter !== LETTER.up && letter !== LETTER.down) {
       throw ERROR_MESSAGE.notUorD;
     }
   },
 
-  checkRorQ(letter) {
+  validateCommandInput(letter) {
     if (letter !== LETTER.retry && letter !== LETTER.quit) {
       throw ERROR_MESSAGE.notRorQ;
     }

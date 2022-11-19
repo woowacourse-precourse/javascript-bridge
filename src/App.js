@@ -6,7 +6,11 @@ const {
   printMap,
   printResult,
 } = require("./OutputView");
-const { checkBridgeNumber, checkRorQ, checkUorD } = require("./Validation");
+const {
+  validateBridgeNumber,
+  validateMoveInput,
+  validateCommandInput,
+} = require("./Validation");
 const { LETTER, MESSAGE } = require("./constant");
 const { Console } = require("@woowacourse/mission-utils");
 
@@ -22,10 +26,10 @@ class App {
     readBridgeSize(this.actWithBridgeNumber.bind(this));
   }
 
-  actWithBridgeNumber(number) {
+  actWithBridgeNumber(input) {
     try {
-      checkBridgeNumber(Number(number));
-      this.#bridgeGame.setBridge(Number(number));
+      validateBridgeNumber(Number(input));
+      this.#bridgeGame.setBridge(Number(input));
       readMoving(this.actWithUserMoveInput.bind(this));
     } catch (e) {
       printErrorMessage(e);
@@ -36,7 +40,7 @@ class App {
   actWithUserMoveInput(input) {
     const letter = input.toUpperCase();
     try {
-      checkUorD(letter);
+      validateMoveInput(letter);
       const { map, isCorrect, isGameOver } = this.#bridgeGame.move(letter);
       printMap(map);
       this.actWithResult({ isCorrect, isGameOver });
@@ -61,7 +65,7 @@ class App {
   actWithUserCommandInput(input) {
     const letter = input.toUpperCase();
     try {
-      checkRorQ(letter);
+      validateCommandInput(letter);
       this.actWithCommand(letter);
     } catch (e) {
       printErrorMessage(e);

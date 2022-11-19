@@ -6,8 +6,8 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(actWithBridgeNumber) {
-    Console.readLine(INPUT_MESSAGE.numberOfBridge, (number) => {
-      actWithBridgeNumber(number);
+    Console.readLine(INPUT_MESSAGE.numberOfBridge, (input) => {
+      actWithBridgeNumber(input);
     });
   },
   /**
