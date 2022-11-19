@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
+const { validateMove, validateRestart } = require('../src/validate');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -112,5 +113,32 @@ describe('다리 건너기 테스트', () => {
 
   test('예외 테스트', () => {
     runException(['a']);
+  });
+});
+
+describe('InputUtils 예외 처리 테스트', () => {
+  test('validateBridgeSize 예외 테스트', () => {
+    runException(['kasdf']);
+    runException(['a']);
+    runException(['22']);
+    runException(['2']);
+  });
+
+  test('validateMove 예외 테스트', () => {
+    expect(() => {
+      validateMove('F');
+    }).toThrow('[ERROR] 이동 타입은 U/D이어야 합니다.');
+  });
+
+  test('validateMove 예외 테스트', () => {
+    expect(() => {
+      validateMove(1);
+    }).toThrow('[ERROR] 이동 타입은 U/D이어야 합니다.');
+  });
+
+  test('readGameCommand 예외 테스트', () => {
+    expect(() => {
+      validateRestart('F');
+    }).toThrow('[ERROR] 재시작 입력은 R/Q이어야 합니다.');
   });
 });
