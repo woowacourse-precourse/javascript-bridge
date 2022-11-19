@@ -16,8 +16,8 @@ const REQUIREMENT = {
 const MESSAGE = {
   INIT: '다리 건너기 게임을 시작합니다.\n',
   INPUTBRIDGELENGTH: '다리의 길이를 입력해주세요.\n',
-  INPUTMOVINGLOCATION: `\n이동할 칸을 선택해주세요. (위: ${REQUIREMENT.UP}, 아래:${REQUIREMENT.DOWN})\n`,
-  INPUTRETRYORQUIT: `\n게임을 다시 시도할지 입력해주세요. (재시도: ${REQUIREMENT.RETRY}, 종료:${REQUIREMENT.QUIT})\n`,
+  INPUTMOVINGLOCATION: `\n이동할 칸을 선택해주세요. (위: ${REQUIREMENT.UP}, 아래: ${REQUIREMENT.DOWN})\n`,
+  INPUTRETRYORQUIT: `\n게임을 다시 시도할지 입력해주세요. (재시도: ${REQUIREMENT.RETRY}, 종료: ${REQUIREMENT.QUIT})\n`,
   RESULT: '\n최종 게임 결과',
   SUCCESSORNOT: '게임 성공 여부: ',
   SUCCESS : '성공',
@@ -31,4 +31,10 @@ const ERROR = {
   RETRY: `[ERROR] 재시작 여부는 ${REQUIREMENT.RETRY}와 ${REQUIREMENT.QUIT}로 입력해야 합니다.`,
 }
 
-module.exports = { MESSAGE, REQUIREMENT, ERROR };
+const GAMERESULT = {
+  WRONGBLOCK: 0,
+  RIGHTBLOCK: 1,
+  GAMECLEAR: 2,
+};
+
+module.exports = { MESSAGE, REQUIREMENT, ERROR, GAMERESULT };
