@@ -72,6 +72,14 @@ class BridgeGame {
    */
   retry(input, mapList) {}
 
+  checkSuccessGame() {
+    if (this.#bridgeList.length !== this.#moveCount) {
+      return false;
+    }
+
+    return true;
+  }
+
   setMapList(input, stingOX) {
     if (input === 'U') {
       return this.addMapList(stingOX, ' ');
