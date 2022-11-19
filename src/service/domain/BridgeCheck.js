@@ -1,4 +1,8 @@
-const { MODEL_KEY, UPDOWN_INDEX } = require('../../utils/constants');
+const {
+  MODEL_KEY,
+  UPDOWN_INDEX,
+  GAME_RESULT_STATE
+} = require('../../utils/constants');
 
 class BridgeCheck {
   #randomBridge;
@@ -40,10 +44,10 @@ class BridgeCheck {
   }
 
   getGameState() {
-    if (this.#isFinish() && this.#isCorrect()) return 'success';
-    if (this.#isCorrect()) return 'try';
+    if (this.#isFinish() && this.#isCorrect()) return GAME_RESULT_STATE.success;
+    if (this.#isCorrect()) return GAME_RESULT_STATE.try;
 
-    return 'fail';
+    return GAME_RESULT_STATE.fail;
   }
 }
 
