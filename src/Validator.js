@@ -1,13 +1,9 @@
-const { BRIDGE_CONSTANTS } = require('./utils/constants');
+const { BRIDGE_CONSTANTS, GAME_CONSTANTS } = require('./utils/constants');
 const ERROR_MESSAGE = require('./utils/ErrorMessage');
 
 class Validator {
-  static checkBridgeLength (size) {
-    return this.checkBridgeLengthInRange(size) && this.isNumeric(size);
-  }
-
-  static checkBridgeLengthInRange (size) {
-    if (size < BRIDGE_CONSTANTS.minimum  || BRIDGE_CONSTANTS.maximum < size) {
+  static isBridgeLengthInRange (size) {
+    if (this.isBridgeLengthMinimum(size)  || this.isBridgeLengthMaximum(size)) {
       throw new Error(ERROR_MESSAGE.bridgeLengthRange);
     }
     return true;
@@ -21,17 +17,25 @@ class Validator {
   }
 
   static checkStep (step) {
-    if (!['U', 'D'].includes(step)) {
+    if (![GAME_CONSTANTS.upStair, GAME_CONSTANTS.downStair].includes(step)) {
       throw new Error(ERROR_MESSAGE.checkStepCorrect);
     }
     return true;
   }
 
   static checkRetry (retry) {
-    if (!['R', 'Q'].includes(retry)) {
+    if (![GAME_CONSTANTS.retryGame, GAME_CONSTANTS.quitGame].includes(retry)) {
       throw new Error(ERROR_MESSAGE.checkRetryCorrect);
     }
     return true;
+  }
+
+  static isBridgeLengthMinimum (size) {
+    return size < BRIDGE_CONSTANTS.minimum;
+  }
+
+  static isBridgeLengthMaximum (size) {
+    return BRIDGE_CONSTANTS.maximum < size;
   }
 }
 
