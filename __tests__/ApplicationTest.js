@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const InputView = require("../src/InputView");
 const BridgeMaker = require("../src/BridgeMaker");
+const BridgeGame = require("../src/BridgeGame");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -108,5 +109,11 @@ describe("다리 건너기 테스트", () => {
 
   test("이동 칸 입력 예외 테스트", () => {
     runReadMovingException(1);
+  });
+
+  test("건널 수 있는 칸인지 비교 결과 확인 테스트", () => {
+    const bridge = new BridgeGame(["U", "D", "D"]);
+    const result = bridge.move(0, "U");
+    expect(result).toEqual([["U", "O"]]);
   });
 });
