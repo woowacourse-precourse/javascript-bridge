@@ -3,6 +3,7 @@ const { GAME_CONSTANTS } = require('./constants');
 
 const MESSAGE = deepFreeze({
   gameStart: '다리 건너기 게임을 시작합니다.\n',
+  gameResult: '최종 게임 결과',
   gameCheckSuccess: '게임 성공 여부: ',
   gameCheckTryCount: '총 시도한 횟수: ',
   successMessage: '성공',
