@@ -549,4 +549,22 @@ describe('다리 이동 로그 메소드 테스트', () => {
 
     expect(bridgeGame.getBridgeLog(EXPECTED)).toEqual(RECEIVED);
   });
+
+  test('세 번째 기록으로 [[ "O", " ", "O" ] [ " ", "O", " " ]]을 반환한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const BRIDGE = ['U', 'D', 'U'];
+    const POSITION_LOG = [
+      [[0, 0], 'O'],
+      [[1, 1], 'O'],
+      [[0, 2], 'O'],
+    ];
+    const SECOND_ROUND = 3;
+    const RECEIVED = [['O', ' ', 'O'], [' ', 'O', ' ']];
+
+    bridgeGame.setBridge(BRIDGE);
+    loop(SECOND_ROUND, bridgeGame.move.bind(bridgeGame));
+    bridgeGame.setPositionLog(POSITION_LOG);
+
+    expect(bridgeGame.getBridgeLog()).toEqual(RECEIVED);
+  });
 });
