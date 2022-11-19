@@ -8,6 +8,10 @@ const { printMap } = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
 
 class App {
+  constructor() {
+    this.bridgeGame = new BridgeGame();
+  }
+
   play() {
     Console.print(START_GAME);
     this.createBridge();
@@ -19,19 +23,17 @@ class App {
       validateBridgeSize(size);
       this.bridge = makeBridge(size, generateRandomNumber);
 
-      this.moveBride();
+      this.moveBridge();
     });
   }
 
-  moveBride() {
+  moveBridge() {
     readMoving((userInput) => {
-      const bridgeGame = new BridgeGame();
-      const upBridge = bridgeGame.getupBridge();
-      const downBridge = bridgeGame.getDownBridge();
-
+      const move = this.bridgeGame.move(this.bridge, userInput);
+      const upBridge = this.bridgeGame.getupBridge();
+      const downBridge = this.bridgeGame.getDownBridge();
       checkMoveString(userInput);
-
-      bridgeGame.move(this.bridge, userInput);
+      move;
       printMap(upBridge, downBridge);
     });
   }
