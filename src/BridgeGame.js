@@ -51,6 +51,15 @@ class BridgeGame {
     return [this.#bridgeUpper, this.#bridgeLower, this.#gameStatus];
   }
 
+  checkMovement(input, bridge, idx) {
+    if (input === bridge[idx]) {
+      this.#moveResult = VALUE.SUCCESS;
+      this.#playerAt = this.#playerAt + 1;
+      return;
+    }
+    this.#moveResult = VALUE.FAILURE;
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
