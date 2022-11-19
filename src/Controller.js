@@ -79,6 +79,12 @@ class Controller {
     OutputView.printResult(this.#try, false);
     Console.close;
   }
+
+  quitGame() {
+    OutputView.printMap(this.#currentBridge);
+    OutputView.printResult(this.#try, false);
+    Console.close();
+  }
 }
 
 module.exports = Controller;
