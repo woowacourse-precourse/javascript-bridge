@@ -6,22 +6,21 @@ const GameMessage = require('./constants/GameMessage');
 
 class App {
   /** @type {BridgeGame} */
-  #GameClient = new BridgeGame();
-
-  /** @type {number} */
-  #bridgeLength;
+  #BridgeGame = new BridgeGame();
 
   /**
    * @param {string} input
    */
-  #setBridgeLength(input) {
+  #getBridgeSize(input) {
     Validation.Bridge(input);
-    this.#bridgeLength = Number(input);
+
+    const bridgeSize = Number(input);
+    this.#BridgeGame.init(bridgeSize);
   }
 
   play() {
     OutputView.printMessage(GameMessage.WELCOME);
-    InputView.readBridgeSize(this.#setBridgeLength.bind(this));
+    InputView.readBridgeSize(this.#getBridgeSize.bind(this));
   }
 }
 
