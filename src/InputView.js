@@ -10,6 +10,7 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine('\n다리의 길이를 입력해주세요.\n', (bridgeSize) => {
+      this.checkBridgeLength(+bridgeSize);
       const bridgeGame = new BridgeGame(+bridgeSize);
       Console.print('');
       this.readMoving(bridgeGame);
@@ -43,6 +44,16 @@ const InputView = {
       return OutputView.printResult(bridgeGame);
     });
   },
+
+  checkBridgeLength(bridgeSize) {
+    try {
+      if (!(bridgeSize >= 3 && bridgeSize <= 20))
+        throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.")
+    } catch (err) {
+      Console.print(err);
+      return this.readBridgeSize();
+    }
+  }
 };
 
 module.exports = InputView;

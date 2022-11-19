@@ -14,7 +14,7 @@
 사용자가 잘못된 값을 입력한 경우 throw문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
 
 - [ ] 다리길이 입력 값이 숫자인지 확인한다. - InputView#checkIsNumber() 
-- [ ] 다리길이가 3에서 20사이인지 확인한다. - InputView#checkBridgeLength()
+- [x] 다리길이가 3에서 20사이인지 확인한다. - InputView#checkBridgeLength()
 - [ ] 이동할 칸 입력이 U 또는 D인지 확인한다. - InputView#checkMoveInput()
 - [ ] 개임 재시작 혹은 종료 여부 입력이 R 또는 Q인지 확인한다. - InputView#checkRestartInput()
 
