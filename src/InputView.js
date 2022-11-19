@@ -44,11 +44,15 @@ const InputView = {
   },
 
   validateMoving(input) {
-    return input === MOVE.UP || input === MOVE.DOWN;
+    if (input !== MOVE.UP && input !== MOVE.DOWN) {
+      throw new Error(ERROR.INVALID_MOVE);
+    }
   },
 
   validateGameCommand(input) {
-    return input === GAME_RETRY || input === GAME_QUIT;
+    if (input !== GAME_RETRY && input !== GAME_QUIT) {
+      throw new Error(ERROR.INVALID_RETRY);
+    }
   },
 };
 

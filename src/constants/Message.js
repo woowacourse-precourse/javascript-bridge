@@ -15,7 +15,7 @@ const REQUEST = {
 const ERROR = {
   INVALID_LENGTH: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n',
   INVALID_MOVE: '[ERROR] 이동할 칸은 U 또는 D 중 하나의 문자로 입력해주세요.\n',
-  INVALID_RESTART:
+  INVALID_RETRY:
     '[ERROR] 재시작 여부는 R 또는 Q 중 하나의 문자로 입력해주세요.\n',
 };
 
