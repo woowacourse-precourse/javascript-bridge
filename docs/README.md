@@ -5,7 +5,7 @@
 - [x] 입력 받은 이동할 칸과 다리를 비교한다. - BridgeGame#match()
 - [x] 입력 받은 이동할 칸으로 이동하여 이동한 상태를 반환한다. - BridgeGame#move()
 - [x] 이동에 성공했는지 확인한다. - BridgeGame#checkMoveSuccess()
-- [x] 이동할 다리가 얼마나 남았는지 확인한다. - BridgeGame#checkRemainGame()
+- [x] 이동할 다리가 얼마나 남았는지 확인한다. - BridgeGame#checkRemainBridge()
 - [ ] 재시작 시 시도 횟수를 증가시킨다. - BridgeGame#retry()
 
 
@@ -16,8 +16,9 @@
 - [x] 다리의 길이를 입력 받고 bridgeSize를 private로 BridgeGame 클래스 필드에 추가. - InputView#readBridgeSize()
 - [x] 이동할 칸을 입력 받는다. - InputView#readMoving()
 - [x] 이동하고 난 결과를 출력한다. - OutputView#printMap()
-- [ ] 게임을 다시 시도할지 종료할지 여부를 입력받는다. - InputView#readGameCommand()
-- [ ] 게임의 최종 결과를 정해진 형식에 맞춰 출력한다. - OutputView#printResult()
+- [x] 건널 다리가 남았고 다리를 건너는데 실패했으면 게임 재시작 여부를 입력받는다. - InputView#readGameCommand()
+  - 건널 다리가 남았고 다리를 건너는데 성공했다면 이동할 칸을 입력 받는다.
+- [ ] 다리를 끝까지 건너면 게임의 최종 결과를 정해진 형식에 맞춰 출력한다. - OutputView#printResult()
 
 ## 기능 요구 사항
 
