@@ -19,6 +19,7 @@ class App {
     validateBridge(size);
     const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.bridgeGame = new BridgeGame(bridge);
+    console.log(bridge);
     InputView.readMoving(this.getMoveInput.bind(this));
   }
 
@@ -27,7 +28,21 @@ class App {
     this.playGame(move);
   }
 
+  getRetry(answer) {
+    if (answer === 'Q') {
+      Console.close();
+      return;
+    }
+    this.bridgeGame.retry(answer);
+    InputView.readMoving(this.getMoveInput.bind(this));
+  }
+
   playGame(move) {
+    if (this.bridgeGame.isEnd(move)) {
+      InputView.readGameCommand(this.getRetry.bind(this));
+      return;
+    }
+    this.bridgeGame.move(move);
     InputView.readMoving(this.getMoveInput.bind(this));
   }
 }
