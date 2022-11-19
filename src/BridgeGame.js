@@ -9,6 +9,7 @@ const { generateRandomNumber } = require("./util/randomNumber");
 class BridgeGame {
   size = null;
   bridgePath = null;
+  pathIndex = 0;
   firstLineResult = [];
   secondLineResult = [];
 
@@ -28,6 +29,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(choice, isAlrightPath) {
+    this.pathIndex += 1;
     this.firstLineResult.push(
       choice === BRIDGE_PATH.up
         ? this.getPrintIsAlrightPath(isAlrightPath)
@@ -42,12 +44,16 @@ class BridgeGame {
     OutputView.printMap(this.firstLineResult, this.secondLineResult);
   }
 
-  getIsAlrightPath(index, currentPath) {
-    return this.bridgePath[index] === currentPath;
+  getIsAlrightPath(currentPath) {
+    return this.bridgePath[this.pathIndex] === currentPath;
   }
 
   getPrintIsAlrightPath(isAlrightPath) {
     return isAlrightPath ? BRIDGE_PRINT.correct : BRIDGE_PRINT.incorrect;
+  }
+
+  checkIsEndBridge() {
+    return this.pathIdx >= this.size;
   }
 
   /**
@@ -55,9 +61,19 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.resetForRetry();
+  }
 
-  end() {}
+  resetForRetry() {
+    this.pathIndex = 0;
+    this.firstLineResult = [];
+    this.secondLineResult = [];
+  }
+
+  end() {
+    console.log("end");
+  }
 }
 
 module.exports = BridgeGame;

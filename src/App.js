@@ -1,12 +1,12 @@
 const BridgeGame = require("./BridgeGame");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const { GAME_PROCEED } = require("./util/game");
 const { validateBrigeSize, validateMoving } = require("./util/validate");
 
 class App {
   bridgeGame = null;
-  pathIdx = 0;
-  tryCount = 0;
+  tryCount = 1;
 
   play() {
     this.start();
@@ -35,10 +35,7 @@ class App {
   cbAfterReadMoving(choice) {
     validateMoving(choice);
 
-    const isAlrightPath = this.bridgeGame.getIsAlrightPath(
-      this.pathIdx++,
-      choice
-    );
+    const isAlrightPath = this.bridgeGame.getIsAlrightPath(choice);
 
     this.bridgeGame.move(choice, isAlrightPath);
     this.goNextStepAfterReadMoving(isAlrightPath);
@@ -52,7 +49,7 @@ class App {
   }
 
   checkEndGame(isAlrightPath) {
-    return !isAlrightPath || this.pathIdx >= this.bridgeGame.size;
+    return !isAlrightPath || this.bridgeGame.checkIsEndBridge();
   }
 
   stopGame() {
@@ -60,7 +57,13 @@ class App {
   }
 
   cbAfterStopGame(choice) {
-    console.log("choice", choice);
+    if (choice === GAME_PROCEED.retry) {
+      this.bridgeGame.retry();
+      return this.proceedGame();
+    }
+    if (choice === GAME_PROCEED.quit) {
+      return this.bridgeGame.end();
+    }
   }
 }
 
