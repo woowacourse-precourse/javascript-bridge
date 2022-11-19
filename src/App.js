@@ -50,7 +50,11 @@ class App {
   }
 
   retryProcess(gameCommand) {
-    this.bridgeGame.retry(gameCommand);
+    try {
+      this.bridgeGame.retry(gameCommand);
+    } catch ({ message }) {
+      this.reRequestGameCommand();
+    }
   }
 
   reRequestBridgeSize(message) {
@@ -61,6 +65,11 @@ class App {
   reRequestMovingDirection(message) {
     printMsg(message);
     this.requestMovingDirection();
+  }
+
+  reRequestGameCommand(message) {
+    printMsg(message);
+    this.requestRetryOrQuit();
   }
 }
 
