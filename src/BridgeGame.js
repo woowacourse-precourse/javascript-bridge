@@ -20,6 +20,7 @@ class BridgeGame {
    */
   move() {
     let move = readMoving();
+    if (move === '[ERROR]') return;
     switch(true) {
       case this.bridgeState[this.nowPosition] === move:
         this.passBridge(move, 'O');
@@ -62,7 +63,18 @@ class BridgeGame {
     this.nowBridge.upperBridge.push(upperState);
     this.nowBridge.downBridge.push(downState);
   }
-
+  /**
+   * 클래스에 대한 내용을 정리하는 기능을 담당하는 함수
+   * tryCount를 1올릴고 게임의 상태를 초기화한다.
+   */
+   clear() {
+    this.tryCount += 1;
+    this.nowPosition = 0;
+    this.nowBridge = {
+      upperBridge: [],
+      downBridge: [],
+    }
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
@@ -75,21 +87,8 @@ class BridgeGame {
         printResult('실패', this.nowBridge, this.tryCount);
         break;
       default:
-        clear();
+        this.clear();
         this.move();
-    }
-  }
-
-  /**
-   * 클래스에 대한 내용을 정리하는 기능을 담당하는 함수
-   * tryCount를 1올릴고 게임의 상태를 초기화한다.
-   */
-  clear() {
-    this.tryCount += 1;
-    this.nowPosition = 0;
-    this.nowBridge = {
-      upperBridge: [],
-      downBridge: [],
     }
   }
 }
