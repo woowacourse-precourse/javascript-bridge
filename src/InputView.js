@@ -12,15 +12,18 @@ const InputView = {
    */
   readBridgeSize() {
     MISSIONUTILS.Console.readLine("다리의 길이를 입력해주세요\n", function(input) {
-      if (isNaN(input)){
-        throw new Error("[ERROR] 다리의 길이는 숫자만 입력 가능합니다");
+      if (isNaN(input) || input<3 || input>20){
+        try {
+          if (isNaN(input) || input<3 || input>20){
+            throw new Error;
+          }
+        } catch (err) {
+          MISSIONUTILS.Console.print("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+          return InputView.readBridgeSize();
+        }
       }
       
       input = Number(input);
-    
-      if(input<3 || input>20){
-        throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
-      }
       
       const bridge = BRIDGE_MAKER.makeBridge(input,BRIDGE_RANDOM_NUMBER_GENERATOR.generate);
       MISSIONUTILS.Console.print(bridge);
@@ -34,12 +37,16 @@ const InputView = {
    */
   readMoving(count, i, bridge, bridgeMap, tryCount) {
     MISSIONUTILS.Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", function(input) {
-      if (!isNaN(input)){
-        throw new Error("[ERROR] 이동할 칸은 알파벳으로 선택해야 합니다");
-      }
-      
-      if(input != 'U' && input != 'D'){
-        throw new Error("[ERROR] 이동할 칸은 U 또는 D만 선택해야 합니다.");
+      try {
+        if (!isNaN(input)){
+          throw new Error;
+        }
+        if(input != 'U' && input != 'D'){
+          throw new Error;
+        }
+      } catch (err) {
+        MISSIONUTILS.Console.print("[ERROR] 이동할 칸은 U 또는 D만 선택해야 합니다.");
+        return InputView.readMoving(count, i, bridge, bridgeMap, tryCount);
       }
       
       var temp = new BRIDGE_GAME;
@@ -54,12 +61,16 @@ const InputView = {
    */
    readGameCommand(count, bridge, bridgeMap, tryCount) {
     MISSIONUTILS.Console.readLine("\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", function(input) {
-      if (!isNaN(input)){
-        throw new Error("[ERROR] 재시도 여부는 알파벳으로 입력해야 합니다");
-      }
-      
-      if(input != 'R' && input != 'Q'){
-        throw new Error("[ERROR] 재시도 여부는 R 또는 Q만 입력해야 합니다.");
+      try {
+        if (!isNaN(input)){
+          throw new Error;
+        }
+        if(input != 'R' && input != 'Q'){
+          throw new Error;
+        }
+      } catch (err) {
+        MISSIONUTILS.Console.print("[ERROR] 재시도 여부는 R 또는 Q만 입력해야 합니다.");
+        return InputView.readGameCommand(count, bridge, bridgeMap, tryCount);
       }
       
       var temp = new BRIDGE_GAME;
