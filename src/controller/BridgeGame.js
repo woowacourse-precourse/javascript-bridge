@@ -19,7 +19,9 @@ class BridgeGame {
   }
 
   restart() {
-    console.log('restart');
+    this.model.tryCount += 1;
+    this.model.init();
+    this.move();
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드

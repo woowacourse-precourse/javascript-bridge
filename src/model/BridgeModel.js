@@ -7,9 +7,13 @@ class BridgeModel {
 
   constructor() {
     this.tryCount = 1;
+    this.init();
+  }
+
+  init() {
     this.moveCount = 0;
-    this.isRight = false;
     this.map = [[],[]];
+    this.isRight = false;
   }
 
   updateState(direction, isRight) {
