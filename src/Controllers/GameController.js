@@ -24,7 +24,7 @@ class GameController {
 
   buildBridge(size) {
     this.bridgeGame.createBridge(size);
-    Console.close();
+    this.inputView.guess();
   }
 }
 
