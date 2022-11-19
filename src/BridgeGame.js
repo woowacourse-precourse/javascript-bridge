@@ -11,6 +11,10 @@ class BridgeGame {
     QUIT: 'Q',
   };
 
+  initBridgeLengthStatus() {
+    this.#bridgeLengthStatus = 0;
+  }
+
   getBridgeLengthStatus() {
     return this.#bridgeLengthStatus;
   }
@@ -56,6 +60,8 @@ class BridgeGame {
     if (input === this.#GAME_OPTION.RETRY) return true;
   }
 }
+
+//초기화 되어야될것 = bridgeMap 의 맵, 이 클래스의 length
 
 // const app = new BridgeGame();
 
