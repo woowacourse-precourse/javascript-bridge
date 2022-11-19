@@ -1,5 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 
+const OutputView = require('./view/OutputView');
+
 
 class BridgeGame {
   constructor() {
@@ -12,7 +14,7 @@ class BridgeGame {
 
   retry(retryOrNot, result) {
     if (retryOrNot === "R") return this.game();
-    if (retryOrNot === "D") {
+    if (retryOrNot === "Q") {
       OutputView.printResult();
       Console.print(result);
       OutputView.printFail();
