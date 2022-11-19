@@ -17,14 +17,18 @@ const InputView = {
    */
   readMoving(callBack) {
     readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", beMovedDirection => {
-      beMovedDirection === "U" ? callBack(1) : callBack(0);
+      beMovedDirection === "U" ? callBack("U") : callBack("D");
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", RestartOrExit => {
+      callback(RestartOrExit);
+    });
+  },
 };
 
 module.exports = InputView;
