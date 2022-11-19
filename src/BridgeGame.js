@@ -5,9 +5,11 @@ const Bridge = require("./Bridge");
  */
 class BridgeGame {
   #bridge;
+  #result;
+  #attempts;
 
   constructor() {
-    this.bridge = new Bridge();
+    this.#bridge = new Bridge();
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -15,7 +17,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move() {
-    this.bridge.move();
+    this.#bridge.move();
   }
 
   /**
@@ -23,15 +25,19 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#result = [];
+    this.#attempts += 1;
+    this.#bridge.initializeCurrentDirection();
+  }
 
   isAnswer(direction) {
-    if (this.bridge.isCurrentDirection(direction)) return true;
+    if (this.#bridge.isCurrentDirection(direction)) return true;
     return false;
   }
 
   isGameEnd() {
-    if (this.bridge.isBridgeEnd()) return true;
+    if (this.#bridge.isBridgeEnd()) return true;
     return false;
   }
 }
