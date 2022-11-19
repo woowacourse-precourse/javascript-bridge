@@ -1,4 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
+const GAME_SIGNATURE = require('./utils/constant');
+const { askRestart } = require('./utils/message');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -45,12 +47,20 @@ class BridgeGame {
    */
   move(direction) {
     this.bridgeModel.move(direction);
-    this.outputView.printMap(this.bridgeModel.trialList);
+    this.outputView.printMap(this.bridgeModel.trials);
 
-    //!: 출력 확인
-    Console.print(`move 결과: ${this.bridgeModel.trialList[0].result}`);
-    Console.close();
+    if (this.bridgeModel.status === GAME_SIGNATURE.gameOn) {
+      this.askMoveDirection();
+    } else if (this.bridgeModel.status === GAME_SIGNATURE.gameFail) {
+      this.askRetry();
+    } else if (this.bridgeModel.status === GAME_SIGNATURE.gameSuccess) {
+      this.end();
+    }
   }
+
+  end() {}
+
+  askRetry() {}
 
   resetMove() {}
 

@@ -3,6 +3,9 @@ const GAME_SIGNATURE = {
   down: 'D',
   pass: 'O',
   fail: 'X',
+  gameOn: 'on',
+  gameSuccess: 'success',
+  gameFail: 'fail',
 };
 
 module.exports = GAME_SIGNATURE;
