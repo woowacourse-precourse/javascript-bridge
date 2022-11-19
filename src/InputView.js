@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
+const OutputView = require('./OutputView');
 const { isNumberInRange } = require('./lib/Utils');
 const { MOVE, GAME_RETRY, GAME_QUIT } = require('./constants/Command');
 const { ERROR, REQUEST } = require('./constants/Message');
@@ -18,6 +19,7 @@ const InputView = {
     Console.readLine(REQUEST.MOVE_SPACE, (input) => {
       InputView.validateMoving(input);
       const isContinued = game.move(input);
+      OutputView.printMap(game.getResultArray());
       if (isContinued) InputView.readMoving(game);
 
       if (game.isFailed()) InputView.readGameCommand(game);

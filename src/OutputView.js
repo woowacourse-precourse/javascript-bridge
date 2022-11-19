@@ -6,7 +6,15 @@ const OutputView = {
     Console.print(NOTICE.GAME_START);
   },
 
-  printMap() {},
+  printMap(resultArrays) {
+    const { upper, lower } = resultArrays;
+    OutputView.printSingleMap(upper);
+    OutputView.printSingleMap(lower);
+  },
+
+  printSingleMap(resultArray) {
+    Console.print(`[ ${resultArray.join(' | ')} ]`);
+  },
 
   printResult() {},
 };
