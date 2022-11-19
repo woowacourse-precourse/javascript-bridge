@@ -12,29 +12,22 @@ class Controller {
   #size;
 
   setting() {
-    try {
-      MissionUtils.Console.print(PRINT.START_GAME);
-      this.#size = InputView.readBridgeSize();
-    } catch (e) {
-      MissionUtils.Console.print(e);
-      // this.setting();
-    }
+    // try {
+    MissionUtils.Console.print(PRINT.START_GAME);
+    this.#size = InputView.readBridgeSize();
+    // } catch (e) {
+    // MissionUtils.Console.print(e);
+    // }
   }
 
-  start() {
+  play() {
     const game = new BridgeGame(this.#size);
-    const location = -1;
-    this.play(game, this.#size, location);
-  }
-
-  play(game, size, location) {
+    let location = -1;
     while (this.#command !== KEY.QUIT) {
       this.#correct = game.move(++location, InputView.readMoving());
       printMap(game.getBridgeMap(), location, this.#correct);
-      if (this.#correct && location === size - 1) break;
-      if (!this.#correct) {
-        location = this.getCommand(game, location);
-      }
+      if (this.#correct && location === this.#size - 1) break;
+      if (!this.#correct) location = this.getCommand(game, location);
     }
     printResult(game, location, this.#correct);
   }
