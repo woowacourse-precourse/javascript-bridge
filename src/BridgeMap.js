@@ -35,7 +35,11 @@ class BridgeMap {
     this.#distance += 1;
   }
 
-  getPathHistory (chooseStep) {
+  getPathHistory () {
+    return this.#history;
+  }
+
+  getPathHistoryWithChooseStep (chooseStep) {
     this.#history.up
       .push(chooseStep === GAME_CONSTANTS.upStair
         ? this.getPathMarker(chooseStep) : GAME_CONSTANTS.empty);
