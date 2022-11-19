@@ -1,6 +1,6 @@
 const { MAP_ELEMENT } = require('./constant');
 const BridgeMap = require('./models/BridgeMap');
-const { retryOrQuit, successfullyMove } = require('./HandleCommand');
+const { retryOrQuit, isCorrectDirection } = require('./HandleCommand');
 
 class BridgeGame {
   #bridge;
@@ -18,7 +18,7 @@ class BridgeGame {
 
   move(direction) {
     const nextCellDirection = this.#bridge[this.#curPlace++];
-    const successful = successfullyMove(direction, nextCellDirection);
+    const successful = isCorrectDirection(direction, nextCellDirection);
 
     return successful;
   }

@@ -2,7 +2,7 @@ const { COMMAND } = require('./constant');
 const Validator = require('./Validator');
 
 const HandleCommand = {
-  successfullyMove: (direction, nextCellDirection) => {
+  isCorrectDirection: (direction, nextCellDirection) => {
     Validator.directionValidityCheck(direction);
 
     return direction === nextCellDirection;
