@@ -7,7 +7,7 @@ const { close } = require("./utils");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #numberOfAttempt = 0;
+  #numberOfAttempt = 1;
   #myPosition = 0;
   #currentMap = { upperPart: [], lowerPart: [] };
   #validPath;
