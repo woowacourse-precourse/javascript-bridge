@@ -63,6 +63,7 @@
 - [ ] Console.readLine()은 InputView에서만 사용할 것
 - [ ] BridgeGame 클래스에서 InputView, OutputView를 사용하지 말 것.
 - [ ] BridgeMaker의 파일 위치 및 시그니처를 변경하지 말 것.
+- [ ] `BridgeGame` 클래스에서 `InputView`, `OutputView` 를 사용하지 않는다.
 
 # 신경 쓴 부분
 
