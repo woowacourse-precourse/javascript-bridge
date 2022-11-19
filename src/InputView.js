@@ -7,9 +7,10 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
+  readBridgeSize(bridgeGame) {
     inputUserValue(GAME_MESSAGE.INPUT_BRIDGE_LENGTH, (length) => {
       isBridgeLengthValid(length);
+      bridgeGame.createBridge(length);
     });
   },
 
