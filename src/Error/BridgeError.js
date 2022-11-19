@@ -1,7 +1,10 @@
+const GameProgress = require('../IO/GameProgress');
+
 const BridgeError = {
-  throwErrorHandler(errorMessage, ...possibeErrors) {
-    if (possibeErrors.includes(true)) {
-      throw new Error(errorMessage);
+  throwErrorHandler(errorMessage, possibeError) {
+    if (possibeError) {
+      GameProgress.printErrorMessage(errorMessage);
+      throw new Error();
     }
   },
 };

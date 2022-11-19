@@ -16,11 +16,12 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
  * BridgeGame의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
  * 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
  */
+
 class BridgeGame {
   #bridgeErrorMessages = [
-    '[ERROR] 유효하지 않은 다리 길이입니다.',
-    '[ERROR] U 또는 D를 입력하세요.',
-    '[ERROR] R 또는 Q를 입력하세요.',
+    '\n[ERROR] 유효하지 않은 다리 길이입니다.',
+    '\n[ERROR] U 또는 D를 입력하세요.',
+    '\n[ERROR] R 또는 Q를 입력하세요.',
   ];
 
   #bridgeMoveCount = 0;
@@ -36,10 +37,12 @@ class BridgeGame {
 
   validateBridgeSize = (size) => {
     const IS_NUMBER = /^\d{1,2}$/.test(size);
-    const LOWER_BOUND = 3;
-    const UPPER_BOUND = 20;
-    const IS_VALID_NUMBER = IS_NUMBER && +(size) >= LOWER_BOUND && +(size) <= UPPER_BOUND;
-    BridgeError.throwErrorHandler(this.#bridgeErrorMessages[0], !IS_VALID_NUMBER);
+    const IS_VALID_NUMBER = IS_NUMBER && +(size) >= 3 && +(size) <= 20;
+    try {
+      BridgeError.throwErrorHandler(this.#bridgeErrorMessages[0], !IS_VALID_NUMBER);
+    } catch {
+      InputView.readBridgeSize(this.validateBridgeSize);
+    }
     this.makeBridge(+size);
   };
 
@@ -59,10 +62,14 @@ class BridgeGame {
   }
 
   validateBridgeMove = (input) => {
-    const IS_VALID_MOVING = /^U|D$/.test(input);
-    BridgeError.throwErrorHandler(this.#bridgeErrorMessages[1], !IS_VALID_MOVING);
-    OutputView.printMap(this.#bridge, this.#bridgeMoveCount, input);
-    this.moveNext(input);
+    const IS_VALID_MOVING = /^[U|D]{1}$/.test(input);
+    try {
+      BridgeError.throwErrorHandler(this.#bridgeErrorMessages[1], !IS_VALID_MOVING);
+      OutputView.printMap(this.#bridge, this.#bridgeMoveCount, input);
+      this.moveNext(input);
+    } catch {
+      InputView.readMoving(this.validateBridgeMove);
+    }
   };
 
   moveNext = (input) => {
@@ -85,8 +92,12 @@ class BridgeGame {
   };
 
   validateRetryInput = (input) => {
-    const IS_VALID_INPUT = /^R|Q$/.test(input);
-    BridgeError.throwErrorHandler(this.#bridgeErrorMessages[2], !IS_VALID_INPUT);
+    const IS_VALID_INPUT = /^[R|Q]{1}$/.test(input);
+    try {
+      BridgeError.throwErrorHandler(this.#bridgeErrorMessages[2], !IS_VALID_INPUT);
+    } catch {
+      InputView.readGameCommand(this.validateRetryInput);
+    }
     this.gameRestartOrOver(input);
   };
 
