@@ -29,37 +29,6 @@ describe('BridgeGame 클래스 테스트', () => {
     token.forEach((token) => expect(binaryRegExp.test(token)).toBe(true));
   });
 
-  test('canMoveNext - 다음 방향으로 움직일 수 있는지 검사', () => {
-    // Given
-    const userDirectionList = ['U', 'D', 'U', 'D'];
-    const isMovable = [true, false, false, true];
-
-    // When
-    const nextDirectionList = ['U', 'U', 'D', 'D'];
-
-    // Then
-    userDirectionList.forEach((userDirection, idx) => {
-      const canMove = BridgeGame.canMoveNext(
-        userDirection,
-        nextDirectionList[idx]
-      );
-      expect(canMove).toBe(isMovable[idx]);
-    });
-  });
-
-  test('canMoveNext - U, D 이외 다른 값이 들어가면 예외 처리', () => {
-    // Given
-    const userDirection = 'L';
-
-    // When
-    const nextDirection = 'R';
-
-    // Then
-    expect(() => BridgeGame.canMoveNext(userDirection, nextDirection)).toThrow(
-      ERROR_MESSAGE.unexpected_input
-    );
-  });
-
   test('isGoUp - 유저 입력이 U일 때만 참값을 반환하는지 검사', () => {
     // Given
     const userDirectionList = ['U', 'D'];
