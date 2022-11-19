@@ -9,7 +9,7 @@ class Bridge {
 
   constructor(bridgeSize) {
     this.#bridgeSize = bridgeSize;
-    this.#bridge = makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate());
+    this.#bridge = makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
   }
 
   print() {
