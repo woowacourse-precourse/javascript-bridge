@@ -1,3 +1,4 @@
+const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const InputValidator = require('./InputValidator');
@@ -6,8 +7,7 @@ const OutputView = require('./OutputView');
 
 class App {
   constructor() {
-    this.bridgeSize;
-    this.bridges;
+    this.bridgeGame;
   }
 
   play() {
@@ -27,11 +27,35 @@ class App {
     }
   }
 
+  handleInputStep(input) {
+    try {
+      if (!InputValidator.isValidStep(input)) {
+        throw new Error('[ERROR] : 유효한 칸이 아닙니다.');
+      }
+      this.bridgeGame.bridgeSteps.push(input);
+      OutputView.printMap(
+        this.bridgeGame.answerSteps,
+        this.bridgeGame.bridgeSteps
+      );
+      const result = this.bridgeGame.move();
+      if (result === 'WIN') {
+        // print result
+      }
+      if (result === 'MOVE') {
+        InputView.readMoving(this.handleInputStep.bind(this));
+      }
+      if (result === 'FAIL') {
+        // handle retry
+      }
+    } catch (error) {
+      OutputView.printMessage(error.message);
+      InputView.readMoving(this.handleInputStep.bind(this));
+    }
+  }
+
   initBridges(size) {
-    this.bridgeSize = size;
-    this.bridges = BridgeMaker.makeBridge(
-      this.bridgeSize,
-      BridgeRandomNumberGenerator.generate
+    this.bridgeGame = new BridgeGame(
+      BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate)
     );
   }
 }
