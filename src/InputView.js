@@ -15,18 +15,19 @@ const InputView = {
     MissionUtils.Console.readLine(WordToPrint.bridgeSize, (bridgeSize) => {
       try {
         Error.readBridgeSizeError(bridgeSize);
-        const bridge = BridgeMaker.makeBridge(
-          bridgeSize,
-          RandomNumber.generate
-        );
-        console.log(bridge, "생성된 다리");
-        bridgeGame = new BridgeGame(bridge);
-        this.readMoving(0, bridge);
+        this.makeBridge(bridgeSize);
       } catch (e) {
         MissionUtils.Console.print(e);
         this.readBridgeSize();
       }
     });
+  },
+
+  makeBridge(bridgeSize) {
+    const bridge = BridgeMaker.makeBridge(bridgeSize, RandomNumber.generate);
+    console.log(bridge, "생성된 다리");
+    bridgeGame = new BridgeGame(bridge);
+    this.readMoving(0, bridge);
   },
 
   /**
