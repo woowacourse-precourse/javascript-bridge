@@ -4,7 +4,7 @@ const BridgeConverter = {
    * @returns {array}
    */
   makeEmptyBridge(length) {
-    return Array.from({ length: 2 }, (_) => Array.from({ length }, (_) => " "));
+    return Array.from({ length: 2 }, () => Array.from({ length }, () => " "));
   },
   /**
    *
@@ -50,13 +50,10 @@ const BridgeConverter = {
    */
   convertToBridge(answer, inputs) {
     const bridge = this.makeEmptyBridge(inputs.length);
-
     for (let i = 0; i < inputs.length; i++) {
       if (inputs[i] === "U") {
         this.writeBridgeU(answer[i], i, bridge);
-        continue;
-      }
-      this.writeBridgeD(answer[i], i, bridge);
+      } else this.writeBridgeD(answer[i], i, bridge);
     }
     return bridge;
   },
