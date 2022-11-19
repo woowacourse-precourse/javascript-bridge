@@ -1,12 +1,22 @@
 const Validate = require("./Validate");
+const { makeBridge } = require("./BridgeMaker");
+const { generate } = require("./BridgeRandomNumberGenerator");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridgeInformation;
+
+  constructor() {
+    this.#bridgeInformation = [];
+  }
 
   ready(size) {
     const validate = new Validate();
     validate.validateBridgeSize(size);
+    const bridgeInformation = makeBridge(Number(size), generate);
+    this.#bridgeInformation = bridgeInformation;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
