@@ -1,5 +1,6 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const Validator = require('./Validator');
 
 const { generate } = BridgeRandomNumberGenerator;
 /**
@@ -18,10 +19,11 @@ class BridgeGame {
   #numOfAttempts = 1;
   /**
    * BridgeGame 인스턴스를 생성할 때 다리의 사이즈를 받아서 다리를 생성
-   * @param {number} size 다리의 길이
+   * @param {string} size 다리의 길이
    */
   constructor(size) {
-    this.#bridge = BridgeMaker.makeBridge(size, generate);
+    Validator.bridgeSizeValidate(size);
+    this.#bridge = BridgeMaker.makeBridge(+size, generate);
   }
 
   /**
