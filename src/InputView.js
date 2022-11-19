@@ -25,7 +25,14 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    MissionUtils.Console.readLine(
+      message.RESTART_END_GAME_MESSAGE,
+      (answer) => {
+        console.log(answer);
+      }
+    );
+  },
 };
 
 module.exports = InputView;
