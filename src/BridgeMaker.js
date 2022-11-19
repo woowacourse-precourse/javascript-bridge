@@ -1,4 +1,4 @@
-const randnum_gen = require("../src/BridgeRandomNumberGenerator");
+const MissionUtils = require("@woowacourse/mission-utils");
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -11,8 +11,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     bridge = []
     for (let i = 0; i < size; i++){
-      temp = generateRandomNumber.generate()
-      MissionUtils.Console.close();
+      temp = generateRandomNumber.generate()      
       temp = temp === 1 ? "U" : "D"
       bridge.push(temp)      
     }            

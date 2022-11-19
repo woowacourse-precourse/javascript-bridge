@@ -1,3 +1,4 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -7,7 +8,34 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(bridge, input, cur_loc) {
+    upper = "["
+    lower = "["
+    for (let i = 0; i < cur_loc; i++){
+      if (bridge[i] === "U") {
+        upper += " O | "
+        lower += "   | "
+      } else if (bridge[i] === "D") {
+        upper += "   | "
+        lower += " O | "
+      }
+    }
+    if (bridge[cur_loc] === input && input == "U"){
+      upper += " O ]"
+      lower += "   ]"
+    } else if (bridge[cur_loc] === input && input == "D"){
+      upper += "   ]"
+      lower += " O ]"      
+    } else if (bridge[cur_loc] !== input && input == "U"){
+      upper += " X ]"
+      lower += "   ]"
+    } else if (bridge[cur_loc] !== input && input == "D"){
+      upper += " X ]"
+      lower += "   ]"
+    }
+    MissionUtils.Console.print(upper);
+    MissionUtils.Console.print(lower);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.

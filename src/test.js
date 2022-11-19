@@ -1,24 +1,51 @@
-const randnum_gen = require("../src/BridgeRandomNumberGenerator");
-const MissionUtils = require("@woowacourse/mission-utils");
 /**
- * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
+ * 사용자로부터 입력을 받는 역할을 한다.
  */
- const BridgeMaker = {
-    /**
-     * @param {number} size 다리의 길이
-     * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
-     * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
-     */
-    makeBridge(size, generateRandomNumber) {
-      bridge = []
-      for (let i = 0; i < size; i++){
-        temp = generateRandomNumber.generate()
-        MissionUtils.Console.close();
-        temp = temp === 1 ? "U" : "D"
-        bridge.push(temp)      
-      }
-      return bridge          
-    },
-  };
-
-BridgeMaker.makeBridge(8, randnum_gen)
+ const MissionUtils = require("@woowacourse/mission-utils");
+ const BridgeMaker = require("../src/BridgeMaker");
+ const randnum_gen = require("../src/BridgeRandomNumberGenerator");
+ const OutputView = require("../src/OutputView");
+ const InputView = {
+   /**
+   * 다리의 길이를 입력받는다.
+   */
+    readBridgeSize() {
+     MissionUtils.Console.readLine('다리의 길이를 입력해주세요.', (bridge_len) => {      
+       if(bridge_len<3 || bridge_len>20){
+         throw new Error(`[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.`)
+       }
+       MissionUtils.Console.print(`${bridge_len}`);
+       Game_Bridge = BridgeMaker.makeBridge(bridge_len, randnum_gen)                    
+       this.readMoving(Game_Bridge, 0)
+     });
+   },
+ 
+   /**
+   * 사용자가 이동할 칸을 입력받는다.
+   */
+   readMoving(Game_Bridge, curr_loc) {
+     MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (move_dir) => {
+       MissionUtils.Console.print(`${move_dir}`);
+       OutputView.printMap(Game_Bridge, move_dir, curr_loc)
+       curr_loc += 1
+       if (curr_loc === Game_Bridge.length){
+         this.readGameCommand()
+       } else {
+         this.readMoving(Game_Bridge, curr_loc)
+       }
+     });
+   },
+ 
+   /**
+   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   */
+   readGameCommand() {    
+     MissionUtils.Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (answer) => {
+       MissionUtils.Console.print(`${answer}`);
+       MissionUtils.Console.close();
+     });
+   },
+ };
+ 
+ InputView.readBridgeSize()
+ 
