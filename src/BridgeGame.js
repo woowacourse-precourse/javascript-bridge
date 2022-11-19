@@ -68,8 +68,15 @@ class BridgeGame {
     return true;
   }
 
+  returnUpDownArray() {
+    let array = [];
+    array.push(this.returnStringArray(this.#up));
+    array.push(this.returnStringArray(this.#down));
+    return array;
+  }
+
   returnStringArray(arr) {
-    str = `[ ${arr.join(' , ')} ]`;
+    let str = `[ ${arr.join(' , ')} ]`;
     str = str.replaceAll("'", ' ');
     str = str.replaceAll(',', '|');
     return str;
