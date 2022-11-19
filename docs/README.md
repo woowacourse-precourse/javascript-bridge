@@ -47,11 +47,11 @@ src
  ┣ controller
  ┃ ┗ BridgeGameControl.js
  ┣ models
- ┃ ┣ AskRetry.js
  ┃ ┣ BridgeGame.js
- ┃ ┣ BridgeSize.js
+ ┃ ┣ BridgeSizeCheck.js
  ┃ ┣ MakeMap.js
- ┃ ┗ MovingCheck.js
+ ┃ ┣ MovingCheck.js
+ ┃ ┗ RetryCheck.js
  ┣ utiles
  ┃ ┗ Constant.js
  ┣ view
@@ -78,7 +78,7 @@ src
 ### models/MakeMap.js
 - 출력할 다리 모양을 만드는 기능
 
-### models/AskRetry.js, BridgeSize.js, MoveingCheck.js
+### models/RetryCheck.js, BridgeSizeCheck.js, MoveingCheck.js
 - 입력값에 대한 유효성 검사
 
 ### view/InputView.js
@@ -99,7 +99,7 @@ src
 ### ApplicationTest.js
 - 전체 기능 테스트
 
-### InputValueTest.js
+### InputCheckTest.js
 - 다리 길이 입력값, U/D 입력값, R/Q 입력값의 유효성 로직을 테스트
 
 ### MakeBridgeTest.js

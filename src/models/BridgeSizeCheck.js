@@ -1,7 +1,7 @@
 const { ERROR } = require('../utiles/Constant');
 const OutputView = require('../view/OutputView');
 
-class BridgeSize {
+class BridgeSizeCheck {
   validate(size) {
     try {
       this.checkWordAndRange(size);
@@ -31,4 +31,4 @@ class BridgeSize {
   };
 };
 
-module.exports = BridgeSize;
+module.exports = BridgeSizeCheck;

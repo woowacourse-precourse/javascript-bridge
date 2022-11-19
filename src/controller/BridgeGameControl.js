@@ -1,12 +1,12 @@
 const { ANSWER } = require('../utiles/Constant');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const BridgeSize = require('../models/BridgeSize');
+const BridgeSizeCheck = require('../models/BridgeSizeCheck');
 const MovingCheck = require('../models/MovingCheck');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const BridgeGame = require('../models/BridgeGame');
-const AskRetry = require('../models/AskRetry');
+const RetryCheck = require('../models/RetryCheck');
 
 class BridgeGameControl {
   size;
@@ -16,15 +16,15 @@ class BridgeGameControl {
   success = ANSWER.FAIL;
 
   constructor() {
-    this.bridgeSize = new BridgeSize();
+    this.bridgeSizeCheck = new BridgeSizeCheck();
     this.movingCheck = new MovingCheck();
-    this.askRetryCheck = new AskRetry();
+    this.retryCheck = new RetryCheck();
     OutputView.printStart();
   };
   
   start() {
     InputView.readBridgeSize((size) => {
-      this.isValidSize(this.bridgeSize.validate(size), size);
+      this.isValidSize(this.bridgeSizeCheck.validate(size), size);
     });
   };
 
@@ -90,7 +90,7 @@ class BridgeGameControl {
 
   askRetry() {
     InputView.readGameCommand((retryAnswer) => {
-      this.isValidRetry(this.askRetryCheck.validate(retryAnswer), retryAnswer);
+      this.isValidRetry(this.retryCheck.validate(retryAnswer), retryAnswer);
     });
   };
 

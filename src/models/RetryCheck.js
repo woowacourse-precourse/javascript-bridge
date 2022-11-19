@@ -1,7 +1,7 @@
 const { ERROR } = require('../utiles/Constant');
 const OutputView = require('../view/OutputView');
 
-class AskRetry {
+class RetryCheck {
   validate(command) {
     try {
       this.checkWordAndRange(command);
@@ -31,4 +31,4 @@ class AskRetry {
   };
 };
 
-module.exports = AskRetry;
+module.exports = RetryCheck;
