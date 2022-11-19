@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { NOTICE } = require('./constants/Message');
+const { NOTICE, RESULT } = require('./constants/Message');
 
 const OutputView = {
   printGameStart() {
@@ -13,7 +13,11 @@ const OutputView = {
   },
 
   printSingleMap(resultArray) {
-    Console.print(`[ ${resultArray.join(' | ')} ]`);
+    Console.print(
+      `${RESULT.OPEN_BRACKET} ${resultArray.join(RESULT.SEPARATOR)} ${
+        RESULT.CLOSING_BRACKET
+      }`
+    );
   },
 
   printResult() {},

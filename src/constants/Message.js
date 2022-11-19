@@ -19,4 +19,12 @@ const ERROR = {
     '[ERROR] 재시작 여부는 R 또는 Q 중 하나의 문자로 입력해주세요.\n',
 };
 
-module.exports = { NOTICE, REQUEST, ERROR };
+const RESULT = {
+  SUCCESS: '성공',
+  FAILURE: '실패',
+  OPEN_BRACKET: '[',
+  CLOSING_BRACKET: ']',
+  SEPARATOR: ' | ',
+};
+
+module.exports = { NOTICE, REQUEST, ERROR, RESULT };
