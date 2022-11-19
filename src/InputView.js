@@ -1,9 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
-const BridgeMaker = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
-const { INPUT_MESSAGE } = require('./constant/message');
-const { printResult, printMap, printStt } = require('./OutputView');
+
+const COMMAND = require('./Constants/contant');
+const { INPUT_MESSAGE } = require('./Constants/message');
+const { initBridge, selectSpace, moveProcess } = require('./GameController');
+const { printResult } = require('./OutputView');
 const Validator = require('./Validator');
 
 /**
@@ -16,11 +17,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.bridge_length, (bridgeLength) => {
       try {
-        Validator.chekcBridgeSizeValue(bridgeLength);
-        const bridge = BridgeMaker.makeBridge(bridgeLength, generate);
-        console.log(bridge);
-        const game = new BridgeGame(bridge);
-
+        const game = initBridge(bridgeLength);
         this.readMoving(game);
       } catch (err) {
         Console.print(err);
@@ -36,18 +33,8 @@ const InputView = {
     // 이동할 칸 선택
     Console.readLine(INPUT_MESSAGE.move, (direction) => {
       try {
-        Validator.checkCorrectDirection(direction);
-        game.move(direction); // records에 넣음 (Move)
-        printMap(game); // printMap
-        if (BridgeGame.canMoveNext(direction, game.getNextDirection())) {
-          // canMoveNext (마지막에 넣은거로 비교해보기)
-          if (game.isEndOfBridge()) {
-            printMap(game);
-            printResult(game);
-            printMap(game);
-            printStt(game);
-          } else this.readMoving(game);
-        } else this.readGameCommand(game);
+        selectSpace(game, direction);
+        moveProcess(game, direction);
       } catch (err) {
         Console.print(err);
         this.readMoving(game);
@@ -61,14 +48,12 @@ const InputView = {
   readGameCommand(game) {
     console.log('readGamecommand');
     Console.readLine(INPUT_MESSAGE.retry, (command) => {
-      Validator.validateRetry(command);
-      if (command === 'R') {
+      Validator.checkCorrectCommand(command);
+      if (command === COMMAND.retry) {
         game.retry();
         this.readMoving(game);
       } else {
-        printResult();
-        printMap(game);
-        printStt(game);
+        printResult(game);
       }
     });
   },
