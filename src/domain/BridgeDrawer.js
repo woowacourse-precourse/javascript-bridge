@@ -14,6 +14,16 @@ class BridgeDrawer {
         .map((cell) => (cell === currentDirection ? BRIDGE.SUCCESS_SIGN : BRIDGE.EMPTY_SIGN));
     });
   }
+
+  #markFailSignIfFailed() {
+    if (this.#gameStatus.isPlayerSucceed) {
+      return;
+    }
+
+    const bridgeLastIndex = this.#gameStatus.drawSize - 1;
+    const direction = this.#gameStatus.bridge[bridgeLastIndex];
+    this.#bridgeDrawing[direction][bridgeLastIndex] = BRIDGE.FAIL_SIGN;
+  }
 }
 
 module.exports = BridgeDrawer;
