@@ -47,18 +47,17 @@ class App {
       OutputView.retry();
       this.progress;
     }
-    OutputView.printResult(MESSAGE_GAME_FAILURE, this.#playCount);
-    this.quit();
+    this.printResultAndQuit(MESSAGE_GAME_FAILURE);
   }
 
-  quit() {
+  printResultAndQuit(endMessage) {
+    OutputView.printResult(endMessage, this.#playCount);
     Console.close();
   }
 
   quitIfAllBridgePassed() {
     if (this.#bridgeGame.isAllPassed()) {
-      OutputView.printResult(MESSAGE_GAME_SUCCESS, this.#playCount);
-      this.quit();
+      this.printResultAndQuit(MESSAGE_GAME_SUCCESS);
     }
   }
 
