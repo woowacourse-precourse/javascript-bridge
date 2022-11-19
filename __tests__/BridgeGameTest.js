@@ -26,6 +26,12 @@ const retryMockFn = jest.fn(() => {
   crossingOrder = [];
 });
 
+const getResultMockFn = jest.fn(() => {
+  const isSuccess = !isFailMockFn() && isLastMockFn();
+
+  return { isSuccess, attemptCount };
+});
+
 describe('move 메서드 테스트', () => {
   test('move 메서드가 실행되면 crossingOrder 요소가 1씩 증가한다.', () => {
     moveMockFn('U');
@@ -245,5 +251,65 @@ describe('retry 메서드 테스트', () => {
     retryMockFn();
 
     expect(crossingOrder).toHaveLength(0);
+
+    attemptCount = 1;
+  });
+});
+
+describe('getResult 메서드 테스트', () => {
+  test.each([
+    [['D'], false],
+    [['U', 'U'], false],
+    [['U', 'D', 'D', 'U'], true],
+  ])('재시도가 없을 때의 반환값 테스트', (array, boolean) => {
+    const app = new App();
+    const bridgeGame = new BridgeGame(['U', 'D', 'D', 'U']);
+
+    app.bridgeGame = bridgeGame;
+
+    crossingOrder = [];
+
+    array.forEach((dircetion) => {
+      moveMockFn(dircetion);
+    });
+
+    getResultMockFn();
+
+    expect(getResultMockFn()).toEqual({
+      isSuccess: boolean,
+      attemptCount: 1,
+    });
+  });
+
+  test('재시도가 있을 때의 반환값 테스트', () => {
+    const app = new App();
+    const bridgeGame = new BridgeGame(['U', 'D', 'D', 'U']);
+
+    app.bridgeGame = bridgeGame;
+
+    crossingOrder = [];
+
+    ['U', 'U'].forEach((dircetion) => {
+      moveMockFn(dircetion);
+    });
+
+    retryMockFn();
+
+    ['U', 'D', 'U'].forEach((dircetion) => {
+      moveMockFn(dircetion);
+    });
+
+    retryMockFn();
+
+    ['U', 'D', 'D', 'U'].forEach((dircetion) => {
+      moveMockFn(dircetion);
+    });
+
+    getResultMockFn();
+
+    expect(getResultMockFn()).toEqual({
+      isSuccess: true,
+      attemptCount: 3,
+    });
   });
 });
