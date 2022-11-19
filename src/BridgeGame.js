@@ -40,33 +40,40 @@ class BridgeGame {
   move(userMove) {
     this.checkMove(this.#bridge[this.#userPos], userMove);
     if (!this.#isPass) {
-      this.#userPos = 0;
-      return;
+      return false;
     }
     this.#userPos++;
-    return !!this.#isPass;
+    return true;
   }
 
-  checkMove(bridge, userMove) {
-    this.#isPass = bridge === userMove;
-    this.setBridgeMap(bridge, userMove);
-    if (this.isGameOver()) {
-      this.#isGameOver = !!this.#isPass;
+  checkMove(currBridge, userMove) {
+    this.#isPass = currBridge === userMove;
+    this.pushBridgeMap(currBridge, userMove);
+    if (this.#bridge.length === this.#userPos + 1) {
+      this.#isGameOver = true;
     }
   }
 
-  setBridgeMap(bridge, userMove) {
-    if (bridge === userMove) {
-      this.#bridgeMap[userMove].push(' O ');
-      if (userMove === 'U') {
-       this.#bridgeMap['D'].push('   ');
-       return;
-      }
-      this.#bridgeMap['U'].push('   ');
+  pushBridgeMap(currBridge, userMove) {
+    if (currBridge === userMove) {
+      this.pushBridgeMapTrueCase(currBridge, userMove);
       return;
     }
-    this.#bridgeMap[userMove].push(' X ');
-    this.#bridgeMap[bridge].push('  ');
+    this.pushBridgeMapFalseCase(currBridge, userMove);
+  }
+
+  pushBridgeMapTrueCase(currBridge, userMove) {
+    this.#bridgeMap[userMove].push('O');
+    if (userMove === 'U') {
+      this.#bridgeMap['D'].push(' ');
+      return;
+    }
+    this.#bridgeMap['U'].push(' ');
+  }
+
+  pushBridgeMapFalseCase(currBridge, userMove) {
+    this.#bridgeMap[userMove].push('X');
+    this.#bridgeMap[currBridge].push(' ');
   }
 
   /**
@@ -89,18 +96,11 @@ class BridgeGame {
     console.log('set bridge array: ',this.#bridge);
   }
 
-  isGameOver() {
-    if (this.#bridge.length === this.#userPos + 1) {
-      return true;
-    }
-  }
-
-  end() {
+  endMessage() {
     if (this.#isPass) {
       return ['성공', this.#userAttempt];
-    } else {
-      return ['실패', this.#userAttempt];
     }
+    return ['실패', this.#userAttempt];
   }
 }
 
