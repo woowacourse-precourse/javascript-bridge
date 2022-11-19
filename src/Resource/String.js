@@ -9,6 +9,7 @@ const ERROR = {
   OUT_OF_BOUNDARY: '[ERROR] 숫자가 다음의 범위에 없습니다.',
   IS_ARRAY: '[ERROR] 배열이 아닙니다.',
   IS_MAX_POSITON: '[ERROR] 마지막 배열입니다.',
+  IS_GAME_RESART_QUIT: '[ERROR] 게임을 재시작 하려면 R, 끄려면 Q를 입력해야함니다.'
 };
 
 Object.freeze(INPUT);

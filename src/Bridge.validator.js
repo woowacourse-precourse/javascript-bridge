@@ -13,8 +13,14 @@ class BridgeValidator {
     });
   }
   static checkInputNext(next) {
-    if (bridgeElement != 'U' && bridgeElement != 'D') {
+    if (next != 'U' && next != 'D') {
       throw new Error(ERROR.IS_BRIDGE_UP_DOWN);
+    }
+    return true;
+  }
+  static checkGameCommand(command) {
+    if (command != 'R' && command != 'Q') {
+      throw new Error(ERROR.IS_GAME_RESART_QUIT);
     }
     return true;
   }

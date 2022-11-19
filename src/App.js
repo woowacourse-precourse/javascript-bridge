@@ -18,6 +18,8 @@ class App {
     bridgeGame.move(nextMoveChar);
     OutputView.printMap(bridgeGame.bridgeAnswers);
     if (bridgeGame.isFinish) {
+      
+      bridgeGame.retry();
     }
   }
 }
