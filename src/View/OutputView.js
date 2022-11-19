@@ -27,7 +27,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(gameResult, tryingCount) {
+  printResult(gameResult, attemptsCount) {
+    MissionUtils.Console.print(`${MESSAGE.SUCCESS_OR_FAIL}${gameResult}`);
+    MissionUtils.Console.print(
+      `${MESSAGE.TOTAL_ATTEMPTS_COUNT}${attemptsCount}`
+    );
+
+    MissionUtils.Console.close();
   },
 };
 
