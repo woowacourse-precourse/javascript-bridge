@@ -19,6 +19,7 @@ class BridgeGame {
     this.#bridges = [];
     this.#state = [];
     this.#tryCount = 1;
+    InputView.readBridgeSize(this);
   }
 
   makeBridge() {
