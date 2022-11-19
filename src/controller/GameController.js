@@ -52,6 +52,13 @@ class GameController {
 
   setGameCommand(gameCommand) {
     validateGameCommand.validate(gameCommand);
+
+    if (gameCommand === 'R') {
+      this.game.retry();
+      OutputView.initialization();
+      this.askMoving();
+    } else {
+    }
   }
 }
 
