@@ -73,7 +73,25 @@
 
 ### :pencil2: 프로그래밍 요구사항
 
----
+- [ ] Node.js 14 버전에서 실행 가능
+- [ ] package.json을 변경 X
+- [ ] process.exit()를 호출 X
+- [ ] ApplicationTest의 모든 테스트가 성공
+- [ ] 패키지 이름 수정/이동 X
+- [ ] indent 최대 2까지 허용
+- [ ] 함수는 한 가지 일만
+- [ ] else 지양
+- [ ] Jest를 이용한 단위 테스트 구현
+- [ ] 함수의 길이는 10라인을 넘지 않음
+- [ ] 메서드의 파라미터 개수는 최대 3개
+- [ ] Console.readLine()은 InputView에서만 사용 가능
+- [ ] BridgeGame에서는 InputView, OutputView 사용 불가능
+- [ ] OutputView, BridgeGame : 메서드 이름 변경 불가
+- [ ] BridgeMaker
+  - [ ] 프로퍼티 추가 불가
+  - [ ] 파일 경로 변경 불가
+  - [ ] 메서드의 시그니처와 반환 타입 변경 불가
+- [ ] BridgeRandomNumberGeneartor 코드 변경 불가
 
 ### :pencil2:전체 진행 과정 예시
 
