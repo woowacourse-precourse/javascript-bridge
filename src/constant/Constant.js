@@ -16,8 +16,8 @@ const REQUIREMENT = {
 const MESSAGE = {
   INIT: '다리 건너기 게임을 시작합니다.\n',
   INPUTBRIDGELENGTH: '다리의 길이를 입력해주세요.\n',
-  INPUTMOVINGLOCATION: `이동할 칸을 선택해주세요. (위: ${REQUIREMENT.UP}, 아래:${REQUIREMENT.DOWN})\n`,
-  INPUTRETRYORQUIT: `게임을 다시 시도할지 입력해주세요. (재시도: ${REQUIREMENT.RETRY}, 종료:${REQUIREMENT.QUIT})\n`,
+  INPUTMOVINGLOCATION: `\n이동할 칸을 선택해주세요. (위: ${REQUIREMENT.UP}, 아래:${REQUIREMENT.DOWN})\n`,
+  INPUTRETRYORQUIT: `\n게임을 다시 시도할지 입력해주세요. (재시도: ${REQUIREMENT.RETRY}, 종료:${REQUIREMENT.QUIT})\n`,
   RESULT: '최종게임 결과',
   SUCCESSORNOT: '게임성공 여부: ',
   SUCCESS : '성공',
