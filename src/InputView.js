@@ -1,10 +1,12 @@
 const { Console } = require('@woowacourse/mission-utils');
-
-const COMMAND = require('./Constants/contant');
-const { INPUT_MESSAGE } = require('./Constants/message');
-const { initBridge, canNotMove, canMoveNext } = require('./GameController');
+const { INPUT_MESSAGE, ERROR_MESSAGE } = require('./Constants/message');
+const {
+  initBridgeGame,
+  canMoveNext,
+  selectWrongDirection,
+  isCommandRetry,
+} = require('./GameController');
 const { printResult } = require('./OutputView');
-const Validator = require('./Validator');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -16,7 +18,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.bridge_length, (bridgeLength) => {
       try {
-        const game = initBridge(bridgeLength);
+        const game = initBridgeGame(bridgeLength);
         this.readMoving(game);
       } catch (err) {
         Console.print(err);
@@ -32,11 +34,8 @@ const InputView = {
     // 이동할 칸 선택
     Console.readLine(INPUT_MESSAGE.move, (direction) => {
       try {
-        if (canNotMove(game, direction)) {
-          this.readGameCommand(game);
-        } else if (canMoveNext(game)) {
-          this.readMoving(game);
-        }
+        if (selectWrongDirection(game, direction)) this.readGameCommand(game);
+        else if (canMoveNext(game)) this.readMoving(game);
       } catch (err) {
         Console.print(err);
         this.readMoving(game);
@@ -49,12 +48,14 @@ const InputView = {
    */
   readGameCommand(game) {
     Console.readLine(INPUT_MESSAGE.retry, (command) => {
-      Validator.checkCorrectCommand(command);
-      if (command === COMMAND.retry) {
-        game.retry();
-        this.readMoving(game);
-      } else {
-        printResult(game);
+      try {
+        if (isCommandRetry(command)) {
+          game.retry();
+          this.readMoving(game);
+        } else printResult(game);
+      } catch (err) {
+        Console.print(err);
+        this.readGameCommand(game);
       }
     });
   },
