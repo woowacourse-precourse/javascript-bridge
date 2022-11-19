@@ -16,19 +16,16 @@ class Bridge {
   generateNumbers() {
     for (let index = 0; index < this.#bridgeSize; index += 1) {
       const generatedPlace = BridgeRandomNumberGenerator.generate(); // 0이면 위, 1이면 아래
-      this.pushToArray(generatedPlace);
+      this.pushToArray(generatedPlace === 0);
     }
   }
 
-  pushToArray(generatedPlace) {
-    if (generatedPlace === 0) {
-      this.#up.push(true);
-      this.#down.push(false);
-    } else { // else deprecated
-      this.#up.push(false);
-      this.#down.push(true);
-    }
+  pushToArray(bool) {
+    this.#up.push(bool);
+    this.#down.push(!bool);
   }
+
+
 
   print() {
     MissionUtils.Console.print(JSON.stringify(this.#up).replaceAll(',', ' | '));
