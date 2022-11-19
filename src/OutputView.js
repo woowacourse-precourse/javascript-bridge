@@ -10,9 +10,7 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(upperBridge, lowerBridge) {
-    const assembleBridge = (bridge) => {
-      return "[ " + bridge.join(" | ") + " ]";
-    };
+    const assembleBridge = (bridge) => "[ " + bridge.join(" | ") + " ]";
     MissionUtils.Console.print(assembleBridge(upperBridge));
     MissionUtils.Console.print(assembleBridge(lowerBridge));
     MissionUtils.Console.print("");
@@ -24,9 +22,7 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(totalTrial, gameResult, bridge) {
-    const assembleBridge = (bridge) => {
-      return "[ " + bridge.join(" | ") + " ]";
-    };
+    const assembleBridge = (bridge) => "[ " + bridge.join(" | ") + " ]";
     MissionUtils.Console.print(MESSAGES_RESULT.TITLE);
     MissionUtils.Console.print(assembleBridge(bridge[VALUES.UPPER_BRIDGE_INDEX]));
     MissionUtils.Console.print(assembleBridge(bridge[VALUES.LOWER_BRIDGE_INDEX]));

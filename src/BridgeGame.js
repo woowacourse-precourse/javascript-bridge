@@ -82,13 +82,16 @@ class BridgeGame {
   #retry(command) {
     if (command === GAME_UTILS.COMMAND_RESTART) {
       this.#numberOfTrials += 1;
-      this.#upperBridge = [];
-      this.#lowerBridge = [];
-      this.#gameRound = VALUES.INITIAL_GAME_ROUND;
+      this.#initializeGameStatus();
       ViewController.input.moving(this.#move.bind(this));
     } else if (command === GAME_UTILS.COMMAND_QUIT) {
       this.#gameOver();
     }
+  }
+  #initializeGameStatus() {
+    this.#upperBridge = [];
+    this.#lowerBridge = [];
+    this.#gameRound = VALUES.INITIAL_GAME_ROUND;
   }
 }
 
