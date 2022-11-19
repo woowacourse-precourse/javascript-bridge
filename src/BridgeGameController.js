@@ -1,5 +1,6 @@
 const BridgeGame = require('./BridgeGame.js');
 const InputView = require('./InputView.js');
+const OutputView = require('./OutputView.js');
 const BridgeMaker = require('./BridgeMaker.js');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator.js');
 const Bridge = require('./model/Bridge.js');
@@ -23,11 +24,11 @@ class BridgeGameController {
   }
 
   movingByUser(move) {
-    this.bridgeGame.move(move, this.bridge);
+    const isWrongAnswer = this.bridgeGame.move(move, this.bridge);
+    OutputView.printMap(this.bridge);
+
     if (this.bridge.data.turn >= this.bridge.data.length) {
-      console.log(this.bridge.data.bridge);
-      console.log(`[${this.bridge.data.upperBridge}]`);
-      console.log(`[${this.bridge.data.lowerBridge}]`);
+      OutputView.printMap(this.bridge);
     } else InputView.readMoving(this.movingByUser.bind(this));
   }
 }

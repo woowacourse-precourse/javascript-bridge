@@ -29,26 +29,22 @@ class BridgeGame {
     if (bridge.data.blueprint[bridge.data.turn] === 'U' && move === 'D') {
       bridge.setData('upperBridge', bridge.data.upperBridge + '   ');
       bridge.setData('lowerBridge', bridge.data.lowerBridge + ' X ');
+
+      return false;
     }
     if (bridge.data.blueprint[bridge.data.turn] === 'D' && move === 'U') {
       bridge.setData('upperBridge', bridge.data.upperBridge + ' X ');
       bridge.setData('lowerBridge', bridge.data.lowerBridge + '   ');
+
+      return false;
     }
     if (bridge.data.blueprint[bridge.data.turn] === 'D' && move === 'D') {
       bridge.setData('upperBridge', bridge.data.upperBridge + '   ');
       bridge.setData('lowerBridge', bridge.data.lowerBridge + ' O ');
     }
 
-    console.log(bridge.data);
-    // this.turn += 1;
     bridge.setData('turn', bridge.data.turn + 1);
-    // console.log(this.turn);
-    // console.log(this.bridgeLength);
-    // if (this.turn >= this.bridgeLength) {
-    //   console.log(this.bridgeGame.bridge);
-    //   console.log(`[${this.upperBridge}]`);
-    //   console.log(`[${this.lowerBridge}]`);
-    // } else InputView.readMoving(this.movingByUser.bind(this));
+    return true;
   }
 
   /**
