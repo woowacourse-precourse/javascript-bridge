@@ -56,12 +56,21 @@ class BridgeGame {
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
+   * @param {string} gameCommand R은 재시작, Q는 종료를 뜻합니다.
+   * @return {boolean} true는 재시작, false는 종료를 뜻합니다.
    */
-  retry() {
-    this.#tryCount+= 1;
-    this.#bridgeAnswers = [];
-    this.#currentPosition = 0;
-    this.#isFinish = false;
+  retry(gameCommand) {
+    BridgeValidator.checkGameCommand(gameCommand);
+    if (gameCommand == 'Q') {
+      return false;
+    }
+    if (gameCommand == 'R') {
+      this.#tryCount += 1;
+      this.#bridgeAnswers = [];
+      this.#currentPosition = 0;
+      this.#isFinish = false;
+    }
+    return true;
   }
 }
 

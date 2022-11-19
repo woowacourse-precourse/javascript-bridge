@@ -11,15 +11,17 @@ class App {
       BridgeRandomNumberGenerator.generate,
     );
     const bridgeGame = new BridgeGame(bridge);
-    this.#start(bridgeGame);
+    while(!this.#start(bridgeGame));
+    
   }
+
   #start(bridgeGame) {
     const nextMoveChar = InputView.readMoving();
     bridgeGame.move(nextMoveChar);
     OutputView.printMap(bridgeGame.bridgeAnswers);
     if (bridgeGame.isFinish) {
-      
-      bridgeGame.retry();
+      const gameCommand = InputView.readGameCommand();
+      return bridgeGame.retry(gameCommand);
     }
   }
 }
