@@ -72,7 +72,7 @@ class BridgeGame {
   }
 
   end() {
-    console.log("end");
+    OutputView.printMap(this.firstLineResult, this.secondLineResult, true);
   }
 }
 

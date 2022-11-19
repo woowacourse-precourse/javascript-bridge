@@ -14,7 +14,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(firstLineResult, secondLineResult) {
+  printMap(firstLineResult, secondLineResult, isFinal) {
+    if (isFinal) {
+      Console.print(CONSOLE_MESSAGE.finalResult);
+    }
     Console.print(`[ ${firstLineResult.join(" | ")} ]`);
     Console.print(`[ ${secondLineResult.join(" | ")} ]\n`);
   },
