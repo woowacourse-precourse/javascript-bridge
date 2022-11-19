@@ -6,15 +6,14 @@ const { printGameStart } = require('../view/OutputView');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridgeSize;
-
   #bridge;
+
+  #level;
 
   async execute() {
     printGameStart();
-    this.#bridgeSize = await readBridgeSize();
-    this.#bridge = new Bridge(this.#bridgeSize);
-    this.#bridge.print();
+    this.#bridge = new Bridge(await readBridgeSize());
+    this.#bridge.print(); // deprecated
     console.log(await readMoving());
   }
 
