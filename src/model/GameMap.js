@@ -30,7 +30,15 @@ class GameMap {
     // 만약, 유저가 n번째 위치라면 다리를 연장 시켜야한다.
   }
 
-  selectUpOrDownBridge(moveCommand) {}
+  selectUpOrDownBridge(moveCommand) {
+    // 패턴을 넣을 다리가 위쪽 다리인지 아래쪽 다리인지 선택
+    const { up } = BRIDGE_GAME;
+    if (moveCommand === up) {
+      return this.#upperBridge;
+    }
+    return this.#lowerBridge;
+  }
+
   selectOXpattern(moveCommand, userLocation) {}
   appendDrawingBridge() {}
   appendEmptySpace(selectBridge) {}
