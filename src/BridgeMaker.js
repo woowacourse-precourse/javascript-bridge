@@ -3,6 +3,8 @@ const { BRIDGE } = require('./constants');
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
+const MOVING_MAP = Object.freeze([BRIDGE.MOVING_LOWER, BRIDGE.MOVING_UPPER]);
+
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -12,11 +14,10 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     validate(size, isBridgeSize);
 
-    const MOVING_MAP = Object.freeze([
-      BRIDGE.MOVING_LOWER,
-      BRIDGE.MOVING_UPPER,
-    ]);
-    const bridgeNumber = Array.from({ length: size }, generateRandomNumber);
+    const bridgeNumber = Array.from(
+      { length: Number(size) },
+      generateRandomNumber,
+    );
 
     return bridgeNumber.map((number) => MOVING_MAP[number]);
   },
