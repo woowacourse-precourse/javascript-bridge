@@ -21,7 +21,9 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    Console.readLine(INPUT_MESSAGE.ENTER_GAME_COMMAND, callback);
+  },
 };
 
 module.exports = InputView;

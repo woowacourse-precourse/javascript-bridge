@@ -22,14 +22,15 @@ class Bridge {
 
   match(playerMovings) {
     const bridgeMap = { U: [], D: [] };
+    let checking;
     for (let idx = 0; idx < playerMovings.length; idx++) {
-      let checking = playerMovings[idx] === this.#pattern[idx] ? BRIDGE.RIGHT : BRIDGE.WRONG;
+      checking = playerMovings[idx] === this.#pattern[idx] ? BRIDGE.RIGHT : BRIDGE.WRONG;
       let moving = playerMovings[idx];
       let notMoving = playerMovings[idx] === BRIDGE.UP ? BRIDGE.DOWN : BRIDGE.UP;
       bridgeMap[moving].push(checking);
       bridgeMap[notMoving].push(' ');
     }
-    return bridgeMap;
+    return { bridgeMap, checking };
   }
 }
 

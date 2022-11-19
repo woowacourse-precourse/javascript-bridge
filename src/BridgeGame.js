@@ -17,8 +17,8 @@ class BridgeGame {
    */
   move(moving) {
     this.#player.movings.push(moving);
-    const bridgeMap = this.#bridge.match(this.#player.movings);
-    return bridgeMap;
+    const { bridgeMap, checking } = this.#bridge.match(this.#player.movings);
+    return { bridgeMap, checking };
   }
 
   /**

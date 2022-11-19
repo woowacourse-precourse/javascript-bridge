@@ -4,6 +4,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const InputValidator = require('../utils/InputValidator');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const { BRIDGE, GAME } = require('../utils/constants');
 
 class BridgeGameController {
   #bridgeGame;
@@ -53,13 +54,31 @@ class BridgeGameController {
   }
 
   move(moving) {
-    const bridgeMap = this.#bridgeGame.move(moving);
-    this.printMap(bridgeMap);
+    const { bridgeMap, checking } = this.#bridgeGame.move(moving);
+    this.printMap({ bridgeMap, checking });
   }
 
-  printMap(bridgeMap) {
+  printMap({ bridgeMap, checking }) {
     OutputView.printMap(bridgeMap);
+    const isRight = checking === BRIDGE.RIGHT;
+    if (isRight) return this.readMoving();
+    this.readGameCommand();
   }
+
+  readGameCommand() {
+    const onReadGameCommand = (gameCommand) => {
+      try {
+        InputValidator.isValidGameCommand(gameCommand);
+        this.excuteGameCommand(gameCommand);
+      } catch (err) {
+        Console.print(err.message);
+        this.readGameCommand();
+      }
+    };
+    InputView.readGameCommand(onReadGameCommand);
+  }
+
+  excuteGameCommand(gameCommand) {}
 }
 
 module.exports = BridgeGameController;
