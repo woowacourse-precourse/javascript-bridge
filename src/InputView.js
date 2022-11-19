@@ -31,6 +31,8 @@ const InputView = {
       console.log(bridge.getBridge());
 
       this.readMoving(bridge, bridgeGame);
+
+      this.readGameCommand();
     });
   },
 
@@ -50,7 +52,9 @@ const InputView = {
         this.checkMovement(movement);
         bridgeGame.move(movement, bridge);
         bridgeGame.setRound();
-        this.readMoving(bridge, bridgeGame);
+        bridgeGame.getCross() === true
+          ? this.readMoving(bridge, bridgeGame)
+          : this.readGameCommand(bridge, bridgeGame);
       }
     );
   },
@@ -58,7 +62,22 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+
+  checkRestart(string) {
+    if (!(string === "R" || string === "Q")) {
+      throw new Error("[ERROR] R이나 Q");
+    }
+  },
+
+  readGameCommand(bridge, bridgeGame) {
+    MissionUtils.Console.readLine(
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (restart) => {
+        this.checkRestart(restart);
+        bridgeGame.retry(restart);
+      }
+    );
+  },
 };
 
 module.exports = InputView;
