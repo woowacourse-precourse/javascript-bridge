@@ -13,5 +13,14 @@ const Validator = {
     if (!sizeIsInteger) throw new Error(MESSAGE.ERROR_NOT_A_NUMBER);
     if (!sizeIsValid) throw new Error(MESSAGE.ERROR_OUT_OF_RANGE);
   },
+
+  /**
+   * 사용자 이동에 대한 입력값을 검증
+   * @param {string} movement input으로 들어온 사용자의 움직임
+   */
+  movingValidate(movement) {
+    const movementIsValid = movement === 'U' || movement === 'D';
+    if (!movementIsValid) throw new Error(MESSAGE.ERROR_NOT_U_OR_D);
+  },
 };
 module.exports = Validator;
