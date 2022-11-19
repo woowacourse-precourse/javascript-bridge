@@ -61,7 +61,7 @@ const InputView = {
   },
 
   bridgeMoveGo(move) {
-    this.bridgeGame.move(move);
+    this.bridgeGame.move(move, this.bridge.getBridge());
   },
 
   bridgeMoveRetry(error) {
