@@ -11,13 +11,9 @@
 
     전달 받은 사이즈 만큼의 다리를 생성한다.
 
-    - [x] generateNumbers()
-
-        랜덤한 번호를 생성한다. (범위 0~1)
-
-    - [x] pushToArray()
+    - [x] makeBridge()
         
-        생성한 번호에 따라서 up과 down 배열에 true 혹은 false을 추가한다.
+        생성한 랜덤 번호에 따라서 bridge 배열에 'U' 혹은 'D'을 추가한다.
 
 - [x] readMoving()
     라운드마다 플레이어가 이동할 칸을 입력 받는다.
