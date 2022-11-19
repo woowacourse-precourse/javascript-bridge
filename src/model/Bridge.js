@@ -1,3 +1,5 @@
+const Constant = require("../lib/Constant");
+
 class Bridge {
   #woowaBridge;
   #originalBridge;
@@ -31,10 +33,10 @@ class Bridge {
   }
 
   setResult(direction, index) {
-    if (direction === "U") {
+    if (direction === Constant.DIRECTION.UP) {
       this.setUpSideBridge(direction, index);
     }
-    if (direction === "D") {
+    if (direction === Constant.DIRECTION.DOWN) {
       this.setDownSideBridge(direction, index);
     }
   }
@@ -55,34 +57,34 @@ class Bridge {
 
   setUpsideBridgeValue(direction, index) {
     if (direction === this.#originalBridge[index]) {
-      this.#upsideBridge.push(" O ");
+      this.#upsideBridge.push(Constant.DIRECTION.POSSIBLE);
     }
     if (direction !== this.#originalBridge[index]) {
-      this.#upsideBridge.push(" X ");
+      this.#upsideBridge.push(Constant.DIRECTION.IMPOSSIBLE);
     }
   }
 
   setDownsideBridgeValue(direction, index) {
     if (direction === this.getOriginalBridge()[index]) {
-      this.#downsideBridge.push(" O ");
+      this.#downsideBridge.push(Constant.DIRECTION.POSSIBLE);
     }
     if (direction !== this.getOriginalBridge()[index]) {
-      this.#downsideBridge.push(" X ");
+      this.#downsideBridge.push(Constant.DIRECTION.IMPOSSIBLE);
     }
   }
 
   setUpsideBridgeEmpty() {
-    this.#upsideBridge.push(" N ");
+    this.#upsideBridge.push(Constant.DIRECTION.EMPTY);
   }
 
   setDownsideBridgeEmpty() {
-    this.#downsideBridge.push(" N ");
+    this.#downsideBridge.push(Constant.DIRECTION.EMPTY);
   }
 
   includesX() {
-    const upLast = this.#upsideBridge.includes(" X ");
-    const downLast = this.#downsideBridge.includes(" X ");
-    return upLast || downLast;
+    const upX = this.#upsideBridge.includes(Constant.DIRECTION.IMPOSSIBLE);
+    const downX = this.#downsideBridge.includes(Constant.DIRECTION.IMPOSSIBLE);
+    return upX || downX;
   }
 
   setInitialValue(setter) {

@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeRandomNumberGenerator = require("../lib/BridgeRandomNumberGenerator");
 const Message = require("../lib/Message");
+const Constant = require("../lib/Constant");
 const BridgeMaker = require("../BridgeMaker");
 const Validate = require("../lib/Validate");
 const ErrorHandler = require("../ErrorHandler");
@@ -39,8 +40,8 @@ const InputView = {
     MissionUtils.Console.readLine(Message.REPLAY, (answer) => {
       const validTarget = () => Validate.restart(answer);
       ErrorHandler.testSimple(validTarget, errorCallBakc);
-      if (answer === "R") reset();
-      if (answer === "Q") printResult();
+      if (answer === Constant.RETRY.REPLAY) reset();
+      if (answer === Constant.RETRY.QUIT) printResult();
     });
   },
 };

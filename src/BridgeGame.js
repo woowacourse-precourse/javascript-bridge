@@ -1,5 +1,6 @@
 const OutputView = require("../src/console/OutputView");
 const InputView = require("./console/InputView");
+const Constant = require("../src/lib/Constant");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -8,8 +9,8 @@ class BridgeGame {
   #bridge;
   #woowaBridge;
   #state = {
-    tried: 1,
-    isWin: "실패",
+    tried: Constant.GAME_RESULT.DEFAULT,
+    isWin: Constant.GAME_RESULT.LOSS,
   };
 
   constructor(bridge, woowaBridge) {
