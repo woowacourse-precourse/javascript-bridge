@@ -13,6 +13,10 @@ class Bridge {
   isBridgeEnd() {
     return this.#currentDirection === this.#directions.length - 1;
   }
+
+  move() {
+    this.#currentDirection += 1;
+  }
 }
 
 module.exports = Bridge;
