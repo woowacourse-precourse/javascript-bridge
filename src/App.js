@@ -25,6 +25,8 @@ class App {
 
   #gameOptionStatus;
 
+  #gameEndBoolean = false;
+
   play() {
     OutputView.printStart();
     this.progressApp(this.#appStatus);
@@ -52,10 +54,11 @@ class App {
         //   console.log('끝');
         // }
         if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
+          this.#gameEndBoolean = true;
           return OutputView.printResult(
             this.#bridgeMap.getMap(),
             this.#brdigeGame.getNumberOfTry(),
-            this.#gameOptionStatus,
+            this.#gameEndBoolean,
           );
         }
         return this.progressBridgeMove();
@@ -79,7 +82,7 @@ class App {
         OutputView.printResult(
           this.#bridgeMap.getMap(),
           this.#brdigeGame.getNumberOfTry(),
-          this.#gameOptionStatus,
+          this.#gameEndBoolean,
         );
       }
     }
