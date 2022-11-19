@@ -29,6 +29,7 @@ const InputView = {
       try {
         const parsedUserInput = Number(userInput);
         BridgeSizeValidation.validateBridgeSize(parsedUserInput);
+        Console.print("");
         return callback(parsedUserInput);
       } catch (error) {
         Console.print(error.message);

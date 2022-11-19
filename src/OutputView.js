@@ -6,6 +6,7 @@ const {
   MESSAGE_GAME_START,
   MESSAGE_GAME_END,
   MESSAGE_PLAY_COUNT,
+  MESSAGE_FINAL_RESULT,
 } = require("./Utils");
 
 /**
@@ -55,7 +56,7 @@ const OutputView = {
    */
   printMap(moving, marking) {
     this.setCurrentMap(moving, marking);
-    Console.print(`${this.currentMap[BRIDGE_UP]}\n${this.currentMap[BRIDGE_DOWN]}`);
+    Console.print(`${this.currentMap[BRIDGE_UP]}\n${this.currentMap[BRIDGE_DOWN]}\n`);
   },
 
   /**
@@ -65,7 +66,7 @@ const OutputView = {
    */
   printResult(gameResult, playCount) {
     Console.print(
-      `${MESSAGE_GAME_END}: ${gameResult}\n${MESSAGE_PLAY_COUNT}: ${playCount}`
+      `${MESSAGE_FINAL_RESULT}${this.currentMap[BRIDGE_UP]}\n${this.currentMap[BRIDGE_DOWN]}\n\n${MESSAGE_GAME_END}: ${gameResult}\n${MESSAGE_PLAY_COUNT}: ${playCount}`
     );
   },
 
