@@ -6,12 +6,19 @@ const Validate = {
     if (size > BRIDGE_LENGTH_LIMIT.BRIDGE_LENGTH_MAXIMUM ||
         size < BRIDGE_LENGTH_LIMIT.BRIDGE_LENGTH_MINIMUM) {
       throw new Error(ERROR_MESSAGE.BRIDGE_LENGTH_NOT_PIXED_NUMBER); 
-    }
+    };
     if (isNaN(size)) {
       throw new Error(ERROR_MESSAGE.BRIDGE_LENGTH_NOT_PIXED_NUMBER);
-    }
-    return size
+    };
+    return size;
+  },
+
+  validateMoving(move) {
+    if (move !== "U" && move !== "D") {
+      throw new Error(ERROR_MESSAGE.CHOICE_SPACE_NOT_PIXED_VALUE);
+    };
+    return move;
   },
 }
 
-module.exports = Validate
+module.exports = Validate;
