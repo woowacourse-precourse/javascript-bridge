@@ -1,10 +1,6 @@
 const BridgeMaker = require("../BridgeMaker");
-const { SPACE, COMMAND } = require("../utils/constants");
+const { ORDER, SPACE, COMMAND } = require("../utils/constants");
 
-/**
- * 다리 건너기 게임을 관리하는 클래스
- * BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
- */
 class BridgeGame {
   #size;
 
@@ -14,11 +10,14 @@ class BridgeGame {
 
   #movingProcess;
 
+  #currentMap;
+
   constructor() {
     this.#size = 0;
     this.#attemptCnt = 1;
     this.#bridge = [];
     this.#movingProcess = [];
+    this.#currentMap = [];
   }
 
   receiveSize(size) {
@@ -35,7 +34,26 @@ class BridgeGame {
     const nowStep = this.checkNowStep();
     const isSafe = this.checkTrap(nowStep, moving);
     const isEnd = this.checkEnd(nowStep);
-    return [this.#bridge, isSafe, isEnd];
+    this.#currentMap = this.makeMap([[], []], nowStep, isSafe);
+    return [this.#currentMap, isSafe, isEnd];
+  }
+
+  makeMap(nowMap, nowStep, isSafe) {
+    this.#movingProcess.forEach((direction) => {
+      const trapZone = Object.keys(SPACE).filter(
+        (space) => space !== direction
+      )[0];
+      nowMap[SPACE[direction]].push("O");
+      nowMap[SPACE[trapZone]].push(" ");
+    });
+    if (!isSafe) return this.checkCrurrent(nowMap, nowStep);
+    else return nowMap;
+  }
+
+  checkCrurrent(nowMap, nowStep) {
+    const currentSpace = this.#movingProcess.pop();
+    nowMap[SPACE[currentSpace]][nowStep] = "X";
+    return nowMap;
   }
 
   checkNowStep() {
@@ -43,7 +61,7 @@ class BridgeGame {
   }
 
   checkTrap(nowStep, moving) {
-    return this.#bridge[nowStep][SPACE[moving]];
+    return moving === this.#bridge[nowStep];
   }
 
   checkEnd(nowStep) {
@@ -54,8 +72,12 @@ class BridgeGame {
     if (answer === COMMAND.RETRY) {
       this.#movingProcess = [];
       this.#attemptCnt += 1;
-      return [true, this.#attemptCnt];
-    } else if (answer === COMMAND.QUIT) return [false, this.#attemptCnt];
+      return true;
+    } else if (answer === COMMAND.QUIT) return false;
+  }
+
+  checkMap() {
+    return this.#currentMap;
   }
 
   letEnd() {

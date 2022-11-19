@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { ERROR, COMMAND } = require("../utils/constants");
+const { ORDER, ERROR } = require("../constants");
 
-class GameCommand {
+class MoveSpace {
   #input;
 
   constructor(input) {
@@ -13,14 +13,14 @@ class GameCommand {
       if (this.isAllowOrder()) throw new Error();
       return true;
     } catch (e) {
-      Console.print(ERROR.GAMECOMMAND);
+      Console.print(ERROR.MOVE_ORDER);
       return false;
     }
   }
 
   isAllowOrder() {
-    return this.#input !== COMMAND.RETRY && this.#input !== COMMAND.QUIT;
+    return this.#input !== ORDER.UP && this.#input !== ORDER.DOWN;
   }
 }
 
-module.exports = GameCommand;
+module.exports = MoveSpace;

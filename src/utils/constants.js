@@ -11,13 +11,13 @@ const SIZE = Object.freeze({
 });
 
 const ORDER = Object.freeze({
-  UP: "U",
   DOWN: "D",
+  UP: "U",
 });
 
 const SPACE = Object.freeze({
-  U: 0,
   D: 1,
+  U: 0,
 });
 
 const PASS = Object.freeze({
@@ -50,8 +50,8 @@ const ERROR = Object.freeze({
 
 module.exports = {
   MANAGER,
-  SIZE,
   ORDER,
+  SIZE,
   SPACE,
   PASS,
   FAIL,
