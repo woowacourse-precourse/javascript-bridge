@@ -1,4 +1,4 @@
-const { UP, DOWN } = require('./Constants');
+const { UP, DOWN, CORRECT, WRONG, SPACE } = require('./Constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -20,23 +20,23 @@ class BridgeGame {
 
   correct(userMove) {
     if (userMove === UP) {
-      this.upBridge.push('O');
-      this.downBridge.push(' ');
+      this.upBridge.push(CORRECT);
+      this.downBridge.push(SPACE);
     }
     if (userMove === DOWN) {
-      this.upBridge.push(' ');
-      this.downBridge.push('O');
+      this.upBridge.push(SPACE);
+      this.downBridge.push(CORRECT);
     }
   }
 
   wrong(userMove) {
     if (userMove === UP) {
-      this.upBridge.push('X');
-      this.downBridge.push(' ');
+      this.upBridge.push(WRONG);
+      this.downBridge.push(SPACE);
     }
     if (userMove === DOWN) {
-      this.upBridge.push(' ');
-      this.downBridge.push('X');
+      this.upBridge.push(SPACE);
+      this.downBridge.push(WRONG);
     }
   }
 
@@ -60,6 +60,4 @@ class BridgeGame {
   retry() {}
 }
 
-const bridgeGame = new BridgeGame();
-bridgeGame.move(['U', 'D', 'D'], 'D');
 module.exports = BridgeGame;

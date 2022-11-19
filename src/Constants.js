@@ -2,6 +2,9 @@ const BRIDGE_MIN_LENGTH = 3;
 const BRIDGE_MAX_LENGTH = 20;
 const UP = 'U';
 const DOWN = 'D';
+const CORRECT = 'O';
+const WRONG = 'X';
+const SPACE = ' ';
 
 const START_GAME = '다리 건너기 게임을 시작합니다.';
 const INPUT_BRIDGE_LENGTH = '다리의 길이를 입력해주세요.\n';
@@ -21,6 +24,9 @@ module.exports = {
   BRIDGE_MAX_LENGTH,
   UP,
   DOWN,
+  CORRECT,
+  WRONG,
+  SPACE,
   START_GAME,
   INPUT_BRIDGE_LENGTH,
   INPUT_MOVE_ROOM,
