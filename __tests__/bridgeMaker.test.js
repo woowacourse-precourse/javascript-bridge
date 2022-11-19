@@ -30,7 +30,6 @@ describe('makeBridge 세부 테스트', () => {
 
     mockGenerator([0, 1, 1, 1, 0]);
     const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    console.log(bridge);
 
     expect(bridge).toEqual(['D', 'U', 'U', 'U', 'D']);
   });
@@ -39,7 +38,6 @@ describe('makeBridge 세부 테스트', () => {
     const size = 9;
     mockGenerator([1, 1, 1, 1, 1, 0, 0, 0, 0]);
     const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    console.log(bridge);
 
     expect(bridge).toEqual(['U', 'U', 'U', 'U', 'U', 'D', 'D', 'D', 'D']);
   });
