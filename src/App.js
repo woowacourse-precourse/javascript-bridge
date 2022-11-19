@@ -8,6 +8,7 @@ class App {
     COUNT = 0;
     BRIDGE = [];
     GAME = new BridgeGame();
+    LAST_RESULT = [];
 
     play() {
         this.start();
@@ -31,6 +32,7 @@ class App {
     async move() {
         const direction = await InputView.readMoving();
         let result = this.GAME.move(direction);
+        this.LAST_RESULT = result;
         OutputView.printMap(result);
         this.judge(result);
     }
@@ -48,14 +50,18 @@ class App {
      */
     async retry() {
         const answer = await InputView.readGameCommand();
+        this.COUNT++;
         let result = this.GAME.retry(answer);
         if (result) this.move();
         else this.end(1);
     }
     /**
      * 게임 종료 후 결과 출력
+     * @param {number} input
      */
-    end() {}
+    end(input) {
+        OutputView.printResult(input, this.LAST_RESULT, this.COUNT);
+    }
 }
 
 module.exports = App;
