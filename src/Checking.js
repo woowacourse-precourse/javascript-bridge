@@ -4,8 +4,20 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Checking  = {
     // 다리의 길이가 숫자인가?
     bridgeNum (bridge) {
-        if (isNaN(bridge) === true ) {
+        // 소수 인 경우 ERROR 처리
+        if(this.isFloat(bridge) === "ERROR") return "ERROR"
+        bridge = parseInt(bridge)
+        if ( Number.isInteger(bridge) === false ) {
             MissionUtils.Console.print("[ERROR] 다리의 길이는 숫자로 입력해주세요")
+            return "ERROR"
+        }
+    },
+
+    // 다리 길이가 소수인 경우 ERROR 처리
+    isFloat(number){
+        number = Number(number)
+        if (number % 1 !== 0 ) {
+            MissionUtils.Console.print("[ERROR] 다리의 길이는 실수형으로 입력해주세요")
             return "ERROR"
         }
     },

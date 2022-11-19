@@ -39,7 +39,7 @@ const InputView = {
   readGameCommand() {
     let USER_CHOICE = ''
     MissionUtils.Console.readLine("",(userChoice) => {
-      if(Checking.userRetryCheck(userChoice) === "ERROR") {this.readMovingg()}
+      if(Checking.userRetryCheck(userChoice) === "ERROR") {this.readMoving()}
       USER_CHOICE = userChoice
     })
     return USER_CHOICE
