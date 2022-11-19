@@ -1,11 +1,18 @@
+const { Console } = require('@woowacourse/mission-utils');
+const GameMessage = require('./constants/GameMessage');
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
+   *
+   * @param {Function} bridgeSizeCallback
    */
-  readBridgeSize() {},
+  readBridgeSize(bridgeSizeCallback) {
+    Console.readLine(GameMessage.BRIDGE_SIZE, bridgeSizeCallback);
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
