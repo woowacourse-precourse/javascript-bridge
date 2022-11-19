@@ -24,7 +24,7 @@ class BridgeGame {
     const isCorrect = this.#isCorrect();
     const isGameOver = this.#isGameOver();
     const map = this.#makeMap();
-    return { map, isCorrect, isGameOver, trialTime: this.#trialTime };
+    return { map, isCorrect, isGameOver };
   };
 
   #isCorrect() {
@@ -41,6 +41,10 @@ class BridgeGame {
       step,
       this.#bridge[ind] === step ? LETTER.correct : LETTER.wrong,
     ]);
+  }
+
+  getResult() {
+    return { map: this.#makeMap(), trialTime: this.#trialTime };
   }
 
   /**
