@@ -32,6 +32,8 @@ class App {
 
   requestMoving() {
     InputView.readMoving((direction) => {
+      this.validate.checkMovingDirection(direction);
+      
       const [canCross, upperBridge, lowerBridge] =
         this.bridgeGame.move(direction);
 
