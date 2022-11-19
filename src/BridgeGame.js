@@ -6,13 +6,14 @@ const GAME_SIGNATURE = require('./utils/constant');
 class BridgeGame {
   constructor(
     { bridgeRandomNumberGenerator, bridgeMaker, bridgeModel },
-    { outputView, inputView }
+    { outputView, inputView, validator }
   ) {
     this.bridgeModel = bridgeModel;
     this.bridgeRandomNumberGenerator = bridgeRandomNumberGenerator;
     this.bridgeMaker = bridgeMaker;
     this.outputView = outputView;
     this.inputView = inputView;
+    this.validator = validator;
     this.start();
     this.askBridgeSize();
   }
@@ -26,6 +27,12 @@ class BridgeGame {
   }
 
   makeBridge(size) {
+    try {
+      this.validator.checkBridgeSize(size);
+    } catch (error) {
+      this.outputView.printError(error);
+    }
+
     const bridge = this.bridgeMaker.makeBridge(size, this.bridgeRandomNumberGenerator.generate);
     this.bridgeModel.setBridge(bridge);
 
