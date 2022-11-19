@@ -516,3 +516,12 @@ describe('위치 기록 가져오는 메서드 테스트', () => {
     expect(EXPECTED).toEqual(RECEIVED);
   });
 });
+
+describe('다리 이동 로그 메소드 테스트', () => {
+  test('메소드 이름은 "getBridgeLog"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'getBridgeLog';
+
+    expect(bridgeGame.getBridgeLog.name).toEqual(METHOD_NAME);
+  });
+});
