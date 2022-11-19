@@ -6,8 +6,8 @@ const INPUT_MESSAGE = {
 
 const RESULT_MESSAGE = {
   announce: '최종 게임 결과',
-  clear: '\n게임 성공 여부: 성공\n',
-  fail: '\n게임 성공 여부: 실패\n',
+  clear: '\n게임 성공 여부: 성공',
+  fail: '\n게임 성공 여부: 실패',
   tried: '총 시도한 횟수: ',
 };
 
