@@ -52,7 +52,7 @@ class GameController {
 
   doseUserWin() {
     const userWin = this.#bridgeGame.gameComplete();
-    const gameResult = this.#bridgeGame.gameResult();
+    const gameResult = this.#bridgeGame.gameResult(userWin);
 
     userWin ? this.gameOver(gameResult) : this.askDirection();
   }

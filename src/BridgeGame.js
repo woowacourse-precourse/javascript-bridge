@@ -6,20 +6,19 @@ class BridgeGame {
   #bridge;
   #curPlace;
   #numberOfAttempts;
-  #success;
   #bridgeMap;
 
   constructor(bridge) {
     this.#bridge = bridge;
     this.#curPlace = 0;
+    console.log(this.#bridge);
     this.#numberOfAttempts = 1;
-    this.#success = false;
     this.#bridgeMap = new BridgeMap();
   }
 
   move(direction) {
-    const nextCell = this.#bridge[this.#curPlace++];
-    const successful = successfullyMove(direction, nextCell);
+    const nextCellDirection = this.#bridge[this.#curPlace++];
+    const successful = successfullyMove(direction, nextCellDirection);
 
     return successful;
   }
@@ -31,18 +30,11 @@ class BridgeGame {
   }
 
   retry(command) {
-    const shouldRetry = retryOrQuit(command);
-
-    return shouldRetry;
+    return retryOrQuit(command);
   }
 
   gameComplete() {
-    const bridgeSize = this.#bridge.length;
-    if (bridgeSize === this.#curPlace) {
-      this.#success = true;
-    }
-
-    return bridgeSize === this.#curPlace;
+    return this.#bridge.length === this.#curPlace;
   }
 
   increaseNumberOfAttempts() {
@@ -54,10 +46,10 @@ class BridgeGame {
     this.#bridgeMap.initMap();
   }
 
-  gameResult() {
+  gameResult(userWin = false) {
     const bridgeMap = Object.values(this.#bridgeMap.getMap());
 
-    return [bridgeMap, this.#success, this.#numberOfAttempts];
+    return [bridgeMap, userWin, this.#numberOfAttempts];
   }
 }
 
