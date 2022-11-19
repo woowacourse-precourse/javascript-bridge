@@ -9,8 +9,8 @@ const BridgeMaker = {
 	 */
 	makeBridge(size, generateRandomNumber) {
 		const bridgeChoice = ['D', 'U'];
-		let bridge = [];
-		for (let i = 0; i < size; i++) {
+		const bridge = [];
+		for (let i = 0; i < size; i += 1) {
 			const zeroOrOne = Number(generateRandomNumber());
 			bridge.push(bridgeChoice[zeroOrOne]);
 		}

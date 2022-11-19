@@ -107,7 +107,7 @@ const InputView = {
 
 	retryStep(bridgeGame) {
 		bridgeGame.retry();
-		InputView.RETRY_COUNT++;
+		InputView.RETRY_COUNT += 1;
 		InputView.readMoving(bridgeGame, InputView.READ_MOVING_MSG);
 	},
 

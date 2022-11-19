@@ -27,7 +27,7 @@ const OutputView = {
 			OutputView.LOWER_BRIDGE,
 		);
 
-		MissionUtils.Console.print(upperMap + '\n' + lowerMap);
+		MissionUtils.Console.print(`${upperMap}\n${lowerMap}`);
 	},
 
 	getOneSideMap(prevCrossedBridge, ONE_SIDE_BRIDGE) {
