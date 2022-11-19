@@ -1,5 +1,5 @@
 const returnProcessedInput = {
-  start(input, isPassed) {
+  getProcessedInput(input, isPassed) {
     const upAndDownArray = this.upAndDown(input, isPassed);
     const splitUpAndDownArray = this.splitUpAndDown(upAndDownArray);
     const result = [
