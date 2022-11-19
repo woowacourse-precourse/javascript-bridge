@@ -53,15 +53,22 @@ class Controller {
   }
 
   retryOrQuit(answer) {
-    GameCommand.validate(answer);
     if (GameCommand.isRetry(answer)) {
-      this.#bridgeGame.retry();
-      InputView.readMoving(this.move.bind(this));
+      this.retry();
     }
     if (GameCommand.isQuit(answer)) {
-      this.printGameResult('fail');
-      BridgeGame.quit();
+      this.quit();
     }
+  }
+
+  retry() {
+    this.#bridgeGame.retry();
+    InputView.readMoving(this.move.bind(this));
+  }
+
+  quit() {
+    this.printGameResult('quit');
+    BridgeGame.quit();
   }
 
   printGameResult(type) {
