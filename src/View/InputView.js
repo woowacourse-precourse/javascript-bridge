@@ -12,7 +12,9 @@ const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const {
   isValidateBridgeSize,
   isValidateDirection,
+  isValidateCommand,
 } = require('../utils/validation');
+const OutputView = require('./OutputView');
 const InputView = {
   game: null,
 
@@ -29,7 +31,10 @@ const InputView = {
         this.readBridgeSize();
       }
 
-      BridgeMaker.makeBridge(+length, BridgeRandomNumberGenerator.generate);
+      this.game.bridge = BridgeMaker.makeBridge(
+        +length,
+        BridgeRandomNumberGenerator.generate
+      );
       this.readMoving();
     });
   },
@@ -46,8 +51,10 @@ const InputView = {
         }
 
         this.game.move(move);
-        if (!this.game.isEnd) this.readMoving();
-        this.readGameCommand();
+        OutputView.printMap();
+        if (this.game.isEnd) OutputView.printResult();
+        else if (!this.game.isSuccess) this.readGameCommand();
+        else this.readMoving();
       }
     );
   },

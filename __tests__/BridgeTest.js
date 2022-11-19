@@ -1,15 +1,14 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
-
-const mockQuestions = (answers) => {
-  MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((_, callback) => {
-      callback(input);
-    });
-  }, MissionUtils.Console.readLine);
-};
+const {
+  getLogSpy,
+  mockRandoms,
+  mockQuestions,
+  getOutput,
+  expectBridgeOrder,
+  expectLogContains,
+} = require('./ApplicationTest');
 
 describe('다리 건너기 기능 테스트', () => {
   test('다리 생성 테스트', () => {
@@ -42,5 +41,31 @@ describe('다리 건너기 기능 테스트', () => {
     } catch (error) {
       expect(error).toMatch('[ERROR] 다리 길이는 3이상 20이하의 숫자입니다.');
     }
+  });
+
+  test('게임 다리 출력 테스트', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['1', '0', '1']);
+    mockQuestions(['3', 'U', 'D']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, ['[ O |   ]', '[   | O ]']);
+    expectBridgeOrder(log, '[ O |   ]', '[   | O ]');
+  });
+
+  test('게임 다리 출력 테스트', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['1', '0', '1']);
+    mockQuestions(['3', 'U', 'D', 'D']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, ['[ O |   |   ]', '[   | O | X ]']);
+    expectBridgeOrder(log, '[ O |   |   ]', '[   | O | X ]');
   });
 });

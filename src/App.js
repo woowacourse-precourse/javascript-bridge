@@ -10,6 +10,7 @@ class App {
   startGame() {
     this.game = new BridgeGame();
     InputView.game = this.game;
+    OutputView.game = this.game;
     OutputView.printStart();
     InputView.playGame();
   }
