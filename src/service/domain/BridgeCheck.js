@@ -1,4 +1,4 @@
-const { MODEL_KEY } = require('../../utils/constants');
+const { MODEL_KEY, UPDOWN_INDEX } = require('../../utils/constants');
 
 class BridgeCheck {
   #repo;
@@ -26,8 +26,8 @@ class BridgeCheck {
 
     return useBridge.map((bridgeItem, index) =>
       bridgeItem === randomBridgeSlice[index]
-        ? ['O', this.#INDEX[bridgeItem]]
-        : ['X', this.#INDEX[bridgeItem]]
+        ? ['O', UPDOWN_INDEX[bridgeItem]]
+        : ['X', UPDOWN_INDEX[bridgeItem]]
     );
   }
 
