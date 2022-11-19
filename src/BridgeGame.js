@@ -28,6 +28,7 @@ class BridgeGame {
         //제대로 이동 못함
         OutputView.printMap(this.current_moving, false);
         this.retry();
+        return;
       }
     }
     OutputView.printResult(this.current_moving, true, this.try);
@@ -40,6 +41,11 @@ class BridgeGame {
    */
   retry() {
     let command = InputVIew.readGameCommand();
+    if (commad === 'Q') {
+      OutputView.printResult(this.current_moving, false, this.try);
+    } else if (command === 'R') {
+      // this.try += 1;
+    }
   }
 }
 

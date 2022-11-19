@@ -59,7 +59,7 @@ const OutputView = {
    */
   printResult(moving_list, success, retry) {
     MissionUtils.Console.print('최종 게임 결과');
-    this.printMap(moving_list);
+    this.printMap(moving_list, success);
     if (success) {
       MissionUtils.Console.print('게임 성공 여부: 성공');
     } else {
