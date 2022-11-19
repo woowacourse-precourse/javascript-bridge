@@ -2,6 +2,7 @@ const InputView = require("./InputView");
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const OutputView = require("./OutputView");
 const { Console } = require("@woowacourse/mission-utils");
 
 class App {
@@ -17,6 +18,12 @@ class App {
     this.#bridgeGame = new BridgeGame(
       BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate)
     );
+  }
+
+  async progress() {
+    const moving = await InputView.readMoving();
+    const moveResult = this.#bridgeGame.move(moving);
+    OutputView.printMap(moving, moveResult);
   }
 
   play() {}
