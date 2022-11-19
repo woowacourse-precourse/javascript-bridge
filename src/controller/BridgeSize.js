@@ -1,5 +1,8 @@
 const VALID_VALUE = require('../constant/ValidValue');
 const ERROR_MESSAGE = require('../constant/ErrorMessage');
+const BridgeMaker = require('../BridgeMaker');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const Bridge = require('../model/Bridge');
 
 class BridgeSize {
   #size;
@@ -13,6 +16,7 @@ class BridgeSize {
     BridgeSize.checkRange(size);
     BridgeSize.isNumber(size);
     BridgeSize.isInteger(size);
+    BridgeSize.createBridge(size);
   }
 
   static checkRange(size) {
@@ -32,6 +36,14 @@ class BridgeSize {
       return;
     }
     throw new Error(ERROR_MESSAGE.NUMBER);
+  }
+
+  static createBridge(size) {
+    const bridge = BridgeMaker.makeBridge(
+      size,
+      BridgeRandomNumberGenerator.generate,
+    );
+    const initialBridge = new Bridge(bridge);
   }
 }
 
