@@ -2,8 +2,8 @@ const { INPUT_CHAR } = require('../Constants/InputValues');
 const { STATUS } = require('../Constants/BridgeStatus');
 
 const returnProcessedInput = {
-  getProcessedInput(input, isPassed) {
-    const upAndDownArray = this.upAndDown(input, isPassed);
+  getProcessedInput(input, pass) {
+    const upAndDownArray = this.upAndDown(input, pass);
     const splitUpAndDownArray = this.splitUpAndDown(upAndDownArray);
     const result = [
       [splitUpAndDownArray[0].join().replace(/,/gi, STATUS.seperator)],
