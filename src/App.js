@@ -39,7 +39,13 @@ class App {
       );
       const result = this.bridgeGame.move();
       if (result === 'WIN') {
-        // print result
+        this.bridgeGame.gameStatus = '성공';
+        OutputView.printResult(
+          this.bridgeGame.answerSteps,
+          this.bridgeGame.bridgeSteps,
+          this.bridgeGame.gameStatus,
+          this.bridgeGame.gameCount
+        );
       }
       if (result === 'MOVE') {
         InputView.readMoving(this.handleInputStep.bind(this));
