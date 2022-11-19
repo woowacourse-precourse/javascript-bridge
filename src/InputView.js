@@ -1,6 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Check = require("./Check");
-const BridgeGame = require("./BridgeGame");
 const { MOVING, COMMAND, RESULT } = require("./constants/values");
 const { OUTPUT, INPUT } = require("./constants/messages");
 /**
@@ -10,12 +9,11 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
+  readBridgeSize(bridgeGame) {
     Console.readLine(`${INPUT.SIZE}${OUTPUT.LINE}`, (size) => {
       const error = Check.checkBridgeSize(size);
       if (error) return this.readBridgeSize();
 
-      const bridgeGame = new BridgeGame();
       bridgeGame.ready(size);
       this.readMoving(bridgeGame, size);
     });
@@ -32,8 +30,6 @@ const InputView = {
         if (error) return this.readMoving(bridgeGame, size);
 
         const movingList = bridgeGame.move(moving);
-        Console.print(size);
-
         if (
           movingList[0].includes(MOVING.WRONG_ANSWER) ||
           movingList[1].includes(MOVING.WRONG_ANSWER)
