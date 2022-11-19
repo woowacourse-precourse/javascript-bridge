@@ -41,6 +41,9 @@ const InputView = {
     });
   },
 
+  /**
+   * 콘솔 입력창을 닫는다.
+   */
   exit() {
     return Console.close();
   },

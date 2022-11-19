@@ -14,6 +14,9 @@ class BridgeGame {
     count: 1,
   };
 
+  /**
+   * 게임 시작 시 다리를 생성하는 메서드
+   */
   initializeBridge(size) {
     this.#Status.bridge = makeBridge(size, generate);
     console.log(this.#Status.bridge); // For test
@@ -47,6 +50,9 @@ class BridgeGame {
     this.#Status.count += 1;
   }
 
+  /**
+   * 생성된 게임의 정보를 가져오는 메서드
+   */
   getStatus() {
     return this.#Status;
   }
