@@ -7,12 +7,12 @@ class App {
     const bridge = Intercessor.bridgeMake();
     if(!bridge) return;
     let count = 0;
-    let win = false;
-    while(!win){
-      win = Intercessor.matchMove(bridge);
+    while(1){
+      Intercessor.matchMove(bridge);
       count++;
+      if(Intercessor.checkResult()) break;
     }
-    Intercessor.printResult(win, count);
+    Intercessor.printResult(count);
   }
 }
 
