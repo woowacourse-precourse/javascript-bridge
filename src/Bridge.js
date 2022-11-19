@@ -49,7 +49,13 @@ class Bridge {
   }
 
   askRetry (retryGame) {
-    InputView.readGameCommand(retryGame, this.runRetry.bind(this));
+    InputView.readGameCommand(retryGame, this.getRetry.bind(this));
+  }
+
+  getRetry (retryGame, chooseRetry) {
+    if (Validator.checkRetry(chooseRetry)) {
+      this.runRetry(retryGame, chooseRetry);
+    }
   }
 
   runRetry (retryGame, chooseRetry) {

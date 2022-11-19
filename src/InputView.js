@@ -36,7 +36,16 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand () {},
+  readGameCommand (retryGame, getRetry) {
+    Console.readLine(MESSAGE.inputChooseRetry, (chooseRetry) => {
+      try {
+        getRetry(retryGame, chooseRetry);
+      } catch (error) {
+        OutputView.printError(error);
+        this.readGameCommand(retryGame, getRetry);
+      }
+    });
+  },
 };
 
 module.exports = InputView;
