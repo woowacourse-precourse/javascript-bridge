@@ -17,17 +17,25 @@ const InputView = {
     return number >= 3 && number <= 20;
   },
   checkBridgeSize(number) {
-    if (!this.isInteger(number)) {
-      throw new Error("[ERROR] 정수 숫자");
-    }
-    if (!this.isBetweenThreeTwenty(number)) {
-      throw new Error("[ERROR] 3~20 숫자");
+    try {
+      if (!this.isInteger(number)) {
+        throw new Error("[ERROR] 정수 숫자");
+      }
+      if (!this.isBetweenThreeTwenty(number)) {
+        throw new Error("[ERROR] 3~20 숫자");
+      }
+    } catch {
+      MissionUtils.Console.print("[ERROR]");
+      return true;
     }
   },
 
   readBridgeSize(bridge, bridgeGame) {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (size) => {
-      this.checkBridgeSize(size);
+      if (this.checkBridgeSize(size)) {
+        return this.readBridgeSize(bridge, bridgeGame);
+      }
+
       bridge.setBridge(size);
       console.log(bridge.getBridge());
       this.readMoving(bridge, bridgeGame);
@@ -40,8 +48,13 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   checkMovement(string) {
-    if (!(string === "U" || string === "D")) {
-      throw new Error("[ERROR] U나 D");
+    try {
+      if (!(string === "U" || string === "D")) {
+        throw new Error("[ERROR] U나 D");
+      }
+    } catch {
+      MissionUtils.Console.print("[ERROR]");
+      return true;
     }
   },
 
@@ -49,7 +62,9 @@ const InputView = {
     MissionUtils.Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (movement) => {
-        this.checkMovement(movement);
+        if (this.checkMovement(movement)) {
+          return this.readMoving(bridge, bridgeGame);
+        }
         bridgeGame.move(movement, bridge);
 
         if (bridgeGame.getCross()) {
@@ -70,8 +85,13 @@ const InputView = {
    */
 
   checkRestart(string) {
-    if (!(string === "R" || string === "Q")) {
-      throw new Error("[ERROR] R이나 Q");
+    try {
+      if (!(string === "R" || string === "Q")) {
+        throw new Error("[ERROR] R이나 Q");
+      }
+    } catch {
+      MissionUtils.Console.print("[ERROR]");
+      return true;
     }
   },
 
@@ -79,7 +99,9 @@ const InputView = {
     MissionUtils.Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (restart) => {
-        this.checkRestart(restart);
+        if (this.checkRestart(restart)) {
+          return this.readGameCommand(bridge, bridgeGame);
+        }
         if (restart === "R") {
           bridgeGame.retry(restart);
           this.readMoving(bridge, bridgeGame);
