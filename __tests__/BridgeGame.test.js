@@ -450,6 +450,9 @@ describe('위치 파악 메서드 테스트', () => {
 });
 
 describe('위치 기록 저장 메서드 테스트', () => {
+  const BRIDGE_REUSLT = 'O';
+  const POSITION_INDEX = [0, 0];
+
   test('메소드 이름은 "setPositionLog"로 정의된다.', () => {
     const bridgeGame = new BridgeGame();
     const METHOD_NAME = 'setPositionLog';
@@ -459,12 +462,18 @@ describe('위치 기록 저장 메서드 테스트', () => {
 
   test('[[0, 0], "O"] 반환을 기대한다.', () => {
     const bridgeGame = new BridgeGame();
-    const BRIDGE_REUSLT = 'O';
-    const POSITION_INDEX = [0, 0];
     const RECEIVED = [[0, 0], 'O'];
 
     bridgeGame.move();
 
     expect(bridgeGame.setPositionLog(POSITION_INDEX, BRIDGE_REUSLT)).toEqual(RECEIVED);
+  });
+
+  test('유저가 아직 출발 전이라면 예외를 발생한다.', () => {
+    expect(() => {
+      const bridgeGame = new BridgeGame();
+
+      bridgeGame.setPositionLog(POSITION_INDEX, BRIDGE_REUSLT);
+    }).toThrow(POSITION_ERROR_TEXT);
   });
 });
