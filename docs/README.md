@@ -101,7 +101,7 @@
 
 #### Trimmer.js
 
-- [ ] 탬플릿 형태의 문자열의 불필요한 whitespace 제거하는 기능 구현하기
+- [x] 탬플릿 형태의 문자열의 불필요한 whitespace 제거하는 기능 구현하기
 
 #### Validator.js
 
