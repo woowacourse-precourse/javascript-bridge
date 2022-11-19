@@ -29,6 +29,10 @@ const OutputView = {
 
     MissionUtils.Console.close();
   },
+
+  end() {
+    MissionUtils.Console.close();
+  },
 };
 
 module.exports = OutputView;
