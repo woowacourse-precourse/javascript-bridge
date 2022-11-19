@@ -10,21 +10,7 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
-  logSpy.mockClear();
-  return logSpy;
-};
-
 describe("입력 테스트", () => {
-  test("다리 길이 테스트", () => {
-    const logSpy = getLogSpy();
-    mockQuestions(["3"]);
-
-    InputView.readBridgeSize();
-
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("3"));
-  });
 
   test("입력값이 숫자가 아닌 경우 예외 처리한다.", () => {
     mockQuestions(["U"]);
@@ -49,4 +35,16 @@ describe("입력 테스트", () => {
       InputView.readBridgeSize();
     }).toThrow("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
   });
+});
+
+describe("입력 테스트(2)", () => {
+
+  test("이동할 칸 입력값이 U나 D가 아닌 경우 예외가 발생한다.", () => {
+    mockQuestions(["C"]);
+
+    expect(() => {
+      InputView.readMoving();
+    }).toThrow("[ERROR] 이동할 칸은 U 혹은 D입니다.");
+  });
+  
 });
