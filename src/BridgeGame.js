@@ -93,6 +93,7 @@ class BridgeGame {
 
   quit() {
     OutputView.printResult(this.#currentMap);
+    OutputView.printIsGameClear(this.isGameCleared());
     this.close();
   }
 

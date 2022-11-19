@@ -25,6 +25,9 @@ const OutputView = {
     print("\n최종 게임 결과");
     this.printMap(finalMap);
   },
+  printIsGameClear(isGameClear) {
+    print(`\n게임 성공 여부 : ${isGameClear ? "성공" : "실패"}`);
+  },
 };
 
 module.exports = OutputView;
