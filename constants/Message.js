@@ -15,4 +15,9 @@ const MESSAGE = {
   ERROR_DIRECTION: "[ERROR] 올바른 방향이 아닙니다. (위: U, 아래: D)",
 };
 
-module.exports = { MESSAGE };
+const CONSTANTS = {
+  UP: "U",
+  DOWN: "D",
+};
+
+module.exports = { MESSAGE, CONSTANTS };
