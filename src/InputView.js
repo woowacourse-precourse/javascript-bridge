@@ -11,13 +11,18 @@ const InputView = {
     inputUserValue(GAME_MESSAGE.INPUT_BRIDGE_LENGTH, (length) => {
       isBridgeLengthValid(length);
       bridgeGame.createBridge(Number(length));
+      this.readMoving(bridgeGame);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(bridgeGame) {
+    inputUserValue(GAME_MESSAGE.INPUT_MOVE, (move) => {
+      console.log(move);
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

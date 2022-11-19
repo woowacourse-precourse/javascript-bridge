@@ -6,8 +6,9 @@ const Bridge = require("./domain/Bridge");
  */
 class BridgeGame {
   #bridge;
+
   /**
-   * 다리를 만들때사용하는 메서드
+   * 다리를 만들 때 사용하는 메서드
    * <p>
    */
   createBridge(length) {
