@@ -1,8 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
-const InputView = require("../src/InputView");
 const BridgeMaker = require("../src/BridgeMaker");
-const OutputView = require("../src/OutputView");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -87,15 +85,3 @@ describe("다리 건너기 테스트", () => {
     runException(["a"]);
   });
 });
-
-
-// // 내가 작성한 테스트
-// describe("InputView 테스트", () => {
-//   test("다리 길이가 입력 값이 3~20 범위내에 있지 않다면", () => {
-//     runException([1]);
-//   });
-
-//   test("다리 길이가 입력 값이 숫자가 아닌 경우", () => {
-//     runException();
-//   });
-// });

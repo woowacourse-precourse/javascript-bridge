@@ -6,19 +6,20 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-
-  readBridgeSize() {
-    MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (answer) => {
-      const bridgeLength = this.readBridgeSizeValidate(Number(answer));
+  readText(label) {
+    return new Promise((resolve) => {
+      MissionUtils.Console.readLine(label, (text) => {
+        resolve(text);
+      });
     });
   },
 
-  readBridgeSizeValidate(number) {
-    if (3 <= number && number <= 20) {
-      return number;
-    }
-    throw "[ERROR]";
+  async readBridgeSize() {
+    const answer = await this.readText("다리의 길이를 입력해주세요.\n");
+    return Number(answer)
   },
+
+  
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
@@ -47,7 +48,7 @@ const InputView = {
     MissionUtils.Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (regame) => {
-        const gameCommand = this.readGameCommandValidate(regame)
+        const gameCommand = this.readGameCommandValidate(regame);
       }
     );
   },
@@ -57,7 +58,7 @@ const InputView = {
       return regame;
     }
     throw "[ERROR]";
-  }
+  },
 };
 
 module.exports = InputView;
