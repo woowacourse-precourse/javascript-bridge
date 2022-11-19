@@ -14,7 +14,11 @@ const InputView = {
     let size = 0;
     MissionUtils.Console.readLine(MESSAGE.INPUT_BRIDGE_LENGTH, (answer) => {
       size = +answer;
-      if (this.bridgeSizeValidate(answer)) {
+      try {
+        this.bridgeSizeValidate(answer);
+      } catch (err) {
+        MissionUtils.Console.print(ERROR.BRIDGE_LENGTH);
+        this.readBridgeSize();
       }
       this.bridge = BridgeMaker.makeBridge(size, Random.generate); //bridge
       this.readMoving(this.bridge, size);
@@ -23,11 +27,12 @@ const InputView = {
 
   bridgeSizeValidate(size) {
     if (+size < BRIDGE.MIN_LENGTH || BRIDGE.MAX_LENGTH < +size) {
-      throw new Error(ERROR.BRIDGE_LENGTH_RANGE);
+      throw err;
     }
     if (isNaN(+size)) {
-      throw new Error(ERROR.BRIDGE_LENGTH_ISNAN);
+      throw err;
     }
+    return size;
   },
 
   /**

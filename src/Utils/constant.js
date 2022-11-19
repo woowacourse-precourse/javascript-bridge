@@ -20,8 +20,7 @@ const BRIDGE = {
   MAX_LENGTH: 20,
 };
 const ERROR = {
-  BRIDGE_LENGTH_RANGE: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
-  BRIDGE_LENGTH_ISNAN: "[ERROR] 다리 길이는 숫자여야 합니다.",
+  BRIDGE_LENGTH: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
   MOVE: "[ERROR] 이동하는 키는 대문자 U와 대문자 D중 하나만 입력 가능합니다.",
   RETRY_OR_QUIT: "[ERROR] R 또는 Q 만 입력 가능합니다.",
 };
