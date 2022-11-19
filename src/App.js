@@ -13,7 +13,7 @@ class App {
 
   #bridge;
 
-  #successCount;
+  #gameEndConditionValue;
 
   #brdigeGame = new BridgeGame();
 
@@ -35,7 +35,7 @@ class App {
     if (appStatus === 2) {
       this.#appStatus = 3;
       this.#bridge = BridgeMaker.makeBridge(this.#bridgeAnswer);
-      this.#successCount = this.#bridge.length;
+      this.#gameEndConditionValue = this.#bridge.length;
       return this.progressBridgeMove();
     }
     if (appStatus === 3) return this.progressBridgeMove();
@@ -46,12 +46,12 @@ class App {
       if (this.#moveStatement) {
         this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
         // OutputView.printMap(this.#bridgeMap.getMap());
-        console.log(this.#brdigeGame.getBridgeLengthStatus(), this.#successCount, '비교');
+        console.log(this.#brdigeGame.getBridgeLengthStatus(), this.#gameEndConditionValue, '비교');
         this.#bridgeMap.cofirm();
-        // if (this.#successCount === this.#brdigeGame.getBridgeLengthStatus()) {
+        // if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
         //   console.log('끝');
         // }
-        if (this.#successCount === this.#brdigeGame.getBridgeLengthStatus()) {
+        if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
           return OutputView.printResult(
             this.#bridgeMap.getMap(),
             this.#brdigeGame.getNumberOfTry(),
@@ -130,6 +130,7 @@ class App {
   retryApp() {
     this.#brdigeGame.initBridgeLengthStatus();
     this.#bridgeMap.initBridgeMap();
+    this.#brdigeGame.incrementNumberOfTry();
   }
 }
 
