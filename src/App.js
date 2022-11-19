@@ -6,8 +6,13 @@ class App {
     Intercessor.startGame();
     const bridge = Intercessor.bridgeMake();
     if(!bridge) return;
-    const game = Intercessor.matchMove(bridge);
-    Intercessor.checkResult(game);
+    let count = 0;
+    let win = false;
+    while(!win){
+      win = Intercessor.matchMove(bridge);
+      count++;
+    }
+    Intercessor.printResult(win, count);
   }
 }
 
