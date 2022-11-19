@@ -13,13 +13,4 @@ const INPUT = {
   GAME_RETRY: "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q",
 };
 
-const BRIDGE = {
-  CAN_MOVE: "O",
-  CANT_MOVE: "X",
-  PRINT: {
-    BRIDGE_START: "[",
-    BRIDGE_END: "]",
-    BRIDGE_DIVISIOB: "|",
-  },
-};
-module.exports = { GAME, INPUT, BRIDGE };
+module.exports = { GAME, INPUT };
