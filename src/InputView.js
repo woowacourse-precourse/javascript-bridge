@@ -5,6 +5,7 @@ const RandomNumber = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 const WordToPrint = require("./WordToPrint");
+
 let bridgeGame;
 
 /**
@@ -26,6 +27,7 @@ const InputView = {
   makeBridge(bridgeSize) {
     const bridge = BridgeMaker.makeBridge(bridgeSize, RandomNumber.generate);
     console.log(bridge, "생성된 다리");
+
     bridgeGame = new BridgeGame(bridge);
     this.readMoving(0, bridge);
   },
