@@ -3,6 +3,7 @@ const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputCheck = require("./inputCheck");
+const OutputView = require("./OutputView");
 
 const InputView = {
   /**
@@ -15,20 +16,21 @@ const InputView = {
         inputBridgeSize,
         BridgeRandomNumberGenerator.generate
       );
-      this.readMoving(bridge);
+      let printBridge = [[],[]]
+      this.readMoving(bridge, printBridge);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge) {
+  readMoving(bridge, printBridge) {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (inputBridgeChoice) => {
         InputCheck.checkMoving(inputBridgeChoice);
         const bridgeGamge = new BridgeGame();
-        bridgeGamge.move(inputBridgeChoice, bridge);
+        bridgeGamge.move(inputBridgeChoice, bridge, printBridge);
       }
     );
   },
