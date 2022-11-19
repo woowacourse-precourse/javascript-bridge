@@ -55,11 +55,7 @@ class App {
         // }
         if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
           this.#gameEndBoolean = true;
-          return OutputView.printResult(
-            this.#bridgeMap.getMap(),
-            this.#brdigeGame.getNumberOfTry(),
-            this.#gameEndBoolean,
-          );
+          return this.getResult();
         }
         return this.progressBridgeMove();
       }
@@ -79,11 +75,7 @@ class App {
         return this.progressApp(this.#appStatus);
       }
       if (!this.#gameOptionStatus) {
-        OutputView.printResult(
-          this.#bridgeMap.getMap(),
-          this.#brdigeGame.getNumberOfTry(),
-          this.#gameEndBoolean,
-        );
+        this.getResult();
       }
     }
   }
@@ -128,6 +120,14 @@ class App {
         this.progressApp(this.#appStatus);
       }
     });
+  }
+
+  getResult() {
+    return OutputView.printResult(
+      this.#bridgeMap.getMap(),
+      this.#brdigeGame.getNumberOfTry(),
+      this.#gameEndBoolean,
+    );
   }
 
   retryApp() {
