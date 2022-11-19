@@ -78,8 +78,9 @@ const InputView = {
       this.bridgeGame.retry();
       OutputView.up = [];
       OutputView.down = [];
+
       this.readMoving(bridge);
-    }
+    } else if (restartOrEnd === 'Q') OutputView.printResult(totalCount);
   },
 };
 
