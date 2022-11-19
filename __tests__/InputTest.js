@@ -44,4 +44,12 @@ describe("[입력 테스트]", () => {
       app.requestMoving();
     }).toThrow(ERROR.MOVING_DIRECTION);
   });
+
+  test("게임 재시작 여부를 R(재시작), Q(종료)가 아닌 다른 문자를 입력한 경우", () => {
+    mockQuestions(["START"]);
+    expect(() => {
+      const app = new App();
+      app.requestGameCommand();
+    }).toThrow(ERROR.GAME_COMMAND);
+  });
 });
