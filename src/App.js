@@ -1,4 +1,5 @@
 const Game = require("./Model/Game");
+const OutputView = require("./GameIO/OutputView")
 
 class App {
   constructor() {
@@ -10,7 +11,8 @@ class App {
   }
 
   createGame() {
-    this.game.gameStartPoint();
+    OutputView.printBeginAnnouncement(); //출력: 게임을 시작합니다.
+    this.game.gameStartPoint(); 
   }
 
   processingGame() {
@@ -22,9 +24,8 @@ class App {
       playCounter++
     ) {
       this.game.increasePlayCount();
-      if(게임실행 및 결과 알려주기){ 
-        // 게임이 완전히 종료됩니다 --> 게임 종료 여부 안 물어봄
-        break;
+      if(game에속하는 메서드: 게임실행 및 결과 알려주기 - 게임 결과 출력 포함){ 
+        break;// 게임이 완전히 종료됩니다 --> 게임 종료 여부 안 물어봄
       }
     }
   }

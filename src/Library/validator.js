@@ -1,7 +1,7 @@
 const ErrorHandler = require("./ErrorHandler.js");
 
 const Validator = {
-  IsNaturalNumber(sentence) {
+  isNaturalNumber(sentence) {
     if (isNaN(sentence)) {
       return false;
     }
@@ -12,11 +12,18 @@ const Validator = {
     return true;
   },
 
-  IsBridgeLength(bridgeLength) {
-    if (IsNaturalNumber(bridgeLength) === false || bridgeLength < 21) {
+  isBridgeLength(bridgeLength) {
+    if (isNaturalNumber(bridgeLength) === false || bridgeLength < 21) {
       ErrorHandler.inputError("bridge");
     }
     return true;
+  },
+
+  isMoveDirection(moveDirection) {
+    if (moveDirection === "U" || moveDirection === "D") {
+      return true;
+    }
+    ErrorHandler.inputError("junmp");
   },
 };
 

@@ -8,7 +8,7 @@ BridgeGame의 메서드의 이름은 변경할 수 없고, 인자는 필요에 �
 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
  */
 
-const InputView = require("../View/InputView");
+const InputView = require("../GameIO/InputView");
 
 class BridgeGame {
   constructor(bridgeSize) {
@@ -26,10 +26,7 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {
-    const isContinue = InputView.readGameCommand();
-    return isContinue;
-  }
+  retry() {}
 }
 
 module.exports = BridgeGame;

@@ -18,7 +18,7 @@ const InputView = {
     MissionUtils.Console.readLine(
       "다리의 길이를 입력해주세요.\n",
       (bridgeLength) => {
-        if (Validator.IsBridgeLength(bridgeLength)) {
+        if (Validator.isBridgeLength(bridgeLength)) {
           return parseInt(bridgeLength);
         }
         // bridgeLen입력값을 Controller에서 검증한 후 --> BridegMaker로 다리를 만들어서 Model이용 --> Model에서 bridge길이 및 만들어진 다리 정보를 저장
@@ -29,7 +29,16 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    MissionUtils.Console.readLine(
+      "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+      (moveDirection) => {
+        if (Validator.isMoveDirection(moveDirection)) {
+          return moveDirection;
+        }
+      }
+    );
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

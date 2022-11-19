@@ -6,6 +6,7 @@ class Game {
   #playCount;
   constructor() {
     this.setPlayCount();
+    this.gameStartPoint();
   }
 
   setPlayCount() {
@@ -24,16 +25,12 @@ class Game {
     this.#bridge = bridge;
   }
 
-  gameAlgorithms() {
-    // 이미 게임이 시작되어 bridge 객체가 만들어짐
-  }
-
   gameStartPoint() {
-    if (this.#playCount === 1) {
+    if (this.#playCount === 0) {
       const bridge = this.initialGame();
       this.setBridge(bridge);
     }
-    if (this.#playCount > 1) {
+    if (this.#playCount > 0) {
       const bridge = this.continueGame();
       this.setBridge(bridge);
     }
@@ -42,10 +39,12 @@ class Game {
   initialGame() {
     const bridgeLength = InputView.readBridgeSize();
     const bridge = new Bridge(bridgeLength);
+    return bridge;
   }
   continueGame() {
     const bridgeLength = this.#Bridge.getBridgeLength();
     const bridge = new Bridge(bridgeLength);
+    return bridge;
   }
 }
 
