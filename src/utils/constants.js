@@ -15,6 +15,7 @@ const BRIDGE = Object.freeze({
   MAX_SIZE: 20,
   UP: 'U',
   DOWN: 'D',
+  CREATE_ERROR: '[ERROR] 유효하지 않은 Brdige객체 생성입니다.',
 });
 
 module.exports = {
