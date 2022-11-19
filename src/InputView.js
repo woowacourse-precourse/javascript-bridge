@@ -10,7 +10,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(REQUEST.BRIDGE_LENGTH, (input) => {
       try {
-        InputView.validateLength(input);
+        InputView.setBridgeSize(input);
       } catch (e) {
         Console.print(e.message);
         InputView.readBridgeSize();
@@ -21,7 +21,7 @@ const InputView = {
   readMoving(game) {
     Console.readLine(REQUEST.MOVE_SPACE, (input) => {
       try {
-        InputView.validateMoving(input, game);
+        InputView.performMoving(input, game);
       } catch (e) {
         Console.print(e.message);
         InputView.readMoving(game);
@@ -32,7 +32,7 @@ const InputView = {
   readGameCommand(game) {
     Console.readLine(REQUEST.GAME_RETRY, (input) => {
       try {
-        InputView.validateGameCommand(input, game);
+        InputView.performGameCommand(input, game);
       } catch (e) {
         Console.print(e.message);
         InputView.readGameCommand(game);
@@ -40,18 +40,14 @@ const InputView = {
     });
   },
 
-  validateLength(input) {
-    if (!isNumberInRange(input, RANGE.LENGTH_MIN, RANGE.LENGTH_MAX)) {
-      throw new Error(ERROR.INVALID_LENGTH);
-    }
+  setBridgeSize(input) {
+    InputView.validateBridgeSize(input);
     const bridgeGame = new BridgeGame(Number(input));
     InputView.readMoving(bridgeGame);
   },
 
-  validateMoving(input, game) {
-    if (input !== MOVE.UP && input !== MOVE.DOWN) {
-      throw new Error(ERROR.INVALID_MOVE);
-    }
+  performMoving(input, game) {
+    InputView.validateMoving(input);
     const isContinued = game.move(input);
     OutputView.printMap(game.getResultArrays());
     if (isContinued) InputView.readMoving(game);
@@ -60,10 +56,8 @@ const InputView = {
     if (game.isFinished()) OutputView.printResult(game);
   },
 
-  validateGameCommand(input, game) {
-    if (input !== GAME_RETRY && input !== GAME_QUIT) {
-      throw new Error(ERROR.INVALID_RETRY);
-    }
+  performGameCommand(input, game) {
+    InputView.validateGameCommand(input);
     if (input === GAME_RETRY) {
       game.retry();
       InputView.readMoving(game);
@@ -71,6 +65,24 @@ const InputView = {
     }
     OutputView.printResult(game);
     Console.close();
+  },
+
+  validateBridgeSize(input) {
+    if (!isNumberInRange(input, RANGE.LENGTH_MIN, RANGE.LENGTH_MAX)) {
+      throw new Error(ERROR.INVALID_LENGTH);
+    }
+  },
+
+  validateMoving(input) {
+    if (input !== MOVE.UP && input !== MOVE.DOWN) {
+      throw new Error(ERROR.INVALID_MOVE);
+    }
+  },
+
+  validateGameCommand(input) {
+    if (input !== GAME_RETRY && input !== GAME_QUIT) {
+      throw new Error(ERROR.INVALID_RETRY);
+    }
   },
 };
 
