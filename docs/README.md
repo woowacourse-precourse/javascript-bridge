@@ -28,6 +28,50 @@ Throw 로 예외를 발생시킬 시 테스트 코드 오류가 생긴다.
 
 
 
+> 위에 코드에서도 수정사항이 있었다.
+
+- 다리 길이 입력이 잘못되었을 때 예외를 발생 시킨다
+
+```js
+    // 다리의 길이가 숫자인가?
+    bridgeNum (bridge) {
+        // 소수 인 경우 ERROR 처리
+        if(this.isFloat(bridge) === "ERROR") return "ERROR"
+        bridge = parseInt(bridge)
+        if ( Number.isInteger(bridge) === false ) {
+            MissionUtils.Console.print("[ERROR] 다리의 길이는 숫자로 입력해주세요")
+            return "ERROR"
+        }
+    },
+      
+    // 다리 길이가 소수인 경우 ERROR 처리
+    isFloat(number){
+        number = Number(number)
+        if (number % 1 !== 0 ) {
+            MissionUtils.Console.print("[ERROR] 다리의 길이는 실수형으로 입력해주세요")
+            return "ERROR"
+        }
+    },
+      // 3 이상 20 이하의 수인가?
+    bridgeNumCheck(bridge) {
+        if (bridge <= 2  || bridge >= 21 ) { 
+            MissionUtils.Console.print("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.")
+            return "ERROR"
+        }
+    },
+```
+
+- 첫번째 : 다리의 길이를 ' ' 와 같은 빈값으로 입력 받았을 때 예외처리를 하지 못하였다.
+- 두번째 : 다리의 길이가 정수형태가 아닐때도 예외처리를 하지 못하였다.
+
+### 해결 방안
+
+1. String 형으로 받아오는 다리의 길이를 Number() 를 통해 숫자형으로 변경한다.
+2. Float 여부를 판단하는 isFloat() 함수를 새로 만들어 Float 형태인 경우 "ERROR" 를 리턴하여 예외처리한다.
+3. Number.isInteger("[다리의길이]") 를 이용하여 false 가 나온 경우 "ERROR" 발생하여 예외처리한다.
+
+
+
 ### 다리 출력 부분
 
 ```js
