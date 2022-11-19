@@ -7,7 +7,7 @@ class BridgeValidator {
   }
   static checkBridge(bridge, min, max) {
     this.#isArray(bridge);
-    this.checkInputBridgeLength(bridge.lenght, min, max);
+    this.checkInputBridgeLength(bridge.length, min, max);
     bridge.forEach((bridgeElement) => {
       this.checkInputNext(bridgeElement);
     });
