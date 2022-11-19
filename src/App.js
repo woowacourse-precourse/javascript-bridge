@@ -63,7 +63,8 @@ class App {
       return this.proceedGame();
     }
     if (choice === GAME_PROCEED.quit) {
-      return this.bridgeGame.end();
+      this.bridgeGame.end();
+      return OutputView.printResult(false, this.tryCount);
     }
   }
 }
