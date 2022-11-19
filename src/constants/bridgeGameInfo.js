@@ -1,10 +1,10 @@
 const BRIDGE_GAME = Object.freeze({
   minSize: 3,
   maxSize: 20,
-  up: 'U',
-  down: 'D',
   o: 'O',
   x: 'X',
+  up: 'U',
+  down: 'D',
   quit: 'Q',
   retry: 'R',
 });
