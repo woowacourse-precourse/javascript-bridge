@@ -24,6 +24,7 @@ class App {
   createBridge() {
     readBridgeSize((size) => {
       const generateRandomNumber = generate;
+
       validateBridgeSize(size);
       this.bridge = makeBridge(size, generateRandomNumber);
       this.getUserMoving();
@@ -41,6 +42,7 @@ class App {
     const move = this.bridgeGame.move(this.bridge, userMove);
     const upBridge = this.bridgeGame.getupBridge();
     const downBridge = this.bridgeGame.getDownBridge();
+
     move;
     printMap(upBridge, downBridge);
     this.checkContinue(move);
@@ -54,7 +56,23 @@ class App {
   getUserRetry() {
     readGameCommand((userRetry) => {
       checkRetryString(userRetry);
+      this.checkRetry(userRetry);
     });
+  }
+
+  checkRetry(userRetry) {
+    const retry = this.bridgeGame.retry(userRetry);
+
+    if (retry === true) this.retryGame();
+    if (retry === false) this.quitGame();
+  }
+
+  retryGame() {
+    console.log('재시작');
+  }
+
+  quitGame() {
+    console.log('종료');
   }
 }
 

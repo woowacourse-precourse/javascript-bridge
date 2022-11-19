@@ -2,6 +2,8 @@ const BRIDGE_MIN_LENGTH = 3;
 const BRIDGE_MAX_LENGTH = 20;
 const UP = 'U';
 const DOWN = 'D';
+const RETRY = 'R';
+const QUIT = 'Q';
 const CORRECT = 'O';
 const WRONG = 'X';
 const SPACE = ' ';
@@ -24,6 +26,8 @@ module.exports = {
   BRIDGE_MAX_LENGTH,
   UP,
   DOWN,
+  RETRY,
+  QUIT,
   CORRECT,
   WRONG,
   SPACE,

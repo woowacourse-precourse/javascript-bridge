@@ -1,4 +1,4 @@
-const { UP, DOWN, CORRECT, WRONG, SPACE } = require('./Constants');
+const { UP, DOWN, RETRY, QUIT, CORRECT, WRONG, SPACE } = require('./Constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -65,7 +65,10 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(userRetry) {
+    if (userRetry === RETRY) return true;
+    if (userRetry === QUIT) return false;
+  }
 }
 
 module.exports = BridgeGame;
