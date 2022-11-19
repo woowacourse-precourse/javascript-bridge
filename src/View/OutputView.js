@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { PASS, FAIL, RESULT, MANAGER } = require("../utils/constants");
+const { RESULT, MANAGER } = require("../utils/constants");
 
 const OutputView = {
   printStart() {
@@ -7,8 +7,9 @@ const OutputView = {
   },
 
   printMap(nowMap) {
-    Console.print(`[ ${nowMap[0].join(" | ")} ]`);
-    Console.print(`[ ${nowMap[1].join(" | ")} ]`);
+    nowMap.forEach((bridge) => {
+      Console.print(`[ ${bridge.join(" | ")} ]`);
+    });
   },
 
   printResult(nowMap, attemptCnt, isSuccess) {

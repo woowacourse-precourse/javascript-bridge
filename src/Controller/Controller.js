@@ -1,4 +1,4 @@
-const BridgeGame = require("../Model/BridgeGame");
+const BridgeGame = require("../Models/BridgeGame");
 const BridgeSize = require("../utils/validator/BridgeSize");
 const MoveSpace = require("../utils/validator/MoveSpace");
 const GameCommand = require("../utils/validator/GAMECOMMAND");
@@ -6,10 +6,10 @@ const OutputView = require("../View/OutputView");
 const InputView = require("../View/InputView");
 
 class Controller {
-  #nowMap;
+  #BridgeGame;
 
   constructor() {
-    this.BridgeGame = new BridgeGame();
+    this.#BridgeGame = new BridgeGame();
   }
 
   gameStart() {
@@ -28,7 +28,7 @@ class Controller {
   }
 
   giveSize(size) {
-    this.BridgeGame.receiveSize(size);
+    this.#BridgeGame.receiveSize(size);
     this.getMoving();
   }
 
@@ -43,8 +43,8 @@ class Controller {
   }
 
   giveMoving(moving) {
-    const [bridge, isSafe, isEnd] = this.BridgeGame.move(moving);
-    const nowStep = this.BridgeGame.checkNowStep();
+    const [bridge, isSafe, isEnd] = this.#BridgeGame.move(moving);
+    const nowStep = this.#BridgeGame.checkNowStep();
     OutputView.printMap(bridge, nowStep, isSafe);
     if (!isSafe) this.getAnswer();
     else {
@@ -64,14 +64,14 @@ class Controller {
   }
 
   giveAnswer(answer) {
-    const order = this.BridgeGame.retry(answer);
+    const order = this.#BridgeGame.retry(answer);
     if (order) this.getMoving();
     else this.orderEnd(false);
   }
 
   orderEnd(isSuccess) {
-    const nowMap = this.BridgeGame.checkMap();
-    const attemptCnt = this.BridgeGame.letEnd();
+    const nowMap = this.#BridgeGame.checkMap();
+    const attemptCnt = this.#BridgeGame.letEnd();
     OutputView.printResult(nowMap, attemptCnt, isSuccess);
   }
 }

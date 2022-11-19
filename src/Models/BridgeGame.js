@@ -1,5 +1,6 @@
-const BridgeMaker = require("../BridgeMaker");
-const { ORDER, SPACE, COMMAND } = require("../utils/constants");
+const ProductionModel = require("./productionModel");
+
+const { SPACE, COMMAND } = require("../utils/constants");
 
 class BridgeGame {
   #size;
@@ -13,6 +14,7 @@ class BridgeGame {
   #currentMap;
 
   constructor() {
+    this.production = new ProductionModel();
     this.#size = 0;
     this.#attemptCnt = 1;
     this.#bridge = [];
@@ -22,11 +24,7 @@ class BridgeGame {
 
   receiveSize(size) {
     this.#size = size;
-    this.makeBridge();
-  }
-
-  makeBridge() {
-    this.#bridge = BridgeMaker.getSize(this.#size);
+    this.#bridge = this.production.makeBridge(this.#size);
   }
 
   move(moving) {
@@ -34,26 +32,19 @@ class BridgeGame {
     const nowStep = this.checkNowStep();
     const isSafe = this.checkTrap(nowStep, moving);
     const isEnd = this.checkEnd(nowStep);
-    this.#currentMap = this.makeMap([[], []], nowStep, isSafe);
+    this.#currentMap = this.production.makeMap([[], []], this.#movingProcess);
+    if (!isSafe) this.markTrap();
     return [this.#currentMap, isSafe, isEnd];
   }
 
-  makeMap(nowMap, nowStep, isSafe) {
-    this.#movingProcess.forEach((direction) => {
-      const trapZone = Object.keys(SPACE).filter(
-        (space) => space !== direction
-      )[0];
-      nowMap[SPACE[direction]].push("O");
-      nowMap[SPACE[trapZone]].push(" ");
-    });
-    if (!isSafe) return this.checkCrurrent(nowMap, nowStep);
-    else return nowMap;
+  giveMovingProcess() {
+    return this.#movingProcess;
   }
 
-  checkCrurrent(nowMap, nowStep) {
+  markTrap() {
+    const nowStep = this.checkNowStep();
     const currentSpace = this.#movingProcess.pop();
-    nowMap[SPACE[currentSpace]][nowStep] = "X";
-    return nowMap;
+    this.#currentMap[SPACE[currentSpace]][nowStep] = "X";
   }
 
   checkNowStep() {
