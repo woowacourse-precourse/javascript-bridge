@@ -2,6 +2,7 @@ const OutputView = require('./view/OutputView');
 const InputView = require('./view/InputView');
 const BridgeGame = require('./domain/BridgeGame');
 const Validator = require('./view/Validator');
+const { BRIDGE_GAME } = require('./constants/bridgeGameInfo');
 
 class App {
   constructor() {
@@ -44,8 +45,7 @@ class App {
       }
 
       if (this.checkGameOver()) {
-        this.requestGameOverCommand();
-        return;
+        return this.requestGameOverCommand();
       }
       this.getBridgeMovementDirection();
     } catch (errorType) {
@@ -67,12 +67,13 @@ class App {
   }
 
   requestRetryGame(retryCommand) {
+    const { quit, retry } = BRIDGE_GAME;
     try {
-      if (retryCommand === 'Q') {
+      if (retryCommand === quit) {
         return this.exitGame();
       }
 
-      if (retryCommand === 'R') {
+      if (retryCommand === retry) {
         this.bridgeGame.retry();
         this.getBridgeMovementDirection();
       }
