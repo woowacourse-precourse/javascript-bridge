@@ -1,4 +1,7 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
+const { QUERY_MESSAGE } = require("./util/Constant");
+
+const { readLine, print } = Console;
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -6,11 +9,16 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
+   * @param {function} callback 입력받은 후 실행할 기능
    */
-  readBridgeSize() {
-    MissionUtils.Console.readLine("다리의 길이를 입력해주세요.", (answer) => {
-      const exceptNumber = /[^0-9]/;
-      if (exceptNumber.test(answer)) MissionUtils.Console.print("[ERROR]");
+  readBridgeSize(callback) {
+    readLine(QUERY_MESSAGE.BRIDGE_SIZE, (answer) => {
+      try {
+        callback(answer);
+      } catch (error) {
+        print(error.message);
+        this.readBridgeSize(callback);
+      }
     });
   },
 
