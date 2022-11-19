@@ -48,7 +48,8 @@ class BridgeGame {
   }
 
   terminate() {
-    console.log('terminate');
+    const { map, isRight, tryCount } = this.model;
+    this.view.printResult(isRight, tryCount, map);
   }
 
 }

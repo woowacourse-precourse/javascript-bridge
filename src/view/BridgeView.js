@@ -53,6 +53,10 @@ class BridgeView {
     this.output.printMap(map)
   }
 
+  printResult(isRight, tryCount, map) {
+    this.output.printResult(isRight, tryCount, map)
+  }
+  
   printError(type) {
     this.output.printError(type)
   }

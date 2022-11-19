@@ -19,7 +19,12 @@ const OutputView = {
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    */
-  printResult() {},
+  printResult(isRight, tryCount, map) {
+    Console.print(MESSAGES.RESULT);
+    this.printMap(map);
+    Console.print(MESSAGES.GAMEDONE(isRight, tryCount));
+    Console.close();
+  },
 
   /**
    * 입력값의 에러 타입에 맞는 메세지를 출력한다.
