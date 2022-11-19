@@ -22,6 +22,10 @@ class User {
   getTryCount() {
     return this.#tryCount;
   }
+
+  increaseCount() {
+    this.#tryCount += 1;
+  }
 }
 
 module.exports = User;
