@@ -23,12 +23,12 @@ const OutputView = {
     Console.print(`[ ${processedDBlock} ]`);
   },
 
-  printResult(result, blocks) {
+  printResult(result, blocks, numberOfTry) {
     Console.print('최종 게임 결과');
     this.printMap(blocks[0], blocks[1]);
 
     Console.print(`게임 성공 여부: ${result}`);
-    Console.print(`총 시도한 횟수: `);
+    Console.print(`총 시도한 횟수: ${numberOfTry}`);
     Console.close();
   },
 };

@@ -1,6 +1,7 @@
 class BridgeGame {
   #bridge;
   #marker = 0;
+  #numberOfTry = 1;
 
   constructor(bridge) {
     this.#bridge = bridge;
@@ -55,6 +56,11 @@ class BridgeGame {
 
   retry() {
     this.#marker = 0;
+    this.#numberOfTry += 1;
+  }
+
+  getNumberOfTry() {
+    return this.#numberOfTry;
   }
 }
 
