@@ -1,6 +1,11 @@
 const validCheck = {
   bridgeLength: (input) => {
-    if (!Number.isNaN(Number(input))) return true;
+    if (
+      !Number.isNaN(Number(input)) &&
+      Number(input) >= 3 &&
+      Number(input) <= 20
+    )
+      return true;
     return false;
   },
   moveInput: (input) => {
