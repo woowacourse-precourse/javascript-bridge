@@ -12,7 +12,7 @@ class BridgeController {
     this.#service = new BridgeService();
   }
 
-  inputBirdgeLength(bridgeLength) {
+  inputBridgeLength(bridgeLength) {
     this.#service.start(
       Input.getValidate(new BridgeLengthException(bridgeLength))
     );
