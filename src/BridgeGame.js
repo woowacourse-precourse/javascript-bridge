@@ -21,10 +21,6 @@ class BridgeGame {
    */
   move(letter) {
     this.#moves.push(letter);
-    const map = this.#drawMap();
-    const isCorrect = this.#isCorrect();
-    const isGameOver = this.#isGameOver();
-    return { map, isCorrect, isGameOver };
   }
 
   #drawMap() {
@@ -56,7 +52,10 @@ class BridgeGame {
   }
 
   getResult() {
-    return { map: this.#drawMap(), trialTime: this.#trialTime };
+    const map = this.#drawMap();
+    const isCorrect = this.#isCorrect();
+    const isGameOver = this.#isGameOver();
+    return { map: map, isCorrect, isGameOver, trialTime: this.#trialTime };
   }
 
   /**

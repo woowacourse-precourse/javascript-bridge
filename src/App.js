@@ -40,9 +40,8 @@ class App {
   actWithUserMoveInput(input) {
     try {
       validateMoveInput(input.toUpperCase());
-      const { map, isCorrect, isGameOver } = this.#bridgeGame.move(
-        input.toUpperCase()
-      );
+      this.#bridgeGame.move(input.toUpperCase());
+      const { map, isCorrect, isGameOver } = this.#bridgeGame.getResult();
       printMap(map);
       this.actWithResult({ isCorrect, isGameOver });
     } catch (e) {
