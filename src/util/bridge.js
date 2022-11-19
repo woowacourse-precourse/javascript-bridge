@@ -9,4 +9,10 @@ const BRIDGE_PATH = {
   down: "D",
 };
 
-module.exports = { BRIDGE_PRINT, BRIDGE_PATH };
+const BRIDGE_DELIMETER = {
+  wrapper: (content) => `[ ${content} ]`,
+  wrapperln: (content) => `[ ${content} ]\n`,
+  delimeter: " | ",
+};
+
+module.exports = { BRIDGE_PRINT, BRIDGE_PATH, BRIDGE_DELIMETER };

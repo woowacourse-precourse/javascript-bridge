@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { BRIDGE_DELIMETER } = require("./util/bridge");
 const { CONSOLE_MESSAGE } = require("./util/messages");
 
 /**
@@ -18,8 +19,14 @@ const OutputView = {
     if (isFinal) {
       Console.print(CONSOLE_MESSAGE.finalResult);
     }
-    Console.print(`[ ${firstLineResult.join(" | ")} ]`);
-    Console.print(`[ ${secondLineResult.join(" | ")} ]\n`);
+    Console.print(
+      BRIDGE_DELIMETER.wrapper(firstLineResult.join(BRIDGE_DELIMETER.delimeter))
+    );
+    Console.print(
+      BRIDGE_DELIMETER.wrapperln(
+        secondLineResult.join(BRIDGE_DELIMETER.delimeter)
+      )
+    );
   },
 
   /**
