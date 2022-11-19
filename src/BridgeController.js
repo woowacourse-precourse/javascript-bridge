@@ -6,11 +6,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 
-const bridgeGame = new BridgeGame({
-  indexCount: 0,
-  gameResult: [[], []],
-  tryCount: 1,
-});
+const bridgeGame = new BridgeGame(0, [[], []], 1);
 
 class BridgeController {
   gameStart() {
@@ -20,8 +16,11 @@ class BridgeController {
 
   getUserBridgeLength() {
     InputView.readBridgeSize((bridgeLength) => {
-      if (this.checkBridgeLength(bridgeLength) !== false) {
+      OutputView.lineBreak();
+
+      if (this.checkBridgeLength(bridgeLength) !== "에러발생") {
         const bridge = this.creatBridge(bridgeLength);
+
         this.getUserMove(bridge);
       }
     });
@@ -34,7 +33,7 @@ class BridgeController {
       Console.print(error);
       this.getUserBridgeLength();
 
-      return false;
+      return "에러발생";
     }
   }
 
@@ -54,14 +53,13 @@ class BridgeController {
       Console.print(error);
       this.getUserMove(bridge);
 
-      return false;
+      return "에러발생";
     }
   }
 
   getUserMove(bridge) {
-    OutputView.lineBreak();
     InputView.readMoving((move) => {
-      if (this.checkUserMove(move, bridge) !== false) {
+      if (this.checkUserMove(move, bridge) !== "에러발생") {
         this.judgementAndShow(bridge, move);
       }
     });
@@ -80,9 +78,11 @@ class BridgeController {
   successGame(passBridge, passBridgeResult, bridge) {
     if (passBridge === true && passBridgeResult[0].length === bridge.length) {
       this.gameEndPoint(passBridgeResult);
+
       return true;
     }
   }
+
   passOrNot(passBridge, passBridgeResult, bridge) {
     if (passBridge === false) {
       this.getUserRetry(bridge, passBridgeResult);
@@ -93,13 +93,7 @@ class BridgeController {
   }
 
   gameEndPoint(passBridgeResult) {
-    OutputView.lineBreak();
-
-    OutputView.printResult({
-      bridgeGameResult: passBridgeResult,
-      successOrFail: "성공",
-      tryCount: bridgeGame.getTryCount(),
-    });
+    OutputView.printResult(passBridgeResult, "성공", bridgeGame.getTryCount());
   }
 
   checkUserRetry(userRetry, bridge, passBridgeResult) {
@@ -109,13 +103,15 @@ class BridgeController {
       Console.print(error);
       this.getUserRetry(bridge, passBridgeResult);
 
-      return false;
+      return "에러발생";
     }
   }
 
   getUserRetry(bridge, passBridgeResult) {
     InputView.readGameCommand((userRetry) => {
-      if (this.checkUserRetry(userRetry, bridge, passBridgeResult) !== false) {
+      if (
+        this.checkUserRetry(userRetry, bridge, passBridgeResult) !== "에러발생"
+      ) {
         this.judgementRetry(bridge, passBridgeResult, userRetry);
       }
     });
@@ -136,11 +132,7 @@ class BridgeController {
   }
 
   renderResult(passBridgeResult) {
-    OutputView.printResult({
-      bridgeGameResult: passBridgeResult,
-      successOrFail: "실패",
-      tryCount: bridgeGame.getTryCount(),
-    });
+    OutputView.printResult(passBridgeResult, "실패", bridgeGame.getTryCount());
   }
 }
 
