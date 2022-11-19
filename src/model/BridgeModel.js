@@ -28,7 +28,6 @@ class BridgeModel {
   stepForward(direction) {
     const [isRight, isDone] = this.bridge.checkAnswer(this.moveCount, direction);
     this.updateState(direction, isRight);
-    console.log(this.map);
     return [isRight, isDone];
   }
 

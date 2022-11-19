@@ -23,7 +23,7 @@ class BridgeGame {
   move() {
     const updateMove = (direction) => {
       const [isRight, isDone] = this.model.stepForward(direction);
-      console.log(isRight, isDone);
+      this.view.printMap(this.model.map);
     }
     this.view.getWhereToGo(updateMove);
   }

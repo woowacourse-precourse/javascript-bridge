@@ -36,6 +36,10 @@ class BridgeView {
     this.input.readMoving(validation);
   } 
 
+  printMap(map) {
+    this.output.printMap(map)
+  }
+
   printError(type) {
     this.output.printError(type)
   }
