@@ -22,9 +22,15 @@ class App {
 
   proceedGame(input) {
     this.#userInput.push(input);
-    const printResult = this.#bridge.makeBridgeString(this.#userInput);
-    OutputView.printMap(printResult);
+    this.printBridge();
     
+    // const calcResult = this.#bridge.move(this.#userInput);
+
+  }
+
+  printBridge() {
+    const result = this.#bridge.makeBridgeString(this.#userInput);
+    OutputView.printMap(result);
   }
 }
 
