@@ -4,8 +4,8 @@ const Validate = {
   isCorrectBridgeLength(input) {
     return (
       this.isNumber(input) &&
-      this.isBiggerThanMaxLength(input) &&
-      this.isLowerThanMinLength(input)
+      this.isLowerThanMaxLength(input) &&
+      this.isBiggerThanMinLength(input)
     );
   },
   isNumber(input) {
