@@ -19,9 +19,15 @@ const InputView = {
   readMoving() {
     return new Promise(resolve => {
       Console.readLine(INPUT_MESSAGE.READ_MOVE, move => {
-        resolve(move);
+        const VALIDATION = this.validateMoving(move);
+        resolve(VALIDATION);
       });
     });
+  },
+
+  validateMoving(move) {
+    if (move === 'U' || move === 'D') return move;
+    throw new Error(ERROR_MESSAGE.MOVE_ERROR);
   },
 
   readGameCommand() {
