@@ -1,6 +1,5 @@
-const BridgeMaker = require("./BridgeMaker");
-const OutputView = require("./OutputView");
-const { SPACE, COMMAND } = require("./utils/constants");
+const BridgeMaker = require("../BridgeMaker");
+const { SPACE, COMMAND } = require("../utils/constants");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -11,12 +10,15 @@ class BridgeGame {
 
   #bridge;
 
-  #retryCnt;
+  #attemptCnt;
+
+  #movingProcess;
 
   constructor() {
     this.#size = 0;
+    this.#attemptCnt = 1;
     this.#bridge = [];
-    this.#retryCnt = 0;
+    this.#movingProcess = [];
   }
 
   receiveSize(size) {
@@ -28,10 +30,16 @@ class BridgeGame {
     this.#bridge = BridgeMaker.getSize(this.#size);
   }
 
-  move(nowStep, moving) {
+  move(moving) {
+    this.#movingProcess.push(moving);
+    const nowStep = this.checkNowStep();
     const isSafe = this.checkTrap(nowStep, moving);
     const isEnd = this.checkEnd(nowStep);
     return [this.#bridge, isSafe, isEnd];
+  }
+
+  checkNowStep() {
+    return this.#movingProcess.length - 1;
   }
 
   checkTrap(nowStep, moving) {
@@ -44,13 +52,14 @@ class BridgeGame {
 
   retry(answer) {
     if (answer === COMMAND.RETRY) {
-      this.#retryCnt += 1;
-      return [true, this.#retryCnt];
-    } else if (answer === COMMAND.QUIT) return [false, this.#retryCnt];
+      this.#movingProcess = [];
+      this.#attemptCnt += 1;
+      return [true, this.#attemptCnt];
+    } else if (answer === COMMAND.QUIT) return [false, this.#attemptCnt];
   }
 
   letEnd() {
-    return this.#retryCnt;
+    return this.#attemptCnt;
   }
 }
 

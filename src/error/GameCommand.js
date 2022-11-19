@@ -1,3 +1,4 @@
+const { Console } = require("@woowacourse/mission-utils");
 const { ERROR, COMMAND } = require("../utils/constants");
 
 class GameCommand {
@@ -5,14 +6,15 @@ class GameCommand {
 
   constructor(input) {
     this.#input = input;
-    this.checkInput();
   }
 
   checkInput() {
     try {
-      if (this.isAllowOrder()) throw new Error(ERROR.GAMECOMMANDO);
+      if (this.isAllowOrder()) throw new Error();
+      return true;
     } catch (e) {
-      return InputView.readMoving();
+      Console.print(ERROR.GAMECOMMAND);
+      return false;
     }
   }
 

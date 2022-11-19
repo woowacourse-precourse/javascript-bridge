@@ -1,20 +1,20 @@
-const InputView = require("../InputView");
+const { Console } = require("@woowacourse/mission-utils");
 const { SIZE, ERROR } = require("../utils/constants");
 
 class BridgeSize {
   #input;
 
   constructor(input) {
-    this.#input = input;
-    this.checkInput();
+    this.#input = +input;
   }
 
   checkInput() {
     try {
-      if (this.isAllowNumber() || this.isAllowRange())
-        throw new Error(ERROR.BRIDGE_SIZE);
-    } catch (e) {
-      return InputView.readBridgeSize();
+      if (this.isAllowNumber() || this.isAllowRange()) throw new Error();
+      return true;
+    } catch (error) {
+      Console.print(ERROR.BRIDGE_SIZE);
+      return false;
     }
   }
 
