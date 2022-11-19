@@ -40,7 +40,10 @@ class Controller {
 
   printMoving(canMove, upperBridge, lowerBridge) {
     OutputView.printMap(upperBridge, lowerBridge);
-    if (this.bridgeGame.isFinished()) return this.getResult();
+    if (canMove && this.bridgeGame.isLastStage()) {
+      const isSucceeded = true;
+      return this.getResult(isSucceeded);
+    }
 
     if (canMove) return this.inputMoving();
     if (!canMove) return this.inputGameCommand();
@@ -53,7 +56,10 @@ class Controller {
 
   configCommand(command) {
     if (command === 'R') this.retry();
-    if (command === 'Q') this.getResult();
+    if (command === 'Q') {
+      const isSucceeded = false;
+      this.getResult(isSucceeded);
+    }
   }
 
   retry() {
@@ -61,9 +67,8 @@ class Controller {
     this.inputMoving();
   }
 
-  getResult() {
-    const [tryingCount, isSucceeded, upperBridge, lowerBridge] =
-      this.bridgeGame.getResult();
+  getResult(isSucceeded) {
+    const [tryingCount, upperBridge, lowerBridge] = this.bridgeGame.getResult();
     this.printResult(tryingCount, isSucceeded, upperBridge, lowerBridge);
   }
 

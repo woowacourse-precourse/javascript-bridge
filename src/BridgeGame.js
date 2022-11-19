@@ -34,14 +34,14 @@ class BridgeGame {
     return [canMove, upperBridge, lowerBridge];
   }
 
-  isFinished() {
+  isLastStage() {
     return this.currBridge.isLast(this.winningBridge);
   }
 
   getResult() {
     const [upperBridge, lowerBridge] = this.currBridge.getBridge();
-    const isSucceeded = this.isFinished();
-    return [this.#tryingCount, isSucceeded, upperBridge, lowerBridge];
+    // const isSucceeded = this.isLast();
+    return [this.#tryingCount, upperBridge, lowerBridge];
   }
 
   /**
