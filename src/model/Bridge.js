@@ -17,7 +17,7 @@ class Bridge {
     }
 
     /**
-     * 다리 데이터를 반환한다.
+     * 다리 데이터를 반환
      * @returns {Array} ex) 길이가 3일 경우 ['U', 'D', 'U']
      */
     getBridge() {
@@ -25,7 +25,7 @@ class Bridge {
     }
 
     /**
-     * 다리 인스턴스 생성 전 다리 길이가 유효 값인지 확인하는 함수.
+     * 다리 길이가 유효 값인지 확인하는 메서드
      * @param {number} size 다리 길이
      */
     vaildateBridgeSize(size) {
