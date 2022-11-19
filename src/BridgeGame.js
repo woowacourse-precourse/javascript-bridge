@@ -3,8 +3,8 @@
  */
 class BridgeGame {
   static BRIDGE_SHAPE = {
-    0: 'D',
-    1: 'U',
+    D: 0,
+    U: 1,
   };
 
   /**

@@ -11,9 +11,11 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
+    const shapes = Object.keys(BridgeGame.BRIDGE_SHAPE);
+
     for (let index = 0; index < size; index++) {
       const number = generateRandomNumber();
-      bridge.push(BridgeGame.BRIDGE_SHAPE[number]);
+      bridge.push(shapes[number]);
     }
     return bridge;
   },
