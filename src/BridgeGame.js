@@ -44,7 +44,9 @@ class BridgeGame {
     if (commad === 'Q') {
       OutputView.printResult(this.current_moving, false, this.try);
     } else if (command === 'R') {
-      // this.try += 1;
+      this.try += 1;
+      this.current_moving = [];
+      this.move(size, information);
     }
   }
 }
