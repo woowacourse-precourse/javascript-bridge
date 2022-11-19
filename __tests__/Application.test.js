@@ -200,4 +200,11 @@ describe('배열 길이 반환 함수 테스트', () => {
       Application.getArrayLength('3');
     }).toThrow(VALIDATION_ARRAY_TEXT);
   });
+
+  test('요소가 3개라면 3을 반환한다.', () => {
+    const EXPECTED = [1, 2, 3];
+    const RECEIVED = 3;
+
+    expect(Application.getArrayLength(EXPECTED)).toEqual(RECEIVED);
+  });
 });
