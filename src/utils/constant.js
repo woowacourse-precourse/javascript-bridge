@@ -1,8 +1,8 @@
-const GAME_SIGNAL = {
+const GAME_SIGNATURE = {
   up: 'U',
   down: 'D',
   pass: 'O',
   fail: 'X',
 };
 
-module.exports = GAME_SIGNAL;
+module.exports = GAME_SIGNATURE;

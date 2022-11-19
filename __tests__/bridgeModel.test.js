@@ -1,6 +1,11 @@
 const BridgeMaker = require('../src/BridgeMaker');
 const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
 
+mockGenerator = (numberList) => {
+  BridgeRandomNumberGenerator.generate = jest.fn();
+  numberList.forEach((num) => BridgeRandomNumberGenerator.generate.mockReturnValueOnce(num));
+};
+
 describe('makeBridge 테스트', () => {
   BridgeRandomNumberGenerator.generate = jest.fn();
 
@@ -20,13 +25,9 @@ describe('makeBridge 테스트', () => {
 });
 
 describe('makeBridge 세부 테스트', () => {
-  const mockGenerator = (numbers) => {
-    BridgeRandomNumberGenerator.generate = jest.fn();
-    numbers.forEach((number) => BridgeRandomNumberGenerator.generate.mockReturnValueOnce(number));
-  };
-
   test('[0, 1, 1, 1, 0]', () => {
     const size = 5;
+
     mockGenerator([0, 1, 1, 1, 0]);
     const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     console.log(bridge);
