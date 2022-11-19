@@ -1,13 +1,15 @@
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const { Console } = require('@woowacourse/mission-utils');
-const { PRINTBRIDGESIZE, PRINTMOVEMENT, PRINTGAMECOMMAND } = require('../view/Message');
+const { PRINTBRIDGESIZE, PRINTMOVEMENT, PRINTGAMECOMMAND } = require('../constant/Message');
+const BridgeGame = require('./BridgeGame');
 
 // 명심하기! controller는 데이터를 받거나 사용자에게 동작을 받으면 model 또는 view를 변경
 
 class BridgeProcess {
   #outputView = OutputView;
   #inputView = InputView;
+  #gameReport;
 
   start() {
     Console.print(this.#outputView.printStart());
@@ -15,13 +17,14 @@ class BridgeProcess {
   }
 
   #process() {
+    this.#gameReport = new BridgeGame();
     this.#inputBridgeSize();
   }
 
   #inputBridgeSize() {
     Console.readLine(PRINTBRIDGESIZE, (bridgeSize) => {
       const isBridgeSize = this.#inputView.readBridgeSize(bridgeSize);
-      // const match = BridgeMaker.makeBridge(bridgeSizeNumber, generate);
+      this.#gameReport.makeBridgeInfo(bridgeSize);
       isBridgeSize ? this.#inputMovement() : this.#inputBridgeSize();
     });
   }
@@ -29,8 +32,14 @@ class BridgeProcess {
   #inputMovement() {
     Console.readLine(PRINTMOVEMENT, (movement) => {
       const isMovement = this.#inputView.readMoving(movement);
-      isMovement ? '맞아' : this.#inputMovement();
+      isMovement ? this.#printMovement(isMovement) : this.#inputMovement();
     });
+  }
+
+  #printMovement(movement) {
+    const match = this.#gameReport.move(movement);
+    this.#inputMovement(match);
+    this.#outputView.printMap(match);
   }
 
   #inputGameCommand() {
