@@ -3,7 +3,7 @@ const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
-const { MARKING_PASS } = require("./Utils");
+const { MARKING_PASS, MESSAGE_GAME_SUCCESS } = require("./Utils");
 const { Console } = require("@woowacourse/mission-utils");
 
 class App {
@@ -40,7 +40,12 @@ class App {
     Console.close();
   }
 
-  quitIfAllBridgePassed() {}
+  quitIfAllBridgePassed() {
+    if (this.#bridgeGame.isAllPassed()) {
+      OutputView.printResult(MESSAGE_GAME_SUCCESS, this.#playCount);
+      this.quit();
+    }
+  }
 
   increasePlayCount() {
     this.#playCount++;
