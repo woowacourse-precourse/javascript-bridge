@@ -23,7 +23,7 @@ const Validator = {
     if (moveDirection === "U" || moveDirection === "D") {
       return true;
     }
-    ErrorHandler.inputError("junmp");
+    ErrorHandler.inputError("jump");
   },
 
   isBoolNumber(number) {

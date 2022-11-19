@@ -6,11 +6,13 @@ class Game {
   #bridge;
   #playCount;
   #bridgeLength;
+  #bridgeStatus;
   constructor() {
     this.setPlayCount();
     this.initializeBridgeLength();
-    this.createBridge(this.#bridgeLength);
-    this.bridgeGame = new BridgeGame();
+    this.#bridge = new Bridge(bridgeLength);
+    this.#bridgeStatus = this.#bridge.getBridgeStatus;
+    this.bridgeGame = new BridgeGame(this.#bridgeStatus);
   }
 
   initializeBridgeLength() {
@@ -28,10 +30,6 @@ class Game {
 
   increasePlayCount() {
     this.#playCount += 1;
-  }
-
-  createBridge(bridgeLength) {
-    this.#bridge = new Bridge(bridgeLength);
   }
 
   gameAlgorithms() {

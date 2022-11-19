@@ -1,22 +1,28 @@
 const BridegMaker = require("../BridgeMaker");
-const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 
 class Bridge {
   #bridgeLength;
+  #bridgeStatus;
+
   constructor(bridgeLength) {
     this.setBridgeLength(bridgeLength);
-    this.buildBridge();
+    this.#bridgeStatus = this.buildBridge();
   }
+
   setBridgeLength(bridgeLength) {
     this.#bridgeLength = bridgeLength;
   }
 
   buildBridge() {
-    const RES = BridegMaker.makeBridge(
+    const bridge = BridegMaker.makeBridge(
       this.#bridgeLength,
-      generateRandomNumber
+      BridgeRandomNumberGenerator.generate()
     );
+  }
+
+  getBridgeStatus() {
+    return this.#bridgeStatus;
   }
 }
 
