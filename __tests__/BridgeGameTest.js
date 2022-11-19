@@ -3,13 +3,13 @@ const { Console } = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeGame = require('../src/BridgeGame');
 
+let crossingOrder = [];
+
+const moveMockFn = jest.fn((direction) => {
+  crossingOrder.push([direction, direction === 'U' ? 0 : 1]);
+});
+
 describe('move 메서드 테스트', () => {
-  let crossingOrder = [];
-
-  const moveMockFn = jest.fn((direction) => {
-    crossingOrder.push([direction, direction === 'U' ? 0 : 1]);
-  });
-
   test('move 메서드가 실행되면 crossingOrder 요소가 1씩 증가한다.', () => {
     moveMockFn('U');
 
@@ -165,5 +165,31 @@ describe('getBridgeCrossingResult 메서드 테스트', () => {
     const result = crossingResultspy.mock.results[lastIdx].value;
 
     expect(result[0][1]).toEqual('X');
+  });
+});
+
+describe('isFail 메서드 테스트', () => {
+  let bridge = ['U', 'D', 'D', 'U'];
+
+  const isFailMockFn = jest.fn(() => {
+    const idx = crossingOrder.length - 1;
+
+    return bridge[idx] !== crossingOrder[idx][0];
+  });
+
+  test.each([[['U', 'D', 'U']], [['U', 'D', 'D', 'D']]])(
+    'crossingOrder 배열의 마지막 요소의 문자열 방향과 같은 위치의 bridge 요소가 다르다면 true를 반환한다.',
+    (array) => {
+      array.forEach((dircetion) => moveMockFn(dircetion));
+
+      expect(isFailMockFn()).toBeTruthy();
+      crossingOrder = [];
+    }
+  );
+
+  test('다리 건너기가 끝까지 성공하면 false를 반환한다.', () => {
+    ['U', 'D', 'D', 'U'].forEach((dircetion) => moveMockFn(dircetion));
+
+    expect(isFailMockFn()).toBeFalsy();
   });
 });
