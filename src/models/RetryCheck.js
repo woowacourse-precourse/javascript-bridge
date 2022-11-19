@@ -5,7 +5,7 @@ class RetryCheck {
   validate(command) {
     try {
       this.checkWordAndRange(command);
-    } catch(error) {
+    } catch (error) {
       OutputView.printError(error);
       return false;
     };
@@ -19,7 +19,7 @@ class RetryCheck {
   };
 
   checkWord(command) {
-    if (!command.match(/[RQ]/g)) {
+    if (!String(command).match(/[RQ]/g)) {
       throw (ERROR.RETRY_WORD);
     };
   };

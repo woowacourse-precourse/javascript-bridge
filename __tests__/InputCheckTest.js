@@ -7,7 +7,7 @@ describe('다리 길이값 에러 테스트', () => {
     const sizeValue = [0, 1, 2, 3, 21, 30];
     const size = new BridgeSizeCheck();
 
-    sizeValue.forEach((value) => {
+    sizeValue.forEach(value => {
       expect(size.validate(value)).toBeFalsy();
     });
   });
@@ -16,7 +16,7 @@ describe('다리 길이값 에러 테스트', () => {
     const sizeValue = [' ', 'a', `\n`, 'BD'];
     const size = new BridgeSizeCheck();
 
-    sizeValue.forEach((value) => {
+    sizeValue.forEach(value => {
       expect(size.validate(value)).toBeFalsy();
     });
   });
@@ -27,7 +27,7 @@ describe('U/D값 에러 테스트', () => {
     const upDownValue = [' ', `\n`, 'a', 'BB'];
     const size = new MovingCheck();
 
-    upDownValue.forEach((value) => {
+    upDownValue.forEach(value => {
       expect(size.validate(value)).toBeFalsy();
     });
   });
@@ -36,7 +36,7 @@ describe('U/D값 에러 테스트', () => {
     const upDownValue = ['UUUU', 'UDD', 'DD', 'DU'];
     const size = new MovingCheck();
 
-    upDownValue.forEach((value) => {
+    upDownValue.forEach(value => {
       expect(size.validate(value)).toBeFalsy();
     });
   });
@@ -47,7 +47,7 @@ describe('재시도 질문 값 에러 테스트', () => {
     const upDownValue = [' ', `\n`, 'a', 'BB'];
     const size = new RetryCheck();
 
-    upDownValue.forEach((value) => {
+    upDownValue.forEach(value => {
       expect(size.validate(value)).toBeFalsy();
     });
   });
@@ -56,7 +56,7 @@ describe('재시도 질문 값 에러 테스트', () => {
     const upDownValue = ['RRR', 'QQ', 'QR', 'RRQ'];
     const size = new RetryCheck();
 
-    upDownValue.forEach((value) => {
+    upDownValue.forEach(value => {
       expect(size.validate(value)).toBeFalsy();
     });
   });

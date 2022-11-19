@@ -1,12 +1,12 @@
 const { ANSWER } = require('../utiles/Constant');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const BridgeSizeCheck = require('../models/BridgeSizeCheck');
-const MovingCheck = require('../models/MovingCheck');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const BridgeGame = require('../models/BridgeGame');
+const BridgeSizeCheck = require('../models/BridgeSizeCheck');
+const MovingCheck = require('../models/MovingCheck');
 const RetryCheck = require('../models/RetryCheck');
+const BridgeGame = require('../models/BridgeGame');
 
 class BridgeGameControl {
   size;
@@ -23,7 +23,7 @@ class BridgeGameControl {
   };
   
   start() {
-    InputView.readBridgeSize((size) => {
+    InputView.readBridgeSize(size => {
       this.isValidSize(this.bridgeSizeCheck.validate(size), size);
     });
   };
@@ -45,7 +45,7 @@ class BridgeGameControl {
   };
   
   userMoving() {
-    InputView.readMoving((userUpDown) => {
+    InputView.readMoving(userUpDown => {
       this.isValidMoving(this.movingCheck.validate(userUpDown), userUpDown);
     });
   };
@@ -61,7 +61,7 @@ class BridgeGameControl {
   
 
   answerCheck() {
-    switch(this.bridgeGame.move(this.userMove)) {
+    switch (this.bridgeGame.move(this.userMove)) {
       case 0:
         return this.notAnswerMoving();
       case 1:
@@ -89,7 +89,7 @@ class BridgeGameControl {
   };
 
   askRetry() {
-    InputView.readGameCommand((retryAnswer) => {
+    InputView.readGameCommand(retryAnswer => {
       this.isValidRetry(this.retryCheck.validate(retryAnswer), retryAnswer);
     });
   };
@@ -98,6 +98,7 @@ class BridgeGameControl {
     if (!commend) {
       return this.askRetry();
     };
+
     return this.retryCommand(this.bridgeGame.retry(retryAnswer));
   };
 

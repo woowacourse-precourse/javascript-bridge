@@ -5,7 +5,7 @@ class MovingCheck {
   validate(move) {
     try {
       this.checkWordAndRange(move);
-    } catch(error) {
+    } catch (error) {
       OutputView.printError(error);
       return false;
     };
@@ -19,7 +19,7 @@ class MovingCheck {
   };
 
   checkWord(move) {
-    if (!move.match(/[UD]/g)) {
+    if (!String(move).match(/[UD]/g)) {
       throw (ERROR.UPDOWN_WORD);
     };
   };

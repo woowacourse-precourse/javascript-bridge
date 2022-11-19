@@ -1,7 +1,7 @@
 const { UP, ANSWER } = require('../utiles/Constant');
 
 const MakeMap = {
-  bridge: [[ ], [ ]],
+  bridge: [[], []],
 
   makePrintMap(userMove, isOX) {
     for (let i = 0; i < userMove.length - 1; i++) {
@@ -30,7 +30,7 @@ const MakeMap = {
     let outputMap = '';
 
     MakeMap.bridge.forEach(upDownBridge => {
-      outputMap += `[ ${upDownBridge.join(' | ')} ]\n`;
+      outputMap = `${outputMap}[ ${upDownBridge.join(' | ')} ]\n`;
     });
 
     MakeMap.printMapClear();
@@ -38,7 +38,7 @@ const MakeMap = {
   },
 
   printMapClear() {
-    MakeMap.bridge = [[ ], [ ]];
+    MakeMap.bridge = [[], []];
   },
 };
 
