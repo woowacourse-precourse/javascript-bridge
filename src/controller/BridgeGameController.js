@@ -1,7 +1,7 @@
 const BridgeGame = require('../model/BridgeGame');
 const { readBridgeSize, readGameCommand, readMoving } = require('../view/InputView');
 const { printNewLine, printStart, printMap, printResult } = require('../view/OutputView');
-const { isValidBridgeSize, isValidRetry, isValidRound } = require('../Error/Validation');
+const { isValidBridgeSize, isValidRetry, isValidRound } = require('../Error/InputValidation');
 
 class BridgeGameController {
   #BridgeGame;
