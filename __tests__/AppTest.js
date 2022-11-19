@@ -217,3 +217,31 @@ describe('다리 건너기 결과 맵을 출력하는 함수 호출 테스트', 
     }
   );
 });
+
+describe('bridgeGame 결과에 따른 함수 호출', () => {
+  test.each([
+    [['D'], 1, 0],
+    [['U', 'D', 'D'], 1, 1],
+    [['U'], 2, 2],
+  ])('방향 입력에 따른 함수 호출 테스트', (array, times, idx) => {
+    const app = new App();
+    app.bridgeGame = new BridgeGame(['U', 'D', 'D']);
+
+    const resetOrQuitSpy = jest.spyOn(app, 'requestRestartOrQuit');
+    const quitSpy = jest.spyOn(app, 'quit');
+    const directionSpy = jest.spyOn(app, 'requestDirection');
+
+    const spyArr = [resetOrQuitSpy, quitSpy, directionSpy];
+
+    Console.readLine = jest.fn();
+    array.reduce((acc, cur) => {
+      return acc.mockImplementationOnce((_, callback) => {
+        callback(cur);
+      });
+    }, Console.readLine);
+
+    app.requestDirection();
+
+    expect(spyArr[idx]).toHaveBeenCalledTimes(times);
+  });
+});
