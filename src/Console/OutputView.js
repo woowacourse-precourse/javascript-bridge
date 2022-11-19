@@ -31,7 +31,7 @@ const OutputView = {
   printResult(bridgeGame) {
     MissionUtils.Console.print(OUTPUT.GAME_END);
     this.printMap(bridgeGame);
-    const gameResult = bridgeGame.isSuccess() ? '성공': '실패';
+    const gameResult = bridgeGame.isSuccess ? '성공': '실패';
 
     BridgeValidator.isNumber(bridgeGame.tryCount);
     MissionUtils.Console.print(OUTPUT.GAME_RESULT + gameResult);

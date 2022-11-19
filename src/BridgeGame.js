@@ -76,9 +76,9 @@ class BridgeGame {
       this.#tryCount += 1;
       this.#bridgeAnswers = [];
       this.#currentPosition = 0;
-      this.#isFinish = false;
+      this.#isFinish = true;
     }
-    return true;
+    return false;
   }
 }
 
