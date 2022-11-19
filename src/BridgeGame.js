@@ -53,7 +53,7 @@ class BridgeGame {
   #validateGameCommand(gameCommand) {
     if (!gameCommand) throw new Error(ERROR_MSG.emptyInput);
 
-    if (!this.#isValidTrigger) {
+    if (!this.#isValidTrigger(gameCommand)) {
       throw new Error(ERROR_MSG.inValidTrigger);
     }
   }
