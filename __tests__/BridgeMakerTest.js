@@ -17,3 +17,12 @@ describe('무작위 값을 생성해주는 함수 호출 테스트', () => {
     }
   );
 });
+
+describe('반환값 길이 테스트', () => {
+  test.each([[12], [10], [17]])(
+    '반환값의 길이는 첫 번째 매개변수인 size의 값이다. size: %d',
+    (size) => {
+      expect(BridgeMaker.makeBridge(size, generate)).toHaveLength(size);
+    }
+  );
+});
