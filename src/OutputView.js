@@ -26,8 +26,9 @@ const OutputView = {
     Console.print(MESSAGE.gameResult);
     this.printMap(history);
     Console.print(MESSAGE.gameCheckSuccess
-      + (success ? MESSAGE.successMessage : MESSAGE.failMessage));
-    Console.print(MESSAGE.gameCheckTryCount + tryCount);
+      + (success ? MESSAGE.successMessage : MESSAGE.failMessage)
+      + MESSAGE.gameCheckTryCount
+      + tryCount);
     Console.close();
   },
 
