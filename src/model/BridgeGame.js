@@ -19,7 +19,7 @@ class BridgeGame {
     const bridge = BridgeMaker.makeBridge(size, () =>
       BridgeRandomNumberGenerator.generate()
     );
-    console.log(bridge);
+    // console.log(bridge);
     this.#bridge = bridge;
   }
 
