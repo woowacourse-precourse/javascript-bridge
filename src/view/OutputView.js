@@ -3,9 +3,9 @@ const { OUTPUT_MESSAGE } = require('../constants/Message');
 const PlayersMap = require('../PlayersMap');
 
 const OutputView = {
-  printMap(nextStep, correctBridge) {
-    return PlayersMap.answerDivision(nextStep, correctBridge);
-  },
+  // printMap(nextStep, correctBridge) {
+  //   return PlayersMap.answerDivision(nextStep, correctBridge);
+  // },
 
   printStart() {
     Console.print(OUTPUT_MESSAGE.GAME_START);
@@ -23,9 +23,9 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.GAME_FAIL);
   },
 
-  // printAttemptCount(countAttempt) {
-  //   Console.print(OUTPUT_MESSAGE.GAME_ATTEMPT`${countAttempt}`);
-  // },
+  printAttemptCount(round) {
+    Console.print(OUTPUT_MESSAGE.GAME_ATTEMPT + `${round}`);
+  },
 };
 
 module.exports = OutputView;

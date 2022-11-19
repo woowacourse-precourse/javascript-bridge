@@ -13,6 +13,8 @@ class BridgeGameProceed {
 
 #playersBridge
 
+#round = 1;
+
     constructor() {
         this.BridgeGame = new BridgeGame();
         this.PlayersMap = new PlayersMap();
@@ -22,7 +24,6 @@ class BridgeGameProceed {
     start() {
         OutputView.printStart();
         InputView.readBridgeSize((bridgeLength) => {
-            Console.print('');
             Validation.bridgeLength(bridgeLength);
             this.#winBridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
             console.log(this.#winBridge);
@@ -50,16 +51,18 @@ class BridgeGameProceed {
     }
 
     fail(result) {
+        this.#round += 1;
         InputView.readGameCommand((retryOrNot) => {
+            if (retryOrNot === "R") return this.game();
             this.BridgeGame.retry(retryOrNot, result);
         })     
     }
 
     win(result) {
         OutputView.printResult()
-        OutputView.printMap()
+        Console.print(result);
         OutputView.printWin()
-        // OutputView.printAttemptCount(this.#round)
+        OutputView.printAttemptCount(this.#round)
         Console.close();
     }
 }
