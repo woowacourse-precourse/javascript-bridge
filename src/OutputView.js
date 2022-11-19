@@ -43,13 +43,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(totalCount) {
+  printResult(totalCount, hasCorrect = false) {
     Console.print(Messages.END_GAME);
     Console.print(`[ ${this.up.join(' | ')} ]`);
     Console.print(`[ ${this.down.join(' | ')} ]\n`);
 
-    let winOrFail = '성공';
-    Console.print(`게임 성공 여부: ${winOrFail}`);
+    Console.print(`게임 성공 여부: ${hasCorrect ? '성공' : '실패'}`);
     Console.print(`총 시도한 횟수: ${totalCount}`);
   },
 };

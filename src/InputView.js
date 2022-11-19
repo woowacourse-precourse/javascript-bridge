@@ -54,7 +54,7 @@ const InputView = {
     if (!hasCorrect) this.readGameCommand(bridge);
     if (round === bridge.length) {
       const totalCount = this.bridgeGame.countTry();
-      OutputView.printResult(totalCount);
+      OutputView.printResult(totalCount, hasCorrect);
     } else this.readMoving(bridge);
   },
 
