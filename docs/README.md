@@ -3,7 +3,7 @@
 
     자동으로 생성할 다리 길이를 입력 받는다.
 
-    - [ ] isValidBridgeNumber()
+    - [x] isBridgeSizeValid()
     
         3 이상 20 이하의 숫자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.
 
