@@ -4,6 +4,7 @@ const MESSAGE = {
   INPUT_BRIDGE_MOVE: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
   INPUT_BRIDGE_RESTART: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
   OUTPUT_TEXT: '최종 게임 결과',
+  OUTPUT_RESULT: (success, count) => `게임 성공 여부: ${success}\n총 시도한 횟수: ${count}`,
 };
 
 const ERROR = {
