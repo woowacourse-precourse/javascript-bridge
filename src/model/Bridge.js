@@ -22,6 +22,10 @@ class Bridge {
     this.#originalBridge = bridge;
   }
 
+  getOriginalBridge() {
+    return this.#originalBridge;
+  }
+
   setAllBridgeEmpty() {
     (this.#upsideBridge = []), (this.#downsideBridge = []);
   }
