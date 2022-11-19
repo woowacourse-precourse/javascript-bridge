@@ -32,6 +32,7 @@ class BridgeGame {
    */
   retry() {
     this.#player.movings = [];
+    this.#bridgeResult.addTryCount();
   }
 
   quit() {

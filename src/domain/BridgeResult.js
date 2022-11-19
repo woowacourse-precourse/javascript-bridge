@@ -16,6 +16,10 @@ class BridgeResult {
     this.#bridgeMap = bridgeMap;
   }
 
+  addTryCount() {
+    this.#tryCount += 1;
+  }
+
   checkSuccess() {
     this.#isSuccess =
       this.#bridgeMap[BRIDGE.UP].length === this.#bridgeSize &&
