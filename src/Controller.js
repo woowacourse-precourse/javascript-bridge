@@ -13,6 +13,7 @@ class Controller {
     down: [],
   };
   #correct;
+  #try = 1;
   constructor() {
     this.validation = new Validation();
     this.bridgeGame = new BridgeGame();
@@ -70,6 +71,13 @@ class Controller {
   checkGameFinished() {
     if (this.#currentBridge.up.length === this.#bridge.length && this.#correct)
       return true;
+  }
+
+  endGame() {
+    OutputView.resultMessage();
+    OutputView.printMap(this.#currentBridge);
+    OutputView.printResult();
+    Console.close;
   }
 }
 
