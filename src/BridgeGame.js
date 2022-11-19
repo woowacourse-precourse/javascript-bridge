@@ -3,6 +3,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
 const BridgeMaker = require("./BridgeMaker.js");
 const InputView = require("./InputView.js");
 const OutputView = require("./OutputView.js");
+const { isSame } = require("./Validation.js");
 
 const { Console } = MissionUtils;
 
@@ -30,9 +31,7 @@ class BridgeGame {
   }
   start() {
     OutputView.printStart();
-
-    const current = this.start.bind(this);
-    InputView.readBridgeSize(current, (bridgeLength) => {
+    InputView.readBridgeSize(this.start.bind(this), (bridgeLength) => {
       if (this.#answer.length === 0) {
         const answer = BridgeMaker.makeBridge(bridgeLength, generate);
         this.#answer = answer;
@@ -55,12 +54,11 @@ class BridgeGame {
     });
   }
   moveAfter(command) {
-    const isCorrect = this.#answer[this.#step - 1] === command;
-    if (!isCorrect) {
+    if (!isSame(this.#answer[this.#step - 1], command)) {
       this.retry();
       return;
     }
-    if (this.#answer.length === this.#inputs.length) {
+    if (isSame(this.#answer.length, this.#inputs.length)) {
       this.end();
       return;
     }
