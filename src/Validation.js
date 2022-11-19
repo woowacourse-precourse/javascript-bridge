@@ -10,6 +10,11 @@ const Validation = {
       throw new Error(ERROR_MESSAGE.DOMAIN);
     }
   },
+  moving(answer) {
+    if (CONDITION.INVALID_MOVING(answer)) {
+      throw new Error(ERROR_MESSAGE.MOVING);
+    }
+  },
 };
 
 module.exports = Validation;
