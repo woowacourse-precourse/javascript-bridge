@@ -22,21 +22,25 @@ describe('다리 건너기 기능 테스트', () => {
     expect(bridge).toEqual(['U', 'U', 'D']);
   });
 
-  test('에러 테스트 : 다리 생성 테스트', () => {
+  test('다리 생성 유효성 검사 테스트', () => {
     mockQuestions(['s']);
 
-    expect(() => {
+    try {
       const app = new App();
       app.play();
-    }).toThrow('다리 길이는 숫자만 입력할 수 있습니다.');
+    } catch (error) {
+      expect(error).toMatch('[ERROR] 다리 길이는 숫자만 입력할 수 있습니다.');
+    }
   });
 
-  test('에러 테스트 : 다리 생성 테스트', () => {
+  test('다리 생성 유효성 검사 테스트', () => {
     mockQuestions([21]);
 
-    expect(() => {
+    try {
       const app = new App();
       app.play();
-    }).toThrow('다리 길이는 3이상 20이하의 숫자입니다.');
+    } catch (error) {
+      expect(error).toMatch('[ERROR] 다리 길이는 3이상 20이하의 숫자입니다.');
+    }
   });
 });
