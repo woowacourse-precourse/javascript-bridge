@@ -11,11 +11,16 @@ const InputView = {
     MissionUtils.Console.readLine(
       '다리의 길이를 입력해주세요.',
       (length_answer) => {
+        console.log(length_answer);
         length = Number(length_answer);
       }
     );
-    if (length < 3 || length > 20) {
-      throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+    if (!(length >= 3 && length <= 20)) {
+      MissionUtils.Console.print(
+        '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.'
+      );
+      // throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+      return -1;
     }
     return length;
   },
@@ -32,7 +37,6 @@ const InputView = {
       }
     );
     if (U_or_D !== 'U' && U_or_D !== 'D') {
-      console.log('U_or_D', U_or_D);
       throw new Error('[ERROR] 이동할 칸은 U와 D만 입력가능합니다.');
     }
     return U_or_D;
