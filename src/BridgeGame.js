@@ -39,8 +39,6 @@ class BridgeGame {
   }
 
   #validateDirection(direction) {
-    if (!direction) throw new Error(ERROR_MSG.emptyInput);
-
     if (!this.#isValidDirectionSymbol(direction)) {
       throw new Error(ERROR_MSG.invalidDirection);
     }
@@ -51,8 +49,6 @@ class BridgeGame {
   }
 
   #validateGameCommand(gameCommand) {
-    if (!gameCommand) throw new Error(ERROR_MSG.emptyInput);
-
     if (!this.#isValidTrigger(gameCommand)) {
       throw new Error(ERROR_MSG.inValidTrigger);
     }
