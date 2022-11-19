@@ -39,6 +39,10 @@ const BRIDGE_SIZE = Object.freeze({
   LOWER_INCLUSIVE: 3,
   UPPER_INCLUSIVE: 20,
 });
+const COMMAND = Object.freeze({
+  RETRY: 'R',
+  QUIT: 'Q',
+});
 module.exports = Object.freeze({
   MESSAGE,
   MOVEMENT,
@@ -47,4 +51,5 @@ module.exports = Object.freeze({
   BRIDGE_BLOCK,
   BRIDGE_SIZE,
   BRIDGE_SIDE,
+  COMMAND,
 });
