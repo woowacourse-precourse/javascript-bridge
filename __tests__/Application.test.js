@@ -194,4 +194,10 @@ describe('배열 길이 반환 함수 테스트', () => {
 
     expect(Application.getArrayLength.name).toEqual(METHOD_NAME);
   });
+
+  test('인수가 배열이 아니라면 예외를 발생시킨다.', () => {
+    expect(() => {
+      Application.getArrayLength('3');
+    }).toThrow(VALIDATION_ARRAY_TEXT);
+  });
 });
