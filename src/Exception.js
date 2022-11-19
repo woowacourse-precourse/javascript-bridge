@@ -49,6 +49,13 @@ class CheckWhetherGameRunning{
     }
 
     validate(value){
-
+        this.CheckInputValue(value)
+    }
+    CheckInputValue(value){
+        if(value !== "Q" || value !== "R"){
+            throw new Error("[ERROR] Q(종료) 또는 R(재시작)을 입력해주세요. ");
+        }
     }
 }
+
+module.exports = {CheckBridgeSizeException , CheckUserMove, CheckWhetherGameRunning};
