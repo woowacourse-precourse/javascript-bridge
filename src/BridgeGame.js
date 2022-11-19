@@ -1,10 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const GameError = require('./Error/GameError');
-const {
-  ERROR_MESSAGE,
-  INPUT_MESSAGE,
-  RETRY_MESSAGE,
-} = require('./utils/Constant');
+const Selected = require('./Model/Selected');
+const { ERROR_MESSAGE, RETRY_MESSAGE } = require('./utils/Constant');
 const InputView = require('./Viewer/InputView');
 const OutputView = require('./Viewer/OutputView');
 
@@ -15,34 +12,24 @@ class BridgeGame {
   #selected;
 
   constructor() {
-    this.#selected = [];
+    this.#selected = new Selected();
     this.tryCnt = 1;
-  }
-
-  static validate(input) {
-    if (input !== INPUT_MESSAGE.UP && input !== INPUT_MESSAGE.DOWN) {
-      throw new GameError(ERROR_MESSAGE.LEVEL_INPUT);
-    }
   }
 
   resetSelectedAndPlusTryCnt() {
     this.plusTryCnt();
-    this.#selected = [];
-  }
-
-  getSelected(i) {
-    return this.#selected[i];
-  }
-
-  getLength() {
-    return this.#selected.length;
+    this.#selected.reset();
   }
 
   getResult(bridge) {
-    for (let i = 0; i < this.getLength(); i += 1) {
-      if (bridge.getBridge(i) !== this.getSelected(i)) return false;
+    for (let i = 0; i < this.#selected.getLength(); i += 1) {
+      if (bridge.getBridge(i) !== this.#selected.getElement(i)) return false;
     }
     return true;
+  }
+
+  getLevelCnt() {
+    return this.#selected.getLength();
   }
 
   getTryCnt() {
@@ -59,8 +46,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(input) {
-    this.constructor.validate(input);
-    this.#selected.push(input);
+    this.#selected.addElement(input);
   }
 
   /**
@@ -69,7 +55,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(input, bridge, game) {
-    this.constructor.validateRetryInput(input);
+    this.constructor.validate(input);
     if (input === RETRY_MESSAGE.RETRY) {
       game.resetSelectedAndPlusTryCnt();
       InputView.readMoving(bridge, game);
@@ -79,7 +65,7 @@ class BridgeGame {
     }
   }
 
-  static validateRetryInput(input) {
+  static validate(input) {
     if (input !== RETRY_MESSAGE.RETRY && input !== RETRY_MESSAGE.QUIT)
       throw new GameError(ERROR_MESSAGE.RETRY_INPUT);
   }

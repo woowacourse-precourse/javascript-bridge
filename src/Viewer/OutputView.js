@@ -21,7 +21,7 @@ const OutputView = {
   },
 
   setMessage(bridge, game, targetElement) {
-    const length = game.getLength();
+    const length = game.getLevelCnt();
     let message = OUTPUT_MESSAGE.START;
     message += this.getMessageBody(bridge, game, targetElement, length);
     return message + OUTPUT_MESSAGE.END;
