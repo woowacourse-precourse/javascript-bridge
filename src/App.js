@@ -36,15 +36,13 @@ class App {
   requestMovementDirection(moveCommand) {
     try {
       this.validator.checkMoveCommand(moveCommand);
-      OutputView.printMap(this.bridgeGame.drawBridgeMap(moveCommand)); // 사용자가 입력한 커맨드에 따라 맵 그리고 출력시키기
-      this.bridgeGame.move(); // 그다음 유저 위치 이동시키기
-      // X를 골랐다면 게임 오버, O면 다음 인풋 받기
+      OutputView.printMap(this.bridgeGame.drawBridgeMap(moveCommand));
+      this.bridgeGame.move();
       if (this.checkGameOver()) {
-        // 게임 오버이면
         this.requestGameOverCommand();
-      } else {
-        this.getBridgeMovementDirection();
+        return;
       }
+      this.getBridgeMovementDirection();
     } catch (errorType) {
       OutputView.printError(errorType);
       this.getBridgeMovementDirection();
@@ -52,7 +50,7 @@ class App {
   }
 
   checkGameOver() {
-    const isGameOver = this.bridgeGame.getGameState();
+    const isGameOver = this.bridgeGame.checkGameOver();
     return isGameOver;
   }
 
@@ -65,7 +63,7 @@ class App {
       if (retryCommand === 'Q') {
         OutputView.printResult(
           '여기에 유저가 현재까지 건넌 다리 넣어야함\n',
-          this.bridgeGame.getGameState(),
+          this.bridgeGame.checkGameOver(),
           this.bridgeGame.getUserTryCount()
         );
         return OutputView.gameClose();

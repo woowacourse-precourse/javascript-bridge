@@ -37,7 +37,7 @@ class BridgeGame {
     return this.gameMap.getCorretGameMap();
   }
 
-  getGameState() {
+  checkGameOver() {
     return this.gameMap.isGameOver();
   }
 

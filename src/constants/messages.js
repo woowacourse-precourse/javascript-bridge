@@ -10,8 +10,8 @@ const OUTPUT_MESSAGES = Object.freeze({
   tryCount(count) {
     return `총 시도한 횟수: ${count}`;
   },
-  successOrFailure(isSuccess) {
-    if (isSuccess) return '게임 성공 여부: 성공';
+  successOrFailure(isGameOver) {
+    if (!isGameOver) return '게임 성공 여부: 성공';
     return '게임 성공 여부: 실패';
   },
 });
