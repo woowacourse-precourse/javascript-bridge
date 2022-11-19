@@ -11,9 +11,10 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine('다리의 길이를 입력해주세요.\n', (length) => {
-      //console.log("입력한 다리 길이는...",length);
       const bridgeList = BridgeMaker.makeBridge(length);
       console.log(bridgeList);
+
+      return this.readMoving(bridgeList);
     })
   },
 
