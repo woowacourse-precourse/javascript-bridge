@@ -17,7 +17,12 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() { },
+  readMoving(postProcess) {
+    MissionUtils.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (input) => {
+      (this.isValidMoveInput(input)) ?
+        postProcess(input) : this.handleMoveException(postProcess);
+    })
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
@@ -42,6 +47,15 @@ const InputView = {
     // TODO: 에러 메시지 출력은 input view가 아닌 다른 클래스에서 수행할 수 있지 않을까? (ex. ErrorView)
     MissionUtils.Console.print("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
     this.readBridgeSize(postProcess);
+  },
+
+  isValidMoveInput(input) {
+    return (input === "U") || (input === "D");
+  },
+
+  handleMoveException(postProcess) {
+    MissionUtils.Console.print("[ERROR] 이동은 U나 D 중 하나의 명령어로만 가능합니다.");
+    this.readMoving(postProcess);
   }
 };
 
