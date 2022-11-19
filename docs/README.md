@@ -109,3 +109,17 @@
 - 컨트롤러: `BridgeGameController`
 
 이를 바탕으로 기능 목록을 재작성하였다.
+
+### 구조 그려보기
+
+```mermaid
+  flowchart TD
+    A[OutputView] --> B[BridgeGameController]
+    A[OutputView] --> C[BridgeError]
+    C --> D[ExceptionHandler]
+    D --> E[InputValidation]
+    E --> B
+    F[InputView] --> B
+    G[BridgeGame] --> B
+    B --> H[App.play]
+```
