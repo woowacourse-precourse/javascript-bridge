@@ -12,4 +12,12 @@ describe("My Application Test", () => {
       }).toThrow(ErrorMessage.NOT_VALID_DIRECTION);
     });
   });
+
+  describe("Bridge Maker", () => {
+    it("size에 숫자 외의 값이 입력되면 예외를 발생시켜야 한다.", () => {
+      expect(() => {
+        makeBridge("abc");
+      }).toThrow(ErrorMessage.NOT_INTEGER);
+    });
+  });
 });
