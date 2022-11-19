@@ -23,8 +23,4 @@ const SIZE = {
     FAIL: "실패",
   };
 
-  const CALCULATION = {
-    DECIMAL_NUMBER: 10
-  };
-  
-module.exports = { SIZE, MOVING, RETRY, RESULT, CALCULATION };
+module.exports = { SIZE, MOVING, RETRY, RESULT };
