@@ -1,4 +1,4 @@
-const DIRECTION = require('./constant/direction');
+const DIRECTION = require('./Constants/direction');
 const Validator = require('./Validator');
 
 /**
@@ -23,6 +23,7 @@ class BridgeGame {
    */
 
   move(direction) {
+    Validator.checkCorrectDirection(direction);
     const dir = BridgeGame.isGoUp(direction) ? DIRECTION.up : DIRECTION.down;
     return this.recordDirection(dir);
   }
@@ -33,12 +34,12 @@ class BridgeGame {
     return false;
   }
 
-  static makeNewDirectionRecord(direction, records) {
-    return [...records, direction];
+  recordDirection(direction) {
+    this.#records = BridgeGame.addDirection(direction, this.#records);
   }
 
-  recordDirection(direction) {
-    this.#records = BridgeGame.makeNewDirectionRecord(direction, this.#records);
+  static addDirection(direction, records) {
+    return [...records, direction];
   }
 
   /**
@@ -48,7 +49,15 @@ class BridgeGame {
    */
 
   retry() {
+    this.addRetry();
+    this.initRecords();
+  }
+
+  addRetry() {
     this.#retry += 1;
+  }
+
+  initRecords() {
     this.#records = [];
   }
 
@@ -70,8 +79,13 @@ class BridgeGame {
    */
   static canMoveNext(selectedDirection, nextDirection) {
     console.log('canMoveNext', selectedDirection, nextDirection);
-    Validator.checkCorrectDirection(selectedDirection);
-    Validator.checkCorrectDirection(nextDirection);
+    Validator.checkCorrectDirection([selectedDirection, nextDirection]);
+    if (BridgeGame.canCrossBridge(selectedDirection, nextDirection))
+      return true;
+    return false;
+  }
+
+  static canCrossBridge(selectedDirection, nextDirection) {
     if (selectedDirection === nextDirection) return true;
     return false;
   }
