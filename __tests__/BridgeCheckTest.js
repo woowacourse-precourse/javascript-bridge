@@ -2,6 +2,8 @@ const BridgeService = require('../src/service/BridgeService');
 
 const MissionUtils = require('@woowacourse/mission-utils');
 
+const { GAME_RESULT_STATE } = require('../src/utils/constants');
+
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce(
@@ -28,7 +30,10 @@ describe('랜덤 브릿지와 유저 브릿지 비교 테스트', () => {
       ['O', ''],
       ['', 'X']
     ]);
-    expect(gameResult).toEqual('fail');
+    expect(gameResult).toEqual({
+      result: GAME_RESULT_STATE.fail,
+      tryCount: 1
+    });
   });
 
   test('(결과:실패 - 유저브릿지["U","U","D"], 랜덤브릿지["U","U","U"],)) 입력 테스트', () => {
@@ -51,7 +56,10 @@ describe('랜덤 브릿지와 유저 브릿지 비교 테스트', () => {
       ['', '', 'X']
     ]);
 
-    expect(gameResult).toEqual('fail');
+    expect(gameResult).toEqual({
+      result: GAME_RESULT_STATE.fail,
+      tryCount: 1
+    });
   });
 
   test('(결과:계속 시도 - 유저브릿지["U","U"], 랜덤브릿지["U","U","U"],)) 입력 테스트', () => {
@@ -72,7 +80,10 @@ describe('랜덤 브릿지와 유저 브릿지 비교 테스트', () => {
       ['', '']
     ]);
 
-    expect(gameResult).toEqual('try');
+    expect(gameResult).toEqual({
+      result: GAME_RESULT_STATE.try,
+      tryCount: 1
+    });
   });
 
   test('(결과:성공 - 유저브릿지["U","U","U"], 랜덤브릿지["U","U","U"],)) 입력 테스트', () => {
@@ -94,6 +105,9 @@ describe('랜덤 브릿지와 유저 브릿지 비교 테스트', () => {
       ['', '', '']
     ]);
 
-    expect(gameResult).toEqual('success');
+    expect(gameResult).toEqual({
+      result: GAME_RESULT_STATE.success,
+      tryCount: 1
+    });
   });
 });
