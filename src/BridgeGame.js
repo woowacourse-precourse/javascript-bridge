@@ -1,6 +1,7 @@
 const GameProgress = require('./IO/GameProgress');
 const InputView = require('./IO/InputView');
 const BridgeError = require('./Error/BridgeError');
+const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -14,7 +15,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
  * 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
  */
 class BridgeGame {
-  #BridgeSize;
+  #bridgeErrorMessages = ['[ERROR] 유효하지 않은 다리 길이입니다.'];
 
   start() {
     GameProgress.printGameStart();
@@ -26,8 +27,13 @@ class BridgeGame {
     const LOWER_BOUND = 3;
     const UPPER_BOUND = 20;
     const IS_VALID_NUMBER = IS_NUMBER && +(size) >= LOWER_BOUND && +(size) <= UPPER_BOUND;
-    BridgeError.throwErrorHandler('[Error]', !IS_VALID_NUMBER);
-    this.#BridgeSize = +size;
+    BridgeError.throwErrorHandler(this.#bridgeErrorMessages[0], !IS_VALID_NUMBER);
+    this.makeBridge(+size);
+  };
+
+  makeBridge = (size) => {
+    const BRIDGE = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.move(BRIDGE);
   };
 
   /**
