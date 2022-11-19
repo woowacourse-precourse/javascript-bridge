@@ -14,7 +14,16 @@ class GameController {
   }
 
   selectBridgeSize() {
-    this.inputView.readBridgeSize();
+    this.inputView.readBridgeSize((userInput) => {
+      const size = this.inputView.getBridegeSize(userInput);
+      console.log('size is ', size);
+      this.nextStep();
+    });
+  }
+
+  nextStep() {
+    console.log(123);
+    Console.close();
   }
 }
 
