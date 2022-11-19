@@ -7,7 +7,13 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
  */
 const BridgeMaker = {
 
+  getSpace(number) {
+    if (number === 1) {
+      return 'U';
+    }
 
+    return 'D';
+  },
 
   /**
    * @param {number} size 다리의 길이
