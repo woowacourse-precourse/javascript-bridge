@@ -14,30 +14,29 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(trials) {
-    let [upStage, downStage] = trials.reduce(
+    const [upperSide, lowerSide] = this.getMap(trials);
+    Console.print(upperSide);
+    Console.print(lowerSide);
+  },
+
+  getMap(trials) {
+    let [upperSide, lowerSide] = trials.reduce(
       (bridgeMap, trial) => {
-        let [upStage, downStage] = bridgeMap;
-
+        let [upperSide, lowerSide] = bridgeMap;
         if (trial.direction === 'U') {
-          upStage += ` ${trial.result} |`;
-          downStage += '   |';
+          upperSide += ` ${trial.result} |`;
+          lowerSide += '   |';
         }
-
         if (trial.direction === 'D') {
-          upStage += `   |`;
-          downStage += ` ${trial.result} |`;
+          upperSide += `   |`;
+          lowerSide += ` ${trial.result} |`;
         }
-
-        return [upStage, downStage];
+        return [upperSide, lowerSide];
       },
       ['[', '[']
     );
 
-    upStage = upStage.slice(0, -1) + ']';
-    downStage = downStage.slice(0, -1) + ']';
-
-    Console.print(upStage);
-    Console.print(downStage);
+    return [upperSide.slice(0, -1) + ']', lowerSide.slice(0, -1) + ']'];
   },
 
   /**
@@ -45,7 +44,20 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridgeModel) {
+    const [bridgeUpperSide, bridgeLowerSide] = this.getMap(bridgeModel.trials);
+    const trialCount = bridgeModel.trialCount;
+    const status = bridgeModel.status;
+    Console.print(
+      `\n최종 게임 결과
+${bridgeUpperSide}
+${bridgeLowerSide}
+
+게임 성공 여부: ${status}
+총 시도한 횟수: ${trialCount}`
+    );
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
