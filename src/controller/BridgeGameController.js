@@ -42,6 +42,14 @@ class BrideGameController {
     this.#bridgeGame.move();
     InputView.readMoving(this.handleAnswerCheckPhase);
   }
+
+  handleGameRetryPhase(retryAnswer) {
+    if (retryAnswer === 'R') {
+      this.#bridgeGame.retry();
+      return;
+    }
+    Console.close();
+  }
 }
 
 module.exports = BrideGameController;
