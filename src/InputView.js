@@ -64,12 +64,20 @@ const InputView = {
   readGameCommand(bridge) {
     Console.readLine(Messages.INPUT_RESTART_OR_END, (restartOrEnd) => {
       this.validateGameCommand(restartOrEnd);
-      const totalCount = this.bridgeGame.countTry();
+      this.restartOrQuit(bridge, restartOrEnd);
     });
   },
 
   validateGameCommand(restartOrEnd) {
     if (restartOrEnd !== 'R' && restartOrEnd !== 'Q') throw new Error(Messages.GAME_COMMAND_ERROR);
+  },
+
+  restartOrQuit(bridge, restartOrEnd) {
+    const totalCount = this.bridgeGame.countTry();
+    if (restartOrEnd === 'R') {
+      this.bridgeGame.retry();
+      this.readMoving(bridge);
+    }
   },
 };
 
