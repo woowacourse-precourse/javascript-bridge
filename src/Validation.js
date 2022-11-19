@@ -1,31 +1,46 @@
+const { Console } = require("@woowacourse/mission-utils");
 const { ERROR, OPTION, KEY } = require("./constant/message.js");
 
 class Validation {
-    static checkSizeInput(size) {
-        // console.log("Validation.checkSizeInput--------------------");
-        this.checkNumber(size);
-        this.checkSizeRange(size);
+    static checkBridgeSizeInput(size) {
+        // console.log("Validation.checkBridgeSizeInput--------------------");
+        const isValidNumber = this.checkNumber(size);
+        const isValidSizeRange = this.checkSizeRange(size);
+        if (isValidNumber || isValidSizeRange) {
+            return true;
+        }
+        return false;
     }
     static checkNumber(number) {
         // console.log("Validation.checkNumber--------------------");
-        const validNumber = !/^\d+$/g.test(number);
-        if (Number(validNumber)) {
-            throw new Error(ERROR.BRIDGE_INVALID_NUMBER);
+        const isInvalidNumber = !/^\d+$/g.test(number);
+        try {
+            if (isInvalidNumber) {
+                throw ERROR.BRIDGE_INVALID_NUMBER;
+            }
+        } catch {
+            Console.print(ERROR.BRIDGE_INVALID_NUMBER);
+            return true;
         }
     }
     static checkSizeRange(size) {
         // console.log("Validation.checkSizeRange-------------------");
-        const validRange = size < OPTION.MINIMUM_LENGTH || size > OPTION.MAXIMUM_LENGTH;
-        if (validRange) {
-            throw new Error(ERROR.BRIDGE_OVER_RANGE);
+        const isValidRange = size < OPTION.MINIMUM_LENGTH || size > OPTION.MAXIMUM_LENGTH;
+        try {
+            if (isValidRange) {
+                throw ERROR.BRIDGE_OVER_RANGE;
+            }
+        } catch {
+            Console.print(ERROR.BRIDGE_OVER_RANGE);
+            return true;
         }
     }
 
     static checkMoveInput(move) {
         // console.log("Validation.checkMoveInput-------------------");
-        const up = move === KEY.UP;
-        const down = move === KEY.DOWN;
-        if (up || down) {
+        const isNotKeyUp = move !== KEY.UP;
+        const isNotKeyDown = move !== KEY.DOWN;
+        if (isNotKeyUp || isNotKeyDown) {
             return true;
         }
         throw new Error(ERROR.MOVE);
@@ -33,9 +48,9 @@ class Validation {
 
     static checkRestartInput(answer) {
         // console.log("Validation.checkRestartInput-------------------");
-        const restart = answer === KEY.RESTART;
-        const quit = answer === KEY.QUIT;
-        if (restart || quit) {
+        const isNotKeyRestart = answer !== KEY.RESTART;
+        const isNotKeyQuit = answer !== KEY.QUIT;
+        if (isNotKeyRestart || isNotKeyQuit) {
             return true;
         }
         throw new Error(ERROR.RESTART);

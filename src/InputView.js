@@ -15,13 +15,20 @@ const InputView = {
      */
     readBridgeSize() {
         // console.log("InputView.readBridgeSize-----------");
-        OutputView.printStart();
         Console.readLine(MESSAGE.SIZE, (size) => {
             OutputView.printSpaceLine();
-            Validation.checkSizeInput(size);
+            this.hasSizeError(size);
+
             const bridgeGame = new BridgeGame(makeBridge(size, generate));
             this.readMoving(bridgeGame);
         });
+    },
+
+    hasSizeError(size) {
+        const isBridgeSizeError = Validation.checkBridgeSizeInput(size);
+        if (isBridgeSizeError) {
+            return this.readBridgeSize();
+        }
     },
 
     /**
