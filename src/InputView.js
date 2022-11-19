@@ -35,15 +35,17 @@ const InputView = {
       bridgeGame.setUserBlock(block);
       const formattedBridges = bridgeGame.move();
       OutputView.printMap(formattedBridges);
-
-      this.readMoving();
+      if (bridgeGame.isGameOver(formattedBridges)) this.readGameCommand();
+      else this.readMoving();
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(MESSAGES.INPUT_RETRY, (check) => {});
+  },
 };
 
 module.exports = InputView;

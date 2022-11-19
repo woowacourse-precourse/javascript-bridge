@@ -8,6 +8,7 @@ class BridgeGame {
   };
 
   #randomBridge = [];
+
   #userBridge = [];
 
   setRandomBridge(bridge) {
@@ -16,6 +17,13 @@ class BridgeGame {
 
   setUserBlock(block) {
     this.#userBridge.push(block);
+  }
+
+  isGameOver(formattedBridges) {
+    const isFail = formattedBridges.flat().find((block) => block === 'X');
+    const isFinish = formattedBridges[0].length === this.#randomBridge.length;
+
+    return isFail || isFinish;
   }
 
   /**
