@@ -1,3 +1,4 @@
+const { MissionUtils } = require('@woowacourse/mission-utils');
 const GameProgress = require('./IO/GameProgress');
 const InputView = require('./IO/InputView');
 const BridgeError = require('./Error/BridgeError');
@@ -17,6 +18,10 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 class BridgeGame {
   #bridgeErrorMessages = ['[ERROR] 유효하지 않은 다리 길이입니다.'];
 
+  #bridgeMoveCount = 0;
+
+  #bridge;
+
   start() {
     GameProgress.printGameStart();
     InputView.readBridgeSize(this.validateBridgeSize);
@@ -33,19 +38,28 @@ class BridgeGame {
 
   makeBridge = (size) => {
     const BRIDGE = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    this.move(BRIDGE);
+    this.#bridge = BRIDGE;
+    this.move();
+  };
+
+  validateBridgeMove = (input) => {
+    if (this.#bridgeMoveCount < this.#bridge.length) {
+      this.#bridgeMoveCount += 1;
+      InputView.readMoving(this.validateBridgeMove);
+    }
   };
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move() {
+    this.#bridgeMoveCount = 1;
+    InputView.readMoving(this.validateBridgeMove);
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {}
