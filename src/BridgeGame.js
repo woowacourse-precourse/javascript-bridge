@@ -13,16 +13,16 @@ class BridgeGame {
   #upperBridge = [];
   #lowerBridge = [];
   #gameRound = VALUES.INITIAL_GAME_ROUND;
-  numberOfTrials = VALUES.INITIAL_TRIAL_NUMBER;
+  #numberOfTrials = VALUES.INITIAL_TRIAL_NUMBER;
 
   start() {
-    ViewController.input.bridgeSize(this.generateBridge.bind(this));
+    ViewController.input.bridgeSize(this.#generateBridge.bind(this));
   }
 
-  generateBridge(size) {
+  #generateBridge(size) {
     this.#bridgeSize = parseInt(size);
     this.#bridge = makeBridge(this.#bridgeSize, generate);
-    ViewController.input.moving(this.move.bind(this));
+    ViewController.input.moving(this.#move.bind(this));
   }
 
   /**
@@ -30,36 +30,36 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(command) {
+  #move(command) {
     if (command === this.#bridge[this.#gameRound]) {
-      this.handleCorrectMove(command);
+      this.#handleCorrectMove(command);
     } else if (command !== this.#bridge[this.#gameRound]) {
-      this.handleWrongMove(command);
+      this.#handleWrongMove(command);
     }
   }
 
-  handleCorrectMove(command) {
-    this.buildBridgeUsingInput(command, GAME_UTILS.MARK_CORRECT_MOVE);
+  #handleCorrectMove(command) {
+    this.#buildBridgeUsingInput(command, GAME_UTILS.MARK_CORRECT_MOVE);
     ViewController.output.map(this.#upperBridge, this.#lowerBridge);
     this.#gameRound += 1;
     if (this.#gameRound === this.#bridgeSize) {
       const RESULT_BRIDGE = [this.#upperBridge, this.#lowerBridge];
-      ViewController.output.result(this.numberOfTrials, GAME_UTILS.GAME_RESULT_WIN, RESULT_BRIDGE);
+      ViewController.output.result(this.#numberOfTrials, GAME_UTILS.GAME_RESULT_WIN, RESULT_BRIDGE);
       MissionUtils.Console.close();
     }
-    if (this.#gameRound < this.#bridgeSize) ViewController.input.moving(this.move.bind(this));
+    if (this.#gameRound < this.#bridgeSize) ViewController.input.moving(this.#move.bind(this));
   }
 
-  handleWrongMove(command) {
-    this.buildBridgeUsingInput(command, GAME_UTILS.MARK_WRONG_MOVE);
+  #handleWrongMove(command) {
+    this.#buildBridgeUsingInput(command, GAME_UTILS.MARK_WRONG_MOVE);
     ViewController.output.map(this.#upperBridge, this.#lowerBridge);
     this.#upperBridge = [];
     this.#lowerBridge = [];
     this.#gameRound = VALUES.INITIAL_GAME_ROUND;
-    ViewController.input.gameCommand(this.retry.bind(this));
+    ViewController.input.gameCommand(this.#retry.bind(this));
   }
 
-  buildBridgeUsingInput(direction, result) {
+  #buildBridgeUsingInput(direction, result) {
     if (direction === GAME_UTILS.COMMAND_UPWARD) {
       this.#upperBridge.push(result);
       this.#lowerBridge.push(GAME_UTILS.MARK_UNCHOSEN_BRIDGE);
@@ -74,13 +74,13 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(command) {
+  #retry(command) {
     if (command === GAME_UTILS.COMMAND_RESTART) {
-      this.numberOfTrials += 1;
-      ViewController.input.moving(this.move.bind(this));
+      this.#numberOfTrials += 1;
+      ViewController.input.moving(this.#move.bind(this));
     } else if (command === GAME_UTILS.COMMAND_QUIT) {
       const CURRENT_BRIDGE = [this.#upperBridge, this.#lowerBridge];
-      ViewController.output.result(this.numberOfTrials, GAME_UTILS.GAME_RESULT_LOSE, CURRENT_BRIDGE);
+      ViewController.output.result(this.#numberOfTrials, GAME_UTILS.GAME_RESULT_LOSE, CURRENT_BRIDGE);
       MissionUtils.Console.close();
     }
   }
