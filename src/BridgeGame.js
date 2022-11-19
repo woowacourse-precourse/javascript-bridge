@@ -4,8 +4,6 @@ const { Console } = require('@woowacourse/mission-utils');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridge;
-
   constructor() {
     this.welcomeMessage();
   }
@@ -14,19 +12,44 @@ class BridgeGame {
     Console.print('다리 건너기 게임을 시작합니다.\n');
   }
 
-  get bridge() {
-    return this.#bridge;
-  }
-
-  set bridge(value) {
-    this.#bridge = value;
-  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move(move, bridge) {
+    if (bridge.data.turn > 0) {
+      bridge.setData('upperBridge', bridge.data.upperBridge + '|');
+      bridge.setData('lowerBridge', bridge.data.lowerBridge + '|');
+    }
+    if (bridge.data.blueprint[bridge.data.turn] === 'U' && move === 'U') {
+      bridge.setData('upperBridge', bridge.data.upperBridge + ' O ');
+      bridge.setData('lowerBridge', bridge.data.lowerBridge + '   ');
+    }
+    if (bridge.data.blueprint[bridge.data.turn] === 'U' && move === 'D') {
+      bridge.setData('upperBridge', bridge.data.upperBridge + '   ');
+      bridge.setData('lowerBridge', bridge.data.lowerBridge + ' X ');
+    }
+    if (bridge.data.blueprint[bridge.data.turn] === 'D' && move === 'U') {
+      bridge.setData('upperBridge', bridge.data.upperBridge + ' X ');
+      bridge.setData('lowerBridge', bridge.data.lowerBridge + '   ');
+    }
+    if (bridge.data.blueprint[bridge.data.turn] === 'D' && move === 'D') {
+      bridge.setData('upperBridge', bridge.data.upperBridge + '   ');
+      bridge.setData('lowerBridge', bridge.data.lowerBridge + ' O ');
+    }
+
+    console.log(bridge.data);
+    // this.turn += 1;
+    bridge.setData('turn', bridge.data.turn + 1);
+    // console.log(this.turn);
+    // console.log(this.bridgeLength);
+    // if (this.turn >= this.bridgeLength) {
+    //   console.log(this.bridgeGame.bridge);
+    //   console.log(`[${this.upperBridge}]`);
+    //   console.log(`[${this.lowerBridge}]`);
+    // } else InputView.readMoving(this.movingByUser.bind(this));
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

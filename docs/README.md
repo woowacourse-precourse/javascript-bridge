@@ -16,13 +16,13 @@
     - ✅ 사용자에게 입력받은 수 만큼 BridgeRandomNumberGenerator 객체를 이용하여 U 또는 D 가 저장된 배열을 만든다. 
 <br/> <br/>
 - ### 다리가 생성되면 플레이어가 이동할 칸을 선택한다.
-    - 사용자에게 U 또는 D 를 입력받는다.
+    - ✅ 사용자에게 U 또는 D 를 입력받는다.
     - [예외] 정규표현식 사용하여 U 또는 D가 아닐경우 예외처리
     - 이동한 칸을 건널 수 있다면 O로 표시한다. 건널 수 없다면 X로 표시한다.
     ```
     const upperBridge = ''
     const lowerBridge = ''
-    const 
+    
     if (turn > 1) {
         upperBridge+='|'
         lowerBridge+='|'

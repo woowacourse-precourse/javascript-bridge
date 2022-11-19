@@ -22,7 +22,14 @@ class BridgeGameController {
     InputView.readMoving(this.movingByUser.bind(this));
   }
 
-  movingByUser(move) {}
+  movingByUser(move) {
+    this.bridgeGame.move(move, this.bridge);
+    if (this.bridge.data.turn >= this.bridge.data.length) {
+      console.log(this.bridge.data.bridge);
+      console.log(`[${this.bridge.data.upperBridge}]`);
+      console.log(`[${this.bridge.data.lowerBridge}]`);
+    } else InputView.readMoving(this.movingByUser.bind(this));
+  }
 }
 
 module.exports = BridgeGameController;
