@@ -32,7 +32,11 @@ class GameController {
       if (IS_MOVE) {
         this.move(index + 1);
       } else {
-        // 게임 탈락 재시도 묻기
+        // 게임 탈락
+        this.failureResult();
+
+        // 재시도 묻기
+        return;
       }
     };
 
@@ -48,6 +52,12 @@ class GameController {
   successResult() {
     const maps = this.game.getMaps();
     this.outputView.printResult(maps, true, 1);
+    this.end();
+  }
+
+  failureResult() {
+    const maps = this.game.getMaps();
+    this.outputView.printResult(maps, false, 1);
     this.end();
   }
 
