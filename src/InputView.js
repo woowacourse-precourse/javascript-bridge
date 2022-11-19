@@ -17,7 +17,7 @@ const InputView = {
    */
   readMoving(callBack) {
     readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", beMovedDirection => {
-      beMovedDirection === "U" ? callBack("U") : callBack("D");
+      callBack(beMovedDirection);
     });
   },
 
