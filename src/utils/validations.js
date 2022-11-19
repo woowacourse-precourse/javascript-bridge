@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { ERROR } = require('./constants');
+const { ERROR, MESSAGE } = require('./constants');
 
 const checkNumberValidation = (userInput) => {
   const numberRegex = /^\d+$/g;
@@ -21,4 +21,12 @@ const validateBridgeSize = (userInput) => {
   validateBridgeRange(userInput);
 };
 
-module.exports = { validateBridgeSize };
+/* Moving Input Validation */
+const validateMovingInput = (userInput) => {
+  const options = ['U', 'D'];
+  if (options.includes(userInput)) return;
+
+  throw new Error(ERROR.MOVING);
+};
+
+module.exports = { validateBridgeSize, validateMovingInput };

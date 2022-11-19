@@ -7,6 +7,7 @@ const MESSAGE = Object.freeze({
 const ERROR = Object.freeze({
   NOT_A_NUMBER: '[ERROR] 다리의 길이는 숫자로 입력해야 합니다.',
   INVALID_RANGE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+  MOVING: '[ERROR] 위 또는 아래만 입력할 수 있습니다. (위: U, 아래: D)',
 });
 
 module.exports = { MESSAGE, ERROR };
