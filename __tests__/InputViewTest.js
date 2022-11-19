@@ -31,4 +31,15 @@ describe("이동할 칸 선택 테스트", () => {
   });
 });
 
+describe("게임 종료 여부 테스트", () => {
+  test("R이나 Q를 입력해야한다.", () => {
+    expect(() => {
+      InputView.checkRestart("a");
+    }).toThrow("[ERROR]");
+    expect(() => {
+      InputView.checkRestart("1");
+    }).toThrow("[ERROR]");
+  });
+});
+
 MissionUtils.Console.close();
