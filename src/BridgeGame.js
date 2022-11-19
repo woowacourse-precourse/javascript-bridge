@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const GameError = require('./Error/GameError');
 const Selected = require('./Model/Selected');
+const TryCnt = require('./Model/TryCnt');
 const { ERROR_MESSAGE, RETRY_MESSAGE } = require('./utils/Constant');
 const InputView = require('./Viewer/InputView');
 const OutputView = require('./Viewer/OutputView');
@@ -11,14 +12,21 @@ const OutputView = require('./Viewer/OutputView');
 class BridgeGame {
   #selected;
 
+  #tryCnt;
+
   constructor() {
     this.#selected = new Selected();
-    this.tryCnt = 1;
+    this.#tryCnt = new TryCnt();
+  }
+
+  static validate(input) {
+    if (input !== RETRY_MESSAGE.RETRY && input !== RETRY_MESSAGE.QUIT)
+      throw new GameError(ERROR_MESSAGE.RETRY_INPUT);
   }
 
   resetSelectedAndPlusTryCnt() {
-    this.plusTryCnt();
     this.#selected.reset();
+    this.#tryCnt.add();
   }
 
   getResult(bridge) {
@@ -33,11 +41,7 @@ class BridgeGame {
   }
 
   getTryCnt() {
-    return this.tryCnt;
-  }
-
-  plusTryCnt() {
-    this.tryCnt += 1;
+    return this.#tryCnt.get();
   }
 
   /**
@@ -63,11 +67,6 @@ class BridgeGame {
       OutputView.printResult(bridge, game);
       Console.close();
     }
-  }
-
-  static validate(input) {
-    if (input !== RETRY_MESSAGE.RETRY && input !== RETRY_MESSAGE.QUIT)
-      throw new GameError(ERROR_MESSAGE.RETRY_INPUT);
   }
 }
 
