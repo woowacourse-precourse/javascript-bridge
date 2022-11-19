@@ -1,11 +1,9 @@
-const BRIDGE = {
+const BRIDGE_PRINT = {
   CAN_MOVE: "O",
   CANT_MOVE: "X",
-  PRINT: {
-    BRIDGE_START: "[",
-    BRIDGE_END: "]",
-    BRIDGE_DIVISIOB: "|",
-  },
+  START: "[",
+  END: "]",
+  DIVISIOB: "|",
 };
 
-module.exports = BRIDGE;
+module.exports = BRIDGE_PRINT;
