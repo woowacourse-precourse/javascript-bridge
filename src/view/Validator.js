@@ -48,7 +48,17 @@ class Validator {
     }
   }
 
-  invalidRetryCommand() {}
+  checkRetryCommand(userInput) {
+    this.invalidRetryCommand(userInput);
+  }
+
+  invalidRetryCommand(retryCommand) {
+    const regExp = /^R{1}$|^Q{1}$/;
+    const isValidCommand = regExp.test(retryCommand);
+    if (!isValidCommand) {
+      throw ERROR_TYPE.retry;
+    }
+  }
 }
 
 module.exports = Validator;
