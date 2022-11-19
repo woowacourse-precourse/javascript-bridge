@@ -76,10 +76,12 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridgeArray) {
-    MissionUtils.Console.print('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)');
-    MissionUtils.Console.readLine('', (userInput) => {
-      this.validateGameCommand(userInput, bridgeArray);
-    });
+    MissionUtils.Console.readLine(
+      '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
+      (userInput) => {
+        this.validateGameCommand(userInput, bridgeArray);
+      }
+    );
   },
 
   validateGameCommand(userInput, bridgeArray) {
