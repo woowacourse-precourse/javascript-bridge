@@ -1,13 +1,12 @@
+const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('../Models/BridgeGame');
 const InputView = require('../Views/InputView');
 const OutputView = require('../Views/OutputView');
 
 class GameController {
-  #size;
-
   constructor() {
-    this.outputView = OutputView;
     this.inputView = InputView;
+    this.outputView = OutputView;
     this.bridgeGame = new BridgeGame();
   }
 
@@ -18,13 +17,14 @@ class GameController {
 
   inputBridgeSize() {
     this.inputView.readBridgeSize((userInput) => {
-      this.#size = this.inputView.getBridegeSize(userInput);
-      this.buildBridge();
+      const size = this.inputView.getBridegeSize(userInput);
+      this.buildBridge(size);
     });
   }
 
-  buildBridge() {
-    this.bridgeGame.createBridge(this.size);
+  buildBridge(size) {
+    this.bridgeGame.createBridge(size);
+    Console.close();
   }
 }
 

@@ -15,6 +15,7 @@ const BridgeMaker = {
    */
 
   makeBridge(size, generateRandomNumber) {
+    console.log(`size : ${size}`);
     const blueprintArray = createBlueprint(size);
     const blueprintFirstRow = blueprintArray.map(() => generateRandomNumber());
     const blueprintSecondRow = [...blueprintFirstRow].map(convertReverse);
