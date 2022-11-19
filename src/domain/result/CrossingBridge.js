@@ -1,3 +1,5 @@
+const CrossingBridgeMark = require('./CrossingBridgeMark');
+
 class CrossingBridge {
   static #MARK = {
     pass: 'O',
@@ -19,14 +21,7 @@ class CrossingBridge {
   }
 
   add({ direction, isPassed }) {
-    const mark = isPassed ? CrossingBridge.#MARK.pass : CrossingBridge.#MARK.fail;
-
-    if (direction === 'U') {
-      this.#marking({ up: mark });
-      return;
-    }
-
-    this.#marking({ down: mark });
+    this.#marking(CrossingBridgeMark.marks({ direction, isPassed }));
   }
 
   #marking({ up = CrossingBridge.#MARK.empty, down = CrossingBridge.#MARK.empty }) {
