@@ -9,6 +9,7 @@ const RANGE = require('./constants/Range');
 const InputView = {
   readBridgeSize() {
     Console.readLine(REQUEST.BRIDGE_LENGTH, (input) => {
+      Console.print('');
       InputView.validateLength(input);
       const bridgeGame = new BridgeGame(Number(input));
       InputView.readMoving(bridgeGame);
