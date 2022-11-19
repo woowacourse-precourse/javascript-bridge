@@ -1,6 +1,7 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const Validator = require('./Validator');
+const { MOVEMENT_RESULT } = require('./Constants');
 
 const { generate } = BridgeRandomNumberGenerator;
 /**
@@ -33,6 +34,34 @@ class BridgeGame {
   move(movement) {
     Validator.movingValidate(movement);
     this.#userPath.push(movement);
+  }
+
+  /**
+   * 사용자의 선택에 대한 결과를 알려주는 메서드
+   * @return {Number} movement result
+   */
+  #judgeUserMovement() {
+    if (!this.#isMovemontCorrect()) return MOVEMENT_RESULT.WRONG;
+    if (this.#isFinish()) return MOVEMENT_RESULT.GAME_SUCCESS;
+    if (!this.#isFinish()) return MOVEMENT_RESULT.CORRECT;
+    return MOVEMENT_RESULT.ERROR;
+  }
+
+  /**
+   * 사용자의 선택이 옳았는지 판단하는 메서드
+   * @return {Number}
+   */
+  #isMovemontCorrect() {
+    const currentPosition = this.#userPath.length - 1;
+    return this.#userPath[currentPosition] === this.#bridge[currentPosition];
+  }
+
+  /**
+   * 마지막 다리에 대한 선택을 했는지 알려주는 메서드
+   * @return {Number}
+   */
+  #isFinish() {
+    return this.#userPath.length === this.#bridge.length;
   }
 
   /**

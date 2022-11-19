@@ -28,6 +28,7 @@ const MOVEMENT_RESULT = Object.freeze({
   GAME_SUCCESS: 1,
   CORRECT: 0,
   WRONG: -1,
+  ERROR: -2,
 });
 const BRIDGE_SIZE = Object.freeze({
   LOWER_INCLUSIVE: 3,
