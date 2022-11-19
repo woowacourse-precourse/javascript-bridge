@@ -10,8 +10,9 @@
     - [X] (예외처리) 숫자의 범위가 아닌 경우 예외 처리 (3이상 20이하)
 </br>
 </br>
-- [ ] (BridgeMaker) 입력받은 숫자만큼 다리 생성 기능
-    - [ ] (BridgeRandomNumberGenerator) 시작 지점 랜덤 생성 / 0 = U, 1 = D
+
+- [X] (BridgeMaker) 입력받은 숫자만큼 다리 생성 기능
+    - [X] (BridgeRandomNumberGenerator) 시작 지점 랜덤 생성 / 0 = U, 1 = D
 - [ ] (InputView) 이동할 칸을 입력받는 기능 (다리 생성 수만큼 입력 반복)
     - [ ] (예외처리) U나 D가 아닌 경우 예외 처리
 - [ ] (BridgeGame) 입력받은 이동 칸을 전달받는 기능 (랜덤값과 일치하면 O, 아닐 경우 X)
