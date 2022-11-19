@@ -39,7 +39,14 @@ class GameMap {
     return this.#lowerBridge;
   }
 
-  selectOXpattern(moveCommand, userLocation) {}
+  selectOXpattern(moveCommand, userLocation) {
+    const isPossibleNext = this.#CorretBridge[userLocation] === moveCommand;
+    if (isPossibleNext) {
+      return o;
+    }
+    return x;
+  }
+
   appendDrawingBridge() {}
   appendEmptySpace(selectBridge) {}
 }
