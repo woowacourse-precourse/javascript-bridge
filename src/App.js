@@ -40,17 +40,8 @@ class App {
       this.#moveStatement = this.#brdigeGame.move(this.#moveAnswer, this.#bridge);
       return this.progressBridgeMove();
     }
-    if (this.#appStatus === 5) return this.progressRetryGame();
-    if (this.#appStatus === 6) {
-      if (this.#gameOptionStatus) {
-        this.retryApp();
-        this.#appStatus = 3;
-        return this.progressApp(this.#appStatus);
-      }
-      if (!this.#gameOptionStatus) {
-        this.getResult();
-      }
-    }
+    if (this.#appStatus === 5) return this.questionGameRetry();
+    if (this.#appStatus === 6) return this.progressGameRetry();
   }
 
   questionBridgeMake() {
@@ -106,7 +97,7 @@ class App {
     this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
     this.#appStatus = 5;
     OutputView.printMap(this.#bridgeMap.getMap());
-    return this.progressRetryGame();
+    return this.questionGameRetry();
   }
 
   progressGameEnd() {
@@ -116,7 +107,7 @@ class App {
 
   // validAssign(answer, Validator) {}
 
-  progressRetryGame() {
+  questionGameRetry() {
     InputView.readGameCommand((answer) => {
       try {
         Validator.confirmOfCondition(answer, 'option');
@@ -128,6 +119,15 @@ class App {
         this.progressApp(this.#appStatus);
       }
     });
+  }
+
+  progressGameRetry() {
+    if (this.#gameOptionStatus) {
+      this.retryApp();
+      this.#appStatus = 3;
+      return this.progressApp(this.#appStatus);
+    }
+    return this.getResult();
   }
 
   getResult() {
