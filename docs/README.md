@@ -199,7 +199,7 @@ const number = generateRandomNumber();
 
 ### 7️⃣ 테스트
 
-- [ ] test: App.js 테스트 코드 작성
+- [x] test: App.js 테스트 코드 작성
   - Console.print() 테스트 코드를 작성한다.
   - 사용자 입력값에 대한 유효성 검사 함수의 호출 테스트 코드를 작성한다.
   - 다리 생성 함수의 호출 테스트 코드를 작성한다.
@@ -207,6 +207,7 @@ const number = generateRandomNumber();
   - bridgeGame 결과에 따른 함수 호출 테스트 코드를 작성한다.
   - 재시작 또는 종료 입력에 따른 함수 호출 테스트 코드를 작성한다.
   - app.restart() 테스트 코드를 작성한다.
+  - app.quit() 테스트 코드를 작성한다.
 - [ ] test: BridgeGame.js 테스트 코드 작성
 - [ ] test: BridgeMaker.js 테스트 코드 작성
 - [ ] test: InputView.js 테스트 코드 작성

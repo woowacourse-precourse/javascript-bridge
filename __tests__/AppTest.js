@@ -298,3 +298,36 @@ describe('app.restart() 테스트', () => {
     expect(directionSpy).toBeCalledTimes(1);
   });
 });
+
+describe('app.quit() 테스트', () => {
+  const bridgeGame = new BridgeGame(['U', 'D', 'U']);
+  const app = new App();
+  app.bridgeGame = bridgeGame;
+  bridgeGame.move('D');
+
+  test('OutputView의 printMap() 메서드가 호출된다.', () => {
+    const printMapSpy = jest.spyOn(OutputView, 'printMap');
+
+    printMapSpy.mockClear();
+
+    app.quit();
+
+    expect(printMapSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test('OutputView의 printResult() 메서드가 호출된다.', () => {
+    const printResult = jest.spyOn(OutputView, 'printResult');
+
+    app.quit();
+
+    expect(printResult).toHaveBeenCalledTimes(1);
+  });
+
+  test('Console.close() 메서드가 호출된다.', () => {
+    const closeSpy = jest.spyOn(Console, 'close');
+
+    app.quit();
+
+    expect(closeSpy).toHaveBeenCalledTimes(1);
+  });
+});
