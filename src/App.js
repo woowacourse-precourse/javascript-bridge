@@ -17,12 +17,12 @@ class App {
 
   userInputMove() {
     InputView.readMoving(inputMove => {
+      const isSuccess = this.bridgeGame.move(inputMove);
       const isGameOver = this.bridgeGame.getGameOver();
-      const isPass = this.bridgeGame.move(inputMove);
-      if (!isPass) {
+      if (!isSuccess) {
         this.userInputEnd();
         return;
-      } else if (isPass && isGameOver) {
+      } else if (isSuccess && isGameOver) {
         OutputView.printResult(this.bridgeGame.end());
         return;
       }

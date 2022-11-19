@@ -32,17 +32,18 @@ class BridgeGame {
     this.checkMove(this.#bridge[this.#userPos], userMove);
     if (!this.#isSuccess) {
       this.#userPos = 0;
-      this.#userAttempt++;
       return;
     }
     this.#userPos++;
-    this.isGameOver();
     return !!this.#isSuccess;
   }
 
   checkMove(bridge, userMove) {
     console.log('체크: 현재 bridge',bridge,'현재 user', userMove);
     this.#isSuccess = bridge === userMove;
+    if (this.isGameOver()) {
+      this.#isGameOver = !!this.#isSuccess;
+    }
   }
 
   /**
@@ -53,6 +54,7 @@ class BridgeGame {
   retry() {
     this.#userPos = 0;
     this.#isGameOver = false;
+    this.#userAttempt++;
   }
 
   init(bridgeSize) {
@@ -62,15 +64,15 @@ class BridgeGame {
 
   isGameOver() {
     if (this.#bridge.length === this.#userPos + 1) {
-      this.#isGameOver = true;
+      return true;
     }
   }
 
   end() {
-    if (this.#isGameOver) {
+    if (this.#isSuccess) {
       return ['성공', this.#userAttempt];
     } else {
-      return ['실패', this.#userAttempt-1];
+      return ['실패', this.#userAttempt];
     }
   }
 }
