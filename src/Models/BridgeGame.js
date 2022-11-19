@@ -12,10 +12,6 @@ class BridgeGame {
     this.#myBridge = BridgeMaker.makeBridge(size, generateRandomNumber);
   }
 
-  get myBridge() {
-    return this.#myBridge;
-  }
-
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>

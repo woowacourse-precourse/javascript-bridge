@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('../utils/constants');
-const { validateBridgeSize } = require('../utils/validations');
+const { validateBridgeSize, validateMovingInput } = require('../utils/validations');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -25,13 +25,21 @@ const InputView = {
     return Number(size);
   },
 
-  guess() {
-    Console.readLine(MESSAGE.GUESS, (userInput) => {});
-  },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(MESSAGE.GUESS, (userInput) => {
+      validateMovingInput(userInput);
+    });
+  },
+
+  validateMovingInput(userInput) {
+    const options = ['U', 'D'];
+    if (options.includes(userInput)) return;
+
+    throw new Error();
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

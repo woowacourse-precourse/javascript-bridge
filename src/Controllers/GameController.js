@@ -1,4 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('../Models/BridgeGame');
 const InputView = require('../Views/InputView');
 const OutputView = require('../Views/OutputView');
@@ -24,7 +23,7 @@ class GameController {
 
   buildBridge(size) {
     this.bridgeGame.createBridge(size);
-    this.inputView.guess();
+    this.inputView.readMoving();
   }
 }
 
