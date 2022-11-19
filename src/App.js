@@ -57,7 +57,17 @@ class App {
   }
 
   requestGameCommand() {
-    InputView.readGameCommand((input) => {});
+    InputView.readGameCommand((input) => {
+      if (input === GAME.REPLAY) {
+        this.bridgeGame.retry();
+        this.requestMoving();
+        
+        return;
+      }
+
+      // Q
+      this.quit();
+    });
   }
 
   quit() {}
