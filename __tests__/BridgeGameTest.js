@@ -33,3 +33,24 @@ describe("move 테스트", () => {
         expect(GAME.crossedAll()).toBe(false);
     })
 })
+
+describe("retry 테스트", () => {
+    const GAME = new BridgeGame(["U", "D", "D"]);
+    GAME.move("U");
+    GAME.retry();
+
+    test("지나온 길 초기화 테스트", () => {
+        expect(GAME.passed).toEqual([]);
+    })
+
+    test("시도 횟수 갱신 테스트", () => {
+        expect(GAME.count).toBe(2);
+    })
+
+    test("경로 불변 테스트", () => {
+        GAME.move("U");
+        GAME.move("D");
+        GAME.move("D");
+        expect(GAME.crossedAll()).toBe(true);
+    })
+})

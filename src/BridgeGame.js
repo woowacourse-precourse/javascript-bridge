@@ -24,7 +24,10 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() { }
+  retry() {
+    this.passed = [];
+    this.count++;
+  }
 
   /**
    * 현재 다리를 올바르게 건너고 있는지를 판단하는 함수
