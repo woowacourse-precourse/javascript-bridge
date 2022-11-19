@@ -5,6 +5,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker = require("../src/BridgeMaker");
 const randnum_gen = require("../src/BridgeRandomNumberGenerator");
 const OutputView = require("../src/OutputView");
+
 const InputView = {
   /**
   * 다리의 길이를 입력받는다.
@@ -29,8 +30,8 @@ const InputView = {
       OutputView.printMap(Game_Bridge, move_dir, curr_loc)
       if (Game_Bridge[curr_loc] !== move_dir){
         //다리를 맞추는데 실패한 경우
-        this.readGameCommand()
-      } (Game_Bridge[curr_loc] !== move_dir) {
+        this.readGameCommand(Game_Bridge)
+      } else if (Game_Bridge[curr_loc] === move_dir) {
         //다리를 맞추는데 성공한 경우
         curr_loc += 1
         if (curr_loc === Game_Bridge.length){
@@ -45,10 +46,10 @@ const InputView = {
   /**
   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
   */
-  readGameCommand() {    
+  readGameCommand(Game_Bridge) {    
     MissionUtils.Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (answer) => {
       MissionUtils.Console.print(`${answer}`);
-      MissionUtils.Console.close();
+      answer === "R" ? this.readMoving(Game_Bridge, 0) : MissionUtils.Console.close()      
     });
   },
 };
