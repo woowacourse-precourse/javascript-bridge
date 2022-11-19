@@ -532,4 +532,21 @@ describe('다리 이동 로그 메소드 테스트', () => {
       bridgeGame.getBridgeLog();
     }).toThrow(POSITION_ERROR_TEXT);
   });
+
+  test('첫 번째 기록으로 [[ "O" ] [ " " ]]을 반환한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const BRIDGE = ['U', 'D', 'U'];
+    const POSITION_INDEX = [0, 0];
+    const BRIDGE_REUSLT = 'O';
+    const POSITION_LOG = [POSITION_INDEX, BRIDGE_REUSLT];
+    const RECEIVED = [['O'][' ']];
+
+    bridgeGame.setBridge(BRIDGE);
+    bridgeGame.move();
+    bridgeGame.setPositionLog(POSITION_LOG);
+
+    const EXPECTED = bridgeGame.getBridgeLog()[0];
+
+    expect(bridgeGame.getBridgeLog(EXPECTED)).toEqual(RECEIVED);
+  });
 });
