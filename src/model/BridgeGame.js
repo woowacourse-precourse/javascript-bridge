@@ -1,7 +1,7 @@
 const { generate } = require('../BridgeRandomNumberGenerator');
 const { makeBridge } = require('../BridgeMaker');
+const { BRIDGE, SUCCESS, FAILURE } = require('../constants/Bridge');
 const { COMMAND } = require('../constants/Messages');
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -25,18 +25,18 @@ class BridgeGame {
    */
   move(space) {
     this.userBridge.command.push(space);
-    const spaceResult = this.isRightSpace(space) ? 'O' : 'X';
+    const spaceResult = this.isRightSpace(space) ? BRIDGE.correct : BRIDGE.wrong;
     return space === COMMAND.up ? this.makeUpBridge(spaceResult) : this.makeDownBridge(spaceResult);
   }
 
   makeUpBridge(spaceResult) {
     this.userBridge.up.push(spaceResult);
-    this.userBridge.down.push(' ');
+    this.userBridge.down.push(BRIDGE.blank);
     return this;
   }
 
   makeDownBridge(spaceResult) {
-    this.userBridge.up.push(' ');
+    this.userBridge.up.push(BRIDGE.blank);
     this.userBridge.down.push(spaceResult);
     return this;
   }
@@ -51,8 +51,9 @@ class BridgeGame {
   }
 
   makeBridgeFormat() {
-    const upBridge = this.userBridge.up.join(' | ');
-    const downBridge = this.userBridge.down.join(' | ');
+    const { front, middle, back } = BRIDGE;
+    const upBridge = front.concat(this.userBridge.up.join(middle), back);
+    const downBridge = front.concat(this.userBridge.down.join(middle), back);
     return { upBridge, downBridge };
   }
 
@@ -62,7 +63,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(input) {
-    if (input === 'R') {
+    if (input === COMMAND.retry) {
       this.tryCount += 1;
       this.initializeUserBridge();
       return true;
@@ -78,7 +79,7 @@ class BridgeGame {
 
   getResult() {
     const bridge = this.makeBridgeFormat();
-    const result = this.isEnd() ? '성공' : '실패';
+    const result = this.isEnd() ? SUCCESS : FAILURE;
     const count = this.tryCount;
     return { bridge, result, count };
   }

@@ -27,4 +27,4 @@ const ERROR_MESSAGE = Object.freeze({
   game_command: `${ERROR} 입력값은 문자 '${COMMAND.retry}'이거나 '${COMMAND.quit}'여야 합니다.`,
 });
 
-module.exports = { INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE };
+module.exports = { INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE, COMMAND };
