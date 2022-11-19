@@ -1,3 +1,7 @@
+const BridegMaker = require("../BridgeMaker");
+const MissionUtils = require("@woowacourse/mission-utils");
+const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
+
 class Bridge {
   #bridgeLength;
   constructor(bridgeLength) {
@@ -8,11 +12,12 @@ class Bridge {
     this.#bridgeLength = bridgeLength;
   }
 
-  getBridgeLength() {
-    return this.#bridgeLength;
+  buildBridge() {
+    const RES = BridegMaker.makeBridge(
+      this.#bridgeLength,
+      generateRandomNumber
+    );
   }
-
-  buildBridge() {}
 }
 
 module.exports = Bridge;

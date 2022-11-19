@@ -2,6 +2,7 @@ const ERROR_MESSAGES = {
   bridgeLength: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
   jumpDirection: "[ERROR] 이동할 칸은 대문자 U나 D여야 합니다.",
   quitGame: "[ERROR] 재시작 혹은 종료 값은 대문자 R나 Q여야 합니다.",
+  program: "[ERROR] 시스템 내부 에러입니다.",
 };
 
 const ErrorHandler = {
@@ -15,6 +16,10 @@ const ErrorHandler = {
     if (causation === "quit") {
       throw new Error(ERROR_MESSAGES.quitGame);
     }
+  },
+
+  computeError() {
+    throw new Error(ERROR_MESSAGES.program);
   },
 };
 

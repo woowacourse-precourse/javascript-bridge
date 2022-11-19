@@ -13,7 +13,7 @@ const Validator = {
   },
 
   isBridgeLength(bridgeLength) {
-    if (isNaturalNumber(bridgeLength) === false || bridgeLength < 21) {
+    if (this.isNaturalNumber(bridgeLength) === false || bridgeLength < 21) {
       ErrorHandler.inputError("bridge");
     }
     return true;
@@ -24,6 +24,12 @@ const Validator = {
       return true;
     }
     ErrorHandler.inputError("junmp");
+  },
+
+  isBoolNumber(number) {
+    if (number !== "0" && number !== "1") {
+      ErrorHandler.computeError();
+    }
   },
 };
 
