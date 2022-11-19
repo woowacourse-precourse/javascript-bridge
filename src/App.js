@@ -2,7 +2,8 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const IsValid = require('./utils/Validator');
+const Exception = require('./utils/Exception');
+const Validator = require('./utils/Validator');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 
@@ -21,7 +22,7 @@ class App {
 
   readValidLength() {
     InputView.readBridgeSize((length) => {
-      if (IsValid.bridgeSize(length)) {
+      if (Exception.isThrow(Validator.bridgeSize, length)) {
         this.makeBridge(length);
         return;
       }
@@ -41,7 +42,7 @@ class App {
 
   readValidDirection() {
     InputView.readMoving((direction) => {
-      if (IsValid.direction(direction)) {
+      if (Exception.isThrow(Validator.direction, direction)) {
         this.startMove(direction);
         return;
       }
@@ -78,7 +79,7 @@ class App {
 
   readValidFinalCommand() {
     InputView.readGameCommand((command) => {
-      if (IsValid.finalGame(command)) {
+      if (Exception.isThrow(Validator.finalGame, command)) {
         this.failGame(command);
         return;
       }
