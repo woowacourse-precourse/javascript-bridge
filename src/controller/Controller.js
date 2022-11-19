@@ -43,12 +43,17 @@ class Controller {
     if (this.bridgeGame.isFinished()) return this.getResult();
 
     if (canMove) return this.inputMoving();
-    if (!canMove) return this.retry();
+    if (!canMove) return this.inputGameCommand();
   }
 
   // - 재시작 또는 종료 여부 입력 받는다.
-  retry() {
-    console.log('다시 시작할꺼에요?');
+  inputGameCommand() {
+    InputView.readGameCommand(this.retry.bind(this));
+  }
+
+  retry(command) {
+    if (command === 'R') this.bridgeGame.retry();
+    if (command === 'Q') this.getResult();
   }
 
   getResult() {
