@@ -1,28 +1,25 @@
 const { Console } = require('@woowacourse/mission-utils');
-const InputView = require('./InputView');
+const InputView = require('./views/InputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame');
-const OutputView = require('./OutputView');
+const OutputView = require('./views/OutputView');
 
 class App {
-  bridge;
-  bridgeSize;
-  gameCommand;
+  game;
 
-  constructor() {
-    const bridgeGame = new BridgeGame();
-
-    this.readBridgeSize = InputView.readBridgeSize.bind(this);
-    this.readMoving = InputView.readMoving.bind(this);
-    this.readGameCommand = InputView.readGameCommand.bind(this);
-  }
+  // constructor() {
+  // }
 
   play() {
     OutputView.printStart();
 
-    this.readBridgeSize(BridgeMaker.makeBridge);
+    InputView.startInteraction.bind(this)([this.createBridge]);
+  }
 
-    // 다리 길이 입력후에 다리를 만들어야한다. 따라서 다리를 만들어주는 함수를 넣어줌
+  createBridge(input) {
+    // Validation
+    console.log('createBridege');
+    this.game = new BridgeGame(input);
   }
 }
 

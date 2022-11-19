@@ -4,13 +4,17 @@ const { Console } = require('@woowacourse/mission-utils');
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
+  startInteraction(callbackArr) {
+    InputView.readBridgeSize.bind(this)(callbackArr);
+  },
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(callback) {
+  readBridgeSize(callbackArr) {
+    const [createBridge, ...rest] = callbackArr;
+
     Console.readLine('다리 길이를 입력해주세요.', (userInput) => {
-      this.bridgeSize = Number(userInput);
-      callback(this.bridgeSize, generateRandomNumber);
+      createBridge.call(this, Number(userInput));
     });
   },
 
