@@ -1,12 +1,16 @@
 class Attempt {
+  static #DEFAULT_ATTEMPT_COUNT = 1;
+
+  static #ATTEMPT_COUNT = 1;
+
   #count;
 
   constructor() {
-    this.#count = 1;
+    this.#count = Attempt.#DEFAULT_ATTEMPT_COUNT;
   }
 
   add() {
-    this.#count += 1;
+    this.#count += Attempt.#ATTEMPT_COUNT;
   }
 
   print() {
