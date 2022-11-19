@@ -118,6 +118,15 @@ class BridgeGame {
 
     return bridge[userPosition] === userInput ? CORRECT : INCORRECT;
   }
+
+  getPositionIndex(userInput) {
+    const TOP_BOTTOM_INDEX = BridgeGame.replaceNumber(userInput);
+    const MOVE_INDEX = this.findUserPosition();
+
+    this.checkBeforeStart();
+
+    return [TOP_BOTTOM_INDEX, MOVE_INDEX];
+  }
 }
 
 module.exports = BridgeGame;
