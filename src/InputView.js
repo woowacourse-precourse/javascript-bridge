@@ -6,12 +6,12 @@ const OutputView = require("./OutputView");
 const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
-      Validate.isNumber(input);
-      Validate.isBigger(input);
-      Validate.isLower(input);
-      const bridgeGame = new BridgeGame();
-      bridgeGame.initGame(parseInt(input));
-      this.readMoving(bridgeGame);
+      const result = Validate.isCorrectBridgeLength(input);
+      if (result) {
+        const bridgeGame = new BridgeGame();
+        bridgeGame.initGame(parseInt(input));
+        this.readMoving(bridgeGame);
+      }
     });
   },
 
