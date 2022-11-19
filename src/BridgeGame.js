@@ -62,6 +62,14 @@ class BridgeGame {
     }
     return { upstairBridge, downstairBridge };
   }
+
+  getBridge() {
+    return this.#bridge;
+  }
+
+  getMoveCount() {
+    return this.#moveCount;
+  }
 }
 
 module.exports = BridgeGame;
