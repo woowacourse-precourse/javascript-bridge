@@ -1,5 +1,10 @@
+const BridgeGame = require("./BridgeGame");
+
 class App {
-  play() {}
+  #startBridgeGame = new BridgeGame();
+  play() {
+    this.#startBridgeGame.getBridgeLengthFromUser();
+  }
 }
 
 module.exports = App;
