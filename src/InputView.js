@@ -16,21 +16,21 @@ const InputView = {
         inputBridgeSize,
         BridgeRandomNumberGenerator.generate
       );
-      let printBridge = [[],[]]
-      this.readMoving(bridge, printBridge);
+      let bridgeList = [[],[]]
+      this.readMoving(bridge, bridgeList);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge, printBridge) {
+  readMoving(bridge, bridgeList) {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (inputBridgeChoice) => {
         InputCheck.checkMoving(inputBridgeChoice);
         const bridgeGamge = new BridgeGame();
-        bridgeGamge.move(inputBridgeChoice, bridge, printBridge);
+        bridgeGamge.move(inputBridgeChoice, bridge, bridgeList);
       }
     );
   },

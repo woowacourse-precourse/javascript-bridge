@@ -10,12 +10,13 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
 
-  move(inputBridgeChoice, bridge, printBridge) {
+  move(inputBridgeChoice, bridge, bridgeList) {
     console.log(inputBridgeChoice);
     console.log(bridge);
 
     if (inputBridgeChoice === bridge[0]) {
-      OutputView.printMap(printBridge)
+      bridgeList
+      OutputView.printMap(bridgeList)
     } else {
       console.log("Game set");
     }
