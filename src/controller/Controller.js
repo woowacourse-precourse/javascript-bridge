@@ -3,14 +3,17 @@ const OutputView = require('../view/OutputView');
 const validator = require('../utils/validator');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../model/BridgeRandomNumberGenerator');
+const BridgeGame = require('../model/BridgeGame');
 
 class Controller {
   #bridgeWay;
   #userSelect;
+  #BridgeGame;
 
   constructor() {
     this.#bridgeWay;
-    this.#userSelect;
+    this.#userSelect = [];
+    this.#BridgeGame = new BridgeGame();
   }
 
   start() {
@@ -42,10 +45,17 @@ class Controller {
   getUserMoving(select) {
     try {
       validator.checkUserMovingInput(select);
+      this.#userSelect.push(select);
+      this.getMovingResult(this.#bridgeWay, this.#userSelect);
     } catch {
-      this.inputBridgeWay();
+      this.inputUserMoving();
     }
-    this.#userSelect = select;
+  }
+
+  getMovingResult(bridgeWay, userSelect) {
+    let [bridgeSize, userInputLength] = [bridgeWay.length, userSelect.length];
+    if (userInputLength < bridgeSize) this.inputUserMoving();
+    this.#BridgeGame.move(bridgeWay, userSelect, userInputLength);
   }
 }
 
