@@ -35,6 +35,7 @@ const InputView = {
         InputView.readMoving(game);
         return;
       }
+      OutputView.printResult(game);
       Console.close();
     });
   },
