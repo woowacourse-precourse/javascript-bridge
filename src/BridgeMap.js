@@ -9,6 +9,10 @@ class BridgeMap {
 
   #bridgeMap = MapMaker.makeMap();
 
+  getMap() {
+    return this.#bridgeMap;
+  }
+
   cofirm() {
     const [up, down] = this.#bridgeMap;
     console.log(`[${up.join('')}]\n[${down.join('')}]`);
@@ -73,10 +77,10 @@ const app = new BridgeMap();
 
 // console.log(up, down);
 // console.log(app.addFirstMap(true, 'D', [[], []]));
-// console.log(app.cofirm(), '시작');
-// console.log(app.confirmisFirst());
-app.handleMap(true, 'D');
-console.log(app.cofirm(), '하나추가');
+// // console.log(app.cofirm(), '시작');
+// // console.log(app.confirmisFirst());
+// app.handleMap(true, 'D');
+// console.log(app.cofirm(), '하나추가');
 app.handleMap(false, 'U');
 console.log(app.cofirm(), '최종');
-console.log();
+// console.log();
