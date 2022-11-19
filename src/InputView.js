@@ -55,7 +55,11 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(MESSAGE.INPUT_WANT_RETRY, (input) => {
+      console.log(input);
+    });
+  },
 };
 
 InputView.readBridgeSize();
