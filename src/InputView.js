@@ -17,11 +17,12 @@ const InputView = {
     Console.readLine("다리의 길이를 입력해주세요.", (bridgeSize) => {
       try {
         validateInput(bridgeSize);
-      } catch(error) {
-        Console.print(error)
+      } catch (error) {
+        Console.print(error);
         InputView.readBridgeSize();
       }
-      mainBridge = makeBridge(bridgeSize, generate); //기준 다리
+      mainBridge = makeBridge(bridgeSize, generate); //기준 다리 출력 형식 [U,D,D]
+      // console.log(mainBridge); //로직 완성 후 삭제하기
       const bridgeGame = new BridgeGame(mainBridge); //인스턴스 생성
       InputView.readMoving(mainBridge, bridgeGame); //움직임 입력 받기
     });
@@ -37,6 +38,8 @@ const InputView = {
         bridgeGame.move(moveInput);
         printMap(bridgeGame.userBridge);
         if (!bridgeGame.hasNext && bridgeGame.finish) {
+          printResult("최종 게임 결과");
+          printMap(bridgeGame.userBridge);
           printResult("게임 성공 여부: 성공");
           printResult(`총 시도한 횟수: ${bridgeGame.retrycount}`);
           return;
@@ -64,7 +67,7 @@ const InputView = {
         }
         if (retryInput === "Q") {
           printResult("최종 게임 결과");
-          printMap(bridgeGame.userBridge)
+          printMap(bridgeGame.userBridge);
           printResult("게임 성공 여부: 실패");
           printResult(`총 시도한 횟수: ${bridgeGame.retrycount - 1}`);
           Console.close();
