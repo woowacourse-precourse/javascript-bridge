@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const { BRIDGE_NUMBER_INPUT } = require("../utils/constant")
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -5,7 +7,10 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize() {
+    MissionUtils.Console.readLine(BRIDGE_NUMBER_INPUT, (answer) => {
+    })
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
