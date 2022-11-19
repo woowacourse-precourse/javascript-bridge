@@ -48,4 +48,11 @@ describe("다리 배열을 문자열로 바꾸는 BridgeConverter 테스트", ()
       [" ", "O", " "],
     ]);
   });
+  test("U와 D로 구성된 [[],[]] 형태의 배열을 출력물 형태로 변환", () => {
+    const answer = ["U", "D", "D"];
+    const inputs = ["U", "D", "U"];
+    expect(BridgeConverter.stringifyBridge(answer, inputs)).toContain(
+      `[ O |   | X ]\n[   | O |   ]`
+    );
+  });
 });
