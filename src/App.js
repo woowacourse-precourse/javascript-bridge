@@ -32,7 +32,7 @@ class App {
     InputView.readMoving(this.tryMovePlayer.bind(this));
   }
 
-  tryMovePlayer(movingDirection) {
+  tryMove(movingDirection) {
     try {
       this.bridgeGame.move(movingDirection);
 
