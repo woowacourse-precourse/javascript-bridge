@@ -1,5 +1,5 @@
 const Bridge = require('./Bridge');
-const Result = require('./Result');
+const ResultMaker = require('./ResultMaker');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -9,6 +9,7 @@ class BridgeGame {
   #index;
   #result;
   #tryCount;
+  #status;
   constructor(length) {
     this.#bridge = new Bridge(length);
     this.#index = 0;
@@ -19,12 +20,20 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  get result() {
+    return this.#result;
+  }
+  get tryCount() {
+    return this.#tryCount;
+  }
+  get status() {
+    return this.#status;
+  }
   move(input) {
-    const CAN_MOVE = this.#bridge.movable(this.#index, input);
-    this.#result = new Result(this.#bridge, this.#index, CAN_MOVE);
-    this.#result.print();
+    this.#status = this.#bridge.movable(this.#index, input);
+    this.#result = ResultMaker(this.#bridge, this.#index, this.#status);
     this.#index += 1;
-    return CAN_MOVE;
+    return this.#status;
   }
 
   isEnd() {

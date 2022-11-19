@@ -9,7 +9,12 @@ const {
   readGameCommand,
   readBridgeSize,
 } = require('./View/InputView');
-const { printStart, printError } = require('./View/OutputView');
+const {
+  printStart,
+  printError,
+  printResult,
+  printMap,
+} = require('./View/OutputView');
 class App {
   #game;
 
@@ -33,6 +38,7 @@ class App {
     try {
       MoveValidation(input);
       const MOVE = this.#game.move(input);
+      printMap(this.#game.result);
       const NOT_END = this.#game.isEnd() == true;
       if (MOVE && !NOT_END) this.gameEnd();
       if (MOVE && NOT_END) readMoving.bind(this)(this.moveBridge);
@@ -57,7 +63,7 @@ class App {
   }
 
   gameEnd() {
-    this.#game.finalPrint();
+    printResult(this.#game.result, this.#game.tryCount, this.#game.status);
     end();
   }
 }
