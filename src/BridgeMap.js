@@ -20,7 +20,7 @@ class BridgeMap {
   }
 
   getPathMarker (chooseStep) {
-    return this.checkPath(chooseStep) ? 'O' : 'X';
+    return this.checkPath(chooseStep) ? GAME_CONSTANTS.goPath : GAME_CONSTANTS.notPath;
   }
 
   checkPath (chooseStep) {
