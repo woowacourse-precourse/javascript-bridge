@@ -1,4 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { makeBridge } = require('./BridgeMaker');
+const { generate } = require('./BridgeRandomNumberGenerator');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -10,6 +12,7 @@ const InputView = {
 		Console.readLine('다리 길이를 입력해주세요.\n', line => {
 			if (isNaN(line) || Number(line) < 3 || Number(line > 20)) throw new Error('[Error] 다리 길이 입력 값이 잘못 되었습니다.');
 			info.bridgeLength = Number(line);
+			console.log(makeBridge(info.bridgeLength, generate));
 		});
 	},
 
