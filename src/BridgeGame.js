@@ -10,6 +10,7 @@ class BridgeGame {
     this.answerSteps = bridge;
     this.bridgeSteps = [];
     this.gameCount = 1;
+    this.gameStatus = '';
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
