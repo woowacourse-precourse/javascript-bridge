@@ -13,8 +13,8 @@ const OutputView = {
   printMap(bridgeGame) {
     BridgeValidator.checkBridgeAnswer(bridgeGame.bridgeAnswers);
     BridgeValidator.checkBridge(bridgeGame.bridge);
-    printBridgeByPosition(bridgeGame.bridgeAnswers, bridgeGame.bridge, 'U');
-    printBridgeByPosition(bridgeGame.bridgeAnswers, bridgeGame.bridge, 'D');
+    this.printBridgeByPosition(bridgeGame.bridgeAnswers, bridgeGame.bridge, 'U');
+    this.printBridgeByPosition(bridgeGame.bridgeAnswers, bridgeGame.bridge, 'D');
   },
 
   printBridgeByPosition(bridgeAnswer, bridge, position) {
