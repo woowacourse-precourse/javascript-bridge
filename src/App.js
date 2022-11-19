@@ -32,7 +32,10 @@ class App {
 
     const isCorrect = this.BridgeGame.isCorrect(answer, this.#bridge);
 
-    if (isCorrect) this.BridgeGame.move();
+    if (isCorrect) {
+      this.BridgeGame.move();
+      InputView.readMoving(this.requestMoveUpOrDown.bind(this));
+    }
   }
 }
 
