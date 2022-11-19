@@ -39,4 +39,13 @@ describe("다리 배열을 문자열로 바꾸는 BridgeConverter 테스트", ()
       ["X", " ", " "],
     ]);
   });
+  test("사용자의 입력값과 정답을 비교해서 [[],[]]형태의 배열을 생성", () => {
+    const answer = ["U", "D", "D"];
+    const inputs = ["U", "D", "U"];
+
+    expect(BridgeConverter.convertToBridge(answer, inputs)).toEqual([
+      ["O", " ", "X"],
+      [" ", "O", " "],
+    ]);
+  });
 });
