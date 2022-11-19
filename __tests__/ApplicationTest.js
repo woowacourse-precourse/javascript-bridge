@@ -146,7 +146,22 @@ describe("다리 건너기 테스트", () => {
     });
   });
 
-  test("실패 게임 후 재시작 2회 후 성공 테스트", () => {
-    mockQuestions(["R"]);
+  test("실패 게임 후 재시작 후 성공 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "0", "1"]);
+    mockQuestions(["4", "U", "U", "R", "U", "D", "D", "U"]);
+    const messages = [
+      "최종 게임 결과",
+      "[ O |   |   | O ]",
+      "[   | O | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ];
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });
