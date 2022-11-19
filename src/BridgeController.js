@@ -1,11 +1,15 @@
-const bridgeValidation = require('./validation/bridgeValidation');
-const movingValidation = require('./validation/movingValidation');
-const commandValidation = require('./validation/commandValidation');
+const BridgeGame = require('./BridgeGame');
+const { checkRetryBridge } = require('./validation/bridgeValidation');
+const { checkRetryMoving } = require('./validation/movingValidation');
+const { checkRetryCommand } = require('./validation/commandValidation');
+const { generate } = require('./utils/BridgeRandomNumberGenerator');
 const { print } = require('./utils/MissionUtils');
 
 class BridgeController {
   constructor() {
+    this.bridgeGame = new BridgeGame();
     this.inputView = require('./InputView');
+    this.bridgeMaker = require('./BridgeMaker');
     this.#initPrint();
   }
 
@@ -15,17 +19,17 @@ class BridgeController {
 
   progressSize() {
     this.inputView.readBridgeSize((input) => {
-      if (!bridgeValidation(input)) {
-        catchError('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+      if (!checkRetryBridge(input)) {
         return this.progressSize();
       }
+
+      return this.progressMoving();
     });
   }
 
   progressMoving() {
     this.inputView.readMoving((input) => {
-      if (!movingValidation(input)) {
-        catchError('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+      if (!checkRetryMoving(input)) {
         return this.progressMoving();
       }
     });
@@ -33,19 +37,10 @@ class BridgeController {
 
   progressCommand() {
     this.inputView.readGameCommand((input) => {
-      if (!commandValidation(input)) {
-        catchError('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+      if (!checkRetryCommand(input)) {
         return this.progressCommand();
       }
     });
-  }
-}
-
-function catchError(error) {
-  try {
-    throw error;
-  } catch (error) {
-    print(error);
   }
 }
 

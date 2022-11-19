@@ -1,6 +1,6 @@
-const bridgeValidation = require('../src/validation/bridgeValidation');
-const movingValidation = require('../src/validation/movingValidation');
-const commandValidation = require('../src/validation/commandValidation');
+const { bridgeValidation } = require('../src/validation/bridgeValidation');
+const { movingValidation } = require('../src/validation/movingValidation');
+const { commandValidation } = require('../src/validation/commandValidation');
 
 describe('User Input 테스트', () => {
   test('다리 갯수 3~20까지의 숫자', () => {
