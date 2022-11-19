@@ -67,7 +67,13 @@ class Controller {
     InputView.readGameCommand(this.getGameOverSelect.bind(this));
   }
 
-  getGameOverSelect(gameOverSelect) {}
+  getGameOverSelect(gameOverSelect) {
+    try {
+      validator.checkGameOverSelect(gameOverSelect);
+    } catch {
+      this.inputGameOver();
+    }
+  }
 }
 
 module.exports = Controller;

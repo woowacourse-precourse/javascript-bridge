@@ -10,6 +10,11 @@ const validator = {
     throw Console.print('[ERROR] 입력한 문자가 올바르지 않습니다.');
   },
 
+  checkGameOverSelect(input) {
+    if (this.checkIsRorQ(input)) return;
+    throw Console.print('[ERROR] 입력한 문자가 올바르지 않습니다.');
+  },
+
   checkIsNum(input) {
     return /^[0-9]*$/g.test(input);
   },
@@ -20,6 +25,10 @@ const validator = {
 
   checkIsUpDown(input) {
     return input === 'U' || input === 'D';
+  },
+
+  checkIsRorQ(input) {
+    return input === 'R' || input === 'Q';
   },
 };
 
