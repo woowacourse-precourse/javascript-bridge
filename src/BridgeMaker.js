@@ -1,7 +1,7 @@
 const { BRIDGE_STRING } = require('./constants');
 
 const BridgeMaker = {
-  BRIDGE_MAKER_MAP: {
+  BRIDGE_LOCATION_MAP: {
     0: BRIDGE_STRING.down,
     1: BRIDGE_STRING.up,
   },
@@ -13,9 +13,9 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
-    for (let i = 0; i < size; i++) {
-      const randomNumber = generateRandomNumber();
-      bridge.push(BridgeMaker.BRIDGE_MAKER_MAP[randomNumber]);
+    while (bridge.length < size) {
+      const number = generateRandomNumber();
+      bridge.push(BridgeMaker.BRIDGE_LOCATION_MAP[number]);
     }
 
     return bridge;
