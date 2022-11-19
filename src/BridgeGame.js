@@ -10,8 +10,7 @@ class BridgeGame {
   #isPass;
   #userAttempt;
   #isGameOver;
-  #bridgeMap1;
-  #bridgeMap2;
+  #bridgeMap;
 
   constructor() {
     this.#bridge = [];
@@ -19,8 +18,10 @@ class BridgeGame {
     this.#userPos = 0;
     this.#userAttempt = 1;
     this.#isGameOver = false;
-    this.#bridgeMap1 = [];
-    this.#bridgeMap2 = [];
+    this.#bridgeMap = {
+      U : [],
+      D : [],
+    }
   }
 
   getGameOver() {
@@ -28,7 +29,7 @@ class BridgeGame {
   }
 
   getBridgeMap() {
-    return [this.#bridgeMap1, this.#bridgeMap2];
+    return this.#bridgeMap;
   }
 
   /**
@@ -48,26 +49,24 @@ class BridgeGame {
 
   checkMove(bridge, userMove) {
     this.#isPass = bridge === userMove;
-    this.bridgeMap(bridge, userMove);
+    this.setBridgeMap(bridge, userMove);
     if (this.isGameOver()) {
       this.#isGameOver = !!this.#isPass;
     }
   }
 
-  bridgeMap(bridge, userMove) {
-    if (bridge === 'U' && userMove === 'U') {
-      this.#bridgeMap1.push(' O ');
-      this.#bridgeMap2.push('   ');
-    } else if (bridge === 'U' && userMove === 'D') {
-      this.#bridgeMap1.push('   ');
-      this.#bridgeMap2.push(' X ');
-    } else if (bridge === 'D' && userMove === 'D') {
-      this.#bridgeMap1.push('   ');
-      this.#bridgeMap2.push(' O ');
-    } else if (bridge === 'D' && userMove === 'U') {
-      this.#bridgeMap1.push(' X ');
-      this.#bridgeMap2.push('   ');
+  setBridgeMap(bridge, userMove) {
+    if (bridge === userMove) {
+      this.#bridgeMap[userMove].push(' O ');
+      if (userMove === 'U') {
+       this.#bridgeMap['D'].push('   ');
+       return;
+      }
+      this.#bridgeMap['U'].push('   ');
+      return;
     }
+    this.#bridgeMap[userMove].push(' X ');
+    this.#bridgeMap[bridge].push('  ');
   }
 
   /**
@@ -79,8 +78,10 @@ class BridgeGame {
     this.#userPos = 0;
     this.#isGameOver = false;
     this.#userAttempt++;
-    this.#bridgeMap1 = [];
-    this.#bridgeMap2 = [];
+    this.#bridgeMap = {
+      U: [],
+      D: [],
+    }
   }
 
   init(bridgeSize) {
