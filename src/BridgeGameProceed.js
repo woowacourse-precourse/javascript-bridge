@@ -53,7 +53,10 @@ class BridgeGameProceed {
     fail(result) {
         this.#round += 1;
         InputView.readGameCommand((retryOrNot) => {
-            if (retryOrNot === "R") return this.game();
+            if (retryOrNot === "R") {
+                this.#playersBridge = [];
+                return this.game();
+            }
             this.BridgeGame.retry(retryOrNot, result);
         })     
     }
