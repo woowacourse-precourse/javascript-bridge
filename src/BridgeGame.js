@@ -51,9 +51,6 @@ class BridgeGame {
   #handleWrongMove(command) {
     this.#buildBridgeUsingInput(command, GAME_UTILS.MARK_WRONG_MOVE);
     ViewController.output.map(this.#upperBridge, this.#lowerBridge);
-    this.#upperBridge = [];
-    this.#lowerBridge = [];
-    this.#gameRound = VALUES.INITIAL_GAME_ROUND;
     ViewController.input.gameCommand(this.#retry.bind(this));
   }
 
@@ -85,6 +82,9 @@ class BridgeGame {
   #retry(command) {
     if (command === GAME_UTILS.COMMAND_RESTART) {
       this.#numberOfTrials += 1;
+      this.#upperBridge = [];
+      this.#lowerBridge = [];
+      this.#gameRound = VALUES.INITIAL_GAME_ROUND;
       ViewController.input.moving(this.#move.bind(this));
     } else if (command === GAME_UTILS.COMMAND_QUIT) {
       this.#gameOver();
