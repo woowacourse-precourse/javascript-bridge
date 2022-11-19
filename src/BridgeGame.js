@@ -24,7 +24,7 @@ class BridgeGame {
    */
   move() {
     InputView.readMoving('이동할 칸을 선택해주세요.', (space) => {
-
+      Validation.checkSpace(space);
     });
   }
 
