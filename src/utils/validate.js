@@ -7,6 +7,10 @@ const isBridgeLengthValid = (value) => {
   if (!isRangeValid(value)) throw new AppError(ERROR_MESSAGE.RANGE_ERROR);
 };
 
+const isMoveValid = (value) => {
+  if (isEmptyInput(value)) throw new AppError(ERROR_MESSAGE.EMPTY_ERROR);
+};
+
 const isEmptyInput = (value) => !value;
 
 const isNumberType = (value) => !Number.isNaN(Number(value));
@@ -14,4 +18,4 @@ const isNumberType = (value) => !Number.isNaN(Number(value));
 const isRangeValid = (value) =>
   BRIDGE_VALUE.MIN <= value && value <= BRIDGE_VALUE.MAX;
 
-module.exports = { isBridgeLengthValid };
+module.exports = { isBridgeLengthValid, isMoveValid };

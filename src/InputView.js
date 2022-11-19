@@ -1,4 +1,8 @@
-const { inputUserValue, isBridgeLengthValid } = require("./utils/index");
+const {
+  inputUserValue,
+  isBridgeLengthValid,
+  isMoveValid,
+} = require("./utils/index");
 const { GAME_MESSAGE } = require("./constants/index");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -20,7 +24,7 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     inputUserValue(GAME_MESSAGE.INPUT_MOVE, (move) => {
-      console.log(move);
+      isMoveValid(move);
     });
   },
 

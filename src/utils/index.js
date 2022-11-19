@@ -1,4 +1,9 @@
 const { inputUserValue, printMessage } = require("./missionUtils");
-const { isBridgeLengthValid } = require("./validate");
+const { isBridgeLengthValid, isMoveValid } = require("./validate");
 
-module.exports = { inputUserValue, printMessage, isBridgeLengthValid };
+module.exports = {
+  inputUserValue,
+  printMessage,
+  isBridgeLengthValid,
+  isMoveValid,
+};
