@@ -141,6 +141,10 @@ class BridgeGame {
 
     return positionLog;
   }
+
+  getPositionLog() {
+    return [...this.#PositionLog.values()];
+  }
 }
 
 module.exports = BridgeGame;
