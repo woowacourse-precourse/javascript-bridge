@@ -7,7 +7,7 @@ const ExceptionHandler = {
 
   validateSizeInput(size) {
     const intSize = parseInt(size);
-    if (intSize < Constant.MIN_SIZE && intSize > Constant.MAX_SIZE)
+    if (intSize < Constant.MIN_SIZE || intSize > Constant.MAX_SIZE)
       throw new Error("[ERROR] 3부터 20 사이의 숫자를 입력해주세요.");
   },
 };
