@@ -41,12 +41,24 @@ class App {
       console.log(this.#moveStatement);
       if (this.#moveStatement) {
         this.#bridgeMap.handleMap(this.#moveStatement, this.#bridge);
+        this.#nowBridgeLength = this.#brdigeGame.getNumberOfTry();
         return this.progressBridgeMove();
       }
       if (!this.#moveStatement) {
         this.#bridgeMap.handleMap(this.#moveStatement, this.#bridge);
         this.#appStatus = 5;
-        Utils.close();
+        return this.progressRetryGame();
+      }
+    }
+    if (this.#appStatus === 5) return this.progressRetryGame();
+    if (this.#appStatus === 6) {
+      if (this.#gameStaus) return this.play();
+      if (!this.#gameStaus) {
+        OutputView.printResult(
+          this.#bridgeMap.getMap(),
+          this.#brdigeGame.getNumberOfTry(),
+          this.#gameStaus,
+        );
       }
     }
   }
@@ -71,6 +83,20 @@ class App {
         Validator.confirmOfCondition(answer, 'move');
         this.#moveAnswer = answer;
         this.#appStatus = 4;
+      } catch (e) {
+        console.log(e, '예외발생');
+      } finally {
+        this.progressApp(this.#appStatus);
+      }
+    });
+  }
+
+  progressRetryGame() {
+    InputView.readGameCommand((answer) => {
+      try {
+        Validator.confirmOfCondition(answer, 'option');
+        this.#gameStaus = this.#brdigeGame.retry(answer);
+        this.#appStatus = 6;
       } catch (e) {
         console.log(e, '예외발생');
       } finally {
