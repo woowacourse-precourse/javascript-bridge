@@ -29,7 +29,6 @@ const InputView = {
       this.checkBridgeSize(size);
       bridge.setBridge(size);
       console.log(bridge.getBridge());
-
       this.readMoving(bridge, bridgeGame);
 
       this.readGameCommand();
@@ -75,6 +74,7 @@ const InputView = {
       (restart) => {
         this.checkRestart(restart);
         bridgeGame.retry(restart);
+        this.readMoving(bridge, bridgeGame);
       }
     );
   },

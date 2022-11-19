@@ -10,36 +10,48 @@ class BridgeGame {
   }
 
   setCross(cross) {
-    this.crossing = cross;
+    if (cross) this.crossing = true;
+    else if (!cross) this.crossing = false;
   }
 
   getCross() {
     return this.crossing;
   }
 
-  setRound() {
-    this.round++;
+  setRound(reset) {
+    if (reset) this.round = 0;
+    else {
+      this.round++;
+    }
   }
 
   getRound() {
     return this.round;
   }
 
-  setUpResult(round, correct) {
-    if (correct) {
-      this.upResult[round] = " O ";
-    } else {
-      this.upResult[round] = " X ";
-      this.setCross(false);
+  setUpResult(reset, round, correct) {
+    if (!reset) {
+      if (correct) {
+        this.upResult[round] = " O ";
+      } else {
+        this.upResult[round] = " X ";
+        this.setCross(false);
+      }
+    } else if (reset) {
+      this.upResult = [];
     }
   }
 
-  setDownResult(round, correct) {
-    if (correct) {
-      this.downResult[round] = " O ";
-    } else {
-      this.downResult[round] = " X ";
-      this.setCross(false);
+  setDownResult(reset, round, correct) {
+    if (!reset) {
+      if (correct) {
+        this.downResult[round] = " O ";
+      } else {
+        this.downResult[round] = " X ";
+        this.setCross(false);
+      }
+    } else if (reset) {
+      this.downResult = [];
     }
   }
 
@@ -61,18 +73,18 @@ class BridgeGame {
 
     if (movement == "U") {
       if (movement == bridgeUD[round]) {
-        this.setUpResult(round, true);
+        this.setUpResult(false, round, true);
         this.downResult.push("   ");
       } else {
-        this.setUpResult(round, false);
+        this.setUpResult(false, round, false);
         this.downResult.push("   ");
       }
     } else if (movement === "D") {
       if (movement == bridgeUD[round]) {
-        this.setDownResult(round, true);
+        this.setDownResult(false, round, true);
         this.upResult.push("   ");
       } else {
-        this.setDownResult(round, false);
+        this.setDownResult(false, round, false);
         this.upResult.push("   ");
       }
     }
@@ -86,7 +98,21 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(restart) {}
+
+  reset() {
+    this.setRound(true);
+    this.setCross(true);
+    this.setUpResult(true);
+    this.setDownResult(true);
+  }
+
+  retry(restart) {
+    if (restart === "R") {
+      this.reset();
+    } else if (restart === "Q") {
+      console.log("Q");
+    }
+  }
 }
 
 module.exports = BridgeGame;
