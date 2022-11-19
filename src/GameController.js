@@ -67,9 +67,9 @@ class GameController {
 
   handleGameCommand(command) {
     if (command === COMMAND.restart) {
-      // TODO 게임 다시 시작하기 기능
-      // this.#bridgeGame.retry();
-      // InputView.readMoving(this.validateMoving.bind(this));
+      this.#bridgeGame.retry();
+      this.#map.resetMap();
+      InputView.readMoving(this.validateMoving.bind(this));
     } else if (command === COMMAND.quit) {
       // TODO 최종 게임 결과 출력 기능
     }

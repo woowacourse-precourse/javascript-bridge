@@ -9,6 +9,10 @@ class Map {
     this.#map.push({ moving, canMove });
     return this.#map;
   }
+
+  resetMap() {
+    this.#map = [];
+  }
 }
 
 module.exports = Map;
