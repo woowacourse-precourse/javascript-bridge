@@ -75,6 +75,11 @@ const OutputView = {
   printStart() {
     Console.print(MESSAGE_GAME_START);
   },
+
+  retry() {
+    this.currentMap[BRIDGE_UP] = "";
+    this.currentMap[BRIDGE_DOWN] = "";
+  },
 };
 
 module.exports = OutputView;
