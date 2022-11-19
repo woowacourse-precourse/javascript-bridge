@@ -1,9 +1,9 @@
 const OutputView = require('../views/OutputView');
 const InputView = require('../views/InputView');
-const BridgeChecker = require('./BridgeChecker');
+const BridgeSizeMaker = require('./BridgeSizeMaker');
 const Convertor = require('../utils/Convertor');
 const BridgeMaker = require('../BridgeMaker');
-const PlayerInputChecker = require('./PlayerInputChecker');
+const InputChecker = require('./InputChecker');
 const BridgeGame = require('../models/BridgeGame');
 const PrintableBridgeMaker = require('../models/PrintableBridgeMaker');
 const { GAME_STATUS, BRIDGE_GAME } = require('../constants/values');
@@ -20,60 +20,52 @@ class GameController {
   }
 
   #makeBridge(rowDataOfBridgeSize) {
-    try {
-      BridgeChecker.checkRowDataOfBridgeSize(rowDataOfBridgeSize);
-    } catch (e) {
-      Console.print(e);
-    }
-    const bridgeSize = Convertor.convertStringToDecimalNumber(rowDataOfBridgeSize);
-    try {
-      BridgeChecker.checkBridgeSize(bridgeSize);
-    } catch (e) {
-      Console.print(e);
-    }
+    Console.print('');
+    const bridgeSize = BridgeSizeMaker.make(rowDataOfBridgeSize, this.#makeBridge.bind(this));
     this.#bridgeGame = new BridgeGame(
       BridgeMaker.makeBridge(bridgeSize, Convertor.convertRandomNumberToString)
     );
     this.#printableBridgeMaker = new PrintableBridgeMaker();
 
-    this.#playGame();
+    this.playGame();
   }
 
-  #playGame() {
-    InputView.readMoving(this.#movePlayer.bind(this));
+  playGame() {
+    InputView.readMoving(this.#move.bind(this));
   }
 
-  #movePlayer(direction) {
-    PlayerInputChecker.checkDirection(direction);
-    const moveResult = this.#bridgeGame.move(direction);
-    this.#printableBridgeMaker.generate(moveResult);
-    OutputView.printMap(this.#printableBridgeMaker.getPrintableBridge());
-    if (this.#bridgeGame.checkGameStatus() === GAME_STATUS.PLAYING) {
-      this.#playGame();
+  #move(direction) {
+    if (InputChecker.checkDirection(direction, this.#move.bind(this)) === GAME_STATUS.ERROR) {
       return;
     }
-
-    this.#quitGame();
+    this.#printableBridgeMaker.generate(this.#bridgeGame.move(direction));
+    OutputView.printMap(this.#printableBridgeMaker.getPrintableBridge());
+    if (this.#bridgeGame.checkGameStatus() === GAME_STATUS.PLAYING) {
+      this.playGame();
+    } else {
+      this.#quitGame();
+    }
   }
 
   #quitGame() {
     if (this.#bridgeGame.checkGameStatus() === GAME_STATUS.FAIL_END) {
-      InputView.readGameCommand(this.#restartOrQuitGame.bind(this));
+      InputView.readGameCommand(this.#restartOrQuit.bind(this));
       return;
     }
 
     this.#printGameResult();
   }
 
-  #restartOrQuitGame(select) {
-    PlayerInputChecker.checkSelect(select);
-    if (select === BRIDGE_GAME.QUIT) {
-      this.#printGameResult();
+  #restartOrQuit(select) {
+    if (InputChecker.checkSelect(select, this.#restartOrQuit.bind(this)) === GAME_STATUS.ERROR) {
       return;
     }
 
-    this.#bridgeGame.retry();
-    this.#playGame();
+    if (select === BRIDGE_GAME.RESTART) {
+      this.#bridgeGame.retry(this.playGame.bind(this));
+    } else {
+      this.#printGameResult();
+    }
   }
 
   #printGameResult() {
@@ -82,6 +74,10 @@ class GameController {
       this.#bridgeGame.getResult()
     );
 
+    this.#normalTerminationProgram();
+  }
+
+  #normalTerminationProgram() {
     Console.close();
   }
 }

@@ -11,9 +11,9 @@ const OutputView = {
   },
 
   printResult(result, { successOrFailure, tryCount }) {
-    Console.print(`${MESSAGE_RESULT.HEAD}\n`);
+    Console.print(`${MESSAGE_RESULT.HEAD}`);
     Console.print(result);
-    Console.print(`${MESSAGE_RESULT.SUCCESS_OR_FAILURE} ${successOrFailure}\n`);
+    Console.print(`${MESSAGE_RESULT.SUCCESS_OR_FAILURE} ${successOrFailure}`);
     Console.print(`${MESSAGE_RESULT.TRY_COUNT} ${tryCount}`);
   },
 };

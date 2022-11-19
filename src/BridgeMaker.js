@@ -1,9 +1,9 @@
-const { BRIDGE_GAME } = require('./constants/values');
+const { BRIDGE_MAKER, BRIDGE_GAME } = require('./constants/values');
 
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size }, () =>
-      generateRandomNumber() === BRIDGE_GAME.ONE_STRING ? BRIDGE_GAME.INPUT_U : BRIDGE_GAME.INPUT_D
+      generateRandomNumber() === BRIDGE_MAKER.ONE ? BRIDGE_GAME.INPUT_U : BRIDGE_GAME.INPUT_D
     );
   },
 };
