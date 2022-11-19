@@ -56,7 +56,10 @@ class App {
     }
     if (this.#appStatus === 5) return this.progressRetryGame();
     if (this.#appStatus === 6) {
-      if (this.#gameOptionStatus) return this.initApp();
+      if (this.#gameOptionStatus) {
+        this.#appStatus = 3;
+        return this.progressApp(this.#appStatus);
+      }
       if (!this.#gameOptionStatus) {
         OutputView.printResult(
           this.#bridgeMap.getMap(),
@@ -107,13 +110,6 @@ class App {
         this.progressApp(this.#appStatus);
       }
     });
-  }
-
-  initApp() {
-    this.#brdigeGame = new BridgeGame();
-    this.#bridgeMap = new BridgeMap();
-    this.#appStatus = 1;
-    this.play();
   }
 }
 
