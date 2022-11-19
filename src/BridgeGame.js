@@ -6,7 +6,7 @@ const { makeUserBridge } = require("./BridgeMaker");
 class BridgeGame {
   constructor(mainBridge) {
     this.mainBridge = mainBridge;
-    this.bridgeSize = mainBridge[0].length;
+    this.bridgeSize = mainBridge.length;
     this.count = 0;
     this.retrycount = 1;
     this.hasNext = true;
