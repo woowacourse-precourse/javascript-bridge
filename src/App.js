@@ -55,26 +55,26 @@ class App {
   }
 
   checkResponse(response) {
-    if (response == "Done") {
-      this.responseDone();
-    } else if (response == "Correct") {
-      this.responseCorrect();
-    } else if (response == "Incorrect") {
-      this.responseIncorrect();
+    if (response == "Finish") {
+      this.responseFinish();
+    } else if (response == "Continue") {
+      this.responseContinue();
+    } else if (response == "Retry") {
+      this.responseRetry();
     }
   }
 
-  responseDone() {
+  responseFinish() {
     OutputView.printMap(this.#moving, true);
     this.printResult(true);
   }
 
-  responseCorrect() {
+  responseContinue() {
     OutputView.printMap(this.#moving, true);
     this.selectMoving();
   }
 
-  responseIncorrect() {
+  responseRetry() {
     OutputView.printMap(this.#moving, false);
     InputView.readGameCommand((command) => {
       this.getCommand(command);
