@@ -42,16 +42,16 @@
     * [x] 사용자가 이동할 칸을 입력받기 readMoving()
     * [x] 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다. readMoving()
 ---
-* [ ] OutputView 사용자에게 게임 진행 상황과 결과를 출력하는 역할
-    * [ ] 현재까지 이동한 다리의 상태를 출력 printMap()
+* [x] OutputView 사용자에게 게임 진행 상황과 결과를 출력하는 역할
+    * [x] 현재까지 이동한 다리의 상태를 출력 printMap()
     * [x] 게임의 최종 결과를 출력 printResult()
     * [x] 게임 성공 여부 출력 printWin()
     * [x] 게임 실패 여부 출력 printFail()
     * [x] 총 시도한 횟수 출력 printAttemptCount()
     * [x] 게임 시작 메세지 출력 printStart()
 ---
-* [ ] BridgeMaker 다리의 길이를 입력 받아서 다리를 생성해주는 역할
-    * [ ] 다리의 길이를 입력받아서 다리를 생성 makeBridge()
+* [x] BridgeMaker 다리의 길이를 입력 받아서 다리를 생성해주는 역할
+    * [x] 다리의 길이를 입력받아서 다리를 생성 makeBridge()
 ---
 * [ ] BridgeGame 다리 건너기 게임을 관리하는 클래스
     * [ ] 다리 이동시키기 move
