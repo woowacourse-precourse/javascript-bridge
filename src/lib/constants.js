@@ -17,10 +17,15 @@ const BRIDGE_SIZE_REGEX = /^[3-9]{1}$|^[1]{1}[0-9]{1}$|^2{1}[0]{1}$/;
 const BRIDGE_RETRY_ASK_REGEX = /[RQ]/;
 const INPUT_BRIDGE_REGEX = /[UD]/;
 
+const UP = 'U';
+const DOWN = 'D';
+
 module.exports = {
   MESSAGE,
   ERROR,
   BRIDGE_SIZE_REGEX,
   BRIDGE_RETRY_ASK_REGEX,
   INPUT_BRIDGE_REGEX,
+  UP,
+  DOWN,
 };
