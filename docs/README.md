@@ -1,3 +1,40 @@
+# 클래스(객체) 요구 사항
+- `InputView` 객체
+  - 파일 경로 변경 가능
+  - 여기서만 readLine 사용 가능
+  - 메서드 인자 변경 가능
+  - 메서드 추가 가능
+  - `readBridgeSize`: 다리길이 입력
+  - `readMoving`: 이동할 칸 입력
+  - `readGameCommand`: 재시도or종료 입력
+- `OutputView` 객체
+  - 파일 경로 변경 가능
+  - 메서드 이름 변경 불가능
+  - 메서드 인자 변경 가능
+  - 메서드 추가 가능
+  - `printMap`: 현재까지 이동한 다리 상태 정해진 형식에 맞게 출력
+  - `printResult`: 게임의 최종 결과
+- `BridgeGame` 클래스
+  - 필드(인스턴스 변수) 추가 가능
+  - 파일 경로 변경 가능
+  - 메서드 이름 변경 불가능
+  - 메서드 인자 변경 가능
+  - 메서드 추가 가능
+  - `move`: 칸 이동
+  - `retry`: 게임 재시도
+- `BridgeMaker` 객체
+  - 프로퍼티 추가 불가능
+  - 파일 경로 변경 불가능
+  - 메서드의 시그니처(인자, 이름)와 반환 타입 변경 불가능
+  - `makeBridge`: 다리 생성
+- `BridgeRandomNumberGenerator` 객체
+  - 코드 변경 불가능
+
+
+## Flow
+![flow](./bridge_flow.jpg)
+
+
 # 1. 하드코딩
 - [x] ApplicationTest 만을 만족하기 위한 하드코딩
 - [ ] 목표: 하드코딩 이후 최종 코드 완성까지 ApplicationTest를 항상 만족하기
