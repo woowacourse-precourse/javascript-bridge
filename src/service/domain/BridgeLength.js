@@ -1,5 +1,3 @@
-const { REGEX, ERROR_MESSAGE } = require('../../utils/constants');
-
 class BridgeLength {
   #input;
 
@@ -10,20 +8,12 @@ class BridgeLength {
     this.#repo = repo;
   }
 
-  #getValidateData() {
-    if (!REGEX.bridgeLength.test(this.#input)) {
-      throw new Error(ERROR_MESSAGE.bridgeLength);
-    }
-
-    return this;
-  }
-
   #createBridgeData() {
     this.#repo.create(this.#input);
   }
 
   doAction() {
-    this.#getValidateData().#createBridgeData();
+    this.#createBridgeData();
   }
 }
 

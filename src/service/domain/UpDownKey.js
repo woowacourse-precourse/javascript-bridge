@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE, REGEX, MODEL_KEY } = require('../../utils/constants');
+const { MODEL_KEY } = require('../../utils/constants');
 
 class UpDownKey {
   #input;
@@ -10,14 +10,6 @@ class UpDownKey {
     this.#repo = repo;
   }
 
-  #getValidateData() {
-    if (!REGEX.upDownKey.test(this.#input)) {
-      throw new Error(ERROR_MESSAGE.upDownKey);
-    }
-
-    return this;
-  }
-
   #updateUserBridge() {
     const oldData = this.#repo.read(MODEL_KEY.userBridge) || [];
 
@@ -27,7 +19,7 @@ class UpDownKey {
   }
 
   doAction() {
-    this.#getValidateData().#updateUserBridge();
+    this.#updateUserBridge();
   }
 }
 
