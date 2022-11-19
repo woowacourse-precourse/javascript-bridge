@@ -72,6 +72,11 @@ class BridgeGame {
    */
   retry(input, mapList) {}
 
+  finish(mapList, successOrNot, totalResult) {
+    this.outputView.printResult(mapList, successOrNot, totalResult);
+    close();
+  }
+
   checkSuccessGame() {
     if (this.#bridgeList.length !== this.#moveCount) {
       return false;
