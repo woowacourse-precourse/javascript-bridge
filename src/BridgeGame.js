@@ -11,6 +11,7 @@ class BridgeGame {
   #myPosition = 0;
   #currentMap = { upperPart: [], lowerPart: [] };
   #validPath;
+  #bridgeSize;
 
   getBridgeLengthFromUser() {
     InputView.readBridgeSize(this.makeBridge.bind(this));
@@ -22,13 +23,19 @@ class BridgeGame {
   }
 
   makeBridge(bridgeSize) {
-    this.#validPath = BridgeMaker.makeBridge(bridgeSize);
+    this.#bridgeSize = Number(bridgeSize);
+    this.#validPath = BridgeMaker.makeBridge(this.#bridgeSize, generateRandomNumber);
+
     // 유효성 검사
     this.getMoveDirectionFromUser();
   }
 
   getMoveDirectionFromUser() {
-    InputView.readMoving(this.move.bind(this));
+    this.isGameCleared() ? this.quit() : InputView.readMoving(this.move.bind(this));
+  }
+
+  isGameCleared() {
+    return this.#bridgeSize === this.#myPosition;
   }
 
   isValidPath(toBeMoveDirection) {
@@ -41,17 +48,27 @@ class BridgeGame {
    */
   move(direction) {
     if (this.isValidPath(direction)) {
-      if (direction === 1) this.#currentMap.upperPart.push(" O ");
-      if (direction === 0) this.#currentMap.lowerPart.push(" O ");
-      this.fillBlankUnselectedPath(Number(!direction));
+      if (direction === "U") {
+        this.#currentMap.upperPart.push(" O ");
+        this.fillBlankUnselectedPath(0);
+      }
+      if (direction === "D") {
+        this.#currentMap.lowerPart.push(" O ");
+        this.fillBlankUnselectedPath(1);
+      }
       this.#myPosition += 1;
       this.showMovedPath();
       this.getMoveDirectionFromUser();
       return;
     }
-    if (direction === 1) this.#currentMap.upperPart.push(" X ");
-    if (direction === 0) this.#currentMap.lowerPart.push(" X ");
-    this.fillBlankUnselectedPath(Number(!direction));
+    if (direction === "U") {
+      this.#currentMap.upperPart.push(" X ");
+      this.fillBlankUnselectedPath(0);
+    }
+    if (direction === "D") {
+      this.#currentMap.lowerPart.push(" X ");
+      this.fillBlankUnselectedPath(1);
+    }
     this.showMovedPath();
     this.askUserRestart();
   }
