@@ -23,7 +23,7 @@ const OutputView = {
 
   printResult(game) {
     Console.print(NOTICE.FINAL_RESULT);
-    OutputView.printMap(game.getResultArray());
+    OutputView.printMap(game.getResultArrays());
     Console.print(
       `${NOTICE.GAME_SUCCESS}${
         game.isFailed() ? RESULT.FAILURE : RESULT.SUCCESS

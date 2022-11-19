@@ -42,7 +42,7 @@ class BridgeGame {
     return this.#attempts;
   }
 
-  getResultArray() {
+  getResultArrays() {
     const proceeded = this.#bridge.slice(0, this.#position);
     const upper = this.getSingleResultArray(MOVE.UP, proceeded);
     const lower = this.getSingleResultArray(MOVE.DOWN, proceeded);

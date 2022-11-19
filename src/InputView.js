@@ -19,7 +19,7 @@ const InputView = {
     Console.readLine(REQUEST.MOVE_SPACE, (input) => {
       InputView.validateMoving(input);
       const isContinued = game.move(input);
-      OutputView.printMap(game.getResultArray());
+      OutputView.printMap(game.getResultArrays());
       if (isContinued) InputView.readMoving(game);
 
       if (game.isFailed()) InputView.readGameCommand(game);
