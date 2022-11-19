@@ -5,6 +5,9 @@ const Validation = {
    * @param {number} number : 식별의 대상이 되는 숫자
    * @return {boolean}
    */
+  isSame(elem1, elem2) {
+    return elem1 === elem2;
+  },
   isInRange(start, end, number) {
     if (number < start || number > end) return false;
     return true;
