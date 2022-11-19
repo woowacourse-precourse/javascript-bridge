@@ -23,6 +23,7 @@ const InputView = {
   },
 
   readGameCommand() {
+    if (GAME_MANAGER.getGameComplete()) return;
     Console.readLine(MESSAGE_RETRY, (command) => {
       if (GAME_MANAGER.retry(command)) {
         this.readMoving();

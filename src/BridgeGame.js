@@ -39,9 +39,20 @@ class BridgeGame {
     this.#bridge = value;
   }
 
+  getGameComplete() {
+    return this.#gameComplete;
+  }
+
   move(command) {
     this.setTurn(this.#turn + 1);
-    return this.#bridge[this.#turn] === command;
+    const IN_RANGE = this.#bridge.length >= this.#turn - 1;
+    const MATCH_COMMAND = this.#bridge[this.#turn] === command;
+    if (this.#bridge.length - 1 === this.#turn && MATCH_COMMAND) {
+      this.#gameComplete = true;
+      this.printResult();
+      return false;
+    }
+    return IN_RANGE && MATCH_COMMAND;
   }
 
   retry(command) {
@@ -54,6 +65,7 @@ class BridgeGame {
 
   printResult() {
     printResult(this.#gameComplete, this.#gameTryCount);
+    Console.close();
   }
 }
 
