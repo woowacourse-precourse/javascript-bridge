@@ -26,9 +26,9 @@ const Intercessor = {
   matchMove(bridge) {
     const bridgeGame = new BridgeGame();
     for (let i = 0; i < bridge.length; i++) {
-      if (!this.matchOneStep(bridge[i], bridgeGame)) return false;
+      if (!this.matchOneStep(bridge[i], bridgeGame)) return bridgeGame;
     }
-    return true;
+    return bridgeGame;
   },
 
   matchOneStep(block, bridgeGame) {
@@ -36,15 +36,18 @@ const Intercessor = {
       const moving = InputView.readMoving();
       if (!bridgeGame.move(moving, block)) {
         OutputView.printMap(bridgeGame.printReady(moving, false));
-        return false;
+        return bridgeGame.gameLose();
       }
       OutputView.printMap(bridgeGame.printReady(moving, true));
     } catch (error) {
       OutputView.printException(error);
     }
-    return true;
+    return bridgeGame.gameWin();
   },
 
+  checkResult(bridgeGame){
+    console.log(bridgeGame.getResult());
+  }
   
 
 };

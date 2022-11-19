@@ -6,6 +6,7 @@ const OutputView = require("./OutputView");
 class BridgeGame {
   #upperTrack = [];
   #lowerTrack = [];
+  #result;
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -51,6 +52,20 @@ class BridgeGame {
     const upperTrack = this.makeLine(this.#upperTrack);
     const lowerTrack = this.makeLine(this.#lowerTrack);
     return [lowerTrack, upperTrack];
+  }
+
+  gameWin(){
+    this.#result = true;
+    return true;
+  }
+
+  gameLose(){
+    this.#result = false;
+    return false;
+  }
+
+  getResult(){
+    return this.#result;
   }
 
   /**
