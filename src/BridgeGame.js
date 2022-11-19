@@ -44,14 +44,16 @@ class BridgeGame {
       if (direction === 1) this.#currentMap.upperPart.push(" O ");
       if (direction === 0) this.#currentMap.lowerPart.push(" O ");
       this.fillBlankUnselectedPath(Number(!direction));
-
       this.#myPosition += 1;
       this.showMovedPath();
       this.getMoveDirectionFromUser();
+      return;
     }
-    if (!this.isValidPath(direction)) {
-      this.askUserRestart();
-    }
+    if (direction === 1) this.#currentMap.upperPart.push(" X ");
+    if (direction === 0) this.#currentMap.lowerPart.push(" X ");
+    this.fillBlankUnselectedPath(Number(!direction));
+    this.showMovedPath();
+    this.askUserRestart();
   }
 
   askUserRestart() {
@@ -61,6 +63,9 @@ class BridgeGame {
   updateRestartOrNot(restartStatus) {
     if (restartStatus === "R") this.retry();
     if (restartStatus === "Q") this.quit();
+  }
+  showMovedPath() {
+    OutputView.printMap(this.#currentMap);
   }
 
   fillBlankUnselectedPath(direction) {
