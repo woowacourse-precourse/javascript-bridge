@@ -84,10 +84,16 @@ class BridgeGame {
   validateGameCommand(command) {
     try {
       new GameCommandValidator(command);
+      this.checkGameCommand(command);
     } catch (error) {
       Console.print(error);
       this.wrongBridge();
     }
+  }
+
+  checkGameCommand(command) {
+    if (command === 'R') return this.retry();
+    this.printEndGameMessage('실패');
   }
 
   /**
