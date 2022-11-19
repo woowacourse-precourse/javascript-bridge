@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('../model/BridgeGame');
 const InputView = require('../view/InputView');
+const OutputView = require('../view/OutputView');
 const { validateBridgeSize, validateNext } = require('../errorHandling');
 
 class GameController {
@@ -30,11 +31,19 @@ class GameController {
   setMoving(next) {
     validateNext.validate(next);
     const result = this.game.move(next);
+    if (result !== 1 && result !== 0) {
+      console.log('성공');
+      Console.close();
+    }
 
-    if (result === 1) this.askMoving();
-    if (result === 0) console.log('실패');
+    this.game.setMap(next); // MAP
 
-    if (result !== 1 && result !== 0) console.log('성공');
+    if (result === 1) {
+      this.askMoving();
+    }
+    if (result === 0) {
+      console.log('실패');
+    }
   }
 }
 

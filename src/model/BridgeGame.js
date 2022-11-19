@@ -6,10 +6,13 @@ const BridgeMaker = require('../BridgeMaker');
  */
 class BridgeGame {
   #bridge;
+  #map;
   #time;
 
   constructor() {
     this.#time = 0;
+    this.topSide = [];
+    this.downSide = [];
   }
 
   setBridge(size) {
@@ -19,6 +22,22 @@ class BridgeGame {
     console.log(bridge);
     this.#bridge = bridge;
   }
+
+  setMap(next) {
+    if (next === 'U') {
+      this.topSide.push('O');
+      this.downSide.push('X');
+    }
+
+    if (next === 'D') {
+      this.topSide.push('X');
+      this.downSide.push('O');
+    }
+
+    console.log(this.topSide);
+    console.log(this.downSide);
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -26,9 +45,12 @@ class BridgeGame {
    */
   move(next) {
     this.#time += 1;
-    if (this.#time === this.#bridge.length) return 2;
-    if (next !== this.#bridge[this.#time - 1]) return 0;
-
+    if (this.#time === this.#bridge.length) {
+      return 2;
+    }
+    if (next !== this.#bridge[this.#time - 1]) {
+      return 0;
+    }
     return 1;
   }
 
