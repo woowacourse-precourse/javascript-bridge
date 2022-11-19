@@ -1,7 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { INPUT_MESSAGE } = require('./Constants/Message');
-const { INPUT_TYPE } = require('./Constants/InputValues');
-const { checkBridgeSize, checkCorrectCharactor, checkCorrectCommand } = require('./Utils/Validation');
+const {
+  isCorrectBridgeSize,
+  isCorrectCharactor,
+  isCorrectMoveCommand,
+  isCorrectOptionCommand,
+} = require('./Utils/Validation');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -12,8 +16,8 @@ const InputView = {
    */
   readBridgeSize(sendBridge) {
     Console.readLine(INPUT_MESSAGE.start, (size) => {
-      checkBridgeSize(size);
-      sendBridge(size);
+      const isError = isCorrectBridgeSize(Number(size));
+      sendBridge(size, isError);
     });
   },
 
@@ -22,9 +26,8 @@ const InputView = {
    */
   readMoving(sendMoving) {
     Console.readLine(INPUT_MESSAGE.move, (move) => {
-      checkCorrectCharactor(move);
-      checkCorrectCommand(move, INPUT_TYPE.move);
-      sendMoving(move);
+      const isError = isCorrectCharactor(move) || isCorrectMoveCommand(move);
+      sendMoving(move, isError);
     });
   },
 
@@ -33,9 +36,8 @@ const InputView = {
    */
   readGameCommand(checkGameOption) {
     Console.readLine(INPUT_MESSAGE.retry, (command) => {
-      checkCorrectCharactor(command);
-      checkCorrectCommand(command, INPUT_TYPE.retry);
-      checkGameOption(command);
+      const isError = isCorrectCharactor(command) || isCorrectOptionCommand(command);
+      checkGameOption(command, isError);
     });
   },
 

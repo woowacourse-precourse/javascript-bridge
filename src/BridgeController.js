@@ -15,7 +15,8 @@ class BridgeController {
     readBridgeSize(this.sendBridge);
   };
 
-  sendBridge = (size) => {
+  sendBridge = (size, isError) => {
+    if (isError) exit();
     this.#Game.initializeBridge(size);
     this.getMove();
   };
@@ -24,7 +25,8 @@ class BridgeController {
     readMoving(this.sendMove);
   };
 
-  sendMove = (moveInput) => {
+  sendMove = (moveInput, isError) => {
+    if (isError) exit();
     this.#Game.move(moveInput);
     this.sendOutputRequestToModel();
   };
@@ -32,7 +34,6 @@ class BridgeController {
   sendOutputRequestToModel = () => {
     const { bridge } = this.#Game.getStatus();
     const input = this.#Game.getStatus().Input;
-
     const isPassed = isPlayerPassed(input[input.length - 1], bridge[input.length - 1]);
     const isCleared = isPlayerCleared(bridge.length, input.length, isPassed);
     this.#Game.setMoveOutput(isPassed, isCleared);
@@ -56,7 +57,8 @@ class BridgeController {
     readGameCommand(this.checkGameOption);
   };
 
-  checkGameOption = (command) => {
+  checkGameOption = (command, isError) => {
+    if (isError) exit();
     const { count, isCleared, output } = this.#Game.getStatus();
     if (command === INPUT_RETRY.restart) {
       this.#Game.retry();
@@ -75,6 +77,8 @@ class BridgeController {
   };
 }
 
-const controller = new BridgeController();
-controller.getBridge();
+// FOR TEST!!
+// const controller = new BridgeController();
+// controller.getBridge();
+
 module.exports = BridgeController;
