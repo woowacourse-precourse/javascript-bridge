@@ -9,35 +9,34 @@ const RANGE = require('./constants/Range');
 const InputView = {
   readBridgeSize() {
     Console.readLine(REQUEST.BRIDGE_LENGTH, (input) => {
-      Console.print('');
-      InputView.validateLength(input);
-      const bridgeGame = new BridgeGame(Number(input));
-      InputView.readMoving(bridgeGame);
+      try {
+        InputView.validateLength(input);
+      } catch (e) {
+        Console.print(e.message);
+        InputView.readBridgeSize();
+      }
     });
   },
 
   readMoving(game) {
     Console.readLine(REQUEST.MOVE_SPACE, (input) => {
-      InputView.validateMoving(input);
-      const isContinued = game.move(input);
-      OutputView.printMap(game.getResultArrays());
-      if (isContinued) InputView.readMoving(game);
-
-      if (game.isFailed()) InputView.readGameCommand(game);
-      if (game.isFinished()) OutputView.printResult(game);
+      try {
+        InputView.validateMoving(input, game);
+      } catch (e) {
+        Console.print(e.message);
+        InputView.readMoving(game);
+      }
     });
   },
 
   readGameCommand(game) {
     Console.readLine(REQUEST.GAME_RETRY, (input) => {
-      InputView.validateGameCommand(input);
-      if (input === GAME_RETRY) {
-        game.retry();
-        InputView.readMoving(game);
-        return;
+      try {
+        InputView.validateGameCommand(input, game);
+      } catch (e) {
+        Console.print(e.message);
+        InputView.readGameCommand(game);
       }
-      OutputView.printResult(game);
-      Console.close();
     });
   },
 
@@ -45,18 +44,33 @@ const InputView = {
     if (!isNumberInRange(input, RANGE.LENGTH_MIN, RANGE.LENGTH_MAX)) {
       throw new Error(ERROR.INVALID_LENGTH);
     }
+    const bridgeGame = new BridgeGame(Number(input));
+    InputView.readMoving(bridgeGame);
   },
 
-  validateMoving(input) {
+  validateMoving(input, game) {
     if (input !== MOVE.UP && input !== MOVE.DOWN) {
       throw new Error(ERROR.INVALID_MOVE);
     }
+    const isContinued = game.move(input);
+    OutputView.printMap(game.getResultArrays());
+    if (isContinued) InputView.readMoving(game);
+
+    if (game.isFailed()) InputView.readGameCommand(game);
+    if (game.isFinished()) OutputView.printResult(game);
   },
 
-  validateGameCommand(input) {
+  validateGameCommand(input, game) {
     if (input !== GAME_RETRY && input !== GAME_QUIT) {
       throw new Error(ERROR.INVALID_RETRY);
     }
+    if (input === GAME_RETRY) {
+      game.retry();
+      InputView.readMoving(game);
+      return;
+    }
+    OutputView.printResult(game);
+    Console.close();
   },
 };
 
