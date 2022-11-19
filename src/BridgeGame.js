@@ -13,14 +13,11 @@ class BridgeGame {
   }
 
   move(move) {
-    const current = this.#user.length;
-    if (this.#bridge[current] === move) {
-      this.#user.push(move);
-    }
+    this.#user.push(move);
   }
 
   isEnd(move) {
-    const current = this.#user.length;
+    const current = this.#user.length - 1;
     if (this.#bridge[current] !== move) return true;
     return false;
   }
