@@ -1,12 +1,9 @@
 /* eslint-disable max-lines-per-function */
 const BridgeGame = require('../src/BridgeGame');
 
-const mockGenerator = (array) =>
-  array.reduce((acc, value) => acc.mockReturnValueOnce(value), jest.fn());
-
 const makeBridgeGame = (bridge, moveCount) => new BridgeGame(bridge, moveCount);
 
-describe('다리 건너기 게임 테스트', () => {
+describe('BridgeGame 클래스 테스트', () => {
   test('BridgeGame 객체를 만들고, 다리와 이동 횟수를 초기화 한다.', () => {
     const bridgeGame = makeBridgeGame(['U', 'D', 'D', 'U'], 0);
 
@@ -89,5 +86,3 @@ describe('다리 건너기 게임 테스트', () => {
     expect(bridgeGame.getMoveCount()).toEqual(0);
   });
 });
-
-module.exports = { mockGenerator };
