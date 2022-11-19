@@ -43,8 +43,7 @@ class Controller {
   movingDirectionForm(square) {
     try {
       this.validation.isUpOrDown(square);
-      this.setBridge(square);
-      OutputView.printMap(this.#currentBridge);
+      this.checkCurrentStatus(sqaure);
     } catch (error) {
       Console.print(error);
       this.getMovingDirection();
@@ -59,6 +58,12 @@ class Controller {
     this.#currentBridge.up = upBridge;
     this.#currentBridge.down = downBridge;
     this.#correct = correct;
+  }
+
+  checkCurrentStatus(square) {
+    this.setBridge(square);
+    OutputView.printMap(this.#currentBridge);
+    !this.#correct && this.getBridgeCommand();
   }
 }
 
