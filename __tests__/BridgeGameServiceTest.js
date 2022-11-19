@@ -34,10 +34,13 @@ const mockBridgeGameModel = () => {
   jest.spyOn(mock, "checkBridge").mockImplementation((bridge) => {
     return bridge;
   });
-  jest.spyOn(mock, "checkEndGame").mockImplementation((bridge) => {
+  jest.spyOn(mock, "checkUser").mockImplementation((bridge) => {
     return bridge;
   });
-  jest.spyOn(mock, "checkUser").mockImplementation((bridge) => {
+  jest.spyOn(mock, "isEndGame").mockImplementation((bridge) => {
+    return bridge;
+  });
+  jest.spyOn(mock, "isSuccess").mockImplementation((bridge) => {
     return bridge;
   });
   return mock;
