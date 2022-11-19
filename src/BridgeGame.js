@@ -12,10 +12,13 @@ class BridgeGame {
 
   #state;
 
+  #tryCount;
+
   constructor() {
     InputView.readBridgeSize(this);
     this.#bridges = [];
     this.#state = [];
+    this.#tryCount = 1;
   }
 
   makeBridge() {
@@ -34,11 +37,14 @@ class BridgeGame {
   move(position) {
     this.#state.push(position);
     let isPossible = false;
-    if (this.#bridges[this.#state.length - 1] === position) {
-      isPossible = true;
-    }
+    if (this.#bridges[this.#state.length - 1] === position) isPossible = true;
     OutputView.printMap(this.#state, isPossible);
-    if (isPossible) InputView.readMoving(this);
+    if (isPossible) {
+      if (this.#state.length === this.#bridges.length)
+        OutputView.printResult(this.#state, isPossible, this.#tryCount);
+      if (this.#state.length !== this.#bridges.length)
+        InputView.readMoving(this);
+    }
     if (!isPossible) this.retry();
   }
 
