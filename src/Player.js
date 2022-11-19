@@ -1,9 +1,11 @@
 class Player {
-  #passedBridge;
-  #isDead;
+  #position;
 
   constructor() {
-    this.#passedBridge = [];
-    this.#isDead = false;
+    this.#position = 0;
+  }
+
+  move() {
+    this.#position++;
   }
 }
