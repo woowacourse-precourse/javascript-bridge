@@ -2,6 +2,8 @@ const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const OutputView = require("../view/OutputView");
 const InputView = require("../view/InputView");
 const BridgeMaker = require("../BridgeMaker");
+const { MOVING, RETRY } = require("../view/stringsUI");
+const Console = require("../utils/Console");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -49,16 +51,21 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(selectedMove) {
-    const moveResult = this.bridgeModel.crossBridge({
+    const isMove = this.bridgeModel.crossBridge({
       bridgeIndex: this.playerMap.length,
       selectedMove,
     });
-    this.playerMap.push({ selectedMove, moveResult });
+    this.playerMap.push({ selectedMove, isMove });
     OutputView.printMap(this, this.playerMap);
   }
 
   checkNextMove() {
-    this.getPlayerMove();
+    const currMove = this.playerMap[this.playerMap.length - 1];
+    if (currMove.isMove) {
+      this.getPlayerMove();
+    } else {
+      InputView.readGameCommand(this);
+    }
   }
 
   /**
@@ -66,7 +73,23 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.totalTrial += 1;
+    this.playerMap = [];
+    this.getPlayerMove();
+  }
+
+  checkRetry(retry) {
+    if (RETRY[retry]) {
+      this.retry();
+    } else {
+      this.quit();
+    }
+  }
+
+  quit() {
+    OutputView.printResult();
+  }
 }
 
 module.exports = BridgeGame;

@@ -17,6 +17,9 @@ class Validation {
     this.validate({ condition: isMove, message: INPUT_VAL.MOVING_ERROR });
   }
 
-  static inputRetry(string) {}
+  static inputRetry(string) {
+    const isRetry = string === "R" || string === "Q";
+    this.validate({ condition: isRetry, message: INPUT_VAL.RETRY_ERROR });
+  }
 }
 module.exports = Validation;

@@ -28,7 +28,12 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGamePresenter) {
+    Console.readLine(INPUT.GET_RETRY, (retry) => {
+      Validation.inputRetry(retry);
+      bridgeGamePresenter.checkRetry(retry);
+    });
+  },
 };
 
 module.exports = InputView;
