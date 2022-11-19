@@ -9,6 +9,10 @@ const InputView = {
   readMoving(callback) {
     Console.readLine(MESSAGE.ASK_SELECT_MOVE, callback);
   },
+
+  readGameCommand(callback) {
+    Console.readLine(MESSAGE.ASK_RETRY, callback);
+  },
 };
 
 module.exports = InputView;
