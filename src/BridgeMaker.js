@@ -12,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridgeArray = [];
     for (let length = 1; length <= size; length += 1) {
-      const number = generateRandomNumber();
+      const number = generateRandomNumber().toString();
       if (number === BRIDGE_ELEMENT.UP) bridgeArray.push(INPUT_MESSAGE.UP);
       else if (number === BRIDGE_ELEMENT.DOWN)
         bridgeArray.push(INPUT_MESSAGE.DOWN);

@@ -26,7 +26,7 @@ class BridgeGame {
 
   resetSelectedAndPlusTryCnt() {
     this.plusTryCnt();
-    this.#selected = '';
+    this.#selected = [];
   }
 
   getSelected(i) {

@@ -16,6 +16,7 @@ class App {
       InputView.readBridgeSize(this.bridge, this.game);
     } catch (error) {
       Console.print(error);
+      Console.close();
     }
   }
 }
