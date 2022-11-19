@@ -20,4 +20,17 @@ describe("검증 메서드에 대한 테스트를 구현합니다.", () => {
       "[ERROR] end는 start보다 항상 크거나 같아야 합니다."
     );
   });
+
+  test.each([[21], [1], ["A"]])(
+    "다리 길이의 값이 2~20을 초과하거나 숫자가 아닌 경우 에러가 발생합니다.",
+    (input) => {
+      expect(() => Validation.validateBridgeLength(input)).toThrow("[ERROR]");
+    }
+  );
+  test.each([["2"], [20], [10]])(
+    "다리 길이의 값이 2~20을 사이인 경우 해당 숫자 값을 반환합니다.",
+    (input) => {
+      expect(Validation.validateBridgeLength(input)).toBe(Number(input));
+    }
+  );
 });
