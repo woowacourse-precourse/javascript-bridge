@@ -9,6 +9,7 @@ class BridgeGame {
   #copyBridge;
   #moveState = [[], []];
   #retryCount = 1;
+  #isSuccess = '';
   
   constructor(bridgeSize) {
     this.#bridgeSize = bridgeSize;
@@ -73,7 +74,11 @@ class BridgeGame {
     if (
       this.#moveState[0].includes(' X ') || 
       this.#moveState[1].includes(' X ')
-    ) return false;
+    ) {
+      this.#isSuccess = '실패';
+      return false;
+    }
+    this.#isSuccess = '성공';
     return true;
   }
 
@@ -86,6 +91,10 @@ class BridgeGame {
     this.#retryCount += 1;
     this.#copyBridge = this.#bridge.slice();
     this.#moveState = [[], []];
+  }
+
+  getFinalResult() {
+    return [this.#moveState, this.#isSuccess, this.#retryCount];
   }
 }
 

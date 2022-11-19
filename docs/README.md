@@ -18,7 +18,7 @@
 - [x] 이동하고 난 결과를 출력한다. - OutputView#printMap()
 - [x] 건널 다리가 남았고 다리를 건너는데 실패했으면 게임 재시작 여부를 입력받는다. - InputView#readGameCommand()
   - 건널 다리가 남았고 다리를 건너는데 성공했다면 이동할 칸을 입력 받는다.
-- [ ] 다리를 끝까지 건너면 게임의 최종 결과를 정해진 형식에 맞춰 출력한다. - OutputView#printResult()
+- [x] 다리를 끝까지 건너면 게임의 최종 결과를 정해진 형식에 맞춰 출력한다. - OutputView#printResult()
 
 ## 기능 요구 사항
 
