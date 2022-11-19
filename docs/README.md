@@ -55,6 +55,35 @@
 - [x] 유효성 검사를 통한 예외 처리
 - [x] 요구사항에 따라 입력이 잘못된 경우 이후에도 새 입력을 받아 플레이할 수 있도록 함.
 
-### 오류
+### 발견된 오류
 
-- [x] fixed : 실패 후 게임 모드를 고르는 동안 U || D를 입력 시 맵이 새로 만들어짐
+(fixed) ~~실패 후 게임 모드를 고르는 동안 U || D를 입력 시 맵이 새로 만들어짐~~
+
+### 구성
+
+```
+src
+  Error/
+    CheckValidation.js
+  Messages/
+    constants.js
+  Model/
+    BridgeGame.js
+  Views
+    InputView.js
+    OutputView.js
+  App.js
+  BridgeMaker.js
+  BridgeRandomNumberGenerator.js
+```
+
+### 테스트 목록
+
+#### ApplicationTest
+
+`InputView`
+
+- 사이즈 입력 시 문자열
+- 사이즈 입력 시 범위 미만의 수
+- 사이즈 입력 시 범위 초과의 수
+- 사이즈 입력 시 음수
