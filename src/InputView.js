@@ -10,14 +10,14 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize (moveGame, setPattern, makeBridge) {
+  readBridgeSize (moveGame, bridgeMap, makeBridge) {
     Console.readLine(MESSAGE.inputBridgeLength, (size) => {
       try {
-        setPattern(makeBridge(Number(size), generate));
+        bridgeMap.setPattern(makeBridge(Number(size), generate));
         moveGame();
       } catch (error) {
         OutputView.printError(error);
-        this.readBridgeSize(moveGame, setPattern, makeBridge);
+        this.readBridgeSize(moveGame, bridgeMap, makeBridge);
       }
     });
   },
