@@ -39,6 +39,10 @@ const OutputView = {
     Console.print(MESSAGE.START_GAME);
   },
 
+  print(message) {
+    Console.print(message);
+  },
+
   close() {
     Console.close();
   },
