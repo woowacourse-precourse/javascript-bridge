@@ -1,13 +1,12 @@
 // @ts-check
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { GAME_STATUS, BRIDGE } = require('./constants');
+const Bridge = require('./Bridge');
+const { GAME_STATUS } = require('./constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  /** @type {string[]} */
+  /** @type {Bridge} */
   #bridge;
   /** @type {string[]} */
   #inputs;
@@ -18,7 +17,12 @@ class BridgeGame {
    * @param {number} size 입력받은 다리의 길이
    */
   constructor(size) {
-    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.#bridge = new Bridge(size);
+    this.#inputs = [];
+    this.#gameStatus = GAME_STATUS.PROCEEDING;
+  }
+
+  retry() {
     this.#inputs = [];
     this.#gameStatus = GAME_STATUS.PROCEEDING;
   }
@@ -34,65 +38,41 @@ class BridgeGame {
    * @return {resultMap} 출력할 map을 반환
    */
   move(input = null) {
-    if (input && this.#inputs.length < this.#bridge.length) {
+    if (input && this.#bridge.canMoveMore(this.#inputs.length)) {
       this.#inputs.push(input);
     }
-    this.#checkGameEnd();
 
+    this.#refreshGameStatus();
     return this.#getResultMap();
   }
 
-  retry() {
-    this.#inputs = [];
-    this.#gameStatus = GAME_STATUS.PROCEEDING;
-  }
-
-  #checkGameEnd() {
-    if (this.#bridge.length === this.#inputs.length) {
-      this.#gameStatus = GAME_STATUS.END;
-    }
+  #refreshGameStatus() {
+    this.#checkGameEnd();
+    this.#checkGameOver();
   }
 
   /**
    * @return {resultMap} 출력할 map을 반환
    */
   #getResultMap() {
-    const abovePartString = `${BRIDGE.START} ${this.#makeAbovePart()} ${BRIDGE.END}`;
-    const belowPartString = `${BRIDGE.START} ${this.#makeBelowPart()} ${BRIDGE.END}`;
-    const resultToString = `${abovePartString}\n${belowPartString}`;
-
     return {
-      resultToString,
+      resultToString: this.#bridge.getResultToString(this.#inputs),
       gameStatus: this.#gameStatus,
     };
   }
 
-  /**
-   * @return {string} 출력할 map의 윗부분
-   */
-  #makeAbovePart() {
-    const abovePart = this.#inputs.map((input, idx) => {
-      if (input !== BRIDGE.ABOVE) return BRIDGE.BLANK;
-      if (input === this.#bridge[idx]) return BRIDGE.MOVE_SUCCESS;
-      this.#gameStatus = GAME_STATUS.OVER;
-      return BRIDGE.MOVE_FAIL;
-    });
-
-    return abovePart.join(BRIDGE.JOIN);
+  #checkGameEnd() {
+    if (!this.#bridge.canMoveMore(this.#inputs.length)) {
+      this.#gameStatus = GAME_STATUS.END;
+    }
   }
 
-  /**
-   * @return {string} 출력할 map의 아랫부분
-   */
-  #makeBelowPart() {
-    const belowPart = this.#inputs.map((input, idx) => {
-      if (input !== BRIDGE.BELOW) return BRIDGE.BLANK;
-      if (input === this.#bridge[idx]) return BRIDGE.MOVE_SUCCESS;
-      this.#gameStatus = GAME_STATUS.OVER;
-      return BRIDGE.MOVE_FAIL;
-    });
+  #checkGameOver() {
+    const lastInputIdx = this.#inputs.length - 1;
 
-    return belowPart.join(BRIDGE.JOIN);
+    if (!this.#bridge.compare(this.#inputs[lastInputIdx], lastInputIdx)) {
+      this.#gameStatus = GAME_STATUS.OVER;
+    }
   }
 }
 
