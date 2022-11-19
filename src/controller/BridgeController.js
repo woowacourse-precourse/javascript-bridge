@@ -1,4 +1,8 @@
 const BridgeModel = require("../model/BridgeModel");
+const GENERAL_CONSTANTS = require("../constants/GeneralConstants");
+const { BRIDGE_INPUT_MESSAGES } = require("../constants/Messages");
+const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
+const BridgeMaker = require("../BridgeMaker");
 
 class BridgeController {
   constructor(mainController) {
