@@ -18,6 +18,10 @@ class User {
   setTryCount() {
     this.#tryCount += 1;
   }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
 }
 
 module.exports = User;

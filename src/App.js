@@ -59,6 +59,21 @@ class App {
 
   requestRetryGame(retryCommand) {
     try {
+      if (retryCommand === 'Q') {
+        OutputView.printResult(
+          '여기에 유저가 현재까지 건넌 다리 넣어야함\n',
+          this.bridgeGame.isSuccess(),
+          this.bridgeGame.getUserTryCount()
+        );
+        OutputView.gameClose();
+        return;
+      }
+
+      if (retryCommand === 'R') {
+        this.bridgeGame.retry();
+        this.getBridgeMovementDirection();
+      }
+
       this.validator.checkRetryCommand(retryCommand);
       this.getGameOverCommand(this.checkGameOver());
     } catch (errorType) {

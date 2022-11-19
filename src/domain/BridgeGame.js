@@ -29,8 +29,29 @@ class BridgeGame {
     return this.user.getLocation();
   }
 
+  getUserTryCount() {
+    return this.user.getTryCount();
+  }
+
+  checkUserLocation() {
+    const gameMap = this.getCorrectGameMap();
+    const userLocation = this.getUserLocation();
+    if (gameMap.length === userLocation) {
+      return true;
+    }
+    return false;
+  }
+
+  getCorrectGameMap() {
+    return this.gameMap.getCorretGameMap();
+  }
+
   getGameState() {
     return this.gameMap.isGameOver();
+  }
+
+  isSuccess() {
+    return this.getCorrectGameMap.length === this.user.getLocation;
   }
 
   /**
@@ -48,7 +69,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    console.log('게임 오버');
+    this.gameMap.setRetryGame();
   }
 }
 

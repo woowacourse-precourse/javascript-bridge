@@ -6,13 +6,13 @@ const INPUT_MESSAGES = Object.freeze({
 
 const OUTPUT_MESSAGES = Object.freeze({
   gameStart: '다리 건너기 게임을 시작합니다.\n',
-  gameResult: '최종 게임 결과\n',
+  gameResult: '최종 게임 결과',
   tryCount(count) {
     return `총 시도한 횟수: ${count}`;
   },
   successOrFailure(isSuccess) {
-    if (isSuccess) return '\n게임 성공 여부: 성공\n';
-    return '게임 성공 여부: 실패\n';
+    if (isSuccess) return '게임 성공 여부: 성공';
+    return '게임 성공 여부: 실패';
   },
 });
 
