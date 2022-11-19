@@ -38,10 +38,10 @@ class App {
       BridgeMaker.makeBridge,
       this.#myBridgeLength
     );
-    return this.moveBridge();
+    return this.moveLocation();
   }
 
-  moveBridge() {
+  moveLocation() {
     InputView.readMoving((input) => {
       try {
         if (!validCheck.moveInput(input))
@@ -51,7 +51,7 @@ class App {
         return this.moveCorrect();
       } catch (err) {
         OutputView.moveInputError();
-        return this.moveBridge();
+        return this.moveLocation();
       }
     });
   }
@@ -62,7 +62,7 @@ class App {
     if (this.#myBridge.isFinishedGame()) {
       return this.gameWin();
     }
-    return this.moveBridge();
+    return this.moveLocation();
   }
 
   moveNotCorrect() {
@@ -80,7 +80,7 @@ class App {
         const retry = this.#myBridge.retry(input);
         if (retry) {
           this.#myBridge.gameStateChangeSuccess();
-          return this.moveBridge();
+          return this.moveLocation();
         }
         return this.quieGame();
       } catch (err) {
@@ -95,6 +95,7 @@ class App {
     const resultBridge = this.#myBridge.printMyBridge(makePrintBridge);
     OutputView.printMap(resultBridge);
     this.#myBridge.printResultGame(OutputView.printResult);
+    Console.close();
   }
 
   quieGame() {
