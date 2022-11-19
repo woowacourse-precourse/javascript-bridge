@@ -1,4 +1,4 @@
-const { inputUserValue } = require("./utils/index");
+const { inputUserValue, isBridgeLengthValid } = require("./utils/index");
 const { GAME_MESSAGE } = require("./constants/index");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -9,7 +9,7 @@ const InputView = {
    */
   readBridgeSize() {
     inputUserValue(GAME_MESSAGE.INPUT_BRIDGE_LENGTH, (length) => {
-      console.log(length);
+      isBridgeLengthValid(length);
     });
   },
 
