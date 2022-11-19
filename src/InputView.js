@@ -1,5 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { generate } = require('./BridgeRandomNumberGenerator');
 const OutputView = require('./OutputView');
 const Validator = require('./Validator');
 const MESSAGE = require('./utils/Message');
@@ -10,14 +9,13 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize (moveGame, bridgeMap, makeBridge) {
+  readBridgeSize (moveGame, createPattern) {
     Console.readLine(MESSAGE.inputBridgeLength, (size) => {
       try {
-        bridgeMap.setPattern(makeBridge(Number(size), generate));
-        moveGame();
+        createPattern(moveGame, size);
       } catch (error) {
         OutputView.printError(error);
-        this.readBridgeSize(moveGame, bridgeMap, makeBridge);
+        this.readBridgeSize(moveGame, createPattern);
       }
     });
   },
@@ -28,9 +26,7 @@ const InputView = {
   readMoving (retryGame, moveMap) {
     Console.readLine(MESSAGE.inputChooseNextStep, (chooseStep) => {
       try {
-        if (Validator.checkStep(chooseStep)) {
-          moveMap(retryGame, chooseStep);
-        }
+        moveMap(retryGame, chooseStep);
       } catch (error) {
         OutputView.printError(error);
         this.readMoving(retryGame, moveMap);

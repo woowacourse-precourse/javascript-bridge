@@ -2,8 +2,14 @@ const { BRIDGE_CONSTANTS, GAME_CONSTANTS } = require('./utils/constants');
 const ERROR_MESSAGE = require('./utils/ErrorMessage');
 
 class Validator {
+  static validatorBridgeLength (size) {
+    return Validator.isBridgeLengthInRange(size)
+      && Validator.isNumeric(size);
+  }
+
   static isBridgeLengthInRange (size) {
-    if (this.isBridgeLengthMinimum(size)  || this.isBridgeLengthMaximum(size)) {
+    if (this.isBridgeLengthMinimum(size)
+      || this.isBridgeLengthMaximum(size)) {
       throw new Error(ERROR_MESSAGE.bridgeLengthRange);
     }
     return true;
