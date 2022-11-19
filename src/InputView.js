@@ -5,6 +5,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker = require("../src/BridgeMaker");
 const randnum_gen = require("../src/BridgeRandomNumberGenerator");
 const OutputView = require("../src/OutputView");
+const readMoving_impl = () => {
+
+}
 
 const InputView = {
   /**
@@ -30,16 +33,11 @@ const InputView = {
     MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (move_dir) => {
       MissionUtils.Console.print(`${move_dir}`);      
       OutputView.printMap(Game_Bridge, move_dir, curr_loc)
-      if (Game_Bridge[curr_loc] !== move_dir){
-        //다리를 맞추는데 실패한 경우
+      if (Game_Bridge[curr_loc] !== move_dir){//다리를 맞추는데 실패한 경우        
         this.readGameCommand(Game_Bridge, curr_loc, retry_cnt)
-      } else if (Game_Bridge[curr_loc] === move_dir) {
-        //다리를 맞추는데 성공한 경우         
-        if (curr_loc+1 === Game_Bridge.length){
-          OutputView.printResult(Game_Bridge, curr_loc, retry_cnt)
-        } else {
-          this.readMoving(Game_Bridge, curr_loc+1, retry_cnt)
-        }
+      } else if (Game_Bridge[curr_loc] === move_dir) {//다리를 맞추는데 성공한 경우        
+        curr_loc+1 === Game_Bridge.length? OutputView.printResult(Game_Bridge, curr_loc, retry_cnt)
+        : this.readMoving(Game_Bridge, curr_loc+1, retry_cnt)        
       }      
     });
   },
