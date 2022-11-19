@@ -5,6 +5,7 @@ const BridgeGame = require('./BridgeGame');
 const OutputView = require('./views/OutputView');
 const InputView = require('./views/InputView');
 const { MESSAGE } = require('./constant');
+const Validator = require('./Validator');
 
 class GameController {
   #bridgeGame;
@@ -26,6 +27,7 @@ class GameController {
   }
 
   handleSize(size) {
+    Validator.sizeValidityCheck(size);
     const bridge = makeBridge(size, generate);
     this.#bridgeGame = new BridgeGame(bridge);
     this.askDirection();
