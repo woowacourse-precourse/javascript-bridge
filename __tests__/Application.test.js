@@ -218,10 +218,21 @@ describe('배열 범위 추출 함수 테스트', () => {
 
   test('참조 대상이 배열이 아니라면 예외를 발생시킨다.', () => {
     const EXPECTED1 = '3';
-    const EXPECTED2 = 3;
+    const EXPECTED2 = 0;
+    const EXPECTED3 = 3;
 
     expect(() => {
-      Application.extractArrayRange(EXPECTED1, EXPECTED2);
+      Application.extractArrayRange(EXPECTED1, EXPECTED2, EXPECTED3);
     }).toThrow(VALIDATION_ARRAY_TEXT);
+  });
+
+  test('범위를 지정하는 인수가 숫자가 아니라면 예외를 발생시킨다.', () => {
+    const EXPECTED1 = [1, 2, 3, 4, 5];
+    const EXPECTED2 = '0';
+    const EXPECTED3 = '3';
+
+    expect(() => {
+      Application.extractArrayRange(EXPECTED1, EXPECTED2, EXPECTED3);
+    }).toThrow(NUMBER_ERROR_TEXT);
   });
 });
