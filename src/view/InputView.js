@@ -20,14 +20,18 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(MESSAGE.ASK_BRIDGE_LENGTH, (sizeInput) => {
-      try {
-        Console.print("");
-        this.createRandomBridge(sizeInput);
-      } catch (err) {
-        Console.print(err);
-        this.readBridgeSize();
-      }
+      this.setSize(sizeInput);
     });
+  },
+
+  setSize(sizeInput) {
+    try {
+      Console.print("");
+      this.createRandomBridge(sizeInput);
+    } catch (err) {
+      Console.print(err);
+      this.readBridgeSize();
+    }
   },
 
   createRandomBridge(sizeInput) {
@@ -45,13 +49,17 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(MESSAGE.ASK_WHERE_WANT_TO_GO, (wantGo) => {
-      try {
-        this.calculatePlayerMove(wantGo);
-      } catch (err) {
-        Console.print(err);
-        this.readMoving();
-      }
+      this.setMove(wantGo);
     });
+  },
+
+  setMove(wantGo) {
+    try {
+      this.calculatePlayerMove(wantGo);
+    } catch (err) {
+      Console.print(err);
+      this.readMoving();
+    }
   },
 
   calculatePlayerMove(wantGo) {
@@ -85,13 +93,17 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(MESSAGE.ASK_RETRY_OR_QUIT, (command) => {
-      try {
-        this.decideRetryOrQuit(command);
-      } catch (err) {
-        Console.print(err);
-        this.readGameCommand();
-      }
+      this.setCommand(command);
     });
+  },
+
+  setCommand(command) {
+    try {
+      this.decideRetryOrQuit(command);
+    } catch (err) {
+      Console.print(err);
+      this.readGameCommand();
+    }
   },
 
   decideRetryOrQuit(command) {
