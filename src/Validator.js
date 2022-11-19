@@ -1,12 +1,11 @@
 const { BRIDGE_STRING, GAME_COMMAND_STRING } = require('./constants');
 
 const Validator = {
-  NUMBER_STRING: '0123456789',
   MIN_SIZE: 3,
   MAX_SIZE: 20,
 
   checkBridgeSize(input) {
-    const isNumber = (character) => Validator.NUMBER_STRING.includes(character);
+    const isNumber = (character) => '0123456789'.includes(character);
     if (input.split('').every(isNumber) === false) {
       throw new Error('다리 길이는 정수만 입력해야 합니다.');
     }
