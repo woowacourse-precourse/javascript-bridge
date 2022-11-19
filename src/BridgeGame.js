@@ -23,10 +23,7 @@ class BridgeGame {
   }
 
   makeBridge(size) {
-    this.bridgeModel = this.bridgeMaker.generateBridgeModel(
-      size,
-      this.bridgeRandomNumberGenerator.generate
-    );
+    this.bridgeModel(this.bridgeMaker.makeBridge(size, bridgeRandomNumberGenerator.generator));
 
     console.log(`makeBridge 결과: ${this.bridgeModel.bridge}`);
     this.askMoveDirection();

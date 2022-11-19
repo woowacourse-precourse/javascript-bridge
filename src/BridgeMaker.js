@@ -4,10 +4,6 @@ const BridgeModel = require('./BridgeModel');
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
 const BridgeMaker = {
-  generateBridgeModel(size, generateRandomNumber) {
-    return new BridgeModel(this.makeBridge(size, generateRandomNumber));
-  },
-
   /**
    * @param {number} size 다리의 길이
    * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
