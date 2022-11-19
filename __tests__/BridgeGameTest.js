@@ -62,6 +62,16 @@ describe('다리 건너기 게임 테스트', () => {
     expect(upsideBridge).toEqual([' ', 'O', 'O']);
     expect(downsideBridge).toEqual(['O', ' ', ' ']);
   });
+
+  test('이동 실패한 다리에 X로 표시한다.', () => {
+    const bridgeGame = makeBridgeGame(['D', 'U', 'D'], 2);
+    const upsideBridge = [' ', 'O'];
+    const downsideBridge = ['O', ' '];
+    const failBridge = bridgeGame.getFailureBridge({ upsideBridge, downsideBridge });
+
+    expect(failBridge.upsideBridge).toEqual([' ', 'O', 'X']);
+    expect(failBridge.downsideBridge).toEqual(['O', ' ', ' ']);
+  });
 });
 
 module.exports = { mockGenerator };
