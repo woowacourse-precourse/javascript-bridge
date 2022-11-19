@@ -13,4 +13,13 @@ const isValidateDirection = (direction) => {
     throw '[ERROR] U 또는 D만 입력할 수 있습니다.';
 };
 
-module.exports = { isValidateBridgeSize, isValidateDirection };
+const isValidateCommand = (command) => {
+  if (command !== 'R' && command !== 'Q')
+    throw '[ERROR] R 또는 Q만 입력할 수 있습니다.';
+};
+
+module.exports = {
+  isValidateBridgeSize,
+  isValidateDirection,
+  isValidateCommand,
+};

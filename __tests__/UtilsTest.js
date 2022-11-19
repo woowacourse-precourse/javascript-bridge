@@ -1,6 +1,7 @@
 const {
   isValidateBridgeSize,
   isValidateDirection,
+  isValidateCommand,
 } = require('../src/utils/validation');
 
 describe('유틸 함수 테스트', () => {
@@ -23,5 +24,12 @@ describe('유틸 함수 테스트', () => {
     expect(() => {
       isValidateDirection(input);
     }).toThrow('[ERROR] U 또는 D만 입력할 수 있습니다.');
+  });
+
+  test('사용자 게임 진행 여부 유효성 검사 테스트', () => {
+    const input = 'X';
+    expect(() => {
+      isValidateCommand(input);
+    }).toThrow('[ERROR] R 또는 Q만 입력할 수 있습니다.');
   });
 });
