@@ -4,6 +4,7 @@ const BridgeGame = require('./BridgeGame');
 
 class App {
   #bridge;
+  #userInput = [];
 
   play() {
     OutputView.printInit();
@@ -12,8 +13,19 @@ class App {
 
   initGame(bridgeLength) {
     this.#bridge = new BridgeGame(bridgeLength);
+    this.getMove();
   }
 
+  getMove(){
+    InputView.readMoving(this);
+  }
+
+  proceedGame(input) {
+    this.#userInput.push(input);
+    const printResult = this.#bridge.makeBridgeString(this.#userInput);
+    OutputView.printMap(printResult);
+    
+  }
 }
 
 const app = new App();

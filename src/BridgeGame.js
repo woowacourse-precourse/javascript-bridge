@@ -7,7 +7,7 @@ const { REQUIREMENT } = require('./constant/Constant');
  */
 class BridgeGame {
   #bridge;
-  
+
   constructor(bridgeLength) {
     this.#bridge = makeBridge(bridgeLength, this.generateRandomNumber);
     console.log(this.#bridge);
@@ -22,6 +22,41 @@ class BridgeGame {
 
     return REQUIREMENT.UP;
   }
+
+  makeBridgeString(userInput) {
+    const letter = [REQUIREMENT.UP, REQUIREMENT.DOWN];
+    let strArray = [];
+
+    letter.forEach((ele) => {
+      strArray.push(`${REQUIREMENT.BRIDGESTART}${this.makeEachMap(this.#bridge, userInput, ele)}${REQUIREMENT.BRIDGEEND}`);
+    });
+
+    return strArray;
+  }
+
+  makeEachMap(bridge, input, letter) {
+    let str = '';
+    input.forEach((cur, idx) => {
+      str += ` ${this.checkBlock(bridge[idx], cur, letter)} `;
+      if (idx !== input.length - 1) {
+        str += REQUIREMENT.BRIDGEDELIMETER;
+      }
+    });
+
+    return str;
+  }
+
+  checkBlock(block, cur, letter) {
+    if (cur !== letter) {
+      return ' ';
+    }
+    if (block === letter) {
+      return REQUIREMENT.CANMOVE;
+    }
+
+    return REQUIREMENT.CANNOTMOVE;
+  }
+  
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
