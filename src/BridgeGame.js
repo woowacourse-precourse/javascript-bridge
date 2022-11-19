@@ -71,6 +71,23 @@ class BridgeGame {
     return;
   }
 
+  checkSuccessFail() {
+    if (
+      this.#moveResult === VALUE.SUCCESS &&
+      this.#playerAt === this.#bridge.length
+    ) {
+      this.#gameStatus = STATUS.SUCCESS;
+      this.#gameWin = true;
+      return;
+    }
+    if (this.#moveResult === VALUE.SUCCESS) {
+      this.#gameStatus = STATUS.NEXT;
+      return;
+    }
+    this.#gameStatus = STATUS.FAIL;
+    this.#gameWin = false;
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
