@@ -24,19 +24,33 @@ const InputView = {
     }
   },
 
-  readBridgeSize() {
+  readBridgeSize(bridge, bridgeGame) {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (size) => {
       this.checkBridgeSize(size);
-      const bridge = new Bridge();
       bridge.setBridge(size);
       console.log(bridge.getBridge());
+
+      this.readMoving(bridge, bridgeGame);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  isUorD(string) {
+    if (!(string === "U" || string === "D")) {
+      throw new Error("[ERROR] U나 D");
+    }
+  },
+
+  readMoving(bridge, bridgeGame) {
+    MissionUtils.Console.readLine(
+      "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+      (movement) => {
+        this.isUorD(movement);
+      }
+    );
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
