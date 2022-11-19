@@ -1,7 +1,6 @@
 const { MESSAGE_ERROR } = require('../constants/messages');
 const { REG_EXP } = require('../constants/values');
 const { BRIDGE_GAME } = require('../constants/values');
-const Console = require('./Console');
 
 const Validator = {
   MIN_BRIDGE_SIZE: 3,

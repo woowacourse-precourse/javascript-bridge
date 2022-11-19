@@ -136,46 +136,40 @@ describe('다리 건너기 테스트', () => {
     });
   });
 
-  test('다리 길이 입력 예외 테스트', () => {
-    const inputs = [
-      ['a'],
-      ['1'],
-      ['2'],
-      ['21'],
-      ['22'],
-      ['23'],
-      ['ㅁ'],
-      [';'],
-      [''],
-      [0],
-      [true],
-      [false],
-    ];
-
-    inputs.forEach(input => runException(input));
+  test.each([
+    ['a'],
+    ['1'],
+    ['2'],
+    ['21'],
+    ['22'],
+    ['23'],
+    ['ㅁ'],
+    [';'],
+    [''],
+    [0],
+    [true],
+    [false],
+  ])('다리 길이 입력 예외 테스트', input => {
+    runException([input]);
   });
 
-  test('이동 방향 입력 예외 테스트', () => {
-    const inputs = [
-      ['3', 1],
-      ['3', 'u'],
-      ['3', 'ㅕ'],
-      ['3', 'd'],
-      ['3', 'ㅇ'],
-    ];
-
-    inputs.forEach(input => runException(input));
+  test.each([
+    ['3', 1],
+    ['3', 'u'],
+    ['3', 'ㅕ'],
+    ['3', 'd'],
+    ['3', 'ㅇ'],
+  ])('이동 방향 입력 예외 테스트', (size, direction) => {
+    runException([size, direction]);
   });
 
-  test('재시작 입력 예외 테스트', () => {
+  test.each([
+    ['3', 'D', 'r'],
+    ['3', 'D', 'ㄱ'],
+    ['3', 'D', 'q'],
+    ['3', 'D', 'ㅂ'],
+  ])('재시작 입력 예외 테스트', (size, direction, select) => {
     mockRandoms(['1', '0', '1']);
-    const inputs = [
-      ['3', 'D', 'r'],
-      ['3', 'D', 'ㄱ'],
-      ['3', 'D', 'q'],
-      ['3', 'D', 'ㅂ'],
-    ];
-
-    inputs.forEach(input => runException(input));
+    runException([size, direction, select]);
   });
 });

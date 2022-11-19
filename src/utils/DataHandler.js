@@ -1,12 +1,12 @@
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const { BRIDGE_MAKER } = require('../constants/values');
 
-const Convertor = {
+const DataHandler = {
   convertStringToDecimalNumber(string) {
     return parseInt(string, 10);
   },
 
-  convertRandomNumberToString() {
+  makeZeroOrOne() {
     const num = BridgeRandomNumberGenerator.generate();
     if (typeof num === 'string') {
       return num;
@@ -16,4 +16,4 @@ const Convertor = {
   },
 };
 
-module.exports = Convertor;
+module.exports = DataHandler;
