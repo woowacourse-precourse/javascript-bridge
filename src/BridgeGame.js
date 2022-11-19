@@ -1,20 +1,49 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+const MissionUtils = require('@woowacourse/mission-utils');
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+const { Console } = MissionUtils;
+
+let instance = null;
+
+class BridgeGame {
+  #turn;
+
+  #bridge;
+
+  constructor() {
+    if (instance) return instance;
+    this.#bridge = [];
+    this.init();
+  }
+
+  init() {
+    this.#turn = -1;
+    instance = this;
+  }
+
+  setTurn(value) {
+    this.#turn = value;
+  }
+
+  getBridge() {
+    return this.#bridge;
+  }
+
+  setBridge(value) {
+    this.#bridge = value;
+  }
+
+  move(command) {
+    this.setTurn(this.#turn + 1);
+    return this.#bridge[this.#turn] === command;
+  }
+
+  retry(command) {
+    if (command === 'R') {
+      this.init();
+      return true;
+    }
+    Console.close();
+  }
 }
 
 module.exports = BridgeGame;
