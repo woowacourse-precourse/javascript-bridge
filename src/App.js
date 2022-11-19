@@ -23,10 +23,12 @@ class App {
             BridgeRandomNumberGenerator
         );
         this.GAME.set(this.BRIDGE);
+        this.move();
     }
-    // async move() {
-    //     const direction = await InputView.readMoving();
-    // }
+    async move() {
+        const direction = await InputView.readMoving();
+        let result = this.GAME.move(direction);
+    }
 }
 
 module.exports = App;
