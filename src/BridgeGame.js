@@ -1,4 +1,3 @@
-const { MissionUtils } = require('@woowacourse/mission-utils');
 const GameProgress = require('./IO/GameProgress');
 const InputView = require('./IO/InputView');
 const BridgeError = require('./Error/BridgeError');
@@ -16,7 +15,10 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
  * 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
  */
 class BridgeGame {
-  #bridgeErrorMessages = ['[ERROR] 유효하지 않은 다리 길이입니다.'];
+  #bridgeErrorMessages = [
+    '[ERROR] 유효하지 않은 다리 길이입니다.',
+    '[ERROR] U 또는 D를 입력하세요.',
+  ];
 
   #bridgeMoveCount = 0;
 
@@ -43,6 +45,9 @@ class BridgeGame {
   };
 
   validateBridgeMove = (input) => {
+    const IS_VALID_MOVING = /^U|D$/.test(input);
+    BridgeError.throwErrorHandler(this.#bridgeErrorMessages[1], !IS_VALID_MOVING);
+    // print the result after moving...
     if (this.#bridgeMoveCount < this.#bridge.length) {
       this.#bridgeMoveCount += 1;
       InputView.readMoving(this.validateBridgeMove);

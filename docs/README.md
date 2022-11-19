@@ -197,9 +197,10 @@ Q
     - `InputView` 객체의 `readMoving` 메서드에서 문구를 출력하고 입력을 받는다.
     - `readMoving`는 파라미터로 콜백함수 `validateBridgeMove`를 받고 다리의 길이만큼 반복한다. 
 
-- [ ] 이동할 칸 입력 예외 처리하기
+- [x] 이동할 칸 입력 예외 처리하기
 
     - U 또는 D 값이 아니면 예외처리한다.
+    - `BridgeGame` 클래스에서 유효한 입력인지 확인하고 `BridgeError` 객체에서 에러를 처리한다.
 
     ```bash
     // 예외 1. 
