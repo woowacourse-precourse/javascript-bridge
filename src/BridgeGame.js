@@ -10,6 +10,7 @@ class BridgeGame {
   constructor() {
     this.bridge = [];
     this.size = 0;
+    this.moving = "";
   }
 
   play() {
@@ -38,6 +39,7 @@ class BridgeGame {
 
   readMove() {
     OutputView.pickMoveSentence();
+    this.moving = InputView.readMoving();
   }
 
   /**
