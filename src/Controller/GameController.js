@@ -18,6 +18,11 @@ class GameController {
     this.#bridgeGame.setBridgeSize(size);
     this.makeBridge();
   }
+
+  makeBridge() {
+    this.#bridgeGame.makeBridge();
+    this.readDirection();
+  }
 }
 
 const gc = new GameController();

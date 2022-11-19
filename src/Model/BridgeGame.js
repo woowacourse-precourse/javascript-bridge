@@ -1,4 +1,6 @@
+const BridgeMaker = require('../BridgeMaker');
 const NUMBER = require('../../constants/numbers');
+const { generate } = require('../BridgeRandomNumberGenerator');
 
 // 어떤 변수를 static으로 관리할 수 있을까?
 // 다리 건너기 게임을 관리하는 클래스
@@ -8,16 +10,27 @@ class BridgeGame {
 
   #bridge;
 
+  #playCount;
+
   #index;
 
   #path;
 
   constructor() {
-    this.#size = NUMBER.ZERO;
+    this.#size = 0;
+    this.#playCount = NUMBER.ONE;
+    this.#bridge = {};
+    this.#path = [];
+    this.#index = NUMBER.ZERO;
   }
 
   setBridgeSize(size) {
     this.#size = size;
+  }
+
+  makeBridge() {
+    this.#path = BridgeMaker.makeBridge(this.#size, generate);
+    this.initBridge();
   }
 
   // 사용자가 칸을 이동할 때 사용하는 메서드
