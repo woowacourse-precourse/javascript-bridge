@@ -48,9 +48,9 @@ const InputView = {
   readGameCommand() {
     Console.readLine(MESSAGE.INPUT_BRIDGE_RESTART, (ask) => {
       try {
-        bridgeReadCommandGo(ask);
+        this.bridgeReadCommandGo(ask);
       } catch (error) {
-        bridgeReadCommandRetry(error);
+        this.bridgeReadCommandRetry(error);
       }
     });
   },
@@ -94,6 +94,11 @@ const InputView = {
 
   bridgeReadCommandGo(ask) {
     printRetryError(checkRetry(ask));
+    if (this.bridgeGame.retry(ask)) {
+      this.readMoving();
+      return;
+    }
+    OutputView.printResult(this.bridgeGame.returnUpDownTryCountArray(this.bridge.getBridge()));
   },
 
   bridgeReadCommandRetry(error) {
