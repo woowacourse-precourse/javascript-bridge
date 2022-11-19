@@ -25,13 +25,13 @@ class BridgeGameController {
     readMoving((input) => (isValidRound(input) ? this.startRound(input) : this.checkRound()));
   }
 
-  startRound(square) {
-    const valid = this.#BridgeGame.move(square).isValidateSquare();
-    printMap(this.#BridgeGame.makeMiddleBridge());
+  startRound(space) {
+    const spaceExistence = this.#BridgeGame.move(space).isRightSpace();
+    printMap(this.#BridgeGame.makeBridgeFormat());
     if (this.#BridgeGame.isEnd()) {
       return this.result();
     }
-    return valid ? this.checkRound() : this.checkRetry();
+    return spaceExistence ? this.checkRound() : this.checkRetry();
   }
 
   checkRetry() {

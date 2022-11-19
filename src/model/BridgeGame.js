@@ -1,5 +1,6 @@
 const { generate } = require('../BridgeRandomNumberGenerator');
 const { makeBridge } = require('../BridgeMaker');
+const { COMMAND } = require('../constants/Messages');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -9,7 +10,11 @@ class BridgeGame {
 
   constructor(size) {
     this.#bridge = makeBridge(size, generate);
-    this.userBridge = [];
+    this.userBridge = {
+      command: [],
+      up: [],
+      down: [],
+    };
     this.tryCount = 1;
   }
 
@@ -18,42 +23,36 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(square) {
-    this.userBridge.push(square);
+  move(space) {
+    this.userBridge.command.push(space);
+    const spaceResult = this.isRightSpace(space) ? 'O' : 'X';
+    return space === COMMAND.up ? this.makeUpBridge(spaceResult) : this.makeDownBridge(spaceResult);
+  }
+
+  makeUpBridge(spaceResult) {
+    this.userBridge.up.push(spaceResult);
+    this.userBridge.down.push(' ');
     return this;
   }
 
-  isValidateSquare() {
-    const bridgePiece = this.#bridge.slice(0, this.userBridge.length);
-    return JSON.stringify(this.userBridge) === JSON.stringify(bridgePiece);
+  makeDownBridge(spaceResult) {
+    this.userBridge.up.push(' ');
+    this.userBridge.down.push(spaceResult);
+    return this;
+  }
+
+  isRightSpace() {
+    const bridgePiece = this.#bridge.slice(0, this.userBridge.command.length);
+    return JSON.stringify(this.userBridge.command) === JSON.stringify(bridgePiece);
   }
 
   isEnd() {
-    return JSON.stringify(this.userBridge) === JSON.stringify(this.#bridge);
+    return JSON.stringify(this.userBridge.command) === JSON.stringify(this.#bridge);
   }
 
-  makeMiddleBridge() {
-    const upBridge = [];
-    const downBridge = [];
-    this.userBridge.forEach((square) => {
-      if (square === 'U') {
-        upBridge.push('O');
-        downBridge.push(' ');
-        return;
-      }
-      upBridge.push(' ');
-      downBridge.push('O');
-    });
-    if (!this.isValidateSquare()) {
-      if (this.userBridge[upBridge.length - 1] === 'U') {
-        upBridge[upBridge.length - 1] = 'X';
-        return { upBridge, downBridge };
-      }
-      if (this.userBridge[downBridge.length - 1] === 'D') {
-        downBridge[downBridge.length - 1] = 'X';
-        return { upBridge, downBridge };
-      }
-    }
+  makeBridgeFormat() {
+    const upBridge = this.userBridge.up.join(' | ');
+    const downBridge = this.userBridge.down.join(' | ');
     return { upBridge, downBridge };
   }
 
@@ -65,15 +64,21 @@ class BridgeGame {
   retry(input) {
     if (input === 'R') {
       this.tryCount += 1;
-      this.userBridge = [];
+      this.initializeUserBridge();
       return true;
     }
     return false;
   }
 
+  initializeUserBridge() {
+    this.userBridge.command = [];
+    this.userBridge.up = [];
+    this.userBridge.down = [];
+  }
+
   getResult() {
-    const bridge = this.makeMiddleBridge();
-    const result = this.isValidateSquare() ? '성공' : '실패';
+    const bridge = this.makeBridgeFormat();
+    const result = this.isEnd() ? '성공' : '실패';
     const count = this.tryCount;
     return { bridge, result, count };
   }
