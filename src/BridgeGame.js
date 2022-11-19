@@ -21,10 +21,11 @@ class BridgeGame {
     for (let i = 0; i < bridge_size; i++) {
       //bridge size만큼 이동
       move = InputVIew.readMoving(); //U or D 입력받음
+      this.current_moving.push(move);
       if (move === bridge_information[i]) {
         //checking
         //제대로 이동
-        this.current_moving.push(move);
+
         OutputView.printMap(this.current_moving, true); //move -> 'U'  or  'D'
       } else {
         //제대로 이동 못함

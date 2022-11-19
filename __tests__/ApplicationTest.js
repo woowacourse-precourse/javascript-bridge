@@ -106,7 +106,7 @@ describe('다리 건너기 테스트', () => {
   });
 
   //게임 종료 테스트케이스
-  test('재시작 기능 테스트', () => {
+  test('종료 기능 테스트', () => {
     const logSpy = getLogSpy();
     mockRandoms(['1', '0', '0']);
     mockQuestions(['3', 'U', 'U', 'Q']);
