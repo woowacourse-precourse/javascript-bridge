@@ -6,6 +6,7 @@ class WinningBridge {
   #winningBridge;
 
   validate(size) {
+    Validation.checkBlank(size);
     Validation.checkNumberType(size);
     Validation.checkRange(size);
   }

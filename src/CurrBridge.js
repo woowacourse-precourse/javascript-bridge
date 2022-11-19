@@ -5,6 +5,7 @@ class CurrBridge {
   #lowerBridge = [];
 
   validate(direction) {
+    Validation.checkBlank(direction);
     Validation.checkStringType(direction);
     Validation.checkUpperCase(direction);
     Validation.checkValidDirection(direction);

@@ -9,6 +9,10 @@ const Validation = {
     if (!Number.isNaN(Number(input))) throw ERROR.mustBeString;
   },
 
+  checkLength(input) {
+    if (input.length === 0) throw ERROR.mustNotBeBlank;
+  },
+
   checkRange(input) {
     if (input < 3 || input > 20) throw ERROR.mustBeInRange;
   },
