@@ -3,7 +3,12 @@ const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
-const { MARKING_PASS, MESSAGE_GAME_SUCCESS } = require("./Utils");
+const {
+  MARKING_PASS,
+  MESSAGE_GAME_SUCCESS,
+  MESSAGE_GAME_FAILURE,
+  GAME_COMMAND_RETRY,
+} = require("./Utils");
 const { Console } = require("@woowacourse/mission-utils");
 
 class App {
@@ -34,7 +39,17 @@ class App {
 
   play() {}
 
-  replayOrQuit() {}
+  async replayOrQuit() {
+    const gameCommand = await InputView.readGameCommand();
+    if (gameCommand === GAME_COMMAND_RETRY) {
+      this.increasePlayCount();
+      this.#bridgeGame.retry();
+      OutputView.retry();
+      this.progress;
+    }
+    OutputView.printResult(MESSAGE_GAME_FAILURE, this.#playCount);
+    this.quit();
+  }
 
   quit() {
     Console.close();
