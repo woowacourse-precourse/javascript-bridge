@@ -15,11 +15,7 @@ class BridgeGame {
   #status;
 
   setUp(bridgeLength) {
-    // TODO: validation of bridge length
-    this.#bridgeAnswer = BridgeMaker.makeBridge(
-      Number(bridgeLength),
-      BridgeRandomNumberGenerator.generate
-    );
+    this.makeBridge(Number(bridgeLength));
     this.#bridgeMap = { U: [], D: [] };
     this.#stepCount = 0;
     this.#status = {
@@ -29,13 +25,14 @@ class BridgeGame {
     };
   }
 
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+  makeBridge(bridgeLength) {
+    this.#bridgeAnswer = BridgeMaker.makeBridge(
+      bridgeLength,
+      BridgeRandomNumberGenerator.generate
+    );
+  }
+
   move(playerMoving) {
-    // TODO: validation of player moving
     const isCorrect = this.isCorrectStep(playerMoving);
     this.updateBridgeMap(playerMoving, isCorrect);
     this.updateStatus(isCorrect);
@@ -49,24 +46,30 @@ class BridgeGame {
   }
 
   updateBridgeMap(playerMoving, isCorrect) {
-    const oppositeDirection = OPPOSITE_DIRECTION[playerMoving];
     if (isCorrect) {
-      this.#bridgeMap[playerMoving].push('O');
-      this.#bridgeMap[oppositeDirection].push(' ');
-    } else {
-      this.#bridgeMap[playerMoving].push('X');
-      this.#bridgeMap[oppositeDirection].push(' ');
+      return this.markBridgeMap(playerMoving, 'O');
     }
+    return this.markBridgeMap(playerMoving, 'X');
+  }
+
+  markBridgeMap(playerMoving, mark) {
+    const oppositeDirection = OPPOSITE_DIRECTION[playerMoving];
+    this.#bridgeMap[playerMoving].push(mark);
+    this.#bridgeMap[oppositeDirection].push(' ');
   }
 
   updateStatus(isCorrect) {
     this.#stepCount += 1;
     if (isCorrect) {
-      if (this.#stepCount === this.#bridgeAnswer.length) {
-        this.#status.isSuccess = true;
-        this.#status.isFinished = true;
-      }
+      this.checkSuccess();
     } else {
+      this.#status.isFinished = true;
+    }
+  }
+
+  checkSuccess() {
+    if (this.#stepCount === this.#bridgeAnswer.length) {
+      this.#status.isSuccess = true;
       this.#status.isFinished = true;
     }
   }
@@ -79,11 +82,6 @@ class BridgeGame {
     return this.#status;
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   retry() {
     this.#bridgeMap.U.pop();
     this.#bridgeMap.D.pop();

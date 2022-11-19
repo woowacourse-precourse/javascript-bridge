@@ -24,11 +24,12 @@ class App {
   moveOne(playerMoving) {
     this.#bridgeGame.move(playerMoving);
     OutputView.printMap(this.#bridgeGame.getBridgeMap());
+    return this.checkStatus();
+  }
+
+  checkStatus() {
     if (this.checkIsSuccess()) {
-      return OutputView.printResult(
-        this.#bridgeGame.getBridgeMap(),
-        this.#bridgeGame.getStatus()
-      );
+      return this.finishGame();
     }
     if (this.checkIsFinished()) {
       return this.askRetry();
@@ -55,7 +56,11 @@ class App {
       this.#bridgeGame.retry();
       return this.askMove();
     }
-    return OutputView.printResult(
+    return this.finishGame();
+  }
+
+  finishGame() {
+    OutputView.printResult(
       this.#bridgeGame.getBridgeMap(),
       this.#bridgeGame.getStatus()
     );

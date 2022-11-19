@@ -9,49 +9,52 @@ const { MESSAGE } = require('./Constants');
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
   readBridgeSize(startGame) {
-    Console.readLine(MESSAGE.bridgeSize, (bridgeLength) => {
-      try {
-        validateBridgeSize(bridgeLength);
-        startGame(bridgeLength);
-      } catch (e) {
-        Console.print(e);
-        this.readBridgeSize(startGame);
-      }
-    });
+    Console.readLine(MESSAGE.bridgeSize, (bridgeLength) =>
+      this.tryToStartGame(bridgeLength, startGame)
+    );
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
+  tryToStartGame(bridgeLength, startGame) {
+    try {
+      validateBridgeSize(bridgeLength);
+      startGame(bridgeLength);
+    } catch (e) {
+      Console.print(e);
+      this.readBridgeSize(startGame);
+    }
+  },
+
   readMoving(moveOne) {
-    Console.readLine(MESSAGE.direction, (direction) => {
-      try {
-        validateDirection(direction);
-        moveOne(direction);
-      } catch (e) {
-        Console.print(e);
-        this.readMoving(moveOne);
-      }
-    });
+    Console.readLine(MESSAGE.direction, (direction) =>
+      this.tryToMoveOne(direction, moveOne)
+    );
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
+  tryToMoveOne(direction, moveOne) {
+    try {
+      validateDirection(direction);
+      moveOne(direction);
+    } catch (e) {
+      Console.print(e);
+      this.readMoving(moveOne);
+    }
+  },
+
   readGameCommand(checkRetry) {
-    Console.readLine(MESSAGE.retry, (command) => {
-      try {
-        validateGameCommand(command);
-        checkRetry(command);
-      } catch (e) {
-        Console.print(e);
-        this.readGameCommand(checkRetry);
-      }
-    });
+    Console.readLine(MESSAGE.retry, (command) =>
+      this.tryToCheckRetry(command, checkRetry)
+    );
+  },
+
+  tryToCheckRetry(command, checkRetry) {
+    try {
+      validateGameCommand(command);
+      checkRetry(command);
+    } catch (e) {
+      Console.print(e);
+      this.readGameCommand(checkRetry);
+    }
   },
 };
 

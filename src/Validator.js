@@ -1,18 +1,25 @@
 const { SIZE_RANGE_INCLUSIVE, ERROR } = require('./Constants');
 
-const validateBridgeSize = (bridgeSizeString) => {
-  const bridgeSize = Number(bridgeSizeString);
+const validateType = (bridgeSize) => {
   if (!bridgeSize) {
     throw ERROR.bridgeSizeType;
   }
-  if (
-    !(
-      bridgeSize >= SIZE_RANGE_INCLUSIVE.lower &&
-      bridgeSize <= SIZE_RANGE_INCLUSIVE.upper
-    )
-  ) {
+};
+
+const isValidRange = (bridgeSize) =>
+  bridgeSize >= SIZE_RANGE_INCLUSIVE.lower &&
+  bridgeSize <= SIZE_RANGE_INCLUSIVE.upper;
+
+const validateRange = (bridgeSize) => {
+  if (!isValidRange(bridgeSize)) {
     throw ERROR.bridgeSizeRange;
   }
+};
+
+const validateBridgeSize = (bridgeSizeString) => {
+  const bridgeSize = Number(bridgeSizeString);
+  validateType(bridgeSize);
+  validateRange(bridgeSize);
 };
 
 const validateDirection = (direction) => {
