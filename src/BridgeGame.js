@@ -41,7 +41,7 @@ class BridgeGame {
   progressMove(input) {
     const moveCount = this.#moveCount;
     this.increamentMoveCount();
-    this.compareMoveInput(input, moveCount);
+    this.compareInputAfterSet(input, moveCount);
     this.compareMove(input, moveCount, this.#mapList);
   }
 
@@ -54,7 +54,7 @@ class BridgeGame {
     this.increamentTotalCount();
   }
 
-  compareMoveInput(input, index) {
+  compareInputAfterSet(input, index) {
     if (this.#bridgeList[index] === input) {
       return this.setMapList(input, GAME_TEXT.O);
     }
@@ -79,6 +79,7 @@ class BridgeGame {
     if (this.checkSuccessGame()) {
       return this.finish(this.#mapList, GAME_TEXT.SUCCESS, this.#totalCount);
     }
+
     this.progressMoving();
   }
 
@@ -97,8 +98,8 @@ class BridgeGame {
     this.progressCommand();
   }
 
-  finish(mapList, successOrNot, totalResult) {
-    this.outputView.printResult(mapList, successOrNot, totalResult);
+  finish(mapList, successResult, totalResult) {
+    this.outputView.printResult(mapList, successResult, totalResult);
     close();
   }
 
