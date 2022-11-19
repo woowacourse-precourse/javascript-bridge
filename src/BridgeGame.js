@@ -76,7 +76,15 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(input, mapList) {}
+  retry(input, mapList) {
+    if (input === 'R') {
+      this.initRetry();
+      return this.progressMoving();
+    }
+
+    this.outputView.printMap(mapList);
+    this.progressCommand();
+  }
 
   finish(mapList, successOrNot, totalResult) {
     this.outputView.printResult(mapList, successOrNot, totalResult);
