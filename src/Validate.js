@@ -7,7 +7,7 @@ class Validate {
   }
 
   checkMovingDirection(direction) {
-    if (direction == "U" || direction !== "D")
+    if (!(direction === "U" || direction === "D"))
       throw new Error(ERROR.MOVING_DIRECTION);
   }
 
