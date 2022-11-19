@@ -15,7 +15,6 @@ class BridgeMap {
   }
 
   handleMap(boolean, input) {
-    // console.log(beforeMap, '저장된맵');
     if (this.#isFirst) {
       this.#bridgeMap = this.addMap(boolean, input);
       this.#isFirst = false;
@@ -25,6 +24,7 @@ class BridgeMap {
       this.#bridgeMap = this.addMap(boolean, input);
       return true;
     }
+    return true;
   }
 
   addMap(boolean, input) {
@@ -36,6 +36,7 @@ class BridgeMap {
       if (boolean) return this.addCorrect(input, this.#MAP_SOURCE);
       if (!boolean) return this.addIncorrect(input, this.#MAP_SOURCE);
     }
+    return true;
   }
 
   addCorrect(input, mapSource) {
