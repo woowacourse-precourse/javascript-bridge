@@ -27,10 +27,14 @@ class BridgeGame {
    */
   move = (command) => {
     // TODO: command확인
-    if (this.bridgeStore.isMovable(this.moveCount, command)) {
-      this.moveCount += 1;
+    const isMovable = this.bridgeStore.isMovable(this.moveCount, command);
+    this.bridgeStore.addUserInputResult(isMovable);
+    OutputView.printMap(this.moveCount, command, this.bridgeStore.getUserInputResult);
+    if (!isMovable) {
+      // TODO: 게임 재시작 여부 확인
     }
 
+    this.moveCount += 1;
     if (!this.bridgeStore.isSameWithBridgeLength(this.moveCount)) {
       InputView.readMoving(this.movingMessage, this.move);
     }
