@@ -27,9 +27,16 @@ class BridgeGameController {
     const isWrongAnswer = this.bridgeGame.move(move, this.bridge);
     OutputView.printMap(this.bridge);
 
+    if (isWrongAnswer) {
+      InputView.readGameCommand(this.askWantRetry.bind(this));
+    } else {
     if (this.bridge.data.turn >= this.bridge.data.length) {
         OutputView.printResult(true, this.bridgeGame.retryCount, this.bridge);
     } else InputView.readMoving(this.movingByUser.bind(this));
+    }
+  }
+
+  askWantRetry(answer) {
   }
 }
 

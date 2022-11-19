@@ -1,16 +1,18 @@
 const { Console } = require('@woowacourse/mission-utils');
 
+const init = {
+  blueprint: [],
+  length: 0,
+  upperBridge: '',
+  lowerBridge: '',
+  turn: 0,
+};
+
 class Bridge {
   #bridge;
 
   constructor() {
-    this.#bridge = {
-      blueprint: [],
-      length: 0,
-      upperBridge: '',
-      lowerBridge: '',
-      turn: 0,
-    };
+    this.#bridge = { ...init };
   }
 
   get data() {
@@ -19,6 +21,10 @@ class Bridge {
 
   setData(key, value) {
     this.#bridge = { ...this.#bridge, [key]: value };
+  }
+
+  retry() {
+    this.#bridge = { ...init, blueprint: this.#bridge.blueprint, length: this.#bridge.length };
   }
 }
 
