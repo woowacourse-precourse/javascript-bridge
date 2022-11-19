@@ -52,7 +52,7 @@ const expectBridgeOrder = (received, upside, downside) => {
 };
 
 describe("다리 건너기 테스트", () => {
-  test("다리 생성 테스트", () => {
+  test("다리 생성 테스트 3개", () => {
     const randomNumbers = ["1", "0", "0"];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
@@ -60,6 +60,16 @@ describe("다리 건너기 테스트", () => {
 
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
     expect(bridge).toEqual(["U", "D", "D"]);
+  });
+
+  test("다리 생성 테스트 5개", () => {
+    const randomNumbers = ["1", "0", "0", "1", "1", "1", "0", "0", "1", "1"];
+    const mockGenerator = randomNumbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, jest.fn());
+
+    const bridge = BridgeMaker.makeBridge(10, mockGenerator);
+    expect(bridge).toEqual(["U", "D", "D", "U", "U", "U", "D", "D", "U", "U"]);
   });
 
   test("기능 테스트", () => {
@@ -103,11 +113,22 @@ describe("실패 케이스", () => {
   });
 });
 
-describe("예외 처리 케이스", () => {
-  test.each([["a"], ["2"], ["21"], ["-1"]])(
-    '사이즈 입력 예외 "%s"',
-    (input) => {
-      runException([input]);
-    }
-  );
+describe("실패 후 게임 선택에서의 케이스", () => {
+  test("시도 횟수 일치 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "1"]);
+    mockQuestions(["3", "D", "R", "U", "U", "R", "U", "D", "U"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 3",
+    ]);
+  });
 });
