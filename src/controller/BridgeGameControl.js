@@ -13,7 +13,7 @@ class BridgeGameControl {
   bridge;
   userMove = [];
   tryCount = 1;
-  success = 0;
+  success = ANSWER.FAIL;
 
   constructor() {
     this.bridgeSize = new BridgeSize();
@@ -75,15 +75,14 @@ class BridgeGameControl {
 
   notAnswerMoving() {
     OutputView.printMap(this.userMove, ANSWER.NO);
-    this.success = 0;
+    this.success = ANSWER.FAIL;
     this.askRetry();
   };
 
   finalAnswer(answer) {
-    this.success = 1;
+    this.success = ANSWER.SUCCESS;
     OutputView.printMap(this.userMove, answer);
-    OutputView.printResult(this.userMove, answer);
-    OutputView.printTryResult(this.tryCount, this.success);
+    OutputView.printResult(this.userMove, this.success, this.tryCount);
   };
 
   askRetry() {
@@ -105,8 +104,7 @@ class BridgeGameControl {
       this.tryCount += 1;
       return this.userMoving();
     };
-    OutputView.printResult(this.userMove, this.success);
-    OutputView.printTryResult(this.tryCount, this.success);
+    OutputView.printResult(this.userMove, this.success, this.tryCount);
   };
 };
 

@@ -19,20 +19,12 @@ const OutputView = {
     Console.print(MakeMap.makeFinalOutputMap());
   },
   
-  printResult(userMove, failOrSuccess) {
-    Console.print(MESSAGE.FINAL_MESSAGE);
-    if (failOrSuccess) {
-      return OutputView.printMap(userMove, ANSWER.OK);
-    }
-    return OutputView.printMap(userMove, ANSWER.NO);
-  },
+  printResult(userMove, failOrSuccess, tryCount) {
+    let answer = (failOrSuccess === ANSWER.SUCCESS) ? ANSWER.OK : ANSWER.NO;
 
-  printTryResult(tryCount, failOrSuccess) {
-    let iscorrect = ANSWER.FAIL;
-    if (failOrSuccess) {
-      iscorrect = ANSWER.SUCCESS;
-    };
-    Console.print(`${MESSAGE.FAIL_OR_SUCCESS}${iscorrect}`);
+    Console.print(MESSAGE.FINAL_MESSAGE);
+    OutputView.printMap(userMove, answer);
+    Console.print(`${MESSAGE.FAIL_OR_SUCCESS}${failOrSuccess}`);
     Console.print(`${MESSAGE.TRY_COUNT}${tryCount}`);
     Console.close();
   },
