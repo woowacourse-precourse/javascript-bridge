@@ -11,11 +11,12 @@ class BridgeGame {
     output: null,
     isPassed: null,
     isCleared: null,
-    try: 1,
+    count: 1,
   };
 
   initializeBridge(size) {
     this.#Status.bridge = makeBridge(size, generate);
+    console.log(this.#Status.bridge); // For test
   }
 
   /**
@@ -43,7 +44,7 @@ class BridgeGame {
     this.#Status.output = null;
     this.#Status.isPassed = null;
     this.#Status.isCleared = null;
-    this.#Status.try += 1;
+    this.#Status.count += 1;
   }
 
   getStatus() {
