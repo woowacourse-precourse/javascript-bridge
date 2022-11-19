@@ -107,4 +107,16 @@ describe.only('TEST', () => {
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
     expect(bridge).toEqual(['U', 'D', 'D']);
   });
+
+  test('다리 이동 테스트', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['1', '1', '1']);
+    mockQuestions(['3', 'U', 'U', 'U']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectBridgeOrder(log, '[ O ]', '[ O | O ]', '[ O | O | O ]');
+  });
 });
