@@ -7,6 +7,10 @@ const BridgeGame = require("./BridgeGame");
 
 class Controller {
   #bridge;
+  #currentBridge = {
+    up: [],
+    down: [],
+  };
   constructor() {
     this.validation = new Validation();
     this.bridgeGame = new BridgeGame();
@@ -37,12 +41,18 @@ class Controller {
   movingDirectionForm(square) {
     try {
       this.validation.isUpOrDown(square);
-      const [upBridge, downBridge] = this.bridgeGame.move(this.#bridge, square);
+      this.setBridge(square);
       OutputView.printMap(this.#currentBridge);
     } catch (error) {
       Console.print(error);
       this.getMovingDirection();
     }
+  }
+
+  setBridge(square) {
+    const [upBridge, downBridge] = this.bridgeGame.move(this.#bridge, square);
+    this.#currentBridge.up = upBridge;
+    this.#currentBridge.down = downBridge;
   }
 }
 
