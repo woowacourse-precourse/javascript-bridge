@@ -59,6 +59,7 @@ class App {
   cbAfterStopGame(choice) {
     if (choice === GAME_PROCEED.retry) {
       this.bridgeGame.retry();
+      this.tryCount += 1;
       return this.proceedGame();
     }
     if (choice === GAME_PROCEED.quit) {
