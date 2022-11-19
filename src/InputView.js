@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { INPUT_MESSAGE } = require('./Constants/Message');
+const { INPUT_TYPE } = require('./Constants/InputValues');
 const { checkBridgeSize, checkCorrectCharactor, checkCorrectCommand } = require('./Utils/Validation');
 
 /**
@@ -11,13 +12,9 @@ const InputView = {
    */
   readBridgeSize(sendBridge) {
     Console.readLine(INPUT_MESSAGE.start, (size) => {
-      // this.sizeValidation(size);
+      checkBridgeSize(size);
       sendBridge(size);
     });
-  },
-
-  sizeValidation(size) {
-    checkBridgeSize(size);
   },
 
   /**
@@ -25,14 +22,10 @@ const InputView = {
    */
   readMoving(sendMoving) {
     Console.readLine(INPUT_MESSAGE.move, (move) => {
-      // this.moveValidation(move, INPUT_TYPE.move);
+      checkCorrectCharactor(move);
+      checkCorrectCommand(move, INPUT_TYPE.move);
       sendMoving(move);
     });
-  },
-
-  moveValidation(move, type) {
-    checkCorrectCharactor(move);
-    checkCorrectCommand(move, type);
   },
 
   /**
@@ -40,14 +33,14 @@ const InputView = {
    */
   readGameCommand(checkGameOption) {
     Console.readLine(INPUT_MESSAGE.retry, (command) => {
-      // this.retryValidation(command, INPUT_TYPE.retry);
+      checkCorrectCharactor(command);
+      checkCorrectCommand(command, INPUT_TYPE.retry);
       checkGameOption(command);
     });
   },
 
-  retryValidation(command, type) {
-    checkCorrectCharactor(command);
-    checkCorrectCommand(command, type);
+  exit() {
+    return Console.close();
   },
 };
 

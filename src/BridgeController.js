@@ -1,5 +1,5 @@
 const BridgeGame = require('./BridgeGame');
-const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
+const { readBridgeSize, readMoving, readGameCommand, exit } = require('./InputView');
 const { printMap, printResult } = require('./OutputView');
 const { isPlayerPassed, isPlayerCleared } = require('./Utils/checkPlayerStatus');
 const { INPUT_RETRY } = require('./Constants/InputValues');
@@ -31,11 +31,10 @@ class BridgeController {
 
   sendOutputRequestToModel = () => {
     const { bridge } = this.#Game.getStatus();
-    console.log(bridge);
     const input = this.#Game.getStatus().Input;
 
     const isPassed = isPlayerPassed(input[input.length - 1], bridge[input.length - 1]);
-    const isCleared = isPlayerCleared(input, isPassed);
+    const isCleared = isPlayerCleared(bridge.length, input.length, isPassed);
     this.#Game.setMoveOutput(isPassed, isCleared);
     this.sendOutputRequestToView();
   };
@@ -47,8 +46,7 @@ class BridgeController {
   };
 
   checkMoveOption = () => {
-    const { isPassed } = this.#Game.getStatus();
-    const { isCleared } = this.#Game.getStatus();
+    const { isPassed, isCleared } = this.#Game.getStatus();
     if (isPassed) this.getMove();
     if (!isPassed) this.getCommand();
     if (isCleared) this.finishControl();
@@ -59,17 +57,21 @@ class BridgeController {
   };
 
   checkGameOption = (command) => {
+    const { count, isCleared, output } = this.#Game.getStatus();
     if (command === INPUT_RETRY.restart) {
       this.#Game.retry();
       this.getMove();
     }
-    if (command === INPUT_RETRY.quit) return 0;
+    if (command === INPUT_RETRY.quit) {
+      printResult(count, isCleared, output);
+      exit();
+    }
   };
 
   finishControl = () => {
-    const { output } = this.#Game.getStatus().output;
-    printResult(output);
-    return 0;
+    const { count, isCleared, output } = this.#Game.getStatus();
+    printResult(count, isCleared, output);
+    exit();
   };
 }
 
