@@ -19,24 +19,26 @@ const OutputView = {
     Console.print(lowerSide);
   },
 
-  getMap(trials) {
-    let [upperSide, lowerSide] = trials.reduce(
-      (bridgeMap, trial) => {
-        let [upperSide, lowerSide] = bridgeMap;
-        if (trial.direction === 'U') {
-          upperSide += ` ${trial.result} |`;
-          lowerSide += '   |';
-        }
-        if (trial.direction === 'D') {
-          upperSide += `   |`;
-          lowerSide += ` ${trial.result} |`;
-        }
-        return [upperSide, lowerSide];
-      },
-      ['[', '[']
-    );
+  getBridgeMap(trials) {
+    let [upperSide, lowerSide] = trials.reduce(this.handleMakeBridgeMap, ['[', '[']);
 
     return [upperSide.slice(0, -1) + ']', lowerSide.slice(0, -1) + ']'];
+  },
+
+  handleMakeBridgeMap(bridgeMap, trial) {
+    let [upperSide, lowerSide] = bridgeMap;
+
+    if (trial.direction === 'U') {
+      upperSide += ` ${trial.result} |`;
+      lowerSide += '   |';
+    }
+
+    if (trial.direction === 'D') {
+      upperSide += `   |`;
+      lowerSide += ` ${trial.result} |`;
+    }
+
+    return [upperSide, lowerSide];
   },
 
   /**
