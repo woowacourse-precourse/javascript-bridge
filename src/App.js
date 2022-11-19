@@ -3,16 +3,29 @@ const inputView = require('./inputView');
 const outputView = require('./outputView');
 
 class App {
+  #bridgeGame
+
+  constructor() {
+    this.#bridgeGame;
+  }
+
   play() {
     outputView.printStart();
-    inputView.readBridgeSize(this.generateBridge)
+    inputView.readBridgeSize.call(this,this.generateBridge,this.makeMovement);
   }
 
-  generateBridge(size) {
-    const bridgeGame = new BridgeGame(size);
-    return outputView.printMap(bridgeGame.bridge);
+  generateBridge(size, callbackMakeMovement) {
+    this.#bridgeGame = new BridgeGame(size);
+    this.bridge = this.#bridgeGame.bridge;
+
+    outputView.printMap(this.bridge);
+    return callbackMakeMovement.call(this);
   }
 
+  makeMovement() {
+    const validate = this.#bridgeGame.validateMoveInput;
+    inputView.readMoving.call(this, validate, this.#bridgeGame.move);
+  }
 }
 
 const app = new App();

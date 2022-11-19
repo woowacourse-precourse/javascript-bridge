@@ -14,15 +14,20 @@ class BridgeGame {
   #size
   #bridge
   constructor(size) {
-    this.validate(size);
+    this.validateSize(size);
     this.#size = size;
     this.#bridge;
   }
 
-  validate(size) {
+  validateSize(size) {
     if (size < 3 || size > 20){
       throw new Error('[ERROR] 3 ~ 20사이의 숫자를 입력해주세요.')
     }
+  }
+
+  validateMoveInput(move) {
+    if (move === 'U' || move === 'D') return
+    throw new Error('[ERROR] "U" 혹은 "D"를 입력해주세요.')
   }
 
   get bridge() {
@@ -34,13 +39,8 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {
-    //기본 다리 형태 출력
-    
-    // 값 압력
-    // 입력값과 다리값과 비교해서 출력
-      //정답체크 따로
-      //맵에 표시 따로
+  move(upOrDown) {
+
   }
 
   /**
