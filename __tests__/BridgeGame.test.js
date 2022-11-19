@@ -393,10 +393,19 @@ describe('위치 파악 메서드 테스트', () => {
     const bridgeGame = new BridgeGame();
     const EXPECTED = 'D';
     const RECEIVED = [1, 1];
+    const SECOND_ROUND = 2;
 
-    bridgeGame.move();
-    bridgeGame.move();
+    loop(SECOND_ROUND, bridgeGame.move.bind(bridgeGame));
 
     expect(bridgeGame.getPositionIndex(EXPECTED)).toEqual(RECEIVED);
+  });
+
+  test('대문자 U, 대문자 D를 입력을 제외한 값은 예외를 발생한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const EXPECTED = 'u';
+
+    expect(() => {
+      bridgeGame.getPositionIndex(EXPECTED);
+    }).toThrow(RANGE_ERROR_TEXT);
   });
 });
