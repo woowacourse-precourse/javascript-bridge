@@ -35,6 +35,7 @@ const InputView = {
     Console.readLine(MESSAGE.INPUT_BRIDGE_MOVE, (move) => {
       try {
         this.bridgeMoveGo(move);
+        this.bridgeMoveOneMore();
       } catch (error) {
         this.bridgeMoveRetry(error);
       }
@@ -76,6 +77,14 @@ const InputView = {
     if (!this.bridgeGame.checkX()) {
       this.readGameCommand();
     }
+  },
+
+  bridgeMoveOneMore() {
+    if (!this.bridgeGame.lengthCompare(this.bridge.getBridge())) {
+      this.readMoving();
+      return;
+    }
+    //최종출력
   },
 
   bridgeMoveRetry(error) {
