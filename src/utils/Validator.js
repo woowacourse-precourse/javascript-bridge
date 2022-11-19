@@ -4,7 +4,7 @@ const Directions = require("./Directions");
 
 class Validator {
   static isInteger(input) {
-    if (input.match(/\D+/) || Number.isNaN(parseInt(input))) {
+    if (Number.isNaN(Number(input))) {
       throw new Error(ErrorMessage.NOT_INTEGER);
     }
   }

@@ -13,10 +13,9 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     Validator.isInteger(size);
-    const parsedSize = parseInt(size, 10);
     const bridge = [];
 
-    for (let i = 0; i < parsedSize; i++) {
+    for (let i = 0; i < size; i++) {
       const random = generateRandomNumber();
       if (random === 0) bridge[i] = BridgeGame.DOWN_DIRECTION;
       if (random === 1) bridge[i] = BridgeGame.UP_DIRECTION;

@@ -16,7 +16,7 @@ const InputView = {
     Console.readLine(InputMessage.READ_BRIDGE_SIZE_MESSAGE, (value) => {
       let bridgeGame;
       try {
-        const bridge = makeBridge(value, generate);
+        const bridge = makeBridge(Number(value), generate);
         bridgeGame = new BridgeGame(bridge);
       } catch (error) {
         OutputView.print(error.message);
