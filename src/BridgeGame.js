@@ -40,7 +40,6 @@ class BridgeGame {
 
   getResult() {
     const [upperBridge, lowerBridge] = this.currBridge.getBridge();
-    // const isSucceeded = this.isLast();
     return [this.#tryingCount, upperBridge, lowerBridge];
   }
 

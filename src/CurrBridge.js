@@ -1,13 +1,8 @@
 const Validation = require('./utils/Validation');
 
 class CurrBridge {
-  #direction;
   #upperBridge = [];
   #lowerBridge = [];
-
-  // constructor(direction) {
-  //   this.#direction = this.validate(direction);
-  // }
 
   validate(direction) {
     Validation.checkStringType(direction);
@@ -16,23 +11,22 @@ class CurrBridge {
   }
 
   canMove(direction, winningBridge) {
-    const isSame = winningBridge.isSameDirection(
+    const isSameDirection = winningBridge.isSameDirection(
       direction,
       this.#upperBridge.length
     );
 
-    return isSame;
+    return isSameDirection;
   }
 
   makeBridge(direction, canMove) {
     if (direction === 'U') {
-      if (canMove) this.#upperBridge.push('O');
-      if (!canMove) this.#upperBridge.push('X');
+      canMove ? this.#upperBridge.push('O') : this.#upperBridge.push('X');
       this.#lowerBridge.push(' ');
     }
+
     if (direction === 'D') {
-      if (canMove) this.#lowerBridge.push('O');
-      if (!canMove) this.#lowerBridge.push('X');
+      canMove ? this.#lowerBridge.push('O') : this.#lowerBridge.push('X');
       this.#upperBridge.push(' ');
     }
   }
