@@ -44,11 +44,9 @@ const InputView = {
           console.log(result);
           OutputView.printMap(result);
           // 건널 수 없는 칸 입력시,
-          if (result[result.length - 1][1] === "X") this.readGameCommand();
           // 건널 수 있는 칸 입력시,
           if (nth < bridge.length - 1) this.readMoving(nth + 1, bridge);
           // 다리를 모두 건넜을 때
-          else OutputView.printResult();
         } catch (e) {
           MissionUtils.Console.print(e);
           this.readMoving();
@@ -60,7 +58,7 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridge, result) {},
 };
 
 module.exports = InputView;
