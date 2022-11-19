@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const { START_GAME } = require('./Constants');
 const { validateBridgeSize, checkMoveString } = require('./Validate');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const { readBridgeSize, readMoving } = require('./InputView');
+const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { makeBridge } = require('./BridgeMaker');
 const { printMap } = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
@@ -22,24 +22,28 @@ class App {
       const generateRandomNumber = generate;
       validateBridgeSize(size);
       this.bridge = makeBridge(size, generateRandomNumber);
-      this.moveBridge();
+      this.getUserMoving();
     });
   }
 
-  moveBridge() {
+  getUserMoving() {
     readMoving((userInput) => {
-      const move = this.bridgeGame.move(this.bridge, userInput);
-      const upBridge = this.bridgeGame.getupBridge();
-      const downBridge = this.bridgeGame.getDownBridge();
       checkMoveString(userInput);
-      move;
-      printMap(upBridge, downBridge);
-      this.checkContinue(move);
+      this.moveBridge(userInput);
     });
+  }
+
+  moveBridge(userInput) {
+    const move = this.bridgeGame.move(this.bridge, userInput);
+    const upBridge = this.bridgeGame.getupBridge();
+    const downBridge = this.bridgeGame.getDownBridge();
+    move;
+    printMap(upBridge, downBridge);
+    this.checkContinue(move);
   }
 
   checkContinue(move) {
-    if (move === true) this.moveBridge();
+    if (move === true) this.getUserMoving();
     if (move === false) this.failAnswer();
   }
 
