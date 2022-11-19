@@ -24,13 +24,22 @@ class BridgeGame {
     const updateMove = (direction) => {
       const [isRight, isDone] = this.model.stepForward(direction);
       this.view.printMap(this.model.map);
+      if ( isRight && isDone ) return this.terminate();
+      if ( !isRight || isDone ) return this.retry()
+      if ( isRight && !isDone ) return this.move();
     }
     this.view.getWhereToGo(updateMove);
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    */
-  retry() {}
+  retry() {
+    console.log('retry');
+  }
+
+  terminate() {
+    console.log('terminate');
+  }
 
 }
 
