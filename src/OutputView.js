@@ -28,6 +28,9 @@ const OutputView = {
   printIsGameClear(isGameClear) {
     print(`\n게임 성공 여부 : ${isGameClear ? "성공" : "실패"}`);
   },
+  printAttemptsCount(attempts) {
+    print(`총 시도한 횟수 : ${attempts}`);
+  },
 };
 
 module.exports = OutputView;

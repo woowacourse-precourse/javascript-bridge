@@ -94,6 +94,7 @@ class BridgeGame {
   quit() {
     OutputView.printResult(this.#currentMap);
     OutputView.printIsGameClear(this.isGameCleared());
+    OutputView.printAttemptsCount(this.#numberOfAttempt);
     this.close();
   }
 
