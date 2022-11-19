@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('./views/InputView');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeGame = require('./BridgeGame');
+const BridgeMaker = require('./utils/BridgeMaker');
+const BridgeGame = require('./controllers/BridgeGame');
 const OutputView = require('./views/OutputView');
 const BridgeValidation = require('./validations/Bridge');
 const MoveValidation = require('./validations/Move');
@@ -25,7 +25,8 @@ class App {
   moveForward(input) {
     MoveValidation.validate(input);
 
-    this.game.move(input);
+    const canMoveForward = this.game.move(input);
+    const isGameEnd = this.game.isGameEnd();
   }
 
   gameControl(input) {

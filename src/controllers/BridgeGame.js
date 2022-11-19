@@ -1,4 +1,5 @@
 const Bridge = require('../models/Bridge');
+const Result = require('../models/Result');
 const OutputView = require('../views/OutputView');
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -23,10 +24,17 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(input) {
-    if (this.bridge.canMoveForward(this.index, input)) {
-      answer.push(true);
-    }
+    // if (this.bridge.canMoveForward(this.index, input)) {
+    //   answer.push(true);
+    // }
 
+    const canMoveForward = this.bridge.canMoveForward(this.index, input);
+    this.result = new Result(this.bridge, this.index, canMoveForward);
+    // this.result.print();
+    console.log('결과 프린트');
+    this.index += 1;
+
+    return canMoveForward;
     // if (this.bridge.canMoveForward(this.index, input)) {
     //   this.index += 1;
     //   OutputView.printMap(this.bridge.bridgeArr, this.index, true);
@@ -42,6 +50,10 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {}
+
+  isGameEnd() {
+    return this.bridge.bridgeArr <= this.index;
+  }
 }
 
 module.exports = BridgeGame;
