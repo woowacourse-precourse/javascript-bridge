@@ -1,10 +1,10 @@
 // @ts-check
-
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { BRIDGE } = require('./constants');
 
 class Bridge {
+  /** @type {string[]} */
   #bridge;
 
   constructor(size) {
