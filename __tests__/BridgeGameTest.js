@@ -1,5 +1,5 @@
 const BridgeGame = require('../src/BridgeGame.js');
-const { GameState } = require('../src/Constant.js');
+const { GameState } = require('../src/constants/Constant.js');
 
 describe('브릿지 게임 테스트', () => {
   test('다리 이동 테스트', () => {

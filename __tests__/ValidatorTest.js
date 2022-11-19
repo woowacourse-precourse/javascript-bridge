@@ -1,5 +1,5 @@
-const Validator = require('../src/Validator.js');
-const { ErrorMsg } = require('../src/Constant.js');
+const Validator = require('../src/utils/Validator.js');
+const { ErrorMsg } = require('../src/constants/Constant.js');
 
 describe('예외 체크 테스트', () => {
   test('빈 문자열이 들어올 경우', () => {
