@@ -15,4 +15,16 @@ const bridgeSizeValidator = {
   },
 };
 
-module.exports = { bridgeSizeValidator };
+const directionValidator = {
+  isUpOrDown(direction) {
+    return direction === 'U' || direction === 'D';
+  },
+
+  isDirectionValid(direction) {
+    if (!this.isUpOrDown(direction)) {
+      throw new Error(ERROR.DIRECTION);
+    }
+  },
+};
+
+module.exports = { bridgeSizeValidator, directionValidator };
