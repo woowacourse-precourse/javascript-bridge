@@ -1,8 +1,9 @@
 const BridgeGame = require('./BridgeGame');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { GAME_COMMAND_STRING } = require('./constants');
 
 class App {
   #model;
@@ -38,7 +39,7 @@ class App {
   }
 
   handleGameCommand(gameCommand) {
-    if (gameCommand === 'Q') {
+    if (gameCommand === GAME_COMMAND_STRING.quit) {
       OutputView.printResult(this.#model.getMoveList(), this.#model.getTryCount());
     } else {
       this.#model.retry();
