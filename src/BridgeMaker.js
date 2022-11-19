@@ -13,7 +13,7 @@ const BridgeMaker = {
       const randomNumber = generateRandomNumber();
       if (randomNumber === 0) {
         bridge.push('D');
-        return;
+        continue;
       }
       bridge.push('U');
     }
