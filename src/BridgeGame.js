@@ -46,20 +46,20 @@ class BridgeGame {
   }
 
   getConvertedBridge() {
-    const upstairBridge = this.convertBridge('U');
-    const downstairBridge = this.convertBridge('D');
-    return { upstairBridge, downstairBridge };
+    const upsideBridge = this.convertBridge('U');
+    const downsideBridge = this.convertBridge('D');
+    return { upsideBridge, downsideBridge };
   }
 
-  getFailureBridge({ upstairBridge, downstairBridge }) {
+  getFailureBridge({ upsideBridge, downsideBridge }) {
     if (this.#bridge[this.#moveCount] === 'U') {
-      upstairBridge.push(' ');
-      downstairBridge.push('X');
+      upsideBridge.push(' ');
+      downsideBridge.push('X');
     } else if (this.#bridge[this.#moveCount] === 'D') {
-      upstairBridge.push('X');
-      downstairBridge.push(' ');
+      upsideBridge.push('X');
+      downsideBridge.push(' ');
     }
-    return { upstairBridge, downstairBridge };
+    return { upsideBridge, downsideBridge };
   }
 
   getBridge() {
