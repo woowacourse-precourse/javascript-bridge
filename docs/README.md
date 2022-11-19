@@ -45,5 +45,12 @@
       fi
     ```
 
-- [ ] eslint airbnb 규칙 등록
-- [ ] prettier 설정
+- [x] eslint airbnb 규칙 등록
+  - `npm init @eslint/config` 로 초기 설정한다.
+  - `npx install-peerdeps --dev eslint-config-airbnb`로 airbnb 규칙을 초기 세팅한다.
+  - 요구사항의 `max-depth`, `max-lines-per-function` 규칙 추가한다.
+  - test 파일엔 다양한 예외처리를 위해 `max-lines-per-function` 규칙을 꺼둔다.
+- [x] prettier 설정
+  - `npm install --save-dev --save-exact prettier`로 prettier를 설치한다.
+  - `echo {}> .prettierrc.json`로 prettier 규칙을 작성할 파일을 생성한다.
+  - eslint와 충돌할 것을 대비하여 `npm install --save-dev eslint-config-prettier` 를 설치한 뒤 eslint 규칙 설정 파일의 extends에 `"prettier"`를 추가한다. ([출처](https://prettier.io/docs/en/integrating-with-linters.html))
