@@ -28,10 +28,15 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(callback) {
     Console.readLine(MESSAGE.GUESS, (userInput) => {
       validateMovingInput(userInput);
+      callback(userInput);
     });
+  },
+
+  getUserMoving(userInput) {
+    return userInput;
   },
 
   /**

@@ -23,7 +23,15 @@ class GameController {
 
   buildBridge(size) {
     this.bridgeGame.createBridge(size);
-    this.inputView.readMoving();
+    this.selectMoving();
+  }
+
+  selectMoving() {
+    this.inputView.readMoving((userInput) => {
+      const select = this.inputView.getUserMoving(userInput);
+      this.bridgeGame.move(select);
+      console.log('done');
+    });
   }
 }
 

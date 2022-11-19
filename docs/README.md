@@ -28,7 +28,7 @@
 
 - [x] 라운드가 시작하면 입력을 받는다. <InputView>
   - [x] 입력된 값이 U 또는 D 이외의 값일 경우 예외처리한다.
-- [ ] 전달받은 입력값을 컨트롤러에 전달한다. <GameContorller>
+- [x] 전달받은 입력값을 컨트롤러에 전달한다. <GameContorller>
 - [ ] 컨트롤러로부터 BridgeGame에 값을 전달하고 결과값 산출한다.
 - [ ] BridgeGame의 결과값을 Contorller에게 전달한다.
 - [ ] Controller로부터 outputView로 결과를 전달해 값을 출력한다.
