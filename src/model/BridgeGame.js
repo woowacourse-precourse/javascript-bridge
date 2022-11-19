@@ -23,6 +23,10 @@ class BridgeGame {
     this.#state.isWin = result;
   }
 
+  getBridge() {
+    return this.#bridge;
+  }
+
   getState() {
     return this.#state;
   }

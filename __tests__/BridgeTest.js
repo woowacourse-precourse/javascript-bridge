@@ -1,9 +1,8 @@
-const bridgeGame = require("../src/BridgeGame");
+const BridgeGame = require("../src/BridgeGame");
 const OutpuyView = require("../src/console/OutputView");
 const InputView = require("../src/console/InputView");
 const Message = require("../src/lib/Message");
 const Bridge = require("../src/model/Bridge");
-const WoowaBridge = require("../src/WoowaBridge");
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 
@@ -47,8 +46,10 @@ describe("브릿지 다리 생성 테스트", () => {
     const length = ["5"];
     setTestInvOnce(length);
 
-    const woowaBridge = new WoowaBridge();
-    woowaBridge.play();
+    const bridgeGame = new BridgeGame();
+    bridgeGame.play();
+
+    const [one, two] = bridgeGame.bridge
     expect(woowaBridge.bridge.getOriginalBridge().length).toBe(5);
     expect(
       woowaBridge.bridge.getOriginalBridge().length
