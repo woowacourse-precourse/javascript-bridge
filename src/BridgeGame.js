@@ -8,12 +8,9 @@ class BridgeGame {
   #player;
   #bridge;
 
-  constructor() {
+  constructor(bridge) {
     this.#player = new Player();
-  }
-
-  makeBridge(size) {
-    this.#bridge = new Bridge(size);
+    this.#bridge = bridge;
   }
 
   move(direction) {

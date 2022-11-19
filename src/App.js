@@ -6,20 +6,10 @@ const { Console } = require('@woowacourse/mission-utils');
 const GameController = require('./GameController');
 
 class App {
-  #gameCtrl;
+  // #gameCtrl;
   #bridgeGame;
 
-  constructor() {
-    this.#gameCtrl = new GameController();
-    this.#bridgeGame = new BridgeGame();
-  }
-
   play() {
-    // this.gameStart();
-    this.#gameCtrl.gameStart();
-  }
-
-  gameStart() {
     OutputView.printMessage(MESSAGE.START_NOTIFICATION);
     this.askBridgeSize();
   }
@@ -36,7 +26,8 @@ class App {
   }
 
   handleSize(size) {
-    this.#bridgeGame.makeBridge(size);
+    const bridge = makeBridge(size);
+    this.#bridgeGame = new BridgeGame(bridge);
     this.askDirection();
   }
 
