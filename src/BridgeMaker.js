@@ -12,6 +12,8 @@ const BridgeMaker = {
    * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
+  
+  /**3. 입력받은 길이 만큼 다리 생성해서 "U/D" 배열 생성 */
   makeBridge(size, generateRandomNumber) {
     const bridgeArr = [];
 
