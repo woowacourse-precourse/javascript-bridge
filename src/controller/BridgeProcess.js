@@ -39,7 +39,11 @@ class BridgeProcess {
   #printMovement(movement) {
     const [match, { sucess, process }] = this.#gameReport.move(movement);
     this.#outputView.printMap(match);
-    sucess || !process ? this.#printFinalResult(sucess) : this.#inputMovement();
+    sucess
+      ? this.#printFinalResult(sucess)
+      : process
+      ? this.#inputMovement()
+      : this.#inputGameCommand();
   }
 
   #inputGameCommand() {
