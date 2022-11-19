@@ -9,33 +9,34 @@ class App {
   async play() {
     OutputView.printHi();
 
-    const bridgeSize = await InputView.readBridgeSize();
-    this.game = new BridgeGame(+bridgeSize);
-    this.playOneStep();
+    InputView.readBridgeSize((bridgeLength) => {
+      this.game = new BridgeGame(+bridgeLength);
+      this.playOneStep();
+    });
   }
 
   /**
    * 한 번 움직이는 메서드
    */
   async playOneStep() {
-    const move = await InputView.readMoving();
+    InputView.readMoving((move) => {
+      this.game.move(move);
+      OutputView.printMap(this.game);
 
-    this.game.move(move);
-    OutputView.printMap(this.game);
-
-    if (this.game.reachedEndOfBridge && !this.game.isGameOver) OutputView.printResult(this.game);
-    else if (this.game.isGameOver) this.askRetryGame();
-    else this.playOneStep();
+      if (this.game.reachedEndOfBridge && !this.game.isGameOver) OutputView.printResult(this.game);
+      else if (this.game.isGameOver) this.askRetryGame();
+      else this.playOneStep();
+    });
   }
 
   /**
    * 게임을 다시 시작할지 묻는 메서드
    */
   async askRetryGame() {
-    const willRetry = await InputView.readGameCommand();
-
-    if (this.game.retry(willRetry)) this.playOneStep();
-    else OutputView.printResult(this.game);
+    InputView.readGameCommand((willRetry) => {
+      if (this.game.retry(willRetry)) this.playOneStep();
+      else OutputView.printResult(this.game);
+    });
   }
 }
 
