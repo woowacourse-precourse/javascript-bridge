@@ -44,6 +44,11 @@ class CurrBridge {
   isLast(winningBridge) {
     return winningBridge.isSameLength(this.#upperBridge);
   }
+
+  delete() {
+    this.#upperBridge.pop();
+    this.#lowerBridge.pop();
+  }
 }
 
 module.exports = CurrBridge;
