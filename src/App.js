@@ -10,7 +10,7 @@ class App {
     while(1){
       Intercessor.matchMove(bridge);
       count++;
-      if(Intercessor.checkResult()) break;
+      if(!Intercessor.checkRetry()) break;
     }
     Intercessor.printResult(count);
   }

@@ -46,6 +46,11 @@ const OutputView = {
         "[ERROR] 이동할 칸은 U 또는 D여야 합니다."
       );
     }
+    if (error === "R 또는 Q가 아님") {
+      MissionUtils.Console.print(
+        "[ERROR] 입력 값은 R 또는 Q여야 합니다."
+      );
+    }
   },
 };
 

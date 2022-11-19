@@ -54,13 +54,17 @@ const Intercessor = {
     return true;
   },
 
-  checkResult(){
-    if(this.gameResult) return true;
+  checkRetry(){
+    let retry;
+    if(this.gameResult) return false;
     const command = InputView.readGameCommand();
     const bridgeGame = new BridgeGame();
-    const retry = bridgeGame.retry(command);
-    if(retry) return false;
-    return true;
+    try{
+      retry = bridgeGame.retry(command);
+    }catch(error){
+      OutputView.printException(error);
+    }
+    return retry;
   },
 
   printResult(count){
