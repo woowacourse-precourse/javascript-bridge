@@ -1,5 +1,6 @@
 const ERROR = "[ERROR]";
 const NEW_LINE = "\n";
+const BAR = " | ";
 
 const MESSAGE = Object.freeze({
   gameStart: "다리 건너기 게임을 시작합니다.",
@@ -50,4 +51,5 @@ module.exports = {
   BRIDGE_MAP,
   NUMBER_RANGE,
   NEW_LINE,
+  BAR,
 };
