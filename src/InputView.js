@@ -39,13 +39,11 @@ const InputView = {
      */
     readMoving() {
         return new Promise((resolve, reject) => {
-            MissionUtils.Console(
-                readLine(
-                    "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-                    (input) => {
-                        resolve(this.checkMoving(input));
-                    }
-                )
+            MissionUtils.Console.readLine(
+                "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+                (input) => {
+                    resolve(this.checkMoving(input));
+                }
             );
         });
     },

@@ -28,6 +28,7 @@ class App {
     async move() {
         const direction = await InputView.readMoving();
         let result = this.GAME.move(direction);
+        OutputView.printMap(result);
     }
 }
 
