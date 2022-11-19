@@ -1,3 +1,19 @@
+const GAME_RULE = Object.freeze({
+  MIN_BRIDGE_LENGTH: 3,
+  MAX_BRIDGE_LENGTH: 20,
+  UPSIDE: '1',
+  DOWNSIDE: '0',
+  UPSIDE_COMMAND: 'U',
+  DOWNSIDE_COMMAND: 'D',
+  RETRY_COMMAND: 'R',
+  END_COMMAND: 'Q',
+  SUCCESS: 'O',
+  SUCCESS_MESSAGE: '성공',
+  FAIL: 'X',
+  FAIL_MESSAGE: '실패',
+  BLANK: ' ',
+});
+
 const INPUT_MESSAGE = Object.freeze({
   BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',
   MOVE: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
@@ -5,10 +21,11 @@ const INPUT_MESSAGE = Object.freeze({
 });
 
 const OUTPUT_MESSAGE = Object.freeze({
+  RESULT: '최종 게임 결과',
   START_GAME: '다리 건너기 게임을 시작합니다.\n',
   UPSIDE_BRIDGE: (upsideBridge) => `[ ${upsideBridge.join(' | ')} ]`,
   DOWNSIDE_BRIDGE: (downsideBridge) => `[ ${downsideBridge.join(' | ')} ]`,
-  RESULT: (result) => `\n게임 성공 여부: ${result}`,
+  IS_SUCCESS: (result) => `\n게임 성공 여부: ${result}`,
   ATTEMPTS: (attempts) => `총 시도한 횟수: ${attempts}`,
 });
 
@@ -28,6 +45,7 @@ const ERROR_MESSAGE_FINAL_GAME = Object.freeze({
 });
 
 module.exports = {
+  GAME_RULE,
   INPUT_MESSAGE,
   OUTPUT_MESSAGE,
   ERROR_MESSAGE_BRIDGE_SIZE,

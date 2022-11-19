@@ -1,3 +1,5 @@
+const { GAME_RULE } = require('./utils/Constant');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -39,25 +41,25 @@ class BridgeGame {
   convertBridge(floor) {
     return this.#bridge.slice(0, this.#moveCount).map((current) => {
       if (current === floor) {
-        return 'O';
+        return GAME_RULE.SUCCESS;
       }
-      return ' ';
+      return GAME_RULE.BLANK;
     });
   }
 
   getConvertedBridge() {
-    const upsideBridge = this.convertBridge('U');
-    const downsideBridge = this.convertBridge('D');
+    const upsideBridge = this.convertBridge(GAME_RULE.UPSIDE_COMMAND);
+    const downsideBridge = this.convertBridge(GAME_RULE.DOWNSIDE_COMMAND);
     return { upsideBridge, downsideBridge };
   }
 
   getFailureBridge({ upsideBridge, downsideBridge }) {
-    if (this.#bridge[this.#moveCount] === 'U') {
-      upsideBridge.push(' ');
-      downsideBridge.push('X');
-    } else if (this.#bridge[this.#moveCount] === 'D') {
-      upsideBridge.push('X');
-      downsideBridge.push(' ');
+    if (this.#bridge[this.#moveCount] === GAME_RULE.UPSIDE_COMMAND) {
+      upsideBridge.push(GAME_RULE.BLANK);
+      downsideBridge.push(GAME_RULE.FAIL);
+    } else if (this.#bridge[this.#moveCount] === GAME_RULE.DOWNSIDE_COMMAND) {
+      upsideBridge.push(GAME_RULE.FAIL);
+      downsideBridge.push(GAME_RULE.BLANK);
     }
     return { upsideBridge, downsideBridge };
   }

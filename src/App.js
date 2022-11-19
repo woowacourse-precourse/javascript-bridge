@@ -2,6 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { OUTPUT_MESSAGE, GAME_RULE } = require('./utils/Constant');
 const Exception = require('./utils/Exception');
 const Validator = require('./utils/Validator');
 const InputView = require('./view/InputView');
@@ -53,17 +54,17 @@ class App {
   startMove(direction) {
     if (this.#bridgeGame.isMove(direction)) {
       this.#bridgeGame.move();
-      this.renderBridge('성공');
+      this.renderBridge(GAME_RULE.SUCCESS_MESSAGE);
       this.checkCompletion();
       return;
     }
-    this.renderBridge('실패');
+    this.renderBridge(GAME_RULE.FAIL_MESSAGE);
     this.readValidFinalCommand();
   }
 
   renderBridge(result) {
     let convertedBridge = this.#bridgeGame.getConvertedBridge();
-    if (result === '실패') {
+    if (result === GAME_RULE.FAIL_MESSAGE) {
       convertedBridge = this.#bridgeGame.getFailureBridge(convertedBridge);
     }
     OutputView.printMap(convertedBridge);
@@ -71,7 +72,7 @@ class App {
 
   checkCompletion() {
     if (this.#bridgeGame.isCompletion()) {
-      this.resultGame('성공');
+      this.resultGame(GAME_RULE.SUCCESS_MESSAGE);
       return;
     }
     this.readValidDirection();
@@ -88,15 +89,15 @@ class App {
   }
 
   failGame(command) {
-    if (command === 'R') {
+    if (command === GAME_RULE.RETRY_COMMAND) {
       this.replay();
       return;
     }
-    this.resultGame('실패');
+    this.resultGame(GAME_RULE.FAIL_MESSAGE);
   }
 
   resultGame(result) {
-    Console.print('최종 게임 결과');
+    Console.print(OUTPUT_MESSAGE.RESULT);
     this.renderBridge(result);
     OutputView.printResult(result, this.#attempts);
     this.end();
