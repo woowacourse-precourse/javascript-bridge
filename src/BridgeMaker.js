@@ -12,12 +12,9 @@ const BridgeMaker = {
     const bridgeSet = [];
     for (let stage = 0; stage < size; stage++) {
       const number = generateRandomNumber();
-      bridgeSet.push(this.rightBridge(number));
+      +number === 0 ? bridgeSet.push('D') : bridgeSet.push('U');
     }
     return bridgeSet;
-  },
-  rightBridge(number) {
-    return number === 0 ? 'D' : 'U';
   },
 };
 
