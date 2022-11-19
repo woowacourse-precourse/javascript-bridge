@@ -19,6 +19,14 @@ const INPUT_BRIDGE_REGEX = /[UD]/;
 
 const UP = 'U';
 const DOWN = 'D';
+const RETRY = 'R';
+
+const SUCCESS = '성공';
+const FAIL = '실패';
+
+const SUCCESS_SHAPE = 'O';
+const FAIL_SHAPE = 'X';
+const BLANK = ' ';
 
 module.exports = {
   MESSAGE,
@@ -28,4 +36,10 @@ module.exports = {
   INPUT_BRIDGE_REGEX,
   UP,
   DOWN,
+  SUCCESS_SHAPE,
+  FAIL_SHAPE,
+  RETRY,
+  SUCCESS,
+  FAIL,
+  BLANK,
 };
