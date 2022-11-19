@@ -15,44 +15,27 @@ class BridgeMap {
     this.#pattern = pattern;
   }
 
+  getPathMarker (chooseStep) {
+    return this.checkPath(chooseStep) ? 'O' : 'X';
+  }
+
   checkPath (chooseStep) {
-    return this.#pattern[this.#distance] !== chooseStep;
+    return this.#pattern[this.#distance] === chooseStep;
   }
 
   isEndGame () {
     return this.#pattern.length === this.#distance;
   }
 
-  record (chooseStep) {
-    if (this.checkPath(chooseStep)) {
-      this.recordNotPath(chooseStep);
-    } else {
-      this.recordGoPath(chooseStep);
-    }
+  getPathHistory (chooseStep) {
+    this.#history.up
+      .push(chooseStep === GAME_CONSTANTS.upStair
+        ? this.getPathMarker(chooseStep) : GAME_CONSTANTS.empty);
+    this.#history.down
+      .push(chooseStep === GAME_CONSTANTS.downStair
+        ? this.getPathMarker(chooseStep) : GAME_CONSTANTS.empty);
     this.#distance += 1;
     return this.#history;
-  }
-
-  recordNotPath (chooseStep) {
-    if (chooseStep === GAME_CONSTANTS.upStair) {
-      this.#history.up.push(GAME_CONSTANTS.notPath);
-      this.#history.down.push(GAME_CONSTANTS.empty);
-    }
-    if (chooseStep === GAME_CONSTANTS.downStair) {
-      this.#history.up.push(GAME_CONSTANTS.empty);
-      this.#history.down.push(GAME_CONSTANTS.notPath);
-    }
-  }
-
-  recordGoPath (chooseStep) {
-    if (chooseStep === GAME_CONSTANTS.upStair) {
-      this.#history.up.push(GAME_CONSTANTS.goPath);
-      this.#history.down.push(GAME_CONSTANTS.empty);
-    }
-    if (chooseStep === GAME_CONSTANTS.downStair) {
-      this.#history.up.push(GAME_CONSTANTS.empty);
-      this.#history.down.push(GAME_CONSTANTS.goPath);
-    }
   }
 }
 
