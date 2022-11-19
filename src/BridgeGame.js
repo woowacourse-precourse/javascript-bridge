@@ -4,10 +4,9 @@ const CurrBridge = require('./CurrBridge');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #tryingCount = 0;
+  #tryingCount = 1;
 
-  constructor(controller) {
-    this.controller = controller;
+  constructor() {
     this.winningBridge;
     this.currBridge = new CurrBridge();
   }
@@ -16,8 +15,10 @@ class BridgeGame {
   makeWinningBridge(size) {
     this.winningBridge = new WinningBridge(size);
     this.winningBridge.makeWinningBridge(size);
+  }
 
-    this.controller.inputMoving();
+  validate(direction) {
+    this.currBridge.validate(direction);
   }
 
   /**
@@ -25,17 +26,12 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  validate(direction) {
-    this.currBridge.validate(direction);
-  }
-
   move(direction) {
-    this.#tryingCount += 1;
     const canMove = this.currBridge.canMove(direction, this.winningBridge);
     this.currBridge.makeBridge(direction, canMove);
 
     const [upperBridge, lowerBridge] = this.currBridge.getBridge();
-    this.controller.printMoving(canMove, upperBridge, lowerBridge);
+    return [canMove, upperBridge, lowerBridge];
   }
 
   isFinished() {
@@ -54,7 +50,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    console.log();
+    this.#tryingCount += 1;
   }
 }
 

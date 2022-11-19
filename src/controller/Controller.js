@@ -5,7 +5,7 @@ const { MESSAGE } = require('../utils/constants');
 
 class Controller {
   constructor() {
-    this.bridgeGame = new BridgeGame(this);
+    this.bridgeGame = new BridgeGame();
   }
 
   // - 다리의 길이 입력 받는다.
@@ -22,6 +22,8 @@ class Controller {
   makeWinningBridge(size) {
     OutputView.printMessage('');
     this.bridgeGame.makeWinningBridge(Number(size));
+
+    this.inputMoving();
   }
 
   // - 위, 아래 중 이동할 칸 입력 받는다.
@@ -31,7 +33,9 @@ class Controller {
 
   move(direction) {
     this.bridgeGame.validate(direction);
-    this.bridgeGame.move(direction);
+    const [canMove, upperBridge, lowerBridge] = this.bridgeGame.move(direction);
+
+    this.printMoving(canMove, upperBridge, lowerBridge);
   }
 
   printMoving(canMove, upperBridge, lowerBridge) {
