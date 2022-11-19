@@ -12,8 +12,8 @@ class Bridge {
     }
   }
 
-  isMovable(path, direction) {
-    return this.#bridge[path.length] === direction;
+  isMovable(position, direction) {
+    return this.#bridge[position + 1] === direction;
   }
 
   isLastStep(position) {
