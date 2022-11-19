@@ -7,6 +7,10 @@ class BridgeGame {
 
   constructor(bridge) {
     this.#bridge = bridge;
+    this.#result = new Map([
+      ['U', []],
+      ['D', []],
+    ]);
   }
 
   move() {
@@ -31,6 +35,18 @@ class BridgeGame {
 
   getResult() {
     return this.#result;
+  }
+  
+  updateResult(direction) {
+    for (let dir of this.#result.keys()) {
+      if (dir === direction) continue;
+      this.#result.get(dir).push(' ');
+    }
+    if (this.isAnswer(direction)) {
+      this.#result.get(direction).push('O');
+      return;
+    }
+    this.#result.get(direction).push('X');
   }
 }
 
