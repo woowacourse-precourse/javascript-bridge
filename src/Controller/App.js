@@ -1,12 +1,14 @@
 const InputView = require("../View/InputView");
 const OutputView = require("../View/OutputView");
-const { makeBridge } = require("../BridgeMaker");
-const BridgeGame = require("../BridgeGame");
-const { generate } = require("../BridgeRandomNumberGenerator");
+const { makeBridge } = require("../Model/BridgeMaker");
+const BridgeGame = require("../Model/BridgeGame");
+const { generate } = require("../Model/BridgeRandomNumberGenerator");
 const { GAME, MESSAGE } = require("../Constants");
+const { Validate } = require("../Validate");
 
 class App {
   constructor() {
+    this.validate = new Validate();
     this.bridgeGame = null;
     this.bridgeSize = 0;
   }
@@ -18,6 +20,8 @@ class App {
 
   requestBridgeSize() {
     InputView.readBridgeSize((bridgeSize) => {
+      this.validate.checkBridgeSize(bridgeSize);
+
       this.bridgeSize = bridgeSize;
       const bridge = makeBridge(bridgeSize, generate);
       this.bridgeGame = new BridgeGame(bridge);
@@ -37,6 +41,7 @@ class App {
       if (canCross) {
         if (this.isLastPosition(upperBridge)) {
           this.quit();
+
           return;
         }
 
