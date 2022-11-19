@@ -263,3 +263,43 @@ describe('다리 건너기 맵 출력 테스트', () => {
     expectBridgeOrder(log, '[ O |   | O |   | O |   ]', '[   | O |   | O |   | X ]');
   });
 });
+
+describe('다리 건너기 결과 출력 테스트 (재시작X)', () => {
+  test('다리를 끝까지 건넌 경우 (다리 길이 20)', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['0', '0', '1', '0', '0', '1', '0', '0', '1', '0', '0', '1', '0', '0', '1', '0', '0', '1', '0', '0']);
+    mockQuestions(['20', 'D', 'D', 'U', 'D', 'D', 'U', 'D', 'D', 'U', 'D', 'D', 'U', 'D', 'D', 'U', 'D', 'D', 'U', 'D', 'D']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '최종 게임 결과',
+      '[   |   | O |   |   | O |   |   | O |   |   | O |   |   | O |   |   | O |   |   ]',
+      '[ O | O |   | O | O |   | O | O |   | O | O |   | O | O |   | O | O |   | O | O ]',
+      '게임 성공 여부: 성공',
+      '총 시도한 횟수: 1',
+    ]);
+    expectBridgeOrder(log, '[   |   | O |   |   | O |   |   | O |   |   | O |   |   | O |   |   | O |   |   ]', '[ O | O |   | O | O |   | O | O |   | O | O |   | O | O |   | O | O |   | O | O ]');
+  });
+
+  test('다리를 건너다 실패한 경우', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['0', '0', '1', '0', '0', '1']);
+    mockQuestions(['6', 'D', 'D', 'U', 'D', 'U']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '최종 게임 결과',
+      '[   |   | O |   | X ]',
+      '[ O | O |   | O |   ]',
+      '게임 성공 여부: 실패',
+      '총 시도한 횟수: 1',
+    ]);
+    expectBridgeOrder(log, '[   |   | O |   | X ]', '[ O | O |   | O |   ]');
+  });
+});
