@@ -19,4 +19,11 @@ const validateMove = (move) => {
   }
 };
 
-module.exports = { validateBridge, validateMove };
+const validateRetry = (answer) => {
+  if (/[^RQ]/.test(answer)) {
+    Console.print('[ERROR] 재시작/종료는 R 도는 Q로 입력해야 합니다.');
+    throw new Error();
+  }
+};
+
+module.exports = { validateBridge, validateMove, validateRetry };

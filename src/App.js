@@ -3,7 +3,7 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const { Console } = require('@woowacourse/mission-utils');
-const { validateBridge, validateMove } = require('./utils/validate');
+const { validateBridge, validateMove, validateRetry } = require('./utils/validate');
 
 class App {
   constructor() {
@@ -29,6 +29,7 @@ class App {
   }
 
   getRetry(answer) {
+    validateRetry(answer);
     if (answer === 'Q') {
       Console.close();
       return;
