@@ -208,3 +208,11 @@ describe('배열 길이 반환 함수 테스트', () => {
     expect(Application.getArrayLength(EXPECTED)).toEqual(RECEIVED);
   });
 });
+
+describe('배열 범위 추출 함수', () => {
+  test('메소드 이름은 "extractArrayRange "로 정의된다.', () => {
+    const METHOD_NAME = 'extractArrayRange';
+
+    expect(Application.extractArrayRange.name).toEqual(METHOD_NAME);
+  });
+});
