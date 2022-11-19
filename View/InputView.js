@@ -1,8 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGE } = require("../constants/Message");
 const ValidateInput = require("../src/ValidateInput");
-const BridgeGame = require("../src/BridgeGame");
-const Convert = require("../src/Convert");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  * InputView 에서만 MissionUtils의

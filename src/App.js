@@ -1,9 +1,11 @@
-const InputView = require("../View/InputView");
-const OutputView = require("../View/OutputView");
+const { printMessage } = require("../View/OutputView");
 const { MESSAGE } = require("../constants/Message");
+const Control = require("./Control");
 
 class App {
-  constructor() {}
+  constructor() {
+    printMessage(MESSAGE.START);
+  }
   play() {}
 }
 
