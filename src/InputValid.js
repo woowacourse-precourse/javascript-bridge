@@ -1,5 +1,3 @@
-const MOVE_VALID = ['U', 'D']
-
 class BridgeSizeValid {
   #answer;
 
@@ -34,6 +32,8 @@ class MovingValid {
   }
 
   validate(answer) {
+    const MOVE_VALID = ['U', 'D']
+    
     if(!MOVE_VALID.includes(answer)) {
       throw new Error('[ERROR] 유효하지 않은 입력');
     }
