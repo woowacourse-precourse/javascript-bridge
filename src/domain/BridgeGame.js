@@ -1,7 +1,7 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const User = require('../model/User');
-const GameMap = require('../model/GameMap');
+const GameMap = require('./GameMap');
 
 class BridgeGame {
   constructor() {
@@ -33,15 +33,6 @@ class BridgeGame {
     return this.user.getTryCount();
   }
 
-  checkUserLocation() {
-    const gameMap = this.getCorrectGameMap();
-    const userLocation = this.getUserLocation();
-    if (gameMap.length === userLocation) {
-      return true;
-    }
-    return false;
-  }
-
   getCorrectGameMap() {
     return this.gameMap.getCorretGameMap();
   }
@@ -50,26 +41,27 @@ class BridgeGame {
     return this.gameMap.isGameOver();
   }
 
-  isSuccess() {
-    return this.getCorrectGameMap.length === this.user.getLocation;
-  }
-
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   move() {
     this.user.setLocation();
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   retry() {
+    this.setupRetryGame();
+  }
+
+  setupRetryGame() {
+    // 리트라이 할 때 세팅 다시하는 곳
+    this.gameMap.setPrevBridge();
     this.gameMap.setRetryGame();
+    this.increaseTryCount();
+    this.decreaseUserLocation();
+  }
+
+  increaseTryCount() {
+    this.user.increaseCount();
+  }
+  decreaseUserLocation() {
+    this.user.decreaseLocation();
   }
 }
 
