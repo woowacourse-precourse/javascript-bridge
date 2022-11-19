@@ -7,6 +7,10 @@ const BRIDGE = {
     SHAPE: "D",
     NUM: 0,
   },
+  GMAE: {
+    RETRY: "R",
+    END: "Q",
+  },
 };
 
 module.exports = BRIDGE;
