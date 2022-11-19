@@ -1,8 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGE } = require("../constants/Message");
-const ValidateInput = require("./ValidateInput");
-const BridgeGame = require("./BridgeGame");
-const Convert = require("./Convert");
+const ValidateInput = require("../src/ValidateInput");
+const BridgeGame = require("../src/BridgeGame");
+const Convert = require("../src/Convert");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  * InputView 에서만 MissionUtils의
@@ -15,12 +15,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(MESSAGE.READ_BRIDGE_SIZE, (size) => {
       try {
-        ValidateInput.validate(Number(size));
-        const solutionBridge = new BridgeGame().makeBridge(size);
-        this.readMoving(solutionBridge, 0);
-      } catch (e) {
-        this.readBridgeSize();
-      }
+      } catch (e) {}
     });
   },
 
