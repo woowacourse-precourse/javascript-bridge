@@ -4,8 +4,12 @@ const InputVaildation = {
     if (!regExag.test(bridgeLength)) {
       throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
     }
-
   },
+  ofMove(movingInput) {
+    if (movingInput !== 'U' && movingInput !== 'D') {
+      throw new Error('[ERROR] 다리 이동 입력은 "U"와 "D"만 가능합니다');
+    }
+  }
 };
 
 module.exports = InputVaildation;
