@@ -7,8 +7,8 @@
 ## 🥇BridgeGame
 
 - [ ] 다리를 생성하는 기능
-  - [ ] 랜덤으로 숫자를 1개 생성하는 기능 (BridgeRandomNumberGenerator)
-  - [ ] 받은 숫자만큼 다리를 생성하는 기능(BridgeMaker)
+  - [x] 랜덤으로 숫자를 1개 생성하는 기능 (BridgeRandomNumberGenerator)
+  - [x] 받은 숫자만큼 다리를 생성하는 기능(BridgeMaker)
 - [ ] 이동하는 기능
 - [ ] 이동후 결과를 판단하는 기능
   - [ ] 성공 && 끝까지 도달

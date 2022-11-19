@@ -11,6 +11,10 @@ const MOVEMENT = Object.freeze({
   UP: 'U',
   DOWN: 'D',
 });
+const BRIDGE_BLOCK = Object.freeze({
+  UP: 'U',
+  DOWN: 'D',
+});
 const TOTAL_RESULT = Object.freeze({
   SUCCESS: 1,
   FAIL: 0,
@@ -21,5 +25,5 @@ const MOVEMENT_RESULT = Object.freeze({
   WRONG: -1,
 });
 module.exports = Object.freeze({
-  MESSAGE, MOVEMENT, TOTAL_RESULT, MOVEMENT_RESULT,
+  MESSAGE, MOVEMENT, TOTAL_RESULT, MOVEMENT_RESULT, BRIDGE_BLOCK,
 });
