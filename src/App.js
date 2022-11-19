@@ -36,15 +36,18 @@ class App {
   roundInputBranch(directionInput) {
     try {
       InputValidate.validateDirection(directionInput);
-      const roundResult = BridgeGameController.startNewRound(this.bridgeGame, directionInput);
-      switch (roundResult) {
-        case 0: InputView.readGameCommand(this.roundRetryBranch); break;
-        case 1: InputView.readMoving(this.roundInputBranch); break;
-        case 2: return null;
-      }
+      this.roundResultBranch(BridgeGameController.startNewRound(this.bridgeGame, directionInput));
     } catch(e) {
       MissionUtils.Console.print(e.message);
       InputView.readMoving(this.roundInputBranch);
+    }
+  }
+
+  roundResultBranch(roundResult) {
+    switch (roundResult) {
+      case 0: InputView.readGameCommand(this.roundRetryBranch); break;
+      case 1: InputView.readMoving(this.roundInputBranch); break;
+      case 2: return null;
     }
   }
 
