@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { BRIDGE_STRING } = require('./constants');
 
 const OutputView = {
   START_MESSAGE: '다리 건너기 게임을 시작합니다.',
@@ -21,8 +22,8 @@ const OutputView = {
   },
 
   printMap(moveList) {
-    OutputView.printLocalMap(moveList, 'U');
-    OutputView.printLocalMap(moveList, 'D');
+    OutputView.printLocalMap(moveList, BRIDGE_STRING.up);
+    OutputView.printLocalMap(moveList, BRIDGE_STRING.down);
   },
 
   printLocalMap(moveList, location) {
