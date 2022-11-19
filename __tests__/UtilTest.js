@@ -85,4 +85,12 @@ describe('유틸 함수 동작 테스트', () => {
     expect(validCheck.moveInput('u')).toBe(false);
     expect(validCheck.moveInput('d')).toBe(false);
   });
+
+  test('재시작/종료 입력값 검증 함수', () => {
+    expect(validCheck.quitInput('Q')).toBe(true);
+    expect(validCheck.quitInput('R')).toBe(true);
+    expect(validCheck.quitInput('1')).toBe(false);
+    expect(validCheck.quitInput('q')).toBe(false);
+    expect(validCheck.quitInput('r')).toBe(false);
+  });
 });
