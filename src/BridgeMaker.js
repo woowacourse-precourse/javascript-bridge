@@ -11,8 +11,9 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = new Array(Number(size)).fill().map((_) => {
-      let number = generateRandomNumber();
-      return (number === 0 && "U") || (number === 1 && "D");
+      let number = String(generateRandomNumber());
+      if (number === "1") return "U";
+      else if (number === "0") return "D";
     });
     return bridge;
   },
