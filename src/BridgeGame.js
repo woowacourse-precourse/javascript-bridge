@@ -12,6 +12,7 @@ class BridgeGame {
     this.playerUpperBridge = [];
     this.playerLowerBridge = [];
     this.attempsCount = GAME.ATTEMPTS_COUNT_INIT;
+    this.isSuccess = GAME.SUCCESS;
   }
 
   init() {
@@ -62,6 +63,15 @@ class BridgeGame {
   retry() {
     this.init();
     this.attempsCount++;
+  }
+
+  getResult() {
+    return [
+      this.playerUpperBridge,
+      this.playerLowerBridge,
+      this.isSuccess,
+      this.attempsCount,
+    ];
   }
 }
 
