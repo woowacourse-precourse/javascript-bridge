@@ -1,12 +1,12 @@
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const BridgeMaker = require('../BridgeMaker');
+const { Console } = require('@woowacourse/mission-utils');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
-  #map;
   #time;
 
   constructor() {
@@ -23,21 +23,19 @@ class BridgeGame {
     this.#bridge = bridge;
   }
 
-  setMap(next) {
-    if (next === 'U') {
-      this.topSide.push('O');
-      this.downSide.push('X');
-    }
-
-    if (next === 'D') {
-      this.topSide.push('X');
-      this.downSide.push('O');
-    }
-
-    console.log(this.topSide);
-    console.log(this.downSide);
+  setTopSide() {
+    this.topSide.push(1);
+    this.downSide.push(0);
   }
 
+  setDownSide() {
+    this.topSide.push(0);
+    this.downSide.push(1);
+  }
+
+  getMap() {
+    return { topSide: this.topSide, dowSide: this.downSide };
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -45,13 +43,11 @@ class BridgeGame {
    */
   move(next) {
     this.#time += 1;
-    if (this.#time === this.#bridge.length) {
-      return 2;
-    }
-    if (next !== this.#bridge[this.#time - 1]) {
-      return 0;
-    }
-    return 1;
+    next === 'U' ? this.setTopSide() : this.setDownSide();
+  }
+
+  isEnd() {
+    return this.#time === this.#bridge.length;
   }
 
   /**

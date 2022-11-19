@@ -30,20 +30,8 @@ class GameController {
 
   setMoving(next) {
     validateNext.validate(next);
-    const result = this.game.move(next);
-    if (result !== 1 && result !== 0) {
-      console.log('성공');
-      Console.close();
-    }
-
-    this.game.setMap(next); // MAP
-
-    if (result === 1) {
-      this.askMoving();
-    }
-    if (result === 0) {
-      console.log('실패');
-    }
+    this.game.move(next);
+    this.game.isEnd() ? Console.close() : this.askMoving();
   }
 }
 
