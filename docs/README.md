@@ -178,3 +178,9 @@
   - [ ] 최종 시도 Map 출력
   - [ ] 게임 성공 여부 출력
   - [ ] 게임 시도 횟수 출력
+
+> 입력값 validation 처리를 Controller에서 처리하도록 변경,
+> 이에 따라 객체 설계 수정하였습니다.
+
+**3차 객체 설계도**
+<img width = "900px" src  = "https://user-images.githubusercontent.com/78203399/202842271-a2fd7c3b-ac11-49cc-a531-8fe3b657d07d.jpeg" />
