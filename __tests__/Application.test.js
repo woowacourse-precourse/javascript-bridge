@@ -209,10 +209,19 @@ describe('배열 길이 반환 함수 테스트', () => {
   });
 });
 
-describe('배열 범위 추출 함수', () => {
+describe('배열 범위 추출 함수 테스트', () => {
   test('메소드 이름은 "extractArrayRange "로 정의된다.', () => {
     const METHOD_NAME = 'extractArrayRange';
 
     expect(Application.extractArrayRange.name).toEqual(METHOD_NAME);
+  });
+
+  test('참조 대상이 배열이 아니라면 예외를 발생시킨다.', () => {
+    const EXPECTED1 = '3';
+    const EXPECTED2 = 3;
+
+    expect(() => {
+      Application.extractArrayRange(EXPECTED1, EXPECTED2);
+    }).toThrow(VALIDATION_ARRAY_TEXT);
   });
 });
