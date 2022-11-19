@@ -38,6 +38,13 @@ describe.only("이동할 칸 player 입력 테스트", () => {
     }
   );
 
+  test.each([["a"], ["k"]])(
+    "이동할 칸을 소문자를 입력한 경우 true 반환",
+    (input) => {
+      expect(Validation.isValidMovingCase(input)).toBe(false);
+    }
+  );
+
   test.each([["U"], ["D"]])(
     "이동할 칸을 U 또는 D를 입력한 경우 true 반환",
     (input) => {
