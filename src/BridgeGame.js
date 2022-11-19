@@ -3,7 +3,8 @@
 const Bridge = require('./Bridge');
 const Player = require('./Player');
 const StatusGenerator = require('./StatusGenerator');
-const { MARKING, COMMAND } = require('./utils/const');
+const { MARKING, COMMAND, BRIDGE_SPACE_TYPE } = require('./utils/const');
+const Validator = require('./utils/Validator');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -30,6 +31,7 @@ class BridgeGame {
    * @return {0 | 1 | 2} 0: Fail, 1: Success, 2: Next
    */
   move(moving) {
+    Validator.validateEqual(moving, BRIDGE_SPACE_TYPE);
     const currentStep = this.#player.getStep();
     const isCorrect = this.#bridge.isCorrect(moving, currentStep);
     const isLast = this.#bridge.isLast(currentStep);
