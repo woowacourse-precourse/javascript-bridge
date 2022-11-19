@@ -21,13 +21,16 @@ class BridgeGame {
    * 사용자가 칸을 이동할 때 사용하는 메서드
    */
   move() {
-    console.log('\nmove\n')
+    const updateMove = (direction) => {
+      console.log(direction);
+    }
+    this.view.getWhereToGo(updateMove);
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    */
   retry() {}
-
+  
 }
 
 module.exports = BridgeGame;

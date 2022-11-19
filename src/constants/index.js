@@ -2,12 +2,13 @@ module.exports = {
   MESSAGES : Object.freeze({
     GAMESTART : '다리 건너기 게임을 시작합니다.',
     ASKBRIDGELENTH : '\n다리의 길이를 입력해주세요.\n',
+    ASKMOVEDIR : '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
   }),
   DIRECTION : Object.freeze({
-    'U': 0,
-    'D': 1,
-    '0': 'D',
-    '1': 'U',
+    U: 0,
+    D: 1,
+    0: 'D',
+    1: 'U',
   }),
   TYPE : Object.freeze({
     SIZE : 'SIZE',

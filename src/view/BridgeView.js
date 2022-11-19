@@ -23,8 +23,21 @@ class BridgeView {
     this.input.readBridgeSize(validation);
   }
 
+  getWhereToGo(updateMove) {
+    const validation = (destination) => {
+      try {
+        Validation.isRightStep(destination);
+        return updateMove(destination);
+      } catch (err) {
+        this.printError(err);
+        this.input.readMoving(validation);
+      }
+    }
+    this.input.readMoving(validation);
+  } 
+
   printError(type) {
-    return this.output.printError(type)
+    this.output.printError(type)
   }
 
 }
