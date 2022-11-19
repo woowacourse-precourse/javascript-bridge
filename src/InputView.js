@@ -29,18 +29,20 @@ const InputView = {
       try {
         GameInfo.bridgeSize = new ValidateBridgeSize(bridgeSize).bridgeSize;
       } catch {
-        OutputView.printError("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+        OutputView.printMessage("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
         return this.readBridgeSize();
       }
       GameInfo.bridge = BridgeMaker
         .makeBridge(GameInfo.bridgeSize, BridgeRandomNumberGenerator.generate);
-      this.playGame();
+
+      return this.playGame();
     });
   },
 
   playGame() {
     BridgeGame.initializeGameInfo();
-    this.readMoving();
+
+    return this.readMoving();
   },
 
   /**
@@ -51,10 +53,11 @@ const InputView = {
       try {
         GameInfo.currentMove = new ValidateMoving(moving).moving;
       } catch {
-        OutputView.printError("[ERROR] 이동할 칸은 'U' 혹은 'D'여야 합니다.");
+        OutputView.printMessage("[ERROR] 이동할 칸은 'U' 혹은 'D'여야 합니다.");
         return this.readMoving();
       }
-      this.moveBridge();
+
+      return this.moveBridge();
     });
   },
 
@@ -75,10 +78,11 @@ const InputView = {
       try {
         GameInfo.gameCommand = new ValidateGameCommand(gameCommand).gameCommand;
       } catch {
-        OutputView.printError("[ERROR] 재시작 혹은 종료는 'R' 혹은 'Q'여야 합니다.");
+        OutputView.printMessage("[ERROR] 재시작 혹은 종료는 'R' 혹은 'Q'여야 합니다.");
         return this.readGameCommand();
       }
-      (BridgeGame.retry()) ? this.playGame() : OutputView.printResult()
+
+      return (BridgeGame.retry()) ? this.playGame() : OutputView.printResult();
     });
   },
 };
