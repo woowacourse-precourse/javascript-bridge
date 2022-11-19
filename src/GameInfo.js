@@ -1,8 +1,4 @@
 const GameInfo = {
-  upper: "U",
-
-  lower: "D",
-
   gameStat: null,
 
   bridgeSize: 0,
@@ -14,6 +10,8 @@ const GameInfo = {
   moveBridge: [[], []],
 
   position: -1,
+
+  currentMove: null,
 
   gameCommand: null,
 
