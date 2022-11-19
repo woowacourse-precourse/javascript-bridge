@@ -59,6 +59,10 @@ class BridgeGame {
     return (this.#moveCount += 1);
   }
 
+  increamentTotalCount() {
+    return (this.#totalCount += 1);
+  }
+
   setBridgeList(list) {
     return (this.#bridgeList = list);
   }
