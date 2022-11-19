@@ -1,7 +1,16 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { GUIDE_MSG, ERROR_MSG, SUCCESS, FAIL } = require("./constants");
-const BridgeGame = require("../BridgeGame");
-const Validation = require("./Validation");
+const {
+  GUIDE_MSG,
+  ERROR_MSG,
+  SUCCESS,
+  FAIL,
+} = require("../Messages/constants");
+const BridgeGame = require("../Model/BridgeGame");
+const {
+  ValidCmd,
+  ValidMove,
+  ValidSize,
+} = require("../Validation/CheckValidation");
 const OutputView = require("./OutputView");
 
 let bridgeGame;
@@ -14,12 +23,20 @@ const InputView = {
 
   inputSizeForm(answer) {
     try {
-      if (!Validation.ValidSize(answer)) throw new Error();
+      this.checkInputSize(answer);
       this.startBridgeGame(answer);
     } catch (error) {
-      Console.print(ERROR_MSG.INPUT_SIZE_ERROR);
-      this.readBridgeSize();
+      this.printMsgAndReadSizeAgain();
     }
+  },
+
+  checkInputSize(answer) {
+    if (!ValidSize(answer)) throw new Error();
+  },
+
+  printMsgAndReadSizeAgain() {
+    Console.print(ERROR_MSG.INPUT_SIZE_ERROR);
+    this.readBridgeSize();
   },
 
   startBridgeGame(answer) {
@@ -36,12 +53,20 @@ const InputView = {
 
   inputMovingForm(answer) {
     try {
-      if (!Validation.ValidMove(answer)) throw new Error();
-      this.checkBridge(answer);
+      this.checkInputMove(answer);
     } catch (error) {
-      Console.print(ERROR_MSG.INPUT_MOVING_ERROR);
-      this.readMoving();
+      this.printMsgAndReadMovingAgain();
     }
+  },
+
+  checkInputMove(answer) {
+    if (!ValidMove(answer)) throw new Error();
+    this.checkBridge(answer);
+  },
+
+  printMsgAndReadMovingAgain() {
+    Console.print(ERROR_MSG.INPUT_MOVING_ERROR);
+    this.readMoving();
   },
 
   checkCrossTheBridgeCompletely(answer) {
@@ -70,12 +95,20 @@ const InputView = {
 
   inputGameCmdForm(answer) {
     try {
-      if (!Validation.ValidCmd(answer)) throw new Error();
-      this.selectRestartOrQuit(answer);
+      this.checkInputCmd(answer);
     } catch (error) {
-      Console.print(ERROR_MSG.INPUT_CMD_ERROR);
-      this.showGameCommand(null);
+      this.printMsgAndInputCmdAgain();
     }
+  },
+
+  checkInputCmd(answer) {
+    if (!ValidCmd(answer)) throw new Error();
+    this.selectRestartOrQuit(answer);
+  },
+
+  printMsgAndInputCmdAgain() {
+    Console.print(ERROR_MSG.INPUT_CMD_ERROR);
+    this.showGameCommand(null);
   },
 
   selectRestartOrQuit(answer) {

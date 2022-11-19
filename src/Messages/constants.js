@@ -16,10 +16,15 @@ const PRINT_FINISH_MSG = "\n최종 게임 결과";
 const SUCCESS = "성공";
 const FAIL = "실패";
 
+const SEPARATOR = " | ";
+const CO_INPUT_UP = "U";
+
 module.exports = {
   GUIDE_MSG,
   ERROR_MSG,
   PRINT_FINISH_MSG,
   SUCCESS,
   FAIL,
+  SEPARATOR,
+  CO_INPUT_UP,
 };

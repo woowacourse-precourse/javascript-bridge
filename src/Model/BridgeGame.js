@@ -1,7 +1,8 @@
-const RandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const BridgeMaker = require("./BridgeMaker");
+const RandomNumberGenerator = require("../BridgeRandomNumberGenerator");
+const BridgeMaker = require("../BridgeMaker");
 
 class BridgeGame {
+  static INPUT_UP = "U";
   #bridge = [];
 
   constructor() {
@@ -27,10 +28,10 @@ class BridgeGame {
   }
 
   move(answer) {
-    return (answer == "U" && answer == this.#bridge[this.progressIdx]) ||
+    return (
+      (answer == "U" && answer == this.#bridge[this.progressIdx]) ||
       (answer == "D" && answer == this.#bridge[this.progressIdx])
-      ? true
-      : false;
+    );
   }
 
   getIsCorrect() {
@@ -41,7 +42,7 @@ class BridgeGame {
   }
 
   crossBridgeCompletely() {
-    return this.#bridge.length == this.numberOfCorrect ? true : false;
+    return this.#bridge.length == this.numberOfCorrect;
   }
 
   setInitializeCondition() {
@@ -51,7 +52,7 @@ class BridgeGame {
 
   retry(answer) {
     if (answer == "R") {
-      this.initializeCondition();
+      this.setInitializeCondition();
       return true;
     }
     if (answer == "Q") return false;
