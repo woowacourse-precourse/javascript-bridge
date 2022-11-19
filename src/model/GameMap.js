@@ -7,6 +7,7 @@ class GameMap {
   #CorretBridge; // 정답 맵
   #upperBridge = [];
   #lowerBridge = [];
+  #fail = false;
 
   setCorretBridge(gameMap) {
     this.#CorretBridge = gameMap;
@@ -14,6 +15,10 @@ class GameMap {
 
   getCorretBridge() {
     return this.#CorretBridge;
+  }
+
+  isGameOver() {
+    return this.#fail;
   }
 
   drawBridge(moveCommand, userLocation) {
@@ -24,7 +29,6 @@ class GameMap {
     this.appendEmptySpace(selectBridge); // 안 선택한 다리에 공백 넣기
 
     return `[${this.#upperBridge.join('')}]\n[${this.#lowerBridge.join('')}]\n`;
-    // 여기서 다리를 그리자
     // 사용자가 고른 다리면 O 또는 X 표시, 안 골랐으면 공백 3칸을 추가한다.
     // 유저가 0번째 위치거나 마지막 위치일 때는 다리를 연장하지 않는다.
     // 만약, 유저가 n번째 위치라면 다리를 연장 시켜야한다.
@@ -44,6 +48,7 @@ class GameMap {
     if (isPossibleNext) {
       return o;
     }
+    this.#fail = true; // 나중에 user 클래스로 옮겨야 될 것 같은..?
     return x;
   }
 

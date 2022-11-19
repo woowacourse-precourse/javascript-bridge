@@ -36,11 +36,34 @@ class App {
   requestMovementDirection(moveCommand) {
     try {
       this.validator.checkMoveCommand(moveCommand);
-      // 예외 통과시 실행할 코드
-      this.bridgeGame.move(moveCommand);
+      OutputView.printMap(this.bridgeGame.drawBridgeMap(moveCommand)); // 사용자가 입력한 커맨드에 따라 맵 그리고 출력시키기
+      this.getGameOverCommand(this.checkGameOver());
+      this.bridgeGame.move(moveCommand); // 그다음 유저 위치 이동시키기
+      this.getBridgeMovementDirection();
     } catch (errorType) {
       OutputView.printError(errorType);
       this.getBridgeMovementDirection();
+    }
+  }
+
+  checkGameOver() {
+    const isGameOver = this.bridgeGame.getGameState();
+    return isGameOver;
+  }
+
+  getGameOverCommand(isGameOver) {
+    if (isGameOver) {
+      InputView.readGameCommand(this.requestRetryGame.bind(this));
+    }
+  }
+
+  requestRetryGame(retryCommand) {
+    try {
+      this.validator.checkRetryCommand(retryCommand);
+      this.getGameOverCommand(this.checkGameOver());
+    } catch (errorType) {
+      OutputView.printError(errorType);
+      this.getGameOverCommand(this.checkGameOver());
     }
   }
 }
