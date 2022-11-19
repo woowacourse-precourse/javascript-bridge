@@ -1,6 +1,12 @@
-const ERROR_NAME = {
-  BRIDGE: 'BridgeLength',
-  CONTROL: 'ControlType',
-  MOVE: 'MoveType',
+const Constant = {
+  ERROR_NAME: {
+    BRIDGE: 'BridgeLength',
+    CONTROL: 'ControlType',
+    MOVE: 'MoveType',
+  },
+  UP: 'U',
+  DOWN: 'D',
+  RETRY: 'R',
+  QUIT: 'Q',
 };
-module.exports = ERROR_NAME;
+module.exports = Constant;

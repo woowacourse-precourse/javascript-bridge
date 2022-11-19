@@ -1,5 +1,5 @@
 const BridgeGame = require('./BridgeGame');
-const ERROR_NAME = require('./Constant/constant');
+const { RETRY, ERROR_NAME } = require('./Constant/constant');
 const BridgeValidation = require('./Validation/BridgeValidation');
 const ControlValidation = require('./Validation/ControlValidation');
 const MoveValidation = require('./Validation/MoveValidation');
@@ -21,7 +21,6 @@ class App {
 
   play() {
     printStart();
-
     readBridgeSize.bind(this)(this.createBridge);
   }
 
@@ -52,7 +51,7 @@ class App {
   controlGame(input) {
     try {
       ControlValidation(input);
-      if (input == 'R') {
+      if (input === RETRY) {
         this.#game.retry();
         readMoving.bind(this)(this.moveBridge);
       } else this.gameEnd();
@@ -67,11 +66,11 @@ class App {
   }
   errorHandler(err) {
     printError(err);
-    if (err.name == ERROR_NAME.BRIDGE)
+    if (err.name === ERROR_NAME.BRIDGE)
       readBridgeSize.bind(this)(this.createBridge);
-    if (err.name == ERROR_NAME.CONTROL)
+    if (err.name === ERROR_NAME.CONTROL)
       readGameCommand.bind(this)(this.controlGame);
-    if (err.name == ERROR_NAME.MOVE) readMoving.bind(this)(this.moveBridge);
+    if (err.name === ERROR_NAME.MOVE) readMoving.bind(this)(this.moveBridge);
   }
 }
 new App().play();

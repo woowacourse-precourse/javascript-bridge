@@ -1,5 +1,5 @@
-const UP = 'U';
-const DOWN = 'D';
+const { UP, DOWN } = require('./Constant/constant');
+
 const STRING_MAKER = {
   BRACKET: {
     OPEN: '[',

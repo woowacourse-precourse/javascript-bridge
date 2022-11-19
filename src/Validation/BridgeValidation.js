@@ -1,4 +1,4 @@
-const ERROR_NAME = require('../Constant/constant');
+const { ERROR_NAME } = require('../Constant/constant');
 const CustomError = require('./CustomError');
 
 module.exports = function bridgeValidate(input) {
