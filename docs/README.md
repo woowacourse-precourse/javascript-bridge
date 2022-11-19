@@ -45,7 +45,7 @@
 
 - [ ] 메인 로직
 
-  - [x] 다리 생성기 #**BridgeMaker**
+  - [x] 다리 생성기 #BridgeMaker
     - [x] 다리 길이를 받아서 무작위 다리를 생성하는 기능 #makeBridge
     - 다리를 생성할 때 위칸과 아래 칸 중 건널 수 있 는칸은 0과 1 중 무작위 값을 이용해서 정한다.
   - 제공된 `BridgeMaker` 객체를 활용해 구현해야 한다.
@@ -53,7 +53,7 @@
   - `BridgeMaker`의 파일 경로는 변경할 수 없다.
   - `BridgeMaker`의 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
 
-  - [x] 다리 랜덤 숫자 생성 #**BridgeRandomNumberGenerator**
+  - [x] 다리 랜덤 숫자 생성 #BridgeRandomNumberGenerator
 
     - [x] 다리 칸 Random 값을 생성하는 기능
     - `BridgeRandomNumberGenerator`의 코드는 변경할 수 없다.
@@ -77,7 +77,7 @@
 
     - [ ] 다리건너기 게임의 중간 결과를 문자열로 반환하는 기능#getCurrentBridgeGameShape
 
-  - [ ] 다리 건너기 게임 #**BridgeGame**
+  - [ ] 다리 건너기 게임 #BridgeGame
 
     - [x] 다리와 플레이어를 만드는 기능 #init
     - [ ] 다리 건너기 게임을 시작하는 기능 #start
