@@ -39,7 +39,7 @@ class App {
       MoveValidation(input);
       this.#game.move(input);
       printMap(this.#game.result);
-      this.determinesNextAction();
+      this.determineNextAction();
     } catch (err) {
       this.errorHandler(err);
     }
