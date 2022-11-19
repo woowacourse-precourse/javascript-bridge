@@ -3,6 +3,7 @@ const MOVE = {
   DOWN: 'D',
   CORRECT: 'O',
   INCORRECT: 'X',
+  NO_VISITED: ' ',
 };
 
 const GAME_RETRY = 'R';
