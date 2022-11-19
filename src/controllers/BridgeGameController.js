@@ -53,8 +53,11 @@ class BridgeGameController {
   }
 
   move(moving) {
-    this.#bridgeGame.move(moving);
+    const bridgeMap = this.#bridgeGame.move(moving);
+    this.printMap(bridgeMap);
   }
+
+  printMap(bridgeMap) {}
 }
 
 module.exports = BridgeGameController;

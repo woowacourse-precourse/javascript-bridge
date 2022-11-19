@@ -19,6 +19,18 @@ class Bridge {
     if (isValidBridge) return true;
     throw new Error(BRIDGE.CREATE_ERROR);
   }
+
+  match(playerMovings) {
+    const bridgeMap = { U: [], D: [] };
+    for (let idx = 0; idx < playerMovings.length; idx++) {
+      let checking = playerMovings[idx] === this.#pattern[idx] ? BRIDGE.RIGHT : BRIDGE.WRONG;
+      let moving = playerMovings[idx];
+      let notMoving = playerMovings[idx] === BRIDGE.UP ? BRIDGE.DOWN : BRIDGE.UP;
+      bridgeMap[moving].push(checking);
+      bridgeMap[notMoving].push(' ');
+    }
+    return bridgeMap;
+  }
 }
 
 module.exports = Bridge;
