@@ -98,7 +98,7 @@ class BridgeGame {
 
   setBridge(bridgeResult) {
     const copiedBridgeResult = Application.copyArray(bridgeResult);
-    const bridgelength = copiedBridgeResult.length;
+    const bridgelength = Application.getArrayLength(copiedBridgeResult);
 
     Application.checkRangeThreeToTwenty(bridgelength);
 
