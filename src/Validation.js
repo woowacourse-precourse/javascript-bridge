@@ -24,6 +24,12 @@ const Validation = {
       throw new Error("[ERROR] 대문자 U와 D만 입력가능합니다.");
     }
   },
+
+  isVaildCommand(command) {
+    if (command !== "R" && command !== "Q") {
+      throw new Error("[ERROR] 올바른 입력이 아닙니다. 입력값을 확인해주세요.");
+    }
+  },
 };
 
 module.exports = Validation;

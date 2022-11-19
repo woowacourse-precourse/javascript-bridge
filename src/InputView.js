@@ -47,7 +47,8 @@ const InputView = {
   readGameCommand() {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
-      (line) => {
+      (command) => {
+        Validation.isVaildCommand(command);
         // 재시도 및 종료 상황 구현하기
       }
     );
