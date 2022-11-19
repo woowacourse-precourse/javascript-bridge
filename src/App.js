@@ -35,13 +35,19 @@ class App {
     validateMoving(choice);
 
     const isAlrightPath = this.bridgeGame.getIsAlrightPath(
-      this.pathIdx,
+      this.pathIdx++,
       choice
     );
     this.bridgeGame.move(choice, isAlrightPath);
 
-    if (isAlrightPath) return this.proceedGame();
-    return this.bridgeGame.end();
+    if (this.checkEndGame(isAlrightPath)) {
+      return this.bridgeGame.end();
+    }
+    return this.proceedGame();
+  }
+
+  checkEndGame(isAlrightPath) {
+    return !isAlrightPath || this.pathIdx >= this.bridgeGame.size;
   }
 }
 
