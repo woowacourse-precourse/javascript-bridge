@@ -36,6 +36,24 @@ class BridgeGameController {
 
   createBridge(bridgeSize, bridgePattern) {
     this.#bridgeGame.createBridge(bridgeSize, bridgePattern);
+    this.readMoving();
+  }
+
+  readMoving() {
+    const onReadMoving = (moving) => {
+      try {
+        InputValidator.isValidMoving(moving);
+        this.move(moving);
+      } catch (err) {
+        Console.print(err.message);
+        this.readMoving();
+      }
+    };
+    InputView.readMoving(onReadMoving);
+  }
+
+  move(moving) {
+    this.#bridgeGame.move(moving);
   }
 }
 

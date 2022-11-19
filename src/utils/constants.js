@@ -1,5 +1,6 @@
 const INPUT_MESSAGE = Object.freeze({
   ENTER_BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',
+  ENTER_MOVING: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
 });
 
 const OUTPUT_MESSAGE = Object.freeze({
@@ -8,6 +9,7 @@ const OUTPUT_MESSAGE = Object.freeze({
 
 const INPUT_ERROR = Object.freeze({
   BRIDGE_SIZE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+  MOVING: '[ERROR] 이동할 칸은 U 또는 D를 입력하여야 합니다.',
 });
 
 const BRIDGE = Object.freeze({
