@@ -32,7 +32,7 @@ const InputView = {
       }
     );
 
-    if (U_or_D !== 'U' || U_or_D !== 'D') {
+    if (U_or_D !== 'U' && U_or_D !== 'D') {
       console.log('U_or_D', U_or_D);
       throw new Error('[ERROR] 이동할 칸은 U와 D만 입력가능합니다.');
     }
