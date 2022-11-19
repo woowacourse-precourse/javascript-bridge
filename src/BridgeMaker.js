@@ -11,9 +11,11 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
     for (let i = 0; i < size; i++) {
-      bridge.push(["D", "U"][generateRandomNumber.generate()]);
+      const number = generateRandomNumber();
+      bridge.push(["D", "U"][number]);
     }
-    Console.print(bridge + "생명의 다리");
+
+    Console.print(bridge);
     return bridge;
   },
 };
