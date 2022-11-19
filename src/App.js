@@ -1,5 +1,6 @@
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
+const BridgeMapMaker = require('./BridgeMapMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeValidator = require('./BridgeValidator');
 
@@ -51,13 +52,13 @@ class App {
 
   tryMove(moving) {
     this.#bridgeGame.move(moving);
-    OutputView.printMap(this.#bridgeGame.getMoveHistory());
-
+    OutputView.printMap(
+      BridgeMapMaker.makeBridgeMap(this.#bridgeGame.getMoveHistory()),
+    );
     if (this.#bridgeGame.isGameOver()) {
       console.log('game over');
       return;
     }
-
     this.inputMoving();
   }
 }
