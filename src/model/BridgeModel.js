@@ -12,7 +12,7 @@ class BridgeModel {
 
   /**
    * 다리의 상태(모습) 을 변경한다.
-   * @param newBridge (새로운 다리)
+   * @param newBridge [새로운 다리]
    */
   setBridge(newBridge) {
     this.#bridge = newBridge;
