@@ -6,3 +6,7 @@
   - max-line이 10줄 이내로 되도록 분리
 
 - [x] refactor: OutputView의 결과 출력 함수 가독성 향상 및 분리
+
+- [x] refactor: InputView의 함수 분리 및 매개변수 변경
+  - InputView의 함수 길이가 10이 넘어가던 함수 수정
+  - InputView의 매개변수를 BridgeGame 클래스로 변경

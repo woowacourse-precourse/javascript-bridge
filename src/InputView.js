@@ -1,7 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const BridgeGame = require('./BridgeGame');
-const { makeBridge } = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
 const {
   GAME_MESSAGE,
   BRIDGE_RANGE,
@@ -9,10 +6,8 @@ const {
   SHORT_CUT,
   ERROR_PLAYING_MESSAGE,
   ERROR_RETRY_MESSAGE,
-  NUMBER,
 } = require('./constants');
-const { printMap, printResult, getMap } = require('./OutputView');
-const { getBridgeString } = require('./Utils');
+const { printMap, printResult } = require('./OutputView');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -20,19 +15,22 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
+  readBridgeSize(bridgeGame) {
     Console.readLine(GAME_MESSAGE.inputLength, (userInput) => {
       try {
-        const bridgeSize = Number(userInput);
-        this.bridgeValidation(bridgeSize);
-        const bridge = makeBridge(bridgeSize, generate);
-        console.log(bridge);
-        this.readMoving(bridge, NUMBER.zero, NUMBER.one);
+        this.bridgeSize(userInput, bridgeGame);
       } catch (error) {
         Console.print(error.message);
-        this.readBridgeSize();
+        this.readBridgeSize(bridgeGame);
       }
     });
+  },
+
+  bridgeSize(userInput, bridgeGame) {
+    const size = Number(userInput);
+    this.sizeValdation(size);
+    bridgeGame.setBridge(size);
+    this.readMoving(bridgeGame);
   },
 
   checkBridgeInteger(bridgeSize) {
@@ -51,7 +49,7 @@ const InputView = {
     }
   },
 
-  bridgeValidation(bridgeSize) {
+  sizeValdation(bridgeSize) {
     this.checkBridgeNumber(bridgeSize);
     this.checkBridgeInteger(bridgeSize);
     this.checkBridgeRange(bridgeSize);
@@ -60,47 +58,64 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge, steps, numberAttempts) {
+  readMoving(bridgeGame) {
     Console.readLine(GAME_MESSAGE.move, (userInput) => {
       try {
-        this.checkMoveLowercase(userInput);
-        this.checkMoveWrong(userInput);
-        const bridgeGame = new BridgeGame(bridge, steps, numberAttempts);
-        bridgeGame.move(userInput);
-        const curSteps = bridgeGame.getSteps();
-        const { upBridge, downBridge } = bridgeGame.getMoveResult();
-        const upBridgeString = getBridgeString(upBridge);
-        const downBridgeString = getBridgeString(downBridge);
-        printMap(upBridgeString, downBridgeString);
-        const bridgeResult = getMap(upBridgeString, downBridgeString);
-        if (curSteps === bridge.length) {
-          printResult(bridgeResult, true, numberAttempts);
-          Console.close();
-          return;
-        }
-        if (steps < curSteps) {
-          this.readMoving(bridge, curSteps, numberAttempts);
-        }
-        if (steps === curSteps) {
-          this.readGameCommand(bridge, curSteps, numberAttempts, bridgeResult);
-        }
+        this.getMoving(userInput, bridgeGame);
       } catch (error) {
         Console.print(error.message);
-        this.readMoving(bridge, steps, numberAttempts);
+        this.readMoving(bridgeGame);
       }
     });
   },
 
-  checkMoveLowercase(userInput) {
-    if (
-      userInput === SHORT_CUT.up.toLowerCase() ||
-      userInput === SHORT_CUT.down.toLowerCase()
-    ) {
+  getMoving(userInput, bridgeGame) {
+    this.moveValidation(userInput);
+    bridgeGame.move(userInput);
+    const bridgeResult = bridgeGame.getMap();
+    printMap(bridgeResult);
+    this.getMoveNext(bridgeGame);
+  },
+
+  getMoveNext(bridgeGame) {
+    const isFinish = this.getGameFinish(bridgeGame);
+    if (isFinish) {
+      Console.close();
+      return;
+    }
+    this.getGameNext(bridgeGame);
+  },
+  getGameFinish(bridgeGame) {
+    const isFinish = bridgeGame.isFinish();
+    if (isFinish) {
+      const bridgeResult = bridgeGame.getMap();
+      const numberAttempts = bridgeGame.getAttempts();
+      printResult(bridgeResult, true, numberAttempts);
+      return true;
+    }
+    return false;
+  },
+  getGameNext(bridgeGame) {
+    const isAnswer = bridgeGame.isAnswer();
+    if (isAnswer) {
+      return this.readMoving(bridgeGame);
+    }
+    return this.readGameCommand(bridgeGame);
+  },
+
+  moveValidation(shortCut) {
+    this.checkMoveLowercase(shortCut);
+    this.checkMoveWrong(shortCut);
+  },
+  checkMoveLowercase(shortCut) {
+    const lowerCaseUp = SHORT_CUT.up.toLowerCase();
+    const lowerCaseDown = SHORT_CUT.down.toLowerCase();
+    if (shortCut === lowerCaseUp || shortCut === lowerCaseDown) {
       throw new Error(ERROR_PLAYING_MESSAGE.lowercase);
     }
   },
-  checkMoveWrong(userInput) {
-    if (userInput !== SHORT_CUT.up && userInput !== SHORT_CUT.down) {
+  checkMoveWrong(shortCut) {
+    if (shortCut !== SHORT_CUT.up && shortCut !== SHORT_CUT.down) {
       throw new Error(ERROR_PLAYING_MESSAGE.wrong);
     }
   },
@@ -108,31 +123,45 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge, steps, numberAttempts, bridgeResult) {
-    Console.print(GAME_MESSAGE.retry);
-    Console.readLine('', (userInput) => {
+  readGameCommand(bridgeGame) {
+    Console.readLine(GAME_MESSAGE.retry, (userInput) => {
       try {
-        this.checkRetryLowercase(userInput);
-        this.checkRetryWrong(userInput);
-        if (userInput === 'R') {
-          this.readMoving(bridge, steps, numberAttempts + 1);
-        }
-        if (userInput === 'Q') {
-          printResult(bridgeResult, false, numberAttempts);
-          Console.close();
-        }
+        this.getRetry(userInput, bridgeGame);
       } catch (error) {
         Console.print(error.message);
-        this.readGameCommand(bridge, steps, numberAttempts, bridgeResult);
+        this.readGameCommand(bridgeGame);
       }
     });
   },
 
+  getRetry(userInput, bridgeGame) {
+    this.retryValidation(userInput);
+    if (userInput === SHORT_CUT.retry) {
+      this.showReStart(bridgeGame);
+    }
+    if (userInput === SHORT_CUT.quit) {
+      this.showQuit();
+    }
+  },
+  showReStart(bridgeGame) {
+    bridgeGame.setAttempts();
+    this.readMoving(bridgeGame);
+  },
+  showQuit(bridgeGame) {
+    const bridgeResult = bridgeGame.getMap();
+    const numberAttempts = bridgeGame.getAttempts();
+    printResult(bridgeResult, false, numberAttempts);
+    Console.close();
+  },
+  retryValidation(userInput) {
+    this.checkRetryLowercase(userInput);
+    this.checkRetryWrong(userInput);
+  },
+
   checkRetryLowercase(userInput) {
-    if (
-      userInput === SHORT_CUT.retry.toLowerCase() ||
-      userInput === SHORT_CUT.quit.toLowerCase()
-    ) {
+    const lowerCaseRetry = SHORT_CUT.retry.toLowerCase();
+    const lowerCaseQuit = SHORT_CUT.quit.toLowerCase();
+    if (userInput === lowerCaseRetry || userInput === lowerCaseQuit) {
       throw new Error(ERROR_RETRY_MESSAGE.lowercase);
     }
   },

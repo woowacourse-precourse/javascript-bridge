@@ -1,5 +1,7 @@
 /* eslint-disable operator-linebreak */
-const { SHORT_CUT, GAME_STRING } = require('./constants');
+const { makeBridge } = require('./BridgeMaker');
+const { generate } = require('./BridgeRandomNumberGenerator');
+const { SHORT_CUT, GAME_STRING, NUMBER } = require('./constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -7,19 +9,13 @@ const { SHORT_CUT, GAME_STRING } = require('./constants');
 class BridgeGame {
   #bridge;
 
-  #steps;
+  #steps = NUMBER.zero;
 
-  #numberAttempts;
+  #numberAttempts = NUMBER.one;
 
   #answer;
 
   #isAnswer;
-
-  constructor(bridge, steps, numberAttempts) {
-    this.#bridge = bridge;
-    this.#steps = steps;
-    this.#numberAttempts = numberAttempts;
-  }
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -30,17 +26,54 @@ class BridgeGame {
     this.#answer = answer;
     this.#isAnswer = this.#bridge[this.#steps] === answer;
     if (this.#bridge[this.#steps] === answer) {
-      this.#steps += 1;
+      this.#steps += NUMBER.one;
     }
+  }
+
+  setAttempts() {
+    this.#numberAttempts += NUMBER.one;
+  }
+
+  setBridge(size) {
+    this.#bridge = makeBridge(size, generate);
+  }
+
+  getBridge() {
+    return this.#bridge;
   }
 
   getSteps() {
     return this.#steps;
   }
 
+  getAttempts() {
+    return this.#numberAttempts;
+  }
+
+  isFinish() {
+    const isDone = this.#steps === this.#bridge.length;
+    return isDone;
+  }
+
+  isAnswer() {
+    return this.#isAnswer;
+  }
+
+  static getBridgeString(bridge) {
+    return `[ ${bridge.join(' | ')} ]`;
+  }
+
   getMoveResult() {
     const { upBridge, downBridge } = this.createBridgeStringArray();
-    return { upBridge, downBridge };
+    const upBridgeResult = BridgeGame.getBridgeString(upBridge);
+    const downBridgeResult = BridgeGame.getBridgeString(downBridge);
+    return { upBridgeResult, downBridgeResult };
+  }
+
+  getMap() {
+    const { upBridgeResult, downBridgeResult } = this.getMoveResult();
+    const result = `${upBridgeResult}\n${downBridgeResult}`;
+    return result;
   }
 
   createBridgeStringArray() {
