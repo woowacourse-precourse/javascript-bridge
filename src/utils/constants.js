@@ -13,6 +13,8 @@ const INPUT_ERROR = Object.freeze({
 const BRIDGE = Object.freeze({
   MIN_SIZE: 3,
   MAX_SIZE: 20,
+  UP: 'U',
+  DOWN: 'D',
 });
 
 module.exports = {
