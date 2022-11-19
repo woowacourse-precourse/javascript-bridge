@@ -35,28 +35,10 @@ class App {
   progressApp(appStatus) {
     if (appStatus === 1) return this.questionBridgeMake();
     if (appStatus === 2) return this.progressBridgeMake();
-
-    if (appStatus === 3) return this.progressBridgeMove();
+    if (appStatus === 3) return this.questionBridgeMove();
     if (appStatus === 4) {
       this.#moveStatement = this.#brdigeGame.move(this.#moveAnswer, this.#bridge);
-      if (this.#moveStatement) {
-        this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
-        OutputView.printMap(this.#bridgeMap.getMap());
-
-        // if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
-        // }
-        if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
-          this.#gameEndBoolean = true;
-          return this.getResult();
-        }
-        return this.progressBridgeMove();
-      }
-      if (!this.#moveStatement) {
-        this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
-        this.#appStatus = 5;
-        OutputView.printMap(this.#bridgeMap.getMap());
-        return this.progressRetryGame();
-      }
+      return this.progressBridgeMove();
     }
     if (this.#appStatus === 5) return this.progressRetryGame();
     if (this.#appStatus === 6) {
@@ -89,10 +71,10 @@ class App {
     this.#appStatus = 3;
     this.#bridge = BridgeMaker.makeBridge(this.#bridgeAnswer);
     this.#gameEndConditionValue = this.#bridge.length;
-    return this.progressBridgeMove();
+    return this.questionBridgeMove();
   }
 
-  progressBridgeMove() {
+  questionBridgeMove() {
     InputView.readMoving((answer) => {
       try {
         Validator.confirmOfCondition(answer, 'move');
@@ -106,7 +88,33 @@ class App {
     });
   }
 
-  validAssign(answer, Validator) {}
+  progressBridgeMove() {
+    if (this.#moveStatement) return this.progressMovementTrue();
+    return this.progressMovementFalse();
+  }
+
+  progressMovementTrue() {
+    this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
+    OutputView.printMap(this.#bridgeMap.getMap());
+    if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
+      return this.progressGameEnd();
+    }
+    return this.questionBridgeMove();
+  }
+
+  progressMovementFalse() {
+    this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
+    this.#appStatus = 5;
+    OutputView.printMap(this.#bridgeMap.getMap());
+    return this.progressRetryGame();
+  }
+
+  progressGameEnd() {
+    this.#gameEndBoolean = true;
+    return this.getResult();
+  }
+
+  // validAssign(answer, Validator) {}
 
   progressRetryGame() {
     InputView.readGameCommand((answer) => {
