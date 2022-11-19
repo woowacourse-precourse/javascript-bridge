@@ -70,21 +70,13 @@ class BridgeGame {
   }
 
   #drawUpBridge(position, upBridge, moveBridge) {
-    if (position === moveBridge[0]) {
-      upBridge += position[0];
-    } else if (position !== moveBridge[0]) {
-      upBridge += ` | ${position[0]}`;
-    }
-    return upBridge;
+    if (position === moveBridge[0]) return (upBridge += position[0]);
+    if (position !== moveBridge[0]) return (upBridge += ` | ${position[0]}`);
   }
 
   #drawDownBridge(position, downBridge, moveBridge) {
-    if (position === moveBridge[0]) {
-      downBridge += position[1];
-    } else if (position !== moveBridge[0]) {
-      downBridge += ` | ${position[1]}`;
-    }
-    return downBridge;
+    if (position === moveBridge[0]) return (downBridge += position[1]);
+    if (position !== moveBridge[0]) return (downBridge += ` | ${position[1]}`);
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
