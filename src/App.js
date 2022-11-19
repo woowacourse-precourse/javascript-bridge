@@ -42,14 +42,13 @@ class App {
   }
 
   goNextStepAfterReadMoving(isAlrightPath) {
-    if (this.checkEndGame(isAlrightPath)) {
+    if (!isAlrightPath) {
       return this.stopGame();
     }
+    if (this.bridgeGame.checkIsEndBridge()) {
+      return OutputView.printResult(true, this.tryCount);
+    }
     return this.proceedGame();
-  }
-
-  checkEndGame(isAlrightPath) {
-    return !isAlrightPath || this.bridgeGame.checkIsEndBridge();
   }
 
   stopGame() {

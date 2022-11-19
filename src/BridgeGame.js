@@ -53,7 +53,7 @@ class BridgeGame {
   }
 
   checkIsEndBridge() {
-    return this.pathIdx >= this.size;
+    return this.pathIndex >= this.size;
   }
 
   /**
