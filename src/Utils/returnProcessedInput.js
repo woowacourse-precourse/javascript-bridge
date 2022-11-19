@@ -17,9 +17,9 @@ const returnProcessedInput = {
     const current = input.length - 1;
     input.forEach((value, index) => {
       if (value === INPUT_CHAR.up && index === current && !pass) upAndDownArray.push([STATUS.fail, STATUS.pass]);
-      if (value === INPUT_CHAR.up && pass) upAndDownArray.push([STATUS.correct, STATUS.pass]);
+      else if (value === INPUT_CHAR.up) upAndDownArray.push([STATUS.correct, STATUS.pass]);
       if (value === INPUT_CHAR.down && index === current && !pass) upAndDownArray.push([STATUS.pass, STATUS.fail]);
-      if (value === INPUT_CHAR.down && pass) upAndDownArray.push([STATUS.pass, STATUS.correct]);
+      else if (value === INPUT_CHAR.down) upAndDownArray.push([STATUS.pass, STATUS.correct]);
     });
     return upAndDownArray;
   },
