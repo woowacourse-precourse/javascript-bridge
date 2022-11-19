@@ -2,40 +2,58 @@ const BridgeGame = require('./BridgeGame');
 const BridgeValidation = require('./Validation/BridgeValidation');
 const ControlValidation = require('./Validation/ControlValidation');
 const MoveValidation = require('./Validation/MoveValidation');
-const { readMoving, end, getInputs } = require('./View/InputView');
-const { printStart } = require('./View/OutputView');
-
+const {
+  readMoving,
+  end,
+  getInputs,
+  readGameCommand,
+  readBridgeSize,
+} = require('./View/InputView');
+const { printStart, printError } = require('./View/OutputView');
 class App {
   #game;
 
   play() {
     printStart();
-    getInputs.bind(this)([
-      this.createBridge,
-      this.moveBridge,
-      this.controlGame,
-    ]);
+    readBridgeSize.bind(this)(this.createBridge);
   }
 
   createBridge(input) {
-    BridgeValidation(input);
-    this.#game = new BridgeGame(input);
+    try {
+      BridgeValidation(input);
+      this.#game = new BridgeGame(input);
+      readMoving.call(this, this.moveBridge);
+    } catch (err) {
+      printError(err);
+      readBridgeSize.bind(this)(this.createBridge);
+    }
   }
 
   moveBridge(input) {
-    MoveValidation(input);
-    const MOVE = this.#game.move(input);
-    const NOT_END = this.#game.isEnd() == true;
-    if (MOVE && !NOT_END) this.gameEnd();
-    return [MOVE, NOT_END];
+    try {
+      MoveValidation(input);
+      const MOVE = this.#game.move(input);
+      const NOT_END = this.#game.isEnd() == true;
+      if (MOVE && !NOT_END) this.gameEnd();
+      if (MOVE && NOT_END) readMoving.bind(this)(this.moveBridge);
+      if (!MOVE) readGameCommand.bind(this)(this.controlGame);
+    } catch (err) {
+      printError(err);
+      readMoving.bind(this)(this.moveBridge);
+    }
   }
 
   controlGame(input) {
-    ControlValidation(input);
-    if (input == 'R') {
-      this.#game.retry();
-      readMoving.call(this, [this.moveBridge, this.controlGame]);
-    } else this.gameEnd();
+    try {
+      ControlValidation(input);
+      if (input == 'R') {
+        this.#game.retry();
+        readMoving.bind(this)(this.moveBridge);
+      } else this.gameEnd();
+    } catch (err) {
+      printError(err);
+      readGameCommand.bind(this)(this.controlGame);
+    }
   }
 
   gameEnd() {
