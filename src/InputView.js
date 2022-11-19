@@ -62,7 +62,9 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridge) {
-    Console.readLine(Messages.INPUT_RESTART_OR_END, (restartOrEnd) => {});
+    Console.readLine(Messages.INPUT_RESTART_OR_END, (restartOrEnd) => {
+      const totalCount = this.bridgeGame.countTry();
+    });
   },
 };
 
