@@ -10,27 +10,30 @@ class App {
     this.game = null;
   }
 
-  play() { }
+  play() {
+    OutputView.printStartMessage();
+    InputView.readBridgeSize(this.proceedAfterGettingBridgeSize);
+  }
 
-  proceedAfterGettingBridgeSize(size) {
+  proceedAfterGettingBridgeSize = (size) => {
     const PATH = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.game = new BridgeGame(PATH);
 
     InputView.readMoving(this.proceedAfterMove);
   }
 
-  proceedAfterMove(direction) {
+  proceedAfterMove = (direction) => {
     this.game.move(direction);
     OutputView.printMap(this.game);
 
     (this.game.isGoingCorrect()) ? this.handleCorrectCase() : InputView.readGameCommand(this.handleGameCommand);
   }
 
-  handleCorrectCase() {
+  handleCorrectCase = () => {
     (this.game.crossedAll()) ? this.finish() : InputView.readMoving(this.proceedAfterMove);
   }
 
-  handleGameCommand(command) {
+  handleGameCommand = (command) => {
     switch (command) {
       case "R":
         this.game.retry();
@@ -43,10 +46,13 @@ class App {
     }
   }
 
-  finish() {
+  finish = () => {
     OutputView.printResult(this.game);
-    MissionUtils.Console.close();
+    //MissionUtils.Console.close();
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
