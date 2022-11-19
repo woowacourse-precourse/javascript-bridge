@@ -21,9 +21,16 @@ const UPDOWN_INDEX = Object.freeze({
   D: 1
 });
 
+const GAME_RESULT_STATE = Object.freeze({
+  success: 'success',
+  try: 'try',
+  fail: 'fail'
+});
+
 module.exports = {
   REGEX,
   ERROR_MESSAGE,
   MODEL_KEY,
-  UPDOWN_INDEX
+  UPDOWN_INDEX,
+  GAME_RESULT_STATE
 };
