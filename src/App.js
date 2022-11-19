@@ -29,7 +29,7 @@ class App {
   }
 
   requestMovingDirection() {
-    InputView.readMoving(this.tryMovePlayer.bind(this));
+    InputView.readMoving(this.tryMove.bind(this));
   }
 
   tryMove(movingDirection) {
