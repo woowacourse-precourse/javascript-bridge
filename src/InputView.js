@@ -11,12 +11,12 @@ const OutputView = require('./OutputView');
 const InputView = {
   BRIDGE_GAME: new BridgeGame(),
   INDEX: 0,
+  SUCCES_MESSAGE: '성공',
   COUNT: 1,
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    MissionUtils.Console.print('다리 건너기 게임을 시작합니다.\n');
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요.\n', (userInput) => {
       this.validateBridgeInput(userInput);
     });
@@ -57,7 +57,7 @@ const InputView = {
     if (bridgeArray[this.INDEX] === userAnswer) {
       if (bridgeArray.length - 1 === this.INDEX) {
         this.BRIDGE_GAME.move(userAnswer);
-        return OutputView.printResult();
+        return OutputView.printResult(this.SUCCES_MESSAGE, this.COUNT);
       }
       this.BRIDGE_GAME.move(userAnswer);
       this.readMoving(bridgeArray);
@@ -85,8 +85,11 @@ const InputView = {
   validateGameCommand(userInput, bridgeArray) {
     try {
       Validate.retryOrEnd(userInput);
-      OutputView.removeArray();
-      this.readMoving(this.BRIDGE_GAME.retry(userInput, bridgeArray));
+      if (userInput === 'R') {
+        this.COUNT += 1;
+        this.readMoving(this.BRIDGE_GAME.retry(userInput, bridgeArray, this.COUNT));
+      }
+      if (userInput === 'Q') this.BRIDGE_GAME.retry(userInput, bridgeArray, this.COUNT);
     } catch (error) {
       MissionUtils.Console.print(error);
       this.readGameCommand();
