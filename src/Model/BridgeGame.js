@@ -18,13 +18,15 @@ class BridgeGame {
 
   checkInputCorrect(answer) {
     this.isCorrect = false;
-    if (this.move(answer)) {
-      this.numberOfCorrect += 1;
-      this.isCorrect = true;
-    }
+    if (this.move(answer)) this.progressOneStep();
 
     this.progressIdx += 1;
     return this.isCorrect;
+  }
+
+  progressOneStep() {
+    this.numberOfCorrect += 1;
+    this.isCorrect = true;
   }
 
   move(answer) {

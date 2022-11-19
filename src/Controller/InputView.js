@@ -1,19 +1,12 @@
 const { Console } = require("@woowacourse/mission-utils");
-const {
-  GUIDE_MSG,
-  ERROR_MSG,
-  SUCCESS,
-  FAIL,
-} = require("../Messages/constants");
-const BridgeGame = require("../Model/BridgeGame");
+const GameController = require("./GameController");
+const { GUIDE_MSG, ERROR_MSG } = require("../Messages/constants");
 const {
   ValidCmd,
   ValidMove,
   ValidSize,
 } = require("../Validation/CheckValidation");
-const OutputView = require("./OutputView");
 
-let bridgeGame;
 const InputView = {
   readBridgeSize() {
     Console.readLine(GUIDE_MSG.START_MSG, (answer) => {
@@ -40,8 +33,7 @@ const InputView = {
   },
 
   startBridgeGame(answer) {
-    bridgeGame = new BridgeGame();
-    bridgeGame.start(answer);
+    GameController.startGame(answer);
     this.readMoving();
   },
 
@@ -54,6 +46,7 @@ const InputView = {
   inputMovingForm(answer) {
     try {
       this.checkInputMove(answer);
+      this.checkBridge(answer);
     } catch (error) {
       this.printMsgAndReadMovingAgain();
     }
@@ -61,7 +54,6 @@ const InputView = {
 
   checkInputMove(answer) {
     if (!ValidMove(answer)) throw new Error();
-    this.checkBridge(answer);
   },
 
   printMsgAndReadMovingAgain() {
@@ -70,20 +62,20 @@ const InputView = {
   },
 
   checkCrossTheBridgeCompletely(answer) {
-    OutputView.makeMap(answer, bridgeGame.getIsCorrect());
-    bridgeGame.crossBridgeCompletely()
-      ? this.exitGame(true)
+    GameController.makeMap(answer);
+    GameController.crossBridgeCompletely()
+      ? GameController.exitGame(true)
       : this.readMoving();
   },
 
   checkBridge(answer) {
-    bridgeGame.checkInputCorrect(answer)
+    GameController.checkInputCorrect(answer)
       ? this.checkCrossTheBridgeCompletely(answer)
       : this.showGameCommand(answer);
   },
 
   showGameCommand(answer) {
-    OutputView.makeMap(answer, bridgeGame.getIsCorrect());
+    GameController.makeMap(answer);
     this.readGameCommand();
   },
 
@@ -96,6 +88,7 @@ const InputView = {
   inputGameCmdForm(answer) {
     try {
       this.checkInputCmd(answer);
+      this.selectRestartOrQuit(answer);
     } catch (error) {
       this.printMsgAndInputCmdAgain();
     }
@@ -103,7 +96,6 @@ const InputView = {
 
   checkInputCmd(answer) {
     if (!ValidCmd(answer)) throw new Error();
-    this.selectRestartOrQuit(answer);
   },
 
   printMsgAndInputCmdAgain() {
@@ -112,22 +104,14 @@ const InputView = {
   },
 
   selectRestartOrQuit(answer) {
-    bridgeGame.retry(answer) ? this.restartGame() : this.exitGame(false);
+    GameController.selectGame(answer)
+      ? this.restartGame()
+      : GameController.exitGame(false);
   },
 
   restartGame() {
-    OutputView.clearMap();
+    GameController.clearMap();
     this.readMoving();
-  },
-
-  exitGame(isClear) {
-    OutputView.printResult();
-    Console.print(
-      `게임 성공 여부: ${
-        isClear ? SUCCESS : FAIL
-      }\n총 시도한 횟수: ${bridgeGame.getGameRunCount()}`
-    );
-    Console.close();
   },
 };
 

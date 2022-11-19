@@ -23,3 +23,5 @@ module.exports = {
   ValidMove,
   ValidCmd,
 };
+
+// throw Error 여기서 하는 방향으로

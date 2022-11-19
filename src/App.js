@@ -1,4 +1,4 @@
-const InputView = require("./Views/InputView");
+const InputView = require("./Controller/InputView");
 
 class App {
   play() {
