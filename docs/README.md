@@ -22,6 +22,12 @@
 - [x] 게임 진행 횟수 `#gameCount` 계산.
 - [x] 재시작, 종료 구현.
 
+### GameController
+
+- [x] `BridgeGame`의 `crossBridgeCompletely`가 true인 경우 게임 클리어.
+- [x] 성공 혹은 재시작 시 맵 초기화 실행.
+- [x] 게임 종료시 결과 출력.
+
 ### InputView
 
 - [x] 다리의 길이 입력 받기.
@@ -33,8 +39,6 @@
 - [x] 사용자 입력으로 재시작 혹은 종료를 결정.
 - [x] [예외 처리] R Q 이외의 문자가 입력된 경우.
 
-- [x] `BridgeGame`의 `crossBridgeCompletely`가 true인 경우 클리어
-
 - [x] `exitGame` 게임 성공, 실패 후 종료 분기점에서 최종 결과 출력 및 시도 횟수를 출력하도록 함.
 
 ### OutputView
@@ -43,6 +47,7 @@
 - [x] 실패 시 Map 출력, 게임 종료 시 실패한 결과 출력
   - [x] 실패 후 U,D를 입력 시 push가 되는 오류 fix.
 - [x] 성공 시 Map 출력
+- [x] 성공 혹은 재시작 시 맵 초기화 정의.
 
 ### BridgeMaker
 
@@ -57,12 +62,16 @@
 
 ### 발견된 오류
 
-(fixed) ~~실패 후 게임 모드를 고르는 동안 U || D를 입력 시 맵이 새로 만들어짐~~
+(fixed) ~~실패 후 게임 모드를 고르는 동안 U || D를 입력 시 맵이 새로 만들어짐.~~
+실패 후 모드를 고르는 동안 R, Q 이외 입력 시 맵을 출력함. -> 플래그로 막을 예정, 인자 기본값 이용
 
 ### 구성
 
 ```
 src
+  Controller/
+    GameController.js
+    InputView.js
   Error/
     CheckValidation.js
   Messages/
@@ -70,7 +79,6 @@ src
   Model/
     BridgeGame.js
   Views
-    InputView.js
     OutputView.js
   App.js
   BridgeMaker.js
@@ -79,11 +87,19 @@ src
 
 ### 테스트 목록
 
-#### ApplicationTest
+#### `InputView`
 
-`InputView`
+`readBridgeSize`
 
 - 사이즈 입력 시 문자열
 - 사이즈 입력 시 범위 미만의 수
 - 사이즈 입력 시 범위 초과의 수
 - 사이즈 입력 시 음수
+
+`readMoving`
+
+- 움직임 입력 시 U, D 이외의 문자
+
+`readGameCommand`
+
+- 커맨드 입력 시 R, Q 이외의 문자
