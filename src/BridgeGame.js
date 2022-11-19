@@ -34,23 +34,41 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moving) {
-    const index = this.#movingList[0].length;
+    const currentIndex = this.#movingList[0].length;
+
     if (moving === MOVING.UPPER) {
-      if (moving === this.#bridge[index]) {
-        this.#movingList[0].push(MOVING.RIGHT_ANSWER);
-        this.#movingList[1].push(MOVING.BLANK);
-      } else {
-        this.#movingList[0].push(MOVING.WRONG_ANSWER);
-        this.#movingList[1].push(MOVING.BLANK);
-      }
+      return this.moveToUpper(moving, currentIndex);
     } else {
-      if (moving === this.#bridge[index]) {
-        this.#movingList[1].push(MOVING.RIGHT_ANSWER);
-        this.#movingList[0].push(MOVING.BLANK);
-      } else {
-        this.#movingList[1].push(MOVING.WRONG_ANSWER);
-        this.#movingList[0].push(MOVING.BLANK);
-      }
+      return this.moveToLower(moving, currentIndex);
+    }
+  }
+
+  /**
+   * 사용자가 위 칸으로 이동할 때 사용하는 메서드
+   */
+  moveToUpper(moving, currentIndex) {
+    if (moving === this.#bridge[currentIndex]) {
+      this.#movingList[0].push(MOVING.RIGHT_ANSWER);
+      this.#movingList[1].push(MOVING.BLANK);
+    } else {
+      this.#movingList[0].push(MOVING.WRONG_ANSWER);
+      this.#movingList[1].push(MOVING.BLANK);
+    }
+
+    OutputView.printMap(this.#movingList);
+    return this.#movingList;
+  }
+
+  /**
+   * 사용자가 아래 칸으로 이동할 때 사용하는 메서드
+   */
+  moveToLower(moving, currentIndex) {
+    if (moving === this.#bridge[currentIndex]) {
+      this.#movingList[1].push(MOVING.RIGHT_ANSWER);
+      this.#movingList[0].push(MOVING.BLANK);
+    } else {
+      this.#movingList[1].push(MOVING.WRONG_ANSWER);
+      this.#movingList[0].push(MOVING.BLANK);
     }
 
     OutputView.printMap(this.#movingList);
