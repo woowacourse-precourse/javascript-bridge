@@ -6,6 +6,7 @@ const OutputView = require('./OutputView');
 class BridgeGame {
   constructor(size, information) {
     this.try = 1; //시도 횟수
+    this.current_moving = [];
     this.move(size, information);
   }
   /**
@@ -15,21 +16,21 @@ class BridgeGame {
    */
   move(bridge_size, bridge_information) {
     let move;
-    const current_moving = [];
     for (let i = 0; i < bridge_size; i++) {
       //bridge size만큼 이동
       move = InputVIew.readMoving(); //U or D 입력받음
       if (move === bridge_information[i]) {
         //checking
         //제대로 이동
-        current_moving.push(move);
-        OutputView.printMap(current_moving); //move -> 'U'  or  'D'
+        this.current_moving.push(move);
+        OutputView.printMap(this.current_moving, true); //move -> 'U'  or  'D'
       } else {
         //제대로 이동 못함
-        OutputView.printResult(current_moving, move);
-        //this.retry();
+        OutputView.printMap(this.current_moving, false);
+        // this.retry();
       }
     }
+    // OutputView.printResult();
   }
 
   /**
