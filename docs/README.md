@@ -62,7 +62,7 @@
     - ✅ upperBridge와 lowerBridge, turn 을 초기화 시킨다.
     - ✅ 플레이어가 이동할 칸을 선택한다. 단계를 반복한다.
     - **D 일경우**
-    - 최종 게임 결과를 출력한다. (아마 upperBridge, lowerBridge 그대로 출력하면 될 것 같다.)
+    - ✅ 최종 게임 결과를 출력한다. (아마 upperBridge, lowerBridge 그대로 출력하면 될 것 같다.)
 <br/> <br/>
 
 

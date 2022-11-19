@@ -30,9 +30,9 @@ class BridgeGameController {
     if (isWrongAnswer) {
       InputView.readGameCommand(this.askWantRetry.bind(this));
     } else {
-    if (this.bridge.data.turn >= this.bridge.data.length) {
-        OutputView.printResult(true, this.bridgeGame.retryCount, this.bridge);
-    } else InputView.readMoving(this.movingByUser.bind(this));
+      if (this.bridge.data.turn >= this.bridge.data.length) {
+        OutputView.printResult(true, this.bridgeGame.retryCount);
+      } else InputView.readMoving(this.movingByUser.bind(this));
     }
   }
 
@@ -41,7 +41,9 @@ class BridgeGameController {
       this.bridgeGame.retry(this.bridge);
       this.bridgeGame.retryCount += 1;
       InputView.readMoving(this.movingByUser.bind(this));
-    } 
+    } else {
+      OutputView.printResult(false, this.bridgeGame.retryCount, this.bridge);
+    }
   }
 }
 
