@@ -25,6 +25,8 @@ const InputView = {
   readMoving(bridgeGame) {
     inputUserValue(GAME_MESSAGE.INPUT_MOVE, (move) => {
       isMoveValid(move);
+      console.log(move);
+      this.readMoving(bridgeGame);
     });
   },
 
