@@ -15,6 +15,13 @@ const IsValid = {
     }
     return true;
   },
+
+  finalGame(command) {
+    if (command !== 'R' && command !== 'Q') {
+      throw new Error('[ERROR] R(재시작)과 Q(종료) 중 하나의 문자만 입력할 수 있습니다.');
+    }
+    return true;
+  },
 };
 
 module.exports = IsValid;

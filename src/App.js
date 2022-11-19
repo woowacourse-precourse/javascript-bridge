@@ -56,7 +56,8 @@ class App {
       this.checkCompletion();
       return;
     }
-    this.failGame();
+    this.renderBridge('실패');
+    this.readValidFinalCommand();
   }
 
   renderBridge(result) {
@@ -75,15 +76,22 @@ class App {
     this.readValidDirection();
   }
 
-  failGame() {
-    this.renderBridge('실패');
+  readValidFinalCommand() {
     InputView.readGameCommand((command) => {
-      if (command === 'R') {
-        this.replay();
+      if (IsValid.finalGame(command)) {
+        this.failGame(command);
         return;
       }
-      this.resultGame('실패');
+      this.readValidFinalCommand();
     });
+  }
+
+  failGame(command) {
+    if (command === 'R') {
+      this.replay();
+      return;
+    }
+    this.resultGame('실패');
   }
 
   resultGame(result) {
