@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { MESSAGE, ERROR, BRIDGE } = require("../Utils/constant");
+const { MESSAGE, ERROR, BRIDGE, BUTTON } = require("../Utils/constant");
 const Random = require("../Utils/BridgeRandomNumberGenerator");
 const BridgeMaker = require("../BridgeMaker");
 const OutputView = require("./OutputView");
@@ -42,15 +42,19 @@ const InputView = {
     let move = "";
     MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
       move = answer;
-      if (this.moveValidate(answer)) {
+      try {
+        this.moveValidate(answer);
+      } catch (err) {
+        MissionUtils.Console.print(ERROR.MOVE);
+        this.readMoving(bridge, size);
       }
       OutputView.printMap(bridge, size, move);
     });
   },
 
   moveValidate(move) {
-    if (!["U", "D"].includes(move)) {
-      throw new Error(ERROR.MOVE);
+    if (![BUTTON.UP, BUTTON.DOWN].includes(move)) {
+      throw err;
     }
   },
 
