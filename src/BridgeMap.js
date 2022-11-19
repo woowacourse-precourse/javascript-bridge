@@ -13,6 +13,11 @@ class BridgeMap {
     return this.#bridgeMap;
   }
 
+  initBridgeMap() {
+    this.#bridgeMap = MapMaker.makeMap();
+    this.#isFirst = true;
+  }
+
   cofirm() {
     const [up, down] = this.#bridgeMap;
     console.log(`[${up.join('')}]\n[${down.join('')}]`);
