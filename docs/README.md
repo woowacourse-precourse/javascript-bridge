@@ -1,4 +1,33 @@
+this.#nowBridgeLength = this.#brdigeGame.getNumberOfTry();
+
+#nowBridgeLength;
+
 # 기능구현 목록
+
+## App.js 게임 총괄 기능
+
+appStatus를 통해 게임 진행 및 질문 회귀
+
+appStatus 상태 임시 숫자 나중에 바꿔야될듯
+
+status 별 상황
+
+1. 다리만들기 질문
+2. 다리만들기 실행
+3. 다리 이동 질문
+4. 다리 이동 진행
+5. 게임 결과 질문
+6. 게임 결과 진행
+
+질문 예외 발생시 회귀를 해야함으로
+
+input view 기준으로 기능 구현 작성
+
+- [x] 다리의 길이를 입력하고 다리를 만들기까지 진행기능
+- [x] 다리의 움직일 값을 입력 받고 이동하여 지도만들어지기까지 진행기능
+- [x] 게임을 다시 할건지 입력 받고 게임을 다시 실행시키는 기능
+- [x] 멤버 변수 초기화 기능
+- [] 게임 종료 판별
 
 ## 상수 생성
 
@@ -55,13 +84,13 @@
 - [x] trim 처리를 통해 양옆 공백 제거 ,
 - [] throw문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지 출력후 종료가 아니라 거기서 부터 다시 시작해야됨
 
-### 게임 재시작, 종료
+### confirmOfCondition
 
-- [x] R, Q 중 하나의 값을 제외한 나머지 막기
+- [] input과 조건을 인자로 받아 checkCondition함수 실행
 
-### 이동할 칸
+### checkConition
 
-- [x] U&D를 제외한 나머지 값 막기
+- [] input 과 error 메세지를 인자 로 받아 해당하는 2개의 문자열에 대한 검증을 하는 메서드
 
 ### 생성할 다리 길이 입력 (checkBridgeInput)
 
@@ -77,9 +106,6 @@
 
 ## 게임
 
-appStatus를 통해 게임 진행
-
-- [x] 다리의 길이를 입력하고 다리를 만들기까지 진행
 - [] 다리를 건너다 실패하면 게임을 재시작하거나 종료하는 기능
 - [] 재시작시 처음에 만든 다리 재사용(죽은 지점까지 세이브는 안된다 즉 무조건 실패시에는 X가 표시된 지도가 나오고 성공시에는 O만 있어야됨 )
 
@@ -117,9 +143,7 @@ appStatus를 통해 게임 진행
 
 - [x] handleMap 해당 클래스의 #isFirst 멤버변수가 true 냐 false 냐에 따라 분기를 나눠 add First Map , add map 을 실행시키는 함수
 
-- [x] add First Map boolean 과 input, 이전의 map 을 받아 맞혔을때와 못맞혔을때의 분기를 나누며 , 해당 클래스의 시작 상태 멤버변수를 false로 바꾸는 메서드
-
-- [x] addmap move의 boolean과 input , 이전의 map을 받아 맞혔을때와 못맞혔을때의 분기를 나눠 correct 와 Incorrect를 실행시키는 메서드
+- [x] addmap move의 boolean과 input을 받아 처음일 때와 아닐때에 따라서 맞혔을때와 못맞혔을때의 분기를 나눠 correct 와 Incorrect를 실행시키는 메서드
 
 - [x] add correct 메서드 move의 input 과 이전의 map , map소스를 받아 이용자가 맞췄을때 해당 자원을 추가하는 메서드
 
@@ -157,11 +181,17 @@ appStatus를 통해 게임 진행
 
 - [x] 게임 시작 메세지
 
-- [] print Map
+- [x] print Map
 
-- [] 게임의 성공과 실패를 나타내는 기능
+  - 인자로 BridgeMap 에서 생성된 맵을 받아 개행처리하여 위 아래를 프린트하는 기능
 
-- [] 게임 종료시 저장한 시도 출력 기능
+- [x] printResult
+
+  게임성공여부 , 시도한 횟수 , map 을 인자로 받음
+
+  - [x] OutputView의 printMap 활용 최종 map 출력
+  - [x] 게임의 성공과 실패를 나타내는 기능
+  - [x] 게임 종료시 저장한 시도 출력 기능
 
 # 객체 관련 제한 사항
 
