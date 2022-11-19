@@ -4,6 +4,9 @@ const BridgeSize = require('./BridgeSize.js');
 const CrossingBridge = require('./CrossingBridge.js');
 const RandomNumber = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
+const BridgeGame = require('./BridgeGame.js');
+const { currentPosition } = require('./Utils.js');
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -17,7 +20,8 @@ const InputView = {
       try {
         bridgeSize.validate();
         const crossableBridge = BridgeMaker.makeBridge(size, RandomNumber.generate);
-        this.readMoving(crossableBridge);
+        const currentPosition = 0;
+        this.readMoving(currentPosition, crossableBridge);
       } catch (err) {
         Console.print(err);
         this.readBridgeSize();
@@ -28,14 +32,22 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(crossableBridge) {
+  readMoving(currentPosition, crossableBridge) {
     Console.readLine(MESSAGE.INPUT_SPACE_TO_MOVE, (move) => {
       const crossingBridge = new CrossingBridge(move);
+      const crossableBridgeList = crossableBridge;
       try {
         crossingBridge.validate();
+        const bridgeGame = new BridgeGame(move, currentPosition, crossableBridgeList);
+        currentPosition += 1;
+        bridgeGame.move();
+        if (move !== crossableBridgeList[currentPosition]) {
+          this.readGameCommand();
+        }
+        this.readMoving(currentPosition, crossableBridgeList);
       } catch (err) {
         Console.print(err);
-        this.readMoving();
+        this.readMoving(currentPosition, crossableBridgeList);
       }
     });
   },
