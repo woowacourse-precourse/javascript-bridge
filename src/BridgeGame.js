@@ -10,6 +10,7 @@ class BridgeGame {
   set() {
     InputView.readBridgeSize(INPUT_QUESTION.bridgeLen, (bridgeLength) => {
       Validation.checkBridgeLength(bridgeLength);
+      const bridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
     });
   }
   /**

@@ -1,5 +1,4 @@
 const BridgeGame = require("./BridgeGame");
-const BridgeMaker = require("./BridgeMaker");
 const OutputView = require("./OutputView");
 
 class App {
