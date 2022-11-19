@@ -31,7 +31,6 @@ const InputView = {
         U_or_D = answer;
       }
     );
-
     if (U_or_D !== 'U' && U_or_D !== 'D') {
       console.log('U_or_D', U_or_D);
       throw new Error('[ERROR] 이동할 칸은 U와 D만 입력가능합니다.');
@@ -42,7 +41,19 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    let R_or_Q;
+    MissionUtils.Console.readLine(
+      '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
+      (answer) => {
+        R_or_Q = answer;
+      }
+    );
+    if (R_or_Q !== 'U' && R_or_Q !== 'D') {
+      throw new Error('[ERROR] 이동할 칸은 R과 Q만 입력가능합니다.');
+    }
+    return R_or_Q;
+  },
 };
 
 module.exports = InputView;
