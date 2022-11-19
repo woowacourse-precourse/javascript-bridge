@@ -10,6 +10,10 @@ const IGameCtrl = class {
   end() {
     throw Error('메서드구현필요');
   }
+
+  askToReplayGame() {
+    throw Error('메서드구현필요');
+  }
 };
 
 module.exports = IGameCtrl;

@@ -1,8 +1,9 @@
-const GameModel = require('./GameModel');
-const ErrorBoundary = require('../error/ErrorBoundary');
-const { SizeValidation } = require('../validate/bridge');
-const { makeBridge } = require('../BridgeMaker');
-const { generate } = require('../BridgeRandomNumberGenerator');
+const GameModel = require('../GameModel');
+const ErrorBoundary = require('../../error/ErrorBoundary');
+const { SizeValidation } = require('../../validate/bridge');
+const { makeBridge } = require('../../BridgeMaker');
+const { generate } = require('../../BridgeRandomNumberGenerator');
+const BridgeGame = require('./BridgeGame');
 
 const BridgeModel = class extends GameModel {
   #isSuccess = false;
@@ -27,6 +28,10 @@ const BridgeModel = class extends GameModel {
   validateBridgeSize(bridgeSize) {
     const onValidateBridgeSize = () => new SizeValidation().validate(bridgeSize);
     this.validateUserInput(onValidateBridgeSize);
+  }
+
+  move(command) {
+    new BridgeGame().move(command);
   }
 };
 

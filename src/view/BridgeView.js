@@ -6,6 +6,32 @@ const BridgeView = class extends GameView {
     this.inputView = inputView;
     this.outputView = outputView;
   }
+
+  // InputView method
+  readBridgeSize(callback) {
+    this.inputView.readBridgeSize(callback);
+  }
+
+  readMoving(callback) {
+    this.inputView.readMoving(callback);
+  }
+
+  readGameCommand(callback) {
+    this.inputView.readGameCommand(callback);
+  }
+
+  // OutputView method
+  printGameStart() {
+    this.outputView.printGameStart();
+  }
+
+  printMap() {
+    this.outputView.printMap();
+  }
+
+  printResult() {
+    this.outputView.printMap();
+  }
 };
 
 module.exports = BridgeView;

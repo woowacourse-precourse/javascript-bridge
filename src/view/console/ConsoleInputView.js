@@ -19,17 +19,17 @@ const ConsoleInputView = class extends InputView {
   }
 
   /**
-   * 사용자가 이동할 칸을 입력받는다.
+   * 사용자가 이동할 칸을 입력받는다. -> U, D
    */
-  readMoving() {
-    throw new Error(ERROR_MESSAGE.interface_class);
+  readMoving(callback) {
+    this.input(GAME_MESSAGE.choose_space, callback.bind(this));
   }
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-    throw new Error(ERROR_MESSAGE.interface_class);
+  readGameCommand(callback) {
+    this.input(GAME_MESSAGE.replay, callback.bind(this));
   }
 };
 

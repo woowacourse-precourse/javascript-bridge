@@ -11,13 +11,13 @@ const GameCtrl = class extends IGameCtrl {
     }
   }
 
-  start() {
-    this.gameProcess();
-  }
+  start() {}
 
   gameProcess() {}
 
   end() {}
+
+  askToReplayGame() {}
 };
 
 module.exports = GameCtrl;

@@ -1,5 +1,4 @@
-const { GAME_MESSAGE } = require('../../constants');
-const GameCtrl = require('../GameCtrl');
+const GameCtrl = require('./GameCtrl');
 
 const BridgeCtrl = class extends GameCtrl {
   constructor(view, model) {
@@ -8,16 +7,17 @@ const BridgeCtrl = class extends GameCtrl {
     this.model = model;
   }
 
-  // 게임 진행
+  // start
   // 1. 다리 길이 입력받기 ✅
   // 2. 다리 생성하기 ✅
-  // 3.
-  gameProcess() {
-    const { inputView, outputView } = this.view;
+  start() {
+    this.view.printGameStart();
+    this.view.readBridgeSize((bridgeSize) => this.gameProcess(bridgeSize));
+  }
 
-    outputView.printGameStart();
-    const onCreateBridge = (bridgeSize) => this.model.createBridge(Number(bridgeSize));
-    inputView.readBridgeSize(onCreateBridge);
+  gameProcess(bridgeSize) {
+    this.model.createBridge(parseInt(bridgeSize));
+    this.view.readMoving((command) => this.model.move(command));
   }
 
   // 게임 종료
