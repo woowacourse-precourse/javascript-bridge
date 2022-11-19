@@ -1,12 +1,14 @@
 const InputView = require('./InputView');
+const OutputView = require('./OutputView');
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 class App {
   async play() {
+    OutputView.printStart();
     const SIZE = await InputView.readBridgeSize();
-    console.log(SIZE);
-    const MOVE = await InputView.readMoving();
-    console.log(MOVE);
-    const RESTART_OR_END = await InputView.readGameCommand();
-    console.log(RESTART_OR_END);
+    const generateRandomNumber = BridgeRandomNumberGenerator.generate;
+    const RESULT = BridgeMaker.makeBridge(SIZE, generateRandomNumber);
+    console.log(RESULT);
   }
 }
 
