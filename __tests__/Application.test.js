@@ -53,15 +53,6 @@ describe('배열 생성 함수 테스트', () => {
     }).toThrow();
   });
 
-  test.each(['2', '21'])(
-    '지정된 범위를 벗어나면 예외를 발생시킨다.',
-    (EXPECTED) => {
-      expect(() => {
-        Application.createArray(EXPECTED, mockFn);
-      }).toThrow(RANGE_ERROR_TEXT);
-    },
-  );
-
   test('인수를 전달하면 [1, 2, 3]을 기대한다.', () => {
     const EXPECTED1 = '3';
     const EXPECTED2 = (_, index) => index + 1;
