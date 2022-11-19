@@ -1,3 +1,5 @@
+const OutputView = require("./OutputView");
+
 class BridgeSizeValid {
   #answer;
 
@@ -44,4 +46,25 @@ class MovingValid {
   }
 }
 
-module.exports = { BridgeSizeValid, MovingValid };
+class RetryValid {
+  #answer;
+
+  constructor(answer) {
+    this.validate(answer);
+    this.#answer = answer;
+  }
+
+  validate(answer) {
+    const RETRY_VALID = ['R', 'Q']
+    
+    if(!RETRY_VALID.includes(answer)) {
+      throw new Error('[ERROR] 유효하지 않은 입력');
+    }
+  }
+
+  getRetry() {
+    return this.#answer;
+  }
+}
+
+module.exports = { BridgeSizeValid, MovingValid, RetryValid };
