@@ -22,3 +22,14 @@ class CheckBridgeSizeException{
         }
     }
 }
+
+class CheckUserMove{
+    #SelectUpOrDown
+    constructor(SelectUpOrDown){
+        this.#SelectUpOrDown = SelectUpOrDown;
+        this.validate(SelectUpOrDown);
+    }
+
+    validate(SelectUpOrDown){
+    }
+}
