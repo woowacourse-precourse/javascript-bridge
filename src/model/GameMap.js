@@ -48,7 +48,15 @@ class GameMap {
   }
 
   appendDrawingBridge() {}
-  appendEmptySpace(selectBridge) {}
+
+  appendEmptySpace(selectBridge) {
+    // 선택하지 않은 다리에 공백 추가하기
+    if (selectBridge !== this.#upperBridge) {
+      this.#upperBridge.push(' '.repeat(REPEAT_COUNT));
+      return;
+    }
+    this.#lowerBridge.push(' '.repeat(REPEAT_COUNT));
+  }
 }
 
 module.exports = GameMap;
