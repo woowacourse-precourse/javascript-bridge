@@ -24,17 +24,17 @@ class BridgeGame {
   }
 
   setTopSide() {
-    this.topSide.push(1);
-    this.downSide.push(0);
+    this.topSide.push('O');
+    this.downSide.push('X');
   }
 
   setDownSide() {
-    this.topSide.push(0);
-    this.downSide.push(1);
+    this.topSide.push('X');
+    this.downSide.push('O');
   }
 
   getMap() {
-    return { topSide: this.topSide, dowSide: this.downSide };
+    return { topSide: this.topSide, downSide: this.downSide };
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -43,8 +43,13 @@ class BridgeGame {
    */
   move(next) {
     const isSuccess = next === this.#bridge[this.#time] ? 1 : 0;
+
+    if (isSuccess && next === 'U') this.setTopSide();
+    if (!isSuccess && next === 'U') this.setDownSide();
+    if (isSuccess && next === 'D') this.setDownSide();
+    if (!isSuccess && next === 'D') this.setTopSide();
+
     this.#time += 1;
-    next === 'U' ? this.setTopSide() : this.setDownSide();
 
     return isSuccess;
   }

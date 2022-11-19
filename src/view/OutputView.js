@@ -1,14 +1,36 @@
+const { Console } = require('@woowacourse/mission-utils');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+  time: 0,
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(map, isSuccess) {
+    const { topSide, downSide } = this.remove(map, isSuccess);
+    Console.print(`[ ${topSide.join(' | ')} ]`);
+    Console.print(`[ ${downSide.join(' | ')} ]`);
+  },
+
+  remove(map, isSuccess) {
     const { topSide, downSide } = map;
+
+    if (isSuccess) {
+      if (topSide[this.time] === 'X') topSide[this.time] = ' ';
+
+      if (downSide[this.time] === 'X') downSide[this.time] = ' ';
+    } else {
+      if (topSide[this.time] === 'O') topSide[this.time] = ' ';
+
+      if (downSide[this.time] === 'O') downSide[this.time] = ' ';
+    }
+
+    this.time += 1;
+
+    return { topSide, downSide };
   },
 
   /**
