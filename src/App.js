@@ -12,7 +12,7 @@ class App {
 
   play() { }
 
-  processAfterGettingBridgeSize(size) {
+  proceedAfterGettingBridgeSize(size) {
     const PATH = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.game = new BridgeGame(PATH);
 
@@ -20,12 +20,14 @@ class App {
     InputView.readMoving();
   }
 
-  processAfterMove(direction) {
+  proceedAfterMove(direction) {
     this.game.move(direction);
     OutputView.printMap(this.game);
 
 
   }
+
+
 
   finish() {
     OutputView.printResult(this.game);
