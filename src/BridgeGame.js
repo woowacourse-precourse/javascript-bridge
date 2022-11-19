@@ -71,8 +71,9 @@ class BridgeGame {
     this.#secondLineResult = [];
   }
 
-  end() {
+  end(isComplete, tryCount) {
     OutputView.printMap(this.#firstLineResult, this.#secondLineResult, true);
+    OutputView.printResult(isComplete, tryCount);
   }
 }
 

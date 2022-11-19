@@ -46,7 +46,7 @@ class App {
       return this.stopGame();
     }
     if (this.#bridgeGame.checkIsEndBridge()) {
-      return OutputView.printResult(true, this.#tryCount);
+      return this.#bridgeGame.end(true, this.#tryCount);
     }
     return this.proceedGame();
   }
@@ -62,8 +62,7 @@ class App {
       return this.proceedGame();
     }
     if (choice === GAME_PROCEED.quit) {
-      this.#bridgeGame.end();
-      return OutputView.printResult(false, this.#tryCount);
+      return this.#bridgeGame.end(false, this.#tryCount);
     }
   }
 }
