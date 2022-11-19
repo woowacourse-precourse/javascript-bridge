@@ -39,6 +39,12 @@ class BridgeGame {
   progressMove(input) {
     const moveCount = this.#moveCount;
     this.increamentMoveCount();
+    this.compareInput(input, moveCount);
+  }
+
+  compareInput(input, index) {
+    if (this.#bridgeList[index] === input) {
+    }
   }
 
   /**
