@@ -61,7 +61,7 @@ class App {
       if (input === GAME.REPLAY) {
         this.bridgeGame.retry();
         this.requestMoving();
-        
+
         return;
       }
 
@@ -70,7 +70,15 @@ class App {
     });
   }
 
-  quit() {}
+  quit() {
+    const [playerUpperBridge, playerLowerBridge, isSuccess, attempsCount] =
+      this.bridgeGame.getResult();
+
+    OutputView.printMsg(MESSAGE.GAME_RESULT);
+    OutputView.printMap(playerUpperBridge, playerLowerBridge);
+    OutputView.printResult(isSuccess, attempsCount);
+    OutputView.end();
+  }
 }
 
 const app = new App();
