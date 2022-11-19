@@ -12,6 +12,7 @@ class App {
   }
 
   play() {
+    OutputView.printMessage('다리 건너기 게임을 시작합니다.');
     InputView.readBridgeSize(this.handleInputLength.bind(this));
   }
 
@@ -52,6 +53,8 @@ class App {
         InputView.readMoving(this.handleInputStep.bind(this));
       }
       if (result === 'FAIL') {
+        this.bridgeGame.gameStatus = '실패';
+        InputView.readGameCommand(this.handleInputCommand.bind(this));
       }
     } catch (error) {
       OutputView.printMessage(error.message);
@@ -60,15 +63,11 @@ class App {
   }
 
   handleInputCommand(input) {
-    OutputView.printMessage(
-      '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)'
-    );
     try {
       if (!InputValidator.isValidCommand(input)) {
         throw new Error('[ERROR] : 유효한 명령어가 아닙니다.');
       }
       if (input === command.GAME_QUIT) {
-        this.bridgeGame.gameStatus = '실패';
         OutputView.printResult(
           this.bridgeGame.answerSteps,
           this.bridgeGame.bridgeSteps,
