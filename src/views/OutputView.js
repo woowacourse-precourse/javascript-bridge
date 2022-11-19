@@ -18,8 +18,8 @@ const OutputView = {
     const upsideString = OutputUtils.stringifyMap(upside);
     const downsideString = OutputUtils.stringifyMap(downside);
 
-    Console.print(`${BRIDGE_MESSAGE.START}${upsideString}${BRIDGE_MESSAGE.END}`);
-    Console.print(`${BRIDGE_MESSAGE.START}${downsideString}${BRIDGE_MESSAGE.END}`);
+    Console.print(BRIDGE_MESSAGE.START + upsideString + BRIDGE_MESSAGE.END);
+    Console.print(BRIDGE_MESSAGE.START + downsideString + BRIDGE_MESSAGE.END);
   },
 
   /**

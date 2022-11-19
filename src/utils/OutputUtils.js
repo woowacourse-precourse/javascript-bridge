@@ -11,7 +11,7 @@ const OutputUtils = {
   stringifyMap(bridgeSide) {
     return bridgeSide
       .map((square) => OutputUtils.convertMapMessage(square))
-      .join(`${BRIDGE_MESSAGE.SEPARATOR}`);
+      .join(BRIDGE_MESSAGE.SEPARATOR);
   },
 
   convertWinMessage(isWin) {
