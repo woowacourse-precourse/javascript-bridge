@@ -5,6 +5,7 @@ const BridgeGame = require('../src/BridgeGame');
 
 let crossingOrder = [];
 let bridge = ['U', 'D', 'D', 'U'];
+let attemptCount = 1;
 
 const moveMockFn = jest.fn((direction) => {
   crossingOrder.push([direction, direction === 'U' ? 0 : 1]);
@@ -18,6 +19,11 @@ const isFailMockFn = jest.fn(() => {
 
 const isLastMockFn = jest.fn(() => {
   return bridge.length === crossingOrder.length;
+});
+
+const retryMockFn = jest.fn(() => {
+  attemptCount += 1;
+  crossingOrder = [];
 });
 
 describe('move 메서드 테스트', () => {
@@ -210,5 +216,34 @@ describe('isLast 메서드 테스트', () => {
     ['U', 'D', 'D', 'U'].forEach((dircetion) => moveMockFn(dircetion));
 
     expect(isLastMockFn()).toBeTruthy();
+  });
+});
+
+describe('retry 메서드 테스트', () => {
+  test.each([
+    [1, 2],
+    [3, 4],
+    [5, 6],
+  ])(
+    'retry 메서드가 호출되면 attemptCount는 1증가한다. 호출 횟수: %d',
+    (num, count) => {
+      for (let i = 0; i < num; i++) {
+        retryMockFn();
+      }
+
+      expect(attemptCount).toEqual(count);
+
+      attemptCount = 1;
+    }
+  );
+
+  test('retry 메서드가 호출되면 crossingOrder는 빈 배열이 된다.', () => {
+    moveMockFn('U');
+    moveMockFn('U');
+    moveMockFn('D');
+
+    retryMockFn();
+
+    expect(crossingOrder).toHaveLength(0);
   });
 });

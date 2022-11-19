@@ -213,6 +213,7 @@ const number = generateRandomNumber();
   - getBridgeCrossingResult 메서드 테스트 코드를 작성한다.
   - isFail 메서드 테스트 코드를 작성한다.
   - isLast 메서드 테스트 코드를 작성한다.
+  - retry 메서드 테스트 코드를 작성한다.
 - [ ] test: BridgeMaker.js 테스트 코드 작성
 - [ ] test: InputView.js 테스트 코드 작성
 - [ ] test: OutPutView.js 테스트 코드 작성
