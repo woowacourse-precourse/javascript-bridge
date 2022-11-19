@@ -6,12 +6,22 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
  * 다리 건너기 게임을 관리하는 클래스, 필드 추가가 가능하다.
  */
 class BridgeGame {
+  #retryCount;
   #selectBridge;
   #correctBridge;
 
   constructor() {
     this.#selectBridge = [];
     this.#correctBridge = [];
+    this.#retryCount = 0;
+  }
+
+  set setRetryCount(retryCount) {
+    this.#retryCount = retryCount;
+  }
+
+  get getRetryCount() {
+    return this.#retryCount;
   }
 
   set setCorrectBridge(correctBridge) {
@@ -59,6 +69,7 @@ class BridgeGame {
 
   retry() {
     // 함수 호출 시 죽었다는 의미. 따라서 재시도 = 참
+    this.setRetryCount = this.getRetryCount + 1;
     return 1;
   }
 

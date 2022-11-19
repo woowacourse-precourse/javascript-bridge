@@ -22,8 +22,7 @@ const InputView = {
         Validate.isCorrectMove(input);
         const result = bridgeGame.move(input);
         if (result === 1) return this.readGameCommand(bridgeGame);
-        if (result === 2)
-          return OutputView.printResult(bridgeGame.getSelectBridge);
+        if (result === 2) return OutputView.printResult(bridgeGame);
         this.readMoving(bridgeGame);
       }
     );
@@ -34,7 +33,7 @@ const InputView = {
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
         Validate.isCorrectRetry(input);
-        if (input === "Q") MissionUtils.Console.close();
+        if (input === "Q") OutputView.printResult(bridgeGame);
         if (input === "R") {
           bridgeGame.initSelectBridge();
           this.readMoving(bridgeGame);

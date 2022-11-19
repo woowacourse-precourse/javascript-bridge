@@ -6,9 +6,11 @@ const OutputView = {
     MissionUtils.Console.print(map);
   },
 
-  printResult(selectBridge) {
+  printResult(selectBridge, isUserDie, retryCount) {
     MissionUtils.Console.print("최종 게임 결과");
-    this.printMap(selectBridge, false);
+    this.printMap(selectBridge, isUserDie);
+    const statistic = this.makeGameStatistic(isUserDie, retryCount);
+    MissionUtils.Console.print(statistic);
     MissionUtils.Console.close();
   },
 
@@ -50,6 +52,13 @@ const OutputView = {
     }
 
     return { topSquare, bottomSquare };
+  },
+
+  makeGameStatistic(isUserDie, retryCount) {
+    MissionUtils.Console.print(
+      `게임 성공 여부: ${isUserDie ? "실패" : "성공"}`
+    );
+    MissionUtils.Console.print(`총 시도한 횟수: ${retryCount}`);
   },
 };
 
