@@ -2,11 +2,13 @@ const { describe, expect, test, afterEach } = require('@jest/globals');
 const { Console } = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeGame = require('../src/BridgeGame');
+const BridgeMaker = require('../src/BridgeMaker');
+const { generate } = require('../src/BridgeRandomNumberGenerator');
+
+const app = new App();
 
 describe('Console.print() 테스트', () => {
   const printFnSpy = jest.spyOn(Console, 'print');
-
-  const app = new App();
 
   test('시작 메시지 출력 테스트', () => {
     app.play();
@@ -91,5 +93,37 @@ describe('Console.print() 테스트', () => {
     expect(printFnSpy).toHaveBeenNthCalledWith(1, '최종 게임 결과');
     expect(printFnSpy).toHaveBeenNthCalledWith(4, '\n게임 성공 여부: 실패');
     expect(printFnSpy).toHaveBeenNthCalledWith(5, '총 시도한 횟수: 1');
+  });
+});
+
+describe('다리 생성 함수 호출 테스트', () => {
+  const makerSpy = jest.spyOn(BridgeMaker, 'makeBridge');
+
+  test('BridgeMaker의 makeBridge 메서드가 호출되어 size에 맞는 다리가 생성된다.', () => {
+    Console.readLine = jest.fn();
+    Console.readLine.mockImplementationOnce((_, callBack) => {
+      callBack('3');
+    });
+
+    app.requestBridgeSize();
+
+    expect(makerSpy).toHaveBeenCalledTimes(1);
+
+    makerSpy.mockClear();
+  });
+
+  test('BridgeMaker의 makeBrige 메서드는 다리의 size와 랜덤 숫자 생성 함수를 인자로 받는다.', () => {
+    Console.readLine = jest.fn();
+    Console.readLine.mockImplementationOnce((_, callBack) => {
+      callBack('12');
+    });
+
+    app.requestBridgeSize();
+
+    console.log(makerSpy);
+
+    expect(makerSpy).toHaveBeenCalledWith(12, generate);
+
+    makerSpy.mockClear();
   });
 });
