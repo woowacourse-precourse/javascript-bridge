@@ -1,5 +1,11 @@
 const { readLine } = require('./utils/ui');
-const { INPUT_MESSAGE, PRINT_MESSAGE } = require('./constants');
+const {
+  INPUT_MESSAGE,
+  PRINT_MESSAGE,
+  MOVE,
+  RETRY_OR_QUIT,
+} = require('./constants');
+const validation = require('./validation');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -10,6 +16,7 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     readLine(INPUT_MESSAGE.BRIDGE_LENGTH, (length) => {
+      validation.bridgeLength(length);
       bridgeGame.getBridge().setComponents(length);
       this.readMoving(bridgeGame);
     });

@@ -2,8 +2,8 @@ const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const Bridge = require('./Bridge');
 const Selection = require('./Selection');
-const { PRINT_MESSAGE, COMMAND } = require('./constants');
-const { close } = require('./utils/ui');
+const { PRINT_MESSAGE, RETRY_OR_QUIT } = require('./constants');
+const { print } = require('./utils/ui');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -41,7 +41,11 @@ class BridgeGame {
 
   start() {
     OutputView.printGameStart();
-    InputView.readBridgeSize(this);
+    try {
+      InputView.readBridgeSize(this);
+    } catch (error) {
+      print(error);
+    }
   }
 
   /**
@@ -65,12 +69,12 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(command) {
-    if (command === COMMAND.RESTART) {
+    if (command === RETRY_OR_QUIT.RETRY) {
       this.increaseCount();
       this.resetGame();
       InputView.readMoving(this);
     }
-    if (command === COMMAND.QUIT) OutputView.printResult(this);
+    if (command === RETRY_OR_QUIT.QUIT) OutputView.printResult(this);
   }
 
   resetGame() {

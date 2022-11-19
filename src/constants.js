@@ -1,7 +1,7 @@
 const INPUT_MESSAGE = {
   BRIDGE_LENGTH: '다리의 길이를 입력해주세요.\n',
   MOVING_DIRECTION: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
-  RESTART_OR_QUIT:
+  RETRY_OR_QUIT:
     '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
 };
 
@@ -16,7 +16,12 @@ const PRINT_MESSAGE = {
 
 const ERROR = '[ERROR]';
 
-const ERROR_MESSAGE = {};
+const ERROR_MESSAGE = {
+  BRIDGE_LENGTH_NUMBER: `${ERROR} 다리의 길이는 숫자여야 합니다.`,
+  BRIDGE_LENGTH_RANGE: `${ERROR} 다리의 길이는 3 ~ 20 사이여야 합니다.`,
+  MOVE_COMMAND: `${ERROR} 이동할 칸의 입력 값은 U 또는 D 여야 합니다.`,
+  RETRY_OR_QUIT_COMMAND: `${ERROR} 재시작&종료 입력 값은 R 또는 Q 이여야 합니다.`,
+};
 
 const MOVE = {
   DIRECTION_UP: 'U',
@@ -34,8 +39,8 @@ const MOVE_RESULT = {
   UNAVAILABLE: ' X ',
 };
 
-const COMMAND = {
-  RESTART: 'R',
+const RETRY_OR_QUIT = {
+  RETRY: 'R',
   QUIT: 'Q',
 };
 
@@ -45,5 +50,5 @@ module.exports = {
   ERROR_MESSAGE,
   MOVE,
   MOVE_RESULT,
-  COMMAND,
+  RETRY_OR_QUIT,
 };
