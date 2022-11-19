@@ -1,5 +1,6 @@
 const Game = require("./Model/Game");
 const OutputView = require("./GameIO/OutputView")
+const InputView = require("./GameIO/InputView");
 
 class App {
   constructor() {
@@ -12,6 +13,7 @@ class App {
 
   createGame() {
     OutputView.printBeginAnnouncement(); //출력: 게임을 시작합니다.
+
     this.game.gameStartPoint(); 
   }
 
