@@ -1,5 +1,6 @@
 const bridgeMaterialize = require('../src/utils/bridgeMaterialize');
 const makePrintBridge = require('../src/utils/makePrintBridge');
+const validCheck = require('../src/utils/validCheck');
 
 describe('유틸 함수 동작 테스트', () => {
   test('다리 구체화 유틸함수 테스트', () => {
@@ -69,5 +70,11 @@ describe('유틸 함수 동작 테스트', () => {
       ['O', ' ', 'O', 'O'],
       [' ', 'O', ' ', ' '],
     ]);
+  });
+
+  test('다리 길이 입력값 검증 함수', () => {
+    expect(validCheck.bridgeLength('5')).toBe(true);
+    expect(validCheck.bridgeLength('21')).toBe(false);
+    expect(validCheck.bridgeLength('a')).toBe(false);
   });
 });
