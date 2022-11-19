@@ -11,12 +11,8 @@ class App {
       BridgeRandomNumberGenerator.generate,
     );
     const bridgeGame = new BridgeGame(bridge);
-    this.whileFinish(bridgeGame);
-  }
-  whileFinish(bridgeGame) {
     const nextMoveChar = InputView.readMoving();
     bridgeGame.move(nextMoveChar);
-    return true;
   }
 }
 

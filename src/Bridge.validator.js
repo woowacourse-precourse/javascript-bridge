@@ -15,6 +15,13 @@ class BridgeValidator {
   static checkInputNext(next) {
     this.#isBridgeUpDown(next);
   }
+  static checkFinish(cur, max) {
+    if(cur == max) {
+      return true;
+    }
+    this.checkPosition(cur, max);
+    return false
+  }
   static checkPosition(cur, max) {
     if (cur > max) {
       throw new Error(ERROR.IS_MAX_POSITON);

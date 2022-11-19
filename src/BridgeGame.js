@@ -5,6 +5,7 @@ const BridgeValidator = require('./Bridge.validator');
  */
 class BridgeGame {
   #bridge = [];
+  #bridgeAnswers = [];
   #currentPosition = 0;
   #maxPosition = 0;
   #isFinish = false;
@@ -16,14 +17,29 @@ class BridgeGame {
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
+   * @param {string}'U', 'D'만 입력을 받습니다.
    */
   move(nextMoveChar) {
     BridgeValidator.checkInputNext(nextMoveChar);
     BridgeValidator.checkPosition(this.#currentPosition, this.#maxPosition);
     if (nextMoveChar == this.#bridge(this.#currentPosition)) {
-      this.#currentPosition += 1;
-      return true;
+      return this.moveNextTrue();
     }
+
+    return this.moveNextFalse();
+  }
+
+  moveNextTrue() {
+    this.#currentPosition += 1;
+    this.#bridgeAnswers.push('O');
+    if (BridgeValidator.checkFinish(this.#currentPosition, this.#maxPosition)) {
+      this.#isFinish = true;
+    }
+    return true;
+  }
+
+  moveNextFalse() {
+    this.#bridgeAnswers.push('X');
     return false;
   }
 
