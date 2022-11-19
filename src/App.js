@@ -53,7 +53,7 @@ class App {
     try {
       this.bridgeGame.retry(gameCommand);
     } catch ({ message }) {
-      this.reRequestGameCommand();
+      this.reRequestGameCommand(message);
     }
   }
 
