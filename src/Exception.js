@@ -18,7 +18,7 @@ class CheckBridgeSizeException{
 
     checkBridgeNum(size){
         if(isNaN(size)){
-            throw new Error("[ERROR] 숫자를 입력해주세요.")
+            throw new Error("[ERROR] 숫자를 입력해주세요.");
         }
     }
 }
@@ -31,5 +31,12 @@ class CheckUserMove{
     }
 
     validate(SelectUpOrDown){
+        this.CheckInputString(SelectUpOrDown);
     }
+
+    CheckInputString(SelectUpOrDown){
+        if(SelectUpOrDown !== "U" || SelectUpOrDown !== "D"){
+            throw new Error("[ERROR] U(위) 또는 D(아래)을 입력해주세요.");
+        }
+    } 
 }
