@@ -23,8 +23,7 @@ class App {
 
       this.requestMovingDirection();
     } catch ({ message }) {
-      printMsg(message);
-      this.requestBridgeSize();
+      this.reRequestBridgeSize(message);
     }
   }
 
@@ -36,9 +35,18 @@ class App {
     try {
       this.bridgeGame.move(movingDirection);
     } catch ({ message }) {
-      printMsg(message);
-      this.requestMovingDirection();
+      this.reRequestMovingDirection(message);
     }
+  }
+
+  reRequestBridgeSize(message) {
+    printMsg(message);
+    this.requestBridgeSize();
+  }
+
+  reRequestMovingDirection(message) {
+    printMsg(message);
+    this.requestMovingDirection();
   }
 }
 
