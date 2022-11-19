@@ -1,12 +1,12 @@
-const { readMoving } = require('./InputView');
-const { printResult } = require('./OutputView');
+const { readMoving, readGameCommand } = require('./InputView');
+const { printMap, printResult } = require('./OutputView');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   constructor(state) {
     this.nowPosition = 0;
-    this.tryCount = 0;
+    this.tryCount = 1;
     this.bridgeState = state;
     this.nowBridge = {
       upperBridge: [],
@@ -23,12 +23,15 @@ class BridgeGame {
     switch(true) {
       case this.bridgeState[this.nowPosition] === move:
         this.passBridge(move, 'O');
+        printMap(this.nowBridge);
+        if (this.bridgeState.length === this.nowPosition) return printResult('성공', this.nowBridge, this.tryCount);
+        this.move();
         break;
       default:
         this.passBridge(move, 'X');
+        printMap(this.nowBridge);
+        this.retry();
     }
-    if (this.nowPosition === this.bridgeState.length) printResult('성공', this.nowBridge, this.tryCount);
-    this.move();
   }
 
   passBridge(move, check) {
@@ -44,8 +47,8 @@ class BridgeGame {
   }
 
   updateNowBridge(upperState, downState) {
-    this.nowBridge[upperBridge].push(upperState);
-    this.nowBridge[downBridge].push(downState);
+    this.nowBridge.upperBridge.push(upperState);
+    this.nowBridge.downBridge.push(downState);
   }
 
   /**
