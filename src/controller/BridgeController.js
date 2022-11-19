@@ -17,11 +17,24 @@ class BridgeController {
   }
 
   /**
-   * 유저에게 다리 길이를 입력 받은 후 순서에 맞게 실행한다.
+   * 다리를 생성 후 반환한다.
+   * @param bridgeLengthInput {string} [다리 길이 input]
+   * @return {string[]} [생성된 다리]
+   */
+  getCreatedBridge(bridgeLengthInput) {
+    return BridgeMaker.makeBridge(
+      parseInt(bridgeLengthInput, 10),
+      BridgeRandomNumberGenerator.generate
+    );
+  }
+
+  /**
+   * 유저에게 다리 길이를 입력 받은 후 다리 생성 및 저장한다.
    * @param bridgeLengthInput {string} [다리 길이 input]
    */
   onBridgeSizeInput(bridgeLengthInput) {
     this.validateBridgeLengthInput(bridgeLengthInput);
+    this.bridgeModel.setBridge(this.getCreatedBridge(bridgeLengthInput));
   }
 }
 
