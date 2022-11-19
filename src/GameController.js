@@ -28,7 +28,8 @@ class GameController {
   }
 
   handleSize(size) {
-    this.#bridgeGame.makeBridge(size);
+    const bridge = makeBridge(size);
+    this.#bridgeGame = new BridgeGame(bridge);
     this.askDirection();
   }
 
@@ -45,8 +46,7 @@ class GameController {
 
   handleDirection(direction) {
     const successfulMove = this.#bridgeGame.move(direction);
-    this.#bridgeGame.drawMap(direction, successfulMove);
-    const curMapState = this.#bridgeGame.curMap();
+    const curMapState = this.#bridgeGame.drawMap(successfulMove, direction);
     OutputView.printMap(curMapState);
 
     successfulMove ? this.doseUserWin() : this.askRetry();

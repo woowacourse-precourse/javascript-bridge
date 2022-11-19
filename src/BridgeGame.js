@@ -1,21 +1,22 @@
 const Player = require('./models/Player');
-const Bridge = require('./models/Bridge');
 const Command = require('./models/Command');
 const Direction = require('./models/Direction');
 const { MAP_ELEMENT } = require('./constant');
+const BridgeMap = require('./models/BridgeMap');
 
 class BridgeGame {
   #player;
   #bridge;
+  #bridgeMap;
 
   constructor(bridge) {
     this.#player = new Player();
+    this.#bridgeMap = new BridgeMap();
     this.#bridge = bridge;
   }
 
   move(direction) {
-    const bridge = this.#bridge.getBridge();
-    const nextCellDirection = bridge[this.#player.getCurPlace()];
+    const nextCellDirection = this.#bridge[this.#player.getCurPlace()];
     const successfulMove = new Direction(direction, nextCellDirection);
     this.#player.increaseCurPlace();
 
@@ -23,15 +24,9 @@ class BridgeGame {
   }
 
   drawMap(successful, direction) {
-    successful
-      ? this.#bridge.updateMap(direction, MAP_ELEMENT.CROSS)
-      : this.#bridge.updateMap(direction, MAP_ELEMENT.FAIL);
-  }
+    const elem = successful ? MAP_ELEMENT.CROSS : MAP_ELEMENT.FAIL;
 
-  curMap() {
-    const curMapState = Object.values(this.#bridge.getMap());
-
-    return curMapState;
+    return Object.values(this.#bridgeMap.updateMap(direction, elem));
   }
 
   retry(command) {
