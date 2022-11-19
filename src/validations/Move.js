@@ -1,4 +1,4 @@
-const CustomError = require('../CustomError');
+const CustomError = require('../errors/CustomError');
 
 const MoveValidation = {
   validate: (input) => {

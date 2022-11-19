@@ -17,6 +17,7 @@ const InputView = {
     Console.readLine('\n다리 길이를 입력해주세요.\n', (userInput) => {
       try {
         createBridge.call(this, Number(userInput));
+        InputView.readMoving.call(this, rest);
       } catch (error) {
         printError(error);
         InputView.readBridgeSize.bind(this)(callbackArr);
@@ -27,9 +28,17 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(callbackArr) {
+    const [moveForward, ...rest] = callbackArr;
+
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (userInput) => {
-      this.moving = Number(userInput);
+      const canMoveForward = moveForward.call(this, userInput);
+
+      if (canMoveForward) {
+        InputView.readMoving.bind(this)(callbackArr);
+      }
+
+      InputView.readGameCommand.call(this, rest);
     });
   },
 
@@ -40,6 +49,10 @@ const InputView = {
     Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (userInput) => {
       this.gameCommand = Number(userInput);
     });
+  },
+
+  close() {
+    Console.close();
   },
 };
 
