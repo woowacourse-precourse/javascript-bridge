@@ -41,7 +41,7 @@ class App {
       console.log(this.#moveStatement);
       if (this.#moveStatement) {
         this.#bridgeMap.handleMap(this.#moveStatement, this.#bridge);
-        this.#nowBridgeLength = this.#brdigeGame.getNumberOfTry();
+        // this.#nowBridgeLength = this.#brdigeGame.getNumberOfTry();
         return this.progressBridgeMove();
       }
       if (!this.#moveStatement) {
@@ -52,7 +52,7 @@ class App {
     }
     if (this.#appStatus === 5) return this.progressRetryGame();
     if (this.#appStatus === 6) {
-      if (this.#gameStaus) return this.play();
+      if (this.#gameStaus) return this.initApp();
       if (!this.#gameStaus) {
         OutputView.printResult(
           this.#bridgeMap.getMap(),
@@ -103,6 +103,13 @@ class App {
         this.progressApp(this.#appStatus);
       }
     });
+  }
+
+  initApp() {
+    this.#brdigeGame = new BridgeGame();
+    this.#bridgeMap = new BridgeMap();
+    this.#appStatus = 1;
+    this.play();
   }
 }
 
