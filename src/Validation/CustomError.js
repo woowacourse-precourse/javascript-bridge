@@ -1,6 +1,7 @@
 class CustomError extends Error {
-  constructor(msg) {
+  constructor(name, msg) {
     super(`[ERROR] ${msg}`);
+    this.name = name;
   }
 }
 module.exports = CustomError;
