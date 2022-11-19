@@ -4,7 +4,15 @@ class BridgeMap {
   #map;
 
   constructor() {
+    this.initMap();
+  }
+
+  initMap() {
     this.#map = { U: [], D: [] };
+  }
+
+  getMap() {
+    return this.#map;
   }
 
   updateMap(direction, elem) {
