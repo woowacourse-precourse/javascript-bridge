@@ -16,7 +16,10 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridgeGame) {},
+  readMoving(callback) {
+    const { moveSpace } = INPUT_MESSAGES;
+    readLine(moveSpace, callback);
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

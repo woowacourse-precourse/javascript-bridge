@@ -1,13 +1,11 @@
 const OutputView = require('./view/OutputView');
 const InputView = require('./view/InputView');
 const BridgeGame = require('./domain/BridgeGame');
-const User = require('./model/User');
 const Validator = require('./view/Validator');
 
 class App {
   constructor() {
     this.bridgeGame = new BridgeGame();
-    this.user = new User();
     this.validator = new Validator();
   }
 
@@ -23,14 +21,28 @@ class App {
   requestBridgeSize(bridgeSize) {
     try {
       this.validator.checkBridgeSize(bridgeSize);
-      // 예외 통과하면 다리 건설
+      this.bridgeGame.makeBridgeMap(bridgeSize);
+      this.getBridgeMovementDirection();
     } catch (errorType) {
       OutputView.printError(errorType);
       this.getBridgeSizeInput();
     }
   }
 
-  getBridgeMovementDirection() {}
+  getBridgeMovementDirection() {
+    InputView.readMoving(this.requestMovementDirection.bind(this));
+  }
+
+  requestMovementDirection(moveCommand) {
+    try {
+      this.validator.checkMoveCommand(moveCommand);
+      // 예외 통과시 실행할 코드
+      this.bridgeGame.move(moveCommand);
+    } catch (errorType) {
+      OutputView.printError(errorType);
+      this.getBridgeMovementDirection();
+    }
+  }
 }
 
 const app = new App();
