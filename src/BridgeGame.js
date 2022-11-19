@@ -49,9 +49,17 @@ class BridgeGame {
   get bridgeAnswers() {
     return this.#bridgeAnswers;
   }
-
   get isFinish() {
     return this.#isFinish;
+  }
+  get bridge() {
+    return this.#bridge;
+  }
+  get tryCount() {
+    return this.#tryCount;
+  }
+  get isSuccess() {
+    return this.#currentPosition == this.#maxPosition;
   }
 
   /**

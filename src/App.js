@@ -11,8 +11,7 @@ class App {
       BridgeRandomNumberGenerator.generate,
     );
     const bridgeGame = new BridgeGame(bridge);
-    while(!this.#start(bridgeGame));
-    
+    while (!this.#start(bridgeGame));
   }
 
   #start(bridgeGame) {
@@ -21,6 +20,7 @@ class App {
     OutputView.printMap(bridgeGame.bridgeAnswers);
     if (bridgeGame.isFinish) {
       const gameCommand = InputView.readGameCommand();
+      OutputView.printResult();
       return bridgeGame.retry(gameCommand);
     }
   }

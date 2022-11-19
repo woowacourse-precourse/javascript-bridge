@@ -2,7 +2,7 @@ const { ERROR } = require('./Resource');
 
 class BridgeValidator {
   static checkInputBridgeLength(number, min, max) {
-    this.#isNumber(number);
+    this.isNumber(number);
     this.#isCheckGap(number, min, max);
   }
   static checkBridge(bridge, min, max) {
@@ -25,11 +25,11 @@ class BridgeValidator {
     return true;
   }
   static checkFinish(cur, max) {
-    if(cur == max) {
+    if (cur == max) {
       return true;
     }
     this.checkPosition(cur, max);
-    return false
+    return false;
   }
   static checkPosition(cur, max) {
     if (cur > max) {
@@ -40,7 +40,7 @@ class BridgeValidator {
     this.#isArray(bridgeAnswer);
   }
 
-  static #isNumber(number) {
+  static isNumber(number) {
     if (isNaN(+number)) {
       throw new Error(ERROR.IS_NUMBER);
     }

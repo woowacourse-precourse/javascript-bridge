@@ -39,7 +39,7 @@ const InputView = {
    */
   readGameCommand() {
     let returnValue = '';
-    MissionUtils.Console.readLine(INPUT.BRIDGE_NEXT, (message) => {
+    MissionUtils.Console.readLine(INPUT.BRIDGE_COMMAND, (message) => {
       returnValue = message;
     });
     BridgeValidator.checkGameCommand(returnValue);

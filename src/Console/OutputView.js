@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeValidator = require('../Bridge.validator');
+const { OUTPUT } = require('../Resource/String');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -9,11 +10,11 @@ const OutputView = {
    * @param {[string]} bridgeAnswer bridgeAnswer를 받습니다.
    * @param {[string]} bridge bridge를 받습니다.
    */
-  printMap(bridgeAnswer, bridge) {
-    BridgeValidator.checkBridgeAnswer(bridgeAnswer);
-    BridgeValidator.checkBridge(bridge);
-    printBridgeByPosition(bridgeAnswer, bridge, 'U');
-    printBridgeByPosition(bridgeAnswer, bridge, 'D');
+  printMap(bridgeGame) {
+    BridgeValidator.checkBridgeAnswer(bridgeGame.bridgeAnswer);
+    BridgeValidator.checkBridge(bridgeGame.bridge);
+    printBridgeByPosition(bridgeGame.bridgeAnswer, bridgeGame.bridge, 'U');
+    printBridgeByPosition(bridgeGame.bridgeAnswer, bridgeGame.bridge, 'D');
   },
 
   printBridgeByPosition(bridgeAnswer, bridge, position) {
@@ -21,15 +22,21 @@ const OutputView = {
       bridge[index] == position ? bridgeAnswerElement : ' ',
     );
     const bridgeString = bridgeByPosition.join(' | ');
-    MissionUtils.Console.readLine(`[ ${bridgeString} ]`);
+    MissionUtils.Console.print(`[ ${bridgeString} ]`);
   },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridgeGame) {
+    MissionUtils.Console.print(OUTPUT.GAME_END);
+    this.printMap(bridgeGame);
+    const gameResult = bridgeGame.isSuccess() ? '성공': '실패';
+
+    BridgeValidator.isNumber(bridgeGame.tryCount);
+    MissionUtils.Console.print(OUTPUT.GAME_RESULT + gameResult);
+    MissionUtils.Console.print(OUTPUT.GAME_TRY + bridgeGame.tryCount);
+  },
 };
 
 module.exports = OutputView;
