@@ -20,4 +20,15 @@ describe("다리 길이 테스트", () => {
   });
 });
 
+describe("이동할 칸 선택 테스트", () => {
+  test("U나 D를 입력해야한다.", () => {
+    expect(() => {
+      InputView.checkMovement("a");
+    }).toThrow("[ERROR]");
+    expect(() => {
+      InputView.checkMovement("1");
+    }).toThrow("[ERROR]");
+  });
+});
+
 MissionUtils.Console.close();
