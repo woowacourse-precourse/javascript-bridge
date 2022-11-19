@@ -37,23 +37,30 @@ const InputView = {
     MissionUtils.Console.readLine(WordToPrint.moving, (moveLocation) => {
       try {
         Error.readMoving(moveLocation);
-        const result = bridgeGame.move(nth, moveLocation);
-
-        OutputView.printMap(result);
-        if (result[result.length - 1][1] === "X") {
-          this.readGameCommand(bridge, result);
-          return;
-        }
-        // 건널 수 있는 칸 입력시,
-        if (nth < bridge.length - 1) this.readMoving(nth + 1, bridge);
-        // 다리를 모두 건넜을 때
-        if (nth === bridge.length - 1)
-          OutputView.printResult(result, bridgeGame.returnCountGame(), "성공");
+        this.startToMove(nth, moveLocation, bridge);
       } catch (e) {
         MissionUtils.Console.print(e);
         this.readMoving(nth, bridge);
       }
     });
+  },
+
+  startToMove(nth, moveLocation, bridge) {
+    const moveResult = bridgeGame.move(nth, moveLocation);
+    OutputView.printMap(moveResult);
+    this.checkPossibleToCross(moveResult, bridge, nth);
+  },
+
+  checkPossibleToCross(moveResult, bridge, nth) {
+    if (moveResult[moveResult.length - 1][1] === "X") {
+      this.readGameCommand(bridge, moveResult);
+      return;
+    }
+    // 건널 수 있는 칸 입력시,
+    if (nth < bridge.length - 1) this.readMoving(nth + 1, bridge);
+    // 다리를 모두 건넜을 때
+    if (nth === bridge.length - 1)
+      OutputView.printResult(moveResult, bridgeGame.returnCountGame(), "성공");
   },
 
   /**
