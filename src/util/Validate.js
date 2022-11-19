@@ -1,9 +1,9 @@
 const { ERROR_MESSAGE } = require("./Constant");
 
 const Validate = {
-  validateReadBridgeSize(answer) {
+  validateReadBridgeSize(size) {
     const exceptNumber = /[^0-9]/;
-    if (exceptNumber.test(answer)) throw new Error(ERROR_MESSAGE.BRIDGE_SIZE);
+    if (exceptNumber.test(size)) throw new Error(ERROR_MESSAGE.BRIDGE_SIZE);
   },
 };
 

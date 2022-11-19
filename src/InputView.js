@@ -14,7 +14,7 @@ const InputView = {
   readBridgeSize(callback) {
     readLine(QUERY_MESSAGE.BRIDGE_SIZE, (answer) => {
       try {
-        callback(answer);
+        callback(parseInt(answer, 10));
       } catch (error) {
         print(error.message);
         this.readBridgeSize(callback);
