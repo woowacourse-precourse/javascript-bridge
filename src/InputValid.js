@@ -5,7 +5,7 @@ class BridgeSizeValid {
 
   constructor(answer) {
     this.validate(answer);
-    this.#answer = answer;
+    this.#answer = Number(answer);
   }
 
   validate(answer) {

@@ -1,6 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
 const GameStatus = require("./GameStatus")
 
+const validMove = ['U', 'D']
+
 const SUCCESS = {
   true: '성공',
   false: '실패',
@@ -34,14 +36,14 @@ const OutputView = {
   },
 
   alreadyPass(upOrDown, i) {
-    if(GameStatus.bridge[i] === upOrDown) {
+    if(GameStatus.bridge[i] === validMove[upOrDown]) {
       return ' O |'
     }
     return '   |'
   },
 
   makeNextMoveOutput(upOrDown, nextMove) {
-    if(upOrDown !== nextMove) {
+    if(validMove[upOrDown] !== nextMove) {
       return '   ]'
     }
     if(GameStatus.bridge[GameStatus.step] !== nextMove) {

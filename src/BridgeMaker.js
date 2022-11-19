@@ -1,3 +1,4 @@
+const validMove = ['D', 'U']
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -8,13 +9,14 @@ const BridgeMaker = {
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
   makeBridge(size, generateRandomNumber) {
-    const bridge = [];
-    for(let i=0; i<size; i++) {
-      const newRandomNumber = generateRandomNumber.generate();
-      bridge.push(newRandomNumber);
-    }
-    return bridge;
+    console.log(size)
+    return new Array(size)
+      .fill('')
+      .map(() => {
+        return validMove[Number(generateRandomNumber())]
+      });
   },
 };
 
 module.exports = BridgeMaker;
+

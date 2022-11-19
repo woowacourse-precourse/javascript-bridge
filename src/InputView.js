@@ -2,7 +2,6 @@ const { Console } = require("@woowacourse/mission-utils");
 const { BridgeSizeValid, MovingValid, RetryValid } = require("./InputValid.js");
 const BridgeGame = require("./BridgeGame.js")
 const GameStatus = require("./GameStatus.js")
-const GameUtils = require("./GameUtils")
 const BridgeMaker = require("./BridgeMaker.js")
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
 const OutputView = require("./OutputView.js");
@@ -17,11 +16,12 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine('다리 건너기 게임을 시작합니다.\n\n다리의 길이를 입력해주세요.\n', (answer => {
-      const inputSize = new BridgeSizeValid(answer).getSize()
-      GameStatus.size = Number(inputSize);
+      GameStatus.size = new BridgeSizeValid(answer).getSize();
       GameStatus.bridge = BridgeMaker
-        .makeBridge(inputSize, BridgeRandomNumberGenerator).slice();
-      console.log(GameStatus.bridge)
+        .makeBridge(GameStatus.size, BridgeRandomNumberGenerator.generate).slice();
+
+      console.log(GameStatus)
+
       this.readMoving();
     }))
   },
@@ -33,7 +33,7 @@ const InputView = {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (answer => {
       const nextMove = new MovingValid(answer).getMove()
       const bridgeGame = new BridgeGame(nextMove)
-      const success = bridgeGame.move(validMove.indexOf(nextMove))
+      const success = bridgeGame.move(nextMove)
       if(success === false) return this.readGameCommand();
       if(GameStatus.size === GameStatus.step) return OutputView.printResult();
       this.readMoving();
