@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./OutputView');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -16,12 +17,12 @@ const InputView = {
       this.readMoving(bridgeGame);
     });
   },
-
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgeGame) {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (moveAnswer) => {
+      if (this.checkMoveInput(moveAnswer)) return this.readMoving(bridgeGame);
       OutputView.printMap(bridgeGame, moveAnswer);
       Console.print('');
       if (bridgeGame.checkRemainBridge() && bridgeGame.checkMoveSuccess())
@@ -31,7 +32,6 @@ const InputView = {
       return OutputView.printResult(bridgeGame);
     });
   },
-
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
@@ -44,14 +44,22 @@ const InputView = {
       return OutputView.printResult(bridgeGame);
     });
   },
-
   checkBridgeLength(bridgeSize) {
     try {
       if (!(bridgeSize >= 3 && bridgeSize <= 20))
-        throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.")
+        throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
     } catch (err) {
       Console.print(err);
       return this.readBridgeSize();
+    }
+  },
+  checkMoveInput (moveAnswer) {
+    try {
+      if (!(moveAnswer === 'U' || moveAnswer === 'D')) 
+        throw new Error("[ERROR] U와 D중 하나의 문자를 입력해주세요.");
+    } catch (err) {
+      Console.print(err);
+      return true;
     }
   }
 };
