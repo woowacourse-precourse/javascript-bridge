@@ -9,8 +9,8 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size }, generateRandomNumber).map((randomNumber) => {
-      if (randomNumber === 1) return 'U';
-      if (randomNumber === 0) return 'D';
+      if (Number(randomNumber) === 1) return 'U';
+      if (Number(randomNumber) === 0) return 'D';
     });
   },
 };

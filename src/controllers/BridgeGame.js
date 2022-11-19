@@ -15,7 +15,6 @@ class BridgeGame {
     this.bridge = new Bridge(size);
     this.try = 1;
     this.index = 0;
-    this.answer = [];
 
     console.log(this.bridge); // ! remove
   }
