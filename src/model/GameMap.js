@@ -21,7 +21,23 @@ class GameMap {
     return this.#fail;
   }
 
+  setRetryGame() {
+    this.#fail = false;
+  }
+
+  getCorretGameMap() {
+    return this.#CorretBridge;
+  }
+
+  removePattern() {
+    // 사용자가 리트라이 했을 때 이전 값 지워야함. 유저 위치도 이동시켰다면 1 감소해야함
+  }
+
   drawBridge(moveCommand, userLocation) {
+    if (userLocation !== 0) {
+      this.appendVerticalLine();
+    }
+
     const oxPattern = this.selectOXpattern(moveCommand, userLocation);
     const selectBridge = this.selectUpOrDownBridge(moveCommand, userLocation);
 
@@ -52,7 +68,10 @@ class GameMap {
     return x;
   }
 
-  appendDrawingBridge() {}
+  appendVerticalLine() {
+    this.#upperBridge.push('|');
+    this.#lowerBridge.push('|');
+  }
 
   appendEmptySpace(selectBridge) {
     // 선택하지 않은 다리에 공백 추가하기
