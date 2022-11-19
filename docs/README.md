@@ -19,3 +19,22 @@
 ###  예외처리
 - [ ] U, D 외의 다른 커멘드를 입력하면 예외를 발생시킨다.
 - [ ] 재시작시 R or Q 외의 다른 커맨드를 입력하면 예외를 발생시킨다.
+
+## 프로그래밍 요구 사항
+- [ ] 컨밴션 준수
+- [ ] process.exit() 호출 x
+- [ ] test 성공
+- [ ] indent 3 이내
+- [ ] 함수의 책임 분리
+- [ ] else 지양
+- [ ] 단위 테스트 구현
+- [ ] 함수의 길이가 10라인 이하
+- [ ] 메서드의 파라미터 개수 3개 이하
+- [ ] InputView에서만 readLine을 사용
+
+## 객체관련
+- [ ] InputView 기능 구현
+- [ ] OutputView 기능 구현
+- [ ] BridgeGame 기능 구현
+- [ ] BridgeMaker 기능 구현
+- [ ] BridgeRandomNumberGenerator 사용
