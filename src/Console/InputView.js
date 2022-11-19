@@ -15,16 +15,16 @@ const InputView = {
       returnValue = message;
     });
 
-    try {
-      BridgeValidator.checkInputBridgeLength(
-        returnValue,
-        BRIDGE_LENGTH_MIN,
-        BRIDGE_LENGTH_MAX,
-      );
-    } catch (e) {
-      MissionUtils.Console.readLine(e);
-      this.readBridgeSize();
-    }
+    // try {
+    //   BridgeValidator.checkInputBridgeLength(
+    //     returnValue,
+    //     BRIDGE_LENGTH_MIN,
+    //     BRIDGE_LENGTH_MAX,
+    //   );
+    // } catch (e) {
+    //   MissionUtils.Console.readLine(e);
+    //   this.readBridgeSize();
+    // }
 
     return returnValue;
   },
@@ -38,12 +38,12 @@ const InputView = {
       returnValue = message;
     });
 
-    try {
-      BridgeValidator.checkInputNext(returnValue);
-    } catch (e) {
-      MissionUtils.Console.readLine(e);
-      this.readMoving();
-    }
+    // try {
+    //   BridgeValidator.checkInputNext(returnValue);
+    // } catch (e) {
+    //   MissionUtils.Console.readLine(e);
+    //   this.readMoving();
+    // }
 
     return returnValue;
   },
@@ -57,12 +57,12 @@ const InputView = {
       returnValue = message;
     });
 
-    try {
-      BridgeValidator.checkGameCommand(returnValue);
-    } catch (e) {
-      MissionUtils.Console.readLine(e);
-      this.readGameCommand();
-    }
+    // try {
+    //   BridgeValidator.checkGameCommand(returnValue);
+    // } catch (e) {
+    //   MissionUtils.Console.readLine(e);
+    //   this.readGameCommand();
+    // }
 
     return returnValue;
   },

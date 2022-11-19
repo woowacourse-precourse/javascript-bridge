@@ -19,12 +19,16 @@ class App {
     bridgeGame.move(nextMoveChar);
     OutputView.printMap(bridgeGame);
     if (bridgeGame.isFinish) {
-      OutputView.printResult(bridgeGame);
       if(bridgeGame.isSuccess) {
+        OutputView.printResult(bridgeGame);
         return true;
       }
       const gameCommand = InputView.readGameCommand();
-      return bridgeGame.retry(gameCommand);
+      const isRetry = bridgeGame.retry(gameCommand);
+      if(!isRetry) {
+        OutputView.printResult(bridgeGame);
+      }
+      return isRetry;
     }
   }
 }

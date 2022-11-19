@@ -15,7 +15,7 @@ class BridgeGame {
   constructor(bridge) {
     BridgeValidator.checkBridge(bridge, BRIDGE_LENGTH_MIN, BRIDGE_LENGTH_MIN);
     this.#bridge = bridge;
-    this.#maxPosition = bridge.length - 1;
+    this.#maxPosition = bridge.length ;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
