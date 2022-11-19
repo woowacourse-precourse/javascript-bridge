@@ -408,4 +408,13 @@ describe('위치 파악 메서드 테스트', () => {
       bridgeGame.getPositionIndex(EXPECTED);
     }).toThrow(RANGE_ERROR_TEXT);
   });
+
+  test('유저가 아직 출발 전이라면 예외를 발생한다.', () => {
+    expect(() => {
+      const bridgeGame = new BridgeGame();
+      const EXPECTED = 'D';
+
+      bridgeGame.getPositionIndex(EXPECTED);
+    }).toThrow(POSITION_ERROR_TEXT);
+  });
 });
