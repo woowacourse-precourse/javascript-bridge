@@ -59,4 +59,34 @@ describe("검증 메서드에 대한 테스트를 구현합니다.", () => {
       expect(Validation.validateCommand(command, permission)).toBe(command);
     }
   );
+  test.each([
+    [
+      ["A", "B", "C"],
+      ["A", "B", "C"],
+    ],
+    [
+      [1, 2, 3],
+      [1, 2, 3],
+    ],
+  ])(
+    "한 배열과 다른 배열의 원소값이 모두 같다면 '성공'을 반환.",
+    (answer, inputs) => {
+      expect(Validation.validateSucess(answer, inputs)).toBe("성공");
+    }
+  );
+  test.each([
+    [
+      ["A", "B", "D"],
+      ["A", "B", "C"],
+    ],
+    [
+      [4, 6, 5],
+      [1, 2, 3],
+    ],
+  ])(
+    "한 배열과 다른 배열의 원소값이 하나라도 다르면 '실패'를 반환.",
+    (answer, inputs) => {
+      expect(Validation.validateSucess(answer, inputs)).toBe("실패");
+    }
+  );
 });
