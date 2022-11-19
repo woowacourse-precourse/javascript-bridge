@@ -59,6 +59,14 @@ const Application = {
 
     return target.length;
   },
+
+  extractArrayRange(target, begin, end) {
+    Validation.array(target);
+    Validation.number(begin);
+    Validation.number(end);
+
+    return target.slice(begin, end);
+  },
 };
 
 module.exports = Application;
