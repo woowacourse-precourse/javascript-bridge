@@ -5,19 +5,25 @@ const {
 } = require('../../utils/constants');
 
 class BridgeCheck {
-  #randomBridge;
-
-  #userBridge;
+  #repo;
 
   constructor({ repo }) {
-    this.#randomBridge = repo.read(MODEL_KEY.randomBridge);
-    this.#userBridge = repo.read(MODEL_KEY.userBridge);
+    this.#repo = repo;
+  }
+
+  #getRepoData() {
+    const randomBridge = this.#repo.read(MODEL_KEY.randomBridge);
+    const userBridge = this.#repo.read(MODEL_KEY.userBridge);
+    const tryCount = this.#repo.read(MODEL_KEY.tryCount);
+
+    return { randomBridge, userBridge, tryCount };
   }
 
   #getBridgeCheckingOX() {
-    const randomSlice = this.#randomBridge.slice(0, this.#userBridge.length);
+    const { randomBridge, userBridge } = this.#getRepoData();
+    const randomSlice = randomBridge.slice(0, userBridge.length);
 
-    return this.#userBridge.map((bridgeItem, index) =>
+    return userBridge.map((bridgeItem, index) =>
       bridgeItem === randomSlice[index]
         ? ['O', UPDOWN_INDEX[bridgeItem]]
         : ['X', UPDOWN_INDEX[bridgeItem]]
@@ -34,20 +40,27 @@ class BridgeCheck {
   }
 
   #isFinish() {
-    return this.#userBridge.length === this.#randomBridge.length;
+    const { randomBridge, userBridge } = this.#getRepoData();
+
+    return userBridge.length === randomBridge.length;
   }
 
   #isCorrect() {
-    return this.#randomBridge
-      .slice(0, this.#userBridge.length)
-      .every((bridgeItem, index) => bridgeItem === this.#userBridge[index]);
+    const { randomBridge, userBridge } = this.#getRepoData();
+
+    return randomBridge
+      .slice(0, userBridge.length)
+      .every((bridgeItem, index) => bridgeItem === userBridge[index]);
   }
 
   getGameState() {
-    if (this.#isFinish() && this.#isCorrect()) return GAME_RESULT_STATE.success;
-    if (this.#isCorrect()) return GAME_RESULT_STATE.try;
+    const tries = { tryCount: this.#getRepoData().tryCount };
 
-    return GAME_RESULT_STATE.fail;
+    if (this.#isFinish() && this.#isCorrect())
+      return { ...tries, result: GAME_RESULT_STATE.success };
+    if (this.#isCorrect()) return { ...tries, result: GAME_RESULT_STATE.try };
+
+    return { ...tries, result: GAME_RESULT_STATE.fail };
   }
 }
 
