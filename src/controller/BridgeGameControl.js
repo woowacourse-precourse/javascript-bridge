@@ -34,7 +34,7 @@ class BridgeGameControl {
     };
 
     this.size = size;
-    InputView.lineInterval();
+    OutputView.lineInterval();
     return this.makeBridge();
   };
 
@@ -107,7 +107,7 @@ class BridgeGameControl {
       this.tryCount += 1;
       return this.userMoving();
     };
-    
+
     OutputView.printResult(this.userMove, this.success, this.tryCount);
   };
 };

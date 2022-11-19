@@ -7,6 +7,10 @@ const OutputView = {
     Console.print(MESSAGE.GAME_START);
   },
 
+  lineInterval() {
+    Console.print('');
+  },
+
   printError(error) {
     Console.print(error);
   },
