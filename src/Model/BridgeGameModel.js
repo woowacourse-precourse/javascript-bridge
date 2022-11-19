@@ -25,6 +25,10 @@ const BridgeGameModel = class {
     return this.#user.length === this.#bridge.length;
   }
 
+  isSuccess() {
+    return JSON.stringify(this.#user) === JSON.stringify(this.#bridge);
+  }
+
   checkBridge(bridge) {
     const length = bridge.length;
     const { MIN_SIZE, MAX_SIZE } = SIZE;
