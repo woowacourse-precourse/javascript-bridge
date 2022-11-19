@@ -43,7 +43,7 @@ class BridgeGame {
     const upper = this.getSingleResultArray(MOVE.UP, proceeded);
     const lower = this.getSingleResultArray(MOVE.DOWN, proceeded);
 
-    if (this.isFailed()) return this.markFailedPoint(upper, lower);
+    if (this.isFailed()) return this.getFailedMarkedResultArray(upper, lower);
     return { upper, lower };
   }
 
@@ -58,7 +58,7 @@ class BridgeGame {
     );
   }
 
-  markFailedPoint(preUpper, preLower) {
+  getFailedMarkedResultArray(preUpper, preLower) {
     const upper = preUpper;
     const lower = preLower;
     if (this.#bridge[this.#position] === MOVE.UP) {

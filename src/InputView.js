@@ -1,9 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const { isNumberInRange } = require('./lib/Utils');
+const { MOVE, GAME_RETRY, GAME_QUIT } = require('./constants/Command');
 const { ERROR, REQUEST } = require('./constants/Message');
 const RANGE = require('./constants/Range');
-const { MOVE, GAME_RETRY, GAME_QUIT } = require('./constants/Command');
 
 const InputView = {
   readBridgeSize() {
