@@ -24,6 +24,7 @@ const InputView = {
 		Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래 : D)\n', input => {
 			console.log('[' + input + ']');
 			if (input !== 'D' && input !== 'U') throw new Error('[Error] 입력 값이 잘못 되었습니다.');
+			info.bridgeGameManager.move(info, input);
 		});
 	},
 

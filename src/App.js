@@ -9,7 +9,7 @@ class App {
 		this.bridgeLength = 0;
 		this.bridgeInfo = null;
 		this.inputList = [];
-		this.BridgeGame = new BridgeGame();
+		this.bridgeGameManager = new BridgeGame();
 	}
 	play() {
 		OutputView.printStart();
