@@ -84,6 +84,13 @@ class BridgeGameController {
       this.#bridgeGame.retry();
       return this.readMoving();
     }
+    return this.quit();
+  }
+
+  quit() {
+    const { bridgeMap, isSuccess, tryCount } = this.#bridgeGame.quit();
+    OutputView.printResult({ bridgeMap, isSuccess, tryCount });
+    Console.close();
   }
 }
 

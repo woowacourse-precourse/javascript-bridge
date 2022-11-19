@@ -6,6 +6,10 @@ const INPUT_MESSAGE = Object.freeze({
 
 const OUTPUT_MESSAGE = Object.freeze({
   GAME_START: '다리 건너기 게임을 시작합니다.\n',
+  GAME_QUIT: '최종 게임 결과',
+  GAME_SUCCESS: '\n게임 성공 여부: 성공',
+  GAME_FAIL: '\n게임 성공 여부: 실패',
+  GAME_TRY_COUNT: (tryCount) => `총 시도한 횟수: ${tryCount}`,
 });
 
 const INPUT_ERROR = Object.freeze({
