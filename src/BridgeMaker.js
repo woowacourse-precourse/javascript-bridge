@@ -1,7 +1,3 @@
-const {
-  BridgeRandomNumberGenerator,
-  generate
-} = require('./BridgeRandomNumberGenerator');
 const { KEYS } = require('./constants/keys');
 
 /**
@@ -17,8 +13,8 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     for (let count = 0; count < size; count += 1) {
-      const block = generateRandomNumber() == 0 ? KEYS.DOWN : KEYS.UP;
-      bridge.push(block);
+      const level = generateRandomNumber() == 0 ? KEYS.DOWN : KEYS.UP;
+      bridge.push(level);
     }
     return bridge;
   }
