@@ -61,8 +61,7 @@ class BridgeGame {
         this.#currentMap.lowerPart.push(" O ");
         this.fillBlankUnselectedPath(1);
       }
-      this.#myPosition += 1;
-      this.showMovedPath();
+      this.moveMyPositionForward();
       this.getMoveDirectionFromUser();
       return;
     }
@@ -76,6 +75,10 @@ class BridgeGame {
     }
     this.showMovedPath();
     this.askUserRestart();
+  }
+
+  moveMyPositionForward() {
+    this.#myPosition += 1;
   }
 
   askUserRestart() {
