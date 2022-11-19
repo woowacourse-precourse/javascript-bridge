@@ -3,6 +3,7 @@ const GameStatus = {
   stage: 1,
   success: true,
   size: 0,
+  lastMove: 0,
   bridge: [],
 }
 

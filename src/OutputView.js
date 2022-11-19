@@ -1,5 +1,11 @@
 const { Console } = require("@woowacourse/mission-utils");
 const GameStatus = require("./GameStatus")
+
+const SUCCESS = {
+  true: '성공',
+  false: '실패',
+}
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -11,6 +17,7 @@ const OutputView = {
    */
   printMap(nextMove) {
     const output = []
+    GameStatus.lastMove = nextMove;
     output.push(this.makeOutput(0, nextMove))
     output.push(this.makeOutput(1, nextMove))
     Console.print(output[0].join(''))
@@ -50,6 +57,11 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult() {
+    Console.print('\n최종 게임 결과')
+    GameStatus.step -= 1;
+    this.printMap(GameStatus.lastMove);
+    Console.print('\n게임 성공 여부: ' + SUCCESS[GameStatus.success])
+    Console.print('총 시도한 횟수: ' + GameStatus.stage)
     Console.close();
   },
 };

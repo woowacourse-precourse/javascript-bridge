@@ -8,7 +8,6 @@ const GameUtils = {
     GameStatus.stage += 1;
     GameStatus.success = true;
     if(retry === 'Q') {
-      Console.close();
       OutputView.printResult();
     }
   },

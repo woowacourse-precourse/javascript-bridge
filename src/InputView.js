@@ -33,10 +33,9 @@ const InputView = {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (answer => {
       const nextMove = new MovingValid(answer).getMove()
       const bridgeGame = new BridgeGame(nextMove)
-      const moveByNum = validMove.indexOf(nextMove)
-      const success = bridgeGame.move(moveByNum)
-      if(success === false) this.readGameCommand(moveByNum);
-      if(GameStatus.size === GameStatus.step) return OutputView.printResult(moveByNum);
+      const success = bridgeGame.move(validMove.indexOf(nextMove))
+      if(success === false) return this.readGameCommand();
+      if(GameStatus.size === GameStatus.step) return OutputView.printResult();
       this.readMoving();
     }))
   },
@@ -48,12 +47,12 @@ const InputView = {
   readGameCommand() {
     Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (answer => {
       const retry = new RetryValid(answer).getRetry()
+      if(retry === 'Q') {
+        return OutputView.printResult();
+      }
       GameStatus.step = 0;
       GameStatus.stage += 1;
       GameStatus.success = true;
-      if(retry === 'Q') {
-        return OutputView.printResult(moveByNum);
-      }
       return this.readMoving();
     }))
   },
