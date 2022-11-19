@@ -5,13 +5,20 @@ const { MESSAGE } = require('../Messages');
  */
 const OutputView = {
   /**
+  * 게임 시작 문구를 출력한다.
+  */
+  printStart() {
+    MissionUtils.Console.print(MESSAGE.START);
+  },
+
+  /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * @param {BridgeGame} bridgeGame 현재 실행 중인 다리 게임
    */
   printMap(bridgeGame) {
     let [upHistory, downHistory] = bridgeGame.getUpDownHistory();
     MissionUtils.Console.print(`[ ${upHistory.join(" | ")} ]`);
-    MissionUtils.Console.print(`[ ${downHistory.join(" | ")} ]`);
+    MissionUtils.Console.print(`[ ${downHistory.join(" | ")} ]\n`);
   },
 
   /**
@@ -21,15 +28,11 @@ const OutputView = {
   printResult(bridgeGame) {
     MissionUtils.Console.print(MESSAGE.GAME_RESULT);
     this.printMap(bridgeGame);
+
     MissionUtils.Console.print(`${MESSAGE.GAME_SUCCESS_STATE}${bridgeGame.getIsSuccess()}`);
     MissionUtils.Console.print(`${MESSAGE.GAME_TRY_COUNT}${bridgeGame.getTryCount()}`);
-  },
 
-  /**
-  * 게임 시작 문구를 출력한다.
-  */
-  printStart() {
-    MissionUtils.Console.print(MESSAGE.START);
+    bridgeGame.exit();
   },
 
   /**
