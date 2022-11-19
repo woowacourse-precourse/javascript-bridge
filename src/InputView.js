@@ -1,5 +1,6 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require ('./BridgeGame');
-const { MESSAGE } = require('./constants/messages');
+const MESSAGE = require('./constants/messages');
 const Validate = require('./utils/validation');
 
 /**
@@ -51,6 +52,19 @@ const Validate = require('./utils/validation');
       this.handleGameStatus(moveResult[2], game);
     } catch (error) {
       MissionUtils.Console.print(MESSAGE.ERROR.USER_INPUT_MOVING_KEY_INVALID);
+      this.readMoving(game);
+    }
+  },
+
+  handleGameStatus(status, game) {
+    if (status === STATUS.SUCCESS) {
+      OutputView.printResult(game);
+      return;
+    }
+    if (status === STATUS.FAIL) {
+      this.readGameCommand(game);
+    }
+    if (status === STATUS.NEXT) {
       this.readMoving(game);
     }
   },
