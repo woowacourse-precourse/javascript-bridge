@@ -11,6 +11,10 @@ class Bridge {
       throw new Error("[ERROR] 다리의 길이는 3 이상 20 이하의 숫자만 입력 가능합니다.");
     }
   }
+
+  checkPassable(bridgePosition, bridgeIndex) {
+    return this.#bridge[bridgeIndex] === bridgePosition;
+  }
 }
 
 module.exports = Bridge;
