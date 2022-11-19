@@ -34,9 +34,19 @@ class BridgeGame {
     this.#tryCount += 1;
   }
 
-  getMap() {}
+  getMap() {
+    const passedMap = this.#bridge.getPassedMap(this.#position);
+    return `[ ${passedMap.join(" | ")} ]`;
+  }
 
-  isSuccess() {}
+  getFailMap(direction) {
+    const failMap = this.#bridge.getFailMap(this.#position, direction);
+    return `[ ${failMap.join(" | ")} ]`;
+  }
+
+  isSuccess() {
+    this.#bridge.isLastStep(this.#position);
+  }
 }
 
 module.exports = BridgeGame;

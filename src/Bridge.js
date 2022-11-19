@@ -16,6 +16,10 @@ class Bridge {
     return this.#bridge[path.length] === direction;
   }
 
+  isLastStep(position) {
+    return this.#bridge.length === position + 1;
+  }
+
   getPassedMap(position) {
     const upperBridge = this.#bridge.slice(0, position + 1).map((direction) => (direction === "U" ? "O" : " "));
     const lowerBridge = this.#bridge.slice(0, position + 1).map((direction) => (direction === "D" ? "O" : " "));
