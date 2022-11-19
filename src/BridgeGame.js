@@ -40,6 +40,13 @@ class BridgeGame {
     
     return false;
   }
+
+  isSuccess() {
+    const bridgeFootboard = this.#bridgeShape[this.#playerLocation];
+    const isSuccess = (bridgeFootboard == this.#playerMoving);
+    
+    return isSuccess;
+  }
 }
 
 module.exports = BridgeGame;
