@@ -24,7 +24,7 @@ class BridgeProcess {
   #inputBridgeSize() {
     Console.readLine(PRINTBRIDGESIZE, (bridgeSize) => {
       const isBridgeSize = this.#inputView.readBridgeSize(bridgeSize);
-      this.#gameReport.makeBridgeInfo(bridgeSize);
+      this.#gameReport.totalTry === 1 ? this.#gameReport.makeBridgeInfo(bridgeSize) : '';
       isBridgeSize ? this.#inputMovement() : this.#inputBridgeSize();
     });
   }
@@ -40,22 +40,29 @@ class BridgeProcess {
     const [match, { sucess, process }] = this.#gameReport.move(movement);
     this.#outputView.printMap(match);
     sucess
-      ? this.#printFinalResult(sucess)
+      ? this.#printFinalResult(sucess, match)
       : process
       ? this.#inputMovement()
-      : this.#inputGameCommand();
+      : this.#inputGameCommand(match);
   }
 
-  #inputGameCommand() {
+  #inputGameCommand(match) {
     Console.readLine(PRINTGAMECOMMAND, (command) => {
       const isCommand = this.#inputView.readGameCommand(command);
-      isCommand ? '맞아' : this.#inputGameCommand();
+      if (isCommand) {
+        if (isCommand === 'R') {
+          this.#inputMovement();
+          this.#gameReport.retry();
+        } else {
+          this.#printFinalResult(false, match);
+        }
+      } else {
+        this.#inputGameCommand();
+      }
     });
   }
 
-  #printFinalResult(sucess) {
-    console.log(sucess);
-  }
+  #printFinalResult() {}
 }
 
 module.exports = BridgeProcess;
