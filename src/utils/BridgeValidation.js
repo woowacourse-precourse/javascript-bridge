@@ -1,13 +1,12 @@
 const { ERROR, BRIDGE } = require('../constants/Constants');
 
-const BridgeLengthValidation = (length) => {
-  if (isNaN(length)) throw new Error(`${ERROR.prefix} ${ERROR.isNaN}`);
-  if (!validLength(length))
-    throw new Error(`${ERROR.prefix} ${ERROR.bridgeLength}`);
+const bridgeLengthValidation = (length) => {
+  if (isNaN(length)) throw `${ERROR.prefix} ${ERROR.isNan}`;
+  if (!validLength(length)) throw `${ERROR.prefix} ${ERROR.bridgeLength}`;
 };
 
 const validLength = (length) => {
   return BRIDGE.min <= length && BRIDGE.max >= length;
 };
 
-module.exports = { BridgeLengthValidation };
+module.exports = { bridgeLengthValidation };
