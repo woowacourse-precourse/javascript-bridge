@@ -14,7 +14,7 @@ const gameCommandValidation = (gameCommand) => {
 
 const keyValidation = (firstKey, secondKey, pressedKey, errorMessage) => {
   if (pressedKey !== firstKey && pressedKey !== secondKey)
-    throw new Error(`${ERROR.prefix} ${errorMessage}`);
+    throw `${ERROR.prefix} ${errorMessage}`;
 };
 
 module.exports = { movingValidation, gameCommandValidation };
