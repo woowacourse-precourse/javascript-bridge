@@ -22,9 +22,16 @@ const UPDOWN_INDEX = Object.freeze({
 });
 
 const GAME_RESULT_STATE = Object.freeze({
-  success: 'success',
-  try: 'try',
-  fail: 'fail'
+  success: '성공',
+  try: '시도',
+  fail: '실패'
+});
+
+const GAME_QUESTION = Object.freeze({
+  bridgeLength: '\n다리의 길이를 입력해주세요.\n',
+  move: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
+  gameCommand:
+    '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n'
 });
 
 module.exports = {
@@ -32,5 +39,6 @@ module.exports = {
   ERROR_MESSAGE,
   MODEL_KEY,
   UPDOWN_INDEX,
-  GAME_RESULT_STATE
+  GAME_RESULT_STATE,
+  GAME_QUESTION
 };
