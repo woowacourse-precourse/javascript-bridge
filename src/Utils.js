@@ -31,6 +31,4 @@ const checkHasKey = (key) => {
   }
 };
 
-let currentPosition = 0;
-
-module.exports = { checkIsInteger, checkSizeInRange, checkHasCrossibleKey, currentPosition, checkHasKey };
+module.exports = { checkIsInteger, checkSizeInRange, checkHasCrossibleKey, checkHasKey };
