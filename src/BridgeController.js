@@ -7,9 +7,14 @@ const { print } = require('./utils/MissionUtils');
 
 class BridgeController {
   constructor() {
-    this.bridgeGame = new BridgeGame();
+    this.bridgeGame = new BridgeGame(
+      () => this.progressMoving(),
+      () => this.progressCommand()
+    );
+
     this.inputView = require('./InputView');
     this.bridgeMaker = require('./BridgeMaker');
+
     this.#initPrint();
   }
 
@@ -33,6 +38,8 @@ class BridgeController {
       if (!checkRetryMoving(input)) {
         return this.progressMoving();
       }
+
+      this.bridgeGame.progress(input);
     });
   }
 
@@ -41,6 +48,8 @@ class BridgeController {
       if (!checkRetryCommand(input)) {
         return this.progressCommand();
       }
+
+      this.bridgeGame.progress(input);
     });
   }
 
