@@ -1,10 +1,7 @@
 const BridgeGame = require('./BridgeGame');
-const { MESSAGE } = require('./constant');
 const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./views/OutputView');
 const InputView = require('./views/InputView');
-const { makeBridge } = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
 
 class GameController {
   #bridgeGame;
@@ -13,24 +10,7 @@ class GameController {
     this.#bridgeGame = new BridgeGame();
   }
 
-  gameStart() {
-    OutputView.printMessage(MESSAGE.START_NOTIFICATION);
-    this.askBridgeSize();
-  }
-
-  askBridgeSize() {
-    InputView.readBridgeSize((size) => {
-      try {
-        this.handleSize(size);
-      } catch ({ message }) {
-        OutputView.printMessage(message);
-        this.askBridgeSize();
-      }
-    });
-  }
-
-  handleSize(size) {
-    const bridge = makeBridge(size, generate);
+  gameStart(bridge) {
     this.#bridgeGame = new BridgeGame(bridge);
     this.askDirection();
   }
