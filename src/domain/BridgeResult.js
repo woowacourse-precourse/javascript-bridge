@@ -25,6 +25,8 @@ class BridgeResult {
       this.#bridgeMap[BRIDGE.UP].length === this.#bridgeSize &&
       !this.#bridgeMap[BRIDGE.UP].some((element) => element === BRIDGE.WRONG) &&
       !this.#bridgeMap[BRIDGE.DOWN].some((element) => element === BRIDGE.WRONG);
+    if (this.#isSuccess) return true;
+    return false;
   }
 
   getResult() {

@@ -21,7 +21,7 @@ class BridgeGameController {
     const onReadBridgeSize = (bridgeSize) => {
       try {
         InputValidator.isValidBridgeSize(bridgeSize);
-        this.makeBridgePattern(bridgeSize);
+        this.makeBridgePattern(parseInt(bridgeSize));
       } catch (err) {
         Console.print(err.message);
         this.readBridgeSize();
@@ -54,12 +54,13 @@ class BridgeGameController {
   }
 
   move(moving) {
-    const { bridgeMap, checking } = this.#bridgeGame.move(moving);
-    this.printMap({ bridgeMap, checking });
+    const { bridgeMap, checking, isSuccess } = this.#bridgeGame.move(moving);
+    this.printMap({ bridgeMap, checking, isSuccess });
   }
 
-  printMap({ bridgeMap, checking }) {
+  printMap({ bridgeMap, checking, isSuccess }) {
     OutputView.printMap(bridgeMap);
+    if (isSuccess) return this.quit();
     const isRight = checking === BRIDGE.RIGHT;
     if (isRight) return this.readMoving();
     this.readGameCommand();

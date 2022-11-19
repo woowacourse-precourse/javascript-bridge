@@ -22,7 +22,8 @@ class BridgeGame {
     this.#player.movings.push(moving);
     const { bridgeMap, checking } = this.#bridge.match(this.#player.movings);
     this.#bridgeResult.save(bridgeMap);
-    return { bridgeMap, checking };
+    const isSuccess = this.#bridgeResult.checkSuccess();
+    return { bridgeMap, checking, isSuccess };
   }
 
   /**
@@ -36,7 +37,6 @@ class BridgeGame {
   }
 
   quit() {
-    this.#bridgeResult.checkSuccess();
     return this.#bridgeResult.getResult();
   }
 }
