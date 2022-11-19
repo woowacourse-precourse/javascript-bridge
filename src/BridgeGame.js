@@ -61,8 +61,12 @@ class BridgeGame {
    */
   retry(gameCommand) {
     this.validateGameCommand(gameCommand);
+    if (gameCommand === "Q") {
+      return false;
+    }
     this.#movings = [];
     this.#trialCount += 1;
+    return true;
   }
 
   getResult() {
