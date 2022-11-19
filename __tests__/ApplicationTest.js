@@ -85,16 +85,25 @@ describe('다리 건너기 테스트', () => {
     runException(['a']);
   });
 });
-describe('user가 다리입력에 잘못된 숫자를 넣었을때 에러메세지 출력 테스트', () => {
-  test('에러 핸들링 테스트', () => {
+describe('user가 잘못된 입력 넣었을때 에러메세지 출력 테스트', () => {
+  test('유저 다리 길이 입력 에러 핸들링 테스트', () => {
     const logSpy = getLogSpy();
     mockRandoms(['1', '0', '1']);
-    mockQuestions([['0']]);
+    mockQuestions(['0']);
     const app = new App();
     app.play();
     const log = getOutput(logSpy);
     expectLogContains(log, [
       '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
     ]);
+  });
+  test('유저 다리 이동 입력 에러 핸들링 테스트', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['1', '0', '1']);
+    mockQuestions(['3', 'Z']);
+    const app = new App();
+    app.play();
+    const log = getOutput(logSpy);
+    expectLogContains(log, ['[ERROR] 다리 이동 입력은 "U"와 "D"만 가능합니다']);
   });
 });
