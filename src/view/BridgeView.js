@@ -1,9 +1,9 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const Validation = require('../util');
+const { TYPE } = require('../constants');
 
 class BridgeView {
-  
   constructor() {
     this.input = InputView;
     this.output = OutputView;
@@ -12,43 +12,25 @@ class BridgeView {
 
   getBridgeLength(printLength) {
     const validation = (length) => {
-      try {
-        Validation.isRightSize(length);
-        return printLength(length);
-      } catch (err) {
-        this.printError(err);
-        this.input.readBridgeSize(validation);
-      }
+      this.inputValidation(length, printLength, TYPE.SIZE);
     }
     this.input.readBridgeSize(validation);
   }
 
   getWhereToGo(updateMove) {
     const validation = (destination) => {
-      try {
-        Validation.isRightStep(destination);
-        return updateMove(destination);
-      } catch (err) {
-        this.printError(err);
-        this.input.readMoving(validation);
-      }
+      this.inputValidation(destination, updateMove, TYPE.STEP);
     }
     this.input.readMoving(validation);
   } 
 
   getWhatToDo(getCommand) {
     const validation = (command) => {
-      try {
-        Validation.isRightRetry(command);
-        return getCommand(command);
-      } catch (err) {
-        this.printError(err);
-        this.input.readGameCommand(validation)
-      }
+      this.inputValidation(command, getCommand, TYPE.RETRY);
     }
     this.input.readGameCommand(validation)
-  }
-
+  } 
+  
   printMap(map) {
     this.output.printMap(map)
   }
@@ -56,9 +38,19 @@ class BridgeView {
   printResult(isRight, tryCount, map) {
     this.output.printResult(isRight, tryCount, map)
   }
-  
+
   printError(type) {
-    this.output.printError(type)
+    return this.output.printError(type)
+  }
+
+  inputValidation(input, callback, type) {
+    try {
+      Validation[type](input);
+      return callback(input);
+    } catch (err) {
+      const fnName = this.printError(err);
+      return this[fnName](callback);
+    }
   }
 
 }

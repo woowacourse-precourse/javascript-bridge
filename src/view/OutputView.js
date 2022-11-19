@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGES, ERROR } = require('../constants');
+const { MESSAGES, ERROR, TYPE } = require('../constants');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -29,9 +29,21 @@ const OutputView = {
   /**
    * 입력값의 에러 타입에 맞는 메세지를 출력한다.
    */
-  printError(type) {
+   printError(type) {
     Console.print(`\n${ERROR.PREFIX} ${ERROR[type]}\n`);
+    return this.returnCallback(type);
   },
+
+  returnCallback(type) {
+    switch(type){
+      case(TYPE.SIZE):
+        return 'getBridgeLength';
+      case(TYPE.STEP):
+        return 'getWhereToGo';
+      case(TYPE.RETRY):
+        return 'getWhatToDo';
+    }
+  }
 };
 
 module.exports = OutputView;
