@@ -12,16 +12,11 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     Console.readLine(MESSAGE.BRIDGE_SIZE, (size) => {
-      try {
-        const SIZE = Number(size);
-        if (Validate.checkBridgeSize(SIZE)) {
-          bridgeGame.getAnswerBridge(SIZE);
-          this.readMoving(bridgeGame);
-        } else {
-          throw new Error(ERROR.BRIDGE_SIZE);
-        }
-      } catch (error) {
-        OutputView.printError(error.message);
+      const SIZE = Number(size);
+      if (Validate.checkBridgeSize(SIZE)) {
+        bridgeGame.getAnswerBridge(SIZE);
+        this.readMoving(bridgeGame);
+      } else {
         this.readBridgeSize(bridgeGame);
       }
     });
@@ -32,20 +27,13 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     Console.readLine(MESSAGE.MOVING_KEY, (key) => {
-      try {
-        if (Validate.checkMovingKey(key)) {
-          const USER_BRIDGE = bridgeGame.move(key);
-          OutputView.printMap(USER_BRIDGE);
-        } else {
-          throw new Error(ERROR.MOVING_KEY);
-        }
-      } catch (error) {
-        OutputView.printError(error.message);
+      if (Validate.checkMovingKey(key)) {
+        const USER_BRIDGE = bridgeGame.move(key);
+        OutputView.printMap(USER_BRIDGE);
+      } else {
         this.readMoving(bridgeGame);
       }
-      if (
-        Validate.checkUserInput(bridgeGame.userInput, bridgeGame.answerBridge)
-      ) {
+      if (Validate.checkUserInput(bridgeGame)) {
         return OutputView.printResult(bridgeGame, '성공');
       }
       if (bridgeGame.getMoveResult(key) === 'O') {
@@ -61,18 +49,13 @@ const InputView = {
    */
   readGameCommand(bridgeGame) {
     Console.readLine(MESSAGE.GAME_COMMAND, (key) => {
-      try {
-        if (!Validate.checkCommandKey(key)) {
-          throw new Error(ERROR.GAME_COMMAND);
-        }
-      } catch (error) {
-        OutputView.printError(error.message);
+      if (!Validate.checkCommandKey(key)) {
+        return this.readGameCommand(bridgeGame);
       }
-      if (key === KEY.RETRY) {
+      if (Validate.isRetry(key)) {
         bridgeGame.retry();
         this.readMoving(bridgeGame);
-      }
-      if (key === KEY.END) {
+      } else {
         OutputView.printResult(bridgeGame, '실패');
       }
     });

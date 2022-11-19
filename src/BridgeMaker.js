@@ -20,10 +20,11 @@ const BridgeMaker = {
   },
 
   getBridgeKey(number) {
-    if (number === 0) {
+    const NUMBER = Number(number);
+    if (NUMBER === 0) {
       return KEY.DOWN;
     }
-    if (number === 1) {
+    if (NUMBER === 1) {
       return KEY.UP;
     }
   },
