@@ -57,6 +57,10 @@ class Controller {
     let [bridgeSize, userInputLength] = [bridgeWay.length, userSelect.length];
     let result = this.#BridgeGame.move(bridgeWay, userSelect, userInputLength);
     OutputView.printMap(result);
+    this.checkIsGameOver(result, bridgeSize, userInputLength);
+  }
+
+  checkIsGameOver(result, bridgeSize, userInputLength) {
     if (result.isGameOver) {
       this.inputGameOver();
       return;
