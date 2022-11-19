@@ -31,6 +31,7 @@ const InputView = {
       if (answer === "U" && locations[this.step] === 1) {
         console.log("success");
         this.step += 1;
+        OutputView.printMap(this.step, locations);
         if (this.step === size) return;
         this.readMoving(locations, size);
         return;
@@ -38,6 +39,8 @@ const InputView = {
       if (answer === "D" && locations[this.step] === 0) {
         console.log("success");
         this.step += 1;
+        OutputView.printMap(this.step, locations);
+
         if (this.step === size) return;
         this.readMoving(locations, size);
         return;
