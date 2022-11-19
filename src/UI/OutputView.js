@@ -37,11 +37,15 @@ const OutputView = {
   },
 
   lengthInputError() {
-    Console.print(ERROR_MESSAGE.INVALID_LENGTH);
+    Console.print(ERROR_MESSAGE.INVALID_LENGTH + '\n');
   },
 
   moveInputError() {
-    Console.print(ERROR_MESSAGE.INVALID_MOVE);
+    Console.print(ERROR_MESSAGE.INVALID_MOVE + '\n');
+  },
+
+  quitInputError() {
+    Console.print(ERROR_MESSAGE.INVALID_QUIT + '\n');
   },
 };
 
