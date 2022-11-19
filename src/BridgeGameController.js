@@ -14,7 +14,7 @@ class BridgeGameController {
   static #RETRY = 1;
 
   static makeNewBridgeGame(input) {
-    return new BridgeGame(BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator.generate));
+    return new BridgeGame(BridgeMaker.makeBridge(parseInt(input), BridgeRandomNumberGenerator.generate));
   }
   
   static startNewRound(bridgeGame, input) {
