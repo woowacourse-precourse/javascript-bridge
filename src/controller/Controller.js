@@ -32,11 +32,11 @@ class Controller {
       size,
       BridgeRandomNumberGenerator.generate
     );
-    this.inputBridgeWay();
+    this.inputUserMoving();
   }
 
-  inputBridgeWay() {
-    InputView.readMoving(this.getBridgeWay.bind(this));
+  inputUserMoving() {
+    InputView.readMoving(this.getUserMoving.bind(this));
   }
 
   getUserMoving(select) {
