@@ -59,7 +59,7 @@ class App {
       if (GAME.move(bridge,USER_MOVE,i) === 'X' ) return this.xCase(BRIDGE,USER_MOVE,GAME.move(bridge,USER_MOVE,i))
       BRIDGE = this.printBridge(GAME.move(bridge,USER_MOVE,i))
     }
-    this.finishGameSuccess(BRIDGE)
+    this.finishGame(BRIDGE,'성공')
   }
 
   // true 출력
@@ -80,7 +80,7 @@ class App {
   failCase(userChoice,bridge){
     switch(userChoice){
       case 'Q':
-        return this.finishGameFail(bridge)
+        return this.finishGame(bridge,'실패')
       case 'R':
         this.TRY_TIME += 1
         return this.movePrint()
@@ -92,16 +92,10 @@ class App {
     return OutputView.printMap(this.BRIDGE_U,this.BRIDGE_D)
   }
 
-  finishGameSuccess(bridge){
+  finishGame(bridge,result) {
     if (bridge.length === 0) return'[ERROR]'
     if (bridge === '[ERROR]') return '[ERROR]'
-    OutputView.printResult('SUCCESS',bridge,this.TRY_TIME)
-  }
-
-  finishGameFail(bridge) {
-    if (bridge.length === 0) return'[ERROR]'
-    if (bridge === '[ERROR]') return '[ERROR]'
-    OutputView.printResult('FAIL',bridge,this.TRY_TIME)
+    OutputView.printResult(result,bridge,this.TRY_TIME)
   }
 }
 
