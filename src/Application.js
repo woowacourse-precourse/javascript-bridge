@@ -43,6 +43,16 @@ const Application = {
       }
     };
   },
+
+  replace(target, item1, item2) {
+    const [COMPARISON_TARGET_1, RETURN_TARGET_1] = item1;
+    const [COMPARISON_TARGET_2, RETURN_TARGET_2] = item2;
+
+    if (target === COMPARISON_TARGET_1) return RETURN_TARGET_1;
+    if (target === COMPARISON_TARGET_2) return RETURN_TARGET_2;
+
+    return Validation.throwError(Validation.RANGE_ERROR_TEXT);
+  },
 };
 
 module.exports = Application;
