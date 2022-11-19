@@ -32,7 +32,9 @@ const InputView = {
       if (input === GAME_RETRY) {
         game.retry();
         InputView.readMoving(game);
+        return;
       }
+      Console.close();
     });
   },
 
