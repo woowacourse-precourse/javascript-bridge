@@ -43,6 +43,10 @@
 ### BridgeGame과 관련하여
 
 - [x] answer을 프로퍼티로 가지고 있게끔 구현
+- [x] start -> move -> retry -> end 의 순서대로 구현
+- [x] move의 과정을 나누어서 구현 (move / moveAfter: 입력 값에 대하여 여러 가능성의 분기를 처리)
+- [x] restart를 구현: 다시 시작시 입력값, 게임 횟수와 단계를 재설정
+- [x] moveAfter 내부에서도 정답시 / 오답시를 나눠어서 메서드화
 
 ## 구현 전략
 
