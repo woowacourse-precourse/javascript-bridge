@@ -2,14 +2,13 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const BridgeState = require('./BridgeState');
 const OutputView = require('./OutputView');
 const Validate = require('./utils/Validate');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  userBridge: BridgeState.userBridge,
+  bridgeGame: new BridgeGame(),
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -18,6 +17,7 @@ const InputView = {
       try {
         Validate.validateSizeRange(Number(size));
         const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
+        this.bridgeGame.updateBridge(bridge);
         InputView.readMoving(bridge, size);
       } catch (error) {
         OutputView.printErrorMessage(error) || InputView.readBridgeSize();
@@ -40,10 +40,10 @@ const InputView = {
   },
 
   movingControler(size, bridge, movePosition) {
-    BridgeState.addBridgeFromUser(movePosition);
-    const bridgeGame = new BridgeGame(bridge);
-    const moveBridge = bridgeGame.move(this.userBridge);
-    const drawBridge = bridgeGame.draw(moveBridge);
+    this.bridgeGame.addBridgeFromUser(movePosition);
+    const userBridge = this.bridgeGame.getUserBridge();
+    const moveBridge = this.bridgeGame.move(userBridge);
+    const drawBridge = this.bridgeGame.draw(moveBridge);
     OutputView.printMap(drawBridge);
     this.startNextStep(drawBridge, bridge, size);
   },
@@ -53,9 +53,10 @@ const InputView = {
       return InputView.readGameCommand(drawBridge, bridge, size);
     }
 
-    if (bridge.length === this.userBridge.length) {
-      const attemps = BridgeState.numberOfAttempts;
-      return OutputView.printResult(drawBridge, '성공', attemps);
+    if (this.bridgeGame.isSuccess()) {
+      const attemps = this.bridgeGame.getNumberOfAttempts();
+      OutputView.printResult(drawBridge, '성공', attemps);
+      Console.close();
     }
 
     return InputView.readMoving(bridge, size);
@@ -70,12 +71,13 @@ const InputView = {
         try {
           Validate.validateRetryOfQuit(input);
           if (input === 'R') {
-            this.userBridge = new BridgeGame(bridge).retry(this.userBridge);
+            this.bridgeGame.retry();
             InputView.readMoving(bridge, size);
           }
           if (input === 'Q') {
             const attemps = BridgeState.numberOfAttempts;
             OutputView.printResult(drawBridge, '실패', attemps);
+            Console.close();
           }
         } catch (error) {
           OutputView.printErrorMessage(error) || InputView.readGameCommand(bridge, size);
