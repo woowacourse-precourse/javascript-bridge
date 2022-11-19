@@ -3,7 +3,7 @@ const GameInfo = {
 
   lower: "D",
 
-  gameStat: [],
+  gameStat: null,
 
   bridge: null,
 
@@ -12,6 +12,12 @@ const GameInfo = {
   moveBridge: [[], []],
 
   position: -1,
+
+  gameCommand: null,
+
+  numberOfPlayGames: 0,
+
+  gameResult: "실패"
 }
 
 module.exports = GameInfo;
