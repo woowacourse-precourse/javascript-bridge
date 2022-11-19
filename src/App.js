@@ -40,12 +40,7 @@ class App {
       this.bridgeGame.move();
 
       if (this.checkGameSuccess()) {
-        OutputView.printResult(
-          this.bridgeGame.getUserGameMap(),
-          this.bridgeGame.checkGameOver(),
-          this.bridgeGame.getUserTryCount()
-        );
-        return OutputView.exit();
+        return this.exitGame();
       }
 
       if (this.checkGameOver()) {
@@ -74,12 +69,7 @@ class App {
   requestRetryGame(retryCommand) {
     try {
       if (retryCommand === 'Q') {
-        OutputView.printResult(
-          this.bridgeGame.getUserGameMap(),
-          this.bridgeGame.checkGameOver(),
-          this.bridgeGame.getUserTryCount()
-        );
-        return OutputView.exit();
+        return this.exitGame();
       }
 
       if (retryCommand === 'R') {
@@ -93,6 +83,15 @@ class App {
       OutputView.printError(errorType);
       this.requestGameOverCommand();
     }
+  }
+
+  exitGame() {
+    OutputView.printResult(
+      this.bridgeGame.getUserGameMap(),
+      this.bridgeGame.checkGameOver(),
+      this.bridgeGame.getUserTryCount()
+    );
+    OutputView.exit();
   }
 }
 
