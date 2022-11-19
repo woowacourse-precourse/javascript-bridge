@@ -29,7 +29,7 @@ class GameController {
       const IS_MOVE = this.game.move(moving, index);
       const maps = this.game.getMaps();
       this.outputView.printMap(maps);
-      if (IS_MOVE) { // 이동했다면 다음 것도 입력
+      if (IS_MOVE) {
         this.move(index + 1);
       } else {
         // 게임 탈락 재시도 묻기
@@ -37,8 +37,18 @@ class GameController {
     };
 
     const bridgeAnswerLength = this.game.getBridgeAnswer().length;
-    if (index === bridgeAnswerLength) return; // 다리 끝까지 도달한 경우
+    if (index === bridgeAnswerLength) {
+      this.successResult();
+      return;
+    }
+
     this.inputView.readMoving(onDeliveryMoving);
+  }
+
+  successResult() {
+    const maps = this.game.getMaps();
+    this.outputView.printResult(maps, true, 1);
+    this.end();
   }
 
   end() {
