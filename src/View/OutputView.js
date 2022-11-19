@@ -23,10 +23,17 @@ const OutputView = {
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
+   * @param {number} result 게임의 결과
+   * @param {[Array<string>,Array<string>]} arr 'O'와 'X'가 표시된 다리의 map
+   * @param {number} attempts 게임 시도횟수
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(result, arr, attempts) {
+    Console.print(MESSAGE.FINAL_RESULT);
+    this.printMap(arr);
+    Console.print(MESSAGE.SUCCESS_OR_FAIL(result));
+    Console.print(MESSAGE.NUMBER_OF_ATTEMPTS(attempts));
+  },
 
   printStart() {
     Console.print(MESSAGE.START_GAME);
