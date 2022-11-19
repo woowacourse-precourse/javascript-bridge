@@ -2,7 +2,7 @@ const { ERROR_MESSAGE, GAME_NUMBER } = require('./utils/Constants');
 
 class Validation {
   static checkBridgeLength(bridgeLen) {
-
+    
     if (Validation.isEmpty(bridgeLen)) {
       throw new Error(ERROR_MESSAGE.form);
     }
@@ -14,7 +14,6 @@ class Validation {
     if (Validation.isInRange(bridgeLen)) {
       throw new Error(ERROR_MESSAGE.range);
     }
-
   }
 
   static isEmpty(input) {

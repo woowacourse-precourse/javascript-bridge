@@ -11,7 +11,8 @@ class App {
 
   start() {
     OutputView.printStartMessage();
-    BridgeMaker.start();
+    this.bridgeGame = new BridgeGame();
+    this.bridgeGame.set();
   }
 }
 
