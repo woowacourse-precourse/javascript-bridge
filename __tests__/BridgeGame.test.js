@@ -370,3 +370,12 @@ describe('이동할 칸의 결과를 반환하는 메서드 테스트', () => {
     }).toThrow(POSITION_ERROR_TEXT);
   });
 });
+
+describe('위치 파악 메서드', () => {
+  test('메소드 이름은 "getPositionIndex"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'getPositionIndex';
+
+    expect(bridgeGame.getPositionIndex.name).toEqual(METHOD_NAME);
+  });
+});
