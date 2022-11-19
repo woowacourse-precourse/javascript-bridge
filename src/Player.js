@@ -4,9 +4,13 @@ const Player = {
   size: null,
   movingArr: [],
   state: [[], []],
-  tryingCount: PLAYER.INITIAL_TRY_NUMBER,
   playerAns: [],
+  tryingCount: PLAYER.INITIAL_TRY_NUMBER,
   gameSuccess: PLAYER.GMAE_FAIL,
+
+  updateMovingArr(wantGo) {
+    this.movingArr.push(wantGo);
+  },
 
   updateState(wantGo, isCorrect) {
     this.calculateBridgeState(wantGo, isCorrect);
