@@ -38,16 +38,16 @@ class BridgeGame {
     return this.#attempts;
   }
 
-  getResultStringArray() {
+  getResultArray() {
     const proceeded = this.#bridge.slice(0, this.#position);
-    const preUpper = this.getSingleResultStringArray(MOVE.UP, proceeded);
-    const preLower = this.getSingleResultStringArray(MOVE.DOWN, proceeded);
-    const { upper, lower } = this.markFailedPoint(preUpper, preLower);
+    const upper = this.getSingleResultArray(MOVE.UP, proceeded);
+    const lower = this.getSingleResultArray(MOVE.DOWN, proceeded);
 
+    if (this.isFailed()) return this.markFailedPoint(upper, lower);
     return { upper, lower };
   }
 
-  getSingleResultStringArray(direction, originalArray) {
+  getSingleResultArray(direction, originalArray) {
     if (direction === MOVE.UP) {
       return originalArray.map((space) =>
         space === MOVE.UP ? MOVE.CORRECT : MOVE.NO_VISITED

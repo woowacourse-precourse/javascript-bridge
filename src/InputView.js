@@ -20,10 +20,7 @@ const InputView = {
       const isContinued = game.move(input);
       if (isContinued) InputView.readMoving(game);
 
-      if (game.isFailed()) {
-        InputView.readGameCommand(game);
-        return;
-      }
+      if (game.isFailed()) InputView.readGameCommand(game);
     });
   },
 
