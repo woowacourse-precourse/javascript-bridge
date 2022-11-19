@@ -77,8 +77,23 @@ class BridgeGame {
    * 게임 진행 상황을 출력할 때 사용하는 메서드
    */
   print() {
-    OutputView.printMap(this.#movingList);
-    return this.#movingList;
+    return OutputView.printMap(this.#movingList);
+  }
+
+  /**
+   * 다리를 잘못 건넜을 때 사용하는 메서드
+   */
+  getWrong() {
+    const result = this.#movingList.flat().includes(MOVING.WRONG_ANSWER);
+    return result;
+  }
+
+  /**
+   * 다리를 모두 건넜을 때 사용하는 메서드
+   */
+  getAll() {
+    const result = this.#movingList[0].length === this.#bridge.length;
+    return result;
   }
 
   /**

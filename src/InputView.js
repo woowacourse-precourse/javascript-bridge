@@ -15,31 +15,24 @@ const InputView = {
       if (error) return this.readBridgeSize(bridgeGame);
 
       bridgeGame.ready(size);
-      this.readMoving(bridgeGame, size);
+      this.readMoving(bridgeGame);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridgeGame, size) {
+  readMoving(bridgeGame) {
     Console.readLine(
       `${OUTPUT.LINE}${INPUT.MOVING}${OUTPUT.LINE}`,
       (moving) => {
         const error = Check.checkMoving(moving);
-        if (error) return this.readMoving(bridgeGame, size);
+        if (error) return this.readMoving(bridgeGame);
 
-        const movingList = bridgeGame.move(moving);
-        if (
-          movingList[0].includes(MOVING.WRONG_ANSWER) ||
-          movingList[1].includes(MOVING.WRONG_ANSWER)
-        ) {
-          return this.readGameCommand(bridgeGame, size);
-        }
-        if (movingList[0].length === parseInt(size, 10)) {
-          return bridgeGame.finish(RESULT.SUCCESS);
-        }
-        return this.readMoving(bridgeGame, size);
+        bridgeGame.move(moving);
+        if (bridgeGame.getWrong()) return this.readGameCommand(bridgeGame);
+        if (bridgeGame.getAll()) return bridgeGame.finish(RESULT.SUCCESS);
+        return this.readMoving(bridgeGame);
       }
     );
   },
@@ -47,15 +40,15 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridgeGame, size) {
+  readGameCommand(bridgeGame) {
     Console.readLine(`${INPUT.COMMAND}${OUTPUT.LINE}`, (command) => {
       const error = Check.checkCommand(command);
-      if (error) return this.readGameCommand(bridgeGame, size);
+      if (error) return this.readGameCommand(bridgeGame);
 
       if (command === COMMAND.END) return bridgeGame.finish(RESULT.FAIL);
 
       bridgeGame.retry();
-      return this.readMoving(bridgeGame, size);
+      return this.readMoving(bridgeGame);
     });
   },
 };
