@@ -3,7 +3,7 @@ const BridgeGame = require('../src/BridgeGame');
 const NUMBER_ERROR_TEXT = '[ERROR] 전달된 인수는 숫자 타입이 아닙니다.';
 const ARRAY_ERROR_TEXT = '[ERROR] 전달된 인수는 배열 타입이 아닙니다.';
 const RANGE_ERROR_TEXT = '[ERROR] 지정한 범위의 값이 아닙니다.';
-const POSITION_ERROR_TEXT = '[ERROR] 플레이가 아직 이동하지 않았습니다.';
+const POSITION_ERROR_TEXT = '[ERROR] 플레이어가 아직 이동하지 않았습니다.';
 
 /**
  * 전달된 인수만큼 함수를 반복 실행하는 유틸 함수이다.

@@ -51,7 +51,7 @@ class BridgeGame {
   }
 
   checkBeforeStart() {
-    const POSITION_ERROR_TEXT = '[ERROR] 플레이가 아직 이동하지 않았습니다.';
+    const POSITION_ERROR_TEXT = '[ERROR] 플레이어가 아직 이동하지 않았습니다.';
 
     if (this.isBeforeStart()) {
       Validation.throwError(POSITION_ERROR_TEXT);
