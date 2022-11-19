@@ -5,6 +5,7 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const MovingValidator = require('./validator/MovingValidator');
 const OutputView = require('./OutputView');
+const GameCommandValidator = require('./validator/GameCommandValidator');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -74,6 +75,19 @@ class BridgeGame {
     }
     this.#gameStage += 1;
     this.inputMoving();
+  }
+
+  wrongBridge() {
+    InputView.readGameCommand(this.validateGameCommand.bind(this));
+  }
+
+  validateGameCommand(command) {
+    try {
+      new GameCommandValidator(command);
+    } catch (error) {
+      Console.print(error);
+      this.wrongBridge();
+    }
   }
 
   /**
