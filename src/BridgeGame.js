@@ -3,48 +3,24 @@
  */
 class BridgeGame {
   #bridge;
-  #path;
+  #position;
   #tryCount;
 
   constructor(bridge) {
     this.#bridge = bridge;
-    this.#path = Array.from({ length: 2 }, () => []);
+    this.#position = 0;
     this.#tryCount = 1;
   }
 
-  #moveRightPath(direction) {
-    if (direction === "U") {
-      this.#path[0].push("O");
-      this.#path[1].push(" ");
-    }
-    if (direction === "D") {
-      this.#path[0].push(" ");
-      this.#path[1].push("O");
-    }
-  }
-
-  #moveWrongPath(direction) {
-    if (direction === "U") {
-      this.#path[0].push("X");
-      this.#path[1].push(" ");
-    }
-    if (direction === "D") {
-      this.#path[0].push(" ");
-      this.#path[1].push("X");
-    }
-  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    if (!this.#bridge.isMovable(this.#path.length, direction)) {
-      this.#moveWrongPath(direction);
-      return false;
-    }
+    if (!this.#bridge.isMovable(this.#position, direction)) return false;
 
-    this.#moveRightPath(direction);
+    this.#position += 1;
     return true;
   }
 
@@ -54,15 +30,13 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#path = Array.from({ length: 2 }, () => []);
+    this.#position = 0;
     this.#tryCount += 1;
   }
 
-  getMap() {
-    const upperBridgeMap = `[ ${this.#path[0].join(" | ")} ]`;
-    const lowerBridgeMap = `[ ${this.#path[1].join(" | ")} ]`;
-    return [upperBridgeMap, lowerBridgeMap];
-  }
+  getMap() {}
+
+  isSuccess() {}
 }
 
 module.exports = BridgeGame;

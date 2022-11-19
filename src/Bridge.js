@@ -12,8 +12,27 @@ class Bridge {
     }
   }
 
-  isMovable(position, direction) {
-    return this.#bridge[position] === direction;
+  isMovable(path, direction) {
+    return this.#bridge[path.length] === direction;
+  }
+
+  getPassedMap(position) {
+    const upperBridge = this.#bridge.slice(0, position + 1).map((direction) => (direction === "U" ? "O" : " "));
+    const lowerBridge = this.#bridge.slice(0, position + 1).map((direction) => (direction === "D" ? "O" : " "));
+    return [upperBridge, lowerBridge];
+  }
+
+  getFailMap(position, direction) {
+    const [upperBridge, lowerBridge] = this.getPassedMap(position);
+    if (direction === "U") {
+      upperBridge.push("X");
+      lowerBridge.push(" ");
+    }
+    if (direction === "D") {
+      upperBridge.push(" ");
+      lowerBridge.push("X");
+    }
+    return [upperBridge, lowerBridge];
   }
 }
 
