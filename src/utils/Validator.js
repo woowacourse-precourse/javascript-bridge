@@ -8,6 +8,13 @@ const IsValid = {
     }
     return true;
   },
+
+  direction(command) {
+    if (command !== 'U' && command !== 'D') {
+      throw new Error('[ERROR] U(위 칸)와 D(아래 칸) 중 하나의 문자만 입력할 수 있습니다.');
+    }
+    return true;
+  },
 };
 
 module.exports = IsValid;

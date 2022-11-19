@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const IsValid = require('./utils/validator');
+const IsValid = require('./utils/Validator');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 
@@ -36,19 +36,27 @@ class App {
 
   makeBridge(length) {
     this.makeGame(length);
-    this.startMove();
+    this.readValidDirection();
   }
 
-  startMove() {
+  readValidDirection() {
     InputView.readMoving((direction) => {
-      if (this.#bridgeGame.isMove(direction)) {
-        this.#bridgeGame.move();
-        this.renderBridge('성공');
-        this.checkCompletion();
+      if (IsValid.direction(direction)) {
+        this.startMove(direction);
         return;
       }
-      this.failGame();
+      this.readValidDirection();
     });
+  }
+
+  startMove(direction) {
+    if (this.#bridgeGame.isMove(direction)) {
+      this.#bridgeGame.move();
+      this.renderBridge('성공');
+      this.checkCompletion();
+      return;
+    }
+    this.failGame();
   }
 
   renderBridge(result) {
@@ -64,7 +72,7 @@ class App {
       this.resultGame('성공');
       return;
     }
-    this.startMove();
+    this.readValidDirection();
   }
 
   failGame() {
@@ -92,7 +100,7 @@ class App {
   replay() {
     this.#attempts += 1;
     this.#bridgeGame.retry();
-    this.startMove();
+    this.readValidDirection();
   }
 }
 
