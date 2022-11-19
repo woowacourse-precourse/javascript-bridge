@@ -1,31 +1,20 @@
 const { MODEL_KEY, UPDOWN_INDEX } = require('../../utils/constants');
 
 class BridgeCheck {
-  #repo;
+  #randomBridge;
 
-  #INDEX = {
-    U: 0,
-    D: 1
-  };
+  #userBridge;
 
   constructor({ repo }) {
-    this.#repo = repo;
-  }
-
-  #getBridgesForCompare() {
-    const useBridge = this.#repo.read(MODEL_KEY.userBridge);
-    const randomBridgeSlice = this.#repo
-      .read(MODEL_KEY.randomBridge)
-      .slice(0, useBridge.length);
-
-    return { useBridge, randomBridgeSlice };
+    this.#randomBridge = repo.read(MODEL_KEY.randomBridge);
+    this.#userBridge = repo.read(MODEL_KEY.userBridge);
   }
 
   #getBridgeCheckingOX() {
-    const { useBridge, randomBridgeSlice } = this.#getBridgesForCompare();
+    const randomSlice = this.#randomBridge.slice(0, this.#userBridge.length);
 
-    return useBridge.map((bridgeItem, index) =>
-      bridgeItem === randomBridgeSlice[index]
+    return this.#userBridge.map((bridgeItem, index) =>
+      bridgeItem === randomSlice[index]
         ? ['O', UPDOWN_INDEX[bridgeItem]]
         : ['X', UPDOWN_INDEX[bridgeItem]]
     );
@@ -40,28 +29,19 @@ class BridgeCheck {
     ];
   }
 
-  #isSuccess() {
-    const randomBridge = this.#repo.read(MODEL_KEY.randomBridge);
-    const { useBridge, randomBridgeSlice } = this.#getBridgesForCompare();
-
-    if (randomBridge.length !== useBridge.length) return false;
-
-    return randomBridgeSlice.every(
-      (bridgeItem, index) => bridgeItem === useBridge[index]
-    );
+  #isFinish() {
+    return this.#userBridge.length === this.#randomBridge.length;
   }
 
-  #isTry() {
-    const { useBridge, randomBridgeSlice } = this.#getBridgesForCompare();
-
-    return randomBridgeSlice.every(
-      (bridgeItem, index) => bridgeItem === useBridge[index]
-    );
+  #isCorrect() {
+    return this.#randomBridge
+      .slice(0, this.#userBridge.length)
+      .every((bridgeItem, index) => bridgeItem === this.#userBridge[index]);
   }
 
   getGameState() {
-    if (this.#isSuccess()) return 'success';
-    if (this.#isTry()) return 'try';
+    if (this.#isFinish() && this.#isCorrect()) return 'success';
+    if (this.#isCorrect()) return 'try';
 
     return 'fail';
   }
