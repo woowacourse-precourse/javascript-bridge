@@ -29,7 +29,15 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(MESSAGE.INPUT_BRIDGE_MOVE, (move) => {
+      try {
+        this.bridgeMoveGo(move);
+      } catch (error) {
+        this.bridgeMoveRetry(error);
+      }
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
@@ -50,6 +58,15 @@ const InputView = {
   bridgeSizeRetry(error) {
     Console.print(error);
     this.readBridgeSize();
+  },
+
+  bridgeMoveGo(move) {
+    this.bridgeGame.move(move);
+  },
+
+  bridgeMoveRetry(error) {
+    Console.print(error);
+    this.readMoving();
   },
 };
 
