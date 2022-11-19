@@ -15,8 +15,8 @@ const OutputView = {
    */
   printMap(bridgeMap) {
     this.resultMap = bridgeMap;
-    MissionUtils.Console.print(`[${String(bridgeMap[0]).replace(/,/g,' | ')}]`)
-    MissionUtils.Console.print(`[${String(bridgeMap[1]).replace(/,/g,' | ')}]`)
+    MissionUtils.Console.print(`[ ${String(bridgeMap[0]).replace(/,/g,' | ')} ]`)
+    MissionUtils.Console.print(`[ ${String(bridgeMap[1]).replace(/,/g,' | ')} ]`)
   },
 
   /**
