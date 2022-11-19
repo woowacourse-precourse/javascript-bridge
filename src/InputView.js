@@ -48,6 +48,9 @@ const InputView = {
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (movement) => {
         this.isUorD(movement);
+        bridgeGame.move(movement, bridge);
+        bridgeGame.setRound();
+        this.readMoving(bridge, bridgeGame);
       }
     );
   },
