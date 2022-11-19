@@ -42,7 +42,13 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(MESSAGE.INPUT_BRIDGE_RESTART, (ask) => {
+      console.log(ask);
+      try {
+      } catch (error) {}
+    });
+  },
 
   bridgeSizeErrorCheck(size) {
     printBridgeSizeError(sizeRegexTest(changeSizeType(size)));
@@ -62,6 +68,9 @@ const InputView = {
 
   bridgeMoveGo(move) {
     this.bridgeGame.move(move, this.bridge.getBridge());
+    if (!this.bridgeGame.checkX()) {
+      this.readGameCommand();
+    }
   },
 
   bridgeMoveRetry(error) {
