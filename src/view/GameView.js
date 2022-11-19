@@ -16,7 +16,7 @@ const GameView = class extends IGameView {
   }
 
   output(message) {
-    this.inputView.output(message);
+    this.outputView.output(message);
   }
 };
 
