@@ -84,6 +84,26 @@ describe('다리 건너기 테스트', () => {
   test('예외 테스트', () => {
     runException(['a']);
   });
+
+  //재시작 테스트케이스
+  test('재시작 기능 테스트', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['1', '0', '0']);
+    mockQuestions(['3', 'U', 'U', 'R', 'U', 'D', 'D']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '최종 게임 결과',
+      '[ O |   |   ]',
+      '[   | O | O ]',
+      '게임 성공 여부: 성공',
+      '총 시도한 횟수: 2',
+    ]);
+    expectBridgeOrder(log, '[ O |   |   ]', '[   | O | O ]');
+  });
 });
 
 //예외처리 테스트 추가

@@ -53,7 +53,7 @@ const InputView = {
         R_or_Q = answer;
       }
     );
-    if (R_or_Q !== 'U' && R_or_Q !== 'D') {
+    if (R_or_Q !== 'R' && R_or_Q !== 'Q') {
       throw new Error('[ERROR] 이동할 칸은 R과 Q만 입력가능합니다.');
     }
     return R_or_Q;

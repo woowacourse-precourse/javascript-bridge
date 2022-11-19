@@ -5,9 +5,11 @@ const OutputView = require('./OutputView');
  */
 class BridgeGame {
   constructor(size, information) {
+    this.size = size;
+    this.information = information;
     this.try = 1; //시도 횟수
     this.current_moving = [];
-    this.move(size, information);
+    this.move(this.size, this.information);
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -41,12 +43,12 @@ class BridgeGame {
    */
   retry() {
     let command = InputVIew.readGameCommand();
-    if (commad === 'Q') {
+    if (command === 'Q') {
       OutputView.printResult(this.current_moving, false, this.try);
     } else if (command === 'R') {
       this.try += 1;
       this.current_moving = [];
-      this.move(size, information);
+      this.move(this.size, this.information);
     }
   }
 }
