@@ -3,10 +3,6 @@ const InputView = require('./InputView.js');
 const BridgeGame = require('./BridgeGame.js');
 
 class App {
-  constructor() {
-    this.totalTrial = 0;
-  }
-
   /**
    * 게임을 시작하는 메서드
    */
