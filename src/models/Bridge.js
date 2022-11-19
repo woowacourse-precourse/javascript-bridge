@@ -4,15 +4,13 @@ const { DIRECTION } = require('../constant');
 const { sizeValidityCheck } = require('../Validator');
 
 class Bridge {
-  #size;
   #bridgeMap;
   #bridge;
 
   constructor(size) {
     sizeValidityCheck(size);
-    this.#size = Number(size);
-    this.initMap();
     this.#bridge = BridgeMaker.makeBridge(this.#size, generate);
+    this.initMap();
     console.log(this.#bridge);
   }
 
@@ -21,7 +19,7 @@ class Bridge {
   }
 
   getSize() {
-    return this.#size;
+    return this.#bridge.length;
   }
 
   getMap() {
