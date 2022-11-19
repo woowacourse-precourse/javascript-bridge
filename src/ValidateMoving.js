@@ -8,8 +8,8 @@ class ValidateMoving {
   }
 
   set moving(moving) {
-    if (this.validate(moving) === false) throw new Error("[ERROR] 이동할 칸은 'U' 혹은 'D'여야 합니다.");
-    this._moving = moving;
+    if (this.validate(moving) === false) throw new Error("[ERROR]");
+    else this._moving = moving;
   }
 
   validate(moving) {

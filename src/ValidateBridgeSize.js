@@ -8,7 +8,7 @@ class ValidateBridgeSize {
   }
 
   set bridgeSize(bridgeSize) {
-    if (this.validate(bridgeSize) === false) throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+    if (this.validate(bridgeSize) === false) throw new Error("[ERROR]");
     this._bridgeSize = Number(bridgeSize);
   }
 

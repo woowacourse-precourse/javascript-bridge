@@ -16,7 +16,7 @@ const InputView = {
 
   validateGameCommand: null,
 
-  messageOfInputSize: "다리의 길이를 입력해주세요.\n",
+  messageOfInputSize: "\n다리의 길이를 입력해주세요.\n",
 
   messageOfInputMoving: "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
 
@@ -26,9 +26,14 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(this.messageOfInputSize, (bridgeSize) => {
-      GameInfo.bridgeSize = new ValidateBridgeSize(bridgeSize).bridgeSize;
+      try {
+        GameInfo.bridgeSize = new ValidateBridgeSize(bridgeSize).bridgeSize;
+      } catch {
+        OutputView.printError("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+        return this.readBridgeSize();
+      }
       GameInfo.bridge = BridgeMaker
-        .makeBridge(GameInfo.bridgeSize, BridgeRandomNumberGenerator);
+        .makeBridge(GameInfo.bridgeSize, BridgeRandomNumberGenerator.generate);
       this.playGame();
     });
   },
@@ -43,18 +48,25 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(this.messageOfInputMoving, (moving) => {
-      this.validateMoving = new ValidateMoving(moving);
-      BridgeGame.move(this.validateMoving.moving);
-      OutputView.moveBridge = BridgeGame.getMoveBridge();
-      OutputView.printMap();
-      const moveBridge = BridgeGame.getMoveBridge();
-      if (moveBridge[0].concat(moveBridge[1]).includes("X")) return this.readGameCommand();
-      if (BridgeGame.getPosition() !== GameInfo.bridgeSize - 1) {
+      try {
+        GameInfo.currentMove = new ValidateMoving(moving).moving;
+      } catch {
+        OutputView.printError("[ERROR] 이동할 칸은 'U' 혹은 'D'여야 합니다.");
         return this.readMoving();
       }
-      GameInfo.gameResult = "성공";
-      return OutputView.printResult();
+      this.moveBridge();
     });
+  },
+
+  moveBridge() {
+    BridgeGame.move();
+    OutputView.printMap();
+    if (BridgeGame.isFailure()) return this.readGameCommand();
+    if (BridgeGame.getPosition() !== GameInfo.bridgeSize - 1) {
+      return this.readMoving();
+    }
+    GameInfo.gameResult = "성공";
+    return OutputView.printResult();
   },
 
   /**
@@ -62,7 +74,12 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(this.messageOfInputGameCommand, (gameCommand) => {
-      GameInfo.gameCommand = new ValidateGameCommand(gameCommand).gameCommand;
+      try {
+        GameInfo.gameCommand = new ValidateGameCommand(gameCommand).gameCommand;
+      } catch {
+        OutputView.printError("[ERROR] 재시작 혹은 종료는 'R' 혹은 'Q'여야 합니다.");
+        return this.readGameCommand();
+      }
       (BridgeGame.retry()) ? this.playGame() : OutputView.printResult()
     });
   },
