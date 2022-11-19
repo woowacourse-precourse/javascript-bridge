@@ -34,6 +34,12 @@ class BridgeGame {
     }
   }
 
+  /**
+   * 
+   * @param {움직이는 다리의 위치} move 
+   * @param {성공인지 실패인지를 알려주는 변수} check
+   * 현재 건너고 있는 다리의 상태를 입력받아 그를 분류해주는 작업을 담당하는 함수이다.
+   */
   passBridge(move, check) {
     this.nowPosition += 1;
     switch(true) {
