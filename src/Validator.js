@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE } = require('./constant/message');
+const { ERROR_MESSAGE } = require('./Constants/message');
 
 class Validator {
   static chekcBridgeSizeValue(command) {
@@ -10,8 +10,14 @@ class Validator {
     if (isNaN(command)) throw new Error(ERROR_MESSAGE.unexpected_input);
   }
 
-  static checkCorrectDirection(direction) {
-    if (direction !== 'U' && direction !== 'D')
+  static checkCorrectDirection(directions) {
+    if (directions instanceof Array) {
+      directions.forEach((dir) => {
+        if (dir !== 'U' && dir !== 'D') {
+          throw new Error(ERROR_MESSAGE.unexpected_input);
+        }
+      });
+    } else if (directions !== 'U' && directions !== 'D')
       throw new Error(ERROR_MESSAGE.unexpected_input);
   }
 
