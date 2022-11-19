@@ -32,6 +32,12 @@ class BridgeGame {
   retry() {
   }
 
+  checkUserMovingInput() {
+    if (this.userInput[this.userInput.length - 1] === this.#password[this.userInput.length - 1]) {
+      return true
+    }
+    return false
+  }
 }
 
 module.exports = BridgeGame;
