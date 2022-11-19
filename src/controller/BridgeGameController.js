@@ -12,12 +12,12 @@ class BrideGameController {
 
   start() {
     OutputView.printIntialMessage();
-    InputView.readBridgeSize(this.handleGameStartPhase);
+    InputView.readBridgeSize(this.handleGameStartPhase.bind(this));
   }
 
   handleGameStartPhase(size) {
     this.generateBridgeGame(size);
-    InputView.readMoving(this.handleAnswerCheckPhase);
+    InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
   }
 
   generateBridgeGame(size) {
@@ -31,7 +31,7 @@ class BrideGameController {
     if(this.#bridgeGame.isAnswer(direction)) {
       this.handleGameEndPhase();
     }
-    InputView.readGameCommand(this.handleGameRetryPhase);
+    InputView.readGameCommand(this.handleGameRetryPhase.bind(this));
   }
 
   handleGameEndPhase() {
@@ -40,7 +40,7 @@ class BrideGameController {
       return;
     }
     this.#bridgeGame.move();
-    InputView.readMoving(this.handleAnswerCheckPhase);
+    InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
   }
 
   handleGameRetryPhase(retryAnswer) {
