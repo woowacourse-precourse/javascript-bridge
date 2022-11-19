@@ -16,6 +16,15 @@ const OUTPUT_MESSAGE = {
   TRIED: "총 시도한 횟수: ",
 }
 
+const MAKE_MAP = {
+  START: "[",
+  PASSED: " O |",
+  EMPTY: "   |",
+  END_EMPTY: "   ]",
+  END_FAIL: " X ]",
+  END_SUCCES: " O ]",
+}
+
 const SUCCESS = {
   true: '성공',
   false: '실패',
@@ -28,6 +37,7 @@ module.exports = {
   ERROR_MESSAGE, 
   INPUT_MESSAGE,
   OUTPUT_MESSAGE,
+  MAKE_MAP,
   MOVE_VALID, 
   RETRY_VALID,
   SUCCESS,

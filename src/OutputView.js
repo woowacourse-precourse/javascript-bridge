@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { GameStatus } = require("./GameUtils")
-const { OUTPUT_MESSAGE, SUCCESS, MOVE_VALID } = require("./Constants")
+const { OUTPUT_MESSAGE, MAKE_MAP, SUCCESS, MOVE_VALID } = require("./Constants")
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -21,7 +21,7 @@ const OutputView = {
   },
 
   makeOutput(upOrDown, nextMove) {
-    const output = ['['];
+    const output = [MAKE_MAP.START];
     for(let i=0; i<GameStatus.step; i++){
       output.push(this.alreadyPass(upOrDown, i));
     };
@@ -31,20 +31,20 @@ const OutputView = {
 
   alreadyPass(upOrDown, i) {
     if(GameStatus.bridge[i] === MOVE_VALID[upOrDown]) {
-      return ' O |';
+      return MAKE_MAP.PASSED;
     };
-    return '   |';
+    return MAKE_MAP.EMPTY;
   },
 
   makeNextMoveOutput(upOrDown, nextMove) {
     if(MOVE_VALID[upOrDown] !== nextMove) {
-      return '   ]';
+      return MAKE_MAP.END_EMPTY;
     }
     if(GameStatus.bridge[GameStatus.step] !== nextMove) {
       GameStatus.alive = false;
-      return ' X ]';
+      return MAKE_MAP.END_FAIL;
     }
-    return ' O ]';
+    return MAKE_MAP.END_SUCCES;
   },
 
   /**
