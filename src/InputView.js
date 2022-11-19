@@ -13,10 +13,12 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(Message.BRIDGE_LENGTH, (input) => {
-      CheckError.checkBridgeLength(input);
+      let checkBoolean = CheckError.checkBridgeLength(input);
+      if (!checkBoolean) {
+        this.readBridgeSize();
+      }
     });
   },
-
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */

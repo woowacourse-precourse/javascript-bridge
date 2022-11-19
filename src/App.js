@@ -1,3 +1,4 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = require("./InputView");
 const Message = require("./Message");
 const OutputView = require("./OutputView");
