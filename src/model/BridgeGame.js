@@ -2,11 +2,13 @@ class BridgeGame {
   #isSameChar;
   #upResultArr;
   #downResultArr;
+  #isGameOver;
 
   constructor() {
     this.#isSameChar = [];
     this.#upResultArr = [];
     this.#downResultArr = [];
+    this.#isGameOver = false;
   }
 
   move(bridgeWay, userSelect, userInputLength) {
@@ -16,6 +18,7 @@ class BridgeGame {
     return {
       upResultArr: this.#upResultArr,
       downResultArr: this.#downResultArr,
+      isGameOver: this.#isGameOver,
     };
   }
 
@@ -23,8 +26,10 @@ class BridgeGame {
     if (bridgeWay[countIndex] === userSelect[countIndex]) {
       this.#isSameChar.push('O');
     }
-
-    this.#isSameChar.push('X');
+    if (bridgeWay[countIndex] !== userSelect[countIndex]) {
+      this.#isSameChar.push('X');
+      this.#isGameOver = true;
+    }
   }
 
   checkUpOrDown(userSelect, countIndex, selectResult) {
