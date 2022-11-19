@@ -1,3 +1,7 @@
+const BridgeGame = require('./BridgeGame');
+
+const GAME_INFORMATION = new BridgeGame();
+
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -9,7 +13,7 @@ const BridgeMaker = {
     for (let index = 0; index < size; index += 1) {
       bridgeInfo.push(this.directionConverter(generateRandomNumber()));
     }
-    return bridgeInfo;
+    GAME_INFORMATION.setBridge(bridgeInfo);
   },
 
   directionConverter(generatedNumber) {
