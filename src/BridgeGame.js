@@ -37,6 +37,18 @@ class BridgeGame {
   }
 
   /**
+   * 사용자가 칸을 이동할 때 사용하는 메서드
+   * @param {{gameState:Number, userPath:Array<string>, bridge:Array<string>} movement 이동 방향
+   */
+  getGameState() {
+    return {
+      gameState: this.#judgeUserMovement(),
+      userPath: this.#userPath,
+      bridge: this.#bridge,
+    };
+  }
+
+  /**
    * 사용자의 선택에 대한 결과를 알려주는 메서드
    * @return {Number} movement result
    */
