@@ -1,6 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
-const Validator = require('./Validator');
 const MESSAGE = require('./utils/Message');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -23,13 +22,13 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving (retryGame, moveMap) {
+  readMoving (retryGame, getNextStep) {
     Console.readLine(MESSAGE.inputChooseNextStep, (chooseStep) => {
       try {
-        moveMap(retryGame, chooseStep);
+        getNextStep(retryGame, chooseStep);
       } catch (error) {
         OutputView.printError(error);
-        this.readMoving(retryGame, moveMap);
+        this.readMoving(retryGame, getNextStep);
       }
     });
   },
