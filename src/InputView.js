@@ -1,12 +1,12 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./Constants.js');
-const BridgeSize = require('./BridgeSize.js');
-const CrossingBridge = require('./CrossingBridge.js');
+const BridgeSize = require('./Validate/BridgeSize.js');
+const CrossingBridge = require('./Validate/CrossingBridge.js');
 const RandomNumber = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame.js');
 const { currentPosition } = require('./Utils.js');
-const Retry = require('./Retry.js');
+const Retry = require('./Validate/Retry.js');
 const OutputView = require('./OutputView.js');
 const { printResult } = require('./OutputView.js');
 

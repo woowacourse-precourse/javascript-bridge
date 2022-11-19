@@ -1,4 +1,4 @@
-const { checkHasCrossibleKey } = require('./Utils');
+const { checkHasCrossibleKey } = require('../Utils');
 
 class CrossingBridge {
   #moveKey;
@@ -12,6 +12,3 @@ class CrossingBridge {
 }
 
 module.exports = CrossingBridge;
-
-const a = new CrossingBridge('');
-a.validate();

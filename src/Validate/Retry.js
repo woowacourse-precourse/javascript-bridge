@@ -1,4 +1,4 @@
-const { checkHasKey } = require('./Utils');
+const { checkHasKey } = require('../Utils');
 
 class Retry {
   #input;
