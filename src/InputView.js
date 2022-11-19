@@ -12,6 +12,7 @@ const InputView = {
     bridge: [],
     currentPosition: 0,
     liveOrDie: true,
+    numberOfChallenge: 1,
   },
   /**
    * 다리의 길이를 입력받는다.
@@ -34,7 +35,7 @@ const InputView = {
         const bridgeGame = new BridgeGame();
         this.gameStatus.liveOrDie = bridgeGame.move(direction, this.gameStatus);
         if (this.gameStatus.liveOrDie) {
-          OutputView.printMap(this.gameStatus, direction);
+          OutputView.printMap(this.gameStatus);
           this.gameStatus.currentPosition += 1;
           this.readMoving();
         }
@@ -54,7 +55,11 @@ const InputView = {
       doOrDie => {
         if (doOrDie === 'R') {
           this.gameStatus.currentPosition = 0;
+          this.gameStatus.numberOfChallenge += 1;
           this.readMoving();
+        }
+        if (doOrDie === 'Q') {
+          OutputView.printResult(this.gameStatus);
         }
       },
     );
