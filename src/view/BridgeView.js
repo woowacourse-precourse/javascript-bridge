@@ -36,6 +36,19 @@ class BridgeView {
     this.input.readMoving(validation);
   } 
 
+  getWhatToDo(getCommand) {
+    const validation = (command) => {
+      try {
+        Validation.isRightRetry(command);
+        return getCommand(command);
+      } catch (err) {
+        this.printError(err);
+        this.input.readGameCommand(validation)
+      }
+    }
+    this.input.readGameCommand(validation)
+  }
+
   printMap(map) {
     this.output.printMap(map)
   }

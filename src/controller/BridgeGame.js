@@ -17,6 +17,10 @@ class BridgeGame {
     }
     this.view.getBridgeLength(printLength);
   }
+
+  restart() {
+    console.log('restart');
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    */
@@ -34,7 +38,11 @@ class BridgeGame {
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    */
   retry() {
-    console.log('retry');
+    const getCommand = (command) => {
+      if(command === 'R') return this.restart();
+      if(command === 'Q') return this.terminate();
+    }
+    this.view.getWhatToDo(getCommand)
   }
 
   terminate() {

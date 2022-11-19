@@ -13,6 +13,13 @@ class Validation {
     if ( input !== 'D' && input !== 'U')  throw TYPE.STEP;
     return true;
   }
+
+  static isRightRetry(input) {
+    if ( input !== 'Q' && input !== 'R') {
+      throw TYPE.RETRY;
+    }
+    return true;
+  }
 }
 
 module.exports = Validation;
