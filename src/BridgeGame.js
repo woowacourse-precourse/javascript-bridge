@@ -53,16 +53,22 @@ class BridgeGame {
       this.moveAfter(command);
     });
   }
-  moveAfter(command) {
-    if (!isSame(this.#answer[this.#step - 1], command)) {
-      this.retry();
-      return;
-    }
+  #doWhenWrongAnswer() {
+    this.retry();
+  }
+  #doWhenRightAnswer() {
     if (isSame(this.#answer.length, this.#inputs.length)) {
       this.end();
       return;
     }
     this.move();
+  }
+  moveAfter(command) {
+    if (!isSame(this.#answer[this.#step - 1], command)) {
+      this.#doWhenWrongAnswer();
+      return;
+    }
+    this.#doWhenRightAnswer();
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
