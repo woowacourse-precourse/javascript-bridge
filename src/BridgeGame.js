@@ -10,6 +10,8 @@ class BridgeGame {
 
   #downMap = [BRIDGE_CONSTANTS.shapeOfBeginning];
 
+  #numberOfAttempts = 1;
+
   setBridgeAnswer(bridge) {
     this.#bridgeAnswer = bridge;
   }
@@ -20,6 +22,10 @@ class BridgeGame {
 
   getMaps() {
     return [this.#upMap, this.#downMap];
+  }
+
+  getNumberOfAttempts() {
+    return this.#numberOfAttempts;
   }
 
   eachMapPush(a, b) {
@@ -74,7 +80,11 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#numberOfAttempts += 1;
+    this.#upMap = [BRIDGE_CONSTANTS.shapeOfBeginning];
+    this.#downMap = [BRIDGE_CONSTANTS.shapeOfBeginning];
+  }
 }
 
 module.exports = BridgeGame;

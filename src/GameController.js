@@ -48,20 +48,23 @@ class GameController {
 
   successResult() {
     const maps = this.game.getMaps();
-    this.outputView.printResult(maps, true, 1);
+    const totalAttempts = this.game.getNumberOfAttempts();
+    this.outputView.printResult(maps, true, totalAttempts);
     this.end();
   }
 
   failureResult() {
     const maps = this.game.getMaps();
-    this.outputView.printResult(maps, false, 1);
+    const totalAttempts = this.game.getNumberOfAttempts();
+    this.outputView.printResult(maps, false, totalAttempts);
     this.end();
   }
 
   retryOrQuit() {
     const onDeliveryCommand = (command) => {
       if (command === BRIDGE_CONSTANTS.retry) {
-        this.game.retry(command);
+        this.game.retry();
+        this.restart();
       } else {
         this.failureResult();
         this.end();
@@ -69,6 +72,11 @@ class GameController {
     };
 
     this.inputView.readGameCommand(onDeliveryCommand);
+  }
+
+  restart() {
+    const START_INDEX = 0;
+    this.move(START_INDEX);
   }
 
   end() {
