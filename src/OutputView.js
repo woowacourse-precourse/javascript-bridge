@@ -21,7 +21,7 @@ const OutputView = {
       this.UP.push('   ');
       this.DOWN.push(' O ');
     }
-    MissionUtils.Console.print(`\n[${this.UP.join('|')}]\n[${this.DOWN.join('|')}]`);
+    MissionUtils.Console.print(`[${this.UP.join('|')}]\n[${this.DOWN.join('|')}]`);
   },
 
   printIncorrect(userAnswer) {
@@ -33,7 +33,12 @@ const OutputView = {
       this.UP.push('   ');
       this.DOWN.push(' X ');
     }
-    MissionUtils.Console.print(`\n[${this.UP.join('|')}]\n[${this.DOWN.join('|')}]`);
+    MissionUtils.Console.print(`[${this.UP.join('|')}]\n[${this.DOWN.join('|')}]`);
+  },
+
+  removeArray() {
+    this.UP = [];
+    this.DOWN = [];
   },
 
   /**
