@@ -13,4 +13,4 @@ class Bridge {
   }
 }
 
-exports.module = Bridge;
+module.exports = Bridge;
