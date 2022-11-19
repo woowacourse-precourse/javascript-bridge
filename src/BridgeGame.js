@@ -13,6 +13,11 @@ class BridgeGame {
     this.#bridges = [];
   }
 
+  makeBridge() {
+    for (let i = 0; i < this.size; i += 1) {
+      this.#bridges.push(BridgeRandomNumberGenerator.generate());
+    }
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>

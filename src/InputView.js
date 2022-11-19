@@ -15,6 +15,7 @@ const InputView = {
         throw new Error(ERROR_MSG.invalidBridgeSize);
       }
       game.size = +len;
+      game.makeBridge();
     });
   },
 
