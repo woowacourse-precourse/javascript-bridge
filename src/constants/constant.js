@@ -8,6 +8,7 @@ const MESSAGE = {
 
 const ERR_MESSAGE = {
   ERR_BRIDGE_LENGTH: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
+  ERR_ISNUMBER: "[ERROR] 숫자 형식으로 입력되어야 합니다.",
 };
 
 module.exports = { MESSAGE, ERR_MESSAGE };
