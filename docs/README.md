@@ -50,6 +50,7 @@ src
  ┃ ┣ AskRetry.js
  ┃ ┣ BridgeGame.js
  ┃ ┣ BridgeSize.js
+ ┃ ┣ MakeMap.js
  ┃ ┗ MovingCheck.js
  ┣ utiles
  ┃ ┗ Constant.js
@@ -74,11 +75,14 @@ src
 ### models/BridgeGame.js
 - 움직임에 대한 정답 검사 및 재시작 입력 분류
 
+### models/MakeMap.js
+- 출력할 다리 모양을 만드는 기능
+
 ### models/AskRetry.js, BridgeSize.js, MoveingCheck.js
 - 입력값에 대한 유효성 검사
 
 ### view/InputView.js
-- 다리 길이, 움직임, 재시작 값 입력받는 기능
+- 다리 길이, 움직임, 재시작 값을 입력받는 기능
 
 ### view/OutputView.js
 - 시작 멘트, 에러 메시지, 다리 모양, 최종 결과를 출력하는 기능
