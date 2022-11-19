@@ -1,7 +1,10 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
-const { isValidateInputBridgeSize } = require('../Validate');
+const { 
+  isValidateInputBridgeSize,
+  isValidateInputMoveDirection,
+} = require('../Validate');
 
 
 /**
@@ -27,6 +30,7 @@ const InputView = {
   readMoving() {
     let move;
     Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)",(moveState) => {
+      if(isValidateInputMoveDirection(moveState)) return move = '[ERROR]';
       move = moveState;
     })
     return move;

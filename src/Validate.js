@@ -17,6 +17,15 @@ const Validate = {
       default:
         return false;
     }
+  },
+
+  isValidateInputMoveDirection(inputMoveDirection) {
+    switch (true) {
+      case inputMoveDirection === 'D' || inputMoveDirection === 'U':
+        return false;
+      default:
+        return true;
+    }
   }
 }
 
