@@ -38,14 +38,16 @@ class App {
   }
 
   actWithUserMoveInput(input) {
-    const letter = input.toUpperCase();
     try {
-      validateMoveInput(letter);
-      const { map, isCorrect, isGameOver } = this.#bridgeGame.move(letter);
+      validateMoveInput(input.toUpperCase());
+      const { map, isCorrect, isGameOver } = this.#bridgeGame.move(
+        input.toUpperCase()
+      );
       printMap(map);
       this.actWithResult({ isCorrect, isGameOver });
     } catch (e) {
       printErrorMessage(e);
+      readMoving(this.actWithUserMoveInput.bind(this));
     }
   }
 
@@ -69,6 +71,7 @@ class App {
       this.actWithCommand(letter);
     } catch (e) {
       printErrorMessage(e);
+      readGameCommand(this.actWithUserCommandInput.bind(this));
     }
   }
 
