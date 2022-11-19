@@ -14,11 +14,18 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT.BRIDGE_LENGTH, (message) => {
       returnValue = message;
     });
-    BridgeValidator.checkInputBridgeLength(
-      returnValue,
-      BRIDGE_LENGTH_MIN,
-      BRIDGE_LENGTH_MAX,
-    );
+
+    try {
+      BridgeValidator.checkInputBridgeLength(
+        returnValue,
+        BRIDGE_LENGTH_MIN,
+        BRIDGE_LENGTH_MAX,
+      );
+    } catch (e) {
+      MissionUtils.Console.readLine(e);
+      this.readBridgeSize();
+    }
+
     return returnValue;
   },
 
@@ -30,7 +37,14 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT.BRIDGE_NEXT, (message) => {
       returnValue = message;
     });
-    BridgeValidator.checkInputNext(returnValue);
+
+    try {
+      BridgeValidator.checkInputNext(returnValue);
+    } catch (e) {
+      MissionUtils.Console.readLine(e);
+      this.readMoving();
+    }
+
     return returnValue;
   },
 
@@ -42,7 +56,14 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT.BRIDGE_COMMAND, (message) => {
       returnValue = message;
     });
-    BridgeValidator.checkGameCommand(returnValue);
+
+    try {
+      BridgeValidator.checkGameCommand(returnValue);
+    } catch (e) {
+      MissionUtils.Console.readLine(e);
+      this.readGameCommand();
+    }
+
     return returnValue;
   },
 };
