@@ -4,6 +4,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const validBridgeSize = require("./validation/validBridgeSize");
+const validMoveUpOrDownAnswer = require("./validation/validMoveUpOrDownAnswer");
 
 class App {
   #bridge;
@@ -26,6 +27,7 @@ class App {
   }
 
   requestMoveUpOrDown(answer) {
+    validMoveUpOrDownAnswer(answer);
     OutputView.printMap(this.BridgeGame.getPosition(), this.#bridge, answer);
 
     const isCorrect = this.BridgeGame.isCorrect(answer, this.#bridge);
