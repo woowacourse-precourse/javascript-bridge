@@ -23,4 +23,19 @@ const validateReadMoving = (upOrDown) => {
   }
 };
 
-module.exports = { validateReadBridgeSize, validateReadMoving };
+const validateReadGameCommand = (retry) => {
+  try {
+    if (retry !== "R" && retry !== "Q")
+      throw { ment: "재시도 여부에는 대문자 R 혹은 Q만 입력할 수 있습니다." };
+    return true;
+  } catch (e) {
+    Console.print("[ERROR] " + e.ment);
+    return false;
+  }
+};
+
+module.exports = {
+  validateReadBridgeSize,
+  validateReadMoving,
+  validateReadGameCommand,
+};
