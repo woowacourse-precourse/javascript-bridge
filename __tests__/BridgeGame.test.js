@@ -73,6 +73,14 @@ describe('문자열 숫자 치환 기능 테스트', () => {
 
     expect(BridgeGame.replaceNumber(EXPECTED)).toEqual(RECEIVED);
   });
+
+  test('대문자 "U", 대문자 "D"를 입력을 제외한 값은 예외를 발생한다.', () => {
+    expect(() => {
+      const EXPECTED = 'K';
+
+      BridgeGame.replaceNumber(EXPECTED);
+    }).toThrow(RANGE_ERROR_TEXT);
+  });
 });
 
 describe('사용자가 칸을 이동할 때 사용하는 메서드 테스트', () => {
