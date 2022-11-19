@@ -1,7 +1,7 @@
-const { makeBridge } = require("./BridgeMaker");
-const { generate } = require("./BridgeRandomNumberGenerator");
-const { VALUES, GAME_UTILS } = require("./constants");
-const ViewController = require("./ViewController");
+const { makeBridge } = require("../BridgeMaker");
+const { generate } = require("../BridgeRandomNumberGenerator");
+const { VALUES, GAME_UTILS } = require("../utils/constants");
+const ViewController = require("../controller/ViewController");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 /**

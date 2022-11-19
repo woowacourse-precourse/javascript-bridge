@@ -1,4 +1,4 @@
-const { MESSAGES_ERROR } = require("./constants");
+const { MESSAGES_ERROR } = require("../utils/constants");
 
 const InputChecker = {
   checkBridgeSize(userInput) {
