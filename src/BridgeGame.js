@@ -20,9 +20,12 @@ class BridgeGame {
   #bridgeErrorMessages = [
     '[ERROR] 유효하지 않은 다리 길이입니다.',
     '[ERROR] U 또는 D를 입력하세요.',
+    '[ERROR] R 또는 Q를 입력하세요.',
   ];
 
   #bridgeMoveCount = 0;
+
+  #tryCount = 1;
 
   #bridge;
 
@@ -69,7 +72,7 @@ class BridgeGame {
     } else if (this.#bridgeMoveCount < this.#bridge.length) {
       InputView.readMoving(this.validateBridgeMove);
     } else if (this.#bridgeMoveCount === this.#bridge.length) {
-      // end
+      OutputView.printResult('성공', this.#tryCount);
     }
   };
 
@@ -82,7 +85,18 @@ class BridgeGame {
   };
 
   validateRetryInput = (input) => {
-    // Exceptions...
+    const IS_VALID_INPUT = /^R|Q$/.test(input);
+    BridgeError.throwErrorHandler(this.#bridgeErrorMessages[2], !IS_VALID_INPUT);
+    this.gameRestartOrOver(input);
+  };
+
+  gameRestartOrOver = (input) => {
+    if (input === 'R') {
+      this.#tryCount += 1;
+      this.move();
+    } else if (input === 'Q') {
+      OutputView.printResult('실패', this.#tryCount);
+    }
   };
 }
 
