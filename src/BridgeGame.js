@@ -101,6 +101,24 @@ class BridgeGame {
     this.#up = [];
     this.#down = [];
   }
+
+  returnUpDownTryCountArray(answer) {
+    let array = [];
+    array.push(this.returnStringArray(this.#up));
+    array.push(this.returnStringArray(this.#down));
+    array.push(this.returnSuccessFail(answer));
+    array.push(this.#tryCount);
+    return array;
+  }
+
+  returnSuccessFail(answer) {
+    if (this.lengthCompare(answer)) {
+      if (this.checkX()) {
+        return '성공';
+      }
+    }
+    return '실패';
+  }
 }
 
 module.exports = BridgeGame;
