@@ -29,8 +29,8 @@ class Controller {
 
   #handleMove() {
     InputView.readMoving((input) => {
-      const { resultToString, gameStatus } = this.#bridgeGame.move(input);
-      OutputView.printMap(resultToString);
+      const { moveResult, gameStatus } = this.#bridgeGame.move(input);
+      OutputView.printMap(moveResult);
       if (gameStatus === GAME_STATUS.END) this.#handleGameEnd();
       if (gameStatus === GAME_STATUS.OVER) this.#handleGameOver();
       if (gameStatus === GAME_STATUS.PROCEEDING) this.#handleMove();
@@ -51,8 +51,8 @@ class Controller {
   }
 
   #handleGameEnd() {
-    const { resultToString, gameStatus } = this.#bridgeGame.move();
-    OutputView.printResult(resultToString, gameStatus, this.#tryCount);
+    const { moveResult, gameStatus } = this.#bridgeGame.move();
+    OutputView.printResult(moveResult, gameStatus, this.#tryCount);
   }
 }
 

@@ -13,7 +13,7 @@ describe('다리 건너기 게임 테스트', () => {
   test('다리 건너기 테스트', () => {
     const resultMap = bridgeGame.move('U');
     expect(resultMap).toEqual({
-      resultToString: '[ O ]\n[   ]',
+      moveResult: '[ O ]\n[   ]',
       gameStatus: 0,
     });
   });
@@ -21,7 +21,7 @@ describe('다리 건너기 게임 테스트', () => {
   test('다리 건너기 테스트', () => {
     const resultMap = bridgeGame.move('D');
     expect(resultMap).toEqual({
-      resultToString: '[ O |   ]\n[   | O ]',
+      moveResult: '[ O |   ]\n[   | O ]',
       gameStatus: 0,
     });
   });
@@ -29,7 +29,7 @@ describe('다리 건너기 게임 테스트', () => {
   test('다리 건너기 테스트', () => {
     const resultMap = bridgeGame.move('D');
     expect(resultMap).toEqual({
-      resultToString: '[ O |   |   ]\n[   | O | X ]',
+      moveResult: '[ O |   |   ]\n[   | O | X ]',
       gameStatus: 1,
     });
   });
@@ -42,7 +42,7 @@ describe('다리 건너기 게임 테스트', () => {
   test('다리 건너기 테스트', () => {
     const resultMap = bridgeGame.move('U');
     expect(resultMap).toEqual({
-      resultToString: '[ O ]\n[   ]',
+      moveResult: '[ O ]\n[   ]',
       gameStatus: 0,
     });
   });
@@ -50,7 +50,7 @@ describe('다리 건너기 게임 테스트', () => {
   test('다리 건너기 테스트', () => {
     const resultMap = bridgeGame.move('U');
     expect(resultMap).toEqual({
-      resultToString: '[ O | X ]\n[   |   ]',
+      moveResult: '[ O | X ]\n[   |   ]',
       gameStatus: 1,
     });
   });
@@ -59,7 +59,7 @@ describe('다리 건너기 게임 테스트', () => {
     bridgeGame.retry();
     const resultMap = bridgeGame.move('U');
     expect(resultMap).toEqual({
-      resultToString: '[ O ]\n[   ]',
+      moveResult: '[ O ]\n[   ]',
       gameStatus: 0,
     });
   });

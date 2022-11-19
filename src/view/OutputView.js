@@ -9,21 +9,21 @@ const OutputView = {
   },
 
   /**
-   * @param {string} resultToString 다리 건너기 결과 문자열
+   * @param {string} moveResult 다리 건너기 결과 문자열
    */
-  printMap(resultToString) {
-    Console.print(resultToString);
+  printMap(moveResult) {
+    Console.print(moveResult);
     Console.print('');
   },
 
   /**
-   * @param {string} resultToString 다리 건너기 결과 문자열
+   * @param {string} moveResult 다리 건너기 결과 문자열
    * @param {number} gameStatus 다리 건너기 게임의 상태
    * @param {number} count 시도 횟수
    */
-  printResult(resultToString, gameStatus, count) {
+  printResult(moveResult, gameStatus, count) {
     Console.print('최종 게임 결과');
-    OutputView.printMap(resultToString);
+    OutputView.printMap(moveResult);
     Console.print(`게임 성공 여부: ${gameStatus === GAME_STATUS.OVER ? '실패' : '성공'}`);
     Console.print(`총 시도한 횟수: ${count}`);
   },

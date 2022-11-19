@@ -29,7 +29,7 @@ class BridgeGame {
 
   /**
    * @typedef {Object} resultMap
-   * @property {string} resultToString
+   * @property {string} moveResult
    * @property {number} gameStatus
    */
 
@@ -56,7 +56,7 @@ class BridgeGame {
    */
   #getResultMap() {
     return {
-      resultToString: this.#bridge.getResultToString(this.#inputs),
+      moveResult: this.#bridge.getMoveResult(this.#inputs),
       gameStatus: this.#gameStatus,
     };
   }

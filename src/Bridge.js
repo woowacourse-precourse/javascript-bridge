@@ -32,12 +32,12 @@ class Bridge {
    * @param {string[]} inputs 비교할 플레이어의 입력
    * @return {string} 출력할 문자열을 반환
    */
-  getResultToString(inputs) {
+  getMoveResult(inputs) {
     const abovePartString = `${BRIDGE.START} ${this.#makeAbovePart(inputs)} ${BRIDGE.END}`;
     const belowPartString = `${BRIDGE.START} ${this.#makeBelowPart(inputs)} ${BRIDGE.END}`;
-    const resultToString = `${abovePartString}\n${belowPartString}`;
+    const moveResult = `${abovePartString}\n${belowPartString}`;
 
-    return resultToString;
+    return moveResult;
   }
 
   /**
