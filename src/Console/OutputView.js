@@ -7,8 +7,8 @@ const { OUTPUT } = require('../Resource/String');
 const OutputView = {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * @param {[string]} bridgeAnswer bridgeAnswer를 받습니다.
-   * @param {[string]} bridge bridge를 받습니다.
+   * @param {string[]} bridgeAnswer bridgeAnswer를 받습니다.
+   * @param {string[]} bridge bridge를 받습니다.
    */
   printMap(bridgeGame) {
     BridgeValidator.checkBridgeAnswer(bridgeGame.bridgeAnswer);

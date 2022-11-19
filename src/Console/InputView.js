@@ -15,7 +15,7 @@ const InputView = {
       returnValue = message;
     });
     BridgeValidator.checkInputBridgeLength(
-      message,
+      returnValue,
       BRIDGE_LENGTH_MIN,
       BRIDGE_LENGTH_MAX,
     );

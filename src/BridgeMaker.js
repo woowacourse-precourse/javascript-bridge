@@ -1,3 +1,5 @@
+const BridgeValidator = require('./Bridge.validator');
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -9,8 +11,18 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
-    while (bridge.length + 1 > size) {
-      bridge.push(generateRandomNumber() ? 'U' : 'D');
+    while (bridge.length < size) {
+      let position = '';
+      const randomNumber = generateRandomNumber();
+      BridgeValidator.isNumber(randomNumber);
+
+      if (randomNumber == 1) {
+        position = 'U';
+      } else if (randomNumber == 0) {
+        position = 'D';
+      }
+
+      bridge.push(position);
     }
     return bridge;
   },
