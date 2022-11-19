@@ -3,7 +3,12 @@
 const Bridge = require('./Bridge');
 const Player = require('./Player');
 const StatusGenerator = require('./StatusGenerator');
-const { MARKING, COMMAND, BRIDGE_SPACE_TYPE } = require('./utils/const');
+const {
+  MARKING,
+  COMMAND,
+  BRIDGE_SPACE_TYPE,
+  COMMAND_TYPE,
+} = require('./utils/const');
 const Validator = require('./utils/Validator');
 
 /**
@@ -50,6 +55,8 @@ class BridgeGame {
    * @return {0 | 1}
    */
   retry(gameCommand) {
+    Validator.validateEqual(gameCommand, COMMAND_TYPE);
+
     if (gameCommand === COMMAND.RETRY) {
       this.#player = new Player();
       this.#count += 1;
