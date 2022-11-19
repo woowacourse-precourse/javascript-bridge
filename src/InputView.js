@@ -70,14 +70,21 @@ const InputView = {
     MissionUtils.Console.readLine(WordToPrint.gameCommand, (retryOrNot) => {
       try {
         Error.readGameCommand(retryOrNot);
-        if (bridgeGame.retry(retryOrNot)) this.readMoving(0, bridge);
-        else
-          OutputView.printResult(result, bridgeGame.returnCountGame(), "실패");
+        this.retryOrNot(retryOrNot, bridge, result);
       } catch (e) {
         MissionUtils.Console.print(e);
         this.readGameCommand(bridge, result);
       }
     });
+  },
+
+  retryOrNot(retryOrNot, bridge, result) {
+    // 재시도를 하면,
+    if (bridgeGame.retry(retryOrNot)) {
+      this.readMoving(0, bridge);
+      return;
+    }
+    OutputView.printResult(result, bridgeGame.returnCountGame(), "실패");
   },
 };
 
