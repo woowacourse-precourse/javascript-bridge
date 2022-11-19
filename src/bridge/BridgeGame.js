@@ -1,5 +1,6 @@
 const BridgeMaker = require('../BridgeMaker.js');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator.js');
+const { CHECK } = require('../constants/Constant.js');
 
 class BridgeGame {
   #bridge;
@@ -22,19 +23,19 @@ class BridgeGame {
   }
 
   checkBridge(value) {
-    if (this.#bridge[this.#currentPos.length] !== value) this.#isPlaying = false;
+    if (CHECK.PLAYING(this.#bridge, this.#currentPos, value)) this.#isPlaying = false;
   }
 
   cellValidator(index) {
-    return this.#currentPos[index] === this.#bridge[index];
+    return CHECK.CELL(this.#currentPos, this.#bridge, index);
   }
 
   detectWinner() {
-    return (this.#currentPos.length === this.#bridge.length) && this.#isPlaying;
+    return CHECK.WINNER(this.#currentPos, this.#bridge, this.#isPlaying);
   }
 
   isSuccess() {
-    return JSON.stringify(this.#bridge) === JSON.stringify(this.#currentPos);
+    return CHECK.ARRAY(this.#bridge, this.#currentPos);
   }
 
   move(direction) {

@@ -39,3 +39,9 @@
 - [x] Implement class that print output to user
   - [x] Function that prints current position of user
   - [x] Function that prints total result of the game
+
+## Refactor
+- [ ] Divide into classes
+- [ ] make sure every function has less than 10 lines
+- [ ] make sure every function has no more than 3 parameters
+- [ ] extract conditional statements, output strings and constant values into constant file

@@ -1,9 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
-const CONSTANT = require('../constants/Constant.js');
+const { MSG, DIRECTION, RESULT } = require('../constants/Constant.js');
 
 const OutputView = {
   printStart() {
-    Console.print('다리 건너기 게임을 시작합니다.');
+    Console.print(MSG.START);
   },
 
   printMap(bridge) {
@@ -30,37 +30,33 @@ const OutputView = {
   addUpperResultStr(bridge, pos, index) {
     let result = '';
 
-    const { DIRECTION } = CONSTANT;
-    
     result += index === 0 ? '' : '|';
-    if (pos === DIRECTION.UP) result += bridge.cellValidator(index) ? ' O ' : ' X ';
-    else result += '   ';
-    
+    if (pos === DIRECTION.UP) result += bridge.cellValidator(index) ? RESULT.CORRECT : RESULT.INCORRECT;
+    else result += RESULT.EMPTY;
+
     return result;
   },
 
   addLowerResultStr(bridge, pos, index) {
     let result = '';
 
-    const { DIRECTION } = CONSTANT;
-    
     result += index === 0 ? '' : '|';
-    if (pos === DIRECTION.DOWN) result += bridge.cellValidator(index) ? ' O ' : ' X ';
-    else result += '   ';
-    
+    if (pos === DIRECTION.DOWN) result += bridge.cellValidator(index) ? RESULT.CORRECT : RESULT.INCORRECT;
+    else result += RESULT.EMPTY;
+
     return result;
   },
 
   printResult(bridge) {
-    Console.print('최종 게임 결과')
+    Console.print(MSG.RESULT);
     this.printMap(bridge);
-    Console.print(`게임 성공 여부: ${bridge.isSuccess() ? '성공' : '실패'}`);
-    Console.print(`총 시도한 횟수: ${bridge.attempt}`)
+    Console.print(`${MSG.SUCCESS_RESULT} ${bridge.isSuccess() ? RESULT.SUCCESS : RESULT.FAIL}`);
+    Console.print(`${MSG.TOTAL_ATTEMPTS} ${bridge.attempt}`);
   },
 
   printError(e) {
     Console.print(e);
-  }
+  },
 };
 
 module.exports = OutputView;
