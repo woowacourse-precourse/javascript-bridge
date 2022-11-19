@@ -27,14 +27,15 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(input, bridge) {
+    console.log(this.#bridgeLengthStatus);
     const nowBridgeLength = this.#bridgeLengthStatus;
     this.incrementNumberOfTry();
     if (bridge[this.#bridgeLengthStatus] === input) {
       this.incrementBridgeLengthStatus();
       console.log(nowBridgeLength, this.#bridgeLengthStatus);
-      return [true, input];
+      return true;
     }
-    return [false, input];
+    return false;
   }
 
   /**
@@ -48,12 +49,12 @@ class BridgeGame {
   }
 }
 
-const app = new BridgeGame();
+// const app = new BridgeGame();
 
-const mockBridge = ['D', 'U', 'D', 'U'];
+// const mockBridge = ['D', 'U', 'D', 'U'];
 
-console.log(app.move('D', mockBridge));
-console.log(app.move('D', mockBridge));
-console.log(app.retry('R'));
+// // console.log(app.move('D', mockBridge));
+// // console.log(app.move('D', mockBridge));
+// // console.log(app.retry('R'));
 
 module.exports = BridgeGame;
