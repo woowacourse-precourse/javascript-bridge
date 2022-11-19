@@ -26,8 +26,18 @@ const Validator = Object.freeze({
     return true;
   },
 
+  confirmOfCondition(input, condition) {
+    if (condition === 'move') {
+      this.checkCondition(input, this.MOVEMENT_CONDITIONS, this.ERROR_MESSAGES.ONLY_U_D);
+    }
+    if (condition === 'option') {
+      this.checkCondition(input, this.GAME_OPTION_CONDITIONS, this.ERROR_MESSAGES.ONLY_R_Q);
+    }
+  },
+
   checkCondition(input, conditionArray, error) {
     const trimedInput = input.trim();
+    console.log(conditionArray[1]);
     if (trimedInput !== conditionArray[0] && trimedInput !== conditionArray[1]) {
       throw new Error(error);
     }
@@ -59,4 +69,6 @@ module.exports = Validator;
 //   ),
 // );
 
-console.log(Validator.checkSpace('1 2'));
+// console.log(Validator.checkSpace('1 2'));
+
+// console.log(Validator.confirmOfCondition('D', 'move'));
