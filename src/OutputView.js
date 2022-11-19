@@ -21,7 +21,40 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(gameMap) {
+    Console.print(`[ ${this.getUpperMap(gameMap).join(' | ')} ]`);
+    Console.print(`[ ${this.getLowerMap(gameMap).join(' | ')} ]`);
+  },
+
+  //FIXME 11줄
+  getUpperMap(gameMap) {
+    return gameMap.map(({ moving, canMove }) => {
+      if (moving !== 'U') {
+        return ' ';
+      }
+
+      if (canMove) {
+        return 'O';
+      } else {
+        return 'X';
+      }
+    });
+  },
+
+  //FIXME 11줄
+  getLowerMap(gameMap) {
+    return gameMap.map(({ moving, canMove }) => {
+      if (moving !== 'D') {
+        return ' ';
+      }
+
+      if (canMove) {
+        return 'O';
+      } else {
+        return 'X';
+      }
+    });
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.

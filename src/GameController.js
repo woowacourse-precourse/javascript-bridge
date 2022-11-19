@@ -1,11 +1,18 @@
+const { ERROR } = require('./utils/constants');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const Bridge = require('./model/Bridge');
-const GamePiece = require('./model/GamePiece');
+const BridgeGame = require('./BridgeGame');
+const Map = require('./model/Map');
 
 class GameController {
   #bridge;
-  #gamePiece;
+  #bridgeGame;
+  #map;
+
+  constructor() {
+    this.#map = new Map();
+  }
 
   load() {
     InputView.readBridgeSize(this.setBridge.bind(this));
@@ -19,16 +26,26 @@ class GameController {
       InputView.readBridgeSize(this.setBridge.bind(this));
     }
 
-    InputView.readMoving(this.setGamePiece.bind(this));
+    this.#bridgeGame = new BridgeGame(this.#bridge);
+    InputView.readMoving(this.validateMoving.bind(this));
   }
 
-  setGamePiece(moving) {
+  validateMoving(moving) {
     try {
-      this.#gamePiece = new GamePiece(moving);
+      if (moving !== 'U' && moving !== 'D') {
+        throw new Error(ERROR.read_moving_error);
+      }
+      this.playGame(moving);
     } catch (error) {
       OutputView.printError(error.message);
-      InputView.readMoving(this.setGamePiece.bind(this));
+      InputView.readMoving(this.validateMoving.bind(this));
     }
+  }
+
+  playGame(moving) {
+    const moveSuccess = this.#bridgeGame.move(moving);
+    OutputView.printMap(this.#map.updateMap(moving, moveSuccess));
+    InputView.readMoving(this.validateMoving.bind(this));
   }
 }
 
