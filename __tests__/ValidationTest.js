@@ -1,10 +1,10 @@
 const Validation = require("../src/Validation");
 
 describe("검증 메서드에 대한 테스트를 구현합니다.", () => {
-  test("isSame은 동일한 값일 경우 true를 반환합니다.", () => {
+  test("isSame은 동일한 값일 경우 true를 반환.", () => {
     expect(Validation.isSame(10, 10)).toBe(true);
   });
-  test("isSame은 동일한 값이 아닌 경우 false를 반환합니다.", () => {
+  test("isSame은 동일한 값이 아닌 경우 false를 반환.", () => {
     expect(Validation.isSame(1, 10)).toBe(false);
   });
 
@@ -29,15 +29,34 @@ describe("검증 메서드에 대한 테스트를 구현합니다.", () => {
   });
 
   test.each([[21], [1], ["A"]])(
-    "다리 길이의 값이 2~20을 초과하거나 숫자가 아닌 경우 에러가 발생합니다.",
+    "다리 길이의 값이 2~20을 초과하거나 숫자가 아닌 경우 에러가 발생.",
     (input) => {
       expect(() => Validation.validateBridgeLength(input)).toThrow("[ERROR]");
     }
   );
   test.each([["2"], [20], [10]])(
-    "다리 길이의 값이 2~20을 사이인 경우 해당 숫자 값을 반환합니다.",
+    "다리 길이의 값이 2~20을 사이인 경우 해당 숫자 값을 반환.",
     (input) => {
       expect(Validation.validateBridgeLength(input)).toBe(parseInt(input, 10));
+    }
+  );
+
+  test.each([
+    ["A", ["B", "C"]],
+    [1, [2, 3]],
+  ])(
+    "해당 커맨드가 허용한 값이 아니라면 에러를 반환.",
+    (command, permission) => {
+      expect(() => Validation.validateCommand(command, permission)).toThrow();
+    }
+  );
+  test.each([
+    ["A", ["A", "B", "C"]],
+    [1, [1, 2, 3]],
+  ])(
+    "해당 커맨드가 허용한 값이면 해당 커맨드를 그대로 반환.",
+    (command, permission) => {
+      expect(Validation.validateCommand(command, permission)).toBe(command);
     }
   );
 });
