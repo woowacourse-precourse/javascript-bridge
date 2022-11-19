@@ -41,10 +41,13 @@ const runException = (inputs) => {
 
   app.play();
 
+  // getOutput(logSpy) = '다리 건너기 게임을 시작합니다. [ERROR] Validate.isNumber occur exception'
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
 
 const expectLogContains = (received, logs) => {
+  // received = '다리 건너기 게임을 시작합니다. [ERROR] Validate.isNumber occur exception'
+  // expect.stringContaining([ERROR]) = '[ERROR]'가 received에 포함되어 있는지 확인
   logs.forEach((log) => {
     expect(received).toEqual(expect.stringContaining(log));
   });
