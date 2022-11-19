@@ -42,10 +42,23 @@ class App {
   validateMoving(moving) {
     try {
       BridgeValidator.validateMoving(moving);
+      this.tryMove(moving);
     } catch (err) {
       OutputView.printErrorMessage(err.message);
       this.inputMoving();
     }
+  }
+
+  tryMove(moving) {
+    this.#bridgeGame.move(moving);
+    OutputView.printMap(this.#bridgeGame.getMoveHistory());
+
+    if (this.#bridgeGame.isGameOver()) {
+      console.log('game over');
+      return;
+    }
+
+    this.inputMoving();
   }
 }
 
