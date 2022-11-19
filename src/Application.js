@@ -15,7 +15,7 @@ const Application = {
     const END = 20;
     const checkRange = Validation.range(START, END);
 
-    return checkRange(target);
+    checkRange(target);
   },
 
   createArray(target, mapFn) {
