@@ -29,6 +29,7 @@ class Bridge {
     if (this.bridgeMap.isEndGame()) {
       return console.log('게임 종료');
     }
+    this.bridgeMap.increaseDistance();
     this.askNextStep(retryGame);
   }
 }

@@ -6,13 +6,17 @@ class BridgeMap {
   #distance;
 
   constructor () {
-    this.#distance = 0;
-    this.#history = { up: [], down: [] };
+    this.resetHistory();
   }
 
   setPattern (pattern) {
     console.log(pattern);
     this.#pattern = pattern;
+  }
+
+  resetHistory () {
+    this.#distance = 0;
+    this.#history = { up: [], down: [] };
   }
 
   getPathMarker (chooseStep) {
@@ -27,6 +31,10 @@ class BridgeMap {
     return this.#pattern.length === this.#distance;
   }
 
+  increaseDistance () {
+    this.#distance += 1;
+  }
+
   getPathHistory (chooseStep) {
     this.#history.up
       .push(chooseStep === GAME_CONSTANTS.upStair
@@ -34,7 +42,6 @@ class BridgeMap {
     this.#history.down
       .push(chooseStep === GAME_CONSTANTS.downStair
         ? this.getPathMarker(chooseStep) : GAME_CONSTANTS.empty);
-    this.#distance += 1;
     return this.#history;
   }
 }
