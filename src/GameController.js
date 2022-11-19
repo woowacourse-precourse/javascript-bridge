@@ -20,8 +20,8 @@ class GameController {
     InputView.readBridgeSize((size) => {
       try {
         this.handleSize(size);
-      } catch (exceptionMessage) {
-        OutputView.printMessage(exceptionMessage);
+      } catch ({ message }) {
+        OutputView.printMessage(message);
         this.askBridgeSize();
       }
     });
@@ -36,8 +36,8 @@ class GameController {
     InputView.readMoving((direction) => {
       try {
         this.handleDirection(direction);
-      } catch (exceptionMessage) {
-        OutputView.printMessage(exceptionMessage);
+      } catch ({ message }) {
+        OutputView.printMessage(message);
         this.askDirection();
       }
     });
@@ -63,8 +63,8 @@ class GameController {
     InputView.readGameCommand((command) => {
       try {
         this.handleCommand(command);
-      } catch (exceptionMessage) {
-        OutputView.printMessage(exceptionMessage);
+      } catch ({ message }) {
+        OutputView.printMessage(message);
         this.askRetry();
       }
     });
