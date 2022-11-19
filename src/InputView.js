@@ -11,6 +11,7 @@ const OutputView = require('./OutputView');
 const InputView = {
   BRIDGE_GAME: new BridgeGame(),
   INDEX: 0,
+  COUNT: 1,
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -72,7 +73,23 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeArray) {
+    MissionUtils.Console.print('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)');
+    MissionUtils.Console.readLine('', (userInput) => {
+      this.validateGameCommand(userInput, bridgeArray);
+    });
+  },
+
+  validateGameCommand(userInput, bridgeArray) {
+    try {
+      Validate.retryOrEnd(userInput);
+      OutputView.removeArray();
+      this.readMoving(this.BRIDGE_GAME.retry(userInput, bridgeArray));
+    } catch (error) {
+      MissionUtils.Console.print(error);
+      this.readGameCommand();
+    }
+  },
 };
 
 module.exports = InputView;
