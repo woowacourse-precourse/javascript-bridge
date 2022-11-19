@@ -1,4 +1,3 @@
-const OutputView = require("./OutputView");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -33,9 +32,18 @@ class BridgeGame {
   retry(retryOrNot) {
     if (retryOrNot === "R") {
       this.#gameResult = []; //초기화
+      this.countGame();
       return true;
     }
     return false;
+  }
+
+  countGame() {
+    this.#countGame += 1;
+  }
+
+  returnCountGame() {
+    return this.#countGame;
   }
 }
 

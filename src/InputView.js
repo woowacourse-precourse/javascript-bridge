@@ -44,9 +44,19 @@ const InputView = {
           console.log(result);
           OutputView.printMap(result);
           // 건널 수 없는 칸 입력시,
+          if (result[result.length - 1][1] === "X") {
+            this.readGameCommand(bridge, result);
+            return;
+          }
           // 건널 수 있는 칸 입력시,
           if (nth < bridge.length - 1) this.readMoving(nth + 1, bridge);
           // 다리를 모두 건넜을 때
+          if (nth === bridge.length - 1)
+            OutputView.printResult(
+              result,
+              bridgeGame.returnCountGame(),
+              "성공"
+            );
         } catch (e) {
           MissionUtils.Console.print(e);
           this.readMoving();
@@ -58,7 +68,27 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge, result) {},
+  readGameCommand(bridge, result) {
+    MissionUtils.Console.readLine(
+      "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (retryOrNot) => {
+        try {
+          // Error.readGameCommand(retryOrNot);
+          if (bridgeGame.retry(retryOrNot)) this.readMoving(0, bridge);
+          // 재시도를 안할 시,
+          else
+            OutputView.printResult(
+              result,
+              bridgeGame.returnCountGame(),
+              "실패"
+            );
+        } catch (e) {
+          MissionUtils.Console.print(e);
+          this.readGameCommand();
+        }
+      }
+    );
+  },
 };
 
 module.exports = InputView;
