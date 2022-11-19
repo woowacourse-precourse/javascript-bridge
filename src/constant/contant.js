@@ -41,6 +41,7 @@ const GAME_TEXT = Object.freeze({
   ZERO: '0',
   ONE: '1',
   SPACE: ' ',
+  EMPTY: '',
 });
 
 const NUMBER = Object.freeze({

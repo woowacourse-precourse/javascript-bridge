@@ -1,5 +1,5 @@
 const { readLine, print } = require('./utils/MissionUtils');
-const { INPUT_TEXT } = require('./constant/contant');
+const { INPUT_TEXT, GAME_TEXT } = require('./constant/contant');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -10,7 +10,7 @@ const InputView = {
    */
   readBridgeSize(callback) {
     print(INPUT_TEXT.BRIDGE_SIZE);
-    readLine('', (bridgeSize) => {
+    readLine(GAME_TEXT.EMPTY, (bridgeSize) => {
       callback(bridgeSize);
     });
   },
@@ -20,7 +20,7 @@ const InputView = {
    */
   readMoving(callback) {
     print(INPUT_TEXT.BRIDGE_MOVING);
-    readLine('', (movingInput) => {
+    readLine(GAME_TEXT.EMPTY, (movingInput) => {
       callback(movingInput);
     });
   },
@@ -30,7 +30,7 @@ const InputView = {
    */
   readGameCommand(callback) {
     print(INPUT_TEXT.BRIDGE_COMMAND);
-    readLine('', (commandInput) => {
+    readLine(GAME_TEXT.EMPTY, (commandInput) => {
       callback(commandInput);
     });
   },
