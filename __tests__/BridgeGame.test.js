@@ -518,8 +518,17 @@ describe('위치 기록 가져오는 메서드 테스트', () => {
 });
 
 describe('다리 이동 로그 메소드 테스트', () => {
+  const bridgeGame = new BridgeGame();
+  bridgeGame.move();
+  bridgeGame.setPositionLog([0, 0], 'O');
+
+  bridgeGame.move();
+  bridgeGame.setPositionLog([1, 1], 'O');
+
+  bridgeGame.move();
+  bridgeGame.setPositionLog([0, 2], 'O');
+
   test('메소드 이름은 "getBridgeLog"로 정의된다.', () => {
-    const bridgeGame = new BridgeGame();
     const METHOD_NAME = 'getBridgeLog';
 
     expect(bridgeGame.getBridgeLog.name).toEqual(METHOD_NAME);
@@ -527,44 +536,28 @@ describe('다리 이동 로그 메소드 테스트', () => {
 
   test('유저가 아직 출발 전이라면 예외를 발생한다.', () => {
     expect(() => {
-      const bridgeGame = new BridgeGame();
-
-      bridgeGame.getBridgeLog();
+      new BridgeGame().getBridgeLog();
     }).toThrow(POSITION_ERROR_TEXT);
   });
 
   test('첫 번째 기록으로 [[ "O" ] [ " " ]]을 반환한다.', () => {
-    const bridgeGame = new BridgeGame();
-    const BRIDGE = ['U', 'D', 'U'];
-    const POSITION_INDEX = [0, 0];
-    const BRIDGE_REUSLT = 'O';
-    const POSITION_LOG = [POSITION_INDEX, BRIDGE_REUSLT];
-    const RECEIVED = [['O'][' ']];
-
-    bridgeGame.setBridge(BRIDGE);
-    bridgeGame.move();
-    bridgeGame.setPositionLog(POSITION_LOG);
-
     const EXPECTED = bridgeGame.getBridgeLog()[0];
+    const RECEIVED = [['O'], [' ']];
 
-    expect(bridgeGame.getBridgeLog(EXPECTED)).toEqual(RECEIVED);
+    expect(EXPECTED).toEqual(RECEIVED);
+  });
+
+  test('두 번째 기록으로 [[ "O", " " ] [ " ", "O" ]]을 반환한다.', () => {
+    const EXPECTED = bridgeGame.getBridgeLog()[1];
+    const RECEIVED = [['O', ' '], [' ', 'O']];
+
+    expect(EXPECTED).toEqual(RECEIVED);
   });
 
   test('세 번째 기록으로 [[ "O", " ", "O" ] [ " ", "O", " " ]]을 반환한다.', () => {
-    const bridgeGame = new BridgeGame();
-    const BRIDGE = ['U', 'D', 'U'];
-    const POSITION_LOG = [
-      [[0, 0], 'O'],
-      [[1, 1], 'O'],
-      [[0, 2], 'O'],
-    ];
-    const SECOND_ROUND = 3;
+    const EXPECTED = bridgeGame.getBridgeLog()[2];
     const RECEIVED = [['O', ' ', 'O'], [' ', 'O', ' ']];
 
-    bridgeGame.setBridge(BRIDGE);
-    loop(SECOND_ROUND, bridgeGame.move.bind(bridgeGame));
-    bridgeGame.setPositionLog(POSITION_LOG);
-
-    expect(bridgeGame.getBridgeLog()).toEqual(RECEIVED);
+    expect(EXPECTED).toEqual(RECEIVED);
   });
 });
