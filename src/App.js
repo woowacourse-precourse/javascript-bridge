@@ -22,7 +22,7 @@ class App {
 
   requestBridgeSize(bridgeSize) {
     try {
-      this.validator.emptyInput(bridgeSize);
+      this.validator.checkBridgeSize(bridgeSize);
       // 예외 통과하면 다리 건설
     } catch (errorType) {
       OutputView.printError(errorType);
