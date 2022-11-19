@@ -14,7 +14,7 @@ class BridgeGame {
 
   constructor() {
     this.#bridge = [];
-    this.#movingList = [[], []];
+    this.#movingList = { upper: [], lower: [] };
     this.#attempts = 1;
   }
   /**
@@ -36,7 +36,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moving) {
-    const currentIndex = this.#movingList[0].length;
+    const currentIndex = this.#movingList.upper.length;
     if (moving === MOVING.UPPER) return this.moveToUpper(moving, currentIndex);
     return this.moveToLower(moving, currentIndex);
   }
@@ -46,11 +46,11 @@ class BridgeGame {
    */
   moveToUpper(moving, currentIndex) {
     if (moving === this.#bridge[currentIndex]) {
-      this.#movingList[0].push(MOVING.RIGHT_ANSWER);
-      this.#movingList[1].push(MOVING.BLANK);
+      this.#movingList.upper.push(MOVING.RIGHT_ANSWER);
+      this.#movingList.lower.push(MOVING.BLANK);
     } else {
-      this.#movingList[0].push(MOVING.WRONG_ANSWER);
-      this.#movingList[1].push(MOVING.BLANK);
+      this.#movingList.upper.push(MOVING.WRONG_ANSWER);
+      this.#movingList.lower.push(MOVING.BLANK);
     }
 
     return this.print();
@@ -61,11 +61,11 @@ class BridgeGame {
    */
   moveToLower(moving, currentIndex) {
     if (moving === this.#bridge[currentIndex]) {
-      this.#movingList[1].push(MOVING.RIGHT_ANSWER);
-      this.#movingList[0].push(MOVING.BLANK);
+      this.#movingList.lower.push(MOVING.RIGHT_ANSWER);
+      this.#movingList.upper.push(MOVING.BLANK);
     } else {
-      this.#movingList[1].push(MOVING.WRONG_ANSWER);
-      this.#movingList[0].push(MOVING.BLANK);
+      this.#movingList.lower.push(MOVING.WRONG_ANSWER);
+      this.#movingList.upper.push(MOVING.BLANK);
     }
 
     return this.print();
@@ -82,7 +82,8 @@ class BridgeGame {
    * 다리를 잘못 건넜을 때 사용하는 메서드
    */
   hasWrong() {
-    const result = this.#movingList.flat().includes(MOVING.WRONG_ANSWER);
+    const movingItems = Object.values(this.#movingList).flat();
+    const result = movingItems.includes(MOVING.WRONG_ANSWER);
     return result;
   }
 
@@ -90,7 +91,7 @@ class BridgeGame {
    * 다리를 모두 건넜을 때 사용하는 메서드
    */
   hasAll() {
-    const result = this.#movingList[0].length === this.#bridge.length;
+    const result = this.#movingList.upper.length === this.#bridge.length;
     return result;
   }
 
@@ -101,7 +102,7 @@ class BridgeGame {
    */
   retry() {
     this.#attempts += 1;
-    this.#movingList = [[], []];
+    this.#movingList = { upper: [], lower: [] };
   }
 
   /**
