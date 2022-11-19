@@ -5,6 +5,18 @@ class BridgeDrawer {
   #gameStatus = {};
   #bridgeDrawing = {};
 
+  getBridgeDrawingUsingResult(bridge, drawSize, isPlayerSucceed) {
+    this.#gameStatus.bridge = bridge;
+    this.#gameStatus.drawSize = drawSize;
+    this.#gameStatus.isPlayerSucceed = isPlayerSucceed;
+
+    this.#createBridgeGrid();
+    this.#markFailSignIfFailed();
+    this.#convertBridgeGridToDrawing();
+
+    return this.#bridgeDrawing;
+  }
+
   #createBridgeGrid() {
     const directions = [COMMAND.MOVING_UP, COMMAND.MOVING_DOWN];
 
