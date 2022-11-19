@@ -4,6 +4,7 @@ const { Console } = require('@woowacourse/mission-utils');
  */
 const OutputView = {
   time: 0,
+  tryCount: 1,
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -35,6 +36,7 @@ const OutputView = {
 
   initialization() {
     this.time = 0;
+    this.tryCount += 1;
   },
 
   /**
@@ -42,7 +44,17 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(isDone, map) {
+    const { topSide, downSide } = map;
+    const result = isDone ? '성공' : '실패';
+
+    Console.print('최종 게임 결과');
+    Console.print(`[ ${topSide.join(' | ')} ]`);
+    Console.print(`[ ${downSide.join(' | ')} ]`);
+    Console.print(`게임 성공 여부 : ${result}`);
+    Console.print(`총 시도한 횟수 : ${this.tryCount}`);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;

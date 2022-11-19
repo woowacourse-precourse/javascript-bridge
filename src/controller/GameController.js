@@ -40,7 +40,9 @@ class GameController {
     OutputView.printMap(this.game.getMap(), isSuccess);
 
     if (isSuccess) {
-      this.game.isEnd() ? Console.close() : this.askMoving();
+      this.game.isEnd()
+        ? OutputView.printResult(true, this.game.getMap())
+        : this.askMoving();
     } else {
       this.askGameCommand();
     }
@@ -58,6 +60,7 @@ class GameController {
       OutputView.initialization();
       this.askMoving();
     } else {
+      OutputView.printResult(false, this.game.getMap());
     }
   }
 }
