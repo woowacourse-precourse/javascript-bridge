@@ -53,16 +53,17 @@ class BridgeGame {
     }
   }
 
+  getStep() {
+    return this.step;
+  }
+
   getTryCount() {
     return this.tryCount;
   }
 
-  getupBridge() {
-    return this.upBridge;
-  }
-
-  getDownBridge() {
-    return this.downBridge;
+  getBridge() {
+    const bridge = [this.upBridge, this.downBridge];
+    return bridge;
   }
 
   init() {

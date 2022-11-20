@@ -40,12 +40,11 @@ class App {
 
   moveBridge(userMove) {
     const move = this.bridgeGame.move(this.bridge, userMove);
-    const upBridge = this.bridgeGame.getupBridge();
-    const downBridge = this.bridgeGame.getDownBridge();
-    const bridge = [upBridge, downBridge];
+    const bridge = this.bridgeGame.getBridge();
 
     move;
     printMap(bridge);
+
     this.checkContinue(move, bridge);
   }
 
