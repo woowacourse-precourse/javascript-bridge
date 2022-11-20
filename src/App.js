@@ -81,6 +81,14 @@ class App {
   inputGameCommand() {
     InputView.readGameCommand(this);
   }
+
+  gameOver() {
+    OutputView.printResult({
+      map: BridgeMapMaker.makeBridgeMap(this.#bridgeGame.getMoveHistory()),
+      isClear: this.#bridgeGame.isClear(),
+      totalTryCount: this.#bridgeGame.getTotalTryCount(),
+    });
+  }
 }
 
 new App().play();
