@@ -1,8 +1,8 @@
 const {
   DOWNSIDE_SYMBOL,
   UPSIDE_SYMBOL,
-  QUIT_TRIGGER,
-  RESTART_TRIGGER,
+  QUIT_COMMAND,
+  RESTART_COMMAND,
 } = require('./constants/condition.js');
 const { ERROR_MSG } = require('./constants/message.js');
 
@@ -18,13 +18,13 @@ class Validation {
   }
 
   static validateGameCommand(gameCommand) {
-    if (!this.#isValidTrigger(gameCommand)) {
-      throw new Error(ERROR_MSG.inValidTrigger);
+    if (!this.#isValidCommand(gameCommand)) {
+      throw new Error(ERROR_MSG.inValidCommand);
     }
   }
 
-  static #isValidTrigger(gameCommand) {
-    return gameCommand === QUIT_TRIGGER || gameCommand === RESTART_TRIGGER;
+  static #isValidCommand(gameCommand) {
+    return gameCommand === QUIT_COMMAND || gameCommand === RESTART_COMMAND;
   }
 }
 

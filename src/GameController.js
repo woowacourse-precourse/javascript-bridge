@@ -1,4 +1,4 @@
-const { RESTART_TRIGGER, QUIT_TRIGGER } = require('./constants/condition.js');
+const { RESTART_COMMAND, QUIT_COMMAND } = require('./constants/condition.js');
 const { GAME_MSG } = require('./constants/message.js');
 
 const { Console } = require('@woowacourse/mission-utils');
@@ -73,11 +73,11 @@ class GameController {
 
   runCommand(command) {
     switch (command) {
-      case QUIT_TRIGGER: {
+      case QUIT_COMMAND: {
         this.quit();
         break;
       }
-      case RESTART_TRIGGER: {
+      case RESTART_COMMAND: {
         this.bridgeGame.retry();
         this.requestDirection();
       }

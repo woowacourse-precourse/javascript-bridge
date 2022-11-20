@@ -3,8 +3,8 @@ const {
   BRIDGE_SIZE_MAX_RANGE,
   UPSIDE_SYMBOL,
   DOWNSIDE_SYMBOL,
-  QUIT_TRIGGER,
-  RESTART_TRIGGER,
+  QUIT_COMMAND,
+  RESTART_COMMAND,
 } = require('./condition.js');
 
 const GAME_MSG = {
@@ -25,7 +25,7 @@ const ERROR_MSG = {
     '[ERROR] 유효하지 않은 입력 범위입니다. ' +
     `${BRIDGE_SIZE_MIN_RANGE} ~ ${BRIDGE_SIZE_MAX_RANGE} 사이의 값을 입력해주세요.`,
   invalidDirection: `[ERROR] 유효하지 않은 이동방향입니다. (위: ${UPSIDE_SYMBOL}, 아래: ${DOWNSIDE_SYMBOL}) 를 입력해주세요`,
-  inValidTrigger: `[ERROR] 유효하지 않은 입력입니다. (재시도: ${RESTART_TRIGGER}, 종료: ${QUIT_TRIGGER}) 를 입력해주세요`,
+  inValidCommand: `[ERROR] 유효하지 않은 입력입니다. (재시도: ${RESTART_COMMAND}, 종료: ${QUIT_COMMAND}) 를 입력해주세요`,
 };
 
 module.exports = {
