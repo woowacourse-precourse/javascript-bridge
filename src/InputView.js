@@ -30,7 +30,7 @@ const InputView = {
       Console.readLine(this.BRIDGE_SIZE, answer);
     });
     this.validateBridgeSize(bridgeSize);
-    return bridgeSize;
+    return Number(bridgeSize);
   },
 
   validateBridgeSize(answer) {
