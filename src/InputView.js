@@ -20,12 +20,12 @@ const InputView = {
   },
 
   validateBridgeSize(input) {
-    if (Number.isNaN(Number(input))) {
+    const regex = /^[\d]{1,2}$/;
+    
+    if(!regex.test(input)) {
       throw new Error(ERROR.LENGTH);
     }
-    if (!Number.isInteger(Number(input))) {
-      throw new Error(ERROR.LENGTH);
-    }
+    
     if (Number(input) < REQUIREMENT.MINLEN || Number(input) > REQUIREMENT.MAXLEN) {
       throw new Error(ERROR.LENGTH);
     }
