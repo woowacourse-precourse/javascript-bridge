@@ -2,7 +2,10 @@ const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeMapMaker = require('./BridgeMapMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const BridgeValidator = require('./BridgeValidator');
+
+const BridgeSizeValidator = require('./BridgeSizeValidator');
+const BridgeMovingValidator = require('./BridgeMovingValidator');
+const BridgeGameCommandValidator = require('./BridgeGameCommandValidator');
 
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
@@ -21,7 +24,7 @@ class App {
 
   validateBridgeSize(bridgeSizeInput) {
     try {
-      BridgeValidator.validateBridgeSize(bridgeSizeInput);
+      BridgeSizeValidator.validate(bridgeSizeInput);
       this.initBridgeGame(parseInt(bridgeSizeInput, 10));
     } catch (err) {
       OutputView.printErrorMessage(err.message);
@@ -43,7 +46,7 @@ class App {
 
   validateMoving(moving) {
     try {
-      BridgeValidator.validateMoving(moving);
+      BridgeMovingValidator.validate(moving);
       this.tryMove(moving);
     } catch (err) {
       OutputView.printErrorMessage(err.message);
@@ -82,7 +85,7 @@ class App {
 
   validateGameCommand(gameCommand) {
     try {
-      BridgeValidator.validateGameCommand(gameCommand);
+      BridgeGameCommandValidator.validate(gameCommand);
       this.retry();
     } catch (err) {
       OutputView.printErrorMessage(err.message);
