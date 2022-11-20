@@ -1,11 +1,17 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const OUTPUT_MESSAGE = require("./constans/Outputmessage");
 class App {
   constructor() {
     this.bridge = [];
-    this.gameResult = null;
+  }
+  gameResultPrint(winOrLose) {
+    winOrLose
+      ? MissionUtils.Console.print(OUTPUT_MESSAGE.SUCCESS_RESULT)
+      : MissionUtils.Console.print(OUTPUT_MESSAGE.FAILURE_RESULT);
   }
   moveing(movePoint, obstacle) {
     return obstacle === movePoint ? true : false;
@@ -14,11 +20,11 @@ class App {
     const movePoint = InputView.readMoving();
     this.bridge.forEach((obstacle) => {
       if (!moveing(movePoint, obstacle)) {
-        gameResult = false;
+        gameResultPrint(false);
         return;
       }
     });
-    gameResult = true;
+    gameResultPrint(true);
     return;
   }
   BridgeMaker() {
