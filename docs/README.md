@@ -111,37 +111,24 @@ classDiagram
 
 ```mermaid
 flowchart  TD;
-
 BridgeController-->Size입력요청;
-
 Size입력요청-->컨트롤러Size수신
-
-컨트롤러Size수신-->|에러|종료
-
+컨트롤러Size수신-->|에러|Size입력요청
 컨트롤러Size수신-->|유효|모델변경_size
-
 모델변경_size-->Move입력요청
-
 Move입력요청-->컨트롤러Move수신
-
-컨트롤러Move수신-->|에러|종료
-
+컨트롤러Move수신-->|에러|Move입력요청
 컨트롤러Move수신-->|유효|모델변경_move
-
 모델변경_move-->뷰에출력요청
-
 뷰에출력요청-->게임진행여부
-
 게임진행여부-->|통과|Move입력요청
-
 게임진행여부-->|실패|Command입력요청
-
 게임진행여부-->|클리어|결과출력
-
-Command입력요청-->|재시작|Move입력요청
-
-Command입력요청-->|종료|결과출력
-
+Command입력요청-->컨트롤러Command수신
+컨트롤러Command수신-->|에러|Command입력요청
+컨트롤러Command수신-->|유효|게임재시작여부
+게임재시작여부-->|재시작|Move입력요청
+게임재시작여부-->|종료|결과출력
 결과출력-->종료
 
 ```
