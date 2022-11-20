@@ -2,12 +2,15 @@ const { BRIDGE_PATH_TYPE, MARKING, MOVING } = require('./utils/const');
 const Validator = require('./utils/Validator');
 
 class Path {
+  /** @type {string[]} */
   #path;
+
+  /** @type {string[][]} */
   #pathMap;
 
   constructor() {
     this.#path = [];
-    this.#pathMap = new Array(2).fill(0).map(() => ['']);
+    this.#pathMap = new Array(2).fill(0).map(() => []);
   }
 
   /**
@@ -28,12 +31,8 @@ class Path {
     Validator.validateEqual(moving, BRIDGE_PATH_TYPE);
   }
 
-  getCurrentPath() {
-    return this.#path[this.#path.length - 1];
-  }
-
   /**
-   * @param {boolean} isCorrect O / X
+   * @param {boolean} isCorrect
    * @return {string[][]}
    */
   markOX(isCorrect) {
@@ -44,34 +43,26 @@ class Path {
     return this.#pathMap;
   }
 
-  /**
-   * @param {string} mark O / X
-   */
   markU(mark) {
     this.#pathMap[MOVING.U][this.#path.length - 1] = mark;
     this.#pathMap[MOVING.D][this.#path.length - 1] = MARKING.BLANK;
   }
 
-  /**
-   * @param {string} mark O / X
-   */
   markD(mark) {
     this.#pathMap[MOVING.U][this.#path.length - 1] = MARKING.BLANK;
     this.#pathMap[MOVING.D][this.#path.length - 1] = mark;
   }
 
-  /**
-   * @returns {string[][]}
-   */
   getPathMap() {
     return this.#pathMap;
   }
 
-  /**
-   * @returns {string[]}
-   */
   getPath() {
     return this.#path;
+  }
+
+  getCurrentPath() {
+    return this.#path[this.#path.length - 1];
   }
 }
 
