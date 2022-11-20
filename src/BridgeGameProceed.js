@@ -24,9 +24,10 @@ class BridgeGameProceed {
     start() {
         OutputView.printStart();
         InputView.readBridgeSize((bridgeLength) => {
+            Console.print('');
             Validation.bridgeLength(bridgeLength);
             this.#winBridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
-            console.log(this.#winBridge);
+            // console.log(this.#winBridge);
             this.game();
         });
     }
@@ -35,45 +36,42 @@ class BridgeGameProceed {
         InputView.readMoving((nextStep) => {
             Validation.nextStep(nextStep);
             this.#playersBridge.push(nextStep);
+            const result = this.bridge();
 
-            const result = this.PlayersMap.show(this.#playersBridge, this.#winBridge)
-            Console.print(result);
-            if (result.includes('X')) {
-                this.fail(result);
-            }
+            if (result.includes('X')) this.fail(result);
+            if (this.#playersBridge.length === this.#winBridge.length) this.win(result);
             
-            if (this.#playersBridge.length === this.#winBridge.length) {
-                this.win(result);
-            }
-
             this.game();
         });
     }
 
+    bridge() {
+        const result = this.PlayersMap.show(this.#playersBridge, this.#winBridge)
+        Console.print(result);
+        Console.print('')
+        return result;
+    }
+
     fail(result) {
-        this.#round += 1;
+        this.BridgeGame.move();
         InputView.readGameCommand((retryOrNot) => {
             Validation.retry(retryOrNot);
             if (retryOrNot === "R") {
                 this.#playersBridge = [];
                 return this.game();
             }
-            this.BridgeGame.retry(retryOrNot, result);
+            if (retryOrNot === "Q") this.BridgeGame.retry(result); 
         })     
     }
 
     win(result) {
         OutputView.printResult()
         Console.print(result);
+        Console.print('');
         OutputView.printWin()
         OutputView.printAttemptCount(this.#round)
         Console.close();
     }
 }
 
-let a = new BridgeGameProceed();
-a.start();
-
 module.exports = BridgeGameProceed;
-
-// 각각의 개체와 클래스들을 하나로 묶어주는 클래스이다.

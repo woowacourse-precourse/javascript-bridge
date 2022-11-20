@@ -24,7 +24,7 @@ const OutputView = {
   },
 
   printAttemptCount(round) {
-    Console.print(OUTPUT_MESSAGE.GAME_ATTEMPT + `${round}`);
+    Console.print(OUTPUT_MESSAGE.GAME_ATTEMPT + ` ${round}`);
   },
 };
 
