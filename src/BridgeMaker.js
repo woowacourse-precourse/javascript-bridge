@@ -13,7 +13,7 @@ const BridgeMaker = {
     const bridge = [];
 
     for (let num = 0; num < size; num++) {
-      bridge.push(generateRandomNumber() === 0 ? EITHER.DOWN : EITHER.UP);
+      bridge.push(generateRandomNumber() + '' === '0' ? EITHER.DOWN : EITHER.UP);
     }
 
     return bridge;
