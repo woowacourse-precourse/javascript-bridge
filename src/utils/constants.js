@@ -5,7 +5,7 @@ const REGEX = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  bridgeLength: '[ERROR] 3 ~ 20 이하의 다리 길이를 입력하세요',
+  bridgeLength: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
   upDownKey: '[ERROR] U 또는 D 문자만 입력 가능합니다.',
   restartExitKey: '[ERROR] Q 또는 R 문자만 입력 가능합니다.'
 });
@@ -34,11 +34,16 @@ const GAME_QUESTION = Object.freeze({
     '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n'
 });
 
+const GAME_MESSAGE = Object.freeze({
+  final: '최종 게임 결과'
+});
+
 module.exports = {
   REGEX,
   ERROR_MESSAGE,
   MODEL_KEY,
   UPDOWN_INDEX,
   GAME_RESULT_STATE,
-  GAME_QUESTION
+  GAME_QUESTION,
+  GAME_MESSAGE
 };
