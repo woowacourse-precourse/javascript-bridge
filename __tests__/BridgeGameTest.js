@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { ERROR } = require("../src/Constants");
+const { ERROR } = require("../src/Utils/Constants");
 const App = require("../src/Controller/App");
 const BridgeGame = require("../src/Model/BridgeGame");
 

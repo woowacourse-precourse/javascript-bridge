@@ -3,7 +3,7 @@ const OutputView = require("../View/OutputView");
 const { makeBridge } = require("../Model/BridgeMaker");
 const BridgeGame = require("../Model/BridgeGame");
 const { generate } = require("../Model/BridgeRandomNumberGenerator");
-const { GAME, MESSAGE } = require("../Constants");
+const { GAME, MESSAGE } = require("../Utils/Constants");
 const Validate = require("../Validate");
 
 class App {

@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const App = require("../src/App");
-const BridgeMaker = require("../src/BridgeMaker");
+const { ERROR } = require("../src/Utils/Constants");
+const App = require("../src/Controller/App");
+const BridgeMaker = require("../src/Model/BridgeMaker");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -35,7 +36,7 @@ const runException = (inputs) => {
 
   app.play();
 
-  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+  expectLogContains(getOutput(logSpy), [ERROR.BRIDGE_SIZE_IS_NAN]);
 };
 
 const expectLogContains = (received, logs) => {

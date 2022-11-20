@@ -1,7 +1,7 @@
 const InputView = require("../View/InputView");
 const MissionUtils = require("@woowacourse/mission-utils");
 const OutputView = require("../View/OutputView");
-const { GAME, BRIDGE, UNIT } = require("../Constants");
+const { GAME, BRIDGE, UNIT } = require("../Utils/Constants");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
