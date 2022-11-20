@@ -353,3 +353,65 @@ describe('재시작/종료 입력 예외 테스트', () => {
     }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
   });
 });
+
+describe('다리 건너기 결과 출력 테스트 (재시작O)', () => {
+  test('재시작 1번 후 실패한 경우', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['0', '0', '1']);
+    mockQuestions(['3', 'U', 'R', 'D', 'U', 'Q']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '[ X ]',
+      '[   ]',
+      '[   ]',
+      '[ O ]',
+      '[   | X ]',
+      '[ O |   ]',
+      '최종 게임 결과',
+      '[   | X ]',
+      '[ O |   ]',
+      '게임 성공 여부: 실패',
+      '총 시도한 횟수: 2',
+    ]);
+    expectBridgeOrder(log, '[ X ]', '[   ]');
+    expectBridgeOrder(log, '[   | X ]', '[ O |   ]');
+  });
+
+  test('재시작 2번 후 성공한 경우', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['0', '0', '1']);
+    mockQuestions(['3', 'U', 'R', 'D', 'U', 'R', 'D', 'D', 'U']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '[ X ]',
+      '[   ]',
+      '[   ]',
+      '[ O ]',
+      '[   | X ]',
+      '[ O |   ]',
+      '[   ]',
+      '[ O ]',
+      '[   |   ]',
+      '[ O | O ]',
+      '[   |   | O ]',
+      '[ O | O |   ]',
+      '최종 게임 결과',
+      '[   |   | O ]',
+      '[ O | O |   ]',
+      '게임 성공 여부: 성공',
+      '총 시도한 횟수: 3',
+    ]);
+    expectBridgeOrder(log, '[ X ]', '[   ]');
+    expectBridgeOrder(log, '[   | X ]', '[ O |   ]');
+    expectBridgeOrder(log, '[   |   ]', '[ O | O ]');
+    expectBridgeOrder(log, '[   |   | O ]', '[ O | O |   ]');
+  });
+});
