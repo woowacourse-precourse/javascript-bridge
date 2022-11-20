@@ -17,14 +17,14 @@ class BridgeGame {
 
   move(direction) {
     const nextCellDirection = this.#bridge[this.#curPlace];
-    const successful = direction === nextCellDirection;
-    if (successful) this.#curPlace += 1;
+    const isCorrectDirection = direction === nextCellDirection;
+    if (isCorrectDirection) this.#curPlace += 1;
 
-    return successful;
+    return isCorrectDirection;
   }
 
-  drawMap(successful, direction) {
-    const elem = successful ? MAP_ELEMENT.CROSS : MAP_ELEMENT.FAIL;
+  drawMap(isCorrectDirection, direction) {
+    const elem = isCorrectDirection ? MAP_ELEMENT.CROSS : MAP_ELEMENT.FAIL;
 
     return Object.values(this.#bridgeMap.updateMap(direction, elem));
   }

@@ -17,11 +17,11 @@ class GameController {
   }
 
   handleDirection(direction) {
-    const successfulMove = this.#bridgeGame.move(direction);
-    const curMapState = this.#bridgeGame.drawMap(successfulMove, direction);
+    const isCorrectDirection = this.#bridgeGame.move(direction);
+    const curMapState = this.#bridgeGame.drawMap(isCorrectDirection, direction);
     OutputView.printMap(curMapState);
 
-    return successfulMove;
+    return isCorrectDirection;
   }
 
   doesUserWin() {

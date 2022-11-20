@@ -32,8 +32,8 @@ const InputView = {
   moveCallback(direction) {
     try {
       Validator.directionValidityCheck(direction);
-      const success = this.controller.handleDirection(direction);
-      success ? this.doesGameOver() : this.readGameCommand();
+      const isCorrectDirection = this.controller.handleDirection(direction);
+      isCorrectDirection ? this.doesGameOver() : this.readGameCommand();
     } catch ({ message }) {
       this.controller.print(message);
       this.readMoving();
