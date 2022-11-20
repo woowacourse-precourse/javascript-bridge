@@ -16,7 +16,13 @@ const Validation = {
   checkDirection(direction) {
     if (direction === "U" || direction === "D") return { errorMsg: undefined };
 
-    return { errorMsg: "[ERROR] U또는 D 알파벳만 입력이 가능합니다." };
+    return { errorMsg: "[ERROR] U또는 D 알파벳만 입력이 가능합니다.\n" };
+  },
+
+  checkRetry(retry) {
+    if (retry === "R" || retry === "Q") return { errorMsg: undefined };
+
+    return { errorMsg: "[ERROR] R또는 Q 알파벳만 입력이 가능합니다.\n" };
   },
 };
 

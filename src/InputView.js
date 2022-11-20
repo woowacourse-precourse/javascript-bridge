@@ -42,6 +42,9 @@ const InputView = {
 
         bridgeGame.move(direction);
         OutputView.printMap(bridgeGame.moveResult());
+
+        if (bridgeGame.isFail()) return this.readGameCommand(bridgeGame);
+        return this.readMoving();
       }
     );
   },
@@ -49,7 +52,23 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGame) {
+    Console.readLine(
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (retry) => {
+        const { errorMsg } = Validation.checkRetry(retry);
+        if (errorMsg) {
+          Console.print(errorMsg);
+          return this.readGameCommand();
+        }
+
+        if (retry === "R") {
+          bridgeGame.retry();
+          return this.readMoving();
+        }
+      }
+    );
+  },
 };
 
 module.exports = InputView;
