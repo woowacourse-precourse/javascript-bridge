@@ -1,6 +1,3 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
 const MissionUtils = require("@woowacourse/mission-utils");
 const { Console } = MissionUtils;
 const {
@@ -8,9 +5,14 @@ const {
   userMoveInput,
   gameRestartInput,
 } = require("./utils/inputValidate");
-const { GameStatus } = require("./GameStatus.js");
+
 const { INPUT_MESSAGE, COMMAND } = require("./Constant");
 const OutputView = require("./OutputView");
+const BridgeMaker = require("./BridgeMaker");
+const BridgeGame = require("./BridgeGame");
+/**
+ * 사용자로부터 입력을 받는 역할을 한다.
+ */
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
