@@ -17,6 +17,7 @@ const OutputView = {
   printMap(bridgeGamePresenter, { upperBridge, lowerBridge }) {
     Console.print(upperBridge.join(" "));
     Console.print(lowerBridge.join(" "));
+    this.printLineBreak();
     bridgeGamePresenter.checkNextMove();
   },
 
@@ -33,6 +34,10 @@ const OutputView = {
     Console.print(OUTPUT.printTrialResult(totalTrial));
 
     Console.close();
+  },
+
+  printLineBreak() {
+    Console.print("");
   },
 
   printError(errorMsg) {

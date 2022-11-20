@@ -40,6 +40,7 @@ class BridgeGame {
   }
 
   createBridgeModel(size) {
+    OutputView.printLineBreak();
     const bridgeArr = BridgeMaker.makeBridge(size, this.generateRandomNumber);
     this.bridgeModel = new Bridge(bridgeArr);
     this.getPlayerMove();
