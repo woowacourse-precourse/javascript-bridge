@@ -6,6 +6,9 @@ class Validation {
   isUpOrDown(input) {
     if (input !== "U" && input !== "D") throw "[ERROR] U 또는 D 만 입력 가능";
   }
+  isRestartOrQuit(input) {
+    if (input !== "R" && input !== "Q") throw "[ERROR] R 또는 Q 만 입력 가능";
+  }
 }
 
 module.exports = Validation;
