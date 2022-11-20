@@ -1,13 +1,51 @@
+const { BRIDGE } = require("./constants/data");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  movingLog;
+  constructor() {
+    this.movingLog = { upper: [], lower: [] };
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move(userInput, bridge) {
+    const currentZone = this.movingLog.upper.length;
+    if (userInput === BRIDGE.UPPER_ZONE)
+      return this.moveUpper(userInput, bridge, currentZone);
+    return this.moveLower(userInput, bridge, currentZone);
+  }
+
+  /**
+   * 유저가 위 칸으로 이동할 때의 메서드
+   */
+  moveUpper(userInput, bridge, currentZone) {
+    if (userInput === bridge[currentZone]) {
+      this.movingLog.upper.push(BRIDGE.RIGHT_ZONE);
+      this.movingLog.lower.push(BRIDGE.WRONG_ZONE);
+    }
+    if (userInput !== bridge[currentZone]) {
+      this.movingLog.upper.push(BRIDGE.WRONG_ZONE);
+      this.movingLog.lower.push(BRIDGE.RIGHT_ZONE);
+    }
+  }
+  /**
+   * 유저가 아래 칸으로 이동할 때의 메서드
+   */
+  moveLower(userInput, bridge, currentZone) {
+    if (userInput === bridge[currentZone]) {
+      this.movingLog.lower.push(BRIDGE.RIGHT_ZONE);
+      this.movingLog.upper.push(BRIDGE.WRONG_ZONE);
+    }
+    if (userInput !== bridge[currentZone]) {
+      this.movingLog.lower.push(BRIDGE.WRONG_ZONE);
+      this.movingLog.upper.push(BRIDGE.RIGHT_ZONE);
+    }
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
