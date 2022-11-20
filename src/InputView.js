@@ -51,7 +51,7 @@ const InputView = {
       }
       
       var temp = new BRIDGE_GAME;
-      var word = temp.move(input, count, i, bridge, bridgeMap, tryCount);
+      var word = temp.move(input, count, i, bridge);
 
       switch (word) {
         case "Success":
@@ -106,7 +106,7 @@ const InputView = {
       }
       
       var temp = new BRIDGE_GAME;
-      var word = temp.retry(input, count, bridge, bridgeMap, tryCount);
+      var word = temp.retry(input);
 
       switch (word) {
         case "Retry":
