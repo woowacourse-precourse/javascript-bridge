@@ -39,11 +39,10 @@ class App {
     const lower = this.makeLine(this.lowerTrack);
     return [upper, lower];
   }
-  gameResultPrint(winOrLose) {
-    const result = winOrLose
-      ? OUTPUT_MESSAGE.SUCCESS_RESULT
-      : OUTPUT_MESSAGE.FAILURE_RESULT;
-    MissionUtils.Console.print(result);
+  gameResultPrint(count, winOrLose) {
+    const result = winOrLose ? SUCCESS_RESULT : FAILURE_RESULT;
+    MissionUtils.Console.print(SUCCESS_OR_FAILURE + result);
+    MissionUtils.Console.print(TOTAL_ATTEMPT + count);
   }
   moveing(movePoint, obstacle) {
     return obstacle === movePoint ? true : false;
@@ -51,15 +50,15 @@ class App {
   BridgeMove() {
     const movePoint = InputView.readMoving();
     this.bridge.forEach((obstacle) => {
-      if (!moveing(movePoint, obstacle)) {
+      if (!this.moveing(movePoint, obstacle)) {
         this.gameMap = this.bridgeDrawing(movePoint);
         OutputView.printMap(this.gameMap);
-        return this.gameResultPrint(false);
+        return false;
       }
     });
     this.gameMap = this.bridgeDrawing(movePoint);
     OutputView.printMap(this.gameMap);
-    return this.gameResultPrint(true);
+    return true;
   }
   BridgeMaker() {
     try {
@@ -71,7 +70,14 @@ class App {
     } catch (error) {
       console.log(error);
     }
-    this.BridgeMove();
+    let result = false;
+    let count = 0;
+    // while (1) {
+    //   result = this.BridgeMove();
+    //   this.count++;
+    //   if (this.reStart(result)) break;
+    // }
+    this.gameResultPrint(count, result);
   }
   play() {
     OutputView.gameStart();
