@@ -27,7 +27,8 @@ const OutputView = {
     const resultArr = [MESSAGE.FAIL, MESSAGE.SUCCESS];
     MissionUtils.Console.print(MESSAGE.RESULT);
     this.printMap(bridgeResult);
-    MissionUtils.Console.print(`\n${MESSAGE.SUCCESSORNOT}${resultArr[result]}`);
+
+    MissionUtils.Console.print(`${MESSAGE.SUCCESSORNOT}${resultArr[result]}`);
     MissionUtils.Console.print(`${MESSAGE.TOTALATTEMPTS}${tryCount}`);
     MissionUtils.Console.close();
   },
