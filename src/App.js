@@ -1,8 +1,10 @@
+const GameInfo = require("./GameInfo");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 
 class App {
   constructor() {
+    GameInfo.numberOfPlayGames = 0;
   }
 
   play() {
