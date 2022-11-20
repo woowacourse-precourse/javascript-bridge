@@ -9,35 +9,10 @@ class BridgeGame {
    */
   move(input, count, i, bridge) { 
     if(i==count){
-      if (bridge[i] == input){
-        return "Success";
-      }
-      else{
-        if (i == 0){
-          return "PrintFirstX";
-        }
-        else{
-          return "PrintX";
-        }
-      }
+      return iSameCount(input, i, bridge);
     }
     else{
-      if (bridge[i] == input){
-          if (i == 0){
-            return "PrintFirstO";
-          }
-          else{
-            return "PrintO"
-          }
-      }    
-      else{
-        if (i == 0){
-          return "PrintFirstX";
-        }
-        else{
-          return "PrintX";
-        }
-      }
+      return idifferentCount(input, i, bridge);
     }
   }
 
@@ -55,5 +30,44 @@ class BridgeGame {
     }
   }
 }
+
+function iSameCount(input, i, bridge){
+  if (bridge[i] == input){
+    return "Success";
+  }
+  else{
+    return iSameZero(i);
+  }
+  
+}
+
+function iSameZero(i){
+  if (i == 0){
+    return "PrintFirstX";
+  }
+  else{
+    return "PrintX";
+  }
+}
+
+function idifferentCount(input, i, bridge){
+  if (bridge[i] == input){
+    return iSameInput(i);
+  }    
+  else{
+    return iSameZero(i);
+  }
+}
+
+function iSameInput(i){
+  if (i == 0){
+    return "PrintFirstO";
+  }
+  else{
+    return "PrintO"
+  }
+}
+
+
 
 module.exports = BridgeGame;

@@ -43,6 +43,7 @@ const InputView = {
       
       var temp = new BRIDGE_GAME;
       var word = temp.move(input, count, i, bridge);
+      MISSIONUTILS.Console.print(word);
 
       moveSwitch(word, count, i, bridge, bridgeMap, tryCount);
     });
