@@ -21,6 +21,10 @@ const OutputView = {
     Console.print(`${TEXT.TOTAL_ATTEMPT_CNT}: ${attemptCnt}`);
     Console.close();
   },
+
+  printError(erroText) {
+    Console.print(erroText);
+  },
 };
 
 module.exports = OutputView;

@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { SIZE, ERROR, ISALLOW } = require("../../utils/constants");
+const OutputView = require("../../View/OutputView");
 
 class BridgeSize {
   #input;
@@ -13,7 +14,7 @@ class BridgeSize {
       if (this.isAllowNumber() || this.isAllowRange()) throw new Error();
       return ISALLOW.TRUE;
     } catch (error) {
-      Console.print(`\n${ERROR.BRIDGE_SIZE}`);
+      OutputView.printError(`\n${ERROR.BRIDGE_SIZE}`);
       return ISALLOW.FALSE;
     }
   }

@@ -1,4 +1,4 @@
-const { Console } = require("@woowacourse/mission-utils");
+const OutputView = require("../../View/OutputView");
 const { ERROR, COMMAND, ISALLOW } = require("../../utils/constants");
 
 class GameCommand {
@@ -13,7 +13,7 @@ class GameCommand {
       if (this.isAllowOrder()) throw new Error();
       return ISALLOW.TRUE;
     } catch (e) {
-      Console.print(`\n${ERROR.GAMECOMMAND}`);
+      OutputView.printError(`\n${ERROR.GAMECOMMAND}`);
       return ISALLOW.FALSE;
     }
   }
