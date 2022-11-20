@@ -40,17 +40,27 @@ const InputView = {
    */
   readMoving() {
     Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D", (selectUpOrDown) => {
-      bridgeGame.move(this.createBridge, selectUpOrDown);
-      this.userPickedIsWrong(userBridgeCorrect);
-      this.readMoving();
-      OutputView.printResult(userBridgeCorrect[0] , userBridgeCorrect[1] , bridgeGame.attemptCount);
-      this.readGameCommand();
+      this.checkUserMoveException(selectUpOrDown);
     });
   },
 
   userPickedIsWrong(userBridgeCorrect){
     if(userBridgeCorrect[0].includes("X") || userBridgeCorrect[1].includes("X")){
       this.readGameCommand();
+    }
+  },
+
+  checkUserMoveException(selectUpOrDown){
+    try{
+      new CheckUserMove(selectUpOrDown);
+      bridgeGame.move(this.createBridge, selectUpOrDown);
+      this.userPickedIsWrong(userBridgeCorrect);
+      this.readMoving();
+      OutputView.printResult(userBridgeCorrect[0] , userBridgeCorrect[1] , bridgeGame.attemptCount);
+      this.readGameCommand();
+    } catch(err){
+      Console.print(err);
+      this.readMoving();
     }
   },
 
