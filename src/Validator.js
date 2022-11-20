@@ -10,6 +10,12 @@ const Validator = {
       throw Error;
     }
   },
+
+  errorIfMovingInvalid(moving) {
+    if (moving !== COMMAND.MOVING_UP && moving !== COMMAND.MOVING_DOWN) {
+      throw Error;
+    }
+  },
 };
 
 module.exports = Validator;
