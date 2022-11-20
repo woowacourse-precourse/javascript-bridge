@@ -31,4 +31,8 @@ const MESSAGES = {
   },
 };
 
-module.exports = { MESSAGES };
+const ALLOWED_CHAR = {
+  MOVE: ["U", "D"],
+  RETRY: ["R", "Q"],
+};
+module.exports = { MESSAGES, ALLOWED_CHAR };
