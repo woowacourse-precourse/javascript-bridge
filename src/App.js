@@ -1,16 +1,9 @@
+const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('./InputView');
-
+const BridgeGame = require('./BridgeGame');
 class App {
   play() {
-    this.letter = InputView.readBridgeSize();
-  }
-
-  desideMove() {}
-
-  movement() {
-    console.log('돌아왔다!');
-    console.log(letter);
-    console.log(answerArr);
+    InputView.start();
   }
 }
 const app = new App();
