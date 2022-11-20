@@ -14,6 +14,11 @@ class GameResult {
   getResult() {
     return this.#resultMap;
   }
-}
 
+  calcutateMatch(index, value) {
+    this.setResult(index, value);
+    const existing = this.#resultMap.get(index);
+    return existing.machine === existing.player;
+  }
+}
 module.exports = GameResult;
