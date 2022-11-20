@@ -39,6 +39,7 @@ class BridgeController {
   onBridgeSizeInput(bridgeLengthInput) {
     this.validateBridgeLengthInput(bridgeLengthInput);
     this.bridgeModel.setBridge(this.getCreatedBridge(bridgeLengthInput));
+    this.mainController.readUserMovingInput();
   }
 }
 

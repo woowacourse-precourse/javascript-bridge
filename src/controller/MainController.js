@@ -13,6 +13,14 @@ class MainController {
     mainController.bridgeController.onBridgeSizeInput(bridgeLengthInput);
   }
 
+  onUserMovingInput(userMovingInput, mainController) {
+    mainController.userController.onUserMovingInput(userMovingInput);
+  }
+
+  readUserMovingInput() {
+    InputView.readMoving(this.onUserMovingInput, this);
+  }
+
   init() {
     this.userController.increaseTryCount();
     if (this.userController.getTryCount() === 1) {

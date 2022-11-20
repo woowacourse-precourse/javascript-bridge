@@ -1,5 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { BRIDGE_INPUT_MESSAGES } = require("../constants/Messages");
+const {
+  BRIDGE_INPUT_MESSAGES,
+  USER_MOVE_MESSAGES,
+} = require("../constants/Messages");
 
 const InputView = {
   /**
@@ -16,7 +19,11 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(callbackFunction, controller) {
+    Console.readLine(USER_MOVE_MESSAGES.INPUT, (movingInput) =>
+      callbackFunction(movingInput, controller)
+    );
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
