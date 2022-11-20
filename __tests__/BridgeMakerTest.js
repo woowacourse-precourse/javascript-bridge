@@ -14,19 +14,40 @@ const doMultipleMocks = (arr) => {
 
 describe('[BridgeMaker] 랜덤 값이 결정되면 올바른 다리 데이터를 반환해야 한다.', () => {
   test('', () => {
-    doMultipleMocks([1, 0, 0, 1, 1, 1]);
+    doMultipleMocks(['1', '0', '0', '1', '1', '1']);
     const testResult = BridgeMaker.makeBridge(6, testFunction);
     expect(testResult).toEqual(['U', 'D', 'D', 'U', 'U', 'U']);
   });
 
   test('', () => {
-    doMultipleMocks([1, 0, 1]);
+    doMultipleMocks(['1', '0', '1']);
     const testResult = BridgeMaker.makeBridge(3, testFunction);
     expect(testResult).toEqual(['U', 'D', 'U']);
   });
 
   test('', () => {
-    doMultipleMocks([0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0]);
+    doMultipleMocks([
+      '0',
+      '0',
+      '0',
+      '0',
+      '0',
+      '1',
+      '1',
+      '1',
+      '1',
+      '1',
+      '0',
+      '0',
+      '1',
+      '1',
+      '1',
+      '0',
+      '1',
+      '0',
+      '1',
+      '0',
+    ]);
     const testResult = BridgeMaker.makeBridge(20, testFunction);
     expect(testResult).toEqual([
       'D',
