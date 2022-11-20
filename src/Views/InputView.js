@@ -4,6 +4,7 @@ const { generate } = require('../BridgeRandomNumberGenerator');
 const { 
   isValidateInputBridgeSize,
   isValidateInputMoveDirection,
+  isValidateInputGameCommand,
 } = require('../Validate');
 
 
@@ -42,6 +43,7 @@ const InputView = {
   readGameCommand() {
     let gameOption;
     Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",(option) => {
+      if (isValidateInputGameCommand(option)) return gameOption = '[ERROR]';
       gameOption = option;
     })
     return gameOption;
