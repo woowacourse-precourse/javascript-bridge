@@ -27,32 +27,43 @@ class BridgeGameController {
 
       InputView.readMoving(this.movingByUser.bind(this));
     } catch (error) {
-      Console.print(error);
+      Console.print(error.message);
+      this.start();
     }
   }
 
   movingByUser(move) {
-    isValidateMoveInput(move);
-    const isWrongAnswer = this.bridgeGame.move(move, this.bridge);
-    OutputView.printMap(this.bridge);
+    try {
+      isValidateMoveInput(move);
+      const isWrongAnswer = this.bridgeGame.move(move, this.bridge);
+      OutputView.printMap(this.bridge);
 
-    if (isWrongAnswer) {
-      InputView.readGameCommand(this.askWantRetry.bind(this));
-    } else {
-      if (this.bridge.data.turn >= this.bridge.data.length) {
-        OutputView.printResult(true, this.bridgeGame.retryCount, this.bridge);
-      } else InputView.readMoving(this.movingByUser.bind(this));
+      if (isWrongAnswer) {
+        InputView.readGameCommand(this.askWantRetry.bind(this));
+      } else {
+        if (this.bridge.data.turn >= this.bridge.data.length) {
+          OutputView.printResult(true, this.bridgeGame.retryCount, this.bridge);
+        } else InputView.readMoving(this.movingByUser.bind(this));
+      }
+    } catch (error) {
+      Console.print(error.message);
+      InputView.readMoving(this.movingByUser.bind(this));
     }
   }
 
   askWantRetry(answer) {
-    isValidateRetryInput(answer);
-    if (answer === 'R') {
-      this.bridgeGame.retry(this.bridge);
-      this.bridgeGame.retryCount += 1;
-      InputView.readMoving(this.movingByUser.bind(this));
-    } else {
-      OutputView.printResult(false, this.bridgeGame.retryCount, this.bridge);
+    try {
+      isValidateRetryInput(answer);
+      if (answer === 'R') {
+        this.bridgeGame.retry(this.bridge);
+        this.bridgeGame.retryCount += 1;
+        InputView.readMoving(this.movingByUser.bind(this));
+      } else {
+        OutputView.printResult(false, this.bridgeGame.retryCount, this.bridge);
+      }
+    } catch (error) {
+      Console.print(error.message);
+      InputView.readGameCommand(this.askWantRetry.bind(this));
     }
   }
 }
