@@ -30,6 +30,7 @@ const InputView = {
   readMoving(bridgeGame) {
     Console.readLine(INPUT_MOVE, (input) => {
       isInvalidMoving(input) && this.readMoving(bridgeGame);
+      bridgeGame.move(input);
     });
   },
 
