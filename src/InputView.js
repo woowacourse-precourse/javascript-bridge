@@ -41,7 +41,18 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    return new Promise((resolve, reject) => {
+      MissionUtils.Console.readLine(MESSAGE.INPUT_GAME_COMMAND, (command) => {
+        try {
+          Validator.checkGameCommand(command);
+          resolve(command);
+        } catch (error) {
+          reject(error);
+        }
+      });
+    });
+  },
 };
 
 module.exports = InputView;

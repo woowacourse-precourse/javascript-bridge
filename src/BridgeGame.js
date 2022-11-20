@@ -1,5 +1,5 @@
 const OutputView = require('./OutputView');
-const { MESSAGE } = require('./constants');
+const { MESSAGE, INPUT_FORMAT } = require('./constants');
 const InputView = require('./InputView');
 const { generate: generateRandomNumber } = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
@@ -53,11 +53,9 @@ class BridgeGame {
       const moved = await this.move(current);
       this.gameResult.printHistory();
 
-      if (moved) current += 1;
-      if (current === until) break;
+      moved ? (current += 1) : await this.command();
+      if (current === until) return this.finish('success');
     }
-
-    return console.log('게임 성공!!!');
   }
 
   // 리팩토링 사항
@@ -69,6 +67,17 @@ class BridgeGame {
   }
 
   async retry() {}
+
+  async getGameCommand() {
+    try {
+      return await InputView.readGameCommand();
+    } catch (error) {
+      OutputView.printMessage(error.message);
+      return this.getGameCommand();
+    }
+  }
+
+  // async finish(type) {}
 }
 
 module.exports = BridgeGame;
