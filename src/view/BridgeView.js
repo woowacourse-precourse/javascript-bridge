@@ -13,6 +13,7 @@ class BridgeView {
   getBridgeLength(printLength) {
     const validation = (length) => {
       this.inputValidation(length, printLength, TYPE.SIZE);
+      this.getBridgeLength(printLength);
     }
     this.input.readBridgeSize(validation);
   }
@@ -39,17 +40,16 @@ class BridgeView {
     this.output.printResult(isRight, tryCount, map)
   }
 
-  printError(type) {
-    return this.output.printError(type)
+  printError(type, callback) {
+    return this.output.printError(type, callback)
   }
 
   inputValidation(input, callback, type) {
     try {
       Validation[type](input);
       return callback(input);
-    } catch (err) {
-      const fnName = this.printError(err);
-      return this[fnName](callback);
+    } catch (errorType) {
+      this.printError(errorType);
     }
   }
 
