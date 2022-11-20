@@ -22,6 +22,9 @@ const OutputView = {
   printErrorMessageAboutBridgeSize(){
     MissionUtils.Console.print("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
   },
+  printErrorMessageAboutMoving(){
+    MissionUtils.Console.print("[ERROR] 이동한 칸은 대문자 U 또는 D 여야 합니다.");
+  },
 };
 
 module.exports = OutputView;
