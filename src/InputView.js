@@ -65,7 +65,12 @@ const InputView = {
         if (this.checkMovement(movement)) {
           return this.readMoving(bridge, bridgeGame);
         }
+
         bridgeGame.move(movement, bridge);
+        OutputView.printMap(
+          bridgeGame.getUpResult(),
+          bridgeGame.getDownResult()
+        );
 
         if (bridgeGame.getCross()) {
           if (bridgeGame.getSuccess()) {

@@ -117,8 +117,6 @@ class BridgeGame {
       console.log("su");
       this.setSuccess();
     }
-
-    OutputView.printMap(this.getUpResult(), this.getDownResult());
   }
 
   /**
