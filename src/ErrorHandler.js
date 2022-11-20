@@ -1,22 +1,13 @@
 const OutputView = require("../src/console/OutputView");
 
 class ErrorHandler {
-  static test(validTarget, doCallBack, errorCallback) {
+  static test(validTarget, errorCallback, doCallBack) {
     try {
       validTarget();
-      doCallBack();
+      if (doCallBack) doCallBack();
     } catch (error) {
       OutputView.printLine(error.message);
       errorCallback();
-    }
-  }
-
-  static testSimple(validTarget, errorCallBack) {
-    try {
-      validTarget();
-    } catch (error) {
-      OutputView.printLine(error.message);
-      errorCallBack();
     }
   }
 }

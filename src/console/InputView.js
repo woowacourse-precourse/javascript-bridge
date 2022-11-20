@@ -10,7 +10,7 @@ const InputView = {
       const target = () => Validate.bridgeLength(size);
       const doCallBack = () => setBridge(size);
 
-      ErrorHandler.test(target, doCallBack, errorCallBack);
+      ErrorHandler.test(target, errorCallBack, doCallBack);
       nextCallBack();
     });
   },
@@ -21,9 +21,9 @@ const InputView = {
   readMoving(moveCallback, printCallback, errorCallBack) {
     MissionUtils.Console.readLine(Message.BRIDGE_DIRECTION, (direction) => {
       const target = () => Validate.bridgeDirection(direction);
-      const callBack = () => moveCallback(direction);
+      const doCallBack = () => moveCallback(direction);
 
-      ErrorHandler.test(target, callBack, errorCallBack);
+      ErrorHandler.test(target, errorCallBack, doCallBack);
       printCallback();
     });
   },
@@ -35,7 +35,7 @@ const InputView = {
     MissionUtils.Console.readLine(Message.REPLAY, (answer) => {
       const target = () => Validate.restart(answer);
 
-      ErrorHandler.testSimple(target, errorCallBakc);
+      ErrorHandler.test(target, errorCallBakc);
       if (answer === Constant.RETRY.REPLAY) reset();
       if (answer === Constant.RETRY.QUIT) printResult();
     });
