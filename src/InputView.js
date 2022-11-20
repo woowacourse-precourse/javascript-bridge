@@ -52,13 +52,10 @@ const InputView = {
   printMoveResult() {
     OutputView.printMap(bridgeGame.getMoveResult());
     if (bridgeGame.isFail()) this.readGameCommand();
-    else if (bridgeGame.isSuccess()) OutputView.printResult();
+    else if (bridgeGame.isSuccess()) OutputView.printResult(bridgeGame.getGameResult());
     else this.readMoving();
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand() {
     Console.readLine(MESSAGE_PROCESS.INPUT_GAME_COMMAND, this.setGameCommand.bind(this));
   },
@@ -68,7 +65,7 @@ const InputView = {
       bridgeGame.retry();
       this.readMoving();
     }
-    if (command === 'Q') OutputView.printResult();
+    if (command === 'Q') OutputView.printResult(bridgeGame.getGameResult());
   },
 
   valitateGameCommand(command) {
@@ -83,5 +80,5 @@ const InputView = {
     }
   }
 };
-InputView.readBridgeSize();
+
 module.exports = InputView;
