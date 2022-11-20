@@ -10,7 +10,12 @@ const Validation = {
   },
   checkMoving(movingInput){
     if (!(movingInput==='U' || movingInput==='D')){
-      throw new Error("[ERROR] 이동할 칸은 U 또는 D 로 입력해야 합니다.")
+      throw new Error("[ERROR] 이동할 칸은 U 또는 D 로 입력해야 합니다.");
+    }
+  },
+  checkOption(optionInput){
+    if (!(optionInput==='Q' || optionInput==='R')){
+      throw new Error("[ERROR] 종료 옵션은 R 또는 Q 로 입력해야 합니다.");
     }
   }
 }
