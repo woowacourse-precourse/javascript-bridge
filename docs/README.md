@@ -20,6 +20,7 @@
 - randomBridge() : bridge의 길이와 RandomNumberGenerator함수를 BridgeMaker의 파라미터로 보내준다
 -> 오류처리 없음
 
+[!] 오류 : 게임을 다시시작할때 배열 초기화가 안됨
 ---
 
 ## 에러처리
@@ -40,7 +41,9 @@ ex) bridge가 5면 배열은 [1,1,0,1,1] 이런식으로 랜덤하게 생성됨 
 bridgePrinterAbove라는 배열이 ['empty','O','O'] 이런식을 되어있다고 가정
 JSON.stringify 사용???? Ok
 
--> 게임이 끝나면 printResult에 보내는 로직도 추가
+-> 게임이 끝나면 printResult에 보내는 로직도 추가 [O]
+
+[!] 문제 발생
 
 
 ### BrideGame
