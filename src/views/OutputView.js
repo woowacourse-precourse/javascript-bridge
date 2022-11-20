@@ -15,8 +15,7 @@ const OutputView = {
    */
   printMap(trials) {
     const [upperSide, lowerSide] = this.getBridgeMap(trials);
-    Console.print(upperSide);
-    Console.print(lowerSide);
+    Console.print(`${upperSide}\n${lowerSide}\n`);
   },
 
   getBridgeMap(trials) {
@@ -39,6 +38,10 @@ const OutputView = {
     }
 
     return [upperSide, lowerSide];
+  },
+
+  newLine() {
+    Console.print('');
   },
 
   printError(error) {

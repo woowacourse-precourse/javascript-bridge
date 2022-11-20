@@ -37,6 +37,7 @@ class BridgeGame {
     const bridge = this.bridgeMaker.makeBridge(size, this.bridgeRandomNumberGenerator.generate);
     this.bridgeModel.setBridge(bridge);
 
+    this.outputView.newLine();
     this.askMoveDirection();
   }
 
