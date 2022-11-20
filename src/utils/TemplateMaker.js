@@ -19,8 +19,8 @@ class TemplateMaker {
 
   static #makeLogTemplate(logs, directionSymbol) {
     const template = logs
-      .map(({ isCrossable, movingDirection }) => {
-        const isSymbolSide = movingDirection === directionSymbol;
+      .map(({ isCrossable, direction }) => {
+        const isSymbolSide = direction === directionSymbol;
 
         if (isCrossable && isSymbolSide) return SYMBOLS.success;
         if (!isCrossable && isSymbolSide) return SYMBOLS.fail;

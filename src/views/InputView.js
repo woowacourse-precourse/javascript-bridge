@@ -7,7 +7,7 @@ const InputView = {
   },
 
   readMoving(callback) {
-    Console.readLine(REQUEST_MSG.movingDirection, callback);
+    Console.readLine(REQUEST_MSG.direction, callback);
   },
 
   readGameCommand(callback) {

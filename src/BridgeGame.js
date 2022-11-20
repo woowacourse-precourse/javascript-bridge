@@ -16,15 +16,15 @@ class BridgeGame {
     this.#bridge = builder.buildBridge(size);
   }
 
-  move(movingDirection) {
+  move(direction) {
     const playerPosition = this.#movementLogs.length; // 필드 round 대체 고민중...
-    const isCrossable = this.#bridge.isCrossable(playerPosition, movingDirection);
+    const isCrossable = this.#bridge.isCrossable(playerPosition, direction);
 
-    this.saveMovementLog(isCrossable, movingDirection);
+    this.saveMovementLog(isCrossable, direction);
   }
 
-  saveMovementLog(isCrossable, movingDirection) {
-    this.#movementLogs.push({ isCrossable, movingDirection });
+  saveMovementLog(isCrossable, direction) {
+    this.#movementLogs.push({ isCrossable, direction });
   }
 
   retry() {
@@ -44,6 +44,10 @@ class BridgeGame {
     const isSucceededMove = this.isSucceededMove();
 
     return isEveryBlockPassed && isSucceededMove;
+  }
+
+  getTryCount(){
+    this.#movementLogs.
   }
 
   getMovementLogs() {
