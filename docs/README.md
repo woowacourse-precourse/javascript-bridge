@@ -14,10 +14,10 @@
 - [x] get bridge size input from user
     - [x] check if input is valid (e.g., 3~20)
 - [x] make bridge of designated size (e.g., ["U", "D", "D"])
-- [ ] get movement input from user
-    - [ ] check if input is valid (e.g., "U" or "D")
-    - [ ] move player (e.g., "O" or "X")
-        - [ ] compare user input with the bridge answer (e.g., ["U", "D", "D"]) and record "O" or "X"
+- [x] get movement input from user
+    - [x] check if input is valid (e.g., "U" or "D")
+    - [x] move player (e.g., "O" or "X")
+        - [x] compare user input with the bridge answer (e.g., ["U", "D", "D"]) and record "O" or "X"
 - [ ] print movement status
 - [ ] get game command input from user
     - [ ] check if input is valid (e.g., "R" or "Q")
