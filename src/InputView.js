@@ -7,10 +7,8 @@ const Vaild = require("./Vaild");
  */
 const InputView = {
   inputMethod(message, callback, vaild) {
-    let answer;
     Console.readLine(message, (input) => {
-      answer = input;
-      if (vaild(answer)) return callback(answer);
+      if (vaild(input)) return callback(input);
       this.inputMethod(message, callback, vaild);
     });
   },
