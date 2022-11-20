@@ -4,13 +4,12 @@ const { makeBridge } = require("../Model/BridgeMaker");
 const BridgeGame = require("../Model/BridgeGame");
 const { generate } = require("../Model/BridgeRandomNumberGenerator");
 const { GAME, MESSAGE } = require("../Utils/Constants");
-const Validate = require("../Validate");
+const Validate = require("../Model/Validate");
 
 class App {
   constructor() {
     this.validate = new Validate();
     this.bridgeGame = null;
-    this.bridgeSize = 0;
   }
 
   play() {
@@ -56,7 +55,9 @@ class App {
   }
 
   isLastPosition(playerBridge) {
-    return playerBridge.length >= this.bridgeSize;
+    const bridgeSize = this.bridgeGame.getBridgeSize();
+
+    return playerBridge.length >= bridgeSize;
   }
 
   printCurrBridgeState(upperBridge, lowerBridge) {
