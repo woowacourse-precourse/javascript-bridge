@@ -20,7 +20,7 @@
 - randomBridge() : bridge의 길이와 RandomNumberGenerator함수를 BridgeMaker의 파라미터로 보내준다
 -> 오류처리 없음
 
-[!] 오류 : 게임을 다시시작할때 배열 초기화가 안됨
+[!] 오류 : 게임을 다시시작할때 배열 초기화가 안됨 -> BridgeGame을 통해 초기화가 되게
 ---
 
 ## 에러처리
