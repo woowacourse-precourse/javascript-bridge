@@ -29,22 +29,27 @@ class BridgeGame {
   }
 
   /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
+   * 사용자가 칸을 이동하고, 라운드를 진행시킬 때 사용하는 메서드
    * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {
-    let gameStatus = [...this.getGameStatus(), this.#up, this.#down];
+  move(move) {
+    if (move !== this.#bridge.getMap()[this.#round]) {
+      if (move === MOVE_VALUE.UP) this.addUp(MOVE_VALUE.INVALID);
+      if (move === MOVE_VALUE.DOWN) this.addDown(MOVE_VALUE.INVALID);
+    } else {
+      if (move === MOVE_VALUE.UP) this.addUp(MOVE_VALUE.VALID);
+      if (move === MOVE_VALUE.DOWN) this.addDown(MOVE_VALUE.VALID);
+    }
+
     this.#round += 1;
-    return gameStatus;
   }
 
   /**
-   * 게임에서 다리의 지도, 현재 라운드를 리턴하는 메서드
+   * 게임에서 위쪽, 아래쪽 상태를 담은 리스트를 리턴하는 메서드
    * <p>
    */
-  getGameStatus() {
-    return [this.#bridge.getMap(), this.#round];
+  getUpDownStatus() {
+    return [this.#up, this.#down];
   }
 
   /**

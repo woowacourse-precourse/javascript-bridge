@@ -26,10 +26,12 @@ const InputView = {
   readMoving(bridgeGame) {
     inputUserValue(GAME_MESSAGE.INPUT_MOVE, (move) => {
       isMoveValid(move);
-      if (move === MOVE_VALUE.UP) bridgeGame.addUp(MOVE_VALUE.VALID);
-      if (move === MOVE_VALUE.DOWN) bridgeGame.addDown(MOVE_VALUE.VALID);
 
-      OutputView.printMap(bridgeGame, move);
+      bridgeGame.move(move);
+
+      let [up, down] = bridgeGame.getUpDownStatus();
+
+      OutputView.printMap(up, down);
       this.readMoving(bridgeGame);
     });
   },

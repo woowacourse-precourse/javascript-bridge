@@ -7,7 +7,7 @@ const MOVE_VALUE = Object.freeze({
   UP: "U",
   DOWN: "D",
   VALID: "O",
-  NOT_VALID: "X",
+  INVALID: "X",
 });
 
 const GAME_MESSAGE = Object.freeze({
