@@ -8,20 +8,23 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickNumberInRange);
 };
 
-describe('BridgeGame 클래스 테스트', () => {
-  const randoms = ['1', '0', '1'];
+const getBridgeGame = (random) => {
+  if (random) mockRandoms(random);
+  const bridgeGame = new BridgeGame(random.length);
 
+  return bridgeGame;
+};
+
+describe('BridgeGame 클래스 테스트', () => {
   test('move: 다리 중간에서 틀린 경우 false 반환', () => {
-    mockRandoms(randoms);
-    const bridgeGame = new BridgeGame(randoms.length);
+    const bridgeGame = getBridgeGame(['1', '0', '1']);
 
     expect(bridgeGame.move('U')).toEqual(true);
     expect(bridgeGame.move('U')).toEqual(false);
   });
 
   test('move: 다리 끝까지 이동한 경우 false 반환', () => {
-    mockRandoms(randoms);
-    const bridgeGame = new BridgeGame(randoms.length);
+    const bridgeGame = getBridgeGame(['1', '0', '1']);
 
     expect(bridgeGame.move('U')).toEqual(true);
     expect(bridgeGame.move('D')).toEqual(true);
@@ -29,8 +32,7 @@ describe('BridgeGame 클래스 테스트', () => {
   });
 
   test('isFailed: 다리 중간에서 틀린 경우 true 반환', () => {
-    mockRandoms(randoms);
-    const bridgeGame = new BridgeGame(randoms.length);
+    const bridgeGame = getBridgeGame(['1', '0', '1']);
 
     bridgeGame.move('U');
     expect(bridgeGame.isFailed()).toEqual(false);
@@ -40,8 +42,7 @@ describe('BridgeGame 클래스 테스트', () => {
   });
 
   test('isFinished: 다리 끝까지 이동한 경우 true 반환', () => {
-    mockRandoms(randoms);
-    const bridgeGame = new BridgeGame(randoms.length);
+    const bridgeGame = getBridgeGame(['1', '0', '1']);
 
     bridgeGame.move('U');
     expect(bridgeGame.isFinished()).toEqual(false);
@@ -58,7 +59,7 @@ describe('BridgeGame 클래스 테스트', () => {
     const upper = ['O', ' ', 'O'];
     const lower = [' ', 'O', ' '];
 
-    const bridgeGame = new BridgeGame(0);
+    const bridgeGame = getBridgeGame(['1', '0', '1']);
 
     expect(bridgeGame.getSingleResultArray('U', commands)).toEqual(upper);
     expect(bridgeGame.getSingleResultArray('D', commands)).toEqual(lower);
@@ -69,8 +70,7 @@ describe('BridgeGame 클래스 테스트', () => {
     const upper = ['O', ' ', 'O'];
     const lower = [' ', 'O', ' '];
 
-    mockRandoms(randoms);
-    const bridgeGame = new BridgeGame(randoms.length);
+    const bridgeGame = getBridgeGame(['1', '0', '1']);
 
     commands.forEach((direction) => bridgeGame.move(direction));
 
