@@ -17,7 +17,7 @@ class App {
 
   #bridge;
 
-  #gameEndConditionValue;
+  #appBridgeLength;
 
   #brdigeGame = new BridgeGame();
 
@@ -54,7 +54,7 @@ class App {
 
   runBridgeMake(bridgeAnswer) {
     this.#bridge = BridgeMaker.makeBridge(bridgeAnswer);
-    this.#gameEndConditionValue = this.#bridge.length;
+    this.#appBridgeLength = this.#bridge.length;
     return this.questionBridgeMove();
   }
 
@@ -80,7 +80,7 @@ class App {
   progressMovementTrue(moveAnswer) {
     this.#bridgeMap.handleMap(this.#moveStatement, moveAnswer);
     OutputView.printMap(this.#bridgeMap.getMap());
-    if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
+    if (this.#appBridgeLength === this.#brdigeGame.getBridgeLengthStatus()) {
       return this.progressGameEnd();
     }
     return this.questionBridgeMove();
