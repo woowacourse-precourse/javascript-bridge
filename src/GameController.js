@@ -49,7 +49,9 @@ class GameController {
   runProcess() {
     if (this.bridgeGame.isClearedGame()) {
       this.quit();
-    } else if (this.bridgeGame.isSucceededMove()) {
+      return;
+    }
+    if (this.bridgeGame.isSucceededMove()) {
       this.requestDirection();
       return;
     }
