@@ -8,12 +8,22 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize(bridge, count) {
+    this.readMoving(bridge, count);
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(bridge, count) {
+    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (upDown) => {
+      if (upDown == 'U') {
+        upDown = 0;
+      } else if (upDown == 'D') {
+        upDown = 1;
+      }
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

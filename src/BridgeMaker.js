@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const InputView = require("./InputView");
 const Console = MissionUtils.Console;
 const Random = MissionUtils.Random;
 /**
@@ -18,7 +19,9 @@ const BridgeMaker = {
       for (let i = 0; i < size; i++) {
         bridge[i] = BridgeRandomNumberGenerator.generate();
       }
-    })
+      let count = 0;
+      InputView.readBridgeSize(bridge, count);
+    });
   },
 };
 
