@@ -1,8 +1,8 @@
-const InputView = require('../src/InputView');
+const InputView = require('../src/view/InputView');
 
-const BridgeLengthException = require('../src/controller/validate/BridgeLengthException');
-const BridgeUpDownException = require('../src/controller/validate/BridgeUpDownException');
-const BridgeRestartExitException = require('../src/controller/validate/BridgeRestartExitException');
+const BridgeLengthException = require('../src/view/validate/BridgeLengthException');
+const BridgeUpDownException = require('../src/view/validate/BridgeUpDownException');
+const BridgeRestartExitException = require('../src/view/validate/BridgeRestartExitException');
 
 describe('입력한 다리 길이 테스트 - BridgeLengthException', () => {
   test.each([['a'], ['1'], ['21'], ['1 ']])('다리 길이가 3 ~ 20 이외의 숫자에 대한 예외처리', (input) => {
