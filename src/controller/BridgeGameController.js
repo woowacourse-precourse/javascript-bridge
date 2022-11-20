@@ -14,6 +14,9 @@ class BridgeGameController {
 
   set(length) {
     new BridgeLengthValidator(length).validate();
+
+    this.#bridgeGame = new BridgeGame(length);
+    this.#bridgeGame.setBridge();
   }
 }
 
