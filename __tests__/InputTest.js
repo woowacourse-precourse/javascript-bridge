@@ -12,4 +12,10 @@ describe("인풋 클래스 테스트", () => {
       Input.validBridgeSize("2");
     }).toThrow("[ERROR]");
   });
+
+  test("칸 이동시 U, D 입력이 아닌 경우", () => {
+    expect(() => {
+      Input.validMovePoint("Z");
+    }).toThrow("[ERROR]");
+  });
 });
