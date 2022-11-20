@@ -6,7 +6,7 @@ const {
   gameRestartInput,
 } = require("./utils/inputValidate");
 
-const { INPUT_MESSAGE, COMMAND } = require("./Constant");
+const { INPUT_MESSAGE, COMMAND, MOVING } = require("./Constant");
 const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
@@ -26,8 +26,12 @@ const InputView = {
         input,
         BridgeRandomNumberGenerator.generate
       );
-
-      this.readMoving();
+      const bridgeGame = new BridgeGame(
+        bridge,
+        MOVING.initialLists,
+        MOVING.count
+      );
+      this.readMoving(bridgeGame, bridge);
     });
   },
 

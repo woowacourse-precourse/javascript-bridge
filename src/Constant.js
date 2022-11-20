@@ -14,18 +14,13 @@ const INPUT_MESSAGE = {
   allCount: (count) => `\n총 시도한 횟수: ${count}`,
 };
 
-const RANGE = {
-  min: 3,
-  max: 20,
-};
-
 const MOVING = {
   random_up: "1",
   random_down: "0",
   up: "U",
   down: "D",
   initialLists: [[], []],
-  attempts: 1,
+  count: 1,
 };
 
 const BRIDGE = {
@@ -47,7 +42,6 @@ const RESULT = {
 module.exports = {
   ERROR_MESSAGE,
   INPUT_MESSAGE,
-  RANGE,
   MOVING,
   BRIDGE,
   COMMAND,
