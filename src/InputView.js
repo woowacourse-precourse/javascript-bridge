@@ -25,8 +25,19 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
 
+  readMoving() {
+    return new Promise((resolve, reject) => {
+      MissionUtils.Console.readLine(MESSAGE.INPUT_MOVING_DIRECTION, (direction) => {
+        try {
+          Validator.checkMovingDirection(direction);
+          resolve(direction);
+        } catch (error) {
+          reject(error);
+        }
+      });
+    });
+  },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */

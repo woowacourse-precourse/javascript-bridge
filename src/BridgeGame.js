@@ -32,6 +32,15 @@ class BridgeGame {
     const bridge = BridgeMaker.makeBridge(size, generateRandomNumber);
     this.bridge = bridge;
   }
+
+  async getMovingDirection() {
+    try {
+      return await InputView.readMoving();
+    } catch (error) {
+      OutputView.printMessage(error.message);
+      return this.getMovingDirection();
+    }
+  }
 }
 
 module.exports = BridgeGame;
