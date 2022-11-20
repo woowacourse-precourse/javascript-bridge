@@ -44,7 +44,7 @@ class App {
       try {
         Validator.checkBridgeInput(answer);
         this.runBridgeMake(+answer);
-        this.#appStatus = 2;
+        this.#appStatus = 3;
       } catch (e) {
         Utils.print(e);
         this.progressApp(this.#appStatus);
@@ -53,7 +53,6 @@ class App {
   }
 
   runBridgeMake(answer) {
-    this.#appStatus = 3;
     this.#bridge = BridgeMaker.makeBridge(answer);
     this.#gameEndConditionValue = this.#bridge.length;
     return this.questionBridgeMove();
