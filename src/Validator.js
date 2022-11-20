@@ -1,7 +1,7 @@
 const ERROR_MESSAGES = require('./utils/messages');
 
 const Validator = {
-  bridgeLength(size) {
+  bridgeSize(size) {
     if (
       typeof +size !== 'number' ||
       Number.isNaN(+size) ||
@@ -9,8 +9,6 @@ const Validator = {
       +size > 20
     )
       throw new Error(ERROR_MESSAGES.BRIDGE_SIZE);
-
-    return +size;
   },
 };
 
