@@ -8,7 +8,7 @@ const BridgeMovingValidator = {
    * @param {string} moving
    * @throws 유효하지 않은 이동인 경우 error를 throw한다.
    */
-  validateMoving(moving) {
+  validate(moving) {
     if (this.isInvalidMoving(moving)) {
       throw new Error(
         '[ERROR] 유효하지 않은 이동입니다. U 또는 D를 입력해 주세요.',

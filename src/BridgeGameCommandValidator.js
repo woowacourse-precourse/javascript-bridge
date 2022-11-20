@@ -8,7 +8,7 @@ const BridgeGameCommandValidator = {
    * @param {string} gameCommand
    * @throws 유효하지 않은 게임 명령인 경우 error를 throw한다.
    */
-  validateGameCommand(gameCommand) {
+  validate(gameCommand) {
     if (this.isInvalidGameCommand(gameCommand)) {
       throw new Error(
         '[ERROR] 유효하지 않은 명령입니다. 재시작을 원하면 R, 종료를 원하면 Q를 입력해 주세요.',

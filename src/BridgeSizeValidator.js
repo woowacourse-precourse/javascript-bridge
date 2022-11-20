@@ -11,7 +11,7 @@ const BridgeSizeValidator = {
    * @throws 숫자가 아닌 문자가 포함된 경우 error를 throw한다.
    * @throws 다리 길이 범위 이외의 값인 경우 error를 throw한다.
    */
-  validateBridgeSize(bridgeSizeInput) {
+  validate(bridgeSizeInput) {
     if (this.isNotNumber(bridgeSizeInput)) {
       throw new Error('[ERROR] 숫자가 아닌 문자가 입력되었습니다.');
     }
