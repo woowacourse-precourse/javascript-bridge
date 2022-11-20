@@ -24,8 +24,12 @@ const OutputView = {
      * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      * 메서드도 추가할 수 있다.
      */
-    printResult() {
-        console.log("결과출력");
+    printResult(upBridgeHistory, downBridgeHistory, result) {
+        // Console.print(MESSAGE.FINISH);
+        // OutputView.printMap(upBridgeHistory, downBridgeHistory);
+        // Console.print(result);
+        // Console.print(MESSAGE.TRY + this.#gameCount);
+        // Console.close();
     },
 
     printStart() {

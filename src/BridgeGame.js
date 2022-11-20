@@ -31,13 +31,6 @@ class BridgeGame {
         }
     }
 
-    getBridgeArray() {
-        return this.#bridgeArray;
-    }
-    getBridgeCount() {
-        return this.#bridgeCount;
-    }
-
     showFail(move) {
         // console.log("BridgeGame.showFail--------------");
         if (move === KEY.UP) {
@@ -61,12 +54,17 @@ class BridgeGame {
         // console.log("BridgeGame.isSuccess---------------------");
         const up = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
         if (this.#bridgeCount === this.#bridgeArray.length - 1) {
-            this.addGoodHistory(up);
+            this.addGoodMoveHistory(up);
             return true;
         }
     }
 
-    addGoodHistory(up) {
+    goodMove(up) {
+        this.addGoodMoveHistory(up);
+        this.#bridgeCount++;
+        OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory, this.#bridgeArray);
+    }
+    addGoodMoveHistory(up) {
         if (up) {
             this.#upBridgeHistory.push(STRUCTURE.GOOD);
             this.#downBridgeHistory.push(STRUCTURE.BLANK);
@@ -75,12 +73,6 @@ class BridgeGame {
             this.#upBridgeHistory.push(STRUCTURE.BLANK);
             this.#downBridgeHistory.push(STRUCTURE.GOOD);
         }
-    }
-
-    goodMove(up) {
-        this.addGoodHistory(up);
-        this.#bridgeCount++;
-        OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory, this.#bridgeArray);
     }
 
     retry(answer) {
@@ -96,18 +88,10 @@ class BridgeGame {
         this.#gameCount++;
     }
 
-    showSuccess() {
+    showResult(result) {
         Console.print(MESSAGE.FINISH);
         OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory);
-        Console.print(MESSAGE.SUCCESS);
-        Console.print(MESSAGE.TRY + this.#gameCount);
-        Console.close();
-    }
-
-    showFinish() {
-        Console.print(MESSAGE.FINISH);
-        OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory);
-        Console.print(MESSAGE.FAIL);
+        Console.print(result);
         Console.print(MESSAGE.TRY + this.#gameCount);
         Console.close();
     }

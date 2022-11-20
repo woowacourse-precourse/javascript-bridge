@@ -51,7 +51,6 @@ class Validation {
         const isKeyRestart = answer === KEY.RESTART;
         const isKeyQuit = answer === KEY.QUIT;
         if (isKeyRestart || isKeyQuit) {
-            console.log("flase반환");
             return false;
         }
         try {
