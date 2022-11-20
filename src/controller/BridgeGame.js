@@ -13,7 +13,6 @@ class BridgeGame {
   async execute() {
     printGameStart();
     this.#bridge = new Bridge(await readBridgeSize());
-    this.#bridge.print(); // deprecated
     this.move(0, await readMoving());
   }
 
@@ -23,10 +22,11 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   async move(level, command) {
-    if (level === this.#bridge.getLength() - 1) {
+    const result = this.#bridge.checkBridge(level, command);
+    if (result && level === this.#bridge.getLength() - 1) {
       return console.log('승리');
     }
-    if (this.#bridge.checkBridge(level, command)) {
+    if (result) {
       return this.move(level + 1, await readMoving());
     }
     return this.retry();

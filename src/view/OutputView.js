@@ -9,8 +9,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridge, index) {
-    console.log(bridge, index);
+  printMap(index, map) {
+    const convertText = (raw) => {
+      const text = JSON.stringify(raw.slice(0, index + 1));
+      return text.replaceAll('"', '').replaceAll(',', ' | ').replaceAll('[', '[ ').replaceAll(']', ' ]');
+    };
+    MissionUtils.Console.print(convertText(map.up));
+    MissionUtils.Console.print(convertText(map.down));
   },
 
   /**
