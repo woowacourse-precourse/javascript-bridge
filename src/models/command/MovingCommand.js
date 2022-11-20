@@ -17,6 +17,18 @@ class MovingCommand extends Command {
   static #isValid(command) {
     return command === GAME_RULE.UPSIDE || command === GAME_RULE.DOWNSIDE;
   }
+
+  isUpside() {
+    return this.getCommand() === GAME_RULE.UPSIDE;
+  }
+
+  isDownside() {
+    return this.getCommand() === GAME_RULE.DOWNSIDE;
+  }
+
+  isCrossed(bridgeCurrent) {
+    return this.getCommand() === bridgeCurrent;
+  }
 }
 
 module.exports = MovingCommand;

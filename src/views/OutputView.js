@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const { BRIDGE_MESSAGE, GAME_MESSAGE } = require('../constants');
+const { BRIDGE_MESSAGE, GAME_MESSAGE, GAME_RULE } = require('../constants');
 const OutputUtils = require('../utils/OutputUtils');
 
 /**
@@ -13,10 +13,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridgeMap) {
-    const [upside, downside] = bridgeMap.getMap();
+    const map = bridgeMap.getMap();
 
-    const upsideString = OutputUtils.stringifyMap(upside);
-    const downsideString = OutputUtils.stringifyMap(downside);
+    const upsideString = OutputUtils.stringifyMap(map[GAME_RULE.UPSIDE]);
+    const downsideString = OutputUtils.stringifyMap(map[GAME_RULE.DOWNSIDE]);
 
     Console.print(BRIDGE_MESSAGE.START + upsideString + BRIDGE_MESSAGE.END);
     Console.print(BRIDGE_MESSAGE.START + downsideString + BRIDGE_MESSAGE.END);

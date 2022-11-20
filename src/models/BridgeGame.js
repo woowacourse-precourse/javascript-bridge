@@ -1,7 +1,6 @@
 const Bridge = require('./Bridge');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const BridgeMap = require('./BridgeMap');
 const BridgeGameStatus = require('./BridgeGameStatus');
 
 /**
@@ -10,12 +9,9 @@ const BridgeGameStatus = require('./BridgeGameStatus');
 class BridgeGame {
   #bridge;
 
-  #map;
-
   #status;
 
   start() {
-    this.#map = new BridgeMap();
     this.#status = new BridgeGameStatus();
     this.#status.increaseTryCount();
   }
@@ -32,17 +28,14 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(movingCommand) {
-    const command = movingCommand.getCommand();
-    const isCrossed = this.#bridge.isCrossed(command, this.#status.getLocation());
-
-    this.#map.add(command, isCrossed);
     this.#status.increaseLocation();
+    this.#bridge.addMap(movingCommand, this.#status.getLocation());
 
-    return isCrossed;
+    return this.#bridge.current(this.#status.getLocation());
   }
 
   getMap() {
-    return this.#map;
+    return this.#bridge.getMap();
   }
 
   isWin() {
@@ -55,7 +48,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#map.reset();
+    this.#bridge.resetMap();
     this.#status.resetLocation();
     this.#status.increaseTryCount();
   }

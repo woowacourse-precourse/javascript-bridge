@@ -1,28 +1,43 @@
 const { GAME_RULE } = require('../constants');
 
 class BridgeMap {
-  #upside = [];
+  static init = [];
 
-  #downside = [];
+  #state = {
+    [GAME_RULE.UPSIDE]: BridgeMap.init,
+    [GAME_RULE.DOWNSIDE]: BridgeMap.init,
+  };
 
   getMap() {
-    return [this.#upside, this.#downside];
+    return this.#state;
   }
 
-  add(moving, isSuccess) {
-    if (moving === GAME_RULE.UPSIDE) {
-      this.#upside.push(isSuccess);
-      this.#downside.push(null);
+  add(movingCommand, current) {
+    const isCrossed = movingCommand.isCrossed(current);
+
+    if (movingCommand.isUpside()) {
+      this.#addUpside(isCrossed);
       return;
     }
 
-    this.#upside.push(null);
-    this.#downside.push(isSuccess);
+    if (movingCommand.isDownside()) {
+      this.#addDownside(isCrossed);
+    }
+  }
+
+  #addUpside(isCrossed) {
+    this.#state[GAME_RULE.UPSIDE] = [...this.#state[GAME_RULE.UPSIDE], isCrossed];
+    this.#state[GAME_RULE.DOWNSIDE] = [...this.#state[GAME_RULE.DOWNSIDE], null];
+  }
+
+  #addDownside(isCrossed) {
+    this.#state[GAME_RULE.UPSIDE] = [...this.#state[GAME_RULE.UPSIDE], null];
+    this.#state[GAME_RULE.DOWNSIDE] = [...this.#state[GAME_RULE.DOWNSIDE], isCrossed];
   }
 
   reset() {
-    this.#upside = [];
-    this.#downside = [];
+    this.#state[GAME_RULE.UPSIDE] = BridgeMap.init;
+    this.#state[GAME_RULE.DOWNSIDE] = BridgeMap.init;
   }
 }
 
