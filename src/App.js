@@ -41,18 +41,14 @@ class App {
       InputView.readMoving(this.requestMoveUpOrDown.bind(this));
     }
 
-    const position = this.BridgeGame.getPosition();
-    const bridge = this.BridgeGame.getBridge();
+    OutputView.printGameProgress(this.BridgeGame.getPosition(), this.BridgeGame.getBridge(), answer);
 
-    OutputView.printMap(position, bridge, answer);
-    OutputView.setRecentBridgePrint(position, bridge, answer);
-
-    const isCorrect = this.BridgeGame.isCorrect(answer, bridge);
+    const isCorrect = this.BridgeGame.isCorrect(answer, this.BridgeGame.getBridge());
 
     if (isCorrect) {
       this.BridgeGame.move();
 
-      if (bridge.length === this.BridgeGame.getPosition()) {
+      if (this.BridgeGame.getBridge().length === this.BridgeGame.getPosition()) {
         OutputView.printGameResult(answer, this.tryTimes);
         this.shutDown();
         return;

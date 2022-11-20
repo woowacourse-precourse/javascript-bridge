@@ -15,9 +15,17 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(position, bridge, answer) {
-    Console.print(this.createUpBridgeTemplate(position, bridge, answer));
-    Console.print(this.createDownBridgeTemplate(position, bridge, answer));
+  printGameProgress(position, bridge, answer) {
+    const upBridge = this.createUpBridgeTemplate(position, bridge, answer);
+    const downBridge = this.createDownBridgeTemplate(position, bridge, answer);
+
+    this.printMap(upBridge, downBridge);
+    this.setRecentBridgePrint(upBridge, downBridge);
+  },
+
+  printMap(upBridge, downBridge) {
+    Console.print(upBridge);
+    Console.print(downBridge);
   },
 
   createUpBridgeTemplate(position, bridge, answer) {
@@ -44,8 +52,8 @@ const OutputView = {
     return `[ ${downBridge.join(" | ")} ]`;
   },
 
-  setRecentBridgePrint(position, bridge, answer) {
-    this.recentBridgePrint = [this.createUpBridgeTemplate(position, bridge, answer), this.createDownBridgeTemplate(position, bridge, answer)];
+  setRecentBridgePrint(upBridge, downBridge) {
+    this.recentBridgePrint = [upBridge, downBridge];
   },
 
   printRecentBridgePrint(recentBridgePrint) {
