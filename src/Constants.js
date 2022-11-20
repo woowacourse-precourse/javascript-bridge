@@ -4,8 +4,8 @@ const MOVE = {
 };
 
 const MOVE_INDEX = {
-  [MOVE.up]: 1,
-  [MOVE.down]: 0,
+  [MOVE.up]: 0,
+  [MOVE.down]: 1,
 };
 
 const INPUT = {
