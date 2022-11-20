@@ -43,10 +43,16 @@ class App {
         return throwException(errorMsg, () => this.requestDirection());
 
       this.bridgeGame.move(direction);
-      OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
+      this.printBridgeCrossingResult();
 
       this.actionAboutBridgeGame();
     });
+  }
+
+  printBridgeCrossingResult() {
+    const bridgeCrossingResult = this.bridgeGame.getBridgeCrossingResult();
+
+    OutputView.printMap(bridgeCrossingResult);
   }
 
   actionAboutBridgeGame() {
