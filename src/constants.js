@@ -46,3 +46,5 @@ const ERROR = Object.freeze({
   ENTER_VALID_GAME_COMMAND:
     '[ERROR] R(재시작)과 Q(종료) 중 하나의 문자를 입력하세요.',
 });
+
+module.exports = { MESSAGE, MAP, MOVING, MOVABLE, REGEX, ERROR };
