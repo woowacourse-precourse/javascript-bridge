@@ -35,6 +35,16 @@ class App {
     }
   }
 
+  tryRetry(input) {
+    try {
+      this.#bridgeGame.validateGameCommand(input);
+      this.handleGameCommand(input);
+    } catch ({ message }) {
+      Console.print(message);
+      InputView.readGameCommand(this.tryRetry.bind(this));
+    }
+  }
+
   handleResult(result) {
     if (result === MESSAGE.SUCCESS) {
       OutputView.printResult(this.#bridgeGame);
@@ -45,16 +55,6 @@ class App {
       return;
     }
     InputView.readMoving(this.tryMove.bind(this));
-  }
-
-  tryRetry(input) {
-    try {
-      this.#bridgeGame.validateGameCommand(input);
-      this.handleGameCommand(input);
-    } catch ({ message }) {
-      Console.print(message);
-      InputView.readGameCommand(this.tryRetry.bind(this));
-    }
   }
 
   handleGameCommand(input) {
