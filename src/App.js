@@ -29,15 +29,23 @@ class App {
   }
 
   move(moving) {
-    const isSuccess = this.bridgeGame.move(
-      moving,
-      this.#bridge,
-      this.#location
-    );
+    const isSafe = this.bridgeGame.move(moving, this.#bridge, this.#location);
 
-    console.log(this.#bridge, isSuccess);
+    printMap(isSafe, this.#bridge, this.#location);
+    if (!isSafe) return this.fail();
 
     this.#location += 1;
+    if (this.#location === this.#bridge.length) return this.success();
+
+    readMoving(this.move.bind(this));
+  }
+
+  fail() {
+    console.log("실패");
+  }
+
+  success() {
+    console.log("성공");
   }
 }
 
