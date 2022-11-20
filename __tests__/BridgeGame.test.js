@@ -777,3 +777,13 @@ describe('시도 횟수 증가 메서드 테스트', () => {
     expect(bridgeGame.increasingTryCount()).toEqual(RECEIVED);
   });
 });
+
+describe('시도 횟수 가져오는 메서드', () => {
+  const bridgeGame = new BridgeGame();
+
+  test('메소드 이름은 "getTryCount"로 정의된다.', () => {
+    const METHOD_NAME = 'getTryCount';
+
+    expect(bridgeGame.getTryCount.name).toEqual(METHOD_NAME);
+  });
+});
