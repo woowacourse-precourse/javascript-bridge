@@ -21,7 +21,7 @@ class BridgeGameController {
         InputValidator.isValidBridgeSize(bridgeSize);
         this.makeBridgePattern(parseInt(bridgeSize));
       } catch (err) {
-        Console.print(err.message);
+        OutputView.printError(err.message);
         this.readBridgeSize();
       }
     };
@@ -44,7 +44,7 @@ class BridgeGameController {
         InputValidator.isValidMoving(moving);
         this.move(moving);
       } catch (err) {
-        Console.print(err.message);
+        OutputView.printError(err.message);
         this.readMoving();
       }
     };
@@ -70,7 +70,7 @@ class BridgeGameController {
         InputValidator.isValidGameCommand(gameCommand);
         this.excuteGameCommand(gameCommand);
       } catch (err) {
-        Console.print(err.message);
+        OutputView.printError(err.message);
         this.readGameCommand();
       }
     };
