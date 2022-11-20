@@ -1,6 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const ERROR_MESSAGE = require("./constans/ErrorMessage");
+const INPUT_MESSAGE = require("./constans/InputMessage");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -10,7 +12,7 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(
-      "다리의 길이를 입력해주세요.",
+      INPUT_MESSAGE.BRIDGE_SIZE,
       (bridgeSizeInput) => {
         this.validBridgeSize(bridgeSizeInput);
         BridgeMaker.makeBridge(
@@ -23,10 +25,10 @@ const InputView = {
 
   validBridgeSize(bridgeSize) {
     if (isNaN(bridgeSize)) {
-      throw new Error("[ERROR] 숫자만 입력 가능합니다.");
+      throw new Error(ERROR_MESSAGE.ONLY_NUMBER);
     }
     if (bridgeSize < 3 || bridgeSize > 20) {
-      throw new Error("[ERROR] 다리 길이는 3부터 20사이여야 한다.");
+      throw new Error(ERROR_MESSAGE.BRIDGE_SIZE_OUT);
     }
   },
 
@@ -34,17 +36,14 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    MissionUtils.Console.readLine(
-      "이동할 칸을 선택해주세요. (위: U, 아래: D)",
-      (movePoint) => {
-        this.validMovePoint(movePoint);
-        MissionUtils.Console.print(movePoint);
-      }
-    );
+    MissionUtils.Console.readLine(INPUT_MESSAGE.MOVE_POINT, (movePoint) => {
+      this.validMovePoint(movePoint);
+      MissionUtils.Console.print(movePoint);
+    });
   },
   validMovePoint(movePoint) {
     if (movePoint !== "U" || movePoint !== "D") {
-      throw new Error("[ERROR] 이동 시 U, D 중 하나만 입력 가능하다.");
+      throw new Error(ERROR_MESSAGE.MOVE_POINT_OUT);
     }
   },
   /**

@@ -9,7 +9,7 @@ const O_MARK = "O";
 const OPEN_BRIDGE = "[ ";
 const CLOSE_OPEN_BRIDGE = " ]";
 
-const INPUT_MESSAGE = {
+const OUTPUT_MESSAGE = {
   GAME_START,
   GAME_RESULT,
   SUCCESS_OR_FAILURE,
@@ -22,4 +22,4 @@ const INPUT_MESSAGE = {
   CLOSE_OPEN_BRIDGE,
 };
 
-module.exports = INPUT_MESSAGE;
+module.exports = OUTPUT_MESSAGE;
