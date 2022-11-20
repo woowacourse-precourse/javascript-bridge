@@ -3,7 +3,7 @@ const { MESSAGES } = require("../constraints/constarints");
 const { generate } = require("../utils/random/BridgeRandomNumberGenerator");
 const { makeBridge } = require("../models/BridgeMaker");
 const {
-  validateLength,
+  validateBridgeSizeInput,
   validateGameCommandInput,
 } = require("../utils/validators/validators");
 const { printResult, printMap } = require("./OutputView");
@@ -16,7 +16,7 @@ const InputView = {
    */
   readBridgeSize(game, readMoving) {
     Console.readLine(MESSAGES.READ_BRIDGE_SIZE, (res) => {
-      if (validateLength(res)) {
+      if (validateBridgeSizeInput(res)) {
         return makeBridge(res, generate, readMoving, game);
       }
     });

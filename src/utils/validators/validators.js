@@ -6,7 +6,7 @@ const isInteger = Number.isInteger;
  * @param {number} input 다리의 길이
  * @return {boolean} 입력값이 유효하면 true 반환
  */
-const validateLength = (input) => {
+const validateBridgeSizeInput = (input) => {
   const convertedInput = Number(input);
   if (input.length > 2)
     throw new Error(MESSAGES.EXCEPTIONS.BRIDGE.COUNT_EXCEPTION);
@@ -40,7 +40,7 @@ const validateGameCommandInput = (input) => {
 };
 
 module.exports = {
-  validateLength,
+  validateBridgeSizeInput,
   validateMoveInput,
   validateGameCommandInput,
 };
