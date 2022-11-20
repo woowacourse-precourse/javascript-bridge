@@ -73,6 +73,11 @@ class BrideGameController {
   }
 
   handleGameRetryPhase(retryAnswer) {
+    try {
+      this.validator.checkRetryInput(retryAnswer);
+    } catch (error) {
+      this.readGameCommandPhase();
+    }
     if (retryAnswer === 'R') {
       this.#bridgeGame.retry();
       InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
