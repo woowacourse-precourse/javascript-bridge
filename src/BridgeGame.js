@@ -71,9 +71,16 @@ class BridgeGame {
     return true;
   }
 
-  checkGameSuccess() {}
+  checkGameSuccess() {
+    if (this.#bridgeAnswer.length === this.#currentBridge.length) {
+      return true;
+    }
+    return false;
+  }
 
-  checkTryCount() {}
+  getTryCount() {
+    return this.#tryCount;
+  }
 }
 
 module.exports = BridgeGame;
