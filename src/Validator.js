@@ -27,4 +27,16 @@ const directionValidator = {
   },
 };
 
-module.exports = { bridgeSizeValidator, directionValidator };
+const commandValidator = {
+  isRegameOrQuit(command) {
+    return command === 'R' || command === 'Q';
+  },
+
+  isCommandValid(command) {
+    if (!this.isRegameOrQuit(command)) {
+      throw new Error(ERROR.COMMAND);
+    }
+  },
+};
+
+module.exports = { bridgeSizeValidator, directionValidator, commandValidator };
