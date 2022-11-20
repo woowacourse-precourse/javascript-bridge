@@ -70,12 +70,10 @@ class App {
     try {
       execution();
     } catch (e) {
-      Console.print(e);
+      Console.print(e.message);
       errorCallback();
     }
   }
 }
-
-new App().play();
 
 module.exports = App;
