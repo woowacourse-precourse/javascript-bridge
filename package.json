@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "우아한테크코스 프리코스 다리 건너기 게임 미션",
   "dependencies": {
-    "@woowacourse/mission-utils": "^1.0.6",
-    "eslint-plugin-jest": "^27.1.5"
+    "@woowacourse/mission-utils": "^1.0.6"
   },
   "devDependencies": {
-    "eslint": "^8.27.0",
+    "eslint": "^8.28.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^27.1.5",
+    "eslint-plugin-jest-extended": "^2.0.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.6.0",

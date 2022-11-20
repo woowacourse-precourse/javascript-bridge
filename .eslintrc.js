@@ -4,7 +4,7 @@ module.exports = {
     commonjs: true,
     es2021: true,
   },
-  extends: ["airbnb", "airbnb/hooks", "plugin:jest-extended/all"],
+  extends: ["airbnb", "airbnb/hooks"],
   overrides: [],
   parserOptions: {
     ecmaVersion: "latest",
@@ -19,4 +19,6 @@ module.exports = {
     "jest-extended/prefer-to-be-true": "warn",
     "jest-extended/prefer-to-be-false": "error",
   },
+  plugins: ["jest"],
+  extends: ["plugin:jest/recommended"],
 };

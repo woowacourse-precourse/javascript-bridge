@@ -6,4 +6,6 @@ const PLAYER_STATE = {
   FAIL: "FAIL",
 };
 
+const CHECK_PLAYER_STATE = (isFinish, isMove) => {};
+
 module.exports = { PLAYER_STATE };

@@ -5,6 +5,9 @@ const BridgeMaker = require("../BridgeMaker");
 const { RETRY } = require("../view/stringsUI");
 const Player = require("../model/Player");
 const Bridge = require("../model/Bridge");
+const Validation = require("../utils/Validation");
+const HandleError = require("../utils/HandleInputError");
+const { ERROR_TYPE } = require("../utils/stringsUtils");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -14,11 +17,8 @@ class BridgeGame {
 
   playerModel;
 
-  totalTrial;
-
   constructor() {
     this.playerModel = new Player();
-    this.totalTrial = 1;
   }
 
   start() {
@@ -28,6 +28,33 @@ class BridgeGame {
 
   getBridgeSize() {
     InputView.readBridgeSize(this);
+  }
+
+  handleReadBridgeSize(size) {
+    try {
+      Validation.inputSize(size);
+      this.createBridgeModel(size);
+    } catch (errorMsg) {
+      HandleError.input(this, ERROR_TYPE.SIZE, errorMsg);
+    }
+  }
+
+  handleReadMoving(selectedMove) {
+    try {
+      Validation.inputMove(selectedMove);
+      this.move(selectedMove);
+    } catch (errorMsg) {
+      HandleError.input(this, ERROR_TYPE.MOVING, errorMsg);
+    }
+  }
+
+  handleReadGameCommand(retry) {
+    try {
+      Validation.inputRetry(retry);
+      this.checkRetryInput(retry);
+    } catch (errorMsg) {
+      HandleError.input(this, ERROR_TYPE.GAME_COMMAND, errorMsg);
+    }
   }
 
   createBridgeModel(size) {
@@ -68,9 +95,11 @@ class BridgeGame {
 
   checkNextMove() {
     const { isFinish, isMove } = this.getMoveFinishBooleans();
+    console.log(isFinish, isMove);
     if (!isFinish) {
       return this.checkNextInput(isMove);
     }
+    //   this.getGameCommand();
     return this.quit();
   }
 
@@ -98,7 +127,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.totalTrial += 1;
+    this.playerModel.addTotalTrial();
     this.playerModel.resetPlayer();
     this.getPlayerMove();
   }
@@ -117,7 +146,7 @@ class BridgeGame {
     OutputView.printResult({
       resultMap: this.playerModel.bridgeMap,
       isSuccess,
-      totalTrial: this.totalTrial,
+      totalTrial: this.playerModel.getTotalTrial(),
     });
   }
 

@@ -5,9 +5,12 @@ class Player {
 
   bridgeMap;
 
+  #totalTrial;
+
   constructor() {
     this.inputArr = [];
     this.bridgeMap = { upperBridge: null, lowerBridge: null };
+    this.#totalTrial = 1;
   }
 
   createBridgeMap(bridgeGamePresenter) {
@@ -18,6 +21,13 @@ class Player {
   resetPlayer() {
     this.inputArr = [];
     this.bridgeMap = { upperBridge: null, lowerBridge: null };
+  }
+
+  addTotalTrial() {
+    this.#totalTrial += 1;
+  }
+  getTotalTrial() {
+    return this.#totalTrial;
   }
 }
 module.exports = Player;

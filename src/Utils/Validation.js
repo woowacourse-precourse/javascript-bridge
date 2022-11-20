@@ -1,4 +1,4 @@
-const { INPUT_VAL } = require("./stringsValidation");
+const { INPUT_VAL } = require("./stringsUtils");
 
 class Validation {
   static validate({ condition, message }) {
