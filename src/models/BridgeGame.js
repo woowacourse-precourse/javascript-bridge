@@ -36,13 +36,9 @@ class BridgeGame {
    * @returns 업데이트 된 현재 진행 상황 (progress)
    */
   updateProgress(roundResult, progress, input) {
-    if (roundResult) {
-      progress = this.success(progress, input);
-    } else {
-      progress = this.fail(progress, input);
-      this.done = true;
-    }
-    return progress;
+    if (roundResult) return (progress = this.success(progress, input));
+    this.done = true;
+    return (progress = this.fail(progress, input));
   }
 
   /**
