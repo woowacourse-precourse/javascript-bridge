@@ -21,8 +21,8 @@ const { Console } = require("@woowacourse/mission-utils");
    */
   printResult(userBridgeUp, userBridgeDown, count){
     Console.print("최종 게임 결과\n");
-    Console.print(`${userBridgeUp}\n`);
-    Console.print(`${userBridgeDown}\n`);
+    Console.print(`[ ${userBridgeUp.join(" | ")} ]\n`);
+    Console.print(`[ ${userBridgeDown.join(" | ")} ]\n`);
     Console.print("게임 성공 여부: 성공\n");
     Console.print("총 시도한 횟수: " + `${count}`);
     Console.close();

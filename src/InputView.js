@@ -43,7 +43,7 @@ const InputView = {
       bridgeGame.move(this.createBridge, selectUpOrDown);
       this.userPickedIsWrong(userBridgeCorrect);
       this.readMoving();
-      OutputView.printResult(`[ ${userBridgeCorrect[0].join(" | ")} ]`, `[ ${userBridgeCorrect[1].join(" | ")} ]`, bridgeGame.attemptCount);
+      OutputView.printResult(userBridgeCorrect[0] , userBridgeCorrect[1] , bridgeGame.attemptCount);
       this.readGameCommand();
     });
   },
