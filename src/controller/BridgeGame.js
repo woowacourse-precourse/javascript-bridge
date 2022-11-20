@@ -36,7 +36,7 @@ const BridgeGame = class extends GameCtrl {
     const { isPassed, bridgeMap } = this.model.getMovedResult;
     this.view.printMap(bridgeMap);
 
-    const isGameSuccess = this.model.getIsGameEnd;
+    const isGameSuccess = this.model.getIsGameSuccess(bridgeMap);
 
     if (!isPassed) return this.askToReplayGame({ bridgeMap, isGameSuccess });
     if (isGameSuccess) return this.end({ bridgeMap, isGameSuccess });

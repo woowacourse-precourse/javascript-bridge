@@ -43,9 +43,11 @@ const BridgeModel = class extends GameModel {
     return movedResult;
   }
 
-  // FIX: 게임 성공 여부 -> 다리에 X가 있는지 여부로 수정
-  get getIsGameEnd() {
-    return this.#position === this.#bridge.length;
+  getIsGameSuccess(bridgeMap) {
+    const isPositionSameWithSize = this.#position === this.#bridge.length;
+    const isNonMovableSpaceOnBridge = !bridgeMap.includes('X');
+
+    return isPositionSameWithSize && isNonMovableSpaceOnBridge;
   }
 
   makeBridgeGameResult({ bridgeMap, isGameSuccess }) {
