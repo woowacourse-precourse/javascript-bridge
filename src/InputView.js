@@ -18,13 +18,15 @@ const InputView = {
     });
   },
 
+  /**
+   * 다리 길이의 입력값이 유효한지 판단한다.
+   */
   checkBridgeSize(size) {
-    for (let i = 0; i < size.length; i++) {
-      if ((isNaN(size[i])) || (!Number.isInteger(Number(size[i]))) || (Number(size[0]) === 0)) {
-        throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
-      }
+    const RANGE = []
+    for (let i=3; i<21; i++) {
+      RANGE.push(String(i));
     }
-    if ((parseInt(size) < 3) || (20 < parseInt(size))) {
+    if (!RANGE.includes(size)) {
       throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
     }
   },
