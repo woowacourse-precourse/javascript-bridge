@@ -17,32 +17,32 @@ const { Console } = require("@woowacourse/mission-utils");
   move(createBridge, selectUpOrDown) {
     this.userPickedArr.push(selectUpOrDown);
     const compareLength = this.userPickedArr.length - 1;
-    this.moveIsUpCorrect(createBridge[compareLength], this.userPickedArr[compareLength]);
-    this.moveIsDownCorrect(createBridge[compareLength], this.userPickedArr[compareLength]);
-    this.moveIsUpWrong(createBridge[compareLength], this.userPickedArr[compareLength]);
-    this.moveIsDownWrong(createBridge[compareLength], this.userPickedArr[compareLength]);
+    this.moveUpIsCorrect(createBridge[compareLength], this.userPickedArr[compareLength]);
+    this.moveDownIsCorrect(createBridge[compareLength], this.userPickedArr[compareLength]);
+    this.moveUpIsWrong(createBridge[compareLength], this.userPickedArr[compareLength]);
+    this.moveDownIsWrong(createBridge[compareLength], this.userPickedArr[compareLength]);
   }
 
-  moveIsUpCorrect(createBridge, selectUpOrDown){
+  moveUpIsCorrect(createBridge, selectUpOrDown){
     if(createBridge == selectUpOrDown && selectUpOrDown == "U"){
       this.userPickedUpOrDown[0].push("O");
       this.userPickedUpOrDown[1].push(" ");
     }
   }
 
-  moveIsDownCorrect(createBridge, selectUpOrDown){
+  moveDownIsCorrect(createBridge, selectUpOrDown){
     if(createBridge == selectUpOrDown && selectUpOrDown == "D"){
       this.userPickedUpOrDown[0].push(" ");
       this.userPickedUpOrDown[1].push("O")
     }
   }
-  moveIsUpWrong(createBridge, selectUpOrDown){
+  moveUpIsWrong(createBridge, selectUpOrDown){
     if(createBridge !== selectUpOrDown && selectUpOrDown == "U"){
       this.userPickedUpOrDown[0].push("X");
       this.userPickedUpOrDown[1].push(" ");
     }
   }
-  moveIsDownWrong(createBridge, selectUpOrDown){
+  moveDownIsWrong(createBridge, selectUpOrDown){
     if(createBridge !== selectUpOrDown && selectUpOrDown == "D"){
       this.userPickedUpOrDown[0].push(" ");
       this.userPickedUpOrDown[1].push("X");
