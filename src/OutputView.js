@@ -15,7 +15,12 @@ const OutputView = {
     Console.print(`[ ${up.join(' | ')} ]\n[ ${down.join(' | ')} ]`);
   },
 
-  printResult() {},
+  printResult(userBridge, isSuccess) {
+    Console.print(`최종 게임 결과\n`);
+    this.printMap(userBridge.bridge, userBridge.status);
+    Console.print(`\n게임 성공 여부: ${isSuccess?"성공":"실패"}\n`);
+    Console.print(`총 시도한 횟수: ${userBridge.attempts}`)
+  },
 };
 
 module.exports = OutputView;

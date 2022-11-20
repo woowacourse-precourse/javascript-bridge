@@ -5,7 +5,7 @@ const BridgeGame = require("./BridgeGame");
 class BridgePlay{
   constructor(bridge){
     this.bridge = bridge;
-    this.bridgeGame = new BridgeGame({ status:[], attempts:1 })
+    this.bridgeGame = new BridgeGame({ bridge:this.bridge, status:[], attempts:1 })
   }
 
   startRound(){
@@ -38,14 +38,14 @@ class BridgePlay{
       this.bridgeGame.retry();
       this.startRound();
     }
+    else{//option==='Q'
+      OutputView.printResult(this.bridgeGame.get(), false);
+    }
   }
   
   playRoundComplete(){
-    //test
-    console.log("round complete");
+    OutputView.printResult(this.bridgeGame.get(), true);
   }
-
-
 
   
 

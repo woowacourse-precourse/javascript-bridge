@@ -10,8 +10,10 @@ class BridgeGame {
   retry() {
     this.userBridge.attempts += 1;
     this.userBridge.status = [];
-    //test
-    console.log(this.userBridge);
+  }
+
+  get(){
+    return this.userBridge;
   }
 }
 
