@@ -83,7 +83,7 @@ const InputView = {
   
   gameFail(value){
     if(value == 'Q'){
-      OutputView.printFailResult();
+      OutputView.printFailResult(userBridgeCorrect[0], userBridgeCorrect[1], bridgeGame.attemptCount);
       Console.close();
     }
   },
