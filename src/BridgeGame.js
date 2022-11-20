@@ -10,7 +10,7 @@ class BridgeGame {
   #currentPosition;
   #map;
   constructor(size) {
-    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator);
+    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.#currentPosition = 0;
     this.#tryCount = 1;
     this.#map = [[], []];
