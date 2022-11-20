@@ -43,7 +43,7 @@ const InputView = {
   },
   checkMovingInput(userSpace,bridgeArray){
     if(userSpace!=='U'&& userSpace!=='D') throw "[ERROR] Only U,D accepted"
-    let correctValue=OutputView.printMap(userSpace,bridgeArray)
+    let correctValue=OutputView.printMap(userSpace,bridgeArray,count)
     if(correctValue==='O') {
       //다리를 맞췄을 때 bridgegame move 함수에 배열을 보내주고, 다시 U,D를 입력받음
       bridegame.move(bridgeArray)
