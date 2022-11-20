@@ -40,11 +40,12 @@ class BridgeGame {
       canMove ? this.#lowerBridge.push("O") : this.#lowerBridge.push("X");
       this.#upperBridge.push(" ");
     }
-    return [this.#upperBridge, this.#lowerBridge];
+    return [this.#upperBridge, this.#lowerBridge, canMove];
   }
 
   canMove(moving) {
     if (this.bridge[this.#turn] === moving) {
+      this.#turn += 1;
       return true;
     }
     return false;

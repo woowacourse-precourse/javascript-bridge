@@ -28,13 +28,13 @@ const InputView = {
       (moving) => {
         const isMovingValueCorrect = Validation.checkMovingValue(moving);
         if (isMovingValueCorrect) return this.readMoving();
-
         const movingDirection = bridgeGame.move(moving);
         OutputView.printMap(movingDirection);
+        OutputView.printResult();
+        if (movingDirection[2]) this.readMoving(bridgeGame);
       }
     );
   },
-
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
