@@ -184,3 +184,10 @@
 
 **3차 객체 설계도**
 <img width = "900px" src  = "https://user-images.githubusercontent.com/78203399/202842271-a2fd7c3b-ac11-49cc-a531-8fe3b657d07d.jpeg" />
+
+## 리팩토링
+
+### 1차
+
+- `InputView`에 데이터를 검증하고 저장하는 로직을 추가
+- `printView`와 `InputView`와 동일한 데이터(객체)를 다뤄야 한다고 판단, Controller객체를 싱글톤으로 구현
