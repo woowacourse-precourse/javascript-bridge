@@ -181,30 +181,16 @@ describe("다리 건너기 테스트", () => {
   });
 
   test("다리 길이 예외 테스트", () => {
-    runException(["a"]);
+    const lengthException = [["a"], ["1"], ["25"], ["-1"], ["4.5"]]
+    lengthException.forEach((element) => {
+      runException(element);
+    })
   });
-
-  test("다리 길이 예외 테스트", () => {
-    runException(["1"]);
-  });
-
-  test("다리 길이 예외 테스트", () => {
-    runException(["25"]);
-  });
-
-  test("다리 길이 예외 테스트", () => {
-    runException(["-1"]);
-  });
-
-  test("다리 길이 예외 테스트", () => {
-    runException(["4.5"]);
-  });
-
+  
   test("이동할 칸 예외 테스트", () => {
-    runException(["3", "7"]);
-  });
-
-  test("이동할 칸 예외 테스트", () => {
-    runException(["3", "u"]);
+    const lengthException = [["3", "7"], ["3", "u"]]
+    lengthException.forEach((element) => {
+      runException(element);
+    })
   });
 });
