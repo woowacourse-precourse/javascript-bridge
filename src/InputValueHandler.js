@@ -8,7 +8,7 @@ const InputValueControl = {
     if (!Validate.checkBridgeSize(SIZE)) {
       return false;
     }
-    bridgeGame.getAnswerBridge(SIZE, BridgeRandomNumberGenerator.generate);
+    bridgeGame.setAnswerBridge(SIZE, BridgeRandomNumberGenerator.generate);
     return true;
   },
 

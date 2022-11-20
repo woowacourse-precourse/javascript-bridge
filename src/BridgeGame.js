@@ -14,7 +14,7 @@ class BridgeGame {
     this.#attempts = 1;
   }
 
-  getAnswerBridge(size, generateRandomNumber) {
+  setAnswerBridge(size, generateRandomNumber) {
     this.#answerBridge = BridgeMaker.makeBridge(size, generateRandomNumber);
   }
 
