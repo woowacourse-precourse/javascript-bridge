@@ -42,6 +42,15 @@ class BridgeController {
   }
 
   /**
+   * 유저가 더 움직일 수 있는 칸이 없는지 여부를 반환하는 메서드 연결체
+   * @param userMoving {string[]} [유저 움직임]
+   * @return {boolean} [움직임 불가능 여부]
+   */
+  getIsFinished(userMoving) {
+    return this.bridgeModel.isFinished(userMoving);
+  }
+
+  /**
    * 유저에게 다리 길이를 입력 받은 후 다리 생성 및 저장한다.
    * @param bridgeLengthInput {string} [다리 길이 input]
    */

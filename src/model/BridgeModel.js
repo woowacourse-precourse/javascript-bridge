@@ -27,6 +27,15 @@ class BridgeModel {
     const indexToCompare = userMoving.length - 1;
     return this.#bridge[indexToCompare] === userMoving[indexToCompare];
   }
+
+  /**
+   * 유저가 더 움직일 수 있는 칸이 없는지 여부를 반환한다.
+   * @param userMoving {string[]} [유저 움직임]
+   * @return {boolean} [움직임 불가능 여부]
+   */
+  isFinished(userMoving) {
+    return this.#bridge.length === userMoving.length;
+  }
 }
 
 module.exports = BridgeModel;
