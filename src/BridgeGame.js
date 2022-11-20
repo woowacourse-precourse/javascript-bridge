@@ -12,7 +12,7 @@ class BridgeGame {
    */
   static move() {
     GameInfo.position += GAME_VALUES.counter;
-    GameInfo.gameStat.push(GameInfo.currentMove);
+    GameInfo.gameStat.push(GameInfo.moving);
     this.moveBridge();
   }
 

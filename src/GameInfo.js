@@ -11,7 +11,7 @@ const GameInfo = {
 
   position: -1,
 
-  currentMove: null,
+  moving: null,
 
   gameCommand: null,
 

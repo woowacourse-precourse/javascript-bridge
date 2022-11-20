@@ -11,11 +11,11 @@ const GAME_MESSAGES = {
 }
 
 const ERROR_MESSAGES = {
-  errorOfInputSize: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
+  bridgeSize: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
 
-  errorOfMoving: "[ERROR] 이동할 칸은 'U' 혹은 'D'여야 합니다.",
+  moving: "[ERROR] 이동할 칸은 'U' 혹은 'D'여야 합니다.",
 
-  errorOfGameCommand: "[ERROR] 재시작 혹은 종료는 'R' 혹은 'Q'여야 합니다."
+  gameCommand: "[ERROR] 재시작 혹은 종료는 'R' 혹은 'Q'여야 합니다."
 }
 
 const RESULT_MESSAGES = {

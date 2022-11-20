@@ -16,17 +16,24 @@ const InputView = {
   validateMoving: null,
 
   validateGameCommand: null,
+
+  inputErrorProcess(validClass, inputValue, objectCode) {
+    try {
+      GameInfo[objectCode] = new validClass(inputValue)[objectCode];
+    } catch {
+      OutputView.printMessage(ERROR_MESSAGES[objectCode]);
+      return false;
+    }
+    return true;
+  },
+
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
     Console.readLine(GAME_MESSAGES.messageOfInputSize, (bridgeSize) => {
-      try {
-        GameInfo.bridgeSize = new ValidateBridgeSize(bridgeSize).bridgeSize;
-      } catch {
-        OutputView.printMessage(ERROR_MESSAGES.errorOfInputSize);
+      if (this.inputErrorProcess(ValidateBridgeSize, bridgeSize, "bridgeSize") === false)
         return this.readBridgeSize();
-      }
       GameInfo.bridge = BridgeMaker
         .makeBridge(GameInfo.bridgeSize, BridgeRandomNumberGenerator.generate);
 
@@ -45,12 +52,8 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(GAME_MESSAGES.messageOfInputMoving, (moving) => {
-      try {
-        GameInfo.currentMove = new ValidateMoving(moving).moving;
-      } catch {
-        OutputView.printMessage(ERROR_MESSAGES.errorOfMoving);
+      if (this.inputErrorProcess(ValidateMoving, moving, "moving") === false)
         return this.readMoving();
-      }
 
       return this.moveBridge();
     });
@@ -70,12 +73,8 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(GAME_MESSAGES.messageOfInputGameCommand, (gameCommand) => {
-      try {
-        GameInfo.gameCommand = new ValidateGameCommand(gameCommand).gameCommand;
-      } catch {
-        OutputView.printMessage(ERROR_MESSAGES.errorOfGameCommand);
+      if (this.inputErrorProcess(ValidateGameCommand, gameCommand, "gameCommand") === false)
         return this.readGameCommand();
-      }
 
       return (BridgeGame.retry()) ? this.playGame() : OutputView.printResult();
     });
