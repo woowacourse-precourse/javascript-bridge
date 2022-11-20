@@ -32,7 +32,7 @@ class BridgeGame {
     this.#upBridgeRecord.push(moveable);
     this.#movingCount += 1;
     success = this.checkSuccess(moveable);
-    return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord, fail: fail, success: success };
+    return { fail: fail, success: success };
   }
   goToDownBridge() {
     let fail = false;
@@ -43,7 +43,7 @@ class BridgeGame {
     this.#downBridgeRecord.push(moveable);
     this.#movingCount += 1;
     success = this.checkSuccess(moveable);
-    return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord, fail: fail, success: success };
+    return { fail: fail, success: success };
   }
   checkReplay(replayComment) {
     if (replayComment == 'R') {
@@ -59,6 +59,9 @@ class BridgeGame {
   }
   getTryCount() {
     return this.#tryCount;
+  }
+  getBridgeRecord() {
+    return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord };
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
