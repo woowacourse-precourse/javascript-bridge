@@ -24,6 +24,8 @@ class App {
     const result = this.bridgeModel.move(input);
     this.setCounter(input, result);
     OutputView.printMap(this.upCounter, this.downCounter);
+
+    if (result === MOVE_RESULT.INCORRECT) InputView.readGameCommand(this.failRoutine.bind(this));
   }
 
   setCounter(userInput, result) {
@@ -38,6 +40,8 @@ class App {
       this.upCounter.push(MOVE_RESULT.BLACK);
     }
   }
+
+  failRoutine(command) {}
 }
 
 const app = new App();

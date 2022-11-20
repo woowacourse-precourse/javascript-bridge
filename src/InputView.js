@@ -29,7 +29,11 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    return Io.input(INPUT.RETRY_OR_QUIT, (char) => {
+      callback(char);
+    });
+  },
 };
 
 module.exports = InputView;

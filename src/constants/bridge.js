@@ -20,9 +20,15 @@ const CONTAINER = {
   MID: ' | ',
 };
 
+const COMMAND = {
+  RETRY: 'R',
+  QUIT: 'Q',
+};
+
 module.exports = {
   ERROR,
   EITHER,
   MOVE_RESULT,
   CONTAINER,
+  COMMAND,
 };
