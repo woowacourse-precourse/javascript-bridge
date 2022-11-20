@@ -16,11 +16,16 @@ class BridgeMap {
 
   resetHistory () {
     this.#distance = 0;
-    this.#history = { up: [], down: [] };
+    this.#history = new Map([
+      [GAME_CONSTANTS.upStair, []],
+      [GAME_CONSTANTS.downStair, []],
+    ]);
   }
 
   getPathMarker (chooseStep) {
-    return this.checkPath(chooseStep) ? GAME_CONSTANTS.goPath : GAME_CONSTANTS.notPath;
+    return this.checkPath(chooseStep)
+      ? GAME_CONSTANTS.goPath
+      : GAME_CONSTANTS.notPath;
   }
 
   checkPath (chooseStep) {
@@ -40,12 +45,11 @@ class BridgeMap {
   }
 
   getPathHistoryWithChooseStep (chooseStep) {
-    this.#history.up
-      .push(chooseStep === GAME_CONSTANTS.upStair
-        ? this.getPathMarker(chooseStep) : GAME_CONSTANTS.empty);
-    this.#history.down
-      .push(chooseStep === GAME_CONSTANTS.downStair
-        ? this.getPathMarker(chooseStep) : GAME_CONSTANTS.empty);
+    [GAME_CONSTANTS.upStair, GAME_CONSTANTS.downStair]
+      .forEach((stair) => {
+        this.#history.get(stair).push(chooseStep === stair
+          ? this.getPathMarker(chooseStep) : GAME_CONSTANTS.empty);
+      });
     return this.#history;
   }
 }
