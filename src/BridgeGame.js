@@ -58,6 +58,10 @@ class BridgeGame {
     return this.#moveHistory;
   }
 
+  /**
+   * 게임의 총 시도 횟수를 반환하는 메서드
+   * @returns {number} 게임의 총 시도 횟수
+   */
   getTotalTryCount() {
     return this.#totalTryCount;
   }
