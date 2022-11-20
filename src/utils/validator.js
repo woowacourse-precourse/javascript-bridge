@@ -11,6 +11,11 @@ const Validator = {
     if (char === 'U' || char === 'D') return;
     throwError(ERROR.NOT_VALID_MOVING_CHAR);
   },
+
+  isVaildCommandChar(char) {
+    if (char === 'R' || char === 'Q') return;
+    throwError(ERROR.NOT_VALID_COMMAND_CHAR);
+  },
 };
 
 module.exports = {

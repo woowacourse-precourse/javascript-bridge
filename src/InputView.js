@@ -31,6 +31,7 @@ const InputView = {
    */
   readGameCommand(callback) {
     return Io.input(INPUT.RETRY_OR_QUIT, (char) => {
+      Validator.isVaildCommandChar(char);
       callback(char);
     });
   },
