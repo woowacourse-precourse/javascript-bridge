@@ -6,9 +6,11 @@ class Player {
   setIsGameOver(boolen) {
     this.#isGameOver = boolen;
   }
+
   getIsGameOver() {
     return this.#isGameOver;
   }
+
   setIsWinnging(boolen) {
     this.#isWinnging = boolen;
   }
@@ -16,9 +18,11 @@ class Player {
   getIsWinnging() {
     return this.#isWinnging;
   }
+
   addCount() {
     this.#count += 1;
   }
+
   getCount() {
     return this.#count;
   }
