@@ -18,11 +18,6 @@ class BridgeMap {
     this.#isFirst = true;
   }
 
-  cofirm() {
-    const [up, down] = this.#bridgeMap;
-    console.log(`[${up.join('')}]\n[${down.join('')}]`);
-  }
-
   handleMap(boolean, input) {
     if (this.#isFirst) {
       this.#bridgeMap = this.addMap(boolean, input);
