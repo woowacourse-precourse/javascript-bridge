@@ -58,11 +58,28 @@ class App {
     OutputView.printMap(
       BridgeMapMaker.makeBridgeMap(this.#bridgeGame.getMoveHistory()),
     );
-    if (this.#bridgeGame.isGameOver()) {
-      console.log('game over');
+    if (this.isNextCommand()) {
+      this.executeNextCommand();
       return;
     }
     this.inputMoving();
+  }
+
+  isNextCommand() {
+    return this.#bridgeGame.isRetry() || this.#bridgeGame.isClear();
+  }
+
+  executeNextCommand() {
+    if (this.#bridgeGame.isRetry()) {
+      this.inputGameCommand();
+      return;
+    }
+
+    this.gameOver();
+  }
+
+  inputGameCommand() {
+    InputView.readGameCommand(this);
   }
 }
 
