@@ -5,17 +5,20 @@ const { GAME_MSG } = require("./constants/Message");
  */
 const OutputView = {
   /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
+   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력하는 메서드
+   * @param {string[][]} bridge 출력할 다리 상태
    */
   printMap(bridge) {
     const up = bridge[0].join("|");
     const down = bridge[1].join("|");
     Console.print(`[${up}]\n[${down}]\n`);
-    return true;
   },
 
   /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
+   * 게임의 최종 결과를 정해진 형식에 맞춰 출력하는 메서드
+   * @param {boolean} isSuccess 성공여부
+   * @param {number} retryCount 시도횟수
+   * @param {string[][]} bridge 출력할 다리 상태
    */
   printResult(isSuccess, retryCount, bridge) {
     Console.print(GAME_MSG.END);
