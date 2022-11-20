@@ -1,5 +1,9 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { MESSAGE_INPUT_BRIDGE_LENGTH, MESSAGE_NEXT_MOVING_INPUT, MESSAGE_RETRY } = require('./constants');
+const {
+  MESSAGE_INPUT_BRIDGE_LENGTH,
+  MESSAGE_NEXT_MOVING_INPUT,
+  MESSAGE_RETRY,
+} = require('./constants');
 const BridgeMaker = require('./BridgeMaker');
 const Validator = require('./Validator');
 
@@ -22,8 +26,7 @@ const InputView = {
   readMoving() {
     Console.readLine(MESSAGE_NEXT_MOVING_INPUT, (direction) => {
       if (!moveCommandValidator(direction)) this.readMoving();
-      GAME_MANAGER.move(direction)
-        ? this.readMoving() : this.readGameCommand();
+      GAME_MANAGER.move(direction) ? this.readMoving() : this.readGameCommand();
     });
   },
 
@@ -31,11 +34,7 @@ const InputView = {
     if (GAME_MANAGER.getGameComplete()) return;
     Console.readLine(MESSAGE_RETRY, (command) => {
       if (!restartCommandValidator(command)) this.readGameCommand();
-      if (GAME_MANAGER.retry(command)) {
-        this.readMoving();
-      } else {
-        GAME_MANAGER.printResult();
-      }
+      GAME_MANAGER.retry(command) ? this.readMoving() : GAME_MANAGER.printResult();
     });
   },
 };

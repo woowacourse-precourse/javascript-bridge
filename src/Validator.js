@@ -3,8 +3,8 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const { Console } = MissionUtils;
 const Validator = {
   moveCommandValidator(command) {
-    if ((command !== 'U') && (command !== 'D')) {
-      Console.print(('[ERROR] 올바르지 않은 커멘드 입니다.'));
+    if (command !== 'U' && command !== 'D') {
+      Console.print('[ERROR] 올바르지 않은 커멘드 입니다.');
       return false;
     }
     return true;
@@ -19,7 +19,7 @@ const Validator = {
   },
 
   restartCommandValidator(command) {
-    if ((command !== 'R') && (command !== 'Q')) {
+    if (command !== 'R' && command !== 'Q') {
       Console.print('[ERROR] 올바르지 않은 커멘드 입니다.');
       return false;
     }

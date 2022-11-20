@@ -25,7 +25,7 @@ const OutputView = {
   },
 
   drawMap(command, bridgeInformation) {
-    const CORRECT = (command === bridgeInformation);
+    const CORRECT = command === bridgeInformation;
     OutputView.drawUpArea(CORRECT, command);
     OutputView.drawDownArea(CORRECT, command);
     return true;
@@ -46,7 +46,6 @@ const OutputView = {
     Console.print(`${MESSAGE_SUCCESS_BOOLEAN}${RESULT}`);
     Console.print(`${MESSAGE_TRY_COUNT}${gameTryCount}`);
   },
-
 };
 
 module.exports = OutputView;
