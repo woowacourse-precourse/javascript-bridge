@@ -85,7 +85,15 @@ const Controller = {
       }
     }
   },
-
+  checkContinue() {
+    if (
+      this.playerArr.length !== this.size &&
+      !OutputView.nowArray[0].includes(SIGN.fail) &&
+      !OutputView.nowArray[1].includes(SIGN.fail)
+    ) {
+      return true;
+    }
+  },
 
   initializeAll() {
     (this.arrayState = [[], []]),

@@ -48,7 +48,8 @@ const InputView = {
       Controller.addRound();
       new BridgeGame().move(block, this.savedBridge);
       OutputView.printMap(Controller.arrayState);
-      this.isGameEnd(block); // 어케 마칠까...
+      this.judgeContinue()
+      // this.isGameEnd(); // block 어케 마칠까...
     });
   },
   getMoving(block) { // is에러 이런식으로 밸리데이션에 분리 시도하기
@@ -61,6 +62,14 @@ const InputView = {
       this.readMoving(); // 문제3. 틀리고 다시 시작하면 메세지가 또출력됨 아isGameEnd때문인데? 지우면 readMoving재실행이 안됨 문제4 처음부터 에러나면 빈어레이가 그대로 출력됨
     }
   },
+  judgeContinue(){
+    if(!Controller.checkContinue()){
+      this.isGameEnd()
+    }
+    if(Controller.checkContinue()){
+      this.readMoving()
+    }
+  },
   isGameEnd() {// 문제1. 에러가 나는 다른 문자가 들어가도 배열에 포함되니 끝나버림. 문제2. X가 들어갔을때 안끝남. 걍 메서드 다 분리하자
     const size = Number(Controller.size);
     MissionUtils.Console.print(OutputView.nowArray)
@@ -68,15 +77,11 @@ const InputView = {
       return this.readGameCommand();
     }
     if (Controller.playerArr.length === size) {
-      Controller.checkSuccess();
-      OutputView.printResult(Controller.tryCount, Controller.gameResult);
+      return this.executePrintResult()
+      // Controller.checkSuccess();
+      // OutputView.printResult(Controller.tryCount, Controller.gameResult);
     }
-    this.readMoving(); // 성공했을 때 다시 UD입력 안물어보게 해결해야함
-  },
-  backToReadMoving(){
-    if(Controller.backToReadMoving){
-      this.readMoving()
-    }
+    // this.readMoving(); // 성공했을 때 다시 UD입력 안물어보게 해결해야함
   },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
@@ -107,9 +112,15 @@ const InputView = {
       this.readMoving();
     }
     if (playerCommand === false) {
-      Controller.checkSuccess();
-      OutputView.printResult(Controller.tryCount, Controller.gameResult);
+      this.executePrintResult()
+      // Controller.checkSuccess();
+      // OutputView.printResult(Controller.tryCount, Controller.gameResult);
     }
+  },
+
+  executePrintResult(){
+    Controller.checkSuccess();
+    OutputView.printResult(Controller.tryCount, Controller.gameResult);
   },
 };
 // InputView.readMoving()
