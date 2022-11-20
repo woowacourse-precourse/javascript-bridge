@@ -15,22 +15,9 @@ class GameController {
     this.askBridgeSize();
   }
 
-  askBridgeSize() {
-    InputView.readBridgeSize((size) => {
-      try {
-        this.handleSize(size);
-      } catch ({ message }) {
-        OutputView.printMessage(message);
-        this.askBridgeSize();
-      }
-    });
-  }
-
   handleSize(size) {
-    Validator.sizeValidityCheck(size);
     const bridge = makeBridge(size, generate);
     this.#bridgeGame = new BridgeGame(bridge);
-    this.askDirection();
   }
 
   askDirection() {
@@ -48,6 +35,8 @@ class GameController {
     const successfulMove = this.#bridgeGame.move(direction);
     const curMapState = this.#bridgeGame.drawMap(successfulMove, direction);
     OutputView.printMap(curMapState);
+
+    return successfulMove;
 
     successfulMove ? this.doseUserWin() : this.askRetry();
   }
