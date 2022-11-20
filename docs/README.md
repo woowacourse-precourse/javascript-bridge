@@ -35,4 +35,5 @@ ex) bridge가 5면 배열은 [1,1,0,1,1] 이런식으로 랜덤하게 생성됨 
 
 ### BrideGame
 - move() : 'O'일때 bridgeArray를 받아와서 앞부분을 하나씩 날려준다
+- moveEnd() : bridgeArray가 [] 빈 배열이 되면 게임을 끝내는 로직
 - retry(): 'X' 일때 재시작하게 하는 로직 추가
