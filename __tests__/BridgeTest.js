@@ -6,6 +6,22 @@ const Bridge = require("../src/model/Bridge");
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 
+/**
+ * @param {[string]} input 다리 길이 숫자를 입력해야함.
+ * @param {[string]} random 랜덤 넘버 0과 1중 입력한 배열
+ * @returns {BridgeGame}
+ */
+const testGame = (input , random) => {
+  setTestInvOnce(input);
+
+  if(random){
+    testRandom(random)
+  }
+
+  const bridgeGame = new BridgeGame();
+  bridgeGame.play();
+  return bridgeGame
+}
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -51,11 +67,7 @@ const setTestInvOnce = (answers) => {
 
 describe("브릿지 다리 생성 테스트", () => {
   test("정수를 입력하면 해당 길이 만큼의 다리가 생성 됩니다", () => {
-    const length = ["5"];
-    setTestInvOnce(length);
-
-    const bridgeGame = new BridgeGame();
-    bridgeGame.play();
+    const bridgeGame = testGame(["5"]);
 
     const bridge = bridgeGame.getBridge().getOriginalBridge();
 
@@ -65,11 +77,8 @@ describe("브릿지 다리 생성 테스트", () => {
   });
 
   test("브짓지는 U와 D를 원소로 가집니다.", () => {
-    const length = ["10"];
-    setTestInvOnce(length);
+    const bridgeGame = testGame(["10"]);
 
-    const bridgeGame = new BridgeGame();
-    bridgeGame.play();
     const bridge = bridgeGame.getBridge().getOriginalBridge();
 
     expect(bridge).toContain("U", "D");
@@ -84,18 +93,13 @@ describe("브릿지 다리 생성 테스트", () => {
 
 describe("브릿지 이동 테스트", () => {
   test("숫자 1은 U , 0은 D가 나옵니다." ,()=>{
-    const length = ["5"]
-    setTestInvOnce(length);
 
-    const direction = ["1","1","1","1","0"]
+    const direction = ["1","1","1","1","0"];
+    const bridgeGame = testGame(["5"], direction);
+
     const result = ["U","U","U","U","D"]
-    testRandom(direction);
-
-    const bridgeGame = new BridgeGame();
-    bridgeGame.play();
-
     const bridge = bridgeGame.getBridge().getOriginalBridge();
-
+    console.log(bridge)
     bridge.forEach((direction,index) => {
       expect(direction).toEqual(result[index])
     } )
@@ -107,13 +111,8 @@ describe("브릿지 이동 테스트", () => {
 
   test("정답이 아니면 X 가 표시됩니다." ,()=>{
     const length = ["3","D"]
-    setTestInvOnce(length);
-
     const direction = ["1","1","1"]
-    testRandom(direction);
-
-    const bridgeGame = new BridgeGame();
-    bridgeGame.play();
+    const bridgeGame = testGame(length, direction)
 
     const [up,down] = bridgeGame.getBridge().getBridges()
 
@@ -121,16 +120,13 @@ describe("브릿지 이동 테스트", () => {
   })
   test("입력하지 않은 칸은 빈칸입니다.." ,()=>{
     const length = ["3","D"]
-    setTestInvOnce(length);
-
     const direction = ["1","1","1"]
-    testRandom(direction);
-
-    const bridgeGame = new BridgeGame();
-    bridgeGame.play();
+    const bridgeGame = testGame(length, direction)
 
     const [up,down] = bridgeGame.getBridge().getBridges()
 
     expect(up).toContain(" N ")
   })
+
+
 });
