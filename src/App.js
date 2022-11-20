@@ -24,11 +24,16 @@ class App {
       if (errorMsg)
         return throwException(errorMsg, () => this.requestBridgeSize());
 
-      const bridge = BridgeMaker.makeBridge(Number(size), generate);
-      this.bridgeGame = new BridgeGame(bridge);
+      this.createBridgeGame(size);
 
       this.requestDirection();
     });
+  }
+
+  createBridgeGame(size) {
+    const bridge = BridgeMaker.makeBridge(Number(size), generate);
+
+    this.bridgeGame = new BridgeGame(bridge);
   }
 
   requestDirection() {
