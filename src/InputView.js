@@ -20,7 +20,6 @@ const InputView = {
         MISSIONUTILS.Console.print("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
         return InputView.readBridgeSize();
       }
-
       input = Number(input);
       const bridge = BRIDGE_MAKER.makeBridge(input,BRIDGE_RANDOM_NUMBER_GENERATOR.generate);
       MISSIONUTILS.Console.print(bridge);
@@ -40,15 +39,11 @@ const InputView = {
         MISSIONUTILS.Console.print("[ERROR] 이동할 칸은 U 또는 D만 선택해야 합니다.");
         return InputView.readMoving(count, i, bridge, bridgeMap, tryCount);
       }
-      
       var temp = new BRIDGE_GAME;
       var word = temp.move(input, count, i, bridge);
       MISSIONUTILS.Console.print(word);
-
       moveSwitch(word, count, i, bridge, bridgeMap, tryCount);
     });
-
-
   },
 
   /**
@@ -62,10 +57,8 @@ const InputView = {
         MISSIONUTILS.Console.print("[ERROR] 재시도 여부는 R 또는 Q만 입력해야 합니다.");
         return InputView.readGameCommand(count, bridge, bridgeMap, tryCount);
       }
-      
       var temp = new BRIDGE_GAME;
       var word = temp.retry(input);
-
       retrySwitch(word, count, bridge, bridgeMap, tryCount)
     });
   },
@@ -111,8 +104,6 @@ function moveSwitch(word, count, i, bridge, bridgeMap, tryCount){
   else if (word == "PrintO"){
     moveO(count, i, bridge, bridgeMap, tryCount)
   }
-  else{
-  }
 }
 
 function retrySwitch(word, count, bridge, bridgeMap, tryCount) {
@@ -122,8 +113,6 @@ function retrySwitch(word, count, bridge, bridgeMap, tryCount) {
   else if (word == "END"){
     OUTPUTVIEW.printResult(bridgeMap, "실패", tryCount);
     MISSIONUTILS.Console.close();
-  }
-  else{
   }
 }
 
@@ -152,9 +141,6 @@ function moveO(count, i, bridge, bridgeMap, tryCount){
   bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
   InputView.readMoving(count, i+1, bridge, bridgeMap, tryCount);
 }
-
-
-
 
 
 module.exports = InputView;
