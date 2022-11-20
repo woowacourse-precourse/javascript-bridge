@@ -770,4 +770,10 @@ describe('시도 횟수 증가 메서드 테스트', () => {
 
     expect(bridgeGame.increasingTryCount.name).toEqual(METHOD_NAME);
   });
+
+  test('메서드를 호출할 때마다 1씩 증가한다.', () => {
+    const RECEIVED = 2;
+
+    expect(bridgeGame.increasingTryCount()).toEqual(RECEIVED);
+  });
 });
