@@ -7,11 +7,11 @@ class App {
 
   play() {
     this.#bridgeCtrl = new BridgeController();
-    this.#bridgeCtrl.printMessage(MESSAGE.START_NOTIFICATION);
     this.gameStart();
   }
 
   gameStart() {
+    this.#bridgeCtrl.printMessage(MESSAGE.START_NOTIFICATION);
     InputView.readBridgeSize();
   }
 }

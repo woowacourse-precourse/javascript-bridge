@@ -26,7 +26,7 @@ class BridgeGame {
   drawMap(isCorrectDirection, direction) {
     const elem = isCorrectDirection ? MAP_ELEMENT.CROSS : MAP_ELEMENT.FAIL;
 
-    return Object.values(this.#bridgeMap.updateMap(direction, elem));
+    return this.#bridgeMap.updateMap(direction, elem);
   }
 
   retry(command) {
@@ -45,7 +45,7 @@ class BridgeGame {
   }
 
   gameResult(userWin = false) {
-    const bridgeMap = Object.values(this.#bridgeMap.getMap());
+    const bridgeMap = this.#bridgeMap.getMap();
 
     return [bridgeMap, this.#numberOfAttempts, userWin];
   }

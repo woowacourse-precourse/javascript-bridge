@@ -12,7 +12,7 @@ class BridgeMap {
   }
 
   getMap() {
-    return this.#map;
+    return Object.values(this.#map);
   }
 
   updateMap(direction, elem) {
@@ -20,7 +20,7 @@ class BridgeMap {
     this.#map[direction].push(elem);
     this.#map[otherSide].push(OTHERSIDE_ELEMENT);
 
-    return this.#map;
+    return Object.values(this.#map);
   }
 }
 
