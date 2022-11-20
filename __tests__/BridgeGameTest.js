@@ -15,15 +15,6 @@ describe('BridgeGame 클래스 테스트', () => {
       }
     );
 
-    test(`입력값이 비어있는 경우, 에러가 발생한다.`, () => {
-      const bridgeGame = new BridgeGame();
-      const input = '';
-
-      expect(() => {
-        bridgeGame.move(input);
-      }).toThrow(ERROR_MSG.emptyInput);
-    });
-
     test.each([['U'], ['D']])(
       `입력이 이동방향 심볼('${UPSIDE_SYMBOL}', '${DOWNSIDE_SYMBOL}')중 하나인 경우, 에러가 발생하지 않는다.`,
       (input) => {
