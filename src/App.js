@@ -7,12 +7,42 @@ const OUTPUT_MESSAGE = require("./constans/OutputMessage");
 class App {
   constructor() {
     this.bridge = [];
+    this.upperTrack = [];
+    this.lowerTrack = [];
+    this.gameMap = [];
+  }
+  makeLine(track) {
+    let line = "[";
+    for (let i = 0; i < track.length; i++) {
+      line += track[i];
+      if (i == track.length - 1) {
+        line += "]";
+        break;
+      }
+      line += "|";
+    }
+    return line;
+  }
+
+  marking(movePoint) {
+    if (movePoint === "U") {
+      this.upperTrack.push(" O ");
+      this.lowerTrack.push("   ");
+      return;
+    }
+    this.upperTrack.push("   ");
+    this.lowerTrack.push(" X ");
+  }
+  bridgeDrawing(movePoint) {
+    this.marking(movePoint);
+    const upper = this.makeLine(this.upperTrack);
+    const lower = this.makeLine(this.lowerTrack);
+    return [upper, lower];
   }
   gameResultPrint(winOrLose) {
     const result = winOrLose
       ? OUTPUT_MESSAGE.SUCCESS_RESULT
       : OUTPUT_MESSAGE.FAILURE_RESULT;
-
     MissionUtils.Console.print(result);
   }
   moveing(movePoint, obstacle) {
@@ -22,12 +52,14 @@ class App {
     const movePoint = InputView.readMoving();
     this.bridge.forEach((obstacle) => {
       if (!moveing(movePoint, obstacle)) {
-        gameResultPrint(false);
-        return;
+        this.gameMap = this.bridgeDrawing(movePoint);
+        OutputView.printMap(this.gameMap);
+        return gameResultPrint(false);
       }
     });
-    gameResultPrint(true);
-    return;
+    this.gameMap = this.bridgeDrawing(movePoint);
+    OutputView.printMap(this.gameMap);
+    return gameResultPrint(true);
   }
   BridgeMaker() {
     try {
