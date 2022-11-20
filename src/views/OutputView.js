@@ -12,10 +12,10 @@ const OutputView = {
     });
   },
 
-  printResult([bridgeState, numberOfAttempts, isSuccess]) {
+  printResult([bridgeState, numberOfAttempts, doesUserWin]) {
     Console.print(MESSAGE.RESULT_NOTIFICATION);
     OutputView.printMap(bridgeState);
-    Console.print(MESSAGE.clear(isSuccess));
+    Console.print(MESSAGE.winOrFail(doesUserWin));
     Console.print(MESSAGE.numberOfAttempts(numberOfAttempts));
   },
 };

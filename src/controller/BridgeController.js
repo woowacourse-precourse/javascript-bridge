@@ -36,8 +36,8 @@ class BridgeController {
     return shouldRetry;
   }
 
-  gameOver(userWin = false) {
-    const gameResult = this.#bridgeGame.gameResult(userWin);
+  gameOver(doesUserWin = false) {
+    const gameResult = this.#bridgeGame.gameResult(doesUserWin);
     OutputView.printResult(gameResult);
     Console.close();
   }
