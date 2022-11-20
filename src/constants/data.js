@@ -6,6 +6,8 @@ const LOWER_ZONE = "D";
 const UPPER_ZONE = "U";
 const RIGHT_ZONE = "O";
 const WRONG_ZONE = "X";
+const RESTART = "R";
+const END = "Q";
 
 const LENGTH = {
   MIN,
@@ -21,4 +23,9 @@ const BRIDGE = {
   WRONG_ZONE,
 };
 
-module.exports = { LENGTH, BRIDGE };
+const COMMAND = {
+  RESTART,
+  END,
+};
+
+module.exports = { LENGTH, BRIDGE, COMMAND };

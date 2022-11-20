@@ -1,4 +1,4 @@
-const { LENGTH, BRIDGE } = require("./constants/data");
+const { LENGTH, BRIDGE, COMMAND } = require("./constants/data");
 const { ERROR_MESSAGE } = require("./constants/message");
 
 const Validation = {
@@ -17,6 +17,11 @@ const Validation = {
   checkUserMoveInput(userInput) {
     if (userInput !== BRIDGE.LOWER_ZONE && userInput !== BRIDGE.UPPER_ZONE)
       throw new Error(ERROR_MESSAGE.MOVE_INPUT);
+  },
+
+  checkCommandInput(commandInput) {
+    if (commandInput !== COMMAND.RESTART && commandInput !== COMMAND.END)
+      throw new Error(ERROR_MESSAGE.COMMAND);
   },
 };
 
