@@ -12,7 +12,7 @@ class BridgeGame {
   #down;
 
   constructor() {
-    this.#round = 0;
+    this.#round = -1;
     this.#up = [];
     this.#down = [];
   }
@@ -33,15 +33,17 @@ class BridgeGame {
    * <p>
    */
   move(move) {
+    this.#round += 1;
+    console.log(this.#bridge.getMap(), this.#round);
     if (move !== this.#bridge.getMap()[this.#round]) {
       if (move === MOVE_VALUE.UP) this.addUp(MOVE_VALUE.INVALID);
       if (move === MOVE_VALUE.DOWN) this.addDown(MOVE_VALUE.INVALID);
+      return false;
     } else {
       if (move === MOVE_VALUE.UP) this.addUp(MOVE_VALUE.VALID);
       if (move === MOVE_VALUE.DOWN) this.addDown(MOVE_VALUE.VALID);
+      return true;
     }
-
-    this.#round += 1;
   }
 
   /**

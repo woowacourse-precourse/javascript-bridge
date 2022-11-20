@@ -27,11 +27,13 @@ const InputView = {
     inputUserValue(GAME_MESSAGE.INPUT_MOVE, (move) => {
       isMoveValid(move);
 
-      bridgeGame.move(move);
-
+      let proceedMove = bridgeGame.move(move);
       let [up, down] = bridgeGame.getUpDownStatus();
 
       OutputView.printMap(up, down);
+
+      if (!proceedMove) this.readGameCommand();
+
       this.readMoving(bridgeGame);
     });
   },
@@ -39,7 +41,11 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    inputUserValue(GAME_MESSAGE.RESTART, (restart) => {
+      console.log(restart);
+    });
+  },
 };
 
 module.exports = InputView;
