@@ -42,6 +42,14 @@ class BridgeGame {
     return this.#bridge.getFailMap(this.#position, direction);
   }
 
+  getResult() {
+    return [this.getMap(), this.#tryCount];
+  }
+
+  getFailResult(direction) {
+    return [this.getFailMap(direction), this.#tryCount];
+  }
+
   isSuccess() {
     return this.#bridge.isLastStep(this.#position);
   }
