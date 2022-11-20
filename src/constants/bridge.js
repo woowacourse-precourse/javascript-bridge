@@ -4,6 +4,11 @@ const ERROR = {
   NOT_VALID_COMMAND_CHAR: 'R(재시도)와 Q(종료) 중 하나의 문자를 입력해야 합니다.',
 };
 
+const LENGTH = {
+  MIN: 3,
+  MAX: 20,
+};
+
 const EITHER = {
   UP: 'U',
   DOWN: 'D',
@@ -28,6 +33,7 @@ const COMMAND = {
 
 module.exports = {
   ERROR,
+  LENGTH,
   EITHER,
   MOVE_RESULT,
   CONTAINER,
