@@ -1,8 +1,17 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require("../src/BridgeGame");
+
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
 
 describe("BridgeGame 클래스 테스트", () => {
   test("다리 한칸 이동 테스트: move() -> getLastRoundResult()", () => {
-    const bridgeGame = new BridgeGame(['D', 'U', 'D']);
+    mockRandoms(['0', '1', '0']);
+    const bridgeGame = new BridgeGame(3);
     bridgeGame.move('D');
     expect(bridgeGame.getLastRoundResult()).toEqual(true);
     bridgeGame.move('D');
@@ -18,7 +27,8 @@ describe("BridgeGame 클래스 테스트", () => {
     ];
     const results = [false, false, true]
     histories.forEach((history, idx) => {
-      bridgeGame = new BridgeGame(['D','D','D']);
+      mockRandoms(['0', '0', '0']);
+      bridgeGame = new BridgeGame(3);
       history.forEach(dir => bridgeGame.move(dir));
       expect(bridgeGame.isArrived()).toEqual(results[idx]);
     });
@@ -52,14 +62,16 @@ describe("BridgeGame 클래스 테스트", () => {
     ];
 
     histories.forEach((history, idx) => {
-      bridgeGame = new BridgeGame(['D','U','D']);
+      mockRandoms(['0', '1', '0']);
+      bridgeGame = new BridgeGame(3);
       history.forEach(dir => bridgeGame.move(dir));
       expect(bridgeGame.stateToString()).toEqual(results[idx]);
     });
   });
 
   test("재시도 시 초기화 및 횟수 증가 테스트: retry(), getTry()", () => {
-    const bridgeGame = new BridgeGame(['D','D','D']);
+    mockRandoms(['0', '0', '0']);
+    const bridgeGame = new BridgeGame(3);
     bridgeGame.move('D');
     expect(bridgeGame.getTry()).toEqual(1);
     expect(bridgeGame.getLastRoundResult()).toEqual(true);
