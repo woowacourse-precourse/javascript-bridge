@@ -1,3 +1,5 @@
+const OutputView = require("./OutputView");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -34,6 +36,15 @@ class BridgeGame {
     const index = this.#move.length - 1;
 
     return this.#bridge[index] !== this.#move[index];
+  }
+
+  isEnd() {
+    return this.#bridge.length === this.#move.length;
+  }
+
+  quit() {
+    let isSuccess = !this.isFail() && this.isEnd();
+    OutputView.printResult(isSuccess);
   }
 
   /**

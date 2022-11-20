@@ -44,6 +44,7 @@ const InputView = {
         OutputView.printMap(bridgeGame.moveResult());
 
         if (bridgeGame.isFail()) return this.readGameCommand(bridgeGame);
+        if (bridgeGame.isEnd()) return bridgeGame.quit();
         return this.readMoving();
       }
     );
@@ -66,6 +67,8 @@ const InputView = {
           bridgeGame.retry();
           return this.readMoving();
         }
+
+        return bridgeGame.quit();
       }
     );
   },
