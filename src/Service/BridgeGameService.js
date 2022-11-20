@@ -1,5 +1,6 @@
 const { generate } = require("../BridgeRandomNumberGenerator.js");
 const { makeBridge } = require("../BridgeMaker.js");
+const { pipe } = require("../utils/Misc.js");
 
 const BridgeGameService = class {
   #inputView;
@@ -46,6 +47,24 @@ const BridgeGameService = class {
     };
 
     this.#inputView.readMoving(callback);
+  }
+
+  processRetry(moveTask, endTask) {
+    if (this.#bridgeGameModel.isRetry()) {
+      moveTask();
+      return;
+    }
+
+    endTask();
+  }
+
+  processMove(retryTask, endTask, moveTask) {
+    if (this.#bridgeGameModel.isSuccess()) {
+      endTask();
+      return;
+    }
+
+    this.#bridgeGameModel.isFail() ? retryTask() : moveTask();
   }
 };
 
