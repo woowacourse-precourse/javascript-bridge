@@ -6,11 +6,10 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 class App {
   constructor() {
-    this.bridgeGame;
+    this.bridgeGame = new BridgeGame();
   }
 
   play() {
-    this.bridgeGame = new BridgeGame();
     OutputView.playGame();
     this.inputBridgeSize();
   }
@@ -42,11 +41,9 @@ class App {
     OutputView.printBridge(upBridgeRecord, downBridgeRecord);
   }
   checkReplay(replayComment) {
-    const retry = this.bridgeGame.checkReplay(replayComment);
-    const tryCount = this.bridgeGame.getTryCount();
     const FAIL_COMMENT = '실패';
-    if (retry) return this.play();
-    if (!retry) {
+    if (replayComment === 'R') return this.bridgeGame.retry(this.inputMoving.bind(this));
+    if (replayComment === 'Q') {
       this.printBridge();
       OutputView.printResult(tryCount, FAIL_COMMENT);
     }

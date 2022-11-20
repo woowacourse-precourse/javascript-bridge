@@ -45,14 +45,6 @@ class BridgeGame {
     success = this.checkSuccess(moveable);
     return { fail: fail, success: success };
   }
-  checkReplay(replayComment) {
-    if (replayComment == 'R') {
-      return this.retry();
-    }
-    if (replayComment == 'Q') {
-      return false;
-    }
-  }
   checkSuccess(moveable) {
     if (moveable === 'O' && this.#bridge.length === this.#movingCount) return true;
     return false;
@@ -68,9 +60,12 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {
+  retry(callback) {
     this.#tryCount += 1;
-    return true;
+    this.#movingCount = 0;
+    this.#downBridgeRecord = [];
+    this.#upBridgeRecord = [];
+    callback();
   }
 }
 
