@@ -13,13 +13,16 @@ const OutputView = {
    * @param {MovementStatus} movementState
    */
   printMap(movementState) {
-    const { moveLength, leftSideStatus, rightSideStatus } = movementState;
-    const leftSidePrintBody = this.encodeBridgeSide(moveLength, leftSideStatus);
-    const rightSidePrintBody = this.encodeBridgeSide(
+    const { moveLength, upperSideStatus, lowerSideStatus } = movementState;
+    const upperSidePrintBody = this.encodeBridgeSide(
       moveLength,
-      rightSideStatus
+      upperSideStatus
     );
-    this.blockPrintHelper([leftSidePrintBody, rightSidePrintBody]);
+    const lowerSidePrintBody = this.encodeBridgeSide(
+      moveLength,
+      lowerSideStatus
+    );
+    this.blockPrintHelper([upperSidePrintBody, lowerSidePrintBody]);
   },
 
   /**

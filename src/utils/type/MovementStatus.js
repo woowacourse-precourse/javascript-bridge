@@ -23,12 +23,12 @@ class MovementStatus {
     /** @type {number} moveLength 지금까지 이동한 다리길이 */
     this.moveLength = 0;
     /**@type {Array<RoundStatus>} 다리의 왼쪽편 이동 결과가 담긴 배열*/
-    this.leftSideStatus = [];
+    this.upperSideStatus = [];
     /**
      * 다리의 오른쪽편 이동 결과 담긴 배열
      * @type {Array<RoundStatus>}
      */
-    this.rightSideStatus = [];
+    this.lowerSideStatus = [];
   }
 }
 
