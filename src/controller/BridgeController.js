@@ -33,6 +33,15 @@ class BridgeController {
   }
 
   /**
+   * 유저가 성공적으로 움직였는지 유무를 반환하는 메서드 연결체
+   * @param userMoving {string[]} [유저 움직임]
+   * @return {boolean} [성공 유무]
+   */
+  getIsSuccessMoving(userMoving) {
+    return this.bridgeModel.isSuccessMoving(userMoving);
+  }
+
+  /**
    * 유저에게 다리 길이를 입력 받은 후 다리 생성 및 저장한다.
    * @param bridgeLengthInput {string} [다리 길이 input]
    */
