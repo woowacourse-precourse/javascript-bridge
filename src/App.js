@@ -5,6 +5,7 @@ const InputValidator = require('./InputValidator');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const command = require('./util/command');
+const message = require('./util/message');
 const View = require('./View');
 
 class App {
@@ -13,14 +14,14 @@ class App {
   }
 
   play() {
-    OutputView.printMessage('다리 건너기 게임을 시작합니다.');
+    OutputView.printMessage(message.GAME_START);
     InputView.readBridgeSize(this.handleInputLength.bind(this));
   }
 
   handleInputLength(input) {
     try {
       if (!InputValidator.isValidLength(input)) {
-        throw new Error('[ERROR] : 유효한 길이가 아닙니다.');
+        throw new Error(message.ERROR_LENGTH);
       }
       this.initBridges(+input);
       InputView.readMoving(this.handleInputStep.bind(this));
@@ -33,7 +34,7 @@ class App {
   handleInputStep(input) {
     try {
       if (!InputValidator.isValidStep(input)) {
-        throw new Error('[ERROR] : 유효한 칸이 아닙니다.');
+        throw new Error(message.ERROR_STEP);
       }
       this.bridgeGame.bridgeSteps.push(input);
       OutputView.printMap(
@@ -67,7 +68,7 @@ class App {
   handleInputCommand(input) {
     try {
       if (!InputValidator.isValidCommand(input)) {
-        throw new Error('[ERROR] : 유효한 명령어가 아닙니다.');
+        throw new Error(message.ERROR_COMMAND);
       }
       if (input === command.GAME_QUIT) {
         OutputView.printResult(
