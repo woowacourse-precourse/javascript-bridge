@@ -15,7 +15,9 @@ class Validator {
   }
 
   checkRetryInput(input) {
-
+    if (this.isNotValidRetryInput(input)) {
+      throw new Error('[ERROR] 재시도: R, 종료: Q 만 입력 가능합니다.')
+    }
   }
 
   isNotNumber(num) {
