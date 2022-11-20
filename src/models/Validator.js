@@ -1,6 +1,11 @@
 class Validator {
   checkBridgeLengthInput(bridgeLength) {
-
+    if (this.isNotNumber(bridgeLength)) {
+      throw new Error('[ERROR] 다리 길이는 숫자만 입력 가능합니다.');
+    }
+    if (this.isNotRangeOfBridgeLength(bridgeLength)) {
+      throw new Error('[ERROR] 다리 길이는 3 이상 20 이하만 입력 가능합니다.');
+    }
   }
 
   checkDirectionInput(direction) {
