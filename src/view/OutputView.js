@@ -26,8 +26,8 @@ const OutputView = {
   printResult() {
     Console.print(MESSAGE.RESULT_MESSAGE);
     this.printMap();
-    Console.print(MESSAGE.SUCCESS_STATE_MESSAGE(Player.gameSuccess));
-    Console.print(MESSAGE.TRYING_COUNT_MESSAGE(Player.tryingCount));
+    Console.print(MESSAGE.SUCCESS_STATE_MESSAGE(Player.getGameSuccess()));
+    Console.print(MESSAGE.TRYING_COUNT_MESSAGE(Player.getTryingCount()));
     Console.close();
   },
 
