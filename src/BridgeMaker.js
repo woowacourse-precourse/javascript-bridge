@@ -2,6 +2,10 @@
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
 const BridgeMaker = {
+  BRIDGE_DIRECTION_UP: "U",
+  BRIDGE_DIRECTION_DOWN: "D",
+  STRING_TO_UP: "0",
+  STRING_TO_DOWN: "1",
   /**
    * @param {number} size 다리의 길이
    * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
@@ -21,11 +25,11 @@ const BridgeMaker = {
    * @param {string[]} bridge 다리 모양을 저장할 배열
    */
   pushConvertedNumberToBridge(randomNumberByString, bridge) {
-    if (randomNumberByString === "0") {
-      bridge.push("U");
+    if (randomNumberByString === BridgeMaker.STRING_TO_UP) {
+      bridge.push(BridgeMaker.BRIDGE_DIRECTION_UP);
     }
-    if (randomNumberByString === "1") {
-      bridge.push("D");
+    if (randomNumberByString === BridgeMaker.STRING_TO_DOWN) {
+      bridge.push(BridgeMaker.BRIDGE_DIRECTION_DOWN);
     }
   },
 };
