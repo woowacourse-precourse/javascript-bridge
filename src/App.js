@@ -10,8 +10,6 @@ const validateRetryCommand = require("./validation/validateRetryCommand");
 const BRIDGE = require("./constant/constants");
 
 class App {
-  #bridge;
-
   constructor() {
     this.BridgeGame = new BridgeGame();
     this.tryTimes = 1;
@@ -31,7 +29,7 @@ class App {
       return;
     }
 
-    this.#bridge = makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
+    this.BridgeGame.setBridge(makeBridge(Number(size), BridgeRandomNumberGenerator.generate));
     InputView.readMoving(this.requestMoveUpOrDown.bind(this));
   }
 
@@ -44,16 +42,17 @@ class App {
     }
 
     const position = this.BridgeGame.getPosition();
+    const bridge = this.BridgeGame.getBridge();
 
-    OutputView.printMap(position, this.#bridge, answer);
-    OutputView.setRecentBridgePrint(position, this.#bridge, answer);
+    OutputView.printMap(position, bridge, answer);
+    OutputView.setRecentBridgePrint(position, bridge, answer);
 
-    const isCorrect = this.BridgeGame.isCorrect(answer, this.#bridge);
+    const isCorrect = this.BridgeGame.isCorrect(answer, bridge);
 
     if (isCorrect) {
       this.BridgeGame.move();
 
-      if (this.#bridge.length === this.BridgeGame.getPosition()) {
+      if (bridge.length === this.BridgeGame.getPosition()) {
         OutputView.printGameResult(answer, this.tryTimes);
         this.shutDown();
         return;

@@ -4,10 +4,19 @@
 class BridgeGame {
   constructor() {
     this.position = 0;
+    this.bridge;
   }
 
   getPosition() {
     return this.position;
+  }
+
+  setBridge(bridge) {
+    this.bridge = bridge;
+  }
+
+  getBridge() {
+    return this.bridge;
   }
 
   isCorrect(answer, bridge) {
