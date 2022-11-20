@@ -1,10 +1,18 @@
 const BridgeService = require('../service/BridgeService');
 
+let instance = null;
+
 class BridgeController {
   #service;
 
   constructor() {
+    if (instance) {
+      throw new Error('Only one instance is allowed!');
+    }
+
     this.#service = new BridgeService();
+
+    instance = this;
   }
 
   inputBridgeLength(bridgeLength) {
@@ -31,4 +39,6 @@ class BridgeController {
   }
 }
 
-module.exports = BridgeController;
+const singletonBridgeController = Object.freeze(new BridgeController());
+
+module.exports = singletonBridgeController;
