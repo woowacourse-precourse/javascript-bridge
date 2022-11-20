@@ -4,7 +4,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { ERROR } = require('./Constants');
 const { readBridgeSize } = require('./InputView');
 const { printError } = require('./OutputView');
-const { isPositiveInteger } = require('./Validation');
+const { isSizeInRange } = require('./Validation');
 
 class App {
   #setBridgeGame(size) {
@@ -16,7 +16,7 @@ class App {
   play() {
     readBridgeSize((size) => {
       const sizeInput = Number(size);
-      if (!isPositiveInteger(sizeInput)) {
+      if (!isSizeInRange(sizeInput)) {
         printError(ERROR.bridgeSizeException);
         return this.play();
       }

@@ -16,7 +16,7 @@ const INPUT = {
 };
 
 const ERROR = {
-  bridgeSizeException: '양의 정수를 입력해 주세요.',
+  bridgeSizeException: '3부터 20 사이의 숫자를 입력해 주세요.',
   movingException: 'U와 D만 입력해 주세요.',
   gameCommandException: 'R과 Q만 입력해 주세요.',
 };

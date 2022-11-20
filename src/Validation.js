@@ -1,6 +1,6 @@
 const Validation = {
-  isPositiveInteger(size) {
-    if (!(Number.isInteger(size) && size > 0)) return false;
+  isSizeInRange(size) {
+    if (!(Number.isInteger(size) && (size >= 3 || size <= 20))) return false;
 
     return true;
   },
