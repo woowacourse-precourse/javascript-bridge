@@ -15,7 +15,6 @@ class BridgeGame {
   }
   makeBridge(length){
     this.bridge = BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate)
-    console.log(this.bridge)
   }
   checkBridgeCorrect(input){
     if(this.bridge[this.number] === input){

@@ -3,16 +3,18 @@ const Validate = require("./Validate.js")
 const BridgeGame = require("./BridgeGame.js")
 const OutputView = require("./OutputView.js")
 const Notice = require("./NoticeMessage.js")
+const MissionUtils = require("@woowacourse/mission-utils")
 class App {
   constructor(){
     this.game = new BridgeGame()
     this.try = 1
   }
   play() {
+    MissionUtils.Console.print(Notice.START_GAME)
     InputView.readBridgeSize(this.makeBridge.bind(this))
   }
   makeBridge(Length){
-    Validate.BridgeLengthInput(Length)
+    this.validateBridgeSizeInput(Length)
     this.game.makeBridge(Length)
     InputView.readMoving(this.inputCommand.bind(this))
   }
@@ -48,6 +50,14 @@ class App {
     this.game.upside = []
     this.game.downside = []
     this.game.number = 0
+  }
+  validateBridgeSizeInput(size){
+    try{
+      Validate.BridgeLengthInput(size)
+    }catch(err){
+      MissionUtils.Console.print(err)
+      InputView.readBridgeSize(this.makeBridge.bind(this))
+    }
   }
 }
 const app = new App();
