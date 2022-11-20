@@ -1,5 +1,6 @@
 // InputView, OutputView 사용 금지
 
+const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { UP_AND_DOWN, TRACE_MARKS } = require("./constants");
 /**
@@ -15,12 +16,9 @@ class BridgeGame {
     this.#trace = [[], []];
   }
 
-  makeBridge(bridgeSize) {
-    let bridge = [];
-    while (bridge.length < bridgeSize) {
-      const number = BridgeRandomNumberGenerator.generate();
-      bridge.push(UP_AND_DOWN[number]);
-    }
+  saveBridge(bridgeSize) {
+    const generator = BridgeRandomNumberGenerator.generate;
+    const bridge = BridgeMaker.makeBridge(bridgeSize, generator);
     this.#bridge = bridge;
   }
   /**
