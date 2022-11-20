@@ -83,6 +83,10 @@ class BridgeGame {
       this.bridgeResult[1].includes("X")
     ) {
       OutputView.retrySentence();
+      if (InputView.readGameCommand() === "R") {
+        this.bridgeResult = [[], []];
+        this.move();
+      }
     }
   }
 }
