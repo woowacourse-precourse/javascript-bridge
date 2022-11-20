@@ -49,7 +49,6 @@ const OutputView = {
     const { topSide, downSide } = map;
     const result = isDone ? '성공' : '실패';
 
-    Console.print(GAME.END);
     Console.print(`[ ${topSide.join(' | ')} ]`);
     Console.print(`[ ${downSide.join(' | ')} ]`);
     Console.print(GAME.GAME_SUCCESS + result);

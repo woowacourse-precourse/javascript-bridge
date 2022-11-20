@@ -37,16 +37,10 @@ class GameController {
     validateNext.validate(next);
 
     const isSuccess = this.game.move(next);
-
     OutputView.printMap(this.game.getMap(), isSuccess);
 
-    if (isSuccess) {
-      this.game.isEnd()
-        ? OutputView.printResult(true, this.game.getMap())
-        : this.askMoving();
-    } else {
-      this.askGameCommand();
-    }
+    if (isSuccess) this.game.isEnd() ? this.end(true) : this.askMoving();
+    if (!isSuccess) this.askGameCommand();
   }
 
   askGameCommand() {
@@ -56,13 +50,19 @@ class GameController {
   setGameCommand(gameCommand) {
     validateGameCommand.validate(gameCommand);
 
-    if (gameCommand === 'R') {
-      this.game.retry();
-      OutputView.initialization();
-      this.askMoving();
-    } else {
-      OutputView.printResult(false, this.game.getMap());
-    }
+    if (gameCommand === 'R') this.retry();
+    if (gameCommand === 'Q') this.end(false);
+  }
+
+  retry() {
+    this.game.retry();
+    OutputView.initialization();
+    this.askMoving();
+  }
+
+  end(isSuccess) {
+    Console.print(GAME.END);
+    OutputView.printResult(isSuccess, this.game.getMap());
   }
 }
 
