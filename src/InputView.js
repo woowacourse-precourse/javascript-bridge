@@ -67,7 +67,6 @@ const InputView = {
   },
 
   fail(userAnswer, bridgeArray) {
-    this.INDEX = 0;
     this.BRIDGE_GAME.fail(userAnswer);
     this.readGameCommand(bridgeArray);
   },
