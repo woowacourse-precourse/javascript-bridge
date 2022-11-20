@@ -1,14 +1,15 @@
 const Trimmer = require('../Trimmer');
-const { BRIDGE, COMMAND } = require('../constant/Constant');
+const { BRIDGE, COMMAND, MOVE_RESULT } = require('../constant/Constant');
 
 class BridgeDrawer {
   #gameStatus = {};
   #bridgeDrawing = {};
 
-  getBridgeDrawingUsingResult(bridge, drawSize, isPlayerSucceed) {
+  getBridgeDrawingUsingResult(bridge, drawSize, roundResult) {
     this.#gameStatus.bridge = bridge;
     this.#gameStatus.drawSize = drawSize;
-    this.#gameStatus.isPlayerSucceed = isPlayerSucceed;
+    this.#gameStatus.roundResult = roundResult;
+    this.#bridgeDrawing = {};
 
     this.#createBridgeGrid();
     this.#markFailSignIfFailed();
@@ -28,10 +29,11 @@ class BridgeDrawer {
   }
 
   #markFailSignIfFailed() {
-    if (this.#gameStatus.isPlayerSucceed) {
+    if (this.#gameStatus.roundResult !== MOVE_RESULT.FAIL) {
       return;
     }
 
+    console.log(this.#gameStatus);
     const bridgeLastIndex = this.#gameStatus.drawSize - 1;
     const direction = this.#gameStatus.bridge[bridgeLastIndex];
     this.#bridgeDrawing[direction][bridgeLastIndex] = BRIDGE.FAIL_SIGN;
