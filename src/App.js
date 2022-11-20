@@ -1,9 +1,9 @@
 const { readBridgeSize } = require("./InputView");
-const { printResult } = require("./OutputView");
+const { printMessege } = require("./OutputView");
 
 class App {
   play() {
-    printResult("다리 건너기 게임을 시작합니다.");
+    printMessege("다리 건너기 게임을 시작합니다.");
     readBridgeSize();
   }
 }
