@@ -5,6 +5,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker=require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView=require('./OutputView')
+const BrideGame=require('./BridgeGame')
+const bridegame=new BrideGame()
 
 const InputView = {
   printGameStart(){
@@ -41,19 +43,27 @@ const InputView = {
   },
   checkMovingInput(userSpace,bridgeArray){
     if(userSpace!=='U'&& userSpace!=='D') throw "[ERROR] Only U,D accepted"
-    OutputView.printMap(bridgeArray)
+    let correctValue=OutputView.printMap(userSpace,bridgeArray)
+    if(correctValue==='O') {
+      // let shiftedArray=bridegame.move(bridgeArray)
+      bridegame.move(bridgeArray)
+      this.readMoving(bridgeArray)
+    }
+    if(correctValue==='X') this.readGameCommand(correctValue)
   },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-    MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",(gameInput)=>{
-      this.checkReadGameInput(gameInput)
+  readGameCommand(correctValue) {
+    MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",(gameInput)=>{
+      this.checkReadGameInput(gameInput,correctValue)
     })
   },
-  checkReadGameInput(gameInput){
-    if(gameInput!=='R' || gameInput!=='Q') throw "[ERROR] Only R,Q accepted"
-    return gameInput
+  checkReadGameInput(gameInput,correctValue){
+    let count=0
+    count++
+    if(gameInput!=='R' && gameInput!=='Q') throw "[ERROR] Only R,Q accepted"
+    OutputView.printResult(count)
   }
 };
 
