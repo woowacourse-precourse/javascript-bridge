@@ -20,8 +20,8 @@ class Player {
   }
 
   #getBridgeArray() {
-    const upperBridge = this.#bridge.map((direction) => (direction === "U" ? "O" : " "));
-    const lowerBridge = this.#bridge.map((direction) => (direction === "D" ? "O" : " "));
+    const upperBridge = this.#bridgePath.map((direction) => (direction === "U" ? "O" : " "));
+    const lowerBridge = this.#bridgePath.map((direction) => (direction === "D" ? "O" : " "));
     return [upperBridge, lowerBridge];
   }
 
@@ -51,3 +51,5 @@ class Player {
     return this.#toString(upperBridge, lowerBridge);
   }
 }
+
+module.exports = Player;
