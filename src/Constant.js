@@ -19,7 +19,6 @@ const MOVING = {
   random_down: "0",
   up: "U",
   down: "D",
-  initialLists: [[], []],
   count: 1,
 };
 

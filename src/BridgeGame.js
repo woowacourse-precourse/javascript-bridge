@@ -1,7 +1,7 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const { MOVING, BRIDGE } = require("./Constant.js");
+const { MOVING, BRIDGE } = require("./Constant");
 class BridgeGame {
   #movingList;
   #gameCount;
@@ -53,7 +53,7 @@ class BridgeGame {
    */
   retry() {
     this.#gameCount += MOVING.count;
-    this.#movingList = MOVING.initialLists;
+    this.#movingList = [[], []];
   }
 }
 
