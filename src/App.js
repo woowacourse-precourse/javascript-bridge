@@ -38,7 +38,7 @@ class App {
   getBridge() {
     this.#bridge = BridgeMaker.makeBridge(
       this.#bridgeSize,
-      BridgeRandomNumberGenerator
+      BridgeRandomNumberGenerator.generate
     );
   }
 

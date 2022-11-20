@@ -6,13 +6,10 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
-
     for (let index = 0; index < size; index += 1) {
-      generateRandomNumber.generate() === 1
-        ? bridge.push("U")
-        : bridge.push("D");
+      let number = generateRandomNumber().toString();
+      number === "1" ? bridge.push("U") : bridge.push("D");
     }
-
     return bridge;
   },
 };
