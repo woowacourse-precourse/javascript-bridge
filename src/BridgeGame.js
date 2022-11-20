@@ -37,13 +37,13 @@ class BridgeGame {
    */
   move(moving) {
     Validator.validateEqual(moving, BRIDGE_SPACE_TYPE);
-    const currentStep = this.#player.getStep();
-    const isCorrect = this.#bridge.isCorrect(moving, currentStep);
-    const isLast = this.#bridge.isLast(currentStep);
+    const currentLocation = this.#player.getLocation();
+    const isCorrect = this.#bridge.isCorrect(moving, currentLocation);
+    const isLast = this.#bridge.isLast(currentLocation);
     const mark = isCorrect ? MARKING.CORRECT : MARKING.WRONG;
 
     this.#player.markOX(moving, mark);
-    this.#player.setStep(currentStep + 1);
+    this.#player.setLocation(currentLocation + 1);
     this.#isSuccess = isCorrect && isLast;
 
     return StatusGenerator.generate(isCorrect, isLast);
