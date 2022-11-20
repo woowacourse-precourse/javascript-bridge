@@ -29,7 +29,7 @@ const InputView = {
       const gameResult=bridgeGame.move(playerMoveList, bridge);
       OutputView.printMap(gameResult);
       if(gameResult.includes('X')){
-        return this.readGameCommand(playerMoveList, bridgeSize, bridge);
+        return this.readGameCommand(gameResult, bridgeSize, bridge);
       }
       if(playerMoveList.length===Number(bridgeSize)) return OutputView.printResult(gameResult)
       return this.readMoving(playerMoveList, bridgeSize, bridge);
@@ -39,9 +39,9 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(playerMoveList, bridgeSize, bridge) {
+  readGameCommand(gameResult, bridgeSize, bridge) {
     MissionUtils.Console.readLine(RESTART_OR_QUIT_INPUT, (answer) => {
-      if(answer==='Q') MissionUtils.Console.close();
+      if(answer==='Q') OutputView.printResult(gameResult)
       if(answer==='R') this.readMoving([], bridgeSize, bridge)
     })
   },
