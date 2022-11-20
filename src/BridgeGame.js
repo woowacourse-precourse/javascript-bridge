@@ -51,8 +51,8 @@ class BridgeGame {
    * 지도에 그려질 위쪽 방향의 목록을 더하는 메서드
    * <p>
    */
-  addUp() {
-    this.#up.push(MOVE_VALUE.UP);
+  addUp(move) {
+    this.#up.push(move);
     this.#down.push(" ");
   }
 
@@ -60,8 +60,8 @@ class BridgeGame {
    * 지도에 그려질 아래쪽 방향의 목록을 더하는 메서드
    * <p>
    */
-  addDown() {
-    this.#down.push(MOVE_VALUE.DOWN);
+  addDown(move) {
+    this.#down.push(move);
     this.#up.push(" ");
   }
 

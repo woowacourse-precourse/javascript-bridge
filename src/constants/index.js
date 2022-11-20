@@ -6,6 +6,8 @@ const BRIDGE_VALUE = Object.freeze({
 const MOVE_VALUE = Object.freeze({
   UP: "U",
   DOWN: "D",
+  VALID: "O",
+  NOT_VALID: "X",
 });
 
 const GAME_MESSAGE = Object.freeze({
