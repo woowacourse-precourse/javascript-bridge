@@ -1,10 +1,13 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const Console = MissionUtils.Console;
+
 const OutputView = {
 
   upper : [],
 
   downer : [],
 
-  push(upperValue, downerValue){
+  addValue(upperValue, downerValue){
     this.upper.push(upperValue);
     this.downer.push(downerValue);
   },
@@ -12,18 +15,20 @@ const OutputView = {
 
   pushResult(bridge,curIdx,success){
     if(success){
-      if(bridge[curIdx-1] === "U") push(" O ", "  ");
-      else push("  ", " O ");
+      if(bridge[curIdx-1] === "U") this.addValue(" O ", "   ");
+      else this.addValue("   ", " O ");
     }
     else{
-      if(bridge[curIdx-1] === "U") push(" X ", "  ");
-      else push("  ", " X ");
+      if(bridge[curIdx-1] === "U") this.addValue(" X ", "   ");
+      else this.addValue("   ", " X ");
     }
   },
 
 
-  printMap(bridge, curIdx, success) {
-
+  printMap() {
+    const [upperStr, downStr] = ["["+this.upper.join('|')+"]", "["+this.downer.join('|')+"]"];
+    Console.print(upperStr);
+    Console.print(downStr);
   },
 
   /**
