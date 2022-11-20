@@ -1,27 +1,37 @@
+const Player = require("./Player");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
-  #position;
+  #player;
   #tryCount;
 
   constructor(bridge) {
     this.#bridge = bridge;
-    this.#position = 0;
+    this.#player = new Player();
     this.#tryCount = 1;
   }
 
+  isSuccess() {
+    return this.#bridge.isLastStep(this.#position);
+  }
+
+  isMovable(direction) {
+    return this.#bridge.getNextIndex(this.#player) === direction;
+  }
+
+  out(direction) {
+    this.#player.out(direction);
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    if (!this.#bridge.isMovable(this.#position, direction)) return false;
-
-    this.#position += 1;
-    return true;
+    this.#player.move(direction);
   }
 
   /**
@@ -30,28 +40,16 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#position = 0;
-    this.#tryCount += 1;
+    this.#player = new Player();
+    this.#tryCount++;
   }
 
   getMap() {
-    return this.#bridge.getPassedMap(this.#position);
-  }
-
-  getFailMap(direction) {
-    return this.#bridge.getFailMap(this.#position, direction);
+    return this.#player.getMap();
   }
 
   getResult() {
-    return [this.getMap(), this.#tryCount];
-  }
-
-  getFailResult(direction) {
-    return [this.getFailMap(direction), this.#tryCount];
-  }
-
-  isSuccess() {
-    return this.#bridge.isLastStep(this.#position);
+    return [this.getMap(), this.isSuccess(), this.#tryCount];
   }
 }
 
