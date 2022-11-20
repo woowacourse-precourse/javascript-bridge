@@ -2,6 +2,7 @@ const COMMAND = require('../../constants/command');
 const NUMBER = require('../../constants/number');
 const STRING = require('../../constants/string');
 const SYSTEM_MESSAGE = require('../../constants/system message');
+const Bridge = require('./Bridge');
 
 class Move {
   static #moveCount = NUMBER.ZERO;
@@ -29,11 +30,11 @@ class Move {
     this.#currentMove = result;
   }
 
-  static canMove(path) {
+  static canMove() {
     if (this.showCurrent() !== STRING.O) {
       return false;
     }
-    if (this.showCount() === path.length) {
+    if (this.showCount() === Bridge.getPath().length) {
       return false;
     }
     return true;
@@ -59,12 +60,19 @@ class Move {
     return moveResult;
   }
 
-  static byDirection(currentCell, direction) {
+  static calculateMove(currentPosition, direction) {
     this.addCount();
-
-    return currentCell === COMMAND.UP
+    return currentPosition === COMMAND.UP
       ? this.moveUp(direction)
       : this.moveDown(direction);
+  }
+
+  static byDirection(direction) {
+    const countIndex = this.showCount();
+    const currentPosition = Bridge.getPathPositionOf(countIndex);
+    const moveResult = this.calculateMove(currentPosition, direction);
+
+    Bridge.setMoveResult(direction, moveResult, countIndex);
   }
 }
 
