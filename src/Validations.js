@@ -14,7 +14,7 @@ const validation = {
     },
     
     validateCommand(commands, error, command){
-        if(!commands.include(command)){
+        if(!commands.includes(command)){
             throw new Error(error)
         }
     }
@@ -23,3 +23,4 @@ const validation = {
 
 module.exports = validation;
 
+console.log(validation.validateRange([1,20],1))
