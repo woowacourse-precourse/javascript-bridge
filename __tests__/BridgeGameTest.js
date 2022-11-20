@@ -1,9 +1,8 @@
-const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeGame = require('../src/BridgeGame');
 const BridgeMaker = require('../src/BridgeMaker');
 const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
 
-const moveCheck = describe('BridgeGame 클래스 테스트', () => {
+describe('BridgeGame 클래스 테스트', () => {
   test('내 위치 이동 메서드 테스트', () => {
     expect(
       (() => {
