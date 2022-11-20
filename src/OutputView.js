@@ -47,8 +47,10 @@ const OutputView = {
     //   if(bridgePrinterBelow[i]==='empty') temp2+='!'
     //   if(bridgePrinterBelow[i]==='O') temp2+='O'
     // }
-    temp=JSON.stringify(bridgePrinterAbove)
-    temp2=JSON.stringify(bridgePrinterBelow)
+    temp=JSON.stringify(bridgePrinterAbove).replace(/,/g,"|")
+    temp=temp.replace(/empty/g,' ')
+    temp2=JSON.stringify(bridgePrinterBelow).replace(/,/g,"|")
+    temp2=temp2.replace(/empty/g,' ')
     console.log(temp);
     console.log(temp2);
   },
