@@ -13,10 +13,15 @@ const InputView = {
     return bridgeSize;
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+  readMoving() {
+    let moving;
+    Console.readLine(MESSAGE.READ_MOVING, (input) => {
+      moving = input;
+      Console.close();
+    });
+
+    return moving;
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

@@ -11,6 +11,8 @@ class App {
       bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
+
+    const moving = InputView.readMoving();
   }
 }
 
