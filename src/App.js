@@ -6,6 +6,7 @@ const OutputView = require("./OutputView");
 const { Console } = require("@woowacourse/mission-utils");
 const validateBridgeSize = require("./validation/validateBridgeSize");
 const validateMoveUpOrDownAnswer = require("./validation/validateMoveUpOrDownAnswer");
+const validateRetryCommand = require("./validation/validateRetryCommand");
 
 class App {
   #bridge;
@@ -48,6 +49,8 @@ class App {
   }
 
   handleRetry(answer) {
+    validateRetryCommand(answer);
+
     if (answer === "R") {
       this.tryTimes++;
       this.BridgeGame.retry();
