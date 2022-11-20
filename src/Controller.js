@@ -96,11 +96,11 @@ const Controller = {
   },
 
   initializeAll() {
-    (this.arrayState = [[], []]),
-      (this.playerArr = []),
-      (this.gameResult = ""),
-      (this.size = 0),
-      (this.tryCount += 1); // 시도 마다 올라감
+    this.arrayState = [[], []],
+    this.playerArr = [],
+    this.gameResult = "",
+    this.size = 0,
+    this.tryCount += 1; // 시도 마다 올라감
   },
 
   playerCommand(command) {
