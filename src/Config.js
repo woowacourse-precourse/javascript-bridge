@@ -10,6 +10,10 @@ const BridgeConfig = {
 const GameConfig = {
   RETRY: 'R',
   QUIT: 'Q',
+
+  STATUS_PLAY: 0,
+  STATUS_FAIL: -1,
+  STATUS_SUCCESS: 1,
 };
 
 const Message = {
