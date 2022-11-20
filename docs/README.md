@@ -11,6 +11,8 @@
 ## Model
 
 - BridgeGame
+- BridgeMap
+- BridgeGameStatistics
 
 ## View
 
@@ -95,6 +97,23 @@
 - [x] 생성된 다리와 건넌 다리의 길이 비교하는 기능
 - [x] 시도 횟수를 알려주는 기능
 
+## BridgeMap
+
+- [ ] 이동한 맵을 추가하는 기능
+  - 위쪽 맵과 아래쪽 맵이 존재함
+  - 건넜다면 'O', 건너지 못했다면 'X', 건너지 않았다면 ''를 맵에 추가
+- [ ] 이동한 맵을 반환하는 기능
+- [ ] 이동한 맵을 초기화하는 기능
+
+
+## BridgeGameStatistics
+
+- [ ] 시도한 횟수를 증가시키는 기능
+- [ ] 시도한 횟수를 반환하는 기능
+- [ ] 건넌 다리의 길이를 초기화하는 기능
+- [ ] 다리의 길이와 건넌 다리의 길이를 비교하는 기능
+- [ ] 게임을 성공했는지 확인하는 기능
+
 ## BridgeMaker
 
 > 제공된 BridgeMaker 객체를 활용해 구현해야 한다.
@@ -106,6 +125,12 @@
 > BridgeMaker의 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
 
 - [x] 다리 생성하기
+
+## BridgeRandomNumberGenerator
+
+> Random 값 추출은 제공된 BridgeRandomNumberGenerator의 generate()를 활용한다.
+>
+> BridgeRandomNumberGenerator의 코드는 변경할 수 없다.
 
 ## BridgeGameController
 
