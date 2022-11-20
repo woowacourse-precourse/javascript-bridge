@@ -20,7 +20,8 @@ class BridgeGame {
     this.#status.increaseTryCount();
   }
 
-  setBridge(size) {
+  setBridge(sizeCommand) {
+    const size = sizeCommand.getSizeNumber();
     const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.#bridge = new Bridge(bridge);
   }
@@ -30,10 +31,11 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(input) {
-    const isCrossed = this.#bridge.isCrossed(input, this.#status.getLocation());
+  move(movingCommand) {
+    const command = movingCommand.getCommand();
+    const isCrossed = this.#bridge.isCrossed(command, this.#status.getLocation());
 
-    this.#map.add(input, isCrossed);
+    this.#map.add(command, isCrossed);
     this.#status.increaseLocation();
 
     return isCrossed;

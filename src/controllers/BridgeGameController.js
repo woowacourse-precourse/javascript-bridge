@@ -1,7 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const { GAME_RULE } = require('../constants');
-
 const BridgeGame = require('../models/BridgeGame');
 const { SizeCommand, MovingCommand, GameCommand } = require('../models/command');
 
@@ -27,7 +25,7 @@ class BridgeGameController {
 
   #tryBridgeSizeSubmit(command) {
     const sizeCommand = new SizeCommand(command);
-    this.#game.setBridge(+sizeCommand.getCommand());
+    this.#game.setBridge(sizeCommand);
     readMoving(this.#onMovingSubmit.bind(this));
   }
 
@@ -41,14 +39,14 @@ class BridgeGameController {
 
   #tryMovingCommandSubmit(command) {
     const movingCommand = new MovingCommand(command);
-    const isCrossed = this.#game.move(movingCommand.getCommand());
+    const isCrossed = this.#game.move(movingCommand);
     const bridgeMap = this.#game.getMap();
-    printMap(bridgeMap);
 
+    printMap(bridgeMap);
     if (this.#game.isWin()) {
       this.#runQuit();
+      return;
     }
-
     this.#runBridgeCross(isCrossed);
   }
 
@@ -72,12 +70,12 @@ class BridgeGameController {
   #tryGameCommandSubmit(command) {
     const gameCommand = new GameCommand(command);
 
-    if (gameCommand.getCommand() === GAME_RULE.RETRY) {
+    if (gameCommand.isRetry()) {
       this.#runRetry();
       return;
     }
 
-    if (gameCommand.getCommand() === GAME_RULE.QUIT) {
+    if (gameCommand.isQuit()) {
       this.#runQuit();
     }
   }

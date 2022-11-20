@@ -17,6 +17,14 @@ class GameCommand extends Command {
   static #isValid(command) {
     return command === GAME_RULE.RETRY || command === GAME_RULE.QUIT;
   }
+
+  isRetry() {
+    return this.getCommand() === GAME_RULE.RETRY;
+  }
+
+  isQuit() {
+    return this.getCommand() === GAME_RULE.QUIT;
+  }
 }
 
 module.exports = GameCommand;

@@ -22,6 +22,10 @@ class SizeCommand extends Command {
   static #isValid(command) {
     return command >= BRIDGE_RULE.LENGTH_MIN && command <= BRIDGE_RULE.LENGTH_MAX;
   }
+
+  getSizeNumber() {
+    return +this.getCommand();
+  }
 }
 
 module.exports = SizeCommand;
