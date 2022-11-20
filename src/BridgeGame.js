@@ -50,21 +50,18 @@ class BridgeGame {
    */
 
   retry() {
-    this.addRetry();
+    this.addRetryCount(1);
     this.initRecords();
   }
 
-  addRetry() {
-    this.#retry += 1;
+  addRetryCount(count) {
+    this.#retry += count;
   }
 
   initRecords() {
     this.#records = [];
   }
 
-  /**
-   * 다리를 생성하는데 필요한 토큰을 만드는 메서드
-   */
   static createTokens(size, generateRandomNumber) {
     const tokens = [];
     let count = 0;
@@ -75,52 +72,23 @@ class BridgeGame {
     return tokens;
   }
 
-  /**
-   * 현재 이동한 횟수를 반환하는 함수
-   */
   getCurrentDistance() {
     return this.#records.length - 1;
   }
 
-  /**
-   * 유저가 선택한 칸(방향)을 반환하는 함수
-   */
-  getSelectedDirection() {
-    return this.#records[this.getCurrentDistance()];
-  }
-
-  /**
-   * 다음 다리 방향을 반환하는 함수
-   */
-  getNextDirection() {
-    return this.#bridge[this.getCurrentDistance()];
-  }
-
-  /**
-   * 게임 프로세스
-   */
   static process(game, direction) {
     return game.move(direction);
   }
 
-  /**
-   * 다리의 끝에 도달했는지 검사하는 메서드
-   */
   isEndOfBridge() {
     if (this.#records.length === this.#bridge.length) return true;
     return false;
   }
 
-  /**
-   * 게임 재시도 횟수 출력
-   */
-  getAttemptCount() {
+  getRetryCount() {
     return this.#retry;
   }
 
-  /**
-   * 게임 맵 배열 반환 메서드
-   */
   getBridge() {
     return this.#bridge;
   }
@@ -129,17 +97,19 @@ class BridgeGame {
     return this.#records;
   }
 
-  /**
-   * 게임 승리/패배 여부 반환 메서드
-   */
   getGameResult() {
+    if (this.isGameSuccess()) return RESULT.success;
+    return RESULT.fail;
+  }
+
+  isGameSuccess() {
     if (
       this.isEndOfBridge() &&
       this.#bridge[this.getCurrentDistance()] ===
         this.#records[this.getCurrentDistance()]
     )
-      return RESULT.success;
-    return RESULT.fail;
+      return true;
+    return false;
   }
 
   isSameDirection() {

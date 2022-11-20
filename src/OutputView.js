@@ -36,7 +36,7 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.result);
     OutputView.printMap(game);
     Console.print(RESULT_MESSAGE.result(game.getGameResult()));
-    Console.print(RESULT_MESSAGE.attempt_count(game.getAttemptCount()));
+    Console.print(RESULT_MESSAGE.attempt_count(game.getRetryCount()));
     Console.close();
   },
 };
