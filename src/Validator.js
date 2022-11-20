@@ -16,6 +16,12 @@ const Validator = {
       throw Error;
     }
   },
+
+  errorIfGameCommandInvalid(gameCommand) {
+    if (gameCommand !== COMMAND.RETRY && gameCommand !== COMMAND.QUIT) {
+      throw Error;
+    }
+  },
 };
 
 module.exports = Validator;
