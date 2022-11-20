@@ -42,18 +42,17 @@ const InputView = {
             if (isMoveError) {
                 return this.readMoving(bridgeGame);
             }
-            this.readGameCommand(bridgeGame);
-            // if (bridgeGame.isBadMove(move)) {
-            //     bridgeGame.showFail(move);
-            //     this.readGameCommand(bridgeGame);
-            // } else {
-            //     if (bridgeGame.isSuccess(move)) {
-            //         bridgeGame.showSuccess(move);
-            //     } else {
-            //         bridgeGame.move(move);
-            //         this.readMoving(bridgeGame);
-            //     }
-            // }
+            if (bridgeGame.isBadMove(move)) {
+                bridgeGame.showFail(move);
+                this.readGameCommand(bridgeGame);
+            } else {
+                if (bridgeGame.isSuccess(move)) {
+                    bridgeGame.showSuccess(move);
+                } else {
+                    bridgeGame.move(move);
+                    this.readMoving(bridgeGame);
+                }
+            }
         });
     },
 
