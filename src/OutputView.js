@@ -1,4 +1,4 @@
-const { Console } = require('@woowacourse/mission-utils');
+const Io = require('./utils/io');
 const { OUTPUT } = require('./constants/views');
 
 /**
@@ -20,7 +20,7 @@ const OutputView = {
   printResult() {},
 
   printStart() {
-    Console.print(OUTPUT.START);
+    return Io.output(OUTPUT.START);
   },
 };
 

@@ -1,4 +1,4 @@
-const { Console } = require('@woowacourse/mission-utils');
+const Io = require('./utils/io');
 const { INPUT } = require('./constants/views');
 const { isVaildSize } = require('./utils/validator');
 
@@ -10,7 +10,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    return Console.readLine(INPUT.BRIDGE_SIZE, (size) => {
+    return Io.input(INPUT.BRIDGE_SIZE, (size) => {
       isVaildSize(size);
       callback(size);
     });
