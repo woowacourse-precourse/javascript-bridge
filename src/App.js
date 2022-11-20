@@ -30,6 +30,7 @@ class App {
     OutputView.printMap(this.upCounter, this.downCounter);
 
     if (result === MOVE_RESULT.INCORRECT) InputView.readGameCommand(this.failRoutine.bind(this));
+    this.attemptRoutine();
   }
 
   setCounter(userInput, result) {
