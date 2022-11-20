@@ -25,6 +25,7 @@ class GameController {
   }
 
   buildBridgePhase(size) {
+    Validation.validateSize(size);
     this.bridgeGame.build(size);
 
     this.requestDirection();
