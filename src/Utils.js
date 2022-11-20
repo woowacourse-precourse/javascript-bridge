@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { ERROR, RULE, POSITION, RETRY_OR_EXIT } = require('./Constants');
+const { ERROR, RULE, COMMAND, RETRY_OR_EXIT } = require('./Constants');
 
 const playerInput = (message, callback) => {
   Console.readLine(message, callback);
@@ -30,10 +30,10 @@ const checkSizeInRange = (size) => {
   }
 };
 
-const checkHasCrossibleKey = (key) => {
-  const positionList = Object.values(POSITION);
-  if (!positionList.includes(key)) {
-    throwErrorMessage(ERROR.NOT_CROSSIBLE_KEY);
+const checkPossibleCommand = (command) => {
+  const positionList = Object.values(COMMAND);
+  if (!positionList.includes(command)) {
+    throwErrorMessage(ERROR.NOT_POSSIBLE_COMMAND);
   }
 };
 
@@ -49,6 +49,6 @@ module.exports = {
   printMessage,
   checkIsInteger,
   checkSizeInRange,
-  checkHasCrossibleKey,
+  checkPossibleCommand,
   checkHasKey,
 };
