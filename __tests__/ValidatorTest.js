@@ -16,8 +16,17 @@ describe('🌈 Validator 클래스 테스트 ', () => {
     expect(() => {
       userInput.forEach((input) => {
         validator.outOfRange(input);
-        console.log(input);
       });
     }).toThrow('invalidRange');
+  });
+
+  test('⚡ 사용자가 입력한 다리 길이에 문자가 포함되어 있으면 예외 처리됩니다.', () => {
+    const validator = new Validator();
+    const userInput = ['우테코 조아용', '1.', '1e1', '1e2', '3.3', '✨'];
+    expect(() => {
+      userInput.forEach((input) => {
+        validator.invalidNumber(input);
+      });
+    }).toThrow('invalidNumber');
   });
 });
