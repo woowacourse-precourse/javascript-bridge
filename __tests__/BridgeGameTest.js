@@ -69,4 +69,18 @@ describe('플레이어 입력값의 유효성 검사', () => {
       expectLogContains(getOutput(logSpy), [ERROR.INPUT_BRIDGE_SIZE]);
     });
   });
+
+  test('주어진 길이의 다리를 만든다', () => {
+    const input = ['4', '5'];
+    const result = [4, 5];
+    mockQuestions(input);
+
+    input.forEach((_, i) => {
+      const game = new BridgeGame();
+
+      game.makeBridge().then(() => {
+        expect(game.bridge.length).toEqual(result[i]);
+      });
+    });
+  });
 });
