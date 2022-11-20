@@ -9,14 +9,16 @@ const controller = require('./controller/BridgeController');
 class BridgeGame {
   start() {
     Console.readLine(GAME_QUESTION.bridgeLength, (bridgeLength) => {
-      InputView.readBridgeSize(bridgeLength);
-      this.move();
+      this.#errorCheckFor(
+        () => InputView.readBridgeSize(bridgeLength),
+        this.start
+      ).move();
     });
   }
 
   move() {
     Console.readLine(GAME_QUESTION.move, (command) => {
-      InputView.readMoving(command);
+      this.#errorCheckFor(() => InputView.readMoving(command), this.move);
       OutputView.printMap();
 
       this.#checkGameResult(controller.outputExit().result);
@@ -25,9 +27,10 @@ class BridgeGame {
 
   retry() {
     Console.readLine(GAME_QUESTION.gameCommand, (command) => {
-      InputView.readGameCommand(command);
-
-      this.#checkGameCommand(command);
+      this.#errorCheckFor(
+        () => InputView.readGameCommand(command),
+        this.retry
+      ).#checkGameCommand(command);
     });
   }
 
@@ -48,6 +51,17 @@ class BridgeGame {
     if (command === 'Q') {
       OutputView.printResult();
     }
+  }
+
+  #errorCheckFor(inputFn, beforePlayFn) {
+    try {
+      inputFn();
+    } catch (error) {
+      Console.print(error.message);
+      beforePlayFn();
+    }
+
+    return this;
   }
 }
 
