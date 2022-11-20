@@ -1,6 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const { ERROR } = require("../src/Utils/Constants");
-const App = require("../src/Controller/App");
 const BridgeGame = require("../src/Model/BridgeGame");
 
 describe("BridgeGame 클래스 테스트", () => {
@@ -22,6 +19,7 @@ describe("BridgeGame 클래스 테스트", () => {
   test("사용자가 게임을 재시작하는 경우", () => {
     const bridgeGame = new BridgeGame(["U", "U", "D"]);
     bridgeGame.retry();
+
     expect(bridgeGame.attempsCount).toEqual(2);
   });
 });

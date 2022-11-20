@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { ERROR } = require("../src/Utils/Constants");
+const { ERROR_MESSAGE } = require("../src/Utils/Constants");
 const App = require("../src/Controller/App");
 const BridgeMaker = require("../src/Model/BridgeMaker");
 
@@ -36,7 +36,7 @@ const runException = (inputs) => {
 
   app.play();
 
-  expectLogContains(getOutput(logSpy), [ERROR.BRIDGE_SIZE_IS_NAN]);
+  expectLogContains(getOutput(logSpy), [ERROR_MESSAGE.BRIDGE_SIZE_IS_NAN]);
 };
 
 const expectLogContains = (received, logs) => {

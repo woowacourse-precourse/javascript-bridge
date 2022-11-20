@@ -1,4 +1,4 @@
-const { GAME, BRIDGE, UNIT } = require("../Utils/Constants");
+const { GAME_OPTION, BRIDGE_SIGN, OUTPUT_MARK } = require("../Utils/Constants");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -8,8 +8,8 @@ class BridgeGame {
     this.computerBridge = computerBridge;
     this.playerUpperBridge = [];
     this.playerLowerBridge = [];
-    this.attempsCount = GAME.ATTEMPTS_COUNT_INIT;
-    this.isSuccess = GAME.SUCCESS;
+    this.attempsCount = GAME_OPTION.ATTEMPTS_COUNT_INIT;
+    this.isSuccess = GAME_OPTION.SUCCESS;
   }
 
   init() {
@@ -28,7 +28,7 @@ class BridgeGame {
    */
   move(direction) {
     const canCross = this.isSameDirection(direction);
-    this.isSuccess = canCross ? GAME.SUCCESS : GAME.FAIL;
+    this.isSuccess = canCross ? GAME_OPTION.SUCCESS : GAME_OPTION.FAIL;
 
     this.makePlayerBridgeState(direction, canCross);
 
@@ -42,18 +42,18 @@ class BridgeGame {
   }
 
   makePlayerBridgeState(direction, canCross) {
-    if (direction === BRIDGE.UPPER) {
+    if (direction === BRIDGE_SIGN.UPPER) {
       canCross
-        ? this.playerUpperBridge.push(BRIDGE.POSSIBLE_SIGN)
-        : this.playerUpperBridge.push(BRIDGE.IMPOSSIBLE_SIGN);
-      this.playerLowerBridge.push(UNIT.BLANK);
+        ? this.playerUpperBridge.push(BRIDGE_SIGN.POSSIBLE)
+        : this.playerUpperBridge.push(BRIDGE_SIGN.IMPOSSIBLE);
+      this.playerLowerBridge.push(OUTPUT_MARK.BLANK);
     }
 
-    if (direction === BRIDGE.LOWER) {
+    if (direction === BRIDGE_SIGN.LOWER) {
       canCross
-        ? this.playerLowerBridge.push(BRIDGE.POSSIBLE_SIGN)
-        : this.playerLowerBridge.push(BRIDGE.IMPOSSIBLE_SIGN);
-      this.playerUpperBridge.push(UNIT.BLANK);
+        ? this.playerLowerBridge.push(BRIDGE_SIGN.POSSIBLE)
+        : this.playerLowerBridge.push(BRIDGE_SIGN.IMPOSSIBLE);
+      this.playerUpperBridge.push(OUTPUT_MARK.BLANK);
     }
   }
 
