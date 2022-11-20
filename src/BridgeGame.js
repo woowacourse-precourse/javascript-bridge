@@ -1,6 +1,6 @@
 const { makeBridge } = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { REQUIREMENT, GAMERESULT } = require('./constant/Constant');
+const { REQUIREMENT, MOVERESULT } = require('./constant/Constant');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -64,14 +64,14 @@ class BridgeGame {
 
   getMoveResult(userInput, bridge, idx) {
     if (userInput[idx] !== bridge[idx]) {
-      return GAMERESULT.WRONGBLOCK;
+      return MOVERESULT.WRONGBLOCK;
     }
     
     if (userInput.length !== bridge.length) {
-      return GAMERESULT.RIGHTBLOCK; 
+      return MOVERESULT.RIGHTBLOCK; 
     }
     
-    return GAMERESULT.GAMECLEAR;
+    return MOVERESULT.GAMECLEAR;
   }
 
   updateUserInput(input) {

@@ -1,7 +1,7 @@
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeGame = require('./BridgeGame');
-const { REQUIREMENT, GAMERESULT } = require('./constant/Constant');
+const { REQUIREMENT, MOVERESULT, GAMERESULT } = require('./constant/Constant');
 
 class App {
   #bridge;
@@ -32,12 +32,12 @@ class App {
   calcBridge() {
     const result = this.#bridge.move();
 
-    if (result === GAMERESULT.WRONGBLOCK) {
+    if (result === MOVERESULT.WRONGBLOCK) {
       InputView.readGameCommand(this);
-    } else if (result === GAMERESULT.RIGHTBLOCK) {
+    } else if (result === MOVERESULT.RIGHTBLOCK) {
       InputView.readMoving(this);
-    } else if (result === GAMERESULT.GAMECLEAR) {
-      this.gameOver(1);
+    } else if (result === MOVERESULT.GAMECLEAR) {
+      this.gameOver(GAMERESULT.CLEAR);
     }
   }
   
@@ -47,11 +47,10 @@ class App {
       this.#attemptsCnt += 1;
       InputView.readMoving(this);
     } else {
-      this.gameOver(0);
+      this.gameOver(GAMERESULT.NOTCLEAR);
     }
   }
 
-  // clear) 1: 성공 0 : 실패
   gameOver(clear) { 
     const result = this.#bridge.makeBridgeString();
     OutputView.printResult(this.#attemptsCnt, result, clear);

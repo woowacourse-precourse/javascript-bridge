@@ -31,10 +31,15 @@ const ERROR = {
   RETRY: `[ERROR] 재시작 여부는 ${REQUIREMENT.RETRY}와 ${REQUIREMENT.QUIT}로 입력해야 합니다.`,
 };
 
-const GAMERESULT = {
+const MOVERESULT = {
   WRONGBLOCK: 0,
   RIGHTBLOCK: 1,
   GAMECLEAR: 2,
 };
 
-module.exports = { MESSAGE, REQUIREMENT, ERROR, GAMERESULT };
+const GAMERESULT = {
+  NOTCLEAR: 0,
+  CLEAR: 1,
+};
+
+module.exports = { MESSAGE, REQUIREMENT, ERROR, MOVERESULT, GAMERESULT };
