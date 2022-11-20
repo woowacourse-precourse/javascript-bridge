@@ -30,3 +30,11 @@ describe('handleMovingException 테스트', () => {
     }).toThrow('[ERROR]');
   });
 });
+
+describe('handleRetryException 테스트', () => {
+  test.each([[''], ['A'], ['r'], ['q']])('대문자 R 또는 대문자 Q가 아니면 예외가 발생한다.', () => {
+    expect((input) => {
+      GameException.handleRetryException(input);
+    }).toThrow('[ERROR]');
+  });
+});

@@ -1,3 +1,6 @@
+const BridgeStatus = require('./BridgeStatus');
+const { GAME_COMMAND } = require('../../lib/constans');
+
 class Bridge {
   #array;
   #step;
@@ -6,44 +9,60 @@ class Bridge {
   constructor(array) {
     this.#array = array;
     this.#step = 0;
-    this.#status = [];
+    this.#status = new BridgeStatus();
   }
 
   getArray() {
     return this.#array;
   }
 
-  #convertMovingToIndex(moving) {
+  #convertCommandToDirection(moving) {
     const map = {
-      D: 0,
-      U: 1
+      [GAME_COMMAND.down]: 0,
+      [GAME_COMMAND.up]: 1
     };
 
     return map[moving];
   }
 
-  #checkSquare(moving, array, step) {
+  #checkForMatch(moving, array, step) {
     return moving === array[step];
   }
 
-  #addStatus(result, index) {
-    this.#status[this.#step] = [' ', ' '];
-    this.#status[this.#step][index] = result ? 'O' : 'X';
+  #reflect(isMatch, position) {
+    this.#status.add(isMatch, position, this.#step);
+    this.#increaseStep(isMatch);
   }
 
-  #increaseStep(result) {
-    if (result) {
+  #increaseStep(isMatch) {
+    if (isMatch) {
       this.#step += 1;
     }
   }
 
-  cross(moving) {
-    const result = this.#checkSquare(moving, this.#array, this.#step);
-    const index = this.#convertMovingToIndex(moving);
-    this.#addStatus(result, index);
-    this.#increaseStep(result);
+  #reset() {
+    this.#status = new BridgeStatus();
+    this.#step = 0;
+  }
 
-    return { status: this.#status, result };
+  reStart(command) {
+    if (command === GAME_COMMAND.quit) {
+      return false;
+    }
+
+    this.#reset();
+    return true;
+  }
+
+  cross(moving) {
+    const isMatch = this.#checkForMatch(moving, this.#array, this.#step);
+    const position = this.#convertCommandToDirection(moving);
+    this.#reflect(isMatch, position);
+
+    return {
+      result: isMatch,
+      status: this.#status.getStatus()
+    };
   }
 }
 

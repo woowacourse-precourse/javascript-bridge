@@ -1,11 +1,11 @@
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
-const { MOVING } = require('../lib/constans');
+const { GAME_COMMAND } = require('../lib/constans');
 
 const BridgeMaker = {
   convertDorU(index) {
-    const downUp = [MOVING.down, MOVING.up];
+    const downUp = [GAME_COMMAND.down, GAME_COMMAND.up];
 
     return downUp[index];
   },

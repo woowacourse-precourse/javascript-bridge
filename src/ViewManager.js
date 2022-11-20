@@ -29,7 +29,23 @@ class ViewManager {
     try {
       const { status, result } = this.#game.move(input);
       OutputView.printMap(status);
-      InputView.readMoving(GAME_QUESTION.moving, this.#readMovingCallback);
+      if (result) {
+        InputView.readMoving(GAME_QUESTION.moving, this.#readMovingCallback);
+      } else {
+        InputView.readGameCommand(GAME_QUESTION.retry, this.#readGameCommandCallback);
+      }
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  #readGameCommandCallback = (input) => {
+    try {
+      if (this.#game.retry(input)) {
+        InputView.readMoving(GAME_QUESTION.moving, this.#readMovingCallback);
+      } else {
+        console.log('게임종료');
+      }
     } catch (err) {
       throw err;
     }
