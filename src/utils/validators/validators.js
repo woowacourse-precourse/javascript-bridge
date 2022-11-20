@@ -18,8 +18,19 @@ const validateLength = (input) => {
 };
 
 /**
+ * 이동 시 입력값의 유효성을 검사하는 함수
+ * @param {*} input 이동 시 입력값
+ */
+const validateMoveInput = (input) => {
+  if (input.length !== 1)
+    throw new Error(MESSAGES.EXCEPTIONS.MOVE.LENGTH_EXCEPTION);
+  if (!ALLOWED_CHAR.MOVE.includes(input))
+    throw new Error(MESSAGES.EXCEPTIONS.MOVE.VALUE_EXCEPTION);
+};
+
+/**
  * 이동 실패시 재시작/종료 여부 입력값의 유효성을 검사하는 함수
- * @param {*} input
+ * @param {*} input 재시작/종료 여부의 입력값
  */
 const validateGameCommandInput = (input) => {
   if (input.length !== 1)
@@ -27,4 +38,9 @@ const validateGameCommandInput = (input) => {
   if (!ALLOWED_CHAR.RETRY.includes(input))
     throw new Error(MESSAGES.EXCEPTIONS.RETRY.VALUE_EXCEPTION);
 };
-module.exports = { validateLength, validateGameCommandInput };
+
+module.exports = {
+  validateLength,
+  validateMoveInput,
+  validateGameCommandInput,
+};
