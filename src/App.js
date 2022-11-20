@@ -1,8 +1,12 @@
 const BridgeGame = require("./BridgeGame");
+const BridgeMaker = require("./BridgeMaker");
+const InputView = require("./InputView");
+const OutputView = require("./OutputView");
 
 class App {
   play() {
-    new BridgeGame();
+    OutputView.printStart();
+    BridgeMaker.makeBridge();
   }
 }
 
