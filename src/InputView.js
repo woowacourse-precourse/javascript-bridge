@@ -1,7 +1,10 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { COMMAND, MESSAGE } = require("./constants/index");
-
-const { checkBridgeSizeValid, checkMovingValid } = require("./Validator");
+const {
+  checkBridgeSizeValid,
+  checkMovingValid,
+  checkCommandValid,
+} = require("./Validator");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -34,7 +37,7 @@ const InputView = {
    */
   readGameCommand(retry, result, current) {
     Console.readLine(MESSAGE.INPUT_COMMAND, (command) => {
-      console.log(command);
+      checkCommandValid(command);
 
       if (command === COMMAND.QUIT) result(false, current);
       if (command === COMMAND.RETRY) retry();

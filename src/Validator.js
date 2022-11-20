@@ -1,4 +1,4 @@
-const { SIZE, WAY, ERROR } = require("./constants/index");
+const { SIZE, WAY, COMMAND, ERROR } = require("./constants/index");
 
 const Validator = {
   checkBridgeSizeValid(size) {
@@ -14,6 +14,12 @@ const Validator = {
   checkMovingValid(moving) {
     if (moving !== WAY.UP && moving !== WAY.DOWN) {
       throw new Error(ERROR.INVALID_MOVING);
+    }
+  },
+
+  checkCommandValid(command) {
+    if (command !== COMMAND.RETRY && command !== COMMAND.QUIT) {
+      throw new Error(ERROR.INVALID_COMMAND);
     }
   },
 };
