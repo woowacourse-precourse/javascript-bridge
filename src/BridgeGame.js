@@ -52,12 +52,12 @@ class BridgeGame {
     return String(userMove + bridgeMove);
   }
 
-  getUpBridge() {
-    return this.#Upbridge.join('|');
+  getUpBridge(index) {
+    return this.#Upbridge.slice(0, index + 1).join('|');
   }
 
-  getDownBridge() {
-    return this.#Downbridge.join('|');
+  getDownBridge(index) {
+    return this.#Downbridge.slice(0, index + 1).join('|');
   }
 
   /*
@@ -78,13 +78,13 @@ class BridgeGame {
   Updown() {
     this.#Upbridge.push(FAIL_BRIDGE);
     this.#Downbridge.push(EMPTY_BRIDGE);
-    return UPDOWN_MESSAGE;
+    throw UPDOWN_MESSAGE;
   }
 
   Downup() {
     this.#Upbridge.push(EMPTY_BRIDGE);
     this.#Downbridge.push(FAIL_BRIDGE);
-    return DOWNUP_MESSAGE;
+    throw DOWNUP_MESSAGE;
   }
 
   Downdown() {
