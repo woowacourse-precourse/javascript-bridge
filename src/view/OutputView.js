@@ -1,7 +1,13 @@
+const MissionUtils = require('@woowacourse/mission-utils');
+const Console = MissionUtils.Console;
+const { GAME_MESSAGE } = require('../utils/constants');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+  printGreeting() {
+    Console.print(GAME_MESSAGE.START);
+  },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
