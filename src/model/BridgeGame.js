@@ -58,26 +58,6 @@ class BridgeGame {
     return crossBridgeResult.push([' ', 'X']);
   }
 
-  draw(moveBridge) {
-    let upBridge = '';
-    let downBridge = '';
-
-    moveBridge.forEach((position) => {
-      upBridge = this.#drawUpBridge(position, upBridge, moveBridge);
-      downBridge = this.#drawDownBridge(position, downBridge, moveBridge);
-    });
-    return [upBridge, downBridge];
-  }
-
-  #drawUpBridge(position, upBridge, moveBridge) {
-    if (position === moveBridge[0]) return (upBridge += position[0]);
-    if (position !== moveBridge[0]) return (upBridge += ` | ${position[0]}`);
-  }
-
-  #drawDownBridge(position, downBridge, moveBridge) {
-    if (position === moveBridge[0]) return (downBridge += position[1]);
-    if (position !== moveBridge[0]) return (downBridge += ` | ${position[1]}`);
-  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>

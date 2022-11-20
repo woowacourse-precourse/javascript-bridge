@@ -14,7 +14,7 @@ const InputView = {
       if (!BridgeController.controlValidate(Validate.validateSizeRange, Number(size))) {
         return this.readBridgeSize();
       }
-      if (BridgeController.controlBridge(Number(size))) return this.readMoving();
+      if (BridgeController.controlSize(Number(size))) return this.readMoving();
     });
   },
 
