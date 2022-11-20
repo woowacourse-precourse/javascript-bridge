@@ -1,11 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { OUTPUT_MESSAGE } = require('../constants/Message');
-const PlayersMap = require('../PlayersMap');
 
 const OutputView = {
-  // printMap(nextStep, correctBridge) {
-  //   return PlayersMap.answerDivision(nextStep, correctBridge);
-  // },
 
   printStart() {
     Console.print(OUTPUT_MESSAGE.GAME_START);
