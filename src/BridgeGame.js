@@ -1,72 +1,78 @@
 const Check = require('./Check');
 const BridgePrint = require('./BridgePrint');
+const MissionUtils = require('@woowacourse/mission-utils');
+const Player = require('./Player');
+const Bridge = require('./Bridge');
 class BridgeGame {
-  #brigeShape;
-  #index;
-  #uparray;
-  #downarray;
+  #bridgeShape;
   #playerInput;
-  #isGameOver;
-  #count;
-  constructor(brigeShape) {
-    this.#brigeShape = brigeShape;
-    this.#index = 0;
-    this.#uparray = [];
-    this.#downarray = [];
-    this.#count = 1;
-    this.#isGameOver = false;
-    this.#isWinnging = false;
+  #index = 0;
+
+  constructor(bridgeShape) {
+    this.Player = new Player();
+    this.Bridge = new Bridge();
+    this.#bridgeShape = bridgeShape;
   }
+
   move(playerInput) {
     this.#playerInput = playerInput;
-    if (this.#playerInput === this.#brigeShape[this.#index]) {
+    if (this.#playerInput === this.#bridgeShape[this.#index]) {
       this.playerInputTrue();
     } else {
       this.playerInputFalse();
     }
-    BridgePrint.printBridge(this.#uparray, this.#downarray);
+    BridgePrint.printBridge(this.Bridge);
     this.#index++;
-    return Check.checkIsGameOver(this.#isGameOver, this.#index, this.#brigeShape.length);
+    return Check.checkIsGameOver(this.Player, this.Bridge, this.isFinshed());
+  }
+  isFinshed() {
+    return this.#bridgeShape.length === this.#index;
   }
 
   playerInputTrue() {
     if (this.#playerInput === 'U') {
-      this.#uparray.push('O');
-      this.#downarray.push(' ');
+      this.Bridge.pushUpBridge('O');
+      this.Bridge.pushDownBridge(' ');
       return;
     }
-    this.#uparray.push(' ');
-    this.#downarray.push('O');
+    this.Bridge.pushUpBridge(' ');
+    this.Bridge.pushDownBridge('O');
   }
 
   playerInputFalse() {
     if (this.#playerInput === 'D') {
-      this.#uparray.push(' ');
-      this.#downarray.push('X');
-      this.#isGameOver = true;
+      this.Bridge.pushUpBridge(' ');
+      this.Bridge.pushDownBridge('X');
+      this.Player.setIsGameOver(true);
       return;
     }
-    this.#uparray.push('X');
-    this.#downarray.push(' ');
-    this.#isGameOver = true;
+    this.Bridge.pushUpBridge('X');
+    this.Bridge.pushDownBridge(' ');
+    this.Player.setIsGameOver(true);
   }
+
   retry() {
-    this.#isGameOver = false;
+    this.Bridge = new Bridge();
+    this.Player.setIsGameOver(false);
     this.#index = 0;
-    this.#uparray = [];
-    this.#downarray = [];
   }
+
   addCount() {
-    this.#count = this.#count + 1;
+    this.Player.addCount();
   }
+
   getPrintParams() {
-    return [this.#uparray, this.#downarray, this.#count];
+    return [this.Player, this.Bridge];
   }
-  setIsWinnging(boolen) {
-    this.#isWinnging = boolen;
+
+  getPlayer() {
+    return this.Player;
+  }
+  getBridge() {
+    return this.Bridge;
   }
   getIsWinnging() {
-    return this.#isWinning;
+    return this.Player.getIsWinnging();
   }
 }
 
