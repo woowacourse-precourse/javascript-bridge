@@ -6,7 +6,11 @@ class BridgeGame {
   #success;
   
   constructor(){
-    this.#curIdx = 0;
+    this.initGame();
+  }
+
+  initGame(){
+    this.#curIdx =0;
     this.#success = true;
   }
 

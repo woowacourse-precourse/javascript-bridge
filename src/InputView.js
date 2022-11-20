@@ -24,7 +24,6 @@ const InputView = {
   },
 
   validateMove(move){
-    Console.print(move);
     if(!(move === "U" || move ==="D")) throw new Error("[ERROR] 이동할 칸을 잘못 입력하셨습니다.");  
   },
 
