@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Notice = require("./NoticeMessage.js")
+const Validate = require("./Validate.js")
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -15,7 +16,15 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(fun) {
-    MissionUtils.Console.readLine(Notice.SELECT_MOVE,fun)
+    MissionUtils.Console.readLine(Notice.SELECT_MOVE,(input)=>{
+      try{
+        Validate.MoveInput(input)
+        fun(input)
+      }catch(err){
+        MissionUtils.Console.print(err)
+        this.readMoving(fun)
+      }
+    })
   },
 
   /**
