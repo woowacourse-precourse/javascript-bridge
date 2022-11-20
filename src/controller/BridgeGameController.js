@@ -34,7 +34,7 @@ class BridgeGameController {
   movingByUser(move) {
     try {
       isValidateMoveInput(move);
-      const isWrongAnswer = this.bridgeGame.move(move, this.bridge);
+      const isWrongAnswer = this.bridgeGame.move(move, this.bridge, this.stepResult);
       OutputView.printMap(this.bridge);
 
       if (isWrongAnswer) {

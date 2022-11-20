@@ -18,34 +18,19 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(move, bridge) {
-    if (bridge.data.turn > 0) {
-      bridge.setData('upperBridge', bridge.data.upperBridge + '|');
-      bridge.setData('lowerBridge', bridge.data.lowerBridge + '|');
-    }
-    if (bridge.data.blueprint[bridge.data.turn] === 'U' && move === 'U') {
-      bridge.setData('upperBridge', bridge.data.upperBridge + ' O ');
-      bridge.setData('lowerBridge', bridge.data.lowerBridge + '   ');
-    }
-    if (bridge.data.blueprint[bridge.data.turn] === 'U' && move === 'D') {
-      bridge.setData('upperBridge', bridge.data.upperBridge + '   ');
-      bridge.setData('lowerBridge', bridge.data.lowerBridge + ' X ');
+  move(move, bridge, stepResult) {
+    if (this.#turn > 0) stepResult.insert('|', '|');
 
-      return true;
+    if (this.isAnswer(bridge.layout[this.#turn], move)) {
+      stepResult.correctStepRecord(move);
+      return;
     }
-    if (bridge.data.blueprint[bridge.data.turn] === 'D' && move === 'U') {
-      bridge.setData('upperBridge', bridge.data.upperBridge + ' X ');
-      bridge.setData('lowerBridge', bridge.data.lowerBridge + '   ');
+    stepResult.correctStepRecord(move);
+    this.#turn += 1;
+  }
 
-      return true;
-    }
-    if (bridge.data.blueprint[bridge.data.turn] === 'D' && move === 'D') {
-      bridge.setData('upperBridge', bridge.data.upperBridge + '   ');
-      bridge.setData('lowerBridge', bridge.data.lowerBridge + ' O ');
-    }
-
-    bridge.setData('turn', bridge.data.turn + 1);
-    return false;
+  isAnswer(bridgeAnswer, move) {
+    return bridgeAnswer === move;
   }
 
   /**
