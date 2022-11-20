@@ -7,6 +7,7 @@ const {
   validateInput,
   validateMoveInput,
   validateRetryInput,
+  isRepeat,
 } = require("./Validator");
 
 /**
@@ -39,22 +40,10 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (moveInput) => {
-        try {
-          validateMoveInput(moveInput);
-        } catch (error) {
-          Console.print(error);
-          InputView.readMoving(mainBridge, bridgeGame);
-          return;
-        }
+        isRepeat(moveInput, mainBridge, bridgeGame);
         bridgeGame.move(moveInput);
         printMap(bridgeGame.userBridge);
-        if (!bridgeGame.hasNext && bridgeGame.finish) {
-          printResult("최종 게임 결과");
-          printMap(bridgeGame.userBridge);
-          printResult("게임 성공 여부: 성공");
-          printResult(`총 시도한 횟수: ${bridgeGame.retrycount}`);
-          return;
-        }
+        printResult(bridgeGame);
         if (!bridgeGame.hasNext) {
           InputView.readGameCommand(mainBridge, bridgeGame);
           return;
