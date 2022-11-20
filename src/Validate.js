@@ -26,6 +26,12 @@ const Validate = {
       default:
         return true;
     }
+  },
+
+  /**
+   * @param {사용자의 입력하는 게임 옵션} inputGameCommand 
+   * @returns 만약 입력값이 Q, R이 아닌 경우 true를 반환한다.
+   */
   isValidateInputGameCommand(inputGameCommand) {
     switch (true) {
         case inputGameCommand === 'Q' || inputGameCommand === 'R':
