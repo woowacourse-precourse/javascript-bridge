@@ -20,13 +20,13 @@ class RetryCheck {
 
   checkWord(command) {
     if (!String(command).match(/[RQ]/g)) {
-      throw (ERROR.RETRY_WORD);
+      throw (ERROR.retryWord);
     };
   };
 
   checkRange(command) {
     if (command.length > 1) {
-      throw (ERROR.RETRY_LENGTH);
+      throw (ERROR.retryLength);
     };
   };
 };

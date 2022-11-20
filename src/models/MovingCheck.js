@@ -20,13 +20,13 @@ class MovingCheck {
 
   checkWord(move) {
     if (!String(move).match(/[UD]/g)) {
-      throw (ERROR.UPDOWN_WORD);
+      throw (ERROR.upDownWord);
     };
   };
 
   checkLength(move) {
     if (move.length > 1) {
-      throw (ERROR.UPDOWN_LENGTH);
+      throw (ERROR.upDownLength);
     };
   };
 };

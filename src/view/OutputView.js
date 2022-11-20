@@ -4,7 +4,7 @@ const MakeMap = require('../models/MakeMap');
 
 const OutputView = {
   printStart() {
-    Console.print(MESSAGE.GAME_START);
+    Console.print(MESSAGE.gameStart);
   },
 
   lineInterval() {
@@ -20,12 +20,12 @@ const OutputView = {
   },
   
   printResult(userMove, failOrSuccess, tryCount) {
-    const isOkOrNo = (failOrSuccess === ANSWER.SUCCESS) ? ANSWER.OK : ANSWER.NO;
+    const isOkOrNo = (failOrSuccess === ANSWER.success) ? ANSWER.ok : ANSWER.no;
 
-    Console.print(MESSAGE.FINAL_MESSAGE);
+    Console.print(MESSAGE.finalMessage);
     OutputView.printMap(userMove, isOkOrNo);
-    Console.print(`${MESSAGE.FAIL_OR_SUCCESS}${failOrSuccess}`);
-    Console.print(`${MESSAGE.TRY_COUNT}${tryCount}`);
+    Console.print(`${MESSAGE.failOrSuccess}${failOrSuccess}`);
+    Console.print(`${MESSAGE.tryCount}${tryCount}`);
     Console.close();
   },
 };

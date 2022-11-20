@@ -3,15 +3,15 @@ const { MESSAGE } = require('../utiles/Constant');
 
 const InputView = {
   readBridgeSize(callback) {
-    Console.readLine(MESSAGE.BRIDGE_SIZE, callback);
+    Console.readLine(MESSAGE.bridgeSize, callback);
   },
   
   readMoving(callback) {
-    Console.readLine(MESSAGE.CHOOSE_UPDOWN, callback);
+    Console.readLine(MESSAGE.chooseUpDown, callback);
   },
   
   readGameCommand(callback) {
-    Console.readLine(MESSAGE.CHOOSE_RETRY, callback);
+    Console.readLine(MESSAGE.chooseRetry, callback);
   },
 };
 

@@ -20,13 +20,13 @@ class BridgeSizeCheck {
 
   checkWord(size) {
     if (size.match(/[^0-9]/g)) {
-      throw (ERROR.SIZE_WORD);
+      throw (ERROR.sizeWord);
     };
   };
 
   checkRange(size) {
     if (size < 3 || size > 20) {
-      throw (ERROR.SIZE_RANGE);
+      throw (ERROR.sizeRange);
     };
   };
 };

@@ -1,11 +1,11 @@
-const { UP, ANSWER } = require('../utiles/Constant');
+const { UP_DOWN, ANSWER } = require('../utiles/Constant');
 
 const MakeMap = {
   bridge: [[], []],
 
   makePrintMap(userMove, isOX) {
     for (let i = 0; i < userMove.length - 1; i++) {
-      MakeMap.pushEachBridge(userMove[i], ANSWER.OK);
+      MakeMap.pushEachBridge(userMove[i], ANSWER.ok);
     };
 
     return MakeMap.makeMapLastItem(userMove[userMove.length - 1], isOX);
@@ -17,12 +17,12 @@ const MakeMap = {
   },
 
   pushEachBridge(userMove, isOX) {
-    if (userMove === UP) {
+    if (userMove === UP_DOWN.up) {
       MakeMap.bridge[0].push(isOX);
-      return MakeMap.bridge[1].push(ANSWER.BLANK);
+      return MakeMap.bridge[1].push(ANSWER.blank);
     };
 
-    MakeMap.bridge[0].push(ANSWER.BLANK);
+    MakeMap.bridge[0].push(ANSWER.blank);
     return MakeMap.bridge[1].push(isOX);
   },
 
