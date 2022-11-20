@@ -36,7 +36,12 @@ class App {
     if (!fail) return this.inputMoving();
   }
   checkReplay(replayComment) {
-    console.log(replayComment);
+    const { retry, tryCount } = this.bridgeGame.checkReplay(replayComment);
+    const failComment = '실패';
+    if (!retry) return this.play();
+    if (retry) {
+      OutputView.printResult(tryCount, failComment);
+    }
   }
 }
 

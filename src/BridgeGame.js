@@ -6,6 +6,7 @@ class BridgeGame {
   #movingCount = 0;
   #downBridgeRecord = [];
   #upBridgeRecord = [];
+  #tryCount = 1;
 
   setBridge(bridge) {
     this.#bridge = bridge;
@@ -40,13 +41,23 @@ class BridgeGame {
     this.#movingCount += 1;
     return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord, fail: fail };
   }
-
+  checkReplay(replayComment) {
+    if (replayComment == 'R') {
+      return this.retry();
+    }
+    if (replayComment == 'Q') {
+      return { retry: false, tryCount: this.#tryCount };
+    }
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#tryCount += 1;
+    return true;
+  }
 }
 
 module.exports = BridgeGame;
