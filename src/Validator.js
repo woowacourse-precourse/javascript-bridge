@@ -17,7 +17,7 @@ const Validator = {
     if (input !== GameConfig.QUIT && input !== GameConfig.RETRY) {
       throw new Error(Message.ERROR_RETRY);
     }
-  }
+  },
 };
 
 module.exports = Validator;
