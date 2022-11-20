@@ -42,14 +42,14 @@ const OutputView = {
 
   printUpperHistory(playHistory) {
     const upperHistory = [];
-    playHistory.map(history => {
+    playHistory.map((history) => {
       upperHistory.push(history[0]);
     });
     return `[ ${upperHistory.join(' | ')} ]`;
   },
   printLowerHistory(playHistory) {
     const lowerHistory = [];
-    playHistory.map(history => {
+    playHistory.map((history) => {
       lowerHistory.push(history[1]);
     });
     return `[ ${lowerHistory.join(' | ')} ]`;

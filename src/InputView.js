@@ -19,7 +19,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine('다리의 길이를 입력해주세요.\n', bridgeSize => {
+    Console.readLine('다리의 길이를 입력해주세요.\n', (bridgeSize) => {
       inputErrorCheck.bridgeSize(bridgeSize);
       this.gameStatus.bridge = BridgeMaker.makeBridge(bridgeSize, generate);
       this.readMoving();
@@ -32,7 +32,7 @@ const InputView = {
   readMoving() {
     Console.readLine(
       '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
-      direction => {
+      (direction) => {
         inputErrorCheck.direction(direction);
         const bridgeGame = new BridgeGame();
         this.gameStatus.liveOrDie = bridgeGame.move(direction, this.gameStatus);
@@ -64,7 +64,7 @@ const InputView = {
   readGameCommand() {
     Console.readLine(
       '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
-      doOrDie => {
+      (doOrDie) => {
         if (doOrDie === 'R') {
           this.gameStatus.currentPosition = 0;
           this.gameStatus.numberOfChallenge += 1;
