@@ -16,8 +16,6 @@ const InputView = {
         MissionUtils.Console.print(ERROR.LENGTH);
         this.readBridgeSize(app);
       }
-      // return input;
-      // return app.initGame(input);
     }); 
   },
 
@@ -42,9 +40,6 @@ const InputView = {
         MissionUtils.Console.print(ERROR.MOVE);
         this.readMoving(app);
       }
-      // this.validateMove(input);
-      // return input;
-      // return app.proceedGame(input);
     });
   },
 
@@ -62,13 +57,10 @@ const InputView = {
       try {      
         this.validateRetry(input);
         return app.retryOrTerminate(input);
-      } catch (error) {
+      } catch {
         MissionUtils.Console.print(ERROR.RETRY);
         this.readGameCommand(app);
       }
-      // this.validateRetry(input);
-      // return input;
-      // return app.retryOrTerminate(input);
     });
   },
 

@@ -1,7 +1,7 @@
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeGame = require('./BridgeGame');
-const { REQUIREMENT, MOVERESULT, GAMERESULT } = require('./constant/Constant');
+const { MOVERESULT, GAMERESULT } = require('./constant/Constant');
 
 class App {
   #bridge;
@@ -53,8 +53,8 @@ class App {
   }
 
   gameOver(clear) { 
-    const result = this.#bridge.makeBridgeString();
-    OutputView.printResult(this.#attemptsCnt, result, clear);
+    const strResult = this.#bridge.makeBridgeString();
+    OutputView.printResult(this.#attemptsCnt, strResult, clear);
   }
 }
 

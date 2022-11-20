@@ -1,4 +1,3 @@
-
 const REQUIREMENT = {
   MINLEN: 3,
   MAXLEN: 20,

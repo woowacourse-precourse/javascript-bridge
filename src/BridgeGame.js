@@ -16,7 +16,7 @@ class BridgeGame {
 
   makeBridgeString(bridge = this.#bridge, userInput = this.#userInput) {
     const letter = [REQUIREMENT.UP, REQUIREMENT.DOWN];
-    let strArray = [];
+    const strArray = [];
 
     letter.forEach((ele) => {
       strArray.push(`${REQUIREMENT.BRIDGESTART}${this.makeEachMap(bridge, userInput, ele)}${REQUIREMENT.BRIDGEEND}`);
@@ -77,6 +77,7 @@ class BridgeGame {
   updateUserInput(input) {
     this.#userInput.push(input);
   }
+  
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
