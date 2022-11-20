@@ -12,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
     for (let zoneNumber = 0; zoneNumber < size; zoneNumber++) {
-      const randomNumber = generateRandomNumber();
+      const randomNumber = parseInt(generateRandomNumber(), 10);
       if (randomNumber === BRIDGE.LOWER_ZONE_NUMBER)
         bridge.push(BRIDGE.LOWER_ZONE);
       if (randomNumber === BRIDGE.UPPER_ZONE_NUMBER)
