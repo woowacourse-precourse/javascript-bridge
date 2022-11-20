@@ -57,6 +57,10 @@ class BridgeGame {
   getMoveHistory() {
     return this.#moveHistory;
   }
+
+  getTotalTryCount() {
+    return this.#totalTryCount;
+  }
 }
 
 module.exports = BridgeGame;
