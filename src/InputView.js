@@ -1,5 +1,6 @@
-const {START_GAME, USER_INPUT} = require('./Messages');
+const {START_GAME, USER_INPUT} = require("./Messages");
 const { Random, Console } = require("@woowacourse/mission-utils");
+const { bridgeSizeAndRandomNum } = require("./Controller");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -10,6 +11,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(USER_INPUT.ENTER_LENGTH, (length) => {
       console.log(length);
+      bridgeSizeAndRandomNum(length);
     });
   },
 
@@ -25,3 +27,5 @@ const InputView = {
 };
 
 module.exports = InputView;
+
+InputView.readBridgeSize();
