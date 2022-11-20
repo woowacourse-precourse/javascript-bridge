@@ -1,3 +1,4 @@
+const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 
 /**
@@ -12,6 +13,7 @@ class BridgeGame {
    */
   constructor() {
     OutputView.printStart();
+    InputView.readBridgeSize();
   }
 
   move() {}
