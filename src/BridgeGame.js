@@ -182,6 +182,13 @@ class BridgeGame {
 
     return [...this.#bridgeLog.values()];
   }
+
+  getCurrentBridgeReuslt() {
+    const ONE = 1;
+    const USER_POSITION = this.findUserPosition();
+
+    return this.getPositionLog()[USER_POSITION][ONE];
+  }
 }
 
 module.exports = BridgeGame;
