@@ -1,4 +1,5 @@
 const { USER_MOVE_MESSAGES } = require("../constants/Messages");
+const GENERAL_CONSTANTS = require("../constants/GeneralConstants");
 
 class UserModel {
   #tryCount;
@@ -48,7 +49,7 @@ class UserModel {
    * @param userMovingInput {string} [유저 이동 input]
    */
   validateUserMoving(userMovingInput) {
-    if (userMovingInput !== "U" && userMovingInput !== "D") {
+    if (!GENERAL_CONSTANTS.USER_MOVING_REGEX.test(userMovingInput)) {
       throw new Error(USER_MOVE_MESSAGES.INPUT_ERROR);
     }
   }
