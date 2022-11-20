@@ -93,7 +93,6 @@ class BridgeGame {
 
   init(bridgeSize) {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-    console.log('set bridge array: ',this.#bridge);
   }
 
   endMessage() {
