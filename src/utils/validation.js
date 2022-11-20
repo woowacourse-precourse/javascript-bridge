@@ -1,5 +1,5 @@
-const { BRIDGE } = require("../constants/constants");
-const { ERROR_MESSAGE } = require("../constants/message");
+const { BRIDGE } = require("../constants/Constants");
+const { ERROR_MESSAGE } = require("../constants/Message");
 
 class Validator {
   static validateBridgeSize(size) {
