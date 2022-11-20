@@ -10,28 +10,40 @@ class PlayersMap {
         this.#upSpace = [];
         this.#downSpace = [];
         for (let i = 0; i < playersBridge.length; i += 1) {
-            this.isU(playersBridge[i], winBridge[i]);
-            this.isD(playersBridge[i], winBridge[i]);
+            this.make(playersBridge[i], winBridge[i]);
         }
-        return `${this.cover(this.#upSpace)}\n${this.cover(this.#downSpace)}`;
+
+        this.#upSpace = this.cover(this.divideLine(this.#upSpace));
+        this.#downSpace = this.cover(this.divideLine(this.#downSpace));
+
+        return `${this.#upSpace}\n${this.#downSpace}`;
+    }
+
+    make(playersBridge, winBridge) {
+        this.isU(playersBridge, winBridge);
+        this.isD(playersBridge, winBridge);
     }
 
     isU(playersBridge, winBridge) {
         if (playersBridge === 'U') {
-            this.#upSpace += playersBridge === winBridge ? 'O' : 'X';
-            this.#downSpace += ' ';
+            this.#upSpace.push(playersBridge === winBridge ? 'O' : 'X');
+            this.#downSpace.push(' ');
         }
     }
 
     isD(playersBridge, winBridge) {
         if (playersBridge === 'D') {
-            this.#upSpace += ' ';
-            this.#downSpace += playersBridge === winBridge ? 'O' : 'X';
+            this.#upSpace.push(' ');
+            this.#downSpace.push(playersBridge === winBridge ? 'O' : 'X');
         }
     }
 
-    empty(space) {
+    emptySpace(space) {
 
+    }
+
+    divideLine(value) {
+        return value.join(' | ');
     }
 
     cover(space) {
