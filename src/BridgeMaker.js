@@ -1,3 +1,4 @@
+const { REQUIREMENT } = require('./constant/Constant');
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -9,9 +10,11 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
+    const arr = [REQUIREMENT.DOWN, REQUIREMENT.UP];
 
     for(let i = 0 ; i < size ; i += 1) {
-      bridge.push(generateRandomNumber());
+      const number = generateRandomNumber(); 
+      bridge.push(arr[number]);  
     }
 
     return bridge;
