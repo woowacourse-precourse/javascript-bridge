@@ -1,13 +1,19 @@
-const { printIntro } = require("./OutputView");
+const { printIntro, printMap } = require("./OutputView");
 const { readBridgeSize, readMoving } = require("./InputView");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker");
 
+const BridgeGame = require("./BridgeGame");
+
 class App {
   #bridge;
+  #location;
 
   constructor() {
     this.#bridge;
+    this.#location = 0;
+
+    this.bridgeGame = new BridgeGame();
   }
 
   play() {
@@ -23,7 +29,15 @@ class App {
   }
 
   move(moving) {
-    console.log(moving);
+    const isSuccess = this.bridgeGame.move(
+      moving,
+      this.#bridge,
+      this.#location
+    );
+
+    console.log(this.#bridge, isSuccess);
+
+    this.#location += 1;
   }
 }
 
