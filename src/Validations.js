@@ -13,8 +13,8 @@ const validation = {
         }
     },
     
-    validateCommand(commandList, error, command){
-        if(!commandList.include(command)){
+    validateCommand(commands, error, command){
+        if(!commands.include(command)){
             throw new Error(error)
         }
     }
