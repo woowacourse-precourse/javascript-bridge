@@ -1,12 +1,10 @@
 const { BRIDGE } = require('../utils/constants');
 
 class Bridge {
-  #size;
   #pattern;
 
-  constructor(size, pattern) {
-    this.validate(size, pattern);
-    this.#size = size;
+  constructor(pattern) {
+    this.validate(pattern.length, pattern);
     this.#pattern = pattern;
   }
 

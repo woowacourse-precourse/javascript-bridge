@@ -10,7 +10,7 @@ class BridgeGame {
   #bridgeResult;
 
   createBridge(bridgeSize, bridgePattern) {
-    this.#bridge = new Bridge(bridgeSize, bridgePattern);
+    this.#bridge = new Bridge(bridgePattern);
     this.#bridgeResult = new BridgeResult(bridgeSize);
   }
   /**
