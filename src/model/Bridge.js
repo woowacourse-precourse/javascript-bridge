@@ -12,7 +12,7 @@ class Bridge {
     this.#bridge = makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     this.#map.up = [...defaultArray];
     this.#map.down = [...defaultArray];
-    console.log(this.#bridge);
+    // console.log(this.#bridge);
   }
 
   makeDefaultArray(bridgeSize) {
