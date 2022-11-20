@@ -3,6 +3,7 @@ const Validation = require("./Validation");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -18,15 +19,16 @@ const InputView = {
         size,
         BridgeRandomNumberGenerator.generate
       );
+      let attemptCount = 1;
       let moveList = [[], []];
-      this.readMoving(bridge, moveList);
+      this.readMoving(bridge, moveList, attemptCount);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge, moveList) {
+  readMoving(bridge, moveList, attempt) {
     Console.readLine(
       "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (moving) => {
@@ -34,9 +36,9 @@ const InputView = {
         const bridgeGame = new BridgeGame();
         const checkContinue = bridgeGame.move(moving, bridge, moveList);
         if (checkContinue[0].includes("X") || checkContinue[1].includes("X")) {
-          return this.readGameCommand(bridge);
+          this.readGameCommand(bridge, attempt);
         }
-        return this.readMoving(bridge, checkContinue);
+        this.readMoving(bridge, checkContinue, attempt);
       }
     );
   },
@@ -44,21 +46,21 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge) {
+  readGameCommand(bridge, attempt) {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (command) => {
         Validation.isVaildCommand(command);
         // 재시작 커맨드
         if (command === "R") {
+          attempt++;
           const bridgeGame = new BridgeGame();
           const againMoveList = bridgeGame.retry();
-          return this.readMoving(bridge, againMoveList);
+          return this.readMoving(bridge, againMoveList, attempt);
         }
         if (command === "Q") {
           //종료 커맨드\\\
-          Console.print("게임종료");
-          Console.close();
+          OutputView.printResult("실패", attempt);
         }
       }
     );
