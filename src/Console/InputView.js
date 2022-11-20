@@ -13,6 +13,7 @@ const InputView = {
     let returnValue = '';
     MissionUtils.Console.readLine(INPUT.BRIDGE_LENGTH, (message) => {
       returnValue = message;
+      MissionUtils.Console.close();
     });
 
     // try {
@@ -36,6 +37,7 @@ const InputView = {
     let returnValue = '';
     MissionUtils.Console.readLine(INPUT.BRIDGE_NEXT, (message) => {
       returnValue = message;
+      MissionUtils.Console.close();
     });
 
     // try {
@@ -55,6 +57,7 @@ const InputView = {
     let returnValue = '';
     MissionUtils.Console.readLine(INPUT.BRIDGE_COMMAND, (message) => {
       returnValue = message;
+      MissionUtils.Console.close();
     });
 
     // try {
