@@ -106,6 +106,8 @@ class BridgeGame {
   retry() {
     this.#userPosition = null;
 
+    this.increasingTryCount();
+
     return this.#userPosition;
   }
 
