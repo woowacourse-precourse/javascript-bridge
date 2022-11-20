@@ -4,7 +4,7 @@ const BridgeMaker = require("./BridgeMaker");
 const InputView = require("./InputView");
 const Message = require("./Message");
 const OutputView = require("./OutputView");
-const BridgeGame = require("./BridgeGame");
+// const BridgeGame = require("./BridgeGame");
 
 class App {
   play() {
