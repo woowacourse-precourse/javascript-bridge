@@ -3,11 +3,20 @@ const RULE = Object.freeze({
   BRIDGE: {
     MIN_LENGTH: 3,
     MAX_LENGTH: 20,
-  },  
-  BEHAVIOR:{
+  },
+  BEHAVIOR: {
     UP: 'U',
-    DOWN: 'D'
-  }
+    DOWN: 'D',
+  },
+  MARKER: {
+    SUCCESS: 'O',
+    FAILURE: 'X',
+    NONE: ' ',
+  },
+  GAME_COMMAND: {
+    RETRY: 'R',
+    EXIT: 'Q',
+  },
 });
 
 module.exports = RULE;
