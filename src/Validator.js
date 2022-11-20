@@ -14,7 +14,7 @@ const Validator = {
   },
 
   validateRetryInput(retryInput) {
-    if (move !== "R" && move !== "Q") {
+    if (retryInput !== "R" && retryInput !== "Q") {
       throw "[ERROR] 입력값은 R 또는 Q 만 가능합니다.";
     }
   },
