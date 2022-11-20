@@ -1,6 +1,6 @@
 const { ERROR } = require('../controller/Error');
 const MissionUtils = require('@woowacourse/mission-utils');
-const { GAME_STATE, MOVE, RESTART, HISTORY } = require('../constants');
+const { GAME_STATE, MOVE, RESTART, HISTORY } = require('../assets/constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스

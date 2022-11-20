@@ -1,6 +1,6 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const { BRIDGE_SIZE } = require('../constants');
+const { BRIDGE_SIZE } = require('../assets/constants');
 const { ERROR } = require('../controller/Error');
 
 /**
