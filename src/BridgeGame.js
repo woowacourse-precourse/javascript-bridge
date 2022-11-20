@@ -7,11 +7,13 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 class BridgeGame {
   #bridge;
   #tryCount;
+  #currentPosition;
   #map;
-  constructer(size) {
+  constructor(size) {
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator);
+    this.#currentPosition = 0;
     this.#tryCount = 1;
-    this.#map = [];
+    this.#map = [[], []];
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
