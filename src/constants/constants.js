@@ -1,9 +1,13 @@
 MINIMUM_BRIDGE_LENGTH = 3;
 MAXIMUM_BRIDGE_LENGTH = 20;
+UP_STR = "U";
+DOWN_STR = "D";
 
-const BRIDGE = {
+const BRIDGE_INFO = {
   MINIMUM_BRIDGE_LENGTH,
   MAXIMUM_BRIDGE_LENGTH,
+  UP_STR,
+  DOWN_STR,
 };
 
-module.exports = { BRIDGE };
+module.exports = { BRIDGE_INFO };

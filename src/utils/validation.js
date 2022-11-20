@@ -1,4 +1,4 @@
-const { BRIDGE } = require("../constants/Constants");
+const { BRIDGE_INFO } = require("../constants/Constants");
 const { ERROR_MESSAGE } = require("../constants/Message");
 
 class Validator {
@@ -9,8 +9,8 @@ class Validator {
 
   static isRightRange(number) {
     return (
-      number >= BRIDGE.MINIMUM_BRIDGE_LENGTH &&
-      number <= BRIDGE.MAXIMUM_BRIDGE_LENGTH
+      number >= BRIDGE_INFO.MINIMUM_BRIDGE_LENGTH &&
+      number <= BRIDGE_INFO.MAXIMUM_BRIDGE_LENGTH
     );
   }
 }
