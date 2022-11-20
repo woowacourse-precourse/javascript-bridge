@@ -2,6 +2,7 @@ const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 const { Console } = require('@woowacourse/mission-utils');
 const Check= require('./Check');
+const BridgeMaker = require('./BridgeMaker');
 
 class BridgeGame {
   size
@@ -12,9 +13,9 @@ class BridgeGame {
 
   start() {
     InputView.readBridgeSize((size) => {
-      this.Check.validate(size);
+      // this.Check.validate(size);
       this.size = size;
-      console.log('asdfasdfas');
+      BridgeMaker.initializeBridge(size);
     })
   }
   /**
