@@ -12,6 +12,7 @@ const InputView = {
   readBridgeSize() {
     let bridgeSize;
     readLine(MESSAGE.INPUT.BRIDGE_SIZE, (input) => {
+      Validate.notNumber(input);
       bridgeSize = Number(input);
       Validate.notInRange(bridgeSize, BRIDGE_SIZE.MAXIMUM, BRIDGE_SIZE.MINIMUM);
     });
