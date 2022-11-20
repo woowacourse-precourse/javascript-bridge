@@ -1,8 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const InputMessage = require("./utils/const/inputViewMessage");
 const VaildationCheck = require("./VaildationCheck");
-const varTypeConst = require("./utils/const/varType");
-const ErrorWithPrifix = require("./CustomError");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -34,7 +32,10 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    return true;
+    this.inputHelper(InputMessage.readGamdCommand);
+    const command = this.inputContainer;
+    this.validate.isStringIntheList(["R", "Q"], command);
+    return command;
   },
 
   inputHelper(message) {
