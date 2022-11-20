@@ -1,6 +1,4 @@
 const GameProgress = require('./IO/GameProgress');
-const InputView = require('./IO/InputView');
-const OutputView = require('./IO/OutputView');
 const BridgeError = require('./Error/BridgeError');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
@@ -29,8 +27,7 @@ class BridgeGame {
   #bridge;
 
   start = () => {
-    GameProgress.printGameStart();
-    InputView.readBridgeSize(this.validateBridgeSize);
+    GameProgress.printGameStart(this.validateBridgeSize);
   };
 
   validateBridgeSize = (size) => {
@@ -47,7 +44,7 @@ class BridgeGame {
     try {
       BridgeError.throwErrorHandler(this.#bridgeErrorMessages[0], !isValidNumber);
     } catch {
-      InputView.readBridgeSize(this.validateBridgeSize);
+      GameProgress.readBridgeSize(this.validateBridgeSize);
     }
   };
 
@@ -63,7 +60,7 @@ class BridgeGame {
    */
   move() {
     this.#bridgeMoveCount = 0;
-    InputView.readMoving(this.validateBridgeMove);
+    GameProgress.readMoving(this.validateBridgeMove);
   }
 
   validateBridgeMove = (input) => {
@@ -74,10 +71,10 @@ class BridgeGame {
   bridgeMoveExceptionHandler = (input, isValidMoving) => {
     try {
       BridgeError.throwErrorHandler(this.#bridgeErrorMessages[1], !isValidMoving);
-      OutputView.printMap(this.#bridge, this.#bridgeMoveCount, input);
+      GameProgress.printMap(this.#bridge, this.#bridgeMoveCount, input);
       this.moveNext(input);
     } catch {
-      InputView.readMoving(this.validateBridgeMove);
+      GameProgress.readMoving(this.validateBridgeMove);
     }
   };
 
@@ -86,9 +83,9 @@ class BridgeGame {
     if (input !== this.#bridge[this.#bridgeMoveCount - 1]) {
       this.retry();
     } else if (this.#bridgeMoveCount < this.#bridge.length) {
-      InputView.readMoving(this.validateBridgeMove);
+      GameProgress.readMoving(this.validateBridgeMove);
     } else if (this.#bridgeMoveCount === this.#bridge.length) {
-      OutputView.printResult('성공', this.#tryCount);
+      GameProgress.printResult('성공', this.#tryCount);
     }
   };
 
@@ -97,7 +94,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry = () => {
-    InputView.readGameCommand(this.validateRetryInput);
+    GameProgress.readGameCommand(this.validateRetryInput);
   };
 
   validateRetryInput = (input) => {
@@ -110,17 +107,17 @@ class BridgeGame {
     try {
       BridgeError.throwErrorHandler(this.#bridgeErrorMessages[2], !isValidInput);
     } catch {
-      InputView.readGameCommand(this.validateRetryInput);
+      GameProgress.readGameCommand(this.validateRetryInput);
     }
   };
 
   gameRestartOrOver = (input) => {
     if (input === 'R') {
       this.#tryCount += 1;
-      OutputView.movingLog = [];
+      GameProgress.clearPreviousProgress();
       this.move();
     } else if (input === 'Q') {
-      OutputView.printResult('실패', this.#tryCount);
+      GameProgress.printResult('실패', this.#tryCount);
     }
   };
 }
