@@ -1,20 +1,63 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+const { Console } = require('@woowacourse/mission-utils');
+const BridgeController = require('./controller/BridgeController');
+const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+const { GAME_QUESTION, GAME_RESULT_STATE } = require('./utils/constants');
+
+class BridgeGame {
+  #controller;
+
+  constructor() {
+    this.#controller = new BridgeController();
+  }
+
+  start() {
+    Console.readLine(GAME_QUESTION.bridgeLength, (bridgeLength) => {
+      InputView.readBridgeSize(bridgeLength);
+
+      this.#controller.inputBridgeLength(bridgeLength);
+      this.move();
+    });
+  }
+
+  move() {
+    Console.readLine(GAME_QUESTION.move, (command) => {
+      InputView.readMoving(command);
+
+      this.#controller.inputBridgeUpDown(command);
+      OutputView.printMap(this.#controller);
+      this.#checkGameResult(this.#controller.outputExit().result);
+    });
+  }
+
+  retry() {
+    Console.readLine(GAME_QUESTION.gameCommand, (command) => {
+      InputView.readGameCommand(command);
+
+      this.#checkGameCommand(command);
+    });
+  }
+
+  #checkGameResult(gameState) {
+    if (gameState === GAME_RESULT_STATE.success)
+      OutputView.printResult(this.#controller);
+
+    if (gameState === GAME_RESULT_STATE.fail) this.retry();
+
+    if (gameState === GAME_RESULT_STATE.try) this.move();
+  }
+
+  #checkGameCommand(command) {
+    switch (command) {
+      case 'R':
+        this.#controller.inputRestart();
+        this.move();
+        break;
+      default:
+        OutputView.printResult(this.#controller);
+    }
+  }
 }
 
 module.exports = BridgeGame;
