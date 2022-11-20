@@ -37,7 +37,7 @@ class App {
     } else if (result === GAMERESULT.RIGHTBLOCK) {
       InputView.readMoving(this);
     } else if (result === GAMERESULT.GAMECLEAR){
-      console.log('Game Clear');
+      this.gameOver(1);
     }
   }
   
@@ -47,10 +47,14 @@ class App {
       this.#attemptsCnt += 1;
       InputView.readMoving(this);
     } else {
-      console.log('Game Over');
+      this.gameOver(0);
     }
   }
 
+  gameOver(clear) { // 1: 성공 0 : 실패
+    const result = this.#bridge.makeBridgeString();
+    OutputView.printResult(this.#attemptsCnt, result, clear);
+  }
 }
 
 const app = new App();
