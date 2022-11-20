@@ -51,7 +51,7 @@ class App {
     }
 
     if (answer === "Q") {
-      OutputView.printGameResult();
+      OutputView.printGameResult(answer);
       this.shutDown();
     }
   }

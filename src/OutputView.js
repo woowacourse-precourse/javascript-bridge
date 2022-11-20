@@ -59,9 +59,14 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printGameResult() {
+  printGameResult(answer) {
     Console.print(MESSAGE.GAME_RESULT);
     this.printRecentBridgePrint(this.recentBridgePrint);
+    this.printGameSuccessOrNot(answer);
+  },
+
+  printGameSuccessOrNot(answer) {
+    Console.print(answer === "Q" ? MESSAGE.GAME_FAIL : MESSAGE.GAME_SUCEESS);
   },
 };
 
