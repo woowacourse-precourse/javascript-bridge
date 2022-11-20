@@ -39,6 +39,9 @@ const OutputView = {
   printGameTryCount(count) {
     Console.print(`총 시도한 횟수: ${count}`);
   },
+  printResultTitle() {
+    Console.print('최종 게임 결과');
+  },
   printBlank() {
     Console.print('');
   }
