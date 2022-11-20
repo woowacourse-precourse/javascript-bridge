@@ -106,7 +106,21 @@ const InputView = {
       }
       
       var temp = new BRIDGE_GAME;
-      temp.retry(input, count, bridge, bridgeMap, tryCount);
+      var word = temp.retry(input, count, bridge, bridgeMap, tryCount);
+
+      switch (word) {
+        case "Retry":
+          InputView.readMoving(count, 0, bridge, "" ,tryCount+1);
+          
+          break;
+        case "END":
+          OUTPUTVIEW.printResult(bridgeMap, "실패", tryCount);
+          MISSIONUTILS.Console.close();
+          break;
+      
+        default:
+          break;
+      }
 
     });
   },

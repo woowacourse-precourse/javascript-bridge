@@ -55,12 +55,10 @@ class BridgeGame {
     const OUTPUTVIEW = require("../src/Outputview");
     const MISSIONUTILS = require("@woowacourse/mission-utils");
     if (input == 'R'){
-      INPUTVIEW.readMoving(count, 0, bridge, "" ,tryCount+1);
+      return "Retry";
     }
     else{
-      OUTPUTVIEW.printResult(bridgeMap, "실패", tryCount);
-      MISSIONUTILS.Console.close();
-      return;
+      return "END";
     }
   }
 }
