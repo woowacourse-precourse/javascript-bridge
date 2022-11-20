@@ -1,9 +1,9 @@
-import BridgeGame from "./BridgeGame";
+const GameManager = require('./GameManager');
 
 class App {
   play() {
-    const bridgeGame = new BridgeGame();
-    bridgeGame.start();
+    const gameManager = new GameManager();
+    gameManager.play();
   }
 }
 
