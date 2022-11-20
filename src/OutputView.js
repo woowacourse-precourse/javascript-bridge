@@ -22,14 +22,14 @@ const OutputView = {
   printResult(currentLocation, result, totalCount) {
     MU.Console.print('최종 게임 결과');
     this.printMap(currentLocation);
-    const rslt = result == 1 ? '성공' : '실패';
-    MU.Console.print(`\n게임 성공 여부: ${rslt}`);
+    const RSLT = result == 1 ? '성공' : '실패';
+    MU.Console.print(`\n게임 성공 여부: ${RSLT}`);
     MU.Console.print(`총 시도한 횟수: ${totalCount}`);
     return MU.Console.close();
   },
 
   printBridgeSizeError(bridgeLen) {
-    if(bridgeLen < 3 || bridgeLen > 20) throw '[ERROR] 3이상 20이하 범위를 입력하세요';
+    if(bridgeLen < 3 || bridgeLen > 20) throw '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.';
     if(isNaN(bridgeLen)) throw '[ERROR] 다리의 길이는 숫자를 입력해야 합니다.';
   },
 

@@ -19,7 +19,7 @@ const InputView = {
         OutputView.printBridgeSizeError(bridgeLen);
         let bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
         this.readMoving([[],[]], bridge, 1);
-        } catch(e) {
+      } catch(e) {
         MU.Console.print(e);
         this.readBridgeSize();
       }
@@ -45,6 +45,7 @@ const InputView = {
   },
 
   helpMoving(currentLocation, bridge, count) {
+    OutputView.printMap(currentLocation);
     if(currentLocation[0].includes('X') || currentLocation[1].includes('X'))
       this.readGameCommand(currentLocation, bridge, count);
     else if(currentLocation[0].length === bridge.length) 
@@ -56,8 +57,8 @@ const InputView = {
    */
   readGameCommand(currentLocation, bridge, count) {
     MU.Console.readLine('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (restart) => {
-      try{
-       OutputView.printGameCommandError(restart);
+      try {
+        OutputView.printGameCommandError(restart);
       } catch(e) {
         MU.Console.print(e);
         this.readGameCommand(currentLocation, bridge, count);
