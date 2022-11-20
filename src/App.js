@@ -6,8 +6,10 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  #game
+
   constructor() {
-    this.game = null; // 내부적으로 저장할 BridgeGame 객체
+    this.#game = null; // 내부적으로 저장할 BridgeGame 객체
   }
 
   play() {
@@ -21,7 +23,7 @@ class App {
    */
   proceedAfterGettingBridgeSize = (size) => {
     const PATH = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    this.game = new BridgeGame(PATH);
+    this.#game = new BridgeGame(PATH);
 
     InputView.readMoving(this.proceedAfterMove);
   }
@@ -31,17 +33,17 @@ class App {
    * @param {string} direction 입력된 이동
    */
   proceedAfterMove = (direction) => {
-    this.game.move(direction);
-    OutputView.printMap(this.game);
+    this.#game.move(direction);
+    OutputView.printMap(this.#game);
 
-    (this.game.isGoingCorrect()) ? this.handleCorrectCase() : InputView.readGameCommand(this.handleGameCommand);
+    (this.#game.isGoingCorrect()) ? this.handleCorrectCase() : InputView.readGameCommand(this.handleGameCommand);
   }
 
   /**
    * 올바르게 다리를 건넌 후의 과정
    */
   handleCorrectCase = () => {
-    (this.game.crossedAll()) ? this.finish() : InputView.readMoving(this.proceedAfterMove);
+    (this.#game.crossedAll()) ? this.finish() : InputView.readMoving(this.proceedAfterMove);
   }
 
   /**
@@ -51,7 +53,7 @@ class App {
   handleGameCommand = (command) => {
     switch (command) {
       case "R":
-        this.game.retry();
+        this.#game.retry();
         InputView.readMoving(this.proceedAfterMove);
         break;
 
@@ -65,7 +67,7 @@ class App {
    * 게임 종료 과정
    */
   finish = () => {
-    OutputView.printResult(this.game);
+    OutputView.printResult(this.#game);
     MissionUtils.Console.close();
   }
 }
