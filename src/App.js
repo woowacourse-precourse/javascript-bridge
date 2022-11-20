@@ -1,5 +1,5 @@
-const OutputView = require("./OutputView");
-const Controller = require("./Controller");
+const OutputView = require("./view/OutputView");
+const Controller = require("./controller/Controller");
 class App {
   constructor() {
     this.controller = new Controller();

@@ -1,10 +1,10 @@
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
-const Validation = require("./utils/validation");
+const InputView = require("../view/InputView");
+const OutputView = require("../view/OutputView");
+const Validation = require("../utils/validation");
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeMachine = require("./BridgeRandomNumberGenerator");
-const BridgeGame = require("./BridgeGame");
+const BridgeMaker = require("../BridgeMaker");
+const BridgeMachine = require("../BridgeRandomNumberGenerator");
+const BridgeGame = require("../model/BridgeGame");
 
 class Controller {
   #bridge = [];
