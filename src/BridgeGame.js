@@ -1,23 +1,4 @@
-const InputView = require('./view/InputView');
-const OutputView = require('./view/OutputView');
-const { Console } = require('@woowacourse/mission-utils');
-const Check= require('./Check');
-const BridgeMaker = require('./BridgeMaker');
-
 class BridgeGame {
-  size
-
-  constructor() {
-    this.Check = new Check();
-  }
-
-  start() {
-    InputView.readBridgeSize((size) => {
-      // this.Check.validate(size);
-      this.size = size;
-      BridgeMaker.initializeBridge(size);
-    })
-  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>

@@ -1,12 +1,12 @@
-const BridgeGame = require('./BridgeGame');
+const Gameflow = require('./Gameflow');
 
 class App {
   constructor() {
-    this.BridgeGame = new BridgeGame();
+    this.Gameflow = new Gameflow();
   }
 
   play() {
-    this.BridgeGame.start();
+    this.Gameflow.start();
   }
 }
 
