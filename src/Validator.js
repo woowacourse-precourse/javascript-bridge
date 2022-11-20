@@ -12,6 +12,12 @@ const Validator = {
       throw new Error(Message.ERROR_MOVE);
     }
   },
+
+  retry(input) {
+    if (input !== GameConfig.QUIT && input !== GameConfig.RETRY) {
+      throw new Error(Message.ERROR_RETRY);
+    }
+  }
 };
 
 module.exports = Validator;
