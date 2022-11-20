@@ -48,7 +48,7 @@ class BridgeGame {
         return this.getUserCommand();
       }
       if (command === 'R') return this.retry();
-      if (command === 'Q') return this.end();
+      return this.end();
     });
   }
 
