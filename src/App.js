@@ -1,9 +1,29 @@
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 class App {
+  constructor() {
+    this.bridge = [];
+  }
+  BridgeMove() {
+    const movePoint = InputView.readMoving();
+  }
+  BridgeMaker() {
+    try {
+      const birdgeSize = InputView.readBridgeSize();
+      this.bridge = BridgeMaker.makeBridge(
+        birdgeSize,
+        BridgeRandomNumberGenerator.generate
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    this.BridgeMove();
+  }
   play() {
     OutputView.gameStart();
-    InputView.readBridgeSize();
+    this.BridgeMaker();
   }
 }
 

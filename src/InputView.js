@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+
 const ERROR_MESSAGE = require("./constans/ErrorMessage");
 const INPUT_MESSAGE = require("./constans/InputMessage");
 /**
@@ -11,18 +10,13 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    MissionUtils.Console.readLine(
-      INPUT_MESSAGE.BRIDGE_SIZE,
-      (bridgeSizeInput) => {
-        this.validBridgeSize(bridgeSizeInput);
-        BridgeMaker.makeBridge(
-          bridgeSizeInput,
-          BridgeRandomNumberGenerator.generate
-        );
-      }
-    );
+    let input;
+    MissionUtils.Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (answer) => {
+      input = answer;
+      this.validBridgeSize(input);
+    });
+    return input;
   },
-
   validBridgeSize(bridgeSize) {
     if (isNaN(bridgeSize)) {
       throw new Error(ERROR_MESSAGE.ONLY_NUMBER);
@@ -36,9 +30,11 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    MissionUtils.Console.readLine(INPUT_MESSAGE.MOVE_POINT, (movePoint) => {
-      this.validMovePoint(movePoint);
-      MissionUtils.Console.print(movePoint);
+    let input;
+    MissionUtils.Console.readLine(INPUT_MESSAGE.MOVE_POINT, (answer) => {
+      input = answer;
+      this.validMovePoint(input);
+      MissionUtils.Console.print(input);
     });
   },
   validMovePoint(movePoint) {
