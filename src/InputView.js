@@ -16,7 +16,7 @@ const InputView = {
         inputBridgeSize,
         BridgeRandomNumberGenerator.generate
       );
-      let bridgeList = [[],[]]
+      let bridgeList = [[], []];
       this.readMoving(bridge, bridgeList);
     });
   },
@@ -30,8 +30,12 @@ const InputView = {
       (inputBridgeChoice) => {
         InputCheck.checkMoving(inputBridgeChoice);
         const bridgeGamge = new BridgeGame();
-        const movingResult = bridgeGamge.move(inputBridgeChoice, bridge, bridgeList);
-        return this.readMoving(bridge, movingResult)
+        const movingResult = bridgeGamge.move(
+          inputBridgeChoice,
+          bridge,
+          bridgeList
+        );
+        return this.readMoving(bridge, movingResult);
       }
     );
   },
@@ -39,7 +43,24 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (choice) => {
+        InputCheck.checkRestart(choice);
+
+        const restart = "R";
+        const quit = "Q";
+        
+        if (choice === restart) {
+          Console.print("게임 재시작");
+        }
+        if (choice === quit) {
+          Console.print("게임 종료");
+        }
+      }
+    );
+  },
 };
 
 module.exports = InputView;
