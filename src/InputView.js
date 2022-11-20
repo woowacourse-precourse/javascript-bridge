@@ -54,6 +54,7 @@ const InputView = {
     try{
       new CheckUserMove(selectUpOrDown);
       bridgeGame.move(this.createBridge, selectUpOrDown);
+      OutputView.printMap(userBridgeCorrect[0], userBridgeCorrect[1]);
       this.userPickedIsWrong(userBridgeCorrect);
       this.readMoving();
       OutputView.printResult(userBridgeCorrect[0] , userBridgeCorrect[1] , bridgeGame.attemptCount);
