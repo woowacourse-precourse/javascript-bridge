@@ -5,10 +5,8 @@
  * BridgeMaker의 파일 경로는 변경할 수 없다.
  * BridgeMaker의 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
  */
-const { BRIDGE_BLOCK } = require('./Constants');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { BRIDGE_BLOCK, BRIDGE_SIDE } = require('./Constants');
 
-const { RANDOM_UPPER_INCLUSIVE } = BridgeRandomNumberGenerator;
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -19,7 +17,7 @@ const BridgeMaker = {
     const bridge = [];
     for (let i = 0; i < size; i += 1) {
       const number = generateRandomNumber();
-      bridge.push(number == RANDOM_UPPER_INCLUSIVE ? BRIDGE_BLOCK.UP : BRIDGE_BLOCK.DOWN);
+      bridge.push(+number === BRIDGE_SIDE.UP ? BRIDGE_BLOCK.UP : BRIDGE_BLOCK.DOWN);
     }
     return bridge;
   },
