@@ -9,6 +9,8 @@ const BRIDGE = {
 	DOWN: 'D',
 	CORRECT: 'O',
 	WRONG: 'X',
+	RANDOM_DOWN: 0,
+	RANDOM_UP: 1,
 };
 
 class Player {
