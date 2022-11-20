@@ -38,7 +38,7 @@ class BridgeGame {
     return lastLog.isCrossable;
   }
 
-  isClearedGame() {
+  isEnd() {
     const passedBlockCount = this.#movementLogs.length;
     const isEveryBlockPassed = this.#bridge.isEveryBlockPassed(passedBlockCount);
     const isSucceededMove = this.isSucceededMove();
