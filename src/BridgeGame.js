@@ -3,8 +3,8 @@ const { ERROR } = require('./Constants');
 const { readGameCommand, readMoving } = require('./InputView');
 const { printResult, printMap, printError } = require('./OutputView');
 const {
-  isRightUserMove,
-  isRightUserCommand,
+  checkUserMove,
+  checkUserCommand,
   isCurrentLastIndexValueSame,
   isLengthSame,
 } = require('./Validation');
@@ -43,12 +43,14 @@ class BridgeGame {
 
   getUserCommand() {
     readGameCommand((command) => {
-      if (!isRightUserCommand(command)) {
-        printError(ERROR.gameCommandException);
+      try {
+        checkUserCommand(command);
+        if (command === 'R') return this.retry();
+        return this.end();
+      } catch (error) {
+        printError(error);
         return this.getUserCommand();
       }
-      if (command === 'R') return this.retry();
-      return this.end();
     });
   }
 
@@ -72,12 +74,13 @@ class BridgeGame {
 
   getUserMove() {
     readMoving((step) => {
-      if (!isRightUserMove(step)) {
-        printError(ERROR.movingException);
+      try {
+        checkUserMove(step);
+        return this.#setUserMove(step);
+      } catch (error) {
+        printError(error);
         return this.getUserMove();
       }
-
-      return this.#setUserMove(step);
     });
   }
 
