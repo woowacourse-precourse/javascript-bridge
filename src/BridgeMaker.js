@@ -14,17 +14,15 @@ const BridgeMaker = {
         Exception.throwError(EXCEPTION_MESSAGE.BRIDGE_SIZE.RANGE);
     }
   },
-  isInteger(number) {
-    return Number.isInteger(Number(number));
+  isInteger(size) {
+    return Number.isInteger(size);
   },
-  isInRange(number) {
-    value = Number(number);
-
-    if (GAME.BRIDGE_SIZE_START <= value && value <= GAME.BRIDGE_SIZE_END) {
-      return false;
+  isInRange(size) {
+    if (GAME.BRIDGE_SIZE_START <= size && size <= GAME.BRIDGE_SIZE_END) {
+      return true;
     }
 
-    return true;
+    return false;
   },
 };
 

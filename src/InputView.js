@@ -5,8 +5,8 @@ const MESSAGE = require('./consts/Input');
 const InputView = {
   readBridgeSize() {
     let bridgeSize;
-    Console.readline(MESSAGE.READ_BRIDGE_SIZE, (input) => {
-      bridgeSize = input;
+    Console.readLine(MESSAGE.READ_BRIDGE_SIZE, (input) => {
+      bridgeSize = Number(input);
       Console.close();
     });
 
