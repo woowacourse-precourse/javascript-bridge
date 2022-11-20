@@ -4,6 +4,7 @@ const { GAME_MSG } = require('./constants/message.js');
 const InputView = require('./views/InputView.js');
 const OutputView = require('./views/OutputView.js');
 const BridgeGame = require('./BridgeGame.js');
+const Validation = require('./Validation.js');
 
 class App {
   constructor() {
@@ -52,9 +53,10 @@ class App {
 
   retryProcess(gameCommand) {
     try {
-      this.bridgeGame.retry(gameCommand);
+      Validation.validateGameCommand(gameCommand);
 
       if (gameCommand === RESTART_TRIGGER) {
+        this.bridgeGame.retry();
         return this.requestMovingDirection();
       }
       if (gameCommand === QUIT_TRIGGER) {

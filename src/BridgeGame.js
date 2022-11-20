@@ -30,9 +30,7 @@ class BridgeGame {
     this.#movementLogs.push({ isCrossable, movingDirection });
   }
 
-  retry(gameCommand) {
-    Validation.validateGameCommand(gameCommand);
-
+  retry() {
     this.#movementLogs = [];
     this.#tryCount += 1;
   }
