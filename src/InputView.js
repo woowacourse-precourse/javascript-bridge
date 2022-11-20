@@ -90,8 +90,6 @@ const InputView = {
       this.rAndQ(userInput, bridgeArray);
     } catch (error) {
       MissionUtils.Console.print(error);
-      this.INDEX = 0;
-      OutputView.removeArray();
       this.readGameCommand(bridgeArray);
     }
   },
@@ -99,6 +97,7 @@ const InputView = {
   rAndQ(userInput, bridgeArray) {
     if (userInput === 'R') {
       this.COUNT += 1;
+      this.INDEX = 0;
       OutputView.removeArray();
       this.readMoving(bridgeArray);
     }
