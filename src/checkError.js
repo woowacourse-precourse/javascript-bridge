@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("./App");
-const BridgeGame = require("./BridgeGame");
 const InputView = require("./InputView");
 
 const CheckError = {
