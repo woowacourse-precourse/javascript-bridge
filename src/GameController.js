@@ -12,7 +12,6 @@ class GameController {
   constructor() {
     this.start();
     this.#bridgeGame = new BridgeGame();
-    this.#selectedPath = [];
   }
 
   start() {
@@ -38,12 +37,17 @@ class GameController {
     InputView.readMoving((input) => {
       try {
         new MovingValidation(input);
-        this.#selectedPath.push(input);
+        this.#selectedPath = input;
+        this.printTrace();
       } catch (e) {
         OutputView.printMessage(e);
         this.askForPath();
       }
     });
+  }
+
+  printTrace() {
+    this.#bridgeGame.makeTrace(this.#selectedPath);
   }
 }
 
