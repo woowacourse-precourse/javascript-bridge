@@ -1,201 +1,179 @@
-this.#nowBridgeLength = this.#brdigeGame.getNumberOfTry();
-
-#nowBridgeLength;
-
 # 기능구현 목록
 
-## App.js 게임 총괄 기능
+이미 만들어져 있는 BridgeRandomNumberGenerator 를 제외하고
 
-appStatus를 통해 게임 진행 및 질문 회귀
+파일 순서대로 , 함수 작성 순서대로 작성하였습니다
 
-appStatus 상태 임시 숫자 나중에 바꿔야될듯
+- [x] 객체 공통 Object.freeze 로 상태접근 제한
 
-status 별 상황
+## 상수화
+
+### Constant 객체
+
+- [x] (위: U, 아래: D)
+
+\*\* 그 밖에 나머지 상수는 최대한 해당 객체에서 사용하게끔 분리 적용하였습니다.
+
+## App 클래스
+
+App 총괄기능
+
+status 별 상수
 
 1. 다리만들기 질문
-2. 다리만들기 실행
-3. 다리 이동 질문
-4. 다리 이동 진행
-5. 게임 결과 질문
-6. 게임 결과 진행
-
-질문 예외 발생시 회귀를 해야함으로
+2. 다리 이동 질문
+3. 게임 결과 질문
 
 input view 기준으로 기능 구현 작성
 
 - [x] 다리의 길이를 입력하고 다리를 만들기까지 진행기능
+
 - [x] 다리의 움직일 값을 입력 받고 이동하여 지도만들어지기까지 진행기능
+
 - [x] 게임을 다시 할건지 입력 받고 게임을 다시 실행시키는 기능
+
 - [x] 멤버 변수 초기화 기능
-- [] 게임 종료 판별
 
-## 상수 생성
+- [x] 게임 종료 (앱 종료) 판별 -[x] 질문을 받아 input 검증에서 예외발생시 status 대로 error handle 기능 구현
 
-### 진행메세지
+### Bridge Game.js
 
-- [x] - 다리 건너기 게임을 시작합니다.
+### initBridgeLengthStatus
 
-- [x] - 다리의 길이를 입력해주세요.
+- [x] 해당 인스턴스의 다리길이상태를 초기화 하는 기능
 
-- [x] - 게임을 다시 시도할지 여부를 입력해주세요.
+### getBridgeLengthStatus
 
-- [x] - 이동할 칸을 선택해주세요.
+- [x] 해당 인스턴스의 다리길이 상태를 얻는 기능
 
-### 결과 메세지
+### getNumberOfTry
 
-- [x] - 성공 실패
+- [x] 해당 인스턴스의 게임을 시도한 횟수를 얻는 기능
 
-- [x] - 총 시도한 횟수
+### incrementBridgeLengthStatus
 
-### 에러 메세지
+- [] 해당 인스턴스의 다리길이 상태의 값을 1 늘리는 기능
 
-\*[ERROR] 로 시작
+### move
 
-- [x]- 공백
+- [x] 사용자의 input과 다리를 받아 사용자의 입력에 따른 정답을 t/f로 리턴하는 기능
 
-- [x] - NaN
+### retry
 
-- [x]- 범위 오류
+- [x] 사용자의 input이 게임옵션과 일치하는지 비교하여 t/f로 처리하는 기능
 
-- [x] - U&D
-
-- [x] - R&Q
-
-### 상수화
-
-- [x] 다리의 길이 범위 (3~20)
-
-- [x] 재시도: R, 종료: Q
-
-- [x] (위: U, 아래: D)
-
-- [x] O | X
-
-## utils
-
-- [x] Console.readLine Utils로 분리
-- [x] Console.pirnt Utils로 분리
-- [x] Console.close Utils로 분리
-
-## 입력 validation
-
-### 공통
-
-- [x] trim 처리를 통해 양옆 공백 제거 ,
-- [] throw문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지 출력후 종료가 아니라 거기서 부터 다시 시작해야됨
-
-### confirmOfCondition
-
-- [] input과 조건을 인자로 받아 checkCondition함수 실행
-
-### checkConition
-
-- [] input 과 error 메세지를 인자 로 받아 해당하는 2개의 문자열에 대한 검증을 하는 메서드
-
-### 생성할 다리 길이 입력 (checkBridgeInput)
-
-- [x] 생성할 다리의 길이 (3~20) 범위 내의 수
-- [x] NaN 예외 처리
-- [x] 숫자 사이에 공백 , 공백으로 제출한다면 예외처리
-
-## 다리 생성
-
-\*무작위 값이 0인 경우 아래 칸, 1인 경우 위 칸이 건널 수 있는 칸이 된다.
-
-- [x] 다리를 생성할 때 위 칸과 아래 칸 중 건널 수 있는 칸은 0과 1 중 무작위 값을 이용해서 정하고 입력 받은 길이만큼 배열생성
-
-## 게임
-
-- [] 다리를 건너다 실패하면 게임을 재시작하거나 종료하는 기능
-- [] 재시작시 처음에 만든 다리 재사용(죽은 지점까지 세이브는 안된다 즉 무조건 실패시에는 X가 표시된 지도가 나오고 성공시에는 O만 있어야됨 )
-
-- [] 시도한 횟수 저장 기능
-
-### Bridge Maker
+## Bridge Maker 객체
 
 - [x] 0 일경우 아래(D) 1일 경우 위칸(U) 을 받은 size 만큼 생성하는 기능
 
-### Bridge Game
+## Bridge Map 클래스
 
-- [x] move 사용자가 칸을 이동할 때 사용하는 메서드
-
-  - [x] 입력값에 따라 만들어진 다리와 입력값을 비교하여 output과 retry에 전달할 return 값 배출 : (t/f) , input 값 , 배열 길이
-
-  - [x] 지금이 다리의 몇번째인지 알 수 있어야됨(성공시에만 다리의길이를 늘림)
-
-  - [x] move 를 사용할때마다 시도횟수도 올라 가야됨(성공 실패와 무관하게 move를 사용할때마다 올라감)
-
-- [x] retry 사용자가 게임을 다시 시도할 때 사용하는 메서드
-
-  - [x] R 게임 재시작 true (처음 만들었던 다리로 재시작)
-
-  - [x] Q 게임종료 exit false 배출
-
-- [x] bridge length status 길이를 올리고 저장하는 기능
-
-- [x] 시도횟수가 늘어나고 저장되는 기능
-
-### Bridge Map
-
-다리건너기 맵을 관리하는 클래스
+다리 건너기 맵을 관리하는 클래스
 
 - [x] 자원들 상수로 구현
 
-- [x] handleMap 해당 클래스의 #isFirst 멤버변수가 true 냐 false 냐에 따라 분기를 나눠 add First Map , add map 을 실행시키는 함수
+### getMap
 
-- [x] addmap move의 boolean과 input을 받아 처음일 때와 아닐때에 따라서 맞혔을때와 못맞혔을때의 분기를 나눠 correct 와 Incorrect를 실행시키는 메서드
+- [x] 해당 인스턴스의 맵을 리턴하는 기능
 
-- [x] add correct 메서드 move의 input 과 이전의 map , map소스를 받아 이용자가 맞췄을때 해당 자원을 추가하는 메서드
+### initBridgeMap
 
-  - [x] move 값이 true 이면 input 에 따라이동한 칸을 O로 표시한다.
+- [x] 해당 인스턴스의 맵과 isFirst 멤버변수를 초기화 시키는 기능
 
-- [x] addIncorrect메서드 move의 input과 이전의 map 을 받아 이용자가 틀렸을때 해당 자원을 추가하는 메서드
+### handleMap
 
-  - [x] move값이 false 이면 input에 따라 틀린 칸을 X가 나타나고 그냥 성공했다면 계속 O만 나온다.
+- [x] 해당 클래스의 #isFirst 멤버변수가 true 냐 false 냐에 따라 분기를 나눠 add First Map , add map 을 실행시키는 기능
 
-  - [x] 실패시 이전 다리의 X는 나타나지않고 실패한 다리의 X만 나옴
+### addMap
 
-  - [x] 인자로 (move의 t/f , input) 그리고 이전 맵을 받는다.
+- [x] move의 실행 결과 boolean과 input을 받아 처음일 때와 아닐때에 따라서 맞혔을때와 못맞혔을때의 분기를 나눠 correct 와 Incorrect를 실행시키는 기능
 
-- [x] first Map 처음 맵에 추가할때 maker로 만든 맵에 자원을 추가한다.
+### addCorrect
 
-- [] 최종 적으로 컨트롤 된 맵을 리턴하는 기능
+- [x] input과 map소스를 받아 이용자가 맞췄을때 해당 자원을 맵에 추가하는 기능
 
-### Map Maker
+### addIncorrect
+
+- [x] move의 input과 이전의 map 을 받아 이용자가 틀렸을때 해당 자원을 추가하는 기능
+
+## input view 객체
+
+### readBridgeSize
+
+- [x] 사용자가 이동할 칸을 입력받는 기능
+
+### readMoving
+
+- [x] 다시 시도할지 종료할지 여부를 입력받는 기능
+
+### readGameCommand
+
+- [x] 다리의 길이를 입력 받는 기능
+
+## Map Maker 객체
 
 기본 맵을 생성하는 객체
 
 - [x] init Map 기본 맵을 생성한다. [[],[]]
 
-## viwe
+## output view 객체
 
-### input view
+### printStart
 
-- [x] 사용자가 이동할 칸을 입력받는 기능
+- [x] 게임 시작 메세지 출력
 
-- [x] 다시 시도할지 종료할지 여부를 입력받는 기능
+### printMap
 
-- [x] 다리의 길이를 입력 받는 기능
+- [x] 인자로 BridgeMap 에서 생성된 맵을 받아 개행처리하여 위 아래를 나눠 프린트하는 기능
 
-### output view
+### printResult
 
-- [x] 게임 시작 메세지
+- [x] 게임성공여부 , 시도한 횟수 , map 을 인자로 받아 게임의 최종 결과물을 출력하는 기능
 
-- [x] print Map
+## utils 객체
 
-  - 인자로 BridgeMap 에서 생성된 맵을 받아 개행처리하여 위 아래를 프린트하는 기능
+- [x] Console.readLine Utils로 분리
+- [x] Console.pirnt Utils로 분리
+- [x] Console.close Utils로 분리
 
-- [x] printResult
+## Validator 객체
 
-  게임성공여부 , 시도한 횟수 , map 을 인자로 받음
+- [x] trim 처리를 통해 양옆 공백 제거 ,
+- [x] throw문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지 출력후 종료가 아니라 거기서 부터 다시 시작해야됨
 
-  - [x] OutputView의 printMap 활용 최종 map 출력
-  - [x] 게임의 성공과 실패를 나타내는 기능
-  - [x] 게임 종료시 저장한 시도 출력 기능
+### checkSpace
+
+- [x] input을 받아 해당 input의 사이에 공백이 있는지 검증 하는 기능
+
+### checkNan
+
+- [x] input을 받아 해당 input을 number로 형변환했을때 isNaN 함수에 의해 NaN 검증을 하는 기능
+
+### confirmOfCondition
+
+- [x] input과 조건을 인자로 받아 해당하는 condition의 checkCondition함수 실행하는 기능
+
+### checkConition
+
+- [x] input 과 error 메세지를 인자 로 받아 해당하는 2개의 문자열에 대한 검증을 하는 기능
+
+### checkRange
+
+- [x] input 을 받아 해당 input이 3 이상 20 이하 내의 숫자인지 판별하는 기능
+
+### checkBridgeInput
+
+다리를 생성할때 필요한 검증들을 실행하는 기능
+
+- [x] 생성할 다리의 길이 (3~20) 범위 내의 수
+- [x] NaN 예외 처리
+- [x] 숫자 사이에 공백 , 공백으로 제출한다면 예외처리
+
+# 테스트 코드
 
 # 객체 관련 제한 사항
 
-## InputView 객체
+## InputView 객체 V
 
 - 제공된 InputView 객체를 활용해 구현해야 한다.
 
@@ -205,7 +183,7 @@ input view 기준으로 기능 구현 작성
 
 - 사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
 
-## OutputView 객체
+## OutputView 객체 V
 
 - 제공된 OutputView 객체를 활용해 구현해야 한다.
 
@@ -216,7 +194,7 @@ input view 기준으로 기능 구현 작성
 
 - 값 출력을 위해 필요한 메서드를 추가할 수 있다.
 
-## BridgeGame 클래스
+## BridgeGame 클래스 V
 
 - 제공된 BridgeGame 클래스를 활용해 구현해야 한다.
 
@@ -228,7 +206,7 @@ input view 기준으로 기능 구현 작성
 
 - 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
 
-## BridgeMaker 객체
+## BridgeMaker 객체 V
 
 - 제공된 BridgeMaker 객체를 활용해 구현해야 한다.
 
@@ -238,7 +216,7 @@ input view 기준으로 기능 구현 작성
 
 - BridgeMaker의 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
 
-## BridgeRandomNumberGenerator 객체
+## BridgeRandomNumberGenerator 객체 V
 
 - Random 값 추출은 제공된 BridgeRandomNumberGenerator의 generate()를 활용한다.
 
