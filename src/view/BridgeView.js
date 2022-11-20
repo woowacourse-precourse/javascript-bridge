@@ -7,7 +7,6 @@ class BridgeView {
   constructor() {
     this.input = InputView;
     this.output = OutputView;
-    this.output.printStart();
   }
 
   getBridgeLength(printLength) {
@@ -15,6 +14,7 @@ class BridgeView {
       this.inputValidation(length, printLength, TYPE.SIZE);
       this.getBridgeLength(printLength);
     }
+    this.output.printStart();
     this.input.readBridgeSize(validation);
   }
 
