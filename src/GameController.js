@@ -61,15 +61,22 @@ class GameController {
     try {
       Validation.validateGameCommand(command);
 
-      if (command === RESTART_TRIGGER) {
-        this.bridgeGame.retry();
-        return this.requestDirection();
-      }
-      if (command === QUIT_TRIGGER) {
-        this.quit();
-      }
+      this.runCommand(command);
     } catch ({ message }) {
       this.reRequest(this.requestRetryCommand, message);
+    }
+  }
+
+  runCommand(command) {
+    switch (command) {
+      case QUIT_TRIGGER: {
+        this.quit();
+        break;
+      }
+      case RESTART_TRIGGER: {
+        this.bridgeGame.retry();
+        this.requestDirection();
+      }
     }
   }
 
