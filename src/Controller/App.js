@@ -6,7 +6,7 @@ const BridgeGame = require("../Model/BridgeGame");
 const { generate } = require("../Model/BridgeRandomNumberGenerator");
 const Validate = require("../Model/Validate");
 
-const { GAME, MESSAGE } = require("../Utils/Constants");
+const { GAME_OPTION, GAME_MESSAGE } = require("../Utils/Constants");
 
 class App {
   constructor() {
@@ -15,7 +15,7 @@ class App {
   }
 
   play() {
-    OutputView.printMsg(MESSAGE.GAME_START);
+    OutputView.printMsg(GAME_MESSAGE.START);
     this.requestBridgeSize();
   }
 
@@ -23,12 +23,14 @@ class App {
     InputView.readBridgeSize((bridgeSize) => {
       this.validate.checkBridgeSize(bridgeSize);
 
-      this.bridgeSize = Number(bridgeSize);
-      const bridge = makeBridge(bridgeSize, generate);
-      this.bridgeGame = new BridgeGame(bridge);
-
+      this.createBridgeGame(bridgeSize);
       this.requestMoving();
     });
+  }
+
+  createBridgeGame(bridgeSize) {
+    const bridge = makeBridge(bridgeSize, generate);
+    this.bridgeGame = new BridgeGame(bridge);
   }
 
   requestMoving() {
@@ -41,18 +43,11 @@ class App {
       // 현재까지 이동한 다리 상태
       this.printCurrBridgeState(upperBridge, lowerBridge);
 
-      if (canCross) {
-        if (this.isLastPosition(upperBridge)) {
-          this.quit();
-
-          return;
-        }
-
-        this.requestMoving();
-        return;
-      }
-
-      this.requestGameCommand();
+      this.isLastPosition(upperBridge) && canCross
+        ? this.quit()
+        : canCross
+        ? this.requestMoving()
+        : this.requestGameCommand();
     });
   }
 
@@ -70,7 +65,7 @@ class App {
     InputView.readGameCommand((command) => {
       this.validate.checkGameCommand(command);
 
-      if (command === GAME.REPLAY) {
+      if (command === GAME_OPTION.REPLAY) {
         this.bridgeGame.retry();
         this.requestMoving();
 
@@ -86,7 +81,7 @@ class App {
     const [playerUpperBridge, playerLowerBridge, isSuccess, attempsCount] =
       this.bridgeGame.getResult();
 
-    OutputView.printMsg(MESSAGE.GAME_RESULT);
+    OutputView.printMsg(GAME_MESSAGE.TOTAL_RESULT);
     OutputView.printMap(playerUpperBridge, playerLowerBridge);
     OutputView.printResult(isSuccess, attempsCount);
     OutputView.end();
