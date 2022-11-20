@@ -8,6 +8,17 @@ const Validate = {
       this.isBiggerThanMinLength(input)
     );
   },
+
+  isCorrectMoving(input) {
+    this.isUndefined(input);
+    this.isCorrectMove(input);
+  },
+
+  isCorrectGameCommand(input) {
+    this.isUndefined(input);
+    this.isCorrectRetry(input);
+  },
+
   isNumber(input) {
     const redex = /[^0-9]/g;
     if (input.match(redex)) {
