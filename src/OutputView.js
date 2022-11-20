@@ -38,11 +38,6 @@ const OutputView = {
     if (context === "start") {
       Console.print(SAYS.START);
     }
-
-    //validation 결과에 따라 메시지 띄움
-  },
-  test() {
-    console.log("7");
   },
 };
 

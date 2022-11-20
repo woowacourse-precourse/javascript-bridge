@@ -10,6 +10,7 @@ const GameLogic = {
   step() {
     //InputView 실행 결과 (U,.. D,.. ) return
   },
+
   compare() {
     // 비교 로직:
     // BridgeMaker에서 가져오기: bridgeArray // 0100010
@@ -34,6 +35,7 @@ const GameLogic = {
     //이기든 지든
     //최종 게임결과 : output의 printMap 띄우고, 메시지, 카운트 data return
   },
+
   terminate() {
     //게임종료 라이브러리
   },
