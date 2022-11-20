@@ -42,13 +42,11 @@ class BridgeGame {
   }
 
   isClearedGame() {
-    const totalRound = this.#bridge.getBridgeSize();
-    const playedRound = this.#movementLogs.length;
-
-    const isEndedGame = totalRound === playedRound;
+    const passedBlockCount = this.#movementLogs.length;
+    const isEveryBlockPassed = this.#bridge.isEveryBlockPassed(passedBlockCount);
     const isSucceededMove = this.isSucceededMove();
 
-    return isEndedGame && isSucceededMove;
+    return isEveryBlockPassed && isSucceededMove;
   }
 
   getMovementLogs() {
