@@ -36,7 +36,7 @@ class App {
   retrying(bridge_game) {
     let command = InputVIew.readGameCommand();
     if (bridge_game.retry(command)) {//'Q'
-      OutputView.printResult(bridge_game.current_moving,false,bridge_game.try);
+      OutputView.printResult(bridge_game.current_moving, false, bridge_game.try);
       return;
     }
     //'R'

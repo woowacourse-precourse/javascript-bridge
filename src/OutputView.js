@@ -21,14 +21,12 @@ const OutputView = {
         upper_text += '   ';
         lower_text += ' O ';
       }
-
       if (i + 1 !== list_length) {
         upper_text += '|';
         lower_text += '|';
       }
     }
-    if (correct) {
-      //마지막 요소 점검
+    if (correct) {//마지막 요소 점검
       if (moving_list[list_length - 1] === 'U') {
         upper_text += ' O ';
         lower_text += '   ';
