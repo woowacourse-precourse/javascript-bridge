@@ -12,7 +12,7 @@ const checkRetry = (ask) => {
 
 const printRetryError = (check) => {
   if (!check) {
-    throw new Error(ERROR.BRIDGE_RETRY_ERROR);
+    throw ERROR.BRIDGE_RETRY_ERROR;
   }
 };
 
