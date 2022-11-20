@@ -26,7 +26,6 @@ const InputView = {
 
   makeBridge(bridgeSize) {
     const bridge = BridgeMaker.makeBridge(bridgeSize, RandomNumber.generate);
-    console.log(bridge, "생성된 다리");
 
     bridgeGame = new BridgeGame(bridge);
     this.readMoving(0, bridge);
