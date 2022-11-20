@@ -13,7 +13,7 @@ const InputView = {
     Console.readLine('다리의 길이를 입력해주세요.\n', (length) => {
       const bridgeList = BridgeMaker.makeBridge(length);
       console.log(bridgeList);
-      const bridgeGame = new BridgeGame(bridgeList);
+      const bridgeGame = new BridgeGame(bridgeList, length);
       return this.readMoving(bridgeGame);
     })
   },
@@ -25,7 +25,7 @@ const InputView = {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (upDown) => {
       //console.log('입력값은..',upDown);
       const answerOrNot = bridgeGame.move(upDown);
-      console.log(answerOrNot);
+      //console.log(answerOrNot);
       if(answerOrNot) this.readMoving(bridgeGame);
 
       return this.readGameCommand();
