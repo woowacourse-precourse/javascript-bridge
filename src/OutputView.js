@@ -6,23 +6,35 @@ const bridge=new BridegGame();
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
+let bridgePrinterAbove=[]
+let bridgePrinterBelow=[]
 const OutputView = {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(userSpace,bridgeArray) {
-    console.log(userSpace,'Outputview',bridgeArray);
-    let correctValue=this.printMapHelper(userSpace,bridgeArray)
-    MissionUtils.Console.print(`[ ${correctValue==='O' ? 'O':' '} ]\n[ ${correctValue==='X' ? 'X':' '} ]`)
+  printMap(userSpace,bridgeArray,count) {
+    // count를 추가해주면서 idx를 추가
+    console.log(userSpace,'Outputview',bridgeArray,count);
+    let correctValue=this.printMapHelper(userSpace,bridgeArray,count)
+    let bridgeLen=bridgeArray.length;
+    console.log(bridgeLen,'다리 길이');
+    // bridgePrinter=`[ ${correctValue==='O' ? 'O':' '} ]\n[ ${correctValue==='X' ? 'X':' '} ]`
+    // MissionUtils.Console.print(bridgePrinterUp)
+    console.log(bridgePrinterAbove);
+    console.log(bridgePrinterBelow);
     return correctValue
   },
-  printMapHelper(userSpace,bridgeArray){
-    if(userSpace==='D'&&bridgeArray[0]===0){
+  printMapHelper(userSpace,bridgeArray,count){
+    if(userSpace==='D'&&bridgeArray[count]===0){
+      bridgePrinterAbove.push('')
+      bridgePrinterBelow.push('O')
       return 'O'
     }
-    if(userSpace==='U'&&bridgeArray[0]===1) {
+    if(userSpace==='U'&&bridgeArray[count]===1) {
+      bridgePrinterBelow.push('')
+      bridgePrinterAbove.push('O')
       return 'O'
     }
     else return 'X'
