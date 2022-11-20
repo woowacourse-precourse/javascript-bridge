@@ -6,7 +6,6 @@ const BridgeGame = require("./BridgeGame");
 
 const Intercessor = {
   gameMap:[],
-  gameResult: false,
 
   startGame() {
     OutputView.printGameStart();
@@ -30,12 +29,10 @@ const Intercessor = {
     const bridgeGame = new BridgeGame();
     for (let i = 0; i < bridge.length; i++) {
       if (!this.matchOneStep(bridge[i], bridgeGame)){
-        this.gameResult = false;
-        return;
+        return false;
       }
     }
-    this.gameResult = true;
-    return;
+    return true;
   },
 
   matchOneStep(block, bridgeGame) {
@@ -54,9 +51,9 @@ const Intercessor = {
     return true;
   },
 
-  checkRetry(){
+  checkRetry(win){
     let retry;
-    if(this.gameResult) return false;
+    if(win) return false;
     const command = InputView.readGameCommand();
     const bridgeGame = new BridgeGame();
     try{
@@ -67,8 +64,8 @@ const Intercessor = {
     return retry;
   },
 
-  printResult(count){
-    if(this.gameResult){
+  printResult(count, win){
+    if(win){
       OutputView.printResult("성공", count, this.gameMap);
     }else{
       OutputView.printResult("실패", count, this.gameMap);
