@@ -49,17 +49,20 @@ const InputView = {
   },
 
   successContinueGame(turnNumber, inputMoveUpDown) {
-    OutputView.printMap(turnNumber, this.bridge, inputMoveUpDown, true);
+    let moveAndBool = inputMoveUpDown + "T";
+    OutputView.makeBridgeMap(turnNumber, this.bridge, moveAndBool);
     this.readMoving(turnNumber + 1);
   },
 
   inputWrongGame(turnNumber, inputMoveUpDown) {
-    OutputView.printMap(turnNumber, this.bridge, inputMoveUpDown, false);
+    let moveAndBool = inputMoveUpDown + "F";
+    OutputView.makeBridgeMap(turnNumber, this.bridge, moveAndBool);
     this.readGameCommand(turnNumber, inputMoveUpDown);
   },
 
   failGameOver(turnNumber, inputMoveUpDown) {
-    OutputView.printResult(turnNumber, this.bridge, inputMoveUpDown, true, this.tryCount);
+    let moveAndBool = inputMoveUpDown + "T";
+    OutputView.printResult(turnNumber, moveAndBool, this.tryCount);
     Console.close();
   },
 
@@ -87,11 +90,12 @@ const InputView = {
   },
 
   isRetryGame(isRetry, turnNumber, inputMoveUpDown) {
+    let moveAndBool = inputMoveUpDown + "F";
     if (isRetry == 1) {
       this.tryCount++;
       this.readMoving(0);
     }
-    if (isRetry == 0) OutputView.printResult(turnNumber, this.bridge, inputMoveUpDown, false, this.tryCount);
+    if (isRetry == 0) OutputView.printResult(turnNumber, moveAndBool, this.tryCount);
   },
 
   retryExceptionCatch(inputRetry, turnNumber, inputMoveUpDown) {

@@ -5,21 +5,25 @@ const Console = MissionUtils.Console;
 const OutputView = {
   upList: [],
   downList: [],
+  bridgeSave: [],
 
-  makeBridgeMap(nowLength, bridge, moveUpDown, tf) {
+  makeBridgeMap(nowLength, bridge, moveAndBool) {
+    let moveUpDown = moveAndBool[0];
+    let tf = moveAndBool[1];
+    this.bridgeSave = bridge;
     this.upList = [];
     this.downList = [];
-    for (let n = 0; n < nowLength + 1; ++n) this.makeMapJustO(bridge, n);
-    if (!tf) this.makeMapWithX(nowLength, moveUpDown);
+    for (let n = 0; n < nowLength + 1; ++n) this.makeMapJustO(n);
+    if (tf == "F") this.makeMapWithX(nowLength, moveUpDown);
     this.printMap();
   },
 
-  makeMapJustO(bridge, n) {
-    if (bridge[n] == "D") {
+  makeMapJustO(n) {
+    if (this.bridgeSave[n] == "D") {
       this.upList.push(" ");
       this.downList.push("O");
     }
-    if (bridge[n] == "U") {
+    if (this.bridgeSave[n] == "U") {
       this.upList.push("O");
       this.downList.push(" ");
     }
@@ -41,11 +45,11 @@ const OutputView = {
     Console.print("[ " + [...this.downList].join(" | ") + " ]");
   },
 
-  printResult(gameLength, bridge, moveUpDown, tf, tryCount) {
+  printResult(gameLength, moveAndBool, tryCount) {
     Console.print("\n최종 게임 결과");
-    this.makeBridgeMap(gameLength, bridge, moveUpDown, tf);
-    if (tf) Console.print("\n게임 성공 여부: 성공");
-    if (!tf) Console.print("\n게임 성공 여부: 실패");
+    this.makeBridgeMap(gameLength, this.bridgeSave, moveAndBool);
+    if (moveAndBool[1] == "T") Console.print("\n게임 성공 여부: 성공");
+    if (moveAndBool[1] == "F") Console.print("\n게임 성공 여부: 실패");
     Console.print("총 시도한 횟수: " + tryCount);
     return;
   },
