@@ -40,6 +40,13 @@ class App {
 
     if (isCorrect) {
       this.BridgeGame.move();
+
+      if (this.#bridge.length === this.BridgeGame.getPosition()) {
+        OutputView.printGameResult(answer, this.tryTimes);
+        this.shutDown();
+        return;
+      }
+
       InputView.readMoving(this.requestMoveUpOrDown.bind(this));
     }
 
