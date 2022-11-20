@@ -9,18 +9,32 @@ const BridgeGame = class extends GameCtrl {
 
   start() {
     this.view.printGameStart();
-    this.view.readBridgeSize((bridgeSize) => this.gameProcess(bridgeSize));
+    this.gameProcess();
   }
 
-  gameProcess(bridgeSize) {
-    this.model.createBridge(parseInt(bridgeSize));
-    this.getUserCommand();
+  gameProcess() {
+    this.view.readBridgeSize((bridgeSize) => {
+      try {
+        bridgeSize = parseInt(bridgeSize);
+        this.model.validateBridgeSize(bridgeSize);
+        this.model.createBridge(bridgeSize);
+        this.getUserCommand();
+      } catch (error) {
+        this.view.printErrorMessage(error.message);
+        this.gameProcess(bridgeSize);
+      }
+    });
   }
 
   getUserCommand() {
     this.view.readMoving((command) => {
-      this.model.validateBridgeCommand(command);
-      this.move(command);
+      try {
+        this.model.validateBridgeCommand(command);
+        this.move(command);
+      } catch (error) {
+        this.view.printErrorMessage(error.message);
+        this.getUserCommand();
+      }
     });
   }
 
@@ -47,8 +61,13 @@ const BridgeGame = class extends GameCtrl {
   // 게임을 재시작 할 것인지 여부를 묻기
   askToReplayGame({ bridgeMap, isGameSuccess }) {
     this.view.readGameCommand((replayCommand) => {
-      this.model.validateBridgeReplayCommand(replayCommand);
-      this.quitOrRetryByCommand({ replayCommand, bridgeMap, isGameSuccess });
+      try {
+        this.model.validateBridgeReplayCommand(replayCommand);
+        this.quitOrRetryByCommand({ replayCommand, bridgeMap, isGameSuccess });
+      } catch (error) {
+        this.view.printErrorMessage(error.message);
+        this.askToReplayGame({ bridgeMap, isGameSuccess });
+      }
     });
   }
 

@@ -21,6 +21,10 @@ const BridgeView = class extends GameView {
   }
 
   // OutputView method
+  printErrorMessage(errorMessage) {
+    this.outputView.printErrorMessage(errorMessage);
+  }
+
   printGameStart() {
     this.outputView.printGameStart();
   }

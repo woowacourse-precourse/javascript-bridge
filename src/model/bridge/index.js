@@ -18,7 +18,6 @@ const BridgeModel = class extends GameModel {
   }
 
   createBridge(bridgeSize) {
-    this.validateBridgeSize(bridgeSize);
     this.#bridge = makeBridge(bridgeSize, generate);
   }
 
