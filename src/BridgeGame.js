@@ -12,18 +12,8 @@ class BridgeGame {
       this.#marker += 1;
       return [this.getUBlock(), this.getDBlock()];
     } else {
-      return this.wrongStep(nextStep, this.getUBlock(), this.getDBlock());
+      return wrongStep(nextStep, this.getUBlock(), this.getDBlock());
     }
-  }
-
-  wrongStep(nextStep, UBlock, DBlock) {
-    if (nextStep === 'U') {
-      pushXToUBlock(UBlock, DBlock);
-    }
-    if (nextStep === 'D') {
-      pushXToDBlock(UBlock, DBlock);
-    }
-    return [UBlock, DBlock];
   }
 
   getUBlock() {
@@ -63,10 +53,21 @@ class BridgeGame {
   }
 }
 
+const wrongStep = (nextStep, UBlock, DBlock) => {
+  if (nextStep === 'U') {
+    pushXToUBlock(UBlock, DBlock);
+  }
+  if (nextStep === 'D') {
+    pushXToDBlock(UBlock, DBlock);
+  }
+  return [UBlock, DBlock];
+};
+
 const pushXToUBlock = (UBlock, DBlock) => {
   UBlock.push('X');
   DBlock.push(' ');
 };
+
 const pushXToDBlock = (UBlock, DBlock) => {
   UBlock.push(' ');
   DBlock.push('X');
