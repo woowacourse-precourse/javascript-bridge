@@ -45,12 +45,16 @@ class BridgeGameController {
   }
 
   move(moving) {
-    const { bridgeMap, checking, isSuccess } = this.#bridgeGame.move(moving);
-    this.printMap({ bridgeMap, checking, isSuccess });
+    const { bridgeMap, isSuccess, checking } = this.#bridgeGame.move(moving);
+    this.printMap({ bridgeMap, isSuccess, checking });
   }
 
-  printMap({ bridgeMap, checking, isSuccess }) {
+  printMap({ bridgeMap, isSuccess, checking }) {
     OutputView.printMap(bridgeMap);
+    this.checkNextStep({ isSuccess, checking });
+  }
+
+  checkNextStep({ isSuccess, checking }) {
     if (isSuccess) return this.quit();
     const isRight = checking === BRIDGE.RIGHT;
     if (isRight) return this.readMoving();
