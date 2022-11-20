@@ -5,8 +5,10 @@ const BridgeMapGenerator = {
     const up = bridge
       .slice(0, location)
       .map((way) => (way === WAY.UP ? BRIDGE.SAFE : " "));
-    const last = isSafe ? BRIDGE.SAFE : BRIDGE.UNSAFE;
-    up.push(bridge[location] === WAY.UP ? last : " ");
+    const safe = isSafe && bridge[location] === WAY.UP;
+    const unsafe = !isSafe && bridge[location] === WAY.DOWN;
+
+    up.push(safe ? BRIDGE.SAFE : unsafe ? BRIDGE.UNSAFE : " ");
 
     return BRIDGE.START + up.join(BRIDGE.DIVIDE) + BRIDGE.END;
   },
@@ -15,8 +17,10 @@ const BridgeMapGenerator = {
     const down = bridge
       .slice(0, location)
       .map((way) => (way === WAY.DOWN ? BRIDGE.SAFE : " "));
-    const last = isSafe ? BRIDGE.SAFE : BRIDGE.UNSAFE;
-    down.push(bridge[location] === WAY.DOWN ? last : " ");
+    const safe = isSafe && bridge[location] === WAY.DOWN;
+    const unsafe = !isSafe && bridge[location] === WAY.UP;
+
+    down.push(safe ? BRIDGE.SAFE : unsafe ? BRIDGE.UNSAFE : " ");
 
     return BRIDGE.START + down.join(BRIDGE.DIVIDE) + BRIDGE.END;
   },
