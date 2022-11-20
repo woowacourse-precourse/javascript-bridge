@@ -1,4 +1,3 @@
-const { readMoving } = require("./views/InputView");
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  * 주의 : 변경 없이 그대로 사용할 것.
@@ -14,10 +13,14 @@ const BridgeMaker = {
     // 생성된 다리
     let bridge = [];
     while (bridge.length < size) {
-      generateRandomNumber() ? bridge.push("U") : bridge.push("D");
+      +generateRandomNumber() ? bridge.push("U") : bridge.push("D");
     }
-    game.bridgeSize = bridge.length;
-    return readMoving(game, bridge);
+    try {
+      readMoving(game, bridge);
+    } catch {}
+    console.log("사이즈", size);
+    console.log("만들어진 다리", bridge);
+    return bridge;
   },
 };
 
