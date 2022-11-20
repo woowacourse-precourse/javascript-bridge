@@ -1,6 +1,9 @@
 const STATE = Object.freeze({
-  MOVE: 0,
-  FAIL: 1,
+  START: 0,
+  MOVE: 1,
+  FAIL: 2,
+  RETRY: 'R',
+  QUIT: 'Q',
 });
 
 module.exports = {
