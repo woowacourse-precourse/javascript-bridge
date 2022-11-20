@@ -1,4 +1,4 @@
-const { MESSAGE, STRUCTURE } = require("./constant/message.js");
+const { MESSAGE, STRUCTURE, ERROR } = require("./constant/message.js");
 const { Console } = require("@woowacourse/mission-utils");
 
 /**
@@ -36,8 +36,21 @@ const OutputView = {
         Console.print(MESSAGE.START);
     },
 
-    printSpaceLine() {
-        Console.print("");
+    // Error
+    printErrorInvalidNumber() {
+        Console.print(ERROR.BRIDGE_INVALID_NUMBER);
+    },
+
+    printErrorBridgeSize() {
+        Console.print(ERROR.BRIDGE_OVER_RANGE);
+    },
+
+    printErrorMove() {
+        Console.print(ERROR.MOVE);
+    },
+
+    printErrorRestart() {
+        Console.print(ERROR.RESTART);
     },
 };
 

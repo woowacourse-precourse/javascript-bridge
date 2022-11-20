@@ -18,7 +18,6 @@ const InputView = {
             if (isErrorBridgeSize) {
                 return this.readBridgeSize();
             }
-
             const bridgeGame = new BridgeGame(makeBridge(size, generate));
             this.readMoving(bridgeGame);
         });
@@ -33,18 +32,15 @@ const InputView = {
             if (isErrorMoving) {
                 return this.readMoving(bridgeGame);
             }
-
             if (bridgeGame.isBadMove(move)) {
                 bridgeGame.showFail(move);
-                this.readGameCommand(bridgeGame);
-            } else {
-                if (bridgeGame.isSuccess(move)) {
-                    bridgeGame.showResult(MESSAGE.SUCCESS);
-                } else {
-                    bridgeGame.move(move);
-                    this.readMoving(bridgeGame);
-                }
+                return this.readGameCommand(bridgeGame);
             }
+            if (bridgeGame.isSuccess(move)) {
+                return bridgeGame.showResult(MESSAGE.SUCCESS);
+            }
+            bridgeGame.move(move);
+            this.readMoving(bridgeGame);
         });
     },
 
@@ -53,21 +49,15 @@ const InputView = {
      */
     readGameCommand(bridgeGame) {
         Console.readLine(MESSAGE.RESTART, (answer) => {
-            const isErrorGameCommand = Validation.checkRestartInput(answer);
+            const isErrorGameCommand = Validation.checkGameCommandInput(answer);
             if (isErrorGameCommand) {
                 return this.readGameCommand(bridgeGame);
             }
-
-            this.questionRetry(answer, bridgeGame);
+            if (bridgeGame.questionRetry(answer)) {
+                return this.readMoving(bridgeGame);
+            }
+            return bridgeGame.showResult(MESSAGE.FAIL);
         });
-    },
-
-    questionRetry(answer, bridgeGame) {
-        if (bridgeGame.retry(answer)) {
-            this.readMoving(bridgeGame);
-        } else {
-            bridgeGame.showResult(MESSAGE.FAIL);
-        }
     },
 };
 

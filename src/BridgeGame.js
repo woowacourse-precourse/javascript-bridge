@@ -46,36 +46,36 @@ class BridgeGame {
 
     move(move) {
         // console.log("BridgeGame.move-----------");
-        const up = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
-        this.goodMove(up);
+        const isUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
+        this.goodMove(isUp);
     }
 
     isSuccess(move) {
         // console.log("BridgeGame.isSuccess---------------------");
-        const up = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
+        const isUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
         if (this.#bridgeCount === this.#bridgeArray.length - 1) {
-            this.addGoodMoveHistory(up);
+            this.addGoodMoveHistory(isUp);
             return true;
         }
     }
 
-    goodMove(up) {
-        this.addGoodMoveHistory(up);
+    goodMove(isUp) {
+        this.addGoodMoveHistory(isUp);
         this.#bridgeCount++;
         OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory, this.#bridgeArray);
     }
-    addGoodMoveHistory(up) {
-        if (up) {
+    addGoodMoveHistory(isUp) {
+        if (isUp) {
             this.#upBridgeHistory.push(STRUCTURE.GOOD);
             this.#downBridgeHistory.push(STRUCTURE.BLANK);
         }
-        if (!up) {
+        if (!isUp) {
             this.#upBridgeHistory.push(STRUCTURE.BLANK);
             this.#downBridgeHistory.push(STRUCTURE.GOOD);
         }
     }
 
-    retry(answer) {
+    questionRetry(answer) {
         if (answer === KEY.RESTART) {
             this.resetBridgeSetting();
             return true;

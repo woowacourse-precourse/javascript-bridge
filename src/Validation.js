@@ -1,14 +1,12 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { ERROR, OPTION, KEY } = require("./constant/message.js");
+const { printErrorMove, printInvalidNumber, printErrorBridgeSize, printErrorInvalidNumber, printErrorRestart } = require("./OutputView.js");
 
 class Validation {
     static checkBridgeSizeInput(size) {
         const isValidNumber = this.checkNumber(size);
         const isValidSizeRange = this.checkBridgeSizeRange(size);
-        if (isValidNumber || isValidSizeRange) {
-            return true;
-        }
-        return false;
+        return isValidNumber || isValidSizeRange === true;
     }
     static checkNumber(number) {
         const isNotNumber = !/^\d+$/g.test(number);
@@ -17,7 +15,7 @@ class Validation {
                 throw new Error(ERROR.BRIDGE_INVALID_NUMBER);
             }
         } catch {
-            Console.print(ERROR.BRIDGE_INVALID_NUMBER);
+            printErrorInvalidNumber();
             return true;
         }
     }
@@ -28,7 +26,7 @@ class Validation {
                 throw new Error(ERROR.BRIDGE_OVER_RANGE);
             }
         } catch {
-            Console.print(ERROR.BRIDGE_OVER_RANGE);
+            printErrorBridgeSize();
             return true;
         }
     }
@@ -42,12 +40,12 @@ class Validation {
         try {
             throw new Error(ERROR.MOVE);
         } catch {
-            Console.print(ERROR.MOVE);
+            printErrorMove();
             return true;
         }
     }
 
-    static checkRestartInput(answer) {
+    static checkGameCommandInput(answer) {
         const isKeyRestart = answer === KEY.RESTART;
         const isKeyQuit = answer === KEY.QUIT;
         if (isKeyRestart || isKeyQuit) {
@@ -56,7 +54,7 @@ class Validation {
         try {
             throw new Error(ERROR.RESTART);
         } catch {
-            Console.print(ERROR.RESTART);
+            printErrorRestart();
             return true;
         }
     }
