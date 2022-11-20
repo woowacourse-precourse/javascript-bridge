@@ -21,8 +21,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(attempts) {
-    Console.print(`${attempts}번 진행 후 종료`)
+  printResult(result, attempts) {
+    Console.print(`게임 성공여부 : ${result}`)
+    Console.print(`총 시도한 횟수: ${attempts}`)
   },
 };
 
