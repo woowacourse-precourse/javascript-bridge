@@ -15,10 +15,18 @@ const Validator = {
 			throw new Error('[ERROR] 다리 길이는 하나의 숫자여야 합니다.');
 		}
 	},
+	
+	isInRange(size) {
+		if (size < 3 || size > 20) {
+			MissionUtils.Console.close();
+			throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');		
+		}
+	},
 
 	checkBridgeSize(size) {
 		this.#isNum(size);
 		this.#isOne(size);
+		this.#isInRange(size);
 	},
 }
 
