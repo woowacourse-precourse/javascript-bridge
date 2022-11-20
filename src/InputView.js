@@ -20,9 +20,8 @@ const InputView = {
 
     Console.print("다리 건너기 게임을 시작합니다.\n");
     Console.readLine("다리의 길이를 입력해주세요.\n", (aNumber) => {
-      if (isNaN(aNumber)) {
-        throw new Error(ERROR.NOT_A_NUMBER);
-      }
+      if (isNaN(aNumber)) throw new Error(ERROR.NOT_A_NUMBER);
+      if (Number(aNumber) > 20 || Number(aNumber) < 3) throw new Error(ERROR.LENGTH_IS_NOT_CORRECT);
 
       randomBridge = BridgeMaker.makeBridge(Number(aNumber), () => generate());
       bridgeGame.makeRandomBridge(randomBridge);
