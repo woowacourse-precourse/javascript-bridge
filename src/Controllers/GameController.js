@@ -16,7 +16,7 @@ class GameController {
 
   inputBridgeSize() {
     this.inputView.readBridgeSize((userInput) => {
-      const size = this.inputView.getBridegeSize(userInput);
+      const size = this.inputView.getBridgeSize(userInput);
       this.bridgeGame.createBridge(size);
       this.selectMoving();
     });
@@ -26,8 +26,12 @@ class GameController {
     this.inputView.readMoving((userInput) => {
       const select = this.inputView.getUserMoving(userInput);
       this.bridgeGame.move(select);
-      this.bridgeGame.checkResult();
+      this.checkResult();
     });
+  }
+
+  checkResult() {
+    const gameProgress = this.bridgeGame.getGameProgress();
   }
 
   // 죽었으면 리트라이, 살았으면 다시 moving

@@ -21,7 +21,7 @@ const InputView = {
     });
   },
 
-  getBridegeSize(size) {
+  getBridgeSize(size) {
     return Number(size);
   },
 
