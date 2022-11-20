@@ -42,4 +42,16 @@ describe("BridgeGame 클래스 도메인 로직 테스트", () => {
     expect(result).toEqual(expected);
   });
 
+  test.each([
+    [['U', 'U'], ['U', 'D', 'D'], 1, 0],
+    [['U', 'D'], ['U', 'D', 'D'], 1, 1],
+    [['U', 'D', 'D'], ['U', 'D', 'D'], 2, 2],
+
+  ])('사용자가 이동한 칸에 대한 결과 기능 구현 테스트', (first, second, third, expected) => {
+    const bridgeGame = new BridgeGame();
+    const result = bridgeGame.getMoveResult(first, second, third);
+    expect(result).toEqual(expected);
+  });
+
+  
 });
