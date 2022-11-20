@@ -12,15 +12,19 @@ class App {
 
   play() {
     OutputView.printStart();
-    InputView.readBridgeSize(this.gameRoutine.bind(this));
+    InputView.readBridgeSize(this.setBridgeRoutine.bind(this));
   }
 
-  gameRoutine(bridgeSize) {
+  setBridgeRoutine(bridgeSize) {
     this.bridgeModel.setBridge(bridgeSize);
-    InputView.readMoving(this.attempt.bind(this));
+    this.attemptRoutine();
   }
 
-  attempt(input) {
+  attemptRoutine() {
+    InputView.readMoving(this.setMovingRoutine.bind(this));
+  }
+
+  setMovingRoutine(input) {
     const result = this.bridgeModel.move(input);
     this.setCounter(input, result);
     OutputView.printMap(this.upCounter, this.downCounter);
