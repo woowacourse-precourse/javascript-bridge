@@ -37,13 +37,15 @@ class Bridge {
   }
 
   moveMap (retryGame, chooseStep) {
-    OutputView.printMap(this.bridgeMap.getPathHistoryWithChooseStep(chooseStep));
+    OutputView.printMap(this.bridgeMap
+      .setHistoryWithChooseStep(chooseStep)
+      .getHistory());
     if (!this.bridgeMap.checkPath(chooseStep)) {
       return retryGame();
     }
     this.bridgeMap.incrementDistance();
     if (this.bridgeMap.isEndGame()) {
-      return OutputView.printResult(true, this.bridgeMap.getPathHistory(), this.#tryCount);
+      return OutputView.printResult(true, this.bridgeMap.getHistory(), this.#tryCount);
     }
     this.askNextStep(retryGame);
   }
@@ -60,7 +62,7 @@ class Bridge {
 
   runRetry (retryGame, chooseRetry) {
     if (chooseRetry === 'Q') {
-      return OutputView.printResult(false, this.bridgeMap.getPathHistory(), this.#tryCount);
+      return OutputView.printResult(false, this.bridgeMap.getHistory(), this.#tryCount);
     }
     this.bridgeMap.initHistory();
     this.#tryCount += 1;

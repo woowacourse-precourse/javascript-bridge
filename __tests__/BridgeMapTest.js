@@ -23,7 +23,7 @@ describe('다리 건너기 테스트', () => {
     bridgeMap.setPattern(pattern);
     input.forEach((path, index) => {
       expect(bridgeMap
-        .getPathHistoryWithChooseStep(path, bridgeMap.getPathMarker(path)))
+        .setHistoryWithChooseStep(path).getHistory())
         .toEqual(historyList[index]);
       bridgeMap.incrementDistance();
     });

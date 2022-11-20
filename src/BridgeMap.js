@@ -30,7 +30,7 @@ class BridgeMap {
     this.#distance += 1;
   }
 
-  getPathHistory () {
+  getHistory () {
     return this.#history;
   }
 
@@ -44,7 +44,7 @@ class BridgeMap {
       : GAME_CONSTANTS.notPath;
   }
 
-  getPathHistoryWithChooseStep (chooseStep) {
+  setHistoryWithChooseStep (chooseStep) {
     [GAME_CONSTANTS.upStair, GAME_CONSTANTS.downStair]
       .forEach((stair) => {
         this.#history.get(stair)
@@ -52,7 +52,7 @@ class BridgeMap {
             ? this.getPathMarker(chooseStep)
             : GAME_CONSTANTS.empty);
       });
-    return this.#history;
+    return this;
   }
 }
 
