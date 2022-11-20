@@ -31,7 +31,7 @@ const Controller = {
   },
   isBlockError() {
     this.round -= 1;
-    this.playerArr.pop();
+    this.playerArr = [];
   }, //
 
   conveyInput(block) {

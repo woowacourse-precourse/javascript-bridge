@@ -49,24 +49,24 @@ const InputView = {
       Controller.addRound();
       new BridgeGame().move(block, this.savedBridge);
       OutputView.printMap(Controller.arrayState);
-      this.judgeContinue()
+      this.judgeContinue(block)
     });
   },
   getMoving(block) { // is에러 이런식으로 밸리데이션에 분리 시도하기
     try {
       if (block !== GO.up && block !== GO.down) {
-        Controller.isBlockError();
         throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.choose_UorD));
       }
     } catch (err) {
-      this.readMoving(); // 문제3. 틀리고 다시 시작하면 메세지가 또출력됨 아isGameEnd때문인데? 지우면 readMoving재실행이 안됨 문제4 처음부터 에러나면 빈어레이가 그대로 출력됨
+      Controller.isBlockError();
+      this.readMoving(); // 문제3. 틀리고 다시 시작하면 메세지가 또출력됨 아isGameEnd때문인데? 지우면 readMoving재실행이 안됨 문제4 처음부터 에러나면 빈어레이가 그대로 출력됨 this.readMoving();
     }
   },
-  judgeContinue(){
+  judgeContinue(block){
     if(!Controller.checkContinue()){
       this.isGameEnd()
     }
-    if(Controller.checkContinue()){
+    if(block === GO.up || block === GO.down && Controller.checkContinue()){
       this.readMoving()
     }
   },
@@ -80,6 +80,7 @@ const InputView = {
       return this.executePrintResult()
     }
   },
+  
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
