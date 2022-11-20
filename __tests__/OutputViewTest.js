@@ -12,7 +12,7 @@ describe('BridgeGame Class 테스트', () => {
 		expect(logSpy).toHaveBeenCalledWith(log);
 	});
 
-	test.only('현재입력까지 지나온 bridge배열을 upper or lower 배열로 출력', () => {
+	test('현재입력까지 지나온 bridge배열을 upper or lower 배열로 출력', () => {
 		expect(
 			OutputView.getOneSideArr(
 				['UO', 'DO', 'UO', 'UX'],
@@ -21,7 +21,7 @@ describe('BridgeGame Class 테스트', () => {
 		).toEqual([' O ', '   ', ' O ', ' X ']);
 	});
 
-	test.only('lower or upper 배열을 실제 출력에 맞게 변환', () => {
+	test('lower or upper 배열을 실제 출력에 맞게 변환', () => {
 		expect(OutputView.convertArrToMap([' O ', '   ', ' O ', ' X '])).toEqual(
 			'[ O |   | O | X ]',
 		);

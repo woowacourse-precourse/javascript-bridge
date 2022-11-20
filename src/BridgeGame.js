@@ -1,4 +1,5 @@
 const BridgeMaker = require('./BridgeMaker');
+const BridgeMove = require('./BridgeMove');
 
 class BridgeGame {
 	#bridge;
@@ -12,16 +13,18 @@ class BridgeGame {
 
 	move(moving) {
 		this.setNextPos();
-
 		const isCorrect = this.isCorrect(moving);
-
-		// UO : 지나온 다리가 U이며, 정답이었던 경우
-		// UX : 지나온 다리가 U이며, 틀린 경우
-		// DO : 지나온 다리가 D이며, 정답이었던 경우
-		// DX : 지나온 다리가 D이며, 틀린 경우
 		isCorrect
-			? (this.#bridge[this.#currentPos] = moving + 'O')
-			: (this.#bridge[this.#currentPos] = moving + 'X');
+			? (this.#bridge = BridgeMove.moveFrontCorrect(
+					this.#bridge,
+					this.#currentPos,
+					moving,
+			  ))
+			: (this.#bridge = BridgeMove.moveFrontWrong(
+					this.#bridge,
+					this.#currentPos,
+					moving,
+			  ));
 	}
 
 	isCorrect(moving) {
@@ -44,18 +47,7 @@ class BridgeGame {
 	}
 
 	retry() {
-		this.backMove();
-	}
-
-	backMove() {
-		// UX인경우 원래 D이므로
-		if (this.#bridge[this.#currentPos] === 'UX') {
-			this.#bridge[this.#currentPos] = 'D';
-		}
-		// DX인경우 원래 O이므로
-		if (this.#bridge[this.#currentPos] === 'DX') {
-			this.#bridge[this.#currentPos] = 'U';
-		}
+		this.#bridge = BridgeMove.moveBack(this.#bridge, this.#currentPos);
 		this.setBackPos();
 	}
 
