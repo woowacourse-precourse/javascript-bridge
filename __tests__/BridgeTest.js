@@ -23,4 +23,13 @@ describe('Bridge 기능 테스트', () => {
     result.push(bridge.moveSuccess(1, 'D'));
     expect(result).toEqual([false, true]);
   });
+
+  test('길이 확인', () => {
+    mockRandoms([1, 0, 1, 0, 1, 1, 0]);
+
+    const bridgeArray = BridgeMaker.makeBridge(7, BridgeRandomNumberGenerator.generate);
+    const bridge = new Bridge(bridgeArray);
+
+    expect(bridge.length()).toEqual(7);
+  });
 });
