@@ -5,6 +5,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const { MESSAGES } = require("./Constants/Constants");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeSizeCheck = require("./Check/BridgeSizeCheck");
 
 const InputView = {
   /**
@@ -13,6 +14,13 @@ const InputView = {
   readBridgeSize() {
     const gameRec = { moveNum: 0, attemptNum: 1, bridgeAnswer: [] };
     MissionUtils.Console.readLine(MESSAGES.ENTER_SIZE, inputLen => {
+      try {
+        (() => new BridgeSizeCheck(Number(inputLen)))();
+      } catch (error) {
+        MissionUtils.Console.print(error);
+        this.readBridgeSize();
+        return;
+      }
       gameRec.bridgeAnswer = BridgeMaker.makeBridge(inputLen, BridgeRandomNumberGenerator.generate);
       gameRec.bridgeOutput = { firstBridge: "", secondBridge: "" };
       this.readMoving(gameRec); // moveNum, attemptNum, bridgeAnswer, bridgeOutput
