@@ -55,6 +55,10 @@ describe("플레이어 상태 테스트", () => {
     expect(Player.getState()).toStrictEqual([[" O "], ["  "]]);
   });
 
+  test("플레이어가 게임을 시도한 횟수 반환 테스트", () => {
+    expect(Player.getTryingCount()).toBe(1);
+  });
+
   test("게임 성공 여부 업데이트 테스트", () => {
     Player.playerAns = [true, true, true];
     Player.size = 3;
