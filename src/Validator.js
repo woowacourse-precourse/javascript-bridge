@@ -1,4 +1,3 @@
-const { readMoving } = require("./InputView");
 const { Console } = require("@woowacourse/mission-utils");
 
 const Validator = {
@@ -30,13 +29,12 @@ const Validator = {
     }
   },
 
-  isRepeat(moveInput, mainBridge, bridgeGame) {
+  validateisRepeat(moveInput) {
     try {
       Validator.validateMoveInput(moveInput);
     } catch (error) {
       Console.print(error);
-      readMoving(mainBridge, bridgeGame);
-      return;
+      return true;
     }
   },
 };
