@@ -29,21 +29,6 @@ describe('Game 진행 테스트', () => {
     expect(game.tryNumber).toBe(tryCnt + 1);
   });
 
-  test('이동시 입력 값이 U또는 D가 아닐 시 예외 출력', () => {
-    const game = new BridgeGame(new Selected(Validator), new TryCnt(Validator));
-
-    const numberInput = 3;
-    const exceptString = 'R';
-
-    expect(() => {
-      game.move(numberInput);
-    }).toThrow(ERROR_MESSAGE.LEVEL_INPUT);
-
-    expect(() => {
-      game.move(exceptString);
-    }).toThrow(ERROR_MESSAGE.LEVEL_INPUT);
-  });
-
   test('게임 실패 및 성공여부 출력', () => {
     const randomNumbers = ['1', '0', '0'];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
@@ -58,5 +43,44 @@ describe('Game 진행 테스트', () => {
     inputArray.forEach((input) => game.move(input));
 
     expect(game.isWin(bridge)).toBe(false);
+  });
+
+  test('게임의 resultMap 출력 테스트', () => {
+    const randomNumbers = ['1', '0', '0'];
+    const mockGenerator = randomNumbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, jest.fn());
+    const game = new BridgeGame(new Selected(Validator), new TryCnt(Validator));
+    const bridge = new Bridge(Validator, mockGenerator);
+
+    const inputArray = ['U', 'D', 'D'];
+    const resultArray = [
+      [true, undefined, undefined],
+      [undefined, true, true],
+    ];
+    bridge.setBridge(3);
+    inputArray.forEach((input) => game.move(input));
+
+    expect(game.getResultMap(bridge)).toStrictEqual(resultArray);
+  });
+
+  test('이동시 입력 값이 U또는 D가 아닐 시 예외 출력', () => {
+    const game = new BridgeGame(new Selected(Validator), new TryCnt(Validator));
+
+    const numberInput = 3;
+    const exceptString = 'R';
+    const lowerCaseString = 'u';
+
+    expect(() => {
+      game.move(numberInput);
+    }).toThrow(ERROR_MESSAGE.LEVEL_INPUT);
+
+    expect(() => {
+      game.move(exceptString);
+    }).toThrow(ERROR_MESSAGE.LEVEL_INPUT);
+
+    expect(() => {
+      game.move(lowerCaseString);
+    }).toThrow(ERROR_MESSAGE.LEVEL_INPUT);
   });
 });
