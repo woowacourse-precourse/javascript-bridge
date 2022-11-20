@@ -24,20 +24,20 @@ class Bridge {
   }
 
   /**
-   * @param {string} moving
-   * @param {number} current
+   * @param {string[]} path
    * @returns
    */
-  isCorrect(moving, current) {
-    return moving === this.#bridge[current];
+  isCorrect(path) {
+    const current = path.length - 1;
+    return path[current] === this.#bridge[current];
   }
 
   /**
-   * @param {number} current
+   * @param {string[]} path
    * @returns
    */
-  isLast(current) {
-    return current == this.#bridge.length - 1;
+  isLast(path) {
+    return path.length === this.#bridge.length;
   }
 }
 
