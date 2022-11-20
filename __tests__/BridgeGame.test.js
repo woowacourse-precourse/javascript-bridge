@@ -681,10 +681,23 @@ describe('다리 이동 로그 가져오는 메서드 테스트', () => {
 });
 
 describe('현재 다리 위치의 결과를 가져오는 메서드 테스트', () => {
+  const bridgeGame = new BridgeGame();
+  const POSITION_LOG_1 = [[0, 0], 'O'];
+
+  bridgeGame.move();
+  bridgeGame.setPositionLog(POSITION_LOG_1);
+
   test('메소드 이름은 "getCurrentBridgeReuslt"로 정의된다.', () => {
-    const bridgeGame = new BridgeGame();
     const METHOD_NAME = 'getCurrentBridgeReuslt';
 
     expect(bridgeGame.getCurrentBridgeReuslt.name).toEqual(METHOD_NAME);
+  });
+
+  test('"O"를 반환한다.', () => {
+    const RECEIVED = 'O';
+    const CURRENT_USER_POSITION = 0;
+    const EXPECTED = bridgeGame.getPositionLog()[CURRENT_USER_POSITION];
+
+    expect(bridgeGame.getCurrentBridgeReuslt(EXPECTED)).toEqual(RECEIVED);
   });
 });
