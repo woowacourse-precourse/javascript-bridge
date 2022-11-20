@@ -1,21 +1,31 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { Console } = require('@woowacourse/mission-utils');
+
+const BridgeLengthException = require('./controller/validate/BridgeLengthException');
+const BridgeUpDownException = require('./controller/validate/BridgeUpDownException');
+const BridgeRestartExitException = require('./controller/validate/BridgeRestartExitException');
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  isValidate(exceptInstance) {
+    return exceptInstance.isValidate();
+  },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+  readBridgeSize(input) {
+    if (!InputView.isValidate(new BridgeLengthException(input))) {
+      Console.close();
+    }
+  },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+  readMoving(input) {
+    if (!InputView.isValidate(new BridgeUpDownException(input))) {
+      Console.close();
+    }
+  },
+
+  readGameCommand(input) {
+    if (!InputView.isValidate(new BridgeRestartExitException(input))) {
+      Console.close();
+    }
+  }
 };
 
 module.exports = InputView;
