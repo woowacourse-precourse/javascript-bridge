@@ -12,6 +12,9 @@ const ERROR = {
 
   MOVING_UPPER: '[ERROR] 이동 칸은 대문자를 입력해야 합니다.',
   MOVING_LETTER: '[ERROR] 이동 칸은 U 혹은 D를 입력해야 합니다.',
+
+  GAME_COMMAND_UPPER: '[ERROR] 재시작 여부는 대문자를 입력해야 합니다.',
+  GAME_COMMAND_LETTER: '[ERROR] 재시작 여부는 Q 혹은 R을 입력해야 합니다.',
 };
 
 module.exports = { GAME, ERROR };

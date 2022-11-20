@@ -11,6 +11,11 @@ const Validation = {
     if (input === 'u' || input === 'd') throw new Error(ERROR.MOVING_UPPER);
     if (input !== 'U' && input !== 'D') throw new Error(ERROR.MOVING_LETTER);
   },
+
+  gameCommand(input) {
+    if (input === 'q' || input === 'r') throw new Error(ERROR.GAME_COMMAND_UPPER);
+    if (input !== 'Q' && input !== 'R') throw new Error(ERROR.GAME_COMMAND_LETTER);
+  },
 };
 
 module.exports = Validation;

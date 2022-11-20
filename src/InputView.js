@@ -19,6 +19,7 @@ const InputView = {
 
   readGameCommand() {
     Console.readLine(GAME.RETRY, (input) => {
+      Validation.gameCommand(input);
       process.retryOrQuit(input);
     });
   },
