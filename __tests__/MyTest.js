@@ -1,4 +1,4 @@
-const { ERROR, INPUT, OUTPUT } = require("../src/data/Constants");
+const { ERROR } = require("../src/data/Constants");
 const Validation = require("../src/Validation");
 
 const BridgeMaker = require("../src/BridgeMaker");
@@ -48,7 +48,7 @@ describe(`다리를 생성기능 테스트`, () => {
     ]);
   });
 
-  test(`생성된 랜덤 숫자가 0이면 "U"를 배열에 저장한다`, () => {
+  test(`생성된 랜덤 숫자가 0이면 "D"를 배열에 저장한다`, () => {
     const size = 3;
     function generateRandomNumber() {
       return 0;
@@ -64,6 +64,7 @@ describe(`다리를 생성기능 테스트`, () => {
     expect(String(BridgeRandomNumberGenerator.generate())).toMatch(/0|1/);
   });
 });
+
 describe(`userMove 입력값 타당성 테스트`, () => {
   test.each([["u"], ["d"]])(
     `알파벳이 UpperCase가 아닐 때 에러발생`,
@@ -90,25 +91,25 @@ describe(`userMove 입력값 타당성 테스트`, () => {
 });
 
 describe(`유저 이동 결과 판단 및 결과를 배열에 저장 테스트`, () => {
-  test(`U을 입력했을 때 유저가 다리 건너기에 실패하면 이중 배열에 그 결과값을 저장한다.`, () => {
+  test(`"U"을 입력했을 때 유저가 다리 건너기에 <실패>하면 이중 배열에 그 결과값을 저장한다.`, () => {
     const bridgeGame = new BridgeGame(0, [[], []], 1);
     bridgeGame.fail("U");
     expect(bridgeGame.getResult()).toEqual([["X"], [` `]]);
   });
 
-  test(`U을 입력했을 때 유저가 다리 건너기에 성공하면 이중 배열에 그 결과값을 저장한다.`, () => {
+  test(`"U"을 입력했을 때 유저가 다리 건너기에 <성공>하면 이중 배열에 그 결과값을 저장한다.`, () => {
     const bridgeGame = new BridgeGame(0, [[], []], 1);
     bridgeGame.pass("U");
     expect(bridgeGame.getResult()).toEqual([["O"], [` `]]);
   });
 
-  test(`D을 입력했을 때 유저가 다리 건너기에 실패하면 이중 배열에 그 결과값을 저장한다.`, () => {
+  test(`"D"을 입력했을 때 유저가 다리 건너기에 <실패>하면 이중 배열에 그 결과값을 저장한다.`, () => {
     const bridgeGame = new BridgeGame(0, [[], []], 1);
     bridgeGame.fail("D");
     expect(bridgeGame.getResult()).toEqual([[` `], ["X"]]);
   });
 
-  test(`D을 입력했을 때 유저가 다리 건너기에 성공하면 이중 배열에 그 결과값을 저장한다.`, () => {
+  test(`"D"을 입력했을 때 유저가 다리 건너기에 <성공>하면 이중 배열에 그 결과값을 저장한다.`, () => {
     const bridgeGame = new BridgeGame(0, [[], []], 1);
     bridgeGame.pass("D");
     expect(bridgeGame.getResult()).toEqual([[` `], ["O"]]);
@@ -128,6 +129,50 @@ describe(`유저 이동 결과 판단 및 결과를 배열에 저장 테스트`,
     const userMove = "U";
 
     expect(bridgeGame.move(bridge, userMove)).toBeFalsy();
+  });
+
+  test(`bridge 와 userMove를 입력 받았을 때 통과/실패 를 판단할 수 있다.`, () => {
+    const bridgeGame = new BridgeGame(2, [[], []], 1);
+    const bridge = ["D", "U", "U"];
+    const userMove = "U";
+
+    expect(bridgeGame.move(bridge, userMove)).toBeTruthy();
+  });
+
+  test(` move() 매서드를 통해 이동한 결과값 배열을 업데이트 할 수 있다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    const bridge = ["D", "U", "U"];
+    const userMove = "U";
+    //"U" 입력 실패 경우
+    bridgeGame.move(bridge, userMove);
+    expect(bridgeGame.getResult()).toEqual([["X"], [` `]]);
+  });
+
+  test(` move() 매서드를 통해 이동한 결과값 배열을 업데이트 할 수 있다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    const bridge = ["D", "U", "U"];
+    const userMove = "D";
+    //"U" 입력 실패 경우
+    bridgeGame.move(bridge, userMove);
+    expect(bridgeGame.getResult()).toEqual([[` `], ["O"]]);
+  });
+
+  test(` move() 매서드를 통해 이동한 결과값 배열을 업데이트 할 수 있다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    const bridge = ["U", "U", "U"];
+    const userMove = "D";
+    //"U" 입력 실패 경우
+    bridgeGame.move(bridge, userMove);
+    expect(bridgeGame.getResult()).toEqual([[` `], ["X"]]);
+  });
+
+  test(` move() 매서드를 통해 이동한 결과값 배열을 업데이트 할 수 있다.`, () => {
+    const bridgeGame = new BridgeGame(0, [[], []], 1);
+    const bridge = ["U", "U", "U"];
+    const userMove = "U";
+    //"U" 입력 실패 경우
+    bridgeGame.move(bridge, userMove);
+    expect(bridgeGame.getResult()).toEqual([["O"], [` `]]);
   });
 });
 
