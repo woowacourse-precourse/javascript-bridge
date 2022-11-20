@@ -1,13 +1,15 @@
 class Selected {
   #selected;
 
+  #validator;
+
   constructor(validator) {
     this.#selected = [];
-    this.validator = validator;
+    this.#validator = validator;
   }
 
   #validate(input) {
-    this.validator.isRightLevelString(input);
+    this.#validator.isRightLevelString(input);
   }
 
   get level() {

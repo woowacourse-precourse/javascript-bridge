@@ -37,29 +37,43 @@
 
 ## Model
 
-- Bridge
-  - validate
+- Bridge: 3이상 20이하의 number를 input으로 받아 랜덤으로 생성된 bridge를 관리
+
+  - #validate
+  - get length
+  - getElement
   - setBridge
-  - getLength
-  - getBridge
-- Try
-  - validate
-  - getTryCnt
-  - addTryCnt
-- Selected
-  - validate
-  - getSelected
-  - getLength
+
+- Selected: 사용자가 입력한 "U"또는 "D"값을 관리한다.
+
+  - #validate
+  - get level
+  - getElement
+  - addElement
+  - reset
+
+- Try: 사용자의 시도 횟수를 관리한다.
+  - get cnt
+  - add
+  - reset
 
 ## Controller
 
 - BridgeGame
-  - validate
-  - resetSelectedAndPlusTryCnt
-  - getResult
+
+  - #validate
+  - get levelCnt
+  - get tryCnt
+  - setInitialResultMap
+  - resetSelectedAndAddTryCnt
+  - isWin
+  - getResultMap
+  - setResultMap
+  - setResultElement
+  - setBoolean
+
   - move
   - retry
-  - validateRetryInput
 
 # function
 
@@ -70,10 +84,36 @@
   - readGameCommand
 - OutputView
   - printMap
-  - printLine
-  - setMesage
-  - getMessageBody
+  - getPrintLine
   - getMessageElement
+  - isLastLine
   - printResult
 - BridgeMaker
+  - makeBridge
 - BridgeRandomNumber
+  - generate
+
+# 예외 상황
+
+## Bridge
+
+### 입력 값 예외
+
+- 문자가 입력되는 경우
+- 3미만, 20초과의 숫자가 입력되는 경우
+- 띄어쓰기가 있는경우
+- 값이 없는 경우
+
+## Selected
+
+### 입력값 예외
+
+- 소문자가 입력된 경우
+- 숫자가 입력된 경우
+
+## Game
+
+### 입력값 예외
+
+- 소문자가 입력된 경우
+- 숫자가 입력된 경우

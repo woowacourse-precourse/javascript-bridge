@@ -13,15 +13,17 @@ class BridgeGame {
 
   #result;
 
+  #validator;
+
   constructor(selected, tryCnt, validator) {
     this.#selected = selected;
     this.#tryCnt = tryCnt;
     this.#result = Array.from({ length: 2 }, () => []);
-    this.validator = validator;
+    this.#validator = validator;
   }
 
   #validate(input) {
-    this.validator.isRightRetryString(input);
+    this.#validator.isRightRetryString(input);
   }
 
   get levelCnt() {

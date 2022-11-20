@@ -6,10 +6,11 @@ const Selected = require('./Model/Selected');
 const TryCnt = require('./Model/TryCnt');
 const { MESSAGE } = require('./Utils/Constant');
 const Validator = require('./Utils/Validator');
+const { generate } = require('./BridgeRandomNumberGenerator');
 
 class App {
   constructor() {
-    this.bridge = new Bridge(Validator);
+    this.bridge = new Bridge(Validator, generate);
     this.game = new BridgeGame(
       new Selected(Validator),
       new TryCnt(Validator),
