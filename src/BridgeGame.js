@@ -6,7 +6,7 @@ const BridgeRanDomNumber = require('./BridgeRandomNumberGenerator');
 class BridgeGame {
   #bridgeSize;
   #bridge;
-  #copyBridge;
+  #index = 0;
   #moveState = [[], []];
   #retryCount = 1;
   #isSuccess = '';
@@ -14,7 +14,6 @@ class BridgeGame {
   constructor(bridgeSize) {
     this.#bridgeSize = bridgeSize;
     this.#bridge = this.generateBridge();
-    this.#copyBridge = this.#bridge.slice();
   }
   
   generateBridge() {
@@ -22,15 +21,14 @@ class BridgeGame {
   }
   
   match(moveAnswer) {
-    if (this.#copyBridge[0] === moveAnswer) {
-      this.#copyBridge.shift();
+    if (this.#bridge[this.#index] === moveAnswer) {
+      this.#index += 1;
       this.#isSuccess = '성공';
       return [moveAnswer, true];
-    } else {
-      this.#copyBridge.shift();
-      this.#isSuccess = '실패';
-      return [moveAnswer, false];
     }
+    this.#index += 1;
+    this.#isSuccess = '실패';
+    return [moveAnswer, false];
   }
   
   /**
@@ -66,7 +64,7 @@ class BridgeGame {
   }
 
   checkRemainBridge() {
-    if (this.#copyBridge.length !== 0) {
+    if (this.#index !== this.#bridgeSize) {
       return true;
     }
     return false;
@@ -89,7 +87,7 @@ class BridgeGame {
    */
   retry() {
     this.#retryCount += 1;
-    this.#copyBridge = this.#bridge.slice();
+    this.#index = 0;
     this.#moveState = [[], []];
   }
 
