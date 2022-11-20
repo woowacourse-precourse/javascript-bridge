@@ -2,7 +2,8 @@ const MESSAGE_PROCESS = Object.freeze({
     GAME_START: "다리 건너기 게임을 시작합니다.\n",
     INPUT_BRIDGE_LENGTH: "다리의 길이를 입력해주세요.\n",
     INPUT_MOVING: "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-    INPUT_GAME_COMMAND: "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n"
+    INPUT_GAME_COMMAND: "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+    GAME_QUIT: "\n최종 게임 결과"
 });
 
 const MESSAGE_ERROR = Object.freeze({

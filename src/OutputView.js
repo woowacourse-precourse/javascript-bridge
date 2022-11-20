@@ -19,7 +19,7 @@ const OutputView = {
   },
 
   printResult(gameResult) {
-    Console.print('최종 게임 결과');
+    Console.print(MESSAGE_PROCESS.GAME_QUIT);
     Console.print(`[ ${gameResult.moveUp.join(' | ')} ]`);
     Console.print(`[ ${gameResult.moveDown.join(' | ')} ]`);
     Console.print(`\n게임 성공 여부: ${gameResult.isSuccess? '성공': '실패'}`);
