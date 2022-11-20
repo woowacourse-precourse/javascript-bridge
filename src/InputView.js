@@ -41,6 +41,18 @@ const InputView = {
     }
   },
 
+  validateMoving(moving) {
+    if (moving !== 'U' && moving !== 'D') {
+      throw new Error(MESSAGES.ERROR.MOVING_CMD_NOT_UD);
+    }
+  },
+
+  validateGameCommand(command) {
+    if (command !== 'R' && command !== 'Q') {
+      throw new Error(MESSAGES.ERROR.RETRY_CMD_NOT_RQ);
+    }
+  },
+
   generateBridge(input) {
     const size = Number(input);
 
