@@ -79,10 +79,14 @@ class App {
   }
 
   quit() {
+    this.printGameResult();
+    Console.close();
+  }
+
+  printGameResult() {
     OutputView.printEndMessage(this.bridgeGame.isFail());
     OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
     OutputView.printResult(this.bridgeGame.getResult());
-    Console.close();
   }
 }
 

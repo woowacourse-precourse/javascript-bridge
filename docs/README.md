@@ -249,3 +249,4 @@ actionAboutGameCommand
   - BridgeGame를 생성하는 함수를 만들어 분리한다.
   - BridgeGame의 결과에 따른 실행을 함수로 만들어 분리한다.
   - 플레이어가 입력한 gameCommand의 결과에 따른 실행을 함수로 만들어 분리한다.
+  - 게임이 종료할 때 출력되는 결과 메시지의 실행을 함수로 만들어 분리한다.
