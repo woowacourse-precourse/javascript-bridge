@@ -33,7 +33,7 @@ const OutputView = {
     const blueprint = createBlueprint(progressData.length);
     const progressMap = [...blueprint].map((_, index) => {
       const data = progressData[index];
-      if (data.select === position) return '   ';
+      if (data.select !== position) return '   ';
 
       return data.alive ? ' O ' : ' X ';
     });
