@@ -8,7 +8,6 @@ class BridgeGame {
   constructor(){
     this.bridge
     this.number = 0
-    this.bridgeMap = new Map()
     this.upside = []
     this.downside = []
     this.resultmap = new Map()
