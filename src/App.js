@@ -4,7 +4,7 @@ const Input = require('./InputView');
 class App {
   play() {
     Output.startText();
-    Input.brigeGameCourse();
+    Input.bridgeGameCourse();
   }
 }
 
