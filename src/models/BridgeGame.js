@@ -1,13 +1,20 @@
 const { validate, isMovingInput } = require('../Validator');
+const MapGenerator = require('./MapGenerator');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #mapGenerator;
+
   #bridge;
 
+  #stage;
+
   constructor(bridge) {
+    this.#mapGenerator = new MapGenerator();
     this.#bridge = bridge;
+    this.#stage = 0;
   }
 
   /**
@@ -17,6 +24,11 @@ class BridgeGame {
    */
   move(moving) {
     validate(moving, isMovingInput);
+
+    this.#mapGenerator.generate(this.#bridge, this.#stage, moving);
+    this.#stage += 1;
+
+    return this.#mapGenerator.toString();
   }
 
   /**

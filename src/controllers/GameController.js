@@ -33,7 +33,9 @@ class GameContoller {
   }
 
   onInputMoving(moving) {
-    this.#bridgeGame.move(moving);
+    const map = this.#bridgeGame.move(moving);
+
+    OutputView.printMap(map);
   }
 }
 
