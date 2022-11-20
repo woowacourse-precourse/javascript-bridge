@@ -32,6 +32,9 @@ const InputView = {
       Validation.checkUserMoveInput(userInput);
       const bridgeGame = new BridgeGame();
       bridgeGame.move(userInput, bridge);
+      console.log(userInput);
+      if (bridgeGame.isWrongZone()) return this.readGameCommand(bridge);
+      return this.readMoving(bridge);
     });
   },
 
