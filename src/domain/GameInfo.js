@@ -13,8 +13,6 @@ const GameInfo = {
 
   moving: null,
 
-  gameCommand: null,
-
   numberOfPlayGames: 0,
 
   gameResult: "실패"

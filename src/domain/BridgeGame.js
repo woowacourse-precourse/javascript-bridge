@@ -1,5 +1,6 @@
-const { GAME_VALUES, INITIALIZE_VALUES } = require("../constants/constant");
+const { GAME_VALUES } = require("../constants/constant");
 const GameInfo = require("./GameInfo");
+const UseGameInfo = require("./UseGameInfo");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -10,58 +11,16 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  static move() {
+  move() {
     GameInfo.position += GAME_VALUES.counter;
     GameInfo.gameStat.push(GameInfo.moving);
     this.moveBridge();
   }
 
-  static moveBridge() {
-    return (this.isValidMove()) ?
-      this.pushMoveBridge(GAME_VALUES.upperCharO) :
-      this.pushMoveBridge(GAME_VALUES.upperCharX);
-  }
-
-  static isValidMove() {
-    return GameInfo.bridge[GameInfo.position] === GameInfo.gameStat[GameInfo.position];
-  }
-
-  static pushMoveBridge(input) {
-    GameInfo.moveBridge[
-      GameInfo.indexingArray
-        .indexOf(GameInfo.gameStat[GameInfo.position])
-    ].push(input);
-    GameInfo.moveBridge[
-      (GameInfo.indexingArray
-        .indexOf(GameInfo.gameStat[GameInfo.position]) + 1) % 2
-    ].push(GAME_VALUES.blank);
-  }
-
-  static initializeGameInfo() {
-    GameInfo.gameStat = [];
-    GameInfo.moveBridge = [[], []];
-    GameInfo.position = INITIALIZE_VALUES.initializedPosition;
-    GameInfo.numberOfPlayGames += GAME_VALUES.counter;
-  }
-
-  static getMoveBridge() {
-    return GameInfo.moveBridge;
-  }
-
-  static getPosition() {
-    return GameInfo.position;
-  }
-
-  static getNumberOfPlayGames() {
-    return GameInfo.numberOfPlayGames;
-  }
-
-  static isFailure() {
-    return (
-      GameInfo.moveBridge[0]
-        .concat(GameInfo.moveBridge[1])
-        .includes(GAME_VALUES.upperCharX)
-    );
+  moveBridge() {
+    return (UseGameInfo.isValidMove()) ?
+      UseGameInfo.pushMoveBridge(GAME_VALUES.upperCharO) :
+      UseGameInfo.pushMoveBridge(GAME_VALUES.upperCharX);
   }
 
   /**
@@ -69,8 +28,8 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  static retry() {
-    return (GameInfo.gameCommand === GAME_VALUES.upperCharR);
+  static retry(gameCommand) {
+    return (gameCommand === GAME_VALUES.upperCharR);
   }
 }
 

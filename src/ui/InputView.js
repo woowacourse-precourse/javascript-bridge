@@ -1,15 +1,14 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { GAME_MESSAGES, ERROR_MESSAGES } = require("../constants/constant");
+const { GAME_MESSAGES } = require("../constants/constant");
 
 const BridgeGame = require("../domain/BridgeGame");
-const BridgeMaker = require("../domain/BridgeMaker");
-const BridgeRandomNumberGenerator = require("../domain/BridgeRandomNumberGenerator");
-const GameInfo = require("../domain/GameInfo");
+const InputErrorProcess = require("../domain/InputErrorProcess");
 const OutputView = require("./OutputView");
 
 const ValidateBridgeSize = require("../utils/ValidateBridgeSize");
 const ValidateMoving = require("../utils/ValidateMoving");
 const ValidateGameCommand = require("../utils/ValidateGameCommand");
+const UseGameInfo = require("../domain/UseGameInfo");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -19,34 +18,22 @@ const InputView = {
 
   validateGameCommand: null,
 
-  inputErrorProcess(validClass, inputValue, objectCode) {
-    try {
-      GameInfo[objectCode] = new validClass(inputValue)[objectCode];
-    } catch {
-      OutputView.printMessage(ERROR_MESSAGES[objectCode]);
-      return false;
-    }
-    return true;
-  },
+  inputErrorProcess: new InputErrorProcess(),
+
+  bridgeGame: new BridgeGame(),
 
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
     Console.readLine(GAME_MESSAGES.messageOfInputSize, (bridgeSize) => {
-      if (this.inputErrorProcess(ValidateBridgeSize, bridgeSize, "bridgeSize") === false)
+      if (!this.inputErrorProcess.inputErrorProcess(ValidateBridgeSize, bridgeSize, "bridgeSize"))
         return this.readBridgeSize();
-      GameInfo.bridge = BridgeMaker
-        .makeBridge(GameInfo.bridgeSize, BridgeRandomNumberGenerator.generate);
+      UseGameInfo.createBridge();
+      UseGameInfo.initializeGameInfo();
 
-      return this.playGame();
+      return this.readMoving();
     });
-  },
-
-  playGame() {
-    BridgeGame.initializeGameInfo();
-
-    return this.readMoving();
   },
 
   /**
@@ -54,7 +41,7 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(GAME_MESSAGES.messageOfInputMoving, (moving) => {
-      if (this.inputErrorProcess(ValidateMoving, moving, "moving") === false)
+      if (!this.inputErrorProcess.inputErrorProcess(ValidateMoving, moving, "moving"))
         return this.readMoving();
 
       return this.moveBridge();
@@ -62,11 +49,11 @@ const InputView = {
   },
 
   moveBridge() {
-    BridgeGame.move();
+    this.bridgeGame.move();
     OutputView.printMap();
-    if (BridgeGame.isFailure()) return this.readGameCommand();
+    if (UseGameInfo.isFailure()) return this.readGameCommand();
 
-    return (BridgeGame.getPosition() !== GameInfo.bridgeSize - 1) ?
+    return (UseGameInfo.isLastTurn()) ?
       this.readMoving() : OutputView.printSuccess();
   },
 
@@ -75,10 +62,12 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(GAME_MESSAGES.messageOfInputGameCommand, (gameCommand) => {
-      if (this.inputErrorProcess(ValidateGameCommand, gameCommand, "gameCommand") === false)
+      if (!this.inputErrorProcess
+        .inputErrorProcess(ValidateGameCommand, gameCommand, "gameCommand"))
         return this.readGameCommand();
 
-      return (BridgeGame.retry()) ? this.playGame() : OutputView.printResult();
+      return (BridgeGame.retry(gameCommand) && UseGameInfo.initializeGameInfo()) ?
+        this.readMoving() : OutputView.printResult();
     });
   },
 };
