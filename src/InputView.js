@@ -1,43 +1,41 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { MESSAGE } = require('./Constants');
 const {
   validateBridgeSize,
   validateDirection,
   validateGameCommand,
 } = require('./Validator');
-const { MESSAGE } = require('./Constants');
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+
 const InputView = {
-  readBridgeSize(startGame) {
-    Console.readLine(MESSAGE.bridgeSize, (bridgeLength) =>
-      this.tryToStartGame(bridgeLength, startGame)
+  readBridgeSize(setUpGame) {
+    Console.readLine(MESSAGE.bridgeSize, (bridgeSize) =>
+      this.tryToSetUpGame(bridgeSize, setUpGame)
     );
   },
 
-  tryToStartGame(bridgeLength, startGame) {
+  tryToSetUpGame(bridgeSize, setUpGame) {
     try {
-      validateBridgeSize(bridgeLength);
-      startGame(bridgeLength);
+      validateBridgeSize(bridgeSize);
+      setUpGame(bridgeSize);
     } catch (e) {
       Console.print(e);
-      this.readBridgeSize(startGame);
+      this.readBridgeSize(setUpGame);
     }
   },
 
-  readMoving(moveOne) {
+  readMoving(moveOneStep) {
     Console.readLine(MESSAGE.direction, (direction) =>
-      this.tryToMoveOne(direction, moveOne)
+      this.tryToMoveOneStep(direction, moveOneStep)
     );
   },
 
-  tryToMoveOne(direction, moveOne) {
+  tryToMoveOneStep(direction, moveOneStep) {
     try {
       validateDirection(direction);
-      moveOne(direction);
+      moveOneStep(direction);
     } catch (e) {
       Console.print(e);
-      this.readMoving(moveOne);
+      this.readMoving(moveOneStep);
     }
   },
 

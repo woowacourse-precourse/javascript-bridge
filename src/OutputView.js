@@ -1,8 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./Constants');
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
+
 const OutputView = {
   printStartMessage() {
     Console.print(MESSAGE.start);
@@ -24,11 +22,11 @@ const OutputView = {
     return mapString;
   },
 
-  printResult(bridgeMap, { isSuccess, numberOfAttempts }) {
+  printResult(bridgeMap, { crossed, numberOfAttempts }) {
     Console.print(MESSAGE.result);
     this.printMap(bridgeMap);
     Console.print('');
-    Console.print(MESSAGE.success(isSuccess));
+    Console.print(MESSAGE.success(crossed));
     Console.print(MESSAGE.attempts(numberOfAttempts));
     Console.close();
   },

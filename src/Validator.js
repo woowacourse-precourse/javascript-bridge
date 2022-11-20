@@ -23,15 +23,15 @@ const validateBridgeSize = (bridgeSizeString) => {
 };
 
 const validateDirection = (direction) => {
-  const directionRegExp = /^U{1}$|^D{1}$/;
-  if (!directionRegExp.test(direction)) {
+  const validDirection = /^U{1}$|^D{1}$/;
+  if (!validDirection.test(direction)) {
     throw ERROR.direction;
   }
 };
 
 const validateGameCommand = (command) => {
-  const commandRegExp = /^R{1}$|^Q{1}$/;
-  if (!commandRegExp.test(command)) {
+  const validRetryCommand = /^R{1}$|^Q{1}$/;
+  if (!validRetryCommand.test(command)) {
     throw ERROR.retry;
   }
 };

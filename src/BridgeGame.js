@@ -2,9 +2,7 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 const OPPOSITE_DIRECTION = { U: 'D', D: 'U' };
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+
 class BridgeGame {
   #bridgeAnswer;
 
@@ -14,63 +12,63 @@ class BridgeGame {
 
   #status;
 
-  setUp(bridgeLength) {
-    this.makeBridge(Number(bridgeLength));
+  setUp(bridgeSize) {
+    this.makeBridge(Number(bridgeSize));
     this.#bridgeMap = { U: [], D: [] };
     this.#stepCount = 0;
     this.#status = {
       numberOfAttempts: 1,
-      isSuccess: false,
-      isFinished: false,
+      crossed: false,
+      gameOver: false,
     };
   }
 
-  makeBridge(bridgeLength) {
+  makeBridge(bridgeSize) {
     this.#bridgeAnswer = BridgeMaker.makeBridge(
-      bridgeLength,
+      bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
   }
 
-  move(playerMoving) {
-    const isCorrect = this.isCorrectStep(playerMoving);
-    this.updateBridgeMap(playerMoving, isCorrect);
+  move(direction) {
+    const isCorrect = this.isCorrectStep(direction);
+    this.updateBridgeMap(direction, isCorrect);
     this.updateStatus(isCorrect);
   }
 
-  isCorrectStep(playerMoving) {
-    if (this.#bridgeAnswer[this.#stepCount] === playerMoving) {
+  isCorrectStep(direction) {
+    if (this.#bridgeAnswer[this.#stepCount] === direction) {
       return true;
     }
     return false;
   }
 
-  updateBridgeMap(playerMoving, isCorrect) {
+  updateBridgeMap(direction, isCorrect) {
     if (isCorrect) {
-      return this.markBridgeMap(playerMoving, 'O');
+      return this.markBridgeMap(direction, 'O');
     }
-    return this.markBridgeMap(playerMoving, 'X');
+    return this.markBridgeMap(direction, 'X');
   }
 
-  markBridgeMap(playerMoving, mark) {
-    const oppositeDirection = OPPOSITE_DIRECTION[playerMoving];
-    this.#bridgeMap[playerMoving].push(mark);
+  markBridgeMap(direction, mark) {
+    const oppositeDirection = OPPOSITE_DIRECTION[direction];
+    this.#bridgeMap[direction].push(mark);
     this.#bridgeMap[oppositeDirection].push(' ');
   }
 
   updateStatus(isCorrect) {
     this.#stepCount += 1;
     if (isCorrect) {
-      this.checkSuccess();
+      this.checkCrossed();
     } else {
-      this.#status.isFinished = true;
+      this.#status.gameOver = true;
     }
   }
 
-  checkSuccess() {
+  checkCrossed() {
     if (this.#stepCount === this.#bridgeAnswer.length) {
-      this.#status.isSuccess = true;
-      this.#status.isFinished = true;
+      this.#status.crossed = true;
+      this.#status.gameOver = true;
     }
   }
 
@@ -87,7 +85,7 @@ class BridgeGame {
     this.#bridgeMap.D.pop();
     this.#stepCount -= 1;
     this.#status.numberOfAttempts += 1;
-    this.#status.isFinished = false;
+    this.#status.gameOver = false;
   }
 }
 
