@@ -8,6 +8,20 @@ const InputView = {
   MOVING: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
   GAME_COMMAND: '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
 
+  BIRDGE_SIZE_MINIMUM: 3,
+  BIRDGE_SIZE_MAXIMUM: 20,
+
+  MOVING_UP: 'U',
+  MOVING_DOWN: 'D',
+
+  GAME_COMMAND_RESTART: 'R',
+  GAME_COMMAND_QUIT: 'Q',
+
+  ERROR_BRIDGE_SIZE_NUMBER: '[ERROR] 다리 길이는 숫자로 입력해야합니다.',
+  ERROR_BRIDGE_SIZE_RANGE: '[ERROR] 다리 길이는 3부터 20사이의 숫자여야 합니다.',
+  ERROR_MOVING: '[ERROR] 위 칸은 U, 아래 칸은 D로 입력해야 합니다.',
+  ERROR_GAME_COMMAND:'[ERROR] 재시도는 R, 종료는 Q로 입력해야 합니다.',
+
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -21,10 +35,10 @@ const InputView = {
 
   validateBridgeSize(answer) {
     if (/[^0-9]/g.test(answer)) {
-      throw new Error('[ERROR] 다리 길이는 숫자로 입력해야합니다.');
+      throw new Error(this.ERROR_BRIDGE_SIZE_NUMBER);
     }
-    if (Number(answer) < 3 || Number(answer) > 20) {
-      throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+    if (Number(answer) < this.BIRDGE_SIZE_MINIMUM || Number(answer) > this.BIRDGE_SIZE_MAXIMUM) {
+      throw new Error(this.ERROR_BRIDGE_SIZE_RANGE);
     }
   },
 
@@ -40,8 +54,8 @@ const InputView = {
   },
 
   validateMoving(answer) {
-    if (answer !== 'U' || answer !== 'D') {
-      throw new Error('[ERROR] 위 칸은 U, 아래 칸은 D로 입력해야 합니다.');
+    if (answer !== this.MOVING_UP || answer !== this.MOVING_DOWN) {
+      throw new Error(this.ERROR_MOVING);
     }
   },
 
@@ -57,8 +71,8 @@ const InputView = {
   },
 
   validateGameCommand(answer) {
-    if (answer !== 'U' || answer !== 'D') {
-      throw new Error('[ERROR] 재시도는 R, 종료는 Q로 입력해야 합니다.');
+    if (answer !== this.GAME_COMMAND_RESTART || answer !== this.GAME_COMMAND_QUIT) {
+      throw new Error(this.ERROR_GAME_COMMAND);
     }
   },
 
