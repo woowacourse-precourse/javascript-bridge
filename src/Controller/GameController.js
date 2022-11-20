@@ -1,6 +1,7 @@
 const InputView = require('../View/InputView');
 const OutputView = require('../View/OutputView');
 const BridgeGame = require('../Model/BridgeGame');
+const { REPLAY } = require('../../constants/string');
 
 class GameController {
   #bridgeGame;
@@ -25,19 +26,27 @@ class GameController {
   }
 
   readDirection() {
-    InputView.readMoving(this.setMoving.bind(this));
+    InputView.readMoving(this.move.bind(this));
   }
 
-  setMoving(direction) {
+  move(direction) {
     this.#bridgeGame.move(direction);
     this.showBridge();
   }
 
   showBridge() {
-    const bridgeMap = this.#bridgeGame.showBridgeResult();
+    const bridgeMap = this.#bridgeGame.mapBridge();
 
     OutputView.printMap(bridgeMap);
-    this.checkCanRead();
+    this.checkPlay();
+  }
+
+  checkPlay() {
+    if (this.#bridgeGame.canMove()) {
+      this.readDirection();
+    } else {
+      InputView.readGameCommand(this.setGameCommand.bind(this));
+    }
   }
 }
 

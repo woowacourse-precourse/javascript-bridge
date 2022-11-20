@@ -2,20 +2,13 @@ const BridgeMaker = require('../BridgeMaker');
 const Move = require('./Move');
 const Bridge = require('./Bridge');
 const NUMBER = require('../../constants/number');
-const STRING = require('../../constants/string');
 const { generate } = require('../BridgeRandomNumberGenerator');
 
-// 어떤 변수를 static으로 관리할 수 있을까?
-// 다리 건너기 게임을 관리하는 클래스
 // InputView, OutputView 호출 불가
 class BridgeGame {
   #size;
 
   #bridge;
-
-  #playCount;
-
-  #index;
 
   #path;
 
@@ -24,7 +17,6 @@ class BridgeGame {
     this.#playCount = NUMBER.ONE;
     this.#bridge = {};
     this.#path = [];
-    this.#index = NUMBER.ZERO;
   }
 
   setBridgeSize(size) {
@@ -34,36 +26,30 @@ class BridgeGame {
   makeBridge() {
     this.#path = BridgeMaker.makeBridge(this.#size, generate);
     this.initBridge();
-    console.log(this.#path);
   }
 
   initBridge() {
     this.#bridge = Bridge.init(this.#size);
-    this.#index = NUMBER.ZERO;
+    Move.init();
   }
 
   move(direction) {
-    const currentCell = this.#path[this.#index];
+    const countIndex = Move.showCount();
+    const currentCell = this.#path[countIndex];
 
-    this.#bridge[direction][this.#index] = Move.byDirection(
+    // 한 줄로 줄이기
+    this.#bridge[direction][countIndex] = Move.byDirection(
       currentCell,
       direction
     );
-    this.#index += NUMBER.ONE;
   }
 
-  showBridgeResult() {
-    // this 바인딩 활용
-    return STRING.DIRECTIONS.map(this.makeValidBridgeForm.bind(this));
-    // 화살표 함수 활용
-    // return DIRECTIONS.map((DIRECTION) => this.makeValidBridgeForm(DIRECTION));
+  mapBridge() {
+    return Bridge.makeValidForm(this.#bridge, Move.showCount());
   }
 
-  makeValidBridgeForm(direction) {
-    const validBridgeForm = this.#bridge[direction]
-      .slice(NUMBER.ZERO, this.#index)
-      .join(STRING.VERTICAL_BAR);
-    return `${STRING.LEFT_BAR} ${validBridgeForm} ${STRING.RIGHT_BAR}`;
+  canMove() {
+    return Move.canMove(this.#path);
   }
 
   // 사용자가 게임을 다시 시도할 때 사용하는 메서드
