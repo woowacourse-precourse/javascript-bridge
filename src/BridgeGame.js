@@ -20,7 +20,7 @@ class BridgeGame {
   }
 
   isMovable(direction) {
-    return this.#bridge.getNextIndex(this.#player) === direction;
+    return this.#bridge.getNextDirection(this.#player) === direction;
   }
 
   out(direction) {
