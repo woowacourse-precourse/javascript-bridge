@@ -87,7 +87,7 @@ class Controller {
   commandForm(input) {
     try {
       this.validation.isRestartOrQuit(input);
-      Console.print(input);
+      this.RetryOrQuitGame(input);
     } catch (error) {
       Console.print(error);
     }
@@ -102,6 +102,16 @@ class Controller {
     OutputView.printMap(this.#currentBridge);
     OutputView.printResult(this.#try, false);
     Console.close();
+  }
+
+  RetryOrQuitGame(input) {
+    if (input === "R") {
+      this.retryGame();
+    }
+    if (input === "Q") {
+      this.quitGame();
+    }
+    this.#try += 1;
   }
 }
 
