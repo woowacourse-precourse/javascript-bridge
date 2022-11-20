@@ -38,6 +38,9 @@ const InputView = {
         if (checkContinue[0].includes("X") || checkContinue[1].includes("X")) {
           this.readGameCommand(bridge, attempt);
         }
+        if (bridge.length === checkContinue[0].length) {
+          return OutputView.printResult("성공", attempt);
+        }
         this.readMoving(bridge, checkContinue, attempt);
       }
     );
