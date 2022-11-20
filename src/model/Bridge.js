@@ -8,6 +8,10 @@ class Bridge {
   getBridge() {
     return this.#path;
   }
+
+  checkPath(moving, location) {
+    return this.#path[location] === moving;
+  }
 }
 
 module.exports = Bridge;

@@ -15,14 +15,20 @@ class BridgeGameController {
     InputView.readBridgeSize((bridgeLength) => {
       new BridgeLengthValidator(bridgeLength).validate();
 
-      this.makeBridge(bridgeLength);
+      this.createBridge(bridgeLength);
       this.getMoving();
     });
   }
 
-  makeBridge(bridgeLength) {
+  createBridge(bridgeLength) {
     this.#bridgeGame = new BridgeGame();
     this.#bridgeGame.setBridge(bridgeLength);
+  }
+
+  getMoving() {
+    InputView.readMoving((moving) => {
+      this.#bridgeGame.move(moving);
+    });
   }
 }
 
