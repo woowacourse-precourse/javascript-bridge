@@ -29,12 +29,41 @@ describe('Map 출력 테스트', () => {
     const input = ['3', 'U', 'D', 'U'];
     const random = ['1', '0', '1'];
     const messages = [
-      "['O']",
-      "[' ']",
-      "['O' | ' ']",
-      "[' ' | 'O']",
-      "['O' | ' ' | 'O']",
-      "[' ' | 'O' | ' ']",
+      '[ O ]',
+      '[   ]',
+      '[ O |   ]',
+      '[   | O ]',
+      '[ O |   | O ]',
+      '[   | O |   ]',
+    ];
+
+    mockRandom(random);
+    mockInput(input);
+
+    const gameController = new BridgeGameController();
+
+    gameController.getBridgeSize();
+    gameController.getMoving();
+    gameController.getMoving();
+    gameController.getMoving();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+    expect();
+  });
+
+  test("Map 출력 - ['U', 'D', 'D'], 마지막 실패 경우", () => {
+    const logSpy = getLogSpy();
+    const input = ['3', 'U', 'D', 'U'];
+    const random = ['1', '0', '0'];
+    const messages = [
+      '[ O ]',
+      '[   ]',
+      '[ O |   ]',
+      '[   | O ]',
+      '[ O |   | X ]',
+      '[   | O |   ]',
     ];
 
     mockRandom(random);
