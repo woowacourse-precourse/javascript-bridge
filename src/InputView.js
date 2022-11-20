@@ -37,9 +37,15 @@ const InputView = {
     MissionUtils.Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (movePoint) => {
+        this.validMovePoint(movePoint);
         MissionUtils.Console.print(movePoint);
       }
     );
+  },
+  validMovePoint(movePoint) {
+    if (movePoint !== "U" || movePoint !== "D") {
+      throw new Error("[ERROR] 이동 시 U, D 중 하나만 입력 가능하다.");
+    }
   },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
