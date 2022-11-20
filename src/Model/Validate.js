@@ -1,18 +1,24 @@
-const { ERROR_MESSAGE } = require("../Utils/Constants");
+const {
+  ERROR_MESSAGE,
+  BRIDGE_SIZE,
+  GAME_OPTION,
+  BRIDGE_SIGN,
+} = require("../Utils/Constants");
 
 class Validate {
   checkBridgeSize(size) {
     if (isNaN(Number(size))) throw new Error(ERROR_MESSAGE.BRIDGE_SIZE_IS_NAN);
-    if (size < 3 || size > 20) throw new Error(ERROR_MESSAGE.BRIDGE_SIZE_RANGE);
+    if (size < BRIDGE_SIZE.MIN || size > BRIDGE_SIZE.MAX)
+      throw new Error(ERROR_MESSAGE.BRIDGE_SIZE_RANGE);
   }
 
   checkMovingDirection(direction) {
-    if (!(direction === "U" || direction === "D"))
+    if (!(direction === BRIDGE_SIGN.UPPER || direction === BRIDGE_SIGN.LOWER))
       throw new Error(ERROR_MESSAGE.MOVING_DIRECTION);
   }
 
   checkGameCommand(command) {
-    if (!(command === "R" || command === "Q"))
+    if (!(command === GAME_OPTION.REPLAY || command === GAME_OPTION.QUIT))
       throw new Error(ERROR_MESSAGE.GAME_COMMAND);
   }
 }

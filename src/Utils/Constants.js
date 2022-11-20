@@ -36,6 +36,11 @@ const BRIDGE_SIGN = {
   IMPOSSIBLE: "X",
 };
 
+const BRIDGE_SIZE = {
+  MIN: 3,
+  MAX: 20,
+};
+
 const OUTPUT_MARK = {
   START: "[ ",
   END: " ]",
@@ -48,5 +53,6 @@ module.exports = {
   ERROR_MESSAGE,
   GAME_OPTION,
   BRIDGE_SIGN,
+  BRIDGE_SIZE,
   OUTPUT_MARK,
 };
