@@ -24,7 +24,7 @@ const Message = {
   ERROR_RETRY: `[ERROR] 잘못된 입력입니다. (재시도: ${GameConfig.RETRY}, 종료: ${GameConfig.QUIT})`,
 
   result(isSuccess) {
-    const result = isSuccess? '성공' : '실패';
+    const result = isSuccess ? '성공' : '실패';
     return `게임 성공 여부: ${result}`;
   },
 
