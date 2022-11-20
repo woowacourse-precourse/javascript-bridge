@@ -10,19 +10,23 @@
   - 게임을 시도하면, try의 값을 1로 set한다
   - bridge 데이터를 set한다
   - user 데이터를 초기화한다.
-- [x] retry
+- [x] attempt
   - try의 값을 +1 한다.
   - user 데이터를 초기화한다.
+- [ ] result
+  - 시도 횟수와 게임 성공 여부를 알려준다
 - [x] jump
   - 유저가 점프한 후 위치 데이터를 갱신한다.
 - [x] checkBridge
   - 메세지를 통해 유효한 bridge 데이터인지 확인하고 유효하지 않다면 Error를 던진다.
 - [x] checkUser
   - 메세지를 통해 유효한 user 데이터인지 확인하고 유효하지 않다면 Error를 던진다.
-- [ ] isEndGame
-  - 메세지를 통해 게임이 끝났는지를 알려준다.
-- [ ] isSuccess
+- [x] isSuccess
   - 메세지를 통해 게임 결과를 알려준다.
+- [x] isFail
+  - 메세지를 통해 게임이 실패했는지 알려준다.
+- [ ] isRetry
+  - 메세지를 통해 게임을 재시작했는지 알려준다.
 
 ### `View`
 

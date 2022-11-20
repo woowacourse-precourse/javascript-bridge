@@ -2,6 +2,8 @@ const constants = Object.freeze({
   KEYWORD: {
     UP: "U",
     DOWN: "D",
+    RETRY: "R",
+    QUIT: "Q",
     SUCCESS_BRIDGE: "성공",
     FAIL_BRIDGE: "실패",
     SUCCESS_JUMP: "O",
@@ -11,12 +13,13 @@ const constants = Object.freeze({
     READ_BRIDGE: "\n다리의 길이를 입력해주세요.\n",
     MOVING_BRIDGE: "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
     RETRY_BRIDGE:
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
+      "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
   },
   OUTPUT: {
     START_BRIDGE: "다리 건너기 게임을 시작합니다.",
     SUCCESS_BRIDGE: (SUCCESS) => `게임 성공 여부: ${SUCCESS}`,
     ATTEMPT_BRIDGE: (ATTEMPT) => `총 시도한 횟수: ${ATTEMPT}`,
+    MAP_BRIDGE: () => "",
   },
   SIZE: {
     MIN_SIZE: 3,
@@ -27,6 +30,8 @@ const constants = Object.freeze({
     0: "D",
     U: "U",
     D: "D",
+    R: "R",
+    Q: "Q",
   },
 });
 

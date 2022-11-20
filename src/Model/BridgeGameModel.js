@@ -1,17 +1,23 @@
 const { SIZE, KEYWORD, HASH } = require("../constants/index.js");
-const { BridgeGameSizeError, BridgeGameMoveError } = require("../Error/index.js");
+const {
+  BridgeGameSizeError,
+  BridgeGameMoveError,
+  BridgeGameRetryError,
+} = require("../Error/index.js");
 
 const BridgeGameModel = class {
   #user = [];
   #bridge = [];
-  #try = 1;
+  #attempt = [];
 
   try(brige) {
+    const { RETRY } = KEYWORD;
+    this.#attempt.push(RETRY);
     this.#bridge.push(...brige);
   }
 
-  retry() {
-    this.#try += 1;
+  attempt(attempt) {
+    this.#attempt.push(HASH[attempt]);
     this.#user = [];
   }
 
@@ -21,12 +27,13 @@ const BridgeGameModel = class {
     return data;
   }
 
-  isEndGame() {
-    return this.#user.length === this.#bridge.length;
-  }
-
   isSuccess() {
     return JSON.stringify(this.#user) === JSON.stringify(this.#bridge);
+  }
+
+  isFail() {
+    const currentIndex = this.#user.length - 1;
+    return this.#user[currentIndex] !== this.#bridge[currentIndex];
   }
 
   checkBridge(bridge) {
@@ -40,6 +47,12 @@ const BridgeGameModel = class {
     const { UP, DOWN } = KEYWORD;
     const isMove = move === UP || move === DOWN;
     if (!isMove) throw new BridgeGameMoveError();
+  }
+
+  checkRetry(input) {
+    const { RETRY, QUIT } = KEYWORD;
+    const isRetry = input === RETRY || input === QUIT;
+    if (!isRetry) throw new BridgeGameRetryError();
   }
 };
 
