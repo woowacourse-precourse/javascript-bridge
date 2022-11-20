@@ -17,6 +17,16 @@ class BridgeModel {
   setBridge(newBridge) {
     this.#bridge = newBridge;
   }
+
+  /**
+   * 유저가 성공적으로 움직였는지 여부를 반환한다.
+   * @param userMoving {string[]} [유저 움직임]
+   * @return {boolean} [움직임 성공 여부]
+   */
+  isSuccessMoving(userMoving) {
+    const indexToCompare = userMoving.length - 1;
+    return this.#bridge[indexToCompare] === userMoving[indexToCompare];
+  }
 }
 
 module.exports = BridgeModel;
