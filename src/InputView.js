@@ -53,6 +53,11 @@ const InputView = {
     });
     return input;
   },
+  validreadGameCommand(command) {
+    if (movePoint !== "R" && movePoint !== "Q") {
+      throw new Error(ERROR_MESSAGE.RESTART_EXPTION);
+    }
+  },
 };
 
 module.exports = InputView;
