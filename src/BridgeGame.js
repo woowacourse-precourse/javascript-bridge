@@ -23,10 +23,12 @@ class BridgeGame {
   
   match(moveAnswer) {
     if (this.#copyBridge[0] === moveAnswer) {
-      this.#copyBridge.shift()
+      this.#copyBridge.shift();
+      this.#isSuccess = '성공';
       return [moveAnswer, true];
     } else {
-      this.#copyBridge.shift()
+      this.#copyBridge.shift();
+      this.#isSuccess = '실패';
       return [moveAnswer, false];
     }
   }
@@ -75,10 +77,8 @@ class BridgeGame {
       this.#moveState[0].includes(' X ') || 
       this.#moveState[1].includes(' X ')
     ) {
-      this.#isSuccess = '실패';
       return false;
     }
-    this.#isSuccess = '성공';
     return true;
   }
 
