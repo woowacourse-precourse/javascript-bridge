@@ -7,7 +7,6 @@ class BridgeGame {
   #try        // 현재까지 시도 횟수
 
   constructor(bridge) {
-    console.log(bridge);
     this.#bridge = bridge;
     this.#curr = new Array();
     this.#try = 1;
@@ -26,7 +25,7 @@ class BridgeGame {
    * @returns {boolean} 마지막 라운드 성공 여부
    */
   getLastRoundResult() {
-    return this.#bridge[this.#curr.length-1] == this.#curr[this.#curr.length-1];
+    return this.#curr.length > 0 && this.#bridge[this.#curr.length-1] == this.#curr[this.#curr.length-1];
   }
 
   /**
@@ -34,7 +33,7 @@ class BridgeGame {
    * @return {boolean} bridge의 길이와 curr의 길이가 같고, 마지막 시도가 성공이면 true, 아니면 false
    */
   isArrived() {
-    return this.#bridge.length == this.#curr.length && this.getLastRoundResult();
+    return this.#bridge.length == this.#curr.length && this.#bridge[this.#curr.length-1] == this.#curr[this.#curr.length-1];
   }
 
   /**
