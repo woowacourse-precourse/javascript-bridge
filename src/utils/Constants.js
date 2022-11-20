@@ -1,6 +1,10 @@
 const GAME_CONDITION = Object.freeze({
   MIN_BRIDGE_LENGTH: 3,
   MAX_BRIDGE_LENGTH: 20,
+  RANDOM_BRIDGE_NUMBER: {
+    0: "D",
+    1: "U",
+  },
 });
 
 const GAME_MESSAGE = Object.freeze({

@@ -23,7 +23,7 @@ class View {
     return (size) => {
       const bridgeSizeValidator = new BridgeSizeValidator();
       bridgeSizeValidator.validate(size);
-      this.#gameController.inputBridge(size);
+      this.#gameController.makeBridge(size);
     };
   }
 }
