@@ -1,7 +1,7 @@
 //view를 게임 로직들과 이어주는 역할
 
 const { readBridgeSize, readMoving, readGameCommand } = require("../view/InputView");
-const { printMap, printResult } = require("../view/OutputView");
+const { printMap, printResult, printGreeting } = require("../view/OutputView");
 
 const ViewController = {
   input: {
@@ -11,6 +11,7 @@ const ViewController = {
   },
 
   output: {
+    greet: printGreeting,
     map: printMap,
     result: printResult,
   },
