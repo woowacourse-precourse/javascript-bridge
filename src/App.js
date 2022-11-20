@@ -4,6 +4,7 @@ const BridgeGame = require("./BridgeGame");
 const { Console } = require("@woowacourse/mission-utils");
 const validator = require("./utils");
 const { ERROR_MESSAGE } = require("./constants");
+
 class App {
   MOVE_TO_FORK_MAP = {
     END: () => {

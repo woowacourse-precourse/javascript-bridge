@@ -5,24 +5,36 @@ const BridgeMaker = require("./BridgeMaker");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  tryCount = 1;
-  moveCount = 0;
-  bridgeSize = 0;
-  bridge = [];
-  user = [];
-  status = "";
+  #tryCount = 1;
+  #moveCount = 0;
+  #bridgeSize = 0;
+  #bridge = [];
+  #user = [];
+  #status = "";
 
-  getBridge() {
-    return this.bridge;
+  getTryCount() {
+    return this.#tryCount
+  }
+  getMoveCount() {
+    return this.#moveCount
+  }
+  getBride() {
+    return this.#bridge
+  }
+  getUser() {
+    return this.#user;
+  }
+  getStatus() {
+    return this.#status;
   }
 
   setBridge(input) {
-    this.bridgeSize = Number(input);
-    this.bridge = BridgeMaker.makeBridge(
-      this.bridgeSize, 
+    this.#bridgeSize = Number(input);
+    this.#bridge = BridgeMaker.makeBridge(
+      this.#bridgeSize, 
       BridgeRandomNumberGenerator.generate
     );
-    // console.log("this.bridge", this.bridge)
+    // console.log("this.#bridge", this.#bridge)
   }
 
   /**
@@ -31,23 +43,23 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(input) {
-    this.moveCount += 1
-    this.user.push(input)
+    this.#moveCount += 1
+    this.#user.push(input)
   }
   
   fork() {
-    const isCorrect = this.bridge[this.moveCount - 1] === this.user[this.moveCount - 1];
+    const isCorrect = this.#bridge[this.#moveCount - 1] === this.#user[this.#moveCount - 1];
 
-    if (this.moveCount === this.bridgeSize && isCorrect) {
-      // console.log(this.moveCount, this.bridgeSize)
-      this.status = "END"
-    } else if (this.moveCount !== this.bridgeSize && isCorrect) {
-      this.status = "NEXT"
+    if (this.#moveCount === this.#bridgeSize && isCorrect) {
+      // console.log(this.#moveCount, this.#bridgeSize)
+      this.#status = "END"
+    } else if (this.#moveCount !== this.#bridgeSize && isCorrect) {
+      this.#status = "NEXT"
     } else if (!isCorrect) {
-      this.status = "FAIL"
+      this.#status = "FAIL"
     }
 
-    return this.status;
+    return this.#status;
   }
 
   /**
@@ -56,9 +68,9 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.tryCount += 1;
-    this.moveCount = 0
-    this.user = [];
+    this.#tryCount += 1;
+    this.#moveCount = 0
+    this.#user = [];
   }
 }
 

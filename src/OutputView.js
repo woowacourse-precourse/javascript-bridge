@@ -21,12 +21,12 @@ const OutputView = {
    */
   printMap(bridgeGame) {
     const result = (
-      bridgeGame.user[bridgeGame.moveCount - 1] === bridgeGame.bridge[bridgeGame.moveCount - 1] ? "O" : "X"
+      bridgeGame.getUser()[bridgeGame.getMoveCount() - 1] === bridgeGame.getBride()[bridgeGame.getMoveCount() - 1] ? "O" : "X"
     )
-    if(bridgeGame.user[bridgeGame.moveCount - 1] === "U") {
+    if(bridgeGame.getUser()[bridgeGame.getMoveCount() - 1] === "U") {
       this.thread.up.push(result);
       this.thread.down.push(" ");
-    } else if (bridgeGame.user[bridgeGame.moveCount - 1] === "D") {
+    } else if (bridgeGame.getUser()[bridgeGame.getMoveCount() - 1] === "D") {
       this.thread.up.push(" ");
       this.thread.down.push(result);
     }
@@ -45,13 +45,13 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(bridgeGame) {
-    const result = bridgeGame.status === "END" ? "성공" : "실패" 
+    const result = bridgeGame.getStatus() === "END" ? "성공" : "실패" 
 
     Console.print(MESSAGE.RESULT_INFO)
     Console.print(`[ ${this.thread.up.join(" | ")} ]`)
     Console.print(`[ ${this.thread.down.join(" | ")} ]`)
     Console.print(MESSAGE.RESULT_IS_SUCCESS(result))
-    Console.print(MESSAGE.RESULT_TRY_COUNT(bridgeGame.tryCount))
+    Console.print(MESSAGE.RESULT_TRY_COUNT(bridgeGame.getTryCount()))
   },
 };
 
