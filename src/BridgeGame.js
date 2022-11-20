@@ -18,33 +18,34 @@ class BridgeGame {
 
   move() {
     this.#game_state = false;
-    this.CallView.readMove(this.checkCommand);
+    return this.CallView.readMove(this.checkCommand);
   }
 
   checkCommand = (command) => {
     try {
       this.errorCheck.validateCommand(command);
-      this.checkBridgeNumber(command);
-    } catch (e) {
-      this.CallView.justPrint(e);
-      this.move();
+      return this.checkBridgeNumber(command);
+    } catch (error) {
+      this.CallView.justPrint(error);
+      return this.move();
     }
-    return;
   };
+
   checkBridgeNumber = (command) => {
     const INDEX = this.#current_bridge;
     if (command === this.#ANSWER_BRIDGE_ARRAY[INDEX]) {
-      return this.circlePush(command);
+      return this.circlePushAndPrint(command);
     }
-    return this.crossPush(command);
+    return this.crossPushAndPrint(command);
   };
+
   changeCommandNumber(COMMAND) {
     const COMMAND_NUMBER = COMMAND === "U" ? 1 : 0;
     const REST_ARRAY_NUMBER = COMMAND_NUMBER === 1 ? 0 : 1;
     return [COMMAND_NUMBER, REST_ARRAY_NUMBER];
   }
 
-  circlePush(COMMAND) {
+  circlePushAndPrint(COMMAND) {
     const [COMMAND_NUMBER, REST_ARRAY_NUMBER] =
       this.changeCommandNumber(COMMAND);
     this.#bridge_map[COMMAND_NUMBER].push("O");
@@ -61,7 +62,7 @@ class BridgeGame {
     return this.move();
   }
 
-  crossPush(COMMAND) {
+  crossPushAndPrint(COMMAND) {
     const [COMMAND_NUMBER, REST_ARRAY_NUMBER] =
       this.changeCommandNumber(COMMAND);
     this.#bridge_map[COMMAND_NUMBER].push("X");
@@ -69,6 +70,7 @@ class BridgeGame {
     this.CallView.currentMap(this.#bridge_map);
     return this.validateMenuCommand();
   }
+
   complateGame() {
     this.#game_state = true;
     this.CallView.resultPrint(
@@ -78,16 +80,15 @@ class BridgeGame {
     );
     return Console.close();
   }
+
   failGame = (command) => {
     try {
       this.errorCheck.validateMenuCommand(command);
-      if (command === "R") this.retry();
-      if (command === "Q") this.stop();
-    } catch (e) {
-      this.CallView.justPrint(e);
-      this.validateMenuCommand();
+      return command === "R" ? this.retry() : this.stop();
+    } catch (error) {
+      this.CallView.justPrint(error);
+      return this.CallView.readCommand(this.failGame);
     }
-    return;
   };
 
   validateMenuCommand = () => {
