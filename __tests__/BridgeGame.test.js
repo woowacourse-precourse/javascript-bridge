@@ -597,13 +597,6 @@ describe('다리 이동 로그 저장하는 메서드', () => {
   const POSITION_LOG_3 = [[0, 2], 'O'];
 
   bridgeGame.move();
-  bridgeGame.setPositionLog(...POSITION_LOG_1);
-
-  bridgeGame.move();
-  bridgeGame.setPositionLog(...POSITION_LOG_2);
-
-  bridgeGame.move();
-  bridgeGame.setPositionLog(...POSITION_LOG_3);
 
   test('메소드 이름은 "setBridgeLog"로 정의된다.', () => {
     const METHOD_NAME = 'setBridgeLog';
@@ -612,24 +605,21 @@ describe('다리 이동 로그 저장하는 메서드', () => {
   });
 
   test('첫 번째 값은 [[ "O" ] [ " " ]]을 반환한다.', () => {
-    const EXPECTED = 0;
     const RECEIVED = [['O'], [' ']];
 
-    expect(bridgeGame.setBridgeLog(EXPECTED)).toEqual(RECEIVED);
+    expect(bridgeGame.setBridgeLog(POSITION_LOG_1)).toEqual(RECEIVED);
   });
 
   test('두 번째 값은 [[ " " ] [ "O" ]]을 반환한다.', () => {
-    const EXPECTED = 1;
     const RECEIVED = [[' '], ['O']];
 
-    expect(bridgeGame.setBridgeLog(EXPECTED)).toEqual(RECEIVED);
+    expect(bridgeGame.setBridgeLog(POSITION_LOG_2)).toEqual(RECEIVED);
   });
 
   test('세 번째 값은 [[ "O" ] [ " " ]]을 반환한다.', () => {
-    const EXPECTED = 2;
     const RECEIVED = [['O'], [' ']];
 
-    expect(bridgeGame.setBridgeLog(EXPECTED)).toEqual(RECEIVED);
+    expect(bridgeGame.setBridgeLog(POSITION_LOG_3)).toEqual(RECEIVED);
   });
 });
 
