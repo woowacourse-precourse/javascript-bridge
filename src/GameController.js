@@ -37,6 +37,7 @@ class GameController {
 
   movePhase(direction) {
     try {
+      Validation.validateDirection(direction);
       this.bridgeGame.move(direction);
 
       const movementLogs = this.bridgeGame.getMovementLogs();

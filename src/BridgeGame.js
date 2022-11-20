@@ -1,5 +1,4 @@
 const Bulider = require('./Builder.js');
-const Validation = require('./Validation.js');
 
 class BridgeGame {
   #bridge;
@@ -18,8 +17,6 @@ class BridgeGame {
   }
 
   move(movingDirection) {
-    Validation.validateDirection(movingDirection);
-
     const playerPosition = this.#movementLogs.length; // 필드 round 대체 고민중...
     const isCrossable = this.#bridge.isCrossable(playerPosition, movingDirection);
 
