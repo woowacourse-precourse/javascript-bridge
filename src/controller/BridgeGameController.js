@@ -1,24 +1,36 @@
-const { Console } = require("@woowacourse/mission-utils");
 const BridgeMaker = require("../BridgeMaker");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const Bridge = require("../models/Bridge");
 const BridgeGame = require("../models/BridgeGame");
+const Validator = require("../models/Validator");
 const InputView = require("../views/InputView");
 const OutputView = require("../views/OutputView");
-
 
 class BrideGameController {
   #bridgeGame;
 
+  constructor() {
+    this.validator = new Validator();
+  }
+
   start() {
     OutputView.printIntialMessage();
+    this.readBridgeSizePhase();
+  }
+
+  readBridgeSizePhase() {
     InputView.readBridgeSize(this.handleGameStartPhase.bind(this));
   }
 
   handleGameStartPhase(size) {
     this.generateBridgeGame(size);
     OutputView.printNewLine();
+    this.readMovingPhase();
+  }
+
+  readMovingPhase() {
     InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
+
   }
 
   generateBridgeGame(size) {
@@ -34,6 +46,10 @@ class BrideGameController {
       this.handleGameEndPhase();
       return;
     }
+    this.readGameCommandPhase();
+  }
+
+  readGameCommandPhase() {
     InputView.readGameCommand(this.handleGameRetryPhase.bind(this));
   }
 
