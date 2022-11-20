@@ -751,4 +751,13 @@ describe('게임 로그 기록 메서드 테스트', () => {
       bridgeGame2.setGameLog(USER_WRONG_INPUT);
     }).toThrow(RANGE_ERROR_TEXT);
   });
+
+  test('사용자 위치가 출발하기 전이라면 예외를 발생한다.', () => {
+    const bridgeGame2 = new BridgeGame();
+    bridgeGame2.setBridge(generateBridge);
+
+    expect(() => {
+      bridgeGame2.setGameLog(USER_MOVE_INPUT);
+    }).toThrow(POSITION_ERROR_TEXT);
+  });
 });
