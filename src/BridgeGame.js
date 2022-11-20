@@ -1,3 +1,4 @@
+const { isValidateInputGameCommand, isValidateInputMoveDirection } = require('./Validate');
 const { readMoving, readGameCommand } = require('./Views/InputView');
 const { printMap, printResult } = require('./Views/OutputView');
 /**
@@ -20,7 +21,7 @@ class BridgeGame {
    */
   move() {
     let move = readMoving();
-    if (move === '[ERROR]') return;
+    if (isValidateInputMoveDirection(move)) return this.move();
     switch(true) {
       case this.bridgeState[this.nowPosition] === move:
         this.passBridge(move, 'O');
@@ -82,6 +83,7 @@ class BridgeGame {
    */
   retry() {
     let gameCommand = readGameCommand();
+    if (isValidateInputGameCommand(gameCommand)) return this.retry();
     switch(true) {
       case gameCommand === 'Q':
         printResult('실패', this.nowBridge, this.tryCount);
