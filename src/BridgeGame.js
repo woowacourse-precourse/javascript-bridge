@@ -11,15 +11,25 @@ class BridgeGame {
    */
 
   move(inputBridgeChoice, bridge, bridgeList) {
-    console.log(inputBridgeChoice);
-    console.log(bridge);
-
-    if (inputBridgeChoice === bridge[0]) {
-      bridgeList
-      OutputView.printMap(bridgeList)
+    const index = bridgeList[0].length;
+    if (inputBridgeChoice === "U") {
+      if (inputBridgeChoice === bridge[index]) {
+        bridgeList[0].push("O");
+        bridgeList[1].push(" ");
+      } else {
+        bridgeList[0].push("X");
+        bridgeList[1].push(" ");
+      }
     } else {
-      console.log("Game set");
+      if (inputBridgeChoice === bridge[index]) {
+        bridgeList[1].push("O");
+        bridgeList[0].push(" ");
+      } else {
+        bridgeList[1].push("X");
+        bridgeList[0].push(" ");
+      }
     }
+    OutputView.printMap(bridgeList);
   }
 
   /**
