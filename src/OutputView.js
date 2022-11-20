@@ -16,53 +16,62 @@ const OutputView = {
    */
   printMap(userSpace,bridgeArray,count) {
     // count를 추가해주면서 idx를 추가
-    let correctValue=this.printMapHelper(userSpace,bridgeArray,count)
-    console.log(userSpace,'Outputview',bridgeArray,count);
-    this.printArrays(bridgePrinterAbove,bridgePrinterBelow)
+    const correctValue=this.printMapHelper(userSpace,bridgeArray,count)
+    // console.log(userSpace,'Outputview',bridgeArray,count);
     return correctValue
   },
-  printMapHelper(userSpace,bridgeArray,count){
+  printMapHelper(userSpace,bridgeArray){
     if(userSpace==='D'&&bridgeArray[0]===0){
       bridgePrinterAbove.push('empty')
       bridgePrinterBelow.push('O')
       return 'O'
     }
     if(userSpace==='U'&&bridgeArray[0]===1) {
-      bridgePrinterBelow.push('empty')
       bridgePrinterAbove.push('O')
+      bridgePrinterBelow.push('empty')
       return 'O'
     }
-    else return 'X'
+    if(userSpace==="D"&&bridgeArray[0]===1){
+      bridgePrinterAbove.push('empty')
+      bridgePrinterBelow.push('X')
+      return 'X'
+    }    
+    if(userSpace==='U'&&bridgeArray[0]===0) {
+      bridgePrinterAbove.push('X')
+      bridgePrinterBelow.push('empty')
+      return 'X'
+    }
   },
   printArrays(bridgePrinterAbove,bridgePrinterBelow){
-    let temp=''
-    let temp2=''
-    console.log(bridgePrinterAbove);
-    console.log(bridgePrinterBelow);
-    temp=JSON.stringify(bridgePrinterAbove).replace(/,/g,'|')
-    temp=temp.replace(/empty/g,' ')
-    temp=temp.replace(/"/g,' ')
-    temp2=JSON.stringify(bridgePrinterBelow).replace(/,/g,'|')
-    temp2=temp2.replace(/empty/g,' ')
-    temp2=temp2.replace(/"/g,' ')
-    console.log(`${temp}`)
-    console.log(`${temp2}`);
-    
+    let bridgeAbove=''
+    let bridgeBelow=''
+    bridgeAbove=JSON.stringify(bridgePrinterAbove).replace(/,/g,'|')
+    bridgeAbove=bridgeAbove.replace(/empty/g,' ')
+    bridgeAbove=bridgeAbove.replace(/"/g,' ')
+    bridgeBelow=JSON.stringify(bridgePrinterBelow).replace(/,/g,'|')
+    bridgeBelow=bridgeBelow.replace(/empty/g,' ')
+    bridgeBelow=bridgeBelow.replace(/"/g,' ')
+    return [bridgeAbove,bridgeBelow]
   },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  printBridgeResult(gameInput){
+    const [bridgeAbove,bridgeBelow]=this.printArrays(bridgePrinterAbove,bridgePrinterBelow)
+    if(gameInput==='Q'){
+      MissionUtils.Console.print('최종 게임 결과')
+    }
+    MissionUtils.Console.print(bridgeAbove)
+    MissionUtils.Console.print(bridgeBelow)
+  },
   printResult(bridgeArray,count) {
-    console.log('printresult');
-    console.log(bridgeArray,count);
     if(bridgeArray.length!==0){
       MissionUtils.Console.print('게임 성공 여부: 실패')
       MissionUtils.Console.print(`총 시도한 횟수: ${count}`)
     }
     if(bridgeArray.length===0){
-      MissionUtils.Console.print('최종 게임 결과')
       MissionUtils.Console.print('게임 성공 여부: 성공')
       MissionUtils.Console.print(`총 시도한 횟수: ${count}`)
     }
