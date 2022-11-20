@@ -1,4 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
 const Exceptionable = require('./Exceptionable');
 const { ERROR_MESSAGE, REGEX } = require('../../utils/constants');
 
@@ -13,11 +12,8 @@ class BrdgeRestartExitException extends Exceptionable {
 
   isValidate() {
     if (!REGEX.restartExitKey.test(this.#command)) {
-      Console.print(ERROR_MESSAGE.restartExitKey);
-      return false;
+      throw new Error(ERROR_MESSAGE.restartExitKey);
     }
-
-    return true;
   }
 }
 
