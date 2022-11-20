@@ -11,29 +11,43 @@ class App {
     Console.print("다리 건너기 게임을 시작합니다.\n");
     this.errorCheck = new BridgeErrorCheck();
   }
+
   play() {
     return InputView.readBridgeSize(this.bridgeSizeValidate);
   }
 
   bridgeSizeValidate = (bridgeSize) => {
-    const SIZE = bridgeSize;
     try {
+      const SIZE = bridgeSize;
       this.errorCheck.validateBridgeSize(SIZE);
-      this.answerBridge(SIZE);
+      return this.answerBridge(SIZE);
     } catch (e) {
       Console.print(e);
-      this.play();
+      return this.play();
     }
-    return;
   };
 
-  answerBridge(bridgeSize) {
-    const RANDOM_NUMBER_GENERATOR = BridgeRandomNumberGenerator.generate;
-    const ANSWER_BRIDGE_ARRAY = BridgeMaker.makeBridge(
+  makeRandomNumber(bridgeSize) {
+    const BRIDGE_ARRAY = BridgeMaker.makeBridge(
       bridgeSize,
-      RANDOM_NUMBER_GENERATOR
+      BridgeRandomNumberGenerator.generate
     );
-    const BRIDGE_GAME = new BridgeGame(ANSWER_BRIDGE_ARRAY);
+    return BRIDGE_ARRAY;
+  }
+
+  answerBridge(bridgeSize) {
+    try {
+      const BRIDGE_ARRAY = this.makeRandomNumber(bridgeSize);
+      this.errorCheck.validateRandomArray(BRIDGE_ARRAY);
+      return this.initGame(BRIDGE_ARRAY);
+    } catch (e) {
+      Console.print(e);
+      return this.play();
+    }
+  }
+
+  initGame(answerBridgeArray) {
+    const BRIDGE_GAME = new BridgeGame(answerBridgeArray);
     return BRIDGE_GAME.move();
   }
 }
