@@ -125,13 +125,13 @@ printResult() - 게임의 최종 결과를 정해진 형식에 맞춰 출력.
 <BridgeGame> // 필드 추가 가능, 메서드 이름 변경불가, 인자 추가/변경 가능, 메서드 
                 추가/변경 가능
                 BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다
-move() - 사용자가 칸을 이동할 때 사용하는 메서드
+move() - 사용자가 칸을 이동할 때 사용하는 메서드 ✔
             이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경 가능
 retry() - 사용자가 게임을 다시 시도할 때 사용하는 메서드
              재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경 가능
 
 <BridgeMaker> // 프로퍼티 추가 불가, 메서드의 인자/이름와 반환 타입은 변경 불가
-makeBridge() - 다리의 길이를 입력 받아서 다리를 생성해주는 역할
+makeBridge() - 다리의 길이를 입력 받아서 다리를 생성해주는 역할 ✔
   
 <BridgeRandomNumberGenerator> // 코드 변경 불가
  다리 칸을 생성하기 위한 Random 값은 아래와 같이 추출.
