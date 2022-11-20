@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const InputView = require("./InputView");
-const OutputView = require("./OutputView")
+const InputView = require("./View/InputView");
+const OutputView = require("./View/OutputView")
 const BridgeGame = require("./BridgeGame");
 const bridgeGame = new BridgeGame();
 const { makeBridge } = require("./BridgeMaker");
