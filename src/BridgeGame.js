@@ -102,12 +102,16 @@ class BridgeGame {
 
   validateRetryInput = (input) => {
     const IS_VALID_INPUT = /^[R|Q]{1}$/.test(input);
+    this.bridgeRetryInputExceptionHandler(IS_VALID_INPUT);
+    this.gameRestartOrOver(input);
+  };
+
+  bridgeRetryInputExceptionHandler = (isValidInput) => {
     try {
-      BridgeError.throwErrorHandler(this.#bridgeErrorMessages[2], !IS_VALID_INPUT);
+      BridgeError.throwErrorHandler(this.#bridgeErrorMessages[2], !isValidInput);
     } catch {
       InputView.readGameCommand(this.validateRetryInput);
     }
-    this.gameRestartOrOver(input);
   };
 
   gameRestartOrOver = (input) => {
