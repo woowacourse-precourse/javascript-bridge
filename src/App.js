@@ -1,6 +1,6 @@
 const BridgeGame = require("./BridgeGame");
 const { Console } = require("@woowacourse/mission-utils");
-const { GAME_MSG } = require("./constants/Message");
+const { GAME_MSG, INPUT_MSG } = require("./constants/Message");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 
@@ -12,17 +12,30 @@ class App {
     this.#retryCount = 1;
   }
 
-  // play() {
-  //   (async () => await this._play())();
-  //   Console.print("!!!");
-  // }
-
-  async play() {
+  play() {
     Console.print(GAME_MSG.START);
-    const size = await InputView.readBridgeSize();
-    Console.print(size);
-    this.createBridgeGame(size);
-    const result = await this.playBridgeGame();
+    InputView.readBridgeSize(this.createBridgeGame.bind(this));
+  }
+
+  createBridgeGame(size) {
+    this.#bridgeGame = new BridgeGame();
+    this.#bridgeGame.setBridge(size);
+    this.playBridgeGame();
+  }
+
+  playBridgeGame() {
+    InputView.readMoving(this.checkBridge.bind(this));
+  }
+
+  retry(command) {
+    if (command === "Q") this.gameEnd(false);
+    if (command === "R") {
+      this.#bridgeGame.retry(this.#retryCount);
+      this.playBridgeGame();
+    }
+  }
+
+  gameEnd(result) {
     OutputView.printResult(
       result,
       this.#retryCount,
@@ -31,22 +44,13 @@ class App {
     Console.close();
   }
 
-  createBridgeGame(size) {
-    this.#bridgeGame = new BridgeGame();
-    this.#bridgeGame.setBridge(size);
-  }
-
-  async playBridgeGame() {
-    const moving = await InputView.readMoving();
+  checkBridge(moving) {
+    // 숫자가 아닌 문자로 결과값받기
     const [isSuccess, crossBridge] = this.#bridgeGame.move(moving);
     OutputView.printMap(crossBridge);
-    if (isSuccess === 0) {
-      const command = await InputView.readGameCommand();
-      if (command === "Q") return false;
-      this.#retryCount = this.#bridgeGame.retry(this.#retryCount);
-    }
-    if (isSuccess === 2) return true;
-    await this.playBridgeGame();
+    if (isSuccess === 0) InputView.readGameCommand(this.retry.bind(this));
+    if (isSuccess === 1) this.playBridgeGame();
+    if (isSuccess === 2) this.gameEnd(true);
   }
 }
 

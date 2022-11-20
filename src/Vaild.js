@@ -1,6 +1,6 @@
 const { isNumber, error } = require("./Utils");
 const { Console } = require("@woowacourse/mission-utils");
-const { INPUT_MSG, ERROR_MSG } = require("./constants/Message");
+const { ERROR_MSG } = require("./constants/Message");
 
 const Vaild = {
   checkBridgeSize(birdgeSize) {

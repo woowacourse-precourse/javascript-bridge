@@ -6,48 +6,42 @@ const Vaild = require("./Vaild");
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  inputMethod(message, fun) {
-    return new Promise((resolve, _) => {
-      Console.readLine(message, (input) => {
-        if (fun(input)) resolve(input);
-      });
+  inputMethod(message, callback, vaild) {
+    let answer;
+    Console.readLine(message, (input) => {
+      answer = input;
+      if (vaild(answer)) return callback(answer);
+      this.inputMethod(message, callback, vaild);
     });
   },
 
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    try {
-      return this.inputMethod(INPUT_MSG.BRIDGESIZE, Vaild.checkBridgeSize);
-    } catch (e) {
-      return this.readBridgeSize();
-    }
+  readBridgeSize(callback) {
+    return this.inputMethod(
+      INPUT_MSG.BRIDGESIZE,
+      callback,
+      Vaild.checkBridgeSize
+    );
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  async readMoving() {
-    try {
-      return await this.inputMethod(INPUT_MSG.MOVING, Vaild.checkMoving);
-    } catch (e) {
-      return this.readMoving();
-    }
+  readMoving(callback) {
+    return this.inputMethod(INPUT_MSG.MOVING, callback, Vaild.checkMoving);
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  async readGameCommand() {
-    try {
-      return await this.inputMethod(
-        INPUT_MSG.GAMECOMMAND,
-        Vaild.checkGameCommand
-      );
-    } catch (e) {
-      return this.readGameCommand();
-    }
+  readGameCommand(callback) {
+    return this.inputMethod(
+      INPUT_MSG.GAMECOMMAND,
+      callback,
+      Vaild.checkGameCommand
+    );
   },
 };
 
