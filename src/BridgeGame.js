@@ -1,4 +1,4 @@
-const OutputView = require('./View/OutputView');
+const OutputView = require('./OutputView');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -26,36 +26,36 @@ class BridgeGame {
     const crossable = bridge[this.#turn];
     this.#turn += 1;
     if (input === crossable) {
-      this.isFirst(GO, crossable);
+      this.isFirst(GO, input);
     }
     if (input !== crossable) {
-      this.isFirst(STOP, crossable);
+      this.isFirst(STOP, input);
       this.retry();
     }
   }
 
-  isFirst(state, crossable) {
-    if (this.#turn === 1) this.firstBlock(state, crossable);
-    if (this.#turn !== 1) this.afterFirstBlock(state, crossable);
+  isFirst(state, input) {
+    if (this.#turn === 1) this.firstBlock(state, input);
+    if (this.#turn !== 1) this.afterFirstBlock(state, input);
   }
 
-  firstBlock(state, crossable) {
-    if (state === 'O' && crossable === 'U') {
+  firstBlock(state, input) {
+    if (input === 'U') {
       this.#upperBridge.push(` ${state} `);
       this.#lowerBridge.push('   ');
     }
-    if (state === 'O' && crossable === 'D') {
+    if (input === 'D') {
       this.#upperBridge.push('   ');
       this.#lowerBridge.push(` ${state} `);
     }
   }
 
-  afterFirstBlock(state, crossable) {
-    if (crossable === 'U') {
+  afterFirstBlock(state, input) {
+    if (input === 'U') {
       this.#upperBridge.push(`| ${state} `);
       this.#lowerBridge.push('|   ');
     }
-    if (crossable === 'D') {
+    if (input === 'D') {
       this.#upperBridge.push('|   ');
       this.#lowerBridge.push(`| ${state} `);
     }
