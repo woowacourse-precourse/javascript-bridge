@@ -1,7 +1,7 @@
 const BridgeGame = require('../model/BridgeGame');
 const { BRIDGE_MESSAGE } = require('../utils/constant');
 const BridgeLengthValidator = require('../validator/BridgeLengthValidator');
-const MovingValidator = require('../validator/MovingValudator');
+const MovingValidator = require('../validator/MovingValidator');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 

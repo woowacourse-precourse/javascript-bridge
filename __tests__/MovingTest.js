@@ -1,4 +1,4 @@
-const MovingValidator = require('../src/validator/MovingValudator');
+const MovingValidator = require('../src/validator/MovingValidator');
 
 describe('이동할 칸 입력 테스트', () => {
   test.each([['Q'], ['UD'], [' '], ['UU'], ['u '], ['d']])(
