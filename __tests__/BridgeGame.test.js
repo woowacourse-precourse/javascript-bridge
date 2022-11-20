@@ -588,6 +588,7 @@ describe('빈 다리 로그 생성 메서드 테스트', () => {
 describe('범위 추출 메서드 테스트', () => {
   const U = ['O', ' ', 'O'];
   const D = [' ', 'O', ' '];
+  const bridgeInfo = [U, D];
 
   test('메소드 이름은 "extractFromZeroTo"로 정의된다.', () => {
     const METHOD_NAME = 'extractFromZeroTo';
@@ -599,28 +600,37 @@ describe('범위 추출 메서드 테스트', () => {
     const EXPECTED = 1;
     const RECEIVED = [['O'], [' ']];
 
-    expect(BridgeGame.extractFromZeroTo([U, D], EXPECTED)).toEqual(RECEIVED);
+    expect(BridgeGame.extractFromZeroTo(bridgeInfo, EXPECTED)).toEqual(RECEIVED);
   });
 
   test('2을 전달하면 [[ "O", " " ], [ " ", "O" ]]을 반환한다.', () => {
     const EXPECTED = 2;
     const RECEIVED = [['O', ' '], [' ', 'O']];
 
-    expect(BridgeGame.extractFromZeroTo([U, D], EXPECTED)).toEqual(RECEIVED);
+    expect(BridgeGame.extractFromZeroTo(bridgeInfo, EXPECTED)).toEqual(RECEIVED);
   });
 
   test('3을 전달하면 [[ "O", " ", "O" ], [ " ", "O", " " ]]을 반환한다.', () => {
     const EXPECTED = 3;
     const RECEIVED = [['O', ' ', 'O'], [' ', 'O', ' ']];
 
-    expect(BridgeGame.extractFromZeroTo([U, D], EXPECTED)).toEqual(RECEIVED);
+    expect(BridgeGame.extractFromZeroTo(bridgeInfo, EXPECTED)).toEqual(RECEIVED);
   });
 
   test('첫 번째 인수는 배열이 아니라면 예외를 발생한다.', () => {
-    const EXPECTED = 3;
+    const EXPECTED1 = 3;
+    const EXPECTED2 = 4;
 
     expect(() => {
-      BridgeGame.extractFromZeroTo(EXPECTED);
+      BridgeGame.extractFromZeroTo(EXPECTED1, EXPECTED2);
     }).toThrow(ARRAY_ERROR_TEXT);
+  });
+
+  test('두 번째 인수는 숫자가 아니라면 예외를 발생한다.', () => {
+    const EXPECTED2 = NaN;
+
+    expect(() => {
+      BridgeGame.extractFromZeroTo(bridgeInfo, EXPECTED2);
+    }).toThrow(NUMBER_ERROR_TEXT);
   });
 });
