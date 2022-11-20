@@ -33,7 +33,7 @@ describe('메시지 출력 기능 단위 테스트', () => {
 
     });
     it('게임 성공 여부 출력', () => {
-        const testMessage = OutputView.printGameResult(success);
+        const testMessage = OutputView.printGameResult('성공');
         const correctMessage = Console.print('게임 성공 여부: 성공');
         expect(testMessage).toEqual(correctMessage);
     });
