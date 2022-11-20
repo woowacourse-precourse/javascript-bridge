@@ -1,8 +1,12 @@
 const command = require('./utils/message');
 const OutputView = require('./OutputView');
+const InputView = require('./InputView');
 class App {
-  play() {
+  #bridgeSize;
+
+  async play() {
     OutputView.printCommand(command.START);
+    this.#bridgeSize = await InputView.readBridgeSize();
   }
 }
 
