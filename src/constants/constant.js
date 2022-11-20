@@ -1,5 +1,3 @@
-const { numberOfPlayGames } = require("./GameInfo")
-
 const GAME_MESSAGES = {
   gameStart: "다리 건너기 게임을 시작합니다.",
 
@@ -41,8 +39,6 @@ const GAME_VALUES = {
 
   blank: ' ',
 
-  initializedPosition: -1,
-
   counter: 1,
 
   minBridgeSize: 3,
@@ -50,9 +46,20 @@ const GAME_VALUES = {
   maxBridgeSize: 20
 }
 
+const INITIALIZE_VALUES = {
+  initializedPosition: -1,
+
+  zero: 0,
+
+  failure: "실패",
+
+  success: "성공"
+}
+
 module.exports = {
   GAME_MESSAGES,
   ERROR_MESSAGES,
   RESULT_MESSAGES,
-  GAME_VALUES
+  GAME_VALUES,
+  INITIALIZE_VALUES
 }

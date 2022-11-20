@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { RESULT_MESSAGES } = require("./constant");
-const GameInfo = require("./GameInfo");
+const { RESULT_MESSAGES } = require("../constants/constant");
+const GameInfo = require("../domain/GameInfo");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */

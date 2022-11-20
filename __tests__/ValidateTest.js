@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const ValidateBridgeSize = require("../src/ValidateBridgeSize");
-const ValidateGameCommand = require("../src/ValidateGameCommand");
-const ValidateMoving = require("../src/ValidateMoving");
+const ValidateBridgeSize = require("../src/utils/ValidateBridgeSize");
+const ValidateGameCommand = require("../src/utils/ValidateGameCommand");
+const ValidateMoving = require("../src/utils/ValidateMoving");
 
 
 const runValidateClassErrorException = (inputs, className) => {

@@ -1,4 +1,4 @@
-const { GAME_VALUES } = require("./constant");
+const { GAME_VALUES } = require("../constants/constant");
 
 class ValidateMoving {
   constructor(moving) {

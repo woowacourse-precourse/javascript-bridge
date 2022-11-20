@@ -1,4 +1,4 @@
-const { GAME_VALUES } = require("./constant");
+const { GAME_VALUES, INITIALIZE_VALUES } = require("../constants/constant");
 const GameInfo = require("./GameInfo");
 
 /**
@@ -40,7 +40,7 @@ class BridgeGame {
   static initializeGameInfo() {
     GameInfo.gameStat = [];
     GameInfo.moveBridge = [[], []];
-    GameInfo.position = GAME_VALUES.initializedPosition;
+    GameInfo.position = INITIALIZE_VALUES.initializedPosition;
     GameInfo.numberOfPlayGames += GAME_VALUES.counter;
   }
 
