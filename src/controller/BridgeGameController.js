@@ -26,7 +26,9 @@ class BrideGameController {
     try {
       this.validator.checkBridgeLengthInput(size);
     } catch (error) {
+      console.log(error.message);
       this.readBridgeSizePhase();
+      return;
     }
     this.generateBridgeGame(size);
     OutputView.printNewLine();
@@ -48,7 +50,9 @@ class BrideGameController {
     try {
       this.validator.checkDirectionInput(direction);
     } catch (error) {
+      console.log(error.message);
       this.readMovingPhase();
+      return;
     }
     this.#bridgeGame.updateResult(direction);
     OutputView.printMap(this.#bridgeGame.getResult());
@@ -76,7 +80,9 @@ class BrideGameController {
     try {
       this.validator.checkRetryInput(retryAnswer);
     } catch (error) {
+      console.log(error.message);
       this.readGameCommandPhase();
+      return;
     }
     if (retryAnswer === 'R') {
       this.#bridgeGame.retry();
