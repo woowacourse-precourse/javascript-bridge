@@ -16,10 +16,8 @@ const OutputView = {
    */
   printMap(userSpace,bridgeArray,count) {
     // count를 추가해주면서 idx를 추가
-    console.log(userSpace,'Outputview',bridgeArray,count);
     let correctValue=this.printMapHelper(userSpace,bridgeArray,count)
-    let bridgeLen=bridgeArray.length;
-    console.log(bridgeLen,'다리 길이');
+    console.log(userSpace,'Outputview',bridgeArray,count);
     this.printArrays(bridgePrinterAbove,bridgePrinterBelow)
     return correctValue
   },
@@ -41,18 +39,15 @@ const OutputView = {
     let temp2=''
     console.log(bridgePrinterAbove);
     console.log(bridgePrinterBelow);
-    // for (let i = 0; i < bridgePrinterBelow.length; i++) {
-    //   if(bridgePrinterAbove[i]==='empty') temp+=`!`
-    //   if(bridgePrinterAbove[i]==='O') temp+='O'
-    //   if(bridgePrinterBelow[i]==='empty') temp2+='!'
-    //   if(bridgePrinterBelow[i]==='O') temp2+='O'
-    // }
-    temp=JSON.stringify(bridgePrinterAbove).replace(/,/g,"|")
+    temp=JSON.stringify(bridgePrinterAbove).replace(/,/g,'|')
     temp=temp.replace(/empty/g,' ')
-    temp2=JSON.stringify(bridgePrinterBelow).replace(/,/g,"|")
+    temp=temp.replace(/"/g,' ')
+    temp2=JSON.stringify(bridgePrinterBelow).replace(/,/g,'|')
     temp2=temp2.replace(/empty/g,' ')
-    console.log(temp);
-    console.log(temp2);
+    temp2=temp2.replace(/"/g,' ')
+    console.log(`${temp}`)
+    console.log(`${temp2}`);
+    
   },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
@@ -68,6 +63,8 @@ const OutputView = {
     }
     if(bridgeArray.length===0){
       MissionUtils.Console.print('최종 게임 결과')
+      MissionUtils.Console.print('게임 성공 여부: 성공')
+      MissionUtils.Console.print(`총 시도한 횟수: ${count}`)
     }
     MissionUtils.Console.close()
   },
