@@ -3,9 +3,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const { GAME_RULE } = require('../constants');
 
 const BridgeGame = require('../models/BridgeGame');
-const GameCommand = require('../models/command/GameCommand');
-const MovingCommand = require('../models/command/MovingCommand');
-const SizeCommand = require('../models/command/SizeCommand');
+const { SizeCommand, MovingCommand, GameCommand } = require('../models/command');
 
 const { readBridgeSize, readMoving, readGameCommand } = require('../views/InputView');
 const { printMap, printResult, printError } = require('../views/OutputView');
