@@ -30,7 +30,15 @@ class App {
     }
   }
 
-  checkGameCmd(cmd) {}
+  checkGameCmd(cmd) {
+    if (cmd === "R") {
+      this.#game.retry();
+      this.readMoving();
+    } else {
+      OutputView.printResult(this.#game.upBridge, this.#game.downBridge, false);
+      Console.close();
+    }
+  }
 }
 
 module.exports = App;
