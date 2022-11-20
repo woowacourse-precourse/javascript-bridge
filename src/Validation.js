@@ -1,20 +1,14 @@
 const Validation = {
   isSizeInRange(size) {
-    if (!Number.isInteger(size) || size < 3 || size > 20) return false;
-
-    return true;
+    return Number.isInteger(size) && size >= 3 && size <= 20;
   },
 
   isRightUserMove(input) {
-    if (input !== 'U' && input !== 'D') return false;
-
-    return true;
+    return input === 'U' || input === 'D';
   },
 
   isRightUserCommand(input) {
-    if (input !== 'R' && input !== 'Q') return false;
-
-    return true;
+    return input === 'R' || input === 'Q';
   },
 
   /**
