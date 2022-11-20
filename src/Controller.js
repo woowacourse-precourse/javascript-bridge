@@ -29,6 +29,7 @@ class Controller {
 
   inputMoving() {
     const callback = (input, index) => {
+      Validator.validateUpDown(input);
       const computerBridgeArr = this.model.getComputerBridgeArr();
       const game = new BridgeGame();
       game.move(input, computerBridgeArr[index], this.model);
