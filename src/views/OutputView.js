@@ -1,25 +1,35 @@
+const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGES } = require("../constraints/constarints");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
   /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * 현재까지의 이동 결과를 출력하는 함수
+   * @param {*} game 현재 진행 중인 게임(인스턴스) 정보
+   * @returns
    */
   printMap(game) {
-    for (let i = 0; i < game.progress.length; i++) {
-      console.log(game.progress[i]);
-    }
+    let result = [];
+    for (let i = 0; i < game.progress.length; i++)
+      result.push(`[ ${game.progress[i].join(" | ")} ]`);
+    return Console.print(result.join("\n"));
   },
 
   /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * 게임의 최종 결과를 출력하는 함수
+   * @param {*} game 현재 진행 중인 게임(인스턴스) 정보
+   * @returns 결과 출력 후 콘솔을 종료
    */
-  printResult() {
-    console.log("결과다");
+  printResult(game) {
+    let result = [];
+    result.push(MESSAGES.RESULT.FINAL);
+    for (let i = 0; i < game.progress.length; i++)
+      result.push(`[ ${game.progress[i].join(" | ")} ]`);
+    result.push(`${MESSAGES.RESULT.IS_SUCCEED[game.succeed]}`);
+    result.push(`${MESSAGES.RESULT.TRY}${game.try}`);
+    Console.print(result.join("\n"));
+    return Console.close();
   },
 };
 
