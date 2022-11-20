@@ -245,3 +245,4 @@ const number = generateRandomNumber();
 - [ ] refactor: 함수(또는 메서드)가 한 가지의 일만 하도록 하기
   - 에러가 발생하였을 때 실행되는 함수를 분리한다.
   - BridgeGame를 생성하는 함수를 만들어 분리한다.
+  - BridgeGame의 결과에 따른 실행을 함수로 만들어 분리한다.

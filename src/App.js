@@ -45,12 +45,16 @@ class App {
       this.bridgeGame.move(direction);
       OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
 
-      if (this.bridgeGame.isFail()) return this.requestRestartOrQuit();
-
-      if (this.bridgeGame.isLast()) return this.quit();
-
-      return this.requestDirection();
+      this.actionAboutBridgeGame();
     });
+  }
+
+  actionAboutBridgeGame() {
+    if (this.bridgeGame.isFail()) return this.requestRestartOrQuit();
+
+    if (this.bridgeGame.isLast()) return this.quit();
+
+    return this.requestDirection();
   }
 
   requestRestartOrQuit() {
