@@ -77,10 +77,10 @@ const InputView = {
       return OutputView.printResult();
     }
 
-    return this.checkCorrectAnswer();
+    return this.checkCorrectBridge();
   },
 
-  checkCorrectAnswer() {
+  checkCorrectBridge() {
     if (this.isCorrect) {
       return this.readMoving();
     }
