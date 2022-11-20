@@ -10,10 +10,16 @@ class BridgeGame {
 
   #result;
 
+  #bridge;
+
   constructor(selected, tryCnt) {
     this.#selected = selected;
     this.#tryCnt = tryCnt;
     this.#result = Array.from({ length: 2 }, () => []);
+  }
+
+  get totalLevel() {
+    return this.#bridge.length;
   }
 
   get levelCnt() {
@@ -24,6 +30,10 @@ class BridgeGame {
     return this.#tryCnt.cnt;
   }
 
+  createBridge(bridge) {
+    this.#bridge = bridge;
+  }
+
   setInitialResultMap() {
     const length = this.levelCnt;
     this.#result = Array.from({ length: 2 }, () =>
@@ -31,39 +41,41 @@ class BridgeGame {
     );
   }
 
-  isWin(bridge) {
+  isWin() {
     for (let level = 0; level < this.levelCnt; level += 1) {
-      if (bridge.getElement(level) !== this.#selected.getElement(level))
+      if (this.#bridge.getElement(level) !== this.#selected.getElement(level))
         return false;
     }
     return true;
   }
 
-  getResultMap(bridge) {
-    this.setResultMap(bridge);
+  getResultMap() {
+    this.setResultMap();
     return this.#result;
   }
 
-  setResultMap(bridge) {
+  setResultMap() {
     this.setInitialResultMap();
     for (let level = 0; level < this.levelCnt; level += 1) {
-      const selectedElement = this.#selected.getElement(level);
-      const bridgeElement = bridge.getElement(level);
-      this.setResultElement(selectedElement, bridgeElement, level);
+      this.setResultElement(level);
     }
   }
 
-  setResultElement(selectedElement, bridgeElement, level) {
-    if (selectedElement === bridgeElement) {
-      this.setBoolean(selectedElement, level, true);
-    } else if (selectedElement !== bridgeElement) {
-      this.setBoolean(selectedElement, level, false);
+  setResultElement(level) {
+    if (this.#selected.getElement(level) === this.#bridge.getElement(level)) {
+      this.setBoolean(level, true);
+    } else if (
+      this.#selected.getElement(level) !== this.#bridge.getElement(level)
+    ) {
+      this.setBoolean(level, false);
     }
   }
 
-  setBoolean(element, level, bool) {
-    if (element === INPUT_MESSAGE.UP) this.#result[0][level] = bool;
-    else if (element === INPUT_MESSAGE.DOWN) this.#result[1][level] = bool;
+  setBoolean(level, bool) {
+    if (this.#selected.getElement(level) === INPUT_MESSAGE.UP)
+      this.#result[0][level] = bool;
+    else if (this.#selected.getElement(level) === INPUT_MESSAGE.DOWN)
+      this.#result[1][level] = bool;
   }
 
   /**

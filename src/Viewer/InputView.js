@@ -10,41 +10,41 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(bridge, game) {
+  readBridgeSize(game, bridge) {
     Console.readLine(MESSAGE.READ_BRIDGE_SIZE, (input) => {
-      bridge.setBridge(input);
-      this.readMoving(bridge, game);
+      game.createBridge(input, bridge);
+      this.readMoving(game);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge, game) {
+  readMoving(game) {
     Console.readLine(MESSAGE.READ_MOVE_LEVEL, (input) => {
       game.move(input);
-      OutputView.printMap(bridge, game);
-      if (this.isReMoving(bridge, game)) return this.readMoving(bridge, game);
-      OutputView.printResult(input, bridge, game);
-      return InputView.readGameCommand(bridge, game);
+      OutputView.printMap(game);
+      if (this.isReMoving(game)) return this.readMoving(game);
+      OutputView.printResult(input, game);
+      return InputView.readGameCommand(game);
     });
   },
 
-  isReMoving(bridge, game) {
-    return game.isWin(bridge) && bridge.length !== game.levelCnt;
+  isReMoving(game) {
+    return game.isWin() && game.totalLevel !== game.levelCnt;
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge, game) {
+  readGameCommand(game) {
     Console.readLine(MESSAGE.GAME_RETRY, (input) => {
       Validator.isRightRetryString(input);
       if (input === RETRY_MESSAGE.RETRY) {
         game.retry();
-        return this.readMoving(bridge, game);
+        return this.readMoving(game);
       }
-      return OutputView.printResult(input, bridge, game);
+      return OutputView.printResult(input, game);
     });
   },
 };

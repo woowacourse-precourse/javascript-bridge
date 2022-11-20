@@ -10,9 +10,9 @@ class Bridge {
 
   #generator;
 
-  constructor(generator) {
-    this.#bridge = '';
+  constructor(input, generator) {
     this.#generator = generator;
+    this.#bridge = this.setBridge(input);
   }
 
   static validate(number) {
@@ -31,7 +31,7 @@ class Bridge {
 
   setBridge(number) {
     this.constructor.validate(number);
-    this.#bridge = makeBridge(number, this.#generator);
+    return makeBridge(number, this.#generator);
   }
 }
 
