@@ -39,9 +39,9 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(gameRec) { // moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD, correctOrNot
+  readMoving(gameRec) {
     MissionUtils.Console.readLine(MESSAGES.ENTER_MOVING, inputUOrD => {
-      this.checkMovingInput(inputUOrD, gameRec);
+      this.checkMovingInput(inputUOrD, gameRec); // gameRec: moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD, correctOrNot
     });
   },
 
