@@ -24,12 +24,19 @@ class App {
     InputView.readMoving(this.passBridge.bind(this));
   }
   passBridge(direction) {
-    const { upBridgeRecord, downBridgeRecord } = this.bridgeGame.move(direction);
-    this.printBridge(upBridgeRecord, downBridgeRecord);
+    const { upBridgeRecord, downBridgeRecord, fail } = this.bridgeGame.move(direction);
+    this.printBridge(upBridgeRecord, downBridgeRecord, fail);
   }
-  printBridge(upBridgeRecord, downBridgeRecord) {
+  inputReplay() {
+    InputView.readReplay(this.checkReplay.bind(this));
+  }
+  printBridge(upBridgeRecord, downBridgeRecord, fail) {
     OutputView.printBridge(upBridgeRecord, downBridgeRecord);
-    this.inputMoving();
+    if (fail) return this.inputReplay();
+    if (!fail) return this.inputMoving();
+  }
+  checkReplay(replayComment) {
+    console.log(replayComment);
   }
 }
 

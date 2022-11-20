@@ -23,18 +23,22 @@ class BridgeGame {
     if (direction === 'D') return this.goToDownBridge();
   }
   goToUpBridge() {
+    let fail = false;
     this.#downBridgeRecord.push(' ');
     const moveable = this.#bridge[this.#movingCount] === 1 ? 'O' : 'X';
+    if (moveable === 'X') fail = true;
     this.#upBridgeRecord.push(moveable);
     this.#movingCount += 1;
-    return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord };
+    return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord, fail: fail };
   }
   goToDownBridge() {
+    let fail = false;
     this.#upBridgeRecord.push(' ');
     const moveable = this.#bridge[this.#movingCount] === 0 ? 'O' : 'X';
+    if (moveable === 'X') fail = true;
     this.#downBridgeRecord.push(moveable);
     this.#movingCount += 1;
-    return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord };
+    return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord, fail: fail };
   }
 
   /**
