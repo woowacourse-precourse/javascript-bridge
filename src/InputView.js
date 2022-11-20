@@ -49,7 +49,6 @@ const InputView = {
       new BridgeGame().move(block, this.savedBridge);
       OutputView.printMap(Controller.arrayState);
       this.judgeContinue()
-      // this.isGameEnd(); // block 어케 마칠까...
     });
   },
   getMoving(block) { // is에러 이런식으로 밸리데이션에 분리 시도하기

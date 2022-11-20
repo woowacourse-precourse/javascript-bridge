@@ -7,7 +7,6 @@ const {
   MESSAGE,
   ERROR_MESSAGE,
 } = require("./constant");
-const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 
 // 클래스로 하니까 걍 다 초기화됨 --
@@ -17,7 +16,6 @@ const Controller = {
   command: "",
   tryCount: 1,
   round: 0,
-  // checkBlock: null,
   arrayState: [[], []],
   playerArr: [],
   gameResult: "",
@@ -75,16 +73,6 @@ const Controller = {
   //     return (this.gameResult = IS_SUCCESS.nailedIt);
   //   }
   // },
-  checkSuccess() {
-    for (let i = 0; i < OutputView.nowArray.length; i++) {
-      if (OutputView.nowArray[i].includes(SIGN.fail)) {
-        return (this.gameResult = IS_SUCCESS.failedIt);
-      }
-      if (!OutputView.nowArray[i].includes(SIGN.fail)) {
-        return (this.gameResult = IS_SUCCESS.nailedIt);
-      }
-    }
-  },
   checkContinue() {
     if (
       this.playerArr.length !== this.size &&
@@ -95,11 +83,27 @@ const Controller = {
     }
   },
 
+  checkSuccess() {
+    for (let i = 0; i < OutputView.nowArray.length; i++) {
+      if (OutputView.nowArray[i].includes(SIGN.fail)) {
+        return (this.gameResult = IS_SUCCESS.failedIt);
+      }
+      if (!OutputView.nowArray[i].includes(SIGN.fail)) {
+        return (this.gameResult = IS_SUCCESS.nailedIt);
+      }
+    }
+  },
+
+
+
+
   initializeAll() {
+    OutputView.nowArray = [],
     this.arrayState = [[], []],
     this.playerArr = [],
     this.gameResult = "",
-    this.size = 0,
+    this.round = 0,
+    // this.size = 0,
     this.tryCount += 1; // 시도 마다 올라감
   },
 
