@@ -8,6 +8,15 @@ const MOVING_SPACE = Object.freeze({
   DOWN: "D",
 });
 
+const MAP = Object.freeze({
+  EMPTY: " ",
+  SUCCESS: "O",
+  FAIL: "X",
+  SEPARATOR: " | ",
+  START: "[ ",
+  END: " ]",
+});
+
 const OUTPUT_MESSAGE = Object.freeze({
   START: "다리 건너기 게임을 시작합니다.",
 });
@@ -26,6 +35,7 @@ const ERROR_MESSAGE = Object.freeze({
 module.exports = {
   BRIDGE_SIZE,
   MOVING_SPACE,
+  MAP,
   OUTPUT_MESSAGE,
   INPUT_MESSAGE,
   ERROR_MESSAGE,

@@ -1,5 +1,5 @@
-const { readBridgeSize, readMoving } = require("./InputView");
-const { printStart, printResult } = require("./OutputView");
+const { readBridgeSize, readMoving } = require("./util/InputView");
+const { printStart, printResult, printMap } = require("./util/OutputView");
 const {
   validateReadBridgeSize,
   validateReadMoving,
@@ -14,7 +14,7 @@ class App {
   play() {
     printStart();
     readBridgeSize(this.onReadBridgeSize.bind(this));
-    printResult();
+    // printResult();
   }
 
   /**
@@ -26,7 +26,12 @@ class App {
     this.gameStart(bridge);
   }
 
+  /**
+   *
+   * @param {string[]} bridge 건너야 할 다리
+   */
   gameStart(bridge) {
+    console.log(bridge);
     this.#bridgeGame = new BridgeGame(bridge);
     readMoving(this.onReadMoving.bind(this));
   }
@@ -36,8 +41,10 @@ class App {
    */
   onReadMoving(movingSpace) {
     validateReadMoving(movingSpace);
-    this.#bridgeGame.move(movingSpace);
-    readMoving(this.onReadMoving.bind(this));
+    const isSuccess = this.#bridgeGame.move(movingSpace);
+    printMap(this.#bridgeGame.getMovedSpace(), isSuccess);
+    if (this.#bridgeGame.isArrive()) console.log("도착! 게임 종료");
+    else if (isSuccess) readMoving(this.onReadMoving.bind(this));
   }
 }
 

@@ -10,7 +10,7 @@ describe("BridgeGame 테스트", () => {
     expect(bridgeGame.getMovedSpace()).toStrictEqual(["U", "U"]);
     bridgeGame.move("D");
     expect(bridgeGame.getMovedSpace()).toStrictEqual(["U", "U", "D"]);
-      bridgeGame.move("U");
-      expect(bridgeGame.getMovedSpace()).toStrictEqual(["U", "U", "D", "U"]);
+    bridgeGame.move("U");
+    expect(bridgeGame.getMovedSpace()).toStrictEqual(["U", "U", "D", "U"]);
   });
 });
