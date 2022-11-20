@@ -1,7 +1,7 @@
 const ERROR = {
-	BRIDGE_SIZE: '[ERROR] 다리의 길이는 3 이상 20 이하의 자연수여야 합니다.',
-	MOVING: '[ERROR] U 또는 D를 입력해주세요.',
-	GAME_COMMAND: '[ERROR] R 또는 Q를 입력해주세요.',
+	BRIDGE_SIZE: '다리의 길이는 3 이상 20 이하의 자연수여야 합니다.',
+	MOVING: 'U 또는 D를 입력해주세요.',
+	GAME_COMMAND: 'R 또는 Q를 입력해주세요.',
 };
 
 const checkBridgeSize = input => {
