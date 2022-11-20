@@ -61,7 +61,22 @@ class App {
   }
 
   askRetryOrEnd() {
-    InputView.readGameCommand();
+    InputView.readGameCommand(this.retryOrEnd.bind(this));
+  }
+
+  retryOrEnd(input) {
+    if (input === 'R') return this.retryGame();
+    if (input === 'Q') return this.endGame();
+  }
+
+  retryGame() {
+    this.bridgeGame.retry();
+    this.getMoving();
+  }
+
+  endGame() {
+    OutputView.printResult(this.bridgeGame.getMap());
+    Console.close();
   }
 }
 
