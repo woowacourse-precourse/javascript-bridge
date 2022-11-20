@@ -14,9 +14,10 @@ const InputView = {
       const isBridgeLengthCorrect = Validation.checkBridgeLength(length);
       if (isBridgeLengthCorrect) {
         this.readBridgeSize();
+      } else {
+        const bridgeGame = new BridgeGame();
+        bridgeGame.make(length);
       }
-      const bridgeGame = new BridgeGame();
-      bridgeGame.make(length);
     });
   },
 
