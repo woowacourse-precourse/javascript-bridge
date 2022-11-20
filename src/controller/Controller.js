@@ -8,13 +8,13 @@ class Controller {
     this.bridgeGame = new BridgeGame();
   }
 
-  // - 다리의 길이 입력 받는다.
   gameStart() {
     OutputView.printMessage(MESSAGE.startGame);
 
     this.inputBrideSize();
   }
 
+  // - 다리의 길이 입력 받는다.
   inputBrideSize() {
     InputView.readBridgeSize(this.makeWinningBridge.bind(this));
   }
@@ -32,7 +32,6 @@ class Controller {
   }
 
   move(direction) {
-    this.bridgeGame.validate(direction);
     const [canMove, upperBridge, lowerBridge] = this.bridgeGame.move(direction);
 
     this.printMoving(canMove, upperBridge, lowerBridge);
@@ -40,6 +39,11 @@ class Controller {
 
   printMoving(canMove, upperBridge, lowerBridge) {
     OutputView.printMap(upperBridge, lowerBridge);
+
+    this.checkSuccess(canMove);
+  }
+
+  checkSuccess(canMove) {
     if (canMove && this.bridgeGame.isLastStage()) {
       const isSucceeded = true;
       return this.getResult(isSucceeded);
@@ -51,10 +55,10 @@ class Controller {
 
   // - 재시작 또는 종료 여부 입력 받는다.
   inputGameCommand() {
-    InputView.readGameCommand(this.configCommand.bind(this));
+    InputView.readGameCommand(this.checkCommand.bind(this));
   }
 
-  configCommand(command) {
+  checkCommand(command) {
     if (command === 'R') this.retry();
     if (command === 'Q') {
       const isSucceeded = false;

@@ -9,7 +9,7 @@ const Validation = {
     if (!Number.isNaN(Number(input))) throw ERROR.mustBeString;
   },
 
-  checkLength(input) {
+  checkBlank(input) {
     if (input.length === 0) throw ERROR.mustNotBeBlank;
   },
 

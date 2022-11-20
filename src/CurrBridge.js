@@ -12,12 +12,7 @@ class CurrBridge {
   }
 
   canMove(direction, winningBridge) {
-    const isSameDirection = winningBridge.isSameDirection(
-      direction,
-      this.#upperBridge.length
-    );
-
-    return isSameDirection;
+    return winningBridge.isSameDirection(direction, this.#upperBridge.length);
   }
 
   makeBridge(direction, canMove) {
