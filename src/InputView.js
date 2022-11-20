@@ -56,9 +56,19 @@ const InputView = {
     Console.readLine(
       '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
       (answer) => {
+        this.answerValidate(answer);
         return answer;
       }
     );
+  },
+  // 재시작/종료 예외처리
+  answerValidate(alphabet) {
+    if (typeof alphabet !== 'string') {
+      throw new Error('[ERROR] 문자를 입력해야 합니다.');
+    }
+    if (alphabet !== 'R' || alphabet !== 'Q') {
+      throw new Error('[ERROR] R나 Q를 입력해야 합니다.');
+    }
   },
 };
 
