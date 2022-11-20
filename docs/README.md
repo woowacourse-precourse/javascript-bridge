@@ -243,3 +243,4 @@ const number = generateRandomNumber();
 - [ ] refactor: 변수명, 함수명 수정하기
 - [ ] refactor: 매직 넘버 상수화하기
 - [ ] refactor: 함수(또는 메서드)가 한 가지의 일만 하도록 하기
+  - 에러가 발생하였을 때 실행되는 함수를 분리한다.

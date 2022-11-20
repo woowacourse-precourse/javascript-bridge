@@ -5,6 +5,7 @@ const { generate } = require('./BridgeRandomNumberGenerator');
 const InputView = require('./View/InputView');
 const OutputView = require('./View/OutputView');
 const Validation = require('./Validation');
+const { throwException } = require('./ErrorHandler');
 
 class App {
   constructor() {
@@ -19,13 +20,9 @@ class App {
 
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
-      try {
-        Validation.checkBridgeSize(size);
-      } catch (error) {
-        OutputView.printErrorMessage(error);
-
-        return this.requestBridgeSize();
-      }
+      const { errorMsg } = Validation.checkBridgeSize(size);
+      if (errorMsg)
+        return throwException(errorMsg, () => this.requestBridgeSize());
 
       const bridge = BridgeMaker.makeBridge(Number(size), generate);
       this.bridgeGame = new BridgeGame(bridge);
@@ -36,13 +33,9 @@ class App {
 
   requestDirection() {
     InputView.readMoving((direction) => {
-      try {
-        Validation.checkDirection(direction);
-      } catch (error) {
-        OutputView.printErrorMessage(error);
-
-        return this.requestDirection();
-      }
+      const { errorMsg } = Validation.checkDirection(direction);
+      if (errorMsg)
+        return throwException(errorMsg, () => this.requestDirection());
 
       this.bridgeGame.move(direction);
       OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
@@ -57,13 +50,9 @@ class App {
 
   requestRestartOrQuit() {
     InputView.readGameCommand((commandOption) => {
-      try {
-        Validation.checkCommandOption(commandOption);
-      } catch (error) {
-        OutputView.printErrorMessage(error);
-
-        return this.requestRestartOrQuit();
-      }
+      const { errorMsg } = Validation.checkCommandOption(commandOption);
+      if (errorMsg)
+        return throwException(errorMsg, () => this.requestRestartOrQuit());
 
       if (commandOption === 'R') return this.restart();
 
