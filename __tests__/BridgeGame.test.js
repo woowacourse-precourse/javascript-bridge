@@ -809,3 +809,94 @@ describe('로그 기록 초기화 메서드 테스트', () => {
     expect(bridgeGame.initializeLogHistory()).toBeTruthy();
   });
 });
+
+describe('다리 건너기 게임 종합 테스트', () => {
+  const bridgeGame = new BridgeGame();
+  const generateBridge = ['U', 'D', 'D'];
+
+  // #1 다리 생성
+  bridgeGame.setBridge(generateBridge);
+
+  // #2 이동할 칸 입력 (위: U, 아래: D)
+  const USER_MOVE_INPUT_1 = 'U';
+
+  // #3 플레이어 이동
+  bridgeGame.move();
+
+  // #4 이동한 위치의 결과 반환 (O, X)
+  // #5 이동한 위치를 인덱스로 변환
+  // #6 포지션 로그 기록
+  // #8 다리 로그 기록
+  bridgeGame.setGameLog(USER_MOVE_INPUT_1);
+
+  // #10 이동할 칸 입력 (위: U, 아래: D)
+  const USER_MOVE_INPUT_2 = 'U';
+
+  // #11 플레이어 이동
+  bridgeGame.move();
+
+  // #12 이동한 위치의 결과 반환 (O, X)
+  // #13 이동한 위치를 인덱스로 변환
+  // #14 포지션 로그 기록
+  // #16 다리 로그 기록
+  bridgeGame.setGameLog(USER_MOVE_INPUT_2);
+
+  // 게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)
+  // R 입력했다고 가정
+  bridgeGame.retry();
+
+  // #17 이동할 칸 입력 (위: U, 아래: D)
+  const USER_MOVE_INPUT_3 = 'U';
+
+  // #18 플레이어 이동
+  bridgeGame.move();
+
+  // #19 이동한 위치의 결과 반환 (O, X)
+  // #20 이동한 위치를 인덱스로 변환
+  // #21 포지션 로그 기록
+  // #22 다리 로그 기록
+  bridgeGame.setGameLog(USER_MOVE_INPUT_3);
+
+  // #23 이동할 칸 입력 (위: U, 아래: D)
+  const USER_MOVE_INPUT_4 = 'D';
+
+  // #24 플레이어 이동
+  bridgeGame.move();
+
+  // #25 이동한 위치의 결과 반환 (O, X)
+  // #26 이동한 위치를 인덱스로 변환
+  // #27 포지션 로그 기록
+  // #28 다리 로그 기록
+  bridgeGame.setGameLog(USER_MOVE_INPUT_4);
+
+  // #29 이동할 칸 입력 (위: U, 아래: D)
+  const USER_MOVE_INPUT_5 = 'D';
+
+  // #30 플레이어 이동
+  bridgeGame.move();
+
+  // #31 이동한 위치의 결과 반환 (O, X)
+  // #32 이동한 위치를 인덱스로 변환
+  // #33 포지션 로그 기록
+  // #34 다리 로그 기록
+  bridgeGame.setGameLog(USER_MOVE_INPUT_5);
+
+  test('[[["O"], [" "]], [[" "], ["O"]], [[" "], ["O"]]]를 반환해야한다.', () => {
+    const RECEIVED = [[['O'], [' ']], [[' '], ['O']], [[' '], ['O']]];
+
+    expect(bridgeGame.getBridgeLog()).toEqual(RECEIVED);
+  });
+
+  test('true를 반환해야한다.', () => {
+    const Length = 3;
+    const RECEIVED = true;
+
+    expect(bridgeGame.isBridgeEnd(Length)).toEqual(RECEIVED);
+  });
+
+  test('2를 반환해야한다.', () => {
+    const RECEIVED = 2;
+
+    expect(bridgeGame.getTryCount()).toEqual(RECEIVED);
+  });
+});
