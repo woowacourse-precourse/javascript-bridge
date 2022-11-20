@@ -1,9 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
-const BridgeMaker = require("./BridgeMaker.js");
 const InputView = require("./InputView.js");
 const OutputView = require("./OutputView.js");
 const { isSame } = require("./Validation.js");
+const Bridge = require("./Bridge.js");
 
 const { Console } = MissionUtils;
 
@@ -15,26 +14,22 @@ const { Console } = MissionUtils;
  * 4. 인자는 필요에 따라 추가하거나 변경할 수 있다.
  * 5. 메서드를 추가하거나 변경할 수 있다.
  */
-const { generate } = BridgeRandomNumberGenerator;
 
 class BridgeGame {
-  #answer;
+  #bridge;
   #inputs;
-  #step;
   #trial;
 
   constructor() {
-    this.#answer = [];
+    this.#bridge = new Bridge();
     this.#inputs = [];
-    this.#step = 0;
     this.#trial = 1;
   }
   start() {
     OutputView.printStart();
     InputView.readBridgeSize(this.start.bind(this), (bridgeLength) => {
-      if (this.#answer.length === 0) {
-        const answer = BridgeMaker.makeBridge(bridgeLength, generate);
-        this.#answer = answer;
+      if (this.#bridge.length === 0) {
+        this.#bridge.init(bridgeLength);
       }
       this.move();
     });
@@ -48,8 +43,8 @@ class BridgeGame {
 
     InputView.readMoving(current, (command) => {
       this.#inputs.push(command);
-      this.#step += 1;
-      OutputView.printMap(this.#answer.slice(0, this.#step), this.#inputs);
+      this.#bridge.move();
+      OutputView.printMap(this.#bridge.currentStage, this.#inputs);
       this.moveAfter(command);
     });
   }
@@ -57,14 +52,14 @@ class BridgeGame {
     this.retry();
   }
   #doWhenRightAnswer() {
-    if (isSame(this.#answer.length, this.#inputs.length)) {
+    if (isSame(this.#bridge.length, this.#inputs.length)) {
       this.end();
       return;
     }
     this.move();
   }
   moveAfter(command) {
-    if (!isSame(this.#answer[this.#step - 1], command)) {
+    if (!isSame(this.#bridge.currentAnswer, command)) {
       this.#doWhenWrongAnswer();
       return;
     }
@@ -85,14 +80,14 @@ class BridgeGame {
     });
   }
   restart() {
-    this.#step = 0;
+    this.#bridge.reset();
     this.#trial += 1;
     this.#inputs = [];
     this.move();
   }
   end() {
     OutputView.printResult(
-      this.#answer.slice(0, this.#step),
+      this.#bridge.currentStage,
       this.#inputs,
       this.#trial
     );
