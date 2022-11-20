@@ -4,6 +4,7 @@ const { makeBridge } = require("../BridgeMaker");
 const { generate } = require("../bridge/BridgeRandomNumberGenerator");
 const InputMessage = require("../messages/InputMessage");
 const OutputView = require("../views/OutputView");
+const GameStates = require("../bridge/GameStates");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -42,23 +43,29 @@ const InputView = {
       }
       const state = bridgeGame.getGameState();
       if (state) {
-        this.readGameCommand(state, bridgeGame);
+        this.afterGameEnded(state, bridgeGame);
         return;
       }
       this.readMoving(bridgeGame);
     });
   },
 
+  afterGameEnded(state, bridgeGame) {
+    switch (state) {
+      case GameStates.GAME_FAILED:
+        this.readGameCommand(bridgeGame);
+        break;
+      case GameStates.GAME_SUCCESS:
+        OutputView.printResult(bridgeGame);
+        Console.close();
+        break;
+    }
+  },
+
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(state, bridgeGame) {
-    if (state === BridgeGame.GAME_FAILED)
-      this.readGameCommandAfterFailed(bridgeGame);
-    if (state === BridgeGame.GAME_SUCCESS) this.readGameCommandAfterSuccess();
-  },
-
-  readGameCommandAfterFailed(bridgeGame) {
+  readGameCommand(bridgeGame) {
     Console.readLine(
       InputMessage.READ_GAME_COMMAND_AFTER_FAILED_MESSAGE,
       (value) => {
@@ -70,7 +77,6 @@ const InputView = {
       }
     );
   },
-  readGameCommandAfterSuccess() {},
 };
 
 module.exports = InputView;

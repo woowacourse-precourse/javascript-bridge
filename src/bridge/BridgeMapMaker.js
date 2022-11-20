@@ -48,6 +48,10 @@ const BridgeMapMaker = {
     this.map[this.down].push(`${point}   ]`);
   },
 
+  getCurrentMap() {
+    return [...this.map];
+  },
+
   onRetry() {
     this.map = [[], []];
   },

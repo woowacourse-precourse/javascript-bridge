@@ -1,6 +1,5 @@
 const BridgeGame = require("../src/bridge/BridgeGame");
 const { makeBridge } = require("../src/BridgeMaker");
-
 const ErrorMessage = require("../src/messages/ErrorMessage");
 
 describe("My Application Test", () => {

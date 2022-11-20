@@ -3,6 +3,7 @@ const OutputView = require("../views/OutputView");
 const Validator = require("../utils/Validator");
 const InputMessage = require("../messages/InputMessage");
 const InputView = require("../views/InputView");
+const GameStates = require("./GameStates");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -14,8 +15,6 @@ class BridgeGame {
   static DOWN_DIRECTION = "D";
   static QUIT = "Q";
   static RETRY = "R";
-  static GAME_FAILED = "fail";
-  static GAME_SUCCESS = "success";
 
   #bridge;
   #numberOfAttemps = 0;
@@ -35,16 +34,20 @@ class BridgeGame {
   }
 
   getGameState() {
-    if (this.#isGameFailed) return BridgeGame.GAME_FAILED;
-    if (this.#isGameSucess) return BridgeGame.GAME_SUCCESS;
+    if (this.#isGameFailed) return GameStates.GAME_FAILED;
+    if (this.#isGameSucess) return GameStates.GAME_SUCCESS;
 
     return null;
+  }
+
+  getNumberOfAttemps() {
+    return this.#numberOfAttemps;
   }
 
   move(direction) {
     Validator.isValidDirection(direction);
     if (this.#distance === this.#bridge.length - 1) {
-      this.#isGameFailed = true;
+      this.#isGameSucess = true;
     }
     const block = this.#bridge[this.#distance++];
     const isPlaceToPass = this.isPlaceToPass(block, direction);
