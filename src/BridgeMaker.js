@@ -5,6 +5,13 @@ const Exception = require('./Exception');
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     this.handleBridgeSizeException(size);
+
+    let bridge = [];
+    for (let i = 0; i < size; i++) {
+      bridge.push(generateRandomNumber());
+    }
+
+    return bridge;
   },
   handleBridgeSizeException(size) {
     switch (false) {
