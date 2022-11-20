@@ -15,6 +15,8 @@ class BridgeGame {
   move(movingInput) {
     this.isCorrect(movingInput) ? 
       this.MoveToCorrectBridge(movingInput) : this.MoveToWrongBridge(movingInput);
+      
+    return this.#currentBridge;
   }
 
   isCorrect(movingInput) {
