@@ -1,7 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
 const {CheckBridgeSizeException, CheckUserMove, CheckWhetherGameRunning} = require("./Exception");
-const { makeBridge } = require("./BridgeMaker");
-const { generate } = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
 const bridgeGame = new BridgeGame;
 const OutputView = require("./OutputView");
@@ -11,10 +9,11 @@ const userBridgeCorrect = bridgeGame.userPickedUpOrDown;
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
+
   /**
    * 다리의 길이를 입력받는다.
    */
-   readBridgeSize(){
+  readBridgeSize(){
     let bridgeSize;
     Console.readLine("다리의 길이를 입력해주세요" , (num) => {
       this.checkBridgeLengthExceptions(num);
@@ -36,22 +35,12 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
+    let userMove;
     Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D", (selectUpOrDown) => {
       this.checkUserMoveException(selectUpOrDown);
-      bridgeGame.move(this.createBridge, selectUpOrDown);
-      OutputView.printMap(userBridgeCorrect[0], userBridgeCorrect[1]);
-      this.userPickedIsWrong(userBridgeCorrect);
-      this.readMoving();
-      OutputView.printResult(userBridgeCorrect[0] , userBridgeCorrect[1] , bridgeGame.attemptCount);
-      this.readGameCommand();
+      userMove = selectUpOrDown; 
     });
-  },
-
-  userPickedIsWrong(userBridgeCorrect){
-    if(userBridgeCorrect[0].includes("X") || userBridgeCorrect[1].includes("X")){
-      this.readGameCommand();
-      
-    }
+    return userMove;
   },
 
   checkUserMoveException(selectUpOrDown){
@@ -66,7 +55,7 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-   readGameCommand() {
+  readGameCommand() {
     Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도:R, 종료:Q)", (value) => {
     this.checkGameRunningException(value);
     this.gameRestart(value);
