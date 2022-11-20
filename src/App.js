@@ -1,7 +1,7 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
-const { EITHER, MOVE_RESULT } = require('./constants/bridge');
+const { EITHER, MOVE_RESULT, COMMAND } = require('./constants/bridge');
 
 class App {
   constructor() {
@@ -46,7 +46,20 @@ class App {
     }
   }
 
-  failRoutine(command) {}
+  failRoutine(command) {
+    if (command === COMMAND.RETRY) this.retryRoutine();
+  }
+
+  retryRoutine() {
+    this.reset();
+    this.attemptRoutine();
+  }
+
+  reset() {
+    this.upCounter = [];
+    this.downCounter = [];
+    this.bridgeModel.retry();
+  }
 }
 
 const app = new App();
