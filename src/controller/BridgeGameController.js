@@ -45,6 +45,11 @@ class BrideGameController {
   }
 
   handleAnswerCheckPhase(direction) {
+    try {
+      this.validator.checkDirectionInput(direction);
+    } catch (error) {
+      this.readMovingPhase();
+    }
     this.#bridgeGame.updateResult(direction);
     OutputView.printMap(this.#bridgeGame.getResult());
     if(this.#bridgeGame.isAnswer(direction)) {
