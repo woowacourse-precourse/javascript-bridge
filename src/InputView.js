@@ -14,10 +14,7 @@ const InputView = {
   setBridgeSize(bridgeSize) {
     this.validateBridgeSize(bridgeSize);
     bridgeGame.setBridge(BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator));
-
-    for (let askMoving = 0; askMoving < bridgeSize; askMoving++) {
-      this.readMoving();
-    }
+    this.readMoving();
   },
 
   validateBridgeSize(bridgeSize) {
@@ -32,9 +29,6 @@ const InputView = {
     }
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
   readMoving() {
     Console.readLine(MESSAGE_PROCESS.INPUT_MOVING, this.setMoving.bind(this));
   },
@@ -42,6 +36,7 @@ const InputView = {
   setMoving(moving) {
     this.valitateMoving(moving);
     bridgeGame.move(moving);
+    this.printMoveResult();
   },
 
   valitateMoving(moving) {
@@ -52,6 +47,13 @@ const InputView = {
       OutputView.printError(e);
       this.readMoving();
     }
+  },
+
+  printMoveResult() {
+    OutputView.printMap(bridgeGame.getMoveResult());
+    if (bridgeGame.isFail()) this.readGameCommand();
+    else if (bridgeGame.isSuccess()) OutputView.printResult();
+    else this.readMoving();
   },
 
   /**
