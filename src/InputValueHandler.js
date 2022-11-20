@@ -2,7 +2,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView = require('./OutputView');
 const Validate = require('./Validate');
 
-const InputValueControl = {
+const InputValueHandler = {
   bridgeSize(size, bridgeGame) {
     const SIZE = Number(size);
     if (!Validate.checkBridgeSize(SIZE)) {
@@ -51,4 +51,4 @@ const InputValueControl = {
   },
 };
 
-module.exports = InputValueControl;
+module.exports = InputValueHandler;
