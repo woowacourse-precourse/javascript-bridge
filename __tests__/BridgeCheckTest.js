@@ -27,8 +27,8 @@ describe('랜덤 브릿지와 유저 브릿지 비교 테스트', () => {
     const gameResult = bridgeService.getGameResult();
 
     expect(moveResult).toEqual([
-      ['O', ''],
-      ['', 'X']
+      ['O', ' '],
+      [' ', 'X']
     ]);
     expect(gameResult).toEqual({
       result: GAME_RESULT_STATE.fail,
@@ -52,8 +52,8 @@ describe('랜덤 브릿지와 유저 브릿지 비교 테스트', () => {
     const gameResult = bridgeService.getGameResult();
 
     expect(moveResult).toEqual([
-      ['O', 'O', ''],
-      ['', '', 'X']
+      ['O', 'O', ' '],
+      [' ', ' ', 'X']
     ]);
 
     expect(gameResult).toEqual({
@@ -77,7 +77,7 @@ describe('랜덤 브릿지와 유저 브릿지 비교 테스트', () => {
 
     expect(moveResult).toEqual([
       ['O', 'O'],
-      ['', '']
+      [' ', ' ']
     ]);
 
     expect(gameResult).toEqual({
@@ -102,7 +102,7 @@ describe('랜덤 브릿지와 유저 브릿지 비교 테스트', () => {
 
     expect(moveResult).toEqual([
       ['O', 'O', 'O'],
-      ['', '', '']
+      [' ', ' ', ' ']
     ]);
 
     expect(gameResult).toEqual({
