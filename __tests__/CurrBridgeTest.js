@@ -23,4 +23,12 @@ describe('CurrBridge 클래스 테스트', () => {
       '[ERROR] 소문자가 아닌 대문자를 입력해주세요.'
     );
   });
+
+  test('예외 테스트 : 입력값이 빈칸인 경우 예외 처리한다', () => {
+    expect(() =>
+      validateDirection('').toThrow(
+        '[ERROR] 공백을 입력할 수 없습니다. 값을 입력해주세요.'
+      )
+    );
+  });
 });
