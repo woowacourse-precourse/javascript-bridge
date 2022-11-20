@@ -12,6 +12,12 @@ const Validation = {
 
     return { errorMsg: undefined };
   },
+
+  checkDirection(direction) {
+    if (direction === "U" || direction === "D") return { errorMsg: undefined };
+
+    return { errorMsg: "[ERROR] U또는 D 알파벳만 입력이 가능합니다." };
+  },
 };
 
 module.exports = Validation;
