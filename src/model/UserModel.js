@@ -1,3 +1,5 @@
+const { USER_MOVE_MESSAGES } = require("../constants/Messages");
+
 class UserModel {
   #tryCount;
   #userMove;
@@ -39,6 +41,16 @@ class UserModel {
   // 유저 이동경로를 초기화한다.
   resetUserMove() {
     this.#userMove = [];
+  }
+
+  /**
+   * 유저의 이동 input 을 검증한다.
+   * @param userMovingInput {string} [유저 이동 input]
+   */
+  validateUserMoving(userMovingInput) {
+    if (userMovingInput !== "U" && userMovingInput !== "D") {
+      throw new Error(USER_MOVE_MESSAGES.INPUT_ERROR);
+    }
   }
 }
 
