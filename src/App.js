@@ -3,9 +3,9 @@ const { makeBridge } = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
-const validBridgeSize = require("./validation/validBridgeSize");
-const validMoveUpOrDownAnswer = require("./validation/validMoveUpOrDownAnswer");
 const { Console } = require("@woowacourse/mission-utils");
+const validateBridgeSize = require("./validation/validateBridgeSize");
+const validateMoveUpOrDownAnswer = require("./validation/validateMoveUpOrDownAnswer");
 
 class App {
   #bridge;
@@ -22,14 +22,14 @@ class App {
 
   requestBridgeSize(size) {
     size = Number(size);
-    validBridgeSize(size);
+    validateBridgeSize(size);
     this.#bridge = makeBridge(size, BridgeRandomNumberGenerator.generate);
 
     InputView.readMoving(this.requestMoveUpOrDown.bind(this));
   }
 
   requestMoveUpOrDown(answer) {
-    validMoveUpOrDownAnswer(answer);
+    validateMoveUpOrDownAnswer(answer);
     const position = this.BridgeGame.getPosition();
 
     OutputView.printMap(position, this.#bridge, answer);
