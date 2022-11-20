@@ -10,7 +10,7 @@ const OutputView = {
    */
   printMap(currentLocation) {
     MU.Console.print(`[ ${currentLocation[0].join(' | ')} ]`);
-    MU.Console.print(`[ ${currentLocation[1].join(' | ')} ]`);
+    MU.Console.print(`[ ${currentLocation[1].join(' | ')} ]\n`);
   },
 
   /**

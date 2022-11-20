@@ -12,6 +12,7 @@ const InputView = {
    * @param {string[]} bridge 만들어진 다리. 재시작시 재사용
    */
   readBridgeSize() {
+    MU.Console.print('다리 건너기 게임을 시작합니다.\n');
     MU.Console.readLine('다리의 길이를 입력해주세요.\n', (bridgeLen) => {
       let bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
       MU.Console.print(bridge);
@@ -26,8 +27,9 @@ const InputView = {
    */
   readMoving(currentLocation, bridge, count) {
     let game = new BridgeGame();
-    MU.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (nextStep) => {
-      currentLocation = game.move(currentLocation, nextStep, bridge); 
+    MU.Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (nextStep) => {
+      currentLocation = game.move(currentLocation, nextStep, bridge);
+      OutputView.printMap(currentLocation); 
       if(currentLocation[0].includes('X') || currentLocation[1].includes('X'))
         this.readGameCommand(currentLocation, bridge, count);
       if(currentLocation[0].length === bridge.length) 
@@ -40,8 +42,9 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(currentLocation, bridge, count) {
-    MU.Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (restart) => {
-      if(restart === 'R') this.readMoving([[],[]], bridge, count + 1);
+    let game = new BridgeGame();
+    MU.Console.readLine('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (restart) => {
+      if(restart === 'R') this.readMoving(game.retry(currentLocation), bridge, count + 1);
       if(restart === 'Q') OutputView.printResult(currentLocation, 0, count);
     })
   },
