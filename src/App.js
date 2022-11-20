@@ -20,9 +20,11 @@ class App {
 
   handleInputLength(input) {
     try {
-      if (!InputValidator.isValidLength(input)) {
-        throw new Error(message.ERROR_LENGTH);
-      }
+      this.checkValid(
+        input,
+        InputValidator.isValidLength,
+        message.ERROR_LENGTH
+      );
       this.initBridges(+input);
       InputView.readMoving(this.handleInputStep.bind(this));
     } catch (error) {
@@ -33,9 +35,7 @@ class App {
 
   handleInputStep(input) {
     try {
-      if (!InputValidator.isValidStep(input)) {
-        throw new Error(message.ERROR_STEP);
-      }
+      this.checkValid(input, InputValidator.isValidStep, message.ERROR_STEP);
       this.bridgeGame.bridgeSteps.push(input);
       OutputView.printMap(
         this.bridgeGame.answerSteps,
@@ -67,9 +67,11 @@ class App {
 
   handleInputCommand(input) {
     try {
-      if (!InputValidator.isValidCommand(input)) {
-        throw new Error(message.ERROR_COMMAND);
-      }
+      this.checkValid(
+        input,
+        InputValidator.isValidCommand,
+        message.ERROR_COMMAND
+      );
       if (input === command.GAME_QUIT) {
         OutputView.printResult(
           this.bridgeGame.answerSteps,
@@ -88,10 +90,17 @@ class App {
       InputView.readGameCommand(this.handleInputCommand.bind(this));
     }
   }
+
   initBridges(size) {
     this.bridgeGame = new BridgeGame(
       BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate)
     );
+  }
+
+  checkValid(input, predicate, errorMessage) {
+    if (!predicate(input)) {
+      throw new Error(errorMessage);
+    }
   }
 }
 
