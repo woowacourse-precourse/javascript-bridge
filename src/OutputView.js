@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const BridgePartsController = require('./BridgePartsController');
 const { OUTPUT_MESSAGE, RESULT_MESSAGE } = require('./Constants/message');
 
 /**
@@ -18,33 +19,12 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(game) {
-    console.log('printMap');
-    const bridge = game.getBridge();
-    const records = game.getRecords();
-    console.log('printmap', bridge, records);
-    const upperBridge = ['['];
-    const downerBridge = ['['];
-    records.forEach((direction, idx) => {
-      if (direction === 'U') {
-        if (direction === bridge[idx]) upperBridge.push('O');
-        else upperBridge.push('X');
-        downerBridge.push(' ');
-      } else if (direction === 'D') {
-        if (direction === bridge[idx]) downerBridge.push('O');
-        else downerBridge.push('X');
-        upperBridge.push(' ');
-      }
-      upperBridge.push('|');
-      downerBridge.push('|');
-    });
-    upperBridge.pop();
-    upperBridge.push(']');
+    const controller = new BridgePartsController();
+    controller.createMap(game);
+    controller.closeBridge();
 
-    downerBridge.pop();
-    downerBridge.push(']');
-
-    Console.print(upperBridge.join(' '));
-    Console.print(downerBridge.join(' '));
+    Console.print(controller.getUpperBridge());
+    Console.print(controller.getDownerBridge());
   },
 
   /**
