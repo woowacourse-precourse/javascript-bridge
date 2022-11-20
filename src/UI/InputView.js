@@ -27,8 +27,13 @@ const InputView = {
    */
   readMoving(move) {
     readLine(MOVE, (upOrDown) => {
-      new Validator().userMovement(upOrDown);
-      move(upOrDown);
+      try {
+        new Validator().userMovement(upOrDown);
+        move(upOrDown);
+      } catch (error) {
+        print(error);
+        InputView.readMoving(move);
+      }
     });
   },
 
