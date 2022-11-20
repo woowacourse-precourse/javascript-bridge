@@ -13,7 +13,6 @@ class PlayersMap {
         for (let i = 0; i < playersBridge.length; i += 1) {
             this.make(playersBridge[i], winBridge[i]);
         }
-
         this.#upSpace = this.cover(this.divideLine(this.#upSpace));
         this.#downSpace = this.cover(this.divideLine(this.#downSpace));
 
@@ -39,10 +38,6 @@ class PlayersMap {
         }
     }
 
-    emptySpace(space) {
-
-    }
-
     divideLine(value) {
         return value.join(' | ');
     }
@@ -50,9 +45,6 @@ class PlayersMap {
     cover(space) {
         return `${leftBlock}${emptySpace}${space}${emptySpace}${rightBlock}`;
     }
-
-    // 사이사이 공백 넣기
-    //사이사이 줄 넣기
 }
 
 module.exports = PlayersMap;
