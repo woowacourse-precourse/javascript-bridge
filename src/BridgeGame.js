@@ -9,6 +9,7 @@ class BridgeGame {
   constructor(answer, size) {
     this.gameAnswer = answer; //게임 정답 리스트
     this.bridgeSize = size; //다리 길이
+    this.readCnt = 0; //입력 횟수
     this.gameCount = 0; //총 시도 횟수
     this.upList = [];
     this.downList = [];
@@ -32,9 +33,17 @@ class BridgeGame {
       this.upList.push(' ');
     }
   }
+  getBridgeSize(){
+    return this.bridgeSize;
+  }
+  //upList, downList 조회
   getUpDownList(){
     return [this.upList, this.downList];
   }
+  getGameCnt(){
+    return this.gameCount;
+  }
+  //정답 맞힌 횟수 조회
   getAnswerCnt() {
     return this.answerCnt;
   }
@@ -48,31 +57,23 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(upDown) {
-    const answerOrNot = upDown == this.gameAnswer.shift();
+    const answerOrNot = upDown == this.gameAnswer[this.readCnt++];
     this.generateUpDownList(upDown, answerOrNot);
-    //if(this.upList.length == this.bridgeSize) this.gameCount += 1;
-    /*
-    if(this.answerCnt == this.bridgeSize) {
-      this.endGame();
-      return Console.close();
-    } 
-    */
+    
     return answerOrNot;
   }
-  /**
-   * 사용자가 게임을 종료할 때 사용하는 메서드
-   */
-  endGame() {
-    OutputView.printResult('P', this.upList, this.downList);
-    OutputView.printGameCount(this.gameCount);
-  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-
+    //upList, downList 초기화!! 
+    this.upList = [];
+    this.downList = [];
+    this.readCnt = 0; //어디로 갈지 입력한 횟수도 초기화!
+    this.answerCnt = 0; //정답 맞혔던 횟수도 초기화!
   }
 }
 
