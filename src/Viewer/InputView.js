@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
-const { MESSAGE } = require('../Utils/Constant');
+const { MESSAGE, RETRY_MESSAGE } = require('../Utils/Constant');
+const Validator = require('../Utils/Validator');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -24,7 +25,7 @@ const InputView = {
       game.move(input);
       OutputView.printMap(bridge, game);
       if (this.isReMoving(bridge, game)) return this.readMoving(bridge, game);
-      OutputView.printResult(bridge, game);
+      OutputView.printResult(input, bridge, game);
       return InputView.readGameCommand(bridge, game);
     });
   },
@@ -38,7 +39,12 @@ const InputView = {
    */
   readGameCommand(bridge, game) {
     Console.readLine(MESSAGE.GAME_RETRY, (input) => {
-      game.retry(input, bridge, game);
+      Validator.isRightRetryString(input);
+      if (input === RETRY_MESSAGE.RETRY) {
+        game.retry();
+        return this.readMoving(bridge, game);
+      }
+      return OutputView.printResult(input, bridge, game);
     });
   },
 };

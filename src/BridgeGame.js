@@ -1,7 +1,4 @@
-const { Console } = require('@woowacourse/mission-utils');
-const { RETRY_MESSAGE, INPUT_MESSAGE } = require('./Utils/Constant');
-const InputView = require('./Viewer/InputView');
-const OutputView = require('./Viewer/OutputView');
+const { INPUT_MESSAGE } = require('./Utils/Constant');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -13,17 +10,10 @@ class BridgeGame {
 
   #result;
 
-  #validator;
-
-  constructor(selected, tryCnt, validator) {
+  constructor(selected, tryCnt) {
     this.#selected = selected;
     this.#tryCnt = tryCnt;
     this.#result = Array.from({ length: 2 }, () => []);
-    this.#validator = validator;
-  }
-
-  #validate(input) {
-    this.#validator.isRightRetryString(input);
   }
 
   get levelCnt() {
@@ -39,11 +29,6 @@ class BridgeGame {
     this.#result = Array.from({ length: 2 }, () =>
       Array.from({ length }, () => undefined),
     );
-  }
-
-  resetSelectedAndAddTryCnt() {
-    this.#selected.reset();
-    this.#tryCnt.add();
   }
 
   isWin(bridge) {
@@ -95,15 +80,9 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(input, bridge, game) {
-    this.#validate(input);
-    if (input === RETRY_MESSAGE.RETRY) {
-      game.resetSelectedAndAddTryCnt();
-      InputView.readMoving(bridge, game);
-    } else if (input === RETRY_MESSAGE.QUIT) {
-      OutputView.printResult(bridge, game);
-      Console.close();
-    }
+  retry() {
+    this.#selected.reset();
+    this.#tryCnt.add();
   }
 }
 
