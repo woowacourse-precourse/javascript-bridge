@@ -6,8 +6,10 @@ const OutputView = require("./OutputView");
  */
 class BridgeGame {
   movingLog;
+  attemptNumber;
   constructor() {
     this.movingLog = { upper: [], lower: [] };
+    this.attemptNumber = 1;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -27,11 +29,11 @@ class BridgeGame {
   moveUpper(userInput, bridge, currentZone) {
     if (userInput === bridge[currentZone]) {
       this.movingLog.upper.push(BRIDGE.RIGHT_ZONE);
-      this.movingLog.lower.push(BRIDGE.WRONG_ZONE);
+      this.movingLog.lower.push(" ");
     }
     if (userInput !== bridge[currentZone]) {
       this.movingLog.upper.push(BRIDGE.WRONG_ZONE);
-      this.movingLog.lower.push(BRIDGE.RIGHT_ZONE);
+      this.movingLog.lower.push(" ");
     }
     return this.printCurrentBridge();
   }
@@ -41,11 +43,11 @@ class BridgeGame {
   moveLower(userInput, bridge, currentZone) {
     if (userInput === bridge[currentZone]) {
       this.movingLog.lower.push(BRIDGE.RIGHT_ZONE);
-      this.movingLog.upper.push(BRIDGE.WRONG_ZONE);
+      this.movingLog.upper.push(" ");
     }
     if (userInput !== bridge[currentZone]) {
       this.movingLog.lower.push(BRIDGE.WRONG_ZONE);
-      this.movingLog.upper.push(BRIDGE.RIGHT_ZONE);
+      this.movingLog.upper.push(" ");
     }
     return this.printCurrentBridge();
   }
@@ -71,12 +73,24 @@ class BridgeGame {
   }
 
   /**
+   * 다리를 끝까지 건넜는지 판단하는 메서드
+   */
+  isReached(bridge) {
+    if (this.movingLog.upper.length === bridge.length) return true;
+    return false;
+  }
+
+  /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
     this.movingLog = { upper: [], lower: [] };
+    this.attemptNumber += 1;
+  }
+  finish(message) {
+    OutputView.printResult(message, this.movingLog, this.attemptNumber);
   }
 }
 

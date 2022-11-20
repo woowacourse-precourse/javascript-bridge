@@ -7,9 +7,15 @@ const NUMBER = "[ERROR] 숫자만 입력할 수 있습니다.";
 const RANGE = "[ERROR] 다리 길이의 입력은 3부터 20 사이의 숫자여야 합니다.";
 const MOVE_INPUT = "[ERROR] 이동 입력은 대문자 U와 P만 입력할 수 있습니다.";
 const COMMAND = "[ERROR] 커맨드는 대문자 R과 Q만 입력할 수 있습니다.";
+const SUCCESS = "게임 성공 여부: 성공";
+const FAIL = "게임 성공 여부: 실패";
+const RESULT = "최종 게임 결과";
 
 const OUTPUT_MESSAGE = {
   START,
+  SUCCESS,
+  FAIL,
+  RESULT,
 };
 
 const INPUT_MESSAGE = {
