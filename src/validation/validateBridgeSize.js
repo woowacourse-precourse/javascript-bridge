@@ -1,4 +1,4 @@
-const BRIDGE_SIZE = require("../constant/constants");
+const BRIDGE = require("../constant/constants");
 const MESSAGE = require("../constant/message");
 
 const validateBridgeSize = (size) => {
@@ -6,7 +6,7 @@ const validateBridgeSize = (size) => {
 };
 
 const isValidRange = (size) => {
-  return size >= BRIDGE_SIZE.MIN_SIZE && size <= BRIDGE_SIZE.MAX_SIZE;
+  return size >= BRIDGE.SIZE.MIN && size <= BRIDGE.SIZE.MAX;
 };
 
 module.exports = validateBridgeSize;
