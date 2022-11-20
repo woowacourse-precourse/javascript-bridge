@@ -82,6 +82,21 @@ class App {
     InputView.readGameCommand(this);
   }
 
+  validateGameCommand(gameCommand) {
+    try {
+      BridgeValidator.validateGameCommand(gameCommand);
+      this.retry();
+    } catch (err) {
+      OutputView.printErrorMessage(err.message);
+      this.inputGameCommand();
+    }
+  }
+
+  retry() {
+    this.#bridgeGame.retry();
+    this.inputMoving();
+  }
+
   gameOver() {
     OutputView.printResult({
       map: BridgeMapMaker.makeBridgeMap(this.#bridgeGame.getMoveHistory()),
