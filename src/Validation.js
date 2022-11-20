@@ -13,9 +13,8 @@ const Validation = {
 
   checkBridgeNumber(inputValue) {
     try {
-      if (isNaN(inputValue)) {
+      if (isNaN(inputValue))
         throw new Error("[ERROR] 다리 길이는 숫자로 입력해야 합니다.");
-      }
     } catch (error) {
       Console.print(error.message);
       return true;
@@ -24,10 +23,20 @@ const Validation = {
 
   checkBridgeRange(inputValue) {
     try {
-      if (inputValue < 3 || inputValue > 20) {
+      if (inputValue < 3 || inputValue > 20)
         throw new Error(
           "[ERROR] 다리 길이는 3 이상 20 이하의 숫자를 입력해야 합니다."
         );
+    } catch (error) {
+      Console.print(error.message);
+      return true;
+    }
+  },
+
+  checkMovingValue(inputValue) {
+    try {
+      if (inputValue !== "U" && inputValue !== "D") {
+        throw new Error("[ERROR] 이동할 칸은 U와 D 중 하나를 입력해야 합니다.");
       }
     } catch (error) {
       Console.print(error.message);

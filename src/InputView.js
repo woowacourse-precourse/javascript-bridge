@@ -13,9 +13,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (length) => {
       const isBridgeLengthCorrect = Validation.checkBridgeLength(length);
-      if (isBridgeLengthCorrect) {
-        return this.readBridgeSize();
-      }
+      if (isBridgeLengthCorrect) return this.readBridgeSize();
 
       const bridgeGame = new BridgeGame();
       bridgeGame.make(length);
@@ -31,9 +29,7 @@ const InputView = {
       "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (moving) => {
         const isMovingValueCorrect = Validation.checkMovingValue(moving);
-        if (isMovingValueCorrect) this.readMoving();
-        else {
-        }
+        if (isMovingValueCorrect) return this.readMoving();
       }
     );
   },
