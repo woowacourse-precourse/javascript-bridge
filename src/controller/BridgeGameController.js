@@ -28,10 +28,14 @@ class BridgeGameController {
   getMoving() {
     InputView.readMoving((moving) => {
       this.#bridgeGame.move(moving);
-      const [upside, downside] = this.#bridgeGame.toStringMap();
-
-      OutputView.printMap(upside, downside);
+      this.printCurrentMap();
     });
+  }
+
+  printCurrentMap() {
+    const [upside, downside] = this.#bridgeGame.toStringMap();
+
+    OutputView.printMap(upside, downside);
   }
 }
 
