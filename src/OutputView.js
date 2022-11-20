@@ -1,3 +1,6 @@
+const { Console } = require("@woowacourse/mission-utils");
+const { SAYS } = require("./constants/Message");
+
 /**
  * 객체
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -24,7 +27,13 @@ const OutputView = {
   printResult() {
     //terminate array에서 data 받아서 출력 라이브러리 적용
   },
-  printMessage() {
+
+  printMessage(context) {
+    if (context === "start") {
+      Console.print(SAYS.START);
+      //다리 길이 입력 로직 넣기: INPUTVIEW
+    }
+
     //validation 결과에 따라 메시지 띄움
   },
 };
