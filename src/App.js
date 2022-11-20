@@ -4,7 +4,7 @@ const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
 const {generate} = require("./BridgeRandomNumberGenerator");
 const {makeBridge} = require("./BridgeMaker");
-const [Console, Random] = [MissionUtils.Console, MissionUtils.Random];
+const Console = MissionUtils.Console;
 
 
 class App {
@@ -12,11 +12,13 @@ class App {
   #bridgeSize;
   #bridge;
   #move;
+  #gameCount;
 
   constructor(){
     this.#bridgeSize = 0;
     this.#bridge = [];
     this.#move = "";
+    this.gameCount = 1;
   }
   
   async play() {
@@ -24,20 +26,36 @@ class App {
     this.#bridgeSize = await InputView.readBridgeSize();
     this.#bridge = makeBridge(this.#bridgeSize, generate);
     Console.print(this.#bridge);
-    await this.moveBridge();
+    const bridgeGame = new BridgeGame();
+    await this.startGame(bridgeGame);
   }
 
-  async moveBridge(){
-    const bridgeGame = new BridgeGame();
-    while((bridgeGame.getIdx()<this.#bridgeSize) && (bridgeGame.getFlag())){
+  async startGame(bridgeGame){
+    await this.moveBridge(bridgeGame);
+    const isSuccess = bridgeGame.getSuccess();
+    isSuccess? OutputView.printResult(this.#gameCount, isSuccess) : await this.restartGame();
+  }
+
+  async moveBridge(bridgeGame){
+    while((bridgeGame.getIdx()<this.#bridgeSize) && (bridgeGame.getSuccess())){
       this.#move = await InputView.readMoving();
       bridgeGame.move(this.#move, this.#bridge);
-      
-
-
-
+      OutputView.pushResult(this.#bridge, bridgeGame.getIdx(), bridgeGame.getSuccess());
+      OutputView.printMap();
     }
   }
+
+  async restartGame(bridgeGame){
+   const restart = await InputView.readGameCommand();
+   if(restart === "Q") OutputView.printResult(this.#gameCount, bridgeGame.getSuccess());
+   if(restart === "R"){
+    this.#gameCount += 1;
+    bridgeGame.retry();
+    this.startGame(bridgeGame);
+   }
+  }
+
+
 }
 
 const app = new App();
