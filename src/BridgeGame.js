@@ -6,6 +6,10 @@ class BridgeGame {
   #moveHistory = [];
   #totalTryCount = 1;
 
+  /**
+   * 다리 건너기 게임 클래스 생성자
+   * @param {string[]} bridge 사용자가 입력한 다리의 길이를 기반으로 생성된 다리
+   */
   constructor(bridge) {
     this.#bridge = bridge;
   }
