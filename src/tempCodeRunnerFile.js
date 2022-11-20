@@ -10,11 +10,13 @@ class App {
     const bridgeSize = await InputView.readBridgeSize();
     const bridge = makeBridge(bridgeSize, generate);
     //
+
     const bridgeGame = new BridgeGame();
 
     bridge.forEach(async (result) => {
       const moving = await InputView.readMoving();
-      const movingResult = bridgeGame.move(result, moving) // true / false
+      const movingResult = bridgeGame.move(result, moving)
+      console.log(movingResult)
       
     })
 

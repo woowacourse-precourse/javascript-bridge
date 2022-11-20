@@ -38,7 +38,7 @@ const InputView = {
   },
 
   validateMoving(answer) {
-    if (answer !== COMMAND.UP || answer !== COMMAND.DOWN) {
+    if (answer !== COMMAND.UP && answer !== COMMAND.DOWN) {
       throw new Error(ERROR.MOVING);
     }
   },
@@ -55,7 +55,7 @@ const InputView = {
   },
 
   validateGameCommand(answer) {
-    if (answer !== COMMAND.RESTART || answer !== COMMAND.QUIT) {
+    if (answer !== COMMAND.RESTART && answer !== COMMAND.QUIT) {
       throw new Error(ERROR.GAME_COMMAND);
     }
   },
