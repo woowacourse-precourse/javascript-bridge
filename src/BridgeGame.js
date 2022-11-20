@@ -1,8 +1,8 @@
 const Check = require('./Check');
 const BridgePrint = require('./BridgePrint');
-const MissionUtils = require('@woowacourse/mission-utils');
 const Player = require('./Player');
 const Bridge = require('./Bridge');
+const { USER_VALID_INPUT, BRIDGE_PRINT_WORD } = require('./common/messages');
 class BridgeGame {
   #bridgeShape;
   #playerInput;
@@ -25,36 +25,37 @@ class BridgeGame {
     this.#index++;
     return Check.checkIsGameOver(this.Player, this.Bridge, this.isFinshed());
   }
-  isFinshed() {
-    return this.#bridgeShape.length === this.#index;
-  }
-
-  playerInputTrue() {
-    if (this.#playerInput === 'U') {
-      this.Bridge.pushUpBridge('O');
-      this.Bridge.pushDownBridge(' ');
-      return;
-    }
-    this.Bridge.pushUpBridge(' ');
-    this.Bridge.pushDownBridge('O');
-  }
-
-  playerInputFalse() {
-    if (this.#playerInput === 'D') {
-      this.Bridge.pushUpBridge(' ');
-      this.Bridge.pushDownBridge('X');
-      this.Player.setIsGameOver(true);
-      return;
-    }
-    this.Bridge.pushUpBridge('X');
-    this.Bridge.pushDownBridge(' ');
-    this.Player.setIsGameOver(true);
-  }
 
   retry() {
     this.Bridge = new Bridge();
     this.Player.setIsGameOver(false);
     this.#index = 0;
+  }
+
+  isFinshed() {
+    return this.#bridgeShape.length === this.#index;
+  }
+
+  playerInputTrue() {
+    if (this.#playerInput === USER_VALID_INPUT.U) {
+      this.Bridge.pushUpBridge(BRIDGE_PRINT_WORD.O);
+      this.Bridge.pushDownBridge(BRIDGE_PRINT_WORD.SPACE);
+      return;
+    }
+    this.Bridge.pushUpBridge(BRIDGE_PRINT_WORD.SPACE);
+    this.Bridge.pushDownBridge(BRIDGE_PRINT_WORD.O);
+  }
+
+  playerInputFalse() {
+    if (this.#playerInput === USER_VALID_INPUT.D) {
+      this.Bridge.pushUpBridge(BRIDGE_PRINT_WORD.SPACE);
+      this.Bridge.pushDownBridge(BRIDGE_PRINT_WORD.X);
+      this.Player.setIsGameOver(true);
+      return;
+    }
+    this.Bridge.pushUpBridge(BRIDGE_PRINT_WORD.X);
+    this.Bridge.pushDownBridge(BRIDGE_PRINT_WORD.SPACE);
+    this.Player.setIsGameOver(true);
   }
 
   addCount() {
@@ -65,11 +66,8 @@ class BridgeGame {
     return [this.Player, this.Bridge];
   }
 
-  getPlayer() {
-    return this.Player;
-  }
-  getBridge() {
-    return this.Bridge;
+  getIsGameOver() {
+    return this.Player.getIsGameOver();
   }
   getIsWinnging() {
     return this.Player.getIsWinnging();
