@@ -5,10 +5,14 @@ class BridgeGame {
   #playerUp;
   #playerDown;
   #playerMoveResult;
+  #finishCheck;
+  #i;
 
   constructor(){
     this.#playerDown = [];
     this.#playerUp = [];
+    this.#finishCheck=0;
+    this.#i=0
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -16,23 +20,27 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(playerMoveList,bridgeList) {
-    let i=0;
     playerMoveList.map((move)=>{
-      this.moveCompareUpDown(bridgeList, move, i)
-      i++;
+      console.log(bridgeList)
+      this.moveCompareUpDown(bridgeList, move)
+      this.#i++;
     })
     this.#playerMoveResult="[ "+this.#playerUp.join(' | ')+" ]\n"+"[ "+this.#playerDown.join(' | ')+" ]";
     return this.#playerMoveResult
   }
 
-  moveCompareUpDown(bridgeList, move, i){
+  moveCompareUpDown(bridgeList, move){
     if(move==='U'){
-      bridgeList[i] === move ? this.#playerUp.push('O') : this.#playerUp.push('X');
+      bridgeList[this.#i] === move ? this.#playerUp.push('O') : this.#playerUp.push('X');
       this.#playerDown.push(" ");
     }else if(move==='D'){
-      bridgeList[i] === move ? this.#playerDown.push('O') : this.#playerDown.push('X');
+      bridgeList[this.#i] === move ? this.#playerDown.push('O') : this.#playerDown.push('X');
       this.#playerUp.push(" ");
     }
+  }
+
+  moveFinishCheck(playerMoveLength, size){
+    return playerMoveLength === Number(size);
   }
 
   /**
