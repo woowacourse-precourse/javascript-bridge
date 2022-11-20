@@ -3,9 +3,13 @@
  */
 class BridgeGame {
   #turn;
+  #upperBridge;
+  #lowerBridge;
 
   init() {
     this.#turn = 0;
+    this.#upperBridge = [];
+    this.#lowerBridge = [];
   }
 
   /**
@@ -18,8 +22,35 @@ class BridgeGame {
     const STOP = 'X';
     const crossable = bridge[this.#turn];
     this.#turn += 1;
-    if (input === crossable) return GO;
-    return STOP;
+    if (input === crossable) this.isFirst(GO, crossable);
+    if (input !== crossable) this.isFirst(STOP, crossable);
+  }
+
+  isFirst(state, crossable) {
+    if (this.#turn === 0) this.firstBlock(state, crossable);
+    if (this.#turn !== 0) this.afterFirstBlock(state, crossable);
+  }
+
+  firstBlock(state, crossable) {
+    if (state === 'O' && crossable === 'U') {
+      this.#upperBridge.push(` ${state} `);
+      this.#lowerBridge.push('   ');
+    }
+    if (state === 'O' && crossable === 'D') {
+      this.#upperBridge.push('   ');
+      this.#lowerBridge.push(` ${state} `);
+    }
+  }
+
+  afterFirstBlock(state, crossable) {
+    if (crossable === 'U') {
+      this.#upperBridge.push(`| ${state} `);
+      this.#lowerBridge.push('|   ');
+    }
+    if (crossable === 'D') {
+      this.#upperBridge.push('|   ');
+      this.#lowerBridge.push(`| ${state} `);
+    }
   }
 
   /**
