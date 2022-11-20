@@ -42,8 +42,10 @@ class Bridge {
   updateMap(index, command, comparison) {
     if (command === 'U') {
       this.#map.up[index] = comparison ? 'O' : 'X';
+      this.#map.down[index] = '';
     }
     if (command === 'D') {
+      this.#map.up[index] = '';
       this.#map.down[index] = comparison ? 'O' : 'X';
     }
   }

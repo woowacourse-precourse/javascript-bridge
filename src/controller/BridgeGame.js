@@ -1,6 +1,7 @@
+const MissionUtils = require('@woowacourse/mission-utils');
 const Bridge = require('../model/Bridge');
 const { readBridgeSize, readMoving, readGameCommand } = require('../view/InputView');
-const { printGameStart } = require('../view/OutputView');
+const { printGameStart, printResult } = require('../view/OutputView');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -14,7 +15,9 @@ class BridgeGame {
     printGameStart();
     this.#bridge = new Bridge(await readBridgeSize());
     const result = await this.move(0, await readMoving());
-    console.log(result);
+    if (result) {
+      this.quitGame(true);
+    }
   }
 
   /**
@@ -25,12 +28,12 @@ class BridgeGame {
   async move(level, command) {
     const result = this.#bridge.checkBridge(level, command);
     if (result && level === this.#bridge.getLength() - 1) {
-      return 'WIN';
+      return true;
     }
     if (result) {
       return this.move(level + 1, await readMoving());
     }
-    return this.retry();
+    return this.retry(level);
   }
 
   /**
@@ -38,15 +41,20 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  async retry() {
+  async retry(level) {
     const command = await readGameCommand();
     if (command === 'R') {
-      return command;
+      return this.move(level, await readMoving());
     }
     if (command === 'Q') {
-      return command;
+      this.quitGame(false);
     }
-    return command;
+    return null;
+  }
+
+  quitGame(result) {
+    printResult(result);
+    MissionUtils.Console.close();
   }
 }
 
