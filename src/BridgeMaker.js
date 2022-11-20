@@ -1,3 +1,5 @@
+const { NUMBER, COMMAND, } = require('./BridgeConstant');
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -10,8 +12,8 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     while(size > bridge.length){
-      if(generateRandomNumber() === 1) bridge.push('U');
-      if(generateRandomNumber() === 0) bridge.push('D');
+      if(generateRandomNumber() === NUMBER.RANDOM_UPPER_INCLUSIVE) bridge.push(COMMAND.UP);
+      if(generateRandomNumber() === NUMBER.RANDOM_LOWER_INCLUSIVE) bridge.push(COMMAND.DOWN);
     }
     return bridge;
   },
