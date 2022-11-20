@@ -20,17 +20,17 @@ class BridgeGame {
     if (nextStep === 'U') {
       UBlock.push('X');
       DBlock.push(' ');
-      return [UBlock, DBlock];
     }
     if (nextStep === 'D') {
       UBlock.push(' ');
       DBlock.push('X');
-      return [UBlock, DBlock];
     }
+    return [UBlock, DBlock];
   }
 
   getUBlock() {
     let UBlock = [];
+
     for (let i = 0; i < this.#marker; i++) {
       if (this.#bridge[i] === 'U') UBlock.push('O');
       if (this.#bridge[i] === 'D') UBlock.push(' ');
@@ -40,6 +40,7 @@ class BridgeGame {
 
   getDBlock() {
     let DBlock = [];
+
     for (let i = 0; i < this.#marker; i++) {
       if (this.#bridge[i] === 'D') DBlock.push('O');
       if (this.#bridge[i] === 'U') DBlock.push(' ');
