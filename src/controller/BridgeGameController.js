@@ -23,6 +23,11 @@ class BrideGameController {
   }
 
   handleGameStartPhase(size) {
+    try {
+      this.validator.checkBridgeLengthInput(size);
+    } catch (error) {
+      this.readBridgeSizePhase();
+    }
     this.generateBridgeGame(size);
     OutputView.printNewLine();
     this.readMovingPhase();
