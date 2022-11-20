@@ -30,3 +30,17 @@ describe('다리 길이 입력 테스트', () => {
     expect(InputView.readBridgeSize).toThrow('[ERROR]');
   });
 });
+
+describe('이동 방향 입력 테스트', () => {
+  test.each([[['U']], [['D']]])('정상', (input) => {
+    mockQuestions(input);
+    expect(InputView.readMoving()).toEqual(input[0]);
+  });
+
+  test.each([
+    [['0x44']], [['U+0044']], [['d']], [['DDD']], [['UD']], [[' ']], [['121687']]
+  ])('예외', (input) => {
+    mockQuestions(input);
+    expect(InputView.readMoving).toThrow('[ERROR]');
+  });
+});
