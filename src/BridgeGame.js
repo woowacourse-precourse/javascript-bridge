@@ -1,7 +1,12 @@
 const BridgeMap = require('./BridgeMap');
 const { readGameCommand, readMoving } = require('./InputView');
 const { printResult, printMap, printError } = require('./OutputView');
-const { isRightUserMove, isRightUserCommand } = require('./Validation');
+const {
+  isRightUserMove,
+  isRightUserCommand,
+  isCurrentLastIndexValueSame,
+  isLengthSame,
+} = require('./Validation');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -47,9 +52,8 @@ class BridgeGame {
   }
 
   checkResult() {
-    const currentBridge = this.#bridge.slice(0, this.#userMove.length);
-    if (currentBridge.toString() === this.#userMove.toString()) {
-      if (this.#userMove.length === this.#bridge.length) {
+    if (isCurrentLastIndexValueSame(this.#bridge, this.#userMove)) {
+      if (isLengthSame(this.#bridge, this.#userMove)) {
         this.#isSuccess = true;
         return this.end();
       }
