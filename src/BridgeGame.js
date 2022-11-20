@@ -17,28 +17,28 @@ class BridgeGame {
 
     move(move) {
         const isKeyUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
-        this.setGoodMove(isKeyUp);
-    }
-
-    setGoodMove(isKeyUp) {
         this.#bridgeCount++;
         this.pushBridgeHistory(isKeyUp, STRUCTURE.GOOD);
         printMap(this.#bridgeHistory);
     }
 
-    pushBridgeHistory(isUpKey, structureStatus) {
-        if (isUpKey) {
+    pushBridgeHistory(isKeyUp, structureStatus) {
+        if (isKeyUp) {
             this.#bridgeHistory.push([structureStatus, STRUCTURE.BLANK]);
         }
-        if (!isUpKey) {
+        if (!isKeyUp) {
             this.#bridgeHistory.push([STRUCTURE.BLANK, structureStatus]);
         }
     }
 
     isBadMove(move) {
-        const isBadKeyUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.DOWN;
-        const isBadKeyDown = move === KEY.DOWN && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
-        return isBadKeyUp || isBadKeyDown === true;
+        const isKeyBadUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.DOWN;
+        const isKeyBadDown = move === KEY.DOWN && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
+        if (isKeyBadUp || isKeyBadDown) {
+            this.pushBridgeHistory(isKeyBadUp, STRUCTURE.BAD);
+            printMap(this.#bridgeHistory);
+            return true;
+        }
     }
 
     isSuccess(move) {
@@ -54,12 +54,6 @@ class BridgeGame {
             this.resetBridgeSetting();
             return true;
         }
-    }
-
-    showFailBridge(move) {
-        const isKeyUp = move === KEY.UP;
-        this.pushBridgeHistory(isKeyUp, STRUCTURE.BAD);
-        printMap(this.#bridgeHistory);
     }
 
     showResult(result) {
