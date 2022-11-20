@@ -1,4 +1,4 @@
-const { COMMAND, ERROR } = require('./utils/constants');
+const { COMMAND } = require('./utils/constants');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const Bridge = require('./model/Bridge');
@@ -7,7 +7,6 @@ const Map = require('./model/Map');
 const Result = require('./model/Result');
 
 class GameController {
-  #bridge;
   #bridgeGame;
   #map;
   #result;
@@ -18,36 +17,18 @@ class GameController {
   }
 
   load() {
-    InputView.readBridgeSize(this.setBridge.bind(this));
+    InputView.readBridgeSize(this.setBridgeGame.bind(this));
   }
 
-  setBridge(size) {
-    try {
-      this.#bridge = new Bridge(size);
-    } catch (error) {
-      OutputView.printError(error.message);
-      InputView.readBridgeSize(this.setBridge.bind(this));
-    }
+  setBridgeGame({ command }) {
+    this.#bridgeGame = new BridgeGame(new Bridge(command));
 
-    this.#bridgeGame = new BridgeGame(this.#bridge);
-    InputView.readMoving(this.validateMoving.bind(this));
+    InputView.readMoving(this.playGame.bind(this));
   }
 
-  validateMoving(moving) {
-    try {
-      if (moving !== 'U' && moving !== 'D') {
-        throw new Error(ERROR.read_moving_error);
-      }
-      this.playGame(moving);
-    } catch (error) {
-      OutputView.printError(error.message);
-      InputView.readMoving(this.validateMoving.bind(this));
-    }
-  }
-
-  playGame(moving) {
-    const { moveSuccess, isEndOfBridge } = this.#bridgeGame.move(moving);
-    OutputView.printMap(this.#map.updateMap(moving, moveSuccess));
+  playGame({ command }) {
+    const { moveSuccess, isEndOfBridge } = this.#bridgeGame.move(command);
+    OutputView.printMap(this.#map.updateMap(command, moveSuccess));
 
     if (moveSuccess) {
       this.handleMoveSuccess(isEndOfBridge);
@@ -61,36 +42,32 @@ class GameController {
       OutputView.printResult(this.#map.getMap(), this.#result.updateResult(true));
       InputView.closeView();
     } else {
-      InputView.readMoving(this.validateMoving.bind(this));
+      InputView.readMoving(this.playGame.bind(this));
     }
   }
 
   handleMoveFail() {
-    InputView.readGameCommand(this.validateGameCommand.bind(this));
+    InputView.readGameCommand(this.handleGameCommand.bind(this));
   }
 
-  validateGameCommand(gameCommand) {
-    try {
-      if (gameCommand !== COMMAND.restart && gameCommand !== COMMAND.quit) {
-        throw new Error(ERROR.read_command_error);
-      }
-      this.handleGameCommand(gameCommand);
-    } catch (error) {
-      OutputView.printError(error.message);
-      InputView.readGameCommand(this.validateGameCommand.bind(this));
-    }
-  }
-
-  handleGameCommand(command) {
+  handleGameCommand({ command }) {
     if (command === COMMAND.restart) {
-      this.#result.updateTryCount();
-      this.#bridgeGame.retry();
-      this.#map.resetMap();
-      InputView.readMoving(this.validateMoving.bind(this));
+      this.handleRestart();
     } else if (command === COMMAND.quit) {
-      OutputView.printResult(this.#map.getMap(), this.#result.updateResult(false));
-      InputView.closeView();
+      this.handleQuit();
     }
+  }
+
+  handleRestart() {
+    this.#result.updateTryCount();
+    this.#bridgeGame.retry();
+    this.#map.resetMap();
+    InputView.readMoving(this.playGame.bind(this));
+  }
+
+  handleQuit() {
+    OutputView.printResult(this.#map.getMap(), this.#result.updateResult(false));
+    InputView.closeView();
   }
 }
 
