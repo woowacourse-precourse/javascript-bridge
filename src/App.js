@@ -40,10 +40,21 @@ class App {
       return;
     }
     if (result === "실패") {
-      InputView.readGameCommand(/** */);
+      InputView.readGameCommand(this.tryRetry.bind(this));
       return;
     }
     InputView.readMoving(this.tryMove.bind(this));
+  }
+
+  tryRetry(input) {
+    try {
+      const retry = this.#bridgeGame.retry(input);
+      if (retry) InputView.readMoving(this.tryMove.bind(this));
+      if (!retry) OutputView.printResult(this.#bridgeGame);
+    } catch ({ message }) {
+      Console.print(message);
+      InputView.readGameCommand(this.tryRetry.bind(this));
+    }
   }
 }
 
