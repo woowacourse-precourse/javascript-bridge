@@ -27,6 +27,12 @@ const BridgeGameModel = class {
     return data;
   }
 
+  isRetry() {
+    const attempt = this.#attempt[this.#attempt.length - 1];
+    const { RETRY } = KEYWORD;
+    return attempt === RETRY;
+  }
+
   isSuccess() {
     return JSON.stringify(this.#user) === JSON.stringify(this.#bridge);
   }
