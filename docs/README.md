@@ -222,8 +222,9 @@ const number = generateRandomNumber();
 - [x] test: InputView.js 테스트 코드 작성
   - readBridgeSize 메서드 테스트 코드를 작성한다.
   - readMoving 메서드 테스트 코드를 작성한다.
-- [ ] test: OutPutView.js 테스트 코드 작성
+- [x] test: OutPutView.js 테스트 코드 작성
   - printMap 메서드 테스트 코드를 작성한다.
+  - printResult 메서드 테스트 코드를 작성한다.
 - [ ] test: Validation.js 테스트 코드 작성
 
 ---
