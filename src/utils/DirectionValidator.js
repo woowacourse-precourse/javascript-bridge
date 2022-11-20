@@ -1,6 +1,8 @@
+const { ERROR_MESSAGE } = require("../constants/message");
+
 class DirectionValidator {
   static validate(letter) {
-    if (!this.#isLetterUorD(letter)) throw new Error("[ERROR] 방향은 U와 D만 입력할 수 있습니다.");
+    if (!this.#isLetterUorD(letter)) throw new Error(ERROR_MESSAGE.NOT_VALID_DIRECTION);
   }
   static #isLetterUorD(letter) {
     return letter === "U" || letter === "D";

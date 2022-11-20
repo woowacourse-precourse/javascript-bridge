@@ -5,7 +5,7 @@ const generateRandomNumber = require("./BridgeRandomNumberGenerator").generate;
 const { close } = require("./utils/utils");
 const BridgegLengthValidator = require("./utils/BridgeLengthValidator");
 const DirectionValidator = require("./utils/DirectionValidator");
-const { STATE } = require("./constants/constants");
+const { STATE } = require("./constants/message");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
