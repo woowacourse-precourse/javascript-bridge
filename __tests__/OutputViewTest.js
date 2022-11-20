@@ -46,5 +46,9 @@ describe('메시지 출력 기능 단위 테스트', () => {
         const testMessage = OutputView.printBlank();
         const correctMessage = Console.print('');
         expect(testMessage).toEqual(correctMessage);
+    });
+    it('최종 결과 출력시 타이틀 출력',() => {
+        const testMessage = OutputView.printResultTitle();
+        const correctMessage = Console.print('최종 게임 결과');
     })
 });
