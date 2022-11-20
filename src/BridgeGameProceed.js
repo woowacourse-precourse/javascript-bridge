@@ -23,24 +23,38 @@ class BridgeGameProceed {
 
     start() {
         OutputView.printStart();
-        InputView.readBridgeSize((bridgeLength) => {
+        InputView.readBridgeSize(this.makeMap.bind(this));
+    }
+
+    makeMap(bridgeLength) {
+        try {
             Console.print('');
             Validation.bridgeLength(bridgeLength);
             this.#winBridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
             console.log(this.#winBridge);
             this.game();
-        });
+        } catch (error) {
+            Console.print(error.message);
+            return ;
+        }
     }
 
     game() {
-        InputView.readMoving((nextStep) => {
+        InputView.readMoving(this.playerMove.bind(this));
+    }
+
+    playerMove(nextStep) {
+        try {
             Validation.nextStep(nextStep);
             this.#playersBridge.push(nextStep);
             const result = this.bridge();
 
             this.dividePath(result);
             this.game();
-        });
+        } catch (error) {
+            Console.print(error.message);
+            return this.game();
+        }
     }
 
     dividePath(result) {
@@ -70,6 +84,19 @@ class BridgeGameProceed {
             if (retryOrNot === "Q") this.BridgeGame.retry(result); 
         })     
     }
+
+    // gameOverChoice(retryOrNot) {
+    //     try {
+    //         Validation.retry(retryOrNot);
+    //         if (retryOrNot === "R") {
+    //             this.#playersBridge = [];
+    //             return this.game();
+    //         }
+    //         if (retryOrNot === "Q") this.BridgeGame.retry(result); 
+    //     } catch (error) {
+    //         Console.print(error.message);
+    //     }
+    // }
 
     win(result) {
         OutputView.printResult()
