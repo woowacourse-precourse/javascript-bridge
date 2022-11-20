@@ -12,4 +12,9 @@ const isUserMovingInputValid = (input) => {
     throw new Error('[ERROR] 올바른 명령어를 입력하세요.');
   }
 };
-module.exports = { isBridgeSizeValid, isUserMovingInputValid };
+const isGameCommandValid = (input) => {
+  if (input !== 'R' && input !== 'Q') {
+    throw new Error('[ERROR] 올바른 명령어를 입력하세요.');
+  }
+};
+module.exports = { isBridgeSizeValid, isUserMovingInputValid, isGameCommandValid };
