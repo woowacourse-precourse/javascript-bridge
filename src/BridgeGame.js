@@ -2,9 +2,8 @@
 
 const Bridge = require('./Bridge');
 const Path = require('./Path');
-const StatusGenerator = require('./StatusGenerator');
 const Validator = require('./utils/Validator');
-const { COMMAND, COMMAND_TYPE } = require('./utils/const');
+const { COMMAND, COMMAND_TYPE, STATUS } = require('./utils/const');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -13,7 +12,6 @@ class BridgeGame {
   #bridge;
   #path;
   #count;
-  #isSuccess;
 
   /**
    * @param {string} bridgeSize
@@ -22,7 +20,6 @@ class BridgeGame {
     this.#bridge = new Bridge(bridgeSize);
     this.#path = new Path();
     this.#count = 1;
-    this.#isSuccess = false;
   }
 
   /**
@@ -33,12 +30,11 @@ class BridgeGame {
   move(moving) {
     const currentPath = this.#path.push(moving);
     const isCorrect = this.#bridge.isCorrect(currentPath);
-    const isLast = this.#bridge.isLast(currentPath);
+    const status = this.#bridge.compare(currentPath);
 
     this.#path.markOX(isCorrect);
-    this.#isSuccess = isCorrect && isLast;
 
-    return StatusGenerator.generate(isCorrect, isLast);
+    return status;
   }
 
   /**
@@ -60,8 +56,10 @@ class BridgeGame {
 
   getResultInfo() {
     const count = this.#count;
-    const pathMap = this.getPathMap();
-    const isSuccess = this.#isSuccess;
+    const pathMap = this.#path.getPathMap();
+    const currentPath = this.#path.getPath();
+    const status = this.#bridge.compare(currentPath);
+    const isSuccess = status === STATUS.SUCCESS;
 
     return { count, pathMap, isSuccess };
   }

@@ -10,6 +10,10 @@ class Path {
     this.#pathMap = new Array(2).fill(0).map(() => ['']);
   }
 
+  /**
+   * @param {string} moving
+   * @returns {string[]}
+   */
   push(moving) {
     this.validate(moving);
     this.#path.push(moving);
@@ -61,6 +65,13 @@ class Path {
    */
   getPathMap() {
     return this.#pathMap;
+  }
+
+  /**
+   * @returns {string[]}
+   */
+  getPath() {
+    return this.#path;
   }
 }
 

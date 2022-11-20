@@ -60,6 +60,7 @@ class App {
 
   quitGame() {
     const { count, isSuccess, pathMap } = this.#bridgeGame.getResultInfo();
+
     OutputView.printResult(pathMap, isSuccess, count);
     MissionUtils.Console.close();
   }
