@@ -20,8 +20,8 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
       drawSize: 1,
       roundResult: MOVE_RESULT.FAIL,
       answer: Trimmer.templateTrim(`
-        [   ]
         [ X ]
+        [   ]
       `),
     },
     {
@@ -38,8 +38,8 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
       drawSize: 2,
       roundResult: MOVE_RESULT.FAIL,
       answer: Trimmer.templateTrim(`
-        [   | X ]
-        [ O |   ]
+        [   |   ]
+        [ O | X ]
       `),
     },
     {
@@ -47,8 +47,8 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
       drawSize: 5,
       roundResult: MOVE_RESULT.FAIL,
       answer: Trimmer.templateTrim(`
-        [ O | O |   |   | X ]
-        [   |   | O | O |   ]
+        [ O | O |   |   |   ]
+        [   |   | O | O | X ]
       `),
     },
     {
@@ -56,8 +56,8 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
       drawSize: 5,
       roundResult: MOVE_RESULT.FAIL,
       answer: Trimmer.templateTrim(`
-        [ O | O | O | O | X ]
-        [   |   |   |   |   ]
+        [ O | O | O | O |   ]
+        [   |   |   |   | X ]
       `),
     },
     {
@@ -95,8 +95,8 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
       drawSize: 20,
       roundResult: MOVE_RESULT.FAIL,
       answer: Trimmer.templateTrim(`
-        [   | O |   | O | O |   | O |   |   | O |   |   | O | O |   | O | O |   | O |   ]
-        [ O |   | O |   |   | O |   | O | O |   | O | O |   |   | O |   |   | O |   | X ]
+        [   | O |   | O | O |   | O |   |   | O |   |   | O | O |   | O | O |   | O | X ]
+        [ O |   | O |   |   | O |   | O | O |   | O | O |   |   | O |   |   | O |   |   ]
       `),
     },
     {
@@ -143,8 +143,8 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
       drawSize: 7,
       roundResult: MOVE_RESULT.FAIL,
       answer: Trimmer.templateTrim(`
-        [   |   |   |   | O | O | X ]
-        [ O | O | O | O |   |   |   ]
+        [   |   |   |   | O | O |   ]
+        [ O | O | O | O |   |   | X ]
       `),
     },
   ])('', ({ bridge, drawSize, roundResult, answer }) => {
