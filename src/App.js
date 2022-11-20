@@ -40,31 +40,37 @@ class App {
 
   moveBridge(userMove) {
     const move = this.bridgeGame.move(this.bridge, userMove);
-    const bridge = this.bridgeGame.getBridge();
+    const bridges = this.bridgeGame.getBridges();
 
-    move;
-    printMap(bridge);
-
-    this.checkContinue(move, bridge);
+    printMap(bridges);
+    this.checkComplete(move, bridges);
   }
 
-  checkContinue(move, bridge) {
+  checkComplete(move, bridges) {
+    const step = this.bridgeGame.getStep();
+
+    if (move === true && this.bridge.length === step)
+      this.successQuitGame(bridges);
+    else this.checkContinue(move, bridges);
+  }
+
+  checkContinue(move, bridges) {
     if (move === true) this.getUserMoving();
-    if (move === false) this.getUserRetry(bridge);
+    if (move === false) this.getUserRetry(bridges);
   }
 
-  getUserRetry(bridge) {
+  getUserRetry(bridges) {
     readGameCommand((userRetry) => {
       checkRetryString(userRetry);
-      this.checkRetry(userRetry, bridge);
+      this.checkRetry(userRetry, bridges);
     });
   }
 
-  checkRetry(userRetry, bridge) {
+  checkRetry(userRetry, bridges) {
     const retry = this.bridgeGame.retry(userRetry);
 
     if (retry === true) this.retryGame();
-    if (retry === false) this.quitGame(bridge);
+    if (retry === false) this.failQuitGame(bridges);
   }
 
   retryGame() {
@@ -72,9 +78,14 @@ class App {
     this.getUserMoving();
   }
 
-  quitGame(bridge) {
+  successQuitGame(bridges) {
     const tryCount = this.bridgeGame.getTryCount();
-    printResult(bridge, FAIL, tryCount);
+    printResult(bridges, SUCCESS, tryCount);
+  }
+
+  failQuitGame(bridges) {
+    const tryCount = this.bridgeGame.getTryCount();
+    printResult(bridges, FAIL, tryCount);
   }
 }
 

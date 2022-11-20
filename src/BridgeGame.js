@@ -61,7 +61,7 @@ class BridgeGame {
     return this.tryCount;
   }
 
-  getBridge() {
+  getBridges() {
     const bridge = [this.upBridge, this.downBridge];
     return bridge;
   }
