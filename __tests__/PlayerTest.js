@@ -22,7 +22,7 @@ describe("플레이어 클래스 테스트", () => {
     expect(playerPosition).toEqual(5);
   });
 
-  test("플레이어가 두 번 이동했다면 플레이어의 위치는 2", () => {
+  test("플레이어가 두 번 이동했을 때 지도 가져오기", () => {
     const player = new Player();
     player.move("U");
     player.move("D");
@@ -32,7 +32,7 @@ describe("플레이어 클래스 테스트", () => {
     expect(lowerBridge).toEqual("[   | O ]");
   });
 
-  test("플레이어가 두 번 이동했다면 플레이어의 위치는 2", () => {
+  test("플레이어가 다섯 번 이동했을 때 지도 가져오기", () => {
     const player = new Player();
     player.move("U");
     player.move("D");
@@ -43,5 +43,30 @@ describe("플레이어 클래스 테스트", () => {
     const [upperBridge, lowerBridge] = player.getMap();
     expect(upperBridge).toEqual("[ O |   | O | O | O ]");
     expect(lowerBridge).toEqual("[   | O |   |   |   ]");
+  });
+
+  test("플레이어가 두 번 이동, 아웃 되었을 때 지도 가져오기", () => {
+    const player = new Player();
+    player.move("U");
+    player.move("D");
+    player.out("U");
+
+    const [upperBridge, lowerBridge] = player.getMap();
+    expect(upperBridge).toEqual("[ O |   | X ]");
+    expect(lowerBridge).toEqual("[   | O |   ]");
+  });
+
+  test("플레이어가 다섯 번 이동, 아웃 되었을 때 지도 가져오기", () => {
+    const player = new Player();
+    player.move("U");
+    player.move("D");
+    player.move("U");
+    player.move("U");
+    player.move("U");
+    player.out("D");
+
+    const [upperBridge, lowerBridge] = player.getMap();
+    expect(upperBridge).toEqual("[ O |   | O | O | O |   ]");
+    expect(lowerBridge).toEqual("[   | O |   |   |   | X ]");
   });
 });
