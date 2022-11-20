@@ -2,6 +2,7 @@ const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const { makeRandomNumber } = require('./utils/util');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 /**
  * 다리 건너기 게임 진행을 관리하는 클래스
@@ -18,7 +19,8 @@ class BridgeGamePlay {
    */
   start() {
     OutputView.printStart();
-    this.bridgeSize = InputView.readBridgeSize();
+    // this.bridgeSize = InputView.readBridgeSize();
+    this.bridgeSize = InputView.getBridgeSize();
     this.makeBridge();
   }
 
@@ -26,11 +28,11 @@ class BridgeGamePlay {
    * 다리 생성
    */
   makeBridge() {
-    this.bridge = BridgeMaker.makeBridge(this.bridgeSize, makeRandomNumber());
+    this.bridge = BridgeMaker.makeBridge(this.bridgeSize, BridgeRandomNumberGenerator.generate);
   }
 
   /**
-   * 게임 진행
+   * 게임 한 판 진행
    */
   playGame() {
     this.tryCount += 1;

@@ -2,6 +2,7 @@ const { readLine } = require('./utils/util');
 const { BRIDGE_SIZE, MOVE, PLAY } = require('./constant/constant');
 const MESSAGE = require('./constant/message');
 const Validate = require('./utils/validate');
+const { print } = require('./utils/util');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -13,9 +14,7 @@ const InputView = {
   readBridgeSize() {
     let bridgeSize;
     readLine(MESSAGE.INPUT.BRIDGE_SIZE, (input) => {
-      Validate.notNumber(input);
       bridgeSize = Number(input);
-      Validate.notInRange(bridgeSize, BRIDGE_SIZE.MAXIMUM, BRIDGE_SIZE.MINIMUM);
     });
     return bridgeSize;
   },
@@ -42,6 +41,20 @@ const InputView = {
       restartOrQuit = input;
     });
     return restartOrQuit;
+  },
+
+  /**
+   * 다리의 길이가 제대로 될 때까지 입력받는다.
+   */
+  getBridgeSize() {
+    const bridgeSize = this.readBridgeSize();
+    if (
+      Validate.notNumber(bridgeSize) &&
+      Validate.notInRange(bridgeSize, BRIDGE_SIZE.MAXIMUM, BRIDGE_SIZE.MINIMUM)
+    ) {
+      return bridgeSize;
+    }
+    this.getBridgeSize();
   },
 };
 
