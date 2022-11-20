@@ -17,14 +17,15 @@ const InputView = {
         BridgeRandomNumberGenerator.generate
       );
       let bridgeList = [[], []];
-      this.readMoving(bridge, bridgeList);
+      let attempts = 1;
+      this.readMoving(bridge, bridgeList, attempts);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge, bridgeList) {
+  readMoving(bridge, bridgeList, attempts) {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (inputBridgeChoice) => {
@@ -36,9 +37,9 @@ const InputView = {
           bridgeList
         );
         if (movingResult[0].includes("X") || movingResult[1].includes("X")) {
-          return this.readGameCommand(bridge);
+          return this.readGameCommand(bridge, attempts);
         }
-        return this.readMoving(bridge, movingResult);
+        return this.readMoving(bridge, movingResult, attempts);
       }
     );
   },
@@ -46,7 +47,7 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge) {
+  readGameCommand(bridge, attempts) {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (choice) => {
@@ -56,12 +57,13 @@ const InputView = {
         const quit = "Q";
 
         if (choice === restart) {
+          attempts += 1;
           const bridgeGame = new BridgeGame();
           const resetBridgeList = bridgeGame.retry(bridge);
-          return this.readMoving(bridge, resetBridgeList);
+          return this.readMoving(bridge, resetBridgeList, attempts);
         }
         if (choice === quit) {
-          Console.print("게임 종료");
+          OutputView.printResult(attempts);
         }
       }
     );
