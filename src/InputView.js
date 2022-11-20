@@ -17,7 +17,7 @@ const InputView = {
     });
   },
 
-  readGameCommand() {
+  readGameCommand(process) {
     Console.readLine(GAME.RETRY, (input) => {
       Validation.gameCommand(input);
       process.retryOrQuit(input);

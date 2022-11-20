@@ -39,6 +39,14 @@ class Process {
   makeResult(input) {
     this.#result.push([input, this.#game.isAccord(input)]);
   }
+
+  retryOrQuit(input) {
+    if (input === 'R') {
+      this.#game.retry();
+      this.#result = [];
+      InputView.readMoving(this);
+    }
+  }
 }
 
 module.exports = Process;
