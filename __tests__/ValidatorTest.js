@@ -19,9 +19,17 @@ describe("checkBridgeSizeValid 테스트", () => {
 });
 
 describe("checkMovingValid 테스트", () => {
-  test("플레이어가 이동할 칸이 U 또는 R이 아니라면 예외가 발생한다.", () => {
+  test("플레이어의 입력 값이 U 또는 R이 아니라면 예외가 발생한다.", () => {
     expect(() => {
       Validator.checkMovingValid("u");
+    }).toThrow("[ERROR]");
+  });
+});
+
+describe("checkCommandValid 테스트", () => {
+  test("플레이어의 입력 값이 R 또는 Q가 아니라면 예외가 발생한다.", () => {
+    expect(() => {
+      Validator.checkCommandValid("r");
     }).toThrow("[ERROR]");
   });
 });
