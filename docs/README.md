@@ -41,3 +41,11 @@
     - [x] Q로 마무리되는 경우 시도횟수 - 1
     
 - [x] **단위테스트 진행**
+  - [x] Validation Test
+    - [x] Exception test
+    - [x] Restart or Success test
+      - [x] Move done test
+  - [x] Print Test
+  - [x] Game Test
+    - [x] Move Test
+  
