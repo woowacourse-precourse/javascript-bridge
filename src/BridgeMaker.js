@@ -15,7 +15,6 @@ const BridgeMaker = {
       bridge.push(["D", "U"][number]);
     }
 
-    Console.print(bridge);
     return bridge;
   },
 };
