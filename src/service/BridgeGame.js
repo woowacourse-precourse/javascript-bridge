@@ -1,5 +1,5 @@
-const { MAP_ELEMENT } = require('./constant');
-const BridgeMap = require('./models/BridgeMap');
+const { MAP_ELEMENT, COMMAND } = require('../constant');
+const BridgeMap = require('../models/BridgeMap');
 
 class BridgeGame {
   #bridge;
@@ -30,7 +30,7 @@ class BridgeGame {
   }
 
   retry(command) {
-    const shouldRetry = command === 'R';
+    const shouldRetry = command === COMMAND.RETRY;
     if (shouldRetry) {
       this.#numberOfAttempts += 1;
       this.#curTargetCell = 0;
