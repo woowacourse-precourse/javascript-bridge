@@ -1,7 +1,7 @@
 # 기능 구현 체크리스트 ☑️☐
-☐ 1. inputView 객체에서 readBrigeSize() 메서드를 이용하여 사용자에게 다리의 길이를 받는다.
-☐ 2. BridgeRandomNumber객체에서 무작위로 0과 1를 저장하는 메서드를 구현한다
-☐ 3. BridgeMaker 객체에서 다리의 길이만큼(inputView.readBrigeSize()) 0과 1이 채워진 변수를 저장한다.
+☑️ 1. inputView 객체에서 readBridgeSize() 메서드를 이용하여 사용자에게 다리의 길이를 받는다.
+☑️ 2. BridgeRandomNumber객체에서 무작위로 0과 1를 저장하는 메서드를 구현한다
+☑️ 3. BridgeMaker 객체에서 다리의 길이만큼(inputView.readBridgeSize()) 0과 1를 무작위로 받아 "U" 또는 "D"로 다리건너기 정답리스트를 만든다.
 ☐ 4. inputView 객체에서 readMoving() 메서드를 이용하여 사용자에게 U 또는 D 값을 받는다.
 ☐ 5. BridgeGame객체에서 move 메서드를 이용하여 사용자 값을 저장한다.
 ☐ 6. 결과 값을 표시한다.
