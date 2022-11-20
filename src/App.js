@@ -4,37 +4,53 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame');
 
 class App {
+  #isNotFinish = true;
+
   play() {
-    const bridgeSize = InputView.readBridgeSize();
+    InputView.readBridgeSize(this.#playCallback.bind(this));
+  }
+  #playCallback(bridgeSize) {
     const bridge = BridgeMaker.makeBridge(
       bridgeSize,
       BridgeRandomNumberGenerator.generate,
     );
     const bridgeGame = new BridgeGame(bridge);
-    while (!this.#start(bridgeGame));
+    while (this.#isNotFinish) {
+      this.#start(bridgeGame)
+    };
   }
 
   #start(bridgeGame) {
-    const nextMoveChar = InputView.readMoving();
+    InputView.readMoving(bridgeGame, this.#startCallback.bind(this));
+  }
+  #startCallback(bridgeGame, nextMoveChar) {
     bridgeGame.move(nextMoveChar);
     OutputView.printMap(bridgeGame);
     if (bridgeGame.isFinish) {
-     return this.#finish(bridgeGame);
+      this.#finish(bridgeGame);
     }
   }
   
   #finish(bridgeGame) {
     if(bridgeGame.isSuccess) {
       OutputView.printResult(bridgeGame);
-      return true;
+      this.#isNotFinish = false;
+      return;
     }
-    const gameCommand = InputView.readGameCommand();
+
+    InputView.readGameCommand(bridgeGame, this.#finishCallback.bind(this));
+  }
+  #finishCallback(bridgeGame, gameCommand) {
     const isRetry = bridgeGame.retry(gameCommand);
     if(!isRetry) {
       OutputView.printResult(bridgeGame);
     }
-    return isRetry;
+
+    this.#isNotFinish = isRetry;
   }
 }
 
 module.exports = App;
+
+
+new App().play();
