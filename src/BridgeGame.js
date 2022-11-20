@@ -44,13 +44,15 @@ class BridgeGame {
     }
   }
 
+  // 리팩토링 사항
   async controlMoving() {
     const until = this.gameResult.size;
 
     let current = 0;
     while (current < until) {
-      const direction = await this.getMovingDirection();
-      const moved = await this.move(current, direction);
+      const moved = await this.move(current);
+      this.gameResult.printHistory();
+
       if (moved) current += 1;
       if (current === until) break;
     }
@@ -58,15 +60,15 @@ class BridgeGame {
     return console.log('게임 성공!!!');
   }
 
-  /***
-   ** 사용자가 칸을 이동할 때 사용하는 메서드*
-   ** <p>*
-   ** 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.*
-   **/
-  async move(current, direction) {
+  // 리팩토링 사항
+  async move(current) {
+    const direction = await this.getMovingDirection();
     const moved = this.gameResult.calculateMatch(current, direction);
+
     return moved;
   }
+
+  async retry() {}
 }
 
 module.exports = BridgeGame;
