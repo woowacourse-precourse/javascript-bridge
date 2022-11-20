@@ -6,12 +6,15 @@ const MESSAGE_PROCESS = Object.freeze({
 });
 
 const MESSAGE_ERROR = Object.freeze({
+    BRIDGE_NOT_EMPTY: "[ERROR] 다리의 길이는 공백일 수 없습니다.",
     BRIDGE_ONLY_NUMBER: "[ERROR] 다리의 길이는 숫자로만 이루어져야 합니다.",
     BRIDGE_OUT_OF_RANGE: "[ERROR] 다리의 길이는 3 이상 20 이하의 숫자여야 합니다.",
 
+    MOVING_NOT_EMPTY: "[ERROR] 이동할 위치는 공백일 수 없습니다.",
     MOVING_ONLY_CHAR: "[ERROR] 이동할 위치는 한 자리 문자여야 합니다.",
     MOVING_ONLY_U_OR_D: "[ERROR] 이동할 위치는 U와 D 중 하나여야 합니다.",
 
+    GAME_COMMAND_NOT_EMPTY: "[ERROR] 게임 명령어는 공백일 수 없습니다.",
     GAME_COMMAND_ONLY_CHAR: "[ERROR] 게임 명령어는 한 자리 문자여야 합니다.",
     GAME_COMMAND_ONLY_R_OR_Q: "[ERROR] 게임 명령어는 R와 Q 중 하나여야 합니다.",
 });
