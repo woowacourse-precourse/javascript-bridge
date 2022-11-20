@@ -51,3 +51,23 @@ describe('방향에 대한 예외 테스트', () => {
     });
   });
 });
+
+describe('재시작 커맨드에 대한 예외 테스트', () => {
+  test('문자에 공백이 포함되어 있다면 예외가 발생한다.', () => {
+    const inputValues = [' ', ' 3', '12 ', '3 4'];
+    inputValues.forEach((inputValue) => {
+      expect(() => Validator.throwErrorIfHasBlank(inputValue)).toThrow(
+        '[ERROR]'
+      );
+    });
+  });
+
+  test('대문자 R 혹은 Q 가 아니라면 예외가 발생한다.', () => {
+    const inputValues = ['r', 'q', 'RQ', 'RQ'];
+    inputValues.forEach((inputValue) => {
+      expect(() => Validator.commandValidityCheck(inputValue)).toThrow(
+        '[ERROR]'
+      );
+    });
+  });
+});
