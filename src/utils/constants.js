@@ -9,6 +9,11 @@ const MESSAGE = Object.freeze({
   TRY: tryCount => `총 시도한 횟수: ${tryCount}`,
 });
 
+const MOVING = Object.freeze({
+  UP: 'U',
+  DOWN: 'D',
+});
+
 const COMMAND = Object.freeze({
   restart: 'R',
   quit: 'Q',
@@ -35,6 +40,7 @@ const RESULT = Object.freeze({
 
 module.exports = {
   MESSAGE,
+  MOVING,
   COMMAND,
   BRIDGE,
   ERROR,

@@ -5,7 +5,7 @@
  * BridgeMaker의 메서드의 `시그니처(인자, 이름)`와 `반환 타입`은 변경할 수 없다. 🙅‍♀️
  */
 
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { MOVING } = require('./utils/constants');
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -20,7 +20,7 @@ const BridgeMaker = {
     return new Array(size)
       .fill(0)
       .map(() => generateRandomNumber())
-      .map(number => (number === 1 ? 'U' : 'D'));
+      .map(number => (+number === 1 ? MOVING.UP : MOVING.DOWN));
   },
 };
 
