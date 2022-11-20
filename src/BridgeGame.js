@@ -1,7 +1,7 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-class BridgeGame {
+ class BridgeGame {
   #cumulativeCount
   #bridgeSize
   #bridgeMap
@@ -19,6 +19,11 @@ class BridgeGame {
   move() {
     for(let moveCount=0;moveCount<this.#bridgeSize;moveCount++){
       const moving = RecallUntilCorrect.recallReadMoving(true);
+      if(moving===this.#bridgeMap[moveCount]){  //움직이려고 하는 곳이 이동할 수 있는 곳이면 O표시 후 맵을 보여주고 계속진행
+        
+      }else{  //움직이려고 하는 곳이 이동할 수 없는 곳이면 X표시 후 맵을 보여주고 재시작 여부를 묻는다.
+
+      }
     }
   }
 
