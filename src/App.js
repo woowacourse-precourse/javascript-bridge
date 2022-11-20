@@ -27,15 +27,15 @@ class App {
     try {
       this.#bridgeGame.move(input);
       OutputView.printMap(this.#bridgeGame);
-      this.handleResult();
+      const result = this.#bridgeGame.getResult();
+      this.handleResult(result);
     } catch ({ message }) {
       Console.print(message);
       InputView.readMoving(this.tryMove.bind(this));
     }
   }
 
-  handleResult() {
-    const result = this.#bridgeGame.getResult();
+  handleResult(result) {
     if (result === MESSAGE.SUCCESS) {
       OutputView.printResult(this.#bridgeGame);
       return;
