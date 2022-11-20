@@ -47,6 +47,14 @@ class BridgeGame {
     this.#count += 1;
   }
 
+  getBridgeLength() {
+    return this.#bridge.length;
+  }
+
+  getChoiceLength() {
+    return this.#choice.length;
+  }
+
   getCount() {
     return this.#count;
   }
