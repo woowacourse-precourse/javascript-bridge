@@ -1,33 +1,49 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const BridgePrint = require('./BridgePrint');
-class Check {
-  static CheckRestartGame(answer, gamePlay) {
-    if (answer === 'Q' || gamePlay.isWinning()) {
-      BridgePrint.printResult(gamePlay);
+const { ERROR_MESSAGES, USER_VALID_INPUT } = require('./common/messages');
+const Check = {
+  checkRestartGame(answer, gamePlay) {
+    if (answer === USER_VALID_INPUT.Q) {
+      this.endGame(gamePlay);
       MissionUtils.Console.close();
       return;
     }
-    if (answer === 'R') {
-      gamePlay.retry();
-      gamePlay.addCount();
-      return true;
+    if (answer === USER_VALID_INPUT.R) {
+      return this.retryGame(gamePlay);
     }
-    throw new Error(ERROR_MESSAGES.ERROR_INVAILD_INPUT('Q', 'R'));
-  }
-  static checkIsGameOver(isGameOver, index, brigeShape) {
-    if (isGameOver) {
-      return isGameOver;
+    throw new Error(ERROR_MESSAGES.ERROR_INVAILD_INPUT(USER_VALID_INPUT.Q, USER_VALID_INPUT.R));
+  },
+
+  checkIsGameOver(Player, Bridge, isFinshed) {
+    if (Player.getIsGameOver()) {
+      return Player.getIsGameOver();
     }
-    if (index === brigeShape) {
-      if (isGameOver === false) this.setIsWinnging(true);
-      isGameOver = true;
-      return isGameOver;
+    if (isFinshed) return this.checkIsFinshed(Player, Bridge);
+  },
+
+  isVaildInput(input) {
+    if (input === USER_VALID_INPUT.U || input === USER_VALID_INPUT.D) return;
+    throw new Error(ERROR_MESSAGES.ERROR_INVAILD_INPUT(USER_VALID_INPUT.U, USER_VALID_INPUT.D));
+  },
+
+  endGame(gamePlay) {
+    BridgePrint.printResultByGamePlay(gamePlay);
+  },
+
+  retryGame(gamePlay) {
+    gamePlay.retry();
+    gamePlay.addCount();
+    return true;
+  },
+
+  checkIsFinshed(Player, Bridge) {
+    if (Player.getIsGameOver() === false) {
+      Player.setIsWinnging(true);
+      BridgePrint.printResult(Player, Bridge);
     }
-  }
-  static isVaildInput(input) {
-    if (input === 'U' || input === 'D') return;
-    throw new Error(ERROR_MESSAGES.ERROR_INVAILD_INPUT('U', 'D'));
-  }
-}
+    Player.setIsGameOver(true);
+    return Player.getIsGameOver();
+  },
+};
 
 module.exports = Check;
