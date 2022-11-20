@@ -8,7 +8,7 @@ class Validator {
 
   static validateMoveCommand(inputMoveCommand) {
     const commands = ["U", "D"];
-    if (!inputMoveCommand.includes(commands)) {
+    if (!commands.includes(inputMoveCommand)) {
       throw new Error("[ERROR] 이동은 U나 D만 선택해주세요.");
     }
   }
@@ -18,7 +18,7 @@ class Validator {
    */
   static validateRetryCommand(inputRetryCommand) {
     const commands = ["R", "Q"];
-    if (!inputRetryCommand.includes(commands)) {
+    if (!commands.includes(inputRetryCommand)) {
       throw new Error(
         "[ERROR] 재시작 혹은 종료하기 위해서는 R이나 Q를 입력해주세요.",
       );
