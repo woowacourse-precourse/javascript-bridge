@@ -3,7 +3,7 @@ const { GAME_COMMAND, GAME_PATTERN } = require('../constants/bridgeGame');
 const REPEAT_COUNT = 3;
 
 class GameMap {
-  #CorretBridge;
+  #bridgeGameMap;
   #upperBridge = [];
   #lowerBridge = [];
   #gameOver = false;
@@ -13,12 +13,12 @@ class GameMap {
     this.#upperBridge = [];
   }
 
-  setCorretBridge(gameMap) {
-    this.#CorretBridge = gameMap;
+  setBridgeGameMap(gameMap) {
+    this.#bridgeGameMap = gameMap;
   }
 
-  getCorretBridge() {
-    return this.#CorretBridge;
+  getBridgeGameMap() {
+    return this.#bridgeGameMap;
   }
 
   isGameOver() {
@@ -29,12 +29,8 @@ class GameMap {
     this.#gameOver = false;
   }
 
-  getCorretGameMap() {
-    return this.#CorretBridge;
-  }
-
   isGameSuccess(userLocation) {
-    if (!this.#gameOver && this.#CorretBridge.length === userLocation) {
+    if (!this.#gameOver && this.#bridgeGameMap.length === userLocation) {
       return true;
     }
     return false;
@@ -66,7 +62,7 @@ class GameMap {
 
   selectOXpattern(moveCommand, userLocation) {
     const { o, x } = GAME_PATTERN;
-    const isPossibleNext = this.#CorretBridge[userLocation] === moveCommand;
+    const isPossibleNext = this.#bridgeGameMap[userLocation] === moveCommand;
     if (isPossibleNext) {
       return o;
     }
