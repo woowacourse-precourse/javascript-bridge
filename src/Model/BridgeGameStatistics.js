@@ -21,6 +21,10 @@ class BridgeStatistics {
     return this.#attempt;
   }
 
+  getMoveCount() {
+    return this.#moveCount;
+  }
+
   isGameWin() {
     return this.#bridgeSize === this.#moveCount;
   }
