@@ -4,7 +4,11 @@
 
 ![Flow Map](../img/flow.png)
 
+---
+
 ## 애플리케이션 구조
+
+```bash
 📦src
  ┣ 📂constant
  ┃ ┗ 📜index.js                         - 게임에서 사용하는 상수값을 변수로 선언
@@ -21,6 +25,9 @@
  ┣ 📜BridgeMaker.js                     - 다리를 생성하는 객체
  ┣ 📜BridgeRandomNumberGenerator.js     - 랜덤 숫자를 반환하는 객체
  ┗ 📜Validator.js                       - 다리 게임의 유효성 검사
+```
+
+---
 
 ## 기능 목록
 
@@ -41,6 +48,8 @@
       - [x] 에러를 잡아 메시지를 출력하고 재도전 커맨드를 재입력받는다
 - [x] 게임 결과를 출력한다
 - [x] 게임을 종료한다
+
+---
 
 ## 예외 처리
 
