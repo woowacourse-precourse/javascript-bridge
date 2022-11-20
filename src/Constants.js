@@ -15,8 +15,15 @@ const INPUT = {
     '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
 };
 
+const ERROR = {
+  bridgeSizeException: '양의 정수를 입력해 주세요.',
+  movingException: 'U와 D만 입력해 주세요.',
+  gameCommandException: 'R과 Q만 입력해 주세요.',
+};
+
 module.exports = {
   MOVE,
   MOVE_INDEX,
   INPUT,
+  ERROR,
 };
