@@ -12,12 +12,12 @@ class BridgeGame {
   makeBridgeMap(size) {
     const { makeBridge } = BridgeMaker;
     const { generate } = BridgeRandomNumberGenerator;
-    const createGameMap = makeBridge(size, generate);
-    this.setupGameMap(createGameMap);
+    return makeBridge(size, generate);
   }
 
-  setupGameMap(gameMap) {
-    this.gameMap.setBridgeGameMap(gameMap);
+  setupGameMap(size) {
+    const bridgeGameMap = this.makeBridgeMap(size);
+    this.gameMap.setBridgeGameMap(bridgeGameMap);
     console.log(this.gameMap.getBridgeGameMap(), '\n'); // 게임 맵 디버깅용
   }
 

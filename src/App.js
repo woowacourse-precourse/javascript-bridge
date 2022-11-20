@@ -22,7 +22,7 @@ class App {
   requestBridgeSize(bridgeSize) {
     try {
       this.validator.checkBridgeSize(bridgeSize);
-      this.bridgeGame.makeBridgeMap(bridgeSize);
+      this.bridgeGame.setupGameMap(bridgeSize);
       this.getBridgeMovementDirection();
     } catch (errorType) {
       OutputView.printError(errorType);
