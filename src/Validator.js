@@ -1,22 +1,21 @@
-const { SIZE, ERROR } = require("./constants/index");
+const { SIZE, WAY, ERROR } = require("./constants/index");
 
 const Validator = {
-  checkBridgeSizeType(size) {
+  checkBridgeSizeValid(size) {
     if (isNaN(size)) {
       throw new Error(ERROR.SIZE_TYPE);
     }
-  },
 
-  checkBridgeSizeRange(size) {
     if (size < SIZE.MIN || size > SIZE.MAX) {
       throw new Error(ERROR.SIZE_RANGE);
     }
   },
+
+  checkMovingValid(moving) {
+    if (moving !== WAY.UP && moving !== WAY.DOWN) {
+      throw new Error(ERROR.INVALID_MOVING);
+    }
+  },
 };
 
-const checkBridgeSizeValid = (size) => {
-  Validator.checkBridgeSizeType(size);
-  Validator.checkBridgeSizeRange(size);
-};
-
-module.exports = { checkBridgeSizeValid };
+module.exports = Validator;

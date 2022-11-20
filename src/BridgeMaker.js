@@ -1,3 +1,5 @@
+const { WAY } = require("./constants/index");
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -11,8 +13,8 @@ const BridgeMaker = {
     const make = () => {
       const number = generateRandomNumber();
 
-      if (number === 0) return "U";
-      if (number === 1) return "D";
+      if (number === 0) return WAY.UP;
+      if (number === 1) return WAY.DOWN;
     };
 
     return Array.from({ length: size }, () => make());
