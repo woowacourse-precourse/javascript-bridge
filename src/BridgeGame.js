@@ -24,10 +24,11 @@ class BridgeGame {
     const STOP = 'X';
     const crossable = bridge[this.#turn];
     this.#turn += 1;
-    if (input === crossable) this.isFirst(GO, crossable);
-    if (bridge.length === this.#turn) {
-      this.retry(true, this.#turn);
+    if (input === crossable) {
+      this.isFirst(GO, crossable);
+      if (bridge.length === this.#turn) this.retry(true, this.#turn);
     }
+
     if (input !== crossable) {
       this.isFirst(STOP, crossable);
       this.retry(false, this.#turn);
