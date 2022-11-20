@@ -6,6 +6,7 @@ const OutputView = require("./OutputView");
 const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
+      Validate.isUndefined(input);
       const result = Validate.isCorrectBridgeLength(input);
       if (result) {
         const bridgeGame = new BridgeGame();
@@ -32,8 +33,8 @@ const InputView = {
     MissionUtils.Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
-        Validate.isCorrectRetry(input);
-        if (input === "Q") OutputView.printResult(bridgeGame);
+        Validate.isCorrectGameCommand(input);
+        if (input === "Q") return OutputView.printResult(bridgeGame);
         if (input === "R") {
           bridgeGame.initSelectBridge();
           this.readMoving(bridgeGame);
