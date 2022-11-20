@@ -15,6 +15,7 @@ class Bridge {
 
   #validate(number) {
     this.#validator.isNumber(number);
+    this.#validator.isNaturalNumber(number);
     this.#validator.isRightNumberRange(3, 20, number);
   }
 

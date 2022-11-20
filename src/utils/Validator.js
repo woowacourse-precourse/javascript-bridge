@@ -7,13 +7,21 @@ const Validator = {
     const regex = /^[0-9-]{1,2}$/g;
 
     if (!regex.test(number)) {
-      throw new BridgeError(ERROR_MESSAGE.BRIDGE_ISNAN);
+      throw new BridgeError(ERROR_MESSAGE.ISNAN);
+    }
+  },
+
+  isNaturalNumber(number) {
+    const regex = /^(\+)?([0-9]+)$/g;
+
+    if (!regex.test(number)) {
+      throw new BridgeError(ERROR_MESSAGE.ISNAN);
     }
   },
 
   isRightNumberRange(start, end, number) {
     if (number < start || number > end)
-      throw new BridgeError(ERROR_MESSAGE.BRIDGE_RANGE);
+      throw new BridgeError(ERROR_MESSAGE.RANGE);
   },
 
   isRightLevelString(input) {

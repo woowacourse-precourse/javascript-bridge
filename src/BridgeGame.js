@@ -20,7 +20,7 @@ class BridgeGame {
     return this.#selected.level;
   }
 
-  get tryCnt() {
+  get tryNumber() {
     return this.#tryCnt.cnt;
   }
 

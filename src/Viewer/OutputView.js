@@ -45,7 +45,7 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.GAME_RESULT);
     this.printMap(bridge, game);
     Console.print(OUTPUT_MESSAGE.GAME_IS_SUCCESS(game.isWin(bridge)));
-    Console.print(OUTPUT_MESSAGE.GAME_TRY_CNT(game.tryCnt));
+    Console.print(OUTPUT_MESSAGE.GAME_TRY_CNT(game.tryNumber));
     if (input === 'Q') Console.close();
   },
 };
