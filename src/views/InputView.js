@@ -1,8 +1,11 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGES } = require("../constraints/constarints");
 const { generate } = require("../utils/random/BridgeRandomNumberGenerator");
-const { makeBridge } = require("../BridgeMaker");
-const { validateLength } = require("../utils/validators/validators");
+const { makeBridge } = require("../models/BridgeMaker");
+const {
+  validateLength,
+  validateGameCommandInput,
+} = require("../utils/validators/validators");
 const { printResult, printMap } = require("./OutputView");
 
 const InputView = {
@@ -27,7 +30,7 @@ const InputView = {
    */
   readMoving(game, bridge) {
     if (game.done) return this.readGameCommand(game, bridge);
-    if (game.bridgeSize === game.playerLocation) {
+    if (bridge.length === game.playerLocation) {
       game.succeed = true;
       return printResult(game);
     }
@@ -43,13 +46,12 @@ const InputView = {
    */
   readGameCommand(game, bridge) {
     Console.readLine(MESSAGES.RETRY, (input) => {
+      validateGameCommandInput(input);
       if (input === "R") {
         game.retry();
         return InputView.readMoving(game, bridge);
-      } else if (input === "Q") {
-        printResult(game);
       }
-      Console.close();
+      printResult(game);
     });
   },
 };
