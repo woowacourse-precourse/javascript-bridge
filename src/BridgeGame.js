@@ -18,12 +18,10 @@ class BridgeGame {
 
   wrongStep(nextStep, UBlock, DBlock) {
     if (nextStep === 'U') {
-      UBlock.push('X');
-      DBlock.push(' ');
+      pushXToUBlock(UBlock, DBlock);
     }
     if (nextStep === 'D') {
-      UBlock.push(' ');
-      DBlock.push('X');
+      pushXToDBlock(UBlock, DBlock);
     }
     return [UBlock, DBlock];
   }
@@ -64,5 +62,14 @@ class BridgeGame {
     return this.#numberOfTry;
   }
 }
+
+const pushXToUBlock = (UBlock, DBlock) => {
+  UBlock.push('X');
+  DBlock.push(' ');
+};
+const pushXToDBlock = (UBlock, DBlock) => {
+  UBlock.push(' ');
+  DBlock.push('X');
+};
 
 module.exports = BridgeGame;
