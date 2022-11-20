@@ -1,3 +1,4 @@
+const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
@@ -12,7 +13,9 @@ class App {
       BridgeRandomNumberGenerator.generate
     );
 
+    const bridgeGame = BridgeGame(bridge);
     const moving = InputView.readMoving();
+    bridgeGame.move(moving);
   }
 }
 
