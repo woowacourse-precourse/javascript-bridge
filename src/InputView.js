@@ -12,11 +12,17 @@ const InputView = {
    * @param {string[]} bridge 만들어진 다리. 재시작시 재사용
    */
   readBridgeSize() {
-    MU.Console.print('다리 건너기 게임을 시작합니다.\n');
     MU.Console.readLine('다리의 길이를 입력해주세요.\n', (bridgeLen) => {
-      let bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
-      MU.Console.print(bridge);
-      this.readMoving([[],[]], bridge, 1);
+      try {
+        if(bridgeLen < 3 || bridgeLen > 20) throw '[ERROR] 3이상 20이하 범위를 입력하세요';
+        if(isNaN(bridgeLen)) throw '[ERROR] 다리의 길이는 숫자를 입력 해야 합니다.';
+        let bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
+        MU.Console.print(bridge);
+        this.readMoving([[],[]], bridge, 1);
+        } catch(e) {
+          MU.Console.print(e);
+          this.readBridgeSize();
+        }
     })
   },
 
