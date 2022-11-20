@@ -9,6 +9,7 @@ const { Console } = require('@woowacourse/mission-utils');
 
 class BridgeGameController {
   constructor() {
+    OutputView.welcomeMessage();
     this.bridgeGame = new BridgeGame();
     this.bridge = new Bridge();
   }
