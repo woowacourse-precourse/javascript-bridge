@@ -14,7 +14,7 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine('다리의 길이를 입력해주세요.\n', (length) => {
-      const bridgeList = BridgeMaker.makeBridge(length, RandomNumGenerator);
+      const bridgeList = BridgeMaker.makeBridge(length, RandomNumGenerator.generate);
       console.log(bridgeList);
       const bridgeGame = new BridgeGame(bridgeList, length);
       return this.readMoving(length, bridgeGame);
