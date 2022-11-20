@@ -14,7 +14,7 @@ const MOVE = Object.freeze({
 });
 
 const HISTORY = Object.freeze({
-    ALIVE: "0",
+    ALIVE: "O",
     DIE: "X"
 });
 
