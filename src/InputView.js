@@ -22,7 +22,6 @@ const InputView = {
       }
       input = Number(input);
       const bridge = BRIDGE_MAKER.makeBridge(input,BRIDGE_RANDOM_NUMBER_GENERATOR.generate);
-      MISSIONUTILS.Console.print(bridge);
       InputView.readMoving(input-1, 0, bridge, "", 1);
     });
 
@@ -41,7 +40,6 @@ const InputView = {
       }
       var temp = new BRIDGE_GAME;
       var word = temp.move(input, count, i, bridge);
-      MISSIONUTILS.Console.print(word);
       moveSwitch(word, count, i, bridge, bridgeMap, tryCount);
     });
   },

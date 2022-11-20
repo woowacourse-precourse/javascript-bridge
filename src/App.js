@@ -8,7 +8,4 @@ class App {
   }
 }
 
-var a = new App();
-a.play();
-
 module.exports = App;
