@@ -13,7 +13,10 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (bridgeSize) => {
       Validation.validateBridgeSize(bridgeSize);
-      BridgeMaker.makeBridge(parseInt(bridgeSize, 10), BridgeRandomNumberGenerator);
+      BridgeMaker.makeBridge(
+        parseInt(bridgeSize, 10),
+        BridgeRandomNumberGenerator.generate
+      );
     });
   },
 

@@ -17,8 +17,8 @@ const BridgeMaker = {
     const LOWER_BLOCK = 'D';
     let bridge = [];
 
-    for (let block = 0; block < size; block++) {
-      const randomNumbers = generateRandomNumber.generate();
+    for (let index = 0; index < size; index++) {
+      const randomNumbers = generateRandomNumber();
       if (randomNumbers === RANDOM_UPPER_BLOCK) {
         bridge.push(UPPER_BLOCK);
         continue;
