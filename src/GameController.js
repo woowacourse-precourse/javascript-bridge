@@ -44,8 +44,7 @@ class GameController {
 
       if (!this.bridgeGame.isSucceededMove()) return this.requestRetryCommand();
       if (this.bridgeGame.isClearedGame()) {
-        this.printFinalResult();
-        Console.close();
+        this.quit();
         return;
       }
       this.requestDirection();
@@ -67,20 +66,20 @@ class GameController {
         return this.requestDirection();
       }
       if (command === QUIT_TRIGGER) {
-        this.printFinalResult();
-        Console.close();
+        this.quit();
       }
     } catch ({ message }) {
       this.reRequest(this.requestRetryCommand, message);
     }
   }
 
-  printFinalResult() {
+  quit() {
     const movementLogs = this.bridgeGame.getMovementLogs();
     const isSucceeded = this.bridgeGame.isSucceededMove();
     const tryCount = this.bridgeGame.getTryCount();
 
     OutputView.printResult(movementLogs, isSucceeded, tryCount);
+    Console.close();
   }
 
   reRequest(requestFunc, errMessage) {
