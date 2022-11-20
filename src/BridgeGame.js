@@ -1,22 +1,17 @@
 // @ts-check
 
 const Bridge = require('./Bridge');
-const Player = require('./Player');
+const Path = require('./Path');
 const StatusGenerator = require('./StatusGenerator');
-const {
-  MARKING,
-  COMMAND,
-  BRIDGE_SPACE_TYPE,
-  COMMAND_TYPE,
-} = require('./utils/const');
 const Validator = require('./utils/Validator');
+const { COMMAND, COMMAND_TYPE } = require('./utils/const');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
-  #player;
+  #path;
   #count;
   #isSuccess;
 
@@ -25,7 +20,7 @@ class BridgeGame {
    */
   constructor(bridgeSize) {
     this.#bridge = new Bridge(bridgeSize);
-    this.#player = new Player();
+    this.#path = new Path();
     this.#count = 1;
     this.#isSuccess = false;
   }
@@ -36,14 +31,11 @@ class BridgeGame {
    * @return {0 | 1 | 2} 0: Fail, 1: Success, 2: Next
    */
   move(moving) {
-    Validator.validateEqual(moving, BRIDGE_SPACE_TYPE);
-    const currentLocation = this.#player.getLocation();
-    const isCorrect = this.#bridge.isCorrect(moving, currentLocation);
-    const isLast = this.#bridge.isLast(currentLocation);
-    const mark = isCorrect ? MARKING.CORRECT : MARKING.WRONG;
+    const currentPath = this.#path.push(moving);
+    const isCorrect = this.#bridge.isCorrect(currentPath);
+    const isLast = this.#bridge.isLast(currentPath);
 
-    this.#player.markOX(moving, mark);
-    this.#player.setLocation(currentLocation + 1);
+    this.#path.markOX(isCorrect);
     this.#isSuccess = isCorrect && isLast;
 
     return StatusGenerator.generate(isCorrect, isLast);
@@ -58,7 +50,7 @@ class BridgeGame {
     Validator.validateEqual(gameCommand, COMMAND_TYPE);
 
     if (gameCommand === COMMAND.RETRY) {
-      this.#player = new Player();
+      this.#path = new Path();
       this.#count += 1;
       return 0;
     }
@@ -68,14 +60,14 @@ class BridgeGame {
 
   getResultInfo() {
     const count = this.#count;
-    const markingPaper = this.getMarkingPaper();
+    const pathMap = this.getPathMap();
     const isSuccess = this.#isSuccess;
 
-    return { count, markingPaper, isSuccess };
+    return { count, pathMap, isSuccess };
   }
 
-  getMarkingPaper() {
-    return this.#player.getMarkingPaper();
+  getPathMap() {
+    return this.#path.getPathMap();
   }
 }
 

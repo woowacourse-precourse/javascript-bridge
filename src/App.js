@@ -35,7 +35,7 @@ class App {
     InputView.readMoving((moving) => {
       try {
         const status = this.#bridgeGame.move(moving);
-        const markingPaper = this.#bridgeGame.getMarkingPaper();
+        const markingPaper = this.#bridgeGame.getPathMap();
         OutputView.printMap(markingPaper);
 
         this.#commands[status].call(this);
@@ -59,8 +59,8 @@ class App {
   }
 
   quitGame() {
-    const { count, isSuccess, markingPaper } = this.#bridgeGame.getResultInfo();
-    OutputView.printResult(markingPaper, isSuccess, count);
+    const { count, isSuccess, pathMap } = this.#bridgeGame.getResultInfo();
+    OutputView.printResult(pathMap, isSuccess, count);
     MissionUtils.Console.close();
   }
 }
