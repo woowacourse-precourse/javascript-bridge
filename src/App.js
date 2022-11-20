@@ -1,5 +1,16 @@
+const { readBridgeSize } = require('./InputView');
+
 class App {
-  play() {}
+  play() {
+    
+    readBridgeSize(this.bridgeSetting);
+  }
+  bridgeSetting = (input) => {
+    // makeBridge();
+  };
 }
 
 module.exports = App;
+
+const app = new App();
+app.play();
