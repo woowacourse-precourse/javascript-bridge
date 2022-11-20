@@ -12,13 +12,25 @@ class BridgePlay{
   }
   playRound(moving){
     const status = this.bridgeGame.move(moving);
-    const moveBy = status.length-1;
-    if(status[moveBy] !== this.bridge[moveBy]){
-      //test
-      console.log("틀림")
-    }else{
-      this.startRound();
+    if(status[status.length-1] !== this.bridge[status.length-1]){
+      this.playRoundOver();
+      return;
     }
+    if(status.length === this.bridge.length){
+      this.playRoundComplete();
+      return;
+    }
+    this.startRound();
+  }
+
+  playRoundOver(){
+    //test
+    console.log("round over");
+  }
+
+  playRoundComplete(){
+    //test
+    console.log("round complete");
   }
 }
 
