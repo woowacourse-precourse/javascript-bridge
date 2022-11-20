@@ -48,25 +48,25 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine(MESSAGE.ASK_WHERE_WANT_TO_GO, (wantGo) => {
-      this.setMove(wantGo);
+    Console.readLine(MESSAGE.ASK_WHERE_WANT_TO_GO, (moving) => {
+      this.setMove(moving);
     });
   },
 
-  setMove(wantGo) {
+  setMove(moving) {
     try {
-      this.calculatePlayerMove(wantGo);
+      this.calculatePlayerMove(moving);
     } catch (err) {
       Console.print(err);
       this.readMoving();
     }
   },
 
-  calculatePlayerMove(wantGo) {
-    new MoveInputValidation(wantGo);
+  calculatePlayerMove(moving) {
+    new MoveInputValidation(moving);
 
-    this.isCorrect = new BridgeGame().move(this.canWalkBridge, wantGo);
-    Player.updateState(wantGo, this.isCorrect);
+    this.isCorrect = new BridgeGame().move(this.canWalkBridge, moving);
+    Player.updateState(moving, this.isCorrect);
 
     OutputView.printMap();
     this.checkGameSuccess();

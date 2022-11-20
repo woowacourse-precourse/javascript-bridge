@@ -18,12 +18,12 @@ class BridgeSizeValidation {
 }
 
 class MoveInputValidation {
-  constructor(wantGo) {
-    this.checkMoveInput(wantGo);
+  constructor(moving) {
+    this.checkMoveInput(moving);
   }
 
-  checkMoveInput(wantGo) {
-    const moveConstraints = new MoveConstraints(wantGo);
+  checkMoveInput(moving) {
+    const moveConstraints = new MoveConstraints(moving);
     moveConstraints.checkInputUorD();
   }
 }

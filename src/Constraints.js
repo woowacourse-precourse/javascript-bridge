@@ -34,16 +34,16 @@ class SizeConstraints {
 }
 
 class MoveConstraints {
-  #wantGo;
+  #moving;
 
-  constructor(wantGo) {
-    this.#wantGo = wantGo;
+  constructor(moving) {
+    this.#moving = moving;
   }
 
   checkInputUorD() {
     if (
-      this.#wantGo !== COMMAND.UPPER_BRIDGE_STRING &&
-      this.#wantGo !== COMMAND.LOWER_BRIDGE_STRING
+      this.#moving !== COMMAND.UPPER_BRIDGE_STRING &&
+      this.#moving !== COMMAND.LOWER_BRIDGE_STRING
     ) {
       throw ERROR.ERROR_NOT_ONLY_U_OR_D;
     }
