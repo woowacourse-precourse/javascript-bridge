@@ -1,4 +1,4 @@
-const { BRIDGE_GAME } = require('../constants/bridgeGameInfo');
+const { BRIDGE_LENGTH } = require('../constants/bridgeGame');
 
 const ERROR_TYPE = Object.freeze({
   empty: 'emptyInput',
@@ -22,7 +22,7 @@ class Validator {
   }
 
   outOfRange(bridgeSize) {
-    const { minSize, maxSize } = BRIDGE_GAME;
+    const { minSize, maxSize } = BRIDGE_LENGTH;
     if (bridgeSize < minSize || bridgeSize > maxSize) {
       throw ERROR_TYPE.range;
     }

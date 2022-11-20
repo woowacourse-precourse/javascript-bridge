@@ -2,7 +2,7 @@ const OutputView = require('./view/OutputView');
 const InputView = require('./view/InputView');
 const BridgeGame = require('./domain/BridgeGame');
 const Validator = require('./view/Validator');
-const { BRIDGE_GAME } = require('./constants/bridgeGameInfo');
+const { GAME_COMMAND } = require('./constants/bridgeGame');
 
 class App {
   constructor() {
@@ -67,7 +67,7 @@ class App {
   }
 
   requestRetryGame(retryCommand) {
-    const { quit, retry } = BRIDGE_GAME;
+    const { quit, retry } = GAME_COMMAND;
     try {
       if (retryCommand === quit) {
         return this.exitGame();

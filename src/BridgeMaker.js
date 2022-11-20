@@ -1,5 +1,5 @@
-const { BRIDGE_GAME } = require('./constants/bridgeGameInfo');
-const { up, down } = BRIDGE_GAME;
+const { GAME_COMMAND } = require('./constants/bridgeGame');
+const { up, down } = GAME_COMMAND;
 
 const BridgeMaker = {
   /**
