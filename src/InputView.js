@@ -60,8 +60,8 @@ const InputView = {
         return OutputView.printResult(this.SUCCESS_MESSAGE, this.COUNT);
       }
       this.BRIDGE_GAME.move(userAnswer);
-      this.readMoving(bridgeArray);
-      return (this.INDEX += 1);
+      this.INDEX += 1;
+      return this.readMoving(bridgeArray);
     }
     this.fail(userAnswer, bridgeArray);
   },
