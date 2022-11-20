@@ -9,6 +9,10 @@ class Bridge {
     if (this.#bridge[position] === direction) return true;
     return false;
   }
+
+  length() {
+    return this.#bridge.length;
+  }
 }
 
 module.exports = Bridge;
