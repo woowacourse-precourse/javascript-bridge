@@ -13,7 +13,7 @@ class ProductionModel {
       nowMap[SPACE[moving]].push(PASS.TRUE);
       nowMap[SPACE[trapZone]].push(PASS.FALSE);
     });
-    console.log(nowMap);
+
     return nowMap;
   }
 }
