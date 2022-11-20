@@ -12,13 +12,11 @@ const BridgeMaker = {
    */
 
   makeBridge(size, generateRandomNumber) {
-    const bridgeNumbers = [];
     const bridgeStrings =[];
     for(let index = 0; index < size; index++) {
       const number = generateRandomNumber();
-      bridgeNumbers.push(number);
-      if(bridgeNumbers[index] === MOVING.UPSIDE_NUMBER) bridgeStrings.push(MOVING.UPSIDE_STRING);
-      if(bridgeNumbers[index] === MOVING.DOWNSIDE_NUMBER) bridgeStrings.push(MOVING.DOWNSIDE_STRING);
+      if(number.toString() === MOVING.UPSIDE_NUMBER) bridgeStrings.push(MOVING.UPSIDE_STRING);
+      if(number.toString() === MOVING.DOWNSIDE_NUMBER) bridgeStrings.push(MOVING.DOWNSIDE_STRING);
     }
     return bridgeStrings;
   }
