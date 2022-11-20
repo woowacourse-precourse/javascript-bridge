@@ -28,7 +28,9 @@ class BridgeGame {
     if (userAnswer === 'R') {
       return OutputView.removeArray();
     }
-    if (userAnswer === 'Q') return OutputView.printResult(this.FAIL_MESSAGE, count);
+    if (userAnswer === 'Q') {
+      return OutputView.printResult(this.FAIL_MESSAGE, count);
+    }
   }
 }
 
