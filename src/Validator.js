@@ -1,3 +1,5 @@
+const { BRIDGE, COMMAND } = require('./Constants/contant');
+const DIRECTION = require('./Constants/direction');
 const { ERROR_MESSAGE } = require('./Constants/message');
 
 class Validator {
@@ -13,20 +15,21 @@ class Validator {
   static checkCorrectDirection(directions) {
     if (directions instanceof Array) {
       directions.forEach((dir) => {
-        if (dir !== 'U' && dir !== 'D') {
+        if (dir !== DIRECTION.up && dir !== DIRECTION.down) {
           throw new Error(ERROR_MESSAGE.unexpected_input);
         }
       });
-    } else if (directions !== 'U' && directions !== 'D')
+    } else if (directions !== DIRECTION.up && directions !== DIRECTION.down)
       throw new Error(ERROR_MESSAGE.unexpected_input);
   }
 
   static checkBridgeSizeRange(size) {
-    if (size < 3 || size > 20) throw Error(ERROR_MESSAGE.exceed_bridge_size);
+    if (size < BRIDGE.min_length || size > BRIDGE.max_length)
+      throw Error(ERROR_MESSAGE.exceed_bridge_size);
   }
 
   static checkCorrectCommand(command) {
-    if (command !== 'R' && command !== 'Q')
+    if (command !== COMMAND.retry && command !== COMMAND.quit)
       throw Error(ERROR_MESSAGE.unexpected_input);
   }
 }
