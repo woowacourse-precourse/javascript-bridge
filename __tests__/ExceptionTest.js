@@ -1,4 +1,8 @@
-const { bridgeSizeValidator, directionValidator } = require('../src/Validator');
+const {
+  bridgeSizeValidator,
+  directionValidator,
+  commandValidator,
+} = require('../src/Validator');
 
 describe('예외 테스트', () => {
   test.each([
@@ -32,5 +36,16 @@ describe('예외 테스트', () => {
     ['DD', false],
   ])('이동할 칸 선택 예외 테스트', (input, result) => {
     expect(directionValidator.isUpOrDown(input)).toEqual(result);
+  });
+
+  test.each([
+    ['R', true],
+    ['Q', true],
+    ['2', false],
+    ['', false],
+    [' Rr', false],
+    ['q', false],
+  ])('재시도 선택 예외 테스트', (input, result) => {
+    expect(commandValidator.isRegameOrQuit(input)).toEqual(result);
   });
 });
