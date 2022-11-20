@@ -5,8 +5,8 @@ const BridgeMaker = {
     const bridge = [];
     while (bridge.length < size) {
       const number = Number(generateRandomNumber());
-      const block = number ? MOVING.UP : MOVING.DOWN;
-      bridge.push(block);
+      const moving = number ? MOVING.UP : MOVING.DOWN;
+      bridge.push(moving);
     }
     return bridge;
   },
