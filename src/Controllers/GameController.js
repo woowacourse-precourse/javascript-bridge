@@ -31,13 +31,27 @@ class GameController {
   }
 
   checkResult() {
-    const alive = this.bridgeGame.checkAlive();
+    const progressData = this.bridgeGame.getGameProgress();
+    this.outputView.printMap(progressData);
+
+    const alive = this.bridgeGame.getAlive();
     if (!alive) return this.askRetry();
-    this.selectMoving();
+
+    const lastRound = this.bridgeGame.checkGameEnd();
+    if (lastRound) return this.win();
+
+    return this.selectMoving();
+  }
+
+  win() {
+    // output에서 Console.close();
+    console.log('win!!');
   }
 
   // 죽었으면 리트라이, 살았으면 다시 moving
-  askRetry() {}
+  askRetry() {
+    console.log('die');
+  }
 }
 
 module.exports = GameController;
