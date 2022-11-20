@@ -9,28 +9,6 @@ const mockQuestions = (answers) => {
   );
 };
 
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
-};
-
-const getOutput = (logSpy) => [...logSpy.mock.calls].join('');
-
-const expectLogContains = (received, logs) => {
-  logs.forEach((log) => {
-    expect(received).toEqual(expect.stringContaining(log));
-  });
-};
-
-const runException = (input) => {
-  mockQuestions(input);
-  const logSpy = getLogSpy();
-
-  InputView.readBridgeSize();
-  expectLogContains(getOutput(logSpy), ['[ERROR]']);
-};
-
 describe('다리 길이 입력 테스트', () => {
   test.each([[['3']], [['20']], [['7']]])('정상', (input) => {
     mockQuestions(input);
