@@ -40,7 +40,7 @@
     -[x] 종료 테스트케이스
 -[] 메서드의 파라미터 개수는 최대 3개까지만 허용한다.
 
--[] InputView 에서만 MissionUtils의 Console.readLine() 을 이용해 사용자의 입력을 받을 수 있다.
--[] BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
+-[x] InputView 에서만 MissionUtils의 Console.readLine() 을 이용해 사용자의 입력을 받을 수 있다.
+-[x] BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
 
  
