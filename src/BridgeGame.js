@@ -3,8 +3,13 @@
  */
 const OutputView = require("./OutputView");
 const InputView = require("./InputView");
+const BridgeValidator = require("./utils/BridgeValidator");
+const { BRIDGE_LENGTH } = require("./constants/gameState");
+const BridgeMaker = require("./BridgeMaker");
+const { generate } = require("./BridgeRandomNumberGenerator");
 
 class BridgeGame {
+  #bridge;
   constructor() {
     OutputView.printStart();
     InputView.game = this;
@@ -13,6 +18,7 @@ class BridgeGame {
 
   start(bridgeSize) {
     this.validateBridgeLength(bridgeSize);
+    this.#bridge = BridgeMaker.makeBridge(bridgeSize, generate);
   }
 
   validateBridgeLength(size) {
