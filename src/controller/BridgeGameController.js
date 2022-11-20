@@ -31,7 +31,7 @@ class BridgeGameController {
             OutputView.printMap(bridgeGame);
 
             if (bridgeGame.isEndPosition())
-                return OutputView.printResult(bridgeGame);
+                OutputView.printResult(bridgeGame);
         } catch (error) {
             ERROR_HANDLING[error.message](bridgeGame, error.message);
         }
