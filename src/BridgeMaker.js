@@ -17,8 +17,8 @@ const BridgeMaker = {
         bridge.push(BRIDGE.LOWER_ZONE);
       if (randomNumber === BRIDGE.UPPER_ZONE_NUMBER)
         bridge.push(BRIDGE.UPPER_ZONE);
-      return bridge;
     }
+    return bridge;
   },
 };
 
