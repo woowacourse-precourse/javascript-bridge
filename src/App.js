@@ -5,9 +5,21 @@ const OutputView = require("./OutputView");
 class App {
   constructor() {
     this.bridge = [];
+    this.gameResult = null;
+  }
+  moveing(movePoint, obstacle) {
+    return obstacle === movePoint ? true : false;
   }
   BridgeMove() {
     const movePoint = InputView.readMoving();
+    this.bridge.forEach((obstacle) => {
+      if (!moveing(movePoint, obstacle)) {
+        gameResult = false;
+        return;
+      }
+    });
+    gameResult = true;
+    return;
   }
   BridgeMaker() {
     try {
