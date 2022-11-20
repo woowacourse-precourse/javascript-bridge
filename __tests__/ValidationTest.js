@@ -54,3 +54,26 @@ describe('checkDirection 메서드 테스트', () => {
     }
   );
 });
+
+describe('checkCommandOption 메서드 테스트', () => {
+  test('R 또는 Q가 아닌 값을 입력하면 errorMsg의 값이 존재하는 객체를 반환한다.', () => {
+    const { errorMsg } = Validation.checkCommandOption('D');
+
+    expect(errorMsg).toEqual('\n[ERROR] R 또는 Q만 입력할 수 있습니다.');
+  });
+
+  test('소문자 r, q를 입력해도 errorMsg의 값이 존재하는 객체를 반환한다.', () => {
+    const { errorMsg } = Validation.checkCommandOption('q');
+
+    expect(errorMsg).toEqual('\n[ERROR] R 또는 Q만 입력할 수 있습니다.');
+  });
+
+  test.each([['R'], ['Q']])(
+    'R 또는 Q를 입력하면 errorMsg의 값이 undefined인 객체를 반환한다. commandOption: %s',
+    (commandOption) => {
+      const { errorMsg } = Validation.checkCommandOption(commandOption);
+
+      expect(errorMsg).toBeUndefined();
+    }
+  );
+});

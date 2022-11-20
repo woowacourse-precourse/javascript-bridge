@@ -225,9 +225,10 @@ const number = generateRandomNumber();
 - [x] test: OutPutView.js 테스트 코드 작성
   - printMap 메서드 테스트 코드를 작성한다.
   - printResult 메서드 테스트 코드를 작성한다.
-- [ ] test: Validation.js 테스트 코드 작성
+- [x] test: Validation.js 테스트 코드 작성
   - checkBridgeSize 메서드 테스트 코드를 작성한다.
   - checkDirection 메서드 테스트 코드를 작성한다.
+  - checkCommandOption 메서드 테스트 코드를 작성한다.
 
 ---
 

@@ -61,7 +61,7 @@ describe('printMap 메서드 테스트', () => {
   });
 });
 
-describe.only('printResult 메서드 테스트', () => {
+describe('printResult 메서드 테스트', () => {
   test('Console.print가 총 2번 호출된다.', () => {
     OutputView.printResult({ isSuccess: true, attempCount: 3 });
 
