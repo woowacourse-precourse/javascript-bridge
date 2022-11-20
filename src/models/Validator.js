@@ -24,6 +24,10 @@ class Validator {
   isNotRangeOfBridgeLength(bridgeLength) {
     return bridgeLength < 3 || bridgeLength > 20; 
   }
+
+  isNotValidDirectionInput(direction) {
+    return direction !== 'U' || direction !== 'D';
+  }
 }
 
 module.exports = Validator;
