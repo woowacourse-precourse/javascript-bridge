@@ -10,6 +10,7 @@ class BridgeGame {
    */
   constructor() {
     this.step = 0;
+    this.tryCount = 1;
     this.upBridge = [];
     this.downBridge = [];
   }
@@ -52,6 +53,10 @@ class BridgeGame {
     }
   }
 
+  getTryCount() {
+    return this.tryCount;
+  }
+
   getupBridge() {
     return this.upBridge;
   }
@@ -62,6 +67,7 @@ class BridgeGame {
 
   init() {
     this.step = 0;
+    this.tryCount += 1;
     this.upBridge = [];
     this.downBridge = [];
   }

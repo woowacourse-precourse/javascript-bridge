@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { START_GAME } = require('./Constants');
+const { START_GAME, SUCCESS, FAIL } = require('./Constants');
 const {
   validateBridgeSize,
   checkMoveString,
@@ -42,29 +42,30 @@ class App {
     const move = this.bridgeGame.move(this.bridge, userMove);
     const upBridge = this.bridgeGame.getupBridge();
     const downBridge = this.bridgeGame.getDownBridge();
+    const bridge = [upBridge, downBridge];
 
     move;
-    printMap(upBridge, downBridge);
-    this.checkContinue(move);
+    printMap(bridge);
+    this.checkContinue(move, bridge);
   }
 
-  checkContinue(move) {
+  checkContinue(move, bridge) {
     if (move === true) this.getUserMoving();
-    if (move === false) this.getUserRetry();
+    if (move === false) this.getUserRetry(bridge);
   }
 
-  getUserRetry() {
+  getUserRetry(bridge) {
     readGameCommand((userRetry) => {
       checkRetryString(userRetry);
-      this.checkRetry(userRetry);
+      this.checkRetry(userRetry, bridge);
     });
   }
 
-  checkRetry(userRetry) {
+  checkRetry(userRetry, bridge) {
     const retry = this.bridgeGame.retry(userRetry);
 
     if (retry === true) this.retryGame();
-    if (retry === false) this.quitGame();
+    if (retry === false) this.quitGame(bridge);
   }
 
   retryGame() {
@@ -72,8 +73,9 @@ class App {
     this.getUserMoving();
   }
 
-  quitGame() {
-    printResult();
+  quitGame(bridge) {
+    const tryCount = this.bridgeGame.getTryCount();
+    printResult(bridge, FAIL, tryCount);
   }
 }
 

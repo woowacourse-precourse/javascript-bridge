@@ -1,5 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_RESULT } = require('./Constants');
+const {
+  GAME_RESULT,
+  GAME_COUNT,
+  GAME_SUCCESS_OR_FAILURE,
+} = require('./Constants');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -10,9 +14,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(upBridge, downBridge) {
-    Console.print(`[ ${upBridge.join(' | ')} ]`);
-    Console.print(`[ ${downBridge.join(' | ')} ]`);
+  printMap(bridge) {
+    Console.print(`[ ${bridge[0].join(' | ')} ]`);
+    Console.print(`[ ${bridge[1].join(' | ')} ]`);
   },
 
   /**
@@ -20,8 +24,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {
+  printResult(bridge, successOrFail, tryCount) {
     Console.print(GAME_RESULT);
+    Console.print(`[ ${bridge[0].join(' | ')} ]`);
+    Console.print(`[ ${bridge[1].join(' | ')} ]`);
+    Console.print(`${GAME_SUCCESS_OR_FAILURE}${successOrFail}`);
+    Console.print(`${GAME_COUNT}${tryCount}`);
     Console.close();
   },
 };
