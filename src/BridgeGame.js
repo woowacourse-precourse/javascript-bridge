@@ -25,16 +25,16 @@ class BridgeGame {
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * @param {string} moving U 혹은 D
-   * @return {0 | 1 | 2} 0: Fail, 1: Success, 2: Next
+   * @return {{status: 0 | 1 | 2, pathMap: string[][]}} 0: Fail, 1: Success, 2: Next
    */
   move(moving) {
     const currentPath = this.#path.push(moving);
     const isCorrect = this.#bridge.isCorrect(currentPath);
+
     const status = this.#bridge.compare(currentPath);
+    const pathMap = this.#path.markOX(isCorrect);
 
-    this.#path.markOX(isCorrect);
-
-    return status;
+    return { status, pathMap };
   }
 
   /**
@@ -55,17 +55,14 @@ class BridgeGame {
   }
 
   getResultInfo() {
-    const count = this.#count;
-    const pathMap = this.#path.getPathMap();
     const currentPath = this.#path.getPath();
     const status = this.#bridge.compare(currentPath);
+
+    const count = this.#count;
+    const pathMap = this.#path.getPathMap();
     const isSuccess = status === STATUS.SUCCESS;
 
     return { count, pathMap, isSuccess };
-  }
-
-  getPathMap() {
-    return this.#path.getPathMap();
   }
 }
 
