@@ -2,20 +2,25 @@ const ExceptionCheck = {
   LOWER_INCLUSIVE: 3,
   UPPER_INCLUSIVE: 20,
 
-  bridgeSize(bridgeSize) {
-    this.number(bridgeSize);
-    this.range(bridgeSize);
+  checkBridgeSize(size) {
+    this.number(size);
+    this.range(size);
   },
 
-  number(bridgeSize) {
+  number(size) {
     const numberRegEx = /[^0-9]/g;
-    if (numberRegEx.test(bridgeSize))
+    if (numberRegEx.test(size))
       throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
   },
 
-  range(bridgeSize) {
-    if (bridgeSize < this.LOWER_INCLUSIVE || bridgeSize > this.UPPER_INCLUSIVE)
+  range(size) {
+    if (size < this.LOWER_INCLUSIVE || size > this.UPPER_INCLUSIVE)
       throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+  },
+
+  checkMove(playerMove) {
+    if (playerMove === "U" || playerMove === "D") return;
+    else throw new Error("player이동은 U 또는 D만 입력해야 합니다.");
   },
 };
 
