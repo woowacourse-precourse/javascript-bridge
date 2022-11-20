@@ -1,15 +1,14 @@
+const { isRightLevelString } = require('../Utils/Validator');
+
 class Selected {
   #selected;
 
-  #validator;
-
-  constructor(validator) {
+  constructor() {
     this.#selected = [];
-    this.#validator = validator;
   }
 
-  #validate(input) {
-    this.#validator.isRightLevelString(input);
+  static validate(input) {
+    isRightLevelString(input);
   }
 
   get level() {
@@ -17,7 +16,7 @@ class Selected {
   }
 
   addElement(input) {
-    this.#validate(input);
+    this.constructor.validate(input);
     this.#selected.push(input);
   }
 

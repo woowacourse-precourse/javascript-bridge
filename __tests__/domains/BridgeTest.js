@@ -11,7 +11,6 @@ const {
   INPUT_MESSAGE,
   BRIDGE_ELEMENT,
 } = require('../../src/Utils/Constant');
-const Validator = require('../../src/Utils/Validator');
 
 describe('Bridge 생성 테스트', () => {
   test('다리 생성 함수 테스트', () => {
@@ -25,7 +24,7 @@ describe('Bridge 생성 테스트', () => {
   });
 
   test('다리 생성 테스트', () => {
-    const bridge = new Bridge(Validator, generate);
+    const bridge = new Bridge(generate);
 
     bridge.setBridge(4);
 
@@ -38,7 +37,7 @@ describe('Bridge 생성 테스트', () => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
 
-    const bridge = new Bridge(Validator, mockGenerator);
+    const bridge = new Bridge(mockGenerator);
     bridge.setBridge(5);
 
     for (let i = 0; i < randomNumbers.length; i += 1) {
@@ -51,7 +50,7 @@ describe('Bridge 생성 테스트', () => {
   });
 
   test('다리 길이 input이 숫자가 아닐 시 예외 출력', () => {
-    const bridge = new Bridge(Validator, generate);
+    const bridge = new Bridge(generate);
 
     expect(() => bridge.setBridge('12j')).toThrow(ERROR_MESSAGE.ISNAN);
     expect(() => bridge.setBridge(' 12')).toThrow(ERROR_MESSAGE.ISNAN);
@@ -59,14 +58,14 @@ describe('Bridge 생성 테스트', () => {
   });
 
   test('다리 길이 3미만, 20이상 입력시 예외 출력', () => {
-    const bridge = new Bridge(Validator, generate);
+    const bridge = new Bridge(generate);
 
     expect(() => bridge.setBridge(2)).toThrow(ERROR_MESSAGE.RANGE);
     expect(() => bridge.setBridge(21)).toThrow(ERROR_MESSAGE.RANGE);
   });
 
   test('자연수가 아닌 경우 예외 출력', () => {
-    const bridge = new Bridge(Validator, generate);
+    const bridge = new Bridge(generate);
 
     expect(() => bridge.setBridge(3.14)).toThrow(ERROR_MESSAGE.ISNAN);
     expect(() => bridge.setBridge(19.99)).toThrow(ERROR_MESSAGE.ISNAN);
