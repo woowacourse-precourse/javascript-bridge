@@ -91,4 +91,21 @@ describe('플레이어 입력값의 유효성 검사', () => {
       expectLogContains(getOutput(logSpy), [ERROR.INPUT_MOVING_DIRECTION]);
     });
   });
+
+  test('플레이어는 자신이 선택한 방향으로 이동한다.', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['1', '0', '1']);
+    mockQuestions(['3', 'U', 'D', 'U']);
+
+    const game = new BridgeGame();
+    game.proceed();
+
+    game.proceed().then(() => {
+      [...game.gameResult.getResult].toEqual([
+        [0, { machine: 'U', player: 'U' }],
+        [1, { machine: 'D', player: 'D' }],
+        [2, { machine: 'U', player: 'U' }],
+      ]);
+    });
+  });
 });
