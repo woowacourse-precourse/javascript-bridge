@@ -12,8 +12,12 @@ const InputView = {
    */
   readBridgeSize(bridgeGamePresenter) {
     Console.readLine(INPUT.GET_SIZE, (size) => {
-      Validation.inputSize(size);
-      bridgeGamePresenter.createBridgeModel(size);
+      try {
+        Validation.inputSize(size);
+        bridgeGamePresenter.createBridgeModel(size);
+      } catch (error) {
+        bridgeGamePresenter.handleReadBridgeSizeError(error);
+      }
     });
   },
   /**
@@ -21,8 +25,13 @@ const InputView = {
    */
   readMoving(bridgeGamePresenter) {
     Console.readLine(INPUT.GET_MOVING, (selectedMove) => {
-      Validation.inputMove(selectedMove);
-      bridgeGamePresenter.move(selectedMove);
+      try {
+        Validation.inputMove(selectedMove);
+
+        bridgeGamePresenter.move(selectedMove);
+      } catch (error) {
+        bridgeGamePresenter.handleReadMovingError(error);
+      }
     });
   },
 
@@ -31,8 +40,12 @@ const InputView = {
    */
   readGameCommand(bridgeGamePresenter) {
     Console.readLine(INPUT.GET_RETRY, (retry) => {
-      Validation.inputRetry(retry);
-      bridgeGamePresenter.checkRetryInput(retry);
+      try {
+        Validation.inputRetry(retry);
+        bridgeGamePresenter.checkRetryInput(retry);
+      } catch (error) {
+        bridgeGamePresenter.handleReadGameCommandError(error);
+      }
     });
   },
 };

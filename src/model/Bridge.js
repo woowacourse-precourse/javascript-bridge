@@ -1,14 +1,12 @@
-const { MOVING } = require("../view/stringsUI");
-
 class Bridge {
-  createdArr;
+  createdArr; // U,D 로 구성됨
 
   constructor(createdArr) {
     this.createdArr = createdArr;
   }
 
   crossBridge({ bridgeIndex, selectedMove }) {
-    const isMove = this.createdArr[bridgeIndex] === MOVING[selectedMove];
+    const isMove = this.createdArr[bridgeIndex] === selectedMove;
     return isMove;
   }
 }

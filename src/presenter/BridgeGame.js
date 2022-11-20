@@ -78,7 +78,11 @@ class BridgeGame {
     if (isMove) {
       return this.getPlayerMove();
     }
-    return InputView.readGameCommand(this);
+    return this.getGameCommand();
+  }
+
+  getGameCommand() {
+    InputView.readGameCommand(this);
   }
 
   getMoveFinishBooleans() {
@@ -115,6 +119,19 @@ class BridgeGame {
       isSuccess,
       totalTrial: this.totalTrial,
     });
+  }
+
+  handleReadBridgeSizeError(error) {
+    OutputView.printError(error);
+    this.getBridgeSize();
+  }
+  handleReadMovingError(error) {
+    OutputView.printError(error);
+    this.getPlayerMove();
+  }
+  handleReadGameCommandError(error) {
+    OutputView.printError(error);
+    this.getGameCommand();
   }
 }
 

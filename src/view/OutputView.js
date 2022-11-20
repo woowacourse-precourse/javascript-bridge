@@ -34,6 +34,10 @@ const OutputView = {
 
     Console.close();
   },
+
+  printError(errorMsg) {
+    Console.print(errorMsg);
+  },
 };
 
 module.exports = OutputView;
