@@ -1,6 +1,8 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { GAME_MESSAGE } = require('./utils/constants');
 
+const controller = require('./controller/BridgeController');
+
 const OutputView = {
   makeMiniTemplate(outputList) {
     return `[ ${outputList.join(' | ')} ]`;
@@ -21,18 +23,18 @@ const OutputView = {
     ];
   },
 
-  printMap(controlInstance) {
-    this.moveMapTemplate(controlInstance.outputmoveMap()).forEach((bridge) =>
+  printMap() {
+    this.moveMapTemplate(controller.outputmoveMap()).forEach((bridge) =>
       Console.print(bridge)
     );
     Console.print('');
   },
 
-  printResult(controlInstance) {
+  printResult() {
     Console.print(GAME_MESSAGE.final);
-    OutputView.printMap(controlInstance);
+    OutputView.printMap();
     OutputView.finalResultTemplate(
-      controlInstance.outputExit()
+      controller.outputExit()
     ).forEach((sentence) => Console.print(sentence));
 
     Console.close();
