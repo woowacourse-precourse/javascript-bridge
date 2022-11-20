@@ -29,13 +29,6 @@ class BridgeGame {
     return [...this.#history].reverse().find((element) => element.crossable === true).location + 1;
   }
 
-  getLastLocation() {
-    if (this.#history.length === 0) {
-      return 0;
-    }
-    return this.#history.at(-1).location;
-  }
-
   getLastCrossable() {
     if (this.#history.length === 0) {
       return true;
