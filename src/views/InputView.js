@@ -42,7 +42,7 @@ const InputView = {
       }
       const state = bridgeGame.getGameState();
       if (state) {
-        this.readGameCommand(state);
+        this.readGameCommand(state, bridgeGame);
         return;
       }
       this.readMoving(bridgeGame);
@@ -52,15 +52,22 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(state) {
-    if (state === BridgeGame.GAME_FAILED) this.readGameCommandAfterFailed();
+  readGameCommand(state, bridgeGame) {
+    if (state === BridgeGame.GAME_FAILED)
+      this.readGameCommandAfterFailed(bridgeGame);
     if (state === BridgeGame.GAME_SUCCESS) this.readGameCommandAfterSuccess();
   },
 
-  readGameCommandAfterFailed() {
+  readGameCommandAfterFailed(bridgeGame) {
     Console.readLine(
       InputMessage.READ_GAME_COMMAND_AFTER_FAILED_MESSAGE,
-      (value) => {}
+      (value) => {
+        if (value === BridgeGame.RETRY) {
+          bridgeGame.retry();
+          this.readMoving(bridgeGame);
+          return;
+        }
+      }
     );
   },
   readGameCommandAfterSuccess() {},

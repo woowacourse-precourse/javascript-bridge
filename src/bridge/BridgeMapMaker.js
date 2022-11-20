@@ -47,6 +47,10 @@ const BridgeMapMaker = {
     }
     this.map[this.down].push(`${point}   ]`);
   },
+
+  onRetry() {
+    this.map = [[], []];
+  },
 };
 
 module.exports = BridgeMapMaker;
