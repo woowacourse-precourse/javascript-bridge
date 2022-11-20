@@ -29,7 +29,15 @@ const InputView = {
   },
 
   readGameCommand(fun) {
-    MissionUtils.Console.readLine(Notice.RETRY_GAME,fun)
+    MissionUtils.Console.readLine(Notice.RETRY_GAME,(input)=>{
+      try{
+        Validate.RetryInput(input)
+        fun(input)
+      }catch(err){
+        MissionUtils.Console.print(err)
+        this.readGameCommand(fun)
+      }
+    })
   },
 };
 
