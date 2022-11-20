@@ -5,6 +5,8 @@ const { printMap } = require('../view/OutputView');
 class Bridge {
   #bridge;
 
+  #level = 0;
+
   #map = {};
 
   constructor(bridgeSize) {
@@ -32,7 +34,12 @@ class Bridge {
     return this.#bridge.length;
   }
 
+  getLevel() {
+    return this.#level;
+  }
+
   checkBridge(index, command) {
+    this.#level = index;
     const comparison = this.#bridge[index] === command;
     this.updateMap(index, command, comparison);
     this.print(index);

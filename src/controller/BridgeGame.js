@@ -9,8 +9,6 @@ const { printGameStart, printResult } = require('../view/OutputView');
 class BridgeGame {
   #bridge;
 
-  #level = 0;
-
   #gameTry = 1;
 
   async execute() {
@@ -35,7 +33,7 @@ class BridgeGame {
     if (result) {
       return this.move(level + 1, await readMoving());
     }
-    return this.retry(level);
+    return this.retry();
   }
 
   /**
@@ -43,15 +41,15 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  async retry(level) {
+  async retry() {
     this.#gameTry += 1;
     const command = await readGameCommand();
-    return this.commandProcess(level, command);
+    return this.commandProcess(command);
   }
 
-  async commandProcess(level, command) {
+  async commandProcess(command) {
     if (command === 'R') {
-      return this.move(level, await readMoving());
+      return this.move(0, await readMoving());
     }
     if (command === 'Q') {
       this.quitGame(false);
