@@ -36,11 +36,6 @@ class GameController {
     return shouldRetry;
   }
 
-  retry() {
-    this.#bridgeGame.increaseNumberOfAttempts();
-    this.#bridgeGame.initPlayData();
-  }
-
   gameOver(userWin = false) {
     const gameResult = this.#bridgeGame.gameResult(userWin);
     OutputView.printResult(gameResult);

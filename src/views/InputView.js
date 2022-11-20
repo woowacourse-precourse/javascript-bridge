@@ -54,12 +54,7 @@ const InputView = {
   commandCallback(command) {
     try {
       const sholudRetry = this.controller.handleCommand(command);
-      if (sholudRetry) {
-        this.controller.retry();
-        this.readMoving();
-      } else {
-        this.controller.gameOver();
-      }
+      sholudRetry ? this.readMoving() : this.controller.gameOver();
     } catch ({ message }) {
       this.controller.print(message);
       this.readGameCommand();

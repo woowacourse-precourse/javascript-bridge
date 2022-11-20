@@ -1,6 +1,5 @@
 const { MAP_ELEMENT } = require('./constant');
 const BridgeMap = require('./models/BridgeMap');
-const { doseUserChooseRetry, isCorrectDirection } = require('./HandleCommand');
 
 class BridgeGame {
   #bridge;
@@ -31,20 +30,18 @@ class BridgeGame {
   }
 
   retry(command) {
-    return command === 'R';
+    const shouldRetry = command === 'R';
+    if (shouldRetry) {
+      this.#numberOfAttempts += 1;
+      this.#curPlace = 0;
+      this.#bridgeMap.initMap();
+    }
+
+    return shouldRetry;
   }
 
   gameComplete() {
     return this.#bridge.length === this.#curPlace;
-  }
-
-  increaseNumberOfAttempts() {
-    this.#numberOfAttempts += 1;
-  }
-
-  initPlayData() {
-    this.#curPlace = 0;
-    this.#bridgeMap.initMap();
   }
 
   gameResult(userWin = false) {
