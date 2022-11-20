@@ -1,5 +1,6 @@
 const { readLine } = require('./utils/util');
-const { MESSAGE, BRIDGE_SIZE } = require('./constant/constant');
+const { BRIDGE_SIZE } = require('./constant/constant');
+const MESSAGE = require('./constant/message');
 const Validate = require('./utils/validate');
 
 /**
@@ -22,7 +23,13 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    let moveInput;
+    readLine(MESSAGE.INPUT.BRIDGE_SIZE, (input) => {
+      moveInput = input;
+    });
+    return moveInput;
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
