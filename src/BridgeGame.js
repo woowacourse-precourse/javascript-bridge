@@ -1,22 +1,15 @@
 const { Console } = require('@woowacourse/mission-utils');
-const BridgeController = require('./controller/BridgeController');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
 const { GAME_QUESTION, GAME_RESULT_STATE } = require('./utils/constants');
 
+const controller = require('./controller/BridgeController');
+
 class BridgeGame {
-  #controller;
-
-  constructor() {
-    this.#controller = new BridgeController();
-  }
-
   start() {
     Console.readLine(GAME_QUESTION.bridgeLength, (bridgeLength) => {
       InputView.readBridgeSize(bridgeLength);
-
-      this.#controller.inputBridgeLength(bridgeLength);
       this.move();
     });
   }
@@ -24,10 +17,9 @@ class BridgeGame {
   move() {
     Console.readLine(GAME_QUESTION.move, (command) => {
       InputView.readMoving(command);
+      OutputView.printMap();
 
-      this.#controller.inputBridgeUpDown(command);
-      OutputView.printMap(this.#controller);
-      this.#checkGameResult(this.#controller.outputExit().result);
+      this.#checkGameResult(controller.outputExit().result);
     });
   }
 
@@ -40,8 +32,7 @@ class BridgeGame {
   }
 
   #checkGameResult(gameState) {
-    if (gameState === GAME_RESULT_STATE.success)
-      OutputView.printResult(this.#controller);
+    if (gameState === GAME_RESULT_STATE.success) OutputView.printResult();
 
     if (gameState === GAME_RESULT_STATE.fail) this.retry();
 
@@ -49,13 +40,13 @@ class BridgeGame {
   }
 
   #checkGameCommand(command) {
-    switch (command) {
-      case 'R':
-        this.#controller.inputRestart();
-        this.move();
-        break;
-      default:
-        OutputView.printResult(this.#controller);
+    if (command === 'R') {
+      controller.inputRestart();
+      this.move();
+    }
+
+    if (command === 'Q') {
+      OutputView.printResult();
     }
   }
 }
