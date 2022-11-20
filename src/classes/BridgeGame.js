@@ -11,11 +11,13 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() { //실질적 (반복이 시작되는) 시작 로직
+  move() {
+    //실질적 (반복이 시작되는) 시작 로직
     const history = { upper: [], lower: [], count: 0 };
     // 칸을 이동한다 : 입력받고, 비교하고, 표 만든다.
     // GameLogic: history 객체를 받아서, 로직 처리 후 history 내보냄
     // 여기서 {history} 리턴
+    return history;
   }
 
   /**

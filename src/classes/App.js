@@ -6,7 +6,12 @@ class App {
     //retry: 위의 다리정보 재활용
     //시도횟수 리셋
     //move부터 다시시작.
+    console.log("start");
   }
 }
 
 module.exports = App;
+
+//구현 완료 후 지우기
+const app = new App();
+app.play();

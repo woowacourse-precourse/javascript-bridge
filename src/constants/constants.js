@@ -1,5 +1,7 @@
 const SAYS = Object.freeze({
   START: "다리 건너기 게임을 시작합니다.",
+  RESULT: (result, count) =>
+    `최종 게임 결과\n${result.map}\n\n게임 성공 여부: ${result.text}\n총 시도한 횟수: ${count}`,
 });
 
 const ASKS = Object.freeze({
