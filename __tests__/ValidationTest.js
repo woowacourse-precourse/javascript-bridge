@@ -31,3 +31,26 @@ describe('checkBridgeSize 메서트 테스트', () => {
     }
   );
 });
+
+describe('checkDirection 메서드 테스트', () => {
+  test('U 또는 D가 아닌 값을 입력하면 errorMsg의 값이 존재하는 객체를 반환한다.', () => {
+    const { errorMsg } = Validation.checkDirection('Y');
+
+    expect(errorMsg).toEqual('\n[ERROR] U 또는 D만 입력할 수 있습니다.');
+  });
+
+  test('소문자 u, d를 입력해도 errorMsg의 값이 존재하는 객체를 반환한다.', () => {
+    const { errorMsg } = Validation.checkDirection('u');
+
+    expect(errorMsg).toEqual('\n[ERROR] U 또는 D만 입력할 수 있습니다.');
+  });
+
+  test.each([['U'], ['D']])(
+    'U 또는 D를 입력하면 errorMsg의 값이 undefined인 객체를 반환한다. direction: %s',
+    (direction) => {
+      const { errorMsg } = Validation.checkDirection(direction);
+
+      expect(errorMsg).toBeUndefined();
+    }
+  );
+});

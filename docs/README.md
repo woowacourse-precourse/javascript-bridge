@@ -227,6 +227,7 @@ const number = generateRandomNumber();
   - printResult 메서드 테스트 코드를 작성한다.
 - [ ] test: Validation.js 테스트 코드 작성
   - checkBridgeSize 메서드 테스트 코드를 작성한다.
+  - checkDirection 메서드 테스트 코드를 작성한다.
 
 ---
 
