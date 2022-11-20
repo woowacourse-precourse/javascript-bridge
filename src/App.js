@@ -6,7 +6,7 @@ const OutputView = require("./OutputView");
 class App {
   play() {
     OutputView.printStart();
-    BridgeMaker.makeBridge();
+    InputView.readBridgeSize();
   }
 }
 
