@@ -37,6 +37,11 @@ class BridgeGame {
     // console.log("this.#bridge", this.#bridge)
   }
 
+  getMatchResult() {
+    const index = this.#moveCount - 1
+    return this.#user[index] === this.#bridge[index] ? "O" : "X"
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>

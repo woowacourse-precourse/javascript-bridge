@@ -6,8 +6,24 @@ const {MESSAGE} = require('./constants');
  */
 const OutputView = {
   thread: {
-    up: [],
-    down: []
+    upside: [],
+    downside: []
+  },
+
+  MAKE_MOVE_MAP: {
+    U: (thread, result) => {
+      thread.upside.push(result);
+      thread.downside.push(" ");
+    },
+    D: (thread, result) => {
+      thread.upside.push(" ");
+      thread.downside.push(result);
+    }
+  },
+  
+  clearThread() {
+    this.thread.upside = [];
+    this.thread.downside = [];
   },
 
   printStart () {
@@ -19,26 +35,16 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+
   printMap(bridgeGame) {
-    const result = (
-      bridgeGame.getUser()[bridgeGame.getMoveCount() - 1] === bridgeGame.getBride()[bridgeGame.getMoveCount() - 1] ? "O" : "X"
-    )
-    if(bridgeGame.getUser()[bridgeGame.getMoveCount() - 1] === "U") {
-      this.thread.up.push(result);
-      this.thread.down.push(" ");
-    } else if (bridgeGame.getUser()[bridgeGame.getMoveCount() - 1] === "D") {
-      this.thread.up.push(" ");
-      this.thread.down.push(result);
-    }
-    
-    Console.print(`[ ${this.thread.up.join(" | ")} ]`)
-    Console.print(`[ ${this.thread.down.join(" | ")} ]\n`)
+    const index = bridgeGame.getMoveCount() - 1;
+    const result = bridgeGame.getMatchResult();
+    this.MAKE_MOVE_MAP[bridgeGame.getUser()[index]](this.thread, result);
+
+    Console.print(`[ ${this.thread.upside.join(" | ")} ]`)
+    Console.print(`[ ${this.thread.downside.join(" | ")} ]\n`)
   },
 
-  clearThread() {
-    this.thread.up = [];
-    this.thread.down = [];
-  },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -48,8 +54,8 @@ const OutputView = {
     const result = bridgeGame.getStatus() === "END" ? "성공" : "실패" 
 
     Console.print(MESSAGE.RESULT_INFO)
-    Console.print(`[ ${this.thread.up.join(" | ")} ]`)
-    Console.print(`[ ${this.thread.down.join(" | ")} ]`)
+    Console.print(`[ ${this.thread.upside.join(" | ")} ]`)
+    Console.print(`[ ${this.thread.downside.join(" | ")} ]`)
     Console.print(MESSAGE.RESULT_IS_SUCCESS(result))
     Console.print(MESSAGE.RESULT_TRY_COUNT(bridgeGame.getTryCount()))
   },
