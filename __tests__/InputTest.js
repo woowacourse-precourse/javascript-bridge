@@ -43,4 +43,10 @@ describe("입력 테스트", () => {
       Validation.isInRange("21");
     }).toThrow(ERROR_MESSAGE.RANGE);
   });
+
+  test("이동 관련 유저의 입력이 대문자 U, D 가 아닌 경우 예외 처리한다.", () => {
+    expect(() => {
+      Validation.checkUserMoveInput("A");
+    }).toThrow(ERROR_MESSAGE.MOVE_INPUT);
+  });
 });

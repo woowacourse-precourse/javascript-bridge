@@ -45,8 +45,13 @@
 ## 🛠 테스트
 
 - [x] `다리 길이 입력에 대한 유효성 테스트 (InputView.readBridgeSize)`
+
   - [x] 다리 길이 입력이 숫자가 아니면 에러 메세지를 출력하여 예외 처리한다. (Validation.isOnlyNumber)
   - [x] 다리 길이 입력 숫자의 범위가 3부터 20 사이가 아니라면 에러 메세지를 출력하여 예외 처리한다. (Validation.isInRange)
+
+- [x] `이동 관련 입력에 대한 유효성 테스트`
+
+  - [x] 유저의 입력이 대문자 U, D 가 아닌 경우 예외 처리한다. (Validation.checkUserMoveInput)
 
 ## 🚀 기능 요구 사항
 
