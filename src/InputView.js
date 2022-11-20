@@ -25,7 +25,7 @@ const InputView = {
     Console.readLine(message, runCommand);
   },
 
-  Close() {
+  close() {
     Console.close();
   },
 };

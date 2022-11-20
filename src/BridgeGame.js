@@ -46,9 +46,14 @@ class BridgeGame {
     }
     this.moveCount += 1;
 
-    if (!this.bridgeStore.isSameWithBridgeLength(this.moveCount)) {
-      InputView.readMoving(this.movingMessage, this.move);
+    const isGameEnd = this.bridgeStore.isSameWithBridgeLength(this.moveCount);
+
+    if (isGameEnd) {
+      this.end();
+      return;
     }
+
+    InputView.readMoving(this.movingMessage, this.move);
   };
 
   /**
@@ -59,7 +64,7 @@ class BridgeGame {
   retry = (command) => {
     const run = {
       R: InputView.readMoving,
-      Q: InputView.Close,
+      Q: this.end,
     };
 
     const params = {
@@ -74,6 +79,12 @@ class BridgeGame {
     // TODO: bridge길이 확인
     const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     this.bridgeStore = new BridgeStore(bridge);
+  }
+
+  end() {
+    // TODO: 게임 결과 출력
+
+    InputView.close();
   }
 
   runGame = (bridgeSize) => {
