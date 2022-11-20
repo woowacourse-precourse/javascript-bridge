@@ -9,24 +9,19 @@ const BridgeMaker = {
    * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
-  
-  makeBridge(size, generateRandomNumber) {
-    
+   makeBridge(size, generateRandomNumber) {
+    let tempArray = [];
 
-    let generate = BridgeMaker.generateRandomNumber(size);
-    for (const element of generate) {
-      console.log(element);
+    for(let i=0 ;i<size; i++){
+      let generates = generateRandomNumber.generate();
+      tempArray.push(generates);
     }
-    return generate;
+
+    console.log(tempArray);
+    return tempArray;
+    
   },
 
-  generateRandomNumber(size){
-    let RandomNumberArray = new Array(size);
-    for(let i=0; i<size; i++){
-      RandomNumberArray[i]= MissionUtils.Random.pickNumberInRange(0, 1);
-    }
-    return RandomNumberArray;
-  }
 };
 
 module.exports = BridgeMaker;

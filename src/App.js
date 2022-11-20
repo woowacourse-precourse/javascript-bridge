@@ -4,24 +4,54 @@ const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 
 class App {
-  #BridgeArray
+  BridgeArray
+  tryGame;
+  flag;
   constructor(){
-    this.#BridgeArray = [];
+    this.BridgeArray = [];
+    this.tryGame=0;
+    this.flag=false;
   }
-  play() {
+  
+  async play() {
     MissionUtils.Console.print('다리 건너기 게임을 시작합니다.\n');
     
-    let tempBridgeArray = InputView.readBridgeSize();
-    console.log(tempBridgeArray);
+    let tempBridgeArray = await InputView.readBridgeSize();
+    this.BridgeArray = tempBridgeArray;
 
-    this.#BridgeArray.push(tempBridgeArray);
-    console.log(this.#BridgeArray);
-    MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)',
-     input => {
-      let checkOrNot = InputView.readMoving(input);
-      
-    })
+    console.log(tempBridgeArray);
+    while(true){
+      let answer = await this.run();
+      if(answer == true) this.flag = true;
+      tryGame += 1;
+      const ready = await InputView.readGameCommand(BridgesGameStart);
+      // 다시 할래?
+      if(!ready){
+        break;
+      }
+    }
+
   }
+
+  async run(){
+    
+    let BridgesGameStart = new BridgeGame(this.BridgeArray);
+    let arr1 = new Array(this.BridgeArray.length);
+    let arr2 = new Array(this.BridgeArray.length);
+    let turns = 0;
+    while(turns != this.BridgeArray.length){
+      const result = await InputView.readMoving(BridgesGameStart,turns);
+
+      if(result == false){
+        return false;
+      }
+      else{
+        turns += 1;
+      }
+    }
+    return true;
+  }
+
 }
 
 module.exports = App;
