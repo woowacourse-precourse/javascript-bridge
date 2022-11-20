@@ -1,6 +1,11 @@
 const Player = require("../src/Player");
 
 describe("플레이어 상태 테스트", () => {
+  test("플레이어가 선택한 길이 저장되는지 테스트", () => {
+    Player.updateMovingArr("U");
+    expect(Player.movingArr).toStrictEqual(["U"]);
+  });
+
   test("위쪽 다리를 맞출 경우 상태 테스트", () => {
     Player.checkUpperBridgeCorrect("U", true);
     expect(Player.state).toStrictEqual([[" O "], ["   "]]);
