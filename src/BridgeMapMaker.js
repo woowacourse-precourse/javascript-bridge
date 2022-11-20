@@ -21,8 +21,8 @@ const BridgeMapMaker = {
 
   /**
    * 다리 일부분의 상태를 업데이트하는 메서드
-   * @param {*} partialMap 업데이트할 다리 일부분의 상태
-   * @param {*} isCorrect 이동 성공 여부
+   * @param {string[]} partialMap 업데이트할 다리 일부분의 상태
+   * @param {boolean} isCorrect 이동 성공 여부
    * @returns {string[]} 업데이트한 다리 일부분의 상태. 이동에 성공하면 O, 실패하면 X로 표현한다.
    */
   update(partialMap, isCorrect) {
