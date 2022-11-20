@@ -8,6 +8,8 @@ const View = {
 
   gameStart: () => OutputView.printStart(),
   gameMap: (top, bottom) => OutputView.printMap(top, bottom),
+  gameResult: (result, userState, tries) =>
+    OutputView.printResult(result, userState, tries),
 };
 
 module.exports = View;
