@@ -21,7 +21,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(MESSAGE.INPUT_BRIDGE_SIZE, (size) => {
       try {
-        this.bridgeSizeErrorCheck(size);
+        this.bridgeSizeErrorCheck(size, this.bridgeSizeGo);
       } catch (error) {
         this.bridgeSizeRetry(error);
       }
@@ -53,9 +53,9 @@ const InputView = {
     });
   },
 
-  bridgeSizeErrorCheck(size) {
+  bridgeSizeErrorCheck(size, callback) {
     printBridgeSizeError(sizeRegexTest(changeSizeType(size)));
-    this.bridgeSizeGo(changeSizeType(size));
+    callback.call(InputView, changeSizeType(size));
   },
 
   bridgeSizeGo(size) {
