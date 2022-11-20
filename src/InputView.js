@@ -30,7 +30,8 @@ const InputView = {
       (inputBridgeChoice) => {
         InputCheck.checkMoving(inputBridgeChoice);
         const bridgeGamge = new BridgeGame();
-        bridgeGamge.move(inputBridgeChoice, bridge, bridgeList);
+        const movingResult = bridgeGamge.move(inputBridgeChoice, bridge, bridgeList);
+        return this.readMoving(bridge, movingResult)
       }
     );
   },
