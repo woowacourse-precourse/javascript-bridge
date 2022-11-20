@@ -16,8 +16,12 @@ const InputView = {
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
+   *
+   * @param {Function} moveCallback
    */
-  readMoving() {},
+  readMoving(moveCallback) {
+    Console.readLine(GameMessage.MOVE, moveCallback);
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
