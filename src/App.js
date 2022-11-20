@@ -5,6 +5,7 @@ const { REQUIREMENT, GAMERESULT } = require('./constant/Constant');
 
 class App {
   #bridge;
+  #attemptsCnt;
 
   play() {
     OutputView.printInit();
@@ -13,6 +14,7 @@ class App {
 
   initGame(bridgeLength) {
     this.#bridge = new BridgeGame(bridgeLength);
+    this.#attemptsCnt = 1;
     InputView.readMoving(this);
   }
   
@@ -23,7 +25,7 @@ class App {
   }
 
   printBridge() {
-    const result = this.#bridge.makeBridgeString(this.#userInput);
+    const result = this.#bridge.makeBridgeString();
     OutputView.printMap(result);
   }
 
@@ -35,10 +37,20 @@ class App {
     } else if (result === GAMERESULT.RIGHTBLOCK) {
       InputView.readMoving(this);
     } else if (result === GAMERESULT.GAMECLEAR){
-      console.log('Game Over');
+      console.log('Game Clear');
     }
   }
   
+  retryOrTerminate(input) {
+    if (input === REQUIREMENT.RETRY) {
+      this.#bridge.retry();
+      this.#attemptsCnt += 1;
+      InputView.readMoving(this);
+    } else {
+      console.log('Game Over');
+    }
+  }
+
 }
 
 const app = new App();
