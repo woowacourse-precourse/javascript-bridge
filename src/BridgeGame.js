@@ -1,8 +1,5 @@
 const OutputView = require("./OutputView");
 
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 class BridgeGame {
   constructor() {
     this.round = 0;
@@ -50,28 +47,24 @@ class BridgeGame {
   }
 
   setUpResult(reset, round, correct) {
-    if (!reset) {
-      if (correct) {
-        this.upResult[round] = " O ";
-      } else {
+    if (reset) this.upResult = [];
+    else {
+      if (correct) this.upResult[round] = " O ";
+      else {
         this.upResult[round] = " X ";
         this.setCross(false);
       }
-    } else if (reset) {
-      this.upResult = [];
     }
   }
 
   setDownResult(reset, round, correct) {
-    if (!reset) {
-      if (correct) {
-        this.downResult[round] = " O ";
-      } else {
+    if (reset) this.downResult = [];
+    else {
+      if (correct) this.downResult[round] = " O ";
+      else {
         this.downResult[round] = " X ";
         this.setCross(false);
       }
-    } else if (reset) {
-      this.downResult = [];
     }
   }
 
@@ -82,48 +75,45 @@ class BridgeGame {
   getDownResult() {
     return this.downResult;
   }
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move(movement, bridge) {
-    const bridgeUD = bridge.getBridge();
-    let round = this.getRound();
 
-    if (movement == "U") {
-      if (movement == bridgeUD[round]) {
-        this.setUpResult(false, round, true);
-        this.downResult.push("   ");
-      } else {
-        this.setUpResult(false, round, false);
-        this.downResult.push("   ");
-        this.setCross(false);
-      }
-    } else if (movement === "D") {
-      if (movement == bridgeUD[round]) {
-        this.setDownResult(false, round, true);
-        this.upResult.push("   ");
-      } else {
-        this.setDownResult(false, round, false);
-        this.upResult.push("   ");
-        this.setCross(false);
-      }
+  upMovement(movement, bridgeUD, round) {
+    if (movement == bridgeUD[round]) {
+      this.setUpResult(false, round, true);
+      this.downResult.push("   ");
+    } else {
+      this.setUpResult(false, round, false);
+      this.downResult.push("   ");
+      this.setCross(false);
     }
+  }
 
-    this.setRound();
+  downMovement(movement, bridgeUD, round) {
+    if (movement == bridgeUD[round]) {
+      this.setDownResult(false, round, true);
+      this.upResult.push("   ");
+    } else {
+      this.setDownResult(false, round, false);
+      this.upResult.push("   ");
+      this.setCross(false);
+    }
+  }
 
+  isSuccess(bridgeUD) {
     if (bridgeUD.length == this.getRound() && this.getCross() == true) {
-      console.log("su");
       this.setSuccess();
     }
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+  move(movement, bridge) {
+    const bridgeUD = bridge.getBridge();
+    let round = this.getRound();
+
+    if (movement == "U") this.upMovement(movement, bridgeUD, round);
+    if (movement === "D") this.downMovement(movement, bridgeUD, round);
+
+    this.setRound();
+    this.isSuccess(bridgeUD);
+  }
 
   reset() {
     this.setRound(true);
