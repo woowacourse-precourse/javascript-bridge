@@ -15,7 +15,7 @@ class BridgeGame {
   }
 
   isSuccess() {
-    return this.#bridge.isLastStep(this.#position);
+    return this.#bridge.isLastStep(this.#player);
   }
 
   isMovable(direction) {
