@@ -1,6 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { Console } = require("@woowacourse/mission-utils");
 const { VALID_CHAR } = require("./constants");
 const ErrorChecker = require("./ErrorChecker");
 /**
@@ -10,11 +8,10 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (bridgeSize) => {
+  readBridgeSize(bridgeGame) {
+    Console.readLine("다리의 길이를 입력해주세요.\n", (bridgeSize) => {
       ErrorChecker.checkBridgeSizeValidation(bridgeSize);
-      BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-      this.readMoving();
+      bridgeGame.init(bridgeSize);
     });
   },
 
