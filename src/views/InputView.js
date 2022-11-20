@@ -2,11 +2,11 @@ const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGES } = require("../constraints/constarints");
 const { generate } = require("../utils/random/BridgeRandomNumberGenerator");
 const { makeBridge } = require("../models/BridgeMaker");
+const { printResult, printMap } = require("./OutputView");
 const {
   validateBridgeSizeInput,
   validateGameCommandInput,
 } = require("../utils/validators/validators");
-const { printResult, printMap } = require("./OutputView");
 
 const InputView = {
   /**
@@ -25,8 +25,8 @@ const InputView = {
 
   /**
    * 사용자가 이동할 칸을 입력받는 함수
-   * @param {*} game 현재 진행 중인 게임 (인스턴스)
-   * @param {*} bridge 현재 만들어진 다리 (정답)
+   * @param {BridgeGame} game 현재 진행 중인 게임 (인스턴스)
+   * @param {string[]} bridge 현재 만들어진 다리 (정답)
    * @returns
    */
   readMoving(game, bridge) {
@@ -43,7 +43,9 @@ const InputView = {
   },
 
   /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는 함수
+   * @param {BridgeGame} game
+   * @param {string[]} bridge
    */
   readGameCommand(game, bridge) {
     Console.readLine(MESSAGES.RETRY, (input) => {

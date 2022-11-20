@@ -1,8 +1,7 @@
 const { validateMoveInput } = require("../utils/validators/validators");
 
 /**
- * 다리 건너기 게임을 관리하는 클래스,
- * inputView, OutputView 사용 금지
+ * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   constructor() {
@@ -16,8 +15,8 @@ class BridgeGame {
 
   /**
    * 플레이어가 칸을 이동하게 하는 함수
-   * @param {*} input 사용자의 입력 ("U" | "D")
-   * @param {*} bridge 현재 만들어진 다리 (정답)
+   * @param {string} input 사용자의 입력 ("U" | "D")
+   * @param {string[]} bridge 현재 만들어진 다리 (정답)
    */
   move(input, bridge) {
     const roundResult = bridge[this.playerLocation] === input;
@@ -30,10 +29,10 @@ class BridgeGame {
   }
 
   /**
-   * 사용자의 이동 결과에 따른 현재 진행 상황(progress)을 업데이트하는 함수
-   * @param {*} roundResult 이동 결과 (성공 시 true, 실패 시 false)
-   * @param {*} progress 현재 진행 상황 (progress)
-   * @param {*} input 사용자의 입력
+   * 플레이어의 이동 결과에 따른 현재 진행 상황(progress)을 업데이트하는 함수
+   * @param {boolean} roundResult 이동 결과 (성공 시 true, 실패 시 false)
+   * @param {[string[],string[]]} progress 현재 진행 상황 (progress)
+   * @param {string} input 사용자의 입력
    * @returns 업데이트 된 현재 진행 상황 (progress)
    */
   updateProgress(roundResult, progress, input) {
@@ -47,9 +46,9 @@ class BridgeGame {
   }
 
   /**
-   * 사용자가 이동에 성공했을 때 현재 진행 상황 업데이트
-   * @param {*} progress 현재 진행상황
-   * @param {*} input 사용자의 입력
+   * 플레이어가 이동에 성공했을 때 현재 진행 상황 업데이트
+   * @param {[string[],string[]]} progress 현재 진행상황
+   * @param {string} input 사용자의 입력
    * @returns 업데이트 된 현재 진행 상황 (progress)
    */
   success(progress, input) {
@@ -64,9 +63,9 @@ class BridgeGame {
   }
 
   /**
-   * 사용자가 이동에 실패했을 때 현재 진행 상황 업데이트
-   * @param {*} progress 현재 진행상황
-   * @param {*} input 사용자의 입력
+   * 플레이어가 이동에 실패했을 때 현재 진행 상황 업데이트
+   * @param {[string[],string[]]} progress 현재 진행상황
+   * @param {string} input 사용자의 입력
    * @returns 업데이트 된 현재 진행 상황 (progress)
    */
   fail(progress, input) {
@@ -80,14 +79,19 @@ class BridgeGame {
     return progress;
   }
 
+  /**
+   * 입력값에 따라 플레이어가 움직일 때 실행되는 함수
+   * @param {BridgeGame} game
+   * @param {string} input
+   * @param {string[]} bridge
+   */
   playerMoving(game, input, bridge) {
     validateMoveInput(input);
     game.move(input, bridge);
   }
+
   /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * 플레이어가 게임을 재시작할 때 실행되는 함수
    */
   retry() {
     this.try += 1;

@@ -1,3 +1,6 @@
+/**
+ * 콘솔 메시지 목록
+ */
 const MESSAGES = {
   START: "다리 건너기 게임을 시작합니다.",
   READ_BRIDGE_SIZE: "다리의 길이를 입력해주세요.",
@@ -31,8 +34,12 @@ const MESSAGES = {
   },
 };
 
+/**
+ * 허용된 입력값 목록
+ */
 const ALLOWED_CHAR = {
   MOVE: ["U", "D"],
   RETRY: ["R", "Q"],
 };
+
 module.exports = { MESSAGES, ALLOWED_CHAR };

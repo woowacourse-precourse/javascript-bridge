@@ -6,8 +6,8 @@ const { MESSAGES } = require("../constraints/constarints");
 const OutputView = {
   /**
    * 현재까지의 이동 결과를 출력하는 함수
-   * @param {*} game 현재 진행 중인 게임(인스턴스) 정보
-   * @returns
+   * @param {BridgeGame} game 현재 진행 중인 게임(인스턴스) 정보
+   * @returns Console에 결과를 출력
    */
   printMap(game) {
     let result = [];
@@ -18,7 +18,7 @@ const OutputView = {
 
   /**
    * 게임의 최종 결과를 출력하는 함수
-   * @param {*} game 현재 진행 중인 게임(인스턴스) 정보
+   * @param {BridgeGame} game 현재 진행 중인 게임(인스턴스) 정보
    * @returns 결과 출력 후 콘솔을 종료
    */
   printResult(game) {
