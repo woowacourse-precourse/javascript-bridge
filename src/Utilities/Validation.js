@@ -13,6 +13,21 @@ class Validation {
   static isValidRange(number) {
     return +number >= 3 && +number <= 20;
   }
+
+  static isUserMoveValid(userMove) {
+    if (!(this.isUserMoveChar(userMove) && this.isUserMoveLength(userMove))) {
+      throw new Error('[ERROR] 대문자 U나 D만 입력 가능합니다');
+    }
+  }
+
+  static isUserMoveChar(userMove) {
+    const Regex = /[U|D]/g;
+    return Regex.test(userMove);
+  }
+
+  static isUserMoveLength(userMove) {
+    return userMove.length === 1;
+  }
 }
 
 module.exports = Validation;
