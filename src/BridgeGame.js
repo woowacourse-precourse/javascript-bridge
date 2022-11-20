@@ -59,18 +59,13 @@ class BridgeGame {
    * @returns {{count: number, pathMap: string[][], isSuccess: boolean}}
    */
   getResultInfo() {
+    const currentPath = this.#path.getPath();
+
     const count = this.#count;
     const pathMap = this.#path.getPathMap();
-    const isSuccess = this.isSuccess();
+    const isSuccess = this.#bridge.compare(currentPath) === STATUS.SUCCESS;
 
     return { count, pathMap, isSuccess };
-  }
-
-  isSuccess() {
-    const currentPath = this.#path.getPath();
-    const status = this.#bridge.compare(currentPath);
-
-    return status === STATUS.SUCCESS;
   }
 }
 
