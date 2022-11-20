@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeSizeValidation = require("./BridgeSizeValidation");
+const MovingValidation = require("./MovingValidation");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -8,22 +9,27 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
-      try {
-        new BridgeSizeValidation(input);
-        return Number(input);
-      } catch (e) {
-        Console.print(e);
-        this.readBridgeSize();
-      }
-    });
+  readBridgeSize(callback) {
+    Console.readLine("다리의 길이를 입력해주세요.\n", callback);
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(
+      "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+      (input) => {
+        try {
+          new MovingValidation(input);
+          return input;
+        } catch (e) {
+          Console.print(e);
+          this.readMoving();
+        }
+      }
+    );
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
