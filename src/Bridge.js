@@ -25,7 +25,7 @@ class Bridge {
    * @returns {boolean}
    */
   canMoveMore(moveCount) {
-    return !(moveCount >= this.#bridge.length);
+    return moveCount < this.#bridge.length;
   }
 
   /**
