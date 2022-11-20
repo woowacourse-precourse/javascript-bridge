@@ -5,13 +5,12 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
 
-// 모델?
+
 // BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  // #bridge;
 
   constructor(size) {
     this.size = [];
@@ -51,7 +50,5 @@ class BridgeGame {
     } 
   }
 }
-// const bridgeGame = new BridgeGame()
-// bridgeGame.successMove("U")
 
 module.exports = BridgeGame;

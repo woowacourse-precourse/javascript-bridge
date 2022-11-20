@@ -9,8 +9,7 @@ const {
 } = require("./constant");
 const OutputView = require("./OutputView");
 
-// 클래스로 하니까 걍 다 초기화됨 --
-// 열로 정보 다보내
+
 const Controller = {
   size: 0,
   command: "",
@@ -19,7 +18,6 @@ const Controller = {
   arrayState: [[], []],
   playerArr: [],
   gameResult: IS_SUCCESS.nailedIt,
-  // gameResult: "",
 
   getSize(size) {
     this.size += size;
@@ -33,7 +31,7 @@ const Controller = {
   initializeBlock() {
     this.round -= 1;
     this.playerArr = [];
-  }, //
+  }, 
   isBlockError(block){
     if(block !== GO.up && block !== GO.down){
       return true
@@ -75,14 +73,6 @@ const Controller = {
     }
   },
 
-  // checkSuccess() {
-  //   if (OutputView.nowArray.includes(SIGN.fail)) {
-  //     return (this.gameResult = IS_SUCCESS.failedIt);
-  //   }
-  //   if (this.size === this.playerArr.length && !OutputView.nowArray.includes(SIGN.fail)) {
-  //     return (this.gameResult = IS_SUCCESS.nailedIt);
-  //   }
-  // },
   checkContinue() {
     if (
       this.playerArr.length !== this.size &&
@@ -118,9 +108,16 @@ const Controller = {
     this.tryCount += 1; // 시도 마다 올라감
   },
 
+  isCommandError(command){
+    if(command !== COMMAND.quit && command !== COMMAND.retry){
+      return true
+    }
+  },
+
   playerCommand(command) {
     this.command = command;
   },
+
 
   // resultArray(playerArr) {
   //   OutputView.printMap(playerArr);

@@ -38,10 +38,12 @@ const OutputView = {
    */
   printResult(totalTry, gameResult) {
     MissionUtils.Console.print(
-      `${MESSAGE.result}\n${this.resultArray}\n\n${MESSAGE.checkResult + gameResult}\n${MESSAGE.countTry + totalTry}`
+      `${MESSAGE.result}\n${this.resultArray}\n\n${
+        MESSAGE.checkResult + gameResult
+      }\n${MESSAGE.countTry + totalTry}`
     );
     MissionUtils.Console.close();
   },
 };
-// MissionUtils.Console.print(OutputView.playerArrPrint())
+
 module.exports = OutputView;
