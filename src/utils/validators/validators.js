@@ -1,8 +1,8 @@
-const { MESSAGES } = require("../../constraints/constarints");
+const { MESSAGES, ALLOWED_CHAR } = require("../../constraints/constarints");
 const isInteger = Number.isInteger;
 
 /**
- * 다리의 길이의 입력값을 유효성 검사하는 역할을 한다.
+ * 다리의 길이의 입력값의 유효성을 검사하는 함수
  * @param {number} input 다리의 길이
  * @return {boolean} 입력값이 유효하면 true 반환
  */
@@ -17,4 +17,14 @@ const validateLength = (input) => {
   return true;
 };
 
-module.exports = { validateLength };
+/**
+ * 이동 실패시 재시작/종료 여부 입력값의 유효성을 검사하는 함수
+ * @param {*} input
+ */
+const validateGameCommandInput = (input) => {
+  if (input.length !== 1)
+    throw new Error(MESSAGES.EXCEPTIONS.RETRY.LENGTH_EXCEPTION);
+  if (!ALLOWED_CHAR.RETRY.includes(input))
+    throw new Error(MESSAGES.EXCEPTIONS.RETRY.VALUE_EXCEPTION);
+};
+module.exports = { validateLength, validateGameCommandInput };
