@@ -26,7 +26,7 @@ class App {
 
       this.requestMovingDirection();
     } catch ({ message }) {
-      this.reRequestBridgeSize(message);
+      this.reRequest(this.requestBridgeSize, message);
     }
   }
 
@@ -43,7 +43,7 @@ class App {
 
       if (!this.bridgeGame.isSucceededMove()) return this.requestRetryOrQuit();
     } catch ({ message }) {
-      this.reRequestMovingDirection(message);
+      this.reRequest(this.requestMovingDirection, message);
     }
   }
 
@@ -63,7 +63,7 @@ class App {
         this.printFinalResult();
       }
     } catch ({ message }) {
-      this.reRequestGameCommand(message);
+      this.reRequest(this.requestRetryOrQuit, message);
     }
   }
 
@@ -75,19 +75,9 @@ class App {
     OutputView.printResult(movementLogs, isSucceeded, tryCount);
   }
 
-  reRequestBridgeSize(message) {
-    OutputView.printMsg(message);
-    this.requestBridgeSize();
-  }
-
-  reRequestMovingDirection(message) {
-    OutputView.printMsg(message);
-    this.requestMovingDirection();
-  }
-
-  reRequestGameCommand(message) {
-    OutputView.printMsg(message);
-    this.requestRetryOrQuit();
+  reRequest(requestFunc, errMessage) {
+    OutputView.printMsg(errMessage);
+    requestFunc.call(this);
   }
 }
 
