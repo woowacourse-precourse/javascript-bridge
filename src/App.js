@@ -19,8 +19,6 @@ class App {
 
   #moveStatement;
 
-  #gameOptionStatus;
-
   #gameEndBoolean = false;
 
   play() {
@@ -32,7 +30,7 @@ class App {
     if (appStatus === 1) return this.questionBridgeMake();
     if (appStatus === 3) return this.questionBridgeMove();
     if (this.#appStatus === 5) return this.questionGameRetry();
-    if (this.#appStatus === 6) return this.runGameRetry();
+    // if (this.#appStatus === 6) return this.runGameRetry();
     return this.progressApp(this.#appStatus);
   }
 
@@ -97,21 +95,19 @@ class App {
   // validAssign(answer, Validator) {}
 
   questionGameRetry() {
-    InputView.readGameCommand((answer) => {
+    InputView.readGameCommand((retryAnswer) => {
       try {
-        Validator.confirmOfCondition(answer, 'option');
-        this.#gameOptionStatus = this.#brdigeGame.retry(answer);
-        this.#appStatus = 6;
+        Validator.confirmOfCondition(retryAnswer, 'option');
+        this.runGameRetry(this.#brdigeGame.retry(retryAnswer));
       } catch (e) {
         Utils.print(e);
-      } finally {
         this.progressApp(this.#appStatus);
       }
     });
   }
 
-  runGameRetry() {
-    if (this.#gameOptionStatus) {
+  runGameRetry(retryAnswer) {
+    if (retryAnswer) {
       this.retryApp();
       this.#appStatus = 3;
       return this.progressApp(this.#appStatus);
