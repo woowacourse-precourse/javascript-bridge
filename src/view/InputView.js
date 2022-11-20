@@ -40,7 +40,7 @@ const InputView = {
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (moveSpace) => {
         try {
-          this.checkMove(moveSpace);
+          ExceptionCheck.checkMove(moveSpace);
           OutputView.printSpace(moveSpace);
 
           const { up, down, compareResult, idx } = this.BRIDGE_GAME.move(
@@ -62,10 +62,6 @@ const InputView = {
         }
       }
     );
-  },
-  checkMove(playerMove) {
-    if (playerMove === "U" || playerMove === "D") return;
-    else throw new Error("player이동은 U 또는 D만 입력해야 합니다.");
   },
 
   /**
