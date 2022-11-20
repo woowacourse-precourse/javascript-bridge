@@ -47,7 +47,7 @@ class BridgeGame {
   gameResult(userWin = false) {
     const bridgeMap = Object.values(this.#bridgeMap.getMap());
 
-    return [bridgeMap, userWin, this.#numberOfAttempts];
+    return [bridgeMap, this.#numberOfAttempts, userWin];
   }
 }
 
