@@ -8,13 +8,13 @@
 - [o] **시작 문구 출력** OutputView #printResult
 - [o] **생성할 다리 길이를 입력 받는다.** InputView #readBridgeSize
   - [o] **3 이상 20 이하의 숫자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** Validator #validateInput
+  - [o] **try catch문 분리** Validator #isRepeat
   - [o] **입력 받은 다리를 생성한다** InputView #readBridgeSize - BridgeMaker #makeBridge - 출력 형식에 맞게 변환, 타입 체크하는데 30분 사용
 - [o] **라운드마다 플레이어가 이동할 칸을 입력 받는다.** InputView #readMoving
 
   - [o] **U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** Validator #validateMoveInput
 
-  - [ ] **게임 종료면 결과 출력하는 로직 분리하기.**OutputView #printTrueResult
-  - [ ] **게임 실패면 결과 출력하는 로직 분리하기.**OutputView #printFalseResult
+  - [ ] **게임 종료면 결과 출력하는 로직 분리하기.**OutputView #printResult
 
   - [o] **입력 받는 값에 맞게 이동한다.**BridgeGame #move
 
