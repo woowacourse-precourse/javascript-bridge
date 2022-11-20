@@ -8,4 +8,15 @@ const RESULT = {
   fail: '실패',
 };
 
-module.exports = { COMMAND, RESULT };
+const BRIDGE_PARTS = {
+  entrance: '[',
+  exit: ']',
+  pier: '|',
+};
+
+const SIGN = {
+  O: 'O',
+  X: 'X',
+  empty_space: ' ',
+};
+module.exports = { COMMAND, RESULT, BRIDGE_PARTS, SIGN };

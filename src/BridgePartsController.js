@@ -1,11 +1,14 @@
+const { BRIDGE_PARTS, SIGN } = require('./Constants/contant');
+const DIRECTION = require('./Constants/direction');
+
 class BridgePartsController {
   #upperBridge;
 
   #downerBridge;
 
   constructor() {
-    this.#upperBridge = ['['];
-    this.#downerBridge = ['['];
+    this.#upperBridge = [BRIDGE_PARTS.entrance];
+    this.#downerBridge = [BRIDGE_PARTS.entrance];
   }
 
   createMap(game) {
@@ -18,35 +21,38 @@ class BridgePartsController {
   }
 
   checkDirection(game, direction, nextDirection) {
-    if (direction === 'U') {
+    if (direction === DIRECTION.up) {
       this.markUpperBridge(direction, nextDirection);
-    } else if (direction === 'D') {
+    } else if (direction === DIRECTION.down) {
       this.markDownerBridge(direction, nextDirection);
     }
   }
 
   markUpperBridge(direction, nextDirection) {
     if (direction === nextDirection)
-      this.#upperBridge = [...this.#upperBridge, 'O'];
-    else this.#upperBridge = [...this.#upperBridge, 'X'];
-    this.#downerBridge = [...this.#downerBridge, ' '];
+      this.#upperBridge = [...this.#upperBridge, SIGN.O];
+    else this.#upperBridge = [...this.#upperBridge, SIGN.X];
+    this.#downerBridge = [...this.#downerBridge, SIGN.empty_space];
   }
 
   markDownerBridge(direction, nextDirection) {
     if (direction === nextDirection)
-      this.#downerBridge = [...this.#downerBridge, 'O'];
-    else this.#downerBridge = [...this.#downerBridge, 'X'];
-    this.#upperBridge = [...this.#upperBridge, ' '];
+      this.#downerBridge = [...this.#downerBridge, SIGN.O];
+    else this.#downerBridge = [...this.#downerBridge, SIGN.X];
+    this.#upperBridge = [...this.#upperBridge, SIGN.empty_space];
   }
 
   createPier() {
-    this.#upperBridge = [...this.#upperBridge, '|'];
-    this.#downerBridge = [...this.#downerBridge, '|'];
+    this.#upperBridge = [...this.#upperBridge, BRIDGE_PARTS.pier];
+    this.#downerBridge = [...this.#downerBridge, BRIDGE_PARTS.pier];
   }
 
   closeBridge() {
-    this.#upperBridge = [...this.#upperBridge.slice(0, -1), ']'];
-    this.#downerBridge = [...this.#downerBridge.slice(0, -1), ']'];
+    this.#upperBridge = [...this.#upperBridge.slice(0, -1), BRIDGE_PARTS.exit];
+    this.#downerBridge = [
+      ...this.#downerBridge.slice(0, -1),
+      BRIDGE_PARTS.exit,
+    ];
   }
 
   getUpperBridge() {
