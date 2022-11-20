@@ -8,7 +8,13 @@ const MOVE = {
   DOWN: 'D',
 };
 
+const PLAY = {
+  RESTART: 'R',
+  QUIT: 'Q',
+};
+
 module.exports = {
   BRIDGE_SIZE,
   MOVE,
+  PLAY,
 };

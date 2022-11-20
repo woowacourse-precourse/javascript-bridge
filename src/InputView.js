@@ -1,5 +1,5 @@
 const { readLine } = require('./utils/util');
-const { BRIDGE_SIZE, MOVE } = require('./constant/constant');
+const { BRIDGE_SIZE, MOVE, PLAY } = require('./constant/constant');
 const MESSAGE = require('./constant/message');
 const Validate = require('./utils/validate');
 
@@ -25,7 +25,7 @@ const InputView = {
    */
   readMoving() {
     let moveInput;
-    readLine(MESSAGE.INPUT.BRIDGE_SIZE, (input) => {
+    readLine(MESSAGE.INPUT.MOVE(MOVE.UP, MOVE.DOWN), (input) => {
       moveInput = input;
       Validate.notAvailableMove(input, Object.values(MOVE));
     });
@@ -35,7 +35,13 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    let restartOrQuit;
+    readLine(MESSAGE.INPUT.RESTART_OR_QUIT(PLAY.RESTART, PLAY.RESTART), (input) => {
+      restartOrQuit = input;
+    });
+    return restartOrQuit;
+  },
 };
 
 module.exports = InputView;
