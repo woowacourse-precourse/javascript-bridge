@@ -27,7 +27,7 @@ class BridgeGameProceed {
             Console.print('');
             Validation.bridgeLength(bridgeLength);
             this.#winBridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
-            // console.log(this.#winBridge);
+            console.log(this.#winBridge);
             this.game();
         });
     }
@@ -38,11 +38,18 @@ class BridgeGameProceed {
             this.#playersBridge.push(nextStep);
             const result = this.bridge();
 
-            if (result.includes('X')) this.fail(result);
-            if (this.#playersBridge.length === this.#winBridge.length) this.win(result);
-            
+            this.dividePath(result);
             this.game();
         });
+    }
+
+    dividePath(result) {
+        if (result.includes('X')) {
+            return this.fail(result);
+        }
+        if (this.#playersBridge.length === this.#winBridge.length) {
+            return this.win(result);
+        }
     }
 
     bridge() {
