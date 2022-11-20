@@ -3,16 +3,16 @@ const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const Bridge = require('./model/Bridge');
 const BridgeGame = require('./BridgeGame');
-const Map = require('./model/Map');
+const History = require('./model/History');
 const Result = require('./model/Result');
 
 class GameController {
   #bridgeGame;
-  #map;
+  #history;
   #result;
 
   constructor() {
-    this.#map = new Map();
+    this.#history = new History();
     this.#result = new Result();
   }
 
@@ -28,7 +28,7 @@ class GameController {
 
   playGame({ command }) {
     const { moveSuccess, isEndOfBridge } = this.#bridgeGame.move(command);
-    OutputView.printMap(this.#map.updateMap(command, moveSuccess));
+    OutputView.printMap(this.#history.updateHistory(command, moveSuccess));
 
     if (moveSuccess) {
       this.handleMoveSuccess(isEndOfBridge);
@@ -39,7 +39,7 @@ class GameController {
 
   handleMoveSuccess(isEndOfBridge) {
     if (isEndOfBridge) {
-      OutputView.printResult(this.#map.getMap(), this.#result.updateResult(true));
+      OutputView.printResult(this.#history.getHistory(), this.#result.updateResult(true));
       InputView.closeView();
     } else {
       InputView.readMoving(this.playGame.bind(this));
@@ -61,12 +61,12 @@ class GameController {
   handleRestart() {
     this.#result.updateTryCount();
     this.#bridgeGame.retry();
-    this.#map.resetMap();
+    this.#history.resetHistory();
     InputView.readMoving(this.playGame.bind(this));
   }
 
   handleQuit() {
-    OutputView.printResult(this.#map.getMap(), this.#result.updateResult(false));
+    OutputView.printResult(this.#history.getHistory(), this.#result.updateResult(false));
     InputView.closeView();
   }
 }

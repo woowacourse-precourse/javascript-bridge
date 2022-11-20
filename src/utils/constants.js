@@ -14,6 +14,11 @@ const MOVING = Object.freeze({
   DOWN: 'D',
 });
 
+const MOVING_RESULT = Object.freeze({
+  SUCCESS: 'O',
+  FAIL: 'X',
+});
+
 const COMMAND = Object.freeze({
   restart: 'R',
   quit: 'Q',
@@ -41,6 +46,7 @@ const RESULT = Object.freeze({
 module.exports = {
   MESSAGE,
   MOVING,
+  MOVING_RESULT,
   COMMAND,
   BRIDGE,
   ERROR,

@@ -8,7 +8,7 @@ OutputView의 `메서드의 이름`은 변경할 수 없다. 🙅‍♀️
 
 const { Console } = require('@woowacourse/mission-utils');
 
-const { MESSAGE } = require('./utils/constants');
+const { MESSAGE, MOVING, MOVING_RESULT } = require('./utils/constants');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -21,39 +21,29 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(gameMap) {
-    Console.print(`[ ${this.getUpperMap(gameMap).join(' | ')} ]`);
-    Console.print(`[ ${this.getLowerMap(gameMap).join(' | ')} ]`);
+  printMap(history) {
+    Console.print(`[ ${this.getUpperMap(history).join(' | ')} ]`);
+    Console.print(`[ ${this.getLowerMap(history).join(' | ')} ]`);
   },
 
-  //FIXME 11줄
-  getUpperMap(gameMap) {
-    return gameMap.map(({ moving, canMove }) => {
-      if (moving !== 'U') {
-        return ' ';
-      }
-
-      if (canMove) {
-        return 'O';
-      } else {
-        return 'X';
-      }
-    });
+  getUpperMap(history) {
+    return history.map(historyItem => this.convertToMap(MOVING.UP, historyItem));
   },
 
-  //FIXME 11줄
-  getLowerMap(gameMap) {
-    return gameMap.map(({ moving, canMove }) => {
-      if (moving !== 'D') {
-        return ' ';
-      }
+  getLowerMap(history) {
+    return history.map(historyItem => this.convertToMap(MOVING.DOWN, historyItem));
+  },
 
-      if (canMove) {
-        return 'O';
-      } else {
-        return 'X';
-      }
-    });
+  convertToMap(targetMoving, { moving, canMove }) {
+    if (targetMoving !== moving) {
+      return ' ';
+    }
+
+    if (canMove) {
+      return MOVING_RESULT.SUCCESS;
+    } else {
+      return MOVING_RESULT.FAIL;
+    }
   },
 
   /**
@@ -61,9 +51,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(gameMap, { tryCount, gameResult }) {
+  printResult(history, { tryCount, gameResult }) {
     Console.print(MESSAGE.INFO);
-    this.printMap(gameMap);
+    this.printMap(history);
 
     if (gameResult) {
       Console.print('\n' + MESSAGE.WIN_GAME);
