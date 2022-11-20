@@ -2,7 +2,9 @@ const { Console } = require('@woowacourse/mission-utils');
 
 const { GAME_RULE } = require('../constants');
 const BridgeGame = require('../models/BridgeGame');
-const InputValidator = require('../utils/InputValidator');
+const GameCommand = require('../models/command/GameCommand');
+const MovingCommand = require('../models/command/MovingCommand');
+const SizeCommand = require('../models/command/SizeCommand');
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
@@ -15,10 +17,10 @@ class BridgeGameController {
     InputView.readBridgeSize(this.#onBridgeSizeSubmit.bind(this));
   }
 
-  #onBridgeSizeSubmit(size) {
+  #onBridgeSizeSubmit(command) {
     try {
-      InputValidator.validateSize(size);
-      this.#game.setBridge(+size);
+      const sizeCommand = new SizeCommand(command);
+      this.#game.setBridge(+sizeCommand.getCommand());
       InputView.readMoving(this.#onMovingSubmit.bind(this));
     } catch (e) {
       OutputView.printError(e);
@@ -28,9 +30,8 @@ class BridgeGameController {
 
   #onMovingSubmit(command) {
     try {
-      InputValidator.validateMovingCommand(command);
-
-      const isCrossed = this.#game.move(command);
+      const movingCommand = new MovingCommand(command);
+      const isCrossed = this.#game.move(movingCommand.getCommand());
       const bridgeMap = this.#game.getMap();
 
       OutputView.printMap(bridgeMap);
@@ -53,11 +54,11 @@ class BridgeGameController {
 
   #onGameCommandSubmit(command) {
     try {
-      InputValidator.validateGameCommand(command);
-      if (command === GAME_RULE.RETRY) {
+      const gameCommand = new GameCommand(command);
+      if (gameCommand.getCommand() === GAME_RULE.RETRY) {
         this.#runRetry();
       }
-      if (command === GAME_RULE.QUIT) {
+      if (gameCommand.getCommand() === GAME_RULE.QUIT) {
         this.#runQuit();
       }
     } catch (e) {
