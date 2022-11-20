@@ -33,10 +33,16 @@ class BridgeDrawer {
       return;
     }
 
-    console.log(this.#gameStatus);
     const bridgeLastIndex = this.#gameStatus.drawSize - 1;
     const direction = this.#gameStatus.bridge[bridgeLastIndex];
-    this.#bridgeDrawing[direction][bridgeLastIndex] = BRIDGE.FAIL_SIGN;
+    const oppositeDirection = this.#getOppositeDirection(direction);
+
+    this.#bridgeDrawing[direction][bridgeLastIndex] = BRIDGE.EMPTY_SIGN;
+    this.#bridgeDrawing[oppositeDirection][bridgeLastIndex] = BRIDGE.FAIL_SIGN;
+  }
+
+  #getOppositeDirection(direction) {
+    return direction === COMMAND.MOVING_UP ? COMMAND.MOVING_DOWN : COMMAND.MOVING_UP;
   }
 
   #convertBridgeGridToDrawing() {
