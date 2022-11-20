@@ -1,6 +1,6 @@
 const BridgeController = require("./BridgeController");
 const UserController = require("./UserController");
-const BridgeGameController = require("./BridgeGameController");
+const BridgeGame = require("../BridgeGame");
 const InputView = require("../view/InputView");
 const OutputView = require("../view/OutputView");
 
@@ -8,7 +8,7 @@ class MainController {
   constructor() {
     this.bridgeController = new BridgeController(this);
     this.userController = new UserController(this);
-    this.bridgeGameController = new BridgeGameController(this);
+    this.bridgeGame = new BridgeGame(this);
   }
 
   /**
@@ -42,7 +42,7 @@ class MainController {
     const isSuccess = this.bridgeController.getIsSuccessMoving(userMoving);
     const isFinished = this.bridgeController.getIsFinished(userMoving);
 
-    this.bridgeGameController.tryMove(isSuccess, isFinished);
+    this.bridgeGame.move(isSuccess, isFinished);
   }
 
   // 게임 초기 실행 메서드
