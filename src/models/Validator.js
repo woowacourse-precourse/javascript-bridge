@@ -14,7 +14,7 @@ class Validator {
     }
   }
 
-  checkRetryInput(retry) {
+  checkRetryInput(input) {
 
   }
 
@@ -29,6 +29,10 @@ class Validator {
 
   isNotValidDirectionInput(direction) {
     return direction !== 'U' || direction !== 'D';
+  }
+
+  isNotValidRetryInput(input) {
+    return input !== 'R' || input !== 'Q';
   }
 }
 
