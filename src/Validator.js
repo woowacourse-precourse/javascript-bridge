@@ -37,6 +37,15 @@ const Validator = {
       return true;
     }
   },
+
+  validateRetryInputCatch(retryInput) {
+    try {
+      Validator.validateRetryInput(retryInput);
+    } catch (error) {
+      Console.print(error);
+      return true;
+    }
+  },
 };
 
 module.exports = Validator;
