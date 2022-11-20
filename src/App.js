@@ -1,33 +1,42 @@
 const InputView = require("./InputView");
 const MissionUtils = require("@woowacourse/mission-utils");
-const {generate} = require("./BridgeRandomNumberGenerator");
+const { generate } = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
+const OutputView = require("./OutputView");
 
 class App {
   async play() {
     MissionUtils.Console.print("다리 건너기 게임을 시작합니다.\n");
 
-    let bridgeSize = 0;
+    let bridgeSize = await this.makeBridgeSize(0)
+
+    const bridge = BridgeMaker.makeBridge(bridgeSize, generate);
+    console.log('bridge',bridge);
+    let moving = null;
+    let traceMap = [];
+    let moveCount = 0;
+    while (bridgeSize >= moveCount && moving !== "D" && moving !== "U") {
+      moving = await InputView.readMoving();
+      let where = this.movingValidate(moving) === "U" ? 0 : 1;
+      console.log(bridge[moveCount][where], moveCount);
+      if (bridge[moveCount][where] === "O") {
+        traceMap.push(where);
+        OutputView.printMap(bridge, where, moveCount);
+        moveCount++;
+      } 
+      // else {
+      //   this.askReGame();
+      // }
+      moving = null;
+    }
+  }
+
+  async makeBridgeSize(bridgeSize = 0){
     while (isNaN(bridgeSize) || bridgeSize < 3 || bridgeSize > 20) {
       bridgeSize = await InputView.readBridgeSize();
       this.bridgeSizeValidate(bridgeSize);
     }
-
-    const bridge = BridgeMaker.makeBridge(bridgeSize, generate);
-
-    let moving = null;
-    while (moving !== "D" && moving !== "U") {
-      moving = await InputView.readMoving();
-      this.movingValidate(moving);
-    }
-
-    let regame = null;
-    while (regame !== "Q" && regame !== "R") {
-      regame = await InputView.readGameCommand();
-      this.gameCommandValidate(regame);
-    }
-
-    
+    return bridgeSize
   }
 
   bridgeSizeValidate(number) {
@@ -63,6 +72,19 @@ class App {
       }
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async askReGame() {
+    let regame = null;
+    while (regame !== "Q" && regame !== "R") {
+      regame = await InputView.readGameCommand();
+      regame = this.gameCommandValidate(regame);
+      if (regame === "Q") {
+        OutputView.printResult();
+      } else {
+        regame = null;
+      }
     }
   }
 }
