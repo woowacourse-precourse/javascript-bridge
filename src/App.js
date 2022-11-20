@@ -94,7 +94,7 @@ class App {
   }
 
   executeGameCommand(gameCommand) {
-    if (gameCommand === 'R') {
+    if (gameCommand === BridgeGameCommandValidator.RETRY) {
       this.retry();
       return;
     }
