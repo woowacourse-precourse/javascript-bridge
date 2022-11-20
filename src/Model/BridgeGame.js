@@ -27,6 +27,7 @@ class BridgeGame {
   makeBridge() {
     this.#path = BridgeMaker.makeBridge(this.#size, generate);
     this.initBridge();
+    console.log(this.#path);
   }
 
   initBridge() {
@@ -38,7 +39,6 @@ class BridgeGame {
     const countIndex = Move.showCount();
     const currentCell = this.#path[countIndex];
 
-    // 한 줄로 줄이기
     this.#bridge[direction][countIndex] = Move.byDirection(
       currentCell,
       direction
@@ -58,7 +58,7 @@ class BridgeGame {
   }
 
   retry() {
-    this.#playCount += 1;
+    this.#playCount += NUMBER.ONE;
     this.initBridge();
   }
 }

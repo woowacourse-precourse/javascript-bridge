@@ -1,8 +1,8 @@
 const InputView = require('../View/InputView');
 const OutputView = require('../View/OutputView');
 const BridgeGame = require('../Model/BridgeGame');
-const { REPLAY } = require('../../constants/string');
 const Move = require('../Model/Move');
+const { REPLAY } = require('../../constants/command');
 
 class GameController {
   #bridgeGame;
@@ -57,6 +57,13 @@ class GameController {
     } else {
       this.end();
     }
+  }
+
+  end() {
+    const bridgeMap = this.#bridgeGame.mapBridge();
+    const playCount = this.#bridgeGame.getPlayCount();
+    const isSuccess = Move.isSuccess();
+    OutputView.printResult(bridgeMap, playCount, isSuccess);
   }
 }
 
