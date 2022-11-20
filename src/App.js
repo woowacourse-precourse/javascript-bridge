@@ -5,8 +5,11 @@ const Control = require("./Control");
 class App {
   constructor() {
     printMessage(MESSAGE.START);
+    this.control = new Control();
   }
-  play() {}
+  play() {
+    this.control.gameStart();
+  }
 }
 
 const app = new App().play();

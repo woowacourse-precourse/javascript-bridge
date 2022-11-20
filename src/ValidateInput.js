@@ -5,7 +5,6 @@ const ValidateInput = {
   validate(size) {
     this.validateBridgeNumber(size);
     this.validateBridgeSize(size);
-    this.validateBridgeInteger(size);
   },
 
   validateBridgeSize(size) {
@@ -15,14 +14,9 @@ const ValidateInput = {
   },
 
   validateBridgeNumber(size) {
-    if (isNaN(size)) {
+    const check = /^[0-9]+$/;
+    if (!check.test(size)) {
       this.throwError(MESSAGE.ERROR_NUMBER);
-    }
-  },
-
-  validateBridgeInteger(size) {
-    if (!Number.isInteger(size)) {
-      this.throwError(MESSAGE.ERROR_INTEGER);
     }
   },
 
