@@ -81,7 +81,73 @@ describe("다리 건너기 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
+
+  test("기능 테스트: 다리 건너는 곳 다르게 입력 시", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "1"]);
+    mockQuestions(["3", "잘못된 입력" ,"U", "D", "U"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 1",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+  });
+
+  test("기능 테스트: 실패하고 게임 종료 시", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "1"]);
+    mockQuestions(["3", "U", "D", "D", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O |   |   ]",
+      "[   | O | X ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
+    expectBridgeOrder(log, "[ O |   |   ]", "[   | O | X ]");
+  });
+
+  test("기능 테스트: 종료 잘못된 입력 이후 재입력 후 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "1"]);
+    mockQuestions(["3", "U", "D", "D", "종료 잘못된 입력" , "R", "U", "D", "U",]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+  });
+
   test("예외 테스트", () => {
     runException(["a"]);
+  });
+
+  test("예외 테스트 : 3보다 작은 다리의 길이 입력", () => {
+    runException(["2"]);
+  });
+
+  test("예외 테스트 : 45보다 큰 다리의 길이 입력", () => {
+    runException(["46"]);
   });
 });
