@@ -1,4 +1,5 @@
-const { readMoving } = require("./InputView");
+const { generateRandomNumber, makeBridge } = require("./BridgeMaker");
+const { readBridgeSize } = require("./InputView");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -9,9 +10,45 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {
-    const mov = readMoving();
-    return mov;
+  constructor() {
+    this.upSide = [];
+    this.downSide = [];
+  }
+
+  move(userInput) {
+    const size = readBridgeSize();
+    const bridge = makeBridge(size, generateRandomNumber) //[U, D, U]
+    
+    for(let i = 0 ; i<size ; i++){
+      const compareResult = this.compareEachSide(i, bridge, userInput);
+      if(compareResult === false) break;
+    }
+    return [this.upSide, this.downSide];
+  }
+
+  compareEachSide(i, bridge, userInput) {
+    if(bridge[i] === userInput){
+      if(userInput === 'U'){
+        this.upSide.push('O');
+        this.downSide.push(' ');
+      }
+      else{
+        this.upSide.push(' ');
+        this.downSide.push('O');
+      }
+    }
+    else{
+      if(userInput === 'U'){
+        this.upSide.push('X');
+        this.downSide.push(' ');
+        
+      }
+      else if(userInput === 'D'){
+        this.upSide.push(' ');
+        this.downSide.push('X'); 
+      }
+      return false;
+    }
   }
 
   /**
