@@ -2,6 +2,7 @@ const BridgeGame = require('../BridgeGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const { MESSAGE } = require('../utils/constants');
+const Validation = require('../utils/Validation');
 
 class Controller {
   constructor() {
@@ -59,6 +60,11 @@ class Controller {
   }
 
   checkCommand(command) {
+    Validation.checkBlank(command);
+    Validation.checkStringType(command);
+    Validation.checkUpperCaseOfCommand(command);
+    Validation.checkValidCommand(command);
+
     if (command === 'R') this.retry();
     if (command === 'Q') {
       const isSucceeded = false;

@@ -21,8 +21,16 @@ const Validation = {
     if (!(input === 'U' || input === 'D')) throw ERROR.mustBeValidDirection;
   },
 
-  checkUpperCase(input) {
+  checkUpperCaseOfDirection(input) {
     if (input === 'u' || input === 'd') throw ERROR.mustBeUpperCase;
+  },
+
+  checkValidCommand(input) {
+    if (!(input === 'R' || input === 'Q')) throw ERROR.mustBeValidCommand;
+  },
+
+  checkUpperCaseOfCommand(input) {
+    if (input === 'r' || input === 'q') throw ERROR.mustBeUpperCase;
   },
 };
 

@@ -12,6 +12,7 @@ const ERROR = Object.freeze({
     '[ERROR] U (위칸) 와 D (아래칸) 중에서만 이동할 칸을 정해 입력해주세요.',
   mustBeUpperCase: '[ERROR] 소문자가 아닌 대문자를 입력해주세요.',
   mustNotBeBlank: '[ERROR] 공백을 입력할 수 없습니다. 값을 입력해주세요.',
+  mustBeValidCommand: '[ERROR] R (재시도) 와 Q (종료) 중에서만 입력해주세요.',
 });
 
 module.exports = { MESSAGE, ERROR };
