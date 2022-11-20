@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const BridgeGame = require('../BridgeGame');
 const { generate } = require('../BridgeRandomNumberGenerator');
 const Bridge = require('../Model/Bridge');
 const { RETRY_MESSAGE } = require('../Utils/Constant');
@@ -7,8 +8,13 @@ const InputView = require('../Viewer/InputView');
 const OutputView = require('../Viewer/OutputView');
 
 class GameController {
+  /** @type {BridgeGame} */
   #game;
 
+  /**
+   *
+   * @param {BridgeGame} game
+   */
   constructor(game) {
     this.#game = game;
   }
@@ -17,11 +23,20 @@ class GameController {
     InputView.readBridgeSize(this);
   }
 
+  /**
+   *
+   * @param {number} input
+   */
   createBridge(input) {
     this.#game.createBridge(new Bridge(input, generate));
     InputView.readMoving(this);
   }
 
+  /**
+   *
+   * @param {number} input
+   * @returns {undefined}
+   */
   setNextTurn(input) {
     this.#game.move(input);
     OutputView.printMap(this.#game);
@@ -31,6 +46,11 @@ class GameController {
     return InputView.readGameCommand(this);
   }
 
+  /**
+   *
+   * @param {string} input
+   * @returns {undefined}
+   */
   setRetryOrQuit(input) {
     isRightRetryString(input);
     if (input === RETRY_MESSAGE.RETRY) {

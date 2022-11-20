@@ -6,6 +6,7 @@ const Selected = require('./Model/Selected');
 const TryCnt = require('./Model/TryCnt');
 
 class App {
+  /** @type {GameController} */
   #gameController;
 
   constructor() {
