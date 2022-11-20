@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeMaker = require('./BridgeMaker');
 const MESSAGES = require('./Constants');
+const Validate = require('./Validate');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -29,34 +30,10 @@ const InputView = {
     MissionUtils.Console.readLine(MESSAGES.INPUT_RETRY, (command) => {});
   },
 
-  validateBridgeSize(size) {
-    if (isNaN(size)) {
-      throw new Error(MESSAGES.ERROR.BRIDGE_LENGTH_NAN);
-    }
-    if (!Number.isInteger(size)) {
-      throw new Error(MESSAGES.ERROR.BRIDGE_LENGTH_NOT_INTEGER);
-    }
-    if (size < 3 || size > 20) {
-      throw new Error(MESSAGES.ERROR.BRIDGE_LENGTH_RANGE);
-    }
-  },
-
-  validateMoving(moving) {
-    if (moving !== 'U' && moving !== 'D') {
-      throw new Error(MESSAGES.ERROR.MOVING_CMD_NOT_UD);
-    }
-  },
-
-  validateGameCommand(command) {
-    if (command !== 'R' && command !== 'Q') {
-      throw new Error(MESSAGES.ERROR.RETRY_CMD_NOT_RQ);
-    }
-  },
-
   generateBridge(input) {
     const size = Number(input);
 
-    this.validateBridgeSize(size);
+    Validate.bridgeSize(size);
     BridgeMaker.makeBridge(size);
   },
 };
