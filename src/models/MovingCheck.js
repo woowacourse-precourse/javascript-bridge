@@ -5,12 +5,11 @@ class MovingCheck {
   validate(move) {
     try {
       this.checkWordAndRange(move);
+      return true;
     } catch (error) {
       OutputView.printError(error);
       return false;
     };
-    
-    return true;
   };
 
   checkWordAndRange(move) {

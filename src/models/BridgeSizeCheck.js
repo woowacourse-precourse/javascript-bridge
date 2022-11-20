@@ -5,12 +5,11 @@ class BridgeSizeCheck {
   validate(size) {
     try {
       this.checkWordAndRange(size);
+      return true;
     } catch (error) {
       OutputView.printError(error);
       return false;
     };
-    
-    return true;
   };
 
   checkWordAndRange(size) {

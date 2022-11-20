@@ -5,12 +5,11 @@ class RetryCheck {
   validate(command) {
     try {
       this.checkWordAndRange(command);
+      return true;
     } catch (error) {
       OutputView.printError(error);
       return false;
     };
-    
-    return true;
   };
 
   checkWordAndRange(command) {
