@@ -2,7 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const { printResult, printMap } = require("./OutputView");
+const { printResult, printMap, printResultFalse } = require("./OutputView");
 const {
   validateRetryInput,
   validateisRepeat,
@@ -55,19 +55,12 @@ const InputView = {
         validateRetryInputCatch(retryInput)
           ? InputView.readGameCommand(mainBridge, bridgeGame)
           : null;
-
         if (retryInput === "R") {
           bridgeGame.init();
           InputView.readMoving(mainBridge, bridgeGame);
-          return;
         }
         if (retryInput === "Q") {
-          printResult("최종 게임 결과");
-          printMap(bridgeGame.userBridge);
-          printResult("게임 성공 여부: 실패");
-          printResult(`총 시도한 횟수: ${bridgeGame.retrycount - 1}`);
-          Console.close();
-          return;
+          printResultFalse(bridgeGame);
         }
       }
     );
