@@ -43,6 +43,10 @@ class GameController {
       OutputView.printMap(movementLogs);
 
       if (!this.bridgeGame.isSucceededMove()) return this.requestRetryOrQuit();
+      if (this.bridgeGame.isClearedGame()) {
+        this.printFinalResult();
+        Console.close();
+      }
     } catch ({ message }) {
       this.reRequest(this.requestMovingDirection, message);
     }

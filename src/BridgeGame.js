@@ -41,6 +41,16 @@ class BridgeGame {
     return lastLog.isCrossable;
   }
 
+  isClearedGame() {
+    const totalRound = this.#bridge.getBridgeSize();
+    const playedRound = this.#movementLogs.length;
+
+    const isEndedGame = totalRound === playedRound;
+    const isSucceededMove = this.isSucceededMove();
+
+    return isEndedGame && isSucceededMove;
+  }
+
   getMovementLogs() {
     return this.#movementLogs;
   }
