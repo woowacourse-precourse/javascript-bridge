@@ -1,9 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { Console, Random } = MissionUtils;
-
+const { INPUT_MESSAGE } = require("./Constant.js");
+const inputView = require("./InputView");
 class App {
   play() {
-    Console.print("다리 건너기 게임을 시작합니다.");
+    Console.print(INPUT_MESSAGE.game_start);
+    inputView.readBridgeSize();
   }
 }
 
