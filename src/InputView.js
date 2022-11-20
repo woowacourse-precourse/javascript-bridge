@@ -36,6 +36,7 @@ const InputView = {
       this.validMovePoint(input);
       MissionUtils.Console.print(input);
     });
+    return input;
   },
   validMovePoint(movePoint) {
     if (movePoint !== "U" && movePoint !== "D") {
@@ -45,7 +46,13 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    let input;
+    MissionUtils.Console.readLine(INPUT_MESSAGE.RESTART_QUIT, (answer) => {
+      input = answer;
+    });
+    return input;
+  },
 };
 
 module.exports = InputView;

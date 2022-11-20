@@ -40,9 +40,11 @@ class App {
     return [upper, lower];
   }
   gameResultPrint(count, winOrLose) {
-    const result = winOrLose ? SUCCESS_RESULT : FAILURE_RESULT;
-    MissionUtils.Console.print(SUCCESS_OR_FAILURE + result);
-    MissionUtils.Console.print(TOTAL_ATTEMPT + count);
+    const result = winOrLose
+      ? OUTPUT_MESSAGE.SUCCESS_RESULT
+      : OUTPUT_MESSAGE.FAILURE_RESULT;
+    MissionUtils.Console.print(OUTPUT_MESSAGE.SUCCESS_OR_FAILURE + result);
+    MissionUtils.Console.print(OUTPUT_MESSAGE.TOTAL_ATTEMPT + count);
   }
   moveing(movePoint, obstacle) {
     return obstacle === movePoint ? true : false;
@@ -60,6 +62,31 @@ class App {
     OutputView.printMap(this.gameMap);
     return true;
   }
+  reStartCheck(command) {
+    if (command == "R") return true;
+    return false;
+  }
+  reStart(result) {
+    let retry;
+    if (result) return false;
+    const command = InputView.readGameCommand();
+    try {
+      retry = this.reStartCheck(command);
+    } catch (error) {
+      console.log(error);
+    }
+    return retry;
+  }
+  gamePlaying() {
+    let result = false;
+    let count = 0;
+    while (1) {
+      result = this.BridgeMove();
+      count++;
+      if (!this.reStart(result)) break;
+    }
+    this.gameResultPrint(count, result);
+  }
   BridgeMaker() {
     try {
       const birdgeSize = InputView.readBridgeSize();
@@ -70,14 +97,7 @@ class App {
     } catch (error) {
       console.log(error);
     }
-    let result = false;
-    let count = 0;
-    // while (1) {
-    //   result = this.BridgeMove();
-    //   this.count++;
-    //   if (this.reStart(result)) break;
-    // }
-    this.gameResultPrint(count, result);
+    this.gamePlaying();
   }
   play() {
     OutputView.gameStart();
