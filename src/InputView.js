@@ -35,57 +35,11 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
 
-  nextStep(randomBridge, upperBridge, lowerBridge) {
-    Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (command) => {
-      if (command !== "U" && command !== "D") throw new Error(ERROR.UP_DOWN_COMMAND);
-      if (randomBridge[bridgeGame.index] === command) {
-        if (command === "U") {
-          upperBridge.push("O");
-          lowerBridge.push(" ");
-          bridgeGame.increaseIndex();
-
-          OutPutView.printMap(upperBridge, lowerBridge);
-
-          this.nextStep(randomBridge, upperBridge, lowerBridge);
-        }
-        if (command === "D") {
-          upperBridge.push(" ");
-          lowerBridge.push("O");
-          bridgeGame.increaseIndex();
-
-          OutPutView.printMap(upperBridge, lowerBridge);
-
-          this.nextStep(randomBridge, upperBridge, lowerBridge);
-        }
-      } else {
-        if (command === "U") {
-          upperBridge.push("X");
-          lowerBridge.push(" ");
-
-          OutPutView.printMap(upperBridge, lowerBridge);
-
-          this.readGameCommand();
-          bridgeGame.retry();
-        }
-        if (command === "D") {
-          upperBridge.push(" ");
-          lowerBridge.push("X");
-
-          OutPutView.printMap(upperBridge, lowerBridge);
-
-          this.readGameCommand();
-          bridgeGame.retry();
-        }
-      }
-    });
-  },
-
   readMoving() {
     Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (command) => {
       bridgeGame.move(command);
       OutPutView.printMap(bridgeGame.upperBridge, bridgeGame.lowerBridge);
-      Console.print(bridgeGame.isCorrect);
-      bridgeGame.isCorrect ? this.readMoving() : this.readGameCommand();
+      bridgeGame.isSuccess ? this.readMoving() : this.readGameCommand();
     });
   },
 
@@ -94,8 +48,12 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (command) => {
+      if (command !== "R" || command !== "Q") throw new Error(ERROR.RETRY_COMMAND);
       if (command === "R") {
-        bridgeGame.retry(this.nextStep());
+        bridgeGame.retry(() => this.readMoving());
+      }
+      if (command === "Q") {
+        OutPutView.printResult(bridgeGame);
       }
     });
   },
