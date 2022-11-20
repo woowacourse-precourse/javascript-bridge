@@ -34,6 +34,17 @@ class MainController {
     InputView.readMoving(this.onUserMovingInput, this);
   }
 
+  /**
+   * 유저 이동 로직 연결 메서드
+   * @param userMoving {string[]} [유저 이동 기록]
+   */
+  tryMove(userMoving) {
+    const isSuccess = this.bridgeController.getIsSuccessMoving(userMoving);
+    const isFinished = this.bridgeController.getIsFinished(userMoving);
+
+    this.bridgeGameController.tryMove(isSuccess, isFinished);
+  }
+
   // 게임 초기 실행 메서드
   init() {
     this.userController.increaseTryCount();
