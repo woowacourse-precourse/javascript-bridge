@@ -561,3 +561,12 @@ describe('다리 이동 로그 메소드 테스트', () => {
     expect(EXPECTED).toEqual(RECEIVED);
   });
 });
+
+describe('빈 다리 로그 생성 메서드 테스트', () => {
+  test('메소드 이름은 "createEmptyUDArray"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'createEmptyUDArray';
+
+    expect(bridgeGame.createEmptyUDArray.name).toEqual(METHOD_NAME);
+  });
+});
