@@ -12,6 +12,7 @@ class App {
 
   constructor() {
     this.BridgeGame = new BridgeGame();
+    this.tryTimes = 1;
   }
 
   play() {
@@ -51,7 +52,7 @@ class App {
     }
 
     if (answer === "Q") {
-      OutputView.printGameResult(answer);
+      OutputView.printGameResult(answer, this.tryTimes);
       this.shutDown();
     }
   }
