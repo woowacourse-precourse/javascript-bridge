@@ -7,7 +7,7 @@ class BridgeGame {
   #movings = [];
   #trialCount = 1;
 
-  constructor(size) {
+  makeBridge(size) {
     this.validateBridgeSize(size);
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
   }

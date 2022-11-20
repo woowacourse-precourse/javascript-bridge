@@ -5,7 +5,7 @@ const OutputView = require("./Views/OutputView");
 const { MESSAGE, COMMAND } = require("./constants/constant");
 
 class App {
-  #bridgeGame;
+  #bridgeGame = new BridgeGame();
 
   play() {
     OutputView.printStart();
@@ -15,7 +15,7 @@ class App {
   tryMakeBridge(input) {
     const size = Number(input);
     try {
-      this.#bridgeGame = new BridgeGame(size);
+      this.#bridgeGame.makeBridge(size);
       InputView.readMoving(this.tryMove.bind(this));
     } catch ({ message }) {
       Console.print(message);
