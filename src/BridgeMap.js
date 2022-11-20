@@ -49,8 +49,7 @@ class BridgeMap {
       .forEach((stair) => {
         this.#history.get(stair)
           .push(chooseStep === stair
-            ? this.#getPathMarker(chooseStep)
-            : GAME_CONSTANTS.empty);
+            ? this.#getPathMarker(chooseStep) : GAME_CONSTANTS.empty);
       });
     return this;
   }
