@@ -1,10 +1,10 @@
-const BridgeGame = require('./BridgeGame.js');
-const InputView = require('./InputView.js');
-const OutputView = require('./OutputView.js');
-const BridgeMaker = require('./BridgeMaker.js');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator.js');
-const Bridge = require('./model/Bridge.js');
-const { isCollectBridgeLength, isValidateMoveInput, isValidateRetryInput } = require('./utils/validator.js');
+const BridgeGame = require('../model/BridgeGame.js');
+const InputView = require('../view/InputView.js');
+const OutputView = require('../view/OutputView.js');
+const BridgeMaker = require('../BridgeMaker.js');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator.js');
+const Bridge = require('../model/Bridge.js');
+const { isCollectBridgeLength, isValidateMoveInput, isValidateRetryInput } = require('../utils/validator.js');
 const { Console } = require('@woowacourse/mission-utils');
 
 class BridgeGameController {
