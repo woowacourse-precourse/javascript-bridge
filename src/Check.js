@@ -18,8 +18,8 @@ const Check = {
       if (isNaN(size)) {
         throw new Error(ERROR.NUMBER);
       }
-    } catch (e) {
-      Console.print(e.message);
+    } catch (error) {
+      Console.print(error.message);
       return true;
     }
   },
@@ -29,8 +29,8 @@ const Check = {
       if (size < SIZE.MINIMUM || size > SIZE.MAXIMUM) {
         throw new Error(ERROR.RANGE);
       }
-    } catch (e) {
-      Console.print(e.message);
+    } catch (error) {
+      Console.print(error.message);
       return true;
     }
   },
@@ -40,8 +40,8 @@ const Check = {
       if (moving !== MOVING.UPPER && moving !== MOVING.LOWER) {
         throw new Error(ERROR.MOVING);
       }
-    } catch (e) {
-      Console.print(e.message);
+    } catch (error) {
+      Console.print(error.message);
       return true;
     }
 
@@ -53,8 +53,8 @@ const Check = {
       if (command !== COMMAND.RESTART && command !== COMMAND.END) {
         throw new Error(ERROR.COMMAND);
       }
-    } catch (e) {
-      Console.print(e.message);
+    } catch (error) {
+      Console.print(error.message);
       return true;
     }
 
