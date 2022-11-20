@@ -4,10 +4,11 @@ class Bridge {
 
   constructor(directions) {
     this.#directions = directions;
+    this.#currentDirection = 0;
   } 
 
   isCurrentDirection(direction) {
-    return this.#directions === direction;
+    return this.#directions[this.#currentDirection] === direction;
   }
 
   isBridgeEnd() {
