@@ -62,7 +62,7 @@ class BridgeGame {
     }
   }
 
-  #setUserMove() {
+  #setUserMove(step) {
     this.move(step);
     BridgeMap.generate(this.#bridge, this.#userMove);
     printMap();
@@ -76,7 +76,7 @@ class BridgeGame {
         return this.getUserMove();
       }
 
-      return this.#setUserMove();
+      return this.#setUserMove(step);
     });
   }
 
