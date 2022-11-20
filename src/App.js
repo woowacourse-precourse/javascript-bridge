@@ -4,12 +4,17 @@ const InputView = require('./Viewer/InputView');
 const Bridge = require('./Model/Bridge');
 const Selected = require('./Model/Selected');
 const TryCnt = require('./Model/TryCnt');
-const { MESSAGE } = require('./utils/Constant');
+const { MESSAGE } = require('./Utils/Constant');
+const Validator = require('./Utils/Validator');
 
 class App {
   constructor() {
-    this.bridge = new Bridge();
-    this.game = new BridgeGame(Selected, TryCnt);
+    this.bridge = new Bridge(Validator);
+    this.game = new BridgeGame(
+      new Selected(Validator),
+      new TryCnt(Validator),
+      Validator,
+    );
   }
 
   play() {

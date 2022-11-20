@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { OUTPUT_MESSAGE } = require('../utils/Constant');
+const { OUTPUT_MESSAGE } = require('../Utils/Constant');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -44,8 +44,8 @@ const OutputView = {
   printResult(bridge, game) {
     Console.print(OUTPUT_MESSAGE.GAME_RESULT);
     this.printMap(bridge, game);
-    Console.print(OUTPUT_MESSAGE.GAME_IS_SUCCESS(game.getResult(bridge)));
-    Console.print(OUTPUT_MESSAGE.GAME_TRY_CNT(game.getTryCnt()));
+    Console.print(OUTPUT_MESSAGE.GAME_IS_SUCCESS(game.isWin(bridge)));
+    Console.print(OUTPUT_MESSAGE.GAME_TRY_CNT(game.tryCnt));
   },
 };
 

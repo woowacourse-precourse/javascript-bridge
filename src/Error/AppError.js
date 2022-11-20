@@ -1,4 +1,4 @@
-const { format } = require('../utils/Constant');
+const { format } = require('../Utils/Constant');
 
 class AppError extends Error {
   static PREFIX = '[ERROR]';

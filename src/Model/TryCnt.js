@@ -1,20 +1,20 @@
 class TryCnt {
-  #tryCnt;
+  #cnt;
 
   constructor() {
-    this.#tryCnt = 1;
+    this.#cnt = 1;
   }
 
-  get() {
-    return this.#tryCnt;
+  get cnt() {
+    return this.#cnt;
   }
 
   add() {
-    this.#tryCnt += 1;
+    this.#cnt += 1;
   }
 
   reset() {
-    this.#tryCnt = 1;
+    this.#cnt = 1;
   }
 }
 

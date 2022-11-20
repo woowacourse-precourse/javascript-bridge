@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
-const { MESSAGE } = require('../utils/Constant');
+const { MESSAGE } = require('../Utils/Constant');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -30,7 +30,7 @@ const InputView = {
   },
 
   isReMoving(bridge, game) {
-    return game.getResult(bridge) && bridge.getLength() !== game.getLevelCnt();
+    return game.isWin(bridge) && bridge.length !== game.levelCnt;
   },
 
   /**
@@ -38,7 +38,7 @@ const InputView = {
    */
   readGameCommand(bridge, game) {
     Console.readLine(MESSAGE.GAME_RETRY, (input) => {
-      return game.retry(input, bridge, game);
+      game.retry(input, bridge, game);
     });
   },
 };

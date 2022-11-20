@@ -5,7 +5,7 @@
 
 const BridgeGame = require('../../src/BridgeGame');
 const Bridge = require('../../src/Model/Bridge');
-const { ERROR_MESSAGE } = require('../../src/utils/Constant');
+const { ERROR_MESSAGE } = require('../../src/Utils/Constant');
 
 describe('Game 진행 테스트', () => {
   test('이동 input 입력시, this.selected에 반영', () => {
