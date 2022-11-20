@@ -4,7 +4,6 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { GAME } = require('./constants');
 const InputView = require('./InputView');
-const { printBridgeSizeException } = require('./OutputView');
 const OutputView = require('./OutputView');
 const Validator = require('./Validator');
 
@@ -19,10 +18,10 @@ class CrossBrigeGame {
   }
 
   askBridgeSize() {
-    InputView.readBridgeSize(this.checkBridgeSize.bind(this));
+    InputView.readBridgeSize(this.checkBridgeSizeInput.bind(this));
   }
 
-  checkBridgeSize(size) {
+  checkBridgeSizeInput(size) {
     try {
       Validator.isValidBridgeSize(size);
       this.setBridge(size);
@@ -40,10 +39,10 @@ class CrossBrigeGame {
   }
 
   askMoving() {
-    InputView.readMoving(this.makeMoving.bind(this));
+    InputView.readMoving(this.checkMovingInput.bind(this));
   }
 
-  checkMoving(moving) {
+  checkMovingInput(moving) {
     try {
       Validator.isValidMoving(moving);
       this.makeMoving(moving);
@@ -59,8 +58,8 @@ class CrossBrigeGame {
     return this.checkStatus(crossMove);
   }
 
-  checkStatus(crossMove) {
-    if (crossMove[0] == false) {
+  checkStatus([isSuccess]) {
+    if (isSuccess === false) {
       return this.askRetry();
     }
     if (this.bridgeGame.isEnd()) {
@@ -70,10 +69,10 @@ class CrossBrigeGame {
   }
 
   askRetry() {
-    InputView.readGameCommand(this.checkRetry.bind(this));
+    InputView.readGameCommand(this.checkRetryInput.bind(this));
   }
 
-  checkRetry(input) {
+  checkRetryInput(input) {
     try {
       Validator.isValidInput(input);
       this.makeRetry(input);
@@ -84,7 +83,7 @@ class CrossBrigeGame {
   }
 
   makeRetry(input) {
-    if (input == GAME.RETRY) {
+    if (input === GAME.RETRY) {
       return this.makeNewGame(input);
     }
     return this.makeEndGame();
@@ -96,11 +95,11 @@ class CrossBrigeGame {
   }
 
   makeEndGame() {
-    const end = this.bridgeGame.quit();
+    const [moveResult, gameSuccess, gameCount] = this.bridgeGame.quit();
     OutputView.printResult();
-    OutputView.printMap(end.moveResult);
-    OutputView.printSucessOrFail(end.gameSuccess);
-    OutputView.printTryCount(end.gameCount);
+    OutputView.printMap(moveResult);
+    OutputView.printSucessOrFail(gameSuccess);
+    OutputView.printTryCount(gameCount);
     Console.close();
   }
 }
