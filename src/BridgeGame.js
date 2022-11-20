@@ -1,5 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
+const Command = require("./constants/Command");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -22,6 +23,7 @@ class BridgeGame {
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * @param {string} moving 이동할 위치 U혹은 D
+   * @return {number, stringp[][]}
    */
   move(moving) {
     const isSuccess = this.checkBridge(moving);
@@ -35,7 +37,7 @@ class BridgeGame {
    */
   updateBirdge(isSuccess) {
     const next = this.#bridge[this.#crossBridge[0].length];
-    const [right, wrong] = next === "D" ? [1, 0] : [0, 1];
+    const [right, wrong] = next === Command.DOWN ? [1, 0] : [0, 1];
     this.#crossBridge[right].push(isSuccess ? " O " : "   ");
     this.#crossBridge[wrong].push(isSuccess ? "   " : " X ");
   }

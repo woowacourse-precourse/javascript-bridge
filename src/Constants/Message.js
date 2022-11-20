@@ -1,14 +1,16 @@
+const Command = require("./Command");
+const BRIDGE = require("./Limit");
+
 const INPUT_MSG = {
   BRIDGESIZE: "다리의 길이를 입력해주세요.\n",
-  MOVING: "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-  GAMECOMMAND:
-    "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+  MOVING: `이동할 칸을 선택해주세요. (위: ${Command.UP}, 아래: ${Command.DOWN})\n`,
+  GAMECOMMAND: `게임을 다시 시도할지 여부를 입력해주세요. (재시도: ${Command.RETRY}, 종료: ${Command.QUIT})\n`,
 };
 
 const ERROR_MSG = {
-  INPUT_BRIDGE: "다리 길이는 3이상 20이하만 가능합니다.",
-  INPUT_MOVING: "U랑 D만 입력할수있습니다. ",
-  INPUT_GAMECOMMAND: "Q랑 R만 입력할수있습니다. ",
+  INPUT_BRIDGE: `다리 길이는 ${BRIDGE.MIN}이상 ${BRIDGE.MAX}이하만 가능합니다.`,
+  INPUT_MOVING: `${Command.UP}랑 ${Command.DOWN}만 입력할수있습니다. `,
+  INPUT_GAMECOMMAND: `${Command.RETRY}랑 ${Command.QUIT}만 입력할수있습니다. `,
 };
 
 const GAME_MSG = {

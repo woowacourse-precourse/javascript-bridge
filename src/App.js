@@ -3,6 +3,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const { GAME_MSG } = require("./constants/Message");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const Command = require("./constants/Command");
 
 class App {
   #bridgeGame;
@@ -39,8 +40,8 @@ class App {
    * @param {string} command 사용장 입력문자 R혹은 Q
    */
   retry(command) {
-    if (command === "Q") this.gameEnd(false);
-    if (command === "R") {
+    if (command === Command.QUIT) this.gameEnd(false);
+    if (command === Command.RETRY) {
       this.#bridgeGame.retry(this.#retryCount);
       this.playBridgeGame();
     }

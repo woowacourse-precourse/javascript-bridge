@@ -1,6 +1,8 @@
 const { isNumber, error } = require("./Utils");
 const { Console } = require("@woowacourse/mission-utils");
 const { ERROR_MSG } = require("./constants/Message");
+const Command = require("./constants/Command");
+const BRIDGE = require("./constants/Limit");
 
 /**
  * 유효성 검사
@@ -8,13 +10,13 @@ const { ERROR_MSG } = require("./constants/Message");
 const Vaild = {
   /**
    * 다리 길이가 올바른지 판별하는 메서드
-   * @param {number} birdgeSize 다리길이
+   * @param {number} size 다리길이
    * @returns {boolean}
    */
-  checkBridgeSize(birdgeSize) {
-    birdgeSize = Number(birdgeSize);
+  checkBridgeSize(size) {
+    size = Number(size);
     try {
-      if (!isNumber(birdgeSize) || !(birdgeSize >= 3 && birdgeSize <= 20))
+      if (!isNumber(size) || !(size >= BRIDGE.MIN && size <= BRIDGE.MAX))
         throw error(ERROR_MSG.INPUT_BRIDGE);
       return true;
     } catch (msg) {
@@ -30,7 +32,8 @@ const Vaild = {
    */
   checkMoving(moving) {
     try {
-      if (moving !== "U" && moving !== "D") throw error(ERROR_MSG.INPUT_MOVING);
+      if (moving !== Command.UP && moving !== Command.DOWN)
+        throw error(ERROR_MSG.INPUT_MOVING);
       return true;
     } catch (msg) {
       Console.print(msg.message);
@@ -44,7 +47,7 @@ const Vaild = {
    */
   checkGameCommand(command) {
     try {
-      if (command !== "R" && command !== "Q")
+      if (command !== Command.RETRY && command !== Command.QUIT)
         throw error(ERROR_MSG.INPUT_GAMECOMMAND);
       return true;
     } catch (msg) {
