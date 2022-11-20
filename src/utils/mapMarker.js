@@ -8,11 +8,15 @@ const marking = (userSteps, bridgeDirections) => userSteps.map((step, index) => 
   return RULE.MARKER.NONE;
 });
 
+const getUpDownMap = (steps) => {
+  const upSide = steps.map((step) => step === RULE.BEHAVIOR.UP);
+  const downSide = upSide.map((step) => !step);
+  return [upSide, downSide];
+};
+
 const mapMarker = (usersSteps, bridgeDirections) => {
-  const userUpside = usersSteps.map((step) => step === RULE.BEHAVIOR.UP);
-  const userDownside = userUpside.map((step) => !step);
-  const bridgeUpside = bridgeDirections.map((step) => step === RULE.BEHAVIOR.UP);
-  const bridgeDownside = bridgeUpside.map((step) => !step);
+  const [userUpside, userDownside] = getUpDownMap(usersSteps);
+  const [bridgeUpside, bridgeDownside] = getUpDownMap(bridgeDirections);
 
   const mapUpside = marking(userUpside, bridgeUpside);
   const mapDownside = marking(userDownside, bridgeDownside);
