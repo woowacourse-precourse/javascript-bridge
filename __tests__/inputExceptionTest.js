@@ -44,3 +44,17 @@ describe('이동 방향 입력 테스트', () => {
     expect(InputView.readMoving).toThrow('[ERROR]');
   });
 });
+
+describe('재시도 입력 테스트', () => {
+  test.each([[['Q']], [['R']]])('정상', (input) => {
+    mockQuestions(input);
+    expect(InputView.readGameCommand()).toEqual(input[0]);
+  });
+
+  test.each([
+    [['0x51']], [['U+0051']], [['d']], [['QQ']], [['R!']], [[' ']], [['121687']]
+  ])('예외', (input) => {
+    mockQuestions(input);
+    expect(InputView.readGameCommand).toThrow('[ERROR]');
+  });
+});
