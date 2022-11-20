@@ -42,4 +42,9 @@ describe('메시지 출력 기능 단위 테스트', () => {
         const correctMessage = Console.print('총 시도한 횟수: 2');
         expect(testMessage).toEqual(correctMessage);
     });
+    it('공백을 출력하는 테스트',() => {
+        const testMessage = OutputView.printBlank();
+        const correctMessage = Console.print('');
+        expect(testMessage).toEqual(correctMessage);
+    })
 });
