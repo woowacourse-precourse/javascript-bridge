@@ -25,5 +25,22 @@
         "js": "never"
       }
     ]
-  }
+  },
+  "overrides": [
+    { "files": ["src/**/*.js"], "rules": { "max-lines-per-function": ["error", { "max": 12 }] } },
+    {
+      "files": ["__tests__/*Test.js"],
+      "env": { "jest/globals": true },
+      "extends": ["plugin:jest/recommended"],
+      "plugins": ["jest"],
+      "rules": {
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error",
+        "jest/expect-expect": "off"
+      }
+    }
+  ]
 }
