@@ -8,7 +8,9 @@ class Player {
   }
 
   move(direction) {
-    this.#bridgePath.push(direction);
+    if (!this.#out) {
+      this.#bridgePath.push(direction);
+    }
   }
 
   out(direction) {
