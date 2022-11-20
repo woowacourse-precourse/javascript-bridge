@@ -1,6 +1,8 @@
 const InputView = require('../View/InputView');
 const OutputView = require('../View/OutputView');
 const BridgeGame = require('../Model/BridgeGame');
+const { REPLAY } = require('../../constants/string');
+const Move = require('../Model/Move');
 
 class GameController {
   #bridgeGame;
@@ -45,6 +47,15 @@ class GameController {
       this.readDirection();
     } else {
       InputView.readGameCommand(this.setGameCommand.bind(this));
+    }
+  }
+
+  setGameCommand(command) {
+    if (command === REPLAY) {
+      this.#bridgeGame.retry();
+      this.readDirection();
+    } else {
+      this.end();
     }
   }
 }

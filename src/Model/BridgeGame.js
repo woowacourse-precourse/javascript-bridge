@@ -4,13 +4,14 @@ const Bridge = require('./Bridge');
 const NUMBER = require('../../constants/number');
 const { generate } = require('../BridgeRandomNumberGenerator');
 
-// InputView, OutputView 호출 불가
 class BridgeGame {
   #size;
 
   #path;
 
   #bridge;
+
+  #playCount;
 
   constructor() {
     this.#size = NUMBER.ZERO;
@@ -52,9 +53,14 @@ class BridgeGame {
     return Move.canMove(this.#path);
   }
 
-  // 사용자가 게임을 다시 시도할 때 사용하는 메서드
-  // 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다. */}
-  retry() {}
+  getPlayCount() {
+    return this.#playCount;
+  }
+
+  retry() {
+    this.#playCount += 1;
+    this.initBridge();
+  }
 }
 
 module.exports = BridgeGame;
