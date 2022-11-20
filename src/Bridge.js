@@ -7,10 +7,11 @@ const Validator = require('./Validator');
 
 class Bridge {
   #tryCount;
+  #bridgeMap;
 
   constructor () {
     OutputView.printStart();
-    this.bridgeMap = new BridgeMap();
+    this.#bridgeMap = new BridgeMap();
     this.#tryCount = 1;
   }
 
@@ -20,7 +21,7 @@ class Bridge {
 
   createPattern (moveGame, size) {
     if (Validator.validatorBridgeLength(size)) {
-      this.bridgeMap
+      this.#bridgeMap
         .setPattern(BridgeMaker.makeBridge(Number(size), generate));
       moveGame();
     }
@@ -32,22 +33,8 @@ class Bridge {
 
   getNextStep (retryGame, chooseStep) {
     if (Validator.checkStep(chooseStep)) {
-      this.moveMap(retryGame, chooseStep);
+      this.#moveMap(retryGame, chooseStep);
     }
-  }
-
-  moveMap (retryGame, chooseStep) {
-    OutputView.printMap(this.bridgeMap
-      .setHistoryWithChooseStep(chooseStep)
-      .getHistory());
-    if (!this.bridgeMap.checkPath(chooseStep)) {
-      return retryGame();
-    }
-    this.bridgeMap.incrementDistance();
-    if (this.bridgeMap.isEndGame()) {
-      return OutputView.printResult(true, this.bridgeMap.getHistory(), this.#tryCount);
-    }
-    this.askNextStep(retryGame);
   }
 
   askRetry (retryGame) {
@@ -56,16 +43,30 @@ class Bridge {
 
   getRetry (retryGame, chooseRetry) {
     if (Validator.checkRetry(chooseRetry)) {
-      this.runRetry(retryGame, chooseRetry);
+      this.#runRetry(retryGame, chooseRetry);
     }
   }
 
-  runRetry (retryGame, chooseRetry) {
+  #runRetry (retryGame, chooseRetry) {
     if (chooseRetry === 'Q') {
-      return OutputView.printResult(false, this.bridgeMap.getHistory(), this.#tryCount);
+      return OutputView.printResult(false, this.#bridgeMap.getHistory(), this.#tryCount);
     }
-    this.bridgeMap.initHistory();
+    this.#bridgeMap.initHistory();
     this.#tryCount += 1;
+    this.askNextStep(retryGame);
+  }
+
+  #moveMap (retryGame, chooseStep) {
+    OutputView.printMap(this.#bridgeMap
+      .setHistoryWithChooseStep(chooseStep)
+      .getHistory());
+    if (!this.#bridgeMap.checkPath(chooseStep)) {
+      return retryGame();
+    }
+    this.#bridgeMap.incrementDistance();
+    if (this.#bridgeMap.isEndGame()) {
+      return OutputView.printResult(true, this.#bridgeMap.getHistory(), this.#tryCount);
+    }
     this.askNextStep(retryGame);
   }
 }

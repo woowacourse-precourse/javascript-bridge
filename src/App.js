@@ -1,11 +1,12 @@
 const BridgeGame = require('./BridgeGame');
 
 class App {
+  #bridgeGame;
   constructor () {
-    this.bridgeGame = new BridgeGame();
+    this.#bridgeGame = new BridgeGame();
   }
   play () {
-    this.bridgeGame.maker();
+    this.#bridgeGame.maker();
   }
 }
 

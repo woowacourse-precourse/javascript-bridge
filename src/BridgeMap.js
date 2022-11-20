@@ -38,7 +38,7 @@ class BridgeMap {
     return this.#pattern[this.#distance] === chooseStep;
   }
 
-  getPathMarker (chooseStep) {
+  #getPathMarker (chooseStep) {
     return this.checkPath(chooseStep)
       ? GAME_CONSTANTS.goPath
       : GAME_CONSTANTS.notPath;
@@ -49,7 +49,7 @@ class BridgeMap {
       .forEach((stair) => {
         this.#history.get(stair)
           .push(chooseStep === stair
-            ? this.getPathMarker(chooseStep)
+            ? this.#getPathMarker(chooseStep)
             : GAME_CONSTANTS.empty);
       });
     return this;
