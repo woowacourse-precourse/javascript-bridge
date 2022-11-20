@@ -12,6 +12,8 @@ class BridgeGame {
     this.bridgeResult = [[], []];
     this.size = 0;
     this.moving = "";
+    this.count = 1;
+    this.resultMessage = "성공";
   }
 
   play() {
@@ -21,6 +23,7 @@ class BridgeGame {
     this.createBridge();
     this.move();
     this.retry();
+    this.result();
   }
 
   bridgeSize() {
@@ -85,9 +88,14 @@ class BridgeGame {
       OutputView.retrySentence();
       if (InputView.readGameCommand() === "R") {
         this.bridgeResult = [[], []];
+        this.count += 1;
         this.move();
-      }
+      } else this.resultMessage = "실패";
     }
+  }
+
+  result() {
+    OutputView.printResult(this.bridgeResult, this.count, this.resultMessage);
   }
 }
 
