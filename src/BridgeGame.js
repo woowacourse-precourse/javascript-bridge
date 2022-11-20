@@ -1,15 +1,26 @@
 class BridgeGame {
   #bridge;
+  #turn;
+
+  constructor() {
+    this.#turn = 0;
+  }
 
   setBridge(bridge) {
     this.#bridge = bridge;
   }
 
   isAccord(direction) {
-    return direction === this.#bridge[0];
+    return direction === this.#bridge[this.#turn];
   }
 
-  move() {}
+  move() {
+    this.#turn += 1;
+  }
+
+  isEnd() {
+    return this.#turn === this.#bridge.length;
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
