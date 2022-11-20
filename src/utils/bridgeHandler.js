@@ -13,7 +13,8 @@ const convertNumberToUpDown = (number) => {
 };
 
 const convertBlueprintToBridge = (array) => {
-  return array.map(convertNumberToUpDown);
+  const bridge = array.map(convertNumberToUpDown);
+  return bridge;
 };
 
 const createBlueprint = (size) => {

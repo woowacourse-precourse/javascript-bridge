@@ -1,6 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('../utils/constants');
-const { validateBridgeSize, validateMovingInput } = require('../utils/validations');
+const {
+  validateBridgeSize,
+  validateMovingInput,
+  validateContinue,
+} = require('../utils/validations');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -43,7 +47,12 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    Console.readLine(MESSAGE.ASK_CONTINUE, (userInput) => {
+      validateContinue(userInput);
+      callback(userInput);
+    });
+  },
 };
 
 module.exports = InputView;

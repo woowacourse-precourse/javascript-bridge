@@ -43,6 +43,19 @@ class GameController {
     return this.selectMoving();
   }
 
+  askRetry() {
+    this.inputView.readGameCommand((userInput) => {
+      if (userInput === 'R') return this.replay();
+
+      return this.defeat();
+    });
+  }
+
+  replay() {
+    this.bridgeGame.retry();
+    this.selectMoving();
+  }
+
   win() {
     const progressData = this.bridgeGame.getGameProgress();
     const playCount = this.bridgeGame.getPlayCount();
@@ -50,10 +63,12 @@ class GameController {
     this.outputView.printResult(progressData, playCount, gameResult);
   }
 
-  // 죽었으면 리트라이, 살았으면 다시 moving
-  askRetry() {
+  defeat() {
     this.bridgeGame.defeat();
-    console.log('die');
+    const progressData = this.bridgeGame.getGameProgress();
+    const playCount = this.bridgeGame.getPlayCount();
+    const gameResult = this.bridgeGame.getGameResult();
+    this.outputView.printResult(progressData, playCount, gameResult);
   }
 }
 

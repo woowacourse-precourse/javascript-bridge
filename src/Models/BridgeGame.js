@@ -1,6 +1,6 @@
 const BridgeMaker = require('../BridgeMaker');
-const { generateRandomNumber } = require('../utils/bridgeHandler');
-const { Console } = require('@woowacourse/mission-utils');
+const generateRandomNumber = require('../utils/bridgeHandler');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -16,7 +16,7 @@ class BridgeGame {
 
   createBridge(size) {
     this.#playCount += 1;
-    this.#myBridge = BridgeMaker.makeBridge(size, generateRandomNumber);
+    this.#myBridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     console.log(this.#myBridge);
   }
 
@@ -64,6 +64,7 @@ class BridgeGame {
     this.#gameProgress = [];
     this.#round = 0;
     this.#alive = true;
+    this.#playCount += 1;
   }
 
   defeat() {

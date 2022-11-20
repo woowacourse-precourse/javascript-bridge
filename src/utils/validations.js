@@ -29,4 +29,12 @@ const validateMovingInput = (userInput) => {
   throw new Error(ERROR.MOVING);
 };
 
-module.exports = { validateBridgeSize, validateMovingInput };
+/* Continue Validation */
+const validateContinue = (userInput) => {
+  const options = ['R', 'Q'];
+  if (options.includes(userInput)) return;
+
+  throw new Error(ERROR.CONTINUE);
+};
+
+module.exports = { validateBridgeSize, validateMovingInput, validateContinue };

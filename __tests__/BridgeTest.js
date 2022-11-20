@@ -4,7 +4,8 @@ const {generateRandomNumber} = require('../src/utils/bridgeHandler')
 describe("다리 생성 테스트", () => {
   test("다리의 길이를 확인한다", () => {
     const size = 5;
-    const blueprintRow = createBlueprint(size);
+    const blueprintArray = createBlueprint(size);
+    const blueprintRow = blueprintArray.map(() => generateRandomNumber());
     const row = convertBlueprintToBridge(blueprintRow);
 
     expect(row.length).toEqual(5);
