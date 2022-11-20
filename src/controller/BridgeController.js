@@ -10,9 +10,9 @@ class BridgeController {
       throw new Error('Only one instance is allowed!');
     }
 
-    this.#service = new BridgeService();
-
     instance = this;
+
+    this.#service = new BridgeService();
   }
 
   inputBridgeLength(bridgeLength) {
@@ -32,13 +32,10 @@ class BridgeController {
   }
 
   outputExit() {
-    return {
-      map: this.outputmoveMap(),
-      ...this.#service.getGameResult()
-    };
+    return this.#service.getGameResult();
   }
 }
 
-const singletonBridgeController = Object.freeze(new BridgeController());
+const singletonController = Object.freeze(new BridgeController());
 
-module.exports = singletonBridgeController;
+module.exports = singletonController;
