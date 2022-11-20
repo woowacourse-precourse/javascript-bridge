@@ -5,6 +5,7 @@ const OutputView = require('./View/OutputView');
  */
 class BridgeGame {
   #turn;
+  #try = 0;
   #upperBridge;
   #lowerBridge;
 
@@ -26,12 +27,10 @@ class BridgeGame {
     this.#turn += 1;
     if (input === crossable) {
       this.isFirst(GO, crossable);
-      if (bridge.length === this.#turn) this.retry(true, this.#turn);
     }
-
     if (input !== crossable) {
       this.isFirst(STOP, crossable);
-      this.retry(false, this.#turn);
+      this.retry();
     }
   }
 
@@ -67,12 +66,9 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(isSuccess, turn) {
+  retry() {
     this.init();
-    const SUCCESS = '성공';
-    const FAIL = '실패';
-    if (isSuccess) OutputView.printResult(SUCCESS, turn);
-    if (!isSuccess) OutputView.printResult(FAIL, turn);
+    this.#try += 1;
   }
 }
 
