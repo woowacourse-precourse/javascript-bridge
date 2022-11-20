@@ -592,11 +592,30 @@ describe('범위 추출 메서드 테스트', () => {
 
 describe('다리 이동 로그 저장하는 메서드', () => {
   const bridgeGame = new BridgeGame();
+  const POSITION_LOG_1 = [[0, 0], 'O'];
+  const POSITION_LOG_2 = [[1, 1], 'O'];
+  const POSITION_LOG_3 = [[0, 2], 'O'];
+
+  bridgeGame.move();
+  bridgeGame.setPositionLog(...POSITION_LOG_1);
+
+  bridgeGame.move();
+  bridgeGame.setPositionLog(...POSITION_LOG_2);
+
+  bridgeGame.move();
+  bridgeGame.setPositionLog(...POSITION_LOG_3);
 
   test('메소드 이름은 "setBridgeLog"로 정의된다.', () => {
     const METHOD_NAME = 'setBridgeLog';
 
     expect(bridgeGame.setBridgeLog.name).toEqual(METHOD_NAME);
+  });
+
+  test('첫 번째 값은 [[ "O" ] [ " " ]]을 반환한다.', () => {
+    const EXPECTED = 0;
+    const RECEIVED = [['O'], [' ']];
+
+    expect(bridgeGame.setBridgeLog(EXPECTED)).toEqual(RECEIVED);
   });
 });
 
