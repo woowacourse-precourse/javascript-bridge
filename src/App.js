@@ -100,7 +100,9 @@ class App {
 
   gameOver() {
     OutputView.printResult({
-      map: BridgeMapMaker.makeBridgeMap(this.#bridgeGame.getMoveHistory()),
+      bridgeMap: BridgeMapMaker.makeBridgeMap(
+        this.#bridgeGame.getMoveHistory(),
+      ),
       isClear: this.#bridgeGame.isClear(),
       totalTryCount: this.#bridgeGame.getTotalTryCount(),
     });
