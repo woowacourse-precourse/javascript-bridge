@@ -29,7 +29,7 @@ const ERROR = {
   LENGTH: `[ERROR] 다리 길이는 ${REQUIREMENT.MINLEN}부터 ${REQUIREMENT.MAXLEN} 사이의 숫자여야 합니다.`,
   MOVE: `[ERROR] 이동할 칸은 ${REQUIREMENT.UP}와 ${REQUIREMENT.DOWN}로 입력해야 합니다.`,
   RETRY: `[ERROR] 재시작 여부는 ${REQUIREMENT.RETRY}와 ${REQUIREMENT.QUIT}로 입력해야 합니다.`,
-}
+};
 
 const GAMERESULT = {
   WRONGBLOCK: 0,

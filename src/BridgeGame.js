@@ -42,6 +42,7 @@ class BridgeGame {
     if (cur !== letter) {
       return ' ';
     }
+
     if (block === letter) {
       return REQUIREMENT.CANMOVE;
     }
@@ -56,15 +57,21 @@ class BridgeGame {
    */
   move(userInput = this.#userInput, bridge = this.#bridge) {
     const idx = userInput.length - 1;
+    const moveResult = this.getMoveResult(userInput, bridge, idx);
 
+    return moveResult;
+  }
+
+  getMoveResult(userInput, bridge, idx) {
     if (userInput[idx] !== bridge[idx]) {
       return GAMERESULT.WRONGBLOCK;
     }
+    
     if (userInput.length !== bridge.length) {
       return GAMERESULT.RIGHTBLOCK; 
     }
     
-    return GAMERESULT.GAMECLEAR; // 게임 클리어
+    return GAMERESULT.GAMECLEAR;
   }
 
   updateUserInput(input) {

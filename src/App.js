@@ -36,7 +36,7 @@ class App {
       InputView.readGameCommand(this);
     } else if (result === GAMERESULT.RIGHTBLOCK) {
       InputView.readMoving(this);
-    } else if (result === GAMERESULT.GAMECLEAR){
+    } else if (result === GAMERESULT.GAMECLEAR) {
       this.gameOver(1);
     }
   }
@@ -51,7 +51,8 @@ class App {
     }
   }
 
-  gameOver(clear) { // 1: 성공 0 : 실패
+  // clear) 1: 성공 0 : 실패
+  gameOver(clear) { 
     const result = this.#bridge.makeBridgeString();
     OutputView.printResult(this.#attemptsCnt, result, clear);
   }
