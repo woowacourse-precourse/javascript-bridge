@@ -1,7 +1,7 @@
 // InputView, OutputView 사용 금지
 
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeMaker = require("./utils/BridgeMaker");
+const BridgeRandomNumberGenerator = require("./utils/BridgeRandomNumberGenerator");
 const { UP_AND_DOWN, TRACE_MARKS } = require("./constants");
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -30,7 +30,7 @@ class BridgeGame {
     this.#selectedPathLog.push(selectedPath);
     const index = this.#selectedPathLog.length - 1;
     const correctionMark =
-      selectedPath === this.#selectedPathLog[index]
+      selectedPath === this.#bridge[index]
         ? TRACE_MARKS.CORRECT
         : TRACE_MARKS.INCORRECT;
     this.#trace[0].push(
