@@ -24,7 +24,6 @@ class BridgeGame {
 
   retry() {
     this.#turn = 0;
-    
   }
 }
 

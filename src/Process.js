@@ -9,9 +9,11 @@ const MapGenerator = require('./MapGenerator');
 class Process {
   #game;
   #result = [];
+  #count;
 
   start() {
     this.#game = new BridgeGame();
+    this.#count = 1;
     InputView.readBridgeSize(this);
   }
 
@@ -49,6 +51,7 @@ class Process {
     if (input === 'R') {
       this.#game.retry();
       this.#result = [];
+      this.#count += 1;
       InputView.readMoving(this);
     }
     if (input === 'Q') {
@@ -59,7 +62,7 @@ class Process {
   end(isSucced) {
     OutputView.printResultPhrase();
     this.printMap();
-    OutputView.printResult(isSucced, count);
+    OutputView.printResult(isSucced, this.#count);
     Console.close();
   }
 }
