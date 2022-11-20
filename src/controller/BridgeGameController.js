@@ -1,4 +1,5 @@
 const BridgeGame = require('../model/BridgeGame');
+const { BRIDGE_MESSAGE } = require('../utils/constant');
 const BridgeLengthValidator = require('../validator/BridgeLengthValidator');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
@@ -27,8 +28,10 @@ class BridgeGameController {
 
   getMoving() {
     InputView.readMoving((moving) => {
-      this.#bridgeGame.move(moving);
+      const isSuccess = this.#bridgeGame.move(moving);
       this.printCurrentMap();
+
+      if (!isSuccess) this.getQuitMessage();
     });
   }
 
@@ -37,6 +40,19 @@ class BridgeGameController {
 
     OutputView.printMap(upside, downside);
   }
+
+  getQuitMessage() {
+    InputView.readGameCommand((command) => {
+      if (command === BRIDGE_MESSAGE.RETRY_SIGN) {
+        this.#bridgeGame.retry();
+        return;
+      }
+
+      this.quit();
+    });
+  }
+
+  quit() {}
 }
 
 module.exports = BridgeGameController;
