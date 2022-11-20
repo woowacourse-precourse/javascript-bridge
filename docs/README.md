@@ -49,3 +49,6 @@
   - [x] Game Test
     - [x] Move Test
   
+
+## 🧐 **테스트 결과**
+  ![image](https://user-images.githubusercontent.com/96935132/202901638-c00c5fb2-ad3b-4d20-ac9e-c24048a0ad18.png)
