@@ -20,7 +20,7 @@ const BRIDGE_GAME = Object.freeze({
   QUIT: 'Q',
 });
 
-const GAME_STATUS = Object.freeze({
+const GAME_STATE = Object.freeze({
   ERROR: -1,
   FAIL_QUIT: -1,
   SUCCESS_QUIT: 0,
@@ -37,6 +37,6 @@ module.exports = {
   REG_EXP,
   BRIDGE_MAKER,
   BRIDGE_GAME,
-  GAME_STATUS,
+  GAME_STATE,
   PRINTABLE_BRIDGE,
 };

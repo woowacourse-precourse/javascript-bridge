@@ -1,7 +1,7 @@
 const Validator = require('../utils/Validator');
 const Console = require('../utils/Console');
 const InputView = require('../views/InputView');
-const { GAME_STATUS } = require('../constants/values');
+const { GAME_STATE } = require('../constants/values');
 
 const InputChecker = {
   checkDirection(direction, move) {
@@ -10,10 +10,10 @@ const InputChecker = {
     } catch (error) {
       Console.print(error);
       InputView.readMoving(move);
-      return GAME_STATUS.ERROR;
+      return GAME_STATE.ERROR;
     }
 
-    return GAME_STATUS.PLAYING;
+    return GAME_STATE.PLAYING;
   },
 
   checkDirectionInput(direction) {
@@ -29,10 +29,10 @@ const InputChecker = {
     } catch (error) {
       Console.print(error);
       InputView.readGameCommand(restartOrQuit);
-      return GAME_STATUS.ERROR;
+      return GAME_STATE.ERROR;
     }
 
-    return GAME_STATUS.PLAYING;
+    return GAME_STATE.PLAYING;
   },
 
   checkSelectInput(select) {

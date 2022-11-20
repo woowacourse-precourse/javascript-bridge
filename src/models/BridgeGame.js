@@ -1,88 +1,81 @@
-const { BRIDGE_GAME, GAME_STATUS } = require('../constants/values');
+const { BRIDGE_GAME, GAME_STATE } = require('../constants/values');
 const { MESSAGE_RESULT } = require('../constants/messages');
+const DataHandler = require('../utils/DataHandler');
 
 class BridgeGame {
-  #bridge;
-
-  #tryCount;
-
-  #gameStatus;
+  #data = {
+    bridge: [],
+    tryCount: 0,
+    gameProgress: {},
+  };
 
   constructor(bridge) {
-    this.#bridge = bridge;
-    this.#tryCount = 1;
-    this.#resetGameStatus();
+    this.#data.bridge = bridge;
+    this.#data.tryCount = 1;
+    this.#resetGameProgress();
   }
 
-  #resetGameStatus() {
-    this.#gameStatus = {
+  #resetGameProgress() {
+    this.#data.gameProgress = {
       length: 0,
       upBridge: [],
       downBridge: [],
-      status: GAME_STATUS.PLAYING,
+      state: GAME_STATE.PLAYING,
     };
   }
 
   move(direction) {
-    const selected = this.#makeSelected(direction);
-    this.#gameStatus[selected].push(this.#answer(direction));
-    this.#gameStatus[this.#makeUnselected(direction)].push(BRIDGE_GAME.EMPTY);
+    const selected = DataHandler.getSelectedIndex(direction);
+    this.#data.gameProgress[selected].push(this.#getSelectOfResult(direction));
+    this.#data.gameProgress[DataHandler.getUnselectedIndex(direction)].push(BRIDGE_GAME.EMPTY);
     this.#increaseStep();
-    this.#setGameStatus(this.#gameStatus[selected]);
+    this.#setGameProgress(this.#data.gameProgress[selected]);
 
     return {
-      upBridge: this.#gameStatus.upBridge,
-      downBridge: this.#gameStatus.downBridge,
+      upBridge: this.#data.gameProgress.upBridge,
+      downBridge: this.#data.gameProgress.downBridge,
     };
   }
 
-  #makeSelected(direction) {
-    return direction === BRIDGE_GAME.INPUT_U ? BRIDGE_GAME.UP_BRIDGE : BRIDGE_GAME.DOWN_BRIDGE;
-  }
-
-  #answer(direction) {
-    return direction === this.#bridge[this.#gameStatus.length]
+  #getSelectOfResult(direction) {
+    return direction === this.#data.bridge[this.#data.gameProgress.length]
       ? BRIDGE_GAME.CORRECT
       : BRIDGE_GAME.INCORRECT;
   }
 
-  #makeUnselected(direction) {
-    return direction === BRIDGE_GAME.INPUT_U ? BRIDGE_GAME.DOWN_BRIDGE : BRIDGE_GAME.UP_BRIDGE;
-  }
-
   #increaseStep() {
-    this.#gameStatus.length += BRIDGE_GAME.STEP;
+    this.#data.gameProgress.length += BRIDGE_GAME.STEP;
   }
 
-  #setGameStatus(selected) {
+  #setGameProgress(selected) {
     const index = selected.length - 1;
 
     if (selected[index] === BRIDGE_GAME.INCORRECT) {
-      this.#gameStatus.status = GAME_STATUS.FAIL_QUIT;
+      this.#data.gameProgress.state = GAME_STATE.FAIL_QUIT;
     }
 
-    if (selected[index] === BRIDGE_GAME.CORRECT && selected.length === this.#bridge.length) {
-      this.#gameStatus.status = GAME_STATUS.SUCCESS_QUIT;
+    if (selected[index] === BRIDGE_GAME.CORRECT && selected.length === this.#data.bridge.length) {
+      this.#data.gameProgress.state = GAME_STATE.SUCCESS_QUIT;
     }
   }
 
-  checkGameStatus() {
-    return this.#gameStatus.status;
+  checkState() {
+    return this.#data.gameProgress.state;
   }
 
   retry(start) {
-    this.#tryCount += 1;
-    this.#resetGameStatus();
+    this.#data.tryCount += 1;
+    this.#resetGameProgress();
     start();
   }
 
   getResult() {
     const successOrFailure =
-      this.#gameStatus.status === GAME_STATUS.SUCCESS_QUIT
+      this.#data.gameProgress.state === GAME_STATE.SUCCESS_QUIT
         ? MESSAGE_RESULT.SUCCESS
         : MESSAGE_RESULT.FAILURE;
 
-    return { successOrFailure, tryCount: this.#tryCount };
+    return { successOrFailure, tryCount: this.#data.tryCount };
   }
 }
 

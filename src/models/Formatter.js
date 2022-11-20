@@ -1,6 +1,6 @@
 const { PRINTABLE_BRIDGE } = require('../constants/values');
 
-class PrintableBridgeMaker {
+class Formatter {
   #printableBridge;
 
   getPrintableBridge() {
@@ -23,4 +23,4 @@ class PrintableBridgeMaker {
   }
 }
 
-module.exports = PrintableBridgeMaker;
+module.exports = Formatter;
