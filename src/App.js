@@ -1,5 +1,5 @@
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
+const InputView = require("./View/InputView");
+const OutputView = require("./View/OutputView");
 
 class App {
   play() {

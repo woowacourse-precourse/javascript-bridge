@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 const Validate = {
   isCorrectBridgeLength(input) {
+    this.isUndefined(input);
     return (
       this.isNumber(input) &&
       this.isLowerThanMaxLength(input) &&

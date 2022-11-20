@@ -1,16 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
-const Validate = require("./Validate");
-const OutputView = require("./OutputView");
+const Validate = require("../Validate");
 
 const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
-      Validate.isUndefined(input);
       const result = Validate.isCorrectBridgeLength(input);
       if (result) {
-        const bridgeGame = new BridgeGame();
-        bridgeGame.initGame(parseInt(input));
+        const bridgeGame = Controller.makeBridgeGame(parseInt(input));
         this.readMoving(bridgeGame);
       }
     });
@@ -21,8 +17,9 @@ const InputView = {
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
         Validate.isCorrectMove(input);
-        const result = bridgeGame.move(input);
+        const result = Controller.sendUserMoving(input, bridgeGame);
         if (result === 1) return this.readGameCommand(bridgeGame);
+        if (result === 2) return;
         this.readMoving(bridgeGame);
       }
     );
@@ -33,11 +30,8 @@ const InputView = {
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
         Validate.isCorrectGameCommand(input);
-        if (input === "Q") return OutputView.printResult(bridgeGame);
-        if (input === "R") {
-          bridgeGame.initSelectBridge();
-          this.readMoving(bridgeGame);
-        }
+        const result = Controller.sendGameCommand(input, bridgeGame);
+        if (result === true) this.readMoving(bridgeGame);
       }
     );
   },
