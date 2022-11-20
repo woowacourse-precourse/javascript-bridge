@@ -11,7 +11,8 @@ const MESSAGE = {
 const PREFIX = "[ERROR]";
 
 const ERROR = {
-  INVALID_SIZE: `${PREFIX} 다리 길이는 ${SIZE.MIN}부터  ${SIZE.MAX} 사이의 숫자여야 합니다.`,
+  SIZE_TYPE: `${PREFIX} 다리 길이는 숫자를 입력해야 합니다.`,
+  SIZE_RANGE: `${PREFIX} 다리 길이는 ${SIZE.MIN}부터  ${SIZE.MAX} 사이의 숫자여야 합니다.`,
 };
 
 module.exports = {

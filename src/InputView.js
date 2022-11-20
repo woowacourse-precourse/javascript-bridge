@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGE } = require("./constants/index");
 
-const { checkBridgeSize } = require("./Validator");
+const { checkBridgeSizeValid } = require("./Validator");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -12,7 +12,8 @@ const InputView = {
    */
   readBridgeSize(generateBridge) {
     Console.readLine(MESSAGE.INPUT_SIZE, (size) => {
-      checkBridgeSize(size);
+      checkBridgeSizeValid(size);
+
       generateBridge(size);
     });
   },
