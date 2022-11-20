@@ -72,16 +72,21 @@ class BridgeGame {
     }
   }
 
+  #setUserMove() {
+    this.move(step);
+    BridgeMap.generate(this.#bridge, this.#userMove);
+    printMap();
+    this.checkResult();
+  }
+
   getUserMove() {
     readMoving((step) => {
       if (!isRightUserMove(step)) {
         printError('U와 D만 입력해 주세요.');
         return this.getUserMove();
       }
-      this.move(step);
-      BridgeMap.generate(this.#bridge, this.#userMove);
-      printMap();
-      this.checkResult();
+
+      return this.#setUserMove();
     });
   }
 
