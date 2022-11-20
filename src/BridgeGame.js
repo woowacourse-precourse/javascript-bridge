@@ -38,23 +38,23 @@ class BridgeGame {
   }
 
   makeCorrectUpBridge() {
-    this.#currentBridge[0].upBridge.push('O');
-    this.#currentBridge[1].downBridge.push(' ');
+    this.#currentBridge[0].push('O');
+    this.#currentBridge[1].push(' ');
   }
 
   makeCorrectDownBridge() {
-    this.#currentBridge[0].upBridge.push(' ');
-    this.#currentBridge[1].downBridge.push('O');
+    this.#currentBridge[0].push(' ');
+    this.#currentBridge[1].push('O');
   }
 
   makeWrongUpBridge() {
-    this.#currentBridge[0].upBridge.push('X');
-    this.#currentBridge[1].downBridge.push(' ');
+    this.#currentBridge[0].push('X');
+    this.#currentBridge[1].push(' ');
   }
 
   makeWrongDownBridge() {
-    this.#currentBridge[0].upBridge.push(' ');
-    this.#currentBridge[1].downBridge.push('X');
+    this.#currentBridge[0].push(' ');
+    this.#currentBridge[1].push('X');
   }
 
   /**
