@@ -20,15 +20,16 @@ class App {
     while (CNT < size) {
       const MOVE = await InputView.readMoving();
       const RESULT = GAME.move(CNT, MOVE);
-      OutputView.printResult();
+      OutputView.printMap(RESULT);
+      if (RESULT[CNT][1] === 'X') this.selectRestart(GAME);
       CNT += 1;
-      if (RESULT === 'X') this.selectRestart();
     }
   }
 
   //실패하면 Restart여부 선택
-  async selectRestart() {
+  async selectRestart(GAME) {
     const RESTART_OR_END = await InputView.readGameCommand();
+    RESTART_OR_END === 'R' ? GAME.retry() : OutputView.printResult();
   }
 }
 
