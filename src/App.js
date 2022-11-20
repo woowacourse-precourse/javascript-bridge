@@ -7,7 +7,7 @@ class App {
     OutputView.printGameStart();
     const BRIDGE_SIZE = RecallUntilCorrect.recallReadBridgeSize(true);
     const BRIDGE_MAP = BridgeMaker.makeBridge(BRIDGE_SIZE,BridgeRandomNumberGenerator.generate);
-    console.log(BRIDGE_MAP);
+    const moving = RecallUntilCorrect.recallReadMoving(true);
   }
 }
 
