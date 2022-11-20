@@ -1,5 +1,5 @@
 const Bridge = require('../model/Bridge');
-const { readBridgeSize, readMoving } = require('../view/InputView');
+const { readBridgeSize, readMoving, readGameCommand } = require('../view/InputView');
 const { printGameStart } = require('../view/OutputView');
 
 /**
@@ -13,7 +13,8 @@ class BridgeGame {
   async execute() {
     printGameStart();
     this.#bridge = new Bridge(await readBridgeSize());
-    this.move(0, await readMoving());
+    const result = await this.move(0, await readMoving());
+    console.log(result);
   }
 
   /**
@@ -24,7 +25,7 @@ class BridgeGame {
   async move(level, command) {
     const result = this.#bridge.checkBridge(level, command);
     if (result && level === this.#bridge.getLength() - 1) {
-      return console.log('승리');
+      return 'WIN';
     }
     if (result) {
       return this.move(level + 1, await readMoving());
@@ -37,8 +38,15 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {
-    console.log('재시작 물어보기');
+  async retry() {
+    const command = await readGameCommand();
+    if (command === 'R') {
+      return command;
+    }
+    if (command === 'Q') {
+      return command;
+    }
+    return command;
   }
 }
 

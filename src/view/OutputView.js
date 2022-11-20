@@ -16,6 +16,7 @@ const OutputView = {
     };
     MissionUtils.Console.print(convertText(map.up));
     MissionUtils.Console.print(convertText(map.down));
+    MissionUtils.Console.print('');
   },
 
   /**
