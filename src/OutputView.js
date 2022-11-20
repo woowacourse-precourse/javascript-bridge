@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { GAME_MESSAGE } = require('./utils/constants');
 
 const OutputView = {
   makeMiniTemplate(outputList) {
@@ -28,7 +29,7 @@ const OutputView = {
   },
 
   printResult(controlInstance) {
-    Console.print('최종 게임 결과');
+    Console.print(GAME_MESSAGE.final);
     OutputView.printMap(controlInstance);
     OutputView.finalResultTemplate(
       controlInstance.outputExit()
