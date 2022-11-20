@@ -7,7 +7,7 @@ const BridgeGame = require("./BridgeGame");
  */
 
 const InputView = {
-  game: new BridgeGame(),
+  game: null,
   /**
    * 다리의 길이를 입력받는다.
    */
