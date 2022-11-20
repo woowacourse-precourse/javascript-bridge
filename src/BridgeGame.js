@@ -10,15 +10,13 @@ class BridgeGame {
     #bridgeArray;
     #bridgeCount;
     #gameCount;
-    #upBridgeHistory;
-    #downBridgeHistory;
+    #bridgeHistory;
 
     constructor(bridgeArray) {
         this.#bridgeArray = bridgeArray;
         this.#bridgeCount = 0;
         this.#gameCount = 1;
-        this.#upBridgeHistory = [];
-        this.#downBridgeHistory = [];
+        this.#bridgeHistory = [];
     }
 
     isBadMove(move) {
@@ -34,14 +32,12 @@ class BridgeGame {
     showFail(move) {
         // console.log("BridgeGame.showFail--------------");
         if (move === KEY.UP) {
-            this.#upBridgeHistory.push(STRUCTURE.BAD);
-            this.#downBridgeHistory.push(STRUCTURE.BLANK);
+            this.#bridgeHistory.push([STRUCTURE.BAD, STRUCTURE.BLANK]);
         }
         if (move === KEY.DOWN) {
-            this.#upBridgeHistory.push(STRUCTURE.BLANK);
-            this.#downBridgeHistory.push(STRUCTURE.BAD);
+            this.#bridgeHistory.push([STRUCTURE.BLANK, STRUCTURE.BAD]);
         }
-        printMap(this.#upBridgeHistory, this.#downBridgeHistory);
+        printMap(this.#bridgeHistory);
     }
 
     move(move) {
@@ -62,16 +58,14 @@ class BridgeGame {
     goodMove(isUp) {
         this.addGoodMoveHistory(isUp);
         this.#bridgeCount++;
-        printMap(this.#upBridgeHistory, this.#downBridgeHistory, this.#bridgeArray);
+        printMap(this.#bridgeHistory, this.#bridgeArray);
     }
     addGoodMoveHistory(isUp) {
         if (isUp) {
-            this.#upBridgeHistory.push(STRUCTURE.GOOD);
-            this.#downBridgeHistory.push(STRUCTURE.BLANK);
+            this.#bridgeHistory.push([STRUCTURE.GOOD, STRUCTURE.BLANK]);
         }
         if (!isUp) {
-            this.#upBridgeHistory.push(STRUCTURE.BLANK);
-            this.#downBridgeHistory.push(STRUCTURE.GOOD);
+            this.#bridgeHistory.push([STRUCTURE.BLANK, STRUCTURE.GOOD]);
         }
     }
 
@@ -83,14 +77,13 @@ class BridgeGame {
     }
     resetBridgeSetting() {
         this.#bridgeCount = 0;
-        this.#upBridgeHistory = [];
-        this.#downBridgeHistory = [];
+        this.#bridgeHistory = [];
         this.#gameCount++;
     }
 
     showResult(result) {
         Console.print(MESSAGE.FINISH);
-        printMap(this.#upBridgeHistory, this.#downBridgeHistory);
+        printMap(this.#bridgeHistory);
         Console.print(result);
         Console.print(MESSAGE.TRY + this.#gameCount);
         Console.close();
