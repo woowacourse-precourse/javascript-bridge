@@ -18,25 +18,41 @@ class Controller {
 
   // - 다리의 길이 입력 받는다.
   inputBrideSize() {
-    InputView.readBridgeSize(this.makeWinningBridge.bind(this));
+    InputView.readBridgeSize(this.validateSize.bind(this));
   }
 
-  makeWinningBridge(size) {
-    OutputView.printMessage('');
-
+  validateSize(size) {
     try {
-      this.bridgeGame.makeWinningBridge(Number(size));
+      this.bridgeGame.validateSize(Number(size));
     } catch (error) {
       OutputView.printMessage(error);
       return this.inputBrideSize();
     }
+
+    this.makeWinningBridge(size);
+  }
+
+  makeWinningBridge(size) {
+    OutputView.printMessage('');
+    this.bridgeGame.makeWinningBridge(Number(size));
 
     this.inputMoving();
   }
 
   // - 위, 아래 중 이동할 칸 입력 받는다.
   inputMoving() {
-    InputView.readMoving(this.move.bind(this));
+    InputView.readMoving(this.validateDirection.bind(this));
+  }
+
+  validateDirection(direction) {
+    try {
+      this.bridgeGame.validateDirection(direction);
+    } catch (error) {
+      OutputView.printMessage(error);
+      return this.inputMoving();
+    }
+
+    this.move(direction);
   }
 
   move(direction) {
@@ -63,15 +79,24 @@ class Controller {
 
   // - 재시작 또는 종료 여부 입력 받는다.
   inputGameCommand() {
-    InputView.readGameCommand(this.checkCommand.bind(this));
+    InputView.readGameCommand(this.validateCommand.bind(this));
   }
 
-  checkCommand(command) {
-    Validation.checkBlank(command);
-    Validation.checkStringType(command);
-    Validation.checkUpperCaseOfCommand(command);
-    Validation.checkValidCommand(command);
+  validateCommand(command) {
+    try {
+      Validation.checkBlank(command);
+      Validation.checkStringType(command);
+      Validation.checkUpperCaseOfCommand(command);
+      Validation.checkValidCommand(command);
+    } catch (error) {
+      OutputView.printMessage(error);
+      return this.inputGameCommand();
+    }
 
+    this.executeCommand(command);
+  }
+
+  executeCommand(command) {
     if (command === 'R') this.retry();
     if (command === 'Q') {
       const isSucceeded = false;

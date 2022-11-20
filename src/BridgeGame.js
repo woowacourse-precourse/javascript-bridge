@@ -11,9 +11,12 @@ class BridgeGame {
     this.currBridge = new CurrBridge();
   }
 
+  validateSize(size) {
+    this.winningBridge.validate(size);
+  }
+
   // 사용자가 건널 다리를 만드는 메서드
   makeWinningBridge(size) {
-    this.winningBridge.validate(size);
     this.winningBridge.makeWinningBridge(size);
   }
 
@@ -22,8 +25,11 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(direction) {
+  validateDirection(direction) {
     this.currBridge.validate(direction);
+  }
+
+  move(direction) {
     const canMove = this.currBridge.canMove(direction, this.winningBridge);
 
     this.currBridge.makeBridge(direction, canMove);
