@@ -25,8 +25,7 @@ class BridgeGameController {
       this.#game.setBridge(+sizeCommand.getCommand());
       readMoving(this.#onMovingSubmit.bind(this));
     } catch (e) {
-      printError(e);
-      readBridgeSize(this.#onBridgeSizeSubmit.bind(this));
+      BridgeGameController.#runError(e, readBridgeSize, this.#onBridgeSizeSubmit.bind(this));
     }
   }
 
@@ -49,8 +48,7 @@ class BridgeGameController {
 
       readMoving(this.#onMovingSubmit.bind(this));
     } catch (e) {
-      printError(e);
-      readMoving(this.#onMovingSubmit.bind(this));
+      BridgeGameController.#runError(e, readMoving, this.#onMovingSubmit.bind(this));
     }
   }
 
@@ -64,8 +62,7 @@ class BridgeGameController {
         this.#runQuit();
       }
     } catch (e) {
-      printError(e);
-      readGameCommand(this.#onGameCommandSubmit.bind(this));
+      BridgeGameController.#runError(e, readGameCommand, this.#onGameCommandSubmit.bind(this));
     }
   }
 
@@ -78,6 +75,11 @@ class BridgeGameController {
     const { bridgeMap, isWin, tryCount } = this.#game.quit();
     printResult(bridgeMap, isWin, tryCount);
     Console.close();
+  }
+
+  static #runError(message, readLine, callback) {
+    printError(message);
+    readLine(callback);
   }
 }
 
