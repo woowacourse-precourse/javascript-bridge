@@ -3,13 +3,23 @@
  */
 const MissionUtils = require("@woowacourse/mission-utils");
 const { Console } = MissionUtils;
+const {
+  bridgeLengthValidate,
+  userMoveInput,
+  gameRestartInput,
+} = require("./utils/inputValidate");
+const { GameStatus } = require("./GameStatus.js");
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
 
   readBridgeSize() {
-    Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {});
+    Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
+      if (!bridgeLengthValidate(input)) throw new Error("[ERROR]");
+      GameStatus.length = input;
+      this.readMoving();
+    });
   },
 
   /**
