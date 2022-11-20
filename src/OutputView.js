@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Notice = require("./NoticeMessage.js")
 
 const OutputView = {
-  
+
   makePrintable(side){
     let printSide = ""
     printSide += Notice.START_PRINT
@@ -22,11 +22,11 @@ const OutputView = {
     MissionUtils.Console.print(printdownside)
   },
 
-  printResult(upside, downside, status, trynum) {
+  printResult(upside, downside, resultMap) {
     MissionUtils.Console.print(Notice.RESULT_GAME)
     this.printMap(upside,downside)
-    MissionUtils.Console.print(Notice.SUCCES_NOT + status)
-    MissionUtils.Console.print(Notice.TRY_NUM + trynum)
+    MissionUtils.Console.print(Notice.SUCCES_NOT + resultMap.get("result"))
+    MissionUtils.Console.print(Notice.TRY_NUM + resultMap.get("try"))
     MissionUtils.Console.close()
   },
 };

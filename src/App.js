@@ -8,6 +8,7 @@ class App {
   constructor(){
     this.game = new BridgeGame()
     this.try = 1
+    this.resultmap = new Map()
   }
   play() {
     MissionUtils.Console.print(Notice.START_GAME)
@@ -40,7 +41,9 @@ class App {
     }
     else if(input == "Q"){
       const result = Notice.FAIL
-      OutputView.printResult(this.game.upside,this.game.downside,result, this.try)
+      this.resultmap.set("result",result)
+      this.resultmap.set("try",this.try)
+      OutputView.printResult(this.game.upside,this.game.downside,this.resultmap)
     }
   }
   setGameReset(){

@@ -11,6 +11,7 @@ class BridgeGame {
     this.bridgeMap = new Map()
     this.upside = []
     this.downside = []
+    this.resultmap = new Map()
   }
 
   makeBridge(length){
@@ -26,7 +27,9 @@ class BridgeGame {
   checkBridgeAll(trynum){
     if(this.bridge.length === this.number){
       const result = Notice.SUCCESS
-      OutputView.printResult(this.upside,this.downside,result, trynum)
+      this.resultmap.set("result",result)
+      this.resultmap.set("try",trynum)
+      OutputView.printResult(this.upside,this.downside,this.resultmap)
       return false
     }
     return true
