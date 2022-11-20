@@ -94,12 +94,16 @@
 <!-- - **Git의 커밋 단위는 앞 단계에서 `docs/README.md`에 정리한 기능 목록 단위**로 추가한다. -->
 
 1. docs : `docs/README.md`에서 추가적인 기능 목록, 완료된 목록에서 체크한 사항이 있을경우 커밋
-2. feat(OutputView) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
-3. test(InputView) : 단위별로테스트 코드 작성
-4. feat(InputView) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
-5. test(BridgeMaker) : 단위별로 테스트 코드 작성
-6. feat(BridgeMaker) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
-7. feat(Print) : 출력 UI 로직을 구현하는 Print 클래스 및 메서드 구현
+2. test(OutputView) : `OutputView`에서 출력하는 메시지를 테스트하는 테스트 코드 작성
+3. feat(OutputView) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
+4. test(InputView) : 단위별로테스트 코드 작성
+5. feat(InputView) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
+6. test(BridgeMaker) : 단위별로 테스트 코드 작성
+7. feat(BridgeMaker) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
+8. feat(Print) : 출력 UI 로직을 구현하는 Print 클래스 및 메서드 구현
+9. feat(GameManager) : 게임을 진행하는 GameManager 클래스 및 메서드 구현
+10. test(OutputView) : `printMap`, `printResult` 메서드 테스트 코드 작성
+11. feat(OutputView) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
 
 
 ## 프로그래밍 요구사항
