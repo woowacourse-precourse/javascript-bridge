@@ -1,4 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -18,33 +17,6 @@ const OutputView = {
   printResult() {
   },
 
-  printStartMessage(){
-    Console.print('다리 건너기 게임을 시작합니다.');
-  },
-  printInputLengthMessage() {
-    Console.print('다리의 길이를 입력해주세요.');
-  },
-  printUserInput(input) {
-    Console.print(`${input}`);
-  },
-  printChooseSectionMessage() {
-    Console.print('이동할 칸을 선택해주세요. (위: U, 아래: D)');
-  },
-  printGameRestartMessage() {
-    Console.print('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)');
-  },
-  printGameResult(result) {
-    Console.print(`게임 성공 여부: ${result}`);
-  },
-  printGameTryCount(count) {
-    Console.print(`총 시도한 횟수: ${count}`);
-  },
-  printResultTitle() {
-    Console.print('최종 게임 결과');
-  },
-  printBlank() {
-    Console.print('');
-  }
 };
 
 module.exports = OutputView;
