@@ -679,3 +679,12 @@ describe('다리 이동 로그 가져오는 메서드 테스트', () => {
     expect(EXPECTED).toEqual(RECEIVED);
   });
 });
+
+describe('현재 다리 위치의 결과를 가져오는 메서드 테스트', () => {
+  test('메소드 이름은 "getCurrentBridgeReuslt"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
+    const METHOD_NAME = 'getCurrentBridgeReuslt';
+
+    expect(bridgeGame.getCurrentBridgeReuslt.name).toEqual(METHOD_NAME);
+  });
+});
