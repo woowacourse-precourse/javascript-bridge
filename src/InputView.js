@@ -26,7 +26,6 @@ const InputView = {
     if(bridgeLength.match([/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g])) throw "[ERROR] The string can not be accepted"
     if(bridgeLength<0) throw "[ERROR] The Negative number can't be accepted"
     this.randomBridge(bridgeLength)
-    // return bridgeLength
   },
   randomBridge(bridgeLength) {
     const number=BridgeRandomNumberGenerator.generate
@@ -49,21 +48,22 @@ const InputView = {
       bridegame.move(bridgeArray)
       this.readMoving(bridgeArray)
     }
-    if(correctValue==='X') this.readGameCommand(correctValue)
+    if(correctValue==='X') this.readGameCommand(correctValue,bridgeArray)
   },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(correctValue) {
+  readGameCommand(correctValue,bridgeArray) {
     MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",(gameInput)=>{
-      this.checkReadGameInput(gameInput,correctValue)
+      this.checkReadGameInput(gameInput,bridgeArray)
     })
   },
-  checkReadGameInput(gameInput,correctValue){
+  checkReadGameInput(gameInput,bridgeArray){
     let count=0
     count++
     if(gameInput!=='R' && gameInput!=='Q') throw "[ERROR] Only R,Q accepted"
-    OutputView.printResult(count)
+    OutputView.printResult(count,bridgeArray)
+    InputView.readMoving(bridgeArray)
   }
 };
 
