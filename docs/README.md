@@ -3,6 +3,32 @@
 
 <br/>
 
+## 고민점
+### 싱글톤패턴
+-BridgeGame은 클래스이고, 여러군대서 접근하기 때문에 new로 생성될 때마다 생성이 되면 곤란하다고 생각됐습니다.
+그렇기 때문에 싱글톤패턴을 이용해서 어디서 접근하더라도 하나의 인스턴스가 리턴되게 설정했습니다.
+
+```javascript
+constructor() {
+    if (instance) return instance;
+    this.#bridge = [];
+    this.#gameTryCount = 1;
+    this.#gameComplete = false;
+    this.init();
+  }
+```
+
+### Input과 Output, 그리고 내부 로직처리가 MVC패턴과 유사하다고 생각했습니다.
+- 비록 완전히 로직을 분리하지는 못했지만, 각종 변수가 담겨있는 BridgeGame의 변수들이 Model, Input, Output이 View, 
+그리고 전반적인 로직을 담당했던 BridgeGame의 변수를 다루는 로직과 BridgeMaker, 그리고 Generator 등이 Controller라고 이해됩니다.
+
+### 테스트코드 자체를 공부하게 되었습니다.
+- 이번 미션도 초기에는 error를 throw하였지만 테스트가 통과가 되지 않았고, 이를 해결하기 위해 Jest의 홈페이지를 들어가 공부했습니다.
+stringContaining을 보고 출력을 해야함을 알았고, 이를 인지하고 코드를 수정했습니다.
+- 이밖에도 이전에 BridgeMaker에서 바로 BridgeGame에 접근하여 변수를 set해주었는데, 테스트를 보고 리턴으로 바꾸는 등,
+기존에 코드에 테스트를 맞췄던 안좋은 습관에서 벗어나, 테스트 코드에 알맞는 코드를 작성하는 방법에 대해서 배웠습니다.
+즉, TDD에 대한 흐름을 조금 더 이해하게 되었습니다.
+
 ## 기능 요구 사항
 ### 위 아래 두 칸으로 이루어진 다리를 건넌다.
 - [x] 왼쪽에서 오른쪽으로 다리를 건넌다.
