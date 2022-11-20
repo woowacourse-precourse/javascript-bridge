@@ -4,6 +4,21 @@ const { Console } = require('@woowacourse/mission-utils');
  */
 const OutputView = {
   /**
+   * 게임 시작 문구를 출력한다.
+   */
+  printGameStartMessage() {
+    Console.print('다리 건너기 게임을 시작합니다.');
+  },
+
+  /**
+   * 예외 상황 시 에러 문구를 출력한다.
+   * @param {string} errorMessage
+   */
+  printErrorMessage(errorMessage) {
+    Console.print(errorMessage);
+  },
+
+  /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * @param {Array<string[]>} bridgeMap 현재까지 이동한 다리의 상태
    */
@@ -24,21 +39,6 @@ const OutputView = {
     Console.print(`\n게임 성공 여부: ${isClear === true ? '성공' : '실패'}`);
     Console.print(`총 시도한 횟수: ${totalTryCount}`);
     Console.close();
-  },
-
-  /**
-   * 게임 시작 문구를 출력한다.
-   */
-  printGameStartMessage() {
-    Console.print('다리 건너기 게임을 시작합니다.');
-  },
-
-  /**
-   * 예외 상황 시 에러 문구를 출력한다.
-   * @param {string} errorMessage
-   */
-  printErrorMessage(errorMessage) {
-    Console.print(errorMessage);
   },
 };
 
