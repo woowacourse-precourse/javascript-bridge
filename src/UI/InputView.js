@@ -42,8 +42,13 @@ const InputView = {
    */
   readGameCommand(retry) {
     readLine(END, (restartOrQuit) => {
-      new Validator().ending(restartOrQuit);
-      retry(restartOrQuit);
+      try {
+        new Validator().ending(restartOrQuit);
+        retry(restartOrQuit);
+      } catch (error) {
+        print(error);
+        InputView.readGameCommand(retry);
+      }
     });
   },
 };
