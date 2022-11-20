@@ -7,9 +7,11 @@ class BridgePlay{
     this.bridge = bridge;
     this.bridgeGame = new BridgeGame({ status:[], attempts:1 })
   }
+
   startRound(){
     InputView.readMoving(this);
   }
+
   playRound(moving){
     const status = this.bridgeGame.move(moving);
     if(status[status.length-1] !== this.bridge[status.length-1]){
@@ -25,6 +27,7 @@ class BridgePlay{
 
   playRoundOver(status){
     OutputView.printMap(status, false);
+    InputView.readGameCommand(this);
   }
 
   playRoundNext(status){
@@ -36,6 +39,12 @@ class BridgePlay{
     //test
     console.log("round complete");
   }
+
+  quitOrRetry(option){
+    //test
+    console.log(option);
+  }
+
 }
 
 module.exports = BridgePlay;
