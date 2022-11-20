@@ -102,4 +102,5 @@
   
 ## Validate
   * 다리 크기에 대한 입력의 유효성을 검증하는 기능을 담당 -`isValidateInputBridgeSize`
-
+  * 다리 건너기에서 어느 다리로 움직일지 선택하는 입력의 유효성을 검증하는 기능을 담당 - `isValidateInputMoveDirection`
+  * 게임에서 다리 건너기 실패시 게임을 재시작할지, 종료할지에 대한 입력의 유효성을 검증하는 기능을 담당 - `isValidateInputGameCommand`
