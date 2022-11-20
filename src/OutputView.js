@@ -14,10 +14,7 @@ const OutputView = {
   },
 
   mapListToString(mapList) {
-    let mapString = '[';
-    mapList.forEach((mark) => {
-      mapString += ` ${mark} |`;
-    });
+    let mapString = mapList.reduce((map, mark) => `${map} ${mark} |`, '[');
     mapString = `${mapString.slice(0, -1)}]`;
     return mapString;
   },

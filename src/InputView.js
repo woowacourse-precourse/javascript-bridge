@@ -1,10 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./Constants');
-const {
-  validateBridgeSize,
-  validateDirection,
-  validateGameCommand,
-} = require('./Validator');
+const Validator = require('./Validator');
 
 const InputView = {
   readBridgeSize(setUpGame) {
@@ -15,7 +11,7 @@ const InputView = {
 
   tryToSetUpGame(bridgeSize, setUpGame) {
     try {
-      validateBridgeSize(bridgeSize);
+      Validator.validateBridgeSize(bridgeSize);
       setUpGame(bridgeSize);
     } catch (e) {
       Console.print(e);
@@ -31,7 +27,7 @@ const InputView = {
 
   tryToMoveOneStep(direction, moveOneStep) {
     try {
-      validateDirection(direction);
+      Validator.validateDirection(direction);
       moveOneStep(direction);
     } catch (e) {
       Console.print(e);
@@ -47,7 +43,7 @@ const InputView = {
 
   tryToCheckRetry(command, checkRetry) {
     try {
-      validateGameCommand(command);
+      Validator.validateGameCommand(command);
       checkRetry(command);
     } catch (e) {
       Console.print(e);
