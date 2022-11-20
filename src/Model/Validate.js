@@ -1,4 +1,4 @@
-const { ERROR } = require("./Constants");
+const { ERROR } = require("../Utils/Constants");
 
 class Validate {
   checkBridgeSize(size) {

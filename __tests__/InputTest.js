@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/Controller/App");
 const BridgeMaker = require("../src/Model/BridgeMaker");
-const { ERROR } = require("../src/Constants");
+const { ERROR } = require("../src/Utils/Constants");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
