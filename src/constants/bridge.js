@@ -8,7 +8,21 @@ const EITHER = {
   DOWN: 'D',
 };
 
+const MOVE_RESULT = {
+  CORRECT: 'O',
+  INCORRECT: 'X',
+  BLACK: ' ',
+};
+
+const CONTAINER = {
+  START: '[ ',
+  END: ' ]',
+  MID: ' | ',
+};
+
 module.exports = {
   ERROR,
   EITHER,
+  MOVE_RESULT,
+  CONTAINER,
 };
