@@ -1,9 +1,6 @@
-const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('../model/BridgeGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const { validateGameCommand } = require('../errorHandling');
-const { GAME } = require('../utils/constant');
 
 class GameController {
   #tryCount;
@@ -14,7 +11,7 @@ class GameController {
   }
 
   start() {
-    Console.print(GAME.START);
+    OutputView.printStart();
     this.askBridge();
   }
 
@@ -59,8 +56,8 @@ class GameController {
   }
 
   end(isDone) {
-    Console.print(GAME.END);
-    OutputView.printResult(isDone, this.#tryCount, this.game.getMap());
+    const result = isDone ? '성공' : '실패';
+    OutputView.printResult(result, this.#tryCount, this.game.getMap());
   }
 }
 
