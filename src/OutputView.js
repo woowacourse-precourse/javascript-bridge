@@ -15,14 +15,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridgeState) {
-    const [upperBridge, lowerBridge] = bridgeState;
-
-    const upperBridgeText = `[ ${upperBridge.join(" | ")} ]`;
-    const lowerBridgeText = `[ ${lowerBridge.join(" | ")} ]\n`;
-
-    MissionUtils.Console.print(upperBridgeText);
-    MissionUtils.Console.print(lowerBridgeText);
+  printMap(map) {
+    const [upperBridge, lowerBridge] = map;
+    MissionUtils.Console.print(upperBridge);
+    MissionUtils.Console.print(lowerBridge);
   },
 
   /**
@@ -30,12 +26,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(success, bridgeState, attemptCount) {
-    const successText = success ? "성공" : "실패";
+  printResult(map, success, tryCount) {
     MissionUtils.Console.print(`최종 게임 결과`);
-    this.printMap(bridgeState);
-    MissionUtils.Console.print(`게임 성공 여부: ${successText}`);
-    MissionUtils.Console.print(`총 시도한 횟수: ${attemptCount}`);
+    this.printMap(map);
+    MissionUtils.Console.print(`게임 성공 여부: ${success ? "성공" : "실패"}`);
+    MissionUtils.Console.print(`총 시도한 횟수: ${tryCount}`);
   },
 };
 
