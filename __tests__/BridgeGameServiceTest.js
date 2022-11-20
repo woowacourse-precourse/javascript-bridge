@@ -3,6 +3,8 @@ const OutputView = require("../src/View/OutputView.js");
 const InputView = require("../src/View/InputView.js");
 const BridgeGameModel = require("../src/Model/BridgeGameModel.js");
 const BridgeMaker = require("../src/BridgeMaker.js");
+const Misc = require("../src/utils/Misc.js");
+const { mockQuestions } = require("./ApplicationTest");
 
 const mockInputView = () => {
   const mock = InputView;
@@ -69,6 +71,16 @@ const mockMakeBridge = () => {
   BridgeMaker.makeBridge = jest.fn().mockImplementation(() => ["U", "U", "D"]);
 };
 
+const mockPipe = () => {
+  Misc.pipe = jest.fn().mockImplementation((initialValue) => {
+    return function (...funcs) {
+      return funcs.reduce((res, func) => {
+        return res ? func(res) : func();
+      }, initialValue);
+    };
+  });
+};
+
 describe("BridgeGameService 클래스 테스트", () => {
   let inputView;
   let outputView;
@@ -111,6 +123,26 @@ describe("BridgeGameService 클래스 테스트", () => {
 
     expect(bridgeGameModel.checkRetry).toHaveBeenCalledTimes(1);
     expect(bridgeGameModel.attempt).toHaveBeenCalledTimes(1);
+    expect(task).toHaveBeenCalledTimes(1);
+  });
+
+  test("moveGame 로직 테스트", () => {
+    const bridgeGameService = new BridgeGameService(
+      inputView,
+      outputView,
+      bridgeGameModel
+    );
+    const task = jest
+      .fn()
+      .mockImplementation(() => console.log("processMoveTask"));
+
+    mockQuestions(["U"]);
+    mockPipe();
+
+    bridgeGameService.moveGame(task);
+
+    expect(bridgeGameModel.jump).toHaveBeenCalledTimes(1);
+    expect(outputView.printMap).toHaveBeenCalledTimes(1);
     expect(task).toHaveBeenCalledTimes(1);
   });
 });
