@@ -1,7 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeGame = require('../src/BridgeGame');
-const { createTokens, canMoveNext } = require('../src/BridgeGame');
+const { createTokens } = require('../src/BridgeGame');
 const { generate } = require('../src/BridgeRandomNumberGenerator');
 const { ERROR_MESSAGE } = require('../src/Constants/message');
 
@@ -29,7 +29,7 @@ describe('BridgeGame 클래스 테스트', () => {
     token.forEach((token) => expect(binaryRegExp.test(token)).toBe(true));
   });
 
-  test('isGoUp - 유저 입력이 U일 때만 참값을 반환하는지 검사', () => {
+  test('isSelectUpper - 유저 입력이 U일 때만 참값을 반환하는지 검사', () => {
     // Given
     const userDirectionList = ['U', 'D'];
 
@@ -38,18 +38,18 @@ describe('BridgeGame 클래스 테스트', () => {
 
     // Then
     userDirectionList.forEach((userDirection, idx) => {
-      const isGoUp = BridgeGame.isGoUp(userDirection);
+      const isGoUp = BridgeGame.isSelectUpper(userDirection);
       expect(isGoUp).toBe(isGoUpList[idx]);
     });
   });
 
-  test('isGoUp - U, D 이외의 값이 입력되면 예외 처리', () => {
+  test('isSelectUpper - U, D 이외의 값이 입력되면 예외 처리', () => {
     // Given
     const userDirectionList = ['L', 'UU', 'UD', 'K', '3', '#!', 'uzz'];
 
     // Then
     userDirectionList.forEach((userDirection) => {
-      expect(() => BridgeGame.isGoUp(userDirection)).toThrow(
+      expect(() => BridgeGame.isSelectUpper(userDirection)).toThrow(
         ERROR_MESSAGE.unexpected_input
       );
     });

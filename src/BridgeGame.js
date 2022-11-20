@@ -1,5 +1,4 @@
-const { RESULT } = require('./Constants/contant');
-const DIRECTION = require('./Constants/direction');
+const { RESULT, DIRECTION } = require('./Constants/contant');
 const Validator = require('./Validator');
 
 /**
@@ -25,11 +24,13 @@ class BridgeGame {
 
   move(direction) {
     Validator.checkCorrectDirection(direction);
-    const dir = BridgeGame.isGoUp(direction) ? DIRECTION.up : DIRECTION.down;
+    const dir = BridgeGame.isSelectUpper(direction)
+      ? DIRECTION.up
+      : DIRECTION.down;
     return this.recordDirection(dir);
   }
 
-  static isGoUp(direction) {
+  static isSelectUpper(direction) {
     Validator.checkCorrectDirection(direction);
     if (direction === DIRECTION.up) return true;
     return false;
