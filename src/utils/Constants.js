@@ -1,5 +1,5 @@
 const BRIDGE = {
-  length: {
+  range: {
     minimum: 3,
     maximum: 20,
   },
