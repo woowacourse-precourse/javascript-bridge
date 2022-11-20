@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { ERROR } = require("./constant/constantValue");
 
 const Validation = {
   checkBridgeLength(inputValue) {
@@ -13,8 +14,7 @@ const Validation = {
 
   checkBridgeNumber(inputValue) {
     try {
-      if (isNaN(inputValue))
-        throw new Error("[ERROR] 다리 길이는 숫자로 입력해야 합니다.");
+      if (isNaN(inputValue)) throw new Error(`${ERROR.NUMBER}`);
     } catch (error) {
       Console.print(error.message);
       return true;
@@ -23,10 +23,7 @@ const Validation = {
 
   checkBridgeRange(inputValue) {
     try {
-      if (inputValue < 3 || inputValue > 20)
-        throw new Error(
-          "[ERROR] 다리 길이는 3 이상 20 이하의 숫자를 입력해야 합니다."
-        );
+      if (inputValue < 3 || inputValue > 20) throw new Error(`${ERROR.RANGE}`);
     } catch (error) {
       Console.print(error.message);
       return true;
@@ -36,7 +33,7 @@ const Validation = {
   checkMovingValue(inputValue) {
     try {
       if (inputValue !== "U" && inputValue !== "D") {
-        throw new Error("[ERROR] 이동할 칸은 U와 D 중 하나를 입력해야 합니다.");
+        throw new Error(`${ERROR.MOVEMENT}`);
       }
     } catch (error) {
       Console.print(error.message);
