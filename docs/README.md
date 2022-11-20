@@ -171,6 +171,23 @@ input view 기준으로 기능 구현 작성
 
 # 테스트 코드
 
+### DomainLogicTest
+
+도메인 로직 테스트
+
+- [] Validator 전체 input 에 대한 의사 결정
+- [] BridgeGame move 이동 에 대한 의사 결정
+- [] BridgeGame retry 재시작에 대한 의사 결정
+- [] BirdgeMap handleMap 어떤 map을 처음인지 아닌지에 따른 map추가 기능실행 의사 결정
+- [] BridgeMap addMap 맞췄는지 틀렸는지에 따라 어떤 자원을 추가할지 의사결정
+
+- [] App progressMovementTrue 게임 이 끝날것인지에 대한 의사 결정이 들어있음
+
+- [] App progressApp appstatus 에 따라 게임을 어느 시점으로 실행시킬것인지 에 따른 의사 결정이 들어가있음 
+
+
+###
+
 # 객체 관련 제한 사항
 
 ## InputView 객체 V
