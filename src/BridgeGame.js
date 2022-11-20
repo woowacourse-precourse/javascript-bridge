@@ -18,7 +18,7 @@ class BridgeGame {
 
   move(direction) {
     const nextCellDirection = this.#bridge[this.#curPlace];
-    const successful = isCorrectDirection(direction, nextCellDirection);
+    const successful = direction === nextCellDirection;
     if (successful) this.#curPlace += 1;
 
     return successful;
@@ -31,7 +31,7 @@ class BridgeGame {
   }
 
   retry(command) {
-    return doseUserChooseRetry(command);
+    return command === 'R';
   }
 
   gameComplete() {
