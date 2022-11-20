@@ -3,8 +3,8 @@ const {
   BRIDGE_LENGTH_LIMIT,
   APPROPRIATE_INPUT,
 } = require("./Constants");
-const { NOT_APPROPRIATE_LENGTH, WRONG_MOVEMENT } = ERROR_MESSAGE;
-const { UP, DOWN } = APPROPRIATE_INPUT;
+const { NOT_APPROPRIATE_LENGTH, WRONG_MOVEMENT, WRONG_ENDING } = ERROR_MESSAGE;
+const { UP, DOWN, RESTART, QUIT } = APPROPRIATE_INPUT;
 
 class Validator {
   bridgeLength(bridgeLength) {
@@ -16,6 +16,12 @@ class Validator {
   userMovement(upOrDown) {
     if (upOrDown !== UP && upOrDown !== DOWN) {
       throw new Error(WRONG_MOVEMENT);
+    }
+  }
+
+  ending(restartOrQuit) {
+    if (restartOrQuit !== RESTART && restartOrQuit !== QUIT) {
+      throw new Error(WRONG_ENDING);
     }
   }
 }
