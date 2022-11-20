@@ -39,26 +39,28 @@ class App {
       this.validator.checkMoveCommand(moveCommand);
       OutputView.printMap(this.bridgeGame.drawBridgeMap(moveCommand));
       this.bridgeGame.move();
-
-      if (this.checkGameSuccess()) {
-        return this.exitGame();
-      }
-
-      if (this.checkGameOver()) {
-        return this.requestGameOverCommand();
-      }
-      this.getBridgeMovementDirection();
+      this.checkGameState();
     } catch (errorType) {
       OutputView.printError(errorType);
       this.getBridgeMovementDirection();
     }
   }
 
-  checkGameSuccess() {
+  checkGameState() {
+    if (this.#checkGameSuccess()) {
+      return this.#exitGame();
+    }
+    if (this.#checkGameOver()) {
+      return this.requestGameOverCommand();
+    }
+    this.getBridgeMovementDirection();
+  }
+
+  #checkGameSuccess() {
     return this.bridgeGame.checkGameSuccess();
   }
 
-  checkGameOver() {
+  #checkGameOver() {
     return this.bridgeGame.checkGameOver();
   }
 
@@ -67,24 +69,28 @@ class App {
   }
 
   requestRetryGame(retryCommand) {
-    const { quit, retry } = GAME_COMMAND;
     try {
-      if (retryCommand === quit) {
-        return this.exitGame();
-      }
-      if (retryCommand === retry) {
-        this.bridgeGame.retry();
-        this.getBridgeMovementDirection();
-      }
       this.validator.checkRetryCommand(retryCommand);
-      this.requestGameOverCommand();
+      this.checkRetryStatus(retryCommand);
     } catch (errorType) {
       OutputView.printError(errorType);
       this.requestGameOverCommand();
     }
   }
 
-  exitGame() {
+  checkRetryStatus(retryCommand) {
+    const { quit, retry } = GAME_COMMAND;
+    if (retryCommand === quit) {
+      return this.#exitGame();
+    }
+    if (retryCommand === retry) {
+      this.bridgeGame.retry();
+      this.getBridgeMovementDirection();
+    }
+    this.requestGameOverCommand();
+  }
+
+  #exitGame() {
     OutputView.printResult(
       this.bridgeGame.getUserGameMap(),
       this.bridgeGame.checkGameOver(),
