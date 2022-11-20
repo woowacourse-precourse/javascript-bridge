@@ -11,8 +11,11 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridgeArray = [];
-    size, generateRandomNumber;
-    //길이만큼 이 함수 (0,1) 돌려서 다리배열 생성
+
+    for (let i = 0; i < size; i++) {
+      bridgeArray.push(generateRandomNumber.generate() === 0 ? "D" : "U");
+    }
+
     return bridgeArray;
   },
 };

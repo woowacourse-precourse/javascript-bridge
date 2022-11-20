@@ -1,5 +1,7 @@
 const InputView = require("../InputView");
 const OutputView = require("../OutputView");
+const BridgeMaker = require("../BridgeMaker");
+const RandomGenerator = require("../BridgeRandomNumberGenerator");
 
 class App {
   play() {
@@ -11,8 +13,14 @@ class App {
     //시도횟수 리셋
     //move부터 다시시작.
 
-    OutputView.printMessage("start");
-    const bridgeSize = InputView.readBridgeSize();
+    OutputView.printMessage("start"); //게임 시작
+    const bridgeSize = InputView.readBridgeSize(); //다리길이 입력
+    const bridge = BridgeMaker.makeBridge(bridgeSize, RandomGenerator); //다리 생성 //['D','U','U']
+  }
+
+  test() {
+    // const bridge = BridgeMaker.makeBridge(3, RandomGenerator);
+    // console.log(bridge);
   }
 }
 
