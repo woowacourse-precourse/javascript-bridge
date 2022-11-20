@@ -52,6 +52,13 @@ class App {
     );
   }
 
+  retry() {
+    this.#tryCount += 1;
+    this.#location = 0;
+
+    readMoving(this.move.bind(this));
+  }
+
   result(isSuccess, current) {
     printResult(isSuccess, current, printMap);
 
