@@ -20,7 +20,6 @@ class BridgeGame {
       } else {
         bridgeList[0].push("X");
         bridgeList[1].push(" ");
-        this.retry()
       }
     } else {
       if (inputBridgeChoice === bridge[index]) {
@@ -29,11 +28,10 @@ class BridgeGame {
       } else {
         bridgeList[1].push("X");
         bridgeList[0].push(" ");
-        this.retry()
       }
     }
     OutputView.printMap(bridgeList);
-    return bridgeList
+    return bridgeList;
   }
 
   /**
@@ -42,7 +40,8 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    console.log('재시작')
+    let bridgeList = [[], []];
+    return bridgeList;
   }
 }
 
