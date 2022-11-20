@@ -5,6 +5,7 @@ const OutputView = require("./OutputView");
 class App {
   constructor() {
     GameInfo.numberOfPlayGames = 0;
+    GameInfo.gameResult = "실패";
   }
 
   play() {
