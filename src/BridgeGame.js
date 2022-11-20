@@ -36,7 +36,6 @@ class BridgeGame {
     const hasMovedAllBridge = this.#movings.length === this.#bridge.length;
     if (!hasMovedCorrectly) return MESSAGE.FAILURE;
     if (hasMovedCorrectly && hasMovedAllBridge) return MESSAGE.SUCCESS;
-    return MESSAGE.PROGRESS;
   }
 
   getTrialCount() {

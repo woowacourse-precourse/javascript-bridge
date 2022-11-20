@@ -3,7 +3,6 @@ module.exports = {
     START: "다리 건너기 게임을 시작합니다.",
     SUCCESS: "성공",
     FAILURE: "실패",
-    PROGRESS: "진행중",
     END: "\n최종 게임 결과",
     RESULT(result) {
       return `\n게임 성공 여부: ${result}`;
