@@ -30,6 +30,11 @@ const OutputView = {
 		MissionUtils.Console.print(`${upperMap}\n${lowerMap}`);
 	},
 
+	/**
+	 * @param {string[]} prevCrossedBridge 지나온 다리의 배열 'DX', 'DO', 'UX', 'UO' 4가지 원소들로만 이루어져있다
+	 * @param {object} ONE_SIDE_BRIDGE 아래 또는 위의 다리 선택 OutputView.UPPER_BRIDGE or OutputView.LOWER_BRIDGE
+	 * @return {string[]} 지나온 다리의 배열을 출력 조건에 맞추어 변환하여 반환
+	 */
 	getOneSideMap(prevCrossedBridge, ONE_SIDE_BRIDGE) {
 		const oneSideArr = OutputView.getOneSideArr(
 			prevCrossedBridge,
@@ -39,6 +44,12 @@ const OutputView = {
 		return oneSideMap;
 	},
 
+	/**
+	 * @param {string[]} prevCrossedBridge 지나온 다리의 배열
+	 * @param {object} ONE_SIDE_BRIDGE 아래 또는 위의 다리 선택 OutputView.UPPER_BRIDGE or OutputView.LOWER_BRIDGE
+	 * @return {string[]} 지나온 다리의 배열을 'O' or 'X' or ' ' 로 출력
+	 * 예) UPPER_BRIDGE에 대하여 출력시 'UX' => 'X' / 'UO' => 'O' / 'DX' => ' ' / 'DO' => ' '
+	 */
 	getOneSideArr(prevCrossedBridge, ONE_SIDE_BRIDGE) {
 		return prevCrossedBridge.map((bridgeEle) => {
 			if (bridgeEle === ONE_SIDE_BRIDGE.CORRECT) {
