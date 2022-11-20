@@ -1,4 +1,9 @@
-const { BRIDGE_SIZE, MOVING_SPACE, ERROR_MESSAGE } = require("./Constant");
+const {
+  BRIDGE_SIZE,
+  MOVING_SPACE,
+  ERROR_MESSAGE,
+  RETRY_OR_QUIT,
+} = require("./Constant");
 
 const isNotNumber = (size) => {
   const exceptNumber = /[^0-9]/;
@@ -12,10 +17,8 @@ const isOverBridgeSizeRange = (size) => {
   return false;
 };
 
-const isNotUorD = (movingSpace) => {
-  if (movingSpace === MOVING_SPACE.UP) return false;
-  if (movingSpace === MOVING_SPACE.DOWN) return false;
-  return true;
+const isNotExistValueInObject = (targetObject, value) => {
+  return !Object.values(targetObject).includes(value);
 };
 
 const Validate = {
@@ -31,7 +34,16 @@ const Validate = {
    * @param {string} movingSpace readMoving에서 입력받은 이동할 칸
    */
   validateReadMoving(movingSpace) {
-    if (isNotUorD(movingSpace)) throw new Error(ERROR_MESSAGE.MOVING_SPACE);
+    if (isNotExistValueInObject(MOVING_SPACE, movingSpace))
+      throw new Error(ERROR_MESSAGE.MOVING_SPACE);
+  },
+
+  /**
+   * @param {string} retryOrQuit readGameCommand에서 입력받은 재시작 여부 입력 값
+   */
+  validateReadGameCommand(retryOrQuit) {
+    if (isNotExistValueInObject(RETRY_OR_QUIT, retryOrQuit))
+      throw new Error(ERROR_MESSAGE.RETRY_OR_QUIT);
   },
 };
 

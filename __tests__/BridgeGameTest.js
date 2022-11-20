@@ -3,7 +3,7 @@ const BridgeGame = require("../src/BridgeGame");
 
 describe("BridgeGame 테스트", () => {
   test("move 이동 테스트", () => {
-    const bridgeGame = new BridgeGame();
+    const bridgeGame = new BridgeGame(["U", "U", "U", "U"]);
     bridgeGame.move("U");
     expect(bridgeGame.getMovedSpace()).toStrictEqual(["U"]);
     bridgeGame.move("U");

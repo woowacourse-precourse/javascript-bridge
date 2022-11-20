@@ -8,6 +8,11 @@ const MOVING_SPACE = Object.freeze({
   DOWN: "D",
 });
 
+const RETRY_OR_QUIT = Object.freeze({
+  RETRY: "R",
+  QUIT: "Q",
+});
+
 const MAP = Object.freeze({
   EMPTY: " ",
   SUCCESS: "O",
@@ -31,17 +36,21 @@ const OUTPUT_MESSAGE = Object.freeze({
 const INPUT_MESSAGE = Object.freeze({
   BRIDGE_SIZE: "다리의 길이를 입력해주세요.\n",
   MOVING_SPACE: `이동할 칸을 선택해주세요. (위: ${MOVING_SPACE.UP}, 아래: ${MOVING_SPACE.DOWN})\n`,
+  RETRY_OR_QUIT:
+    "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
 });
 
 const ERROR = "[ERROR]";
 const ERROR_MESSAGE = Object.freeze({
   BRIDGE_SIZE: `${ERROR} 다리 길이는 ${BRIDGE_SIZE.MIN}부터 ${BRIDGE_SIZE.MAX} 사이의 숫자여야 합니다.`,
   MOVING_SPACE: `${ERROR} ${MOVING_SPACE.UP} 또는 ${MOVING_SPACE.DOWN} 만 입력할 수 있습니다.`,
+  RETRY_OR_QUIT: `${RETRY_OR_QUIT.RETRY} 또는 ${RETRY_OR_QUIT.QUIT} 만 입력할 수 있습니다.`,
 });
 
 module.exports = {
   BRIDGE_SIZE,
   MOVING_SPACE,
+  RETRY_OR_QUIT,
   MAP,
   OUTPUT_MESSAGE,
   INPUT_MESSAGE,

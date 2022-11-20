@@ -15,7 +15,7 @@ const InputView = {
         Console.print("");
         callback(answer);
       } catch (error) {
-        InputView.handleError(error.message, callback);
+        InputView.handleError(error, InputView.readBridgeSize, callback);
       }
     });
   },
@@ -29,19 +29,33 @@ const InputView = {
       try {
         callback(answer);
       } catch (error) {
-        InputView.handleError(error.message, callback);
+        InputView.handleError(error, InputView.readMoving, callback);
       }
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   * @param {function} callback 재시작 여부("R" or "Q") 입력받은 후 실행할 기능
    */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    Console.readLine(INPUT_MESSAGE.RETRY_OR_QUIT, (answer) => {
+      try {
+        callback(answer);
+      } catch (error) {
+        InputView.handleError(error, InputView.readGameCommand, callback);
+      }
+    });
+  },
 
-  handleError(errorMessage, callback) {
-    Console.print(errorMessage);
-    InputView.readBridgeSize(callback);
+  /**
+   * @param {object} error 발생한 에러 객체
+   * @param {function} callFunction 호출할 함수
+   * @param {function} callback callFunction에 전달할 callback 함수
+   */
+  handleError(error, callFunction, callback) {
+    Console.print(error.message);
+    callFunction(callback);
   },
 };
 

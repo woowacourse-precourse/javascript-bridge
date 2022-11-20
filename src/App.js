@@ -1,12 +1,18 @@
-const { readBridgeSize, readMoving } = require("./util/InputView");
+const {
+  readBridgeSize,
+  readMoving,
+  readGameCommand,
+} = require("./util/InputView");
 const { printStart, printResult, printMap } = require("./util/OutputView");
 const {
   validateReadBridgeSize,
   validateReadMoving,
+  validateReadGameCommand,
 } = require("./util/Validate");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
+const { RETRY_OR_QUIT } = require("./util/Constant");
 
 class App {
   #bridgeGame;
@@ -16,23 +22,18 @@ class App {
     readBridgeSize(this.onReadBridgeSize.bind(this));
   }
 
+  gameStart() {
+    readMoving(this.onReadMoving.bind(this));
+  }
+
   /**
    * @param {string} size readBridgeSize에서 입력받은 다리의 길이
    */
   onReadBridgeSize(size) {
     validateReadBridgeSize(size);
     const bridge = makeBridge(parseInt(size, 10), generate);
-    this.gameStart(bridge);
-  }
-
-  /**
-   *
-   * @param {string[]} bridge 건너야 할 다리
-   */
-  gameStart(bridge) {
-    console.log(bridge);
     this.#bridgeGame = new BridgeGame(bridge);
-    readMoving(this.onReadMoving.bind(this));
+    this.gameStart();
   }
 
   /**
@@ -43,9 +44,27 @@ class App {
     const isSuccess = this.#bridgeGame.move(movingSpace);
     const movedSpace = this.#bridgeGame.getMovedSpace();
     printMap(movedSpace, isSuccess);
+    if (!isSuccess) readGameCommand(this.onReadGameCommand.bind(this));
     this.judge(movedSpace, isSuccess);
   }
 
+  /**
+   * @param {string} retryOrQuit 재시도 여부("R" or "Q")
+   */
+  onReadGameCommand(retryOrQuit) {
+    validateReadGameCommand(retryOrQuit);
+    if (retryOrQuit === RETRY_OR_QUIT.RETRY) {
+      this.#bridgeGame.retry(this);
+    } else if (retryOrQuit === RETRY_OR_QUIT.QUIT) {
+      const movedSpace = this.#bridgeGame.getMovedSpace();
+      printResult(movedSpace, false, this.#bridgeGame.getTryCount());
+    }
+  }
+
+  /**
+   * @param {string[]} movedSpace 현재까지 이동한 칸
+   * @param {boolean} isSuccess 현재 칸이 성공인지 실패인지 여부
+   */
   judge(movedSpace, isSuccess) {
     if (this.#bridgeGame.isArrive())
       printResult(movedSpace, true, this.#bridgeGame.getTryCount());
