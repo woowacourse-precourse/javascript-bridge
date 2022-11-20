@@ -51,7 +51,7 @@ class BridgeGame {
    */
   retry(input) {
     if (input === this.#GAME_OPTION.RETRY) return true;
-    return true;
+    return false;
   }
 }
 
