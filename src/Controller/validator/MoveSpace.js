@@ -11,7 +11,7 @@ class MoveSpace {
 
   checkInput() {
     try {
-      if (this.isAllowOrder()) throw new Error();
+      if (!this.isAllowOrder()) throw new Error();
       return ISALLOW.TRUE;
     } catch (e) {
       OutputView.printError(`\n${ERROR.MOVE_ORDER}`);
@@ -20,7 +20,7 @@ class MoveSpace {
   }
 
   isAllowOrder() {
-    return this.#input !== ORDER.UP && this.#input !== ORDER.DOWN;
+    return this.#input === ORDER.UP || this.#input === ORDER.DOWN;
   }
 }
 

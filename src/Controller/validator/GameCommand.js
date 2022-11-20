@@ -10,7 +10,7 @@ class GameCommand {
 
   checkInput() {
     try {
-      if (this.isAllowOrder()) throw new Error();
+      if (!this.isAllowOrder()) throw new Error();
       return ISALLOW.TRUE;
     } catch (e) {
       OutputView.printError(`\n${ERROR.GAMECOMMAND}`);
@@ -19,7 +19,7 @@ class GameCommand {
   }
 
   isAllowOrder() {
-    return this.#input !== COMMAND.RETRY && this.#input !== COMMAND.QUIT;
+    return this.#input === COMMAND.RETRY || this.#input === COMMAND.QUIT;
   }
 }
 
