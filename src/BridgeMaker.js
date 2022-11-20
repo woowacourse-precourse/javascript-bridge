@@ -15,6 +15,7 @@ const BridgeMaker = {
       const number = generateRandomNumber();
       number === 0 ? bridgeList.unshift(DOUWN) : bridgeList.unshift(UP);
     }
+    return bridgeList;
   },
 };
 
