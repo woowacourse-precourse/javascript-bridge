@@ -1,16 +1,22 @@
 const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { generate } = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
 class App {
   play() {
     OutputView.printStart();
-    InputView.readBridgeSize();
-    BridgeMaker.makeBridge(
-      InputView.readBridgeSize(),
-      BridgeRandomNumberGenerator.generate
-    );
+    this.initBridge();
+  }
+
+  initBridge() {
+    InputView.readBridgeSize((length) => {
+      if (!InputView.validate(length)) {
+        return this.initBridge();
+      }
+
+      const bridge = BridgeMaker.makeBridge(parseInt(length, 10), generate);
+    });
   }
 }
 

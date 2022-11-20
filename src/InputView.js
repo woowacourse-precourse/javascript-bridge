@@ -8,12 +8,8 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    Console.readLine(MESSAGE.INPUT_LENGTH, (length) => {
-      this.validate(length);
-
-      return length;
-    });
+  readBridgeSize(callBack) {
+    Console.readLine(MESSAGE.INPUT_LENGTH, callBack);
   },
 
   /**
@@ -41,8 +37,10 @@ const InputView = {
       }
     } catch (error) {
       Console.print(error);
-      this.readBridgeSize();
+      return false;
     }
+
+    return true;
   },
 };
 
