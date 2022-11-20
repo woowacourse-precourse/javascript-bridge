@@ -16,33 +16,42 @@ class Model {
   }
 
   aliveOrDeath(userMove, turn) {
+    let life = true;
     Validation.isUserMoveValid(userMove);
     if (userMove === this.#bridge[turn]) {
       this.alive(userMove);
     }
     if (userMove !== this.#bridge[turn]) {
       this.death(userMove);
+      life = false;
     }
+    return life;
   }
 
   alive(userMove) {
     if (userMove === 'U') {
       this.#upperBridge += ' O |';
       this.#lowerBridge += '   |';
-      return;
     }
-    this.#upperBridge += '   |';
-    this.#lowerBridge += ' O |';
+    if (userMove === 'D') {
+      this.#upperBridge += '   |';
+      this.#lowerBridge += ' O |';
+    }
   }
 
   death(userMove) {
     if (userMove === 'U') {
       this.#upperBridge += ' X |';
       this.#lowerBridge += '   |';
-      return;
     }
-    this.#upperBridge += '   |';
-    this.#lowerBridge += ' X |';
+    if (userMove === 'D') {
+      this.#upperBridge += '   |';
+      this.#lowerBridge += ' X |';
+    }
+  }
+
+  get bridge() {
+    return this.#bridge;
   }
 
   get upsideBridge() {

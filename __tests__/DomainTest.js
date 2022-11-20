@@ -16,6 +16,36 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  // eslint-disable-next-line arrow-body-style
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
+
+const getLogSpy = () => {
+  console.log('getLogSpy');
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+};
+
+const expectLogContains = (received, logs) => {
+  logs.forEach((log) => {
+    expect(received).toEqual(expect.stringContaining(log));
+  });
+};
+
+const expectBridgeOrder = (received, upside, downside) => {
+  const upsideIndex = received.indexOf(upside);
+  const downsideIndex = received.indexOf(downside);
+
+  expect(upsideIndex).toBeLessThan(downsideIndex);
+};
+
+const getOutput = (logSpy) => [...logSpy.mock.calls].join('');
+
 describe('1. 다리 생성하기', () => {
   test.each([[['15c']], [['길게']], [['five']]])(
     '사용자가 3과 20사이 숫자로 다리 길이를 입력했는지 확인했다.',
@@ -39,7 +69,7 @@ describe('1. 다리 생성하기', () => {
 });
 
 describe('3. 플레이어가 이동할 칸 선택하기', () => {
-  test.each([[['Up']], [['down']], [['△']]])(
+  test.skip.each([[['Up']], [['down']], [['△']]])(
     '사용자가 대문자 U나 D를 입력했는지 확인했다.',
     (input) => {
       const model = new Model();
@@ -51,4 +81,18 @@ describe('3. 플레이어가 이동할 칸 선택하기', () => {
       );
     },
   );
+  test('다리 출력 테스트', () => {
+    const logSpy = getLogSpy();
+    const model = new Model();
+    const gameView = new GameView(new InputView(), new OutputView());
+    const bridgeGame = new BridgeGame(model, gameView);
+    mockQuestions(['3', 'U', 'D', 'D']);
+    mockRandoms(['1', '0', '0']);
+
+    bridgeGame.getBridgeSize();
+    bridgeGame.start();
+    const log = getOutput(logSpy);
+    expectLogContains(log, ['[ O |   |   ]', '[   | O | O ]']);
+    expectBridgeOrder(log, '[ O |   |   ]', '[   | O | O ]');
+  });
 });

@@ -3,10 +3,18 @@
  */
 class BridgeGame {
   #turn = 0;
+  #isUserAlive = true;
 
   constructor(model, view) {
     this.model = model;
     this.view = view;
+  }
+
+  start() {
+    this.move();
+    if (this.#isUserAlive && this.#turn !== this.model.bridge.length) {
+      this.start();
+    }
   }
 
   /**
@@ -18,7 +26,7 @@ class BridgeGame {
     this.view.readMoving(
       '이동할 칸을 선택해주세요. (위: U, 아래: D)',
       (userMove) => {
-        this.model.aliveOrDeath(userMove, this.#turn);
+        this.#isUserAlive = this.model.aliveOrDeath(userMove, this.#turn);
         this.#turn += 1;
         this.view.printMap(this.model.upsideBridge, this.model.downSideBridge);
       },
