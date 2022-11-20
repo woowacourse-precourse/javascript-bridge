@@ -25,6 +25,10 @@ class BridgeGame {
     this.#userBridge[invertCommand].push(false);
   }
 
+  getUserBridge() {
+    return this.#userBridge;
+  }
+
   compare(command) {
     const isLoss = this.#bridge[this.bridgeStep] !== command;
     if (isLoss) {
