@@ -23,8 +23,6 @@ class App {
   }
 
   requestBridgeSize(size) {
-    size = Number(size);
-
     try {
       validateBridgeSize(size);
     } catch (error) {
@@ -33,7 +31,7 @@ class App {
       return;
     }
 
-    this.#bridge = makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.#bridge = makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
     InputView.readMoving(this.requestMoveUpOrDown.bind(this));
   }
 
