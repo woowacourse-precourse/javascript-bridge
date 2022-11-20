@@ -16,6 +16,7 @@ const BridgeMaker = {
     while (bridge.length < size) {
       generateRandomNumber() ? bridge.push("U") : bridge.push("D");
     }
+    game.bridgeSize = bridge.length;
     return readMoving(game, bridge);
   },
 };
