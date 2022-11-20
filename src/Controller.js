@@ -18,7 +18,8 @@ const Controller = {
   round: 0,
   arrayState: [[], []],
   playerArr: [],
-  gameResult: "",
+  gameResult: IS_SUCCESS.nailedIt,
+  // gameResult: "",
 
   getSize(size) {
     this.size += size;
@@ -97,9 +98,9 @@ const Controller = {
       if (OutputView.nowArray[i].includes(SIGN.fail)) {
         return (this.gameResult = IS_SUCCESS.failedIt);
       }
-      if (!OutputView.nowArray[i].includes(SIGN.fail)) {
-        return (this.gameResult = IS_SUCCESS.nailedIt);
-      }
+      // if (!OutputView.nowArray[i].includes(SIGN.fail)) {
+      //   return (this.gameResult = IS_SUCCESS.nailedIt);
+      // }
     }
   },
 
@@ -110,7 +111,8 @@ const Controller = {
     OutputView.nowArray = [],
     this.arrayState = [[], []],
     this.playerArr = [],
-    this.gameResult = "",
+    // this.gameResult = "",
+    this.gameResult = IS_SUCCESS.nailedIt,
     this.round = 0,
     // this.size = 0,
     this.tryCount += 1; // 시도 마다 올라감

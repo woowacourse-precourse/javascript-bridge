@@ -74,7 +74,7 @@ const InputView = {
   },
   isGameEnd() {// 문제1. 에러가 나는 다른 문자가 들어가도 배열에 포함되니 끝나버림.
     const size = Number(Controller.size);
-    // MissionUtils.Console.print(OutputView.nowArray)
+    MissionUtils.Console.print(OutputView.nowArray)
     if (OutputView.nowArray[0].includes(SIGN.fail) || OutputView.nowArray[1].includes(SIGN.fail)) {
       return this.readGameCommand();
     }
