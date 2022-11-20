@@ -12,6 +12,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.LENGTH, (length) => {
       Validation.checkBridgeLength(length);
+      Console.print(length);
     });
   },
 
