@@ -7,6 +7,7 @@ const ValidCheck = {
   },
   movingValidCheck(moving){
     this.isCorrectUpDown(moving);
+    this.isOneLetter(moving);
   },
   isInRange(bridgeSize){
     if (bridgeSize<3 || bridgeSize>20) {
@@ -39,14 +40,25 @@ const ValidCheck = {
       try{
         throw new Error();
       }catch(e){
-        OutputView.printErrorMessageAboutBridgeSize();
+        OutputView.printErrorMessageAboutMoving();
+        return true;
+      }
+    }else{
+      return false;
+    }
+  },
+  isOneLetter(moving){
+    if(moving.length!==1){
+      try{
+        throw new Error();
+      }catch(e){
+        OutputView.printErrorMessageAboutMoving();
         return true;
       }
     }else{
       return false;
     }
   }
-  
 };
 
 module.exports = ValidCheck;
