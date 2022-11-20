@@ -6,7 +6,7 @@ describe("다리 클래스 테스트", () => {
 
     expect(() => {
       new Bridge(path);
-    }).toThrow("[ERROR] 다리의 길이는 3 이상 20 이하의 숫자만 입력 가능합니다.");
+    }).toThrow("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
   });
 
   test("다리 길이가 3 미만일 때 예외 처리", () => {
@@ -14,6 +14,6 @@ describe("다리 클래스 테스트", () => {
 
     expect(() => {
       new Bridge(path);
-    }).toThrow("[ERROR] 다리의 길이는 3 이상 20 이하의 숫자만 입력 가능합니다.");
+    }).toThrow("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
   });
 });
