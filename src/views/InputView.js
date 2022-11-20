@@ -41,8 +41,8 @@ const InputView = {
   },
 
   doesGameOver() {
-    const userWin = this.controller.doesUserWin();
-    userWin ? this.controller.gameOver(userWin) : this.readMoving();
+    const doesUserWin = this.controller.doesUserWin();
+    doesUserWin ? this.controller.gameOver(doesUserWin) : this.readMoving();
   },
 
   readGameCommand() {
@@ -53,6 +53,7 @@ const InputView = {
 
   commandCallback(command) {
     try {
+      Validator.commandValidityCheck(command);
       const sholudRetry = this.controller.handleCommand(command);
       sholudRetry ? this.readMoving() : this.controller.gameOver();
     } catch ({ message }) {
@@ -60,13 +61,6 @@ const InputView = {
       this.readGameCommand();
     }
   },
-
-  // catchHandler(message, type) {
-  //   OutputView.printMessage(message);
-  //   if (type === 'size') this.readBridgeSize();
-  //   if (type === 'direction') this.readMoving();
-  //   if (type === 'command') this.readGameCommand();
-  // },
 };
 
 module.exports = InputView;

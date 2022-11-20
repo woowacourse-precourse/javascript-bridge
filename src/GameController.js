@@ -25,9 +25,9 @@ class GameController {
   }
 
   doesUserWin() {
-    const userWin = this.#bridgeGame.gameComplete();
+    const doesUserWin = this.#bridgeGame.gameComplete();
 
-    return userWin;
+    return doesUserWin;
   }
 
   handleCommand(command) {

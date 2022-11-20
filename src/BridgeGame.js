@@ -3,22 +3,22 @@ const BridgeMap = require('./models/BridgeMap');
 
 class BridgeGame {
   #bridge;
-  #curPlace;
+  #curTargetCell;
   #numberOfAttempts;
   #bridgeMap;
 
   constructor(bridge) {
     this.#bridge = bridge;
     console.log(this.#bridge);
-    this.#curPlace = 0;
+    this.#curTargetCell = 0;
     this.#numberOfAttempts = 1;
     this.#bridgeMap = new BridgeMap();
   }
 
   move(direction) {
-    const nextCellDirection = this.#bridge[this.#curPlace];
+    const nextCellDirection = this.#bridge[this.#curTargetCell];
     const isCorrectDirection = direction === nextCellDirection;
-    if (isCorrectDirection) this.#curPlace += 1;
+    if (isCorrectDirection) this.#curTargetCell += 1;
 
     return isCorrectDirection;
   }
@@ -33,7 +33,7 @@ class BridgeGame {
     const shouldRetry = command === 'R';
     if (shouldRetry) {
       this.#numberOfAttempts += 1;
-      this.#curPlace = 0;
+      this.#curTargetCell = 0;
       this.#bridgeMap.initMap();
     }
 
@@ -41,7 +41,7 @@ class BridgeGame {
   }
 
   gameComplete() {
-    return this.#bridge.length === this.#curPlace;
+    return this.#bridge.length === this.#curTargetCell;
   }
 
   gameResult(userWin = false) {
