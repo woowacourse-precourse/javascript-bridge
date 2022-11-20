@@ -13,7 +13,7 @@ const BridgeMaker = {
 
     for(let i = 0; i < size; i++) {
       const randomNumber = generateRandomNumber();
-      bridgeAnswer.push(randomNumber === 1 ? "U" : "D");
+      bridgeAnswer.push(randomNumber === "1" ? "U" : "D");
     }
     return bridgeAnswer;
   },
