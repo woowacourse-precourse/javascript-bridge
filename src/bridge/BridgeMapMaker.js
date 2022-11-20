@@ -15,7 +15,7 @@ const BridgeMapMaker = {
       this.mapDownBlock(direction, isPlaceToPass, distance);
     }
 
-    return this.map;
+    return this.getCurrentMap();
   },
 
   mapUpBlock(direction, isPlaceToPass, distance) {

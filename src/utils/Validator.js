@@ -1,4 +1,4 @@
-const BridgeGame = require("../bridge/BridgeGame");
+const GameCommands = require("../bridge/GameCommands");
 const ErrorMessage = require("../messages/ErrorMessage");
 const Directions = require("./Directions");
 
@@ -15,6 +15,12 @@ class Validator {
       direction !== Directions.DOWN_DIRECTION
     )
       throw new Error(ErrorMessage.NOT_VALID_DIRECTION);
+  }
+
+  static isValidCommand(command) {
+    if (command !== GameCommands.QUIT && command !== GameCommands.RETRY) {
+      throw new Error(ErrorMessage.NOT_VALID_COMMAND);
+    }
   }
 }
 

@@ -11,17 +11,12 @@ const GameStates = require("./GameStates");
 class BridgeGame {
   static NOT_PASS = "X";
   static PASS = "O";
-  static UP_DIRECTION = "U";
-  static DOWN_DIRECTION = "D";
-  static QUIT = "Q";
-  static RETRY = "R";
 
   #bridge;
   #numberOfAttemps = 0;
   #distance = 0;
   #isGameFailed = false;
   #isGameSucess = false;
-  #isGameEnded = false;
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
