@@ -1,3 +1,4 @@
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView = require('./OutputView');
 const Validate = require('./Validate');
 
@@ -7,7 +8,7 @@ const InputValueControl = {
     if (!Validate.checkBridgeSize(SIZE)) {
       return false;
     }
-    bridgeGame.getAnswerBridge(SIZE);
+    bridgeGame.getAnswerBridge(SIZE, BridgeRandomNumberGenerator.generate);
     return true;
   },
 
@@ -39,9 +40,9 @@ const InputValueControl = {
 
   gameCommand(key, bridgeGame) {
     if (!Validate.checkCommandKey(key)) {
-      return this.readGameCommand(bridgeGame);
+      return false;
     }
-    return this.checkRetry(bridgeGame);
+    return this.checkRetry(key, bridgeGame);
   },
 
   checkRetry(key, bridgeGame) {
@@ -49,7 +50,6 @@ const InputValueControl = {
       return true;
     } else {
       OutputView.printResult(bridgeGame, '실패');
-      return false;
     }
   },
 };

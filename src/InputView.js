@@ -1,6 +1,4 @@
-const OutputView = require('./OutputView');
-const Validate = require('./Validate');
-const InputValueControl = require('./InputValueControl');
+const InputValueHandler = require('./InputValueHandler');
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./Constants');
 
@@ -13,7 +11,7 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     Console.readLine(MESSAGE.BRIDGE_SIZE, (size) => {
-      if (InputValueControl.bridgeSize(size, bridgeGame)) {
+      if (InputValueHandler.bridgeSize(size, bridgeGame)) {
         this.readMoving(bridgeGame);
       } else {
         this.readBridgeSize(bridgeGame);
@@ -26,11 +24,11 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     Console.readLine(MESSAGE.MOVING_KEY, (key) => {
-      if (!InputValueControl.movingKey(key, bridgeGame)) {
+      if (!InputValueHandler.movingKey(key, bridgeGame)) {
         return this.readMoving(bridgeGame);
       }
-      if (InputValueControl.checkSuccess(bridgeGame)) return;
-      if (InputValueControl.checkMoveResult(key, bridgeGame)) {
+      if (InputValueHandler.checkSuccess(bridgeGame)) return;
+      if (InputValueHandler.checkMoveResult(key, bridgeGame)) {
         return this.readMoving(bridgeGame);
       }
       return this.readGameCommand(bridgeGame);
@@ -42,9 +40,10 @@ const InputView = {
    */
   readGameCommand(bridgeGame) {
     Console.readLine(MESSAGE.GAME_COMMAND, (key) => {
-      if (InputValueControl.gameCommand(key, bridgeGame)) {
-        this.readMoving(bridgeGame);
+      if (InputValueHandler.gameCommand(key, bridgeGame)) {
+        return this.readMoving(bridgeGame);
       }
+      return this.readGameCommand(bridgeGame);
     });
   },
 };
