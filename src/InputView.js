@@ -15,10 +15,9 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(verifyBridgeSize) {
-    let isError;
     Console.readLine(INPUT_MESSAGE.start, (size) => {
       try {
-        isError = isCorrectBridgeSize(Number(size));
+        const isError = isCorrectBridgeSize(Number(size));
         verifyBridgeSize(size, isError);
       } catch (e) {
         Console.print(e);
@@ -31,10 +30,9 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(verifyMove) {
-    let isError;
     Console.readLine(INPUT_MESSAGE.move, (move) => {
       try {
-        isError = isCorrectCharactor(move) || isCorrectMoveCommand(move);
+        const isError = isCorrectCharactor(move) || isCorrectMoveCommand(move);
         verifyMove(move, isError);
       } catch (e) {
         Console.print(e);
@@ -47,10 +45,9 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(verifyCommand) {
-    let isError;
     Console.readLine(INPUT_MESSAGE.retry, (command) => {
       try {
-        isError = isCorrectCharactor(command) || isCorrectOptionCommand(command);
+        const isError = isCorrectCharactor(command) || isCorrectOptionCommand(command);
         verifyCommand(command, isError);
       } catch (e) {
         Console.print(e);
