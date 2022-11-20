@@ -10,8 +10,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridgeList) {
-    const upperBlock = bridgeList[0]
-    const lowerBlock = bridgeList[1]
+    const upperBlock = bridgeList[0].join(" | ");
+    const lowerBlock = bridgeList[1].join(" | ");
     Console.print(`[ ${upperBlock} ]`);
     Console.print(`[ ${lowerBlock} ]`);
   },
