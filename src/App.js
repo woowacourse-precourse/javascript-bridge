@@ -13,6 +13,7 @@ class App {
         throw new Error(ERROR_MESSAGE.LENGTH);
       }
       const bridgeArr = bridgeMaker.makeBridge(size, bridgeRandomNumberGenerator.generate);
+      console.log(bridgeArr);
 
       this.move();
     });
@@ -21,7 +22,9 @@ class App {
   /** 4-1. 이동할 칸 입력 및 입력값 */
   move() {
     inputView.readMoving((movingInput) => {
+      let movingInputArr=[];
       this.validMovingInput(movingInput);
+      movingInputArr.push(movingInput); 
     });
   }
   /** 4-2. 이동할 칸 입력값 유효성 및 에러시 입력 재시작 */
