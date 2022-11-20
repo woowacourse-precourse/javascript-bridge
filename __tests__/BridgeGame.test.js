@@ -796,12 +796,16 @@ describe('시도 횟수 가져오는 메서드', () => {
   });
 });
 
-describe('로그 기록 초기화 메서드', () => {
+describe('로그 기록 초기화 메서드 테스트', () => {
   const bridgeGame = new BridgeGame();
 
   test('메소드 이름은 "initializeLogHistory"로 정의된다.', () => {
     const METHOD_NAME = 'initializeLogHistory';
 
     expect(bridgeGame.initializeLogHistory.name).toEqual(METHOD_NAME);
+  });
+
+  test('메서드를 실행시키면 true를 반환한다.', () => {
+    expect(bridgeGame.initializeLogHistory()).toBeTruthy();
   });
 });
