@@ -34,7 +34,10 @@ class BridgePlay{
     InputView.readGameCommand(this);
   }
   quitOrRetry(option){
-    
+    if(option==='R'){
+      this.bridgeGame.retry();
+      this.startRound();
+    }
   }
   
   playRoundComplete(){

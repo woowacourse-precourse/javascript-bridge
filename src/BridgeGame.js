@@ -7,7 +7,12 @@ class BridgeGame {
     return this.userBridge.status;
   }
 
-  retry() {}
+  retry() {
+    this.userBridge.attempts += 1;
+    this.userBridge.status = [];
+    //test
+    console.log(this.userBridge);
+  }
 }
 
 module.exports = BridgeGame;
