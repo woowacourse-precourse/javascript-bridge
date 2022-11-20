@@ -164,4 +164,13 @@ describe("다리 건너기 테스트", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test.each([["T"],["30"],["-1"]])("예외 테스트: 다리 길이 입력 에러", (input) => {
+    const logSpy = getLogSpy();
+    mockQuestions([input]);
+    Intercessor.bridgeMake();
+    const message = "[ERROR]";
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
+  });
+ 
 });
