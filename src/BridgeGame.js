@@ -35,7 +35,7 @@ class BridgeGame {
       if (this.size < 3 || this.size > 20 || isNaN(this.size))
         throw ErrorMessages.numberSize;
     } catch (err) {
-      MissionUtils.Console.print(err);
+      OutputView.sizeError(err);
       this.size = InputView.readBridgeSize();
     }
   }
@@ -68,7 +68,7 @@ class BridgeGame {
     try {
       if (this.moving !== "U" && this.moving !== "D") throw ErrorMessages.move;
     } catch (err) {
-      MissionUtils.Console.print(err);
+      OutputView.moveError(err);
       this.moving = InputView.readMoving();
     }
   }
@@ -117,7 +117,7 @@ class BridgeGame {
       if (this.command !== "R" && this.command !== "Q")
         throw ErrorMessages.command;
     } catch (err) {
-      MissionUtils.Console.print(err);
+      OutputView.commandError(err);
       this.command = InputView.readGameCommand();
     }
   }
