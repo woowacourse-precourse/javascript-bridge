@@ -15,8 +15,4 @@ const ERROR = Object.freeze({
   mustBeValidCommand: '[ERROR] R (재시도) 와 Q (종료) 중에서만 입력해주세요.',
 });
 
-const GAME_RESULT = (isSucceeded) => {
-  return isSucceeded ? '성공' : '실패';
-};
-
-module.exports = { MESSAGE, ERROR, GAME_RESULT };
+module.exports = { MESSAGE, ERROR };

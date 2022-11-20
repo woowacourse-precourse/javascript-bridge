@@ -16,7 +16,6 @@ class Controller {
     this.inputBrideSize();
   }
 
-  // - 다리의 길이 입력 받는다.
   inputBrideSize() {
     InputView.readBridgeSize(this.validateSize.bind(this));
   }
@@ -39,7 +38,6 @@ class Controller {
     this.inputMoving();
   }
 
-  // - 위, 아래 중 이동할 칸 입력 받는다.
   inputMoving() {
     InputView.readMoving(this.validateDirection.bind(this));
   }
@@ -77,17 +75,13 @@ class Controller {
     if (!canMove) return this.inputGameCommand();
   }
 
-  // - 재시작 또는 종료 여부 입력 받는다.
   inputGameCommand() {
     InputView.readGameCommand(this.validateCommand.bind(this));
   }
 
   validateCommand(command) {
     try {
-      Validation.checkBlank(command);
-      Validation.checkStringType(command);
-      Validation.checkUpperCaseOfCommand(command);
-      Validation.checkValidCommand(command);
+      this.bridgeGame.validateCommand(command);
     } catch (error) {
       OutputView.printMessage(error);
       return this.inputGameCommand();

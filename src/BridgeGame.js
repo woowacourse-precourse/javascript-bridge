@@ -15,7 +15,6 @@ class BridgeGame {
     this.winningBridge.validate(size);
   }
 
-  // 사용자가 건널 다리를 만드는 메서드
   makeWinningBridge(size) {
     this.winningBridge.makeWinningBridge(size);
   }
@@ -39,6 +38,13 @@ class BridgeGame {
 
   isLastStage() {
     return this.currBridge.isLast(this.winningBridge);
+  }
+
+  validateCommand(command) {
+    Validation.checkBlank(command);
+    Validation.checkStringType(command);
+    Validation.checkUpperCaseOfCommand(command);
+    Validation.checkValidCommand(command);
   }
 
   getResult() {
