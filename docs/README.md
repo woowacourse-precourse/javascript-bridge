@@ -61,10 +61,8 @@
     - 다리 길이를 입력받습니다.
     - ValidateBridgeSize 클래스를 통해 입력값의 유효성을 판단하고, 에러를 발생합니다.
       - 만약 에러가 발생되었다면, 에러 문구를 출력하고 readBridgeSize 메서드를 호출합니다.
-    - BridgeMaker를 통해 다리를 생성합니다.
-
-  - playGame
-    - 게임에 필요한 정보들을 초기화해주는 BridgeGame.initializeGameInfo를 호출하는 메서드입니다.
+    - UseGameInfo 클래스의 createBridge 메서드를 호출합니다.
+    - UseGameInfo 클래스의 initializeGameInfo 메서드를 호출합니다.
 
   - readMoving
     - 이동할 칸을 입력받습니다.
@@ -83,6 +81,7 @@
     - ValidateGameCommand 클래스를 통해 입력값의 유효성을 판단하고, 에러를 발생합니다.
       - 만약 에러가 발생되었다면, 에러 문구를 출력하고 readGameCommand 메서드를 호출합니다.
     - BridgeGame 클래스의 retry 메서드 반환값에 따라 playGame을 호출하거나 OutputView 객체의 printResult 메서드를 호출합니다.
+      - retry 메서드가 true라면, UseGameInfo 클래스의 initializeGameInfo 메서드가 호출됩니다.
 
 - OutputView 객체
   - printMessage
@@ -104,19 +103,11 @@
     - 현재 입력받은 이동할 칸을 gameStat에 담아줍니다.
     - moveBridge를 호출합니다.
 
-  - moveBridge
+  - recordCurrentStatus
     - isValidMove 메서드의 반환값에 따라 pushMoveBridge 메서드의 입력값을 다르게 호출합니다.
-    
-  - pushMoveBridge
-    - moveBridge는 두 개의 1차원 배열을 가지는 2차원 배열입니다. 이 배열의 인덱스에 알맞게 값을 넣어줍니다.
-    - 인덱스가 [0, 1]로 구성되어 있어, indexOf 메서드를 통해 1이 나온다면, (1 + 1) % 2 ==> 0을 해주어 인덱스를 맞춰줍니다
 
-  - initializeGameInfo
-    - GameInfo 객체의 값들을 게임의 시작 상태로 초기화합니다.
-    - 단, numberOfPlayGames 프로퍼티는 1 증가시켜줍니다.
-
-  - isFailure
-    - 만약 현재 상태에서 "X"가 존재한다면, true를 반환합니다.
+  - retry
+    - 재시작 여부 입력값에 따라 true 혹은 false를 반환합니다.
 
 - Validate (BridgeSize, GameCommand, Moving) 클래스
   - 입력값이 유효한지 판단하고, 유효하지 않다면 에러를 발생합니다.
@@ -142,11 +133,8 @@
   - position
     - 현재 위치의 인덱스를 가집니다. 초기값은 -1입니다.
 
-  - currentMove
+  - moving
     - 현재 입력받은 이동할 칸을 값으로 가집니다.
-
-  - gameCommand
-    - 재시작 여부를 입력받은 값을 가집니다.
 
   - numberOfPlayGames
     - 현재 총 시도한 판 수를 값으로 가집니다.
@@ -154,22 +142,87 @@
   - gameResult
     - 현재 게임 성공 여부를 값으로 가집니다.
     - 초기 값은 "실패"이며, 게임 클리어 시 "성공" 값을 가지게 됩니다.
-    
+
+- InputErrorProcess
+  - try - catch문 사용으로 try문 내부에서 에러가 발생할 경우, catch문을 수행하게 합니다.
+
+- UseGameInfo
+  - GameInfo 객체를 사용하는 메서드들이 담겨있습니다.
+
+  - initializeGameInfo
+    - GameInfo 객체의 값들을 게임의 시작 상태로 초기화합니다.
+    - 단, numberOfPlayGames 프로퍼티는 1 증가시켜줍니다.
+
+  - isLastTurn
+    - 다리 건너기 게임에서 마지막 턴인지 확인합니다.
+
+  - isFailure
+    - 만약 현재 상태에서 "X"가 존재한다면, true를 반환합니다.
+
+  - isValidMove
+    - 현재 입력받은 이동할 칸과 같은 위치의 생성된 다리 배열의 값이 같은지 확인합니다. 
+
+  - pushMoveBridge
+    - moveBridge는 두 개의 1차원 배열을 가지는 2차원 배열입니다. 이 배열의 인덱스에 알맞게 값을 넣어줍니다.
+    - 인덱스가 [0, 1]로 구성되어 있어, indexOf 메서드를 통해 1이 나온다면, (1 + 1) % 2 ==> 0을 해주어 인덱스를 맞춰줍니다
+
+  - createBridge
+    - BridgeMaker를 통해 다리를 생성합니다.
+
+# 테스트
+
+- ApplicationTest
+  - 다리 건너기 테스트
+    - 다리 생성 테스트
+    - 기능 테스트
+    - 재시작 테스트
+    - 실패 후 종료 테스트
+
+  - 예외 발생 테스트
+    - 다리 길이 입력 예외 발생 후 다시 입력 받는 기능 테스트
+    - 이동할 칸 입력시 예외 발생 후 다시 입력 받는 기능 테스트
+    - 재시작 여부 입력 예외 발생 후 다시 입력 받는 기능 테스트
+
+- ValidateTest
+  - ValidateBridgeSize 클래스 테스트
+    - 다리 길이 입력값이 숫자가 아닌 경우 예외가 발생합니다.
+    - 다리 길이 입력값이 음수인 경우 예외가 발생합니다.
+    - 다리 길이 입력값이 자연수가 아닌 경우 예외가 발생합니다.
+    - 다리 길이 입력값이 3 이상 20 이하의 수가 아닌 경우 예외가 발생합니다.
+    - 다리 길이 입력값에 공백이 포함되는 경우 예외가 발생합니다.
+
+  - ValidateMoving 클래스 테스트
+    - 이동할 칸 입력값이 알파벳 문자가 아닌 경우 예외가 발생합니다.
+    - 이동할 칸 입력값이 소문자인 경우 예외가 발생합니다.
+    - 이동할 칸 입력값이 대문자이지만 'U' 혹은 'D'가 아닐 경우 예외가 발생합니다.
+    - 이동할 칸 입력값이 'U' 혹은 'D'지만, 입력값의 길이가 1이 아닐 경우 예외가 발생합니다.
+
+  - ValidateGameCommand 클래스 테스트
+    - 재시작 여부 입력값이 알파벳 문자가 아닌 경우 예외가 발생합니다.
+    - 재시작 여부 입력값이 알파벳 소문자인 경우 예외가 발생합니다.
+    - 재시작 여부 입력값이 알파벳 대문자이지만 'R' 혹은 'Q'가 아닐 경우 예외가 발생합니다.
+    - 재시작 여부 입력값이 알파벳 대문자 'R' 혹은 'Q'지만, 입력값의 길이가 1이 아닐 경우 예외가 발생합니다.
+
+
 # 과정
 
 ## 과정 설계
 
 ```mermaid
   flowchart LR;
-    A[App.play()]-->B[다리 길이 입력 문구출력\n다리 길이 입력];
-    B-->E1[다리 길이에 대한 유효성 검사 및 에러 발생];
-    B-->C[이동할 칸 입력 문구 출력\n이동할 칸 입력];
-    C-->E2[이동할 칸에 대한 유효성 검사 및 에러 발생];
+    A[App.play\n시작 문구 출력]--> | 입력 문구 출력 | B[다리 길이 입력];
+    B-->| 입력 문구 출력 |C[이동할 칸 입력];
+    B--> | 유효성 검사 | E1[에러 발생];
     C-->D[이동한 칸까지 다리 건너기 결과 출력];
-    D-->E[틀렸을 경우, 재시작 문구 출력\n재시작 혹은 종료 입력];
-    E-->C;
+    D--> | 이동 실패\n재시작 문구 출력 | E[재시작 혹은 종료 입력];
+    E--> | 재시작 선택 시 | C;
+    E--> | 유효성 검사 | E3[에러 발생];
     E-->F[게임 성공 여부 및 결과 출력];
-    D-->F;
+    E1--> | 재입력 | B;
+    C--> | 유효성 검사 | E2[에러 발생];
+    E2--> | 재입력 | C;
+    E3--> | 재입력 | E;
+    C --> | 끝까지 건너는 데 성공 시 | F
 ```
 
 ## 기능 나열
@@ -221,3 +274,51 @@
 - 이 3개의 입력받는 기능에 대해서 클래스로 분리합니다.
 - 각각의 클래스는 입력값을 받아 유효성을 검사하고 다시 반환합니다.
 - 각각 받은 입력값에 대해 getter와 setter를 적용해 프로퍼티 값을 통제합니다.
+
+# 리펙토링
+
+- 중복되는 기능을 가진 메소드 통합
+
+- 반복적인 작업을 수행하는 테스트 케이스 코드 수정
+
+- 상수 사용으로 인한 코드 리펙토링
+
+- try-catch문을 통합한 메서드 inputErrorProcess 생성 및 코드 수정
+
+- InputErrorProcess 클래스 생성 및 코드 분리
+
+- UseGameInfo 클래스 생성으로 인한 코드 분리
+
+- 용도에 따른 디렉토리 구조 변경
+
+```
+-- src
+  |  
+  |-App.js
+  |
+  |-- constants
+  |   |
+  |   |-constant.js
+  |
+  |-- domain
+  |   |
+  |   |-BridgeGame.js
+  |   |-BridgeMaker.js
+  |   |-BridgeRandomNumberGenerator.js
+  |   |-GameInfo.js
+  |   |-InputErrorProcess.js
+  |   |-UseGameInfo.js
+  |
+  |-- ui
+  |   |
+  |   |-InputView.js
+  |   |-OutputView.js
+  |
+  |-- utils
+  |   |
+  |   |-ValidateBridgeSize.js
+  |   |-ValidateGameCommand.js
+  |   |-ValidateMoving.js
+  |
+```
+
