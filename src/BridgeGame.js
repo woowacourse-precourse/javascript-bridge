@@ -5,7 +5,7 @@ class BridgeGame {
   #bridgeAnswer;
   #currentBridge = [[], []];
   #current = 0
-  #tryCount = 0;
+  #tryCount = 1;
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -68,6 +68,7 @@ class BridgeGame {
     if (gameCommandInput === 'Q') {
       return false;
     }
+    this.#tryCount++;
     return true;
   }
 
