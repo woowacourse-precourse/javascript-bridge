@@ -209,6 +209,10 @@ class BridgeGame {
 
     return this.#tryCount;
   }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
 }
 
 module.exports = BridgeGame;
