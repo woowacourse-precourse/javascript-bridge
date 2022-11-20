@@ -176,6 +176,12 @@ class BridgeGame {
 
     return emptyArray;
   }
+
+  getBridgeLog() {
+    this.checkBeforeStart();
+
+    return [...this.#bridgeLog.values()];
+  }
 }
 
 module.exports = BridgeGame;
