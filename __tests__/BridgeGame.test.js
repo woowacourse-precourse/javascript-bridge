@@ -713,7 +713,11 @@ describe('현재 다리 위치의 결과를 가져오는 메서드 테스트', (
 describe('게임 로그 기록 메서드 테스트', () => {
   const bridgeGame = new BridgeGame();
   const generateBridge = ['U', 'D', 'D'];
+  const USER_MOVE_INPUT = 'U';
+
   bridgeGame.setBridge(generateBridge);
+  bridgeGame.move();
+  bridgeGame.setGameLog(USER_MOVE_INPUT);
 
   test('메소드 이름은 "setGameLog"로 정의된다.', () => {
     const METHOD_NAME = 'setGameLog';
@@ -721,13 +725,17 @@ describe('게임 로그 기록 메서드 테스트', () => {
     expect(bridgeGame.setGameLog.name).toEqual(METHOD_NAME);
   });
 
-  test('포지션 로그 기록을 호출하면 [ [ [ 0, 0 ], "O" ] ]을 반환한다.', () => {
-    const USER_MOVE_INPUT = 'U';
-    const RECEIVED = [[[0, 0], 'O']];
+  test('포지션 로그 기록을 호출하면 [[0, 0], "O"]을 반환한다.', () => {
+    const RECEIVED = [[0, 0], 'O'];
+    const USER_POSITION = bridgeGame.findUserPosition();
 
-    bridgeGame.move();
-    bridgeGame.setGameLog(USER_MOVE_INPUT);
+    expect(bridgeGame.getPositionLog()[USER_POSITION]).toEqual(RECEIVED);
+  });
 
-    expect(bridgeGame.getPositionLog()).toEqual(RECEIVED);
+  test('다리 로그 기록을 호출하면 [["O"], [" "]]을 반환한다.', () => {
+    const RECEIVED = [['O'], [' ']];
+    const USER_POSITION = bridgeGame.findUserPosition();
+
+    expect(bridgeGame.getBridgeLog()[USER_POSITION]).toEqual(RECEIVED);
   });
 });
