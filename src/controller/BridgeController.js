@@ -1,10 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { makeBridge } = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
-const BridgeGame = require('./service/BridgeGame');
-const OutputView = require('./views/OutputView');
+const { makeBridge } = require('../BridgeMaker');
+const { generate } = require('../BridgeRandomNumberGenerator');
+const BridgeGame = require('../service/BridgeGame');
+const OutputView = require('../views/OutputView');
 
-class GameController {
+class BridgeController {
   #bridgeGame;
 
   print(message) {
@@ -43,4 +43,4 @@ class GameController {
   }
 }
 
-module.exports = GameController;
+module.exports = BridgeController;

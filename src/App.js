@@ -1,17 +1,17 @@
 const { MESSAGE } = require('./constant');
-const GameController = require('./GameController');
+const BridgeController = require('./controller/BridgeController');
 const InputView = require('./views/InputView');
 
 class App {
-  #gameCtrl;
+  #bridgeCtrl;
 
   play() {
-    this.#gameCtrl = new GameController();
+    this.#bridgeCtrl = new BridgeController();
     this.gameStart();
   }
 
   gameStart() {
-    this.#gameCtrl.print(MESSAGE.START_NOTIFICATION);
+    this.#bridgeCtrl.print(MESSAGE.START_NOTIFICATION);
     InputView.readBridgeSize();
   }
 }

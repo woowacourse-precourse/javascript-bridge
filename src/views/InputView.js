@@ -1,10 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('../constant/index');
-const GameController = require('../GameController');
+const BridgeController = require('../controller/BridgeController');
 const Validator = require('../Validator');
 
 const InputView = {
-  controller: new GameController(),
+  controller: new BridgeController(),
 
   readBridgeSize() {
     Console.readLine(MESSAGE.ASK_BRIDGE_SIZE, (size) => {
