@@ -5,6 +5,12 @@ const MESSAGE = {
   },
 };
 
+const BRIDGE_SIZE = {
+  MINIMUM: 3,
+  MAXIMUM: 20,
+};
+
 module.exports = {
   MESSAGE,
+  BRIDGE_SIZE,
 };

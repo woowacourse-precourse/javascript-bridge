@@ -1,5 +1,6 @@
 const { readLine } = require('./utils/util');
-const { MESSAGE } = require('./constant/constant');
+const { MESSAGE, BRIDGE_SIZE } = require('./constant/constant');
+const Validate = require('./utils/validate');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -11,7 +12,8 @@ const InputView = {
   readBridgeSize() {
     let bridgeSize;
     readLine(MESSAGE.INPUT.BRIDGE_SIZE, (input) => {
-      bridgeSize = input;
+      bridgeSize = Number(input);
+      Validate.notInRange(bridgeSize, BRIDGE_SIZE.MAXIMUM, BRIDGE_SIZE.MINIMUM);
     });
     return bridgeSize;
   },
