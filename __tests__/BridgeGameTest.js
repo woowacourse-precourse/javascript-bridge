@@ -1,4 +1,5 @@
 const BridgeMaker = require('../src/BridgeMaker')
+const isNumber = require('../src/validator/isNumber')
 
 describe("다리 건너기 테스트", () => {
   test("다리 생성 테스트1", () => {
@@ -31,3 +32,19 @@ describe("다리 건너기 테스트", () => {
     expect(bridge).toEqual(["D", "U", "D"]);
   });
 });
+
+describe('사용자의 입력 유효성 테스트', () => {
+  test('3 ~ 20 범위 테스트1', () => {
+    expect(isNumber(15)).toEqual(15)
+  })
+  test('3 ~ 20 범위 테스트2', () => {
+    expect(() => {
+      isNumber('a')
+    }).toThrow('[ERROR]')
+  })
+  test('3 ~ 20 범위 테스트3', () => {
+    expect(() => {
+      isNumber(22)
+    }).toThrow('[ERROR]')
+  })
+})
