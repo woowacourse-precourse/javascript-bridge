@@ -33,7 +33,7 @@ const InputView = {
     Console.readLine(MESSAGE.INPUT_MOVING, (input) => {
       bridgeGame.move(input);
       bridgeGame.drawMap(input);
-      printMap(bridgeGame.bridgeMap);
+      printMap(bridgeGame.moveMap);
     });
   },
 

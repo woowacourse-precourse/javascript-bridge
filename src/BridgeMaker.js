@@ -1,4 +1,4 @@
-DIRECTION = Object.freeze({
+const DIRECTION = Object.freeze({
   0: 'D',
   1: 'U',
 });

@@ -1,11 +1,11 @@
 const STATE = Object.freeze({
-  ALIVE: 1,
-  DEAD: 0,
+  MOVE: 0,
+  FAIL: 1,
 });
 
 const OBJECT = Object.freeze({
-  [STATE.ALIVE]: 'O',
-  [STATE.DEAD]: 'X',
+  [STATE.MOVE]: 'O',
+  [STATE.FAIL]: 'X',
   BLANK: ' ',
 });
 
@@ -13,12 +13,9 @@ const OBJECT = Object.freeze({
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  player = {
-    state: STATE.ALIVE,
-    position: -1,
-  };
-
-  bridgeMap = {
+  state = STATE.MOVE;
+  playerPosition = -1;
+  moveMap = {
     U: [],
     D: [],
   };
@@ -33,20 +30,20 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moving) {
-    const { player, bridge } = this;
+    const { bridge } = this;
 
-    player.position += 1;
-    if (moving !== bridge[player.position]) {
-      player.state = STATE.DEAD;
+    this.playerPosition += 1;
+    if (moving !== bridge[this.playerPosition]) {
+      this.state = STATE.FAIL;
     }
   }
 
   drawMap(moving) {
-    const { bridgeMap, player } = this;
+    const { moveMap, state } = this;
     const unchosen = 'UD'.replace(moving, '');
 
-    bridgeMap[moving].push(OBJECT[player.state]);
-    bridgeMap[unchosen].push(OBJECT.BLANK);
+    moveMap[moving].push(OBJECT[state]);
+    moveMap[unchosen].push(OBJECT.BLANK);
   }
 
   /**
