@@ -12,14 +12,18 @@ const BridgeMaker = {
     let num;
     for (let i = 0; i < size; i++) {
       num = Number(generateRandomNumber());
-      if (num === 0) {
-        up_and_down.push('D');
-      } else {
-        up_and_down.push('U');
-      }
+      this.number_traslate(num,up_and_down);
     }
     return up_and_down;
   },
+
+  number_traslate(number,list){
+    if(number===0){
+      list.push('D');
+      return;
+    }
+    list.push('U')
+  }
 };
 
 module.exports = BridgeMaker;

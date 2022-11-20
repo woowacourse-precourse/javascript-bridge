@@ -18,20 +18,20 @@ class App {
     MissionUtils.Console.close();
   }
 
-  moving(bridge_game) {
-    let move;
+  moving(bridge_game) {   
     for (let i = 0; i < bridge_game.size; i++) {
-      move = InputVIew.readMoving();
-      if (bridge_game.move(move, i)) {
+      if (bridge_game.move(InputVIew.readMoving(), i)) {
         OutputView.printMap(bridge_game.current_moving, true);
-      } else {
-        OutputView.printMap(bridge_game.current_moving, false);
-        this.retrying(bridge_game);
-        return; 
-      }
+        continue;
+      } 
+      OutputView.printMap(bridge_game.current_moving, false);
+      this.retrying(bridge_game);
+      return; 
     }
     OutputView.printResult(bridge_game.current_moving, true, bridge_game.try);
   }
+
+  
 
   retrying(bridge_game) {
     let command = InputVIew.readGameCommand();
