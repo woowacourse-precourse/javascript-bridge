@@ -1,3 +1,4 @@
+// @type-check
 const { INPUT_MESSAGE } = require('./Utils/Constant');
 
 /**

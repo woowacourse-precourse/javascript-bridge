@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "extends": ["airbnb", "plugin:prettier/recommended","plugin:jsdoc/recommended"],
   "rules": {
     "no-restricted-syntax": ["error", "BinaryExpression[operator='in']"],
     "no-nested-ternary": ["off"],

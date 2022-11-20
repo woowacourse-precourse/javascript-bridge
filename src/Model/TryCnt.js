@@ -1,10 +1,16 @@
+// @ts-checkts-check
+
 class TryCnt {
+  /** @type {number} */
   #cnt;
 
   constructor() {
     this.#cnt = 1;
   }
 
+  /**
+   * @returns {number}
+   */
   get cnt() {
     return this.#cnt;
   }
