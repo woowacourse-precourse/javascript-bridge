@@ -55,14 +55,4 @@ class BridgeGame {
   }
 }
 
-//초기화 되어야될것 = bridgeMap 의 맵, 이 클래스의 length
-
-// const app = new BridgeGame();
-
-// const mockBridge = ['D', 'U', 'D', 'U'];
-
-// // console.log(app.move('D', mockBridge));
-// // console.log(app.move('D', mockBridge));
-// // console.log(app.retry('R'));
-
 module.exports = BridgeGame;

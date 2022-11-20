@@ -134,9 +134,3 @@ class App {
 }
 
 module.exports = App;
-
-const app = new App();
-
-console.log(app.play());
-
-// 실패가 되면 메서드를 재실행시켜야됨
