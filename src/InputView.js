@@ -8,7 +8,7 @@ const InputView = {
    * @param {function()} proceed 제대로 된 입력을 받으면 진행할 함수
    */
   readBridgeSize(proceed) {
-    MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
+    MissionUtils.Console.readLine("\n다리의 길이를 입력해주세요.\n", (input) => {
       (this.isValidBridgeSizeInput(input)) ?
         proceed(parseInt(input)) : this.handleBridgeSizeException(proceed);
     })
@@ -19,7 +19,7 @@ const InputView = {
    * @param {function()} proceed 제대로 된 입력을 받으면 진행할 함수
    */
   readMoving(proceed) {
-    MissionUtils.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (input) => {
+    MissionUtils.Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (input) => {
       (this.isValidMoveInput(input)) ?
         proceed(input) : this.handleMoveException(proceed);
     })
@@ -30,7 +30,7 @@ const InputView = {
    * @param {function()} proceed 제대로 된 입력을 받으면 진행할 함수
    */
   readGameCommand(proceed) {
-    MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (input) => {
+    MissionUtils.Console.readLine("\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (input) => {
       (this.isValidGameCommand(input)) ?
         proceed(input) : this.handleGameCommandException(proceed);
     })
