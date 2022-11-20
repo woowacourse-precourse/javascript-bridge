@@ -172,5 +172,13 @@ describe("다리 건너기 테스트", () => {
     const message = "[ERROR]";
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
   });
- 
+
+  test.each([["UP"],["Down"],["01"]])("예외 테스트: 이동할 칸 입력 에러", (input) => {
+    const logSpy = getLogSpy();
+    mockQuestions([input]);
+    Intercessor.matchMove("U", "D", "D");
+    const message = "[ERROR]";
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
+  });
+
 });
