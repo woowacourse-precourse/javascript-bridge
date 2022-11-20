@@ -1,7 +1,3 @@
-const InputView = require("./InputView");
-const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeMaker = require("./BridgeMaker");
-
 class BridgeGame {
   bridge;
   progressCnt;
@@ -25,6 +21,7 @@ class BridgeGame {
   }
 
   move(userSelectValue) {
+    console.log(userSelectValue);
     this.progressCnt += 1;
     this.checkCorrectWay(userSelectValue);
     this.mapMaker();
@@ -48,9 +45,9 @@ class BridgeGame {
   mapMaker() {
     if (this.isOkWay) {
       this.drawCorrectWay();
-    } else {
-      this.drawFalseWay();
+      return;
     }
+    this.drawFalseWay();
   }
 
   drawCorrectWay() {
@@ -81,11 +78,6 @@ class BridgeGame {
     return "U";
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   retry() {
     this.tryCnt += 1;
     this.cutLastTryMap();

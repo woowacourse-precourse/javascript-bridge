@@ -1,4 +1,3 @@
-const BridgeGame = require("./BridgeGame");
 const { readBridgeSize } = require("./InputView");
 const { printStart } = require("./OutputView");
 

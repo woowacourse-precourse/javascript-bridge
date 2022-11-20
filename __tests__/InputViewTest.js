@@ -1,5 +1,4 @@
 const InputView = require("../src/InputView");
-const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const MissionUtils = require("@woowacourse/mission-utils");
 const Game = require("../src/BridgeGame");
 const App = require("../src/App");
