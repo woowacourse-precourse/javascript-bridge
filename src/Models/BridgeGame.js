@@ -54,12 +54,8 @@ class BridgeGame {
     } else if (answer === COMMAND.QUIT) return ORDER.QUIT;
   }
 
-  getMap() {
-    return this.#currentMap;
-  }
-
-  getAttemptCnt() {
-    return this.#attemptCnt;
+  getGameInfo() {
+    return [this.#currentMap, this.#attemptCnt];
   }
 }
 

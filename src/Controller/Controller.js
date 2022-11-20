@@ -10,11 +10,8 @@ const { RESULT } = require("../utils/constants");
 class Controller {
   #BridgeGame;
 
-  #CheckModel;
-
   constructor() {
     this.#BridgeGame = new BridgeGame();
-    this.#CheckModel = new CheckModel();
   }
 
   gameStart() {
@@ -49,15 +46,14 @@ class Controller {
 
   orderMoving(moving) {
     const [currentMap, isSafe, isEnd] = this.#BridgeGame.move(moving);
-    const nowStep = this.#CheckModel.checkNowStep();
-    this.orderPrint(currentMap, nowStep, isSafe);
+    this.orderPrint(currentMap);
     if (!isSafe) this.getAnswer();
     else if (isEnd) this.orderEnd(RESULT.SUCCESS);
     else this.getMoving();
   }
 
-  orderPrint(currentMap, nowStep, isSafe) {
-    OutputView.printMap(currentMap, nowStep, isSafe);
+  orderPrint(currentMap) {
+    OutputView.printMap(currentMap);
   }
 
   getAnswer() {
@@ -76,8 +72,7 @@ class Controller {
   }
 
   orderEnd(isSuccess) {
-    const nowMap = this.#BridgeGame.getMap();
-    const attemptCnt = this.#BridgeGame.getAttemptCnt();
+    const [nowMap, attemptCnt] = this.#BridgeGame.getGameInfo();
     OutputView.printResult(nowMap, attemptCnt, isSuccess);
   }
 }
