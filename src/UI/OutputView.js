@@ -1,5 +1,6 @@
 const { GAME_MESSAGE } = require("../Utils/Constants");
 const { START } = GAME_MESSAGE;
+const { print } = require("../Utils/MissionUtils");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
