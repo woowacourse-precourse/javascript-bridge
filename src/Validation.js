@@ -5,11 +5,8 @@ const {
 } = require("./Constraints");
 
 class BridgeSizeValidation {
-  #size;
-
   constructor(size) {
     this.checkBridgesizeConstraints(size);
-    this.#size = size;
   }
 
   checkBridgesizeConstraints(size) {
