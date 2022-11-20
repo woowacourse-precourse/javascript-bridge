@@ -27,6 +27,14 @@ const BridgeGameModel = class {
     return data;
   }
 
+  result() {
+    const { RETRY } = KEYWORD;
+    const retry = this.#attempt.filter((attemp) => attemp === RETRY).length;
+    const success = this.isSuccess();
+    const data = { retry, success };
+    return data;
+  }
+
   isRetry() {
     const attempt = this.#attempt[this.#attempt.length - 1];
     const { RETRY } = KEYWORD;
