@@ -1,10 +1,8 @@
-const BridgeError = require('./BridgeError');
-
 const exceptionHandler = (message) => {
   try {
-    throw new BridgeError(message);
+    throw new Error(message);
   } catch (e) {
-    return false;
+    return e.message;
   }
 };
 
