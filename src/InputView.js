@@ -9,9 +9,10 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    Console.readLine(INPUT.BRIDGE_SIZE, (input) => {
-      isVaildSize(input);
+  readBridgeSize(callback) {
+    return Console.readLine(INPUT.BRIDGE_SIZE, (size) => {
+      isVaildSize(size);
+      callback(size);
     });
   },
 
