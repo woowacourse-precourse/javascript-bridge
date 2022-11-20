@@ -1,18 +1,18 @@
 class Bridge {
-  #upBrige = [];
-  #downBrige = [];
+  #upBridge = [];
+  #downBridge = [];
 
-  pushUpBrige(word) {
-    this.#upBrige.push(word);
+  pushUpBridge(word) {
+    this.#upBridge.push(word);
   }
-  pushDownBrige(word) {
-    this.#downBrige.push(word);
+  pushDownBridge(word) {
+    this.#downBridge.push(word);
   }
-  getUpBrige() {
-    return this.#upBrige;
+  getUpBridge() {
+    return this.#upBridge;
   }
-  getDownBrige() {
-    return this.#downBrige;
+  getDownBridge() {
+    return this.#downBridge;
   }
 }
 
