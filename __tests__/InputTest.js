@@ -27,11 +27,20 @@ const getOutput = (logSpy) => {
   return [...logSpy.mock.calls].join("");
 };
 
-const runException = (inputs) => {
+const runExceptionBridgeLength = (inputs) => {
   mockQuestions(inputs);
   const logSpy = getLogSpy();
 
   InputView.readBridgeSize();
+
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
+
+const runExceptionMoving = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+
+  InputView.readMoving();
 
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
@@ -42,14 +51,26 @@ const expectLogContains = (received, logs) => {
   });
 };
 
-describe("입력 테스트", () => {
+describe("다리 길이 입력 테스트", () => {
   test("다리 길이가 숫자가 아닌 경우 예외 처리한다.", () => {
-    runException(["d"]);
+    runExceptionBridgeLength(["d"]);
   });
+
   test("다리 길이가 3 이상 20 이하가 아닌 경우 예외 처리한다", () => {
-    runException(["2"]);
+    runExceptionBridgeLength(["2"]);
   });
+
   test("다리 길이가 3 이상 20 이하가 아닌 경우 예외 처리한다", () => {
-    runException(["21"]);
+    runExceptionBridgeLength(["21"]);
+  });
+});
+
+describe("이동할 칸 입력 테스트", () => {
+  test("이동할 칸이 U나 D가 아닌 경우 예외 처리한다.", () => {
+    runExceptionMoving(["F"]);
+  });
+
+  test("이동할 칸이 U나 D가 아닌 경우 예외 처리한다.", () => {
+    runExceptionMoving(["u"]);
   });
 });
