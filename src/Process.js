@@ -57,6 +57,7 @@ class Process {
   }
 
   end() {
+    OutputView.printResultPhrase();
     this.printMap();
     OutputView.printResult();
     Console.close();

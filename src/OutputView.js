@@ -11,7 +11,15 @@ const OutputView = {
     Console.print(lowerMap);
   },
 
-  printResult() {},
+  printResultPhrase() {
+    Console.print(GAME.RESULT);
+  },
+
+  printResult(isSucced, count) {
+    const result = isSucced ? GAME.SUCCESS : GAME.FAILURE;
+    Console.print(GAME.SUCCESS_OR_FAILURE + result);
+    Console.print(GAME.TOTAL_ATTEMPTS + count);
+  },
 };
 
 module.exports = OutputView;
