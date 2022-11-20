@@ -3,6 +3,7 @@ const ERROR = require("../utils/constant");
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
+const OutPutView = require("./OutputView");
 
 const bridgeGame = new BridgeGame();
 
@@ -22,8 +23,10 @@ const InputView = {
       if (isNaN(aNumber)) {
         throw new Error(ERROR.NOT_A_NUMBER);
       }
+
       randomBridge = BridgeMaker.makeBridge(Number(aNumber), () => generate());
-      Console.print(randomBridge);
+      bridgeGame.makeRandomBridge(randomBridge);
+
       this.readMoving(randomBridge);
     });
   },
@@ -40,40 +43,36 @@ const InputView = {
           upperBridge.push("O");
           lowerBridge.push(" ");
           bridgeGame.increaseIndex();
-          //OutPutView
-          Console.print(upperBridge);
-          Console.print(lowerBridge);
-          //
+
+          OutPutView.printMap(upperBridge, lowerBridge);
+
           this.nextStep(randomBridge, upperBridge, lowerBridge);
         }
         if (command === "D") {
           upperBridge.push(" ");
           lowerBridge.push("O");
           bridgeGame.increaseIndex();
-          //OutPutView
-          Console.print(upperBridge);
-          Console.print(lowerBridge);
-          //
+
+          OutPutView.printMap(upperBridge, lowerBridge);
+
           this.nextStep(randomBridge, upperBridge, lowerBridge);
         }
       } else {
         if (command === "U") {
           upperBridge.push("X");
           lowerBridge.push(" ");
-          //OutPutView
-          Console.print(upperBridge);
-          Console.print(lowerBridge);
-          //
+
+          OutPutView.printMap(upperBridge, lowerBridge);
+
           this.readGameCommand();
           bridgeGame.retry();
         }
         if (command === "D") {
           upperBridge.push(" ");
           lowerBridge.push("X");
-          //OutPutView
-          Console.print(upperBridge);
-          Console.print(lowerBridge);
-          //
+
+          OutPutView.printMap(upperBridge, lowerBridge);
+
           this.readGameCommand();
           bridgeGame.retry();
         }
@@ -81,16 +80,25 @@ const InputView = {
     });
   },
 
-  readMoving(randomBridge) {
-    const upperBridge = [];
-    const lowerBridge = [];
-    this.nextStep(randomBridge, upperBridge, lowerBridge);
+  readMoving() {
+    Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (command) => {
+      bridgeGame.move(command);
+      OutPutView.printMap(bridgeGame.upperBridge, bridgeGame.lowerBridge);
+      Console.print(bridgeGame.isCorrect);
+      bridgeGame.isCorrect ? this.readMoving() : this.readGameCommand();
+    });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (command) => {
+      if (command === "R") {
+        bridgeGame.retry(this.nextStep());
+      }
+    });
+  },
 };
 
 module.exports = InputView;
