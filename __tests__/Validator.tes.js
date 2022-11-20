@@ -1,6 +1,6 @@
-const BridgeSize = require("../src/utils/validator/BridgeSize");
-const MoveSpace = require("../src/utils/validator/MoveSpace");
-const GameCommand = require("../src/utils/validator/GAMECOMMAND");
+const BridgeSize = require("../src/Controller/validator/BridgeSize");
+const MoveSpace = require("../src/Controller/validator/MoveSpace");
+const GameCommand = require("../src/Controller/validator/GAMECOMMAND");
 
 const { ISALLOW } = require("../src/utils/constants");
 
