@@ -31,9 +31,14 @@ const OutputView = {
    */
   
   printResult(gameResult, upList, downList) {
+      Console.print('\n최종 게임 결과');
+      this.printMap(upList, downList); 
+      Console.print(`\n게임 성공 여부: ${RESULT_MESSAGE.showGameResult(gameResult)}`);
   },
 
-
+  printGameCount(gameCount) {
+    Console.print("총 시도한 횟수: " + gameCount);
+  }
 };
 
 module.exports = OutputView;
