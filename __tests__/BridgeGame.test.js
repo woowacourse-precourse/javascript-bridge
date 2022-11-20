@@ -524,11 +524,17 @@ describe('빈 다리 로그 생성 메서드 테스트', () => {
     expect(BridgeGame.createEmptyUDArray.name).toEqual(METHOD_NAME);
   });
 
-  test('2를 전달하면 각각 [ " ", " " ] 형태의 배열을 반환한다.', () => {
-    const [U, D] = BridgeGame.createEmptyUDArray(2);
-    const RECEIVED = [' ', ' '];
+  test('인수를 전달하지 않으면 기본값 1이 전달되어 [[" "], [" "]] 형태의 배열을 반환한다.', () => {
+    const RECEIVED = [[' '], [' ']];
 
-    [U, D].forEach((array) => expect(array).toEqual(RECEIVED));
+    expect(BridgeGame.createEmptyUDArray()).toEqual(RECEIVED);
+  });
+
+  test('2를 전달하면 각각 [[" ", " "], [" ", " "]]형태의 배열을 반환한다.', () => {
+    const EXPECTED = 2;
+    const RECEIVED = [[' ', ' '], [' ', ' ']];
+
+    expect(BridgeGame.createEmptyUDArray(EXPECTED)).toEqual(RECEIVED);
   });
 
   test('인자가 숫자가 아니라면 예외를 발생한다.', () => {
