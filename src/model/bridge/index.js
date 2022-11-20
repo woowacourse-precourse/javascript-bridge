@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const GameModel = require('../GameModel');
 const ErrorBoundary = require('../../error/ErrorBoundary');
 const { SizeValidation, CommandValidation } = require('../../validate/bridge');

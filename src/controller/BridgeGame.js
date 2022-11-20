@@ -32,8 +32,9 @@ const BridgeGame = class extends GameCtrl {
   //   - 동일 X = 더 가야할 칸이 있음
   //              MOVE 재귀 돌리기
   move(command) {
-    this.model.addCommandToList = command; // U, D
-    const { isPassed, bridgeMap } = this.model.getCommandMap();
+    this.model.addCommandToList = command;
+    const { isPassed, bridgeMap } = this.model.getMovedResult();
+    this.view.printMap(bridgeMap);
   }
 
   // 다리를 다 건넜는지 확인
