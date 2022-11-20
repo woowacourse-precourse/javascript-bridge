@@ -1,3 +1,4 @@
+// 입력에 관한 테스트가 아닐 경우 Application Test에
 // const MissionUtils = require("@woowacourse/mission-utils");
 // const App = require("../src/classes/App");
 // const BridgeMaker = require("../src/BridgeMaker");

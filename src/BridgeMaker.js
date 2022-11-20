@@ -1,3 +1,5 @@
+const Check = require("./utils/Check");
+
 /**
  * 객체
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -16,6 +18,7 @@ const BridgeMaker = {
       bridgeArray.push(generateRandomNumber.generate() === 0 ? "D" : "U");
     }
 
+    // Check.bridgeFormat(bridgeArray, size); //필요없는 로직
     return bridgeArray;
   },
 };

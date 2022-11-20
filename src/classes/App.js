@@ -19,8 +19,8 @@ class App {
   }
 
   test() {
-    // const bridge = BridgeMaker.makeBridge(3, RandomGenerator);
-    // console.log(bridge);
+    const bridge = BridgeMaker.makeBridge(3, RandomGenerator);
+    console.log(bridge);
   }
 }
 

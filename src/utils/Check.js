@@ -16,10 +16,16 @@ const Check = {
     }
   },
 
-  bridgeFormat() {},
-  // ?
-  // 다리 array 개별 타입이 0나 1이 아니면 에러,
-  // 길이와 입력 개수가 같은지
+  // bridgeFormat(value, size) { //필요없는 로직
+  //   if (value.length !== size) {
+  //     throw new Error(ABOUT.BRIDGE_SIZE);
+  //   }
+
+  //   if (value.map((el) => el !== "U" || el !== "D")) {
+  //     throw new Error(ABOUT.BRIDGE_ELEMENT);
+  //   }
+  // },
+
   moveFormat() {
     // U나 D가 아닐 경우 -> U나 D만 입력하라고 하기
   },
