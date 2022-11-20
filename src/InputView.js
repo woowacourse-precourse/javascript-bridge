@@ -2,10 +2,17 @@
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+
+  //다리의 길이를 입력받는다.
+  //함수 자체를 파라미터로 받음
+  readBridgeSize(afterReadBridgeSize) {
+    MissionUtils.Console.readLine(
+      '다리의 길이를 입력해주세요.',
+      (bridgeLength) => {
+        afterReadBridgeSize(bridgeLength);
+      }
+    );
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
