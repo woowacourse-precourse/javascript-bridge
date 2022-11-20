@@ -6,17 +6,12 @@ const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
    * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
-   * @param {function()} readMoving 사용자가 이동할 칸을 입력받는 함수
-   * @param {BridgeGame} game 현재 진행 중인 게임(인스턴스)
    */
-  makeBridge(size, generateRandomNumber, readMoving, game) {
+  makeBridge(size, generateRandomNumber) {
     let bridge = []; // 생성된 다리
     while (bridge.length < size) {
       +generateRandomNumber() ? bridge.push("U") : bridge.push("D");
     }
-    try {
-      readMoving(game, bridge);
-    } catch {}
     return bridge;
   },
 };

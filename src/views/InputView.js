@@ -17,7 +17,8 @@ const InputView = {
   readBridgeSize(game, readMoving) {
     Console.readLine(MESSAGES.READ_BRIDGE_SIZE, (res) => {
       if (validateBridgeSizeInput(res)) {
-        return makeBridge(res, generate, readMoving, game);
+        let bridge = makeBridge(res, generate);
+        return readMoving(game, bridge);
       }
     });
   },
