@@ -1,4 +1,3 @@
-const Bridge = require('../model/Bridge');
 const BridgeGame = require('../model/BridgeGame');
 const BridgeLengthValidator = require('../validator/BridgeLengthValidator');
 const InputView = require('../view/InputView');
