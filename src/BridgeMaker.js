@@ -1,4 +1,4 @@
-const { MOVING } = require("./constants");
+const { MOVING } = require("./constants/constant");
 
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
