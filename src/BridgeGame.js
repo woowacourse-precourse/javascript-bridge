@@ -107,6 +107,7 @@ class BridgeGame {
     this.#userPosition = null;
 
     this.increasingTryCount();
+    this.initializeLogHistory();
 
     return this.#userPosition;
   }
