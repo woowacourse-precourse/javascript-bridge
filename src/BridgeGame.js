@@ -7,6 +7,10 @@ class BridgeGame {
   #current = 0
   #tryCount = 1;
 
+  constructor(bridgeAnswer) {
+    this.#bridgeAnswer = bridgeAnswer;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
