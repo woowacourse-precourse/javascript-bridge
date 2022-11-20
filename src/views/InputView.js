@@ -49,14 +49,15 @@ const InputView = {
    * @param {string[]} bridge
    */
   readGameCommand(game, bridge) {
-    Console.readLine(MESSAGES.RETRY, (input) => {
+    const readGameCommandCallback = (input) => {
       validateGameCommandInput(input);
       if (input === "R") {
         game.retry();
         return InputView.readMoving(game, bridge);
       }
       return printResult(game);
-    });
+    };
+    Console.readLine(MESSAGES.RETRY, readGameCommandCallback);
   },
 };
 
