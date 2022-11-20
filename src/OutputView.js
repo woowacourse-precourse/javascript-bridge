@@ -5,7 +5,7 @@ const { VALUE } = require('./constants/values');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
- const OutputView = {
+const OutputView = {
   printStart() {
     MissionUtils.Console.print(MESSAGE.GAME_START);
   },
@@ -14,7 +14,7 @@ const { VALUE } = require('./constants/values');
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-   printMap(upper, lower) {
+  printMap(upper, lower) {
     const bridgeUpper = upper.join('|');
     const bridgeLower = lower.join('|');
     const bridge = [
@@ -29,11 +29,11 @@ const { VALUE } = require('./constants/values');
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-   printResult(game) {
-    let getWin = game.getGameWin();
-    let getTrialCount = game.getTrialCount();
-    let getUpper = game.getBridgeUpper();
-    let getLower = game.getBridgeLower();
+  printResult(game) {
+    const getWin = game.getGameWin();
+    const getTrialCount = game.getTrialCount();
+    const getUpper = game.getBridgeUpper();
+    const getLower = game.getBridgeLower();
     MissionUtils.Console.print(MESSAGE.GAME_RESULT_PRINT);
     this.printMap(getUpper, getLower);
     this.printGameSuccessFail(getWin, getTrialCount);
@@ -41,22 +41,22 @@ const { VALUE } = require('./constants/values');
 
   printGameSuccessFail(getWin, getTrialCount) {
     if (getWin === true) {
-      this.printGameSuccess(getTrialCount);
+      this.printGameResultSuccess(getTrialCount);
       return;
     }
-    this.printGameFail(getTrialCount);
+    this.printGameResultFail(getTrialCount);
   },
 
-  printGameSuccess(getTrialCount) {
-    MissionUtils.Console.print(MESSAGE.GAME_SUCCESS);
+  printGameResultSuccess(getTrialCount) {
+    MissionUtils.Console.print(MESSAGE.GAME_RESULT_SUCCESS);
     MissionUtils.Console.print(
       `${MESSAGE.TOTAL_TRIAL_NUMBERS}` + `${getTrialCount}`
     );
     MissionUtils.Console.close();
   },
 
-  printGameFail(getTrialCount) {
-    MissionUtils.Console.print(MESSAGE.GAME_FAILURE);
+  printGameResultFail(getTrialCount) {
+    MissionUtils.Console.print(MESSAGE.GAME_RESULT_FAIL);
     MissionUtils.Console.print(
       `${MESSAGE.TOTAL_TRIAL_NUMBERS}` + `${getTrialCount}`
     );

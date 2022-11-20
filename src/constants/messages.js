@@ -14,8 +14,8 @@ const MESSAGE = {
   READ_USER_INPUT_COMMAND:
     '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
   GAME_RESULT_PRINT: '최종 게임 결과',
-  GAME_SUCCESS: '게임 성공 여부: 성공',
-  GAME_FAILURE: '게임 성공 여부: 실패',
+  GAME_RESULT_SUCCESS: '게임 성공 여부: 성공',
+  GAME_RESULT_FAIL: '게임 성공 여부: 실패',
   TOTAL_TRIAL_NUMBERS: '총 시도한 횟수: '
 };
 
