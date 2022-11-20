@@ -2,6 +2,7 @@ const InputView = require("../src/InputView");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const MissionUtils = require("@woowacourse/mission-utils");
 const Game = require("../src/BridgeGame");
+const App = require("../src/App");
 
 const mockQuestions = (answer) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -10,32 +11,47 @@ const mockQuestions = (answer) => {
   });
 };
 
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
+
+const getOutput = (logSpy) => {
+  return [...logSpy.mock.calls].join("");
+};
+
+const runException = (input) => {
+  mockQuestions(input);
+  const logSpy = getLogSpy();
+  const app = new App();
+  app.play();
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
+
+const expectLogContains = (received, logs) => {
+  logs.forEach((log) => {
+    expect(received).toEqual(expect.stringContaining(log));
+  });
+};
+
 describe("readBridgeSize 테스트", () => {
   test("다리길이 입력 예외 테스트: 범위를 넘는 수를 입력했을 때", () => {
-    mockQuestions(1);
-    expect(() => {
-      InputView.readBridgeSize();
-    }).toThrow("[ERROR]");
+    runException(1);
   });
 
   test("다리길이 입력 예외 테스트: 숫자가 아닌 문자를 입력했을 때", () => {
-    mockQuestions("a");
-    expect(() => {
-      InputView.readBridgeSize();
-    }).toThrow("[ERROR]");
+    runException("a");
   });
 
   test("다리길이 입력 예외 테스트: 실수를 입력했을 때", () => {
-    mockQuestions(6.6);
-    expect(() => {
-      InputView.readBridgeSize();
-    }).toThrow("[ERROR]");
+    runException(6.6);
   });
 
   test("유저 다리 선택 입력 예외 테스트: U와 D를 입력하지 않았을 때", () => {
     mockQuestions("A");
-    expect(() => {
-      InputView.readMoving(new Game.BridgeGame(["U", "U", "U"]));
-    }).toThrow("[ERROR]");
+    const logSpy = getLogSpy();
+    InputView.readMoving(new Game.BridgeGame(["U", "U", "U"]));
+    expectLogContains(getOutput(logSpy), ["[ERROR]"]);
   });
 });
