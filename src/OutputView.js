@@ -1,7 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const { Console } = MissionUtils;
-const { MESSAGE_SUCCESS_BOOLEAN, MESSAGE_TRY_COUNT } = require('./constants');
+const { MESSAGE_SUCCESS_BOOLEAN, MESSAGE_TRY_COUNT, MESSAGE_RESULT } = require('./constants');
 
 let upArea = [];
 let downArea = [];
@@ -14,8 +14,14 @@ const OutputView = {
 
   printMap(command, bridgeInformation) {
     OutputView.drawMap(command, bridgeInformation);
-    Console.print(upArea);
-    Console.print(downArea);
+    Console.print(`[ ${upArea.join(' | ')} ]`);
+    Console.print(`[ ${downArea.join(' | ')} ]`);
+  },
+
+  endResult() {
+    Console.print(MESSAGE_RESULT);
+    Console.print(`[ ${upArea.join(' | ')} ]`);
+    Console.print(`[ ${downArea.join(' | ')} ]`);
   },
 
   drawMap(command, bridgeInformation) {
