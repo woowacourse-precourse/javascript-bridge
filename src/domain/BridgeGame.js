@@ -14,10 +14,10 @@ class BridgeGame {
   move() {
     GameInfo.position += GAME_VALUES.counter;
     GameInfo.gameStat.push(GameInfo.moving);
-    this.moveBridge();
+    this.recordCurrentStatus();
   }
 
-  moveBridge() {
+  recordCurrentStatus() {
     return (UseGameInfo.isValidMove()) ?
       UseGameInfo.pushMoveBridge(GAME_VALUES.upperCharO) :
       UseGameInfo.pushMoveBridge(GAME_VALUES.upperCharX);

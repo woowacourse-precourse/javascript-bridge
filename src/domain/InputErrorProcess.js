@@ -3,10 +3,6 @@ const OutputView = require("../ui/OutputView");
 const GameInfo = require("./GameInfo");
 
 class InputErrorProcess {
-  constructor() {
-
-  }
-
   inputErrorProcess(validClass, inputValue, objectCode) {
     try {
       GameInfo[objectCode] = new validClass(inputValue)[objectCode];
