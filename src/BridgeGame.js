@@ -40,6 +40,7 @@ class BridgeGame {
 
     if (!isMovable) {
       // TODO: 게임 재시작 여부 확인
+      this.moveCount = 0;
       InputView.readGameCommand(this.retryMessage, this.retry);
       return;
     }
@@ -55,10 +56,19 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(command) {
-    console.log('엥?');
-    console.log('retry : command is ', command);
-  }
+  retry = (command) => {
+    const run = {
+      R: InputView.readMoving,
+      Q: InputView.Close,
+    };
+
+    const params = {
+      R: [this.movingMessage, this.move],
+      Q: [],
+    };
+
+    run[command](...params[command]);
+  };
 
   createBridge(bridgeSize) {
     // TODO: bridge길이 확인
