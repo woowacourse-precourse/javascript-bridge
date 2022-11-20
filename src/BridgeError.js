@@ -1,4 +1,12 @@
 class BridgeErrorCheck {
+  validateRandomArray(bridgeArray) {
+    bridgeArray.forEach((value) => {
+      if (value === null)
+        throw "\n[ERROR] 랜덤한 숫자는 0과 1로만 이루어져 있어야 합니다.\n";
+    });
+    return this;
+  }
+
   validateBridgeSize(size) {
     this.bridgeSize(size);
     this.bridgeType(size);
