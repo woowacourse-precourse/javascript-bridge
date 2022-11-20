@@ -61,6 +61,10 @@ const Player = {
     this.size = size;
   },
 
+  getGameSuccess() {
+    return this.gameSuccess;
+  },
+
   checkGameSuccess() {
     if (
       this.playerAns.length === this.size &&
