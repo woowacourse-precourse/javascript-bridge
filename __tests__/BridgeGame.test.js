@@ -761,3 +761,13 @@ describe('게임 로그 기록 메서드 테스트', () => {
     }).toThrow(POSITION_ERROR_TEXT);
   });
 });
+
+describe('시도 횟수 증가 메서드 테스트', () => {
+  const bridgeGame = new BridgeGame();
+
+  test('메소드 이름은 "increasingTryCount"로 정의된다.', () => {
+    const METHOD_NAME = 'increasingTryCount';
+
+    expect(bridgeGame.increasingTryCount.name).toEqual(METHOD_NAME);
+  });
+});
