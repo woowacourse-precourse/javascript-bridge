@@ -14,7 +14,9 @@ class BridgeGame {
 
   create(size) {
     GameException.handleBridgeSizeException(size);
-    this.#bridge = new Bridge(BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator));
+    this.#bridge = new Bridge(
+      BridgeMaker.makeBridge(size, () => BridgeRandomNumberGenerator.generate())
+    );
     console.log(this.#bridge.getArray());
   }
   /**

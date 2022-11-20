@@ -3,13 +3,15 @@ const { GAME_COMMAND } = require('../../lib/constans');
 
 class Bridge {
   #array;
-  #step;
   #status;
+  #step;
+  #attempts;
 
   constructor(array) {
     this.#array = array;
-    this.#step = 0;
     this.#status = new BridgeStatus();
+    this.#step = 0;
+    this.#attempts = 1;
   }
 
   getArray() {
@@ -40,18 +42,23 @@ class Bridge {
     }
   }
 
-  #reset() {
+  #reset(isRetry) {
+    if (!isRetry) return;
+
     this.#status = new BridgeStatus();
+    this.#attempts += 1;
     this.#step = 0;
   }
 
   reStart(command) {
-    if (command === GAME_COMMAND.quit) {
-      return false;
-    }
+    const isRetry = command === GAME_COMMAND.retry;
+    this.#reset(isRetry);
 
-    this.#reset();
-    return true;
+    return {
+      isRetry,
+      attempts: this.#attempts,
+      status: this.#status.getStatus()
+    };
   }
 
   cross(moving) {
@@ -60,8 +67,10 @@ class Bridge {
     this.#reflect(isMatch, position);
 
     return {
-      result: isMatch,
-      status: this.#status.getStatus()
+      isMatch,
+      attempts: this.#attempts,
+      status: this.#status.getStatus(),
+      finish: this.#array.length === this.#step
     };
   }
 }

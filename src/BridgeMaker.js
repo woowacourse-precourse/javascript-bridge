@@ -18,7 +18,7 @@ const BridgeMaker = {
     const bridge = [];
 
     for (let i = 0; i < size; i++) {
-      bridge[i] = this.convertDorU(generateRandomNumber.generate());
+      bridge[i] = this.convertDorU(generateRandomNumber());
     }
 
     return bridge;

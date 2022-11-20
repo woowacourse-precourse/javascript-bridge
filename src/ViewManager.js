@@ -1,6 +1,5 @@
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
-const { GAME_QUESTION } = require('../lib/constans');
 const { parseNumber } = require('../lib/utils');
 
 class ViewManager {
@@ -12,43 +11,29 @@ class ViewManager {
 
   start() {
     OutputView.printStartMessage();
-    InputView.readBridgeSize(GAME_QUESTION.size, this.#readBridgeSizeCallback);
+    InputView.readBridgeSize(this.#readBridgeSizeCallback);
   }
 
   // 화살표 함수로 작성한 이유: 클래스 메서드는 기본적으로 클래스를 바인딩하지 않는다.
   #readBridgeSizeCallback = (input) => {
-    try {
-      this.#game.create(parseNumber(input));
-      InputView.readMoving(GAME_QUESTION.moving, this.#readMovingCallback);
-    } catch (err) {
-      throw err;
-    }
+    this.#game.create(parseNumber(input));
+    InputView.readMoving(this.#readMovingCallback);
   };
 
   #readMovingCallback = (input) => {
-    try {
-      const { status, result } = this.#game.move(input);
-      OutputView.printMap(status);
-      if (result) {
-        InputView.readMoving(GAME_QUESTION.moving, this.#readMovingCallback);
-      } else {
-        InputView.readGameCommand(GAME_QUESTION.retry, this.#readGameCommandCallback);
-      }
-    } catch (err) {
-      throw err;
-    }
+    const { status, isMatch, finish, attempts } = this.#game.move(input);
+
+    OutputView.printMap(status);
+    if (finish) return OutputView.printResult({ status, attempts, clear: true });
+    if (!isMatch) return InputView.readGameCommand(this.#readGameCommandCallback);
+    InputView.readMoving(this.#readMovingCallback);
   };
 
   #readGameCommandCallback = (input) => {
-    try {
-      if (this.#game.retry(input)) {
-        InputView.readMoving(GAME_QUESTION.moving, this.#readMovingCallback);
-      } else {
-        console.log('게임종료');
-      }
-    } catch (err) {
-      throw err;
-    }
+    const { isRetry, status, attempts } = this.#game.retry(input);
+
+    if (!isRetry) return OutputView.printResult({ status, attempts, clear: false });
+    InputView.readMoving(this.#readMovingCallback);
   };
 }
 
