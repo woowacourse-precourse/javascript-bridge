@@ -19,7 +19,6 @@ const InputView = {
       let bridgeList = [[], []];
       let attempts = 1;
       this.readMoving(bridge, bridgeList, attempts);
-      console.log(bridge)
     });
   },
 

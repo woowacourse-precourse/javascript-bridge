@@ -24,7 +24,7 @@ const OutputView = {
   printResult(bridgeList, result, attempts) {
     Console.print(`\n최종 게임 결과`);
     this.printMap(bridgeList);
-    Console.print(`\n게임 성공여부 : ${result}`);
+    Console.print(`\n게임 성공 여부: ${result}`);
     Console.print(`총 시도한 횟수: ${attempts}`);
     Console.close();
   },
