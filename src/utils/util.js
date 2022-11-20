@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { BridgeRandomNumberGenerator } = require('../BridgeRandomNumberGenerator');
 
 class Utils {
   static readLine(message, callback) {
@@ -8,6 +9,10 @@ class Utils {
 
   static print(message) {
     Console.print(message);
+  }
+
+  static makeRandomNumber() {
+    return BridgeRandomNumberGenerator.generate();
   }
 
   static printAllInList(list) {
