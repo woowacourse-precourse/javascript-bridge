@@ -3,7 +3,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
-const OUTPUT_MESSAGE = require("./constans/Outputmessage");
+const OUTPUT_MESSAGE = require("./constans/OutputMessage");
 class App {
   constructor() {
     this.bridge = [];
