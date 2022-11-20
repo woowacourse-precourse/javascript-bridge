@@ -74,6 +74,18 @@
 - 데이터와 비즈니스 로직을 담는 모델
 - 뷰와 모델을 연결할 컨트롤러
 
+### 좋은 아키텍처 찾기
+
+- mvc, mvvm, mvp, mvi... mv\* 패턴 중에 서 무엇을 선택 할 것인가?
+  - mvvm ❌
+    - viewmodel을 구현하기에는 이번 요구 사항과 적합하지 않다고 판단하였다.
+  - mvi ❌
+    - 구현을 위해 모델이 뷰에 접근할 필요가 있다.
+    - BridgeGame을 모델로 사용할 것이기 때문에 BridgeGame은 뷰에 접근할 수 없어 부적합하다.
+  - mvc와 mvp ⭕
+    - MVC의 방식에서 모델과 뷰가 의존하지 않게 만들면 MVP가 된다. 따라서 기본적으로 MVC를 따른다.
+    - 이후 모델과 뷰가 의존하지 않게 설계 가능하다면, MVP로 명칭을 바꾼다.
+
 ### 각 구조 전제 조건 설정
 
 의존성
@@ -116,10 +128,7 @@
 ```mermaid
   flowchart TD
     A[OutputView] --> B[BridgeGameController]
-    A[OutputView] --> C[BridgeError]
-    C --> D[ExceptionHandler]
-    D --> E[InputValidation]
-    E --> B
+    E[InputValidation] --> B
     F[InputView] --> B
     G[BridgeGame] --> B
     B --> H[App.play]
