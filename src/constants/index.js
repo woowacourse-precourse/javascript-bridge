@@ -8,6 +8,14 @@ const WAY = Object.freeze({
   DOWN: "D",
 });
 
+const BRIDGE = Object.freeze({
+  START: "[ ",
+  END: " ]",
+  DIVIDE: " | ",
+  SAFE: "O",
+  UNSAFE: "X",
+});
+
 const MESSAGE = Object.freeze({
   START_GAME: "다리 건너기 게임을 시작합니다.",
   INPUT_SIZE: "다리의 길이를 입력해주세요.",
@@ -25,6 +33,7 @@ const ERROR = Object.freeze({
 module.exports = {
   SIZE,
   WAY,
+  BRIDGE,
   MESSAGE,
   ERROR,
 };

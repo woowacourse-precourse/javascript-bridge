@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const BridgeMapGenerator = require("./BridgeMapGenerator");
 const { MESSAGE } = require("./constants/index");
 
 /**
@@ -15,7 +16,15 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(isSafe, bridge, location) {
-    console.log(isSafe, bridge, location);
+    const upMap = BridgeMapGenerator.generateUpMap(isSafe, bridge, location);
+    const downMap = BridgeMapGenerator.generateDownMap(
+      isSafe,
+      bridge,
+      location
+    );
+
+    Console.print(upMap);
+    Console.print(downMap);
   },
 
   /**
