@@ -31,7 +31,9 @@ class GameController {
   }
 
   checkResult() {
-    const gameProgress = this.bridgeGame.getGameProgress();
+    const alive = this.bridgeGame.checkAlive();
+    if (!alive) return this.askRetry();
+    this.selectMoving();
   }
 
   // 죽었으면 리트라이, 살았으면 다시 moving
