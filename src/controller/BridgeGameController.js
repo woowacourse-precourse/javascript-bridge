@@ -17,6 +17,7 @@ class BrideGameController {
 
   handleGameStartPhase(size) {
     this.generateBridgeGame(size);
+    OutputView.printNewLine();
     InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
   }
 
@@ -27,16 +28,18 @@ class BrideGameController {
   }
 
   handleAnswerCheckPhase(direction) {
+    this.#bridgeGame.updateResult(direction);
     OutputView.printMap(this.#bridgeGame.getResult());
     if(this.#bridgeGame.isAnswer(direction)) {
       this.handleGameEndPhase();
+      return;
     }
     InputView.readGameCommand(this.handleGameRetryPhase.bind(this));
   }
 
   handleGameEndPhase() {
     if(this.#bridgeGame.isGameEnd()) {
-      OutputView.printResult();
+      OutputView.printResult(this.#bridgeGame.getResult(), this.#bridgeGame.getAttempts(), true);
       return;
     }
     this.#bridgeGame.move();
@@ -46,9 +49,10 @@ class BrideGameController {
   handleGameRetryPhase(retryAnswer) {
     if (retryAnswer === 'R') {
       this.#bridgeGame.retry();
+      InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
       return;
     }
-    Console.close();
+    OutputView.printResult(this.#bridgeGame.getResult(), this.#bridgeGame.getAttempts(), false);
   }
 }
 
