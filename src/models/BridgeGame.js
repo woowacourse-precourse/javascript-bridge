@@ -1,4 +1,3 @@
-const Bridge = require("./Bridge");
 
 class BridgeGame {
   #bridge;
@@ -11,6 +10,7 @@ class BridgeGame {
       ['U', []],
       ['D', []],
     ]);
+    this.#attempts = 1;
   }
 
   move() {
@@ -18,7 +18,10 @@ class BridgeGame {
   }
 
   retry() {
-    this.#result = [];
+    this.#result = new Map([
+      ['U', []],
+      ['D', []],
+    ]);
     this.#attempts += 1;
     this.#bridge.initializeCurrentDirection();
   }
@@ -36,7 +39,11 @@ class BridgeGame {
   getResult() {
     return this.#result;
   }
-  
+
+  getAttempts() {
+    return this.#attempts;
+  }
+
   updateResult(direction) {
     for (let dir of this.#result.keys()) {
       if (dir === direction) continue;
