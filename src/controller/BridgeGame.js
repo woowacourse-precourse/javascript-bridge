@@ -6,10 +6,8 @@ const { generate } = require('../model/BridgeRandomNumberGenerator');
  */
 class BridgeGame {
   #bridge = [];
-  #round = -1;
   #inputs = [];
-  #roundMoveable = false;
-  totalTry = 1;
+  round = { trun: -1, total: 1 };
 
   makeBridgeInfo(bridgeSize) {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, generate);
@@ -21,20 +19,20 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(movement) {
-    this.#roundMoveable = this.#moveRound(movement);
-    this.#inputs.push({ move: movement, moveable: this.#roundMoveable ? true : false });
-    return [this.#inputs, this.#judgeRound()];
+    const roundMoveable = this.#moveRound(movement);
+    this.#inputs.push({ move: movement, moveable: roundMoveable ? true : false });
+    return [this.#inputs, this.#judgeRound(roundMoveable)];
   }
 
   #moveRound(movement) {
-    this.#round += 1;
-    return this.#bridge[this.#round] === movement;
+    this.round.trun += 1;
+    return this.#bridge[this.round.trun] === movement;
   }
 
-  #judgeRound() {
+  #judgeRound(roundMoveable) {
     return {
       sucess: this.#bridge.join('') === this.#inputs.map(({ move }) => move).join(''),
-      process: this.#roundMoveable && this.#bridge.length - 1 > this.#round,
+      process: roundMoveable && this.#bridge.length - 1 > this.round.trun,
     };
   }
 
@@ -44,11 +42,8 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#round = -1;
+    this.round = { trun: -1, total: this.round.total + 1 };
     this.#inputs = [];
-    this.#roundMoveable = false;
-    this.totalTry += 1;
-    return true;
   }
 }
 

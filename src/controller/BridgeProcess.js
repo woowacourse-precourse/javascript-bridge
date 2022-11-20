@@ -12,7 +12,7 @@ class BridgeProcess {
   #gameReport;
 
   start() {
-    Console.print(this.#outputView.printStart());
+    this.#outputView.printStart();
     this.#process();
   }
 
@@ -24,7 +24,7 @@ class BridgeProcess {
   #inputBridgeSize() {
     Console.readLine(PRINTBRIDGESIZE, (bridgeSize) => {
       const isBridgeSize = this.#inputView.readBridgeSize(bridgeSize);
-      this.#gameReport.totalTry === 1 ? this.#gameReport.makeBridgeInfo(bridgeSize) : '';
+      this.#gameReport.round.total === 1 ? this.#gameReport.makeBridgeInfo(bridgeSize) : '';
       isBridgeSize ? this.#inputMovement() : this.#inputBridgeSize();
     });
   }
@@ -48,7 +48,6 @@ class BridgeProcess {
     [
       { sucess: true, process: false },
       (sucess, match) => {
-        console.log(sucess, match);
         this.#printFinalResult(sucess, match);
       },
     ],
@@ -87,7 +86,7 @@ class BridgeProcess {
   };
 
   #printFinalResult(sucess, match) {
-    this.#outputView.printResult(sucess, this.#gameReport.totalTry, match);
+    this.#outputView.printResult(sucess, this.#gameReport.round.total, match);
   }
 }
 
