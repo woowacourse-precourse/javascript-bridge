@@ -1,5 +1,5 @@
 class BridgeGameStatus {
-  #location = 0;
+  #location = -1;
 
   #tryCount = 0;
 
@@ -20,11 +20,7 @@ class BridgeGameStatus {
   }
 
   resetLocation() {
-    this.#location = 0;
-  }
-
-  isWin(size) {
-    return size === this.#location;
+    this.#location = -1;
   }
 }
 

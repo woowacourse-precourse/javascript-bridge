@@ -38,8 +38,8 @@ class BridgeGame {
     return this.#bridge.getMap();
   }
 
-  isWin() {
-    return this.#status.isWin(this.#bridge.size());
+  isWin(isCrossed) {
+    return this.#bridge.isLastLocation(this.#status.getLocation()) && isCrossed;
   }
 
   /**
@@ -53,9 +53,9 @@ class BridgeGame {
     this.#status.increaseTryCount();
   }
 
-  quit() {
+  quit(isCrossed) {
     const bridgeMap = this.getMap();
-    const isWin = this.isWin();
+    const isWin = this.isWin(isCrossed);
     const tryCount = this.#status.getTryCount();
 
     return { bridgeMap, isWin, tryCount };

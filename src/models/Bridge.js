@@ -14,8 +14,8 @@ class Bridge {
     return this.#data[location];
   }
 
-  size() {
-    return this.#data.length;
+  isLastLocation(location) {
+    return this.#data.length - 1 === location;
   }
 
   getMap() {

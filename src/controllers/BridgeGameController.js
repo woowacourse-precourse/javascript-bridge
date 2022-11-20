@@ -40,14 +40,14 @@ class BridgeGameController {
   #tryMovingCommandSubmit(command) {
     const movingCommand = new MovingCommand(command);
     const current = this.#game.move(movingCommand);
+    const isCrossed = movingCommand.isCrossed(current);
     const bridgeMap = this.#game.getMap();
     printMap(bridgeMap);
-
-    if (this.#game.isWin()) {
-      this.#runQuit();
+    if (this.#game.isWin(isCrossed)) {
+      this.#runQuit(isCrossed);
       return;
     }
-    this.#runBridgeCross(movingCommand.isCrossed(current));
+    this.#runBridgeCross(isCrossed);
   }
 
   #runBridgeCross(isCrossed) {
@@ -85,8 +85,8 @@ class BridgeGameController {
     readMoving(this.#onMovingSubmit.bind(this));
   }
 
-  #runQuit() {
-    const { bridgeMap, isWin, tryCount } = this.#game.quit();
+  #runQuit(isCrossed = false) {
+    const { bridgeMap, isWin, tryCount } = this.#game.quit(isCrossed);
     printResult(bridgeMap, isWin, tryCount);
     Console.close();
   }
