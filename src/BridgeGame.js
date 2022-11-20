@@ -36,6 +36,8 @@ class BridgeGame {
     this.playerPosition += 1;
     if (moving !== bridge[this.playerPosition]) {
       this.state = STATE.FAIL;
+    } else if (this.playerPosition + 1 === bridge.length) {
+      this.state = STATE.QUIT;
     }
   }
 
