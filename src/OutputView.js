@@ -62,6 +62,7 @@ const OutputView = {
     MissionUtils.Console.print(`${bridge[1]}`)
     MissionUtils.Console.print(`게임 성공 여부: ${RESULT}`)
     MissionUtils.Console.print(`총 시도한 횟수: ${try_time}`)
+    MissionUtils.Console.close()
   },
 
   printStart() {
