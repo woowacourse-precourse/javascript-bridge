@@ -5,6 +5,7 @@ const OutputView = require("./OutputView");
 const InputView = require("./InputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class BridgeGame {
   constructor() {
@@ -13,6 +14,7 @@ class BridgeGame {
     this.size = 0;
     this.moving = "";
     this.count = 1;
+    this.command = "";
     this.resultMessage = "성공";
   }
 
@@ -28,6 +30,13 @@ class BridgeGame {
 
   bridgeSize() {
     this.size = InputView.readBridgeSize();
+    try {
+      if (this.size < 3 || this.size > 20 || isNaN(this.size))
+        throw "[ERROR] 3이상 20이하의 숫자만 입력바랍니다.";
+    } catch (err) {
+      MissionUtils.Console.print(err);
+      this.size = InputView.readBridgeSize();
+    }
   }
 
   createBridge() {
@@ -55,6 +64,13 @@ class BridgeGame {
   readMove() {
     OutputView.pickMoveSentence();
     this.moving = InputView.readMoving();
+    try {
+      if (this.moving !== "U" && this.moving !== "D")
+        throw "[ERROR] U와 D 중 입력바랍니다.";
+    } catch (err) {
+      MissionUtils.Console.print(err);
+      this.moving = InputView.readMoving();
+    }
   }
 
   pushXOrO(i) {
@@ -85,12 +101,24 @@ class BridgeGame {
       this.bridgeResult[0].includes("X") ||
       this.bridgeResult[1].includes("X")
     ) {
-      OutputView.retrySentence();
-      if (InputView.readGameCommand() === "R") {
+      this.readCommand();
+      if (this.command === "R") {
         this.bridgeResult = [[], []];
-        this.count += 1;
+        this.count++;
         this.move();
       } else this.resultMessage = "실패";
+    }
+  }
+
+  readCommand() {
+    OutputView.retrySentence();
+    this.command = InputView.readGameCommand();
+    try {
+      if (this.command !== "R" && this.command !== "Q")
+        throw "[ERROR] R와 Q 중 입력바랍니다.";
+    } catch (err) {
+      MissionUtils.Console.print(err);
+      this.command = InputView.readGameCommand();
     }
   }
 
