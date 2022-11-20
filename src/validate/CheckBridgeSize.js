@@ -1,6 +1,7 @@
-const { ERROR } = require('./util/Constant');
+/* eslint-disable class-methods-use-this */
+const { ERROR } = require('../util/Constant');
 
-class Check {
+class CheckBridgeSize {
   validate(size) {
     this.checkNotNumber(size);
     this.checkNotRange(size);
@@ -19,4 +20,4 @@ class Check {
   }
 }
 
-module.exports = Check;
+module.exports = CheckBridgeSize;
