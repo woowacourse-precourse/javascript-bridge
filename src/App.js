@@ -60,7 +60,7 @@ class App {
   }
 
   result(isSuccess, current) {
-    printResult(isSuccess, current, printMap);
+    printResult({ isSuccess, current, tryCount: this.#tryCount }, printMap);
 
     this.exit();
   }
