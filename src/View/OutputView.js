@@ -22,8 +22,8 @@ const OutputView = {
     Console.close();
   },
 
-  printError(erroText) {
-    Console.print(erroText);
+  printError(errorText) {
+    Console.print(errorText);
   },
 };
 

@@ -50,10 +50,14 @@ class Controller {
   orderMoving(moving) {
     const [currentMap, isSafe, isEnd] = this.#BridgeGame.move(moving);
     const nowStep = this.#CheckModel.checkNowStep();
-    OutputView.printMap(currentMap, nowStep, isSafe);
+    this.orderPrint(currentMap, nowStep, isSafe);
     if (!isSafe) this.getAnswer();
     else if (isEnd) this.orderEnd(RESULT.SUCCESS);
     else this.getMoving();
+  }
+
+  orderPrint(currentMap, nowStep, isSafe) {
+    OutputView.printMap(currentMap, nowStep, isSafe);
   }
 
   getAnswer() {

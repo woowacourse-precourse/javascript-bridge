@@ -1,6 +1,6 @@
-const { Console } = require("@woowacourse/mission-utils");
-const { SIZE, ERROR, ISALLOW } = require("../../utils/constants");
 const OutputView = require("../../View/OutputView");
+
+const { SIZE, ERROR, ISALLOW } = require("../../utils/constants");
 
 class BridgeSize {
   #input;

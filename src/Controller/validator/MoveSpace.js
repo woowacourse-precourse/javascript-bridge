@@ -1,5 +1,6 @@
-const { ORDER, ERROR, ISALLOW } = require("../../utils/constants");
 const OutputView = require("../../View/OutputView");
+
+const { ORDER, ERROR, ISALLOW } = require("../../utils/constants");
 
 class MoveSpace {
   #input;

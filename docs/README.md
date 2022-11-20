@@ -17,78 +17,93 @@
 
 ## 📋 미션 로직 설계
 
-다리길이 입력
+- MVC 패턴 적용
 
-- InputView.readBridgeSize 사용자에게 다리의 길이를 입력받음.
-- 예외처리
-- Controller에게 다리 길이 를 전달.
-- Controller 는 다리 길이 정보를 BridgeGame에 전달.
-- BridgeGame은 다리 길이 정보 저장.
-- BridgeMaker, BridgeRandomNumberGenerate 사용해서 다리 만들기.
-- 만들어진 다리 정보 저장.
+#### MVC 패턴 로직 이미지화
 
-움직임 입력
+<img src="./MVC 설계.jpg">
 
-- InputView.readMoving 사용자에게 움직임을 입력받음.
-- 예외처리
-- Controller 에게 움직일 방향 전달.
-- Controller 는 움직일 방향을 BridgeGame에 전달
-- move 메소드가 이동할 정보를 Controller에게 전달
-- Controller는 이동정보를 OutView에게 전달
-- OutView는 맞는 정보에 맞게 출력
-- 이후 move 메소드는 게임 진행상황을 Controller 에게 전달
+#### Controller
 
-함정 X
+- Controller.js
+- Validator
+  - BridgeSize.js
+  - GameCommand.js
+  - MoveSpace.js
 
-- 다리 끝까지 혹은 함정을 밟을때까지 InputView.readMoving 과정을 반복
+#### Model
 
-함정 O
+- BridgeGame.js
+- CheckModel.js
+- ProductionModel.js
 
-- Controller는 BridgeGame에 함정 밟은 정보를 알려줌.
-- Controller는 readGameCommand를 통해 재시작 응답을 받음.
-- 응답 예외처리
-- 응답정보를 Controller 에게 알려줌.
-- Controller 는 응답정보를 BridgeGame에게 전달
+#### View
 
-재시작
-
-- BridgeGame은 현재까지 온 스테이지 번호를 다시 초기화, 기존 다리 정보는 유지됨.
-- BridgeGame 은 재시작 횟수 를 저장.
-- Controller 를 통해 inputView.readMoving 을 실현
-
-종료
-
-- BridgeGame은 현재까지의 정보를 Controller에게 전달
-- Controller는 OutputView.printResult 에게 정보 전달<br>
+- InputView.js
+- OutputView.js <br>
   <br>
 
 ## 📲 기능 목록
 
 <br>
 
-### 1️⃣ 다리 건너기 게임 관리
+#### 1️⃣ 다리 건너기 게임 관리
 
-- [x] 사용자가 칸을 이동
-- [x] 사용자가 게임을 다시 시도
-- [x] `BridgeGame` 클래스에서 `InputView`, `OutputView` 를 사용하지 않는다. <br>
+- [x] 게임 시작
+- [x] View에게 다리 길이 입력 명령
+- [x] 입력받은 다리 길이 예외처리
+- [x] Model에게 다리 만들기 명령
+- [x] View에게 이동 방향 입력 명령
+- [x] 입력받은 이동 방향 예외처리
+- [x] Model에게 이동 명령
+- [x] View에게 다리 건너기 결과 출력 명령
+- [x] View에게 게임 재시작 응답 입력 명령
+- [x] 입력받은 응답 예외처리
+- [x] Model에게 응답 처리 명령
+- [x] 게임 끝내기 명령
+- [x] 만들어진 다리 정보를 저장한다
+- [x] 이동 과정을 저장한다
+- [x] 시도 횟수를 저장한다 <br>
       <br>
 
-### 2️⃣ 다리 생성
+## 비즈니스 로직 구현
+
+#### 2️⃣ 생성 기능
 
 - [x] 입력된 길이만큼 다리를 생성
 - [x] 다리에 대한 정보 0과 1을 랜덤으로 생성
-- [x] 생성된 정보로 다리에 함정 배치 <br>
+- [x] 생성된 정보로 다리에 함정 배치
+- [x] 입력된 과정에 따른 다리 건너기 결과 생성 <br>
       <br>
 
-### 3️⃣ 입력 기능
+#### 3️⃣ 이동 기능
+
+- [x] 이동 위치에 따른 정보 생성
+- [x] 함정을 밟았는지 확인
+- [x] 게임이 끝났는지 확인 <br>
+      <br>
+
+#### 4️⃣ 함정 표시 기능
+
+- [x] 함정을 밟았을 경우 다리 건너기 결과에 함정 표시 <br>
+      <br>
+
+#### 5️⃣ 게임 재시작 응답 처리 기능
+
+- [x] 재시작 응답시 게임 재시작
+- [x] 종료 응답시 게임 종료 <br>
+      <br>
+
+## UI 로직 구현
+
+#### 6️⃣ 입력 기능
 
 - [x] 다리의 길이를 입력받는다.
 - [x] 사용자가 이동할 칸을 입력받는다.
-- [x] 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-- [x] `InputView` 에서만 `MissionUtils`의 `Console.readLine()` 을 이용해 사용자의 입력을 받을 수 있다. <br>
+- [x] 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다. <br>
       <br>
 
-### 4️⃣ 출력 기능
+#### 7️⃣ 출력 기능
 
 - [x] 게임 시작 문구 출력
 - [x] 다리의 길이 입력 안내 문구 출력
@@ -99,27 +114,20 @@
 - [x] 총 시도한 횟수를 출력 <br>
       <br>
 
-### 5️⃣ 게임 정보 저장 기능
-
-- [x] 설정한 다리 길이를 저장한다.
-- [x] 만들어진 다리 정보를 저장한다.
-- [x] 시도 횟수를 저장한다. <br>
-      <br>
-
 ## ⛔ 에러 메시지 기능<br>
 
 - 예외 상황 시 에러 문구를 출력해야 한다. 단, 에러 문구는 "[ERROR]"로 시작해야 한다.<br>
   <br>
 
-### ⚠️ 다리의 길이 입력 상황
+#### ⚠️ 다리의 길이 입력 상황
 
 - [x] 3 이상 20 이하의 숫자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다. <br>
 
-### ⚠️ 이동할 칸 입력 상황
+#### ⚠️ 이동할 칸 입력 상황
 
 - [x] U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다. <br>
 
-### ⚠️ 재시작 여부 입력 상황
+#### ⚠️ 재시작 여부 입력 상황
 
 - [ ] R(재시작)과 Q(종료) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다. <br>
       <br>
