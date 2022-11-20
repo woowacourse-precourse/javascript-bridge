@@ -22,7 +22,7 @@ const directionInput = jest.fn(direction => Validation.STEP(direction))
 const commandInput = jest.fn(command => Validation.RETRY(command))
 
 
-describe.only("단위 유효성 검사", () => {
+describe("단위 유효성 검사", () => {
   test("다리 길이값을 잘못 입력하면 throw를 통해 예외처리한다.", () => {
     const wrongInput = [1,2,'f',21];
     InputCheck.SIZE(wrongInput);
