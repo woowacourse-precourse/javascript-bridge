@@ -9,7 +9,6 @@ const InputView = {
   readBridgeSize() {
     let length;
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요.',(length_answer) => {
-        console.log(length_answer);
         length = Number(length_answer);
       }
     );

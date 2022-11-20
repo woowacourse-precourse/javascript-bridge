@@ -9,11 +9,9 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const up_and_down = [];
-    console.log('asbdc');
     let num;
     for (let i = 0; i < size; i++) {
       num = Number(generateRandomNumber());
-      console.log(num);
       if (num === 0) {
         up_and_down.push('D');
       } else {
