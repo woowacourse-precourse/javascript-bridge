@@ -6,18 +6,18 @@ const OutputView = {
     Console.print(MESSAGE.START);
   },
 
-  printMap(bridge) {
-    const upperMap = bridge.getMap(MOVING.UP);
-    const lowerMap = bridge.getMap(MOVING.DOWN);
+  printMap(bridgeGame) {
+    const upperMap = bridgeGame.getMap(MOVING.UP);
+    const lowerMap = bridgeGame.getMap(MOVING.DOWN);
     Console.print(upperMap);
     Console.print(lowerMap);
   },
 
-  printResult(bridge) {
-    const result = bridge.getResult();
-    const trialCount = bridge.getTrialCount();
+  printResult(bridgeGame) {
+    const result = bridgeGame.getResult();
+    const trialCount = bridgeGame.getTrialCount();
     Console.print(MESSAGE.END);
-    this.printMap(bridge);
+    this.printMap(bridgeGame);
     Console.print(MESSAGE.RESULT(result));
     Console.print(MESSAGE.TRIAL_COUNT(trialCount));
     Console.close();
