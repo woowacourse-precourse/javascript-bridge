@@ -6,17 +6,27 @@ const BridgeMaker = require("../src/BridgeMaker.js");
 
 const mockInputView = () => {
   const mock = InputView;
-  jest.spyOn(mock, "readBridgeSize").mockImplementation((callback) => callback());
+  jest
+    .spyOn(mock, "readBridgeSize")
+    .mockImplementation((callback) => callback());
   jest.spyOn(mock, "readMoving").mockImplementation((callback) => callback());
-  jest.spyOn(mock, "readGameCommand").mockImplementation((callback) => callback());
+  jest
+    .spyOn(mock, "readGameCommand")
+    .mockImplementation((callback) => callback());
   return mock;
 };
 
 const mockOutView = () => {
   const mock = OutputView;
-  jest.spyOn(mock, "printStart").mockImplementation(() => console.log("다리 건너기 게임을 시작합니다."));
-  jest.spyOn(mock, "printResult").mockImplementation(() => console.log("다리게임 결과"));
-  jest.spyOn(mock, "printMap").mockImplementation(() => console.log("다리게임"));
+  jest
+    .spyOn(mock, "printStart")
+    .mockImplementation(() => console.log("다리 건너기 게임을 시작합니다."));
+  jest
+    .spyOn(mock, "printResult")
+    .mockImplementation(() => console.log("다리게임 결과"));
+  jest
+    .spyOn(mock, "printMap")
+    .mockImplementation(() => console.log("다리게임"));
   return mock;
 };
 
@@ -25,11 +35,14 @@ const mockBridgeGameModel = () => {
   jest.spyOn(mock, "try").mockImplementation((bridge) => {
     return bridge;
   });
-  jest.spyOn(mock, "retry").mockImplementation((bridge) => {
-    return bridge;
+  jest.spyOn(mock, "attempt").mockImplementation((attempt) => {
+    return attempt;
   });
   jest.spyOn(mock, "jump").mockImplementation((bridge) => {
     return bridge;
+  });
+  jest.spyOn(mock, "result").mockImplementation((result) => {
+    return result;
   });
   jest.spyOn(mock, "checkBridge").mockImplementation((bridge) => {
     return bridge;
@@ -37,11 +50,17 @@ const mockBridgeGameModel = () => {
   jest.spyOn(mock, "checkUser").mockImplementation((bridge) => {
     return bridge;
   });
-  jest.spyOn(mock, "isEndGame").mockImplementation((bridge) => {
-    return bridge;
+  jest.spyOn(mock, "checkRetry").mockImplementation((retry) => {
+    return retry;
+  });
+  jest.spyOn(mock, "isFail").mockImplementation((attemp) => {
+    return attemp;
   });
   jest.spyOn(mock, "isSuccess").mockImplementation((bridge) => {
     return bridge;
+  });
+  jest.spyOn(mock, "isRetry").mockImplementation((retry) => {
+    return retry;
   });
   return mock;
 };
@@ -62,7 +81,11 @@ describe("BridgeGameService 클래스 테스트", () => {
   });
 
   test("startGame 로직 테스트", () => {
-    const bridgeGameService = new BridgeGameService(inputView, outputView, bridgeGameModel);
+    const bridgeGameService = new BridgeGameService(
+      inputView,
+      outputView,
+      bridgeGameModel
+    );
     const task = () => console.log("task");
 
     mockMakeBridge();
@@ -72,5 +95,22 @@ describe("BridgeGameService 클래스 테스트", () => {
     expect(outputView.printStart).toHaveBeenCalledTimes(1);
     expect(bridgeGameModel.checkBridge).toHaveBeenCalledTimes(1);
     expect(bridgeGameModel.try).toHaveBeenCalledTimes(1);
+  });
+
+  test("retryGame 로직 테스트", () => {
+    const bridgeGameService = new BridgeGameService(
+      inputView,
+      outputView,
+      bridgeGameModel
+    );
+    const task = jest
+      .fn()
+      .mockImplementation(() => console.log("processRetryTask"));
+
+    bridgeGameService.retryGame(task);
+
+    expect(bridgeGameModel.checkRetry).toHaveBeenCalledTimes(1);
+    expect(bridgeGameModel.attempt).toHaveBeenCalledTimes(1);
+    expect(task).toHaveBeenCalledTimes(1);
   });
 });
