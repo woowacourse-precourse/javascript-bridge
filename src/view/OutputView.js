@@ -5,7 +5,6 @@ const { GAME } = require('../utils/constant');
  */
 const OutputView = {
   time: 0,
-  tryCount: 1,
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -43,7 +42,6 @@ const OutputView = {
 
   initialization() {
     this.time = 0;
-    this.tryCount += 1;
   },
 
   /**
@@ -51,13 +49,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(isDone, map) {
+  printResult(isDone, tryCount, map) {
     const { topSide, downSide } = map;
     const result = isDone ? '성공' : '실패';
 
     this.showMap(topSide, downSide);
     Console.print(GAME.GAME_SUCCESS + result);
-    Console.print(GAME.GAME_TRY_COUNT + this.tryCount);
+    Console.print(GAME.GAME_TRY_COUNT + tryCount);
     Console.close();
   },
 };

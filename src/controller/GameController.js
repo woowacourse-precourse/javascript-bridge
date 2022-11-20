@@ -12,6 +12,7 @@ const { GAME } = require('../utils/constant');
 class GameController {
   constructor() {
     this.game = new BridgeGame();
+    this.tryCount = 1;
   }
 
   start() {
@@ -55,14 +56,15 @@ class GameController {
   }
 
   retry() {
+    this.tryCount += 1;
     this.game.retry();
     OutputView.initialization();
     this.askMoving();
   }
 
-  end(isSuccess) {
+  end(idDone) {
     Console.print(GAME.END);
-    OutputView.printResult(isSuccess, this.game.getMap());
+    OutputView.printResult(idDone, this.tryCount, this.game.getMap());
   }
 }
 
