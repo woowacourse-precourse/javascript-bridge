@@ -22,13 +22,13 @@ const InputView = {
 
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.bridge, (input) => {
-      if (bridgeLengthValidate(input)) return this.readBridgeSize();
+      if (!bridgeLengthValidate(input)) return this.readBridgeSize();
       const bridgeSize = BridgeMaker.makeBridge(
         input,
         BridgeRandomNumberGenerator.generate
       );
       const bridgeGame = new BridgeGame(
-        bridge,
+        bridgeSize,
         MOVING.initialLists,
         MOVING.count
       );
@@ -41,7 +41,7 @@ const InputView = {
    */
   readMoving(bridgeGame, bridgeSize) {
     Console.readLine(INPUT_MESSAGE.moving, (input) => {
-      if (userMoveInput(input)) return this.readMoving();
+      if (!userMoveInput(input)) return this.readMoving(bridgeGame, bridgeSize);
       const movingList = bridgeGame.move(input);
       OutputView.printMap(movingList);
       if (determineGameRestart(movingList))
@@ -57,7 +57,7 @@ const InputView = {
    */
   readGameCommand(bridgeGame, bridgeSize) {
     Console.readLine(INPUT_MESSAGE.restart, (input) => {
-      if (gameRestartInput(input)) this.readGameCommand();
+      if (!gameRestartInput(input)) this.readGameCommand();
 
       if (input === COMMAND.restart) {
         bridgeGame.retry();

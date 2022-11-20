@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { Console, Random } = MissionUtils;
+const { Console } = MissionUtils;
 const { INPUT_MESSAGE } = require("./Constant.js");
 const inputView = require("./InputView");
 class App {
@@ -9,4 +9,6 @@ class App {
   }
 }
 
+const app = new App();
+app.play();
 module.exports = App;

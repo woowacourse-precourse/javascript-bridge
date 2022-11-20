@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE } = require("../Constant");
+const { ERROR_MESSAGE, BRIDGE } = require("../Constant");
 
 const bridgeLengthValidate = (input) => {
   if (input < 3 || input > 20) throw new Error(ERROR_MESSAGE.range);
@@ -6,12 +6,12 @@ const bridgeLengthValidate = (input) => {
   return true;
 };
 const userMoveInput = (input) => {
-  if (input !== "U" || input !== "D") throw new Error(ERROR_MESSAGE.moving);
-  return true;
+  if (input === "U" || input === "D") return true;
+  throw new Error(ERROR_MESSAGE.moving);
 };
 const gameRestartInput = (input) => {
-  if (input !== "R" || input !== "Q") throw new Error(ERROR_MESSAGE.restart);
-  return true;
+  if (input === "R" || input === "Q") return true;
+  throw new Error(ERROR_MESSAGE.restart);
 };
 const determineGameRestart = (moveLists) => {
   const [upList, downList] = moveLists;
