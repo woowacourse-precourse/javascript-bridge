@@ -59,4 +59,14 @@ describe('플레이어 입력값의 유효성 검사', () => {
       expectLogContains(log, [MESSAGE.ENTRY]);
     });
   });
+
+  test('다리 길이 - 예외처리', () => {
+    mockQuestions(['2', '31', '0']);
+    const logSpy = getLogSpy();
+    const game = new BridgeGame();
+
+    game.getBridgeSize().then(() => {
+      expectLogContains(getOutput(logSpy), [ERROR.INPUT_BRIDGE_SIZE]);
+    });
+  });
 });
