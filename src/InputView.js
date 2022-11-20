@@ -4,8 +4,11 @@
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
+   * @param {callback} function 다리의 길이를 입력받은 후 실행될 함수
    */
-  readBridgeSize() {},
+  readBridgeSize(callback) {
+    MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", callback);
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
