@@ -58,7 +58,7 @@ describe('Game 진행 테스트', () => {
     game.createBridge(new Bridge(3, mockGenerator));
     inputArray.forEach((input) => game.move(input));
 
-    expect(game.getResultMap()).toStrictEqual(resultArray);
+    expect(game.result).toStrictEqual(resultArray);
   });
 
   test('이동시 입력 값이 U또는 D가 아닐 시 예외 출력', () => {

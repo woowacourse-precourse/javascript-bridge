@@ -39,38 +39,49 @@
 
 - Bridge: 3이상 20이하의 number를 input으로 받아 랜덤으로 생성된 bridge를 관리
 
-  - #validate
+  - validate
   - get length
   - getElement
   - setBridge
 
 - Selected: 사용자가 입력한 "U"또는 "D"값을 관리한다.
 
-  - #validate
+  - validate
   - get level
-  - getElement
   - addElement
+  - getElement
   - reset
 
-- Try: 사용자의 시도 횟수를 관리한다.
+- TryCnt: 사용자의 시도 횟수를 관리한다.
   - get cnt
   - add
   - reset
 
 ## Controller
 
-- BridgeGame
+- GameController: game을 진행하는 전반적인 과정에 대한 책임
 
-  - #validate
+  - start
+  - createBridge
+  - setNextTurn
+  - setRetryOrQuit
+
+- BridgeGame: game을 구성하는 요소에 대한 책임
+
+  - validate
+  - get totalLevel
   - get levelCnt
-  - get tryCnt
-  - setInitialResultMap
-  - resetSelectedAndAddTryCnt
+  - get tryNumber
+  - createBridge
+  - isRemoving
+  - isEnd
   - isWin
   - getResultMap
-  - setResultMap
-  - setResultElement
-  - setBoolean
+  - #setInitialResultMap
+  - #isCorrect
+  - #setResultMap
+  - #setResultElement
+  - #setBoolean
 
   - move
   - retry

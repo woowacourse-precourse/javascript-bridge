@@ -1,19 +1,23 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { MESSAGE } = require('./Utils/Constant');
+const GameController = require('./Controller/GameController');
 const BridgeGame = require('./BridgeGame');
-const InputView = require('./Viewer/InputView');
 const Selected = require('./Model/Selected');
 const TryCnt = require('./Model/TryCnt');
-const { MESSAGE } = require('./Utils/Constant');
 
 class App {
+  #gameController;
+
   constructor() {
-    this.game = new BridgeGame(new Selected(), new TryCnt());
+    this.#gameController = new GameController(
+      new BridgeGame(new Selected(), new TryCnt()),
+    );
   }
 
   play() {
     Console.print(MESSAGE.GAME_START);
     try {
-      InputView.readBridgeSize(this.game);
+      this.#gameController.start();
     } catch (error) {
       Console.print(error);
       Console.close();

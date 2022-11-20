@@ -30,6 +30,11 @@ class BridgeGame {
     return this.#tryCnt.cnt;
   }
 
+  get result() {
+    this.#setResultMap();
+    return this.#result;
+  }
+
   createBridge(bridge) {
     this.#bridge = bridge;
   }
@@ -38,16 +43,15 @@ class BridgeGame {
     return this.isWin() && this.totalLevel !== this.levelCnt;
   }
 
+  isEnd() {
+    return this.isWin() && this.totalLevel === this.levelCnt;
+  }
+
   isWin() {
     for (let level = 0; level < this.levelCnt; level += 1) {
       if (!this.#isCorrect(level)) return false;
     }
     return true;
-  }
-
-  getResultMap() {
-    this.#setResultMap();
-    return this.#result;
   }
 
   #setInitialResultMap() {

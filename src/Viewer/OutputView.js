@@ -11,7 +11,7 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(game) {
-    const resultMap = game.getResultMap();
+    const resultMap = game.result;
     Console.print(this.getPrintLine(0, resultMap));
     Console.print(this.getPrintLine(1, resultMap));
   },
@@ -41,12 +41,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(input, game) {
+  printResult(game) {
     Console.print(OUTPUT_MESSAGE.GAME_RESULT);
     this.printMap(game);
     Console.print(OUTPUT_MESSAGE.GAME_IS_SUCCESS(game.isWin()));
     Console.print(OUTPUT_MESSAGE.GAME_TRY_CNT(game.tryNumber));
-    if (input === 'Q') Console.close();
   },
 };
 
