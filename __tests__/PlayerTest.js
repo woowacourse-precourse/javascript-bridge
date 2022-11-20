@@ -50,6 +50,11 @@ describe("플레이어 상태 테스트", () => {
     expect(Player.getMovingArr()).toStrictEqual(["U", "D", "U"]);
   });
 
+  test("플레이어가 선택한 다리 정답 상태 반환 테스트", () => {
+    Player.state = [[" O "], ["  "]];
+    expect(Player.getState()).toStrictEqual([[" O "], ["  "]]);
+  });
+
   test("게임 성공 여부 업데이트 테스트", () => {
     Player.playerAns = [true, true, true];
     Player.size = 3;
