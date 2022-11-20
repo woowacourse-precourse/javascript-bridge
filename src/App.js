@@ -39,7 +39,7 @@ class App {
       this.bridgeGame = new BridgeGame(parseInt(bridgeLengthInput));
       InputView.readMoving(this.roundInputBranch);
     } catch(e) {
-      OutputView.printString('\n' + e.message);
+      OutputView.printString(e.message);
       InputView.readBridgeSize(this.roundStartBranch);
     }
   }
@@ -56,7 +56,7 @@ class App {
       this.bridgeGame.move(directionInput);
       this.roundResultBranch();
     } catch(e) {
-      OutputView.printString('\n' + e.message);
+      OutputView.printString(e.message);
       InputView.readMoving(this.roundInputBranch);
     }
   }
@@ -90,7 +90,7 @@ class App {
       InputValidate.validateRetry(retryInput);
       this.terminateBranch(retryInput);
     } catch(e) {
-      OutputView.printString('\n' + e.message);
+      OutputView.printString(e.message);
       InputView.readGameCommand(this.roundRetryBranch);
     }
   }
