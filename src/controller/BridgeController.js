@@ -1,17 +1,14 @@
 const BridgeGame = require('../model/BridgeGame');
 const OutputView = require('../OutputView');
-const Validate = require('../utils/Validate');
 const BridgeMaker = require('../BridgeMaker.js');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator.js');
 
 const BridgeController = {
   bridgeGame: new BridgeGame(),
 
-  controlBridge(size) {
+  controlValidate(validate, input) {
     try {
-      Validate.validateSizeRange(size);
-      const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-      this.bridgeGame.updateBridge(bridge);
+      validate(input);
       return true;
     } catch (error) {
       OutputView.printErrorMessage(error);
@@ -19,15 +16,16 @@ const BridgeController = {
     }
   },
 
-  controlMovingFromUser(movePosition) {
-    try {
-      Validate.validateMovePosition(movePosition);
-      this.bridgeGame.addBridgeFromUser(movePosition);
-      return this.controlDrawByMovement();
-    } catch (error) {
-      OutputView.printErrorMessage(error);
-      return false;
-    }
+  controlBridge(size) {
+    const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.bridgeGame.updateBridge(bridge);
+    OutputView.printLineBreak();
+    return true;
+  },
+
+  controlMovemonetFromUser(movePosition) {
+    this.bridgeGame.addBridgeFromUser(movePosition);
+    return this.controlDrawByMovement();
   },
 
   getDrawBridge() {
@@ -55,16 +53,6 @@ const BridgeController = {
       const attemps = this.bridgeGame.getNumberOfAttempts();
       OutputView.printResult(drawBridge, '성공', attemps);
       return true;
-    }
-  },
-
-  controlGameCommand(input) {
-    try {
-      Validate.validateRetryOfQuit(input);
-      return true;
-    } catch (error) {
-      OutputView.printErrorMessage(error);
-      return false;
     }
   },
 
