@@ -36,7 +36,7 @@ describe("플레이어 상태 테스트", () => {
   });
 
   test("다리 길이 업데이트 테스트", () => {
-    Player.getSize(3);
+    Player.setSize(3);
     expect(Player.size).toBe(3);
   });
 

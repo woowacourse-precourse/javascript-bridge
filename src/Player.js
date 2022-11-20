@@ -57,7 +57,7 @@ const Player = {
     }
   },
 
-  getSize(size) {
+  setSize(size) {
     this.size = size;
   },
 
