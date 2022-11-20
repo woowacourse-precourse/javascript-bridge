@@ -6,6 +6,10 @@ const OutputView = {
   printStart() {
     Console.print("다리 건너기 게임을 시작합니다.\n");
   },
+
+  printBridgeSizeError() {
+    Console.print("\n[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+  },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
