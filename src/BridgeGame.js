@@ -29,14 +29,24 @@ class BridgeGame {
   retry() {}
 
   /**
-   * 게임의 종료 여부를 판단하는 메서드
-   * @returns {boolean} 게임이 종료되면 true, 아니면 false를 반환한다.
+   * 사용자가 이동에 실패하는 경우 게임의 재시작 여부를 판단하는 메서드
+   * @returns {boolean} 게임이 재시작되어야 하면 true, 아니면 false를 반환한다.
    */
-  isGameOver() {
+  isRetry() {
+    const { isCorrect } = this.#moveHistory[this.#moveHistory.length - 1];
+
+    return isCorrect === false;
+  }
+
+  /**
+   * 게임의 성공 여부를 판단하는 메서드
+   * @returns {boolean} 게임이 성공하면 true, 실패하면 false를 반환한다.
+   */
+  isClear() {
     const { isCorrect } = this.#moveHistory[this.#moveHistory.length - 1];
 
     return (
-      isCorrect === false || this.#bridge.length === this.#moveHistory.length
+      this.#bridge.length === this.#moveHistory.length && isCorrect === true
     );
   }
 
