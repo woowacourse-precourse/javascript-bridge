@@ -1,11 +1,7 @@
 const Validation = {
   isPositiveInteger(size) {
-    // FIXME: fix if condition
-    if (
-      !(Number.isInteger(size) && size > 0 && size % parseInt(size, 10) === 0)
-    ) {
-      return false;
-    }
+    if (!(Number.isInteger(size) && size > 0)) return false;
+
     return true;
   },
 
