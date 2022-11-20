@@ -14,6 +14,7 @@ const InputView = {
 
   start() {
     this.count = 0;
+    this.roundCount = 1;
     this.bridgeGame = new BridgeGame();
     this.readBridgeSize();
   },
@@ -90,6 +91,7 @@ const InputView = {
   isGameDone() {
     if (this.count === this.answerArr.length) {
       OutputView.printResult();
+      OutputView.printWinResult(this.count, this.roundCount, this.answerArr);
     }
     if (this.count !== this.answerArr.length) {
       this.readMoving(this.answerArr);
@@ -124,6 +126,7 @@ const InputView = {
       return this.finishGame();
     }
     if (finishLetter === 'R') {
+      this.roundCount++;
       this.resetOutputBridge();
       return this.readMoving(this.answerArr);
     }
@@ -131,6 +134,7 @@ const InputView = {
 
   finishGame() {
     OutputView.printResult();
+    OutputView.printLoseResult(this.count, this.roundCount, this.answerArr);
   },
 
   resetOutputBridge() {
