@@ -4,14 +4,17 @@ const OutputView = require('./OutputView');
 const Bridge = require('./model/Bridge');
 const BridgeGame = require('./BridgeGame');
 const Map = require('./model/Map');
+const Result = require('./model/Result');
 
 class GameController {
   #bridge;
   #bridgeGame;
   #map;
+  #result;
 
   constructor() {
     this.#map = new Map();
+    this.#result = new Result();
   }
 
   load() {
@@ -43,14 +46,27 @@ class GameController {
   }
 
   playGame(moving) {
-    const moveSuccess = this.#bridgeGame.move(moving);
+    const { moveSuccess, isEndOfBridge } = this.#bridgeGame.move(moving);
     OutputView.printMap(this.#map.updateMap(moving, moveSuccess));
 
     if (moveSuccess) {
-      InputView.readMoving(this.validateMoving.bind(this));
+      this.handleMoveSuccess(isEndOfBridge);
     } else {
-      InputView.readGameCommand(this.validateGameCommand.bind(this));
+      this.handleMoveFail();
     }
+  }
+
+  handleMoveSuccess(isEndOfBridge) {
+    if (isEndOfBridge) {
+      OutputView.printResult(this.#map.getMap(), this.#result.updateResult(true));
+      InputView.closeView();
+    } else {
+      InputView.readMoving(this.validateMoving.bind(this));
+    }
+  }
+
+  handleMoveFail() {
+    InputView.readGameCommand(this.validateGameCommand.bind(this));
   }
 
   validateGameCommand(gameCommand) {
@@ -67,11 +83,13 @@ class GameController {
 
   handleGameCommand(command) {
     if (command === COMMAND.restart) {
+      this.#result.updateTryCount();
       this.#bridgeGame.retry();
       this.#map.resetMap();
       InputView.readMoving(this.validateMoving.bind(this));
     } else if (command === COMMAND.quit) {
-      // TODO 최종 게임 결과 출력 기능
+      OutputView.printResult(this.#map.getMap(), this.#result.updateResult(false));
+      InputView.closeView();
     }
   }
 }

@@ -36,6 +36,10 @@ class Bridge {
   isAccessiblePosition(positionNumber, moving) {
     return this.#bridgeStructure[positionNumber] === moving;
   }
+
+  isEndOfBridge(positionNumber) {
+    return this.#size === positionNumber;
+  }
 }
 
 module.exports = Bridge;

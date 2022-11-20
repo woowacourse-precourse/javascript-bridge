@@ -5,6 +5,10 @@ class Map {
     this.#map = [];
   }
 
+  getMap() {
+    return this.#map;
+  }
+
   updateMap(moving, canMove) {
     this.#map.push({ moving, canMove });
     return this.#map;
