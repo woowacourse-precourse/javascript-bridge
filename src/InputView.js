@@ -1,5 +1,5 @@
 const { readLine } = require('./utils/util');
-const { BRIDGE_SIZE } = require('./constant/constant');
+const { BRIDGE_SIZE, MOVE } = require('./constant/constant');
 const MESSAGE = require('./constant/message');
 const Validate = require('./utils/validate');
 
@@ -27,6 +27,7 @@ const InputView = {
     let moveInput;
     readLine(MESSAGE.INPUT.BRIDGE_SIZE, (input) => {
       moveInput = input;
+      Validate.notAvailableMove(input, Object.values(MOVE));
     });
     return moveInput;
   },
