@@ -10,16 +10,13 @@ const BridgeMaker = {
    * @param {BridgeGame} game 현재 진행 중인 게임(인스턴스)
    */
   makeBridge(size, generateRandomNumber, readMoving, game) {
-    // 생성된 다리
-    let bridge = [];
+    let bridge = []; // 생성된 다리
     while (bridge.length < size) {
       +generateRandomNumber() ? bridge.push("U") : bridge.push("D");
     }
     try {
       readMoving(game, bridge);
     } catch {}
-    console.log("사이즈", size);
-    console.log("만들어진 다리", bridge);
     return bridge;
   },
 };
