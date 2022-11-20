@@ -5,13 +5,12 @@ const { makeBridge } = require("./BridgeMaker.js");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #playerLocation
   #bridgeShape
-  #playerMoving
+  #playerMovingRecord
 
   constructor(size){
     this.#bridgeShape = makeBridge(size, generate);
-    this.#playerLocation = -1;
+    this.#playerMovingRecord = "";
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -19,10 +18,13 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(playerMoving) {
-    if(this.#bridgeShape.length-1 > this.#playerLocation){
-      this.#playerLocation++;
-      this.#playerMoving = playerMoving;
+    if(this.#bridgeShape.length > this.playerLoction()){
+      this.#playerMovingRecord = this.#playerMovingRecord + playerMoving;
     }
+  }
+
+  playerLoction(){
+    return playerMovingRecord.length;
   }
 
   /**
@@ -31,19 +33,20 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#playerLocation = -1;
+    this.#playerMovingRecord = "";
   }
 
   isFinish() {
-    if (this.#bridgeShape.length-1 <= this.#playerLocation)
+    if (this.#bridgeShape.length <= this.playerLoction())
       return true;
     
     return false;
   }
 
   isSuccess() {
-    const bridgeFootboard = this.#bridgeShape[this.#playerLocation];
-    const isSuccess = (bridgeFootboard == this.#playerMoving);
+    const bridgeFootboard = this.#bridgeShape[this.playerLoction()-1];
+    const playerMoving = this.#playerMovingRecord[this.#playerMovingRecord-1];
+    const isSuccess = (bridgeFootboard == playerMoving);
     
     return isSuccess;
   }
