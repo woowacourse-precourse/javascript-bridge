@@ -9,6 +9,14 @@ const Misc = class {
       method(callback);
     }
   }
+
+  static pipe(initialValue) {
+    return function (...funcs) {
+      return funcs.reduce((res, func) => {
+        return res ? func(res) : func();
+      }, initialValue);
+    };
+  }
 };
 
 module.exports = Misc;
