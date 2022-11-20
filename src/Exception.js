@@ -1,11 +1,11 @@
 class CheckBridgeSizeException{
     #size
     constructor(size){
-        this.validate(size);
+        this.checkInputBridgeSize(size);
         this.#size = size;
     }
 
-    validate(size){
+    checkInputBridgeSize(size){
         this.checkBridgeSize(size);
         this.checkBridgeNum(size);
     }
@@ -27,10 +27,6 @@ class CheckUserMove{
     #SelectUpOrDown
     constructor(SelectUpOrDown){
         this.#SelectUpOrDown = SelectUpOrDown;
-        this.validate(SelectUpOrDown);
-    }
-
-    validate(SelectUpOrDown){
         this.CheckInputString(SelectUpOrDown);
     }
 
@@ -45,11 +41,7 @@ class CheckWhetherGameRunning{
     #value
     constructor(value){
         this.#value = value;
-        validate(value);
-    }
-
-    validate(value){
-        this.CheckInputValue(value)
+        this.CheckInputValue(value);
     }
     CheckInputValue(value){
         if(value !== "Q" && value !== "R"){
