@@ -10,7 +10,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     for (let i = 0; i < size; i++) {
-      const answer = generateRandomNumber();
+      const answer = generateRandomNumber.generate();
       const crossable = this.whereCrossable(answer);
       bridge.push(crossable);
     }
