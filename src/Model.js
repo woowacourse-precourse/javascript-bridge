@@ -35,6 +35,10 @@ class Model {
     return this.#bridgeSize;
   }
 
+  getComputerBridgeArr() {
+    return this.#computerBridgeArr;
+  }
+
   getAccumulatedOX() {
     const upResult = `[${this.#userUpBridgeArr.join('|')}]`;
     const downResult = `[${this.#userDownBridgeArr.join('|')}]`;
