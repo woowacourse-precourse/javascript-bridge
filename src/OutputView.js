@@ -19,10 +19,10 @@ const OutputView = {
   printResult() {},
 
   printGameSuccess(gameSuccess) {
-    if (gameSuccess) {
-      MissionUtils.Console.print(`게임 성공 여부: ${gameSuccess}`);
-    }
-  }
+    const result = gameSuccess ? '성공' : '실패';
+    MissionUtils.Console.print(`게임 성공 여부: ${result}`);
+  },
+
 };
 
 module.exports = OutputView;
