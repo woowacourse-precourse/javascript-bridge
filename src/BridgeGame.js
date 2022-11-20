@@ -63,8 +63,11 @@ class BridgeGame {
     if (this.isDie(selectBridge)) return this.retry();
     // 다 건넌 경우 판별
     if (this.isSame(selectBridge.length, this.getCorrectBridge.length))
-      return this.isGameClear();
-    return 0;
+      return OutputView.printResult(
+        selectBridge,
+        this.isDie(selectBridge),
+        this.getRetryCount
+      );
   }
 
   retry() {
