@@ -9,6 +9,10 @@ class Utils {
   static print(message) {
     Console.print(message);
   }
+
+  static printAllInList(list) {
+    return list.reduce((allMoves, move) => allMoves + `, ${move}`, '').slice(2);
+  }
 }
 
 module.exports = Utils;

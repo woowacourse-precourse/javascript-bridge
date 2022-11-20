@@ -1,3 +1,5 @@
+const { printAllInList } = require('../utils/util');
+
 const HEADER = '[ERROR] ';
 
 const ERROR = {
@@ -5,9 +7,7 @@ const ERROR = {
     `${HEADER}다리 길이는 ${minimum}부터 ${maximum} 사이의 숫자여야 합니다.`,
   NOT_NUMBER: `${HEADER} 숫자를 입력해야 합니다.`,
   NOT_AVAILABLE_MOVE: (availableMoves) =>
-    `${HEADER} 이동하기 위해서는 ${availableMoves
-      .reduce((allMoves, move) => allMoves + `, ${move}`, '')
-      .slice(2)}만 입력 가능합니다`,
+    `${HEADER} 이동하기 위해서는 ${printAllInList(availableMoves)}만 입력 가능합니다`,
 };
 
 module.exports = ERROR;
