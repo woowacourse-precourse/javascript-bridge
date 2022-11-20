@@ -19,10 +19,10 @@ class BridgeGame {
       BridgeRandomNumberGenerator.generate()
     );
 
-    this.setBridge(path);
+    this.makeBridgeWithPath(path);
   }
 
-  setBridge(path) {
+  makeBridgeWithPath(path) {
     this.#bridge = new Bridge(path);
   }
 
