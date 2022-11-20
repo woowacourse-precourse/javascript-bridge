@@ -32,8 +32,7 @@ class Controller {
       this.#bridge = BridgeMaker.makeBridge(length, BridgeMachine.generate);
       this.getMovingDirection();
     } catch (error) {
-      Console.print(error);
-      this.getBridgeSize();
+      this.bridgeSizeError(error);
     }
   }
 
@@ -47,8 +46,7 @@ class Controller {
       this.checkCurrentStatus(square);
       this.checkGameFinished() ? this.endGame() : this.getMovingDirection();
     } catch (error) {
-      Console.print(error);
-      this.getMovingDirection();
+      this.bridgeMovingError(error);
     }
   }
 
@@ -76,7 +74,7 @@ class Controller {
   endGame() {
     OutputView.resultMessage();
     OutputView.printMap(this.#currentBridge);
-    OutputView.printResult(this.#try, false);
+    OutputView.printResult(this.#try, true);
     Console.close;
   }
 
@@ -89,7 +87,7 @@ class Controller {
       this.validation.isRestartOrQuit(input);
       this.RetryOrQuitGame(input);
     } catch (error) {
-      Console.print(error);
+      this.bridgeCommandError(error);
     }
   }
 
@@ -112,6 +110,21 @@ class Controller {
       this.quitGame();
     }
     this.#try += 1;
+  }
+
+  bridgeSizeError(error) {
+    OutputView.printError(error);
+    this.getBridgeSize();
+  }
+
+  bridgeMovingError(error) {
+    OutputView.printError(error);
+    this.getMovingDirection();
+  }
+
+  bridgeCommandError(error) {
+    OutputView.printError(error);
+    this.getBridgeCommand();
   }
 }
 

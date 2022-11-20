@@ -1,10 +1,11 @@
-const InputView = require("./InputView");
+const OutputView = require("./OutputView");
 const Controller = require("./Controller");
 class App {
   constructor() {
     this.controller = new Controller();
   }
   play() {
+    OutputView.printStart();
     this.controller.start();
   }
 }
