@@ -68,6 +68,7 @@ class BridgeGame {
   }
 
   printResult() {
+    OutputView.endResult();
     printResult(this.#gameComplete, this.#gameTryCount);
     Console.close();
   }
