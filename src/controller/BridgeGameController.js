@@ -6,12 +6,14 @@ const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator.js')
 const Bridge = require('../model/Bridge.js');
 const { isCollectBridgeLength, isValidateMoveInput, isValidateRetryInput } = require('../utils/validator.js');
 const { Console } = require('@woowacourse/mission-utils');
+const StepResult = require('../model/StepResult.js');
 
 class BridgeGameController {
   constructor() {
     OutputView.welcomeMessage();
     this.bridgeGame = new BridgeGame();
     this.bridge = new Bridge();
+    this.stepResult = new StepResult();
   }
 
   start() {
@@ -21,11 +23,7 @@ class BridgeGameController {
   createBridgeByUser(bridgeLength) {
     try {
       isCollectBridgeLength(bridgeLength);
-
-      this.bridge.setData('length', bridgeLength);
-      const blueprint = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
-      this.bridge.setData('blueprint', blueprint);
-
+      this.bridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
       InputView.readMoving(this.movingByUser.bind(this));
     } catch (error) {
       Console.print(error.message);

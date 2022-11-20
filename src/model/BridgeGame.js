@@ -6,8 +6,11 @@ const { Console } = require('@woowacourse/mission-utils');
 class BridgeGame {
   #retryCount;
 
+  #turn;
+
   constructor() {
     this.#retryCount = 1;
+    this.#turn = 0;
   }
 
   /**
@@ -60,6 +63,14 @@ class BridgeGame {
 
   set retryCount(value) {
     this.#retryCount = value;
+  }
+
+  get turn() {
+    return this.#turn;
+  }
+
+  set turn(value) {
+    this.#turn = value;
   }
 }
 
