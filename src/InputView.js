@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const [Console] = [MissionUtils.Console, MissionUtils.Random];
+const Console = MissionUtils.Console;
 
 
 const InputView = {
@@ -9,14 +9,14 @@ const InputView = {
   },
 
   validateBridge(bridgeInput) {
-    if (typeof bridgeInput !== "number") throw new Error("[ERROR] 다리길이는 숫자여야 합니다.");
+    if (Number.isNaN(bridgeInput)) throw new Error("[ERROR] 다리길이는 숫자여야 합니다.");
     if (!(3 <= bridgeInput && bridgeInput <= 20)) throw new Error("[ERROR] 다리길이는 3에서 20사이의 숫자여야 합니다.");
   },
 
   readBridgeSize() {
     return new Promise((resolve, _) => {
       Console.readLine("다리의 길이를 입력해주세요.\n", (inputString) => {
-        const inputNum = Number(inputString);
+        const inputNum = parseInt(inputString);
         this.validateBridge(inputNum);
         resolve(inputNum);
       });
@@ -37,8 +37,8 @@ const InputView = {
     })
   },
 
-  validateStart(move){
-    if(!(move === "R" || move ==="Q")) throw new Error("[ERROR] 다시시도 여부를 잘못 입력하셨습니다.");  
+  validateStart(start){
+    if(!(start === "R" || start ==="Q")) throw new Error("[ERROR] 다시시도 여부를 잘못 입력하셨습니다.");  
   },
 
   readGameCommand(){
