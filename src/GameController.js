@@ -43,15 +43,21 @@ class GameController {
       const movementLogs = this.bridgeGame.getMovementLogs();
       OutputView.printMap(movementLogs);
 
-      if (!this.bridgeGame.isSucceededMove()) return this.requestRetryCommand();
-      if (this.bridgeGame.isClearedGame()) {
-        this.quit();
-        return;
-      }
-      this.requestDirection();
+      this.runProcess();
     } catch ({ message }) {
       this.reRequest(this.requestDirection, message);
     }
+  }
+
+  runProcess() {
+    if (this.bridgeGame.isClearedGame()) {
+      this.quit();
+    } else if (this.bridgeGame.isSucceededMove()) {
+      this.requestDirection();
+      return;
+    }
+
+    this.requestRetryCommand();
   }
 
   requestRetryCommand() {
