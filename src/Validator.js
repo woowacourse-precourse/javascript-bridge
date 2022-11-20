@@ -9,6 +9,8 @@ const Validator = {
       +size > 20
     )
       throw new Error(ERROR_MESSAGES.BRIDGE_SIZE);
+
+    return +size;
   },
 };
 

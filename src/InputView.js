@@ -12,9 +12,9 @@ const InputView = {
     Console.readLine('다리의 길이를 입력해주세요.\n', (userInput) => {
       try {
         Validator.bridgeLength(+userInput);
-
-        return +userInput;
       } catch (error) {
+        Console.print(error.message);
+
         this.readBridgeSize();
       }
     });
