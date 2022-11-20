@@ -1,6 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
-const BridgeSize = require("./BridgeSize");
+const BridgeSize = require("./ValidateBridgeSize");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -13,7 +12,7 @@ const InputView = {
     Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
       try {
         new BridgeSize(input);
-        new BridgeGame(Number(input));
+        return Number(input);
       } catch (e) {
         Console.print(e);
         this.readBridgeSize();
