@@ -7,6 +7,7 @@ const View = {
   gameCommand: (retry) => InputView.readGameCommand(retry),
 
   gameStart: () => OutputView.printStart(),
+  gameMap: (top, bottom) => OutputView.printMap(top, bottom),
 };
 
 module.exports = View;
