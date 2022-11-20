@@ -22,12 +22,7 @@ class BridgeGame {
   }
 
   start() {
-    try {
-      InputView.readBridgeLength(this.#initBridge.bind(this));
-    } catch (err) {
-      Console.print(err);
-      this.start();
-    }
+    InputView.readBridgeLength(this.#initBridge.bind(this));
   }
 
   #initBridge(length) {
