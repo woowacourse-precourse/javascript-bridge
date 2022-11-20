@@ -53,5 +53,12 @@ describe("BridgeGame 클래스 도메인 로직 테스트", () => {
     expect(result).toEqual(expected);
   });
 
-  
+  test.each([
+    ['R', true],
+    ['Q', false],
+  ])('게임 재시작 기능 구현 테스트', (first, expected) => {
+    const bridgeGame = new BridgeGame();
+    const result = bridgeGame.retry(first);
+    expect(result).toEqual(expected);
+  });
 });
