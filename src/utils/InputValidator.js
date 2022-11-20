@@ -6,21 +6,21 @@ class InputValidator extends Validator {
     const isValidBridgeSize =
       InputValidator.isNumericInput(size) &&
       !InputValidator.isZeroStartInput(size) &&
-      InputValidator.isBetween(size, BRIDGE.MIN_SIZE, BRIDGE.MAX_SIZE);
+      InputValidator.isBetween(size, BRIDGE.minSize, BRIDGE.maxSize);
     if (isValidBridgeSize) return true;
-    throw new Error(INPUT_ERROR.BRIDGE_SIZE);
+    throw new Error(INPUT_ERROR.bridgeSize);
   }
 
   static isValidMoving(moving) {
-    const isValidMoving = moving === BRIDGE.UP || moving === BRIDGE.DOWN;
+    const isValidMoving = moving === BRIDGE.up || moving === BRIDGE.down;
     if (isValidMoving) return true;
-    throw new Error(INPUT_ERROR.MOVING);
+    throw new Error(INPUT_ERROR.moving);
   }
 
   static isValidGameCommand(gameCommand) {
-    const isValidGameCommand = gameCommand === GAME.RETRY || gameCommand === GAME.QUIT;
+    const isValidGameCommand = gameCommand === GAME.retry || gameCommand === GAME.quit;
     if (isValidGameCommand) return true;
-    throw new Error(INPUT_ERROR.GAME_COMMAND);
+    throw new Error(INPUT_ERROR.gameCommand);
   }
 }
 

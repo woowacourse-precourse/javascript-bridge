@@ -56,7 +56,7 @@ class BridgeGameController {
 
   checkNextStep({ isSuccess, checking }) {
     if (isSuccess) return this.quit();
-    const isRight = checking === BRIDGE.RIGHT;
+    const isRight = checking === BRIDGE.right;
     if (isRight) return this.readMoving();
     this.readGameCommand();
   }
@@ -75,7 +75,7 @@ class BridgeGameController {
   }
 
   excuteGameCommand(gameCommand) {
-    const isRetry = gameCommand === GAME.RETRY;
+    const isRetry = gameCommand === GAME.retry;
     if (isRetry) {
       this.#bridgeGame.retry();
       return this.readMoving();

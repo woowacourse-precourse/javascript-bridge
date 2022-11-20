@@ -5,7 +5,7 @@ const { OUTPUT_MESSAGE, BRIDGE } = require('../utils/constants');
  */
 const OutputView = {
   printStart() {
-    Console.print(OUTPUT_MESSAGE.GAME_START);
+    Console.print(OUTPUT_MESSAGE.gameStart);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
@@ -13,8 +13,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridgeMap) {
-    const upBridgeMap = `[ ${[...bridgeMap[BRIDGE.UP]].join(' | ')} ]`;
-    const downBridgeMap = `[ ${[...bridgeMap[BRIDGE.DOWN]].join(' | ')} ]`;
+    const upBridgeMap = `[ ${[...bridgeMap[BRIDGE.up]].join(' | ')} ]`;
+    const downBridgeMap = `[ ${[...bridgeMap[BRIDGE.down]].join(' | ')} ]`;
     Console.print(upBridgeMap);
     Console.print(downBridgeMap);
   },
@@ -25,11 +25,11 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult({ bridgeMap, isSuccess, tryCount }) {
-    Console.print(OUTPUT_MESSAGE.GAME_QUIT);
+    Console.print(OUTPUT_MESSAGE.gameQuit);
     this.printMap(bridgeMap);
-    if (isSuccess) Console.print(OUTPUT_MESSAGE.GAME_SUCCESS);
-    if (!isSuccess) Console.print(OUTPUT_MESSAGE.GAME_FAIL);
-    Console.print(OUTPUT_MESSAGE.GAME_TRY_COUNT(tryCount));
+    if (isSuccess) Console.print(OUTPUT_MESSAGE.gameSuccess);
+    if (!isSuccess) Console.print(OUTPUT_MESSAGE.gameFail);
+    Console.print(OUTPUT_MESSAGE.gameTryCount(tryCount));
   },
 
   printError(errorMessage) {

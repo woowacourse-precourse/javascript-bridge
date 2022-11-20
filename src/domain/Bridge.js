@@ -9,13 +9,13 @@ class Bridge {
   }
 
   validate(size, pattern) {
-    const isValideSize = BRIDGE.MIN_SIZE <= size && size <= BRIDGE.MAX_SIZE;
+    const isValideSize = BRIDGE.minSize <= size && size <= BRIDGE.maxSize;
     const isValidePattern = pattern.every(
-      (element) => element === BRIDGE.UP || element === BRIDGE.DOWN,
+      (element) => element === BRIDGE.up || element === BRIDGE.down,
     );
     const isValidBridge = isValideSize && isValidePattern;
     if (isValidBridge) return true;
-    throw new Error(BRIDGE.CREATE_ERROR);
+    throw new Error(BRIDGE.createError);
   }
 
   match(playerMovings) {
@@ -23,8 +23,8 @@ class Bridge {
     let checking;
     for (let idx = 0; idx < playerMovings.length; idx++) {
       const moving = playerMovings[idx];
-      const notMoving = moving === BRIDGE.UP ? BRIDGE.DOWN : BRIDGE.UP;
-      checking = moving === this.#pattern[idx] ? BRIDGE.RIGHT : BRIDGE.WRONG;
+      const notMoving = moving === BRIDGE.up ? BRIDGE.down : BRIDGE.up;
+      checking = moving === this.#pattern[idx] ? BRIDGE.right : BRIDGE.wrong;
       bridgeMap[moving].push(checking);
       bridgeMap[notMoving].push(' ');
     }

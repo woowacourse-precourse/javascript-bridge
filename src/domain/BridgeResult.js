@@ -22,9 +22,9 @@ class BridgeResult {
 
   checkSuccess() {
     this.#isSuccess =
-      this.#bridgeMap[BRIDGE.UP].length === this.#bridgeSize &&
-      !this.#bridgeMap[BRIDGE.UP].some((element) => element === BRIDGE.WRONG) &&
-      !this.#bridgeMap[BRIDGE.DOWN].some((element) => element === BRIDGE.WRONG);
+      this.#bridgeMap[BRIDGE.up].length === this.#bridgeSize &&
+      !this.#bridgeMap[BRIDGE.up].some((element) => element === BRIDGE.wrong) &&
+      !this.#bridgeMap[BRIDGE.down].some((element) => element === BRIDGE.wrong);
     if (this.#isSuccess) return true;
     return false;
   }
