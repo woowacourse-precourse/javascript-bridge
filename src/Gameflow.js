@@ -4,6 +4,7 @@ const CheckBridgeSize = require('./validate/CheckBridgeSize')
 const CheckUD = require('./validate/CheckUD')
 const BridgeMaker = require('./BridgeMaker');
 const { Console } = require('@woowacourse/mission-utils');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 class Gameflow {
     size
@@ -17,9 +18,13 @@ class Gameflow {
       InputView.readBridgeSize((size) => {
         this.CheckBridgeSize .validate(size);
         this.size = size;
-        Console.print(BridgeMaker.initializeBridge(size));
-        this.userMoving();
+        this.createBridge();
       })
+    }
+
+    createBridge(){
+      Console.print(BridgeMaker.makeBridge(this.size,BridgeRandomNumberGenerator.generate));
+      this.userMoving();
     }
     
     userMoving(){
