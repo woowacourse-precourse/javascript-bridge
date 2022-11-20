@@ -52,10 +52,6 @@ const OutputView = {
     );
   },
 
-  printRetry() {
-    Console.print();
-  },
-
   printResult(partialBridgeMap, result, totalMovingCount) {
     Console.print(RESULT.final);
     this.printMap(partialBridgeMap, result);
