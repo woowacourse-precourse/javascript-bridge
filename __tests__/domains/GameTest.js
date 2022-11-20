@@ -35,13 +35,12 @@ describe('Game 진행 테스트', () => {
     }, jest.fn());
 
     const game = new BridgeGame(new Selected(), new TryCnt());
-    const bridge = new Bridge(mockGenerator);
     const inputArray = ['U', 'D', 'U'];
 
-    bridge.setBridge(3);
+    game.createBridge(new Bridge(3, mockGenerator));
     inputArray.forEach((input) => game.move(input));
 
-    expect(game.isWin(bridge)).toBe(false);
+    expect(game.isWin()).toBe(false);
   });
 
   test('게임의 resultMap 출력 테스트', () => {
@@ -50,17 +49,16 @@ describe('Game 진행 테스트', () => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
     const game = new BridgeGame(new Selected(), new TryCnt());
-    const bridge = new Bridge(mockGenerator);
 
     const inputArray = ['U', 'D', 'D'];
     const resultArray = [
       [true, undefined, undefined],
       [undefined, true, true],
     ];
-    bridge.setBridge(3);
+    game.createBridge(new Bridge(3, mockGenerator));
     inputArray.forEach((input) => game.move(input));
 
-    expect(game.getResultMap(bridge)).toStrictEqual(resultArray);
+    expect(game.getResultMap()).toStrictEqual(resultArray);
   });
 
   test('이동시 입력 값이 U또는 D가 아닐 시 예외 출력', () => {

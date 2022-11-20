@@ -4,8 +4,6 @@ const InputView = require('./Viewer/InputView');
 const Selected = require('./Model/Selected');
 const TryCnt = require('./Model/TryCnt');
 const { MESSAGE } = require('./Utils/Constant');
-const Bridge = require('./Model/Bridge');
-const { generate } = require('./BridgeRandomNumberGenerator');
 
 class App {
   constructor() {
@@ -15,7 +13,7 @@ class App {
   play() {
     Console.print(MESSAGE.GAME_START);
     try {
-      InputView.readBridgeSize(this.game, new Bridge(generate));
+      InputView.readBridgeSize(this.game);
     } catch (error) {
       Console.print(error);
       Console.close();
