@@ -3,13 +3,12 @@ const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./views/OutputView');
-const { MESSAGE } = require('./constant');
 
 class GameController {
   #bridgeGame;
 
-  gameStart() {
-    OutputView.printMessage(MESSAGE.START_NOTIFICATION);
+  print(message) {
+    OutputView.printMessage(message);
   }
 
   handleSize(size) {

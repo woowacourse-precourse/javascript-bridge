@@ -2,7 +2,6 @@ const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('../constant/index');
 const GameController = require('../GameController');
 const Validator = require('../Validator');
-const OutputView = require('./OutputView');
 
 const InputView = {
   controller: new GameController(),
@@ -19,7 +18,7 @@ const InputView = {
       this.controller.handleSize(size);
       this.readMoving();
     } catch ({ message }) {
-      OutputView.printMessage(message);
+      this.controller.print(message);
       this.readBridgeSize();
     }
   },
@@ -34,15 +33,16 @@ const InputView = {
     try {
       Validator.directionValidityCheck(direction);
       const success = this.controller.handleDirection(direction);
-      if (success) {
-        const userWin = this.controller.doseUserWin();
-        if (userWin) this.controller.gameOver(userWin);
-        else this.readMoving();
-      } else this.readGameCommand();
+      success ? this.doseUserWin() : this.readGameCommand();
     } catch ({ message }) {
-      OutputView.printMessage(message);
+      this.controller.print(message);
       this.readMoving();
     }
+  },
+
+  doseUserWin() {
+    const userWin = this.controller.doseUserWin();
+    userWin ? this.controller.gameOver(userWin) : this.readMoving();
   },
 
   readGameCommand() {
@@ -61,10 +61,17 @@ const InputView = {
         this.controller.gameOver();
       }
     } catch ({ message }) {
-      OutputView.printMessage(message);
+      this.controller.print(message);
       this.readGameCommand();
     }
   },
+
+  // catchHandler(message, type) {
+  //   OutputView.printMessage(message);
+  //   if (type === 'size') this.readBridgeSize();
+  //   if (type === 'direction') this.readMoving();
+  //   if (type === 'command') this.readGameCommand();
+  // },
 };
 
 module.exports = InputView;
