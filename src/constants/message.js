@@ -1,0 +1,12 @@
+INPUT_BRIDGE_LENGTH = "다리의 길이를 입력해주세요.";
+CONSOLE_MESSAGE = {
+  INPUT_BRIDGE_LENGTH,
+};
+
+NOT_RIGHT_BRIDGE_LENGTH =
+  "[ERROR] 다리의 길이는 3부터 20까지 입력하실 수 있습니다.";
+ERROR_MESSAGE = {
+  NOT_RIGHT_BRIDGE_LENGTH,
+};
+
+module.exports = { CONSOLE_MESSAGE, ERROR_MESSAGE };
