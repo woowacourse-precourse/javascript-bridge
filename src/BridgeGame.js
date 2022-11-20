@@ -1,4 +1,4 @@
-const { gameStart, bridgeSize, moving } = require("./UI/View");
+const { gameStart, bridgeSize, moving, gameCommand } = require("./UI/View");
 const { APPROPRIATE_INPUT, ANSWER } = require("./Utils/Constants");
 const { UP } = APPROPRIATE_INPUT;
 const { RIGHT, WRONG, UNCHOSEN } = ANSWER;
@@ -52,6 +52,8 @@ class BridgeGame {
 
   untraversable(command) {
     command === UP ? this.mark(WRONG, UNCHOSEN) : this.mark(UNCHOSEN, WRONG);
+
+    gameCommand();
   }
 
   mark(top, bottom) {
