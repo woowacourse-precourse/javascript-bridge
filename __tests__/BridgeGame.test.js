@@ -615,4 +615,12 @@ describe('범위 추출 메서드 테스트', () => {
 
     expect(BridgeGame.extractFromZeroTo([U, D], EXPECTED)).toEqual(RECEIVED);
   });
+
+  test('첫 번째 인수는 배열이 아니라면 예외를 발생한다.', () => {
+    const EXPECTED = 3;
+
+    expect(() => {
+      BridgeGame.extractFromZeroTo(EXPECTED);
+    }).toThrow(ARRAY_ERROR_TEXT);
+  });
 });
