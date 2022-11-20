@@ -73,6 +73,10 @@ const Player = {
     return this.state;
   },
 
+  getTryingCount() {
+    return this.tryingCount;
+  },
+
   checkGameSuccess() {
     if (
       this.playerAns.length === this.size &&
