@@ -6,6 +6,7 @@ const InputView = require('./views/InputView.js');
 const OutputView = require('./views/OutputView.js');
 const BridgeGame = require('./BridgeGame.js');
 const Validation = require('./Validation.js');
+const tryCatchHandler = require('./utils/tryCatchHandler.js');
 
 class GameController {
   constructor() {
@@ -18,35 +19,31 @@ class GameController {
   }
 
   requestBridgeSize() {
-    InputView.readBridgeSize(this.buildBridgePhase.bind(this));
+    InputView.readBridgeSize((size) => {
+      tryCatchHandler(this.buildBridgePhase.bind(this, size), this.requestBridgeSize.bind(this));
+    });
   }
 
   buildBridgePhase(size) {
-    try {
-      this.bridgeGame.build(size);
+    this.bridgeGame.build(size);
 
-      this.requestDirection();
-    } catch ({ message }) {
-      this.reRequest(this.requestBridgeSize, message);
-    }
+    this.requestDirection();
   }
 
   requestDirection() {
-    InputView.readMoving(this.movePhase.bind(this));
+    InputView.readMoving((direction) => {
+      tryCatchHandler(this.movePhase.bind(this, direction), this.requestDirection.bind(this));
+    });
   }
 
   movePhase(direction) {
-    try {
-      Validation.validateDirection(direction);
-      this.bridgeGame.move(direction);
+    Validation.validateDirection(direction);
+    this.bridgeGame.move(direction);
 
-      const movementLogs = this.bridgeGame.getMovementLogs();
-      OutputView.printMap(movementLogs);
+    const movementLogs = this.bridgeGame.getMovementLogs();
+    OutputView.printMap(movementLogs);
 
-      this.runProcess();
-    } catch ({ message }) {
-      this.reRequest(this.requestDirection, message);
-    }
+    this.runProcess();
   }
 
   runProcess() {
@@ -61,17 +58,15 @@ class GameController {
   }
 
   requestRetryCommand() {
-    InputView.readGameCommand(this.retryPhase.bind(this));
+    InputView.readGameCommand((command) => {
+      tryCatchHandler(this.retryPhase.bind(this, command), this.requestRetryCommand.bind(this));
+    });
   }
 
   retryPhase(command) {
-    try {
-      Validation.validateGameCommand(command);
+    Validation.validateGameCommand(command);
 
-      this.runCommand(command);
-    } catch ({ message }) {
-      this.reRequest(this.requestRetryCommand, message);
-    }
+    this.runCommand(command);
   }
 
   runCommand(command) {
@@ -94,11 +89,6 @@ class GameController {
 
     OutputView.printResult(movementLogs, isSucceeded, tryCount);
     Console.close();
-  }
-
-  reRequest(requestFunc, errMessage) {
-    OutputView.printMsg(errMessage);
-    requestFunc.call(this);
   }
 }
 
