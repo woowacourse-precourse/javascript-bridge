@@ -16,9 +16,9 @@ const MODEL_KEY = Object.freeze({
   tryCount: 'TRY_COUNT_BRIDGE_MODEL_KEY'
 });
 
-const UPDOWN_INDEX = Object.freeze({
-  U: 0,
-  D: 1
+const BRIDGE_DIRECTION = Object.freeze({
+  up: 'U',
+  down: 'D'
 });
 
 const GAME_RESULT_STATE = Object.freeze({
@@ -38,12 +38,19 @@ const GAME_MESSAGE = Object.freeze({
   final: '최종 게임 결과'
 });
 
+const BRIDGE_CHECK = Object.freeze({
+  right: 'O',
+  wrong: 'X',
+  blank: ' '
+});
+
 module.exports = {
   REGEX,
   ERROR_MESSAGE,
   MODEL_KEY,
-  UPDOWN_INDEX,
+  BRIDGE_DIRECTION,
   GAME_RESULT_STATE,
   GAME_QUESTION,
-  GAME_MESSAGE
+  GAME_MESSAGE,
+  BRIDGE_CHECK
 };
