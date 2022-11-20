@@ -23,14 +23,27 @@ class App {
 
   requestBridgeSize(size) {
     size = Number(size);
-    validateBridgeSize(size);
-    this.#bridge = makeBridge(size, BridgeRandomNumberGenerator.generate);
 
+    try {
+      validateBridgeSize(size);
+    } catch (error) {
+      Console.print(error);
+      InputView.readBridgeSize(this.requestBridgeSize.bind(this));
+      return;
+    }
+
+    this.#bridge = makeBridge(size, BridgeRandomNumberGenerator.generate);
     InputView.readMoving(this.requestMoveUpOrDown.bind(this));
   }
 
   requestMoveUpOrDown(answer) {
-    validateMoveUpOrDownAnswer(answer);
+    try {
+      validateMoveUpOrDownAnswer(answer);
+    } catch (error) {
+      Console.print(error);
+      InputView.readMoving(this.requestMoveUpOrDown.bind(this));
+    }
+
     const position = this.BridgeGame.getPosition();
 
     OutputView.printMap(position, this.#bridge, answer);
@@ -56,7 +69,12 @@ class App {
   }
 
   handleRetry(answer) {
-    validateRetryCommand(answer);
+    try {
+      validateRetryCommand(answer);
+    } catch (error) {
+      Console.print(error);
+      InputView.readGameCommand(this.handleRetry.bind(this));
+    }
 
     if (answer === "R") {
       this.tryTimes++;
