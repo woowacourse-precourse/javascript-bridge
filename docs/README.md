@@ -31,6 +31,8 @@
 - [x] 전달받은 입력값을 컨트롤러에 전달한다. <GameContorller>
 - [x] 컨트롤러로부터 BridgeGame에 값을 전달하고 결과값 산출한다.
 - [x] BridgeGame의 결과값을 Contorller에게 전달한다.
+
+- [ ] 결과값 인터페이스를 생성한다.<OutputView>
 - [ ] Controller로부터 outputView로 결과를 전달해 값을 출력한다.
 
 - 라운드마다 플레이어가 이동할 칸을 입력 받는다. <InputView>

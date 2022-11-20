@@ -1,5 +1,6 @@
 const BridgeMaker = require('../BridgeMaker');
 const { generateRandomNumber } = require('../utils/bridgeHandler');
+const { Console } = require('@woowacourse/mission-utils');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -7,8 +8,9 @@ const { generateRandomNumber } = require('../utils/bridgeHandler');
 
 class BridgeGame {
   #myBridge;
+  #userSelect;
   #round = 0;
-  #alive;
+  #alive = true;
 
   createBridge(size) {
     this.#myBridge = BridgeMaker.makeBridge(size, generateRandomNumber);
@@ -19,20 +21,25 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(select, selectMoving) {
-    console.log(this.#myBridge);
-    console.log('!!round : ', this.#round);
-    console.log('!!solution : ', this.#myBridge[this.#round]);
-    this.#alive = this.checkAlive();
+  move(select) {
+    this.#alive = this.checkAlive(select);
+  }
+
+  checkResult() {
+    console.log('end');
+    Console.close();
+    /*
+    if (!this.#alive) return 'die';
 
     if (this.#round === this.#myBridge.length - 1) {
       console.log('WIN');
       throw new Error('WIN!!');
     }
     this.#round += 1;
+    */
   }
 
-  checkAvlie(select) {
+  checkAlive(select) {
     return select === this.#myBridge[this.#round] ? true : false;
   }
 

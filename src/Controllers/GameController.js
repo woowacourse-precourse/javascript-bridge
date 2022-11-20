@@ -17,25 +17,20 @@ class GameController {
   inputBridgeSize() {
     this.inputView.readBridgeSize((userInput) => {
       const size = this.inputView.getBridegeSize(userInput);
-      this.buildBridge(size);
+      this.bridgeGame.createBridge(size);
+      this.selectMoving();
     });
-  }
-
-  buildBridge(size) {
-    this.bridgeGame.createBridge(size);
-    this.selectMoving();
   }
 
   selectMoving() {
     this.inputView.readMoving((userInput) => {
       const select = this.inputView.getUserMoving(userInput);
       this.bridgeGame.move(select);
-      const alive = this.bridgeGame.checkAlive();
-      if (alive) return this.selectMoving();
-      this.askRetry();
+      this.bridgeGame.checkResult();
     });
   }
 
+  // 죽었으면 리트라이, 살았으면 다시 moving
   askRetry() {}
 }
 
