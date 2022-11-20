@@ -1,4 +1,9 @@
-const { ERROR_MESSAGE, BRIDGE_VALUE, MOVE_VALUE } = require("../constants");
+const {
+  ERROR_MESSAGE,
+  BRIDGE_VALUE,
+  MOVE_VALUE,
+  RESTART_VALUE,
+} = require("../constants");
 const AppError = require("../errors/AppError");
 
 const isBridgeLengthValid = (value) => {
@@ -9,11 +14,18 @@ const isBridgeLengthValid = (value) => {
 
 const isMoveValid = (value) => {
   if (isEmptyInput(value)) throw new AppError(ERROR_MESSAGE.EMPTY_ERROR);
-  if (!isAlphabetValid(value)) throw new AppError(ERROR_MESSAGE.ALPHABET_ERROR);
+  if (!isAlphabetValid(value))
+    throw new AppError(
+      ERROR_MESSAGE.ALPHABET_ERROR(MOVE_VALUE.UP, MOVE_VALUE.DOWN)
+    );
 };
 
 const isRestartValid = (value) => {
   if (isEmptyInput(value)) throw new AppError(ERROR_MESSAGE.EMPTY_ERROR);
+  if (!isAlphabetValid(value))
+    throw new AppError(
+      ERROR_MESSAGE.ALPHABET_ERROR(RESTART_VALUE.RESTART, RESTART_VALUE.QUIT)
+    );
 };
 
 const isEmptyInput = (value) => !value;

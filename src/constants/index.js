@@ -10,6 +10,11 @@ const MOVE_VALUE = Object.freeze({
   INVALID: "X",
 });
 
+const RESTART_VALUE = Object.freeze({
+  RESTART: "R",
+  QUIT: "Q",
+});
+
 const GAME_MESSAGE = Object.freeze({
   START: "다리 건너기 게임을 시작합니다.",
   INPUT_BRIDGE_LENGTH: "다리의 길이를 입력해주세요.",
@@ -22,7 +27,14 @@ const ERROR_MESSAGE = Object.freeze({
   EMPTY_ERROR: "공백이 아닌 값을 입력해주세요.",
   TYPE_ERROR: "숫자를 입력해주세요.",
   RANGE_ERROR: "3~20 범위의 값만 입력해주세요.",
-  ALPHABET_ERROR: "U 또는 D 값만 입력해주세요.",
+  ALPHABET_ERROR: (first, second) =>
+    `${first} 또는 ${second} 값만 입력해주세요.`,
 });
 
-module.exports = { BRIDGE_VALUE, MOVE_VALUE, GAME_MESSAGE, ERROR_MESSAGE };
+module.exports = {
+  BRIDGE_VALUE,
+  MOVE_VALUE,
+  RESTART_VALUE,
+  GAME_MESSAGE,
+  ERROR_MESSAGE,
+};
