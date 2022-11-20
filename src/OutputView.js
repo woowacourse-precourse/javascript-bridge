@@ -46,9 +46,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(gameobj) {
+  printMap(gameobj, idx) {
     Console.print(
-      `[${gameobj.getUpBridge()}]` + '\n' + `[${gameobj.getDownBridge()}]`
+      `[${gameobj.getUpBridge(idx)}]` + '\n' + `[${gameobj.getDownBridge(idx)}]`
     );
   },
 
@@ -57,14 +57,6 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(gameobj, gamecount, isWinorFail) {
-    if (isWinorFail) {
-      this.printWinResult(gamecount);
-    } else {
-      this.printLoseResult(gamecount);
-    }
-    Console.close();
-  },
 
   printWinResult(gameCount) {
     Console.print(END_MESSAGE);
