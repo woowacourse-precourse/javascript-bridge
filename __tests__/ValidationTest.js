@@ -19,8 +19,5 @@ describe("예외처리 테스트", () => {
         expect(validation.validateCommand(commands, error, 'D')).toBe(undefined)
         expect(validation.validateCommand(commands, error, 'A')).toThrow(ERROR.notPlayCommand)
     });
-    test("게임 종료 / 재시작 커맨드 테스트", () => {
-
-    });
   });
   
