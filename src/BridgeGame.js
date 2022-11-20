@@ -46,6 +46,8 @@ class BridgeGame {
 
   traversable(command) {
     command === UP ? this.mark(RIGHT, UNCHOSEN) : this.mark(UNCHOSEN, RIGHT);
+
+    moving(this.move.bind(this));
   }
 
   untraversable(command) {
