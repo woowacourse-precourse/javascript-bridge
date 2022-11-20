@@ -25,25 +25,26 @@ class App {
   }
 
   printBridge() {
-    const result = this.#bridge.makeBridgeString();
-    OutputView.printMap(result);
+    const strResult = this.#bridge.makeBridgeString();
+    OutputView.printMap(strResult);
   }
 
   calcBridge() {
-    const result = this.#bridge.move();
+    const moveResult = this.#bridge.move();
 
-    if (result === MOVERESULT.WRONGBLOCK) {
+    if (moveResult === MOVERESULT.WRONGBLOCK) {
       InputView.readGameCommand(this);
-    } else if (result === MOVERESULT.RIGHTBLOCK) {
+    } else if (moveResult === MOVERESULT.RIGHTBLOCK) {
       InputView.readMoving(this);
-    } else if (result === MOVERESULT.GAMECLEAR) {
+    } else if (moveResult === MOVERESULT.GAMECLEAR) {
       this.gameOver(GAMERESULT.CLEAR);
     }
   }
   
   retryOrTerminate(input) {
-    if (input === REQUIREMENT.RETRY) {
-      this.#bridge.retry();
+    const tryAgain = this.#bridge.retry(input);
+
+    if (tryAgain) {
       this.#attemptsCnt += 1;
       InputView.readMoving(this);
     } else {
