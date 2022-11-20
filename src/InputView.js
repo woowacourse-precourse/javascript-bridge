@@ -13,6 +13,7 @@ const InputView = {
 
   readBridgeSize() {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.", (input) => {
+      try {new BridgeError(input)} catch (errorMSG) {throw new Error(errorMSG)}
       MissionUtils.Console.print(input);
     });
   },
