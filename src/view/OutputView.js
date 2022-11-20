@@ -12,7 +12,6 @@ const OutputView = {
    */
   printMap(map) {
     Io.output(map);
-    Io.output(MESSAGE.LINE_SPACE);
   },
 
   /**
@@ -20,17 +19,21 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(map, result, trys) {
+  printResult({ map, isSuccess, trys }) {
     Io.output(MESSAGE.GAME_RESULT.TITLE);
     this.printMap(map);
-    Io.output(`${MESSAGE.GAME_RESULT.RESULT} ${result ? MESSAGE.GAME_RESULT.SUCCESS : MESSAGE.GAME_RESULT.FAILURE}`);
+    Io.output(`${MESSAGE.GAME_RESULT.RESULT} ${isSuccess ? MESSAGE.GAME_RESULT.SUCCESS : MESSAGE.GAME_RESULT.FAILURE}`);
     Io.output(`${MESSAGE.GAME_RESULT.COUNT} ${trys}`);
-
+    Io.close();
   },
 
-  printMessage(message){
+  printMessage(message) {
     Io.output(message);
-  }
+  },
+
+  printError(error) {
+    Io.output(error.message);
+  },
 };
 
 module.exports = OutputView;
