@@ -1,22 +1,22 @@
 const { ErrorMsg } = require("../constants/Constant");
 
-const Validate = {
-  bridgeSize(input) {
+const InputValidator = {
+  checkBridgeSize(input) {
     if (input.replace(/\d/g, "").length > 0)
       throw new Error(ErrorMsg.NOT_NUMBER);
     if (parseInt(input) < 3 || parseInt(input) > 20)
       throw new Error(ErrorMsg.OUT_OF_RANGE);
   },
 
-  move(input) {
+  checkMove(input) {
     if (input.replace(/U|D/, "").length > 0)
       throw new Error(ErrorMsg.NOT_MOVE_COMMAND);
   },
 
-  restart(input) {
+  checkRestart(input) {
     if (input.replace(/R|Q/, "").length > 0)
       throw new Error(ErrorMsg.NOT_RESTART_COMMAND);
   },
 };
 
-module.exports = Validate;
+module.exports = InputValidator;
