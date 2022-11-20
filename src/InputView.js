@@ -16,7 +16,7 @@ const InputView = {
    */
   readBridgeSize(){
     Console.readLine("다리의 길이를 입력해주세요" , (num) => {
-      this.checkFunctionExceptions(num);
+      this.checkBridgeLengthExceptions(num);
     });
   },
 
@@ -25,7 +25,7 @@ const InputView = {
     this.readMoving();
   },
 
-  checkFunctionExceptions(num){
+  checkBridgeLengthExceptions(num){
     try{
       new CheckBridgeSizeException(num);
       this.createRandomBridge(num);
