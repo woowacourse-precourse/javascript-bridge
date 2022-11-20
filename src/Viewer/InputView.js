@@ -30,7 +30,7 @@ const InputView = {
   },
 
   isReMoving(bridge, game) {
-    return game.getResult(bridge) && bridge.getLength() !== game.getLength();
+    return game.getResult(bridge) && bridge.getLength() !== game.getLevelCnt();
   },
 
   /**

@@ -1,8 +1,12 @@
 const { Console } = require('@woowacourse/mission-utils');
 const GameError = require('./Error/GameError');
-const Selected = require('./Model/Selected');
-const TryCnt = require('./Model/TryCnt');
-const { ERROR_MESSAGE, RETRY_MESSAGE } = require('./utils/Constant');
+// const Selected = require('./Model/Selected');
+// const TryCnt = require('./Model/TryCnt');
+const {
+  ERROR_MESSAGE,
+  RETRY_MESSAGE,
+  INPUT_MESSAGE,
+} = require('./utils/Constant');
 const InputView = require('./Viewer/InputView');
 const OutputView = require('./Viewer/OutputView');
 
@@ -14,14 +18,22 @@ class BridgeGame {
 
   #tryCnt;
 
-  constructor() {
-    this.#selected = new Selected();
-    this.#tryCnt = new TryCnt();
+  constructor(selected, tryCnt) {
+    this.#selected = selected;
+    this.#tryCnt = tryCnt;
+    this.result = Array.from({ length: 2 }, () => []);
   }
 
   static validate(input) {
     if (input !== RETRY_MESSAGE.RETRY && input !== RETRY_MESSAGE.QUIT)
       throw new GameError(ERROR_MESSAGE.RETRY_INPUT);
+  }
+
+  setInitialResultMap() {
+    const length = this.#selected.getLength();
+    this.result = Array.from({ length: 2 }, () =>
+      Array.from({ length }, () => undefined),
+    );
   }
 
   resetSelectedAndPlusTryCnt() {
@@ -34,6 +46,31 @@ class BridgeGame {
       if (bridge.getBridge(i) !== this.#selected.getElement(i)) return false;
     }
     return true;
+  }
+
+  getResultMap(bridge) {
+    this.setResultMap(bridge);
+    return this.result;
+  }
+
+  setResultMap(bridge) {
+    this.setInitialResultMap();
+    for (let i = 0; i < this.#selected.getLength(); i += 1) {
+      const selectedElement = this.#selected.getElement(i);
+      const bridgeElement = bridge.getBridge(i);
+      this.setResultElement(selectedElement, bridgeElement, i);
+    }
+  }
+
+  setResultElement(selectedElement, bridgeElement, i) {
+    if (selectedElement === bridgeElement) {
+      if (selectedElement === INPUT_MESSAGE.UP) this.result[0][i] = true;
+      else if (selectedElement === INPUT_MESSAGE.DOWN) this.result[1][i] = true;
+    } else if (selectedElement !== bridgeElement) {
+      if (selectedElement === INPUT_MESSAGE.UP) this.result[0][i] = false;
+      else if (selectedElement === INPUT_MESSAGE.DOWN)
+        this.result[1][i] = false;
+    }
   }
 
   getLevelCnt() {
