@@ -26,6 +26,13 @@ const Validate = {
       default:
         return true;
     }
+  isValidateInputGameCommand(inputGameCommand) {
+    switch (true) {
+        case inputGameCommand === 'Q' || inputGameCommand === 'R':
+          return false;
+        default:
+          return true;
+      }
   }
 }
 
