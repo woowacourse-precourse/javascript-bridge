@@ -2,7 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
-const { MESSAGE } = require("./constants");
+const { MESSAGE, COMMAND } = require("./constants");
 
 class App {
   #bridgeGame;
@@ -49,13 +49,21 @@ class App {
 
   tryRetry(input) {
     try {
-      const retry = this.#bridgeGame.retry(input);
-      if (retry) InputView.readMoving(this.tryMove.bind(this));
-      if (!retry) OutputView.printResult(this.#bridgeGame);
+      this.#bridgeGame.validateGameCommand(input);
+      this.handleGameCommand(input);
     } catch ({ message }) {
       Console.print(message);
       InputView.readGameCommand(this.tryRetry.bind(this));
     }
+  }
+
+  handleGameCommand(input) {
+    if (input === COMMAND.QUIT) {
+      OutputView.printResult(this.#bridgeGame);
+      return;
+    }
+    this.#bridgeGame.retry();
+    InputView.readMoving(this.tryMove.bind(this));
   }
 }
 
