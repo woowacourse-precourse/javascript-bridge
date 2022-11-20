@@ -12,13 +12,16 @@ class App {
   }
   play() {
     OutputView.printStart();
-    InputView.readBridgeSize(this.play.bind(this), (bridgeLength) => {
+
+    const self = this.play.bind(this);
+    InputView.readBridgeSize(self, (bridgeLength) => {
       this.#game.start(bridgeLength);
       this.move();
     });
   }
   move() {
-    InputView.readMoving(this.move.bind(this), (command) => {
+    const self = this.move.bind(this);
+    InputView.readMoving(self, (command) => {
       const { bridge, inputs } = this.#game.move(command);
       OutputView.printMap(bridge, inputs);
       this.moveAfter(command);
@@ -41,10 +44,10 @@ class App {
     this.#doWhenRightAnswer();
   }
   retry() {
-    InputView.readGameCommand(this.retry.bind(this), (command) => {
+    const self = this.retry.bind(this);
+    InputView.readGameCommand(self, (command) => {
       if (command === "R") {
-        this.restart();
-        return;
+        return this.restart();
       }
       this.end();
     });
