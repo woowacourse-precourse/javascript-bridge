@@ -7,7 +7,13 @@ const BridgeMap = require('./BridgeMap');
 const Utils = require('./Utils');
 
 class App {
-  #appStatus = 1;
+  #APP_STATUS = {
+    QUESTION_BRIDGE: 1,
+    QUESTION_MOVE: 3,
+    QUESTION_RETRY: 5,
+  };
+
+  #appStatus = this.#APP_STATUS.QUESTION_BRIDGE;
 
   #bridge;
 
@@ -27,11 +33,10 @@ class App {
   }
 
   progressApp(appStatus) {
-    if (appStatus === 1) return this.questionBridgeMake();
-    if (appStatus === 3) return this.questionBridgeMove();
-    if (this.#appStatus === 5) return this.questionGameRetry();
-    // if (this.#appStatus === 6) return this.runGameRetry();
-    return this.progressApp(this.#appStatus);
+    if (appStatus === this.#APP_STATUS.QUESTION_BRIDGE) return this.questionBridgeMake();
+    if (appStatus === this.#APP_STATUS.QUESTION_MOVE) return this.questionBridgeMove();
+    if (appStatus === this.#APP_STATUS.QUESTION_RETRY) return this.questionGameRetry();
+    return this.progressApp(appStatus);
   }
 
   questionBridgeMake() {
@@ -39,7 +44,7 @@ class App {
       try {
         Validator.checkBridgeInput(bridgeAnswer);
         this.runBridgeMake(+bridgeAnswer);
-        this.#appStatus = 3;
+        this.#appStatus = this.#APP_STATUS.QUESTION_MOVE;
       } catch (e) {
         Utils.print(e);
         this.progressApp(this.#appStatus);
@@ -58,7 +63,7 @@ class App {
       try {
         Validator.confirmOfCondition(moveAnswer, 'move');
         this.runBridgeMove(moveAnswer);
-        this.#appStatus = 5;
+        this.#appStatus = this.#APP_STATUS.QUESTION_RETRY;
       } catch (e) {
         Utils.print(e);
         this.progressApp(this.#appStatus);
@@ -92,8 +97,6 @@ class App {
     return this.getResult();
   }
 
-  // validAssign(answer, Validator) {}
-
   questionGameRetry() {
     InputView.readGameCommand((retryAnswer) => {
       try {
@@ -109,7 +112,7 @@ class App {
   runGameRetry(retryAnswer) {
     if (retryAnswer) {
       this.retryApp();
-      this.#appStatus = 3;
+      this.#appStatus = this.#APP_STATUS.QUESTION_MOVE;
       return this.progressApp(this.#appStatus);
     }
     return this.getResult();
