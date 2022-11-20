@@ -26,8 +26,8 @@ const INPUT_FORMAT = {
 };
 
 const OUTPUT_FORMAT = {
-  PASSABLE: 'O',
-  IMPASSABLE: 'X',
+  MATCH: 'O',
+  UNMATCH: 'X',
   NOT_SELECTED: ' ',
   START: '[',
   END: ']',
