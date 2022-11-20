@@ -6,12 +6,13 @@ const OutputView = require("./OutputView");
  */
 class BridgeGame {
   #bridge;
-  #status = [];
-  #result = [[], []];
+  #status;
   #count;
 
   constructor(bridge) {
     this.#bridge = bridge;
+    this.#status = [];
+    this.#count = 1;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -23,14 +24,16 @@ class BridgeGame {
   }
 
   moveResult() {
+    let result = [[], []];
+
     this.#status.map(([direction, isBottom], index) => {
       const compareBridge = direction === this.#bridge[index];
 
-      this.#result[isBottom].push(compareBridge ? "O" : "X");
-      this.#result[Math.abs(isBottom - 1)].push(" ");
+      result[isBottom].push(compareBridge ? "O" : "X");
+      result[Math.abs(isBottom - 1)].push(" ");
     });
 
-    return this.#result;
+    return result;
   }
 
   isFail() {
