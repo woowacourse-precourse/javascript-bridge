@@ -1,7 +1,7 @@
-const { validateBridgeSize } = require('../src/InputView');
+const { validateBridgeSize, validateMove, validateRetry } = require('../src/InputView');
 
 describe('입력 테스트', () => {
-  test.each([['ad3'], ['10a'], ['2'], ['21'], ['-1']])('다리 길이 입력에 대한 예외 처리', (input) => {
+  test.each([['ad3'], ['3.0'], ['20.0'], ['13.5'], ['2'], ['21'], ['-1']])('다리 길이 입력에 대한 예외 처리', (input) => {
       expect(() => {
         validateBridgeSize(input);
       }).toThrow();
