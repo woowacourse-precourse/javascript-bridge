@@ -34,8 +34,8 @@ class BridgeCheck {
     const checkingOXBridge = this.#getBridgeCheckingOX();
 
     return [
-      checkingOXBridge.map(([ox, position]) => (position === 0 ? ox : '')),
-      checkingOXBridge.map(([ox, position]) => (position === 1 ? ox : ''))
+      checkingOXBridge.map(([ox, position]) => (position === 0 ? ox : ' ')),
+      checkingOXBridge.map(([ox, position]) => (position === 1 ? ox : ' '))
     ];
   }
 
