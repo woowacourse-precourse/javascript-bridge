@@ -1,18 +1,14 @@
-const BridgeMaker = require("../src/BridgeMaker");
-const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
+// const BridgeGame = require("../src/BridgeGame");
+const Validation = require("../src/utils/Validation");
+const Constant = require("../src/constant/Constant");
+const { ERROR_MESSAGE } = Constant;
 
-describe("도메인 기능 유닛테스트", () => {
-  test("makeBridge length 테스트", () => {
-    expect(
-      BridgeMaker.makeBridge(9, BridgeRandomNumberGenerator.generate).length
-    ).toBe(9);
-  });
+describe("도메인 기능(BridgeGame) 유닛테스트", () => {
+  test("BridgeGame 시작후 U,D를 제외한 다른 입력값은 예외처리", () => {
+    const userInput = "k";
 
-  test("makeBridge 1,0만 포함됐는지 테스트", () => {
-    expect(
-      BridgeMaker.makeBridge(9, BridgeRandomNumberGenerator.generate).includes(
-        2
-      )
-    ).toBe(false);
+    expect(() => Validation.isBridgeWords(userInput)).toThrow(
+      ERROR_MESSAGE.IS_BRIDGE_WORDS
+    );
   });
 });
