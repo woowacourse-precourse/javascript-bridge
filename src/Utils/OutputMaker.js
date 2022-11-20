@@ -2,6 +2,9 @@ const { INPUT_CHAR } = require('../Constants/InputValues');
 const { STATUS } = require('../Constants/BridgeStatus');
 
 const OutputMaker = {
+  /**
+   * 생성된 진행상황 배열을 반환하는 메서드
+   */
   makeOutput(input, pass) {
     const upAndDownArray = this.upAndDown(input, pass);
     const splitUpAndDownArray = this.splitUpAndDown(upAndDownArray);
@@ -12,6 +15,9 @@ const OutputMaker = {
     return result;
   },
 
+  /**
+   * 플레이어 입력에 따른 진행상황을 생성하는 메서드
+   */
   upAndDown(input, pass) {
     const upAndDownArray = [];
     const current = input.length - 1;
@@ -24,6 +30,9 @@ const OutputMaker = {
     return upAndDownArray;
   },
 
+  /**
+   * 생성된 진행상황 배열을 위아래로 각각 분할하는 메서드
+   */
   splitUpAndDown(array) {
     const splitUpAndDownArray = [[], []];
     array.forEach((value) => {

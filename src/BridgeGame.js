@@ -31,6 +31,9 @@ class BridgeGame {
     this.#Status.Input.push(moveInput);
   }
 
+  /**
+   * 이동에 따른 결과를 저장하는 메서드
+   */
   setMoveOutput(isPassed, isCleared) {
     this.#Status.isPassed = isPassed;
     this.#Status.isCleared = isCleared;
