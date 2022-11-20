@@ -1,14 +1,22 @@
+const { ERROR } = require('./Constants');
+
 const Validation = {
-  isSizeInRange(size) {
-    return Number.isInteger(size) && size >= 3 && size <= 20;
+  checkSizeInRange(size) {
+    if (!(Number.isInteger(size) && size >= 3 && size <= 20)) {
+      throw ERROR.bridgeSizeException;
+    }
   },
 
-  isRightUserMove(input) {
-    return input === 'U' || input === 'D';
+  checkUserMove(input) {
+    if (input !== 'U' && input !== 'D') {
+      throw ERROR.movingException;
+    }
   },
 
-  isRightUserCommand(input) {
-    return input === 'R' || input === 'Q';
+  checkUserCommand(input) {
+    if (input !== 'R' && input !== 'Q') {
+      throw ERROR.gameCommandException;
+    }
   },
 
   /**
