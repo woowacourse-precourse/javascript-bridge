@@ -18,6 +18,16 @@ class UserController {
   increaseTryCount() {
     this.userModel.increaseTryCount();
   }
+
+  /**
+   * 유저의 이동 입력을 처리하는 메서드
+   * @param userMovingInput {string} [유저 이동 입력]
+   */
+  onUserMovingInput(userMovingInput) {
+    this.userModel.validateUserMoving(userMovingInput);
+    this.userModel.appendUserMoving(userMovingInput);
+    this.mainController.tryMove(this.userModel.getUserMoving());
+  }
 }
 
 module.exports = UserController;
