@@ -11,6 +11,20 @@ class BridgeGame {
     InputView.readBridgeSize();
   }
 
+  start(bridgeSize) {
+    this.validateBridgeLength(bridgeSize);
+  }
+
+  validateBridgeLength(size) {
+    try {
+      BridgeValidator.isInRange(size, BRIDGE_LENGTH.START, BRIDGE_LENGTH.END);
+      BridgeValidator.isNumber(size);
+    } catch (e) {
+      OutputView.printError(e);
+      return InputView.readBridgeSize();
+    }
+    return true;
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
