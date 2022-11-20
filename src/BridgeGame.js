@@ -28,6 +28,15 @@ class BridgeGame {
     InputView.readBridgeSize('다리의 길이를 입력해주세요.\n', bridgeLength);
   }
 
+  enterMoving() {
+    const moving = (input) => {
+      this.move(input);
+      this.enterMoving();
+    };
+
+    InputView.readMoving('이동할 칸을 선택해주세요.\n', moving);
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
