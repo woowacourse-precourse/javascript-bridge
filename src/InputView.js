@@ -1,9 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const {
-  validateReadBridgeSize,
-  validateReadMoving,
-  validateReadGameCommand,
-} = require("./Validator");
+const { validateReadBridgeSize, validateReadMoving, validateReadGameCommand } = require("./Validator");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -23,26 +19,20 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine(
-      "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      (upOrDown) => {
-        if (!validateReadMoving(upOrDown)) this.readMoving();
-        this.readGameCommand();
-      }
-    );
+    Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (upOrDown) => {
+      if (!validateReadMoving(upOrDown)) this.readMoving();
+      this.readGameCommand();
+    });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    Console.readLine(
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
-      (retry) => {
-        if (!validateReadGameCommand(retry)) this.readGameCommand();
-      }
-    );
+    Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (retry) => {
+      if (!validateReadGameCommand(retry)) this.readGameCommand();
+    });
   },
 };
 
-module.exports = { InputView };
+module.exports = InputView;

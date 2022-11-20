@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { InputView } = require("./InputView");
+const InputView = require("./InputView");
 
 class App {
   play() {
