@@ -1,3 +1,6 @@
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+
 /**
  * 다리 건너기 게임의 정보를 저장한다.
  */
@@ -6,8 +9,8 @@ class BridgeGame {
   #curr       // 현재까지 기록
   #try        // 현재까지 시도 횟수
 
-  constructor(bridge) {
-    this.#bridge = bridge;
+  constructor(bridgeLengthInput) {
+    this.#bridge = BridgeMaker.makeBridge(bridgeLengthInput, BridgeRandomNumberGenerator.generate);
     this.#curr = new Array();
     this.#try = 1;
   }

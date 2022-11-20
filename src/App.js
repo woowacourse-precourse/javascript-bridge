@@ -1,10 +1,7 @@
-const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = require("./InputView");
 const InputValidate = require("./InputValidate");
 const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 /**
  * 어플리케이션 최상단 구현부
@@ -39,10 +36,10 @@ class App {
   roundStartBranch(bridgeLengthInput) {
     try {
       InputValidate.validateBridgeLength(bridgeLengthInput);
-      this.bridgeGame = new BridgeGame(BridgeMaker.makeBridge(parseInt(bridgeLengthInput), BridgeRandomNumberGenerator.generate));
+      this.bridgeGame = new BridgeGame(parseInt(bridgeLengthInput));
       InputView.readMoving(this.roundInputBranch);
     } catch(e) {
-      MissionUtils.Console.print('\n' + e.message);
+      OutputView.printString('\n' + e.message);
       InputView.readBridgeSize(this.roundStartBranch);
     }
   }
@@ -59,7 +56,7 @@ class App {
       this.bridgeGame.move(directionInput);
       this.roundResultBranch();
     } catch(e) {
-      MissionUtils.Console.print('\n' + e.message);
+      OutputView.printString('\n' + e.message);
       InputView.readMoving(this.roundInputBranch);
     }
   }
@@ -93,7 +90,7 @@ class App {
       InputValidate.validateRetry(retryInput);
       this.terminateBranch(retryInput);
     } catch(e) {
-      MissionUtils.Console.print('\n' + e.message);
+      OutputView.printString('\n' + e.message);
       InputView.readGameCommand(this.roundRetryBranch);
     }
   }
@@ -113,8 +110,5 @@ class App {
     InputView.readMoving(this.roundInputBranch);
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
