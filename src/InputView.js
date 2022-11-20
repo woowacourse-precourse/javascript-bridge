@@ -119,7 +119,7 @@ function retrySwitch(word, count, bridge, bridgeMap, tryCount) {
   if (word == "Retry"){
     InputView.readMoving(count, 0, bridge, "" ,tryCount+1);
   }
-  else if (word == "Retry"){
+  else if (word == "END"){
     OUTPUTVIEW.printResult(bridgeMap, "실패", tryCount);
     MISSIONUTILS.Console.close();
   }
