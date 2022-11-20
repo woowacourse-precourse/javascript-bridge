@@ -13,16 +13,16 @@ class Bridge {
   }
 
   isMovable(position, direction) {
-    return this.#bridge[position + 1] === direction;
+    return this.#bridge[position] === direction;
   }
 
   isLastStep(position) {
-    return this.#bridge.length === position + 1;
+    return this.#bridge.length === position;
   }
 
   getPassedMap(position) {
-    const upperBridge = this.#bridge.slice(0, position + 1).map((direction) => (direction === "U" ? "O" : " "));
-    const lowerBridge = this.#bridge.slice(0, position + 1).map((direction) => (direction === "D" ? "O" : " "));
+    const upperBridge = this.#bridge.slice(0, position).map((direction) => (direction === "U" ? "O" : " "));
+    const lowerBridge = this.#bridge.slice(0, position).map((direction) => (direction === "D" ? "O" : " "));
     return [upperBridge, lowerBridge];
   }
 
