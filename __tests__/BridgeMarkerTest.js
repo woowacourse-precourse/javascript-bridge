@@ -9,13 +9,10 @@ const mockRandoms = (numbers) => {
 
 describe('BridgeMarker 테스트', () => {
   test('makeBridge메서드가 정상 동작하는지 확인한다.', () => {
-    // 준비(arrange)
-    mockRandoms(['1', '1', '0', '0']);
+    mockRandoms(['1', '1', '0', '0', '1']);
 
-    // 실행(act)
-    const bridge = makeBridge(4, generate);
+    const bridge = makeBridge(5, generate);
 
-    // 검증(assert)
-    expect(bridge).toEqual(['U', 'U', 'D', 'D']);
+    expect(bridge).toEqual(['U', 'U', 'D', 'D', 'U']);
   });
 });
