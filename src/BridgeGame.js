@@ -1,6 +1,7 @@
 // InputView, OutputView 사용 금지
 
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { UP_AND_DOWN } = require("./constants");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -16,7 +17,7 @@ class BridgeGame {
     let bridge = [];
     while (bridge.length < bridgeLength) {
       const number = BridgeRandomNumberGenerator.generate();
-      bridge.push(number ? "U" : "D");
+      bridge.push(UP_AND_DOWN[number]);
     }
     this.#bridge = bridge;
   }
