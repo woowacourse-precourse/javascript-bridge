@@ -16,9 +16,9 @@ const INPUT = {
 };
 
 const ERROR = {
-  bridgeSizeException: '3부터 20 사이의 숫자를 입력해 주세요.',
-  movingException: 'U와 D만 입력해 주세요.',
-  gameCommandException: 'R과 Q만 입력해 주세요.',
+  bridgeSizeException: '다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+  movingException: 'U(위 칸)만 D(아래 칸)만 입력해 주세요.',
+  gameCommandException: 'R(재시도)과 Q(종료)만 입력해 주세요.',
 };
 
 module.exports = {
