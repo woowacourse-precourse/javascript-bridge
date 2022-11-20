@@ -586,9 +586,19 @@ describe('빈 다리 로그 생성 메서드 테스트', () => {
 });
 
 describe('범위 추출 메서드 테스트', () => {
+  const U = [['O'], [' '], ['O']];
+  const D = [[' '], ['O'], [' ']];
+
   test('메소드 이름은 "extractFromZeroTo"로 정의된다.', () => {
     const METHOD_NAME = 'extractFromZeroTo';
 
     expect(BridgeGame.extractFromZeroTo.name).toEqual(METHOD_NAME);
+  });
+
+  test('1을 전달하면 [[ "O" ] [ " " ]]을 반환한다.', () => {
+    const EXPECTED = 1;
+    const RECEIVED = [['O'][' ']];
+
+    expect(BridgeGame.extractFromZeroTo([U, D], EXPECTED)).toEqual(RECEIVED);
   });
 });
