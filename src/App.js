@@ -1,6 +1,7 @@
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeGame = require('./BridgeGame');
+const { REQUIREMENT, GAMERESULT } = require('./constant/Constant');
 
 class App {
   #bridge;
@@ -16,7 +17,6 @@ class App {
   }
   
   proceedGame(input) {
-    
     this.#bridge.updateUserInput(input);
     this.printBridge();
     this.calcBridge();
@@ -28,10 +28,13 @@ class App {
   }
 
   calcBridge() {
-    const result = this.#bridge.move(this.#userInput);
-    if (result) {
+    const result = this.#bridge.move();
+
+    if (result === GAMERESULT.WRONGBLOCK) {
+      InputView.readGameCommand(this);
+    } else if (result === GAMERESULT.RIGHTBLOCK) {
       InputView.readMoving(this);
-    } else {
+    } else if (result === GAMERESULT.GAMECLEAR){
       console.log('Game Over');
     }
   }
