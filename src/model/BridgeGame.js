@@ -1,4 +1,5 @@
 const Bridge = require('./Bridge');
+const Moving = require('./Moving');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -17,6 +18,11 @@ class BridgeGame {
     const bridge = new Bridge(size);
     this.#bridge = bridge.getBridge();
     console.log(this.#bridge);
+  }
+
+  // new
+  setMoving(next) {
+    Moving.setMoving(next);
   }
 
   setTopSide(isSuccess) {

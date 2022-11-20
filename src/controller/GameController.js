@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('../model/BridgeGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const { validateNext, validateGameCommand } = require('../errorHandling');
+const { validateGameCommand } = require('../errorHandling');
 const { GAME } = require('../utils/constant');
 
 class GameController {
@@ -32,7 +32,7 @@ class GameController {
   }
 
   setMoving(next) {
-    validateNext.validate(next);
+    this.game.setMoving(next);
 
     const isSuccess = this.game.move(next);
     OutputView.printMap(this.game.getMap(), isSuccess);
