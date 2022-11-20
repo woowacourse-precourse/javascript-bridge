@@ -14,7 +14,7 @@ const BridgeMaker = {
 
   makeBridge(size, generateRandomNumber) {
     let bridgeArray=[]
-    console.log(Number(size),'사이즈')
+    // console.log(Number(size),'사이즈')
     for (let i = 0; i < Number(size); i++) {
       const number=generateRandomNumber()
       bridgeArray.push(number)

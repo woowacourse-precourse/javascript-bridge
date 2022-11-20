@@ -6,12 +6,10 @@ const BridgeGame=require('./BridgeGame')
 
 class App {
   constructor(){
-    let game=new BridgeGame()
   }
   play() {
     InputView.printGameStart()
-    InputView.readBridgeSize()
-    // InputView.readMoving()
+    InputView.readBridgeSize() 
   }
 }
 const app=new App()

@@ -10,9 +10,6 @@ class BridgeGame {
   move(bridgeArray) {
     console.log('여기서 앞부분을 날리는 로직으로');
     bridgeArray.shift();
-    if(bridgeArray.length===0){
-      this.moveEnd(bridgeArray)
-    }
     console.log(bridgeArray);
   }
   moveEnd(bridgeArray){
