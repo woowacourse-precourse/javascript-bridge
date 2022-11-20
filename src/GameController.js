@@ -18,60 +18,60 @@ class GameController {
   }
 
   requestBridgeSize() {
-    InputView.readBridgeSize(this.tryBuildBridge.bind(this));
+    InputView.readBridgeSize(this.buildBridgePhase.bind(this));
   }
 
-  tryBuildBridge(size) {
+  buildBridgePhase(size) {
     try {
       this.bridgeGame.build(size);
 
-      this.requestMovingDirection();
+      this.requestDirection();
     } catch ({ message }) {
       this.reRequest(this.requestBridgeSize, message);
     }
   }
 
-  requestMovingDirection() {
-    InputView.readMoving(this.tryMove.bind(this));
+  requestDirection() {
+    InputView.readMoving(this.movePhase.bind(this));
   }
 
-  tryMove(movingDirection) {
+  movePhase(direction) {
     try {
-      this.bridgeGame.move(movingDirection);
+      this.bridgeGame.move(direction);
 
       const movementLogs = this.bridgeGame.getMovementLogs();
       OutputView.printMap(movementLogs);
 
-      if (!this.bridgeGame.isSucceededMove()) return this.requestRetryOrQuit();
+      if (!this.bridgeGame.isSucceededMove()) return this.requestRetryCommand();
       if (this.bridgeGame.isClearedGame()) {
         this.printFinalResult();
         Console.close();
         return;
       }
-      this.requestMovingDirection();
+      this.requestDirection();
     } catch ({ message }) {
-      this.reRequest(this.requestMovingDirection, message);
+      this.reRequest(this.requestDirection, message);
     }
   }
 
-  requestRetryOrQuit() {
-    InputView.readGameCommand(this.retryProcess.bind(this));
+  requestRetryCommand() {
+    InputView.readGameCommand(this.retryPhase.bind(this));
   }
 
-  retryProcess(gameCommand) {
+  retryPhase(command) {
     try {
-      Validation.validateGameCommand(gameCommand);
+      Validation.validateGameCommand(command);
 
-      if (gameCommand === RESTART_TRIGGER) {
+      if (command === RESTART_TRIGGER) {
         this.bridgeGame.retry();
-        return this.requestMovingDirection();
+        return this.requestDirection();
       }
-      if (gameCommand === QUIT_TRIGGER) {
+      if (command === QUIT_TRIGGER) {
         this.printFinalResult();
         Console.close();
       }
     } catch ({ message }) {
-      this.reRequest(this.requestRetryOrQuit, message);
+      this.reRequest(this.requestRetryCommand, message);
     }
   }
 
