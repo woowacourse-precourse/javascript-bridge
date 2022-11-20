@@ -40,8 +40,8 @@ class BridgeGame {
 
   makeBridge() {
     const setBridge = (size) => {
-      const bridge = BridgeMaker.makeBridge(size, Generator.generate)
-      this.#bridge.setOriginalBridge(bridge)
+      const bridge = BridgeMaker.makeBridge(size, Generator.generate);
+      this.#bridge.setOriginalBridge(bridge);
     }
     const nextCallback = this.selectDirection.bind(this);
     const errorCallback = this.makeBridge.bind(this);
