@@ -18,12 +18,19 @@ const MAP = Object.freeze({
 });
 
 const OUTPUT_MESSAGE = Object.freeze({
-  START: "다리 건너기 게임을 시작합니다.",
+  START: "다리 건너기 게임을 시작합니다.\n",
+  RESULT: "최종 게임 결과",
+  GAME_SUCCESS_OR_NOT(isArrive) {
+    return `게임 성공 여부: ${isArrive ? "성공" : "실패"}`;
+  },
+  TOTAL_NUMBER_OF_TRY(tryCount) {
+    return `총 시도한 횟수: ${tryCount}`;
+  },
 });
 
 const INPUT_MESSAGE = Object.freeze({
-  BRIDGE_SIZE: "\n다리의 길이를 입력해주세요.\n",
-  MOVING_SPACE: `\n이동할 칸을 선택해주세요. (위: ${MOVING_SPACE.UP}, 아래: ${MOVING_SPACE.DOWN})\n`,
+  BRIDGE_SIZE: "다리의 길이를 입력해주세요.\n",
+  MOVING_SPACE: `이동할 칸을 선택해주세요. (위: ${MOVING_SPACE.UP}, 아래: ${MOVING_SPACE.DOWN})\n`,
 });
 
 const ERROR = "[ERROR]";

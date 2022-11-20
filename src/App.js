@@ -14,7 +14,6 @@ class App {
   play() {
     printStart();
     readBridgeSize(this.onReadBridgeSize.bind(this));
-    // printResult();
   }
 
   /**
@@ -42,8 +41,14 @@ class App {
   onReadMoving(movingSpace) {
     validateReadMoving(movingSpace);
     const isSuccess = this.#bridgeGame.move(movingSpace);
-    printMap(this.#bridgeGame.getMovedSpace(), isSuccess);
-    if (this.#bridgeGame.isArrive()) console.log("도착! 게임 종료");
+    const movedSpace = this.#bridgeGame.getMovedSpace();
+    printMap(movedSpace, isSuccess);
+    this.judge(movedSpace, isSuccess);
+  }
+
+  judge(movedSpace, isSuccess) {
+    if (this.#bridgeGame.isArrive())
+      printResult(movedSpace, true, this.#bridgeGame.getTryCount());
     else if (isSuccess) readMoving(this.onReadMoving.bind(this));
   }
 }

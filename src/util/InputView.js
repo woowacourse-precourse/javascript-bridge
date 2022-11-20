@@ -12,10 +12,10 @@ const InputView = {
   readBridgeSize(callback) {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (answer) => {
       try {
+        Console.print("");
         callback(answer);
       } catch (error) {
-        Console.print(error.message);
-        InputView.readBridgeSize(callback);
+        InputView.handleError(error.message, callback);
       }
     });
   },
@@ -29,8 +29,7 @@ const InputView = {
       try {
         callback(answer);
       } catch (error) {
-        Console.print(error.message);
-        InputView.readMoving(callback);
+        InputView.handleError(error.message, callback);
       }
     });
   },
@@ -39,6 +38,11 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {},
+
+  handleError(errorMessage, callback) {
+    Console.print(errorMessage);
+    InputView.readBridgeSize(callback);
+  },
 };
 
 module.exports = InputView;

@@ -59,6 +59,7 @@ const OutputView = {
     const { upRoad, downRoad } = parseUpAndDown(movedSpace, isSuccess);
     Console.print(upRoad);
     Console.print(downRoad);
+    Console.print("");
   },
 
   /**
@@ -66,12 +67,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {
-    Console.print("최종 게임 결과");
-    Console.print("[ O |   | O ]");
-    Console.print("[   | O |   ]");
-    Console.print("게임 성공 여부: 성공");
-    Console.print("총 시도한 횟수: 1");
+  printResult(movedSpace, isArrive, tryCount) {
+    Console.print(OUTPUT_MESSAGE.RESULT);
+    OutputView.printMap(movedSpace, isArrive);
+    Console.print(OUTPUT_MESSAGE.GAME_SUCCESS_OR_NOT(isArrive));
+    Console.print(OUTPUT_MESSAGE.TOTAL_NUMBER_OF_TRY(tryCount));
+    Console.close();
   },
 };
 
