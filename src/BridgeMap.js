@@ -6,7 +6,7 @@ class BridgeMap {
   #distance;
 
   constructor () {
-    this.resetHistory();
+    this.initHistory();
   }
 
   setPattern (pattern) {
@@ -14,12 +14,28 @@ class BridgeMap {
     this.#pattern = pattern;
   }
 
-  resetHistory () {
+  initHistory () {
     this.#distance = 0;
     this.#history = new Map([
       [GAME_CONSTANTS.upStair, []],
       [GAME_CONSTANTS.downStair, []],
     ]);
+  }
+
+  isEndGame () {
+    return this.#pattern.length === this.#distance;
+  }
+
+  incrementDistance () {
+    this.#distance += 1;
+  }
+
+  getPathHistory () {
+    return this.#history;
+  }
+
+  checkPath (chooseStep) {
+    return this.#pattern[this.#distance] === chooseStep;
   }
 
   getPathMarker (chooseStep) {
@@ -28,27 +44,13 @@ class BridgeMap {
       : GAME_CONSTANTS.notPath;
   }
 
-  checkPath (chooseStep) {
-    return this.#pattern[this.#distance] === chooseStep;
-  }
-
-  isEndGame () {
-    return this.#pattern.length === this.#distance;
-  }
-
-  increaseDistance () {
-    this.#distance += 1;
-  }
-
-  getPathHistory () {
-    return this.#history;
-  }
-
   getPathHistoryWithChooseStep (chooseStep) {
     [GAME_CONSTANTS.upStair, GAME_CONSTANTS.downStair]
       .forEach((stair) => {
-        this.#history.get(stair).push(chooseStep === stair
-          ? this.getPathMarker(chooseStep) : GAME_CONSTANTS.empty);
+        this.#history.get(stair)
+          .push(chooseStep === stair
+            ? this.getPathMarker(chooseStep)
+            : GAME_CONSTANTS.empty);
       });
     return this.#history;
   }

@@ -25,7 +25,7 @@ describe('다리 건너기 테스트', () => {
       expect(bridgeMap
         .getPathHistoryWithChooseStep(path, bridgeMap.getPathMarker(path)))
         .toEqual(historyList[index]);
-      bridgeMap.increaseDistance();
+      bridgeMap.incrementDistance();
     });
   });
 });
