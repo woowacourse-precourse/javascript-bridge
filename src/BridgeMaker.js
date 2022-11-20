@@ -1,4 +1,4 @@
-const { BRIDGE_SPACE_TYPE } = require('./utils/const');
+const { BRIDGE_PATH_TYPE } = require('./utils/const');
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -13,7 +13,7 @@ const BridgeMaker = {
     const bridge = [];
     for (let i = 0; i < size; i++) {
       const randomNumber = generateRandomNumber();
-      bridge.push(BRIDGE_SPACE_TYPE[randomNumber]);
+      bridge.push(BRIDGE_PATH_TYPE[randomNumber]);
     }
 
     return bridge;
