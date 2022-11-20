@@ -68,8 +68,12 @@ class BridgeGame {
 
   validateBridgeMove = (input) => {
     const IS_VALID_MOVING = /^[U|D]{1}$/.test(input);
+    this.bridgeMoveExceptionHandler(input, IS_VALID_MOVING);
+  };
+
+  bridgeMoveExceptionHandler = (input, isValidMoving) => {
     try {
-      BridgeError.throwErrorHandler(this.#bridgeErrorMessages[1], !IS_VALID_MOVING);
+      BridgeError.throwErrorHandler(this.#bridgeErrorMessages[1], !isValidMoving);
       OutputView.printMap(this.#bridge, this.#bridgeMoveCount, input);
       this.moveNext(input);
     } catch {
