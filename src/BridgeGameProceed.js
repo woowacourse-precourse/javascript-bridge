@@ -33,6 +33,7 @@ class BridgeGameProceed {
 
     game() {
         InputView.readMoving((nextStep) => {
+            Validation.nextStep(nextStep);
             this.#playersBridge.push(nextStep);
 
             const result = this.PlayersMap.show(this.#playersBridge, this.#winBridge)
