@@ -1,7 +1,8 @@
+const { ERROR_MESSAGE } = require('../constant/Message');
+
 /**
  * 입력 받은 값을 유효성 검사를 진행한다.
  */
-
 const Validator = {
   /**
    * @param {String} checkElement 유효성 검사할 요소
@@ -14,7 +15,7 @@ const Validator = {
    * 숫자인지 확인한다.
    */
   isNumber(checkElement) {
-    return /^\d+$/.test(checkElement) ? true : '[ERROR] 숫자만 입력해주세요.';
+    return /^\d+$/.test(checkElement) ? true : ERROR_MESSAGE.NOT_NUMBER;
   },
   /**
    * 숫자가 범위 안에 있는지 확인한다.
@@ -22,27 +23,25 @@ const Validator = {
   isNumberInRange(checkElement, minimumRange, maximumRange) {
     return Number(checkElement) >= minimumRange && Number(checkElement) <= maximumRange
       ? true
-      : `[ERROR] 범위는 ${minimumRange} ~ ${maximumRange} 사이의 숫자여야 합니다.`;
+      : ERROR_MESSAGE.NOT_IN_RANGE(minimumRange, maximumRange);
   },
   /**
    * 알파벳인지 확인한다.
    */
   isAlphabet(checkElement) {
-    return /^[a-z|A-Z|]+$/.test(checkElement) ? true : '[ERROR] 영어만 입력해주세요.';
+    return /^[a-z|A-Z|]+$/.test(checkElement) ? true : ERROR_MESSAGE.NOT_ALPHABET;
   },
   /**
    * 대문자인지 확인한다.
    */
   isUpperCase(checkElement) {
-    return /^[A-Z]+$/.test(checkElement) ? true : '[ERROR] 대문자여야 합니다.';
+    return /^[A-Z]+$/.test(checkElement) ? true : ERROR_MESSAGE.NOT_UPPERCASE;
   },
   /**
    * 리스트에 문자열이 포함되어 있는지 확인한다.
    */
   isStringInList(checkElement, checkList) {
-    return checkList.includes(checkElement)
-      ? true
-      : `[ERROR] ${checkList.join(', ')} 중 하나로 입력해주세요.'`;
+    return checkList.includes(checkElement) ? true : ERROR_MESSAGE.NOT_IN_LIST(checkList);
   },
 };
 

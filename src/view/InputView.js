@@ -1,5 +1,6 @@
-const { Console } = require('@woowacourse/mission-utils');
-const ObjectToValidate = require('../model/ObjectToValidate');
+const { BRIDGESIZE_KEY, MOVEMENT_KEY, COMMAND_KEY, UTILS_URL } = require('../constant/Key');
+const { Console } = require(UTILS_URL);
+const { bridgeSize, movement, progress } = require('../model/ObjectToValidate');
 
 // view는 받아오는 데이터에 따라 처리가 다를 때만 model를 불러온다
 
@@ -11,10 +12,9 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
 
-  readBridgeSize(bridgeSize) {
+  readBridgeSize(size) {
     try {
-      const infomation = ObjectToValidate.bridgeSize;
-      return infomation.checkValidation(bridgeSize, infomation.minimum, infomation.maximum);
+      return bridgeSize.checkValidation(size, BRIDGESIZE_KEY.MINIMUM, BRIDGESIZE_KEY.MAXIMUM);
     } catch (error) {
       Console.print(error);
       return false;
@@ -24,10 +24,9 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(movement) {
+  readMoving(move) {
     try {
-      const infomation = ObjectToValidate.movement;
-      return infomation.checkValidation(movement, [infomation.up, infomation.down]);
+      return movement.checkValidation(move, [MOVEMENT_KEY.UP, MOVEMENT_KEY.DOUN]);
     } catch (error) {
       Console.print(error);
       return false;
@@ -39,8 +38,7 @@ const InputView = {
    */
   readGameCommand(command) {
     try {
-      const infomation = ObjectToValidate.command;
-      return infomation.checkValidation(command, [infomation.quit, infomation.restart]);
+      return progress.checkValidation(command, [COMMAND_KEY.QUIT, COMMAND_KEY.RESTART]);
     } catch (error) {
       Console.print(error);
       return false;

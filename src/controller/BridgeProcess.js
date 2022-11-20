@@ -1,10 +1,9 @@
+const { UTILS_URL } = require('../constant/Key');
+const { Console } = require(UTILS_URL);
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const { Console } = require('@woowacourse/mission-utils');
-const { PRINTBRIDGESIZE, PRINTMOVEMENT, PRINTGAMECOMMAND } = require('../constant/Message');
+const { ASK_MESSAGE } = require('../constant/Message');
 const BridgeGame = require('./BridgeGame');
-
-// 명심하기! controller는 데이터를 받거나 사용자에게 동작을 받으면 model 또는 view를 변경
 
 class BridgeProcess {
   #outputView = OutputView;
@@ -22,7 +21,7 @@ class BridgeProcess {
   }
 
   #inputBridgeSize() {
-    Console.readLine(PRINTBRIDGESIZE, (bridgeSize) => {
+    Console.readLine(ASK_MESSAGE.INPUT_BRIDGESIZE, (bridgeSize) => {
       const isBridgeSize = this.#inputView.readBridgeSize(bridgeSize);
       this.#gameReport.round.total === 1 ? this.#gameReport.makeBridgeInfo(bridgeSize) : '';
       isBridgeSize ? this.#inputMovement() : this.#inputBridgeSize();
@@ -30,7 +29,7 @@ class BridgeProcess {
   }
 
   #inputMovement() {
-    Console.readLine(PRINTMOVEMENT, (movement) => {
+    Console.readLine(ASK_MESSAGE.INPUT_MOVEMENT, (movement) => {
       const isMovement = this.#inputView.readMoving(movement);
       isMovement ? this.#printMovement(isMovement) : this.#inputMovement();
     });
@@ -66,7 +65,7 @@ class BridgeProcess {
   ]);
 
   #inputGameCommand(match) {
-    Console.readLine(PRINTGAMECOMMAND, (command) => {
+    Console.readLine(ASK_MESSAGE.INPUT_GAMECOMMAND, (command) => {
       const isCommand = this.#inputView.readGameCommand(command);
       this.#commandOptions[isCommand](match);
     });

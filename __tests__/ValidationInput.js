@@ -40,7 +40,7 @@ describe('움직임 테스트', () => {
 describe('명령어 테스트', () => {
   test.each(['r', 'q', 'qq', '0', '1'])('범위 미만의 금액에 대한 예외처리', (input) => {
     expect(() => {
-      const infomation = ObjectToValidate.command;
+      const infomation = ObjectToValidate.progress;
       infomation.checkValidation(input, [infomation.quit, infomation.restart]);
     }).toThrow('[ERROR]');
   });

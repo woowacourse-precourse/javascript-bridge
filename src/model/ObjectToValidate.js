@@ -2,8 +2,6 @@ const Validation = require('./Validaion');
 
 const ObjectToValidate = {
   bridgeSize: {
-    minimum: 3,
-    maximum: 20,
     checkValidation(checkElement, minimum, maximum) {
       return new Validation(
         [
@@ -15,8 +13,6 @@ const ObjectToValidate = {
     },
   },
   movement: {
-    up: 'U',
-    down: 'D',
     checkValidation(checkElement, checkList) {
       return new Validation(
         [
@@ -28,9 +24,7 @@ const ObjectToValidate = {
       ).showResult();
     },
   },
-  command: {
-    quit: 'Q',
-    restart: 'R',
+  progress: {
     checkValidation(checkElement, checkList) {
       return new Validation(
         [
