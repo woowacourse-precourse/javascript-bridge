@@ -5,14 +5,14 @@ class Model {
 
   #computerBridgeArr;
 
-  #accumulatedOX;
-
   #totalTryCount;
 
   #bridgeSize;
 
   constructor() {
     this.#totalTryCount = 0;
+    this.#userUpBridgeArr = [];
+    this.#userDownBridgeArr = [];
   }
 
   setComputerBridgeArr(arr) {
@@ -21,6 +21,14 @@ class Model {
 
   setBridgeSize(num) {
     this.#bridgeSize = num;
+  }
+
+  setUpBridgeArr(answer) {
+    this.#userUpBridgeArr.push(answer);
+  }
+
+  setDownBridgeArr(answer) {
+    this.#userDownBridgeArr.push(answer);
   }
 
   getBridgeSize() {
