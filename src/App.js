@@ -36,7 +36,6 @@ class App {
       try {
         const { status, pathMap } = this.#bridgeGame.move(moving);
         OutputView.printMap(pathMap);
-
         this.#commands[status].call(this);
       } catch (error) {
         MissionUtils.Console.print(error.message);
