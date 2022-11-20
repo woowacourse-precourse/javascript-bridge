@@ -22,7 +22,7 @@ const InputView = {
         MissionUtils.Console.print(e);
         this.readBridgeSize(callback);
       }
-      return callback(message);
+      callback(message);
     });
   },
 
@@ -54,7 +54,7 @@ const InputView = {
         MissionUtils.Console.readLine(e);
         this.readGameCommand(bridgeGame, callback)
       }
-      return callback(bridgeGame, message);
+      callback(bridgeGame, message);
     });
   },
 };

@@ -16,8 +16,9 @@ class App {
     );
     const bridgeGame = new BridgeGame(bridge);
     while (this.#isNotFinish) {
-      this.#start(bridgeGame)
-    };
+      if(bridgeGame.isFinish && bridgeGame.isSuccess) break;
+      this.#start(bridgeGame);
+    }
   }
 
   #start(bridgeGame) {
@@ -30,9 +31,9 @@ class App {
       this.#finish(bridgeGame);
     }
   }
-  
+
   #finish(bridgeGame) {
-    if(bridgeGame.isSuccess) {
+    if (bridgeGame.isSuccess) {
       OutputView.printResult(bridgeGame);
       this.#isNotFinish = false;
       return;
@@ -42,15 +43,11 @@ class App {
   }
   #finishCallback(bridgeGame, gameCommand) {
     const isRetry = bridgeGame.retry(gameCommand);
-    if(!isRetry) {
+    if (!isRetry) {
       OutputView.printResult(bridgeGame);
+      this.#isNotFinish = false;
     }
-
-    this.#isNotFinish = isRetry;
   }
 }
 
 module.exports = App;
-
-
-new App().play();

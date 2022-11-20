@@ -50,7 +50,7 @@ class BridgeGame {
     return this.#bridgeAnswers;
   }
   get isFinish() {
-    return this.#isFinish;
+    return this.#isFinish || this.#currentPosition == this.#maxPosition;
   }
   get bridge() {
     return this.#bridge;
