@@ -14,6 +14,7 @@ class BridgePlay{
 
   playRound(moving){
     const status = this.bridgeGame.move(moving);
+    OutputView.printMap(this.bridge, status);
     if(status[status.length-1] !== this.bridge[status.length-1]){
       this.playRoundOver(status);
       return;
@@ -25,25 +26,25 @@ class BridgePlay{
     this.playRoundNext(status);
   }
 
-  playRoundOver(status){
-    OutputView.printMap(status, false);
-    InputView.readGameCommand(this);
-  }
-
-  playRoundNext(status){
-    OutputView.printMap(status, true);
+  playRoundNext(){
     this.startRound();
   }
 
+  playRoundOver(){
+    InputView.readGameCommand(this);
+  }
+  quitOrRetry(option){
+    
+  }
+  
   playRoundComplete(){
     //test
     console.log("round complete");
   }
 
-  quitOrRetry(option){
-    //test
-    console.log(option);
-  }
+
+
+  
 
 }
 
