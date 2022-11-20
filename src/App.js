@@ -54,12 +54,12 @@ class App {
       if (!moveing(movePoint, obstacle)) {
         this.gameMap = this.bridgeDrawing(movePoint);
         OutputView.printMap(this.gameMap);
-        return gameResultPrint(false);
+        return this.gameResultPrint(false);
       }
     });
     this.gameMap = this.bridgeDrawing(movePoint);
     OutputView.printMap(this.gameMap);
-    return gameResultPrint(true);
+    return this.gameResultPrint(true);
   }
   BridgeMaker() {
     try {

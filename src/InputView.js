@@ -38,7 +38,7 @@ const InputView = {
     });
   },
   validMovePoint(movePoint) {
-    if (movePoint !== "U" || movePoint !== "D") {
+    if (movePoint !== "U" && movePoint !== "D") {
       throw new Error(ERROR_MESSAGE.MOVE_POINT_OUT);
     }
   },
