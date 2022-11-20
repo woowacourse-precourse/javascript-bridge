@@ -7,6 +7,7 @@ const {
   validateNext,
   validateGameCommand,
 } = require('../errorHandling');
+const { GAME } = require('../utils/constant');
 
 class GameController {
   constructor() {
@@ -14,7 +15,7 @@ class GameController {
   }
 
   start() {
-    Console.print('다리 건너기 게임을 시작합니다.');
+    Console.print(GAME.START);
     this.askBridge();
   }
 

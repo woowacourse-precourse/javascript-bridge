@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { GAME } = require('../utils/constant');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -48,11 +49,11 @@ const OutputView = {
     const { topSide, downSide } = map;
     const result = isDone ? '성공' : '실패';
 
-    Console.print('최종 게임 결과');
+    Console.print(GAME.END);
     Console.print(`[ ${topSide.join(' | ')} ]`);
     Console.print(`[ ${downSide.join(' | ')} ]`);
-    Console.print(`게임 성공 여부 : ${result}`);
-    Console.print(`총 시도한 횟수 : ${this.tryCount}`);
+    Console.print(GAME.GAME_SUCCESS + result);
+    Console.print(GAME.GAME_TRY_COUNT + this.tryCount);
     Console.close();
   },
 };
