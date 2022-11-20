@@ -20,6 +20,10 @@ const MESSAGE = Object.freeze({
   START_GAME: "다리 건너기 게임을 시작합니다.",
   INPUT_SIZE: "다리의 길이를 입력해주세요.",
   INPUT_MOVING: `이동할 칸을 선택해주세요. (위: ${WAY.UP}, 아래: ${WAY.DOWN})`,
+  GAME_RESULT: "최종 게임 결과",
+  GAME_SUCCESS: "게임 성공 여부: 성공",
+  GAME_FAIL: "게임 성공 여부: 실패",
+  GAME_TRY: "총 시도한 횟수: ",
 });
 
 const PREFIX = "[ERROR]";

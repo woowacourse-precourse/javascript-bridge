@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeMapGenerator = require("./BridgeMapGenerator");
+const { generateUpMap, generateDownMap } = require("./BridgeMapGenerator");
 const { MESSAGE } = require("./constants/index");
 
 /**
@@ -15,13 +15,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(isSafe, bridge, location) {
-    const upMap = BridgeMapGenerator.generateUpMap(isSafe, bridge, location);
-    const downMap = BridgeMapGenerator.generateDownMap(
-      isSafe,
-      bridge,
-      location
-    );
+  printMap({ isSafe, bridge, location }) {
+    const upMap = generateUpMap(isSafe, bridge, location);
+    const downMap = generateDownMap(isSafe, bridge, location);
 
     Console.print(upMap);
     Console.print(downMap);
@@ -32,7 +28,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(isSuccess, current, printMap) {
+    Console.print(MESSAGE.GAME_RESULT);
+    printMap(current);
+
+    Console.print(isSuccess ? MESSAGE.GAME_SUCCESS : MESSAGE.GAME_FAIL);
+  },
 };
 
 module.exports = OutputView;

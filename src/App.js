@@ -1,4 +1,4 @@
-const { printIntro, printMap } = require("./OutputView");
+const { printIntro, printMap, printResult } = require("./OutputView");
 const { readBridgeSize, readMoving } = require("./InputView");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker");
@@ -30,22 +30,19 @@ class App {
 
   move(moving) {
     const isSafe = this.bridgeGame.move(moving, this.#bridge, this.#location);
+    const current = { isSafe, bridge: this.#bridge, location: this.#location };
 
-    printMap(isSafe, this.#bridge, this.#location);
-    if (!isSafe) return this.fail();
-
+    printMap(current);
+    if (!isSafe) return this.result(false, current);
     this.#location += 1;
-    if (this.#location === this.#bridge.length) return this.success();
+    if (this.#location === this.#bridge.length)
+      return this.result(true, current);
 
     readMoving(this.move.bind(this));
   }
 
-  fail() {
-    console.log("실패");
-  }
-
-  success() {
-    console.log("성공");
+  result(isSuccess, current) {
+    printResult(isSuccess, current, printMap);
   }
 }
 
