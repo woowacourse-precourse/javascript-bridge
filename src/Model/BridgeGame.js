@@ -3,29 +3,24 @@ const BridgeStatistics = require('./BridgeGameStatistics');
 const BridgeMap = require('./BridgeMap');
 
 class BridgeGame {
+  #bridgeMap = new BridgeMap();
+  #statistics = new BridgeStatistics();
   #bridge;
-  #bridgeMap;
-  #statistics;
 
-  constructor(bridge) {
-    this.#bridge = bridge;
-    this.#bridgeMap = new BridgeMap();
-    this.#statistics = new BridgeStatistics(bridge.length);
-  }
-
-  start() {
+  try() {
     this.#statistics.increaseAttempt();
   }
 
-  move(moving) {
+  move(moving, canMove) {
     Validator.validateMoving(moving);
-    this.#bridgeMap.addMoveMark(moving, this.canMove(moving));
+    this.#bridgeMap.addMoveMark(moving, canMove);
     this.#statistics.increaseMoveCount();
   }
 
   retry() {
     this.#bridgeMap.reset();
     this.#statistics.resetMoveCount();
+    this.try();
   }
 
   getBridgeMap() {
@@ -36,8 +31,13 @@ class BridgeGame {
     return this.#statistics.getAttempt();
   }
 
-  isGameWin() {
-    return this.#statistics.isGameWin();
+  setBridgeGame(bridge) {
+    this.#bridge = bridge;
+    this.#statistics.setBridgeSize(bridge.length);
+  }
+
+  isGameSuccess() {
+    return this.#statistics.isGameSuccess();
   }
 
   canMove(moving) {

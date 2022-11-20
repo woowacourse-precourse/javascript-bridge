@@ -3,19 +3,19 @@ const SETTING = require('./constants/gameSetting');
 
 class Validator {
   static validateBridgeSize(bridgeSize) {
-    if (!this.isBridgeSize(bridgeSize)) throw new Error(ERROR.BRIDGE_SIZE);
+    if (!this.isBridgeSize(bridgeSize)) throw ERROR.BRIDGE_SIZE;
 
     return true;
   }
 
   static validateMoving(moving) {
-    if (!this.isMoving(moving)) throw new Error(ERROR.MOVING);
+    if (!this.isMoving(moving)) throw ERROR.MOVING;
 
     return true;
   }
 
   static validateGameCommand(gameCommand) {
-    if (!this.isGameCommand(gameCommand)) throw new Error(ERROR.GAME_COMMAND);
+    if (!this.isGameCommand(gameCommand)) throw ERROR.GAME_COMMAND;
 
     return true;
   }

@@ -1,13 +1,8 @@
 const SETTING = require('../constants/gameSetting');
 
 class BridgeMap {
-  #upsideMap;
-  #downsideMap;
-
-  constructor() {
-    this.#upsideMap = [];
-    this.#downsideMap = [];
-  }
+  #upsideMap = [];
+  #downsideMap = [];
 
   addMoveMark(moving, canMove) {
     const moveMark = canMove ? SETTING.CAN_MOVE : SETTING.CANT_MOVE;

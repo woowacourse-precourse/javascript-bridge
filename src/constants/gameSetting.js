@@ -7,7 +7,7 @@ const SETTING = {
   GAME_QUIT: 'Q',
   CAN_MOVE: 'O',
   CANT_MOVE: 'X',
-  DONT_MOVE: '',
+  DONT_MOVE: ' ',
 };
 
 module.exports = Object.freeze(SETTING);

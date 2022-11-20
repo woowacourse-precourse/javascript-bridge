@@ -11,6 +11,7 @@ const OutputView = {
     this.printMap(map);
     Console.print(MESSAGE.OUTPUT.IS_GAME_SUCCESS(isGameSuccess));
     Console.print(MESSAGE.OUTPUT.ATTEMPT(attempt));
+    Console.close();
   },
 
   printGameStart() {

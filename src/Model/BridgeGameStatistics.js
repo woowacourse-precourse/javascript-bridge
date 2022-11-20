@@ -1,13 +1,7 @@
 class BridgeStatistics {
-  #bridgeSize;
-  #moveCount;
-  #attempt;
-
-  constructor(bridgeSize) {
-    this.#bridgeSize = bridgeSize;
-    this.#moveCount = 0;
-    this.#attempt = 0;
-  }
+  #bridgeSize = null;
+  #moveCount = 0;
+  #attempt = 0;
 
   increaseAttempt() {
     this.#attempt += 1;
@@ -25,7 +19,11 @@ class BridgeStatistics {
     return this.#moveCount;
   }
 
-  isGameWin() {
+  setBridgeSize(bridgeSize) {
+    this.#bridgeSize = bridgeSize;
+  }
+
+  isGameSuccess() {
     return this.#bridgeSize === this.#moveCount;
   }
 
