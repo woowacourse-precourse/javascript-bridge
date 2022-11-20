@@ -73,7 +73,7 @@ const InputView = {
   },
 
   checkGameSuccess() {
-    if (Player.gameSuccess) {
+    if (Player.getGameSuccess()) {
       return OutputView.printResult();
     }
 
