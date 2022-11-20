@@ -9,10 +9,10 @@ class App {
   }
 
   inputSize() {
-    readBridgeSize(this.generate);
+    readBridgeSize(this.generateBridge);
   }
 
-  generate(size) {
+  generateBridge(size) {
     console.log(size);
   }
 }
