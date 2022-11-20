@@ -83,4 +83,16 @@ describe('플레이어 입력값의 유효성 검사', () => {
       });
     });
   });
+
+  test('이동할 칸 - 예외처리', () => {
+    mockQuestions(['a', 'B', 'C']);
+
+    const logSpy = getLogSpy();
+
+    const game = new BridgeGame();
+
+    game.getMovingDirection().then(() => {
+      expectLogContains(getOutput(logSpy), [ERROR.INPUT_MOVING_DIRECTION]);
+    });
+  });
 });
