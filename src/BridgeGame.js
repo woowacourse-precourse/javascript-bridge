@@ -11,6 +11,8 @@ class BridgeGame {
   constructor() {
     this.#bridge;
     this.pointer = -1;
+    this.trial = 1;
+    this.success = false;
   }
 
   /**
@@ -32,6 +34,11 @@ class BridgeGame {
    */
   retry() {
     this.pointer = -1;
+    this.trial += 1;
+  }
+
+  success() {
+    this.success = true;
   }
 
   setBridge(bridgeSize) {
