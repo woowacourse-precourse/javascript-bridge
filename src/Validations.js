@@ -2,7 +2,7 @@ const ERROR = require('./Error');
 
 const validation = {
     validateRange(range, number){
-        if(number < range[0] || number > range[1]){
+        if(Number(number) < range[0] || Number(number) > range[1]){
             throw new Error(ERROR.numberNotInRange);
         }
     },
