@@ -1,12 +1,12 @@
 class Bridge {
-  #bridge;
+  #layout;
 
-  get bridge() {
-    return this.#bridge;
+  get layout() {
+    return this.#layout;
   }
 
-  set bridge(value) {
-    this.#bridge = value;
+  set layout(value) {
+    this.#layout = value;
   }
 }
 

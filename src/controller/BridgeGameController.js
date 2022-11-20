@@ -23,7 +23,7 @@ class BridgeGameController {
   createBridgeByUser(bridgeLength) {
     try {
       isCollectBridgeLength(bridgeLength);
-      this.bridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
+      this.bridge.layout = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
       InputView.readMoving(this.movingByUser.bind(this));
     } catch (error) {
       Console.print(error.message);
