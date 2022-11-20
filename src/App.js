@@ -19,5 +19,4 @@ class App {
   }
 }
 
-// module.exports = App;
-new App().play();
+module.exports = App;
