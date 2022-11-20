@@ -15,6 +15,19 @@ const BridgeMaker = {
     }
     return bridge;
   },
+  /**
+   * 무작위 값을 생성해주는 함수를 통해 생성된 무작위 값의 문자열을 다리 모양으로 변환한다.
+   * @param {string} randomNumberByString 무작위 값을 생성해주는 함수를 통해 생성된 무작위 값의 문자열
+   * @param {string[]} bridge 다리 모양을 저장할 배열
+   */
+  convertNumberToBridge(randomNumberByString, bridge) {
+    if (randomNumberByString === "0") {
+      bridge.push("U");
+    }
+    if (randomNumberByString === "1") {
+      bridge.push("D");
+    }
+  },
 };
 
 module.exports = BridgeMaker;
