@@ -11,7 +11,7 @@ class App {
   }
 
   gameStart() {
-    this.#bridgeCtrl.print(MESSAGE.START_NOTIFICATION);
+    this.#bridgeCtrl.printMessage(MESSAGE.START_NOTIFICATION);
     InputView.readBridgeSize();
   }
 }

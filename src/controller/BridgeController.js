@@ -7,7 +7,7 @@ const OutputView = require('../views/OutputView');
 class BridgeController {
   #bridgeGame;
 
-  print(message) {
+  printMessage(message) {
     OutputView.printMessage(message);
   }
 

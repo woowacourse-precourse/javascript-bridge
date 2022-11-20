@@ -18,7 +18,7 @@ const InputView = {
       this.controller.handleSize(size);
       this.readMoving();
     } catch ({ message }) {
-      this.controller.print(message);
+      this.controller.printMessage(message);
       this.readBridgeSize();
     }
   },
@@ -35,7 +35,7 @@ const InputView = {
       const isCorrectDirection = this.controller.handleDirection(direction);
       isCorrectDirection ? this.doesGameOver() : this.readGameCommand();
     } catch ({ message }) {
-      this.controller.print(message);
+      this.controller.printMessage(message);
       this.readMoving();
     }
   },
@@ -57,7 +57,7 @@ const InputView = {
       const sholudRetry = this.controller.handleCommand(command);
       sholudRetry ? this.readMoving() : this.controller.gameOver();
     } catch ({ message }) {
-      this.controller.print(message);
+      this.controller.printMessage(message);
       this.readGameCommand();
     }
   },
