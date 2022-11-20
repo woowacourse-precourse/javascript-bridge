@@ -13,9 +13,9 @@ const BridgeMaker = {
     for (let i = 0; i < size; i++) {
       bridgeNumbers.push(generateRandomNumber());
     }
-    return bridgeNumbers.map((number)=> {
-      return Number(number) === 1 ? RULE.BEHAVIOR.UP : RULE.BEHAVIOR.DOWN;
-    })
+    return bridgeNumbers.map((number) => (Number(number)
+      ? RULE.BEHAVIOR.UP
+      : RULE.BEHAVIOR.DOWN));
   },
 };
 
