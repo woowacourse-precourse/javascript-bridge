@@ -1,5 +1,5 @@
-const BridgeRandomNumberGenerator = require('../utils/BridgeRandomNumberGenerator');
-const { makeBridge } = require('../utils/BridgeMaker');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const { makeBridge } = require('../BridgeMaker');
 const { MODEL_KEY } = require('../utils/constants');
 
 class BridgeRepository {
