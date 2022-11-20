@@ -25,6 +25,16 @@ const InputCheck = {
       throw new Error("[ERROR] 이동할 칸은 U 혹은 D입니다.");
     }
   },
+
+  checkRestart(choice) {
+    this.isCorrectChoice(choice);
+  },
+
+  isCorrectChoice(choice) {
+    if (choice !== "R" && choice !== "Q") {
+      throw new Error("[ERROR] 재시작하려면 R, 종료하려면 Q를 입력해주세요.");
+    }
+  },
 };
 
 module.exports = InputCheck;
