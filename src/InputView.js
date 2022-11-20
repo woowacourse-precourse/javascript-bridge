@@ -6,12 +6,14 @@ const { MESSAGES } = require("./Constants/Constants");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeSizeCheck = require("./Check/BridgeSizeCheck");
+const MoveCheck = require("./Check/MoveCheck");
+const BridgeGame = require("./BridgeGame");
 
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-   readBridgeSize() {
+  readBridgeSize() {
     const gameRec = { moveNum: 0, attemptNum: 1, bridgeAnswer: [] };
     MissionUtils.Console.readLine(MESSAGES.ENTER_SIZE, inputLen => {
       this.checkBridgeSizeInput(inputLen, gameRec);
@@ -37,7 +39,20 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(gameRec) { // moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD, correctOrNot
+    MissionUtils.Console.readLine(MESSAGES.ENTER_MOVING, inputUOrD => {
+      try {
+        (() => new MoveCheck(inputUOrD))(); // check valid input
+      } catch (error) {
+        MissionUtils.Console.print(error);
+        this.readMoving(gameRec);
+        return;
+      }
+      gameRec.inputUOrD = inputUOrD;
+      const bridgeGame = new BridgeGame();
+      bridgeGame.move(gameRec); // moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
