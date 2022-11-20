@@ -635,7 +635,7 @@ describe('다리 이동 로그 저장하는 메서드', () => {
   });
 });
 
-describe('다리 이동 로그 메소드 테스트', () => {
+describe('다리 이동 로그 가져오는 메서드 테스트', () => {
   const bridgeGame = new BridgeGame();
   bridgeGame.move();
   bridgeGame.setBridgeLog([[0, 0], 'O']);
