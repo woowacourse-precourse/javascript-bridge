@@ -4,9 +4,10 @@ const {
   bridgeLengthValidate,
   userMoveInput,
   gameRestartInput,
+  determineGameRestart,
 } = require("./utils/inputValidate");
 
-const { INPUT_MESSAGE, COMMAND, MOVING } = require("./Constant");
+const { INPUT_MESSAGE, COMMAND, MOVING, RESULT } = require("./Constant");
 const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
@@ -22,7 +23,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.bridge, (input) => {
       if (bridgeLengthValidate(input)) return this.readBridgeSize();
-      const bridge = BridgeMaker.makeBridge(
+      const bridgeSize = BridgeMaker.makeBridge(
         input,
         BridgeRandomNumberGenerator.generate
       );
@@ -31,18 +32,23 @@ const InputView = {
         MOVING.initialLists,
         MOVING.count
       );
-      this.readMoving(bridgeGame, bridge);
+      this.readMoving(bridgeGame, bridgeSize);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(bridgeGame, bridgeSize) {
     Console.readLine(INPUT_MESSAGE.moving, (input) => {
       if (userMoveInput(input)) return this.readMoving();
-
-      this.readGameCommand();
+      const movingList = bridgeGame.move(input);
+      OutputView.printMap(movingList);
+      if (determineGameRestart(movingList))
+        return this.readGameCommand(bridgeGame, bridgeSize);
+      if (movingList[0].length === bridgeSize.length)
+        return OutputView.printResult(RESULT.success, bridgeGame);
+      return this.readMoving(bridgeGame, bridgeSize);
     });
   },
 

@@ -13,4 +13,16 @@ const gameRestartInput = (input) => {
   if (input !== "R" || input !== "Q") throw new Error(ERROR_MESSAGE.restart);
   return true;
 };
-module.exports = { bridgeLengthValidate, userMoveInput, gameRestartInput };
+const determineGameRestart = (moveLists) => {
+  const [upList, downList] = moveLists;
+  return (
+    upList.includes(BRIDGE.wrong_direction) ||
+    downList.includes(BRIDGE.wrong_direction)
+  );
+};
+module.exports = {
+  bridgeLengthValidate,
+  userMoveInput,
+  gameRestartInput,
+  determineGameRestart,
+};
