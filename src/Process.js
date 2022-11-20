@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
@@ -25,9 +26,7 @@ class Process {
 
   move(input) {
     this.makeResult(input);
-    const mapGenerator = new MapGenerator();
-    const map = mapGenerator.generate(this.#result);
-    OutputView.printMap(map);
+    this.printMap();
 
     if (this.#game.isAccord(input)) {
       this.#game.move();
@@ -40,12 +39,27 @@ class Process {
     this.#result.push([input, this.#game.isAccord(input)]);
   }
 
+  printMap() {
+    const mapGenerator = new MapGenerator();
+    const map = mapGenerator.generate(this.#result);
+    OutputView.printMap(map);
+  }
+
   retryOrQuit(input) {
     if (input === 'R') {
       this.#game.retry();
       this.#result = [];
       InputView.readMoving(this);
     }
+    if (input === 'Q') {
+      this.end();
+    }
+  }
+
+  end() {
+    this.printMap();
+    OutputView.printResult();
+    Console.close();
   }
 }
 
