@@ -9,9 +9,9 @@ class BridgeGame {
   #player = { movings: [] };
   #bridgeResult;
 
-  createBridge(bridgeSize, bridgePattern) {
+  createBridge(bridgePattern) {
     this.#bridge = new Bridge(bridgePattern);
-    this.#bridgeResult = new BridgeResult(bridgeSize);
+    this.#bridgeResult = new BridgeResult(bridgePattern.length);
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드

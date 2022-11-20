@@ -32,11 +32,11 @@ class BridgeGameController {
 
   makeBridgePattern(bridgeSize) {
     const bridgePattern = BridgeMaker.makeBridge(bridgeSize, generate);
-    this.createBridge(bridgeSize, [...bridgePattern]);
+    this.createBridge([...bridgePattern]);
   }
 
-  createBridge(bridgeSize, bridgePattern) {
-    this.#bridgeGame.createBridge(bridgeSize, bridgePattern);
+  createBridge(bridgePattern) {
+    this.#bridgeGame.createBridge(bridgePattern);
     this.readMoving();
   }
 
