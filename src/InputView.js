@@ -35,6 +35,10 @@ const InputView = {
    */
 
   readMoving() {
+    if (bridgeGame.isSuccess && bridgeGame.randomBridge.length === bridgeGame.index) {
+      OutPutView.printResult(bridgeGame);
+      return;
+    }
     Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (command) => {
       bridgeGame.move(command);
       OutPutView.printMap(bridgeGame.upperBridge, bridgeGame.lowerBridge);
@@ -47,7 +51,7 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (command) => {
-      if (command !== "R" || command !== "Q") throw new Error(ERROR.RETRY_COMMAND);
+      if (command !== "R" && command !== "Q") throw new Error(ERROR.RETRY_COMMAND);
       if (command === "R") {
         bridgeGame.retry(() => this.readMoving());
       }
