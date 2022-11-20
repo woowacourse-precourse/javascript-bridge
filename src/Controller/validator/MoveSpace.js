@@ -13,7 +13,7 @@ class MoveSpace {
       if (this.isAllowOrder()) throw new Error();
       return ISALLOW.TRUE;
     } catch (e) {
-      Console.print(ERROR.MOVE_ORDER);
+      Console.print(`\n${ERROR.MOVE_ORDER}`);
       return ISALLOW.FALSE;
     }
   }

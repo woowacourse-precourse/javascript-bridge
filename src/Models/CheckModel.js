@@ -1,10 +1,7 @@
-const ProductionModel = require("./ProductionModel");
-
 class CheckModel {
   #movingProcess;
 
   constructor() {
-    this.production = new ProductionModel();
     this.#movingProcess = [];
   }
 

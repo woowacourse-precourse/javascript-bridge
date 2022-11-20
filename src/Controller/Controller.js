@@ -2,10 +2,10 @@ const BridgeGame = require("../Models/BridgeGame");
 const BridgeSize = require("./validator/BridgeSize");
 const MoveSpace = require("./validator/MoveSpace");
 const GameCommand = require("./validator/GAMECOMMAND");
+const CheckModel = require("../Models/CheckModel");
 const OutputView = require("../View/OutputView");
 const InputView = require("../View/InputView");
 const { RESULT } = require("../utils/constants");
-const CheckModel = require("../Models/CheckModel");
 
 class Controller {
   #BridgeGame;
@@ -52,7 +52,7 @@ class Controller {
     const nowStep = this.#CheckModel.checkNowStep();
     OutputView.printMap(currentMap, nowStep, isSafe);
     if (!isSafe) this.getAnswer();
-    else if (isEnd) this.orderEnd(RESULT.TRUE);
+    else if (isEnd) this.orderEnd(RESULT.SUCCESS);
     else this.getMoving();
   }
 
@@ -68,7 +68,7 @@ class Controller {
 
   giveAnswer(answer) {
     if (this.#BridgeGame.retry(answer)) this.getMoving();
-    else this.orderEnd(RESULT.FALSE);
+    else this.orderEnd(RESULT.FAIL);
   }
 
   orderEnd(isSuccess) {

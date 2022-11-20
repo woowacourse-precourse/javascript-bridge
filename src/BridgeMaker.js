@@ -1,5 +1,5 @@
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { ORDER } = require("./utils/constants");
+const { ORDER, SPACE } = require("./utils/constants");
 
 const BridgeMaker = {
   /**
@@ -15,7 +15,7 @@ const BridgeMaker = {
     const bridge = [];
     for (let i = 0; i < size; i++) {
       const trap = generateRandomNumber();
-      bridge.push(+trap === 0 ? ORDER.DOWN : ORDER.UP);
+      bridge.push(+trap === SPACE.DOWN ? ORDER.DOWN : ORDER.UP);
     }
 
     return bridge;

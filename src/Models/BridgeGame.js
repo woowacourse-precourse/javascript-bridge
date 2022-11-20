@@ -1,10 +1,12 @@
 const ProductionModel = require("./ProductionModel");
-
-const { SPACE, COMMAND, ORDER, MARK } = require("../utils/constants");
 const CheckModel = require("./CheckModel");
 
+const { SPACE, COMMAND, ORDER, MARK } = require("../utils/constants");
+
 class BridgeGame {
-  #size;
+  #production;
+
+  #checkModel;
 
   #bridge;
 
@@ -15,9 +17,8 @@ class BridgeGame {
   #currentMap;
 
   constructor() {
-    this.production = new ProductionModel();
-    this.checkModel = new CheckModel();
-    this.#size = 0;
+    this.#production = new ProductionModel();
+    this.#checkModel = new CheckModel();
     this.#attemptCnt = 1;
     this.#bridge = [];
     this.#movingProcess = [];
@@ -25,18 +26,17 @@ class BridgeGame {
   }
 
   receiveSize(size) {
-    this.#size = size;
-    this.receiveBridge();
+    this.receiveBridge(size);
   }
 
-  receiveBridge() {
-    this.#bridge = this.production.makeBridge(this.#size);
+  receiveBridge(size) {
+    this.#bridge = this.#production.makeBridge(size);
   }
 
   move(moving) {
     this.#movingProcess.push(moving);
-    this.#currentMap = this.production.makeMap([[], []], this.#movingProcess);
-    const [isSafe, isEnd] = this.checkModel.check(
+    this.#currentMap = this.#production.makeMap([[], []], this.#movingProcess);
+    const [isSafe, isEnd] = this.#checkModel.check(
       this.#bridge,
       this.#movingProcess
     );
@@ -45,7 +45,7 @@ class BridgeGame {
   }
 
   markTrap() {
-    const nowStep = this.checkModel.checkNowStep();
+    const nowStep = this.#checkModel.checkNowStep();
     const currentSpace = this.#movingProcess.pop();
     this.#currentMap[SPACE[currentSpace]][nowStep] = MARK.TRAP;
   }

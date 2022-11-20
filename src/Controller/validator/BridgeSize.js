@@ -13,7 +13,7 @@ class BridgeSize {
       if (this.isAllowNumber() || this.isAllowRange()) throw new Error();
       return ISALLOW.TRUE;
     } catch (error) {
-      Console.print(ERROR.BRIDGE_SIZE);
+      Console.print(`\n${ERROR.BRIDGE_SIZE}`);
       return ISALLOW.FALSE;
     }
   }

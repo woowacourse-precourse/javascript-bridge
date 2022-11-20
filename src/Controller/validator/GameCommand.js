@@ -13,7 +13,7 @@ class GameCommand {
       if (this.isAllowOrder()) throw new Error();
       return ISALLOW.TRUE;
     } catch (e) {
-      Console.print(ERROR.GAMECOMMAND);
+      Console.print(`\n${ERROR.GAMECOMMAND}`);
       return ISALLOW.FALSE;
     }
   }

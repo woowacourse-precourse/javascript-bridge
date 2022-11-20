@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { RESULT, MANAGER } = require("../utils/constants");
+const { RESULT, MANAGER, TEXT } = require("../utils/constants");
 
 const OutputView = {
   printStart() {
@@ -13,12 +13,12 @@ const OutputView = {
   },
 
   printResult(nowMap, attemptCnt, isSuccess) {
-    Console.print(`\n최종 게임 결과`);
+    Console.print(`\n${TEXT.FINAL_RESULT}`);
     nowMap.forEach((bridge) => {
       Console.print(`[ ${bridge.join(" | ")} ]`);
     });
-    Console.print(`\n게임 성공 여부: ${RESULT[isSuccess]}`);
-    Console.print(`총 시도한 횟수: ${attemptCnt}`);
+    Console.print(`\n${TEXT.IS_SUCCESS}: ${RESULT[isSuccess]}`);
+    Console.print(`${TEXT.TOTAL_ATTEMPT_CNT}: ${attemptCnt}`);
     Console.close();
   },
 };

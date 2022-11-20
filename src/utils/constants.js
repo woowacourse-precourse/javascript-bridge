@@ -5,6 +5,12 @@ const MANAGER = Object.freeze({
   ASK_RETRY: "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
 });
 
+const TEXT = Object.freeze({
+  FINAL_RESULT: "최종 게임 결과",
+  IS_SUCCESS: "게임 성공 여부",
+  TOTAL_ATTEMPT_CNT: "총 시도한 횟수",
+});
+
 const SIZE = Object.freeze({
   MIN: 3,
   MAX: 20,
@@ -20,6 +26,7 @@ const ORDER = Object.freeze({
 const SPACE = Object.freeze({
   D: 1,
   U: 0,
+  DOWN: 0,
 });
 
 const MARK = Object.freeze({
@@ -27,8 +34,8 @@ const MARK = Object.freeze({
 });
 
 const PASS = Object.freeze({
-  true: "O",
-  false: " ",
+  TRUE: "O",
+  FALSE: " ",
 });
 
 const FAIL = Object.freeze({
@@ -44,8 +51,8 @@ const COMMAND = Object.freeze({
 const RESULT = Object.freeze({
   true: "성공",
   false: "실패",
-  TRUE: true,
-  FALSE: false,
+  SUCCESS: true,
+  FAIL: false,
 });
 
 const ISALLOW = Object.freeze({
@@ -63,6 +70,7 @@ const ERROR = Object.freeze({
 
 module.exports = {
   MANAGER,
+  TEXT,
   ORDER,
   SIZE,
   SPACE,
