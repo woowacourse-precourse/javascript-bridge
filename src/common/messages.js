@@ -3,7 +3,17 @@ const INPUT_MESSAGES = {
   INPUT_MOVE: '이동할 칸을 선택해주세요. (위: U, 아래:D)\n',
   INPUT_RETRY: '게임을 종료합니다.게임을 재시도하려면 R, 종료하려면 Q를 눌러주세요.',
 };
-
+const USER_VALID_INPUT = {
+  U: 'U',
+  R: 'R',
+  D: 'D',
+  Q: 'Q',
+};
+const BRIDGE_PRINT_WORD = {
+  O: 'O',
+  X: 'X',
+  SPACE: ' ',
+};
 const OUTPUT_MESSAGES = {
   OUTPUT_FINALCOUNT(count) {
     return `최종 시도 횟수 : ${count}`;
@@ -19,4 +29,6 @@ module.exports = {
   INPUT_MESSAGES,
   OUTPUT_MESSAGES,
   ERROR_MESSAGES,
+  USER_VALID_INPUT,
+  BRIDGE_PRINT_WORD,
 };
