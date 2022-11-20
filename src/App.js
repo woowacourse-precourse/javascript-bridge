@@ -7,23 +7,20 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 class App {
     COUNT = 0;
     BRIDGE = [];
-    GAME = new BridgeGame();
+    game = new BridgeGame();
     LAST_RESULT = [];
 
-    play() {
-        this.start();
-    }
     /**
      * 게임 시작 메시지 출력 후 다리 길이를 입력 받아 다리 생성
      */
-    async start() {
+    async play() {
         OutputView.printHello();
         let length = await InputView.readBridgeSize();
         this.BRIDGE = BridgeMaker.makeBridge(
             length,
-            BridgeRandomNumberGenerator
+            BridgeRandomNumberGenerator.generate
         );
-        this.GAME.set(this.BRIDGE);
+        this.game.set(this.BRIDGE);
         this.move();
     }
     /**
@@ -31,7 +28,7 @@ class App {
      */
     async move() {
         const direction = await InputView.readMoving();
-        let result = this.GAME.move(direction);
+        let result = this.game.move(direction);
         this.LAST_RESULT = result;
         OutputView.printMap(result);
         this.judge(result);
@@ -51,7 +48,7 @@ class App {
     async retry() {
         const answer = await InputView.readGameCommand();
         this.COUNT++;
-        let result = this.GAME.retry(answer);
+        let result = this.game.retry(answer);
         if (result) this.move();
         else this.end(1);
     }
@@ -65,3 +62,6 @@ class App {
 }
 
 module.exports = App;
+
+const app = new App();
+app.play();

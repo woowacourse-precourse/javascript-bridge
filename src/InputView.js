@@ -13,7 +13,12 @@ const InputView = {
             MissionUtils.Console.readLine(
                 "다리의 길이를 입력해주세요.\n",
                 (input) => {
-                    resolve(this.checkBridgeSize(input));
+                    try {
+                        resolve(this.checkBridgeSize(input));
+                    } catch (error) {
+                        MissionUtils.Console.print(error.message);
+                        resolve(this.readBridgeSize());
+                    }
                 }
             )
         );
@@ -24,7 +29,7 @@ const InputView = {
      * @returns {number}
      */
     checkBridgeSize(input) {
-        if (Number.isNaN(input + "."))
+        if (!Number.isInteger(Number(input)))
             throw new Error("[ERROR] 다리 길이는 숫자여야 합니다.");
         const int = Number(input);
         if (int < 3 || int > 20)
@@ -42,7 +47,12 @@ const InputView = {
             MissionUtils.Console.readLine(
                 "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
                 (input) => {
-                    resolve(this.checkMoving(input));
+                    try {
+                        resolve(this.checkMoving(input));
+                    } catch (error) {
+                        MissionUtils.Console.print(error.message);
+                        resolve(this.readMoving());
+                    }
                 }
             );
         });
@@ -66,7 +76,12 @@ const InputView = {
             MissionUtils.Console.readLine(
                 "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
                 (input) => {
-                    resolve(this.checkGameCommand(input));
+                    try {
+                        resolve(this.checkGameCommand(input));
+                    } catch (error) {
+                        MissionUtils.Console.print(error.message);
+                        resolve(this.readGameCommand());
+                    }
                 }
             );
         });
