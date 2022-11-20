@@ -1,5 +1,7 @@
 const { printIntro } = require("./OutputView");
 const { readBridgeSize } = require("./InputView");
+const { generate } = require("./BridgeRandomNumberGenerator");
+const { makeBridge } = require("./BridgeMaker");
 
 class App {
   play() {
@@ -13,7 +15,9 @@ class App {
   }
 
   generateBridge(size) {
-    console.log(size);
+    const bridge = makeBridge(size, generate);
+
+    console.log(bridge);
   }
 }
 
