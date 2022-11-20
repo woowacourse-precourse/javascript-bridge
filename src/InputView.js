@@ -1,11 +1,12 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Message = require('../src/MessageContent')
+const isNumber = require('../src/validator/isNumber')
 
 const InputView = {
 
   readBridgeSize(callback) {
     MissionUtils.Console.readLine(Message.BRIDGE_SIZE, size => {
-      callback(size)
+      callback(isNumber(size))
     })
   },
 
