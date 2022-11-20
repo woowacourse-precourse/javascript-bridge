@@ -12,11 +12,13 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = Array.from(Array(2), () => Array(size).fill(''));
-    for (let bridgeIndex; bridgeIndex < size; bridgeIndex += 1) {
-      const upOrDown = generateRandomNumber();
+    for (let bridgeIndex = 0; bridgeIndex < size; bridgeIndex += 1) {
+      const random = generateRandomNumber(); // number가 아니라 string으로 와서 타입 변환 필요
+      const upOrDown = Number(random);
       if (upOrDown === 1) bridge[0][bridgeIndex] = MOVE.UP;
       if (upOrDown === 0) bridge[1][bridgeIndex] = MOVE.DOWN;
     }
+    console.log(size, bridge);
     return bridge;
   },
 };
