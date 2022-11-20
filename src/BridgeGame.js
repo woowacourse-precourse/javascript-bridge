@@ -43,7 +43,7 @@ class BridgeGame {
   end() {
     return {
       bridge: this.#bridge.currentStage,
-      inputs: this.#inputs,
+      inputs: this.#inputs.slice(),
       trial: this.#trial,
     };
   }
