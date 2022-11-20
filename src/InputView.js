@@ -1,8 +1,8 @@
 const { Console } = require('@woowacourse/mission-utils');
+const BridgeGame = require('./BridgeGame');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { printMap } = require('./OutputView');
-const BridgeGame = require('./BridgeGame');
 
 const MESSAGE = Object.freeze({
   INPUT_BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',

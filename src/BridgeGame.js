@@ -1,7 +1,4 @@
-const STATE = Object.freeze({
-  MOVE: 0,
-  FAIL: 1,
-});
+const { STATE } = require('./Constant');
 
 const OBJECT = Object.freeze({
   [STATE.MOVE]: 'O',
