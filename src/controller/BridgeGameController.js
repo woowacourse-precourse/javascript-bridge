@@ -1,6 +1,7 @@
 const BridgeGame = require('../model/BridgeGame');
 const { BRIDGE_MESSAGE } = require('../utils/constant');
 const BridgeLengthValidator = require('../validator/BridgeLengthValidator');
+const MovingValidator = require('../validator/MovingValudator');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
@@ -28,6 +29,8 @@ class BridgeGameController {
 
   getMoving() {
     InputView.readMoving((moving) => {
+      new MovingValidator(moving).validate();
+
       const isSuccess = this.#bridgeGame.move(moving);
       this.printCurrentMap();
 
