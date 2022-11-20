@@ -42,17 +42,6 @@ const InputView = {
   readMoving(gameRec) { // moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD, correctOrNot
     MissionUtils.Console.readLine(MESSAGES.ENTER_MOVING, inputUOrD => {
       this.checkMovingInput(inputUOrD, gameRec);
-      // try {
-      //   (() => new MoveCheck(inputUOrD))(); // check valid input
-      // } catch (error) {
-      //   MissionUtils.Console.print(error);
-      //   this.readMoving(gameRec);
-      //   return;
-      // }
-
-      // gameRec.inputUOrD = inputUOrD;
-      // const bridgeGame = new BridgeGame();
-      // bridgeGame.move(gameRec); // moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD
     });
   },
 
