@@ -1,6 +1,7 @@
 const { RESTART_TRIGGER, QUIT_TRIGGER } = require('./constants/condition.js');
 const { GAME_MSG } = require('./constants/message.js');
 
+const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('./views/InputView.js');
 const OutputView = require('./views/OutputView.js');
 const BridgeGame = require('./BridgeGame.js');
@@ -61,6 +62,7 @@ class GameController {
       }
       if (gameCommand === QUIT_TRIGGER) {
         this.printFinalResult();
+        Console.close();
       }
     } catch ({ message }) {
       this.reRequest(this.requestRetryOrQuit, message);
