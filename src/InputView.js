@@ -3,7 +3,8 @@ const {
   isBridgeLengthValid,
   isMoveValid,
 } = require("./utils/index");
-const { GAME_MESSAGE } = require("./constants/index");
+const { GAME_MESSAGE, MOVE_VALUE } = require("./constants/index");
+const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -25,7 +26,10 @@ const InputView = {
   readMoving(bridgeGame) {
     inputUserValue(GAME_MESSAGE.INPUT_MOVE, (move) => {
       isMoveValid(move);
-      bridgeGame.move();
+      if (move === MOVE_VALUE.UP) bridgeGame.addUp();
+      if (move === MOVE_VALUE.DOWN) bridgeGame.addDown();
+
+      OutputView.printMap(bridgeGame, move);
       this.readMoving(bridgeGame);
     });
   },
