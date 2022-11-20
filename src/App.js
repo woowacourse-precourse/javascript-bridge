@@ -1,28 +1,12 @@
-const BridgeGame = require('./BridgeGame');
-const { makeBridge } = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { readBridgeSize } = require('./InputView');
-const { printError } = require('./OutputView');
-const { checkSizeInRange } = require('./Validation');
+const BridgeGameController = require('./BridgeGameController');
+const BridgeGameModel = require('./BridgeGameModel');
+
+const bridgeGameModel = new BridgeGameModel();
+const bridgeGameController = new BridgeGameController(bridgeGameModel);
 
 class App {
-  #setBridgeGame(size) {
-    const bridge = makeBridge(size, BridgeRandomNumberGenerator.generate);
-    const bridgeGame = new BridgeGame(bridge);
-    bridgeGame.start();
-  }
-
   play() {
-    readBridgeSize((size) => {
-      try {
-        const sizeInput = Number(size);
-        checkSizeInRange(sizeInput);
-        return this.#setBridgeGame(sizeInput);
-      } catch (error) {
-        printError(error);
-        return this.play();
-      }
-    });
+    bridgeGameController.setUserBridgeSize();
   }
 }
 
