@@ -12,7 +12,6 @@ class BridgeGame {
   }
 
   move(moving, canMove) {
-    Validator.validateMoving(moving);
     this.#bridgeMap.addMoveMark(moving, canMove);
     this.#statistics.increaseMoveCount();
   }
