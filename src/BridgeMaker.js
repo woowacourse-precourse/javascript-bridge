@@ -11,7 +11,7 @@ const BridgeMaker = {
     const bridge = [];
     for (let i = 0; i < size; i++) {
       const randomNumberByString = generateRandomNumber().toString();
-      BridgeMaker.convertNumberToBridge(randomNumberByString, bridge);
+      BridgeMaker.pushConvertedNumberToBridge(randomNumberByString, bridge);
     }
     return bridge;
   },
@@ -20,7 +20,7 @@ const BridgeMaker = {
    * @param {string} randomNumberByString 무작위 값을 생성해주는 함수를 통해 생성된 무작위 값의 문자열
    * @param {string[]} bridge 다리 모양을 저장할 배열
    */
-  convertNumberToBridge(randomNumberByString, bridge) {
+  pushConvertedNumberToBridge(randomNumberByString, bridge) {
     if (randomNumberByString === "0") {
       bridge.push("U");
     }
