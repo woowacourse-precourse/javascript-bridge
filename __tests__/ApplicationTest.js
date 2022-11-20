@@ -28,8 +28,9 @@ const getOutput = (logSpy) => {
   return [...logSpy.mock.calls].join('');
 };
 
-const runException = (inputs) => {
-  mockQuestions(inputs);
+const runException = (userInput, random) => {
+  mockQuestions(userInput);
+  if (random) mockRandoms(random);
   const logSpy = getLogSpy();
   const app = new App();
 
@@ -81,7 +82,24 @@ describe('다리 건너기 테스트', () => {
     expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
   });
 
-  test('예외 테스트', () => {
-    runException(['a']);
-  });
+  test.each([['a'], ['2'], ['21'], ['']])(
+    '예외 테스트: 잘못된 다리 길이 입력',
+    (input) => {
+      runException([input]);
+    }
+  );
+
+  test.each([['w'], ['u'], ['12'], ['']])(
+    '예외 테스트: 잘못된 이동 칸 입력',
+    (input) => {
+      runException(['3', input], ['1', '0', '1']);
+    }
+  );
+
+  test.each([['w'], ['r'], ['12'], ['']])(
+    '예외 테스트: 잘못된 재시작 여부 입력',
+    (input) => {
+      runException(['3', 'D', input], ['1', '0', '1']);
+    }
+  );
 });
