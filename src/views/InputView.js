@@ -10,7 +10,9 @@ const { printResult, printMap } = require("./OutputView");
 
 const InputView = {
   /**
-   * 다리의 길이를 입력받는다.
+   * 다리의 길이를 입력받는 함수
+   * @param {*} game 현재 진행 중인 게임 (인스턴스)
+   * @param {*} readMoving 사용자가 이동할 칸을 입력받는 함수
    */
   readBridgeSize(game, readMoving) {
     Console.readLine(MESSAGES.READ_BRIDGE_SIZE, (res) => {
@@ -21,7 +23,10 @@ const InputView = {
   },
 
   /**
-   * 사용자가 이동할 칸을 입력받는다.
+   * 사용자가 이동할 칸을 입력받는 함수
+   * @param {*} game 현재 진행 중인 게임 (인스턴스)
+   * @param {*} bridge 현재 만들어진 다리 (정답)
+   * @returns
    */
   readMoving(game, bridge) {
     console.log("다리", bridge); // 나중에 지울것
