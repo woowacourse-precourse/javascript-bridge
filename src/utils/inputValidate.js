@@ -1,17 +1,31 @@
 const { ERROR_MESSAGE, BRIDGE } = require("../Constant");
-
+const { Console } = require("@woowacourse/mission-utils");
 const bridgeLengthValidate = (input) => {
-  if (input < 3 || input > 20) throw new Error(ERROR_MESSAGE.range);
-  if (isNaN(input)) throw new Error(ERROR_MESSAGE.notNumber);
-  return true;
+  try {
+    if (input < 3 || input > 20) throw new Error(ERROR_MESSAGE.range);
+    if (isNaN(input)) throw new Error(ERROR_MESSAGE.notNumber);
+  } catch (err) {
+    Console.print(err.message);
+    return true;
+  }
 };
 const userMoveInput = (input) => {
-  if (input === "U" || input === "D") return true;
-  throw new Error(ERROR_MESSAGE.moving);
+  try {
+    if (input === "U" || input === "D") return true;
+    throw new Error(ERROR_MESSAGE.moving);
+  } catch (err) {
+    Console.print(err.message);
+    return true;
+  }
 };
 const gameRestartInput = (input) => {
-  if (input === "R" || input === "Q") return true;
-  throw new Error(ERROR_MESSAGE.restart);
+  try {
+    if (input === "R" || input === "Q") return true;
+    throw new Error(ERROR_MESSAGE.restart);
+  } catch (err) {
+    Console.print(err.message);
+    return true;
+  }
 };
 const determineGameRestart = (moveLists) => {
   const [upList, downList] = moveLists;
