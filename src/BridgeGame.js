@@ -6,10 +6,13 @@ class BridgeGame {
   #order;
   #map;
 
-  setBridge(bridge) {
-    this.#bridge = bridge;
+  constructor() {
     this.#order = 0;
     this.#map = [[], []];
+  }
+
+  setBridge(bridge) {
+    this.#bridge = bridge;
   }
 
   isSuccess(move) {
