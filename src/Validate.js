@@ -2,7 +2,7 @@ const { ERROR } = require("./Constants");
 
 class Validate {
   checkBridgeSize(size) {
-    if (isNaN(size)) throw new Error(ERROR.BRIDGE_SIZE_IS_NAN);
+    if (isNaN(Number(size))) throw new Error(ERROR.BRIDGE_SIZE_IS_NAN);
     if (size < 3 || size > 20) throw new Error(ERROR.BRIDGE_SIZE_RANGE);
   }
 
@@ -17,4 +17,4 @@ class Validate {
   }
 }
 
-module.exports = { Validate };
+module.exports = Validate;

@@ -4,7 +4,7 @@ const { makeBridge } = require("../Model/BridgeMaker");
 const BridgeGame = require("../Model/BridgeGame");
 const { generate } = require("../Model/BridgeRandomNumberGenerator");
 const { GAME, MESSAGE } = require("../Constants");
-const { Validate } = require("../Validate");
+const Validate = require("../Validate");
 
 class App {
   constructor() {
@@ -22,7 +22,7 @@ class App {
     InputView.readBridgeSize((bridgeSize) => {
       this.validate.checkBridgeSize(bridgeSize);
 
-      this.bridgeSize = bridgeSize;
+      this.bridgeSize = Number(bridgeSize);
       const bridge = makeBridge(bridgeSize, generate);
       this.bridgeGame = new BridgeGame(bridge);
 
@@ -66,7 +66,7 @@ class App {
   requestGameCommand() {
     InputView.readGameCommand((command) => {
       this.validate.checkGameCommand(command);
-      
+
       if (command === GAME.REPLAY) {
         this.bridgeGame.retry();
         this.requestMoving();
