@@ -36,7 +36,7 @@ class App {
     this.#myBridge = new BridgeGame(
       BridgeRandomNumberGenerator.generate,
       BridgeMaker.makeBridge,
-      this.#myBridgeLength
+      Number(this.#myBridgeLength)
     );
     return this.moveLocation();
   }
