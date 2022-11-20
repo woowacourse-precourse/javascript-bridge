@@ -34,6 +34,12 @@ class Model {
   getBridgeSize() {
     return this.#bridgeSize;
   }
+
+  getAccumulatedOX() {
+    const upResult = `[${this.#userUpBridgeArr.join('|')}]`;
+    const downResult = `[${this.#userDownBridgeArr.join('|')}]`;
+    return `${upResult}\n${downResult}`;
+  }
 }
 
 module.exports = Model;
