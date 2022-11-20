@@ -55,6 +55,14 @@ class BridgeGame {
     return [emptyUArray, emptyDArray];
   }
 
+  static extractFromZeroTo(targetArray, range) {
+    const BEGIN = 0;
+    const copiedArray = Application.copyArray(targetArray);
+    const extractBridge = (bridge) => Application.extractArrayRange(bridge, BEGIN, range);
+
+    return copiedArray.map(extractBridge);
+  }
+
   isBeforeStart() {
     return this.#userPosition === null;
   }
