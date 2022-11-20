@@ -1,6 +1,6 @@
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const returnProcessedInput = require('./Utils/returnProcessedInput');
+const OutputMaker = require('./Utils/OutputMaker');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -19,7 +19,7 @@ class BridgeGame {
    */
   initializeBridge(size) {
     this.#Status.bridge = makeBridge(size, generate);
-    console.log(this.#Status.bridge); // For test
+    console.log(this.#Status.bridge); // FOR TEST
   }
 
   /**
@@ -34,7 +34,7 @@ class BridgeGame {
   setMoveOutput(isPassed, isCleared) {
     this.#Status.isPassed = isPassed;
     this.#Status.isCleared = isCleared;
-    this.#Status.output = returnProcessedInput.getProcessedInput(this.#Status.Input, isPassed);
+    this.#Status.output = OutputMaker.makeOutput(this.#Status.Input, isPassed);
   }
 
   /**

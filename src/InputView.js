@@ -14,20 +14,20 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(sendBridge) {
+  readBridgeSize(sendBridgeToModel) {
     Console.readLine(INPUT_MESSAGE.start, (size) => {
       const isError = isCorrectBridgeSize(Number(size));
-      sendBridge(size, isError);
+      sendBridgeToModel(size, isError);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(sendMoving) {
+  readMoving(sendMoveToModel) {
     Console.readLine(INPUT_MESSAGE.move, (move) => {
       const isError = isCorrectCharactor(move) || isCorrectMoveCommand(move);
-      sendMoving(move, isError);
+      sendMoveToModel(move, isError);
     });
   },
 

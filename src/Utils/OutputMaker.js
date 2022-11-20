@@ -1,8 +1,8 @@
 const { INPUT_CHAR } = require('../Constants/InputValues');
 const { STATUS } = require('../Constants/BridgeStatus');
 
-const returnProcessedInput = {
-  getProcessedInput(input, pass) {
+const OutputMaker = {
+  makeOutput(input, pass) {
     const upAndDownArray = this.upAndDown(input, pass);
     const splitUpAndDownArray = this.splitUpAndDown(upAndDownArray);
     const result = [
@@ -34,4 +34,4 @@ const returnProcessedInput = {
   },
 };
 
-module.exports = returnProcessedInput;
+module.exports = OutputMaker;
