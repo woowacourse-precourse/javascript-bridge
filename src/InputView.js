@@ -14,9 +14,8 @@ const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine(Message.BRIDGE_LENGTH, (input) => {
       let checkBoolean = CheckError.checkBridgeLength(input);
-      if (!checkBoolean) {
-        this.readBridgeSize();
-      }
+      if (!checkBoolean) return this.readBridgeSize();
+      BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator.generate);
     });
   },
   /**
