@@ -9,7 +9,9 @@ class Validator {
   }
 
   checkDirectionInput(direction) {
-
+    if (this.isNotValidDirectionInput(direction)) {
+      throw new Error('[ERROR] 이동할 칸은 위: U, 아래: D 만 입력 가능합니다.')
+    }
   }
 
   checkRetryInput(retry) {
