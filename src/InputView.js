@@ -59,8 +59,8 @@ const InputView = {
         this.BRIDGE_GAME.move(userAnswer);
         return OutputView.printResult(this.SUCCESS_MESSAGE, this.COUNT);
       }
-      this.BRIDGE_GAME.move(userAnswer);
       this.INDEX += 1;
+      this.BRIDGE_GAME.move(userAnswer);
       return this.readMoving(bridgeArray);
     }
     return this.fail(userAnswer, bridgeArray);
@@ -77,7 +77,7 @@ const InputView = {
    */
   readGameCommand(bridgeArray) {
     MissionUtils.Console.readLine(
-      '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
+      '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
       (userInput) => {
         this.validateGameCommand(userInput, bridgeArray);
       }
@@ -102,7 +102,7 @@ const InputView = {
       OutputView.removeArray();
       this.readMoving(bridgeArray);
     }
-    if (userInput === 'Q') this.BRIDGE_GAME.retry(userInput, bridgeArray, this.COUNT);
+    if (userInput === 'Q') this.BRIDGE_GAME.retry(userInput, this.COUNT);
   },
 };
 
