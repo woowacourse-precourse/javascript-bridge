@@ -22,11 +22,19 @@ class CrossBrigeGame {
     InputView.readBridgeSize(this.checkBridgeSize.bind(this));
   }
 
+  checkBridgeSize(size) {
+    try {
+      Validator.isValidBridgeSize(size);
+      this.setBridge(size);
+    } catch (error) {
+      OutputView.printExceptionMessage(error);
+      this.askBridgeSize();
+    }
+  }
+
   setBridge(size) {
-    Validator.isValidBridgeSize(size);
     const generateRandomNumber = () => BridgeRandomNumberGenerator.generate();
     const bridge = BridgeMaker.makeBridge(size, generateRandomNumber);
-    console.log(bridge);
     this.bridgeGame.setBridge(bridge);
     this.askMoving();
   }
@@ -35,8 +43,17 @@ class CrossBrigeGame {
     InputView.readMoving(this.makeMoving.bind(this));
   }
 
+  checkMoving(moving) {
+    try {
+      Validator.isValidMoving(moving);
+      this.makeMoving(moving);
+    } catch (error) {
+      OutputView.printExceptionMessage(error);
+      this.askMoving();
+    }
+  }
+
   makeMoving(moving) {
-    Validator.isValidMoving(moving);
     const crossMove = this.bridgeGame.move(moving);
     OutputView.printMap(crossMove);
     return this.checkStatus(crossMove);
@@ -56,8 +73,17 @@ class CrossBrigeGame {
     InputView.readGameCommand(this.checkRetry.bind(this));
   }
 
+  checkRetry(input) {
+    try {
+      Validator.isValidInput(input);
+      this.makeRetry(input);
+    } catch (error) {
+      OutputView.printExceptionMessage(error);
+      this.askRetry();
+    }
+  }
+
   makeRetry(input) {
-    Validator.isValidInput(input);
     if (input == GAME.RETRY) {
       return this.makeNewGame(input);
     }

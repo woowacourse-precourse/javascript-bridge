@@ -2,7 +2,7 @@
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME } = require("./constants");
+const { GAME, BRIDGE_MOVEMENT, ERROR } = require("./constants");
 
 const OutputView = {
   /**
@@ -50,6 +50,10 @@ const OutputView = {
    */
   printResult() {
     Console.print(GAME.END_RESULT);
+  },
+
+  printExceptionMessage(e) {
+    Console.print(e.message);
   },
 
   printSucessOrFail(isSuccess) {
