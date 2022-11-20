@@ -1,5 +1,4 @@
 const Validator = require('../src/view/Validator');
-const { ERROR_MESSAGES } = require('../src/constants/messages');
 
 describe('🌈 Validator 클래스 테스트 ', () => {
   test('⚡ 사용자가 공백을 입력하면 emptyInput 예외 처리됩니다.', () => {
@@ -38,5 +37,15 @@ describe('🌈 Validator 클래스 테스트 ', () => {
         validator.invalidMoveCommand(input);
       });
     }).toThrow('invalidMoveInput');
+  });
+
+  test('⚡ 사용자가 다리 건너기 게임 실패시 리트라이 커맨드로 대문자 R 또는 대문자 Q가 아닌 값을 입력하면 예외 처리됩니다.', () => {
+    const validator = new Validator();
+    const userInput = ['0', '다리 건너기 게임', 'r', 'q', 'Qq', 'RRR'];
+    expect(() => {
+      userInput.forEach((input) => {
+        validator.invalidRetryCommand(input);
+      });
+    }).toThrow('invalidGameOverInput');
   });
 });
