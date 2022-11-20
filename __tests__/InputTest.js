@@ -49,4 +49,10 @@ describe("입력 테스트", () => {
       Validation.checkUserMoveInput("A");
     }).toThrow(ERROR_MESSAGE.MOVE_INPUT);
   });
+
+  test("재시작 입력 관련 유저의 입력이 대문자 R, Q 가 아닌 경우 예외 처리한다.", () => {
+    expect(() => {
+      Validation.checkCommandInput("a");
+    }).toThrow(ERROR_MESSAGE.COMMAND);
+  });
 });
