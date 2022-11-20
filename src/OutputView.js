@@ -20,24 +20,37 @@ const OutputView = {
     let correctValue=this.printMapHelper(userSpace,bridgeArray,count)
     let bridgeLen=bridgeArray.length;
     console.log(bridgeLen,'다리 길이');
-    // bridgePrinter=`[ ${correctValue==='O' ? 'O':' '} ]\n[ ${correctValue==='X' ? 'X':' '} ]`
-    // MissionUtils.Console.print(bridgePrinterUp)
-    console.log(bridgePrinterAbove);
-    console.log(bridgePrinterBelow);
+    this.printArrays(bridgePrinterAbove,bridgePrinterBelow)
     return correctValue
   },
   printMapHelper(userSpace,bridgeArray,count){
-    if(userSpace==='D'&&bridgeArray[count]===0){
-      bridgePrinterAbove.push('')
+    if(userSpace==='D'&&bridgeArray[0]===0){
+      bridgePrinterAbove.push('empty')
       bridgePrinterBelow.push('O')
       return 'O'
     }
-    if(userSpace==='U'&&bridgeArray[count]===1) {
-      bridgePrinterBelow.push('')
+    if(userSpace==='U'&&bridgeArray[0]===1) {
+      bridgePrinterBelow.push('empty')
       bridgePrinterAbove.push('O')
       return 'O'
     }
     else return 'X'
+  },
+  printArrays(bridgePrinterAbove,bridgePrinterBelow){
+    let temp=''
+    let temp2=''
+    console.log(bridgePrinterAbove);
+    console.log(bridgePrinterBelow);
+    // for (let i = 0; i < bridgePrinterBelow.length; i++) {
+    //   if(bridgePrinterAbove[i]==='empty') temp+=`!`
+    //   if(bridgePrinterAbove[i]==='O') temp+='O'
+    //   if(bridgePrinterBelow[i]==='empty') temp2+='!'
+    //   if(bridgePrinterBelow[i]==='O') temp2+='O'
+    // }
+    temp=JSON.stringify(bridgePrinterAbove)
+    temp2=JSON.stringify(bridgePrinterBelow)
+    console.log(temp);
+    console.log(temp2);
   },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
