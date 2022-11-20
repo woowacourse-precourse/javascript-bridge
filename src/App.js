@@ -4,18 +4,26 @@ const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker");
 
 class App {
+  #bridge;
+
+  constructor() {
+    this.#bridge;
+  }
+
   play() {
     printIntro();
 
-    readBridgeSize(this.generateBridge);
+    readBridgeSize(this.make.bind(this));
   }
 
-  generateBridge(size) {
-    const bridge = makeBridge(size, generate);
+  make(size) {
+    this.#bridge = makeBridge(size, generate);
 
-    console.log(bridge);
+    readMoving(this.move.bind(this));
+  }
 
-    readMoving();
+  move(moving) {
+    console.log(moving);
   }
 }
 

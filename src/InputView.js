@@ -10,22 +10,22 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(generateBridge) {
+  readBridgeSize(make) {
     Console.readLine(MESSAGE.INPUT_SIZE, (size) => {
       checkBridgeSizeValid(size);
 
-      generateBridge(size);
+      make(size);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(move) {
     Console.readLine(MESSAGE.INPUT_MOVING, (moving) => {
       checkMovingValid(moving);
 
-      console.log(moving);
+      move(moving);
     });
   },
 
