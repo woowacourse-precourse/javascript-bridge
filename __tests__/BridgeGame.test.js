@@ -795,3 +795,13 @@ describe('시도 횟수 가져오는 메서드', () => {
     expect(bridgeGame.getTryCount()).toEqual(RECEIVED);
   });
 });
+
+describe('로그 기록 초기화 메서드', () => {
+  const bridgeGame = new BridgeGame();
+
+  test('메소드 이름은 "initializeLogHistory"로 정의된다.', () => {
+    const METHOD_NAME = 'initializeLogHistory';
+
+    expect(bridgeGame.initializeLogHistory.name).toEqual(METHOD_NAME);
+  });
+});
