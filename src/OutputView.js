@@ -11,29 +11,14 @@ const OutputView = {
    */
    printMap(i, bridge, check, bridgeMap){  
     if (check == 'O'){
-      if (bridge[i] == 'U'){
-        bridgeMap[0] += "| O ";
-        bridgeMap[1] += "|   ";
-      }
-      else{
-        bridgeMap[0] += "|   ";
-        bridgeMap[1] += "| O ";
-      }
+      checkO(i, bridge, bridgeMap)
     }
 
     if (check == 'X'){
-      if (bridge[i] == 'U'){
-        bridgeMap[0] += "|   ";
-        bridgeMap[1] += "| X ";
-      }
-      else{
-        bridgeMap[0] += "| X ";
-        bridgeMap[1] += "|   ";
-      }
+      checkX(i, bridge, bridgeMap)
     }
 
-    MISSIONUTILS.Console.print(bridgeMap[0]+"]");
-    MISSIONUTILS.Console.print(bridgeMap[1]+"]");
+    printBridgeMap(bridgeMap);
     return bridgeMap;
   },
 
@@ -43,29 +28,14 @@ const OutputView = {
     bridgeMap[1] = "[";
 
     if (check == 'O'){
-      if (bridge[0] == 'U'){
-        bridgeMap[0] += " O ";
-        bridgeMap[1] += "   ";
-      }
-      else{
-        bridgeMap[0] += "   ";
-        bridgeMap[1] += " O ";
-      }
+      checkFirstO(bridge, bridgeMap);
     }
 
     if (check == 'X'){
-      if (bridge[0] == 'U'){
-        bridgeMap[0] += "   ";
-        bridgeMap[1] += " X ";
-      }
-      else{
-        bridgeMap[0] += " X ";
-        bridgeMap[1] += "   ";
-      }
+      checkFirstX(bridge, bridgeMap);
     }
 
-    MISSIONUTILS.Console.print(bridgeMap[0]+"]");
-    MISSIONUTILS.Console.print(bridgeMap[1]+"]");
+    printBridgeMap(bridgeMap);
     return bridgeMap;
   },
 
@@ -78,13 +48,65 @@ const OutputView = {
     MISSIONUTILS.Console.print("");
     MISSIONUTILS.Console.print("최종 게임 결과");
 
-    MISSIONUTILS.Console.print(bridgeMap[0]+"]");
-    MISSIONUTILS.Console.print(bridgeMap[1]+"]");
+    printBridgeMap(bridgeMap);
     
     MISSIONUTILS.Console.print("");
     MISSIONUTILS.Console.print("게임 성공 여부: "+ result);
     MISSIONUTILS.Console.print("총 시도한 횟수: "+ tryCount);
   },
 };
+
+function printBridgeMap(bridgeMap){
+  MISSIONUTILS.Console.print(bridgeMap[0]+"]");
+  MISSIONUTILS.Console.print(bridgeMap[1]+"]");
+}
+
+
+function checkFirstO(bridge, bridgeMap){
+  if (bridge[0] == 'U'){
+    bridgeMap[0] += " O ";
+    bridgeMap[1] += "   ";
+  }
+  else{
+    bridgeMap[0] += "   ";
+    bridgeMap[1] += " O ";
+  }
+}
+
+function checkFirstX(bridge, bridgeMap){
+  if (bridge[0] == 'U'){
+    bridgeMap[0] += "   ";
+    bridgeMap[1] += " X ";
+  }
+  else{
+    bridgeMap[0] += " X ";
+    bridgeMap[1] += "   ";
+  }
+}
+
+function checkO(i, bridge, bridgeMap){
+  if (bridge[i] == 'U'){
+    bridgeMap[0] += "| O ";
+    bridgeMap[1] += "|   ";
+  }
+  else{
+    bridgeMap[0] += "|   ";
+    bridgeMap[1] += "| O ";
+  }
+}
+
+function checkX(i, bridge, bridgeMap){
+  if (bridge[i] == 'U'){
+    bridgeMap[0] += "|   ";
+    bridgeMap[1] += "| X ";
+  }
+  else{
+    bridgeMap[0] += "| X ";
+    bridgeMap[1] += "|   ";
+  }
+}
+
+
+
 
 module.exports = OutputView;

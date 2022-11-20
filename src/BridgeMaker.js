@@ -18,7 +18,6 @@ const BridgeMaker = {
         bridge[i] = "U";
       }
     }
-    
     return bridge;
   },
 };
