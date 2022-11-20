@@ -19,13 +19,19 @@ const InputView = {
         parseInt(length, 10),
         BridgeRandomNumberGenerator.generate
       );
+      this.readMoving();
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(INPUT_MESSAGE.MOVE, (userInput) => {
+      Validation.checkUserMoveInput(userInput);
+      Console.print(userInput);
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
