@@ -1,12 +1,14 @@
 const { Console } = require('@woowacourse/mission-utils');
 
 const { GAME_RULE } = require('../constants');
+
 const BridgeGame = require('../models/BridgeGame');
 const GameCommand = require('../models/command/GameCommand');
 const MovingCommand = require('../models/command/MovingCommand');
 const SizeCommand = require('../models/command/SizeCommand');
-const InputView = require('../views/InputView');
-const OutputView = require('../views/OutputView');
+
+const { readBridgeSize, readMoving, readGameCommand } = require('../views/InputView');
+const { printMap, printResult, printError } = require('../views/OutputView');
 
 class BridgeGameController {
   #game;
@@ -14,17 +16,17 @@ class BridgeGameController {
   play() {
     this.#game = new BridgeGame();
     this.#game.start();
-    InputView.readBridgeSize(this.#onBridgeSizeSubmit.bind(this));
+    readBridgeSize(this.#onBridgeSizeSubmit.bind(this));
   }
 
   #onBridgeSizeSubmit(command) {
     try {
       const sizeCommand = new SizeCommand(command);
       this.#game.setBridge(+sizeCommand.getCommand());
-      InputView.readMoving(this.#onMovingSubmit.bind(this));
+      readMoving(this.#onMovingSubmit.bind(this));
     } catch (e) {
-      OutputView.printError(e);
-      InputView.readBridgeSize(this.#onBridgeSizeSubmit.bind(this));
+      printError(e);
+      readBridgeSize(this.#onBridgeSizeSubmit.bind(this));
     }
   }
 
@@ -34,10 +36,10 @@ class BridgeGameController {
       const isCrossed = this.#game.move(movingCommand.getCommand());
       const bridgeMap = this.#game.getMap();
 
-      OutputView.printMap(bridgeMap);
+      printMap(bridgeMap);
 
       if (!isCrossed) {
-        InputView.readGameCommand(this.#onGameCommandSubmit.bind(this));
+        readGameCommand(this.#onGameCommandSubmit.bind(this));
         return;
       }
       if (this.#game.isWin()) {
@@ -45,10 +47,10 @@ class BridgeGameController {
         return;
       }
 
-      InputView.readMoving(this.#onMovingSubmit.bind(this));
+      readMoving(this.#onMovingSubmit.bind(this));
     } catch (e) {
-      OutputView.printError(e);
-      InputView.readMoving(this.#onMovingSubmit.bind(this));
+      printError(e);
+      readMoving(this.#onMovingSubmit.bind(this));
     }
   }
 
@@ -62,19 +64,19 @@ class BridgeGameController {
         this.#runQuit();
       }
     } catch (e) {
-      OutputView.printError(e);
-      InputView.readGameCommand(this.#onGameCommandSubmit.bind(this));
+      printError(e);
+      readGameCommand(this.#onGameCommandSubmit.bind(this));
     }
   }
 
   #runRetry() {
     this.#game.retry();
-    InputView.readMoving(this.#onMovingSubmit.bind(this));
+    readMoving(this.#onMovingSubmit.bind(this));
   }
 
   #runQuit() {
     const { bridgeMap, isWin, tryCount } = this.#game.quit();
-    OutputView.printResult(bridgeMap, isWin, tryCount);
+    printResult(bridgeMap, isWin, tryCount);
     Console.close();
   }
 }
