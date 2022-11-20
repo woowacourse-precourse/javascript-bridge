@@ -15,7 +15,7 @@ const {
 const { UP, RESTART, QUIT } = APPROPRIATE_INPUT;
 const { RIGHT, WRONG, UNCHOSEN } = ANSWER;
 const { COMMA, LINE } = REPLACEMENT;
-const { FAIL } = GAME_MESSAGE;
+const { SUCCESS, FAIL } = GAME_MESSAGE;
 const { close } = require("./Utils/MissionUtils");
 
 const BridgeMaker = require("./BridgeMaker");
@@ -62,6 +62,12 @@ class BridgeGame {
 
   traversable(command) {
     command === UP ? this.mark(RIGHT, UNCHOSEN) : this.mark(UNCHOSEN, RIGHT);
+
+    if (this.#round === this.#bridge.length) {
+      gameResult(SUCCESS, this.designMap.bind(this), this.#tries);
+
+      return close();
+    }
 
     moving(this.move.bind(this));
   }
