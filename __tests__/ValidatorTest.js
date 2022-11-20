@@ -29,4 +29,14 @@ describe('🌈 Validator 클래스 테스트 ', () => {
       });
     }).toThrow('invalidNumber');
   });
+
+  test('⚡ 사용자가 다리 이동 커맨드로 대문자 U 또는 대문자 D가 아닌 값을 입력하면 예외 처리됩니다.', () => {
+    const validator = new Validator();
+    const userInput = ['A', 'Uuu', 'u', 'd', 'UD', '1234'];
+    expect(() => {
+      userInput.forEach((input) => {
+        validator.invalidMoveCommand(input);
+      });
+    }).toThrow('invalidMoveInput');
+  });
 });
