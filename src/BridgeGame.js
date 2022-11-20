@@ -42,32 +42,32 @@ class BridgeGame {
     return false;
   }
 
-  drawingBridge(userMoveInputCollection, password) {
-    const upside = ['['];
-    const downside = ['['];
-    userMoveInputCollection.forEach((movingInput, index) => {
-      if (movingInput === password[index]) {
-        if (movingInput === 'U') {
-          upside.push('O', '|');
-          downside.push(' ', '|');
-        } else if (movingInput === 'D') {
-          upside.push(' ', '|');
-          downside.push('O', '|');
-        }
-      } else if (movingInput !== password[index]) {
-        if (movingInput === 'U') {
-          upside.push('X', '|');
-          downside.push(' ', '|');
-        } else if (movingInput === 'D') {
-          upside.push(' ', '|');
-          downside.push('X', '|');
-        }
+  drawingCorrectBridge(userMoveInputCollection) {
+    const userMoveBridge = [['['], ['[']];
+    userMoveInputCollection.forEach(movingInput => {
+      if (movingInput === 'U') {
+        userMoveBridge[0].push('O', '|');
+        userMoveBridge[1].push(' ', '|');
+      } else if (movingInput === 'D') {
+        userMoveBridge[0].push(' ', '|');
+        userMoveBridge[1].push('O', '|');
       }
     });
-    return [
-      BridgeGame.bridgeCloseConverter(upside).join(' '),
-      BridgeGame.bridgeCloseConverter(downside).join(' '),
-    ];
+    return userMoveBridge;
+  }
+
+  drawingWrongBridge(userMoveInputCollection) {
+    const userMoveBridge = [['['], ['[']];
+    userMoveInputCollection.forEach(movingInput => {
+      if (movingInput === 'U') {
+        userMoveBridge[0].push('X', '|');
+        userMoveBridge[1].push(' ', '|');
+      } else if (movingInput === 'D') {
+        userMoveBridge[0].push(' ', '|');
+        userMoveBridge[1].push('X', '|');
+      }
+    });
+    return userMoveBridge;
   }
 
   static bridgeCloseConverter(drawingBridge) {
