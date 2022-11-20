@@ -1,5 +1,6 @@
+const { Console } = require("@woowacourse/mission-utils");
 const { printIntro, printMap, printResult } = require("./OutputView");
-const { readBridgeSize, readMoving } = require("./InputView");
+const { readBridgeSize, readMoving, readGameCommand } = require("./InputView");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker");
 
@@ -8,10 +9,12 @@ const BridgeGame = require("./BridgeGame");
 class App {
   #bridge;
   #location;
+  #tryCount;
 
   constructor() {
     this.#bridge;
     this.#location = 0;
+    this.#tryCount = 1;
 
     this.bridgeGame = new BridgeGame();
   }
@@ -33,7 +36,7 @@ class App {
     const current = { isSafe, bridge: this.#bridge, location: this.#location };
 
     printMap(current);
-    if (!isSafe) return this.result(false, current);
+    if (!isSafe) return this.select(current);
     this.#location += 1;
     if (this.#location === this.#bridge.length)
       return this.result(true, current);
@@ -41,8 +44,22 @@ class App {
     readMoving(this.move.bind(this));
   }
 
+  select(current) {
+    readGameCommand(
+      this.bridgeGame.retry.bind(this),
+      this.result.bind(this),
+      current
+    );
+  }
+
   result(isSuccess, current) {
     printResult(isSuccess, current, printMap);
+
+    this.exit();
+  }
+
+  exit() {
+    Console.close();
   }
 }
 
