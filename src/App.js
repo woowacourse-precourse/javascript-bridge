@@ -13,32 +13,25 @@ class App {
         throw new Error(ERROR_MESSAGE.LENGTH);
       }
       const bridgeArr = bridgeMaker.makeBridge(size, bridgeRandomNumberGenerator.generate);
-      console.log(bridgeArr);
+      console.log(bridgeArr);  
 
-      this.move();
+      this.move(bridgeArr);    
     });
   }
 
   /** 4-1. 이동할 칸 입력 및 입력값 */
-  move() {
-    inputView.readMoving((movingInput) => {
-      let movingInputArr=[];
-      this.validMovingInput(movingInput);
-      movingInputArr.push(movingInput); 
-    });
-  }
-  /** 4-2. 이동할 칸 입력값 유효성 및 에러시 입력 재시작 */
-  validMovingInput(movingInput) {
-    if(movingInput !== "U" && movingInput !== "D") {
-      try {
-        throw new Error(ERROR_MESSAGE.MOVE);
-      } catch(e) {
-        Console.print(e.message);
-        this.move();
-      }
+  async move(bridgeArr) {
+    const movingInputArr = [];
+    for(let i = 0; i < bridgeArr.length; i++) {
+      await inputView.readMoving()
+        .then(value => {
+          movingInputArr.push(value);
+        }).catch(error => {
+          Console.print(error.message);
+          --i;
+        });
     }
   }
-
 }
 
 const app = new App();
