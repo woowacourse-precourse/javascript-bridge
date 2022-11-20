@@ -44,7 +44,7 @@ class Controller {
   movingDirectionForm(square) {
     try {
       this.validation.isUpOrDown(square);
-      this.checkCurrentStatus(sqaure);
+      this.checkCurrentStatus(square);
       this.checkGameFinished() ? this.endGame() : this.getMovingDirection();
     } catch (error) {
       Console.print(error);
