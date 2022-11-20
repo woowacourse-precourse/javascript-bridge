@@ -27,8 +27,7 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
-        this.Game.canMove(input);
-        const gameState = this.Game.getGameState();
+        const gameState = this.Game.move(input);
         const bridgeMap = this.Game.getBridgeMap();
         OutputView.printMap(bridgeMap);
         if (gameState == "O") {
