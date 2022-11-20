@@ -1,8 +1,10 @@
 const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 const Validator = require('./Validator');
 
 class App {
   play() {
+    OutputView.printGameStart();
     InputView.readBridgeSize(this.settingBridge);
   }
   
