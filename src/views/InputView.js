@@ -14,8 +14,7 @@ const InputView = {
       try {
         func1.call(this, input);
         InputView.readMoving.call(this, func2, func3);
-      }
-      catch (error) {
+      } catch (error) {
         InputView.inputError(error);
       }
     });
@@ -26,16 +25,16 @@ const InputView = {
    */
   readMoving(func2, func3) {
     MissionUtils.Console.readLine(`\n이동할 칸을 선택해주세요. (위: ${BRIDGE.letter.up}, 아래: ${BRIDGE.letter.down})\n`, (input) => {
-      try {
-        const [isEnd, isWin] = func2.call(this, input);
-        if (isWin) InputView.gameEnd();
-        else if (isEnd) InputView.readGameCommand.call(this, func3);
-        else InputView.readMoving.call(this, func2, func3);
+        try {
+          const gameStatus = func2.call(this, input);
+          const funcList = [func2, func3];
+
+          InputView.checkGameStatus.call(this, gameStatus, funcList);
+        } catch (error) {
+          InputView.inputError(error);
+        }
       }
-      catch (error) {
-        InputView.inputError(error);
-      }
-    });
+    );
   },
 
   /**
@@ -43,13 +42,13 @@ const InputView = {
    */
   readGameCommand(func3) {
     MissionUtils.Console.readLine(`\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: ${BRIDGE.game.retry}, 종료: ${BRIDGE.game.quit})\n`, (input) => {
-      try {
-        func3.call(this, input);
+        try {
+          func3.call(this, input);
+        } catch (error) {
+          InputView.inputError(error);
+        }
       }
-      catch (error) {
-        InputView.inputError(error);
-      }
-    });
+    );
   },
 
   gameEnd() {
@@ -59,7 +58,16 @@ const InputView = {
   inputError(error) {
     MissionUtils.Console.print(error);
     MissionUtils.Console.close();
-  }
+  },
+
+  checkGameStatus(gameStatus, funcList) {
+    const [isEnd, isWin] = gameStatus;
+    const [func2, func3] = funcList;
+    
+    if (isWin) InputView.gameEnd();
+    else if (isEnd) InputView.readGameCommand.call(this, func3);
+    else InputView.readMoving.call(this, func2, func3);
+  },
 };
 
 module.exports = InputView;
