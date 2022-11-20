@@ -59,7 +59,7 @@ class Bridge {
     }
   }
 
-  haveXvalue() {
+  haveXValue() {
     const upX = this.#upsideBridge.includes(Constant.DIRECTION.IMPOSSIBLE);
     const downX = this.#downsideBridge.includes(Constant.DIRECTION.IMPOSSIBLE);
     return upX || downX;

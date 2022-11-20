@@ -11,17 +11,17 @@ const App = require("../src/App");
  * @param {[string]} random 랜덤 넘버 0과 1중 입력한 배열
  * @returns {BridgeGame}
  */
-const testGame = (input , random) => {
+const testGame = (input, random) => {
   setTestInvOnce(input);
 
-  if(random){
-    testRandom(random)
+  if (random) {
+    testRandom(random);
   }
 
   const bridgeGame = new BridgeGame();
   bridgeGame.play();
-  return bridgeGame
-}
+  return bridgeGame;
+};
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -72,8 +72,8 @@ describe("브릿지 다리 생성 테스트", () => {
     const bridge = bridgeGame.getBridge().getOriginalBridge();
 
     expect(bridge.length).toBe(5);
-    expect(bridge.length).toBeGreaterThanOrEqual(3)
-    expect(bridge.length).toBeLessThanOrEqual(20)
+    expect(bridge.length).toBeGreaterThanOrEqual(3);
+    expect(bridge.length).toBeLessThanOrEqual(20);
   });
 
   test("브짓지는 U와 D를 원소로 가집니다.", () => {
@@ -86,47 +86,91 @@ describe("브릿지 다리 생성 테스트", () => {
     expect(bridge).not.toContain(/\d/);
   });
 
-  test.each([["E"],["0.5"],["-5"],["2"],["21"],["2+3"]])("잘못된 길이는 오류를 냅니다." , (input)=>{
-    runException([input])
-  })
+  test.each([["E"], ["0.5"], ["-5"], ["2"], ["21"], ["2+3"]])(
+    "잘못된 길이는 오류를 냅니다.",
+    (input) => {
+      runException([input]);
+    }
+  );
 });
 
 describe("브릿지 이동 테스트", () => {
-  test("숫자 1은 U , 0은 D가 나옵니다." ,()=>{
-
-    const direction = ["1","1","1","1","0"];
+  test("숫자 1은 U , 0은 D가 나옵니다.", () => {
+    const direction = ["1", "1", "1", "1", "0"];
     const bridgeGame = testGame(["5"], direction);
 
-    const result = ["U","U","U","U","D"]
+    const result = ["U", "U", "U", "U", "D"];
     const bridge = bridgeGame.getBridge().getOriginalBridge();
-    console.log(bridge)
-    bridge.forEach((direction,index) => {
-      expect(direction).toEqual(result[index])
-    } )
-  })
+    console.log(bridge);
+    bridge.forEach((direction, index) => {
+      expect(direction).toEqual(result[index]);
+    });
+  });
 
-  test.each([["3", "f"],["3", "1"],["3", "ㄱ"],["3", "!"],["3", " "]])("잘못된 방향 입력은 예외를발생시킵니다." , (input, direction)=>{
-    runException([input,direction])
-  })
+  test.each([
+    ["3", "f"],
+    ["3", "1"],
+    ["3", "ㄱ"],
+    ["3", "!"],
+    ["3", " "],
+  ])("잘못된 방향 입력은 예외를발생시킵니다.", (input, direction) => {
+    runException([input, direction]);
+  });
 
-  test("정답이 아니면 X 가 표시됩니다." ,()=>{
-    const length = ["3","D"]
-    const direction = ["1","1","1"]
-    const bridgeGame = testGame(length, direction)
+  test("정답이 아니면 X 가 표시됩니다.", () => {
+    const length = ["3", "D"];
+    const direction = ["1", "1", "1"];
+    const bridgeGame = testGame(length, direction);
 
-    const [up,down] = bridgeGame.getBridge().getBridges()
+    const [up, down] = bridgeGame.getBridge().getBridges();
 
-    expect(down).toContain(" X ")
-  })
-  test("입력하지 않은 칸은 빈칸입니다.." ,()=>{
-    const length = ["3","D"]
-    const direction = ["1","1","1"]
-    const bridgeGame = testGame(length, direction)
+    expect(down).toContain(" X ");
+  });
+  test("입력하지 않은 칸은 빈칸입니다..", () => {
+    const length = ["3", "D"];
+    const direction = ["1", "1", "1"];
+    const bridgeGame = testGame(length, direction);
 
-    const [up,down] = bridgeGame.getBridge().getBridges()
+    const [up, down] = bridgeGame.getBridge().getBridges();
 
-    expect(up).toContain(" N ")
-  })
+    expect(up).toContain(" N ");
+  });
+  test.only("입력한 만큼 다리의 길이가 늘어납니다.", () => {
+    const length = ["10", "U", "U", "U"];
+    const direction = ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"];
+    const bridgeGame = testGame(length, direction);
 
+    const bridge = bridgeGame.getBridge().getCurrentBridge();
+    expect(bridge.length).toBe(3);
+  });
+});
 
+describe("브릿지 재시작 테스트", () => {
+  test.only("재시작 시 다리 길이가 초기화 됩니다.", () => {
+    const length = ["5", "U", "U", "U"];
+    const direction = ["1", "1"];
+    const bridgeGame = testGame(length);
+
+    const bridge = bridgeGame.getBridge();
+    bridge.setAllBridgeEmpty();
+
+    const bridgeLength = bridge.getCurrentBridge().length;
+    expect(bridgeLength).toBe(0);
+  });
+
+  test.only("재시작시 시도 횟수가 증가합니다.", () => {
+    const length = ["3"];
+    const bridgeGame = testGame(length);
+    bridgeGame.restartGame();
+    bridgeGame.restartGame();
+    bridgeGame.restartGame();
+    bridgeGame.restartGame();
+    const state = bridgeGame.getState();
+
+    expect(state.tried).toBe(5);
+  });
+
+  // test.only("" ,()=>{
+
+  // })
 });

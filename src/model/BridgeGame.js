@@ -60,7 +60,7 @@ class BridgeGame {
   }
 
   continue() {
-    const haveX = this.#bridge.haveXvalue();
+    const haveX = this.#bridge.haveXValue();
 
     if (haveX) return this.retry();
     if (this.#bridge.isGameEnd()) return this.endGame();
