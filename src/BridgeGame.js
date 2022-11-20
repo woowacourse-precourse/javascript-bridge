@@ -1,18 +1,22 @@
 const Bridge = require('./domain/Bridge');
 const BridgeResult = require('./domain/BridgeResult');
+const BridgeMaker = require('./BridgeMaker');
+const { generate } = require('./BridgeRandomNumberGenerator');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
-  #player = { movings: [] };
   #bridgeResult;
+  #player = { movings: [] };
 
-  createBridge(bridgePattern) {
+  createBridge(bridgeSize) {
+    const bridgePattern = BridgeMaker.makeBridge(bridgeSize, generate);
     this.#bridge = new Bridge(bridgePattern);
     this.#bridgeResult = new BridgeResult(bridgePattern.length);
   }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
