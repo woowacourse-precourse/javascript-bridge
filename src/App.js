@@ -12,16 +12,8 @@ class App {
 
   initGame(bridgeLength) {
     this.#bridge = new BridgeGame(bridgeLength);
-    this.getMove();
-  }
-
-  getMove() {
     InputView.readMoving(this);
   }
-
-  // getCommand() {
-  //   InputView.readGameCommand(this);
-  // }
   
   proceedGame(input) {
     
@@ -38,7 +30,7 @@ class App {
   calcBridge() {
     const result = this.#bridge.move(this.#userInput);
     if (result) {
-      this.getMove();
+      InputView.readMoving(this);
     } else {
       console.log('Game Over');
     }
