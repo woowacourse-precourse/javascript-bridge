@@ -46,6 +46,15 @@ class BridgeGame {
     return isIncludeRandQ(userInput);
   }
 
+  static createEmptyUDArray(Length) {
+    const EMPTY = ' ';
+    const createEmptyArray = () => Application.createArray(Length, () => EMPTY);
+    const emptyUArray = createEmptyArray();
+    const emptyDArray = createEmptyArray();
+
+    return [emptyUArray, emptyDArray];
+  }
+
   isBeforeStart() {
     return this.#userPosition === null;
   }
