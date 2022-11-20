@@ -45,11 +45,11 @@ const OutputView = {
         Console.print(ERROR.BRIDGE_OVER_RANGE);
     },
 
-    printErrorMove() {
+    printErrorMoving() {
         Console.print(ERROR.MOVE);
     },
 
-    printErrorRestart() {
+    printErrorGameCommand() {
         Console.print(ERROR.RESTART);
     },
 };

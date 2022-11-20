@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const OutputView = require("./OutputView");
 const { STRUCTURE, MESSAGE, KEY } = require("./constant/message.js");
+const { printMap } = require("./OutputView");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -41,7 +41,7 @@ class BridgeGame {
             this.#upBridgeHistory.push(STRUCTURE.BLANK);
             this.#downBridgeHistory.push(STRUCTURE.BAD);
         }
-        OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory);
+        printMap(this.#upBridgeHistory, this.#downBridgeHistory);
     }
 
     move(move) {
@@ -62,7 +62,7 @@ class BridgeGame {
     goodMove(isUp) {
         this.addGoodMoveHistory(isUp);
         this.#bridgeCount++;
-        OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory, this.#bridgeArray);
+        printMap(this.#upBridgeHistory, this.#downBridgeHistory, this.#bridgeArray);
     }
     addGoodMoveHistory(isUp) {
         if (isUp) {
@@ -90,7 +90,7 @@ class BridgeGame {
 
     showResult(result) {
         Console.print(MESSAGE.FINISH);
-        OutputView.printMap(this.#upBridgeHistory, this.#downBridgeHistory);
+        printMap(this.#upBridgeHistory, this.#downBridgeHistory);
         Console.print(result);
         Console.print(MESSAGE.TRY + this.#gameCount);
         Console.close();

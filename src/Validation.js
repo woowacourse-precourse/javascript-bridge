@@ -1,6 +1,5 @@
-const { Console } = require("@woowacourse/mission-utils");
 const { ERROR, OPTION, KEY } = require("./constant/message.js");
-const { printErrorMove, printInvalidNumber, printErrorBridgeSize, printErrorInvalidNumber, printErrorRestart } = require("./OutputView.js");
+const { printErrorMoving, printErrorBridgeSize, printErrorInvalidNumber, printErrorGameCommand } = require("./OutputView.js");
 
 class Validation {
     static checkBridgeSizeInput(size) {
@@ -40,7 +39,7 @@ class Validation {
         try {
             throw new Error(ERROR.MOVE);
         } catch {
-            printErrorMove();
+            printErrorMoving();
             return true;
         }
     }
@@ -54,7 +53,7 @@ class Validation {
         try {
             throw new Error(ERROR.RESTART);
         } catch {
-            printErrorRestart();
+            printErrorGameCommand();
             return true;
         }
     }
