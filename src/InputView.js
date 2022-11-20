@@ -4,10 +4,8 @@ const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { printResult, printMap } = require("./OutputView");
 const {
-  validateInput,
-  validateMoveInput,
   validateRetryInput,
-  isRepeat,
+  validateisRepeat,
   validateInputCatch,
 } = require("./Validator");
 
@@ -35,14 +33,13 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (moveInput) => {
-        isRepeat(moveInput, mainBridge, bridgeGame);
-        bridgeGame.move(moveInput);
-        printMap(bridgeGame.userBridge);
-        printResult(bridgeGame);
-        if (!bridgeGame.hasNext) {
-          InputView.readGameCommand(mainBridge, bridgeGame);
-          return;
-        }
+        validateisRepeat(moveInput)
+          ? InputView.readMoving(mainBridge, bridgeGame)
+          : null;
+        InputView.doMove(moveInput, bridgeGame);
+        !bridgeGame.hasNext
+          ? InputView.readGameCommand(mainBridge, bridgeGame)
+          : null;
         InputView.readMoving(mainBridge, bridgeGame);
       }
     );
@@ -78,6 +75,12 @@ const InputView = {
         }
       }
     );
+  },
+
+  doMove(moveInput, bridgeGame) {
+    bridgeGame.move(moveInput);
+    printMap(bridgeGame.userBridge);
+    printResult(bridgeGame);
   },
 };
 
