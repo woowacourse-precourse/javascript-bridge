@@ -25,7 +25,7 @@ const InputView = {
   },
 
   setBridgeSize(bridgeSize) {
-    bridgeGame.setBridge(BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator));
+    bridgeGame.setBridge(BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate));
     this.readMoving();
   },
 

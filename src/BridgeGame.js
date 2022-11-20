@@ -24,9 +24,9 @@ class BridgeGame {
     const moveUp = Array.from({length: this.#movings.length}, () => ' ');
     const moveDown = Array.from({length: this.#movings.length}, () => ' ');
     this.#movings.forEach((moving, idx) => {
-      if (moving === 'U' && moving === this.#bridge[idx]) moveUp[idx] = '0';
+      if (moving === 'U' && moving === this.#bridge[idx]) moveUp[idx] = 'O';
       if (moving === 'U' && moving !== this.#bridge[idx]) moveUp[idx] = 'X';
-      if (moving === 'D' && moving === this.#bridge[idx]) moveDown[idx] = '0';
+      if (moving === 'D' && moving === this.#bridge[idx]) moveDown[idx] = 'O';
       if (moving === 'D' && moving !== this.#bridge[idx]) moveDown[idx] = 'X';
     })
     return { moveUp, moveDown };
