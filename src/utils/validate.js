@@ -12,6 +12,10 @@ const isMoveValid = (value) => {
   if (!isAlphabetValid(value)) throw new AppError(ERROR_MESSAGE.ALPHABET_ERROR);
 };
 
+const isRestartValid = (value) => {
+  if (isEmptyInput(value)) throw new AppError(ERROR_MESSAGE.EMPTY_ERROR);
+};
+
 const isEmptyInput = (value) => !value;
 
 const isNumberType = (value) => !Number.isNaN(Number(value));
@@ -22,4 +26,4 @@ const isRangeValid = (value) =>
 const isAlphabetValid = (value) =>
   value === MOVE_VALUE.UP || value === MOVE_VALUE.DOWN;
 
-module.exports = { isBridgeLengthValid, isMoveValid };
+module.exports = { isBridgeLengthValid, isMoveValid, isRestartValid };

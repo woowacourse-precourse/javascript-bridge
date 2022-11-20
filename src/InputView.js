@@ -2,8 +2,9 @@ const {
   inputUserValue,
   isBridgeLengthValid,
   isMoveValid,
+  isRestartValid,
 } = require("./utils/index");
-const { GAME_MESSAGE, MOVE_VALUE } = require("./constants/index");
+const { GAME_MESSAGE } = require("./constants/index");
 const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -43,7 +44,7 @@ const InputView = {
    */
   readGameCommand() {
     inputUserValue(GAME_MESSAGE.RESTART, (restart) => {
-      console.log(restart);
+      isRestartValid(restart);
     });
   },
 };
