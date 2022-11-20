@@ -1,6 +1,8 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView = require('./OutputView');
+const UserInput = require('./UserInput');
+const BridgeUnit = require('./BridgeUnit');
 
 class App {
   play() {
