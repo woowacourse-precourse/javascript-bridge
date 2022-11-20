@@ -1,6 +1,6 @@
 const { GAME_MESSAGE } = require("../Utils/Constants");
 const { BRIDGE_LENGTH } = GAME_MESSAGE;
-const { readLine } = require("../Utils/MissionUtils");
+const { readLine, print } = require("../Utils/MissionUtils");
 const Validator = require("../Utils/Validator");
 
 /**
@@ -12,8 +12,13 @@ const InputView = {
    */
   readBridgeSize(generateBridge) {
     readLine(BRIDGE_LENGTH, (size) => {
-      new Validator().bridgeLength(size);
-      generateBridge(size);
+      try {
+        new Validator().bridgeLength(size);
+        generateBridge(size);
+      } catch (error) {
+        print(error);
+        InputView.readBridgeSize(generateBridge);
+      }
     });
   },
 
