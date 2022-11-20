@@ -21,7 +21,9 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (str) => {
-      if(["U","D"].includes(str)) bridgeGame.move(str);
+      bridgeGame.move(str)
+      ? this.readMoving(bridgeGame)
+      : this.readGameCommand();
     })
   },
 
