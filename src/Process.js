@@ -11,6 +11,9 @@ class Process {
   #result = [];
   #count;
 
+  INITIAL_RETRY = 'R';
+  INITIAL_QUIT = 'Q';
+
   start() {
     this.#game = new BridgeGame();
     this.#count = 1;
@@ -48,13 +51,13 @@ class Process {
   }
 
   retryOrQuit(input) {
-    if (input === 'R') {
+    if (input === this.INITIAL_RETRY) {
       this.#game.retry();
       this.#result = [];
       this.#count += 1;
       InputView.readMoving(this);
     }
-    if (input === 'Q') {
+    if (input === this.INITIAL_QUIT) {
       this.end(false);
     }
   }

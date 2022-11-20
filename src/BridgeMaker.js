@@ -1,11 +1,17 @@
 const BridgeMaker = {
+  NUMBER_DOWN: '0',
+  NUMBER_UP: '1',
+  INITIAL_DOWN: 'D',
+  INITIAL_UP: 'U',
+
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     for (let i = 0; i < size; i++) {
       const randomNumber = generateRandomNumber();
+      console.log(randomNumber);
       let direction;
-      if (randomNumber === 0) direction = 'D';
-      if (randomNumber === 1) direction = 'U';
+      if (randomNumber === this.NUMBER_DOWN) direction = this.INITIAL_DOWN;
+      if (randomNumber === this.NUMBER_UP) direction = this.INITIAL_UP;
       bridge.push(direction);
     }
     return bridge;
