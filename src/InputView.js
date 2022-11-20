@@ -23,6 +23,7 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(MESSAGE.inputLength, (size) => {
+      MissionUtils.Console.print('')
       this.getBridgeSize(Number(size));
       Controller.getSize(Number(size));
       this.savedBridge = BridgeMaker.makeBridge(Number(size));
@@ -45,21 +46,22 @@ const InputView = {
    */
   readMoving() {
     MissionUtils.Console.readLine(MESSAGE.inputMove, (block) => {
-      this.getMoving(block); // 에러
+      // this.getMoving(block); // 에러
       Controller.addRound();
       new BridgeGame().move(block, this.savedBridge);
-      OutputView.printMap(Controller.arrayState);
+      // OutputView.printMap(Controller.arrayState);
+      if(Controller.isBlockError(block)) return this.getMoving()
       this.judgeContinue(block)
     });
   },
-  getMoving(block) { // is에러 이런식으로 밸리데이션에 분리 시도하기
+  getMoving(block) { // is에러 이런식으로 분리 시도하기
     try {
-      if (block !== GO.up && block !== GO.down) {
+      // if () {  // block !== GO.up && block !== GO.down
         throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.choose_UorD));
-      }
+      // }
     } catch (err) {
-      Controller.isBlockError();
-      this.readMoving(); // 문제3. 틀리고 다시 시작하면 메세지가 또출력됨 아isGameEnd때문인데? 지우면 readMoving재실행이 안됨 문제4 처음부터 에러나면 빈어레이가 그대로 출력됨 this.readMoving();
+      Controller.initializeBlock();
+      this.readMoving();
     }
   },
   judgeContinue(block){
@@ -72,7 +74,7 @@ const InputView = {
   },
   isGameEnd() {// 문제1. 에러가 나는 다른 문자가 들어가도 배열에 포함되니 끝나버림.
     const size = Number(Controller.size);
-    MissionUtils.Console.print(OutputView.nowArray)
+    // MissionUtils.Console.print(OutputView.nowArray)
     if (OutputView.nowArray[0].includes(SIGN.fail) || OutputView.nowArray[1].includes(SIGN.fail)) {
       return this.readGameCommand();
     }
@@ -80,7 +82,7 @@ const InputView = {
       return this.executePrintResult()
     }
   },
-  
+
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */

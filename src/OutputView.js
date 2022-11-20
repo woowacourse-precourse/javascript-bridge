@@ -27,8 +27,8 @@ const OutputView = {
     const upSideResult = `[ ${upSide} ]`;
     const downSide = arrayState[1].join(" | ");
     const downSideResult = `[ ${downSide} ]`;
-    this.resultArray = `${upSideResult}\n${downSideResult}\n`;
-    return MissionUtils.Console.print(`${upSideResult}\n${downSideResult}`);
+    this.resultArray = `${upSideResult}\n${downSideResult}`;
+    return MissionUtils.Console.print(`${upSideResult}\n${downSideResult}\n`);
   },
 
   /**

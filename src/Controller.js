@@ -29,10 +29,19 @@ const Controller = {
   addTrialCount() {
     this.tryCount += 1;
   },
-  isBlockError() {
+  initializeBlock() {
     this.round -= 1;
     this.playerArr = [];
   }, //
+  isBlockError(block){
+    if(block !== GO.up && block !== GO.down){
+      return true
+    }
+    if(block === GO.up || block === GO.down){
+      OutputView.printMap(this.arrayState);
+    }
+  },
+
 
   conveyInput(block) {
     this.addPlayerBlock(block);
