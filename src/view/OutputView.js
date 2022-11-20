@@ -12,19 +12,25 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(map, isSuccess) {
-    const { topSide, downSide } = this.remove(map, isSuccess);
+    const { topSide, downSide } = this.filterMap(map, isSuccess);
+    this.showMap(topSide, downSide);
+  },
+
+  showMap(topSide, downSide) {
     Console.print(`[ ${topSide.join(' | ')} ]`);
     Console.print(`[ ${downSide.join(' | ')} ]`);
   },
 
-  remove(map, isSuccess) {
+  filterMap(map, isSuccess) {
     const { topSide, downSide } = map;
 
     if (isSuccess) {
       if (topSide[this.time] === 'X') topSide[this.time] = ' ';
 
       if (downSide[this.time] === 'X') downSide[this.time] = ' ';
-    } else {
+    }
+
+    if (!isSuccess) {
       if (topSide[this.time] === 'O') topSide[this.time] = ' ';
 
       if (downSide[this.time] === 'O') downSide[this.time] = ' ';
@@ -49,8 +55,7 @@ const OutputView = {
     const { topSide, downSide } = map;
     const result = isDone ? '성공' : '실패';
 
-    Console.print(`[ ${topSide.join(' | ')} ]`);
-    Console.print(`[ ${downSide.join(' | ')} ]`);
+    this.showMap(topSide, downSide);
     Console.print(GAME.GAME_SUCCESS + result);
     Console.print(GAME.GAME_TRY_COUNT + this.tryCount);
     Console.close();
