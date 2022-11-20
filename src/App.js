@@ -22,12 +22,11 @@ class App {
   validateBridgeSize(bridgeSizeInput) {
     try {
       BridgeValidator.validateBridgeSize(bridgeSizeInput);
+      this.initBridgeGame(parseInt(bridgeSizeInput, 10));
     } catch (err) {
       OutputView.printErrorMessage(err.message);
       this.inputBridgeSize();
     }
-
-    this.initBridgeGame(parseInt(bridgeSizeInput, 10));
   }
 
   initBridgeGame(bridgeSize) {
@@ -45,12 +44,11 @@ class App {
   validateMoving(moving) {
     try {
       BridgeValidator.validateMoving(moving);
+      this.tryMove(moving);
     } catch (err) {
       OutputView.printErrorMessage(err.message);
       this.inputMoving();
     }
-
-    this.tryMove(moving);
   }
 
   tryMove(moving) {
