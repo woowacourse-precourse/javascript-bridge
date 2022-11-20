@@ -213,6 +213,15 @@ class BridgeGame {
   getTryCount() {
     return this.#tryCount;
   }
+
+  initializeLogHistory() {
+    const DONE = true;
+
+    this.#positionLog = new Map();
+    this.#bridgeLog = new Map();
+
+    return DONE;
+  }
 }
 
 module.exports = BridgeGame;
