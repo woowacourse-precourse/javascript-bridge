@@ -1,27 +1,41 @@
 const {Console} = require("@woowacourse/mission-utils");
-const { input_command } = require("./Messages");
 const Messages = require("./Messages");
 const Validation = require("./Validation");
 
 const InputView = {
   readBridgeSize(app) {
     Console.readLine(Messages.input_size(), (size)=>{
-      Validation.checkBridgeSize(size);
-      app.init(size);
+      try{
+        Validation.checkBridgeSize(size);
+        app.init(size);
+      }catch(err){
+        Console.print(err.message);
+        this.readBridgeSize(app);
+      }
     })
   },
 
   readMoving(bridgePlay) {
     Console.readLine(Messages.input_moving(), (moving)=>{
-      Validation.checkMoving(moving);
-      bridgePlay.playRound(moving);
+      try{
+        Validation.checkMoving(moving);
+        bridgePlay.playRound(moving);
+      }catch(err){
+        Console.print(err.message);
+        this.readMoving(bridgePlay);
+      }
     })
   },
 
   readGameCommand(bridgePlay) {
-    Console.readLine(input_command(), (option)=>{
-      Validation.checkOption(option);
-      bridgePlay.quitOrRetry(option);
+    Console.readLine(Messages.input_command(), (option)=>{
+      try{
+        Validation.checkOption(option);
+        bridgePlay.quitOrRetry(option);
+      }catch(err){
+        Console.print(err.message);
+        this.readGameCommand(bridgePlay);
+      }
     })
   },
 };
