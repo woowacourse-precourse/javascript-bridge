@@ -27,24 +27,27 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
-        const gameState = this.Game.move(input);
-        const bridgeMap = this.Game.getBridgeMap();
-        OutputView.printMap(bridgeMap);
-        if (gameState == "O") {
-          return this.readMoving();
-        }
-        if (gameState == "성공") {
-          return OutputView.printResult(
-            this.Game.getBridgeMap(),
-            gameState,
-            this.Game.getRetryCount()
-          );
-        }
-        if (gameState == "X") {
-          return this.readGameCommand("실패");
-        }
+        this.Game.fillMap(input);
+        OutputView.printMap(this.Game.getBridgeMap());
+        return this.nextRound(this.Game.move(input));
       }
     );
+  },
+
+  nextRound(gameState) {
+    if (gameState == "O") {
+      return this.readMoving();
+    }
+    if (gameState == "성공") {
+      return OutputView.printResult(
+        this.Game.getBridgeMap(),
+        gameState,
+        this.Game.getRetryCount()
+      );
+    }
+    if (gameState == "X") {
+      return this.readGameCommand("실패");
+    }
   },
 
   /**
