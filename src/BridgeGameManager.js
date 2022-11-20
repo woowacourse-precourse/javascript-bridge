@@ -2,10 +2,10 @@ const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./View/InputView');
 const OutputView = require('./View/OutputView');
-const Validation = require('./Validation');
+const Validation = require('./libs/Validation');
 const { Console } = require('@woowacourse/mission-utils');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const { throwException } = require('./ErrorHandler');
+const { throwException } = require('./libs/ErrorHandler');
 
 class BridgeGameManager {
   #bridgeGame;

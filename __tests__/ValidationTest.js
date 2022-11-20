@@ -1,5 +1,5 @@
 const { describe, expect, test } = require('@jest/globals');
-const Validation = require('../src/Validation');
+const Validation = require('../src/libs/Validation');
 
 describe('checkBridgeSize 메서트 테스트', () => {
   test.each([['3j'], ['hello']])(

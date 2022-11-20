@@ -1,5 +1,4 @@
 const { describe, expect, test } = require('@jest/globals');
-const { Console } = require('@woowacourse/mission-utils');
 const BridgeGameManager = require('../src/BridgeGameManager');
 const BridgeGame = require('../src/BridgeGame');
 

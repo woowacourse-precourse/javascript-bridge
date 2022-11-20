@@ -1,4 +1,4 @@
-const OutputView = require('./View/OutputView');
+const OutputView = require('../View/OutputView');
 
 const ErrorHandler = {
   throwException(errorMsg, callback) {
