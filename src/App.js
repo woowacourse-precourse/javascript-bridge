@@ -8,7 +8,7 @@ class App {
   }
 
   play() {
-    this.#gameController.initializeGame();
+    this.#gameController.playBridgeGame();
   }
 }
 

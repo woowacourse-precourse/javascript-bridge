@@ -58,11 +58,11 @@ class BridgeGame {
     const index = selected.length - 1;
 
     if (selected[index] === BRIDGE_GAME.INCORRECT) {
-      this.#gameStatus.status = GAME_STATUS.FAIL_END;
+      this.#gameStatus.status = GAME_STATUS.FAIL_QUIT;
     }
 
     if (selected[index] === BRIDGE_GAME.CORRECT && selected.length === this.#bridge.length) {
-      this.#gameStatus.status = GAME_STATUS.SUCCESS_END;
+      this.#gameStatus.status = GAME_STATUS.SUCCESS_QUIT;
     }
   }
 
@@ -70,15 +70,15 @@ class BridgeGame {
     return this.#gameStatus.status;
   }
 
-  retry(playGame) {
+  retry(start) {
     this.#tryCount += 1;
     this.#resetGameStatus();
-    playGame();
+    start();
   }
 
   getResult() {
     const successOrFailure =
-      this.#gameStatus.status === GAME_STATUS.SUCCESS_END
+      this.#gameStatus.status === GAME_STATUS.SUCCESS_QUIT
         ? MESSAGE_RESULT.SUCCESS
         : MESSAGE_RESULT.FAILURE;
 

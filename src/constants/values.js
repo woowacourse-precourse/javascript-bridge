@@ -22,8 +22,8 @@ const BRIDGE_GAME = Object.freeze({
 
 const GAME_STATUS = Object.freeze({
   ERROR: -1,
-  FAIL_END: -1,
-  SUCCESS_END: 0,
+  FAIL_QUIT: -1,
+  SUCCESS_QUIT: 0,
   PLAYING: 1,
 });
 
