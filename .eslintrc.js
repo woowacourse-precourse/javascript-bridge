@@ -12,6 +12,7 @@ module.exports = {
   rules: {
     "max-depth": ["error", 2],
     "max-lines-per-function": ["error", 10],
+    "max-params": ["error", 3],
     "prettier/prettier": [
       "error",
       {
