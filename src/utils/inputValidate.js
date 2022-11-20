@@ -10,18 +10,18 @@ const bridgeLengthValidate = (input) => {
   }
 };
 const userMoveInput = (input) => {
+  const isRight = (input) => input === "U" || input === "D";
   try {
-    if (input === "U" || input === "D") return true;
-    throw new Error(ERROR_MESSAGE.moving);
+    if (!isRight(input)) throw new Error(ERROR_MESSAGE.moving);
   } catch (err) {
     Console.print(err.message);
     return true;
   }
 };
 const gameRestartInput = (input) => {
+  const isRight = (input) => input === "R" || input === "Q";
   try {
-    if (input === "R" || input === "Q") return true;
-    throw new Error(ERROR_MESSAGE.restart);
+    if (!isRight(input)) throw new Error(ERROR_MESSAGE.restart);
   } catch (err) {
     Console.print(err.message);
     return true;

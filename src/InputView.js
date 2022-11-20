@@ -41,7 +41,7 @@ const InputView = {
    */
   readMoving(bridgeGame, bridge) {
     Console.readLine(INPUT_MESSAGE.moving, (input) => {
-      if (!userMoveInput(input)) return this.readMoving(bridgeGame, bridge);
+      if (userMoveInput(input)) return this.readMoving(bridgeGame, bridge);
       const movingList = bridgeGame.move(input);
       OutputView.printMap(movingList);
       if (determineGameRestart(movingList))
@@ -57,7 +57,7 @@ const InputView = {
    */
   readGameCommand(bridgeGame, bridge) {
     Console.readLine(INPUT_MESSAGE.restart, (input) => {
-      if (!gameRestartInput(input)) this.readGameCommand(bridgeGame, bridge);
+      if (gameRestartInput(input)) this.readGameCommand(bridgeGame, bridge);
 
       if (input === COMMAND.restart) {
         bridgeGame.retry();
