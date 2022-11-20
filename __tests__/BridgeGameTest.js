@@ -1,6 +1,6 @@
 const { describe, expect, test } = require('@jest/globals');
 const BridgeGameManager = require('../src/BridgeGameManager');
-const BridgeGame = require('../src/BridgeGame');
+const BridgeGame = require('../src/Model/BridgeGame');
 
 let crossingOrder = [];
 let bridge = ['U', 'D', 'D', 'U'];

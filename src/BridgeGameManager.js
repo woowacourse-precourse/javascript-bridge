@@ -1,4 +1,4 @@
-const BridgeGame = require('./BridgeGame');
+const BridgeGame = require('./Model/BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./View/InputView');
 const OutputView = require('./View/OutputView');
