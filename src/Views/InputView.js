@@ -16,6 +16,7 @@ const InputView = {
 
   readBridgeSize(callback) {
     Console.readLine(MESSAGE.SELECT_BRIDGE_SIZE, (userInput) => {
+      Console.print('');
       validateBridgeSize(userInput);
       callback(userInput);
     });

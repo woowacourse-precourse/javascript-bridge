@@ -32,7 +32,7 @@
 - [x] 컨트롤러로부터 BridgeGame에 값을 전달하고 결과값 산출한다.
 - [x] BridgeGame의 결과값을 Contorller에게 전달한다.
 - [x] 유저의 입력값과 정답을 비교한다.
-- [ ] Controller로부터 outputView로 결과를 전달해 값을 출력한다.  
+- [x] Controller로부터 outputView로 결과를 전달해 값을 출력한다.  
 - [ ] 결과값 인터페이스를 생성한다.<OutputView>
 - [ ] 유저가 다리 건너기에 성공할 경우, 결과 인터페이스를 출력한다.
 

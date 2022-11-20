@@ -8,6 +8,7 @@ const { createBlueprint } = require('../utils/bridgeHandler');
 const OutputView = {
   printStart() {
     Console.print(MESSAGE.START);
+    Console.print('');
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
@@ -18,6 +19,7 @@ const OutputView = {
     const progressMap = this.createMap(progressData);
     Console.print(progressMap.up);
     Console.print(progressMap.down);
+    Console.print('');
   },
 
   createMap(progressData) {
@@ -46,7 +48,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(progressData, playCount, gameResult) {
+    Console.print('최종 게임 결과');
+    this.printMap(progressData);
+    Console.print(`게임 성공 여부: ${gameResult}`);
+    Console.print(`총 시도한 횟수: ${playCount}`);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;

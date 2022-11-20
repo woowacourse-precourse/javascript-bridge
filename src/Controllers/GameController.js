@@ -37,19 +37,22 @@ class GameController {
     const alive = this.bridgeGame.getAlive();
     if (!alive) return this.askRetry();
 
-    const lastRound = this.bridgeGame.checkGameEnd();
-    if (lastRound) return this.win();
+    const end = this.bridgeGame.checkGameEnd();
+    if (end) return this.win();
 
     return this.selectMoving();
   }
 
   win() {
-    // output에서 Console.close();
-    console.log('win!!');
+    const progressData = this.bridgeGame.getGameProgress();
+    const playCount = this.bridgeGame.getPlayCount();
+    const gameResult = this.bridgeGame.getGameResult();
+    this.outputView.printResult(progressData, playCount, gameResult);
   }
 
   // 죽었으면 리트라이, 살았으면 다시 moving
   askRetry() {
+    this.bridgeGame.defeat();
     console.log('die');
   }
 }

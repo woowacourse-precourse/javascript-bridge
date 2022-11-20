@@ -11,8 +11,11 @@ class BridgeGame {
   #gameProgress = [];
   #round = 0;
   #alive = true;
+  #playCount = 0;
+  #gameResult = '성공';
 
   createBridge(size) {
+    this.#playCount += 1;
     this.#myBridge = BridgeMaker.makeBridge(size, generateRandomNumber);
     console.log(this.#myBridge);
   }
@@ -45,6 +48,13 @@ class BridgeGame {
     return this.#gameProgress;
   }
 
+  getPlayCount() {
+    return this.#playCount;
+  }
+
+  getGameResult() {
+    return this.#gameResult;
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
@@ -54,6 +64,10 @@ class BridgeGame {
     this.#gameProgress = [];
     this.#round = 0;
     this.#alive = true;
+  }
+
+  defeat() {
+    this.#gameResult = '실패';
   }
 }
 
