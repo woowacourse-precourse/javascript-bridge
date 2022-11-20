@@ -7,7 +7,7 @@ describe('다리 길이 입력 테스트', () => {
     '3~20까지의 숫자 입력 테스트',
     () => {
       expect((input) => {
-        gameController.setBridge(input);
+        gameController.set(input);
       }).toThrow('[ERROR]');
     }
   );
