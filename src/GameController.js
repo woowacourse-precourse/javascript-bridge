@@ -5,7 +5,6 @@ const BridgeGame = require('./BridgeGame');
 const OutputView = require('./views/OutputView');
 const InputView = require('./views/InputView');
 const { MESSAGE } = require('./constant');
-const Validator = require('./Validator');
 
 class GameController {
   #bridgeGame;
@@ -20,25 +19,12 @@ class GameController {
     this.#bridgeGame = new BridgeGame(bridge);
   }
 
-  askDirection() {
-    InputView.readMoving((direction) => {
-      try {
-        this.handleDirection(direction);
-      } catch ({ message }) {
-        OutputView.printMessage(message);
-        this.askDirection();
-      }
-    });
-  }
-
   handleDirection(direction) {
     const successfulMove = this.#bridgeGame.move(direction);
     const curMapState = this.#bridgeGame.drawMap(successfulMove, direction);
     OutputView.printMap(curMapState);
 
     return successfulMove;
-
-    successfulMove ? this.doseUserWin() : this.askRetry();
   }
 
   doseUserWin() {
