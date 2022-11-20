@@ -2,7 +2,7 @@
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME, BRIDGE_MOVEMENT, ERROR } = require("./constants");
+const { GAME, MOVEMENT } = require('./constants');
 
 const OutputView = {
   /**
@@ -14,33 +14,36 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
 
-  makeUpside(isSuccess, upMove) {
-    const upSide = [];
-    for (let i = 0; i < upMove.length - 1; i += 1) {
-      upMove[i] ? upSide.push(BRIDGE_MOVEMENT.SUCCESS) : upSide.push(' ');
-    }
-    upMove[upMove.length - 1]
-      ? upSide.push(isSuccess ? BRIDGE_MOVEMENT.SUCCESS : BRIDGE_MOVEMENT.FAIL)
-      : upSide.push(" ");
-    return upSide;
+  printGameStart() {
+    Console.print(GAME.START);
   },
 
-  makeDownside(isSuccess, downMove) {
-    const downSide = [];
-    for (let i = 0; i < downMove.length - 1; i += 1) {
-      downMove[i] ? downSide.push(BRIDGE_MOVEMENT.SUCCESS) : downSide.push(' ');
-    }
-    downMove[downMove.length - 1]
-      ? downSide.push(
-          isSuccess ? BRIDGE_MOVEMENT.SUCCESS : BRIDGE_MOVEMENT.FAIL
-        )
-      : downSide.push(" ");
-    return downSide;
+  makeUpside(lastPoint, upMove) {
+    return upMove.reduce((arr, value, idx) => {
+      if (idx === upMove.length - 1) {
+        value ? arr.push(lastPoint) : arr.push(' ');
+        return arr;
+      }
+      value ? arr.push(MOVEMENT.SUCCESS) : arr.push(' ');
+      return arr;
+    }, []);
+  },
+
+  makeDownside(lastPoint, downMove) {
+    return downMove.reduce((arr, value, idx) => {
+      if (idx === downMove.length - 1) {
+        value ? arr.push(lastPoint) : arr.push(' ');
+        return arr;
+      }
+      value ? arr.push(MOVEMENT.SUCCESS) : arr.push(' ');
+      return arr;
+    }, []);
   },
 
   printMap([isSuccess, upMove, downMove]) {
-    Console.print(`[ ${this.makeUpside(isSuccess, upMove).join(" | ")} ]`);
-    Console.print(`[ ${this.makeDownside(isSuccess, downMove).join(" | ")} ]`);
+    const lastPoint = isSuccess ? MOVEMENT.SUCCESS : MOVEMENT.FAIL;
+    Console.print(`[ ${this.makeUpside(lastPoint, upMove).join(' | ')} ]`);
+    Console.print(`[ ${this.makeDownside(lastPoint, downMove).join(' | ')} ]`);
   },
 
   /**
@@ -57,7 +60,7 @@ const OutputView = {
   },
 
   printSucessOrFail(isSuccess) {
-    Console.print(`${GAME.RESULT}${isSuccess ? "성공" : "실패"}`);
+    Console.print(`${GAME.RESULT}${isSuccess ? '성공' : '실패'}`);
   },
 
   printTryCount(gameCount) {
