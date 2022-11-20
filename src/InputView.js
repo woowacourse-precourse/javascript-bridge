@@ -2,6 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { COMMAND } = require("./constants/data");
 const { INPUT_MESSAGE } = require("./constants/message");
 const Validation = require("./Validation");
 
@@ -44,6 +45,14 @@ const InputView = {
   readGameCommand(bridge) {
     Console.readLine(INPUT_MESSAGE.RESTART, (commandInput) => {
       Validation.checkCommandInput(commandInput);
+      if (commandInput === COMMAND.RESTART) {
+        const bridgeGame = new BridgeGame();
+        bridgeGame.retry();
+        this.readMoving(bridge);
+      }
+      if (commandInput === COMMAND.END) {
+        // 게임 종료
+      }
     });
   },
 };
