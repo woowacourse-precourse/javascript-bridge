@@ -26,8 +26,8 @@ const InputView = {
   readMoving() {
     let moveInput;
     readLine(MESSAGE.INPUT.MOVE(MOVE.UP, MOVE.DOWN), (input) => {
-      moveInput = input;
       Validate.notAvailableMove(input, Object.values(MOVE));
+      moveInput = input;
     });
     return moveInput;
   },
@@ -38,6 +38,7 @@ const InputView = {
   readGameCommand() {
     let restartOrQuit;
     readLine(MESSAGE.INPUT.RESTART_OR_QUIT(PLAY.RESTART, PLAY.RESTART), (input) => {
+      Validate.notAvailablePlay(input, Object.values(PLAY));
       restartOrQuit = input;
     });
     return restartOrQuit;
