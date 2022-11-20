@@ -3,7 +3,7 @@ const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { MissionUtils } = require("@woowacourse/mission-utils");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
@@ -48,7 +48,7 @@ class App {
 
   finish = () => {
     OutputView.printResult(this.game);
-    //MissionUtils.Console.close();
+    MissionUtils.Console.close();
   }
 }
 
