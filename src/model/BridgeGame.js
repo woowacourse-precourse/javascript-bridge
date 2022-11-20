@@ -1,4 +1,4 @@
-const { ERROR } = require('../Error');
+const { ERROR } = require('../controller/Error');
 const MissionUtils = require('@woowacourse/mission-utils');
 const { GAME_STATE, MOVE, RESTART, HISTORY } = require('../constants');
 

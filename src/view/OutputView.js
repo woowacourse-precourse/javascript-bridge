@@ -35,13 +35,6 @@ const OutputView = {
     bridgeGame.exit();
   },
 
-  /**
-   * 에러 메세지를 출력한다.
-   * @param {string} message 에러 메세지
-   */
-  printError(message) {
-    MissionUtils.Console.print(message);
-  }
 };
 
 module.exports = OutputView;

@@ -1,6 +1,6 @@
 const Bridge = require('../src/model/Bridge');
 const BridgeMaker = require("../src/BridgeMaker");
-const { ERROR } = require('../src/Error');
+const { ERROR } = require('../src/controller/Error');
 
 describe("Bridge 테스트", () => {
     test.each([

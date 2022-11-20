@@ -1,7 +1,7 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const { BRIDGE_SIZE } = require('../constants');
-const { ERROR } = require('../Error');
+const { ERROR } = require('../controller/Error');
 
 /**
  * 다리 클래스

@@ -1,6 +1,6 @@
 const Bridge = require("../model/Bridge");
 const OutputView = require('../view/OutputView');
-const { ERROR_HANDLING } = require("../Error");
+const { ERROR_HANDLING } = require('./Error');
 
 /**
  * View로 부터 받은 요청을 처리하는 Controller
