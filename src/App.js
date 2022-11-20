@@ -14,7 +14,6 @@ class App {
     InputView.readBridgeSize(this.makeBridge.bind(this))
   }
   makeBridge(Length){
-    // this.validateBridgeSizeInput(Length)
     this.game.makeBridge(Length)
     InputView.readMoving(this.inputCommand.bind(this))
   }
@@ -50,14 +49,6 @@ class App {
     this.game.downside = []
     this.game.number = 0
   }
-  // validateBridgeSizeInput(size){
-  //   try{
-  //     Validate.BridgeLengthInput(size)
-  //   }catch(err){
-  //     MissionUtils.Console.print(err)
-  //     InputView.readBridgeSize(this.makeBridge.bind(this))
-  //   }
-  // }
 }
 const app = new App();
 app.play();
