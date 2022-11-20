@@ -31,6 +31,13 @@ class BridgeGame {
         }
     }
 
+    getBridgeArray() {
+        return this.#bridgeArray;
+    }
+    getBridgeCount() {
+        return this.#bridgeCount;
+    }
+
     showFail(move) {
         // console.log("BridgeGame.showFail--------------");
         if (move === KEY.UP) {

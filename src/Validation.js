@@ -3,32 +3,29 @@ const { ERROR, OPTION, KEY } = require("./constant/message.js");
 
 class Validation {
     static checkBridgeSizeInput(size) {
-        // console.log("Validation.checkBridgeSizeInput--------------------");
         const isValidNumber = this.checkNumber(size);
-        const isValidSizeRange = this.checkSizeRange(size);
+        const isValidSizeRange = this.checkBridgeSizeRange(size);
         if (isValidNumber || isValidSizeRange) {
             return true;
         }
         return false;
     }
     static checkNumber(number) {
-        // console.log("Validation.checkNumber--------------------");
-        const isInvalidNumber = !/^\d+$/g.test(number);
+        const isNotNumber = !/^\d+$/g.test(number);
         try {
-            if (isInvalidNumber) {
-                throw ERROR.BRIDGE_INVALID_NUMBER;
+            if (isNotNumber) {
+                throw new Error(ERROR.BRIDGE_INVALID_NUMBER);
             }
         } catch {
             Console.print(ERROR.BRIDGE_INVALID_NUMBER);
             return true;
         }
     }
-    static checkSizeRange(size) {
-        // console.log("Validation.checkSizeRange-------------------");
-        const isValidRange = size < OPTION.MINIMUM_LENGTH || size > OPTION.MAXIMUM_LENGTH;
+    static checkBridgeSizeRange(size) {
+        const isNotValidRange = size < OPTION.MINIMUM_LENGTH || size > OPTION.MAXIMUM_LENGTH;
         try {
-            if (isValidRange) {
-                throw ERROR.BRIDGE_OVER_RANGE;
+            if (isNotValidRange) {
+                throw new Error(ERROR.BRIDGE_OVER_RANGE);
             }
         } catch {
             Console.print(ERROR.BRIDGE_OVER_RANGE);
@@ -37,23 +34,32 @@ class Validation {
     }
 
     static checkMoveInput(move) {
-        // console.log("Validation.checkMoveInput-------------------");
-        const isNotKeyUp = move !== KEY.UP;
-        const isNotKeyDown = move !== KEY.DOWN;
-        if (isNotKeyUp || isNotKeyDown) {
+        const isKeyUp = move === KEY.UP;
+        const isKeyDown = move === KEY.DOWN;
+        if (isKeyUp || isKeyDown) {
+            return false;
+        }
+        try {
+            throw new Error(ERROR.MOVE);
+        } catch {
+            Console.print(ERROR.MOVE);
             return true;
         }
-        throw new Error(ERROR.MOVE);
     }
 
     static checkRestartInput(answer) {
-        // console.log("Validation.checkRestartInput-------------------");
-        const isNotKeyRestart = answer !== KEY.RESTART;
-        const isNotKeyQuit = answer !== KEY.QUIT;
-        if (isNotKeyRestart || isNotKeyQuit) {
+        const isKeyRestart = answer === KEY.RESTART;
+        const isKeyQuit = answer === KEY.QUIT;
+        if (isKeyRestart || isKeyQuit) {
+            console.log("flase반환");
+            return false;
+        }
+        try {
+            throw new Error(ERROR.RESTART);
+        } catch {
+            Console.print(ERROR.RESTART);
             return true;
         }
-        throw new Error(ERROR.RESTART);
     }
 }
 
