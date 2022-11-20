@@ -13,11 +13,11 @@ const BridgeMaker = {
     for (let index = 0; index < size; index += 1) {
       bridgeInfo.push(this.directionConverter(generateRandomNumber()));
     }
-    GAME_INFORMATION.setBridge(bridgeInfo);
+    return bridgeInfo;
   },
 
   directionConverter(generatedNumber) {
-    return generatedNumber === 0 ? 'D' : 'U';
+    return generatedNumber === '0' ? 'D' : 'U';
   },
 };
 

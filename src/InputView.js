@@ -9,7 +9,7 @@ const GAME_MANAGER = new BridgeGame();
 const InputView = {
   readBridgeSize() {
     Console.readLine(MESSAGE_INPUT_BRIDGE_LENGTH, (length) => {
-      BridgeMaker.makeBridge(length, generate);
+      GAME_MANAGER.setBridge(BridgeMaker.makeBridge(length, generate));
       Console.print(GAME_MANAGER.getBridge());
       InputView.readMoving();
     });
