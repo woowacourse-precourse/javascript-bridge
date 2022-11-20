@@ -12,9 +12,10 @@ class BridgeGame {
    */
   move(canWalkBridge, wantGo) {
     Player.updateMovingArr(wantGo);
-    const currentIndex = Player.movingArr.length - 1;
+    const movingArr = Player.getMovingArr();
+    const currentIndex = movingArr.length - 1;
 
-    if (Player.movingArr[currentIndex] === canWalkBridge[currentIndex]) {
+    if (movingArr[currentIndex] === canWalkBridge[currentIndex]) {
       return true;
     }
 
