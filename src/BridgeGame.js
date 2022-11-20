@@ -30,13 +30,13 @@ class BridgeGame {
     try {
       this.validator.checkBridgeSize(size);
     } catch (error) {
-      this.outputView.printError(error);
+      this.outputView.printError(error.message);
+      return;
     }
 
     const bridge = this.bridgeMaker.makeBridge(size, this.bridgeRandomNumberGenerator.generate);
     this.bridgeModel.setBridge(bridge);
 
-    console.log(`makeBridge 결과: ${this.bridgeModel.bridge}`);
     this.askMoveDirection();
   }
 
@@ -50,6 +50,13 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
+    try {
+      this.validator.checkMove(direction);
+    } catch (error) {
+      this.outputView.printError(error.message);
+      return;
+    }
+
     this.bridgeModel.move(direction);
     this.outputView.printMap(this.bridgeModel.trials);
 
@@ -78,6 +85,13 @@ class BridgeGame {
   }
 
   handleCommand(command) {
+    try {
+      this.validator.checkGameCommand(command);
+    } catch (error) {
+      this.outputView.printError(error.message);
+      return;
+    }
+
     if (command === 'R') {
       this.retry();
 

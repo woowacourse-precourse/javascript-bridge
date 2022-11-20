@@ -12,7 +12,7 @@ const BridgeMaker = {
     const bridge = [];
 
     while (size > 0) {
-      const direction = generateRandomNumber() === 1 ? 'U' : 'D';
+      const direction = generateRandomNumber() == 1 ? 'U' : 'D';
       bridge.push(direction);
       size -= 1;
     }

@@ -13,11 +13,15 @@ const Validator = {
   },
 
   checkMove(move) {
-    return this.MOVE_REGEX.test(move);
+    if (!this.MOVE_REGEX.test(move)) {
+      throw new Error(ERROR_MESSAGE.move);
+    }
   },
 
   checkGameCommand(command) {
-    return this.MOVE_REGEX.test(command);
+    if (!this.COMMAND_REGEX.test(command)) {
+      throw new Error(ERROR_MESSAGE.command);
+    }
   },
 };
 

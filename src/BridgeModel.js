@@ -1,8 +1,8 @@
 const GAME_SIGNATURE = require('./utils/constant');
 
 class BridgeModel {
+  bridge;
   constructor() {
-    this.bridge;
     this.trialCount = 1;
     this.trials = [];
     this.status = GAME_SIGNATURE.gameOn;

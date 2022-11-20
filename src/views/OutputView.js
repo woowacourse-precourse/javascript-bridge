@@ -22,7 +22,7 @@ const OutputView = {
   getBridgeMap(trials) {
     let [upperSide, lowerSide] = trials.reduce(this.handleMakeBridgeMap, ['[', '[']);
 
-    return [upperSide.slice(0, -1) + ']', lowerSide.slice(0, -1) + ']'];
+    return [upperSide.slice(0, -1) + ']', lowerSide.slice(0, -1) + ']', '\n'];
   },
 
   handleMakeBridgeMap(bridgeMap, trial) {
@@ -42,8 +42,8 @@ const OutputView = {
   },
 
   printError(error) {
+    Console.print(error);
     Console.close();
-    throw new Error(error);
   },
 
   /**
@@ -56,7 +56,7 @@ const OutputView = {
     const trialCount = bridgeModel.trialCount;
     const status = bridgeModel.status;
     Console.print(
-      `\n최종 게임 결과
+      `최종 게임 결과
 ${bridgeUpperSide}
 ${bridgeLowerSide}
 

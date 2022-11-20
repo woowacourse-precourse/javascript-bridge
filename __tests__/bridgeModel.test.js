@@ -1,7 +1,9 @@
 const BridgeModel = require('../src/BridgeModel');
 
 describe('move', () => {
-  const bridgeModel = new BridgeModel(['U', 'U', 'D', 'D']);
+  const bridgeModel = new BridgeModel();
+  bridgeModel.setBridge(['U', 'U', 'D', 'D']);
+
   test('첫 번째 이동(U): this.trials 에 {U, O} 추가', () => {
     bridgeModel.move('U');
     expect(bridgeModel.trials).toEqual([{ direction: 'U', result: 'O' }]);
