@@ -1,4 +1,7 @@
-const Bulider = require('./Builder.js');
+const { makeBridge } = require('./BridgeMaker.js');
+const { generate } = require('./utils/BridgeRandomNumberGenerator.js');
+
+const Bridge = require('./Bridge.js');
 
 class BridgeGame {
   #bridge;
@@ -11,9 +14,9 @@ class BridgeGame {
   }
 
   build(size) {
-    const builder = new Bulider();
+    const directionSymbols = makeBridge(Number(size), generate);
 
-    this.#bridge = builder.buildBridge(size);
+    this.#bridge = new Bridge(directionSymbols);
   }
 
   move(direction) {
