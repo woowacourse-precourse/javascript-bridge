@@ -1,8 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const InputView = require('./InputView');
-const { FAIL_GAME, TOTAL_ATTEMPT } = require('./constant/outputMessage');
-const App = require("./App");
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -12,12 +7,38 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(userInput, bridge, count) {
-    if (userInput !== bridge[count]) {
-      this.retry(count, bridge);
+  move(madeBridge, moveInput, count) {
+    let moveArray = [[], []];
+    if (moveInput === 'U') {
+      this.upPush(moveInput, madeBridge[count], moveArray);
+    }
+    if (moveInput === 'D') {
+      this.downPush(moveInput, madeBridge[count], moveArray);
     }
 
-    
+    return moveArray;
+  }
+
+  upPush(moveInput, madeBridge, moveArray) {
+    if (moveInput === madeBridge) {
+      moveArray[0].push('O');
+      moveArray[1].push(' ');
+      return;
+    }
+
+    moveArray[0].push('X');
+    moveArray[1].push(' ');
+  }
+
+  downPush(moveInput, madeBridge, moveArray) {
+    if (moveInput === madeBridge) {
+      moveArray[0].push(' ');
+      moveArray[1].push('O');
+      return;
+    }
+
+    moveArray[0].push(' ');
+    moveArray[1].push('X');
   }
 
   /**
@@ -25,17 +46,10 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(count, bridge) {
-    const userDecision = InputView.readGameCommand();
-    if (userDecision === 'Q') {
-      MissionUtils.Console.print(FAIL_GAME);
-      MissionUtils.Console.print(TOTAL_ATTEMPT(count));
-    }
+  retry(userDecision) {
+    if (userDecision === 'Q') return false;
 
-    if (userDecision === 'R') {
-      const app = new App();
-      app.compareInputRandom(bridge.length, bridge);
-    }
+    return true;
   }
 }
 
