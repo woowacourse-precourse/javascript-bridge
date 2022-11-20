@@ -1,5 +1,12 @@
+const { printIntro } = require("./OutputView");
+
 class App {
-  play() {}
+  play() {
+    printIntro();
+  }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
