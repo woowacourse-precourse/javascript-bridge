@@ -1,3 +1,5 @@
+const { MOVING } = require("./constants");
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -11,7 +13,7 @@ const BridgeMaker = {
     const bridge = [];
     while (bridge.length < size) {
       const number = Number(generateRandomNumber());
-      const block = number ? "U" : "D";
+      const block = number ? MOVING.UP : MOVING.DOWN;
       bridge.push(block);
     }
     return bridge;

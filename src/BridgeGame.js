@@ -1,5 +1,6 @@
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
+const { MESSAGE, ERROR, MOVING, COMMAND, MAP, SIZE } = require("./constants");
 
 class BridgeGame {
   #bridge;
@@ -13,32 +14,32 @@ class BridgeGame {
 
   validateBridgeSize(size) {
     if (this.isInvalidBridgeSize(size)) {
-      throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+      throw new Error(ERROR.INVALID_BRIDGE_SIZE);
     }
   }
 
   validateMoving(moving) {
     if (this.isInvalidMoving(moving)) {
-      throw new Error("[ERROR] 위로 이동하려면 U, 아래로 이동하려면 D를 입력해야 합니다.");
+      throw new Error(ERROR.INVALID_MOVING);
     }
   }
 
   validateGameCommand(gameCommand) {
     if (this.isInvalidGameCommand(gameCommand)) {
-      throw new Error("[ERROR] 재시도하려면 R, 종료하려면 Q를 입력해야 합니다.");
+      throw new Error(ERROR.INVALID_GAME_COMMAND);
     }
   }
 
   isInvalidBridgeSize(size) {
-    return Number.isNaN(size) || !Number.isInteger(size) || size < 3 || size > 20;
+    return Number.isNaN(size) || !Number.isInteger(size) || size < SIZE.MINIMUM || size > SIZE.MAXIMUM;
   }
 
   isInvalidMoving(moving) {
-    return moving !== "U" && moving !== "D";
+    return moving !== MOVING.UP && moving !== MOVING.DOWN;
   }
 
   isInvalidGameCommand(gameCommand) {
-    return gameCommand !== "R" && gameCommand !== "Q";
+    return gameCommand !== COMMAND.RETRY && gameCommand !== COMMAND.QUIT;
   }
 
   move(moving) {
@@ -48,7 +49,7 @@ class BridgeGame {
 
   retry(gameCommand) {
     this.validateGameCommand(gameCommand);
-    if (gameCommand === "Q") {
+    if (gameCommand === COMMAND.QUIT) {
       return false;
     }
     this.#movings = [];
@@ -58,20 +59,19 @@ class BridgeGame {
 
   getMap(line) {
     const marks = this.#movings.map((moving, index) => {
-      if (moving === line && this.#bridge[index] === line) return "O";
-      if (moving === line && this.#bridge[index] !== line) return "X";
-      return " ";
-    });
-    const map = `[ ${marks.join(" | ")} ]`;
-    return map;
+      if (moving === line && this.#bridge[index] === line) return MAP.O;
+      if (moving === line && this.#bridge[index] !== line) return MAP.X;
+      return MAP.BLANK;
+    }).join(MAP.BAR);
+    return MAP.BRACKET(marks);
   }
 
   getResult() {
     const hasMovedCorrectly = this.#movings.every((moving, index) => moving === this.#bridge[index]);
     const hasMovedAllBridge = this.#movings.length === this.#bridge.length;
-    if (!hasMovedCorrectly) return "실패";
-    if (hasMovedCorrectly && hasMovedAllBridge) return "성공";
-    if (hasMovedCorrectly && !hasMovedAllBridge) return "진행중";
+    if (!hasMovedCorrectly) return MESSAGE.FAILURE;
+    if (hasMovedCorrectly && hasMovedAllBridge) return MESSAGE.SUCCESS;
+    if (hasMovedCorrectly && !hasMovedAllBridge) return MESSAGE.PROGRESS;
   }
 
   getTrialCount() {

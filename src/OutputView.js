@@ -1,11 +1,12 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGE, MOVING } = require("./constants");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
   printStart() {
-    Console.print("다리 건너기 게임을 시작합니다.");
+    Console.print(MESSAGE.START);
   },
 
   /**
@@ -14,8 +15,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridge) {
-    const upperMap = bridge.getMap("U");
-    const lowerMap = bridge.getMap("D");
+    const upperMap = bridge.getMap(MOVING.UP);
+    const lowerMap = bridge.getMap(MOVING.DOWN);
     Console.print(upperMap);
     Console.print(lowerMap);
   },
@@ -28,10 +29,10 @@ const OutputView = {
   printResult(bridge) {
     const result = bridge.getResult();
     const trialCount = bridge.getTrialCount();
-    Console.print("\n최종 게임 결과");
+    Console.print(MESSAGE.END);
     this.printMap(bridge);
-    Console.print(`\n게임 성공 여부: ${result}`);
-    Console.print(`총 시도한 횟수: ${trialCount}`);
+    Console.print(MESSAGE.RESULT(result));
+    Console.print(MESSAGE.TRIAL_COUNT(trialCount));
     Console.close();
   },
 };

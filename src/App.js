@@ -2,6 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const { MESSAGE } = require("./constants");
 
 class App {
   #bridgeGame;
@@ -35,11 +36,11 @@ class App {
 
   handleResult() {
     const result = this.#bridgeGame.getResult();
-    if (result === "성공") {
+    if (result === MESSAGE.SUCCESS) {
       OutputView.printResult(this.#bridgeGame);
       return;
     }
-    if (result === "실패") {
+    if (result === MESSAGE.FAILURE) {
       InputView.readGameCommand(this.tryRetry.bind(this));
       return;
     }
@@ -57,5 +58,8 @@ class App {
     }
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
