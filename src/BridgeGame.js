@@ -27,8 +27,8 @@ class BridgeGame {
   }
 
   isFirst(state, crossable) {
-    if (this.#turn === 0) this.firstBlock(state, crossable);
-    if (this.#turn !== 0) this.afterFirstBlock(state, crossable);
+    if (this.#turn === 1) this.firstBlock(state, crossable);
+    if (this.#turn !== 1) this.afterFirstBlock(state, crossable);
   }
 
   firstBlock(state, crossable) {
