@@ -25,6 +25,12 @@ describe('Validator 단위 테스트', () => {
     expect(InputValidator.isValidStep('D')).toEqual(true);
     expect(InputValidator.isValidStep('Z')).toEqual(false);
   });
+
+  test('사용자 명령어 입력이 유효한 값인지 판단하는 기능', () => {
+    expect(InputValidator.isValidCommand('R')).toEqual(true);
+    expect(InputValidator.isValidCommand('Q')).toEqual(true);
+    expect(InputValidator.isValidCommand('U')).toEqual(false);
+  });
 });
 
 describe('BridgeMaker 단위 테스트', () => {
