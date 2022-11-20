@@ -36,7 +36,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(gameCount,success) {
+    Console.print("최종게임결과");
+    this.printMap();
+    const result = success ? "성공" : "실패";
+    Console.print(`게임 성공 여부 : ${실패}`);
+    Console.print(`총 시도한 횟수: ${gameCount}`);
+  },
 };
 
 module.exports = OutputView;
