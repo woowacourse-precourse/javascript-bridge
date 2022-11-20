@@ -34,7 +34,6 @@ class BridgeGameProceed {
     game() {
         InputView.readMoving((nextStep) => {
             this.#playersBridge.push(nextStep);
-            Console.print(this.#playersBridge)
 
             const result = this.PlayersMap.show(this.#playersBridge, this.#winBridge)
             Console.print(result);
@@ -53,6 +52,7 @@ class BridgeGameProceed {
     fail(result) {
         this.#round += 1;
         InputView.readGameCommand((retryOrNot) => {
+            Validation.retry(retryOrNot);
             if (retryOrNot === "R") {
                 this.#playersBridge = [];
                 return this.game();

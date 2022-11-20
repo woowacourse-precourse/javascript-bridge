@@ -18,7 +18,7 @@ class Validation {
     }
   }
 
-  static nextStep() {
+  static nextStep(value) {
     if (Validation.isStringEmpty(value)) {
         Console.close();
         throw new Error('[ERROR] 값을 입력해주세요.');
@@ -35,7 +35,7 @@ class Validation {
     }
   }
 
-  static retry() {
+  static retry(value) {
     if (Validation.isStringEmpty(value)) {
         Console.close();
         throw new Error('[ERROR] 값을 입력해주세요.');
