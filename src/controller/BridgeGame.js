@@ -11,6 +11,8 @@ class BridgeGame {
 
   #level = 0;
 
+  #gameTry = 1;
+
   async execute() {
     printGameStart();
     this.#bridge = new Bridge(await readBridgeSize());
@@ -42,7 +44,12 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   async retry(level) {
+    this.#gameTry += 1;
     const command = await readGameCommand();
+    return this.commandProcess(level, command);
+  }
+
+  async commandProcess(level, command) {
     if (command === 'R') {
       return this.move(level, await readMoving());
     }
@@ -53,7 +60,7 @@ class BridgeGame {
   }
 
   quitGame(result) {
-    printResult(result);
+    printResult(result, this.#gameTry, this.#bridge);
     MissionUtils.Console.close();
   }
 }
