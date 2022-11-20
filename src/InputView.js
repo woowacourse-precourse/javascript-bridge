@@ -7,7 +7,6 @@ const {
 } = require('./lib/bridgeSizeInputUtils');
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const Bridge = require('./Bridge');
 const BridgeGame = require('./BridgeGame');
 const { printRetryError, checkRetry } = require('./lib/bridgeRetryInputUtils');
 const OutputView = require('./OutputView');
@@ -60,8 +59,7 @@ const InputView = {
   },
 
   bridgeSizeGo(size) {
-    this.bridge = new Bridge(BridgeMaker.makeBridge(size, generate));
-    this.bridgeGame = new BridgeGame();
+    this.bridgeGame = new BridgeGame(BridgeMaker.makeBridge(size, generate));
     this.readMoving();
   },
 
@@ -71,7 +69,7 @@ const InputView = {
   },
 
   bridgeMoveGo(move, callback) {
-    this.bridgeGame.move(move, this.bridge.getBridge());
+    this.bridgeGame.move(move);
     OutputView.printMap(this.bridgeGame.returnUpDownArray());
     if (!this.bridgeGame.checkX()) {
       this.readGameCommand();
@@ -81,11 +79,11 @@ const InputView = {
   },
 
   bridgeMoveOneMore() {
-    if (!this.bridgeGame.lengthCompare(this.bridge.getBridge())) {
+    if (!this.bridgeGame.lengthCompare()) {
       this.readMoving();
       return;
     }
-    OutputView.printResult(this.bridgeGame.returnUpDownTryCountArray(this.bridge.getBridge()));
+    OutputView.printResult(this.bridgeGame.returnUpDownTryCountArray());
   },
 
   bridgeMoveRetry(error) {
@@ -99,7 +97,7 @@ const InputView = {
       this.readMoving();
       return;
     }
-    OutputView.printResult(this.bridgeGame.returnUpDownTryCountArray(this.bridge.getBridge()));
+    OutputView.printResult(this.bridgeGame.returnUpDownTryCountArray());
   },
 
   bridgeReadCommandRetry(error) {

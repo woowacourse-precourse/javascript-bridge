@@ -13,6 +13,7 @@ const {
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridge;
   #route = [];
   #tryCount = 1;
   #up = [];
@@ -22,10 +23,14 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(move, answer) {
+  constructor(bridge) {
+    this.#bridge = bridge;
+  }
+
+  move(move) {
     this.moveValidate(move);
     this.#route.push(move);
-    this.addUpDown(move, answer);
+    this.addUpDown(move, this.#bridge);
   }
 
   moveValidate(move) {
@@ -99,8 +104,8 @@ class BridgeGame {
     return str;
   }
 
-  lengthCompare(answer) {
-    if (answer.length !== this.#route.length) {
+  lengthCompare() {
+    if (this.#bridge.length !== this.#route.length) {
       return false;
     }
     return true;
@@ -112,11 +117,11 @@ class BridgeGame {
     this.#down = [];
   }
 
-  returnUpDownTryCountArray(answer) {
+  returnUpDownTryCountArray() {
     let array = [];
     array.push(this.returnStringArray(this.#up));
     array.push(this.returnStringArray(this.#down));
-    array.push(this.returnSuccessFail(answer));
+    array.push(this.returnSuccessFail(this.#bridge));
     array.push(this.#tryCount);
     return array;
   }
