@@ -69,6 +69,7 @@ class BridgeGame {
   retry() {
     this.#distance = 0;
     this.#isGameFailed = false;
+    this.#isGameSucess = false;
     this.#numberOfAttemps++;
     BridgeMapMaker.onRetry();
   }
