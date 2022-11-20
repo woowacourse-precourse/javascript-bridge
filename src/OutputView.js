@@ -11,7 +11,6 @@ const OutputView = {
    */
   printMap(result) {
     result.forEach((value) => Console.print(`[ ${value} ]`));
-    Console.print('\n');
   },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
