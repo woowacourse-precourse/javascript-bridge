@@ -3,6 +3,7 @@ const { generate } = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
 const Validation = require("./Validation");
 const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -19,15 +20,17 @@ const InputView = {
         return this.readBridgeSize();
       }
 
-      const bridge = BridgeMaker.makeBridge(+size, generate);
+      const bridge = BridgeMaker.makeBridge(bridgeSize, generate);
       const bridgeGame = new BridgeGame(bridge);
+
+      this.readMoving(bridgeGame);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(bridgeGame) {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (direction) => {
@@ -36,6 +39,9 @@ const InputView = {
           Console.print(errorMsg);
           return this.readMoving();
         }
+
+        bridgeGame.move(direction);
+        OutputView.printMap(bridgeGame.moveResult());
       }
     );
   },
