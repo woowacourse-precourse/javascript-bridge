@@ -91,11 +91,11 @@ class App {
   }
 
   #exitGame() {
-    OutputView.printResult(
-      this.bridgeGame.getUserGameMap(),
-      this.bridgeGame.checkGameOver(),
-      this.bridgeGame.getUserTryCount()
-    );
+    OutputView.printResult({
+      userGameMap: this.bridgeGame.getUserGameMap(),
+      isSuccess: this.bridgeGame.checkGameOver(),
+      userTryCount: this.bridgeGame.getUserTryCount(),
+    });
     OutputView.exit();
   }
 }
