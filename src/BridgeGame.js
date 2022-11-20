@@ -9,10 +9,6 @@ const { UP_AND_DOWN } = require("./constants");
 class BridgeGame {
   #bridge;
 
-  constructor() {
-    this.#movements = [];
-  }
-
   makeBridge(bridgeSize) {
     let bridge = [];
     while (bridge.length < bridgeSize) {
