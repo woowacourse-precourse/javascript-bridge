@@ -2,11 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('../model/BridgeGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const {
-  validateBridgeSize,
-  validateNext,
-  validateGameCommand,
-} = require('../errorHandling');
+const { validateNext, validateGameCommand } = require('../errorHandling');
 const { GAME } = require('../utils/constant');
 
 class GameController {
@@ -27,7 +23,6 @@ class GameController {
   }
 
   setBridge(size) {
-    validateBridgeSize.validate(size);
     this.game.setBridge(size);
     this.askMoving();
   }
