@@ -1,5 +1,13 @@
+const OutputView = require("./View/OutputView");
+
 class App {
-  play() {}
+  play() {
+    this.showGreeting();
+  }
+
+  showGreeting() {
+    OutputView.printGreeting();
+  }
 }
 
 module.exports = App;
