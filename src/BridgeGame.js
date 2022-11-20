@@ -13,10 +13,16 @@ class BridgeGame {
   moveCount;
 
   // TODO: 메세지들 많아짐, 정리
-  constructor(welcomeMessage = '다리 건너기 게임을 시작합니다.', bridgeSizeMessage = '다리의 길이를 입력해주세요.\n', movingMessage = '이동할 칸을 선택해주세요. (위: U, 아래: D)\n') {
+  constructor(
+    welcomeMessage = '다리 건너기 게임을 시작합니다.',
+    bridgeSizeMessage = '다리의 길이를 입력해주세요.\n',
+    movingMessage = '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
+    retryMessage = '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+  ) {
     this.welcomeMessage = welcomeMessage;
     this.bridgeSizeMessage = bridgeSizeMessage;
     this.movingMessage = movingMessage;
+    this.retryMessage = retryMessage;
     this.moveCount = 0;
   }
 
@@ -28,13 +34,17 @@ class BridgeGame {
   move = (command) => {
     // TODO: command확인
     const isMovable = this.bridgeStore.isMovable(this.moveCount, command);
+
     this.bridgeStore.addUserInputResult(isMovable);
     OutputView.printMap(this.moveCount, command, this.bridgeStore.getUserInputResult);
+
     if (!isMovable) {
       // TODO: 게임 재시작 여부 확인
+      InputView.readGameCommand(this.retryMessage, this.retry);
+      return;
     }
-
     this.moveCount += 1;
+
     if (!this.bridgeStore.isSameWithBridgeLength(this.moveCount)) {
       InputView.readMoving(this.movingMessage, this.move);
     }
@@ -45,7 +55,10 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(command) {
+    console.log('엥?');
+    console.log('retry : command is ', command);
+  }
 
   createBridge(bridgeSize) {
     // TODO: bridge길이 확인
