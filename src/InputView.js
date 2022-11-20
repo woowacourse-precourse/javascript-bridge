@@ -51,10 +51,11 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT_MESSAGE.RESTART_QUIT, (answer) => {
       input = answer;
     });
+    validreadGameCommand(input);
     return input;
   },
   validreadGameCommand(command) {
-    if (movePoint !== "R" && movePoint !== "Q") {
+    if (command !== "R" && command !== "Q") {
       throw new Error(ERROR_MESSAGE.RESTART_EXPTION);
     }
   },

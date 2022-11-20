@@ -18,4 +18,10 @@ describe.only("인풋 클래스 테스트", () => {
       Input.validMovePoint("Z");
     }).toThrow("[ERROR]");
   });
+
+  test("재시작 여부 R, Q 입력이 아닌 경우", () => {
+    expect(() => {
+      Input.validreadGameCommand("s");
+    }).toThrow("[ERROR]");
+  });
 });
