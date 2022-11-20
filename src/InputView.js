@@ -54,11 +54,11 @@ const InputView = {
   },
 
   moveOrFail(userAnswer, bridgeArray) {
+    if (bridgeArray.length - 1 === this.INDEX) {
+      this.BRIDGE_GAME.move(userAnswer);
+      return OutputView.printResult(this.SUCCESS_MESSAGE, this.COUNT);
+    }
     if (bridgeArray[this.INDEX] === userAnswer) {
-      if (bridgeArray.length - 1 === this.INDEX) {
-        this.BRIDGE_GAME.move(userAnswer);
-        return OutputView.printResult(this.SUCCESS_MESSAGE, this.COUNT);
-      }
       this.INDEX += 1;
       this.BRIDGE_GAME.move(userAnswer);
       return this.readMoving(bridgeArray);
