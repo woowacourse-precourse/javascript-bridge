@@ -28,10 +28,14 @@ const OutputView = {
     return MU.Console.close();
   },
 
-  printBridgeSizeError(bridgeLen){
+  printBridgeSizeError(bridgeLen) {
     if(bridgeLen < 3 || bridgeLen > 20) throw '[ERROR] 3이상 20이하 범위를 입력하세요';
-    if(isNaN(bridgeLen)) throw '[ERROR] 다리의 길이는 숫자를 입력 해야 합니다.';
+    if(isNaN(bridgeLen)) throw '[ERROR] 다리의 길이는 숫자를 입력해야 합니다.';
   },
+
+  printMovingError(nextStep) {
+    if(nextStep != 'U' && nextStep != 'D') throw '[ERROR] U 혹은 D만 입력 가능합니다.';
+   },
 };
 
 module.exports = OutputView;
