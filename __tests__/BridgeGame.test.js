@@ -590,6 +590,16 @@ describe('범위 추출 메서드 테스트', () => {
   });
 });
 
+describe('다리 이동 로그 저장하는 메서드', () => {
+  const bridgeGame = new BridgeGame();
+
+  test('메소드 이름은 "setBridgeLog"로 정의된다.', () => {
+    const METHOD_NAME = 'setBridgeLog';
+
+    expect(bridgeGame.setBridgeLog.name).toEqual(METHOD_NAME);
+  });
+});
+
 describe('다리 이동 로그 메소드 테스트', () => {
   const bridgeGame = new BridgeGame();
   bridgeGame.move();
