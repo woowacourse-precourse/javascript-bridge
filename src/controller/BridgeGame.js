@@ -8,13 +8,13 @@ const { printGameStart } = require('../view/OutputView');
 class BridgeGame {
   #bridge;
 
-  #level;
+  #level = 0;
 
   async execute() {
     printGameStart();
     this.#bridge = new Bridge(await readBridgeSize());
     this.#bridge.print(); // deprecated
-    console.log(await readMoving());
+    this.move(0, await readMoving());
   }
 
   /**
@@ -22,14 +22,24 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  async move(level, command) {
+    if (level === this.#bridge.getLength() - 1) {
+      return console.log('승리');
+    }
+    if (this.#bridge.checkBridge(level, command)) {
+      return this.move(level + 1, await readMoving());
+    }
+    return this.retry();
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    console.log('재시작 물어보기');
+  }
 }
 
 module.exports = BridgeGame;
