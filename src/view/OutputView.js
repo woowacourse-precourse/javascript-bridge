@@ -62,6 +62,10 @@ const OutputView = {
     Console.print(`${RESULT.isClear}${result ? GAME.clear : GAME.fail}`);
     Console.print(`${RESULT.tryCount}${totalMovingCount}`);
   },
+
+  printError(errorMessage) {
+    Console.print(errorMessage);
+  },
 };
 
 module.exports = OutputView;
