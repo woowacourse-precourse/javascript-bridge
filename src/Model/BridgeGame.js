@@ -26,6 +26,12 @@ class BridgeGame {
   getBridgeCrossingResult() {
     let bridgeCrossingResult = [[], []];
 
+    this.setBridgeCrossingResult(bridgeCrossingResult);
+
+    return bridgeCrossingResult;
+  }
+
+  setBridgeCrossingResult(bridgeCrossingResult) {
     this.#crossingOrder.forEach(([direction, directionNumber], idx) => {
       const isCross = direction === this.#bridge[idx];
 
@@ -36,8 +42,6 @@ class BridgeGame {
         CROSSING_RESULT.notSeleted
       );
     });
-
-    return bridgeCrossingResult;
   }
 
   isFail() {
