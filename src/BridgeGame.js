@@ -4,11 +4,19 @@ const {
   moving,
   gameCommand,
   gameMap,
+  gameResult,
 } = require("./UI/View");
-const { APPROPRIATE_INPUT, ANSWER, REPLACEMENT } = require("./Utils/Constants");
-const { UP, RESTART } = APPROPRIATE_INPUT;
+const {
+  APPROPRIATE_INPUT,
+  ANSWER,
+  REPLACEMENT,
+  GAME_MESSAGE,
+} = require("./Utils/Constants");
+const { UP, RESTART, QUIT } = APPROPRIATE_INPUT;
 const { RIGHT, WRONG, UNCHOSEN } = ANSWER;
 const { COMMA, LINE } = REPLACEMENT;
+const { FAIL } = GAME_MESSAGE;
+const { close } = require("./Utils/MissionUtils");
 
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
@@ -88,6 +96,10 @@ class BridgeGame {
       this.#tries += 1;
       this.reset();
       moving(this.move.bind(this));
+    }
+    if (restartOrQuit === QUIT) {
+      gameResult(FAIL, this.designMap.bind(this), this.#tries);
+      close();
     }
   }
 
