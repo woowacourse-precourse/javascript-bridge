@@ -1,16 +1,15 @@
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const BridgeMaker = require('../BridgeMaker');
-const { Console } = require('@woowacourse/mission-utils');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
-  #time;
+  #currentIndex;
 
   constructor() {
-    this.#time = 0;
+    this.#currentIndex = 0;
     this.topSide = [];
     this.downSide = [];
   }
@@ -23,14 +22,28 @@ class BridgeGame {
     this.#bridge = bridge;
   }
 
-  setTopSide() {
-    this.topSide.push('O');
-    this.downSide.push('X');
+  setTopSide(isSuccess) {
+    if (isSuccess) {
+      this.topSide.push('O');
+      this.downSide.push(' ');
+    }
+
+    if (!isSuccess) {
+      this.topSide.push('X');
+      this.downSide.push(' ');
+    }
   }
 
-  setDownSide() {
-    this.topSide.push('X');
-    this.downSide.push('O');
+  setDownSide(isSuccess) {
+    if (isSuccess) {
+      this.topSide.push(' ');
+      this.downSide.push('O');
+    }
+
+    if (!isSuccess) {
+      this.topSide.push(' ');
+      this.downSide.push('X');
+    }
   }
 
   getMap() {
@@ -42,20 +55,18 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(next) {
-    const isSuccess = next === this.#bridge[this.#time] ? 1 : 0;
+    const isSuccess = next === this.#bridge[this.#currentIndex] ? 1 : 0;
 
-    if (isSuccess && next === 'U') this.setTopSide();
-    if (!isSuccess && next === 'U') this.setDownSide();
-    if (isSuccess && next === 'D') this.setDownSide();
-    if (!isSuccess && next === 'D') this.setTopSide();
+    if (next === 'U') this.setTopSide(isSuccess);
+    if (next === 'D') this.setDownSide(isSuccess);
 
-    this.#time += 1;
+    this.#currentIndex += 1;
 
     return isSuccess;
   }
 
   isEnd() {
-    return this.#time === this.#bridge.length;
+    return this.#currentIndex === this.#bridge.length;
   }
 
   /**
@@ -68,7 +79,7 @@ class BridgeGame {
   }
 
   initialization() {
-    this.#time = 0;
+    this.#currentIndex = 0;
     this.topSide = [];
     this.downSide = [];
   }
