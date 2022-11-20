@@ -8,6 +8,11 @@ const Validation = {
         errorMsg: '\n[ERROR] 3 이상 20 이하의 숫자만 입력할 수 있습니다.\n',
       };
 
+    if (!Number.isInteger(Number(size)))
+      return {
+        errorMsg: '\n[ERROR] 정수만 입력할 수 있습니다.\n',
+      };
+
     return { errorMsg: undefined };
   },
 
