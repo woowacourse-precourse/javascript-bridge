@@ -1,5 +1,4 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const Bridge = require("./Bridge");
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
@@ -12,48 +11,42 @@ class App {
 
   play() {
     OutputView.printOpening();
-    this.bridgeMakeInput();
+    this.constructBridgeInput();
   }
 
-  bridgeMakeInput() {
-    InputView.readBridgeSize(this.bridgeMake.bind(this));
+  constructBridgeInput() {
+    InputView.readBridgeSize(this.constructBridge.bind(this));
   }
 
-  bridgeMake(size) {
-    try {
-      InputValidate.checkBridgeSize(size);
-    } catch (error) {
-      OutputView.printErrorMessage(error.message);
-      this.bridgeMakeInput();
+  constructBridge(size) {
+    if (!this.#tryValidate(InputValidate.checkBridgeSize, size)) {
+      this.constructBridgeInput();
     }
-
-    const bridge = new Bridge(BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate));
+    const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
     this.#bridgeGame = new BridgeGame(bridge);
 
-    this.moveInput();
+    this.crossBridgeInput();
   }
 
-  moveInput() {
-    InputView.readMoving(this.move.bind(this));
+  crossBridgeInput() {
+    InputView.readMoving(this.crossBridge.bind(this));
   }
 
-  move(direction) {
-    try {
-      InputValidate.checkMovingDirection(direction);
-    } catch (error) {
-      OutputView.printErrorMessage(error.message);
-      this.moveInput();
+  crossBridge(direction) {
+    if (!this.#tryValidate(InputValidate.checkMovingDirection, direction)) {
+      this.crossBridgeInput();
     }
-
-    if (this.#bridgeGame.move(direction)) {
+    if (this.#bridgeGame.isMovable(direction)) {
+      this.#bridgeGame.move(direction);
       OutputView.printMap(this.#bridgeGame.getMap());
       if (this.#bridgeGame.isSuccess()) {
-        this.success(direction);
+        this.showResult();
         return;
       }
-      this.moveInput();
+      this.crossBridgeInput();
     } else {
-      OutputView.printMap(this.#bridgeGame.getFailMap(direction));
+      this.#bridgeGame.out(direction);
+      OutputView.printMap(this.#bridgeGame.getMap());
       this.retryOrNotInput();
     }
   }
@@ -63,31 +56,32 @@ class App {
   }
 
   retryOrNot(command) {
-    try {
-      InputValidate.checkRetryOrQuitCommand(command);
-    } catch (error) {
-      OutputView.printErrorMessage(error.message);
+    if (!this.#tryValidate(InputValidate.checkRetryOrQuitCommand, command)) {
       this.retryOrNotInput();
     }
     if (command === "R") {
       this.#bridgeGame.retry();
-      this.moveInput();
+      this.crossBridgeInput();
     }
     if (command === "Q") {
       this.success();
     }
   }
 
-  fail(direction) {
-    const [map, tryCount] = this.#bridgeGame.getFailResult(direction);
-    OutputView.printResult(this.#bridgeGame.isSuccess(), map, tryCount);
+  showResult() {
+    const [map, success, tryCount] = this.#bridgeGame.getResult();
+    OutputView.printResult(map, success, tryCount);
     MissionUtils.Console.close();
   }
 
-  success() {
-    const [map, tryCount] = this.#bridgeGame.getResult();
-    OutputView.printResult(this.#bridgeGame.isSuccess(), map, tryCount);
-    MissionUtils.Console.close();
+  #tryValidate(validate, input) {
+    try {
+      validate(input);
+      return true;
+    } catch (error) {
+      OutputView.printErrorMessage(error.message);
+      return false;
+    }
   }
 }
 
