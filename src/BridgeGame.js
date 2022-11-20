@@ -12,36 +12,6 @@ class BridgeGame {
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
   }
 
-  validateBridgeSize(size) {
-    if (this.isInvalidBridgeSize(size)) {
-      throw new Error(ERROR.INVALID_BRIDGE_SIZE);
-    }
-  }
-
-  validateMoving(moving) {
-    if (this.isInvalidMoving(moving)) {
-      throw new Error(ERROR.INVALID_MOVING);
-    }
-  }
-
-  validateGameCommand(gameCommand) {
-    if (this.isInvalidGameCommand(gameCommand)) {
-      throw new Error(ERROR.INVALID_GAME_COMMAND);
-    }
-  }
-
-  isInvalidBridgeSize(size) {
-    return Number.isNaN(size) || !Number.isInteger(size) || size < SIZE.MINIMUM || size > SIZE.MAXIMUM;
-  }
-
-  isInvalidMoving(moving) {
-    return moving !== MOVING.UP && moving !== MOVING.DOWN;
-  }
-
-  isInvalidGameCommand(gameCommand) {
-    return gameCommand !== COMMAND.RETRY && gameCommand !== COMMAND.QUIT;
-  }
-
   move(moving) {
     this.validateMoving(moving);
     this.#movings.push(moving);
@@ -76,6 +46,36 @@ class BridgeGame {
 
   getTrialCount() {
     return this.#trialCount;
+  }
+
+  validateBridgeSize(size) {
+    if (this.isInvalidBridgeSize(size)) {
+      throw new Error(ERROR.INVALID_BRIDGE_SIZE);
+    }
+  }
+
+  validateMoving(moving) {
+    if (this.isInvalidMoving(moving)) {
+      throw new Error(ERROR.INVALID_MOVING);
+    }
+  }
+
+  validateGameCommand(gameCommand) {
+    if (this.isInvalidGameCommand(gameCommand)) {
+      throw new Error(ERROR.INVALID_GAME_COMMAND);
+    }
+  }
+
+  isInvalidBridgeSize(size) {
+    return Number.isNaN(size) || !Number.isInteger(size) || size < SIZE.MINIMUM || size > SIZE.MAXIMUM;
+  }
+
+  isInvalidMoving(moving) {
+    return moving !== MOVING.UP && moving !== MOVING.DOWN;
+  }
+
+  isInvalidGameCommand(gameCommand) {
+    return gameCommand !== COMMAND.RETRY && gameCommand !== COMMAND.QUIT;
   }
 }
 
