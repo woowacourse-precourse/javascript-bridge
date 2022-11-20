@@ -1,12 +1,15 @@
 const OutputView = require('./OutputView');
 
 const BridgePrint = {
-  printBridge(uparray, downarray) {
-    OutputView.printMap(uparray, downarray);
+  printBridge(Bridge) {
+    OutputView.printMap(Bridge.getUpBridge(), Bridge.getDownBridge());
   },
-  printResult(gamePlay) {
+  printResultByGamePlay(gamePlay) {
     const result = gamePlay.getPrintParams();
     OutputView.printResult(result);
+  },
+  printResult(player, bridge) {
+    OutputView.printResult([player, bridge]);
   },
 };
 
