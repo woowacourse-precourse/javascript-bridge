@@ -9,9 +9,11 @@ class App {
     this.bridge = [];
   }
   gameResultPrint(winOrLose) {
-    winOrLose
-      ? MissionUtils.Console.print(OUTPUT_MESSAGE.SUCCESS_RESULT)
-      : MissionUtils.Console.print(OUTPUT_MESSAGE.FAILURE_RESULT);
+    const result = winOrLose
+      ? OUTPUT_MESSAGE.SUCCESS_RESULT
+      : OUTPUT_MESSAGE.FAILURE_RESULT;
+
+    MissionUtils.Console.print(result);
   }
   moveing(movePoint, obstacle) {
     return obstacle === movePoint ? true : false;
