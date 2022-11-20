@@ -32,6 +32,10 @@ const OutputView = {
     MissionUtils.Console.print(`총 시도한 횟수: ${playCount}`);
     MissionUtils.Console.close();
   },
+
+  printError(message) {
+    MissionUtils.Console.print(`[ERROR] ${message}`);
+  },
 };
 
 module.exports = OutputView;
