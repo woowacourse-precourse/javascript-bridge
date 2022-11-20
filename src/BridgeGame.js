@@ -14,7 +14,7 @@ class BridgeGame {
     // console.log(this.#bridge);
   }
 
-  makeBridgeString(userInput = this.#userInput, bridge = this.#bridge) {
+  makeBridgeString(bridge = this.#bridge, userInput = this.#userInput) {
     const letter = [REQUIREMENT.UP, REQUIREMENT.DOWN];
     let strArray = [];
 

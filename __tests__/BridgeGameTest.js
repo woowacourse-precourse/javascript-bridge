@@ -30,4 +30,16 @@ describe("BridgeGame 클래스 도메인 로직 테스트", () => {
     const result = bridgeGame.makeEachMap(first, second, third);
     expect(result).toEqual(expected);
   });
+
+  test.each([
+    [['U', 'D', 'D'], ['U', 'D'], ['[ O |   ]', '[   | O ]']],
+    [['U', 'D', 'D'], ['U', 'U'], ['[ O | X ]', '[   |   ]']],
+    [['U', 'D', 'D'], ['U', 'D', 'D'], ['[ O |   |   ]', '[   | O | O ]']],
+
+  ])('다리 출력 배열에 대한 생성 기능 구현 테스트', (first, second, expected) => {
+    const bridgeGame = new BridgeGame();
+    const result = bridgeGame.makeBridgeString(first, second);
+    expect(result).toEqual(expected);
+  });
+
 });
