@@ -12,7 +12,7 @@ describe("Validator 테스트", () => {
   });
 
   test("게임 재시작을 할 때 입력 값이 R이나 Q가 아니라면 예외발생", () => {
-    expect(() => Validator.validateMoveCommand("u")).toThrow("[ERROR]");
-    expect(() => Validator.validateMoveCommand("D")).toThrow("[ERROR]");
+    expect(() => Validator.validateRetryCommand("u")).toThrow("[ERROR]");
+    expect(() => Validator.validateRetryCommand("D")).toThrow("[ERROR]");
   });
 });
