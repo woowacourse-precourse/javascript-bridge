@@ -1,4 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
 const GameModel = require('../GameModel');
 const ErrorBoundary = require('../../error/ErrorBoundary');
 const { SizeValidation, CommandValidation, ReplayValidation } = require('../../validate/bridge');
@@ -20,6 +19,12 @@ const BridgeModel = class extends GameModel {
   createBridge(bridgeSize) {
     this.validateBridgeSize(bridgeSize);
     this.#bridge = makeBridge(bridgeSize, generate);
+  }
+
+  setStateToReplay() {
+    this.#commandList = [];
+    this.#position = 0;
+    this.#tryCount += 1;
   }
 
   set addCommandToList(command) {

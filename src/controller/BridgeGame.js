@@ -36,32 +36,35 @@ const BridgeGame = class extends GameCtrl {
     const { isPassed, bridgeMap } = this.model.getMovedResult;
     this.view.printMap(bridgeMap);
 
-    if (!isPassed) return this.askToReplayGame();
+    if (!isPassed) return this.askToReplayGame(bridgeMap);
 
-    const isGameEnd = this.model.getGameEnd;
-    if (isGameEnd) return this.end();
+    const isGameEnd = this.model.getIsGameEnd;
+    if (isGameEnd) return this.end(bridgeMap);
 
     return this.getUserCommand();
   }
 
   // 게임을 재시작 할 것인지 여부를 묻기
-  askToReplayGame() {
+  askToReplayGame(bridgeMap) {
     this.view.readGameCommand((replayCommand) => {
-      this.model.validateBridgeCommand(replayCommand);
-      this.quitOrRetryByCommand(replayCommand);
+      this.model.validateBridgeReplayCommand(replayCommand);
+      this.quitOrRetryByCommand(replayCommand, bridgeMap);
     });
   }
 
-  quitOrRetryByCommand(replayCommand) {
+  quitOrRetryByCommand(replayCommand, bridgeMap) {
     if (replayCommand === 'R') return this.retry();
-    return this.end();
+    return this.end(bridgeMap);
   }
 
   // 게임 종료 = Q
-  end() {}
+  end(bridgeMap) {}
 
   // 사용자가 게임을 다시 시도할 때 사용하는 메서드 = R
-  retry() {}
+  retry() {
+    this.model.setStateToReplay();
+    this.getUserCommand();
+  }
 };
 
 module.exports = BridgeGame;
