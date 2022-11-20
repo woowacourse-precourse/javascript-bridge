@@ -1,4 +1,4 @@
-const { RESULT, DIRECTION } = require('./Constants/constant');
+const { RESULT, DIRECTION, COMMAND } = require('./Constants/constant');
 const Validator = require('./Validator');
 
 class BridgeGame {
@@ -101,6 +101,17 @@ class BridgeGame {
       this.#bridge[this.getCurrentDistance()]
     )
       return true;
+    return false;
+  }
+
+  static isWrongDirection(game) {
+    if (!game.isSameDirection()) return true;
+    return false;
+  }
+
+  static isCommandRetry(command) {
+    Validator.checkCorrectCommand(command);
+    if (command === COMMAND.retry) return true;
     return false;
   }
 }
