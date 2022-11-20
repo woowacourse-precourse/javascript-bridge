@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Validation = require("./Validation");
+const OutputView = require("./OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -28,7 +29,8 @@ const InputView = {
         const isMovingValueCorrect = Validation.checkMovingValue(moving);
         if (isMovingValueCorrect) return this.readMoving();
 
-        bridgeGame.move(moving);
+        const movingDirection = bridgeGame.move(moving);
+        OutputView.printMap(movingDirection);
       }
     );
   },

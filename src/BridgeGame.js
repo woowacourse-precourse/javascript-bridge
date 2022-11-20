@@ -32,6 +32,22 @@ class BridgeGame {
    */
   move(moving) {
     const canMove = this.canMove(moving);
+    if (canMove && moving === "U") {
+      this.#upperBridge.push("O");
+      this.#lowerBridge.push(" ");
+    } else if (!canMove && moving === "U") {
+      this.#upperBridge.push("X");
+      this.#lowerBridge.push(" ");
+    }
+    if (canMove && moving == "D") {
+      this.#lowerBridge.push("O");
+      this.#upperBridge.push(" ");
+    } else if (!canMove && moving == "D") {
+      this.#lowerBridge.push("X");
+      this.#upperBridge.push(" ");
+    }
+
+    return [this.#upperBridge, this.#lowerBridge];
   }
 
   canMove(moving) {
