@@ -1,14 +1,14 @@
-const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
-const BridgeMapMaker = require('./BridgeMapMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeGame = require('./domain/BridgeGame');
+const BridgeMapMaker = require('./domain/BridgeMapMaker');
 
-const BridgeSizeValidator = require('./BridgeSizeValidator');
-const BridgeMovingValidator = require('./BridgeMovingValidator');
-const BridgeGameCommandValidator = require('./BridgeGameCommandValidator');
+const BridgeSizeValidator = require('./validators/BridgeSizeValidator');
+const BridgeMovingValidator = require('./validators/BridgeMovingValidator');
+const BridgeGameCommandValidator = require('./validators/BridgeGameCommandValidator');
 
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const InputView = require('./views/InputView');
+const OutputView = require('./views/OutputView');
 
 class App {
   #bridgeGame;
