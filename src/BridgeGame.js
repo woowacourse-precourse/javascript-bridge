@@ -9,13 +9,13 @@ const { UP_AND_DOWN } = require("./constants");
 class BridgeGame {
   #bridge;
 
-  constructor(bridgeLength) {
-    this.saveBridge(bridgeLength);
+  constructor(bridgeSize) {
+    this.saveBridge(bridgeSize);
   }
 
-  saveBridge(bridgeLength) {
+  saveBridge(bridgeSize) {
     let bridge = [];
-    while (bridge.length < bridgeLength) {
+    while (bridge.length < bridgeSize) {
       const number = BridgeRandomNumberGenerator.generate();
       bridge.push(UP_AND_DOWN[number]);
     }
