@@ -1,8 +1,19 @@
 const { printIntro } = require("./OutputView");
+const { readBridgeSize } = require("./InputView");
 
 class App {
   play() {
     printIntro();
+
+    this.inputSize();
+  }
+
+  inputSize() {
+    readBridgeSize(this.generate);
+  }
+
+  generate(size) {
+    console.log(size);
   }
 }
 
