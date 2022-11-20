@@ -33,10 +33,6 @@ class BridgeGame {
     this.#turn = value;
   }
 
-  getBridge() {
-    return this.#bridge;
-  }
-
   setBridge(value) {
     this.#bridge = value;
   }
