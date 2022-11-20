@@ -59,7 +59,29 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
-};
+  readGameCommand() {
+    Console.readLine(MESSAGE_PROCESS.INPUT_GAME_COMMAND, this.setGameCommand.bind(this));
+  },
 
+  setGameCommand(command) {
+    if (command === 'R') {
+      bridgeGame.retry();
+      this.readMoving();
+    }
+    if (command === 'Q') OutputView.printResult();
+  },
+
+  valitateGameCommand(command) {
+    try {
+      if (command.length !== 1) throw MESSAGE_ERROR.GAME_COMMAND_ONLY_CHAR;
+      if (command !== GAME_COMMAND.RETRY && command !== GAME_COMMAND.QUIT ) {
+        throw MESSAGE_ERROR.GAME_COMMAND_ONLY_R_OR_Q;
+      }
+    } catch(e) {
+      OutputView.printError(e);
+      this.readGameCommand();
+    }
+  }
+};
+InputView.readBridgeSize();
 module.exports = InputView;
