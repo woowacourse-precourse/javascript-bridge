@@ -36,6 +36,27 @@ class App {
   moveInput() {
     InputView.readMoving(this.move.bind(this));
   }
+
+  move(direction) {
+    try {
+      InputValidate.checkMovingDirection(direction);
+    } catch (error) {
+      OutputView.printErrorMessage(error.message);
+      this.moveInput();
+    }
+
+    if (this.#bridgeGame.move(direction)) {
+      OutputView.printMap(this.#bridgeGame.getMap());
+      if (this.#bridgeGame.isSuccess()) {
+        this.success(direction);
+        return;
+      }
+      this.moveInput();
+    } else {
+      OutputView.printMap(this.#bridgeGame.getFailMap(direction));
+      this.retryOrNotInput();
+    }
+  }
 }
 
 const app = new App();
