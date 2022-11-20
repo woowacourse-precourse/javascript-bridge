@@ -19,48 +19,66 @@ class BridgeGameController {
 
   #onBridgeSizeSubmit(command) {
     try {
-      const sizeCommand = new SizeCommand(command);
-      this.#game.setBridge(+sizeCommand.getCommand());
-      readMoving(this.#onMovingSubmit.bind(this));
+      this.#tryBridgeSizeSubmit(command);
     } catch (e) {
       BridgeGameController.#runError(e, readBridgeSize, this.#onBridgeSizeSubmit.bind(this));
     }
   }
 
+  #tryBridgeSizeSubmit(command) {
+    const sizeCommand = new SizeCommand(command);
+    this.#game.setBridge(+sizeCommand.getCommand());
+    readMoving(this.#onMovingSubmit.bind(this));
+  }
+
   #onMovingSubmit(command) {
     try {
-      const movingCommand = new MovingCommand(command);
-      const isCrossed = this.#game.move(movingCommand.getCommand());
-      const bridgeMap = this.#game.getMap();
-
-      printMap(bridgeMap);
-
-      if (!isCrossed) {
-        readGameCommand(this.#onGameCommandSubmit.bind(this));
-        return;
-      }
-      if (this.#game.isWin()) {
-        this.#runQuit();
-        return;
-      }
-
-      readMoving(this.#onMovingSubmit.bind(this));
+      this.#tryMovingCommandSubmit(command);
     } catch (e) {
       BridgeGameController.#runError(e, readMoving, this.#onMovingSubmit.bind(this));
     }
   }
 
+  #tryMovingCommandSubmit(command) {
+    const movingCommand = new MovingCommand(command);
+    const isCrossed = this.#game.move(movingCommand.getCommand());
+    const bridgeMap = this.#game.getMap();
+    printMap(bridgeMap);
+
+    if (this.#game.isWin()) {
+      this.#runQuit();
+    }
+
+    this.#runBridgeCross(isCrossed);
+  }
+
+  #runBridgeCross(isCrossed) {
+    if (!isCrossed) {
+      readGameCommand(this.#onGameCommandSubmit.bind(this));
+      return;
+    }
+
+    readMoving(this.#onMovingSubmit.bind(this));
+  }
+
   #onGameCommandSubmit(command) {
     try {
-      const gameCommand = new GameCommand(command);
-      if (gameCommand.getCommand() === GAME_RULE.RETRY) {
-        this.#runRetry();
-      }
-      if (gameCommand.getCommand() === GAME_RULE.QUIT) {
-        this.#runQuit();
-      }
+      this.#tryGameCommandSubmit(command);
     } catch (e) {
       BridgeGameController.#runError(e, readGameCommand, this.#onGameCommandSubmit.bind(this));
+    }
+  }
+
+  #tryGameCommandSubmit(command) {
+    const gameCommand = new GameCommand(command);
+
+    if (gameCommand.getCommand() === GAME_RULE.RETRY) {
+      this.#runRetry();
+      return;
+    }
+
+    if (gameCommand.getCommand() === GAME_RULE.QUIT) {
+      this.#runQuit();
     }
   }
 
