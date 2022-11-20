@@ -13,6 +13,8 @@ const GAME_CONSTANTS = deepFreeze({
   goPath: 'O',
   notPath: 'X',
   empty: ' ',
+  gameSuccess: true,
+  gameFailure: false,
 });
 
 module.exports = {

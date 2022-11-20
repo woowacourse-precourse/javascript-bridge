@@ -1,7 +1,11 @@
+const { generate } = require('./BridgeRandomNumberGenerator');
+
+const { GAME_CONSTANTS } = require('./utils/constants');
+
 const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const { generate } = require('./BridgeRandomNumberGenerator');
+
 const BridgeMap = require('./BridgeMap');
 const Validator = require('./Validator');
 
@@ -48,8 +52,12 @@ class Bridge {
   }
 
   #runRetry (retryGame, chooseRetry) {
-    if (chooseRetry === 'Q') {
-      return OutputView.printResult(false, this.#bridgeMap.getHistory(), this.#tryCount);
+    if (chooseRetry === GAME_CONSTANTS.quitGame) {
+      return OutputView.printResult(
+        GAME_CONSTANTS.resultFailure,
+        this.#bridgeMap.getHistory(),
+        this.#tryCount,
+      );
     }
     this.#bridgeMap.initHistory();
     this.#tryCount += 1;
@@ -65,7 +73,11 @@ class Bridge {
     }
     this.#bridgeMap.incrementDistance();
     if (this.#bridgeMap.isEndGame()) {
-      return OutputView.printResult(true, this.#bridgeMap.getHistory(), this.#tryCount);
+      return OutputView.printResult(
+        GAME_CONSTANTS.resultSuccess,
+        this.#bridgeMap.getHistory(),
+        this.#tryCount,
+      );
     }
     this.askNextStep(retryGame);
   }
