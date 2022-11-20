@@ -11,8 +11,8 @@
 <br/>
 
 ## **📝 기능 구현 목록** ##
-- [ ] get bridge size input from user
-    - [ ] check if input is valid (e.g., 3~20)
+- [x] get bridge size input from user
+    - [x] check if input is valid (e.g., 3~20)
 - [ ] make bridge (e.g., ["U", "D", "D"])
 - [ ] get movement input from user
     - [ ] check if input is valid (e.g., "U" or "D")
