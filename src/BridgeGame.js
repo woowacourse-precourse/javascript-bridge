@@ -42,16 +42,24 @@ class BridgeGame {
   }
 
   move(command) {
-    this.setTurn(this.#turn + 1);
-    printMap(command, this.#bridge[this.#turn]);
+    this.turnChanger(command);
     const IN_RANGE = this.#bridge.length >= this.#turn - 1;
     const MATCH_COMMAND = this.#bridge[this.#turn] === command;
     if (this.#bridge.length - 1 === this.#turn && MATCH_COMMAND) {
-      this.#gameComplete = true;
-      this.printResult();
-      return false;
+      return this.endGame();
     }
     return IN_RANGE && MATCH_COMMAND;
+  }
+
+  turnChanger(command) {
+    this.setTurn(this.#turn + 1);
+    printMap(command, this.#bridge[this.#turn]);
+  }
+
+  endGame() {
+    this.#gameComplete = true;
+    this.printResult();
+    return false;
   }
 
   retry(command) {
@@ -60,7 +68,7 @@ class BridgeGame {
       this.init();
       return true;
     }
-    Console.close();
+    return Console.close();
   }
 
   printResult() {
