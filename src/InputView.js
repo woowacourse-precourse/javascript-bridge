@@ -14,30 +14,30 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(sendBridgeToModel) {
+  readBridgeSize(verifyBridgeSize) {
     Console.readLine(INPUT_MESSAGE.start, (size) => {
       const isError = isCorrectBridgeSize(Number(size));
-      sendBridgeToModel(size, isError);
+      verifyBridgeSize(size, isError);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(sendMoveToModel) {
+  readMoving(verifyMove) {
     Console.readLine(INPUT_MESSAGE.move, (move) => {
       const isError = isCorrectCharactor(move) || isCorrectMoveCommand(move);
-      sendMoveToModel(move, isError);
+      verifyMove(move, isError);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(checkGameOption) {
+  readGameCommand(verifyCommand) {
     Console.readLine(INPUT_MESSAGE.retry, (command) => {
       const isError = isCorrectCharactor(command) || isCorrectOptionCommand(command);
-      checkGameOption(command, isError);
+      verifyCommand(command, isError);
     });
   },
 
