@@ -1,6 +1,6 @@
 const { gameStart, bridgeSize, moving, gameCommand } = require("./UI/View");
 const { APPROPRIATE_INPUT, ANSWER } = require("./Utils/Constants");
-const { UP } = APPROPRIATE_INPUT;
+const { UP, RESTART } = APPROPRIATE_INPUT;
 const { RIGHT, WRONG, UNCHOSEN } = ANSWER;
 
 const BridgeMaker = require("./BridgeMaker");
@@ -12,6 +12,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 class BridgeGame {
   #bridge;
   #round = 0;
+  #tries = 1;
   #userState = { top: [], bottom: [] };
 
   start() {
@@ -53,7 +54,7 @@ class BridgeGame {
   untraversable(command) {
     command === UP ? this.mark(WRONG, UNCHOSEN) : this.mark(UNCHOSEN, WRONG);
 
-    gameCommand();
+    gameCommand(this.retry.bind(this));
   }
 
   mark(top, bottom) {
@@ -66,7 +67,18 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(restartOrQuit) {
+    if (restartOrQuit === RESTART) {
+      this.#tries += 1;
+      this.reset();
+      moving(this.move.bind(this));
+    }
+  }
+
+  reset() {
+    this.#round = 0;
+    this.#userState = { top: [], bottom: [] };
+  }
 }
 
 module.exports = BridgeGame;
