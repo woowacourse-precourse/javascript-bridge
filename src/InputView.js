@@ -97,10 +97,12 @@ const InputView = {
     if (userInput === 'R') {
       this.COUNT += 1;
       this.INDEX = 0;
-      OutputView.removeArray();
+      this.BRIDGE_GAME.retry(userInput, this.COUNT);
       this.readMoving(bridgeArray);
     }
-    if (userInput === 'Q') this.BRIDGE_GAME.retry(userInput, this.COUNT);
+    if (userInput === 'Q') {
+      this.BRIDGE_GAME.retry(userInput, this.COUNT);
+    }
   },
 };
 
