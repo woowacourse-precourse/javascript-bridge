@@ -3,10 +3,10 @@ const Validator = require("./Validator.js");
 const InfoMessages = require("./constants/InfoMessages.js");
 
 const InputView = {
-  readBridgeSize(callback) {
+  readBridgeSize(createBridge) {
     Console.readLine(InfoMessages.ENTER_BRIDGE_SIZE, (size) => {
-      Validator.checkSizeInput(size);
-      callback(size);
+      createBridge.call(this, size);
+      this.readMoving();
     });
   },
 
