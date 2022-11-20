@@ -1,9 +1,12 @@
 const BridgeGame = require('./BridgeGame');
+const { readBridgeSize } = require('./InputView');
 
 const bridgeGame = new BridgeGame();
 
 class App {
-  play() {}
+  play() {
+    const bridgeSize = readBridgeSize();
+  }
 }
 
 const app = new App();
