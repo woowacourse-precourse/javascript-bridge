@@ -121,14 +121,6 @@ describe("다리 건너기 테스트", () => {
 });
 
 describe("예외 발생 테스트", () => {
-  test("다리 길이 입력 예외 테스트", () => {
-    runException(["a"]);
-    runException([""]);
-    runException(["2"]);
-    runException(["21"]);
-    runException(["-5"]);
-  });
-
   test("다리 길이 입력 예외 발생 후 다시 입력 받는 기능 테스트", () => {
     const logSpy = getLogSpy();
     mockRandoms(["1", "0", "1"]);
