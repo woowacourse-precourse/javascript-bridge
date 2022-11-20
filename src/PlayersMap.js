@@ -1,5 +1,6 @@
 const leftBlock = '[';
 const rightBlock = ']';
+const emptySpace = ' ';
 
 class PlayersMap {
     #upSpace;
@@ -47,7 +48,7 @@ class PlayersMap {
     }
 
     cover(space) {
-        return `${leftBlock}${space}${rightBlock}`;
+        return `${leftBlock}${emptySpace}${space}${emptySpace}${rightBlock}`;
     }
 
     // 사이사이 공백 넣기
