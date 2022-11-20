@@ -33,15 +33,15 @@ const InputView = {
     try {
       Validator.directionValidityCheck(direction);
       const success = this.controller.handleDirection(direction);
-      success ? this.doseUserWin() : this.readGameCommand();
+      success ? this.doesGameOver() : this.readGameCommand();
     } catch ({ message }) {
       this.controller.print(message);
       this.readMoving();
     }
   },
 
-  doseUserWin() {
-    const userWin = this.controller.doseUserWin();
+  doesGameOver() {
+    const userWin = this.controller.doesUserWin();
     userWin ? this.controller.gameOver(userWin) : this.readMoving();
   },
 

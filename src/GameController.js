@@ -24,7 +24,7 @@ class GameController {
     return successfulMove;
   }
 
-  doseUserWin() {
+  doesUserWin() {
     const userWin = this.#bridgeGame.gameComplete();
 
     return userWin;
