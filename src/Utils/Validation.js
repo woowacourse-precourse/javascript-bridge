@@ -1,6 +1,6 @@
+const { Console } = require('@woowacourse/mission-utils');
 const { ERROR_MESSAGE } = require('../Constants/Message');
 const { INPUT_CHAR, INPUT_RETRY } = require('../Constants/InputValues');
-const { Console } = require('@woowacourse/mission-utils');
 
 function isCorrectBridgeSize(input) {
   const RegExp = /^[0-9]+$/;
