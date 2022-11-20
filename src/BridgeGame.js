@@ -14,40 +14,33 @@ class BridgeGame {
     
     if(i==count){
       if (bridge[i] == input){
-        bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
-        OUTPUTVIEW.printResult(bridgeMap, "성공", tryCount);
-        MISSIONUTILS.Console.close();
-        return;
+        return "Success";
       }
       else{
         if (i == 0){
-          bridgeMap = OUTPUTVIEW.printMapFirst(bridge, 'X');
+          return "PrintFirstX";
         }
         else{
-          bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'X', bridgeMap);
+          return "PrintX";
         }
-        INPUTVIEW.readGameCommand(count, bridge, bridgeMap,tryCount);
       }
     }
     else{
       if (bridge[i] == input){
           if (i == 0){
-            bridgeMap = OUTPUTVIEW.printMapFirst(bridge, 'O');
+            return "PrintFirstO";
           }
           else{
-            bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
+            return "PrintO"
           }
-          INPUTVIEW.readMoving(count, i+1, bridge, bridgeMap, tryCount);
       }    
-      
       else{
         if (i == 0){
-          bridgeMap = OUTPUTVIEW.printMapFirst(bridge, 'X');
+          return "PrintFirstX";
         }
         else{
-          bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'X', bridgeMap);
+          return "PrintX";
         }
-        INPUTVIEW.readGameCommand(count, bridge, bridgeMap,tryCount);
       }
     }
   }

@@ -2,6 +2,7 @@ const BRIDGE_RANDOM_NUMBER_GENERATOR = require("../src/BridgeRandomNumberGenerat
 const BRIDGE_MAKER = require("../src/BridgeMaker");
 const BRIDGE_GAME = require("../src/BridgeGame");
 const MISSIONUTILS = require("@woowacourse/mission-utils");
+const OUTPUTVIEW = require("../src/Outputview");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -50,7 +51,38 @@ const InputView = {
       }
       
       var temp = new BRIDGE_GAME;
-      temp.move(input, count, i, bridge, bridgeMap, tryCount);
+      var word = temp.move(input, count, i, bridge, bridgeMap, tryCount);
+
+      switch (word) {
+        case "Success":
+          bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
+          OUTPUTVIEW.printResult(bridgeMap, "성공", tryCount);
+          MISSIONUTILS.Console.close();
+          break;
+        case "PrintFirstX":
+          bridgeMap = OUTPUTVIEW.printMapFirst(bridge, 'X');
+          InputView.readGameCommand(count, bridge, bridgeMap,tryCount);
+  
+          break;
+        case "PrintX":
+          bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'X', bridgeMap);
+          InputView.readGameCommand(count, bridge, bridgeMap,tryCount);
+
+          break;
+        case "PrintFirstO":
+          bridgeMap = OUTPUTVIEW.printMapFirst(bridge, 'O');
+          InputView.readMoving(count, i+1, bridge, bridgeMap, tryCount);
+
+          break;
+        case "PrintO":
+          bridgeMap = OUTPUTVIEW.printMap(i, bridge, 'O', bridgeMap);
+          InputView.readMoving(count, i+1, bridge, bridgeMap, tryCount);
+
+          break;
+    
+        default:
+          break;
+      }
     });
 
 
