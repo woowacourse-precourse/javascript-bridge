@@ -1,5 +1,5 @@
 const { ERROR_MESSAGE } = require("./constants/Messages.js");
-const Validation = {
+const Validator = {
   BRIDGE_LENGTH_REGEX: /^[3-9]{1}$|^1{1}[0-9]{1}$|20/,
   // 3이상 20이하의 숫자가 아니면 Error
   checkBridgeLengthInput(input) {
@@ -8,4 +8,4 @@ const Validation = {
   },
 };
 
-module.exports = Validation;
+module.exports = Validator;
