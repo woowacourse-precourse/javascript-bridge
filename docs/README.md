@@ -47,3 +47,14 @@
   - [ ] 각 다리마다 0 과 1 무작위 값 생성(0인 경우 아래, 1인 경우 위칸 이동 가능)
 - [ ] 총 이동한 횟수 누적
 - [ ] 입력받은 이동할 칸과 현재 건너는 다리 비교해서 성공 여부 가리기
+- [ ] 오류시 `Console.close`와 `throw new Error([Error] 에러메세지)`
+
+## MVC 패턴 사용
+
+Model : utils/contants, utils/validation, utils/util,
+BridgeGame, BridgeMaker, BridgeRandomMaker
+
+View : Views/Inputview, Views/OuputView
+
+Controller :
+BridgeGameController
