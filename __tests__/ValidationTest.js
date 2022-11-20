@@ -7,7 +7,12 @@ describe("검증 메서드에 대한 테스트를 구현합니다.", () => {
   test("isSame은 동일한 값이 아닌 경우 false를 반환.", () => {
     expect(Validation.isSame(1, 10)).toBe(false);
   });
-
+  test("isDifferent는 동일한 값일 경우 false를 반환", () => {
+    expect(Validation.isDifferent(4, 4)).toBe(false);
+  });
+  test("isDifferent는 동일한 값이 아닐 경우 true를 반환", () => {
+    expect(Validation.isDifferent(4, 6)).toBe(true);
+  });
   test.each([
     [1, 10, 100],
     [1, 2, 3],
