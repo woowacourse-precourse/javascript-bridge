@@ -1,3 +1,4 @@
+const Bridge = require("./Bridge");
 const Player = require("./Player");
 
 /**
@@ -9,7 +10,7 @@ class BridgeGame {
   #tryCount;
 
   constructor(bridge) {
-    this.#bridge = bridge;
+    this.#bridge = new Bridge(bridge);
     this.#player = new Player();
     this.#tryCount = 1;
   }
