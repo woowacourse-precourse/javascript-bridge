@@ -577,4 +577,11 @@ describe('빈 다리 로그 생성 메서드 테스트', () => {
 
     expect(EXPECTED).toEqual(RECEIVED);
   });
+
+  test('2를 전달하면 두 번째 요소는 [ " ", " " ] 배열을 반환한다.', () => {
+    const EXPECTED = bridgeGame.createEmptyUDArray(2)[1];
+    const RECEIVED = [' ', ' '];
+
+    expect(EXPECTED).toEqual(RECEIVED);
+  });
 });
