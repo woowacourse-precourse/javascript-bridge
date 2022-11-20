@@ -18,11 +18,18 @@ class BridgeGame {
   setupGameMap(size) {
     const bridgeGameMap = this.makeBridgeMap(size);
     this.gameMap.setBridgeGameMap(bridgeGameMap);
-    console.log(this.gameMap.getBridgeGameMap(), '\n'); // 게임 맵 디버깅용
   }
 
   drawBridgeMap(moveCommand) {
     return this.gameMap.drawOX(moveCommand, this.getUserLocation());
+  }
+
+  checkGameSuccess() {
+    return this.gameMap.isGameSuccess(this.getUserLocation());
+  }
+
+  getUserGameMap() {
+    return this.gameMap.currentUserBridgeMap(this.getUserLocation());
   }
 
   getUserLocation() {
@@ -46,30 +53,18 @@ class BridgeGame {
   }
 
   retry() {
-    this.setupRetryGame();
-  }
-
-  setupRetryGame() {
     this.gameMap.initBridge();
     this.gameMap.setRetryGame();
-    this.increaseTryCount();
-    this.initUserLocation();
+    this.#increaseTryCount();
+    this.#initUserLocation();
   }
 
-  checkGameSuccess() {
-    return this.gameMap.isGameSuccess(this.getUserLocation());
-  }
-
-  increaseTryCount() {
+  #increaseTryCount() {
     this.user.increaseCount();
   }
 
-  initUserLocation() {
+  #initUserLocation() {
     this.user.initLocation();
-  }
-
-  getUserGameMap() {
-    return this.gameMap.currentUserBridgeMap(this.getUserLocation());
   }
 }
 
