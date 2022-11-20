@@ -1,5 +1,6 @@
 const BridgeController = require("./BridgeController");
 const UserController = require("./UserController");
+const BridgeGameController = require("./BridgeGameController");
 const InputView = require("../view/InputView");
 const OutputView = require("../view/OutputView");
 
@@ -7,6 +8,7 @@ class MainController {
   constructor() {
     this.bridgeController = new BridgeController(this);
     this.userController = new UserController(this);
+    this.bridgeGameController = new BridgeGameController(this);
   }
 
   /**
