@@ -42,6 +42,8 @@ class BridgeGame {
 
     this.#map.update(isCorrect, moving);
     this.#currentLocation += 1;
+
+    return isCorrect;
   }
 
   toStringMap() {
