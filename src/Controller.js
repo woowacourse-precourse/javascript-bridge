@@ -31,8 +31,7 @@ class Controller {
     const callback = (input, index) => {
       Validator.validateUpDown(input);
       const computerBridgeArr = this.model.getComputerBridgeArr();
-      const game = new BridgeGame();
-      game.move(input, computerBridgeArr[index], this.model);
+      BridgeGame.move(input, computerBridgeArr[index], this.model);
       OutputView.printMap(this.model);
     };
     InputView.readMoving(callback, this.model, 0);
