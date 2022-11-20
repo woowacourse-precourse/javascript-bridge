@@ -89,22 +89,19 @@ class Controller {
   getGameOverSelect(gameOverSelect) {
     try {
       validator.checkGameOverSelect(gameOverSelect);
+      this.runSelectResult(gameOverSelect);
     } catch {
       this.inputGameOver();
     }
-    this.runSelectResult(gameOverSelect);
   }
 
   runSelectResult(gameOverSelect) {
-    if (gameOverSelect === 'R') {
-      this.#BridgeGame.retry();
-      this.#userSelect = [];
-      this.#attemptsNum += 1;
-      this.inputUserMoving();
-    }
-    if (gameOverSelect === 'Q') {
-      this.printGameResult();
-    }
+    gameOverSelect === 'R'
+      ? (this.#BridgeGame.retry(),
+        (this.#userSelect = []),
+        (this.#attemptsNum += 1),
+        this.inputUserMoving())
+      : this.printGameResult();
   }
 
   printGameResult() {
