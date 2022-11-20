@@ -15,8 +15,6 @@ class App {
 
   #brdigeGame = new BridgeGame();
 
-  #moveAnswer;
-
   #bridgeMap = new BridgeMap();
 
   #moveStatement;
@@ -33,7 +31,6 @@ class App {
   progressApp(appStatus) {
     if (appStatus === 1) return this.questionBridgeMake();
     if (appStatus === 3) return this.questionBridgeMove();
-    if (appStatus === 4) return this.runBridgeMove();
     if (this.#appStatus === 5) return this.questionGameRetry();
     if (this.#appStatus === 6) return this.runGameRetry();
     return this.progressApp(this.#appStatus);
@@ -62,24 +59,23 @@ class App {
     InputView.readMoving((answer) => {
       try {
         Validator.confirmOfCondition(answer, 'move');
-        this.#moveAnswer = answer;
-        this.#appStatus = 4;
+        this.runBridgeMove(answer);
+        this.#appStatus = 5;
       } catch (e) {
         Utils.print(e);
-      } finally {
         this.progressApp(this.#appStatus);
       }
     });
   }
 
-  runBridgeMove() {
-    this.#moveStatement = this.#brdigeGame.move(this.#moveAnswer, this.#bridge);
-    if (this.#moveStatement) return this.progressMovementTrue();
-    return this.progressMovementFalse();
+  runBridgeMove(answer) {
+    this.#moveStatement = this.#brdigeGame.move(answer, this.#bridge);
+    if (this.#moveStatement) return this.progressMovementTrue(answer);
+    return this.progressMovementFalse(answer);
   }
 
-  progressMovementTrue() {
-    this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
+  progressMovementTrue(answer) {
+    this.#bridgeMap.handleMap(this.#moveStatement, answer);
     OutputView.printMap(this.#bridgeMap.getMap());
     if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
       return this.progressGameEnd();
@@ -87,9 +83,8 @@ class App {
     return this.questionBridgeMove();
   }
 
-  progressMovementFalse() {
-    this.#bridgeMap.handleMap(this.#moveStatement, this.#moveAnswer);
-    this.#appStatus = 5;
+  progressMovementFalse(answer) {
+    this.#bridgeMap.handleMap(this.#moveStatement, answer);
     OutputView.printMap(this.#bridgeMap.getMap());
     return this.questionGameRetry();
   }
