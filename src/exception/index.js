@@ -17,11 +17,27 @@ class BridgeException {
     }
   };
 
+  validateMovingKeyWord = (input) => {
+    if (input !== "U" && input !== "D") {
+      throw MESSAGE.ERROR.INVALID_MOVE;
+    }
+  };
+
   static isInvalidBridgeLength = (input) => {
     const bridgeException = new BridgeException();
     try {
       bridgeException.validateInteger(input);
       bridgeException.validateRange(input);
+    } catch (error) {
+      Console.print(error);
+      return true;
+    }
+  };
+
+  static isInvalidMoving = (input) => {
+    const bridgeException = new BridgeException();
+    try {
+      bridgeException.validateMovingKeyWord(input);
     } catch (error) {
       Console.print(error);
       return true;

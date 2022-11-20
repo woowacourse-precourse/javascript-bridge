@@ -1,6 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
 
 const BridgeGame = require("./BridgeGame");
+const { isInvalidBridgeLength, isInvalidMoving } = require("./exception");
+
 const { toNumber } = require("./helpers/common");
 const { generate } = require("./BridgeRandomNumberGenerator");
 
@@ -25,9 +27,9 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(bridgeGame) {
     Console.readLine(INPUT_MOVE, (input) => {
-      console.log(input);
+      isInvalidMoving(input) && this.readMoving(bridgeGame);
     });
   },
 
