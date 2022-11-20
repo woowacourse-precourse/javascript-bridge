@@ -2,8 +2,10 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridgeAnswer;
-  #current = 0;
+  bridgeAnswer;
+  currentBridge = [[], []];
+  current = 0
+  tryCount = 0;
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -13,11 +15,37 @@ class BridgeGame {
   move() {}
 
   isCorrect(movingInput) {
-    if (movingInput === this.#bridgeAnswer[this.#current]) {
+    if (movingInput === this.bridgeAnswer[this.current]) {
       this.#index++;
       return true;
     } 
     return false;
+  }
+
+  // 정답일 때 실행할 메서드
+  MoveToCorrectBridge() {}
+
+  // 틀렸을 때 실행할 메서드
+  MoveToWrongBridge() {}
+
+  makeCorrectUpBridge() {
+    currentBridge[0].upBridge.push('O');
+    currentBridge[1].downBridge.push(' ');
+  }
+
+  makeCorrectDownBridge() {
+    currentBridge[0].upBridge.push(' ');
+    currentBridge[1].downBridge.push('O');
+  }
+
+  makeCorrectDownBridge() {
+    currentBridge[0].upBridge.push('X');
+    currentBridge[1].downBridge.push(' ');
+  }
+
+  makeWrongDownBridge() {
+    currentBridge[0].upBridge.push(' ');
+    currentBridge[1].downBridge.push('X');
   }
 
   /**
