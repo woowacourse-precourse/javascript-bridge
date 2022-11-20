@@ -8,7 +8,7 @@ describe('BridgeGame 클래스 테스트', () => {
     const testPlayerAt = 0;
     bridgeGame.checkMovement(testInput, testBridge, testPlayerAt);
     bridgeGame.setBridgeForm(testInput);
-    bridgeGame.checkSuccessFail();
+    bridgeGame.setGameStatus();
     const testBridgeUpper = bridgeGame.getBridgeUpper();
     const testBridgeLower = bridgeGame.getBridgeLower();
     expect(testBridgeUpper[0]).toEqual(' O ');
@@ -21,7 +21,7 @@ describe('BridgeGame 클래스 테스트', () => {
     const testInput = 'D';
     const testPlayerAt = 0;
     bridgeGame2.checkMovement(testInput, testBridge, testPlayerAt);
-    bridgeGame2.checkSuccessFail();
+    bridgeGame2.setGameStatus();
     const testWinStatus = bridgeGame2.getGameWin();
     expect(testWinStatus).toBeFalsy();
 
