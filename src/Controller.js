@@ -80,6 +80,18 @@ class Controller {
     Console.close;
   }
 
+  getBridgeCommand() {
+    InputView.readGameCommand(this.commandForm.bind(this));
+  }
+
+  commandForm(input) {
+    try {
+      Console.print(input);
+    } catch (error) {
+      Console.print(error);
+    }
+  }
+
   retryGame() {
     this.bridgeGame.retry();
     this.getMovingDirection();
