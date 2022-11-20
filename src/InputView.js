@@ -1,23 +1,25 @@
 const {Console} = require("@woowacourse/mission-utils");
+const { input_command } = require("./Messages");
+const Messages = require("./Messages");
 const Validation = require("./Validation");
 
 const InputView = {
   readBridgeSize(app) {
-    Console.readLine(`다리의 길이를 입력해주세요.\n`, (size)=>{
+    Console.readLine(Messages.input_size(), (size)=>{
       Validation.checkBridgeSize(size);
       app.init(size);
     })
   },
 
   readMoving(bridgePlay) {
-    Console.readLine(`이동할 칸을 선택해주세요. (위: U, 아래: D)\n`, (moving)=>{
+    Console.readLine(Messages.input_moving(), (moving)=>{
       Validation.checkMoving(moving);
       bridgePlay.playRound(moving);
     })
   },
 
   readGameCommand(bridgePlay) {
-    Console.readLine(`게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n`, (option)=>{
+    Console.readLine(input_command(), (option)=>{
       Validation.checkOption(option);
       bridgePlay.quitOrRetry(option);
     })
