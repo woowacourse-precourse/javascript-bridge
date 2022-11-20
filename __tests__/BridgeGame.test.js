@@ -621,6 +621,12 @@ describe('다리 이동 로그 저장하는 메서드', () => {
 
     expect(bridgeGame.setBridgeLog(POSITION_LOG_3)).toEqual(RECEIVED);
   });
+
+  test('유저가 아직 출발 전이라면 예외를 발생한다.', () => {
+    expect(() => {
+      new BridgeGame().setBridgeLog(POSITION_LOG_3);
+    }).toThrow(POSITION_ERROR_TEXT);
+  });
 });
 
 describe('다리 이동 로그 메소드 테스트', () => {
