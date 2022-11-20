@@ -17,7 +17,7 @@ describe(" 다리 테스트 ", () => {
       ],
     ];
     inputs.forEach((input, idx) => {
-      bridgeGame.canMove(input);
+      bridgeGame.move(input);
       expect(bridgeGame.getBridgeMap()).toEqual(results[idx]);
     });
   });
