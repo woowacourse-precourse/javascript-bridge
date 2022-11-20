@@ -619,8 +619,15 @@ describe('다리 이동 로그 저장하는 메서드', () => {
   });
 
   test('두 번째 값은 [[ " " ] [ "O" ]]을 반환한다.', () => {
-    const EXPECTED = 0;
+    const EXPECTED = 1;
     const RECEIVED = [[' '], ['O']];
+
+    expect(bridgeGame.setBridgeLog(EXPECTED)).toEqual(RECEIVED);
+  });
+
+  test('세 번째 값은 [[ "O" ] [ " " ]]을 반환한다.', () => {
+    const EXPECTED = 2;
+    const RECEIVED = [['O'], [' ']];
 
     expect(bridgeGame.setBridgeLog(EXPECTED)).toEqual(RECEIVED);
   });
