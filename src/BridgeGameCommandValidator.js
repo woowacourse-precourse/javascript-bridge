@@ -1,7 +1,8 @@
 /**
- * 다리 건너기 게임 진행을 위해 입력받은 값의 유효성을 검사하는 역할을 한다.
+ * 사용자가 입력한 게임 명령에 대한 유효성을 검사하는 역할을 한다.
  */
-const BridgeValidator = {
+const BridgeGameCommandValidator = {
+  VALID_COMMAND_LIST: ['R', 'Q'],
   /**
    * 사용자가 입력한 게임 명령에 대한 유효성을 검사하는 메서드
    * @param {string} gameCommand
@@ -21,8 +22,8 @@ const BridgeValidator = {
    * @returns {boolean} 유효하지 않은 게임 명령인 경우 true, 아니면 false를 반환한다.
    */
   isInvalidGameCommand(gameCommand) {
-    return !['R', 'Q'].includes(gameCommand);
+    return !this.VALID_COMMAND_LIST.includes(gameCommand);
   },
 };
 
-module.exports = BridgeValidator;
+module.exports = BridgeGameCommandValidator;
