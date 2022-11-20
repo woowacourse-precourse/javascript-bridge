@@ -14,7 +14,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult() {
+    MissionUtils.Console.print('게임 성공 여부: ');
+    // 여기에 성공 여부 넣는다.
+    MissionUtils.Console.print('총 시도한 횟수: ');
+    // 시도 횟수 넣는다.
+  },
 };
 
 module.exports = OutputView;
