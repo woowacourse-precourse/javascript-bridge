@@ -29,9 +29,9 @@ const InputView = {
       const gameResult=bridgeGame.move(playerMoveList, bridge);
       OutputView.printMap(gameResult);
       if(gameResult.includes('X')){
-        this.readGameCommand(playerMoveList, bridgeSize, bridge);
+        return this.readGameCommand(playerMoveList, bridgeSize, bridge);
       }
-      if(bridgeGame.moveFinishCheck(playerMoveList.length, bridgeSize)) this.gameFinish()
+      if(playerMoveList.length===Number(bridgeSize)) return OutputView.printResult(gameResult)
       return this.readMoving(playerMoveList, bridgeSize, bridge);
     })
   },
