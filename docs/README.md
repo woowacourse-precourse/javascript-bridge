@@ -41,14 +41,12 @@
 
 1. InputView
 
-- [ ] readBridgeSize
+- [x] readBridgeSize
   - 사이즈 입력 문구를 그려주고 내부 콜백은 컨트롤러에게 위임한다.
-- [ ] readMoving
+- [x] readMoving
   - 이동할 칸 입력 문구를 그려주고 내부 콜백은 컨트롤러에게 위임한다.
-- [ ] readGameCommand
+- [x] readGameCommand
   - 재시작/종료 여부 문구를 그려주고 내부 콜백은 컨트롤러에게 위임한다.
-- [ ] readRetry
-  - 잘못된 값이 들어온다면 에러를 캐치해 그려주고 인풋 값을 다시 받는다.
 
 ### `Controller`
 
