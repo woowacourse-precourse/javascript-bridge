@@ -17,14 +17,9 @@ class BridgeGame {
     this.#movings.push(moving);
   }
 
-  retry(gameCommand) {
-    this.validateGameCommand(gameCommand);
-    if (gameCommand === COMMAND.QUIT) {
-      return false;
-    }
+  retry() {
     this.#movings = [];
     this.#trialCount += 1;
-    return true;
   }
 
   getMap(line) {
