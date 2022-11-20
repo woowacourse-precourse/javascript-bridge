@@ -54,17 +54,4 @@ describe('BridgeGame 클래스 테스트', () => {
       );
     });
   });
-
-  test('addDirection - 올바른 이동 기록을 반환하는지 검사', () => {
-    // Given
-    const userDirection = 'D';
-    const records = ['U', 'D'];
-
-    // When
-    const newRecords = BridgeGame.addDirection(userDirection, records);
-
-    const nextRecords = ['U', 'D', 'D'];
-    // Then
-    expect(newRecords).toEqual(nextRecords);
-  });
 });

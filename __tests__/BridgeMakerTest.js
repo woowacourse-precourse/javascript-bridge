@@ -1,10 +1,5 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-const App = require('../src/App');
 const { makeBridge } = require('../src/BridgeMaker');
-const BridgeMaker = require('../src/BridgeMaker');
 const { generate } = require('../src/BridgeRandomNumberGenerator');
-const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
-const OutputView = require('../src/OutputView');
 
 describe('다리 만들기 테스트', () => {
   test('makeBridge - 반환하는 배열 길이가 입력한 size와 같은지 검사', () => {
