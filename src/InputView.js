@@ -34,9 +34,19 @@ const InputView = {
     Console.readLine(
       '이동할 칸을 선택해주세요. (위: U, 아래: D)',
       (alphabet) => {
+        this.alphabetValidate(alphabet);
         return alphabet;
       }
     );
+  },
+  // 이동할 칸 예외처리
+  alphabetValidate(alphabet) {
+    if (typeof alphabet !== 'string') {
+      throw new Error('[ERROR] 문자를 입력해야 합니다.');
+    }
+    if (alphabet !== 'U' || alphabet !== 'D') {
+      throw new Error('[ERROR] U나 D를 입력해야 합니다.');
+    }
   },
 
   /**
