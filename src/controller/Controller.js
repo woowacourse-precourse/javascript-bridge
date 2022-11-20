@@ -5,6 +5,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeMaker = require("../BridgeMaker");
 const BridgeMachine = require("../BridgeRandomNumberGenerator");
 const BridgeGame = require("../model/BridgeGame");
+const { BRIDGE } = require("../utils/constants");
 
 class Controller {
   #bridge = [];
@@ -103,10 +104,10 @@ class Controller {
   }
 
   RetryOrQuitGame(input) {
-    if (input === "R") {
+    if (input === BRIDGE.RETRY) {
       this.retryGame();
     }
-    if (input === "Q") {
+    if (input === BRIDGE.QUIT) {
       this.quitGame();
     }
     this.#try += 1;

@@ -22,9 +22,13 @@ const BRIDGE = {
   ZERO: "0",
   UP: "U",
   DOWN: "D",
+  RETRY: "R",
+  QUIT: "Q",
   MOVABLE: " O ",
   IMMOVABLE: " X ",
   UNSELECTED: "   ",
+  MIN_LENGTH: 3,
+  MAX_LENGTH: 20,
 };
 
 module.exports = { INPUT_MESSAGE, INFO_MESSAGE, ERROR_MESSAGE, BRIDGE };
