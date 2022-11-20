@@ -14,7 +14,11 @@ describe('다리 건너기 테스트', () => {
   test('다리 건너기 기록 체크', () => {
     const pattern = ['U', 'D', 'D'];
     const input = ['U', 'D', 'U'];
-    const historyList = [{ up: ['O'], down: [' '] }, { up: ['O', ' '], down: [' ', 'O'] }, { up: ['O', ' ', 'X'], down: [' ', 'O', ' '] }];
+    const historyList = [
+      new Map([['U', ['O']], ['D', [' ']]]),
+      new Map([['U', ['O', ' ']], ['D', [' ', 'O']]]),
+      new Map([['U', ['O', ' ', 'X']], ['D', [' ', 'O', ' ']]]),
+    ];
     const bridgeMap = new BridgeMap();
     bridgeMap.setPattern(pattern);
     input.forEach((path, index) => {
