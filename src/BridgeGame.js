@@ -1,4 +1,7 @@
 const { gameStart, bridgeSize, moving } = require("./UI/View");
+const { APPROPRIATE_INPUT, ANSWER } = require("./Utils/Constants");
+const { UP } = APPROPRIATE_INPUT;
+const { RIGHT, WRONG, UNCHOSEN } = ANSWER;
 
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
@@ -9,6 +12,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 class BridgeGame {
   #bridge;
   #round = 0;
+  #userState = { top: [], bottom: [] };
 
   start() {
     gameStart();
@@ -32,10 +36,25 @@ class BridgeGame {
   move(command) {
     if (command === this.#bridge[this.#round]) {
       this.#round += 1;
+      return this.traversable(command);
     }
     if (command !== this.#bridge[this.#round]) {
       this.#round += 1;
+      return this.untraversable(command);
     }
+  }
+
+  traversable(command) {
+    command === UP ? this.mark(RIGHT, UNCHOSEN) : this.mark(UNCHOSEN, RIGHT);
+  }
+
+  untraversable(command) {
+    command === UP ? this.mark(WRONG, UNCHOSEN) : this.mark(UNCHOSEN, WRONG);
+  }
+
+  mark(top, bottom) {
+    this.#userState.top.push(top);
+    this.#userState.bottom.push(bottom);
   }
 
   /**
