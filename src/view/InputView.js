@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { READ_BRIDGE_SIZE, READ_MOVING } = require('../util/constant');
-const { isBridgeSizeValid, isUserMovingInputValid } = require('../util/validation');
+const { READ_BRIDGE_SIZE, READ_MOVING } = require('../utils/constant');
+const { isBridgeSizeValid, isUserMovingInputValid } = require('../utils/validation');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
