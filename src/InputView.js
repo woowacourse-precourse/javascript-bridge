@@ -1,5 +1,5 @@
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const MissionUtils = require('@woowacourse/mission-utils');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame');
 const Validate = require('./Validation');
@@ -63,7 +63,7 @@ const InputView = {
       this.INDEX += 1;
       return this.readMoving(bridgeArray);
     }
-    this.fail(userAnswer, bridgeArray);
+    return this.fail(userAnswer, bridgeArray);
   },
 
   fail(userAnswer, bridgeArray) {
