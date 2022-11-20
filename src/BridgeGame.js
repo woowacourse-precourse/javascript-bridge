@@ -7,8 +7,8 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 class BridgeGame {
   #bridge;
 
-  constructor(bridgeSize) {
-    this.#bridge = this.setBridge(bridgeSize);
+  constructor() {
+    this.#bridge;
   }
 
   /**
@@ -26,7 +26,7 @@ class BridgeGame {
   retry() {}
 
   setBridge(bridgeSize) {
-    return BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+    this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
   }
 }
 

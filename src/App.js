@@ -3,14 +3,17 @@ const OutputView = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
 
 class App {
+  constructor() {
+    this.bridgeModel = new BridgeGame();
+  }
+
   play() {
     OutputView.printStart();
     InputView.readBridgeSize(this.gameRoutine.bind(this));
   }
 
   gameRoutine(bridgeSize) {
-    const bridgeModel = new BridgeGame(bridgeSize);
-    InputView.readMoving(bridgeModel.move.bind(this));
+    this.bridgeModel.setBridge(bridgeSize);
   }
 }
 
