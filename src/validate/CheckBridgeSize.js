@@ -8,7 +8,7 @@ class CheckBridgeSize {
   }
 
   checkNotNumber(size) {
-    if (Number.isNaN(size)) {
+    if (size.match(/[^0-9]/g)) {
       throw new Error(ERROR.NOT_NUMBER);
     }
   }
