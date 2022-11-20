@@ -22,7 +22,7 @@ class BridgeController {
    * 입력받은 다리의 유효성 검사여부에 따라 게임을 종료시키는 메서드
    */
   verifyBridgeSize = (size, isError) => {
-    if (isError) this.finishControl(true);
+    if (isError) this.getBridgeSize();
     if (!isError) this.sendBridgeToModel(size);
   };
 
@@ -45,7 +45,7 @@ class BridgeController {
    * 입력받은 이동의 유효성 검사여부에 따라 게임을 종료시키는 메서드
    */
   verifyMove = (move, isError) => {
-    if (isError) this.finishControl(true);
+    if (isError) this.getMove();
     if (!isError) this.sendMoveToModel(move);
   };
 
@@ -99,7 +99,7 @@ class BridgeController {
    * 입력받은 종료,재시작여부의 유효성 검사여부에 따라 게임을 종료시키는 메서드
    */
   verifyCommand = (command, isError) => {
-    if (isError) this.finishControl(true);
+    if (isError) this.getCommand();
     if (!isError) this.checkGameOption(command);
   };
 
@@ -107,25 +107,19 @@ class BridgeController {
    * 입력받은 값을 바탕으로 게임을 종료, 재시작시키는 메서드
    */
   checkGameOption = (command) => {
-    const { count, isCleared, output } = this.#Game.getStatus();
     if (command === INPUT_RETRY.restart) {
       this.#Game.retry();
       this.getMove();
     }
-    if (command === INPUT_RETRY.quit) {
-      printResult(count, isCleared, output);
-      this.finishControl(false);
-    }
+    if (command === INPUT_RETRY.quit) this.finishControl(false);
   };
 
   /**
    * 뷰에 최종 결과 출력을 요청하는 메서드
    */
-  finishControl = (isError) => {
-    if (!isError) {
-      const { count, isCleared, output } = this.#Game.getStatus();
-      printResult(count, isCleared, output);
-    }
+  finishControl = () => {
+    const { count, isCleared, output } = this.#Game.getStatus();
+    printResult(count, isCleared, output);
     exit();
   };
 }
