@@ -3,10 +3,20 @@
  */
 class BridgeGame {
   #bridge;
+  #order;
 
   setBridge(bridge) {
     this.#bridge = bridge;
+    this.#order = 0;
   }
+
+  isSuccess(move) {
+    if (this.#bridge[this.#order].includes(move)) {
+      return true;
+    }
+    return false;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
