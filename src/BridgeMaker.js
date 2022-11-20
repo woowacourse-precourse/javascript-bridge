@@ -1,4 +1,3 @@
-const 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -14,8 +13,8 @@ const BridgeMaker = {
     for (let i = 0; i < size; i++) {
       const randomNumber = generateRandomNumber();
 
-      if (+randomNumber === 0) bridge.push('D');
-      if (+randomNumber === 1) bridge.push('U');
+      if (+randomNumber === 0) bridge.push("D");
+      if (+randomNumber === 1) bridge.push("U");
 
       return bridge;
     }

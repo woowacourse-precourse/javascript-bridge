@@ -2,6 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
 const Validation = require("./Validation");
+const BridgeGame = require("./BridgeGame");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -18,7 +19,8 @@ const InputView = {
         return this.readBridgeSize();
       }
 
-      BridgeMaker.makeBridge(+size, generate);
+      const bridge = BridgeMaker.makeBridge(+size, generate);
+      const bridgeGame = new BridgeGame(bridge);
     });
   },
 
