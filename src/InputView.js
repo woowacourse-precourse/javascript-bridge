@@ -14,16 +14,13 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(){
+   readBridgeSize(){
+    let bridgeSize;
     Console.readLine("다리의 길이를 입력해주세요" , (num) => {
       this.checkBridgeLengthExceptions(num);
-      this.createRandomBridge(num);
+      bridgeSize = num;
     });
-  },
-
-  createRandomBridge(num){
-    this.createBridge = makeBridge(num, generate);
-    this.readMoving();
+    return bridgeSize;
   },
 
   checkBridgeLengthExceptions(num){
