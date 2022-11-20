@@ -7,6 +7,10 @@ const OutputView = class {
     throw new Error(ERROR_MESSAGE.interface_class);
   }
 
+  close() {
+    throw new Error(ERROR_MESSAGE.interface_class);
+  }
+
   printGameStart() {
     throw new Error(ERROR_MESSAGE.interface_class);
   }

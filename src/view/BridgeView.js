@@ -29,8 +29,8 @@ const BridgeView = class extends GameView {
     this.outputView.printMap(map);
   }
 
-  printResult() {
-    this.outputView.printMap();
+  printResult(result) {
+    this.outputView.printResult(result);
   }
 };
 

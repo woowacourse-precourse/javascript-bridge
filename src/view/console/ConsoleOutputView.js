@@ -11,6 +11,10 @@ const ConsoleOutputView = class extends OutputView {
     Console.print(message);
   }
 
+  close() {
+    Console.close();
+  }
+
   printGameStart() {
     this.output(GAME_MESSAGE.start);
   }
@@ -20,8 +24,8 @@ const ConsoleOutputView = class extends OutputView {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(map) {
-    this.output(map);
+  printMap(bridgeMap) {
+    this.output(bridgeMap);
   }
 
   /**
@@ -29,8 +33,9 @@ const ConsoleOutputView = class extends OutputView {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {
-    throw new Error(ERROR_MESSAGE.interface_class);
+  printResult(result) {
+    this.output(result);
+    this.close();
   }
 };
 

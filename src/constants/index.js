@@ -3,9 +3,9 @@ const GAME_MESSAGE = Object.freeze({
   input_size: '다리의 길이를 입력해주세요.\n',
   choose_space: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
   replay: '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
-  result: '최종 게임 결과\n',
+  result: '\n최종 게임 결과',
   is_success: '\n게임 성공 여부: ',
-  total_attempts: '총 시도한 횟수: ',
+  try_count: '총 시도한 횟수: ',
   success: '성공',
   fail: '실패',
 });

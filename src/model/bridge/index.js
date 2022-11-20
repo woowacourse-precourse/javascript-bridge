@@ -4,6 +4,7 @@ const { SizeValidation, CommandValidation, ReplayValidation } = require('../../v
 const { makeBridge } = require('../../BridgeMaker');
 const { generate } = require('../../BridgeRandomNumberGenerator');
 const BridgeMap = require('./BridgeMap');
+const { GAME_MESSAGE } = require('../../constants');
 
 const BridgeModel = class extends GameModel {
   #tryCount = 1;
@@ -33,17 +34,31 @@ const BridgeModel = class extends GameModel {
   }
 
   get getMovedResult() {
-    const movedResult = new BridgeMap(
-      this.#bridge,
-      this.#position,
-      this.#commandList,
-    ).getBridgeMap();
+    const movedResult = new BridgeMap({
+      bridge: this.#bridge,
+      position: this.#position,
+      commandList: this.#commandList,
+    }).getBridgeMap();
 
     return movedResult;
   }
 
+  // FIX: 게임 성공 여부 -> 다리에 X가 있는지 여부로 수정
   get getIsGameEnd() {
     return this.#position === this.#bridge.length;
+  }
+
+  makeBridgeGameResult({ bridgeMap, isGameSuccess }) {
+    const tryCountMessage = GAME_MESSAGE.try_count + this.#tryCount;
+    const gameSuccessMessage = this.getGameSuccessMessage(isGameSuccess);
+
+    return [GAME_MESSAGE.result, bridgeMap, gameSuccessMessage, tryCountMessage].join('\n');
+  }
+
+  getGameSuccessMessage(isGameSuccess) {
+    const { is_success, success, fail } = GAME_MESSAGE;
+    const gameResult = isGameSuccess ? success : fail;
+    return is_success + gameResult;
   }
 
   validateUserInput(validateValueCallback) {

@@ -18,6 +18,10 @@ const GameView = class extends IGameView {
   output(message) {
     this.outputView.output(message);
   }
+
+  close() {
+    this.outputView.close();
+  }
 };
 
 module.exports = GameView;

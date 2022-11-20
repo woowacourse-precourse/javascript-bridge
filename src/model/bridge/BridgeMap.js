@@ -20,7 +20,7 @@ const BridgeMap = class {
   #bridgeMap;
   #isPassed;
 
-  constructor(bridge, position, commandList) {
+  constructor({ bridge, position, commandList }) {
     this.#bridge = bridge;
     this.#position = position;
     this.#commandList = commandList;
