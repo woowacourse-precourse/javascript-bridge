@@ -1,0 +1,116 @@
+const MissionUtils = require("@woowacourse/mission-utils"); // 지우기
+const {  GO, COMMAND, SIGN, IS_SUCCESS, MESSAGE, ERROR_MESSAGE }= require("./constant");
+const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
+
+// 클래스로 하니까 걍 다 초기화됨 -- 
+// 열로 정보 다보내
+const Controller = {
+  size: 0,
+  command: "",
+  tryCount: 1,
+  round: 0,
+  // checkBlock: null,
+  arrayState: [[], []],
+  playerArr: [],
+  gameResult: "",
+
+
+  getSize(size) {
+    this.size += size;
+  },
+
+  addRound() {
+    this.round += 1;
+  },
+  addTrialCount() {
+    this.tryCount += 1;
+  },
+  isBlockError(){
+    this.round -= 1
+    this.playerArr.pop()
+  },
+
+  conveyInput(block) {
+    this.addPlayerBlock(block);
+    // this.successMove(block);
+    // this.failMove(block);
+  },
+  
+  addPlayerBlock(block) {
+    this.playerArr.push(block);
+  },
+
+  // checkMovetrue(){
+  //   this.checkBlock = 1
+  // },
+
+  // successMove(block) {
+  //   if (block === "U" && this.checkBlock === 1) {
+  //     this.arrayState[0].push("O");
+  //     this.arrayState[1].push(" ");
+  //   }
+  //   if (block === "D" && this.checkBlock === 1) {
+  //     this.arrayState[0].push(" ");
+  //     this.arrayState[1].push("O");
+  //   }
+  // },
+  // failMove(block) {
+  //   if (block === "U" && this.checkBlock === 0) {
+  //     this.arrayState[0].push("X");
+  //     this.arrayState[1].push(" ");
+  //   }
+  //   if (block === "D" && this.checkBlock === 0) {
+  //     this.arrayState[0].push(" ");
+  //     this.arrayState[1].push("X");
+  //   }
+  // },
+  successMove(block) {
+    if (block === "U") {
+      this.arrayState[0].push("O");
+      this.arrayState[1].push(" ");
+    }
+    if (block === "D") {
+      this.arrayState[0].push(" ");
+      this.arrayState[1].push("O");
+    }
+  },
+  failMove(block) {
+    if (block === "U") {
+      this.arrayState[0].push("X");
+      this.arrayState[1].push(" ");
+    }
+    if (block === "D") {
+      this.arrayState[0].push(" ");
+      this.arrayState[1].push("X");
+    }
+  },
+
+  checkSuccess() {
+    if (this.size === this.playerArr.length) {
+      return (this.gameResult = IS_SUCCESS.nailedIt);
+    }
+    if (this.size !== this.playerArr.length){
+      return (this.gameResult = IS_SUCCESS.failedIt);
+    }
+  },
+
+  initializeAll() {
+    this.arrayState = [[], []],
+    this.playerArr = [],
+    this.gameResult = "",
+    this.size = 0,
+    this.tryCount += 1; // 시도 마다 올라감
+  },
+
+  playerCommand(command){
+    this.command = command
+  },
+
+  // resultArray(playerArr) {
+  //   OutputView.printMap(playerArr);
+  // },
+
+};
+
+module.exports = Controller;
