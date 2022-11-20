@@ -1,4 +1,6 @@
-const ErrorMessage = Object.freeze({
+const { deepFreeze } = require("../services/system");
+
+const ErrorMessage = deepFreeze({
   input_number: '숫자를 입력해주세요.',
   range_number: '3부터 20 사이의 숫자를 입력해주세요.',
   valid_move: 'U 또는 D를 입력해주세요.',

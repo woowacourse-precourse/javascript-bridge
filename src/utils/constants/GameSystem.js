@@ -1,6 +1,8 @@
+const { deepFreeze } = require("../services/system");
+
 const LINE_BREAK = '\n';
 
-const GAME_MESSAGE = Object.freeze({
+const GAME_MESSAGE = deepFreeze({
   start: '다리 건너기 게임을 시작합니다.',
   bridge_size: '다리의 길이를 입력해주세요.',
   bridge_move: '이동할 칸을 선택해주세요. (위: U, 아래: D)',
@@ -10,14 +12,18 @@ const GAME_MESSAGE = Object.freeze({
   attempts: (count) => `총 시도한 횟수: ${count}`,
 });
 
-const MOVE_UP_DOWN = Object.freeze({
-  U: 1,
-  D: 0,
+const DIRECTION = deepFreeze({
   1: 'U',
   0: 'D',
 });
 
-const GAME_COMMAND = Object.freeze({
+const STEP_TYPE = deepFreeze({
+  correct: 'O',
+  wrong: 'X',
+  none: ' '
+})
+
+const GAME_COMMAND = deepFreeze({
   R: true,
   Q: false,
 });
@@ -25,6 +31,7 @@ const GAME_COMMAND = Object.freeze({
 module.exports = {
   LINE_BREAK,
   GAME_MESSAGE,
-  MOVE_UP_DOWN,
+  DIRECTION,
+  STEP_TYPE,
   GAME_COMMAND,
 };
