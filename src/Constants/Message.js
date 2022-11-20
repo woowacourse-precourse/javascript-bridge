@@ -12,7 +12,7 @@ const RESULT_MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  noZero: '[ERROR] 다리의 길이는 0보다 커야 합니다. ',
+  biggerThanThree: '[ERROR] 다리의 길이는 3보다 커야 합니다. ',
   mustNumber: '[ERROR] 다리의 길이는 반드시 숫자여야 합니다. ',
   mustCharactor: '[ERROR] 입력 값은 반드시 문자여야 합니다. ',
   wrongMove: '[ERROR] 이동 값은 반드시 U 또는 D를 입력하여야 합니다. ',

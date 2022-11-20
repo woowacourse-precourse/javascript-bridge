@@ -4,8 +4,8 @@ const { INPUT_CHAR, INPUT_RETRY } = require('../Constants/InputValues');
 
 function isCorrectBridgeSize(input) {
   const RegExp = /^[0-9]+$/;
-  if (input === 0 || input < 0) {
-    Console.print(ERROR_MESSAGE.noZero);
+  if (input < 3) {
+    Console.print(ERROR_MESSAGE.biggerThanThree);
     return true;
   }
   if (!RegExp.test(input)) {
