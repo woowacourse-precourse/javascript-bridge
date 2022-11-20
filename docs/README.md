@@ -40,7 +40,7 @@
 
 # 기능 목록 및 todo
 
-- [ ] 다리 생성하기 (BridgeMaker.js)
+- [x] 다리 생성하기 (BridgeMaker.js)
 - [ ] 다리 생성 시 입력 값 및 무작위 값 유효성 검사
 - [ ] 다리 생성 시 발생하는 예외 처리
 - [ ] 플레이어 이동(move()) 구현하기
@@ -63,7 +63,6 @@
 - [ ] Console.readLine()은 InputView에서만 사용할 것
 - [ ] BridgeGame 클래스에서 InputView, OutputView를 사용하지 말 것.
 - [ ] BridgeMaker의 파일 위치 및 시그니처를 변경하지 말 것.
-- [ ] `BridgeGame` 클래스에서 `InputView`, `OutputView` 를 사용하지 않는다.
 
 # 신경 쓴 부분
 
