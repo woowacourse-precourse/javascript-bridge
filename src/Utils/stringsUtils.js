@@ -4,22 +4,4 @@ const INPUT_VAL = {
   RETRY_ERROR: "[ERROR] R 혹은 Q를 입력햐여 재시작/종료 여부를 결정해 주세요.",
 };
 
-const FALLBACK_FN = {
-  size(bridgeGamePresenter) {
-    bridgeGamePresenter.getBridgeSize();
-  },
-  moving(bridgeGamePresenter) {
-    bridgeGamePresenter.getPlayerMove();
-  },
-  gameCommand(bridgeGamePresenter) {
-    bridgeGamePresenter.getGameCommand();
-  },
-};
-
-const ERROR_TYPE = {
-  SIZE: "size",
-  MOVING: "moving",
-  GAME_COMMAND: "gameCommand",
-};
-
-module.exports = { INPUT_VAL, ERROR_TYPE, FALLBACK_FN };
+module.exports = { INPUT_VAL };

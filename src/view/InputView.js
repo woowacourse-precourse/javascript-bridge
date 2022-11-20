@@ -1,6 +1,7 @@
 const Console = require("../utils/Console");
 const { INPUT } = require("./stringsUI");
 const Validation = require("../utils/Validation");
+const { INPUT_TYPE } = require("./stringsUI");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -12,7 +13,7 @@ const InputView = {
    */
   readBridgeSize(bridgeGamePresenter) {
     Console.readLine(INPUT.GET_SIZE, (size) => {
-      bridgeGamePresenter.handleReadBridgeSize(size);
+      bridgeGamePresenter.handleInput(size, INPUT_TYPE.SIZE);
     });
   },
   /**
@@ -20,7 +21,7 @@ const InputView = {
    */
   readMoving(bridgeGamePresenter) {
     Console.readLine(INPUT.GET_MOVING, (selectedMove) => {
-      bridgeGamePresenter.handleReadMoving(selectedMove);
+      bridgeGamePresenter.handleInput(selectedMove, INPUT_TYPE.MOVING);
     });
   },
 
@@ -29,7 +30,7 @@ const InputView = {
    */
   readGameCommand(bridgeGamePresenter) {
     Console.readLine(INPUT.GET_RETRY, (retry) => {
-      bridgeGamePresenter.handleReadGameCommand(retry);
+      bridgeGamePresenter.handleInput(retry, INPUT_TYPE.GAME_COMMAND);
     });
   },
 };

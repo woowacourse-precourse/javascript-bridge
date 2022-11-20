@@ -6,8 +6,9 @@ const { RETRY } = require("../view/stringsUI");
 const Player = require("../model/Player");
 const Bridge = require("../model/Bridge");
 const Validation = require("../utils/Validation");
-const HandleError = require("../utils/HandleInputError");
+const HandleError = require("../utils/HandleError");
 const { ERROR_TYPE } = require("../utils/stringsUtils");
+const { INPUT_TRY_FN, INPUT_CATCH_FN } = require("./stringsPresenter");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -30,30 +31,13 @@ class BridgeGame {
     InputView.readBridgeSize(this);
   }
 
-  handleReadBridgeSize(size) {
+  handleInput(input, InputType) {
     try {
-      Validation.inputSize(size);
-      this.createBridgeModel(size);
+      Validation[InputType](input);
+      INPUT_TRY_FN[InputType](this, input);
     } catch (errorMsg) {
-      HandleError.input(this, ERROR_TYPE.SIZE, errorMsg);
-    }
-  }
-
-  handleReadMoving(selectedMove) {
-    try {
-      Validation.inputMove(selectedMove);
-      this.move(selectedMove);
-    } catch (errorMsg) {
-      HandleError.input(this, ERROR_TYPE.MOVING, errorMsg);
-    }
-  }
-
-  handleReadGameCommand(retry) {
-    try {
-      Validation.inputRetry(retry);
-      this.checkRetryInput(retry);
-    } catch (errorMsg) {
-      HandleError.input(this, ERROR_TYPE.GAME_COMMAND, errorMsg);
+      OutputView.printError(errorMsg);
+      INPUT_CATCH_FN[InputType](this);
     }
   }
 
@@ -95,7 +79,6 @@ class BridgeGame {
 
   checkNextMove() {
     const { isFinish, isMove } = this.getMoveFinishBooleans();
-    console.log(isFinish, isMove);
     if (!isFinish) {
       return this.checkNextInput(isMove);
     }

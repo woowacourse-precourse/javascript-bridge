@@ -16,8 +16,6 @@ module.exports = {
     "arrow-body-style": "off",
     "max-depth": ["error", 2],
     "max-lines-per-function": ["error", 10],
-    "jest-extended/prefer-to-be-true": "warn",
-    "jest-extended/prefer-to-be-false": "error",
   },
   plugins: ["jest"],
   extends: ["plugin:jest/recommended"],

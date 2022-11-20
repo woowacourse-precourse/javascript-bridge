@@ -6,6 +6,28 @@ const PLAYER_STATE = {
   FAIL: "FAIL",
 };
 
-const CHECK_PLAYER_STATE = (isFinish, isMove) => {};
+const INPUT_TRY_FN = {
+  size(bridgeGamePresenter, size) {
+    bridgeGamePresenter.createBridgeModel(size);
+  },
+  moving(bridgeGamePresenter, selectedMove) {
+    bridgeGamePresenter.move(selectedMove);
+  },
+  gameCommand(bridgeGamePresenter, retry) {
+    bridgeGamePresenter.checkRetryInput(retry);
+  },
+};
 
-module.exports = { PLAYER_STATE };
+const INPUT_CATCH_FN = {
+  size(bridgeGamePresenter) {
+    bridgeGamePresenter.getBridgeSize();
+  },
+  moving(bridgeGamePresenter) {
+    bridgeGamePresenter.getPlayerMove();
+  },
+  gameCommand(bridgeGamePresenter) {
+    bridgeGamePresenter.getGameCommand();
+  },
+};
+
+module.exports = { PLAYER_STATE, INPUT_CATCH_FN, INPUT_TRY_FN };
