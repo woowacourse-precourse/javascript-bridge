@@ -16,7 +16,10 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(direction) {
+    if (direction !== 'U' && direction !== 'D')
+      throw new Error('[ERROR] 제대로된 값을 입력해주세요!');
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

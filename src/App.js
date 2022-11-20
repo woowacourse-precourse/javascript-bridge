@@ -1,10 +1,17 @@
 const { Console } = require('@woowacourse/mission-utils');
+const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
 const MESSAGE = require('./utils/constants');
 
 class App {
+  #bridgeGame;
+
+  constructor() {
+    this.#bridgeGame = new BridgeGame();
+  }
+
   play() {
     Console.print(MESSAGE.GAMESTART);
     Console.readLine(MESSAGE.SETBRIDGESIZE, (bridgeSize) => {
@@ -14,7 +21,7 @@ class App {
         BridgeRandomNumberGenerator,
       );
 
-      console.log(bridge);
+      this.#bridgeGame.move(bridge);
     });
   }
 }
