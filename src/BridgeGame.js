@@ -1,3 +1,4 @@
+const { RESULT } = require('./Constants/contant');
 const DIRECTION = require('./Constants/direction');
 const Validator = require('./Validator');
 
@@ -146,8 +147,8 @@ class BridgeGame {
       this.#bridge[this.getCurrentDistance()] ===
         this.#records[this.getCurrentDistance()]
     )
-      return '성공';
-    return '실패';
+      return RESULT.success;
+    return RESULT.fail;
   }
 
   isSameDirection() {

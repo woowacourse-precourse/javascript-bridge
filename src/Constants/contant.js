@@ -3,4 +3,9 @@ const COMMAND = {
   quiy: 'Q',
 };
 
-module.exports = COMMAND;
+const RESULT = {
+  success: '성공',
+  fail: '실패',
+};
+
+module.exports = { COMMAND, RESULT };
