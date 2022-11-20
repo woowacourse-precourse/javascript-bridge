@@ -27,7 +27,6 @@ const BridgeMaker = {
         bridge.push(LOWER_BLOCK);
       }
     }
-    console.log(bridge);
     return bridge;
   },
 };
