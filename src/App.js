@@ -7,7 +7,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    this.game = null;
+    this.game = null; // 내부적으로 저장할 BridgeGame 객체
   }
 
   play() {
