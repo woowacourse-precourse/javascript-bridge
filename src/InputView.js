@@ -8,6 +8,7 @@ const {
   validateMoveInput,
   validateRetryInput,
   isRepeat,
+  validateInputCatch,
 } = require("./Validator");
 
 /**
@@ -20,16 +21,10 @@ const InputView = {
   readBridgeSize() {
     let mainBridge = [];
     Console.readLine("다리의 길이를 입력해주세요.", (bridgeSize) => {
-      try {
-        validateInput(bridgeSize);
-      } catch (error) {
-        Console.print(error);
-        InputView.readBridgeSize();
-      }
-      mainBridge = makeBridge(bridgeSize, generate); //기준 다리 출력 형식 [U,D,D]
-      // console.log(mainBridge); //로직 완성 후 삭제하기
-      const bridgeGame = new BridgeGame(mainBridge); //인스턴스 생성
-      InputView.readMoving(mainBridge, bridgeGame); //움직임 입력 받기
+      validateInputCatch(bridgeSize) ? InputView.readBridgeSize() : null;
+      mainBridge = makeBridge(bridgeSize, generate);
+      const bridgeGame = new BridgeGame(mainBridge);
+      InputView.readMoving(mainBridge, bridgeGame);
     });
   },
 
