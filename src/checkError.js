@@ -13,6 +13,16 @@ const CheckError = {
     }
     return true;
   },
+
+  checkChoiceUpDown(input) {
+    try {
+      if (input !== "U" && input !== "D") throw new Error("[ERROR] U 또는 D만 입력하세요.");
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      return false;
+    }
+    return true;
+  },
 };
 
 module.exports = CheckError;
