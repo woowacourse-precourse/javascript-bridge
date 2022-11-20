@@ -43,9 +43,8 @@ class BridgeGame {
   getMoveResult(movingKey) {
     if (this.#answerBridge[this.getMovingCount() - 1] === movingKey) {
       return 'O';
-    } else {
-      return 'X';
     }
+    return 'X';
   }
 
   /**
@@ -74,9 +73,8 @@ class BridgeGame {
     const ANSWER_BRIDGE = String(this.#answerBridge);
     if (USER_INPUT === ANSWER_BRIDGE) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 
   getMovingCount() {

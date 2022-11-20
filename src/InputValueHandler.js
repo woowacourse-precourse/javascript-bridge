@@ -25,32 +25,29 @@ const InputValueControl = {
     if (bridgeGame.isSuccess()) {
       OutputView.printResult(bridgeGame, '성공');
       return true;
-    } else {
-      return false;
     }
+    return false;
   },
 
   checkMoveResult(key, bridgeGame) {
     if (bridgeGame.getMoveResult(key) === 'O') {
       return true;
-    } else {
-      return false;
     }
+    return false;
   },
 
   gameCommand(key, bridgeGame) {
-    if (!Validate.checkCommandKey(key)) {
-      return false;
+    if (Validate.checkCommandKey(key) && this.checkRetry(key, bridgeGame)) {
+      return true;
     }
-    return this.checkRetry(key, bridgeGame);
+    return false;
   },
 
   checkRetry(key, bridgeGame) {
     if (bridgeGame.isRetry(key)) {
       return true;
-    } else {
-      OutputView.printResult(bridgeGame, '실패');
     }
+    return false;
   },
 };
 
