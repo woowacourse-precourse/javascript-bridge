@@ -30,7 +30,7 @@ class BridgeResult {
   }
 
   getResult() {
-    const bridgeMap = this.#bridgeMap;
+    const bridgeMap = Object.freeze(this.#bridgeMap);
     const isSuccess = this.#isSuccess;
     const tryCount = this.#tryCount;
     return { bridgeMap, isSuccess, tryCount };
