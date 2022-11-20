@@ -10,6 +10,7 @@ class App {
 
   gameRoutine(bridgeSize) {
     const bridgeModel = new BridgeGame(bridgeSize);
+    InputView.readMoving(bridgeModel.move.bind(this));
   }
 }
 
