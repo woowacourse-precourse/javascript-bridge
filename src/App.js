@@ -1,8 +1,8 @@
 // @ts-check
 
 const BridgeGame = require('./BridgeGame');
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const InputView = require('./views/InputView');
+const OutputView = require('./views/OutputView');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
