@@ -41,25 +41,21 @@ class BridgeGame {
         printError('R과 Q만 입력해 주세요.');
         return this.getUserCommand();
       }
-      if (command === 'R') this.retry();
-      if (command === 'Q') this.end();
+      if (command === 'R') return this.retry();
+      if (command === 'Q') return this.end();
     });
   }
 
-  // FIXME: maximum 10 length
   checkResult() {
     const currentBridge = this.#bridge.slice(0, this.#userMove.length);
-    // FIXME: change toString into different logic
     if (currentBridge.toString() === this.#userMove.toString()) {
       if (this.#userMove.length === this.#bridge.length) {
         this.#isSuccess = true;
-        this.end();
-        return;
+        return this.end();
       }
-      this.getUserMove();
-    } else {
-      this.getUserCommand();
+      return this.getUserMove();
     }
+    return this.getUserCommand();
   }
 
   #setUserMove(step) {
