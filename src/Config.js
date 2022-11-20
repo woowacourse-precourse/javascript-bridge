@@ -1,4 +1,6 @@
 const BridgeConfig = {
+  UP_VALUE: 1,
+  DOWN_VALUE: 0,
   UP: 'U',
   DOWN: 'D',
   MIN_LENGTH: 3,
