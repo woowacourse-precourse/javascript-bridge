@@ -1,20 +1,41 @@
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
-const OutputView = {
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printMap() {},
+const { Console } = require('@woowacourse/mission-utils');
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult() {},
+const OutputView = {
+  makeMiniTemplate(outputList) {
+    return `[ ${outputList.join(' | ')} ]`;
+  },
+
+  moveMapTemplate(outputMap) {
+    return [
+      OutputView.makeMiniTemplate(outputMap[0]),
+      OutputView.makeMiniTemplate(outputMap[1])
+    ];
+  },
+
+  finalResultTemplate(outputExit) {
+    return [
+      '',
+      `게임 성공 여부: ${outputExit.result}`,
+      `총 시도한 횟수: ${outputExit.tryCount}`
+    ];
+  },
+
+  printMap(controlInstance) {
+    this.moveMapTemplate(controlInstance.outputmoveMap()).forEach((bridge) =>
+      Console.print(bridge)
+    );
+    Console.print('');
+  },
+
+  printResult(controlInstance) {
+    Console.print('최종 게임 결과');
+    OutputView.printMap(controlInstance);
+    OutputView.finalResultTemplate(
+      controlInstance.outputExit()
+    ).forEach((sentence) => Console.print(sentence));
+
+    Console.close();
+  }
 };
 
 module.exports = OutputView;
