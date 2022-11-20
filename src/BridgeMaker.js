@@ -9,7 +9,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     return [...Array(size)].map((x) =>
-      generateRandomNumber() === 0 ? "D" : "U"
+      Number(generateRandomNumber()) === 0 ? "D" : "U"
     );
   },
 };
