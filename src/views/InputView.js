@@ -40,17 +40,30 @@ const InputView = {
         this.readMoving(bridgeGame);
         return;
       }
-      if (!bridgeGame.getIsGameEnded()) {
-        this.readMoving(bridgeGame);
+      const state = bridgeGame.getGameState();
+      if (state) {
+        this.readGameCommand(state);
         return;
       }
+      this.readMoving(bridgeGame);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(state) {
+    if (state === BridgeGame.GAME_FAILED) this.readGameCommandAfterFailed();
+    if (state === BridgeGame.GAME_SUCCESS) this.readGameCommandAfterSuccess();
+  },
+
+  readGameCommandAfterFailed() {
+    Console.readLine(
+      InputMessage.READ_GAME_COMMAND_AFTER_FAILED_MESSAGE,
+      (value) => {}
+    );
+  },
+  readGameCommandAfterSuccess() {},
 };
 
 module.exports = InputView;
