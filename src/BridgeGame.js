@@ -6,11 +6,11 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
  */
 class BridgeGame {
   #bridge;
-  #count;
+  #tryCount;
   #map;
   constructer(size) {
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator);
-    this.#count = 1;
+    this.#tryCount = 1;
     this.#map = [];
   }
   /**
