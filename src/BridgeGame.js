@@ -1,10 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { STRUCTURE, MESSAGE, KEY } = require("./constant/message.js");
-const { printMap } = require("./OutputView");
-
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+const { printMap, printResult } = require("./OutputView");
 
 class BridgeGame {
     #bridgeArray;
@@ -19,53 +15,37 @@ class BridgeGame {
         this.#bridgeHistory = [];
     }
 
-    isBadMove(move) {
-        // console.log("BridgeGame.isBadMove----------");
-        // console.log(this.#bridgeArray);
-        const badUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.DOWN;
-        const badDown = move === KEY.DOWN && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
-        if (badUp || badDown) {
-            return true;
-        }
+    move(move) {
+        const isKeyUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
+        this.setGoodMove(isKeyUp);
     }
 
-    showFail(move) {
-        // console.log("BridgeGame.showFail--------------");
-        if (move === KEY.UP) {
-            this.#bridgeHistory.push([STRUCTURE.BAD, STRUCTURE.BLANK]);
-        }
-        if (move === KEY.DOWN) {
-            this.#bridgeHistory.push([STRUCTURE.BLANK, STRUCTURE.BAD]);
-        }
+    setGoodMove(isKeyUp) {
+        this.#bridgeCount++;
+        this.pushBridgeHistory(isKeyUp, STRUCTURE.GOOD);
         printMap(this.#bridgeHistory);
     }
 
-    move(move) {
-        // console.log("BridgeGame.move-----------");
-        const isUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
-        this.goodMove(isUp);
+    pushBridgeHistory(isUpKey, structureStatus) {
+        if (isUpKey) {
+            this.#bridgeHistory.push([structureStatus, STRUCTURE.BLANK]);
+        }
+        if (!isUpKey) {
+            this.#bridgeHistory.push([STRUCTURE.BLANK, structureStatus]);
+        }
+    }
+
+    isBadMove(move) {
+        const isBadKeyUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.DOWN;
+        const isBadKeyDown = move === KEY.DOWN && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
+        return isBadKeyUp || isBadKeyDown === true;
     }
 
     isSuccess(move) {
-        // console.log("BridgeGame.isSuccess---------------------");
-        const isUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
+        const isKeyUp = move === KEY.UP && this.#bridgeArray[this.#bridgeCount] === KEY.UP;
         if (this.#bridgeCount === this.#bridgeArray.length - 1) {
-            this.addGoodMoveHistory(isUp);
+            this.pushBridgeHistory(isKeyUp, STRUCTURE.GOOD);
             return true;
-        }
-    }
-
-    goodMove(isUp) {
-        this.addGoodMoveHistory(isUp);
-        this.#bridgeCount++;
-        printMap(this.#bridgeHistory, this.#bridgeArray);
-    }
-    addGoodMoveHistory(isUp) {
-        if (isUp) {
-            this.#bridgeHistory.push([STRUCTURE.GOOD, STRUCTURE.BLANK]);
-        }
-        if (!isUp) {
-            this.#bridgeHistory.push([STRUCTURE.BLANK, STRUCTURE.GOOD]);
         }
     }
 
@@ -75,18 +55,25 @@ class BridgeGame {
             return true;
         }
     }
-    resetBridgeSetting() {
-        this.#bridgeCount = 0;
-        this.#bridgeHistory = [];
-        this.#gameCount++;
+
+    showFailBridge(move) {
+        const isKeyUp = move === KEY.UP;
+        this.pushBridgeHistory(isKeyUp, STRUCTURE.BAD);
+        printMap(this.#bridgeHistory);
     }
 
     showResult(result) {
-        Console.print(MESSAGE.FINISH);
+        printResult();
         printMap(this.#bridgeHistory);
         Console.print(result);
         Console.print(MESSAGE.TRY + this.#gameCount);
         Console.close();
+    }
+
+    resetBridgeSetting() {
+        this.#bridgeCount = 0;
+        this.#bridgeHistory = [];
+        this.#gameCount++;
     }
 }
 module.exports = BridgeGame;

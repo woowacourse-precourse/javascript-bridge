@@ -33,7 +33,7 @@ const InputView = {
                 return this.readMoving(bridgeGame);
             }
             if (bridgeGame.isBadMove(move)) {
-                bridgeGame.showFail(move);
+                bridgeGame.showFailBridge(move);
                 return this.readGameCommand(bridgeGame);
             }
             if (bridgeGame.isSuccess(move)) {
