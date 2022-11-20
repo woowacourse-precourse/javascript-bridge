@@ -8,15 +8,15 @@ const { generate } = require('../BridgeRandomNumberGenerator');
 class BridgeGame {
   #size;
 
-  #bridge;
-
   #path;
+
+  #bridge;
 
   constructor() {
     this.#size = NUMBER.ZERO;
-    this.#playCount = NUMBER.ONE;
-    this.#bridge = {};
     this.#path = [];
+    this.#bridge = {};
+    this.#playCount = NUMBER.ONE;
   }
 
   setBridgeSize(size) {
