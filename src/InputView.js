@@ -17,6 +17,7 @@ const InputView = {
   readBridgeSize(){
     Console.readLine("다리의 길이를 입력해주세요" , (num) => {
       this.checkBridgeLengthExceptions(num);
+      this.createRandomBridge(num);
     });
   },
 
@@ -28,7 +29,6 @@ const InputView = {
   checkBridgeLengthExceptions(num){
     try{
       new CheckBridgeSizeException(num);
-      this.createRandomBridge(num);
     } catch(err){
       Console.print(err);
       this.readBridgeSize();
@@ -41,24 +41,25 @@ const InputView = {
   readMoving() {
     Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D", (selectUpOrDown) => {
       this.checkUserMoveException(selectUpOrDown);
-    });
-  },
-
-  userPickedIsWrong(userBridgeCorrect){
-    if(userBridgeCorrect[0].includes("X") || userBridgeCorrect[1].includes("X")){
-      this.readGameCommand();
-    }
-  },
-
-  checkUserMoveException(selectUpOrDown){
-    try{
-      new CheckUserMove(selectUpOrDown);
       bridgeGame.move(this.createBridge, selectUpOrDown);
       OutputView.printMap(userBridgeCorrect[0], userBridgeCorrect[1]);
       this.userPickedIsWrong(userBridgeCorrect);
       this.readMoving();
       OutputView.printResult(userBridgeCorrect[0] , userBridgeCorrect[1] , bridgeGame.attemptCount);
       this.readGameCommand();
+    });
+  },
+
+  userPickedIsWrong(userBridgeCorrect){
+    if(userBridgeCorrect[0].includes("X") || userBridgeCorrect[1].includes("X")){
+      this.readGameCommand();
+      
+    }
+  },
+
+  checkUserMoveException(selectUpOrDown){
+    try{
+      new CheckUserMove(selectUpOrDown);
     } catch(err){
       Console.print(err);
       this.readMoving();
@@ -71,6 +72,8 @@ const InputView = {
    readGameCommand() {
     Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도:R, 종료:Q)", (value) => {
     this.checkGameRunningException(value);
+    this.gameRestart(value);
+    this.gameFail(value);
     })
   },
 
@@ -91,8 +94,6 @@ const InputView = {
   checkGameRunningException(value){
     try { 
       new CheckWhetherGameRunning(value);
-      this.gameRestart(value);
-      this.gameFail(value);
     } catch(err){
       Console.print(err);
       this.readGameCommand(value);
