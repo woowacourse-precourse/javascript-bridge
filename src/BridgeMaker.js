@@ -23,26 +23,28 @@ const BridgeMaker = {
 
   makeUserBridge(moveInput, userBridge, mainBridge) {
     const [userBridgeTop, userBridgeBottom] = userBridge;
-    if (
-      moveInput === mainBridge[userBridge[0].length] &&
-      mainBridge[userBridge[0].length] === "U"
-    ) {
+    moveInput === mainBridge[userBridge[0].length]
+      ? BridgeMaker.isAnswer(moveInput, userBridge, mainBridge)
+      : BridgeMaker.isWorng(moveInput, userBridge, mainBridge);
+    console.log([userBridgeTop, userBridgeBottom]);
+    return [userBridgeTop, userBridgeBottom];
+  },
+
+  isAnswer(moveInput, userBridge, mainBridge) {
+    const [userBridgeTop, userBridgeBottom] = userBridge;
+    if (moveInput === "U" && mainBridge[userBridge[0].length] === "U") {
       userBridgeTop.push("O");
       userBridgeBottom.push(" ");
-      // console.log(userBridgeTop);
-      // console.log(userBridgeBottom);
-      return [userBridgeTop, userBridgeBottom];
     }
-    if (
-      moveInput === mainBridge[userBridge[0].length] &&
-      mainBridge[userBridge[0].length] === "D"
-    ) {
+    if (moveInput === "D" && mainBridge[userBridge[0].length] === "D") {
       userBridgeTop.push(" ");
       userBridgeBottom.push("O");
-      // console.log(userBridgeTop);
-      // console.log(userBridgeBottom);
-      return [userBridgeTop, userBridgeBottom];
     }
+    return [userBridgeTop, userBridgeBottom];
+  },
+
+  isWorng(moveInput, userBridge, mainBridge) {
+    const [userBridgeTop, userBridgeBottom] = userBridge;
     if (moveInput === "U" && mainBridge[userBridge[0].length] === "D") {
       userBridgeTop.push("X");
       userBridgeBottom.push(" ");
@@ -51,8 +53,6 @@ const BridgeMaker = {
       userBridgeTop.push(" ");
       userBridgeBottom.push("X");
     }
-    // console.log(userBridgeTop);
-    // console.log(userBridgeBottom);
     return [userBridgeTop, userBridgeBottom];
   },
 };
