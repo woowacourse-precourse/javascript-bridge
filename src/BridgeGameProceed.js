@@ -53,7 +53,7 @@ class BridgeGameProceed {
             this.game();
         } catch (error) {
             Console.print(error.message);
-            return this.game();
+            this.game.call(this);
         }
     }
 

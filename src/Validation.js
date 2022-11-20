@@ -3,51 +3,42 @@ const { Console } = require('@woowacourse/mission-utils');
 class Validation {
   static bridgeLength(number) {
     if (Validation.isEmpty(number)) {
-        Console.close();
         throw new Error('[ERROR] 값을 입력해주세요.'); 
     }
 
     if (!Validation.isNumber(number)) {
-        Console.close();
         throw new Error('[ERROR] 숫자를 입력해주세요.')
     }
 
     if (!Validation.numberNet(number)) {
-        Console.close();
         throw new Error('[ERROR] 3과 20사이의 값을 입력해주세요.');
     }
   }
 
   static nextStep(value) {
     if (Validation.isStringEmpty(value)) {
-        Console.close();
         throw new Error('[ERROR] 값을 입력해주세요.');
     }
 
     if (!Validation.oneValue(value)) {
-        Console.close();
         throw new Error('[ERROR] 1개의 값을 입력해주세요.');
     }
 
     if (!Validation.nextStepValue(value)) {
-        Console.close();
         throw new Error('[ERROR] U 또는 D를 입력해주세요.');
     }
   }
 
   static retry(value) {
     if (Validation.isStringEmpty(value)) {
-        Console.close();
         throw new Error('[ERROR] 값을 입력해주세요.');
     }
 
     if (!Validation.oneValue(value)) {
-        Console.close();
         throw new Error("[ERROR] 1개의 값을 입력해주세요.");
     }
 
     if (!Validation.retryOrNotValue(value)) {
-      Console.close();
       throw new Error("[ERROR] R 또는 Q를 입력해주세요.");
     }
   }
