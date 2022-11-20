@@ -3,6 +3,7 @@ const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const { MESSAGE } = require('../utils/constants');
 const Validation = require('../utils/Validation');
+const { close } = require('../utils/utils');
 
 class Controller {
   constructor() {
@@ -84,6 +85,12 @@ class Controller {
 
   printResult(tryingCount, isSucceeded, upperBridge, lowerBridge) {
     OutputView.printResult(tryingCount, isSucceeded, upperBridge, lowerBridge);
+
+    this.close();
+  }
+
+  close() {
+    close();
   }
 }
 
