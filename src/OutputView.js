@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { START_MESSAGE } = require('./Constant');
+const { START_MESSAGE, OUTPUT_MESSAGE } = require('./Constant');
 const OutputView = {
   printStart() {
     Console.print(START_MESSAGE);
@@ -40,7 +40,25 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  async printResult(results, cnt) {
+    Console.print(OUTPUT_MESSAGE.RESULT);
+    this.printMap(results);
+    const SUCCESS = await this.checkSuccess(results);
+    SUCCESS
+      ? Console.print(OUTPUT_MESSAGE.SUCCESS)
+      : Console.print(OUTPUT_MESSAGE.FAIL);
+    Console.print(OUTPUT_MESSAGE.COUNT_TRY + cnt);
+  },
+
+  checkSuccess(results) {
+    let SUCCESS = true;
+    return new Promise(resolve => {
+      results.forEach(result => {
+        if (result[1] === 'X') SUCCESS = false;
+      });
+      resolve(SUCCESS);
+    });
+  },
 };
 
 module.exports = OutputView;

@@ -8,9 +8,9 @@ class App {
     OutputView.printStart();
     const SIZE = await InputView.readBridgeSize();
     const generateRandomNumber = BridgeRandomNumberGenerator.generate;
-    const RESULT = BridgeMaker.makeBridge(SIZE, generateRandomNumber);
-    console.log(RESULT);
-    const GAME = new BridgeGame(RESULT);
+    const ANSWER = BridgeMaker.makeBridge(SIZE, generateRandomNumber);
+    console.log(ANSWER);
+    const GAME = new BridgeGame(ANSWER);
     this.repeatMove(SIZE, GAME);
   }
 
@@ -21,15 +21,20 @@ class App {
       const MOVE = await InputView.readMoving();
       const RESULT = GAME.move(CNT, MOVE);
       OutputView.printMap(RESULT);
-      if (RESULT[CNT][1] === 'X') this.selectRestart(GAME);
+      if (RESULT[CNT][1] === 'X') this.selectRestart(size, GAME);
       CNT += 1;
     }
   }
 
   //실패하면 Restart여부 선택
-  async selectRestart(GAME) {
+  async selectRestart(size, GAME) {
     const RESTART_OR_END = await InputView.readGameCommand();
-    RESTART_OR_END === 'R' ? GAME.retry() : OutputView.printResult();
+    const RESULT = GAME.getResult();
+    const CNT = GAME.getCnt();
+    if (RESTART_OR_END === 'R') {
+      GAME.retry();
+      this.repeatMove(size, GAME);
+    } else OutputView.printResult(RESULT, CNT);
   }
 }
 

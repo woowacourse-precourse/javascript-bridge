@@ -6,6 +6,7 @@
 class BridgeGame {
   #answer;
   #result = [];
+  #cnt = 1;
   constructor(answer) {
     this.#answer = answer;
   }
@@ -28,6 +29,15 @@ class BridgeGame {
    */
   retry() {
     this.#result = [];
+    this.#cnt += 1;
+  }
+
+  getCnt() {
+    return this.#cnt;
+  }
+
+  getResult() {
+    return this.#result;
   }
 }
 
