@@ -1,3 +1,5 @@
+const OutputView = require('./View/OutputView');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -23,7 +25,13 @@ class BridgeGame {
     const crossable = bridge[this.#turn];
     this.#turn += 1;
     if (input === crossable) this.isFirst(GO, crossable);
-    if (input !== crossable) this.isFirst(STOP, crossable);
+    if (bridge.length === this.#turn) {
+      this.retry(true, this.#turn);
+    }
+    if (input !== crossable) {
+      this.isFirst(STOP, crossable);
+      this.retry(false, this.#turn);
+    }
   }
 
   isFirst(state, crossable) {
@@ -58,7 +66,13 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(isSuccess, turn) {
+    this.init();
+    const SUCCESS = '성공';
+    const FAIL = '실패';
+    if (isSuccess) OutputView.printResult(SUCCESS, turn);
+    if (!isSuccess) OutputView.printResult(FAIL, turn);
+  }
 }
 
 module.exports = BridgeGame;
