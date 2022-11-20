@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { BRIDGE_NUMBER_INPUT, PLAYER_MOVE_INPUT } = require("../utils/constant")
+const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator.js")
+const BridgeMaker = require("../BridgeMaker.js")
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -8,7 +10,8 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    MissionUtils.Console.readLine(BRIDGE_NUMBER_INPUT, (answer) => {
+    MissionUtils.Console.readLine(BRIDGE_NUMBER_INPUT, (bridgeSize) => {
+      BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate());
       this.readMoving();
     })
   },
@@ -18,6 +21,7 @@ const InputView = {
    */
   readMoving() {
     MissionUtils.Console.readLine(PLAYER_MOVE_INPUT, (answer) => {
+      return answer
     })
   },
 
