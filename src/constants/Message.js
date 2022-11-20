@@ -11,11 +11,11 @@ const INPUT_MESSAGE = {
 
 const ERROR_MESSAGE = {
   BRIDGE_SIZE: {
-    NOT_A_NUMBER: "[ERROR] 숫자를 입력하세요.",
-    INVALID_RANGE: "[ERROR] 3이상 20이하의 숫자만 입력가능합니다.",
+    NOT_A_NUMBER: "[ERROR] 숫자를 입력하세요.\n",
+    INVALID_RANGE: "[ERROR] 3이상 20이하의 숫자만 입력가능합니다.\n",
   },
-  MOVING: "[ERROR] 'U'혹은 'D'만 입력가능합니다.",
-  COMMAND: "[ERROR] 'R'혹은 'Q'만 입력가능합니다.",
+  MOVING: "[ERROR] 'U'혹은 'D'만 입력가능합니다.\n",
+  COMMAND: "[ERROR] 'R'혹은 'Q'만 입력가능합니다.\n",
 };
 
 module.exports = { PRINT_MESSAGE, INPUT_MESSAGE, ERROR_MESSAGE };

@@ -8,12 +8,11 @@ class BridgeGame {
     return "Retry";
   }
 
-  retry(command, retry, printResult) {
+  retry(command) {
     if (command == "R") {
-      retry();
+      return true;
     } else if (command == "Q") {
-      printResult(false);
-      MissionUtils.Console.close();
+      return false;
     }
   }
 }

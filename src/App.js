@@ -8,50 +8,59 @@ const OutputView = require("./OutputView");
 const Validate = require("./utils/Validate");
 
 class App {
+  #print = MissionUtils.Console.print;
+  #bridgeGame = new BridgeGame();
   #bridgeSize;
   #bridge;
-  #moving;
-  #totalTry;
-
-  constructor() {
-    this.#totalTry = 1;
-    this.#moving = [];
-    this.bridgeGame = new BridgeGame();
-  }
+  #moving = [];
+  #totalTry = 1;
 
   play() {
-    MissionUtils.Console.print(PRINT_MESSAGE.GAME_START);
-
-    InputView.readBridgeSize((size) => this.getBridgeSize(size));
+    this.#print(PRINT_MESSAGE.GAME_START);
+    this.inputBridgeSize();
   }
 
-  getBridgeSize(size) {
-    MissionUtils.Console.print("");
-
-    Validate.validateSize(size);
-    this.#bridgeSize = Number(size);
-
-    this.getBridge();
-    this.selectMoving();
+  inputBridgeSize() {
+    InputView.readBridgeSize((size) => {
+      this.#print("");
+      this.validateSize(size);
+    });
   }
 
-  getBridge() {
+  validateSize(size) {
+    try {
+      Validate.validateSize(size);
+      this.#bridgeSize = Number(size);
+      this.makeBridge();
+    } catch (error) {
+      this.#print(error);
+      this.inputBridgeSize();
+    }
+  }
+
+  makeBridge() {
     this.#bridge = BridgeMaker.makeBridge(
       this.#bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
+
+    this.inputMoving();
   }
 
-  selectMoving() {
-    InputView.readMoving((moving) => this.getMoving(moving));
+  inputMoving() {
+    InputView.readMoving((moving) => this.validateMoving(moving));
   }
 
-  getMoving(moving) {
-    Validate.validateMoving(moving);
-    this.#moving.push(moving);
+  validateMoving(moving) {
+    try {
+      Validate.validateMoving(moving);
+      this.#moving.push(moving);
 
-    let response = this.bridgeGame.move(this.#moving, this.#bridge);
-    this.checkResponse(response);
+      this.checkResponse(this.#bridgeGame.move(this.#moving, this.#bridge));
+    } catch (error) {
+      this.#print(error);
+      this.inputMoving();
+    }
   }
 
   checkResponse(response) {
@@ -63,37 +72,44 @@ class App {
       this.responseRetry();
     }
   }
-
   responseFinish() {
     OutputView.printMap(this.#moving, true);
     this.printResult(true);
   }
-
   responseContinue() {
     OutputView.printMap(this.#moving, true);
-    this.selectMoving();
+    this.inputMoving();
   }
-
   responseRetry() {
     OutputView.printMap(this.#moving, false);
+    this.inputGameCommand();
+  }
+
+  inputGameCommand() {
     InputView.readGameCommand((command) => {
-      this.getCommand(command);
+      this.validateCommand(command);
     });
   }
 
-  getCommand(command) {
-    Validate.validateCommand(command);
-    this.bridgeGame.retry(
-      command,
-      this.retry.bind(this),
-      this.printResult.bind(this)
-    );
+  validateCommand(command) {
+    try {
+      Validate.validateCommand(command);
+      this.commandReact(command);
+    } catch (error) {
+      this.#print(error);
+      this.inputGameCommand();
+    }
   }
 
-  retry() {
+  commandReact(command) {
+    let response = this.#bridgeGame.retry(command);
+    response ? this.retryGame() : this.printResult();
+  }
+
+  retryGame() {
     this.#totalTry += 1;
     this.#moving = [];
-    this.selectMoving();
+    this.inputMoving();
   }
 
   printResult(success) {
