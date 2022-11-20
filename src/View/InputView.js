@@ -1,5 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { MESSAGE, ERROR, BRIDGE, BUTTON } = require('../Utils/constant');
+const {
+  MESSAGE, ERROR, BRIDGE, BUTTON,
+} = require('../Utils/constant');
 const Random = require('../Utils/BridgeRandomNumberGenerator');
 const BridgeMaker = require('../BridgeMaker');
 const OutputView = require('./OutputView');
@@ -28,10 +30,10 @@ const InputView = {
 
   bridgeSizeValidate(size) {
     if (+size < BRIDGE.MIN_LENGTH || BRIDGE.MAX_LENGTH < +size) {
-      throw err;
+      throw ERROR.BRIDGE_LENGTH;
     }
-    if (isNaN(+size)) {
-      throw err;
+    if (Number.isNaN(+size)) {
+      throw ERROR.BRIDGE_LENGTH;
     }
     return size;
   },
@@ -54,7 +56,7 @@ const InputView = {
 
   moveValidate(move) {
     if (![BUTTON.UP, BUTTON.DOWN].includes(move)) {
-      throw err;
+      throw ERROR.RETRY_OR_QUIT;
     }
   },
 
