@@ -1,4 +1,4 @@
-const { MOVE_UP_DOWN } = require('./utils/constants/GameSystem');
+const { DIRECTION } = require('./utils/constants/GameSystem');
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -12,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const array = Array.from({length: size}, () => {
       const number = generateRandomNumber();
-      return MOVE_UP_DOWN[number];
+      return DIRECTION[number];
     })
     return array;
   },
