@@ -28,3 +28,5 @@ const InputValidate = {
     }
   },
 };
+
+module.exports = InputValidate;
