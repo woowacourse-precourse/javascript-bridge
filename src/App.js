@@ -3,6 +3,7 @@ const { printMsg } = require('./views/OutputView.js');
 const InputView = require('./views/InputView.js');
 const OutputView = require('./views/OutputView.js');
 const BridgeGame = require('./BridgeGame.js');
+const { RESTART_TRIGGER, QUIT_TRIGGER } = require('./constants/condition.js');
 
 class App {
   constructor() {
@@ -52,6 +53,10 @@ class App {
   retryProcess(gameCommand) {
     try {
       this.bridgeGame.retry(gameCommand);
+
+      if (gameCommand === RESTART_TRIGGER) {
+        return this.requestMovingDirection();
+      }
     } catch ({ message }) {
       this.reRequestGameCommand(message);
     }

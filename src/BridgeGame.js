@@ -4,9 +4,11 @@ const Validation = require('./Validation.js');
 class BridgeGame {
   #bridge;
   #movementLogs;
+  #tryCount;
 
   constructor() {
     this.#movementLogs = [];
+    this.#tryCount = 1;
   }
 
   build(size) {
@@ -30,6 +32,9 @@ class BridgeGame {
 
   retry(gameCommand) {
     Validation.validateGameCommand(gameCommand);
+
+    this.#movementLogs = [];
+    this.#tryCount += 1;
   }
 
   isSucceededMove() {
