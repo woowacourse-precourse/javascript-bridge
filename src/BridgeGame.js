@@ -20,17 +20,20 @@ class BridgeGame {
   move() {
     const lastIdx = this.bridgeSteps.length - 1;
     if (
-      this.bridgeSteps[lastIdx] === this.answerSteps[lastIdx] &&
+      this.isStepSame(this.answerSteps[lastIdx], this.bridgeSteps[lastIdx]) &&
       lastIdx === this.answerSteps.length - 1
     ) {
       return 'WIN';
     }
-    if (this.bridgeSteps[lastIdx] === this.answerSteps[lastIdx]) {
+    if (this.isStepSame(this.answerSteps[lastIdx], this.bridgeSteps[lastIdx])) {
       return 'MOVE';
     }
     return 'FAIL';
   }
 
+  isStepSame(answerStep, compareStep) {
+    return answerStep === compareStep;
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
