@@ -189,6 +189,15 @@ class BridgeGame {
 
     return this.getPositionLog()[USER_POSITION][ONE];
   }
+
+  setGameLog(userInput) {
+    const USER_POSITION = this.findUserPosition();
+
+    this.setPositionLog(this.getPositionIndex(userInput), this.calcBridgeReuslt(userInput));
+    this.setBridgeLog(this.getPositionLog()[USER_POSITION]);
+
+    return this.getBridgeLog();
+  }
 }
 
 module.exports = BridgeGame;
