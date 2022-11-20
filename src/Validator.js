@@ -6,6 +6,12 @@ const Validator = {
       throw new RangeError(Message.ERROR_BRIDGE_LENGTH);
     }
   },
+
+  direction(direction) {
+    if (direction !== BridgeConfig.UP && direction !== BridgeConfig.DOWN) {
+      throw new Error(Message.ERROR_MOVE);
+    }
+  },
 };
 
 module.exports = Validator;
