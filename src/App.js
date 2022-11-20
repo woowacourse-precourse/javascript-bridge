@@ -49,6 +49,9 @@ class App {
 
   handleRetry(answer) {
     if (answer === "R") {
+      this.tryTimes++;
+      this.BridgeGame.retry();
+      InputView.readMoving(this.requestMoveUpOrDown.bind(this));
     }
 
     if (answer === "Q") {
