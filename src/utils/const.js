@@ -3,7 +3,7 @@ const BRIDGE = {
   MAX: 20,
 };
 
-const BRIDGE_SPACE_TYPE = ['D', 'U'];
+const BRIDGE_PATH_TYPE = ['D', 'U'];
 
 const RETRY = 'R';
 const QUIT = 'Q';
@@ -29,7 +29,7 @@ const MARKING = {
 };
 
 Object.freeze(BRIDGE);
-Object.freeze(BRIDGE_SPACE_TYPE);
+Object.freeze(BRIDGE_PATH_TYPE);
 Object.freeze(MOVING);
 Object.freeze(COMMAND_TYPE);
 Object.freeze(COMMAND);
@@ -38,7 +38,7 @@ Object.freeze(MARKING);
 
 module.exports = {
   BRIDGE,
-  BRIDGE_SPACE_TYPE,
+  BRIDGE_PATH_TYPE,
   MOVING,
   COMMAND_TYPE,
   COMMAND,

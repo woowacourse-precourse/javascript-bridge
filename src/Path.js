@@ -1,4 +1,4 @@
-const { BRIDGE_SPACE_TYPE, MARKING, MOVING } = require('./utils/const');
+const { BRIDGE_PATH_TYPE, MARKING, MOVING } = require('./utils/const');
 const Validator = require('./utils/Validator');
 
 class Path {
@@ -25,7 +25,7 @@ class Path {
    * @param {string} moving
    */
   validate(moving) {
-    Validator.validateEqual(moving, BRIDGE_SPACE_TYPE);
+    Validator.validateEqual(moving, BRIDGE_PATH_TYPE);
   }
 
   getCurrentPath() {
