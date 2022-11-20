@@ -7,8 +7,12 @@ class BridgeGameController {
     this.#gameService = new BridgeGameService();
   }
 
-  makeBridge(size) {
+  inputBridgeSize(size) {
     this.#gameService.generateBridge(size);
+  }
+
+  inputSpaceToMove(space) {
+    this.#gameService.canMove(space);
   }
 }
 module.exports = BridgeGameController;

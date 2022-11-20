@@ -7,7 +7,10 @@ class BridgeGameService {
   //prettier-ignore
   generateBridge(size) {
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    console.log(this.#bridge);
+  }
+
+  canMove(space) {
+    console.log(space);
   }
 }
 

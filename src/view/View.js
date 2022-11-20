@@ -2,6 +2,7 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const BridgeGameController = require("../BridgeGameController");
 const BridgeSizeValidator = require("../validator/BridgeSizeValidator");
+const BridgeSpaceValidator = require("../validator/BridgeSpaceValidator");
 
 class View {
   #gameController;
@@ -23,7 +24,20 @@ class View {
     return (size) => {
       const bridgeSizeValidator = new BridgeSizeValidator();
       bridgeSizeValidator.validate(size);
-      this.#gameController.makeBridge(size);
+      this.#gameController.inputBridgeSize(size);
+      this.#inputSpaceToMove();
+    };
+  }
+
+  #inputSpaceToMove() {
+    InputView.readMoving(this.#getSpaceToMove());
+  }
+
+  #getSpaceToMove() {
+    return (space) => {
+      const bridgeSpaceValidator = new BridgeSpaceValidator();
+      bridgeSpaceValidator.validate(space);
+      this.#gameController.inputSpaceToMove(space);
     };
   }
 }
