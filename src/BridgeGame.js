@@ -11,13 +11,8 @@ class BridgeGame {
    */
   move(answerArr, inputLetter) {
     this.answerArr = answerArr;
-    if (this.#count < this.answerArr.length) {
-      console.log('세번만 들어오자');
-      return this.isMoveCorrect(inputLetter);
-    }
-    if (this.#count === this.answerArr.length) {
-      return console.log('정답!');
-    }
+    console.log(this.answerArr);
+    return this.isMoveCorrect(inputLetter);
   }
 
   isMoveCorrect(inputLetter) {
@@ -33,14 +28,10 @@ class BridgeGame {
     this.#count++;
     return true;
   }
+
   moveisFalse() {
     this.#count++;
     return false;
-  }
-
-  moveIfWrong(inputLetter) {
-    console.log('탈락!');
-    this.answer = false;
   }
 
   /**
@@ -48,7 +39,9 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#count = 0;
+  }
 }
 
 module.exports = BridgeGame;

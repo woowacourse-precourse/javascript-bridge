@@ -1,7 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-
 const OutputView = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
 
@@ -31,7 +30,8 @@ const InputView = {
   },
 
   inputBridgeSizeException(answer) {
-    if (answer < 3 || answer > 21) {
+    const ONLY_NUMBER = /^[3-9]{1}$|^[1-2]{1}[0-9]{1}$|^3{1}0{1}$/;
+    if (!ONLY_NUMBER.test(answer)) {
       throw '[ERROR] 3 이상 20 이하의 숫자를 입력해주세요.';
     } else this.bridgeSizetoArr(answer);
   },
@@ -41,7 +41,7 @@ const InputView = {
       number,
       BridgeRandomNumberGenerator.generate
     );
-    return this.readMoving();
+    this.readMoving(this.answerArr);
   },
 
   /**
@@ -77,27 +77,66 @@ const InputView = {
     if (Boolean) {
       OutputView.printMap(Boolean, this.letter);
       this.count++;
-      return this.isGameDone();
+      this.isGameDone();
     }
     if (!Boolean) {
       OutputView.printMap(Boolean, this.letter);
       this.count++;
-      return OutputView.printResult();
+      OutputView.printResult();
+      this.readGameCommand();
     }
   },
 
   isGameDone() {
     if (this.count === this.answerArr.length) {
-      return OutputView.printResult();
+      OutputView.printResult();
     }
     if (this.count !== this.answerArr.length) {
-      return this.readMoving();
+      this.readMoving(this.answerArr);
     }
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요', (answer) => {
+      try {
+        this.readGameCommandException(answer);
+      } catch (err) {
+        Console.print(err);
+        this.readGameCommand();
+      }
+    });
+  },
+
+  readGameCommandException(finishLetter) {
+    const LimitedMovement = /[RQ]/;
+    if (!LimitedMovement.test(finishLetter)) {
+      throw '[ERROR] 대문자 R 과 Q 를 입력해주세요.';
+    } else {
+      this.finishorRestartGame(finishLetter);
+    }
+  },
+
+  finishorRestartGame(finishLetter) {
+    if (finishLetter === 'Q') {
+      return this.finishGame();
+    }
+    if (finishLetter === 'R') {
+      this.resetOutputBridge();
+      return this.readMoving(this.answerArr);
+    }
+  },
+
+  finishGame() {
+    OutputView.printResult();
+  },
+
+  resetOutputBridge() {
+    this.count = 0;
+    this.bridgeGame.retry();
+    OutputView.resetOutputBridge();
+  },
 };
 module.exports = InputView;
