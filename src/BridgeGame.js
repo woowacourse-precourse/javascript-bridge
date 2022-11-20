@@ -5,15 +5,15 @@ const BridgeError = require('./Error/BridgeError');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
-/* ******************************************** *
- * BridgeGame: 다리 건너기 게임을 관리하는 클래스  *
- * ******************************************** *
+/**
+ * BridgeGame: 다리 건너기 게임을 관리하는 클래스
  *
  * 제공된 BridgeGame 클래스를 활용해 구현해야 한다.
  * BridgeGame에 필드(인스턴스 변수)를 추가할 수 있다.
  * BridgeGame의 파일 경로는 변경할 수 있다.
  * BridgeGame의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
- * 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다. */
+ * 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
+ */
 
 class BridgeGame {
   #bridgeErrorMessages = [
@@ -43,13 +43,13 @@ class BridgeGame {
     this.makeBridge(+size);
   };
 
-  bridgeSizeExecptionHandler(isValidNumber) {
+  bridgeSizeExecptionHandler = (isValidNumber) => {
     try {
       BridgeError.throwErrorHandler(this.#bridgeErrorMessages[0], !isValidNumber);
     } catch {
       InputView.readBridgeSize(this.validateBridgeSize);
     }
-  }
+  };
 
   makeBridge = (size) => {
     const BRIDGE = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
