@@ -23,6 +23,7 @@
 * 예외 U,D가 아닌 다른 모든 문자
 
 ### 기능목록 3 기능목록2의 잘못된 값을 받는다면 재시작 여부를 묻는다.
+* 게임 성공 여부와 함께 총 시도횟수가 출력된다.
 * 플레이어에게 [Mission Utils Library](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)를 사용해서 R(재시작) Q(종료)을 입력받고 R이라면 게임 재시작 Q라면 어플리케이션이 종료된다.
 
 ### 기능목록 4 만약 다리를 끝까지 건너면 어플리케이션이 종료된다.
