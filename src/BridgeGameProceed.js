@@ -19,10 +19,10 @@ class BridgeGameProceed {
         this.BridgeGame = new BridgeGame();
         this.PlayersMap = new PlayersMap();
         this.#playersBridge = [];
+        OutputView.printStart();
     }
 
     start() {
-        OutputView.printStart();
         InputView.readBridgeSize(this.makeMap.bind(this));
     }
 
@@ -35,7 +35,7 @@ class BridgeGameProceed {
             this.game();
         } catch (error) {
             Console.print(error.message);
-            return ;
+            this.start.call(this);
         }
     }
 
@@ -59,6 +59,7 @@ class BridgeGameProceed {
 
     dividePath(result) {
         if (result.includes('X')) {
+            this.BridgeGame.move();
             return this.fail(result);
         }
         if (this.#playersBridge.length === this.#winBridge.length) {
@@ -74,15 +75,20 @@ class BridgeGameProceed {
     }
 
     fail(result) {
-        this.BridgeGame.move();
-        InputView.readGameCommand((retryOrNot) => {
-            Validation.retry(retryOrNot);
-            if (retryOrNot === "R") {
-                this.#playersBridge = [];
-                return this.game();
-            }
-            if (retryOrNot === "Q") this.BridgeGame.retry(result); 
-        })     
+        try {
+            InputView.readGameCommand((retryOrNot) => {
+                Validation.retry(retryOrNot);
+                if (retryOrNot === "R") {
+                    this.#playersBridge = [];
+                    return this.game();
+                }
+                if (retryOrNot === "Q") this.BridgeGame.retry(result); 
+            })  
+        } catch (error) {
+            Console.print(error.message);
+            this.fail.call(result);
+        }
+           
     }
 
     // gameOverChoice(retryOrNot) {
