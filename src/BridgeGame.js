@@ -33,12 +33,12 @@ class BridgeGame {
     const { bridge, crntPstn } = this.#gameStatus;
     this.#gameStatus.liveOrDie = way === bridge[crntPstn];
     if (this.#gameStatus.liveOrDie) {
-      return this.nextStepDecider(bridge, crntPstn, gameStatusForReturn);
+      return this.nextStepDecision(bridge, crntPstn, gameStatusForReturn);
     }
     if (!this.#gameStatus.liveOrDie) return this.whetherRetryPackage();
   }
 
-  nextStepDecider(bridge, crntPstn, gameStatusForReturn) {
+  nextStepDecision(bridge, crntPstn, gameStatusForReturn) {
     if (bridge.length - 1 === crntPstn) {
       return this.printResultPackage();
     }
