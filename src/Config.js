@@ -16,6 +16,10 @@ const GameConfig = {
   STATUS_SUCCESS: 1,
 };
 
+const AppConfig = {
+  MAX_ERROR_PATIENCE: 100,
+};
+
 const Message = {
   GAME_START: '다리 건너기 게임을 시작합니다.',
   ENTER_BRIDGE_LENGTH: '다리의 길이를 입력해주세요.',
@@ -26,6 +30,7 @@ const Message = {
   ERROR_BRIDGE_LENGTH: `[ERROR] 다리 길이는 ${BridgeConfig.MIN_LENGTH}부터 ${BridgeConfig.MAX_LENGTH} 사이의 자연수여야 합니다.`,
   ERROR_MOVE: `[ERROR] 잘못된 입력입니다. (위: ${BridgeConfig.UP}, 아래: ${BridgeConfig.DOWN})`,
   ERROR_RETRY: `[ERROR] 잘못된 입력입니다. (재시도: ${GameConfig.RETRY}, 종료: ${GameConfig.QUIT})`,
+  ERROR_TOO_MANY: `[ERROR] ${AppConfig.MAX_ERROR_PATIENCE}번이나 잘못된 입력을 하셨습니다! 강제로 프로그램을 종료합니다.`
 
   result(isSuccess) {
     const result = isSuccess ? '성공' : '실패';
@@ -37,4 +42,4 @@ const Message = {
   },
 };
 
-module.exports = { BridgeConfig, GameConfig, Message };
+module.exports = { BridgeConfig, GameConfig, AppConfig, Message };
