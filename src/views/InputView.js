@@ -35,7 +35,7 @@ const InputView = {
       return printResult(game);
     }
     Console.readLine(MESSAGES.MOVE, (input) => {
-      game.move(input, bridge);
+      game.playerMoving(game, input, bridge);
       printMap(game, bridge);
       InputView.readMoving(game, bridge);
     });
