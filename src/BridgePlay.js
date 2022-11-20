@@ -13,19 +13,23 @@ class BridgePlay{
   playRound(moving){
     const status = this.bridgeGame.move(moving);
     if(status[status.length-1] !== this.bridge[status.length-1]){
-      this.playRoundOver();
+      this.playRoundOver(status);
       return;
     }
     if(status.length === this.bridge.length){
       this.playRoundComplete();
       return;
     }
-    this.startRound();
+    this.playRoundNext(status);
   }
 
-  playRoundOver(){
-    //test
-    console.log("round over");
+  playRoundOver(status){
+    OutputView.printMap(status, false);
+  }
+
+  playRoundNext(status){
+    OutputView.printMap(status, true);
+    this.startRound();
   }
 
   playRoundComplete(){
