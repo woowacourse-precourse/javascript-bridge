@@ -47,27 +47,41 @@ const InputView = {
     if(correctValue==='O') {
       //다리를 맞췄을 때 bridgegame move 함수에 배열을 보내주고, 다시 U,D를 입력받음
       bridegame.move(bridgeArray)
-      this.readMoving(bridgeArray)
+      if(bridgeArray.length===0) {
+        MissionUtils.Console.print('최종 게임 결과')
+        OutputView.printBridgeResult()
+        OutputView.printResult(bridgeArray,count)
+      }
+      if(bridgeArray.length!==0) {
+        OutputView.printBridgeResult()
+        this.readMoving(bridgeArray)
+      }
     }
-    if(correctValue==='X') this.readGameCommand(bridgeArray)
+    if(correctValue==='X') {
+      OutputView.printBridgeResult()
+      this.readGameCommand(bridgeArray)
+    }
   },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridgeArray) {
-    console.log(bridgeArray,'게임 다시시작');
     MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",(gameInput)=>{
       this.checkReadGameInput(gameInput,bridgeArray)
+      
     })
   },
   checkReadGameInput(gameInput,bridgeArray){
     count++
     if(gameInput!=='R' && gameInput!=='Q') throw "[ERROR] Only R,Q accepted"
     if(gameInput==='R'){
-      bridegame.retry(bridgeArray,count)
+      bridegame.retry(gameInput)
       InputView.readMoving(bridgeArray)
     }
-    if(gameInput==='Q') OutputView.printResult(bridgeArray,count)
+    if(gameInput==='Q') {
+      OutputView.printBridgeResult(gameInput)
+      OutputView.printResult(bridgeArray,count)
+    }
   }
 };
 
