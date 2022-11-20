@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+const { MOVE_RESULT } = require('../src/constant/Constant');
 const BridgeDrawer = require('../src/domain/BridgeDrawer');
 const Trimmer = require('../src/Trimmer');
 
@@ -8,7 +9,7 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
     {
       bridge: ['U'],
       drawSize: 1,
-      isPlayerSucceed: true,
+      roundResult: MOVE_RESULT.CLEAR,
       answer: Trimmer.templateTrim(`
         [ O ]
         [   ]
@@ -17,7 +18,7 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
     {
       bridge: ['D'],
       drawSize: 1,
-      isPlayerSucceed: false,
+      roundResult: MOVE_RESULT.FAIL,
       answer: Trimmer.templateTrim(`
         [   ]
         [ X ]
@@ -26,7 +27,7 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
     {
       bridge: ['U', 'D'],
       drawSize: 2,
-      isPlayerSucceed: true,
+      roundResult: MOVE_RESULT.CLEAR,
       answer: Trimmer.templateTrim(`
         [ O |   ]
         [   | O ]
@@ -35,7 +36,7 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
     {
       bridge: ['D', 'U'],
       drawSize: 2,
-      isPlayerSucceed: false,
+      roundResult: MOVE_RESULT.FAIL,
       answer: Trimmer.templateTrim(`
         [   | X ]
         [ O |   ]
@@ -44,7 +45,7 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
     {
       bridge: ['U', 'U', 'D', 'D', 'U', 'D', 'D'],
       drawSize: 5,
-      isPlayerSucceed: false,
+      roundResult: MOVE_RESULT.FAIL,
       answer: Trimmer.templateTrim(`
         [ O | O |   |   | X ]
         [   |   | O | O |   ]
@@ -53,7 +54,7 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
     {
       bridge: ['U', 'U', 'U', 'U', 'U'],
       drawSize: 5,
-      isPlayerSucceed: false,
+      roundResult: MOVE_RESULT.FAIL,
       answer: Trimmer.templateTrim(`
         [ O | O | O | O | X ]
         [   |   |   |   |   ]
@@ -62,7 +63,7 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
     {
       bridge: ['D', 'D', 'D', 'D', 'D'],
       drawSize: 5,
-      isPlayerSucceed: true,
+      roundResult: MOVE_RESULT.OK,
       answer: Trimmer.templateTrim(`
         [   |   |   |   |   ]
         [ O | O | O | O | O ]
@@ -92,7 +93,7 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
         'D',
       ],
       drawSize: 20,
-      isPlayerSucceed: false,
+      roundResult: MOVE_RESULT.FAIL,
       answer: Trimmer.templateTrim(`
         [   | O |   | O | O |   | O |   |   | O |   |   | O | O |   | O | O |   | O |   ]
         [ O |   | O |   |   | O |   | O | O |   | O | O |   |   | O |   |   | O |   | X ]
@@ -122,7 +123,7 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
         'D',
       ],
       drawSize: 15,
-      isPlayerSucceed: true,
+      roundResult: MOVE_RESULT.OK,
       answer: Trimmer.templateTrim(`
         [   | O |   | O | O |   | O |   |   | O |   |   | O | O |   ]
         [ O |   | O |   |   | O |   | O | O |   | O | O |   |   | O ]
@@ -131,7 +132,7 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
     {
       bridge: ['D', 'D', 'D', 'D', 'U', 'U', 'U', 'D', 'D', 'U'],
       drawSize: 10,
-      isPlayerSucceed: true,
+      roundResult: MOVE_RESULT.CLEAR,
       answer: Trimmer.templateTrim(`
         [   |   |   |   | O | O | O |   |   | O ]
         [ O | O | O | O |   |   |   | O | O |   ]
@@ -140,15 +141,15 @@ describe('[BridgeDrawer] 주어진 입력에 맞는 다리가 반환되어야 �
     {
       bridge: ['D', 'D', 'D', 'D', 'U', 'U', 'U', 'D', 'D', 'U'],
       drawSize: 7,
-      isPlayerSucceed: false,
+      roundResult: MOVE_RESULT.FAIL,
       answer: Trimmer.templateTrim(`
         [   |   |   |   | O | O | X ]
         [ O | O | O | O |   |   |   ]
       `),
     },
-  ])('', ({ bridge, drawSize, isPlayerSucceed, answer }) => {
+  ])('', ({ bridge, drawSize, roundResult, answer }) => {
     const bridgeDrawer = new BridgeDrawer();
-    const testResult = bridgeDrawer.getBridgeDrawingUsingResult(bridge, drawSize, isPlayerSucceed);
+    const testResult = bridgeDrawer.getBridgeDrawingUsingResult(bridge, drawSize, roundResult);
     expect(testResult).toEqual(answer);
   });
 });
