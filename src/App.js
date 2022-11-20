@@ -1,7 +1,7 @@
 const { MESSAGES } = require("./constraints/constarints");
 const { Console } = require("@woowacourse/mission-utils");
+const BridgeGame = require("./models/BridgeGame");
 const { readBridgeSize, readMoving } = require("./views/InputView");
-const BridgeGame = require("./BridgeGame");
 
 class App {
   play() {
@@ -9,13 +9,13 @@ class App {
     Console.print(MESSAGES.START);
 
     // 게임 생성
-    let game = new BridgeGame();
+    const game = new BridgeGame();
 
     // 다리 생성 및 다리와 게임의 연결
     readBridgeSize(game, readMoving);
   }
 }
 
-let app = new App();
-app.play();
-// module.exports = App;
+// let app = new App();
+// app.play();
+module.exports = App;
