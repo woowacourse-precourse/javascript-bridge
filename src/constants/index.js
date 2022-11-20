@@ -17,15 +17,13 @@ const ERROR_MESSAGE = Object.freeze({
     type: '다리 길이는 숫자여야 합니다.',
     range: '다리 길이는 1-25사이의 숫자를 입력해주어야 합니다.',
   },
+  command: '플레이어가 이동할 칸은 대문자 U 또는 D중 하나만 입력할 수 있습니다.',
 });
 
-const REGEX = Object.freeze({
-  choice: /^[12]$/,
-});
-
+// 다리 길이는 3 - 20 사이
 const RANGE = Object.freeze({
-  min: 1,
-  max: 25,
+  min: 3,
+  max: 20,
 });
 
 // 아래칸 = D = 0
@@ -33,6 +31,14 @@ const RANGE = Object.freeze({
 const SPACE = Object.freeze({
   0: 'D',
   1: 'U',
+});
+
+const BRIDGE_MAP = Object.freeze({
+  up_direction: 'U',
+  down_direction: 'D',
+  success_space: ' O ',
+  empty_space: '   ',
+  fail_space: ' X ',
 });
 
 const CHOICE = Object.freeze({
@@ -43,8 +49,8 @@ const CHOICE = Object.freeze({
 module.exports = {
   GAME_MESSAGE,
   ERROR_MESSAGE,
-  REGEX,
   RANGE,
   SPACE,
+  BRIDGE_MAP,
   CHOICE,
 };

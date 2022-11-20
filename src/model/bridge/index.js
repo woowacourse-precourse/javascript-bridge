@@ -1,15 +1,16 @@
 const GameModel = require('../GameModel');
 const ErrorBoundary = require('../../error/ErrorBoundary');
-const { SizeValidation } = require('../../validate/bridge');
+const { SizeValidation, CommandValidation } = require('../../validate/bridge');
 const { makeBridge } = require('../../BridgeMaker');
 const { generate } = require('../../BridgeRandomNumberGenerator');
-const BridgeGame = require('./BridgeGame');
+const BridgeMap = require('./BridgeMap');
 
 const BridgeModel = class extends GameModel {
-  #isSuccess = false;
+  #isSuccess;
   #tryCount = 1;
-  #position = 0;
   #bridge;
+  #position = 0;
+  #commandList = [];
 
   constructor() {
     super();
@@ -21,17 +22,31 @@ const BridgeModel = class extends GameModel {
     this.#bridge = makeBridge(bridgeSize, generate);
   }
 
+  set addCommandToList(command) {
+    this.#commandList.push(command);
+    this.#position += 1;
+  }
+
+  getMovedResult() {
+    const movedResult = new BridgeMap(
+      this.#bridge,
+      this.#position,
+      this.#commandList,
+    ).getBridgeMap();
+
+    return movedResult;
+  }
+
   validateUserInput(validateValueCallback) {
     this.errorBoundary.validateInput(validateValueCallback);
   }
 
   validateBridgeSize(bridgeSize) {
-    const onValidateBridgeSize = () => new SizeValidation().validate(bridgeSize);
-    this.validateUserInput(onValidateBridgeSize);
+    this.validateUserInput(() => new SizeValidation().validate(bridgeSize));
   }
 
-  move(command) {
-    new BridgeGame().move(command);
+  validateBridgeCommand(command) {
+    this.validateUserInput(() => new CommandValidation().validate(command));
   }
 };
 

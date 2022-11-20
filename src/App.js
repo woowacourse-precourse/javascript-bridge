@@ -1,6 +1,6 @@
 const BridgeView = require('./view/BridgeView');
 const BridgeModel = require('./model/bridge');
-const BridgeCtrl = require('./controller/BridgeCtrl');
+const BridgeCtrl = require('./controller/BridgeGame');
 const ConsoleInputView = require('./view/console/ConsoleInputView');
 const ConsoleOutputView = require('./view/console/ConsoleOutputView');
 
