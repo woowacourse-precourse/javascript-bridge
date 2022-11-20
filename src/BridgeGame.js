@@ -1,3 +1,4 @@
+const { Console } = require("@woowacourse/mission-utils");
 const OutputView = require("./OutputView");
 
 /**
@@ -5,7 +6,7 @@ const OutputView = require("./OutputView");
  */
 class BridgeGame {
   #bridge;
-  #move = [];
+  #status = [];
   #result = [[], []];
   #count;
 
@@ -18,11 +19,11 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    this.#move.push([direction, direction === "U" ? 0 : 1]);
+    this.#status.push([direction, direction === "U" ? 0 : 1]);
   }
 
   moveResult() {
-    this.#move.map(([direction, isBottom], index) => {
+    this.#status.map(([direction, isBottom], index) => {
       const compareBridge = direction === this.#bridge[index];
 
       this.#result[isBottom].push(compareBridge ? "O" : "X");
@@ -33,18 +34,22 @@ class BridgeGame {
   }
 
   isFail() {
-    const index = this.#move.length - 1;
+    const index = this.#status.length - 1;
 
-    return this.#bridge[index] !== this.#move[index];
+    return this.#bridge[index] !== this.#status[index][0];
   }
 
   isEnd() {
-    return this.#bridge.length === this.#move.length;
+    return this.#bridge.length === this.#status.length;
   }
 
   quit() {
     let isSuccess = !this.isFail() && this.isEnd();
-    OutputView.printResult(isSuccess);
+
+    Console.print("최종 게임 결과\n");
+    OutputView.printMap(this.moveResult());
+    OutputView.printResult({ isSuccess, count: this.#count });
+    Console.close();
   }
 
   /**
@@ -54,7 +59,7 @@ class BridgeGame {
    */
   retry() {
     this.#count += 1;
-    this.#move = [];
+    this.#status = [];
   }
 }
 
