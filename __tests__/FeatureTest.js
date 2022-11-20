@@ -1,10 +1,55 @@
 const { checkBridgeSize, checkMoves, checkGameCommand } = require("../src/model/InputChecker");
+const BridgeGame = require("../src/model/BridgeGame");
+const MissionUtils = require("@woowacourse/mission-utils");
 
-//기능 동작 테스트
-//이동이 제대로 되는가? -> O/X
-//재시작 횟수를 제대로 세는가?
-//게임이 제대로 종료되는가? -> 다 건너서 종료, 도중에 종료
-describe("기능 동작 테스트", () => {});
+describe("기능 동작 테스트", () => {
+  const bridgeMoveTestHelper = (logSpy, upperBridge, lowerBridge) => {
+    expect(logSpy).toHaveBeenNthCalledWith(1, upperBridge);
+    expect(logSpy).toHaveBeenNthCalledWith(2, lowerBridge);
+  };
+
+  describe("다리 이동 테스트", () => {
+    test("건널 수 있는 위쪽 다리로 이동할 경우 [ O ], [   ]순으로 출력되어야 한다.", () => {
+      const Game = new BridgeGame();
+      const LOG_SPY = jest.spyOn(MissionUtils.Console, "print");
+      LOG_SPY.mockClear();
+
+      Game.handleCorrectMove("U");
+
+      bridgeMoveTestHelper(LOG_SPY, "[ O ]", "[   ]");
+    });
+
+    test("건널 수 있는 아래쪽 다리로 이동할 경우 [   ], [ O ]순으로 출력되어야 한다.", () => {
+      const Game = new BridgeGame();
+      const LOG_SPY = jest.spyOn(MissionUtils.Console, "print");
+      LOG_SPY.mockClear();
+
+      Game.handleCorrectMove("D");
+
+      bridgeMoveTestHelper(LOG_SPY, "[   ]", "[ O ]");
+    });
+
+    test("건널 수 없는 위쪽 다리로 이동할 경우 [ X ], [   ]순으로 출력되어야 한다.", () => {
+      const Game = new BridgeGame();
+      const LOG_SPY = jest.spyOn(MissionUtils.Console, "print");
+      LOG_SPY.mockClear();
+
+      Game.handleWrongMove("U");
+
+      bridgeMoveTestHelper(LOG_SPY, "[ X ]", "[   ]");
+    });
+
+    test("건널 수 없는 아래쪽 다리로 이동할 경우 [   ], [ X ]순으로 출력되어야 한다.", () => {
+      const Game = new BridgeGame();
+      const LOG_SPY = jest.spyOn(MissionUtils.Console, "print");
+      LOG_SPY.mockClear();
+
+      Game.handleWrongMove("D");
+
+      bridgeMoveTestHelper(LOG_SPY, "[   ]", "[ X ]");
+    });
+  });
+});
 
 describe("입력 예외 테스트", () => {
   const CASES_FOR_BRIDGE_SIZE = {

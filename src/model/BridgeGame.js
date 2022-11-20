@@ -32,13 +32,13 @@ class BridgeGame {
    */
   #move(command) {
     if (command === this.#bridge[this.#gameRound]) {
-      this.#handleCorrectMove(command);
+      this.handleCorrectMove(command);
     } else if (command !== this.#bridge[this.#gameRound]) {
-      this.#handleWrongMove(command);
+      this.handleWrongMove(command);
     }
   }
 
-  #handleCorrectMove(command) {
+  handleCorrectMove(command) {
     this.#buildBridgeUsingInput(command, GAME_UTILS.MARK_CORRECT_MOVE);
     ViewController.output.map(this.#upperBridge, this.#lowerBridge);
     this.#gameRound += 1;
@@ -48,7 +48,7 @@ class BridgeGame {
     if (this.#gameRound < this.#bridgeSize) ViewController.input.moving(this.#move.bind(this));
   }
 
-  #handleWrongMove(command) {
+  handleWrongMove(command) {
     this.#buildBridgeUsingInput(command, GAME_UTILS.MARK_WRONG_MOVE);
     ViewController.output.map(this.#upperBridge, this.#lowerBridge);
     ViewController.input.gameCommand(this.#retry.bind(this));
