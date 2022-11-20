@@ -517,51 +517,6 @@ describe('위치 기록 가져오는 메서드 테스트', () => {
   });
 });
 
-describe('다리 이동 로그 메소드 테스트', () => {
-  const bridgeGame = new BridgeGame();
-  bridgeGame.move();
-  bridgeGame.setPositionLog([0, 0], 'O');
-
-  bridgeGame.move();
-  bridgeGame.setPositionLog([1, 1], 'O');
-
-  bridgeGame.move();
-  bridgeGame.setPositionLog([0, 2], 'O');
-
-  test('메소드 이름은 "getBridgeLog"로 정의된다.', () => {
-    const METHOD_NAME = 'getBridgeLog';
-
-    expect(bridgeGame.getBridgeLog.name).toEqual(METHOD_NAME);
-  });
-
-  test('유저가 아직 출발 전이라면 예외를 발생한다.', () => {
-    expect(() => {
-      new BridgeGame().getBridgeLog();
-    }).toThrow(POSITION_ERROR_TEXT);
-  });
-
-  test('첫 번째 기록으로 [[ "O" ] [ " " ]]을 반환한다.', () => {
-    const EXPECTED = bridgeGame.getBridgeLog()[0];
-    const RECEIVED = [['O'], [' ']];
-
-    expect(EXPECTED).toEqual(RECEIVED);
-  });
-
-  test('두 번째 기록으로 [[ "O", " " ] [ " ", "O" ]]을 반환한다.', () => {
-    const EXPECTED = bridgeGame.getBridgeLog()[1];
-    const RECEIVED = [['O', ' '], [' ', 'O']];
-
-    expect(EXPECTED).toEqual(RECEIVED);
-  });
-
-  test('세 번째 기록으로 [[ "O", " ", "O" ] [ " ", "O", " " ]]을 반환한다.', () => {
-    const EXPECTED = bridgeGame.getBridgeLog()[2];
-    const RECEIVED = [['O', ' ', 'O'], [' ', 'O', ' ']];
-
-    expect(EXPECTED).toEqual(RECEIVED);
-  });
-});
-
 describe('빈 다리 로그 생성 메서드 테스트', () => {
   test('메소드 이름은 "createEmptyUDArray"로 정의된다.', () => {
     const METHOD_NAME = 'createEmptyUDArray';
@@ -632,5 +587,50 @@ describe('범위 추출 메서드 테스트', () => {
     expect(() => {
       BridgeGame.extractFromZeroTo(bridgeInfo, EXPECTED2);
     }).toThrow(NUMBER_ERROR_TEXT);
+  });
+});
+
+describe('다리 이동 로그 메소드 테스트', () => {
+  const bridgeGame = new BridgeGame();
+  bridgeGame.move();
+  bridgeGame.setPositionLog([0, 0], 'O');
+
+  bridgeGame.move();
+  bridgeGame.setPositionLog([1, 1], 'O');
+
+  bridgeGame.move();
+  bridgeGame.setPositionLog([0, 2], 'O');
+
+  test('메소드 이름은 "getBridgeLog"로 정의된다.', () => {
+    const METHOD_NAME = 'getBridgeLog';
+
+    expect(bridgeGame.getBridgeLog.name).toEqual(METHOD_NAME);
+  });
+
+  test('유저가 아직 출발 전이라면 예외를 발생한다.', () => {
+    expect(() => {
+      new BridgeGame().getBridgeLog();
+    }).toThrow(POSITION_ERROR_TEXT);
+  });
+
+  test('첫 번째 기록으로 [[ "O" ] [ " " ]]을 반환한다.', () => {
+    const EXPECTED = bridgeGame.getBridgeLog()[0];
+    const RECEIVED = [['O'], [' ']];
+
+    expect(EXPECTED).toEqual(RECEIVED);
+  });
+
+  test('두 번째 기록으로 [[ "O", " " ] [ " ", "O" ]]을 반환한다.', () => {
+    const EXPECTED = bridgeGame.getBridgeLog()[1];
+    const RECEIVED = [['O', ' '], [' ', 'O']];
+
+    expect(EXPECTED).toEqual(RECEIVED);
+  });
+
+  test('세 번째 기록으로 [[ "O", " ", "O" ] [ " ", "O", " " ]]을 반환한다.', () => {
+    const EXPECTED = bridgeGame.getBridgeLog()[2];
+    const RECEIVED = [['O', ' ', 'O'], [' ', 'O', ' ']];
+
+    expect(EXPECTED).toEqual(RECEIVED);
   });
 });
