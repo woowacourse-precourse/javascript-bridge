@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = require("./InputView.js");
 const OutputView = require("./OutputView.js");
-const { isSame } = require("./Validation.js");
+const Validation = require("./Validation.js");
 const Bridge = require("./Bridge.js");
 
 const { Console } = MissionUtils;
@@ -52,14 +52,14 @@ class BridgeGame {
     this.retry();
   }
   #doWhenRightAnswer() {
-    if (isSame(this.#bridge.length, this.#inputs.length)) {
+    if (Validation.isSame(this.#bridge.length, this.#inputs.length)) {
       this.end();
       return;
     }
     this.move();
   }
   moveAfter(command) {
-    if (!isSame(this.#bridge.currentAnswer, command)) {
+    if (Validation.isDifferent(this.#bridge.currentAnswer, command)) {
       this.#doWhenWrongAnswer();
       return;
     }

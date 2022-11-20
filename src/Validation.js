@@ -8,6 +8,9 @@ const Validation = {
   isSame(elem1, elem2) {
     return elem1 === elem2;
   },
+  isDifferent(elem1, elem2) {
+    return !this.isSame(elem1, elem2);
+  },
   isInRange(start, end, number) {
     if (end < start)
       throw new Error("[ERROR] end는 start보다 항상 크거나 같아야 합니다.");
