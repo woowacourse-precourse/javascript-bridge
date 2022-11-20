@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const Exceptionable = require('./Exceptionable');
 const { ERROR_MESSAGE, REGEX } = require('../../utils/constants');
 
@@ -10,12 +11,13 @@ class BrdgeLengthException extends Exceptionable {
     this.#bridgeLength = bridgeLength;
   }
 
-  getValidation() {
+  isValidate() {
     if (!REGEX.bridgeLength.test(this.#bridgeLength)) {
-      throw new Error(ERROR_MESSAGE.bridgeLength);
+      Console.print(ERROR_MESSAGE.bridgeLength);
+      return false;
     }
 
-    return this.#bridgeLength;
+    return true;
   }
 }
 

@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const Exceptionable = require('./Exceptionable');
 const { ERROR_MESSAGE, REGEX } = require('../../utils/constants');
 
@@ -10,12 +11,13 @@ class BrdgeUpDownException extends Exceptionable {
     this.#command = command;
   }
 
-  getValidation() {
+  isValidate() {
     if (!REGEX.upDownKey.test(this.#command)) {
-      throw new Error(ERROR_MESSAGE.upDownKey);
+      Console.print(ERROR_MESSAGE.upDownKey);
+      return false;
     }
 
-    return this.#command;
+    return true;
   }
 }
 
