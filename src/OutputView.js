@@ -13,13 +13,13 @@ const OutputView = {
   },
 
 
-  pushResult(bridge,curIdx,success){
+  pushResult(dir, success){
     if(success){
-      if(bridge[curIdx-1] === "U") this.addValue(" O ", "   ");
-      else this.addValue("   ", " O ");
+      if(dir === "U") this.addValue(" O ", "   ");
+      if(dir === "D") this.addValue("   ", " O ");
     }
     else{
-      if(bridge[curIdx-1] === "U") this.addValue(" X ", "   ");
+      if(dir === "U") this.addValue(" X ", "   ");
       else this.addValue("   ", " X ");
     }
   },
@@ -33,11 +33,12 @@ const OutputView = {
 
  
   printResult(gameCount,success) {
-    Console.print("최종게임결과");
+    Console.print("\n최종게임결과");
     this.printMap();
     const result = success ? "성공" : "실패";
-    Console.print(`게임 성공 여부 : ${result}`);
+    Console.print(`\n게임 성공 여부 : ${result}`);
     Console.print(`총 시도한 횟수: ${gameCount}`);
+    Console.close();
   },
 };
 
