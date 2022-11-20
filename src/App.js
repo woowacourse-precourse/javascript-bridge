@@ -57,6 +57,11 @@ class App {
   fail(move) {
     this.bridgeGame.fail(move);
     OutputView.printMap(this.bridgeGame.getMap());
+    return this.askRetryOrEnd();
+  }
+
+  askRetryOrEnd() {
+    InputView.readGameCommand();
   }
 }
 
