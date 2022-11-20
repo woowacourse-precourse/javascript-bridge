@@ -3,12 +3,12 @@
 const { MOVING, MARKING } = require('./utils/const');
 
 class Player {
-  #step;
-  #markingPaper;
+  #location;
+  #map;
 
   constructor() {
-    this.#step = 0;
-    this.#markingPaper = new Array(2).fill(0).map(() => ['']);
+    this.#location = 0;
+    this.#map = new Array(2).fill(0).map(() => ['']);
   }
 
   /**
@@ -23,31 +23,31 @@ class Player {
    * @param {string} mark O / X
    */
   markU(mark) {
-    this.#markingPaper[MOVING.U][this.#step] = mark;
-    this.#markingPaper[MOVING.D][this.#step] = MARKING.BLANK;
+    this.#map[MOVING.U][this.#location] = mark;
+    this.#map[MOVING.D][this.#location] = MARKING.BLANK;
   }
 
   /**
    * @param {string} mark O / X
    */
   markD(mark) {
-    this.#markingPaper[MOVING.U][this.#step] = MARKING.BLANK;
-    this.#markingPaper[MOVING.D][this.#step] = mark;
+    this.#map[MOVING.U][this.#location] = MARKING.BLANK;
+    this.#map[MOVING.D][this.#location] = mark;
   }
 
   /**
-   * @param {number} newStep
+   * @param {number} location
    */
-  setStep(newStep) {
-    this.#step = newStep;
+  setLocation(location) {
+    this.#location = location;
   }
 
-  getStep() {
-    return this.#step;
+  getLocation() {
+    return this.#location;
   }
 
   getMarkingPaper() {
-    return this.#markingPaper;
+    return this.#map;
   }
 }
 
