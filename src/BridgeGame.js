@@ -18,28 +18,41 @@ class BridgeGame {
   getMoveCount() {
     return this.#moveCount
   }
+
   getBride() {
     return this.#bridge
   }
-  getUser() {
-    return this.#user;
-  }
-  getStatus() {
-    return this.#status;
-  }
-
   setBridge(input) {
     this.#bridgeSize = Number(input);
     this.#bridge = BridgeMaker.makeBridge(
       this.#bridgeSize, 
       BridgeRandomNumberGenerator.generate
     );
-    // console.log("this.#bridge", this.#bridge)
+  }
+
+  getUser() {
+    return this.#user;
+  }
+
+  getStatus() {
+    return this.#status;
+  }
+  setStaus() {
+    const isCorrect = this.#bridge[this.#moveCount - 1] === this.#user[this.#moveCount - 1];
+    const isEnd = this.#moveCount === this.#bridgeSize
+
+    if (isEnd && isCorrect) {
+      this.#status = "END"
+    } else if (!isEnd && isCorrect) {
+      this.#status = "NEXT"
+    } else if (!isCorrect) {
+      this.#status = "FAIL"
+    }
+    return this;
   }
 
   getMatchResult() {
-    const index = this.#moveCount - 1
-    return this.#user[index] === this.#bridge[index] ? "O" : "X"
+    return this.#user[this.#moveCount - 1] === this.#bridge[this.#moveCount - 1] ? "O" : "X"
   }
 
   /**
@@ -50,22 +63,11 @@ class BridgeGame {
   move(input) {
     this.#moveCount += 1
     this.#user.push(input)
+
+    return this;
   }
   
-  fork() {
-    const isCorrect = this.#bridge[this.#moveCount - 1] === this.#user[this.#moveCount - 1];
-
-    if (this.#moveCount === this.#bridgeSize && isCorrect) {
-      // console.log(this.#moveCount, this.#bridgeSize)
-      this.#status = "END"
-    } else if (this.#moveCount !== this.#bridgeSize && isCorrect) {
-      this.#status = "NEXT"
-    } else if (!isCorrect) {
-      this.#status = "FAIL"
-    }
-
-    return this.#status;
-  }
+  
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

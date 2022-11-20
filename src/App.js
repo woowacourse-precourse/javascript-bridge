@@ -46,12 +46,12 @@ class App {
 
   validateBridgeSize(size) {
     if (validator.isOverSize(size)) {
-      Console.print(ERROR_MESSAGE.SIZE_RANGE);
+      OutputView.printError(ERROR_MESSAGE.SIZE_RANGE)
       Console.close();
       return;
     }
     if (!validator.isInteger(size)) {
-      Console.print(ERROR_MESSAGE.SIZE_INTEGER);
+      OutputView.printError(ERROR_MESSAGE.SIZE_INTEGER)
       Console.close();
       return;
     }
@@ -69,7 +69,7 @@ class App {
 
   validateMoveCommand(command) {
     if (validator.isNotUorD(command)) {
-      Console.print(ERROR_MESSAGE.OPERATION_MOVE);
+      OutputView.printError(ERROR_MESSAGE.OPERATION_MOVE)
       Console.close();
       return;
     }
@@ -77,25 +77,24 @@ class App {
 
   moveUser(response) {
     this.validateMoveCommand(response);
-    this.bridgeGame.move(response);
+    this.bridgeGame.move(response).setStaus();
     OutputView.printMap(this.bridgeGame);
-    const status = this.bridgeGame.fork();
-    this.MOVE_TO_FORK_MAP[status]();
+    this.MOVE_TO_FORK_MAP[this.bridgeGame.getStatus()]();
   }
 
   requestIsTry() {
-    InputView.readGameCommand(this.TryOrClose.bind(this));
+    InputView.readGameCommand(this.isRetry.bind(this));
   }
 
   validateGameCommand(command) {
     if (validator.isNotRorQ(command)) {
-      Console.print(ERROR_MESSAGE.OPERATION_GAME_COMMAND);
+      OutputView.printError(ERROR_MESSAGE.OPERATION_GAME_COMMAND)
       Console.close();
       return;
     }
   }
 
-  TryOrClose(response) {
+  isRetry(response) {
     this.validateGameCommand(response)
     this.FAIL_TO_FORK_MAP[response]();
   }
