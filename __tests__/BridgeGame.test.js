@@ -563,10 +563,18 @@ describe('다리 이동 로그 메소드 테스트', () => {
 });
 
 describe('빈 다리 로그 생성 메서드 테스트', () => {
+  const bridgeGame = new BridgeGame();
+
   test('메소드 이름은 "createEmptyUDArray"로 정의된다.', () => {
-    const bridgeGame = new BridgeGame();
     const METHOD_NAME = 'createEmptyUDArray';
 
     expect(bridgeGame.createEmptyUDArray.name).toEqual(METHOD_NAME);
+  });
+
+  test('2를 전달하면 첫 번째 요소는 [ " ", " " ] 배열을 반환한다.', () => {
+    const EXPECTED = bridgeGame.createEmptyUDArray(2)[0];
+    const RECEIVED = [' ', ' '];
+
+    expect(EXPECTED).toEqual(RECEIVED);
   });
 });
