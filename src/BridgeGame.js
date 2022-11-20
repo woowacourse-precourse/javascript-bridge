@@ -1,4 +1,5 @@
 const { BRIDGE } = require("./constants/data");
+const OutputView = require("./OutputView");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -32,6 +33,7 @@ class BridgeGame {
       this.movingLog.upper.push(BRIDGE.WRONG_ZONE);
       this.movingLog.lower.push(BRIDGE.RIGHT_ZONE);
     }
+    return this.printCurrentBridge();
   }
   /**
    * 유저가 아래 칸으로 이동할 때의 메서드
@@ -45,6 +47,14 @@ class BridgeGame {
       this.movingLog.lower.push(BRIDGE.WRONG_ZONE);
       this.movingLog.upper.push(BRIDGE.RIGHT_ZONE);
     }
+    return this.printCurrentBridge();
+  }
+
+  /**
+   * 현재 다리 상황을 출력하는 메서드
+   */
+  printCurrentBridge() {
+    return OutputView.printMap(this.movingLog);
   }
 
   /**
