@@ -595,9 +595,16 @@ describe('범위 추출 메서드 테스트', () => {
     expect(BridgeGame.extractFromZeroTo.name).toEqual(METHOD_NAME);
   });
 
-  test('1을 전달하면 [[ "O" ] [ " " ]]을 반환한다.', () => {
+  test('1을 전달하면 [[ "O" ], [ " " ]]을 반환한다.', () => {
     const EXPECTED = 1;
-    const RECEIVED = [['O'][' ']];
+    const RECEIVED = [['O'], [' ']];
+
+    expect(BridgeGame.extractFromZeroTo([U, D], EXPECTED)).toEqual(RECEIVED);
+  });
+
+  test('2을 전달하면 [[ "O", " " ], [ " ", "O" ]]을 반환한다.', () => {
+    const EXPECTED = 2;
+    const RECEIVED = [['O', ' '], [' ', 'O']];
 
     expect(BridgeGame.extractFromZeroTo([U, D], EXPECTED)).toEqual(RECEIVED);
   });
