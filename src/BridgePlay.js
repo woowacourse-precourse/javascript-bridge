@@ -11,8 +11,14 @@ class BridgePlay{
     InputView.readMoving(this);
   }
   playRound(moving){
-    //test
-    console.log(moving);
+    const status = this.bridgeGame.move(moving);
+    const moveBy = status.length-1;
+    if(status[moveBy] !== this.bridge[moveBy]){
+      //test
+      console.log("틀림")
+    }else{
+      this.startRound();
+    }
   }
 }
 
