@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { INFO_MESSAGE } = require("./utils/constants");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -8,7 +9,7 @@ const OutputView = {
   },
 
   printStart() {
-    Console.print("다리 건너기 게임을 시작합니다.\n");
+    Console.print(INFO_MESSAGE.START);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
@@ -17,7 +18,7 @@ const OutputView = {
    */
   printMap(bridge) {
     Console.print(`[${bridge.up.join(", ").replaceAll(", ", "|")}]`);
-    Console.print(`[${bridge.down.join(", ").replaceAll(", ", "|")}]`);
+    Console.print(`[${bridge.down.join(", ").replaceAll(", ", "|")}]\n`);
   },
 
   /**
@@ -27,13 +28,13 @@ const OutputView = {
    */
   printResult(tried, success) {
     success
-      ? Console.print("게임 성공 여부: 성공")
-      : Console.print("게임 성공 여부: 실패");
-    Console.print(`총 시도한 횟수: ${tried}`);
+      ? Console.print(INFO_MESSAGE.SUCCESS)
+      : Console.print(INFO_MESSAGE.FAIL);
+    Console.print(INFO_MESSAGE.TRY(tried));
     Console.close();
   },
   resultMessage() {
-    Console.print("최종 게임 결과");
+    Console.print(INFO_MESSAGE.RESULT);
   },
 };
 

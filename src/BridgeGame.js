@@ -1,3 +1,4 @@
+const { BRIDGE } = require("./utils/constants");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -11,10 +12,10 @@ class BridgeGame {
    */
   move(bridge, input) {
     switch (input) {
-      case "U":
+      case BRIDGE.UP:
         this.moveUpSide(bridge);
         break;
-      case "D":
+      case BRIDGE.DOWN:
         this.moveDownSide(bridge);
         break;
     }
@@ -22,38 +23,38 @@ class BridgeGame {
   }
 
   moveUpSide(bridge) {
-    bridge[this.#array[0].length] === "U"
+    bridge[this.#array[0].length] === BRIDGE.UP
       ? this.moveRightUp()
       : this.moveWrongUp();
   }
 
   moveDownSide(bridge) {
-    bridge[this.#array[0].length] === "D"
+    bridge[this.#array[0].length] === BRIDGE.DOWN
       ? this.moveRightDown()
       : this.moveWrongDown();
   }
 
   moveRightUp() {
-    this.#array[0].push(" O ");
-    this.#array[1].push("   ");
+    this.#array[0].push(BRIDGE.MOVABLE);
+    this.#array[1].push(BRIDGE.UNSELECTED);
     this.#rightAnswer = true;
   }
 
   moveWrongUp() {
-    this.#array[0].push("   ");
-    this.#array[1].push(" X ");
+    this.#array[0].push(BRIDGE.UNSELECTED);
+    this.#array[1].push(BRIDGE.IMMOVABLE);
     this.#rightAnswer = false;
   }
 
   moveWrongDown() {
-    this.#array[0].push(" X ");
-    this.#array[1].push("   ");
+    this.#array[0].push(BRIDGE.IMMOVABLE);
+    this.#array[1].push(BRIDGE.UNSELECTED);
     this.#rightAnswer = false;
   }
 
   moveRightDown() {
-    this.#array[0].push("   ");
-    this.#array[1].push(" O ");
+    this.#array[0].push(BRIDGE.UNSELECTED);
+    this.#array[1].push(BRIDGE.MOVABLE);
     this.#rightAnswer = true;
   }
 
