@@ -6,6 +6,7 @@ const InputView = require("./InputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const MissionUtils = require("@woowacourse/mission-utils");
+const ErrorMessages = require("./ErrorMessages");
 
 class BridgeGame {
   constructor() {
@@ -32,7 +33,7 @@ class BridgeGame {
     this.size = InputView.readBridgeSize();
     try {
       if (this.size < 3 || this.size > 20 || isNaN(this.size))
-        throw "[ERROR] 3이상 20이하의 숫자만 입력바랍니다.";
+        throw ErrorMessages.numberSize;
     } catch (err) {
       MissionUtils.Console.print(err);
       this.size = InputView.readBridgeSize();
@@ -65,8 +66,7 @@ class BridgeGame {
     OutputView.pickMoveSentence();
     this.moving = InputView.readMoving();
     try {
-      if (this.moving !== "U" && this.moving !== "D")
-        throw "[ERROR] U와 D 중 입력바랍니다.";
+      if (this.moving !== "U" && this.moving !== "D") throw ErrorMessages.move;
     } catch (err) {
       MissionUtils.Console.print(err);
       this.moving = InputView.readMoving();
@@ -115,7 +115,7 @@ class BridgeGame {
     this.command = InputView.readGameCommand();
     try {
       if (this.command !== "R" && this.command !== "Q")
-        throw "[ERROR] R와 Q 중 입력바랍니다.";
+        throw ErrorMessages.command;
     } catch (err) {
       MissionUtils.Console.print(err);
       this.command = InputView.readGameCommand();
