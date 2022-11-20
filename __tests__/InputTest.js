@@ -31,4 +31,16 @@ describe("입력 테스트", () => {
       Validation.isOnlyNumber("a");
     }).toThrow(ERROR_MESSAGE.NUMBER);
   });
+
+  test("다리 길이 입력 숫자가 3보다 작은 경우 예외 처리한다.", () => {
+    expect(() => {
+      Validation.isInRange("1");
+    }).toThrow(ERROR_MESSAGE.RANGE);
+  });
+
+  test("다리 길이 입력 숫자가 20보다 큰 경우 예외 처리한다.", () => {
+    expect(() => {
+      Validation.isInRange("21");
+    }).toThrow(ERROR_MESSAGE.RANGE);
+  });
 });
