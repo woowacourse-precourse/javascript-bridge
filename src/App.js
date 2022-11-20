@@ -19,9 +19,11 @@ class App {
 
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
-      const { errorMsg } = Validation.checkBridgeSize(size);
-      if (errorMsg) {
-        OutputView.printErrorMessage(errorMsg);
+      try {
+        Validation.checkBridgeSize(size);
+      } catch (error) {
+        OutputView.printErrorMessage(error);
+
         return this.requestBridgeSize();
       }
 
@@ -34,9 +36,11 @@ class App {
 
   requestDirection() {
     InputView.readMoving((direction) => {
-      const { errorMsg } = Validation.checkDirection(direction);
-      if (errorMsg) {
-        OutputView.printErrorMessage(errorMsg);
+      try {
+        Validation.checkDirection(direction);
+      } catch (error) {
+        OutputView.printErrorMessage(error);
+
         return this.requestDirection();
       }
 
@@ -53,9 +57,11 @@ class App {
 
   requestRestartOrQuit() {
     InputView.readGameCommand((commandOption) => {
-      const { errorMsg } = Validation.checkCommandOption(commandOption);
-      if (errorMsg) {
-        OutputView.printErrorMessage(errorMsg);
+      try {
+        Validation.checkCommandOption(commandOption);
+      } catch (error) {
+        OutputView.printErrorMessage(error);
+
         return this.requestRestartOrQuit();
       }
 

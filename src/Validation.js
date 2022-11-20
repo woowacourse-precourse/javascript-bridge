@@ -1,32 +1,26 @@
 const Validation = {
   checkBridgeSize(size) {
-    if (isNaN(size))
-      return { errorMsg: '\n[ERROR] 숫자만 입력할 수 있습니다.\n' };
+    if (isNaN(size)) throw new Error('\n[ERROR] 숫자만 입력할 수 있습니다.\n');
 
     if (size < 3 || size > 20)
-      return {
-        errorMsg: '\n[ERROR] 3 이상 20 이하의 숫자만 입력할 수 있습니다.\n',
-      };
+      throw new Error(
+        '\n[ERROR] 3 이상 20 이하의 숫자만 입력할 수 있습니다.\n'
+      );
 
     if (!Number.isInteger(Number(size)))
-      return {
-        errorMsg: '\n[ERROR] 정수만 입력할 수 있습니다.\n',
-      };
-
-    return { errorMsg: undefined };
+      throw new Error('\n[ERROR] 정수만 입력할 수 있습니다.\n');
   },
 
   checkDirection(direction) {
-    if (direction === 'U' || direction === 'D') return { errorMsg: undefined };
+    if (direction === 'U' || direction === 'D') return;
 
-    return { errorMsg: '\n[ERROR] U 또는 D만 입력할 수 있습니다.' };
+    throw new Error('\n[ERROR] U 또는 D만 입력할 수 있습니다.');
   },
 
   checkCommandOption(commandOption) {
-    if (commandOption === 'R' || commandOption === 'Q')
-      return { errorMsg: undefined };
+    if (commandOption === 'R' || commandOption === 'Q') return;
 
-    return { errorMsg: '\n[ERROR] R 또는 Q만 입력할 수 있습니다.' };
+    throw new Error('\n[ERROR] R 또는 Q만 입력할 수 있습니다.');
   },
 };
 
