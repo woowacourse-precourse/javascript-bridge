@@ -29,10 +29,10 @@ class Controller {
   isAllowSize(input) {
     this.bridgeSize = new BridgeSize(input);
     if (!this.bridgeSize.checkInput()) this.getSize();
-    else this.giveSize(input);
+    else this.orderMake(input);
   }
 
-  giveSize(size) {
+  orderMake(size) {
     this.#BridgeGame.receiveSize(size);
     this.getMoving();
   }
@@ -44,10 +44,10 @@ class Controller {
   isAllowMoving(input) {
     this.moveSpace = new MoveSpace(input);
     if (!this.moveSpace.checkInput()) this.getMoving();
-    else this.giveMoving(input);
+    else this.orderMoving(input);
   }
 
-  giveMoving(moving) {
+  orderMoving(moving) {
     const [currentMap, isSafe, isEnd] = this.#BridgeGame.move(moving);
     const nowStep = this.#CheckModel.checkNowStep();
     OutputView.printMap(currentMap, nowStep, isSafe);

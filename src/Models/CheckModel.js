@@ -9,7 +9,7 @@ class CheckModel {
     this.#movingProcess = movingProcess;
     const nowStep = this.checkNowStep();
     const isSafe = this.checkTrap(bridge, nowStep);
-    const isEnd = this.checkEnd(isSafe, bridge, nowStep);
+    const isEnd = this.checkEnd(bridge, nowStep, isSafe);
     return [isSafe, isEnd];
   }
 
@@ -21,7 +21,7 @@ class CheckModel {
     return this.#movingProcess[nowStep] === bridge[nowStep];
   }
 
-  checkEnd(isSafe, bridge, nowStep) {
+  checkEnd(bridge, nowStep, isSafe) {
     return bridge.length - 1 === nowStep && isSafe;
   }
 }

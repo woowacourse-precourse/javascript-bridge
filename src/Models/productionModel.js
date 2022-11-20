@@ -3,7 +3,7 @@ const { SPACE, PASS } = require("../utils/constants");
 
 class ProductionModel {
   makeBridge(size) {
-    return BridgeMaker.getBridge(size);
+    return BridgeMaker.orderMake(size);
   }
 
   makeMap(nowMap, movingProcess) {
