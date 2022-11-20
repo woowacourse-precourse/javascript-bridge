@@ -30,6 +30,14 @@ const { Console } = require("@woowacourse/mission-utils");
     Console.print("총 시도한 횟수: " + `${count}`);
     Console.close();
   },
+
+  printFailResult(userBridgeUp, userBridgeDown, count){
+    Console.print("최종 게임 결과\n");
+    this.printMap(userBridgeUp, userBridgeDown);
+    Console.print("게임 성공 여부: 실패\n");
+    Console.print("총 시도한 횟수: " + `${count}`);
+    Console.close();
+  }
 };
 
 module.exports = OutputView;

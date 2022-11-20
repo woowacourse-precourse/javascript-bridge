@@ -83,7 +83,7 @@ const InputView = {
   
   gameFail(value){
     if(value == 'Q'){
-      OutputView.printResult();
+      OutputView.printFailResult();
       Console.close();
     }
   },
