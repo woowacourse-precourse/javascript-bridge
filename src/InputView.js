@@ -64,7 +64,6 @@ const InputView = {
       return;
     }
     OutputView.printResult(game);
-    Console.close();
   },
 
   validateBridgeSize(input) {

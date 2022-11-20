@@ -11,7 +11,6 @@ const BridgeMaker = {
           : MOVE.DOWN
       );
     }
-
     return bridge;
   },
 };

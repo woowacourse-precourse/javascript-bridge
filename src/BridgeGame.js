@@ -48,7 +48,7 @@ class BridgeGame {
     const lower = this.getSingleResultArray(MOVE.DOWN, proceeded);
 
     if (this.isFailed()) {
-      return this.getFailedMarkedResultArray({ upper, lower });
+      return this.getFailedMarkedResultArrays({ upper, lower });
     }
     return { upper, lower };
   }
@@ -64,7 +64,7 @@ class BridgeGame {
     );
   }
 
-  getFailedMarkedResultArray(resultArrays) {
+  getFailedMarkedResultArrays(resultArrays) {
     const { upper, lower } = resultArrays;
     if (this.#bridge[this.#position] === MOVE.UP) {
       lower[this.#position] = MOVE.INCORRECT;
