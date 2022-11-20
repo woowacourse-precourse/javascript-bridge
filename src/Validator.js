@@ -9,8 +9,16 @@ const Validator = {
 		}
 	},
 	
+	isOne(size) {
+		if (size.length() !== 1) {
+			MissionUtils.Console.close();
+			throw new Error('[ERROR] 다리 길이는 하나의 숫자여야 합니다.');
+		}
+	},
+
 	checkBridgeSize(size) {
 		this.#isNum(size);
+		this.#isOne(size);
 	},
 }
 
