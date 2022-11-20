@@ -74,6 +74,9 @@ const InputView = {
           this.readMoving(bridgeGame);
           return;
         }
+        OutputView.printResult(bridgeGame);
+        Console.close();
+        return;
       }
     );
   },
