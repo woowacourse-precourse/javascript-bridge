@@ -9,14 +9,30 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() { },
+  printMap(bridgeGame, bridge) {
+    let upMarks = [];
+    let downMarks = [];
+    for (let i = 0; i < bridgeGame.steps; i++) {
+      upMarks.push(bridge[i].element[0]);
+      downMarks.push(bridge[i].element[1]);
+    }
+    this.print(upMarks.join('').replaceAll('][', '|'));
+    this.print(downMarks.join('').replaceAll('][', '|'));
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() { },
+  printResult(bridgeGame) {
+    this.print(`게임 성공 여부: ${bridgeGame.result}`);
+    this.print(`총 시도한 횟수: ${bridgeGame.trials}`);
+  },
+
+  print(string) {
+    Console.print(string);
+  },
 
   end() {
     Console.close();

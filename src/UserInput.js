@@ -1,6 +1,6 @@
 class UserInput {
-    constructor(input) {
-        this.value = input;
+    constructor(UorD) {
+        this.value = UorD;
         this.step;
     }
     setStep(number) {

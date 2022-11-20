@@ -12,7 +12,12 @@ class BridgeUnit {
         this.markIndex = UorD;
     }
     setElement() {
-        this.element[this.markIndex] = `[ ${this.mark} ]`;
+        if (this.markIndex === 0) {
+            this.element = [`[ ${this.mark} ]`, `[   ]`];
+        }
+        if (this.markIndex === 1) {
+            this.element = [`[   ]`, `[ ${this.mark} ]`];
+        }
     }
 }
 
