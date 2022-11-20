@@ -3,7 +3,6 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 class Bridge {
   constructor() {
-    this.size;
     this.bridge;
   }
 
