@@ -57,9 +57,20 @@ class App {
       if (gameCommand === RESTART_TRIGGER) {
         return this.requestMovingDirection();
       }
+      if (gameCommand === QUIT_TRIGGER) {
+        this.printFinalResult();
+      }
     } catch ({ message }) {
       this.reRequestGameCommand(message);
     }
+  }
+
+  printFinalResult() {
+    const movementLogs = this.bridgeGame.getMovementLogs();
+    const isSucceeded = this.bridgeGame.isSucceededMove();
+    const tryCount = this.bridgeGame.getTryCount();
+
+    OutputView.printResult(movementLogs, isSucceeded, tryCount);
   }
 
   reRequestBridgeSize(message) {

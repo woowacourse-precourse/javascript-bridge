@@ -46,6 +46,10 @@ class BridgeGame {
   getMovementLogs() {
     return this.#movementLogs;
   }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
 }
 
 module.exports = BridgeGame;
