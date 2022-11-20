@@ -10,17 +10,24 @@ class PlayersMap {
         this.#upSpace = [];
         this.#downSpace = [];
         for (let i = 0; i < playersBridge.length; i += 1) {
-            if (playersBridge[i] === 'U') {
-                this.#upSpace += playersBridge[i] === winBridge[i] ? 'O' : 'X';
-                this.#downSpace += ' ';
-            }
-
-            if (playersBridge[i] === 'D') {
-                this.#upSpace += ' ';
-                this.#downSpace += playersBridge[i] === winBridge[i] ? 'O' : 'X';
-            }
+            this.isU(playersBridge[i], winBridge[i]);
+            this.isD(playersBridge[i], winBridge[i]);
         }
         return `${this.cover(this.#upSpace)}\n${this.cover(this.#downSpace)}`;
+    }
+
+    isU(playersBridge, winBridge) {
+        if (playersBridge === 'U') {
+            this.#upSpace += playersBridge === winBridge ? 'O' : 'X';
+            this.#downSpace += ' ';
+        }
+    }
+
+    isD(playersBridge, winBridge) {
+        if (playersBridge === 'D') {
+            this.#upSpace += ' ';
+            this.#downSpace += playersBridge === winBridge ? 'O' : 'X';
+        }
     }
 
     empty(space) {
