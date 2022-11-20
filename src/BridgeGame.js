@@ -42,7 +42,7 @@ class BridgeGame {
 
   getMoveResult(movingKey) {
     const INDEX = this.#userInput.length - 1;
-    if (this.#answerBridge[MOVING_COUNT] === movingKey) {
+    if (this.#answerBridge[INDEX] === movingKey) {
       return 'O';
     }
     return 'X';
