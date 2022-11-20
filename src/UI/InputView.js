@@ -1,5 +1,5 @@
 const { GAME_MESSAGE } = require("../Utils/Constants");
-const { BRIDGE_LENGTH } = GAME_MESSAGE;
+const { BRIDGE_LENGTH, MOVE } = GAME_MESSAGE;
 const { readLine, print } = require("../Utils/MissionUtils");
 const Validator = require("../Utils/Validator");
 
@@ -25,7 +25,11 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(move) {
+    readLine(MOVE, (upOrDown) => {
+      move(upOrDown);
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
