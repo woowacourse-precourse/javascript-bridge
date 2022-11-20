@@ -5,6 +5,7 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const validBridgeSize = require("./validation/validBridgeSize");
 const validMoveUpOrDownAnswer = require("./validation/validMoveUpOrDownAnswer");
+const { Console } = require("@woowacourse/mission-utils");
 
 class App {
   #bridge;
@@ -28,7 +29,10 @@ class App {
 
   requestMoveUpOrDown(answer) {
     validMoveUpOrDownAnswer(answer);
-    OutputView.printMap(this.BridgeGame.getPosition(), this.#bridge, answer);
+    const position = this.BridgeGame.getPosition();
+
+    OutputView.printMap(position, this.#bridge, answer);
+    OutputView.setRecentBridgePrint(position, this.#bridge, answer);
 
     const isCorrect = this.BridgeGame.isCorrect(answer, this.#bridge);
 
@@ -36,6 +40,24 @@ class App {
       this.BridgeGame.move();
       InputView.readMoving(this.requestMoveUpOrDown.bind(this));
     }
+
+    if (!isCorrect) {
+      InputView.readGameCommand(this.handleRetry.bind(this));
+    }
+  }
+
+  handleRetry(answer) {
+    if (answer === "R") {
+    }
+
+    if (answer === "Q") {
+      OutputView.printGameResult();
+      this.shutDown();
+    }
+  }
+
+  shutDown() {
+    Console.close();
   }
 }
 
