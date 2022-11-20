@@ -33,7 +33,7 @@ class Controller {
   }
 
   orderMake(size) {
-    this.#BridgeGame.receiveSize(size);
+    this.#BridgeGame.orderMakeBridge(size);
     this.getMoving();
   }
 
