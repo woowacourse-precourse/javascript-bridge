@@ -1,10 +1,6 @@
 const BridgeGame = require('../model/BridgeGame');
 const { readBridgeSize, readGameCommand, readMoving } = require('../view/InputView');
-const {
-  checkValidBridgeSize,
-  checkValidRetry,
-  checkValidRound,
-} = require('../Error/InputValidation');
+const { checkValidBridgeSize, checkValidRetry, checkValidRound } = require('../InputValidation');
 const {
   printNewLine,
   printStart,

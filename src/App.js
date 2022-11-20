@@ -1,10 +1,10 @@
-const Controller = require('./Controller');
+const BridgeGameController = require('./controller/BridgeGameController');
 
 class App {
-  #controller = new Controller();
+  #bridgeGameController = new BridgeGameController();
 
   play() {
-    this.#controller.run();
+    this.#bridgeGameController.run();
   }
 }
 
