@@ -12,13 +12,10 @@ class BridgeGame {
 
   #retry;
 
-  #step;
-
   constructor(bridge) {
     this.#bridge = bridge;
     this.#retry = 1;
     this.#records = [];
-    this.#step = 0;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -29,7 +26,6 @@ class BridgeGame {
   move(direction) {
     Validator.checkCorrectDirection(direction);
     const dir = BridgeGame.isGoUp(direction) ? DIRECTION.up : DIRECTION.down;
-    this.#step += 1;
     return this.recordDirection(dir);
   }
 
@@ -112,11 +108,6 @@ class BridgeGame {
    */
   isEndOfBridge() {
     if (this.#records.length === this.#bridge.length) return true;
-    return false;
-  }
-
-  isEndOfBridge2() {
-    if (this.#step === this.#bridge.length) return true;
     return false;
   }
 
