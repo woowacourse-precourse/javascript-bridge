@@ -31,8 +31,10 @@ class Controller {
     const callback = (input, index) => {
       Validator.validateUpDown(input);
       const computerBridgeArr = this.model.getComputerBridgeArr();
-      BridgeGame.move(input, computerBridgeArr[index], this.model);
-      OutputView.printMap(this.model);
+      const OX = input === computerBridgeArr[index] ? ' O ' : ' X ';
+      if (OX === ' X ') return InputView.readGameCommand(this.inputGameCommandCallback);
+      BridgeGame.move(input, OX, this.model);
+      return OutputView.printMap(this.model);
     };
     InputView.readMoving(callback, this.model, 0);
   }
