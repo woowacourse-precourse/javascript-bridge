@@ -6,8 +6,6 @@ const { RETRY } = require("../view/stringsUI");
 const Player = require("../model/Player");
 const Bridge = require("../model/Bridge");
 const Validation = require("../utils/Validation");
-const HandleError = require("../utils/HandleError");
-const { ERROR_TYPE } = require("../utils/stringsUtils");
 const { INPUT_TRY_FN, INPUT_CATCH_FN } = require("./stringsPresenter");
 
 /**
@@ -62,10 +60,10 @@ class BridgeGame {
    */
   move(selectedMove) {
     const isMove = this.bridgeModel.crossBridge({
-      bridgeIndex: this.playerModel.inputArr.length,
+      bridgeIndex: this.playerModel.getInputArrayLength(),
       selectedMove,
     });
-    this.playerModel.inputArr.push({ selectedMove, isMove });
+    this.playerModel.setInputArray({ selectedMove, isMove });
     this.createPlayerBridgeMap();
   }
 
@@ -74,7 +72,7 @@ class BridgeGame {
   }
 
   printMove() {
-    OutputView.printMap(this, this.playerModel.bridgeMap);
+    OutputView.printMap(this, this.playerModel.getBridgeMap());
   }
 
   checkNextMove() {
@@ -98,9 +96,9 @@ class BridgeGame {
   }
 
   getMoveFinishBooleans() {
-    const currPlayerIndex = this.playerModel.inputArr.length - 1;
-    const isFinish = this.bridgeModel.createdArr.length === currPlayerIndex + 1;
-    const { isMove } = this.playerModel.inputArr[currPlayerIndex];
+    const currPlayerIndex = this.playerModel.getInputArrayLength() - 1;
+    const isFinish = this.bridgeModel.getBridgeLength() === currPlayerIndex + 1;
+    const { isMove } = this.playerModel.getInputArrayItem(currPlayerIndex);
     return { isFinish, isMove };
   }
 
@@ -127,23 +125,10 @@ class BridgeGame {
     const { isFinish, isMove } = this.getMoveFinishBooleans();
     const isSuccess = isFinish && isMove;
     OutputView.printResult({
-      resultMap: this.playerModel.bridgeMap,
+      resultMap: this.playerModel.getBridgeMap(),
       isSuccess,
       totalTrial: this.playerModel.getTotalTrial(),
     });
-  }
-
-  handleReadBridgeSizeError(error) {
-    OutputView.printError(error);
-    this.getBridgeSize();
-  }
-  handleReadMovingError(error) {
-    OutputView.printError(error);
-    this.getPlayerMove();
-  }
-  handleReadGameCommandError(error) {
-    OutputView.printError(error);
-    this.getGameCommand();
   }
 }
 

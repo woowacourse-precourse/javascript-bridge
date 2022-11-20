@@ -1,13 +1,20 @@
 class Bridge {
-  createdArr; // U,D 로 구성됨
+  #bridgeArr; // U,D 로 구성됨
 
   constructor(createdArr) {
-    this.createdArr = createdArr;
+    this.#bridgeArr = createdArr;
   }
 
   crossBridge({ bridgeIndex, selectedMove }) {
-    const isMove = this.createdArr[bridgeIndex] === selectedMove;
+    const isMove = this.#bridgeArr[bridgeIndex] === selectedMove;
     return isMove;
+  }
+
+  getBridgeArray() {
+    return this.#bridgeArr;
+  }
+  getBridgeLength() {
+    return this.#bridgeArr.length;
   }
 }
 module.exports = Bridge;
