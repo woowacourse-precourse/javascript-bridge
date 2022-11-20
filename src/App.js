@@ -86,11 +86,20 @@ class App {
   validateGameCommand(gameCommand) {
     try {
       BridgeGameCommandValidator.validate(gameCommand);
-      this.retry();
+      this.executeGameCommand(gameCommand);
     } catch (err) {
       OutputView.printErrorMessage(err.message);
       this.inputGameCommand();
     }
+  }
+
+  executeGameCommand(gameCommand) {
+    if (gameCommand === 'R') {
+      this.retry();
+      return;
+    }
+
+    this.gameOver();
   }
 
   retry() {
