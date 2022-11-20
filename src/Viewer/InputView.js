@@ -26,14 +26,10 @@ const InputView = {
     Console.readLine(MESSAGE.READ_MOVE_LEVEL, (input) => {
       game.move(input);
       OutputView.printMap(game);
-      if (this.isReMoving(game)) return this.readMoving(game);
+      if (game.isReMoving()) return this.readMoving(game);
       OutputView.printResult(input, game);
       return InputView.readGameCommand(game);
     });
-  },
-
-  isReMoving(game) {
-    return game.isWin() && game.totalLevel !== game.levelCnt;
   },
 
   /**

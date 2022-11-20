@@ -34,44 +34,48 @@ class BridgeGame {
     this.#bridge = bridge;
   }
 
-  setInitialResultMap() {
+  isReMoving() {
+    return this.isWin() && this.totalLevel !== this.levelCnt;
+  }
+
+  isWin() {
+    for (let level = 0; level < this.levelCnt; level += 1) {
+      if (!this.#isCorrect(level)) return false;
+    }
+    return true;
+  }
+
+  getResultMap() {
+    this.#setResultMap();
+    return this.#result;
+  }
+
+  #setInitialResultMap() {
     const length = this.levelCnt;
     this.#result = Array.from({ length: 2 }, () =>
       Array.from({ length }, () => undefined),
     );
   }
 
-  isWin() {
+  #isCorrect(level) {
+    return this.#bridge.getElement(level) === this.#selected.getElement(level);
+  }
+
+  #setResultMap() {
+    this.#setInitialResultMap();
     for (let level = 0; level < this.levelCnt; level += 1) {
-      if (this.#bridge.getElement(level) !== this.#selected.getElement(level))
-        return false;
-    }
-    return true;
-  }
-
-  getResultMap() {
-    this.setResultMap();
-    return this.#result;
-  }
-
-  setResultMap() {
-    this.setInitialResultMap();
-    for (let level = 0; level < this.levelCnt; level += 1) {
-      this.setResultElement(level);
+      this.#setResultElement(level);
     }
   }
 
-  setResultElement(level) {
-    if (this.#selected.getElement(level) === this.#bridge.getElement(level)) {
-      this.setBoolean(level, true);
-    } else if (
-      this.#selected.getElement(level) !== this.#bridge.getElement(level)
-    ) {
-      this.setBoolean(level, false);
+  #setResultElement(level) {
+    if (this.#isCorrect(level)) {
+      return this.#setBoolean(level, true);
     }
+    return this.#setBoolean(level, false);
   }
 
-  setBoolean(level, bool) {
+  #setBoolean(level, bool) {
     if (this.#selected.getElement(level) === INPUT_MESSAGE.UP)
       this.#result[0][level] = bool;
     else if (this.#selected.getElement(level) === INPUT_MESSAGE.DOWN)
