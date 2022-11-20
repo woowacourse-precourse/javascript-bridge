@@ -56,6 +56,12 @@ const InputView = {
    */
   readGameCommand(currentLocation, bridge, count) {
     MU.Console.readLine('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (restart) => {
+      try{
+       OutputView.printGameCommandError(restart);
+      } catch(e) {
+        MU.Console.print(e);
+        this.readGameCommand(currentLocation, bridge, count);
+      }
       if(restart === 'R') this.readMoving(GAME.retry(currentLocation), bridge, count + 1);
       if(restart === 'Q') OutputView.printResult(currentLocation, 0, count);
     })

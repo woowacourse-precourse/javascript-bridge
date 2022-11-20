@@ -36,6 +36,10 @@ const OutputView = {
   printMovingError(nextStep) {
     if(nextStep != 'U' && nextStep != 'D') throw '[ERROR] U 혹은 D만 입력 가능합니다.';
    },
+  
+  printGameCommandError(restart) {
+    if(restart != 'R' && restart != 'Q') throw '[ERROR] R 혹은 Q만 입력 가능합니다.';
+  },
 };
 
 module.exports = OutputView;
