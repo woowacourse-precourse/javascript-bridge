@@ -44,23 +44,30 @@ class BridgeGame {
 
   parseResult(matchResult) {
     const [upOrDown, matchBoolean] = matchResult;
-    if (matchBoolean) {
-      if (upOrDown === 'U') {
-        this.#moveState[0].push(' O ');
-        this.#moveState[1].push('   ');
-      } else {
-        this.#moveState[0].push('   ');
-        this.#moveState[1].push(' O ');
-      }
-    } else {
-      if (upOrDown === 'U') {
-        this.#moveState[0].push(' X ');
-        this.#moveState[1].push('   ');
-      } else {
-        this.#moveState[0].push('   ');
-        this.#moveState[1].push(' X ');
-      }
+  
+    const successOrFail = this.toSuccessOrFail(matchBoolean);
+    if (upOrDown === 'U') {
+      this.parseUpBridge(successOrFail);
+      return;
     }
+    this.parseDownBridge(successOrFail);
+  }
+  
+  toSuccessOrFail(matchBoolean) {
+    if (matchBoolean === true) {
+      return ' O ';
+    }
+    return ' X ';
+  }
+
+  parseUpBridge(successOrFail) {
+    this.#moveState[0].push(successOrFail);
+    this.#moveState[1].push('   ');
+  }
+
+  parseDownBridge(successOrFail) {
+    this.#moveState[0].push('   ');
+    this.#moveState[1].push(successOrFail);
   }
 
   checkRemainBridge() {
