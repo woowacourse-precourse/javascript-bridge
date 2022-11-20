@@ -63,10 +63,14 @@ class App {
       if (errorMsg)
         return throwException(errorMsg, () => this.requestRestartOrQuit());
 
-      if (commandOption === 'R') return this.restart();
-
-      return this.quit();
+      this.actionAboutGameCommand(commandOption);
     });
+  }
+
+  actionAboutGameCommand(commandOption) {
+    if (commandOption === 'R') return this.restart();
+
+    return this.quit();
   }
 
   restart() {

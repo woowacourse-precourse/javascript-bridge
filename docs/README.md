@@ -236,6 +236,8 @@ const number = generateRandomNumber();
 
 ---
 
+actionAboutGameCommand
+
 ### 8️⃣ 리펙터링
 
 - [ ] refactor: 객체(또는 클래스) 분리하기
@@ -246,3 +248,4 @@ const number = generateRandomNumber();
   - 에러가 발생하였을 때 실행되는 함수를 분리한다.
   - BridgeGame를 생성하는 함수를 만들어 분리한다.
   - BridgeGame의 결과에 따른 실행을 함수로 만들어 분리한다.
+  - 플레이어가 입력한 gameCommand의 결과에 따른 실행을 함수로 만들어 분리한다.
