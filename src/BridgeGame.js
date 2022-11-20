@@ -32,7 +32,7 @@ class BridgeGame {
     Validation.validateGameCommand(gameCommand);
   }
 
-  isMoved() {
+  isSucceededMove() {
     const lastLog = this.#movementLogs[this.#movementLogs.length - 1];
 
     return lastLog.isCrossable;

@@ -39,7 +39,7 @@ class App {
       const movementLogs = this.bridgeGame.getMovementLogs();
       OutputView.printMap(movementLogs);
 
-      if (!this.bridgeGame.isMoved()) return this.requestRetryOrQuit();
+      if (!this.bridgeGame.isSucceededMove()) return this.requestRetryOrQuit();
     } catch ({ message }) {
       this.reRequestMovingDirection(message);
     }
