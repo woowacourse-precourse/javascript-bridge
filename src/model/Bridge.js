@@ -1,12 +1,12 @@
 class Bridge {
-  #bridge;
+  #path;
 
   constructor(path) {
-    this.#bridge = path;
+    this.#path = path;
   }
 
   getBridge() {
-    return this.#bridge;
+    return this.#path;
   }
 }
 
