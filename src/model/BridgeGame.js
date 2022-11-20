@@ -1,5 +1,6 @@
 const { ERROR } = require('../Error');
 const MissionUtils = require('@woowacourse/mission-utils');
+const { GAME_STATE, MOVE, RESTART, HISTORY } = require('../constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -13,7 +14,7 @@ class BridgeGame {
   constructor() {
     this.#bridge = null;
     this.#moveHistory = [];
-    this.#isSuccess = "실패";
+    this.#isSuccess = GAME_STATE.FAIL;
     this.#tryCount = 1;
   }
 
@@ -109,9 +110,9 @@ class BridgeGame {
 
     for (let position = 0; position < this.#moveHistory.length; position++) {
       if (this.#moveHistory[position] === bridge[position])
-        this.changeUpDownHistory(upDownHistory, position, "O");
+        this.changeUpDownHistory(upDownHistory, position, HISTORY.ALIVE);
       if (this.#moveHistory[position] !== bridge[position])
-        this.changeUpDownHistory(upDownHistory, position, "X");
+        this.changeUpDownHistory(upDownHistory, position, HISTORY.DIE);
     }
     return [upDownHistory[0], upDownHistory[1]];
   }
@@ -123,9 +124,9 @@ class BridgeGame {
    * @param {*} type 성공적으로 지났으면 O, 실패했으면 X
    */
   changeUpDownHistory(upDownHistory, position, type) {
-    if (this.#moveHistory[position] === "U")
+    if (this.#moveHistory[position] === MOVE.UP)
       upDownHistory[0][position] = type;
-    if (this.#moveHistory[position] === "D")
+    if (this.#moveHistory[position] === MOVE.DOWN)
       upDownHistory[1][position] = type;
   }
 
@@ -134,7 +135,7 @@ class BridgeGame {
    * @param {string} moveType 사용자가 입력한 값
    */
   validateMoveType(moveType) {
-    if (moveType !== "U" && moveType !== "D")
+    if (moveType !== MOVE.UP && moveType !== MOVE.DOWN)
       throw new Error(ERROR.INVALID_MOVE_TYPE);
   }
 
@@ -143,7 +144,7 @@ class BridgeGame {
    * @param {string} command 사용자가 입력한 값
    */
   validateCommand(command) {
-    if (command !== "R" && command !== "Q")
+    if (command !== RESTART.YES && command !== RESTART.NO)
       throw new Error(ERROR.INVALID_COMMAND);
   }
 
@@ -162,7 +163,7 @@ class BridgeGame {
    * @param {[string[], string[]]} 위 이동 경로, 아래 이동 경로
    */
   isFailMove([upHistory, downHistory]) {
-    if ([...upHistory, ...downHistory].includes("X"))
+    if ([...upHistory, ...downHistory].includes(HISTORY.DIE))
       throw new Error(ERROR.FAIL_MOVE);
   }
 
@@ -172,7 +173,7 @@ class BridgeGame {
    */
   isEndPosition() {
     if (this.getPosition() === this.getEndPosition()) {
-      this.setIsSuccess("성공");
+      this.setIsSuccess(GAME_STATE.SUCCESS);
       return true;
     }
     return false;

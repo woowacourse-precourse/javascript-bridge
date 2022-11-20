@@ -1,5 +1,6 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const { BRIDGE_SIZE } = require('../constants');
 const { ERROR } = require('../Error');
 
 /**
@@ -31,7 +32,7 @@ class Bridge {
     vaildateBridgeSize(size) {
         if (isNaN(size))
             throw new Error(ERROR.BRIDGE_SIZE_NOT_NUMBER);
-        if (size < 3 || size > 20)
+        if (size < BRIDGE_SIZE.MIN || size > BRIDGE_SIZE.MAX)
             throw new Error(ERROR.BRIDGE_SIZE_OUT_BOUNDARY);
     }
 }

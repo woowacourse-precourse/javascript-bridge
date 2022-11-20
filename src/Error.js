@@ -8,7 +8,6 @@ const ERROR = Object.freeze({
     INVALID_COMMAND: '[ERROR] 입력값은 R 또는 Q 여야합니다.\n',
     FAIL_MOVE: '[ERROR] 건널 수 없는 곳 입니다.\n'
 });
-const ErrorView = require('./view/ErrorView');
 
 /**
  * 에러 타입에 따라 실행해야할 에러 핸들링 메서드들
