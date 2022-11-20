@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_MESSAGE } = require('./utils/constants');
+const { GAME_MESSAGE } = require('../utils/constants');
 
-const controller = require('./controller/BridgeController');
+const controller = require('../controller/BridgeController');
 
 const OutputView = {
   makeMiniTemplate(outputList) {
