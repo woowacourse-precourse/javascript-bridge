@@ -13,10 +13,13 @@ class BridgeGame {
 
   #bridgeLog;
 
+  #tryCount;
+
   constructor() {
     this.#userPosition = null;
     this.#positionLog = new Map();
     this.#bridgeLog = new Map();
+    this.#tryCount = 1;
   }
 
   static replaceString(numberValue) {
@@ -197,6 +200,14 @@ class BridgeGame {
     this.setBridgeLog(this.getPositionLog()[USER_POSITION]);
 
     return this.getBridgeLog();
+  }
+
+  increasingTryCount() {
+    const INCREASE = 1;
+
+    this.#tryCount += INCREASE;
+
+    return this.#tryCount;
   }
 }
 
