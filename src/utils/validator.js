@@ -1,19 +1,19 @@
 const { throwError } = require('./error');
-const { ERROR } = require('../constants/bridge');
+const { ERROR, LENGTH, EITHER, COMMAND } = require('../constants/bridge');
 
 const Validator = {
   isVaildSize(number) {
-    if (number >= 3 && number <= 20) return;
+    if (number >= LENGTH.MIN && number <= LENGTH.MAX) return;
     throwError(ERROR.NOT_VALID_SIZE);
   },
 
   isVaildMovingChar(char) {
-    if (char === 'U' || char === 'D') return;
+    if (char === EITHER.UP || char === EITHER.DOWN) return;
     throwError(ERROR.NOT_VALID_MOVING_CHAR);
   },
 
   isVaildCommandChar(char) {
-    if (char === 'R' || char === 'Q') return;
+    if (char === COMMAND.RETRY || char === COMMAND.QUIT) return;
     throwError(ERROR.NOT_VALID_COMMAND_CHAR);
   },
 };
