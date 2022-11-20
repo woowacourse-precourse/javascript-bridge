@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 
+const { toNumber } = require("./helpers/common");
 const { generate } = require("./BridgeRandomNumberGenerator");
 
 /**
@@ -11,9 +12,8 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(INPUT_LENGTH, (input) => {
+      isInvalidBridgeLength(input) && InputView.readBridgeSize();
       const bridgeSize = toNumber(input);
-
-      // 다리 길이 예외처리
 
       // bridge 인스턴스 생성
       InputView.readMoving(bridgeGame);
