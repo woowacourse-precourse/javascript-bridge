@@ -29,26 +29,38 @@ const BridgeGame = class extends GameCtrl {
   // 3. map과 bridge를 비교 후 bridgeMap + 현재 칸 통과 여부 얻기 -> BridgeMap 클래스 ✅
   // 4. map 출력하기 = this.view.printMap(bridgeMap) ✅
 
-  // 5. 현재 칸 통과 실패 OR 다리 건너기 성공시 askToReplayGame 실행 ✅
+  // 5. 현재 칸 통과 실패시 -> 게임을 재시작하거나 종료 여부 묻기
+  //    -> askToReplayGame 실행 ✅
   move(command) {
     this.model.addCommandToList = command;
     const { isPassed, bridgeMap } = this.model.getMovedResult;
     this.view.printMap(bridgeMap);
 
-    const isGameEnd = this.model.getIsGameEnd(isPassed);
-    if (isGameEnd) return this.askToReplayGame(isGameEnd);
+    if (!isPassed) return this.askToReplayGame();
+
+    const isGameEnd = this.model.getGameEnd;
+    if (isGameEnd) return this.end();
+
     return this.getUserCommand();
   }
 
-  // 게임 종료
-  end() {}
-
   // 게임을 재시작 할 것인지 여부를 묻기
-  askToReplayGame(isGameEnd) {
-    this.view.output('게임 재시작 여부 묻기');
+  askToReplayGame() {
+    this.view.readGameCommand((replayCommand) => {
+      this.model.validateBridgeCommand(replayCommand);
+      this.quitOrRetryByCommand(replayCommand);
+    });
   }
 
-  // 사용자가 게임을 다시 시도할 때 사용하는 메서드
+  quitOrRetryByCommand(replayCommand) {
+    if (replayCommand === 'R') return this.retry();
+    return this.end();
+  }
+
+  // 게임 종료 = Q
+  end() {}
+
+  // 사용자가 게임을 다시 시도할 때 사용하는 메서드 = R
   retry() {}
 };
 

@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const GameModel = require('../GameModel');
 const ErrorBoundary = require('../../error/ErrorBoundary');
-const { SizeValidation, CommandValidation } = require('../../validate/bridge');
+const { SizeValidation, CommandValidation, ReplayValidation } = require('../../validate/bridge');
 const { makeBridge } = require('../../BridgeMaker');
 const { generate } = require('../../BridgeRandomNumberGenerator');
 const BridgeMap = require('./BridgeMap');
@@ -37,11 +37,8 @@ const BridgeModel = class extends GameModel {
     return movedResult;
   }
 
-  getIsGameEnd(isGamePassed) {
-    const isGameFailed = !isGamePassed;
-    const isGameSuccess = this.#position === this.#bridge.length;
-
-    return isGameFailed || isGameSuccess;
+  get getIsGameEnd() {
+    return this.#position === this.#bridge.length;
   }
 
   validateUserInput(validateValueCallback) {
@@ -54,6 +51,10 @@ const BridgeModel = class extends GameModel {
 
   validateBridgeCommand(command) {
     this.validateUserInput(() => new CommandValidation().validate(command));
+  }
+
+  validateBridgeReplayCommand(replayCommand) {
+    this.validateUserInput(() => new ReplayValidation().validate(replayCommand));
   }
 };
 
