@@ -3,6 +3,7 @@ const BridgeSizeValidation = require("./validation/BridgeSizeValidation");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const MovingValidation = require("./validation/MovingValidation");
+const { MESSAGES } = require("./constants");
 
 class GameController {
   #bridgeGame;
@@ -15,7 +16,7 @@ class GameController {
   }
 
   start() {
-    OutputView.startGame();
+    OutputView.printMessage(MESSAGES.START);
     this.askForBridgeSize();
   }
 

@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGES } = require("./constants");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -8,17 +9,14 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    Console.readLine("다리의 길이를 입력해주세요.\n", callback);
+    Console.readLine(MESSAGES.ASK_SIZE, callback);
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(callback) {
-    Console.readLine(
-      "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      callback
-    );
+    Console.readLine(MESSAGES.ASK_MOVING, callback);
   },
 
   /**
