@@ -23,7 +23,13 @@ class Controller {
 
   makeWinningBridge(size) {
     OutputView.printMessage('');
-    this.bridgeGame.makeWinningBridge(Number(size));
+
+    try {
+      this.bridgeGame.makeWinningBridge(Number(size));
+    } catch (error) {
+      OutputView.printMessage(error);
+      return this.inputBrideSize();
+    }
 
     this.inputMoving();
   }
