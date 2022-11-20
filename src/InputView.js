@@ -41,17 +41,36 @@ const InputView = {
    */
   readMoving(gameRec) { // moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD, correctOrNot
     MissionUtils.Console.readLine(MESSAGES.ENTER_MOVING, inputUOrD => {
-      try {
-        (() => new MoveCheck(inputUOrD))(); // check valid input
-      } catch (error) {
-        MissionUtils.Console.print(error);
-        this.readMoving(gameRec);
-        return;
-      }
-      gameRec.inputUOrD = inputUOrD;
-      const bridgeGame = new BridgeGame();
-      bridgeGame.move(gameRec); // moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD
+      this.checkMovingInput(inputUOrD, gameRec);
+      // try {
+      //   (() => new MoveCheck(inputUOrD))(); // check valid input
+      // } catch (error) {
+      //   MissionUtils.Console.print(error);
+      //   this.readMoving(gameRec);
+      //   return;
+      // }
+
+      // gameRec.inputUOrD = inputUOrD;
+      // const bridgeGame = new BridgeGame();
+      // bridgeGame.move(gameRec); // moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD
     });
+  },
+
+  checkMovingInput(inputUOrD, gameRec) {
+    try {
+      (() => new MoveCheck(inputUOrD))(); // check valid input
+    } catch (error) {
+      MissionUtils.Console.print(error);
+      this.readMoving(gameRec);
+      return;
+    }
+    this.setMovingInfo(inputUOrD, gameRec);
+  },
+
+  setMovingInfo(inputUOrD, gameRec) {
+    gameRec.inputUOrD = inputUOrD;
+    const bridgeGame = new BridgeGame();
+    bridgeGame.move(gameRec); // moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD
   },
 
   /**
