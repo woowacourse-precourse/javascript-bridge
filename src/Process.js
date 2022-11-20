@@ -30,7 +30,7 @@ class Process {
 
     if (this.#game.isAccord(input)) {
       this.#game.move();
-      if (this.#game.isEnd()) OutputView.printResult();
+      if (this.#game.isEnd()) this.end(true);
       else InputView.readMoving(this);
     } else InputView.readGameCommand(this);
   }
@@ -52,14 +52,14 @@ class Process {
       InputView.readMoving(this);
     }
     if (input === 'Q') {
-      this.end();
+      this.end(false);
     }
   }
 
-  end() {
+  end(isSucced) {
     OutputView.printResultPhrase();
     this.printMap();
-    OutputView.printResult();
+    OutputView.printResult(isSucced, count);
     Console.close();
   }
 }
