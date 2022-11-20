@@ -7,7 +7,6 @@ const { generate } = require('../../BridgeRandomNumberGenerator');
 const BridgeMap = require('./BridgeMap');
 
 const BridgeModel = class extends GameModel {
-  #isSuccess;
   #tryCount = 1;
   #bridge;
   #position = 0;
@@ -28,7 +27,7 @@ const BridgeModel = class extends GameModel {
     this.#position += 1;
   }
 
-  getMovedResult() {
+  get getMovedResult() {
     const movedResult = new BridgeMap(
       this.#bridge,
       this.#position,
@@ -36,6 +35,13 @@ const BridgeModel = class extends GameModel {
     ).getBridgeMap();
 
     return movedResult;
+  }
+
+  getIsGameEnd(isGamePassed) {
+    const isGameFailed = !isGamePassed;
+    const isGameSuccess = this.#position === this.#bridge.length;
+
+    return isGameFailed || isGameSuccess;
   }
 
   validateUserInput(validateValueCallback) {
