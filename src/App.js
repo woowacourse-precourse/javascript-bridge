@@ -7,7 +7,12 @@ class App {
 
     InputView.readBridgeSize(size => {
       bridgeGame.makeBridge(size)
+      this.getUserMove()
     })
+  }
+
+  getUserMove() {
+    InputView.readMoving(move => {})
   }
 }
 
