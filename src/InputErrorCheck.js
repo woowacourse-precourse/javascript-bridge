@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 
 const inputErrorCheck = {
-  direction: (input) => {
+  way: (input) => {
     if (!(input === 'U' || input === 'D')) {
       Console.print('[ERROR] 이동할 칸은 U 또는 D만 공백없이 입력 가능합니다.');
       Console.close();

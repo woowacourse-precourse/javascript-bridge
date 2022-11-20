@@ -17,7 +17,7 @@ class BridgeGame {
   set(bridgeSize) {
     this.#gameStatus = {
       bridge: BridgeMaker.makeBridge(bridgeSize, generate),
-      currentPosition: 0,
+      crntPstn: 0,
       liveOrDie: true,
       numberOfChallenge: 1,
     };
@@ -28,46 +28,46 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(direction) {
+  move(way) {
     const gameStatusForReturn = { ...this.#gameStatus };
-    const { bridge, currentPosition } = this.#gameStatus;
-    this.#gameStatus.liveOrDie = direction === bridge[currentPosition];
+    const { bridge, crntPstn } = this.#gameStatus;
+    this.#gameStatus.liveOrDie = way === bridge[crntPstn];
     if (this.#gameStatus.liveOrDie) {
-      return this.nextStepDecider(bridge, currentPosition, gameStatusForReturn);
+      return this.nextStepDecider(bridge, crntPstn, gameStatusForReturn);
     }
     if (!this.#gameStatus.liveOrDie) return this.whetherRetryPackage();
   }
 
-  nextStepDecider(bridge, currentPosition, gameStatusForReturn) {
-    if (bridge.length - 1 === currentPosition) {
+  nextStepDecider(bridge, crntPstn, gameStatusForReturn) {
+    if (bridge.length - 1 === crntPstn) {
       return this.printResultPackage();
     }
-    if (bridge.length - 1 !== currentPosition) {
-      this.#gameStatus.currentPosition += 1;
+    if (bridge.length - 1 !== crntPstn) {
+      this.#gameStatus.crntPstn += 1;
       return this.printMapPackage(gameStatusForReturn);
     }
   }
 
   printResultPackage() {
     return {
-      nextInputView: null,
-      nextOutputView: this.#OUTPUT_MESSAGES.PRINT_RESULT,
+      nextInput: null,
+      nextOutput: this.#OUTPUT_MESSAGES.PRINT_RESULT,
       gameStatus: this.#gameStatus,
     };
   }
 
   printMapPackage(gameStatusForReturn) {
     return {
-      nextInputView: this.#OUTPUT_MESSAGES.READ_MOVING,
-      nextOutputView: this.#OUTPUT_MESSAGES.PRINT_MAP,
+      nextInput: this.#OUTPUT_MESSAGES.READ_MOVING,
+      nextOutput: this.#OUTPUT_MESSAGES.PRINT_MAP,
       gameStatus: gameStatusForReturn,
     };
   }
 
   whetherRetryPackage() {
     return {
-      nextInputView: this.#OUTPUT_MESSAGES.READ_GAME_COMMAND,
-      nextOutputView: null,
+      nextInput: this.#OUTPUT_MESSAGES.READ_GAME_COMMAND,
+      nextOutput: null,
     };
   }
 
@@ -78,7 +78,7 @@ class BridgeGame {
    */
   retry(doOrDie) {
     if (doOrDie === 'R') {
-      this.#gameStatus.currentPosition = 0;
+      this.#gameStatus.crntPstn = 0;
       this.#gameStatus.numberOfChallenge += 1;
       return this.retryPackage();
     }
@@ -89,15 +89,15 @@ class BridgeGame {
 
   retryPackage() {
     return {
-      nextInputView: this.#OUTPUT_MESSAGES.READ_MOVING,
-      nextOutputView: null,
+      nextInput: this.#OUTPUT_MESSAGES.READ_MOVING,
+      nextOutput: null,
     };
   }
 
   quitPackage() {
     return {
-      nextInputView: null,
-      nextOutputView: this.#OUTPUT_MESSAGES.PRINT_RESULT,
+      nextInput: null,
+      nextOutput: this.#OUTPUT_MESSAGES.PRINT_RESULT,
       gameStatus: this.#gameStatus,
     };
   }

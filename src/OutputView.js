@@ -20,16 +20,14 @@ const OutputView = {
     // InputView.readMoving();
   },
 
-  printPlayHistory({ bridge, currentPosition, liveOrDie }) {
+  printPlayHistory({ bridge, crntPstn, liveOrDie }) {
     const playHistory = [];
-    for (let step = 0; step <= currentPosition; step += 1) {
-      if (bridge[step] === 'U') playHistory.push(['O', ' ']);
-      if (bridge[step] === 'D') playHistory.push([' ', 'O']);
+    for (let step = 0; step <= crntPstn; step += 1) {
+      playHistory.push(bridge[step] === 'U' ? ['O', ' '] : [' ', 'O']);
     }
-    if (!liveOrDie)
-      playHistory[currentPosition] = this.replaceLastStepOtoX(
-        playHistory[currentPosition],
-      );
+    if (!liveOrDie) {
+      playHistory[crntPstn] = this.replaceLastStepOtoX(playHistory[crntPstn]);
+    }
     return playHistory;
   },
 
@@ -42,14 +40,14 @@ const OutputView = {
 
   printUpperHistory(playHistory) {
     const upperHistory = [];
-    playHistory.map((history) => {
+    playHistory.forEach((history) => {
       upperHistory.push(history[0]);
     });
     return `[ ${upperHistory.join(' | ')} ]`;
   },
   printLowerHistory(playHistory) {
     const lowerHistory = [];
-    playHistory.map((history) => {
+    playHistory.forEach((history) => {
       lowerHistory.push(history[1]);
     });
     return `[ ${lowerHistory.join(' | ')} ]`;

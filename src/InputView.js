@@ -16,7 +16,6 @@ const InputView = {
     Console.readLine('다리의 길이를 입력해주세요.\n', (bridgeSize) => {
       inputErrorCheck.bridgeSize(bridgeSize);
       bridgeGame.set(bridgeSize);
-      // this.gameStatus.bridge = BridgeMaker.makeBridge(bridgeSize, generate);
       this.readMoving();
     });
   },
@@ -25,16 +24,12 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine(
-      '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
-      (direction) => {
-        inputErrorCheck.direction(direction);
-        const { nextInputView, nextOutputView, gameStatus } =
-          bridgeGame.move(direction);
-        if (nextOutputView) OutputView[nextOutputView](gameStatus);
-        if (nextInputView) this[nextInputView]();
-      },
-    );
+    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (way) => {
+      inputErrorCheck.way(way);
+      const { nextInput, nextOutput, gameStatus } = bridgeGame.move(way);
+      if (nextOutput) OutputView[nextOutput](gameStatus);
+      if (nextInput) this[nextInput]();
+    });
   },
 
   /**
@@ -44,10 +39,9 @@ const InputView = {
     Console.readLine(
       '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
       (doOrDie) => {
-        const { nextInputView, nextOutputView, gameStatus } =
-          bridgeGame.retry(doOrDie);
-        if (nextInputView) this[nextInputView]();
-        if (nextOutputView) OutputView[nextOutputView](gameStatus);
+        const { nextInput, nextOutput, gameStatus } = bridgeGame.retry(doOrDie);
+        if (nextInput) this[nextInput]();
+        if (nextOutput) OutputView[nextOutput](gameStatus);
       },
     );
   },
