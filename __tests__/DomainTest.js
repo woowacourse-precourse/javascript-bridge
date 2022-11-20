@@ -2,6 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeGame = require('../src/Controllers/BridgeGame');
 const Model = require('../src/Models/Model');
 const InputView = require('../src/Views/InputView');
+const BridgeMaker = require('../src/BridgeMaker');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -24,4 +25,13 @@ describe('1. 다리 생성하기', () => {
       expect(() => bridgeGame.getBridgeSize()).toThrow('[ERROR]');
     },
   );
+  test('다리 생성 테스트', () => {
+    const randomNumbers = ['1', '0', '0'];
+    // eslint-disable-next-line arrow-body-style
+    const mockGenerator = randomNumbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, jest.fn());
+    const bridge = BridgeMaker.makeBridge(3, mockGenerator);
+    expect(bridge).toEqual(['U', 'D', 'D']);
+  });
 });

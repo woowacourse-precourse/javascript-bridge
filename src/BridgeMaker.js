@@ -1,5 +1,3 @@
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -12,7 +10,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size })
       .map(generateRandomNumber)
-      .map((isUpNum) => (isUpNum ? 'U' : 'D'));
+      .map((isUpNum) => (+isUpNum ? 'U' : 'D'));
   },
 };
 
