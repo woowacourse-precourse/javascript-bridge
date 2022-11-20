@@ -1,6 +1,6 @@
 const Io = require('./utils/io');
 const { INPUT } = require('./constants/views');
-const { isVaildSize, isVaildMovingChar } = require('./utils/validator');
+const { Validator } = require('./utils/validator');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -11,7 +11,7 @@ const InputView = {
    */
   readBridgeSize(callback) {
     return Io.input(INPUT.BRIDGE_SIZE, (size) => {
-      isVaildSize(size);
+      Validator.isVaildSize(size);
       callback(size);
     });
   },
@@ -21,7 +21,7 @@ const InputView = {
    */
   readMoving(callback) {
     return Io.input(INPUT.EITHER_UP_OR_DOWN, (char) => {
-      isVaildMovingChar(char);
+      Validator.isVaildMovingChar(char);
       callback(char);
     });
   },
