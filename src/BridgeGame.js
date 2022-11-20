@@ -33,7 +33,7 @@ class BridgeGame {
     if (this.#history.length === 0) {
       return true;
     }
-    return this.#history.at(-1).crossable;
+    return this.#history.slice(-1)[0].crossable;
   }
 
   getPaths() {
@@ -41,7 +41,7 @@ class BridgeGame {
       if (paths.length === 0) {
         return [cur];
       }
-      if (paths.at(-1).location - 1 === cur.location) {
+      if (paths.slice(-1)[0].location - 1 === cur.location) {
         return [...paths, cur];
       }
       return [...paths];
@@ -62,7 +62,7 @@ class BridgeGame {
   }
 
   isEnd() {
-    return this.#bridges.length - 1 === this.#history.at(-1).location;
+    return this.#bridges.length - 1 === this.#history.slice(-1)[0].location;
   }
 
   getTrials() {
