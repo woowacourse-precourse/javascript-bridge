@@ -2,11 +2,11 @@ const { USER_MOVE_MESSAGES } = require("../constants/Messages");
 
 class UserModel {
   #tryCount;
-  #userMove;
+  #userMoving;
 
   constructor() {
     this.#tryCount = 0;
-    this.#userMove = [];
+    this.#userMoving = [];
   }
 
   /**
@@ -26,21 +26,21 @@ class UserModel {
    * 유저가 이동한 경로를 반환한다.
    * @return {string[]} [유저 이동 경로]
    */
-  getUserMove() {
-    return this.#userMove;
+  getUserMoving() {
+    return this.#userMoving;
   }
 
   /**
    * 유저가 이동한 칸을 userMove 배열에 추가한다.
    * @param userMove  {string} [유저가 이동한 칸]
    */
-  appendUserMove(userMove) {
-    this.#userMove.push(userMove);
+  appendUserMoving(userMove) {
+    this.#userMoving.push(userMove);
   }
 
   // 유저 이동경로를 초기화한다.
-  resetUserMove() {
-    this.#userMove = [];
+  resetUserMoving() {
+    this.#userMoving = [];
   }
 
   /**
