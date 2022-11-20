@@ -10,6 +10,7 @@ class BridgeGame {
 
   constructor(bridge) {
     this.#bridge = bridge;
+    console.log(this.#bridge);
     this.#curPlace = 0;
     this.#numberOfAttempts = 1;
     this.#bridgeMap = new BridgeMap();

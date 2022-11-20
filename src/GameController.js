@@ -3,7 +3,6 @@ const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./views/OutputView');
-const InputView = require('./views/InputView');
 const { MESSAGE } = require('./constant');
 
 class GameController {
@@ -11,7 +10,6 @@ class GameController {
 
   gameStart() {
     OutputView.printMessage(MESSAGE.START_NOTIFICATION);
-    this.askBridgeSize();
   }
 
   handleSize(size) {
@@ -29,37 +27,23 @@ class GameController {
 
   doseUserWin() {
     const userWin = this.#bridgeGame.gameComplete();
-    const gameResult = this.#bridgeGame.gameResult(userWin);
 
-    userWin ? this.gameOver(gameResult) : this.askDirection();
-  }
-
-  askRetry() {
-    InputView.readGameCommand((command) => {
-      try {
-        this.handleCommand(command);
-      } catch ({ message }) {
-        OutputView.printMessage(message);
-        this.askRetry();
-      }
-    });
+    return userWin;
   }
 
   handleCommand(command) {
     const shouldRetry = this.#bridgeGame.retry(command);
-    const gameResult = this.#bridgeGame.gameResult();
 
-    shouldRetry ? this.retry() : this.gameOver(gameResult);
+    return shouldRetry;
   }
 
   retry() {
     this.#bridgeGame.increaseNumberOfAttempts();
     this.#bridgeGame.initPlayData();
-
-    this.askDirection();
   }
 
-  gameOver(gameResult) {
+  gameOver(userWin = false) {
+    const gameResult = this.#bridgeGame.gameResult(userWin);
     OutputView.printResult(gameResult);
     Console.close();
   }

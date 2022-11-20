@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const {
   COMMAND,
   EXCEPTION_MESSAGE,
