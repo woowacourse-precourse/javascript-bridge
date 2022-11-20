@@ -1,4 +1,5 @@
 const BridgeMap = require('./BridgeMap');
+const { ERROR } = require('./Constants');
 const { readGameCommand, readMoving } = require('./InputView');
 const { printResult, printMap, printError } = require('./OutputView');
 const {
@@ -43,7 +44,7 @@ class BridgeGame {
   getUserCommand() {
     readGameCommand((command) => {
       if (!isRightUserCommand(command)) {
-        printError('R과 Q만 입력해 주세요.');
+        printError(ERROR.gameCommandException);
         return this.getUserCommand();
       }
       if (command === 'R') return this.retry();
@@ -72,7 +73,7 @@ class BridgeGame {
   getUserMove() {
     readMoving((step) => {
       if (!isRightUserMove(step)) {
-        printError('U와 D만 입력해 주세요.');
+        printError(ERROR.movingException);
         return this.getUserMove();
       }
 

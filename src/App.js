@@ -1,6 +1,7 @@
 const BridgeGame = require('./BridgeGame');
 const { makeBridge } = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { ERROR } = require('./Constants');
 const { readBridgeSize } = require('./InputView');
 const { printError } = require('./OutputView');
 const { isPositiveInteger } = require('./Validation');
@@ -16,7 +17,7 @@ class App {
     readBridgeSize((size) => {
       const sizeInput = Number(size);
       if (!isPositiveInteger(sizeInput)) {
-        printError('양의 정수를 입력해 주세요.');
+        printError(ERROR.bridgeSizeException);
         return this.play();
       }
       return this.#setBridgeGame(sizeInput);
