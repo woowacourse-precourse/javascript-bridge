@@ -36,10 +36,10 @@ const InputView = {
         const bridgeGame = new BridgeGame();
         const checkContinue = bridgeGame.move(moving, bridge, moveList);
         if (checkContinue[0].includes("X") || checkContinue[1].includes("X")) {
-          this.readGameCommand(bridge, attempt);
+          this.readGameCommand(bridge, attempt, moveList);
         }
         if (bridge.length === checkContinue[0].length) {
-          return OutputView.printResult("성공", attempt);
+          return OutputView.printResult("성공", attempt, moveList);
         }
         this.readMoving(bridge, checkContinue, attempt);
       }
@@ -49,7 +49,7 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge, attempt) {
+  readGameCommand(bridge, attempt, moveList) {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (command) => {
@@ -63,7 +63,7 @@ const InputView = {
         }
         if (command === "Q") {
           //종료 커맨드\\\
-          OutputView.printResult("실패", attempt);
+          OutputView.printResult("실패", attempt, moveList);
         }
       }
     );
