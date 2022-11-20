@@ -63,14 +63,20 @@ const InputView = {
   },
   isGameEnd() {// 문제1. 에러가 나는 다른 문자가 들어가도 배열에 포함되니 끝나버림. 문제2. X가 들어갔을때 안끝남. 걍 메서드 다 분리하자
     const size = Number(Controller.size);
-    if (OutputView.nowArray.includes(SIGN.fail)) {
+    MissionUtils.Console.print(OutputView.nowArray)
+    if (OutputView.nowArray[0].includes(SIGN.fail) || OutputView.nowArray[1].includes(SIGN.fail)) {
       return this.readGameCommand();
     }
-    if (Controller.round === size && !OutputView.nowArray.includes(SIGN.fail)) {
+    if (Controller.playerArr.length === size) {
       Controller.checkSuccess();
       OutputView.printResult(Controller.tryCount, Controller.gameResult);
     }
     this.readMoving(); // 성공했을 때 다시 UD입력 안물어보게 해결해야함
+  },
+  backToReadMoving(){
+    if(Controller.backToReadMoving){
+      this.readMoving()
+    }
   },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

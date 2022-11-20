@@ -29,15 +29,14 @@ class BridgeGame {
    */
 
   move(block, completeBridge) {
-    MissionUtils.Console.print(completeBridge)
+    MissionUtils.Console.print(completeBridge);
     Controller.conveyInput(block);
     const currentRound = Controller.round - 1;
     if (Controller.playerArr[currentRound] === completeBridge[currentRound]) {
-      // Controller.checkMovetrue();
-      Controller.successMove(block)
+      Controller.successMove(block);
     }
     if (Controller.playerArr[currentRound] !== completeBridge[currentRound]) {
-      Controller.failMove(block)
+      Controller.failMove(block);
     }
   }
 

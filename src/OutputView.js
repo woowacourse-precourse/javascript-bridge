@@ -21,8 +21,8 @@ const OutputView = {
    */
 
   printMap(arrayState) {
-    this.nowArray.push(arrayState[0][0]);
-    this.nowArray.push(arrayState[1][0]);
+    this.nowArray.push(arrayState[0]);
+    this.nowArray.push(arrayState[1]);
     const upSide = arrayState[0].join(" | ");
     const upSideResult = `[ ${upSide} ]`;
     const downSide = arrayState[1].join(" | ");
