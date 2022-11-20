@@ -23,7 +23,15 @@ const BridgeGameService = class {
     this.#inputView.readBridgeSize(callback);
   }
 
-  retryGame() {}
+  retryGame(processRetryTask) {
+    const callback = (attempt) => {
+      this.#bridgeGameModel.checkRetry(attempt);
+      this.#bridgeGameModel.attempt(attempt);
+      processRetryTask();
+    };
+
+    this.#inputView.readGameCommand(callback);
+  }
 
   endGame() {}
 
