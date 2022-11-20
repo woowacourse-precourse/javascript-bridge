@@ -11,9 +11,12 @@ class BridgeGame {
 
   #positionLog;
 
+  #bridgeLog;
+
   constructor() {
     this.#userPosition = null;
     this.#positionLog = new Map();
+    this.#bridgeLog = new Map();
   }
 
   static replaceString(numberValue) {
@@ -46,7 +49,7 @@ class BridgeGame {
     return isIncludeRandQ(userInput);
   }
 
-  static createEmptyUDArray(Length = 0) {
+  static createEmptyUDArray(Length = 1) {
     const EMPTY = ' ';
     const createEmptyArray = () => Application.createArray(Length, () => EMPTY);
     const emptyUArray = createEmptyArray();
@@ -161,6 +164,17 @@ class BridgeGame {
 
   getPositionLog() {
     return [...this.#positionLog.values()];
+  }
+
+  setBridgeLog(positionLog) {
+    this.checkBeforeStart();
+    const emptyArray = BridgeGame.createEmptyUDArray();
+    const [[TOP_BOTTOM_INDEX, USER_POSITION], BRIDGE_REUSLT] = positionLog;
+    emptyArray[TOP_BOTTOM_INDEX] = [BRIDGE_REUSLT];
+
+    this.#bridgeLog.set(USER_POSITION, emptyArray);
+
+    return emptyArray;
   }
 }
 
