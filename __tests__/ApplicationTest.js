@@ -303,3 +303,53 @@ describe('다리 건너기 결과 출력 테스트 (재시작X)', () => {
     expectBridgeOrder(log, '[   |   | O |   | X ]', '[ O | O |   | O |   ]');
   });
 });
+
+describe('재시작/종료 입력 예외 테스트', () => {
+  test('입력이 공백인 경우', () => {
+    expect(() => {
+      InputView.hanldeWrongCommandException('', null);
+    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
+  });
+
+  test('입력이 공백 한칸인 경우', () => {
+    expect(() => {
+      InputView.hanldeWrongCommandException(' ');
+    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
+  });
+
+  test('입력이 줄바꿈인 경우', () => {
+    expect(() => {
+      InputView.hanldeWrongCommandException('\n');
+    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
+  });
+
+  test('입력에 공백이 있는 경우', () => {
+    expect(() => {
+      InputView.hanldeWrongCommandException(' R');
+    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
+  });
+
+  test('입력이 숫자인 경우', () => {
+    expect(() => {
+      InputView.hanldeWrongCommandException('3');
+    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
+  });
+
+  test('입력이 R 또는 Q가 아닌 문자인 경우', () => {
+    expect(() => {
+      InputView.hanldeWrongCommandException('U');
+    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
+  });
+
+  test('입력이 소문자 r인 경우', () => {
+    expect(() => {
+      InputView.hanldeWrongCommandException('r');
+    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
+  });
+
+  test('입력이 소문자 q인 경우', () => {
+    expect(() => {
+      InputView.hanldeWrongCommandException('q');
+    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
+  });
+});
