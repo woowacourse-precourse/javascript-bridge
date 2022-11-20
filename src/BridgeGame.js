@@ -1,4 +1,7 @@
 const OutputView = require('./OutputView');
+const InputView = require('./InputView');
+const BridgeMaker = require('./BridgeMaker');
+const BridgeNumber = require('./BridgeRandomNumberGenerator');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -6,6 +9,7 @@ const OutputView = require('./OutputView');
 class BridgeGame {
   #turn;
   #try = 0;
+  #bridge;
   #upperBridge;
   #lowerBridge;
 
@@ -15,15 +19,24 @@ class BridgeGame {
     this.#lowerBridge = [];
   }
 
+  enterBridgeLength() {
+    const bridgeLength = (input) => {
+      this.#bridge = BridgeMaker.makeBridge(input, BridgeNumber);
+      this.enterMoving();
+    };
+
+    InputView.readBridgeSize('다리의 길이를 입력해주세요.\n', bridgeLength);
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(input, bridge) {
+  move(input) {
     const GO = 'O';
     const STOP = 'X';
-    const crossable = bridge[this.#turn];
+    const crossable = this.#bridge[this.#turn];
     this.#turn += 1;
     if (input === crossable) {
       this.isFirst(GO, input);
