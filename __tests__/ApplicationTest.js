@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const App = require("../src/App");
+const App = require("../src/classes/App");
 const BridgeMaker = require("../src/BridgeMaker");
 
 const mockQuestions = (answers) => {
@@ -85,3 +85,7 @@ describe("다리 건너기 테스트", () => {
     runException(["a"]);
   });
 });
+
+//게임 시작 메시지 출력테스트 추가
+// OX 결과 틀리면 에러처리
+// 입력결과와  [ ].. 형태가 다르면 에러처리

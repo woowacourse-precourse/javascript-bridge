@@ -10,14 +10,23 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap() {
+    //GameLogic에서 history 불러서 O 일 경우 표시로직
+    //history upper나 lower 개수가 하나면 [ ] 로 표시
+    //아닐 경우 계속 [ | ] ... 추가됨
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult() {
+    //terminate array에서 data 받아서 출력 라이브러리 적용
+  },
+  printMessage() {
+    //validation 결과에 따라 메시지 띄움
+  },
 };
 
 module.exports = OutputView;
