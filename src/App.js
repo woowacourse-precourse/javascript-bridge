@@ -13,8 +13,13 @@ class App {
   #myBridgeLength;
 
   play() {
-    OutputView.gameStart();
-    this.getBridgeLength();
+    try {
+      OutputView.gameStart();
+      this.getBridgeLength();
+    } catch (err) {
+      OutputView.unExceptedError();
+      return this.play();
+    }
   }
 
   getBridgeLength() {

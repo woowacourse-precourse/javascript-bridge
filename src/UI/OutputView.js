@@ -47,6 +47,10 @@ const OutputView = {
   quitInputError() {
     Console.print(ERROR_MESSAGE.INVALID_QUIT + '\n');
   },
+
+  unExceptedError() {
+    Console.print(ERROR_MESSAGE.UNEXCEPTED_ERROR + '\n');
+  },
 };
 
 module.exports = OutputView;

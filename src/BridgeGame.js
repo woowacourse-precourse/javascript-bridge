@@ -1,4 +1,4 @@
-const { Console } = require('@woowacourse/mission-utils');
+const { ERROR_MESSAGE } = require('./constants/constants');
 const bridgeMaterialize = require('./utils/bridgeMaterialize');
 
 /**
@@ -30,7 +30,7 @@ class BridgeGame {
       this.#nowState += 1;
       return true;
     }
-    return false;
+    if (this.#myBridge[this.#nowState] !== input) return false;
   }
 
   retry(input) {
@@ -41,6 +41,7 @@ class BridgeGame {
       return true;
     }
     if (input === 'Q') return false;
+    throw new Error(ERROR_MESSAGE.UNEXCEPTED_ERROR);
   }
 
   printMyBridge(printMap) {
