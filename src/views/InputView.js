@@ -15,12 +15,13 @@ const InputView = {
    * @param {function()} readMoving 사용자가 이동할 칸을 입력받는 함수
    */
   readBridgeSize(game, readMoving) {
-    Console.readLine(MESSAGES.READ_BRIDGE_SIZE, (res) => {
+    const readBridgeSizeCallback = (res) => {
       if (validateBridgeSizeInput(res)) {
         let bridge = makeBridge(res, generate);
         return readMoving(game, bridge);
       }
-    });
+    };
+    Console.readLine(MESSAGES.READ_BRIDGE_SIZE, readBridgeSizeCallback);
   },
 
   /**
