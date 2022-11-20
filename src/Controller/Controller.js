@@ -1,7 +1,7 @@
 const BridgeGame = require("../Models/BridgeGame");
-const BridgeSize = require("../utils/validator/BridgeSize");
-const MoveSpace = require("../utils/validator/MoveSpace");
-const GameCommand = require("../utils/validator/GAMECOMMAND");
+const BridgeSize = require("./validator/BridgeSize");
+const MoveSpace = require("./validator/MoveSpace");
+const GameCommand = require("./validator/GAMECOMMAND");
 const OutputView = require("../View/OutputView");
 const InputView = require("../View/InputView");
 const { RESULT } = require("../utils/constants");

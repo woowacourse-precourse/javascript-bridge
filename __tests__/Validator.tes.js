@@ -21,7 +21,7 @@ describe("예외 처리 테스트", () => {
   });
 
   test.each([["G"], ["0"], ["u"], ["d"], ["NaN"], ["undefined"]])(
-    "이동 방향 입력 예외처리",
+    "이동 방향 입력 예외 처리",
     (input) => {
       const moveSpace = new MoveSpace(input);
       const errorTest = () => moveSpace.checkInput();
@@ -36,7 +36,7 @@ describe("예외 처리 테스트", () => {
   });
 
   test.each([["r"], ["0"], ["1"], ["q"], ["NaN"], ["undefined"]])(
-    "게임 재시작 입력 예외처리",
+    "게임 재시작 입력 예외 처리",
     (input) => {
       const gameCommand = new GameCommand(input);
       const errorTest = () => gameCommand.checkInput();
