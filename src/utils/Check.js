@@ -1,14 +1,18 @@
+const { ABOUT } = require("../constants/Message");
 /**
  * 객체
  * 유효성 체크 기능
  * 코드 짜다가 검증 필요없는 validation 삭제하기
  */
 
-const Validation = {
-  bridgeLength() {
-    //다리 길이 :
-    // 타입: 숫자
-    // 범위: 3~20
+const Check = {
+  bridgeLength(value) {
+    if (isNaN(value)) {
+      throw new Error(ABOUT.TYPE_NUMBER);
+    }
+    if (value < 3 || value > 20) {
+      throw new Error(ABOUT.NUMBER_RANGE);
+    }
   },
   bridgeFormat() {},
   // ?
@@ -22,4 +26,4 @@ const Validation = {
   },
 };
 
-module.exports = Validation;
+module.exports = Check;

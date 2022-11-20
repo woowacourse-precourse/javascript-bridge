@@ -1,3 +1,7 @@
+const { Console } = require("@woowacourse/mission-utils");
+const { ASKS } = require("./constants/Message");
+const Check = require("./utils/Check");
+
 /**
  * 객체
  * 사용자로부터 입력을 받는 역할을 한다. : Console.readLine() -> 이 클래스에서만 사용 가능
@@ -6,10 +10,14 @@
  */
 
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  readBridgeSize() {
+    Console.readLine(ASKS.BRIDGE_SIZE, (size) => {
+      const resolved = Number(size);
+      Check.bridgeLength(resolved);
+      Console.print(size);
+      return size;
+    });
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.

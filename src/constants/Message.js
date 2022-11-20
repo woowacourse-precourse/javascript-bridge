@@ -10,8 +10,9 @@ const ASKS = Object.freeze({
   AGAIN: "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
 });
 
-const THROWS = Object.freeze({
-  TYPE_NUMBER: "[ERROR] 타입이 넘버가 아님",
+const ABOUT = Object.freeze({
+  TYPE_NUMBER: "[ERROR] 입력 타입은 숫자여야 합니다.",
+  NUMBER_RANGE: "[ERROR] 입력 숫자 범위는 3 ~ 20이어야 합니다.",
 });
 
-module.exports = { SAYS, ASKS, THROWS };
+module.exports = { SAYS, ASKS, ABOUT };

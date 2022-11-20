@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { SAYS } = require("./constants/Message");
+const GameLogic = require("./utils/GameLogic");
 
 /**
  * 객체
@@ -13,6 +14,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  printEntry(entry) {
+    // Console.print(entry);
+    console.log(entry);
+  },
+
   printMap() {
     //GameLogic에서 history 불러서 O 일 경우 표시로직
     //history upper나 lower 개수가 하나면 [ ] 로 표시
@@ -31,10 +37,12 @@ const OutputView = {
   printMessage(context) {
     if (context === "start") {
       Console.print(SAYS.START);
-      //다리 길이 입력 로직 넣기: INPUTVIEW
     }
 
     //validation 결과에 따라 메시지 띄움
+  },
+  test() {
+    console.log("7");
   },
 };
 

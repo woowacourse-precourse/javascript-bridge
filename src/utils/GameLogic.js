@@ -1,3 +1,6 @@
+const InputView = require("../InputView");
+const OutputView = require("../OutputView");
+
 /**
  * 객체
  * 게임 핵심 로직

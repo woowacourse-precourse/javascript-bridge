@@ -1,3 +1,4 @@
+const InputView = require("../InputView");
 const OutputView = require("../OutputView");
 
 class App {
@@ -11,6 +12,7 @@ class App {
     //move부터 다시시작.
 
     OutputView.printMessage("start");
+    const bridgeSize = InputView.readBridgeSize();
   }
 }
 
