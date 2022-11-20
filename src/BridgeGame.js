@@ -1,55 +1,52 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const { BRIDGE_MOVEMENT } = require("./constants");
+const { MOVEMENT } = require('./constants');
 
 class BridgeGame {
   #bridge;
-
   #bridgeAttempt;
-
-  #gameSuccess;
-
+  #isSuccess;
   #gameCount;
-
   #upSide = [];
-
   #downSide = [];
 
   constructor() {
     this.#bridgeAttempt = 0;
     this.#gameCount = 1;
-    this.isSuccess = false;
   }
 
   setBridge(bridge) {
     this.#bridge = bridge;
   }
 
-  moveUpside() {
+  #setUpside() {
     this.#upSide.push(1);
     this.#downSide.push(0);
   }
 
-  moveDownSide() {
+  #setDownSide() {
     this.#downSide.push(1);
     this.#upSide.push(0);
   }
 
   #setGameStatus(moving) {
-    this.#gameSuccess = moving == this.#bridge[this.#bridgeAttempt - 1];
+    this.#isSuccess = moving === this.#bridge[this.#bridgeAttempt - 1];
+  }
+
+  #setAttempt() {
+    this.#bridgeAttempt += 1;
   }
 
   move(moving) {
-    moving == BRIDGE_MOVEMENT.UP ? this.moveUpside() : this.moveDownSide();
-    this.#bridgeAttempt += 1;
+    this.#setAttempt();
     this.#setGameStatus(moving);
-
-    return [this.#gameSuccess, this.#upSide, this.#downSide];
+    moving === MOVEMENT.UP ? this.#setUpside() : this.#setDownSide();
+    return [this.#isSuccess, this.#upSide, this.#downSide];
   }
 
   isEnd() {
-    return this.#bridge.length == this.#bridgeAttempt;
+    return this.#bridge.length === this.#bridgeAttempt;
   }
 
   /**
@@ -65,10 +62,11 @@ class BridgeGame {
   }
 
   quit() {
-    const isSuccess = this.#bridge.length == this.#bridgeAttempt;
-    const gameCount = this.#gameCount
-    const move = [this.#gameSuccess, this.#upSide, this.#downSide];
-    return { move, isSuccess, gameCount };
+    return [
+      [this.#isSuccess, this.#upSide, this.#downSide],
+      this.#isSuccess,
+      this.#gameCount,
+    ];
   }
 }
 
