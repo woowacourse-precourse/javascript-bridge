@@ -2,8 +2,8 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const InputView = require('./View/InputView');
+const OutputView = require('./View/OutputView');
 const Validation = require('./Validation');
 
 class App {
@@ -12,7 +12,7 @@ class App {
   }
 
   play() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
+    OutputView.printStartMessage();
 
     this.requestBridgeSize();
   }
@@ -21,7 +21,7 @@ class App {
     InputView.readBridgeSize((size) => {
       const { errorMsg } = Validation.checkBridgeSize(size);
       if (errorMsg) {
-        Console.print(errorMsg);
+        OutputView.printErrorMessage(errorMsg);
         return this.requestBridgeSize();
       }
 
@@ -36,7 +36,7 @@ class App {
     InputView.readMoving((direction) => {
       const { errorMsg } = Validation.checkDirection(direction);
       if (errorMsg) {
-        Console.print(errorMsg);
+        OutputView.printErrorMessage(errorMsg);
         return this.requestDirection();
       }
 
@@ -55,7 +55,7 @@ class App {
     InputView.readGameCommand((commandOption) => {
       const { errorMsg } = Validation.checkCommandOption(commandOption);
       if (errorMsg) {
-        Console.print(errorMsg);
+        OutputView.printErrorMessage(errorMsg);
         return this.requestRestartOrQuit();
       }
 
@@ -71,8 +71,7 @@ class App {
   }
 
   quit() {
-    const isFail = this.bridgeGame.isFail();
-    Console.print(`${!isFail ? '\n' : ''}최종 게임 결과`);
+    OutputView.printEndMessage(this.bridgeGame.isFail());
     OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
     OutputView.printResult(this.bridgeGame.getResult());
     Console.close();

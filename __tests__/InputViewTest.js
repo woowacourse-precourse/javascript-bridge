@@ -1,6 +1,6 @@
 const { describe, expect, test } = require('@jest/globals');
-const InputView = require('../src/InputView');
 const { Console } = require('@woowacourse/mission-utils');
+const InputView = require('../src/View/InputView');
 
 const readLineSpy = jest.spyOn(Console, 'readLine');
 

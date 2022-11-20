@@ -236,6 +236,7 @@ const number = generateRandomNumber();
 ### 8️⃣ 리펙터링
 
 - [ ] refactor: 객체(또는 클래스) 분리하기
+  - UI를 담당하는 로직은 View 폴더 내에서 관리한다.
 - [ ] refactor: 변수명, 함수명 수정하기
 - [ ] refactor: 매직 넘버 상수화하기
 - [ ] refactor: 함수(또는 메서드)가 한 가지의 일만 하도록 하기

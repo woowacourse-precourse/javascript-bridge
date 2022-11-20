@@ -4,7 +4,7 @@ const App = require('../src/App');
 const BridgeGame = require('../src/BridgeGame');
 const BridgeMaker = require('../src/BridgeMaker');
 const { generate } = require('../src/BridgeRandomNumberGenerator');
-const OutputView = require('../src/OutputView');
+const OutputView = require('../src/View/OutputView');
 const Validation = require('../src/Validation');
 
 const app = new App();
