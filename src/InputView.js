@@ -52,13 +52,9 @@ const InputView = {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
       (retryInput) => {
-        try {
-          validateRetryInput(retryInput);
-        } catch (error) {
-          Console.print(error);
-          InputView.readGameCommand(mainBridge, bridgeGame);
-          return;
-        }
+        validateRetryInputCatch(retryInput)
+          ? InputView.readGameCommand(mainBridge, bridgeGame)
+          : null;
 
         if (retryInput === "R") {
           bridgeGame.init();
