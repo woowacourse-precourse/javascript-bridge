@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker = require("./BridgeMaker");
-const BridgeGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -13,13 +13,21 @@ const InputView = {
       "다리의 길이를 입력해주세요.",
       (bridgeSizeInput) => {
         this.validBridgeSize(bridgeSizeInput);
-        BridgeMaker.makeBridge(bridgeSizeInput, BridgeGenerator.generate);
+        BridgeMaker.makeBridge(
+          bridgeSizeInput,
+          BridgeRandomNumberGenerator.generate
+        );
       }
     );
   },
 
   validBridgeSize(bridgeSize) {
-    // 예외 처리
+    if (isNaN(bridgeSize)) {
+      throw new Error("[ERROR] 숫자만 입력 가능합니다.");
+    }
+    if (bridgeSize < 3 || bridgeSize > 20) {
+      throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+    }
   },
 
   /**
