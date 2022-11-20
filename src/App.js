@@ -7,6 +7,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const validateBridgeSize = require("./validation/validateBridgeSize");
 const validateMoveUpOrDownAnswer = require("./validation/validateMoveUpOrDownAnswer");
 const validateRetryCommand = require("./validation/validateRetryCommand");
+const BRIDGE = require("./constant/constants");
 
 class App {
   #bridge;
@@ -76,13 +77,13 @@ class App {
       InputView.readGameCommand(this.handleRetry.bind(this));
     }
 
-    if (answer === "R") {
+    if (answer === BRIDGE.KEYWORDS.RETRY) {
       this.tryTimes++;
       this.BridgeGame.retry();
       InputView.readMoving(this.requestMoveUpOrDown.bind(this));
     }
 
-    if (answer === "Q") {
+    if (answer === BRIDGE.KEYWORDS.QUIT) {
       OutputView.printGameResult(answer, this.tryTimes);
       this.shutDown();
     }

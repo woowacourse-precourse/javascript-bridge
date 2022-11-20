@@ -1,3 +1,4 @@
+const BRIDGE = require("../constant/constants");
 const MESSAGE = require("../constant/message");
 
 const validateMoveUpOrDownAnswer = (answer) => {
@@ -5,7 +6,7 @@ const validateMoveUpOrDownAnswer = (answer) => {
 };
 
 const isValidAnswer = (answer) => {
-  return answer === "U" || answer === "D";
+  return answer === BRIDGE.KEYWORDS.UP || answer === BRIDGE.KEYWORDS.DOWN;
 };
 
 module.exports = validateMoveUpOrDownAnswer;

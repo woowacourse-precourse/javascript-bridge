@@ -1,3 +1,4 @@
+const BRIDGE = require("../constant/constants");
 const MESSAGE = require("../constant/message");
 
 const validateRetryCommand = (answer) => {
@@ -5,7 +6,7 @@ const validateRetryCommand = (answer) => {
 };
 
 const isValidAnswer = (answer) => {
-  return answer === "R" || answer === "Q";
+  return answer === BRIDGE.KEYWORDS.RETRY || answer === BRIDGE.KEYWORDS.QUIT;
 };
 
 module.exports = validateRetryCommand;

@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const BRIDGE = require("./constant/constants");
 const MESSAGE = require("./constant/message");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -20,25 +21,25 @@ const OutputView = {
   },
 
   createUpBridgeTemplate(position, bridge, answer) {
-    const upBridge = bridge.slice(0, position).map((cell) => (cell === "U" ? "O" : " "));
+    const upBridge = bridge.slice(0, position).map((cell) => (cell === BRIDGE.KEYWORDS.UP ? "O" : " "));
 
-    if (bridge[position] === "U" && answer === "U") upBridge.push("O");
+    if (bridge[position] === BRIDGE.KEYWORDS.UP && answer === BRIDGE.KEYWORDS.UP) upBridge.push("O");
 
-    if (bridge[position] !== "U" && answer === "U") upBridge.push("X");
+    if (bridge[position] !== BRIDGE.KEYWORDS.UP && answer === BRIDGE.KEYWORDS.UP) upBridge.push("X");
 
-    if (answer !== "U") upBridge.push(" ");
+    if (answer !== BRIDGE.KEYWORDS.UP) upBridge.push(" ");
 
     return `[ ${upBridge.join(" | ")} ]`;
   },
 
   createDownBridgeTemplate(position, bridge, answer) {
-    const downBridge = bridge.slice(0, position).map((cell) => (cell === "D" ? "O" : " "));
+    const downBridge = bridge.slice(0, position).map((cell) => (cell === BRIDGE.KEYWORDS.DOWN ? "O" : " "));
 
-    if (bridge[position] === "D" && answer === "D") downBridge.push("O");
+    if (bridge[position] === BRIDGE.KEYWORDS.DOWN && answer === BRIDGE.KEYWORDS.DOWN) downBridge.push("O");
 
-    if (bridge[position] !== "D" && answer === "D") downBridge.push("X");
+    if (bridge[position] !== BRIDGE.KEYWORDS.DOWN && answer === BRIDGE.KEYWORDS.DOWN) downBridge.push("X");
 
-    if (answer !== "D") downBridge.push(" ");
+    if (answer !== BRIDGE.KEYWORDS.DOWN) downBridge.push(" ");
 
     return `[ ${downBridge.join(" | ")} ]`;
   },
@@ -67,7 +68,7 @@ const OutputView = {
   },
 
   printGameSuccessOrNot(answer) {
-    Console.print(answer === "Q" ? MESSAGE.GAME_FAIL : MESSAGE.GAME_SUCEESS);
+    Console.print(answer === BRIDGE.KEYWORDS.QUIT ? MESSAGE.GAME_FAIL : MESSAGE.GAME_SUCEESS);
   },
 };
 
