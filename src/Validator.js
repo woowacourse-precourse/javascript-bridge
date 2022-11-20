@@ -23,14 +23,16 @@ class Validator {
   }
 
   static checkStep (step) {
-    if (![GAME_CONSTANTS.upStair, GAME_CONSTANTS.downStair].includes(step)) {
+    if (![GAME_CONSTANTS.upStair, GAME_CONSTANTS.downStair]
+      .includes(step)) {
       throw new Error(ERROR_MESSAGE.checkStepCorrect);
     }
     return true;
   }
 
   static checkRetry (retry) {
-    if (![GAME_CONSTANTS.retryGame, GAME_CONSTANTS.quitGame].includes(retry)) {
+    if (![GAME_CONSTANTS.retryGame, GAME_CONSTANTS.quitGame]
+      .includes(retry)) {
       throw new Error(ERROR_MESSAGE.checkRetryCorrect);
     }
     return true;

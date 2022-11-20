@@ -53,31 +53,35 @@ class Bridge {
 
   #runRetry (retryGame, chooseRetry) {
     if (chooseRetry === GAME_CONSTANTS.quitGame) {
-      return OutputView.printResult(
-        GAME_CONSTANTS.resultFailure,
-        this.#bridgeMap.getHistory(),
-        this.#tryCount,
-      );
+      return this.#showResult(GAME_CONSTANTS.resultFailure);
     }
     this.#bridgeMap.initHistory();
     this.#tryCount += 1;
     this.askNextStep(retryGame);
   }
 
-  #moveMap (retryGame, chooseStep) {
+  #showResult (isSuccess) {
+    OutputView.printResult(
+      isSuccess,
+      this.#bridgeMap.getHistory(),
+      this.#tryCount,
+    );
+  }
+
+  #showMap (chooseStep) {
     OutputView.printMap(this.#bridgeMap
       .setHistoryWithChooseStep(chooseStep)
       .getHistory());
+  }
+
+  #moveMap (retryGame, chooseStep) {
+    this.#showMap(chooseStep);
     if (!this.#bridgeMap.checkPath(chooseStep)) {
       return retryGame();
     }
     this.#bridgeMap.incrementDistance();
     if (this.#bridgeMap.isEndGame()) {
-      return OutputView.printResult(
-        GAME_CONSTANTS.resultSuccess,
-        this.#bridgeMap.getHistory(),
-        this.#tryCount,
-      );
+      return this.#showResult(GAME_CONSTANTS.resultSuccess);
     }
     this.askNextStep(retryGame);
   }
