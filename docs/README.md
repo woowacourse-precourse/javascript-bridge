@@ -245,7 +245,9 @@ const number = generateRandomNumber();
   - 특정 기능을 지닌 객체 또는 로직은 libs 폴더 내에서 관리한다.
   - 상태 데이터가 변하는 객체(또는 클래스)는 Model 폴더 내에서 관리한다.
 - [ ] refactor: 변수명, 함수명 수정하기
-- [ ] refactor: 매직 넘버 상수화하기
+- [x] refactor: 매직 넘버 상수화하기
+  - libs/Constant.js 에서 매직 넘버를 상수화한다.
+  - 해당 파일에서 생성된 객체는 MESSAGE, ERROR_MESSAGE, BRIDGE_SIZE, DIRECTION, COMMAND_OPTION, CROSSING_RESULT이고 UP_NUMBER는 상수이다.
 - [ ] refactor: 함수(또는 메서드)가 한 가지의 일만 하도록 하기
   - 에러가 발생하였을 때 실행되는 함수를 분리한다.
   - BridgeGame를 생성하는 함수를 만들어 분리한다.

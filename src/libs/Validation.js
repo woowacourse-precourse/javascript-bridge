@@ -1,32 +1,38 @@
+const {
+  ERROR_MESSAGE,
+  DIRECTION,
+  BRIDGE_SIZE,
+  COMMAND_OPTION,
+} = require('./Constant');
+
 const Validation = {
   checkBridgeSize(size) {
-    if (isNaN(size))
-      return { errorMsg: '\n[ERROR] 숫자만 입력할 수 있습니다.\n' };
+    if (isNaN(size)) return { errorMsg: ERROR_MESSAGE.number };
 
-    if (size < 3 || size > 20)
-      return {
-        errorMsg: '\n[ERROR] 3 이상 20 이하의 숫자만 입력할 수 있습니다.\n',
-      };
+    if (size < BRIDGE_SIZE.min || size > BRIDGE_SIZE.max)
+      return { errorMsg: ERROR_MESSAGE.range };
 
     if (!Number.isInteger(Number(size)))
-      return {
-        errorMsg: '\n[ERROR] 정수만 입력할 수 있습니다.\n',
-      };
+      return { errorMsg: ERROR_MESSAGE.integer };
 
     return { errorMsg: undefined };
   },
 
   checkDirection(direction) {
-    if (direction === 'U' || direction === 'D') return { errorMsg: undefined };
+    if (direction === DIRECTION.up || direction === DIRECTION.down)
+      return { errorMsg: undefined };
 
-    return { errorMsg: '\n[ERROR] U 또는 D만 입력할 수 있습니다.' };
+    return { errorMsg: ERROR_MESSAGE.direction };
   },
 
   checkCommandOption(commandOption) {
-    if (commandOption === 'R' || commandOption === 'Q')
+    if (
+      commandOption === COMMAND_OPTION.restart ||
+      commandOption === COMMAND_OPTION.quit
+    )
       return { errorMsg: undefined };
 
-    return { errorMsg: '\n[ERROR] R 또는 Q만 입력할 수 있습니다.' };
+    return { errorMsg: ERROR_MESSAGE.commandOption };
   },
 };
 

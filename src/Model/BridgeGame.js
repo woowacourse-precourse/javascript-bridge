@@ -1,3 +1,5 @@
+const { DIRECTION, CROSSING_RESULT } = require('../libs/Constant');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -18,7 +20,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    this.#crossingOrder.push([direction, direction === 'U' ? 0 : 1]);
+    this.#crossingOrder.push([direction, direction === DIRECTION.up ? 0 : 1]);
   }
 
   getBridgeCrossingResult() {
@@ -27,8 +29,12 @@ class BridgeGame {
     this.#crossingOrder.forEach(([direction, directionNumber], idx) => {
       const isCross = direction === this.#bridge[idx];
 
-      bridgeCrossingResult[directionNumber].push(isCross ? 'O' : 'X');
-      bridgeCrossingResult[Math.abs(directionNumber - 1)].push(' ');
+      bridgeCrossingResult[directionNumber].push(
+        isCross ? CROSSING_RESULT.pass : CROSSING_RESULT.fail
+      );
+      bridgeCrossingResult[Math.abs(directionNumber - 1)].push(
+        CROSSING_RESULT.notSeleted
+      );
     });
 
     return bridgeCrossingResult;

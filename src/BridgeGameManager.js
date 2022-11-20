@@ -4,6 +4,7 @@ const InputView = require('./View/InputView');
 const OutputView = require('./View/OutputView');
 const Validation = require('./libs/Validation');
 const { Console } = require('@woowacourse/mission-utils');
+const { COMMAND_OPTION } = require('./libs/Constant');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { throwException } = require('./libs/ErrorHandler');
 
@@ -76,7 +77,7 @@ class BridgeGameManager {
   }
 
   actionAboutGameCommand(commandOption) {
-    if (commandOption === 'R') return this.restart();
+    if (commandOption === COMMAND_OPTION.restart) return this.restart();
 
     return this.quit();
   }
