@@ -1,5 +1,5 @@
-const BridgeGame = require("./bridge/BridgeGame");
 const ErrorMessage = require("./messages/ErrorMessage");
+const Directions = require("./utils/Directions");
 const Validator = require("./utils/Validator");
 
 /**
@@ -16,9 +16,9 @@ const BridgeMaker = {
     const bridge = [];
 
     for (let i = 0; i < size; i++) {
-      const random = generateRandomNumber();
-      if (random === 0) bridge[i] = BridgeGame.DOWN_DIRECTION;
-      if (random === 1) bridge[i] = BridgeGame.UP_DIRECTION;
+      const random = Number(generateRandomNumber());
+      if (random === 0) bridge[i] = Directions.DOWN_DIRECTION;
+      if (random === 1) bridge[i] = Directions.UP_DIRECTION;
     }
     return bridge;
   },
