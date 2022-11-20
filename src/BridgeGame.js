@@ -37,6 +37,7 @@ class BridgeGame {
     const IS_BOUNDED = +(size) >= BRIDGE_LOWER_BOUND && +(size) <= BRIDGE_UPPER_BOUND;
     const IS_VALID_NUMBER = IS_NUMBER && IS_BOUNDED;
     this.bridgeSizeExceptionHandler(IS_VALID_NUMBER);
+    GameProgress.printBlankLine();
     this.makeBridge(+size);
   };
 
@@ -72,6 +73,7 @@ class BridgeGame {
     try {
       BridgeError.throwErrorHandler(this.#bridgeErrorMessages[1], !isValidMoving);
       GameProgress.printMap(this.#bridge, this.#bridgeMoveCount, input);
+      GameProgress.printBlankLine();
       this.moveNext(input);
     } catch {
       GameProgress.readMoving(this.validateBridgeMove);

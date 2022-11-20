@@ -26,6 +26,10 @@ const GameProgress = {
     OutputView.printMap(bridge, bridgeMoveCount, input);
   },
 
+  printBlankLine() {
+    MissionUtils.Console.print('');
+  },
+
   readBridgeSize(validateBridgeSize) {
     InputView.readBridgeSize(validateBridgeSize);
   },

@@ -18,13 +18,13 @@ const InputView = {
 
   // 사용자가 이동할 칸을 입력받는다.
   readMoving(validateBridgeMove) {
-    const SELECT_CELL = '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n';
+    const SELECT_CELL = '이동할 칸을 선택해주세요. (위: U, 아래: D)\n';
     MissionUtils.Console.readLine(SELECT_CELL, validateBridgeMove);
   },
 
   // 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
   readGameCommand(validateRetryInput) {
-    const DO_YOU_WANNA_RETRY = '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n';
+    const DO_YOU_WANNA_RETRY = '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n';
     MissionUtils.Console.readLine(DO_YOU_WANNA_RETRY, validateRetryInput);
   },
 };
