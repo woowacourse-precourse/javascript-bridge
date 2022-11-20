@@ -85,15 +85,15 @@ const InputView = {
 
   validateGameCommand(userInput, bridgeArray) {
     try {
-      Validate.retryOrEnd(userInput);
-      this.rAndQ(userInput, bridgeArray);
+      Validate.retryQuitInput(userInput);
+      this.retryQuit(userInput, bridgeArray);
     } catch (error) {
       MissionUtils.Console.print(error);
       this.readGameCommand(bridgeArray);
     }
   },
 
-  rAndQ(userInput, bridgeArray) {
+  retryQuit(userInput, bridgeArray) {
     if (userInput === 'R') {
       this.COUNT += 1;
       this.INDEX = 0;

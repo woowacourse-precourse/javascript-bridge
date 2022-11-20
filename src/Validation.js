@@ -15,7 +15,7 @@ const Validate = {
     }
   },
 
-  retryOrEnd(input) {
+  retryQuitInput(input) {
     if (input !== 'R' && input !== 'Q') {
       throw new Error('[ERROR] 재시작 하려면 R, 종료하려면 Q를 입력하셔야 합니다.');
     }
