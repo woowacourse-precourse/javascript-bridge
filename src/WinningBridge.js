@@ -16,7 +16,6 @@ class WinningBridge {
       size,
       BridgeRandomNumberGenerator.generate
     );
-    console.log(this.#winningBridge);
   }
 
   isSameDirection(currDirection, currOrder) {

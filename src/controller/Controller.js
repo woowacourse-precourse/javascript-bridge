@@ -79,12 +79,13 @@ class Controller {
   }
 
   getResult(isSucceeded) {
+    const GAME_RESULT = isSucceeded ? '성공' : '실패';
     const [tryingCount, upperBridge, lowerBridge] = this.bridgeGame.getResult();
-    this.printResult(tryingCount, isSucceeded, upperBridge, lowerBridge);
+    this.printResult(tryingCount, GAME_RESULT, upperBridge, lowerBridge);
   }
 
-  printResult(tryingCount, isSucceeded, upperBridge, lowerBridge) {
-    OutputView.printResult(tryingCount, isSucceeded, upperBridge, lowerBridge);
+  printResult(tryingCount, GAME_RESULT, upperBridge, lowerBridge) {
+    OutputView.printResult(tryingCount, GAME_RESULT, upperBridge, lowerBridge);
 
     this.close();
   }
