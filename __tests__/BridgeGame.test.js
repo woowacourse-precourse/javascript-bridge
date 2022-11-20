@@ -786,4 +786,12 @@ describe('시도 횟수 가져오는 메서드', () => {
 
     expect(bridgeGame.getTryCount.name).toEqual(METHOD_NAME);
   });
+
+  test('시도한 횟수 값 2를 반환한다.', () => {
+    const RECEIVED = 2;
+
+    bridgeGame.increasingTryCount();
+
+    expect(bridgeGame.getTryCount()).toEqual(RECEIVED);
+  });
 });
