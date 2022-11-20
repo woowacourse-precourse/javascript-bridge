@@ -9,7 +9,8 @@ describe("예외처리 테스트", () => {
         expect(validation.validateRange(range, 21)).toThrow(ERROR.numberNotInRange)
     });
     test("문자 예외처리 테스트", () => {
-
+        expect(validation.validateNumber('a')).toThrow(ERROR.notNumber)
+        expect(validation.validateNumber('3')).toBe(undefined)
     });
     test("게임 플레이 커맨드 예외처리 테스트", () => {
 
