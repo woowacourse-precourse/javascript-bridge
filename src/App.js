@@ -9,6 +9,7 @@ class App {
   }
 
   play() {
+    OutputView.printStart();
     InputView.readBridgeSize(bridgeSize => {
       this.bridgeGame.init(bridgeSize);
       this.userInputMove();
