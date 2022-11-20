@@ -10,7 +10,7 @@ class Bridge {
   }
 
   getBridgeSize() {
-    this.#directionSymbols.length;
+    return this.#directionSymbols.length;
   }
 }
 

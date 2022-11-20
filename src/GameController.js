@@ -46,7 +46,9 @@ class GameController {
       if (this.bridgeGame.isClearedGame()) {
         this.printFinalResult();
         Console.close();
+        return;
       }
+      this.requestMovingDirection();
     } catch ({ message }) {
       this.reRequest(this.requestMovingDirection, message);
     }
