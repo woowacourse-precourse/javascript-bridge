@@ -2,6 +2,8 @@ const InputView = require("../console/InputView");
 const Constant = require("../lib/Constant");
 const Bridge = require("./Bridge");
 const Printer = require("../view/Printer");
+const BridgeMaker = require("../BridgeMaker")
+const Generator = require("../lib/BridgeRandomNumberGenerator")
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -37,7 +39,10 @@ class BridgeGame {
   }
 
   makeBridge() {
-    const setBridge = this.#bridge.setOriginalBridge.bind(this.#bridge);
+    const setBridge = (size) => {
+      const bridge = BridgeMaker.makeBridge(size, Generator.generate)
+      this.#bridge.setOriginalBridge(bridge)
+    }
     const nextCallback = this.selectDirection.bind(this);
     const errorCallback = this.makeBridge.bind(this);
 

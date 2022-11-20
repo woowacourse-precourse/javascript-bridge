@@ -1,18 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeRandomNumberGenerator = require("../lib/BridgeRandomNumberGenerator");
 const Message = require("../lib/Message");
 const Constant = require("../lib/Constant");
-const BridgeMaker = require("../BridgeMaker");
 const Validate = require("../lib/Validate");
 const ErrorHandler = require("../ErrorHandler");
 
-const generator = BridgeRandomNumberGenerator.generate;
 const InputView = {
   readBridgeSize(setBridge, nextCallBack, errorCallBack) {
     MissionUtils.Console.readLine(Message.BRIDGE_SIZE, (size) => {
-      const target = () => Validate.bridgeLength(size.toUpperCase());
-      const doCallBack = () =>
-        setBridge(BridgeMaker.makeBridge(size, generator));
+      const target = () => Validate.bridgeLength(size);
+      const doCallBack = () => setBridge(size);
 
       ErrorHandler.test(target, doCallBack, errorCallBack);
       nextCallBack();
@@ -24,7 +20,7 @@ const InputView = {
    */
   readMoving(moveCallback, printCallback, errorCallBack) {
     MissionUtils.Console.readLine(Message.BRIDGE_DIRECTION, (direction) => {
-      const target = () => Validate.bridgeDirection(direction.toUpperCase());
+      const target = () => Validate.bridgeDirection(direction);
       const callBack = () => moveCallback(direction);
 
       ErrorHandler.test(target, callBack, errorCallBack);
