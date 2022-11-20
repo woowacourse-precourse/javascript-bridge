@@ -5,7 +5,7 @@
 
 class BridgeGame {
   #answer;
-
+  #result = [];
   constructor(answer) {
     this.#answer = answer;
   }
@@ -15,8 +15,10 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(index, input) {
-    if (this.#answer[index] === input) return 'O';
-    return 'X';
+    let compare;
+    this.#answer[index] === input ? (compare = 'O') : (compare = 'X');
+    this.#result.push([input, compare]);
+    return this.#result;
   }
 
   /**
