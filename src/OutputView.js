@@ -1,9 +1,20 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { ANNOUNCEMENT_MESSAGE } = require("./constant/Constant");
+const { ANNOUNCEMENT_MESSAGE, BRIDGE_DETAIL } = require("./constant/Constant");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
+
+// function mapStart(up,down){
+//   if (index === 0) {
+//     up += "[ ";
+//     down += "[ ";
+//   } else {
+//     up += "| ";
+//     down += "| ";
+//   }
+// }
+
 const OutputView = {
   printStart() {
     Console.print(ANNOUNCEMENT_MESSAGE.GAME_START);
@@ -14,14 +25,43 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(printArr) {
+    const a = { up: "", down: "" };
+    let up = "";
+    let down = "";
+    printArr.forEach((objectValue, index) => {
+      if (index === 0) {
+        up += "[ ";
+        down += "[ ";
+      } else {
+        up += "| ";
+        down += "| ";
+      }
+      if (objectValue.userCommand === BRIDGE_DETAIL.UP.COMMAND) {
+        up += `${objectValue.compareResultToPrint} `;
+        down += "  ";
+      } else if (objectValue.userCommand === BRIDGE_DETAIL.DOWN.COMMAND) {
+        down += `${objectValue.compareResultToPrint} `;
+        up += "  ";
+      }
+      if (index === printArr.length - 1) {
+        up += "]";
+        down += "]";
+      }
+    });
+    Console.print(up);
+    Console.print(down);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(isSuccess, tries) {
+    Console.print(`${ANNOUNCEMENT_MESSAGE.IS_SUCCESS}: ${isSuccess}`);
+    Console.print(`${ANNOUNCEMENT_MESSAGE.ALL_TRIES}: ${tries}`);
+  },
 };
 
 module.exports = OutputView;

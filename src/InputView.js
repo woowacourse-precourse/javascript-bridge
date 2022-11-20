@@ -25,6 +25,21 @@ function validateIsBridge(toNumberUserInput, callback) {
   }
 }
 
+function validateIsBridgeWords(userInput, callback) {
+  try {
+    Validation.isBridgeLength(userInput);
+  } catch (e) {
+    Console.print(e);
+    InputView.readMoving(callback);
+    return;
+  }
+}
+
+function validateBridgeSize(toNumberUserInput, callback) {
+  validateNumber(toNumberUserInput, callback);
+  validateIsBridge(toNumberUserInput, callback);
+}
+
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
@@ -32,8 +47,7 @@ const InputView = {
   readBridgeSize(callback) {
     Console.readLine(ANNOUNCEMENT_MESSAGE.GET_BRIDGE, (userInput) => {
       const toNumberUserInput = Number(userInput);
-      validateNumber(toNumberUserInput, callback);
-      validateIsBridge(toNumberUserInput, callback);
+      validateBridgeSize(toNumberUserInput, callback);
       callback(toNumberUserInput);
     });
   },
@@ -41,7 +55,13 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(callback) {
+    Console.readLine(ANNOUNCEMENT_MESSAGE.MOVE_SPACE, (userInput) => {
+      console.log(userInput);
+      validateIsBridgeWords(userInput, callback);
+      callback(userInput);
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
