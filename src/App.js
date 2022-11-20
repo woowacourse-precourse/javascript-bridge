@@ -1,9 +1,9 @@
+const { RESTART_TRIGGER, QUIT_TRIGGER } = require('./constants/condition.js');
 const { GAME_MSG } = require('./constants/message.js');
-const { printMsg } = require('./views/OutputView.js');
+
 const InputView = require('./views/InputView.js');
 const OutputView = require('./views/OutputView.js');
 const BridgeGame = require('./BridgeGame.js');
-const { RESTART_TRIGGER, QUIT_TRIGGER } = require('./constants/condition.js');
 
 class App {
   constructor() {
@@ -11,7 +11,7 @@ class App {
   }
 
   play() {
-    printMsg(GAME_MSG.start);
+    OutputView.printMsg(GAME_MSG.start);
     this.requestBridgeSize();
   }
 
@@ -74,17 +74,17 @@ class App {
   }
 
   reRequestBridgeSize(message) {
-    printMsg(message);
+    OutputView.printMsg(message);
     this.requestBridgeSize();
   }
 
   reRequestMovingDirection(message) {
-    printMsg(message);
+    OutputView.printMsg(message);
     this.requestMovingDirection();
   }
 
   reRequestGameCommand(message) {
-    printMsg(message);
+    OutputView.printMsg(message);
     this.requestRetryOrQuit();
   }
 }
