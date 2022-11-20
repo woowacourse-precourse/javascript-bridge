@@ -14,12 +14,13 @@
 
   - [o] **U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** Validator #validateMoveInput
 
-  - [ ] **게임 종료면 결과 출력하는 로직 분리하기.**OutputView #printResult
+  - [o] **게임 종료면 결과 출력하는 로직 분리하기.**OutputView #printResult
 
   - [o] **입력 받는 값에 맞게 이동한다.**BridgeGame #move
 
     - [o] **기존 다리와 유저 인풋값을 활용하여 새로운 다리 반환한다.** BridgeMaker #makeUserBridge
-      - [ ] **코드 길이 너무 길어서 분리하기** BridgeMaker #
+      - [o] **맞췄을 경우 로직** BridgeMaker #isAnswer
+      - [o] **틀렸을 경우 로직** BridgeMaker #isWorng
     - [o] **새로운 다리를 출력한다.** OutputView #printMap
 
     - [o] **게임 재시작/종료 여부를 입력 받는다. R(재시작)과 Q(종료) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.** InputView #readGameCommand
@@ -37,6 +38,7 @@
 ## 🧾 공부 목록
 
 콜백 함수를 동기적으로 처리하는 방법은?
+한번에 최종 모습을 그리며 코드를 짜려하니 멍하니 손놓고 있는 시간이 길어진다. 일단 그냥 만들고 나중에 모듈화 하기
 
 ### 🚨 체크리스트
 
