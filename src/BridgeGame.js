@@ -23,10 +23,16 @@ class BridgeGame {
   }
 
   // 정답일 때 실행할 메서드
-  MoveToCorrectBridge() {}
+  MoveToCorrectBridge(movingInput) {
+    if (movingInput === 'U') this.makeCorrectUpBridge();
+    if (movingInput === 'D') this.makeCorrectDownBridge();
+  }
 
   // 틀렸을 때 실행할 메서드
-  MoveToWrongBridge() {}
+  MoveToWrongBridge(movingInput) {
+    if (movingInput === 'U') this.makeWrongUpBridge();
+    if (movingInput === 'D') this.makeWrongDownBridge();
+  }
 
   makeCorrectUpBridge() {
     currentBridge[0].upBridge.push('O');
@@ -38,7 +44,7 @@ class BridgeGame {
     currentBridge[1].downBridge.push('O');
   }
 
-  makeCorrectDownBridge() {
+  makeWrongUpBridge() {
     currentBridge[0].upBridge.push('X');
     currentBridge[1].downBridge.push(' ');
   }
