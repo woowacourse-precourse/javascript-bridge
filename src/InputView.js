@@ -26,7 +26,7 @@ const InputView = {
       this.getBridgeSize(Number(size));
       Controller.getSize(Number(size));
       this.savedBridge = BridgeMaker.makeBridge(Number(size));
-      this.readMoving(Number(size));
+      this.readMoving(); // Number(size)
     });
   },
   getBridgeSize(size) {
@@ -35,6 +35,7 @@ const InputView = {
         throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.inputRange));
       }
     } catch (err) {
+      Controller.size -= Number(size)
       this.readBridgeSize();
     }
   },
