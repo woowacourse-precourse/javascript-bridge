@@ -24,7 +24,10 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    return true;
+    this.inputHelper(InputMessage.readMoving);
+    const move = this.inputContainer;
+    this.validate.isStringIntheList(["U", "D"], move);
+    return move;
   },
 
   /**
@@ -33,8 +36,6 @@ const InputView = {
   readGameCommand() {
     return true;
   },
-
-  readBridgeSizeValidate() {},
 
   inputHelper(message) {
     MissionUtils.Console.readLine(message, (input) => {

@@ -64,6 +64,7 @@ const bridgeMovingInput = () => {
       { testId: "2-1", param: "U" },
       { testId: "2-2", param: "D" },
     ];
+    mockQuestions(getParams(testCase_pass));
     test.each(testCase_pass)(
       `2-$testId 입력값이 올바를 때 : $param`,
       ({ param }) => expect(InputView.readMoving()).toBe(param)
