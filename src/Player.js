@@ -65,6 +65,10 @@ const Player = {
     return this.gameSuccess;
   },
 
+  getMovingArr() {
+    return this.movingArr;
+  },
+
   checkGameSuccess() {
     if (
       this.playerAns.length === this.size &&
