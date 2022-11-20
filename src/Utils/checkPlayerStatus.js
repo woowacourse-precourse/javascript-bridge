@@ -1,6 +1,5 @@
 const CheckPlayerStatus = {
   isPlayerPassed(move, stage) {
-    // 상수처리 필요
     if (move !== stage) return false;
     return true;
   },
