@@ -1,6 +1,6 @@
 const { BRIDGESIZE_KEY, MOVEMENT_KEY, COMMAND_KEY, UTILS_URL } = require('../constant/Key');
 const { Console } = require(UTILS_URL);
-const { bridgeSize, movement, progress } = require('../model/ObjectToValidate');
+const Validation = require('../model/Validaion');
 
 // view는 받아오는 데이터에 따라 처리가 다를 때만 model를 불러온다
 
@@ -12,9 +12,9 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
 
-  readBridgeSize(size) {
+  readBridgeSize(bridgeSize) {
     try {
-      return bridgeSize.checkValidation(size, BRIDGESIZE_KEY.MINIMUM, BRIDGESIZE_KEY.MAXIMUM);
+      return new Validation(BRIDGESIZE_KEY.CHECK_VALIDATION, bridgeSize).showResult();
     } catch (error) {
       Console.print(error);
       return false;
@@ -26,7 +26,7 @@ const InputView = {
    */
   readMoving(move) {
     try {
-      return movement.checkValidation(move, [MOVEMENT_KEY.UP, MOVEMENT_KEY.DOUN]);
+      return new Validation(MOVEMENT_KEY.CHECK_VALIDATION, move).showResult();
     } catch (error) {
       Console.print(error);
       return false;
@@ -38,7 +38,7 @@ const InputView = {
    */
   readGameCommand(command) {
     try {
-      return progress.checkValidation(command, [COMMAND_KEY.QUIT, COMMAND_KEY.RESTART]);
+      return new Validation(COMMAND_KEY.CHECK_VALIDATION, command).showResult();
     } catch (error) {
       Console.print(error);
       return false;

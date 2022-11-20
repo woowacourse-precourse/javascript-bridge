@@ -20,7 +20,8 @@ const Validator = {
   /**
    * 숫자가 범위 안에 있는지 확인한다.
    */
-  isNumberInRange(checkElement, minimumRange, maximumRange) {
+  isNumberInRange(checkElement, checkInfo) {
+    const { minimumRange, maximumRange } = checkInfo;
     return Number(checkElement) >= minimumRange && Number(checkElement) <= maximumRange
       ? true
       : ERROR_MESSAGE.NOT_IN_RANGE(minimumRange, maximumRange);
@@ -40,7 +41,8 @@ const Validator = {
   /**
    * 리스트에 문자열이 포함되어 있는지 확인한다.
    */
-  isStringInList(checkElement, checkList) {
+  isStringInList(checkElement, checkInfo) {
+    const { checkList } = checkInfo;
     return checkList.includes(checkElement) ? true : ERROR_MESSAGE.NOT_IN_LIST(checkList);
   },
 };
