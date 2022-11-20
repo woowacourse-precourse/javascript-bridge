@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const OutputView = require("./OutputView");
 const Console = MissionUtils.Console;
 const Random = MissionUtils.Random;
 /**
@@ -22,6 +23,8 @@ const InputView = {
       } else if (upDown == 'D') {
         upDown = 1;
       }
+
+      OutputView.printMap(bridge, count, upDown);
     });
   },
 
