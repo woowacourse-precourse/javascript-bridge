@@ -13,7 +13,11 @@ describe("예외처리 테스트", () => {
         expect(validation.validateNumber('3')).toBe(undefined)
     });
     test("게임 플레이 커맨드 예외처리 테스트", () => {
-
+        const commands = ['U','D'];
+        const error =  ERROR.notPlayCommand;
+        expect(validation.validateCommand(commands, error, 'U')).toBe(undefined)
+        expect(validation.validateCommand(commands, error, 'D')).toBe(undefined)
+        expect(validation.validateCommand(commands, error, 'A')).toThrow(ERROR.notPlayCommand)
     });
     test("게임 종료 / 재시작 커맨드 테스트", () => {
 
