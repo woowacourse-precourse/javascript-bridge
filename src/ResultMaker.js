@@ -13,11 +13,12 @@ const STRING_MAKER = {
 
 module.exports = function resultMaker(bridge, index, bool) {
   result = '';
-  result += makeOneLine(bridge, UP, index);
-  result += addLastOne(bridge.getbridgePart(index), bool, UP);
-  result += '\n';
-  result += makeOneLine(bridge, DOWN, index);
-  result += addLastOne(bridge.getbridgePart(index), bool, DOWN);
+  [UP, DOWN].forEach((direction) => {
+    result += makeOneLine(bridge, direction, index);
+    result += addLastOne(bridge.getbridgePart(index), bool, direction);
+    result += '\n';
+  });
+  result = result.slice(0, result.length - 1);
   return result;
 };
 
