@@ -25,29 +25,40 @@ class BridgeGame {
   }
   goToUpBridge() {
     let fail = false;
+    let success = false;
     this.#downBridgeRecord.push(' ');
     const moveable = this.#bridge[this.#movingCount] === 1 ? 'O' : 'X';
     if (moveable === 'X') fail = true;
     this.#upBridgeRecord.push(moveable);
     this.#movingCount += 1;
-    return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord, fail: fail };
+    success = this.checkSuccess(moveable);
+    return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord, fail: fail, success: success };
   }
   goToDownBridge() {
     let fail = false;
+    let success = false;
     this.#upBridgeRecord.push(' ');
     const moveable = this.#bridge[this.#movingCount] === 0 ? 'O' : 'X';
     if (moveable === 'X') fail = true;
     this.#downBridgeRecord.push(moveable);
     this.#movingCount += 1;
-    return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord, fail: fail };
+    success = this.checkSuccess(moveable);
+    return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord, fail: fail, success: success };
   }
   checkReplay(replayComment) {
     if (replayComment == 'R') {
       return this.retry();
     }
     if (replayComment == 'Q') {
-      return { retry: false, tryCount: this.#tryCount };
+      return false;
     }
+  }
+  checkSuccess(moveable) {
+    if (moveable === 'O' && this.#bridge.length === this.#movingCount) return true;
+    return false;
+  }
+  getTryCount() {
+    return this.#tryCount;
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
