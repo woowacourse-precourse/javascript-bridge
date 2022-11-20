@@ -19,7 +19,7 @@ class BridgeController {
   };
 
   /**
-   * 입력받은 다리의 유효성 검사여부에 따라 게임을 종료시키는 메서드
+   * 입력받은 다리의 유효성 검사여부에 따라 다시 입력을 요청하거나 다음단계로 진행시키는 메서드
    */
   verifyBridgeSize = (size, isError) => {
     if (isError) this.getBridgeSize();
@@ -42,7 +42,7 @@ class BridgeController {
   };
 
   /**
-   * 입력받은 이동의 유효성 검사여부에 따라 게임을 종료시키는 메서드
+   * 입력받은 이동의 유효성 검사여부에 따라 다시 입력을 요청하거나 다음단계로 진행시키는 메서드
    */
   verifyMove = (move, isError) => {
     if (isError) this.getMove();
@@ -96,7 +96,7 @@ class BridgeController {
   };
 
   /**
-   * 입력받은 종료,재시작여부의 유효성 검사여부에 따라 게임을 종료시키는 메서드
+   * 입력받은 종료,재시작여부의 유효성 검사여부에 따라 다시 입력을 요청하거나 다음단계로 진행시키는 메서드
    */
   verifyCommand = (command, isError) => {
     if (isError) this.getCommand();
@@ -125,7 +125,7 @@ class BridgeController {
 }
 
 // FOR TEST!!
-const controller = new BridgeController();
-controller.getBridgeSize();
+// const controller = new BridgeController();
+// controller.getBridgeSize();
 
 module.exports = BridgeController;
