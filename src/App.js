@@ -4,6 +4,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const OUTPUT_MESSAGE = require("./constans/OutputMessage");
+const { printResult } = require("./OutputView");
 class App {
   constructor() {
     this.bridge = [];
@@ -43,8 +44,7 @@ class App {
     const result = winOrLose
       ? OUTPUT_MESSAGE.SUCCESS_RESULT
       : OUTPUT_MESSAGE.FAILURE_RESULT;
-    MissionUtils.Console.print(OUTPUT_MESSAGE.SUCCESS_OR_FAILURE + result);
-    MissionUtils.Console.print(OUTPUT_MESSAGE.TOTAL_ATTEMPT + count);
+    OutputView.printResult(result, count, this.gameMap);
   }
   moveing(movePoint, obstacle) {
     return obstacle === movePoint ? true : false;
