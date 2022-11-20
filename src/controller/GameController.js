@@ -46,7 +46,7 @@ class GameController {
   }
 
   setGameCommand(gameCommand) {
-    validateGameCommand.validate(gameCommand);
+    this.game.setGameCommand(gameCommand);
 
     if (gameCommand === 'R') this.retry();
     if (gameCommand === 'Q') this.end(false);
