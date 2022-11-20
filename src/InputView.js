@@ -55,16 +55,17 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(bridgeGame, bridgeSize) {
     Console.readLine(INPUT_MESSAGE.restart, (input) => {
-      if (gameRestartInput(input)) return this.readGameCommand();
+      if (gameRestartInput(input)) this.readGameCommand();
 
       if (input === COMMAND.restart) {
-        return this.readMoving();
+        bridgeGame.retry();
+        return this.readMoving(bridgeGame, bridgeSize);
       }
 
       if (input === COMMAND.end) {
-        OutputView.printResult();
+        OutputView.printResult(RESULT.fail, bridgeGame);
       }
     });
   },
