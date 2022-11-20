@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { printResult } = require('./OutputView');
+const { printMap, printResult } = require('./OutputView');
+const OutputView = require('./OutputView');
 
 const { Console } = MissionUtils;
 
@@ -25,6 +26,7 @@ class BridgeGame {
   init() {
     this.#turn = -1;
     instance = this;
+    OutputView.initResult();
   }
 
   setTurn(value) {
@@ -45,6 +47,7 @@ class BridgeGame {
 
   move(command) {
     this.setTurn(this.#turn + 1);
+    printMap(command, this.#bridge[this.#turn]);
     const IN_RANGE = this.#bridge.length >= this.#turn - 1;
     const MATCH_COMMAND = this.#bridge[this.#turn] === command;
     if (this.#bridge.length - 1 === this.#turn && MATCH_COMMAND) {
