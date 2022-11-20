@@ -9,8 +9,6 @@ const Utils = require('./Utils');
 class App {
   #appStatus = 1;
 
-  #bridgeAnswer;
-
   #bridge;
 
   #gameEndConditionValue;
@@ -34,7 +32,6 @@ class App {
 
   progressApp(appStatus) {
     if (appStatus === 1) return this.questionBridgeMake();
-    if (appStatus === 2) return this.runBridgeMake();
     if (appStatus === 3) return this.questionBridgeMove();
     if (appStatus === 4) return this.runBridgeMove();
     if (this.#appStatus === 5) return this.questionGameRetry();
@@ -46,19 +43,18 @@ class App {
     InputView.readBridgeSize((answer) => {
       try {
         Validator.checkBridgeInput(answer);
-        this.#bridgeAnswer = +answer;
+        this.runBridgeMake(+answer);
         this.#appStatus = 2;
       } catch (e) {
         Utils.print(e);
-      } finally {
         this.progressApp(this.#appStatus);
       }
     });
   }
 
-  runBridgeMake() {
+  runBridgeMake(answer) {
     this.#appStatus = 3;
-    this.#bridge = BridgeMaker.makeBridge(this.#bridgeAnswer);
+    this.#bridge = BridgeMaker.makeBridge(answer);
     this.#gameEndConditionValue = this.#bridge.length;
     return this.questionBridgeMove();
   }
