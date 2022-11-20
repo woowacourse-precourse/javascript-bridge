@@ -1,3 +1,5 @@
+const { GAME_VALUES } = require("./constant");
+
 class ValidateGameCommand {
   constructor(gameCommand) {
     this.gameCommand = gameCommand;
@@ -21,7 +23,10 @@ class ValidateGameCommand {
 
   isBlank = (input) => !input;
 
-  isCorrectCharacter = (input) => (input === "R" || input === "Q");
+  isCorrectCharacter = (input) => (
+    input === GAME_VALUES.upperCharR ||
+    input === GAME_VALUES.upperCharQ
+  );
 }
 
 module.exports = ValidateGameCommand;

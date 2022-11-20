@@ -7,6 +7,7 @@ const ValidateGameCommand = require("./ValidateGameCommand");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 const GameInfo = require("./GameInfo");
+const { GAME_MESSAGES, ERROR_MESSAGES } = require("./constant");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -15,21 +16,15 @@ const InputView = {
   validateMoving: null,
 
   validateGameCommand: null,
-
-  messageOfInputSize: "\n다리의 길이를 입력해주세요.\n",
-
-  messageOfInputMoving: "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-
-  messageOfInputGameCommand: "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine(this.messageOfInputSize, (bridgeSize) => {
+    Console.readLine(GAME_MESSAGES.messageOfInputSize, (bridgeSize) => {
       try {
         GameInfo.bridgeSize = new ValidateBridgeSize(bridgeSize).bridgeSize;
       } catch {
-        OutputView.printMessage("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+        OutputView.printMessage(ERROR_MESSAGES.errorOfInputSize);
         return this.readBridgeSize();
       }
       GameInfo.bridge = BridgeMaker
@@ -49,11 +44,11 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine(this.messageOfInputMoving, (moving) => {
+    Console.readLine(GAME_MESSAGES.messageOfInputMoving, (moving) => {
       try {
         GameInfo.currentMove = new ValidateMoving(moving).moving;
       } catch {
-        OutputView.printMessage("[ERROR] 이동할 칸은 'U' 혹은 'D'여야 합니다.");
+        OutputView.printMessage(ERROR_MESSAGES.errorOfMoving);
         return this.readMoving();
       }
 
@@ -74,11 +69,11 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    Console.readLine(this.messageOfInputGameCommand, (gameCommand) => {
+    Console.readLine(GAME_MESSAGES.messageOfInputGameCommand, (gameCommand) => {
       try {
         GameInfo.gameCommand = new ValidateGameCommand(gameCommand).gameCommand;
       } catch {
-        OutputView.printMessage("[ERROR] 재시작 혹은 종료는 'R' 혹은 'Q'여야 합니다.");
+        OutputView.printMessage(ERROR_MESSAGES.errorOfGameCommand);
         return this.readGameCommand();
       }
 

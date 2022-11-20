@@ -1,3 +1,5 @@
+const { GAME_VALUES } = require("./constant");
+
 class ValidateBridgeSize {
   constructor(bridgeSize) {
     this.bridgeSize = bridgeSize;
@@ -25,7 +27,10 @@ class ValidateBridgeSize {
 
   isNumber = (input) => !isNaN(input);
 
-  isRange = (input) => (input >= 3 && input <= 20);
+  isRange = (input) => (
+    input >= GAME_VALUES.minBridgeSize &&
+    input <= GAME_VALUES.maxBridgeSize
+  );
 }
 
 module.exports = ValidateBridgeSize;

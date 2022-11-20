@@ -1,9 +1,12 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { RESULT_MESSAGES } = require("./constant");
 const GameInfo = require("./GameInfo");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+  changeSuccess: "성공",
+
   printMessage(message) {
     Console.print(message);
   },
@@ -20,7 +23,7 @@ const OutputView = {
   },
 
   printSuccess() {
-    GameInfo.gameResult = "성공";
+    GameInfo.gameResult = this.changeSuccess;
     this.printResult();
   },
 
@@ -30,10 +33,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult() {
-    Console.print("최종 게임 결과");
+    Console.print(RESULT_MESSAGES.finalResult);
     this.printMap();
-    Console.print(`\n게임 성공 여부: ${GameInfo.gameResult}`);
-    Console.print(`총 시도한 횟수: ${GameInfo.numberOfPlayGames}`);
+    Console.print(RESULT_MESSAGES.gameResult(GameInfo.gameResult));
+    Console.print(RESULT_MESSAGES.tryCount(GameInfo.numberOfPlayGames));
     Console.close();
   },
 };

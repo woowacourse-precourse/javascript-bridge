@@ -1,3 +1,4 @@
+const { GAME_VALUES } = require("./constant");
 const GameInfo = require("./GameInfo");
 
 /**
@@ -10,13 +11,15 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   static move() {
-    GameInfo.position += 1;
+    GameInfo.position += GAME_VALUES.counter;
     GameInfo.gameStat.push(GameInfo.currentMove);
     this.moveBridge();
   }
 
   static moveBridge() {
-    return (this.isValidMove()) ? this.pushMoveBridge("O") : this.pushMoveBridge("X");
+    return (this.isValidMove()) ?
+      this.pushMoveBridge(GAME_VALUES.upperCharO) :
+      this.pushMoveBridge(GAME_VALUES.upperCharX);
   }
 
   static isValidMove() {
@@ -31,14 +34,14 @@ class BridgeGame {
     GameInfo.moveBridge[
       (GameInfo.indexingArray
         .indexOf(GameInfo.gameStat[GameInfo.position]) + 1) % 2
-    ].push(" ");
+    ].push(GAME_VALUES.blank);
   }
 
   static initializeGameInfo() {
     GameInfo.gameStat = [];
     GameInfo.moveBridge = [[], []];
-    GameInfo.position = -1;
-    GameInfo.numberOfPlayGames += 1;
+    GameInfo.position = GAME_VALUES.initializedPosition;
+    GameInfo.numberOfPlayGames += GAME_VALUES.counter;
   }
 
   static getMoveBridge() {
@@ -57,7 +60,7 @@ class BridgeGame {
     return (
       GameInfo.moveBridge[0]
         .concat(GameInfo.moveBridge[1])
-        .includes("X")
+        .includes(GAME_VALUES.upperCharX)
     );
   }
 
@@ -67,7 +70,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   static retry() {
-    return (GameInfo.gameCommand === 'R');
+    return (GameInfo.gameCommand === GAME_VALUES.upperCharR);
   }
 }
 

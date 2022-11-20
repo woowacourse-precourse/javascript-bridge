@@ -1,3 +1,4 @@
+const { GAME_MESSAGES } = require("./constant");
 const GameInfo = require("./GameInfo");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
@@ -9,7 +10,7 @@ class App {
   }
 
   play() {
-    OutputView.printMessage("다리 건너기 게임을 시작합니다.");
+    OutputView.printMessage(GAME_MESSAGES.gameStart);
     InputView.readBridgeSize();
   }
 }

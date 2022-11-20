@@ -1,3 +1,5 @@
+const { GAME_VALUES } = require("./constant");
+
 class ValidateMoving {
   constructor(moving) {
     this.moving = moving;
@@ -21,7 +23,10 @@ class ValidateMoving {
 
   isBlank = (input) => !input;
 
-  isCorrectCharacter = (input) => (input === "U" || input === "D");
+  isCorrectCharacter = (input) => (
+    input === GAME_VALUES.upperCharU ||
+    input === GAME_VALUES.upperCharD
+  );
 }
 
 module.exports = ValidateMoving;
