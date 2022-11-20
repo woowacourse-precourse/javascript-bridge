@@ -14,10 +14,8 @@ const InputView = {
   readBridgeSize() {
     MU.Console.readLine('다리의 길이를 입력해주세요.\n', (bridgeLen) => {
       try {
-        if(bridgeLen < 3 || bridgeLen > 20) throw '[ERROR] 3이상 20이하 범위를 입력하세요';
-        if(isNaN(bridgeLen)) throw '[ERROR] 다리의 길이는 숫자를 입력 해야 합니다.';
+        OutputView.printBridgeSizeError(bridgeLen);
         let bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
-        MU.Console.print(bridge);
         this.readMoving([[],[]], bridge, 1);
         } catch(e) {
           MU.Console.print(e);

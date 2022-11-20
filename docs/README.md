@@ -109,8 +109,8 @@ BridgeRandomNumberGenerator 객체
 
 <InputView> // 사용자 입력 받는 클래스, 메서드 인자 변경가능, 메서드 추가 가능
 readBridgeSize() - 다리의 길이를 입력받는다. ✔
-    예외) 3 미만 OR 20초과 숫자 입력시
-        숫자이외의 문자 입력시
+    예외) 3 미만 OR 20초과 숫자 입력시  ✔
+        숫자이외의 문자 입력시  ✔
 readMoving() - 사용자가 이동할 칸을 입력받는다. ✔
     예외) U와 D 이외의 문자 입력 시
 readGameCommand() -사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다 ✔
