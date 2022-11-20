@@ -39,6 +39,9 @@ const OutputView = {
   printGameTryCount(count) {
     Console.print(`총 시도한 횟수: ${count}`);
   },
+  printBlank() {
+    Console.print('');
+  }
 };
 
 module.exports = OutputView;
