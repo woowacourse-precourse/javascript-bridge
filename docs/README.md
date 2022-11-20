@@ -135,16 +135,13 @@
 
 ## BridgeGameController
 
-- [ ] OutputView의 시작 문구 출력 메서드 호출
-- [ ] InputView의 이동할 칸 입력 메서드 호출
+- [x] OutputView의 시작 문구 출력 메서드 호출
+- [x] InputView의 이동할 칸 입력 메서드 호출
   - OutputView의 결과 출력 문구 메서드 호출
-- [ ] BridgeGame의 성공 여부가 참이면 OutputView의 게임 종료 문구 메서드 호출
-- [ ] BridgeGame의 길이 비교 메서드 호출
-  - 참이면서 실패하지 않고 이동했으면 InputView의 게임 종료 문구 메서드 호출
-  - 거짓이면서 실패하지 않고 이동했으면 InputView의 이동할 칸 입력 메서드 호출
-  - 거짓이면서 실패했으면 InputView의 다시시도 여부 입력 메서드 호출
-    - 다시시도 시 BridgeGame의 retry 메서드 호출 및 InputView의 이동할 칸 입력 메서드 호출
-    - 종료 시 OutputView의 게임 종료 문구 메서드 호출
+- [x] BridgeGame의 성공 여부가 참이면 OutputView의 게임 종료 문구 메서드 호출
+  - 실패했으면 InputView의 다시시도 여부 입력 메서드 호출
+- [x] 다시시도 시 BridgeGame의 retry 메서드 호출 및 InputView의 이동할 칸 입력 메서드 호출
+- [x] 종료 시 OutputView의 게임 종료 문구 메서드 호출
 
 ## 예외처리
 
