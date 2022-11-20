@@ -46,10 +46,6 @@ class BridgeGame {
     return isEveryBlockPassed && isSucceededMove;
   }
 
-  getTryCount(){
-    this.#movementLogs.
-  }
-
   getMovementLogs() {
     return this.#movementLogs;
   }
