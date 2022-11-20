@@ -10,6 +10,13 @@ const InputView = {
     let size = 0;
     MissionUtils.Console.readLine("", (answer) => {
       size = answer;
+      try {
+        if (size < 3 || size > 20 || isNaN(size))
+          throw "[ERROR] 3이상 20이하의 숫자만 입력바랍니다.";
+      } catch (err) {
+        MissionUtils.Console.print(err);
+        this.readBridgeSize();
+      }
     });
     return size;
   },
@@ -21,6 +28,13 @@ const InputView = {
     let move = "";
     MissionUtils.Console.readLine("", (answer) => {
       move = answer;
+      try {
+        if (!(move === "U") || !(move === "D"))
+          throw "[ERROR] U와 D 중 입력바랍니다.";
+      } catch (err) {
+        MissionUtils.Console.print(err);
+        this.readMoving();
+      }
     });
     return move;
   },
@@ -32,6 +46,13 @@ const InputView = {
     let command = "";
     MissionUtils.Console.readLine("", (answer) => {
       command = answer;
+      try {
+        if (!(command === "R") || !(command === "Q"))
+          throw "[ERROR] R와 Q 중 입력바랍니다.";
+      } catch (err) {
+        MissionUtils.Console.print(err);
+        this.readGameCommand();
+      }
     });
     return command;
   },
