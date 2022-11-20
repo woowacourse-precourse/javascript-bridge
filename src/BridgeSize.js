@@ -1,4 +1,4 @@
-class BridgeLength {
+class BridgeSize {
   #number;
 
   constructor(number) {
@@ -26,4 +26,4 @@ class BridgeLength {
   }
 }
 
-module.exports = BridgeLength;
+module.exports = BridgeSize;
