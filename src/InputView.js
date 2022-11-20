@@ -17,6 +17,8 @@ const InputView = {
         parseInt(bridgeSize, 10),
         BridgeRandomNumberGenerator.generate
       );
+      Console.print('');
+      this.readMoving();
     });
   },
 
@@ -24,7 +26,10 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine(INPUT_MESSAGE.MOVING_COMMAND, (movingCommand) => {});
+    Console.readLine(INPUT_MESSAGE.MOVING_COMMAND, (movingCommand) => {
+      Console.print(movingCommand);
+      Validation.validateMovingCommand(movingCommand);
+    });
   },
 
   /**

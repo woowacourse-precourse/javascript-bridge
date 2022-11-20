@@ -19,7 +19,16 @@ const Validation = {
   },
 
   validateMovingCommand(movingCommand) {
-    this.validateMovingCommand(movingCommand);
+    this.validateInputMoving(movingCommand);
+  },
+
+  validateInputMoving(movingCommand) {
+    const UPPER_MOVING = 'U';
+    const LOWER_MOVING = 'D';
+
+    if (movingCommand !== UPPER_MOVING && movingCommand !== LOWER_MOVING) {
+      throw new Error('[ERROR] 이동할 다리 칸은 U 또는 D만 입력 가능합니다.');
+    }
   },
 };
 
