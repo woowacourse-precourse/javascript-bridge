@@ -51,7 +51,7 @@ const InputView = {
         game.retry();
         return InputView.readMoving(game, bridge);
       }
-      printResult(game);
+      return printResult(game);
     });
   },
 };
