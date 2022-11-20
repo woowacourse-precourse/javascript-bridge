@@ -8,23 +8,19 @@ const { ERROR_MSG } = require('./constants/message.js');
 
 class Validation {
   static validateDirection(direction) {
-    if (!this.#isValidDirectionSymbol(direction)) {
+    const directionSymbols = [DOWNSIDE_SYMBOL, UPSIDE_SYMBOL];
+
+    if (!directionSymbols.includes(direction)) {
       throw new Error(ERROR_MSG.invalidDirection);
     }
   }
 
-  static #isValidDirectionSymbol(direction) {
-    return direction === DOWNSIDE_SYMBOL || direction === UPSIDE_SYMBOL;
-  }
-
   static validateGameCommand(gameCommand) {
-    if (!this.#isValidCommand(gameCommand)) {
+    const commands = [QUIT_COMMAND, RESTART_COMMAND];
+
+    if (!commands.includes(gameCommand)) {
       throw new Error(ERROR_MSG.inValidCommand);
     }
-  }
-
-  static #isValidCommand(gameCommand) {
-    return gameCommand === QUIT_COMMAND || gameCommand === RESTART_COMMAND;
   }
 }
 
