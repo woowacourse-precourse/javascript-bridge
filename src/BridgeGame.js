@@ -1,10 +1,5 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const InputView = require("./InputView.js");
-const OutputView = require("./OutputView.js");
 const Validation = require("./Validation.js");
 const Bridge = require("./Bridge.js");
-
-const { Console } = MissionUtils;
 
 class BridgeGame {
   #bridge;
@@ -16,66 +11,41 @@ class BridgeGame {
     this.#inputs = [];
     this.#trial = 1;
   }
-  start() {
-    OutputView.printStart();
-    InputView.readBridgeSize(this.start.bind(this), (bridgeLength) => {
-      if (this.#bridge.length === 0) {
-        this.#bridge.init(bridgeLength);
-      }
-      this.move();
-    });
-  }
-  move() {
-    const current = this.move.bind(this);
-
-    InputView.readMoving(current, (command) => {
-      this.#inputs.push(command);
-      this.#bridge.move();
-      OutputView.printMap(this.#bridge.currentStage, this.#inputs);
-      this.moveAfter(command);
-    });
-  }
-  #doWhenWrongAnswer() {
-    this.retry();
-  }
-  #doWhenRightAnswer() {
-    if (Validation.isSame(this.#bridge.length, this.#inputs.length)) {
-      this.end();
-      return;
+  start(bridgeLength) {
+    if (this.#bridge.length === 0) {
+      this.#bridge.init(bridgeLength);
     }
-    this.move();
+  }
+  move(command) {
+    this.#inputs.push(command);
+    this.#bridge.move();
+    return { bridge: this.#bridge.currentStage, inputs: this.#inputs.slice() };
+  }
+
+  isAnswer() {
+    if (Validation.isSame(this.#bridge.length, this.#inputs.length)) {
+      return true;
+    }
+    return false;
   }
   moveAfter(command) {
     if (Validation.isDifferent(this.#bridge.currentAnswer, command)) {
-      this.#doWhenWrongAnswer();
-      return;
+      return false;
     }
-    this.#doWhenRightAnswer();
+    return true;
   }
 
   retry() {
-    const current = this.retry.bind(this);
-    InputView.readGameCommand(current, (command) => {
-      if (command === "R") {
-        this.restart();
-        return;
-      }
-      this.end();
-    });
-  }
-  restart() {
     this.#bridge.reset();
     this.#trial += 1;
     this.#inputs = [];
-    this.move();
   }
   end() {
-    OutputView.printResult(
-      this.#bridge.currentStage,
-      this.#inputs,
-      this.#trial
-    );
-    Console.close();
+    return {
+      bridge: this.#bridge.currentStage,
+      inputs: this.#inputs,
+      trial: this.#trial,
+    };
   }
 }
 
