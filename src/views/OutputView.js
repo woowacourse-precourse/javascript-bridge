@@ -12,13 +12,13 @@ const OutputView = {
 
   printResult(logs, isSucceeded, tryCount) {
     const templates = TemplateMaker.getLogTemplates(logs);
-    const succeedOfFail = isSucceeded ? '성공' : '실패';
+    const successOrFail = isSucceeded ? '성공' : '실패';
 
-    Console.print('최종 게임 결과\n');
+    Console.print('\n최종 게임 결과\n');
     templates.forEach((template) => {
       Console.print(template);
     });
-    Console.print(`\n게임 성공 여부: ${succeedOfFail}`);
+    Console.print(`\n게임 성공 여부: ${successOrFail}`);
     Console.print(`총 시도한 횟수: ${tryCount}`);
   },
 
