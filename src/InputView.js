@@ -10,6 +10,7 @@ const { INPUT_MESSAGE, COMMAND } = require("./Constant");
 const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -21,6 +22,10 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.bridge, (input) => {
       if (bridgeLengthValidate(input)) return this.readBridgeSize();
+      const bridge = BridgeMaker.makeBridge(
+        input,
+        BridgeRandomNumberGenerator.generate
+      );
 
       this.readMoving();
     });
