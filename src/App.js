@@ -37,10 +37,10 @@ class App {
   }
 
   questionBridgeMake() {
-    InputView.readBridgeSize((answer) => {
+    InputView.readBridgeSize((bridgeAnswer) => {
       try {
-        Validator.checkBridgeInput(answer);
-        this.runBridgeMake(+answer);
+        Validator.checkBridgeInput(bridgeAnswer);
+        this.runBridgeMake(+bridgeAnswer);
         this.#appStatus = 3;
       } catch (e) {
         Utils.print(e);
@@ -49,17 +49,17 @@ class App {
     });
   }
 
-  runBridgeMake(answer) {
-    this.#bridge = BridgeMaker.makeBridge(answer);
+  runBridgeMake(bridgeAnswer) {
+    this.#bridge = BridgeMaker.makeBridge(bridgeAnswer);
     this.#gameEndConditionValue = this.#bridge.length;
     return this.questionBridgeMove();
   }
 
   questionBridgeMove() {
-    InputView.readMoving((answer) => {
+    InputView.readMoving((moveAnswer) => {
       try {
-        Validator.confirmOfCondition(answer, 'move');
-        this.runBridgeMove(answer);
+        Validator.confirmOfCondition(moveAnswer, 'move');
+        this.runBridgeMove(moveAnswer);
         this.#appStatus = 5;
       } catch (e) {
         Utils.print(e);
@@ -68,14 +68,14 @@ class App {
     });
   }
 
-  runBridgeMove(answer) {
-    this.#moveStatement = this.#brdigeGame.move(answer, this.#bridge);
-    if (this.#moveStatement) return this.progressMovementTrue(answer);
-    return this.progressMovementFalse(answer);
+  runBridgeMove(moveAnswer) {
+    this.#moveStatement = this.#brdigeGame.move(moveAnswer, this.#bridge);
+    if (this.#moveStatement) return this.progressMovementTrue(moveAnswer);
+    return this.progressMovementFalse(moveAnswer);
   }
 
-  progressMovementTrue(answer) {
-    this.#bridgeMap.handleMap(this.#moveStatement, answer);
+  progressMovementTrue(moveAnswer) {
+    this.#bridgeMap.handleMap(this.#moveStatement, moveAnswer);
     OutputView.printMap(this.#bridgeMap.getMap());
     if (this.#gameEndConditionValue === this.#brdigeGame.getBridgeLengthStatus()) {
       return this.progressGameEnd();
@@ -83,8 +83,8 @@ class App {
     return this.questionBridgeMove();
   }
 
-  progressMovementFalse(answer) {
-    this.#bridgeMap.handleMap(this.#moveStatement, answer);
+  progressMovementFalse(moveAnswer) {
+    this.#bridgeMap.handleMap(this.#moveStatement, moveAnswer);
     OutputView.printMap(this.#bridgeMap.getMap());
     return this.questionGameRetry();
   }
