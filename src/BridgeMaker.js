@@ -1,10 +1,7 @@
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
-// 프로퍼티를 추가할 수 없다.
-// 파일의 경로 변경 불가
 
-// 메서드의 시그니처(인자,이름)와 반환 타입은 변경 불가
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -16,12 +13,19 @@ const BridgeMaker = {
     let whileCount = 0;
     while (whileCount < size) {
       const RANDOM_NUMBER = generateRandomNumber();
-      const COMMAND = String(RANDOM_NUMBER) === "1" ? "U" : "D";
+      const COMMAND = makeCommand(RANDOM_NUMBER);
       BRIDGE_ARRAY.push(COMMAND);
-      whileCount++;
+      whileCount += 1;
     }
     return BRIDGE_ARRAY;
   }
 };
+
+function makeCommand(number) {
+  const RANDOM_NUMBER = String(number);
+  if (RANDOM_NUMBER === "1") return "U";
+  if (RANDOM_NUMBER === "0") return "D";
+  return null;
+}
 
 module.exports = BridgeMaker;
