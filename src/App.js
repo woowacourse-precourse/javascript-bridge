@@ -11,11 +11,12 @@ class App {
 
   initBridge() {
     InputView.readBridgeSize((length) => {
-      if (!InputView.validate(length)) {
+      if (!InputView.sizeValidate(length)) {
         return this.initBridge();
       }
 
       const bridge = BridgeMaker.makeBridge(parseInt(length, 10), generate);
+      InputView.readMoving();
     });
   }
 }

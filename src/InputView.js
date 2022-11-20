@@ -15,14 +15,21 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(MESSAGE.INPUT_UP_DOWN, (moving) => {
+      if (!this.moveValidate(moving)) {
+        return this.readMoving();
+      }
+      return true;
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {},
 
-  validate(length) {
+  sizeValidate(length) {
     try {
       if (!REGEXP.CHECK_NUMBER.test(length)) {
         throw new Error(ERROR_MESSAGE.INVALID_LENGTH_NUMBER);
@@ -34,6 +41,19 @@ const InputView = {
 
       if (parseInt(length, 10) < 3 || parseInt(length, 10) > 20) {
         throw new Error(ERROR_MESSAGE.INVALID_LENGTH_RANGE);
+      }
+    } catch (error) {
+      Console.print(error);
+      return false;
+    }
+
+    return true;
+  },
+
+  moveValidate(moving) {
+    try {
+      if (moving !== 'U' && moving !== 'D') {
+        throw new Error(ERROR_MESSAGE.INVALID_MOVE_VALUE);
       }
     } catch (error) {
       Console.print(error);
