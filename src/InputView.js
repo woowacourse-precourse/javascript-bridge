@@ -1,15 +1,10 @@
 const { Console } = require("@woowacourse/mission-utils");
 const {CheckBridgeSizeException, CheckUserMove, CheckWhetherGameRunning} = require("./Exception");
-const BridgeGame = require("./BridgeGame");
-const bridgeGame = new BridgeGame;
-const OutputView = require("./OutputView");
-const userBridgeCorrect = bridgeGame.userPickedUpOrDown;
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -56,25 +51,12 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
+    let gameSelect;
     Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도:R, 종료:Q)", (value) => {
-    this.checkGameRunningException(value);
-    this.gameRestart(value);
-    this.gameFail(value);
+      this.checkGameRunningException(value);
+      gameSelect = value;
     })
-  },
-
-  gameRestart(value){
-    if(value == 'R'){
-      bridgeGame.retry();
-      this.readMoving();
-    }
-  },
-  
-  gameFail(value){
-    if(value == 'Q'){
-      OutputView.printFailResult(userBridgeCorrect[0], userBridgeCorrect[1], bridgeGame.attemptCount);
-      Console.close();
-    }
+    return gameSelect;
   },
 
   checkGameRunningException(value){
