@@ -4,9 +4,11 @@ class BridgeGame {
  
   #curIdx;
   #success;
+  #gameCount;
   
   constructor(){
     this.init();
+    this.#gameCount = 1;
   }
 
   init(){
@@ -22,6 +24,10 @@ class BridgeGame {
     return this.#success;
   }
 
+  getCount(){
+    return this.#gameCount;
+  }
+
   move(dir, bridge) {
     if(dir === bridge[this.#curIdx]){
       this.#curIdx += 1;
@@ -34,6 +40,7 @@ class BridgeGame {
 
   retry() {
     this.init();
+    this.#gameCount += 1;
   }
 }
 
