@@ -34,11 +34,11 @@ class Controller {
   getBridgeSize(size) {
     try {
       validator.checkBridgeSizeInput(size);
+      this.getBridge(size, BridgeRandomNumberGenerator.generate);
+      this.inputUserMoving();
     } catch {
       this.inputBridgeSize();
     }
-    this.getBridge(size, BridgeRandomNumberGenerator.generate);
-    this.inputUserMoving();
   }
 
   getBridge(size, generater) {
