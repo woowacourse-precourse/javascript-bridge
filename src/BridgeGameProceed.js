@@ -13,11 +13,9 @@ class BridgeGameProceed {
 
 #playersBridge
 
-#round = 1;
-
     constructor() {
-        this.BridgeGame = new BridgeGame();
-        this.PlayersMap = new PlayersMap();
+        this.bridgeGame = new BridgeGame();
+        this.playersMap = new PlayersMap();
         this.#playersBridge = [];
         OutputView.printStart();
     }
@@ -48,7 +46,6 @@ class BridgeGameProceed {
             Validation.nextStep(nextStep);
             this.#playersBridge.push(nextStep);
             const result = this.bridge();
-
             this.dividePath(result);
             this.game();
         } catch (error) {
@@ -59,7 +56,8 @@ class BridgeGameProceed {
 
     dividePath(result) {
         if (result.includes('X')) {
-            this.BridgeGame.move();
+            this.bridgeGame.move();
+            this.#playersBridge = [];
             return this.fail(result);
         }
         if (this.#playersBridge.length === this.#winBridge.length) {
@@ -68,39 +66,37 @@ class BridgeGameProceed {
     }
 
     bridge() {
-        const result = this.PlayersMap.show(this.#playersBridge, this.#winBridge)
+        const result = this.playersMap.show(this.#playersBridge, this.#winBridge)
         Console.print(result);
         Console.print('')
         return result;
     }
 
     fail(result) {
-        try {
-            InputView.readGameCommand((retryOrNot) => {
+        InputView.readGameCommand((retryOrNot) => {
+            try {
                 Validation.retry(retryOrNot);
                 if (retryOrNot === "R") {
-                    this.#playersBridge = [];
                     return this.game();
                 }
-                if (retryOrNot === "Q") this.BridgeGame.retry(result); 
-            })  
-        } catch (error) {
-            Console.print(error.message);
-            this.fail.call(result);
-        }
-           
+                if (retryOrNot === "Q") this.bridgeGame.retry(result); 
+            } catch (error) {
+                Console.print(error.message);
+                this.fail.call(this);
+            }
+        });
     }
 
-    // gameOverChoice(retryOrNot) {
+    // gameOverChoice(retryOrNot, result) {
     //     try {
     //         Validation.retry(retryOrNot);
     //         if (retryOrNot === "R") {
-    //             this.#playersBridge = [];
     //             return this.game();
     //         }
-    //         if (retryOrNot === "Q") this.BridgeGame.retry(result); 
+    //         if (retryOrNot === "Q") this.bridgeGame.retry(result); 
     //     } catch (error) {
     //         Console.print(error.message);
+    //         this.fail.call(this);
     //     }
     // }
 
@@ -109,7 +105,7 @@ class BridgeGameProceed {
         Console.print(result);
         Console.print('');
         OutputView.printWin()
-        OutputView.printAttemptCount(this.#round)
+        this.bridgeGame.countRound();
         Console.close();
     }
 }

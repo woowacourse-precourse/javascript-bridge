@@ -3,10 +3,14 @@ const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./view/OutputView');
 
 class BridgeGame {
-  #round = 0;
+  #round = 1;
 
   move() {
     this.#round += 1;
+  }
+
+  countRound() {
+    OutputView.printAttemptCount(this.#round);
   }
 
   retry(result) {
@@ -14,7 +18,7 @@ class BridgeGame {
       Console.print(result);
       Console.print('');
       OutputView.printFail();
-      OutputView.printAttemptCount(this.#round);
+      this.countRound();
       Console.close();
   }
 }
