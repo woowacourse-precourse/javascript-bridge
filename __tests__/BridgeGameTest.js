@@ -9,10 +9,18 @@ describe("다리 건너기 테스트", () => {
         expect(actual[0]).toEqual(["O"]);
     });
 
-    test("이동 인풋 테스트", () => {
+    test("이동 입력 테스트1", () => {
         const bridgeGame = new BridgeGame(["U", "D", "D"]);
         let actual = bridgeGame.isCorrect("D")       
         
         expect(actual).toEqual(false);
     });
+
+    test("이동 입력 테스트2", () => {
+        const bridgeGame = new BridgeGame(["U", "D", "D"]);
+        let actual = bridgeGame.isCorrect("U")       
+        
+        expect(actual).toEqual(true);
+    });
+    
 });
