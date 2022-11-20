@@ -108,12 +108,12 @@ BridgeRandomNumberGenerator 객체
 <App>
 
 <InputView> // 사용자 입력 받는 클래스, 메서드 인자 변경가능, 메서드 추가 가능
-readBridgeSize() - 다리의 길이를 입력받는다.
+readBridgeSize() - 다리의 길이를 입력받는다. ✔
     예외) 3 미만 OR 20초과 숫자 입력시
         숫자이외의 문자 입력시
-readMoving() - 사용자가 이동할 칸을 입력받는다.
+readMoving() - 사용자가 이동할 칸을 입력받는다. ✔
     예외) U와 D 이외의 문자 입력 시
-readGameCommand() -사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다
+readGameCommand() -사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다 ✔
     예외)R과 Q 이외의 문자 입력 시
 
 <OutputView> // 메서드 이름 변경불가, 값 출력 메서드 추가
@@ -124,6 +124,7 @@ printResult() - 게임의 최종 결과를 정해진 형식에 맞춰 출력.
 
 <BridgeGame> // 필드 추가 가능, 메서드 이름 변경불가, 인자 추가/변경 가능, 메서드 
                 추가/변경 가능
+                BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다
 move() - 사용자가 칸을 이동할 때 사용하는 메서드
             이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경 가능
 retry() - 사용자가 게임을 다시 시도할 때 사용하는 메서드
