@@ -78,6 +78,7 @@ class BridgeGame {
    */
   retry(doOrDie) {
     if (doOrDie === 'R') {
+      this.#gameStatus.liveOrDie = true;
       this.#gameStatus.crntPstn = 0;
       this.#gameStatus.numberOfChallenge += 1;
       return this.retryPackage();
