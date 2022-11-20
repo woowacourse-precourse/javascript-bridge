@@ -41,7 +41,7 @@ const InputView = {
         }
         if (movingResult[0].length === bridge.length) {
           const successMessage = "성공";
-          return OutputView.printResult(successMessage, attempts);
+          return OutputView.printResult(bridgeList, successMessage, attempts);
         }
         return this.readMoving(bridge, movingResult, attempts);
       }
