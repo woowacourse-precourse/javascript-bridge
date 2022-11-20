@@ -4,10 +4,11 @@
  */
 class BridgeGame {
   constructor() {
-    this.bridge;
+    this.bridgeSize;
     this.done = false;
     this.succeed = false;
     this.playerLocation = 0;
+    this.try = 0;
     this.progress = [[], []]; // playerLocation[0] = up, playerLocation[1] = down
   }
 
@@ -82,7 +83,12 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.done = false;
+    this.progress[0].length = 0;
+    this.progress[1].length = 0;
+    this.playerLocation = 0;
+  }
 }
 
 module.exports = BridgeGame;
