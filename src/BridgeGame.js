@@ -2,10 +2,10 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  bridgeAnswer;
-  currentBridge = [[], []];
-  current = 0
-  tryCount = 0;
+  #bridgeAnswer;
+  #currentBridge = [[], []];
+  #current = 0
+  #tryCount = 0;
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -18,8 +18,8 @@ class BridgeGame {
   }
 
   isCorrect(movingInput) {
-    if (movingInput === this.bridgeAnswer[this.current]) {
-      this.index++;
+    if (movingInput === this.#bridgeAnswer[this.#current]) {
+      this.current++;
       return true;
     } 
     return false;
@@ -38,23 +38,23 @@ class BridgeGame {
   }
 
   makeCorrectUpBridge() {
-    currentBridge[0].upBridge.push('O');
-    currentBridge[1].downBridge.push(' ');
+    this.#currentBridge[0].upBridge.push('O');
+    this.#currentBridge[1].downBridge.push(' ');
   }
 
   makeCorrectDownBridge() {
-    currentBridge[0].upBridge.push(' ');
-    currentBridge[1].downBridge.push('O');
+    this.#currentBridge[0].upBridge.push(' ');
+    this.#currentBridge[1].downBridge.push('O');
   }
 
   makeWrongUpBridge() {
-    currentBridge[0].upBridge.push('X');
-    currentBridge[1].downBridge.push(' ');
+    this.#currentBridge[0].upBridge.push('X');
+    this.#currentBridge[1].downBridge.push(' ');
   }
 
   makeWrongDownBridge() {
-    currentBridge[0].upBridge.push(' ');
-    currentBridge[1].downBridge.push('X');
+    this.#currentBridge[0].upBridge.push(' ');
+    this.#currentBridge[1].downBridge.push('X');
   }
 
   /**
