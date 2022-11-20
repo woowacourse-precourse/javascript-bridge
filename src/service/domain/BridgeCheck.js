@@ -1,7 +1,8 @@
 const {
   MODEL_KEY,
-  UPDOWN_INDEX,
-  GAME_RESULT_STATE
+  BRIDGE_DIRECTION,
+  GAME_RESULT_STATE,
+  BRIDGE_CHECK
 } = require('../../utils/constants');
 
 class BridgeCheck {
@@ -25,17 +26,23 @@ class BridgeCheck {
 
     return userBridge.map((bridgeItem, index) =>
       bridgeItem === randomSlice[index]
-        ? ['O', UPDOWN_INDEX[bridgeItem]]
-        : ['X', UPDOWN_INDEX[bridgeItem]]
+        ? [BRIDGE_CHECK.right, bridgeItem]
+        : [BRIDGE_CHECK.wrong, bridgeItem]
+    );
+  }
+
+  #makeOneBridgeFor(direction) {
+    const checkingOXBridge = this.#getBridgeCheckingOX();
+
+    return checkingOXBridge.map(([ox, position]) =>
+      position === direction ? ox : BRIDGE_CHECK.blank
     );
   }
 
   getUserBridgeState() {
-    const checkingOXBridge = this.#getBridgeCheckingOX();
-
     return [
-      checkingOXBridge.map(([ox, position]) => (position === 0 ? ox : ' ')),
-      checkingOXBridge.map(([ox, position]) => (position === 1 ? ox : ' '))
+      this.#makeOneBridgeFor(BRIDGE_DIRECTION.up),
+      this.#makeOneBridgeFor(BRIDGE_DIRECTION.down)
     ];
   }
 
