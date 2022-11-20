@@ -6,6 +6,12 @@ const { printError } = require('./OutputView');
 const { isPositiveInteger } = require('./Validation');
 
 class App {
+  #setBridgeGame(size) {
+    const bridge = makeBridge(size, BridgeRandomNumberGenerator.generate);
+    const bridgeGame = new BridgeGame(bridge);
+    bridgeGame.start();
+  }
+
   play() {
     readBridgeSize((size) => {
       const sizeInput = Number(size);
@@ -13,12 +19,7 @@ class App {
         printError('양의 정수를 입력해 주세요.');
         return this.play();
       }
-      const bridge = makeBridge(
-        sizeInput,
-        BridgeRandomNumberGenerator.generate,
-      );
-      const bridgeGame = new BridgeGame(bridge);
-      bridgeGame.start();
+      return this.#setBridgeGame(sizeInput);
     });
   }
 }
