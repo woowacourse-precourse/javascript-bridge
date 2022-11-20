@@ -22,7 +22,7 @@ class BridgeGame {
   }
 
   drawBridgeMap(moveCommand) {
-    return this.gameMap.drawBridge(moveCommand, this.getUserLocation());
+    return this.gameMap.drawOX(moveCommand, this.getUserLocation());
   }
 
   getUserLocation() {

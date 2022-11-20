@@ -36,16 +36,21 @@ class GameMap {
     return false;
   }
 
-  drawBridge(moveCommand, userLocation) {
-    if (userLocation !== 0) {
-      this.appendVerticalBar();
-    }
+  drawOX(moveCommand, userLocation) {
+    this.checkBridgeLocation(userLocation);
+
     const oxPattern = this.selectOXpattern(moveCommand, userLocation);
     const selectBridge = this.selectUpOrDownBridge(moveCommand, userLocation);
     selectBridge.push(` ${oxPattern} `);
     this.appendEmptySpace(selectBridge);
 
     return this.currentUserBridgeMap();
+  }
+
+  checkBridgeLocation(userLocation) {
+    if (userLocation !== 0) {
+      this.appendVerticalBar();
+    }
   }
 
   currentUserBridgeMap() {
