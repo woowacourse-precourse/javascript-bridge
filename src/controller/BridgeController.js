@@ -1,10 +1,5 @@
 const BridgeService = require('../service/BridgeService');
 
-const BridgeLengthException = require('./validate/BridgeLengthException');
-const BridgeUpDownException = require('./validate/BridgeUpDownException');
-
-const Input = require('./validate/Input');
-
 class BridgeController {
   #service;
 
@@ -13,15 +8,11 @@ class BridgeController {
   }
 
   inputBridgeLength(bridgeLength) {
-    this.#service.start(
-      Input.getValidate(new BridgeLengthException(bridgeLength))
-    );
+    this.#service.start(bridgeLength);
   }
 
   inputBridgeUpDown(command) {
-    this.#service.recordMove(
-      Input.getValidate(new BridgeUpDownException(command))
-    );
+    this.#service.recordMove(command);
   }
 
   inputRestart() {
