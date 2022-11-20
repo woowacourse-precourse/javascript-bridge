@@ -9,7 +9,8 @@ const OutputView = {
      * @param {string} message
      */
     print(message) {
-        MissionUtils.Console.print(message);
+        let arr = message.split("\n");
+        for (let i in arr) MissionUtils.Console.print(arr[i]);
     },
     printHello() {
         this.print("다리 건너기 게임을 시작합니다.\n");
