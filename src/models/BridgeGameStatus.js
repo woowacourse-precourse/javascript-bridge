@@ -1,26 +1,31 @@
 class BridgeGameStatus {
-  #location = -1;
+  static initLocation = -1;
 
-  #tryCount = 0;
+  static initTryCount = 0;
+
+  #state = {
+    location: BridgeGameStatus.initLocation,
+    tryCount: BridgeGameStatus.initTryCount,
+  };
 
   getLocation() {
-    return this.#location;
+    return this.#state.location;
   }
 
   getTryCount() {
-    return this.#tryCount;
+    return this.#state.tryCount;
   }
 
   increaseLocation() {
-    this.#location += 1;
+    this.#state.location += 1;
   }
 
   increaseTryCount() {
-    this.#tryCount += 1;
+    this.#state.tryCount += 1;
   }
 
   resetLocation() {
-    this.#location = -1;
+    this.#state.location = BridgeGameStatus.initLocation;
   }
 }
 

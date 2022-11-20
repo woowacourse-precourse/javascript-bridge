@@ -1,21 +1,21 @@
 const BridgeMap = require('./BridgeMap');
 
 class Bridge {
-  #data;
+  #state;
 
   #map;
 
   constructor(bridge) {
-    this.#data = bridge;
+    this.#state = bridge;
     this.#map = new BridgeMap();
   }
 
   current(location) {
-    return this.#data[location];
+    return this.#state[location];
   }
 
   isLastLocation(location) {
-    return this.#data.length - 1 === location;
+    return this.#state.length - 1 === location;
   }
 
   getMap() {
