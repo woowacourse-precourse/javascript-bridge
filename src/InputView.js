@@ -15,9 +15,16 @@ const InputView = {
    */
   readBridgeSize() {
     return Console.readLine(MESSAGE.ASK_BRIDGE_SIZE, (bridgeSize) => {
-      let bridge = makeBridge(bridgeSize, generate);
-      console.log(bridge); // 지워야 될 코드
-      this.readMoving(bridge, CONSTANT.ZERO_INDEX, CONSTANT.FIRST_GAME);      
+      try {
+        if (isNaN(bridgeSize)) { throw new Error(); }
+        if (bridgeSize < 3 || bridgeSize > 20) { throw new Error(); }
+        let bridge = makeBridge(bridgeSize, generate);
+        console.log(bridge); // 지워야 될 코드
+        this.readMoving(bridge, CONSTANT.ZERO_INDEX, CONSTANT.FIRST_GAME);       
+      } catch (error) {
+        Console.print(ERROR.BRIDGE_RANGE);
+        this.readBridgeSize();
+      }
     });
   },
 
