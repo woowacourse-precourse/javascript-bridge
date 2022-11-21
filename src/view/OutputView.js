@@ -29,7 +29,7 @@ const OutputView = {
     MissionUtils.Console.print(MESSAGE.GAME_RESULT);
     this.printMap(bridgeGame);
 
-    MissionUtils.Console.print(`${MESSAGE.GAME_SUCCESS_STATE}${bridgeGame.getIsSuccess()}`);
+    MissionUtils.Console.print(`${MESSAGE.GAME_SUCCESS_STATE}${bridgeGame.getState()}`);
     MissionUtils.Console.print(`${MESSAGE.GAME_TRY_COUNT}${bridgeGame.getTryCount()}`);
 
     bridgeGame.exit();

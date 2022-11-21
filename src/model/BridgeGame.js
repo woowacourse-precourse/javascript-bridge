@@ -8,13 +8,13 @@ const { GAME_STATE, MOVE, RESTART, HISTORY } = require('../assets/constants');
 class BridgeGame {
   #bridge
   #moveHistory
-  #isSuccess
+  #state
   #tryCount
 
   constructor() {
     this.#bridge = null;
     this.#moveHistory = [];
-    this.#isSuccess = GAME_STATE.FAIL;
+    this.#state = GAME_STATE.FAIL;
     this.#tryCount = 1;
   }
 
@@ -54,16 +54,16 @@ class BridgeGame {
    * 게임 성공 여부를 반환하는 메서드
    * @returns {string} '성공' 혹은 '실패'
    */
-  getIsSuccess() {
-    return this.#isSuccess;
+  getState() {
+    return this.#state;
   }
 
   /**
    * 게임 성공 여부를 재할당하는 메서드
    * @param {string} type 
    */
-  setIsSuccess(type) {
-    this.#isSuccess = type;
+  setState(type) {
+    this.#state = type;
   }
 
   /**
@@ -182,7 +182,7 @@ class BridgeGame {
    */
   isEndPosition() {
     if (this.getPosition() === this.getEndPosition()) {
-      this.setIsSuccess(GAME_STATE.SUCCESS);
+      this.setState(GAME_STATE.SUCCESS);
       return true;
     }
     return false;

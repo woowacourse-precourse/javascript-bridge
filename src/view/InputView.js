@@ -25,7 +25,7 @@ const InputView = {
     MissionUtils.Console.readLine(MESSAGE.ENTER_MOVE_TYPE, (moveType) => {
       bridgeGameController.move(bridgeGame, moveType);
 
-      if (bridgeGame.getIsSuccess() === GAME_STATE.FAIL)
+      if (bridgeGame.getState() === GAME_STATE.FAIL)
         this.readMoving(bridgeGame);
     });
   },
