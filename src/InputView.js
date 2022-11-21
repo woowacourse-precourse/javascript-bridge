@@ -24,6 +24,10 @@ const InputView = {
   readGameCommand(message, callback) {
     Console.readLine(message, callback);
   },
+
+  closeRead() {
+    Console.close();
+  },
 };
 
 module.exports = InputView;
