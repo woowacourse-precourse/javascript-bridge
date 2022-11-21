@@ -15,7 +15,7 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(gameResult) {
-    MissionUtils.Console.print(gameResult);
+    MissionUtils.Console.print(gameResult+"\n");
   },
 
   /**
@@ -24,7 +24,9 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(gameResult, isSuccess, attempts) {
-    MissionUtils.Console.print(GAME_RESULT_STRING+gameResult+"\n"+GAME_SUCCESS_OR_NOT+isSuccess+"\n"+TOTAL_NUMBER_OF_ATTEMPTS+attempts)
+    MissionUtils.Console.print(GAME_RESULT_STRING+gameResult)
+    MissionUtils.Console.print(GAME_SUCCESS_OR_NOT+isSuccess)
+    MissionUtils.Console.print(TOTAL_NUMBER_OF_ATTEMPTS+attempts)
     MissionUtils.Console.close()
   },
 };
