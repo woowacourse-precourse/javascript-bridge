@@ -29,11 +29,20 @@ class Referee {
 
   judgement(compareResult) {
     if (Referee.#isOver(compareResult)) {
-      InputView.readGameCommand();
-    }
-    if (this.bridgeGame.bridge.bridge.length === compareResult[0].length) {
+      InputView.readGameCommand((answer) => this.gameCommand(answer));
+    } else if (this.bridgeGame.bridge.bridge.length === compareResult[0].length) {
       OutputView.printResult();
+    } else {
+      this.start();
     }
+  }
+
+  gameCommand(answer) {
+    if (answer === 'R') {
+      this.bridgeGame.retry(() => this.resultAnalysis());
+      return;
+    }
+    this.endGame();
   }
 
   static #isOver(compareResult) {
