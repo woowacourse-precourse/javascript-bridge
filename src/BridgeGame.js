@@ -13,7 +13,7 @@ class BridgeGame {
   #tryCount = 1;
 
   constructor(bridge) {
-    BridgeValidator.checkBridge(bridge, BRIDGE_LENGTH_MIN, BRIDGE_LENGTH_MIN);
+    BridgeValidator.checkBridge(bridge, BRIDGE_LENGTH_MIN, BRIDGE_LENGTH_MAX);
     this.#bridge = bridge;
     this.#maxPosition = bridge.length;
   }

@@ -47,8 +47,8 @@ class BridgeValidator {
     return true;
   }
   static #isCheckGap(number, min, max) {
-    if (+min > +number && +number > +max) {
-      throw new Error(`${ERROR.OUT_OF_BOUNDARY} : ${min}이상 ${max}이하`);
+    if (+min > +number || +number > +max) {
+      throw new Error(`${ERROR.OUT_OF_BOUNDARY}: ${min}이상 ${max}이하`);
     }
     return true;
   }

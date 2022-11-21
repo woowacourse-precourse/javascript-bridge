@@ -11,7 +11,6 @@ const InputView = {
    */
   readBridgeSize(callback) {
     MissionUtils.Console.readLine(INPUT.BRIDGE_LENGTH, (message) => {
-      MissionUtils.Console.close();
       try {
         BridgeValidator.checkInputBridgeLength(
           message,
@@ -19,10 +18,12 @@ const InputView = {
           BRIDGE_LENGTH_MAX,
         );
       } catch (e) {
-        MissionUtils.Console.print(e);
+        MissionUtils.Console.print(e.message);
         this.readBridgeSize(callback);
+        return;
       }
       callback(message);
+      this.close();
     });
   },
 
@@ -31,15 +32,16 @@ const InputView = {
    */
   readMoving(bridgeGame, callback) {
     MissionUtils.Console.readLine(INPUT.BRIDGE_NEXT, (message) => {
-      MissionUtils.Console.close();
       try {
         BridgeValidator.checkInputNext(message);
       } catch (e) {
-        MissionUtils.Console.readLine(e);
+        MissionUtils.Console.readLine(e.message);
         this.readMoving(bridgeGame, callback);
+        return;
       }
       callback(bridgeGame, message);
     });
+    this.close();
   },
 
   /**
@@ -47,16 +49,20 @@ const InputView = {
    */
   readGameCommand(bridgeGame, callback) {
     MissionUtils.Console.readLine(INPUT.BRIDGE_COMMAND, (message) => {
-      MissionUtils.Console.close();
       try {
         BridgeValidator.checkInputNext(message);
       } catch (e) {
-        MissionUtils.Console.readLine(e);
-        this.readGameCommand(bridgeGame, callback)
+        MissionUtils.Console.readLine(e.message);
+        this.readGameCommand(bridgeGame, callback);
+        return;
       }
       callback(bridgeGame, message);
+      this.close();
     });
   },
+  close() {
+    MissionUtils.Console.close();
+  }
 };
 
 module.exports = InputView;

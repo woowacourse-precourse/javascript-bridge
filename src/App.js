@@ -19,6 +19,7 @@ class App {
       if(bridgeGame.isFinish && bridgeGame.isSuccess) break;
       this.#start(bridgeGame);
     }
+    InputView.close();
   }
 
   #start(bridgeGame) {
@@ -38,7 +39,6 @@ class App {
       this.#isNotFinish = false;
       return;
     }
-
     InputView.readGameCommand(bridgeGame, this.#finishCallback.bind(this));
   }
   #finishCallback(bridgeGame, gameCommand) {
