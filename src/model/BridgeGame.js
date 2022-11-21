@@ -14,7 +14,6 @@ class BridgeGame {
     this.#gameCount = 0;
     this.#inputs = [];
     this.RESTART = "R";
-    this.QUIT = "Q";
   }
   setBridge = (bridge) => {
     this.#bridge = bridge;
@@ -69,8 +68,11 @@ class BridgeGame {
    */
   retry = (input) => {
     Validation.validateRestartInput(input);
-    this.setInput([]);
-    return input;
+    if (input === this.RESTART) {
+      this.setInput([]);
+      return "RESTART";
+    }
+    return "QUIT";
   };
 }
 
