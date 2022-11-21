@@ -1,10 +1,8 @@
-const InputView = require('./InputView.js');
 const OutputView = require('./OutputView.js');
 
 class App {
   play() {
     OutputView.gameStart();
-    InputView.readBridgeSize();
   }
 }
 
