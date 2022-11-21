@@ -24,7 +24,17 @@ class BridgeGame {
     const stage = this.#stateManager.getStage();
     MapGenerator.generate(this.#bridge, stage, moving);
 
+    this.checkWrongMoving(stage, moving);
+
     this.#stateManager.increaseStage();
+  }
+
+  checkWrongMoving(stage, moving) {
+    const isWrongMoving = this.#bridge[stage] !== moving;
+
+    if (isWrongMoving) {
+      this.#stateManager.updateGameStatus('FAIL');
+    }
   }
 
   /**

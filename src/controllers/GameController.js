@@ -16,6 +16,7 @@ class GameContoller {
 
   #gameStatusMap = {
     PLAYING: this.inputMoving.bind(this),
+    FAIL: this.inputGameCommand.bind(this),
   };
 
   start() {
@@ -54,6 +55,12 @@ class GameContoller {
     const gameStatus = this.#stateManager.getGameStatus();
     this.#gameStatusMap[gameStatus]();
   }
+
+  inputGameCommand() {
+    InputView.readGameCommand(this.onInputGameCommand.bind(this));
+  }
+
+  onInputGameCommand(command) {}
 }
 
 module.exports = GameContoller;
