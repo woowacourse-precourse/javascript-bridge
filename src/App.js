@@ -3,6 +3,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
+const { Console } = require("@woowacourse/mission-utils");
 
 class App {
   startGame() {
@@ -36,6 +37,8 @@ class App {
   checkIsGameSuccess(bridge, size) {
     if (bridge.checkIsLastStep(bridge.step, size - 1)) {
       OutputView.printResult("성공", bridge);
+      Console.close();
+
       return;
     }
   }
@@ -50,6 +53,8 @@ class App {
       switch (answer) {
         case "Q":
           OutputView.printResult("실패", bridge);
+          Console.close();
+
           return;
         case "R":
           this.resetGame(bridge);
