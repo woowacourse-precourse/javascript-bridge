@@ -14,10 +14,10 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(moveBridge) {
+  readBridgeSize(makeBridgeAndMove) {
     Console.readLine(PRINT_MESSAGE.BRIDGE_LENGTH, (size) => {
       validateBridgeSize(size);
-      moveBridge(size);
+      makeBridgeAndMove(size);
     });
   },
 
@@ -29,15 +29,15 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(gameResult) {
-    Console.readLine(PRINT_MESSAGE.BRIDGE_TO_MOVE, (Mmve) => {
-      validateMove(move);
-      gameResult(move);
+  readMoving(moveBridge) {
+    Console.readLine(PRINT_MESSAGE.BRIDGE_TO_MOVE, (moveDirection) => {
+      validateMove(moveDirection);
+      moveBridge(moveDirection);
     });
   },
 
-  validateMove(move) {
-    if (move !== BRIDGE_RULE.MOVE_UP && move !== BRIDGE_RULE.MOVE_DOWN)
+  validateMove(moveDirection) {
+    if (moveDirection !== BRIDGE_RULE.MOVE_UP && move !== BRIDGE_RULE.MOVE_DOWN)
       throw new Error(ERROR_MESSAGE.VALIDATION_MOVE);
   },
 
