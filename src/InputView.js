@@ -4,7 +4,7 @@ const Validation = require('./Validation');
 const BridgeMaker = require('./BridgeMaker');
 const OutputView = require('./OutputView');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { CONSOLE_MESSAGE } = require('./utils/constants');
+const { CONSOLE_MESSAGE, PARAMETERS } = require('./utils/constants');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -54,11 +54,12 @@ const InputView = {
 
   trackProgress(bridgeGameLog) {
     if (this.validation.checkRestartRequirement(this.moveCount, bridgeGameLog, this.bridge)) {
-      // readGameCommand: check if user wants to end or restart
-    } 
+      OutputView.bridgeGame.retry();
+      this.readGameCommand(bridgeGameLog);
+    }
 
     if (this.validation.checkGameSuccess(this.moveCount, bridgeGameLog, this.bridge)) {
-      // print final result 
+      // print final result
     } else {
       this.readMoving();
     }
@@ -67,7 +68,17 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGameLog) {
+    MissionUtils.Console.readLine(CONSOLE_MESSAGE.restartCheck, (input) => {
+      try {
+        this.exception.validateRestartInput(input);
+      } catch (error) {
+        return this.readGameCommand(bridgeGameLog);
+      }
+
+      // check if we should restart or just end game; 
+    });
+  },
 };
 
 module.exports = InputView;
