@@ -35,27 +35,32 @@ const InputView = {
    */
   readMoving(bridge, currentIndex, totalgames) {
     Console.readLine(MESSAGE.ASK_BRIDGE_MOVE, (answer) => {
-      let bridgeGame = new BridgeGame;
-      let result = bridgeGame.move(answer, bridge, currentIndex);
+      try{
+        if (answer !== "U" && answer !== "D") { throw new Error(); }
+        let bridgeGame = new BridgeGame;
+        let result = bridgeGame.move(answer, bridge, currentIndex);
 
-      if (result == -1) {
-        OutputView.printMap(bridge.slice(0, currentIndex+1), currentIndex, false);
-        return this.readGameCommand(bridge, currentIndex, totalgames);
-      }
-      if (result == 0) {
-        OutputView.printResult(bridge, totalgames, true);
-        return Console.close();
-      }
-      OutputView.printMap(bridge.slice(0, currentIndex+1), currentIndex, true);
-      return this.readMoving(bridge, currentIndex+1, totalgames);
-      
+        if (result == -1) {
+          OutputView.printMap(bridge.slice(0, currentIndex+1), currentIndex, false);
+          return this.readGameCommand(bridge, currentIndex, totalgames);
+        }
+        if (result == 0) {
+          OutputView.printResult(bridge, totalgames, true);
+          return Console.close();
+        }
+        OutputView.printMap(bridge.slice(0, currentIndex+1), currentIndex, true);
+        return this.readMoving(bridge, currentIndex+1, totalgames);
+      } catch (error) {
+        Console.print(ERROR.MOVE_KEY);
+        this.readMoving(bridge, currentIndex, totalgames);
+      } 
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(bridge, index, totalgames) {
     
   }
 };
