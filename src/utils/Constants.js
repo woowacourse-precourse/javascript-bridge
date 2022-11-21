@@ -8,7 +8,8 @@ const INPUT_MESSAGES = {
 }
 
 const ERROR_MESSAGES = {
-    BRIDGE_SIZE : '[ERROR] 잘못된 입력입니다.\n'
+    BRIDGE_SIZE : '[ERROR] 3 ~ 20 사이 숫자만 입력할 수 있습니다.\n',
+    MOVING : '[ERROR] U 또는 D만 입력할 수 있습니다.\n'
 }
 
 const RANDOM_NUMBERS = {
