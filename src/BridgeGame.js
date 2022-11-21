@@ -41,10 +41,10 @@ class BridgeGame {
   setCorrectCounter(input) {
     if (input === EITHER.UP) {
       this.upCounter.push(MOVE_RESULT.CORRECT);
-      this.downCounter.push(MOVE_RESULT.BLACK);
+      this.downCounter.push(MOVE_RESULT.BLANK);
     }
     if (input === EITHER.DOWN) {
-      this.upCounter.push(MOVE_RESULT.BLACK);
+      this.upCounter.push(MOVE_RESULT.BLANK);
       this.downCounter.push(MOVE_RESULT.CORRECT);
     }
   }
@@ -52,10 +52,10 @@ class BridgeGame {
   setInCorrectCounter(input) {
     if (input === EITHER.UP) {
       this.upCounter.push(MOVE_RESULT.INCORRECT);
-      this.downCounter.push(MOVE_RESULT.BLACK);
+      this.downCounter.push(MOVE_RESULT.BLANK);
     }
     if (input === EITHER.DOWN) {
-      this.upCounter.push(MOVE_RESULT.BLACK);
+      this.upCounter.push(MOVE_RESULT.BLANK);
       this.downCounter.push(MOVE_RESULT.INCORRECT);
     }
   }

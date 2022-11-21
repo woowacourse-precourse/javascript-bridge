@@ -17,7 +17,7 @@ const EITHER = {
 const MOVE_RESULT = {
   CORRECT: 'O',
   INCORRECT: 'X',
-  BLACK: ' ',
+  BLANK: ' ',
 };
 
 const CONTAINER = {
