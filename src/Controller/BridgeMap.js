@@ -20,7 +20,8 @@ class BridgeMap {
   }
 
   getMyStep(parents, current) {
-    const type = DIRECTION[(parents + 1) % 2];
+    const directionIndex = (parents + 1) % 2;
+    const type = DIRECTION[directionIndex];
     if (this.#model.isSameLocationAndType(type, current)) return STEP_TYPE.correct;
     if (this.#model.isWrongLocation(type, current)) return STEP_TYPE.wrong;
     return STEP_TYPE.none;
