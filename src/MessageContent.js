@@ -1,6 +1,7 @@
 const MESSAGE = {
   BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',
   MOVE: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
+  RETRY: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
   END_GAME: '\n최종 게임 결과',
   SUCCESSS: '게임 성공 여부: 성공',
   FAILURE: '게임 성공 여부: 실패',
