@@ -11,7 +11,7 @@ const InputView = {
   readBridgeSize(callback) {
     MissionUtils.Console.readLine(MESSAGE.INPUT.BRIDGE_SIZE, (answer) => {
       try {
-        console.log(answer);
+        console.log(answer); // 삭제 가능
         this.validateBridgeSize(answer);
         callback(answer);
       } catch (error) {
@@ -20,9 +20,6 @@ const InputView = {
       }
     });
   },
-  /**
-   * + 입력 받은 다리 길이를 검증한다.
-   */
   validateBridgeSize(bridgeSize) {
     if (WORD.START_SIZE <= bridgeSize && bridgeSize <= WORD.END_SIZE) {
       return bridgeSize;
@@ -33,7 +30,22 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(callback) {
+    MissionUtils.Console.readLine(MESSAGE.INPUT.MOVING, (answer) => {
+      try {
+        console.log(answer.toUpperCase()); // 삭제 가능
+        this.validateMoving(answer.toUpperCase());
+        callback(answer.toUpperCase());
+      } catch (error) {
+        console.error(error);
+        this.readMoving(callback);
+      }
+    });
+  },
+  validateMoving(moving) {
+    if (moving === WORD.UP || moving === WORD.DOWN) return moving;
+    throw MESSAGE.ERROR.MOVING;
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

@@ -11,8 +11,8 @@
 - [x] 다리를 생성한다.| BridgeMaker#makeBridge(bridgeSize, BridgeRandomNumber.generate)
   - [x] 다리를 생성할 때 위 칸과 아래 칸 중 건널 수 있는 칸은 0과 1 중 무작위 값을 이용해서 정한다.| BridgeRandomNumberGenerator#generate()
     - [x] [예외처리] 무작위 값이 0 또는 1이 아닌 경우 예외 처리한다.
-- [ ] [입력] 플레이어가 이동할 칸을 선택한다.| InputView#readMoving()
-  - [ ] [예외처리] 입력 받은 값이 U 또는 D가 아닌 경우 예외 처리한다.| InputValidator#validateMoving(moving)
+- [x] [입력] 플레이어가 이동할 칸을 선택한다.| InputView#readMoving()
+  - [x] [예외처리] 입력 받은 값이 U 또는 D가 아닌 경우 예외 처리한다.| InputView#validateMoving(moving)
 - [ ] 플레이어가 칸을 이동한다.| BridgeGame#move()
 - [ ] [출력] 다리 건너기 결과를 출력한다.| OutputView#printMap()
 - 다리를 끝까지 건너면 게임이 종료된다.

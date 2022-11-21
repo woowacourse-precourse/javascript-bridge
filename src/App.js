@@ -17,6 +17,7 @@ class App {
     InputView.readBridgeSize((bridgeSize) => {
       console.log("(callback 확인용) bridgeSize: ", bridgeSize);
       this.getBridge(bridgeSize);
+      this.getMoving();
     });
   }
 
@@ -26,6 +27,12 @@ class App {
       BridgeRandomNumberGenerator.generate
     );
     console.log("(확인용) bridges: ", bridges);
+  }
+
+  getMoving() {
+    InputView.readMoving((moving) => {
+      console.log("(callback 확인용) moving: ", moving);
+    });
   }
 }
 
