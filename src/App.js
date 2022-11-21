@@ -100,7 +100,7 @@ class App {
   questionGameRetry() {
     InputView.readGameCommand((retryAnswer) => {
       try {
-        Validator.confirmOfCondition(retryAnswer, 'option');
+        Validator.confirmByCondition(retryAnswer, 'option');
         this.runGameRetry(this.#brdigeGame.retry(retryAnswer));
       } catch (e) {
         Utils.print(e);
