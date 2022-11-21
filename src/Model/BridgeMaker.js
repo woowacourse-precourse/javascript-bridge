@@ -14,12 +14,12 @@ const BridgeMaker = {
 
     for (let cnt = 0; cnt < size; cnt++) {
       const randomValue = generateRandomNumber();
-
-      bridge.push(
+      const crossDirection =
         Number(randomValue) === BRIDGE_SIGN.UPPER_NUM
           ? BRIDGE_SIGN.UPPER
-          : BRIDGE_SIGN.LOWER
-      );
+          : BRIDGE_SIGN.LOWER;
+
+      bridge.push(crossDirection);
     }
 
     return bridge;
