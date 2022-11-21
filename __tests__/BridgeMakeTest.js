@@ -9,7 +9,7 @@ describe('다리 생성 테스트', () => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
 
-    const bridge = BridgeMaker.makeBridge(3, mockGenerator);
+    const bridge = BridgeMaker.makeBridge(bridgeLength, mockGenerator);
     expect(bridge).toEqual(['U', 'U', 'U']);
   });
 
