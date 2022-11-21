@@ -6,6 +6,7 @@ const { close } = require("./utils/utils");
 const BridgegLengthValidator = require("./utils/BridgeLengthValidator");
 const DirectionValidator = require("./utils/DirectionValidator");
 const { STATE } = require("./constants/message");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -17,7 +18,7 @@ class BridgeGame {
   #bridgeSize;
 
   getBridgeLengthFromUser() {
-    InputView.readBridgeSize(this.makeBridge.bind(this));
+    return InputView.readBridgeSize(this.makeBridge.bind(this));
   }
 
   initState() {
@@ -27,11 +28,14 @@ class BridgeGame {
 
   makeBridge(bridgeSize) {
     this.#bridgeSize = Number(bridgeSize);
-    BridgegLengthValidator.validate(this.#bridgeSize);
-
+    try {
+      BridgegLengthValidator.validate(this.#bridgeSize);
+    } catch (e) {
+      OutputView.printErrorLog(e);
+      this.getBridgeLengthFromUser();
+      return;
+    }
     this.#validPath = BridgeMaker.makeBridge(this.#bridgeSize, generateRandomNumber);
-
-    // 유효성 검사
     this.getMoveDirectionFromUser();
   }
 
@@ -52,7 +56,6 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    DirectionValidator.validate(direction);
     if (this.isValidPath(direction)) {
       this.moveMyPositionForward(direction, STATE.VALID.symbol);
       this.updateMyPositionForward();

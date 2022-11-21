@@ -32,6 +32,9 @@ const OutputView = {
   printAttemptsCount(attempts) {
     print(OUTPUT.NOTIFY_TOTAL_TRIAL(attempts));
   },
+  printErrorLog(event) {
+    print(event);
+  },
 };
 
 module.exports = OutputView;
