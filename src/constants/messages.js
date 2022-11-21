@@ -5,7 +5,7 @@ const QUESTION = Object.freeze({
   });
   
   const ERROR = Object.freeze({
-    BRIDGE_LENGTH: '[ERROR] 다리 길이는 3과 20 사이의 정수여야 합니다',
+    BRIDGE_LENGTH_BOUNDARY: '[ERROR] 다리 길이는 3과 20 사이의 정수여야 합니다',
     NUMBER: '[ERROR] 숫자만 입력 가능합니다',
     EMPTY: '[ERROR] 입력값이 존재하지 않습니다',
     NEXT_MOVE: '[ERROR] U , D 의 값만 입력 가능합니다',
