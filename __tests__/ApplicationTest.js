@@ -162,7 +162,7 @@ describe('단판전 진행 테스트', () => {
         '[ O | X ]',
         '[   |   ]',
       ],
-    ]
+    ],
   ])('단판전 진행', (directions, solutionStatus, solutionLog) => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
