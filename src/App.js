@@ -1,7 +1,7 @@
-const BridgeGame = require("./BridgeGame");
+const BridgeGameController = require("./controller/BridgeGameController");
 
 class App {
-  #startBridgeGame = new BridgeGame();
+  #startBridgeGame = new BridgeGameController();
   play() {
     this.#startBridgeGame.getBridgeLengthFromUser();
   }
