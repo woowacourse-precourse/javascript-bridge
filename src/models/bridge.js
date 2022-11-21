@@ -1,11 +1,10 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const CONSTANT = require('../constant');
+const Validate = require('../utils/validate');
 const OutputView = require('../views/OutputView');
 
-const { FAIL_MARK, SUCCESS_MARK, NONE_MARK, UPSTAIR_MARK, DOWNSTAIR_MARK } = CONSTANT.MARKS;
-const { INPUT_ERROR } = CONSTANT.ERROR_MESSAGE;
-const { BRIDGE_MAX_SIZE, BRIDGE_MIN_SIZE } = CONSTANT.Size;
+const { FAIL_MARK, SUCCESS_MARK, NONE_MARK, UPSTAIR_MARK } = CONSTANT.MARKS;
 
 class Bridge {
   #locationNumber;
@@ -28,7 +27,7 @@ class Bridge {
 
   makeBridge(size, init) {
     try {
-      Bridge.#bridgeSizeValidate(size, init);
+      Validate.bridgeSizeValidate(size, init);
       this.bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     } catch {
       OutputView.printMakeBridgeError();
@@ -38,7 +37,7 @@ class Bridge {
 
   compareSpace(value, start, resultAnalysis) {
     try {
-      Bridge.#moveInputValidate(value);
+      Validate.moveInputValidate(value);
       this.sameCheck(value);
       resultAnalysis();
     } catch {
@@ -78,18 +77,6 @@ class Bridge {
 
     this.#compareResult[0].push(NONE_MARK);
     this.#compareResult[1].push(SUCCESS_MARK);
-  }
-
-  static #bridgeSizeValidate(size) {
-    if (!(Number(size) >= BRIDGE_MIN_SIZE && Number(size) <= BRIDGE_MAX_SIZE)) {
-      throw new Error(INPUT_ERROR);
-    }
-  }
-
-  static #moveInputValidate(input) {
-    if (!(input === UPSTAIR_MARK || input === DOWNSTAIR_MARK)) {
-      throw new Error(INPUT_ERROR);
-    }
   }
 }
 

@@ -2,9 +2,9 @@ const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 const BridgeGame = require('./BridgeGame');
 const CONSTANT = require('../constant');
+const Validate = require('../utils/validate');
 
-const { QUIT_MARK, RESTART_MARK, FAIL_MARK } = CONSTANT.MARKS;
-const { INPUT_ERROR } = CONSTANT.ERROR_MESSAGE;
+const { RESTART_MARK, FAIL_MARK } = CONSTANT.MARKS;
 
 class Referee {
   constructor() {
@@ -48,7 +48,7 @@ class Referee {
 
   gameCommand(answer) {
     try {
-      Referee.#gameCommandValidate(answer);
+      Validate.gameCommandValidate(answer);
       this.endOrRestart(answer);
     } catch {
       OutputView.printGameCommandError();
@@ -82,12 +82,6 @@ class Referee {
     }
 
     return false;
-  }
-
-  static #gameCommandValidate(answer) {
-    if (!(answer === RESTART_MARK || answer === QUIT_MARK)) {
-      throw new Error(INPUT_ERROR);
-    }
   }
 }
 module.exports = Referee;
