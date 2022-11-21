@@ -1,4 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { START_MESSAGE } = require('../util/Constant');
+const { GAME_UTILS } = require('../util/Constant');
 const InputView = require('./InputView');
 const BridgeSizeValidator = require('./validator/BridgeSizeValidator');
 const BridgeMaker = require('./BridgeMaker');
@@ -24,7 +26,7 @@ class BridgeGame {
   }
 
   start() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
+    Console.print(START_MESSAGE.START_TITLE);
     this.inputBridgeSize();
   }
 
@@ -64,14 +66,14 @@ class BridgeGame {
   }
 
   isRightBridge(moving) {
-    moving === this.#bridgeSet[this.#gameStage] ? this.#checkSet.push('O') : this.#checkSet.push('X');
+    moving === this.#bridgeSet[this.#gameStage] ? this.#checkSet.push(GAME_UTILS.MOVE_CORRECT) : this.#checkSet.push(GAME_UTILS.MOVE_WRONG);
     this.move();
-    this.#checkSet.includes('X') ? this.wrongBridge() : this.correctBridge();
+    this.#checkSet.includes(GAME_UTILS.MOVE_WRONG) ? this.wrongBridge() : this.correctBridge();
   }
 
   correctBridge() {
     if (this.#gameStage === this.#bridgeSet.length - 1) {
-      return this.printEndGameMessage('성공');
+      return this.printEndGameMessage(GAME_UTILS.GAME_RESULT_SUCCESS);
     }
     this.#gameStage += 1;
     this.inputMoving();
@@ -98,8 +100,8 @@ class BridgeGame {
   }
 
   checkGameCommand(command) {
-    if (command === 'R') return this.retry();
-    this.printEndGameMessage('실패');
+    if (command === GAME_UTILS.COMMAND_RESTART) return this.retry();
+    this.printEndGameMessage(GAME_UTILS.GAME_RESULT_FAILURE);
   }
 
   /**
@@ -111,8 +113,8 @@ class BridgeGame {
     const uBridgeMap = [];
     const dBridgeMap = [];
     this.#checkSet.forEach((stage, index) => {
-      this.#bridgeSet[index] === 'U' ? uBridgeMap.push(stage) : uBridgeMap.push(' ');
-      this.#bridgeSet[index] === 'D' ? dBridgeMap.push(stage) : dBridgeMap.push(' ');
+      this.#bridgeSet[index] === GAME_UTILS.COMMAND_UPBRIDGE ? uBridgeMap.push(stage) : uBridgeMap.push(GAME_UTILS.MOVE_UNCHECK);
+      this.#bridgeSet[index] === GAME_UTILS.COMMAND_DOWNBRIDGE ? dBridgeMap.push(stage) : dBridgeMap.push(GAME_UTILS.MOVE_UNCHECK);
     });
     OutputView.printMap(uBridgeMap, dBridgeMap);
   }
