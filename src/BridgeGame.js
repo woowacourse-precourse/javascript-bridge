@@ -6,14 +6,12 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 class BridgeGame {
   #password;
   constructor() {
+    this.#password;
     this.userInput = [];
   }
 
   generateOfBridgeGamePassword(bridgeLength) {
-    this.#password = BridgeMaker.makeBridge(
-      bridgeLength,
-      BridgeRandomNumberGenerator.generate,
-    );
+    this.#password = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
   }
 
   /**
@@ -32,52 +30,64 @@ class BridgeGame {
   retry() {}
 
   checkUserMovingInput() {
-    if (
-      this.userInput[this.userInput.length - 1] ===
-      this.#password[this.userInput.length - 1]
-    ) {
+    if (this.userInput[this.userInput.length - 1] === this.#password[this.userInput.length - 1]) {
       return true;
     }
     return false;
   }
-
-  drawingCorrectBridge(userMoveInputCollection) {
-    const userMoveBridge = [['['], ['[']];
-    userMoveInputCollection.forEach(movingInput => {
-      if (movingInput === 'U') {
-        userMoveBridge[0].push('O', '|');
-        userMoveBridge[1].push(' ', '|');
-      } else if (movingInput === 'D') {
-        userMoveBridge[0].push(' ', '|');
-        userMoveBridge[1].push('O', '|');
-      }
+  // [[upper, lower]]
+  forDrawingBridge(userInput, password) {
+    const arr = userInput.map((input, index) => (input === password[index] ? [input, true] : [input, false]));
+    return arr;
+  }
+  // [input, true]
+  drawingBridge() {
+    const result = this.forDrawingBridge(this.userInput, this.#password);
+    const resultResult = result.map(userInputAndResult => {
+      this.moveYesOrNO(userInputAndResult);
     });
-    return userMoveBridge.forEach(bridge => {
-      this.bridgeCloseConverter(bridge);
-    });
+    return this.finalConvert(resultResult);
   }
 
-  drawingWrongBridge(userMoveInputCollection) {
-    const userMoveBridge = [['['], ['[']];
-    userMoveInputCollection.forEach(movingInput => {
-      if (movingInput === 'U') {
-        userMoveBridge[0].push('X', '|');
-        userMoveBridge[1].push(' ', '|');
-      } else if (movingInput === 'D') {
-        userMoveBridge[0].push(' ', '|');
-        userMoveBridge[1].push('X', '|');
-      }
-    });
-    return userMoveBridge.forEach(bridge => {
-      this.bridgeCloseConverter(bridge);
-    });
+  finalConvert(result) {
+    const upside = result.map(upAndDown => upAndDown[0]);
+    const downside = result.map(upAndDown => upAndDown[0]);
+    return [upside, downside];
   }
+  // [input, true]
 
-  bridgeCloseConverter(drawingBridge) {
-    if (drawingBridge[drawingBridge.length - 1] === '|') {
-      drawingBridge[drawingBridge.length - 1] = ']';
+  moveYesOrNO(result) {
+    const movable = result[1];
+    if (result[0] === 'U') {
+      return this.drawingUpperBridge(movable);
+    } else {
+      return this.drawingLowerBridge(movable);
     }
-    return drawingBridge;
+  }
+  //true
+  drawingUpperBridge(movable) {
+    const UpperBridge = [];
+    const lowerBridge = [];
+    if (movable === true) {
+      UpperBridge.push('O');
+      lowerBridge.push(' ');
+    } else {
+      UpperBridge.push('X');
+      lowerBridge.push(' ');
+    }
+    return [UpperBridge, lowerBridge];
+  }
+  drawingLowerBridge(movable) {
+    const UpperBridge = [];
+    const lowerBridge = [];
+    if (movable === true) {
+      UpperBridge.push(' ');
+      lowerBridge.push('O');
+    } else {
+      UpperBridge.push(' ');
+      lowerBridge.push('X');
+    }
+    return [UpperBridge, lowerBridge];
   }
 
   gameSuccessStatus() {
