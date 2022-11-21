@@ -14,24 +14,24 @@ class App {
 
   startBridgeGame() {
     OutputView.printStartMessage();
-    this.controllBridgeSize();
+    this.controlBridgeSize();
   }
 
-  controllBridgeSize() {
+  controlBridgeSize() {
     InputView.readBridgeSize((bridgeSize) => {
       console.log("(callback 확인용) bridgeSize: ", bridgeSize);
-      this.controllBridges(bridgeSize);
-      this.controllMoving();
+      this.controlBridges(bridgeSize);
+      this.controlMoving();
     });
   }
 
-  controllBridges(bridgeSize) {
+  controlBridges(bridgeSize) {
     const bridges = BridgeMaker.makeBridge(bridgeSize, generate);
     this.bridgeGame.getBridges(bridges);
     console.log("(확인용) bridges: ", this.bridgeGame.bridges);
   }
 
-  controllMoving() {
+  controlMoving() {
     InputView.readMoving((moving) => {
       console.log("(callback 확인용) moving: ", moving);
       this.bridgeGame.move(moving);
