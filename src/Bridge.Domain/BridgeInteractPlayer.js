@@ -63,6 +63,16 @@ class BridgeInteractPlayer {
         break;
     }
   }
+
+  playerEndThisGame(bridge, isWin) {
+    OutputView.printResult(
+      this.#bridgeGameShape
+        .getCurrentBridgeGameShape(bridge, isWin)
+        .getCurrentShape()
+    );
+    OutputView.printGameEnd(isWin, this.#player.getBridgeGameTryCount());
+    return;
+  }
 }
 
 const bi = new BridgeInteractPlayer();
