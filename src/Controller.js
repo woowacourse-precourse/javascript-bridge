@@ -35,12 +35,16 @@ class Controller {
   inputMoving() {
     const callback = (input, index) => {
       const OX = input === this.inputView.birdgeStrArr[index] ? CROSS_OR_NOT.YES : CROSS_OR_NOT.NO;
-      BridgeGame.move(input, OX, this.model);
-      this.outputView.printMap(this.model);
+      this.reflectMapResult(input, OX);
       if (OX === CROSS_OR_NOT.NO) return this.inputGameCommand();
       return index === this.inputView.bridgeSize - 1 && this.outputView.printResult(SUCCESS, this.model);
     };
     return this.inputView.readMoving(callback, 0, this.inputView.bridgeSize);
+  }
+
+  reflectMapResult(upOrDown, crossOrNot) {
+    BridgeGame.move(upOrDown, crossOrNot, this.model);
+    this.outputView.printMap(this.model);
   }
 
   inputGameCommand() {
