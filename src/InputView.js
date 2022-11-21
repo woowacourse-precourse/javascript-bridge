@@ -34,7 +34,9 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (moveInput) => {
-        validateisRepeat(moveInput)? InputView.readMoving(mainBridge, bridgeGame): null;
+        if (validateisRepeat(moveInput)) {
+          return  InputView.readMoving(mainBridge, bridgeGame)
+        }
         InputView.doMove(moveInput, bridgeGame);
         !bridgeGame.hasNext? InputView.readGameCommand(mainBridge, bridgeGame): null;
         InputView.readMoving(mainBridge, bridgeGame);
