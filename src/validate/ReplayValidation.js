@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE } = require('../../constants');
+const { ERROR_MESSAGE } = require('../constants');
 
 const ReplayValidation = class {
   validate(command) {

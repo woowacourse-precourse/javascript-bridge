@@ -1,5 +1,5 @@
-const { RANGE, ERROR_MESSAGE } = require('../../constants');
-const { isNumber } = require('../../utils/isNumber');
+const { RANGE, ERROR_MESSAGE } = require('../constants');
+const { isNumber } = require('../utils/isNumber');
 
 const SizeValidation = class {
   validate(bridgeSize) {
