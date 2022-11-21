@@ -47,6 +47,20 @@ class BridgeGame {
    */
   retry() {}
 
+  roundCheck(moveInput, round) {
+    const bridge = [...this.#bridge];
+    const upperResult = moveInput === "U" ? moveInput === bridge[round] : null;
+    const lowerResult = moveInput === "D" ? moveInput === bridge[round] : null;
+    const gameState = moveInput === bridge[round] && round < bridge.length - 1;
+    return { upperResult, lowerResult, gameState };
+  }
+  #movementStatusUpdate(result) {
+    const { upperResult, lowerResult } = result;
+    this.#movementStatus.upperSideStatus.push(upperResult);
+    this.#movementStatus.lowerSideStatus.push(lowerResult);
+    this.#movementStatus.round++;
+  }
+
   get currentStatus() {
     return { ...this.#movementStatus };
   }
