@@ -47,15 +47,15 @@ class BridgeGameController {
   }
 
   askWantRetry(answer) {
-    if (answer === 'R') {
-      this.bridgeGame.retry(this.bridge);
-      this.bridgeGame.retryCount += 1;
+    if (answer === 'R') return this.retry();
+
+    return OutputView.printResult(false, this.bridgeGame.retryCount, this.bridge);
+  }
+
+  retry() {
+    this.bridgeGame.retry();
+    this.stepResult.retry();
       InputView.readMoving(this.moveByUser.bind(this));
-    } else {
-      OutputView.printResult(false, this.bridgeGame.retryCount, this.bridge);
-    }
-    Console.print(error.message);
-    InputView.readGameCommand(this.askWantRetry.bind(this));
   }
 }
 
