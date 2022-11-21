@@ -58,6 +58,7 @@ class BridgeGameController {
       );
       return;
     }
+    InputView.readMoving(this.moveBridge.bind(this));
   }
 
   gameOver() {
@@ -66,6 +67,11 @@ class BridgeGameController {
       this.#bridgeInfo.tryCount,
       this.bridgeGame.result
     );
+  }
+
+  retryGame() {
+    this.bridgeGame.retry(this.#bridgeInfo);
+    InputView.readMoving(this.moveBridge.bind(this));
   }
 }
 
