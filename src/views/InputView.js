@@ -13,7 +13,6 @@ const InputView = {
    */
   readBridgeSize(callbackArr) {
     const [createBridge, ...rest] = callbackArr;
-
     Console.readLine('\n다리 길이를 입력해주세요.\n', (userInput) => {
       try {
         createBridge.call(this, Number(userInput));
@@ -42,7 +41,6 @@ const InputView = {
    */
   readGameCommand(callbackArr) {
     const [gameControl] = callbackArr;
-
     Console.readLine('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (userInput) => {
       try {
         gameControl.call(this, userInput);
