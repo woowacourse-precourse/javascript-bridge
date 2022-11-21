@@ -65,7 +65,27 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(gameRec) {
+    MissionUtils.Console.readLine(MESSAGES.ENTER_RETRYQUIT, inputROrQ => {
+      try {
+        (() => new RetryQuitCheck(inputROrQ))(); // check valid input
+      } catch (error) {
+        MissionUtils.Console.print(error);
+        this.readGameCommand(gameRec);
+        return;
+      }
+      switch (inputROrQ) {
+        case "R": // retry
+          const bridgeGame = new BridgeGame();
+          bridgeGame.retry(gameRec);
+          break;
+        case "Q": // quit
+          OutputView.printResult(gameRec);
+          break;
+        default:
+      }
+    });
+  },
 };
 
 module.exports = InputView;
