@@ -36,8 +36,8 @@ const OutputView = {
     Console.print(END_RESULT_SENTENCE);
     OutputView.printMap(bridgeGame);
     Console.print(SUCCESS_OR_FAILURE_SENTENCE + strResult);
-    Console.print(TOTAL_COUNT_SENTENCE);
-    
+    Console.print(TOTAL_COUNT_SENTENCE + bridgeGame.totalCount);
+
     Console.close()
   },
 };
