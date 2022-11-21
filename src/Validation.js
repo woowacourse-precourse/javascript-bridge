@@ -13,6 +13,11 @@ const Validaton = {
             throw new Error(`[ERROR] 다리의 길이는 3이상 20이하입니다.`); 
         }
     },
+    validateUserChoice(userInput){
+        if(!(userInput === 'U' || userInput === 'D')){
+            throw new Error(`[ERROR] 이동할 칸은 U 또는 D만 선택 가능합니다.`);
+        }
+    }
 };
 
 module.exports = Validaton;

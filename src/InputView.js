@@ -26,6 +26,7 @@ const InputView = {
    */
   readMoving(SIZE, BridgeStatus, BridgeIndex, BridgeResultArray) {
     Io.input('이동할 칸을 선택해주세요. (위: U, 아래: D)', (userChoice) => {
+      Validation.validateUserChoice(userChoice);
       console.log(BridgeStatus, userChoice);
       const NowBridgeValue = BridgeStatus[BridgeIndex];
       const CompareResult = BridgeCompare.isSameBridge(userChoice, NowBridgeValue);
