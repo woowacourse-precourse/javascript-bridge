@@ -20,8 +20,9 @@ const InputView = {
     try {
       this.bridgeGameControl.makeBridge(size); // 다리 만들기
       this.readMoving(); // 무빙 입력받기
-    } catch (error) {
-      OutputView.printErrorMessage(SIZE_ERROR); // 위 과정에서 에러 발생시 에러 출력
+    } 
+    catch (error) {
+      OutputView.printErrorMessage(ERROR.SIZE_ERROR); // 위 과정에서 에러 발생시 에러 출력
       this.readBridgeSize(); // 다시 사이즈 입력받기
     }
   },
@@ -29,7 +30,18 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+   readMoving() {
+    Console.readLine(PROMPT.READ_MOVING, this.readMovingCallback.bind(this));
+  },
+
+  readMovingCallback(moving) {
+    try {
+      this.readGameCommand();
+    } catch (error) {
+      OutputView.printErrorMessage(MOVING_ERROR);
+      this.readMoving();
+    }
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
