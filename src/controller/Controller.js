@@ -22,20 +22,23 @@ class Controller {
 
     this.#bridgeGame.move(answer, isPassed);
     this.printCrossing();
-
-    if (isPassed) {
-      this.progress();
-      return;
-    }
-
-    this.fail();
+    this.progress(isPassed);
   }
 
   printCrossing() {
     OutputView.printMap(this.#bridgeGame.printCrossingBridge());
   }
 
-  progress() {
+  progress(isPassed) {
+    if (isPassed) {
+      this.checkWin();
+      return;
+    }
+
+    this.fail();
+  }
+
+  checkWin() {
     if (this.#bridgeGame.checkGameWin()) {
       this.win();
       return;
