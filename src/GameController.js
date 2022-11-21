@@ -73,15 +73,13 @@ class GameController {
   }
 
   runCommand(command) {
-    switch (command) {
-      case QUIT_COMMAND: {
-        this.quit();
-        break;
-      }
-      case RESTART_COMMAND: {
-        this.bridgeGame.retry();
-        this.requestDirection();
-      }
+    if (command === RESTART_COMMAND) {
+      this.bridgeGame.retry();
+      this.requestBridgeSize();
+      return;
+    }
+    if (command === QUIT_COMMAND) {
+      this.quit();
     }
   }
 
@@ -91,6 +89,7 @@ class GameController {
     const tryCount = this.bridgeGame.getTryCount();
 
     OutputView.printResult(movementLogs, isSucceeded, tryCount);
+
     Console.close();
   }
 }
