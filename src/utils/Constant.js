@@ -1,8 +1,6 @@
 const Constant = {
   UP: "U",
   DOWN: "D",
-  CORRECT: " O ",
-  INCORECT: " X ",
   MIN_SIZE: 3,
   MAX_SIZE: 20,
   WRONG: " X ]",
@@ -10,6 +8,8 @@ const Constant = {
   NOT_CHOSEN: "   ]",
   LEFT_BRACKET: "[",
   BAR: "|",
+  QUIT: "Q",
+  RETRY: "R",
 };
 
 module.exports = Constant;
