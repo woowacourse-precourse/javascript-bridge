@@ -10,9 +10,15 @@
 4. InputView
    - 여기서만 입력 가능
 5. OutputView
+   - 출력 형식 지키기
 
 - 함수 10라인 이내
 - 파라미터 최대 3가지
+
+---
+
+6. BridgeUtil
+   -BridgeGame class와 input / output 간 매개하는 함수들 정의 -유저 입력에 따른 결과 유효성 검사하는 함수 추가
 
 ## 예외사항처리
 
