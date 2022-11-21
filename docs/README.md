@@ -35,6 +35,13 @@
     - [x] check if input is "U" or "D"
 - [x] check if game command input is valid
     - [x] check if input is "R" or "Q"
+- [x] check if BridgeGame class works properly
+    - [x] check if move method works properly
+    - [x] check if checkCorrectOrNot method works properly
+    - [x] check if setBridgeOutput method works properly
+    - [x] check if retry method works properly
+- [x] check if BridgeRandomNumberGenerator object works properly
+    - [x] check if generate method works properly
     
 <br/>
 <br/>
