@@ -45,6 +45,7 @@ class BridgeGame {
    * * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    */
   retry() {
+    this.model.isRight = false;
     const getCommand = (command) => {
       if (command === 'R') return this.restart();
       if (command === 'Q') return this.terminate();
