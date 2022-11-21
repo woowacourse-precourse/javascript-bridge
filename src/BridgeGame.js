@@ -13,6 +13,14 @@ class BridgeGame {
     this.outputView = OutputView;
   }
 
+  get nowBridge() {
+    return [this.#nowUpBridge, this.#nowDownBridge];
+  }
+
+  get tryCount() {
+    return this.#tryCount;
+  }
+
   move(playerInput) {
     this.#playerInput = playerInput;
     this.nowBridgeState();
