@@ -5,6 +5,9 @@ const MSG = {
   BRIDGE_SIZE_ERR: '[ERROR] 다리 길이는 3부터 20 사이의 정수 여야 합니다.\n',
   MOVING: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
   MOVING_ERR: '[ERROR] 이동할 칸은 U 또는 D 여야 합니다.\n',
+  GAME_COMMAND:
+    '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+  GAME_COMMAND_ERR: '[ERROR] 다시 시도할지 여부는 R 또는 Q 여야 합니다.\n',
 };
 
 const InputView = {
@@ -48,10 +51,22 @@ const InputView = {
     }
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+  readGameCommand(setGameCommand) {
+    MissionUtils.Console.readLine(MSG.GAME_COMMAND, (input) => {
+      try {
+        this.validateGameCommand(input);
+        setGameCommand(input);
+      } catch (e) {
+        MissionUtils.Console.print(e);
+        this.readGameCommand(setGameCommand);
+      }
+    });
+  },
+  validateGameCommand(input) {
+    if (input !== 'R' && input !== 'Q') {
+      throw new Error(MSG.GAME_COMMAND_ERR);
+    }
+  },
 };
 
 module.exports = InputView;
