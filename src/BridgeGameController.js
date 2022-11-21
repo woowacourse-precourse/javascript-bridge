@@ -3,16 +3,18 @@ const InputView = require('./Views/InputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { RESULT } = require('./utils/constants');
 
 class BridgeGameController {
   #bridgeInfo;
 
   constructor() {
     this.#bridgeInfo = {
+      bridge: [],
       userMove: [],
-      moveCount: 0,
+      tryCount: 1,
     };
-    const bridgeGame = new BridgeGame();
+    this.bridgeGame = new BridgeGame();
   }
 
   start() {
@@ -28,14 +30,9 @@ class BridgeGameController {
   }
 
   moveBridge(moveDirection) {
-    this.#bridgeInfo.moveCount++;
-    this.#bridgeInfo.userMove.push(moveDirection);
-    console.log(this.#bridgeInfo);
-    // this.bridgeGame.move();
-    // this.this.moveAgainOrReGame(this.isSafeBridge());
+    this.bridgeGame.move(this.#bridgeInfo, moveDirection);
+    OutputView.printMap(this.bridgeGame.bridgeMap);
   }
-
-  moveAgainOrReGame() {}
 }
 
 module.exports = BridgeGameController;
