@@ -51,6 +51,7 @@ class BridgeGame {
    */
   retry() {
     this.#bridgeIndex = GAME_NUMBER.startIndex;
+    return this.#bridgeIndex;
   }
 }
 
