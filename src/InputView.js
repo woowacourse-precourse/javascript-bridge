@@ -6,6 +6,13 @@ const OutputView = require("./OutputView");
 const Console = MissionUtils.Console;
 
 const InputView = {
+  BRIDGE_SIZE_MIN: 3,
+  BRIDGE_SIZE_MAX: 20,
+  MOVE_UP: "U",
+  MOVE_DOWN: "D",
+  RETRY_COMMAND: "R",
+  QUIT_COMMAND: "Q",
+
   gameContinue: 0,
   bridge: [],
   tryCount: 1,
@@ -30,7 +37,8 @@ const InputView = {
 
   bridgeSizeException(inputBridgeSize) {
     if (isNaN(inputBridgeSize)) throw "[ERROR] 문자를 입력하실 수 없습니다.";
-    if (inputBridgeSize < 3 || inputBridgeSize > 20) throw "[ERROR] 3이상 20이하의 수만 입력할 수 있습니다.";
+    if (inputBridgeSize < this.BRIDGE_SIZE_MIN || inputBridgeSize > this.BRIDGE_SIZE_MAX)
+      throw "[ERROR] 3이상 20이하의 수만 입력할 수 있습니다.";
   },
 
   readMoving(turnNumber) {
@@ -76,7 +84,8 @@ const InputView = {
   },
 
   movingException(inputMoveUpDown) {
-    if (inputMoveUpDown != "U" && inputMoveUpDown != "D") throw "[ERROR] U 혹은 D만 입력할 수 있습니다.";
+    if (inputMoveUpDown != this.MOVE_UP && inputMoveUpDown != this.MOVE_DOWN)
+      throw "[ERROR] U 혹은 D만 입력할 수 있습니다.";
   },
 
   readGameCommand(turnNumber, inputMoveUpDown) {
@@ -108,7 +117,8 @@ const InputView = {
   },
 
   retryException(inputRetry) {
-    if (inputRetry != "R" && inputRetry != "Q") throw "[ERROR] R 혹은 Q만 입력할 수 있습니다.";
+    if (inputRetry != this.RETRY_COMMAND && inputRetry != this.QUIT_COMMAND)
+      throw "[ERROR] R 혹은 Q만 입력할 수 있습니다.";
   },
 };
 

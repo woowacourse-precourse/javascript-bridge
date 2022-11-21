@@ -3,6 +3,11 @@ const InputView = require("./InputView");
 const Console = MissionUtils.Console;
 
 const OutputView = {
+  MOVE_UP: "U",
+  MOVE_DOWN: "D",
+  RETRY_COMMAND: "R",
+  QUIT_COMMAND: "Q",
+
   upList: [],
   downList: [],
   bridgeSave: [],
@@ -19,22 +24,22 @@ const OutputView = {
   },
 
   makeMapJustO(n) {
-    if (this.bridgeSave[n] == "D") {
+    if (this.bridgeSave[n] == this.MOVE_DOWN) {
       this.upList.push(" ");
       this.downList.push("O");
     }
-    if (this.bridgeSave[n] == "U") {
+    if (this.bridgeSave[n] == this.MOVE_UP) {
       this.upList.push("O");
       this.downList.push(" ");
     }
   },
 
   makeMapWithX(nowLength, moveUpDown) {
-    if (moveUpDown == "U") {
+    if (moveUpDown == this.MOVE_UP) {
       this.upList[nowLength] = "X";
       this.downList[nowLength] = " ";
     }
-    if (moveUpDown == "D") {
+    if (moveUpDown == this.MOVE_DOWN) {
       this.downList[nowLength] = "X";
       this.upList[nowLength] = " ";
     }

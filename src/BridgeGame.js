@@ -1,4 +1,7 @@
 class BridgeGame {
+  RETRY_COMMAND = "R";
+  QUIT_COMMAND = "Q";
+
   move(turnNumber, bridge, moveUpDown) {
     if (bridge[turnNumber] == moveUpDown) {
       if (turnNumber == bridge.length - 1) return 0;
@@ -8,8 +11,8 @@ class BridgeGame {
   }
 
   retry(isRetry) {
-    if (isRetry == "R") return 1;
-    if (isRetry == "Q") return 0;
+    if (isRetry == this.RETRY_COMMAND) return 1;
+    if (isRetry == this.QUIT_COMMAND) return 0;
   }
 }
 
