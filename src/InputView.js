@@ -9,13 +9,17 @@ const InputView = {
    */
   readBridgeSize(callback) {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (input) => {
-      try {
-        return callback(input);
-      } catch (error) {
-        Console.print(error.message);
-        return this.readBridgeSize(callback);
-      }
+      return this.asyncReadBridgeSizeFn(callback, input);
     });
+  },
+
+  async asyncReadBridgeSizeFn(cb, size) {
+    try {
+      return cb(size);
+    } catch (error) {
+      Console.print(error.message);
+      return this.readBridgeSize(cb);
+    }
   },
 
   /**
@@ -23,14 +27,18 @@ const InputView = {
    */
   readMoving(callback, index) {
     Console.readLine(INPUT_MESSAGE.MOVING, (input) => {
-      try {
-        callback(input, index);
-        return index < this.bridgeSize - 1 && this.readMoving(callback, index + 1);
-      } catch (error) {
-        Console.print(error.message);
-        return this.readMoving(callback, index);
-      }
+      return this.asyncReadMovingFn(callback, index, input);
     });
+  },
+
+  async asyncReadMovingFn(cb, Index, upOrDown) {
+    try {
+      cb(upOrDown, Index);
+      return Index < this.bridgeSize - 1 && this.readMoving(cb, Index + 1);
+    } catch (error) {
+      Console.print(error.message);
+      return this.readMoving(cb, Index);
+    }
   },
 
   /**
@@ -38,13 +46,17 @@ const InputView = {
    */
   readGameCommand(callback) {
     Console.readLine(INPUT_MESSAGE.COMMAND, (input) => {
-      try {
-        return callback(input);
-      } catch (error) {
-        Console.print(error.message);
-        return this.readGameCommand(callback);
-      }
+      return this.asyncReadGameCommand(callback, input);
     });
+  },
+
+  async asyncReadGameCommand(cb, command) {
+    try {
+      return cb(command);
+    } catch (error) {
+      Console.print(error.message);
+      return this.readGameCommand(command);
+    }
   },
 };
 
