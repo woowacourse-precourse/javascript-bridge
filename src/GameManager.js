@@ -19,6 +19,12 @@ class GameManager {
     });
   }
 
+  inputMovingSpace(callback) {
+    InputView.readMoving(INPUT_QUESTION.move, (space) => {
+      Validation.checkSpace(space);
+    })
+  }
+
 }
 
 module.exports = GameManager;
