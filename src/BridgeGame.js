@@ -24,15 +24,12 @@ class BridgeGame {
     const compareIndex = this.nowMap['U'].length;
     const other = movingInfo === 'U' ? 'D' : 'U';
 
-    if (this.bridge[compareIndex] === movingInfo) {
-      this.nowMap[movingInfo].push(CORRECT_MOVING);
-      this.nowMap[other].push(NONE_MOVING);
-      return true;
-    } 
+    const pushString = this.bridge[compareIndex] === movingInfo ? CORRECT_MOVING : INCORRECT_MOVING;
+    const returnTF = this.bridge[compareIndex] === movingInfo ? true : false;
 
-    this.nowMap[movingInfo].push(INCORRECT_MOVING);
+    this.nowMap[movingInfo].push(pushString);
     this.nowMap[other].push(NONE_MOVING);
-    return false;
+    return returnTF;
   }
 
   /**
