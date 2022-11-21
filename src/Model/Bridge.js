@@ -7,10 +7,6 @@ class Bridge {
 
   static #bridge = {};
 
-  static getBridge() {
-    return this.#bridge;
-  }
-
   static getSize() {
     return this.#size;
   }

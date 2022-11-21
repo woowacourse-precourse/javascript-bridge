@@ -25,7 +25,7 @@ class GameController {
   setSize(size) {
     if (Exception.bridgeSize(size)) {
       Bridge.setSize(size);
-      this.makeBridge();
+      this.makeBridge(size);
     } else {
       this.readSize();
     }
@@ -43,11 +43,15 @@ class GameController {
 
   setDirection(direction) {
     if (Exception.moveInput(direction)) {
-      BridgeGame.move(direction);
-      this.showBridge();
+      this.move(direction);
     } else {
       this.readDirection();
     }
+  }
+
+  move(direction) {
+    BridgeGame.move(direction);
+    this.showBridge();
   }
 
   showBridge() {

@@ -33,7 +33,6 @@ class Exception {
   }
 
   static bridgeSize(input) {
-    // return this.catchError(this.validateBridgeSize, input);
     return (
       this.catchError(this.validateBridgeSize, input) &&
       this.catchError(this.validateNumberType, input)
@@ -49,13 +48,14 @@ class Exception {
   }
 
   static catchError(validateFunction, input) {
+    let isValid = true;
     try {
       validateFunction(input);
-      return true;
     } catch (error) {
       OutputView.printError(error.message);
-      return false;
+      isValid = false;
     }
+    return isValid;
   }
 }
 

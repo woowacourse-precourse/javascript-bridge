@@ -16,7 +16,6 @@ class Path {
   static makePath() {
     const size = Bridge.getSize();
     this.#path = BridgeMaker.makeBridge(size, generate);
-    // console.log(this.#path);
   }
 }
 
