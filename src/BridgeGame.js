@@ -10,7 +10,7 @@ class BridgeGame {
   constructor(length) {
     this.bridgeForm = BridgeMaker.makeBridge(
       length,
-      BridgeRandomNumberGenerator
+      BridgeRandomNumberGenerator.generate
     );
   }
 

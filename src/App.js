@@ -14,7 +14,7 @@ class App {
   }
 
   play() {
-    this.print(`다리 건너기 게임을 시작합니다.\n`);
+    this.print(`다리 건너기 게임을 시작합니다. \n`);
 
     readBridgeSize((bridgeLength) => {
       try {
