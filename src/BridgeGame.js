@@ -15,6 +15,11 @@ class BridgeGame {
   #upperBridge = [];
   #lowerBridge = [];
 
+  startGame() {
+    OutputView.start();
+    this.enterBridgeLength();
+  }
+
   enterBridgeLength() {
     const bridgeLength = (input) => {
       this.#bridge = BridgeMaker.makeBridge(input, BridgeNumber);
