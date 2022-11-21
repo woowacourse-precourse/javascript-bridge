@@ -1,3 +1,10 @@
+# **⬇️ 다리 건너기 APP 순서도 (FlowChart)**
+
+<img src="img/FlowChart.png">
+
+<br/>
+
+---
 # **🎮 [다리건너기] 기능 단위 구현 목록**
 
 작성방법 : 🟥: 미완성 / 🟧: 진행중 / ✅: 완료 / ❎: 리펙토링중
@@ -66,14 +73,14 @@
 5. [X] 어플리케이션 종료
 
 ## **🟥 기타 체크사항 🎸**
-1. [ ] `InputView` 에서만 `MissionUtils`의 `Console.readLine()` 을 이용해 사용자의 입력
-2. [ ] `BridgeGame` 클래스에서 `InputView`, `OutputView` 를 사용하지 않는다.
-3. [ ] 함수(또는 메서드)의 **길이가 10라인**을 넘어가지 않도록 구현한다
-4. [ ] 메서드의 파라미터 개수는 **최대 3개까지**만 허용한다.
-5. [ ] `BridgeRandomNumberGenerator` 코드는 변경할 수 없다.
-6. [ ] `BridgeMaker` 프로퍼티를 추가할 수 없다.
-7. [ ] `BridgeMaker` 파일 경로는 변경할 수 없다.
-8. [ ] `BridgeMaker` 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
+1. [X] `InputView` 에서만 `MissionUtils`의 `Console.readLine()` 을 이용해 사용자의 입력
+2. [X] `BridgeGame` 클래스에서 `InputView`, `OutputView` 를 사용하지 않는다.
+3. [X] 함수(또는 메서드)의 **길이가 10라인**을 넘어가지 않도록 구현한다
+4. [X] 메서드의 파라미터 개수는 **최대 3개까지**만 허용한다.
+5. [X] `BridgeRandomNumberGenerator` 코드는 변경할 수 없다.
+6. [X] `BridgeMaker` 프로퍼티를 추가할 수 없다.
+7. [X] `BridgeMaker` 파일 경로는 변경할 수 없다.
+8. [X] `BridgeMaker` 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
 
 <br/>
 
