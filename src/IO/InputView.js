@@ -11,21 +11,21 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 const InputView = {
   // 다리의 길이를 입력받는다.
-  readBridgeSize(validateBridgeSize) {
+  readBridgeSize(bridgeSizeInputHandler) {
     const GET_BRIDGE_LENGTH = '다리의 길이를 입력해주세요.\n';
-    MissionUtils.Console.readLine(GET_BRIDGE_LENGTH, validateBridgeSize);
+    MissionUtils.Console.readLine(GET_BRIDGE_LENGTH, bridgeSizeInputHandler);
   },
 
   // 사용자가 이동할 칸을 입력받는다.
-  readMoving(validateBridgeMove) {
+  readMoving(bridgeMoveInputHandler) {
     const SELECT_CELL = '이동할 칸을 선택해주세요. (위: U, 아래: D)\n';
-    MissionUtils.Console.readLine(SELECT_CELL, validateBridgeMove);
+    MissionUtils.Console.readLine(SELECT_CELL, bridgeMoveInputHandler);
   },
 
   // 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-  readGameCommand(validateRetryInput) {
+  readGameCommand(bridgeRetryInputHandler) {
     const DO_YOU_WANNA_RETRY = '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n';
-    MissionUtils.Console.readLine(DO_YOU_WANNA_RETRY, validateRetryInput);
+    MissionUtils.Console.readLine(DO_YOU_WANNA_RETRY, bridgeRetryInputHandler);
   },
 };
 
