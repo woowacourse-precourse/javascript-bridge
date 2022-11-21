@@ -28,7 +28,7 @@ const InputView = {
 
   checkBridgeSizeInput(inputLen, gameRec) {
     try {
-      (() => new BridgeSizeCheck(Number(inputLen)))();
+      (() => new BridgeSizeCheck(inputLen))();
     } catch (error) {
       MissionUtils.Console.print(error);
       this.readBridgeSize();
