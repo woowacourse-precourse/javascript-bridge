@@ -7,32 +7,45 @@ const BridgeGame = require("./BridgeGame");
 const { printMap } = require("./OutputView");
 
 class App {
+  constructor() {
+    this.bridge = null;
+    this.tryNumber = 1;
+  }
+
   async play() {
     MissionUtils.Console.print("다리 건너기 게임을 시작합니다.\n");
-    let tryNumber = 1;
     const bridgeSize = await this.makeBridgeSize(0);
 
-    // 입력받은 길이만큼 다리 생성
-    const bridge = BridgeMaker.makeBridge(bridgeSize, generate);
-    console.log("bridge", bridge);
+    this.bridge = BridgeMaker.makeBridge(bridgeSize, generate);
     const bridgeGame = new BridgeGame();
 
     let moveCount = 0;
     let retry = "R";
     let moveCommand = "";
     while (retry === "R") {
-      const gameResults = await bridgeGame.move(bridgeSize, bridge, moveCount);
-      moveCommand += gameResults === 'END' ? '' : gameResults
+      const gameResults = await bridgeGame.move(
+        bridgeSize,
+        this.bridge,
+        moveCount
+      );
+      moveCommand += gameResults === "END" ? "" : gameResults;
       if (gameResults === "O") {
-        OutputView.printMap(bridge.slice(0, moveCount + 1), moveCommand);
+        moveCommand.length === moveCount
+          ? OutputView.printResult(this.tryNumber, this.bridge, moveCommand)
+          : OutputView.printMap(
+              this.bridge.slice(0, moveCount + 1),
+              moveCommand
+            );
         moveCount++;
       } else if (gameResults === "X") {
-        OutputView.printMap(bridge.slice(0, moveCount + 1), moveCommand);
-        moveCommand = moveCommand.slice(0, moveCount);
+        OutputView.printMap(this.bridge.slice(0, moveCount + 1), moveCommand);
+
         retry = await bridgeGame.retry();
-        tryNumber = await this.isRetry(retry, tryNumber, moveCommand);
-      } else if (gameResults === "END") {
-        OutputView.printResult(tryNumber, bridge, moveCommand);
+        if (this.isRetry(retry, this.tryNumber, moveCommand) === "R") {
+          moveCommand = moveCommand.slice(0, moveCount);
+        }
+      } else if (gameResults === "END" || retry === "Q") {
+        OutputView.printResult(this.tryNumber, this.bridge, moveCommand);
         retry = "Q";
       }
     }
@@ -54,17 +67,17 @@ class App {
         throw "[ERROR] 다리의 길이는 3~20 사이의 숫자여야 합니다.";
       }
     } catch (err) {
-      console.log(err);
+      MissionUtils.Console.print(err);
     }
   }
 
   isRetry(command, tryNumber, moveCommand) {
     if (command === "R") {
-      return tryNumber + 1;
+      this.tryNumber += 1;
+      return "R";
     }
     if (command === "Q") {
-      console.log("최종결과 프린트");
-      OutputView.printResult(false, tryNumber, moveCommand);
+      OutputView.printResult(tryNumber, this.bridge, moveCommand);
     }
   }
 }
