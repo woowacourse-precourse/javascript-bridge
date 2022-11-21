@@ -22,8 +22,9 @@ class App {
     Input.readMoving(this.nextMoving);
   }
 
-  nextMoving = () => {
-
+  nextMoving = (way) => {
+    this.#bridgeGame.move(way);
+    Output.printMap(this.#bridgeGame);
   }
 }
 

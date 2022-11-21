@@ -11,7 +11,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {
+  printMap(bridge) {
+    this.printingMap(bridge, "U");
+    this.printingMap(bridge, "D");
   },
 
   /**
@@ -20,6 +22,13 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult() {},
+
+  printingMap(bridge, way) {
+    const result = bridge.compareResult(way);
+    const printMap = `[ ${result.join(" | ")} ]`;
+
+    MissionUtils.Console.print(printMap);
+  }
 };
 
 module.exports = OutputView;
