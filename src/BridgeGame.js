@@ -36,6 +36,25 @@ class BridgeGame {
     this.moveCount = 0;
   }
 
+  detectIsMovable = (command) => {
+    if (!this.bridgeStore.isMovable(this.moveCount, command)) {
+      this.fail();
+      return false;
+    }
+
+    this.moveCount += 1;
+    return true;
+  };
+
+  detectIsGameClear = () => {
+    if (!this.bridgeStore.isGameClear(this.moveCount)) {
+      return false;
+    }
+
+    this.end();
+    return true;
+  };
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -43,27 +62,18 @@ class BridgeGame {
    */
   move = (command) => {
     // TODO: command확인
-    const isMovable = this.bridgeStore.isMovable(this.moveCount, command);
+    this.setMovedData(command);
 
-    this.setMovedData(isMovable, command);
-
-    if (!isMovable) {
-      this.fail();
-      return;
-    }
-
-    if (this.bridgeStore.isGameClear(this.moveCount)) {
-      this.end();
+    if (!this.detectIsMovable(command) || this.detectIsGameClear()) {
       return;
     }
 
     InputView.readMoving(this.movingMessage, this.move);
   };
 
-  setMovedData = (isMovable, command) => {
-    this.bridgeStore.addUserInputResult(isMovable);
+  setMovedData = (command) => {
+    this.bridgeStore.addUserInputResult(this.bridgeStore.isMovable(this.moveCount, command));
     OutputView.printMap(this.moveCount, command, this.bridgeStore.getUserInputResult);
-    this.moveCount += 1;
   };
 
   confirmRetry = (command) => {
