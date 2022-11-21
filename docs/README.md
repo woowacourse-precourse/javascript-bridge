@@ -25,4 +25,4 @@
 ### BridgeGame
 
 - [x] 라운드마다 U와 D 이외의 값이 입력될 경우 - Validator#validateMove()
-- [ ] 게임 재시작 시 R과 Q 이외의 값이 입력될 경우 - Validator#validateRetry()
+- [x] 게임 재시작 시 R과 Q 이외의 값이 입력될 경우 - Validator#validateRetry()

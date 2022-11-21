@@ -13,7 +13,10 @@ const Validator = {
     if (dir.length !== 1 || /[^UD]/.test(dir))
       throw new Error(prefix + isNotUpOrDown);
   },
-  validateRetry() {},
+  validateRetry(msg) {
+    if (msg.length !== 1 || /[^RQ]/.test(msg))
+      throw new Error(prefix + isNotRetryOrQuit);
+  },
 };
 
 module.exports = Validator;
