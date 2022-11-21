@@ -12,7 +12,7 @@ class BridgeGame {
     this.#numberOfAttempts = 1;
   }
 
-  addBridgeFromUser(input) {
+  selectMovemonetPosition(input) {
     return this.#userBridge.push(input);
   }
 
@@ -39,23 +39,16 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(userBridge) {
-    const crossBridgeResult = [];
-    userBridge.forEach((position, index) => {
-      this.#checkBridge(position, crossBridgeResult, index);
-    });
-    return crossBridgeResult;
-  }
 
-  #checkBridge(position, crossBridgeResult, index) {
-    if (position === this.#bridge[index] && position === 'U') {
-      return crossBridgeResult.push(['O', ' ']);
-    }
-    if (position === this.#bridge[index] && position === 'D') {
-      return crossBridgeResult.push([' ', 'O']);
-    }
-    if (position === 'U') return crossBridgeResult.push(['X', ' ']);
-    return crossBridgeResult.push([' ', 'X']);
+  move() {
+    return this.#userBridge.reduce((acc, position, index) => {
+      if (position === this.#bridge[index]) {
+        position === 'U' ? acc.push(['O', ' ']) : acc.push([' ', 'O']);
+      } else if (position !== this.#bridge[index]) {
+        position === 'U' ? acc.push(['X', ' ']) : acc.push([' ', 'X']);
+      }
+      return acc;
+    }, []);
   }
 
   /**
