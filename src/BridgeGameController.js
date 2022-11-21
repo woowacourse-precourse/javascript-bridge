@@ -50,8 +50,6 @@ class BridgeGameController {
     }
   }
 
-  // if (BridgeGameController.canMoveNext(game))
-
   static queryRetry(game, command) {
     try {
       BridgeGameController.checkRetry(game, command);
@@ -66,11 +64,6 @@ class BridgeGameController {
       game.retry();
       readMoving(game, BridgeGameController.moveNext);
     } else BridgeGameController.quit(game);
-  }
-
-  static canMoveNext(game) {
-    if (!game.isEndOfBridge()) return true;
-    return false;
   }
 
   static showBridge(game) {
