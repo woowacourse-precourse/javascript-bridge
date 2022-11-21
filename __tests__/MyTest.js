@@ -1,6 +1,7 @@
 const BridgeMaker = require('../src/BridgeMaker');
 const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
 const InputView = require('../src/InputView');
+const BridgeGame = require('../src/BridgeGame');
 
 describe('입력값 예외 테스트', () => {
   test.each([['1'], ['31'], ['!'], ['A']])(
@@ -29,4 +30,15 @@ describe('입력값 예외 테스트', () => {
       }).toThrow('[ERROR]');
     }
   );
+});
+
+describe('다리 길이를 입력하면 다리를 생성한다.', () => {
+  test('입력 받은 다리 길이에 맞는 다리 건설한다.', () => {
+    const size = 3;
+    const answerArr = BridgeMaker.makeBridge(
+      size,
+      BridgeRandomNumberGenerator.generate
+    );
+    expect(answerArr.length).toEqual(3);
+  });
 });
