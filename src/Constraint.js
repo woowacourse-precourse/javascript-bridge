@@ -47,4 +47,18 @@ class MoveConstraint {
   }
 }
 
-module.exports = { SizeConstraint, MoveConstraint };
+class CommandConstraint {
+  #command;
+
+  constructor(command) {
+    this.#command = command;
+  }
+
+  checkInputRQ() {
+    if (this.#command !== "R" && this.#command !== "Q") {
+      throw new Error("[ERROR] R 또는 Q만 입력 가능합니다.");
+    }
+  }
+}
+
+module.exports = { SizeConstraint, MoveConstraint, CommandConstraint };
