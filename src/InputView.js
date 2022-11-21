@@ -5,6 +5,7 @@ const generateRandomNumber = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
 let game = new BridgeGame();
 let current = 0;
+let bridgeSize = 0;
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -14,19 +15,19 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(`다리의 길이를 입력해주세요.\n`,(getSize)=>{
-      let bridgeSize = parseInt(getSize);
+      bridgeSize = parseInt(getSize);
       game.answer = BridgeMaker.makeBridge(getSize, generateRandomNumber);
-      this.readMoving(bridgeSize);
+      this.readMoving();
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridgeSize) {
-    if (current >= bridgeSize) return;
+  readMoving() {
+    if (current >= bridgeSize) return OutputView.printResult(game.map, game.result, game.count);
     Console.readLine(`이동할 칸을 선택해주세요. (위: U, 아래: D)\n`,(getUser)=>{
-      game.user =getUser;
+      game.user = getUser;
       if (game.move(current++)) {
         OutputView.printMap(game.map);
         return this.readMoving();
@@ -45,7 +46,7 @@ const InputView = {
         current = 0;
         return this.readMoving();
       }
-      return OutputView.printResult(game.result, game.count);
+      return OutputView.printResult(game.map, game.result, game.count);
     })
   },
 };
