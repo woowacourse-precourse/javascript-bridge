@@ -9,15 +9,23 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    const validation = new Validation();
     let bridgeSize;
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.", (bridgeSizeInput) => {
       bridgeSize = Number(bridgeSizeInput);
-      validation.checkSizeInputValidation(bridgeSize);
+      this.handleSizeError(bridgeSize);
     });
     return bridgeSize;
   },
 
+  handleSizeError(bridgeSize) {
+    const validation = new Validation();
+    try {
+        validation.checkSizeInputValidation(bridgeSize);
+    } catch (error) {
+        MissionUtils.Console.print('[ERROR]');
+        this.readBridgeSize();
+    }
+  },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
