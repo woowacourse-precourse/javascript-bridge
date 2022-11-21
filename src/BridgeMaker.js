@@ -9,7 +9,7 @@ const BridgeMaker = {
    */
 
   makeBridge: (size, generateRandomNumber) =>
-    [...Array(size)].map(() => {
+    [...Array(Number(size))].map(() => {
       const randomNumber = generateRandomNumber();
       const isUpNumber = Number(randomNumber) === UP_NUMBER;
       return isUpNumber ? POSITION.UP : POSITION.DOWN;
