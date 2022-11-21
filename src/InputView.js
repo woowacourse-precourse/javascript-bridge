@@ -33,16 +33,16 @@ const InputView = {
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       function (direction) {
         validateDirection(direction);
-        const [isFinish, isEnd] = bridgeGame.move(direction);
+        const [marking, isEnd] = bridgeGame.move(direction);
         OutputView.printMap(bridgeGame.board);
-        if (isEnd === true || isFinish === false) {
-          OutputView.printResult();
-          this.readGameCommand(bridgeGame);
-          return;
-        }
-        this.readMoving(bridgeGame);
+        this.makeResult(marking, isEnd, bridgeGame);
       }.bind(this)
     );
+  },
+  makeResult(marking, isEnd, bridgeGame) {
+    if (isEnd === true && marking === true) this.finishGame(bridgeGame, "");
+    else if (marking === false) this.readGameCommand(bridgeGame);
+    else this.readMoving(bridgeGame);
   },
 
   /**
@@ -62,7 +62,14 @@ const InputView = {
     if (command === "R") {
       bridgeGame.retry();
       this.readMoving(bridgeGame);
-    } else if (command === "Q") Console.close();
+    } else if (command === "Q") {
+      this.finishGame(bridgeGame, command);
+    }
+  },
+
+  finishGame(bridgeGame, command) {
+    OutputView.printResult(bridgeGame.board, bridgeGame.count, command);
+    Console.close();
   },
 };
 
