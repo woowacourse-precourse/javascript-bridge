@@ -8,9 +8,9 @@ class InputValidation {
     }
   }
 
-  static checkValidRound(input) {
+  static checkValidSpace(space) {
     const regExp = /U|D/;
-    if (!regExp.test(input)) {
+    if (!regExp.test(space)) {
       throw new Error(ERROR_MESSAGE.moving);
     }
   }

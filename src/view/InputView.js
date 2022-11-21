@@ -8,13 +8,13 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    Console.readLine(INPUT_MESSAGE.bridge_size, (size) => callback(size));
+    Console.readLine(INPUT_MESSAGE.bridge_size, (input) => callback(input));
   },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(callback) {
-    Console.readLine(INPUT_MESSAGE.moving, (space) => callback(space));
+    Console.readLine(INPUT_MESSAGE.moving, (input) => callback(input));
   },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

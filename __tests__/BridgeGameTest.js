@@ -38,7 +38,7 @@ test('사용자가 현재까지 입력한 다리 정보가 정답인 다리와 �
   const bridgeGame = new BridgeGame(4);
   bridgeGame.userBridge.command = ['U', 'D'];
 
-  const value = bridgeGame.isRightSpace();
+  const value = bridgeGame.isCorrectSpace();
 
   expect(value).toEqual(true);
 });

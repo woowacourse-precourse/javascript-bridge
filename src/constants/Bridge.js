@@ -1,4 +1,4 @@
-const BRIDGE = Object({
+const BRIDGE = Object.freeze({
   front: '[ ',
   correct: 'O',
   wrong: 'X',

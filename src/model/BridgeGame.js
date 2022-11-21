@@ -26,10 +26,12 @@ class BridgeGame {
    */
   move(space) {
     this.userBridge.command.push(space);
-    const spaceResult = this.isRightSpace(space) ? BRIDGE.correct : BRIDGE.wrong;
-    return space === COMMAND.up
-      ? this.#makeUpBridge(spaceResult)
-      : this.#makeDownBridge(spaceResult);
+    const spaceResult = this.isCorrectSpace(space) ? BRIDGE.correct : BRIDGE.wrong;
+
+    if (space === COMMAND.up) {
+      return this.#makeUpBridge(spaceResult);
+    }
+    return this.#makeDownBridge(spaceResult);
   }
 
   #makeUpBridge(spaceResult) {
@@ -44,7 +46,7 @@ class BridgeGame {
     return this;
   }
 
-  isRightSpace() {
+  isCorrectSpace() {
     const bridgePiece = this.#bridge.slice(ZERO, this.userBridge.command.length);
     return JSON.stringify(this.userBridge.command) === JSON.stringify(bridgePiece);
   }
