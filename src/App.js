@@ -15,7 +15,7 @@ class App {
   play() {
     this.#bridge = maker.makeBridge(this.#inputBridgeLength(),generate.generate);
     const game = new Game(this.#bridge);
-
+    game.start();
   }
 
   /**
