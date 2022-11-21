@@ -7,7 +7,7 @@ const mockRandoms = (numbers) => {
 };
 
 test('다리를 건너는 move 메서드가 userBridge의 command정보를 올바르게 저장하는지 확인한다.', () => {
-  mockRandoms(['1', '0', '1']);
+  mockRandoms([1, 0, 1]);
   const bridgeGame = new BridgeGame(3);
 
   bridgeGame.move('U');
@@ -16,7 +16,7 @@ test('다리를 건너는 move 메서드가 userBridge의 command정보를 올�
 });
 
 test('다리를 건너는 move 메서드가 userBridge의 up정보를 올바르게 저장하는지 확인한다.', () => {
-  mockRandoms(['1', '0', '1']);
+  mockRandoms([1, 0, 1]);
   const bridgeGame = new BridgeGame(3);
 
   bridgeGame.move('U');
@@ -25,7 +25,7 @@ test('다리를 건너는 move 메서드가 userBridge의 up정보를 올바르�
 });
 
 test('다리를 건너는 move 메서드가 userBridge의 down정보를 올바르게 저장하는지 확인한다.', () => {
-  mockRandoms(['1', '0', '1']);
+  mockRandoms([1, 0, 1]);
   const bridgeGame = new BridgeGame(3);
 
   bridgeGame.move('U');
@@ -34,7 +34,7 @@ test('다리를 건너는 move 메서드가 userBridge의 down정보를 올바�
 });
 
 test('사용자가 현재까지 입력한 다리 정보가 정답인 다리와 같은지 비교하는 isRightSpace 메서드가 정삭 동작하는지 확인한다.', () => {
-  mockRandoms(['1', '0', '1', '0']);
+  mockRandoms([1, 0, 1, 0]);
   const bridgeGame = new BridgeGame(4);
   bridgeGame.userBridge.command = ['U', 'D'];
 
@@ -44,7 +44,7 @@ test('사용자가 현재까지 입력한 다리 정보가 정답인 다리와 �
 });
 
 test('사용자의 다리 정보와 정답인 다리와 동일한지 확인하는 isEnd 메서드가 정상 동작하는지 확인한다.', () => {
-  mockRandoms(['1', '0', '1', '0']);
+  mockRandoms([1, 0, 1, 0]);
   const bridgeGame = new BridgeGame(4);
   bridgeGame.userBridge.command = ['U', 'D', 'U', 'D'];
 
@@ -54,7 +54,7 @@ test('사용자의 다리 정보와 정답인 다리와 동일한지 확인하�
 });
 
 test('사용자의 다리 정보를 바탕으로 다리 형식을 만드는 makeBridgeFormat 메서드가 정상 동작하는지 확인한다.', () => {
-  mockRandoms(['1', '0', '1']);
+  mockRandoms([1, 0, 1]);
   const bridgeGame = new BridgeGame(3);
   bridgeGame.userBridge.up = ['O', ' ', ' '];
   bridgeGame.userBridge.down = [' ', 'O', 'X'];

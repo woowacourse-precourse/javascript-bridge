@@ -9,7 +9,7 @@ const mockRandoms = (numbers) => {
 
 describe('BridgeMarker 테스트', () => {
   test('makeBridge메서드가 정상 동작하는지 확인한다.', () => {
-    mockRandoms(['1', '1', '0', '0', '1']);
+    mockRandoms([1, 1, 0, 0, 1]);
 
     const bridge = makeBridge(5, generate);
 
