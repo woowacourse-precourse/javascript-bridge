@@ -11,13 +11,18 @@ class App {
   async play() {
     OutputView.printStart();
 
-    const size = await InputView.readBridgeSize();
+    const BRIDGE_SIZE = await InputView.readBridgeSize();
 
-    const bridge = this.#bridgeGame.make(size);
+    const bridge = this.#bridgeGame.make(BRIDGE_SIZE);
     Console.print(bridge);
 
-    const direction = await InputView.readMoving();
-    Console.print(direction);
+    let isLive = true;
+
+    while (isLive === true) {
+      const direction = await InputView.readMoving();
+      isLive = this.#bridgeGame.move(bridge, direction);
+      if (isLive === "finish") InputView.close();
+    }
   }
 }
 

@@ -39,6 +39,11 @@ const InputView = {
    */
   readGameCommand() {},
 
+  close() {
+    Console.print("끄으으읕");
+    Console.close();
+  },
+
   validateSize(inputSize) {
     if (inputSize >= 3 && inputSize <= 20) {
       return true;
