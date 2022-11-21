@@ -1,12 +1,9 @@
-const { Console } = require("@woowacourse/mission-utils");
 const InputView = require('./InputView.js');
-
-const GAME_START_SENTENCE = '다리 건너기 게임을 시작합니다.\n'
+const OutputView = require('./OutputView.js');
 
 class App {
   play() {
-    Console.print(GAME_START_SENTENCE);
-
+    OutputView.gameStart();
     InputView.readBridgeSize();
   }
 }
