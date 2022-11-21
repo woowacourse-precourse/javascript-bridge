@@ -39,10 +39,12 @@ class Model {
     return this.#computerBridgeArr;
   }
 
-  getAccumulatedOX() {
-    const upResult = `[${this.#userUpBridgeArr.join('|')}]`;
-    const downResult = `[${this.#userDownBridgeArr.join('|')}]`;
-    return `${upResult}\n${downResult}`;
+  getUpBridgeArr() {
+    return this.#userUpBridgeArr;
+  }
+
+  getDownBridgeArr() {
+    return this.#userDownBridgeArr;
   }
 
   resetAndRetry() {
