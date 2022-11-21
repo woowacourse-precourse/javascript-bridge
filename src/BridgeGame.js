@@ -42,29 +42,14 @@ class BridgeGame {
     return this.#usersMove;
   }
 
-  checkCanMoveNextStep() {
+  checkCurrentStatus() {
     if (this.#gameOver === true) {
-      InputView.readGameCommand(this.checkRetryOrEnd.bind(this));
-      return;
+      return "gameOver"
     }
 
     if (this.#moveCount === this.#bridge.length) {
-      this.end();
-      return;
+      return "arrival"
     }
-
-    InputView.readMoving(this.move.bind(this));
-    return;
-  }
-
-  checkRetryOrEnd(inputRetryOrEnd) {
-    if (inputRetryOrEnd === 'R') {
-      this.retry();
-      return;
-    }
-
-    this.end();
-    return;
   }
 
   /**

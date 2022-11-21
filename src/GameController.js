@@ -54,6 +54,33 @@ class GameController {
     const usersMove = this.BridgeGame.move(moving);
 
     OutputView.printMap(usersMove);
+    this.checkCanMoveNextStep();
+  }
+
+  checkCanMoveNextStep() {
+    const status = this.BridgeGame.checkCurrentStatus()
+
+    if (status === "gameOver") {
+      this.getRetryOrEnd();
+      return;
+    }
+
+    if (status === "arrival") {
+      this.end();
+      return;
+    }
+
+    this.getMoving();
+    return;
+  }
+
+  getRetryOrEnd() {
+  }
+
+  retry() {
+  }
+
+  end() {
   }
 }
 
