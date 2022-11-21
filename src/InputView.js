@@ -4,6 +4,7 @@ const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker.js");
 const BridgeGame = require("./BridgeGame");
 const Validation = require("./Validation.js");
+const { printResult, printFinish, printMap, printGameCount } = require("./OutputView.js");
 
 const InputView = {
     readBridgeSize() {
@@ -30,7 +31,7 @@ const InputView = {
             return this.readGameCommand(bridgeGame);
         }
         if (bridgeGame.isSuccess(move)) {
-            return bridgeGame.showResult(MESSAGE.SUCCESS);
+            return printResult(bridgeGame, MESSAGE.SUCCESS);
         }
         bridgeGame.move(move);
         this.readMoving(bridgeGame);
@@ -47,7 +48,13 @@ const InputView = {
         if (bridgeGame.questionRetry(answer)) {
             return this.readMoving(bridgeGame);
         }
-        bridgeGame.showResult(MESSAGE.FAIL);
+        printResult(bridgeGame, MESSAGE.SUCCESS);
+    },
+    showResult(bridgeGame, result) {
+        printFinish();
+        printMap(bridgeGame);
+        printResult(result);
+        printGameCount(bridgeGame);
     },
 };
 
