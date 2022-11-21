@@ -4,12 +4,18 @@
 
 - [x] 0과 1 중 무작위 값을 생성한다. - BridgeRandomNumberGenerator#generate()
 - [x] 특정 길이의 다리를 생성한다. - BridgeMaker#makeBridge()
-- [x] 1, 0을 각각 U, D로 변환한다. - Converter#convertToUpDown()
-- [x] 특정 칸이 건널 수 있는지 확인한다. - Checker#checkSpaceCanCross()
-- [x] 다리 끝까지 건넜는지 판단한다. - Checker#checkCrossBridge()
 - [ ] 게임 성공 여부를 판단한다. - Judge#judgeGameSuccess()
-- [ ] 게임 시도 횟수를 센다. - Counter#countTry()
+
+- [ ] 입력 값에 따라 이동한다. - BridgeGame#move()
+- [ ] 게임을 재시작한다. - BridgeGame#retry()
+- [ ] 게임 시도 횟수를 센다. - BridgeGame#countTry()
+
+- [x] 1, 0을 각각 U, D로 변환한다. - Converter#convertToUpDown()
 - [x] 이동 정보를 다리 결과로 변환한다. - Converter#convertToBridgeMap()
+
+- [x] 특정 칸이 건널 수 있는지 확인한다. - Checker#checkSpaceCanMove()
+- [ ] 게임이 종료되었는지 확인한다. - Checker#checkGameOver()
+
 - [x] 다리의 정보를 출력한다. - OutputView#printMap()
 - [ ] 게임 결과를 출력한다. - OutputView#printResult()
 - [x] 게임 시작 메세지를 출력한다. - OutputView#printGameStart()
