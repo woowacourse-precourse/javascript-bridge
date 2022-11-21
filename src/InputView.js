@@ -24,10 +24,10 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgeGame) {
-    Console.readLine(INPUT_MESSAGE.MOVE, (userInput) => {
-      const error = Validation.checkUserMoveInput(userInput);
+    Console.readLine(INPUT_MESSAGE.MOVE, (moveInput) => {
+      const error = Validation.checkUserMoveInput(moveInput);
       if (error) return this.readMoving(bridgeGame);
-      bridgeGame.move(userInput);
+      bridgeGame.move(moveInput);
       OutputView.printMap(bridgeGame.getLog());
       if (bridgeGame.isWrongZone()) return this.readGameCommand(bridgeGame);
       if (bridgeGame.isReached())
