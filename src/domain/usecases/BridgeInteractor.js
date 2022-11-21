@@ -14,7 +14,7 @@ class BridgeInteractor {
   }
 
   makeBridge(size) {
-    if (!this.validate(size)) throw new BridgeError(ERROR_MESSAGE.INVALID_BRIGE_SIZE);
+    if (!BridgeInteractor.validate(size)) throw new BridgeError(ERROR_MESSAGE.INVALID_BRIGE_SIZE);
 
     this.#bridge = new Bridge(BridgeMaker.makeBridge(size, generate));
     return this.#bridge;
