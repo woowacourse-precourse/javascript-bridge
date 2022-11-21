@@ -58,7 +58,6 @@ class App {
         InputView.readMoving(this.handleInputStep.bind(this));
         break;
       case 'FAIL':
-        this.bridgeGame.gameStatus = '실패';
         InputView.readGameCommand(this.handleInputCommand.bind(this));
       default:
     }
@@ -72,12 +71,7 @@ class App {
         message.ERROR_COMMAND
       );
       if (input === command.GAME_QUIT) {
-        OutputView.printResult(
-          this.bridgeGame.answerSteps,
-          this.bridgeGame.bridgeSteps,
-          this.bridgeGame.gameStatus,
-          this.bridgeGame.gameCount
-        );
+        this.bridgeGame.lose();
         View.close();
       }
       if (input === command.GAME_RESTART) {

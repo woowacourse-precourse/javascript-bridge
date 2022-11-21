@@ -54,6 +54,16 @@ class BridgeGame {
       this.gameCount
     );
   }
+
+  lose() {
+    this.gameStatus = '실패';
+    OutputView.printResult(
+      this.answerSteps,
+      this.bridgeSteps,
+      this.gameStatus,
+      this.gameCount
+    );
+  }
 }
 
 module.exports = BridgeGame;
