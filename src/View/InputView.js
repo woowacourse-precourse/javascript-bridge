@@ -10,7 +10,6 @@ const InputView = {
    */
   readBridgeSize(cb) {
     const MESSAGE = "다리의 길이를 입력해주세요.\n";
-
     Console.readLine(MESSAGE, (inputBridgeSize) => {
       this.readBridgeSizeCallback(inputBridgeSize, cb);
     });
@@ -32,7 +31,6 @@ const InputView = {
    */
   readMoving(cb) {
     const MESSAGE = "이동할 칸을 선택해주세요. (위: U, 아래: D)\n";
-
     Console.readLine(MESSAGE, (inputMoveCommand) => {
       this.readMovingCallback(inputMoveCommand, cb);
     });
@@ -54,7 +52,6 @@ const InputView = {
   readGameCommand(cb) {
     const MESSAGE =
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n";
-
     Console.readLine(MESSAGE, (inputRetryCommand) => {
       this.readGameCommandCallback(inputRetryCommand, cb);
     });
