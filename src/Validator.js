@@ -1,5 +1,6 @@
 const { ERROR_MESSAGES } = require('./utils/messages');
-const { WRONG_BRIDGE_SIZE, WRONG_MOVEMENT } = ERROR_MESSAGES;
+const { WRONG_BRIDGE_SIZE, WRONG_MOVEMENT, WRONG_WHETHER_TO_RETRY } =
+  ERROR_MESSAGES;
 
 const Validator = {
   bridgeSize(size) {
@@ -14,6 +15,11 @@ const Validator = {
 
   moving(movement) {
     if (movement !== 'U' && movement !== 'D') throw new Error(WRONG_MOVEMENT);
+  },
+
+  retry(whetherToRetry) {
+    if (whetherToRetry !== 'R' && whetherToRetry !== 'Q')
+      throw new Error(WRONG_WHETHER_TO_RETRY);
   },
 };
 
