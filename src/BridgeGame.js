@@ -6,6 +6,7 @@ class BridgeGame {
   #collectInputResult = {
     moveIndex: 0,
     bridgeMap: [[], []],
+    tryCount: 1,
   }
 
   makeBridge(size) {
