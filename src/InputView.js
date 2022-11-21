@@ -1,11 +1,13 @@
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
+
 const { Console } = require("@woowacourse/mission-utils");
 const Constant = require("./utils/Constant");
 const Validate = require("./utils/Validate");
 const BridgeMaker = require("./BridgeMaker");
 const randomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeGame = require("./BridgeGame");
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
@@ -26,7 +28,12 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine(Constant.INPUT.NEXT_STEP, () => {});
+    Console.readLine(Constant.INPUT.NEXT_STEP, (inputUpOrDown) => {
+      if (Validate.validateUserInputMove(inputUpOrDown)) {
+        let bridgeGame = new BridgeGame();
+        bridgeGame.move(inputUpOrDown);
+      }
+    });
   },
 
   /**

@@ -9,6 +9,9 @@ const Constant = {
     BRIDGE_SIZE: "[ERROR] 3이상 20이하 숫자만 입력하세요.",
     ONLY_NUMBER: "[ERROR] 오직 숫자만 입력하세요.",
     ONLY_ONE_NUMBER: "[ERROR] 한 개의 숫자만 입력하세요.",
+    ONLY_U_OR_D: "U와 D만 입력하세요.",
+    ONLY_UPPERCASE: "대문자로 입력하세요.",
+    ONLY_INPUT_ONE: "한개만 입력하세요.",
   },
 };
 

@@ -13,6 +13,20 @@ class Validate {
     }
     return true;
   }
+
+  //사용자 움직일 칸에 대한 입력 유효성 검사
+  static validateUserInputMove(userInput) {
+    if (userInput !== "U" || userInput !== "D") {
+      throw new Error(Constant.ERROR.ONLY_U_OR_D);
+    }
+    if (userInput === "u" || userInput === "d") {
+      throw new Error(Constant.ERROR.ONLY_UPPERCASE);
+    }
+    if (userInput.length >= 2) {
+      throw new Error(Constant.ERROR.ONLY_INPUT_ONE);
+    }
+    return true;
+  }
 }
 
 module.exports = Validate;
