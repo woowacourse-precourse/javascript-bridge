@@ -41,13 +41,7 @@ class BridgeGame {
 
   #moveIncorrectly(direction, bridge) {
     OutputView.printMap(this.#bridgeHistory, direction);
-    this.#gameSet(bridge);
-  }
-
-  #gameSet(bridge) {
-    Console.readLine(MESSAGE.REGAME, (re) => {
-      InputView.readGameCommand(re);
-    });
+    this.#retry(bridge);
   }
 
   /**
@@ -55,7 +49,18 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  #retry(bridge) {
+    Console.readLine(MESSAGE.REGAME, (re) => {
+      InputView.readGameCommand(re);
+      if (re === 'R') {
+        this.#attempts++;
+        this.move(bridge);
+      }
+      this.#gameSet();
+    });
+  }
+
+  #gameSet() {}
 }
 
 module.exports = BridgeGame;
