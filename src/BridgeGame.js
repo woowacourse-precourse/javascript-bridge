@@ -21,6 +21,10 @@ class BridgeGame {
       this.countRound();
       Console.close();
   }
+
+  printResultBridge(result) {
+    Console.print(result);
+  }
 }
 
 module.exports = BridgeGame;

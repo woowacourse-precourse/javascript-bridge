@@ -33,6 +33,7 @@ class BridgeGameProceed {
             this.game();
         } catch (error) {
             Console.print(error.message);
+            Console.print('');
             this.start.call(this);
         }
     }
@@ -45,8 +46,7 @@ class BridgeGameProceed {
         try {
             Validation.nextStep(nextStep);
             this.#playersBridge.push(nextStep);
-            const result = this.bridge();
-            this.dividePath(result);
+            this.dividePath(this.bridge());
             this.game();
         } catch (error) {
             Console.print(error.message);
@@ -77,6 +77,7 @@ class BridgeGameProceed {
             try {
                 Validation.retry(retryOrNot);
                 if (retryOrNot === "R") {
+                    Console.print('');
                     return this.game();
                 }
                 if (retryOrNot === "Q") this.bridgeGame.retry(result); 
@@ -87,11 +88,15 @@ class BridgeGameProceed {
         });
     }
 
-    // gameOverChoice(retryOrNot, result) {
+    // fail(result) {
+    //     InputView.readGameCommand(this.gameOverChoice.bind(result));
+    // }
+
+    // gameOverChoice(retryOrNot) {
     //     try {
     //         Validation.retry(retryOrNot);
     //         if (retryOrNot === "R") {
-    //             return this.game();
+    //             this.game.call();
     //         }
     //         if (retryOrNot === "Q") this.bridgeGame.retry(result); 
     //     } catch (error) {
@@ -99,7 +104,7 @@ class BridgeGameProceed {
     //         this.fail.call(this);
     //     }
     // }
-
+    
     win(result) {
         OutputView.printResult()
         Console.print(result);
@@ -107,7 +112,7 @@ class BridgeGameProceed {
         OutputView.printWin()
         this.bridgeGame.countRound();
         Console.close();
-    }
+    } // 하나하나 함수화 시켜보기
 }
 
 module.exports = BridgeGameProceed;
