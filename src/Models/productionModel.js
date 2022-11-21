@@ -1,4 +1,5 @@
 const BridgeMaker = require("../BridgeMaker");
+
 const { SPACE, PASS } = require("../utils/constants");
 
 class ProductionModel {

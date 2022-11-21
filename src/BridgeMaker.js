@@ -1,4 +1,5 @@
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+
 const { ORDER, SPACE } = require("./utils/constants");
 
 const BridgeMaker = {

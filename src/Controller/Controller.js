@@ -16,62 +16,62 @@ class Controller {
 
   gameStart() {
     OutputView.printStart();
-    this.getSize();
+    this.orderInputSize();
   }
 
-  getSize() {
+  orderInputSize() {
     InputView.readBridgeSize(this.isAllowSize.bind(this));
   }
 
   isAllowSize(input) {
     this.bridgeSize = new BridgeSize(input);
-    if (!this.bridgeSize.checkInput()) this.getSize();
-    else this.orderMake(input);
+    if (!this.bridgeSize.checkInput()) return this.orderInputSize();
+    return this.orderMake(input);
   }
 
   orderMake(size) {
     this.#BridgeGame.orderMakeBridge(size);
-    this.getMoving();
+    this.orderInputMoving();
   }
 
-  getMoving() {
+  orderInputMoving() {
     InputView.readMoving(this.isAllowMoving.bind(this));
   }
 
   isAllowMoving(input) {
     this.moveSpace = new MoveSpace(input);
-    if (!this.moveSpace.checkInput()) this.getMoving();
-    else this.orderMoving(input);
+    if (!this.moveSpace.checkInput()) return this.orderInputMoving();
+    return this.orderMoving(input);
   }
 
   orderMoving(moving) {
     const [currentMap, isSafe, isEnd] = this.#BridgeGame.move(moving);
     this.orderPrint(currentMap);
-    if (!isSafe) this.getAnswer();
-    else if (isEnd) this.orderEnd(RESULT.SUCCESS);
-    else this.getMoving();
+    if (!isSafe) return this.orderInputAnswer();
+    if (isEnd) return this.orderGameEnd(RESULT.SUCCESS);
+    return this.orderInputMoving();
   }
 
   orderPrint(currentMap) {
     OutputView.printMap(currentMap);
   }
 
-  getAnswer() {
+  orderInputAnswer() {
     InputView.readGameCommand(this.isAllowCommand.bind(this));
   }
 
   isAllowCommand(input) {
     this.gameCommand = new GameCommand(input);
-    if (!this.gameCommand.checkInput()) this.getAnswer();
-    else this.giveAnswer(input);
+    if (!this.gameCommand.checkInput()) return this.orderInputAnswer();
+    return this.giveAnswer(input);
   }
 
   giveAnswer(answer) {
-    if (this.#BridgeGame.retry(answer)) this.getMoving();
-    else this.orderEnd(RESULT.FAIL);
+    if (this.#BridgeGame.retry(answer)) return this.orderInputMoving();
+    return this.orderGameEnd(RESULT.FAIL);
   }
 
-  orderEnd(isSuccess) {
+  orderGameEnd(isSuccess) {
     const [nowMap, attemptCnt] = this.#BridgeGame.getGameInfo();
     OutputView.printResult(nowMap, attemptCnt, isSuccess);
   }

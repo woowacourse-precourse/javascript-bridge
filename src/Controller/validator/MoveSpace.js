@@ -14,7 +14,7 @@ class MoveSpace {
       if (!this.isAllowOrder()) throw new Error(`${ERROR.MOVE_ORDER}`);
       return ISALLOW.TRUE;
     } catch (errorMessage) {
-      OutputView.printError(errorMessage);
+      OutputView.printErrorMessage(errorMessage);
       return ISALLOW.FALSE;
     }
   }

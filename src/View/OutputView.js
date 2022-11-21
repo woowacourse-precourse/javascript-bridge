@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+
 const { RESULT, MANAGER, TEXT } = require("../utils/constants");
 
 const OutputView = {
@@ -20,7 +21,7 @@ const OutputView = {
     Console.close();
   },
 
-  printError(errorText) {
+  printErrorMessage(errorText) {
     Console.print(errorText);
   },
 };

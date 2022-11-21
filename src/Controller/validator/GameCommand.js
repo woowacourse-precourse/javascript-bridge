@@ -1,4 +1,5 @@
 const OutputView = require("../../View/OutputView");
+
 const { ERROR, COMMAND, ISALLOW } = require("../../utils/constants");
 
 class GameCommand {
@@ -13,7 +14,7 @@ class GameCommand {
       if (!this.isAllowOrder()) throw new Error(`${ERROR.GAMECOMMAND}`);
       return ISALLOW.TRUE;
     } catch (errorMessage) {
-      OutputView.printError(errorMessage);
+      OutputView.printErrorMessage(errorMessage);
       return ISALLOW.FALSE;
     }
   }

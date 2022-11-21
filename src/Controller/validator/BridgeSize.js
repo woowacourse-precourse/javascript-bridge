@@ -15,7 +15,7 @@ class BridgeSize {
         throw new Error(`${ERROR.BRIDGE_SIZE}`);
       return ISALLOW.TRUE;
     } catch (errorMessage) {
-      OutputView.printError(errorMessage);
+      OutputView.printErrorMessage(errorMessage);
       return ISALLOW.FALSE;
     }
   }
