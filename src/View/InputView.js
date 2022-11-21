@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Validate = require("../Validate/Validate");
+const Controller = require("../Controller/Controller");
+const { GAME_OVER, GAME_CLEAR } = require("../Constant/Constants");
 
 const InputView = {
   readBridgeSize() {
@@ -7,7 +9,7 @@ const InputView = {
       const result = Validate.isCorrectBridgeLength(input);
       if (result) {
         const bridgeGame = Controller.makeBridgeGame(parseInt(input));
-        this.readMoving(bridgeGame);
+        return this.readMoving(bridgeGame);
       }
     });
   },
@@ -18,8 +20,8 @@ const InputView = {
       (input) => {
         Validate.isCorrectMove(input);
         const result = Controller.sendUserMoving(input, bridgeGame);
-        if (result === 1) return this.readGameCommand(bridgeGame);
-        if (result === 2) return;
+        if (result === GAME_OVER) return this.readGameCommand(bridgeGame);
+        if (result === GAME_CLEAR) return;
         this.readMoving(bridgeGame);
       }
     );

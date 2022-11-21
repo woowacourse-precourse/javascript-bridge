@@ -1,3 +1,4 @@
+const { GAME_CLEAR, GAME_OVER } = require("../Constant/Constants");
 const BridgeGame = require("../Model/BridgeGame");
 const OutputView = require("../View/OutputView");
 
@@ -9,20 +10,24 @@ const Controller = {
   },
 
   sendUserMoving(userMoving, bridgeGame) {
-    const result = bridgeGame.move(userMoving);
-    if (result === 1) {
-      OutputView.printResult(bridgeGame);
+    const message = bridgeGame.move(userMoving);
+    const map = bridgeGame.makeMap();
+    OutputView.printMap(map);
+    if (message === GAME_CLEAR) {
+      const statistic = bridgeGame.makeStatistic();
+      OutputView.printResult(map, statistic);
     }
-    return result;
+    return message;
   },
 
   sendGameCommand(command, bridgeGame) {
-    if (command === "Q") {
-      // get results string
-      OutputView.printResult(bridgeGame); // send results strings
-      return true;
+    const isRetry = bridgeGame.retry(command);
+    if (!isRetry) {
+      const map = bridgeGame.makeMap();
+      const statistic = bridgeGame.makeStatistic();
+      OutputView.printResult(map, statistic);
     }
-    if (command === "R") bridgeGame.initSelectBridge();
+    return isRetry;
   },
 };
 

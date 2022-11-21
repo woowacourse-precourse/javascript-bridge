@@ -1,6 +1,7 @@
 const BridgeMaker = require("../BridgeMaker");
-const OutputView = require("../View/OutputView");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
+const { GAME_OVER, GAME_CLEAR } = require("../Constant/Constants");
+const ObjectMapping = require("../Mapping/ObjectMapping");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스, 필드 추가가 가능하다.
@@ -46,34 +47,53 @@ class BridgeGame {
       BridgeRandomNumberGenerator.generate
     );
     this.setCorrectBridge = correctSquares;
-    console.log(correctSquare);
+    console.log(correctSquares);
   }
 
   move(square) {
-    // 입력된 칸 값을 이용해 선택한 다리 칸 배열 만들기
-    const selectBridge = this.makeSelectBridge(square);
-    const isUserDie = this.isDie(selectBridge);
-    const retryCount = this.getRetryCount;
-    // 결과 출력하기
-    OutputView.printMap(selectBridge, isUserDie);
-    // 사망 여부 구하기 + 재시도 판별하기
-    if (isUserDie) return this.retry(retryCount);
-    // 다 건넌 경우 판별
-    if (this.isGameClear(selectBridge)) {
-      OutputView.printResult(selectBridge, isUserDie, retryCount);
-      return 2;
+    this.makeSelectBridge(square);
+    if (this.isDie()) return GAME_OVER;
+    if (this.isGameClear()) return GAME_CLEAR;
+  }
+
+  retry(command) {
+    this.setRetryCount = this.getRetryCount + 1;
+    if (command === "Q") return false;
+    if (command === "R") {
+      this.initSelectBridge();
+      return true;
     }
   }
 
-  retry(retryCount) {
-    // 함수 호출 시 죽었다는 의미. 따라서 재시도 = 참
-    this.setRetryCount = retryCount + 1;
-    return 1;
+  makeMap() {
+    const topSquares = this.makeSquares("U");
+    const bottomSquares = this.makeSquares("D");
+    return topSquares + "\n" + bottomSquares;
   }
 
-  isGameClear(selectBridge) {
-    const correctBridge = this.getCorrectBridge;
-    return this.isSame(selectBridge.length, correctBridge.length);
+  makeSquares(type) {
+    const selectBridge = this.getSelectBridge;
+    const lastIndex = selectBridge.length - 1;
+    const squares = selectBridge.reduce((pre, cur, index) => {
+      let string = this.drawOneSquare(cur, type, "O");
+      if (!this.isSame(index, lastIndex)) string += "|";
+      if (this.isSame(lastIndex, index) && this.isDie())
+        string = this.drawOneSquare(cur, type, "X");
+      return pre + string;
+    }, "[");
+    return squares + "]";
+  }
+
+  drawOneSquare(cur, type, result) {
+    if (cur === type) return ` ${result} `;
+    return `   `;
+  }
+
+  makeStatistic() {
+    return {
+      isDie: ObjectMapping.GameClear[!this.isDie()],
+      retryCount: this.getRetryCount,
+    };
   }
 
   initSelectBridge() {
@@ -84,15 +104,22 @@ class BridgeGame {
     const oldSelectBridge = this.getSelectBridge;
     const newSelectBridge = [...oldSelectBridge, square];
     this.setSelectBridge = newSelectBridge;
-    return newSelectBridge;
   }
 
-  isDie(selectBridge) {
+  isGameClear() {
+    const selectBridge = this.getSelectBridge;
+    const correctBridge = this.getCorrectBridge;
+    return this.isSame(selectBridge.length, correctBridge.length);
+  }
+
+  isDie() {
+    const selectBridge = this.getSelectBridge;
     const correctBridge = this.getCorrectBridge;
     const lastIndex = selectBridge.length - 1;
-    if (!this.isSame(selectBridge[lastIndex], correctBridge[lastIndex]))
-      return true;
-    return false;
+
+    if (this.isSame(selectBridge[lastIndex], correctBridge[lastIndex]))
+      return false;
+    return true;
   }
 
   isSame(a, b) {
