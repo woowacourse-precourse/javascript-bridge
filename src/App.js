@@ -12,6 +12,21 @@ class App {
     OutputView.printMessage(MESSAGE.GAME_START);
     this.#bridgeSizeInputPhase();
   }
+
+  // TODO: 메서드 길이 10줄 이하로 줄이기
+  #bridgeSizeInputPhase() {
+    InputView.readBridgeSize((bridgeSize) => {
+      try {
+        Validator.errorIfBridgeSizeInvalid(bridgeSize);
+      } catch (error) {
+        OutputView.printMessage(ERROR.INVALID_BRIDGE_SIZE);
+        this.#bridgeSizeInputPhase();
+        return;
+      }
+      this.#bridgeGame = new BridgeGame(bridgeSize);
+      this.#movingInputPhase();
+    });
+  }
 }
 
 module.exports = App;
