@@ -1,4 +1,4 @@
-const { ERROR, RULE, DIRECTION, IS_RETRY } = require('./Constants');
+const { ERROR, RULE, DIRECTION, COMMAND } = require('./Constants');
 
 const throwErrorMessage = (message) => {
   throw new Error(`${ERROR.PREFIX} ${message}`);
@@ -25,7 +25,7 @@ const checkPossibleDirection = (direction) => {
 };
 
 const checkPossibleCommand = (command) => {
-  const commandList = Object.values(IS_RETRY);
+  const commandList = Object.values(COMMAND);
   if (!commandList.includes(command)) {
     throwErrorMessage(ERROR.NOT_POSSIBLE_COMMAND);
   }
