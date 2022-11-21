@@ -11,5 +11,7 @@ module.exports = {
     SUCCESS: "성공",
     FAIL: "실패",
     PASS: "통과",
+    TRUE: "O",
+    FALSE: "X",
   },
 };
