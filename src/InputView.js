@@ -22,7 +22,7 @@ const InputView = {
     try {
         validation.checkSizeInputValidation(bridgeSize);
     } catch (error) {
-        MissionUtils.Console.print('[ERROR]');
+        MissionUtils.Console.print(error);
         this.readBridgeSize();
     }
   },
@@ -37,6 +37,16 @@ const InputView = {
       validation.checkMovingInputValidation(moving);
     });
     return moving;
+  },
+
+  handleMovingError(movingInput) {
+    const validation = new Validation();
+    try {
+        validation.checkMovingInputValidation(movingInput);
+    } catch (error) {
+        MissionUtils.Console.print(error);
+        this.readMoving();
+    }
   },
 
   /**
