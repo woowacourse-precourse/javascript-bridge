@@ -38,7 +38,7 @@ const OutputView = {
       MissionUtils.Console.print(MESSAGES.SUC_OR_FAIL + MESSAGES.FAIL); // 게임 성공 여부: 실패
     }
     MissionUtils.Console.print(MESSAGES.ATTEMPT_NUM + gameRec.attemptNum); // 총 시도한 횟수: 1
-    // MissionUtils.Console.close();
+    // MissionUtils.Console.close(); // commented out since watch mode in jest won't quit if this line is included
   },
 };
 
