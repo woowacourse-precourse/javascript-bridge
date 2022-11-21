@@ -1,23 +1,26 @@
+// library
 const { Console } = require('@woowacourse/mission-utils');
-const OutputView = require('./OutputView');
+// inputCheck
 const BridgeGame = require('./BridgeGame');
 const BridgeSize = require('./InputCheck/BridgeSize');
 const Moving = require('./InputCheck/Moving');
+// controller
 const GameCommand = require('./InputCheck/GameCommand');
+// view
+const OutputView = require('./OutputView');
+// constant
+const { INPUT_VIEW } = require('./Constants');
 
-const SUCCESS = 1;
-const FAIL = 0;
 const bridgeGame = new BridgeGame();
-const InputView = {
-  RESTART: 'R',
 
+const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
 
   readBridgeSize() {
     Console.readLine(
-      '다리의 길이를 입력해주세요.\n',
+      `${INPUT_VIEW.size_message}`,
       this.checkBridgeSize.bind(this)
     );
   },
@@ -50,7 +53,7 @@ const InputView = {
 
   readMoving() {
     Console.readLine(
-      '이동할 칸을 선택해 주세요',
+      `${INPUT_VIEW.moving_message}`,
       this.runBridgeMovingProcess.bind(this)
     );
   },
@@ -74,10 +77,10 @@ const InputView = {
 
   printMap(input) {
     if (bridgeGame.isSamePreBuiltBridgeAsInput(input)) {
-      OutputView.printMap(bridgeGame.move(input, SUCCESS));
+      OutputView.printMap(bridgeGame.move(input, INPUT_VIEW.pass));
       return this.passAllOrNot();
     }
-    OutputView.printMap(bridgeGame.move(input, FAIL));
+    OutputView.printMap(bridgeGame.move(input, INPUT_VIEW.fail));
     return this.readGameCommand();
   },
 
@@ -87,7 +90,7 @@ const InputView = {
 
   readGameCommand() {
     Console.readLine(
-      '게임을 다시 시도할지 여부를 입력해주세요. (재시도 : R, 종료 : Q)',
+      `${INPUT_VIEW.game_command_message}`,
       this.runGameCommandProcess.bind(this)
     );
   },
@@ -105,17 +108,18 @@ const InputView = {
   },
 
   retryOrEnd(input) {
-    if (input === this.RESTART) {
+    if (input === INPUT_VIEW.retry) {
       bridgeGame.retry();
       return this.readMoving();
     }
+    OutputView.printResult(INPUT_VIEW.failure, bridgeGame.returnBridgeData());
     BridgeGame.end();
   },
 
   passAllOrNot() {
     bridgeGame.increaseTryOrder();
     if (bridgeGame.isAllPass()) {
-      OutputView.printResult('성공', bridgeGame.returnBridgeData());
+      OutputView.printResult(INPUT_VIEW.success, bridgeGame.returnBridgeData());
       return BridgeGame.end();
     }
     return this.readMoving();
