@@ -34,7 +34,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridge, input, result, totalTry) {
+    this.printMessage(message.MESSAGE.GAME_END);
+    this.printMap(bridge, bridge.length, input);
+    if(result) {this.printMessage(message.MESSAGE.SUCCESS);}
+    else{this.printMessage(message.MESSAGE.FAIL);}
+    this.printMessage(message.MESSAGE.GAME_RESULT+totalTry);
+  },
 
   printMessage(message){
     MissionUtils.Console.print(message);
