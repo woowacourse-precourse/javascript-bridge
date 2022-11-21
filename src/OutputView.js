@@ -20,16 +20,25 @@ const OutputView = {
     Console.print(message);
   },
 
+  getMapHead(isFirstIndex) {
+    return isFirstIndex ? this.MAP_CHARACTER.START : '';
+  },
+
+  getMapTail(isLastIndex) {
+    return isLastIndex ? this.MAP_CHARACTER.END : '';
+  },
+
+  getMapCharacter(isCommandisCurrentPosition, result) {
+    return isCommandisCurrentPosition ? this.MAP_CHARACTER[result] : this.MAP_CHARACTER.WHITE_SPACE;
+  },
+
   createMap(currentMoveCount, getUserInputResult) {
     const bridgeMap = [[], []].map(() => Array.from({ length: currentMoveCount + 1 }));
 
     return bridgeMap.map((el, pos) => el.map((_, idx) => {
-      const head = idx === 0 ? this.MAP_CHARACTER.START : '';
-      const tail = idx === currentMoveCount ? this.MAP_CHARACTER.END : '';
       const { command, result } = getUserInputResult(idx);
 
-      return this.MAP_COMMAND[command] === pos
-        ? `${head}${this.MAP_CHARACTER[result]}${tail}` : `${head}${this.MAP_CHARACTER.WHITE_SPACE}${tail}`;
+      return `${this.getMapHead(idx === 0)}${this.getMapCharacter(this.MAP_COMMAND[command] === pos, result)}${this.getMapTail(idx === currentMoveCount)}`;
     }));
   },
   /**
