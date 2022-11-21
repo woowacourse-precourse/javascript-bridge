@@ -1,7 +1,9 @@
 const OutputView = require("./OutputView");
 
 class BridgeMap {
-  static createMap(originBridgeSize, gameState) {
+  static createMap(mapInfo, readFuncs) {
+    const { gameState, originBridgeSize } = mapInfo;
+
     let upBridge = "[ ";
     let downBridge = "[ ";
 
@@ -32,7 +34,7 @@ class BridgeMap {
       currentBridgeSize: gameState.length,
     };
 
-    OutputView.printMap(gameInfo);
+    OutputView.printMap(gameInfo, readFuncs);
   }
 }
 

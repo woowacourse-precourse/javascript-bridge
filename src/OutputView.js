@@ -1,5 +1,4 @@
 const { Console } = require("@woowacourse/mission-utils");
-const InputView = require("./InputView");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -14,13 +13,15 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap({ map, lastResult, originBridgeSize, currentBridgeSize }) {
+  printMap(gameInfo, readFuncs) {
+    const { map, lastResult, originBridgeSize, currentBridgeSize } = gameInfo;
+    const { readMoving, readGameCommand } = readFuncs;
     Console.print(map);
 
-    if (lastResult === "X") InputView.readGameCommand();
+    if (lastResult === "X") readGameCommand();
 
     if (lastResult === "O" && originBridgeSize !== currentBridgeSize) {
-      InputView.readMoving();
+      readMoving();
     } else {
       this.printResult();
     }
