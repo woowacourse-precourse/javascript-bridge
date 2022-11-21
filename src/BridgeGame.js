@@ -18,11 +18,9 @@ class BridgeGame {
 
   makeBridge(bridgeSize) {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-    console.log(this.#bridge);
   }
 
   move(inputMoving) {
-    console.log(this.#bridge);
     if (this.#bridge[this.#moveCount] === inputMoving) {
       this.#usersMove.push([inputMoving, 'O']);
     } else {

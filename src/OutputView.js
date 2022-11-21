@@ -7,7 +7,6 @@ const OutputView = {
   },
     
   printMap(map) {
-    console.log(typeof map);
     map.forEach((map) => {
       MissionUtils.Console.print(`[ ${map.join(" | ")} ]`);
     })
