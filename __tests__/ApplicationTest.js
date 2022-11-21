@@ -130,3 +130,13 @@ describe("예외 테스트", () => {
     }).toThrow("[ERROR]");
   });
 });
+
+describe("기능 목록 테스트", () => {
+  test("게임 시작 문구를 출력한다.", () => {
+    const logSpy = getLogSpy();
+    const app = new App();
+    app.play();
+
+    expectLogContains(getOutput(logSpy), ["다리 건너기 게임을 시작합니다."]);
+  });
+});
