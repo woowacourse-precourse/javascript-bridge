@@ -36,6 +36,20 @@ class BridgeModel {
   isFinished(userMoving) {
     return this.#bridge.length === userMoving.length;
   }
+
+  /**
+   * 현재까지의 유저의 움직임 성공유무들을 반환한다.
+   * @param userMoving {string[]} [유저 움직임]
+   * @return {boolean[]} [성공유무]
+   */
+  getMovingRecords(userMoving) {
+    const movingRecords = [];
+    for (let index = 0; index < userMoving.length; index++) {
+      movingRecords.push(userMoving[index] === this.#bridge[index]);
+    }
+
+    return movingRecords;
+  }
 }
 
 module.exports = BridgeModel;
