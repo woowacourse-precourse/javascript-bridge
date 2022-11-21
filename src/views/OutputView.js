@@ -1,4 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
+const CONSTANT = require('../constant');
+
+const { BUILD_BRIDGE_ERROR, MOVE_INPUT_ERROR, GAME_COMMAND_ERROR } = CONSTANT.ERROR_MESSAGE;
+const { START_MESSAGE } = CONSTANT.NORMAL_MESSAGE;
+const { FAIL, SUCCESS, SUCCESS_WHETHER, TOTAL_ATTEMPT, FINAL_RESULT } = CONSTANT.NORMAL_MESSAGE;
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -9,19 +14,19 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printStartMessage() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
+    Console.print(START_MESSAGE);
   },
 
   printMakeBridgeError() {
-    Console.print('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+    Console.print(BUILD_BRIDGE_ERROR);
   },
 
   printMoveInputError() {
-    Console.print('[ERROR] 이동할 칸은 (위: U, 아래: D)만 입력가능합니다.');
+    Console.print(MOVE_INPUT_ERROR);
   },
 
   printGameCommandError() {
-    Console.print('[ERROR] 재시도: R, 종료: Q 만 입력가능합니다.');
+    Console.print(GAME_COMMAND_ERROR);
   },
 
   printMap(results) {
@@ -51,10 +56,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(compareResult, executionCount, gameStatus) {
-    Console.print('최종 게임 결과');
+    Console.print(FINAL_RESULT);
     this.printMap(compareResult);
-    Console.print(`게임 성공 여부: ${gameStatus ? '실패' : '성공'}`);
-    Console.print(`총 시도한 횟수: ${executionCount}`);
+    Console.print(`${SUCCESS_WHETHER}${gameStatus ? FAIL : SUCCESS}`);
+    Console.print(`${TOTAL_ATTEMPT}${executionCount}`);
     Console.close();
   },
 };

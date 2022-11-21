@@ -1,6 +1,10 @@
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 const BridgeGame = require('./BridgeGame');
+const CONSTANT = require('../constant');
+
+const { QUIT_MARK, RESTART_MARK, FAIL_MARK } = CONSTANT.MARKS;
+const { INPUT_ERROR } = CONSTANT.ERROR_MESSAGE;
 
 class Referee {
   constructor() {
@@ -45,7 +49,7 @@ class Referee {
   gameCommand(answer) {
     try {
       Referee.#gameCommandValidate(answer);
-      if (answer === 'R') this.bridgeGame.retry(() => this.resultAnalysis());
+      if (answer === RESTART_MARK) this.bridgeGame.retry(() => this.resultAnalysis());
       else this.endGame();
     } catch {
       OutputView.printGameCommandError();
@@ -66,15 +70,15 @@ class Referee {
     const downStage = compareResult[1];
 
     for (let index = 0; index < upStage.length; index += 1) {
-      if (upStage[index] === 'X' || downStage[index] === 'X') return true;
+      if (upStage[index] === FAIL_MARK || downStage[index] === FAIL_MARK) return true;
     }
 
     return false;
   }
 
   static #gameCommandValidate(answer) {
-    if (!(answer === 'R' || answer === 'Q')) {
-      throw new Error('입력오류');
+    if (!(answer === RESTART_MARK || answer === QUIT_MARK)) {
+      throw new Error(INPUT_ERROR);
     }
   }
 }

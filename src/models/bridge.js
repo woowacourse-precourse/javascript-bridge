@@ -1,6 +1,11 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const CONSTANT = require('../constant');
 const OutputView = require('../views/OutputView');
+
+const { FAIL_MARK, SUCCESS_MARK, NONE_MARK, UPSTAIR_MARK, DOWNSTAIR_MARK } = CONSTANT.MARKS;
+const { INPUT_ERROR } = CONSTANT.ERROR_MESSAGE;
+const { BRIDGE_MAX_SIZE, BRIDGE_MIN_SIZE } = CONSTANT.Size;
 
 class Bridge {
   constructor() {
@@ -45,36 +50,36 @@ class Bridge {
   }
 
   #incorrect(value) {
-    if (value === 'U') {
-      this.compareResult[0].push('X');
-      this.compareResult[1].push('N');
+    if (value === UPSTAIR_MARK) {
+      this.compareResult[0].push(FAIL_MARK);
+      this.compareResult[1].push(NONE_MARK);
       return;
     }
 
-    this.compareResult[0].push('N');
-    this.compareResult[1].push('X');
+    this.compareResult[0].push(NONE_MARK);
+    this.compareResult[1].push(FAIL_MARK);
   }
 
   #correct(value) {
-    if (value === 'U') {
-      this.compareResult[0].push('O');
-      this.compareResult[1].push('N');
+    if (value === UPSTAIR_MARK) {
+      this.compareResult[0].push(SUCCESS_MARK);
+      this.compareResult[1].push(NONE_MARK);
       return;
     }
 
-    this.compareResult[0].push('N');
-    this.compareResult[1].push('O');
+    this.compareResult[0].push(NONE_MARK);
+    this.compareResult[1].push(SUCCESS_MARK);
   }
 
   static #bridgeSizeValidate(size) {
-    if (!(Number(size) >= 3 && Number(size) <= 20)) {
-      throw new Error('입력오류');
+    if (!(Number(size) >= BRIDGE_MIN_SIZE && Number(size) <= BRIDGE_MAX_SIZE)) {
+      throw new Error(INPUT_ERROR);
     }
   }
 
   static #moveInputValidate(input) {
-    if (!(input === 'U' || input === 'D')) {
-      throw new Error('입력오류');
+    if (!(input === UPSTAIR_MARK || input === DOWNSTAIR_MARK)) {
+      throw new Error(INPUT_ERROR);
     }
   }
 }
