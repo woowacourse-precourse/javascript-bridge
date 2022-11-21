@@ -15,7 +15,7 @@
   - [ ] `BridgeGame`의 `retry`를 호출한 뒤 다음 `status`를 반환한다.
 - [ ] `BridgeGame` class
   - [ ] 게임 결과에 따라 다음 `status`를 반환한다.
-  - [ ] 사용자 이동 경로를 추가한다.
+  - [x] 사용자 이동 경로를 추가한다. - `move`
   - [ ] 재시작한다.
 - [x] `BridgeMaker`
   - [x] 다리 길이에 따라 랜덤한 다리를 생성한다. - `makeBridge`
