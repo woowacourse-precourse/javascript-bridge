@@ -1,5 +1,5 @@
-const { COMMAND } = require("./constant");
 const Controller = require("./Controller");
+const { COMMAND } = require("./constant");
 
 class BridgeGame {
 
