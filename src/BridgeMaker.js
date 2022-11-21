@@ -1,6 +1,5 @@
-/**
- * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
- */
+const gameConst = require("./const")
+
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -9,7 +8,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     return [...Array(size)].map((x) =>
-      Number(generateRandomNumber()) === 0 ? "D" : "U"
+      Number(generateRandomNumber()) === 0 ? gameConst.cmd.DOWN : gameConst.cmd.UP
     );
   },
 };
