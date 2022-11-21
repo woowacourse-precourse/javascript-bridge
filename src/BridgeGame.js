@@ -12,8 +12,9 @@ class BridgeGame {
     this.#controller = controller;
   }
 
-  // FIXME: change the function
   move() {
+    const step = this.#model.getStep();
+    this.#model.setUserMove(step);
     this.#controller.renderMap();
     this.#controller.setCurrentResult();
     this.checkCurrentResult();

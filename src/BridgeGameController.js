@@ -41,7 +41,7 @@ class BridgeGameController {
   setUserMoving(step, resolve) {
     try {
       checkUserMove(step);
-      this.#model.setUserMove(step);
+      this.#model.setStep(step);
       resolve();
     } catch (error) {
       this.controlException(error, () => this.readUserMoving(resolve));
