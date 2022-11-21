@@ -34,7 +34,7 @@ class BridgeGame {
   };
 
   getResult() {
-    const map = this.#drawMap().join(NEW_LINE);
+    const map = this.#drawMap();
     const isCorrect = this.#isCorrect();
     const isGameOver = this.#isGameOver();
     return { map, isCorrect, isGameOver, trialTime: this.#trialTime };
