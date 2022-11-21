@@ -54,6 +54,20 @@ class GameResult {
     const result = this.makeHistory();
     OutputView.printMap(result);
   }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
+
+  clear() {
+    const entries = [...this.#resultMap];
+
+    entries.forEach(([key, value]) => {
+      this.#resultMap.set(key, { ...value, player: null });
+    });
+
+    this.#tryCount += 1;
+  }
 }
 
 module.exports = GameResult;
