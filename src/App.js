@@ -1,5 +1,5 @@
-import BridgeGame from "./BridgeGame";
-import { readBridgeSize } from "./InputView";
+const BridgeGame = require("./BridgeGame");
+const { readBridgeSize } = require("./InputView");
 const { Console } = require("@woowacourse/mission-utils");
 
 class App {
