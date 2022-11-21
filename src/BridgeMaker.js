@@ -1,3 +1,5 @@
+const InputView = require("./InputView");
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -10,7 +12,7 @@
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
-    const candidates = ['D', 'U'];
+    const candidates = [InputView.INPUT_DOWN_MOVING, InputView.INPUT_UP_MOVING];
 
     while(bridge.length < size) {
       const number = generateRandomNumber();
