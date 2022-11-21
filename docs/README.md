@@ -97,7 +97,7 @@ D
 
 ### 출력 기능
 
-- [ ] 게임 시작 문구를 출력합니다. - `OutputView.printStart`
+- [x] 게임 시작 문구를 출력합니다. - `OutputView.printStart`
 - [ ] 사용자가 이동할 때마다 다리 건너기 결과를 출력합니다. - `OutputView.printMap`
   - [ ] 이동할 수 있는 칸을 선택한 경우 O를 표시합니다.
   - [ ] 이동할 수 없는 칸을 선택한 경우 X를 표시합니다.
