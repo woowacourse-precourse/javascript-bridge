@@ -2,6 +2,7 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 const { BRIDGE } = require("./Constants/Constants");
+const BridgeGameToView = require("./BridgeGameToView");
 
 class BridgeGame {
   /**
@@ -9,41 +10,37 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  constructor() {
+    this.bridgeGameToView = new BridgeGameToView();
+  }
+
   move(gameRec) {
-    let correctOrNot; // 참가자 응답과 정답을 비교한 결과: O 또는 X
-    if (gameRec.bridgeAnswer[gameRec.moveNum] === gameRec.inputUOrD) {
-      correctOrNot = BRIDGE.CORRECT;
-    } else {
-      correctOrNot = BRIDGE.WRONG;
+    // 두 번째 move 이상일 때만 실행: 이전 bridge값 불러온 것에서 마지막 ] 빼고 "| " 추가
+    if (gameRec.moveNum !== 0) {
+      gameRec.bridgeOutput.firstBridge = `${gameRec.bridgeOutput.firstBridge}${BRIDGE.BAR}`;
+      gameRec.bridgeOutput.secondBridge = `${gameRec.bridgeOutput.secondBridge}${BRIDGE.BAR}`;
     }
-    if (gameRec.moveNum === 0) {
-      gameRec.bridgeOutput.firstBridge = BRIDGE.LEFT_BRACKET; // 처음에 "[" 할당
-      gameRec.bridgeOutput.secondBridge = BRIDGE.LEFT_BRACKET;
-    } else {
-      // 첫 move 아닐 때만 실행! (쌓아 나갈 때)
-      // 이전 bridge값 불러온 것에서 마지막 ] 빼고 "| " 추가   // 예. "[ O ]" => [ O | "
-      gameRec.bridgeOutput.firstBridge = `${gameRec.bridgeOutput.firstBridge.slice(0, -1)}${BRIDGE.BAR}`;
-      gameRec.bridgeOutput.secondBridge = `${gameRec.bridgeOutput.secondBridge.slice(0, -1)}${BRIDGE.BAR}`;
-    }
+    this.checkCorrectOrNot(gameRec);
+  }
 
-    switch (gameRec.inputUOrD) {
-      case "U":
-        gameRec.bridgeOutput.firstBridge += BRIDGE.SPACE + correctOrNot + BRIDGE.SPACE;
-        gameRec.bridgeOutput.secondBridge += BRIDGE.THREE_SPACE;
-        break;
-      case "D":
-        gameRec.bridgeOutput.firstBridge += BRIDGE.THREE_SPACE;
-        gameRec.bridgeOutput.secondBridge += BRIDGE.SPACE + correctOrNot + BRIDGE.SPACE;
-        break;
-      default:
-    }
-
-    // 최종 마무리 오른쪽 괄호
-    gameRec.bridgeOutput.firstBridge += BRIDGE.RIGHT_BRACKET;
-    gameRec.bridgeOutput.secondBridge += BRIDGE.RIGHT_BRACKET;
+  checkCorrectOrNot(gameRec) {
+    let correctOrNot; // 참가자 응답과 실제 정답을 비교한 결과: O 또는 X
+    if (gameRec.bridgeAnswer[gameRec.moveNum] === gameRec.inputUOrD) correctOrNot = BRIDGE.CORRECT;
+    if (gameRec.bridgeAnswer[gameRec.moveNum] !== gameRec.inputUOrD) correctOrNot = BRIDGE.WRONG;
     gameRec.moveNum += 1;
     gameRec.correctOrNot = correctOrNot; // moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD, correctOrNot
-    OutputView.printMap(gameRec); // BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
+    this.setBridgeOutput(gameRec);
+  }
+
+  setBridgeOutput(gameRec) {
+    if (gameRec.inputUOrD === "U") {
+      gameRec.bridgeOutput.firstBridge += BRIDGE.SPACE + gameRec.correctOrNot + BRIDGE.SPACE + BRIDGE.RIGHT_BRACKET; // 예. "[ O | " => "[ O | O ]"
+      gameRec.bridgeOutput.secondBridge += BRIDGE.THREE_SPACE + BRIDGE.RIGHT_BRACKET; // 예. "[   | " => "[   |   ]"
+    } else if (gameRec.inputUOrD === "D") {
+      gameRec.bridgeOutput.firstBridge += BRIDGE.THREE_SPACE + BRIDGE.RIGHT_BRACKET;
+      gameRec.bridgeOutput.secondBridge += BRIDGE.SPACE + gameRec.correctOrNot + BRIDGE.SPACE + BRIDGE.RIGHT_BRACKET;
+    }
+    this.bridgeGameToView.BridgeGameToOutputView(gameRec); // BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
   }
 
   /**
