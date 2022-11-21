@@ -24,6 +24,11 @@ class App {
     return input;
   }
 
+  static isSingleGameEnd(resultStatus) {
+    if (resultStatus === GameConfig.STATUS_PLAY) return false;
+    return true;
+  }
+
   static #tryInput(inputFunction) {
     try {
       return inputFunction();
