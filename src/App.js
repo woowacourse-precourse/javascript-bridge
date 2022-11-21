@@ -42,6 +42,14 @@ class App {
 
     this.#output.printMap(classifiedBridgeLog);
   }
+
+  generateBridge(size) {
+    const newBridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+
+    this.#bridgeGame.setBridge(newBridge);
+
+    return newBridge;
+  }
 }
 
 module.exports = App;
