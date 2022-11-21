@@ -3,7 +3,7 @@
 const BridgeMaker = require("./utils/BridgeMaker");
 const BridgeRandomNumberGenerator = require("./utils/BridgeRandomNumberGenerator");
 const { UP_AND_DOWN, TRACE_MARKS } = require("./constants");
-const TraceMaker = require("./utils/TraceMaker");
+const TraceController = require("./utils/TraceController");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -29,7 +29,7 @@ class BridgeGame {
    */
   move(selectedPath) {
     this.#selectedPathLog.push(selectedPath);
-    const trace = TraceMaker.makeTrace(
+    const trace = TraceController.makeTrace(
       selectedPath,
       this.#selectedPathLog,
       this.#bridge,
@@ -37,6 +37,15 @@ class BridgeGame {
     );
     this.#currentTrace = trace;
     return trace;
+  }
+
+  checkFailure() {
+    const isFailed = TraceController.determineFail(this.#currentTrace);
+    return isFailed;
+  }
+
+  checkOvered() {
+    return this.#bridge.length === this.#currentTrace[0].length;
   }
 
   /**

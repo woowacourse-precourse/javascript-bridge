@@ -28,6 +28,11 @@ const TraceController = {
       ? TRACE_MARKS.CORRECT
       : TRACE_MARKS.INCORRECT;
   },
+
+  determineFail(trace) {
+    const joined = trace.join();
+    return joined.includes(TRACE_MARKS.INCORRECT);
+  },
 };
 
 module.exports = TraceController;

@@ -4,7 +4,7 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const MovingValidation = require("./validation/MovingValidation");
 const { MESSAGES } = require("./constants");
-const TraceMaker = require("./utils/TraceMaker");
+const TraceController = require("./utils/TraceController");
 
 class GameController {
   #bridgeGame;
@@ -49,7 +49,15 @@ class GameController {
 
   printTrace() {
     const trace = this.#bridgeGame.move(this.#selectedPath);
-    TraceMaker.printTrace(trace);
+    TraceController.printTrace(trace);
+    this.stirUp();
+  }
+
+  stirUp() {
+    const isFailed = this.#bridgeGame.checkFailure();
+    if (isFailed) this.#bridgeGame.retry();
+    const isOvered = this.#bridgeGame.checkOvered();
+    if (isOvered) this.printEnding();
   }
 }
 
