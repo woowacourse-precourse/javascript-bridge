@@ -11,6 +11,8 @@ const InputView = {
 
       const generater = BridgeRandomNumberGenerator.generate;
       const bridgeShape = BridgeMaker.makeBridge(size, generater);
+
+      this.readMoving();
     });
   },
 
@@ -20,7 +22,7 @@ const InputView = {
   readMoving() {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      (cell) => cell
+      (move) => new MoveInput(move)
     );
   },
 
