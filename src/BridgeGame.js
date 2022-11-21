@@ -80,6 +80,13 @@ class BridgeGame {
     }, [[], []]);
   }
 
+  getCurrentClassifiedBridgeLog() {
+    const currentBridge = this.getBridgeLog();
+    const copiedBridge = Application.copyArray(currentBridge);
+
+    return BridgeGame.logClassification(copiedBridge);
+  }
+
   isBeforeStart() {
     return this.#userPosition === null;
   }
