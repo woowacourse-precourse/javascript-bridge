@@ -62,14 +62,11 @@ const InputView = {
         const error = Validation.isVaildCommand(command);
         if (error) return this.readGameCommand(bridge, attempt, moveList);
 
+        if (command === "Q") OutputView.printResult("실패", attempt, moveList);
         if (command === "R") {
-          attempt++;
           const bridgeGame = new BridgeGame();
           const againMoveList = bridgeGame.retry();
-          return this.readMoving(bridge, againMoveList, attempt);
-        }
-        if (command === "Q") {
-          OutputView.printResult("실패", attempt, moveList);
+          return this.readMoving(bridge, againMoveList, attempt + 1);
         }
       }
     );
