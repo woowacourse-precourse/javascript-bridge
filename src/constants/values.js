@@ -2,11 +2,6 @@ const REG_EXP = Object.freeze({
   ONLY_NUMBERS: /^[0-9]+$/,
 });
 
-const BRIDGE_MAKER = Object.freeze({
-  ZERO: '0',
-  ONE: '1',
-});
-
 const BRIDGE_GAME = Object.freeze({
   INPUT_U: 'U',
   INPUT_D: 'D',
@@ -35,7 +30,6 @@ const PRINTABLE_BRIDGE = Object.freeze({
 
 module.exports = {
   REG_EXP,
-  BRIDGE_MAKER,
   BRIDGE_GAME,
   GAME_STATE,
   PRINTABLE_BRIDGE,

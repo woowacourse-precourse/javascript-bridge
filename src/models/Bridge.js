@@ -1,3 +1,4 @@
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const BridgeChecker = require('../controller/BridgeChecker');
 const Console = require('../utils/Console');
 const InputView = require('../views/InputView');
@@ -12,7 +13,7 @@ class Bridge {
   constructor({ bridgeSize, makeBridge, initialize }) {
     Console.print('');
     this.#makeSize(bridgeSize, initialize);
-    this.#data.bridge = makeBridge(this.#data.bridgeSize, DataHandler.makeZeroOrOne);
+    this.#data.bridge = makeBridge(this.#data.bridgeSize, BridgeRandomNumberGenerator.generate);
   }
 
   get() {
