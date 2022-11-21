@@ -1,4 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { INPUT_BRIDGE_SIZE_MESSAGE, INPUT_MOVE_MESSAGE, INPUT_GAME_RUNNING_MASSAGE } = require("../Constants")
+
 const {CheckBridgeSizeException, CheckUserMove, CheckWhetherGameRunning} = require("../Exception");
 
 /**
@@ -10,7 +12,7 @@ const InputView = {
    */
   readBridgeSize(){
     let bridgeSize;
-    Console.readLine("다리의 길이를 입력해주세요" , (num) => {
+    Console.readLine(INPUT_BRIDGE_SIZE_MESSAGE , (num) => {
       this.checkBridgeLengthExceptions(num);
       bridgeSize = num;
     });
@@ -31,7 +33,7 @@ const InputView = {
    */
   readMoving() {
     let userMove;
-    Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D", (selectUpOrDown) => {
+    Console.readLine(INPUT_MOVE_MESSAGE, (selectUpOrDown) => {
       this.checkUserMoveException(selectUpOrDown);
       userMove = selectUpOrDown; 
     });
@@ -52,7 +54,7 @@ const InputView = {
    */
   readGameCommand() {
     let gameSelect;
-    Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도:R, 종료:Q)", (value) => {
+    Console.readLine(INPUT_GAME_RUNNING_MASSAGE, (value) => {
       this.checkGameRunningException(value);
       gameSelect = value;
     })
