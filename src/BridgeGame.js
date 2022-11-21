@@ -42,9 +42,13 @@ class BridgeGame {
         const lastMovingIndex = this.userChoice.length - 1;
 
         if (move !== this.bridgeForm[lastMovingIndex]) {
-          this.retry();
-          this.print(this.userChoice);
+          this.retry(); //틀린 경우
         }
+        if (this.bridgeForm.length == this.userChoice.length) {
+          this.quitGame(); //다맞은 경우
+        }
+
+        this.move();
       } catch (err) {
         this.print(err);
       }
@@ -75,7 +79,7 @@ class BridgeGame {
 
   quitGame() {
     printResult();
-    announceEnd(true, userChoice);
+    announceEnd(true, this.tryCount);
   }
 }
 
