@@ -4,9 +4,9 @@ const RecallUntilCorrect = require("./RecallUntilCorrect.js");
  */
  class BridgeGame {
   #cumulativeCount
-  #bridgeMap
-  #upMap
-  #downMap
+  #bridgeMap = [];
+  #upMap = [];
+  #downMap = [];
   #success
   constructor(bridgeMap){
     this.#cumulativeCount = 1;
