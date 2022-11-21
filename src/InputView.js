@@ -23,17 +23,22 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(MESSAGE.PROCESS.SELECT_UP_DOWN, (select) => {
-      Validator.isCorrectSelect(select);
+      Validator.isUpOrDown(select);
       Console.print(NEW_LINE);
+      this.readGameCommand();
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(MESSAGE.PROCESS.SELECT_RESTART_OR_QUIT, (select) => {
+      Validator.isRestartOrQuit(select);
+    });
+  },
 };
 
-Console.print(InputView.readBridgeSize());
+Console.print(InputView);
 
 module.exports = InputView;

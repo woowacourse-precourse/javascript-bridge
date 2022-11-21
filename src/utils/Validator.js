@@ -1,4 +1,4 @@
-const { BRIDGE_INFO } = require('../constants/BridgeGameSetting');
+const { BRIDGE_INFO, GAME_STATUS } = require('../constants/BridgeGameSetting');
 const MESSAGE = require('../constants/BridgeGameMessage');
 
 class Validator {
@@ -14,10 +14,16 @@ class Validator {
     Validator.throwErr(result, MESSAGE.ERROR.INCORRECT_BRIDGE_LENGTH);
   }
 
-  static isCorrectSelect(input) {
+  static isUpOrDown(input) {
     const result =
       input === BRIDGE_INFO.SELECT_UP || input === BRIDGE_INFO.SELECT_DOWN;
     Validator.throwErr(result, MESSAGE.ERROR.INCORRECT_BRIDGE_SELECT);
+  }
+
+  static isRestartOrQuit(input) {
+    const result =
+      input === GAME_STATUS.GAME_RESTART || input === GAME_STATUS.GAME_QUIT;
+    Validator.throwErr(result, MESSAGE.ERROR.INCORRECT_GAME_STATUS);
   }
 }
 
