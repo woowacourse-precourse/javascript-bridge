@@ -7,8 +7,10 @@ class BridgeValidator extends Validator {
     this.max = max;
   }
 
-  isValidBridgeSize(number) {
-    const size = Number(number);
+  isValidBridgeSize(value) {
+    this.isValidInput(value);
+
+    const size = Number(value);
 
     if (size < this.min || size > this.max) {
       throw new Error(`${this.ERROR_MESSAGE_HEADER} 다리 길이는 ${this.min}부터 ${this.max}사이의 숫자여야 합니다.`);
