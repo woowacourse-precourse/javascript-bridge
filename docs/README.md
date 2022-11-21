@@ -27,7 +27,7 @@
 
 <img src="./MVC 설계.jpg">
 
-#### Controller
+### Controller
 
 - Controller.js
 - Validator
@@ -35,13 +35,13 @@
   - GameCommand.js
   - MoveSpace.js
 
-#### Model
+### Model
 
 - BridgeGame.js
 - CheckModel.js
 - ProductionModel.js
 
-#### View
+### View
 
 - InputView.js
 - OutputView.js <br>

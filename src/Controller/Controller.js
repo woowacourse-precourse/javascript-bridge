@@ -47,7 +47,7 @@ class Controller {
   orderMoving(moving) {
     const [currentMap, isSafe, isEnd] = this.#BridgeGame.move(moving);
     this.orderPrint(currentMap);
-    if (!isSafe) return this.orderInputAnswer();
+    if (!isSafe) return this.orderInputCommand();
     if (isEnd) return this.orderGameEnd(RESULT.SUCCESS);
     return this.orderInputMoving();
   }
@@ -56,18 +56,18 @@ class Controller {
     OutputView.printMap(currentMap);
   }
 
-  orderInputAnswer() {
+  orderInputCommand() {
     InputView.readGameCommand(this.isAllowCommand.bind(this));
   }
 
   isAllowCommand(input) {
     this.gameCommand = new GameCommand(input);
-    if (!this.gameCommand.checkInput()) return this.orderInputAnswer();
-    return this.giveAnswer(input);
+    if (!this.gameCommand.checkInput()) return this.orderInputCommand();
+    return this.processCommand(input);
   }
 
-  giveAnswer(answer) {
-    if (this.#BridgeGame.retry(answer)) return this.orderInputMoving();
+  processCommand(command) {
+    if (this.#BridgeGame.retry(command)) return this.orderInputMoving();
     return this.orderGameEnd(RESULT.FAIL);
   }
 

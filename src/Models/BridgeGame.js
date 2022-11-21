@@ -46,12 +46,13 @@ class BridgeGame {
     this.#currentMap[SPACE[currentSpace]][nowStep] = MARK.TRAP;
   }
 
-  retry(answer) {
-    if (answer === COMMAND.RETRY) {
+  retry(command) {
+    if (command === COMMAND.RETRY) {
       this.#movingProcess = [];
       this.#attemptCnt += 1;
       return ORDER.RETRY;
-    } else if (answer === COMMAND.QUIT) return ORDER.QUIT;
+    }
+    return ORDER.QUIT;
   }
 
   getGameInfo() {
