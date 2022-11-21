@@ -1,18 +1,10 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const BridgeValidator = require("./utils/BridgeValidator");
-const {
-  BRIDGE_LENGTH,
-  DIRECTION,
-  DIRECTION_MATCH,
-} = require("./constants/gameState");
+const { DIRECTION, DIRECTION_MATCH } = require("./constants/gameState");
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const DirectionValidator = require("./utils/DirectionValidator");
 const BridgeGameController = require("./BridgeGameController");
-const { Console } = require("@woowacourse/mission-utils");
-
 class BridgeGame {
   #bridge;
   #totalCount;
@@ -28,17 +20,6 @@ class BridgeGame {
   startGame(bridgeSize) {
     this.validateBridgeLength(bridgeSize);
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, generate);
-    Console.print(this.#bridge);
-  }
-
-  validateBridgeLength(size) {
-    try {
-      BridgeValidator.isInRange(size, BRIDGE_LENGTH.START, BRIDGE_LENGTH.END);
-      BridgeValidator.isNumber(size);
-    } catch (e) {
-      this.#bridgeGameController.outputError(e);
-      this.#bridgeGameController.inputBridgeSize();
-    }
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -83,16 +64,6 @@ class BridgeGame {
       upArray.push(" ");
     }
   }
-
-  validateDirection(direction) {
-    try {
-      DirectionValidator.validateDirection(direction);
-    } catch (e) {
-      this.#bridgeGameController.outputError(e);
-      this.#bridgeGameController.inputDirection();
-    }
-  }
-
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
