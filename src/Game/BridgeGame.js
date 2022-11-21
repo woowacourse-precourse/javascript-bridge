@@ -31,9 +31,6 @@ class BridgeGame {
     return this.#score;
   }
 
-  /**
-   * @param {string[]} bridge
-   */
   set bridge(bridge) {
     this.#bridge = bridge;
   }

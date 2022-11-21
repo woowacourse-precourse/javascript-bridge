@@ -4,18 +4,14 @@ const OutputView = require('./View/OutputView');
 
 class App {
   play() {
-    this.startGame();
+    this.setGame();
   }
 
-  startGame() {
+  setGame() {
     this.game = new BridgeGame();
-    InputView.game = this.game;
-    OutputView.game = this.game;
-    OutputView.printStart();
-    InputView.playGame();
+    OutputView.showStart();
+    InputView.setGame(this.game);
   }
 }
-
-new App().play();
 
 module.exports = App;
