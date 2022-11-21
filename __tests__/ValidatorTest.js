@@ -1,5 +1,5 @@
-const { ERROR_MSG } = require('../src/Constant');
-const Validator = require('../src/Validator');
+const { ERROR_MSG } = require('../src/common/Constant');
+const Validator = require('../src/utils/Validator');
 const { validateNumber, validateNumberRange, validateMove, validateRetry } =
   Validator;
 const { prefix, isNotANumber, isOutOfRange, isNotUpOrDown, isNotRetryOrQuit } =

@@ -1,4 +1,4 @@
-const { ERROR_MSG } = require('./Constant');
+const { ERROR_MSG } = require('../common/Constant');
 const { prefix, isNotANumber, isOutOfRange, isNotUpOrDown, isNotRetryOrQuit } =
   ERROR_MSG;
 

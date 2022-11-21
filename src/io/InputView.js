@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_MSG, COMMON } = require('./Constant');
+const { GAME_MSG, COMMON } = require('../common/Constant');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.

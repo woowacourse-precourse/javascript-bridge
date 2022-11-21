@@ -1,4 +1,4 @@
-const { BRIDGE_MSG, COMMON } = require('./Constant');
+const { BRIDGE_MSG, COMMON } = require('../common/Constant');
 const { leftEdge, divider, downward, impossible, possible, rightEdge, upward } =
   BRIDGE_MSG;
 const { blank, newLine } = COMMON;

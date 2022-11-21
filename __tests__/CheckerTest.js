@@ -1,5 +1,5 @@
-const { checkSpaceCanMove, checkGameOver } = require('../src/Checker');
-const { BRIDGE_MSG } = require('../src/Constant');
+const { checkSpaceCanMove, checkGameOver } = require('../src/utils/Checker');
+const { BRIDGE_MSG } = require('../src/common/Constant');
 
 describe('가능 검토자 테스트', () => {
   test('입력값과 다리 칸 정보가 같은지 확인한다.', () => {

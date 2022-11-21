@@ -1,5 +1,8 @@
-const { convertToUpDown, convertToBridgeMap } = require('../src/Converter');
-const { BRIDGE_MSG, COMMON } = require('../src/Constant');
+const {
+  convertToUpDown,
+  convertToBridgeMap,
+} = require('../src/utils/Converter');
+const { BRIDGE_MSG, COMMON } = require('../src/common/Constant');
 
 describe('변환자 테스트', () => {
   test('1을 U로, 0을 D로 변환한다.', () => {
