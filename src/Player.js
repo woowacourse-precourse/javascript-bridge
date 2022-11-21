@@ -26,6 +26,10 @@ class Player {
 
     this.#currentLocation += 1;
   }
+
+  resetPath() {
+    this.#path = { upside: [], downside: [] };
+  }
 }
 
 module.exports = Player;
