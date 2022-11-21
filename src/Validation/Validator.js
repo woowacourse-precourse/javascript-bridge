@@ -1,5 +1,5 @@
 const { ERROR } = require('../Constant/message');
-const { BLOCK } = require('../Constant/value');
+const { BLOCK, COMMAND } = require('../Constant/value');
 
 const Validator = {
   direction(userInput) {
@@ -14,6 +14,12 @@ const Validator = {
     }
     if (!new RegExp('^[0-9]+$').test(userInput)) {
       throw new Error(ERROR.TYPE);
+    }
+  },
+
+  command(userInput) {
+    if (userInput !== COMMAND.RETRY && userInput !== COMMAND.QUIT) {
+      throw new Error(ERROR.COMMAND);
     }
   },
 };

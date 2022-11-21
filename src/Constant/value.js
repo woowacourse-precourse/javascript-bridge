@@ -9,5 +9,10 @@ const BLOCK = {
   LOWER: 'D',
 };
 
-module.exports = { PATH, BLOCK };
+const COMMAND = {
+  RETRY: 'R',
+  QUIT: 'Q',
+};
+
+module.exports = { PATH, BLOCK, COMMAND };
 
