@@ -28,7 +28,7 @@ class App {
         isRetry = this.#bridgeGame.retry(command);
       }
     }
-    OutputView.printResult(InputView.getRetryCount(), isLive);
+    OutputView.printResult(this.#bridgeGame.getRetryCount(), isLive);
     InputView.close();
   }
 

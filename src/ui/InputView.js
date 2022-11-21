@@ -51,7 +51,6 @@ const InputView = {
   },
 
   close() {
-    Console.print("끄으으읕");
     Console.close();
   },
 
