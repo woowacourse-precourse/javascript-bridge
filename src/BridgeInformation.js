@@ -64,6 +64,50 @@ class BridgeInformation {
   makeNotFirstBlock(item) {
     return BLOCK.NOT_FIRST_BLOCK(item);
   }
+  finishGame(tryCount, gameStatus) {
+    OutputView.printEndGame();
+    this.printRouteMap();
+    if (gameStatus === SIGN.SUCCESS) {
+      OutputView.printResult(tryCount, SIGN.SUCCESS);
+      return;
+    }
+    OutputView.printResult(tryCount, SIGN.FAILURE);
+    return;
+  }
+
+  resetRoute() {
+    this.#route = Array.from(Array(SIGN.TOTAL_DIRECTION), () => Array());
+  }
+
+  checkMatchLength(movingRoute) {
+    return this.#bridgeInformation.length === movingRoute;
+  }
+
+  getWrongRoute() {
+    if (
+      !this.#route[0].join("").includes(SIGN.FAILURE_SIGN) &&
+      !this.#route[1].join("").includes(SIGN.FAILURE_SIGN)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  successStatus(movingRouteLength) {
+    if (this.#bridgeInformation.length === movingRouteLength && this.getWrongRoute()) {
+      return true;
+    }
+    return false;
+  }
+
+  printRouteMap() {
+    OutputView.printMap(this.#route[0].join(""));
+    OutputView.printMap(this.#route[1].join(""));
+  }
+
+  resetRoute() {
+    this.#route = Array.from(Array(SIGN.TOTAL_DIRECTION), () => Array());
+  }
 }
 
 module.exports = BridgeInformation;
