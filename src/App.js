@@ -1,4 +1,5 @@
 const InputView = require("./InputView");
+const OutputView = require("./OutputView")
 const BridgeGame = require("./BridgeGame");
 class App {
   #bridgeGame;
@@ -6,6 +7,7 @@ class App {
     this.#bridgeGame = new BridgeGame();
   }
   play() {
+    OutputView.printStart();
     InputView.readBridgeSize(this.#bridgeGame);
   }
 }
