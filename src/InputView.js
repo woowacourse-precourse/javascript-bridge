@@ -58,7 +58,23 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge, currentBridge, idx, count, move) {},
+  readGameCommand(bridge, currentBridge, idx, count, move) {
+    Console.readLine(`${Message.INPUT_MESSAGE.READ_GAME_COMMAND_TEXT}\n`, (command) => {
+      if (ErrorHandler.readGameCommandErrorHandler(command)) {
+        Console.close();
+      }
+      else {
+        const checkReturn = this.bridgeGame.retry(bridge, command, currentBridge, idx, count);
+        if (checkReturn) {
+          [currentBridge, idx, count] = checkReturn;
+          this.readMoving(bridge, currentBridge, idx, count);
+        }
+        else {
+          Console.close();
+        }
+      }
+    });
+  },
 
 };
 module.exports = InputView;
