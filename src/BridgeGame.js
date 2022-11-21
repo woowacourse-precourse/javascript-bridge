@@ -20,7 +20,7 @@ class BridgeGame {
   #checkMoveable(movement) {
     const isCorrect = this.#bridge[this.#currentIndex] === movement;
     const isEnd = this.#currentIndex === this.#bridge.length - 1;
-    return { isCorrect, isEnd }
+    return { isCorrect, isEnd };
   }
 
   #checkMarking(movement) {
@@ -42,7 +42,7 @@ class BridgeGame {
     const { markedPosition, unmarkedPosition } = this.#checkMarking(movement);
     this.#updateMap(isCorrect, markedPosition, unmarkedPosition);
 
-    return { isCorrect, isGameEnd: isEnd && isCorrect, count: this.#count, map: this.#map,  }
+    return { isCorrect, isGameEnd: isEnd && isCorrect, count: this.#count, map: this.#map }
   }
 
   retry() {
