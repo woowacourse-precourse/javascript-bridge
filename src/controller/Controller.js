@@ -46,11 +46,22 @@ class Controller {
   movingDirectionForm(square) {
     try {
       this.validation.isUpOrDown(square);
-      this.bridgeCurrentStatus(square);
+      !this.bridgeCurrentStatus(square) && this.getBridgeCommand();
       this.checkGameFinished() ? this.endGame() : this.getMovingDirection();
     } catch (error) {
       this.bridgeMovingError(error);
     }
+  }
+
+  bridgeCurrentStatus(square) {
+    this.setBridge(square);
+    OutputView.printMap(this.#currentBridge);
+    return this.#correct;
+  }
+
+  checkGameFinished() {
+    if (this.#currentBridge.up.length === this.#bridge.length && this.#correct)
+      return true;
   }
 
   setBridge(square) {
@@ -61,17 +72,6 @@ class Controller {
     this.#currentBridge.up = upBridge;
     this.#currentBridge.down = downBridge;
     this.#correct = correct;
-  }
-
-  bridgeCurrentStatus(square) {
-    this.setBridge(square);
-    OutputView.printMap(this.#currentBridge);
-    !this.#correct && this.getBridgeCommand();
-  }
-
-  checkGameFinished() {
-    if (this.#currentBridge.up.length === this.#bridge.length && this.#correct)
-      return true;
   }
 
   endGame() {
@@ -94,6 +94,20 @@ class Controller {
     }
   }
 
+  RetryOrQuitGame(input) {
+    switch (input) {
+      case BRIDGE.RETRY:
+        this.retryGame();
+        break;
+      case BRIDGE.QUIT:
+        this.quitGame();
+        break;
+      default:
+        break;
+    }
+    this.#try += 1;
+  }
+
   retryGame() {
     this.bridgeGame.retry();
     this.getMovingDirection();
@@ -103,16 +117,6 @@ class Controller {
     OutputView.printMap(this.#currentBridge);
     OutputView.printResult(this.#try, false);
     Console.close();
-  }
-
-  RetryOrQuitGame(input) {
-    if (input === BRIDGE.RETRY) {
-      this.retryGame();
-    }
-    if (input === BRIDGE.QUIT) {
-      this.quitGame();
-    }
-    this.#try += 1;
   }
 
   bridgeSizeError(error) {
