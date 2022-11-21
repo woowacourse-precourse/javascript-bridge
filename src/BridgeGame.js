@@ -93,7 +93,12 @@ class BridgeGame {
   }
 
   retry(command) {
-
+    if (command === 'R') {
+      this.#bridges = this.#originBridges;
+      this.openBridgeRow();
+      this.inputSpace();
+      return;
+    }
   }
 }
 
