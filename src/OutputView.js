@@ -89,10 +89,3 @@ const OutputView = {
 };
 
 module.exports = OutputView;
-
-const bridge = ["U", "D", "D", "U"];
-const location = 4;
-const isSuccess = true;
-
-OutputView.printResult(bridge, location, isSuccess, 4);
-Console.close();
