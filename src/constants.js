@@ -6,19 +6,29 @@ const RETRY_REQUEST =
 const BRIDGE_SIZE_ERROR =
   '\n[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.';
 const MOVE_INPUT_ERROR = '\n[ERROR] U 또는 D 를 입력하여야 합니다.';
+const RETRY_INPUT_ERROR = '\n[ERROR] R 또는 Q를 입력하여야 합니다.';
 const MIN_BRIDGE_SIZE = 3;
 const MAX_BRIDGE_SIZE = 20;
 const MOVE_UP = 'U';
 const MOVE_DOWN = 'D';
+const RESULT_MSG = '\n최종 게임 결과';
+const FAIL_MSG = '게임 성공 여부: 실패\n';
+const SUCCESS_MSG = '\n게임 성공 여부: 성공';
+const TOTAL_COUNT_MSG = '총 시도한 횟수: ';
 module.exports = {
   START_GAME_MSG,
   BRIDGE_SIZE_REQUEST,
   MOVE_REQUEST,
   RETRY_REQUEST,
   BRIDGE_SIZE_ERROR,
+  RETRY_INPUT_ERROR,
   MIN_BRIDGE_SIZE,
   MAX_BRIDGE_SIZE,
   MOVE_UP,
   MOVE_DOWN,
   MOVE_INPUT_ERROR,
+  RESULT_MSG,
+  FAIL_MSG,
+  SUCCESS_MSG,
+  TOTAL_COUNT_MSG,
 };
