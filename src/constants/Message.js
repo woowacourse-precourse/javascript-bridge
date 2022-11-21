@@ -11,8 +11,8 @@ const ASKS = Object.freeze({
 });
 
 const ABOUT = Object.freeze({
-  TYPE_NUMBER: "[ERROR] 입력 타입은 숫자여야 합니다.",
-  NUMBER_RANGE: "[ERROR] 입력 숫자 범위는 3 ~ 20이어야 합니다.",
+  // TYPE_NUMBER: "[ERROR] 입력 타입은 숫자여야 합니다.",
+  RANGE: "[ERROR] 입력 숫자 범위는 3 ~ 20이어야 합니다.",
 
   BRIDGE_SIZE:
     "[ERROR] 입력한 다리 size와 생성된 다리 길이가 일치하지 않습니다.",

@@ -5,7 +5,7 @@ const BridgeMaker = require("./BridgeMaker");
 const RandomGenerator = require("./BridgeRandomNumberGenerator");
 const GameLogic = require("./utils/GameLogic");
 
-// 로직 분리 -> Map 만들기 로직 -> Map 프린트 로직 -> test
+// 로직 분리 //로직 꼬인 것
 
 /**
  * 객체
@@ -31,7 +31,8 @@ const InputView = {
   },
 
   readBridge(resolved, values, result) {
-    const bridge = BridgeMaker.makeBridge(resolved, RandomGenerator.generate());
+    const bridge = BridgeMaker.makeBridge(resolved, RandomGenerator.generate);
+    console.log(bridge);
     this.readMoving(bridge, values, result);
   },
 
@@ -42,25 +43,25 @@ const InputView = {
         values.stepArray.push(step);
 
         this.compare(bridge, values, result);
-
-        //MAP
       });
     }
 
     if (values.index === bridge.length - 1) {
       //성공 로직
-      console.log(
-        `\n최종 게임 결과\n${result.upper}\n${result.lower}\n\n게임성공여부: 성공\n총 시도한 횟수: ${result.count}`
-      );
+      // console.log(
+      //   `\n최종 게임 결과\n${result.upper}\n${result.lower}\n\n게임성공여부: 성공\n총 시도한 횟수: ${result.count}`
+      // );
+      Console.print(`\n최종 게임 결과`);
+      Console.print(result.upper);
+      Console.print(result.lower);
+      Console.print("\n게임 성공 여부: 성공");
+      Console.print(`총 시도한 횟수: ${result.count}`);
       Console.close();
     }
   },
 
   compare(bridge, values, result) {
     values.index++;
-    // values.stepArray
-    // console.log(bridge, result.upper);
-    // console.log(bridge, result.lower);
 
     if (bridge[values.index] === values.stepArray[values.index]) {
       if (values.stepArray[values.index] === "U") {
@@ -118,9 +119,15 @@ const InputView = {
       }
 
       if (select === "Q") {
-        console.log(
-          `\n최종 게임 결과\n${result.upper}\n${result.lower}\n\n게임성공여부: 실패\n총 시도한 횟수: ${result.count}`
-        );
+        // console.log(
+        //   `\n최종 게임 결과\n${result.upper}\n${result.lower}\n\n게임성공여부: 실패\n총 시도한 횟수: ${result.count}`
+        // );
+
+        Console.print(`\n최종 게임 결과`);
+        Console.print(result.upper);
+        Console.print(result.lower);
+        Console.print("\n게임 성공 여부: 실패");
+        Console.print(`총 시도한 횟수: ${result.count}`);
         Console.close();
       }
     });

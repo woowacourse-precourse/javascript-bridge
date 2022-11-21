@@ -14,9 +14,6 @@ const GameLogic = {
   //   InputView.readMoving(bridge, values, result)
   // }
 
-
-
-
   // step() {
   //   //InputView 실행 결과 (U,.. D,.. ) return
   // },

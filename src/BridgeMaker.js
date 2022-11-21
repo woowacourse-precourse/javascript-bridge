@@ -11,8 +11,8 @@ const BridgeMaker = {
    */
 
   makeBridge(size, generateRandomNumber) {
-    return Array.from({ length: size }, () => generateRandomNumber).map(
-      (value) => (value === 0 ? "U" : "D")
+    return Array.from({ length: size }, () => generateRandomNumber()).map(
+      (value) => (value === 1 ? "U" : "D")
     );
   },
 };
