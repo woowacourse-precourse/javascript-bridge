@@ -8,7 +8,6 @@ const StepResult = require('../model/StepResult.js');
 
 class BridgeGameController {
   constructor() {
-    OutputView.welcomeMessage();
     this.bridgeGame = new BridgeGame();
     this.bridge = new Bridge();
     this.stepResult = new StepResult();
@@ -29,8 +28,10 @@ class BridgeGameController {
     const isWrongAnswer = this.playTurn(move);
     if (isWrongAnswer) return InputView.readGameCommand(this.askWantRetry.bind(this));
 
-    if (this.isEndGame()) return OutputView.printResult(true, this.bridgeGame.retryCount, this.stepResult);
-
+    if (this.isEndGame()) {
+      const isSuccess = true;
+      return OutputView.printResult(isSuccess, this.bridgeGame.retryCount, this.stepResult);
+    }
     return InputView.readMoving(this.moveByUser.bind(this));
   }
 
@@ -44,13 +45,14 @@ class BridgeGameController {
   }
 
   isEndGame() {
-    return this.bridgeGame.turn >= this.bridge.answerArray.length;
+    return this.bridgeGame.turn === this.bridge.answerArray.length;
   }
 
   askWantRetry(answer) {
     if (answer === 'R') return this.retry();
 
-    return OutputView.printResult(false, this.bridgeGame.retryCount, this.bridge);
+    const isSuccess = false;
+    return OutputView.printResult(isSuccess, this.bridgeGame.retryCount, this.bridge);
   }
 
   retry() {
