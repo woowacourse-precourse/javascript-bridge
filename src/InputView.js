@@ -1,13 +1,14 @@
 const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
-const BridgeData = require('./BridgeData');
 const BridgeGame = require('./BridgeGame');
+const BridgeSize = require('./InputCheck/BridgeSize');
+const Moving = require('./InputCheck/Moving');
+const GameCommand = require('./InputCheck/GameCommand');
 
 const SUCCESS = 1;
 const FAIL = 0;
+const bridgeGame = new BridgeGame();
 const InputView = {
-  callbackCount: 0,
-  tryCount: 0,
   RESTART: 'R',
 
   /**
@@ -16,16 +17,31 @@ const InputView = {
 
   readBridgeSize() {
     Console.readLine(
-      '다리의 길이를 입력해주세요.',
-      this.runBridgeSizeProcess.bind(this)
+      '다리의 길이를 입력해주세요.\n',
+      this.checkBridgeSize.bind(this)
     );
   },
 
-  runBridgeSizeProcess(input) {
-    OutputView.printInput(input);
-    this.saveSize(input);
-    this.prebuildBridge(input);
-    this.readMoving();
+  checkBridgeSize(input, confirmedInput = null) {
+    try {
+      const bridgeSize = new BridgeSize(input);
+      confirmedInput = bridgeSize.checkInput();
+    } catch (error) {
+      Console.print(`[${error}]`);
+    } finally {
+      if (confirmedInput !== input) return this.readBridgeSize();
+    }
+    return this.saveSize(input);
+  },
+
+  saveSize(input) {
+    bridgeGame.saveSize(input);
+    return this.prebuildBridge(input);
+  },
+
+  prebuildBridge(input) {
+    bridgeGame.precompose(input);
+    return this.readMoving();
   },
 
   /**
@@ -39,15 +55,30 @@ const InputView = {
     );
   },
 
-  runBridgeMovingProcess(input) {
-    this.callbackCount += 1;
-    this.saveInput(input);
-    if (this.isSamePreBuiltBridgeAsInput(input)) {
-      OutputView.printMap(BridgeGame.move(input, SUCCESS));
+  runBridgeMovingProcess(input, confirmedInput = null) {
+    try {
+      const moving = new Moving(input);
+      confirmedInput = moving.checkInput();
+    } catch (error) {
+      Console.Print(error);
+    } finally {
+      if (confirmedInput !== input) return this.readMoving();
+    }
+    return this.saveInput(input);
+  },
+
+  saveInput(input) {
+    bridgeGame.saveUpOrDown(input);
+    return this.printMap(input);
+  },
+
+  printMap(input) {
+    if (bridgeGame.isSamePreBuiltBridgeAsInput(input)) {
+      OutputView.printMap(bridgeGame.move(input, SUCCESS));
       return this.passAllOrNot();
     }
-    OutputView.printMap(BridgeGame.move(input, FAIL));
-    InputView.readGameCommand();
+    OutputView.printMap(bridgeGame.move(input, FAIL));
+    return this.readGameCommand();
   },
 
   /**
@@ -61,41 +92,33 @@ const InputView = {
     );
   },
 
-  runGameCommandProcess(input) {
+  runGameCommandProcess(input, confirmedInput = null) {
+    try {
+      const gameCommand = new GameCommand(input);
+      confirmedInput = gameCommand.checkInput();
+    } catch (error) {
+      Console.print(error);
+    } finally {
+      if (confirmedInput !== input) return this.readGameCommand();
+    }
+    this.retryOrEnd(input);
+  },
+
+  retryOrEnd(input) {
     if (input === this.RESTART) {
-      [this.callbackCount, this.tryCount] = BridgeGame.retry();
+      bridgeGame.retry();
       return this.readMoving();
     }
     BridgeGame.end();
   },
 
-  saveSize(input) {
-    BridgeData.size = input;
-  },
-
-  prebuildBridge(input) {
-    BridgeData.prebuilt = BridgeGame.precompose(input);
-  },
-
-  saveInput(input) {
-    BridgeData.upOrDown = input;
-  },
-
-  isSamePreBuiltBridgeAsInput(input) {
-    return BridgeData.prebuilt[this.tryCount] === input;
-  },
-
   passAllOrNot() {
-    this.tryCount += 1;
-    if (this.isAllPass()) {
-      OutputView.printResult('성공', this.try);
+    bridgeGame.increaseTryOrder();
+    if (bridgeGame.isAllPass()) {
+      OutputView.printResult('성공', bridgeGame.returnBridgeData());
       return BridgeGame.end();
     }
     return this.readMoving();
-  },
-
-  isAllPass() {
-    return this.callbackCount === Number(BridgeData.size);
   },
 };
 
