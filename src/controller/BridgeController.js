@@ -19,10 +19,10 @@ class BridgeController {
   }
 
   requestBridgeSize() {
-    InputView.readBridgeSize(this.controlSize.bind(this));
+    InputView.readBridgeSize(this.controlBridgeSize.bind(this));
   }
 
-  controlSize(size) {
+  controlBridgeSize(size) {
     const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
     this.#bridgeGame.updateBridge(bridge);
     if (!this.controlValidate(Validate.validateSizeRange, Number(size))) {
@@ -40,12 +40,15 @@ class BridgeController {
     if (!this.controlValidate(Validate.validateMovePosition, movePosition)) {
       return this.requestBridgeMovemonet();
     }
-    this.controlMovemonetFromUser(movePosition);
+
+    this.#bridgeGame.selectMovemonetPosition(movePosition);
+    const drawBridge = this.getDrawBridge();
+    OutputView.printMap(drawBridge);
+    this.controlNextStep();
   }
 
   getDrawBridge() {
-    const userBridge = this.#bridgeGame.getUserBridge();
-    const moveBridge = this.#bridgeGame.move(userBridge);
+    const moveBridge = this.#bridgeGame.move();
     return this.draw(moveBridge);
   }
 
@@ -70,13 +73,6 @@ class BridgeController {
     return (downBridge += ` | ${position[1]}`);
   }
 
-  controlMovemonetFromUser(movePosition) {
-    this.#bridgeGame.addBridgeFromUser(movePosition);
-    const drawBridge = this.getDrawBridge();
-    OutputView.printMap(drawBridge);
-    this.controlNextStep();
-  }
-
   controlNextStep() {
     const drawBridge = this.getDrawBridge();
     if (drawBridge.upBridge.includes('X') || drawBridge.downBridge.includes('X')) {
@@ -99,21 +95,10 @@ class BridgeController {
     if (!this.controlValidate(Validate.validateRetryOfQuit, input)) {
       return this.requestGameCommand();
     }
-    this.controlRetryCommand(input);
-  }
-
-  controlRetryCommand(input) {
-    if (input === 'R') {
-      this.#bridgeGame.retry();
-      this.requestBridgeMovemonet();
-    }
-
-    if (input === 'Q') {
-      const attemps = this.#bridgeGame.getNumberOfAttempts();
-      const drawBridge = this.getDrawBridge();
-      OutputView.printResult(drawBridge, '실패', attemps);
-      return Console.close();
-    }
+    if (input === 'R') return this.#bridgeGame.retry() || this.requestBridgeMovemonet();
+    const attemps = this.#bridgeGame.getNumberOfAttempts();
+    const drawBridge = this.getDrawBridge();
+    return OutputView.printResult(drawBridge, '실패', attemps) || Console.close();
   }
 
   controlValidate(validate, input) {
