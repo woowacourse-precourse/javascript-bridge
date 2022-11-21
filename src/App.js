@@ -1,9 +1,19 @@
+const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
 class App {
+  #bridge;
+
+  #index;
+
+  constructor() {
+    this.bridgeGame = new BridgeGame();
+    this.#index = 0;
+  }
+
   play() {
     OutputView.printStart();
     this.initBridge();
@@ -19,9 +29,15 @@ class App {
       this.movingBridge();
     });
   }
+
   movingBridge() {
     InputView.readMoving((moving) => {
       if (!InputView.moveValidate(moving)) return this.movingBridge();
+
+      this.bridgeGame.move(this.#bridge, moving, this.#index);
+      this.#index += 1;
+      OutputView.printMap(this.bridgeGame.getMoving());
+      if (this.#index !== this.#bridge.length) return this.movingBridge();
     });
   }
 }
