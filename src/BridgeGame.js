@@ -19,8 +19,8 @@ class BridgeGame {
     return this.bridge;
   }
 
-  isCorrect(answer, bridge) {
-    return answer === bridge[this.position];
+  isCorrect(answer) {
+    return answer === this.bridge[this.position];
   }
 
   /**
