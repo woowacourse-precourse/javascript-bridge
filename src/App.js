@@ -8,8 +8,11 @@ const OutputView = require('./OutputView');
 class App {
   #bridge;
 
+  #tryCount;
+
   constructor() {
     this.bridgeGame = new BridgeGame();
+    this.#tryCount = 1;
   }
 
   play() {
@@ -24,7 +27,7 @@ class App {
       }
 
       this.#bridge = BridgeMaker.makeBridge(parseInt(length, 10), generate);
-      this.movingBridge();
+      return this.movingBridge();
     });
   }
 
@@ -38,6 +41,8 @@ class App {
       if (this.bridgeGame.isFail(this.#bridge, moving)) return this.askGameCommand();
 
       if (this.bridgeGame.getIndex() !== this.#bridge.length) return this.movingBridge();
+
+      return this.quitGame();
     });
   }
 
@@ -47,9 +52,20 @@ class App {
 
       if (command === BRIDGE.RESTART) {
         this.bridgeGame.retry();
+        this.#tryCount += 1;
         return this.movingBridge();
       }
+
+      return this.quitGame();
     });
+  }
+
+  quitGame() {
+    OutputView.printResult(
+      this.bridgeGame.getMoving(),
+      this.bridgeGame.getResult(this.#bridge),
+      this.#tryCount
+    );
   }
 }
 
