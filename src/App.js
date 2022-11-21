@@ -37,6 +37,10 @@ class App {
   tryBuildMoving(moving) {
     try {
       this.brideGame.move(moving);
+      let recordMoving = this.brideGame.getRecordSteps();
+      OutputView.printMap(recordMoving);
+      let firstDesideKey = this.brideGame.getCurrentCondition();
+      this.decideControl(firstDesideKey);
     } catch(error) {
       this.retryRequestMoving();
     }
@@ -54,7 +58,7 @@ class App {
   decideControl(controlKey) {
     if(controlKey === CONTROL.PASS_STEP) this.requestMoving();
     if(controlKey === CONTROL.GAME_END) {
-      const recordMoving = this.brideGame.getRecordSteps();
+      let recordMoving = this.brideGame.getRecordSteps();
       let result = this.brideGame.getSucessValue();
       let replay = this.brideGame.getCountReplyNumber();
       OutputView.printResult(recordMoving, result, replay);
