@@ -1,55 +1,71 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeMaker  = require('./BridgeMaker');
+const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const generateNum = require('./BridgeRandomNumberGenerator')
 class App {
-  BridgeArray
+  bridge
   tryGame;
   flag;
-  constructor(){
-    this.BridgeArray = [];
-    this.tryGame=0;
-    this.flag=false;
+  BridgesGameStart;
+  constructor() {
+    this.bridge = [];
+    this.tryGame = 0;
+    this.flag = false;
   }
-  
+
   async play() {
-    MissionUtils.Console.print('다리 건너기 게임을 시작합니다.\n');
-    
-    let tempBridgeArray = await InputView.readBridgeSize();
-    this.BridgeArray = tempBridgeArray;
+    MissionUtils.Console.print('다리 건너기 게임을 시작합니다.');
+    try {
+      let bridgeSize = await InputView.readBridgeSize();
+      this.bridge = BridgeMaker.makeBridge(bridgeSize, generateNum.generate);
 
-    console.log(tempBridgeArray);
-    while(true){
-
-      let answer = await this.run();
-
-      if(answer == true) this.flag = true;
-      this.tryGame += 1;
-      const ready = await InputView.readGameCommand(BridgesGameStart);
-      // 다시 할래?
-      if(!ready)   break;
+     // console.log(tempBridgeArray);
+    }
+    catch (error) {
+      MissionUtils.Console.print("[ERROR]" + error);
     }
 
-    OutputView.printResult(this.flag,this.tryGame);
+    while (true) {
 
+      let answer = await this.run();
+      this.tryGame += 1;
+      if (answer == true) {
+        this.flag = true;
+        MissionUtils.Console.print("최종 게임 결과");
+        OutputView.printMap(this.BridgesGameStart.arr1, this.BridgesGameStart.arr2);
+        OutputView.printResult(this.flag, this.tryGame);
+        break;
+      }
+      try {
+        const gameCommand = await InputView.readGameCommand();
+        // 다시 할래?
+        if (this.BridgesGameStart.retry(gameCommand)) {
+          MissionUtils.Console.print("최종 게임 결과");
+          OutputView.printMap(this.BridgesGameStart.arr1, this.BridgesGameStart.arr2);
+          OutputView.printResult(this.flag, this.tryGame);
+          break;
+        } else {
+          await this.run();
+        }
+      }
+      catch (error) {
+        MissionUtils.Console.print("[ERROR]" + error);
+      }
+    }
   }
 
-  async run(){
-    
-    let BridgesGameStart = new BridgeGame(this.BridgeArray);
-    let arr1 = new Array(this.BridgeArray.length);
-    let arr2 = new Array(this.BridgeArray.length);
-    let turns = 0;
-    while(turns != this.BridgeArray.length){
-      const result = await InputView.readMoving(BridgesGameStart,turns);
+  async run() {
 
-      if(result == false){
-        return false;
-      }
-      else{
-        turns += 1;
-      }
+    this.BridgesGameStart = new BridgeGame(this.bridge);
+
+    let turns = 0;
+    while (turns != this.bridge.length) {
+      const input = await InputView.readMoving();
+      const notFailed = await this.BridgesGameStart.move(input, turns)
+      if (notFailed) turns += 1;
+      else return false
     }
     return true;
   }

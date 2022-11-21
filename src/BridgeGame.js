@@ -4,10 +4,14 @@ const OutputView = require('./OutputView');
 class BridgeGame {
   num;
   bridges =[];
-  constructor(BridgeArray){
-    this.num=0;
-    this.bridges = BridgeArray;
+  arr1 = [];
+  arr2 = [];
     
+  constructor(bridge){
+    this.num=0;
+    this.bridges = bridge;
+    this.arr1= [];
+    this.arr2= [];
   }
 
   /**
@@ -15,13 +19,29 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(input,turns) {
-    if(input == this.bridges[turns]){
-      OutputView.printMap();
+  async move(input,turn) {
+    if(input == this.bridges[turn]){
+      if(input == 'D'){
+        this.arr1.push('O');
+        this.arr2.push(' ');
+      }
+      else if(input == 'U'){
+        this.arr1.push(' ');
+        this.arr2.push('O');
+      }
+      OutputView.printMap(this.arr1,this.arr2);
       return true;
     }
     else{
-      OutputView.printMap();
+      if(input == 'D'){
+        this.arr1.push('X');
+        this.arr2.push(' ');
+      }
+      else if(input == 'U'){
+        this.arr1.push(' ');
+        this.arr2.push('X');
+      }
+      OutputView.printMap(this.arr1,this.arr2);
       return false;
     }
   }
@@ -32,11 +52,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(input) {
-    if(input =='Q'){ 
-      printResult();
-      return false;
-    }
-    else if(input =='R') return true;
+    return input == 'R'
   }
 }
 

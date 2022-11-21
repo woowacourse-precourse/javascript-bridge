@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -13,11 +15,10 @@ const BridgeMaker = {
     let tempArray = [];
 
     for(let i=0 ;i<size; i++){
-      let generates = generateRandomNumber.generate();
-      tempArray.push(generates);
+      let generates = generateRandomNumber();
+      tempArray.push(generates === 1 ? 'U' : 'D');
     }
 
-    console.log(tempArray);
     return tempArray;
     
   },
