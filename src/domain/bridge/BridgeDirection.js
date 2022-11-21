@@ -1,4 +1,5 @@
 const BridgeRandomNumberGenerator = require('../../BridgeRandomNumberGenerator');
+const BridgeDirectionException = require('../../exception/BridgeDirectionException');
 const BridgeRandomNumberException = require('../../exception/BridgeRandomNumberException');
 
 class BridgeDirection {
@@ -9,8 +10,9 @@ class BridgeDirection {
 
   static validate(direction) {
     const { values } = Object;
-    if (!values(BridgeDirection.#DIRECTION).includes(direction)) {
-      throw new Error('[ERROR] 방향이 "D" 또는 "U" 가 아닙니다.');
+    const directions = values(BridgeDirection.#DIRECTION);
+    if (!directions.includes(direction)) {
+      throw new BridgeDirectionException(directions);
     }
   }
 
