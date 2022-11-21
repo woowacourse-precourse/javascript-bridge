@@ -43,10 +43,6 @@ class BridgeGame {
     //console.log(this.#bridge);
   }
 
-  getBridgeSize() {
-    return this.#bridgeSize;
-  }
-
   getCurrBridge() {
     return this.#currBridge;
   }
@@ -57,10 +53,6 @@ class BridgeGame {
 
   getTrial() {
     return this.#trial;
-  }
-
-  getUserLocation() {
-    return this.#userLocation;
   }
 
   move(bridgeChoice) {
