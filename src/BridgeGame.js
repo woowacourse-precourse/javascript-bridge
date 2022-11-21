@@ -94,7 +94,7 @@ class BridgeGame {
 
   end = () => {
     // TODO: 게임 결과 출력
-    OutputView.printResult(this.bridgeStore.getGameResult());
+    OutputView.printResult(this.bridgeStore.getGameResult(this.moveCount));
     InputView.close();
   };
 

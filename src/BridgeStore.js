@@ -46,9 +46,9 @@ class BridgeStore {
 
   /* 게임 성공 여부: 실패
    총 시도한 횟수: 1 */
-  getGameResult() {
+  getGameResult(moveCount) {
     return {
-      isGameClear: this.isGameClear(),
+      isGameClear: this.isGameClear(moveCount),
       tryCount: this.#tryCount,
     };
   }
