@@ -1,3 +1,5 @@
+const { RULES } = require('./constants/index.js');
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -10,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size }, () => {
       const randomNumber = generateRandomNumber();
-      return randomNumber === 1 ? 'U' : 'D';
+      return randomNumber === 1 ? RULES.UP : RULES.DOWN;
     });
   },
 };

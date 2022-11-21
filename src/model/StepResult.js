@@ -1,3 +1,5 @@
+const { RULES } = require('../constants/index.js');
+
 class StepResult {
   #upperBridge;
 
@@ -10,22 +12,22 @@ class StepResult {
 
   wrongStepRecord(move) {
     switch (move) {
-      case 'U':
-        this.insert(' X ', '   ');
+      case RULES.UP:
+        this.insert(RULES.NO_PASS, RULES.SPACE);
         break;
-      case 'D':
-        this.insert('   ', ' X ');
+      case RULES.DOWN:
+        this.insert(RULES.SPACE, RULES.NO_PASS);
         break;
     }
   }
 
   correctStepRecord(move) {
     switch (move) {
-      case 'U':
-        this.insert(' O ', '   ');
+      case RULES.UP:
+        this.insert(RULES.PASS, RULES.SPACE);
         break;
-      case 'D':
-        this.insert('   ', ' O ');
+      case RULES.DOWN:
+        this.insert(RULES.SPACE, RULES.PASS);
         break;
     }
   }

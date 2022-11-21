@@ -1,8 +1,9 @@
 const { isCollectRange, isValidateNumber } = require('./common.js');
+const { RULES } = require('../constants/index.js');
 
 const isCollectBridgeLength = (input) => {
   isValidateNumber(input);
-  isCollectRange(input, 3, 20);
+  isCollectRange(input, RULES.MIN_BRIDGE_NUMBER, RULES.MAX_BRIDGE_NUMBER);
 };
 
 const isValidateMoveInput = (number) => {
