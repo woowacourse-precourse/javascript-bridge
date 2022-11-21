@@ -1,17 +1,17 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const InputView = require('./IO/InputView');
+const OutputView = require('./IO/OutputView');
 
 /**
- * GameProgress: 게임 진행을 위한 문장을 출력하는 객체
+ * GameProgress: 게임 진행을 관리하는 객체
  */
 
 const GameProgress = {
 
-  printGameStart(validateBridgeSize) {
+  printGameStart(bridgeSizeInputHandler) {
     const BRIDGE_GAME_START = '다리 건너기 게임을 시작합니다.\n';
     MissionUtils.Console.print(BRIDGE_GAME_START);
-    this.readBridgeSize(validateBridgeSize);
+    this.readBridgeSize(bridgeSizeInputHandler);
   },
 
   printErrorMessage(err) {
@@ -24,22 +24,23 @@ const GameProgress = {
 
   printMap(bridge, bridgeMoveCount, input) {
     OutputView.printMap(bridge, bridgeMoveCount, input);
+    MissionUtils.Console.print('');
   },
 
   printBlankLine() {
     MissionUtils.Console.print('');
   },
 
-  readBridgeSize(validateBridgeSize) {
-    InputView.readBridgeSize(validateBridgeSize);
+  readBridgeSize(bridgeSizeInputHandler) {
+    InputView.readBridgeSize(bridgeSizeInputHandler);
   },
 
-  readMoving(validateBridgeMove) {
-    InputView.readMoving(validateBridgeMove);
+  readMoving(bridgeMoveInputHandler) {
+    InputView.readMoving(bridgeMoveInputHandler);
   },
 
-  readGameCommand(validateRetryInput) {
-    InputView.readGameCommand(validateRetryInput);
+  readGameCommand(bridgeRetryInputHandler) {
+    InputView.readGameCommand(bridgeRetryInputHandler);
   },
 
   clearPreviousProgress() {
