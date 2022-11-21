@@ -32,10 +32,10 @@ class BridgeMap {
   /**
    * 다리에 칸 추가할 때 사용하는 메서드
    * @param {MovingCommand} movingCommand
-   * @param {'U' | 'D'} current
+   * @param {'U' | 'D'} currentBridge
    */
-  add(movingCommand, current) {
-    const isCrossed = movingCommand.isCrossed(current);
+  add(movingCommand, currentBridge) {
+    const isCrossed = movingCommand.isCrossed(currentBridge);
 
     this.#addUpside(movingCommand, isCrossed);
     this.#addDownside(movingCommand, isCrossed);

@@ -54,11 +54,11 @@ class MovingCommand extends Command {
 
   /**
    * 다리 건너기 성공했는지 확인할 때 사용하는 메서드
-   * @param {('U' | 'D')} bridgeCurrent
+   * @param {('U' | 'D')} currentBridge
    * @returns
    */
-  isCrossed(bridgeCurrent) {
-    return this.getCommand() === bridgeCurrent;
+  isCrossed(currentBridge) {
+    return this.getCommand() === currentBridge;
   }
 }
 

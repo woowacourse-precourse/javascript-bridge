@@ -7,6 +7,10 @@ const { readBridgeSize, readMoving, readGameCommand } = require('../views/InputV
 const { printMap, printResult, printError } = require('../views/OutputView');
 
 class BridgeGameController {
+  /**
+   * 게임 타입
+   * @type {BridgeGame}
+   */
   #game;
 
   play() {
@@ -39,8 +43,8 @@ class BridgeGameController {
 
   #tryMovingCommandSubmit(command) {
     const movingCommand = new MovingCommand(command);
-    const current = this.#game.move(movingCommand);
-    const isCrossed = movingCommand.isCrossed(current);
+    const currentBridge = this.#game.move(movingCommand);
+    const isCrossed = movingCommand.isCrossed(currentBridge);
     const bridgeMap = this.#game.getMap();
     printMap(bridgeMap);
     if (this.#game.isWin(isCrossed)) {
@@ -86,8 +90,8 @@ class BridgeGameController {
   }
 
   #runQuit(isCrossed = false) {
-    const { bridgeMap, isWin, tryCount } = this.#game.quit(isCrossed);
-    printResult(bridgeMap, isWin, tryCount);
+    const finalStatus = this.#game.quit(isCrossed);
+    printResult(finalStatus);
     Console.close();
   }
 

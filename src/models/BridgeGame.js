@@ -58,7 +58,7 @@ class BridgeGame {
     this.#status.increaseLocation();
     this.#bridge.addMap(movingCommand, this.#status.getLocation());
 
-    return this.#bridge.current(this.#status.getLocation());
+    return this.#bridge.getCurrentBridge(this.#status.getLocation());
   }
 
   /**

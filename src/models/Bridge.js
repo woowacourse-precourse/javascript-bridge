@@ -6,16 +6,8 @@ const { MovingCommand } = require('./command');
  * @class
  */
 class Bridge {
-  /**
-   * 다리 상태 타입
-   * @type {string[]}
-   */
   #state;
 
-  /**
-   * 다리 지도 타입
-   * @type {BridgeMap}
-   */
   #map;
 
   /**
@@ -32,7 +24,7 @@ class Bridge {
    * @param {number} location 현재 위치
    * @return {'U' | 'D'} 현재 위치 요소
    */
-  current(location) {
+  getCurrentBridge(location) {
     return this.#state[location];
   }
 
@@ -59,7 +51,7 @@ class Bridge {
    * @param {number} location 현재 위치
    */
   addMap(movingCommand, location) {
-    this.#map.add(movingCommand, this.current(location));
+    this.#map.add(movingCommand, this.getCurrentBridge(location));
   }
 
   /**
