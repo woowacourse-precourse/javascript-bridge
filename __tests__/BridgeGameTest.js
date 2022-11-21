@@ -51,7 +51,7 @@ const expectLogContains = (received, logs) => {
  * 잘못된 입력이 주어졌을 때 에러메시지를 출력하는지 확인한다.
  */
 const runException = (inputs, errorMessage) => {
-  mockRandoms(['1', '0', '1']);
+  mockRandoms([1, 0, 1]);
   mockQuestions(inputs);
   const logSpy = getLogSpy();
   const GAME = new BridgeGame();
