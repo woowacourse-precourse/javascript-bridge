@@ -50,6 +50,12 @@ class App {
 
     return newBridge;
   }
+
+  setGameLog(userInput) {
+    BridgeGame.checkIncludeUandD(userInput);
+    this.#bridgeGame.move();
+    this.#bridgeGame.setGameLog(userInput);
+  }
 }
 
 module.exports = App;
