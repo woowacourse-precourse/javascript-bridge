@@ -13,6 +13,9 @@ const GAME_CONSTANTS = deepFreeze({
   goPath: 'O',
   notPath: 'X',
   empty: ' ',
+  bridgeStart: '[ ',
+  bridgeEnd: ' ]',
+  bridgeDivision: ' | ',
   resultSuccess: true,
   resultFailure: false,
 });
