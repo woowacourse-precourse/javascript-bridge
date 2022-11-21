@@ -35,7 +35,7 @@ class Controller {
       BridgeGame.move(input, OX, this.model);
       this.outputView.printMap(this.model);
       if (OX === ' X ') return this.inputGameCommand();
-      if (index === bridgeSize - 1) return this.outputView.printResult('성공', this.model);
+      return index === bridgeSize - 1 && this.outputView.printResult('성공', this.model);
     };
     return this.inputView.readMoving(callback, 0, this.model);
   }

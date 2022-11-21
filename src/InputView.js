@@ -40,7 +40,7 @@ const InputView = {
         Console.print('[ERROR] R 또는 Q 중 한 문자만 입력해주세요.\n');
         return this.readGameCommand(callback);
       }
-      callback(input);
+      return callback(input);
     });
   },
 };
