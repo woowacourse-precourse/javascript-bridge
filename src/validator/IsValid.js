@@ -20,4 +20,14 @@ const isUpDown = (string) => {
   return string
 }
 
-module.exports = { isNumber, isUpDown }
+const isRetryQuit = (string) => {
+  const regex = /^(?:[R]|[Q])$/
+
+  if (!regex.test(string)) {
+    throw new Error(ERROR_MESSAGE.INPUT_RETRY_ERROR)
+  }
+
+  return string
+}
+
+module.exports = { isNumber, isUpDown, isRetryQuit }

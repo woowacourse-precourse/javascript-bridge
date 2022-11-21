@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const MESSAGE = require('../src/MESSAGEContent')
-const { isNumber, isUpDown } = require('./validator/IsValid')
+const { isNumber, isUpDown, isRetryQuit } = require('./validator/IsValid')
 
 const InputView = {
 
@@ -18,7 +18,7 @@ const InputView = {
 
   readGameCommand(callback) {
     MissionUtils.Console.readLine(MESSAGE.RETRY, retry => {
-      callback(retry)
+      callback(isRetryQuit(retry))
     })
   },
 };
