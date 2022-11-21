@@ -52,7 +52,7 @@ input view 기준으로 기능 구현 작성
 
 ### incrementBridgeLengthStatus
 
-- [] 해당 인스턴스의 다리길이 상태의 값을 1 늘리는 기능
+- [x] 해당 인스턴스의 다리길이 상태의 값을 1 늘리는 기능
 
 ### move
 
@@ -82,7 +82,7 @@ input view 기준으로 기능 구현 작성
 
 ### handleMap
 
-- [x] 해당 클래스의 #isFirst 멤버변수가 true 냐 false 냐에 따라 분기를 나눠 add First Map , add map 을 실행시키는 기능
+- [x] 해당 클래스의 #isFirst 멤버변수가 true 냐 false 냐에 따라 분기를 나눠 isFirst의 상태를 변화시키고 addMap을 실행시켜 클래스의 bridgeMap에 할당 시키는 기능
 
 ### addMap
 
@@ -94,7 +94,7 @@ input view 기준으로 기능 구현 작성
 
 ### addIncorrect
 
-- [x] move의 input과 이전의 map 을 받아 이용자가 틀렸을때 해당 자원을 추가하는 기능
+- [x] input과 map소스를 받아 이용자가 틀렸을때 해당 자원을 추가하는 기능
 
 ## input view 객체
 
@@ -171,22 +171,21 @@ input view 기준으로 기능 구현 작성
 
 # 테스트 코드
 
-### DomainLogicTest
+## DomainLogicTest
 
 도메인 로직 테스트
 
-- [] Validator 전체 input 에 대한 의사 결정
-- [] BridgeGame move 이동 에 대한 의사 결정
-- [] BridgeGame retry 재시작에 대한 의사 결정
-- [] BirdgeMap handleMap 어떤 map을 처음인지 아닌지에 따른 map추가 기능실행 의사 결정
-- [] BridgeMap addMap 맞췄는지 틀렸는지에 따라 어떤 자원을 추가할지 의사결정
+- [x] Validator 전체 input 에 대한 의사 결정
+- [x] BridgeGame move 이동 에 대한 의사 결정
+- [x] BridgeGame retry 재시작에 대한 의사 결정
+- [x] BirdgeMap handleMap 어떤 map을 처음인지 아닌지에 따른 isFirst 상태변경 map추가 기능실행 의사 결정
+- [x] BridgeMap addMap 맞췄는지 틀렸는지에 따라 어떤 자원을 추가할지 의사결정
 
 - [] App progressMovementTrue 게임 이 끝날것인지에 대한 의사 결정이 들어있음
+  (Utils.console 관련 로직 테스트)
 
-- [] App progressApp appstatus 에 따라 게임을 어느 시점으로 실행시킬것인지 에 따른 의사 결정이 들어가있음 
-
-
-###
+- [] App progressApp appstatus 에 따라 게임을 어느 시점으로 실행시킬것인지 에 따른 의사 결정이 들어가있음
+  (Utils.console 관련 로직 테스트)
 
 # 객체 관련 제한 사항
 
