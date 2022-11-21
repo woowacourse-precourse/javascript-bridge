@@ -1,4 +1,4 @@
-const { USER_TEXT, GAME_TEXT } = require('./constant/contant');
+const { USER_TEXT } = require('./constant/contant');
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -12,11 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     return Array(size)
       .fill(size)
-      .map((_) =>
-        String(generateRandomNumber()) === GAME_TEXT.ONE
-          ? USER_TEXT.UP
-          : USER_TEXT.DOWN
-      );
+      .map((_) => (generateRandomNumber() ? USER_TEXT.UP : USER_TEXT.DOWN));
   },
 };
 
