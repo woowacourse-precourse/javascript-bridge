@@ -1,5 +1,5 @@
-const BridgeCheck = require("./BridgeSet");
 const BridgeSet = require("./BridgeSet");
+const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { GAME_CHOICE, SPACE_TO_MOVE, OUTPUT_MESSAGE } = require("./Utils")
 /**
@@ -7,19 +7,26 @@ const { GAME_CHOICE, SPACE_TO_MOVE, OUTPUT_MESSAGE } = require("./Utils")
  */
 class BridgeGame {
   #bridge
+  #command
 
   constructor() {
     this.moving = "";
+    this.Count = 1;
   }
 
   getBridge(size) {
     this.#bridge = BridgeMaker.makeBridge(size,
-      BridgeRandomNumberGenerator.generate());
+      BridgeRandomNumberGenerator.generate);
   }
 
   getMoving(move) {
     this.moving = move;
     return this.move();
+  }
+
+  getGameCommand(command) {
+    this.#command = command;
+    return this.gameWheter();
   }
 
   /**
@@ -29,13 +36,13 @@ class BridgeGame {
    */
   move() {
     if(this.#bridge.length === 0) {
-     this.end(true);
+      return this.end(true);
     }
     if(this.moving === this.#bridge[0]) {
-      this.moveSuccess();
+      return this.moveSuccess();
     }
     if(this.moving !== this.#bridge[0]) {
-      this.moveFailure();
+      return this.moveFailure();
     }
   }
 
@@ -47,9 +54,17 @@ class BridgeGame {
 
   moveFailure() {
     BridgeSet.BridgeFail(this.moving);
-    return this.gameWheter();
+    return BridgeSet.gameStop();
   }
 
+  gameWheter() {
+    if(this.#command === GAME_CHOICE.GAME_RETRY) {
+      return this.retry();
+    }
+    if(this.#command === GAME_CHOICE.GAME_END) {
+      return this.end();
+    }
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>

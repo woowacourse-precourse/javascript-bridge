@@ -10,6 +10,10 @@ const BridgeSet = {
     InputView.readMoving();
   },
 
+  gameStop() {
+    InputView.readGameCommand();
+  },
+
   BridgePass(moving) {
     if(moving === SPACE_TO_MOVE.MOVE_UP) {
       BridgeSet.overBridgePass();
