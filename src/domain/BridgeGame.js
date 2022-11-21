@@ -13,6 +13,7 @@ class BridgeGame {
   #countTry = 1;
 
   initalize(bridgeSize) {
+    BridgeGameValidator.validateBridgeSize(bridgeSize);
     this.#bridge = BridgeMaker.makeBridge(
       bridgeSize,
       BridgeRandomNumberGenerator.generate
