@@ -5,6 +5,15 @@ class BridgeGame {
   constructor(mainController) {
     this.mainController = mainController;
   }
+
+  /**
+   * 이동에 따른 결과를 출력한다.
+   * @param userMoving {string[]} [유저 이동 기록]
+   */
+  displayCaseResult(userMoving) {
+    this.mainController.displayCaseResult(userMoving);
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
