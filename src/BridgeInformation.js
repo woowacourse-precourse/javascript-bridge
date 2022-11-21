@@ -64,6 +64,7 @@ class BridgeInformation {
   makeNotFirstBlock(item) {
     return BLOCK.NOT_FIRST_BLOCK(item);
   }
+
   finishGame(tryCount, gameStatus) {
     OutputView.printEndGame();
     this.printRouteMap();
