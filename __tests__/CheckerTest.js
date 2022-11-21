@@ -1,4 +1,4 @@
-const { checkSpaceCanCross, checkCrossBridge } = require('../src/Checker');
+const { checkSpaceCanMove, checkCrossBridge } = require('../src/Checker');
 const { BRIDGE_MSG } = require('../src/Constant');
 
 describe('가능 검토자 테스트', () => {
@@ -8,10 +8,10 @@ describe('가능 검토자 테스트', () => {
     const inputDownward = downward;
     const bridgeSpaceUpward = upward;
     const bridgeSpaceDownward = downward;
-    expect(checkSpaceCanCross(inputUpward, bridgeSpaceUpward)).toBeTruthy();
-    expect(checkSpaceCanCross(inputUpward, bridgeSpaceDownward)).toBeFalsy();
-    expect(checkSpaceCanCross(inputDownward, bridgeSpaceDownward)).toBeTruthy();
-    expect(checkSpaceCanCross(inputDownward, bridgeSpaceUpward)).toBeFalsy();
+    expect(checkSpaceCanMove(inputUpward, bridgeSpaceUpward)).toBeTruthy();
+    expect(checkSpaceCanMove(inputUpward, bridgeSpaceDownward)).toBeFalsy();
+    expect(checkSpaceCanMove(inputDownward, bridgeSpaceDownward)).toBeTruthy();
+    expect(checkSpaceCanMove(inputDownward, bridgeSpaceUpward)).toBeFalsy();
   });
 
   test('종료된 라운드와 다리의 길이가 같은지 비교한다.', () => {
