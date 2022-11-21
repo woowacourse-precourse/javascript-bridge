@@ -14,10 +14,6 @@ class BridgeGame {
     U: 1,
   };
 
-  #tryCount = 1;
-
-  #result = false;
-
   #randomBridge = [];
 
   #userBridge = [];
@@ -52,12 +48,20 @@ class BridgeGame {
     this.#userBridge = [];
   }
 
-  static isFail(formattedBridges) {
+  isFail(formattedBridges) {
     return formattedBridges.flat().find((block) => block === 'X');
   }
 
   isSuccess(formattedBridges) {
     return formattedBridges[0].length === this.#randomBridge.length;
+  }
+
+  findBlockIndex(index, block) {
+    const randomBlock = this.#randomBridge[index];
+    const correctIndex = BridgeGame.BRIDGE_SHAPE[block];
+    const incorrectIndex = correctIndex === 1 ? 0 : 1;
+
+    return [randomBlock, correctIndex, incorrectIndex];
   }
 
   /**
@@ -66,19 +70,14 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move() {
-    return this.#userBridge.reduce(
-      (acc, block, index) => {
-        if (this.#randomBridge[index] === 'D') {
-          acc[0].push(this.#randomBridge[index] === block ? 'O' : 'X');
-          acc[1].push(' ');
-        } else {
-          acc[1].push(this.#randomBridge[index] === block ? 'O' : 'X');
-          acc[0].push(' ');
-        }
-        return acc;
-      },
-      [[], []],
-    );
+    const formatBridge = [[], []];
+    this.#userBridge.forEach((block, index) => {
+      const [randomBlock, correctIndex, incorrectIndex] = this.findBlockIndex(index, block);
+
+      formatBridge[correctIndex].push(randomBlock === block ? 'O' : 'X');
+      formatBridge[incorrectIndex].push(' ');
+    });
+    return formatBridge;
   }
 
   /**
@@ -87,7 +86,6 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#tryCount += 1;
     this.resetUserBridge();
   }
 }
