@@ -1,4 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
+const {
+  RESULT_MSG,
+  FAIL_MSG,
+  SUCCESS_MSG,
+  TOTAL_COUNT_MSG,
+} = require('./constants');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -54,7 +60,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(moveInputArray, isSuccess, gameCount) {
+    Console.print(RESULT_MSG);
+    this.printMap(moveInputArray);
+    if (isSuccess) Console.print(SUCCESS_MSG);
+    else Console.print(FAIL_MSG);
+    Console.print(`${TOTAL_COUNT_MSG}${gameCount}`);
+  },
 
   printGuide(message) {
     Console.print(message);
