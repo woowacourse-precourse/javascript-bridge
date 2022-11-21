@@ -56,29 +56,29 @@ describe('BridgeGame 클래스의 유저가 움직인 다리 맵 만드는 기�
   });
 });
 describe('BridgeGame클래스의 retry() 기능 테스트', () => {
-  test('retry()의 argument로 "R"을 넣었을때 true 반환 확인', () => {
+  test('retry()호출했을때 this.moveLogs 멤버변수가 초기화 되는지 확인', () => {
     const bridgeGame = new BridgeGame();
-    const result = bridgeGame.retry('R');
-    expect(result).toEqual(true);
+    bridgeGame.move('U');
+    bridgeGame.retry();
+    const moveLogs = bridgeGame.moveLogs;
+    expect(moveLogs).toEqual([]);
   });
-  test('retry()의 argument로 "Q"을 넣었을때 false 반환 확인', () => {
+  test.failing('retry()를 하지않으면 moveLogs가 쌓여 초기화되지 않는지 확인하는 실패테스트', () => {
     const bridgeGame = new BridgeGame();
-    const result = bridgeGame.retry('Q');
-    expect(result).toEqual(false);
+    bridgeGame.move('U');
+    const moveLogs = bridgeGame.moveLogs;
+    expect(moveLogs).toEqual([]);
   });
-  test('retry()의 argument로 "R"을 넣었을때 user의 시도 횟수가 1에서 2로 증가하는지 확인', () => {
+  test('retry() 실행했을때 user의 시도 횟수가 1에서 2로 증가하는지 확인', () => {
     const bridgeGame = new BridgeGame();
     bridgeGame.retry('R');
     const result = bridgeGame.tryCount;
     expect(result).toEqual(2);
   });
-  test.failing(
-    'retry()의 argument로 "R"을 넣었을때 user의 시도 횟수가 증가하는지 실패 테스트',
-    () => {
-      const bridgeGame = new BridgeGame();
-      bridgeGame.retry('R');
-      const result = bridgeGame.tryCount;
-      expect(result).toEqual(1);
-    }
-  );
+  test.failing('retry() 실행했을때 user의 시도 횟수가 증가하는지 실패 테스트', () => {
+    const bridgeGame = new BridgeGame();
+    bridgeGame.retry('R');
+    const result = bridgeGame.tryCount;
+    expect(result).toEqual(1);
+  });
 });

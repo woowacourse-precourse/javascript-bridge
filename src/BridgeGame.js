@@ -58,25 +58,17 @@ class BridgeGame {
     return convertedBridge;
   }
 
+  walkable() {
+    return this.moveLogs[this.moveLogs.length - 1] === this.#bridge[this.moveLogs.length - 1];
+  }
+
   isWin() {
     return JSON.stringify(this.moveLogs) === JSON.stringify(this.#bridge);
   }
 
-  isMovable() {
-    return this.moveLogs[this.moveLogs.length - 1] === this.#bridge[this.moveLogs.length - 1];
-  }
-
-  retry(userChoice) {
-    if (userChoice === 'R') {
-      this.moveLogs = [];
-      this.tryCount += 1;
-      return true;
-    }
-    return false;
-  }
-
-  quit(userChoice) {
-    return userChoice === 'Q';
+  retry() {
+    this.moveLogs = [];
+    this.tryCount += 1;
   }
 }
 module.exports = BridgeGame;

@@ -30,17 +30,14 @@ class App {
   moveUser(upOrDown) {
     this.bridgeGame.move(upOrDown);
     OutputView.printMap(this.bridgeGame.moveTracking());
-    if (this.bridgeGame.isMovable()) {
+    if (this.bridgeGame.walkable()) {
       this.requestMove();
     } else {
       this.requestContinue();
     }
     if (this.bridgeGame.isWin()) {
-      OutputView.printResult(
-        this.bridgeGame.moveTracking(),
-        this.bridgeGame.isWin(),
-        this.bridgeGame.tryCount
-      );
+      const uesrfootprint = this.bridgeGame.moveTracking();
+      OutputView.printResult(uesrfootprint, this.bridgeGame.isWin(), this.bridgeGame.tryCount);
       Console.close();
     } else {
       this.requestMove();
@@ -52,17 +49,18 @@ class App {
   }
 
   retryOrQuit(userChoice) {
-    if (this.bridgeGame.retry(userChoice)) {
+    if (userChoice === 'R') {
+      this.bridgeGame.retry();
       this.requestMove();
     }
-    if (this.bridgeGame.quit(userChoice)) {
-      OutputView.printMap(this.bridgeGame.moveTracking());
-      OutputView.printResult(
-        this.bridgeGame.moveTracking(),
-        this.bridgeGame.isWin(),
-        this.bridgeGame.tryCount
-      );
+    if (userChoice === 'Q') {
+      this.gameEnd();
     }
+  }
+
+  gameEnd() {
+    const uesrfootprint = this.bridgeGame.moveTracking();
+    OutputView.printResult(uesrfootprint, this.bridgeGame.isWin(), this.bridgeGame.tryCount);
   }
 }
 
