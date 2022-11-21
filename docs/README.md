@@ -233,7 +233,8 @@ const number = generateRandomNumber();
   - checkBridgeSize 메서드 테스트 코드를 작성한다.
   - checkDirection 메서드 테스트 코드를 작성한다.
   - checkCommandOption 메서드 테스트 코드를 작성한다.
-- [ ] test: BirdgeGameManger.js 테스트 코드 작성
+- [ ] test: BridgeGameManager.js 테스트 코드 작성
+  - start 메서드 테스트 코드를 작성한다.
 
 ---
 
