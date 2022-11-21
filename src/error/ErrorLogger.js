@@ -3,15 +3,19 @@ const ErrorLogger = class {
     return new Proxy(this, handler);
   }
 
-  onCallback(callback) {
-    const { status, message } = callback();
+  onCallback({ validateValueCallback, errorHandler, successHandler }) {
+    this.errorHandler = errorHandler;
+
+    const { status, message } = validateValueCallback();
     if (!status) {
-      throw new Error(message);
+      throw new Error(`[ERROR] ${message}`);
     }
+
+    successHandler();
   }
 
   catchAllError(error) {
-    throw new Error(`[ERROR] ${error.message}`);
+    this.errorHandler(error);
   }
 };
 
@@ -23,7 +27,7 @@ const handler = {
           try {
             target[prop].apply(this, args);
           } catch (error) {
-            target.catchAllError(error);
+            target.catchAllError.call(this, error);
           }
         };
   },

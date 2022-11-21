@@ -5,8 +5,8 @@ const ErrorBoundary = class {
     this.errorLogger = new ErrorLogger();
   }
 
-  validateInput(validateValueCallback) {
-    this.errorLogger.onCallback(validateValueCallback);
+  validateInput(callbackFuncs) {
+    this.errorLogger.onCallback(callbackFuncs);
   }
 
   validate(value) {}

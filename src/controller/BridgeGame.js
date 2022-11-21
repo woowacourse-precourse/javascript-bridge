@@ -12,29 +12,35 @@ const BridgeGame = class extends GameCtrl {
     this.#gameProcess();
   }
 
+  // TODO: 메서드 10줄 이내로 수정 -> errorHandler, successHandler 로직 분리
   #gameProcess() {
     this.view.readBridgeSize((bridgeSize) => {
-      try {
-        bridgeSize = parseInt(bridgeSize);
-        this.model.validateBridgeSize(bridgeSize);
-        this.model.createBridge(bridgeSize);
-        this.#getUserCommand();
-      } catch (error) {
+      const errorHandler = (error) => {
         this.view.printErrorMessage(error.message);
         this.#gameProcess(bridgeSize);
-      }
+      };
+
+      const successHandler = () => {
+        this.model.createBridge(bridgeSize);
+        this.#getUserCommand();
+      };
+
+      bridgeSize = parseInt(bridgeSize);
+      this.model.validateBridgeSize({ bridgeSize, errorHandler, successHandler });
     });
   }
 
+  // TODO: 메서드 10줄 이내로 수정 -> errorHandler, successHandler 로직 분리
   #getUserCommand() {
     this.view.readMoving((command) => {
-      try {
-        this.model.validateBridgeCommand(command);
-        this.#move(command);
-      } catch (error) {
+      const errorHandler = (error) => {
         this.view.printErrorMessage(error.message);
         this.#getUserCommand();
-      }
+      };
+
+      const successHandler = () => this.#move(command);
+
+      this.model.validateBridgeCommand({ command, errorHandler, successHandler });
     });
   }
 
@@ -51,15 +57,18 @@ const BridgeGame = class extends GameCtrl {
     return this.#getUserCommand();
   }
 
+  // TODO: 메서드 10줄 이내로 수정 -> errorHandler, successHandler 로직 분리
   #askToReplayGame({ bridgeMap, isGameSuccess }) {
     this.view.readGameCommand((replayCommand) => {
-      try {
-        this.model.validateBridgeReplayCommand(replayCommand);
-        this.#quitOrRetryByCommand({ replayCommand, bridgeMap, isGameSuccess });
-      } catch (error) {
+      const errorHandler = (error) => {
         this.view.printErrorMessage(error.message);
         this.#askToReplayGame({ bridgeMap, isGameSuccess });
-      }
+      };
+
+      const successHandler = () =>
+        this.#quitOrRetryByCommand({ replayCommand, bridgeMap, isGameSuccess });
+
+      this.model.validateBridgeReplayCommand({ replayCommand, errorHandler, successHandler });
     });
   }
 
