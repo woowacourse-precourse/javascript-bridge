@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
-const { checkVaildBridgeSize, checkVaildMoveInput } = require("./Exception");
+const { checkVaildBridgeSize, checkVaildMoveInput, checkVaildRetryInput } = require("./Exception");
 const { readGameCommand, readMoving, readBridgeSize } = require("./InputView");
 const { printResult, returnCheckedMap, printStart, printMap, printOneBlankLine } = require("./OutputView");
 
@@ -62,6 +62,7 @@ class App {
    */
   restartGame(bridgeGame) {
     readGameCommand((response) => {
+      checkVaildRetryInput(response);
       if (bridgeGame.retry(response)) {
         this.#tryCount += 1;
         this.repeatGame(bridgeGame);
