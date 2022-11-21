@@ -5,6 +5,7 @@ const { makeBridge } = require("./BridgeMaker");
 
 const { INFO_MESSAGES } = require("./utils/messages");
 const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -37,7 +38,7 @@ const InputView = {
       try {
         Validator.moving(userInput);
 
-        BridgeGame.move(userInput);
+        OutputView.printMap(BridgeGame.move(userInput));
       } catch (error) {
         Console.print(error.message);
 
