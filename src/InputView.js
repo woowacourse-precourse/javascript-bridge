@@ -33,7 +33,6 @@ const InputView = {
     const number=BridgeRandomNumberGenerator.generate
     const bridgeArray=BridgeMaker.makeBridge(bridgeLength,number)
     originalBridge=JSON.parse(JSON.stringify(bridgeArray))
-    bridegame.saveBridge(originalBridge)
     this.readMoving(bridgeArray)
   },
   /**
@@ -52,7 +51,7 @@ const InputView = {
       bridegame.move(bridgeArray)
       if(bridgeArray.length===0) {
         MissionUtils.Console.print('최종 게임 결과')
-        // OutputView.printBridgeResult()
+        OutputView.printBridgeResult()
         OutputView.printResult(bridgeArray,count)
       }
       if(bridgeArray.length!==0) {
@@ -61,8 +60,8 @@ const InputView = {
       }
     }
     if(correctValue==='X') {
-      this.readGameCommand(bridgeArray)
       OutputView.printBridgeResult()
+      this.readGameCommand(bridgeArray)
     }
   },
   /**
@@ -78,7 +77,8 @@ const InputView = {
     if(gameInput!=='R' && gameInput!=='Q') throw "[ERROR] Only R,Q accepted"
     if(gameInput==='R'){
       bridgeArray=originalBridge
-      bridegame.retry(gameInput)
+      // bridegame.retry()
+      OutputView.initializeArray()
       InputView.readMoving(bridgeArray)
     }
     if(gameInput==='Q') {
