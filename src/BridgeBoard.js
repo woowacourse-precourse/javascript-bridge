@@ -25,6 +25,9 @@ class BridgeBoard {
   getClearedBridge(){
     return this.#movedBoard;
   }
+  isLastRound(){
+    return this.#bridgeBoard.length === 0;
+  }
 }
 
 module.exports = BridgeBoard;
