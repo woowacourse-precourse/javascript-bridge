@@ -2,22 +2,30 @@ const BridgeRepository = require('../../src/repository/BridgeRepository');
 const BridgeDirection = require('../../src/service/domain/BridgeDirection');
 const { MODEL_KEY } = require('../../src/utils/constants');
 
+const makeRepo = () => {
+  const repo = new BridgeRepository();
+  repo.create();
+
+  return repo;
+};
+
+const makeInput = ({ input, result }) => {
+  return {
+    input,
+    repo: makeRepo(),
+    result
+  };
+};
+
 describe('(domain) BridgeDirection 클래스', () => {
-  test('(U키 입력) 데이터가 잘 저장되는 지 확인', () => {
-    const repo = new BridgeRepository();
-    const direction = new BridgeDirection({ input: 'U', repo: repo });
+  test.each([
+    [makeInput({ input: 'U', result: ['U'] })],
+    [makeInput({ input: 'D', result: ['D'] })]
+  ])('U | D 키 입력 시 데이터 저장 확인', ({ input, repo, result }) => {
+    const direction = new BridgeDirection({ input, repo });
 
     direction.store();
 
-    expect(repo.read(MODEL_KEY.userBridge)).toEqual(['U']);
-  });
-
-  test('(D키 입력) 데이터가 잘 저장되는 지 확인', () => {
-    const repo = new BridgeRepository();
-    const direction = new BridgeDirection({ input: 'D', repo: repo });
-
-    direction.store();
-
-    expect(repo.read(MODEL_KEY.userBridge)).toEqual(['D']);
+    expect(repo.read(MODEL_KEY.userBridge)).toEqual(result);
   });
 });
