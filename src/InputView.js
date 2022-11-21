@@ -16,14 +16,8 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    Console.readLine(INPUT_LENGTH, (input) => {
-      isInvalidBridgeLength(input) && InputView.readBridgeSize();
-      const bridgeSize = toNumber(input);
-      const bridge = makeBridge(bridgeSize, generate);
-      const bridgeGame = new BridgeGame(bridge);
-      InputView.readMoving(bridgeGame);
-    });
+  readBridgeSize(callback) {
+    Console.readLine(INPUT_LENGTH, callback);
   },
 
   /**
