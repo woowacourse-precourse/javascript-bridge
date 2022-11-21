@@ -1,3 +1,5 @@
+const { printMap } = require("./OutputView.js");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -5,6 +7,10 @@ class BridgeGame {
   #bridge = [];
   #count = 0;
   #gameCount = 0;
+  #moveBridge = new Map([
+    ["U", ""],
+    ["D", ""],
+  ]);
 
   init(bridge){
     this.#bridge = bridge;
@@ -15,16 +21,16 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(str) {
-    let bool = false;
-    if(str == "U" && str == this.#bridge[this.#count]){
-      bool = true;
-      this.#count++;
-    }
-    if(str == "D" && str == this.#bridge[this.#count]){
-      bool = true;
-      this.#count++;
-    }
-    return bool;
+    const state = this.#moveBridge.get("U").length;
+    this.checkMove(str, state);
+    printMap(this.#moveBridge);
+  }
+
+  checkMove(str, state){
+    const check = this.#bridge[state] === str ? "O" : "X";
+    this.#moveBridge.set(str,this.#moveBridge.get(str) + check);
+    const miss = str === "U" ? "D" : "U";
+    this.#moveBridge.set(str,this.#moveBridge.get(miss) + " ");
   }
 
   /**
