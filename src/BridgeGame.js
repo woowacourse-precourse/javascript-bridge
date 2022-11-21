@@ -1,5 +1,7 @@
+const Validator = require('./Validator');
 const { makeBridge } = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { ERROR_MSG } = require('./libs/constant');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -13,7 +15,18 @@ class BridgeGame {
 
   constructor(size) {
     this.size = size;
+    this.validate();
     this.initBridge();
+  }
+
+  validate() {
+    const isValidBridgeSize = Validator.validBridgeSize(this.size);
+
+    if (!isValidBridgeSize) {
+      throw new Error(ERROR_MSG.invalidBridgeSize);
+    }
+
+    return true;
   }
 
   initBridge() {

@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
+const BridgeGame = require('./BridgeGame');
 const TypeConverter = require('./TypeConverter');
-const Validator = require('./Validator');
-const { MSG, ERROR_MSG } = require('./libs/constant');
+const { MSG } = require('./libs/constant');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -22,13 +22,9 @@ const InputView = {
     Console.readLine(MSG.inputBridgeSize, (answer) => {
       try {
         const bridgeSize = TypeConverter.toNumber(answer);
-        const isValidBridgeSize = Validator.validBridgeSize(bridgeSize);
+        const bridgeGame = new BridgeGame(bridgeSize);
 
-        if (!isValidBridgeSize) {
-          throw new Error(ERROR_MSG.invalidBridgeSize);
-        }
-
-        this.readMoving();
+        this.readMoving(bridgeGame);
       } catch (e) {
         console.log(e.message);
         this.readBridgeSize();
@@ -39,7 +35,7 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(bridgeGame) {
     Console.readLine(MSG.inputMoveDirection, (moveDirection) => {});
   },
 
