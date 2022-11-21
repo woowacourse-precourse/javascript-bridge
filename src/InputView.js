@@ -6,15 +6,22 @@ const BridgeGame = require('./BridgeGame');
 const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, size => {
-      this.validateBridgeSize(size);
-      size = parseInt(size);
-      const GAME = this.startBridgeGame(size);
+      const VALIDATION = this.validateBridgeSize(size);
+      if (VALIDATION) {
+        size = parseInt(size);
+        const GAME = this.startBridgeGame(size);
+      }
     });
   },
 
   validateBridgeSize(size) {
-    if (size >= 3 && size <= 20) return size;
-    throw new Error(ERROR_MESSAGE.SIZE_ERROR);
+    if (size >= 3 && size <= 20) return true;
+    try {
+      throw new Error(ERROR_MESSAGE.SIZE_ERROR);
+    } catch (e) {
+      Console.print(e);
+      this.readBridgeSize();
+    }
   },
 
   startBridgeGame(size) {
