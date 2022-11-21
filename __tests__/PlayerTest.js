@@ -6,6 +6,11 @@ describe('플레이어 상태 테스트', () => {
 		expect(Player.movingArray).toStrictEqual(['U']);
 	});
 
+	test('플레이어가 선택한 다리가 옳은 다리인지 판별하는 테스트', () => {
+		const isCorrect = Player.checkPlayerMovingCorrect(['U', 'D', 'U']);
+		expect(isCorrect).toBeTruthy();
+	});
+
 	test('위쪽 다리를 맞출 경우 상태 테스트', () => {
 		Player.checkUpperBridgeCorrect('U', true);
 		expect(Player.bridgeStateArray).toStrictEqual([['   '], [' O ']]);
@@ -43,11 +48,6 @@ describe('플레이어 상태 테스트', () => {
 	test('게임 성공 여부 반환 테스트', () => {
 		Player.gameSuccess = true;
 		expect(Player.getGameSuccess()).toBeTruthy();
-	});
-
-	test('플레이어가 선택한 다리 상태 반환 테스트', () => {
-		Player.movingArray = ['U', 'D', 'U'];
-		expect(Player.getMovingArray()).toStrictEqual(['U', 'D', 'U']);
 	});
 
 	test('플레이어가 선택한 다리 정답 상태 반환 테스트', () => {
