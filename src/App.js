@@ -8,6 +8,7 @@ class App {
   #bridgeGame;
 
   play() {
+    OutputView.printStart();
     this.#bridgeGame = new BridgeGame();
     this.controller();
   }
@@ -15,7 +16,6 @@ class App {
   controller() {
     switch (this.#bridgeGame.getStatus()) {
       case "start":
-        OutputView.printStart();
         InputView.readBridgeSize(this.readBridgeSizeCallback);
         break;
       case "move":
@@ -50,7 +50,6 @@ class App {
       OutputView.printMap(this.#bridgeGame.getBridgeResult());
       this.controller();
     } catch (err) {
-      console.log(err);
       MissionUtils.Console.print(err.message);
       this.controller();
     }
