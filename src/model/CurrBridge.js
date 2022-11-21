@@ -1,5 +1,5 @@
-const Validation = require('./utils/Validation');
-const { UP, DOWN, CROSSED, BLOCKED, BLANK } = require('./utils/constants');
+const Validation = require('../utils/Validation');
+const { UP, DOWN, CROSSED, BLOCKED, BLANK } = require('../utils/constants');
 
 class CurrBridge {
   #upperBridge = [];

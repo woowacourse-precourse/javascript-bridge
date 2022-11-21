@@ -1,6 +1,6 @@
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const Validation = require('./utils/Validation');
-const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const Validation = require('../utils/Validation');
+const BridgeMaker = require('../BridgeMaker');
 
 class WinningBridge {
   #winningBridge;

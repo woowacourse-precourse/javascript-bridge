@@ -1,4 +1,4 @@
-const WinningBridge = require('../src/WinningBridge.js');
+const WinningBridge = require('../src/model/WinningBridge');
 
 const validateSize = (input) => {
   const winningBridge = new WinningBridge();

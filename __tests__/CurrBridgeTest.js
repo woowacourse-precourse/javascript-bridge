@@ -1,4 +1,4 @@
-const CurrBridge = require('../src/CurrBridge.js');
+const CurrBridge = require('../src/model/CurrBridge');
 
 const validateDirection = (input) => {
   const currBridge = new CurrBridge();
