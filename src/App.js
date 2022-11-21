@@ -1,5 +1,5 @@
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const command = require('./utils/message');
+const { command } = require('./utils/message');
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeMaker = require('./BridgeMaker');

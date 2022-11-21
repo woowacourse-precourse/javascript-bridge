@@ -8,4 +8,8 @@ const command = Object.freeze({
   TRY_NUM: (tryNum) => `총 시도한 횟수: ${tryNum}`,
 });
 
-module.exports = command;
+const error = Object.freeze({
+  SIZE: '[ERROR] 다리 길이는 3 이상 20 이하의 숫자여야 합니다.',
+});
+
+module.exports = { command, error };
