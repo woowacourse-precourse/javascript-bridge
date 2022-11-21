@@ -28,6 +28,9 @@ class Print {
   static Blank() {
     Console.print('');
   }
+  static Bridge(array) {
+    Console.print(array.join(''));
+  }
 }
 
 module.exports = Print;
