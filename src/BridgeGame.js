@@ -7,14 +7,10 @@ const OutputView = require("./OutputView.js");
   #cumulativeCount
   #bridgeSize
   #bridgeMap
-  #upMap
-  #downMap
   constructor(bridgeSize, bridgeMap){
     this.#cumulativeCount = 1;
     this.#bridgeSize = bridgeSize;
     this.#bridgeMap = bridgeMap;
-    this.#upMap = "";
-    this.#downMap = "";
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -22,41 +18,34 @@ const OutputView = require("./OutputView.js");
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move() {
+    let upMap = "", downMap ="";
     for(let moveCount=0;moveCount<this.#bridgeSize;moveCount++){
       const moving = RecallUntilCorrect.recallReadMoving(true);
       if(moving===this.#bridgeMap[moveCount]){  //움직이려고 하는 곳이 이동할 수 있는 곳이면 O표시 후 맵을 보여주고 계속진행
-        this.isUpOrDown(moving, moveCount, true);
-        const upMap = this.#upMap.slice(0,-1);
-        const downMap = this.#downMap.slice(0,-1);
-        OutputView.printMap(upMap, downMap);
+        const Map = this.isUpOrDown(moving, true);
+        upMap += Map[0], downMap += Map[1];
+        OutputView.printMap(upMap.slice(0,-1), downMap.slice(0,-1));
       }else{  //움직이려고 하는 곳이 이동할 수 없는 곳이면 X표시 후 맵을 보여주고 재시작 여부를 묻는다.
-        this.isUpOrDown(moving, moveCount, false);
-        const upMap = this.#upMap.slice(0,-1);
-        const downMap = this.#downMap.slice(0,-1);
-        OutputView.printMap(upMap, downMap);
+        const Map = this.isUpOrDown(moving, false);
+        upMap += Map[0], downMap += Map[1];
+        OutputView.printMap(upMap.slice(0,-1), downMap.slice(0,-1));
       }
     }
   }
-  isUpOrDown(moving, moveCount, canMove){
+  isUpOrDown(moving, canMove){
     if(moving === "U" && canMove){
-      this.saveCurLocation(moveCount, "O", " ");
+      return ["O"+"|", " "+"|"];
     }
     if(moving === "D" && canMove){
-      this.saveCurLocation(moveCount, " ", "O");
+      return[" "+"|", "O"+"|"];
     }
     if(moving === "U" && !canMove){
-      this.saveCurLocation(moveCount, "X", " ");
+      return["X"+"|", " "+"|"];
     }
     if(moving === "D" && !canMove){
-      this.saveCurLocation(moveCount, " ", "X");
+      return[" "+"|", "X"+"|"];
     }
-  }
-  saveCurLocation(moveCount, upState, downState){
-    console.log("moveCount"+moveCount+"upState"+upState+"downState"+downState);
-    this.#upMap+= (upState +"|");
-    this.#downMap+=(downState +"|");
-  }
-
+  } 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
