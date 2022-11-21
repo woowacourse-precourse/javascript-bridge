@@ -62,13 +62,18 @@ const InputView = {
    */
   readGameCommand(bridge, index, totalgames) {
     Console.readLine(MESSAGE.ASK_GAME_RETRY, (answer) => {
-      let bridgeGame = new BridgeGame;
-      if(!bridgeGame.retry(answer)){
-        OutputView.printResult(bridge.slice(0, index+1), totalgames, false);
-        return Console.close();
+      try {
+        if (answer !== "R" && answer !== "Q") { throw new Error(); }
+        let bridgeGame = new BridgeGame;
+        if(!bridgeGame.retry(answer)){
+          OutputView.printResult(bridge.slice(0, index+1), totalgames, false);
+          return Console.close();
+        }
+        return this.readMoving(bridge, CONSTANT.ZERO_INDEX, totalgames+1); 
+      } catch (error) {
+        Console.print(ERROR.RETRY_KEY);
+        this.readGameCommand(bridge, index, totalgames);
       }
-      return this.readMoving(bridge, CONSTANT.ZERO_INDEX, totalgames+1); 
-      
     })
   },
 };
