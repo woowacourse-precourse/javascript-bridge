@@ -11,6 +11,14 @@ const OutputView = {
   printStartingMessage() {
     Console.print(NOTICE.START_GAME);
   },
+
+  /**
+   * 입력이 올바르지 않음을 알리는 문구를 출력한다.
+   */
+  printInputErrorMessage(errorMessage) {
+    Console.print(errorMessage);
+  },
+
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
