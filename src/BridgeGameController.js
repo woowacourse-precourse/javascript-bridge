@@ -1,8 +1,13 @@
-const { readBridgeSize, readMoving } = require('./InputView');
+const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { printError, printMap } = require('./OutputView');
 const BridgeMap = require('./BridgeMap');
-const BridgeGame = require('./BridgeGame');
-const { checkSizeInRange, checkUserMove } = require('./Validation');
+const {
+  checkSizeInRange,
+  isCurrentLastIndexValueSame,
+  isLengthSame,
+  checkUserMove,
+  checkUserCommand,
+} = require('./Validation');
 
 class BridgeGameController {
   #model;
@@ -47,9 +52,33 @@ class BridgeGameController {
     });
   }
 
+  readUserCommand(resolve) {
+    readGameCommand((command) => {
+      try {
+        checkUserCommand(command);
+        this.#model.setCommand(command);
+        resolve();
+        if (command === 'R') return this.retry();
+        return this.end();
+      } catch (error) {
+        this.controlException(error, this.readUserCommand(resolve));
+      }
+    });
+  }
+
   renderMap() {
     BridgeMap.generate(this.#model.getBridge(), this.#model.getUserMove());
     printMap();
+  }
+
+  setCurrentResult() {
+    const bridge = this.#model.getBridge();
+    const userMove = this.#model.getUserMove();
+    if (isCurrentLastIndexValueSame(bridge, userMove)) {
+      if (isLengthSame(bridge, userMove)) {
+        this.#model.setIsSuccess(true);
+      }
+    }
   }
 }
 

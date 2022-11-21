@@ -1,10 +1,5 @@
-const { readGameCommand } = require('./InputView');
-const { printResult, printError } = require('./OutputView');
-const {
-  checkUserCommand,
-  isCurrentLastIndexValueSame,
-  isLengthSame,
-} = require('./Validation');
+const { printResult } = require('./OutputView');
+const { isCurrentLastIndexValueSame } = require('./Validation');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -26,9 +21,11 @@ class BridgeGame {
     this.#userMove = [];
   }
 
+  // FIXME: change the function
   move() {
     this.#controller.renderMap();
-    this.checkResult();
+    this.#controller.setCurrentResult();
+    this.checkCurrentResult();
   }
 
   retry() {
@@ -39,28 +36,25 @@ class BridgeGame {
     printResult(this.#isSuccess, this.#playCount);
   }
 
-  getUserCommand() {
-    readGameCommand((command) => {
-      try {
-        checkUserCommand(command);
-        if (command === 'R') return this.retry();
-        return this.end();
-      } catch (error) {
-        printError(error);
-        return this.getUserCommand();
-      }
-    });
+  fail() {
+    this.#controller.readUserCommand(() => this.checkCommand());
   }
 
-  checkResult() {
-    if (isCurrentLastIndexValueSame(this.#bridge, this.#userMove)) {
-      if (isLengthSame(this.#bridge, this.#userMove)) {
-        this.#isSuccess = true;
-        return this.end();
-      }
+  checkCommand() {
+    const command = this.#model.getCommand();
+    if (command === 'R') this.retry();
+    if (command === 'Q') this.end();
+  }
+
+  checkCurrentResult() {
+    const bridge = this.#model.getBridge();
+    const userMove = this.#model.getUserMove();
+    const isSuccess = this.#model.getIsSuccess();
+    if (isCurrentLastIndexValueSame(bridge, userMove)) {
+      if (isSuccess) return this.end();
       return this.#controller.readUserMoving(() => this.move());
     }
-    return this.getUserCommand();
+    return this.#controller.readUserCommand(() => this.checkCommand());
   }
 
   start() {
