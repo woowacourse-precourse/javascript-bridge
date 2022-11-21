@@ -4,6 +4,7 @@ const BridgeMaker = require("./BridgeMaker");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const Validation = require("./Validation");
+const { generate } = require("./BridgeRandomNumberGenerator");
 class App {
   constructor() {
     this.bridgeGame = null;
