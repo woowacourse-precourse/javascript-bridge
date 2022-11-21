@@ -2,7 +2,7 @@
 
 ## 기능 목록
 
-- [ ] 0과 1 중 무작위 값을 생성한다. - BridgeRandomNumberGenerator#generate()
+- [x] 0과 1 중 무작위 값을 생성한다. - BridgeRandomNumberGenerator#generate()
 - [ ] 특정 길이의 다리를 생성한다. - BridgeMaker#makeBridge()
 - [ ] 특정 칸이 건널 수 있는지 확인한다. - Checker#checkSpaceCanCross()
 - [ ] 다리 끝까지 건넜는지 판단한다. - Checker#checkCrossBridge()
