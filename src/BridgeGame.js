@@ -1,17 +1,19 @@
 const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
-  #userInputs;
   #board;
   #count;
 
   constructor(size) {
-    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator);
-    this.#userInputs = [];
+    this.#bridge = BridgeMaker.makeBridge(
+      size,
+      BridgeRandomNumberGenerator.generate
+    );
     this.#board = [[], []];
     this.#count = 0;
   }
@@ -21,9 +23,9 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    const location = this.#board.length;
-    const marking = this.markBoard(direction);
-    return marking;
+    const location = this.#board[0].length;
+    const marking = this.markBoard(direction, location);
+    return [marking, this.isEnd()];
   }
 
   /**
@@ -37,15 +39,14 @@ class BridgeGame {
   }
 
   init() {
-    this.#userInputs = [];
-    this.#board = [];
+    this.#board = [[], []];
   }
 
-  markBoard(direction) {
-    const index = this.parseDirection(direction);
-    const marking = bridge[location] === direction;
-    this.#board[index].push(marking ? "O" : "X");
-    this.#board[Number(!index)].push("   ");
+  markBoard(direction, location) {
+    const directionNumber = this.parseDirection(direction);
+    const marking = this.#bridge[location] === direction;
+    this.#board[directionNumber].push(marking ? "O" : "X");
+    this.#board[Number(!directionNumber)].push(" ");
     return marking;
   }
 
@@ -54,11 +55,12 @@ class BridgeGame {
     return 1;
   }
 
+  isEnd() {
+    return this.#board[0].length === this.#bridge.length;
+  }
+
   get bridge() {
     return [...this.#bridge];
-  }
-  get userInputs() {
-    return [...this.#userInputs];
   }
   get board() {
     return [...this.#board];
@@ -67,9 +69,5 @@ class BridgeGame {
     return this.#count;
   }
 }
-
-const a = 0;
-console.log(a);
-console.log(Number(!a));
 
 module.exports = BridgeGame;
