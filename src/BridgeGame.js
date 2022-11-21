@@ -1,23 +1,52 @@
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator.js');
+const { MOVE, GAME_RESULT, COMMAND } = require('./Utils/Constants.js');
 
 class BridgeGame {
-  #size;
+  #bridgeMap;
+  #attemptNumber;
+  #compareResult;
 
-  constructor(size) {
-    this.#size = size;
+  constructor() {
+    this.#bridgeMap = { U: [], D: [] };
+    this.#attemptNumber = 1;
+    this.#compareResult;
   }
 
-  makeBridge() {
-    return BridgeMaker.makeBridge(this.#size, BridgeRandomNumberGenerator.generate);
+  initBridgeMap() {
+    this.#bridgeMap[COMMAND.UP] = [];
+    this.#bridgeMap[COMMAND.DOWN] = [];
+  }
+
+  addBridgeMap(inputCommand, compareResult) {
+    this.#bridgeMap[COMMAND.UP].push(' ');
+    this.#bridgeMap[COMMAND.DOWN].push(' ');
+    this.#bridgeMap[inputCommand].pop();
+    this.#bridgeMap[inputCommand].push(compareResult);
+  }
+
+  currentBridgeMap() {
+    return this.#bridgeMap;
   }
 
   move(inputCommand, correctCommand) {
-    return inputCommand === correctCommand ? 'O' : this.retry();
+    this.#compareResult = inputCommand === correctCommand ? MOVE.PASS : MOVE.FAIL;
+    this.addBridgeMap(inputCommand, this.#compareResult);
+  }
+
+  isPass() {
+    return this.#compareResult === MOVE.PASS;
+  }
+
+  isFail() {
+    return this.#compareResult === MOVE.FAIL;
   }
 
   retry() {
-    return 'X';
+    this.#attemptNumber += 1;
+    this.initBridgeMap();
+  }
+
+  gameResult() {
+    return [this.currentBridgeMap(), GAME_RESULT[this.#compareResult], this.#attemptNumber];
   }
 }
 

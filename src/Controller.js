@@ -1,28 +1,25 @@
-const { printMessage, close } = require('./Utils.js');
-const { GAME_RESULT, MOVE, IS_RETRY } = require('./Constants.js');
+const { printMessage, close, isRetry, isQuit } = require('./Utils/Utils.js');
 const BridgeSize = require('./Validate/BridgeSize.js');
 const BridgeCommand = require('./Validate/BridgeCommand.js');
 const InputView = require('./View/InputView.js');
 const OutputView = require('./View/OutputView.js');
 const BridgeGame = require('./BridgeGame.js');
-const BridgeShape = require('./BridgeShape.js');
 const Retry = require('./Validate/Retry.js');
-const Counting = require('./Counting.js');
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator.js');
 
 class Controller {
   constructor() {
     this.bridgeGame;
     this.safeBridgeList;
     this.originalBridgeList;
-    this.bridgeShape = new BridgeShape();
-    this.counting = new Counting();
   }
 
   InputBridgeSize() {
     InputView.readBridgeSize((size) => {
       const bridgeSize = new BridgeSize(size);
       this.bridgeGame = new BridgeGame(size);
-      this.safeBridgeList = this.bridgeGame.makeBridge();
+      this.safeBridgeList = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
       this.originalBridgeList = JSON.parse(JSON.stringify(this.safeBridgeList));
       this.checkReInputSize(bridgeSize);
     });
@@ -48,75 +45,71 @@ class Controller {
   checkReInputMoving(bridgeCommand, command) {
     try {
       bridgeCommand.validate();
-      this.compareCommand(command);
+      this.printCurrentBridge(command);
     } catch (errorMessage) {
       printMessage(errorMessage);
       this.inputMoving();
     }
   }
 
-  compareCommand(inputCommand) {
+  printCurrentBridge(inputCommand) {
     const correctCommand = this.safeBridgeList.shift();
-    const compareResult = this.bridgeGame.move(inputCommand, correctCommand);
-    this.printCurrentBridge(inputCommand, compareResult);
+    this.bridgeGame.move(inputCommand, correctCommand);
+    OutputView.printMap(this.bridgeGame.currentBridgeMap());
+    this.judgePassFail();
   }
 
-  printCurrentBridge(inputCommand, compareResult) {
-    this.bridgeShape.addBridgeMap(inputCommand, compareResult);
-    OutputView.printMap(this.bridgeShape.currentBridgeMap());
-    this.isWrong(compareResult);
-  }
-
-  isWrong(compareResult) {
-    if (compareResult === MOVE.FAIL) {
-      this.safeBridgeList = JSON.parse(JSON.stringify(this.originalBridgeList));
-      this.selectRetry();
+  judgePassFail() {
+    if (this.bridgeGame.isPass()) {
+      this.judgeLastInput();
     }
-    if (compareResult === MOVE.PASS) {
-      this.isEndGame();
+    if (this.bridgeGame.isFail()) {
+      this.inputRetryQuit();
     }
   }
 
-  selectRetry() {
-    InputView.readGameCommand((input) => {
-      const retry = new Retry(input);
-      this.checkReInputRetry(retry, input);
-    });
-  }
-
-  checkReInputRetry(retry, input) {
-    try {
-      retry.validate();
-      this.selectRegameOrQuit(input);
-    } catch (errorMessage) {
-      printMessage(errorMessage);
-      this.selectRetry();
-    }
-  }
-
-  selectRegameOrQuit(input) {
-    if (input === IS_RETRY.YES) {
-      this.bridgeShape.initBridgeMap();
-      this.counting.addCount();
-      this.inputMoving();
-    }
-    if (input === IS_RETRY.NO) {
-      this.Quit(GAME_RESULT.FAIL);
-    }
-  }
-
-  isEndGame() {
+  judgeLastInput() {
     if (!this.safeBridgeList.length) {
-      this.Quit(GAME_RESULT.SUCCESS);
+      printMessage('');
+      this.printResult();
     }
     if (this.safeBridgeList.length) {
       this.inputMoving();
     }
   }
 
-  Quit(gameResult) {
-    OutputView.printResult(this.bridgeShape.currentBridgeMap(), `${gameResult}`, this.counting.getCount());
+  printResult() {
+    const result = this.bridgeGame.gameResult();
+    OutputView.printResult(...result);
     close();
+  }
+
+  inputRetryQuit() {
+    InputView.readGameCommand((input) => {
+      const retry = new Retry(input);
+      this.safeBridgeList = JSON.parse(JSON.stringify(this.originalBridgeList));
+      this.checkInputRetryQuit(retry, input);
+    });
+  }
+
+  checkInputRetryQuit(retry, input) {
+    try {
+      retry.validate();
+      this.judgeRetryQuit(input);
+    } catch (errorMessage) {
+      printMessage(errorMessage);
+      this.inputRetryQuit();
+    }
+  }
+
+  judgeRetryQuit(input) {
+    if (isRetry(input)) {
+      this.bridgeGame.retry();
+      this.inputMoving();
+    }
+    if (isQuit(input)) {
+      this.printResult();
+    }
   }
 }
 
