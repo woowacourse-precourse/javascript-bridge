@@ -1,9 +1,11 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 class BridgeBoard {
-  #bridgeBoard = [];
+  #bridgeBoard
+  #movedBoard
   constructor() {
     this.#bridgeBoard = [];
+    this.#movedBoard = [];
   }
   makeBoard(size) {
     this.#bridgeBoard = BridgeMaker.makeBridge(
@@ -11,8 +13,8 @@ class BridgeBoard {
       BridgeRandomNumberGenerator.generate
     );
   }
-  moveTo(direction, round) {
-    if (this.#bridgeBoard[round] === direction) {
+  moveTo(direction) {
+    if (this.#bridgeBoard[0] === direction) {
       return true;
     }
     return false;
