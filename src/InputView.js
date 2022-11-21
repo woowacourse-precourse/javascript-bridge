@@ -31,9 +31,11 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   async readGameCommand() {
-    return await new Promise((move) => {
+    const retry = await new Promise((move) => {
       Console.readLine(command.RETRY, move);
     });
+    validate.retry(retry);
+    return retry;
   },
 };
 
@@ -44,7 +46,11 @@ const validate = {
   },
 
   move(input) {
-    if (input !== 'U' && input !== 'R') throw new Error(error.MOVE);
+    if (input !== 'U' && input !== 'D') throw new Error(error.MOVE);
+  },
+
+  retry(input) {
+    if (input !== 'R' && input !== 'Q') throw new Error(error.RETRY);
   },
 };
 
