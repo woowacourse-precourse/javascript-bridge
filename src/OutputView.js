@@ -10,12 +10,15 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(inputMoves, moveResult) {
-    inputMoves.length <= 1
-      ? this.makeMap(inputMoves, moveResult)
-      : this.makeMaps(inputMoves, moveResult);
+    const [upBridge, downBridge] =
+      inputMoves.length <= 1
+        ? this.makeMap(inputMoves, moveResult)
+        : this.makeMaps(inputMoves, moveResult);
+    Console.print(`${upBridge}\n${downBridge}`);
   },
   makeMap(inputMoves, moveResult) {
-    let upBridge, downBridge = ["[ ", "[ "];
+    let upBridge = "[ ";
+    let downBridge = "[ ";
     if (inputMoves[0] === "U") {
       upBridge += moveResult[0] + " ]";
       downBridge += "  ]";
@@ -24,7 +27,7 @@ const OutputView = {
       downBridge += moveResult[0] + " ]";
       upBridge += "  ]";
     }
-    Console.print(`${upBridge}\n${downBridge}`);
+    return [upBridge, downBridge];
   },
   makeMaps(inputMoves, moveResult) {
     let upBridge = []; let downBridge = [];
@@ -35,7 +38,7 @@ const OutputView = {
         downBridge.push(moveResult[i]); upBridge.push(" ");
       }}
     upBridge = upBridge.join(" | "); downBridge = downBridge.join(" | ");
-    Console.print(`${"[ " + upBridge + " ]"}\n${"[ " + downBridge + " ]"}`);
+    return [upBridge, downBridge];
   },
 
   /**
