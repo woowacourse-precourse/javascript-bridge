@@ -17,20 +17,32 @@ class App {
     const bridgeGame = new BridgeGame(bridge);
 
     let isContinue = true;
-
+    let count = 0;
+    let turnSuccess;
     while (isContinue) {
-      this.excuteGame(bridgeGame);
+      count += 1;
+
+      turnSuccess = this.excuteGame(bridgeGame);
       isContinue = false;
 
       if (!turnSuccess) {
         isContinue = this.getIsContinue(InputView.readGameCommand());
       }
     }
+    OutputView.printResult(
+      bridgeGame.getBridge(),
+      bridgeGame.getTurn(),
+      turnSuccess,
+      count
+    );
   }
 
   excuteGame(bridgeGame) {
     let turnSuccess = true;
-    while (turnSuccess) {
+    const bridge = bridgeGame.getBridge();
+    const turn = bridgeGame.getTurn();
+
+    while (turn < bridge.length && turnSuccess) {
       turnSuccess = this.executeTurn(bridgeGame);
 
       OutputView.printMap(
@@ -39,6 +51,7 @@ class App {
         turnSuccess
       );
     }
+    return turnSuccess;
   }
 
   executeTurn(bridgeGame) {

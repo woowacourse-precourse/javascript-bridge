@@ -45,12 +45,15 @@ const OutputView = {
 
     return str;
   },
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult() {},
+  printResult(bridge, turn, isCurrentTurnSuccess, gameCount) {
+    Console.print(MESSAGE.END);
+    this.printMap(bridge, turn, isCurrentTurnSuccess);
+    const isSuccess = isCurrentTurnSuccess
+      ? MESSAGE.GAME_SUCCESS
+      : MESSAGE.GAME_FAIL;
+    Console.print(`${MESSAGE.IS_SUCCESS}${isSuccess}`);
+    Console.print(`${MESSAGE.GAME_COUNT}${gameCount}`);
+  },
 };
 
 module.exports = OutputView;
