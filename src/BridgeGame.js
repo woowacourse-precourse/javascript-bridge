@@ -16,7 +16,7 @@ class BridgeGame {
     printMap(this.#bridge, this.#user);
   }
 
-  isEnd(move) {
+  isFail(move) {
     const current = this.#user.length - 1;
     if (this.#bridge[current] !== move) return true;
     return false;

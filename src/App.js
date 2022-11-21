@@ -41,7 +41,7 @@ class App {
   playGame(move) {
     this.bridgeGame.move(move);
 
-    if (this.bridgeGame.isEnd(move)) {
+    if (this.bridgeGame.isFail(move)) {
       InputView.readGameCommand(this.getRetry.bind(this));
       return;
     }
