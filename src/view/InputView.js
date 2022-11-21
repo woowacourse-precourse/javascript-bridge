@@ -18,6 +18,8 @@ const InputView = {
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
+   * @param callbackFunction {callbackFunction} [실행될 콜백 함수]
+   * @param controller [컨트롤러]
    */
   readMoving(callbackFunction, controller) {
     Console.readLine(USER_MOVE_MESSAGES.INPUT, (movingInput) =>
