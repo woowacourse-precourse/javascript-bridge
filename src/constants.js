@@ -16,7 +16,14 @@ const STEP = Object.freeze({
 	DOWN: 'D',
 });
 
+const RESULT = Object.freeze({
+	SUCCESS: 'success',
+	FAIL: 'fail',
+	FINISH: 'finish'
+});
+
 module.exports = {
 	MESSAGE,
 	STEP,
+	RESULT,
 };
