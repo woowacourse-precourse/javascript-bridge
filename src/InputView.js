@@ -1,6 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const BridgeGame = require('./BridgeGame');
-const OutputView = require('./OutputView');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
