@@ -6,6 +6,7 @@ const Validation = require('../Utilities/Validation');
 class BridgeGame {
   #turn = 0;
   #userLife = true;
+  #attemptNumber = 1;
 
   constructor(model, view) {
     this.model = model;
@@ -13,12 +14,32 @@ class BridgeGame {
   }
 
   start() {
+    this.getBridgeSize();
+    this.gameStart();
+  }
+
+  gameStart() {
     this.move();
+    this.isUserSucess();
+    this.isUserAlive();
+    this.isUserDead();
+  }
+
+  isUserAlive() {
     if (this.#userLife && this.#turn !== this.model.bridge.length) {
-      this.start();
+      this.gameStart();
     }
+  }
+
+  isUserDead() {
     if (!this.#userLife) {
       this.retry();
+    }
+  }
+
+  isUserSucess() {
+    if (this.#userLife && this.#turn === this.model.bridge.length) {
+      this.end();
     }
   }
 
@@ -51,12 +72,16 @@ class BridgeGame {
    */
   retry() {
     this.#turn = 0;
-    this.#userLife = true;
+    this.#attemptNumber = 1;
     this.askUserRetry();
   }
 
   end() {
-    this.view.end();
+    this.view.printResultBridge(
+      this.model.upsideBridge,
+      this.model.downSideBridge,
+    );
+    this.view.printResult(this.#userLife, this.#attemptNumber);
   }
 
   askUserRetry() {
@@ -72,7 +97,9 @@ class BridgeGame {
   retryOrQuit(userRetry) {
     if (userRetry === 'R') {
       this.model.reset();
-      this.start();
+      this.#attemptNumber += 1;
+      this.#userLife = true;
+      this.gameStart();
     }
     if (userRetry === 'Q') {
       this.end();

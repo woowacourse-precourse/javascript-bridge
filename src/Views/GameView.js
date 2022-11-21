@@ -1,10 +1,11 @@
-const Model = require('../Models/Model');
-
 class GameView {
   constructor(inputView, outputView) {
     this.inputView = inputView;
     this.outputView = outputView;
-    this.model = new Model();
+  }
+
+  close() {
+    this.outputView.close();
   }
 
   readBridgeSize(query, callback) {
@@ -28,8 +29,14 @@ class GameView {
     );
   }
 
-  end() {
-    this.outputView.close();
+  printResultBridge(upsideBridge, downSideBridge) {
+    this.outputView.print('최종 게임 결과 \n');
+    this.printMap(upsideBridge, downSideBridge);
+  }
+
+  printResult(userLife, attemptNumber) {
+    this.outputView.print(`\n 게임 성공 여부: ${userLife ? '성공' : '실패'}`);
+    this.outputView.print(`총 시도한 횟수: ${attemptNumber}`);
   }
 }
 
