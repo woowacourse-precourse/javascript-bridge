@@ -1,9 +1,9 @@
 class BridgeUnit {
+    mark;
+    markIndex;
+    element = [`[   ]`, `[   ]`];
     constructor(characterBit) {
         this.value = characterBit;
-        this.mark;
-        this.markIndex;
-        this.element = [`[   ]`, `[   ]`];
     }
 
     setMark(mark) {
