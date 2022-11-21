@@ -8,8 +8,7 @@ describe('BridgeRandomNumberGenerator 클래스 테스트', () => {
   };
 
   test('0과 1 중 무작위 값 생성', () => {
-    const numberGenerator = new BridgeRandomNumberGenerator();
-    const randomNumber = numberGenerator.generate();
+    const randomNumber = BridgeRandomNumberGenerator.generate();
 
     expect(isInRange(randomNumber)).toBe(true);
   });
