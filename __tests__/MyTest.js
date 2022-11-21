@@ -17,7 +17,7 @@ describe("다리 건너기 테스트", () => {
     const size = 2;
     const upDownMock = jest.fn();
 
-    const upDownMocks = upDownMock.mockReturnValueOnce("1").mockReturnValueOnce("0");
+    const upDownMocks = upDownMock.mockReturnValueOnce(1).mockReturnValueOnce(0);
 
     expect(BridgeMaker.makeBridge(size, upDownMocks)).toEqual(["U", "D"]);
   });
@@ -27,7 +27,9 @@ describe("다리 건너기 테스트", () => {
     const validateTest = (size) => {
       ExceptionHandler.validateSizeInput(size);
     };
-    expect(validateTest(size)).toBeFalsy();
+    expect(() => {
+      validateTest(size);
+    }).toThrow("[ERROR]");
   });
 
   test("게임 진행 다리 생성 테스트", () => {
