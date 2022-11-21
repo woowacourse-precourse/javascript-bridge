@@ -1,8 +1,6 @@
-const inputView=require('./InputView')
-const bridgeMaker=require('./BridgeMaker')
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView=require('./OutputView')
 const BridgeGame=require('./BridgeGame')
+const MissionUtils  = require('@woowacourse/mission-utils')
 const bridegame=new BridgeGame()
 
 
@@ -20,7 +18,6 @@ class Input{
   }
 
   static randomBridge(bridgeArray){
-    console.log('input class에 저장')
     this.originalBridge=JSON.parse(JSON.stringify(bridgeArray))
     bridegame.retry(this.originalBridge)
     console.log(this.originalBridge);

@@ -1,15 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const InputView=require("./InputView")
-const BridegGame= require('./BridgeGame')
-const bridge=new BridegGame();
-
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 bridgePrinterAbove=[]
 bridgePrinterBelow=[]
-// let bridgePrinterAbove=bridgePrinterAbove
-// let bridgePrinterBelow=bridgePrinterBelow
 const OutputView = {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
@@ -18,7 +12,6 @@ const OutputView = {
    */
   printMap(userSpace,bridgeArray,restart) {
     const correctValue=this.printMapHelper(userSpace,bridgeArray,restart)
-    // console.log(correctValue);
     return correctValue
   },
   printMapHelper(userSpace,bridgeArray){
@@ -48,8 +41,6 @@ const OutputView = {
     bridgePrinterBelow=[]
   },
   printArrays(bridgePrinterAbove,bridgePrinterBelow){
-    // console.log(bridgePrinterAbove);
-    // console.log(bridgePrinterBelow);
     let bridgeAbove=''
     let bridgeBelow=''
     bridgeAbove=JSON.stringify(bridgePrinterAbove).replace(/,/g,'|')
