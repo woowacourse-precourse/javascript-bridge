@@ -115,13 +115,15 @@ class BridgeGame {
   clearGame() {
     const SUCCESS = '성공';
     InputView.closeRead();
-    return SUCCESS;
+    const records = [this.#upperBridge, this.#lowerBridge];
+    OutputView.printResult(SUCCESS, this.#try, records);
   }
 
   giveupGame() {
     const FAIL = '실패';
     InputView.closeRead();
-    return FAIL;
+    const records = [this.#upperBridge, this.#lowerBridge];
+    OutputView.printResult(FAIL, this.#try, records);
   }
 }
 
