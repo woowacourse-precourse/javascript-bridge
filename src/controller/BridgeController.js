@@ -19,15 +19,16 @@ class BridgeController {
   }
 
   requestBridgeSize() {
-    InputView.readBridgeSize(this.controlBridgeSize.bind(this));
+    InputView.readBridgeSize(this.createBridge.bind(this));
   }
 
-  controlBridgeSize(size) {
-    const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
-    this.#bridgeGame.updateBridge(bridge);
+  createBridge(size) {
     if (!this.controlValidate(Validate.validateSizeRange, Number(size))) {
       return this.requestBridgeSize();
     }
+    const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
+    this.#bridgeGame.updateBridge(bridge);
+
     OutputView.printLineBreak();
     this.requestBridgeMovemoment();
   }
@@ -49,10 +50,10 @@ class BridgeController {
 
   getDrawBridge() {
     const moveBridge = this.#bridgeGame.move();
-    return this.draw(moveBridge);
+    return this.drawBridge(moveBridge);
   }
 
-  draw(moveBridge) {
+  drawBridge(moveBridge) {
     let upBridge = '';
     let downBridge = '';
 

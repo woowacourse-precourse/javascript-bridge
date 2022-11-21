@@ -21,9 +21,7 @@ class BridgeGame {
   }
 
   isSuccess() {
-    if (this.#bridge.length === this.#userBridge.length) {
-      return true;
-    }
+    if (this.#bridge.length === this.#userBridge.length) return true;
     return false;
   }
 
@@ -34,28 +32,18 @@ class BridgeGame {
   getNumberOfAttempts() {
     return this.#numberOfAttempts;
   }
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
 
   move() {
-    return this.#userBridge.reduce((acc, position, index) => {
+    return this.#userBridge.reduce((trace, position, index) => {
       if (position === this.#bridge[index]) {
-        position === 'U' ? acc.push(['O', ' ']) : acc.push([' ', 'O']);
+        position === 'U' ? trace.push(['O', ' ']) : trace.push([' ', 'O']);
       } else if (position !== this.#bridge[index]) {
-        position === 'U' ? acc.push(['X', ' ']) : acc.push([' ', 'X']);
+        position === 'U' ? trace.push(['X', ' ']) : trace.push([' ', 'X']);
       }
-      return acc;
+      return trace;
     }, []);
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   retry() {
     this.#userBridge = [];
     this.#numberOfAttempts += 1;
