@@ -5,9 +5,16 @@ const Player = require('../models/player');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #executionCount;
+
   constructor() {
+    this.#executionCount = 1;
     this.bridge = new Bridge();
     this.player = new Player();
+  }
+
+  getExecutionCount() {
+    return this.#executionCount;
   }
 
   /**
@@ -32,7 +39,7 @@ class BridgeGame {
   }
 
   #adjustmentGameStatus() {
-    this.bridge.executionCount += 1;
+    this.#executionCount += 1;
     this.bridge.locationNumber = 0;
     this.bridge.compareResult = [[], []];
   }

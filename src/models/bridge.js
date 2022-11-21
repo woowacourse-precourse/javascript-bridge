@@ -4,17 +4,12 @@ const OutputView = require('../views/OutputView');
 
 class Bridge {
   constructor() {
-    this.executionCount = 1;
     this.locationNumber = 0;
     this.compareResult = [[], []];
   }
 
   getCompareResult() {
     return this.compareResult;
-  }
-
-  getExecutionCount() {
-    return this.executionCount;
   }
 
   makeBridge(size, init) {
