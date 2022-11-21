@@ -83,4 +83,17 @@ describe("다리 건너기 게임 진행 테스트", () => {
       expect(correctness).toBe(booleanValue[index]);
     });
   });
+
+  test("다리 완전 횡단 판단 테스트", () => {
+    const bridge = ["U", "D", "D"];
+    const directions = ["U", "D", "D"];
+    const bridgeGame = new BridgeGame(bridge);
+
+    directions.forEach((direction, index) => {
+      bridgeGame.move(direction);
+    });
+
+    const crossed = bridgeGame.hasCrossedCompletely();
+    expect(crossed).toBe(true);
+  });
 });
