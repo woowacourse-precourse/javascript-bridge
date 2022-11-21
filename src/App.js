@@ -19,10 +19,10 @@ class App {
     InputView.readBridgeSize(this.requestBridgeSize.bind(this));
   }
 
-  requestBridgeSize(bridgeSize) {
+  requestBridgeSize(size) {
     try {
-      this.validator.checkBridgeSize(bridgeSize);
-      this.bridgeGame.setupGameMap(bridgeSize);
+      this.validator.checkBridgeSize(size);
+      this.bridgeGame.setupGameMap(size);
       this.getBridgeMovementDirection();
     } catch (errorType) {
       OutputView.printError(errorType);
@@ -47,21 +47,21 @@ class App {
   }
 
   checkGameState() {
-    if (this.#checkGameSuccess()) {
+    if (this.#isGameSuccess()) {
       return this.#exitGame();
     }
-    if (this.#checkGameOver()) {
+    if (this.#isGameOver()) {
       return this.requestGameOverCommand();
     }
     this.getBridgeMovementDirection();
   }
 
-  #checkGameSuccess() {
-    return this.bridgeGame.checkGameSuccess();
+  #isGameSuccess() {
+    return this.bridgeGame.isSuccess();
   }
 
-  #checkGameOver() {
-    return this.bridgeGame.checkGameOver();
+  #isGameOver() {
+    return this.bridgeGame.checkGameStatus();
   }
 
   requestGameOverCommand() {
@@ -71,14 +71,14 @@ class App {
   requestRetryGame(retryCommand) {
     try {
       this.validator.checkRetryCommand(retryCommand);
-      this.checkRetryStatus(retryCommand);
+      this.checkRetryState(retryCommand);
     } catch (errorType) {
       OutputView.printError(errorType);
       this.requestGameOverCommand();
     }
   }
 
-  checkRetryStatus(retryCommand) {
+  checkRetryState(retryCommand) {
     const { quit, retry } = GAME_COMMAND;
     if (retryCommand === quit) {
       return this.#exitGame();
@@ -92,11 +92,11 @@ class App {
 
   #exitGame() {
     OutputView.printResult({
-      userGameMap: this.bridgeGame.getUserGameMap(),
-      isSuccess: this.bridgeGame.checkGameOver(),
+      userGameMap: this.bridgeGame.getUserBridgeMap(),
+      isSuccess: this.bridgeGame.checkGameStatus(),
       userTryCount: this.bridgeGame.getUserTryCount(),
     });
-    OutputView.exit();
+    return OutputView.exit();
   }
 }
 

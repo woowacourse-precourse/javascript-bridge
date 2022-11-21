@@ -26,6 +26,10 @@ class User {
   getTryCount() {
     return this.#tryCount;
   }
+
+  isSameLocation(gameMapLength) {
+    return this.#location === gameMapLength;
+  }
 }
 
 module.exports = User;

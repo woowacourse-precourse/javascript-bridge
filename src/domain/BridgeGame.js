@@ -4,6 +4,8 @@ const User = require('../model/User');
 const GameMap = require('./GameMap');
 
 class BridgeGame {
+  #isGameOver = false;
+
   constructor() {
     this.user = new User();
     this.gameMap = new GameMap();
@@ -24,12 +26,38 @@ class BridgeGame {
     return this.gameMap.drawOX(moveCommand, this.getUserLocation());
   }
 
-  checkGameSuccess() {
-    return this.gameMap.isGameSuccess(this.getUserLocation());
+  checkGameStatus() {
+    if (this.#isGameOver) {
+      return true;
+    }
+    return false;
   }
 
-  getUserGameMap() {
-    return this.gameMap.currentUserBridgeMap(this.getUserLocation());
+  isSuccess() {
+    if (!this.gameMap.isCorrectLocation()) {
+      this.changeStateIntoFailure();
+      return false;
+    }
+    return this.checkGameArrived();
+  }
+
+  changeStateIntoFailure() {
+    this.#isGameOver = true;
+  }
+
+  checkGameArrived() {
+    if (this.isArrival()) {
+      return true;
+    }
+    return false;
+  }
+
+  isArrival() {
+    return this.user.isSameLocation(this.gameMap.getMapLength());
+  }
+
+  getUserBridgeMap() {
+    return this.gameMap.getUserBridgeMap(this.getUserLocation());
   }
 
   getUserLocation() {
@@ -40,21 +68,13 @@ class BridgeGame {
     return this.user.getTryCount();
   }
 
-  getBridgeGameMap() {
-    return this.gameMap.getBridgeGameMap();
-  }
-
-  checkGameOver() {
-    return this.gameMap.isGameOver();
-  }
-
   move() {
     this.user.increaseLocation();
   }
 
   retry() {
+    this.#isGameOver = false;
     this.gameMap.initBridge();
-    this.gameMap.setRetryGame();
     this.#increaseTryCount();
     this.#initUserLocation();
   }

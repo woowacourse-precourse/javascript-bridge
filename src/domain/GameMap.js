@@ -4,9 +4,12 @@ const REPEAT_COUNT = 3;
 
 class GameMap {
   #bridgeGameMap;
-  #upperBridge = [];
-  #lowerBridge = [];
-  #gameOver = false;
+  #upperBridge;
+  #lowerBridge;
+
+  constructor() {
+    this.initBridge();
+  }
 
   initBridge() {
     this.#lowerBridge = [];
@@ -17,23 +20,8 @@ class GameMap {
     this.#bridgeGameMap = gameMap;
   }
 
-  getBridgeGameMap() {
-    return this.#bridgeGameMap;
-  }
-
-  isGameOver() {
-    return this.#gameOver;
-  }
-
-  setRetryGame() {
-    this.#gameOver = false;
-  }
-
-  isGameSuccess(userLocation) {
-    if (!this.#gameOver && this.#bridgeGameMap.length === userLocation) {
-      return true;
-    }
-    return false;
+  getMapLength() {
+    return this.#bridgeGameMap.length;
   }
 
   drawOX(moveCommand, userLocation) {
@@ -44,7 +32,7 @@ class GameMap {
     selectBridge.push(` ${oxPattern} `);
     this.appendEmptySpace(selectBridge);
 
-    return this.currentUserBridgeMap();
+    return this.getUserBridgeMap();
   }
 
   checkBridgeLocation(userLocation) {
@@ -53,7 +41,7 @@ class GameMap {
     }
   }
 
-  currentUserBridgeMap() {
+  getUserBridgeMap() {
     return `[${this.#upperBridge.join('')}]\n[${this.#lowerBridge.join('')}]\n`;
   }
 
@@ -71,8 +59,15 @@ class GameMap {
     if (isPossibleNext) {
       return o;
     }
-    this.#gameOver = true;
     return x;
+  }
+
+  isCorrectLocation() {
+    const hasX = [...this.#upperBridge, ...this.#lowerBridge].join(' ').includes('X');
+    if (hasX) {
+      return false;
+    }
+    return true;
   }
 
   appendVerticalBar() {
