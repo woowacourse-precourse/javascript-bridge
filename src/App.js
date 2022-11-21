@@ -39,7 +39,6 @@ class App {
     }
     if (result == RESULT.FINISH) {
       OutputView.printResult(this.#bridgeGame);
-      Console.close();
     }
   }
 
@@ -50,7 +49,6 @@ class App {
     }
     if (command === 'Q') {
       OutputView.printResult(this.#bridgeGame);
-      Console.close();
     }
   }
 }

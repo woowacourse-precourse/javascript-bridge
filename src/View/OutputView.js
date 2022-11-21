@@ -22,6 +22,7 @@ const OutputView = {
     this.printMap(bridgeGame);
     Console.print(`${MESSAGE.SUCCESS_OR_FAIL} ${bridgeGame.getResult()}`);
     Console.print(`${MESSAGE.TRY_COUNT} ${bridgeGame.getTryCount()}`);
+    Console.close();
   },
 };
 
