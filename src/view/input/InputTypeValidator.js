@@ -1,4 +1,4 @@
-const ErrorForm = require('../contants/ErrorForm');
+const ErrorForm = require('../../contants/ErrorForm');
 
 const InputTypeValidator = {
   isInteger(value) {

@@ -1,4 +1,4 @@
-const { UP, DOWN, RETRY, QUIT } = require('../contants/Options');
+const { UP, DOWN, RETRY, QUIT } = require('../../contants/Options');
 
 module.exports = {
   ASK_BRIDGE_SIZE: '다리의 길이를 입력해주세요.',

@@ -1,6 +1,6 @@
 const BridgeGame = require('../domain/BridgeGame');
 const OutputView = require('../view/OutputView');
-const InputView = require('../view/InputView');
+const InputView = require('../view/input/InputView');
 const BridgeCtrlValidator = require('./BridgeCtrlValidator');
 const { RETRY, QUIT } = require('../contants/Options');
 
