@@ -12,6 +12,10 @@ class Bridge {
     return this.#bridgeArr.slice(0, pos + 1);
   }
 
+  getBridgeArrayLength() {
+    return this.#bridgeArr.length;
+  }
+
   getBridgeArray() {
     return this.#bridgeArr;
   }
