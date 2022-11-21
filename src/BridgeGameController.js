@@ -4,6 +4,7 @@ const BridgeGame = require("./BridgeGame");
 
 class BridgeGameController {
   game() {
+    OutputView.printStartMessage();
     InputView.readBridgeSize();
   }
 }

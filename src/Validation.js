@@ -6,12 +6,12 @@ const checkNaN = (value) => {
 };
 
 const checkRange = (value) => {
-  if (value < 3 || value > 20) return false;
+  if (value < 3 || value > 20) return true;
 };
 
 const checkBridgeSize = (size) => {
   if (checkNaN(size)) throw INPUT_ERROR_MESSAGE.NAN_ERROR;
-  if (!checkRange(size)) throw INPUT_ERROR_MESSAGE.RANGE_ERROR;
+  if (checkRange(parseInt(size))) throw INPUT_ERROR_MESSAGE.RANGE_ERROR;
 };
 
 module.exports = { checkBridgeSize: checkBridgeSize };
