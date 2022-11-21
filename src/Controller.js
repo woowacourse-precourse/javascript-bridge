@@ -1,11 +1,5 @@
-const {
-  GO,
-  COMMAND,
-  SIGN,
-  IS_SUCCESS,
-} = require("./constant");
 const OutputView = require("./OutputView");
-
+const { GO, COMMAND, SIGN, IS_SUCCESS } = require("./constant");
 
 const Controller = {
   size: 0,
@@ -19,27 +13,27 @@ const Controller = {
   getSize(size) {
     this.size += size;
   },
+
   addRound() {
     this.round += 1;
   },
+
   addTrialCount() {
     this.tryCount += 1;
   },
+
   initializeBlock() {
     this.round -= 1;
     this.playerArr = [];
-  }, 
-  isBlockError(block){
-    if(block !== GO.up && block !== GO.down){
-      return true
-    }
-    if(block === GO.up || block === GO.down){
-      OutputView.printMap(this.arrayState);
-    }
   },
 
-  conveyInput(block) { // 이거 수정 굳이 얘를 써서 내려보낼 필요 ㅇ없어짐
-    this.addPlayerBlock(block);
+  isBlockError(block) {
+    if (block !== GO.up && block !== GO.down) {
+      return true;
+    }
+    if (block === GO.up || block === GO.down) {
+      OutputView.printMap(this.arrayState);
+    }
   },
 
   addPlayerBlock(block) {
@@ -56,6 +50,7 @@ const Controller = {
       this.arrayState[1].push("O");
     }
   },
+
   failMove(block) {
     if (block === "U") {
       this.arrayState[0].push("X");
@@ -67,7 +62,7 @@ const Controller = {
     }
   },
 
-  checkContinue() {
+  checkMoveContinue() {
     if (
       this.playerArr.length !== this.size &&
       !OutputView.nowArray[0].includes(SIGN.fail) &&
@@ -86,24 +81,19 @@ const Controller = {
   },
 
   initializeAll() {
-    OutputView.nowArray = [],
-    this.arrayState = [[], []],
-    this.playerArr = [],
-    this.gameResult = IS_SUCCESS.nailedIt,
-    this.round = 0,
-    this.tryCount += 1; 
+    (OutputView.nowArray = []),
+      (this.arrayState = [[], []]),
+      (this.playerArr = []),
+      (this.gameResult = IS_SUCCESS.nailedIt),
+      (this.round = 0),
+      (this.tryCount += 1);
   },
 
-  isCommandError(command){
-    if(command !== COMMAND.quit && command !== COMMAND.retry){
-      return true
+  isCommandError(command) {
+    if (command !== COMMAND.quit && command !== COMMAND.retry) {
+      return true;
     }
   },
-
-  // playerCommand(command) {
-  //   this.command = command;
-  // },
-
 };
 
 module.exports = Controller;

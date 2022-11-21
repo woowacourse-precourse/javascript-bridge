@@ -1,8 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const Controller = require("./Controller");
 const BridgeMaker = require("./BridgeMaker");
+const BridgeGame = require("./BridgeGame");
+const Controller = require("./Controller");
 const OutputView = require("./OutputView");
 const {
   GO,
@@ -48,7 +48,7 @@ const InputView = {
       Controller.addRound();
       new BridgeGame().move(block, this.savedBridge);
       if (Controller.isBlockError(block)) return this.getMoving();
-      this.judgeContinue(block);
+      this.moveContinue(block);
     });
   },
 
@@ -61,11 +61,11 @@ const InputView = {
     }
   },
 
-  judgeContinue(block) {
-    if (!Controller.checkContinue()) {
+  moveContinue(block) {
+    if (!Controller.checkMoveContinue()) {
       return this.isGameEnd();
     }
-    if ((block === GO.up || block === GO.down) && Controller.checkContinue()) {
+    if ((block === GO.up || block === GO.down) && Controller.checkMoveContinue()) {
       return this.readMoving();
     }
   },
@@ -95,7 +95,7 @@ const InputView = {
       }
     });
   },
-  
+
   getCommand() {
     try {
       throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.choose_RorQ));
