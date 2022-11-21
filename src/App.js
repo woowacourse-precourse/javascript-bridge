@@ -70,17 +70,24 @@ class App {
         InputValidator.isValidCommand,
         message.ERROR_COMMAND
       );
-      if (input === command.GAME_QUIT) {
-        this.bridgeGame.lose();
-        View.close();
-      }
-      if (input === command.GAME_RESTART) {
-        this.bridgeGame.retry();
-        InputView.readMoving(this.handleInputStep.bind(this));
-      }
+      this.nextActionByCommand(input);
     } catch {
       OutputView.printMessage(error.message);
       InputView.readGameCommand(this.handleInputCommand.bind(this));
+    }
+  }
+
+  nextActionByCommand(action) {
+    switch (action) {
+      case command.GAME_QUIT:
+        this.bridgeGame.lose();
+        View.close();
+        break;
+      case command.GAME_RESTART:
+        this.bridgeGame.retry();
+        InputView.readMoving(this.handleInputStep.bind(this));
+        break;
+      default:
     }
   }
 
