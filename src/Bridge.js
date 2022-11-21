@@ -12,10 +12,6 @@ class Bridge {
   isEveryBlockPassed(passedBlockCount) {
     return this.#directionSymbols.length === passedBlockCount;
   }
-
-  getBridgeSize() {
-    return this.#directionSymbols.length;
-  }
 }
 
 module.exports = Bridge;
