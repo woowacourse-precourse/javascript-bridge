@@ -9,6 +9,11 @@ class GameControl {
   start() {
     const size = InputView.readBridgeSize();
     this.bridgeGame.make(size);
+    this.orderMoving();
+  }
+
+  orderMoving() {
+    const direction = InputView.readMoving();
   }
 }
 module.exports = GameControl;
