@@ -13,18 +13,14 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
+  readBridgeSize(bridgeGame) {
     Console.readLine(INPUT_MESSAGE.LENGTH, (length) => {
       const error = Validation.checkBridgeLength(length);
-      Console.print(error);
       if (error) {
         this.readBridgeSize();
       } else {
-        const bridge = BridgeMaker.makeBridge(
-          parseInt(length, 10),
-          BridgeRandomNumberGenerator.generate
-        );
-        this.readMoving(bridge);
+        bridgeGame.makeBridge(length);
+        this.readMoving(bridgeGame);
       }
     });
   },
@@ -32,38 +28,32 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge) {
+  readMoving(bridgeGame) {
     Console.readLine(INPUT_MESSAGE.MOVE, (userInput) => {
       const error = Validation.checkUserMoveInput(userInput);
-      if (error) {
-        return this.readMoving(bridge);
-      }
-      const bridgeGame = new BridgeGame();
-      bridgeGame.move(userInput, bridge);
-      if (bridgeGame.isWrongZone()) return this.readGameCommand(bridge);
-      if (bridgeGame.isReached(bridge))
+      if (error) return this.readMoving(bridgeGame);
+      bridgeGame.move(userInput);
+      if (bridgeGame.isWrongZone()) return this.readGameCommand(bridgeGame);
+      else if (bridgeGame.isReached())
         return bridgeGame.finish(OUTPUT_MESSAGE.SUCCESS);
-      return this.readMoving(bridge);
+      else return this.readMoving(bridgeGame);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge) {
+  readGameCommand(bridgeGame) {
     Console.readLine(INPUT_MESSAGE.RESTART, (commandInput) => {
       const error = Validation.checkCommandInput(commandInput);
       if (error) {
-        return this.readGameCommand(bridge);
+        return this.readGameCommand(bridgeGame);
       }
-      console.log(commandInput);
       if (commandInput === COMMAND.RESTART) {
-        const bridgeGame = new BridgeGame();
         bridgeGame.retry();
-        return this.readMoving(bridge);
+        return this.readMoving(bridgeGame);
       }
       if (commandInput === COMMAND.END) {
-        const bridgeGame = new BridgeGame();
         bridgeGame.finish(OUTPUT_MESSAGE.FAIL);
       }
     });

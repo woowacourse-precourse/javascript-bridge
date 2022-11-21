@@ -1,3 +1,5 @@
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { BRIDGE } = require("./constants/data");
 const OutputView = require("./OutputView");
 
@@ -7,31 +9,44 @@ const OutputView = require("./OutputView");
 class BridgeGame {
   movingLog;
   attemptNumber;
+  bridge;
   constructor() {
     this.movingLog = { upper: [], lower: [] };
     this.attemptNumber = 1;
+    this.bridge = [];
+  }
+  makeBridge(length) {
+    const bridge = BridgeMaker.makeBridge(
+      parseInt(length, 10),
+      BridgeRandomNumberGenerator.generate
+    );
+    this.bridge = bridge;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(userInput, bridge) {
+  move(userInput) {
     const currentZone = this.movingLog.upper.length;
+    console.log(userInput);
+    console.log(userInput === BRIDGE.UPPER_ZONE);
     if (userInput === BRIDGE.UPPER_ZONE)
-      return this.moveUpper(userInput, bridge, currentZone);
-    return this.moveLower(userInput, bridge, currentZone);
+      return this.moveUpper(userInput, currentZone);
+    if (userInput === BRIDGE.LOWER_ZONE)
+      return this.moveLower(userInput, currentZone);
   }
 
   /**
    * 유저가 위 칸으로 이동할 때의 메서드
    */
-  moveUpper(userInput, bridge, currentZone) {
-    if (userInput === bridge[currentZone]) {
+  moveUpper(userInput, currentZone) {
+    console.log(this.bridge);
+    if (userInput === this.bridge[currentZone]) {
       this.movingLog.upper.push(BRIDGE.RIGHT_ZONE);
       this.movingLog.lower.push(" ");
     }
-    if (userInput !== bridge[currentZone]) {
+    if (userInput !== this.bridge[currentZone]) {
       this.movingLog.upper.push(BRIDGE.WRONG_ZONE);
       this.movingLog.lower.push(" ");
     }
@@ -40,12 +55,13 @@ class BridgeGame {
   /**
    * 유저가 아래 칸으로 이동할 때의 메서드
    */
-  moveLower(userInput, bridge, currentZone) {
-    if (userInput === bridge[currentZone]) {
+  moveLower(userInput, currentZone) {
+    console.log(currentZone);
+    if (userInput === this.bridge[currentZone]) {
       this.movingLog.lower.push(BRIDGE.RIGHT_ZONE);
       this.movingLog.upper.push(" ");
     }
-    if (userInput !== bridge[currentZone]) {
+    if (userInput !== this.bridge[currentZone]) {
       this.movingLog.lower.push(BRIDGE.WRONG_ZONE);
       this.movingLog.upper.push(" ");
     }
@@ -75,8 +91,8 @@ class BridgeGame {
   /**
    * 다리를 끝까지 건넜는지 판단하는 메서드
    */
-  isReached(bridge) {
-    if (this.movingLog.upper.length === bridge.length) return true;
+  isReached() {
+    if (this.movingLog.upper.length === this.bridge.length) return true;
     return false;
   }
 
