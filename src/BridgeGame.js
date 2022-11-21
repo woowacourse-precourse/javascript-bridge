@@ -6,6 +6,8 @@ const GameManager = require("./GameManager");
  */
 class BridgeGame {
   #bridges
+  #firstRow
+  #secondRow
 
   constructor() {
     this.gameManager = new GameManager();
@@ -17,15 +19,21 @@ class BridgeGame {
 
   getBridge(bridge) {
     this.#bridges = bridge;
+    this.setBridgeRow();
     this.getSpace();
-  }  
+  }
+  
+  setBridgeRow() {
+    this.#firstRow = ['['];
+    this.#secondRow = ['['];
+  }
   
   getSpace() {
     this.gameManager.inputMovingSpace(this.move.bind(this));
   }
 
   move(space) {
-    console.log(space);
+
   }
 
 
