@@ -20,6 +20,10 @@ const OutputView = {
     Console.print(MESSAGE.printInitial);
   },
 
+  printErrorMessage(errorMessage) {
+    Console.print(errorMessage);
+  },
+
   printNewLine() {
     Console.print('');
   }
