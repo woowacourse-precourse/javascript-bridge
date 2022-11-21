@@ -1,16 +1,17 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { ERROR, DEFAULT } = require("./constant.js");
 
 const isNumber = (input) => isNaN(input);
-const isOverBridgeRange = (input) => input < 3 || input > 20;
+const isOverBridgeRange = (input) =>
+  input < DEFAULT.MIN_BRIDGE_NUM || input > DEFAULT.MAX_BRIDGE_NUM;
 
 const bridgeLength = function bridgeLengthValidation(input, callback) {
   try {
-    if (isNumber(input)) throw new Error("숫자만 입력 가능합니다.");
-    if (isOverBridgeRange(input))
-      throw new Error("3 ~ 20사이의 숫자만 입력 가능합니다.");
+    if (isNumber(input)) throw new Error(ERROR.BRIDGE_IS_NUMBER_ERROR);
+    if (isOverBridgeRange(input)) throw new Error(ERROR.BRIDGE_RANGE_ERROR);
     return true;
-  } catch (e) {
-    Console.print(`[ERROR]${e}`);
+  } catch (error) {
+    Console.print(error);
     callback();
     return false;
   }
@@ -18,11 +19,11 @@ const bridgeLength = function bridgeLengthValidation(input, callback) {
 
 const bridgeDirection = function bridgeDirectionValidation(input, callback) {
   try {
-    if (input !== "U" && input !== "D")
-      throw new Error("U 또는 D만 입력 가능합니다.");
+    if (input !== DEFAULT.UP && input !== DEFAULT.DOWN)
+      throw new Error(ERROR.DIRECTION_INPUT_ERROR);
     return true;
-  } catch (e) {
-    Console.print(`[ERROR]${e}`);
+  } catch (error) {
+    Console.print(error);
     callback();
     return false;
   }
@@ -30,11 +31,11 @@ const bridgeDirection = function bridgeDirectionValidation(input, callback) {
 
 const gameContinue = function gameContinueValidation(input, callback) {
   try {
-    if (input !== "R" && input !== "Q")
-      throw new Error("R 또는 Q만 입력 가능합니다.");
+    if (input !== DEFAULT.RETRY && input !== DEFAULT.QUIT)
+      throw new Error(ERROR.CONTINUE_INPUT_ERROR);
     return true;
-  } catch (e) {
-    Console.print(`[ERROR]${e}`);
+  } catch (error) {
+    Console.print(error);
     callback();
     return false;
   }
