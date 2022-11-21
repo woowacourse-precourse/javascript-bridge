@@ -27,6 +27,12 @@ class BridgeGame {
     this.#firstRow = ['['];
     this.#secondRow = ['['];
   }
+
+  closeBridgeRow() {
+    this.#firstRow.push(']');
+    this.#secondRow.push(']');
+  }
+
   
   getSpace() {
     this.gameManager.inputMovingSpace(this.move.bind(this));
