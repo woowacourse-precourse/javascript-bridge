@@ -12,7 +12,7 @@ class App {
   init(bridgeSize){
     const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     const bridgePlay = new BridgePlay(bridge);
-    bridgePlay.startRound();
+    bridgePlay.newRound();
   }
   play() {
     this.start();

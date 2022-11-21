@@ -8,7 +8,7 @@ class BridgePlay{
     this.bridgeGame = new BridgeGame(this.bridge, { moved:[], attempts:1 })
   }
 
-  startRound(){
+  newRound(){
     InputView.readMoving(this);
   }
 
@@ -24,7 +24,7 @@ class BridgePlay{
         InputView.readGameCommand(this);
         break;
       case 1:
-        this.startRound();
+        this.newRound();
         break;
       case 2:
         this.playEnd();
@@ -34,7 +34,7 @@ class BridgePlay{
   endOrRetry(option){
     if(option==='R'){
       this.bridgeGame.retry();
-      this.startRound();
+      this.newRound();
       return;
     }//option==='Q'
     this.playEnd();
