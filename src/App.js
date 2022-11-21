@@ -1,5 +1,10 @@
+const Player = require("./Player");
+
 class App {
-  play() {}
+  play() {
+    const play = new Player();
+    play.createBridgeAnswer();
+  }
 }
 
 module.exports = App;
