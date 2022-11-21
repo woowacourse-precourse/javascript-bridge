@@ -42,7 +42,7 @@ class Controller {
       if (OX === CROSS_OR_NOT.NO) return this.inputGameCommand();
       return index === this.inputView.bridgeSize - 1 && this.outputView.printResult(SUCCESS, this.model);
     };
-    return this.inputView.readMoving(readMovingCallback, 0, this.inputView.bridgeSize);
+    return this.inputView.readMoving(readMovingCallback, 0);
   }
 
   reflectMapResult(upOrDown, crossOrNot) {

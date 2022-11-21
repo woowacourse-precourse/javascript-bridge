@@ -21,14 +21,14 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(callback, index, size) {
+  readMoving(callback, index) {
     Console.readLine(INPUT_MESSAGE.MOVING, (input) => {
       try {
         callback(input, index);
-        return index < size - 1 && this.readMoving(callback, index + 1, size);
+        return index < this.bridgeSize - 1 && this.readMoving(callback, index + 1);
       } catch (error) {
         Console.print(error.message);
-        return this.readMoving(callback, index, size);
+        return this.readMoving(callback, index);
       }
     });
   },
