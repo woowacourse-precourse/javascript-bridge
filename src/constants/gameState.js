@@ -7,4 +7,9 @@ const DIRECTION = Object.freeze({
   UP: "U",
   DOWN: "D",
 });
-module.exports = { BRIDGE_LENGTH, DIRECTION };
+
+const DIRECTION_MATCH = Object.freeze({
+  RIGHT: "O",
+  WRONG: "X",
+});
+module.exports = { BRIDGE_LENGTH, DIRECTION, DIRECTION_MATCH };
