@@ -17,7 +17,7 @@ const BridgeSizeError = {
   },
 };
 
-const ErrorHandler = {
+const InputHandler = {
   handleBridgeSizeInput(app, input, readAgain) {
     const isError = checkBridgeSizeInput(input);
 
@@ -25,4 +25,4 @@ const ErrorHandler = {
   },
 };
 
-module.exports = ErrorHandler;
+module.exports = InputHandler;
