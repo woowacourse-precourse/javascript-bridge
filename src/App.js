@@ -1,17 +1,11 @@
-const { readBridgeSize } = require("./InputView");
-const { bridgeSizeAndRandomNum } = require("./Controller");
-const BridgeGame = require("./BridgeGame");
-const { generate } = require("./BridgeRandomNumberGenerator");
-const { makeBridge } = require("./BridgeMaker");
-const bridgeSize = require("./Controller");
 const OutputView = require("./OutputView");
+const InputView = require("./InputView");
 
 class App {
   play() {
     OutputView.printStartMessage();
-    readBridgeSize();
+    InputView.readBridgeSize();
   }
 }
-const a = new App();
-a.play();
+
 module.exports = App;
