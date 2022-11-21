@@ -65,4 +65,19 @@ describe("BridgeGame 클래스 테스트", () => {
     expect(gameRec.bridgeOutput.firstBridge).toEqual("[ O |   ]");
     expect(gameRec.bridgeOutput.secondBridge).toEqual("[   | O ]");
   });
+
+  test("retry 메서드: moveNum 0 초기화, attemptNum 1 증가", () => {
+    const gameRec = {
+      moveNum: 2,
+      attemptNum: 1,
+      bridgeAnswer: ["U", "D", "D"],
+      bridgeOutput: { firstBridge: "[ O |", secondBridge: "[   |" },
+      correctOrNot: "O",
+      inputUOrD: "D",
+    };
+    const bridgeGame = new BridgeGame();
+    bridgeGame.retry(gameRec);
+    expect(gameRec.moveNum).toEqual(0);
+    expect(gameRec.attemptNum).toEqual(2);
+  });
 });
