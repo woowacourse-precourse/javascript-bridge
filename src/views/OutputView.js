@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const InfoMessages = require("./constants/InfoMessages.js");
-const Values = require("./constants/Values.js");
+const InfoMessages = require("../constants/InfoMessages.js");
+const Values = require("../constants/Values.js");
 
 const OutputView = {
   printGameStart() {

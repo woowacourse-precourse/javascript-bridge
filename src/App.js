@@ -1,5 +1,5 @@
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
+const InputView = require("./views/InputView");
+const OutputView = require("./views/OutputView");
 const BridgeGame = require("./BridgeGame");
 const Validator = require("./Validator.js");
 const Values = require("./constants/Values.js");
