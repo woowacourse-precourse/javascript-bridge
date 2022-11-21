@@ -12,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridgeArray = Array.from({ length: size }).map((number, index) => {
       const RandomNumber = Number(generateRandomNumber());
-      console.log(RandomNumber);
+      // console.log(RandomNumber);
       if (RandomNumber === BRIDGE_DETAIL.UP.NUMBER)
         return BRIDGE_DETAIL.UP.COMMAND;
       return BRIDGE_DETAIL.DOWN.COMMAND;
