@@ -15,6 +15,17 @@ class BridgeGame {
     this.userMoveArray = userMoveArray;
     this.gameTryCount = gameTryCount;
   }
+
+  getCount(gameTryCount) {
+    this.gameTryCount = gameTryCount;
+    return this.gameTryCount;
+  }
+
+  plusCount() {
+    this.gameTryCount += 1;
+    return this.gameTryCount;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>

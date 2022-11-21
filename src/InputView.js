@@ -16,7 +16,10 @@ const InputView = {
     Console.readLine(MESSAGE.INPUT_BRIDGE_LENGTH, (inputBridgeSize) => {
       Validate.isNumber(inputBridgeSize);
       Validate.checkLength(inputBridgeSize);
-
+      let gameTryCount = 0;
+      const count = bridgeGame.getCount(gameTryCount);
+      // gameTryCount = count;
+      console.log(count);
       const bridge = BridgeMaker.makeBridge(
         inputBridgeSize,
         BridgeRandomNumberGenerator.generate
@@ -59,14 +62,15 @@ const InputView = {
   readGameCommand(bridgeGame, bridge, userMoveArray) {
     Console.readLine(MESSAGE.SELECT_RETRY, (userInput) => {
       const retryOrCloseKey = Validate.checkRetryOrCloseKey(userInput);
+      let count = bridgeGame.plusCount();
+
       const command = bridgeGame.retry(retryOrCloseKey);
-      if (command === 0) {
-        // 다시시도
-        OutputView.printResult(command);
-      }
       if (command === 1) {
         const userMoveArray = [];
         this.readMoving(bridgeGame, bridge, userMoveArray);
+      }
+      if (command === 0) {
+        OutputView.printResult(command, count);
       }
     });
   },
