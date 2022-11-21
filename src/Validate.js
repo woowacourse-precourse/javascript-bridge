@@ -31,7 +31,7 @@ class MoveInput {
 
   checkMoveInput(move) {
     const moveConstraint = new MoveConstraint(move);
-    moveConstraint.checkInputValue();
+    moveConstraint.checkInputUD();
   }
 }
 
