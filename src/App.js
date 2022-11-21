@@ -1,7 +1,7 @@
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const { BRIDGE } = require('./constant/constant');
+const { BRIDGE, GAME_RESULT } = require('./constant/constant');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
@@ -10,9 +10,12 @@ class App {
 
   #tryCount;
 
+  #gameResult;
+
   constructor() {
     this.bridgeGame = new BridgeGame();
     this.#tryCount = 1;
+    this.#gameResult = GAME_RESULT.FAIL;
   }
 
   play() {
@@ -41,6 +44,7 @@ class App {
 
       if (this.bridgeGame.getIndex() !== this.#bridge.length) return this.movingBridge();
 
+      this.#gameResult = GAME_RESULT.SUCCESS;
       return this.quitGame();
     });
   }
@@ -60,11 +64,7 @@ class App {
   }
 
   quitGame() {
-    OutputView.printResult(
-      this.bridgeGame.getMoving(),
-      this.bridgeGame.getResult(this.#bridge),
-      this.#tryCount
-    );
+    OutputView.printResult(this.bridgeGame.getMoving(), this.#gameResult, this.#tryCount);
   }
 }
 

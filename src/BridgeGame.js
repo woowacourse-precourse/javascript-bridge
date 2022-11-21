@@ -1,6 +1,5 @@
 const {
   BRIDGE: { STRING_UP, STRING_DOWN, SUCCESS, FAIL, BLANK },
-  GAME_RESULT,
 } = require('./constant/constant');
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -63,12 +62,6 @@ class BridgeGame {
 
   getIndex() {
     return this.#index + 1;
-  }
-
-  getResult(bridge) {
-    if (bridge.length !== this.#index + 1) return GAME_RESULT.FAIL;
-
-    return GAME_RESULT.SUCCESS;
   }
 }
 
