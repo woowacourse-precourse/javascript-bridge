@@ -92,7 +92,7 @@ const InputView = {
     if (inputROrQ === "R") {
       const bridgeGame = new BridgeGame();
       bridgeGame.retry(gameRec);
-    } 
+    }
     if (inputROrQ === "Q") {
       OutputView.printResult(gameRec);
     }
