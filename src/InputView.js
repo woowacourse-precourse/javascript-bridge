@@ -37,7 +37,7 @@ const InputView = {
   readMovingCallback(moving) {
     try {
       this.bridgeGameControl.manageMoving(moving);
-      this.readGameCommand();
+      this.bridgeGameControl.isGameEnd() ? this.readGameCommand() : this.readMoving(); 
     } catch (error) {
       OutputView.printErrorMessage(ERROR.MOVING_ERROR);
       this.readMoving();

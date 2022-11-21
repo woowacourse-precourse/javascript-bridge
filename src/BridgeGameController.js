@@ -15,6 +15,11 @@ class BridgeGameController {
     const bridgeSketch = this.#bridgeGame.move(moving);
     OutputView.printMap(bridgeSketch);
   }
+
+  isGameEnd() {
+    const isGameEnd = this.#bridgeGame.isGameEnd();
+    return isGameEnd;
+  }
 }
 
 module.exports = BridgeGameController;
