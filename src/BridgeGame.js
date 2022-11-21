@@ -1,8 +1,10 @@
 const Bridge = require('./Bridge');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { MOVABLE } = require('./data/constants');
 const InputView = require('./InputView');
 const IO = require('./IO');
+const OutputView = require('./OutputView');
 const Validator = require('./Validator');
 
 /**
@@ -13,21 +15,27 @@ class BridgeGame {
 
   #bridge;
 
+  #bridgesProgress;
+
   constructor() {
     this.checkLengthValidate();
   }
 
   checkLengthValidate() {
     InputView.readBridgeSize((length) => {
-      if (!Validator.validateBridgeLength(length)) {
+      try {
+        Validator.validateBridgeLength(length);
+
+        this.#bridge = new Bridge(
+          length,
+          BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate),
+        );
+        this.#bridgesProgress = [[], []];
+        this.play(length);
+      } catch (error) {
+        IO.output(error);
         this.checkLengthValidate();
-        return;
       }
-      this.#bridge = new Bridge(
-        length,
-        BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate),
-      );
-      this.play(length);
     });
   }
 
@@ -42,14 +50,18 @@ class BridgeGame {
    */
   move(index, length) {
     InputView.readMoving((direction) => {
-      if (!Validator.validateBridgeDirection(direction)) {
-        this.move(index, length);
-        return;
-      }
-      this.#bridge.checkCorrectDirection(direction, index);
+      try {
+        Validator.validateBridgeDirection(direction);
+        const checkCorect = this.#bridge.checkCorrectDirection(direction, index);
 
-      if (index === length - 1) { IO.close(); return; }
-      this.move(index + 1, length);
+        OutputView.printMap(this.#bridgesProgress, checkCorect);
+
+        if (index === length - 1) { IO.close(); return; }
+        this.move(index + 1, length);
+      } catch (error) {
+        IO.output(error);
+        this.move(index, length);
+      }
     });
   }
 
