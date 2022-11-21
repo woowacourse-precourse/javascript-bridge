@@ -1,44 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { OUTPUT_MESSAGE, MOVING_SPACE, MAP } = require("./Constant");
-
-/**
- * @param {string[]} movedSpace 현재까지 이동한 칸
- * @param {number} index 현재 인덱스
- * @param {boolean} isSuccess 마지막 칸 성공 여부
- * @returns {boolean} 마지막 인덱스이고, 선택에 실패했는지 여부 반환
- */
-const isLastIndexAndFailed = (movedSpace, index, isSuccess) => {
-  if (movedSpace.length - 1 !== index) return false;
-  return !isSuccess;
-};
-
-/**
- * @param {string[]} movedSpace 현재까지 이동한 칸
- * @param {boolean} isSuccess 마지막 칸 성공 여부
- * @param {string} road UP 인지 DOWN 인지
- * @returns {string} 해당 road에 해당하는 상태를 정해진 형식에 맞게 반환
- */
-const parseToRoad = (movedSpace, isSuccess, road) => {
-  const movedLog = movedSpace
-    .map((space, index) => {
-      if (space !== road) return MAP.EMPTY;
-      if (isLastIndexAndFailed(movedSpace, index, isSuccess)) return MAP.FAIL;
-      return MAP.SUCCESS;
-    })
-    .join(MAP.SEPARATOR);
-  return MAP.START + movedLog + MAP.END;
-};
-
-/**
- * @param {string[]} movedSpace 현재까지 이동한 칸
- * @param {boolean} isSuccess 마지막 칸 성공 여부
- * @returns {object} 윗길, 아랫길로 각각 파싱한 값을 반환
- */
-const parseUpAndDown = (movedSpace, isSuccess) => {
-  const upRoad = parseToRoad(movedSpace, isSuccess, MOVING_SPACE.UP);
-  const downRoad = parseToRoad(movedSpace, isSuccess, MOVING_SPACE.DOWN);
-  return { upRoad, downRoad };
-};
+const { OUTPUT_MESSAGE } = require("./Constant");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -55,8 +16,8 @@ const OutputView = {
    * @param {string[]} movedSpace 현재까지 이동한 칸
    * @param {boolean} isSuccess 마지막 칸 성공 여부
    */
-  printMap(movedSpace, isSuccess) {
-    const { upRoad, downRoad } = parseUpAndDown(movedSpace, isSuccess);
+  printMap(game) {
+    const { upRoad, downRoad } = game.getRoadStates();
     Console.print(upRoad);
     Console.print(downRoad);
     Console.print("");
@@ -67,11 +28,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(movedSpace, isArrive, tryCount) {
+  printResult(game) {
     Console.print(OUTPUT_MESSAGE.RESULT);
-    OutputView.printMap(movedSpace, isArrive);
-    Console.print(OUTPUT_MESSAGE.GAME_SUCCESS_OR_NOT(isArrive));
-    Console.print(OUTPUT_MESSAGE.TOTAL_NUMBER_OF_TRY(tryCount));
+    OutputView.printMap(game);
+    Console.print(OUTPUT_MESSAGE.GAME_SUCCESS_OR_NOT(game.isArrive()));
+    Console.print(OUTPUT_MESSAGE.TOTAL_NUMBER_OF_TRY(game.getTryCount()));
     Console.close();
   },
 };

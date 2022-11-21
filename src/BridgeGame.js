@@ -1,3 +1,5 @@
+const { MAP, MOVING_SPACE } = require("./util/Constant");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -24,6 +26,40 @@ class BridgeGame {
 
   getMovedSpace() {
     return [...this.#movedSpace];
+  }
+
+  /**
+   * @returns {object} 윗길, 아랫길로 각각 파싱한 값을 반환
+   */
+  getRoadStates() {
+    return {
+      upRoad: this.#getRoadState(MOVING_SPACE.UP),
+      downRoad: this.#getRoadState(MOVING_SPACE.DOWN),
+    };
+  }
+
+  /**
+   * @param {string} road 윗길or아랫길 ("U" or "D")
+   * @returns {string} 해당 길의 기록을 정해진 형식에 맞게 반환 (ex: "[ O |   | X ]")
+   */
+  #getRoadState(road) {
+    return (
+      MAP.START +
+      this.#parseMovedSpaceToRoadLog(road).join(MAP.SEPARATOR) +
+      MAP.END
+    );
+  }
+
+  /**
+   * @param {string} road 윗길or아랫길 ("U" or "D")
+   * @returns {string[]} 해당 길의 기록을 반환 (ex: ["O", " ", "X"])
+   */
+  #parseMovedSpaceToRoadLog(road) {
+    return this.#movedSpace.map((space, index, arr) => {
+      if (space !== road) return MAP.EMPTY;
+      if (index === arr.length - 1 && !this.isSuccessMoved()) return MAP.FAIL;
+      return MAP.SUCCESS;
+    });
   }
 
   /**

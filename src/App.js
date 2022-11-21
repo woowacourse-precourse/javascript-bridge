@@ -22,8 +22,11 @@ class App {
     this.readBridgeSize();
   }
 
+  /**
+   * @param {number} size 다리의 길이
+   */
   gameStart(size) {
-    const bridge = makeBridge(parseInt(size, 10), generate);
+    const bridge = makeBridge(size, generate);
     this.#game = new BridgeGame(bridge);
 
     this.readMoving();
@@ -44,8 +47,7 @@ class App {
    * @param {number} judgement 판정 결과
    */
   executeByJudgement(judgement) {
-    if (judgement === JUDGEMENT.IS_ARRIVE)
-      printResult(this.#game.getMovedSpace(), true, this.#game.getTryCount());
+    if (judgement === JUDGEMENT.IS_ARRIVE) printResult(this.#game);
     else if (judgement === JUDGEMENT.IS_SUCCESS_MOVED) this.readMoving();
     else if (judgement === JUDGEMENT.IS_FAIL_MOVED) this.readGameCommand();
   }
@@ -69,7 +71,7 @@ class App {
   onReadBridgeSize(size) {
     validateReadBridgeSize(size);
 
-    this.gameStart(size);
+    this.gameStart(parseInt(size, 10));
   }
 
   /**
@@ -80,7 +82,7 @@ class App {
     validateReadMoving(movingSpace);
 
     this.#game.move(movingSpace);
-    printMap(this.#game.getMovedSpace(), this.#game.isSuccessMoved());
+    printMap(this.#game);
 
     this.executeByJudgement(this.judge());
   }
@@ -95,7 +97,7 @@ class App {
     if (retryOrQuit === RETRY_OR_QUIT.RETRY) {
       this.#game.retry(this);
     } else if (retryOrQuit === RETRY_OR_QUIT.QUIT) {
-      printResult(this.#game.getMovedSpace(), false, this.#game.getTryCount());
+      printResult(this.#game);
     }
   }
 }
