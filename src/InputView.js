@@ -9,10 +9,7 @@ const InputView = {
     readBridgeSize() {
         Console.readLine(MESSAGE.SIZE, (size) => {
             const isErrorBridgeSize = Validation.checkBridgeSizeInput(size);
-            if (isErrorBridgeSize) {
-                return this.readBridgeSize();
-            }
-            this.createBridgeGame(size);
+            isErrorBridgeSize ? this.readBridgeSize() : this.createBridgeGame(size);
         });
     },
 
@@ -24,10 +21,7 @@ const InputView = {
     readMoving(bridgeGame) {
         Console.readLine(MESSAGE.MOVE, (move) => {
             const isErrorMoving = Validation.checkMoveInput(move);
-            if (isErrorMoving) {
-                return this.readMoving(bridgeGame);
-            }
-            this.playMoving(bridgeGame, move);
+            isErrorMoving ? this.readMoving(bridgeGame) : this.playMoving(bridgeGame, move);
         });
     },
 
@@ -45,10 +39,7 @@ const InputView = {
     readGameCommand(bridgeGame) {
         Console.readLine(MESSAGE.RESTART, (answer) => {
             const isErrorGameCommand = Validation.checkGameCommandInput(answer);
-            if (isErrorGameCommand) {
-                return this.readGameCommand(bridgeGame);
-            }
-            this.playGameCommand(bridgeGame, answer);
+            isErrorGameCommand ? this.readGameCommand(bridgeGame) : this.playGameCommand(bridgeGame, answer);
         });
     },
 
