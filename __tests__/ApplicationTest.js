@@ -73,6 +73,15 @@ describe("다리 건너기 테스트", () => {
     expect(bridge).toEqual(["U", "D", "D", "U", "D"]);
   });
 
+  test("다리 생성 테스트3", () => {
+    const randomNumbers = [1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1];
+    const mockGenerator = randomNumbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, jest.fn());
+
+    const bridge = BridgeMaker.makeBridge(20, mockGenerator);
+    expect(bridge).toEqual(["U", "D", "D", "U", "D", "D", "D", "U", "U", "U", "D", "D", "U", "D", "D", "U", "U", "D", "U", "U"]);
+  });
 
   test("기능 테스트", () => {
     const logSpy = getLogSpy();
