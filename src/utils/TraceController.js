@@ -33,6 +33,10 @@ const TraceController = {
     const joined = trace.join();
     return joined.includes(TRACE_MARKS.INCORRECT);
   },
+
+  resetTrace(trace) {
+    return trace.map((el) => el.slice(0, el.length - 1));
+  },
 };
 
 module.exports = TraceController;

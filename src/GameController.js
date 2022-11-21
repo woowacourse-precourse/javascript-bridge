@@ -59,7 +59,7 @@ class GameController {
     if (isFailed) this.askRetry();
     else if (!isFailed) this.askForPath();
     const isOvered = this.#bridgeGame.checkOvered();
-    if (isOvered) this.printEnding();
+    if (isOvered && !isFailed) this.printEnding();
   }
 
   askRetry() {
@@ -81,7 +81,13 @@ class GameController {
     } else if (!this.#bridgeGame.checkRetry(command)) this.printEnding();
   }
 
-  printEnding() {}
+  printEnding() {
+    OutputView.printMessage(MESSAGES.RESULT);
+    const result = this.#bridgeGame.getResult();
+    const [isFailed, tryCount, trace] = result;
+    TraceController.printTrace(trace);
+    OutputView.printResult(isFailed, tryCount);
+  }
 }
 
 module.exports = GameController;
