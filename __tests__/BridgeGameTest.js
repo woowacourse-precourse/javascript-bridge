@@ -1,6 +1,6 @@
-const BridgeGame = require("../src/BridgeGame");
+const { BridgeGame } = require("../src/model");
 
-describe("BridgeGame 테스트", () => {
+describe("BridgeGame테스트", () => {
   test("다리 길이 잘못된 사이즈 입력시 에러 테스트", () => {
     expect(() => {
       const bridgeGame = new BridgeGame();

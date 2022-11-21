@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { curry, errorHandler } = require("./libs");
-const Validation = require("./Validation");
+const { curry, errorHandler } = require("../libs");
+const Validation = require("../model/Validation");
 const OutputView = require("./OutputView");
 
 /**

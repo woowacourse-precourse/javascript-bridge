@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const InputView = require("../src/InputView");
+const { InputView } = require("../src/view");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
