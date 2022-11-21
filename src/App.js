@@ -3,52 +3,59 @@ const OutputView = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
+const { FAIL_MESSAGE, SUCCESS_MESSAGE } = require('./constant/outputMessage');
 
 class App {
   constructor() {
     this.tryCount = 1;
     this.bridgeArray = [[], []];
+    this.bridgeGame = new BridgeGame();
   }
 
   play() {
     OutputView.printStart();
-    this.makeStart();
+    this.makeLength();
   }
 
-  makeStart() {
+  makeLength() {
     const bridgeLength = InputView.readBridgeSize();
-    const randomBridge = BridgeRandomNumberGenerator.generate();
-    const makeBridge = BridgeMaker.makeBridge(bridgeLength, randomBridge);
-    const userMoveInput = InputView.readMoving();
-    this.userMove(makeBridge, userMoveInput);
+    this.makeBridge(bridgeLength);
   }
 
-  userMove(madeBridge, moveInput) {
-    const bridgeGame = new BridgeGame();
-    let bridgeMove = bridgeGame.move(madeBridge, moveInput, this.tryCount);
-    OutputView.printMap(bridgeMove);
-    if (bridgeMove[0].includes('X') || bridgeMove[1].includes('X')) {
-      const userDecision = InputView.readGameCommand();
-      const reTryCheck = bridgeGame.retry(userDecision);
-      if (!reTryCheck) {
-        const RESULT_MESSAGE = '실패';
-        this.tryCount += 1;
-        OutputView.printResult(RESULT_MESSAGE, this.tryCount);
-      }
-      if (reTryCheck) {
-        bridgeMove = [[], []];
-        this.tryCount += 1;
-        this.userMove(madeBridge, moveInput, this.tryCount);
-      }
-    }
-    if (madeBridge.length === bridgeMove.length) {
-      const RESULT_MESSAGE = '성공';
-      this.tryCount += 1;
-      OutputView.printResult(RESULT_MESSAGE, this.tryCount);
-    }
+  makeBridge(length) {
+    const randomBridge = BridgeRandomNumberGenerator.generate();
+    const makeBridge = BridgeMaker.makeBridge(length, randomBridge);
+    this.userMove(length, makeBridge);
+  }
 
-    this.tryCount =+ 1;
-    this.userMove(madeBridge, moveInput, this.tryCount);
+  userMove(length, Bridges) {
+    let resultBridge = [[], []];
+    const userMoveInput = InputView.readMoving();
+    for (let i = 0; i < length; i++) {
+      resultBridge = this.bridgeGame.move(userMoveInput, Bridges, this.bridgeArray);
+      OutputView.printMap(resultBridge);
+      if (this.failCheck(resultBridge)) return this.restartCheck(length, Bridges, resultBridge);
+    }
+    OutputView.printResult(SUCCESS_MESSAGE, this.tryCount, resultBridge);
+  }
+
+  failCheck(resultBridges) {
+    if (resultBridges[0].includes('X') || resultBridges[1].includes('X')) return true;
+
+    return false;
+  }
+
+  restartCheck(length, Bridges, resultBridge) {
+    const userDecision = InputView.readGameCommand();
+    const userResult = this.bridgeGame.retry(userDecision);
+    if (!userResult) {
+      OutputView.printResult(FAIL_MESSAGE, this.tryCount, resultBridge);
+    }
+    if (userResult) {
+      this.tryCount += 1;
+      this.bridgeArray = [[], []];
+      this.userMove(length, Bridges);
+    }
   }
 }
 

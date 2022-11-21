@@ -1,3 +1,5 @@
+const OutputView = require("./OutputView");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -7,8 +9,8 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(madeBridge, moveInput, count) {
-    let moveArray = [[], []];
+  move(moveInput, madeBridge, moveArray) {
+    let count = moveArray[0].length;
     if (moveInput === 'U') {
       this.upPush(moveInput, madeBridge[count], moveArray);
     }
