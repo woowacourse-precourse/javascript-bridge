@@ -10,7 +10,7 @@ const OutputView = {
    */
   printMap([upBridge, downBridge]) {
     Console.print(`[${upBridge.join(" | ")} ]`);
-    Conole.print(` [${downBridge.join(" | ")}]`);
+    Console.print(`[${downBridge.join(" | ")} ]`);
   },
 
   /**
