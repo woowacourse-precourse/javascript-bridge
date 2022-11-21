@@ -4,15 +4,9 @@ const OutputView = require("./OutputView");
 const ValidCheck = require("./ValidCheck/ValidCheck");
 const BridgeGameController = require("./BridgeGameController");
 
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
 const InputView = {
   bridgeGameControl: new BridgeGameController(),
 
-  /**
-   * 다리의 길이를 입력받는다.
-   */
   readBridgeSize() {
     Console.readLine(PROMPT.READ_SIZE, this.readBridgeSizeCallback.bind(this));
   },
@@ -20,18 +14,15 @@ const InputView = {
   readBridgeSizeCallback(size) {
     try {
       ValidCheck.sizeInput(size);
-      this.bridgeGameControl.makeBridgeGame(size); // 다리 만들기
-      this.readMoving(); // 무빙 입력받기
+      this.bridgeGameControl.makeBridgeGame(size);
+      this.readMoving();
     } 
     catch (error) {
-      OutputView.printErrorMessage(ERROR.SIZE_ERROR); // 위 과정에서 에러 발생시 에러 출력
-      this.readBridgeSize(); // 다시 사이즈 입력받기
+      OutputView.printErrorMessage(ERROR.SIZE_ERROR);
+      this.readBridgeSize();
     }
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
   readMoving() {
     Console.readLine(PROMPT.READ_MOVING, this.readMovingCallback.bind(this));
   },
@@ -39,7 +30,7 @@ const InputView = {
   readMovingCallback(moving) {
     try {
       ValidCheck.movingInput(moving);
-      const isWrong = this.bridgeGameControl.manageMoving(moving); // moving 값으로 출력까지 완료
+      const isWrong = this.bridgeGameControl.manageMoving(moving);
       isWrong ? this.isGameEnd() : this.readGameCommand();
     } catch (error) {
       OutputView.printErrorMessage(ERROR.MOVING_ERROR);
@@ -52,9 +43,6 @@ const InputView = {
     isGameEnd ? this.bridgeGameControl.gameOver(isGameEnd) : this.readMoving();
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand() {
     Console.readLine(PROMPT.READ_COMMAND, this.readGameCommandCallback.bind(this));
   },
