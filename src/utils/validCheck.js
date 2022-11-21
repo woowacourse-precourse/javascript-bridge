@@ -9,11 +9,11 @@ const validCheck = {
     return false;
   },
   moveInput: (input) => {
-    if (input === 'U' || input === 'D') return true;
+    if (input.toUpperCase() === 'U' || input.toUpperCase() === 'D') return true;
     return false;
   },
   quitInput: (input) => {
-    if (input === 'R' || input === 'Q') return true;
+    if (input.toUpperCase() === 'R' || input.toUpperCase() === 'Q') return true;
     return false;
   },
 };

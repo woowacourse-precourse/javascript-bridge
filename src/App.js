@@ -49,9 +49,9 @@ class App {
   moveLocation() {
     InputView.readMoving((input) => {
       try {
-        if (!validCheck.moveInput(input))
+        if (!validCheck.moveInput(input.toUpperCase()))
           throw new Error(ERROR_MESSAGE.INVALID_MOVE);
-        const move = this.#myBridge.move(input);
+        const move = this.#myBridge.move(input.toUpperCase());
         if (!move) return this.moveNotCorrect();
         return this.moveCorrect();
       } catch (err) {
