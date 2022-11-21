@@ -21,10 +21,11 @@ const OutputView = {
 
     Console.print(map);
 
-    lastResult === 'X' && readGameCommand(map, this.printResult.bind(this));
-    lastResult === 'O' && originBridgeSize !== currentBridgeSize
-      ? readMoving()
-      : this.printResult(map, true, tryCount);
+    if (lastResult === 'X') readGameCommand(map, this.printResult.bind(this));
+    if (lastResult === 'O' && originBridgeSize !== currentBridgeSize)
+      readMoving();
+    if (lastResult === 'O' && originBridgeSize === currentBridgeSize)
+      this.printResult(map, true, tryCount);
   },
 
   /**
