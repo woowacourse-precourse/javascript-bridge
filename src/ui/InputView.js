@@ -10,8 +10,13 @@ const InputView = {
    */
   readBridgeSize(nextStep) {
     Console.readLine(CMM_INPUT_SIZE, (input) => {
-      const bridgeSize = validateBridgeSize(input);
-      nextStep(bridgeSize);
+      try {
+        const bridgeSize = validateBridgeSize(input);
+        nextStep(bridgeSize);
+      } catch (e) {
+        Console.print(e);
+        this.readBridgeSize(nextStep);
+      }
     });
   },
   /**
@@ -19,8 +24,13 @@ const InputView = {
    */
   readMoving(nextStep) {
     Console.readLine(CMM_INPUT_MOVING, (input) => {
-      validateMoving(input);
-      nextStep(input);
+      try {
+        validateMoving(input);
+        nextStep(input);
+      } catch (e) {
+        Console.print(e);
+        this.readMoving(nextStep);
+      }
     });
   },
 
@@ -29,8 +39,13 @@ const InputView = {
    */
   readGameCommand(nextStep) {
     Console.readLine(CMM_INPUT_REPLAY, (input) => {
-      validateReplay(input);
-      nextStep(input);
+      try {
+        validateReplay(input);
+        nextStep(input);
+      } catch (e) {
+        Console.print(e);
+        this.readGameCommand(nextStep);
+      }
     });
   },
 };

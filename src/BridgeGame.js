@@ -1,6 +1,7 @@
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { RETRY, UP, STATUS_SUCCESS, STATUS_FAIL, STATUS_FINISH } = require('./constant/constants');
+const InputView = require('./ui/InputView');
 const { readMoving, readBridgeSize, readGameCommand } = require('./ui/InputView');
 const OutputView = require('./ui/OutputView');
 
@@ -29,12 +30,12 @@ class BridgeGame {
 
   start() {
     OutputView.printStart();
-    readBridgeSize(this.bridgeSetting);
+    InputView.readBridgeSize(this.bridgeSetting);
   }
 
   bridgeSetting = (input) => {
-    this.#bridgeString = makeBridge(input, generate);
-    readMoving(this.check);
+    this.#bridgeString = makeBridge(input, generate).join('');
+    InputView.readMoving(this.check);
   };
 
   check = (input) => {
@@ -56,7 +57,7 @@ class BridgeGame {
     switch (status) {
       case STATUS_SUCCESS:
         this.#round += 1;
-        readMoving(this.check);
+        InputView.readMoving(this.check);
         break;
       case STATUS_FAIL:
         this.askRetry();
@@ -69,7 +70,7 @@ class BridgeGame {
   };
 
   askRetry = () => {
-    readGameCommand((input) => {
+    InputView.readGameCommand((input) => {
       if (input === RETRY) {
         this.retry();
       } else {
@@ -115,7 +116,7 @@ class BridgeGame {
     this.#try += 1;
     this.#userInputString = '';
     this.#isAnswerList = [];
-    readMoving(this.check);
+    InputView.readMoving(this.check);
 
     // this.#upperBridge = [];
     // this.#lowerBridge = [];
