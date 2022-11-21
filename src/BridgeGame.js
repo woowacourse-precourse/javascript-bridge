@@ -55,6 +55,7 @@ class BridgeGame {
   retry() {}
   play(size) {
     this.#bridgeBoard.makeBoard(size);
+    InputView.readMoving(this);
   }
 }
 
