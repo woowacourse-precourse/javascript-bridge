@@ -8,13 +8,25 @@ const MOVE = {
   DOWN: 'D',
 };
 
+const MOVE_PICK = {
+  RIGHT: 'O',
+  WRONG: 'X',
+};
+
 const PLAY = {
   RESTART: 'R',
   QUIT: 'Q',
 };
 
+const RESULT = {
+  WIN: '성공',
+  FAIL: '실패',
+};
+
 module.exports = {
   BRIDGE_SIZE,
   MOVE,
+  MOVE_PICK,
   PLAY,
+  RESULT,
 };
