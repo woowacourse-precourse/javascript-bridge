@@ -2,15 +2,16 @@
 class BridgeGame {
   #bridge;
   #result;
-  #attempts;
 
   constructor(bridge) {
     this.#bridge = bridge;
-    this.#result = new Map([
-      ['U', []],
-      ['D', []],
-    ]);
-    this.#attempts = 1;
+    this.#result = {
+      map: new Map([
+        ['U', []],
+        ['D', []],
+      ]),
+      attempts: 1,
+    }
   }
 
   move() {
@@ -18,11 +19,11 @@ class BridgeGame {
   }
 
   retry() {
-    this.#result = new Map([
+    this.#result.map = new Map([
       ['U', []],
       ['D', []],
     ]);
-    this.#attempts += 1;
+    this.#result.attempts += 1;
     this.#bridge.initializeCurrentDirection();
   }
 
@@ -40,20 +41,15 @@ class BridgeGame {
     return this.#result;
   }
 
-  getAttempts() {
-    return this.#attempts;
-  }
-
   updateResult(direction) {
-    for (let dir of this.#result.keys()) {
-      if (dir === direction) continue;
-      this.#result.get(dir).push(' ');
+    for (let dir of this.#result.map.keys()) {
+      if (dir !== direction) this.#result.map.get(dir).push(' ');
     }
     if (this.isAnswer(direction)) {
-      this.#result.get(direction).push('O');
+      this.#result.map.get(direction).push('O');
       return;
     }
-    this.#result.get(direction).push('X');
+    this.#result.map.get(direction).push('X');
   }
 }
 
