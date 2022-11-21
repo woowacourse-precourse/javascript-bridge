@@ -17,12 +17,15 @@ describe('예외처리 테스트', () => {
     }).toThrow('[ERROR]');
   });
 
-  test.each(['u', 'ud', 'D2'])(
-    '다리 사이즈 숫자가 아닌 입력값 테스트',
-    (input) => {
-      expect(() => {
-        InputView.validateMove(input);
-      }).toThrow('[ERROR]');
-    }
-  );
+  test.each(['u', 'ud', 'D2'])('이동할 칸 예외처리 테스트', (input) => {
+    expect(() => {
+      InputView.validateMove(input);
+    }).toThrow('[ERROR]');
+  });
+
+  test.each(['r', 'qr', 'Q2'])('재시작 여부 예외처리 테스트', (input) => {
+    expect(() => {
+      InputView.validateMove(input);
+    }).toThrow('[ERROR]');
+  });
 });
