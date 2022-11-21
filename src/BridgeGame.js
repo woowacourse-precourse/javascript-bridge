@@ -47,8 +47,14 @@ class BridgeGame {
     if(moving === MOVING.DOWNSIDE_STRING) this.#bridgeInformation.upside.splice(step, 1, MOVING.BLANK);
     this.#userInformation.upside = this.#bridgeInformation.upside.slice(0, step + 1);
     this.#userInformation.downside = this.#bridgeInformation.downside.slice(0, step + 1);
- 
+    this.getRecordSteps();
     this.#userInformation.track.push(moving);
+  }
+
+  getRecordSteps() {
+    let recordAllSteps = [];
+    recordAllSteps.push(this.#userInformation.upside.join(MOVING.JUMP),this.#userInformation.downside.join(MOVING.JUMP));
+    return recordAllSteps;
   }
 
   /**
