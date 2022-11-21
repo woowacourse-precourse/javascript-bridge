@@ -1,5 +1,6 @@
 # 목차
 
+```
 📦src
 ┣ 📂Constants
 ┃ ┣ 📜BridgeStatus.js
@@ -18,6 +19,7 @@
 ┣ 📜CheckPlayerStatus.js
 ┣ 📜OutputMaker.js
 ┗ 📜Validation.js
+```
 
 # 기능 목록
 
