@@ -135,6 +135,16 @@ class App {
 
     this.#input.readMoving(message, callbackFn);
   }
+
+  readBridgeSize(nextFunc) {
+    const message = this.#output.message.LENGTH;
+    const callbackFn = (userInput) => {
+      this.generateBridge(userInput);
+      nextFunc();
+    };
+
+    this.#input.readBridgeSize(message, callbackFn);
+  }
 }
 
 module.exports = App;
