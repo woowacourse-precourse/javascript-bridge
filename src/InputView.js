@@ -15,10 +15,10 @@ const InputView = {
     });
   },
 
-  readGameCommand(callback) {
+  readGameCommand(handleGameCommand) {
     Console.readLine(InfoMessages.RESTART_OR_QUIT, (command) => {
       Validator.checkCommandInput(command);
-      callback(command);
+      handleGameCommand.call(this, command);
     });
   },
 };
