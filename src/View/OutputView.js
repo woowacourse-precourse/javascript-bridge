@@ -17,6 +17,10 @@ const OutputView = {
     Console.print(`${SYSTEM_MESSAGE.TRY_COUNT}${playCount}`);
     Console.close();
   },
+
+  printError(message) {
+    Console.print(message);
+  },
 };
 
 module.exports = OutputView;

@@ -2,8 +2,10 @@ const InputView = require('../View/InputView');
 const OutputView = require('../View/OutputView');
 const BridgeGame = require('../Model/BridgeGame');
 const Move = require('../Model/Move');
-const { REPLAY } = require('../../constants/command');
 const Bridge = require('../Model/Bridge');
+const Exception = require('../components/Exception');
+const Path = require('../Model/Path');
+const { REPLAY } = require('../../constants/command');
 
 class GameController {
   #bridgeGame;
@@ -12,18 +14,27 @@ class GameController {
     this.#bridgeGame = new BridgeGame();
   }
 
-  play() {
+  start() {
     OutputView.printStart();
+    this.readSize();
+  }
+
+  readSize() {
     InputView.readBridgeSize(this.setSize.bind(this));
   }
 
   setSize(size) {
-    Bridge.setSize(size);
-    this.makeBridge();
+    if (Exception.bridgeSize(size)) {
+      Bridge.setSize(size);
+      this.makeBridge();
+    } else {
+      this.readSize();
+    }
   }
 
   makeBridge() {
-    this.#bridgeGame.makeBridge();
+    Path.makePath();
+    BridgeGame.init();
     this.readDirection();
   }
 
@@ -32,8 +43,12 @@ class GameController {
   }
 
   setDirection(direction) {
-    BridgeGame.move(direction);
-    this.showBridge();
+    if (Exception.moveInput(direction)) {
+      BridgeGame.move(direction);
+      this.showBridge();
+    } else {
+      this.readDirection();
+    }
   }
 
   showBridge() {
@@ -44,7 +59,7 @@ class GameController {
   }
 
   checkPlay() {
-    if (BridgeGame.canMove()) {
+    if (Move.canMove()) {
       this.readDirection();
     } else {
       InputView.readGameCommand(this.setGameCommand.bind(this));
@@ -63,12 +78,9 @@ class GameController {
   end() {
     const bridgeMap = BridgeGame.mapBridge();
     const playCount = this.#bridgeGame.getPlayCount();
-    const isSuccess = Move.isSuccess();
-    OutputView.printResult(bridgeMap, playCount, isSuccess);
+    const sucessMessage = Move.isSuccess();
+    OutputView.printResult(bridgeMap, playCount, sucessMessage);
   }
 }
-
-const gc = new GameController();
-gc.play();
 
 module.exports = GameController;

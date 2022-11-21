@@ -9,37 +9,27 @@ class BridgeGame {
     this.#playCount = NUMBER.ONE;
   }
 
+  getPlayCount() {
+    return this.#playCount;
+  }
+
+  static init() {
+    Bridge.init();
+    Move.init();
+  }
+
   static mapBridge() {
     const moveCount = Move.showCount();
     return Bridge.makeValidForm(moveCount);
-  }
-
-  static canMove() {
-    return Move.canMove();
   }
 
   static move(direction) {
     Move.byDirection(direction);
   }
 
-  getPlayCount() {
-    return this.#playCount;
-  }
-
-  makeBridge() {
-    Bridge.makePath();
-    this.init();
-    // console.log(Bridge.getPath());
-  }
-
-  init() {
-    Bridge.init();
-    Move.init();
-  }
-
   retry() {
     this.#playCount += NUMBER.ONE;
-    this.init();
+    BridgeGame.init();
   }
 }
 

@@ -3,6 +3,7 @@ const NUMBER = require('../../constants/number');
 const STRING = require('../../constants/string');
 const SYSTEM_MESSAGE = require('../../constants/system message');
 const Bridge = require('./Bridge');
+const Path = require('./Path');
 
 class Move {
   static #moveCount = NUMBER.ZERO;
@@ -14,7 +15,7 @@ class Move {
     this.#currentMove = STRING.X;
   }
 
-  static addCount() {
+  static countMove() {
     this.#moveCount += NUMBER.ONE;
   }
 
@@ -22,7 +23,7 @@ class Move {
     return this.#moveCount;
   }
 
-  static showCurrent() {
+  static showCurrentMoveResult() {
     return this.#currentMove;
   }
 
@@ -31,17 +32,17 @@ class Move {
   }
 
   static canMove() {
-    if (this.showCurrent() !== STRING.O) {
+    if (this.showCurrentMoveResult() !== STRING.O) {
       return false;
     }
-    if (this.showCount() === Bridge.getPath().length) {
+    if (this.showCount() === Path.getPath().length) {
       return false;
     }
     return true;
   }
 
   static isSuccess() {
-    return this.showCurrent() === STRING.O
+    return this.showCurrentMoveResult() === STRING.O
       ? SYSTEM_MESSAGE.SUCCESS
       : SYSTEM_MESSAGE.FAIL;
   }
@@ -61,7 +62,7 @@ class Move {
   }
 
   static calculateMove(currentPosition, direction) {
-    this.addCount();
+    this.countMove();
     return currentPosition === COMMAND.UP
       ? this.moveUp(direction)
       : this.moveDown(direction);
@@ -69,7 +70,7 @@ class Move {
 
   static byDirection(direction) {
     const countIndex = this.showCount();
-    const currentPosition = Bridge.getPathPositionOf(countIndex);
+    const currentPosition = Path.getPathPositionOf(countIndex);
     const moveResult = this.calculateMove(currentPosition, direction);
 
     Bridge.setMoveResult(direction, moveResult, countIndex);
