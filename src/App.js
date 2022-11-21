@@ -58,7 +58,8 @@ class App {
 
           return;
         case "R":
-          this.resetGame(bridge);
+          // this.resetGame(bridge);
+          bridge.retry();
           this.progressGame(bridge, size);
       }
     });
