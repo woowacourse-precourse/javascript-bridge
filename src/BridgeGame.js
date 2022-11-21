@@ -1,6 +1,6 @@
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
-const { STEP, RESULT } = require('../Utils/constants');
+const { STEP, RESULT } = require('./Utils/constants');
 
 class BridgeGame {
   #bridge;

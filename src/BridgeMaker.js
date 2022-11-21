@@ -1,4 +1,4 @@
-const { STEP } = require('../Utils/constants');
+const { STEP } = require('./Utils/constants');
 
 const BridgeMaker = {
   
