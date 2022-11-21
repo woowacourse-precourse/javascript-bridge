@@ -17,9 +17,8 @@ class BridgeGame extends Bridge{
   checkAnswer(moving) {
     const currentLocation = this.movingState.currentLocation
     const correct = this.bridge[currentLocation];
-    const answer = moving === 'U' ? 1 : 0;
 
-    return correct === answer ? true : false
+    return correct === moving ? true : false
   } 
 
   /**
