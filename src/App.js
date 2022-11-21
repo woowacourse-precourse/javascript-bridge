@@ -21,6 +21,15 @@ class App {
       this.#bridgeGame.isClear(stats => {
         if (stats) {
           OutputView.printResult(this.#bridgeGame.mapResult(stats))
+        }
+        else if (stats === false) {
+          InputView.readGameCommand(callback => {
+            if (callback === 'R') {
+              this.#bridgeGame.retry()
+              this.getUserMove()
+            }
+            if (callback === 'Q') OutputView.printResult(this.#bridgeGame.mapResult(stats))
+          })
         } else {
           this.getUserMove()
         }
