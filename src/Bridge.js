@@ -6,10 +6,13 @@ class Bridge {
   #bridge;
   #step;
   #size;
+  #tries;
+
   constructor() {
     this.map = new Map();
     this.#step = 0;
     this.#size;
+    this.#tries = 0;
   }
 
   make(size) {
@@ -24,6 +27,10 @@ class Bridge {
 
   validate(size) {}
 
+  isBridgeLeft() {
+    return this.#step + 1 < this.#size;
+  }
+
   askUserCanGo(userPosition) {
     if (this.#bridge[this.#step] === userPosition) return true;
     return false;
@@ -32,6 +39,18 @@ class Bridge {
   drawMap(go) {
     this.map.draw(go, this.#step);
     this.#step += 1;
+  }
+
+  drawResultMap(go) {
+    this.map.drawResult(go);
+  }
+
+  resetStep() {
+    this.#step = 0;
+  }
+
+  addRetrys() {
+    this.#tries += 1;
   }
 }
 

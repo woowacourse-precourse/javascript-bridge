@@ -40,6 +40,9 @@ class Map {
     }
     OutputView.printMap(nowMap);
   }
+  drawResult(go) {
+    OutputView.printResult(go);
+  }
 }
 
 module.exports = Map;
