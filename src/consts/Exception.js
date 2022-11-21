@@ -7,6 +7,7 @@ const MESSAGE = Object.freeze({
   MOVING: {
     CHARACTER: `이동은 ${GAME.UP} 또는 ${GAME.DOWN}만 가능합니다.`,
   },
+  RETRY: `재시작 입력은 ${GAME.RESTART} 또는 ${GAME.QUIT}이어야 합니다.`,
 });
 
 module.exports = MESSAGE;
