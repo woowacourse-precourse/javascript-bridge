@@ -2,7 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const { SIZE, MOVING, COMMAND } = require("./constants/values");
 const { ERROR } = require("./constants/messages");
 
-const Check = {
+const ErrorChecking = {
   hasCorrectSize(size) {
     const number = this.hasNumber(size);
     const range = this.hasInRange(size);
@@ -13,9 +13,7 @@ const Check = {
   hasNumber(size) {
     const notNumber = isNaN(size);
     try {
-      if (notNumber) {
-        throw new Error(ERROR.NUMBER);
-      }
+      if (notNumber) throw new Error(ERROR.NUMBER);
     } catch (error) {
       Console.print(error.message);
     }
@@ -25,9 +23,7 @@ const Check = {
   hasInRange(size) {
     const notInRange = size < SIZE.MINIMUM || size > SIZE.MAXIMUM;
     try {
-      if (notInRange) {
-        throw new Error(ERROR.RANGE);
-      }
+      if (notInRange) throw new Error(ERROR.RANGE);
     } catch (error) {
       Console.print(error.message);
     }
@@ -37,9 +33,7 @@ const Check = {
   hasMoving(moving) {
     const notMoving = moving !== MOVING.UPPER && moving !== MOVING.LOWER;
     try {
-      if (notMoving) {
-        throw new Error(ERROR.MOVING);
-      }
+      if (notMoving) throw new Error(ERROR.MOVING);
     } catch (error) {
       Console.print(error.message);
     }
@@ -49,9 +43,7 @@ const Check = {
   hasCommand(command) {
     const notCommand = command !== COMMAND.RESTART && command !== COMMAND.END;
     try {
-      if (notCommand) {
-        throw new Error(ERROR.COMMAND);
-      }
+      if (notCommand) throw new Error(ERROR.COMMAND);
     } catch (error) {
       Console.print(error.message);
     }
@@ -59,4 +51,4 @@ const Check = {
   },
 };
 
-module.exports = Check;
+module.exports = ErrorChecking;
