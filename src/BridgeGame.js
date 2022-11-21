@@ -8,12 +8,17 @@ class BridgeGame {
   #count
   #map
 
-  constructor(bridge) {
-    this.#bridge = bridge;
+  constructor() {
+    this.#bridge = [];
     this.#currentIndex = 0;
     this.#count = 1;
     this.#map = { 1: [], 0: [] };
   }
+
+  setBridge(bridge) {
+    this.#bridge = bridge;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
