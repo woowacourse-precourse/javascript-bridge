@@ -1,9 +1,10 @@
-const BridgeRepository = require('../repository/BridgeRepository');
-const BridgeFinalResult = require('./domain/BridgeFinalResult');
 const BridgeStart = require('./domain/BridgeStart');
 const BridgeRestart = require('./domain/BridgeRestart');
-const UpDownKey = require('./domain/UpDownKey');
 const BridgeUserMap = require('./domain/BridgeUserMap');
+const BridgeDirection = require('./domain/UpDownKey');
+const BridgeFinalResult = require('./domain/BridgeFinalResult');
+
+const BridgeRepository = require('../repository/BridgeRepository');
 
 class BridgeService {
   #bridgeRepository;
@@ -18,32 +19,16 @@ class BridgeService {
       repo: this.#bridgeRepository
     });
 
-    bridgeStart.doAction();
+    bridgeStart.store();
   }
 
   recordMove(command) {
-    const upDownKey = new UpDownKey({
+    const bridgeDirection = new BridgeDirection({
       input: command,
       repo: this.#bridgeRepository
     });
 
-    upDownKey.doAction();
-  }
-
-  getMoveResult() {
-    const bridgeCheck = new BridgeUserMap({
-      repo: this.#bridgeRepository
-    });
-
-    return bridgeCheck.getOutput();
-  }
-
-  getGameResult() {
-    const bridgeCheck = new BridgeFinalResult({
-      repo: this.#bridgeRepository
-    });
-
-    return bridgeCheck.getOutput();
+    bridgeDirection.store();
   }
 
   restart() {
@@ -51,7 +36,23 @@ class BridgeService {
       repo: this.#bridgeRepository
     });
 
-    bridgeRestart.doAction();
+    bridgeRestart.store();
+  }
+
+  getMoveResult() {
+    const bridgeUserMap = new BridgeUserMap({
+      repo: this.#bridgeRepository
+    });
+
+    return bridgeUserMap.getOutput();
+  }
+
+  getGameResult() {
+    const bridgeFinalResult = new BridgeFinalResult({
+      repo: this.#bridgeRepository
+    });
+
+    return bridgeFinalResult.getOutput();
   }
 }
 
