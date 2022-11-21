@@ -70,7 +70,7 @@ class BridgeGame {
    */
   move = (command) => {
     // TODO: command확인
-    this.bridgeValidator.isValidMoveCommand(command);
+    this.bridgeValidator.isValidCommand('move', command);
     this.setMovedData(command);
 
     if (!this.detectIsMovable(command) || this.detectIsGameClear()) {
@@ -88,6 +88,8 @@ class BridgeGame {
   };
 
   confirmRetry = (command) => {
+    this.bridgeValidator.isValidCommand('retry', command);
+
     const run = {
       R: this.retry,
       Q: this.end,
