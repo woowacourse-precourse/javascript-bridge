@@ -1,6 +1,7 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const MovementStatus = require("./model/MovementStatus");
+const GameStatus = require("./model/GameStatus");
 const ValidationCheck = require("./VaildationCheck");
 
 /**
@@ -9,7 +10,7 @@ const ValidationCheck = require("./VaildationCheck");
 class BridgeGame {
   #bridge;
   #movementStatus;
-  #gameState;
+  #gameStatus;
 
   constructor(size) {
     ValidationCheck.isNumberIntheRange([3, 20], size);
@@ -18,7 +19,7 @@ class BridgeGame {
       BridgeRandomNumberGenerator.generate
     );
     this.#movementStatus = new MovementStatus();
-    this.#gameState = true;
+    this.#gameStatus = new GameStatus();
   }
 
   /**
@@ -27,17 +28,16 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moveInput) {
-    //이동 체크
-    const currentRound = this.currentStatus.round;
-    const { upperResult, lowerResult, gameState } = this.roundCheck(
+    const movementStatus = this.movementStatus;
+    const gameStatus = this.gameStatus;
+    const { upperResult, lowerResult, roundCheckResult } = this.roundCheck(
       moveInput,
-      currentRound
+      movementStatus.round
     );
-    //이동 상태 변경
+    const success = movementStatus.round === this.#bridge.length - 1;
     this.#movementStatusUpdate({ upperResult, lowerResult });
-    this.#gameState = gameState;
-    //현재 상태 리턴,
-    return { status: this.currentStatus, gameState };
+    this.#gameStatusUpdate({ playing: roundCheckResult, success });
+    return { movementStatus, gameStatus };
   }
 
   /**
@@ -45,27 +45,45 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(retryInput) {
+    ValidationCheck.isStringIntheList(["Q", "R"], retryInput);
+    const { trial } = this.gameStatus;
+    if (retryInput === "R") {
+      this.#moventStatusReset();
+      this.#gameStatusUpdate({ playing: false, trial: trial + 1 });
+      return true;
+    }
+    return false;
+  }
 
   roundCheck(moveInput, round) {
     const bridge = [...this.#bridge];
     const upperResult = moveInput === "U" ? moveInput === bridge[round] : null;
     const lowerResult = moveInput === "D" ? moveInput === bridge[round] : null;
-    const gameState = moveInput === bridge[round] && round < bridge.length - 1;
-    return { upperResult, lowerResult, gameState };
+    const roundCheckResult =
+      moveInput === bridge[round] && round < bridge.length - 1;
+    return { upperResult, lowerResult, roundCheckResult };
   }
-  #movementStatusUpdate(result) {
-    const { upperResult, lowerResult } = result;
+  #movementStatusUpdate(movementResult) {
+    const { upperResult, lowerResult } = movementResult;
     this.#movementStatus.upperSideStatus.push(upperResult);
     this.#movementStatus.lowerSideStatus.push(lowerResult);
     this.#movementStatus.round++;
   }
-
-  get currentStatus() {
+  #moventStatusReset() {
+    this.#movementStatus = new MovementStatus();
+  }
+  #gameStatusUpdate(gameresult) {
+    const { success, playing, trial } = gameresult;
+    if (success !== undefined) this.#gameStatus.success = success;
+    if (playing !== undefined) this.#gameStatus.playing = playing;
+    if (trial !== undefined) this.#gameStatus.trial = trial;
+  }
+  get movementStatus() {
     return { ...this.#movementStatus };
   }
-  get gameState() {
-    return this.#gameState;
+  get gameStatus() {
+    return { ...this.#gameStatus };
   }
 }
 
