@@ -18,8 +18,8 @@ const OutputView = {
   },
 
   /**
-   * @param {number[]} bridge
-   * @param {number[]} moves
+   * @param {string[]} bridge
+   * @param {string[]} moves
    * @param {boolean=} last - 게임 최종 여부
    * @returns {boolean} success - 게임 성공 / 실패 여부
    */
@@ -37,15 +37,15 @@ const OutputView = {
   },
 
   /**
-   * @param {number[]} bridge
-   * @param {number[]} moves
+   * @param {string[]} bridge
+   * @param {string[]} moves
    * @returns {string[][]}
    */
   drawMap(bridge, moves) {
     const [upside, downside] = this.initializeMap(moves.length)
 
     moves.forEach((move, index) => {
-      const side = move === step.D ? downside : upside
+      const side = move === step[0] ? downside : upside
 
       side[index] = move === bridge[index] ? this.map.RIGHT : this.map.WRONG
     })

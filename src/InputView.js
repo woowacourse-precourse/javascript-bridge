@@ -63,7 +63,7 @@ const InputView = {
 
       this.validateMovement(movement)
 
-      const gameStatus = getNextGameStatus(step[movement])
+      const gameStatus = getNextGameStatus(movement)
       setNextGameStatus(gameStatus)
     })
   },
@@ -72,8 +72,8 @@ const InputView = {
    * @param {string} movement
    */
   validateMovement(movement) {
-    const movementKeys = Object.keys(step)
-    const isInValid = !movementKeys.includes(movement)
+    const movementValues = Object.values(step)
+    const isInValid = !movementValues.includes(movement)
 
     if (isInValid) {
       throw new Error(this.error.MOVEMENT)

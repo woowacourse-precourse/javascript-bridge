@@ -6,8 +6,8 @@ const status = {
 }
 
 const step = {
-  D: 0, // Down
-  U: 1, // Up
+  0: 'D', // Down
+  1: 'U', // Up
 }
 
 const option = {
