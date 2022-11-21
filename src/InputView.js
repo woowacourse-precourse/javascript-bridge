@@ -1,5 +1,9 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { GAME_MESSAGES } = require("./Constants");
+const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
+const Validate = require("./Validate");
+
 const InputView = {
   size: "",
   gameClient: "",
@@ -31,7 +35,25 @@ const InputView = {
     this.readBridgeSize();
   },
 
-  readMoving() {},
+  readMoving() {
+    Console.readLine(GAME_MESSAGES.ASK_TO_MOVE_BLOCKS, (direction) => {
+      try {
+        Validate.checkDirectionInputType(direction);
+        this.insertMoving(direction);
+      } catch (error) {
+        this.printInputDirectionError(error);
+      }
+    });
+  },
+
+  printInputDirectionError(error) {
+    OutputView.printError(error);
+    this.readMoving();
+  },
+
+  insertMoving(direction) {
+    this.gameClient.move(direction);
+  },
 
   readGameCommand() {},
 };
