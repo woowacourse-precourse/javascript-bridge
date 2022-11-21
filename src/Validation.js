@@ -2,11 +2,16 @@ const { Console } = require("@woowacourse/mission-utils");
 
 const Validation = {
     checkBridgeSize(size) {
-        let isBridgeSizeValid = true;
-        isBridgeSizeValid = this.isBridgeSizeNum(size);
-        isBridgeSizeValid = this.isBridgeSizeValue(size);
-        isBridgeSizeValid = this.isBridgeSizeInt(size);
-        return isBridgeSizeValid;
+        if(!this.isBridgeSizeNum(size)) {
+            return false;
+        }
+        if(!this.isBridgeSizeValue(size)) {
+            return false;
+        }
+        if(!this.isBridgeSizeInt(size)) {
+            return false;
+        }
+        return true;
     },
 
     isBridgeSizeNum(size) {
