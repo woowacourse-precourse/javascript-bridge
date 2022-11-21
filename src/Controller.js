@@ -37,5 +37,14 @@ class Controller {
     };
     InputView.readMoving(callback, 0, this.model);
   }
+
+  inputGameCommand() {
+    const callback = (input) => {
+      if (input === 'Q') return OutputView.printResult('실패', this.model);
+      BridgeGame.retry(this.model);
+      return this.inputMoving();
+    };
+    InputView.readGameCommand(callback);
+  }
 }
 module.exports = Controller;
