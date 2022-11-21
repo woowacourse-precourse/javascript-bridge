@@ -30,18 +30,18 @@
 - [x] 이동결과를 출력한다. - OutputView#printMap()
   - 이동하고 난 결과를 출력하기 위해 다리 모양을 만든다. - OutputView#parseResult()
     - 건너는데 성공했으면 ' O '를 반환하고 실패했으면 ' X '를 반환한다 - OutputView#toSuccessOrFail()
-    -  moveResult 결과에 따라 toSuccessOrFail의 반환 값을 각 다리에 저장한다. OutputView#parseUpbridge(), OutputView#parseDownBridge()
+    -  moveResult 결과에 따라 toSuccessOrFail의 반환 값을 각 다리에 저장한다. - OutputView#parseUpbridge(), OutputView#parseDownBridge()
 - [x] 출력 데이터를 초기화한다. - OutputView#resetPrintData()
 - [x] 다리를 끝까지 건너면 게임의 최종 결과를 정해진 형식에 맞춰 출력한다. - OutputView#printResult()
 
 ## Controller 로직
-- [x] 게임을 시작한다. - Controller#gameStart()
-- [x] 게임 시작 문구를 출력 후 다리 사이즈를 입력 받은 뒤 유효성 검사를 하고 다리를 만든다. - Controller#inputBridgeSize()
-  - 다리를 만든다. Controller#makeBridge()
-- [x] 어디로 건널지 입력받은 뒤 유효성 검사를하고 움직임 결과에 따라 게임을 어떻게 진행할지 결정한다. - Controller#inputWhereMoving()
-  - 게임을 어떻게 진행할지 결정한다. - Controller#handleGame()
-- [x] 재시작 여부에 대한 입력값을 유효성 검사하고 재시작과 종료에 대한 게임진행을 결정한다. - Controller#inputRetryOrQuit()
-  - 재시작과 종료에 대한 게임진행을 결정한다 - Controller#handleRetryOrQuit()
+- [x] 게임을 시작한다. - GameController#gameStart()
+- [x] 게임 시작 문구를 출력 후 다리 사이즈를 입력 받은 뒤 유효성 검사를 하고 다리를 만든다. - GameController#inputBridgeSize()
+  - 다리를 만든다. - GameController#makeBridge()
+- [x] 어디로 건널지 입력받은 뒤 유효성 검사를하고 움직임 결과에 따라 게임을 어떻게 진행할지 결정한다. - GameController#inputWhereMoving()
+  - 게임을 어떻게 진행할지 결정한다. - GameController#handleGame()
+- [x] 재시작 여부에 대한 입력값을 유효성 검사하고 재시작과 종료에 대한 게임진행을 결정한다. - GameController#inputRetryOrQuit()
+  - 재시작과 종료에 대한 게임진행을 결정한다 - GameController#handleRetryOrQuit()
 
 ## 기능 요구 사항
 
