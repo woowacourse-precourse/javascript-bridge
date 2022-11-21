@@ -10,8 +10,7 @@ class App {
   }
 
   play() {
-    OutputView.printGuide(START_GAME_MSG); // 게임시작 문구 출력
-    // 다리 길이 받아서 다리 만들기
+    OutputView.printGuide(START_GAME_MSG);
     this.requestBridgeSize();
   }
 
@@ -37,24 +36,21 @@ class App {
     try {
       this.bridgeGame.move(moveInput);
       const moveInputArray = this.bridgeGame.getMoveInputArray();
-      // moveInputArray 이용해서 printMap 그리기
-      // OutputView.printGuide(this.bridgeGame.getBridge());
       OutputView.printMap(moveInputArray);
-      // OutputView.printGuide(moveInputArray.length);
-      if (moveInputArray.slice(-1)[0].isRightDirect === true) {
-        // 마지막까지 성공하면 게임 종료
-        if (moveInputArray.length === this.bridgeGame.getBridgeLength()) {
-          // 게임 결과 출력 후 게임 종료
-          this.quit();
-        } else {
-          this.requestMoving();
-        }
-      } else {
-        this.requestRetry();
-      }
+      this.determinePath(moveInputArray);
     } catch (err) {
       OutputView.printGuide(err.message);
       this.tryAgain(this.requestMoving);
+    }
+  }
+
+  determinePath(moveInputArray) {
+    if (this.isSuccess(moveInputArray)) {
+      this.quit();
+    } else if (moveInputArray.slice(-1)[0].isRightDirect === true) {
+      this.requestMoving();
+    } else {
+      this.requestRetry();
     }
   }
 
@@ -98,8 +94,6 @@ class App {
   }
 
   quit() {
-    // 결과 출력 후 종료.
-    // map,성공여부,시도 횟수
     const moveInputArray = this.bridgeGame.getMoveInputArray();
     const isSuccess = this.isSuccess(moveInputArray);
     const gameCount = this.bridgeGame.getGameCount();
