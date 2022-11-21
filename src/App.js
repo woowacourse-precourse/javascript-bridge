@@ -1,5 +1,5 @@
 const InputView = require('./views/InputView');
-const BridgeGame = require('./controllers/BridgeGame');
+const BridgeGame = require('./BridgeGame');
 const OutputView = require('./views/OutputView');
 const BridgeValidation = require('./validations/Bridge');
 const MoveValidation = require('./validations/Move');
