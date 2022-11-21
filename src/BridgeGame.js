@@ -1,5 +1,6 @@
 const Validation = require("./Validation");
 const GameManager = require("./GameManager");
+const { Console } = require("@woowacourse/mission-utils");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -7,9 +8,9 @@ const GameManager = require("./GameManager");
 class BridgeGame {
   #originBridges
   #bridges
-  #userSelectSpace
   #firstRow
   #secondRow
+
 
   constructor() {
     this.gameManager = new GameManager();
@@ -50,7 +51,6 @@ class BridgeGame {
     const bridge = [...this.#bridges];
     const bridgeSpace = bridge[0];
     this.checkSpace(bridgeSpace, userSelectSpace);
-    this.gameManager.printSpace(this.#firstRow, this.#secondRow);
     bridge.shift();
     this.checkBridge(bridge);
   }
@@ -65,13 +65,14 @@ class BridgeGame {
 
   checkBridge(bridge) {
     if (this.#firstRow.includes("X") === true || this.#secondRow.includes("X") === true) {
-      return this.retry();
+      return this.inputRetry();
     }
 
     if (bridge.length === 0) {
       return this.finish();  
     }
 
+    this.gameManager.printSpace(this.#firstRow, this.#secondRow);
     this.addPartition(bridge);
   }
 
@@ -85,6 +86,14 @@ class BridgeGame {
   addResultInRow(a, b) {
     this.#firstRow.push(a);
     this.#secondRow.push(b);
+  }
+
+  inputRetry() {
+    this.gameManager.inputRetry(this.retry.bind(this));
+  }
+
+  retry(command) {
+
   }
 }
 
