@@ -1,3 +1,5 @@
+const { Console } = require('@woowacourse/mission-utils');
+
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
@@ -37,16 +39,25 @@ class App {
   }
 
   #handleFinish(formattedBridges) {
-    if (this.bridgeGame.isFail(formattedBridges)) this.#finishMoveBlock();
-    else if (this.bridgeGame.isSuccess(formattedBridges)) OutputView.printResult();
-    else {
-      this.#addTryCount();
-      this.#inputMoveBlock();
-    }
+    if (this.bridgeGame.isFail(formattedBridges)) this.#finishMoveBlock(formattedBridges);
+    else if (this.bridgeGame.isSuccess(formattedBridges)) {
+      this.#result = true;
+      OutputView.printResult(this.#tryCount, this.#result, formattedBridges);
+      Console.close();
+    } else this.#inputMoveBlock(formattedBridges);
   }
 
-  async #finishMoveBlock() {
-    console.log('hi');
+  async #finishMoveBlock(formattedBridges) {
+    const command = await InputView.readGameCommand();
+    BridgeGame.validateCommand(command);
+    if (command === 'Q') {
+      OutputView.printResult(this.#tryCount, this.#result, formattedBridges);
+      Console.close();
+    } else {
+      this.#addTryCount();
+      this.bridgeGame.retry();
+      this.#inputMoveBlock();
+    }
   }
 }
 
