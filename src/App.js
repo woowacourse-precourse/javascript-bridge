@@ -31,6 +31,11 @@ class App {
     this.#output.finalGameResult(classifiedBridgeLog);
     this.#output.printResult(gameReuslt, tryCount);
   }
+
+  printFinalGameResultAndClose() {
+    this.printFinalGameResult();
+    this.exit();
+  }
 }
 
 module.exports = App;
