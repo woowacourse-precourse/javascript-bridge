@@ -1,11 +1,14 @@
 const { Console } = require("@woowacourse/mission-utils");
-const OutputView = require("./OutputView");
 const { PROMPT, ERROR } = require("./Constants/Constants");
+const OutputView = require("./OutputView");
+const BridgeGameController = require("./BridgeGameController");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
+  bridgeGameControl: new BridgeGameController(),
+
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -15,6 +18,7 @@ const InputView = {
 
   readBridgeSizeCallback(size) {
     try {
+      this.bridgeGameControl.makeBridge(size); // 다리 만들기
       this.readMoving(); // 무빙 입력받기
     } catch (error) {
       OutputView.printErrorMessage(SIZE_ERROR); // 위 과정에서 에러 발생시 에러 출력
