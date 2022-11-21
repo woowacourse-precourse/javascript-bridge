@@ -21,6 +21,7 @@ const InputView = {
     Console.readLine("다리의 길이를 입력해주세요.\n", (answer) => {
       this.bridge = BridgeMaker.makeBridge(answer, Generator);
       this.now = 0;
+      this.retry = 1;
 
       this.readMoving();
     });
@@ -75,7 +76,10 @@ const InputView = {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (answer) => {
-        if (answer == "R") this.readMoving();
+        if (answer == "R") {
+          this.retry += 1;
+          this.readMoving();
+        }
         if (answer == "Q") {
           Console.close();
           OutputView.printResult("실패");
