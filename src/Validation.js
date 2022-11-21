@@ -10,7 +10,7 @@ Validation = {
   },
 
   isValidRangeSize(size){
-    if (size < ErrorMessage.MINIMUM_SIZE_RANGE && size > ErrorMessage.MAXIMUM_SIZE_RANGE){
+    if (size < ErrorMessage.MINIMUM_SIZE_RANGE || size > ErrorMessage.MAXIMUM_SIZE_RANGE){
       OutputMessage.printErrorMessage(ErrorMessage.BRIDGE_SIZE);
       throw new Error(ErrorMessage.BRIDGE_SIZE);
     }
