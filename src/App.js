@@ -37,6 +37,17 @@ class App {
     this.#game.move(input);
     const map = this.#game.getMap();
     OutputView.printMap(map);
+    this.checkGameProgress();
+  }
+
+  proceedStepThree(input) {}
+
+  checkGameProgress() {
+    //game over
+
+    //game clear
+
+    InputView.readMoving(this.proceedStepTwo.bind(this));
   }
 }
 
