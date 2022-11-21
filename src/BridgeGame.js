@@ -57,7 +57,7 @@ class BridgeGame {
    */
   retry() {
     this.retryTime += 1;
-    location = 0;
+    this.location = 0;
   }
 }
 

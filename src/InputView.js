@@ -89,6 +89,7 @@ const InputView = {
       (input) => {
         try {
           this.checkRetryInput(input);
+          this.chooseRetry(input);
         } catch (e) {
           MissionUtils.Console.print(e);
           this.readGameCommand();
@@ -106,8 +107,11 @@ const InputView = {
   chooseRetry(input) {
     if (input === "R") {
       mainBridge.retry();
+      this.readMoving();
     }
     if (input === "Q") {
+      MissionUtils.Console.print(`총 시도한 횟수: 1`);
+      MissionUtils.Console.close();
     }
   },
 };
