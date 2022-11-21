@@ -4,7 +4,7 @@ module.exports = {
     commonjs: true,
     es2021: true,
   },
-  extends: 'eslint:recommended',
+  extends: 'airbnb-base',
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -12,5 +12,6 @@ module.exports = {
   rules: {
     'max-params': ['error', 3],
     'max-lines-per-function': ['error', 10],
+    'max-depth': ['error', 2],
   },
 };
