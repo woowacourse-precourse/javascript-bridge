@@ -3,7 +3,10 @@ const { SizeConstraint, MoveConstraint } = require("./Constraint");
 class BridgeSize {
   #size;
 
-  constructor(size) {}
+  constructor(size) {
+    this.checkBridgeSize(size);
+    this.#size = size;
+  }
 
   checkBridgeSize(size) {
     const sizeConstraint = new SizeConstraint(size);
