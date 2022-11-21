@@ -27,7 +27,7 @@ class BridgeGame {
    */
   onReadBridgeSize(bridgeSize) {
     this.#bridge = makeBridge(bridgeSize, generate);
-    this.move();
+    return this.move();
   }
 
   /**
@@ -47,11 +47,12 @@ class BridgeGame {
     this.#movings.push(moving);
     printMap(this.#bridge, this.#movings);
     if (this.isFailed()) {
-      readGameCommand(this.onReadGameCommand.bind(this));
-    } else if (this.isFinished()) {
-      this.finish();
+      return readGameCommand(this.onReadGameCommand.bind(this));
     }
-    this.move();
+    if (this.isFinished()) {
+      return this.finish();
+    }
+    return this.move();
   }
 
   /**
@@ -85,9 +86,9 @@ class BridgeGame {
    */
   onReadGameCommand(gameCommand) {
     if (gameCommand === 'R') {
-      this.retry();
+      return this.retry();
     }
-    this.finish();
+    return this.finish();
   }
 
   /**
