@@ -9,8 +9,8 @@ class Bridge {
     return this.#directions[position] === direction;
   }
 
-  isEveryBlockPassed(passedBlockCount) {
-    return this.#directions.length === passedBlockCount;
+  isEveryBlockPassed(position) {
+    return this.#directions.length === position;
   }
 }
 

@@ -10,7 +10,7 @@ class BridgeGame {
   }
 
   move(direction) {
-    const currentPosition = this.#movementLogs.length;
+    const currentPosition = this.getCurrentPosition();
     const isCrossable = this.#bridge.isCrossable(currentPosition, direction);
 
     this.saveMovementLog(isCrossable, direction);
@@ -33,11 +33,15 @@ class BridgeGame {
   }
 
   isEnd() {
-    const passedBlockCount = this.#movementLogs.length;
-    const isEveryBlockPassed = this.#bridge.isEveryBlockPassed(passedBlockCount);
+    const currentPosition = this.getCurrentPosition();
+    const isEveryBlockPassed = this.#bridge.isEveryBlockPassed(currentPosition);
     const isLatestMoveSucceeded = this.isLatestMoveSucceeded();
 
     return isEveryBlockPassed && isLatestMoveSucceeded;
+  }
+
+  getCurrentPosition() {
+    return this.#movementLogs.length;
   }
 
   getMovementLogs() {
