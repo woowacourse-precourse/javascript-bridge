@@ -13,8 +13,8 @@ const BridgeMaker = {
     const make = () => {
       const number = generateRandomNumber();
 
-      if (number === 0) return WAY.UP;
-      if (number === 1) return WAY.DOWN;
+      if (number === 0) return WAY.DOWN;
+      if (number === 1) return WAY.UP;
     };
 
     return Array.from({ length: size }, () => make());
