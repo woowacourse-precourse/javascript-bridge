@@ -14,7 +14,6 @@ class BridgeGame {
     this.#bridge = new Bridge(makeBridge(bridgeSize, generate));
     this.#bridgeMap = new BridgeMap();
     this.#step = -1;
-    this.#tryingNum = 1;
   }
 
   move(moving) {

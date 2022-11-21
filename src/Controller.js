@@ -1,10 +1,11 @@
 const BridgeGame = require("./BridgeGame");
 const { readBridgeSize, readMoving, readGameCommand } = require("./InputView");
-const { printMap } = require("./OutputView");
+const { printMap, printResult, printResultMap } = require("./OutputView");
 
 class Controller {
   #bridgeGame;
   #tryingNum;
+  #moving;
 
   constructor() {
     this.init();
@@ -18,20 +19,26 @@ class Controller {
   }
   play() {
     readMoving((moving) => {
-      const isMatch = this.#bridgeGame.move(moving);
-      this.showResult(moving);
+      this.#moving = moving;
+      const isMatch = this.#bridgeGame.move(this.#moving);
+      this.showMap();
       this.handleBridgeGame(isMatch);
     })
   }
-  showResult(moving) {
-    const upMap = this.#bridgeGame.getMap(true, moving);
-    const downMap = this.#bridgeGame.getMap(false, moving);
-    printMap(upMap);
-    printMap(downMap);
+
+  showMap() {
+    const upMap = this.#bridgeGame.getMap(true, this.#moving);
+    const downMap = this.#bridgeGame.getMap(false, this.#moving);
+    printMap(upMap,downMap);
   }
+
   handleBridgeGame(isMatch){
     if(!isMatch){
       this.askReplay();
+      return;
+    }
+    if(this.#bridgeGame.isEnd()){
+      this.end(isMatch);
       return;
     }
     this.play();
@@ -42,10 +49,15 @@ class Controller {
         this.#tryingNum += 1;
         this.#bridgeGame.retry();
         this.play();
+        return;
       }
+      this.end();
     })
   }
-  end(){
+  end(isMatch){
+    printResultMap();
+    this.showMap();
+    printResult(isMatch, this.#tryingNum);
   }
 }
 
