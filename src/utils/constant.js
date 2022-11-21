@@ -19,7 +19,7 @@ const OUTPUT_VIEW_VALUE = Object.freeze({
   FIRST_EMPTY: "   ",
   FIRST_WRONG: " X ",
   FIRST_RIGHT: " O ",
-  EMPTY: "|  ",
+  EMPTY: "|   ",
   RIGHT: "| O ",
   WRONG: "| X ",
 });
