@@ -4,9 +4,7 @@ const InputView = require("./InputView");
 
 class Process {
   constructor() {
-    this.bridgeGame = new BridgeGame();
-    this.bridge = [];
-    this.bridgeResult = [[], []];
+    this.bridgeGame = new BridgeGame([], [[], []]);
     this.count = 1;
     this.resultMessage = "성공";
   }
@@ -15,24 +13,24 @@ class Process {
     OutputView.startSentence();
     OutputView.lengthBridgeSentence();
     let size = InputView.readBridgeSize();
-    this.bridge = this.bridgeGame.createBridge(size);
+    this.bridgeGame.setBridge(this.bridgeGame.createBridge(size));
     this.process();
     this.result();
   }
 
   process() {
-    for (let i = 0; i < this.bridge.length; i++) {
+    for (let i = 0; i < this.bridgeGame.getBridge().length; i++) {
       OutputView.pickMoveSentence();
       let moving = InputView.readMoving();
-      this.bridgeResult = this.bridgeGame.move(moving, i);
-      OutputView.printMap(this.bridgeResult);
+      this.bridgeGame.setBridgeResult(this.bridgeGame.move(moving, i));
+      OutputView.printMap(this.bridgeGame.getBridgeResult());
       this.restart();
     }
   }
 
   restart() {
-    this.bridgeResult = this.bridgeGame.retry();
-    if (this.bridgeResult === [[], []]) {
+    this.bridgeGame.setBridgeResult(this.bridgeGame.retry());
+    if (this.bridgeGame.getBridgeResult() === [[], []]) {
       OutputView.retrySentence();
       this.command = InputView.readGameCommand();
       this.commandCheck();
@@ -49,7 +47,11 @@ class Process {
   }
 
   result() {
-    OutputView.printResult(this.bridgeResult, this.count, this.resultMessage);
+    OutputView.printResult(
+      this.bridgeGame.getBridgeResult(),
+      this.count,
+      this.resultMessage
+    );
   }
 }
 

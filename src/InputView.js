@@ -11,22 +11,34 @@ const InputView = {
    */
   readBridgeSize() {
     let errCode = "";
-    let size = 0;
     try {
-      MissionUtils.Console.readLine("", (answer) => {
-        size = Number(answer);
-        if (size < 3 || size > 20 || isNaN(size)) {
-          throw ErrorMessages.numberSize;
-        }
-      });
-      return size;
+      return this.inputBridgeSize();
     } catch (error) {
-      OutputView.sizeError(error);
-      errCode = error;
+      errCode = this.errorBridgeSize(error);
     } finally {
-      if (errCode !== "") {
-        this.readBridgeSize();
+      this.finallyBridgeSize(errCode);
+    }
+  },
+
+  inputBridgeSize() {
+    let size = 0;
+    MissionUtils.Console.readLine("", (answer) => {
+      size = Number(answer);
+      if (size < 3 || size > 20 || isNaN(size)) {
+        throw ErrorMessages.numberSize;
       }
+    });
+    return size;
+  },
+
+  errorBridgeSize(error) {
+    OutputView.sizeError(error);
+    return error;
+  },
+
+  finallyBridgeSize(errCode) {
+    if (errCode !== "") {
+      this.readBridgeSize();
     }
   },
 
@@ -35,19 +47,32 @@ const InputView = {
    */
   readMoving() {
     let errCode = "";
-    let move = "";
     try {
-      MissionUtils.Console.readLine("", (answer) => {
-        move = answer;
-        if (move !== "U" && move !== "D") throw ErrorMessages.move;
-      });
-      return move;
+      return this.inputMoving();
     } catch (error) {
-      OutputView.moveError(error);
+      errCode = this.errorMoving(error);
     } finally {
-      if (errCode != "") {
-        this.readMoving();
-      }
+      this.finallyMoving(errCode);
+    }
+  },
+
+  inputMoving() {
+    let move = "";
+    MissionUtils.Console.readLine("", (answer) => {
+      move = answer;
+      if (move !== "U" && move !== "D") throw ErrorMessages.move;
+    });
+    return move;
+  },
+
+  errorMoving(error) {
+    OutputView.moveError(error);
+    return error;
+  },
+
+  finallyMoving(errCode) {
+    if (errCode != "") {
+      this.readMoving();
     }
   },
 
@@ -56,21 +81,31 @@ const InputView = {
    */
   readGameCommand() {
     let errCode = "";
-    let command = "";
     try {
-      MissionUtils.Console.readLine("", (answer) => {
-        command = answer;
-        if (this.command !== "R" && this.command !== "Q") {
-          throw ErrorMessages.command;
-        }
-      });
-      return command;
+      return this.inputGameCommand();
     } catch (error) {
-      OutputView.commandError(error);
+      errCode = this.errorGameCommand(error);
     } finally {
-      if (errCode != "") {
-        this.readGameCommand();
+      this.finallyGameCommand(errCode);
+    }
+  },
+  inputGameCommand() {
+    let command = "";
+    MissionUtils.Console.readLine("", (answer) => {
+      command = answer;
+      if (this.command !== "R" && this.command !== "Q") {
+        throw ErrorMessages.command;
       }
+    });
+    return command;
+  },
+  errorGameCommand(error) {
+    OutputView.commandError(error);
+    return error;
+  },
+  finallyGameCommand(errCode) {
+    if (errCode != "") {
+      this.readGameCommand();
     }
   },
 };
