@@ -1,5 +1,4 @@
 const { MOVABLE } = require('./data/constants');
-const IO = require('./IO');
 
 /**
  * 다리 객체
