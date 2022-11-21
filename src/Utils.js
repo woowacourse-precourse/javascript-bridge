@@ -46,4 +46,4 @@ class CommandInput {
   }
 }
 
-module.exports = { BridgeSize, MoveInput };
+module.exports = { BridgeSize, MoveInput, CommandInput };
