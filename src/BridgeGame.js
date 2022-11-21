@@ -1,5 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-// const Index = require("./index");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -21,84 +19,68 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(data) {
-    const bridge = data["bridge"];
-    const callCount = data["callCount"];
+    const bridgeAnswer = data["bridge"][data["callCount"]];
+    const userAnswer = data["currentAnswer"];
 
-    if (bridge[callCount] === data["currentAnswer"]) {
-      if (data["currentAnswer"] === "U") {
-        if (data["callCount"] === 0) {
-          data["upperBridge"] += this.bridgeString.start("O");
-          data["lowerBridge"] += this.bridgeString.start(" ");
-          data["callCount"] += 1;
-          data["status"] = "continue";
-          return data;
-        }
-        data["upperBridge"] += this.bridgeString.middle("O");
-        data["lowerBridge"] += this.bridgeString.middle(" ");
-        data["callCount"] += 1;
-        data["status"] = "continue";
-        return data;
-      } else if (data["currentAnswer"] === "D") {
-        if (data["callCount"] === 0) {
-          data["upperBridge"] += this.bridgeString.start(" ");
-          data["lowerBridge"] += this.bridgeString.start("O");
-          data["callCount"] += 1;
-          data["status"] = "continue";
-          return data;
-        } else {
-          data["upperBridge"] += this.bridgeString.middle(" ");
-          data["lowerBridge"] += this.bridgeString.middle("O");
-          data["callCount"] += 1;
-          data["status"] = "continue";
-          return data;
-        }
-      }
-    } else {
-      if (data["currentAnswer"] === "U") {
-        if (data["callCount"] === 0) {
-          data["upperBridge"] += this.bridgeString.start("X");
-          data["lowerBridge"] += this.bridgeString.start(" ");
-          data["status"] = "fail";
-          return data;
-        }
-        data["upperBridge"] += this.bridgeString.middle("X");
-        data["lowerBridge"] += this.bridgeString.middle(" ");
-        data["status"] = "fail";
-        return data;
-      }
-      if (data["currentAnswer"] === "D") {
-        if (data["callCount"] === 0) {
-          data["upperBridge"] += this.bridgeString.start(" ");
-          data["lowerBridge"] += this.bridgeString.start("X");
-          data["status"] = "fail";
-          return Inputthis.data;
-        }
-        data["upperBridge"] += this.bridgeString.middle(" ");
-        data["lowerBridge"] += this.bridgeString.middle("X");
-        data["status"] = "fail";
-        return data;
-      }
-    }
+    bridgeAnswer === userAnswer ? this.correctCase(data) : this.incorrectCase(data);
+    return data;
   }
 
+  correctCase(data) {
+    const correct = "O";
+    const empty = " ";
+
+    data["currentAnswer"] === "U" ? this.defineString(data, correct, empty) : this.defineString(data, empty, correct);
+    return data;
+  }
+
+  incorrectCase(data) {
+    const incorrect = "X";
+    const empty = " ";
+
+    data["currentAnswer"] === "U" ? this.defineString(data, incorrect, empty) : this.defineString(data, empty, incorrect);
+    return data;
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(data) {
-    if (data["currentAnswer"] === "R") {
-      data["status"] = "retry";
-      data["callCount"] = 0;
-      data["upperBridge"] = "";
-      data["lowerBridge"] = "";
+  defineString(data, upperString, lowerString) {
+    data["callCount"] === 0 ? this.startString(data, upperString, lowerString) : this.middleString(data, upperString, lowerString);
+  }
 
-      return data;
-    }
-    if (data["currentAnswer"] === "Q") {
-      data["status"] = "quit";
-      return data;
-    }
+  startString(data, upperString, lowerString) {
+    data["upperBridge"] += this.bridgeString.start(upperString);
+    data["lowerBridge"] += this.bridgeString.start(lowerString);
+    data["callCount"] += 1;
+    data["status"] = "continue";
+    return data;
+  }
+
+  middleString(data, upperString, lowerString) {
+    data["upperBridge"] += this.bridgeString.middle(upperString);
+    data["lowerBridge"] += this.bridgeString.middle(lowerString);
+    data["callCount"] += 1;
+    data["status"] = "continue";
+    return data;
+  }
+
+  retry(data) {
+    data["currentAnswer"] === "R" ? this.enterRetry(data) : this.enterQuit(data);
+    return data;
+  }
+
+  enterRetry(data) {
+    data["status"] = "retry";
+    data["callCount"] = 0;
+    data["upperBridge"] = "";
+    data["lowerBridge"] = "";
+  }
+
+  enterQuit(data) {
+    data["status"] = "quit";
+    return data;
   }
 }
 
