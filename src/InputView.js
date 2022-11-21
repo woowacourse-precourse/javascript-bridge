@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker = require("../src/BridgeMaker");
-const { generate } = require("../src/BridgeRandomNumberGenerator");
+const OutputView = require("../src/OutputView");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const BridgeGame = require("../src/BridgeGame");
 const InputView = {
@@ -9,12 +9,17 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (number) => {
-      this.checkPlayerInput(number);
-      mainBridge = new BridgeGame();
-      mainBridge.setBridge(
-        BridgeMaker.makeBridge(number, BridgeRandomNumberGenerator)
-      );
-      this.readMoving(0);
+      try {
+        this.checkPlayerInput(number);
+        mainBridge = new BridgeGame();
+        mainBridge.setBridge(
+          BridgeMaker.makeBridge(number, BridgeRandomNumberGenerator)
+        );
+        this.readMoving();
+        console.log(mainBridge.bridge);
+      } catch {
+        this.readBridgeSize();
+      }
     });
   },
 
@@ -24,7 +29,7 @@ const InputView = {
       this.checkInRange(input);
     } catch (e) {
       MissionUtils.Console.print(e);
-      this.readBridgeSize();
+      throw e;
     }
   },
 
@@ -37,19 +42,19 @@ const InputView = {
       throw "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.";
   },
 
-  readMoving(location) {
-    MissionUtils.Console.readLine("이동할 칸을 선택해주세요.\n", (input) => {
-      this.checkPlayerMove(input);
-      mainBridge.move(input, location);
-      location += 1;
-      if (this.checkEndMove(location)) this.readMoving(location);
-    });
-  },
-
-  checkEndMove(number) {
-    console.log(number, mainBridge.getSize());
-    if (number === mainBridge.getSize()) return 0;
-    return 1;
+  readMoving() {
+    MissionUtils.Console.readLine(
+      "이동할 칸을 선택해주세요.(위: U 아래: D)\n",
+      (input) => {
+        try {
+          this.checkPlayerMove(input);
+          this.checkAndMove(input);
+        } catch (e) {
+          MissionUtils.Console.print(e);
+          this.checkEndError(e);
+        }
+      }
+    );
   },
 
   checkPlayerMove(input) {
@@ -57,16 +62,38 @@ const InputView = {
       throw "[ERROR] U 혹은 D을 입력해라!!";
     }
   },
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
+
+  checkAndMove(input) {
+    try {
+      mainBridge.move(input, mainBridge.getLocation());
+      mainBridge.changeLocation();
+      this.readMoving();
+    } catch (e) {
+      this.checkEndError(e);
+    }
+  },
+
+  checkEndError(e) {
+    if (e == 2) {
+      this.readGameCommand();
+    }
+    if (e == 0) {
+      this.readGameCommand();
+    }
+    this.readMoving();
+  },
+
   readGameCommand() {
     MissionUtils.Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요.\n",
       (number) => {
-        this.checkPlayerInput(number);
+        this.checkRetryInput(number);
       }
     );
+  },
+
+  checkRetryInput(number) {
+    console.log(number);
   },
 };
 
