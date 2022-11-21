@@ -1,7 +1,28 @@
+const InputView = require('./Views/InputView');
+const OutputView = require('./Views/OutputView');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #length = 0;
+  constructor() {
+    this.#length = this.#length;
+  }
+
+  /**
+   * 사용자가 게임을 시작 할 때 사용하는 메서드
+   */
+  start() {
+    OutputView.printStartMessage();
+    InputView.readBridgeSize(input => {
+      this.#length = input;
+      OutputView.printLength(this.#length);
+    });
+
+    // InputView.readBridgeSize();
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
