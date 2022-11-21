@@ -1,8 +1,13 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 /**
  * 예외처리용
  */
 const CheckException = {
   checkValidBridgeLength(length) {
+    if (isNaN(length) === true) {
+      throw "[ERROR] invalid bridge length format";
+    }
     if (length < 3 && length > 20) {
       throw "[ERROR] invalid bridge length";
     }

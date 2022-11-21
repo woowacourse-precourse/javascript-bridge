@@ -1,7 +1,8 @@
-const { MissionUtils } = require("@woowacourse/mission-utils");
+const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const { checkValidBridgeLength } = require("./CheckException");
+const { readBridgeSize } = require("./InputView");
 const InputView = require("./InputView");
 
 class App {
@@ -13,14 +14,14 @@ class App {
   }
 
   play() {
-    this.print(`다리 건너기 게임을 시작합니다.`);
-    InputView.readBridgeSize((bridgeLength) => {
-      const isValidInput = checkValidBridgeLength(bridgeLength);
+    this.print(`다리 건너기 게임을 시작합니다.\n`);
 
-      if (isValidInput == true) {
+    readBridgeSize((bridgeLength) => {
+      try {
+        checkValidBridgeLength(parseInt(bridgeLength));
         this.bridge = new BridgeGame(bridgeLength);
-      } else {
-        MissionUtils.Console.close();
+      } catch (err) {
+        this.print(err);
       }
     });
   }
