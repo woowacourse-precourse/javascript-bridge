@@ -25,10 +25,10 @@ describe("BridgeGame class 테스트", () => {
     const playerChoiceMovingCommands = ["U", "D", "U"];
     const upsideBridgeMap = ["O", " ", "X"];
     const downSideBridgeMap = [" ", "O", " "];
+    const bridgeShape = ["U", "D", "D", "D", "U"];
 
     const bridgeGame = new BridgeGame();
-    bridgeGame.setBridgeShape(["U", "D", "D", "D", "U"]);
-
+    bridgeGame.setBridgeShape(bridgeShape);
     playerChoiceMovingCommands.forEach((playerChoiceMovingCommand) => {
       bridgeGame.move(playerChoiceMovingCommand);
     });
@@ -43,9 +43,9 @@ describe("BridgeGame class 테스트", () => {
 
   test("다리를 끝까지 올바르게 건넜는지 테스트", () => {
     const bridgeShape = ["U", "D", "D", "D", "U"];
+
     const bridgeGame = new BridgeGame();
     bridgeGame.setBridgeShape(bridgeShape);
-
     bridgeShape.forEach((playerChoiceMovingCommand) => {
       bridgeGame.move(playerChoiceMovingCommand);
     });
@@ -54,12 +54,14 @@ describe("BridgeGame class 테스트", () => {
   });
 
   test("이동할 수 있는 칸을 선택했는지 테스트", () => {
-    const answerMovingChoiceCommands = ["U", "D", "D", "D"];
-    const bridgeGame = new BridgeGame();
-    bridgeGame.setBridgeShape(["U", "D", "D", "D", "U"]);
+    const playerChoiceMovingCommands = ["U", "D", "D", "D"];
+    const bridgeShape = ["U", "D", "D", "D", "U"];
 
-    answerMovingChoiceCommands.forEach((answerMovingChoiceCommand) => {
-      bridgeGame.move(answerMovingChoiceCommand);
+    const bridgeGame = new BridgeGame();
+    bridgeGame.setBridgeShape(bridgeShape);
+
+    playerChoiceMovingCommands.forEach((playerChoiceMovingCommand) => {
+      bridgeGame.move(playerChoiceMovingCommand);
       expect(bridgeGame.isAnswerMovingChoice()).toBeTruthy();
     });
 
