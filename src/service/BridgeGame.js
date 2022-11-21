@@ -6,13 +6,13 @@ const GameInteractor = require('../domain/usecases/GameInteractor');
 class BridgeGame {
   constructor(UserInteractor, BridgeInteractor) {
     this.userInteractor = UserInteractor;
-    this.brigeInteractor = BridgeInteractor;
-    this.JudgeInteractor = new JudgeInteractor(this.userInteractor, this.brigeInteractor);
+    this.bridgeInteractor = BridgeInteractor;
+    this.JudgeInteractor = new JudgeInteractor(this.userInteractor, this.bridgeInteractor);
     this.gameInteractor = new GameInteractor();
   }
 
   makeBridge(size) {
-    this.brigeInteractor.makeBridge(size);
+    this.bridgeInteractor.makeBridge(size);
   }
 
   init() {
