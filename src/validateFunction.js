@@ -17,6 +17,26 @@ const bridgeLengthValidate = (number)=>{
   }
 }
 
+const userMoveValidate = (move)=>{
+  try{
+    if(!userMoveInputCheck(move)) throw new Error("[ERROR]")
+  }catch(error){
+    MissionUtils.Console.print(error.message)
+    return true;
+  }
+}
+
+const userRetryValidate = (retry)=>{
+  try{
+    if(!userRetryInputCheck(retry)) throw new Error("[ERROR]")
+  }catch(error){
+    MissionUtils.Console.print(error.message)
+    return true;
+  }
+}
+
 module.exports = {
-  bridgeLengthValidate
+  bridgeLengthValidate,
+  userMoveValidate,
+  userRetryValidate
 }

@@ -5,7 +5,8 @@ const BridgeMaker = require("../BridgeMaker.js");
 const BridgeGame = require("../BridgeGame.js");
 const OutputView = require("./OutputView")
 const {
-  bridgeLengthValidate
+  bridgeLengthValidate,
+  userMoveValidate
 } = require('../validateFunction')
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -28,6 +29,7 @@ const InputView = {
    */
   readMoving(playerMoveList,bridgeGame, bridgeSize) {
     MissionUtils.Console.readLine(PLAYER_MOVE_INPUT, (playerMove) => {
+      if(userMoveValidate(playerMove)) return this.readMoving([], bridgeGame, bridgeSize)
       playerMoveList.push(playerMove);
       const gameResult=bridgeGame.move(playerMoveList);
       OutputView.printMap(gameResult);
