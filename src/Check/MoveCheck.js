@@ -13,5 +13,4 @@ class MoveCheck {
   }
 }
 
-// InputCheckTest.js 에서 검증하기!
 module.exports = MoveCheck;
