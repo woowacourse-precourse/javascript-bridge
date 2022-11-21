@@ -6,21 +6,14 @@ const OPPOSITE_DIRECTION = { U: 'D', D: 'U' };
 class BridgeGame {
   #bridgeAnswer;
 
-  #bridgeMap;
-
-  #stepCount;
+  #numberOfAttempts;
 
   #status;
 
   setUp(bridgeSize) {
     this.makeBridge(Number(bridgeSize));
-    this.#bridgeMap = { U: [], D: [] };
-    this.#stepCount = 0;
-    this.#status = {
-      numberOfAttempts: 1,
-      crossed: false,
-      gameOver: false,
-    };
+    this.initStatus();
+    this.#numberOfAttempts = 1;
   }
 
   makeBridge(bridgeSize) {
@@ -30,6 +23,15 @@ class BridgeGame {
     );
   }
 
+  initStatus() {
+    this.#status = {
+      stepCount: 0,
+      crossed: false,
+      gameOver: false,
+      bridgeMap: { U: [], D: [] },
+    };
+  }
+
   move(direction) {
     const isCorrect = this.isCorrectStep(direction);
     this.updateBridgeMap(direction, isCorrect);
@@ -37,7 +39,7 @@ class BridgeGame {
   }
 
   isCorrectStep(direction) {
-    if (this.#bridgeAnswer[this.#stepCount] === direction) {
+    if (this.#bridgeAnswer[this.#status.stepCount] === direction) {
       return true;
     }
     return false;
@@ -52,12 +54,12 @@ class BridgeGame {
 
   markBridgeMap(direction, mark) {
     const oppositeDirection = OPPOSITE_DIRECTION[direction];
-    this.#bridgeMap[direction].push(mark);
-    this.#bridgeMap[oppositeDirection].push(' ');
+    this.#status.bridgeMap[direction].push(mark);
+    this.#status.bridgeMap[oppositeDirection].push(' ');
   }
 
   updateStatus(isCorrect) {
-    this.#stepCount += 1;
+    this.#status.stepCount += 1;
     if (isCorrect) {
       this.checkCrossed();
     } else {
@@ -66,26 +68,30 @@ class BridgeGame {
   }
 
   checkCrossed() {
-    if (this.#stepCount === this.#bridgeAnswer.length) {
+    if (this.#status.stepCount === this.#bridgeAnswer.length) {
       this.#status.crossed = true;
       this.#status.gameOver = true;
     }
   }
 
   getBridgeMap() {
-    return { upperRow: this.#bridgeMap.U, lowerRow: this.#bridgeMap.D };
+    return {
+      upperRow: this.#status.bridgeMap.U,
+      lowerRow: this.#status.bridgeMap.D,
+    };
   }
 
   getStatus() {
     return this.#status;
   }
 
+  getNumberOfAttempts() {
+    return this.#numberOfAttempts;
+  }
+
   retry() {
-    this.#bridgeMap.U.pop();
-    this.#bridgeMap.D.pop();
-    this.#stepCount -= 1;
-    this.#status.numberOfAttempts += 1;
-    this.#status.gameOver = false;
+    this.initStatus();
+    this.#numberOfAttempts += 1;
   }
 }
 

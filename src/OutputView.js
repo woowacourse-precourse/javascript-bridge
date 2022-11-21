@@ -19,7 +19,7 @@ const OutputView = {
     return mapString;
   },
 
-  printResult(bridgeMap, { crossed, numberOfAttempts }) {
+  printResult(bridgeMap, { crossed }, numberOfAttempts) {
     Console.print(MESSAGE.result);
     this.printMap(bridgeMap);
     Console.print('');

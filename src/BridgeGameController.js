@@ -66,7 +66,8 @@ class BridgeGameController {
   finishGame() {
     OutputView.printResult(
       this.#bridgeGame.getBridgeMap(),
-      this.#bridgeGame.getStatus()
+      this.#bridgeGame.getStatus(),
+      this.#bridgeGame.getNumberOfAttempts()
     );
   }
 }
