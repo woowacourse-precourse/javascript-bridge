@@ -8,7 +8,8 @@ const validation = {
     },
     
     validateNumber(charicter){
-        if(!/d/.test(charicter)){
+        const regEx = /\d+/g
+        if(!regEx.test(charicter)){
             throw new Error(ERROR.notNumber);
         }
     },
