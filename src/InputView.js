@@ -3,6 +3,7 @@ const Exception = require('./Exception');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { CONSOLE_MESSAGE } = require('./utils/constants');
+const OutputView = require('./OutputView');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -10,6 +11,7 @@ const { CONSOLE_MESSAGE } = require('./utils/constants');
 const InputView = {
   exception: new Exception(),
   bridge: [],
+  moveCount: 0,
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -26,7 +28,7 @@ const InputView = {
   },
 
   getBridge(input) {
-    const BRIDGE = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator);
+    const BRIDGE = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator.generate);
     this.bridge = BRIDGE;
   },
   /**
