@@ -1,4 +1,5 @@
 const BridgeGame = require('../src/BridgeGame');
+const BridgeMap = require('../src/BridgeMap');
 const Validator = require('../src/Validator');
 
 describe('도메인 로직 테스트 Validator 객체', () => {
@@ -67,7 +68,7 @@ describe('도메인 로직 테스트 Validator 객체', () => {
 describe('도메인 로직테스트 BridgeGame class', () => {
   const bridgeGame = new BridgeGame();
 
-  test('입력값과 다리를 비교하여 갈수있는길이면 true 아니면 false를 리턴한다', () => {
+  test('입력값과 다리를 비교하여 갈수있는길이면 true 아니면 false를 의사결정 한다', () => {
     const inputs = ['D', 'U', 'U', 'D'];
     const bridge = ['D', 'D', 'D', 'D'];
     const answers = [true, false, false, true];
@@ -77,12 +78,34 @@ describe('도메인 로직테스트 BridgeGame class', () => {
     });
   });
 
-  test('입력값에 따라 retry 면 true 아니면 false 를 리턴한다', () => {
+  test('입력값에 따라 retry 면 true 아니면 false 를 의사결정 한다', () => {
     const inputs = ['R', 'Q'];
     const answers = [true, false];
 
     inputs.forEach((input, i) => {
       expect(bridgeGame.retry(input)).toBe(answers[i]);
     });
+  });
+});
+
+describe('도메인 로직 테스트  BridgeMap class', () => {
+  test('전달받은 moveStatement와 input을 addMap에 전달하고 처음 실행인지 아닌지 의사결정하는 기능', () => {
+    const bridgeMap = new BridgeMap();
+    const moveStatements = [true, false];
+    const inputs = ['D', 'D'];
+    const answers = ['isFirst', 'isNotFirst'];
+
+    moveStatements.forEach((moveStatement, i) => {
+      expect(bridgeMap.handleMap(moveStatement, inputs[i])).toBe(answers[i]);
+    });
+  });
+
+  test('전달된 boolean과 class의 isFirst 상태에 따라 addCorrect와 addIncorrect 를 실행 시킬지 결정하는 기능', () => {
+    const bridgeMap = new BridgeMap();
+    const moveStatement = true;
+    const input = 'D';
+    const answer = [['   '], [' O ']];
+
+    expect(bridgeMap.addMap(moveStatement, input)).toEqual(answer);
   });
 });
