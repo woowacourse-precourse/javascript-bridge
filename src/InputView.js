@@ -39,9 +39,9 @@ const InputView = {
     if (this.isPass && this.index < this.bridgeSize) {
       this.readMoving();
     }
+    if (this.isPass === false) this.readGameCommand();
     if (this.index === this.bridgeSize)
       BridgeGameController.outputData(true, true, this.tryCount);
-    if (this.isPass === false) this.readGameCommand();
   },
 
   /**
@@ -63,6 +63,8 @@ const InputView = {
       this.index = 0;
       this.readMoving();
     }
+    if (retryOrQuit === 'Q')
+      BridgeGameController.outputData(true, false, this.tryCount);
   },
 };
 
