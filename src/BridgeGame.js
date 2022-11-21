@@ -4,7 +4,6 @@
 class BridgeGame {
   constructor() {
     this.bridge;
-    this.result = [];
     this.nowMap = {
       'U': [],
       'D': []
@@ -20,14 +19,12 @@ class BridgeGame {
    * EX) [['U', 'success'], ['D', 'success'], ['U', 'fail']]
    */
   move(movingInfo) {
-    const compareIndex = this.result.length;
+    const compareIndex = this.nowMap['U'].length;
 
     if (this.bridge[compareIndex] === movingInfo) {
-      this.result.push([movingInfo, 'success']);
       return true;
     } 
       
-    this.result.push([movingInfo, 'fail']);
     return false;
   }
 
