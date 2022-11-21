@@ -17,8 +17,8 @@
 [:deciduous_tree:] 다리의 현재 상태를 출력한다.
 [ ] 다리를 끝까지 건너면 게임 종료
 [ ] 게임 성공 여부를 출력한다.
-[ ] 실패하면 재시작(R)하거나 종료(Q)할 수 있다.
-    [ ] [ERROR] R, Q가 아니면 에러
+[:deciduous_tree:] 실패하면 재시작(R)하거나 종료(Q)를 입력 받는다.
+    [:deciduous_tree:] [ERROR] R, Q가 아니면 에러
 [ ] 재시작 - 다리 재사용
 [:deciduous_tree:] 최종 게임 결과를 출력한다.
 [:deciduous_tree:] 총 시도한 횟수를 출력한다.
