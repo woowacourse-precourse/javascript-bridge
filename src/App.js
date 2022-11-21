@@ -55,6 +55,7 @@ class App {
     if (this.bridgeGame.gameFinish()) {
       this.#successOrFailure = "성공";
       OutputView.printMap(isSuccess);
+      OutputView.printResult(isSuccess, this.#retryCount, this.#successOrFailure);
       return Console.close();
     }
     OutputView.printMap(isSuccess);
@@ -82,6 +83,7 @@ class App {
     if (retryKey === "Q") {
       this.#successOrFailure = "실패";
       OutputView.printMap(isFail);
+      OutputView.printResult(isFail, this.#retryCount, this.#successOrFailure);
       return Console.close();
     }
   }
