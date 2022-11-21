@@ -1,3 +1,4 @@
+const ValidateCheck = require('./utils/ValidatateCheck');
 const InputView = require('./Views/InputView');
 const OutputView = require('./Views/OutputView');
 
@@ -16,8 +17,8 @@ class BridgeGame {
   start() {
     OutputView.printStartMessage();
     InputView.readBridgeSize(input => {
+      ValidateCheck.lengthCheck(input);
       this.#length = input;
-      OutputView.printLength(this.#length);
     });
 
     // InputView.readBridgeSize();
