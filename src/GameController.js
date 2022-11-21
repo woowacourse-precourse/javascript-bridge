@@ -34,15 +34,23 @@ class GameController {
     InputView.readBridgeSize((input) => {
       try {
         new BridgeSizeValidation(input);
-        const bridgeSize = Number(input);
-        this.#bridgeGame.saveBridge(bridgeSize);
-        OutputView.printMessage("");
-        this.askForPath();
+        this.callSaveBridge(input);
       } catch (e) {
         OutputView.printMessage(e);
         this.askForBridgeSize();
       }
     });
+  }
+
+  /**
+   * 다리의 길이를 저장할 것을 요청한다.
+   * @param {string} input - 사용자가 입력한 다리의 길이
+   */
+  callSaveBridge(input) {
+    const bridgeSize = Number(input);
+    this.#bridgeGame.saveBridge(bridgeSize);
+    OutputView.printMessage("");
+    this.askForPath();
   }
 
   /**
