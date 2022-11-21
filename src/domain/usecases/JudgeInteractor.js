@@ -1,5 +1,3 @@
-const BridgeInteractor = require('./BridgeInteractor');
-
 /**
  * this class depends on the Interactor interface
  * - bridgeInteractor
