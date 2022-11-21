@@ -1,4 +1,4 @@
-const { ERROR_MESSAGES } = require('../Constants/Constants');
+const { ERROR_MESSAGES } = require("../Constants/Constants");
 
 class MoveCheck {
   constructor(userInput) {
