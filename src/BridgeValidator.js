@@ -11,7 +11,7 @@ class BridgeValidator extends Validator {
     const size = Number(number);
 
     if (size < this.min || size > this.max) {
-      throw new Error('[ERROR]');
+      throw new Error(`${this.ERROR_MESSAGE_HEADER} 다리 길이는 ${this.min}부터 ${this.max}사이의 숫자여야 합니다.`);
     }
   }
 }
