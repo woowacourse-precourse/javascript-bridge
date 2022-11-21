@@ -7,8 +7,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     for (let i = 0; i < size; i++) {
-      const randomNumber = generateRandomNumber();
-      console.log(randomNumber);
+      const randomNumber = generateRandomNumber().toString();
       let direction;
       if (randomNumber === this.NUMBER_DOWN) direction = this.INITIAL_DOWN;
       if (randomNumber === this.NUMBER_UP) direction = this.INITIAL_UP;
