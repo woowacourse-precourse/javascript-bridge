@@ -10,7 +10,7 @@ const InputView = {
    * @return {number} 다리 길이를 number형식으로 리턴.
    */
   readBridgeSize() {
-    Console.readLine(REQUEST_MESSAGE.BRIDGE_LENGTH, (length) => {
+    Console.readLine(REQUEST_MESSAGE.BRIDGE_SIZE, (length) => {
       try {
         Validator.checkBridgeLengthInput(Number(length));
         return Number(length);
