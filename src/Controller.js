@@ -29,6 +29,7 @@ class Controller {
   checkReInputSize(bridgeSize) {
     try {
       bridgeSize.validate();
+      printMessage('');
       this.inputMoving();
     } catch (errorMessage) {
       printMessage(errorMessage);
@@ -75,6 +76,7 @@ class Controller {
       this.printResult();
     }
     if (this.safeBridgeList.length) {
+      printMessage('');
       this.inputMoving();
     }
   }
