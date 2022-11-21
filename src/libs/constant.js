@@ -24,4 +24,10 @@ const ROW_IDX = {
 
 const EMPTY = ' ';
 
-module.exports = { MSG, ERROR_MSG, DIRECTION, ROW_IDX, EMPTY };
+const NEXT_STEP = {
+  correctMove: 'correctMove',
+  wrongMove: 'wrongMove',
+  endGame: 'endGame',
+};
+
+module.exports = { MSG, ERROR_MSG, DIRECTION, ROW_IDX, EMPTY, NEXT_STEP };

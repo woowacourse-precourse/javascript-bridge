@@ -1,7 +1,7 @@
 const Validator = require('./Validator');
 const { makeBridge } = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { ERROR_MSG } = require('./libs/constant');
+const { ERROR_MSG, NEXT_STEP } = require('./libs/constant');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -57,6 +57,16 @@ class BridgeGame {
     const { bridge, movedDirections } = this;
 
     return movedDirections.map((direction, idx) => ({ direction, correct: direction === bridge[idx] }));
+  }
+
+  nextStep() {
+    const { correctMove, wrongMove, endGame } = NEXT_STEP;
+    const movedBridge = this.getMovedBridge();
+    const isWrongMove = !movedBridge[movedBridge.length - 1].correct;
+
+    if (isWrongMove) return wrongMove;
+    if (movedBridge.length === this.size) return endGame;
+    return correctMove;
   }
 
   /**
