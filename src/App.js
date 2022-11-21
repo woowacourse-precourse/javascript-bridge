@@ -40,8 +40,20 @@ class App {
   readMove(num){
     this.userMove = readMoving();
     let moveCheck = bridgeGame.move(this.userMove, num);
-    printMap(bridgeGame.check);
+    this.settingPrint();
     return moveCheck;
+  }
+  settingPrint(){
+    let upArr, downArr = [];
+    for(let i = 0; i < bridgeGame.check.length; i++){
+      downArr[i] = bridgeGame.check[i];
+      upArr[i] = " ";
+      if(bridgeGame.current[i] == "U"){
+        upArr[i] = bridgeGame.check[i];
+        downArr[i] = " ";
+      }
+    }
+    printMap(upArr, downArr);
   }
   checkResetOrFinish(isCheck){
     let read;
@@ -63,7 +75,7 @@ class App {
     this.finish();
   }
   finish(){
-    
+
   }
 }
 

@@ -5,6 +5,7 @@ class BridgeGame {
   constructor(){
     this.bridge = [];
     this.check = [];
+    this.current = [];
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -14,8 +15,9 @@ class BridgeGame {
   move(user, i) {
     let isCheckOk = false;
     this.check[i] = "X";
+    this.current[i] = this.bridge[i];
     if(this.bridge[i] == user){
-      this.check[i] = this.bridge[i];
+      this.check[i] = "O";
       isCheckOk = true;
     }
     return isCheckOk;
