@@ -1,5 +1,6 @@
 const Bridge = require('./Bridge');
 const Player = require('./Player');
+const { checkMoveInput, checkGameCommand } = require('./util/validationInput');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -18,6 +19,7 @@ class BridgeGame {
 	 * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
 	 */
 	move(input) {
+		checkMoveInput(input);
 		const MOVABLE = this.#bridge.movable(
 			this.#player.getCurrentIndex() + 1,
 			input,
