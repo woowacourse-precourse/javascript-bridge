@@ -96,3 +96,18 @@ describe('3. 플레이어가 이동할 칸 선택하기', () => {
     expectBridgeOrder(log, '[ O |   |   ]', '[   | O | O ]');
   });
 });
+
+describe('4. 잘못된 칸을 밟았을 때', () => {
+  test.each([[['r']], [['다시']], [['Restart'], ['Quit']]])(
+    '사용자가 대문자 R이나 Q를 입력했는지 확인했다.',
+    (input) => {
+      const model = new Model();
+      const gameView = new GameView(new InputView(), new OutputView());
+      const bridgeGame = new BridgeGame(model, gameView);
+      mockQuestions(input);
+      expect(() => bridgeGame.askUserRetry()).toThrow(
+        '[ERROR] 대문자 R이나 Q만 입력 가능합니다.',
+      );
+    },
+  );
+});
