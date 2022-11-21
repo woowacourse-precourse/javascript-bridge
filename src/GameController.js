@@ -1,5 +1,5 @@
 const { RESTART_COMMAND, QUIT_COMMAND } = require('./constants/condition.js');
-const { GAME_MSG } = require('./constants/message.js');
+const { GAME_MSG_START } = require('./constants/message.js');
 
 const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('./views/InputView.js');
@@ -14,7 +14,7 @@ class GameController {
   }
 
   play() {
-    OutputView.printMsg(GAME_MSG.start);
+    OutputView.printMsg(GAME_MSG_START);
     this.requestBridgeSize();
   }
 
