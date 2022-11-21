@@ -2,7 +2,7 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 const BridgeValidator = require("./utils/BridgeValidator");
-const { BRIDGE_LENGTH } = require("./constants/gameState");
+const { BRIDGE_LENGTH, DIRECTION_MATCH } = require("./constants/gameState");
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const DirectionValidator = require("./utils/DirectionValidator");
@@ -12,16 +12,17 @@ class BridgeGame {
   #bridge;
   #totalCount;
   #bridgeGameController;
+  #userDirectionInput;
 
   constructor() {
     this.#bridgeGameController = new BridgeGameController();
     this.#totalCount = 0;
+    this.#userDirectionInput = [];
   }
 
   startGame(bridgeSize) {
     this.validateBridgeLength(bridgeSize);
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, generate);
-    // Console.print(this.#bridge); //지우기
   }
 
   validateBridgeLength(size) {
@@ -40,8 +41,20 @@ class BridgeGame {
    */
   move(direction) {
     this.validateDirection(direction);
+    this.compareDirection(direction);
   }
 
+  compareDirection(direction) {
+    if (direction === this.#bridge[this.#totalCount - 1]) {
+      this.#userDirectionInput.push([DIRECTION_MATCH.RIGHT, direction]);
+      this.#bridgeGameController.outputMap(this.#userDirectionInput);
+      this.#bridgeGameController.inputDirection();
+    } else {
+      this.#userDirectionInput.push([DIRECTION_MATCH.WRONG, direction]);
+      this.#bridgeGameController.outputMap(this.#userDirectionInput);
+      this.retry();
+    }
+  }
   validateDirection(direction) {
     try {
       DirectionValidator.validateDirection(direction);
