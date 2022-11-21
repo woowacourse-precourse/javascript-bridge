@@ -12,14 +12,8 @@ class BridgeGame {
 	 */
 	move(canWalkBridge, moving) {
 		Player.updateMovingArray(moving);
-		const movingArray = Player.getMovingArray();
-		const currentIndex = movingArray.length - 1;
 
-		if (movingArray[currentIndex] === canWalkBridge[currentIndex]) {
-			return true;
-		}
-
-		return false;
+		return Player.checkPlayerMovingCorrect(canWalkBridge);
 	}
 
 	/**

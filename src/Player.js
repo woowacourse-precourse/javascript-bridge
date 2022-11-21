@@ -65,16 +65,22 @@ const Player = {
 		return this.gameSuccess;
 	},
 
-	getMovingArray() {
-		return this.movingArray;
-	},
-
 	getBridgeStateArray() {
 		return this.bridgeStateArray;
 	},
 
 	getTryingCount() {
 		return this.tryingCount;
+	},
+
+	checkPlayerMovingCorrect(canWalkBridge) {
+		const currentIndex = this.movingArray.length - 1;
+
+		if (this.movingArray[currentIndex] === canWalkBridge[currentIndex]) {
+			return true;
+		}
+
+		return false;
 	},
 
 	checkGameSuccess() {
