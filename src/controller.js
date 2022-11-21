@@ -6,7 +6,7 @@ const bridgeGame = new BridgeGame();
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const userBridgeCorrect = bridgeGame.userPickedUpOrDown;
-const { COMMAND, BRIDGE_MAP } = require("./Constants");
+const { COMMAND, BRIDGE_MAP, CONSTRAINTS_NUMBER } = require("./Constants");
 
 class Controller{
     #number;
@@ -24,14 +24,14 @@ class Controller{
         while(bridgeGame.userPickedArr.length < this.#number){
             this.#selectUpOrDown = InputView.readMoving();
             bridgeGame.move(this.createBridge, this.#selectUpOrDown);
-            OutputView.printMap(userBridgeCorrect[0], userBridgeCorrect[1]);
+            OutputView.printMap(userBridgeCorrect[CONSTRAINTS_NUMBER.BRIDGE_DOWN], userBridgeCorrect[CONSTRAINTS_NUMBER.BRIDGE_UP]);
             this.userPickedIsWrong(userBridgeCorrect);
         }
-        OutputView.printResult(userBridgeCorrect[0], userBridgeCorrect[1], bridgeGame.attemptCount);
+        OutputView.printResult(userBridgeCorrect[CONSTRAINTS_NUMBER.BRIDGE_DOWN], userBridgeCorrect[CONSTRAINTS_NUMBER.BRIDGE_UP], bridgeGame.attemptCount);
     }
 
     userPickedIsWrong(userBridgeCorrect){
-        if(userBridgeCorrect[0].includes(BRIDGE_MAP.WRONG) || userBridgeCorrect[1].includes(BRIDGE_MAP.WRONG)){
+        if(userBridgeCorrect[CONSTRAINTS_NUMBER.BRIDGE_DOWN].includes(BRIDGE_MAP.WRONG) || userBridgeCorrect[CONSTRAINTS_NUMBER.BRIDGE_UP].includes(BRIDGE_MAP.WRONG)){
             this.gameRunningSelect();
         }
     }
@@ -45,7 +45,7 @@ class Controller{
 
     gameFail(value){
         if(value == COMMAND.QUIT){
-          OutputView.printFailResult(userBridgeCorrect[0], userBridgeCorrect[1], bridgeGame.attemptCount);
+          OutputView.printFailResult(userBridgeCorrect[CONSTRAINTS_NUMBER.BRIDGE_DOWN], userBridgeCorrect[CONSTRAINTS_NUMBER.BRIDGE_UP], bridgeGame.attemptCount);
           Console.close();
         }
     }

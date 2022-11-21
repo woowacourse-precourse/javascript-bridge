@@ -1,4 +1,4 @@
-const { COMMAND } = require("./Constants");
+const { COMMAND, CONSTRAINTS_NUMBER } = require("./Constants");
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -12,7 +12,7 @@ const { COMMAND } = require("./Constants");
     let answerBridgeShape = [];
     while (answerBridgeShape.length < size){
       const selectValue = generateRandomNumber();
-      String(selectValue) == '1' ? answerBridgeShape.push(COMMAND.BRIDGE_UP) : answerBridgeShape.push(COMMAND.BRIDGE_DOWN);
+      String(selectValue) == CONSTRAINTS_NUMBER.BRIDGE_UP ? answerBridgeShape.push(COMMAND.BRIDGE_UP) : answerBridgeShape.push(COMMAND.BRIDGE_DOWN);
     } 
     return answerBridgeShape;
   },

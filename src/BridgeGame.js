@@ -1,4 +1,4 @@
-const { COMMAND, BRIDGE_MAP } = require("./Constants");
+const { COMMAND, BRIDGE_MAP, CONSTRAINTS_NUMBER } = require("./Constants");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -6,7 +6,7 @@ const { COMMAND, BRIDGE_MAP } = require("./Constants");
   constructor(){
     this.userPickedArr = [];
     this.userPickedUpOrDown = [[], []];
-    this.attemptCount = 1;
+    this.attemptCount = CONSTRAINTS_NUMBER.TRY_COUNT;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -24,27 +24,27 @@ const { COMMAND, BRIDGE_MAP } = require("./Constants");
 
   moveUpIsCorrect(createBridge, selectUpOrDown){
     if(createBridge == selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_UP){
-      this.userPickedUpOrDown[0].push(BRIDGE_MAP.CORRECT);
-      this.userPickedUpOrDown[1].push(BRIDGE_MAP.BLANK);
+      this.userPickedUpOrDown[CONSTRAINTS_NUMBER.BRIDGE_DOWN].push(BRIDGE_MAP.CORRECT);
+      this.userPickedUpOrDown[CONSTRAINTS_NUMBER.BRIDGE_UP].push(BRIDGE_MAP.BLANK);
     }
   }
 
   moveDownIsCorrect(createBridge, selectUpOrDown){
     if(createBridge == selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_DOWN){
-      this.userPickedUpOrDown[0].push(BRIDGE_MAP.BLANK);
-      this.userPickedUpOrDown[1].push(BRIDGE_MAP.CORRECT)
+      this.userPickedUpOrDown[CONSTRAINTS_NUMBER.BRIDGE_DOWN].push(BRIDGE_MAP.BLANK);
+      this.userPickedUpOrDown[CONSTRAINTS_NUMBER.BRIDGE_UP].push(BRIDGE_MAP.CORRECT)
     }
   }
   moveUpIsWrong(createBridge, selectUpOrDown){
     if(createBridge !== selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_UP){
-      this.userPickedUpOrDown[0].push(BRIDGE_MAP.WRONG);
-      this.userPickedUpOrDown[1].push(BRIDGE_MAP.BLANK);
+      this.userPickedUpOrDown[CONSTRAINTS_NUMBER.BRIDGE_DOWN].push(BRIDGE_MAP.WRONG);
+      this.userPickedUpOrDown[CONSTRAINTS_NUMBER.BRIDGE_UP].push(BRIDGE_MAP.BLANK);
     }
   }
   moveDownIsWrong(createBridge, selectUpOrDown){
     if(createBridge !== selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_DOWN){
-      this.userPickedUpOrDown[0].push(BRIDGE_MAP.BLANK);
-      this.userPickedUpOrDown[1].push(BRIDGE_MAP.WRONG);
+      this.userPickedUpOrDown[CONSTRAINTS_NUMBER.BRIDGE_DOWN].push(BRIDGE_MAP.BLANK);
+      this.userPickedUpOrDown[CONSTRAINTS_NUMBER.BRIDGE_UP].push(BRIDGE_MAP.WRONG);
     }  
   }
   /**
@@ -53,10 +53,10 @@ const { COMMAND, BRIDGE_MAP } = require("./Constants");
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-      this.attemptCount += 1;
-      this.userPickedArr.length = 0;
-      this.userPickedUpOrDown[0].length = 0;
-      this.userPickedUpOrDown[1].length = 0;
+      this.attemptCount += CONSTRAINTS_NUMBER.TRY_INCREASE;
+      this.userPickedArr.length = CONSTRAINTS_NUMBER.ARRAY_RESET;
+      this.userPickedUpOrDown[0].length = CONSTRAINTS_NUMBER.ARRAY_RESET;
+      this.userPickedUpOrDown[1].length = CONSTRAINTS_NUMBER.ARRAY_RESET;
     }
   }
 module.exports = BridgeGame;
