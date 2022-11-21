@@ -47,9 +47,12 @@ class App {
   }
 
   askRetryOrQuit() {
-    InputView.readGameCommand((playerInput) => {
-      const command = InputView.getGameCommand(playerInput);
-    });
+    if (this.#bridgeGame.loseGame()) {
+      InputView.readGameCommand((playerInput) => {
+        const command = InputView.getGameCommand(playerInput);
+      });
+    }
+    console.log("최종게임결과");
   }
 }
 

@@ -33,6 +33,10 @@ class BridgeGame {
     return canMove;
   }
 
+  loseGame() {
+    return this.#bridge.hasX();
+  }
+
   move(moving) {
     this.#bridge.setBridge(this.#bridgeArray, this.#bridgeIndex++, moving);
   }
