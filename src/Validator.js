@@ -11,9 +11,9 @@ const validateReadBridgeSize = (bridgeSize) => {
   }
 };
 
-const validateReadMoving = (upOrDown) => {
+const validateReadMoving = (moveKey) => {
   try {
-    if (upOrDown !== "U" && upOrDown !== "D") throw { ment: "이동할 칸에는 대문자 U 혹은 D만 입력할 수 있습니다." };
+    if (moveKey !== "U" && moveKey !== "D") throw { ment: "이동할 칸에는 대문자 U 혹은 D만 입력할 수 있습니다." };
     return true;
   } catch (e) {
     Console.print("[ERROR] " + e.ment);
