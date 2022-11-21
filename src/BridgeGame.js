@@ -1,7 +1,14 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+const MissionUtils = require("@woowacourse/mission-utils");
+const InputView = require("./InputView");
+const Script = require("./Script");
+
 class BridgeGame {
+
+  play() {
+    MissionUtils.Console.print(`${Script.STARTSCRIPT}\n`);
+    this.bridge = InputView.readBridgeSize();
+  }
+  
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
