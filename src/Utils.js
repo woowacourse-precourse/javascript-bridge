@@ -41,7 +41,7 @@ class CommandInput {
   }
 
   checkCommanInput(command) {
-    const commandConstraint = new CommandConstraint(move);
+    const commandConstraint = new CommandConstraint(command);
     commandConstraint.checkInputRQ();
   }
 }
