@@ -22,6 +22,7 @@ class BridgeGame {
   createMap(size) {
     const bridgeShape = BridgeMaker.makeBridge(size, this.randNum);
     this.#bridgeShape = bridgeShape;
+    InputView.readMoving(this);
   }
 
   randNum() {
