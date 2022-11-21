@@ -16,7 +16,7 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(BRIDGE_NUMBER_INPUT, (bridgeSize) => {
-      bridgeLengthValidate(bridgeSize);
+      if(bridgeLengthValidate(bridgeSize)) return this.readBridgeSize();
       const bridge=BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
       const bridgeGame= new BridgeGame(bridge, bridgeSize);
       this.readMoving([],bridgeGame, bridgeSize);

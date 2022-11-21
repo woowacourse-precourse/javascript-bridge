@@ -1,3 +1,4 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const {
   bridgeRangeCheck,
   userMoveInputCheck,
@@ -7,7 +8,12 @@ const {
 } = require('./utils/validation')
 
 const bridgeLengthValidate = (number)=>{
-  if(!bridgeRangeCheck(number)) throw new Error("[ERROR]")
+  try{
+    if(!bridgeRangeCheck(number)) throw new Error("[ERROR]")
+  }catch(error){
+    MissionUtils.Console.print(err.message)
+    return true;
+  }
 }
 
 module.exports = {
