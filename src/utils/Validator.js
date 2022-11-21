@@ -3,6 +3,11 @@ const { prefix, isNotANumber, isOutOfRange, isNotUpOrDown, isNotRetryOrQuit } =
   ERROR_MSG;
 
 const Validator = {
+  validateBridgeLength(number) {
+    Validator.validateNumber(number);
+    Validator.validateNumberRange(number);
+  },
+
   validateNumber(number) {
     if (/\D+/g.test(number)) throw new Error(prefix + isNotANumber);
   },

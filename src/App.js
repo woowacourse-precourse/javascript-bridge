@@ -5,8 +5,7 @@ const OutputView = require('./io/OutputView');
 const {
   validateMove,
   validateRetry,
-  validateNumber,
-  validateNumberRange,
+  validateBridgeLength,
 } = require('./utils/Validator');
 
 class App {
@@ -18,8 +17,7 @@ class App {
   askSize() {
     InputView.readBridgeSize((input) => {
       try {
-        validateNumber(input);
-        validateNumberRange(input);
+        validateBridgeLength(input);
         this.game = new BridgeGame(+input);
         this.askMove();
       } catch (e) {
