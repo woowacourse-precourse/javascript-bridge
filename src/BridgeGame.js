@@ -68,7 +68,11 @@ class BridgeGame {
   }
 
   getSucessValue() {
-
+    let lastStep = this.getRecordSteps();
+    
+    if(lastStep[0].length !== this.#bridgeInformation.bridge.length) return RESULT.FAIL;
+    if(lastStep[0].indexOf(MOVING.UNPASSED) > -1 || lastStep[1].indexOf(MOVING.UNPASSED) > -1) return RESULT.FAIL;
+    if(lastStep[0].length === this.#bridgeInformation.bridge.length) return RESULT.SUCCESS;
   }
 
   /**
