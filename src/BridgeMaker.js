@@ -16,10 +16,15 @@ const BridgeMaker = {
     const bridge = [];
     for (let i = 0; i < size; i++) {
       const trap = generateRandomNumber();
-      bridge.push(+trap === SPACE.DOWN ? ORDER.DOWN : ORDER.UP);
+      bridge.push(this.putTrap(+trap));
     }
 
     return bridge;
+  },
+
+  putTrap(trap) {
+    if (trap === SPACE.DOWN) return ORDER.DOWN;
+    return ORDER.UP;
   },
 };
 
