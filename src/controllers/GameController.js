@@ -63,6 +63,16 @@ class GameContoller {
 
   onInputGameCommand(command) {
     validate(command, isCommandInput);
+
+    if (command === 'R') {
+      this.onRetryCommand();
+    }
+  }
+
+  onRetryCommand() {
+    this.#bridgeGame.retry();
+
+    this.checkGameStatus();
   }
 }
 

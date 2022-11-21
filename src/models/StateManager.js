@@ -11,6 +11,11 @@ class StateManager {
     this.#gameStatus = status;
   }
 
+  reset() {
+    this.#stage = 0;
+    this.#gameStatus = 'PLAYING';
+  }
+
   getStage() {
     return this.#stage;
   }
