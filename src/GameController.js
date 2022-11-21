@@ -41,7 +41,7 @@ class GameController {
       try {
         new MovingValidation(input);
         this.#selectedPath = input;
-        this.printTrace();
+        this.convertTrace();
       } catch (e) {
         OutputView.printMessage(e);
         this.askForPath();
@@ -49,9 +49,9 @@ class GameController {
     });
   }
 
-  printTrace() {
+  convertTrace() {
     const trace = this.#bridgeGame.move(this.#selectedPath);
-    TraceController.printTrace(trace);
+    TraceController.convertTrace(trace);
     this.stirUp();
   }
 
@@ -87,7 +87,7 @@ class GameController {
     OutputView.printMessage(MESSAGES.RESULT);
     const result = this.#bridgeGame.getResult();
     const [isFailed, tryCount, trace] = result;
-    TraceController.printTrace(trace);
+    TraceController.convertTrace(trace);
     OutputView.printResult(isFailed, tryCount);
   }
 }
