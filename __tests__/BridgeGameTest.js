@@ -69,4 +69,18 @@ describe("다리 건너기 게임 진행 테스트", () => {
     expect(gameMap[0]).toEqual(upside);
     expect(gameMap[1]).toEqual(downside);
   });
+
+  test("마지막 이동 성공 판단 테스트", () => {
+    const bridge = ["U", "D", "D"];
+    const directions = ["U", "D", "U"];
+    const bridgeGame = new BridgeGame(bridge);
+    const booleanValue = [true, true, false];
+
+    directions.forEach((direction, index) => {
+      bridgeGame.move(direction);
+
+      const correctness = bridgeGame.hasMovedCorrectly();
+      expect(correctness).toBe(booleanValue[index]);
+    });
+  });
 });
