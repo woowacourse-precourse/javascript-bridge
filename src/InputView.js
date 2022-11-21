@@ -11,7 +11,7 @@ const InputView = {
    */
   readBridgeSize(app) {
     Console.readLine(NOTICE.INPUT_SIZE, (bridgeSize) => {
-      handleBridgeSizeInput(app, bridgeSize, InputView.readBridgeSize);
+      handleBridgeSizeInput({ app, bridgeSize }, InputView.readBridgeSize);
     });
   },
 
