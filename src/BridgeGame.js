@@ -16,7 +16,7 @@ class BridgeGame {
     this.isFinish = false;
   }
 
-  setUserBridge(command, isLoss) {
+  setUserState(command, isLoss) {
     const invertCommand = command === "U" ? "D" : "U";
     if (isLoss) {
       this.#userState[command].push("X");
@@ -54,7 +54,7 @@ class BridgeGame {
    */
   move(command) {
     const isLoss = this.#bridge[this.bridgeStep] !== command;
-    this.setUserBridge(command, isLoss);
+    this.setUserState(command, isLoss);
     if (isLoss) {
       this.isFinish = true;
       return;
