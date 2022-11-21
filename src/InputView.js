@@ -18,7 +18,7 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요\n', (bridgeLength)=>{
-      InputClass.checkBride(bridgeLength)
+      InputClass.checkBridge(bridgeLength)
       this.randomBridge(bridgeLength)
     })
   },
