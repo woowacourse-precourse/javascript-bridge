@@ -4,9 +4,7 @@ const { DEFAULTS } = require('../utils/Constants');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #upList;
-  #downList;
-  #movecnt;
+  #resultList;
 
   constructor() {
     this.init();
@@ -14,29 +12,28 @@ class BridgeGame {
   }
 
   init() {
-    this.#upList = [];
-    this.#downList = [];
-    this.#movecnt = 0;
+    this.#resultList = [[], [], 0]; // upList, downList, movecnt
   }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(answer, upOrdown) {
-    answer[this.#movecnt] === upOrdown
+    answer[this.#resultList[2]] === upOrdown
       ? this.checkUporDown(upOrdown, DEFAULTS.CAN_MOVE)
       : this.checkUporDown(upOrdown, DEFAULTS.CANT_MOVE);
-    this.#movecnt += 1;
-    return [this.#upList, this.#downList, this.#movecnt];
+    this.#resultList[2] += 1;
+    return this.#resultList;
   }
 
   checkUporDown(upOrdown, mark) {
     if (upOrdown === DEFAULTS.UP) {
-      this.moveRecord(this.#upList, this.#downList, mark);
+      this.moveRecord(this.#resultList[0], this.#resultList[1], mark);
     }
     if (upOrdown === DEFAULTS.DOWN) {
-      this.moveRecord(this.#downList, this.#upList, mark);
+      this.moveRecord(this.#resultList[1], this.#resultList[0], mark);
     }
   }
 
