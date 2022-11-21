@@ -75,6 +75,18 @@ class GameController {
   }
 
   getRetryOrEnd() {
+    InputView.readGameCommand(this.checkRetryOrEnd.bind(this));
+  }
+
+  checkRetryOrEnd(inputRetryOrEnd) {
+    try {
+      Validation.checkInputRetryOrEnd(inputRetryOrEnd);
+    } catch (Error) {
+      MissionUtils.Console.print(`${Error.message} \n`);
+      return this.getRetryOrEnd();
+    }
+
+    (inputRetryOrEnd === 'R') ? this.retry() : this.end();
   }
 
   retry() {
