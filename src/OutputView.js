@@ -19,26 +19,28 @@ const OutputView = {
   print(message) {
     Console.print(message);
   },
+
+  createMap(currentMoveCount, getUserInputResult) {
+    const bridgeMap = [[], []].map(() => Array.from({ length: currentMoveCount + 1 }));
+
+    return bridgeMap.map((el, pos) => el.map((_, idx) => {
+      const head = idx === 0 ? this.MAP_CHARACTER.START : '';
+      const tail = idx === currentMoveCount ? this.MAP_CHARACTER.END : '';
+      const { command, result } = getUserInputResult(idx);
+
+      return this.MAP_COMMAND[command] === pos
+        ? `${head}${this.MAP_CHARACTER[result]}${tail}` : `${head}${this.MAP_CHARACTER.WHITE_SPACE}${tail}`;
+    }));
+  },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(currentMoveCount, getUserInputResult) {
-    let idx = 0;
-    const map = [[], []];
+    const bridgeMap = this.createMap(currentMoveCount, getUserInputResult);
 
-    while (idx <= currentMoveCount) {
-      const head = idx === 0 ? this.MAP_CHARACTER.START : '';
-      const tail = idx === currentMoveCount ? this.MAP_CHARACTER.END : '';
-      const { command, result } = getUserInputResult(idx);
-
-      map[0].push(`${head}${this.MAP_CHARACTER.WHITE_SPACE}${tail}`);
-      map[1].push(`${head}${this.MAP_CHARACTER.WHITE_SPACE}${tail}`);
-      map[this.MAP_COMMAND[command]][idx] = `${head}${this.MAP_CHARACTER[result]}${tail}`;
-      idx += 1;
-    }
-    Console.print(map.map((el) => el.join(this.MAP_CHARACTER.MIDDLE)).join('\n'));
+    Console.print(bridgeMap.map((el) => el.join(this.MAP_CHARACTER.MIDDLE)).join('\n'));
   },
 
   /**
