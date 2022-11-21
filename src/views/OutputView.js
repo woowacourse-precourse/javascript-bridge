@@ -15,10 +15,10 @@ const OutputView = {
    * @param {BridgeMap} bridgeMap
    */
   printMap(bridgeMap) {
-    const map = bridgeMap.getMap();
+    const [upside, downside] = bridgeMap.getMap();
 
-    const upsideString = OutputUtils.stringifyMap(map[GAME_RULE.UPSIDE]);
-    const downsideString = OutputUtils.stringifyMap(map[GAME_RULE.DOWNSIDE]);
+    const upsideString = OutputUtils.stringifyMap(upside);
+    const downsideString = OutputUtils.stringifyMap(downside);
 
     Console.print(BRIDGE_MESSAGE.START + upsideString + BRIDGE_MESSAGE.END);
     Console.print(BRIDGE_MESSAGE.START + downsideString + BRIDGE_MESSAGE.END);

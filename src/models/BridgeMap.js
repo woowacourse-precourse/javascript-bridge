@@ -3,14 +3,7 @@ const { MovingCommand } = require('./command');
 
 /**
  * 다리 배열 타입 정의
- * @typedef {Array.<boolean | null>} BridgeArray
- */
-
-/**
- * 다리 지도 상태 타입 정의
- * @typedef {Object} BridgeMapState
- * @property {BridgeArray} U
- * @property {BridgeArray} D
+ * @typedef {Array.<boolean | null>} BridgeProcess
  */
 
 /**
@@ -18,23 +11,22 @@ const { MovingCommand } = require('./command');
  * @class
  */
 class BridgeMap {
-  static init = [];
-
   /**
-   * 게임 상태 타입
-   * @type {BridgeMapState}
+   * 다리 지도 상태 타입
+   * @type {BridgeProcess}
    */
-  #state = {
-    [GAME_RULE.UPSIDE]: BridgeMap.init,
-    [GAME_RULE.DOWNSIDE]: BridgeMap.init,
-  };
+  static #initialState = [];
+
+  #upside = BridgeMap.#initialState;
+
+  #downside = BridgeMap.#initialState;
 
   /**
    * 다리 지도 가져올 때 사용하는 메서드
-   * @returns {BridgeMapState}
+   * @returns {Array.<BridgeProcess>}
    */
   getMap() {
-    return this.#state;
+    return [this.#upside, this.#downside];
   }
 
   /**
@@ -45,40 +37,42 @@ class BridgeMap {
   add(movingCommand, current) {
     const isCrossed = movingCommand.isCrossed(current);
 
+    this.#addUpside(movingCommand, isCrossed);
+    this.#addDownside(movingCommand, isCrossed);
+  }
+
+  /**
+   * 위쪽 다리에 칸 추가할 때 사용하는 private 메서드
+   * @param {MovingCommand} movingCommand
+   * @param {boolean} isCrossed
+   */
+  #addUpside(movingCommand, isCrossed) {
     if (movingCommand.isUpside()) {
-      this.#addUpside(isCrossed);
+      this.#upside = [...this.#upside, isCrossed];
       return;
     }
+    this.#upside = [...this.#upside, null];
+  }
 
+  /**
+   * 위쪽 다리에 칸 추가할 때 사용하는 private 메서드
+   * @param {MovingCommand} movingCommand
+   * @param {boolean} isCrossed
+   */
+  #addDownside(movingCommand, isCrossed) {
     if (movingCommand.isDownside()) {
-      this.#addDownside(isCrossed);
+      this.#downside = [...this.#downside, isCrossed];
+      return;
     }
-  }
-
-  /**
-   * 위쪽 다리에 칸 추가할 때 사용하는 private 메서드
-   * @param {boolean} isCrossed
-   */
-  #addUpside(isCrossed) {
-    this.#state[GAME_RULE.UPSIDE] = [...this.#state[GAME_RULE.UPSIDE], isCrossed];
-    this.#state[GAME_RULE.DOWNSIDE] = [...this.#state[GAME_RULE.DOWNSIDE], null];
-  }
-
-  /**
-   * 위쪽 다리에 칸 추가할 때 사용하는 private 메서드
-   * @param {boolean} isCrossed
-   */
-  #addDownside(isCrossed) {
-    this.#state[GAME_RULE.UPSIDE] = [...this.#state[GAME_RULE.UPSIDE], null];
-    this.#state[GAME_RULE.DOWNSIDE] = [...this.#state[GAME_RULE.DOWNSIDE], isCrossed];
+    this.#downside = [...this.#downside, null];
   }
 
   /**
    * 지도 초기화할 때 사용하는 메서드
    */
   reset() {
-    this.#state[GAME_RULE.UPSIDE] = BridgeMap.init;
-    this.#state[GAME_RULE.DOWNSIDE] = BridgeMap.init;
+    this.#upside = BridgeMap.#initialState;
+    this.#downside = BridgeMap.#initialState;
   }
 }
 
