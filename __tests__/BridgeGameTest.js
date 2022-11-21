@@ -1,10 +1,18 @@
 const BridgeGame = require('../src/domain/BridgeGame');
+const BridgeMaker = require('../src/BridgeMaker');
+
+const getSettedBridgeGame = (bridge) => {
+  BridgeMaker.makeBridge = jest.fn();
+  BridgeMaker.makeBridge.mockReturnValueOnce(bridge);
+  const bridgeGame = new BridgeGame();
+  bridgeGame.initalize(bridge.length);
+  return bridgeGame;
+};
 
 describe('다리 게임 test', () => {
   test('가능한 움직임인지 판단하는 기능', () => {
     const bridge = ['U', 'D', 'D'];
-    const bridgeGame = new BridgeGame(bridge);
-
+    const bridgeGame = getSettedBridgeGame(bridge);
     bridgeGame.move('U');
     expect(bridgeGame.isMovesPossible()).toEqual([true]);
     bridgeGame.move('D');
@@ -15,7 +23,7 @@ describe('다리 게임 test', () => {
 
   test('게임 승리 판단', () => {
     const bridge = ['U', 'D', 'D', 'U', 'D'];
-    const bridgeGame = new BridgeGame(bridge);
+    const bridgeGame = getSettedBridgeGame(bridge);
 
     for (let i = 0; i < bridge.length; i += 1) {
       bridgeGame.move(bridge[i]);
@@ -26,7 +34,7 @@ describe('다리 게임 test', () => {
   test('게임 실패 판단', () => {
     const bridge = ['U', 'D', 'D', 'U', 'D'];
     const choice = ['U', 'D', 'D', 'D'];
-    const bridgeGame = new BridgeGame(bridge);
+    const bridgeGame = getSettedBridgeGame(bridge);
 
     for (let i = 0; i < choice.length; i += 1) {
       bridgeGame.move(choice[i]);
@@ -37,7 +45,7 @@ describe('다리 게임 test', () => {
   test('게임 재시도', () => {
     const bridge = ['U', 'D', 'D', 'U', 'D'];
     const choice = ['U', 'D', 'D', 'D'];
-    const bridgeGame = new BridgeGame(bridge);
+    const bridgeGame = getSettedBridgeGame(bridge);
 
     for (let i = 0; i < choice.length; i += 1) {
       bridgeGame.move(choice[i]);
