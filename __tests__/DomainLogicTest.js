@@ -8,6 +8,7 @@ const {
   VALID_CHECK_PASS,
   VALID_CHECK_DO,
 } = require("../src/Constant");
+const OutputView = require("../src/OutputView");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -23,6 +24,29 @@ const mockRandoms = (numbers) => {
   numbers.reduce((acc, number) => {
     return acc.mockReturnValueOnce(number);
   }, MissionUtils.Random.pickNumberInRange);
+};
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
+
+const getOutput = (logSpy) => {
+  return [...logSpy.mock.calls].join("");
+};
+
+const expectLogContains = (received, logs) => {
+  logs.forEach((log) => {
+    expect(received).toEqual(expect.stringContaining(log));
+  });
+};
+
+const expectBridgeOrder = (received, upside, downside) => {
+  const upsideIndex = received.indexOf(upside);
+  const downsideIndex = received.indexOf(downside);
+
+  expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
 describe("도메인 로직 단위 테스트", () => {
@@ -79,5 +103,20 @@ describe("도메인 로직 단위 테스트", () => {
     })
   });
 
-  test("라운드가 모두 종료되면, 성공 여부를 판별한다.", () => {});
+  test("라운드가 모두 종료되면, 성공 여부를 판별한다.", () => {
+    const logspy = getLogSpy();
+    const bridge = ["U", "U"];
+    const userMoving = ["U", "U"];
+    OutputView.printResult(bridge, userMoving, 1);
+
+    const log = getOutput(logspy);
+
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O | O ]",
+      "[   |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 1",
+    ]);
+  });
 });
