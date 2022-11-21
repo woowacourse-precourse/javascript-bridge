@@ -48,6 +48,10 @@ const BridgeMaker = {
   
   bridgePush(u_array , d_array){
     const NUMBER = BridgeRandomNumberGenerator.generate()
+    this.bridgePushSwitch(u_array,d_array,NUMBER)
+  },
+  
+  bridgePushSwitch(u_array , d_array , NUMBER) {
     switch(NUMBER){
       case 1:
         u_array.push('U')
