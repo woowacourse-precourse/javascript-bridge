@@ -1,4 +1,4 @@
-const ControlValidation = require('../src/Validation/ControlValidation');
+const ControlValidation = require('../../src/Validation/ControlValidation');
 
 describe('게임 재시작 테스트', () => {
   test('R 또는 Q가 아닌경우', () => {

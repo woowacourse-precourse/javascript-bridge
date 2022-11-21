@@ -1,4 +1,4 @@
-const MoveValidation = require('../src/Validation/MoveValidation');
+const MoveValidation = require('../../src/Validation/MoveValidation');
 
 describe('유저 이동 테스트', () => {
   test('U 또는 D가 아닌경우', () => {
