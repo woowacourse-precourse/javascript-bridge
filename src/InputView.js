@@ -28,6 +28,7 @@ const InputView = {
       this.readBridgeSize();
     }
   },
+
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
@@ -74,6 +75,7 @@ const InputView = {
       this.tryGameCommand(RorQ, bridgeGame, bridge);
     })
   },
+
   tryGameCommand(command, bridgeGame, bridge) {
     try {
       bridgeGame.isVaildCommand(command);
