@@ -32,18 +32,30 @@ class App {
     console.log(
       `round : ${this.#round}, bridge: ${this.#bridgeString}, userInput : ${this.#userInputString}`
     );
-    const isPlaying = this.brideGame.move(this.#round, this.#bridgeString, this.#userInputString);
+    const { status } = this.brideGame.move(this.#round, this.#bridgeString, this.#userInputString);
     this.brideGame.showCurrentBridge();
-    if (isPlaying) {
-      this.#round += 1;
-      readMoving(this.check);
-    } else {
-      this.askRetry();
+    this.doAfterCheck(status);
+  };
+
+  doAfterCheck = (status) => {
+    switch (status) {
+      case 'success':
+        this.#round += 1;
+        readMoving(this.check);
+        break;
+      case 'fail':
+        this.askRetry();
+        break;
+      case 'finish':
+        //TODO 총 시도 횟수, 성공 여부 보여주기
+        break;
     }
   };
   askRetry = () => {
     readGameCommand((input) => {
-      console.log(input);
+      if(input ==='R'){
+        readMoving(this.check);
+      }
     });
   };
 }

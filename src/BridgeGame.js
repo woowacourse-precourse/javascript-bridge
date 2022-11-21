@@ -11,14 +11,19 @@ class BridgeGame {
   #lowerBridge = [];
 
   move(round, bridgeString, userInputString) {
-    //n번째 round에서 bridgeString과 userInputString을 보고 다리 보여주기
+    //n번째 round에서 bridgeString과 userInputString을 보고 다리 현황 만들기
     const roundResult = {};
     if (bridgeString[round] === userInputString[round]) {
+      roundResult.status = 'success';
       this.pushO(this.#upperBridge, this.#lowerBridge, bridgeString[round]);
     } else {
       this.pushX(this.#upperBridge, this.#lowerBridge, bridgeString[round]);
+      roundResult.status = 'fail';
     }
-    return true;
+    if (round === bridgeString.length - 1) {
+      roundResult.status = 'end';
+    }
+    return roundResult;
   }
 
   pushO(bridge1, bridge2, uOrD) {
@@ -46,7 +51,10 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    //bridge 한칸씩 지우기? 아니면 round 줄이면 되려나...
+    
+  }
   showCurrentBridge() {
     let upperStr = '[';
     let lowerStr = '[';

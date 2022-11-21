@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { CMM_INPUT_MOVING, CMM_INPUT_SIZE } = require('../constant/Comment');
+const { CMM_INPUT_MOVING, CMM_INPUT_SIZE, CMM_INPUT_REPLAY } = require('../constant/Comment');
 const { validateBridgeSize, validateMoving, validateReplay } = require('./InputValidation');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -28,7 +28,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(nextStep) {
-    Console.readLine('끝났어요, 다싷할래요?', (input) => {
+    Console.readLine(CMM_INPUT_REPLAY, (input) => {
       validateReplay(input);
       nextStep(input);
     });
