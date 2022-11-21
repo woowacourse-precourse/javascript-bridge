@@ -36,13 +36,21 @@ class BridgeGame {
     this.moveCount = 0;
   }
 
+  increaseMoveCount = () => {
+    this.moveCount += 1;
+  };
+
+  resetMoveCount = () => {
+    this.moveCount = 0;
+  };
+
   detectIsMovable = (command) => {
     if (!this.bridgeStore.isMovable(this.moveCount, command)) {
       this.fail();
       return false;
     }
 
-    this.moveCount += 1;
+    this.increaseMoveCount();
     return true;
   };
 
@@ -88,7 +96,7 @@ class BridgeGame {
   };
 
   fail = () => {
-    this.moveCount = 0;
+    this.resetMoveCount();
     InputView.readGameCommand(this.retryMessage, this.confirmRetry);
   };
 
@@ -109,17 +117,13 @@ class BridgeGame {
   }
 
   end = () => {
-    // TODO: 게임 결과 출력
     OutputView.printResult(this.bridgeStore.getGameResult(this.moveCount));
     InputView.close();
   };
 
   runGame = (bridgeSize) => {
     this.createBridge(bridgeSize);
-
-    // while (!this.bridgeStore.isSameWithBridgeLength(this.moveCount)) {
     InputView.readMoving(this.movingMessage, this.move);
-    // }
   };
 
   init() {
