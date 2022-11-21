@@ -1,6 +1,6 @@
 const { checkPossibleCommand } = require('../Utils');
 
-class SafeBridge {
+class BridgeCommand {
   #command;
   constructor(command) {
     this.#command = command;
@@ -11,4 +11,4 @@ class SafeBridge {
   }
 }
 
-module.exports = SafeBridge;
+module.exports = BridgeCommand;
