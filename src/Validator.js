@@ -3,7 +3,7 @@ const { BridgeConfig, GameConfig, Message } = require('./Config');
 const Validator = {
 
   bridgeSize(input) {
-    if (!/^\d+$/.test(input.trim())) {
+    if (!/^\d+\s*$/.test(input)) {
       throw new RangeError(Message.ERROR_BRIDGE_LENGTH);
     }
 
