@@ -1,7 +1,7 @@
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
-const BridgeData = require('./BridgeData');
+
 /**
  * BridgeMaker에 프로퍼티를 추가할 수 없다
  * BridgeMaker의 파일 경로는 변경할 수 없다
@@ -18,7 +18,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size }, () => {
       const number = generateRandomNumber();
-      return number ? 'U' : 'D';
+      return Number(number) ? 'U' : 'D';
     });
   },
 };
