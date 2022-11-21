@@ -24,8 +24,12 @@ const InputView = {
    */
   readMoving(gameManager, level) {
     MissionUtils.Console.readLine(READ_MESSAGE.MOVING_COMMAND, (answer) => {
-      isUserMovingInputValid(answer);
-      gameManager.getBridgeGame().move(level, answer);
+      try {
+        isUserMovingInputValid(answer);
+        gameManager.getBridgeGame().move(level, answer);
+      } catch (error) {
+        InputView.readMoving(gameManager, level);
+      }
     });
   },
 
@@ -34,9 +38,12 @@ const InputView = {
    */
   readGameCommand(gameManager) {
     MissionUtils.Console.readLine(READ_MESSAGE.GAME_COMMAND, (answer) => {
-      isGameCommandValid(answer);
-      // resolve(answer);
-      gameManager.getBridgeGame().commandProcess(answer);
+      try {
+        isGameCommandValid(answer);
+        gameManager.getBridgeGame().commandProcess(answer);
+      } catch (error) {
+        InputView.readGameCommand(gameManager);
+      }
     });
   },
 };
