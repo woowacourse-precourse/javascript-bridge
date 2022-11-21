@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { OUTPUT_MESSAGE } = require('./Message');
+const { OUTPUT_MESSAGE, RESULT_MESSAGE } = require('./Message');
 
-const { print } = Console;
+const { print, close } = Console;
 
 const sketchMap = (moveHistory, dir) => {
   const line = moveHistory
@@ -35,7 +35,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(tryNum, moveHistory, isCorrect) {
+    print(RESULT_MESSAGE.GAME_RESULT);
+    OutputView.printMap(moveHistory, isCorrect);
+    print(`${RESULT_MESSAGE.IS_SUCCESS}성공`);
+    print(`${RESULT_MESSAGE.TOTAL_TRY}${tryNum}`);
+    close();
+  },
 };
 
 module.exports = OutputView;
