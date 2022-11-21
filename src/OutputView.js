@@ -7,20 +7,28 @@ const OutputView = {
     });
   },
 
-  printResult(winOrLose, tryCount) {
-    Console.print(`게임 성공 여부: ${winOrLose}\n총 시도한 횟수: ${tryCount}`);
+  printResult(bridge, isWin, tryCount) {
+    if (isWin) {
+      Console.print('최종 게임 결과');
+      this.printMap(bridge);
+      Console.print(`게임 성공 여부: 성공`);
+      Console.print(`총 시도한 횟수: ${tryCount}`);
+    } else {
+      Console.print(`게임 성공 여부: 실패`);
+      Console.print(`총 시도한 횟수: ${tryCount}`);
+    }
   },
 
   printGameStartMsg() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
+    Console.print('다리 건너기 게임을 시작합니다.');
   },
 
   printWrongInputOfBridgeLength() {
-    Console.print('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n');
+    Console.print('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
   },
 
   printWrongInputOfMoving() {
-    Console.print('[ERROR] 다리 이동 입력은 "U"와 "D"만 가능합니다\n');
+    Console.print(`[ERROR] 다리 이동 입력은 'U'와 'D'만 가능합니다.`);
   },
 
   printWrongInputOfRetryOrQuit() {

@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const InputVaildation = require('./InputValidation');
 const InputView = require('./InputView');
@@ -14,36 +15,63 @@ class App {
   }
 
   requestBridgeLength() {
-    InputView.readBridgeSize(this.startBridgeGame.bind(this));
+    InputView.readBridgeSize(this.makeBridge.bind(this));
   }
 
-  startBridgeGame(userInputOfBridegeLength) {
+  makeBridge(length) {
     try {
-      InputVaildation.ofBridgeLength(userInputOfBridegeLength);
-      this.bridgeGame.generateOfBridgeGamePassword(userInputOfBridegeLength);
-      this.requestMovingInput();
+      InputVaildation.ofBridgeLength(length);
+      this.bridgeGame.buildBridge(length);
+      this.requestMove();
     } catch {
       OutputView.printWrongInputOfBridgeLength();
       this.requestBridgeLength();
     }
   }
 
-  requestMovingInput() {
-    InputView.readMoving(this.userDecideGoToUpOrDown.bind(this));
+  requestMove() {
+    InputView.readMoving(this.moveUser.bind(this));
   }
 
-  userDecideGoToUpOrDown(userInputMoving) {
+  moveUser(upOrDown) {
     try {
-      InputVaildation.ofMove(userInputMoving);
-      this.bridgeGame.move(userInputMoving);
-      const bridge = this.bridgeGame.drawingBridge();
+      InputVaildation.ofMove(upOrDown);
+      this.bridgeGame.move(upOrDown);
+      const bridge = this.bridgeGame.moveTracking();
       OutputView.printMap(bridge);
     } catch {
-      OutputView.printWorngInputOfMoving();
-      this.requestMovingInput();
+      OutputView.printWrongInputOfMoving();
+      this.requestMove();
     }
-    if (!this.bridgeGame.gameSuccessStatus()) {
-      this.requestMovingInput();
+    if (this.bridgeGame.isMovable()) {
+      if (this.bridgeGame.isWin()) {
+        OutputView.printResult(
+          this.bridgeGame.moveTracking(),
+          this.bridgeGame.isWin(),
+          this.bridgeGame.tryCount
+        );
+        Console.close();
+      } else {
+        this.requestMove();
+      }
+    } else {
+      this.requestContinue();
+    }
+  }
+
+  requestContinue() {
+    InputView.readRetryOrQuit(this.retryOrQuit.bind(this));
+  }
+
+  retryOrQuit(userChoice) {
+    if (this.bridgeGame.retry(userChoice)) {
+      this.requestMove();
+    }
+    if (this.bridgeGame.quit(userChoice)) {
+      const map = this.bridgeGame.moveTracking();
+      const gameResult = this.bridgeGame.isWin();
+      OutputView.printMap(map);
+      OutputView.printResult(gameResult);
     }
   }
 }

@@ -4,46 +4,45 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #password;
+  #bridge;
   constructor() {
-    this.#password;
-    this.userInput = [];
+    this.moveLogs = [];
     this.tryCount = 1;
   }
 
-  generateOfBridgeGamePassword(bridgeLength) {
-    this.#password = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
+  buildBridge(length) {
+    this.#bridge = BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate);
   }
 
-  move(userMovingInput) {
-    this.userInput.push(userMovingInput);
+  move(upOrDown) {
+    this.moveLogs.push(upOrDown);
   }
 
-  drawingBridge() {
-    const bridge = this.readyForDrawingBridge(this.userInput, this.#password);
-    return this.bridgeToStringConverter(bridge);
+  moveTracking() {
+    const bridge = this.userMoveMap(this.moveLogs, this.#bridge);
+    return this.bridgeToString(bridge);
   }
 
-  readyForDrawingBridge(userMoveCollection, password) {
+  userMoveMap(moveLogs, bridge) {
     const upside = [];
     const downside = [];
-    userMoveCollection.forEach((movingInput, index) => {
-      if (movingInput === password[index]) {
-        if (movingInput === 'U') {
+    moveLogs.forEach((move, index) => {
+      if (move === bridge[index]) {
+        if (move === 'U') {
           upside.push(' O ');
           downside.push('   ');
         }
-        if (movingInput === 'D') {
+        if (move === 'D') {
           upside.push('   ');
           downside.push(' O ');
         }
       }
-      if (movingInput !== password[index]) {
-        if (movingInput === 'U') {
+      if (move !== bridge[index]) {
+        if (move === 'U') {
           upside.push(' X ');
           downside.push('   ');
         }
-        if (movingInput === 'D') {
+        if (move === 'D') {
           upside.push('   ');
           downside.push(' X ');
         }
@@ -52,28 +51,32 @@ class BridgeGame {
     return [upside, downside];
   }
 
-  bridgeToStringConverter(vanilaBridge) {
-    const convertedBridge = vanilaBridge.map(side => {
-      return '[' + side.join('|') + ']';
+  bridgeToString(bridge) {
+    const convertedBridge = bridge.map(upOrDown => {
+      return '[' + upOrDown.join('|') + ']';
     });
     return convertedBridge;
   }
 
-  gameSuccessStatus() {
-    return JSON.stringify(this.userInput) === JSON.stringify(this.#password);
+  isWin() {
+    return JSON.stringify(this.moveLogs) === JSON.stringify(this.#bridge);
   }
 
   isMovable() {
-    return this.userInput[this.userInput.length - 1] === this.#password[this.userInput.length - 1];
+    return this.moveLogs[this.moveLogs.length - 1] === this.#bridge[this.moveLogs.length - 1];
   }
 
   retry(userChoice) {
     if (userChoice === 'R') {
-      this.userInput = [];
+      this.moveLogs = [];
       this.tryCount += 1;
       return true;
     }
     return false;
+  }
+
+  quit(userChoice) {
+    return userChoice === 'Q';
   }
 }
 module.exports = BridgeGame;

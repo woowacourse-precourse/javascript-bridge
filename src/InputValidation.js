@@ -1,15 +1,18 @@
 const InputVaildation = {
   ofBridgeLength(bridgeLength) {
-    const regExag = /(^[3-9]{1}$|^[1]{1}[0-9]{1}$|^20$)/g;
+    const regExag = /(^[3-9]{1}$|^[1]{1}[0-9]{1}$|^20$)/gm;
     if (!regExag.test(bridgeLength)) {
       throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
     }
+    return;
   },
+
   ofMove(movingInput) {
     if (movingInput !== 'U' && movingInput !== 'D') {
       throw new Error('[ERROR] 다리 이동 입력은 "U"와 "D"만 가능합니다');
     }
-  }
+    return;
+  },
 };
 
 module.exports = InputVaildation;
