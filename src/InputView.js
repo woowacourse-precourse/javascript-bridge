@@ -62,7 +62,26 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    MissionUtils.Console.readLine(Constants.Input.gameCommand, (command) => {
+      try {
+        Validate.gameCommand(command);
+      } catch (error) {
+        MissionUtils.Console.print(error);
+      }
+      readCommand(command);
+    });
+  },
+
+  readCommand(command) {
+    switch (command) {
+      case 'R':
+        game.retry();
+        return InputView.readMoving();
+      case 'Q':
+        return;
+    }
+  },
 };
 
 module.exports = InputView;
