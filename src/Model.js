@@ -44,6 +44,12 @@ class Model {
     const downResult = `[${this.#userDownBridgeArr.join('|')}]`;
     return `${upResult}\n${downResult}`;
   }
+
+  resetAndRetry() {
+    this.#totalTryCount += 1;
+    this.#userDownBridgeArr = [];
+    this.#userUpBridgeArr = [];
+  }
 }
 
 module.exports = Model;
