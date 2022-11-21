@@ -1,7 +1,10 @@
 class BridgeGame {
-  #answer;
+  #answer = [];
+
   #result = [];
+
   #cnt = 1;
+
   #size;
 
   constructor(answer, size) {
@@ -11,7 +14,8 @@ class BridgeGame {
 
   move(index, input) {
     let compare;
-    this.#answer[index] === input ? (compare = 'O') : (compare = 'X');
+    if (this.#answer[index] === input) compare = 'O';
+    else compare = 'X';
     this.#result.push([input, compare]);
     return this.#result;
   }

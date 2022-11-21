@@ -5,13 +5,14 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./OutputView');
 
+let GAME;
 const InputView = {
   readBridgeSize() {
-    Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, size => {
+    Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (size) => {
       const VALIDATION = this.validateBridgeSize(size);
       if (VALIDATION) {
-        const GAME = this.startBridgeGame(parseInt(size));
-        this.repeatMoving(GAME, -1);
+        GAME = this.startBridgeGame(Number(size));
+        this.repeatMoving(-1);
       }
     });
   },
@@ -24,79 +25,81 @@ const InputView = {
       Console.print(e);
       this.readBridgeSize();
     }
+    return false;
   },
 
   startBridgeGame(size) {
     const generateRandomNumber = BridgeRandomNumberGenerator.generate;
     const ANSWER = BridgeMaker.makeBridge(size, generateRandomNumber);
-    const GAME = new BridgeGame(ANSWER, size);
+    GAME = new BridgeGame(ANSWER, size);
     return GAME;
   },
 
-  repeatMoving(GAME, cnt) {
+  repeatMoving(cnt) {
     const RESULT = GAME.getResult();
     const SIZE = GAME.getSize();
     if (cnt === SIZE - 1) {
       OutputView.printResult(RESULT, GAME.getCnt());
       Console.close();
     } else {
-      this.readMoving(GAME, cnt + 1);
+      this.readMoving(cnt + 1);
     }
   },
 
-  readMoving(GAME, cnt) {
-    Console.readLine(INPUT_MESSAGE.READ_MOVE, move => {
-      const VALIDATION = this.validateMoving(move, GAME, cnt);
+  readMoving(cnt) {
+    Console.readLine(INPUT_MESSAGE.READ_MOVE, (move) => {
+      const VALIDATION = this.validateMoving(move, cnt);
       if (VALIDATION) {
-        RESULT = GAME.move(cnt, move);
+        const RESULT = GAME.move(cnt, move);
         OutputView.printMap(RESULT);
-        this.check_X(GAME, RESULT, cnt);
+        this.check_X(RESULT, cnt);
       }
     });
   },
 
-  validateMoving(move, GAME, cnt) {
+  validateMoving(move, cnt) {
     if (move === 'U' || move === 'D') return true;
     try {
       throw new Error(ERROR_MESSAGE.MOVE_ERROR);
     } catch (e) {
       Console.print(e);
-      this.readMoving(GAME, cnt);
+      this.readMoving(cnt);
     }
+    return false;
   },
 
-  check_X(GAME, RESULT, cnt) {
-    RESULT[cnt][1] === 'X'
-      ? this.readGameCommand(GAME)
-      : this.repeatMoving(GAME, cnt);
+  check_X(RESULT, cnt) {
+    if (RESULT[cnt][1] === 'X') this.readGameCommand();
+    else this.repeatMoving(cnt);
   },
 
-  readGameCommand(GAME) {
-    Console.readLine(INPUT_MESSAGE.READ_GAME_COMMAND, restart => {
-      const VALIDATION = this.vadlidateGameCommand(restart, GAME);
-      if (VALIDATION) this.continueGame(GAME, restart);
+  readGameCommand() {
+    Console.readLine(INPUT_MESSAGE.READ_GAME_COMMAND, (restart) => {
+      const VALIDATION = this.vadlidateGameCommand(restart);
+      if (VALIDATION) this.continueGame(restart);
     });
   },
 
-  continueGame(GAME, restart) {
+  continueGame(restart) {
     const [RESULT, CNT] = [GAME.getResult(), GAME.getCnt()];
     if (restart === 'R') {
       GAME.retry();
-      this.repeatMoving(GAME, -1);
+      this.repeatMoving(-1);
     } else {
       OutputView.printResult(RESULT, CNT);
       Console.close();
     }
   },
 
-  vadlidateGameCommand(restart, GAME) {
+  vadlidateGameCommand(restart) {
     if (restart === 'R' || restart === 'Q') return true;
     try {
       throw new Error(ERROR_MESSAGE.RESTART_ERROR);
     } catch (e) {
       Console.print(e);
-      this.readGameCommand(GAME);
+      this.readGameCommand();
     }
+    return false;
   },
 };
 
