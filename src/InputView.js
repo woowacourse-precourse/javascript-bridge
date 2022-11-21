@@ -10,14 +10,11 @@ const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (number) => {
       this.checkPlayerInput(number);
-      const bridge = BridgeMaker.makeBridge(
-        number,
-        BridgeRandomNumberGenerator
-      );
-      console.log(bridge);
       mainBridge = new BridgeGame();
-      mainBridge.setSize(number);
-      this.readMoving();
+      mainBridge.setBridge(
+        BridgeMaker.makeBridge(number, BridgeRandomNumberGenerator)
+      );
+      this.readMoving(0);
     });
   },
 
@@ -40,14 +37,19 @@ const InputView = {
       throw "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.";
   },
 
-  readMoving() {
-    let location = 0;
+  readMoving(location) {
     MissionUtils.Console.readLine("이동할 칸을 선택해주세요.\n", (input) => {
       this.checkPlayerMove(input);
+      mainBridge.move(input, location);
       location += 1;
-      mainBridge.getSize();
-      this.readMoving();
+      if (this.checkEndMove(location)) this.readMoving(location);
     });
+  },
+
+  checkEndMove(number) {
+    console.log(number, mainBridge.getSize());
+    if (number === mainBridge.getSize()) return 0;
+    return 1;
   },
 
   checkPlayerMove(input) {

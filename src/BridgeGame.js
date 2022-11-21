@@ -11,19 +11,28 @@ class BridgeGame {
    */
   size;
   time;
+  bridge;
   location;
-
-  setSize(number) {
-    this.size = number;
-  }
 
   getSize() {
     return this.size;
   }
 
-  getBridge() {}
+  setBridge(string) {
+    this.bridge = string;
+    this.size = string.length;
+  }
 
-  move(playerInput, bridge, index) {
+  getBridge() {
+    return this.bridge;
+  }
+
+  move(playerInput, index) {
+    if (playerInput === bridge[index]) return 1;
+    if (playerInput === bridge[index]) return 0;
+  }
+
+  cheackResult() {
     if (playerInput === bridge[index]) return 1;
     if (playerInput === bridge[index]) return 0;
   }
