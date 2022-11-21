@@ -74,6 +74,34 @@ class BridgeGame {
     if (input === Constant.UP) return true;
     return false;
   }
+
+  buildCorrectBridge(input, upBridge, downBridge) {
+    if (this.isUpOrDown(input)) {
+      upBridge += Constant.CORRECT;
+      downBridge += Constant.NOT_CHOSEN;
+
+      return [upBridge, downBridge];
+    }
+
+    downBridge += Constant.CORRECT;
+    upBridge += Constant.NOT_CHOSEN;
+
+    return [upBridge, downBridge];
+  }
+
+  buildWrongBridge(input, upBridge, downBridge) {
+    if (this.isUpOrDown(input)) {
+      upBridge += Constant.WRONG;
+      downBridge += Constant.NOT_CHOSEN;
+
+      return [upBridge, downBridge];
+    }
+
+    downBridge += Constant.WRONG;
+    upBridge += Constant.NOT_CHOSEN;
+
+    return [upBridge, downBridge];
+  }
 }
 
 module.exports = BridgeGame;
