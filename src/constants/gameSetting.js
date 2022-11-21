@@ -5,9 +5,9 @@ const SETTING = {
   MOVING_DOWN: 'D',
   GAME_RESTART: 'R',
   GAME_QUIT: 'Q',
-  CAN_MOVE: 'O',
-  CANT_MOVE: 'X',
-  DONT_MOVE: ' ',
+  SUCCESS_MOVE: 'O',
+  FAIL_MOVE: 'X',
+  NOT_MOVE: ' ',
 };
 
 module.exports = Object.freeze(SETTING);

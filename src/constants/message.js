@@ -4,7 +4,7 @@ const MESSAGE = {
     GAME_RESULT: '최종 게임 결과',
     MAP: (map) => `[ ${map[0].join(' | ')} ]\n[ ${map[1].join(' | ')} ]\n`,
     IS_GAME_SUCCESS: (isGameSuccess) => `게임 성공 여부: ${isGameSuccess ? '성공' : '실패'}`,
-    ATTEMPT: (attempt) => `총 시도한 횟수: ${attempt}`,
+    ATTEMPT: (attempt) => `총 시도한 횟수: ${attempt.toLocaleString()}`,
   },
   INPUT: {
     BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',

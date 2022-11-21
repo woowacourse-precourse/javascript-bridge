@@ -1,5 +1,7 @@
 const BridgeMap = require('./BridgeMap');
 const Bridge = require('./Bridge');
+const Validator = require('../Validator');
+const ERROR = require('../constants/error');
 
 class BridgeGame {
   #bridgeMap = new BridgeMap();
@@ -19,10 +21,12 @@ class BridgeGame {
   }
 
   move(moving) {
-    const canIMove = this.#bridge.canMove(this.#gameStat.get('moveCount'), moving);
+    this.validateMoving(moving);
+    this.validateGame();
 
-    this.#bridgeMap.addMoveMark(moving, canIMove);
-    if (canIMove) return this.#gameStat.set('moveCount', this.#gameStat.get('moveCount') + 1);
+    const canMove = this.#bridge.canMove(this.#gameStat.get('moveCount'), moving);
+    this.#bridgeMap.addMoveMark(moving, canMove);
+    if (canMove) return this.#gameStat.set('moveCount', this.#gameStat.get('moveCount') + 1);
 
     return this.gameOver();
   }
@@ -55,6 +59,14 @@ class BridgeGame {
 
   isAlive() {
     return this.#gameStat.get('isAlive');
+  }
+
+  validateMoving(moving) {
+    if (!Validator.isMoving(moving)) throw new Error(ERROR.MOVING);
+  }
+
+  validateGame() {
+    if (this.#gameStat.get('isAlive') !== true) throw new Error(ERROR.INVALID_ACCESS);
   }
 }
 

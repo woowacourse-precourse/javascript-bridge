@@ -9,8 +9,8 @@ describe('BridgeMap 테스트', () => {
     bridgeMap.addMoveMark(SETTING.MOVING_UP, true);
 
     expect(bridgeMap.getBridgeMap()).toEqual([
-      [SETTING.CAN_MOVE, SETTING.CAN_MOVE, SETTING.CAN_MOVE],
-      [SETTING.DONT_MOVE, SETTING.DONT_MOVE, SETTING.DONT_MOVE],
+      [SETTING.SUCCESS_MOVE, SETTING.SUCCESS_MOVE, SETTING.SUCCESS_MOVE],
+      [SETTING.NOT_MOVE, SETTING.NOT_MOVE, SETTING.NOT_MOVE],
     ]);
   });
 
@@ -20,8 +20,8 @@ describe('BridgeMap 테스트', () => {
     bridgeMap.addMoveMark(SETTING.MOVING_DOWN, false);
 
     expect(bridgeMap.getBridgeMap()).toEqual([
-      [SETTING.CAN_MOVE, SETTING.DONT_MOVE],
-      [SETTING.DONT_MOVE, SETTING.CANT_MOVE],
+      [SETTING.SUCCESS_MOVE, SETTING.NOT_MOVE],
+      [SETTING.NOT_MOVE, SETTING.FAIL_MOVE],
     ]);
   });
 
