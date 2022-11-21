@@ -1,11 +1,11 @@
-import Console from "@woowacourse/mission-utils";
-import BridgeGame from "./BridgeGame";
-import {
+const { Console } = require("@woowacourse/mission-utils");
+const BridgeGame = require("./BridgeGame");
+const {
   validateBridgeLength,
   validateDirection,
   validateCommand,
-} from "./Exceptions";
-import OutputView from "./OutputView";
+} = require("./Exceptions");
+const OutputView = require("./OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -15,11 +15,14 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine("다리의 길이를 입력해주세요.\n", function (length) {
-      validateBridgeLength(length);
-      const bridgeGame = new BridgeGame(length);
-      this.readMoving(bridgeGame);
-    });
+    Console.readLine(
+      "다리의 길이를 입력해주세요.\n",
+      function (length) {
+        validateBridgeLength(length);
+        const bridgeGame = new BridgeGame(length);
+        this.readMoving(bridgeGame);
+      }.bind(this)
+    );
   },
 
   /**
@@ -30,13 +33,15 @@ const InputView = {
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       function (direction) {
         validateDirection(direction);
-        const isFinish = bridgeGame.move(direction);
+        const [isFinish, isEnd] = bridgeGame.move(direction);
         OutputView.printMap(bridgeGame.board);
-        if (isFinish) {
+        if (isEnd === true || isFinish === false) {
           OutputView.printResult();
           this.readGameCommand(bridgeGame);
+          return;
         }
-      }
+        this.readMoving(bridgeGame);
+      }.bind(this)
     );
   },
 
@@ -49,14 +54,14 @@ const InputView = {
       function (command) {
         validateCommand(command);
         this.executeCommand(command, bridgeGame);
-      }
+      }.bind(this)
     );
   },
 
   executeCommand(command, bridgeGame) {
     if (command === "R") {
       bridgeGame.retry();
-      this.readBridgeSize();
+      this.readMoving(bridgeGame);
     } else if (command === "Q") Console.close();
   },
 };
