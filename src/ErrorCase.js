@@ -1,3 +1,5 @@
+const { U, D } = require("./constants");
+
 const ErrorCase = {
   checkBridgeSizeInput(input) {
     const parsed = Number(input);
@@ -9,6 +11,12 @@ const ErrorCase = {
     if (parsed !== Math.floor(parsed)) return true;
 
     return false;
+  },
+
+  checkMovingInput(input) {
+    if (input === U || input === D) return false;
+
+    return true;
   },
 };
 
