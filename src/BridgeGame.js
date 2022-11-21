@@ -76,7 +76,6 @@ class BridgeGame {
    */
   retry(retryOrCloseKey) {
     if (retryOrCloseKey === "R") {
-      console.log("재시도");
       return 1;
     } else if (retryOrCloseKey === "Q") {
       return 0;

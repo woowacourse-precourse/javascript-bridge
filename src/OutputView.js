@@ -49,6 +49,11 @@ const OutputView = {
     }
     Console.print(upSide);
     Console.print(downSide);
+
+    const resultArr = new Array(2);
+    resultArr[0] = upSide;
+    resultArr[1] = downSide;
+    return resultArr;
   },
 
   /**
@@ -56,15 +61,21 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(command, count) {
+  printResult(command, count, result) {
     // 투두 : 칸 추가 하기
 
     if (command === 0) {
+      Console.print(MESSAGE.PRINT_RESULT);
+      Console.print(result[0]);
+      Console.print(result[1]);
       Console.print(MESSAGE.PRINT_GAME_RESULT + " " + MESSAGE.FAIL);
       Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + " " + count);
+      Console.close();
       return;
     }
     Console.print(MESSAGE.PRINT_RESULT);
+    Console.print(result[0]);
+    Console.print(result[1]);
     Console.print(MESSAGE.PRINT_GAME_RESULT + " " + MESSAGE.SUCCESS);
     Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + " " + count);
     Console.close();

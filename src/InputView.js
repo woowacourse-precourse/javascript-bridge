@@ -37,17 +37,17 @@ const InputView = {
       const userArray = bridgeGame.move(moveKey, userMoveArray);
       const keepGaming = bridgeGame.compareMove(bridge, userArray);
       const getMap = bridgeGame.getMap(userArray);
-      OutputView.printMap(keepGaming, getMap);
+      const result = OutputView.printMap(keepGaming, getMap);
 
       if (keepGaming === "right") {
         this.readMoving(bridgeGame, bridge, userMoveArray);
       }
       if (keepGaming === "allRight") {
         let count = bridgeGame.plusCount();
-        OutputView.printResult(keepGaming, count);
+        OutputView.printResult(keepGaming, count, result);
       }
       if (keepGaming === "wrong") {
-        this.readGameCommand(bridgeGame, bridge, userMoveArray);
+        this.readGameCommand(bridgeGame, bridge, userMoveArray, result);
       }
     });
     return;
@@ -56,7 +56,7 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridgeGame, bridge, userMoveArray) {
+  readGameCommand(bridgeGame, bridge, userMoveArray, result) {
     Console.readLine(MESSAGE.SELECT_RETRY, (userInput) => {
       const retryOrCloseKey = Validate.checkRetryOrCloseKey(userInput);
       let count = bridgeGame.plusCount();
@@ -67,7 +67,7 @@ const InputView = {
         this.readMoving(bridgeGame, bridge, userMoveArray);
       }
       if (command === 0) {
-        OutputView.printResult(command, count);
+        OutputView.printResult(command, count, result);
       }
     });
   },
