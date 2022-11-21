@@ -1,3 +1,6 @@
+![bridge_mvc 001](https://user-images.githubusercontent.com/111125577/203160031-5b4bb891-42f8-4377-b63b-65818650f7c0.jpeg)
+
+
 1. UI 담당 로직
     1) "다리 건너기 게임을 시작합니다." 출력
     2) "다리의 길이를 입력해주세요." 출력
