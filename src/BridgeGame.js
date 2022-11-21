@@ -50,6 +50,12 @@ class BridgeGame {
   getBridgeMap() {
     return [this.#upBridge, this.#downBridge];
   }
+
+  retry() {
+    this.#downBridge.length = 0;
+    this.#upBridge.length = 0;
+    this.#attemptCount++;
+  }
 }
 
 module.exports = BridgeGame;
