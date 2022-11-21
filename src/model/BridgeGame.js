@@ -50,6 +50,10 @@ class BridgeGame {
     return this.#map.toString();
   }
 
+  isDestination() {
+    return this.#bridge.getSize() === this.#currentLocation;
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>

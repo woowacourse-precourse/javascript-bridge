@@ -5,8 +5,8 @@ class Bridge {
     this.#path = path;
   }
 
-  getBridge() {
-    return this.#path;
+  getSize() {
+    return this.#path.length;
   }
 
   checkPath(moving, location) {

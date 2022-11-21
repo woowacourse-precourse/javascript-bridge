@@ -34,8 +34,18 @@ class BridgeGameController {
       const isSuccess = this.#bridgeGame.move(moving);
       this.printCurrentMap();
 
-      if (!isSuccess) this.getQuitMessage();
+      this.checkNextProcess(isSuccess);
     });
+  }
+
+  checkNextProcess(isSuccess) {
+    if (!isSuccess) return this.getQuitMessage();
+
+    if (isSuccess && this.#bridgeGame.isDestination()) {
+      return this.quit();
+    }
+
+    return this.getMoving();
   }
 
   printCurrentMap() {
