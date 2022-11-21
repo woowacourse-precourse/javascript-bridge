@@ -52,6 +52,8 @@ const InputView = {
         this.retryNum += 1;
         InputView.readMoving(bridgeList);
       } else if(retryOrQuit === 'Q') {
+          this.isSuccess = false;
+          printResult(upAndDown, this.retryNum, this.isSuccess);
       }
     })
   },
