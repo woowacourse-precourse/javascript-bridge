@@ -17,8 +17,8 @@ class BridgeGame {
   move(gameRec) {
     // 두 번째 move 이상일 때만 실행: 이전 bridge값 불러온 것에서 마지막 ] 빼고 "| " 추가
     if (gameRec.moveNum !== 0) {
-      gameRec.bridgeOutput.firstBridge = `${gameRec.bridgeOutput.firstBridge}${BRIDGE.BAR}`;
-      gameRec.bridgeOutput.secondBridge = `${gameRec.bridgeOutput.secondBridge}${BRIDGE.BAR}`;
+      gameRec.bridgeOutput.firstBridge = `${gameRec.bridgeOutput.firstBridge.slice(0, -1)}${BRIDGE.BAR}`;
+      gameRec.bridgeOutput.secondBridge = `${gameRec.bridgeOutput.secondBridge.slice(0, -1)}${BRIDGE.BAR}`;
     }
     this.checkCorrectOrNot(gameRec);
   }
