@@ -19,6 +19,10 @@ class BridgeGameController {
     readBridgeSize(this.#onBridgeSizeSubmit.bind(this));
   }
 
+  /**
+   * 다리 사이즈 입력할 때 사용하는 메서드
+   * @param {string} command
+   */
   #onBridgeSizeSubmit(command) {
     try {
       this.#tryBridgeSizeSubmit(command);
@@ -27,12 +31,20 @@ class BridgeGameController {
     }
   }
 
+  /**
+   * 다리 사이즈 입력 시 시도하는 메서드
+   * @param {string} command
+   */
   #tryBridgeSizeSubmit(command) {
     const sizeCommand = new SizeCommand(command);
     this.#game.setBridge(sizeCommand);
     readMoving(this.#onMovingSubmit.bind(this));
   }
 
+  /**
+   * 이동 커맨드 입력할 때 사용하는 메서드
+   * @param {string} command
+   */
   #onMovingSubmit(command) {
     try {
       this.#tryMovingCommandSubmit(command);
@@ -41,6 +53,10 @@ class BridgeGameController {
     }
   }
 
+  /**
+   * 이동 커맨드 입력 시 시도하는 메서드
+   * @param {string} command
+   */
   #tryMovingCommandSubmit(command) {
     const movingCommand = new MovingCommand(command);
     const currentBridge = this.#game.move(movingCommand);
@@ -54,6 +70,10 @@ class BridgeGameController {
     this.#runBridgeCross(isCrossed);
   }
 
+  /**
+   * 다리 건너기 성공 여부에 따라 실행할 함수 구분하는 메서드
+   * @param {boolean} isCrossed
+   */
   #runBridgeCross(isCrossed) {
     if (!isCrossed) {
       readGameCommand(this.#onGameCommandSubmit.bind(this));
@@ -63,6 +83,10 @@ class BridgeGameController {
     readMoving(this.#onMovingSubmit.bind(this));
   }
 
+  /**
+   * 게임 커맨드 입력할 때 사용하는 메서드
+   * @param {string} command
+   */
   #onGameCommandSubmit(command) {
     try {
       this.#tryGameCommandSubmit(command);
@@ -71,6 +95,10 @@ class BridgeGameController {
     }
   }
 
+  /**
+   * 게임 커맨드 입력 시 시도하는 메서드
+   * @param {string} command
+   */
   #tryGameCommandSubmit(command) {
     const gameCommand = new GameCommand(command);
 
@@ -84,17 +112,29 @@ class BridgeGameController {
     }
   }
 
+  /**
+   * 재시도 커맨드 입력할 때 사용하는 메서드
+   */
   #runRetry() {
     this.#game.retry();
     readMoving(this.#onMovingSubmit.bind(this));
   }
 
+  /**
+   * 종료 커맨드 입력할 때 사용하는 메서드
+   */
   #runQuit(isCrossed = false) {
     const finalStatus = this.#game.quit(isCrossed);
     printResult(finalStatus);
     Console.close();
   }
 
+  /**
+   * 에러가 발생할 때 사용하는 메서드
+   * @param {string} message
+   * @param {function(callback): void} readLine
+   * @param {function(string): void} callback
+   */
   static #runError(message, readLine, callback) {
     printError(message);
     readLine(callback);
