@@ -9,8 +9,32 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {
-
+  printMap(bridge,steps) {
+    let resultUp = "[ ";
+    let resultDown = "[ ";
+    for(let idx=0; idx<steps.length; idx++){
+      if(steps[idx]==bridge[idx] && steps[idx]=='U'){
+        resultUp += "O ";
+        resultDown += "  ";
+      }else if(steps[idx]!=bridge[idx] && steps[idx]=='U'){
+        resultUp += "X ";
+        resultDown += "  ";
+      }else if(steps[idx]==bridge[idx] && steps[idx]=='D'){
+        resultDown += "O ";
+        resultUp += "  ";
+      }else if(steps[idx]!=bridge[idx] && steps[idx]=='D'){
+        resultDown += "X ";
+        resultUp += "  ";
+      }
+      resultUp += "| ";
+      resultDown += "| ";
+    }
+    resultUp=resultUp.slice(0,resultUp.length-2);
+    resultDown=resultDown.slice(0,resultDown.length-2);
+    resultUp+="]";
+    resultDown+="]";
+    Console.print(resultUp);
+    Console.print(resultDown);
   },
 
   /**
