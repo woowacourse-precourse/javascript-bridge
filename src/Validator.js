@@ -9,7 +9,10 @@ const Validator = {
   validateNumberRange(number) {
     if (number < 3 || 20 < number) throw new Error(prefix + isOutOfRange);
   },
-  validateMove() {},
+  validateMove(dir) {
+    if (dir.length !== 1 || /[^UD]/.test(dir))
+      throw new Error(prefix + isNotUpOrDown);
+  },
   validateRetry() {},
 };
 
