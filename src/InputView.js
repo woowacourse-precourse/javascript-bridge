@@ -45,7 +45,8 @@ const InputView = {
       }
       if(gameRestart === "Q") {
         const trial = bridgeGame.getTrial();
-        OutputView.printResult(false, trial);
+        const currBridge = bridgeGame.getCurrBridge();
+        OutputView.printResult(currBridge, false, trial);
         Console.close();
       }
     });

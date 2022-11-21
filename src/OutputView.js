@@ -15,8 +15,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(currBridge) {
-    Console.print(currBridge[UP]);
-    Console.print(currBridge[DOWN]);
+    const upBridge = currBridge[UP].join(" | ");
+    const downBridge = currBridge[DOWN].join(" | ");
+    Console.print("[ " + upBridge + " ]");
+    Console.print("[ " + downBridge + " ]");
     Console.print("\n");
   },
 
@@ -28,7 +30,14 @@ const OutputView = {
   printResult(currBridge, gameResult, trial) {
     Console.print("최종 게임 결과");
     this.printMap(currBridge);
-    Console.print(`게임 성공 여부: ${gameResult}`);
+    let GAME_RESULT;
+    if(gameResult) {
+      GAME_RESULT = "성공";
+    }
+    if(!gameResult) {
+      GAME_RESULT = "실패";
+    }
+    Console.print(`게임 성공 여부: ${GAME_RESULT}`);
     Console.print(`총 시도한 횟수: ${trial}`);
   },
 };
