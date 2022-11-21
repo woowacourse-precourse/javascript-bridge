@@ -40,7 +40,7 @@ const InputView = {
   setBridgeInfo(inputLen, gameRec) {
     gameRec.bridgeAnswer = BridgeMaker.makeBridge(inputLen, BridgeRandomNumberGenerator.generate);
     gameRec.bridgeOutput = { firstBridge: BRIDGE.LEFT_BRACKET, secondBridge: BRIDGE.LEFT_BRACKET };
-    this.readMoving(gameRec); // moveNum, attemptNum, bridgeAnswer, bridgeOutput
+    this.readMoving(gameRec); // gameRec: moveNum, attemptNum, bridgeAnswer, bridgeOutput
   },
   /**
    * 사용자가 이동할 칸을 입력받는다.
@@ -53,7 +53,7 @@ const InputView = {
 
   checkMovingInput(inputUOrD, gameRec) {
     try {
-      (() => new MoveCheck(inputUOrD))(); // check valid input
+      (() => new MoveCheck(inputUOrD))(); // check valid input ("U" or "D")
     } catch (error) {
       MissionUtils.Console.print(error);
       this.readMoving(gameRec);
@@ -79,7 +79,7 @@ const InputView = {
 
   checkGameCommandInput(inputROrQ, gameRec) {
     try {
-      (() => new RetryQuitCheck(inputROrQ))(); // check valid input
+      (() => new RetryQuitCheck(inputROrQ))(); // check valid input ("R" or "Q")
     } catch (error) {
       MissionUtils.Console.print(error);
       this.readGameCommand(gameRec);
