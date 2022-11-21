@@ -1,4 +1,4 @@
-const MissonUtils = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 
 /**
  * 제약사항
@@ -13,7 +13,9 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize(inputBridgeSize) {
+    Console.readLine('다리의 길이를 입력해주세요.\n', inputBridgeSize);
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
