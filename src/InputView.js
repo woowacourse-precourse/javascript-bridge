@@ -1,6 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./constants');
-const { validateBridgeSize, validateMoving } = require('./Validation');
+const {
+  validateBridgeSize,
+  validateMoving,
+  validateGameCommand,
+} = require('./Validation');
 const { printMap } = require('./OutputView');
 
 /**
@@ -23,13 +27,13 @@ const InputView = {
   readMoving(bridgeGame, step, app) {
     Console.readLine(`\n${MESSAGE.SELECT_MOVING}\n`, (inputStr) => {
       const moving = validateMoving(inputStr);
-      printMap(bridgeGame, step, moving);
       const isMovable = bridgeGame.move(step, moving);
+      printMap(bridgeGame, step, isMovable);
       const bridgeSize = bridgeGame.getBridgeSize();
-      if (!isMovable) app.readGameCommand();
+      if (!isMovable) app.readGameCommand(bridgeGame, step);
       else {
         if (step < bridgeSize - 1) app.step(bridgeGame, step + 1);
-        else app.printResult(bridgeGame, step, moving);
+        else app.printResult(bridgeGame, step, isMovable);
       }
     });
   },
@@ -37,7 +41,18 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGame, step, app) {
+    Console.readLine(`\n${MESSAGE.ENTER_GAME_COMMAND}\n`, (inputStr) => {
+      const gameCommand = validateGameCommand(inputStr);
+      switch (gameCommand) {
+        case 'R':
+          break;
+        case 'Q':
+          app.printResult(bridgeGame, step, false);
+          break;
+      }
+    });
+  },
 };
 
 module.exports = InputView;

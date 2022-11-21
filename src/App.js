@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { readBridgeSize, readMoving } = require('./InputView');
+const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { MESSAGE } = require('./constants');
 const BridgeGame = require('./BridgeGame');
 const { generate } = require('./BridgeRandomNumberGenerator');
@@ -31,15 +31,16 @@ class App {
     readMoving(bridgeGame, step, this);
   }
 
-  printResult(bridgeGame, step, moving) {
+  printResult(bridgeGame, step, isMovable) {
     Console.print(`\n${MESSAGE.RESULT.FINAL_GAME_RESULT}`);
-    printMap(bridgeGame, step, moving);
-    const isSuccess = bridgeGame.move(step, moving);
-    printResult(bridgeGame, isSuccess);
+    printMap(bridgeGame, step, isMovable);
+    printResult(bridgeGame, isMovable);
     Console.close();
   }
 
-  readGameCommand() {}
+  readGameCommand(bridgeGame, step) {
+    readGameCommand(bridgeGame, step, app);
+  }
 }
 
 const app = new App();

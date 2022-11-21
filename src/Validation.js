@@ -16,6 +16,14 @@ const Validation = {
 
     return inputStr;
   },
+
+  validateGameCommand(inputStr) {
+    if (!REGEX.GAME_COMMAND.test(inputStr)) {
+      throw new Error(ERROR.ENTER_VALID_GAME_COMMAND);
+    }
+
+    return inputStr;
+  },
 };
 
 module.exports = Validation;
