@@ -126,7 +126,7 @@ D
 
 - [x] 현재 다리의 길이를 반환합니다. - `Bridge.size`
 - [x] 사용자의 입력에 따라 다리에서 이동합니다. - `BridgeGame.move`
-  - [ ] 입력한 칸이 이동할 수 있는 칸인지 비교합니다. - `Bridge.isMovable`
+  - [x] 입력한 칸이 이동할 수 있는 칸인지 비교합니다. - `Bridge.isMovable`
 - [ ] 게임을 재시작합니다. - `BridgeGame.retry`
 - [ ] 게임을 종료합니다. - `BridgeGame.quit`
 

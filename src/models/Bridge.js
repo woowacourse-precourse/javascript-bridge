@@ -32,6 +32,8 @@ class Bridge {
    */
   isMovable(direction, index) {
     this.#validateDirection(direction);
+
+    return direction === this.#bridge[index];
   }
 
   #validateDirection(direction) {
