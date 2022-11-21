@@ -27,12 +27,7 @@ class Controller {
   }
 
   handleMakingBridge(size) {
-    try {
-      this.validator.checkBridgeSize(size);
-    } catch (error) {
-      this.outputView.printError(error);
-      return;
-    }
+    this.validateBy(this.validator.checkBridgeSize, size);
 
     const bridge = this.bridgeMaker.makeBridge(size, this.bridgeRandomNumberGenerator.generate);
     this.bridgeGame.setBridge(bridge);
@@ -45,31 +40,15 @@ class Controller {
   }
 
   handleMoving(direction) {
-    try {
-      this.validator.checkMoving(direction);
-    } catch (error) {
-      this.outputView.printError(error);
-      return;
-    }
+    this.validateBy(this.validator.checkMoving, direction);
 
     this.bridgeGame.move(direction);
     this.outputView.printMap(this.bridgeGame.trials);
 
-    //TODO: if-else
-    if (this.bridgeGame.status === GAME_SIGNATURE.gameOn) {
-      this.askMoveDirection();
-      return;
-    }
-
-    if (this.bridgeGame.status === GAME_SIGNATURE.gameFail) {
-      this.askGameCommand();
-      return;
-    }
-
-    if (this.bridgeGame.status === GAME_SIGNATURE.gameSuccess) {
-      this.end();
-      return;
-    }
+    if (this.bridgeGame.status === GAME_SIGNATURE.gameOn) this.askMoveDirection();
+    else if (this.bridgeGame.status === GAME_SIGNATURE.gameFail) this.askGameCommand();
+    else if (this.bridgeGame.status === GAME_SIGNATURE.gameSuccess) this.end();
+    return;
   }
 
   end() {
@@ -81,20 +60,19 @@ class Controller {
   }
 
   handleGameCommand(command) {
+    this.validateBy(this.validator.checkGameCommand, command);
+
+    if (command === 'R') this.retry();
+    else if (command === 'Q') this.end();
+
+    return;
+  }
+
+  validateBy(handleChecking, input) {
     try {
-      this.validator.checkGameCommand(direction);
+      handleChecking(input);
     } catch (error) {
       this.outputView.printError(error);
-      return;
-    }
-
-    if (command === 'R') {
-      this.retry();
-      return;
-    }
-
-    if (command === 'Q') {
-      this.end();
     }
   }
 
