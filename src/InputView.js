@@ -30,6 +30,26 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
+  // readMoving(bridgeGame, bridge, userMoveArray) {
+  //   Console.readLine(MESSAGE.CHOOSE_MOVE_SPACE, (userInput) => {
+  //     const moveKey = Validate.checkMovingKey(userInput);
+  //     const userArray = bridgeGame.move(moveKey, userMoveArray);
+  //     const keepGaming = bridgeGame.compareMove(bridge, userArray);
+
+  //     if (keepGaming === 1) {
+  //       this.readMoving(bridgeGame, bridge, userMoveArray);
+  //     }
+  //     if (keepGaming === 0) {
+  //       OutputView.printResult();
+  //     }
+  //     if (keepGaming === 2) {
+  //       console.log("틀렸음 다시할거임?");
+  //       this.readGameCommand(bridgeGame, bridge, userMoveArray);
+  //     }
+  //   });
+  //   return;
+  // },
+
   readMoving(bridgeGame, bridge, userMoveArray) {
     Console.readLine(MESSAGE.CHOOSE_MOVE_SPACE, (userInput) => {
       const moveKey = Validate.checkMovingKey(userInput);
@@ -44,7 +64,7 @@ const InputView = {
       }
       if (keepGaming === 2) {
         console.log("틀렸음 다시할거임?");
-        this.readGameCommand();
+        this.readGameCommand(bridgeGame, bridge, userMoveArray);
       }
     });
     return;
@@ -53,9 +73,16 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(bridgeGame, bridge, userMoveArray) {
     Console.readLine(MESSAGE.SELECT_RETRY, (userInput) => {
       const retryOrCloseKey = Validate.checkRetryOrCloseKey(userInput);
+      const command = bridgeGame.retry(retryOrCloseKey);
+      if (command === 0) {
+        OutputView.printResult();
+      }
+      if (command === 1) {
+        // this.readMoving(bridgeGame, bridge, userMoveArray);
+      }
     });
   },
 };
