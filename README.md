@@ -235,7 +235,7 @@ const InputView = {
 
   readMoving() {},
 
-  readGameCommand() {},
+  readGameCommand() {}
 };
 ```
 
@@ -250,7 +250,7 @@ const InputView = {
 const OutputView = {
   printMap() {},
 
-  printResult() {},
+  printResult() {}
 };
 ```
 
@@ -279,7 +279,7 @@ class BridgeGame {
 
 ```javascript
 const BridgeMaker = {
-  makeBridge(size, generateRandomNumber) {},
+  makeBridge(size, generateRandomNumber) {}
 };
 ```
 
