@@ -40,6 +40,11 @@ const InputView = {
     if([upList[upList.length-1], downList[downList.length-1]].includes('X')) {
       this.readGameCommand(upAndDown, bridgeList);
     }
+    else {
+      if(tryNum < bridgeList.length) {
+        this.readMoving(bridgeList);
+      }
+    }
   },
 
   /**
