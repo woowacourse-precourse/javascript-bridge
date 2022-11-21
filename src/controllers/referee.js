@@ -7,7 +7,14 @@ class Referee {
   }
 
   init() {
-    InputView.readBridgeSize((answer) => this.bridgeGame.bridge.makeBridge(answer));
+    InputView.readBridgeSize((answer) => {
+      this.bridgeGame.bridge.makeBridge(answer);
+      this.start();
+    });
+  }
+
+  start() {
+    this.bridgeGame.move();
   }
 }
 module.exports = Referee;
