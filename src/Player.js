@@ -2,14 +2,14 @@ const { ANSWER, COMMAND, PLAYER } = require("./constant/Constants");
 
 const Player = {
   size: null,
-  movingArr: [],
+  movingArray: [],
   state: [[], []],
   playerAns: [],
   tryingCount: PLAYER.INITIAL_TRY_NUMBER,
   gameSuccess: PLAYER.GMAE_FAIL,
 
-  updateMovingArr(moving) {
-    this.movingArr.push(moving);
+  updateMovingArray(moving) {
+    this.movingArray.push(moving);
   },
 
   updateState(moving, isCorrect) {
@@ -65,8 +65,8 @@ const Player = {
     return this.gameSuccess;
   },
 
-  getMovingArr() {
-    return this.movingArr;
+  getMovingArray() {
+    return this.movingArray;
   },
 
   getState() {
@@ -88,7 +88,7 @@ const Player = {
 
   reset() {
     this.state = [[], []];
-    this.movingArr = [];
+    this.movingArray = [];
     this.playerAns = [];
     this.tryingCount += PLAYER.INCREASE_TRY_NUMBER;
   },

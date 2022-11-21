@@ -2,8 +2,8 @@ const Player = require("../src/Player");
 
 describe("플레이어 상태 테스트", () => {
   test("플레이어가 선택한 길이 저장되는지 테스트", () => {
-    Player.updateMovingArr("U");
-    expect(Player.movingArr).toStrictEqual(["U"]);
+    Player.updateMovingArray("U");
+    expect(Player.movingArray).toStrictEqual(["U"]);
   });
 
   test("위쪽 다리를 맞출 경우 상태 테스트", () => {
@@ -46,8 +46,8 @@ describe("플레이어 상태 테스트", () => {
   });
 
   test("플레이어가 선택한 다리 상태 반환 테스트", () => {
-    Player.movingArr = ["U", "D", "U"];
-    expect(Player.getMovingArr()).toStrictEqual(["U", "D", "U"]);
+    Player.movingArray = ["U", "D", "U"];
+    expect(Player.getMovingArray()).toStrictEqual(["U", "D", "U"]);
   });
 
   test("플레이어가 선택한 다리 정답 상태 반환 테스트", () => {
@@ -71,7 +71,7 @@ describe("플레이어 상태 테스트", () => {
     Player.reset();
 
     expect(Player.state).toStrictEqual([[], []]);
-    expect(Player.movingArr).toStrictEqual([]);
+    expect(Player.movingArray).toStrictEqual([]);
     expect(Player.playerAns).toStrictEqual([]);
     expect(Player.tryingCount).toBe(2);
   });
