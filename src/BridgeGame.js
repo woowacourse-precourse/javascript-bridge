@@ -6,14 +6,14 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 class BridgeGame {
   realBridge;
-  upBridge;
-  downBridge;
+  userBridge;
   curr;
+  tryCnt;
 
   constructor() {
-    this.upBridge = [];
-    this.downBridge = [];
+    this.userBridge = { up: [], down: [] };
     this.curr = 0;
+    this.tryCnt = 1;
   }
 
   makeRealBridge(size) {
@@ -31,11 +31,11 @@ class BridgeGame {
   move(cmd) {
     const mark = this.realBridge[this.curr] === cmd ? "O" : "X";
     if (cmd === "U") {
-      this.upBridge.push(mark);
-      this.downBridge.push(" ");
+      this.userBridge.up.push(mark);
+      this.userBridge.down.push(" ");
     } else {
-      this.downBridge.push(mark);
-      this.upBridge.push(" ");
+      this.userBridge.down.push(mark);
+      this.userBridge.up.push(" ");
     }
     this.curr += 1;
 
@@ -48,9 +48,10 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.downBridge = [];
-    this.upBridge = [];
+    this.userBridge.down = [];
+    this.userBridge.up = [];
     this.curr = 0;
+    this.tryCnt += 1;
   }
 }
 

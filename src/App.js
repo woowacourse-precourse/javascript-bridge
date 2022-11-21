@@ -25,20 +25,14 @@ class App {
 
   move(cmd) {
     let result = this.#game.move(cmd);
-    OutputView.printMap(this.#game.upBridge, this.#game.downBridge);
+    OutputView.printMap(this.#game.userBridge);
     this.checkFinish(result);
   }
 
   checkFinish(result) {
     if (result === "O") {
-      console.log(this.#game.realBridge.length);
-      console.log(this.#game.curr);
       if (this.#game.realBridge.length <= this.#game.curr) {
-        OutputView.printResult(
-          this.#game.upBridge,
-          this.#game.downBridge,
-          true
-        );
+        OutputView.printResult(this.#game.userBridge, this.#game.tryCnt, true);
         Console.close();
         return;
       }
@@ -53,7 +47,7 @@ class App {
       this.#game.retry();
       this.readMoving();
     } else {
-      OutputView.printResult(this.#game.upBridge, this.#game.downBridge, false);
+      OutputView.printResult(this.#game.userBridge, this.#game.tryCnt, false);
       Console.close();
     }
   }
