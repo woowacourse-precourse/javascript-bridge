@@ -64,8 +64,8 @@ const InputView = {
 
     if (!hasCorrect) this.readGameCommand(bridge);
     else if (round === bridge.length && hasCorrect) {
-      const totalCount = this.bridgeGame.countTry();
-      OutputView.printResult(totalCount, hasCorrect, [up, down]);
+      const totalTry = this.bridgeGame.countTry();
+      OutputView.printResult(totalTry, hasCorrect, [up, down]);
     } else this.readMoving(bridge);
   },
 
@@ -84,13 +84,13 @@ const InputView = {
   },
 
   restartOrQuit(bridge, restartOrQuit) {
-    const totalCount = this.bridgeGame.countTry();
+    const totalTry = this.bridgeGame.countTry();
 
     if (restartOrQuit === 'R') {
       this.bridgeGame.retry();
       this.readMoving(bridge);
     } else if (restartOrQuit === 'Q') {
-      OutputView.printResult(totalCount, false, this.bridgeGame.getMap());
+      OutputView.printResult(totalTry, false, this.bridgeGame.getMap());
     }
   },
 };
