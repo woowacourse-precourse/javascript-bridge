@@ -1,6 +1,6 @@
 const Vaildation =  {
     isNumber(input) {
-        if (isNaN(money)) {
+        if (isNaN(input)) {
             throw new Error(`[ERROR] 입력값 ${input}은 숫자가 아닙니다.`);
         }
     },
