@@ -26,10 +26,10 @@ const BridgeMaker = {
 
   makeBridgePush(bridge, number) {
     switch(number){
-      case '1':
+      case 1:
         bridge.push('U')
         return 
-      case '0':
+      case 0:
         bridge.push('D')
         return 
     }
@@ -49,11 +49,11 @@ const BridgeMaker = {
   bridgePush(u_array , d_array){
     const NUMBER = BridgeRandomNumberGenerator.generate()
     switch(NUMBER){
-      case '1':
+      case 1:
         u_array.push('U')
         d_array.push('X')
         return 
-      case '0':
+      case 0:
         u_array.push('X')
         d_array.push('D')
         return 
