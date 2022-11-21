@@ -29,19 +29,19 @@ class BridgeController {
       return this.requestBridgeSize();
     }
     OutputView.printLineBreak();
-    this.requestBridgeMovemonet();
+    this.requestBridgeMovemoment();
   }
 
-  requestBridgeMovemonet() {
+  requestBridgeMovemoment() {
     InputView.readMoving(this.controlMovemoment.bind(this));
   }
 
   controlMovemoment(movePosition) {
     if (!this.controlValidate(Validate.validateMovePosition, movePosition)) {
-      return this.requestBridgeMovemonet();
+      return this.requestBridgeMovemoment();
     }
 
-    this.#bridgeGame.selectMovemonetPosition(movePosition);
+    this.#bridgeGame.selectMovemomentPosition(movePosition);
     const drawBridge = this.getDrawBridge();
     OutputView.printMap(drawBridge);
     this.controlNextStep(drawBridge);
@@ -82,7 +82,7 @@ class BridgeController {
       OutputView.printResult(drawBridge, '성공', attemps);
       return Console.close();
     }
-    return this.requestBridgeMovemonet();
+    return this.requestBridgeMovemoment();
   }
 
   requestGameCommand() {
@@ -93,7 +93,7 @@ class BridgeController {
     if (!this.controlValidate(Validate.validateRetryOfQuit, input)) {
       return this.requestGameCommand();
     }
-    if (input === 'R') return this.#bridgeGame.retry() || this.requestBridgeMovemonet();
+    if (input === 'R') return this.#bridgeGame.retry() || this.requestBridgeMovemoment();
     const attemps = this.#bridgeGame.getNumberOfAttempts();
     const drawBridge = this.getDrawBridge();
     return OutputView.printResult(drawBridge, '실패', attemps) || Console.close();

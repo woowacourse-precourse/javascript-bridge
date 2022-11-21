@@ -10,9 +10,9 @@ describe('Bridge Game Move Test', () => {
     const bridge = ['U', 'D', 'U'];
     bridgeGame.updateBridge(bridge);
 
-    bridgeGame.selectMovemonetPosition('U');
-    bridgeGame.selectMovemonetPosition('D');
-    bridgeGame.selectMovemonetPosition('U');
+    bridgeGame.selectMovemomentPosition('U');
+    bridgeGame.selectMovemomentPosition('D');
+    bridgeGame.selectMovemomentPosition('U');
 
     const result = bridgeGame.isSuccess();
     expect(result).toBeTruthy();
@@ -23,10 +23,10 @@ describe('Bridge Game Move Test', () => {
 
     bridgeGame.updateBridge(bridge);
 
-    bridgeGame.selectMovemonetPosition('U');
-    bridgeGame.selectMovemonetPosition('D');
-    bridgeGame.selectMovemonetPosition('D');
-    bridgeGame.selectMovemonetPosition('U');
+    bridgeGame.selectMovemomentPosition('U');
+    bridgeGame.selectMovemomentPosition('D');
+    bridgeGame.selectMovemomentPosition('D');
+    bridgeGame.selectMovemomentPosition('U');
     const result = bridgeGame.move();
     expect(result).toEqual([
       ['O', ' '],
@@ -38,8 +38,8 @@ describe('Bridge Game Move Test', () => {
 
   describe('retry test', () => {
     test('재시작시 사용자가 입력한값이 초기화가 되는지 Test', () => {
-      bridgeGame.selectMovemonetPosition('U');
-      bridgeGame.selectMovemonetPosition('D');
+      bridgeGame.selectMovemomentPosition('U');
+      bridgeGame.selectMovemomentPosition('D');
       bridgeGame.retry();
       const result = bridgeGame.getUserBridge();
       expect(result).toEqual([]);

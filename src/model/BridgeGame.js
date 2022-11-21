@@ -12,7 +12,7 @@ class BridgeGame {
     this.#numberOfAttempts = 1;
   }
 
-  selectMovemonetPosition(input) {
+  selectMovemomentPosition(input) {
     return this.#userBridge.push(input);
   }
 
