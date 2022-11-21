@@ -16,7 +16,13 @@ class App {
     InputView.readMoving(move => {
       this.#bridgeGame.moveCompare(move)
       OutputView.printMap(this.#bridgeGame.moveResult())
-      this.getUserMove()
+      this.#bridgeGame.isClear(stats => {
+        if (stats) {
+          OutputView.printResult(this.#bridgeGame.mapResult(stats))
+        } else {
+          this.getUserMove()
+        }
+      })
     })
   }
 }

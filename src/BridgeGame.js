@@ -1,5 +1,6 @@
 const BridgeMaker = require('../src/BridgeMaker')
 const randomNumber = require('../src/controller/GenerateRandomNumber')
+const MESSAGE = require('../src/MessageContent')
 
 class BridgeGame {
   #bridge
@@ -45,6 +46,24 @@ class BridgeGame {
   moveResult() {
     return this.#collectInputResult.bridgeMap
   }
+
+  isClear(callback) {
+  callback(this.checkBridgeStats())
+}
+
+checkBridgeStats() {
+  if (this.#collectInputResult.bridgeMap[0].length === this.#bridge.length) {
+    return true
+  }
+}
+
+mapResult(stats) {
+  return {
+    bridgeMap: this.#collectInputResult.bridgeMap,
+    gameOver: stats ? MESSAGE.SUCCESSS : MESSAGE.FAILURE,
+    moveCount: `${MESSAGE.TRY}${this.#collectInputResult.tryCount}`
+  }
+}
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
