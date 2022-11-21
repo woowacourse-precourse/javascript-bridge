@@ -60,7 +60,7 @@ const expectBridgeOrder = (received, upside, downside) => {
 
 describe("다리 건너기 테스트", () => {
   test("다리 생성 테스트", () => {
-    const randomNumbers = ["1", "0", "0"];      // 위 - 아래 - 아래
+    const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);   // mock function에 대한 한 번의 호출에 대해 반환된 값을 지정 ("1", "0", "0" 순으로 값을 리턴)
     }, jest.fn());
@@ -70,9 +70,9 @@ describe("다리 건너기 테스트", () => {
   });
 
   test("기능 테스트", () => {
-    const logSpy = getLogSpy();           // spyOn: print
-    mockRandoms(["1", "0", "1"]);         // mock: pickNumberInRange
-    mockQuestions(["3", "U", "D", "U"]);  // mock: readLine
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["3", "U", "D", "U"]);
 
     const app = new App();
     app.play();
