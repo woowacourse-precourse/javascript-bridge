@@ -3,10 +3,18 @@ class Bridge {
 
   constructor(bridge) {
     this.#bridge = bridge;
+    console.log(this.#bridge);
   }
 
   matchMoveBridge(moving,step){
     if(moving === this.#bridge[step]){
+      return true;
+    }
+    return false;
+  }
+
+  isReach(step) {
+    if(step === this.#bridge.length-1){
       return true;
     }
     return false;

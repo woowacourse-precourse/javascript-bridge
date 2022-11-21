@@ -27,8 +27,8 @@ class BridgeGame {
     return isUp ? this.#bridgeMap.upMap(moving) : this.#bridgeMap.downMap(moving);
   }
 
-  isEnd(isMatch) {
-    return isMatch;
+  isEnd() {
+    return this.#bridge.isReach(this.#step);
   }
   retry() {}
   

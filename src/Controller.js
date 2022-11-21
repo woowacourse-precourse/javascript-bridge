@@ -28,7 +28,11 @@ class Controller {
     printMap(downMap);
   }
   handleBridgeGame(isMatch){
-    isMatch? this.play() : '';
+    if(this.#bridgeGame.isEnd() || !isMatch){
+      this.end();
+      return;
+    }
+    this.play();
   }
 }
 
