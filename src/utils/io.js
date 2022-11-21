@@ -8,6 +8,10 @@ const Io = {
   output(message) {
     Console.print(message);
   },
+
+  close() {
+    Console.close();
+  },
 };
 
 module.exports = Io;
