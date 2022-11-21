@@ -1,4 +1,4 @@
-const BridgeGame = require("./BridgeGame");
+const { DIRECTION } = require("./constants/gameState");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 
@@ -23,6 +23,10 @@ class BridgeGameController {
 
   inputRetry() {
     InputView.readGameCommand();
+  }
+
+  outputMap(upArray, downArray) {
+    OutputView.printMap(upArray.join(" | "), downArray.join(" | "));
   }
 }
 
