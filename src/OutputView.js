@@ -8,7 +8,16 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(bridge) {
+    const upBridge = this.makeBridgeLine(bridge, 'U');
+    const downBridge = this.makeBridgeLine(bridge, 'D');
+    Console.print(this.makeMap(upBridge))
+    Console.print(this.makeMap(downBridge) + '\n')
+  },
+  makeMap(bridge){
+    const printingBridge = `[ ${bridge.join().replace(/,/g," | ")} ]`
+    return printingBridge;
+  },
   makeBridgeLine(bridge, direction) {
     const bridgeLine = bridge.map((block) => {
       if (block === direction) {
