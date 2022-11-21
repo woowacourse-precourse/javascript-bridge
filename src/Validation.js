@@ -36,6 +36,20 @@ const Validation = {
       throw ERROR_MESSAGE.IS_WRONG_DIRECTION;
     }
   },
+  validateRetryComment(retryComment) {
+    try {
+      this.isRightRetryComment(retryComment);
+    } catch (error) {
+      Console.print(error);
+      return false;
+    }
+    return true;
+  },
+  isRightRetryComment(retryComment) {
+    if (retryComment !== 'R' && retryComment !== 'Q') {
+      throw ERROR_MESSAGE.IS_WRONG_RETRY_COMMENT;
+    }
+  },
 };
 
 module.exports = Validation;

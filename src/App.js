@@ -44,6 +44,7 @@ class App {
     OutputView.printBridge(upBridgeRecord, downBridgeRecord);
   }
   checkReplay(replayComment) {
+    if (!Validation.validateRetryComment(replayComment)) return this.inputReplay();
     const FAIL_COMMENT = '실패';
     if (replayComment === 'R') return this.bridgeGame.retry(this.inputMoving.bind(this));
     if (replayComment === 'Q') {
