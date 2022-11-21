@@ -47,6 +47,18 @@ class App {
     OutputView.printMap(this.#gameResult);
     this.#decideNextPhaseByRoundResult();
   }
+
+  #decideNextPhaseByRoundResult() {
+    if (this.#gameResult.roundResult === MOVE_RESULT.FAIL) {
+      this.#retryCommandInputPhase();
+      return;
+    }
+    if (this.#gameResult.roundResult === MOVE_RESULT.CLEAR) {
+      this.#gameEndPhase();
+      return;
+    }
+    this.#movingInputPhase();
+  }
 }
 
 module.exports = App;
