@@ -15,6 +15,11 @@ const Validation = {
       throw new Error(ERROR_MESSAGE.MOVING);
     }
   },
+  gameCommand(answer) {
+    if (CONDITION.INVALID_GAME_COMMAND(answer)) {
+      throw new Error(ERROR_MESSAGE.GAME_COMMAND);
+    }
+  },
 };
 
 module.exports = Validation;
