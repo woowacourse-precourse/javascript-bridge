@@ -18,7 +18,7 @@ class App {
     InputView.readBridgeSize(this.makeBridge.bind(this));
   }
   makeBridge(size) {
-    Validation.isInputNumber(size);
+    if (!Validation.isInputNumber(size)) this.play();
     this.bridgeGame.setBridge(BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate));
     this.inputMoving();
   }
