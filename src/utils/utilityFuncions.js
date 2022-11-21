@@ -1,5 +1,5 @@
-const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator.js");
-const BridgeMaker = require("../BridgeMaker.js");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
+const BridgeMaker = require("./BridgeMaker.js");
 
 const { DEFAULT } = require("./constant.js");
 
