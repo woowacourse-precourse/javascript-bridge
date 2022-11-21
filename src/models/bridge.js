@@ -1,5 +1,6 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const OutputView = require('../views/OutputView');
 
 class Bridge {
   constructor() {
@@ -11,18 +12,29 @@ class Bridge {
     return this.compareResult;
   }
 
-  makeBridge(size) {
-    Bridge.#bridgeSizeValidate(size);
-    this.bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+  makeBridge(size, init) {
+    try {
+      Bridge.#bridgeSizeValidate(size, init);
+      this.bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    } catch {
+      OutputView.printMakeBridgeError();
+      init();
+    }
   }
 
-  compareSpace(value) {
-    Bridge.#moveInputValidate(value);
-    this.sameCheck(value);
-    this.locationNumber += 1;
+  compareSpace(value, start, resultAnalysis) {
+    try {
+      Bridge.#moveInputValidate(value, start);
+      this.sameCheck(value);
+      resultAnalysis();
+    } catch {
+      OutputView.printMoveInputError();
+      start();
+    }
   }
 
   sameCheck(value) {
+    this.locationNumber += 1;
     if (this.bridge[this.locationNumber] === value) {
       this.#correct(value);
       return;
@@ -55,17 +67,14 @@ class Bridge {
 
   static #bridgeSizeValidate(size) {
     if (!(Number(size) >= 3 && Number(size) <= 20)) {
-      throw new Error('3이상 20이하의 길이만 가능합니다');
+      throw new Error('입력오류');
     }
-    if (!(size >= '0' && size <= '9')) throw new Error('0~9숫자만 입력가능합니다');
-
-    if (size[0] === '0') throw new Error('옳지않은 입력입니다');
   }
 
   static #moveInputValidate(input) {
-    if (input.length !== 1) throw new Error('U,D만 입력가능합니다');
-
-    if (!(input === 'U' || input === 'D')) throw new Error('U,D만 입력가능합니다.');
+    if (!(input === 'U' || input === 'D')) {
+      throw new Error('입력오류');
+    }
   }
 }
 

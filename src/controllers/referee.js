@@ -9,13 +9,16 @@ class Referee {
 
   init() {
     InputView.readBridgeSize((answer) => {
-      this.bridgeGame.bridge.makeBridge(answer);
+      this.bridgeGame.bridge.makeBridge(answer, () => this.init());
       this.start();
     });
   }
 
   start() {
-    this.bridgeGame.move(() => this.resultAnalysis());
+    this.bridgeGame.move(
+      () => this.resultAnalysis(),
+      () => this.start(),
+    );
   }
 
   resultAnalysis() {
