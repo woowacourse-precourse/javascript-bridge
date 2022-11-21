@@ -2,7 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
 
-const mockQuestions = answers => {
+const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
     return acc.mockImplementationOnce((_, callback) => {
@@ -11,7 +11,7 @@ const mockQuestions = answers => {
   }, MissionUtils.Console.readLine);
 };
 
-const mockRandoms = numbers => {
+const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce((acc, number) => {
     return acc.mockReturnValueOnce(number);
@@ -24,11 +24,11 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-const getOutput = logSpy => {
+const getOutput = (logSpy) => {
   return [...logSpy.mock.calls].join('');
 };
 
-const runException = inputs => {
+const runException = (inputs) => {
   mockQuestions(inputs);
   const logSpy = getLogSpy();
   const app = new App();
@@ -41,7 +41,7 @@ const runException = inputs => {
 const expectLogContains = (received, logs) => {
   console.log('recieved : ', received);
   console.log('logs : ', logs);
-  logs.forEach(log => {
+  logs.forEach((log) => {
     expect(received).toEqual(expect.stringContaining(log));
   });
 };
@@ -55,7 +55,7 @@ const expectBridgeOrder = (received, upside, downside) => {
 
 describe('다리 건너기 테스트', () => {
   test('다리 생성 테스트', () => {
-    const randomNumbers = ['1', '0', '0'];
+    const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
@@ -66,7 +66,7 @@ describe('다리 건너기 테스트', () => {
 
   test('기능 테스트', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1']);
+    mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'D', 'U']);
 
     const app = new App();
