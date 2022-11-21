@@ -9,10 +9,11 @@ const{ Console } = require("@woowacourse/mission-utils"); //테스트용 추가,
  */
 class BridgeGame {
   #bridgeInformation;
+  #userInformation;
 
   constructor() {
     this.#bridgeInformation = { bridge: [] };
-
+    this.#userInformation = { track: [] };
   }
 
   ready(size) {
@@ -41,6 +42,13 @@ class BridgeGame {
   move(moving) {
     const validate = new Validate();
     validate.validateMove(moving);
+    const step = this.#userInformation.track.length;
+    if(moving === MOVING.UPSIDE_STRING) this.#bridgeInformation.downside.splice(step, 1, MOVING.BLANK);
+    if(moving === MOVING.DOWNSIDE_STRING) this.#bridgeInformation.upside.splice(step, 1, MOVING.BLANK);
+    this.#userInformation.upside = this.#bridgeInformation.upside.slice(0, step + 1);
+    this.#userInformation.downside = this.#bridgeInformation.downside.slice(0, step + 1);
+ 
+    this.#userInformation.track.push(moving);
   }
 
   /**
