@@ -49,6 +49,13 @@ class BridgeGame {
   getRetryCount() {
     return this.#retryCount;
   }
+
+  isRetry(input) {
+    if (!["R", "Q"].includes(input))
+      throw "[ERROR] R, Q 이외의 입력은 오류가 발생합니다.";
+    if (input == "R") return this.retry();
+    return false;
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
@@ -58,6 +65,7 @@ class BridgeGame {
     this.#retryCount += 1;
     this.#currentIdx = 0;
     this.#bridgeMap = [[], []];
+    return true;
   }
 }
 
