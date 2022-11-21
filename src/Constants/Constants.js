@@ -8,6 +8,8 @@ const PROMPT = {
 const COMMAND = {
   UP : "U",
   DOWN : "D",
+  RETRY : "R",
+  QUIT : "Q",
 }
 
 const WORD = {

@@ -18,6 +18,11 @@ class BridgeGameController {
     return isWrong;
   }
 
+  manageCommand(command) {
+    const isRetry = this.#bridgeGame.retry(command);
+    return isRetry;
+  }
+
   isGameEnd() {
     const isGameEnd = this.#bridgeGame.isGameEnd();
     return isGameEnd;
