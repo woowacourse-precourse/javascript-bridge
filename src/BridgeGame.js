@@ -39,6 +39,33 @@ class BridgeGame {
   isFinal() {
     return this.#history.length === this.#bridge.length;
   }
+
+  getMap() {
+    const upFloors = this.#getUpfloors();
+    const downFloors = this.#getDownFloors();
+
+    return { upFloors, downFloors };
+  }
+
+  #getUpfloors() {
+    const upFloors = this.#history.map((floor, i) => {
+      if (floor === 'U' && floor === this.#bridge[i]) return 'O';
+      if (floor === 'U' && floor !== this.#bridge[i]) return 'X';
+      return ' ';
+    });
+
+    return `[ ${upFloors.join(' | ')} ]`;
+  }
+
+  #getDownFloors() {
+    const downFloors = this.#history.map((floor, i) => {
+      if (floor === 'D' && floor === this.#bridge[i]) return 'O';
+      if (floor === 'D' && floor !== this.#bridge[i]) return 'X';
+      return ' ';
+    });
+
+    return `[ ${downFloors.join(' | ')} ]`;
+  }
 }
 
 module.exports = BridgeGame;

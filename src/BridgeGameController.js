@@ -17,6 +17,7 @@ const BridgeGameController = {
   moveBridge(bridgeGame) {
     InputView.readMoving((moving) => {
       bridgeGame.move(moving);
+      OutputView.printMap(bridgeGame.getMap());
 
       if (!bridgeGame.isSuccess()) return BridgeGameController.askRetry(bridgeGame);
       if (bridgeGame.isFinal()) return BridgeGameController.end(bridgeGame);
