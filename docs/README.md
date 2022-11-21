@@ -10,7 +10,7 @@
 - [ ] 게임 성공 여부를 판단한다. - Judge#judgeGameSuccess()
 - [ ] 게임 시도 횟수를 센다. - Counter#countTry()
 - [x] 이동 정보를 다리 결과로 변환한다. - Converter#convertToBridgeMap()
-- [ ] 다리의 정보를 출력한다. - OutputView#printMap()
+- [x] 다리의 정보를 출력한다. - OutputView#printMap()
 - [ ] 게임 결과를 출력한다. - OutputView#printResult()
 - [x] 게임 시작 메세지를 출력한다. - OutputView#printGameStart()
 - [x] 다리의 길이를 입력받고 전달한다. - InputView#readBridgeSize()
