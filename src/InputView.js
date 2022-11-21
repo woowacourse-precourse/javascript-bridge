@@ -18,6 +18,7 @@ const InputView = {
     Console.readLine(
       "다리의 길이를 입력해주세요.\n",
       function (length) {
+        length = Number(length);
         validateBridgeLength(length);
         const bridgeGame = new BridgeGame(length);
         this.readMoving(bridgeGame);

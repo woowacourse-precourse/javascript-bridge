@@ -1,5 +1,5 @@
 function validateBridgeLength(length) {
-  if (length < 3 || length > 20)
+  if (isNaN(length) === true || length < 3 || length > 20)
     throw Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
 }
 
