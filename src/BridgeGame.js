@@ -70,6 +70,10 @@ class BridgeGame {
     return isRetry;
   }
 
+  bringCountRetry() {
+    return this.#countRetry;
+  }
+
   isGameEnd() {
     return this.#bridge.length === this.#currentBridge.length;
   }

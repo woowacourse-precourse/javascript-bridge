@@ -31,7 +31,8 @@ class BridgeGameController {
 
   gameOver(state = false) {
     const resultMap = this.#bridgeGame.bringSketch();
-    OutputView.printResult(resultMap, state);
+    const countRetry = this.#bridgeGame.bringCountRetry();
+    OutputView.printResult(resultMap, state, countRetry);
     Console.close();
   }
 }

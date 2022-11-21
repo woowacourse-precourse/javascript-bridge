@@ -6,6 +6,7 @@ const PROMPT = {
   RESULT : "\n최종 게임 결과",
   SUCCESS : "\n게임 성공 여부: 성공",
   FAIL : "\n게임 성공 여부: 실패",
+  COUNT : "총 시도한 횟수: ",
 }
 
 const COMMAND = {
