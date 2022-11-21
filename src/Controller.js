@@ -8,10 +8,12 @@ const BridgeGame = require('./BridgeGame');
 class Controller {
   constructor() {
     this.model = new Model();
+    this.inputView = InputView;
+    this.outputView = OutputView;
   }
 
   startGame() {
-    OutputView.printGameStart();
+    this.outputView.printGameStart();
     this.inputBridgeSize();
   }
 
@@ -22,7 +24,7 @@ class Controller {
       this.model.setComputerBridgeArr(BridgeMaker.makeBridge(num, generate));
       return this.inputMoving();
     };
-    InputView.readBridgeSize(readBridgeSizeCallback);
+    return this.inputView.readBridgeSize(readBridgeSizeCallback);
   }
 
   inputMoving() {
@@ -31,20 +33,21 @@ class Controller {
       const computerBridgeArr = this.model.getComputerBridgeArr();
       const OX = input === computerBridgeArr[index] ? ' O ' : ' X ';
       BridgeGame.move(input, OX, this.model);
-      OutputView.printMap(this.model);
+      this.outputView.printMap(this.model);
       if (OX === ' X ') return this.inputGameCommand();
-      if (index === bridgeSize - 1) return OutputView.printResult('성공', this.model);
+      if (index === bridgeSize - 1) return this.outputView.printResult('성공', this.model);
     };
-    InputView.readMoving(callback, 0, this.model);
+    return this.inputView.readMoving(callback, 0, this.model);
   }
 
   inputGameCommand() {
     const callback = (input) => {
-      if (input === 'Q') return OutputView.printResult('실패', this.model);
+      if (input === 'Q') return this.outputView.printResult('실패', this.model);
       BridgeGame.retry(this.model);
       return this.inputMoving();
     };
-    InputView.readGameCommand(callback);
+    return this.inputView.readGameCommand(callback);
   }
 }
+
 module.exports = Controller;
