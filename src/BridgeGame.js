@@ -26,7 +26,8 @@ class BridgeGame {
   }
 
   isLatestMoveSucceeded() {
-    const lastLog = this.#movementLogs.slice(-1)[0];
+    const lastIndex = this.#movementLogs.length - 1;
+    const lastLog = this.#movementLogs[lastIndex];
 
     return lastLog.isCrossable;
   }
