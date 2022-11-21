@@ -11,6 +11,12 @@ class BridgeBoard {
       BridgeRandomNumberGenerator.generate
     );
   }
+  moveTo(direction, round) {
+    if (this.#bridgeBoard[round] === direction) {
+      return true;
+    }
+    return false;
+  }
 }
 
 module.exports = BridgeBoard;
