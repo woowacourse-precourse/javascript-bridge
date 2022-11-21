@@ -1,8 +1,9 @@
 const BridgeGame = require('./BridgeGame.js');
 const InputView = require('./InputView.js');
+const OutputView = require('./OutputView.js');
 const { makeBridge } = require('./BridgeMaker.js');
 const { generate } = require('./BridgeRandomNumberGenerator.js');
-
+const { COMMAND } = require('./constructor.js');
 class App {
   #game
 
@@ -14,6 +15,12 @@ class App {
     const bridgeSize = await InputView.readBridgeSize();
     const bridge = makeBridge(bridgeSize, generate);
     return bridge;
+  }
+
+  async crossingBridge() {
+    const movement = await InputView.readMoving();
+    const result = this.#game.move(movement);
+    return result;
   }
 
   play() {
