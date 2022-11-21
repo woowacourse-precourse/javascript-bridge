@@ -21,6 +21,14 @@ class BridgeGame {
     return this.#bridge;
   }
 
+    /**
+     * 현재 서있는 다리의 위치(인덱스)를 나타내는 getter
+     * @return {number} 현재 서 있는 다리의 위치(인덱스)를 반환한다.
+     */
+     get tempPosition(){
+      return this.#tempPosition;
+    }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
