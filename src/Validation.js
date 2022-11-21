@@ -8,5 +8,10 @@ const Validation = {
       };
     return { errorMsg: undefined };
   },
+  validateDirection(direction) {
+    if (direction == "U" || direction === "D") return { errorMsg: undefined };
+
+    return { errorMsg: "\n[ERROR] U 또는 D만 입력할 수 있습니다.\n" };
+  },
 };
 module.exports = Validation;
