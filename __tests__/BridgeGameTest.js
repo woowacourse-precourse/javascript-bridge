@@ -52,4 +52,21 @@ describe("다리 건너기 게임 진행 테스트", () => {
       expect(symbol).toBe(matchSymbols[index]);
     });
   });
+
+  test("지도 만들기 테스트", () => {
+    const bridge = ["U", "D", "D"];
+    const bridgeGame = new BridgeGame(bridge);
+    const directions = ["U", "D", "U"];
+    const upside = ["O", " ", "X"];
+    const downside = [" ", "O", " "];
+
+    directions.forEach((direction) => {
+      bridgeGame.move(direction);
+    });
+
+    const gameMap = bridgeGame.getMap();
+
+    expect(gameMap[0]).toEqual(upside);
+    expect(gameMap[1]).toEqual(downside);
+  });
 });
