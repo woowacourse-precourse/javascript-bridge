@@ -5,6 +5,7 @@ const OutputView = require('./OutputView');
 const { validateReadBridgeSize, validateReadMoving } = require('./Validate');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
+const { printMap } = require('./OutputView');
 
 class App {
   #bridgeGame;
@@ -27,8 +28,12 @@ class App {
 
   onReadMoving(moving) {
     validateReadMoving(moving);
-    this.#bridgeGame.move(moving);
-    InputView.readMoving(this.onReadMoving.bind(this));
+    const isCorrect = this.#bridgeGame.move(moving);
+    printMap(this.#bridgeGame.getMoveHistory(), isCorrect);
+    if (this.#bridgeGame.isFinished()) {
+      return;
+    }
+    if (isCorrect) InputView.readMoving(this.onReadMoving.bind(this));
   }
 }
 

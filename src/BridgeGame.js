@@ -15,6 +15,9 @@ class BridgeGame {
     this.#moveHistory = [];
     this.#tryNum = 1;
   }
+  getMoveHistory() {
+    return [...this.#moveHistory];
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -22,7 +25,18 @@ class BridgeGame {
    */
   move(moving) {
     this.#moveHistory.push(moving);
-    console.log(this.#moveHistory);
+    return this.checkMove();
+  }
+  checkMove() {
+    const index = this.#moveHistory.length - 1;
+    if (this.#bridge[index] === this.#moveHistory[index]) return true;
+    return false;
+  }
+  isFinished() {
+    const index = this.#moveHistory.length - 1;
+    const bridgeSize = this.#bridge.length - 1;
+    if (index === bridgeSize) return true;
+    return false;
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
