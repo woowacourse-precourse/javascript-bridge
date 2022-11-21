@@ -24,6 +24,10 @@ class Validation {
         throw new Error('[ERROR] 1개의 값을 입력해주세요.');
     }
 
+    if (Validation.nextStepLowerCase(value)) {
+      throw new Error('[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.')
+    }
+
     if (!Validation.nextStepValue(value)) {
         throw new Error('[ERROR] U 또는 D를 입력해주세요.');
     }
@@ -35,12 +39,24 @@ class Validation {
     }
 
     if (!Validation.oneValue(value)) {
-        throw new Error("[ERROR] 1개의 값을 입력해주세요.");
+        throw new Error('[ERROR] 1개의 값을 입력해주세요.');
+    }
+
+    if (Validation.retryLowerCase(value)) {
+      throw new Error('[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.')
     }
 
     if (!Validation.retryOrNotValue(value)) {
-      throw new Error("[ERROR] R 또는 Q를 입력해주세요.");
+      throw new Error('[ERROR] R 또는 Q를 입력해주세요.');
     }
+  }
+
+  static nextStepLowerCase(value) {
+    return value === 'u' || value === 'd'
+  }
+
+  static retryLowerCase(value) {
+    return value === 'r' || value === 'q'
   }
 
   static retryOrNotValue(value) {
