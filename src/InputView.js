@@ -28,18 +28,26 @@ const InputView = {
     Io.input('이동할 칸을 선택해주세요. (위: U, 아래: D)', (userChoice) => {
       console.log(BridgeStatus, userChoice);
       const NowBridgeValue = BridgeStatus[BridgeIndex];
-      const CompareResult = BridgeCompare.isCompareBridge(userChoice, NowBridgeValue);
+      const CompareResult = BridgeCompare.isSameBridge(userChoice, NowBridgeValue);
       BridgeResultArray = BridgeCompare.makeBridgeResultArray(userChoice, CompareResult, BridgeResultArray);
       OutputView.printMap(BridgeResultArray);
       const NextBridgeSize = BridgeIndex + 1;
-      if(!BridgeCompare.isCompleteBridge(SIZE, NextBridgeSize) && CompareResult) { this.readMoving(SIZE, BridgeStatus, NextBridgeSize, BridgeResultArray)}
+      if(BridgeCompare.isCompleteBridge(SIZE, NextBridgeSize)) {
+        OutputView.printResult(BridgeResultArray, CompareResult, 10);      
+      }
+      if(CompareResult){
+        this.readGameCommand();
+      } 
+      this.readMoving(SIZE, BridgeStatus, NextBridgeSize, BridgeResultArray);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    // OutputView.printResult(BridgeResultArray, CompareResult, count);
+  },
 };
 
 module.exports = InputView;

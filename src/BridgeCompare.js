@@ -11,7 +11,7 @@ const BridgeCompare = {
     isCompleteBridge(SIZE, bridgeSize){
         return SIZE == bridgeSize;
     },
-    isCompareBridge(userChoice, NowBridgeValue) {
+    isSameBridge(userChoice, NowBridgeValue) {
         if(userChoice === NowBridgeValue) { return true; }
         return false;
     },
