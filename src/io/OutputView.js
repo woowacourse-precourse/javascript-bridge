@@ -36,6 +36,14 @@ const OutputView = {
   printGameStart() {
     Console.print(GAME_MSG.start + COMMON.newLine);
   },
+
+  /**
+   * 에러 메세지를 출력한다.
+   * @param {string} error
+   */
+  printError(error) {
+    Console.print(error);
+  },
 };
 
 module.exports = OutputView;
