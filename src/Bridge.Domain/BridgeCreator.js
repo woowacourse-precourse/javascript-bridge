@@ -7,6 +7,7 @@ const BridgeCreator = {
     const bridge = new Bridge(
       BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate)
     );
+    console.log(bridge.getBridgeArray());
     return bridge;
   },
 };
