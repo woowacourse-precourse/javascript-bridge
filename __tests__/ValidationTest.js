@@ -67,6 +67,18 @@ describe('Validation 클래스 테스트', () => {
     expect(() => Validation.nextStep(input)).toThrow('[ERROR] U 또는 D를 입력해주세요.');
   });
 
+  test('bridge 이동 값이 소문자일 경우', () => {
+    const input = 'u';
+
+    expect(() => Validation.nextStep(input)).toThrow('[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.');
+  });
+
+  test('bridge 이동 값이 소문자일 경우', () => {
+    const input = 'd';
+
+    expect(() => Validation.nextStep(input)).toThrow('[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.');
+  });
+
   test('게임오버시 입력 값이 없을 경우', () => {
     const input = '';
 
@@ -83,6 +95,18 @@ describe('Validation 클래스 테스트', () => {
     const input = 'QR';
 
     expect(() => Validation.retry(input)).toThrow('[ERROR] 1개의 값을 입력해주세요.');
+  });
+
+  test('게임오버시 소문자를 입력했을 경우', () => {
+    const input = 'r';
+
+    expect(() => Validation.retry(input)).toThrow('[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.');
+  });
+
+  test('게임오버시 소문자를 입력했을 경우', () => {
+    const input = 'q';
+
+    expect(() => Validation.retry(input)).toThrow('[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.');
   });
 
   test('게임 오버시 입력값이 올바르지 않을 경우', () => {
