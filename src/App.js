@@ -4,31 +4,32 @@ const OutputView = require("./view/OutputView");
 
 class App {
   game;
-  isPossible;
-  isEnd;
 
   play() {
     OutputView.printStart();
-    const { createGame, movePlayer, getGameState, gameEndControl } = this;
-    const callbackArr = [createGame, movePlayer, getGameState, gameEndControl];
-    InputView.readBridgeSize.bind(this)(callbackArr);
+    InputView.readBridgeSize((size) => {
+      this.createGame(size);
+      this.movePlayer();
+    });
   }
 
   createGame(input) {
     this.game = new BridgeGame(input);
   }
 
-  movePlayer(direction) {
-    this.isPossible = this.game.move(direction);
-    this.isEnd = this.game.isEnd();
+  movePlayer() {
+    InputView.readMoving((direction) => {
+      const isPossible = this.game.move(direction);
+      const isEnd = this.game.isEnd();
+      if (!isEnd && isPossible) this.movePlayer();
+      if (!isPossible) this.gameEndControl();
+    });
   }
 
-  getGameState() {
-    return { isPossible: this.isPossible, isEnd: this.isEnd };
-  }
-
-  gameEndControl(input) {
-    this.game.endValidate(input);
+  gameEndControl() {
+    InputView.readGameCommand((input) => {
+      this.game.endValidate(input);
+    });
   }
 }
 
