@@ -68,7 +68,7 @@ class BridgeGame {
     ) {
       return true;
     }
-    return true;
+    return false;
   }
 
   /**
