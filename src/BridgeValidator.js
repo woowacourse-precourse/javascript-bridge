@@ -9,6 +9,7 @@ class BridgeValidator extends Validator {
 
   isValidBridgeSize(value) {
     this.isValidInput(value);
+    this.isValidNumber(value);
 
     const size = Number(value);
 

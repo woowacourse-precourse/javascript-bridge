@@ -86,7 +86,6 @@ class BridgeGame {
   };
 
   createBridge(bridgeSize) {
-    // TODO: bridge길이 확인
     this.bridgeValidator.isValidBridgeSize(bridgeSize);
     const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     this.bridgeStore = new BridgeStore(bridge, INITIAL_GAME_COUNT);
