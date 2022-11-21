@@ -16,6 +16,13 @@ class Exception {
 
     return true;
   }
+
+  validateMove(input) {
+    if (input !== PARAMETERS.upControl || input !== PARAMETERS.downControl) {
+      MissionUtils.Console.print(ERROR_MESSAGE.invalidMove);
+      throw new Error(ERROR_MESSAGE.invalidMove);
+    }
+  }
 }
 
 module.exports = Exception;
