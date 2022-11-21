@@ -16,8 +16,7 @@ class App {
   proceedStepOne(input) {
     try {
       Validator.validateBridgeSize(input);
-    } catch (e) {
-      Console.print(e.message);
+    } catch {
       InputView.readBridgeSize(this.proceedStepOne.bind(this));
       return;
     }
@@ -29,8 +28,7 @@ class App {
   proceedStepTwo(input) {
     try {
       Validator.validateSpace(input);
-    } catch (e) {
-      Console.print(e.message);
+    } catch {
       InputView.readMoving(this.proceedStepTwo.bind(this));
       return;
     }
@@ -43,8 +41,7 @@ class App {
   proceedStepThree(input) {
     try {
       Validator.validateCommand(input);
-    } catch (e) {
-      Console.print(e.message);
+    } catch {
       InputView.readGameCommand(this.proceedStepThree.bind(this));
       return;
     }
