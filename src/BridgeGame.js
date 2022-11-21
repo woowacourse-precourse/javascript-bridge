@@ -50,7 +50,6 @@ class BridgeGame {
   }
 
   start() {
-    console.log(this.#model.getBridge());
     this.#model.setPlayCount();
     this.#model.initialize();
     this.#controller.readUserMoving(() => this.move());
