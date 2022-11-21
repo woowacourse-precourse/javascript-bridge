@@ -7,6 +7,8 @@ const MESSAGE = {
   PRINT_RESULT: "최종 게임 결과",
   PRINT_GAME_RESULT: "게임 성공 여부:",
   PRINT_TRY_COUNT_MESSAGE: "총 시도한 횟수:",
+  SUCCESS: "성공",
+  FAIL: "실패",
 };
 
 const ERR_MESSAGE = {

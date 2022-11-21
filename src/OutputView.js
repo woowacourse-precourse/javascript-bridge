@@ -20,10 +20,14 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {
+  printResult(command) {
     Console.print(MESSAGE.PRINT_RESULT);
     // 투두 : 칸 추가 하기
-    Console.print(MESSAGE.PRINT_GAME_RESULT);
+    if (command === 0) {
+      Console.print(MESSAGE.PRINT_GAME_RESULT + " " + MESSAGE.FAIL);
+      Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE);
+    }
+    // 투두 : 성공했을 시
   },
 };
 

@@ -33,27 +33,6 @@ class BridgeGame {
   /**
    * 생성된 값과 사용자 입력값 비교
    */
-  // compareMove(bridge, userMoveArray) {
-  //   this.userMoveArray = userMoveArray;
-  //   console.log(this.userMoveArray);
-  //   for (let i = 0; i < this.userMoveArray.length; i++) {
-  //     if (bridge[i] === this.userMoveArray[i]) {
-  //       console.log("같음");
-  //       console.log(bridge[i]);
-  //       console.log(userMoveArray[i]);
-
-  //       if (bridge.length === this.userMoveArray.length) {
-  //         return 0;
-  //       }
-  //       return 1;
-  //     } else {
-  //       console.log("다름");
-
-  //       return 2;
-  //     }
-  //   }
-  // }
-
   compareMove(bridge, userMoveArray) {
     this.userMoveArray = userMoveArray;
     console.log(this.userMoveArray);
@@ -87,7 +66,6 @@ class BridgeGame {
       console.log("재시도");
       return 1;
     } else if (retryOrCloseKey === "Q") {
-      console.log("종료");
       return 0;
     }
   }

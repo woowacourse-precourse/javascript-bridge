@@ -30,26 +30,6 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  // readMoving(bridgeGame, bridge, userMoveArray) {
-  //   Console.readLine(MESSAGE.CHOOSE_MOVE_SPACE, (userInput) => {
-  //     const moveKey = Validate.checkMovingKey(userInput);
-  //     const userArray = bridgeGame.move(moveKey, userMoveArray);
-  //     const keepGaming = bridgeGame.compareMove(bridge, userArray);
-
-  //     if (keepGaming === 1) {
-  //       this.readMoving(bridgeGame, bridge, userMoveArray);
-  //     }
-  //     if (keepGaming === 0) {
-  //       OutputView.printResult();
-  //     }
-  //     if (keepGaming === 2) {
-  //       console.log("틀렸음 다시할거임?");
-  //       this.readGameCommand(bridgeGame, bridge, userMoveArray);
-  //     }
-  //   });
-  //   return;
-  // },
-
   readMoving(bridgeGame, bridge, userMoveArray) {
     Console.readLine(MESSAGE.CHOOSE_MOVE_SPACE, (userInput) => {
       const moveKey = Validate.checkMovingKey(userInput);
@@ -78,7 +58,7 @@ const InputView = {
       const retryOrCloseKey = Validate.checkRetryOrCloseKey(userInput);
       const command = bridgeGame.retry(retryOrCloseKey);
       if (command === 0) {
-        OutputView.printResult();
+        OutputView.printResult(command);
       }
       if (command === 1) {
         // this.readMoving(bridgeGame, bridge, userMoveArray);
