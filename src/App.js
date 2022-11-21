@@ -4,6 +4,7 @@ const { validateReadBridgeSize, validateReadMoving, validateReadGameCommand } = 
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const OutputView = require("./OutputView");
 
 class App {
   play() {
@@ -23,7 +24,18 @@ class App {
   inputMoving() {
     InputView.readMoving((moveKey) => {
       if (!validateReadMoving(moveKey)) this.inputMoving();
-      this.inputGameCommand();
+
+      const isFail = this.bridgeGame.checkFail(moveKey);
+      if (isFail) {
+        OutputView.printMap(isFail);
+        this.inputGameCommand();
+      }
+
+      const isSuccess = this.bridgeGame.move();
+      if (isSuccess) {
+        OutputView.printMap(isSuccess);
+        this.inputMoving();
+      }
     });
   }
 
