@@ -20,6 +20,17 @@ class BridgeGame {
     return this.round;
   }
 
+  makeMap(oneBridge, upOrDown) {
+    let upAndDown = { U: ' ', D: ' ' };
+    if (oneBridge === upOrDown) upAndDown[upOrDown] = 'O';
+    else upAndDown[upOrDown] = 'X';
+
+    this.up.push(upAndDown['U']);
+    this.down.push(upAndDown['D']);
+
+    return [this.up, this.down, oneBridge === upOrDown];
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>

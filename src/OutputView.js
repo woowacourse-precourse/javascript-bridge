@@ -19,17 +19,6 @@ const OutputView = {
     Console.print(`[ ${down.join(' | ')} ]\n`);
   },
 
-  makeMap(oneBridge, upOrDown) {
-    let upAndDown = { U: ' ', D: ' ' };
-    if (oneBridge === upOrDown) upAndDown[upOrDown] = 'O';
-    else upAndDown[upOrDown] = 'X';
-
-    this.up.push(upAndDown['U']);
-    this.down.push(upAndDown['D']);
-
-    return [this.up, this.down, upAndDown];
-  },
-
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
