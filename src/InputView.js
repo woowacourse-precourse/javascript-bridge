@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const BridgeGame = require("./BridgeGame");
 const { INPUT_MESSAGE } = require("./constants/inputMessage");
 
 /**
@@ -10,7 +11,7 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.READ_BRIDGE_SIZE,(bridgeSize) => {
-      
+      new BridgeGame().play(Number(bridgeSize));
     });
   },
 
@@ -19,7 +20,6 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(INPUT_MESSAGE.READ_MOVING,(moving) => {
-      
     });
   },
 
