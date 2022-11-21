@@ -3,32 +3,21 @@
  */
 // InputView 에서만 MissionUtils의 Console.readLine() 을 이용해 사용자의 입력을 받을 수 있다.
 const { Console } = require('@woowacourse/mission-utils');
-const ERROR_MESSAGES = require('./constants/ErrorMessages');
-const { BRIDGE, QUERY } = require('./constants/constants');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const InputValidator = require('./validator/InputValidator');
+const { QUERY } = require('./constants/constants');
 
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    Console.readLine(QUERY.SIZE, (size) => {
-      InputValidator.validateBridgeSize(size);
-      BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-      readMoving();
-    });
+  readBridgeSize(setBridge) {
+    Console.readLine(QUERY.SIZE, setBridge);
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    Console.readLine(QUERY.MOVE, (char) => {
-      InputValidator.validateMoving(char);
-      // O, X 표시
-    });
+  readMoving(callback) {
+    Console.readLine(QUERY.MOVE, callback);
   },
 
   /**
