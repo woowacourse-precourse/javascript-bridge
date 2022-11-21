@@ -1,13 +1,13 @@
 const SAYS = Object.freeze({
-  START: "다리 건너기 게임을 시작합니다.",
+  START: "다리 건너기 게임을 시작합니다.\n",
   RESULT: (result, count) =>
     `최종 게임 결과\n${result.map}\n\n게임 성공 여부: ${result.text}\n총 시도한 횟수: ${count}`,
 });
 
 const ASKS = Object.freeze({
-  BRIDGE_SIZE: "다리의 길이를 입력해주세요.",
-  PLAYER_MOVE: "이동할 칸을 선택해주세요. (위: U, 아래: D)",
-  AGAIN: "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
+  BRIDGE_SIZE: "다리의 길이를 입력해주세요.\n",
+  PLAYER_MOVING: "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+  AGAIN: "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
 });
 
 const ABOUT = Object.freeze({
@@ -17,6 +17,7 @@ const ABOUT = Object.freeze({
   BRIDGE_SIZE:
     "[ERROR] 입력한 다리 size와 생성된 다리 길이가 일치하지 않습니다.",
   BRIDGE_ELEMENT: "[ERROR] 다리 요소는 'U' 혹은 'D' 여야 합니다.",
+  SELECT_ELEMENT: "[ERROR] 선택 요소는 'R' 혹은 'Q' 여야 합니다.",
 });
 
 module.exports = { SAYS, ASKS, ABOUT };

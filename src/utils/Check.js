@@ -16,22 +16,20 @@ const Check = {
     }
   },
 
-  // bridgeFormat(value, size) { //필요없는 로직
-  //   if (value.length !== size) {
-  //     throw new Error(ABOUT.BRIDGE_SIZE);
-  //   }
-
-  //   if (value.map((el) => el !== "U" || el !== "D")) {
-  //     throw new Error(ABOUT.BRIDGE_ELEMENT);
-  //   }
-  // },
-
-  moveFormat() {
-    // U나 D가 아닐 경우 -> U나 D만 입력하라고 하기
+  moveFormat(step) {
+    if (step !== "U") {
+      if (step !== "D") {
+        throw new Error(ABOUT.BRIDGE_ELEMENT);
+      }
+    }
   },
 
-  selectFormat() {
-    //R,Q가 아닌 경우 -> RQ만 입력하라 하기
+  selectFormat(select) {
+    if (select !== "R") {
+      if (select !== "Q") {
+        throw new Error(ABOUT.SELECT_ELEMENT);
+      }
+    }
   },
 };
 

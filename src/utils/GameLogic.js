@@ -11,8 +11,9 @@ const GameLogic = {
     //InputView 실행 결과 (U,.. D,.. ) return
   },
 
-  compare() {
-    // 비교 로직:
+  compare(bridge, stepArray, index) {
+
+    console.log(bridge, stepArray, index);
     // BridgeMaker에서 가져오기: bridgeArray // 0100010
     // step() 과 비교
   },
