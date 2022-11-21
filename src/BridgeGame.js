@@ -29,6 +29,7 @@ const OutputView = require("./OutputView.js");
         const Map = this.isUpOrDown(moving, false);
         upMap += Map[0], downMap += Map[1];
         OutputView.printMap(upMap.slice(0,-1), downMap.slice(0,-1));
+        this.isRetryOrQuit();
       }
     }
   }
@@ -45,13 +46,23 @@ const OutputView = require("./OutputView.js");
     if(moving === "D" && !canMove){
       return[" "+"|", "X"+"|"];
     }
-  } 
+  }
+  isRetryOrQuit(){
+    const gameCommand = RecallUntilCorrect.recallreadGameCommand(true);
+    if(gameCommand==="R"){
+      this.retry();
+    }
+    if(gameCommand==="Q"){
+      this.quit();
+    }
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {}
+  quit() {}
 }
 
 module.exports = BridgeGame;
