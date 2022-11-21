@@ -66,7 +66,6 @@ class BridgeGame {
 
   checkBridge(bridge) {
     if (this.#firstRow.includes("X") === true || this.#secondRow.includes("X") === true) {
-      this.#count += 1;
       return this.inputRetry();
     }
 
@@ -95,6 +94,8 @@ class BridgeGame {
   }
 
   retry(command) {
+    this.#count += 1;
+    
     if (command === 'R') {
       this.#bridges = this.#originBridges;
       this.openBridgeRow();
@@ -103,6 +104,12 @@ class BridgeGame {
     }
 
     this.#result = '실패';
+    this.printFinalResult();
+  }
+
+  finish() {
+    this.#count += 1;
+    this.#result = '성공';
     this.printFinalResult();
   }
 
