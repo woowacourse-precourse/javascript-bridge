@@ -2,33 +2,33 @@ const Validator = require('../src/Validator');
 
 describe("예외 처리 테스트", () => {
     test("validateInputCatch 예외 테스트 정상", () => {
-        const size = 3;
-        expect(Validator.validateInputCatch(size)).toBe(undefined)
+        const SIZE = 3;
+        expect(Validator.validateInputCatch(SIZE)).toBe(undefined)
     });
 
     test("validateInputCatch 예외 테스트 실패", () => {
-        const size = '우테코';
-        expect(Validator.validateInputCatch(size)).toBe(true)
+        const SIZE = '우테코';
+        expect(Validator.validateInputCatch(SIZE)).toBe(true)
     });
 
     test("validateisRepeat 예외 테스트 정상", () => {
-        const moveInput = "U";
-        expect(Validator.validateisRepeat(moveInput)).toBe(undefined)
+        const MOVE_INPUT = "U";
+        expect(Validator.validateisRepeat(MOVE_INPUT)).toBe(undefined)
     });
 
     test("validateisRepeat 예외 테스트 실패", () => {
-        const moveInput = '우테코';
-        expect(Validator.validateisRepeat(moveInput)).toBe(true)
+        const MOVE_INPUT = '합격';
+        expect(Validator.validateisRepeat(MOVE_INPUT)).toBe(true)
     });
 
     test("validateRetryInputCatch 예외 테스트 정상", () => {
-        const retryInput = "R";
-        expect(Validator.validateRetryInputCatch(retryInput)).toBe(undefined)
+        const RETRY_INPUT = "R";
+        expect(Validator.validateRetryInputCatch(RETRY_INPUT)).toBe(undefined)
     });
 
     test("validateRetryInputCatch 예외 테스트 실패", () => {
-        const retryInput = '우테코';
-        expect(Validator.validateRetryInputCatch(retryInput)).toBe(true)
+        const RETRY_INPUT = '기원';
+        expect(Validator.validateRetryInputCatch(RETRY_INPUT)).toBe(true)
     });
 
 });
