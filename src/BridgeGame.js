@@ -54,6 +54,15 @@ class BridgeGame {
     return this.#bridge.length === this.#results.length;
   }
 
+  isClear() {
+    const crossed = this.hasCrossedCompletely();
+    const correct = this.hasMovedCorrectly();
+
+    if (crossed && correct) return true;
+
+    return false;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
