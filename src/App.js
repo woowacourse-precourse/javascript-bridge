@@ -49,7 +49,12 @@ class App {
         Console.print(errorMsg);
         return this.requestRestartOrQuit();
       }
+      if (commandOption === "R") return this.restart();
     });
+  }
+  restart() {
+    this.bridgeGame.retry();
+    this.requestDirection();
   }
 }
 const app = new App();
