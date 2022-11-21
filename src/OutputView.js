@@ -1,4 +1,4 @@
-const { MOVABLE } = require('./data/constants');
+const { MOVABLE, DIRECTION } = require('./data/constants');
 const IO = require('./IO');
 
 /**
@@ -10,9 +10,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(previous, movable) {
+  printMap(previous, movable, direction) {
     let movablePosition;
-    if (movable === MOVABLE.MOVABLE) movablePosition = 0;
+    if (direction === DIRECTION.UP) movablePosition = 0;
     else movablePosition = 1;
 
     previous.forEach((arr, index) => {
