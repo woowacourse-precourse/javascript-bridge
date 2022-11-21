@@ -12,6 +12,15 @@ class BridgeGame {
     this.#bridge = makeBridge(size,generate)
     this.#tempPosition = 0;
   }
+
+    /**
+   * 만들어진 다리를 반환하는 getter
+   * @return {string[]} 만들어진 다리를 반환한다.
+   */
+  get bridge (){
+    return this.#bridge;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -42,5 +51,6 @@ class BridgeGame {
   }
 
 }
+
 
 module.exports = BridgeGame;
