@@ -75,6 +75,9 @@ JSON.stringify 사용???? Ok
 
 - printResult() : 최종 결과를 뿌려줌
 
+## OutPut 클래스
+- OutputView에서 사용하는 배열이 담겨져 있음
+
 ### BrideGame
 - move() : 'O'일때 bridgeArray를 받아와서 앞부분을 하나씩 날려준다.
 배열을 깊은 복사를 사용해 shift()시 원본배열을 참조하지 않도록한다
