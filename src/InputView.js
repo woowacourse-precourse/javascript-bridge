@@ -37,16 +37,16 @@ const InputView = {
       const userArray = bridgeGame.move(moveKey, userMoveArray);
       const keepGaming = bridgeGame.compareMove(bridge, userArray);
 
-      if (keepGaming === 1) {
+      if (keepGaming === "right") {
         // 맟줬음 계속
         this.readMoving(bridgeGame, bridge, userMoveArray);
       }
-      if (keepGaming === "success") {
+      if (keepGaming === "allRight") {
         // 다 맞췄음 끝 !
         let count = bridgeGame.plusCount();
         OutputView.printResult(keepGaming, count);
       }
-      if (keepGaming === -1) {
+      if (keepGaming === "wrong") {
         // 틀렸음
         console.log("틀렸음 다시할거임?");
         this.readGameCommand(bridgeGame, bridge, userMoveArray);
