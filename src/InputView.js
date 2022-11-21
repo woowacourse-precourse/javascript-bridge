@@ -57,7 +57,7 @@ const InputView = {
       this.validateMoving(upOrDown);
       const round = this.bridgeGame.move();
 
-      this.readMovingOrGameCommand(bridge, round, upOrDown);
+      this.proceedRound(bridge, round, upOrDown);
     });
   },
 
@@ -65,7 +65,7 @@ const InputView = {
     if (upOrDown !== 'U' && upOrDown !== 'D') throw new Error(Messages.MOVING_ERROR);
   },
 
-  readMovingOrGameCommand(bridge, round, upOrDown) {
+  proceedRound(bridge, round, upOrDown) {
     const [up, down, hasCorrect] = this.bridgeGame.makeMap(bridge[round - 1], upOrDown);
     OutputView.printMap(up, down);
 
