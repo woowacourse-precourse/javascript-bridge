@@ -4,6 +4,9 @@ const { printMap, printResult } = require('./OutputView');
 const { isPlayerPassed, isPlayerCleared } = require('./Utils/CheckPlayerStatus');
 const { INPUT_RETRY } = require('./Constants/InputValues');
 
+/**
+ * BridgeGame(모델) 과 InputView, OutputView(뷰)를 조작하는 컨트롤러
+ */
 class BridgeController {
   #Game;
 
