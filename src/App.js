@@ -43,7 +43,9 @@ class App {
     this.#game.retry();
     this.askMoving();
   }
-  showGameResult() {}
+  showGameResult() {
+    OutputView.printResult(this.#game.stepObj, this.#game.isSuccess, this.#game.numOfTrials);
+  }
 }
 
 const app = new App();
