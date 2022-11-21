@@ -11,7 +11,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const pattern = [];
     while (pattern.length < size) {
-      const oneOrZero = parseInt(generateRandomNumber());
+      const oneOrZero = generateRandomNumber();
       const upOrDown = oneOrZero ? BRIDGE.up : BRIDGE.down;
       pattern.push(upOrDown);
     }
