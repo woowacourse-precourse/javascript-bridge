@@ -17,7 +17,9 @@ const ERROR_MESSAGE = {
     "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
   WRONG_MOVEMENT:
     "[ERROR] U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력해야 합니다.",
-  WRONG_ENDING: "[ERROR] R(재시작)과 Q(종료) 중 하나의 문자를 입력해야 합니다.",
+  WRONG_ENDING_COMMAND:
+    "[ERROR] R(재시작)과 Q(종료) 중 하나의 문자를 입력해야 합니다.",
+  BLANK: "[ERROR] 공백이 없어야 합니다.",
 };
 
 const LIMIT_NUMBER = {
