@@ -36,6 +36,16 @@ class BridgeGame {
     );
   }
 
+  hasMovedCorrectly() {
+    const lastIndex = this.getIndex() - 1;
+
+    if (lastIndex < 0) return true;
+
+    const lastSymbol = this.#results[lastIndex].matchSymbol;
+
+    return lastSymbol === O;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
