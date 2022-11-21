@@ -45,14 +45,12 @@ class BridgeGame {
     // TODO: command확인
     const isMovable = this.bridgeStore.isMovable(this.moveCount, command);
 
-    this.bridgeStore.addUserInputResult(isMovable);
-    OutputView.printMap(this.moveCount, command, this.bridgeStore.getUserInputResult);
+    this.setMovedData(isMovable, command);
 
     if (!isMovable) {
       this.fail();
       return;
     }
-    this.moveCount += 1;
 
     if (this.bridgeStore.isGameClear(this.moveCount)) {
       this.end();
@@ -60,6 +58,12 @@ class BridgeGame {
     }
 
     InputView.readMoving(this.movingMessage, this.move);
+  };
+
+  setMovedData = (isMovable, command) => {
+    this.bridgeStore.addUserInputResult(isMovable);
+    OutputView.printMap(this.moveCount, command, this.bridgeStore.getUserInputResult);
+    this.moveCount += 1;
   };
 
   confirmRetry = (command) => {
