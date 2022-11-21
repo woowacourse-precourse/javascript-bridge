@@ -1,6 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
 const {
-  BridgeConfig,
   GameConfig,
   AppConfig,
   Message,
