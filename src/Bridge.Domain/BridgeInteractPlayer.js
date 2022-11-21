@@ -1,26 +1,56 @@
 const InputView = require("../Bridge.Input/InputView");
 const BridgeGame = require("./BridgeGame");
+const BridgeGameShape = require("./BridgeGameShape");
 const Player = require("./Player");
+const { BRIDGE, GAME } = require("../lib/Const");
+const OutputView = require("../Bridge.UI/OutputView");
 
 class BridgeInteractPlayer {
   #player;
   #bridgeGame;
+  #bridgeGameShape;
 
   constructor() {
     this.#player = new Player();
+    this.#bridgeGameShape = new BridgeGameShape();
   }
 
   playerInputBridgeSize(size) {
     this.#bridgeGame = new BridgeGame(size);
     this.#bridgeGame.start();
-    InputView.readMoving(this.playerInputBridgeDirection);
+    InputView.readMoving(this.playerInputBridgeDirection.bind(this));
   }
 
   playerInputBridgeDirection(direction) {
-    console.log(direction);
+    //상호 작용 담당 , 모양 출력 ,
+    const [bridgeArr, result, status] = this.#bridgeGame.move(
+      this.#player,
+      direction
+    );
+    //모양 출력
+    this.#bridgeGameShape
+      .getCurrentBridgeGameShape(bridgeArr, result)
+      .OutputResultMap();
+
+    this.playerGoBridgeNext(result, status);
+    return;
   }
 
-  playerInputCommandBridgeRetry() {}
+  playerGoBridgeNext(result, status) {
+    if (status === GAME.STATUS.END) {
+      const bridge = this.#bridgeGame.winGame();
+      //todo: true 고치기
+      this.playerEndThisGame(bridge, true);
+      return;
+    }
+    //성공 했을 때
+    if (result)
+      InputView.readMoving(this.playerInputBridgeDirection.bind(this));
+    //실패 했을 때
+    if (!result)
+      InputView.readGameCommand(this.playerInputCommandBridgeRetry.bind(this));
+    return;
+  }
 }
 
 const bi = new BridgeInteractPlayer();
