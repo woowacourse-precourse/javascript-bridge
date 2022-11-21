@@ -32,7 +32,9 @@ class GameController {
       this.compareStep(input);
     });
   }
-  compareStep(input) {}
+  compareStep(input) {
+    const result = this.bridgeGame.compareBridge(input);
+  }
 }
 
 module.exports = GameController;
