@@ -21,4 +21,11 @@ describe('BridgeResult 테스트', () => {
       expect(bridgeResult.checkSuccess()).toBeFalsy();
     },
   );
+
+  test('1번 재시도한 경우 총 시도 횟수는 2를 반환한다.', () => {
+    const bridgeResult = new BridgeResult(3);
+    bridgeResult.addTryCount();
+    const { tryCount } = bridgeResult.getResult();
+    expect(tryCount).toEqual(2);
+  });
 });
