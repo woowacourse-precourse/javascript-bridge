@@ -1,176 +1,69 @@
-const BridgeGame = require("../src/model/BridgeGame");
-const OutpuyView = require("../src/console/OutputView");
-const InputView = require("../src/console/InputView");
-const Message = require("../src/lib/Message");
 const Bridge = require("../src/model/Bridge");
-const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
+const MissionUtils = require("@woowacourse/mission-utils");
+const BridgeGame = require("../src/model/BridgeGame");
 
 /**
- * @param {[string]} input 다리 길이 숫자를 입력해야함.
- * @param {[string]} random 랜덤 넘버 0과 1중 입력한 배열
- * @returns {BridgeGame}
+ *
+ * @param {string[]} array
+ * @returns bridge
  */
-const testGame = (input, random) => {
-  setTestInvOnce(input);
+const initialBridge = (array) => {
+  const bridge = new Bridge(new BridgeGame());
+  bridge.setOriginalBridge(array);
 
-  if (random) {
-    testRandom(random);
-  }
-
-  const bridgeGame = new BridgeGame();
-  bridgeGame.play();
-  return bridgeGame;
+  return bridge;
 };
 
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
-  logSpy.mockClear();
-  return logSpy;
+const getBridges = (bridge) => {
+  return bridge.getBridges();
 };
+const basic = ["U", "U", "U"];
 
-const testRandom = (numbers) => {
-  MissionUtils.Random.pickNumberInRange = jest.fn();
-  numbers.reduce((acc, number) => {
-    return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickNumberInRange);
-};
+describe("브릿지 클래스 테스트", () => {
+  test("브릿지는 배열을 입력받아 브릿지를 생성합니다.", () => {
+    const bridge = initialBridge(basic);
 
-const getOutput = (logSpy) => {
-  return [...logSpy.mock.calls].join("");
-};
-
-const runException = (inputs) => {
-  setTestInvOnce(inputs);
-  const logSpy = getLogSpy();
-  const app = new App();
-
-  app.play();
-
-  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
-};
-
-const expectLogContains = (received, logs) => {
-  logs.forEach((log) => {
-    expect(received).toEqual(expect.stringContaining(log));
-  });
-};
-
-const setTestInvOnce = (answers) => {
-  MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((_, callback) => {
-      callback(input);
-    });
-  }, MissionUtils.Console.readLine);
-};
-
-describe("브릿지 다리 생성 테스트", () => {
-  test("정수를 입력하면 해당 길이 만큼의 다리가 생성 됩니다", () => {
-    const bridgeGame = testGame(["5"]);
-
-    const bridge = bridgeGame.getBridge().getOriginalBridge();
-
-    expect(bridge.length).toBe(5);
-    expect(bridge.length).toBeGreaterThanOrEqual(3);
-    expect(bridge.length).toBeLessThanOrEqual(20);
+    const origin = bridge.getOriginalBridge();
+    expect(origin instanceof Array).toBe(true);
+    expect(origin.length).toBe(3);
+    expect(origin.length).not.toBe(4);
   });
 
-  test("브짓지는 U와 D를 원소로 가집니다.", () => {
-    const bridgeGame = testGame(["10"]);
+  test("브릿지 방향입력은 오리지날 브릿지와 비교합니다.", () => {
+    const bridge = initialBridge(basic);
+    bridge.moveUpside("U", "0");
+    const [up, down] = getBridges(bridge);
 
-    const bridge = bridgeGame.getBridge().getOriginalBridge();
-
-    expect(bridge).toContain("U", "D");
-    expect(bridge).toContainEqual("U", "D");
-    expect(bridge).not.toContain(/\d/);
+    expect(up[0]).toBe(" O ");
+    expect(down[0]).toBe(" N ");
   });
 
-  test.each([["E"], ["0.5"], ["-5"], ["2"], ["21"], ["2+3"]])(
-    "잘못된 길이는 오류를 냅니다.",
-    (input) => {
-      runException([input]);
-    }
-  );
-});
-
-describe("브릿지 이동 테스트", () => {
-  test("숫자 1은 U , 0은 D가 나옵니다.", () => {
-    const direction = ["1", "1", "1", "1", "0"];
-    const bridgeGame = testGame(["5"], direction);
-
-    const result = ["U", "U", "U", "U", "D"];
-    const bridge = bridgeGame.getBridge().getOriginalBridge();
-    console.log(bridge);
-    bridge.forEach((direction, index) => {
-      expect(direction).toEqual(result[index]);
-    });
-  });
-
-  test.each([
-    ["3", "f"],
-    ["3", "1"],
-    ["3", "ㄱ"],
-    ["3", "!"],
-    ["3", " "],
-  ])("잘못된 방향 입력은 예외를발생시킵니다.", (input, direction) => {
-    runException([input, direction]);
-  });
-
-  test("정답이 아니면 X 가 표시됩니다.", () => {
-    const length = ["3", "D"];
-    const direction = ["1", "1", "1"];
-    const bridgeGame = testGame(length, direction);
-
-    const [up, down] = bridgeGame.getBridge().getBridges();
-
-    expect(down).toContain(" X ");
-  });
-  test("입력하지 않은 칸은 빈칸입니다..", () => {
-    const length = ["3", "D"];
-    const direction = ["1", "1", "1"];
-    const bridgeGame = testGame(length, direction);
-
-    const [up, down] = bridgeGame.getBridge().getBridges();
-
-    expect(up).toContain(" N ");
-  });
-  test.only("입력한 만큼 다리의 길이가 늘어납니다.", () => {
-    const length = ["10", "U", "U", "U"];
-    const direction = ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"];
-    const bridgeGame = testGame(length, direction);
-
-    const bridge = bridgeGame.getBridge().getCurrentBridge();
-    expect(bridge.length).toBe(3);
-  });
-});
-
-describe("브릿지 재시작 테스트", () => {
-  test.only("재시작 시 다리 길이가 초기화 됩니다.", () => {
-    const length = ["5", "U", "U", "U"];
-    const direction = ["1", "1"];
-    const bridgeGame = testGame(length);
-
-    const bridge = bridgeGame.getBridge();
+  test("브릿지 초기화 는 오리지날브릿지를 건들지 않고 게임 진행상황을 초기화 시킵니다.", () => {
+    const bridge = initialBridge(basic);
+    bridge.moveUpside("U", "0");
     bridge.setAllBridgeEmpty();
 
-    const bridgeLength = bridge.getCurrentBridge().length;
-    expect(bridgeLength).toBe(0);
+    const [up, down] = getBridges(bridge);
+    const origin = bridge.getOriginalBridge();
+
+    expect(origin.length).toBe(3);
+    expect(up.length).toBe(0);
   });
 
-  test.only("재시작시 시도 횟수가 증가합니다.", () => {
-    const length = ["3"];
-    const bridgeGame = testGame(length);
-    bridgeGame.restartGame();
-    bridgeGame.restartGame();
-    bridgeGame.restartGame();
-    bridgeGame.restartGame();
-    const state = bridgeGame.getState();
+  test("이동이 불가능하면 X를 포함합니다.", () => {
+    const bridge = initialBridge(basic);
+    bridge.moveUpside("D", "0");
 
-    expect(state.tried).toBe(5);
+    expect(bridge.haveXValue()).toBe(true);
   });
 
-  // test.only("" ,()=>{
+  test("이동이 완료 되면 게임이 정상적으로 끝납니다.", () => {
+    const bridge = initialBridge(basic);
+    bridge.moveUpside("U", "0");
+    bridge.moveUpside("U", "1");
+    bridge.moveUpside("U", "2");
 
-  // })
+    expect(bridge.isGameEnd()).toBe(true);
+  });
 });
