@@ -1,18 +1,16 @@
-const { Console } = require('@woowacourse/mission-utils');
 const { ERROR, BRIDGE_VALUE, REGEX, OPTION } = require('./constants');
 
+/* readBridgeSize */
 const checkNumberValidation = (userInput) => {
   const numberRegex = REGEX.NUMBER;
   if (userInput.match(numberRegex)) return true;
 
-  Console.close();
   throw new Error(ERROR.NOT_A_NUMBER);
 };
 
 const validateBridgeRange = (userInput) => {
   if (userInput >= BRIDGE_VALUE.RANGE_MIN && userInput <= BRIDGE_VALUE.RANGE_MAX) return;
 
-  Console.close();
   throw new Error(ERROR.INVALID_RANGE);
 };
 

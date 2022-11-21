@@ -20,9 +20,13 @@ const InputView = {
 
   readBridgeSize(callback) {
     Console.readLine(MESSAGE.SELECT_BRIDGE_SIZE, (userInput) => {
-      Console.print('');
-      validateBridgeSize(userInput);
-      callback(userInput);
+      try {
+        validateBridgeSize(userInput);
+        callback(userInput);
+      } catch (error) {
+        Console.print(error);
+        this.readBridgeSize(callback);
+      }
     });
   },
 
@@ -32,11 +36,16 @@ const InputView = {
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
-   */
+4   */
   readMoving(callback) {
     Console.readLine(MESSAGE.GUESS, (userInput) => {
-      validateMovingInput(userInput);
-      callback(userInput);
+      try {
+        validateMovingInput(userInput);
+        callback(userInput);
+      } catch (error) {
+        Console.print(error);
+        this.readMoving(callback);
+      }
     });
   },
 
@@ -49,8 +58,13 @@ const InputView = {
    */
   readGameCommand(callback) {
     Console.readLine(MESSAGE.ASK_CONTINUE, (userInput) => {
-      validateContinue(userInput);
-      callback(userInput);
+      try {
+        validateContinue(userInput);
+        callback(userInput);
+      } catch (error) {
+        Console.print(error);
+        this.readGameCommand(callback);
+      }
     });
   },
 };
