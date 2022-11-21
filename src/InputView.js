@@ -43,6 +43,8 @@ const InputView = {
     else {
       if(tryNum < bridgeList.length) {
         this.readMoving(bridgeList);
+      } else {
+        printResult(upAndDown, this.retryNum, this.isSuccess);
       }
     }
   },
