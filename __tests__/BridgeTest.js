@@ -2,7 +2,7 @@ const Bridge = require('../src/Bridge.js');
 
 describe('Bridge 클래스 테스트', () => {
   describe('isCrossable 메서드 테스트', () => {
-    test('위치와 방향이 주어지면, true와 false중 하나를 return 해야 한다.', () => {
+    test('생성된 다리가 입력된 위치, 방향과 일치하면, true를 return 해야 한다.', () => {
       const directions = ['U', 'D', 'U'];
       const bridge = new Bridge(directions);
       const position = 0;
@@ -10,20 +10,18 @@ describe('Bridge 클래스 테스트', () => {
 
       const result = bridge.isCrossable(position, direction);
 
-      expect([true, false]).toContain(result);
+      expect(result).toBe(true);
     });
 
-    test.each([
-      [{ position: 0, direction: 'U' }],
-      [{ position: 1, direction: 'D' }],
-      [{ position: 2, direction: 'U' }],
-    ])('위치와 방향이 일치하면, true를 return 해야 한다.', ({ position, direction }) => {
+    test('생성된 다리가 입력된 위치, 방향과 일치하지 않으면, false를 return 해야 한다.', () => {
       const directions = ['U', 'D', 'U'];
       const bridge = new Bridge(directions);
+      const position = 0;
+      const direction = 'D';
 
       const result = bridge.isCrossable(position, direction);
 
-      expect(result).toBe(true);
+      expect(result).toBe(false);
     });
   });
 
