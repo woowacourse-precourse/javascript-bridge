@@ -35,6 +35,18 @@ class BridgeGame {
     this.#gameStatus.attempt += 1;
     this.#gameStatus.bridgeCrossCount = 0;
   }
+
+  getGameResult() {
+    return {
+      bridge: this.#bridgeDrawer.getBridgeDrawingUsingResult(
+        this.#gameStatus.bridge,
+        this.#gameStatus.bridgeCrossCount,
+        this.#gameStatus.roundResult
+      ),
+      roundResult: this.#gameStatus.roundResult,
+      attempt: this.#gameStatus.attempt,
+    };
+  }
 }
 
 module.exports = BridgeGame;
