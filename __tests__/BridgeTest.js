@@ -37,3 +37,21 @@ describe("결과 테스트", () => {
     expect(OutputView.checkSuccess(["O", "O", "X"])).toBe(expected);
   });
 });
+
+describe("다리 건너기에 따른 다리 출력", () => {
+  test("윗 다리를 1번 건넜을 때 건널 수 있는 다리가 위쪽에 있는 경우", () => {
+    expect(OutputView.makeMap(["U"], ["O"])).toEqual(["[ O ]", "[   ]"]);
+  });
+  test("윗 다리를 여러 번 건넜을 때 건널 수 있는 다리가 위쪽에 있는 경우", () => {
+    expect(OutputView.makeMaps(["U", "U"], ["O", "O"])).toEqual(["[ O | O ]", "[   |   ]"]);
+  });
+  test("아랫 다리를 1번 건넜을 때 건널 수 있는 다리가 아래 쪽에 있는 경우", () => {
+    expect(OutputView.makeMap(["D"], ["O"])).toEqual(["[   ]", "[ O ]"]);
+  });
+  test("아랫 다리를 여러 번 건넜을 때 건널 수 있는 다리가 아래 쪽에 있는 경우", () => {
+    expect(OutputView.makeMaps(["D", "D"], ["O", "O"])).toEqual([
+      "[   |   ]",
+      "[ O | O ]",
+    ]);
+  });
+});
