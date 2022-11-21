@@ -23,23 +23,23 @@ class BridgeGame {
    */
   move(moving) {
     moving === COMMAND.UP ? this.#currentBridge.push(COMMAND.UP) : this.#currentBridge.push(COMMAND.DOWN);
-    this.sketch(this.#bridge, this.#currentBridge, moving);
+    this.sketch(moving);
     return [this.#up, this.#down];
   }
 
-  sketch(bridge, currentBridge, moving) {
-    if (bridge[currentBridge.length - 1] === moving) this.sketchCorrectMap(bridge, currentBridge, moving);
-    if (bridge[currentBridge.length - 1] !== moving) this.sketchWrongMap(bridge, currentBridge, moving);
+  sketch(moving) {
+    if (this.#bridge[this.#currentBridge.length - 1] === moving) this.sketchCorrectMap();
+    if (this.#bridge[this.#currentBridge.length - 1] !== moving) this.sketchWrongMap(moving);
   }
 
-  sketchCorrectMap(bridge, currentBridge) {
-    if (currentBridge.length <= bridge.length) {
-      this.#up = currentBridge.map((location) => location === COMMAND.UP ? location = WORD.CORRECT : location = WORD.EMPTY);
-      this.#down = currentBridge.map((location) => location === COMMAND.DOWN ? location = WORD.CORRECT : location = WORD.EMPTY);
+  sketchCorrectMap() {
+    if (this.#currentBridge.length <= this.#bridge.length) {
+      this.#up = this.#currentBridge.map((location) => location === COMMAND.UP ? location = WORD.CORRECT : location = WORD.EMPTY);
+      this.#down = this.#currentBridge.map((location) => location === COMMAND.DOWN ? location = WORD.CORRECT : location = WORD.EMPTY);
     }
   }
 
-  sketchWrongMap(bridge, currentBridge, moving) {
+  sketchWrongMap(moving) {
     moving === COMMAND.UP ? this.#up.push(WORD.WRONG) : this.#down.push(WORD.WRONG);
     this.#up.length === this.#down.length - 1 ? this.#up.push(WORD.EMPTY) : this.#down.push(WORD.EMPTY);
   }
