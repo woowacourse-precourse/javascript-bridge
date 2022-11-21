@@ -1,3 +1,5 @@
+const BridgeMaker = require("./BridgeMaker");
+const Random = require("./BridgeRandomNumberGenerator");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -24,7 +26,8 @@ class BridgeGame {
     this.#bridgeSize = size;
   }
 
-  setBridge(bridge) {
+  setBridge() {
+    const bridge = BridgeMaker.makeBridge(this.#size, Random.generate);
     this.#bridge = bridge;
   }
 
