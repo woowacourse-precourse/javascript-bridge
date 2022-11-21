@@ -1,4 +1,4 @@
-const { printMap } = require('./OutputView');
+const { printMap, printResult } = require('./OutputView');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -24,6 +24,10 @@ class BridgeGame {
     const current = this.#user.length - 1;
     if (this.#bridge[current] !== this.#user[current]) return true;
     return false;
+  }
+
+  end() {
+    printResult(this.#bridge, this.#user);
   }
 
   retry() {

@@ -4,6 +4,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const { Console } = require('@woowacourse/mission-utils');
 const { validateBridge, validateMove, validateRetry } = require('./utils/validate');
+const OutputView = require('./OutputView');
 
 class App {
   constructor() {
@@ -40,10 +41,12 @@ class App {
 
   playGame(move) {
     this.bridgeGame.move(move);
-
-    if (this.bridgeGame.isFail(move)) {
+    if (this.bridgeGame.isFail()) {
       InputView.readGameCommand(this.getRetry.bind(this));
       return;
+    }
+    if (this.bridgeGame.isEnd()) {
+      OutputView.printResult();
     }
     InputView.readMoving(this.getMoveInput.bind(this));
   }
