@@ -5,11 +5,8 @@ const { BRIDGE_CONSTANTS } = require('./GameConstants');
  */
 class BridgeGame {
   #bridgeAnswer;
-
   #upMap = [BRIDGE_CONSTANTS.shapeOfBeginning];
-
   #downMap = [BRIDGE_CONSTANTS.shapeOfBeginning];
-
   #numberOfAttempts = 1;
 
   setBridgeAnswer(bridge) {
@@ -28,51 +25,51 @@ class BridgeGame {
     return this.#numberOfAttempts;
   }
 
-  eachMapPush(a, b) {
-    this.#upMap.push(a);
-    this.#downMap.push(b);
-  }
-
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moving, index) {
-    if (index > 0) {
-      this.eachMapPush(BRIDGE_CONSTANTS.dividingLine, BRIDGE_CONSTANTS.dividingLine);
-    }
-
+    this.pushDividingLine(index);
     const answerShape = this.#bridgeAnswer[index];
     const IS_MOVE = (moving === answerShape);
-
     if (moving === BRIDGE_CONSTANTS.up) {
-      this.selectUp(IS_MOVE);
-      return IS_MOVE;
+      return this.selectUp(IS_MOVE);
     }
 
-    this.selectDown(IS_MOVE);
-    return IS_MOVE;
+    return this.selectDown(IS_MOVE);
+  }
+
+  pushDividingLine(index) {
+    if (index === 0) {
+      return;
+    }
+
+    this.#upMap.push(BRIDGE_CONSTANTS.dividingLine);
+    this.#downMap.push(BRIDGE_CONSTANTS.dividingLine);
   }
 
   selectUp(IS_MOVE) {
     this.#downMap.push(BRIDGE_CONSTANTS.notSelect);
     if (IS_MOVE) {
       this.#upMap.push(BRIDGE_CONSTANTS.success);
-      return;
+      return IS_MOVE;
     }
 
     this.#upMap.push(BRIDGE_CONSTANTS.failure);
+    return IS_MOVE;
   }
 
   selectDown(IS_MOVE) {
     this.#upMap.push(BRIDGE_CONSTANTS.notSelect);
     if (IS_MOVE) {
       this.#downMap.push(BRIDGE_CONSTANTS.success);
-      return;
+      return IS_MOVE;
     }
 
     this.#downMap.push(BRIDGE_CONSTANTS.failure);
+    return IS_MOVE;
   }
 
   /**
