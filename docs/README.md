@@ -10,9 +10,10 @@
 ## 기능 목록
 
 - [ ] `App` 클래스
-  - [x] `InputView`를 이용해 다리 길이를 입력 받는다. 이후 `BridgeGame` 클래스를 만들고 다음 `status`를 반환한다. `setBridgeGame`
-  - [ ] `BridgeGame`의 `move`를 호출한 뒤 다음 `status`를 반환한다.
-  - [ ] `BridgeGame`의 `retry`를 호출한 뒤 다음 `status`를 반환한다.
+  - [x] `InputView`를 이용해 다리 길이를 입력 받는다. 이후 `BridgeGame` 클래스를 만들고 다음 `status`를 반환한다. - `setBridgeGame`
+  - [x] `InputView`를 이용해 플레이어 이동을 입력 받는다. `BridgeGame`의 `move`를 호출한 뒤 다음 `status`를 반환한다. - `addBridgeGameMove`
+  - [ ] `InputView`를 이용해 재시작 옵션을 입력 받는다. `BridgeGame`의 `retry`를 호출한 뒤 다음 `status`를 반환한다. - `retryOrQuit`
+  - [ ] 게임이 종료되면 `OutputView`를 이용해 결과를 출력한다.
 - [x] `BridgeGame` 클래스
   - [x] 게임 결과에 따라 다음 `status`를 반환한다. - `getStatus`
   - [x] 사용자 이동 경로를 추가한다. - `move`
