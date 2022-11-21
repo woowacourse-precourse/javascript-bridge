@@ -6,7 +6,7 @@ const { INPUT_CHAR, INPUT_RETRY } = require('../Constants/InputValues');
  */
 function isCorrectBridgeSize(input) {
   const RegExp = /^[0-9]+$/;
-  if (input < 3) throw new Error(ERROR_MESSAGE.biggerThanThree);
+  if (input < 3 && input > 20) throw new Error(ERROR_MESSAGE.wrongSize);
   if (!RegExp.test(input)) throw new Error(ERROR_MESSAGE.mustNumber);
   return false;
 }
@@ -32,7 +32,7 @@ function isCorrectMoveCommand(input) {
  * 입력된 값이 유효한 종료/재시작 값인지 판별하는 메서드
  */
 function isCorrectOptionCommand(input) {
-  if (!(input === INPUT_RETRY.restart) && !(input === INPUT_RETRY.quit)) throw new Error(ERROR_MESSAGE.wrontCommand);
+  if (!(input === INPUT_RETRY.restart) && !(input === INPUT_RETRY.quit)) throw new Error(ERROR_MESSAGE.wrongCommand);
   return false;
 }
 
