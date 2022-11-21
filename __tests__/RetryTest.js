@@ -48,10 +48,6 @@ describe('게임 재실행 테스트', () => {
 
     gameController.getBridgeSize();
     gameController.getMoving();
-    gameController.getMoving();
-    gameController.getMoving();
-    gameController.getMoving();
-    gameController.getMoving();
 
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
