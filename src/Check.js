@@ -6,59 +6,56 @@ const Check = {
   hasCorrectSize(size) {
     const number = this.hasNumber(size);
     const range = this.hasInRange(size);
-
-    if (number || range) {
-      return true;
-    }
-    return false;
+    const incorrectSize = number || range;
+    return incorrectSize;
   },
 
   hasNumber(size) {
+    const notNumber = isNaN(size);
     try {
-      if (isNaN(size)) {
+      if (notNumber) {
         throw new Error(ERROR.NUMBER);
       }
     } catch (error) {
       Console.print(error.message);
-      return true;
     }
+    return notNumber;
   },
 
   hasInRange(size) {
+    const notInRange = size < SIZE.MINIMUM || size > SIZE.MAXIMUM;
     try {
-      if (size < SIZE.MINIMUM || size > SIZE.MAXIMUM) {
+      if (notInRange) {
         throw new Error(ERROR.RANGE);
       }
     } catch (error) {
       Console.print(error.message);
-      return true;
     }
+    return notInRange;
   },
 
   hasMoving(moving) {
+    const notMoving = moving !== MOVING.UPPER && moving !== MOVING.LOWER;
     try {
-      if (moving !== MOVING.UPPER && moving !== MOVING.LOWER) {
+      if (notMoving) {
         throw new Error(ERROR.MOVING);
       }
     } catch (error) {
       Console.print(error.message);
-      return true;
     }
-
-    return false;
+    return notMoving;
   },
 
   hasCommand(command) {
+    const notCommand = command !== COMMAND.RESTART && command !== COMMAND.END;
     try {
-      if (command !== COMMAND.RESTART && command !== COMMAND.END) {
+      if (notCommand) {
         throw new Error(ERROR.COMMAND);
       }
     } catch (error) {
       Console.print(error.message);
-      return true;
     }
-
-    return false;
+    return notCommand;
   },
 };
 
