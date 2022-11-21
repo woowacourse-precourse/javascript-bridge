@@ -16,41 +16,25 @@ class BridgeGame {
 
   move(round, bridgeString, userInputString) {
     //n번째 round에서 bridgeString과 userInputString을 보고 다리 보여주기
-    // for (let i = 0; i < round; i++) {
-    //   // console.log(bridgeString[i] === userInputString[i]);
-    //   if (bridgeString[i] === userInputString[i] && bridgeString[i] === 'U') {
-    //     this.#upperBridge.push('o');
-    //     this.#lowerBridge.push('n');
-    //   } else if (bridgeString[i] === userInputString[i] && bridgeString[i] === 'D') {
-    //     this.#upperBridge.push('n');
-    //     this.#lowerBridge.push('o');
-    //   } else if (bridgeString[i] === 'U') {
-    //     this.#upperBridge.push('x');
-    //     this.#lowerBridge.push('n');
-    //     return false;
-    //   } else {
-    //     this.#lowerBridge.push('x');
-    //     this.#upperBridge.push('n');
-    //     return false;
-    //   }
-    // }
+    const roundResult = {};
     if (bridgeString[round] === userInputString[round] && bridgeString[round] === 'U') {
-      this.#upperBridge.push('o');
-      this.#lowerBridge.push('n');
+      this.pushO(this.#upperBridge, this.#lowerBridge);
     } else if (bridgeString[round] === userInputString[round] && bridgeString[round] === 'D') {
-      this.#upperBridge.push('n');
-      this.#lowerBridge.push('o');
+      this.pushO(this.#lowerBridge, this.#upperBridge);
     } else if (bridgeString[round] === 'U') {
-      this.#upperBridge.push('x');
-      this.#lowerBridge.push('n');
-      return false;
-    } else {
-      this.#lowerBridge.push('x');
-      this.#upperBridge.push('n');
-      return false;
+      this.pushX(this.#upperBridge, this.#lowerBridge);
+    } else if (bridgeString[round] === 'D') {
+      this.pushX(this.#lowerBridge, this.#upperBridge);
     }
-    this.showCurrentBridge();
     return true;
+  }
+  pushO(bridge1, bridge2) {
+    bridge1.push('o');
+    bridge2.push('n');
+  }
+  pushX(bridge1, bridge2) {
+    bridge1.push('x');
+    bridge2.push('n');
   }
 
   /**
@@ -63,13 +47,25 @@ class BridgeGame {
     let upperStr = '[';
     let lowerStr = '[';
     for (let i in this.#upperBridge) {
-      upperStr += ` ${this.#upperBridge[i] === 'o' ? 'O' : ' '} |`;
-      lowerStr += ` ${this.#lowerBridge[i] === 'o' ? 'O' : ' '} |`;
+      upperStr += this.modifyCurStr(this.#upperBridge[i]);
+      lowerStr += this.modifyCurStr(this.#lowerBridge[i]);
     }
     upperStr += '\b]';
     lowerStr += '\b]';
     console.log(upperStr);
     console.log(lowerStr);
+  }
+  modifyCurStr(char) {
+    switch (char) {
+      case 'o':
+        return ' O |';
+      case 'n':
+        return '   |';
+      case 'x':
+        return ' X |';
+      default:
+        break;
+    }
   }
 }
 

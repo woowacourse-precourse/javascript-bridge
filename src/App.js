@@ -33,6 +33,7 @@ class App {
       `round : ${this.#round}, bridge: ${this.#bridgeString}, userInput : ${this.#userInputString}`
     );
     const isPlaying = this.brideGame.move(this.#round, this.#bridgeString, this.#userInputString);
+    this.brideGame.showCurrentBridge();
     if (isPlaying) {
       this.#round += 1;
       readMoving(this.check);
