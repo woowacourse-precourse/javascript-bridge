@@ -20,14 +20,11 @@ const ERROR_MESSAGE = Object.freeze({
   command: '플레이어가 이동할 칸은 대문자 U 또는 D중 하나만 입력할 수 있습니다.',
 });
 
-// 다리 길이는 3 - 20 사이
 const RANGE = Object.freeze({
   min: 3,
   max: 20,
 });
 
-// 아래칸 = D = 0
-// 위칸 = U = 1
 const SPACE = Object.freeze({
   0: 'D',
   1: 'U',
