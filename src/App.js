@@ -1,9 +1,9 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const InputVIew = require('./InputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const BridgeGame = require('./BridgeGame');
-const OutputView = require('./OutputView');
+const BridgeGame = require('./BridgeGame/BridgeGame');
+const OutputView = require('./IO/OutputView');
+const InputVIew = require('./IO/InputView');
 
 class App {
   play() {
@@ -18,25 +18,24 @@ class App {
     MissionUtils.Console.close();
   }
 
-  moving(bridge_game) {   
+  moving(bridge_game) {
     for (let i = 0; i < bridge_game.size; i++) {
       if (bridge_game.move(InputVIew.readMoving(), i)) {
         OutputView.printMap(bridge_game.current_moving, true);
         continue;
-      } 
+      }
       OutputView.printMap(bridge_game.current_moving, false);
       this.retrying(bridge_game);
-      return; 
+      return;
     }
     OutputView.printResult(bridge_game.current_moving, true, bridge_game.try);
   }
 
-  
-
   retrying(bridge_game) {
     let command = InputVIew.readGameCommand();
-    if (bridge_game.retry(command)) {//'Q'
-      OutputView.printResult(bridge_game.current_moving, false, bridge_game.try);
+    if (bridge_game.retry(command)) {
+      //'Q'
+      OutputView.printResult(bridge_game.current_moving,false,bridge_game.try);
       return;
     }
     //'R'
