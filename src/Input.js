@@ -19,7 +19,7 @@ class Input{
   }
   static checkMovingInput(userSpace,bridgeArray){
     if(userSpace!=='U'&& userSpace!=='D') throw "[ERROR] Only U,D accepted"
-    let correctValue=OutputView.printMap(userSpace,bridgeArray,this.count)
+    let correctValue=OutputView.printMap(userSpace,bridgeArray)
     return correctValue
   }
   static checkReadGameInput(gameInput,bridgeArray){
