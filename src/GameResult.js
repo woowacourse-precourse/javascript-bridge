@@ -22,7 +22,7 @@ class GameResult {
     return this.#resultMap;
   }
 
-  calcutateMatch(index, value) {
+  calculateMatch(index, value) {
     this.updateResult(index, value);
     const existing = this.#resultMap.get(index);
     return existing.machine === existing.player;
@@ -36,18 +36,19 @@ class GameResult {
     return this.getAsArray().findIndex(([, value]) => !value.player);
   }
 
-  // 리팩토링 사항
+  // 리팩토링 사항ㅜㅜㅜ
   makeHistory() {
     const history = this.getAsArray().filter(([, value]) => value.player);
     const [upside, downside] = Array.from({ length: 2 }, () => []);
 
     for (let i = 0; i < history.length; i++) {
-      const { machine, player } = history[i][1];
-      const [selected, notSeleted] = [
-        machine === player ? OUTPUT_FORMAT.MATCH : OUTPUT_FORMAT.UNMATCH,
-        OUTPUT_FORMAT.NOT_SELECTED,
-      ];
-      const [up, down] = player === INPUT_FORMAT.UPSIDE ? [selected, notSeleted] : [notSeleted, selected];
+      const [up, down] = this.makeHistoryLine(history[i][1]);
+      // const { machine, player } = history[i][1];
+      // const [selected, notSeleted] = [
+      //   machine === player ? OUTPUT_FORMAT.MATCH : OUTPUT_FORMAT.UNMATCH,
+      //   OUTPUT_FORMAT.NOT_SELECTED,
+      // ];
+      // const [up, down] = player === INPUT_FORMAT.UPSIDE ? [selected, notSeleted] : [notSeleted, selected];
 
       upside.push(up);
       downside.push(down);
@@ -56,6 +57,18 @@ class GameResult {
     return [upside, downside];
   }
 
+  makeHistoryLine(value) {
+    const { machine, player } = value;
+    const [selected, notSeleted] = [
+      machine === player ? OUTPUT_FORMAT.MATCH : OUTPUT_FORMAT.UNMATCH,
+      OUTPUT_FORMAT.NOT_SELECTED,
+    ];
+    const [up, down] = player === INPUT_FORMAT.UPSIDE ? [selected, notSeleted] : [notSeleted, selected];
+
+    return [up, down];
+  }
+
+  // getter 줄일 것
   getTryCount() {
     return this.#tryCount;
   }
