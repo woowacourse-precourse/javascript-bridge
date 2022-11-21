@@ -7,6 +7,7 @@ const {
   bridgeDirection,
   gameContinue,
 } = require("./utils/validate.js");
+const { DEFAULT } = require("./utils/constant.js");
 
 const BridgeGame = require("./BridgeGame.js");
 
@@ -70,11 +71,11 @@ class App {
 
   doNextMove = (nextMove) => {
     switch (nextMove) {
-      case "Retry":
+      case DEFAULT.RETRY:
         return InputView.readGameCommand(this.retryCallback);
-      case "End":
+      case DEFAULT.END:
         return this.endCallback(this.bridgeGame.end());
-      case "Move":
+      case DEFAULT.MOVE:
         return InputView.readMoving(this.moveCallback);
     }
   };
