@@ -12,7 +12,7 @@ class BridgeGame {
   #bridge = "";
   #bridgeLength = 0;
   #currentMovingBridge = [];
-
+  #try = 1;
 
   setBridge(bridge) {
     this.#bridge = bridge;
@@ -20,6 +20,14 @@ class BridgeGame {
 
   setBridgeLength(length) {
     this.#bridgeLength = length;
+  }
+
+  getTry() {
+    return this.#try;
+  }
+
+  getCurrentMovingBridge() {
+    return this.#currentMovingBridge;
   }
 
   move(word) {
@@ -31,6 +39,24 @@ class BridgeGame {
     return [false, this.#currentMovingBridge];
   }
 
+  judgePlay(isMove) {
+    if (!isMove) {
+      return false;
+    }
+
+    if (this.#bridgeLength === this.#currentMovingBridge.length) {
+      return true;
+    }
+
+    return 0;
+  }
+
+  judgeState() {
+    if(this.#currentMovingBridge.length === this.#bridgeLength) {
+      return Constant.SUCCESS_TEXT;
+    }
+    return Constant.FAIL_TEXT;
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
