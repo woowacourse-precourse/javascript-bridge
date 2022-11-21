@@ -50,6 +50,23 @@ class BridgeModel {
 
     return movingRecords;
   }
+
+  /**
+   * 각 움직임에 대해 성공여부를 참고하여 사인을 반환한다.
+   * @param userMoving {string[]} [유저 이동 기록]
+   * @param index {number} [움직임 순서]
+   * @param type {string} [up / down 기준]
+   * @return {string} [성공여부에 대한 사인]
+   */
+  getSignFromMove(userMoving, index, type) {
+    // up 다리인지, down 다리인지 type 을 통해 판별한다.
+    const standard = type === "up" ? "U" : "D";
+    const movingRecords = this.getMovingRecords(userMoving);
+
+    if (userMoving[index] === standard && movingRecords[index]) return "O";
+    if (userMoving[index] === standard && !movingRecords[index]) return "X";
+    return " ";
+  }
 }
 
 module.exports = BridgeModel;
