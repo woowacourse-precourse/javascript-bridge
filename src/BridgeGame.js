@@ -27,36 +27,43 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+
+  ifSuccess(command) {
+    switch (command) {
+      case "U":
+        this.upperBridge.push(RESULT.success);
+        this.lowerBridge.push(RESULT.empty);
+        break;
+      case "D":
+        this.upperBridge.push(RESULT.empty);
+        this.lowerBridge.push(RESULT.success);
+        break;
+    }
+  }
+
+  ifFail(command) {
+    switch (command) {
+      case "U":
+        this.upperBridge.push(RESULT.fail);
+        this.lowerBridge.push(RESULT.empty);
+        break;
+      case "D":
+        this.upperBridge.push(RESULT.empty);
+        this.lowerBridge.push(RESULT.fail);
+        break;
+    }
+  }
+
   move(command) {
     if (this.randomBridge[this.index] === command) {
       this.isSuccess = true;
-      switch (command) {
-        case "U":
-          this.upperBridge.push(RESULT.success);
-          this.lowerBridge.push(RESULT.empty);
-          break;
-        case "D":
-          this.upperBridge.push(RESULT.empty);
-          this.lowerBridge.push(RESULT.success);
-          break;
-      }
+      this.ifSuccess(command);
     } else {
       this.isSuccess = false;
-      switch (command) {
-        case "U":
-          this.upperBridge.push(RESULT.fail);
-          this.lowerBridge.push(RESULT.empty);
-          break;
-        case "D":
-          this.upperBridge.push(RESULT.empty);
-          this.lowerBridge.push(RESULT.fail);
-          break;
-      }
+      this.ifFail(command);
     }
 
-    if (this.randomBridge.length === this.index + 1 && this.isSuccess === true) {
-      this.end = true;
-    }
+    if (this.randomBridge.length === this.index + 1 && this.isSuccess === true) return (this.end = true);
 
     this.index++;
   }
