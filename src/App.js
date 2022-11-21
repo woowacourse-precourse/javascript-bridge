@@ -61,7 +61,7 @@ class App {
   questionBridgeMove() {
     InputView.readMoving((moveAnswer) => {
       try {
-        Validator.confirmOfCondition(moveAnswer, 'move');
+        Validator.confirmByCondition(moveAnswer, 'move');
         this.runBridgeMove(moveAnswer);
         this.#appStatus = this.#APP_STATUS.QUESTION_RETRY;
       } catch (e) {

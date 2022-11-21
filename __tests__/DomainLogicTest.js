@@ -24,7 +24,7 @@ describe('도메인 로직 테스트 Validator 객체', () => {
     const answer = true;
 
     inputs.forEach((input, i) => {
-      expect(Validator.confirmOfCondition(input, conditions[i])).toBe(answer);
+      expect(Validator.confirmByCondition(input, conditions[i])).toBe(answer);
     });
   });
 

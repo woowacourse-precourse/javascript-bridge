@@ -26,7 +26,7 @@ const Validator = Object.freeze({
     return true;
   },
 
-  confirmOfCondition(input, condition) {
+  confirmByCondition(input, condition) {
     if (condition === 'move') {
       return this.checkCondition(input, this.MOVEMENT_CONDITIONS, this.ERROR_MESSAGES.ONLY_U_D);
     }
