@@ -1,4 +1,3 @@
-const { read } = require('./utils');
 const { Console } = require('@woowacourse/mission-utils');
 const Validator = require('./Validator');
 const {

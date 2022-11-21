@@ -1,4 +1,4 @@
-const { print, close } = require('./utils');
+const { Console } = require('@woowacourse/mission-utils');
 const { RESULT_GROUP } = require('./enums');
 
 /**
@@ -13,26 +13,26 @@ const TRY_COUNT_MESSAGE = '총 시도한 횟수: ';
 
 const OutputView = {
   printStart() {
-    print(START_MESSAGE);
+    Console.print(START_MESSAGE);
   },
 
   printMap(map, location) {
     const [firstLine, secondLine] = map;
     const curFirstLine = firstLine.slice(0, location).join(' | ');
     const curSecondLine = secondLine.slice(0, location).join(' | ');
-    print('[ ' + curFirstLine + ' ]');
-    print('[ ' + curSecondLine + ' ]\n');
+    Console.print('[ ' + curFirstLine + ' ]');
+    Console.print('[ ' + curSecondLine + ' ]\n');
   },
 
   printEnd() {
-    print(END_MESSAGE);
+    Console.print(END_MESSAGE);
   },
 
   printResult(isSuccess, tryCount) {
     const result = isSuccess ? RESULT_GROUP.SUCCESS : RESULT_GROUP.FAIL;
-    print(IS_SUCCEED_MESSAGE + result);
-    print(TRY_COUNT_MESSAGE + tryCount);
-    close();
+    Console.print(IS_SUCCEED_MESSAGE + result);
+    Console.print(TRY_COUNT_MESSAGE + tryCount);
+    Console.close();
   },
 };
 
