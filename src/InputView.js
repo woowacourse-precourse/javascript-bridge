@@ -54,15 +54,15 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(PROMPT.READ_COMMAND, this.readGameCommandCallback.bind(this));
-    },
+  },
   
-    readGameCommandCallback(command) {
-      try {
-      } catch (error) {
-        OutputView.printErrorMessage(error);
-        this.readGameCommand();
-      }
-    },
+  readGameCommandCallback(command) {
+    try {
+    } catch (error) {
+      OutputView.printErrorMessage(error);
+      this.readGameCommand();
+    }
+  },
 };
 
 module.exports = InputView;
