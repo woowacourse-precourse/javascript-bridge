@@ -40,10 +40,10 @@ class BridgeGameController {
   }
 
   checkNextProcess(isSuccess) {
-    if (!isSuccess) return this.getQuitMessage();
+    if (!isSuccess) return this.getQuitMessage(isSuccess);
 
     if (isSuccess && this.#bridgeGame.isDestination()) {
-      return this.quit();
+      return this.quit(isSuccess);
     }
 
     return this.getMoving();
@@ -55,7 +55,7 @@ class BridgeGameController {
     OutputView.printMap(upside, downside);
   }
 
-  getQuitMessage() {
+  getQuitMessage(isSuccess) {
     InputView.readGameCommand((command) => {
       new GameCommandValidator(command).validate();
 
@@ -64,11 +64,13 @@ class BridgeGameController {
         this.getMoving();
       }
 
-      if (command === BRIDGE_MESSAGE.QUIT_SIGN) this.quit();
+      if (command === BRIDGE_MESSAGE.QUIT_SIGN) this.quit(isSuccess);
     });
   }
 
-  quit() {}
+  quit(isSuccess) {
+    OutputView.printResult(this.#bridgeGame, isSuccess);
+  }
 }
 
 module.exports = BridgeGameController;
