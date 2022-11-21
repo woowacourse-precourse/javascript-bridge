@@ -2,6 +2,7 @@ const { ERROR_MESSAGE } = require("./constants/Messages.js");
 const Validator = {
   BRIDGE_SIZE_REGEX: /^[3-9]{1}$|^1{1}[0-9]{1}$|20/,
   MOVE_REGEX: /^[UD]$/,
+  RESTART_REGEX: /^[RQ]$/,
   // 3이상 20이하의 숫자가 아니면 Error
   checkBridgeLengthInput(input) {
     if (!this.BRIDGE_SIZE_REGEX.test(input))
@@ -11,6 +12,10 @@ const Validator = {
   checkValidMove(input) {
     if (!this.MOVE_REGEX.test(input))
       throw new Error(ERROR_MESSAGE.MOVE_INPUT_ERROR);
+  },
+  checkValidRestart(input) {
+    if (!this.RESTART_REGEX.test(input))
+      throw new Error(ERROR_MESSAGE.RESTART_INPUT_ERROR);
   },
 };
 
