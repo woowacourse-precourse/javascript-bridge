@@ -11,15 +11,15 @@ class App {
 
   play() {
     OutputView.printStart();
-    InputView.readBridgeSize(this.setBridgeRoutine.bind(this));
+    InputView.readBridgeSize(this.setBridge.bind(this));
   }
 
-  setBridgeRoutine(bridgeSize) {
+  setBridge(bridgeSize) {
     this.bridgeModel.setBridge(bridgeSize);
-    this.attemptRoutine();
+    this.attempt();
   }
 
-  attemptRoutine() {
+  attempt() {
     InputView.readMoving(this.setMovingRoutine.bind(this));
   }
 
@@ -29,17 +29,17 @@ class App {
     this.bridgeIdx += 1;
 
     OutputView.printMap(upDownCounter[0], upDownCounter[1]);
-    if (isSuccess) return this.endGameRoution(upDownCounter);
-    if (!moveResult) return InputView.readGameCommand(this.failRoutine.bind(this));
-    this.attemptRoutine();
+    if (isSuccess) return this.printResultEndGame(upDownCounter);
+    if (!moveResult) return InputView.readGameCommand(this.afterFailResult.bind(this));
+    this.attempt();
   }
 
-  failRoutine(command) {
+  afterFailResult(command) {
     if (command === COMMAND.RETRY) return this.retryRoutine();
-    this.endGameRoution(this.bridgeModel.getUpDownCounter());
+    this.printResultEndGame(this.bridgeModel.getUpDownCounter());
   }
 
-  endGameRoution(upDownCounter) {
+  printResultEndGame(upDownCounter) {
     const finalResult = {
       upDownCounter,
       isSuccess: this.bridgeModel.isSuccess ? '성공' : '실패',
@@ -51,7 +51,7 @@ class App {
 
   retryRoutine() {
     this.reset();
-    this.attemptRoutine();
+    this.attempt();
   }
 
   reset() {
