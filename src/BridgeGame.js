@@ -11,6 +11,11 @@ class BridgeGame {
     this.#crossingOrder = [];
     this.#attemptCount = 1;
   }
+  getResult() {
+    let isSuccess = !this.isFail() && this.isLast();
+
+    return { isSuccess };
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
