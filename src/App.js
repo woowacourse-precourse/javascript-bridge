@@ -5,20 +5,23 @@ const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const { Console } = require("@woowacourse/mission-utils");
 const { INPUT_VALUE, STATES } = require("./constants/values");
+const { Errors } = require("./Errors");
 
 class App {
   startGame() {
     InputView.readBridgeSize((size) => {
+      size = Number(size);
       const bridge = new BridgeGame(
         BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate)
       );
-      this.progressGame(bridge, size);
+      this.progressGame(bridge, Number(size));
     });
   }
 
   progressGame(bridge, size) {
     InputView.readMoving((answer) => {
       if (bridge.checkInputIsCorrect(answer, bridge.step)) {
+        // check 이름, parameter 수정
         this.moveUserBridge(answer, bridge, size);
         return;
       }
@@ -62,6 +65,22 @@ class App {
           this.progressGame(bridge, size);
       }
     });
+  }
+
+  validateInputSize(size) {
+    this.validateIsNumber(size);
+    this.validateRange(size);
+  }
+
+  validateIsNumber(size) {
+    if (isNaN(size)) {
+      throw Error("[ERROR] 숫자를 입력해주세요");
+    }
+  }
+
+  validateRange(size) {
+    if (size < 3 || size > 20)
+      throw Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
   }
 
   play() {
