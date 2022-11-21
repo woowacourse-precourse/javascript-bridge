@@ -3,6 +3,7 @@ const { GAME_MESSAGE } = require('../constants/game.constants');
 const InputValidator = require('../validators/InputValidator');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
+const { printMap, printResult } = require('./OutputView');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -39,11 +40,19 @@ const InputView = {
         try {
           InputValidator.isUpDown(string);
 
+          bridgeGame.setInputUpDown(string);
+          bridgeGame.setMapArray(bridgeGame.sameBridge(idx), string);
+          printMap(bridgeGame);
+          if (bridge[idx] === string) {
+            return this.readMoving(bridgeGame, idx + 1);
+          }
         } catch (error) {
           Console.print(error.message);
           this.readMoving(bridgeGame, idx);
         }
       });
+    } else {
+      printResult(true, bridgeGame);
     }
   },
 
