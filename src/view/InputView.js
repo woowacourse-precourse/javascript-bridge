@@ -41,6 +41,9 @@ const InputView = {
 
   correctMove(game, input) {
     OutputView.printMap(input);
+    if (game.checkEnd()) {
+      return OutputView.printResult("성공", game.getTryCount());
+    }
     this.readMoving(game);
   },
 
@@ -52,7 +55,23 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(game) {
+    Console.readLine(
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (input) => {
+        Errors.readGameError(input);
+        input === "Q"
+          ? OutputView.printResult("실패", game.getTryCount())
+          : this.restart(game);
+      }
+    );
+  },
+
+  restart(game) {
+    game.retry();
+    OutputView.restart();
+    this.readMoving(game);
+  },
 };
 
 module.exports = InputView;

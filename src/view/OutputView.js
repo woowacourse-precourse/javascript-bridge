@@ -20,8 +20,8 @@ let bridgeStepFalse = function (str) {
   }
 };
 
-const currentBridgeUp = [];
-const currentBridgeDown = [];
+let currentBridgeUp = [];
+let currentBridgeDown = [];
 const START = "[";
 const END = "]";
 const SPLIT = "|";
@@ -39,12 +39,14 @@ const OutputView = {
     bridgeStep(str);
     Console.print(START + currentBridgeUp.join(SPLIT) + END);
     Console.print(START + currentBridgeDown.join(SPLIT) + END);
+    Console.print("");
   },
 
   printResultFalse(str) {
     bridgeStepFalse(str);
     Console.print(START + currentBridgeUp.join(SPLIT) + END);
     Console.print(START + currentBridgeDown.join(SPLIT) + END);
+    Console.print("");
   },
 
   /**
@@ -52,7 +54,19 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(result, num) {
+    Console.print("최종 게임 결과");
+    Console.print(START + currentBridgeUp.join(SPLIT) + END);
+    Console.print(START + currentBridgeDown.join(SPLIT) + END);
+    Console.print(`\n게임 성공 여부: ${result}`);
+    Console.print(`총 시도한 횟수: ${num}`);
+    Console.close();
+  },
+
+  restart() {
+    currentBridgeDown = [];
+    currentBridgeUp = [];
+  },
 };
 
 module.exports = OutputView;

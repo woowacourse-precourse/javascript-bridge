@@ -4,6 +4,7 @@
 class BridgeGame {
   #bridge;
   #currentStep = 0;
+  #tryCount = 1;
 
   constructor(bridge) {
     this.#bridge = bridge;
@@ -11,6 +12,25 @@ class BridgeGame {
 
   getBridge() {
     return this.#bridge;
+  }
+
+  checkEnd() {
+    if (this.#currentStep === this.#bridge.length) {
+      return true;
+    }
+    return false;
+  }
+
+  setCurrentStep() {
+    this.#currentStep = 0;
+  }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
+
+  setTryCount() {
+    this.#tryCount++;
   }
 
   /**
@@ -32,7 +52,10 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.setCurrentStep();
+    this.setTryCount();
+  }
 }
 
 module.exports = BridgeGame;
