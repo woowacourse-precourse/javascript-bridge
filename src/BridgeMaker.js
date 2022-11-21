@@ -9,10 +9,9 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const tempBridge = new Array(size).fill(0);
-
     const bridge = tempBridge.map((elem) => {
-      const tempNumber = generateRandomNumber.generate();
-      console.log(`tempNum: ${tempNumber}`);
+      const tempNumber = generateRandomNumber();
+
       if (tempNumber) return "U";
       if (!tempNumber) return "D";
     });
