@@ -1,4 +1,4 @@
-const {OPERATION_KEY} = require('./constants')
+const { OPERATION_KEY } = require('./constants');
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -16,7 +16,7 @@ const BridgeMaker = {
       route.push(number ? OPERATION_KEY.UP : OPERATION_KEY.DOWN);
     }
 
-    return route
+    return route;
   },
 };
 

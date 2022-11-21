@@ -1,9 +1,9 @@
-const OutputView = require("./OutputView");
-const InputView = require("./InputView");
-const BridgeGame = require("./BridgeGame");
-const { Console } = require("@woowacourse/mission-utils");
-const validator = require("./utils");
-const { ERROR_MESSAGE } = require("./constants");
+const OutputView = require('./OutputView');
+const InputView = require('./InputView');
+const BridgeGame = require('./BridgeGame');
+const { Console } = require('@woowacourse/mission-utils');
+const validator = require('./utils');
+const { ERROR_MESSAGE } = require('./constants');
 
 class App {
   MOVE_TO_FORK_MAP = {
@@ -45,10 +45,10 @@ class App {
 
   validateBridgeSize(size) {
     if (validator.isOverSize(size)) {
-      throw new Error(ERROR_MESSAGE.SIZE_RANGE)
+      throw new Error(ERROR_MESSAGE.SIZE_RANGE);
     }
     if (!validator.isInteger(size)) {
-      throw new Error(ERROR_MESSAGE.SIZE_INTEGER)
+      throw new Error(ERROR_MESSAGE.SIZE_INTEGER);
     }
   }
 
@@ -61,7 +61,6 @@ class App {
       OutputView.printError(error);
       Console.close();
     }
-    
   }
 
   requestDirection() {
@@ -70,7 +69,7 @@ class App {
 
   validateMoveCommand(command) {
     if (validator.isNotUorD(command)) {
-      throw new Error(ERROR_MESSAGE.OPERATION_MOVE)
+      throw new Error(ERROR_MESSAGE.OPERATION_MOVE);
     }
   }
 
@@ -78,10 +77,9 @@ class App {
     try {
       this.validateMoveCommand(response);
       this.bridgeGame.move(response).setStaus().setResultMap();
-
       OutputView.printMap(this.bridgeGame);
       this.MOVE_TO_FORK_MAP[this.bridgeGame.getStatus()]();
-    } catch(error) {
+    } catch (error) {
       OutputView.printError(error);
       Console.close();
     }
@@ -93,15 +91,15 @@ class App {
 
   validateGameCommand(command) {
     if (validator.isNotRorQ(command)) {
-      throw new Error(ERROR_MESSAGE.OPERATION_GAME_COMMAND)
+      throw new Error(ERROR_MESSAGE.OPERATION_GAME_COMMAND);
     }
   }
 
   isRetry(response) {
     try {
-      this.validateGameCommand(response)
+      this.validateGameCommand(response);
       this.FAIL_TO_FORK_MAP[response]();
-    } catch(error) {
+    } catch (error) {
       OutputView.printError(error);
       Console.close();
     }

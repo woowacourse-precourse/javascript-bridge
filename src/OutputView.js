@@ -1,5 +1,5 @@
-const {Console} = require("@woowacourse/mission-utils");
-const {MESSAGE} = require('./constants');
+const { Console } = require('@woowacourse/mission-utils');
+const { MESSAGE } = require('./constants');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -8,7 +8,7 @@ const OutputView = {
   printStart() {
     Console.print(MESSAGE.START);
   },
-  
+
   printError(message) {
     Console.print(message);
   },
@@ -18,10 +18,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridgeGame) {
-    const resultMap = bridgeGame.getResultMap()
+    const resultMap = bridgeGame.getResultMap();
 
-    Console.print(`[ ${resultMap.upside.join(" | ")} ]`)
-    Console.print(`[ ${resultMap.downside.join(" | ")} ]\n`)
+    Console.print(`[ ${resultMap.upside.join(' | ')} ]`);
+    Console.print(`[ ${resultMap.downside.join(' | ')} ]\n`);
   },
 
   /**
@@ -30,14 +30,14 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(bridgeGame) {
-    const result = bridgeGame.getStatus() === "END" ? "성공" : "실패" 
-    const resultMap = bridgeGame.getResultMap()
+    const result = bridgeGame.getStatus() === 'END' ? '성공' : '실패';
+    const resultMap = bridgeGame.getResultMap();
 
-    Console.print(MESSAGE.RESULT_INFO)
-    Console.print(`[ ${resultMap.upside.join(" | ")} ]`)
-    Console.print(`[ ${resultMap.downside.join(" | ")} ]`)
-    Console.print(MESSAGE.RESULT_IS_SUCCESS(result))
-    Console.print(MESSAGE.RESULT_TRY_COUNT(bridgeGame.getTryCount()))
+    Console.print(MESSAGE.RESULT_INFO);
+    Console.print(`[ ${resultMap.upside.join(' | ')} ]`);
+    Console.print(`[ ${resultMap.downside.join(' | ')} ]`);
+    Console.print(MESSAGE.RESULT_IS_SUCCESS(result));
+    Console.print(MESSAGE.RESULT_TRY_COUNT(bridgeGame.getTryCount()));
   },
 };
 
