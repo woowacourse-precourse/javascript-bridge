@@ -5,10 +5,10 @@ describe("BridgeGame class 테스트", () => {
     const playerChoiceMovingCommands = ["U", "D", "D", "D"];
     const upsideBridgeMap = ["O", " ", " ", " "];
     const downSideBridgeMap = [" ", "O", "O", "O"];
+    const bridgeShape = ["U", "D", "D", "D", "U"];
 
     const bridgeGame = new BridgeGame();
-    bridgeGame.setBridgeShape(["U", "D", "D", "D", "U"]);
-
+    bridgeGame.setBridgeShape(bridgeShape);
     playerChoiceMovingCommands.forEach((playerChoiceMovingCommand) => {
       bridgeGame.move(playerChoiceMovingCommand);
     });
