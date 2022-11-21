@@ -10,8 +10,7 @@ const InputView = {
   readBridgeSize(callback) {
     Console.readLine('다리의 길이를 입력해주세요.', (input) => {
       try {
-        const bridgeSize = this.parseBridgeSize(input);
-        callback(bridgeSize);
+        callback(this.parseBridgeSize(input));
       } catch (error) {
         Console.print(error.message);
 
