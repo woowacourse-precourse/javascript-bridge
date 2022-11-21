@@ -50,7 +50,7 @@
 <br/>
 <br/>
 
-## **🗂️ 파일 구성**
+## **🗂️ 폴더 구성**
 javascript-bridge  
 ┣ **`__tests__`**  
 ┃ ┣ ApplicationTest.js    
@@ -76,3 +76,54 @@ javascript-bridge
 ┃ ┣ BridgeRandomNumberGenerator.js  
 ┃ ┣ InputView.js  
 ┗ ┗ OutputView.js
+    
+<br/>
+<br/>
+
+## **🗄️ 파일 설명**
+**`<__tests__>`**  
+- **`ApplicationTest.js`**  
+    - 프로그램 전반에 대한 테스트 코드
+- **`BridgeGameTest.js`**  
+    - BridgeGame class를 테스트하기 위한 테스트 코드
+- **`BridgeMakerTest.js`**  
+    - BridgeMaker object를 테스트하기 위한 테스트 코드
+- **`BridgeRandomNumberGeneratorTest.js`**  
+    - BridgeRandomNumberGenerator object를 테스트하기 위한 테스트 코드
+- **`BridgeSizeCheckTest.js`**  
+    - BridgeSizeCheck class를 테스트하기 위한 테스트 코드
+- **`MoveCheckTest.js`**  
+    - MoveCheck class를 테스트하기 위한 테스트 코드
+- **`RetryQuitCheckTest.js`**  
+    - RetryQuitCheck class를 테스트하기 위한 테스트 코드  
+
+**`<docs>`**
+- **`README.md`**  
+    - 미션에 대한 설명을 담은 문서
+
+**`<src>`**
+- **`<Check>`**
+    - **`BridgeSizeCheck.js`**  
+        - 사용자가 입력한 다리 길이가 유효한지 확인하는 클래스
+    - **`MoveCheck.js`**  
+        - 사용자가 입력한 움직임이 유효한지 확인하는 클래스
+    - **`RetryQuitCheck.js`**  
+        - 사용자가 입력한 재시도/종료 명령이 유효한지 확인하는 클래스
+
+- **`<Constants>`**
+    - **`Constants.js`**  
+        - 프로젝트에서 사용되는 상수 및 메시지를 정의한 클래스
+- **`App.js`**  
+    - 프로그램의 시작점
+- **`BridgeGame.js`**  
+    - 다리를 건너는 게임을 진행하는 클래스
+- **`BridgeGameToView.js`**  
+    - BridgeGame과 In/OutputView를 연결하는 클래스
+- **`BridgeMaker.js`**  
+    - 다리를 만드는 클래스
+- **`BridgeRandomNumberGenerator.js`**  
+    - 다리를 만드는 데 사용되는 랜덤 숫자를 생성하는 클래스
+- **`InputView.js`**  
+    - 사용자의 입력을 받는 클래스
+- **`OutputView.js`**  
+    - 출력을 담당하는 클래스
