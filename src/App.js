@@ -3,7 +3,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
-const { COMMAND } = require("./utils/constans");
+const { COMMAND } = require("./constants/game");
 
 class App {
   constructor() {

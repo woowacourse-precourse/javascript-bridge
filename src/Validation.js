@@ -1,5 +1,6 @@
-const { ERROR_MESSAGE, BRIDGE, COMMAND } = require("./utils/constans");
 const { Console } = require("@woowacourse/mission-utils");
+const { COMMAND, BRIDGE } = require("./constants/game");
+const { ERROR_MESSAGE } = require("./constants/message");
 
 const Validation = {
   bridgeSize: (bridgeSize) => {

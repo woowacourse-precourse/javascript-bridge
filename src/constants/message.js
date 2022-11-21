@@ -1,19 +1,4 @@
-const COMMAND = {
-  MOVING: { UP: "U", DOWN: "D" },
-  GAME: { RETRY: "R", QUIT: "Q" },
-};
-
-const BRIDGE = {
-  MAP: {
-    START: "[ ",
-    END: " ]",
-    DIVIDING_LINE: " | ",
-  },
-  SIZE: {
-    MINIMUN: 3,
-    MAXIMUM: 20,
-  },
-};
+const { BRIDGE, COMMAND } = require("./game");
 
 const INPUT_MESSAGE = {
   BRIDGE_SIZE: "다리의 길이를 입력해주세요.\n",
@@ -41,9 +26,7 @@ const ERROR_MESSAGE = {
 };
 
 module.exports = {
+  ERROR_MESSAGE,
   INPUT_MESSAGE,
   OUTPUT_MESSAGE,
-  COMMAND,
-  ERROR_MESSAGE,
-  BRIDGE,
 };
