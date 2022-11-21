@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const Const = require('../src/constant/constant');
-const message = require('../src/constant/message');
+const Const = require('../constant/constant');
+const message = require('../constant/message');
 
 
 /**
