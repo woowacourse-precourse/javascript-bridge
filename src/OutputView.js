@@ -5,10 +5,8 @@ const { INPUT_VALUE } = require("./constants/InputValue");
 const OutputView = {
   makeBridge(moving, boolean, string) {
     let answer = moving.map((direction, index) => {
-      if (direction == string && index === moving.length - 1) {
-        return this.checkBoolean(boolean);
-      } else if (direction == string) {
-        return OUTPUT_FORM.MAP_ELEMENT.COINCIDE;
+      if (direction === string) {
+        return this.checkLastIndex(index, moving, boolean);
       }
       return OUTPUT_FORM.MAP_ELEMENT.NOT_SELECTED;
     });
@@ -16,11 +14,13 @@ const OutputView = {
     return answer;
   },
 
-  checkBoolean(boolean) {
-    if (boolean) {
-      return OUTPUT_FORM.MAP_ELEMENT.COINCIDE;
+  checkLastIndex(index, moving, boolean) {
+    if (index === moving.length - 1) {
+      return boolean
+        ? OUTPUT_FORM.MAP_ELEMENT.COINCIDE
+        : OUTPUT_FORM.MAP_ELEMENT.WRONG;
     }
-    return OUTPUT_FORM.MAP_ELEMENT.WRONG;
+    return OUTPUT_FORM.MAP_ELEMENT.COINCIDE;
   },
 
   printMap(moving, boolean) {
