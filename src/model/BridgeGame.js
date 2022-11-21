@@ -3,6 +3,7 @@ const { generate } = require("../BridgeRandomNumberGenerator");
 const { BRIDGE } = require("../constants/bridge.constants");
 const MOVE = require("../constants/move.constants");
 const InValidInputError = require("../error/InValidInputError");
+const BridgeResult = require("./BridgeResult");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -10,6 +11,7 @@ const InValidInputError = require("../error/InValidInputError");
 class BridgeGame {
   bridge;
   idx;
+  result;
 
   constructor(size) {
     this.validate(size);
@@ -39,6 +41,8 @@ class BridgeGame {
   move(input) {
     this.moveValidate(input);
     const isPossible = this.isPossibleMove(this.idx, input);
+    this.result = new BridgeResult(this.bridge, this.idx, isPossible);
+    this.result.printMiddleResult();
     return isPossible;
   }
 

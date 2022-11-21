@@ -16,7 +16,6 @@ class App {
 
   movePlayer(direction) {
     const isPossibleMove = this.game.move(direction);
-    console.log(isPossibleMove);
   }
 }
 
