@@ -113,8 +113,8 @@
 
 - 📁src
   - 📁constant
-    - 📜Error.js
     - 📜Bridge.js
+    - 📜Error.js
   - 📁error
     - 📜InvalidInputError.js
   - 📜App.js
