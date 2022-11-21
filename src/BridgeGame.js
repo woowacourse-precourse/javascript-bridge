@@ -8,7 +8,7 @@ const BridgeNumber = require('./BridgeRandomNumberGenerator');
  */
 class BridgeGame {
   #turn = 0;
-  #try = 0;
+  #try = 1;
   #isPlay = true;
   #isEnd = false;
   #bridge;
