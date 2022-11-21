@@ -11,12 +11,20 @@ class Controller {
   init() {
     readBridgeSize((bridgeSize)=>{
       this.#bridgeGame = new BridgeGame(Number(bridgeSize));
+      this.play();
     });
   }
   play() {
     readMoving((moving) => {
       this.#bridgeGame.move(moving);
+      this.showResult(moving);
     })
+  }
+  showResult(moving) {
+    const upMap = this.#bridgeGame.getMap(true, moving);
+    const downMap = this.#bridgeGame.getMap(false, moving);
+    printMap(upMap);
+    printMap(downMap);
   }
 }
 
