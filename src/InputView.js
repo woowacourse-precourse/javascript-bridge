@@ -31,7 +31,7 @@ const InputView = {
   },
 
   readBridge(resolved, values, result) {
-    const bridge = BridgeMaker.makeBridge(resolved, RandomGenerator);
+    const bridge = BridgeMaker.makeBridge(resolved, RandomGenerator.generate());
     this.readMoving(bridge, values, result);
   },
 
