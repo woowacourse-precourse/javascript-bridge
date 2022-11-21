@@ -22,7 +22,7 @@ class Map {
     this.#map = bridgeMap;
   }
 
-  draw(go, step) {
+  makeNowMap(go, step) {
     let nowMap = [[], []];
     nowMap[0] = this.#map[0].slice(0, step + 1);
     nowMap[1] = this.#map[1].slice(0, step + 1);
@@ -38,10 +38,16 @@ class Map {
       if (nowMap[0][step] === 'O') nowMap[0][step] = ' ';
       if (nowMap[1][step] === 'O') nowMap[1][step] = ' ';
     }
-    OutputView.printMap(nowMap);
+    // OutputView.printMap(nowMap);
+    return nowMap;
   }
-  drawResult(go) {
-    OutputView.printResult(go);
+
+  drawNowMap(go, step) {
+    OutputView.printMap(this.makeNowMap(go, step));
+  }
+
+  drawNowMapWithResult(go, step, tries, result) {
+    OutputView.printResult(this.makeNowMap(go, step), tries, result);
   }
 }
 

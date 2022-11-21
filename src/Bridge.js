@@ -36,13 +36,14 @@ class Bridge {
     return false;
   }
 
-  drawMap(go) {
-    this.map.draw(go, this.#step);
+  drawNowMap(go) {
+    this.map.drawNowMap(go, this.#step);
     this.#step += 1;
   }
 
-  drawResultMap(go) {
-    this.map.drawResult(go);
+  drawResultMap(go, result) {
+    const STEP = this.#step - 1;
+    this.map.drawNowMapWithResult(go, STEP, this.#tries, result);
   }
 
   resetStep() {

@@ -28,19 +28,28 @@ class BridgeGame {
     const IS_USER_CAN_GO = bridge.askUserCanGo(userPosition);
     const GO = 'O';
     const CANT_GO = 'X';
+    const SUCCESS = '성공';
+    const FAIL = '실패';
+
     if (IS_BRIDGE_LEFT) {
       if (IS_USER_CAN_GO) {
-        bridge.drawMap(GO);
+        bridge.drawNowMap(GO);
         return gameManager.askWhereToGo(BridgeGame.move);
       }
       if (!IS_USER_CAN_GO) {
-        bridge.drawMap(CANT_GO);
+        bridge.drawNowMap(CANT_GO);
         return gameManager.askRetry(BridgeGame.retry);
       }
     }
     if (!IS_BRIDGE_LEFT) {
-      bridge.drawMap(GO);
-      bridge.drawResultMap(GO);
+      if (IS_USER_CAN_GO) {
+        bridge.drawNowMap(GO);
+        bridge.drawResultMap(GO, SUCCESS);
+      }
+      if (!IS_USER_CAN_GO) {
+        bridge.drawNowMap(CANT_GO);
+        gameManager.askRetry(BridgeGame.retry);
+      }
     }
   }
 
@@ -51,7 +60,9 @@ class BridgeGame {
    */
   static retry(answer) {
     if (answer === 'Q') {
-      bridge.drawResultMap();
+      const RESULT = '실패';
+      const CANT_GO = 'X';
+      bridge.drawResultMap(CANT_GO, RESULT);
     }
     if (answer === 'R') {
       bridge.resetStep();
