@@ -11,7 +11,7 @@ const ERROR_MSG = {
   INPUT_CMD_ERROR: "[ERROR] 재시작하려면 R, 종료하려면 Q를 입력해주세요.\n",
 };
 
-const PRINT_FINISH_MSG = "\n최종 게임 결과";
+const PRINT_FINISH_MSG = "최종 게임 결과";
 
 const SUCCESS_OR_NOT = "게임 성공 여부: ";
 const COUNT_TRY = "\n총 시도한 횟수: ";
@@ -20,6 +20,18 @@ const SUCCESS = "성공";
 const FAIL = "실패";
 
 const SEPARATOR = " | ";
+
+const USER_INPUT = {
+  UP: "U",
+  DOWN: "D",
+  RESTART: "R",
+  QUIT: "Q",
+};
+
+const RANGE = {
+  MIN_RANGE: 3,
+  MAX_RANGE: 20,
+};
 
 module.exports = {
   GUIDE_MSG,
@@ -30,4 +42,6 @@ module.exports = {
   SEPARATOR,
   SUCCESS_OR_NOT,
   COUNT_TRY,
+  USER_INPUT,
+  RANGE,
 };

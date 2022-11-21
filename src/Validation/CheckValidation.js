@@ -1,9 +1,11 @@
+const { USER_INPUT, RANGE } = require("../Messages/constants");
+
 const ValidCmd = (cmd) => {
-  if (cmd != "R" && cmd != "Q") throw new Error();
+  if (cmd != USER_INPUT.RESTART && cmd != USER_INPUT.QUIT) throw new Error();
 };
 
 const ValidMove = (move) => {
-  if (move != "U" && move != "D") throw new Error();
+  if (move != USER_INPUT.UP && move != USER_INPUT.DOWN) throw new Error();
 };
 
 const ValidSize = (input) => {
@@ -16,7 +18,7 @@ const CheckNotANumber = (input) => {
 };
 
 const CheckInputRange = (input) => {
-  if (+input < 3 || +input > 20) throw new Error();
+  if (+input < RANGE.MIN_RANGE || +input > RANGE.MAX_RANGE) throw new Error();
 };
 
 module.exports = {

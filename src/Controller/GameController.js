@@ -1,6 +1,7 @@
 const OutputView = require("../View/OutputView");
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("../Model/BridgeGame");
+const DrawBridge = require("../Model/DrawBridge");
 
 let bridgeGame;
 
@@ -20,11 +21,11 @@ const GameController = {
   },
 
   makeMap(answer) {
-    OutputView.makeMap(answer, bridgeGame.getIsCorrect());
+    DrawBridge.makeMap(answer, bridgeGame.getIsCorrect());
   },
 
   clearMap() {
-    OutputView.clearMap();
+    DrawBridge.clearMap();
   },
 
   selectGame(answer) {
@@ -32,7 +33,12 @@ const GameController = {
   },
 
   exitGame(isClear) {
-    OutputView.printResult(isClear, bridgeGame.getGameRunCount());
+    OutputView.printResult(
+      isClear,
+      bridgeGame.getGameRunCount(),
+      DrawBridge.getBridge()
+    );
+    DrawBridge.clearMap();
     Console.close();
   },
 };
