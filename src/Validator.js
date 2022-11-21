@@ -1,3 +1,5 @@
+const { BRIDGE_SIZE_RANGE, UP, DOWN, RETRY, QUIT } = require('./constants');
+
 class Validator {
   static validateNumber(value) {
     const regExp = /[0-9]/;
@@ -10,21 +12,21 @@ class Validator {
 
   static validateNumberInRange(value) {
     const num = parseInt(value, 10);
-    if (num > 20 || num < 3) {
+    if (num > BRIDGE_SIZE_RANGE.MAX || num < BRIDGE_SIZE_RANGE.MIN) {
       return false;
     }
     return true;
   }
 
   static validateUpDown(value) {
-    if (value !== 'U' && value !== 'D') {
+    if (value !== UP && value !== DOWN) {
       return false;
     }
     return true;
   }
 
   static validateGameCommand(value) {
-    if (value !== 'R' && value !== 'Q') {
+    if (value !== RETRY && value !== QUIT) {
       return false;
     }
     return true;

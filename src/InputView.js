@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const Validator = require('./Validator');
+const { INPUT_MESSAGE, ERROR_MESSAGE } = require('./constants');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -8,9 +9,9 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    Console.readLine('다리의 길이를 입력해주세요. \n', (input) => {
+    Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (input) => {
       if (!Validator.validateNumber(input) || !Validator.validateNumberInRange(input)) {
-        Console.print('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n');
+        Console.print(ERROR_MESSAGE.SIZE_ERROR);
         return this.readBridgeSize(callback);
       }
       return callback(input);
@@ -21,9 +22,9 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(callback, index, size) {
-    Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D) \n', (input) => {
+    Console.readLine(INPUT_MESSAGE.MOVING, (input) => {
       if (!Validator.validateUpDown(input)) {
-        Console.print('[ERROR] U 또는 D 중 한 문자만 입력해주세요.\n');
+        Console.print(ERROR_MESSAGE.MOVING_ERROR);
         return this.readMoving(callback, index, size);
       }
       callback(input, index);
@@ -35,9 +36,9 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(callback) {
-    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q) \n', (input) => {
+    Console.readLine(INPUT_MESSAGE.COMMAND, (input) => {
       if (!Validator.validateGameCommand(input)) {
-        Console.print('[ERROR] R 또는 Q 중 한 문자만 입력해주세요.\n');
+        Console.print(ERROR_MESSAGE.COMMAND_ERROR);
         return this.readGameCommand(callback);
       }
       return callback(input);

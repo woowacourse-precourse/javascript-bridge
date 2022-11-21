@@ -4,6 +4,7 @@ const OutputView = require('./OutputView');
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
+const { SUCCESS, FAIL, QUIT, CROSS_OR_NOT } = require('./constants');
 
 class Controller {
   constructor() {
@@ -29,18 +30,18 @@ class Controller {
 
   inputMoving() {
     const callback = (input, index) => {
-      const OX = input === this.inputView.birdgeStrArr[index] ? ' O ' : ' X ';
+      const OX = input === this.inputView.birdgeStrArr[index] ? CROSS_OR_NOT.YES : CROSS_OR_NOT.NO;
       BridgeGame.move(input, OX, this.model);
       this.outputView.printMap(this.model);
-      if (OX === ' X ') return this.inputGameCommand();
-      return index === this.inputView.bridgeSize - 1 && this.outputView.printResult('성공', this.model);
+      if (OX === CROSS_OR_NOT.NO) return this.inputGameCommand();
+      return index === this.inputView.bridgeSize - 1 && this.outputView.printResult(SUCCESS, this.model);
     };
     return this.inputView.readMoving(callback, 0, this.inputView.bridgeSize);
   }
 
   inputGameCommand() {
     const callback = (input) => {
-      if (input === 'Q') return this.outputView.printResult('실패', this.model);
+      if (input === QUIT) return this.outputView.printResult(FAIL, this.model);
       BridgeGame.retry(this.model);
       return this.inputMoving();
     };
