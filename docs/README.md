@@ -112,13 +112,12 @@ D
 
 ### 주요 기능
 
-- [ ] 입력받은 길이의 다리를 생성합니다. - `BridgeMaker.makeBridge`
-- [ ] 다리에 건널 수 있는 칸을 지정합니다.
+- [x] 입력받은 길이의 다리를 생성합니다. - `BridgeMaker.makeBridge`
+- [x] 다리에 건널 수 있는 칸을 지정합니다.
 
-  - [ ] 0과 1 중에서 무작위 값 추출합니다. - `generateRandomNumber`
-    - [ ] BridgeRandomeNumberGenerator의 generate를 사용합니다. - `BridgeRandomNumberGenerator.generate`
-  - [ ] 무작위 값이 0인 경우 아래 칸, 1인 경우 위 칸이 건널 수 있는 칸으로 지정합니다.
-  - [ ] 위 칸을 건널 수 있는 경우 U, 아래 칸을 건널 수 있는 경우 D값으로 나타냅니다.
+  - [x] BridgeRandomeNumberGenerator의 generate를 사용해서 0과 1 중에서 무작위 값을 추출합니다. - `BridgeRandomNumberGenerator.generate`
+  - [x] 무작위 값이 0인 경우 아래 칸, 1인 경우 위 칸이 건널 수 있는 칸으로 지정합니다.
+  - [x] 위 칸을 건널 수 있는 경우 U, 아래 칸을 건널 수 있는 경우 D값으로 나타냅니다.
 
 - [ ] 사용자의 입력에 따라 다리에서 이동합니다. - `BridgeGame.move`
   - [ ] 입력한 칸이 이동할 수 있는 칸인지 비교합니다. - `Bridge.isMovable`
