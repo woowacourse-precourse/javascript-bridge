@@ -7,7 +7,8 @@ const REGEX = Object.freeze({
 const ERROR_MESSAGE = Object.freeze({
   bridgeLength: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
   upDownKey: '[ERROR] U 또는 D 문자만 입력 가능합니다.',
-  restartExitKey: '[ERROR] Q 또는 R 문자만 입력 가능합니다.'
+  restartExitKey: '[ERROR] Q 또는 R 문자만 입력 가능합니다.',
+  singleton: '[ERROR] Only one instance is allowed'
 });
 
 const MODEL_KEY = Object.freeze({
