@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
-const BridgeMaker = require("../src/BridgeMaker");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -28,16 +27,6 @@ const getOutput = (logSpy) => {
   return [...logSpy.mock.calls].join("");
 };
 
-const runException = (inputs) => {
-  mockQuestions(inputs);
-  const logSpy = getLogSpy();
-  const app = new App();
-
-  app.play();
-
-  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
-};
-
 const expectLogContains = (received, logs) => {
   logs.forEach((log) => {
     expect(received).toEqual(expect.stringContaining(log));
@@ -63,7 +52,6 @@ describe("게임 재시작 테스트", () => {
         "게임 성공 여부: 성공",
         "총 시도한 횟수: 2",
     ]);
-    expectBridgeOrder(log, "[ O |   |   ]", "[   | O | O ]");
   });
 
   test("재시작 X 테스트", () => {
