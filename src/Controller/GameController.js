@@ -1,6 +1,8 @@
 const InputView = require('../View/InputView');
 const OutputView = require('../View/OutputView');
 const Validation = require('../Model/Validation');
+const BridgeMaker = require('../BridgeMaker');
+const BridgeRanDomNumber = require('../BridgeRandomNumberGenerator');
 const BridgeGame = require('../Model/BridgeGame');
 const { GAME_NUMBER, GAME_STRING } = require('../Constants/constant');
 
@@ -22,7 +24,9 @@ class GameController {
   }
 
   makeBridge(bridgeSize) {
-    this.#bridgeGame = new BridgeGame(bridgeSize);
+    const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRanDomNumber.generate);
+    this.#bridgeGame = new BridgeGame(bridge);
+    return;
   }
 
   inputWhereMoving() {

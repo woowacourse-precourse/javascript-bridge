@@ -1,21 +1,13 @@
-const BridgeMaker = require('../BridgeMaker');
-const BridgeRanDomNumber = require('../BridgeRandomNumberGenerator');
 const { GAME_NUMBER } = require('../Constants/constant');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridgeSize;
   #bridge;
   #bridgeIndex = GAME_NUMBER.startIndex;
-  
-  constructor(bridgeSize) {
-    this.#bridgeSize = bridgeSize;
-    this.#bridge = this.generateBridge();
-  }
 
-  generateBridge() {
-    return BridgeMaker.makeBridge(this.#bridgeSize, BridgeRanDomNumber.generate);
+  constructor(bridge) {
+    this.#bridge = bridge;
   }
 
   match(moveAnswer) {
@@ -38,7 +30,7 @@ class BridgeGame {
   }
 
   checkRemainBridge() {
-    if (this.#bridgeIndex !== this.#bridgeSize) {
+    if (this.#bridgeIndex !== this.#bridge.length) {
       return true;
     }
     return false;
