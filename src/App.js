@@ -45,6 +45,8 @@ class App {
       }
       brigeIndex += 1;
     }
+    OutputView.printResult('성공', this.#curBridge, this.#tryNum);
+    this.end();
   }
 
   async #doRetry() {
