@@ -67,5 +67,43 @@ describe('잘못된 값 입력 테스트', () => {
         `${GAME_MESSAGE.try_count}1`,
       ]);
     });
+
+    test('다리 길이 범위보다 작은 값 입력', () => {
+      const logSpy = getLogSpy();
+      mockRandoms([1, 0, 1]);
+      mockQuestions(['2', '3', 'U', 'D', 'U']);
+
+      const app = new App();
+      app.play();
+
+      const log = getOutput(logSpy);
+      expectLogContains(log, [
+        `[ERROR] ${ERROR_MESSAGE.size.range}`,
+        `${GAME_MESSAGE.result}`,
+        '[ O |   | O ]',
+        '[   | O |   ]',
+        `${GAME_MESSAGE.is_success}${GAME_MESSAGE.success}`,
+        `${GAME_MESSAGE.try_count}1`,
+      ]);
+    });
+
+    test('다리 길이 범위보다 큰 값 입력', () => {
+      const logSpy = getLogSpy();
+      mockRandoms([1, 0, 1]);
+      mockQuestions(['21', '3', 'U', 'D', 'U']);
+
+      const app = new App();
+      app.play();
+
+      const log = getOutput(logSpy);
+      expectLogContains(log, [
+        `[ERROR] ${ERROR_MESSAGE.size.range}`,
+        `${GAME_MESSAGE.result}`,
+        '[ O |   | O ]',
+        '[   | O |   ]',
+        `${GAME_MESSAGE.is_success}${GAME_MESSAGE.success}`,
+        `${GAME_MESSAGE.try_count}1`,
+      ]);
+    });
   });
 });
