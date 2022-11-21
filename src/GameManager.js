@@ -31,6 +31,18 @@ class GameManager {
       callback(input);
     })
   }
+
+  printSpace(firstRow, secondRow) {
+    OutputView.printMap(firstRow, secondRow);
+  }
+
+  printResult(firstRow, secondRow) {
+    OutputView.printResult(firstRow, secondRow);
+  }
+
+  printInfo(count, result) {
+    OutputView.printInfo(count, result);
+  }
 }
 
 module.exports = GameManager;

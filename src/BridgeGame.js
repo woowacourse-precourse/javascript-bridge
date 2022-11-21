@@ -10,6 +10,8 @@ class BridgeGame {
   #bridges
   #firstRow
   #secondRow
+  #count
+  #result
 
 
   constructor() {
@@ -33,6 +35,7 @@ class BridgeGame {
 
   start() {
     this.gameManager.inputBridgeSize(this.getBridge.bind(this));
+    this.#count = 0;
   }
 
   getBridge(bridge) {
@@ -65,6 +68,7 @@ class BridgeGame {
 
   checkBridge(bridge) {
     if (this.#firstRow.includes("X") === true || this.#secondRow.includes("X") === true) {
+      this.#count += 1;
       return this.inputRetry();
     }
 
@@ -99,6 +103,14 @@ class BridgeGame {
       this.inputSpace();
       return;
     }
+
+    this.#result = '실패';
+    this.printFinalResult();
+  }
+
+  printFinalResult() {
+    this.gameManager.printResult(this.#firstRow, this.#secondRow);
+    this.gameManager.printInfo(this.#count, this.#result);
   }
 }
 
