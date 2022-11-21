@@ -1,3 +1,8 @@
+const MissionUtils = require('@woowacourse/mission-utils');
+const { CONSOLE_MESSAGE } = require('./utils/constants');
+const Exception = require('./Exception');
+const exception = new Exception();
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -5,7 +10,15 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize() {
+    MissionUtils.Console.readLine(CONSOLE_MESSAGE.bridgeLengthInput, (input) => {
+      try {
+        exception.validateBridgeLength(input);
+      } catch (error) {
+        return this.readBridgeSize();
+      }
+    });
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
