@@ -14,7 +14,7 @@ const OutputConstants = {
   TRYING_COUNT: (tryCount) => `총 시도한 횟수: ${tryCount}`,
 };
 
-const ConstraintsConstants = {
+const ERROR = {
   ERROR_NOT_ONLY_NUMBER: "[ERROR] 숫자만 입력 가능합니다.\n",
   ERROR_NOT_IN_RANGE: "[ERROR] 다리 길이는 3 이상 20 이하만 가능합니다.\n",
   ERROR_NOT_START_ZERO: "[ERROR] 0으로 시작하는 숫자는 입력할 수 없습니다.\n",
@@ -22,4 +22,4 @@ const ConstraintsConstants = {
   ERROR_NOT_ONLY_R_OR_Q: "[ERROR] R 혹은 Q만 입력 가능합니다.\n",
 };
 
-module.exports = { InputConstants, OutputConstants, ConstraintsConstants };
+module.exports = { InputConstants, OutputConstants, ERROR };
