@@ -5,6 +5,8 @@ const Constants = {
   DOWN: 'D',
   RETRY: 'R',
   QUIT: 'Q',
+  BRIDGE_START: '[',
+  BRIDGE_END: '\b]',
 };
 
 module.exports = Constants;
