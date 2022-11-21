@@ -9,7 +9,7 @@ const GameCommand = require('./InputCheck/GameCommand');
 // view
 const OutputView = require('./OutputView');
 // constant
-const { INPUT_VIEW } = require('./Constants');
+const { INPUT_VIEW, NEW_LINE } = require('./Constants');
 
 const bridgeGame = new BridgeGame();
 
@@ -20,7 +20,7 @@ const InputView = {
 
   readBridgeSize() {
     Console.readLine(
-      `${INPUT_VIEW.size_message}`,
+      `${INPUT_VIEW.size_message + NEW_LINE}`,
       this.checkBridgeSize.bind(this)
     );
   },
@@ -53,7 +53,7 @@ const InputView = {
 
   readMoving() {
     Console.readLine(
-      `${INPUT_VIEW.moving_message}`,
+      `${NEW_LINE + INPUT_VIEW.moving_message + NEW_LINE}`,
       this.runBridgeMovingProcess.bind(this)
     );
   },
@@ -63,7 +63,7 @@ const InputView = {
       const moving = new Moving(input);
       confirmedInput = moving.checkInput();
     } catch (error) {
-      Console.Print(error);
+      Console.print(`[${error}]`);
     } finally {
       if (confirmedInput !== input) return this.readMoving();
     }
@@ -90,7 +90,7 @@ const InputView = {
 
   readGameCommand() {
     Console.readLine(
-      `${INPUT_VIEW.game_command_message}`,
+      `${NEW_LINE + INPUT_VIEW.game_command_message + NEW_LINE}`,
       this.runGameCommandProcess.bind(this)
     );
   },
