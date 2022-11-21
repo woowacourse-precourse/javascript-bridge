@@ -4,6 +4,7 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const { Console } = require("@woowacourse/mission-utils");
+const { INPUT_VALUE, STATES } = require("./constants/values");
 
 class App {
   startGame() {
@@ -37,7 +38,7 @@ class App {
 
   checkIsGameSuccess(bridge, size) {
     if (bridge.checkIsLastStep(bridge.step, size - 1)) {
-      OutputView.printResult("성공", bridge);
+      OutputView.printResult(STATES.SUCCESS, bridge);
       Console.close();
       return true;
     }
@@ -52,24 +53,17 @@ class App {
   askRetry(bridge, size) {
     InputView.readGameCommand((answer) => {
       switch (answer) {
-        case "Q":
-          OutputView.printResult("실패", bridge);
+        case INPUT_VALUE.QUIT:
+          OutputView.printResult(STATES.FAIL, bridge);
           Console.close();
-
           return;
-        case "R":
-          // this.resetGame(bridge);
+        case INPUT_VALUE.RETRY:
           bridge.retry();
           this.progressGame(bridge, size);
       }
     });
   }
 
-  resetGame(bridge) {
-    bridge.addRound();
-    bridge.resetStep();
-    bridge.resetCurrentBridge();
-  }
   play() {
     this.startGame();
   }

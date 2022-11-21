@@ -1,5 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { OUTPUT } = require("./constants/messages");
+const { INPUT_VALUE } = require("./constants/values");
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -27,11 +29,11 @@ const OutputView = {
   },
 
   createSinglBridge(currentBridge, bridgeMap, index) {
-    if (currentBridge[index][0] === "U") {
+    if (currentBridge[index][0] === INPUT_VALUE.UP) {
       bridgeMap[0] += ` ${currentBridge[index][1]} |`;
       bridgeMap[1] += "   |";
     }
-    if (currentBridge[index][0] === "D") {
+    if (currentBridge[index][0] === INPUT_VALUE.DOWN) {
       bridgeMap[0] += "   |";
       bridgeMap[1] += ` ${currentBridge[index][1]} |`;
     }
