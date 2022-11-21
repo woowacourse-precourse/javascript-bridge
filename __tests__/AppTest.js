@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const { BRIDGE, COMMAND } = require('../src/constant/Bridge');
+const { ERROR_MESSAGE } = require('../src/constant/Error');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -80,5 +81,16 @@ describe('다리 건너기 테스트', () => {
       '게임 성공 여부: 성공',
       '총 시도한 횟수: 2'
     ]);
+  });
+
+  test('다리 길이를 잘못 입력해 예외가 발생한다.', () => {
+    const logSpy = getLogSpy();
+    mockQuestions(['2']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [ERROR_MESSAGE.BRIDGE_SIZE]);
   });
 });
