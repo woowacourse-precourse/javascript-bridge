@@ -46,7 +46,7 @@ class BridgeGame {
   /**
    * @return {boolean}
    */
-  isGameWin() {
+  isWin() {
     return (
       this.#moveStack.length === this.#bridge.length &&
       this.#moveStack.every((elem, idx) => elem === this.#bridge[idx])
@@ -56,7 +56,7 @@ class BridgeGame {
   /**
    * @return {boolean}
    */
-  isGameLose() {
+  isLose() {
     return this.#moveStack.some((elem, idx) => elem !== this.#bridge[idx]);
   }
 

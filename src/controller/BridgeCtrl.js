@@ -9,50 +9,50 @@ class BridgeCtrl {
 
   start() {
     this.#game = new BridgeGame();
-    this.initalizeGame();
+    this.initalize();
   }
 
-  initalizeGame() {
+  initalize() {
     const onReadBridgeSize = (input) => {
       this.#game.initalize(Number(input));
-      this.playBridgeGame();
+      this.play();
     };
     InputView.readBridgeSize(onReadBridgeSize);
   }
 
-  playBridgeGame() {
+  play() {
     const onReadMoving = (input) => {
       this.#game.move(input);
       OutputView.printMap(this.#game.getMoves(), this.#game.isMovesPossible());
-      this.manageGameProgress();
+      this.manageProgress();
     };
     InputView.readMoving(onReadMoving);
   }
 
-  manageGameProgress() {
-    const gameWin = this.#game.isGameWin();
-    const gameLose = this.#game.isGameLose();
-    if (gameWin) this.closeGame();
-    if (gameLose) this.askMoreChance();
-    if (!gameWin && !gameLose) this.playBridgeGame();
+  manageProgress() {
+    const gameWin = this.#game.isWin();
+    const gameLose = this.#game.isLose();
+    if (gameWin) this.close();
+    if (gameLose) this.askCommand();
+    if (!gameWin && !gameLose) this.play();
   }
 
-  askMoreChance() {
+  askCommand() {
     const onReadGameCommand = (gameCommand) => {
       BridgeCtrlValidator.validateGameCommand(gameCommand);
-      if (gameCommand === RETRY) this.retryGame();
-      if (gameCommand === QUIT) this.closeGame();
+      if (gameCommand === RETRY) this.retry();
+      if (gameCommand === QUIT) this.close();
     };
     InputView.readGameCommand(onReadGameCommand);
   }
 
-  retryGame() {
+  retry() {
     this.#game.retry();
-    this.playBridgeGame();
+    this.play();
   }
 
-  closeGame() {
-    const result = this.#game.isGameWin();
+  close() {
+    const result = this.#game.isWin();
     OutputView.printFinalMap(
       this.#game.getMoves(),
       this.#game.isMovesPossible()

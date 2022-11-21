@@ -27,7 +27,7 @@ describe('다리 게임 test', () => {
 
     for (let i = 0; i < bridge.length; i += 1) {
       bridgeGame.move(bridge[i]);
-      expect(bridgeGame.isGameWin()).toBe(i === bridge.length - 1);
+      expect(bridgeGame.isWin()).toBe(i === bridge.length - 1);
     }
   });
 
@@ -38,7 +38,7 @@ describe('다리 게임 test', () => {
 
     for (let i = 0; i < choice.length; i += 1) {
       bridgeGame.move(choice[i]);
-      expect(bridgeGame.isGameLose()).toBe(!(bridge[i] === choice[i]));
+      expect(bridgeGame.isLose()).toBe(!(bridge[i] === choice[i]));
     }
   });
 
@@ -51,10 +51,10 @@ describe('다리 게임 test', () => {
       bridgeGame.move(choice[i]);
     }
 
-    expect(bridgeGame.isGameLose()).toBe(true);
+    expect(bridgeGame.isLose()).toBe(true);
     bridgeGame.retry();
     expect(bridgeGame.getMoves()).toEqual([]);
-    expect(bridgeGame.isGameLose()).toBe(false);
+    expect(bridgeGame.isLose()).toBe(false);
     expect(bridgeGame.getTryCount()).toBe(2);
   });
 });
