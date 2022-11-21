@@ -19,7 +19,10 @@ class GameController {
 
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
-      tryCatchHandler(this.buildBridgePhase.bind(this, size), this.requestBridgeSize.bind(this));
+      tryCatchHandler(
+        () => this.buildBridgePhase(size),
+        () => this.requestBridgeSize()
+      );
     });
   }
 
@@ -36,7 +39,10 @@ class GameController {
 
   requestDirection() {
     InputView.readMoving((direction) => {
-      tryCatchHandler(this.movePhase.bind(this, direction), this.requestDirection.bind(this));
+      tryCatchHandler(
+        () => this.movePhase(direction),
+        () => this.requestDirection()
+      );
     });
   }
 
@@ -65,7 +71,10 @@ class GameController {
 
   requestRetryCommand() {
     InputView.readGameCommand((command) => {
-      tryCatchHandler(this.retryPhase.bind(this, command), this.requestRetryCommand.bind(this));
+      tryCatchHandler(
+        () => this.retryPhase(command),
+        () => this.requestRetryCommand
+      );
     });
   }
 
