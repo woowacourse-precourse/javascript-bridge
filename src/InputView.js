@@ -108,7 +108,7 @@ const InputView = {
   },
 
   retryOrEnd(input) {
-    if (input === INPUT_VIEW.retry) {
+    if (BridgeGame.isRetry(input)) {
       bridgeGame.retry();
       return this.readMoving();
     }
