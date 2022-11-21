@@ -15,43 +15,49 @@ class App {
     this.game = new BridgeGame(input);
   }
 
+  readBridgeCallback = (size) => {
+    try {
+      this.createGame(size);
+      this.movePlayer();
+    } catch (err) {
+      OutputView.printError(err.message);
+      this.inputBridgeSize();
+    }
+  };
+
+  movePlayerCallback = (direction) => {
+    try {
+      const isPossible = this.game.move(direction);
+      const isEnd = this.game.isEnd();
+      if (!isEnd && isPossible) this.movePlayer();
+      if (!isPossible) this.gameEndControl();
+      if (isEnd && isPossible) this.gameEnd(true);
+    } catch (err) {
+      OutputView.printError(err.message);
+      this.movePlayer();
+    }
+  };
+
+  gameEndControlCallback = (input) => {
+    try {
+      this.game.endValidate(input);
+      this.decideCommand(input);
+    } catch (err) {
+      OutputView.printError(err.message);
+      this.gameEndControl();
+    }
+  };
+
   inputBridgeSize() {
-    InputView.readBridgeSize((size) => {
-      try {
-        this.createGame(size);
-        this.movePlayer();
-      } catch (err) {
-        OutputView.printError(err.message);
-        this.inputBridgeSize();
-      }
-    });
+    InputView.readBridgeSize(this.readBridgeCallback);
   }
 
   movePlayer() {
-    InputView.readMoving((direction) => {
-      try {
-        const isPossible = this.game.move(direction);
-        const isEnd = this.game.isEnd();
-        if (!isEnd && isPossible) this.movePlayer();
-        if (!isPossible) this.gameEndControl();
-        if (isEnd && isPossible) this.gameEnd(true);
-      } catch (err) {
-        OutputView.printError(err.message);
-        this.movePlayer();
-      }
-    });
+    InputView.readMoving(this.movePlayerCallback);
   }
 
   gameEndControl() {
-    InputView.readGameCommand((input) => {
-      try {
-        this.game.endValidate(input);
-        this.decideCommand(input);
-      } catch (err) {
-        OutputView.printError(err.message);
-        this.gameEndControl();
-      }
-    });
+    InputView.readGameCommand(this.gameEndControlCallback);
   }
 
   decideCommand(command) {
