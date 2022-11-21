@@ -75,7 +75,7 @@ class Bridge {
 
   #showMap (chooseStep) {
     OutputView.printMap(this.#bridgeGame
-      .setHistoryWithChooseStep(chooseStep)
+      .move(chooseStep)
       .getHistory());
   }
 
