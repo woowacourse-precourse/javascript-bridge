@@ -1,5 +1,5 @@
 const BridgeGame = require('./BridgeGame');
-const BridgeModel = require('./BridgeModel');
+const Controller = require('./Controller');
 const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
@@ -9,7 +9,7 @@ const Validator = require('./Validator');
 class App {
   play() {
     const models = {
-      bridgeModel: new BridgeModel(),
+      bridgeGame: new BridgeGame(),
       bridgeRandomNumberGenerator: BridgeRandomNumberGenerator,
       bridgeMaker: BridgeMaker,
     };
@@ -20,7 +20,7 @@ class App {
       validator: Validator,
     };
 
-    new BridgeGame(models, views);
+    new Controller(models, views);
   }
 }
 
