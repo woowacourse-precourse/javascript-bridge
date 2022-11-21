@@ -1,8 +1,8 @@
-const BridgeGame = require("./BridgeGame");
+const { Console } = require("@woowacourse/mission-utils");
+const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const OutputView = require("./OutputView");
-const { Console } = require("@woowacourse/mission-utils");
+const BridgeGame = require("./BridgeGame");
 
 class BridgeGameController {
   #bridgeGame;
