@@ -15,10 +15,6 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(keepGaming, getMap) {
-    console.log("printmap kg" + keepGaming);
-    console.log("printmap gm" + getMap);
-    console.log("printmap gm" + getMap.length);
-
     let upSide = "";
     let downSide = "";
     for (let i = 0; i < getMap.length; i++) {
@@ -30,7 +26,7 @@ const OutputView = {
         downSide += " | ";
       }
       if (getMap[i] === 1) {
-        if (keepGaming === "right") {
+        if (keepGaming === "right" || keepGaming === "allRight") {
           upSide += "O";
           downSide += " ";
         } else {
@@ -38,7 +34,7 @@ const OutputView = {
           downSide += " ";
         }
       } else if (getMap[i] === 0) {
-        if (keepGaming === "right") {
+        if (keepGaming === "right" || keepGaming === "allRight") {
           upSide += " ";
           downSide += "O";
         } else {
