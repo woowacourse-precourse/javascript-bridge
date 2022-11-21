@@ -13,16 +13,22 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
+    let generatedBridge
     Console.readLine(QUESTION.BRIDGE_LENGTH,(input)=>{
       Validation.validationForBridgeLength(input)
-      BridgeMaker.makeBridge(input,BridgeRandomNumberGenerator.generate)
+      generatedBridge=BridgeMaker.makeBridge(input,BridgeRandomNumberGenerator.generate)
     })
+    return generatedBridge
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(QUESTION.NEXT_MOVE,(input)=>{
+      
+    }) 
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
