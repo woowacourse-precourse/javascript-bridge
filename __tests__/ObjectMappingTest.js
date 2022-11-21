@@ -1,4 +1,4 @@
-const ObjectMapping = require("../src/ObjectMapping");
+const ObjectMapping = require("../src/Mapping/ObjectMapping");
 
 describe("Object Mapping Test", () => {
   test("BridgeLineMap에 0을 매핑하면 D값이 반환된다.", () => {

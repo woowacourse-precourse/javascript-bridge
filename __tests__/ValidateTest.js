@@ -1,4 +1,4 @@
-const Validate = require("../src/Validate");
+const Validate = require("../src/Validate/Validate");
 
 describe("Validate Object Test", () => {
   test("숫자가 아닌 값을 넣으면 에러를 반환한다.", () => {
