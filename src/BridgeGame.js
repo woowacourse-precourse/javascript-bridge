@@ -39,6 +39,11 @@ class BridgeGame {
     }
   }
 
+  sketchWrongMap(bridge, currentBridge, moving) {
+    moving === COMMAND.UP ? this.#up.push(WORD.WRONG) : this.#down.push(WORD.WRONG);
+    this.#up.length === this.#down.length - 1 ? this.#up.push(WORD.EMPTY) : this.#down.push(WORD.EMPTY);
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
