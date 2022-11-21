@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./OutputView');
 const TypeConverter = require('./TypeConverter');
-const { MSG } = require('./libs/constant');
+const { MSG, NEXT_STEP } = require('./libs/constant');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -42,11 +42,29 @@ const InputView = {
         const moveDirection = TypeConverter.toString(answer);
         bridgeGame.move(moveDirection);
         OutputView.printMap(bridgeGame.getMovedBridge());
+
+        const nextStep = bridgeGame.nextStep();
+        this.executeNextStep(bridgeGame, nextStep);
       } catch (e) {
         console.log(e.message);
         this.readMoving(bridgeGame);
       }
     });
+  },
+
+  executeNextStep(bridgeGame, nextStep) {
+    const { correctMove, wrongMove, endGame } = NEXT_STEP;
+
+    switch (nextStep) {
+      case correctMove:
+        return this.readMoving(bridgeGame);
+      case wrongMove:
+        return this.readGameCommand(bridgeGame);
+      case endGame:
+        return OutputView.printResult();
+      default:
+        return;
+    }
   },
 
   /**
