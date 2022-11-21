@@ -1,7 +1,7 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const { MOVEMENT, COMMAND, BRIDGE_SIZE, ERROR_MESSAGE } = require('./constructor.js');
+const { MOVEMENT, BRIDGE_POSITION, MARK } = require('./constructor.js');
 class BridgeGame {
   #bridge
   #currentIndex
@@ -22,10 +22,13 @@ class BridgeGame {
   move(movement) {
     const isCorrect = this.#bridge[this.#currentIndex] === movement;
     const isEnd = this.#currentIndex === this.#bridge.length - 1;
-    const mark = isCorrect ? 'O' : 'X';
-    const markPosition = movement === MOVEMENT.UP ? BRIDGE_POSITION.UP : BRIDGE_POSITION.DOWN;
-    this.#map[markPosition].push(mark);
+    const markedPosition = movement === MOVEMENT.UP ? BRIDGE_POSITION.UP : BRIDGE_POSITION.DOWN;
+    const unmarkedPosition = movement === MOVEMENT.UP ? BRIDGE_POSITION.DOWN : BRIDGE_POSITION.UP;
+    
     if (isCorrect) this.#currentIndex += 1;
+    this.#map[markedPosition].push(isCorrect ? MARK.CORRECT : MARK.WRONG);
+    this.#map[unmarkedPosition].push(MARK.EMPTY);
+    
     return { isCorrect, isEnd, count: this.#count, map: this.#map,  }
   }
 
