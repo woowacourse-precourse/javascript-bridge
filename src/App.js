@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
-const { checkVaildBridgeSize } = require("./Exception");
+const { checkVaildBridgeSize, checkVaildMoveInput } = require("./Exception");
 const { readGameCommand, readMoving, readBridgeSize } = require("./InputView");
 const { printResult, returnCheckedMap, printStart, printMap, printOneBlankLine } = require("./OutputView");
 
@@ -46,6 +46,7 @@ class App {
       return;
     }
     readMoving((direction) => {
+      checkVaildMoveInput(direction);
       printMap(
         returnCheckedMap(bridgeGame.bridge,bridgeGame.tempPosition,bridgeGame.move(direction))
       ),
