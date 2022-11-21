@@ -7,6 +7,8 @@ const RETRY = '\n게임을 다시 시도할지 여부를 입력해주세요. (�
 const END_GAME = {
   RESULT: '\n최종 게임 결과',
   IS_SUCCESS: '\n게임 성공 여부: ',
-  TOTAL_RETRY: '총 시도한 횟수: '
+  TOTAL_RETRY: '총 시도한 횟수: ',
+  SUCCESSED: '성공',
+  FAILED: '실패',
 }
 module.exports = {START_GAME, USER_INPUT, RETRY, END_GAME};

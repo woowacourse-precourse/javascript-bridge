@@ -25,14 +25,10 @@ const OutputView = {
   printResult(upAndDown, retryNum, isSuccess) {
     Console.print(END_GAME.RESULT);
     OutputView.printMap(upAndDown);
-    if(isSuccess === true) {
-      isSuccess = '성공';
-    } else {
-      isSuccess = '실패';
-    }
     Console.print(END_GAME.IS_SUCCESS.concat(isSuccess));
     Console.print(END_GAME.TOTAL_RETRY.concat(retryNum));
     Console.close();
   },
+
 };
 module.exports = OutputView;

@@ -1,4 +1,4 @@
-const { USER_INPUT, RETRY } = require("./Messages");
+const { USER_INPUT, RETRY, END_GAME } = require("./Messages");
 const { Console } = require("@woowacourse/mission-utils");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker");
@@ -14,7 +14,7 @@ const InputView = {
    */
   bridgeGame: new BridgeGame(),
   retryNum: 1,
-  isSuccess: true,
+  isSuccess: END_GAME.SUCCESSED,
 
   readBridgeSize() {
     Console.readLine(USER_INPUT.ENTER_LENGTH, (size) => {
@@ -33,6 +33,7 @@ const InputView = {
       this.repeatMoving(bridgeList, result);
     })
   },
+
   repeatMoving(bridgeList, result) {
     const [upList, downList, tryNum] = result;
     const upAndDown = ['[ ' + upList.join(' | ') + ' ]', '[ ' + downList.join(' | ') + ' ]'];
@@ -59,7 +60,7 @@ const InputView = {
         this.retryNum += 1;
         InputView.readMoving(bridgeList);
       } else if(retryOrQuit === 'Q') {
-          this.isSuccess = false;
+          this.isSuccess = END_GAME.FAILED;
           printResult(upAndDown, this.retryNum, this.isSuccess);
       }
     })
