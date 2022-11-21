@@ -29,6 +29,21 @@ describe('BridgeGame 클래스 테스트', () => {
     token.forEach((token) => expect(binaryRegExp.test(token)).toBe(true));
   });
 
+  test('createTokens - 올바른 토큰을 생성하는지 검사', () => {
+    // Given
+    const size = 4;
+    const randomNumbers = [0, 1, 1, 0];
+
+    // When
+    const mockGenerator = [0, 1, 1, 0].reduce((acc, cur) => {
+      return acc.mockReturnValueOnce(cur);
+    }, jest.fn());
+    const tokens = createTokens(size, mockGenerator);
+
+    // Then
+    expect(tokens).toEqual(randomNumbers);
+  });
+
   test('move - 이동할 방향을 입력받고 올바르게 기록하는지 검사', () => {
     // Given
     const direction = 'U';
@@ -82,5 +97,31 @@ describe('BridgeGame 클래스 테스트', () => {
         ERROR_MESSAGE.unexpected_input
       );
     });
+  });
+
+  test('isEndOfBridge - 다리의 끝에 도달하면 참값을 반환하는지 검사', () => {
+    // Given
+    const bridge = ['U', 'D', 'D', 'U'];
+    const records = ['U', 'D', 'D', 'U'];
+
+    // When
+    const game = new BridgeGame();
+    const isEndOfBridge = game.isEndOfBridge(bridge, records);
+
+    // Then
+    expect(isEndOfBridge).toBe(true);
+  });
+
+  test('isEndOfBridge - 경계값 검사, 아직 끝에 도달하지 않았을 때', () => {
+    // Given
+    const bridge = ['U', 'D', 'U'];
+    const records = ['U', 'D'];
+
+    // When
+    const game = new BridgeGame();
+    const isEndOfBridge = game.isEndOfBridge(bridge, records);
+
+    // Then
+    expect(isEndOfBridge).toBe(false);
   });
 });
