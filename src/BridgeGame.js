@@ -28,6 +28,16 @@ class BridgeGame {
   canMove(nextDirection) {
     return nextDirection === this.#bridge[this.#upBridge.length];
   }
+
+  mark(nextDirection, marker) {
+    if (nextDirection === this.UP_DIRECTION) {
+      this.#upBridge.push(marker);
+      this.#downBridge.push(" ");
+    } else {
+      this.#downBridge.push(marker);
+      this.#upBridge.push(" ");
+    }
+  }
 }
 
 module.exports = BridgeGame;
