@@ -2,10 +2,10 @@ const TotalMovingCount = class {
   #totalMovingCount;
 
   constructor() {
-    this.#totalMovingCount = 0;
+    this.#totalMovingCount = 1;
   }
 
-  plusTotalMovingCount() {
+  addMovingCount() {
     this.#totalMovingCount += 1;
   }
 
