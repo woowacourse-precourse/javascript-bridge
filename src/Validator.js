@@ -16,6 +16,12 @@ class Validator {
     return true;
   }
 
+  static validateBridgeDirection(direction) {
+    if (direction === 'U' || direction === 'D') return true;
+    IO.output(ERROR.BRIDGE_DIRECTION);
+    return false;
+  }
+
   static isExceedRange(value, from, to) {
     if (value < from || value > to) return true;
     return false;

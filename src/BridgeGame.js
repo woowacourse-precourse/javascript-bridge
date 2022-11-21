@@ -42,6 +42,10 @@ class BridgeGame {
    */
   move(index, length) {
     InputView.readMoving((direction) => {
+      if (!Validator.validateBridgeDirection(direction)) {
+        this.move(index, length);
+        return;
+      }
       this.#bridge.checkCorrectDirection(direction, index);
 
       if (index === length - 1) { IO.close(); return; }
