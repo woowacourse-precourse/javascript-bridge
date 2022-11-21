@@ -53,11 +53,14 @@
 * [x] BridgeMaker 다리의 길이를 입력 받아서 다리를 생성해주는 역할
     * [x] 다리의 길이를 입력받아서 다리를 생성 makeBridge()
 ---
-* [ ] BridgeGame 다리 건너기 게임을 관리하는 클래스
-    * [ ] 다리 이동시키기 move
-    * [ ] 게임 다시 시도 retry
+* [x] BridgeGame 다리 건너기 게임을 관리하는 클래스
+    * [x] 재시작시 라운드 세기 move()
+    * [x] 게임 다시 시도시 환경설정 retry()
+    * [x] 게임 종료 시 출력 fail()
+    * [x] 게임 성공시 출력 win()
+    * [x] 현재 진행상황 bridge storage()
 ---
-* [ ] App
+* [x] App
 ---
 * [x] Message
     * [x] 다리 건너기 게임을 시작합니다.
