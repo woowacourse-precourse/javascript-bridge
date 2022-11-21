@@ -18,33 +18,32 @@ class BridgeGameController {
     InputView.readBridgeSize((bridgeLength) => {
       new BridgeLengthValidator(bridgeLength).validate();
 
-      this.createBridge(bridgeLength);
+      this.startBridgeGame(bridgeLength);
       this.getMoving();
     });
   }
 
-  createBridge(bridgeLength) {
+  startBridgeGame(bridgeLength) {
     this.#bridgeGame = new BridgeGame();
-    this.#bridgeGame.setBridge(bridgeLength);
+    this.#bridgeGame.set(bridgeLength);
   }
 
   getMoving() {
     InputView.readMoving((moving) => {
       new MovingValidator(moving).validate();
 
-      const isSuccess = this.#bridgeGame.move(moving);
+      const result = this.#bridgeGame.move(moving);
+      console.log(result);
       OutputView.printMap(this.#bridgeGame);
 
-      this.checkNextProcess(isSuccess);
+      this.checkNextProcess(result);
     });
   }
 
-  checkNextProcess(isSuccess) {
+  checkNextProcess({ isSuccess, isDestination }) {
     if (!isSuccess) return this.getQuitMessage(isSuccess);
 
-    if (isSuccess && this.#bridgeGame.isDestination()) {
-      return this.quit();
-    }
+    if (isSuccess && isDestination) return this.quit();
 
     return this.getMoving();
   }
@@ -53,13 +52,15 @@ class BridgeGameController {
     InputView.readGameCommand((command) => {
       new GameCommandValidator(command).validate();
 
-      if (command === INPUT_SIGN.RETRY) {
-        this.#bridgeGame.retry();
-        this.getMoving();
-      }
+      if (command === INPUT_SIGN.RETRY) this.retry();
 
       if (command === INPUT_SIGN.QUIT) this.quit();
     });
+  }
+
+  retry() {
+    this.#bridgeGame.retry();
+    this.getMoving();
   }
 
   quit() {

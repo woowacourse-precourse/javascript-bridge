@@ -1,24 +1,26 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const Bridge = require('./Bridge');
-const BridgeMap = require('./BridgeMap');
+const GameState = require('./GameState');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridge;
   #round;
-  #currentLocation;
-  #map;
+  #bridge;
+  #gameState;
 
   constructor() {
     this.#round = 1;
-    this.#currentLocation = 0;
-    this.#map = new BridgeMap();
   }
 
-  setBridge(length) {
+  set(length) {
+    this.getBridgeInfo(length);
+    this.#gameState = new GameState(this.#bridge);
+  }
+
+  getBridgeInfo(length) {
     const path = BridgeMaker.makeBridge(
       length,
       BridgeRandomNumberGenerator.generate
@@ -37,20 +39,11 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moving) {
-    const isCorrect = this.#bridge.checkPath(moving, this.#currentLocation);
-
-    this.#map.update(isCorrect, moving);
-    this.#currentLocation += 1;
-
-    return isCorrect;
+    return this.#gameState.checkBridgePath(moving);
   }
 
-  toStringMap() {
-    return this.#map.toString();
-  }
-
-  isDestination() {
-    return this.#bridge.getSize() === this.#currentLocation;
+  getStringMap() {
+    return this.#gameState.toStringMap();
   }
 
   /**
@@ -60,8 +53,7 @@ class BridgeGame {
    */
   retry() {
     this.#round += 1;
-    this.#currentLocation = 0;
-    this.#map = new BridgeMap();
+    this.#gameState = new GameState(this.#bridge);
   }
 
   getRound() {
@@ -69,9 +61,10 @@ class BridgeGame {
   }
 
   getResult() {
-    const [upside, downside] = this.toStringMap();
+    const [upside, downside] = this.#gameState.toStringMap();
+    const isDestination = this.#gameState.checkLocation();
 
-    return [this.getRound(), upside, downside, this.isDestination()];
+    return [this.getRound(), upside, downside, isDestination];
   }
 }
 

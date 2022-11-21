@@ -10,8 +10,8 @@ class BridgeMap {
     };
   }
 
-  update(isCorrect, moving) {
-    const sign = this.isPassable(isCorrect);
+  update(isSuccess, moving) {
+    const sign = this.isPassable(isSuccess);
 
     moving === INPUT_SIGN.UP
       ? this.updateUpside(sign)
@@ -28,18 +28,14 @@ class BridgeMap {
     this.#map[INPUT_SIGN.DOWN].push(sign);
   }
 
-  isPassable(isCorrect) {
-    return isCorrect ? BRIDGE_STRUCTURE.PASSABLE : BRIDGE_STRUCTURE.UNPASSABLE;
+  isPassable(isSuccess) {
+    return isSuccess ? BRIDGE_STRUCTURE.PASSABLE : BRIDGE_STRUCTURE.UNPASSABLE;
   }
 
   toString() {
     return [
-      `${BRIDGE_STRUCTURE.BEGIN} ${this.#map[INPUT_SIGN.UP].join(
-        BRIDGE_STRUCTURE.WALL
-      )} ${BRIDGE_STRUCTURE.END}`,
-      `${BRIDGE_STRUCTURE.BEGIN} ${this.#map[INPUT_SIGN.DOWN].join(
-        BRIDGE_STRUCTURE.WALL
-      )} ${BRIDGE_STRUCTURE.END}`,
+      `[ ${this.#map[INPUT_SIGN.UP].join(BRIDGE_STRUCTURE.WALL)} ]`,
+      `[ ${this.#map[INPUT_SIGN.DOWN].join(BRIDGE_STRUCTURE.WALL)} ]`,
     ];
   }
 }
