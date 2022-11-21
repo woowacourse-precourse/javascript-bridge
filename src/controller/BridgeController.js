@@ -1,4 +1,5 @@
 const BridgeService = require('../service/BridgeService');
+const { ERROR_MESSAGE } = require('../utils/constants');
 
 let instance = null;
 
@@ -7,7 +8,7 @@ class BridgeController {
 
   constructor() {
     if (instance) {
-      throw new Error('Only one instance is allowed!');
+      throw new Error(ERROR_MESSAGE.singleton);
     }
 
     instance = this;
@@ -36,6 +37,4 @@ class BridgeController {
   }
 }
 
-const singletonController = Object.freeze(new BridgeController());
-
-module.exports = singletonController;
+module.exports = Object.freeze(new BridgeController());
