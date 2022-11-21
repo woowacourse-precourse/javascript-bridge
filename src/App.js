@@ -4,12 +4,12 @@ const Console = MissionUtils.Console;
 const Random = MissionUtils.Random;
 
 class App {
-  GameStart() {
+  gameStart() {
     Console.print("다리 건너기 게임을 시작합니다.");
   }
   
   play() {
-    this.GameStart();
+    this.gameStart();
     BridgeMaker.makeBridge();
   }
 }
