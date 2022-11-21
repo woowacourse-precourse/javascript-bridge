@@ -22,25 +22,25 @@ const OutputView = {
     this.printUpBridge.push(up);
     this.printDownBridge.push(down);
 
-    let upString = "";
-    let downString = "";
+    this.upString = "";
+    this.downString = "";
 
-    upString += "[ ";
+    this.upString += "[ ";
     for (let index = 0; index < this.printUpBridge.length; index++) {
-      upString += this.printUpBridge[index];
-      if (index < this.printUpBridge.length - 1) upString += " | ";
+      this.upString += this.printUpBridge[index];
+      if (index < this.printUpBridge.length - 1) this.upString += " | ";
     }
-    upString += " ]";
+    this.upString += " ]";
 
-    downString += "[ ";
+    this.downString += "[ ";
     for (let index = 0; index < this.printDownBridge.length; index++) {
-      downString += this.printDownBridge[index];
-      if (index < this.printDownBridge.length - 1) downString += " | ";
+      this.downString += this.printDownBridge[index];
+      if (index < this.printDownBridge.length - 1) this.downString += " | ";
     }
-    downString += " ]";
+    this.downString += " ]";
 
-    Console.print(upString);
-    Console.print(downString);
+    Console.print(this.upString);
+    Console.print(this.downString);
   },
 
   /**
@@ -48,8 +48,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {
+  printResult(message) {
     Console.print("최종 게임 결과 \n");
+    Console.print(this.upString);
+    Console.print(this.downString);
   },
 };
 

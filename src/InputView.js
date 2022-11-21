@@ -38,24 +38,24 @@ const InputView = {
 
         if (check == true && answer == "U") {
           OutputView.printMap("O", " ");
-          this.now += 1;
         }
 
         if (check == true && answer == "D") {
           OutputView.printMap(" ", "O");
-          this.now += 1;
         }
 
         if (check == false) {
           this.readGameCommand();
-        }
-
-        if (this.now >= this.bridge.length) {
-          Console.close();
-          OutputView.printResult();
-
           return;
         }
+
+        if (this.now >= this.bridge.length - 1) {
+          Console.close();
+          OutputView.printResult();
+          return;
+        }
+
+        this.now += 1;
 
         this.readMoving();
       }
