@@ -33,6 +33,10 @@ const OutputView = {
     MissionUtils.Console.print('다리 건너기 게임을 시작합니다.');
   },
 
+  printInputMove() {
+    MissionUtils.Console.print('이동할 칸을 선택해주세요. (위 : U, 아래 : D)');
+  },
+
   printGameSuccess(gameSuccess) {
     const result = gameSuccess ? '성공' : '실패';
     MissionUtils.Console.print(`게임 성공 여부: ${result}`);
