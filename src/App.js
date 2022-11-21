@@ -7,11 +7,16 @@ class App {
 
   play() {
     OutputView.printStart();
-    InputView.readBridgeSize.bind(this)(this.createGame);
+    InputView.readBridgeSize.bind(this)([this.createGame, this.movePlayer]);
   }
 
   createGame(input) {
     this.game = new BridgeGame(input);
+  }
+
+  movePlayer(direction) {
+    const isPossibleMove = this.game.move(direction);
+    console.log(isPossibleMove);
   }
 }
 
