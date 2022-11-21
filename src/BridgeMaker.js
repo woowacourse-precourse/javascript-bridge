@@ -3,7 +3,12 @@
  */
 const InputView=require('./InputView')
 const BridgeRandomNumberGenerator=require('./BridgeRandomNumberGenerator')
-const OutputView=require('./OutputView')
+const OutputView=require('./OutputView');
+const BridgeGame = require('./BridgeGame');
+const bridge=new BridgeGame()
+
+const Input=require('./Input')
+const inputClass=new Input()
 
 const BridgeMaker = {
   /**
@@ -22,7 +27,7 @@ const BridgeMaker = {
       if(number===1) bridgeString.push("U")
       if(number===0) bridgeString.push("D")
     }
-    console.log(bridgeString);
+    // console.log(bridgeString);
     // return bridgeArray
     return bridgeString
   }
