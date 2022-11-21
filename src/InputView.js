@@ -1,7 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { NOTICE } = require("./constants");
-const { makeBridge } = require("./BridgeMaker");
-const { generate } = require("./BridgeRandomNumberGenerator");
 const { handleBridgeSizeInput } = require("./ErrorHandler");
 
 /**
@@ -13,9 +11,7 @@ const InputView = {
    */
   readBridgeSize(app) {
     Console.readLine(NOTICE.INPUT_SIZE, (bridgeSize) => {
-      handleBridgeSizeInput(app, bridgeSize);
-      const bridge = makeBridge(bridgeSize, generate);
-      app.createGame(bridge);
+      handleBridgeSizeInput(app, bridgeSize, InputView.readBridgeSize);
     });
   },
 
