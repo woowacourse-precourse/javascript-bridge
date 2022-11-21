@@ -1,9 +1,6 @@
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const { RETRY, UP, STATUS_SUCCESS, STATUS_FAIL, STATUS_FINISH } = require('./constant/constants');
-const InputView = require('./ui/InputView');
-const { readMoving, readBridgeSize, readGameCommand } = require('./ui/InputView');
-const OutputView = require('./ui/OutputView');
+const { RETRY, STATUS_SUCCESS, STATUS_FAIL, STATUS_FINISH } = require('./constant/constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -27,57 +24,30 @@ class BridgeGame {
     this.#round = 0;
     this.#isAnswerList = [];
   }
-
-  start() {
-    OutputView.printStart();
-    InputView.readBridgeSize(this.bridgeSetting);
-  }
-
-  bridgeSetting = (input) => {
-    this.#bridgeString = makeBridge(input, generate).join('');
-    InputView.readMoving(this.check);
+  getBridgeString = () => {
+    return this.#bridgeString;
+  };
+  getuserInputString = () => {
+    return this.#userInputString;
+  };
+  getAnswerList = () => {
+    return this.#isAnswerList;
+  };
+  getTry = () => {
+    return this.#try;
+  };
+  plusRound = () => {
+    this.#round += 1;
+  };
+  bridgeSetting = (bridgeSize) => {
+    this.#bridgeString = makeBridge(bridgeSize, generate).join('');
   };
 
-  check = (input) => {
-    this.#userInputString += input;
-    // console.log(
-    //   `round : ${this.#round}, bridge: ${this.#bridgeString}, userInput : ${this.#userInputString}`
-    // );
+  check = (userChar) => {
+    this.#userInputString += userChar;
     this.move(this.#bridgeString[this.#round], this.#userInputString[this.#round]);
-    // console.log(this.#isAnswerList);
-    const status = this.checkStatus(
-      this.#bridgeString[this.#round],
-      this.#userInputString[this.#round]
-    );
-    OutputView.printMap(this.#isAnswerList, this.#userInputString);
-    this.doAfterCheck(status);
-  };
-
-  doAfterCheck = (status) => {
-    switch (status) {
-      case STATUS_SUCCESS:
-        this.#round += 1;
-        InputView.readMoving(this.check);
-        break;
-      case STATUS_FAIL:
-        this.askRetry();
-        break;
-      case STATUS_FINISH:
-        //TODO 총 시도 횟수, 성공 여부 보여주기
-        OutputView.printResult(this.#isAnswerList, this.#userInputString, this.#try);
-        break;
-    }
-  };
-
-  askRetry = () => {
-    InputView.readGameCommand((input) => {
-      if (input === RETRY) {
-        this.retry();
-      } else {
-        // printResult(STATUS_FAIL, this.#try);
-        OutputView.printResult(this.#isAnswerList, this.#userInputString, this.#try);
-      }
-    });
+    return this.checkStatus(this.#bridgeString[this.#round], this.#userInputString[this.#round]);
+    // OutputView.printMap(this.#isAnswerList, this.#userInputString);
   };
 
   move(answerChar, userChar) {
@@ -91,11 +61,6 @@ class BridgeGame {
 
   checkStatus(answerChar, userChar) {
     const total_round = this.#bridgeString.length;
-    // console.log(
-    //   `checkStatus... round : ${this.#round}, total_round : ${total_round}, userInput : ${
-    //     this.#userInputString
-    //   }`
-    // );
     if (answerChar !== userChar) {
       return STATUS_FAIL;
     } else if (this.#isAnswerList.length === total_round) {
@@ -116,10 +81,6 @@ class BridgeGame {
     this.#try += 1;
     this.#userInputString = '';
     this.#isAnswerList = [];
-    InputView.readMoving(this.check);
-
-    // this.#upperBridge = [];
-    // this.#lowerBridge = [];
   }
 }
 
