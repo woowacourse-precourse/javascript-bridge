@@ -3,7 +3,7 @@ const Constant = require("../lib/Constant");
 const Bridge = require("./Bridge");
 const ViewPrinter = require("../view/ViewPrinter");
 const BridgeMaker = require("../BridgeMaker");
-const Generator = require("../lib/BridgeRandomNumberGenerator");
+const Generator = require("../BridgeRandomNumberGenerator");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -24,20 +24,20 @@ class BridgeGame {
   setState(result) {
     this.#state.isWin = result;
   }
-  
+
   getBridge() {
     return this.#bridge;
   }
-  
+
   getState() {
     return this.#state;
   }
-  
+
   play() {
     this.#viewPrinter.sayHello();
     this.#viewPrinter.insertBridgeSize();
   }
-  
+
   continue() {
     const haveX = this.#bridge.haveXValue();
 
@@ -45,7 +45,7 @@ class BridgeGame {
     if (this.#bridge.isGameEnd()) return this.endGame();
     if (!haveX) return this.#viewPrinter.selectBridgeDirection();
   }
-  
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>

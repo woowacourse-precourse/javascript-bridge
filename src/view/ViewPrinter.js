@@ -2,7 +2,7 @@ const OutputView = require("../console/OutputView");
 const Message = require("../lib/Message");
 const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = require("../console/InputView");
-const Generator = require("../lib/BridgeRandomNumberGenerator");
+const Generator = require("../BridgeRandomNumberGenerator");
 const BridgeMaker = require("../BridgeMaker");
 
 class ViewPrinter {
