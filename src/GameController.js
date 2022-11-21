@@ -38,7 +38,6 @@ class GameController {
     this.inputStep();
   }
   inputStep() {
-    console.log(this.bridgeGame.getNowIndex());
     InputView.readMoving((input) => {
       errorController(
         this.compareStep.bind(this, input),

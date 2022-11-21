@@ -1,8 +1,10 @@
+const OutputView = require("./OutputView");
+
 const errorController = (callbalck, errorCallback) => {
   try {
     callbalck();
   } catch (error) {
-    console.log(error.message);
+    OutputView.printError(error.message);
     errorCallback();
   }
 };
