@@ -37,18 +37,18 @@ U 입력 시 위 칸, D 입력 시 아래 칸으로 이동
 
 # 📝 기능 목록
 
-## [✅] 다리 길이 입력받기   
+## [✅] 다리 길이 입력받기 - GameController, getBridgeSize()     
 3 이상 20 이하의 숫자를 입력받는다.  
 **MissionUtils 라이브러리**에서 제공하는 `Console.readLine()`를 활용한다.  
 
-❗ 예외 처리하기 (3 이상 20 이하의 숫자만 가능)  
+❗ 예외 처리하기 (3 이상 20 이하의 숫자만 가능) GameController, checkSizeValidation()   
 - 숫자가 아닌 문자를 입력한 경우
 - 정수가 아닌 실수를 입력한 경우
 - 범위를 벗어난 숫자를 입력한 경우  
 
 </br>
 
-## [✅] 다리 생성하기
+## [✅] 다리 생성하기 - GameController, makeBridge()
 입력받은 숫자 길이의 다리를 생성한다.
 
 `BridgeRandomNumberGenerator`의 `generate()`를 활용하여 0 또는 1의 랜덤값을 생성한다.  
@@ -57,7 +57,7 @@ U 입력 시 위 칸, D 입력 시 아래 칸으로 이동
 
 </br>
 
-## [✅] 플레이어가 이동할 칸 입력받기
+## [✅] 플레이어가 이동할 칸 입력받기 - GameController, getMoving()  
 U 또는 D를 입력 받는다.  
 **MissionUtils 라이브러리**에서 제공하는 `Console.readLine()`를 활용한다.
 
@@ -66,13 +66,13 @@ U 또는 D를 입력 받는다.
 
 </br>
 
-## [✅] 이동 가능 여부 확인하기
+## [✅] 이동 가능 여부 확인하기 - GameController, checkCanMoveNextStep()
 사용자가 선택한 칸이 이동 가능한지 확인한다.  
 이동 가능하면 O, 이동 불가능하면 X로 표시한다.
 
 </br>
 
-## [✅] 건너기 결과 출력하기
+## [✅] 건너기 결과 출력하기 - GameController, makeMapCycle()  
 현재까지 건넌 다리를 출력한다.   
 **MissionUtils 라이브러리**에서 제공하는 `Console.print()`를 활용한다.
 
@@ -84,24 +84,24 @@ U 또는 D를 입력 받는다.
 
 </br>
 
-## [✅] 재시작 / 종료 입력받기
+## [✅] 재시작 / 종료 입력받기 - GameController, getRetryOrEnd()  
 다리를 건너다 실패할 경우 재시작 또는 종료할 수 있다.  
 재시도 여부를 입력받는다. R을 입력하면 재시도, Q를 입력하면 종료한다.  
 **MissionUtils 라이브러리**에서 제공하는 `Console.readLine()`를 활용한다.
 
-❗ 예외 처리하기 (재시도는 R, 종료는 Q)  
+❗ 예외 처리하기 (재시도는 R, 종료는 Q) - GameController, checkRetryOrEnd()  
 - R 또는 Q가 아닌 다른 문자를 입력한 경우 
 
 </br>
 
-## [✅] 재시작하기
+## [✅] 재시작하기 - GameController, retry() 
 다리 건너기 게임을 재시작한다.  
 **처음에 만든 다리를 재사용**한다.  
 시도 횟수를 +1 누적한다.  
 
 </br>
 
-## [✅] 게임 종료, 결과 출력하기
+## [✅] 게임 종료, 결과 출력하기 - GameController, end()  
 실패할 경우 또는 다리를 끝까지 건넌 경우 종료할 수 있다.  
 
 최종 결과를 출력한다.  
