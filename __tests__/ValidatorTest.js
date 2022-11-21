@@ -66,4 +66,31 @@ describe('유효성 검사 테스트', () => {
       validateMove(invalidInput4);
     }).toThrow(prefix + isNotUpOrDown);
   });
+
+  test('게임 재시작시 R과 Q 이외의 값이 입력되면 예외가 발생한다.', () => {
+    const validInput1 = 'R';
+    const validInput2 = 'Q';
+    const invalidInput1 = /[^RQ]/;
+    const invalidInput2 = 'RR';
+    const invalidInput3 = 'QR';
+    const invalidInput4 = 'UaagD';
+    expect(() => {
+      validateRetry(validInput1);
+    }).not.toThrow();
+    expect(() => {
+      validateRetry(validInput2);
+    }).not.toThrow();
+    expect(() => {
+      validateRetry(invalidInput1);
+    }).toThrow(prefix + isNotRetryOrQuit);
+    expect(() => {
+      validateRetry(invalidInput2);
+    }).toThrow(prefix + isNotRetryOrQuit);
+    expect(() => {
+      validateRetry(invalidInput3);
+    }).toThrow(prefix + isNotRetryOrQuit);
+    expect(() => {
+      validateRetry(invalidInput4);
+    }).toThrow(prefix + isNotRetryOrQuit);
+  });
 });
