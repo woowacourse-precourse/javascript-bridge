@@ -55,6 +55,7 @@ class BridgeInteractPlayer {
   playerInputCommandBridgeRetry(command) {
     switch (command) {
       case BRIDGE.GAME.RETRY:
+        this.#player.bridgeGameRetry();
         InputView.readMoving(this.playerInputBridgeDirection.bind(this));
         break;
       case BRIDGE.GAME.END:
