@@ -39,6 +39,7 @@ class BridgeException {
       Console.print(error);
       return true;
     }
+    return false;
   };
 
   static isInvalidMoving = (input) => {
@@ -49,6 +50,7 @@ class BridgeException {
       Console.print(error);
       return true;
     }
+    return false;
   };
 
   static isInvalidGameCommand = (input) => {
@@ -59,6 +61,7 @@ class BridgeException {
       Console.print(error);
       return true;
     }
+    return false;
   };
 }
 
