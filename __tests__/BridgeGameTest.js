@@ -27,4 +27,19 @@ describe('BridgeGame 클래스 테스트', () => {
 
     expect(map).toEqual(expectedOutput);
   });
+
+  test('다리를 무사히 건넜는지 확인한다', () => {
+    mockRandoms([1, 0, 0]);
+    //bridge = ['U','D','D']
+
+    const inputs = [BRIDGE.UP, BRIDGE.DOWN];
+    const expectedOutput = [true, false];
+
+    inputs.forEach((input, index) => {
+      const game = new BridgeGame(3);
+      game.move(input);
+      const output = game.isPass();
+      expect(output).toEqual(expectedOutput[index]);
+    });
+  });
 });
