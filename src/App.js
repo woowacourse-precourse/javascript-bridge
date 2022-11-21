@@ -10,14 +10,14 @@ class App {
 
   play() {
     Console.print(MESSAGE.START);
-    InputView.readBridgeSize(this.proceedStepOne.bind(this));
+    InputView.readBridgeSize(this.makeBridge.bind(this));
   }
 
-  proceedStepOne(input) {
+  makeBridge(input) {
     try {
       Validator.validateBridgeSize(input);
     } catch {
-      InputView.readBridgeSize(this.proceedStepOne.bind(this));
+      InputView.readBridgeSize(this.makeBridge.bind(this));
       return;
     }
     const game = new BridgeGame(input);
