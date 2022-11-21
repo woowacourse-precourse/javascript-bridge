@@ -29,14 +29,32 @@ class Game {
   }
 
   playAlgorithms() {
-    let moveCount = 0;
-    for (moveCount = 0; moveCount < this.#bridgeLength; moveCount++) {
-      const NEXT_DIRECTION = InputView.readMoving();
-      if (this.bridgeGame.move(NEXT_DIRECTION, moveCount) === false) {
-        break; //
+    let quitResult = true;
+
+    for (let moveCount = 0; moveCount < this.#bridgeLength; moveCount++) {
+      const MOVE_RESULT = this.bridgeGame.move(
+        InputView.readMoving(),
+        moveCount
+      );
+
+      if (!MOVE_RESULT) {
+        quitResult = this.askQuit();
+      }
+      if (quitResult === false) {
+        return false;
       }
     }
     return true;
+  }
+
+  askQuit() {
+    const IS_QUIT = InputView.readGameCommand();
+    if (IS_QUIT === "Q") {
+      return false;
+    }
+    if (IS_QUIT === "R") {
+      return true;
+    }
   }
 }
 

@@ -36,6 +36,13 @@ const Validator = {
       ErrorHandler.computeError();
     }
   },
+
+  isQuit(rq) {
+    if (rq === "R" || rq === "Q") {
+      return true;
+    }
+    ErrorHandler.inputError("quit");
+  },
 };
 
 module.exports = Validator;
