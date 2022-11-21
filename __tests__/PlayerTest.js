@@ -44,13 +44,6 @@ const expectLogContains = (received, logs) => {
   });
 };
 
-const expectBridgeOrder = (received, upside, downside) => {
-  const upsideIndex = received.indexOf(upside);
-  const downsideIndex = received.indexOf(downside);
-
-  expect(upsideIndex).toBeLessThan(downsideIndex);
-};
-
 describe("게임 재시작 테스트", () => {
   test("재시작 O 테스트", () => {
     const logSpy = getLogSpy();
@@ -89,6 +82,5 @@ describe("게임 재시작 테스트", () => {
       "게임 성공 여부: 실패",
       "총 시도한 횟수: 1",
     ]);
-    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 });
