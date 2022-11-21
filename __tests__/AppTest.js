@@ -52,4 +52,33 @@ describe('다리 건너기 테스트', () => {
       '총 시도한 횟수: 1'
     ]);
   });
+
+  test('다리 건너기 실패 후 재시도해 성공한다.', () => {
+    const logSpy = getLogSpy();
+    mockRandoms([BRIDGE.UPPER, BRIDGE.UPPER, BRIDGE.UPPER]);
+    mockQuestions([
+      '3',
+      BRIDGE.UP,
+      BRIDGE.UP,
+      BRIDGE.DOWN,
+      COMMAND.RESTART,
+      BRIDGE.UP,
+      BRIDGE.UP,
+      BRIDGE.UP
+    ]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '[ O | O |   ]',
+      '[   |   | X ]',
+      '최종 게임 결과',
+      '[ O | O | O ]',
+      '[   |   |   ]',
+      '게임 성공 여부: 성공',
+      '총 시도한 횟수: 2'
+    ]);
+  });
 });
