@@ -1,6 +1,6 @@
 const BridgeGame = require("./BridgeGame");
-const { readGameCommand, readMoving } = require("./InputView");
-const { printResult, returnCheckedMap } = require("./OutputView");
+const { readGameCommand, readMoving, readBridgeSize } = require("./InputView");
+const { printResult, returnCheckedMap, printStart } = require("./OutputView");
 
 class App {
   #size;
@@ -11,7 +11,12 @@ class App {
     this.#tryCount = 0;
   }
 
+  /**
+   * 앱을 실행시켜 게임 시작 메세지 출력 후 다리의 길이 값을 입력받는다.
+   */
   play() {
+    printStart();
+    readBridgeSize((size) => this.startGame(size));
   }
 
     /**
