@@ -13,5 +13,4 @@ class RetryQuitCheck {
   }
 }
 
-// InputCheckTest.js 에서 검증하기!
 module.exports = RetryQuitCheck;
