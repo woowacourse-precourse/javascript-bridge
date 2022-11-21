@@ -1,22 +1,26 @@
 class Player {
   #bridgePath;
-  #out;
 
   constructor() {
     this.#bridgePath = { upperBridge: [], lowerBridge: [] };
-    this.#out = false;
   }
 
   move(direction) {
-    if (this.#out) return;
+    if (this.isFallen()) return;
     this.#bridgePath.upperBridge.push(direction === "U" ? "O" : " ");
     this.#bridgePath.lowerBridge.push(direction === "D" ? "O" : " ");
   }
 
-  out(direction) {
-    this.#out = true;
+  fall(direction) {
+    if (this.isFallen()) return;
     this.#bridgePath.upperBridge.push(direction === "U" ? "X" : " ");
     this.#bridgePath.lowerBridge.push(direction === "D" ? "X" : " ");
+  }
+
+  isFallen() {
+    if (this.#bridgePath.upperBridge.slice(-1)[0] === "X") return true;
+    if (this.#bridgePath.lowerBridge.slice(-1)[0] === "X") return true;
+    return false;
   }
 
   getCurrentPosition() {
