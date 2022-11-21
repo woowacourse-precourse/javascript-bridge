@@ -19,6 +19,12 @@ class BridgeGame {
     this.bridgeMap = Map.makeMap(bridgeInfo);
   }
 
+  setResult(userMove, bridge) {
+    this.result = RESULT.SUCCESS;
+    for (let index = 0; index < userMove.length; index++) {
+      if (userMove[index] != bridge[index]) this.result = RESULT.FAILURE;
+    }
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>

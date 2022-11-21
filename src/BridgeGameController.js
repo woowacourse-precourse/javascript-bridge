@@ -32,6 +32,22 @@ class BridgeGameController {
   moveBridge(moveDirection) {
     this.bridgeGame.move(this.#bridgeInfo, moveDirection);
     OutputView.printMap(this.bridgeGame.bridgeMap);
+    this.gameResult();
+  }
+
+  gameResult() {
+    this.bridgeGame.setResult(
+      this.#bridgeInfo.userMove,
+      this.#bridgeInfo.bridge
+    );
+    if (this.isBridgeOver()) this.gameOver();
+    else this.keepGoing();
+  }
+
+  isBridgeOver() {
+    if (this.#bridgeInfo.userMove.length === this.#bridgeInfo.bridge.length)
+      return true;
+    return false;
   }
 }
 
