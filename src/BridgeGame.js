@@ -5,6 +5,8 @@ class BridgeGame {
   constructor() {
     this.round = 0;
     this.count = 0;
+    this.up = [];
+    this.down = [];
   }
 
   /**
@@ -25,6 +27,8 @@ class BridgeGame {
    */
   retry() {
     this.round = 0;
+    this.up = [];
+    this.down = [];
 
     return this.round;
   }
