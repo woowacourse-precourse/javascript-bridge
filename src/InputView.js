@@ -75,29 +75,22 @@ const InputView = {
   },
 
   printMapBasedOnInput(Boolean) {
+    OutputView.printMap(Boolean, this.letter);
+    this.count++;
     if (Boolean) {
-      this.printMapWhenWin(Boolean);
+      return this.isGameDone();
     }
     if (!Boolean) {
-      this.printMapWhenLose(Boolean);
+      this.printMapWhenLose();
     }
   },
 
-  printMapWhenWin(Boolean) {
-    OutputView.printMap(Boolean, this.letter);
-    this.count++;
-    this.isGameDone();
-  },
-
-  printMapWhenLose(Boolean) {
-    OutputView.printMap(Boolean, this.letter);
-    this.count++;
+  printMapWhenLose() {
     OutputView.printResult();
     this.readGameCommand();
   },
 
   isGameDone() {
-    // 기능 분리
     if (this.count === this.answerArr.length) {
       OutputView.printResult();
       OutputView.printTotalResult(true, this.roundCount, this.answerArr);

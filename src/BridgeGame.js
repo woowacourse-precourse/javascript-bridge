@@ -1,4 +1,3 @@
-const App = require('./App');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -11,7 +10,6 @@ class BridgeGame {
    */
   move(answerArr, inputLetter) {
     this.answerArr = answerArr;
-    console.log(this.answerArr);
     return this.isMoveCorrect(inputLetter);
   }
 

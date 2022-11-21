@@ -1,4 +1,3 @@
-const InputView = require('./InputView');
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -15,7 +14,7 @@ const BridgeMaker = {
       if (Answer == 0) this.answerArr.push('D');
       if (Answer == 1) this.answerArr.push('U');
     }
-    console.log(this.answerArr);
+    console.log(this.answerArr); // 제출 시 삭제
     return this.answerArr;
   },
 };
