@@ -24,6 +24,7 @@ const InputView = {
       }
 
       this.getBridge(input);
+      this.readMoving();
     });
   },
 
@@ -41,6 +42,9 @@ const InputView = {
       } catch (error) {
         return this.readMoving();
       }
+
+      OutputView.printMap(this.bridge[this.moveCount], input);
+      this.moveCount += 1; 
     });
   },
 
