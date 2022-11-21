@@ -4,9 +4,9 @@ const MESSAGE = Object.freeze({
   READ_MOVING: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
   READ_GAME_COMMAND: '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
   INFO: '최종 게임 결과',
-  WIN_GAME: '게임 성공 여부: 성공',
-  LOSE_GAME: '게임 성공 여부: 실패',
-  TRY: tryCount => `총 시도한 횟수: ${tryCount}`,
+  WIN: '게임 성공 여부: 성공',
+  FAIL: '게임 성공 여부: 실패',
+  TRY: '총 시도한 횟수: ',
 });
 
 const MOVING = Object.freeze({
@@ -31,6 +31,12 @@ const BRIDGE = Object.freeze({
   max_size: 20,
 });
 
+const GAME_STATUS = Object.freeze({
+  WIN: 'WIN',
+  FAIL: 'FAIL',
+  PLAYING: 'PLAYING',
+});
+
 const ERROR = Object.freeze({
   bridge_size_error: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n',
   read_moving_error: '[ERROR] 이동할 칸은 U 또는 D로 입력해야 합니다.\n',
@@ -40,7 +46,6 @@ const ERROR = Object.freeze({
 const RESULT = Object.freeze({
   INITIAL_TRY: 1,
   TRY_UNIT: 1,
-  INITIAL_RESULT: false,
 });
 
 module.exports = {
@@ -49,6 +54,7 @@ module.exports = {
   MOVING_RESULT,
   COMMAND,
   BRIDGE,
+  GAME_STATUS,
   ERROR,
   RESULT,
 };

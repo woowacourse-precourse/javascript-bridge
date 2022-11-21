@@ -1,53 +1,42 @@
-const { COMMAND } = require('./utils/constants');
+const { COMMAND, GAME_STATUS } = require('./utils/constants');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const Bridge = require('./model/Bridge');
-const BridgeGame = require('./BridgeGame');
+const BridgeGame = require('./model/BridgeGame');
 const History = require('./model/History');
-const Result = require('./model/Result');
 
 class GameController {
   #bridgeGame;
   #history;
-  #result;
-
-  constructor() {
-    this.#history = new History();
-    this.#result = new Result();
-  }
 
   load() {
-    InputView.readBridgeSize(this.setBridgeGame.bind(this));
+    OutputView.printStart();
+    InputView.readBridgeSize(this.setGame.bind(this));
   }
 
-  setBridgeGame({ command }) {
+  setGame({ command }) {
     this.#bridgeGame = new BridgeGame(new Bridge(command));
+    this.#history = new History();
 
     InputView.readMoving(this.playGame.bind(this));
   }
 
   playGame({ command }) {
-    const { moveSuccess, isEndOfBridge } = this.#bridgeGame.move(command);
-    OutputView.printMap(this.#history.updateHistory(command, moveSuccess));
+    const { moveSuccess, gameStatus } = this.#bridgeGame.move(command);
+    OutputView.printMap(this.#history.updateMoveTrace(command, moveSuccess));
 
-    if (moveSuccess) {
-      this.handleMoveSuccess(isEndOfBridge);
-    } else {
-      this.handleMoveFail();
-    }
+    this.handleMove(gameStatus);
   }
 
-  handleMoveSuccess(isEndOfBridge) {
-    if (isEndOfBridge) {
-      OutputView.printResult(this.#history.getHistory(), this.#result.updateResult(true));
+  handleMove(gameStatus) {
+    if (gameStatus === GAME_STATUS.WIN) {
+      OutputView.printResult(this.#history.getHistory(), gameStatus);
       InputView.closeView();
-    } else {
+    } else if (gameStatus === GAME_STATUS.FAIL) {
+      InputView.readGameCommand(this.handleGameCommand.bind(this));
+    } else if (gameStatus === GAME_STATUS.PLAYING) {
       InputView.readMoving(this.playGame.bind(this));
     }
-  }
-
-  handleMoveFail() {
-    InputView.readGameCommand(this.handleGameCommand.bind(this));
   }
 
   handleGameCommand({ command }) {
@@ -59,14 +48,14 @@ class GameController {
   }
 
   handleRestart() {
-    this.#result.updateTryCount();
     this.#bridgeGame.retry();
     this.#history.resetHistory();
+
     InputView.readMoving(this.playGame.bind(this));
   }
 
   handleQuit() {
-    OutputView.printResult(this.#history.getHistory(), this.#result.updateResult(false));
+    OutputView.printResult(this.#history.getHistory(), this.#bridgeGame.getGameStatus());
     InputView.closeView();
   }
 }

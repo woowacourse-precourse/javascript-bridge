@@ -21,25 +21,25 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(history) {
-    Console.print(`[ ${this.getUpperMap(history).join(' | ')} ]`);
-    Console.print(`[ ${this.getLowerMap(history).join(' | ')} ]`);
+  printMap(moveTrace) {
+    Console.print(`[ ${this.getUpperMap(moveTrace).join(' | ')} ]`);
+    Console.print(`[ ${this.getLowerMap(moveTrace).join(' | ')} ]`);
   },
 
-  getUpperMap(history) {
-    return history.map(historyItem => this.convertToMap(MOVING.UP, historyItem));
+  getUpperMap(moveTrace) {
+    return moveTrace.map(trace => this.convertToMap(MOVING.UP, trace));
   },
 
-  getLowerMap(history) {
-    return history.map(historyItem => this.convertToMap(MOVING.DOWN, historyItem));
+  getLowerMap(moveTrace) {
+    return moveTrace.map(trace => this.convertToMap(MOVING.DOWN, trace));
   },
 
-  convertToMap(targetMoving, { moving, canMove }) {
+  convertToMap(targetMoving, { moving, moveSuccess }) {
     if (targetMoving !== moving) {
       return ' ';
     }
 
-    if (canMove) {
+    if (moveSuccess) {
       return MOVING_RESULT.SUCCESS;
     } else {
       return MOVING_RESULT.FAIL;
@@ -51,17 +51,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(history, { tryCount, gameResult }) {
+  printResult({ tryCount, moveTrace }, gameStatus) {
     Console.print(MESSAGE.INFO);
-    this.printMap(history);
-
-    if (gameResult) {
-      Console.print('\n' + MESSAGE.WIN_GAME);
-    } else {
-      Console.print('\n' + MESSAGE.LOSE_GAME);
-    }
-
-    Console.print(MESSAGE.TRY(tryCount));
+    this.printMap(moveTrace);
+    Console.print(MESSAGE[gameStatus]);
+    Console.print(MESSAGE.TRY + tryCount);
   },
 
   printError(errorMessage) {

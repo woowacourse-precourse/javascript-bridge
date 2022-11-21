@@ -1,21 +1,27 @@
+const { RESULT } = require('../utils/constants');
+
 class History {
-  #history;
+  #tryCount;
+  #moveTrace;
 
   constructor() {
-    this.#history = [];
+    this.#tryCount = RESULT.INITIAL_TRY;
+    this.#moveTrace = [];
   }
 
   getHistory() {
-    return this.#history;
-  }
-
-  updateHistory(moving, canMove) {
-    this.#history.push({ moving, canMove });
-    return this.#history;
+    return { tryCount: this.#tryCount, moveTrace: this.#moveTrace };
   }
 
   resetHistory() {
-    this.#history = [];
+    this.#tryCount += RESULT.TRY_UNIT;
+    this.#moveTrace = [];
+  }
+
+  updateMoveTrace(moving, moveSuccess) {
+    this.#moveTrace.push({ moving, moveSuccess });
+
+    return this.#moveTrace;
   }
 }
 
