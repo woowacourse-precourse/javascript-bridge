@@ -4,6 +4,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeCompare = require('./BridgeCompare');
 const OutputView = require('./OutputView');
+const { output } = require("./Io");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -14,7 +15,7 @@ const InputView = {
   readBridgeSize(callback) {
       Io.input('다리의 길이를 입력해주세요.', (input) => {
         Validation.validatePositiveInteger(input);
-        const SIZE = Number(input)
+        const SIZE = Number(input);
         const BridgeStatus = BridgeMaker.makeBridge(SIZE, BridgeRandomNumberGenerator.generate);
         callback(SIZE, BridgeStatus);
       });
@@ -23,15 +24,15 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(SIZE, BridgeStatus, index, array) {
+  readMoving(SIZE, BridgeStatus, BridgeIndex, BridgeResultArray) {
     Io.input('이동할 칸을 선택해주세요. (위: U, 아래: D)', (userChoice) => {
-      console.log(userChoice, BridgeStatus);
-      const result = BridgeCompare.moveBridge(userChoice, BridgeStatus[index]);
-      array = BridgeCompare.makeBridgeResultArray(userChoice, result, array);
-      console.log(array);
-      OutputView.printMap(userChoice, result);
-      const result2 = BridgeCompare.isCompleteBridge(SIZE, index + 1);
-      if(result2 == false && result) { this.readMoving(SIZE, BridgeStatus, index + 1, array)}
+      console.log(BridgeStatus, userChoice);
+      const NowBridgeValue = BridgeStatus[BridgeIndex];
+      const CompareResult = BridgeCompare.isCompareBridge(userChoice, NowBridgeValue);
+      BridgeResultArray = BridgeCompare.makeBridgeResultArray(userChoice, CompareResult, BridgeResultArray);
+      OutputView.printMap(BridgeResultArray);
+      const NextBridgeSize = BridgeIndex + 1;
+      if(!BridgeCompare.isCompleteBridge(SIZE, NextBridgeSize) && CompareResult) { this.readMoving(SIZE, BridgeStatus, NextBridgeSize, BridgeResultArray)}
     });
   },
 
