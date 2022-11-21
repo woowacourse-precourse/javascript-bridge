@@ -79,6 +79,7 @@ class BridgeGame {
       this.#upperBridge.push('   ');
       this.#lowerBridge.push(` ${state} `);
     }
+    OutputView.printMap([this.#upperBridge, this.#lowerBridge]);
   }
 
   afterFirstBlock(state, input) {
@@ -90,6 +91,7 @@ class BridgeGame {
       this.#upperBridge.push('|   ');
       this.#lowerBridge.push(`| ${state} `);
     }
+    OutputView.printMap([this.#upperBridge, this.#lowerBridge]);
   }
 
   /**
