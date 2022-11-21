@@ -22,8 +22,12 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
+  INPUT_UP_MOVING: 'U',
+  INPUT_DOWN_MOVING: 'D',
+
   readMoving( callback ) {
     MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (answer) => {
+      Vaildation.one_of_candidates(answer, [this.INPUT_UP_MOVING, this.INPUT_DOWN_MOVING]);
 
       callback(answer);
     });
