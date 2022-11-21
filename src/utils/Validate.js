@@ -31,6 +31,20 @@ class Validate {
     }
     return true;
   }
+  static validateUserInputRetry(inputRetry) {
+    let regexOnlyRorQ = /[RQ]/g;
+    if (!regexOnlyRorQ.test(inputRetry)) {
+      throw new Error("R과 D만 입력하세요.");
+    }
+    if (inputRetry === "R".toLowerCase() || inputRetry === "Q".toLowerCase()) {
+      throw new Error(Constant.ERROR.ONLY_UPPERCASE);
+    }
+    if (inputRetry.length >= 2) {
+      throw new Error(Constant.ERROR.ONLY_INPUT_ONE);
+    }
+
+    return true;
+  }
 }
 
 module.exports = Validate;
