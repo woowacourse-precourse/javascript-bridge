@@ -1,7 +1,8 @@
-const { printInputErrorMessage } = require("./OutputView");
+const { printInputErrorMessage, printMap } = require("./OutputView");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { ERROR } = require("./constants");
+const { takeNextStep } = require("./utils");
 
 const ErrorHandler = {
   BridgeSize: {
@@ -14,6 +15,21 @@ const ErrorHandler = {
       const bridge = makeBridge(bridgeSize, generate);
 
       app.createGame(bridge);
+    },
+  },
+
+  Moving: {
+    true({ app, bridgeGame, readAgain }) {
+      printInputErrorMessage(ERROR.WRONG_DIRECTION);
+      readAgain(app, bridgeGame);
+    },
+
+    false({ app, bridgeGame, direction, readAgain }) {
+      bridgeGame.move(direction);
+      printMap(bridgeGame);
+
+      const movedCorrect = bridgeGame.hasMovedCorrectly();
+      takeNextStep[movedCorrect]({ app, bridgeGame, readAgain });
     },
   },
 };
