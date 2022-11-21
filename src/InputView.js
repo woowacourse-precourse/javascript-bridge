@@ -31,6 +31,7 @@ const InputView = {
       function (direction) {
         validateDirection(direction);
         const isFinish = bridgeGame.move(direction);
+        OutputView.printMap(bridgeGame.board);
         if (isFinish) {
           OutputView.printResult();
           this.readGameCommand(bridgeGame);
