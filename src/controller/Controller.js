@@ -2,7 +2,7 @@ const InputView = require("../view/InputView");
 const OutputView = require("../view/OutputView");
 const Validation = require("../utils/validation");
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeMaker = require("../BridgeMaker");
+const { makeBridge } = require("../BridgeMaker");
 const BridgeMachine = require("../BridgeRandomNumberGenerator");
 const BridgeGame = require("../model/BridgeGame");
 const { BRIDGE } = require("../utils/constants");
@@ -32,7 +32,7 @@ class Controller {
   bridgeSizeForm(length) {
     try {
       this.validation.isValidLength(length);
-      this.#bridge = BridgeMaker.makeBridge(length, BridgeMachine.generate);
+      this.#bridge = makeBridge(length, BridgeMachine.generate);
       this.getMovingDirection();
     } catch (error) {
       this.bridgeSizeError(error);
@@ -46,7 +46,7 @@ class Controller {
   movingDirectionForm(square) {
     try {
       this.validation.isUpOrDown(square);
-      !this.bridgeCurrentStatus(square) && this.getBridgeCommand();
+      if (!this.bridgeCurrentStatus(square)) this.getBridgeCommand();
       this.checkGameFinished() ? this.endGame() : this.getMovingDirection();
     } catch (error) {
       this.bridgeMovingError(error);
