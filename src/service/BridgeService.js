@@ -1,7 +1,7 @@
 const BridgeStart = require('./domain/BridgeStart');
 const BridgeRestart = require('./domain/BridgeRestart');
 const BridgeUserMap = require('./domain/BridgeUserMap');
-const BridgeDirection = require('./domain/UpDownKey');
+const BridgeDirection = require('./domain/BridgeDirection');
 const BridgeFinalResult = require('./domain/BridgeFinalResult');
 
 const BridgeRepository = require('../repository/BridgeRepository');
