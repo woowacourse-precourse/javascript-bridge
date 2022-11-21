@@ -27,6 +27,7 @@ const OutputView = {
     MissionUtils.Console.print("["+downMap+"]");
     MissionUtils.Console.print("게임 성공 여부: "+success);
     MissionUtils.Console.print("총 시도한 횟수: "+cumulativeCount);
+    MissionUtils.Console.close();
   },
   printErrorMessageAboutBridgeSize(){
     MissionUtils.Console.print("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
