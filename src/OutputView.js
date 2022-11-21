@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { generateUpMap, generateDownMap } = require("./BridgeMapGenerator");
 const { MESSAGE } = require("./constants/index");
+const { generateUpMap, generateDownMap } = require("./BridgeMapGenerator");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -34,6 +34,10 @@ const OutputView = {
 
     Console.print(isSuccess ? MESSAGE.GAME_SUCCESS : MESSAGE.GAME_FAIL);
     Console.print(MESSAGE.GAME_TRY + tryCount);
+  },
+
+  printError(message) {
+    Console.print(message);
   },
 };
 

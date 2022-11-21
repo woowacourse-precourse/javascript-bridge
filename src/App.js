@@ -1,9 +1,13 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { printIntro, printMap, printResult } = require("./OutputView");
+const {
+  printIntro,
+  printMap,
+  printResult,
+  printError,
+} = require("./OutputView");
 const { readBridgeSize, readMoving, readGameCommand } = require("./InputView");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker");
-
 const BridgeGame = require("./BridgeGame");
 
 class App {
@@ -22,13 +26,29 @@ class App {
   play() {
     printIntro();
 
-    readBridgeSize(this.make.bind(this));
+    try {
+      readBridgeSize(this.make.bind(this));
+    } catch (message) {
+      printError(message);
+
+      readBridgeSize(this.make.bind(this));
+    }
   }
 
   make(size) {
     this.#bridge = makeBridge(size, generate);
 
-    readMoving(this.move.bind(this));
+    this.moving();
+  }
+
+  moving() {
+    try {
+      readMoving(this.move.bind(this));
+    } catch (message) {
+      printError(message);
+
+      readMoving(this.move.bind(this));
+    }
   }
 
   move(moving) {
@@ -41,22 +61,26 @@ class App {
     if (this.#location === this.#bridge.length)
       return this.result(true, current);
 
-    readMoving(this.move.bind(this));
+    this.moving();
   }
 
   select(current) {
-    readGameCommand(
-      this.bridgeGame.retry.bind(this),
-      this.result.bind(this),
-      current
-    );
+    try {
+      // prettier-ignore
+      readGameCommand(this.bridgeGame.retry.bind(this), this.result.bind(this), current);
+    } catch (message) {
+      printError(message);
+
+      // prettier-ignore
+      readGameCommand(this.bridgeGame.retry.bind(this), this.result.bind(this), current);
+    }
   }
 
   retry() {
     this.#tryCount += 1;
     this.#location = 0;
 
-    readMoving(this.move.bind(this));
+    this.moving();
   }
 
   result(isSuccess, current) {
