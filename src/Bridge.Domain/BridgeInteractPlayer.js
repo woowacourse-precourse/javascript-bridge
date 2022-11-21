@@ -51,6 +51,18 @@ class BridgeInteractPlayer {
       InputView.readGameCommand(this.playerInputCommandBridgeRetry.bind(this));
     return;
   }
+
+  playerInputCommandBridgeRetry(command) {
+    switch (command) {
+      case BRIDGE.GAME.RETRY:
+        InputView.readMoving(this.playerInputBridgeDirection.bind(this));
+        break;
+      case BRIDGE.GAME.END:
+        //todo: true 고치기
+        this.playerEndThisGame(this.#bridgeGameShape.getCurrentShape(), true);
+        break;
+    }
+  }
 }
 
 const bi = new BridgeInteractPlayer();
