@@ -19,7 +19,7 @@ const ERROR_MESSAGE = Object.freeze({
 const PRINT_MESSAGE = Object.freeze({
   WELLCOME: '다리 건너기 게임을 시작합니다.\n',
   MAP: (bridge) => `[${bridge}]`,
-  RESULT_INFORMATION: '최종 게임 결과',
+  RESULT_INFORMATION: '\n최종 게임 결과',
   SUCCESS: '성공',
   FAIL: '실패',
   GAME_RESULT: (gameResult) => `게임 성공 여부: ${gameResult} `,
@@ -27,9 +27,9 @@ const PRINT_MESSAGE = Object.freeze({
 });
 
 const INFORMATION_MESSAGE = Object.freeze({
-  READ_BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',
-  READ_MOVE: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
-  READ_GAME_COMMAND: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+  READ_BRIDGE_SIZE: '\n다리의 길이를 입력해주세요.\n',
+  READ_MOVE: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
+  READ_GAME_COMMAND: '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
 });
 
 module.exports = { RULES, ERROR_MESSAGE, PRINT_MESSAGE, INFORMATION_MESSAGE };
