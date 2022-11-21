@@ -69,7 +69,15 @@ describe("도메인 로직 단위 테스트", () => {
     })
   });
 
-  test("오답을 선택하여 재시작 시, 사용자의 재시작 커맨드가 올바른 값인지 검사한다.", () => {});
+  test("오답을 선택하여 재시작 시, 사용자의 재시작 커맨드가 올바른 값인지 검사한다.", () => {
+    const commands = ["R", "Q", "U", undefined];
+    const answerFlags = [VALID_CHECK_PASS, VALID_CHECK_PASS, VALID_CHECK_DO, VALID_CHECK_ERROR];
+
+    answerFlags.forEach((answer, index) => {
+      const flag = ValidCheck.validReadGameCommand(commands[index]);
+      expect(flag).toEqual(answer);
+    })
+  });
 
   test("라운드가 모두 종료되면, 성공 여부를 판별한다.", () => {});
 });

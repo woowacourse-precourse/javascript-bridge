@@ -13,7 +13,9 @@ const Constant = {
   WRONG_SELECT_CASE: " X ",
   NOT_SELECT_CASE: "   ",
   SUCCESS_TERMINATION: "성공",
-  FAIL_TERMINAITION: "실패"
+  FAIL_TERMINAITION: "실패",
+  QUIT_COMMAND: "Q",
+  RESTART_COMMAND: "R"
 }
 
 module.exports = Constant;
