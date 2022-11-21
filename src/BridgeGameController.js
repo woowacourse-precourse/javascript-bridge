@@ -1,7 +1,10 @@
-const { DIRECTION } = require("./constants/gameState");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const BridgeValidator = require("./utils/BridgeValidator");
+const DirectionValidator = require("./utils/DirectionValidator");
+const RetryValidator = require("./utils/RetryValidator");
 
+const { BRIDGE_LENGTH } = require("./constants/gameState");
 class BridgeGameController {
   start(game) {
     OutputView.printStart();
@@ -27,6 +30,37 @@ class BridgeGameController {
 
   outputMap(upArray, downArray) {
     OutputView.printMap(upArray.join(" | "), downArray.join(" | "));
+  }
+
+  validateBridgeLength(size) {
+    try {
+      BridgeValidator.isInRange(size, BRIDGE_LENGTH.START, BRIDGE_LENGTH.END);
+      BridgeValidator.isNumber(size);
+      return true;
+    } catch (e) {
+      this.outputError(e);
+      this.inputBridgeSize();
+    }
+  }
+
+  validateDirection(direction) {
+    try {
+      DirectionValidator.validateDirection(direction);
+      return true;
+    } catch (e) {
+      this.outputError(e);
+      this.inputDirection();
+    }
+  }
+
+  validateRetry(retry) {
+    try {
+      RetryValidator.validateRetry(retry);
+      return true;
+    } catch (e) {
+      this.outputError(e);
+      this.inputRetry();
+    }
   }
 }
 
