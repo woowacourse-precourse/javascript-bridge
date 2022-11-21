@@ -8,6 +8,14 @@ const Validation = {
 
     return parseInt(inputStr);
   },
+
+  validateMoving(inputStr) {
+    if (!REGEX.MOVING.test(inputStr)) {
+      throw new Error(ERROR.SELECT_VALID_MOVING);
+    }
+
+    return inputStr;
+  },
 };
 
 module.exports = Validation;
