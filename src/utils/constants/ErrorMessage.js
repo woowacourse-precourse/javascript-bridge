@@ -1,6 +1,6 @@
 const { deepFreeze } = require("../services/system");
 
-const ErrorMessage = deepFreeze({
+const ERROR_MESSAGE = deepFreeze({
   input_number: '숫자를 입력해주세요.',
   range_number: '3부터 20 사이의 숫자를 입력해주세요.',
   valid_move: 'U 또는 D를 입력해주세요.',
@@ -10,6 +10,6 @@ const ErrorMessage = deepFreeze({
 const ERROR_CODE = '[ERROR]'
 
 module.exports = {
-  ErrorMessage,
+  ERROR_MESSAGE,
   ERROR_CODE
 }

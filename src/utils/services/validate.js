@@ -2,7 +2,7 @@ const CustomError = require('../../CustomError');
 const {
   DIRECTION, GAME_COMMAND, MAX_SIZE, MIN_SIZE
 } = require('../constants/GameSystem');
-const { ErrorMessage } = require('../constants/ErrorMessage');
+const { ERROR_MESSAGE } = require('../constants/ErrorMessage');
 
 /**
  * @param {Object} option
@@ -39,16 +39,16 @@ const isNumber = (input) => {
 const isRangeNumber = (min, max, number) => number >= min && number <= max;
 
 const bridgeSizeValidation = (input) => {
-  if (!isNumber(input)) throw new CustomError(ErrorMessage.input_number);
-  if (!isRangeNumber(MIN_SIZE, MAX_SIZE, Number(input))) { throw new CustomError(ErrorMessage.range_number); }
+  if (!isNumber(input)) throw new CustomError(ERROR_MESSAGE.input_number);
+  if (!isRangeNumber(MIN_SIZE, MAX_SIZE, Number(input))) { throw new CustomError(ERROR_MESSAGE.range_number); }
 };
 
 const movingValidation = (input) => {
-  if (isNumber(input) || !isIncludesObjectValues(DIRECTION, input)) throw new CustomError(ErrorMessage.valid_move);
+  if (isNumber(input) || !isIncludesObjectValues(DIRECTION, input)) throw new CustomError(ERROR_MESSAGE.valid_move);
 };
 
 const gameCommandValidation = (input) => {
-  if (isNumber(GAME_COMMAND, input) || !isIncludesObjectKeys(GAME_COMMAND, input)) throw new CustomError(ErrorMessage.valid_command);
+  if (isNumber(GAME_COMMAND, input) || !isIncludesObjectKeys(GAME_COMMAND, input)) throw new CustomError(ERROR_MESSAGE.valid_command);
 };
 
 module.exports = {
