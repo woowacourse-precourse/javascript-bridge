@@ -12,18 +12,8 @@ describe("다리 생성 기능 테스트", () => {
   });
 
   test("숫자 배열을 다리 형태로 반환", () => {
-    const TEST_CASE = [
-      {
-        numbers: [1, 0, 0],
-        result: ["U", "D", "D"],
-      },
-      {
-        numbers: [1, 1, 0, 0, 1],
-        result: ["U", "U", "D", "D", "U"],
-      },
-    ];
-    TEST_CASE.forEach(({ numbers, result }) => {
-      expect(BridgeMaker.makeBridgeByNumbers(numbers)).toEqual(result);
-    });
+    const numbers = [1, 1, 0, 0, 1];
+    const result = ["U", "U", "D", "D", "U"];
+    expect(BridgeMaker.makeBridgeByNumbers(numbers)).toEqual(result);
   });
 });
