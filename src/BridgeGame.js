@@ -19,7 +19,6 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(bridge) {
-    Console.print(bridge);
     Console.readLine(MESSAGE.WHERETOMOVE, (direction) => {
       InputView.readMoving(direction);
       this.#checkMoveCorrectly(direction, bridge);
@@ -35,13 +34,13 @@ class BridgeGame {
   #moveCorretly(direction, bridge) {
     this.#bridgeHistory.push(direction);
     OutputView.printMap(this.#bridgeHistory);
-    // if (this.#bridgeHistory.length === bridge.length) this.#gameSet('실패');
+    if (this.#bridgeHistory.length === bridge.length) this.#gameSet('성공');
     this.move(bridge);
   }
 
   #moveIncorrectly(direction, bridge) {
     OutputView.printMap(this.#bridgeHistory, direction);
-    this.#retry(bridge);
+    this.#retry(bridge, direction);
   }
 
   /**
@@ -49,18 +48,25 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  #retry(bridge) {
+  #retry(bridge, direction) {
     Console.readLine(MESSAGE.REGAME, (re) => {
       InputView.readGameCommand(re);
       if (re === 'R') {
         this.#attempts++;
-        this.move(bridge);
+        this.move(bridge, direction);
+      } else {
+        Console.print('최종 게임 결과');
+
+        this.#gameSet('실패');
       }
-      this.#gameSet();
     });
   }
 
-  #gameSet() {}
+  #gameSet(isSuccess) {
+    Console.print(`게임 성공 여부: ${isSuccess}`);
+    Console.print(`총 시도한 횟수: ${this.#attempts}`);
+    Console.close();
+  }
 }
 
 module.exports = BridgeGame;
