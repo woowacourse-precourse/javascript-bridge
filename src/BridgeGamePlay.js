@@ -3,7 +3,6 @@ const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const { RESULT } = require('./constant/constant');
 const { makeRandomNumber } = require('./utils/util');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 
 /**
@@ -33,7 +32,7 @@ class BridgeGamePlay {
    * 다리 생성
    */
   makeBridge() {
-    this.bridge = BridgeMaker.makeBridge(this.bridgeSize, BridgeRandomNumberGenerator.generate);
+    this.bridge = BridgeMaker.makeBridge(this.bridgeSize, makeRandomNumber);
   }
 
   /**

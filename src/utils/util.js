@@ -11,7 +11,7 @@ class Utils {
     Console.print(message);
   }
 
-  static makeRandom() {
+  static makeRandomNumber() {
     return BridgeRandomNumberGenerator.generate();
   }
 
