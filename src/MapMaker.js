@@ -1,17 +1,4 @@
-const MAP_CHARACTERS = {
-  START: '[ ',
-  MIDDLE: ' | ',
-  END: ' ]',
-  WHITE_SPACE: ' ',
-  USER_MOVE_RESULT: {
-    true: 'O',
-    false: 'X',
-  },
-  COMMAND: {
-    U: 0,
-    D: 1,
-  },
-};
+const { MAP_CHARACTERS } = require('./constants');
 
 const MapMaker = {
   getMapHead(isFirstIndex) {
@@ -34,7 +21,7 @@ const MapMaker = {
       const { command, result } = getUserInputResult(idx);
 
       return `${this.getMapHead(idx === 0)}${this.getMapCharacter(MAP_CHARACTERS.COMMAND[command] === pos, result)}${this.getMapTail(idx === currentMoveCount)}`;
-    }));
+    })).map((el) => el.join(MAP_CHARACTERS.MIDDLE));
   },
 
 };
