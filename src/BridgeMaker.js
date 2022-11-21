@@ -13,14 +13,18 @@ const BridgeMaker = {
    */
 
   makeBridge(size, generateRandomNumber) {
-    let bridgeArray=[]
+    // let bridgeArray=[]
+    let bridgeString=[]
     // console.log(Number(size),'사이즈')
     for (let i = 0; i < Number(size); i++) {
       const number=generateRandomNumber()
-      bridgeArray.push(number)
+      // bridgeArray.push(number)
+      if(number===1) bridgeString.push("U")
+      if(number===0) bridgeString.push("D")
     }
-    console.log(bridgeArray);
-    return bridgeArray
+    console.log(bridgeString);
+    // return bridgeArray
+    return bridgeString
   }
 };
 
