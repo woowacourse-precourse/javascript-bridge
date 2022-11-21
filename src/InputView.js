@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { BridgeSize, MoveInput, CommandInput } = require("./Utils");
+const { BridgeSize, MoveInput, CommandInput } = require("./Validate");
 const { InputConstants } = require("./constant/Constants");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
