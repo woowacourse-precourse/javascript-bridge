@@ -67,9 +67,9 @@ class App {
   checkComplete(move, bridges) {
     const step = this.bridgeGame.getStep();
 
-    if (move === true && this.bridge.length === step)
-      this.successQuitGame(bridges);
-    else this.checkContinue(move, bridges);
+    move === true && this.bridge.length === step
+      ? this.successQuitGame(bridges)
+      : this.checkContinue(move, bridges);
   }
 
   checkContinue(move, bridges) {
