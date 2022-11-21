@@ -76,16 +76,24 @@ const InputView = {
 
   printMapBasedOnInput(Boolean) {
     if (Boolean) {
-      OutputView.printMap(Boolean, this.letter);
-      this.count++;
-      this.isGameDone();
+      this.printMapWhenWin(Boolean);
     }
     if (!Boolean) {
-      OutputView.printMap(Boolean, this.letter);
-      this.count++;
-      OutputView.printResult();
-      this.readGameCommand();
+      this.printMapWhenLose(Boolean);
     }
+  },
+
+  printMapWhenWin(Boolean) {
+    OutputView.printMap(Boolean, this.letter);
+    this.count++;
+    this.isGameDone();
+  },
+
+  printMapWhenLose(Boolean) {
+    OutputView.printMap(Boolean, this.letter);
+    this.count++;
+    OutputView.printResult();
+    this.readGameCommand();
   },
 
   isGameDone() {
