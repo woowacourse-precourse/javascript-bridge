@@ -38,10 +38,11 @@ class BridgeGame {
    */
   retry(input) {
     if (input === DEFAULT.QUIT) {
-      return false;
+      return DEFAULT.FALSE;
     }
+
     this.setRetryState();
-    return true;
+    return DEFAULT.TRUE;
   }
 
   end() {

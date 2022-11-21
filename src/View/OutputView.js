@@ -2,6 +2,19 @@
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const { Console } = require("@woowacourse/mission-utils");
+const {
+  DEFAULT,
+  OUTPUT_VIEW_VALUE: {
+    FIRST_EMPTY,
+    FIRST_WRONG,
+    FIRST_RIGHT,
+    EMPTY,
+    RIGHT,
+    WRONG,
+  },
+} = require("../utils/constant.js");
+
+const checkIsZero = (value) => value === DEFAULT.ZERO;
 
 const OutputView = {
   printInitialComment() {
@@ -16,9 +29,10 @@ const OutputView = {
     Console.print(
       `[${inputHistory.reduce((acc, cur, idx) => {
         if (cur === bridgeOpposition)
-          return (acc += idx === 0 ? "   " : "|   ");
-        if (cur !== bridge[idx]) return (acc += idx === 0 ? " X " : "| X ");
-        return (acc += idx === 0 ? " O " : "| O ");
+          return (acc += checkIsZero(idx) ? FIRST_EMPTY : EMPTY);
+        if (cur !== bridge[idx])
+          return (acc += checkIsZero(idx) ? FIRST_WRONG : WRONG);
+        return (acc += checkIsZero(idx) ? FIRST_RIGHT : RIGHT);
       }, "")}]`,
     );
   },
@@ -43,8 +57,8 @@ const OutputView = {
   },
 
   printUserInput(inputHistory, bridge) {
-    OutputView.printMap(inputHistory, bridge, "D");
-    OutputView.printMap(inputHistory, bridge, "U");
+    OutputView.printMap(inputHistory, bridge, DEFAULT.DOWN);
+    OutputView.printMap(inputHistory, bridge, DEFAULT.UP);
   },
 };
 
