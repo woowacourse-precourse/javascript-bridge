@@ -20,9 +20,6 @@ const BridgeMaker = {
     for (let step = 0; step < size; step++) {
       bridge.push(generateRandomNumber() === 0 ? "D" : "U");
     }
-
-    Console.print(`다리 : ${bridge}`);
-
     return bridge;
   },
 };
