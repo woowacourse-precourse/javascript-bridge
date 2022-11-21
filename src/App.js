@@ -2,11 +2,6 @@ const BridgeGame = require('./BridgeGame');
 const { GAME_RESULT } = require('./common/Constant');
 const InputView = require('./io/InputView');
 const OutputView = require('./io/OutputView');
-const {
-  validateMove,
-  validateRetry,
-  validateBridgeLength,
-} = require('./utils/Validator');
 
 class App {
   play() {
@@ -16,43 +11,25 @@ class App {
 
   askSize() {
     InputView.readBridgeSize((input) => {
-      try {
-        validateBridgeLength(input);
-        this.game = new BridgeGame(+input);
-        this.askMove();
-      } catch (e) {
-        OutputView.printError(e);
-        this.askSize();
-      }
+      this.game = new BridgeGame(+input);
+      this.askMove();
     });
   }
 
   askMove() {
     InputView.readMoving((input) => {
-      try {
-        validateMove(input);
-        this.game.move(input);
-        OutputView.printMap(this.game.movingState);
-        if (this.game.checkGameOver())
-          return this.game.judgeGameSuccess() ? this.end() : this.askRestart();
-      } catch (e) {
-        OutputView.printError(e);
-      }
+      this.game.move(input);
+      OutputView.printMap(this.game.movingState);
+      if (this.game.checkGameOver())
+        return this.game.judgeGameSuccess() ? this.end() : this.askRestart();
       this.askMove();
     });
   }
 
   askRestart() {
     InputView.readGameCommand((input) => {
-      try {
-        validateRetry(input);
-        if (input === GAME_RESULT.retry)
-          return this.game.retry(), this.askMove();
-        this.end();
-      } catch (e) {
-        OutputView.printError(e);
-        this.askRestart();
-      }
+      if (input === GAME_RESULT.retry) return this.game.retry(), this.askMove();
+      this.end();
     });
   }
 
@@ -64,5 +41,5 @@ class App {
     );
   }
 }
-
+new App().play();
 module.exports = App;
