@@ -22,14 +22,14 @@ class App {
     }
     const game = new BridgeGame(input);
     this.#game = game;
-    InputView.readMoving(this.moveSpace.bind(this));
+    this.readMoving();
   }
 
   moveSpace(input) {
     try {
       Validator.validateSpace(input);
     } catch {
-      InputView.readMoving(this.moveSpace.bind(this));
+      this.readMoving();
       return;
     }
     this.#game.move(input);
@@ -58,7 +58,7 @@ class App {
       this.endGame();
       return;
     }
-    InputView.readMoving(this.moveSpace.bind(this));
+    this.readMoving();
   }
 
   endGame() {
@@ -70,11 +70,15 @@ class App {
 
   retryGame() {
     this.#game.retry();
-    InputView.readMoving(this.moveSpace.bind(this));
+    this.readMoving();
   }
 
   readBridgeSize() {
     InputView.readBridgeSize(this.makeBridge.bind(this));
+  }
+
+  readMoving() {
+    InputView.readMoving(this.moveSpace.bind(this));
   }
 }
 
