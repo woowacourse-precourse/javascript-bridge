@@ -22,11 +22,10 @@ class App {
 
   initBridge() {
     InputView.readBridgeSize((length) => {
-      if (!InputView.sizeValidate(length)) {
-        return this.initBridge();
-      }
+      if (!InputView.sizeValidate(length)) return this.initBridge();
 
       this.#bridge = BridgeMaker.makeBridge(parseInt(length, 10), generate);
+      OutputView.printEnter();
       return this.movingBridge();
     });
   }
