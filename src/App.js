@@ -26,7 +26,10 @@ class App {
    */
   setGame(){
     readBridgeSize((size) => {
-      checkVaildBridgeSize(size);
+      if(checkVaildBridgeSize(size) === false){
+        this.setGame()
+        return;
+      }
       this.startGame(size)
     });
   }
