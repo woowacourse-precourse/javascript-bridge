@@ -42,7 +42,7 @@ class App {
     try {
       Validator.validateCommand(input);
     } catch {
-      InputView.readGameCommand(this.selectRetryOrQuit.bind(this));
+      this.readGameCommand();
       return;
     }
     if (input === COMMAND.QUIT) this.endGame();
@@ -51,7 +51,7 @@ class App {
 
   checkGameProgress() {
     if (!this.#game.isPass()) {
-      InputView.readGameCommand(this.selectRetryOrQuit.bind(this));
+      this.readGameCommand();
       return;
     }
     if (this.#game.isClear()) {
@@ -79,6 +79,10 @@ class App {
 
   readMoving() {
     InputView.readMoving(this.moveSpace.bind(this));
+  }
+
+  readGameCommand() {
+    InputView.readGameCommand(this.selectRetryOrQuit.bind(this));
   }
 }
 
