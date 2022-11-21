@@ -6,12 +6,11 @@ const OutputView = {
     Console.print('[ '+ map.get('D').join(' | ')+' ]\n');
   },
 
-  printResult(map, attempts, success) {
+  printResult(result, success) {
     Console.print(`최종 게임 결과`)
-    this.printMap(map);
+    this.printMap(result.map);
     Console.print(`게임 성공 여부: ${success ? '성공' : '실패'}`)
-    Console.print(`총 시도한 횟수: ${attempts}`);
-    Console.close();
+    Console.print(`총 시도한 횟수: ${result.attempts}`);
   },
 
   printIntialMessage() {
