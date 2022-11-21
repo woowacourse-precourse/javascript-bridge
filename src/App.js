@@ -38,11 +38,11 @@ class App {
     this.checkGameProgress();
   }
 
-  proceedStepThree(input) {
+  selectRetryOrQuit(input) {
     try {
       Validator.validateCommand(input);
     } catch {
-      InputView.readGameCommand(this.proceedStepThree.bind(this));
+      InputView.readGameCommand(this.selectRetryOrQuit.bind(this));
       return;
     }
     if (input === COMMAND.QUIT) this.endGame();
@@ -51,7 +51,7 @@ class App {
 
   checkGameProgress() {
     if (!this.#game.isPass()) {
-      InputView.readGameCommand(this.proceedStepThree.bind(this));
+      InputView.readGameCommand(this.selectRetryOrQuit.bind(this));
       return;
     }
     if (this.#game.isClear()) {
