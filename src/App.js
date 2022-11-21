@@ -1,6 +1,6 @@
 const BridgeGame = require("./BridgeGame");
 const { readGameCommand, readMoving, readBridgeSize } = require("./InputView");
-const { printResult, returnCheckedMap, printStart } = require("./OutputView");
+const { printResult, returnCheckedMap, printStart, printMap } = require("./OutputView");
 
 class App {
   #size;
