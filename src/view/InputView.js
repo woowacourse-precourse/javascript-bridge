@@ -7,12 +7,14 @@ const {
 } = require("../utils/index");
 const { GAME_MESSAGE, COMMAND_VALUE } = require("../constants/index");
 const OutputView = require("./OutputView");
+const BridgeGame = require("../BridgeGame");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
+   * @param {BridgeGame} bridgeGame 다리 게임 객체
    */
   readBridgeSize(bridgeGame) {
     inputUserValue(GAME_MESSAGE.INPUT_BRIDGE_LENGTH, (length) => {
@@ -29,6 +31,7 @@ const InputView = {
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
+   * @param {BridgeGame} bridgeGame 다리 게임 객체
    */
   readMoving(bridgeGame) {
     inputUserValue(GAME_MESSAGE.INPUT_MOVE, (move) => {
@@ -61,6 +64,10 @@ const InputView = {
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   * @param {BridgeGame} bridgeGame 다리 게임 객체
+   * @param {string[]} up 위쪽 다리 성공실패 목록
+   * @param {string[]} down 아래쪽 다리 성공실패 목록
+   * @param {BridgeGame} successStatus 다리를 건널수 있는지 여부
    */
   readGameCommand(bridgeGame, up, down, successStatus) {
     inputUserValue(GAME_MESSAGE.RESTART, (command) => {

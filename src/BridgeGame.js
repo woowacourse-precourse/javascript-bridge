@@ -21,8 +21,8 @@ class BridgeGame {
   }
 
   /**
-   * 다리를 만들 때 사용하는 메서드
-   * <p>
+   * 다리를 만든다.
+   * @param {number} length 다리의 길이
    */
   createBridge(length) {
     this.#bridge = new Bridge(
@@ -32,8 +32,9 @@ class BridgeGame {
   }
 
   /**
-   * 사용자가 칸을 이동하고, 라운드를 진행시킬 때 사용하는 메서드
-   * <p>
+   * 사용자가 칸을 이동하고, 라운드를 진행한다.
+   * @param {string} move 이동 커맨드
+   * @return {boolean} 칸 이동 가능 여부
    */
   move(move) {
     this.#round += 1;
@@ -50,16 +51,16 @@ class BridgeGame {
   }
 
   /**
-   * 게임에서 위쪽, 아래쪽 상태를 담은 리스트를 리턴하는 메서드
-   * <p>
+   * 다리의 위쪽, 아래쪽 상태를 반환한다.
+   * @return {string[string[]]} 현재 위쪽, 아래쪽 다리 상태를 나태내는 배열
    */
   getUpDownStatus() {
     return [this.#up, this.#down];
   }
 
   /**
-   * 지도에 그려질 위쪽 방향의 목록을 더하는 메서드
-   * <p>
+   * 지도에 그려질 위쪽 방향의 목록에 이동 성공실패 여부를 더한다.
+   * @param {string} move 이동한 칸의 이동 성공실패 여부
    */
   addUp(move) {
     this.#up.push(move);
@@ -67,8 +68,8 @@ class BridgeGame {
   }
 
   /**
-   * 지도에 그려질 아래쪽 방향의 목록을 더하는 메서드
-   * <p>
+   * 지도에 그려질 아래쪽 방향의 목록에 이동 성공실패 여부를 더한다.
+   * @param {string} move 이동한 칸의 이동 성공실패 여부
    */
   addDown(move) {
     this.#down.push(move);
@@ -76,24 +77,23 @@ class BridgeGame {
   }
 
   /**
-   * 총 게임 시도 횟수를 리턴하는 메서드
-   * <p>
+   * 총 게임 시도 횟수를 반환한다.
+   * @return {number} 총 게임 시도 횟수
    */
   getTotalTry() {
     return this.#totalTry;
   }
 
   /**
-   * 다리의 끝 지점에 도착했는지 리턴하는 메서드
-   * <p>
+   * 다리의 끝 지점에 도착했는지 리여부를 반환한다.
+   * @return {boolean} 다리의 끝에 도착했는지 여부
    */
   isArriveToEnd() {
     return this.#bridge.getLength() === this.#round + 1;
   }
 
   /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
+   * 사용자가 게임을 다시 시도한다.
    */
   retry() {
     this.#round = -1;
@@ -103,8 +103,7 @@ class BridgeGame {
   }
 
   /**
-   * 사용자가 게임을 종료할 때 사용하는 메서드
-   * <p>
+   * 사용자가 게임을 종료한다.
    */
   quit() {
     quitGame();
