@@ -1,8 +1,8 @@
-const BridgeService = require('../src/service/BridgeService');
+const BridgeService = require('../../src/service/BridgeService');
 
 const MissionUtils = require('@woowacourse/mission-utils');
 
-const { GAME_RESULT_STATE } = require('../src/utils/constants');
+const { GAME_RESULT_STATE } = require('../../src/utils/constants');
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
