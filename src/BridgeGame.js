@@ -1,7 +1,7 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const { MOVEMENT } = require('./constants');
+const { MOVEMENT } = require('./utils/constants');
 
 class BridgeGame {
   #bridge;

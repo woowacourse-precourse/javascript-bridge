@@ -7,7 +7,7 @@
 //  사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
 
 const { Console } = require("@woowacourse/mission-utils");
-const { INPUT } = require("./constants");
+const { INPUT } = require("../utils/constants");
 
 const InputView = {
   /**

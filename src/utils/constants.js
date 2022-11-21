@@ -12,6 +12,8 @@ const GAME = Object.freeze({
   QUIT: 'Q',
   RESULT: '게임 성공 여부: ',
   TRY_COUNT: '총 시도한 횟수: ',
+  SUCCESS: '성공',
+  FAIL: '실패',
 });
 
 const INPUT = Object.freeze({
