@@ -1,11 +1,10 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
-
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
 
+/**
+ * 사용자로부터 입력을 받는 역할을 한다.
+ */
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
@@ -22,19 +21,20 @@ const InputView = {
    * 다리 길이의 입력값이 유효한지 판단한다.
    */
   checkBridgeSize(size) {
-    const RANGE = []
-    for (let i=3; i<21; i++) {
-      RANGE.push(String(i));
+    const size_range = []
+    for (let i = 3; i < 21; i++) {
+      size_range.push(String(i));
     }
-    if (!RANGE.includes(size)) {
+    if (!size_range.includes(size)) {
       throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
     }
+    return parseInt(size);
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() { },
+   readMoving() { },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
