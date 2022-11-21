@@ -51,3 +51,28 @@
 <br/>
 
 ## **🗂️ 파일 구성**
+javascript-bridge  
+┣ **`__tests__`**  
+┃ ┣ ApplicationTest.js    
+┃ ┣ BridgeGameTest.js   
+┃ ┣ BridgeMakerTest.js  
+┃ ┣ BridgeRandomNumberGeneratorTest.js  
+┃ ┣ BridgeSizeCheckTest.js  
+┃ ┣ MoveCheckTest.js   
+┃ ┗ RetryQuitCheckTest.js  
+┣ **`docs`**    
+┃ ┗ README.md  
+┣ **`src`**  
+┃ ┣ **`Check`**  
+┃ &nbsp;&nbsp;&nbsp;&nbsp;┣ BridgeSizeCheck.js  
+┃ &nbsp;&nbsp;&nbsp;&nbsp;┣ MoveCheck.js  
+┃ &nbsp;&nbsp;&nbsp;&nbsp;┗ RetryQuitCheck.js  
+┃ ┣ **`Constants`**   
+┃ &nbsp;&nbsp;&nbsp;&nbsp;┗ Constants.js  
+┃ ┣ App.js  
+┃ ┣ BridgeGame.js  
+┃ ┣ BridgeGameToView.js  
+┃ ┣ BridgeMaker.js  
+┃ ┣ BridgeRandomNumberGenerator.js  
+┃ ┣ InputView.js  
+┗ ┗ OutputView.js
