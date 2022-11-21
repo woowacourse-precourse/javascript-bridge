@@ -45,12 +45,65 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(callback) {
+    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
+      try {
+        this.validateMove(input);
+        callback(input);
+      } catch (error) {
+        Console.print(error.message);
+
+        this.readMoving(callback);
+      }
+    });
+  },
+
+  validateMove(input) {
+    this.validateSpace(input);
+    this.validateMoveRange(input);
+  },
+
+  defineStringValidator(strings) {
+    return (string) => {
+      const message = `[ERROR] ${strings.join(', ')} 중에서만 입력할 수 있습니다.`;
+
+      if (!strings.includes(string)) throw new Error(message);
+    };
+  },
+
+  validateMoveRange(input) {
+    const moves = ['U', 'D'];
+    const validator = this.defineStringValidator(moves);
+
+    validator(input);
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (input) => {
+      try {
+        callback(this.validateCommand(input));
+      } catch (error) {
+        Console.print(error.message);
+
+        this.readGameCommand(callback);
+      }
+    });
+  },
+
+  validateCommand(input) {
+    this.validateSpace(input);
+    this.validateCommandRange(input);
+  },
+
+  validateCommandRange(input) {
+    const commands = ['R', 'Q'];
+    const validator = this.defineStringValidator(commands);
+
+    validator(input);
+  },
 };
 
 module.exports = InputView;
