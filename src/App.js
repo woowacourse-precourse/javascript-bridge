@@ -56,6 +56,8 @@ class App {
       Console.close();
       return;
     }
+    this.#game.retry();
+    InputView.readMoving(this.proceedStepTwo.bind(this));
   }
 
   checkGameProgress() {
