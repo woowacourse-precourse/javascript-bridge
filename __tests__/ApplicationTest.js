@@ -1,5 +1,7 @@
+const App = require('../src/App')
 const BridgeMaker = require('../src/BridgeMaker')
 const BridgeGame = require('../src/BridgeGame')
+const InputView = require('../src/InputView')
 const {
   mockQuestions,
   mockRandoms,
@@ -77,6 +79,17 @@ describe('다리 게임 테스트', () => {
 })
 
 describe('다리 건너기 테스트', () => {
+  test('다리 길이가 유효하지 않다면 반복적으로 입력 받아야 한다.', () => {
+    const logSpy = getLogSpy()
+    mockQuestions(['undefined', '', '2', '200', '3'])
+
+    const app = new App()
+    app.play()
+
+    const log = getOutput(logSpy)
+    expectLogContains(log, [InputView.error.BRIDGE_SIZE.repeat(4)])
+  })
+
   test('기능 테스트', () => {
     const logSpy = getLogSpy()
     mockRandoms([1, 0, 1])
