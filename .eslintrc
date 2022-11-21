@@ -4,6 +4,8 @@
     "no-restricted-syntax": ["error", "BinaryExpression[operator='in']"],
     "no-nested-ternary": ["off"],
     "no-unused-expressions": ["off"],
+    "jsdoc/require-param-description":["off"],
+    "jsdoc/require-returns-description":["off"],
     "max-depth": ["error", 2],
     "max-lines-per-function": ["error", 10],
     "prettier/prettier": [

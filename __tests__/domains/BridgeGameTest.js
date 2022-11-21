@@ -7,9 +7,8 @@ const BridgeGame = require('../../src/BridgeGame');
 const Bridge = require('../../src/Model/Bridge');
 const Selected = require('../../src/Model/Selected');
 const TryCnt = require('../../src/Model/TryCnt');
-const { ERROR_MESSAGE } = require('../../src/Utils/Constant');
 
-describe('Game 진행 테스트', () => {
+describe('Game 도메인 로직 테스트', () => {
   test('이동 input 입력시 game의 level값에 반영', () => {
     const game = new BridgeGame(new Selected(), new TryCnt());
     const inputArray = ['U', 'U', 'D'];
@@ -59,25 +58,5 @@ describe('Game 진행 테스트', () => {
     inputArray.forEach((input) => game.move(input));
 
     expect(game.result).toStrictEqual(resultArray);
-  });
-
-  test('이동시 입력 값이 U또는 D가 아닐 시 예외 출력', () => {
-    const game = new BridgeGame(new Selected(), new TryCnt());
-
-    const numberInput = 3;
-    const exceptString = 'R';
-    const lowerCaseString = 'u';
-
-    expect(() => {
-      game.move(numberInput);
-    }).toThrow(ERROR_MESSAGE.LEVEL_INPUT);
-
-    expect(() => {
-      game.move(exceptString);
-    }).toThrow(ERROR_MESSAGE.LEVEL_INPUT);
-
-    expect(() => {
-      game.move(lowerCaseString);
-    }).toThrow(ERROR_MESSAGE.LEVEL_INPUT);
   });
 });
