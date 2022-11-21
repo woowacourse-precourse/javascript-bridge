@@ -1,3 +1,50 @@
+# **📚 MVC 설계**
+- `App.js` : `Bridge` 객체를 생성 후 실행 시켜주는 역할.
+
+## **🗃️ Model**
+- `BridgeGame.js` : 게임 진행에 필요한 변수를 처리하거나 반환한다.
+- `BridgeMaker.js` : 다리의 길이를 입력 받아서 다리를 생성해준다.
+- `BridgeRandomNumberGenerator.js` : `0` 또는 `1`의 난수를 발생시켜 반환한다.
+- `Validator.js` : 유효성 검사를 하여, `boolean`값으로 반환하거나, `Error`를 발생시킨다.
+
+## **🖼️ View**
+- `InputView.js` : 입력값을 받는 역할.
+- `OutputView.js` : 출력값을 보여주는 역할.
+
+## **🎮 Controller**
+- `Bridge.js`: 다리 건너기 게임을 관리하는 역할.
+
+--- 
+
+# **🗂️ 디렉터리 구조 (Directory Structure)**
+
+    📂 docs/ : 전체 문서 모음
+    ┗━ 📂 img/ : 문서 이미지 관리
+            ┣━🖼️ mvc_role_diagram.png : MVC 첨부 이미지 파일
+            ┗━🖼️ FlowChart.png : 순서도 이미지 파일
+        ┗━ 📑 README.md : 애플리케이션 기획 및 구성
+    📂 __tests__/ : 테스트 관리 폴더
+    ┣━ 📑 ApplicationTest.js : 애플리케이션 전체 테스트
+    ┣━ 📑 BridgeGameTest.js : BridgeGame 단위 테스트
+    ┗━ 📑 BridgeMakerTest.js : BridgeMaker 단위 테스트
+    📂 src/ : 소스파일 폴더
+    ┗━ 📂 views : 입출력 담당 관리 폴더
+        ┣━ 📑 InputView.js : 사용자로부터 입력을 받는 역할을 한다.
+        ┗━ 📑 OutputView.js : 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다. 
+    ┗━ 📂 util : 유틸 관리 폴더
+        ┣━ 📑 constants.js : 상수 관리 파일
+        ┣━ 📑 ErrorMessage.js : 에러 메세지 문자열 관리 파일
+        ┣━ 📑 helper.js : 기타 추가 함수
+        ┗━ 📑 Message.js : 메세지 문자열 관리 파일
+    ┣━ 📑 App.js : Bridge 객체를 호출하는 파일
+    ┣━ 📑 Bridge.js : 게임 전체 프로세서를 관리하며, 필요한 값을 호출하는 파일
+    ┣━ 📑 BridgeGame.js : 게임을 진행시 변수를 저장하며, 필요한 값을 반환한다.
+    ┣━ 📑 BridgeMaker.js : 입력받은 사이즈 만큼 다리 생성
+    ┣━ 📑 BridgeRandomNumberGenerator.js : 난수 생성 파일 
+    ┗━ 📑 Validator.js : 유효성 검사 파일
+
+---
+
 # **⬇️ 다리 건너기 APP 순서도 (FlowChart)**
 
 <img src="img/FlowChart.png">
@@ -5,6 +52,7 @@
 <br/>
 
 ---
+
 # **🎮 [다리건너기] 기능 단위 구현 목록**
 
 작성방법 : 🟥: 미완성 / 🟧: 진행중 / ✅: 완료 / ❎: 리펙토링중
