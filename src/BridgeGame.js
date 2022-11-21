@@ -29,65 +29,44 @@ class BridgeGame {
    */
   retry() {}
 
-  checkUserMovingInput() {
-    if (this.userInput[this.userInput.length - 1] === this.#password[this.userInput.length - 1]) {
-      return true;
-    }
-    return false;
-  }
-  // [[upper, lower]]
-  forDrawingBridge(userInput, password) {
-    const arr = userInput.map((input, index) => (input === password[index] ? [input, true] : [input, false]));
-    return arr;
-  }
-  // [input, true]
   drawingBridge() {
-    const result = this.forDrawingBridge(this.userInput, this.#password);
-    const resultResult = result.map(userInputAndResult => {
-      this.moveYesOrNO(userInputAndResult);
+    const bridge = this.readyForDrawingBridge(this.userInput, this.#password);
+    return this.bridgeToStringConverter(bridge);
+  }
+
+  bridgeToStringConverter(vanilaBridge) {
+    const convertedBridge = vanilaBridge.map(side => {
+      return '[' + side.join('|') + ']';
     });
-    return this.finalConvert(resultResult);
+    return convertedBridge;
   }
 
-  finalConvert(result) {
-    const upside = result.map(upAndDown => upAndDown[0]);
-    const downside = result.map(upAndDown => upAndDown[0]);
+  readyForDrawingBridge(userMoveCollection, password) {
+    const upside = [];
+    const downside = [];
+    userMoveCollection.forEach((movingInput, index) => {
+      if (movingInput === password[index]) {
+        if (movingInput === 'U') {
+          upside.push(' O ');
+          downside.push('   ');
+        }
+        if (movingInput === 'D') {
+          upside.push('   ');
+          downside.push(' O ');
+        }
+      }
+      if (movingInput !== password[index]) {
+        if (movingInput === 'U') {
+          upside.push(' X ');
+          downside.push('   ');
+        }
+        if (movingInput === 'D') {
+          upside.push('   ');
+          downside.push(' X ');
+        }
+      }
+    });
     return [upside, downside];
-  }
-  // [input, true]
-
-  moveYesOrNO(result) {
-    const movable = result[1];
-    if (result[0] === 'U') {
-      return this.drawingUpperBridge(movable);
-    } else {
-      return this.drawingLowerBridge(movable);
-    }
-  }
-  //true
-  drawingUpperBridge(movable) {
-    const UpperBridge = [];
-    const lowerBridge = [];
-    if (movable === true) {
-      UpperBridge.push('O');
-      lowerBridge.push(' ');
-    } else {
-      UpperBridge.push('X');
-      lowerBridge.push(' ');
-    }
-    return [UpperBridge, lowerBridge];
-  }
-  drawingLowerBridge(movable) {
-    const UpperBridge = [];
-    const lowerBridge = [];
-    if (movable === true) {
-      UpperBridge.push(' ');
-      lowerBridge.push('O');
-    } else {
-      UpperBridge.push(' ');
-      lowerBridge.push('X');
-    }
-    return [UpperBridge, lowerBridge];
   }
 
   gameSuccessStatus() {
