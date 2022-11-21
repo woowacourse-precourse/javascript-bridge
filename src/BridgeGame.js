@@ -1,5 +1,5 @@
 const { O, X } = require("./constants");
-const { generateColumnMap } = require("./utils");
+const { generateColumnMap, stopWalking } = require("./utils");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -63,6 +63,11 @@ class BridgeGame {
       direction,
       matchSymbol,
     });
+  }
+
+  endStep(app, readAgain) {
+    const completed = this.hasCrossedCompletely();
+    stopWalking[completed]({ app, bridgeGame: this, readAgain });
   }
 
   /**
