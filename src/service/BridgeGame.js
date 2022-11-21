@@ -1,18 +1,23 @@
-const UserInteractor = require('../domain/usecases/UserInteractor');
-const BridgeInteractor = require('../domain/usecases/BridgeInteractor');
 const JudgeInteractor = require('../domain/usecases/JudgeInteractor');
-const ViewInteractor = require('../domain/usecases/ViewInteractor');
 const GameInteractor = require('../domain/usecases/GameInteractor');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor() {
-    this.userInteractor = new UserInteractor();
-    this.brigeInteractor = new BridgeInteractor();
+  constructor(UserInteractor, BridgeInteractor) {
+    this.userInteractor = UserInteractor;
+    this.brigeInteractor = BridgeInteractor;
     this.JudgeInteractor = new JudgeInteractor(this.userInteractor, this.brigeInteractor);
-    this.viewInteractor = new ViewInteractor(this.userInteractor, this.brigeInteractor);
     this.gameInteractor = new GameInteractor();
+  }
+
+  makeBridge(size) {
+    this.brigeInteractor.makeBridge(size);
+  }
+
+  init() {
+    this.gameInteractor.addTry();
+    this.userInteractor.init();
   }
 
   /**
@@ -20,7 +25,18 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(callback) {
+  move(direction) {
+    this.userInteractor.move(direction);
+  }
+
+  judge({ success, fending, failure }) {
+    if (this.JudgeInteractor.judge()) {
+      if (this.JudgeInteractor.isSucceed()) {
+        return success();
+      }
+      return fending();
+    }
+    failure();
   }
 
   /**
@@ -28,9 +44,13 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {
+  retryTrigger(command, { restart, exit }) {
+    this.gameInteractor.triggerGameCommand(command,  { restart, exit });
   }
 
+  exit(isSuccess) {
+    return { isSuccess, trys: this.gameInteractor.getTrys() };
+  }
 }
 
 module.exports = BridgeGame;
