@@ -10,9 +10,9 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
 
-    Array.from({ length: size }).forEach(
-      () => (bridge = [...bridge, generateRandomNumber()])
-    );
+    Array.from({ length: size }).forEach(() => {
+      bridge = [...bridge, generateRandomNumber() === 1 ? "U" : "D"];
+    });
 
     console.log(bridge);
 
