@@ -1,13 +1,13 @@
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
-const BridgeMaker = require("./BridgeMaker.js");
 const InputView = require("./View/InputView.js");
 const OutputView = require("./View/OutputView.js");
+
 const {
   bridgeLength,
   bridgeDirection,
   gameContinue,
 } = require("./utils/validate.js");
 const { DEFAULT } = require("./utils/constant.js");
+const { getBridgeMake } = require("./utils/utilityFuncions.js");
 
 const BridgeGame = require("./BridgeGame.js");
 
@@ -28,13 +28,10 @@ class App {
     );
     if (!isBridgeValidate) return;
 
-    const bridge = this.getBridgeMake(length);
+    const bridge = getBridgeMake(length);
     this.bridgeGame.setState({ length, bridge });
     InputView.readMoving(this.moveCallback);
   };
-
-  getBridgeMake = (length) =>
-    BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate);
 
   moveCallback = (input) => {
     const isDirectionValidate = bridgeDirection(input, () =>

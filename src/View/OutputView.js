@@ -13,8 +13,7 @@ const {
     WRONG,
   },
 } = require("../utils/constant.js");
-
-const checkIsZero = (value) => value === DEFAULT.ZERO;
+const { isZero } = require("../utils/utilityFuncions.js");
 
 const OutputView = {
   printInitialComment() {
@@ -29,10 +28,10 @@ const OutputView = {
     Console.print(
       `[${inputHistory.reduce((acc, cur, idx) => {
         if (cur === bridgeOpposition)
-          return (acc += checkIsZero(idx) ? FIRST_EMPTY : EMPTY);
+          return (acc += isZero(idx) ? FIRST_EMPTY : EMPTY);
         if (cur !== bridge[idx])
-          return (acc += checkIsZero(idx) ? FIRST_WRONG : WRONG);
-        return (acc += checkIsZero(idx) ? FIRST_RIGHT : RIGHT);
+          return (acc += isZero(idx) ? FIRST_WRONG : WRONG);
+        return (acc += isZero(idx) ? FIRST_RIGHT : RIGHT);
       }, DEFAULT.EMPTY_STRING)}]`,
     );
   },
@@ -59,7 +58,7 @@ const OutputView = {
   printUserInput(inputHistory, bridge) {
     OutputView.printMap(inputHistory, bridge, DEFAULT.DOWN);
     OutputView.printMap(inputHistory, bridge, DEFAULT.UP);
-    Console.print("");
+    Console.print(DEFAULT.EMPTY_STRING);
   },
 };
 

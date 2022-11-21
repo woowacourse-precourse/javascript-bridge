@@ -1,9 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { ERROR, DEFAULT } = require("./constant.js");
-
-const isNumber = (input) => isNaN(input);
-const isOverBridgeRange = (input) =>
-  input < DEFAULT.MIN_BRIDGE_NUM || input > DEFAULT.MAX_BRIDGE_NUM;
+const { isNumber, isOverBridgeRange } = require("./utilityFuncions.js");
 
 const bridgeLength = function bridgeLengthValidation(input, callback) {
   try {
