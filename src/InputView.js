@@ -1,3 +1,9 @@
+const { Console } = require("@woowacourse/mission-utils");
+const { NOTICE } = require("./constants");
+const { makeBridge } = require("./BridgeMaker");
+const { generate } = require("./BridgeRandomNumberGenerator");
+const { handleBridgeSizeInput } = require("./ErrorHandler");
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -5,7 +11,13 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize(app) {
+    Console.readLine(NOTICE.INPUT_SIZE, (bridgeSize) => {
+      handleBridgeSizeInput(app, bridgeSize);
+      const bridge = makeBridge(bridgeSize, generate);
+      app.createGame(bridge);
+    });
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
