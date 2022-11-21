@@ -1,21 +1,15 @@
 const { Console } = require("@woowacourse/mission-utils");
 const {
-  PRINT_FINISH_MSG,
   SEPARATOR,
+  PRINT_FINISH_MSG,
+  SUCCESS_OR_NOT,
   SUCCESS,
   FAIL,
-  SUCCESS_OR_NOT,
   COUNT_TRY,
 } = require("../Messages/constants");
 
-let upsideBridge = [];
-let downsideBridge = [];
-
-const INPUT_UP = "U";
-const INPUT_DOWN = "D";
-
 const OutputView = {
-  printMap() {
+  printMap(upsideBridge, downsideBridge) {
     Console.print(
       `\[ ${upsideBridge.join(SEPARATOR)} \]\n\[ ${downsideBridge.join(
         SEPARATOR
@@ -23,38 +17,12 @@ const OutputView = {
     );
   },
 
-  makeMap(input, isCorrect) {
-    this.drawBridge(input, isCorrect);
-    this.printMap();
-  },
-
-  drawBridge(input, isCorrect) {
-    if (input == INPUT_UP) this.drawUpside(isCorrect);
-    if (input == INPUT_DOWN) this.drawDownside(isCorrect);
-  },
-
-  drawUpside(isCorrect) {
-    isCorrect ? upsideBridge.push("O") : upsideBridge.push("X");
-    downsideBridge.push(" ");
-  },
-
-  drawDownside(isCorrect) {
-    isCorrect ? downsideBridge.push("O") : downsideBridge.push("X");
-    upsideBridge.push(" ");
-  },
-
-  clearMap() {
-    upsideBridge = [];
-    downsideBridge = [];
-  },
-
-  printResult(isClear, gameCount) {
+  printResult(isClear, gameCount, bridge) {
     Console.print(
-      `${PRINT_FINISH_MSG}\n\[ ${upsideBridge.join(
+      `${PRINT_FINISH_MSG}\n\[ ${bridge[0].join(
         SEPARATOR
-      )} \]\n\[ ${downsideBridge.join(SEPARATOR)} \]\n`
+      )} \]\n\[ ${bridge[1].join(SEPARATOR)} \]\n`
     );
-    this.clearMap();
     this.printFinishMsg(isClear, gameCount);
   },
 
