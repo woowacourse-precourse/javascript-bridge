@@ -10,9 +10,6 @@ const OutputView = require("../views/OutputView");
 class BrideGameController {
   #bridgeGame;
 
-  constructor() {
-  }
-
   start() {
     OutputView.printIntialMessage();
     this.#readBridgeSizePhase();
