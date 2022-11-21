@@ -54,3 +54,8 @@
   - `npm install --save-dev --save-exact prettier`로 prettier를 설치한다.
   - `echo {}> .prettierrc.json`로 prettier 규칙을 작성할 파일을 생성한다.
   - eslint와 충돌할 것을 대비하여 `npm install --save-dev eslint-config-prettier` 를 설치한 뒤 eslint 규칙 설정 파일의 extends에 `"prettier"`를 추가한다. ([출처](https://prettier.io/docs/en/integrating-with-linters.html))
+
+## 리팩토링
+
+- [x] InputView, OutputView에서 Input, Output의 책임만 갖도록 변경한다.
+  - [x] readLineAsync 함수 추가하여 readLine의 callback loop를 최소화한다.
