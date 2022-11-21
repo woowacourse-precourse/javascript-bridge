@@ -15,10 +15,11 @@ class BridgeView {
    */
   getBridgeLength(printLength) {
     const validation = (length) => {
-      this.inputValidation(length, printLength, TYPE.SIZE);
-      this.getBridgeLength(printLength);
+      const pass = this.inputValidation(length, TYPE.SIZE);
+
+      pass ? printLength(length) : this.getBridgeLength(printLength);
     };
-    this.output.printStart();
+
     this.input.readBridgeSize(validation);
   }
 
@@ -28,7 +29,9 @@ class BridgeView {
    */
   getWhereToGo(updateMove) {
     const validation = (destination) => {
-      this.inputValidation(destination, updateMove, TYPE.STEP);
+      const pass = this.inputValidation(destination, TYPE.STEP);
+
+      pass ? updateMove(destination) : this.getWhereToGo(updateMove);
     };
     this.input.readMoving(validation);
   }
@@ -39,9 +42,20 @@ class BridgeView {
    */
   getWhatToDo(getCommand) {
     const validation = (command) => {
-      this.inputValidation(command, getCommand, TYPE.RETRY);
+      const pass = this.inputValidation(command, TYPE.RETRY);
+
+      pass ? getCommand(command) : this.getWhatToDo(getCommand);
     };
     this.input.readGameCommand(validation);
+  }
+
+  /**
+   * 게임 시작시 시작 메세지를 출력하고, 다음 메서드에 콜백함수 전달하는 메서드
+   * @param {function} printLength - Controller에서 실행할 콜백함수
+   */
+  printGameStart(printLength) {
+    this.output.printStart();
+    this.getBridgeLength(printLength);
   }
 
   /**
@@ -71,18 +85,17 @@ class BridgeView {
   }
 
   /**
-   * * 유효성 검사에 문제가 없다면, callback 함수를 실행합니다.
+   * * 유효성 검사에 문제가 없다면, true를 반환합니다.
    * * 유효성 검사에 문제가 있다면, printError 메서드를 실행합니다.
    * @param {string | number} input
-   * @param {function} callback
-   * @param {string} type
+   * @param {string} inputType
    */
-  inputValidation(input, callback, type) {
+  inputValidation(input, inputType) {
     try {
-      Validation[type](input);
-      callback(input);
+      return Validation[inputType](input);
     } catch (errorType) {
       this.printError(errorType);
+      return false;
     }
   }
 }

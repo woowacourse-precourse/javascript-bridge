@@ -15,7 +15,7 @@ class BridgeGame {
       this.model.buildBridge(length);
       this.move();
     };
-    this.view.getBridgeLength(printLength);
+    this.view.printGameStart(printLength);
   }
 
   /**
