@@ -22,6 +22,11 @@ class InputValidator {
     this.isRightRange(string);
   }
 
+  static isUpDown (string) {
+    this.isBlank(string);
+    if (string !== 'U' && string !== 'D') throw new Error(INPUT_ERROR.MOVE_INPUT_IS_U_OR_D);
+  }
+
 }
 
 module.exports = InputValidator;
