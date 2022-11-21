@@ -4,7 +4,6 @@ const OutputView = require('../view/OutputView.js');
 const BridgeMaker = require('../BridgeMaker.js');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator.js');
 const Bridge = require('../model/Bridge.js');
-const { Console } = require('@woowacourse/mission-utils');
 const StepResult = require('../model/StepResult.js');
 
 class BridgeGameController {
@@ -34,7 +33,7 @@ class BridgeGameController {
   }
 
   playTurn(move) {
-    const thisTurnAnswer = this.bridge.answerArray[this.turn];
+    const thisTurnAnswer = this.bridge.answerArray[this.bridgeGame.turn];
     this.bridgeGame.move(thisTurnAnswer, move, this.stepResult);
     const isWrongAnswer = !this.bridgeGame.isThisTurnCorrect(thisTurnAnswer, move);
     OutputView.printMap(this.stepResult);
@@ -55,7 +54,7 @@ class BridgeGameController {
   retry() {
     this.bridgeGame.retry();
     this.stepResult.retry();
-      InputView.readMoving(this.moveByUser.bind(this));
+    InputView.readMoving(this.moveByUser.bind(this));
   }
 }
 
