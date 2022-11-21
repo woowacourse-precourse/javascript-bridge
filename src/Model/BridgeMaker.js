@@ -12,13 +12,16 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
 
-    for (let i = 0; i < size; i++) {
+    for (let cnt = 0; cnt < size; cnt++) {
       const randomValue = generateRandomNumber();
-      
+
       bridge.push(
-        Number(randomValue) === BRIDGE_SIGN.UPPER_NUM ? BRIDGE_SIGN.UPPER : BRIDGE_SIGN.LOWER
+        Number(randomValue) === BRIDGE_SIGN.UPPER_NUM
+          ? BRIDGE_SIGN.UPPER
+          : BRIDGE_SIGN.LOWER
       );
     }
+
     return bridge;
   },
 };
