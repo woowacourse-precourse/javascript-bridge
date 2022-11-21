@@ -19,9 +19,19 @@ const MissionUtils = require("@woowacourse/mission-utils");
   },
 
   /**
-   * 사용자가 이동할 칸을 입력받는다.
+   * 사용자가 이동할 칸을 입력받는 함수 + 예외처리
    */
-  readMoving() {},
+  readMoving(callback) {
+    MissionUtils.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)", (input) => {
+      try {
+        if ((input != "U")&&(input != "D")) throw new Error("[ERROR] U/D으로 입력 바랍니다.")
+        callback(input)
+      } catch (err) {
+        MissionUtils.Console.print(err.message) ;
+        InputView.readMoving(callback) ;
+      }
+    })
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
