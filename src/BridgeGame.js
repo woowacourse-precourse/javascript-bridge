@@ -1,25 +1,27 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const OutputView = require("./OutputView");
-const InputView = require("./InputView");
 const BridgeValidator = require("./utils/BridgeValidator");
 const { BRIDGE_LENGTH } = require("./constants/gameState");
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const DirectionValidator = require("./utils/DirectionValidator");
+const BridgeGameController = require("./BridgeGameController");
 
 class BridgeGame {
   #bridge;
+  #totalCount;
+  #bridgeGameController;
+
   constructor() {
-    OutputView.printStart();
-    InputView.game = this;
-    InputView.readBridgeSize();
+    this.#bridgeGameController = new BridgeGameController();
+    this.#totalCount = 0;
   }
 
-  start(bridgeSize) {
+  startGame(bridgeSize) {
     this.validateBridgeLength(bridgeSize);
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, generate);
+    // Console.print(this.#bridge); //지우기
   }
 
   validateBridgeLength(size) {
@@ -27,10 +29,9 @@ class BridgeGame {
       BridgeValidator.isInRange(size, BRIDGE_LENGTH.START, BRIDGE_LENGTH.END);
       BridgeValidator.isNumber(size);
     } catch (e) {
-      OutputView.printError(e);
-      return InputView.readBridgeSize();
+      this.#bridgeGameController.outputError(e);
+      this.#bridgeGameController.inputBridgeSize();
     }
-    return true;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -45,8 +46,8 @@ class BridgeGame {
     try {
       DirectionValidator.validateDirection(direction);
     } catch (e) {
-      OutputView.printError(e);
-      return InputView.readMoving();
+      this.#bridgeGameController.outputError(e);
+      this.#bridgeGameController.inputDirection();
     }
   }
 

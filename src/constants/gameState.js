@@ -3,4 +3,8 @@ const BRIDGE_LENGTH = Object.freeze({
   END: 20,
 });
 
-module.exports = { BRIDGE_LENGTH };
+const DIRECTION = Object.freeze({
+  UP: "U",
+  DOWN: "D",
+});
+module.exports = { BRIDGE_LENGTH, DIRECTION };
