@@ -20,17 +20,17 @@ class BridgeGame {
   checkStatus() {
     const lastTrial = [...this.trials].pop();
 
-    if (lastTrial.result === GAME_SIGNATURE.pass && this.trials.length === this.bridge.length) {
-      this.status = GAME_SIGNATURE.gameSuccess;
-      return;
-    }
+    if (this.isGameSuccess(lastTrial)) this.status = GAME_SIGNATURE.gameSuccess;
+    else if (this.isGameFailed(lastTrial)) this.status = GAME_SIGNATURE.gameFail;
+    else this.status = GAME_SIGNATURE.gameOn;
+  }
 
-    if (lastTrial.result === GAME_SIGNATURE.fail) {
-      this.status = GAME_SIGNATURE.gameFail;
-      return;
-    }
+  isGameSuccess(lastTrial) {
+    return lastTrial.result === GAME_SIGNATURE.pass && this.trials.length === this.bridge.length;
+  }
 
-    this.status = GAME_SIGNATURE.gameOn;
+  isGameFailed(lastTrial) {
+    return lastTrial.result === GAME_SIGNATURE.fail;
   }
 
   getStage() {
@@ -39,7 +39,6 @@ class BridgeGame {
 
   getTrialResult(trialDirection, stage) {
     const answerDirection = this.bridge[stage];
-
     return answerDirection === trialDirection ? GAME_SIGNATURE.pass : GAME_SIGNATURE.fail;
   }
 
@@ -49,6 +48,7 @@ class BridgeGame {
       result: this.getTrialResult(trialDirection, stage),
     });
   }
+
   retry() {
     this.trialCount += 1;
     this.trials = [];
