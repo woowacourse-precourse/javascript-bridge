@@ -31,10 +31,12 @@ const OutputView = {
 
   printErrorLog(error) {
     MissionUtils.Console.print(error.message);
+    MissionUtils.Console.print('\n');
   },
 
   printGameStartMessage() {
     MissionUtils.Console.print(Message.GAME_START);
+    MissionUtils.Console.print('\n');
   },
 };
 
