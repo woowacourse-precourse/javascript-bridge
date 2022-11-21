@@ -52,6 +52,13 @@ class App {
       this.restart();
     }
   }
+
+  restart() {
+    this.inputView.readRestart(
+      this.restartCallback.bind(this),
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)"
+    );
+  }
 }
 
 module.exports = App;
