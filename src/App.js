@@ -40,7 +40,6 @@ class App {
 
   playGame(move) {
     this.bridgeGame.move(move);
-    const status = this.bridgeGame.getUserStatus();
 
     if (this.bridgeGame.isEnd(move)) {
       InputView.readGameCommand(this.getRetry.bind(this));
