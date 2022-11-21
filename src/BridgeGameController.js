@@ -32,13 +32,25 @@ class BridgeGameController {
   }
 
   checkStatus() {
+    if (this.#bridgeGame.isGameOver()) {
+      return this.checkSuccessful();
+    }
+    return this.askMove();
+  }
+
+  checkSuccessful() {
     if (this.#bridgeGame.isSuccessful()) {
       return this.finishGame();
     }
-    if (this.#bridgeGame.isGameOver()) {
-      return this.askRetry();
-    }
-    return this.askMove();
+    return this.askRetry();
+  }
+
+  finishGame() {
+    OutputView.printResult(
+      this.#bridgeGame.getBridgeMap(),
+      this.#bridgeGame.isSuccessful(),
+      this.#bridgeGame.getNumberOfAttempts()
+    );
   }
 
   askRetry() {
@@ -51,14 +63,6 @@ class BridgeGameController {
       return this.askMove();
     }
     return this.finishGame();
-  }
-
-  finishGame() {
-    OutputView.printResult(
-      this.#bridgeGame.getBridgeMap(),
-      this.#bridgeGame.isSuccessful(),
-      this.#bridgeGame.getNumberOfAttempts()
-    );
   }
 }
 
