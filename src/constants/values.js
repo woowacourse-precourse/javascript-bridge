@@ -8,7 +8,11 @@ const INPUT_VALUE = {
 const STATES = {
   SUCCESS: "성공",
   FAIL: "실패",
+
+  RIGHT: "O",
+  WRONG: "X",
 };
+
 module.exports = {
   INPUT_VALUE,
   STATES,

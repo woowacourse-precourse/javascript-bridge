@@ -1,4 +1,4 @@
-const { INPUT_VALUE } = require("./constants/values");
+const { INPUT_VALUE, STATES } = require("./constants/values");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -61,19 +61,19 @@ class BridgeGame {
 
   move(userInput) {
     if (userInput === INPUT_VALUE.UP) {
-      this.#currentBridge.push([INPUT_VALUE.UP, "O"]);
+      this.#currentBridge.push([INPUT_VALUE.UP, STATES.RIGHT]);
     }
     if (userInput === INPUT_VALUE.DOWN) {
-      this.#currentBridge.push([INPUT_VALUE.DOWN, "O"]);
+      this.#currentBridge.push([INPUT_VALUE.DOWN, STATES.RIGHT]);
     }
   }
 
   stop(userInput) {
     if (userInput === INPUT_VALUE.UP) {
-      this.#currentBridge.push([INPUT_VALUE.UP, "X"]);
+      this.#currentBridge.push([INPUT_VALUE.UP, STATES.FAIL]);
     }
     if (userInput === INPUT_VALUE.DOWN) {
-      this.#currentBridge.push([INPUT_VALUE.DOWN, "X"]);
+      this.#currentBridge.push([INPUT_VALUE.DOWN, STATES.FAIL]);
     }
   }
 
