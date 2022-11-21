@@ -23,7 +23,6 @@ const InputView = {
   readMoving() {
     let moveDirection;
     Console.readLine(ConstValue.INPUT_MOVE_SELECT_MESSAGE, value => {
-      // 입력값 예외 검증
       moveDirection = value;
     });
 
@@ -34,12 +33,12 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    let input;
+    let command;
     Console.readLine(ConstValue.INPUT_RESTART_MESSAGE, value => {
       input = value;
     });
 
-    return input;
+    return command;
   },
 };
 
