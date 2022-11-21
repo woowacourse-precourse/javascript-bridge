@@ -77,10 +77,10 @@ class Controller {
       this.readCommand();
       return;
     }
-    this.turnOnOffGame(command);
+    this.decideContinue(command);
   };
 
-  turnOnOffGame(command) {
+  decideContinue(command) {
     if (command === RESTART_COMMAND) {
       this.#bridgeGame.retry();
       this.readMove();
