@@ -8,7 +8,9 @@ const BridgeGameController = {
   },
 
   setBridge(bridgeGame) {
-    InputView.readBridgeSize((size) => {});
+    InputView.readBridgeSize((size) => {
+      bridgeGame.setBridge(size);
+    });
   },
 };
 
