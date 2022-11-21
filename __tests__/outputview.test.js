@@ -1,45 +1,46 @@
 const OutputView = require('../src/views/OutputView');
 const MissionUtils = require('@woowacourse/mission-utils');
-const { printMap } = require('../src/views/OutputView');
 
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
-};
-
-const getOutput = (logSpy) => {
-  return [...logSpy.mock.calls].join('');
-};
+const logSpy = jest.spyOn(MissionUtils.Console, 'print');
 
 describe('다리 화면 출력 확인하기', () => {
-  test('bridgeMap 생성 테스트 1', () => {
-    const trials = [
-      { direction: 'U', result: 'O' },
-      { direction: 'D', result: 'X' },
-      { direction: 'D', result: 'O' },
-      { direction: 'U', result: 'X' },
-    ];
+  const trials1 = [
+    { direction: 'U', result: 'O' },
+    { direction: 'D', result: 'O' },
+    { direction: 'D', result: 'O' },
+    { direction: 'U', result: 'X' },
+  ];
 
-    expect(OutputView.getBridgeMap(trials)).toEqual([
+  const trials2 = [
+    { direction: 'D', result: 'O' },
+    { direction: 'U', result: 'O' },
+    { direction: 'U', result: 'O' },
+    { direction: 'U', result: 'X' },
+  ];
+
+  test('bridgeMap 생성 테스트 (케이스1)', () => {
+    expect(OutputView.getBridgeMap(trials1)).toEqual([
       '[ O |   |   | X ]',
-      '[   | X | O |   ]',
+      '[   | O | O |   ]',
       '\n',
     ]);
   });
 
-  test('bridgeMap 생성 테스트 2', () => {
-    const trials = [
-      { direction: 'D', result: 'O' },
-      { direction: 'U', result: 'X' },
-      { direction: 'U', result: 'O' },
-      { direction: 'U', result: 'X' },
-    ];
-
-    expect(OutputView.getBridgeMap(trials)).toEqual([
-      '[   | X | O | X ]',
+  test('bridgeMap 생성 테스트 (케이스2)', () => {
+    expect(OutputView.getBridgeMap(trials2)).toEqual([
+      '[   | O | O | X ]',
       '[ O |   |   |   ]',
       '\n',
     ]);
+  });
+
+  test('printMap 출력 테스트 (케이스1)', () => {
+    OutputView.printMap(trials1);
+    expect(logSpy).toHaveBeenCalledWith('[ O |   |   | X ]\n[   | O | O |   ]\n');
+  });
+
+  test('printMap 출력 테스트 (케이스2)', () => {
+    OutputView.printMap(trials2);
+    expect(logSpy).toHaveBeenCalledWith('[   | O | O | X ]\n[ O |   |   |   ]\n');
   });
 });
