@@ -20,8 +20,8 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   canMove(input) {
-    console.log(this.#bridge);
-    if (!["U", "D"].includes(input)) throw "[ERROR]";
+    if (!["U", "D"].includes(input))
+      throw "[ERROR] U, D 이외의 문자는 오류가 발생합니다.";
     if (input === this.#bridge[this.#currentIdx]) return true;
     return false;
   }
