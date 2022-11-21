@@ -1,12 +1,13 @@
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
+const Bridge = require('./Bridge');
 const User = require('./User');
+
 const { UI_COMPONENT, GAME_STATUS } = require('./constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridge = [];
   #status = '';
   #footprint = {
     upside: [],
@@ -25,9 +26,11 @@ class BridgeGame {
 
   constructor(size) {
     this.user = new User();
-    this.#bridge = BridgeMaker.makeBridge(
-      Number(size),
-      BridgeRandomNumberGenerator.generate,
+    this.bridge = new Bridge(
+      BridgeMaker.makeBridge(
+        Number(size),
+        BridgeRandomNumberGenerator.generate,
+      ),
     );
   }
 
@@ -35,15 +38,26 @@ class BridgeGame {
     return this.#status;
   }
 
-  setStaus() {
+  getCurrent() {
     const index = this.user.getIndex();
-    const isCorrect = this.#bridge[index] === this.user.getRoute()[index];
-    const isEnd = index + 1 === this.#bridge.length;
-    if (isEnd && isCorrect) {
+    const isCorrect =
+      this.bridge.getRoute()[index] === this.user.getRoute()[index];
+    const isEnd = index + 1 === this.bridge.getRoute().length;
+
+    return {
+      index,
+      isCorrect,
+      isEnd,
+    };
+  }
+
+  setStaus() {
+    const current = this.getCurrent();
+    if (current.isEnd && current.isCorrect) {
       this.#status = GAME_STATUS.END;
-    } else if (!isEnd && isCorrect) {
+    } else if (!current.isEnd && current.isCorrect) {
       this.#status = GAME_STATUS.NEXT;
-    } else if (!isCorrect) {
+    } else if (!current.isCorrect) {
       this.#status = GAME_STATUS.FAIL;
     }
     return this;
@@ -54,12 +68,13 @@ class BridgeGame {
   }
 
   setFootprint() {
-    const index = this.user.getIndex();
+    const current = this.getCurrent();
     const result =
-      this.user.getRoute()[index] === this.#bridge[index]
+      this.user.getRoute()[current.index] ===
+      this.bridge.getRoute()[current.index]
         ? UI_COMPONENT.CORRECT
         : UI_COMPONENT.INCORRECT;
-    this.MAKE_MOVE_MAP[this.user.getRoute()[index]](result);
+    this.MAKE_MOVE_MAP[this.user.getRoute()[current.index]](result);
   }
 
   /**
