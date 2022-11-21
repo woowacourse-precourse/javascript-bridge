@@ -72,12 +72,12 @@ class App {
   }
 
   quit() {
-    const [playerUpperBridgeState, playerLowerBridgeState, isSuccess, attempsCount] =
+    const [playerUpperBridgeState, playerLowerBridgeState, result] =
       this.bridgeGame.getResult();
 
-    OutputView.printMsg(GAME_MESSAGE.TOTAL_RESULT);
+    OutputView.printMsg(`\n${GAME_MESSAGE.TOTAL_RESULT}`);
     OutputView.printMap(playerUpperBridgeState, playerLowerBridgeState);
-    OutputView.printResult(isSuccess, attempsCount);
+    OutputView.printResult(result);
     OutputView.end();
   }
 }

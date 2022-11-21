@@ -1,4 +1,9 @@
-const { GAME_OPTION, BRIDGE_SIGN, OUTPUT_MARK } = require("../Utils/Constants");
+const {
+  RESULT,
+  GAME_OPTION,
+  BRIDGE,
+  OUTPUT_MARK,
+} = require("../Utils/Constants");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -8,8 +13,10 @@ class BridgeGame {
     this.computerBridge = computerBridge;
     this.playerUpperBridgeState = [];
     this.playerLowerBridgeState = [];
-    this.isSuccess = GAME_OPTION.SUCCESS;
-    this.attempsCount = GAME_OPTION.ATTEMPTS_COUNT_INIT;
+    this.result = new Map([
+      [RESULT.IS_SUCCESS, GAME_OPTION.SUCCESS],
+      [RESULT.TOTAL_ATTEMPTS_COUNT, GAME_OPTION.ATTEMPTS_COUNT_INIT],
+    ]);
   }
 
   init() {
@@ -28,8 +35,9 @@ class BridgeGame {
    */
   move(direction) {
     const canCross = this.isSameDirection(direction);
-    this.isSuccess = canCross ? GAME_OPTION.SUCCESS : GAME_OPTION.FAIL;
+    const successOrFail = canCross ? GAME_OPTION.SUCCESS : GAME_OPTION.FAIL;
 
+    this.result.set(RESULT.IS_SUCCESS, successOrFail);
     this.makePlayerBridgeState(direction, canCross);
 
     return [canCross, this.playerUpperBridgeState, this.playerLowerBridgeState];
@@ -42,17 +50,17 @@ class BridgeGame {
   }
 
   makePlayerBridgeState(direction, canCross) {
-    if (direction === BRIDGE_SIGN.UPPER) {
+    if (direction === BRIDGE.UPPER) {
       canCross
-        ? this.playerUpperBridgeState.push(BRIDGE_SIGN.POSSIBLE)
-        : this.playerUpperBridgeState.push(BRIDGE_SIGN.IMPOSSIBLE);
+        ? this.playerUpperBridgeState.push(BRIDGE.POSSIBLE_MARK)
+        : this.playerUpperBridgeState.push(BRIDGE.IMPOSSIBLE_MARK);
       this.playerLowerBridgeState.push(OUTPUT_MARK.BLANK);
     }
 
-    if (direction === BRIDGE_SIGN.LOWER) {
+    if (direction === BRIDGE.LOWER) {
       canCross
-        ? this.playerLowerBridgeState.push(BRIDGE_SIGN.POSSIBLE)
-        : this.playerLowerBridgeState.push(BRIDGE_SIGN.IMPOSSIBLE);
+        ? this.playerLowerBridgeState.push(BRIDGE.POSSIBLE_MARK)
+        : this.playerLowerBridgeState.push(BRIDGE.IMPOSSIBLE_MARK);
       this.playerUpperBridgeState.push(OUTPUT_MARK.BLANK);
     }
   }
@@ -64,15 +72,17 @@ class BridgeGame {
    */
   retry() {
     this.init();
-    this.attempsCount++;
+
+    const attemptsCount = this.result.get(RESULT.TOTAL_ATTEMPTS_COUNT) + 1;
+
+    this.result.set(RESULT.TOTAL_ATTEMPTS_COUNT, attemptsCount);
   }
 
   getResult() {
     return [
       this.playerUpperBridgeState,
       this.playerLowerBridgeState,
-      this.isSuccess,
-      this.attempsCount,
+      this.result,
     ];
   }
 }
