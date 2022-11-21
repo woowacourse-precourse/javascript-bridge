@@ -4,6 +4,7 @@ const {
   printMap,
   printResult,
   printStart,
+  printEmptyLine,
 } = require('./OutputView');
 const BridgeMap = require('./BridgeMap');
 const {
@@ -82,6 +83,7 @@ class BridgeGameController {
   renderMap() {
     BridgeMap.generate(this.#model.getBridge(), this.#model.getUserMove());
     printMap();
+    printEmptyLine();
   }
 
   setCurrentResult() {
