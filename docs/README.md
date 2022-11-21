@@ -76,15 +76,17 @@
 
   - [ ] 다리와 플레이어의 상호작용을 책임지는 객체#BridgeInteractPlayer
 
-    - [ ] 플레이어가 다리를 만드는 기능#playerInputBridgeSize()
+    - [x] 플레이어가 다리를 만드는 기능#playerInputBridgeSize()
 
-    - [ ] 플레이어가 위 아래 선택해서 전진하는 기능 #playerInputBridgeDirection()
+    - [] 플레이어가 위 아래 선택해서 전진하는 기능 #playerInputBridgeDirection()
 
     - [ ] 플레이어가 게임을 재시작 여부를 정하는 기능 #playerInputCommandBridgeRetry()
 
   - [ ] 다리건너기 게임의 다리 출력 모양을 계산하는 객체 #BridgeGameShape
 
     - [ ] 다리건너기 게임의 중간 결과를 문자열로 반환하는 기능#getCurrentBridgeGameShape
+    - [ ] 다리 위쪽 모양을 만드는 기능#makeUpShape
+    - [ ] 다리 아래쪽 모양을 만드는 기능#makeDownShape
 
   - [ ] 다리 건너기 게임 #BridgeGame
 
