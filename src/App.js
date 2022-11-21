@@ -42,7 +42,13 @@ class App {
     }
   }
 
-  play() {}
+  play() {
+    try {
+      this.#play();
+    } catch (error) {
+      OutputView.printErrorLog(error);
+    }
+  }
 
   startGame(bridgeLength) {
     let bridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
@@ -65,6 +71,21 @@ class App {
     const resultStatus = this.#game.move(direction);
     this.#logger.logMoveResult(direction, resultStatus);
     return resultStatus;
+  }
+
+  #play() {
+    OutputView.printGameStartMessage();
+    this.startGame(App.requestUserInput(InputView.readBridgeSize));
+    const isSuccess = this.#singleGameLoop();
+    OutputView.printResult(this.#logger, isSuccess);
+  }
+
+  #singleGameLoop() {
+    while (true) {
+      this.#logger.logNewTrial();
+      if (this.playSingleGame() === GameConfig.STATUS_SUCCESS) return true;
+      if (this.requestUserInput(InputView.readGameCommand) === GameConfig.QUIT) return false;
+    }
   }
 }
 
