@@ -31,7 +31,13 @@ class BridgeGameManager {
     OutputView.printMap(bridgeGame.getCurrentState());
     if (gameState === GAME_STATE.PASS)
       return InputView.readMoving(this.manageMoving.bind(this));
-    if (gameState === GAME_STATE.FAIL) return InputView.readGameCommand();
+    if (gameState === GAME_STATE.FAIL)
+      return InputView.readGameCommand(this.manageRetry.bind(this));
+  }
+
+  manageRetry(command) {
+    Validation.checkGameCommand(command);
+    if (command === "R") bridgeGame.retry();
   }
 }
 
