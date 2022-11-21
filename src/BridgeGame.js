@@ -8,6 +8,7 @@ const { makeBridge } = require("./BridgeMaker");
   constructor() {
     this.currSpot = 0 ;
     this.tryCount = 1 ;
+    this.printMap = [[],[]] ;
     this.bridge ;
   }
 
@@ -20,12 +21,19 @@ const { makeBridge } = require("./BridgeMaker");
     this.bridge =  makeBridge(num, generate) ; //ex. ["U","D","D"]
   }
 
-  /**
+   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {string} userUD User에게 받은 U/D
+   * @return {string} User의 U/D와 정답다리의 일치여부
    */
-  move() {}
+    move(userUD) {
+      let nowbridge = this.bridge[this.currSpot] ;
+      if (userUD == nowbridge) this.addPrintMap(userUD, "O") ;  //addPrintMap = 프린트용 배열에 요소 넣기 함수
+      else this.addPrintMap(userUD, "X")
+      this.currSpot++ ;
+      return userUD == nowbridge ? "Go" : "Stop" ;
+    }
+  
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
