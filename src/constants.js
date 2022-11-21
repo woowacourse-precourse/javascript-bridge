@@ -11,6 +11,12 @@ const MIN_BRIDGE_SIZE = 3;
 const MAX_BRIDGE_SIZE = 20;
 const MOVE_UP = 'U';
 const MOVE_DOWN = 'D';
+const SUCCESS = 'O';
+const FAIL = 'X';
+const BLANK = ' ';
+const START_BRIDGE = '[';
+const END_BRIDGE = ']';
+const BAR = ' | ';
 const RESULT_MSG = '\n최종 게임 결과';
 const FAIL_MSG = '게임 성공 여부: 실패\n';
 const SUCCESS_MSG = '\n게임 성공 여부: 성공';
@@ -31,4 +37,10 @@ module.exports = {
   FAIL_MSG,
   SUCCESS_MSG,
   TOTAL_COUNT_MSG,
+  SUCCESS,
+  FAIL,
+  BLANK,
+  START_BRIDGE,
+  END_BRIDGE,
+  BAR,
 };
