@@ -191,3 +191,8 @@
 
 - `InputView`에 데이터를 검증하고 저장하는 로직을 추가
 - `printView`와 `InputView`와 동일한 데이터(객체)를 다뤄야 한다고 판단, Controller객체를 싱글톤으로 구현
+
+### 2차
+
+- 브릿지 게임 결과 데이터를 구하는 `BridgeCheck` 클래스에 userBridgeMap 정보와 전체 게임 결과 내용을 도출하는 내용이 있어
+  객체의 단일책임 원칙에 위반된다고 생각해 `BridgeUserMap`, `BridgeFinalResult` 클래스로 분리하였습니다.
