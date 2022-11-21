@@ -33,7 +33,7 @@ const OutputView = {
         if (cur !== bridge[idx])
           return (acc += checkIsZero(idx) ? FIRST_WRONG : WRONG);
         return (acc += checkIsZero(idx) ? FIRST_RIGHT : RIGHT);
-      }, "")}]`,
+      }, DEFAULT.EMPTY_STRING)}]`,
     );
   },
 
@@ -59,6 +59,7 @@ const OutputView = {
   printUserInput(inputHistory, bridge) {
     OutputView.printMap(inputHistory, bridge, DEFAULT.DOWN);
     OutputView.printMap(inputHistory, bridge, DEFAULT.UP);
+    Console.print("");
   },
 };
 

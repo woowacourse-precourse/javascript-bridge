@@ -1,6 +1,7 @@
 const DEFAULT = Object.freeze({
   ZERO: 0,
   EMPTY_ARRAY: [],
+  EMPTY_STRING: "",
   ONE: 1,
   TRUE: true,
   FALSE: false,
