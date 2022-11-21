@@ -31,6 +31,8 @@ const ERROR = {
 const GAME_RESULT = {
   SUCCESS: '성공',
   FAIL: '실패',
+  O: '성공',
+  X: '실패',
 };
 
 const MOVE = {
@@ -38,4 +40,6 @@ const MOVE = {
   FAIL: 'X',
 };
 
-module.exports = { MESSAGE, RULE, ERROR, COMMAND, GAME_RESULT, MOVE, IS_RETRY };
+const RETRY_OR_EXIT = ['R', 'Q'];
+
+module.exports = { MESSAGE, RULE, RETRY_OR_EXIT, ERROR, COMMAND, GAME_RESULT, MOVE, IS_RETRY };

@@ -1,4 +1,4 @@
-const { checkPossibleCommand } = require('../Utils');
+const { checkPossibleCommand } = require('../Utils/Utils');
 
 class BridgeCommand {
   #command;

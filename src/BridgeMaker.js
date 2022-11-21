@@ -1,4 +1,4 @@
-const { COMMAND } = require('./Constants.js');
+const { COMMAND } = require('./Utils/Constants.js');
 
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {

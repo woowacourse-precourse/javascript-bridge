@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { ERROR, RULE, COMMAND, RETRY_OR_EXIT } = require('./Constants');
+const { ERROR, RULE, COMMAND, RETRY_OR_EXIT, IS_RETRY } = require('./Constants');
 
 const playerInput = (message, callback) => {
   Console.readLine(message, callback);
@@ -43,6 +43,14 @@ const checkHasKey = (key) => {
   }
 };
 
+const isRetry = (input) => {
+  return input === IS_RETRY.YES;
+};
+
+const isQuit = (input) => {
+  return input === IS_RETRY.NO;
+};
+
 module.exports = {
   playerInput,
   close,
@@ -51,4 +59,6 @@ module.exports = {
   checkSizeInRange,
   checkPossibleCommand,
   checkHasKey,
+  isRetry,
+  isQuit,
 };
