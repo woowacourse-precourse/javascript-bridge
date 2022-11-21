@@ -18,6 +18,7 @@ class GameContoller {
   #gameStatusMap = {
     PLAYING: this.inputMoving.bind(this),
     FAIL: this.inputGameCommand.bind(this),
+    CLEAR: this.onGameClear.bind(this),
   };
 
   start() {
@@ -80,7 +81,12 @@ class GameContoller {
 
   onQuitCommand() {
     const map = MapGenerator.toString();
-    OutputView.printResult(map);
+    OutputView.printResult(map, '실패');
+  }
+
+  onGameClear() {
+    const map = MapGenerator.toString();
+    OutputView.printResult(map, '성공');
   }
 }
 
