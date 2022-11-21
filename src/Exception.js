@@ -21,10 +21,17 @@ const Exception = {
    * @param {string} input 위 또는 아래에 대한 입력값
    */
   checkVaildMoveInput(input) {
-    if (input === "U" || input === "D") {
-      return;
+
+    try {
+      if (input === "U" || input === "D") {
+        return true;
+      }
+      throw new Error()
+    } catch {
+      MissionUtils.Console.print("[ERROR] 'U' 또는 'D' 를 입력하여야 합니다.");
+      return false;
     }
-    throw new Error("[ERROR] 'U' 또는 'D' 를 입력하여야 합니다.");
+
   },
 
   /**
