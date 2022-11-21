@@ -6,7 +6,9 @@ const generateRandomNumber = () => {
 };
 
 const convertNumberToUpDown = (number) => {
-  return number === RANDOM_NUMBER.ONE ? OPTION.UP : OPTION.DOWN;
+  if (number === RANDOM_NUMBER.ONE) return OPTION.UP;
+
+  return OPTION.DOWN;
 };
 
 const convertBlueprintToBridge = (array) => {

@@ -8,7 +8,7 @@ const { BRIDGE_VALUE } = require('../utils/constants');
 
 class BridgeGame {
   #myBridge;
-  #gameProgress = BRIDGE_VALUE.DEFAULT_GAME_PROGRESS;
+  #gameProgress = [...BRIDGE_VALUE.DEFAULT_GAME_PROGRESS];
   #round = BRIDGE_VALUE.DEFAULT_ROUND;
   #alive = BRIDGE_VALUE.DEFAULT_ALIVE_VALUE;
   #playCount = BRIDGE_VALUE.DEFAULT_COUNT;
@@ -61,7 +61,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#gameProgress = BRIDGE_VALUE.DEFAULT_GAME_PROGRESS;
+    this.#gameProgress = [...BRIDGE_VALUE.DEFAULT_GAME_PROGRESS];
     this.#round = BRIDGE_VALUE.DEFAULT_ROUND;
     this.#alive = BRIDGE_VALUE.DEFAULT_ALIVE_VALUE;
     this.#playCount += BRIDGE_VALUE.COUNT_UNIT;
