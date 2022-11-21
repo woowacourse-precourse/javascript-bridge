@@ -11,13 +11,9 @@ const BridgeMaker = {
     const bridge = [];
     for (let i = 0; i < size; i++) {
       const number = +generateRandomNumber();
-      if (number === 1) {
-        bridge.push("U");
+      number === 1 ? bridge.push("U") : null;
+      number === 0 ? bridge.push("D") : null
       }
-      if (number === 0) {
-        bridge.push("D");
-      }
-    }
     return bridge;
   },
 
@@ -26,7 +22,6 @@ const BridgeMaker = {
     moveInput === mainBridge[userBridge[0].length]
       ? BridgeMaker.isAnswer(moveInput, userBridge, mainBridge)
       : BridgeMaker.isWorng(moveInput, userBridge, mainBridge);
-    console.log([userBridgeTop, userBridgeBottom]);
     return [userBridgeTop, userBridgeBottom];
   },
 
