@@ -3,12 +3,9 @@ const InputView = require("./views/InputView.js")
 
 class App {
 
-  constructor(){
+  play() {
     OutputView.printGameStart();
     InputView.readBridgeSize();
-  }
-
-  play() {
   }
 }
 

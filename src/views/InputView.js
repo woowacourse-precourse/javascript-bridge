@@ -9,6 +9,9 @@ const {
   userMoveValidate,
   userRetryValidate
 } = require('../validateFunction')
+const {
+  moveListPush,
+} = require('../controller/controller')
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -31,13 +34,10 @@ const InputView = {
   readMoving(playerMoveList,bridgeGame, bridgeSize) {
     MissionUtils.Console.readLine(PLAYER_MOVE_INPUT, (playerMove) => {
       if(userMoveValidate(playerMove)) return this.readMoving([], bridgeGame, bridgeSize)
-      playerMoveList.push(playerMove);
-      const gameResult=bridgeGame.move(playerMoveList);
-      OutputView.printMap(gameResult);
-      if(gameResult.includes('X')){
-        return this.readGameCommand(gameResult, bridgeGame, bridgeSize);
-      }
+      playerMoveList=moveListPush(playerMoveList, playerMove)
+      const gameResult=bridgeGame.move(playerMoveList, bridgeSize);
       if(playerMoveList.length===Number(bridgeSize)) return OutputView.printResult(gameResult, SUCCESS, bridgeGame.getTotalTry())
+      if(gameResult.includes('X')) this.readGameCommand(gameResult, bridgeGame, bridgeSize);
       return this.readMoving(playerMoveList, bridgeGame, bridgeSize);
     })
   },
@@ -55,10 +55,6 @@ const InputView = {
       }
     })
   },
-
-  gameFinish(){
-    MissionUtils.Console.close()
-  }
 };
 
 module.exports = InputView;
