@@ -19,9 +19,9 @@ const InputView = {
   },
 
   async readMoving() {
-    const answer = await input('이동할 칸을 선택해주세요. (위: U, 아래: D)\n');
     while(true) {
       try {
+        const answer = await input('이동할 칸을 선택해주세요. (위: U, 아래: D)\n');
         validMoving(answer);
         return answer;
       } catch (e) {
