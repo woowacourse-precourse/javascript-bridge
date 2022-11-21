@@ -1,10 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
 const Validator = require('./Validator');
-const { generate } = require('./BridgeRandomNumberGenerator');
-const { makeBridge } = require('./BridgeMaker');
-
-const { INFO_MESSAGES } = require('./utils/messages');
 const BridgeGame = require('./BridgeGame');
+const { makeBridge } = require('./BridgeMaker');
+const { generate } = require('./BridgeRandomNumberGenerator');
+const { INFO_MESSAGES } = require('./utils/messages');
+const { INPUT, IS_SUCCESS } = require('./utils/constants');
+const errorHandler = require('./utils/errorHandler');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -18,16 +19,18 @@ const InputView = {
       try {
         Validator.bridgeSize(+userInput);
 
-        BridgeGame.bridge = makeBridge(+userInput, generate);
-        BridgeGame.tryCount += 1;
+        this.saveBridgeGameState(+userInput);
 
         this.readMoving();
-      } catch (error) {
-        Console.print(error.message);
-
-        this.readBridgeSize();
+      } catch ({ message }) {
+        errorHandler(message, this.readBridgeSize.bind(this));
       }
     });
+  },
+
+  saveBridgeGameState(userInput) {
+    BridgeGame.bridge = makeBridge(userInput, generate);
+    BridgeGame.tryCount += 1;
   },
 
   /**
@@ -38,18 +41,18 @@ const InputView = {
       try {
         Validator.moving(userInput);
 
-        const readFuncs = {
-          readMoving: this.readMoving.bind(this),
-          readGameCommand: this.readGameCommand.bind(this),
-        };
-
-        BridgeGame.move(userInput, readFuncs);
-      } catch (error) {
-        Console.print(error.message);
-
-        this.readMoving();
+        BridgeGame.move(userInput, this.createReadFuncs());
+      } catch ({ message }) {
+        errorHandler(message, this.readMoving.bind(this));
       }
     });
+  },
+
+  createReadFuncs() {
+    return {
+      readMoving: this.readMoving.bind(this),
+      readGameCommand: this.readGameCommand.bind(this),
+    };
   },
 
   /**
@@ -60,14 +63,19 @@ const InputView = {
       try {
         Validator.retry(userInput);
 
-        if (userInput === 'R') BridgeGame.retry(this.readMoving.bind(this));
-        if (userInput === 'Q') printResult(map, false, BridgeGame.tryCount);
-      } catch (error) {
-        Console.print(error.message);
-
-        this.readGameCommand();
+        this.processCommand(userInput, map, printResult);
+      } catch ({ message }) {
+        errorHandler(message, this.readGameCommand.bind(this));
       }
     });
+  },
+
+  processCommand(userInput, map, printResult) {
+    const { RETRY, END } = INPUT;
+
+    if (userInput === RETRY) BridgeGame.retry(this.readMoving.bind(this));
+    if (userInput === END)
+      printResult(map, IS_SUCCESS.FALSE, BridgeGame.tryCount);
   },
 };
 
