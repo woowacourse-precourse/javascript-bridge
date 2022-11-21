@@ -7,10 +7,17 @@ const BRIDGE = {
     SHAPE: "D",
     NUM: 0,
   },
-  GMAE: {
+  GAME: {
     RETRY: "R",
     END: "Q",
   },
 };
 
-module.exports = BRIDGE;
+const GAME = {
+  STATUS: {
+    END: 100,
+    START: 101,
+  },
+};
+
+module.exports = { BRIDGE, GAME };
