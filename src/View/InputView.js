@@ -10,10 +10,10 @@ const InputView = {
   size: 0,
 
   readBridgeSize() {
-    MissionUtils.Console.readLine(MESSAGE.INPUT_BRIDGE_LENGTH, (answer) => {
-      this.size = +answer;
+    MissionUtils.Console.readLine(MESSAGE.INPUT_BRIDGE_LENGTH, (length) => {
+      this.size = +length;
       try {
-        this.bridgeSizeValidate(answer);
+        this.bridgeSizeValidate(length);
       } catch {
         MissionUtils.Console.print(ERROR.BRIDGE_LENGTH);
         this.readBridgeSize();
@@ -24,20 +24,16 @@ const InputView = {
   },
 
   bridgeSizeValidate(size) {
-    if (+size < BRIDGE.MIN_LENGTH || BRIDGE.MAX_LENGTH < +size) {
-      throw ERROR.BRIDGE_LENGTH;
-    }
-    if (Number.isNaN(+size)) {
+    if (+size < BRIDGE.MIN_LENGTH || BRIDGE.MAX_LENGTH < +size || Number.isNaN(+size)) {
       throw ERROR.BRIDGE_LENGTH;
     }
     return size;
   },
 
   readMoving(bridge, size) {
-    MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
-      const move = answer;
+    MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (move) => {
       try {
-        this.moveValidate(answer);
+        this.moveValidate(move);
         OutputView.printMap(bridge, size, move);
       } catch {
         MissionUtils.Console.print(ERROR.MOVE);

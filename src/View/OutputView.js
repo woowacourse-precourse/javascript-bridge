@@ -6,15 +6,14 @@ const OutputView = {
   isSucces: MESSAGE.SUCCESS,
   count: 1,
   size: 0,
-  upsideLast: '',
-  downSideLast: '',
+
   printStart() {
     MissionUtils.Console.print(MESSAGE.GAME_START);
   },
 
   printMap(bridge, size, move) {
     this.size = size;
-    const bridgeGame = new BridgeGame(bridge, size, move);
+    const bridgeGame = new BridgeGame(bridge, move);
     bridgeGame.realBridge.map((x) => MissionUtils.Console.print(`[ ${x.join('\n')} ]`));
     return this.checkBridge(bridgeGame);
   },
@@ -35,6 +34,7 @@ const OutputView = {
     ) {
       return true;
     }
+    return false;
   },
 
   printUpO(bridgeGame) {
@@ -54,15 +54,7 @@ const OutputView = {
   printUpX(bridgeGame) {
     if (bridgeGame.realBridge[0][bridgeGame.realBridge[0].length - 1] === 'X') {
       MissionUtils.Console.readLine(MESSAGE.INPUT_RETRY_OR_QUIT, (answer) => {
-        try {
-          this.retryOrQuitValidate(bridgeGame, answer);
-        } catch {
-          MissionUtils.Console.print(ERROR.RETRY_OR_QUIT);
-          this.printUpX(bridgeGame);
-        }
-        if (answer === 'R') {
-          this.printRetryBridge(bridgeGame);
-        }
+        this.isRetry(bridgeGame, answer);
       });
     }
     this.printDownX(bridgeGame);
@@ -71,16 +63,20 @@ const OutputView = {
   printDownX(bridgeGame) {
     if (bridgeGame.realBridge[1][bridgeGame.realBridge[1].length - 1] === 'X') {
       MissionUtils.Console.readLine(MESSAGE.INPUT_RETRY_OR_QUIT, (answer) => {
-        try {
-          this.retryOrQuitValidate(bridgeGame, answer);
-        } catch {
-          MissionUtils.Console.print(ERROR.RETRY_OR_QUIT);
-          this.printUpO(bridgeGame);
-        }
-        if (answer === 'R') {
-          this.printRetryBridge(bridgeGame);
-        }
+        this.isRetry(bridgeGame, answer);
       });
+    }
+  },
+
+  isRetry(bridgeGame, answer) {
+    try {
+      this.retryOrQuitValidate(bridgeGame, answer);
+    } catch {
+      MissionUtils.Console.print(ERROR.RETRY_OR_QUIT);
+      this.printUpO(bridgeGame);
+    }
+    if (answer === 'R') {
+      this.printRetryBridge(bridgeGame);
     }
   },
 
@@ -95,15 +91,20 @@ const OutputView = {
   },
 
   moveValidate(move) {
-    if (![BUTTON.UP, BUTTON.DOWN].includes(move)) {
-      throw ERROR.MOVE;
+    try {
+      if (![BUTTON.UP, BUTTON.DOWN].includes(move)) {
+        throw new Error(ERROR.MOVE);
+      }
+    } catch {
+      MissionUtils.Console.print(ERROR.MOVE);
     }
   },
 
   printBridge(bridgeGame) {
     MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
       const move = answer;
-      bridgeGame.moveIsU(move);
+      this.moveValidate(move);
+      bridgeGame.moveIsWhat(move);
       bridgeGame.realBridge.map((x) => MissionUtils.Console.print(`[ ${x.join(' | ')} ]`));
       this.checkBridge(bridgeGame);
     });
@@ -113,6 +114,7 @@ const OutputView = {
     this.count += 1;
     MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (inputMove) => {
       const move = inputMove;
+      this.moveValidate(move);
       bridgeGame.retry(move);
       bridgeGame.realBridge.map((x) => MissionUtils.Console.print(`[ ${x.join(' | ')} ]`));
       this.checkBridge(bridgeGame);
