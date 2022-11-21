@@ -40,6 +40,10 @@ class BridgeGame {
       this.#collectInputResult.bridgeMap[1].push('X')
     }
   }
+
+  moveResult() {
+    return this.#collectInputResult.bridgeMap
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>

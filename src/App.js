@@ -1,4 +1,5 @@
 const InputView = require('../src/InputView')
+const OutputView = require('../src/OutputView')
 const BridgeGame = require('../src/BridgeGame');
 
 class App {
@@ -14,6 +15,7 @@ class App {
   getUserMove() {
     InputView.readMoving(move => {
       this.#bridgeGame.moveCompare(move)
+      OutputView.printMap(this.#bridgeGame.moveResult())
       this.getUserMove()
     })
   }
