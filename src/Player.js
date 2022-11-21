@@ -24,6 +24,7 @@ class Player {
   }
 
   getCurrentPosition() {
+    if (this.isFallen()) return -1;
     return this.#bridgePath.upperBridge.length;
   }
 
