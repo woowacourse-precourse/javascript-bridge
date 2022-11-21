@@ -14,6 +14,10 @@ class App {
     this.runGame(bridgeGame);
   }
 
+  runGame(bridgeGame) {
+    InputView.readMoving(this, bridgeGame);
+  }
+
   terminate() {
     Console.close();
   }
