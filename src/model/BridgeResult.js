@@ -1,15 +1,15 @@
-const { POS } = require("../constants/bridge.constants");
+const { BRIDGE } = require("../constants/bridge.constants");
 const { printMap } = require("../view/OutputView");
 
 class BridgeResult {
   #result;
 
   constructor(bridge, idx, isPossibleMove) {
-    this.#result = this.makeResultBeforeCurrent(bridge, POS.UP, idx);
-    this.#result += this.makeCurrent(isPossibleMove, bridge[idx], POS.UP);
+    this.#result = this.makeResultBeforeCurrent(bridge, BRIDGE.UP, idx);
+    this.#result += this.makeCurrent(isPossibleMove, bridge[idx], BRIDGE.UP);
     this.#result += "\n";
-    this.#result += this.makeResultBeforeCurrent(bridge, POS.DOWN, idx);
-    this.#result += this.makeCurrent(isPossibleMove, bridge[idx], POS.DOWN);
+    this.#result += this.makeResultBeforeCurrent(bridge, BRIDGE.DOWN, idx);
+    this.#result += this.makeCurrent(isPossibleMove, bridge[idx], BRIDGE.DOWN);
   }
 
   makeResultBeforeCurrent(bridge, direction, idx) {
@@ -19,13 +19,13 @@ class BridgeResult {
     }, "[ ");
   }
 
-  makeCurrent(isPossibleMove, curPosition, answerDirection) {
+  makeCurrent(isPossibleMove, curPos, answer) {
     if (isPossibleMove) {
-      if (answerDirection === curPosition) return "O ]";
+      if (answer === curPos) return "O ]";
       return "  ]";
     }
-    if (answerDirection === POS.DOWN && curPosition === POS.UP) return "X ]";
-    if (answerDirection === POS.UP && curPosition === POS.DOWN) return "X ]";
+    if (answer === BRIDGE.DOWN && curPos === BRIDGE.UP) return "X ]";
+    if (answer === BRIDGE.UP && curPos === BRIDGE.DOWN) return "X ]";
     return "  ]";
   }
 

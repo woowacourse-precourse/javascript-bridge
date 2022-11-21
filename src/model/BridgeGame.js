@@ -1,7 +1,7 @@
 const { makeBridge } = require("../BridgeMaker");
 const { generate } = require("../BridgeRandomNumberGenerator");
 const { POS } = require("../constants/bridge.constants");
-const { ERR } = require("../constants/input.constants");
+const { INPUT_ERR } = require("../constants/input.constants");
 const InValidInputError = require("../error/InValidInputError");
 const BridgeResult = require("./BridgeResult");
 
@@ -20,18 +20,18 @@ class BridgeGame {
   }
 
   validate(size) {
-    if (!/^[0-9]+$/.test(size)) throw new InValidInputError(POS.NO_NUM);
-    if (size < 3 || size > 20) throw new InValidInputError(POS.NO_RANGE);
+    if (!/^[0-9]+$/.test(size)) throw new InValidInputError(INPUT_ERR.NO_NUM);
+    if (size < 3 || size > 20) throw new InValidInputError(INPUT_ERR.NO_RANGE);
   }
 
   moveValidate(direction) {
     if (direction !== POS.UP && direction !== POS.DOWN)
-      throw new InValidInputError(ERR.DIRECTION_ERR);
+      throw new InValidInputError(INPUT_ERR.DIRECTION_ERR);
   }
 
   endValidate(input) {
     if (input !== "R" && input !== "Q")
-      throw new InValidInputError(ERR.CONTROL_ERR);
+      throw new InValidInputError(INPUT_ERR.CONTROL_ERR);
   }
 
   isPossibleMove(idx, direction) {
