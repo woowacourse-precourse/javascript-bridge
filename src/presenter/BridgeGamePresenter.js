@@ -9,7 +9,7 @@ const {
   printError,
 } = require('../view/OutputView');
 
-class BridgeGameController {
+class BridgeGamePresenter {
   #BridgeGame;
 
   constructor() {
@@ -18,36 +18,32 @@ class BridgeGameController {
   }
 
   run() {
-    readBridgeSize((input) => {
-      try {
-        this.#create(input);
-      } catch (error) {
-        printError(error.message);
-        this.run();
+    readBridgeSize((input, isValid) => {
+      if (!isValid) {
+        printError(input);
+        return this.run();
       }
+      return this.#create(input);
     });
   }
 
   #create(size) {
-    checkValidBridgeSize(size);
     this.#BridgeGame = new BridgeGame(size);
     printNewLine();
     this.checkRound();
   }
 
   checkRound() {
-    readMoving((input) => {
-      try {
-        this.#startRound(input);
-      } catch (error) {
-        printError(error.message);
-        this.checkRound();
+    readMoving((input, isValid) => {
+      if (!isValid) {
+        printError(input);
+        return this.checkRound();
       }
+      return this.#startRound(input);
     });
   }
 
   #startRound(space) {
-    checkValidRound(space);
     const spaceExistence = this.#BridgeGame.move(space).isRightSpace();
     printMap(this.#BridgeGame.makeBridgeFormat());
     if (this.#BridgeGame.isEnd()) {
@@ -57,13 +53,12 @@ class BridgeGameController {
   }
 
   checkRetry() {
-    readGameCommand((input) => {
-      try {
-        this.#retry(input);
-      } catch (error) {
-        printError(error.message);
-        this.checkRetry();
+    readGameCommand((input, isValid) => {
+      if (!isValid) {
+        printError(input);
+        return this.checkRetry();
       }
+      return this.#retry(input);
     });
   }
 
@@ -77,4 +72,4 @@ class BridgeGameController {
   }
 }
 
-module.exports = BridgeGameController;
+module.exports = BridgeGamePresenter;
