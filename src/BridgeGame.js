@@ -39,7 +39,7 @@ class BridgeGame {
   }
 
   isFailed() {
-    const lastLog = this.#movementLog.slice(-1);
+    const lastLog = this.#movementLog.slice(-1).join('');
     const failedCodes = Object.values(MOVEMENT_LOG_CODE.FAILED);
     if(failedCodes.includes(lastLog)) return true;
   }

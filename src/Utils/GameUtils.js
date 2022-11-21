@@ -15,7 +15,7 @@ class GameUtils {
       if(trace === MOVEMENT_LOG_CODE.FAILED.UPPER) return upperRow.push(OUTPUT_SYMBOLS.FAILED);
       upperRow.push(OUTPUT_SYMBOLS.BLANK);
     });
-    let result = `[ ${upperRow.join(` ${OUTPUT_SYMBOLS.PARTITION} `)} ]`;
+    let result = `${OUTPUT_SYMBOLS.EDGE.OPEN}${upperRow.join(`${OUTPUT_SYMBOLS.PARTITION}`)}${OUTPUT_SYMBOLS.EDGE.CLOSE}`;
     return result;
   };
 
@@ -26,7 +26,7 @@ class GameUtils {
       if(trace === MOVEMENT_LOG_CODE.FAILED.LOWER) return lowerROW.push(OUTPUT_SYMBOLS.FAILED);
       lowerROW.push(OUTPUT_SYMBOLS.BLANK);
     });
-    let result = `[ ${lowerROW.join(` ${OUTPUT_SYMBOLS.PARTITION} `)} ]`;
+    let result = `${OUTPUT_SYMBOLS.EDGE.OPEN}${lowerROW.join(`${OUTPUT_SYMBOLS.PARTITION}`)}${OUTPUT_SYMBOLS.EDGE.CLOSE}`;
     return result;
   };
 }
