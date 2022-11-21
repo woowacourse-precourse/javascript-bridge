@@ -72,7 +72,7 @@ describe("플레이어 상태 테스트", () => {
 
     expect(Player.bridgeStateArray).toStrictEqual([[], []]);
     expect(Player.movingArray).toStrictEqual([]);
-    expect(Player.playerAns).toStrictEqual([]);
+    expect(Player.correctStateArray).toStrictEqual([]);
     expect(Player.tryingCount).toBe(2);
   });
 });

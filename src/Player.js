@@ -4,7 +4,7 @@ const Player = {
   size: null,
   movingArray: [],
   bridgeStateArray: [[], []],
-  playerAns: [],
+  correctStateArray: [],
   tryingCount: PLAYER.INITIAL_TRY_NUMBER,
   gameSuccess: PLAYER.GMAE_FAIL,
 
@@ -14,7 +14,7 @@ const Player = {
 
   updateBridgeStateArray(moving, isCorrect) {
     this.calculateBridgeState(moving, isCorrect);
-    this.playerAns.push(isCorrect);
+    this.correctStateArray.push(isCorrect);
 
     this.checkGameSuccess();
   },
@@ -79,8 +79,8 @@ const Player = {
 
   checkGameSuccess() {
     if (
-      this.playerAns.length === this.size &&
-      !this.playerAns.includes(false)
+      this.correctStateArray.length === this.size &&
+      !this.correctStateArray.includes(false)
     ) {
       this.gameSuccess = PLAYER.GAME_SUCCESS;
     }
@@ -89,7 +89,7 @@ const Player = {
   reset() {
     this.bridgeStateArray = [[], []];
     this.movingArray = [];
-    this.playerAns = [];
+    this.correctStateArray = [];
     this.tryingCount += PLAYER.INCREASE_TRY_NUMBER;
   },
 };
