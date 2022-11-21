@@ -4,7 +4,8 @@ const Values = require("./constants/Values.js");
 class Validator {
   static checkSizeInput(input) {
     const isNumber = /^[0-9]+$/.test(input);
-    const isInRange = input > SIZE.MINIMUM && input < SIZE.MAXIMUM;
+    console.log(input);
+    const isInRange = input >= Values.SIZE_MINIMUM && input <= Values.SIZE_MAXIMUM;
     if (!isNumber || !isInRange) throw new Error(ErrorMessages.INVALID_SIZE);
 
     return;
