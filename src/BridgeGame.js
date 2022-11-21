@@ -72,5 +72,13 @@ class BridgeGame {
   gameSuccessStatus() {
     return JSON.stringify(this.userInput) === JSON.stringify(this.#password);
   }
+
+  isMovable() {
+    return this.userInput[this.userInput.length - 1] === this.#password[this.userInput.length - 1];
+  }
+
+  userChoiceRetry(userInput) {
+    return userInput === 'R';
+  }
 }
 module.exports = BridgeGame;
