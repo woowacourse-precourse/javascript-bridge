@@ -29,10 +29,17 @@ class BridgeGame {
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {string} response "R" 또는 "Q"의 값만을 인자로 받는다.
+   * @return {boolean} "R"이라면 true(재시작), "Q"라면 false(종료)를 반환한다.
    */
-  retry() {}
+  retry(response) {
+    if (response === "R") {
+      return true;
+    }
+    if (response === "Q") {
+      return false;
+    }
+  }
 
 }
 
