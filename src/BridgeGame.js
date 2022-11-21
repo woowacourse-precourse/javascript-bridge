@@ -97,7 +97,10 @@ class BridgeGame {
   }
 
   initialize() {
-    
+    this.#userInformation.track = [];
+    this.#userInformation.upside = [];
+    this.#userInformation.downside = [];
+    this.addBridgeCondition();
    }
 }
 
