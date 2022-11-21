@@ -40,23 +40,23 @@ class BridgeGame {
   success(move) {
     this.#order += 1;
     move === BRIDGE.UP
-      ? this.up(BRIDGE.CROSS_SUCCESS)
-      : this.down(BRIDGE.CROSS_SUCCESS);
+      ? this.upSideMap(BRIDGE.CROSS_SUCCESS)
+      : this.downSideMap(BRIDGE.CROSS_SUCCESS);
   }
 
   fail(move) {
     this.#isPass = false;
     move === BRIDGE.UP
-      ? this.up(BRIDGE.CROSS_FAIL)
-      : this.down(BRIDGE.CROSS_FAIL);
+      ? this.upSideMap(BRIDGE.CROSS_FAIL)
+      : this.downSideMap(BRIDGE.CROSS_FAIL);
   }
 
-  up(result) {
+  upSideMap(result) {
     this.#map[0].push(result);
     this.#map[1].push(' ');
   }
 
-  down(result) {
+  downSideMap(result) {
     this.#map[0].push(' ');
     this.#map[1].push(result);
   }
