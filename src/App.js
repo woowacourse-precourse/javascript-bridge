@@ -1,8 +1,5 @@
 const BridgeGame = require('./BridgeGame');
-const { RETRY, ERROR_NAME, QUIT } = require('./Constant/constant');
-const BridgeValidation = require('./Validation/BridgeValidation');
-const ControlValidation = require('./Validation/ControlValidation');
-const MoveValidation = require('./Validation/MoveValidation');
+const { ERROR_NAME, QUIT } = require('./Constant/constant');
 const {
   readMoving,
   end,
@@ -26,7 +23,6 @@ class App {
 
   createBridge(input) {
     this.tryCatch(() => {
-      BridgeValidation(input);
       this.#game = new BridgeGame(input);
       readMoving.bind(this)(this.moveBridge);
     });
@@ -34,7 +30,6 @@ class App {
 
   moveBridge(input) {
     this.tryCatch(() => {
-      MoveValidation(input);
       this.#game.move(input);
       printMap(this.#game.result);
       this.determineNextAction();
@@ -51,12 +46,9 @@ class App {
 
   controlGame(input) {
     this.tryCatch(() => {
-      ControlValidation(input);
-      if (input === RETRY) {
-        this.#game.retry();
-        readMoving.bind(this)(this.moveBridge);
-      }
       if (input === QUIT) this.gameEnd();
+      this.#game.retry(input);
+      readMoving.bind(this)(this.moveBridge);
     });
   }
 

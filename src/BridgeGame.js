@@ -1,5 +1,8 @@
 const Bridge = require('./Bridge');
 const ResultMaker = require('./ResultMaker');
+const BridgeValidation = require('./Validation/BridgeValidation');
+const ControlValidation = require('./Validation/ControlValidation');
+const MoveValidation = require('./Validation/MoveValidation');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -11,6 +14,7 @@ class BridgeGame {
   #tryCount;
   #status;
   constructor(length) {
+    BridgeValidation(length);
     this.#bridge = new Bridge(length);
     this.#index = 0;
     this.#tryCount = 1;
@@ -31,6 +35,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(input) {
+    MoveValidation(input);
     this.#status = this.#bridge.movable(this.#index, input);
     this.#result = ResultMaker(this.#bridge, this.#index, this.#status);
     this.#index += 1;
@@ -45,7 +50,8 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
 
-  retry() {
+  retry(input) {
+    ControlValidation(input);
     this.#index = 0;
     this.#tryCount += 1;
   }

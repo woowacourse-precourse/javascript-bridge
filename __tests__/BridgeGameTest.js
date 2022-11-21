@@ -6,7 +6,7 @@ describe('BridgeGame 테스트', () => {
     expect(bridgeGame.result).not.toBe(undefined);
   });
   test('retry 테스트', () => {
-    bridgeGame.retry();
+    bridgeGame.retry('R');
     expect(bridgeGame.tryCount).toBe(2);
   });
   test('isNotEnd 테스트', () => {
