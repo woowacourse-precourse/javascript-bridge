@@ -83,6 +83,34 @@ describe("다리 건너기 테스트", () => {
   });
 });
 
+describe("다리 건너기 추가 테스트", () => {
+  test("실행 결과 예시1", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 0]);
+    mockQuestions(["3", "U", "U", "R", "U", "D", "D"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, ["최종 게임 결과", "[ O |   |   ]", "[   | O | O ]", "게임 성공 여부: 성공", "총 시도한 횟수: 2"]);
+    expectBridgeOrder(log, "[ O |   |   ]", "[   | O | O ]");
+  });
+
+  test("실행 결과 예시2", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 0]);
+    mockQuestions(["3", "U", "U", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, ["최종 게임 결과", "[ O | X ]", "[   |   ]", "게임 성공 여부: 실패", "총 시도한 횟수: 1"]);
+    expectBridgeOrder(log, "[ O | X ]", "[   |   ]");
+  });
+});
+
 describe("예외 테스트", () => {
   test.each([["2"], ["21"], ["Q"]])("다리 사이즈를 입력할 때 유효하지 않은 값을 넣었을 때 에러 처리해야 한다.", (input) => {
     expect(() => {
