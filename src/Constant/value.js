@@ -4,5 +4,10 @@ const PATH = {
   NOT_CHOSEN: ' ',
 };
 
-module.exports = { PATH };
+const BLOCK = {
+  UPPER: 'U',
+  LOWER: 'D',
+};
+
+module.exports = { PATH, BLOCK };
 
