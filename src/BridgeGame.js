@@ -29,9 +29,10 @@ const OutputView = require("./OutputView.js");
         const Map = await this.isUpOrDown(moving, false);
         upMap += Map[0], downMap += Map[1];
         OutputView.printMap(upMap.slice(0,-1), downMap.slice(0,-1));
-        this.isRetryOrQuit();
+        this.isRetryOrQuit(upMap.slice(0,-1), downMap.slice(0,-1), "실패", this.#cumulativeCount);
       }
     }
+    this.quit(upMap.slice(0,-1), downMap.slice(0,-1), "성공", this.#cumulativeCount)
   }
   isUpOrDown(moving, canMove){
     if(moving === "U" && canMove){
@@ -47,13 +48,13 @@ const OutputView = require("./OutputView.js");
       return[" "+"|", "X"+"|"];
     }
   }
-  isRetryOrQuit(){
+  isRetryOrQuit(upMap, downMap, success, cumulativeCount){
     const gameCommand = RecallUntilCorrect.recallreadGameCommand(true);
     if(gameCommand==="R"){
       this.retry();
     }
     if(gameCommand==="Q"){
-      this.quit();
+      this.quit(upMap, downMap, success, cumulativeCount);
     }
   }
   /**
@@ -65,7 +66,9 @@ const OutputView = require("./OutputView.js");
     this.#cumulativeCount+=1;
     this.move();
   }
-  quit() {}
+  quit(upMap, downMap, success, cumulativeCount) {
+    OutputView.printResult(upMap, downMap, success, cumulativeCount);
+  }
 }
 
 module.exports = BridgeGame;
