@@ -10,21 +10,21 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    this.input(GAME_MESSAGE.input_size, callback.bind(this));
+    this.input(GAME_MESSAGE.input_size, callback);
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다. -> U, D
    */
   readMoving(callback) {
-    this.input(GAME_MESSAGE.choose_space, callback.bind(this));
+    this.input(GAME_MESSAGE.choose_space, callback);
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(callback) {
-    this.input(GAME_MESSAGE.replay, callback.bind(this));
+    this.input(GAME_MESSAGE.replay, callback);
   },
 };
 
