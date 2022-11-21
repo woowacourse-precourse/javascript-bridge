@@ -7,13 +7,12 @@ class BridgeGame {
   #upperTrack;
   #lowerTrack;
 
-  constructor(size) {
-    this.set(size);
+  constructor() {
     this.#upperTrack = [];
     this.#lowerTrack = [];
   }
 
-  set(size) {
+  setBridge(size) {
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
   }
 
