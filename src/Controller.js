@@ -1,14 +1,28 @@
-const { printMessage } = require('./Utils.js');
+const { printMessage, close } = require('./Utils.js');
 const BridgeSize = require('./Validate/BridgeSize.js');
-const SafeBridge = require('./Validate/SafeBridge.js');
+const BridgeCommand = require('./Validate/BridgeCommand.js');
 const InputView = require('./View/InputView.js');
+const OutputView = require('./View/OutputView.js');
+const BridgeGame = require('./BridgeGame.js');
+const BridgeShape = require('./BridgeShape.js');
+const Retry = require('./Validate/Retry.js');
+const Counting = require('./Counting.js');
 
 class Controller {
-  constructor() {}
+  constructor() {
+    this.bridgeGame;
+    this.safeBridgeList;
+    this.originalBridgeList;
+    this.bridgeShape = new BridgeShape();
+    this.counting = new Counting();
+  }
 
   InputBridgeSize() {
     InputView.readBridgeSize((size) => {
       const bridgeSize = new BridgeSize(size);
+      this.bridgeGame = new BridgeGame(size);
+      this.safeBridgeList = this.bridgeGame.makeBridge();
+      this.originalBridgeList = JSON.parse(JSON.stringify(this.safeBridgeList));
       this.checkReInputSize(bridgeSize);
     });
   }
@@ -25,18 +39,84 @@ class Controller {
 
   inputMoving() {
     InputView.readMoving((command) => {
-      const safeBridge = new SafeBridge(command);
-      this.checkReInputMoving(safeBridge);
+      const bridgeCommand = new BridgeCommand(command);
+      this.checkReInputMoving(bridgeCommand, command);
     });
   }
 
-  checkReInputMoving(safeBridge) {
+  checkReInputMoving(bridgeCommand, command) {
     try {
-      safeBridge.validate();
+      bridgeCommand.validate();
+      this.compareCommand(command);
     } catch (errorMessage) {
       printMessage(errorMessage);
       this.inputMoving();
     }
+  }
+
+  compareCommand(inputCommand) {
+    const correctCommand = this.safeBridgeList.shift();
+    const compareResult = this.bridgeGame.move(inputCommand, correctCommand);
+    this.printCurrentBridge(inputCommand, compareResult);
+  }
+
+  printCurrentBridge(inputCommand, compareResult) {
+    this.bridgeShape.addBridgeMap(inputCommand, compareResult);
+    OutputView.printMap(this.bridgeShape.currentBridgeMap());
+    this.isWrong(compareResult);
+  }
+
+  isWrong(compareResult) {
+    if (compareResult === 'X') {
+      this.safeBridgeList = JSON.parse(JSON.stringify(this.originalBridgeList));
+      this.selectRetry();
+    }
+    if (compareResult === 'O') {
+      this.isEndGame();
+    }
+  }
+
+  selectRetry() {
+    InputView.readGameCommand((input) => {
+      const retry = new Retry(input);
+      this.checkReInputRetry(retry, input);
+    });
+  }
+
+  checkReInputRetry(retry, input) {
+    try {
+      retry.validate();
+      this.selectRegameOrQuit(input);
+    } catch (errorMessage) {
+      printMessage(errorMessage);
+      this.selectRetry();
+    }
+  }
+
+  selectRegameOrQuit(input) {
+    if (input === 'R') {
+      this.bridgeShape.initBridgeMap();
+      this.counting.addCount();
+      this.inputMoving();
+    }
+    if (input === 'Q') {
+      this.Quit();
+    }
+  }
+
+  isEndGame() {
+    if (!this.safeBridgeList.length) {
+      OutputView.printResult(this.bridgeShape.currentBridgeMap(), '성공', this.counting.getCount());
+      close();
+    }
+    if (this.safeBridgeList.length) {
+      this.inputMoving();
+    }
+  }
+
+  Quit() {
+    OutputView.printResult(this.bridgeShape.currentBridgeMap(), '실패', this.counting.getCount());
+    close();
   }
 }
 
