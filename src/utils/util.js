@@ -1,5 +1,7 @@
 const Console = require('@woowacourse/mission-utils');
-const { REGEX_NUM, ERROR_MESSAGE, BRIDGE_RULE } = require('./constants');
+const { ERROR_MESSAGE, BRIDGE_RULE } = require('./constants');
+
+const REGEX_NUM = Object.freeze(/^[0-9]+$/);
 
 const isNum = (size) => {
   if (size.match(REGEX_NUM) === null) throw ERROR_MESSAGE.VALIDATION_SIZE;
