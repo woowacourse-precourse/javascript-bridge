@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker  = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
-
+const OutputView = require('./OutputView');
 class App {
   BridgeArray
   tryGame;
@@ -21,15 +21,17 @@ class App {
 
     console.log(tempBridgeArray);
     while(true){
+
       let answer = await this.run();
+
       if(answer == true) this.flag = true;
-      tryGame += 1;
+      this.tryGame += 1;
       const ready = await InputView.readGameCommand(BridgesGameStart);
       // 다시 할래?
-      if(!ready){
-        break;
-      }
+      if(!ready)   break;
     }
+
+    OutputView.printResult(this.flag,this.tryGame);
 
   }
 

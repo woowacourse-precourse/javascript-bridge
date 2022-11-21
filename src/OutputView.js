@@ -35,10 +35,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {
-    MissionUtils.Console.print('게임 성공 여부: ');
+  printResult(succeess , tryGame) {
+    let outputSuccess = "";
+    if(succeess== true) outputSuccess = "성공";
+    else outputSuccess ="실패";
+    MissionUtils.Console.print(`게임 성공 여부: ${outputSuccess}\n`);
     // 여기에 성공 여부 넣는다.
-    MissionUtils.Console.print('총 시도한 횟수: ');
+    MissionUtils.Console.print(`총 시도한 횟수: ${tryGame}`);
     // 시도 횟수 넣는다.
   },
 };

@@ -49,6 +49,7 @@ const InputView = {
           let select = 0;
           if (input == 'U') select = 1;
           else if (input == 'D') select = 0;
+          console.log(select,turns);
           let answer = BridgesGameStart.move(select,turns);
           res(answer);
         })
