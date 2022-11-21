@@ -12,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridgeShape = [];
     for (let makedBridgeSize = 1; makedBridgeSize <= size; makedBridgeSize++) {
-      const shape = Number(generateRandomNumber()) //ApplicationTest 코드 이상?
+      const shape = generateRandomNumber()
         ? COMMAND.MOVING.UP
         : COMMAND.MOVING.DOWN;
       bridgeShape.push(shape);
