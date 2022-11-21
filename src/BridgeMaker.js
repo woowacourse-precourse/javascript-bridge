@@ -1,13 +1,12 @@
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
-    let dummy = []
+    let BRIDGE = []
     for(let i = 0; i<size; i++){
       const number = generateRandomNumber();
       if (number == 1) {
-        dummy.push('U')
-      } else {dummy.push('D')}
+        BRIDGE.push('U')
+      } else {BRIDGE.push('D')}
     }
-    const BRIDGE = dummy
     return BRIDGE
   },
 };
