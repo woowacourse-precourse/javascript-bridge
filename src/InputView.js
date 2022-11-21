@@ -35,7 +35,9 @@ const InputView = {
       this.validateBridgeSize(bridgeSize);
       bridgeSize = Number(bridgeSize);
 
-      this.bridgeMaker(bridgeSize);
+      Console.print('');
+
+      this.readMoving(this.bridgeMaker(bridgeSize));
     });
   },
 
@@ -44,10 +46,7 @@ const InputView = {
   },
 
   bridgeMaker(bridgeSize) {
-    Console.print('');
-    const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-
-    this.readMoving(bridge);
+    return BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
   },
 
   /**
