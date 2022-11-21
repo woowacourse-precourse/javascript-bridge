@@ -1,22 +1,17 @@
+const { ERROR_MESSAGE } = require('../util/Constant');
 class MovingValidator {
   constructor(moving) {
     this.validate(moving);
   }
 
   validate(moving) {
-    if (this.isNull(moving)) throw new Error('[ERROR] 값을 입력해야 합니다.');
-    if (!this.isAlphabet(moving)) throw new Error('[ERROR] 영어로 입력해야 합니다.');
-    if (this.isNotRightRange(moving)) throw new Error('[ERROR] U or D 를 입력해야 합니다.');
+    if (this.isNull(moving)) throw new Error(ERROR_MESSAGE.IS_EMPTY);
+    if (this.isNotRightRange(moving)) throw new Error(ERROR_MESSAGE.MOVE_NOT_RIGHT_LETTER);
     return moving;
   }
 
   isNull(moving) {
     return moving == '';
-  }
-
-  isAlphabet(moving) {
-    const AlphabetTest = /^[a-zA-Z]*$/;
-    return AlphabetTest.test(moving);
   }
 
   isNotRightRange(moving) {
