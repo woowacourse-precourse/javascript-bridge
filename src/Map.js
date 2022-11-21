@@ -1,17 +1,17 @@
 const OutputView = require('./Views/OutputView');
 
 class Map {
-  #map;
+  #originMap;
 
   constructor() {
-    this.#map;
+    this.#originMap;
   }
 
-  make(bridge) {
+  makeOrginBridgeMap(bridge) {
     let bridgeMap = [[], []];
     bridgeMap[0] = this.makeUpperBridge(bridge);
     bridgeMap[1] = this.makeLowerBridge(bridge);
-    this.#map = bridgeMap;
+    this.#originMap = bridgeMap;
   }
 
   makeUpperBridge(bridge) {
@@ -44,8 +44,8 @@ class Map {
 
   sliceMapFromZeroToNowStep(step) {
     let map = [[], []];
-    map[0] = this.#map[0].slice(0, step + 1);
-    map[1] = this.#map[1].slice(0, step + 1);
+    map[0] = this.#originMap[0].slice(0, step + 1);
+    map[1] = this.#originMap[1].slice(0, step + 1);
     return map;
   }
 
