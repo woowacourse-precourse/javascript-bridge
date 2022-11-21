@@ -62,10 +62,10 @@ class App {
   }
 
   isGameOver() {
-    const result = this.#bridgeGame.getCurrentBridgeReuslt();
     const FAILURE = 'X';
     const [GAMR_OVER, NO_GAME_OVER] = [true, false];
-    if (result === FAILURE) {
+
+    if (this.#bridgeGame.getCurrentBridgeReuslt() === FAILURE) {
       return GAMR_OVER;
     }
 
@@ -79,13 +79,17 @@ class App {
   }
 
   checkIsR(userInput) {
-    if (userInput === 'R') {
+    const R = 'R';
+
+    if (userInput === R) {
       this.retryAndMove();
     }
   }
 
   checkIsQ(userInput) {
-    if (userInput === 'Q') {
+    const Q = 'Q';
+
+    if (userInput === Q) {
       this.printFinalGameResultAndClose();
     }
   }
