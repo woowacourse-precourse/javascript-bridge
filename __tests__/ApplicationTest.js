@@ -14,7 +14,7 @@ const {
 const { status, step } = require('../src/lib/constants');
 
 describe('다리 생성 테스트', () => {
-  const randomNumbers = [1, 0, 0]
+  const randomNumbers = [1, 0, 0];
 
   test(`[${randomNumbers.map(
     (number) => step[number],
@@ -91,15 +91,9 @@ describe('다리 건너기 테스트', () => {
   });
 
   test('횟수 1번만에 성공한다.', () => {
-<<<<<<< HEAD
-    const logSpy = getLogSpy()
-    mockRandoms([1, 0, 1])
-    mockQuestions(['3', 'U', 'D', 'U'])
-=======
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1']);
+    mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'D', 'U']);
->>>>>>> fc92d14 (style: Airbnb 표준 스타일 적용)
 
     const app = new App();
     app.play();
@@ -117,7 +111,7 @@ describe('다리 건너기 테스트', () => {
 
   test('횟수 2번만에 성공한다.', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1']);
+    mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'D', 'D', 'R', 'U', 'D', 'U']);
 
     const app = new App();
@@ -136,7 +130,7 @@ describe('다리 건너기 테스트', () => {
 
   test('2번 시도 후에 실패한다.', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1']);
+    mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'D', 'D', 'R', 'U', 'D', 'D', 'Q']);
 
     const app = new App();
