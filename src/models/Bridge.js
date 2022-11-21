@@ -5,7 +5,24 @@ class Bridge {
   #bridge;
 
   setBridge(size) {
+    this.#validate(size);
     this.#bridge = makeBridge(size, generate);
+  }
+
+  #validate(size) {
+    if (this.#isNumber(size) && this.#isInRange(size)) {
+      return;
+    }
+
+    throw new Error('[ERROR] 다리의 길이는 3이상 20이하의 숫자여야 합니다.');
+  }
+
+  #isInRange(number) {
+    return number >= 3 && number <= 20;
+  }
+
+  #isNumber(value) {
+    return typeof value === 'number';
   }
 
   /**

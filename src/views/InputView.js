@@ -4,14 +4,8 @@ const { Console } = require('@woowacourse/mission-utils');
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
   readBridgeSize(onInput) {
-    Console.readLine('다리의 길이를 입력해 주세요.\n', (input) => {
-      const bridgeSize = Number(input);
-      onInput(bridgeSize);
-    });
+    Console.readLine('다리의 길이를 입력해 주세요.\n', onInput);
   },
 
   /**
