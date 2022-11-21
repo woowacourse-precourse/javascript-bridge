@@ -60,6 +60,17 @@ class App {
   getBridgeLength() {
     return this.#bridgeGame.getBridge().length;
   }
+
+  isGameOver() {
+    const result = this.#bridgeGame.getCurrentBridgeReuslt();
+    const FAILURE = 'X';
+    const [GAMR_OVER, NO_GAME_OVER] = [true, false];
+    if (result === FAILURE) {
+      return GAMR_OVER;
+    }
+
+    return NO_GAME_OVER;
+  }
 }
 
 module.exports = App;
