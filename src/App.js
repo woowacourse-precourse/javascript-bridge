@@ -2,6 +2,11 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
 const BridgeMaker = require("./BridgeMaker.js");
 const InputView = require("./View/InputView.js");
 const OutputView = require("./View/OutputView.js");
+const {
+  bridgeLength,
+  bridgeDirection,
+  gameContinue,
+} = require("./utils/validate.js");
 const BridgeGame = require("./BridgeGame.js");
 
 class App {
@@ -15,16 +20,19 @@ class App {
   };
 
   bridgeSizeCallback = (input) => {
-    // 값 검증
     const length = Number(input);
-    const bridge = BridgeMaker.makeBridge(
-      length,
-      BridgeRandomNumberGenerator.generate,
+    const isBridgeValidate = bridgeLength(length, () =>
+      InputView.readBridgeSize(this.bridgeSizeCallback),
     );
+    if (!isBridgeValidate) return;
 
+    const bridge = this.getBridgeMake(length);
     this.bridgeGame.setState({ length, bridge });
     InputView.readMoving(this.moveCallback);
   };
+
+  getBridgeMake = (length) =>
+    BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate);
 
   moveCallback = (input) => {
     const { inputHistory, bridge } = this.bridgeGame.move(input);
@@ -62,8 +70,6 @@ class App {
         return this.endCallback(this.bridgeGame.end());
       case "Move":
         return InputView.readMoving(this.moveCallback);
-      default:
-        return;
     }
   };
 }
