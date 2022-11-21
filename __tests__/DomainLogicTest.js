@@ -103,6 +103,25 @@ describe("도메인 로직 단위 테스트", () => {
     })
   });
 
+  test("재시작 하지 않을 경우 게임을 종료한다.", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "0"]);
+    mockQuestions(["3", "D", "Q"]);
+
+    const bridgeGame = new BridgeGame();
+    bridgeGame.init();
+    bridgeGame.gameStart();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[   ]",
+      "[ X ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1"
+    ]);
+  })
+
   test("라운드가 모두 종료되면, 성공 여부를 판별한다.", () => {
     const logspy = getLogSpy();
     const bridge = ["U", "U"];
