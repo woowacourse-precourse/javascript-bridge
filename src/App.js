@@ -17,10 +17,20 @@ class App {
     return bridge;
   }
 
+  async checkRetry() {
+    const retryGame = await InputView.readGameCommand();
+    return retryGame === COMMAND.RETRY;
+  }
+
   async crossingBridge() {
     const movement = await InputView.readMoving();
     const result = this.#game.move(movement);
     return result;
+  }
+
+  retryGame() {
+    this.#game.retry();
+    return this.runGame();
   }
 
   play() {
