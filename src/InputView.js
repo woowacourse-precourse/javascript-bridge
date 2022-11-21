@@ -76,7 +76,18 @@ const InputView = {
       } catch (error) {
         return this.readGameCommand(bridgeGameLog);
       }
+
+      this.checkRestart(input, bridgeGameLog);
     });
+  },
+
+  checkRestart(input, bridgeGameLog) {
+    if (input === PARAMETERS.restartControl) {
+      this.moveCount = 0;
+      this.readMoving();
+    } else {
+      // print result
+    }
   },
 };
 
