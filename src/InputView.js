@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 
 const BridgeGame = require("./BridgeGame");
-const { isInvalidBridgeLength, isInvalidMoving } = require("./exception");
+const { isInvalidBridgeLength, isInvalidMoving, isInvalidGameCommand } = require("./exception");
 const { makeBridge } = require("./BridgeMaker");
 const { toNumber } = require("./helpers/common");
 const { generate } = require("./BridgeRandomNumberGenerator");
@@ -55,6 +55,7 @@ const InputView = {
    */
   readGameCommand(bridgeGame) {
     Console.readLine(INPUT_RETRY, (input) => {
+      isInvalidGameCommand(input) && InputView.readGameCommand(bridgeGame);
       bridgeGame.retry();
       InputView.readMoving(bridgeGame);
     });

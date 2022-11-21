@@ -3,6 +3,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const MESSAGE = require("../constant/message");
 const { toNumber } = require("../helpers/common");
 const { BRIDGE_MAX_LENGTH, BRIDGE_MIN_LENGTH } = require("../constant");
+
 class BridgeException {
   validateInteger = (input) => {
     if (isNaN(input) || input === "") {
@@ -23,6 +24,12 @@ class BridgeException {
     }
   };
 
+  validateGameCommand = (input) => {
+    if (input !== "R" && input !== "Q") {
+      throw MESSAGE.ERROR.INVALID_COMMAND;
+    }
+  };
+
   static isInvalidBridgeLength = (input) => {
     const bridgeException = new BridgeException();
     try {
@@ -38,6 +45,16 @@ class BridgeException {
     const bridgeException = new BridgeException();
     try {
       bridgeException.validateMovingKeyWord(input);
+    } catch (error) {
+      Console.print(error);
+      return true;
+    }
+  };
+
+  static isInvalidGameCommand = (input) => {
+    const bridgeException = new BridgeException();
+    try {
+      bridgeException.validateGameCommand(input);
     } catch (error) {
       Console.print(error);
       return true;
