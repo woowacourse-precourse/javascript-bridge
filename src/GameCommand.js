@@ -18,4 +18,4 @@ class GameCommand {
   }
 }
 
-module.export = GameCommand;
+module.exports = GameCommand;

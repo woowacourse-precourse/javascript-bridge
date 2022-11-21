@@ -18,4 +18,4 @@ class BridgeSize {
   }
 }
 
-module.export = BridgeSize;
+module.exports = BridgeSize;

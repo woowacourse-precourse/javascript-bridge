@@ -18,4 +18,4 @@ class Moving {
   }
 }
 
-module.export = Moving;
+module.exports = Moving;
