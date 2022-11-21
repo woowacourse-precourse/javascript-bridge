@@ -1,6 +1,7 @@
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const errorController = require("./ErrorController");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const Validation = require("./Validation");
@@ -16,27 +17,38 @@ class GameController {
   }
   startMessage() {
     OutputView.printGameStart();
-    this.createBridge();
+    this.inputBridgeSize();
   }
-  createBridge() {
+  inputBridgeSize() {
     InputView.readBridgeSize((input) => {
-      Validation.bridgeInput(Number(input));
-      const bridge = BridgeMaker.makeBridge(
-        input,
-        BridgeRandomNumberGenerator.generate
+      errorController(
+        this.createBridge.bind(this, input),
+        this.inputBridgeSize.bind(this)
       );
-      //   console.log(bridge);
-      this.bridgeGame.setBridge(bridge);
-      this.inputStep();
     });
+  }
+  createBridge(input) {
+    Validation.bridgeInput(Number(input));
+    const bridge = BridgeMaker.makeBridge(
+      input,
+      BridgeRandomNumberGenerator.generate
+    );
+    console.log(bridge);
+    this.bridgeGame.setBridge(bridge);
+    this.inputStep();
   }
   inputStep() {
     InputView.readMoving((input) => {
-      Validation.stepInput(input);
-      this.compareStep(input);
+      errorController(
+        this.compareStep.bind(this, input),
+        this.inputStep.bind(this)
+      );
+      //   Validation.stepInput(input);
+      //   this.compareStep(input);
     });
   }
   compareStep(input) {
+    Validation.stepInput(input);
     const result = this.bridgeGame.compareBridge(input);
     if (result) {
       this.bridgeGame.addCorrect();
