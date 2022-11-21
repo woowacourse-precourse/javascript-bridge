@@ -13,12 +13,9 @@ const BRIDGE = {
 
 class Bridge {
 	#bridge;
+
 	constructor(length) {
 		this.#bridge = makeBridge(length, generate);
-	}
-
-	getBridge() {
-		return this.#bridge;
 	}
 
 	checkLength(index) {
