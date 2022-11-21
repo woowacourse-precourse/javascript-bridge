@@ -1,4 +1,4 @@
-const { IS_SIZE_INPUT_ERROR } = require('./constants/errors/MakeBridgeError');
+const { IS_SIZE_INPUT_ERROR, IS_MOVING_INPUT_ERROR } = require('./constants/errors');
 
 const Validator = {
   validateBridgeSizeInput: (bridgeSizeInput) => {
@@ -8,8 +8,9 @@ const Validator = {
   },
 
   validateMoveInput: (moveInput) => {
-    // todo: "U", "D"
-    // throw new Error('다리 길이 입력이 유효하지 않습니다.');
+    if (!(moveInput === 'U' || moveInput === 'D')) {
+      throw new Error(IS_MOVING_INPUT_ERROR);
+    }
   },
   validateRetryInput: (retryInput) => {
     // todo: "R", "Q"
