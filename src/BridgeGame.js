@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
 const OutputView = require("./OutputView");
+const InputView = require("./InputView");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -26,9 +27,23 @@ class BridgeGame {
    */
   retry(retry,attempt) {
     if(retry=="R"){
-      this.readMoving(bridge,[],attempt+1);
+      InputView.readMoving(bridge,[],attempt+1);
     }else if(retry=="Q"){
       OutputView.printResult(false,attempt);
+      Console.close();
+    }
+  }
+
+  /**
+   * 추가 - 끝까지 건너면 종료
+   */
+  finish(steps,bridge,attempt){
+    if(steps.length!=bridge.length){
+      InputView.readMoving(bridge,steps,attempt);
+    }else{
+      Console.print("최종 게임 결과");
+      OutputView.printMap(bridge,steps);
+      OutputView.printResult(true,attempt);
       Console.close();
     }
   }

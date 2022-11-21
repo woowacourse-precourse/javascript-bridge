@@ -21,6 +21,7 @@ const BridgeMaker = {
         bridge.push("D");
       }
     }
+    console.log("bridge 생성됨",bridge);
     return bridge;
   }
 };
