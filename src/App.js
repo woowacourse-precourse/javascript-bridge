@@ -25,6 +25,16 @@ class App {
   }
 
     /**
+   * 다리를 만들어 게임을 준비한다.
+   */
+  setGame(){
+    readBridgeSize((size) => {
+      checkVaildBridgeSize(size);
+      this.startGame(size)
+    });
+  }
+
+    /**
    * 다리의 길이 값을 인자로 받아 게임을 시작한다.
    * @param {string} size 다리의 길이가 되었으면 하는 값
    */
