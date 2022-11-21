@@ -9,11 +9,11 @@ class IngState extends StateTemplate {
 	inputHandler = InputView.readMoving;
 	run(command) {
 		const isCompelete = this.game.move(command.toUpperCase());
+		OutputView.printMap(this.game.getCurResult().stringify());
 		if (isCompelete) {
 			OutputView.printResult(this.game.getCurResult().stringify(), true, this.game.getTryCount());
 			return false;
 		}
-		OutputView.printMap(this.game.getCurResult().stringify());
 		return true;
 	}
 }

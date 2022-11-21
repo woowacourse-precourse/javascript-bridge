@@ -8,7 +8,7 @@ class RetryState extends StateTemplate {
 	}
 	inputHandler = InputView.readGameCommand;
 	run(command) {
-		const isEnd = this.game.retry(command.toUpperCase());
+		const isEnd = this.game.retry(command);
 		if (isEnd) {
 			OutputView.printResult(this.game.getCurResult().stringify(), false, this.game.getTryCount());
 			return false;

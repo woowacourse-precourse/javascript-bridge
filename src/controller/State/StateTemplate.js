@@ -1,5 +1,7 @@
 /** @abstract */
 class StateTemplate {
+	/** @abstract */
+	inputHandler;
 	constructor(game) {
 		this.game = game;
 	}
@@ -8,6 +10,9 @@ class StateTemplate {
 	run(command) {}
 
 	next() {
+		if (!this.inputHandler) {
+			
+		}
 		this.inputHandler((command) => {
 			const isNext = this.run(command);
 			if (isNext)

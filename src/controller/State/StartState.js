@@ -7,7 +7,7 @@ class StartState extends StateTemplate {
 	}
 	inputHandler = InputView.readBridgeSize;
 	run(command) {
-		this.game.start(+command);
+		this.game.start(command);
 		return true;
 	}
 }
