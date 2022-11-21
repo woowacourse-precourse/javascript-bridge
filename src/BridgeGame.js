@@ -13,7 +13,7 @@ class BridgeGame {
     this.randomBridge;
     this.upperBridge = [];
     this.lowerBridge = [];
-    this.count = 0;
+    this.count = 1;
     this.index = 0;
     this.isSuccess = true;
   }
@@ -52,7 +52,7 @@ class BridgeGame {
           break;
       }
     }
-    this.count++;
+
     this.index++;
   }
 
@@ -65,6 +65,7 @@ class BridgeGame {
     this.upperBridge = [];
     this.lowerBridge = [];
     this.index = 0;
+    this.count++;
   }
 }
 
