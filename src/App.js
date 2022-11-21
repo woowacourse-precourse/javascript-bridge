@@ -12,7 +12,7 @@ class App {
   }
 
   play() {
-    bridgeGameController.initializeGame();
+    bridgeGameController.initialize();
     bridgeGameController.readUserBridgeSize(this.startBridgeGame);
   }
 }

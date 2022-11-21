@@ -21,7 +21,7 @@ class BridgeGameController {
     this.#model = model;
   }
 
-  initializeGame() {
+  initialize() {
     printStart();
   }
 
