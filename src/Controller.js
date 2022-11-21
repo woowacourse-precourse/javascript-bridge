@@ -1,10 +1,10 @@
-const { printMessage, close, isRetry, isQuit } = require('./Utils/Utils.js');
+const { printMessage, isRetry, isQuit } = require('./Utils/Utils.js');
 const BridgeSize = require('./Validate/BridgeSize.js');
-const BridgeCommand = require('./Validate/BridgeCommand.js');
+const BridgeDirection = require('./Validate/BridgeDirection.js');
 const InputView = require('./View/InputView.js');
 const OutputView = require('./View/OutputView.js');
 const BridgeGame = require('./BridgeGame.js');
-const Retry = require('./Validate/Retry.js');
+const BridgeCommand = require('./Validate/BridgeCommand.js');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator.js');
 
@@ -37,14 +37,14 @@ class Controller {
 
   inputMoving() {
     InputView.readMoving((command) => {
-      const bridgeCommand = new BridgeCommand(command);
-      this.checkReInputMoving(bridgeCommand, command);
+      const bridgeDirection = new BridgeDirection(command);
+      this.checkReInputMoving(bridgeDirection, command);
     });
   }
 
-  checkReInputMoving(bridgeCommand, command) {
+  checkReInputMoving(bridgeDirection, command) {
     try {
-      bridgeCommand.validate();
+      bridgeDirection.validate();
       this.printCurrentBridge(command);
     } catch (errorMessage) {
       printMessage(errorMessage);
@@ -81,33 +81,32 @@ class Controller {
   printResult() {
     const result = this.bridgeGame.gameResult();
     OutputView.printResult(...result);
-    close();
   }
 
   inputRetryQuit() {
-    InputView.readGameCommand((input) => {
-      const retry = new Retry(input);
+    InputView.readGameCommand((command) => {
+      const bridgeCommand = new BridgeCommand(command);
       this.safeBridgeList = JSON.parse(JSON.stringify(this.originalBridgeList));
-      this.checkInputRetryQuit(retry, input);
+      this.checkInputRetryQuit(bridgeCommand, command);
     });
   }
 
-  checkInputRetryQuit(retry, input) {
+  checkInputRetryQuit(bridgeCommand, command) {
     try {
-      retry.validate();
-      this.judgeRetryQuit(input);
+      bridgeCommand.validate();
+      this.judgeRetryQuit(command);
     } catch (errorMessage) {
       printMessage(errorMessage);
       this.inputRetryQuit();
     }
   }
 
-  judgeRetryQuit(input) {
-    if (isRetry(input)) {
+  judgeRetryQuit(command) {
+    if (isRetry(command)) {
       this.bridgeGame.retry();
       this.inputMoving();
     }
-    if (isQuit(input)) {
+    if (isQuit(command)) {
       this.printResult();
     }
   }

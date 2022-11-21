@@ -1,7 +1,8 @@
-const { checkPossibleCommand } = require('../Utils/Utils');
+const { checkPossibleCommand } = require('../Utils/ValidateUtils.js');
 
 class BridgeCommand {
   #command;
+
   constructor(command) {
     this.#command = command;
   }

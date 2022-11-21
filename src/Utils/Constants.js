@@ -10,22 +10,19 @@ const RULE = {
   MAX_SIZE: 20,
 };
 
-const COMMAND = {
+const DIRECTION = {
   UP: 'U',
   DOWN: 'D',
 };
 
-const IS_RETRY = {
-  YES: 'R',
-  NO: 'Q',
+const COMMAND = {
+  RETRY: 'R',
+  QUIT: 'Q',
 };
 
-const ERROR = {
-  PREFIX: '[ERROR]',
-  NOT_INTEGER: '정수를 입력해주세요.',
-  NOT_IN_RANGE: `${RULE.MIN_SIZE} ~ ${RULE.MAX_SIZE}사이의 자연수를 입력해주세요.`,
-  NOT_POSSIBLE_COMMAND: `대문자 ${COMMAND.UP}와 ${COMMAND.DOWN} 중 하나를 입력해주세요.`,
-  NOT_KEY: `대문자 ${IS_RETRY.YES}와 ${IS_RETRY.NO}중 하나를 입력해주세요`,
+const MOVE = {
+  PASS: 'O',
+  FAIL: 'X',
 };
 
 const GAME_RESULT = {
@@ -35,11 +32,12 @@ const GAME_RESULT = {
   X: '실패',
 };
 
-const MOVE = {
-  PASS: 'O',
-  FAIL: 'X',
+const ERROR = {
+  PREFIX: '[ERROR]',
+  NOT_INTEGER: '정수를 입력해주세요.',
+  NOT_IN_RANGE: `${RULE.MIN_SIZE} ~ ${RULE.MAX_SIZE}사이의 자연수를 입력해주세요.`,
+  NOT_POSSIBLE_DIRECTION: `대문자 ${DIRECTION.UP}와 ${DIRECTION.DOWN} 중 하나를 입력해주세요.`,
+  NOT_POSSIBLE_COMMAND: `대문자 ${COMMAND.RETRY}와 ${COMMAND.QUIT}중 하나를 입력해주세요`,
 };
 
-const RETRY_OR_EXIT = ['R', 'Q'];
-
-module.exports = { MESSAGE, RULE, RETRY_OR_EXIT, ERROR, COMMAND, GAME_RESULT, MOVE, IS_RETRY };
+module.exports = { MESSAGE, RULE, ERROR, DIRECTION, GAME_RESULT, MOVE, COMMAND };

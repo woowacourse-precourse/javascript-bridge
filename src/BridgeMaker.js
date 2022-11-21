@@ -1,11 +1,11 @@
-const { COMMAND } = require('./Utils/Constants.js');
+const { DIRECTION } = require('./Utils/Constants.js');
 
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const safeBridgeList = [];
     for (let count = 0; count < size; count++) {
       const direction = generateRandomNumber();
-      direction ? safeBridgeList.push(COMMAND.UP) : safeBridgeList.push(COMMAND.DOWN);
+      direction ? safeBridgeList.push(DIRECTION.UP) : safeBridgeList.push(DIRECTION.DOWN);
     }
     return safeBridgeList;
   },

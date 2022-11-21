@@ -1,4 +1,4 @@
-const { ERROR, RULE, COMMAND, IS_RETRY } = require('./Constants');
+const { ERROR, RULE, DIRECTION, IS_RETRY } = require('./Constants');
 
 const throwErrorMessage = (message) => {
   throw new Error(`${ERROR.PREFIX} ${message}`);
@@ -18,17 +18,17 @@ const checkSizeInRange = (size) => {
 };
 
 const checkPossibleDirection = (direction) => {
-  const directionList = Object.values(COMMAND);
+  const directionList = Object.values(DIRECTION);
   if (!directionList.includes(direction)) {
+    throwErrorMessage(ERROR.NOT_POSSIBLE_DIRECTION);
+  }
+};
+
+const checkPossibleCommand = (command) => {
+  const commandList = Object.values(IS_RETRY);
+  if (!commandList.includes(command)) {
     throwErrorMessage(ERROR.NOT_POSSIBLE_COMMAND);
   }
 };
 
-const checkHasKey = (key) => {
-  const commandList = Object.values(IS_RETRY);
-  if (!commandList.includes(key)) {
-    throwErrorMessage(ERROR.NOT_KEY);
-  }
-};
-
-module.exports = { checkIsInteger, checkSizeInRange, checkPossibleDirection, checkHasKey };
+module.exports = { checkIsInteger, checkSizeInRange, checkPossibleDirection, checkPossibleCommand };

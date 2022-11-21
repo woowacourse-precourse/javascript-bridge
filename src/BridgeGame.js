@@ -1,4 +1,4 @@
-const { MOVE, GAME_RESULT, COMMAND } = require('./Utils/Constants.js');
+const { MOVE, GAME_RESULT, DIRECTION } = require('./Utils/Constants.js');
 
 class BridgeGame {
   #bridgeMap;
@@ -12,13 +12,13 @@ class BridgeGame {
   }
 
   initBridgeMap() {
-    this.#bridgeMap[COMMAND.UP] = [];
-    this.#bridgeMap[COMMAND.DOWN] = [];
+    this.#bridgeMap[DIRECTION.UP] = [];
+    this.#bridgeMap[DIRECTION.DOWN] = [];
   }
 
   addBridgeMap(inputCommand, compareResult) {
-    this.#bridgeMap[COMMAND.UP].push(' ');
-    this.#bridgeMap[COMMAND.DOWN].push(' ');
+    this.#bridgeMap[DIRECTION.UP].push(' ');
+    this.#bridgeMap[DIRECTION.DOWN].push(' ');
     this.#bridgeMap[inputCommand].pop();
     this.#bridgeMap[inputCommand].push(compareResult);
   }

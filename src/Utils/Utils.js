@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { IS_RETRY } = require('./Constants');
+const { COMMAND } = require('./Constants');
 
 const playerInput = (message, callback) => {
   Console.readLine(message, callback);
@@ -13,12 +13,12 @@ const printMessage = (message) => {
   Console.print(message);
 };
 
-const isRetry = (input) => {
-  return input === IS_RETRY.YES;
+const isRetry = (command) => {
+  return command === COMMAND.RETRY;
 };
 
-const isQuit = (input) => {
-  return input === IS_RETRY.NO;
+const isQuit = (command) => {
+  return command === COMMAND.QUIT;
 };
 
 module.exports = {
