@@ -96,10 +96,10 @@ describe("다리 건너기 테스트", () => {
   test("다리 길이 예외 테스트", () => {
     runException([101]);
   });
-  
+
   test("다리 이동 예외 테스트", () => {
     expect(() => {
-      MoveInput('Z');
+      MoveInput('R');
     }).toThrow('[ERROR]');
     expect(() => {
       MoveInput('Q');
@@ -115,6 +115,27 @@ describe("다리 건너기 테스트", () => {
     }).toThrow('[ERROR]');
     expect(() => {
       MoveInput(15);
+    }).toThrow('[ERROR]');
+  });
+
+  test("재시작 예외 테스트", () => {
+    expect(() => {
+      RetryInput('U');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      RetryInput('D');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      RetryInput('r');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      RetryInput('q');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      RetryInput('rrr');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      RetryInput(15);
     }).toThrow('[ERROR]');
   });
 });
