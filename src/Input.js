@@ -1,16 +1,13 @@
 const OutputView=require('./OutputView')
 const BridgeGame=require('./BridgeGame')
-const MissionUtils  = require('@woowacourse/mission-utils')
 const bridegame=new BridgeGame()
 
 
-// let count=0
-
 class Input{
-  static count=0
+  static count=BridgeGame.count
   static originalBridge=''
 
-  static checkBride(bridgeLength){
+  static checkBridge(bridgeLength){
     if(bridgeLength<3 || bridgeLength>20) throw "[ERROR] range error occured"
     if(bridgeLength.match(/[a-zA-z]/g) || bridgeLength.match(/[ㄱ-ㅎ가-힣]/g)) throw "[ERROR] The string can not be accepted"
     if(bridgeLength.match([/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g])) throw "[ERROR] The string can not be accepted"
@@ -19,8 +16,6 @@ class Input{
 
   static randomBridge(bridgeArray){
     this.originalBridge=JSON.parse(JSON.stringify(bridgeArray))
-    bridegame.retry(this.originalBridge)
-    console.log(this.originalBridge);
   }
   static checkMovingInput(userSpace,bridgeArray){
     if(userSpace!=='U'&& userSpace!=='D') throw "[ERROR] Only U,D accepted"
@@ -31,8 +26,8 @@ class Input{
     this.count++
     if(gameInput!=='R' && gameInput!=='Q') throw "[ERROR] Only R,Q accepted"
     if(gameInput==='R'){
+      this.count=BridgeGame.retry()
       const newBridgeArray=this.originalBridge
-      console.log(newBridgeArray);
       return newBridgeArray
     }
     if(gameInput==='Q') {
