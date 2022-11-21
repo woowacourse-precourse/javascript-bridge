@@ -16,8 +16,11 @@ class Print {
   static GameRestartMessage() {
     Console.print('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)');
   }
-  static GameResult(result) {
-    Console.print(`게임 성공 여부: ${result}`);
+  static GameResultIsWin() {
+    Console.print(`게임 성공 여부: 성공`);
+  }
+  static GameResultIsDefeat() {
+    Console.print(`게임 성공 여부: 실패`);
   }
   static GameTryCount(count) {
     Console.print(`총 시도한 횟수: ${count}`);

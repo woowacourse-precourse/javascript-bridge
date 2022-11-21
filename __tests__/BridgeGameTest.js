@@ -5,9 +5,9 @@ describe('다리 건너기 게임 단위 테스트', () => {
         const bridgeGame = new BridgeGame([],[],1);
         const test = bridgeGame.getUserInputArray();
         bridgeGame.move('U');
-        expect(test).toEqual([1]);
-        bridgeGame.move('D')
-        expect(test).toEqual([1,0]);
+        expect(test).toEqual(['U']);
+        bridgeGame.move('D');
+        expect(test).toEqual(['U','D']);
     });
     it('재시작시 사용자의 입력값 초기화',()=>{
         const bridgeGame = new BridgeGame([],[],1);
@@ -24,7 +24,7 @@ describe('다리 건너기 게임 단위 테스트', () => {
         expect(test).toEqual(correct);
     });
     it('게임 승리 여부 판별',()=>{
-        const bridgeGame = new BridgeGame([0, 0],[0, 1, 0, 1],1);
+        const bridgeGame = new BridgeGame(['D', 'D'],['D', 'U', 'D', 'U'],1);
         const test = bridgeGame.getGameResult();
         expect(test).toBeFalsy();
     });

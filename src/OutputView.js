@@ -1,5 +1,4 @@
 const Print = require('../src/Print');
-const { Console } = require('@woowacourse/mission-utils');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -9,15 +8,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(userInput, bridgeInfo, upside = [], downside = []) {
-    const CurrentRound = userInput.length;
-    this.addLeftBracket(upside, downside);
-    for (let i = 0; i < CurrentRound; i++) {
-      this.getAllgameResult(userInput, bridgeInfo, upside, downside, i);
-      this.addDivision(upside, downside);
-    }
-    this.deleteItem(upside, downside);
-    this.addRightBracket(upside, downside);
+  printMap(userInput, bridgeInfo) {
+    const upside = this.generateUpside(userInput, bridgeInfo);
+    const downside = this.generateDownside(userInput, bridgeInfo);
     Print.BothBridge(upside, downside);
   },
 
@@ -26,58 +19,93 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(userInput, bridgeInfo, result, count) {
+  printResult(userInput, bridgeInfo, count) {
     Print.ResultTitle();
     this.printMap(userInput, bridgeInfo);
     Print.Blank();
-    Print.GameTryCount(result);
+    if(userInput.length === bridgeInfo.length){
+      Print.GameResultIsWin();
+    }
+    if(userInput.length !== bridgeInfo.length){
+      Print.GameResultIsDefeat();
+    }
     Print.GameTryCount(count);
   },
-
-  addLeftBracket(upside, downside) {
-    upside.push('[ ');
-    downside.push('[ ');
+  generateUpside(userInput, bridgeInfo) {
+    const bridge = [];
+    this.openBracketTo(bridge);
+    for (let i = 0; i < userInput.length; i++) {
+      this.makeEachSectionAtUpside(userInput[i], bridgeInfo[i], bridge);
+    }
+    bridge.pop();
+    this.CloseBracketTo(bridge);
+    return bridge;
   },
-  addRightBracket(upside, downside) {
-    upside.push(' ]');
-    downside.push(' ]');
+  makeEachSectionAtUpside (userInput, bridgeInfo, bridge) {
+    if(bridgeInfo === 'U') {
+      this.printOMarkAtUpside(userInput, bridge);
+      this.printXMarkAtDownside(userInput, bridge);
+      this.printBlankAtUpside(userInput, bridgeInfo, bridge);
+    }
+    bridge.push(' | ');
   },
-  addDivision(upside, downside) {
-    upside.push(' | ');
-    downside.push(' | ');
-  },
-  deleteItem(upside, downside) {
-    upside.pop();
-    downside.pop();
-  },
-  getAllgameResult(userInput, bridgeInfo, upside, downside, count) {
-    this.getUpsideResult(userInput, bridgeInfo, upside, downside, count);
-    this.getDownsideResult(userInput, bridgeInfo, upside, downside, count);
-  },
-  getUpsideResult(userInput, bridgeInfo, upside, downside, count) {
-    if (bridgeInfo[count] === 1) {
-      if (userInput[count] === 1) {
-        upside.push('O');
-        downside.push('\u00A0');
-      }
-      if (userInput[count] === 0) {
-        upside.push(`\u00A0`);
-        downside.push('X');
-      }
+  printOMarkAtUpside(userInput, bridge){
+    if(userInput === 'U'){
+      bridge.push('0');
     }
   },
-  getDownsideResult(userInput, bridgeInfo, upside, downside, count) {
-    if (bridgeInfo[count] === 0) {
-      if (userInput[count] === 1) {
-        upside.push('X');
-        downside.push('\u00A0');
-      }
-      if (userInput[count] === 0) {
-        upside.push('\u00A0');
-        downside.push('O');
-      }
+  printXMarkAtDownside(userInput, bridge){
+    if(userInput === 'D'){
+      bridge.push('X');
     }
   },
+  printBlankAtUpside(userInput, bridgeInfo, bridge){
+    if(userInput === 'D' && bridgeInfo === 'D'){
+      bridge.push('\u00A0');
+    }
+  },
+  generateDownside(userInput, bridgeInfo) {
+    const bridge = [];
+    this.openBracketTo(bridge);
+    for (let i = 0; i < userInput.length; i++) {
+      this.makeEachSectionAtDownside(userInput[i], bridgeInfo[i], bridge);
+    }
+    bridge.pop();
+    this.closeBracketTo(bridge);
+    return bridge;
+  },
+  makeEachSectionAtDownside (userInput, bridgeInfo, bridge) {
+    if(bridgeInfo === 'D') {
+      this.printOMarkAtDownside(userInput, bridge);
+      this.printXMarkAtUpside(userInput, bridge);
+      this.printBlankAtDownside(userInput, bridgeInfo, bridge);
+    }
+    addDivisionTo(bridge);
+  },
+  printXMarkAtDownside(userInput, bridge){
+    if(userInput === 'U'){
+      bridge.push('X');
+    }
+  },
+  printOMarkAtDownside(userInput, bridge){
+    if(userInput === 'D'){
+      bridge.push('0');
+    }
+  },
+  printBlankAtDownside(userInput, bridgeInfo, bridge){
+    if(userInput === 'U' && bridgeInfo === 'U'){
+      bridge.push('\u00A0');
+    }
+  },
+  closeBracketTo(bridge){
+    bridge.push(' ]');
+  },
+  openBracketTo(bridge){
+    bridge.push('[ ');
+  },
+  addDivisionTo(bridge){
+    bridge.push(' | ');
+  }
 };
 
 module.exports = OutputView;

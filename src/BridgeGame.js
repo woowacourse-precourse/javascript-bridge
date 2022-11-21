@@ -18,10 +18,10 @@ class BridgeGame {
    */
   move(moveInput) {
     if(moveInput === 'U'){
-      this.#userInputArray.push(1);
+      this.#userInputArray.push('U');
     }
     if(moveInput === 'D'){
-      this.#userInputArray.push(0);
+      this.#userInputArray.push('D');
     }
   }
 
