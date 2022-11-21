@@ -44,7 +44,7 @@ class BridgeController {
     this.#bridgeGame.selectMovemonetPosition(movePosition);
     const drawBridge = this.getDrawBridge();
     OutputView.printMap(drawBridge);
-    this.controlNextStep();
+    this.controlNextStep(drawBridge);
   }
 
   getDrawBridge() {
@@ -73,12 +73,10 @@ class BridgeController {
     return (downBridge += ` | ${position[1]}`);
   }
 
-  controlNextStep() {
-    const drawBridge = this.getDrawBridge();
+  controlNextStep(drawBridge) {
     if (drawBridge.upBridge.includes('X') || drawBridge.downBridge.includes('X')) {
       return this.requestGameCommand();
     }
-
     if (this.#bridgeGame.isSuccess()) {
       const attemps = this.#bridgeGame.getNumberOfAttempts();
       OutputView.printResult(drawBridge, '성공', attemps);
