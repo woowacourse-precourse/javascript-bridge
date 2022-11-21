@@ -22,6 +22,7 @@ class BridgeGame {
       this.makeOMap();
       return true;
     }
+    this.result = false;
     this.makeXMap();
     return false;
   }
