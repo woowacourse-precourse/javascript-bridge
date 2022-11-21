@@ -10,14 +10,26 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(movingCommand, bridge, movingRoute) {
-    if (movingCommand === bridge[0]) {
-      movingRoute[0].push('O');
-      movingRoute[1].push(' ');
+    const movingRouteIndex = movingRoute[0].length;
+    if (movingCommand === 'U') {
+      if (movingCommand === bridge[movingRouteIndex]) {
+        movingRoute[0].push('O');
+        movingRoute[1].push(' ');
+      } else {
+        movingRoute[0].push('X');
+        movingRoute[1].push(' ');
+      }
     } else {
-      movingRoute[0].push('X');
-      movingRoute[1].push(' ');
+      if (movingCommand === bridge[movingRouteIndex]) {
+        movingRoute[1].push('O');
+        movingRoute[0].push(' ');
+      } else {
+        movingRoute[1].push('X');
+        movingRoute[0].push(' ');
+      }
     }
     OutputView.printMap(movingRoute);
+    return movingRoute;
   }
 
   /**

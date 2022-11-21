@@ -17,21 +17,21 @@ const InputView = {
         BridgeRandomNumberGenerator.generate
       );
       Console.print('');
-      this.readMoving(bridge);
+      let movingRoute = [[], []];
+      this.readMoving(bridge, movingRoute);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge) {
+  readMoving(bridge, movingRoute) {
     Console.readLine(INPUT_MESSAGE.MOVING_COMMAND, (movingCommand) => {
       Validation.validateMovingCommand(movingCommand);
 
       const bridgeGame = new BridgeGame();
-      let movingRoute = [[], []];
-
-      bridgeGame.move(movingCommand, bridge, movingRoute);
+      const gameReult = bridgeGame.move(movingCommand, bridge, movingRoute);
+      return this.readMoving(bridge, gameReult);
     });
   },
 
