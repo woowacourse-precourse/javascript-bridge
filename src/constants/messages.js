@@ -3,8 +3,10 @@ const OUTPUT = {
   RESULT: "최종 게임 결과",
   SUCCESS: (result) => `게임 성공 여부: ${result}`,
   ATTEMPTS: (attempts) => `총 시도한 횟수: ${attempts}`,
+  MAP: (list) => `[ ${list} ]`,
   LINE: "\n",
   BLANK: " ",
+  DIVISION: " | ",
 };
 
 const INPUT = {
