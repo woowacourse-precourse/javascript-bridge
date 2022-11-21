@@ -4,6 +4,7 @@ const OutputView = require('../views/OutputView');
 
 class Bridge {
   constructor() {
+    this.executionCount = 1;
     this.locationNumber = 0;
     this.compareResult = [[], []];
   }
@@ -34,13 +35,14 @@ class Bridge {
   }
 
   sameCheck(value) {
-    this.locationNumber += 1;
     if (this.bridge[this.locationNumber] === value) {
       this.#correct(value);
+      this.locationNumber += 1;
       return;
     }
 
     this.#incorrect(value);
+    this.locationNumber += 1;
   }
 
   #incorrect(value) {
