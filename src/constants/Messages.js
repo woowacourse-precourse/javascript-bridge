@@ -13,6 +13,10 @@ const ERROR_MESSAGES = Object.freeze({
     EMPTY: '[ERROR] 이동할 칸을 입력해주세요.',
     VALUE: '[ERROR] U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력할 수 있습니다.',
   },
+  COMMAND: {
+    EMPTY: '[ERROR] 게임을 다시 시도할지 여부를 입력해주세요.',
+    VALUE: '[ERROR] R(재시도)와 Q(종료) 중 하나의 문자를 입력할 수 있습니다.',
+  },
 });
 
 module.exports = { MESSAGES, ERROR_MESSAGES };

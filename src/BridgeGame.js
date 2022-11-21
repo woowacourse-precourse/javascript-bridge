@@ -36,6 +36,16 @@ class BridgeGame {
     }
   }
 
+  static validateCommand(command) {
+    const commands = ['R', 'Q'];
+    if (command.length === 0) {
+      throw new Error(ERROR_MESSAGES.COMMAND.EMPTY);
+    }
+    if (!commands.includes(command)) {
+      throw new Error(ERROR_MESSAGES.COMMAND.VALUE);
+    }
+  }
+
   setRandomBridge(bridge) {
     this.#randomBridge = bridge;
   }
