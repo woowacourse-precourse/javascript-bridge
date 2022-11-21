@@ -23,6 +23,20 @@ class App {
     }
     const game = new BridgeGame(input);
     this.#game = game;
+    InputView.readMoving(this.proceedStepTwo.bind(this));
+  }
+
+  proceedStepTwo(input) {
+    try {
+      Validator.validateSpace(input);
+    } catch (e) {
+      Console.print(e.message);
+      InputView.readMoving(this.proceedStepTwo.bind(this));
+      return;
+    }
+    this.#game.move(input);
+    const map = this.#game.getMap();
+    OutputView.printMap(map);
   }
 }
 
