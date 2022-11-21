@@ -25,6 +25,10 @@ class BridgeValidator extends Validator {
 
   isValidMoveCommand(value) {
     this.isValidInput(value);
+
+    if (!VALID_MOVE_INPUT.includes(value)) {
+      throw new Error(`${this.ERROR_MESSAGE_HEADER} ${VALID_MOVE_INPUT.join(' 또는 ')}만 입력할 수 있습니다.\n다시 확인하고 입력해 주세요.`);
+    }
   }
 }
 
