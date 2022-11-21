@@ -31,11 +31,24 @@ class BridgeGame {
 
   checkDirection(moveDirection, mark) {
     if (moveDirection === PARAMETERS.upControl) {
-      // mark game result -> deliver mark and where to record mark | space 
+      this.recordMovement(this.top, this.bottom, mark);
     } else if (moveDirection === PARAMETERS.downControl) {
-      // mark game result -> deliver mark and where to record mark | space 
+      this.recordMovement(this.bottom, this.top, mark);
     }
   }
+
+  recordMovement(markList, spaceList, mark) {
+    this.recordMark(markList, mark);
+    this.recordMark(spaceList, PARAMETERS.space);
+  }
+
+  recordMark(row, mark) {
+    if (row.length !== 0) {
+      row.push(PARAMETERS.separator, mark);
+    } else {
+      row.push(mark);
+    }
+  } 
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
