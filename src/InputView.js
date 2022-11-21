@@ -10,23 +10,23 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(bridge) {
+  readBridgeSize(bridge,bridgeGame) {
     Console.readLine(COMMAND.INPUT, (bridgeSize) => {
       exception.checkBridgeSize(bridgeSize);
       // if(exception.checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge);
 
       bridge.setBridge(Number(bridgeSize));
-      this.readMoving();
+      this.readMoving(bridgeGame);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(bridgeGame) {
     Console.readLine(COMMAND.MOVE, (space) => {
-      Console.print(space);
       exception.checkSpace(space);
+      bridgeGame.move(space);
     });
   },
 
