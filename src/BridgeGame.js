@@ -67,6 +67,18 @@ class BridgeGame {
     for (let i = 0; i < userDirectionInput.length; i++) {
       this.checkUpDown(userDirectionInput[i], upArray, downArray);
     }
+    this.#bridgeGameController.outputMap(upArray, downArray);
+  }
+
+  checkUpDown(input, upArray, downArray) {
+    if (input[1] === DIRECTION.UP) {
+      upArray.push(input[0]);
+      downArray.push(" ");
+    }
+    if (input[1] === DIRECTION.DOWN) {
+      downArray.push(input[0]);
+      upArray.push(" ");
+    }
   }
 
   validateDirection(direction) {
