@@ -61,7 +61,7 @@ class BridgeGame {
   }
 
   getIndex() {
-    return this.#index;
+    return this.#index + 1;
   }
 }
 
