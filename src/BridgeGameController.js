@@ -29,6 +29,7 @@ const BridgeGameController = {
   askRetry(bridgeGame) {
     InputView.readGameCommand((command) => {
       if (command === 'R') return BridgeGameController.retry(bridgeGame);
+      if (command === 'Q') return BridgeGameController.end(bridgeGame);
     });
   },
 
@@ -38,7 +39,9 @@ const BridgeGameController = {
   },
 
   end(bridgeGame) {
-    OutputView.printResult();
+    const result = bridgeGame.getResult();
+    const map = bridgeGame.getMap();
+    OutputView.printResult({ map, result });
   },
 };
 

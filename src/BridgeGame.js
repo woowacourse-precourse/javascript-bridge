@@ -6,6 +6,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
  */
 class BridgeGame {
   #history = [];
+  #tryCount = 1;
   #bridge;
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -23,6 +24,7 @@ class BridgeGame {
    */
   retry() {
     this.#history = [];
+    this.#tryCount += 1;
   }
 
   setBridge(size) {
@@ -65,6 +67,13 @@ class BridgeGame {
     });
 
     return `[ ${downFloors.join(' | ')} ]`;
+  }
+
+  getResult() {
+    const isCompleted = this.isFinal() && this.isSuccess() ? '성공' : '실패';
+    const tryCount = String(this.#tryCount);
+
+    return { isCompleted, tryCount };
   }
 }
 
