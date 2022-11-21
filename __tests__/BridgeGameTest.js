@@ -13,4 +13,17 @@ describe("BridgeGame 클래스 테스트", () => {
     expect(gameRec.bridgeOutput.firstBridge).toEqual("[ O |");
     expect(gameRec.bridgeOutput.secondBridge).toEqual("[   |");
   });
+
+  test("checkCorrectOrNot 메서드-1: 참가자 입력 값(U/D)과 실제 정답 비교", () => {
+    const gameRec = {
+      moveNum: 0,
+      attemptNum: 1,
+      bridgeAnswer: ["U", "D", "D"],
+      inputUOrD: "U",
+      bridgeOutput: { firstBridge: "[ O ]", secondBridge: "[   ]" },
+    };
+    const bridgeGame = new BridgeGame();
+    bridgeGame.checkCorrectOrNot(gameRec);
+    expect(gameRec.correctOrNot).toEqual("O");
+  });
 });
