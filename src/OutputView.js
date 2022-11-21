@@ -1,19 +1,76 @@
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
+const MissionUtils = require('@woowacourse/mission-utils')
+const { step } = require('./lib/constants')
+
 const OutputView = {
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printMap() {},
+  map: {
+    PREFIX: '[',
+    SEPARATOR: '|',
+    SUFFIX: ']',
+    RIGHT: 'O',
+    WRONG: 'X',
+    DEFAULT: ' ',
+  },
+
+  result: {
+    LAST: '최종 게임 결과',
+  },
 
   /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {number[]} bridge
+   * @param {number[]} moves
+   * @param {boolean=} last - 게임 최종 여부
+   * @returns {boolean} success - 게임 성공 / 실패 여부
    */
+  printMap(bridge, moves, last = false) {
+    const [upside, downside] = this.drawMap(bridge, moves)
+
+    if (last) MissionUtils.Console.print(this.result.LAST)
+    MissionUtils.Console.print(this.formatSide(upside))
+    MissionUtils.Console.print(this.formatSide(downside))
+
+    return (
+      upside.every((result) => result !== this.map.WRONG) &&
+      downside.every((result) => result !== this.map.WRONG)
+    )
+  },
+
+  /**
+   * @param {number[]} bridge
+   * @param {number[]} moves
+   * @returns {string[][]}
+   */
+  drawMap(bridge, moves) {
+    const [upside, downside] = this.initializeMap(moves.length)
+
+    moves.forEach((move, index) => {
+      const side = move === step.D ? downside : upside
+
+      side[index] = move === bridge[index] ? this.map.RIGHT : this.map.WRONG
+    })
+
+    return [upside, downside]
+  },
+
+  /**
+   * @param {number} length
+   * @returns {string[][]}
+   */
+  initializeMap(length) {
+    const side = new Array(length).fill(this.map.DEFAULT)
+
+    return [[...side], [...side]]
+  },
+
+  /**
+   * @param {number[]} side
+   * @returns {string}
+   */
+  formatSide(side) {
+    return `${this.map.PREFIX} ${side.join(` ${this.map.SEPARATOR} `)} ${
+      this.map.SUFFIX
+    }`
+  },
+
   printResult() {},
 }
 
