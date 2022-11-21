@@ -1,6 +1,4 @@
 const { ERROR_MESSAGES } = require('./constants/Messages');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./utils/BridgeRandomNumberGenerator');
 
 const BRIDGE_RANGE = {
   START: 3,
@@ -24,7 +22,7 @@ class BridgeGame {
 
   #userBridge = [];
 
-  static #validateSize(size) {
+  static validateSize(size) {
     if (size.length === 0) {
       throw new Error(ERROR_MESSAGES.BRIDGE_SIZE.EMPTY);
     }
@@ -33,9 +31,16 @@ class BridgeGame {
     }
   }
 
-  setRandomBridge(size) {
-    BridgeGame.#validateSize(size);
-    const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+  static validateBlock(block) {
+    if (block.length === 0) {
+      throw new Error(ERROR_MESSAGES.BLOCK.EMPTY);
+    }
+    if (!Object.keys(BridgeGame.BRIDGE_SHAPE).includes(block)) {
+      throw new Error(ERROR_MESSAGES.BLOCK.VALUE);
+    }
+  }
+
+  setRandomBridge(bridge) {
     this.#randomBridge = bridge;
   }
 
