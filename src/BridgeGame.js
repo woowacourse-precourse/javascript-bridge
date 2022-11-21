@@ -1,4 +1,6 @@
 const BridgeBoard = require("./BridgeBoard");
+const InputView = require("./InputView")
+const OutputView = require('./OutputView')
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -16,7 +18,9 @@ class BridgeGame {
    */
   move(direction) {
     if (this.#bridgeBoard.moveTo(direction, this.#round)) {
-      this.#round++;
+      this.clearRound();
+    }else{
+      this.faildRound();
     }
   }
 
