@@ -1,4 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils')
 
 const BridgeMaker = {
   /**
@@ -16,6 +15,7 @@ const BridgeMaker = {
     }
 
     const bridge = this.formatBridge(numbers)
+    console.log(bridge)
     return bridge
   },
 
