@@ -44,7 +44,13 @@ const InputView = {
           OutputView.printMap(" ", "O");
         }
 
-        if (check == false) {
+        if (check == false && answer == "U") {
+          OutputView.printMap("X", " ");
+          this.readGameCommand();
+          return;
+        }
+        if (check == false && answer == "D") {
+          OutputView.printMap(" ", "X");
           this.readGameCommand();
           return;
         }
