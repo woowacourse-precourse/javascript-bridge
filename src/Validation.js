@@ -15,7 +15,7 @@ const Validation = {
   },
   restartInput: (input) => {
     if (!(input === "R" || input === "Q")) {
-      throw new Error(ERROR_MESSAGE.STEP_ERROR);
+      throw new Error(ERROR_MESSAGE.RESTART_ERROR);
     }
   },
 };

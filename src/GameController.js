@@ -73,11 +73,14 @@ class GameController {
   }
   askStopGame() {
     InputView.readGameCommand((input) => {
-      Validation.restartInput(input);
-      this.chooseRetryGame(input);
+      errorController(
+        this.chooseRetryGame.bind(this, input),
+        this.askStopGame.bind(this)
+      );
     });
   }
   chooseRetryGame(input) {
+    Validation.restartInput(input);
     if (input === "R") {
       this.bridgeGame.retry();
       this.inputStep();
