@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
-const { START_GAME_MSG } = require('./constants');
+const { START_GAME_MSG, RETRY_INPUT_ERROR } = require('./constants');
 const BridgeGame = require('./BridgeGame');
 
 class App {
@@ -45,14 +45,12 @@ class App {
         // 마지막까지 성공하면 게임 종료
         if (moveInputArray.length === this.bridgeGame.getBridgeLength()) {
           // 게임 결과 출력 후 게임 종료
-          OutputView.printGuide('게임결과 출력');
-          Console.close();
+          this.quit();
         } else {
           this.requestMoving();
         }
       } else {
-        // false 는 X 나옴 -> 실패이면, 다시 시작할지 종료할지 물어봐야 함.
-        OutputView.printGuide('실패');
+        this.requestRetry();
       }
     } catch (err) {
       OutputView.printGuide(err.message);
@@ -60,12 +58,39 @@ class App {
     }
   }
 
-  requestRetryOrExit() {
-    InputView.readGameCommand();
+  requestRetry() {
+    InputView.readGameCommand(this.checkValidCommand.bind(this));
+  }
+
+  checkValidCommand(tryInput) {
+    try {
+      if (tryInput !== 'Q' && tryInput !== 'R') {
+        throw new Error(RETRY_INPUT_ERROR);
+      }
+      this.determineTryOrExit(tryInput);
+    } catch (err) {
+      OutputView.printGuide(err.message);
+      this.tryAgain(this.requestRetry);
+    }
+  }
+
+  determineTryOrExit(tryInput) {
+    if (tryInput === 'Q') {
+      this.quit();
+    } else {
+      this.bridgeGame.retry();
+      this.requestMoving();
+    }
   }
 
   tryAgain(tryAgainFunc) {
     tryAgainFunc.call(this);
+  }
+
+  quit() {
+    // 결과 출력 후 종료.
+    OutputView.printResult();
+    Console.close();
   }
 }
 
