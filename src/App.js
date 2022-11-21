@@ -42,7 +42,7 @@ class App {
   questionBridgeMake() {
     InputView.readBridgeSize((bridgeAnswer) => {
       try {
-        Validator.checkBridgeInput(bridgeAnswer);
+        Validator.checkBridgeLengthInput(bridgeAnswer);
         this.runBridgeMake(+bridgeAnswer);
         this.#appStatus = this.#APP_STATUS.QUESTION_MOVE;
       } catch (e) {

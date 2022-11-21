@@ -41,7 +41,7 @@ const Validator = Object.freeze({
     return true;
   },
 
-  checkBridgeInput(input) {
+  checkBridgeLengthInput(input) {
     if (Validator.checkSpace(input) && Validator.checkNan(input) && Validator.checkRange(input)) {
       return true;
     }
