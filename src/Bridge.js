@@ -3,31 +3,30 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 class Bridge {
   #answer;
-  #step;
+
   constructor() {
     this.#answer = [];
-    this.#step = 0;
   }
-  init(length) {
+  generate(length) {
     this.#answer = BridgeMaker.makeBridge(
       length,
       BridgeRandomNumberGenerator.generate
     );
   }
-  move() {
-    this.#step += 1;
-  }
   reset() {
-    this.#step = 0;
+    this.#answer = [];
   }
-  get currentStage() {
-    return this.#answer.slice(0, this.#step);
+  addAnswer(answer) {
+    this.#answer.push(answer);
   }
-  get length() {
+  currentStage(step) {
+    return this.#answer.slice(0, step);
+  }
+  getLength() {
     return this.#answer.length;
   }
-  get currentAnswer() {
-    return this.#answer[this.#step - 1];
+  currentAnswer(step) {
+    return this.#answer[step - 1];
   }
 }
 

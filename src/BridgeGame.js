@@ -5,45 +5,51 @@ class BridgeGame {
   #bridge;
   #inputs;
   #trial;
-
+  #step;
   constructor() {
     this.#bridge = new Bridge();
-    this.#inputs = [];
+    this.#inputs = new Bridge();
+    this.#step = 0;
     this.#trial = 1;
   }
   start(bridgeLength) {
-    if (this.#bridge.length === 0) {
-      this.#bridge.init(bridgeLength);
+    if (this.#bridge.getLength() === 0) {
+      this.#bridge.generate(bridgeLength);
     }
   }
   move(command) {
-    this.#inputs.push(command);
-    this.#bridge.move();
-    return { bridge: this.#bridge.currentStage, inputs: this.#inputs.slice() };
+    this.#inputs.addAnswer(command);
+    this.#step += 1;
+    return {
+      bridge: this.#bridge.currentStage(this.#step),
+      inputs: this.#inputs.currentStage(this.#step),
+    };
   }
 
   isAnswer() {
-    if (Validation.isSame(this.#bridge.length, this.#inputs.length)) {
+    if (Validation.isSame(this.#bridge.getLength(), this.#inputs.getLength())) {
       return true;
     }
     return false;
   }
   moveAfter(command) {
-    if (Validation.isDifferent(this.#bridge.currentAnswer, command)) {
+    if (
+      Validation.isDifferent(this.#bridge.currentAnswer(this.#step), command)
+    ) {
       return false;
     }
     return true;
   }
 
   retry() {
-    this.#bridge.reset();
+    this.#step = 0;
     this.#trial += 1;
-    this.#inputs = [];
+    this.#inputs.reset();
   }
   end() {
     return {
-      bridge: this.#bridge.currentStage,
-      inputs: this.#inputs.slice(),
+      bridge: this.#bridge.currentStage(this.#step),
+      inputs: this.#inputs.currentStage(this.#step),
       trial: this.#trial,
     };
   }
