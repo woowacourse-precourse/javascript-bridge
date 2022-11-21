@@ -5,6 +5,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
 const { QUESTION } = require('./constants/messages');
 const Validation = require('./Validation')
 const BridgeGame = require('./BridgeGame')
+const OutputView = require('./OutputView')
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -29,8 +30,6 @@ const InputView = {
     Console.readLine(QUESTION.NEXT_MOVE,(input)=>{
       Validation.validationForNextMove(input)
       new BridgeGame().move(input,generatedBridge,gameStatus)
-      console.log(gameStatus)
-
         // if(this.generatedBridge.length===this.gameStatus.playerLocation) {
         //     this.gameStatus.wrongFlag=true
         //     return

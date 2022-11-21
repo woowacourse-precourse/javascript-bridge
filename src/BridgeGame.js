@@ -12,7 +12,6 @@ class BridgeGame {
    */
   move(input,generatedBridge,gameStatus) {
     new CalcForDrawingBridgeStatus(input,generatedBridge,gameStatus).calc()
-    OutputView.printMap(gameStatus)
     //console.log(gameStatus)
   }
 

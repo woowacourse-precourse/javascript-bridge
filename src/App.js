@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView')
+const OutputView= require('./OutputView')
 
 class App {
 
@@ -30,6 +31,8 @@ class App {
 
   playerMove(){
     InputView.readMoving(this.#generatedBridge,this.#gameStatus)
+    console.log(this.#gameStatus)
+    //OutputView.printMap(this.#gameStatus)
   }
 
   
