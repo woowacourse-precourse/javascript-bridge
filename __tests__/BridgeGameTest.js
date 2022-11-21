@@ -25,7 +25,7 @@ describe('다리 건너기 게임 단위 테스트', () => {
     });
     it('게임 승리 여부 판별',()=>{
         const bridgeGame = new BridgeGame([0, 0],[0, 1, 0, 1],1);
-        const test = bridgeGame.isUserWin();
+        const test = bridgeGame.getGameResult();
         expect(test).toBeFalsy();
     });
 });

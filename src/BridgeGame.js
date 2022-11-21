@@ -45,6 +45,24 @@ class BridgeGame {
   getTryCount(){
     return this.#tries;
   }
+
+  getGameResult(){
+    const INDEX = this.getUserInputArray().length - 1;
+    if (this.#userInputArray[INDEX] === this.#bridgeInfoArray[INDEX]){
+      return this.isUserWin();
+    }
+    if (this.#userInputArray[INDEX] !== this.#bridgeInfoArray[INDEX]){
+      return this.isUserLose();
+    }
+  }
+
+  isUserWin(){
+    return true;
+  }
+
+  isUserLose(){
+    return false;
+  } 
 }
 
 module.exports = BridgeGame;
