@@ -83,6 +83,12 @@ class App {
       this.retryAndMove();
     }
   }
+
+  checkIsQ(userInput) {
+    if (userInput === 'Q') {
+      this.printFinalGameResultAndClose();
+    }
+  }
 }
 
 module.exports = App;
