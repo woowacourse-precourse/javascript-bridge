@@ -1,90 +1,36 @@
-const { UTILS_URL } = require('../constant/Key');
-const { Console } = require(UTILS_URL);
-const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const { ASK_MESSAGE } = require('../constant/Message');
-const BridgeGame = require('./BridgeGame');
+const Validation = require('../model/Validaion');
+const BridgeGame = require('../model/BridgeGame');
 
 class BridgeProcess {
   #outputView = OutputView;
-  #inputView = InputView;
-  #gameReport;
+  #gameReport = new BridgeGame();
 
-  start() {
-    this.#outputView.printStart();
-    this.#process();
+  checkValidation(key, checkElement) {
+    try {
+      new Validation(key.CHECK_VALIDATION, checkElement).showResult();
+      return true;
+    } catch (error) {
+      this.#outputView.printError(error);
+      return false;
+    }
   }
 
-  #process() {
-    this.#gameReport = new BridgeGame();
-    this.#inputBridgeSize();
+  makeBridge(bridgeSize) {
+    this.#gameReport.round.total === 1 ? this.#gameReport.makeBridgeInfo(bridgeSize) : '';
   }
 
-  #inputBridgeSize() {
-    Console.readLine(ASK_MESSAGE.INPUT_BRIDGESIZE, (bridgeSize) => {
-      const isBridgeSize = this.#inputView.readBridgeSize(bridgeSize);
-      this.#gameReport.round.total === 1 ? this.#gameReport.makeBridgeInfo(bridgeSize) : '';
-      isBridgeSize ? this.#inputMovement() : this.#inputBridgeSize();
-    });
-  }
-
-  #inputMovement() {
-    Console.readLine(ASK_MESSAGE.INPUT_MOVEMENT, (movement) => {
-      const isMovement = this.#inputView.readMoving(movement);
-      isMovement ? this.#printMovement(isMovement) : this.#inputMovement();
-    });
-  }
-
-  #printMovement(movement) {
-    const [match, { sucess, process }] = this.#gameReport.move(movement);
+  moveToBridge(movement) {
+    const [match, result] = this.#gameReport.move(movement);
     this.#outputView.printMap(match);
-    [...this.#movementOptions].filter(([key, value]) =>
-      key.sucess === sucess && key.process === process ? value(sucess, match) : ''
-    );
+    return [match, result];
   }
 
-  #movementOptions = new Map([
-    [
-      { sucess: true, process: false },
-      (sucess, match) => {
-        this.#printFinalResult(sucess, match);
-      },
-    ],
-    [
-      { sucess: false, process: true },
-      () => {
-        this.#inputMovement();
-      },
-    ],
-    [
-      { sucess: false, process: false },
-      (_, match) => {
-        this.#inputGameCommand(match);
-      },
-    ],
-  ]);
-
-  #inputGameCommand(match) {
-    Console.readLine(ASK_MESSAGE.INPUT_GAMECOMMAND, (command) => {
-      const isCommand = this.#inputView.readGameCommand(command);
-      this.#commandOptions[isCommand](match);
-    });
+  restartGame() {
+    this.#gameReport.retry();
   }
 
-  #commandOptions = {
-    R: () => {
-      this.#inputMovement();
-      this.#gameReport.retry();
-    },
-    Q: (match) => {
-      this.#printFinalResult(false, match);
-    },
-    false: () => {
-      this.#inputGameCommand();
-    },
-  };
-
-  #printFinalResult(sucess, match) {
+  finalResult(sucess, match) {
     this.#outputView.printResult(sucess, this.#gameReport.round.total, match);
   }
 }

@@ -1,9 +1,13 @@
-const BridgeProcess = require('./controller/BridgeProcess');
+const InputView = require('./view/InputView');
+const OutputView = require('./view/OutputView');
 
-// 앱은 controlel
 class App {
+  #outputView = OutputView;
+  #inputView = InputView;
+
   play() {
-    new BridgeProcess().start();
+    this.#outputView.printStart();
+    this.#inputView.readBridgeSize();
   }
 }
 

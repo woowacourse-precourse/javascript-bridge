@@ -213,3 +213,4 @@ Q
 
 - [x] 하드코딩 피하기
 - [x] validation의 재사용성, 유지보수
+- [x] readline 분리하기
