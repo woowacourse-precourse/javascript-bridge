@@ -1,7 +1,3 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
-
 const { Console } = require('@woowacourse/mission-utils');
 const Messages = require('./Messages');
 const BridgeMaker = require('./BridgeMaker');
@@ -49,9 +45,6 @@ const InputView = {
     return BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
   readMoving(bridge) {
     this.wrappingInput(Messages.INPUT_MOVING, (upOrDown) => {
       this.validateMoving(upOrDown);
@@ -76,9 +69,6 @@ const InputView = {
     } else this.readMoving(bridge);
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand(bridge) {
     this.wrappingInput(Messages.INPUT_RESTART_OR_END, (restartOrQuit) => {
       this.validateGameCommand(restartOrQuit);
