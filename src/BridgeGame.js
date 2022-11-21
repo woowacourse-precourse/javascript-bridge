@@ -22,10 +22,7 @@ class BridgeGame {
    */
   canMove(input) {
     if (!["U", "D"].includes(input))
-      throw new InputError(
-        "U/D",
-        "[ERROR] U, D 이외의 문자는 오류가 발생합니다."
-      );
+      throw new InputError("U/D", "[ERROR] 유효한 값(U or D)를 입력해주세요.");
     if (input === this.#bridge[this.#currentIdx]) return true;
     return false;
   }
@@ -56,10 +53,7 @@ class BridgeGame {
 
   isRetry(input) {
     if (!["R", "Q"].includes(input))
-      throw new InputError(
-        "R/Q",
-        "[ERROR] R, Q 이외의 입력은 오류가 발생합니다."
-      );
+      throw new InputError("R/Q", "[ERROR] 유효한 값(R or Q)를 입력해주세요.");
     if (input == "R") return this.retry();
     return false;
   }
