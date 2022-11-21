@@ -50,41 +50,29 @@ const OutputView = {
     upside.pop();
     downside.pop();
   },
-  getAllgameResult(userInputArray, bridgeInfoArray, upside, downside, count) {
-    this.getUpsideResult(
-      userInputArray,
-      bridgeInfoArray,
-      upside,
-      downside,
-      count
-    );
-    this.getDownsideResult(
-      userInputArray,
-      bridgeInfoArray,
-      upside,
-      downside,
-      count
-    );
+  getAllgameResult(userInput, bridgeInfo, upside, downside, count) {
+    this.getUpsideResult(userInput, bridgeInfo, upside, downside, count);
+    this.getDownsideResult(userInput, bridgeInfo, upside, downside, count);
   },
-  getUpsideResult(userInputArray, bridgeInfoArray, upside, downside, count) {
-    if (bridgeInfoArray[count] === 1) {
-      if (userInputArray[count] === 1) {
+  getUpsideResult(userInput, bridgeInfo, upside, downside, count) {
+    if (bridgeInfo[count] === 1) {
+      if (userInput[count] === 1) {
         upside.push('O');
         downside.push('\u00A0');
       }
-      if (userInputArray[count] === 0) {
+      if (userInput[count] === 0) {
         upside.push(`\u00A0`);
         downside.push('X');
       }
     }
   },
-  getDownsideResult(userInputArray, bridgeInfoArray, upside, downside, count) {
-    if (bridgeInfoArray[count] === 0) {
-      if (userInputArray[count] === 1) {
+  getDownsideResult(userInput, bridgeInfo, upside, downside, count) {
+    if (bridgeInfo[count] === 0) {
+      if (userInput[count] === 1) {
         upside.push('X');
         downside.push('\u00A0');
       }
-      if (userInputArray[count] === 0) {
+      if (userInput[count] === 0) {
         upside.push('\u00A0');
         downside.push('O');
       }
