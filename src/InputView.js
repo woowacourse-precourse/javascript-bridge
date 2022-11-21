@@ -82,8 +82,7 @@ const InputView = {
   readGameCommand(bridge) {
     this.wrappingInput(Messages.INPUT_RESTART_OR_END, (restartOrQuit) => {
       this.validateGameCommand(restartOrQuit);
-      const totalCount = this.bridgeGame.countTry();
-      this.restartOrQuit(bridge, restartOrQuit, totalCount);
+      this.restartOrQuit(bridge, restartOrQuit);
     });
   },
 
@@ -92,14 +91,14 @@ const InputView = {
       throw new Error(Messages.GAME_COMMAND_ERROR);
   },
 
-  restartOrQuit(bridge, restartOrQuit, totalCount) {
+  restartOrQuit(bridge, restartOrQuit) {
+    const totalCount = this.bridgeGame.countTry();
+
     if (restartOrQuit === 'R') {
       this.bridgeGame.retry();
-      OutputView.up = [];
-      OutputView.down = [];
-
       this.readMoving(bridge);
-    } else if (restartOrQuit === 'Q') OutputView.printResult(totalCount);
+    } else if (restartOrQuit === 'Q')
+      OutputView.printResult(totalCount, false, this.bridgeGame.getMap());
   },
 };
 
