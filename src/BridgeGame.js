@@ -40,11 +40,11 @@ class BridgeGame {
 
   check = (input) => {
     this.#userInputString += input;
-    console.log(
-      `round : ${this.#round}, bridge: ${this.#bridgeString}, userInput : ${this.#userInputString}`
-    );
+    // console.log(
+    //   `round : ${this.#round}, bridge: ${this.#bridgeString}, userInput : ${this.#userInputString}`
+    // );
     this.move(this.#bridgeString[this.#round], this.#userInputString[this.#round]);
-    console.log(this.#isAnswerList);
+    // console.log(this.#isAnswerList);
     const status = this.checkStatus(
       this.#bridgeString[this.#round],
       this.#userInputString[this.#round]
@@ -91,11 +91,11 @@ class BridgeGame {
 
   checkStatus(answerChar, userChar) {
     const total_round = this.#bridgeString.length;
-    console.log(
-      `checkStatus... round : ${this.#round}, total_round : ${total_round}, userInput : ${
-        this.#userInputString
-      }`
-    );
+    // console.log(
+    //   `checkStatus... round : ${this.#round}, total_round : ${total_round}, userInput : ${
+    //     this.#userInputString
+    //   }`
+    // );
     if (answerChar !== userChar) {
       return STATUS_FAIL;
     } else if (this.#isAnswerList.length === total_round) {

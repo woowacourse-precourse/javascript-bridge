@@ -10,6 +10,11 @@ const Constants = {
   STATUS_SUCCESS: 'success',
   STATUS_FAIL: 'fail',
   STATUS_FINISH: 'finish',
+  BRIDGE_O: ' O |',
+  BRIDGE_X: ' X |',
+  BRIDGE_NONE: '   |',
+  MIN_BRIDGE_SIZE: 3,
+  MAX_BRIDGE_SIZE: 20,
 };
 
 module.exports = Constants;
