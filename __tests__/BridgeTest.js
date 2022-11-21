@@ -31,4 +31,16 @@ describe('다리 테스트', () => {
     const userMove = 'D';
     expect(bridgeGame.move(bridge, userMove)).toBeFalsy();
   });
+
+  test('재시작 값이 들어왔을 때 리턴값 테스트', () => {
+    const bridgeGame = new BridgeGame();
+    const userRetry = 'R';
+    expect(bridgeGame.retry(userRetry)).toBeTruthy();
+  });
+
+  test('종료 값이 들어왔을 때 리턴값 테스트', () => {
+    const bridgeGame = new BridgeGame();
+    const userRetry = 'Q';
+    expect(bridgeGame.retry(userRetry)).toBeFalsy();
+  });
 });
