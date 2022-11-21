@@ -88,11 +88,11 @@ class App {
   }
 
   handleSuccessFulFinish() {
-    OutputView.printResult('success', this.bridgeGame.resultMap);
+    this.handleFinish('success');
   }
 
   handleFailedFinish() {
-    OutputView.printResult('fail', this.bridgeGame.resultMap);
+    this.handleFinish('fail');
   }
 }
 

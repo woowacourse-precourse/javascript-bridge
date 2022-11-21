@@ -1,6 +1,4 @@
-const OutputView = require('./OutputView');
-const { MESSAGE, INPUT_FORMAT } = require('./constants');
-const InputView = require('./InputView');
+const { INPUT_FORMAT } = require('./constants');
 const { generate: generateRandomNumber } = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
 const GameResult = require('./GameResult');
@@ -15,72 +13,27 @@ class BridgeGame {
   }
 
   async makeBridge(size) {
-    // const size = await this.getBridgeSize();
     const bridge = BridgeMaker.makeBridge(size, generateRandomNumber);
-    this.resultMap.setDefault(bridge);
+    this.resultMap.generate(bridge);
   }
 
-  // async getBridgeSize() {
-  //   try {
-  //     return await InputView.readBridgeSize();
-  //   } catch (error) {
-  //     OutputView.printMessage(error.message);
-  //     return this.getBridgeSize();
-  //   }
-  // }
-
-  // async getMovingDirection() {
-  //   try {
-  //     return await InputView.readMoving();
-  //   } catch (error) {
-  //     OutputView.printMessage(error.message);
-  //     return this.getMovingDirection();
-  //   }
-  // }
-
-  // async controlMoving() {
-  //   const current = this.resultMap.getCurrentIndex();
-  //   if (current > -1) {
-  //     const isMoved = await this.move(current);
-  //     this.resultMap.printHistory();
-
-  //     return isMoved ? this.controlMoving() : await this.command();
-  //   }
-
-  //   return this.finish('success');
-  // }
-
-  async move(current, asyncCb) {
-    // const direction = await this.getMovingDirection();
-    const direction = asyncCb();
+  move(current, direction) {
     const isMoved = this.resultMap.calculateMatch(current, direction);
-
+    // this.resultMap.printHistory();
     return isMoved;
   }
 
-  async command(controller, command) {
-    // const command = await this.getGameCommand();
-    command === INPUT_FORMAT.RETRY ? this.retry(controller) : this.finish('fail');
+  async command(retryHandler, isRetry, finishHandler) {
+    isRetry ? await retryHandler(this.retry) : finishHandler();
   }
 
-  // async getGameCommand() {
-  //   try {
-  //     return await InputView.readGameCommand();
-  //   } catch (error) {
-  //     OutputView.printMessage(error.message);
-  //     this.getGameCommand();
-  //   }
-  // }
-
-  retry(controller) {
+  async retry() {
     this.resultMap.clear();
-    // this.controlMoving();
-    controller();
   }
 
-  // finish(type) {
-  //   OutputView.printResult(type, this.resultMap);
-  // }
+  getCurrentPosition() {
+    return this.resultMap.getCurrentPosition();
+  }
 }
 
 module.exports = BridgeGame;
