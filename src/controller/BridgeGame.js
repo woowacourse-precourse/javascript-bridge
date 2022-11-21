@@ -6,24 +6,30 @@ const { printResult } = require('../view/OutputView');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #gameManager;
+
   #bridge;
 
   #gameTry = 1;
+
+  constructor(gameManager) {
+    this.#gameManager = gameManager;
+  }
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(gameManager, level, command) {
-    const result = gameManager.getBridge().checkBridge(level, command);
-    if (result && level === gameManager.getBridge().getLength() - 1) {
-      return this.win(gameManager);
+  move(level, command) {
+    const result = this.#gameManager.getBridge().checkBridge(level, command);
+    if (result && level === this.#gameManager.getBridge().getLength() - 1) {
+      return this.win(this.#gameManager);
     }
     if (result) {
-      return readMoving(gameManager, level + 1);
+      return readMoving(this.#gameManager, level + 1);
     }
-    return this.retry(gameManager);
+    return this.retry(this.#gameManager);
   }
 
   /**
@@ -31,21 +37,21 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(gameManager) {
+  retry() {
     this.#gameTry += 1;
-    readGameCommand(gameManager, this);
+    readGameCommand(this.#gameManager, this);
   }
 
-  win(gameManager) {
-    this.quitGame(true, gameManager.getBridge());
+  win() {
+    this.quitGame(true, this.#gameManager.getBridge());
   }
 
-  commandProcess(gameManager, command) {
+  commandProcess(command) {
     if (command === 'R') {
-      return readMoving(gameManager, 0);
+      return readMoving(this.#gameManager, 0);
     }
     if (command === 'Q') {
-      this.quitGame(false, gameManager.getBridge());
+      this.quitGame(false, this.#gameManager.getBridge());
     }
     return null;
   }

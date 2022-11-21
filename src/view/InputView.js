@@ -25,18 +25,18 @@ const InputView = {
   readMoving(gameManager, level) {
     MissionUtils.Console.readLine(READ_MESSAGE.MOVING_COMMAND, (answer) => {
       isUserMovingInputValid(answer);
-      gameManager.getBridgeGame().move(gameManager, level, answer);
+      gameManager.getBridgeGame().move(level, answer);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(gameManager, bridgeGame) {
+  readGameCommand(gameManager) {
     MissionUtils.Console.readLine(READ_MESSAGE.GAME_COMMAND, (answer) => {
       isGameCommandValid(answer);
       // resolve(answer);
-      bridgeGame.commandProcess(gameManager, answer);
+      gameManager.getBridgeGame().commandProcess(answer);
     });
   },
 };

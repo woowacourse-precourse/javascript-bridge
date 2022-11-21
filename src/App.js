@@ -9,7 +9,7 @@ class App {
   #bridgeGame;
 
   play() {
-    this.#bridgeGame = new BridgeGame();
+    this.#bridgeGame = new BridgeGame(this);
     printGameStart();
     readBridgeSize(this);
   }
