@@ -37,7 +37,6 @@ class App {
   }
 
   makeMyBridge() {
-    // 다리 객체 생성! -> 다리만드는함수, 랜덤숫자넣어주는함수, 다리 길이 넣어주기
     this.#myBridge = new BridgeGame(
       BridgeRandomNumberGenerator.generate,
       BridgeMaker.makeBridge,

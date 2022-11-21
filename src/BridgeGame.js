@@ -35,7 +35,6 @@ class BridgeGame {
 
   retry(input) {
     this.#trycount += 1;
-    // 결과 이용해 값 유효 여부 확인 후 로직 전개
     if (input.toUpperCase() === 'R') {
       this.#nowState = 0;
       return true;

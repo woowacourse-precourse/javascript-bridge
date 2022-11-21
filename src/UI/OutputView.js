@@ -12,11 +12,8 @@ const OutputView = {
   gameResult() {
     Console.print(GAME_MESSAGE.GAME_RESULT);
   },
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+
+  // 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력
   printMap(bridge) {
     let [top, bottom] = bridge.slice();
     const topResult = `[ ${top.join().replace(/,/g, ' | ')} ]`;
@@ -24,11 +21,7 @@ const OutputView = {
     return Console.print(`${topResult}\n${bottomResult}`);
   },
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+  // 게임 최종 결과 출력
   printResult(trycount, success) {
     const count = trycount === 0 ? 1 : trycount;
 
@@ -36,18 +29,22 @@ const OutputView = {
     Console.print(GAME_MESSAGE.TRY_COUNT(count));
   },
 
+  // 다리 길이 입력 오류 메시지 출력
   lengthInputError() {
     Console.print(ERROR_MESSAGE.INVALID_LENGTH + '\n');
   },
 
+  // 다리 이동 입력 오류 메시지 출력
   moveInputError() {
     Console.print(ERROR_MESSAGE.INVALID_MOVE + '\n');
   },
 
+  // 재시작 여부 입력 오류 메시지 출력
   quitInputError() {
     Console.print(ERROR_MESSAGE.INVALID_QUIT + '\n');
   },
 
+  // 그 밖의 예상못한 입력 오류 메시지 출력
   unExceptedError() {
     Console.print(ERROR_MESSAGE.UNEXCEPTED_ERROR + '\n');
   },

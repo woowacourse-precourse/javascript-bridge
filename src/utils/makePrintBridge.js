@@ -16,15 +16,4 @@ const makePrintBridge = (bridge, state, correct) => {
   return [top, bottom];
 };
 
-// console.log(
-//   makePrintBridge(
-//     [
-//       ['O', ' ', 'O'],
-//       [' ', 'O', ' '],
-//     ],
-//     2,
-//     false
-//   )
-// );
-
 module.exports = makePrintBridge;
