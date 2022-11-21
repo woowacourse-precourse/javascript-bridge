@@ -1,6 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const { LETTER, NEW_LINE, BAR } = require("./constant");
+const { LETTER, NEW_LINE, BAR, BLANCK } = require("./constant");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -23,13 +23,32 @@ class BridgeGame {
     this.#moves.push(letter);
   }
 
+  /**
+   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
+   * <p>
+   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   */
+  retry = () => {
+    this.#moves = [];
+    this.#trialTime += 1;
+  };
+
+  getResult() {
+    const map = this.#drawMap().join(NEW_LINE);
+    const isCorrect = this.#isCorrect();
+    const isGameOver = this.#isGameOver();
+    return { map, isCorrect, isGameOver, trialTime: this.#trialTime };
+  }
+
   #drawMap() {
     const resultArray = this.#makeResultArray();
     return [LETTER.up, LETTER.down]
       .map(
         (upOrDown) =>
           `[ ${resultArray
-            .map((result) => (result[0] === upOrDown ? result[1] : " "))
+            .map(([userUorD, isCorrect]) =>
+              userUorD === upOrDown ? isCorrect : BLANCK
+            )
             .join(BAR)} ]`
       )
       .join(NEW_LINE);
@@ -50,23 +69,6 @@ class BridgeGame {
       this.#bridge[ind] === move ? LETTER.correct : LETTER.wrong,
     ]);
   }
-
-  getResult() {
-    const map = this.#drawMap();
-    const isCorrect = this.#isCorrect();
-    const isGameOver = this.#isGameOver();
-    return { map: map, isCorrect, isGameOver, trialTime: this.#trialTime };
-  }
-
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry = () => {
-    this.#moves = [];
-    this.#trialTime += 1;
-  };
 }
 
 module.exports = BridgeGame;
