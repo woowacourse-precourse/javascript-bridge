@@ -90,17 +90,25 @@ function moveSwitch(word, count, i, bridge, bridgeMap, tryCount){
   if (word == "Success"){
     moveSuccess(i, bridge, bridgeMap, tryCount);
   }
-  else if (word == "PrintFirstX"){
-    moveFirstX(count, bridge, bridgeMap, tryCount)
-  }
-  else if (word == "PrintX"){
-    moveX(count, i, bridge, bridgeMap, tryCount)
-  }
-  else if (word == "PrintFirstO"){
+  printMoveO(word, count, i, bridge, bridgeMap, tryCount);
+  printMoveX(word, count, i, bridge, bridgeMap, tryCount)
+}
+
+function printMoveO(word, count, i, bridge, bridgeMap, tryCount){
+  if (word == "PrintFirstO"){
     moveFirstO(count, i, bridge, bridgeMap, tryCount)
   }
   else if (word == "PrintO"){
     moveO(count, i, bridge, bridgeMap, tryCount)
+  }
+}
+
+function printMoveX(word, count, i, bridge, bridgeMap, tryCount){
+  if (word == "PrintFirstX"){
+    moveFirstX(count, bridge, bridgeMap, tryCount)
+  }
+  else if (word == "PrintX"){
+    moveX(count, i, bridge, bridgeMap, tryCount)
   }
 }
 
