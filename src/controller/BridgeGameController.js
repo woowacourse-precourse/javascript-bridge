@@ -1,4 +1,3 @@
-const { Console } = require("@woowacourse/mission-utils");
 const BridgeMaker = require("../BridgeMaker");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const Bridge = require("../models/Bridge");
@@ -27,7 +26,7 @@ class BrideGameController {
     try {
       this.validator.checkBridgeLengthInput(size);
     } catch (error) {
-      Console.print(error.message);
+      OutputView.printErrorMessage(error.message);
       this.readBridgeSizePhase();
       return;
     }
@@ -54,7 +53,7 @@ class BrideGameController {
     try {
       this.validator.checkDirectionInput(direction);
     } catch (error) {
-      Console.print(error.message);
+      OutputView.printErrorMessage(error.message);
       this.readMovingPhase();
       return;
     }
@@ -88,7 +87,7 @@ class BrideGameController {
     try {
       this.validator.checkRetryInput(retryAnswer);
     } catch (error) {
-      Console.print(error.message);
+      OutputView.printErrorMessage(error.message);
       this.readGameCommandPhase();
       return;
     }
