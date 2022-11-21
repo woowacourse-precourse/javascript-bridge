@@ -12,7 +12,7 @@ module.exports = {
   rules: {
     'linebreak-style': ['error', 'windows'],
     'max-depth': ['error', 2],
-    'max-lines-per-function': ['error', 15],
+    'max-lines-per-function': ['error', 10],
   },
 };
 
