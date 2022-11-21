@@ -1,8 +1,8 @@
 const BridgeGame = require('../model/BridgeGame');
 const BridgeMaker = require('../BridgeMaker.js');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator.js');
-const InputView = require('../InputView');
-const OutputView = require('../OutputView');
+const InputView = require('../view/InputView');
+const OutputView = require('../view/OutputView');
 const Validate = require('../utils/Validate');
 const { Console } = require('@woowacourse/mission-utils');
 
@@ -55,7 +55,6 @@ class BridgeController {
     this.#bridgeGame.selectMovemomentPosition(movePosition);
     const drawBridge = this.getDrawBridge();
     OutputView.printMap(drawBridge);
-
     this.controlNextStep(drawBridge);
   }
 
