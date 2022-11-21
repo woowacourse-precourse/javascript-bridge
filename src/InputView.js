@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./constants');
 
 /**
@@ -6,7 +6,7 @@ const { MESSAGE } = require('./constants');
  */
 const InputView = {
   readBridgeSize(settingBridge) {
-    MissionUtils.Console.readLine(MESSAGE.INPUT_BRIDGE_SIZE, (size) => {
+    Console.readLine(MESSAGE.INPUT_BRIDGE_SIZE, (size) => {
       settingBridge(size);
     });
   },
@@ -14,8 +14,10 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-
+  readMoving(bridgeGame) {
+    Console.readLine(MESSAGE.INPUT_MOVING, (move) => {
+      bridgeGame.move(move);
+    })
   },
 
   /**
