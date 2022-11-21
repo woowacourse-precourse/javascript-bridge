@@ -25,7 +25,6 @@ class BridgeGame {
       BridgeRandomNumberGenerator.generate
     );
     this.#bridge = bridge;
-
     Console.print(OUTPUT.BLANK);
   }
 
@@ -51,7 +50,6 @@ class BridgeGame {
       this.#movingList.upper.push(MOVING.WRONG_ANSWER);
       this.#movingList.lower.push(MOVING.BLANK);
     }
-
     return this.getResult();
   }
 
@@ -66,7 +64,6 @@ class BridgeGame {
       this.#movingList.lower.push(MOVING.WRONG_ANSWER);
       this.#movingList.upper.push(MOVING.BLANK);
     }
-
     return this.getResult();
   }
 
@@ -76,7 +73,6 @@ class BridgeGame {
   hasWrong() {
     const movingItems = Object.values(this.#movingList).flat();
     const wrongAnswer = movingItems.includes(MOVING.WRONG_ANSWER);
-
     return wrongAnswer;
   }
 
@@ -85,7 +81,6 @@ class BridgeGame {
    */
   hasAll() {
     const allAnswer = this.#movingList.upper.length === this.#bridge.length;
-
     return allAnswer;
   }
 
