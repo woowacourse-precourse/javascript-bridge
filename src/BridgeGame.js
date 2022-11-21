@@ -1,17 +1,22 @@
+
+const BridgeResult = require("./BridgeResult");
+
 class BridgeGame {
 
   #curIdx;
   #success;
   #bridge;
   #gameCount;
+  #bridgeResult;
 
   constructor(bridge) {
-    this.init();
+    this.initGame();
     this.#bridge = bridge;
     this.#gameCount = 1;
+    this.#bridgeResult = new BridgeResult();
   }
 
-  init() {
+  initGame() {
     this.#curIdx = 0;
     this.#success = true;
   }
@@ -32,6 +37,14 @@ class BridgeGame {
     return this.#gameCount;
   }
 
+  makeResult(dir, success){
+    this.#bridgeResult.pushResult(dir, success);
+  }
+
+  gameResult(){
+    return this.#bridgeResult.getResult();
+  }
+
   move(dir) {
     if (dir === this.#bridge[this.#curIdx]) {
       this.#curIdx += 1;
@@ -43,7 +56,8 @@ class BridgeGame {
   }
 
   retry() {
-    this.init();
+    this.initGame();
+    this.#bridgeResult.initResult();
     this.#gameCount += 1;
   }
 }
