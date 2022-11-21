@@ -92,7 +92,7 @@
 
 #### App.js
 
-- [ ] `play` : 게임 시작 기능 구현하기
+- [x] `play` : 게임 시작 기능 구현하기
 - [ ] `bridgeSizeInputPhase` : 다리의 길이를 묻는 단계 구현하기
 - [ ] `movingInputPhase` : 이동 방향을 묻는 단계 구현하기
 - [ ] `showBridgePhase` : 해당 라운드에 대해 다리의 결과를 보여주는 단계 구현하기
