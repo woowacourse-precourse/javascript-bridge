@@ -9,6 +9,10 @@ const { bridgeLength, newLine, selectMoving, selectRestart } = SENTENCE;
 const OutputView = require('./OutputView');
 
 const InputView = {
+  endInput() {
+    Console.close();
+  },
+
   readBridgeLength(initBridge) {
     Console.readLine(`${bridgeLength}${newLine}`, (inputLength) => {
       this.readBridgeLengthHandler(inputLength, initBridge);
