@@ -1,14 +1,20 @@
-class Validation {
-    bridgeSize(size) {
+const { Console } = require("@woowacourse/mission-utils");
+
+const Validation = {
+    checkBridgeSize(size) {
         if(isNaN(size)) {
-            throw new Error("[ERROR]");
+            Console.print("[ERROR] 다리 길이는 숫자여야 합니다.\n");
+            return false;
         }
         if(Number(size) < 3 || 20 < Number(size)) {
-            throw new Error("[ERROR]");
+            Console.print("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n");
+            return false;
         }
         if(Number(size) % 1 !== 0) {
-            throw new Error("[ERROR]");
+            Console.print("[ERROR] 다리 길이는 정수여야 합니다.\n");
+            return false;
         }
+        return true;
     }
 }
 
