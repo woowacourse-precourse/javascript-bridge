@@ -1,49 +1,56 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
+const BridgeGame = require("./BridgeGame");
+const { generate } = require("./BridgeRandomNumberGenerator");
+const { makeBridge } = require("./BridgeMaker");
+const { validateBridge, validateMove, validateStart } = require("./util/Validation");
+const OutputView = require("./OutputView");
 
 
 const InputView = {
 
-  validateBridge(bridgeInput, reject) {
-    if (Number.isNaN(bridgeInput)) reject(new Error("[ERROR] 다리길이는 숫자여야 합니다."));
-    if (!(3 <= bridgeInput && bridgeInput <= 20)) reject(new Error("[ERROR] 다리길이는 3에서 20사이의 숫자여야 합니다."));
-  },
-
   readBridgeSize() {
-    return new Promise((resolve, reject) => {
-      Console.readLine("다리의 길이를 입력해주세요.", (inputString) => {
-        const inputNum = parseInt(inputString);
-        this.validateBridge(inputNum,reject);
-        resolve(inputNum);
-      });
-    })
+    Console.readLine("다리의 길이를 입력해주세요.\n", (inputString) => {
+      const inputNum = Number(inputString);
+      if (validateBridge(inputNum)) return this.readBridgeSize();
+      const bridge = makeBridge(inputNum, generate);
+      const bridgeGame = new BridgeGame(bridge);
+      this.readMoving(bridgeGame);
+    });
   },
 
-  validateMove(move, reject){
-    if(!(move === "U" || move ==="D")) reject(new Error("[ERROR] 이동할 칸을 잘못 입력하셨습니다."));  
+  readMoving(bridgeGame) {
+    Console.readLine("\n이동할 칸을 선택해주세요. (위:U, 아래:D)\n", (inputMove) => {
+      if (validateMove(inputMove)) return this.readMoving(bridgeGame);
+      bridgeGame.move(inputMove);
+      OutputView.pushResult(inputMove, bridgeGame.getSuccess());
+      OutputView.printMap();
+      this.next(bridgeGame);
+    });
   },
 
-  readMoving() {
-    return new Promise((resolve, reject) => {
-      Console.readLine("\n이동할 칸을 선택해주세요. (위:U, 아래:D)\n", (inputMove) => {
-        this.validateMove(inputMove, reject);
-        resolve(inputMove);
-      });
-    })
+  next(bridgeGame){
+    if(bridgeGame.gameNotFinished()) return this.readMoving(bridgeGame);
+    else if(bridgeGame.gameSuccess()) return OutputView.printResult(bridgeGame.getCount(), bridgeGame.getSuccess());
+    else return this.readGameCommand(bridgeGame);
   },
 
-  validateStart(start, reject){
-    if(!(start === "R" || start ==="Q")) reject(new Error("[ERROR] 다시시도 여부를 잘못 입력하셨습니다."));  
-  },
-
-  readGameCommand(){
-    return new Promise((resolve, reject) => {
+  readGameCommand(bridgeGame) {
       Console.readLine("\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (restart) => {
-        this.validateStart(restart, reject);
-        resolve(restart);
+        if(validateStart(restart)) return this.readGameCommand();
+        if(restart === "Q") OutputView.printResult(bridgeGame.getCount(), bridgeGame.getSuccess());
+        if(restart === "R"){
+          this.initGame(bridgeGame);
+          this.readMoving(bridgeGame);
+        }
       });
-    })
-   },
+  },
+
+  initGame(bridgeGame) {
+      bridgeGame.retry();
+      OutputView.upper.length = 0;
+      OutputView.downer.length = 0;
+    }
 };
 
 module.exports = InputView;
