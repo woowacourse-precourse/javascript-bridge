@@ -8,9 +8,8 @@ const input = async (commandMessage) => {
   });
 }
 
-const handleError = (errorMessage, nextStep) => {
+const handleError = (errorMessage) => {
   Console.print(`[ERROR] ${errorMessage}\n`);
-  nextStep();
 }
 
 module.exports = {
