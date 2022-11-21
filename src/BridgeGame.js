@@ -96,8 +96,13 @@ class BridgeGame {
   }
 
   updateRestartOrNot(restartStatus) {
-    RegameCommandValidator.validate(restartStatus);
-
+    try {
+      RegameCommandValidator.validate(restartStatus);
+    } catch (e) {
+      OutputView.printErrorLog(e);
+      this.askUserRestart();
+      return;
+    }
     if (restartStatus === "R") this.retry();
     if (restartStatus === "Q") this.quit();
   }

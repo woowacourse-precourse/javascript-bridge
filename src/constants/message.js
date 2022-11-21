@@ -11,6 +11,7 @@ const ERROR_MESSAGE = Object.freeze({
   BRIDGE_LENGTH: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
   NOT_INTEGER: "[ERROR] 정수인 숫자만 입력해주세요.",
   NOT_VALID_DIRECTION: "[ERROR] 방향은 U와 D만 입력할 수 있습니다.",
+  NOT_VALID_REGAME_COMMAND: "[ERROR] 재시작 여부엔 R과 Q만 입력할 수 있습니다.",
 });
 
 const QUESTION = Object.freeze({
