@@ -33,6 +33,7 @@ const OutputView = {
     Console.print(INFO_MESSAGE.TRY(tried));
     Console.close();
   },
+
   resultMessage() {
     Console.print(INFO_MESSAGE.RESULT);
   },

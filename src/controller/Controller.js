@@ -15,10 +15,12 @@ class Controller {
   };
   #correct;
   #try = 1;
+
   constructor() {
     this.validation = new Validation();
     this.bridgeGame = new BridgeGame();
   }
+
   start() {
     this.getBridgeSize();
   }
@@ -44,7 +46,7 @@ class Controller {
   movingDirectionForm(square) {
     try {
       this.validation.isUpOrDown(square);
-      this.checkCurrentStatus(square);
+      this.bridgeCurrentStatus(square);
       this.checkGameFinished() ? this.endGame() : this.getMovingDirection();
     } catch (error) {
       this.bridgeMovingError(error);
@@ -61,7 +63,7 @@ class Controller {
     this.#correct = correct;
   }
 
-  checkCurrentStatus(square) {
+  bridgeCurrentStatus(square) {
     this.setBridge(square);
     OutputView.printMap(this.#currentBridge);
     !this.#correct && this.getBridgeCommand();
