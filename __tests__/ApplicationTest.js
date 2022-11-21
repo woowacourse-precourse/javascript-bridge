@@ -1,4 +1,5 @@
 const BridgeMaker = require('../src/BridgeMaker')
+const BridgeGame = require('../src/BridgeGame')
 const {
   mockQuestions,
   mockRandoms,
@@ -22,6 +23,18 @@ describe('다리 생성 테스트', () => {
     const bridge = BridgeMaker.makeBridge(3, mockGenerator)
 
     expect(bridge).toEqual(['U', 'D', 'D'])
+  })
+})
+
+describe('다리 게임 테스트', () => {
+  test('false 값이 아닌 매개변수와 같이 호출되면 moves 길이가 증가해야 한다.', () => {
+    const bridgeGame = new BridgeGame()
+
+    bridgeGame.move('U')
+    expect(bridgeGame.moves).toHaveLength(1)
+
+    bridgeGame.move('U')
+    expect(bridgeGame.moves).toHaveLength(2)
   })
 })
 
