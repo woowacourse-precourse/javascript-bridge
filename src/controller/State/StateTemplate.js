@@ -6,13 +6,9 @@ class StateTemplate {
 	
 	/** @abstract */
 	run(command) {}
-	
-	/** @abstract */
-	getInputHandler(command) {}
 
 	next() {
-		const input = this.getInputHandler();
-		input((command) => {
+		this.inputHandler((command) => {
 			const isNext = this.run(command);
 			if (isNext)
 				this.game.next();

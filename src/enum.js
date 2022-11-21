@@ -1,6 +1,6 @@
 const POSITION_TWO = Object.freeze({
-	"U": 0,
-	"D": 1,
+	"U": 1,
+	"D": 0,
 });
 
 module.exports = { POSITION_TWO };

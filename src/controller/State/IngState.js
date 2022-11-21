@@ -6,9 +6,7 @@ class IngState extends StateTemplate {
 	constructor(game) {
 		super(game);
 	}
-	getInputHandler() {
-		return InputView.readMoving;
-	}
+	inputHandler = InputView.readMoving;
 	run(command) {
 		const isCompelete = this.game.move(command.toUpperCase());
 		if (isCompelete) {

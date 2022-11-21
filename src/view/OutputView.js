@@ -12,11 +12,11 @@ const OutputView = {
     const result = [];
     result.push("[ " +
       data.map((position) => 
-        position[0] === 0 ? (position[0] === position[1] ? "O" : "X") : " ").join(" | ")
+        position[0] === 1 ? (position[0] === position[1] ? "O" : "X") : " ").join(" | ")
       + " ]");
     result.push("[ " +
       data.map((position) => 
-        position[0] === 1 ? (position[0] === position[1] ? "O" : "X") : " ").join(" | ")
+        position[0] === 0 ? (position[0] === position[1] ? "O" : "X") : " ").join(" | ")
       + " ]");
     Console.print(result.join("\n"));
   },

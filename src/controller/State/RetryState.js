@@ -6,9 +6,7 @@ class RetryState extends StateTemplate {
 	constructor(game) {
 		super(game);
 	}
-	getInputHandler() {
-		return InputView.readGameCommand;
-	}
+	inputHandler = InputView.readGameCommand;
 	run(command) {
 		const isEnd = this.game.retry(command.toUpperCase());
 		if (isEnd) {
