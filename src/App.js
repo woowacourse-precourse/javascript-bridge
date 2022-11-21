@@ -75,6 +75,12 @@ class App {
       this.upDown();
     }
     if (restartInput === "Q") {
+      this.outputView.printResult(
+        this.#bridgeGame.nowBridge,
+        "실패",
+        this.#bridgeGame.tryCount
+      );
+      this.inputView.close();
     }
   }
 }
