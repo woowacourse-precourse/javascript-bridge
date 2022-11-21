@@ -9,32 +9,36 @@ class BridgeGame {
    */
   #upperBridge = [];
   #lowerBridge = [];
-  #bridge = {
-    U: [],
-    D: [],
-  };
 
   move(round, bridgeString, userInputString) {
     //n번째 round에서 bridgeString과 userInputString을 보고 다리 보여주기
     const roundResult = {};
-    if (bridgeString[round] === userInputString[round] && bridgeString[round] === 'U') {
-      this.pushO(this.#upperBridge, this.#lowerBridge);
-    } else if (bridgeString[round] === userInputString[round] && bridgeString[round] === 'D') {
-      this.pushO(this.#lowerBridge, this.#upperBridge);
-    } else if (bridgeString[round] === 'U') {
-      this.pushX(this.#upperBridge, this.#lowerBridge);
-    } else if (bridgeString[round] === 'D') {
-      this.pushX(this.#lowerBridge, this.#upperBridge);
+    if (bridgeString[round] === userInputString[round]) {
+      this.pushO(this.#upperBridge, this.#lowerBridge, bridgeString[round]);
+    } else {
+      this.pushX(this.#upperBridge, this.#lowerBridge, bridgeString[round]);
     }
     return true;
   }
-  pushO(bridge1, bridge2) {
-    bridge1.push('o');
-    bridge2.push('n');
+
+  pushO(bridge1, bridge2, uOrD) {
+    if (uOrD === 'U') {
+      bridge1.push('o');
+      bridge2.push('n');
+    } else {
+      bridge1.push('n');
+      bridge2.push('o');
+    }
   }
-  pushX(bridge1, bridge2) {
-    bridge1.push('x');
-    bridge2.push('n');
+
+  pushX(bridge1, bridge2, uOrD) {
+    if (uOrD === 'U') {
+      bridge1.push('n');
+      bridge2.push('x');
+    } else {
+      bridge1.push('x');
+      bridge2.push('n');
+    }
   }
 
   /**
