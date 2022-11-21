@@ -8,4 +8,11 @@ const convertBridge = (bridge, user, upOrDown) => {
   return convertedBridge;
 };
 
-module.exports = { convertBridge };
+const createCurrentBridge = (bridge, user) => {
+  const currentBridge = [];
+  currentBridge.push(convertBridge(bridge, user, 'U'));
+  currentBridge.push(convertBridge(bridge, user, 'D'));
+  return currentBridge;
+};
+
+module.exports = { convertBridge, createCurrentBridge };

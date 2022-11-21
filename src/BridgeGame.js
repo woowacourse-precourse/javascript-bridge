@@ -1,4 +1,5 @@
 const { printMap, printResult } = require('./OutputView');
+const { createCurrentBridge } = require('./utils/gameUtil');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -15,7 +16,8 @@ class BridgeGame {
 
   move(move) {
     this.#user.push(move);
-    printMap(this.#bridge, this.#user);
+    const currentBridge = createCurrentBridge(this.#bridge, this.#user);
+    printMap(currentBridge);
   }
 
   isEnd() {
@@ -30,7 +32,8 @@ class BridgeGame {
 
   end() {
     const gameResult = this.isFail() ? '실패' : '성공';
-    printResult(this.#bridge, this.#user, this.#round, gameResult);
+    const resultBridge = createCurrentBridge(this.#bridge, this.#user);
+    printResult(resultBridge, this.#round, gameResult);
   }
 
   retry() {

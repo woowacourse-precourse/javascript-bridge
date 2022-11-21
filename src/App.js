@@ -32,7 +32,7 @@ class App {
   getRetry(answer) {
     validateRetry(answer);
     if (answer === 'Q') {
-      Console.close();
+      this.bridgeGame.end();
       return;
     }
     this.bridgeGame.retry(answer);
@@ -46,7 +46,6 @@ class App {
       return;
     }
     if (this.bridgeGame.isEnd()) {
-      //Console.close();
       this.bridgeGame.end();
       return;
     }
