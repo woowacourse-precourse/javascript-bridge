@@ -1,6 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { printMap, printResult } = require('./OutputView');
-const OutputView = require('./OutputView');
+const GameViewController = require('./GameViewController');
 
 const { Console } = MissionUtils;
 
@@ -26,7 +25,7 @@ class BridgeGame {
   init() {
     this.#turn = -1;
     instance = this;
-    OutputView.initResult();
+    GameViewController.viewStateReset();
   }
 
   setTurn(value) {
@@ -53,7 +52,7 @@ class BridgeGame {
 
   turnChanger(command) {
     this.setTurn(this.#turn + 1);
-    printMap(command, this.#bridge[this.#turn]);
+    GameViewController.printMapController(command, this.#bridge[this.#turn]);
   }
 
   endGame() {
@@ -72,8 +71,8 @@ class BridgeGame {
   }
 
   printResult() {
-    OutputView.endResult();
-    printResult(this.#gameComplete, this.#gameTryCount);
+    GameViewController.resultOutputController();
+    GameViewController.printResultController(this.#gameComplete, this.#gameTryCount);
     Console.close();
   }
 }

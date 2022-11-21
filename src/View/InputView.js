@@ -4,21 +4,19 @@ const {
   MESSAGE_NEXT_MOVING_INPUT,
   MESSAGE_RETRY,
 } = require('./constants');
-const BridgeMaker = require('./BridgeMaker');
 const Validator = require('./Validator');
 
 const { moveCommandValidator, bridgeLengthValidator, restartCommandValidator } = Validator;
-const { generate } = require('./BridgeRandomNumberGenerator');
-const BridgeGame = require('./BridgeGame');
+
+const ModelController = require('./GameModelController');
 
 const { Console } = MissionUtils;
-const GAME_MANAGER = new BridgeGame();
 
 const InputView = {
   readBridgeSize() {
     Console.readLine(MESSAGE_INPUT_BRIDGE_LENGTH, (length) => {
       if (!bridgeLengthValidator(length)) this.readBridgeSize();
-      GAME_MANAGER.setBridge(BridgeMaker.makeBridge(length, generate));
+      ModelController.readBridgeController(length);
       InputView.readMoving();
     });
   },
@@ -26,15 +24,19 @@ const InputView = {
   readMoving() {
     Console.readLine(MESSAGE_NEXT_MOVING_INPUT, (direction) => {
       if (!moveCommandValidator(direction)) this.readMoving();
-      GAME_MANAGER.move(direction) ? this.readMoving() : this.readGameCommand();
+      ModelController.readMovingController(direction)
+        ? this.readMoving()
+        : this.readRestartCommand();
     });
   },
 
-  readGameCommand() {
-    if (GAME_MANAGER.getGameComplete()) return;
+  readRestartCommand() {
+    if (ModelController.readGameComplete()) return;
     Console.readLine(MESSAGE_RETRY, (command) => {
-      if (!restartCommandValidator(command)) this.readGameCommand();
-      GAME_MANAGER.retry(command) ? this.readMoving() : GAME_MANAGER.printResult();
+      if (!restartCommandValidator(command)) this.readRestartCommand();
+      ModelController.readRestartCommandController(command)
+        ? this.readMoving()
+        : GAME_MANAGER.printResult();
     });
   },
 };
