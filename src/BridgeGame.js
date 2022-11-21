@@ -1,12 +1,13 @@
 const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 const MESSAGE = require('./utils/constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #history = [];
+  #bridgeHistory = [];
   #attempts;
 
   constructor() {
@@ -18,6 +19,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(bridge) {
+    Console.print(bridge);
     Console.readLine(MESSAGE.WHERETOMOVE, (direction) => {
       InputView.readMoving(direction);
       this.#checkMoveCorrectly(direction, bridge);
@@ -25,17 +27,21 @@ class BridgeGame {
   }
 
   #checkMoveCorrectly(direction, bridge) {
-    if (bridge[this.#history.length] === direction)
+    if (bridge[this.#bridgeHistory.length] === direction)
       this.#moveCorretly(direction, bridge);
-    else this.#moveInCorrectly();
+    else this.#moveIncorrectly();
   }
 
   #moveCorretly(direction, bridge) {
-    this.#history.push(direction);
-    console.log(this.#history);
+    this.#bridgeHistory.push(direction);
+    OutputView.printMap(this.#bridgeHistory);
+    // if (this.#bridgeHistory.length === bridge.length) this.#gameSet('실패');
+    this.move(bridge);
   }
 
-  #moveInCorrectly() {}
+  #moveIncorrectly() {}
+
+  #gameSet() {}
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

@@ -27,7 +27,7 @@
 
 ### OutputView
 
-- [ ] 이동한 칸을 출력하는 메소드
+- [x] 이동한 칸을 출력하는 메소드
 - [ ] 성공여부와 시도한 횟수를 출려하는 메소드
 
 ### BridgeGame
@@ -44,6 +44,6 @@
 - [x] app.play()를 실행하면 게임 시작문을 출력하고 다리 길이를 입력받는다
 - [x] BridgeRandomNumberGenerator 객체로 랜덤값을 생성하고 BridgeMaker 객체로 0과1을 D와 U로 바꿔준다
 - [x] BridgeMaker로 만들어진 string 배열로 BridgeGame의 객체를 생성해 move의 매개변수에 넣는다
-- [ ] BridgeGame의 move 메소드에 InputView, OutputView 객체를 이용하고 올바른 곳으로 이동했는지 확인하는 로직추가 (만일 제대로 이동했으면 필드에 현재까지의 진행상황을 U 또는 D로 추가)
+- [x] BridgeGame의 move 메소드에 InputView, OutputView 객체를 이용하고 올바른 곳으로 이동했는지 확인하는 로직추가 (만일 제대로 이동했으면 필드에 현재까지의 진행상황을 U 또는 D로 추가)
 - [ ] 만약 올바른 곳으로 이동하지 못했다면 retry메소드 실행하여 다시 실행할지 확인
 - [ ] 만약 마지막까지 올바른길을 갔거나 재시작하지 않는 경우 성공여부와 시도 횟수 출력
