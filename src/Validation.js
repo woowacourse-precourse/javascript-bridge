@@ -37,9 +37,16 @@ const Validation = {
     const UPPER_MOVING = "U";
     const LOWER_MOVING = "D";
 
-    if (moving !== UPPER_MOVING && moving !== LOWER_MOVING) {
-      throw new Error("[ERROR] 대문자 U와 D만 입력가능합니다.");
+    try {
+      if (moving !== UPPER_MOVING && moving !== LOWER_MOVING) {
+        throw new Error("[ERROR] 대문자 U와 D만 입력가능합니다.");
+      }
+    } catch (error) {
+      Console.print(error.message);
+      return true;
     }
+
+    false;
   },
 
   isVaildCommand(command) {

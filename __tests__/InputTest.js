@@ -35,6 +35,14 @@ const runException = (inputs) => {
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
 
+const runExceptionMoving = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  InputView.readMoving();
+
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
+
 describe("입력 테스트", () => {
   test("다리 길이가 숫자가 아닌 경우 예외 처리한다.", () => {
     runException(["a"]);
@@ -49,10 +57,6 @@ describe("입력 테스트", () => {
   });
 
   test("이동할 칸이 U나 P가 아닌 경우 예외 처리한다.", () => {
-    mockQuestions(["S"]);
-
-    expect(() => {
-      InputView.readMoving();
-    }).toThrow("[ERROR] 대문자 U와 D만 입력가능합니다.");
+    runExceptionMoving(["S"]);
   });
 });
