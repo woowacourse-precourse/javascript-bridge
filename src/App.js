@@ -13,10 +13,10 @@ class App {
   }
 
   async play() {
-    MissionUtils.Console.print("다리 건너기 게임을 시작합니다.\n");
+    console.log("다리 건너기 게임을 시작합니다.\n");
     const bridgeSize = await this.makeBridgeSize(0);
 
-    this.bridge = BridgeMaker.makeBridge(bridgeSize, generate);
+    this.bridge = BridgeMaker.makeBridge(bridgeSize, generate).toString;
     const bridgeGame = new BridgeGame();
 
     let moveCount = 0;
