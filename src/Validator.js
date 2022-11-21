@@ -28,11 +28,9 @@ const Validator = Object.freeze({
 
   confirmOfCondition(input, condition) {
     if (condition === 'move') {
-      this.checkCondition(input, this.MOVEMENT_CONDITIONS, this.ERROR_MESSAGES.ONLY_U_D);
+      return this.checkCondition(input, this.MOVEMENT_CONDITIONS, this.ERROR_MESSAGES.ONLY_U_D);
     }
-    if (condition === 'option') {
-      this.checkCondition(input, this.GAME_OPTION_CONDITIONS, this.ERROR_MESSAGES.ONLY_R_Q);
-    }
+    return this.checkCondition(input, this.GAME_OPTION_CONDITIONS, this.ERROR_MESSAGES.ONLY_R_Q);
   },
 
   checkCondition(input, conditionArray, error) {
