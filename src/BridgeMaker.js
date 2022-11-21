@@ -14,11 +14,10 @@ const BridgeMaker = {
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
 
-  // ApplicationTest의 다리 생성 테스트에서 randomNumbers가 문자로 주어지기 때문에 `Number()` 메서드를 사용해서 다시 변환해준다.
   makeBridge(size, generateRandomNumber) {
     const BRIDGE = [];
     for (let length = 0; length < size; length += 1) {
-      const RANDOM_NUMBER = Number(generateRandomNumber());
+      const RANDOM_NUMBER = generateRandomNumber();
       const POSSIBLE_CELL = RANDOM_NUMBER === 1 ? 'U' : 'D';
       BRIDGE.push(POSSIBLE_CELL);
     }
