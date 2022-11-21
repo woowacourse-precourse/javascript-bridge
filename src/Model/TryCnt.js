@@ -2,25 +2,25 @@
 
 class TryCnt {
   /** @type {number} */
-  #cnt;
+  #array;
 
   constructor() {
-    this.#cnt = 1;
+    this.#array = [];
   }
 
   /**
    * @returns {number}
    */
   get cnt() {
-    return this.#cnt;
+    return this.#array.length + 1;
   }
 
   add() {
-    this.#cnt += 1;
+    this.#array.push(1);
   }
 
   reset() {
-    this.#cnt = 1;
+    this.#array = [];
   }
 }
 
