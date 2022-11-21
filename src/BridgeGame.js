@@ -1,12 +1,20 @@
-const { INFO_MESSAGE } = require("./Constants");
+const { INFO_MESSAGE, INPUT_MESSAGE } = require("./Constants");
+const InputView = require("./InputView");
 const { printMessage } = require("./OutputView");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridgeSize;
+
   gameStart() {
     printMessage(INFO_MESSAGE.start);
+    InputView.readBridgeSize(INPUT_MESSAGE.bridgeLength, this.getInput);
+  }
+
+  getInput(userInput) {
+    this.#bridgeSize = userInput;
   }
 
   /**
