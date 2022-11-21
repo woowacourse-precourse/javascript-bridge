@@ -29,11 +29,12 @@ const OutputView = {
     Console.print(command.TRY_NUM(tryNum));
   },
 
-  /**
-   * 진행 상황 출력
-   */
-  printCommand(command) {
-    Console.print(command);
+  printStart() {
+    Console.print(command.START);
+  },
+
+  printError(error) {
+    Console.print(error);
   },
 };
 

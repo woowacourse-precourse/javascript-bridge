@@ -4,6 +4,7 @@ const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame');
+const Validate = require('./utils/Validate');
 
 const { Console } = require('@woowacourse/mission-utils');
 
@@ -19,7 +20,7 @@ class App {
   }
 
   play() {
-    OutputView.printCommand(command.START);
+    OutputView.printStart();
     this.getBridgeSize();
   }
 
@@ -29,6 +30,7 @@ class App {
   }
 
   setBridge() {
+    if (!this.validateBridgeSize()) return this.getBridgeSize();
     this.#bridge = BridgeMaker.makeBridge(
       this.#bridgeSize,
       BridgeRandomNumberGenerator.generate
@@ -63,6 +65,16 @@ class App {
     if (retryInput === 'Q') {
       OutputView.printResult('실패', this.#curBridge, this.#tryNum);
       this.end();
+    }
+  }
+
+  validateBridgeSize() {
+    try {
+      Validate.size(parseInt(this.#bridgeSize));
+      return true;
+    } catch (e) {
+      OutputView.printError(e.message);
+      return false;
     }
   }
 
