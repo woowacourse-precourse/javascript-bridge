@@ -2,7 +2,7 @@ const { Size, Moving, GameCommand } = require('../src/Commands');
 const { ERROR } = require('../src/utils/constants');
 
 // Size 테스트
-describe('숫자 이외의 값이 입력될 경우 예외가 발생되는지 테스트한다.', () => {
+describe('숫자 이외의 값이 포함된 사이즈를 입력될 경우 예외가 발생되는지 테스트한다.', () => {
   test.each([['a'], ['abc'], ['test123'], ['123testing'], , ['0,0']])(
     '문자가 포함된 입력이라면 예외가 발생한다.',
     input => {
@@ -31,7 +31,7 @@ describe('숫자 이외의 값이 입력될 경우 예외가 발생되는지 테
   });
 });
 
-describe('숫자로만 이루어진 값이 입력될 경우 예외가 발생되지 않는지 테스트한다.', () => {
+describe('숫자로만 이루어진 값의 사이즈를 입력될 경우 예외가 발생되지 않는지 테스트한다.', () => {
   test.each([['0'], ['1'], ['3'], ['4'], ['10'], ['19'], ['20']])(
     '숫자로만 이루어진 입력이라면 예외가 발생하지 않는다.',
     size => {
@@ -83,4 +83,46 @@ describe('유효한 이동할 칸 입력 시 예외가 발생되지 않는지 �
   });
 });
 
-// TODO GameCommand 테스트
+// GameCommand 테스트
+describe('유효하지 않은 게임 커맨드 입력 시 예외가 발생되는지 테스트한다.', () => {
+  test.each([['1'], ['12'], ['123'], ['1234'], ['0']])('숫자가 포함된 입력이라면 예외가 발생한다.', input => {
+    expect(() => {
+      const gameCommand = new GameCommand(input);
+    }).toThrow(ERROR.read_command_error);
+  });
+
+  test.each([[''], [' '], ['  '], ['   ']])('공백 문자열이라면 예외가 발생한다.', input => {
+    expect(() => {
+      const gameCommand = new GameCommand(input);
+    }).toThrow(ERROR.read_command_error);
+  });
+
+  test.each([['A'], ['B'], ['C'], ['X'], ['O']])('R 또는 Q 이외의 문자라면 예외가 발생한다.', input => {
+    expect(() => {
+      const gameCommand = new GameCommand(input);
+    }).toThrow(ERROR.read_command_error);
+  });
+
+  test.each([['RETRY'], ['QUIT'], ['retry'], ['quit'], ['Retry'], ['Quit']])(
+    '문자열 입력이라면 예외가 발생한다.',
+    input => {
+      expect(() => {
+        const gameCommand = new GameCommand(input);
+      }).toThrow(ERROR.read_command_error);
+    }
+  );
+
+  test.each([['r'], ['q']])('소문자 입력이라면 예외가 발생한다.', input => {
+    expect(() => {
+      const gameCommand = new GameCommand(input);
+    }).toThrow(ERROR.read_command_error);
+  });
+});
+
+describe('유효한 게임 커맨드 입력 시 예외가 발생되지 않는지 테스트한다.', () => {
+  test.each([['R'], ['Q']])('', input => {
+    expect(() => {
+      const gameCommand = new GameCommand(input);
+    }).not.toThrow(ERROR.read_command_error);
+  });
+});
