@@ -42,7 +42,16 @@ class BridgeGame {
   setBridge(bridge) {
     this.#bridge = bridge;
   }
-
+  
+  getBridge() {
+    return this.#bridge;
+  }
+  getPath() {
+    return this.#path;
+  }
+  getTryNum() {
+    return this.#tryNum;
+  }
 }
 
 module.exports = BridgeGame;
