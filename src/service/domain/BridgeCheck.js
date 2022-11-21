@@ -1,11 +1,6 @@
-const {
-  MODEL_KEY,
-  BRIDGE_DIRECTION,
-  GAME_RESULT_STATE,
-  BRIDGE_CHECK
-} = require('../../utils/constants');
+const { MODEL_KEY, GAME_RESULT_STATE } = require('../../utils/constants');
 
-class BridgeCheck {
+class BridgeFinalResult {
   #repo;
 
   constructor({ repo }) {
@@ -13,37 +8,11 @@ class BridgeCheck {
   }
 
   #getRepoData() {
-    const randomBridge = this.#repo.read(MODEL_KEY.randomBridge);
-    const userBridge = this.#repo.read(MODEL_KEY.userBridge);
-    const tryCount = this.#repo.read(MODEL_KEY.tryCount);
-
-    return { randomBridge, userBridge, tryCount };
-  }
-
-  #getBridgeCheckingOX() {
-    const { randomBridge, userBridge } = this.#getRepoData();
-    const randomSlice = randomBridge.slice(0, userBridge.length);
-
-    return userBridge.map((bridgeItem, index) =>
-      bridgeItem === randomSlice[index]
-        ? [BRIDGE_CHECK.right, bridgeItem]
-        : [BRIDGE_CHECK.wrong, bridgeItem]
-    );
-  }
-
-  #makeOneBridgeFor(direction) {
-    const checkingOXBridge = this.#getBridgeCheckingOX();
-
-    return checkingOXBridge.map(([ox, position]) =>
-      position === direction ? ox : BRIDGE_CHECK.blank
-    );
-  }
-
-  getUserBridgeState() {
-    return [
-      this.#makeOneBridgeFor(BRIDGE_DIRECTION.up),
-      this.#makeOneBridgeFor(BRIDGE_DIRECTION.down)
-    ];
+    return {
+      randomBridge: this.#repo.read(MODEL_KEY.randomBridge),
+      userBridge: this.#repo.read(MODEL_KEY.userBridge),
+      tryCount: this.#repo.read(MODEL_KEY.tryCount)
+    };
   }
 
   #isFinish() {
@@ -60,7 +29,7 @@ class BridgeCheck {
       .every((bridgeItem, index) => bridgeItem === userBridge[index]);
   }
 
-  getGameState() {
+  getOutput() {
     const tries = { tryCount: this.#getRepoData().tryCount };
 
     if (this.#isFinish() && this.#isCorrect())
@@ -71,4 +40,4 @@ class BridgeCheck {
   }
 }
 
-module.exports = BridgeCheck;
+module.exports = BridgeFinalResult;
