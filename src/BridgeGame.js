@@ -9,9 +9,12 @@ class BridgeGame {
 
   #down;
 
+  #index;
+
   constructor() {
     this.#up = [];
     this.#down = [];
+    this.#index = -1;
   }
 
   /**
@@ -19,14 +22,15 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(bridge, moving, index) {
+  move(bridge, moving) {
+    this.#index += 1;
     if (moving === STRING_UP) {
-      bridge[index] === STRING_UP ? this.#up.push(SUCCESS) : this.#up.push(FAIL);
+      this.#up.push(bridge[this.#index] === STRING_UP ? SUCCESS : FAIL);
       this.#down.push(BLANK);
       return;
     }
 
-    bridge[index] === STRING_DOWN ? this.#down.push(SUCCESS) : this.#down.push(FAIL);
+    this.#down.push(bridge[this.#index] === STRING_DOWN ? SUCCESS : FAIL);
     this.#up.push(BLANK);
   }
   }
@@ -40,6 +44,10 @@ class BridgeGame {
 
   getMoving() {
     return { up: this.#up, down: this.#down };
+  }
+
+  getIndex() {
+    return this.#index;
   }
 }
 
