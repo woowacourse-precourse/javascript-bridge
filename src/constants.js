@@ -30,7 +30,8 @@ const OUTPUT_MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  SIZE_ERROR: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n',
+  SIZE_NUMBER_ERROR: '[ERROR] 다리 길이는 숫자여야 합니다.\n',
+  SIZE_RANGE_ERROR: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n',
   MOVING_ERROR: '[ERROR] U 또는 D 중 한 문자만 입력해주세요.\n',
   COMMAND_ERROR: '[ERROR] R 또는 Q 중 한 문자만 입력해주세요.\n',
 });
