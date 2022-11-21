@@ -61,8 +61,16 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridge, index, totalgames) {
-    
-  }
+    Console.readLine(MESSAGE.ASK_GAME_RETRY, (answer) => {
+      let bridgeGame = new BridgeGame;
+      if(!bridgeGame.retry(answer)){
+        OutputView.printResult(bridge.slice(0, index+1), totalgames, false);
+        return Console.close();
+      }
+      return this.readMoving(bridge, CONSTANT.ZERO_INDEX, totalgames+1); 
+      
+    })
+  },
 };
 
 module.exports = InputView;
