@@ -1,3 +1,5 @@
+const OutputView = require('./OutputView');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -11,13 +13,11 @@ class BridgeGame {
     if (movingCommand === bridge[0]) {
       movingRoute[0].push('O');
       movingRoute[1].push(' ');
-      return movingRoute;
-    }
-    if (movingCommand !== bridge[0]) {
+    } else {
       movingRoute[0].push('X');
       movingRoute[1].push(' ');
-      return movingRoute;
     }
+    OutputView.printMap(movingRoute);
   }
 
   /**

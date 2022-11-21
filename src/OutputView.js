@@ -14,7 +14,13 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.GAME_START);
   },
 
-  printMap() {},
+  printMap(movingRoute) {
+    const UpperBlock = movingRoute[0].join(' ㅣ ');
+    const LowerBlock = movingRoute[1].join(' ㅣ ');
+
+    Console.print(`[ ${UpperBlock} ]`);
+    Console.print(`[ ${LowerBlock} ]`);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
