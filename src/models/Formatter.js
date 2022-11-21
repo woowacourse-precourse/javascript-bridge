@@ -1,17 +1,17 @@
 const { PRINTABLE_BRIDGE } = require('../constants/values');
 
 class Formatter {
-  #printableBridge;
+  #formattedBridge;
 
-  getPrintableBridge() {
-    return this.#printableBridge;
+  getFormattedBridge() {
+    return this.#formattedBridge;
   }
 
   generate({ upBridge, downBridge }) {
     const printableUpBridge = this.#addSquareBracket(this.#addSpaceLineInBridge(upBridge));
     const printableDownBridge = this.#addSquareBracket(this.#addSpaceLineInBridge(downBridge));
 
-    this.#printableBridge = `${printableUpBridge}\n${printableDownBridge}\n`;
+    this.#formattedBridge = `${printableUpBridge}\n${printableDownBridge}\n`;
   }
 
   #addSpaceLineInBridge(bridge) {

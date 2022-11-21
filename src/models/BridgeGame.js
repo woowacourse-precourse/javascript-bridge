@@ -17,7 +17,7 @@ class BridgeGame {
 
   #resetGameProgress() {
     this.#data.gameProgress = {
-      length: 0,
+      step: 0,
       upBridge: [],
       downBridge: [],
       state: GAME_STATE.PLAYING,
@@ -25,11 +25,11 @@ class BridgeGame {
   }
 
   move(direction) {
-    const selected = DataHandler.getSelectedIndex(direction);
-    this.#data.gameProgress[selected].push(this.#getSelectOfResult(direction));
-    this.#data.gameProgress[DataHandler.getUnselectedIndex(direction)].push(BRIDGE_GAME.EMPTY);
-    this.#increaseStep();
-    this.#setGameProgress(this.#data.gameProgress[selected]);
+    const selected = this.#data.gameProgress[DataHandler.getSelectedIndex(direction)];
+    const unSelected = this.#data.gameProgress[DataHandler.getUnselectedIndex(direction)];
+
+    this.#setResultOfSelect({ direction, selected, unSelected });
+    this.#setGameState(selected);
 
     return {
       upBridge: this.#data.gameProgress.upBridge,
@@ -37,17 +37,18 @@ class BridgeGame {
     };
   }
 
-  #getSelectOfResult(direction) {
-    return direction === this.#data.bridge[this.#data.gameProgress.length]
-      ? BRIDGE_GAME.CORRECT
-      : BRIDGE_GAME.INCORRECT;
+  #setResultOfSelect({ direction, selected, unSelected }) {
+    if (direction === this.#data.bridge[this.#data.gameProgress.step]) {
+      selected.push(BRIDGE_GAME.CORRECT);
+    } else {
+      selected.push(BRIDGE_GAME.INCORRECT);
+    }
+    unSelected.push(BRIDGE_GAME.EMPTY);
+
+    this.#data.gameProgress.step += BRIDGE_GAME.STEP;
   }
 
-  #increaseStep() {
-    this.#data.gameProgress.length += BRIDGE_GAME.STEP;
-  }
-
-  #setGameProgress(selected) {
+  #setGameState(selected) {
     const index = selected.length - 1;
 
     if (selected[index] === BRIDGE_GAME.INCORRECT) {

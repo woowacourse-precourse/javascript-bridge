@@ -49,7 +49,7 @@ class GameController {
     }
 
     this.#instance.formatter.generate(this.#instance.bridgeGame.move(direction));
-    OutputView.printMap(this.#instance.formatter.getPrintableBridge());
+    OutputView.printMap(this.#instance.formatter.getFormattedBridge());
     this.#startGame();
 
     this.#stopGame();
@@ -79,7 +79,7 @@ class GameController {
 
   #quitGame() {
     OutputView.printResult(
-      this.#instance.formatter.getPrintableBridge(),
+      this.#instance.formatter.getFormattedBridge(),
       this.#instance.bridgeGame.getResult()
     );
 
