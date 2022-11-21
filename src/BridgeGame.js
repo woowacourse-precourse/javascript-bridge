@@ -16,7 +16,7 @@ class BridgeGame {
   bridgeArray = [];
   moveInput = [];
   constructor() {
-    this.idx = 0;
+    this.gameRetryCount = 1;
   }
   makeBridge(input) {
     this.bridgeArray = BridgeMaker.makeBridge(
@@ -24,13 +24,17 @@ class BridgeGame {
       BridgeRandomNumberGenerator.generate
     );
   }
-
+  initializeMove() {
+    this.gameRetryCount++;
+    this.moveInput = [];
+    this.move();
+  }
   move() {
     BridgeUtil.getUserInput(this);
   }
   validate() {
     BridgeUtil.printBridge(this.bridgeArray, this.moveInput);
-    BridgeUtil.validateUserInput(this.bridgeArray, this.moveInput);
+    this.retry();
   } //outputview 그리기
 
   /**
@@ -38,7 +42,17 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    if (!BridgeUtil.validateUserInput(this.bridgeArray, this.moveInput)) {
+      BridgeUtil.printRetryCommand(this);
+      return;
+    }
+    if (this.bridgeArray.length === this.moveInput.length) {
+      BridgeUtil.printGameResult(this);
+      return;
+    }
+    this.move();
+  }
 }
 
 module.exports = BridgeGame;
