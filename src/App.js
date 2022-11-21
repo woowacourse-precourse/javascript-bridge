@@ -45,12 +45,8 @@ class App {
       InputView.readGameCommand(this.proceedStepThree.bind(this));
       return;
     }
-    if (input === COMMAND.QUIT) {
-      this.endGame();
-      return;
-    }
-    this.#game.retry();
-    InputView.readMoving(this.proceedStepTwo.bind(this));
+    if (input === COMMAND.QUIT) this.endGame();
+    else this.retryGame();
   }
 
   checkGameProgress() {
@@ -70,6 +66,11 @@ class App {
     const tryCount = this.#game.getTryCount();
     OutputView.printResult(map, MESSAGE.SUCCESS, tryCount);
     Console.close();
+  }
+
+  retryGame() {
+    this.#game.retry();
+    InputView.readMoving(this.proceedStepTwo.bind(this));
   }
 }
 
