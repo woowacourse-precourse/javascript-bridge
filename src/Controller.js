@@ -1,4 +1,5 @@
-const { printMessage, isRetry, isQuit } = require('./Utils/Utils.js');
+const { printMessage } = require('./Utils/ConsoleUtils.js');
+const { isRetry, isQuit } = require('./Utils/CommandUtils.js');
 const BridgeSize = require('./Validate/BridgeSize.js');
 const BridgeDirection = require('./Validate/BridgeDirection.js');
 const InputView = require('./View/InputView.js');

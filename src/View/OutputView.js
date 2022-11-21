@@ -1,5 +1,5 @@
 const { MESSAGE, DIRECTION } = require('../Utils/Constants.js');
-const { printMessage, close } = require('../Utils/Utils.js');
+const { printMessage, close } = require('../Utils/ConsoleUtils.js');
 
 const OutputView = {
   printMap(bridgeMap) {

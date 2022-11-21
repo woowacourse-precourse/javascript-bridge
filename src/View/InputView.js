@@ -1,5 +1,5 @@
 const { MESSAGE } = require('../Utils/Constants.js');
-const { playerInput } = require('../Utils/Utils.js');
+const { playerInput } = require('../Utils/ConsoleUtils.js');
 
 const InputView = {
   readBridgeSize(callback) {
