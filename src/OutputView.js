@@ -24,7 +24,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(result, isSucces, totalCount) {
+    Console.print(OUTPUT_MESSAGE.FINAL_RESULT(result));
+    Console.print(OUTPUT_MESSAGE.SUCCESS_RESULT(isSucces));
+    Console.print(OUTPUT_MESSAGE.ATTEMPT_COUNT(totalCount));
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
