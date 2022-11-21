@@ -1,4 +1,4 @@
-const { printMap } = require("./OutputView.js");
+const OutputView = require("./OutputView.js");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -23,7 +23,7 @@ class BridgeGame {
   move(str) {
     const state = this.#moveBridge.get("U").length;
     this.checkMove(str, state);
-    printMap(this.#moveBridge);
+    OutputView.printMap(this.#moveBridge);
   }
 
   checkMove(str, state){
