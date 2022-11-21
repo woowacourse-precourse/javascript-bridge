@@ -1,4 +1,4 @@
-const { printGameStart } = require('./OutputView');
+const { printGameStart, printMap } = require('./OutputView');
 const { readBridgeSize, readMoving } = require('./InputView');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
@@ -43,6 +43,7 @@ class BridgeGame {
    */
   onReadMoving(moving) {
     this.#movings.push(moving);
+    printMap(this.#bridge, this.#movings);
   }
 
   /**
