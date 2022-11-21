@@ -40,7 +40,10 @@ const InputView = {
 
   determineNext(result) {
     if(result) {
-      this.readMoving();
+      if(bridgeGame.bridge.length === bridgeGame.movingState.currentLocation) {
+        OutputView.printResult(bridgeGame.movingState, true);
+      } 
+      else this.readMoving();
       return;
     }
     this.readGameCommand();
@@ -52,7 +55,7 @@ const InputView = {
   readGameCommand() {
     Console.readLine('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (answer) => {
       if (Exception.retryingException(answer)) {
-        bridgeGame.retry(answer) ? this.readMoving() : OutputView.printResult();
+        bridgeGame.retry(answer) ? this.readMoving() : OutputView.printResult(bridgeGame.movingState, false);
       }
       else this.readGameCommand();
     })
