@@ -1,1 +1,3 @@
-module.exports = BridgeModel = require('./BridgeModel');
+const BridgeModel = require('./BridgeModel');
+
+module.exports = BridgeModel;

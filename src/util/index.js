@@ -1,1 +1,3 @@
-module.exports =  Validation = require('./validation');
+const Validation = require('./validation');
+
+module.exports = Validation;

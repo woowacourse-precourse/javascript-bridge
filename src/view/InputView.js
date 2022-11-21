@@ -25,7 +25,7 @@ const InputView = {
    * @param {function} validation 콜백함수
    */
   readGameCommand(validation) {
-    Console.readLine(MESSAGES.ASKRETRY, validation)
+    Console.readLine(MESSAGES.ASKRETRY, validation);
   },
 };
 

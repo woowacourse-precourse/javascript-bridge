@@ -1,1 +1,3 @@
-module.exports = BridgeView = require("./BridgeView");
+const BridgeView = require('./BridgeView');
+
+module.exports = BridgeView;

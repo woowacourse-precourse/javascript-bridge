@@ -1,1 +1,3 @@
-module.exports = BridgeGame = require('./BridgeGame');
+const BridgeGame = require('./BridgeGame');
+
+module.exports = BridgeGame;
