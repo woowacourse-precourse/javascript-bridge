@@ -10,7 +10,7 @@ class Model {
   #bridgeSize;
 
   constructor() {
-    this.#totalTryCount = 0;
+    this.#totalTryCount = 1;
     this.#userUpBridgeArr = [];
     this.#userDownBridgeArr = [];
   }
