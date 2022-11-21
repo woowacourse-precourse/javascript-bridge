@@ -3,8 +3,8 @@
 - [ ] 프로그램 시작
     App.play()
 
-- [ ] 다리 생성
-    - [ ] 다리 길이에 따른 무작위 다리 생성
+- [x] 다리 생성
+    - [x] 다리 길이에 따른 무작위 다리 생성
         BridgeMaker.makeBridge()
     - [x] 랜덤 숫자 추출
         BridgeRandomNumberGernerator.generate()
