@@ -1,6 +1,12 @@
 const MissionUtils = require('@woowacourse/mission-utils')
 
 /**
+ * @typedef {Object} gameStatusCallback
+ * @property {function(): number} getNextGameStatus
+ * @property {function(number): void} setNextGameStatus
+ */
+
+/**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
@@ -18,10 +24,9 @@ const InputView = {
   },
 
   /**
-   * @param {function(): number} getNextGameStatus
-   * @param {function(number): void} setNextGameStatus
+   * @param {gameStatusCallback} gameStatusCallback
    */
-  readBridgeSize(getNextGameStatus, setNextGameStatus) {
+  readBridgeSize({ getNextGameStatus, setNextGameStatus }) {
     MissionUtils.Console.readLine(`${this.query.BRIDGE_SIZE}\n`, (size) => {
       const numberedSize = Number(size)
 
