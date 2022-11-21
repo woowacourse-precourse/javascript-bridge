@@ -9,6 +9,7 @@ class App {
     Console.print(GAME_MESSAGES.START);
     const bridgeSize = InputView.readBridgeSize();
     const bridge = makeBridge(Number(bridgeSize), generate);
+    const moving = InputView.readMoving();
   }
 }
 
