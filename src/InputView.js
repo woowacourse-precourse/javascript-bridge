@@ -35,6 +35,8 @@ const InputView = {
 
   repeatMoving(bridgeList, result) {
     const [upList, downList, tryNum] = result;
+    // const upAndDown = ['[ ' + upList.join(' | ') + ' ]', '[ ' + downList.join(' | ') + ' ]'];
+    // OutputView.printMap(upAndDown);
     const upAndDownList = [upList, downList];
     OutputView.printMap(upAndDownList);
 
