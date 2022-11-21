@@ -10,29 +10,41 @@ class App {
     const BRIDGE_MAP = BridgeMaker.makeBridge(BRIDGE_SIZE,BridgeRandomNumberGenerator.generate);
     return BRIDGE_MAP;
   }
+
   play() {
     const setting = this.setting();
     const player = new BridgeGame(setting);
-    let moveCount = 0;
-    let wantRetry = '';
+    this.move(setting, player);
+    this.result(player);
+  }
+
+  move(setting, player){
+    let moveCount = 0, wantRetry = '';
     while(moveCount<setting.length){
       let canMove = player.move(moveCount);
       moveCount+=1;
-      if(canMove){
-        OutputView.printMap(player.getUpMap().slice(0,-1), player.getDownMap().slice(0,-1));
-      }else{
-        OutputView.printMap(player.getUpMap().slice(0,-1), player.getDownMap().slice(0,-1));
-        wantRetry = player.isRetryOrQuit();
-      }
-      if(wantRetry==="R"){
+      wantRetry = this.moveJudgement(player, canMove);
+      if(wantRetry==="R")
         moveCount = 0;
-      }
-      if(wantRetry==="Q"){
-        player.setSuccess("실패");
+      if(wantRetry==="Q")
         break;
-      }
-      player.setSuccess("성공");
     }
+  }
+
+  moveJudgement(player, canMove){
+    if(canMove){
+      OutputView.printMap(player.getUpMap().slice(0,-1), player.getDownMap().slice(0,-1));
+      player.setSuccess("성공");
+      return '';
+    }else{
+      OutputView.printMap(player.getUpMap().slice(0,-1), player.getDownMap().slice(0,-1));
+      wantRetry = player.isRetryOrQuit();
+      player.setSuccess("실패");
+      return wantRetry;
+    }
+  }
+  
+  result(player){
     OutputView.printResult(player.getUpMap().slice(0,-1), player.getDownMap().slice(0,-1));
     OutputView.printIsGameClear(player.getSuccess());
     OutputView.printHowManyPlay(player.getCumulativeCount());
