@@ -6,6 +6,7 @@ class App {
   #bridgeGame = new BridgeGame()
 
   play() {
+    OutputView.pirntGameStart()
     InputView.readBridgeSize(size => {
       this.#bridgeGame.makeBridge(size)
       OutputView.linkBreak()

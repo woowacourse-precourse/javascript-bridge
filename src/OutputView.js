@@ -2,6 +2,10 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const Message = require('../src/MessageContent')
 
 const OutputView = {
+  pirntGameStart() {
+    MissionUtils.Console.print(Message.GAME_START)
+  },
+
   printMap(map) {
     MissionUtils.Console.print(`[ ${map[0].join(' | ')} ]\n[ ${map[1].join(' | ')} ]\n`)
   },
