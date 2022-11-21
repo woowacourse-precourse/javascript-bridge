@@ -29,6 +29,10 @@ const OutputView = {
     MissionUtils.Console.print(`[ ${downBridge} ]`);
   },
 
+  printGameStart() {
+    MissionUtils.Console.print('다리 건너기 게임을 시작합니다.');
+  },
+
   printGameSuccess(gameSuccess) {
     const result = gameSuccess ? '성공' : '실패';
     MissionUtils.Console.print(`게임 성공 여부: ${result}`);
