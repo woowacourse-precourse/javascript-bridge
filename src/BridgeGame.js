@@ -52,13 +52,13 @@ class BridgeGame {
     for (let i = this.userMoveArray.length - 1; i < bridge.length; i++) {
       if (bridge[i] === this.userMoveArray[i]) {
         if (bridge.length === this.userMoveArray.length) {
-          return 0;
+          return "success";
         }
         console.log(bridge[i]);
         console.log(userMoveArray[i]);
         return 1;
       } else {
-        return 2;
+        return -1;
       }
     }
   }

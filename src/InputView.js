@@ -17,9 +17,7 @@ const InputView = {
       Validate.isNumber(inputBridgeSize);
       Validate.checkLength(inputBridgeSize);
       let gameTryCount = 0;
-      const count = bridgeGame.getCount(gameTryCount);
-      // gameTryCount = count;
-      console.log(count);
+      bridgeGame.getCount(gameTryCount);
       const bridge = BridgeMaker.makeBridge(
         inputBridgeSize,
         BridgeRandomNumberGenerator.generate
@@ -43,11 +41,12 @@ const InputView = {
         // 맟줬음 계속
         this.readMoving(bridgeGame, bridge, userMoveArray);
       }
-      if (keepGaming === 0) {
+      if (keepGaming === "success") {
         // 다 맞췄음 끝 !
-        OutputView.printResult();
+        let count = bridgeGame.plusCount();
+        OutputView.printResult(keepGaming, count);
       }
-      if (keepGaming === 2) {
+      if (keepGaming === -1) {
         // 틀렸음
         console.log("틀렸음 다시할거임?");
         this.readGameCommand(bridgeGame, bridge, userMoveArray);
