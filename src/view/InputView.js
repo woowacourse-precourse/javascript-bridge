@@ -66,7 +66,7 @@ const InputView = {
     new MoveInputValidation(moving);
 
     this.isCorrect = new BridgeGame().move(this.canWalkBridge, moving);
-    Player.updateState(moving, this.isCorrect);
+    Player.updateBridgeStateArray(moving, this.isCorrect);
 
     OutputView.printMap();
     this.checkGameSuccess();

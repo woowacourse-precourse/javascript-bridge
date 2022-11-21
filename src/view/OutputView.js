@@ -12,10 +12,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap() {
-    const state = Player.getState();
+    const bridge = Player.getBridgeStateArray();
 
-    Console.print(MESSAGE.BRIDGE_STATE_MESSAGE(state[0]));
-    Console.print(`${MESSAGE.BRIDGE_STATE_MESSAGE(state[1])}\n`);
+    Console.print(MESSAGE.BRIDGE_STATE_MESSAGE(bridge[0]));
+    Console.print(`${MESSAGE.BRIDGE_STATE_MESSAGE(bridge[1])}\n`);
   },
 
   /**

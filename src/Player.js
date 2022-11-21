@@ -3,7 +3,7 @@ const { ANSWER, COMMAND, PLAYER } = require("./constant/Constants");
 const Player = {
   size: null,
   movingArray: [],
-  state: [[], []],
+  bridgeStateArray: [[], []],
   playerAns: [],
   tryingCount: PLAYER.INITIAL_TRY_NUMBER,
   gameSuccess: PLAYER.GMAE_FAIL,
@@ -12,7 +12,7 @@ const Player = {
     this.movingArray.push(moving);
   },
 
-  updateState(moving, isCorrect) {
+  updateBridgeStateArray(moving, isCorrect) {
     this.calculateBridgeState(moving, isCorrect);
     this.playerAns.push(isCorrect);
 
@@ -31,29 +31,29 @@ const Player = {
 
   checkUpperBridgeCorrect(moving, isCorrect) {
     if (moving === COMMAND.UPPER_BRIDGE_STRING && isCorrect) {
-      this.state[0].push(ANSWER.CORRECT_ANSWER);
-      this.state[1].push(ANSWER.EMPTY_ANSWER);
+      this.bridgeStateArray[0].push(ANSWER.CORRECT_ANSWER);
+      this.bridgeStateArray[1].push(ANSWER.EMPTY_ANSWER);
     }
   },
 
   checkUpperBridgeWrong(moving, isCorrect) {
     if (moving === COMMAND.UPPER_BRIDGE_STRING && !isCorrect) {
-      this.state[0].push(ANSWER.WRONG_ANSWER);
-      this.state[1].push(ANSWER.EMPTY_ANSWER);
+      this.bridgeStateArray[0].push(ANSWER.WRONG_ANSWER);
+      this.bridgeStateArray[1].push(ANSWER.EMPTY_ANSWER);
     }
   },
 
   checkLowerBridgeCorrect(moving, isCorrect) {
     if (moving === COMMAND.LOWER_BRIDGE_STRING && isCorrect) {
-      this.state[0].push(ANSWER.EMPTY_ANSWER);
-      this.state[1].push(ANSWER.CORRECT_ANSWER);
+      this.bridgeStateArray[0].push(ANSWER.EMPTY_ANSWER);
+      this.bridgeStateArray[1].push(ANSWER.CORRECT_ANSWER);
     }
   },
 
   checkLowerBridgeWrong(moving, isCorrect) {
     if (moving === COMMAND.LOWER_BRIDGE_STRING && !isCorrect) {
-      this.state[0].push(ANSWER.EMPTY_ANSWER);
-      this.state[1].push(ANSWER.WRONG_ANSWER);
+      this.bridgeStateArray[0].push(ANSWER.EMPTY_ANSWER);
+      this.bridgeStateArray[1].push(ANSWER.WRONG_ANSWER);
     }
   },
 
@@ -69,8 +69,8 @@ const Player = {
     return this.movingArray;
   },
 
-  getState() {
-    return this.state;
+  getBridgeStateArray() {
+    return this.bridgeStateArray;
   },
 
   getTryingCount() {
@@ -87,7 +87,7 @@ const Player = {
   },
 
   reset() {
-    this.state = [[], []];
+    this.bridgeStateArray = [[], []];
     this.movingArray = [];
     this.playerAns = [];
     this.tryingCount += PLAYER.INCREASE_TRY_NUMBER;

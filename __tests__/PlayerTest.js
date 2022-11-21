@@ -8,12 +8,12 @@ describe("플레이어 상태 테스트", () => {
 
   test("위쪽 다리를 맞출 경우 상태 테스트", () => {
     Player.checkUpperBridgeCorrect("U", true);
-    expect(Player.state).toStrictEqual([[" O "], ["   "]]);
+    expect(Player.bridgeStateArray).toStrictEqual([[" O "], ["   "]]);
   });
 
   test("위쪽 다리를 틀릴 경우 상태 테스트", () => {
     Player.checkUpperBridgeWrong("U", false);
-    expect(Player.state).toStrictEqual([
+    expect(Player.bridgeStateArray).toStrictEqual([
       [" O ", " X "],
       ["   ", "   "],
     ]);
@@ -21,7 +21,7 @@ describe("플레이어 상태 테스트", () => {
 
   test("아래 다리를 맞출 경우 상태 테스트", () => {
     Player.checkLowerBridgeCorrect("D", true);
-    expect(Player.state).toStrictEqual([
+    expect(Player.bridgeStateArray).toStrictEqual([
       [" O ", " X ", "   "],
       ["   ", "   ", " O "],
     ]);
@@ -29,7 +29,7 @@ describe("플레이어 상태 테스트", () => {
 
   test("아래 다리를 틀릴 경우 상태 테스트", () => {
     Player.checkLowerBridgeWrong("D", false);
-    expect(Player.state).toStrictEqual([
+    expect(Player.bridgeStateArray).toStrictEqual([
       [" O ", " X ", "   ", "   "],
       ["   ", "   ", " O ", " X "],
     ]);
@@ -51,8 +51,8 @@ describe("플레이어 상태 테스트", () => {
   });
 
   test("플레이어가 선택한 다리 정답 상태 반환 테스트", () => {
-    Player.state = [[" O "], ["  "]];
-    expect(Player.getState()).toStrictEqual([[" O "], ["  "]]);
+    Player.bridgeStateArray = [[" O "], ["  "]];
+    expect(Player.getBridgeStateArray()).toStrictEqual([[" O "], ["  "]]);
   });
 
   test("플레이어가 게임을 시도한 횟수 반환 테스트", () => {
@@ -70,7 +70,7 @@ describe("플레이어 상태 테스트", () => {
   test("게임 재시작 테스트", () => {
     Player.reset();
 
-    expect(Player.state).toStrictEqual([[], []]);
+    expect(Player.bridgeStateArray).toStrictEqual([[], []]);
     expect(Player.movingArray).toStrictEqual([]);
     expect(Player.playerAns).toStrictEqual([]);
     expect(Player.tryingCount).toBe(2);
