@@ -14,7 +14,7 @@ const isBridgeLengthValid = (value) => {
 
 const isMoveValid = (value) => {
   if (isEmptyInput(value)) throw new AppError(ERROR_MESSAGE.EMPTY_ERROR);
-  if (!isAlphabetValid(value))
+  if (!isAlphabetValid(value, MOVE_VALUE.UP, MOVE_VALUE.DOWN))
     throw new AppError(
       ERROR_MESSAGE.ALPHABET_ERROR(MOVE_VALUE.UP, MOVE_VALUE.DOWN)
     );
@@ -22,7 +22,7 @@ const isMoveValid = (value) => {
 
 const isRestartValid = (value) => {
   if (isEmptyInput(value)) throw new AppError(ERROR_MESSAGE.EMPTY_ERROR);
-  if (!isAlphabetValid(value))
+  if (!isAlphabetValid(value, RESTART_VALUE.RESTART, RESTART_VALUE.QUIT))
     throw new AppError(
       ERROR_MESSAGE.ALPHABET_ERROR(RESTART_VALUE.RESTART, RESTART_VALUE.QUIT)
     );
@@ -35,7 +35,7 @@ const isNumberType = (value) => !Number.isNaN(Number(value));
 const isRangeValid = (value) =>
   BRIDGE_VALUE.MIN <= value && value <= BRIDGE_VALUE.MAX;
 
-const isAlphabetValid = (value) =>
-  value === MOVE_VALUE.UP || value === MOVE_VALUE.DOWN;
+const isAlphabetValid = (value, option1, option2) =>
+  value === option1 || value === option2;
 
 module.exports = { isBridgeLengthValid, isMoveValid, isRestartValid };

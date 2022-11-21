@@ -4,7 +4,7 @@ const {
   isMoveValid,
   isRestartValid,
 } = require("./utils/index");
-const { GAME_MESSAGE } = require("./constants/index");
+const { GAME_MESSAGE, RESTART_VALUE } = require("./constants/index");
 const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -33,7 +33,7 @@ const InputView = {
 
       OutputView.printMap(up, down);
 
-      if (!proceedMove) this.readGameCommand();
+      if (!proceedMove) this.readGameCommand(bridgeGame);
 
       this.readMoving(bridgeGame);
     });
@@ -42,9 +42,13 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(bridgeGame) {
     inputUserValue(GAME_MESSAGE.RESTART, (restart) => {
       isRestartValid(restart);
+      if (restart === RESTART_VALUE.RESTART) {
+        bridgeGame.retry();
+        this.readMoving(bridgeGame);
+      }
     });
   },
 };
