@@ -1,6 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const Validator = require('./Validator');
-const { INPUT_MESSAGE, ERROR_MESSAGE } = require('./constants');
+const { INPUT_MESSAGE } = require('./constants');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -10,11 +9,12 @@ const InputView = {
    */
   readBridgeSize(callback) {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (input) => {
-      if (!Validator.validateNumber(input) || !Validator.validateNumberInRange(input)) {
-        Console.print(ERROR_MESSAGE.SIZE_ERROR);
+      try {
+        return callback(input);
+      } catch (error) {
+        Console.print(error.message);
         return this.readBridgeSize(callback);
       }
-      return callback(input);
     });
   },
 
@@ -23,12 +23,13 @@ const InputView = {
    */
   readMoving(callback, index, size) {
     Console.readLine(INPUT_MESSAGE.MOVING, (input) => {
-      if (!Validator.validateUpDown(input)) {
-        Console.print(ERROR_MESSAGE.MOVING_ERROR);
+      try {
+        callback(input, index);
+        return index < size - 1 && this.readMoving(callback, index + 1, size);
+      } catch (error) {
+        Console.print(error.message);
         return this.readMoving(callback, index, size);
       }
-      callback(input, index);
-      return index < size - 1 && this.readMoving(callback, index + 1, size);
     });
   },
 
@@ -37,11 +38,12 @@ const InputView = {
    */
   readGameCommand(callback) {
     Console.readLine(INPUT_MESSAGE.COMMAND, (input) => {
-      if (!Validator.validateGameCommand(input)) {
-        Console.print(ERROR_MESSAGE.COMMAND_ERROR);
+      try {
+        return callback(input);
+      } catch (error) {
+        Console.print(error.message);
         return this.readGameCommand(callback);
       }
-      return callback(input);
     });
   },
 };
