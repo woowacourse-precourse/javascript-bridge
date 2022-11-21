@@ -10,9 +10,19 @@ const VALID_CHAR = {
     DOWN: "D",
     REPLAY: "R",
     QUIT: "Q",
-}
+};
+
+const BRIDGE_SHAPE = {
+    START: "[",
+    END: "]",
+    DELIMITER: "|",
+    SUCCESS: " O ",
+    FAILURE: " X ",
+    BLANK: "   ",
+};
 
 module.exports = {
     ERROR_MESSAGE,
     VALID_CHAR,
+    BRIDGE_SHAPE,
 };
