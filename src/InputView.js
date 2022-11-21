@@ -61,6 +61,16 @@ const InputView = {
     });
     return gameCommand;
   },
+
+  handleRetryError(gameCommandInput) {
+    const validation = new Validation();
+    try {
+        validation.checkRetryInputValidation(gameCommandInput);
+    } catch (error) {
+        MissionUtils.Console.print(error);
+        this.readGameCommand();
+    }
+  },
 };
 
 module.exports = InputView;
