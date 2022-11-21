@@ -10,19 +10,33 @@ const OutputView = {
    */
   printMap(board) {
     const height = board.length;
-    const width = board[0].length;
     let currentHeight = 0;
-    let message = "";
+    let messages = ["", ""];
     while (currentHeight < height) {
-      message += "[";
-      board[currentHeight].forEach(function (marking, index) {
-        message += ` ${marking} `;
-        if (index < width - 1) message += "|";
-      });
-      message += "]\n";
+      messages[currentHeight] = this.makeMessage(board[currentHeight]);
       currentHeight++;
     }
-    Console.print(message);
+    const resultMessage = this.makeResultMessage(messages);
+    Console.print(resultMessage);
+  },
+  makeMessage(line) {
+    const width = line.length;
+    let message = "";
+    message += "[";
+    line.forEach(function (marking, index) {
+      message += ` ${marking} `;
+      if (index < width - 1) message += "|";
+    });
+    message += "]\n";
+    return message;
+  },
+  makeResultMessage(messages) {
+    let resultMessage = "";
+    messages.reverse();
+    messages.forEach(function (message) {
+      resultMessage += message;
+    });
+    return resultMessage;
   },
 
   /**
