@@ -5,27 +5,6 @@ const {MESSAGE} = require('./constants');
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
-  thread: {
-    upside: [],
-    downside: []
-  },
-
-  MAKE_MOVE_MAP: {
-    U: (thread, result) => {
-      thread.upside.push(result);
-      thread.downside.push(" ");
-    },
-    D: (thread, result) => {
-      thread.upside.push(" ");
-      thread.downside.push(result);
-    }
-  },
-
-  clearThread() {
-    this.thread.upside = [];
-    this.thread.downside = [];
-  },
-
   printStart() {
     Console.print(MESSAGE.START);
   },
@@ -38,14 +17,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-
   printMap(bridgeGame) {
-    const index = bridgeGame.getMoveCount() - 1;
-    const result = bridgeGame.getMatchResult();
-    this.MAKE_MOVE_MAP[bridgeGame.getUser()[index]](this.thread, result);
+    const resultMap = bridgeGame.getResultMap()
 
-    Console.print(`[ ${this.thread.upside.join(" | ")} ]`)
-    Console.print(`[ ${this.thread.downside.join(" | ")} ]\n`)
+    Console.print(`[ ${resultMap.upside.join(" | ")} ]`)
+    Console.print(`[ ${resultMap.downside.join(" | ")} ]\n`)
   },
 
   /**
@@ -55,10 +31,11 @@ const OutputView = {
    */
   printResult(bridgeGame) {
     const result = bridgeGame.getStatus() === "END" ? "성공" : "실패" 
+    const resultMap = bridgeGame.getResultMap()
 
     Console.print(MESSAGE.RESULT_INFO)
-    Console.print(`[ ${this.thread.upside.join(" | ")} ]`)
-    Console.print(`[ ${this.thread.downside.join(" | ")} ]`)
+    Console.print(`[ ${resultMap.upside.join(" | ")} ]`)
+    Console.print(`[ ${resultMap.downside.join(" | ")} ]`)
     Console.print(MESSAGE.RESULT_IS_SUCCESS(result))
     Console.print(MESSAGE.RESULT_TRY_COUNT(bridgeGame.getTryCount()))
   },

@@ -10,6 +10,32 @@ class BridgeGame {
   #bridge = [];
   #user = [];
   #status = "";
+  #resultMap = {
+    upside: [],
+    downside: []
+  }
+  
+
+  MAKE_MOVE_MAP = {
+    U: (result) => {
+      this.#resultMap.upside.push(result);
+      this.#resultMap.downside.push(" ");
+    },
+    D: (result) => {
+      this.#resultMap.upside.push(" ");
+      this.#resultMap.downside.push(result);
+    }
+  };
+
+  getResultMap() {
+    return this.#resultMap
+  }
+
+  setResultMap () {
+    const index = this.#moveCount - 1;
+    const result = this.#user[index] === this.#bridge[index] ? "O" : "X"
+    this.MAKE_MOVE_MAP[this.#user[index]](result);
+  }
 
   getTryCount() {
     return this.#tryCount
@@ -49,9 +75,7 @@ class BridgeGame {
     return this;
   }
 
-  getMatchResult() {
-    return this.#user[this.#moveCount - 1] === this.#bridge[this.#moveCount - 1] ? "O" : "X"
-  }
+  
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -76,6 +100,8 @@ class BridgeGame {
     this.#tryCount += 1;
     this.#moveCount = 0
     this.#user = [];
+    this.#resultMap.upside = [];
+    this.#resultMap.downside = [];
   }
 }
 
