@@ -24,6 +24,10 @@ class BridgeGame {
     this.#bridgeSize = size;
   }
 
+  setBridge(bridge) {
+    this.#bridge = bridge;
+  }
+
 
   move() {
   }
