@@ -34,6 +34,11 @@ const OutputView = {
     this.printMap(totalResultLength, getUserInputResult);
     this.print(`게임 성공 여부: ${gameClearMessage[isGameClear]}\n총 시도한 횟수: ${tryCount}`);
   },
+
+  printError({ message }) {
+    // REMOVE: printError 부분 임시 추가
+    this.print(`printError : ${message}`);
+  },
 };
 
 module.exports = OutputView;
