@@ -13,18 +13,16 @@ class App {
     this.#bridgeSizeInputPhase();
   }
 
-  // TODO: 메서드 길이 10줄 이하로 줄이기
   #bridgeSizeInputPhase() {
     InputView.readBridgeSize((bridgeSize) => {
       try {
         Validator.errorIfBridgeSizeInvalid(bridgeSize);
+        this.#bridgeGame = new BridgeGame(bridgeSize);
+        this.#movingInputPhase();
       } catch (error) {
         OutputView.printMessage(ERROR.INVALID_BRIDGE_SIZE);
         this.#bridgeSizeInputPhase();
-        return;
       }
-      this.#bridgeGame = new BridgeGame(bridgeSize);
-      this.#movingInputPhase();
     });
   }
 
@@ -32,12 +30,11 @@ class App {
     InputView.readMoving((moving) => {
       try {
         Validator.errorIfMovingInvalid(moving);
+        this.#showBridgePhase(moving);
       } catch (error) {
         OutputView.printMessage(ERROR.INVALID_MOVING);
         this.#movingInputPhase();
-        return;
       }
-      this.#showBridgePhase(moving);
     });
   }
 
@@ -64,12 +61,11 @@ class App {
     InputView.readGameCommand((command) => {
       try {
         Validator.errorIfGameCommandInvalid(command);
+        this.#decideNextPhaseByRetryCommand(command);
       } catch (error) {
         OutputView.printMessage(ERROR.INVALID_RETRY_COMMAND);
         this.#retryCommandInputPhase();
-        return;
       }
-      this.#decideNextPhaseByRetryCommand(command);
     });
   }
 
