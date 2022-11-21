@@ -10,8 +10,10 @@ const {
 const bridgeLengthValidate = (number)=>{
   try{
     if(!bridgeRangeCheck(number)) throw new Error("[ERROR]")
+    
+    if(!isBridgeLengthFloat(number)) throw new Error("[ERROR]")
   }catch(error){
-    MissionUtils.Console.print(err.message)
+    MissionUtils.Console.print(error.message)
     return true;
   }
 }
