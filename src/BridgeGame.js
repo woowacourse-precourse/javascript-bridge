@@ -51,6 +51,10 @@ class BridgeGame {
     return [this.#upBridge, this.#downBridge];
   }
 
+  getAttemptCount() {
+    return this.#attemptCount;
+  }
+
   retry() {
     this.#downBridge.length = 0;
     this.#upBridge.length = 0;
