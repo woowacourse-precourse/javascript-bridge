@@ -25,12 +25,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(currBridge) {
+  printMap(bridgeGame) {
     print(
-      STARTING_POINT + currBridge.getUpperBridge().join(EDGE) + FINISHING_POINT
+      STARTING_POINT + bridgeGame.getUpperBridge().join(EDGE) + FINISHING_POINT
     );
     print(
-      STARTING_POINT + currBridge.getLowerBridge().join(EDGE) + FINISHING_POINT
+      STARTING_POINT + bridgeGame.getLowerBridge().join(EDGE) + FINISHING_POINT
     );
     print(LINE_BREAK);
   },
@@ -40,9 +40,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(GAME_RESULT, bridgeGame, currBridge) {
+  printResult(GAME_RESULT, bridgeGame) {
     print(MESSAGE.totalGameResult);
-    this.printMap(currBridge);
+    this.printMap(bridgeGame);
     print(SHOW_GAME_RESULT(GAME_RESULT));
     print(SHOW_RETRY_COUNT(bridgeGame.getRetryingCount()));
   },

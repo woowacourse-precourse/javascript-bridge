@@ -1,6 +1,5 @@
 const BridgeGame = require('../model/BridgeGame');
 const WinningBridge = require('../model/WinningBridge');
-const CurrBridge = require('../model/CurrBridge');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const {
@@ -17,7 +16,6 @@ class Controller {
   constructor() {
     this.bridgeGame = new BridgeGame();
     this.winningBridge = new WinningBridge();
-    this.currBridge = new CurrBridge();
   }
 
   gameStart() {
@@ -54,7 +52,7 @@ class Controller {
 
   validateDirection(direction) {
     try {
-      this.currBridge.validate(direction);
+      this.bridgeGame.validateDirection(direction);
     } catch (error) {
       OutputView.printError(error);
       return this.inputMoving();
@@ -64,15 +62,15 @@ class Controller {
   }
 
   move(direction) {
-    const CAN_MOVE = this.currBridge.canMove(direction, this.winningBridge);
-    this.bridgeGame.move(this.currBridge, direction, CAN_MOVE);
-    OutputView.printMap(this.currBridge);
+    const CAN_MOVE = this.bridgeGame.canMove(direction, this.winningBridge);
+    this.bridgeGame.move(direction, CAN_MOVE);
+    OutputView.printMap(this.bridgeGame);
 
     this.checkSuccess(CAN_MOVE);
   }
 
   checkSuccess(CAN_MOVE) {
-    if (CAN_MOVE && this.currBridge.isLast(this.winningBridge)) {
+    if (CAN_MOVE && this.bridgeGame.isLast(this.winningBridge)) {
       const IS_SUCCEEDED = true;
       return this.printResult(IS_SUCCEEDED);
     }
@@ -105,13 +103,14 @@ class Controller {
   }
 
   retry() {
-    this.bridgeGame.retry(this.currBridge);
+    this.bridgeGame.retry();
+
     this.inputMoving();
   }
 
   printResult(IS_SUCCEEDED) {
     const GAME_RESULT = IS_SUCCEEDED ? SUCCESS : FAIL;
-    OutputView.printResult(GAME_RESULT, this.bridgeGame, this.currBridge);
+    OutputView.printResult(GAME_RESULT, this.bridgeGame);
 
     this.close();
   }
