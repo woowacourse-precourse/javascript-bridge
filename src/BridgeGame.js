@@ -1,5 +1,4 @@
 const Bridge = require('./Bridge');
-const Player = require('./Player');
 const { checkMoveInput, checkGameCommand } = require('./util/validationInput');
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -7,11 +6,24 @@ const { checkMoveInput, checkGameCommand } = require('./util/validationInput');
 
 class BridgeGame {
 	#bridge;
-	#player;
+	#result;
+	#currentIndex;
 
 	constructor(length) {
-		this.#player = new Player();
 		this.#bridge = new Bridge(length);
+		this.#currentIndex = -1;
+		this.#result = {
+			isMovable: true,
+			tryCount: 1,
+		};
+	}
+
+	getIsMovable() {
+		return this.#result.isMovable;
+	}
+
+	getResult() {
+		return this.#result;
 	}
 	/**
 	 * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -20,13 +32,11 @@ class BridgeGame {
 	 */
 	move(input) {
 		checkMoveInput(input);
-		const MOVABLE = this.#bridge.movable(
-			this.#player.getCurrentIndex() + 1,
+		this.#result.isMovable = this.#bridge.movable(
+			this.#currentIndex + 1,
 			input,
 		);
-		this.#player.move(input, MOVABLE);
-		this.#player.printCurrentFootprints();
-		return MOVABLE;
+		this.#currentIndex++;
 	}
 
 	/**
@@ -36,18 +46,18 @@ class BridgeGame {
 	 */
 	retry(input) {
 		checkGameCommand(input);
-		this.#player.retry();
+		this.#currentIndex = -1;
+		this.#result.tryCount++;
 	}
 
 	isCrossed() {
 		return (
-			this.#bridge.checkLength(this.#player.getCurrentIndex()) &&
-			this.#player.getIsMovable()
+			this.#bridge.checkLength(this.#currentIndex) && this.#result.isMovable
 		);
 	}
 
-	printResult() {
-		this.#player.printPlayerResult();
+	printCurrent() {
+		this.#bridge.printBridge(this.#currentIndex, this.#result.isMovable);
 	}
 }
 

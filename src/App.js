@@ -1,10 +1,15 @@
-const { getInputs, readMoving, closeConsole } = require('./View/InputView');
 const {
-	checkBridgeSize,
-	checkMoveInput,
-	checkGameCommand,
-} = require('./util/validationInput');
-const { printStart } = require('./View/OutputView');
+	readBridgeSize,
+	readMoving,
+	readGameCommand,
+	closeConsole,
+} = require('./View/InputView');
+const {
+	printStart,
+	printError,
+	printResult,
+	printGameResultMessage,
+} = require('./View/OutputView');
 const BridgeGame = require('./BridgeGame');
 
 class App {
@@ -12,34 +17,59 @@ class App {
 
 	play() {
 		printStart();
-		getInputs.bind(this)([this.createBridge, this.move, this.controlGame]);
+		readBridgeSize.bind(this)(this.createBridge);
 	}
 
 	createBridge(input) {
-		this.#bridgeGame = new BridgeGame(input);
+		this.tryCatch(() => {
+			this.#bridgeGame = new BridgeGame(input);
+			readMoving.bind(this)(this.move);
+		}, 'BRIDGE');
 	}
 
 	move(input) {
-		const MOVABLE = this.#bridgeGame.move(input);
+		this.tryCatch(() => {
+			this.#bridgeGame.move(input);
+			this.#bridgeGame.printCurrent();
+			this.decideNextStep();
+		}, 'MOVE');
+	}
+
+	decideNextStep() {
+		const MOVABLE = this.#bridgeGame.getIsMovable();
 		const IS_END = this.#bridgeGame.isCrossed();
-		if (IS_END) {
-			this.gameEnd();
-		}
-		return [MOVABLE, IS_END];
+		if (IS_END) this.gameEnd();
+		if (!IS_END && MOVABLE) readMoving.bind(this)(this.move);
+		if (!IS_END && !MOVABLE) readGameCommand.bind(this)(this.controlGame);
 	}
 
 	controlGame(input) {
-		if (input === 'R') {
-			this.#bridgeGame.retry(input);
-			readMoving.call(this, [this.move, this.controlGame]);
-		} else {
-			this.gameEnd();
-		}
+		this.tryCatch(() => {
+			if (input === 'R') {
+				this.#bridgeGame.retry(input);
+				readMoving.bind(this)(this.move);
+			} else {
+				this.gameEnd();
+			}
+		}, 'COMMAND');
 	}
 
 	gameEnd() {
-		this.#bridgeGame.printResult();
+		printGameResultMessage();
+		this.#bridgeGame.printCurrent();
+		printResult(this.#bridgeGame.getResult());
 		closeConsole();
+	}
+
+	tryCatch(callback, type) {
+		try {
+			callback();
+		} catch (err) {
+			printError(err);
+			if (type === 'BRIDGE') readBridgeSize.bind(this)(this.createBridge);
+			if (type === 'MOVE') readMoving.bind(this)(this.move);
+			if (type === 'COMMAND') readGameCommand.bind(this)(this.controlGame);
+		}
 	}
 }
 
