@@ -1,4 +1,3 @@
-const App = require("../src/App");
 const BridgeGame = require("../src/BridgeGame");
 
 describe("BridgeGame class 함수 기능테스트", () => {
