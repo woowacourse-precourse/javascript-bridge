@@ -16,7 +16,7 @@ class App {
     console.log("다리 건너기 게임을 시작합니다.\n");
     const bridgeSize = await this.makeBridgeSize(0);
 
-    this.bridge = BridgeMaker.makeBridge(bridgeSize, generate).toString;
+    this.bridge = BridgeMaker.makeBridge(bridgeSize, generate);
     const bridgeGame = new BridgeGame();
 
     let moveCount = 0;
