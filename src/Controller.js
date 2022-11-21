@@ -18,112 +18,78 @@ class Controller {
 
   start() {
     printStart();
-    InputView.readBridgeSize((input) => {
-      this.checkBridgeSize(input);
+    this.readSize();
+  }
+
+  readSize() {
+    InputView.readBridgeSize((size) => {
+      this.checkBridgeSize(size);
     });
   }
 
-  checkBridgeSize = (input) => {
-    isInvalidBridgeLength(input) && InputView.readBridgeSize();
-    this.makeAnswerBridge(input);
+  checkBridgeSize = (size) => {
+    isInvalidBridgeLength(size) && this.readSize();
+    this.makeAnswerBridge(size);
   };
 
-  makeAnswerBridge(input) {
-    const bridgeSize = toNumber(input);
+  makeAnswerBridge(size) {
+    const bridgeSize = toNumber(size);
     const bridge = makeBridge(bridgeSize, generate);
     this.setBridgeGame(new BridgeGame(bridge));
-    InputView.readMoving((input) => {
-      this.checkMoving(input);
+    this.readMove();
+  }
+
+  readMove() {
+    InputView.readMoving((moveCommand) => {
+      this.checkMoving(moveCommand);
     });
   }
 
-  checkMoving = (input) => {
-    if (isInvalidMoving(input)) {
-      InputView.readMoving((input) => {
-        this.checkMoving(input);
-      });
+  checkMoving = (moveCommand) => {
+    if (isInvalidMoving(moveCommand)) {
+      this.readMove();
       return;
     }
-    this.setMoving(input);
+    this.setMoving(moveCommand);
   };
 
-  setMoving(input) {
-    this.#bridgeGame.move(input);
+  setMoving(moveCommand) {
+    this.#bridgeGame.move(moveCommand);
     printMap(this.#bridgeGame.getUserState());
-    if (this.#bridgeGame.isVictory()) {
-      printResult(this.#bridgeGame);
-      Console.close();
-      return;
-    }
-    if (this.#bridgeGame.isFinish) {
-      InputView.readGameCommand((input) => {
-        this.checkGameCommand(input);
-      });
-      return;
-    }
-    InputView.readMoving((input) => {
-      this.checkMoving(input);
-    });
+    if (this.#bridgeGame.isVictory()) this.endGame();
+    if (this.#bridgeGame.isLoss()) this.readCommand();
+    this.readMove();
   }
 
-  checkGameCommand = (input) => {
-    if (isInvalidGameCommand(input)) {
-      InputView.readGameCommand((input) => {
-        this.checkGameCommand(input);
-      });
-      return;
-    }
-    this.turnOnOffGame(input);
-  };
-
-  turnOnOffGame(input) {
-    if (input === RESTART_COMMAND) {
-      this.#bridgeGame.retry();
-      InputView.readMoving((input) => {
-        this.checkMoving(input);
-      });
-      return;
-    }
-    if (input === QUIT_COMMAND) {
-      printResult(this.#bridgeGame);
-    }
+  endGame() {
+    printResult(this.#bridgeGame);
     Console.close();
   }
 
-  // (input) => {
-  //   if (isInvalidGameCommand(input)) {
-  //     InputView.readGameCommand(bridgeGame);
-  //     return;
-  //   }
-  //   if (input === RESTART_COMMAND) {
-  //     bridgeGame.retry();
-  //     InputView.readMoving(bridgeGame);
-  //     return;
-  //   }
-  //   if (input === QUIT_COMMAND) {
-  //     printResult(bridgeGame);
-  //   }
-  //   Console.close();
-  // }
+  readCommand() {
+    InputView.readGameCommand((command) => {
+      this.checkGameCommand(command);
+    });
+  }
 
-  // (input) => {
-  //   if (isInvalidMoving(input)) {
-  //     InputView.readMoving(bridgeGame);
-  //     return;
-  //   }
-  //   bridgeGame.move(input);
-  //   printMap(bridgeGame.getUserState());
-  //   if (bridgeGame.isVictory()) {
-  //     printResult(bridgeGame);
-  //     Console.close();
-  //     return;
-  //   }
-  //   if (bridgeGame.isFinish) {
-  //     InputView.readGameCommand(bridgeGame);
-  //     return;
-  //   }
-  //   InputView.readMoving(bridgeGame);
-  // }
+  checkGameCommand = (command) => {
+    if (isInvalidGameCommand(command)) {
+      this.readCommand();
+      return;
+    }
+    this.turnOnOffGame(command);
+  };
+
+  turnOnOffGame(command) {
+    if (command === RESTART_COMMAND) {
+      this.#bridgeGame.retry();
+      this.readMove();
+      return;
+    }
+    if (command === QUIT_COMMAND) {
+      this.endGame();
+    }
+  }
 }
 
 module.exports = Controller;

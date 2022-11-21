@@ -37,6 +37,10 @@ class BridgeGame {
     return false;
   }
 
+  isLoss() {
+    return this.isFinish;
+  }
+
   initState() {
     this.retryCount++;
     this.bridgeStep = 0;
