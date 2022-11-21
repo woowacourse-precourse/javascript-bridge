@@ -2,28 +2,28 @@
 
 ## ✍🏻 기능 목록
 
-- [x] `다리 건너기 게임을 시작합니다.` 출력
-- [x] `다리의 길이를 입력해주세요.` 출력
-  - [x] 사용자가 숫자 입력
-    - [x] 예외 사항 확인
-- [x] 랜덤 값(0과 1)을 이용해서 다리 생성
-- [x] `이동할 칸을 선택해주세요. (위: U, 아래: D)` 출력
-  - [x] 사용자가 U 또는 D 입력
-    - [x] 예외 사항 확인
-  - [x] 현재 몇 번째 라운드인지 확인
-  - [x] 현재 라운드까지의 결과 출력
-- [x] 현재 라운드의 결과가 O인 경우 다음 라운드 진행 (`이동할 칸을 선택해주세요. (위: U, 아래: D)` 출력 ...)
-  - [x] 만약 현재 라운드의 결과가 O이고 마지막 라운드라면 최종 게임 결과 출력
-    - [x] 총 시도 횟수 증가
-- [x] 현재 라운드의 결과가 X인 경우 `게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)` 출력
-  - [x] 총 시도 횟수 증가
-  - [x] 사용자가 R 또는 Q 입력
-    - [x] 예외 사항 확인
-- [x] R을 입력한 경우 다시 1라운드부터 진행 (`이동할 칸을 선택해주세요. (위: U, 아래: D)` 출력 ...)
-  - [x] 라운드 값 초기화
-  - [x] 출력 결과 초기화
-- [x] Q를 입력한 경우 최종 게임 결과 출력
-- [x] 최종 게임 결과가 출력되면 게임 종료
+- [x] `다리 건너기 게임을 시작합니다.` 출력 - OutputView.startGame
+- [x] `다리의 길이를 입력해주세요.` 출력 - InputView.readBridgeSize
+  - [x] 사용자가 숫자 입력 - InputView.readBridgeSize
+    - [x] 예외 사항 확인 - InputView.validateBridgeSize
+- [x] 랜덤 값(0과 1)을 이용해서 다리 생성 - BridgeMaker
+- [x] `이동할 칸을 선택해주세요. (위: U, 아래: D)` 출력 - InputView.readMoving
+  - [x] 사용자가 U 또는 D 입력 - InputView.readMoving
+    - [x] 예외 사항 확인 - InputView.validateMoving
+  - [x] 현재 몇 번째 라운드인지 확인 - BridgeGame
+  - [x] 현재 라운드까지의 결과 출력 - OutputView.printMap
+- [x] 현재 라운드의 결과가 O인 경우 다음 라운드 진행 (`이동할 칸을 선택해주세요. (위: U, 아래: D)` 출력 ...) - InputView.proceedRound
+  - [x] 만약 현재 라운드의 결과가 O이고 마지막 라운드라면 최종 게임 결과 출력 - InputView.proceedRound
+    - [x] 총 시도 횟수 증가 - BridgeGame
+- [x] 현재 라운드의 결과가 X인 경우 `게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)` 출력 - InputView.proceedRound
+  - [x] 총 시도 횟수 증가 - BridgeGame
+  - [x] 사용자가 R 또는 Q 입력 - InputView.readGameCommand
+    - [x] 예외 사항 확인 - InputView.validateGameCommand
+- [x] R을 입력한 경우 다시 1라운드부터 진행 (`이동할 칸을 선택해주세요. (위: U, 아래: D)` 출력 ...) - InputView.restartOrQuit
+  - [x] 라운드 값 초기화 - BridgeGame
+  - [x] 출력 결과 초기화 - BridgeGame
+- [x] Q를 입력한 경우 최종 게임 결과 출력 - InputView.restartOrQuit
+- [x] 최종 게임 결과가 출력되면 게임 종료 - OutputView.printResult
 
 ---
 
@@ -31,13 +31,13 @@
 
 #### `throw문`으로 예외 발생시키고, `[ERROR]`로 시작하는 에러 메시지 출력 후 그 부분부터 입력을 다시 받기
 
-- [x] 다리 길이
+- [x] 다리 길이 - InputView.validateBridgeSize
   - [x] 3 이상 20 이하의 숫자가 아닌 경우
-  - [x] 문자를 입력한 경우 (안녕, hello, &&&)
-- [x] 각 라운드마다 사용자가 이동할 칸
-  - [x] U 또는 D가 아닌 값을 입력한 경우 (u, d, 안녕, hello, &&&, 1)
-- [x] 게임 재시작/종료 여부
-  - [x] R 또는 Q가 아닌 값을 입력한 경우 (r, q, 안녕, hello, &&&, 1)
+  - [x] 문자를 입력한 경우 ('안녕', 'hello', '&&&')
+- [x] 각 라운드마다 사용자가 이동할 칸 - InputView.validateMoving
+  - [x] U 또는 D가 아닌 값을 입력한 경우 ('u', 'd', '안녕', 'hello', '&&&', 1)
+- [x] 게임 재시작/종료 여부 - InputView.validateGameCommand
+  - [x] R 또는 Q가 아닌 값을 입력한 경우 ('r', 'q', '안녕', 'hello', '&&&', 1)
 
 ---
 
