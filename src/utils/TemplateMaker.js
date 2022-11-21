@@ -1,13 +1,13 @@
 const { UPSIDE_SYMBOL, DOWNSIDE_SYMBOL } = require('../constants/condition.js');
 
-const SYMBOLS = {
+const SYMBOLS = Object.freeze({
   start: '[',
   end: ']',
   fail: 'X',
   success: 'O',
   blank: ' ',
   separator: ' | ',
-};
+});
 
 class TemplateMaker {
   static getLogTemplates(logs) {
