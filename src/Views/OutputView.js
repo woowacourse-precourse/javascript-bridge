@@ -6,7 +6,7 @@ const MESSAGE = require('../utils/Message');
  */
 const OutputView = {
   printStartMessage() {
-    MissionUtils.Console.print(MESSAGE.start);
+    MissionUtils.Console.print(MESSAGE.io.start);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
