@@ -1,5 +1,5 @@
-const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE } = require('./lib/constants');
+const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGE } = require("./lib/constants");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -15,7 +15,7 @@ const OutputView = {
   printMap(upDownArray) {
     Console.print(upDownArray[0]);
     Console.print(upDownArray[1]);
-    Console.print('\n');
+    Console.print("\n");
   },
 
   /**

@@ -1,4 +1,4 @@
-const { BRIDGE_SIZE_REGEX, ERROR } = require('./constants');
+const { BRIDGE_SIZE_REGEX, ERROR } = require("./constants");
 
 const changeSizeType = (size) => {
   return parseInt(size);

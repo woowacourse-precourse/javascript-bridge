@@ -1,4 +1,4 @@
-const { ERROR, INPUT_BRIDGE_REGEX } = require('./constants');
+const { ERROR, INPUT_BRIDGE_REGEX } = require("./constants");
 
 const checkBridgeMove = (move) => {
   if (move.length !== 1) {

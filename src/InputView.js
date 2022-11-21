@@ -1,15 +1,15 @@
-const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE } = require('./lib/constants');
+const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGE } = require("./lib/constants");
 const {
   changeSizeType,
   printBridgeSizeError,
   sizeRegexTest,
-} = require('./lib/bridgeSizeInputUtils');
-const BridgeMaker = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
-const BridgeGame = require('./BridgeGame');
-const { printRetryError, checkRetry } = require('./lib/bridgeRetryInputUtils');
-const OutputView = require('./OutputView');
+} = require("./lib/bridgeSizeInputUtils");
+const BridgeMaker = require("./BridgeMaker");
+const { generate } = require("./BridgeRandomNumberGenerator");
+const BridgeGame = require("./BridgeGame");
+const { printRetryError, checkRetry } = require("./lib/bridgeRetryInputUtils");
+const OutputView = require("./OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.

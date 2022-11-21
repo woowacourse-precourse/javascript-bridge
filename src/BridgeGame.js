@@ -1,4 +1,4 @@
-const { checkBridgeMove, printBridgeMoveError } = require('./lib/bridgeGameUtils');
+const { checkBridgeMove, printBridgeMoveError } = require("./lib/bridgeGameUtils");
 const {
   RETRY,
   FAIL,
@@ -8,7 +8,7 @@ const {
   SUCCESS_SHAPE,
   FAIL_SHAPE,
   BLANK,
-} = require('./lib/constants');
+} = require("./lib/constants");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -96,9 +96,9 @@ class BridgeGame {
   }
 
   returnStringArray(arr) {
-    let str = `[ ${arr.join(' , ')} ]`;
-    str = str.replaceAll("'", ' ');
-    str = str.replaceAll(',', '|');
+    let str = `[ ${arr.join(" , ")} ]`;
+    str = str.replaceAll("'", " ");
+    str = str.replaceAll(",", "|");
     return str;
   }
 

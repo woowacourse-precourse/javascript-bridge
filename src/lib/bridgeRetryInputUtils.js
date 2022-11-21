@@ -1,4 +1,4 @@
-const { BRIDGE_RETRY_ASK_REGEX, ERROR } = require('./constants');
+const { BRIDGE_RETRY_ASK_REGEX, ERROR } = require("./constants");
 
 const checkRetry = (ask) => {
   if (ask.length !== 1) {
