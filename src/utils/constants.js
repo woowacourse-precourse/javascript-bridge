@@ -21,6 +21,8 @@ const INPUT_ERROR = Object.freeze({
 const BRIDGE = Object.freeze({
   minSize: 3,
   maxSize: 20,
+  1: 'U',
+  0: 'D',
   up: 'U',
   down: 'D',
   right: 'O',
