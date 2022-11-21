@@ -1,4 +1,5 @@
 const { O, X } = require("./constants");
+const { generateColumnMap } = require("./utils");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -23,6 +24,16 @@ class BridgeGame {
 
   getMatchSymbol(correctDirection, direction) {
     return correctDirection === direction ? O : X;
+  }
+
+  getMap() {
+    return this.#results.reduce(
+      (acc, { direction, matchSymbol }) => {
+        const columnMap = generateColumnMap[direction](matchSymbol);
+        return acc.map((rowMap, index) => [...rowMap, columnMap[index]]);
+      },
+      [[], []]
+    );
   }
 
   /**
