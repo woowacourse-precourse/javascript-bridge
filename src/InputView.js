@@ -4,7 +4,7 @@ const Validation = require('./Validation');
 const BridgeMaker = require('./BridgeMaker');
 const OutputView = require('./OutputView');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { CONSOLE_MESSAGE } = require('./utils/constants');
+const { PARAMETERS, CONSOLE_MESSAGE, RESULT_MESSAGE } = require('./utils/constants');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -27,7 +27,7 @@ const InputView = {
 
       this.bridgeLength = Number(input);
       this.getBridge(input);
-      console.log(this.bridge);
+      // console.log(this.bridge);
       this.readMoving();
     });
   },
@@ -55,12 +55,11 @@ const InputView = {
 
   trackProgress(bridgeGameLog) {
     if (this.validation.checkRestartRequirement(this.moveCount, bridgeGameLog, this.bridge)) {
-      OutputView.bridgeGame.retry();
       this.readGameCommand(bridgeGameLog);
     }
 
     if (this.validation.checkGameSuccess(this.moveCount, bridgeGameLog, this.bridge)) {
-      // print final result
+      OutputView.printResult(bridgeGameLog, RESULT_MESSAGE.success);
     } else {
       this.readMoving();
     }
@@ -83,10 +82,11 @@ const InputView = {
 
   checkRestart(input, bridgeGameLog) {
     if (input === PARAMETERS.restartControl) {
+      OutputView.bridgeGame.retry();
       this.moveCount = 0;
       this.readMoving();
     } else {
-      // print result
+      OutputView.printResult(bridgeGameLog, RESULT_MESSAGE.fail);
     }
   },
 };
