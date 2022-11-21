@@ -62,7 +62,9 @@ const InputView = {
         InputView.readMoving(bridgeGame);
         return;
       }
-
+      if (input === QUIT_COMMAND) {
+        printResult(bridgeGame);
+      }
       Console.close();
     });
   },
