@@ -901,10 +901,18 @@ describe('다리 건너기 게임 종합 테스트', () => {
   });
 });
 
-describe('다리 로그 분류 메서드', () => {
+describe('다리 로그 분류 메서드 테스트', () => {
+  const BRIDGE_LOG = [[['O'], [' ']], [[' '], ['O']], [[' '], ['O']]];
+
   test('메소드 이름은 "logClassification"로 정의된다.', () => {
     const METHOD_NAME = 'logClassification';
 
     expect(BridgeGame.logClassification.name).toEqual(METHOD_NAME);
+  });
+
+  test('첫 번째 반환값은 [["O"], [" "], [" "]]을 반환한다.', () => {
+    const RECEIVED = [['O'], [' '], [' ']];
+
+    expect(BridgeGame.logClassification(BRIDGE_LOG)[0]).toEqual(RECEIVED);
   });
 });
