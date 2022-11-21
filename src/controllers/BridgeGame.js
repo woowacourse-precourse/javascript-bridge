@@ -48,12 +48,20 @@ class BridgeGame {
 
   #handleInputMoving(moveCount, direction) {
     try {
-      this.#model.isMovable(direction, moveCount);
-      this.move(moveCount + 1);
+      const isMovable = this.#model.isMovable(direction, moveCount);
+      const progress = isMovable
+        ? this.#moveNext.bind(this, moveCount)
+        : this.retry.bind(this);
+
+      progress();
     } catch (error) {
       this.#view.print(`\n${error.message}\n`);
       this.move(moveCount);
     }
+  }
+
+  #moveNext(moveCount) {
+    this.move(moveCount + 1);
   }
 
   /**
