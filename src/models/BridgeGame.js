@@ -75,7 +75,7 @@ class BridgeGame {
    * @return {boolean} 게임 승리 여부
    */
   isWin(isCrossed) {
-    return this.#bridge.isLastLocation(this.#status.getLocation()) && isCrossed;
+    return this.#status.isWin(this.#bridge.getSize(), isCrossed);
   }
 
   /**
@@ -94,7 +94,7 @@ class BridgeGame {
    */
   quit(isCrossed) {
     const bridgeMap = this.getMap();
-    const isWin = this.isWin(isCrossed);
+    const isWin = this.#status.isWin(this.#bridge.getSize(), isCrossed);
     const tryCount = this.#status.getTryCount();
 
     return { bridgeMap, isWin, tryCount };

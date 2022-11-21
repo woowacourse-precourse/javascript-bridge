@@ -42,6 +42,25 @@ class BridgeGameStatus {
   }
 
   /**
+   * 마지막 위치인지 확인할 때 사용하는 메서드
+   * @param {number} size 다리 사이즈
+   * @return {boolean} 마지막 위치인지 여부
+   */
+  isLastLocation(size) {
+    return size - 1 === this.#location;
+  }
+
+  /**
+   * 게임 승리 여부 확인하는 메서드
+   * @param {number} size 다리 사이즈
+   * @param {boolean} isCrossed 해당 칸 건넜는지 성공 여부
+   * @return {boolean} 게임 승리 여부
+   */
+  isWin(size, isCrossed) {
+    return this.isLastLocation(size) && isCrossed;
+  }
+
+  /**
    * 위치 초기화 시 사용하는 메서드
    */
   resetLocation() {

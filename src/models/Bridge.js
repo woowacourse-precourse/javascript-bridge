@@ -29,12 +29,11 @@ class Bridge {
   }
 
   /**
-   * 마지막 위치인지 확인할 때 사용하는 메서드
-   * @param {number} location 현재 위치
-   * @return {boolean} 마지막 위치인지 여부
+   * 다리 사이즈 가져올 때 사용하는 메서드
+   * @returns {number}
    */
-  isLastLocation(location) {
-    return this.#state.length - 1 === location;
+  getSize() {
+    return this.#state.length;
   }
 
   /**
