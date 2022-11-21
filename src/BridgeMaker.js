@@ -11,13 +11,13 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
-    
     for (let count = 0; count < size; count += 1) {
       const position = generateRandomNumber();
-      bridge = position === BRIDGE_POSITION.UP ? [...bridge, MOVEMENT.UP] : [...bridge, MOVEMENT.DOWN];
-    }
-    return bridge;
-  },
+      const movable = position === BRIDGE_POSITION.UP ? MOVEMENT.UP : MOVEMENT.DOWN;
+      bridge.push(movable);
+  }
+  return bridge;
+}
 };
 
 module.exports = BridgeMaker;
