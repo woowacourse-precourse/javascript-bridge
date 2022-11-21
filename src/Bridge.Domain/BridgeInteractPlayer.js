@@ -22,12 +22,10 @@ class BridgeInteractPlayer {
   }
 
   playerInputBridgeDirection(direction) {
-    //상호 작용 담당 , 모양 출력 ,
     const [bridgeArr, result, status] = this.#bridgeGame.move(
       this.#player,
       direction
     );
-    //모양 출력
     OutputView.printResult(
       this.#bridgeGameShape
         .getCurrentBridgeGameShape(bridgeArr, result)
@@ -44,10 +42,8 @@ class BridgeInteractPlayer {
       this.playerEndThisGame(bridge, true);
       return;
     }
-    //성공 했을 때
     if (result)
       InputView.readMoving(this.playerInputBridgeDirection.bind(this));
-    //실패 했을 때
     if (!result)
       InputView.readGameCommand(this.playerInputCommandBridgeRetry.bind(this));
     return;
@@ -61,6 +57,7 @@ class BridgeInteractPlayer {
         break;
       case BRIDGE.GAME.END:
         //todo: true 고치기
+        console.log(this.#bridgeGameShape.getCurrentShape());
         this.playerEndThisGame(this.#bridgeGameShape.getCurrentShape(), true);
         break;
     }
@@ -79,7 +76,7 @@ class BridgeInteractPlayer {
 }
 
 const bi = new BridgeInteractPlayer();
-//start
+
 InputView.readBridgeSize(bi.playerInputBridgeSize.bind(bi));
 
 module.exports = BridgeInteractPlayer;

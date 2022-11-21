@@ -30,7 +30,7 @@ class BridgeGame {
     if (playerDirection === answerDirection) goResult = true;
     if (playerDirection !== answerDirection) goResult = false;
     //bridge , index , result -> shape
-    if (index + 1 === this.#bridge.getBridgeArrayLength())
+    if (goResult && index + 1 === this.#bridge.getBridgeArrayLength())
       this.#status = GAME.STATUS.END;
     return [
       this.#bridge.getBridgeSliceArrFirstToPosition(index),
