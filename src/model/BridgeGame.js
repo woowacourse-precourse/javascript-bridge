@@ -1,5 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -18,19 +16,17 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(turnAnswer, move, stepResult) {
+  move(thisTurnAnswer, move, stepResult) {
     if (this.#turn > 0) stepResult.insert('|', '|');
-
-    if (this.isThisTurnCorrect(turnAnswer, move)) {
-      stepResult.correctStepRecord(move);
-      return;
-    }
-    stepResult.wrongStepRecord(move);
     this.#turn += 1;
+
+    if (this.isThisTurnCorrect(thisTurnAnswer, move)) return stepResult.correctStepRecord(move);
+
+    return stepResult.wrongStepRecord(move);
   }
 
-  isThisTurnCorrect(bridgeAnswer, move) {
-    return bridgeAnswer === move;
+  isThisTurnCorrect(thisTurnAnswer, move) {
+    return thisTurnAnswer === move;
   }
 
   /**
