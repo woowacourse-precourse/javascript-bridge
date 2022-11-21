@@ -26,6 +26,7 @@ const ERROR = {
 };
 
 const GAME = {
+  start: '다리 건너기 게임을 시작합니다.',
   end: '최종 게임 결과',
   success: '게임 성공 여부: 성공',
   fail: '게임 성공 여부: 실패',

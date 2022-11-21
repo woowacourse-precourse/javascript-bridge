@@ -1,5 +1,10 @@
 const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
-const { printError, printMap, printResult } = require('./OutputView');
+const {
+  printError,
+  printMap,
+  printResult,
+  printStart,
+} = require('./OutputView');
 const BridgeMap = require('./BridgeMap');
 const {
   checkSizeInRange,
@@ -14,6 +19,10 @@ class BridgeGameController {
 
   constructor(model) {
     this.#model = model;
+  }
+
+  initializeGame() {
+    printStart();
   }
 
   controlException(error, callback) {
