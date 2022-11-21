@@ -1,6 +1,8 @@
+const { DIRECTION } = require("../constants/gameState");
+
 class DirectionValidator {
   static validateDirection(direction) {
-    if (!(direction === "U" || direction === "D")) {
+    if (!(direction === DIRECTION.UP || direction === DIRECTION.DOWN)) {
       throw new Error("[ERROR] 잘못된 입력입니다. U 또는 D를 입력해주세요.");
     }
   }
