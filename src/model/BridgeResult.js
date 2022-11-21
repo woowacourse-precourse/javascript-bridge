@@ -13,9 +13,9 @@ class BridgeResult {
   }
 
   makeResultBeforeCurrent(bridge, direction, idx) {
-    return new Array(idx).reduce((acc, _, index) => {
-      if (bridge[index] === direction) return (acc += " O " + "|");
-      return (acc += "   " + "|");
+    return Array.from({ length: idx }).reduce((acc, _, index) => {
+      if (bridge[index] === direction) return (acc += "O | ");
+      return (acc += "  | ");
     }, "[ ");
   }
 
