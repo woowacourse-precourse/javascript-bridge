@@ -17,9 +17,23 @@ class App {
   #readBridgeSizeCallback(size) {
     try {
       this.#brideGame = new BridgeGame(size);
+      this.#readMovingStage();
     } catch (error) {
       OutputView.print(error.message);
       this.#readBridgeSizeStage();
+    }
+  }
+
+  #readMovingStage() {
+    InputView.readMoving(this.#readMovingCallback.bind(this));
+  }
+
+  #readMovingCallback(movement) {
+    try {
+      this.#brideGame.move(movement);
+    } catch (error) {
+      OutputView.print(error.message);
+      this.#readMovingStage();
     }
   }
 }
