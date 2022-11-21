@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 // const { Console } = require('@woowacourse/mission-utils');
-const BridgeGameControl = require('./BridgeGameControl');
+const { BridgeGameControl } = require('./control');
 
 class App {
   play() {
