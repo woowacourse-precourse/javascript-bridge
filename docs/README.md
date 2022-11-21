@@ -18,7 +18,7 @@
 - readMovingReadLineHandler - 입력받은 동작을 move로 전달, 예외처리
 
 ### BridgeGame
-- move - 전달받은 move를 바탕으로 insertMoveMap을 호출하고 printMap을 요청 다음 동작을 결정
+- move - 전달받은 move를 바탕으로 insertMoveMap을 호출하고 처리결과를 리턴
 - insertMoveMap  - move를 저장
 
 ### OutputView
@@ -37,3 +37,6 @@
 
 ### OutputView
 - printResult - 결과를 출력
+
+### InputView
+- progress -move의 반환값을 받아 다음 동작을 실행

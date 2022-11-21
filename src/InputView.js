@@ -3,7 +3,7 @@ const BridgeMaker = require("./BridgeMaker");
 const OutputView = require("./OutputView");
 const wConsole = MissionUtils.Console;
 const { makeBridge } = BridgeMaker;
-const { printResult } = OutputView;
+const { printMap, printResult } = OutputView;
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { generate } = BridgeRandomNumberGenerator;
 
@@ -18,7 +18,7 @@ const InputView = {
   readBridgeSizeReadLineHandler(line, bridgeGame) {
     try {
       const size = parseInt(line);
-      if (!/^\d+$/.test(line)|| isNaN(line) || size < 3 || 20 < size)
+      if (!/^\d+$/.test(line) || isNaN(line) || size < 3 || 20 < size)
         throw new Error("[ERROR] 입력은  3부터 20 사이 숫자여야 합니다.");
       bridgeGame.setBridge(makeBridge(size, generate));
       InputView.readMoving(bridgeGame);
@@ -37,11 +37,23 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
+  progress(bridgeGame, result) {
+    if (result == "retry") InputView.readMoving(bridgeGame);
+    else {
+      const moveMap = bridgeGame.getMoveMap();
+      printMap(moveMap);
+      if (result === "over") this.readGameCommand(bridgeGame);
+      else if (result === "win") printResult(bridgeGame, true);
+      else if (result === "next") InputView.readMoving(bridgeGame);
+    }
+  },
 
   readMovingReadLineHandler(line, bridgeGame) {
     try {
-      if (["U", "D"].includes(line)) bridgeGame.move(line);
-      else throw new Error("[ERROR] 이동할 칸은 U또는 D입니다.");
+      if (["U", "D"].includes(line)) {
+        const result = bridgeGame.move(line);
+        InputView.progress(bridgeGame, result);
+      } else throw new Error("[ERROR] 이동할 칸은 U또는 D입니다.");
     } catch (error) {
       wConsole.print(error);
       InputView.readMoving(bridgeGame);
@@ -62,8 +74,10 @@ const InputView = {
   readGameCommandReadLineHandler(line, bridgeGame) {
     try {
       if (line === "Q") printResult(bridgeGame, false);
-      else if (line === "R") bridgeGame.retry();
-      else throw new Error("[ERROR] 입력은 R 또는 Q입니다.");
+      else if (line === "R") {
+        const result = bridgeGame.retry();
+        InputView.progress(bridgeGame, result);
+      } else throw new Error("[ERROR] 입력은 R 또는 Q입니다.");
     } catch (error) {
       wConsole.print(error);
       InputView.readGameCommand(bridgeGame);
