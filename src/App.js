@@ -1,6 +1,5 @@
-import Console from "@woowacourse/mission-utils";
-import BridgeMaker from "./BridgeMaker";
-import InputView from "./InputView";
+const InputView = require("./InputView");
+const { Console } = require("@woowacourse/mission-utils");
 
 class App {
   play() {
