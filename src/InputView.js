@@ -14,14 +14,18 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (size) => {
-      Validation.isVaildBridgeSize(size);
-      const bridge = BridgeMaker.makeBridge(
-        size,
-        BridgeRandomNumberGenerator.generate
-      );
-      let attemptCount = 1;
-      let moveList = [[], []];
-      this.readMoving(bridge, moveList, attemptCount);
+      const error = Validation.isVaildBridgeSize(size);
+      if (error) {
+        this.readBridgeSize();
+      } else {
+        const bridge = BridgeMaker.makeBridge(
+          size,
+          BridgeRandomNumberGenerator.generate
+        );
+        let attemptCount = 1;
+        let moveList = [[], []];
+        this.readMoving(bridge, moveList, attemptCount);
+      }
     });
   },
 

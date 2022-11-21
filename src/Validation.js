@@ -1,18 +1,35 @@
+const { Console } = require("@woowacourse/mission-utils");
+
 const Validation = {
   isVaildBridgeSize(size) {
-    this.isVaildNumber(size);
-    this.isVaildRange(size);
+    const number = this.isVaildNumber(size);
+    const range = this.isVaildRange(size);
+
+    if (number || range) {
+      return true;
+    }
+    return false;
   },
 
   isVaildNumber(size) {
-    if (isNaN(size)) {
-      throw new Error("[ERROR] 다리 길이는 숫자여야 합니다.");
+    try {
+      if (isNaN(size)) {
+        throw new Error("[ERROR] 다리 길이는 숫자여야 합니다.");
+      }
+    } catch (error) {
+      Console.print(error.message);
+      return true;
     }
   },
 
   isVaildRange(size) {
-    if (size < 3 || size > 20) {
-      throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+    try {
+      if (size < 3 || size > 20) {
+        throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+      }
+    } catch (error) {
+      Console.print(error.message);
+      return true;
     }
   },
 
