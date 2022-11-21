@@ -47,20 +47,34 @@ class GameController {
     const [upString, downString] = this.bridgeGame.getBridgeString();
     OutputView.printMap(upString, downString);
     if (result) {
-      this.correctAnswer();
+      this.continueGame();
     } else {
-      this.worngAnwer();
+      this.askStopGame();
     }
   }
-  correctAnswer() {
+  continueGame() {
     if (this.bridgeGame.checkLast()) {
-      console.log("END!!");
+      console.log("END!!", this.bridgeGame.getTryCount());
     } else {
       this.inputStep();
     }
   }
-  worngAnwer() {
-    this.bridgeGame.retry();
+  askStopGame() {
+    InputView.readGameCommand((input) => {
+      Validation.restartInput(input);
+      this.chooseRetryGame(input);
+    });
+  }
+  chooseRetryGame(input) {
+    if (input === "R") {
+      this.bridgeGame.retry();
+      this.inputStep();
+    } else if (input === "Q") {
+      console.log("END!!", this.bridgeGame.getTryCount());
+    }
+  }
+  showGameResult() {
+    //게임 결과보여주고 종료
   }
 }
 

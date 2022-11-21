@@ -5,6 +5,7 @@ class BridgeGame {
   #nowIndex = 0;
   #upString = BRIDGE_DRAWER.START;
   #downString = BRIDGE_DRAWER.START;
+  #tryCount = 1;
 
   setBridge(bridge) {
     this.#bridge = bridge;
@@ -17,9 +18,13 @@ class BridgeGame {
   getBridgeString() {
     return [this.#upString, this.#downString];
   }
+  getTryCount() {
+    return this.#tryCount;
+  }
   move() {
     this.#nowIndex += 1;
   }
+
   addCorrect() {
     if (this.#bridge[this.#nowIndex] === "U") {
       this.#upString += BRIDGE_DRAWER.CORRECT;
@@ -53,6 +58,7 @@ class BridgeGame {
   }
 
   retry() {
+    this.#tryCount += 1;
     this.#nowIndex = 0;
     this.#upString = BRIDGE_DRAWER.START;
     this.#downString = BRIDGE_DRAWER.START;
