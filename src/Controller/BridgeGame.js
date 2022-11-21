@@ -22,6 +22,7 @@ class BridgeGame {
   }
 
   start() {
+    this.#model.allReset();
     this.#view.printStart();
     this.#userInput.readBridgeSize();
   }
@@ -34,7 +35,6 @@ class BridgeGame {
 
   saveBridge(bridge) {
     this.#model.setBridge(bridge);
-    console.log(bridge);
     this.move();
   }
 
@@ -74,7 +74,7 @@ class BridgeGame {
   }
 
   retry() {
-    this.#model.reset();
+    this.#model.roundReset();
     this.#model.updateRetryCount();
     return this.move();
   }

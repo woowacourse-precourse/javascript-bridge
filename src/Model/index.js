@@ -61,6 +61,10 @@ class Model {
     return this.#size;
   }
 
+  resetRetryCount() {
+    this.#retryCount = 1;
+  }
+
   getRetryCount() {
     return this.#retryCount;
   }
@@ -94,7 +98,12 @@ class Model {
     return this.#isGameOver;
   }
 
-  reset() {
+  allReset(){
+    this.resetRetryCount();
+    this.roundReset();
+  }
+
+  roundReset() {
     this.resetGameOver();
     this.resetGameWin();
     this.resetMoveList();
