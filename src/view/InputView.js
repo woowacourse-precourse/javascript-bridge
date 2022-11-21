@@ -3,8 +3,8 @@ const { Console } = MissionUtils;
 const BridgeMaker = require("../BridgeMaker");
 const Errors = require("../Error");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
+let GameStore = require("../GameStore");
 
-let bridgeGame;
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -15,17 +15,25 @@ const InputView = {
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (size) => {
       Errors.bridgeSizeError(size);
-      bridgeGame = BridgeMaker.makeBridge(
+      GameStore = BridgeMaker.makeBridge(
         size,
         BridgeRandomNumberGenerator.generate
       );
+      this.readMoving();
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(
+      "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+      (input) => {
+        Errors.movingError(input);
+      }
+    );
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
