@@ -9,12 +9,12 @@ const BridgeMaker = {
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
   makeBridge(size, generateRandomNumber) {
+    let alpabetArr = ["D", "U"];
     let bridge = [];
-    let pushAlpabet = (alpabet) => bridge.push(alpabet);
 
     while (size > bridge.length) {
-      const number = String(generateRandomNumber());
-      number === "1" ? pushAlpabet("U") : pushAlpabet("D");
+      const number = generateRandomNumber();
+      bridge.push(alpabetArr[number]);
     }
 
     return bridge;
