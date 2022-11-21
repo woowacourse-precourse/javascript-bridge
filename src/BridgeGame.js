@@ -102,8 +102,13 @@ class BridgeGame {
     this.movingLog = { upper: [], lower: [] };
     this.attemptNumber += 1;
   }
-  finish(message) {
-    OutputView.printResult(message, this.movingLog, this.attemptNumber);
+
+  getLog() {
+    return this.movingLog;
+  }
+
+  getAttmeptNumber() {
+    return this.attemptNumber;
   }
 }
 

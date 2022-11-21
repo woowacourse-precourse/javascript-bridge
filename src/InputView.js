@@ -4,6 +4,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { COMMAND } = require("./constants/data");
 const { INPUT_MESSAGE, OUTPUT_MESSAGE } = require("./constants/message");
+const OutputView = require("./OutputView");
 const Validation = require("./Validation");
 
 /**
@@ -32,7 +33,7 @@ const InputView = {
       bridgeGame.move(userInput);
       if (bridgeGame.isWrongZone()) return this.readGameCommand(bridgeGame);
       if (bridgeGame.isReached())
-        return bridgeGame.finish(OUTPUT_MESSAGE.SUCCESS);
+        this.summaryResult(bridgeGame, OUTPUT_MESSAGE.SUCCESS);
       return this.readMoving(bridgeGame);
     });
   },
@@ -48,8 +49,16 @@ const InputView = {
         bridgeGame.retry();
         return this.readMoving(bridgeGame);
       }
-      return bridgeGame.finish(OUTPUT_MESSAGE.FAIL);
+      return this.summaryResult(bridgeGame, OUTPUT_MESSAGE.FAIL);
     });
+  },
+
+  summaryResult(bridgeGame, message) {
+    OutputView.printResult(
+      message,
+      bridgeGame.getLog(),
+      bridgeGame.getAttmeptNumber()
+    );
   },
 };
 
