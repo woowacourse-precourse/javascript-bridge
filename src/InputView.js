@@ -25,23 +25,41 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (userChoice) => {
-      bridgeGame.move(userChoice);
-      const currBridge = bridgeGame.getCurrBridge();
-      OutputView.printMap(currBridge);
-      const failFlag = bridgeGame.getFailFlag();
-      const gameWinFlag = bridgeGame.getGameWinFlag();
-      if(failFlag) {
-        this.readGameCommand(bridgeGame);
-      }
-      if(!failFlag && gameWinFlag) {
-        const trial = bridgeGame.getTrial();
-        OutputView.printResult(currBridge, true, trial);
-        Console.close();
-      }
-      if(!failFlag && !gameWinFlag) {
+      if(!Validation.checkUserChoice(userChoice)) {
         this.readMoving(bridgeGame);
       }
+      else {
+        bridgeGame.move(userChoice);
+        this.printMoveResult(bridgeGame);
+        this.getTurnResult(bridgeGame);
+      }
     });
+  },
+
+  printMoveResult(bridgeGame) {
+    const currBridge = bridgeGame.getCurrBridge();
+    OutputView.printMap(currBridge);
+  },
+
+  getTurnResult(bridgeGame) {
+    const failFlag = bridgeGame.getFailFlag();
+    const gameWinFlag = bridgeGame.getGameWinFlag();
+    if(failFlag) {
+      this.readGameCommand(bridgeGame);
+    }
+    if(!failFlag && gameWinFlag) {
+      this.printGameResult(bridgeGame, true);
+    }
+    if(!failFlag && !gameWinFlag) {
+      this.readMoving(bridgeGame);
+    }
+  },
+
+  printGameResult(bridgeGame, gameResult) {
+    const currBridge = bridgeGame.getCurrBridge();
+    const trial = bridgeGame.getTrial();
+    OutputView.printResult(currBridge, gameResult, trial);
+    Console.close();
   },
 
   /**
@@ -49,18 +67,28 @@ const InputView = {
    */
   readGameCommand(bridgeGame) {
     Console.readLine("\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (gameRestart) => {
-      if(gameRestart === "R") {
-        bridgeGame.retry();
-        this.readMoving(bridgeGame);
+      if(!Validation.checkGameRestart(gameRestart)) {
+        this.readGameCommand(bridgeGame);
       }
-      if(gameRestart === "Q") {
-        const trial = bridgeGame.getTrial();
-        const currBridge = bridgeGame.getCurrBridge();
-        OutputView.printResult(currBridge, false, trial);
-        Console.close();
+      else {
+        this.restartGame(gameRestart, bridgeGame);
+        this.QuitGame(gameRestart, bridgeGame);
       }
     });
   },
+
+  restartGame(gameRestart, bridgeGame) {
+    if(gameRestart === "R") {
+      bridgeGame.retry();
+      this.readMoving(bridgeGame);
+    }
+  },
+  
+  QuitGame(gameRestart, bridgeGame) {
+    if(gameRestart === "Q") {
+      this.printGameResult(bridgeGame, false);
+    }
+  }
 };
 
 module.exports = InputView;
