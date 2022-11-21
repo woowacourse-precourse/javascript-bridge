@@ -125,7 +125,7 @@ describe('BridgeGame 클래스 테스트', () => {
     expect(isEndOfBridge).toBe(false);
   });
 
-  test('IsCommandRetry - 커맨드에 맞게 올바른 값을 반환하는지 검사', () => {
+  test('isCommandRetry - 커맨드에 맞게 올바른 값을 반환하는지 검사', () => {
     // Given
     const commands = ['R', 'Q'];
 
