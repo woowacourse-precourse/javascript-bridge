@@ -56,8 +56,8 @@ class Controller {
   setMoving(moveCommand) {
     this.#bridgeGame.move(moveCommand);
     printMap(this.#bridgeGame.getUserState());
-    if (this.#bridgeGame.isVictory()) this.endGame();
-    if (this.#bridgeGame.isLoss()) this.readCommand();
+    if (this.#bridgeGame.isVictory()) return this.endGame();
+    if (this.#bridgeGame.isLoss()) return this.readCommand();
     this.readMove();
   }
 
