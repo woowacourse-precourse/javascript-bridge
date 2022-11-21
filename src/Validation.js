@@ -5,7 +5,7 @@ class Validation {
   checkGameSuccess(moveCount, bridgeGameLog, bridge) {
     if (
       this.checkIsLastMove(moveCount, bridge) &&
-      checkMoveSuccess(bridgeGameLog, bridge.length - 1)
+      this.checkMoveSuccess(bridgeGameLog, bridge.length - 1)
     ) {
       return true;
     }
@@ -27,7 +27,7 @@ class Validation {
 
   hasFailedOnLastMove(moveCount, bridgeGameLog, bridge) {
     if (
-      !this.checkIsLastMove(moveCount, bridge) ||
+      this.checkIsLastMove(moveCount, bridge) &&
       !this.checkMoveSuccess(bridgeGameLog, bridge.length - 1)
     ) {
       return true;

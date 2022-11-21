@@ -1,6 +1,6 @@
 const Utils = {
   getLastInputResult(array, firstIndex, secondIndex) {
-    return array[firstIndex][array[secondIndex]];
+    return array[firstIndex][secondIndex];
   },
 };
 
