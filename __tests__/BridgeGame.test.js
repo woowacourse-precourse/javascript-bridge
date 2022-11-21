@@ -900,3 +900,11 @@ describe('다리 건너기 게임 종합 테스트', () => {
     expect(bridgeGame.getTryCount()).toEqual(RECEIVED);
   });
 });
+
+describe('다리 로그 분류 메서드', () => {
+  test('메소드 이름은 "logClassification"로 정의된다.', () => {
+    const METHOD_NAME = 'logClassification';
+
+    expect(BridgeGame.logClassification.name).toEqual(METHOD_NAME);
+  });
+});
