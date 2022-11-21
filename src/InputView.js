@@ -89,9 +89,7 @@ const InputView = {
     if (restartOrQuit === 'R') {
       this.bridgeGame.retry();
       this.readMoving(bridge);
-    } else if (restartOrQuit === 'Q') {
-      OutputView.printResult(totalTry, false, this.bridgeGame.getMap());
-    }
+    } else OutputView.printResult(totalTry, false, this.bridgeGame.getMap());
   },
 };
 
