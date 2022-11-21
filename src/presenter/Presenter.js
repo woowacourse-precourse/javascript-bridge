@@ -1,15 +1,13 @@
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const OutputView = require("../view/OutputView");
 const InputView = require("../view/InputView");
-const BridgeMaker = require("../BridgeMaker");
-const { RETRY } = require("../view/stringsUI");
-const Player = require("../model/Player");
-const Bridge = require("../model/Bridge");
 const Validation = require("../utils/Validation");
 const {
   INPUT_TRY_FN,
   INPUT_CATCH_FN,
   RETRY_FN,
+  PLAYER_STATE_FN,
+  PLAYER_STATE,
 } = require("./stringsPresenter");
 const BridgeGame = require("../model/BridgeGame");
 
@@ -52,6 +50,7 @@ class Presenter {
     RETRY_FN[retry](this);
   }
 
+  // Control View
   handleInput(input, InputType) {
     try {
       Validation[InputType](input);
@@ -62,6 +61,7 @@ class Presenter {
     }
   }
 
+  // Control Model
   createPlayerMap() {
     const playerMap = this.bridgeGameModel.playerModel.getBridgeMap();
     OutputView.printMap(playerMap);
@@ -69,24 +69,13 @@ class Presenter {
   }
 
   checkContinueMove() {
-    const { isFinish, isMove } = this.bridgeGameModel.getMoveFinishBooleans();
-    if (!isFinish) {
-      return this.checkNextInput(isMove);
-    }
-    //   this.getGameCommand();
-    return this.quit();
-  }
-
-  checkNextInput(isMove) {
-    if (isMove) {
-      return this.getPlayerMove();
-    }
-    return this.getGameCommand();
+    const playerState = this.bridgeGameModel.getPlayerState();
+    PLAYER_STATE_FN[playerState](this);
   }
 
   quit() {
-    const { isFinish, isMove } = this.bridgeGameModel.getMoveFinishBooleans();
-    const isSuccess = isFinish && isMove;
+    const isSuccess =
+      this.bridgeGameModel.getPlayerState() === PLAYER_STATE.SUCCESS;
     OutputView.printResult({
       resultMap: this.bridgeGameModel.playerModel.getBridgeMap(),
       isSuccess,

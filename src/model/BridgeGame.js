@@ -1,15 +1,8 @@
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
-const OutputView = require("../view/OutputView");
-const InputView = require("../view/InputView");
 const BridgeMaker = require("../BridgeMaker");
-const { RETRY } = require("../view/stringsUI");
 const Player = require("./Player");
 const Bridge = require("./Bridge");
-const Validation = require("../utils/Validation");
-const {
-  INPUT_TRY_FN,
-  INPUT_CATCH_FN,
-} = require("../presenter/stringsPresenter");
+const { createPlayerState } = require("../presenter/stringsPresenter");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -38,14 +31,14 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(selectedMove) {
-    const isMove = this.isMove(selectedMove);
-    this.playerModel.addInputArrayItem({ selectedMove, isMove });
+    const isCrossBridge = this.getCurrMove(selectedMove);
+    this.playerModel.addInputArrayItem({ selectedMove, isCrossBridge });
     this.createPlayerBridgeMap();
   }
 
-  isMove(selectedMove) {
-    const bridgeIndex = this.playerModel.getInputArrayLength();
-    return this.bridgeModel.crossBridge(bridgeIndex, selectedMove);
+  getCurrMove(selectedMove) {
+    const currIndex = this.playerModel.getInputArrayLength();
+    return this.bridgeModel.crossBridge(currIndex, selectedMove);
   }
 
   createPlayerBridgeMap() {
@@ -56,8 +49,16 @@ class BridgeGame {
   getMoveFinishBooleans() {
     const currPlayerIndex = this.playerModel.getInputArrayLength() - 1;
     const isFinish = this.bridgeModel.getBridgeLength() === currPlayerIndex + 1;
-    const { isMove } = this.playerModel.getInputArrayItem(currPlayerIndex);
+    const { isCrossBridge: isMove } =
+      this.playerModel.getInputArrayItem(currPlayerIndex);
     return { isFinish, isMove };
+  }
+
+  getPlayerState() {
+    const { isFinish, isMove } = this.getMoveFinishBooleans();
+
+    const playerState = createPlayerState(isFinish, isMove);
+    return playerState;
   }
 
   /**

@@ -1,9 +1,30 @@
 const PLAYER_STATE = {
-  NEXT: "NEXT",
-  FINISH: "FINISH",
-  RETRY: "RETRY",
-  SUCCESS: "SUCCESS",
-  FAIL: "FAIL",
+  RETRY: "retry",
+  CONTINUE: "continue",
+  SUCCESS: "success",
+};
+const PLAYER_STATE_ARRAY = [
+  PLAYER_STATE.RETRY,
+  PLAYER_STATE.CONTINUE,
+  PLAYER_STATE.RETRY,
+  PLAYER_STATE.SUCCESS,
+];
+
+const createPlayerState = (isFinish, isMove) => {
+  const state = (isFinish << 1) | isMove;
+  return PLAYER_STATE_ARRAY[state];
+};
+
+const PLAYER_STATE_FN = {
+  retry(gamePresenter) {
+    gamePresenter.getGameCommand();
+  },
+  continue(gamePresenter) {
+    gamePresenter.getPlayerMove();
+  },
+  success(gamePresenter) {
+    gamePresenter.quit();
+  },
 };
 
 const INPUT_TRY_FN = {
@@ -39,4 +60,11 @@ const RETRY_FN = {
   },
 };
 
-module.exports = { PLAYER_STATE, INPUT_CATCH_FN, INPUT_TRY_FN, RETRY_FN };
+module.exports = {
+  PLAYER_STATE,
+  createPlayerState,
+  PLAYER_STATE_FN,
+  INPUT_CATCH_FN,
+  INPUT_TRY_FN,
+  RETRY_FN,
+};

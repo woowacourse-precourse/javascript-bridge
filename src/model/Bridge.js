@@ -5,8 +5,8 @@ class Bridge {
     this.#bridgeArr = createdArr;
   }
 
-  crossBridge(bridgeIndex, selectedMove) {
-    const isMove = this.#bridgeArr[bridgeIndex] === selectedMove;
+  crossBridge(currIndex, selectedMove) {
+    const isMove = this.#bridgeArr[currIndex] === selectedMove;
     return isMove;
   }
 

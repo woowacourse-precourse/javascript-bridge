@@ -20,12 +20,12 @@ class MapMaker {
     return this.returnBridge();
   }
 
-  createBridgeMap({ selectedMove, isMove }) {
+  createBridgeMap({ selectedMove, isCrossBridge }) {
     if (selectedMove === MAP.UPPER) {
-      this.upperBridge.push(MAP[isMove]);
+      this.upperBridge.push(MAP[isCrossBridge]);
       this.lowerBridge.push(MAP.NONE);
     } else {
-      this.lowerBridge.push(MAP[isMove]);
+      this.lowerBridge.push(MAP[isCrossBridge]);
       this.upperBridge.push(MAP.NONE);
     }
   }
