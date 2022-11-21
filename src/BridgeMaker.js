@@ -12,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridgeAnswer = [];
     while (size > 0) {
-      String(generateRandomNumber()) === String(DEFAULTS.UP_CNT)
+      generateRandomNumber() === DEFAULTS.UP_CNT
         ? bridgeAnswer.push(DEFAULTS.UP)
         : bridgeAnswer.push(DEFAULTS.DOWN);
       size -= 1;
