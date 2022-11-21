@@ -1,4 +1,4 @@
-const { checkBridgeSizeInput, checkMovingInput } = require("../src/ErrorCase");
+const { checkBridgeSizeInput, checkMovingInput, checkRetrialInput } = require("../src/ErrorCase");
 
 describe("에러 발생 상황 테스트", () => {
   test("다리 길이 입력 에러 테스트", () => {
@@ -18,6 +18,15 @@ describe("에러 발생 상황 테스트", () => {
     directions.forEach((direction, index) => {
       const value = checkMovingInput(direction);
       expect(value).toBe(returnValues[index]);
+    });
+  });
+
+  test("재시작 여부 입력 에러 테스트", () => {
+    const commands = ["R", "Q", 4, "p"];
+    const booleanValues = [false, false, true, true];
+    commands.forEach((command, index) => {
+      const booleanValue = checkRetrialInput(command);
+      expect(booleanValue).toBe(booleanValues[index]);
     });
   });
 });
