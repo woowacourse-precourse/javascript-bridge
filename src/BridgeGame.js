@@ -42,16 +42,14 @@ class BridgeGame {
   move(square) {
     const nowIndex = this.moveMap.get("U").length;
     this.insertMoveMap(square, nowIndex);
-    //printMap(this.moveMap);
     if (
       this.moveMap.get("U")[nowIndex] === "X" ||
       this.moveMap.get("D")[nowIndex] === "X"
     )
       return "over";
-    // readGameCommand(this);
     else if (this.bridge.length === nowIndex + 1)
-      return "win"; //printResult(this, true);
-    else return "next"; //readMoving(this);
+      return "win"; 
+    else return "next"; 
   }
 
   /**
@@ -65,7 +63,7 @@ class BridgeGame {
       ["U", ""],
       ["D", ""],
     ]);
-    return "retry"; //readMoving(this);
+    return "retry";
   }
 }
 
