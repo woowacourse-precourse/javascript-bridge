@@ -5,11 +5,9 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 class BridgeGame {
   #bridge;
   #tryCount;
-  #currentPosition;
   #map;
   constructor(size) {
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    this.#currentPosition = -1;
     this.#tryCount = 1;
     this.#map = [[], []];
   }
@@ -23,8 +21,8 @@ class BridgeGame {
   }
 
   move(space) {
-    this.#currentPosition += 1;
-    const passResult = space === this.#bridge[this.#currentPosition] ? MAP.PASS : MAP.NONPASS;
+    const currentPosition = this.#map[BRIDGE.UPPER].length;
+    const passResult = space === this.#bridge[currentPosition] ? MAP.PASS : MAP.NONPASS;
     if (space === BRIDGE.UP) {
       this.#map[BRIDGE.UPPER].push(passResult);
       this.#map[BRIDGE.LOWER].push(MAP.BLANK);
@@ -36,19 +34,20 @@ class BridgeGame {
 
   retry() {
     this.#tryCount += 1;
-    this.#currentPosition = -1;
     this.#map = [[], []];
   }
 
   isPass() {
+    const currentPosition = this.#map[BRIDGE.UPPER].length - 1;
     return (
-      this.#map[BRIDGE.UPPER][this.#currentPosition] === MAP.PASS ||
-      this.#map[BRIDGE.LOWER][this.#currentPosition] === MAP.PASS
+      this.#map[BRIDGE.UPPER][currentPosition] === MAP.PASS ||
+      this.#map[BRIDGE.LOWER][currentPosition] === MAP.PASS
     );
   }
 
   isClear() {
-    if (this.#currentPosition !== this.#bridge.length - 1) return false;
+    const currentPosition = this.#map[BRIDGE.UPPER].length - 1;
+    if (currentPosition !== this.#bridge.length - 1) return false;
     return this.isPass();
   }
 }
