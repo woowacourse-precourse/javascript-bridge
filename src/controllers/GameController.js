@@ -5,6 +5,7 @@ const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 
 const BridgeGame = require('../models/BridgeGame');
+const { validate, isCommandInput } = require('../Validator');
 const StateManager = require('../models/StateManager');
 
 const MapGenerator = require('../models/MapGenerator');
@@ -60,7 +61,9 @@ class GameContoller {
     InputView.readGameCommand(this.onInputGameCommand.bind(this));
   }
 
-  onInputGameCommand(command) {}
+  onInputGameCommand(command) {
+    validate(command, isCommandInput);
+  }
 }
 
 module.exports = GameContoller;

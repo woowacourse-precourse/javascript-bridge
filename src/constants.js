@@ -5,6 +5,12 @@ const BRIDGE = Object.create({
   MAX_SIZE: 20,
 });
 
+const COMMAND = Object.create({
+  RETRY: 'R',
+  QUIT: 'Q',
+});
+
 module.exports = {
   BRIDGE,
+  COMMAND,
 };
