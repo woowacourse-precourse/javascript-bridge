@@ -1,9 +1,10 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const { MESSAGE } = require('./Const');
 
 class App {
   play() {
-    OutputView.print('다리 건너기 게임을 시작합니다.' + '\n');
+    OutputView.print(MESSAGE.START + '\n');
     InputView.readBridgeSize();
   }
 }

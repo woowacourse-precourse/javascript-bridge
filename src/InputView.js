@@ -2,11 +2,12 @@ const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
 const BridgeUnit = require('./BridgeUnit');
 const BridgeGame = require('./BridgeGame');
+const { MESSAGE } = require('./Const');
 
 const InputView = {
 
   readBridgeSize() {
-    Console.readLine('다리의 길이를 입력해주세요' + '\n', (input) => {
+    Console.readLine(MESSAGE.READ_SIZE + '\n', (input) => {
       let bridgeGame = new BridgeGame(Number(input));
       this.tryBridgeSize(input, bridgeGame);
     })
@@ -26,14 +27,14 @@ const InputView = {
   },
 
   readMoving(bridgeGame, bridge) {
-    Console.readLine('\n' + '이동할 칸을 선택해주세요. (위: U, 아래: D)' + '\n', (UorD) => {
+    Console.readLine('\n' + MESSAGE.READ_MOVING + '\n', (UorD) => {
       this.tryMoving(UorD, bridgeGame, bridge);
     })
   },
 
   tryMoving(moving, bridgeGame, bridge) {
     try {
-      bridgeGame.isValidInput(moving);
+      bridgeGame.isValidMoving(moving);
       bridgeGame.setMoving(moving);
       this.setMap(bridgeGame, bridge);
       this.checkWin(bridgeGame, bridge);
@@ -62,7 +63,7 @@ const InputView = {
   },
 
   readGameCommand(bridgeGame, bridge) {
-    Console.readLine('\n' + '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)' + '\n', (RorQ) => {
+    Console.readLine('\n' + MESSAGE.READ_COMMAND + '\n', (RorQ) => {
       this.tryGameCommand(RorQ, bridgeGame, bridge);
     })
   },

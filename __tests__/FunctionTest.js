@@ -53,7 +53,7 @@ const expectBridgeOrder = (received, upside, downside) => {
 
 describe("다리 건너기 테스트", () => {
 
-    test("한 칸 사이즈의 문자비트(1->U) 생성 테스트", () => {
+    test("다리 길이 입력 범위(3~20)와는 무관한, 한 칸 사이즈의 문자비트(1->U) 생성 기능 테스트", () => {
         const randomNumbers = [1];
         const mockGenerator = randomNumbers.reduce((acc, number) => {
             return acc.mockReturnValueOnce(number);

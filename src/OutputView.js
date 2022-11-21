@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-
+const { MESSAGE } = require('./Const');
 
 const OutputView = {
 
@@ -19,12 +19,12 @@ const OutputView = {
   },
 
   printResult(bridgeGame) {
-    this.print(`게임 성공 여부: ${bridgeGame.result}`);
-    this.print(`총 시도한 횟수: ${bridgeGame.trials}`);
+    this.print(`${MESSAGE.RESULT_PASS} ${bridgeGame.result}`);
+    this.print(`${MESSAGE.RESULT_TRIALS} ${bridgeGame.trials}`);
   },
 
   end(bridgeGame, bridge) {
-    this.print('\n' + '최종 게임 결과');
+    this.print('\n' + MESSAGE.RESULT_TITLE);
     this.printMap(bridgeGame, bridge);
     this.printResult(bridgeGame);
     Console.close();
