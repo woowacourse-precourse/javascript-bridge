@@ -3,6 +3,8 @@ const { INPUT_MESSAGE, ERROR_MESSAGE } = require('./Constant');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
+const OutputView = require('./OutputView');
+
 const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, size => {
@@ -10,6 +12,7 @@ const InputView = {
       if (VALIDATION) {
         size = parseInt(size);
         const GAME = this.startBridgeGame(size);
+        this.repeatMoving(GAME, -1);
       }
     });
   },
@@ -32,9 +35,42 @@ const InputView = {
     return GAME;
   },
 
-  validateMoving(move) {
-    if (move === 'U' || move === 'D') return move;
-    throw new Error(ERROR_MESSAGE.MOVE_ERROR);
+  repeatMoving(GAME, cnt) {
+    const RESULT = GAME.getResult();
+    const SIZE = GAME.getSize();
+    if (cnt === SIZE - 1) {
+      OutputView.printResult(RESULT, GAME.getCnt());
+      Console.close();
+    } else {
+      this.readMoving(GAME, cnt + 1);
+    }
+  },
+
+  readMoving(GAME, cnt) {
+    Console.readLine(INPUT_MESSAGE.READ_MOVE, move => {
+      const VALIDATION = this.validateMoving(move, GAME, cnt);
+      if (VALIDATION) {
+        RESULT = GAME.move(cnt, move);
+        OutputView.printMap(RESULT);
+        this.check_X(GAME, RESULT, cnt);
+      }
+    });
+  },
+
+  validateMoving(move, GAME, cnt) {
+    if (move === 'U' || move === 'D') return true;
+    try {
+      throw new Error(ERROR_MESSAGE.MOVE_ERROR);
+    } catch (e) {
+      Console.print(e);
+      this.readMoving(GAME, cnt);
+    }
+  },
+
+  check_X(GAME, RESULT, cnt) {
+    RESULT[cnt][1] === 'X'
+      ? this.readGameCommand(GAME)
+      : this.repeatMoving(GAME, cnt);
   },
 
   readGameCommand() {
