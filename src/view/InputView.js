@@ -19,7 +19,6 @@ const InputView = {
         size,
         BridgeRandomNumberGenerator.generate
       );
-      Console.print(game.getBridge());
       this.readMoving(game);
     });
   },
@@ -32,9 +31,10 @@ const InputView = {
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
         Errors.movingError(input);
-        game.move(input)
-          ? this.correctMove(game, input)
-          : this.wrongMove(game, input);
+        if (game.move(input)) {
+          return this.correctMove(game, input);
+        }
+        return this.wrongMove(game, input);
       }
     );
   },
@@ -60,9 +60,10 @@ const InputView = {
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
         Errors.readGameError(input);
-        input === "Q"
-          ? OutputView.printResult("실패", game.getTryCount())
-          : this.restart(game);
+        if (input === "R") {
+          return this.restart(game);
+        }
+        return OutputView.printResult("실패", game.getTryCount());
       }
     );
   },
