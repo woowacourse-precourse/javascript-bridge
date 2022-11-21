@@ -17,7 +17,7 @@ describe("다리 건너기 테스트", () => {
     const size = 2;
     const upDownMock = jest.fn();
 
-    const upDownMocks = upDownMock.mockReturnValueOnce("0").mockReturnValueOnce("1");
+    const upDownMocks = upDownMock.mockReturnValueOnce("1").mockReturnValueOnce("0");
 
     expect(BridgeMaker.makeBridge(size, upDownMocks)).toEqual(["U", "D"]);
   });
@@ -25,11 +25,9 @@ describe("다리 건너기 테스트", () => {
   test.each([["2"], ["21"]])("다리 길이 입력 범위에 대한 예외 처리", (input) => {
     const size = input;
     const validateTest = (size) => {
-      gameController.constructBridgeGameAndSaveAnswerBridge(size);
+      ExceptionHandler.validateSizeInput(size);
     };
-    expect(() => {
-      validateTest(size);
-    }).toThrow("[ERROR] 3부터 20 사이의 숫자를 입력해주세요.");
+    expect(validateTest(size)).toBeFalsy();
   });
 
   test("게임 진행 다리 생성 테스트", () => {
@@ -48,4 +46,3 @@ describe("다리 건너기 테스트", () => {
     expect(bridgeGame.extendUpDownBridges("U")).toEqual(["[ O | O ]", "[   |   ]"]);
   });
 });
-//  "[ERROR] 3부터 20 사이의 숫자를 입력해주세요."
