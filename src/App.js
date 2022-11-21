@@ -1,6 +1,5 @@
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
-const BridgeGame = require("./BridgeGame");
 
 class App {
   play() {
