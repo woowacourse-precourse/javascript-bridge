@@ -1,7 +1,8 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const User = require('../model/User');
-const GameMap = require('./GameMap');
+const GameMap = require('../model/GameMap');
+const BridgeMapPainter = require('./BridgeMapPainter');
 
 class BridgeGame {
   #isGameOver = false;
@@ -9,6 +10,7 @@ class BridgeGame {
   constructor() {
     this.user = new User();
     this.gameMap = new GameMap();
+    this.bridgeMapPainter = new BridgeMapPainter();
   }
 
   makeBridgeMap(size) {
@@ -23,7 +25,7 @@ class BridgeGame {
   }
 
   drawBridgeMap(moveCommand) {
-    return this.gameMap.drawOX(moveCommand, this.getUserLocation());
+    return this.bridgeMapPainter.drawOX(moveCommand, this.getUserLocation(), this.getGameMap());
   }
 
   checkGameStatus() {
@@ -34,7 +36,7 @@ class BridgeGame {
   }
 
   isSuccess() {
-    if (!this.gameMap.isCorrectLocation()) {
+    if (!this.bridgeMapPainter.isCorrectLocation()) {
       this.changeStateIntoFailure();
       return false;
     }
@@ -57,7 +59,7 @@ class BridgeGame {
   }
 
   getUserBridgeMap() {
-    return this.gameMap.getUserBridgeMap(this.getUserLocation());
+    return this.bridgeMapPainter.getUserBridgeMap(this.getUserLocation());
   }
 
   getUserLocation() {
@@ -68,13 +70,17 @@ class BridgeGame {
     return this.user.getTryCount();
   }
 
+  getGameMap() {
+    return this.gameMap.getGameMap();
+  }
+
   move() {
     this.user.increaseLocation();
   }
 
   retry() {
     this.#isGameOver = false;
-    this.gameMap.initBridge();
+    this.bridgeMapPainter.initBridge();
     this.#increaseTryCount();
     this.#initUserLocation();
   }
