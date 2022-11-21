@@ -8,9 +8,9 @@
 - [x] [입력] 자동으로 생성할 다리 길이를 입력 받는다.| InputView#readBridgeSize(callback)
   - [x] [예외처리] 입력 받은 값이 3 이상 20 이하 숫자가 아니면 예외 처리한다.| InputView#validateBridgeSize(bridgeSize)
   - this.getBridge(bridgeSize)
-- [ ] 다리를 생성한다.| BridgeMaker#makeBridge(bridgeSize, BridgeRandomNumber.generate)
-  - [ ] 다리를 생성할 때 위 칸과 아래 칸 중 건널 수 있는 칸은 0과 1 중 무작위 값을 이용해서 정한다.| BridgeRandomNumberGenerator#generate()
-    - [ ] [예외처리] 무작위 값이 0 또는 1이 아닌 경우 예외 처리한다.
+- [x] 다리를 생성한다.| BridgeMaker#makeBridge(bridgeSize, BridgeRandomNumber.generate)
+  - [x] 다리를 생성할 때 위 칸과 아래 칸 중 건널 수 있는 칸은 0과 1 중 무작위 값을 이용해서 정한다.| BridgeRandomNumberGenerator#generate()
+    - [x] [예외처리] 무작위 값이 0 또는 1이 아닌 경우 예외 처리한다.
 - [ ] [입력] 플레이어가 이동할 칸을 선택한다.| InputView#readMoving()
   - [ ] [예외처리] 입력 받은 값이 U 또는 D가 아닌 경우 예외 처리한다.| InputValidator#validateMoving(moving)
 - [ ] 플레이어가 칸을 이동한다.| BridgeGame#move()

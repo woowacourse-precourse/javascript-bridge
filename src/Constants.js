@@ -2,6 +2,10 @@ const WORD = {
   ERROR: "[ERROR]",
   START_SIZE: 3,
   END_SIZE: 20,
+  UP_NUMBER: 1,
+  DOWN_NUMBER: 0,
+  UP: "U",
+  DOWN: "D",
 };
 
 const MESSAGE = {
@@ -13,6 +17,7 @@ const MESSAGE = {
   },
   ERROR: {
     BRIDGE_SIZE: `${WORD.ERROR} 다리 길이는 ${WORD.START_SIZE}부터 ${WORD.END_SIZE} 사이의 숫자여야 합니다.`,
+    RANDOM_NUMBER: `${WORD.ERROR} ${WORD.DOWN_NUMBER} 또는 ${WORD.UP_NUMBER}이어야 합니다.`,
   },
 };
 

@@ -1,5 +1,7 @@
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 class App {
   play() {
@@ -14,7 +16,16 @@ class App {
   getBridgeSize() {
     InputView.readBridgeSize((bridgeSize) => {
       console.log("(callback 확인용) bridgeSize: ", bridgeSize);
+      this.getBridge(bridgeSize);
     });
+  }
+
+  getBridge(bridgeSize) {
+    const bridges = BridgeMaker.makeBridge(
+      bridgeSize,
+      BridgeRandomNumberGenerator.generate
+    );
+    console.log("(확인용) bridges: ", bridges);
   }
 }
 
