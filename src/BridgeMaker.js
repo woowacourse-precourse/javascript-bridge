@@ -17,14 +17,17 @@ const BridgeMaker = {
   },
   handleBridgeSizeException(size) {
     try {
-      switch (false) {
-        case this.isInteger(size):
-          Exception.throwError(EXCEPTION_MESSAGE.BRIDGE_SIZE.INTEGER);
-        case this.isInRange(size):
-          Exception.throwError(EXCEPTION_MESSAGE.BRIDGE_SIZE.RANGE);
-      }
+      this.throwException(size);
     } catch (e) {
       Exception.printError(e.message);
+    }
+  },
+  throwException(size) {
+    switch (false) {
+      case this.isInteger(size):
+        Exception.throwError(EXCEPTION_MESSAGE.BRIDGE_SIZE.INTEGER);
+      case this.isInRange(size):
+        Exception.throwError(EXCEPTION_MESSAGE.BRIDGE_SIZE.RANGE);
     }
   },
   isInteger(size) {

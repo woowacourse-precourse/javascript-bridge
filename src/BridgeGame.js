@@ -32,12 +32,16 @@ class BridgeGame {
 
   handleMovingException(moving) {
     try {
-      switch (false) {
-        case [GAME.UP, GAME.DOWN].includes(moving):
-          Exception.throwError(EXCEPTION_MESSAGE.MOVING.CHARACTER);
-      }
+      this.throwException(moving);
     } catch (e) {
       Exception.printError(e.message);
+    }
+  }
+
+  throwException(moving) {
+    switch (false) {
+      case [GAME.UP, GAME.DOWN].includes(moving):
+        Exception.throwError(EXCEPTION_MESSAGE.MOVING.CHARACTER);
     }
   }
 
@@ -54,14 +58,7 @@ class BridgeGame {
   }
 
   retry(command) {
-    try {
-      switch (false) {
-        case [GAME.RESTART, GAME.QUIT].includes(command):
-          Exception.throwError(EXCEPTION_MESSAGE.RETRY);
-      }
-    } catch (e) {
-      Exception.printError(e.message);
-    }
+    this.handleRetryException(command);
 
     if (this.isCommandContinue(command)) {
       this.turn = 0;
@@ -69,6 +66,21 @@ class BridgeGame {
     }
 
     return false;
+  }
+
+  handleRetryException(command) {
+    try {
+      this.throwException(command);
+    } catch (e) {
+      Exception.printError(e.message);
+    }
+  }
+
+  throwException(command) {
+    switch (false) {
+      case [GAME.RESTART, GAME.QUIT].includes(command):
+        Exception.throwError(EXCEPTION_MESSAGE.RETRY);
+    }
   }
 
   isCommandContinue(command) {
