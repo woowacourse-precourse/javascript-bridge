@@ -24,10 +24,17 @@ const ERROR_MESSAGE = {
   WRONG_INPUT: '잘못된 입력입니다. 지정된 문자만 입력해주세요.',
 }
 
+const MARK = {
+  CORRECT: 'O',
+  WRONG: 'X',
+  EMPTY: ' ',
+}
+
 module.exports = {
   MOVEMENT,
   COMMAND,
   BRIDGE_SIZE,
   BRIDGE_POSITION,
   ERROR_MESSAGE,
+  MARK,
 }
