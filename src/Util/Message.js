@@ -15,3 +15,5 @@ const ERROR = Object.freeze({
   MOVE: '[ERROR] 이동은 U와 D를 사용할 수 있습니다.',
   RETRY: '[ERROR] 재시도는 R, 종료는 Q 입니다.',
 });
+
+module.exports = { GAME, ERROR };
