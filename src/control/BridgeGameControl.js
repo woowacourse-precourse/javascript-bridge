@@ -1,7 +1,10 @@
+/* eslint-disable max-len */
 /* eslint-disable class-methods-use-this */
 const { Console } = require('@woowacourse/mission-utils');
 const { InputView } = require('../view');
 const { BridgeSize, Moving, GameCommand } = require('../model');
+const BridgeMaker = require('../BridgeMaker');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -16,7 +19,8 @@ class BridgeGameControl {
   make() {
     const bridgeSizeCallback = (input) => {
       const bridgeSize = new BridgeSize(input);
-      Console.print(bridgeSize.getBridgeSize());
+      const bridgeMaker = Object.create(BridgeMaker);
+      const bridge = bridgeMaker.makeBridge(bridgeSize.getBridgeSize(), BridgeRandomNumberGenerator);
       this.move();
     };
     this.#inputView.readBridgeSize(bridgeSizeCallback);
