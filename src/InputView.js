@@ -1,15 +1,12 @@
 const { Console } = require('@woowacourse/mission-utils');
-const {
-  GAME_MESSAGE,
-  BRIDGE_RANGE,
-  ERROR_BRIDGE_MESSAGE,
-  SHORT_CUT,
-  ERROR_PLAYING_MESSAGE,
-  ERROR_RETRY_MESSAGE,
-  GAME_BOOLEAN,
-} = require('./constants');
+const { GAME_BOOLEAN, GAME_MESSAGE, SHORT_CUT } = require('./constants');
 const { printMap, printResult } = require('./OutputView');
 const { readLine } = require('./Utils');
+const {
+  sizeValdation,
+  moveValidation,
+  retryValidation,
+} = require('./Validations');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -30,31 +27,9 @@ const InputView = {
 
   bridgeSize(userInput, bridgeGame) {
     const size = Number(userInput);
-    this.sizeValdation(size);
+    sizeValdation(size);
     bridgeGame.setBridge(size);
     this.readMoving(bridgeGame);
-  },
-
-  checkBridgeInteger(bridgeSize) {
-    if (!Number.isInteger(bridgeSize)) {
-      throw new Error(ERROR_BRIDGE_MESSAGE.integer);
-    }
-  },
-  checkBridgeNumber(bridgeSize) {
-    if (Number.isNaN(bridgeSize)) {
-      throw new Error(ERROR_BRIDGE_MESSAGE.number);
-    }
-  },
-  checkBridgeRange(bridgeSize) {
-    if (bridgeSize < BRIDGE_RANGE.start || bridgeSize > BRIDGE_RANGE.end) {
-      throw new Error(ERROR_BRIDGE_MESSAGE.range);
-    }
-  },
-
-  sizeValdation(bridgeSize) {
-    this.checkBridgeNumber(bridgeSize);
-    this.checkBridgeInteger(bridgeSize);
-    this.checkBridgeRange(bridgeSize);
   },
 
   /**
@@ -72,7 +47,7 @@ const InputView = {
   },
 
   getMoving(userInput, bridgeGame) {
-    this.moveValidation(userInput);
+    moveValidation(userInput);
     bridgeGame.move(userInput);
     const bridgeResult = bridgeGame.getMap();
     printMap(bridgeResult);
@@ -101,23 +76,6 @@ const InputView = {
     return this.readGameCommand(bridgeGame);
   },
 
-  moveValidation(shortCut) {
-    this.checkMoveLowercase(shortCut);
-    this.checkMoveWrong(shortCut);
-  },
-  checkMoveLowercase(shortCut) {
-    const lowerCaseUp = SHORT_CUT.up.toLowerCase();
-    const lowerCaseDown = SHORT_CUT.down.toLowerCase();
-    if (shortCut === lowerCaseUp || shortCut === lowerCaseDown) {
-      throw new Error(ERROR_PLAYING_MESSAGE.lowercase);
-    }
-  },
-  checkMoveWrong(shortCut) {
-    if (shortCut !== SHORT_CUT.up && shortCut !== SHORT_CUT.down) {
-      throw new Error(ERROR_PLAYING_MESSAGE.wrong);
-    }
-  },
-
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
@@ -133,7 +91,7 @@ const InputView = {
   },
 
   getRetry(userInput, bridgeGame) {
-    this.retryValidation(userInput);
+    retryValidation(userInput);
     if (userInput === SHORT_CUT.retry) {
       this.showReStart(bridgeGame);
     }
@@ -150,23 +108,6 @@ const InputView = {
     const numberAttempts = bridgeGame.getAttempts();
     printResult(bridgeResult, GAME_BOOLEAN.fail, numberAttempts);
     Console.close();
-  },
-  retryValidation(userInput) {
-    this.checkRetryLowercase(userInput);
-    this.checkRetryWrong(userInput);
-  },
-
-  checkRetryLowercase(userInput) {
-    const lowerCaseRetry = SHORT_CUT.retry.toLowerCase();
-    const lowerCaseQuit = SHORT_CUT.quit.toLowerCase();
-    if (userInput === lowerCaseRetry || userInput === lowerCaseQuit) {
-      throw new Error(ERROR_RETRY_MESSAGE.lowercase);
-    }
-  },
-  checkRetryWrong(userInput) {
-    if (userInput !== SHORT_CUT.retry && userInput !== SHORT_CUT.quit) {
-      throw new Error(ERROR_RETRY_MESSAGE.wrong);
-    }
   },
 };
 

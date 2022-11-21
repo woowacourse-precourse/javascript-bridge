@@ -13,6 +13,10 @@
   - InputView의 매개변수를 BridgeGame 클래스로 변경
 
 - [x] refactor: Utils와 BridgeGame ,constant 리팩토링
+
   - Utils의 readLine 함수 기능 구현
   - InputView에 있던 재시작 함수를 BridgeGame의 retry으로 이동
   - constant의 GAME_BOOLEAN 추가
+
+- [x] refactor: InputView에 있던 예외 처리 함수를 분리
+- Validations 파일 추가
