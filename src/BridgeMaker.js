@@ -18,8 +18,8 @@ const BridgeMaker = {
   },
 
   convertNumberToUpDown(number) {
-    if (Number(number) === 0) return BRIDGE.DOWN;
-    if (Number(number) === 1) return BRIDGE.UP;
+    if (number === 0) return BRIDGE.DOWN;
+    if (number === 1) return BRIDGE.UP;
   },
 };
 
