@@ -6,9 +6,9 @@
 - [x] 특정 길이의 다리를 생성한다. - BridgeMaker#makeBridge()
 - [x] 게임 성공 여부를 판단한다. - Judge#judgeGameSuccess()
 
-- [ ] 입력 값에 따라 이동한다. - BridgeGame#move()
-- [ ] 게임을 재시작한다. - BridgeGame#retry()
-- [ ] 게임 시도 횟수를 센다. - BridgeGame#countTry()
+- [x] 입력 값에 따라 이동한다. - BridgeGame#move()
+- [x] 게임을 재시작한다. - BridgeGame#retry()
+- [x] 게임 시도 횟수를 센다. - BridgeGame#countTry()
 
 - [x] 1, 0을 각각 U, D로 변환한다. - Converter#convertToUpDown()
 - [x] 이동 정보를 다리 결과로 변환한다. - Converter#convertToBridgeMap()
