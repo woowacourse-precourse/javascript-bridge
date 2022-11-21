@@ -13,6 +13,8 @@ const OutputView = {
 
   result: {
     LAST: '최종 게임 결과',
+    SUCCESS: '게임 성공 여부',
+    TRIAL: '총 시도한 횟수',
   },
 
   /**
@@ -71,7 +73,16 @@ const OutputView = {
     }`
   },
 
-  printResult() {},
+  /**
+   * @param {boolean} success
+   * @param {number} trial
+   */
+  printResult(success, trial) {
+    MissionUtils.Console.print(
+      `\n${this.result.SUCCESS}: ${success ? '성공' : '실패'}`
+    )
+    MissionUtils.Console.print(`${this.result.TRIAL}: ${trial}`)
+  },
 }
 
 module.exports = OutputView
