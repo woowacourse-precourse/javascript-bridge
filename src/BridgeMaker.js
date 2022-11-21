@@ -18,7 +18,6 @@ const BridgeMaker = {
         bridge.push('U');
       };
     }
-    console.log(bridge)
     return bridge
   },
 };
