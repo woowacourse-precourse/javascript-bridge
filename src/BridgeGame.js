@@ -14,18 +14,6 @@ class BridgeGame {
     this.#player = new Player();
     this.#tryCount = 1;
   }
-
-  isClear() {
-    return this.#bridge.isLastPosition(this.#player);
-  }
-
-  isMovable(direction) {
-    return this.#bridge.getNextDirection(this.#player) === direction;
-  }
-
-  out(direction) {
-    this.#player.out(direction);
-  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -33,11 +21,10 @@ class BridgeGame {
    */
   move(direction) {
     if (!this.isMovable(direction)) {
-      this.out(direction);
-      return false;
+      this.#player.fall(direction);
+      return;
     }
     this.#player.move(direction);
-    return true;
   }
 
   /**
@@ -48,6 +35,18 @@ class BridgeGame {
   retry() {
     this.#player = new Player();
     this.#tryCount++;
+  }
+
+  isMovable(direction) {
+    return this.#bridge.getNextDirection(this.#player) === direction;
+  }
+
+  isFailure() {
+    return this.#player.isFallen();
+  }
+
+  isClear() {
+    return this.#bridge.isLastPosition(this.#player);
   }
 
   getMap() {
