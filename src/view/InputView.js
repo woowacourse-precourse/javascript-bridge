@@ -33,7 +33,7 @@ const InputView = {
       (input) => {
         Errors.movingError(input);
         if (GameStore.move(input)) {
-          OutputView.printMap();
+          OutputView.printMap(input);
         } else {
           OutputView.printResult();
           this.readGameCommand();
