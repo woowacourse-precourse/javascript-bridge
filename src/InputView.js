@@ -62,7 +62,7 @@ const InputView = {
       case wrongMove:
         return this.readGameCommand(bridgeGame);
       case endGame:
-        return OutputView.printResult();
+        return OutputView.printResult(bridgeGame);
       default:
         return;
     }
@@ -81,7 +81,7 @@ const InputView = {
           throw new Error(ERROR_MSG.invalidGameCmd);
         }
 
-        if (gameCmd === GAME_CMD.quit) return OutputView.printResult();
+        if (gameCmd === GAME_CMD.quit) return OutputView.printResult(bridgeGame);
 
         bridgeGame.retry();
         this.readMoving(bridgeGame);

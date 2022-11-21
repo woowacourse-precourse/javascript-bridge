@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { DIRECTION, ROW_IDX, EMPTY } = require('./libs/constant');
+const { MSG, DIRECTION, ROW_IDX, EMPTY } = require('./libs/constant');
 const TypeConverter = require('./TypeConverter');
 
 /**
@@ -38,7 +38,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridgeGame) {
+    const { result, cntRetry } = bridgeGame;
+
+    Console.print(MSG.endGame);
+    this.printMap(bridgeGame.getMovedBridge());
+    Console.print(MSG.statisticGame(result, cntRetry));
+  },
 };
 
 module.exports = OutputView;
