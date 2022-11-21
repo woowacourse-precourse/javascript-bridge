@@ -48,12 +48,8 @@ class App {
       InputView.readGameCommand(this.proceedStepThree.bind(this));
       return;
     }
-    //함수로 분리하기
     if (input === COMMAND.QUIT) {
-      const map = this.#game.getMap();
-      const tryCount = this.#game.getTryCount();
-      OutputView.printResult(map, MESSAGE.FAIL, tryCount);
-      Console.close();
+      this.endGame();
       return;
     }
     this.#game.retry();
@@ -61,20 +57,22 @@ class App {
   }
 
   checkGameProgress() {
-    //game over
     if (!this.#game.isPass()) {
       InputView.readGameCommand(this.proceedStepThree.bind(this));
       return;
     }
-    //game clear
     if (this.#game.isClear()) {
-      const map = this.#game.getMap();
-      const tryCount = this.#game.getTryCount();
-      OutputView.printResult(map, MESSAGE.SUCCESS, tryCount);
-      Console.close();
+      this.endGame();
       return;
     }
     InputView.readMoving(this.proceedStepTwo.bind(this));
+  }
+
+  endGame() {
+    const map = this.#game.getMap();
+    const tryCount = this.#game.getTryCount();
+    OutputView.printResult(map, MESSAGE.SUCCESS, tryCount);
+    Console.close();
   }
 }
 
