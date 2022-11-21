@@ -23,7 +23,6 @@ class BridgeGame {
   getStepsSoFar(step) {
     const previousSteps = this.#bridge.substr(0, step);
     const currentStep = this.#bridge.charAt(step);
-    Console.print([previousSteps, currentStep]); //지워
     return [previousSteps, currentStep];
   }
 

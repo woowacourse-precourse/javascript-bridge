@@ -4,6 +4,7 @@ const { MESSAGE } = require('./constants');
 const BridgeGame = require('./BridgeGame');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { makeBridge } = require('./BridgeMaker');
+const { printMap, printResult } = require('./OutputView');
 
 class App {
   play() {
@@ -29,6 +30,15 @@ class App {
   step(bridgeGame, step) {
     readMoving(bridgeGame, step, this);
   }
+
+  printResult(bridgeGame, step, moving) {
+    Console.print(`${MESSAGE.RESULT.FINAL_GAME_RESULT}`);
+    printMap(bridgeGame, step, moving);
+    const isSuccess = bridgeGame.move(step, moving);
+    printResult(bridgeGame, isSuccess);
+  }
+
+  readGameCommand() {}
 }
 
 const app = new App();

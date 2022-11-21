@@ -24,7 +24,13 @@ const InputView = {
     Console.readLine(`${MESSAGE.SELECT_MOVING}`, (inputStr) => {
       const moving = validateMoving(inputStr);
       printMap(bridgeGame, step, moving);
-      app.step(bridgeGame, step + 1);
+      const isMovable = bridgeGame.move(step, moving);
+      const bridgeSize = bridgeGame.getBridgeSize();
+      if (!isMovable) app.printResult(bridgeGame, step, moving);
+      else {
+        if (step < bridgeSize - 1) app.step(bridgeGame, step + 1);
+        else app.readGameCommand();
+      }
     });
   },
 
