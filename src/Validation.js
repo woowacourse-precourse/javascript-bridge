@@ -50,9 +50,18 @@ const Validation = {
   },
 
   isVaildCommand(command) {
-    if (command !== "R" && command !== "Q") {
-      throw new Error("[ERROR] 올바른 입력이 아닙니다. 입력값을 확인해주세요.");
+    try {
+      if (command !== "R" && command !== "Q") {
+        throw new Error(
+          "[ERROR] 올바른 입력이 아닙니다. 입력값을 확인해주세요."
+        );
+      }
+    } catch (error) {
+      Console.print(error.message);
+      return true;
     }
+
+    return false;
   },
 };
 

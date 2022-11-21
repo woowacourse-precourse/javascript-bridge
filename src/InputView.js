@@ -59,8 +59,9 @@ const InputView = {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (command) => {
-        Validation.isVaildCommand(command);
-        // 재시작 커맨드
+        const error = Validation.isVaildCommand(command);
+        if (error) return this.readGameCommand(bridge, attempt, moveList);
+
         if (command === "R") {
           attempt++;
           const bridgeGame = new BridgeGame();
@@ -68,7 +69,6 @@ const InputView = {
           return this.readMoving(bridge, againMoveList, attempt);
         }
         if (command === "Q") {
-          //종료 커맨드\\\
           OutputView.printResult("실패", attempt, moveList);
         }
       }
