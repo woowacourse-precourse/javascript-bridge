@@ -33,7 +33,22 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
+      this.checkMoving(input);
+    });
+  },
+
+  /**
+   * 입력받은 이동할 칸을 검증한다.
+   * @param {string} moving 이동할 칸
+   * @throws {Error} U, D 이외의 문자가 입력된 경우
+   */
+  checkMoving(moving) {
+    if (moving !== 'U' && moving !== 'D') {
+      throw new Error('[ERROR] 이동할 칸은 U또는 D여야 합니다.');
+    }
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
