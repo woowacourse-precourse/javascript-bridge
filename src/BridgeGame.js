@@ -10,10 +10,12 @@ const{ Console } = require("@woowacourse/mission-utils"); //테스트용 추가,
 class BridgeGame {
   #bridgeInformation;
   #userInformation;
+  #countGame;
 
   constructor() {
     this.#bridgeInformation = { bridge: [] };
     this.#userInformation = { track: [] };
+    this.#countGame = 1;
   }
 
   ready(size) {
@@ -69,18 +71,23 @@ class BridgeGame {
 
   getSucessValue() {
     let lastStep = this.getRecordSteps();
-    
     if(lastStep[0].length !== this.#bridgeInformation.bridge.length) return RESULT.FAIL;
     if(lastStep[0].indexOf(MOVING.UNPASSED) > -1 || lastStep[1].indexOf(MOVING.UNPASSED) > -1) return RESULT.FAIL;
     if(lastStep[0].length === this.#bridgeInformation.bridge.length) return RESULT.SUCCESS;
   }
 
+  
+  getCountReplyNumber() {
+    return this.#countGame;
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+
+  }
 }
 
 module.exports = BridgeGame;
