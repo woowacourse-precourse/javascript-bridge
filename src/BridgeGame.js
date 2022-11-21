@@ -1,4 +1,4 @@
-const BridgeMaker = require("./utils/BridgeMaker");
+const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./utils/BridgeRandomNumberGenerator");
 const { RETRY_COMMAND } = require("./constants");
 const TraceController = require("./utils/TraceController");
