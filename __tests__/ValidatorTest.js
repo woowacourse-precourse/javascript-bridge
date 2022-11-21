@@ -1,10 +1,10 @@
 const Validator = require('../src/Validator');
 
-const getExceptionTest = (inputList, callback) => {
+const getExceptionTest = (inputList, validatorFunction) => {
   return () => {
     inputList.forEach((input) => {
       expect(() => {
-        callback(input);
+        validatorFunction(input);
       }).toThrow();
     });
   };
@@ -22,17 +22,17 @@ describe('Validator 테스트', () => {
   );
 
   test(
+    '다리 길이가 20 초과면 예외가 발생한다.',
+    getExceptionTest(['21'], Validator.checkBridgeSize)
+  );
+
+  test(
     'U 와 D 중 한 글자가 아니면 예외가 발생한다.',
-    getExceptionTest(['UU', 'DD', 'U ', 'S'], Validator.checkBridgeSize)
+    getExceptionTest(['UU', 'DD', 'U ', 'S'], Validator.checkMoving)
   );
 
   test(
     'R 과 Q 중 한 글자가 아니면 예외가 발생한다.',
-    getExceptionTest(['RR', 'QQ', 'R ', 'S'], Validator.checkBridgeSize)
-  );
-
-  test(
-    '다리 길이가 20 초과면 예외가 발생한다.',
-    getExceptionTest(['21'], Validator.checkBridgeSize)
+    getExceptionTest(['RR', 'QQ', 'R ', 'S'], Validator.checkGameCommand)
   );
 });
