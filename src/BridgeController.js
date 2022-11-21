@@ -5,6 +5,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
+const { JUDGEMENT } = require("./data/Constants");
 
 const bridgeGame = new BridgeGame(0, [[], []], 1);
 
@@ -18,7 +19,7 @@ class BridgeController {
     InputView.readBridgeSize((bridgeSize) => {
       OutputView.lineBreak();
 
-      if (this.checkBridgeLength(bridgeSize) !== "에러발생") {
+      if (this.checkBridgeLength(bridgeSize) !== JUDGEMENT.ERROR) {
         const bridge = this.creatBridge(bridgeSize);
 
         this.getUserMove(bridge);
@@ -33,7 +34,7 @@ class BridgeController {
       Console.print(error);
       this.getUserBridgeSize();
 
-      return "에러발생";
+      return JUDGEMENT.ERROR;
     }
   }
 
@@ -42,13 +43,14 @@ class BridgeController {
       bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
+    Console.print(bridge);
 
     return bridge;
   }
 
   getUserMove(bridge) {
     InputView.readMoving((move) => {
-      if (this.checkUserMove(move, bridge) !== "에러발생") {
+      if (this.checkUserMove(move, bridge) !== JUDGEMENT.ERROR) {
         this.judgementAndShow(bridge, move);
       }
     });
@@ -61,7 +63,7 @@ class BridgeController {
       Console.print(error);
       this.getUserMove(bridge);
 
-      return "에러발생";
+      return JUDGEMENT.ERROR;
     }
   }
 
@@ -96,7 +98,11 @@ class BridgeController {
   }
 
   gameEnd(bridgeGameResult) {
-    OutputView.printResult(bridgeGameResult, "성공", bridgeGame.getTryCount());
+    OutputView.printResult(
+      bridgeGameResult,
+      JUDGEMENT.SUCCESS,
+      bridgeGame.getTryCount()
+    );
   }
 
   checkUserRetry(userRetry, bridge, bridgeGameResult) {
@@ -106,14 +112,15 @@ class BridgeController {
       Console.print(error);
       this.getUserRetry(bridge, bridgeGameResult);
 
-      return "에러발생";
+      return JUDGEMENT.ERROR;
     }
   }
 
   getUserRetry(bridge, bridgeGameResult) {
     InputView.readGameCommand((userRetry) => {
       if (
-        this.checkUserRetry(userRetry, bridge, bridgeGameResult) !== "에러발생"
+        this.checkUserRetry(userRetry, bridge, bridgeGameResult) !==
+        JUDGEMENT.ERROR
       ) {
         this.judgementRetry(bridge, bridgeGameResult, userRetry);
       }
@@ -135,7 +142,11 @@ class BridgeController {
   }
 
   gameGiveUp(bridgeGameResult) {
-    OutputView.printResult(bridgeGameResult, "실패", bridgeGame.getTryCount());
+    OutputView.printResult(
+      bridgeGameResult,
+      JUDGEMENT.FAIL,
+      bridgeGame.getTryCount()
+    );
   }
 }
 

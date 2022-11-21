@@ -24,4 +24,10 @@ const OUTPUT = Object.freeze({
   SEND_GAME_TRY_COUNT: `총 시도한 횟수: `,
 });
 
-module.exports = { ERROR, INPUT, OUTPUT };
+const JUDGEMENT = Object.freeze({
+  SUCCESS: `성공`,
+  FAIL: `실패`,
+  ERROR: `에러발생`,
+});
+
+module.exports = { ERROR, INPUT, OUTPUT, JUDGEMENT };
