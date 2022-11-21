@@ -14,14 +14,19 @@ const MapMaker = {
       ? MAP_CHARACTERS.USER_MOVE_RESULT[result] : MAP_CHARACTERS.WHITE_SPACE;
   },
 
-  create(currentMoveCount, getUserInputResult) {
-    const bridgeMap = [[], []].map(() => Array.from({ length: currentMoveCount + 1 }));
+  init(lastMoveCount) {
+    return [[], []].map(() => Array.from({ length: lastMoveCount + 1 }));
+  },
 
-    return bridgeMap.map((el, pos) => el.map((_, idx) => {
-      const { command, result } = getUserInputResult(idx);
+  create(lastMoveCount, getUserInputResult) {
+    const bridgeMap = this.init(lastMoveCount)
+      .map((prop, pos) => prop.map((_, idx) => {
+        const { command, result } = getUserInputResult(idx);
 
-      return `${this.getMapHead(idx === 0)}${this.getMapCharacter(MAP_CHARACTERS.COMMAND[command] === pos, result)}${this.getMapTail(idx === currentMoveCount)}`;
-    })).map((el) => el.join(MAP_CHARACTERS.MIDDLE));
+        return `${this.getMapHead(idx === 0)}${this.getMapCharacter(MAP_CHARACTERS.COMMAND[command] === pos, result)}${this.getMapTail(idx === lastMoveCount)}`;
+      }));
+
+    return bridgeMap.map((el) => el.join(MAP_CHARACTERS.MIDDLE));
   },
 
 };
