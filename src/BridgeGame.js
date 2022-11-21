@@ -58,19 +58,24 @@ class BridgeGame {
   pass(state, upOrDown) {
     if (upOrDown === 'U') {
       this.moveToUp(state);
-      return [this.#BridgeData.up, this.#BridgeData.down];
+      return this.getUpAndDown();
     }
     this.moveToDown(state);
-    return [this.#BridgeData.up, this.#BridgeData.down];
+    return this.getUpAndDown();
   }
 
   fail(state, upOrDown) {
     if (upOrDown === 'U') {
       this.moveToUp(state);
-      return [this.#BridgeData.up, this.#BridgeData.down];
+      return this.getUpAndDown();
     }
     this.moveToDown(state);
-    return [this.#BridgeData.up, this.#BridgeData.down];
+    return this.getUpAndDown();
+  }
+
+  getUpAndDown() {
+    const { up, down } = this.#BridgeData;
+    return { up, down };
   }
 
   moveToUp(state) {
@@ -86,9 +91,8 @@ class BridgeGame {
   }
 
   static isRetry(input) {
-    const RETRY = 1;
-    if (input === RETRY) {
-    }
+    const RETRY = 'R';
+    return input === RETRY;
   }
 
   saveSize(input) {
