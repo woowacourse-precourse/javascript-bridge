@@ -35,9 +35,14 @@ class App {
   userDecideGoToUpOrDown(userInputMoving) {
     try {
       InputVaildation.ofMove(userInputMoving);
-      this.bridgeGame.stackOfUserMovingInput(userInputMoving);
+      this.bridgeGame.move(userInputMoving);
+      const bridge = this.bridgeGame.drawingBridge();
+      OutputView.printMap(bridge);
     } catch {
       OutputView.printWorngInputOfMoving();
+      this.requestMovingInput();
+    }
+    if (!this.bridgeGame.gameSuccessStatus()) {
       this.requestMovingInput();
     }
   }
