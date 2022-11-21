@@ -3,8 +3,13 @@ const InputView = require('./InputView');
 const BridgeStore = require('./BridgeStore');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeValidator = require('./BridgeValidator');
 
 const INITIAL_GAME_COUNT = 1;
+const INITIAL_BRIDGE_SIZE = {
+  min: 3,
+  max: 20,
+};
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -17,11 +22,13 @@ class BridgeGame {
 
   // TODO: 메세지들 많아짐, 정리
   constructor(
+    bridgeSize = INITIAL_BRIDGE_SIZE,
     welcomeMessage = '다리 건너기 게임을 시작합니다.',
     bridgeSizeMessage = '다리의 길이를 입력해주세요.\n',
     movingMessage = '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
     retryMessage = '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
   ) {
+    this.bridgeValidator = new BridgeValidator({ bridgeSize });
     this.welcomeMessage = welcomeMessage;
     this.bridgeSizeMessage = bridgeSizeMessage;
     this.movingMessage = movingMessage;
@@ -80,6 +87,7 @@ class BridgeGame {
 
   createBridge(bridgeSize) {
     // TODO: bridge길이 확인
+    this.bridgeValidator.isValidBridgeSize(bridgeSize);
     const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     this.bridgeStore = new BridgeStore(bridge, INITIAL_GAME_COUNT);
   }
