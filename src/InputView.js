@@ -37,7 +37,19 @@ const InputView = {
       game.end(game);
     });
   },
-  readGameCommand() {},
+  readGameCommand(game) {
+    Console.readLine(GAME_MESSAGE.RESTART, (answer) => {
+      Validation.gameCommand(answer);
+
+      if (answer === 'R') {
+        game.retry(game);
+        InputView.readMoving(game);
+        return;
+      }
+
+      game.end(game);
+    });
+  },
 };
 
 module.exports = InputView;
