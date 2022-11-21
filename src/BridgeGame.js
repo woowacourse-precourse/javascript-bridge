@@ -1,6 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const { LETTER, NEW_LINE, BAR, BLANCK } = require("./constant");
+const { LETTER, NEW_LINE, BAR, BLANK } = require("./constant");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -37,6 +37,7 @@ class BridgeGame {
     const map = this.#drawMap();
     const isCorrect = this.#isCorrect();
     const isGameOver = this.#isGameOver();
+
     return { map, isCorrect, isGameOver, trialTime: this.#trialTime };
   }
 
@@ -47,7 +48,7 @@ class BridgeGame {
         (upOrDown) =>
           `[ ${resultArray
             .map(([userUorD, isCorrect]) =>
-              userUorD === upOrDown ? isCorrect : BLANCK
+              userUorD === upOrDown ? isCorrect : BLANK
             )
             .join(BAR)} ]`
       )
