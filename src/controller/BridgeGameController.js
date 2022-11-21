@@ -43,13 +43,13 @@ class BridgeGameController {
     if (!isSuccess) return this.getQuitMessage(isSuccess);
 
     if (isSuccess && this.#bridgeGame.isDestination()) {
-      return this.quit(isSuccess);
+      return this.quit();
     }
 
     return this.getMoving();
   }
 
-  getQuitMessage(isSuccess) {
+  getQuitMessage() {
     InputView.readGameCommand((command) => {
       new GameCommandValidator(command).validate();
 
@@ -58,12 +58,12 @@ class BridgeGameController {
         this.getMoving();
       }
 
-      if (command === INPUT_SIGN.QUIT) this.quit(isSuccess);
+      if (command === INPUT_SIGN.QUIT) this.quit();
     });
   }
 
-  quit(isSuccess) {
-    OutputView.printResult(this.#bridgeGame, isSuccess);
+  quit() {
+    OutputView.printResult(this.#bridgeGame);
   }
 }
 
