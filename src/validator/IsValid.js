@@ -9,4 +9,15 @@ const isNumber = (number) => {
 
   return number
 }
-module.exports = isNumber
+
+const isUpDown = (string) => {
+  const regex = /^(?:[U]|[D])$/
+
+  if (!regex.test(string)) {
+    throw new Error(ERROR_MESSAGE.INPUT_MOVE_ERROR)
+  }
+
+  return string
+}
+
+module.exports = { isNumber, isUpDown }

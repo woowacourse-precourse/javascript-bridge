@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Message = require('../src/MessageContent')
-const isNumber = require('./validator/IsValid')
+const { isNumber, isUpDown } = require('./validator/IsValid')
 
 const InputView = {
 
@@ -12,7 +12,7 @@ const InputView = {
 
   readMoving(callback) {
     MissionUtils.Console.readLine(Message.MOVE, move => {
-      callback(move)
+      callback(isUpDown(move))
     })
   },
 
