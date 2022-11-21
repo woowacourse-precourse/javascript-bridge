@@ -1,4 +1,4 @@
-const InputView = require('./InputView.js');
+const InputView = require('./Views/InputView.js');
 
 class GameManager {
   constructor() {}

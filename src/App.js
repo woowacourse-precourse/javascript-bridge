@@ -1,4 +1,4 @@
-const OutputView = require('./OutputView');
+const OutputView = require('./Views/OutputView');
 const BridgeGame = require('./BridgeGame');
 class App {
   constructor() {
