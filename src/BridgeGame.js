@@ -48,19 +48,19 @@ class BridgeGame {
   pass(state, upOrDown) {
     if (upOrDown === 'U') {
       this.moveToUp(state);
-      return [upOrDown, this.#BridgeData.up, this.#BridgeData.down];
+      return [this.#BridgeData.up, this.#BridgeData.down];
     }
     this.moveToDown(state);
-    return [upOrDown, this.#BridgeData.up, this.#BridgeData.down];
+    return [this.#BridgeData.up, this.#BridgeData.down];
   }
 
   fail(state, upOrDown) {
     if (upOrDown === 'U') {
       this.moveToUp(state);
-      return [upOrDown, this.#BridgeData.up, this.#BridgeData.down];
+      return [this.#BridgeData.up, this.#BridgeData.down];
     }
     this.moveToDown(state);
-    return [upOrDown, this.#BridgeData.up, this.#BridgeData.down];
+    return [this.#BridgeData.up, this.#BridgeData.down];
   }
 
   moveToUp(state) {
