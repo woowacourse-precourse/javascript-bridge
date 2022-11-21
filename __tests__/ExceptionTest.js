@@ -112,4 +112,23 @@ describe("실패 후 게임 선택에서의 케이스", () => {
       "총 시도한 횟수: 1",
     ]);
   });
+
+  test('실패 후 "U" 입력 예외 처리', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "1", "1"]);
+    mockQuestions(["3", "D", "13", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[   ]",
+      "[ X ]",
+      "[ERROR] 재시작하려면 R, 종료하려면 Q를 입력해주세요.",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
+  });
 });

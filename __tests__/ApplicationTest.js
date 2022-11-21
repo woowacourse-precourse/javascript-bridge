@@ -53,7 +53,7 @@ const expectBridgeOrder = (received, upside, downside) => {
 
 describe("다리 건너기 테스트", () => {
   test("다리 생성 테스트 3개", () => {
-    const randomNumbers = ["1", "0", "0"];
+    const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
@@ -62,8 +62,8 @@ describe("다리 건너기 테스트", () => {
     expect(bridge).toEqual(["U", "D", "D"]);
   });
 
-  test("다리 생성 테스트 5개", () => {
-    const randomNumbers = ["1", "0", "0", "1", "1", "1", "0", "0", "1", "1"];
+  test("다리 생성 테스트 10개", () => {
+    const randomNumbers = [1, 0, 0, 1, 1, 1, 0, 0, 1, 1];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
@@ -74,7 +74,7 @@ describe("다리 건너기 테스트", () => {
 
   test("기능 테스트", () => {
     const logSpy = getLogSpy();
-    mockRandoms(["1", "0", "1"]);
+    mockRandoms([1, 0, 1]);
     mockQuestions(["3", "U", "D", "U"]);
 
     const app = new App();
@@ -96,7 +96,7 @@ describe("다리 건너기 테스트", () => {
 describe("실패 케이스", () => {
   test("기능 테스트", () => {
     const logSpy = getLogSpy();
-    mockRandoms(["1", "1", "1"]);
+    mockRandoms([1, 1, 1]);
     mockQuestions(["3", "D", "Q"]);
 
     const app = new App();
@@ -116,7 +116,7 @@ describe("실패 케이스", () => {
 describe("실패 후 게임 선택에서의 케이스", () => {
   test("시도 횟수 일치 테스트", () => {
     const logSpy = getLogSpy();
-    mockRandoms(["1", "0", "1"]);
+    mockRandoms([1, 0, 1]);
     mockQuestions(["3", "D", "R", "U", "U", "R", "U", "D", "U"]);
 
     const app = new App();
