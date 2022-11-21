@@ -19,7 +19,7 @@ class BridgeRestart {
     this.#repo.update(MODEL_KEY.tryCount, oldData + 1);
   }
 
-  doAction() {
+  store() {
     this.#reset().#increaseTryCount();
   }
 }
