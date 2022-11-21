@@ -10,30 +10,21 @@ class BridgeGame {
    */
 
   move(dir, bridge, now) {
-    console.log("this is bridgegame class console");
-    console.log(dir);
-    console.log(bridge);
-
     if (dir === "U") {
-      this.moveUp(bridge, now);
+      if (bridge[0][now] == 1) {
+        return true;
+      }
+      if (bridge[0][now] == 0) {
+        return false;
+      }
     }
     if (dir === "D") {
-      this.moveDown(bridge, now);
-    }
-  }
-
-  moveUp(bridge, now) {
-    if (bridge[0][now] == 1) {
-    }
-
-    if (bridge[0][now] == 0) {
-    }
-  }
-  moveDown(bridge, now) {
-    if (bridge[1][now] == 1) {
-    }
-
-    if (bridge[1][now] == 0) {
+      if (bridge[1][now] == 1) {
+        return true;
+      }
+      if (bridge[1][now] == 0) {
+        return false;
+      }
     }
   }
 
