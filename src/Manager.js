@@ -10,55 +10,67 @@ class Manager{
     this.requestBridgeSize();
   }
 
+  tryCatch = (tryFuntion, catchFunction) => {
+    try {
+      tryFuntion();
+    } catch{
+      catchFunction();
+    }
+  };
+
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
-      try{
-        Validation.isNumber(size);
-        Validation.isValidRangeSize(size);
-        this.bridgeGame.makeBridge(size);
-        this.requestDirection();
-      }catch{
-        this.requestBridgeSize();
-      }
+      this.tryCatch(this.tryBridgeSize.bind(this, size), this.requestBridgeSize.bind(this));
     });
+  }
+
+  tryBridgeSize(size){
+    Validation.isNumber(size);
+    Validation.isValidRangeSize(size);
+    this.bridgeGame.makeBridge(size);
+    this.requestDirection();
   }
   
   requestDirection(){
     InputView.readMoving((direction) => {
-      try{
-        Validation.isValidDirection(direction);
-        this.bridgeGame.move(direction);
-        this.requestMap();
-        const isCorrect = this.bridgeGame.getIsCorrect();
-        const isSuccess = this.bridgeGame.getIsSuccess();
-        isSuccess ? this.requestResult() : (isCorrect ? this.requestDirection() : this.requestGameCommand());
-      }catch{
-        this.requestDirection();
-      }
+      this.tryCatch(this.tryDirection.bind(this, direction), this.requestDirection.bind(this));
     });
   }
 
+  tryDirection(direction){
+    Validation.isValidDirection(direction);
+    this.bridgeGame.move(direction);
+    this.requestMap();
+  }
+  
   requestMap(){
-    const [upBridge, downBridge] = this.bridgeGame.getCurrentMap();
-    OutputView.printMap(upBridge, downBridge);
+    const currentBridge = this.bridgeGame.getCurrentBridge();
+    OutputView.printMap(currentBridge);
+    this.chosseNextWork();
+  }
+
+  chosseNextWork(){
+    const isCorrect = this.bridgeGame.getIsCorrect();
+    const isSuccess = this.bridgeGame.getIsSuccess();
+    isSuccess ? this.requestResult() : (isCorrect ? this.requestDirection() : this.requestGameCommand());
   }
 
   requestResult(){
-    const [upBridge, downBridge] = this.bridgeGame.getCurrentMap();
+    const currentBridge = this.bridgeGame.getCurrentBridge();
     const isSuccess = this.bridgeGame.getIsSuccess();
     const tryNumber = this.bridgeGame.getTryNumber();
-    OutputView.printResult(upBridge, downBridge, isSuccess, tryNumber);
+    OutputView.printResult(currentBridge, isSuccess, tryNumber);
   }
 
   requestGameCommand(){
     InputView.readGameCommand((retryOrQuit) => {
-      Validation.isValidRetryOrQuitInput(retryOrQuit);
-      try{
-        retryOrQuit === "Q" ? this.requestResult() : this.bridgeGame.retry(), this.requestDirection();
-      }catch{
-        this.requestGameCommand();
-      }
+      this.tryCatch(this.tryBridgeSize.bind(this, retryOrQuit), this.requestGameCommand.bind(this));
     });
+  }
+
+  tryGameCommand(){
+    Validation.isValidRetryOrQuitInput(retryOrQuit);
+    retryOrQuit === "Q" ? this.requestResult() : this.bridgeGame.retry(), this.requestDirection();
   }
 }
 

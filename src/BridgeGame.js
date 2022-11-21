@@ -17,7 +17,7 @@ class BridgeGame {
     this.#currentIndex = 0;
   }
 
-  getCurrentMap(){
+  getCurrentBridge(){
     return [this.#upBridge, this.#downBridge];
   }
   

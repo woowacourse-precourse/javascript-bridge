@@ -10,14 +10,15 @@ const OutputView = {
     MissionUtils.Console.print(OutputMessage.START);
   },
 
-  printMap(upBridge, downBridge) {
+  printMap(currentBridge) {
+    const [upBridge, downBridge] = currentBridge;
     MissionUtils.Console.print(OutputMessage.FORMAT(upBridge));
     MissionUtils.Console.print(OutputMessage.FORMAT(downBridge));
   },
 
-  printResult(upBridge, downBridge, isSuccess, tryNumber) {
+  printResult(currentBridge, isSuccess, tryNumber) {
     MissionUtils.Console.print(OutputMessage.RESULT_TITLE);
-    this.printMap(upBridge, downBridge);
+    this.printMap(currentBridge);
     MissionUtils.Console.print(OutputMessage.RESULT(isSuccess));
     MissionUtils.Console.print(OutputMessage.TRY_NUMBER(tryNumber));
     MissionUtils.Console.close();
