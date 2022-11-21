@@ -1,4 +1,4 @@
-const { printGameStart, printMap } = require('./OutputView');
+const { printGameStart, printMap, printResult } = require('./OutputView');
 const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
@@ -99,6 +99,13 @@ class BridgeGame {
     this.#attempt += 1;
     this.#movings = [];
     this.move();
+  }
+
+  /**
+   * 게임을 종료할 때 사용하는 메서드
+   */
+  finish() {
+    printResult(this.isFinished(), this.#attempt);
   }
 }
 
