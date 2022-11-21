@@ -2,11 +2,11 @@ const OutputView = require("./OutputView");
 const InputView = require("./InputView");
 
 class BridgeGameToView {
-  BridgeGameToOutputView(gameRec) {
+  bridgeGameToOutputView(gameRec) {
     OutputView.printMap(gameRec);
   }
 
-  BridgeGameToInputView(gameRec) {
+  bridgeGameToInputView(gameRec) {
     InputView.readMoving(gameRec);
   }
 }
