@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const MESSAGE = require('./constants/BridgeGameMessage');
+const Validator = require('./utils/Validator');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -12,7 +13,7 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(MESSAGE.PROCESS.ENTER_BRIDGE_LENGTH, (length) => {
-      Console.print(`다리길이 ${length}`);
+      Validator.validateInput(length);
     });
   },
 
