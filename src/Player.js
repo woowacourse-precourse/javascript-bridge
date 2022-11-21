@@ -23,18 +23,22 @@ class Player {
 
     repeatMove(bridgeAnswer) {
         const bridgeGame = new BridgeGame(bridgeAnswer);
+        let currentBridge;
         let isSuccessed = true;
 
         for(let i = 0; i < bridgeAnswer.length; i++) {
             OutputView.printInputMove();
             const movingInput = InputView.readMoving();
-            const currentBridge = bridgeGame.move(movingInput);
+            currentBridge = bridgeGame.move(movingInput);
             OutputView.printMap(currentBridge);
             if (!this.checkIncludeFail(currentBridge)) {
                 isSuccessed = false;
                 break;
             }
         }
+        OutputView.printResult(currentBridge);
+        OutputView.printGameSuccess(isSuccessed);
+        OutputView.printTryCount();
     }
 
 }
