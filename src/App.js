@@ -18,15 +18,30 @@ class App {
   validateSize(size) {
     try {
       if (isNaN(Number(size))) {
-        throw new Error("[ERROR] 숫자를 입력해야합니다.");
+        throw new Error("[ERROR] 숫자를 입력해야 합니다.");
       }
       if (size < 3 && 20 < size) {
-        throw new Error("[ERROR] 3이상 20이하의 size를 입력해여합니다.");
+        throw new Error("[ERROR] 3이상 20이하의 size를 입력해야 합니다.");
       }
       return size;
     } catch (e) {
       MissionUtils.Console.print(e.message);
       return InputView.readBridgeSize();
+    }
+  }
+
+  makeMoving() {
+    let moving = InputView.readMoving();
+    moving = this.validateMoving(moving);
+    return moving;
+  }
+  validateMoving(moving) {
+    try {
+      if (moving !== "U" && moving !== "D")
+        throw new Error("[ERROR] U나 D를 입력해야 합니다.");
+    } catch (e) {
+      MissionUtils.Console.print(e.message);
+      return InputView.readMoving();
     }
   }
 }
