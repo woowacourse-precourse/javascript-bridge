@@ -23,7 +23,7 @@ describe("다리 길이 player 입력 테스트", () => {
   );
 });
 
-describe.only("이동할 칸 player 입력 테스트", () => {
+describe("이동할 칸 player 입력 테스트", () => {
   test.each([["0"], ["/"], [25]])(
     "이동할 칸이 알파벳이 아닌 경우 false 반환",
     (input) => {
@@ -49,6 +49,36 @@ describe.only("이동할 칸 player 입력 테스트", () => {
     "이동할 칸을 U 또는 D를 입력한 경우 true 반환",
     (input) => {
       expect(Validation.isValidMoving(input)).toBe(true);
+    }
+  );
+});
+
+describe.only("게임 재시작/종료 여부 입력 입력 테스트", () => {
+  test.each([["0"], ["/"], [25]])(
+    "게임 재시작/종료가 알파벳이 아닌 경우 false 반환",
+    (input) => {
+      expect(Validation.isValidCommandType(input)).toBe(false);
+    }
+  );
+
+  test.each([[""], ["DDDD"], ["UU"]])(
+    "게임 재시작/종료에 한 개의 문자열을 입력하지 아닌 경우 false 반환",
+    (input) => {
+      expect(Validation.isValidCommandLength(input)).toBe(false);
+    }
+  );
+
+  test.each([["z"], ["y"]])(
+    "게임 재시작/종료에 소문자를 입력한 경우 true 반환",
+    (input) => {
+      expect(Validation.isValidCommandCase(input)).toBe(false);
+    }
+  );
+
+  test.each([["R"], ["Q"]])(
+    "게임 재시작/종료를 R 또는 Q를 입력한 경우 true 반환",
+    (input) => {
+      expect(Validation.isValidCommand(input)).toBe(true);
     }
   );
 });
