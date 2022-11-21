@@ -46,6 +46,8 @@ const InputView = {
       const RESTART_COMMAND = 'R';
       const END_COMMAND = 'Q';
 
+      Validation.validateInputCommand(gameCommand);
+
       if (gameCommand === RESTART_COMMAND) {
       }
       if (gameCommand === END_COMMAND) {
