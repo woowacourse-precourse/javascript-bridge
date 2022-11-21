@@ -13,7 +13,8 @@ const BridgeMaker = {
     let bridge = [];
 
     for (let i = 0; i < size; i++) {
-      const bridgeShape = generateRandomNumber() === 0 ? 'D' : 'U';
+      const number = generateRandomNumber().toString();
+      const bridgeShape = number === '0' ? 'D' : 'U';
       bridge.push(bridgeShape);
     }
 
