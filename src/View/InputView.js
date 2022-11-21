@@ -1,6 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { INPUT_BRIDGE_SIZE_MESSAGE, INPUT_MOVE_MESSAGE, INPUT_GAME_RUNNING_MASSAGE } = require("../Constants")
-
+const {INPUT_MESSAGE} = require("../Constants");
 const {CheckBridgeSizeException, CheckUserMove, CheckWhetherGameRunning} = require("../Exception");
 
 /**
@@ -12,7 +11,7 @@ const InputView = {
    */
   readBridgeSize(){
     let bridgeSize;
-    Console.readLine(INPUT_BRIDGE_SIZE_MESSAGE , (num) => {
+    Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE_MESSAGE , (num) => {
       this.checkBridgeLengthExceptions(num);
       bridgeSize = num;
     });
@@ -33,7 +32,7 @@ const InputView = {
    */
   readMoving() {
     let userMove;
-    Console.readLine(INPUT_MOVE_MESSAGE, (selectUpOrDown) => {
+    Console.readLine(INPUT_MESSAGE.MOVE_MESSAGE, (selectUpOrDown) => {
       this.checkUserMoveException(selectUpOrDown);
       userMove = selectUpOrDown; 
     });
@@ -54,7 +53,7 @@ const InputView = {
    */
   readGameCommand() {
     let gameSelect;
-    Console.readLine(INPUT_GAME_RUNNING_MASSAGE, (value) => {
+    Console.readLine(INPUT_MESSAGE.GAME_RUNNING_MASSAGE, (value) => {
       this.checkGameRunningException(value);
       gameSelect = value;
     })
