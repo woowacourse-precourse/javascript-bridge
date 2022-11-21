@@ -1,6 +1,10 @@
-const { readBridgeSize, readMoving } = require('./InputView');
+const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { printStartGame, printError, printMap } = require('./OutputView');
-const { bridgeSizeValidator, directionValidator } = require('./Validator');
+const {
+  bridgeSizeValidator,
+  directionValidator,
+  commandValidator,
+} = require('./Validator');
 const BridgeGame = require('./BridgeGame');
 
 class BridgeGameHandler {
@@ -45,6 +49,23 @@ class BridgeGameHandler {
     this.#bridgeGame.isGameClear()
       ? this.exitGame('성공')
       : this.requestMoveDirection();
+  }
+
+  requestGameCommand() {
+    readGameCommand((command) => {
+      try {
+        commandValidator.isCommandValid(command);
+        if (this.#bridgeGame.isRetry(command)) {
+          this.#bridgeGame.retry();
+          this.requestMoveDirection();
+        } else {
+          this.exitGame('실패');
+        }
+      } catch (errorMessage) {
+        printError(errorMessage);
+        this.requestGameCommand();
+      }
+    });
   }
 }
 
