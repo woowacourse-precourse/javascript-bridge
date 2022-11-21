@@ -13,6 +13,9 @@ const ERROR_MSG = {
 
 const PRINT_FINISH_MSG = "\n최종 게임 결과";
 
+const SUCCESS_OR_NOT = "게임 성공 여부: ";
+const COUNT_TRY = "\n총 시도한 횟수: ";
+
 const SUCCESS = "성공";
 const FAIL = "실패";
 
@@ -27,4 +30,6 @@ module.exports = {
   FAIL,
   SEPARATOR,
   CO_INPUT_UP,
+  SUCCESS_OR_NOT,
+  COUNT_TRY,
 };

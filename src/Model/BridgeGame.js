@@ -2,7 +2,6 @@ const RandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const BridgeMaker = require("../BridgeMaker");
 
 class BridgeGame {
-  static INPUT_UP = "U";
   #bridge = [];
 
   constructor() {

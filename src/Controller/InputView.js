@@ -54,8 +54,7 @@ const InputView = {
   },
 
   checkCrossTheBridgeCompletely(answer) {
-    GameController.makeMap(answer);
-    GameController.crossBridgeCompletely()
+    GameController.crossBridgeCompletely(answer)
       ? GameController.exitGame(true)
       : this.readMoving();
   },
