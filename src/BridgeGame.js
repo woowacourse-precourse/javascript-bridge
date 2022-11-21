@@ -5,9 +5,11 @@ const OutputView = require("./OutputView");
  */
 class BridgeGame {
   #bridge;
+  #currentBridge;
 
   constructor(bridge) {
     this.#bridge = bridge;
+    this.#currentBridge = [];
     this.step = 0;
     this.round = 1;
   }
@@ -26,9 +28,21 @@ class BridgeGame {
     return this.step;
   }
 
+  getRound() {
+    return this.round;
+  }
+
   addRound() {
     this.round += 1;
     return this.round;
+  }
+
+  getCurrentBridge() {
+    return this.#currentBridge;
+  }
+
+  resetCurrentBridge() {
+    this.#currentBridge = [];
   }
 
   /**
@@ -36,10 +50,7 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  // checkInputIsCorrect(inputAnswer, step) {
-  //   if (inputAnswer === this.#bridge[step]) return true;
-  //   return false;
-  // }
+
   checkInputIsCorrect(inputAnswer) {
     if (inputAnswer === this.#bridge[this.step]) return true;
     return false;
@@ -49,24 +60,21 @@ class BridgeGame {
     return step === size ? true : false;
   }
 
-  move(step, size) {
-    if (this.checkIsLastStep(step, size - 1)) {
-      OutputView.printMap(step, this.#bridge);
-      return true;
+  move(userInput) {
+    if (userInput === "U") {
+      this.#currentBridge.push(["U", "O"]);
     }
-    OutputView.printMap(step, this.#bridge);
-    return false;
+    if (userInput === "D") {
+      this.#currentBridge.push(["D", "O"]);
+    }
   }
 
-  move(answer, step, round, size) {
-    if (this.checkInputIsCorrect(answer, step)) {
-      OutputView.printMap(step, this.#bridge);
-      if (this.checkIsLastStep(step, size - 1)) {
-        OutputView.printResult("성공", round, step, this.#bridge);
-        return;
-      }
-      // InputView.readMoving(this.#bridge, size, step + 1, round);
-      return;
+  stop(userInput) {
+    if (userInput === "U") {
+      this.#currentBridge.push(["U", "X"]);
+    }
+    if (userInput === "D") {
+      this.#currentBridge.push(["D", "X"]);
     }
   }
 
