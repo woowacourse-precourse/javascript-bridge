@@ -16,6 +16,7 @@ const WORD = {
   NEW_LINE : "\n",
   LEFT_BRACKET : "[",
   RIGHT_BRACKET : "]",
+  BAR : "|"
 }
 
 const ERROR = {

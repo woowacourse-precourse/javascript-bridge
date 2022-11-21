@@ -14,8 +14,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(sketch) {
-    Console.print(`${WORD.LEFT_BRACKET} ${sketch[0]} ${WORD.RIGHT_BRACKET}`);
-    Console.print(`${WORD.LEFT_BRACKET} ${sketch[1]} ${WORD.RIGHT_BRACKET}${WORD.NEW_LINE}`);
+    const up = sketch[0].join(` ${WORD.BAR} `);
+    const down = sketch[1].join(` ${WORD.BAR} `);
+    Console.print(`${WORD.LEFT_BRACKET} ${up} ${WORD.RIGHT_BRACKET}`);
+    Console.print(`${WORD.LEFT_BRACKET} ${down} ${WORD.RIGHT_BRACKET}${WORD.NEW_LINE}`);
   },
 
   /**
