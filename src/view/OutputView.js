@@ -5,9 +5,9 @@ const OutputView = {
   upfloor: [],
   downfloor: [],
 
-  printMap(userUd, OX) {
+  printMap(userUd, inputOx) {
     OutputView.fillPrintMap(userUd, userUd.length - 1);
-    OutputView.fillMapLastUd(userUd[userUd.length - 1], OX);
+    OutputView.fillMapLastUd(userUd[userUd.length - 1], inputOx);
 
     Console.print(OutputView.fillEndMap());
 
@@ -21,9 +21,9 @@ const OutputView = {
     }
   },
 
-  fillMapLastUd(recentUd, OX) {
-    OutputView.upfloor.push(recentUd === 'U' ? OX : ' ');
-    OutputView.downfloor.push(recentUd === 'D' ? OX : ' ');
+  fillMapLastUd(recentUd, inputOx) {
+    OutputView.upfloor.push(recentUd === 'U' ? inputOx : ' ');
+    OutputView.downfloor.push(recentUd === 'D' ? inputOx : ' ');
   },
 
   fillEndMap() {
@@ -37,11 +37,17 @@ const OutputView = {
     OutputView.downfloor = [];
   },
 
-  printResult(userMove, OX) {
-    Console.print(MESSAGE.END_GAME);
-    OutputView.printMap(userMove, OX);
-    Console.print(MESSAGE.CHECK_ANSWER);
-    Console.print(MESSAGE.COUNT);
+  printResult(userUd, middleResult) {
+    Console.print(MESSAGE.FINAL);
+    if (middleResult === MESSAGE.SUCCESS) {
+      return OutputView.printMap(userUd, 'O');
+    }
+    return OutputView.printMap(userUd, 'X');
+  },
+
+  printFinalResult(count, middleResult) {
+    Console.print(`${MESSAGE.CHECK_ANSWER}${middleResult}`);
+    Console.print(`${MESSAGE.COUNT}${count}`);
     Console.close();
   },
 };
