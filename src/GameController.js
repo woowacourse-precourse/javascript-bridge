@@ -40,9 +40,9 @@ class GameController {
   }
 
   handleGameCommand({ command }) {
-    if (command === COMMAND.restart) {
+    if (command === COMMAND.RESTART) {
       this.handleRestart();
-    } else if (command === COMMAND.quit) {
+    } else if (command === COMMAND.QUIT) {
       this.handleQuit();
     }
   }

@@ -19,11 +19,11 @@ class Size extends Command {
 
   validate(size) {
     if (!/^[0-9]+$/.test(size)) {
-      throw new Error(ERROR.bridge_size_error);
+      throw new Error(ERROR.INVALID_BRIDGE_SIZE_ERROR);
     }
 
     if (size !== String(+size)) {
-      throw new Error(ERROR.bridge_size_error);
+      throw new Error(ERROR.INVALID_BRIDGE_SIZE_ERROR);
     }
   }
 }
@@ -31,15 +31,15 @@ class Size extends Command {
 class Moving extends Command {
   validate(moving) {
     if (moving !== MOVING.UP && moving !== MOVING.DOWN) {
-      throw new Error(ERROR.read_moving_error);
+      throw new Error(ERROR.INVALID_MOVING_ERROR);
     }
   }
 }
 
 class GameCommand extends Command {
   validate(gameCommand) {
-    if (gameCommand !== COMMAND.restart && gameCommand !== COMMAND.quit) {
-      throw new Error(ERROR.read_command_error);
+    if (gameCommand !== COMMAND.RESTART && gameCommand !== COMMAND.QUIT) {
+      throw new Error(ERROR.INVALID_COMMAND_ERROR);
     }
   }
 }

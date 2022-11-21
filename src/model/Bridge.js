@@ -13,8 +13,8 @@ class Bridge {
   }
 
   #validateSize(size) {
-    if (size < BRIDGE.min_size || size > BRIDGE.max_size) {
-      throw new Error(ERROR.bridge_size_error);
+    if (size < BRIDGE.MIN_SIZE || size > BRIDGE.MAX_SIZE) {
+      throw new Error(ERROR.INVALID_BRIDGE_SIZE_ERROR);
     }
   }
 
