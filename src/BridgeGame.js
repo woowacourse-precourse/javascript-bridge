@@ -4,7 +4,6 @@ const { Console } = require('@woowacourse/mission-utils');
  */
 class BridgeGame {
   #bridge;
-  #currentStep = 0;
 
   constructor(bridge) {
     this.#bridge = bridge;
@@ -15,12 +14,21 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(moving) {
-    if (moving === this.#bridge.charAt(this.#currentStep)) {
-      Console.print(true);
-    } else Console.print(false);
+  move(step, moving) {
+    const isMovable = moving === this.#bridge.charAt(step);
 
-    this.#currentStep += 1;
+    return isMovable;
+  }
+
+  getStepsSoFar(step) {
+    const previousSteps = this.#bridge.substr(0, step);
+    const currentStep = this.#bridge.charAt(step);
+    Console.print([previousSteps, currentStep]); //지워
+    return [previousSteps, currentStep];
+  }
+
+  getBridgeSize() {
+    return this.#bridge.length;
   }
 
   /**

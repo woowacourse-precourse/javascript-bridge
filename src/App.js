@@ -22,10 +22,12 @@ class App {
 
   cross(bridge) {
     const bridgeGame = new BridgeGame(bridge);
-    const bridgeSize = bridge.length;
-    for (let step = 0; step < bridgeSize; ++step) {
-      readMoving(bridgeGame);
-    }
+    Console.print(bridge); //지워
+    this.step(bridgeGame, 0);
+  }
+
+  step(bridgeGame, step) {
+    readMoving(bridgeGame, step, this);
   }
 }
 
