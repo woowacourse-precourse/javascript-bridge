@@ -17,16 +17,18 @@ describe('BridgeGame 테스트', () => {
 
   test('[move] 움직임 입력이 정상적으로 모델에 반영되는지 테스트', () => {
     // 조건
-    const testMove = 'U';
-    const correctInput = ['U'];
+    const testMove = ['U', 'U', 'D'];
+    const correctInput = [['U'], ['U', 'U'], ['U', 'U', 'D']];
 
-    // 실행
+    // 실행 및 평가
     const game = new BridgeGame();
-    game.move(testMove);
-    const expectInput = game.getStatus().Input;
 
-    // 평가
-    expect(expectInput).toEqual(correctInput);
+    testMove.forEach((move, index) => {
+      game.move(move);
+      const expectInput = game.getStatus().Input;
+      const correct = correctInput[index];
+      expect(expectInput).toEqual(correct);
+    });
   });
 
   test('[setMoveOutput] : isPassed값과 isCleard이 정상적으로 모델에 반영되는지 테스트', () => {
@@ -60,17 +62,19 @@ describe('BridgeGame 테스트', () => {
   test('[retry] : retry시 bridge의 데이터를 바꾸지 않고 정상적으로 시도 횟수를 증가시키는지 확인한다.', () => {
     // 조건
     const game = new BridgeGame();
-    game.initializeBridge(3);
+    const randomSize = Random.pickNumberInRange(3, 20);
+    game.initializeBridge(randomSize);
     const originalBridge = game.getStatus().bridge;
-    const correctCount = 2;
+    const randomCount = Random.pickNumberInRange(1, 5); // 1 ~ 5번 랜덤으로 retry를 실행하기 위해 필요한 count
+    const correctRetryCount = randomCount + 1;
 
     // 실행
-    game.retry();
+    for (let i = 0; i < randomCount; i += 1) game.retry();
     const expectBridge = game.getStatus().bridge;
     const expectCount = game.getStatus().count;
 
     // 평가
     expect(expectBridge).toBe(originalBridge);
-    expect(expectCount).toBe(correctCount);
+    expect(expectCount).toBe(correctRetryCount);
   });
 });
