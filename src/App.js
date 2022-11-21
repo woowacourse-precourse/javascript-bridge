@@ -56,7 +56,10 @@ class App {
       return;
     }
     readMoving((direction) => {
-      checkVaildMoveInput(direction);
+      if(checkVaildMoveInput(direction)===false){
+        this.repeatGame(bridgeGame);
+        return;
+      }
       printMap(
         returnCheckedMap(bridgeGame.bridge,bridgeGame.tempPosition,bridgeGame.move(direction))
       ),
