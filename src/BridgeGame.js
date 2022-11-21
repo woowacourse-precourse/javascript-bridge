@@ -1,3 +1,5 @@
+const { BRIDGE } = require('./constant');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -42,12 +44,16 @@ class BridgeGame {
 
   success(move) {
     this.#order += 1;
-    move === 'U' ? this.up('O') : this.down('O');
+    move === BRIDGE.UP
+      ? this.up(BRIDGE.CROSS_SUCCESS)
+      : this.down(BRIDGE.CROSS_SUCCESS);
   }
 
   fail(move) {
     this.#isPass = false;
-    move === 'U' ? this.up('X') : this.down('X');
+    move === BRIDGE.UP
+      ? this.up(BRIDGE.CROSS_FAIL)
+      : this.down(BRIDGE.CROSS_FAIL);
   }
 
   up(result) {

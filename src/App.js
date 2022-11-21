@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { GAME_MSG, SELECT } = require('./constant');
 
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
@@ -17,7 +18,7 @@ class App {
   }
 
   startGame() {
-    Console.print('다리 건너기 게임을 시작합니다.');
+    Console.print(GAME_MSG.START);
     this.getBridgeSize();
   }
 
@@ -87,8 +88,8 @@ class App {
 
   retryOrEnd(input) {
     this.checkretryOrEndInput(input);
-    if (input === 'R') return this.retryGame();
-    if (input === 'Q') return this.endGame();
+    if (input === SELECT.RETRY) return this.retryGame();
+    if (input === SELECT.QUIT) return this.endGame();
   }
 
   checkretryOrEndInput(input) {

@@ -1,3 +1,5 @@
+const { ERROR_MSG, SELECT, BRIDGE } = require('./constant');
+
 const Validate = {
   size(size) {
     const number = /^(0|[-]?[1-9]\d*)$/.test(size) || typeof size === 'number';
@@ -17,10 +19,8 @@ const Validate = {
   },
 
   retryOrEndInput(input) {
-    if (input !== 'R' && input !== 'Q') {
-      throw new Error(
-        '[ERROR] R(재시작)과 Q(종료) 중 하나의 문자를 입력해야 합니다.\n',
-      );
+    if (input !== SELECT.RETRY && input !== SELECT.QUIT) {
+      throw new Error(ERROR_MSG.ENTER_R_OR_Q);
     }
   },
 };

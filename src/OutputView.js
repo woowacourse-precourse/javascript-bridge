@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { GAME_RESULT, BRIDGE } = require('./constant');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -12,8 +13,8 @@ const OutputView = {
   printMap(map) {
     const [up, down] = map;
 
-    Console.print('[ ' + up.join(' | ') + ' ]');
-    Console.print('[ ' + down.join(' | ') + ' ]');
+    Console.print(BRIDGE.START + up.join(BRIDGE.SEPARATE) + BRIDGE.END);
+    Console.print(BRIDGE.START + down.join(BRIDGE.SEPARATE) + BRIDGE.END);
     Console.print('');
   },
 
@@ -29,13 +30,13 @@ const OutputView = {
 
   finalResultText(bridge, result) {
     const [up, down] = bridge;
-    const pass = result.isPass ? '성공' : '실패';
+    const pass = result.isPass ? GAME_RESULT.SUCCESS : GAME_RESULT.FAIL;
 
-    Console.print('최종 게임 결과');
-    Console.print('[ ' + up.join(' | ') + ' ]');
-    Console.print('[ ' + down.join(' | ') + ' ]');
-    Console.print(`\n게임 성공 여부: ${pass}`);
-    Console.print(`총 시도한 횟수: ${result.try}`);
+    Console.print(GAME_RESULT.FINAL_RESULT);
+    Console.print(BRIDGE.START + up.join(BRIDGE.SEPARATE) + BRIDGE.END);
+    Console.print(BRIDGE.START + down.join(BRIDGE.SEPARATE) + BRIDGE.END);
+    Console.print(GAME_RESULT.IS_PASS + `${pass}`);
+    Console.print(GAME_RESULT.TRY_COUNT + `${result.try}`);
   },
 };
 
