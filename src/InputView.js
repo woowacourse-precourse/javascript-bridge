@@ -19,7 +19,6 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(USER_INPUT.ENTER_LENGTH, (size) => {
       const bridgeList = makeBridge(size, generate);
-      // console.log(bridgeList);
       InputView.readMoving(bridgeList);
     });
   },
@@ -36,16 +35,17 @@ const InputView = {
 
   repeatMoving(bridgeList, result) {
     const [upList, downList, tryNum] = result;
-    const upAndDown = ['[ ' + upList.join(' | ') + ' ]', '[ ' + downList.join(' | ') + ' ]'];
-    OutputView.printMap(upAndDown);
+    const upAndDownList = [upList, downList];
+    OutputView.printMap(upAndDownList);
+
     if([upList[upList.length-1], downList[downList.length-1]].includes('X')) {
-      this.readGameCommand(upAndDown, bridgeList);
+      this.readGameCommand(upAndDownList, bridgeList);
     }
     else {
       if(tryNum < bridgeList.length) {
         this.readMoving(bridgeList);
       } else {
-        printResult(upAndDown, this.retryNum, this.isSuccess);
+        printResult(upAndDownList, this.retryNum, this.isSuccess);
       }
     }
   },
@@ -53,7 +53,7 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(upAndDown, bridgeList) {
+  readGameCommand(upAndDownList, bridgeList) {
     Console.readLine(RETRY, (retryOrQuit) => {
       if(retryOrQuit === 'R') {
         this.bridgeGame.retry();
@@ -61,7 +61,7 @@ const InputView = {
         InputView.readMoving(bridgeList);
       } else if(retryOrQuit === 'Q') {
           this.isSuccess = END_GAME.FAILED;
-          printResult(upAndDown, this.retryNum, this.isSuccess);
+          printResult(upAndDownList, this.retryNum, this.isSuccess);
       }
     })
   },
