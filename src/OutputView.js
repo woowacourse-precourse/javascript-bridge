@@ -37,6 +37,10 @@ const OutputView = {
   printGreeting() {
     Console.print(OutputView.GREETING);
   },
+
+  printError(error) {
+    Console.print(error.message);
+  },
 };
 
 module.exports = OutputView;

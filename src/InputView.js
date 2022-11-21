@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const OutputView = require('./OutputView');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -16,7 +17,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    Console.readLine(InputView.BRIDGE_SIZE, callback);
+    InputView.question(InputView.BRIDGE_SIZE, callback, InputView.validateSize);
   },
 
   validateSize(size) {
@@ -33,7 +34,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(callback) {
-    Console.readLine(InputView.MOVING, callback);
+    InputView.question(InputView.MOVING, callback, InputView.validateMoving);
   },
 
   validateMoving(moving) {
@@ -46,13 +47,25 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(callback) {
-    Console.readLine(InputView.GAME_COMMAND, callback);
+    InputView.question(InputView.GAME_COMMAND, callback, InputView.validateCommand);
   },
 
   validateCommand(command) {
     if (command !== InputView.RETRY && command !== InputView.QUIT) {
       throw new Error('[ERROR] R과 Q만 입력 가능합니다.');
     }
+  },
+
+  question(string, callback, validateFn) {
+    Console.readLine(string, (input) => {
+      try {
+        validateFn(input);
+        callback(input);
+      } catch (error) {
+        OutputView.printError(error);
+        InputView.question(string, callback, validateFn);
+      }
+    });
   },
 };
 
