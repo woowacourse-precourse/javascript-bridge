@@ -3,7 +3,7 @@
 ## Model(Domain) 로직
 
 ### BridgeMaker 로직
-- [x] 입력 받은 다리 길이로 다리를 생성한다. - BridgeMaker#makeBridge()
+- [x] 입력 받은 다리 길이로 다리를 생성한다. - BridgeMaker#makeBridge() -> ApplicationTest에서 다리생성 테스트를 한다.
 
 ### BridgeGame 로직 
 - [x] 입력 받은 이동할 칸과 다리를 비교한다. - BridgeGame#match()
