@@ -1,4 +1,3 @@
-const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const OutputView = require("../view/OutputView");
 const InputView = require("../view/InputView");
 const Validation = require("../utils/Validation");
@@ -8,14 +7,14 @@ const {
   RETRY_FN,
   PLAYER_STATE_FN,
   PLAYER_STATE,
-} = require("./stringsPresenter");
+} = require("./constantsPresenter");
 const BridgeGame = require("../model/BridgeGame");
 
 class Presenter {
-  bridgeGameModel;
+  #bridgeGameModel;
 
   constructor() {
-    this.bridgeGameModel = new BridgeGame(this);
+    this.#bridgeGameModel = new BridgeGame(this);
   }
 
   init() {
@@ -39,18 +38,18 @@ class Presenter {
   //INPUT_TRY_FN
   createBridge(size) {
     OutputView.printLineBreak();
-    this.bridgeGameModel.createBridgeModel(size);
+    this.#bridgeGameModel.createBridgeModel(size);
   }
 
   checkmove(selectedMove) {
-    this.bridgeGameModel.move(selectedMove);
+    this.#bridgeGameModel.move(selectedMove);
   }
 
   checkRetryInput(retry) {
     RETRY_FN[retry](this);
   }
 
-  // Control View
+  // Control InputView
   handleInput(input, InputType) {
     try {
       Validation[InputType](input);
@@ -63,23 +62,23 @@ class Presenter {
 
   // Control Model
   createPlayerMap() {
-    const playerMap = this.bridgeGameModel.playerModel.getBridgeMap();
+    const playerMap = this.#bridgeGameModel.getPlayerBridgeMap();
     OutputView.printMap(playerMap);
     this.checkContinueMove();
   }
 
   checkContinueMove() {
-    const playerState = this.bridgeGameModel.getPlayerState();
+    const playerState = this.#bridgeGameModel.getPlayerState();
     PLAYER_STATE_FN[playerState](this);
   }
 
   quit() {
     const isSuccess =
-      this.bridgeGameModel.getPlayerState() === PLAYER_STATE.SUCCESS;
+      this.#bridgeGameModel.getPlayerState() === PLAYER_STATE.SUCCESS;
     OutputView.printResult({
-      resultMap: this.bridgeGameModel.playerModel.getBridgeMap(),
+      resultMap: this.#bridgeGameModel.getPlayerBridgeMap(),
       isSuccess,
-      totalTrial: this.bridgeGameModel.playerModel.getTotalTrial(),
+      totalTrial: this.#bridgeGameModel.getPlayerTotalTrial(),
     });
   }
 }

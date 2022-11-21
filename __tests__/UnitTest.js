@@ -1,7 +1,7 @@
 const {
   createPlayerState,
   PLAYER_STATE,
-} = require("../src/presenter/stringsPresenter");
+} = require("../src/presenter/constantsPresenter");
 
 describe("Player State 테스트", () => {
   test.only("Player State 생성 테스트", () => {

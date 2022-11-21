@@ -1,54 +1,59 @@
 const { MAP } = require("./view/stringsUI");
 
 class MapMaker {
-  upperBridge;
+  #upperBridge;
 
-  lowerBridge;
+  #lowerBridge;
 
   constructor(playerArr) {
-    this.upperBridge = [];
-    this.lowerBridge = [];
+    this.#upperBridge = [];
+    this.#lowerBridge = [];
     this.createMap(playerArr);
   }
 
   createMap(playerArr) {
     playerArr.forEach((playerAction, index) => {
       this.divideBridge(index);
-      this.createBridgeMap(playerAction);
+      this.handlePlayerAction(playerAction);
     });
     this.wrapBridge();
-    return this.returnBridge();
+    return this.getBridge();
   }
 
-  createBridgeMap({ selectedMove, isCrossBridge }) {
+  handlePlayerAction({ selectedMove, isCrossBridge }) {
     if (selectedMove === MAP.UPPER) {
-      this.upperBridge.push(MAP[isCrossBridge]);
-      this.lowerBridge.push(MAP.NONE);
+      this.#upperBridge.push(MAP[isCrossBridge]);
+      this.#lowerBridge.push(MAP.NONE);
     } else {
-      this.lowerBridge.push(MAP[isCrossBridge]);
-      this.upperBridge.push(MAP.NONE);
+      this.#lowerBridge.push(MAP[isCrossBridge]);
+      this.#upperBridge.push(MAP.NONE);
     }
   }
 
   divideBridge(index) {
     if (index > 0) {
-      this.upperBridge.push(MAP.DIVIDER);
-      this.lowerBridge.push(MAP.DIVIDER);
+      this.#upperBridge.push(MAP.DIVIDER);
+      this.#lowerBridge.push(MAP.DIVIDER);
     }
   }
 
   wrapBridge() {
-    this.upperBridge.unshift(MAP.WRAPPER_LEFT);
-    this.upperBridge.push(MAP.WRAPPER_RIGHT);
-    this.lowerBridge.unshift(MAP.WRAPPER_LEFT);
-    this.lowerBridge.push(MAP.WRAPPER_RIGHT);
+    this.#upperBridge.unshift(MAP.WRAPPER_LEFT);
+    this.#upperBridge.push(MAP.WRAPPER_RIGHT);
+    this.#lowerBridge.unshift(MAP.WRAPPER_LEFT);
+    this.#lowerBridge.push(MAP.WRAPPER_RIGHT);
   }
 
-  returnBridge() {
+  getBridge() {
     return {
-      upperBridge: this.upperBridge,
-      lowerBridge: this.lowerBridge,
+      upperBridge: this.#upperBridge,
+      lowerBridge: this.#lowerBridge,
     };
+  }
+
+  resetBridge() {
+    this.#upperBridge = [];
+    this.#lowerBridge = [];
   }
 }
 

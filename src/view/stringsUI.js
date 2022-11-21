@@ -29,10 +29,7 @@ const BRIDGE = {
   1: "U",
   0: "D",
 };
-const MOVING = {
-  U: 1,
-  D: 0,
-};
+
 const MAP = {
   UPPER: "U",
   LOWER: "L",
@@ -44,17 +41,10 @@ const MAP = {
   NONE: " ",
 };
 
-const RETRY = {
-  R: true,
-  Q: false,
-};
-
 module.exports = {
   INPUT,
   INPUT_TYPE,
   OUTPUT,
   BRIDGE,
-  MOVING,
   MAP,
-  RETRY,
 };
