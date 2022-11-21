@@ -11,14 +11,14 @@ const BridgeResult = require("./BridgeResult");
 class BridgeGame {
   bridge;
   idx;
-  result;
-  try;
+  gameResult;
+  tryNum;
 
   constructor(size) {
     this.validate(size);
     this.bridge = makeBridge(size, generate);
     this.idx = 0;
-    this.try = 1;
+    this.tryNum = 1;
   }
 
   validate(size) {
@@ -48,8 +48,8 @@ class BridgeGame {
   move(input) {
     this.moveValidate(input);
     const isPossible = this.isPossibleMove(this.idx, input);
-    this.result = new BridgeResult(this.bridge, this.idx, isPossible);
-    this.result.printMiddleResult();
+    this.gameResult = new BridgeResult(this.bridge, this.idx, isPossible);
+    this.gameResult.printResult();
     this.idx += 1;
     return isPossible;
   }
@@ -61,7 +61,7 @@ class BridgeGame {
    */
   retry() {
     this.idx = 0;
-    this.try += 1;
+    this.tryNum += 1;
   }
 
   isEnd() {
