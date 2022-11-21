@@ -1,6 +1,5 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+const OutputView = require("./OutputView");
+
 class BridgeGame {
   #bridge;
   #moveCount = 0;
@@ -11,6 +10,14 @@ class BridgeGame {
 
   constructor(bridge) {
     this.#bridge = bridge;
+    this.outputView = OutputView;
+  }
+
+  move(playerInput) {
+    this.#playerInput = playerInput;
+    this.nowBridgeState();
+    this.outputView.printMap([this.#nowUpBridge, this.#nowDownBridge]);
+    this.#moveCount++;
   }
 
   haveBridge() {
