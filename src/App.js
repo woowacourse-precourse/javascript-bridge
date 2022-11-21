@@ -39,50 +39,46 @@ class App {
     } catch (error) {
       Console.print(error);
       InputView.readMoving(this.requestMoveUpOrDown.bind(this));
+      return;
     }
 
     OutputView.printGameProgress(this.BridgeGame.getPosition(), this.BridgeGame.getBridge(), answer);
-
-    const isCorrect = this.BridgeGame.isCorrect(answer, this.BridgeGame.getBridge());
-
-    if (isCorrect) {
-      this.BridgeGame.move();
-
-      if (this.BridgeGame.getBridge().length === this.BridgeGame.getPosition()) {
-        OutputView.printGameResult(answer, this.tryTimes);
-        this.shutDown();
-        return;
-      }
-
-      InputView.readMoving(this.requestMoveUpOrDown.bind(this));
-    }
-
-    if (!isCorrect) {
-      InputView.readGameCommand(this.handleRetry.bind(this));
-    }
+    this.gameProgress(answer);
   }
 
-  handleRetry(answer) {
+  gameProgress(answer) {
+    if (this.BridgeGame.isCorrect(answer)) {
+      this.BridgeGame.move();
+
+      if (this.BridgeGame.getBridge().length === this.BridgeGame.getPosition()) return this.closeGame(answer);
+
+      InputView.readMoving(this.requestMoveUpOrDown.bind(this));
+      return;
+    }
+
+    InputView.readGameCommand(this.handleReadGameCommand.bind(this));
+  }
+
+  handleReadGameCommand(answer) {
     try {
       validateRetryCommand(answer);
     } catch (error) {
       Console.print(error);
-      InputView.readGameCommand(this.handleRetry.bind(this));
+      return InputView.readGameCommand(this.handleReadGameCommand.bind(this));
     }
 
-    if (answer === BRIDGE.KEYWORDS.RETRY) {
-      this.tryTimes++;
-      this.BridgeGame.retry();
-      InputView.readMoving(this.requestMoveUpOrDown.bind(this));
-    }
-
-    if (answer === BRIDGE.KEYWORDS.QUIT) {
-      OutputView.printGameResult(answer, this.tryTimes);
-      this.shutDown();
-    }
+    if (answer === BRIDGE.KEYWORDS.RETRY) return this.onRetry();
+    if (answer === BRIDGE.KEYWORDS.QUIT) return this.closeGame(answer);
   }
 
-  shutDown() {
+  onRetry() {
+    this.tryTimes++;
+    this.BridgeGame.retry();
+    InputView.readMoving(this.requestMoveUpOrDown.bind(this));
+  }
+
+  closeGame(answer) {
+    OutputView.printGameResult(answer, this.tryTimes);
     Console.close();
   }
 }
