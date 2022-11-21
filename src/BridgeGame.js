@@ -32,10 +32,23 @@ class BridgeGame {
     this.#firstRow.push(']');
     this.#secondRow.push(']');
   }
-
   
   getSpace() {
     this.gameManager.inputMovingSpace(this.move.bind(this));
+    this.checkSpace(bridgeSpace, userSelectSpace);
+  }
+
+  checkSpace(bridge, user) {
+    if (bridge === user && 'U' === user) this.addResultInRow(0,' ');
+    if (bridge === user && 'D' === user) this.addResultInRow(' ', 0);
+    if (bridge !== user && bridge === 'U') this.addResultInRow(' ', 'X');
+    if (bridge !== user && bridge === 'D') this.addResultInRow('X', ' ');
+    this.closeBridgeRow();
+  }
+
+  addResultInRow(a, b) {
+    this.#firstRow.push(a);
+    this.#secondRow.push(b);
   }
 
 }
