@@ -3,7 +3,7 @@ const { BRIDGE_SHAPE } = require("./constants");
 
 const OutputView = {
   printStart() {
-    Console.print("다리 건너기 게임을 시작합니다.");
+    Console.print("다리 건너기 게임을 시작합니다.\n");
   },
 
   printMap(upLineOfBridge, downLineOfBridge) {
