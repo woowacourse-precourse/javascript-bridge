@@ -13,8 +13,7 @@ const OutputView = {
     const bridgeUpside = [];
     const bridgeDownside = [];
     const CurrentRound = userInputArray.length;
-    bridgeUpside.push('[ ');
-    bridgeDownside.push('[ ');
+    this.addLeftBracket(bridgeUpside, bridgeDownside);
     for (let i = 0; i < CurrentRound; i++) {
       if (bridgeInfoArray[i] === 1) {
         if (userInputArray[i] === 1) {
@@ -36,13 +35,10 @@ const OutputView = {
           bridgeDownside.push('O');
         }
       }
-      bridgeUpside.push(' | ');
-      bridgeDownside.push(' | ');
+      this.addDivision(bridgeUpside, bridgeDownside);
     }
-    bridgeUpside.pop();
-    bridgeDownside.pop();
-    bridgeUpside.push(' ]');
-    bridgeDownside.push(' ]');
+    this.deleteItem(bridgeUpside, bridgeDownside);
+    this.addRightBracket(bridgeUpside, bridgeDownside);
     Print.BothBridge(bridgeUpside, bridgeDownside);
   },
 
@@ -52,6 +48,23 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult() {},
+
+  addLeftBracket(upside, downside) {
+    upside.push('[ ');
+    downside.push('[ ');
+  },
+  addRightBracket(upside, downside) {
+    upside.push(' ]');
+    downside.push(' ]');
+  },
+  addDivision(upside, downside) {
+    upside.push(' | ');
+    downside.push(' | ');
+  },
+  deleteItem(upside, downside) {
+    upside.pop();
+    downside.pop();
+  },
 };
 
 module.exports = OutputView;
