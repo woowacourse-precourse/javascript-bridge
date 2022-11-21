@@ -21,40 +21,52 @@ class BridgeGameController {
     return callback();
   }
 
+  setUserBridgeSize(size, resolve) {
+    try {
+      const sizeInput = Number(size);
+      checkSizeInRange(sizeInput);
+      this.#model.setBridgeSize(sizeInput);
+      resolve();
+    } catch (error) {
+      this.controlException(error, () => this.readUserBridgeSize(resolve));
+    }
+  }
+
   readUserBridgeSize(resolve) {
     readBridgeSize((size) => {
-      try {
-        const sizeInput = Number(size);
-        checkSizeInRange(sizeInput);
-        this.#model.setBridgeSize(sizeInput);
-        resolve();
-      } catch (error) {
-        this.controlException(error, () => this.readUserBridgeSize(resolve));
-      }
+      this.setUserBridgeSize(size, resolve);
     });
+  }
+
+  setUserMoving(step, resolve) {
+    try {
+      checkUserMove(step);
+      this.#model.setUserMove(step);
+      resolve();
+    } catch (error) {
+      this.controlException(error, () => this.readUserMoving(resolve));
+    }
   }
 
   readUserMoving(resolve) {
     readMoving((step) => {
-      try {
-        checkUserMove(step);
-        this.#model.setUserMove(step);
-        resolve();
-      } catch (error) {
-        this.controlException(error, () => this.readUserMoving(resolve));
-      }
+      this.setUserMoving(step, resolve);
     });
+  }
+
+  setUserCommand(command, resolve) {
+    try {
+      checkUserCommand(command);
+      this.#model.setCommand(command);
+      resolve();
+    } catch (error) {
+      this.controlException(error, () => this.readUserCommand(resolve));
+    }
   }
 
   readUserCommand(resolve) {
     readGameCommand((command) => {
-      try {
-        checkUserCommand(command);
-        this.#model.setCommand(command);
-        resolve();
-      } catch (error) {
-        this.controlException(error, () => this.readUserCommand(resolve));
-      }
+      this.setUserCommand(command, resolve);
     });
   }
 
