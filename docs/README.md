@@ -63,6 +63,7 @@
     - [x] 배열을 받고 다리를 생성함
     - [x] 다리의 배열을 반환하는 기능
     - [x] 다리의 처음 부터 포지션 까지의 배열을 반환하는 기능
+    - [x] 다리의 길이를 반환하는 기능
 
   - [x] 다리 생성기 #BridgeCreator
 
@@ -78,17 +79,19 @@
 
     - [x] 플레이어가 다리를 만드는 기능#playerInputBridgeSize()
 
-    - [] 플레이어가 위 아래 선택해서 전진하는 기능 #playerInputBridgeDirection()
+    - [x] 플레이어가 위 아래 선택해서 전진하는 기능 #playerInputBridgeDirection()
+    - [x] 플레이어가 전진하고 결과를 처리하는 기능 #playerGoBridgeNext()
 
     - [ ] 플레이어가 게임을 재시작 여부를 정하는 기능 #playerInputCommandBridgeRetry()
 
-  - [ ] 다리건너기 게임의 다리 출력 모양을 계산하는 객체 #BridgeGameShape
+  - [x] 다리건너기 게임의 다리 출력 모양을 계산하는 객체 #BridgeGameShape
 
-    - [ ] 다리건너기 게임의 중간 결과를 문자열로 반환하는 기능#getCurrentBridgeGameShape
+    - [x] 다리건너기 게임의 중간 결과를 문자열로 반환하는 기능#getCurrentBridgeGameShape
     - [x] 다리 위쪽 모양을 만드는 기능#makeUpShape
     - [x] 다리 위쪽 결과 포함하는 모양 문자열을 만드는 기능#upBridgeShapeWithResult
     - [x] 다리 아래쪽 모양을 만드는 기능#makeDownShape
     - [x] 다리 아래쪽 결과 포함하는 모양 문자열을 만드는 기능#downBridgeShapeWithResult
+    - [x] 다리 현재 모양을 반환하는 기능#getCurrentShape
 
   - [ ] 다리 건너기 게임 #BridgeGame
 
