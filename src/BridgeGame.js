@@ -7,7 +7,9 @@ const BridgeMaker = require('./BridgeMaker');
 class BridgeGame {
   count = 1;
   result = '성공';
-  //bridge = BridgeMaker.makeBridge();
+  bridge = BridgeMaker.makeBridge();
+  userStep = [];
+  matchMap = [];
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -15,18 +17,21 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move() {
-    const matching = this.match();
-    const userStep = matching[0];
-    const matchMap = matching[1];
     let upBridge = [];
     let downBridge = [];
-    for (let i = 0; i < userStep.length; i++) {
-      if (userStep[i] === 'U' && (matchMap[i] === 'O' || matchMap[i] === 'X')) {
-        upBridge.push(matchMap[i]);
+    for (let i = 0; i < this.userStep.length; i++) {
+      if (
+        this.userStep[i] === 'U' &&
+        (this.matchMap[i] === 'O' || this.matchMap[i] === 'X')
+      ) {
+        upBridge.push(this.matchMap[i]);
         downBridge.push(' ');
       }
-      if (userStep[i] === 'D' && (matchMap[i] === 'O' || matchMap[i] === 'X')) {
-        downBridge.push(matchMap[i]);
+      if (
+        this.userStep[i] === 'D' &&
+        (this.matchMap[i] === 'O' || this.matchMap[i] === 'X')
+      ) {
+        downBridge.push(this.matchMap[i]);
         upBridge.push(' ');
       }
     }
@@ -35,17 +40,14 @@ class BridgeGame {
 
   // 일단 O인지 X인지 거르기
   match(bridge, userMoving) {
-    let matchMap = [];
-    let userStep = [];
-    userStep.push(userMoving);
-    for (let i = 0; i < userStep.length; i++) {
-      if (bridge[i] === userStep[i]) {
-        matchMap.push('O');
+    this.userStep.push(userMoving);
+    for (let i = 0; i < this.userStep.length; i++) {
+      if (this.bridge[i] === this.userStep[i]) {
+        this.matchMap.push('O');
       }
-      matchMap.push('X');
+      this.matchMap.push('X');
       this.notMatched();
     }
-    return [userStep, matchMap];
   }
 
   /**
