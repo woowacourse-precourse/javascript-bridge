@@ -1,4 +1,5 @@
-const { OUTPUT_FORMAT, INPUT_FORMAT } = require('./constants');
+const { OUTPUT_FORMAT, INPUT_FORMAT, MESSAGE } = require('./constants');
+const OutputView = require('./OutputView');
 
 class GameResult {
   #resultMap;
@@ -36,41 +37,37 @@ class GameResult {
     return this.getAsArray().findIndex(([, value]) => !value.player);
   }
 
-  // 리팩토링 사항ㅜㅜㅜ
+  printHistory() {
+    const result = this.makeHistory();
+    OutputView.printMap(result);
+  }
+
   makeHistory() {
     const history = this.getAsArray().filter(([, value]) => value.player);
-    const [upside, downside] = Array.from({ length: 2 }, () => []);
+    const sides = Array.from({ length: 2 }, () => []);
 
     for (let i = 0; i < history.length; i++) {
       const [up, down] = this.makeHistoryLine(history[i][1]);
-      // const { machine, player } = history[i][1];
-      // const [selected, notSeleted] = [
-      //   machine === player ? OUTPUT_FORMAT.MATCH : OUTPUT_FORMAT.UNMATCH,
-      //   OUTPUT_FORMAT.NOT_SELECTED,
-      // ];
-      // const [up, down] = player === INPUT_FORMAT.UPSIDE ? [selected, notSeleted] : [notSeleted, selected];
 
-      upside.push(up);
-      downside.push(down);
+      sides[0].push(up);
+      sides[1].push(down);
     }
 
-    return [upside, downside];
+    return sides;
   }
 
   makeHistoryLine(value) {
     const { machine, player } = value;
-    const [selected, notSeleted] = [
-      machine === player ? OUTPUT_FORMAT.MATCH : OUTPUT_FORMAT.UNMATCH,
-      OUTPUT_FORMAT.NOT_SELECTED,
-    ];
-    const [up, down] = player === INPUT_FORMAT.UPSIDE ? [selected, notSeleted] : [notSeleted, selected];
+    const selected = machine === player ? OUTPUT_FORMAT.MATCH : OUTPUT_FORMAT.UNMATCH;
+    const notSelected = OUTPUT_FORMAT.NOT_SELECTED;
+
+    const [up, down] = player === INPUT_FORMAT.UPSIDE ? [selected, notSelected] : [notSelected, selected];
 
     return [up, down];
   }
 
-  // getter 줄일 것
-  getTryCount() {
-    return this.#tryCount;
+  printTryCount() {
+    OutputView.printMessage(`${MESSAGE.TRY_COUNT}${this.#tryCount}`);
   }
 
   clear() {
