@@ -1,10 +1,10 @@
 const BridgeGame = require('../model/BridgeGame.js');
+const Bridge = require('../model/Bridge.js');
+const StepResult = require('../model/StepResult.js');
 const InputView = require('../view/InputView.js');
 const OutputView = require('../view/OutputView.js');
 const BridgeMaker = require('../BridgeMaker.js');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator.js');
-const Bridge = require('../model/Bridge.js');
-const StepResult = require('../model/StepResult.js');
 
 class BridgeGameController {
   constructor() {
