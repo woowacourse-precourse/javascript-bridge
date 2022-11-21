@@ -67,8 +67,7 @@ const InputView = {
 
   isFinish(bridgeGame) {
     if ((bridgeGame.realBridge[0].length === this.size
-      && bridgeGame.realBridge[0][bridgeGame.realBridge[0].length - 1]
-        === 'O')
+      && bridgeGame.realBridge[0][bridgeGame.realBridge[0].length - 1] === 'O')
     || (bridgeGame.realBridge[0].length === this.size
       && bridgeGame.realBridge[1][bridgeGame.realBridge[1].length - 1] === 'O')
     ) {
@@ -126,7 +125,7 @@ const InputView = {
     }
   },
 
-  moveValidate2(move) {
+  movingValidate(move) {
     try {
       if (![BUTTON.UP, BUTTON.DOWN].includes(move)) {
         throw new Error(ERROR.MOVE);
@@ -139,7 +138,7 @@ const InputView = {
   printBridge(bridgeGame) {
     MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (answer) => {
       const move = answer;
-      this.moveValidate2(move);
+      this.movingValidate(move);
       bridgeGame.moveIsWhat(move);
       bridgeGame.realBridge.map((x) => MissionUtils.Console.print(`[ ${x.join(' | ')} ]`));
       this.checkBridge(bridgeGame);
@@ -150,7 +149,7 @@ const InputView = {
     this.count += 1;
     MissionUtils.Console.readLine(MESSAGE.INPUT_MOVE, (inputMove) => {
       const move = inputMove;
-      this.moveValidate2(move);
+      this.movingValidate(move);
       bridgeGame.retry(move);
       bridgeGame.realBridge.map((x) => MissionUtils.Console.print(`[ ${x.join(' | ')} ]`));
       this.checkBridge(bridgeGame);
