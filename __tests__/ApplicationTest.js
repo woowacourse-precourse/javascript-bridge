@@ -143,6 +143,7 @@ describe('다리 건너기 테스트', () => {
   });
 
   const runInvalidMovingException = (inputs) => {
+    mockRandoms([1, 0, 1]);
     mockQuestions(inputs);
     const logSpy = getLogSpy();
     const app = new App();
