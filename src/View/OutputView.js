@@ -21,7 +21,14 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(map, isSuccess, attempt) {
+    Console.print(PRINT_MESSAGE.RESULT);
+    Console.print(PRINT_MESSAGE.MAP(map[0], map[1]));
+    Console.print(PRINT_MESSAGE.IS_SUCCESS(isSuccess));
+    Console.print(PRINT_MESSAGE.ATTEMPT(attempt));
+    Console.close();
+  },
+
   printErrorMessage(error) {
     Console.print(error);
   },
