@@ -21,6 +21,14 @@ class App {
       );
       this.bridgeGame.setBridge(bridge);
       console.log(this.bridgeGame.bridge);
+      this.pushSpace();
+    });
+  };
+
+  pushSpace = () => {
+    InputView.readMoving((space) => {
+      this.bridgeGame.pushSpace(space);
+      console.log(this.bridgeGame.userSpaces);
     });
   };
 }
