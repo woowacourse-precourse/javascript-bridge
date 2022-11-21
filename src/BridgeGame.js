@@ -11,7 +11,7 @@ class BridgeGame {
   #attempts;
 
   constructor() {
-    this.#attempts = 0;
+    this.#attempts = 1;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -34,8 +34,9 @@ class BridgeGame {
   #moveCorretly(direction, bridge) {
     this.#bridgeHistory.push(direction);
     OutputView.printMap(this.#bridgeHistory);
-    if (this.#bridgeHistory.length === bridge.length) this.#gameSet('성공');
-    this.move(bridge);
+    if (this.#bridgeHistory.length === bridge.length)
+      OutputView.printResult('성공', this.#bridgeHistory, this.#attempts);
+    else this.move(bridge);
   }
 
   #moveIncorrectly(direction, bridge) {
@@ -53,19 +54,16 @@ class BridgeGame {
       InputView.readGameCommand(re);
       if (re === 'R') {
         this.#attempts++;
-        this.move(bridge, direction);
+        this.move(bridge);
       } else {
-        Console.print('최종 게임 결과');
-
-        this.#gameSet('실패');
+        OutputView.printResult(
+          '실패',
+          this.#bridgeHistory,
+          this.#attempts,
+          direction,
+        );
       }
     });
-  }
-
-  #gameSet(isSuccess) {
-    Console.print(`게임 성공 여부: ${isSuccess}`);
-    Console.print(`총 시도한 횟수: ${this.#attempts}`);
-    Console.close();
   }
 }
 
