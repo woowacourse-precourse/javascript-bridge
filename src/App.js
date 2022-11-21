@@ -38,7 +38,7 @@ class App {
       this.bridgeGame.move(moveInput);
       const moveInputArray = this.bridgeGame.getMoveInputArray();
       // moveInputArray 이용해서 printMap 그리기
-      OutputView.printGuide(this.bridgeGame.getBridge());
+      // OutputView.printGuide(this.bridgeGame.getBridge());
       OutputView.printMap(moveInputArray);
       // OutputView.printGuide(moveInputArray.length);
       if (moveInputArray.slice(-1)[0].isRightDirect === true) {
@@ -87,9 +87,23 @@ class App {
     tryAgainFunc.call(this);
   }
 
+  isSuccess(moveInputArray) {
+    if (
+      moveInputArray.slice(-1)[0].isRightDirect === true &&
+      moveInputArray.length === this.bridgeGame.getBridgeLength()
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   quit() {
     // 결과 출력 후 종료.
-    OutputView.printResult();
+    // map,성공여부,시도 횟수
+    const moveInputArray = this.bridgeGame.getMoveInputArray();
+    const isSuccess = this.isSuccess(moveInputArray);
+    const gameCount = this.bridgeGame.getGameCount();
+    OutputView.printResult(moveInputArray, isSuccess, gameCount);
     Console.close();
   }
 }
