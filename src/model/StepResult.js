@@ -11,10 +11,10 @@ class StepResult {
   wrongStepRecord(move) {
     switch (move) {
       case 'U':
-        stepResult.insert(' X ', '   ');
+        this.insert(' X ', '   ');
         break;
       case 'D':
-        stepResult.insert('   ', ' X ');
+        this.insert('   ', ' X ');
         break;
     }
   }
@@ -22,10 +22,10 @@ class StepResult {
   correctStepRecord(move) {
     switch (move) {
       case 'U':
-        stepResult.insert(' O ', '   ');
+        this.insert(' O ', '   ');
         break;
       case 'D':
-        stepResult.insert('   ', ' O ');
+        this.insert('   ', ' O ');
         break;
     }
   }
