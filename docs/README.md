@@ -127,5 +127,6 @@ GameController 클래스의 입력값 전달 전 단계에 실행하여
 - [x] BridgeMaker 객체 테스트 완료
 - [x] Validation 클래스 테스트 완료
 - [x] BridgeGame 클래스 테스트 완료
+- [x] Bridge 클래스 테스트 완료
 
 - [x] `Application 테스트 완료`
