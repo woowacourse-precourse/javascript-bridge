@@ -11,7 +11,7 @@ class WinningBridge {
     Validation.checkRange(size);
   }
 
-  makeWinningBridge(size) {
+  makeBridge(size) {
     this.#winningBridge = BridgeMaker.makeBridge(
       size,
       BridgeRandomNumberGenerator.generate
