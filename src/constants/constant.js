@@ -18,4 +18,11 @@ const ERR_MESSAGE = {
 };
 
 const COMMAND_VALUE = {};
-module.exports = { MESSAGE, ERR_MESSAGE };
+const GAME_RESOURCE = {
+  LEFT_BRACKET: "[ ",
+  RIGHT_BRACKET: " ]",
+  CENTER_VERTICAL: " | ",
+  CAN_GO: "O",
+  CANT_GO: "X",
+};
+module.exports = { MESSAGE, ERR_MESSAGE, GAME_RESOURCE };
