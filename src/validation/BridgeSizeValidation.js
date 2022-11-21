@@ -1,3 +1,5 @@
+const { SIZE_RANGE } = require("../constants");
+
 /**
  * 사용자가 입력한 다리 길이의 유효성을 검사한다.
  */
@@ -34,7 +36,7 @@ class BridgeSizeValidation {
    */
   checkRange() {
     const number = this.#number;
-    if (number < 3 || number > 20)
+    if (number < SIZE_RANGE.MIN || number > SIZE_RANGE.MAX)
       throw "[ERROR] 다리 길이는 3이상 20이하 입니다.";
   }
 }

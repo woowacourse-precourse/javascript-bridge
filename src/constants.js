@@ -23,4 +23,8 @@ module.exports = Object.freeze({
     RETRY: "R",
     QUIT: "Q",
   },
+  SIZE_RANGE: {
+    MAX: 20,
+    MIN: 3,
+  },
 });
