@@ -59,24 +59,29 @@ class BridgeGame {
         OutputView.printMap(this.#bridgesProgress, checkCorect, direction);
 
         if (checkCorect === MOVABLE.IMMOVABLE) {
-          InputView.readGameCommand((command) => {
-            try {
-              if (command === GAME_COMMAND.RETRY) {
-                this.retry();
-                return;
-              }
-              IO.output('quit');
-              return;
-            } catch (error) {
-              IO.output(error);
-            }
-          });
+          this.checkRetry();
         } else if (index === length - 1) { IO.close(); return; }
 
         this.move(index + 1, length);
       } catch (error) {
         IO.output(error);
         this.move(index, length);
+      }
+    });
+  }
+
+  checkRetry() {
+    InputView.readGameCommand((command) => {
+      try {
+        Validator.validateGameCommand(command);
+        if (command === GAME_COMMAND.RETRY) {
+          this.retry();
+          return;
+        }
+        IO.close();
+      } catch (error) {
+        IO.output(error);
+        this.checkRetry();
       }
     });
   }
