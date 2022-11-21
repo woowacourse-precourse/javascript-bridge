@@ -1,5 +1,5 @@
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const InputView = require('./Viewer/InputView');
+const OutputView = require('./Viewer/OutputView');
 
 class BridgeGameController {
   constructor() {

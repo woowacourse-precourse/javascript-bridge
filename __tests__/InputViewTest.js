@@ -1,4 +1,4 @@
-const InputView = require('../src/InputView');
+const InputView = require('../src/Viewer/InputView');
 
 describe('InputView 기능 테스트', () => {
   test('다리 길이 입력 시 유효하지 않은 값을 입력하면 예외가 발생한다', () => {

@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { MESSAGE } = require('./constants/messages');
-const { VALUE } = require('./constants/values');
+const { MESSAGE } = require('../constants/messages');
+const { VALUE } = require('../constants/values');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.

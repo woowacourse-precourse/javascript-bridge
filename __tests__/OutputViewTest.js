@@ -1,5 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const OutputView = require('../src/OutputView');
+const OutputView = require('../src/Viewer/OutputView');
 const App = require('../src/App');
 
 describe('OutputView 기능 테스트', () => {
