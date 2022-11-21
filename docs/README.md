@@ -22,7 +22,7 @@
 - [x] print results (if user input is "Q" or when user succeeds to cross the bridge)
 - [x] get game command input from user
     - [x] check if input is valid (e.g., "R" or "Q")
-- [ ] retry game (if user input is "R")
+- [x] retry game (if user input is "R")
 
 <br/>
 <br/>
