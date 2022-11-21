@@ -28,15 +28,23 @@ class App {
       const isFail = this.bridgeGame.checkFail(moveKey);
       if (isFail) {
         OutputView.printMap(isFail);
-        this.inputGameCommand();
+        this.inputGameCommand(isFail);
+        return;
       }
 
-      const isSuccess = this.bridgeGame.move();
-      if (isSuccess) {
-        OutputView.printMap(isSuccess);
-        this.inputMoving();
-      }
+      this.displaySuccessState();
     });
+  }
+
+  displaySuccessState() {
+    const isSuccess = this.bridgeGame.move();
+    if (isSuccess) {
+      if (this.bridgeGame.gameFinish()) {
+        OutputView.printMap(isSuccess);
+      }
+      OutputView.printMap(isSuccess);
+      this.inputMoving();
+    }
   }
 
   inputGameCommand() {
