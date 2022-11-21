@@ -7,7 +7,7 @@ const BridgeSizeValidator = {
 
   /**
    * 사용자가 입력한 다리 길이의 값에 대한 유효성을 검사하는 메서드
-   * @param {number} bridgeSize
+   * @param {string} bridgeSizeInput
    * @throws 숫자가 아닌 문자가 포함된 경우 error를 throw한다.
    * @throws 다리 길이 범위 이외의 값인 경우 error를 throw한다.
    */
