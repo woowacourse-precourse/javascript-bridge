@@ -26,3 +26,14 @@ describe("BridgeGame 클래스 테스트", () => {
   });
 });
 
+describe("결과 테스트", () => {
+  test("주어진 길이의 모든 다리를 건넜을 때", () => {
+    const expected = "성공";
+    expect(OutputView.checkSuccess(["O", "O", "O", "O"])).toBe(expected);
+  });
+
+  test("주어진 길이의 모든 다리를 건너지 못했을 때", () => {
+    const expected = "실패";
+    expect(OutputView.checkSuccess(["O", "O", "X"])).toBe(expected);
+  });
+});
