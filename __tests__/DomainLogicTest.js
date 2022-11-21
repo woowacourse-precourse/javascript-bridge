@@ -10,8 +10,8 @@ const BridgeMaker = require("../src/BridgeMaker");
 
 describe("도메인 로직 단위 테스트", () => {
   test("사용자가 입력한 다리 길이가 올바른 값인지 검사한다.", () => {
-    const answerFlags = [VALID_CHECK_PASS, VALID_CHECK_DO, VALID_CHECK_ERROR];
     const bridgeSizes = [10, 1000, undefined];
+    const answerFlags = [VALID_CHECK_PASS, VALID_CHECK_DO, VALID_CHECK_ERROR];
 
     answerFlags.forEach((flag, index) => {
       expect(ValidCheck.validBridgeSize(bridgeSizes[index])).toEqual(flag);
@@ -28,7 +28,14 @@ describe("도메인 로직 단위 테스트", () => {
     expect(bridge).toEqual(["U", "D", "U", "U", "D"]);
   });
 
-  test("사용자가 입력한 이동 커맨드가 올바른 값인지 검사한다.", () => {});
+  test("사용자가 입력한 이동 커맨드가 올바른 값인지 검사한다.", () => {
+    const commands = ["U", "a", undefined];
+    const answerFlags = [VALID_CHECK_PASS, VALID_CHECK_DO, VALID_CHECK_ERROR];
+
+    answerFlags.forEach((flag, index) => {
+      expect(ValidCheck.validMoving(commands[index])).toEqual(flag);
+    });
+  });
 
   test("사용자가 입력한 값으로 다리를 건널 수 있는지 검사한다.", () => {});
 
