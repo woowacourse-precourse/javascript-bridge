@@ -10,8 +10,8 @@ class BridgeView {
     this.#output = outputView;
   }
 
-  readBridgeSize() {
-    this.#input.readBridgeSize();
+  readBridgeSize(onInput) {
+    this.#input.readBridgeSize(onInput);
   }
 
   readMoving() {
