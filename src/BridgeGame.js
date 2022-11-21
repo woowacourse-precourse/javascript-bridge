@@ -7,6 +7,8 @@ const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const DirectionValidator = require("./utils/DirectionValidator");
 const BridgeGameController = require("./BridgeGameController");
+const { Console } = require("@woowacourse/mission-utils");
+const { DIRECTION } = require("./constants/gameState");
 
 class BridgeGame {
   #bridge;
@@ -23,6 +25,7 @@ class BridgeGame {
   startGame(bridgeSize) {
     this.validateBridgeLength(bridgeSize);
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, generate);
+    Console.print(this.#bridge);
   }
 
   validateBridgeLength(size) {
@@ -41,20 +44,31 @@ class BridgeGame {
    */
   move(direction) {
     this.validateDirection(direction);
+    this.#totalCount++;
     this.compareDirection(direction);
   }
 
   compareDirection(direction) {
     if (direction === this.#bridge[this.#totalCount - 1]) {
       this.#userDirectionInput.push([DIRECTION_MATCH.RIGHT, direction]);
-      this.#bridgeGameController.outputMap(this.#userDirectionInput);
+      this.makeMap(this.#userDirectionInput);
       this.#bridgeGameController.inputDirection();
-    } else {
+    }
+    if (direction !== this.#bridge[this.#totalCount - 1]) {
       this.#userDirectionInput.push([DIRECTION_MATCH.WRONG, direction]);
-      this.#bridgeGameController.outputMap(this.#userDirectionInput);
+      this.makeMap(this.#userDirectionInput);
       this.retry();
     }
   }
+
+  makeMap(userDirectionInput) {
+    const upArray = [];
+    const downArray = [];
+    for (let i = 0; i < userDirectionInput.length; i++) {
+      this.checkUpDown(userDirectionInput[i], upArray, downArray);
+    }
+  }
+
   validateDirection(direction) {
     try {
       DirectionValidator.validateDirection(direction);
