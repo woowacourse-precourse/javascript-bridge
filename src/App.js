@@ -44,7 +44,10 @@ class App {
 
   checkGameProgress() {
     //game over
-
+    if (!this.#game.isPass()) {
+      InputView.readGameCommand(this.proceedStepThree.bind(this));
+      return;
+    }
     //game clear
 
     InputView.readMoving(this.proceedStepTwo.bind(this));
