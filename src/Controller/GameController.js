@@ -69,6 +69,38 @@ class GameController {
     this.BridgeGame.answerBridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.startMove();
   }
+
+  /**
+   * 사용자의 입력을 받아 게임을 진행시킨다.
+   */
+  startMove() {
+    InputView.readMoving(this.startMoveCallback.bind(this));
+  }
+
+  restartMove() {
+    InputView.readMoving(this.startMoveCallback.bind(this));
+  }
+
+  /**
+   * try/catch구문으로 예외 처리를 한다.
+   * 예외가 아니라면 InputView의 메소드를 호출하여 해당 메소드의 콜백으로 로직을 수행할 메소드를 전달한다.
+   * @param {string} input 사용자가 입력한 "U" 혹은 "D"
+   */
+  startMoveCallback(input) {
+    try {
+      ExceptionHandler.validateGameInput(input);
+      this.BridgeGame.move(input);
+      this.printMaps();
+    } catch (err) {
+      OutputView.printError(err);
+      this.restartMove();
+    }
+  }
+
+  printMaps() {
+    OutputView.printMap(this.BridgeGame.bridges.getAllBridges());
+    this.keepMovingOrStop();
+  }
 }
 
 module.exports = GameController;
