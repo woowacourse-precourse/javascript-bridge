@@ -40,7 +40,23 @@ class App {
     this.checkGameProgress();
   }
 
-  proceedStepThree(input) {}
+  proceedStepThree(input) {
+    try {
+      Validator.validateCommand(input);
+    } catch (e) {
+      Console.print(e.message);
+      InputView.readGameCommand(this.proceedStepThree.bind(this));
+      return;
+    }
+    //함수로 분리하기
+    if (input === COMMAND.QUIT) {
+      const map = this.#game.getMap();
+      const tryCount = this.#game.getTryCount();
+      OutputView.printResult(map, MESSAGE.FAIL, tryCount);
+      Console.close();
+      return;
+    }
+  }
 
   checkGameProgress() {
     //game over
