@@ -1,15 +1,17 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Exception = require('./Exception');
+const Validation = require('./Validation');
 const BridgeMaker = require('./BridgeMaker');
+const OutputView = require('./OutputView');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { CONSOLE_MESSAGE } = require('./utils/constants');
-const OutputView = require('./OutputView');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
   exception: new Exception(),
+  validation: new Validation(),
   bridge: [],
   moveCount: 0,
   /**
@@ -23,6 +25,7 @@ const InputView = {
         return this.readBridgeSize();
       }
 
+      this.bridgeLength = Number(input);
       this.getBridge(input);
       this.readMoving();
     });
@@ -43,9 +46,22 @@ const InputView = {
         return this.readMoving();
       }
 
-      OutputView.printMap(this.bridge[this.moveCount], input);
-      this.moveCount += 1; 
+      const BRIDGE_GAME_LOG = OutputView.printMap(this.bridge[this.moveCount], input);
+      this.trackProgress(BRIDGE_GAME_LOG);
+      this.moveCount += 1;
     });
+  },
+
+  trackProgress(bridgeGameLog) {
+    if (this.validation.checkRestartRequirement(this.moveCount, bridgeGameLog, this.bridge)) {
+      // readGameCommand: check if user wants to end or restart
+    } 
+
+    if (this.validation.checkGameSuccess(this.moveCount, bridgeGameLog, this.bridge)) {
+      // print final result 
+    } else {
+      this.readMoving();
+    }
   },
 
   /**
