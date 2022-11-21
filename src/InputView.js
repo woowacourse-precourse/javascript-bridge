@@ -2,7 +2,7 @@ const {
   inputUserValue,
   isBridgeLengthValid,
   isMoveValid,
-  isRestartValid,
+  isCommandValid,
 } = require("./utils/index");
 const { GAME_MESSAGE, COMMAND_VALUE } = require("./constants/index");
 const OutputView = require("./OutputView");
@@ -33,7 +33,7 @@ const InputView = {
 
       OutputView.printMap(up, down);
 
-      if (!proceedMove) this.readGameCommand(bridgeGame, up, down);
+      if (!proceedMove) this.readGameCommand(bridgeGame, up, down, proceedMove);
 
       this.readMoving(bridgeGame);
     });
@@ -42,15 +42,15 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridgeGame, up, down) {
+  readGameCommand(bridgeGame, up, down, successStatus) {
     inputUserValue(GAME_MESSAGE.RESTART, (command) => {
-      isRestartValid(command);
+      isCommandValid(command);
       if (command === COMMAND_VALUE.RESTART) {
         bridgeGame.retry();
         this.readMoving(bridgeGame);
       }
       if (command === COMMAND_VALUE.QUIT) {
-        OutputView.printResult(up, down);
+        OutputView.printResult(up, down, successStatus);
         bridgeGame.quit();
       }
     });

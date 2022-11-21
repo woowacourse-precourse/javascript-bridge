@@ -2,7 +2,7 @@ const {
   ERROR_MESSAGE,
   BRIDGE_VALUE,
   MOVE_VALUE,
-  RESTART_VALUE,
+  COMMAND_VALUE,
 } = require("../constants");
 const AppError = require("../errors/AppError");
 
@@ -20,11 +20,11 @@ const isMoveValid = (value) => {
     );
 };
 
-const isRestartValid = (value) => {
+const isCommandValid = (value) => {
   if (isEmptyInput(value)) throw new AppError(ERROR_MESSAGE.EMPTY_ERROR);
-  if (!isAlphabetValid(value, RESTART_VALUE.RESTART, RESTART_VALUE.QUIT))
+  if (!isAlphabetValid(value, COMMAND_VALUE.RESTART, COMMAND_VALUE.QUIT))
     throw new AppError(
-      ERROR_MESSAGE.ALPHABET_ERROR(RESTART_VALUE.RESTART, RESTART_VALUE.QUIT)
+      ERROR_MESSAGE.ALPHABET_ERROR(COMMAND_VALUE.RESTART, COMMAND_VALUE.QUIT)
     );
 };
 
@@ -38,4 +38,4 @@ const isRangeValid = (value) =>
 const isAlphabetValid = (value, option1, option2) =>
   value === option1 || value === option2;
 
-module.exports = { isBridgeLengthValid, isMoveValid, isRestartValid };
+module.exports = { isBridgeLengthValid, isMoveValid, isCommandValid };

@@ -2,7 +2,7 @@ const { inputUserValue, printMessage, quitGame } = require("./missionUtils");
 const {
   isBridgeLengthValid,
   isMoveValid,
-  isRestartValid,
+  isCommandValid,
 } = require("./validate");
 const { createMap } = require("./mapMaker");
 
@@ -12,6 +12,6 @@ module.exports = {
   quitGame,
   isBridgeLengthValid,
   isMoveValid,
-  isRestartValid,
+  isCommandValid,
   createMap,
 };
