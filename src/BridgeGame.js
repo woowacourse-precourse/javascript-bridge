@@ -9,24 +9,15 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+
   move(moving, bridge, movingList) {
-    const number = movingList[0].length;
-    if (moving === "U") {
-      if (moving === bridge[number]) {
-        movingList[0].push("O");
-        movingList[1].push(" ");
-      } else {
-        movingList[0].push("X");
-        movingList[1].push(" ");
-      }
+    const index = movingList[0].length;
+    if (moving === bridge[index]) {
+      moving === "U" ? movingList[0].push("O") : movingList[1].push("O");
+      moving === "U" ? movingList[1].push(" ") : movingList[0].push(" ");
     } else {
-      if (moving === bridge[number]) {
-        movingList[1].push("O");
-        movingList[0].push(" ");
-      } else {
-        movingList[1].push("X");
-        movingList[0].push(" ");
-      }
+      moving === "U" ? movingList[0].push("X") : movingList[1].push("X");
+      moving === "U" ? movingList[1].push(" ") : movingList[0].push(" ");
     }
 
     OutputView.printMap(movingList);
