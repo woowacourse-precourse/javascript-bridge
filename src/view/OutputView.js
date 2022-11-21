@@ -8,7 +8,7 @@ OutputView의 `메서드의 이름`은 변경할 수 없다. 🙅‍♀️
 
 const { Console } = require('@woowacourse/mission-utils');
 
-const { MESSAGE, MOVING, MOVING_RESULT } = require('./utils/constants');
+const { MESSAGE, MOVING, MOVING_RESULT } = require('../utils/constants');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */

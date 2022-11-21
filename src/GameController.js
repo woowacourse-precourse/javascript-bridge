@@ -1,6 +1,6 @@
 const { COMMAND, GAME_STATUS } = require('./utils/constants');
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const InputView = require('./view/InputView');
+const OutputView = require('./view/OutputView');
 const Bridge = require('./model/Bridge');
 const BridgeGame = require('./model/BridgeGame');
 const History = require('./model/History');

@@ -6,9 +6,9 @@
  */
 const { Console } = require('@woowacourse/mission-utils');
 
-const OutputView = require('./OutputView');
-const { MESSAGE } = require('./utils/constants');
-const { Size, Moving, GameCommand } = require('./Commands');
+const OutputView = require('../view/OutputView');
+const { MESSAGE } = require('../utils/constants');
+const { Size, Moving, GameCommand } = require('../Commands');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
