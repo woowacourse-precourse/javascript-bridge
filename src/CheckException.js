@@ -1,5 +1,3 @@
-const { MissionUtils } = require("@woowacourse/mission-utils");
-
 /**
  * 예외처리용
  */
@@ -24,4 +22,4 @@ const CheckException = {
   },
 };
 
-module.exports = InputView;
+module.exports = CheckException;
