@@ -6,7 +6,8 @@ const BridgeGame = require("../BridgeGame.js");
 const OutputView = require("./OutputView")
 const {
   bridgeLengthValidate,
-  userMoveValidate
+  userMoveValidate,
+  userRetryValidate
 } = require('../validateFunction')
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -46,6 +47,7 @@ const InputView = {
    */
   readGameCommand(gameResult, bridgeGame, bridgeSize) {
     MissionUtils.Console.readLine(RESTART_OR_QUIT_INPUT, (answer) => {
+      if(userRetryValidate(answer)) return this.readGameCommand(gameResult, bridgeGame, bridgeSize)
       if(answer==='Q') OutputView.printResult(gameResult, FAIL, bridgeGame.getTotalTry())
       if(answer==='R') {
         bridgeGame.retry();
