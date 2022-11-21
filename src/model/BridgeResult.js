@@ -1,14 +1,15 @@
+const { POS } = require("../constants/bridge.constants");
 const { printMap } = require("../view/OutputView");
 
 class BridgeResult {
   #result;
 
   constructor(bridge, idx, isPossibleMove) {
-    this.#result = this.makeResultBeforeCurrent(bridge, "U", idx);
-    this.#result += this.makeCurrent(isPossibleMove, bridge[idx], "U");
+    this.#result = this.makeResultBeforeCurrent(bridge, POS.UP, idx);
+    this.#result += this.makeCurrent(isPossibleMove, bridge[idx], POS.UP);
     this.#result += "\n";
-    this.#result += this.makeResultBeforeCurrent(bridge, "D", idx);
-    this.#result += this.makeCurrent(isPossibleMove, bridge[idx], "D");
+    this.#result += this.makeResultBeforeCurrent(bridge, POS.DOWN, idx);
+    this.#result += this.makeCurrent(isPossibleMove, bridge[idx], POS.DOWN);
   }
 
   makeResultBeforeCurrent(bridge, direction, idx) {
@@ -23,8 +24,8 @@ class BridgeResult {
       if (answerDirection === curPosition) return "O ]";
       return "  ]";
     }
-    if (answerDirection === "D" && curPosition === "U") return "X ]";
-    if (answerDirection === "U" && curPosition === "D") return "X ]";
+    if (answerDirection === POS.DOWN && curPosition === POS.UP) return "X ]";
+    if (answerDirection === POS.UP && curPosition === POS.DOWN) return "X ]";
     return "  ]";
   }
 

@@ -1,4 +1,4 @@
-const { BRIDGE } = require("./constants/bridge.constants");
+const { POS } = require("./constants/bridge.constants");
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -11,7 +11,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size }, () =>
-      generateRandomNumber() === BRIDGE.RANDOM_DOWN ? BRIDGE.DOWN : BRIDGE.UP
+      generateRandomNumber() === POS.RANDOM_DOWN ? POS.DOWN : POS.UP
     );
   },
 };
