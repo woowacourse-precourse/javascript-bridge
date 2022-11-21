@@ -1,3 +1,4 @@
+const BridgeGame = require('../src/BridgeGame');
 const Validator = require('../src/Validator');
 
 describe('도메인 로직 테스트 Validator 객체', () => {
@@ -59,6 +60,29 @@ describe('도메인 로직 테스트 Validator 객체', () => {
 
     inputs.forEach((input) => {
       expect(() => Validator.checkRange(input)).toThrow(answer);
+    });
+  });
+});
+
+describe('도메인 로직테스트 BridgeGame class', () => {
+  const bridgeGame = new BridgeGame();
+
+  test('입력값과 다리를 비교하여 갈수있는길이면 true 아니면 false를 리턴한다', () => {
+    const inputs = ['D', 'U', 'U', 'D'];
+    const bridge = ['D', 'D', 'D', 'D'];
+    const answers = [true, false, false, true];
+
+    inputs.forEach((input, i) => {
+      expect(bridgeGame.move(input, bridge)).toBe(answers[i]);
+    });
+  });
+
+  test('입력값에 따라 retry 면 true 아니면 false 를 리턴한다', () => {
+    const inputs = ['R', 'Q'];
+    const answers = [true, false];
+
+    inputs.forEach((input, i) => {
+      expect(bridgeGame.retry(input)).toBe(answers[i]);
     });
   });
 });
