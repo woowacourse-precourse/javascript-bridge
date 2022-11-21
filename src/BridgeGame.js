@@ -34,9 +34,7 @@ class BridgeGame {
       bridgeSize < MIN_BRIDGE_SIZE ||
       bridgeSize > MAX_BRIDGE_SIZE ||
       bridgeSize === ''
-    ) {
-      return false;
-    }
+    ) return false;
     return true;
   }
 
@@ -46,9 +44,7 @@ class BridgeGame {
     }
     const nowMoveIdx = this.#moveInputArray.length;
     let isRightDirect = false;
-    if (this.#bridge[nowMoveIdx] === moveInput) {
-      isRightDirect = true;
-    }
+    if (this.#bridge[nowMoveIdx] === moveInput) isRightDirect = true;
     this.#moveInputArray.push({ isRightDirect, moveInput });
   }
 

@@ -23,8 +23,7 @@ class App {
       this.bridgeGame.buildBridge(size);
       this.requestMoving();
     } catch (err) {
-      OutputView.printGuide(err.message);
-      this.tryAgain(this.requestBridgeSize);
+      this.tryAgain(err.message, this.requestBridgeSize);
     }
   }
 
@@ -39,8 +38,7 @@ class App {
       OutputView.printMap(moveInputArray);
       this.determinePath(moveInputArray);
     } catch (err) {
-      OutputView.printGuide(err.message);
-      this.tryAgain(this.requestMoving);
+      this.tryAgain(err.msg, this.requestMoving);
     }
   }
 
@@ -65,8 +63,7 @@ class App {
       }
       this.determineTryOrExit(tryInput);
     } catch (err) {
-      OutputView.printGuide(err.message);
-      this.tryAgain(this.requestRetry);
+      this.tryAgain(err.message, this.requestRetry);
     }
   }
 
@@ -79,7 +76,8 @@ class App {
     }
   }
 
-  tryAgain(tryAgainFunc) {
+  tryAgain(errorMsg, tryAgainFunc) {
+    OutputView.printGuide(errorMsg);
     tryAgainFunc.call(this);
   }
 
@@ -87,9 +85,7 @@ class App {
     if (
       moveInputArray.slice(-1)[0].isRightDirect === true &&
       moveInputArray.length === this.bridgeGame.getBridgeLength()
-    ) {
-      return true;
-    }
+    ) return true;
     return false;
   }
 

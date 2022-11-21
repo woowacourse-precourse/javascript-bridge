@@ -13,15 +13,8 @@ const {
   BAR,
   BLANK,
 } = require('./constants');
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
+
 const OutputView = {
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   printMap(moveInputArray) {
     const resultMap = this.makeResultMap(moveInputArray);
     resultMap.forEach((bridge) => {
@@ -39,12 +32,8 @@ const OutputView = {
 
   mergeTwoBlock(floor, moveInputArray, resultMap) {
     let block = '';
-    if (floor === 0) {
-      block = this.makeUpSideBlock(moveInputArray);
-    }
-    if (floor === 1) {
-      block = this.makeDownSideBlock(moveInputArray);
-    }
+    if (floor === 0) block = this.makeUpSideBlock(moveInputArray);
+    if (floor === 1) block = this.makeDownSideBlock(moveInputArray);
     const bridge = `${START_BRIDGE} ${block} ${END_BRIDGE}`;
     resultMap.push(bridge);
     return resultMap;
@@ -56,10 +45,8 @@ const OutputView = {
         if (moveInput === MOVE_UP) {
           if (isRightDirect) return SUCCESS;
           return FAIL;
-        }
-        return BLANK;
-      })
-      .join(BAR);
+        } return BLANK;
+      }).join(BAR);
     return upsideBlock;
   },
 
@@ -69,17 +56,11 @@ const OutputView = {
         if (moveInput === MOVE_DOWN) {
           if (isRightDirect) return SUCCESS;
           return FAIL;
-        }
-        return BLANK;
-      })
-      .join(BAR);
+        } return BLANK;
+      }).join(BAR);
     return downSideBlock;
   },
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+
   printResult(moveInputArray, isSuccess, gameCount) {
     Console.print(RESULT_MSG);
     this.printMap(moveInputArray);
