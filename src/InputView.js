@@ -4,12 +4,11 @@ const MissionUtils = require("@woowacourse/mission-utils");
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  bridgeSize: 0,
-  moving: "",
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
+    let bridgeSize = 0;
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (answer) => {
       try {
         this.validateBridgeSize(answer);
@@ -17,8 +16,10 @@ const InputView = {
         MissionUtils.Console.print(error);
         this.readBridgeSize();
       }
-      this.bridgeSize = answer;
+      bridgeSize = answer;
     });
+
+    return bridgeSize;
   },
 
   validateBridgeSize(size) {
@@ -30,6 +31,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
+    let moving = "";
     MissionUtils.Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (answer) => {
@@ -39,9 +41,11 @@ const InputView = {
           MissionUtils.Console.print(error);
           this.readMoving();
         }
-        this.moving = answer;
+        moving = answer;
       }
     );
+
+    return moving;
   },
 
   validateMoving(moving) {
