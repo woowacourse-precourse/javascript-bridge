@@ -1,6 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const BridgeGame = require("./BridgeGame");
+const Validation = require("./Validation");
 
 class GameController {
 
@@ -28,3 +30,5 @@ class GameController {
     return inputBridgeSize;
   }
 }
+
+module.exports = GameController;
