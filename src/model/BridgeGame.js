@@ -1,15 +1,14 @@
-const InputView = require("../console/InputView");
 const Constant = require("../lib/Constant");
 const Bridge = require("./Bridge");
 const ViewPrinter = require("../view/ViewPrinter");
-const BridgeMaker = require("../BridgeMaker");
-const Generator = require("../BridgeRandomNumberGenerator");
+const InputPrinter = require("../view/InputPrinter");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
+  #inputPrinter
   #viewPrinter;
   #state = {
     tried: Constant.GAME_RESULT.DEFAULT,
@@ -19,6 +18,7 @@ class BridgeGame {
   constructor() {
     this.#bridge = new Bridge(this);
     this.#viewPrinter = new ViewPrinter(this);
+    this.#inputPrinter = new InputPrinter(this)
   }
 
   setState(result) {
@@ -29,21 +29,25 @@ class BridgeGame {
     return this.#bridge;
   }
 
+  getView() {
+    return this.#viewPrinter;
+  }
+
   getState() {
     return this.#state;
   }
 
   play() {
     this.#viewPrinter.sayHello();
-    this.#viewPrinter.insertBridgeSize();
+    this.#inputPrinter.insertBridgeSize();
   }
 
   continue() {
     const haveX = this.#bridge.haveXValue();
 
-    if (haveX) return this.#viewPrinter.selectRetry();
+    if (haveX) return this.#inputPrinter.selectRetry();
     if (this.#bridge.isGameEnd()) return this.endGame();
-    if (!haveX) return this.#viewPrinter.selectBridgeDirection();
+    if (!haveX) return this.#inputPrinter.selectBridgeDirection();
   }
 
   /**
@@ -68,7 +72,7 @@ class BridgeGame {
   retry() {
     this.#state.tried += 1;
     this.#bridge.setAllBridgeEmpty();
-    this.#viewPrinter.selectBridgeDirection();
+    this.#inputPrinter.selectBridgeDirection();
   }
 
   setWinOrLoss() {
