@@ -40,11 +40,10 @@ const OutputView = {
   getMap(myMoves, bridge) {
     const currentBridge = this.makeBridge(myMoves, bridge);
     const currentMyMoves = this.makeBridge(myMoves, myMoves);
-    const result = this.compareBridge(currentMyMoves, currentBridge).reduce(
+    return this.compareBridge(currentMyMoves, currentBridge).reduce(
       (allMap, side) => `${allMap}\n${this.makeOneSideMap(side)}`,
       '',
     );
-    return result;
   },
 
   /**
@@ -54,7 +53,7 @@ const OutputView = {
    */
   printMap(myMoves, bridge) {
     const result = this.getMap(myMoves, bridge);
-    print(result);
+    print(`${result}\n`);
   },
 
   /**

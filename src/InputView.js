@@ -15,6 +15,7 @@ const InputView = {
     let bridgeSize;
     readLine(MESSAGE.INPUT.BRIDGE_SIZE, (input) => {
       bridgeSize = Number(input);
+      this.validateBridgeSize(bridgeSize);
     });
     return bridgeSize;
   },
@@ -28,15 +29,14 @@ const InputView = {
    * 다리의 길이가 제대로 될 때까지 입력받는다.
    */
   getBridgeSize() {
-    const bridgeSize = this.readBridgeSize();
-    if (bridgeSize === undefined) return;
+    let bridgeSize;
     try {
-      this.validateBridgeSize(bridgeSize);
-      return bridgeSize;
+      bridgeSize = this.readBridgeSize();
     } catch (error) {
       print(error.message);
       this.getBridgeSize();
     }
+    return bridgeSize;
   },
 
   /**
@@ -46,6 +46,7 @@ const InputView = {
     let move;
     readLine(MESSAGE.INPUT.MOVE(MOVE.UP, MOVE.DOWN), (input) => {
       move = input;
+      Validate.notAvailableMove(move, Object.values(MOVE));
     });
     return move;
   },
@@ -54,15 +55,14 @@ const InputView = {
    * 사용자가 이동할 칸이 제대로 될 때까지 입력받는다.
    */
   getMoving() {
-    const move = this.readMoving();
-    if (move === undefined) return;
+    let move;
     try {
-      Validate.notAvailableMove(move, Object.values(MOVE));
-      return move;
+      move = this.readMoving();
     } catch (error) {
       print(error.message);
       this.getMoving();
     }
+    return move;
   },
 
   /**
@@ -72,6 +72,7 @@ const InputView = {
     let gameCommand;
     readLine(MESSAGE.INPUT.RESTART_OR_QUIT(PLAY.RESTART, PLAY.QUIT), (input) => {
       gameCommand = input;
+      Validate.notAvailablePlay(gameCommand, Object.values(PLAY));
     });
     return gameCommand;
   },
@@ -80,15 +81,14 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 제대로 될 때까지 입력받는다.
    */
   getGameCommand() {
-    const gameCommand = this.readGameCommand();
-    if (gameCommand === undefined) return;
+    let gameCommand;
     try {
-      Validate.notAvailablePlay(gameCommand, Object.values(PLAY));
-      return gameCommand;
+      gameCommand = this.readGameCommand();
     } catch (error) {
       print(error.message);
       this.getGameCommand();
     }
+    return gameCommand;
   },
 };
 
