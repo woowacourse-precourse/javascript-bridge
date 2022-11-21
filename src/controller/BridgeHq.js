@@ -1,7 +1,8 @@
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
-const { ERROR, BRIDGE } = require('../util/Message');
+const { ERROR } = require('../util/Message');
+const { checkInteger, checkRange } = require('../util/Validation');
 
 class BridgeHq {
   startGame() {
@@ -14,7 +15,7 @@ class BridgeHq {
   }
 
   validBridgeSize(size) {
-    if (size >= BRIDGE.MIN_LENGTH && size <= BRIDGE.MAX_LENGTH) {
+    if (checkInteger(size) && checkRange(size)) {
       return;
     }
     OutputView.printError(ERROR.LENGTH);
