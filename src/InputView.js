@@ -4,10 +4,6 @@ const Console = MissionUtils.Console;
 
 const InputView = {
 
-  gameStart() {
-    Console.print("다리 건너기 게임을 시작합니다.");
-  },
-
   validateBridge(bridgeInput, reject) {
     if (Number.isNaN(bridgeInput)) reject(new Error("[ERROR] 다리길이는 숫자여야 합니다."));
     if (!(3 <= bridgeInput && bridgeInput <= 20)) reject(new Error("[ERROR] 다리길이는 3에서 20사이의 숫자여야 합니다."));
@@ -15,18 +11,17 @@ const InputView = {
 
   readBridgeSize() {
     return new Promise((resolve, reject) => {
-      Console.readLine("다리의 길이를 입력해주세요.\n", (inputString) => {
+      Console.readLine("다리의 길이를 입력해주세요.", (inputString) => {
         const inputNum = parseInt(inputString);
-        this.validateBridge(inputNum, reject);
+        this.validateBridge(inputNum,reject);
         resolve(inputNum);
       });
     })
   },
 
-  validateMove(move){
+  validateMove(move, reject){
     if(!(move === "U" || move ==="D")) reject(new Error("[ERROR] 이동할 칸을 잘못 입력하셨습니다."));  
   },
-
 
   readMoving() {
     return new Promise((resolve, reject) => {
@@ -37,7 +32,7 @@ const InputView = {
     })
   },
 
-  validateStart(start){
+  validateStart(start, reject){
     if(!(start === "R" || start ==="Q")) reject(new Error("[ERROR] 다시시도 여부를 잘못 입력하셨습니다."));  
   },
 
