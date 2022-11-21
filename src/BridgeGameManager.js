@@ -18,7 +18,6 @@ class BridgeGameManager {
   manageBridge(size) {
     Validation.checkBridgeSize(size);
     this.#bridge = makeBridge(size, generate);
-    console.log(this.#bridge);
     return InputView.readMoving(this.manageMoving.bind(this));
   }
 
@@ -41,6 +40,8 @@ class BridgeGameManager {
       bridgeGame.retry();
       InputView.readMoving(this.manageMoving.bind(this));
     }
+    if (command === "Q")
+      return OutputView.printResult(bridgeGame.getCurrentState());
   }
 
   makeBridgeState() {}

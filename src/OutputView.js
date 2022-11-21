@@ -17,7 +17,7 @@ const OutputView = {
       row[bridgeState[i][0]][i] = state;
     }
     Console.print("[ " + row["U"].join(" | ") + " ]");
-    Console.print("[ " + row["D"].join(" | ") + " ]");
+    Console.print("[ " + row["D"].join(" | ") + " ]\n");
   },
 
   printResult(currentState) {
