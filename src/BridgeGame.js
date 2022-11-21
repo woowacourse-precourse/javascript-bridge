@@ -1,4 +1,4 @@
-const { COMMAND } = require("./Constants");
+const { COMMAND, BRIDGE_MAP } = require("./Constants");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -24,27 +24,27 @@ const { COMMAND } = require("./Constants");
 
   moveUpIsCorrect(createBridge, selectUpOrDown){
     if(createBridge == selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_UP){
-      this.userPickedUpOrDown[0].push("O");
-      this.userPickedUpOrDown[1].push(" ");
+      this.userPickedUpOrDown[0].push(BRIDGE_MAP.CORRECT);
+      this.userPickedUpOrDown[1].push(BRIDGE_MAP.BLANK);
     }
   }
 
   moveDownIsCorrect(createBridge, selectUpOrDown){
     if(createBridge == selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_DOWN){
-      this.userPickedUpOrDown[0].push(" ");
-      this.userPickedUpOrDown[1].push("O")
+      this.userPickedUpOrDown[0].push(BRIDGE_MAP.BLANK);
+      this.userPickedUpOrDown[1].push(BRIDGE_MAP.CORRECT)
     }
   }
   moveUpIsWrong(createBridge, selectUpOrDown){
     if(createBridge !== selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_UP){
-      this.userPickedUpOrDown[0].push("X");
-      this.userPickedUpOrDown[1].push(" ");
+      this.userPickedUpOrDown[0].push(BRIDGE_MAP.WRONG);
+      this.userPickedUpOrDown[1].push(BRIDGE_MAP.BLANK);
     }
   }
   moveDownIsWrong(createBridge, selectUpOrDown){
     if(createBridge !== selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_DOWN){
-      this.userPickedUpOrDown[0].push(" ");
-      this.userPickedUpOrDown[1].push("X");
+      this.userPickedUpOrDown[0].push(BRIDGE_MAP.BLANK);
+      this.userPickedUpOrDown[1].push(BRIDGE_MAP.WRONG);
     }  
   }
   /**

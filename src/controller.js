@@ -6,7 +6,7 @@ const bridgeGame = new BridgeGame();
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const userBridgeCorrect = bridgeGame.userPickedUpOrDown;
-const { COMMAND } = require("./Constants");
+const { COMMAND, BRIDGE_MAP } = require("./Constants");
 
 class Controller{
     #number;
@@ -31,7 +31,7 @@ class Controller{
     }
 
     userPickedIsWrong(userBridgeCorrect){
-        if(userBridgeCorrect[0].includes("X") || userBridgeCorrect[1].includes("X")){
+        if(userBridgeCorrect[0].includes(BRIDGE_MAP.WRONG) || userBridgeCorrect[1].includes(BRIDGE_MAP.WRONG)){
             this.gameRunningSelect();
         }
     }

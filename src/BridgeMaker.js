@@ -13,7 +13,7 @@ const { COMMAND } = require("./Constants");
     while (answerBridgeShape.length < size){
       const selectValue = generateRandomNumber();
       String(selectValue) == '1' ? answerBridgeShape.push(COMMAND.BRIDGE_UP) : answerBridgeShape.push(COMMAND.BRIDGE_DOWN);
-    }
+    } 
     return answerBridgeShape;
   },
 };

@@ -26,4 +26,11 @@ const COMMAND = {
     QUIT : "Q"
 }
 
-module.exports = {INPUT_MESSAGE, PRINT_MESSAGE, ERROR_MESSAGE, COMMAND};
+const BRIDGE_MAP = {
+    CORRECT : "O",
+    WRONG : "X",
+    BLANK : " ",
+    DIVISION : " | "
+}
+
+module.exports = {INPUT_MESSAGE, PRINT_MESSAGE, ERROR_MESSAGE, COMMAND, BRIDGE_MAP};
