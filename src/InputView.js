@@ -29,12 +29,27 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgeGame, bridge) {
-    console.log(bridge);
     Console.readLine(MESSAGE.CHOOSE_MOVE_SPACE, (userInput) => {
       const moveKey = Validate.checkMovingKey(userInput);
-      bridgeGame.move(moveKey);
+      const userMoveArray = bridgeGame.move(moveKey);
+      this.compareMove(bridge, userMoveArray);
     });
     return;
+  },
+
+  /**
+   * 생성된 값과 사용자 입력값 비교
+   */
+  compareMove(bridge, userMoveArray) {
+    console.log(bridge);
+    console.log(userMoveArray);
+    for (let i = 0; i < userMoveArray.length; i++) {
+      if (bridge[i] === userMoveArray[i]) {
+        console.log("같음");
+      } else {
+        console.log("다름");
+      }
+    }
   },
 
   /**
