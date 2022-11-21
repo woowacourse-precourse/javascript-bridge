@@ -9,20 +9,22 @@ class BridgeGame {
   #bridge;
   #currBridge;
   #bridgeSize;
-  //#userLog;
   #trial;
-  #survived;
+  #fail;
 
   constructor() {
     this.#userLocation = -1;
     this.#bridge = [];
-    this.#currBridge = [];
-    this.#currBridge.push([]);
-    this.#currBridge.push([]);
-    //this.#userLog = [];
+    this.initCurrBridge();
     this.#trial = 0;
     this.#bridgeSize = 0;
     this.#fail = false;
+  }
+
+  initCurrBridge() {
+    this.#currBridge = [];
+    this.#currBridge.push([]);
+    this.#currBridge.push([]);
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -41,12 +43,20 @@ class BridgeGame {
     //console.log(this.#bridge);
   }
 
+  getBridgeSize() {
+    return this.#bridgeSize;
+  }
+
   getCurrBridge() {
     return this.#currBridge;
   }
 
   getFailFlag() {
     return this.#fail;
+  }
+
+  getTrial() {
+    return this.#trial;
   }
 
   move(bridgeChoice) {
@@ -88,9 +98,7 @@ class BridgeGame {
   retry() {
     this.increaseTrial();
     this.#userLocation = -1;
-    this.#currBridge = [];
-    this.#currBridge.push([]);
-    this.#currBridge.push([]);
+    this.initCurrBridge();
   }
 }
 
