@@ -1,3 +1,4 @@
+const { HOTKEY, RESULT_MAP } = require("../constants/constants");
 
 class BridgeGame {
   #bridge;
@@ -7,8 +8,8 @@ class BridgeGame {
     this.#bridge = bridge;
     this.#result = {
       map: new Map([
-        ['U', []],
-        ['D', []],
+        [HOTKEY.up, []],
+        [HOTKEY.down, []],
       ]),
       attempts: 1,
     }
@@ -20,8 +21,8 @@ class BridgeGame {
 
   retry() {
     this.#result.map = new Map([
-      ['U', []],
-      ['D', []],
+      [HOTKEY.up, []],
+      [HOTKEY.down, []],
     ]);
     this.#result.attempts += 1;
     this.#bridge.initializeCurrentDirection();
@@ -43,13 +44,13 @@ class BridgeGame {
 
   updateResult(direction) {
     for (let dir of this.#result.map.keys()) {
-      if (dir !== direction) this.#result.map.get(dir).push(' ');
+      if (dir !== direction) this.#result.map.get(dir).push(RESULT_MAP.trap);
     }
     if (this.isAnswer(direction)) {
-      this.#result.map.get(direction).push('O');
+      this.#result.map.get(direction).push(RESULT_MAP.correct);
       return;
     }
-    this.#result.map.get(direction).push('X');
+    this.#result.map.get(direction).push(RESULT_MAP.incorrect);
   }
 }
 
