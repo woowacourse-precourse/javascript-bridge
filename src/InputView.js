@@ -30,7 +30,8 @@ const InputView = {
       array = BridgeCompare.makeBridgeResultArray(userChoice, result, array);
       console.log(array);
       OutputView.printMap(userChoice, result);
-      if(result) { this.readMoving(SIZE, BridgeStatus, index + 1, array)}
+      const result2 = BridgeCompare.isCompleteBridge(SIZE, index + 1);
+      if(result2 == false && result) { this.readMoving(SIZE, BridgeStatus, index + 1, array)}
     });
   },
 

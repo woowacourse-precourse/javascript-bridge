@@ -1,6 +1,9 @@
 const InputView = require('./InputView');
 
 const BridgeCompare = {
+    isCompleteBridge(SIZE, bridgeSize){
+        return SIZE == bridgeSize;
+    },
     moveBridge(userChoice, bridgeValue){
         return BridgeCompare.IsCompareBridge(userChoice, bridgeValue);
     },
