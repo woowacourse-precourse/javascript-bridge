@@ -7,9 +7,13 @@ class BridgeGame {
   #answer;
   #result = [];
   #cnt = 1;
-  constructor(answer) {
+  #size;
+
+  constructor(answer, size) {
     this.#answer = answer;
+    this.#size = size;
   }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -38,6 +42,10 @@ class BridgeGame {
 
   getResult() {
     return this.#result;
+  }
+
+  getSize() {
+    return this.#size;
   }
 }
 
