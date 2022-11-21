@@ -75,9 +75,9 @@ class BridgeGame {
   }
 
   #initializeUserBridge() {
-    this.userBridge.command = [];
-    this.userBridge.up = [];
-    this.userBridge.down = [];
+    Object.keys(this.userBridge).forEach((key) => {
+      this.userBridge[key] = [];
+    });
   }
 
   getResult() {
