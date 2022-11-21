@@ -1,4 +1,4 @@
-const BridgeMapMaker = require('../src/BridgeMapMaker');
+const BridgeMapMaker = require('../src/domain/BridgeMapMaker');
 
 describe('다리의 상태를 생성하는 객체 테스트', () => {
   test('이동한 블록들과 이동 성공 여부를 기반으로 다리의 상태를 생성한다.', () => {
