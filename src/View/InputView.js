@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const Validate = require("../Validate");
+const Validate = require("../Validate/Validate");
 
 const InputView = {
   readBridgeSize() {

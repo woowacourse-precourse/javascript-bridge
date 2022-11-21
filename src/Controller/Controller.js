@@ -1,5 +1,5 @@
-const BridgeGame = require("./Model/BridgeGame");
-const OutputView = require("./View/OutputView");
+const BridgeGame = require("../Model/BridgeGame");
+const OutputView = require("../View/OutputView");
 
 const Controller = {
   makeBridgeGame(bridgeSize) {
