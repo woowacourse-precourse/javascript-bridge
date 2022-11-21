@@ -8,14 +8,6 @@ const {
 
 class App {
   play() {
-    try {
-      this.run();
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-    }
-  }
-
-  run() {
     this.showGreeting();
   }
 
