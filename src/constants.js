@@ -21,8 +21,14 @@ const BRIDGE_SHAPE = {
     BLANK: "   ",
 };
 
+const SUCCESS_WORD = "성공";
+
+const FAILURE_WORD = "실패";
+
 module.exports = {
     ERROR_MESSAGE,
     VALID_CHAR,
     BRIDGE_SHAPE,
+    SUCCESS_WORD,
+    FAILURE_WORD
 };

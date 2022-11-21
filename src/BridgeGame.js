@@ -1,6 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { BRIDGE_SHAPE, VALID_CHAR } = require("./constants");
+const { BRIDGE_SHAPE, VALID_CHAR, SUCCESS_WORD, FAILURE_WORD } = require("./constants");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 
@@ -30,7 +30,7 @@ class BridgeGame {
     OutputView.printMap(this.upLineOfBridge, this.downLineOfBridge);
 
     if (!this.state) return InputView.readGameCommand(this);
-    if (this.currentStep === this.bridgeSize) return OutputView.printResult(this.upLineOfBridge, this.downLineOfBridge, "성공", this.try); //최종 게임 결과 출력
+    if (this.currentStep === this.bridgeSize) return OutputView.printResult(this.upLineOfBridge, this.downLineOfBridge, SUCCESS_WORD, this.try); //최종 게임 결과 출력
     return InputView.readMoving(this);
   }
 
@@ -62,7 +62,7 @@ class BridgeGame {
   }
 
   quit() {
-    return OutputView.printResult(this.upLineOfBridge, this.downLineOfBridge, "실패", this.try);
+    return OutputView.printResult(this.upLineOfBridge, this.downLineOfBridge, FAILURE_WORD, this.try);
   }
 }
 
