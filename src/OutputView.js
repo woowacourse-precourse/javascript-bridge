@@ -39,7 +39,7 @@ const OutputView = {
 
   printGameSuccess(gameSuccess) {
     const result = gameSuccess ? '성공' : '실패';
-    MissionUtils.Console.print(`게임 성공 여부: ${result}`);
+    MissionUtils.Console.print(`\n게임 성공 여부: ${result}`);
   },
 
   printTryCount(tryCount) {
