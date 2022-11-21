@@ -36,7 +36,15 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgeGame) {
-    Console.readLine(MSG.inputMoveDirection, (moveDirection) => {});
+    Console.readLine(MSG.inputMoveDirection, (answer) => {
+      try {
+        const moveDirection = TypeConverter.toString(answer);
+        bridgeGame.move(moveDirection);
+      } catch (e) {
+        console.log(e.message);
+        this.readMoving(bridgeGame);
+      }
+    });
   },
 
   /**

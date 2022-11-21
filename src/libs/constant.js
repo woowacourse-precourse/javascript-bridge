@@ -7,6 +7,7 @@ const MSG = {
 
 const ERROR_MSG = {
   invalidBridgeSize: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+  invalidMoveDirection: '[ERROR] 이동할 칸은 U(위) 혹은 D(아래)여야 합니다.',
 };
 
 const DIRECTION = {
