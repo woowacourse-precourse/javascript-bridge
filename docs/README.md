@@ -148,3 +148,21 @@ Command입력요청-->컨트롤러Command수신
   - 재시작해도 처음에 만든 다리로 재사용한다.
   - 게임 결과의 총 시도한 횟수는 첫 시도를 포함해 게임을 종료할 때까지 시도한 횟수를 나타낸다.
 - 사용자가 잘못된 값을 입력한 경우 throw문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
+
+# 이번 미션을 진행하면서 참고한 자료들
+
+## 화살 함수와 this
+
+- https://stackoverflow.com/questions/69657417/cannot-read-properties-of-undefined-method-inside-another
+- https://velog.io/@padoling/JavaScript-%ED%99%94%EC%82%B4%ED%91%9C-%ED%95%A8%EC%88%98%EC%99%80-this-%EB%B0%94%EC%9D%B8%EB%94%A9
+
+## MVC 디자인 패턴
+
+- https://m.blog.naver.com/jhc9639/220967034588
+- https://junhyunny.github.io/information/design-pattern/mvc-pattern/
+- https://hanamon.kr/mvc%EB%9E%80-mvc-design-pattern/
+
+## 코딩 컨벤션
+
+- https://738.github.io/clean-code-typescript/
+- https://github.com/ParkSB/javascript-style-guide
