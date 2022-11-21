@@ -6,6 +6,7 @@ const {
   VALID_CHECK_PASS,
   VALID_CHECK_DO,
 } = require("../src/Constant");
+const BridgeMaker = require("../src/BridgeMaker");
 
 describe("도메인 로직 단위 테스트", () => {
   test("사용자가 입력한 다리 길이가 올바른 값인지 검사한다.", () => {
@@ -17,7 +18,15 @@ describe("도메인 로직 단위 테스트", () => {
     });
   });
 
-  test("사용자가 입력한 길이만큼 다리를 생성한다.", () => {});
+  test("사용자가 입력한 길이만큼 다리를 생성한다.", () => {
+    const randomNumbers = ["1", "0", "1", "1", "0"];
+    const mockGenerator = randomNumbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, jest.fn());
+    const bridge = BridgeMaker.makeBridge(5, mockGenerator);
+
+    expect(bridge).toEqual(["U", "D", "U", "U", "D"]);
+  });
 
   test("사용자가 입력한 이동 커맨드가 올바른 값인지 검사한다.", () => {});
 
