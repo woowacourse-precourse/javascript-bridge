@@ -1,4 +1,5 @@
 # 디렉토리 구조
+
 ```
 ├── __test__
 │    ├── Validation
@@ -27,7 +28,13 @@
      ├── BridgeMaker.js
      ├── BridgeRandomNumberGenerator.js
      └── ResultMaker.js
-``` 
+```
+
+# UML 클래스 다이어그램 및 설계
+
+<img src="./uml.png">
+
+App을 컨트롤러로 사용하여 BridgeGame과 Bridge의 Model을 View와 연결시켜주었습니다. BridgeGame에서 실행되는 각 함수마다 Validation 함수를 통해 Custom Error를 throw하고 App에서 catch하여 처리해주었습니다.
 
 # 기능명세
 
