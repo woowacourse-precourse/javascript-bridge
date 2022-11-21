@@ -59,6 +59,19 @@ class App {
     }
     this.#movingInputPhase();
   }
+
+  #retryCommandInputPhase() {
+    InputView.readGameCommand((command) => {
+      try {
+        Validator.errorIfGameCommandInvalid(command);
+      } catch (error) {
+        OutputView.printMessage(ERROR.INVALID_RETRY_COMMAND);
+        this.#retryCommandInputPhase();
+        return;
+      }
+      this.#decideNextPhaseByRetryCommand(command);
+    });
+  }
 }
 
 module.exports = App;
