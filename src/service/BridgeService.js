@@ -1,5 +1,5 @@
 const BridgeRepository = require('../repository/BridgeRepository');
-const BridgeFinalResult = require('./domain/BridgeCheck');
+const BridgeFinalResult = require('./domain/BridgeFinalResult');
 const BridgeStart = require('./domain/BridgeStart');
 const BridgeRestart = require('./domain/BridgeRestart');
 const UpDownKey = require('./domain/UpDownKey');
