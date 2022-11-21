@@ -35,63 +35,43 @@ describe('변환자 테스트', () => {
       [downward, true],
     ];
 
+    const LEFT_EDGE = leftEdge + blank;
+    const RIGHT_EDGE = blank + rightEdge;
+    const DIVIDER = blank + divider + blank;
+
     expect(convertToBridgeMap(failedMovingState)).toEqual(
-      leftEdge +
-        blank +
+      LEFT_EDGE +
         possible +
-        blank +
-        divider +
-        blank +
+        DIVIDER +
         possible +
+        DIVIDER +
         blank +
-        divider +
-        blank +
-        blank +
-        blank +
-        rightEdge +
+        RIGHT_EDGE +
         newLine +
-        leftEdge +
+        LEFT_EDGE +
         blank +
+        DIVIDER +
         blank +
-        blank +
-        divider +
-        blank +
-        blank +
-        blank +
-        divider +
-        blank +
+        DIVIDER +
         impossible +
-        blank +
-        rightEdge
+        RIGHT_EDGE
     );
     expect(convertToBridgeMap(successMovingState)).toEqual(
-      leftEdge +
-        blank +
+      LEFT_EDGE +
         possible +
-        blank +
-        divider +
-        blank +
+        DIVIDER +
         possible +
+        DIVIDER +
         blank +
-        divider +
-        blank +
-        blank +
-        blank +
-        rightEdge +
+        RIGHT_EDGE +
         newLine +
-        leftEdge +
+        LEFT_EDGE +
         blank +
+        DIVIDER +
         blank +
-        blank +
-        divider +
-        blank +
-        blank +
-        blank +
-        divider +
-        blank +
+        DIVIDER +
         possible +
-        blank +
-        rightEdge
+        RIGHT_EDGE
     );
   });
 });
