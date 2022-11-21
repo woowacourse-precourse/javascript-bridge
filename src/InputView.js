@@ -53,6 +53,20 @@ const InputView = {
 
   insertMoving(direction) {
     this.gameClient.move(direction);
+    this.checkIncludeWrongDirection();
+    this.checkMatchBridgeSize();
+  },
+
+  checkIncludeWrongDirection() {
+    if (!this.gameClient.checkWrongInput()) {
+      this.readGameCommand();
+    }
+  },
+
+  checkMatchBridgeSize() {
+    if (!this.gameClient.getMatchSize()) {
+      this.readMoving();
+    }
   },
 
   readGameCommand() {},
