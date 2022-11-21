@@ -35,7 +35,7 @@ class StepResult {
     this.#lowerBridge += lowerBridgeResult;
   }
 
-  reset() {
+  retry() {
     this.#upperBridge = '';
     this.#lowerBridge = '';
   }
