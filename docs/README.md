@@ -13,7 +13,7 @@
 
 |달성|구현 목표|비고|
 |:---:|---|---|
-|:heavy_minus_sign:|다리 길이를 입력받는다.||
+|:heavy_check_mark:|다리 길이를 입력받는다.||
 |:heavy_minus_sign:|다리 칸을 생성한다.||
 |:heavy_minus_sign:|라운드마다 플레이어가 이동할 칸을 입력받는다.|'U'또는 'D'|
 |:heavy_minus_sign:|게임 재시작/종료 여부를 입력받는다.|'R' 또는 'Q'|
