@@ -33,6 +33,9 @@ const OutputView = {
     MissionUtils.Console.close();
   },
 
+  printError(err) {
+    MissionUtils.Console.print(err);
+  },
 };
 
 module.exports = OutputView;
