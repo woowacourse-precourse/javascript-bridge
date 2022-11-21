@@ -1,4 +1,8 @@
+const BridgeGame = require('./BridgeGame');
+const ValidateInput = require('./ValidateInput');
+const { readMoving, end, conectStart } = require('./View/InputView');
 const { printGameStart } = require('./View/OutputView');
+const RETRY = 'R';
 
 class App {
   constructor() {
