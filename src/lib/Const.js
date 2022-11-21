@@ -18,6 +18,10 @@ const GAME = {
     END: 100,
     START: 101,
   },
+  RESULT: {
+    WIN: true,
+    FAIL: false,
+  },
 };
 
 module.exports = { BRIDGE, GAME };

@@ -38,7 +38,10 @@ class BridgeInteractPlayer {
   playerGoBridgeNext(result, status) {
     if (status === GAME.STATUS.END) {
       //todo: true 고치기
-      this.playerEndThisGame(this.#bridgeGameShape.getCurrentShape(), true);
+      this.playerEndThisGame(
+        this.#bridgeGameShape.getCurrentShape(),
+        GAME.RESULT.WIN
+      );
       return;
     }
     if (result)
@@ -53,10 +56,11 @@ class BridgeInteractPlayer {
       case BRIDGE.GAME.RETRY:
         this.#player.bridgeGameRetry();
         InputView.readMoving(this.playerInputBridgeDirection.bind(this));
-        break;
       case BRIDGE.GAME.END:
-        this.playerEndThisGame(this.#bridgeGameShape.getCurrentShape(), false);
-        break;
+        this.playerEndThisGame(
+          this.#bridgeGameShape.getCurrentShape(),
+          GAME.RESULT.FAIL
+        );
     }
   }
 
