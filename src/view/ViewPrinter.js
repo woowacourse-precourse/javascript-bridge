@@ -2,7 +2,7 @@ const OutputView = require("../console/OutputView");
 const Message = require("../lib/Message");
 const MissionUtils = require("@woowacourse/mission-utils");
 
-class Printer {
+class ViewPrinter {
   #bridgeGame;
 
   constructor(bridgeGame) {
@@ -26,4 +26,4 @@ class Printer {
   }
 }
 
-module.exports = Printer;
+module.exports = ViewPrinter;

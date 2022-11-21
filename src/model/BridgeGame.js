@@ -1,7 +1,7 @@
 const InputView = require("../console/InputView");
 const Constant = require("../lib/Constant");
 const Bridge = require("./Bridge");
-const Printer = require("../view/Printer");
+const ViewPrinter = require("../view/ViewPrinter");
 const BridgeMaker = require("../BridgeMaker");
 const Generator = require("../lib/BridgeRandomNumberGenerator");
 
@@ -10,7 +10,7 @@ const Generator = require("../lib/BridgeRandomNumberGenerator");
  */
 class BridgeGame {
   #bridge;
-  #printer;
+  #viewPrinter;
   #state = {
     tried: Constant.GAME_RESULT.DEFAULT,
     isWin: Constant.GAME_RESULT.LOSS,
@@ -18,11 +18,11 @@ class BridgeGame {
 
   constructor() {
     this.#bridge = new Bridge(this);
-    this.#printer = new Printer(this);
+    this.#viewPrinter = new ViewPrinter(this);
   }
 
   play() {
-    this.#printer.sayHello();
+    this.#viewPrinter.sayHello();
     this.makeBridge();
   }
 
@@ -52,7 +52,7 @@ class BridgeGame {
   selectDirection() {
     const moveCallback = this.move.bind(this);
     const printCallback = () => {
-      this.#printer.printBridge(this.#bridge.getBridges());
+      this.#viewPrinter.printBridge(this.#bridge.getBridges());
       this.continue();
     };
     const errorCallback = this.selectDirection.bind(this);
@@ -104,7 +104,7 @@ class BridgeGame {
     const state = this.getState();
 
     this.setWinOrLoss();
-    this.#printer.printEndResult(bridges, state);
+    this.#viewPrinter.printEndResult(bridges, state);
   }
 
   setWinOrLoss() {
