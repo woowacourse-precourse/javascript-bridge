@@ -56,7 +56,14 @@ const InputView = {
     );
   },
 
-  checkRetry(retryOrQuit) {},
+  checkRetry(retryOrQuit) {
+    if (retryOrQuit === 'R') {
+      BridgeGameController.getCommand();
+      this.tryCount += 1;
+      this.index = 0;
+      this.readMoving();
+    }
+  },
 };
 
 module.exports = InputView;

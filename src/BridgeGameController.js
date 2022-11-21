@@ -30,6 +30,10 @@ const BridgeGameController = {
     if (this.isPass === false) this.failData();
     this.outputData(false);
   },
+  getCommand() {
+    this.upper = [];
+    this.lower = [];
+  },
   passData() {
     if (this.isPass && this.chooseBlock === 'U') {
       this.upper.push('O');
