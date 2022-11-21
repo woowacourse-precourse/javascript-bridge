@@ -1,4 +1,4 @@
-const { STATE } = require('./Constant');
+const { STATE } = require('../constant/Constant');
 
 const RESULT = Object.freeze({
   SUCCESS: '성공',
