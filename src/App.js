@@ -1,18 +1,14 @@
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
+const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 
 class App {
   play() {
-    this.startGame();
+    this.#startGame();
   }
 
-  startGame() {
+  #startGame() {
     OutputView.printStartMessage();
 
-    this.progressGame();
-  }
-
-  progressGame() {
     InputView.readBridgeSize();
   }
 }
