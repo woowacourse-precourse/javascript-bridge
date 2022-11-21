@@ -10,7 +10,7 @@ class GameResult {
     this.#tryCount = 1;
   }
 
-  setDefault(values) {
+  generate(values) {
     values.map((value, index) => this.#resultMap.set(index, { machine: value, player: null }));
   }
 
@@ -19,22 +19,18 @@ class GameResult {
     this.#resultMap.set(index, { ...existing, player: value });
   }
 
-  getResult() {
-    return this.#resultMap;
-  }
-
   calculateMatch(index, value) {
     this.updateResult(index, value);
     const existing = this.#resultMap.get(index);
     return existing.machine === existing.player;
   }
 
-  getAsArray() {
+  getResultAsArray() {
     return [...this.#resultMap];
   }
 
-  getCurrentIndex() {
-    return this.getAsArray().findIndex(([, value]) => !value.player);
+  getCurrentPosition() {
+    return this.getResultAsArray().findIndex(([, value]) => !value.player);
   }
 
   printHistory() {
@@ -43,7 +39,7 @@ class GameResult {
   }
 
   makeHistory() {
-    const history = this.getAsArray().filter(([, value]) => value.player);
+    const history = this.getResultAsArray().filter(([, value]) => value.player);
     const sides = Array.from({ length: 2 }, () => []);
 
     for (let i = 0; i < history.length; i++) {
@@ -66,12 +62,12 @@ class GameResult {
     return [up, down];
   }
 
-  printTryCount() {
-    OutputView.printMessage(`${MESSAGE.TRY_COUNT}${this.#tryCount}`);
+  showTryCountSummary() {
+    return `${MESSAGE.TRY_COUNT}${this.#tryCount}`;
   }
 
   clear() {
-    this.getAsArray().forEach(([key, value]) => {
+    this.getResultAsArray().forEach(([key, value]) => {
       this.#resultMap.set(key, { ...value, player: null });
     });
 
