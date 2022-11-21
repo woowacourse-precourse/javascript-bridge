@@ -83,9 +83,7 @@ class BridgeGame {
       this.#gameStatus.numberOfChallenge += 1;
       return this.retryPackage();
     }
-    if (doOrDie === 'Q') {
-      return this.quitPackage();
-    }
+    if (doOrDie === 'Q') return this.quitPackage();
   }
 
   retryPackage() {
