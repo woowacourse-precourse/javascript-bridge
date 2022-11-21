@@ -1,7 +1,7 @@
 const BridgeSet = require("./BridgeSet");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { GAME_CHOICE, SPACE_TO_MOVE, OUTPUT_MESSAGE } = require("./Utils")
+const { GAME_COMMAND } = require("./Utils")
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -11,7 +11,7 @@ class BridgeGame {
 
   constructor() {
     this.moving = "";
-    this.Count = 1;
+    this.tryCount = 1;
   }
 
   getBridge(size) {
@@ -58,11 +58,11 @@ class BridgeGame {
   }
 
   gameWheter() {
-    if(this.#command === GAME_CHOICE.GAME_RETRY) {
+    if(this.#command === GAME_COMMAND.GAME_RETRY) {
       return this.retry();
     }
-    if(this.#command === GAME_CHOICE.GAME_END) {
-      return this.end();
+    if(this.#command === GAME_COMMAND.GAME_END) {
+      return this.end(false);
     }
   }
   /**
@@ -76,7 +76,14 @@ class BridgeGame {
     return BridgeSet.repeat();
   }
 
-  end() {}
+  end(result) {
+    if(result === true) {
+      BridgeSet.successEnd(this.tryCount);
+    }
+    if(result === false) {
+      BridgeSet.failureEnd(this.tryCount);
+    }
+  }
 }
 
 module.exports = BridgeGame;

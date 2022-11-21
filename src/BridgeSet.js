@@ -1,6 +1,7 @@
 const InputView = require("./InputView");
+const { printResult, printMap } = require("./OutputView");
 const OutputView = require("./OutputView");
-const { SPACE_TO_MOVE, OUTPUT_MESSAGE } = require("./Utils");
+const { SPACE_TO_MOVE, OUTPUT_MESSAGE, GAME_RESULT } = require("./Utils");
 
 const BridgeSet = {
   overBridge: [],
@@ -83,6 +84,18 @@ const BridgeSet = {
     this.underBridge.pop();
     return OutputView.printMap(this.overBridge, this.underBridge);
   },
+
+  successEnd(tryCount) {
+    printResult(GAME_RESULT.SUCCESS, tryCount);
+    this.overBridge = [];
+    this.underBridge = [];
+  },
+
+  failureEnd(tryCount) {
+    printResult(GAME_RESULT.FAILURE, tryCount);
+    this.overBridge = [];
+    this.underBridge = [];
+  }
 }
 
 
