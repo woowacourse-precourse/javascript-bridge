@@ -10,9 +10,9 @@ const OutputView = {
   },
 
   printResult(result, success) {
-    Console.print(MESSAGE.printResultTitle)
+    Console.print(MESSAGE.printResultTitle);
     this.printMap(result.map);
-    Console.print(`${MESSAGE.printResult}${success ? RESULT.success : RESULT.fail}`)
+    Console.print(`${MESSAGE.printResult}${success ? RESULT.success : RESULT.fail}`);
     Console.print(`${MESSAGE.printRetry}${result.attempts}`);
   },
 
