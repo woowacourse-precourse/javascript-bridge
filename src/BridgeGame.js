@@ -16,7 +16,9 @@ class BridgeGame {
   constructor() {
     this.#userLocation = -1;
     this.#bridge = [];
-    this.#currBridge = [[], []];
+    this.#currBridge = [];
+    this.#currBridge.push([]);
+    this.#currBridge.push([]);
     this.#userLog = [];
     this.#trial = 0;
     this.#bridgeSize = 0;
@@ -47,7 +49,7 @@ class BridgeGame {
     //Validate.bridgeChoice(bridgeChoice);
     this.#userLog.push(bridgeChoice);
     this.#userLocation++;
-    if(bridgeChoice === bridge[this.#userLocation]) {
+    if(bridgeChoice === this.#bridge[this.#userLocation]) {
       if(bridgeChoice === "U") {
         this.#currBridge[0].push(" ");
         this.#currBridge[1].push("O");
@@ -57,7 +59,7 @@ class BridgeGame {
         this.#currBridge[1].push(" ");
       }
     }
-    if(bridgeChoice !== bridge[this.#userLocation]) {
+    if(bridgeChoice !== this.#bridge[this.#userLocation]) {
       if(bridgeChoice === "U") {
         this.#currBridge[0].push(" ");
         this.#currBridge[1].push("X");
