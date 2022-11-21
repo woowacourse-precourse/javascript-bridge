@@ -2,14 +2,14 @@ const { BRIDGE } = require("../constants/bridge.constants");
 const { printMap } = require("../view/OutputView");
 
 class BridgeResult {
-  #result;
+  result;
 
   constructor(bridge, idx, isPossibleMove) {
-    this.#result = this.makeResultBeforeCurrent(bridge, BRIDGE.UP, idx);
-    this.#result += this.makeCurrent(isPossibleMove, bridge[idx], BRIDGE.UP);
-    this.#result += "\n";
-    this.#result += this.makeResultBeforeCurrent(bridge, BRIDGE.DOWN, idx);
-    this.#result += this.makeCurrent(isPossibleMove, bridge[idx], BRIDGE.DOWN);
+    this.result = this.makeResultBeforeCurrent(bridge, BRIDGE.UP, idx);
+    this.result += this.makeCurrent(isPossibleMove, bridge[idx], BRIDGE.UP);
+    this.result += "\n";
+    this.result += this.makeResultBeforeCurrent(bridge, BRIDGE.DOWN, idx);
+    this.result += this.makeCurrent(isPossibleMove, bridge[idx], BRIDGE.DOWN);
   }
 
   makeResultBeforeCurrent(bridge, direction, idx) {
@@ -29,8 +29,8 @@ class BridgeResult {
     return "  ]";
   }
 
-  printMiddleResult() {
-    printMap(this.#result);
+  printResult() {
+    printMap(this.result);
   }
 }
 module.exports = BridgeResult;
