@@ -27,8 +27,10 @@ class App {
   };
 
   moveCallback = (input) => {
-    this.bridgeGame.move(input);
-    // 여기서 한번 갈라질 것
+    const { inputHistory, bridge } = this.bridgeGame.move(input);
+    OutputView.printMap(inputHistory, bridge, "D");
+    OutputView.printMap(inputHistory, bridge, "U");
+
     const nextMove = this.bridgeGame.getNextMove(input);
     this.doNextMove(nextMove);
   };
@@ -39,10 +41,17 @@ class App {
     // 재시작 관련로직 정리하기
     const result = this.bridgeGame.retry(input);
     if (!result) {
-      this.bridgeGame.end();
+      this.endCallback(this.bridgeGame.end());
       return;
     }
     InputView.readMoving(this.moveCallback);
+  };
+
+  endCallback = ({ inputHistory, bridge, isSuccess, tryCount }) => {
+    OutputView.printGameEnd();
+    OutputView.printMap(inputHistory, bridge, "D");
+    OutputView.printMap(inputHistory, bridge, "U");
+    OutputView.printResult({ isSuccess, tryCount });
   };
 
   doNextMove = (nextMove) => {
@@ -50,7 +59,7 @@ class App {
       case "Retry":
         return InputView.readGameCommand(this.retryCallback);
       case "End":
-        return this.bridgeGame.end();
+        return this.endCallback(this.bridgeGame.end());
       case "Move":
         return InputView.readMoving(this.moveCallback);
       default:

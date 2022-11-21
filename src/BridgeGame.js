@@ -29,8 +29,7 @@ class BridgeGame {
     });
     const { inputHistory, bridge } = this.#state;
 
-    OutputView.printMap(inputHistory, bridge, "D");
-    OutputView.printMap(inputHistory, bridge, "U");
+    return { inputHistory, bridge };
   }
 
   /**
@@ -49,10 +48,13 @@ class BridgeGame {
   end() {
     const { inputHistory, bridge, tryCount, currentPosition, length } =
       this.#state;
-    OutputView.printGameEnd();
-    OutputView.printMap(inputHistory, bridge, "D");
-    OutputView.printMap(inputHistory, bridge, "U");
-    OutputView.printResult({ isSuccess: currentPosition === length, tryCount });
+
+    return {
+      inputHistory,
+      bridge,
+      isSuccess: currentPosition === length,
+      tryCount,
+    };
   }
 
   getNextMove(input) {
