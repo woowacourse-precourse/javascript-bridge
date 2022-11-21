@@ -22,7 +22,7 @@ class BridgeGame {
     this.#userLog = [];
     this.#trial = 0;
     this.#bridgeSize = 0;
-    this.#survived = true;
+    this.#fail = false;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -68,7 +68,7 @@ class BridgeGame {
         this.#currBridge[0].push("X");
         this.#currBridge[1].push(" ");
       }
-      this.#survived = false;
+      this.#fail = true;
     }
   }
 
