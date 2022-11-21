@@ -21,10 +21,12 @@ const OutputView = {
 
     Console.print(`[ ${processedUBlock} ]`);
     Console.print(`[ ${processedDBlock} ]`);
+    Console.print('');
   },
 
   printResult(result, blocks, numberOfTry) {
     Console.print('최종 게임 결과');
+
     this.printMap(blocks[0], blocks[1]);
 
     Console.print(`게임 성공 여부: ${result}`);
