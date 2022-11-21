@@ -7,7 +7,7 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
+  readBridgeSize(callback) {
     Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
       try {
         Validation.validateBridgeSize(input);
@@ -15,24 +15,34 @@ const InputView = {
         Console.print(error);
         InputView.readBridgeSize();
       }
+      callback(input);
     });
+  },
+
+  getBridgeSize(bridgeSize) {
+    return Number(bridgeSize);
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(callback) {
     Console.readLine(
-      "\n이동할 칸을 선택해주세요. (위: U, 아래: D)",
+      "\n이동할 칸을 선택해주세요.(위: U, 아래: D)\n",
       (input) => {
         try {
-          Validation.validateBridgeSize(input);
+          Validation.validateMoving(input);
         } catch (error) {
           Console.print(error);
           InputView.readMoving();
         }
+        callback(input);
       }
     );
+  },
+
+  getMoving(moving) {
+    return moving;
   },
 
   /**
