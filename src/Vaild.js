@@ -2,7 +2,7 @@ const { isNumber, error } = require("./Utils");
 const { Console } = require("@woowacourse/mission-utils");
 const { ERROR_MSG } = require("./constants/Message");
 const Command = require("./constants/Command");
-const BRIDGE = require("./constants/Limit");
+const BRIDGE = require("./constants/Range");
 
 /**
  * 유효성 검사
@@ -48,7 +48,7 @@ const Vaild = {
   checkGameCommand(command) {
     try {
       if (command !== Command.RETRY && command !== Command.QUIT)
-        throw error(ERROR_MSG.INPUT_GAMECOMMAND);
+        throw error(ERROR_MSG.INPUT_GAME_COMMAND);
       return true;
     } catch (msg) {
       Console.print(msg.message);

@@ -25,7 +25,7 @@ const InputView = {
    */
   readBridgeSize(callback) {
     return this.inputMethod(
-      INPUT_MSG.BRIDGESIZE,
+      INPUT_MSG.BRIDGE_SIZE,
       callback,
       Vaild.checkBridgeSize
     );
@@ -45,7 +45,7 @@ const InputView = {
    */
   readGameCommand(callback) {
     return this.inputMethod(
-      INPUT_MSG.GAMECOMMAND,
+      INPUT_MSG.GAME_COMMAND,
       callback,
       Vaild.checkGameCommand
     );

@@ -65,7 +65,6 @@ class App {
    * @param {number} moving 이동할 위치 U혹은 D
    */
   checkBridge(moving) {
-    // 숫자가 아닌 문자로 결과값받기
     const [isSuccess, crossBridge] = this.#bridgeGame.move(moving);
     OutputView.printMap(crossBridge);
     if (isSuccess === 0) InputView.readGameCommand(this.retry.bind(this));
