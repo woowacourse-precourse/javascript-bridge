@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { PROMPT, ERROR } = require("./Constants/Constants");
+const ValidCheck = require("./ValidCheck");
 const OutputView = require("./OutputView");
 const BridgeGameController = require("./BridgeGameController");
 
@@ -18,6 +19,7 @@ const InputView = {
 
   readBridgeSizeCallback(size) {
     try {
+      ValidCheck.sizeInput(size);
       this.bridgeGameControl.makeBridgeGame(size); // 다리 만들기
       this.readMoving(); // 무빙 입력받기
     } 
