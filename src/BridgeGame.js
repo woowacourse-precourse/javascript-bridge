@@ -1,7 +1,40 @@
+const { Console } = require('@woowacourse/mission-utils');
+const BridgeMaker = require('./BridgeMaker');
+const { generate } = require('./BridgeRandomNumberGenerator');
+const {
+  BRIDGE_SIZE_ERROR,
+  MIN_BRIDGE_SIZE,
+  MAX_BRIDGE_SIZE,
+} = require('./constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  // eslint-disable-next-line consistent-return
+  #bridge;
+
+  constructor() {}
+
+  buildBridge(size) {
+    if (!this.isValidBridgeSize(size)) {
+      throw new Error(BRIDGE_SIZE_ERROR);
+    }
+    this.#bridge = BridgeMaker.makeBridge(size, generate);
+  }
+
+  isValidBridgeSize(bridgeSize) {
+    if (
+      // eslint-disable-next-line no-restricted-globals
+      isNaN(bridgeSize) ||
+      bridgeSize < MIN_BRIDGE_SIZE ||
+      bridgeSize > MAX_BRIDGE_SIZE ||
+      bridgeSize === ''
+    ) {
+      return false;
+    }
+    return true;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
