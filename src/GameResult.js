@@ -3,19 +3,21 @@ const OutputView = require('./OutputView');
 
 class GameResult {
   #resultMap;
-  #upside;
-  #downside;
+  #tryCount;
 
   constructor() {
     this.#resultMap = new Map();
-    this.#upside = [];
-    this.#downside = [];
+    this.#tryCount = 1;
   }
 
-  setResult(index, value) {
+  setDefault(values) {
+    values.map((value, index) => this.#resultMap.set(index, { machine: value, player: null }));
+    console.log(values, this.#resultMap);
+  }
+
+  updateResult(index, value) {
     const existing = this.#resultMap.get(index);
-    if (!existing) this.#resultMap.set(index, { machine: value, player: null });
-    else if (!existing?.player) this.#resultMap.set(index, { ...existing, player: value });
+    this.#resultMap.set(index, { ...existing, player: value });
   }
 
   getResult() {
@@ -23,26 +25,29 @@ class GameResult {
   }
 
   calcutateMatch(index, value) {
-    this.setResult(index, value);
+    this.updateResult(index, value);
     const existing = this.#resultMap.get(index);
     return existing.machine === existing.player;
   }
 
   // 리팩토링 사항
   makeHistory() {
-    const entries = [...this.#resultMap].filter((v) => v[1].player);
-    for (let i = 0; i < entries.length; i++) {
-      const { player, machine } = entries[i][1];
-      const [selected, notSelected] = [
-        `${player === machine ? OUTPUT_FORMAT.MATCH : OUTPUT_FORMAT.UNMATCH}`,
-        OUTPUT_FORMAT.NOT_SELECTED,
-      ];
-      const [up, down] = player === INPUT_FORMAT.UPSIDE ? [selected, notSelected] : [notSelected, selected];
-      this.#upside.push(up);
-      this.#downside.push(down);
-    }
+    const entries = [...this.#resultMap];
+    const upside = [];
+    const downside = [];
 
-    return [this.#upside, this.#downside];
+    for (let i = 0; i < entries.length; i++) {
+      const { machine, player } = entries[i][1];
+      const isMatch = machine === player;
+      if (player === INPUT_FORMAT.UPSIDE) {
+        upside.push(isMatch ? OUTPUT_FORMAT.MATCH : OUTPUT_FORMAT.UNMATCH);
+        downside.push(OUTPUT_FORMAT.NOT_SELECTED);
+      } else if (player === INPUT_FORMAT.DOWNSIDE) {
+        upside.push(OUTPUT_FORMAT.NOT_SELECTED);
+        downside.push(isMatch ? OUTPUT_FORMAT.MATCH : OUTPUT_FORMAT.UNMATCH);
+      }
+    }
+    return [upside, downside];
   }
 
   printHistory() {
