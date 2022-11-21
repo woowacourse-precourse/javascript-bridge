@@ -3,7 +3,6 @@ const InputView = require("../src/InputView");
 class App {
   play() {
     const bridge = InputView.readBridgeSize();
-    console.log(1);
   }
 }
 

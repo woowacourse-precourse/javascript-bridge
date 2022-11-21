@@ -2,13 +2,12 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker = require("../src/BridgeMaker");
 const { generate } = require("../src/BridgeRandomNumberGenerator");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
-
+const BridgeGame = require("../src/BridgeGame");
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    MissionUtils.Console.print("다리 건너기 게임을 시작합니다.\n");
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (number) => {
       this.checkPlayerInput(number);
       const bridge = BridgeMaker.makeBridge(
@@ -16,6 +15,8 @@ const InputView = {
         BridgeRandomNumberGenerator
       );
       console.log(bridge);
+      mainBridge = new BridgeGame();
+      mainBridge.setSize(number);
       this.readMoving();
     });
   },
@@ -26,6 +27,7 @@ const InputView = {
       this.checkInRange(input);
     } catch (e) {
       MissionUtils.Console.print(e);
+      this.readBridgeSize();
     }
   },
 
@@ -39,13 +41,17 @@ const InputView = {
   },
 
   readMoving() {
-    MissionUtils.Console.readLine("이동할 칸을 선택해주세요.\n", (number) => {
-      this.checkPlayerMove(number);
+    let location = 0;
+    MissionUtils.Console.readLine("이동할 칸을 선택해주세요.\n", (input) => {
+      this.checkPlayerMove(input);
+      location += 1;
+      mainBridge.getSize();
+      this.readMoving();
     });
   },
 
   checkPlayerMove(input) {
-    if (input !== "U" || input !== "D") {
+    if (input !== "U" && input !== "D") {
       throw "[ERROR] U 혹은 D을 입력해라!!";
     }
   },
