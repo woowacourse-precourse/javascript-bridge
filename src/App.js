@@ -71,6 +71,12 @@ class App {
 
     return NO_GAME_OVER;
   }
+
+  isGameSuccess() {
+    const length = this.getBridgeLength();
+
+    return this.#bridgeGame.isBridgeEnd(length);
+  }
 }
 
 module.exports = App;
