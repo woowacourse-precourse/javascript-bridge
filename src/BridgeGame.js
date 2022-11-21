@@ -17,7 +17,11 @@ class BridgeGame {
   // eslint-disable-next-line consistent-return
   #bridge;
 
-  constructor() {}
+  #moveInputArray;
+
+  constructor() {
+    this.#moveInputArray = [];
+  }
 
   buildBridge(size) {
     if (!this.isValidBridgeSize(size)) {
@@ -48,13 +52,25 @@ class BridgeGame {
     if (!this.isValidMove(moveInput)) {
       throw new Error(MOVE_INPUT_ERROR);
     }
-    //
-    OutputView.printGuide(moveInput);
+    const nowMoveIdx = this.#moveInputArray.length;
+    let isRightDirect = false;
+    if (this.#bridge[nowMoveIdx] === moveInput) {
+      isRightDirect = true;
+    }
+    this.#moveInputArray.push({ isRightDirect, moveInput });
   }
 
   isValidMove(moveInput) {
     if (moveInput === MOVE_DOWN || moveInput === MOVE_UP) return true;
     return false;
+  }
+
+  getMoveInputArray() {
+    return this.#moveInputArray;
+  }
+
+  getBridge() {
+    return this.#bridge;
   }
 
   /**
