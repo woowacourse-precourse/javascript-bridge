@@ -1,5 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils')
-const { step } = require('./lib/constants')
+const { step, option } = require('./lib/constants')
 
 /**
  * @typedef {Object} gameStatusCallback
@@ -7,9 +7,6 @@ const { step } = require('./lib/constants')
  * @property {function(number): void} setNextGameStatus
  */
 
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
 const InputView = {
   bridgeLength: {
     MIN: 3,
@@ -19,11 +16,13 @@ const InputView = {
   query: {
     BRIDGE_SIZE: '다리의 길이를 입력해주세요.',
     MOVEMENT: '이동할 칸을 선택해주세요. (위: U, 아래: D)',
+    COMMAND: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
   },
 
   error: {
     BRIDGE_SIZE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
     MOVEMENT: '[ERROR] 이동할 칸은 U 또는 D만 가능합니다.',
+    COMMAND: '[ERROR] 게임 옵션은 R 또는 Q만 가능합니다.',
   },
 
   /**
@@ -69,7 +68,7 @@ const InputView = {
   },
 
   /**
-   * @param {string} size
+   * @param {string} movement
    */
   validateMovement(movement) {
     const movementKeys = Object.keys(step)
@@ -81,9 +80,30 @@ const InputView = {
   },
 
   /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   * @param {gameStatusCallback} gameStatusCallback
    */
-  readGameCommand() {},
+  readGameCommand({ getNextGameStatus, setNextGameStatus }) {
+    MissionUtils.Console.readLine(`${this.query.COMMAND}\n`, (input) => {
+      const command = input.trim()
+
+      this.validateCommand(command)
+
+      const gameStatus = getNextGameStatus(option[command])
+      setNextGameStatus(gameStatus)
+    })
+  },
+
+  /**
+   * @param {string} command
+   */
+  validateCommand(command) {
+    const optionKeys = Object.keys(option)
+    const isInValid = !optionKeys.includes(command)
+
+    if (isInValid) {
+      throw new Error(this.error.COMMAND)
+    }
+  },
 }
 
 module.exports = InputView

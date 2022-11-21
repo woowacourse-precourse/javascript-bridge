@@ -10,7 +10,13 @@ const step = {
   U: 1, // Up
 }
 
+const option = {
+  R: 0, // Restart
+  Q: 1, // Quit
+}
+
 module.exports = {
   status,
   step,
+  option,
 }
