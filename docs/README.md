@@ -5,7 +5,7 @@
 [O] 입력값들 입력받고 에러처리해주는 기능구현
 [O] 입력한 수만큼 다리를 생성해준뒤 배열로 return 해주는 기능구현
 [O] Retry일 때 배열이 초기화 되는 로직추가
-[] 출력문 초기화
+[O] 출력문 초기화
 
 ## InputView
 - printGameStart() : 다리 건너기 게임을 시작합니다.
@@ -41,6 +41,8 @@ ex) bridge가 5면 배열은 [1,1,0,1,1] 이런식으로 랜덤하게 생성됨 
 -> 아마 for 반복문으로 각각 돌려서 해줘야 할듯
 bridgePrinterAbove라는 배열이 ['empty','O','O'] 이런식을 되어있다고 가정
 JSON.stringify 사용???? Ok
+
+- initializeArray() : retry시 출력문을 초기화시키는 로직
 
 -> 게임이 끝나면 printResult에 보내는 로직도 추가 [O]
 
