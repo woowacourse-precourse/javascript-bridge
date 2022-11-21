@@ -6,9 +6,9 @@ class App {
   #bridgeGameControl;
 
   play() {
-    this.#bridgeGameControl = new BridgeGameController(); // 게임 컨트롤러 생성
-    OutputView.printStart(); // 게임 시작 문구 출력
-    InputView.readBridgeSize(); // 다리 길이 입력 받기
+    this.#bridgeGameControl = new BridgeGameController();
+    OutputView.printStart();
+    InputView.readBridgeSize();
   }
 }
 
