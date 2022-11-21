@@ -69,6 +69,27 @@ class BridgeGameController {
     this.inputMoving();
   }
 
+  selectEndInput() {
+    InputView.readGameCommand((word) => {
+      this.tryCatch(Validate.selectEndInputValidate, word);
+
+      if (word === Constant.RESTART_ALPHABET || word === Constant.END_ALPHABET) {
+        return this.selectEnd(word);
+      }
+      return this.selectEndInput();
+    });
+  }
+
+  selectEnd(word) {
+    if (word === Constant.END_ALPHABET) {
+      const state = this.bridgeGame.judgeState();
+      OutputView.printResult(state, this.bridgeGame);
+    }
+
+    if (word === Constant.RESTART_ALPHABET) {
+      this.bridgeGame.retry(this.inputMoving);
+    }
+  }
 }
 
 module.exports = BridgeGameController;

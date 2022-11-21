@@ -17,6 +17,12 @@ const Validate = {
       throw Message.ERROR.invalidMovingValue;
     }
   },
+
+  selectEndInputValidate(word) {
+    if (!(word === Constant.RESTART_ALPHABET || word === Constant.END_ALPHABET)) {
+      throw Message.ERROR.invalidEndValue;
+    }
+  }
 }
 
 module.exports = Validate;
