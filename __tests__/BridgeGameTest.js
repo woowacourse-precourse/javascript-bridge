@@ -5,134 +5,51 @@ describe('Bridge Game Move Test', () => {
   beforeEach(() => {
     bridgeGame = new BridgeGame();
   });
-  describe('사용자의 입력값이 일치할 경우', () => {
-    test('사용자의 입력값이 U로 일치할 경우 Test', () => {
-      bridgeGame.updateBridge(['U', 'D', 'U']);
-      const result = bridgeGame.move(['U']);
-      expect(result).toEqual([['O', ' ']]);
-    });
 
-    test('사용자의 입력값이 D로 일치할 경우 Test', () => {
-      bridgeGame.updateBridge(['D', 'D', 'U']);
-      const result = bridgeGame.move(['D']);
-      expect(result).toEqual([[' ', 'O']]);
-    });
+  test('사용자가 입력한 개수와, 다리의 총 개수가 일치하는지 Test', () => {
+    const bridge = ['U', 'D', 'U'];
+    bridgeGame.updateBridge(bridge);
+
+    bridgeGame.selectMovemonetPosition('U');
+    bridgeGame.selectMovemonetPosition('D');
+    bridgeGame.selectMovemonetPosition('U');
+
+    const result = bridgeGame.isSuccess();
+    expect(result).toBeTruthy();
   });
 
-  describe('사용자의 입력값이 일치하지 않을 경우', () => {
-    test('사용자의 입력값이 U로 일치하지 않을 경우 Test', () => {
-      bridgeGame.updateBridge(['D', 'D', 'U']);
-      const result = bridgeGame.move(['U']);
-      expect(result).toEqual([['X', ' ']]);
-    });
+  test('사용자가 선택한 값으로 잘 이동했는지 Test', () => {
+    const bridge = ['U', 'D', 'U', 'D'];
 
-    test('사용자의 입력값이 D로 일치하지 않을 경우 Test', () => {
-      bridgeGame.updateBridge(['U', 'D', 'U']);
-      const result = bridgeGame.move(['D']);
-      expect(result).toEqual([[' ', 'X']]);
-    });
+    bridgeGame.updateBridge(bridge);
+
+    bridgeGame.selectMovemonetPosition('U');
+    bridgeGame.selectMovemonetPosition('D');
+    bridgeGame.selectMovemonetPosition('D');
+    bridgeGame.selectMovemonetPosition('U');
+    const result = bridgeGame.move();
+    expect(result).toEqual([
+      ['O', ' '],
+      [' ', 'O'],
+      [' ', 'X'],
+      ['X', ' '],
+    ]);
   });
 
-  describe('사용자의 입력값이 처음이 아닌 경우', () => {
-    test('2번째 사용자의 입력값이 일치하는 경우 Test', () => {
-      bridgeGame.updateBridge(['U', 'D', 'U']);
-      const result = bridgeGame.move(['U', 'D']);
-      expect(result).toEqual([
-        ['O', ' '],
-        [' ', 'O'],
-      ]);
+  describe('retry test', () => {
+    test('재시작시 사용자가 입력한값이 초기화가 되는지 Test', () => {
+      bridgeGame.selectMovemonetPosition('U');
+      bridgeGame.selectMovemonetPosition('D');
+      bridgeGame.retry();
+      const result = bridgeGame.getUserBridge();
+      expect(result).toEqual([]);
     });
 
-    test('2번째 사용자의 입력값이 일치하지 않는 경우 Test', () => {
-      bridgeGame.updateBridge(['U', 'D', 'U']);
-      const result = bridgeGame.move(['U', 'U']);
-      expect(result).toEqual([
-        ['O', ' '],
-        ['X', ' '],
-      ]);
+    test('재시작한 횟수 Test', () => {
+      bridgeGame.retry();
+      bridgeGame.retry();
+      const result = bridgeGame.getNumberOfAttempts();
+      expect(result).toBe(3);
     });
-  });
-});
-
-describe('Bridge Game draw Test', () => {
-  let bridgeGame;
-  beforeEach(() => {
-    bridgeGame = new BridgeGame();
-  });
-  describe('사용자의 입력값이 일치할 경우', () => {
-    test('사용자의 입력값이 U로 일치할 경우 Test', () => {
-      bridgeGame.updateBridge(['U', 'D', 'U']);
-      const moveBridge = bridgeGame.move(['U']);
-      const result = bridgeGame.draw(moveBridge);
-      expect(result).toEqual(['O', ' ']);
-    });
-
-    test('사용자의 입력값이 D로 일치할 경우 Test', () => {
-      bridgeGame.updateBridge(['D', 'D', 'U']);
-      const moveBridge = bridgeGame.move(['D']);
-      const result = bridgeGame.draw(moveBridge);
-      expect(result).toEqual([' ', 'O']);
-    });
-  });
-
-  describe('사용자의 입력값이 일치하지 않을 경우', () => {
-    test('사용자의 입력값이 U로 일치하지 않을 경우 Test', () => {
-      bridgeGame.updateBridge(['D', 'D', 'U']);
-      const moveBridge = bridgeGame.move(['U']);
-      const result = bridgeGame.draw(moveBridge);
-      expect(result).toEqual(['X', ' ']);
-    });
-
-    test('사용자의 입력값이 D로 일치하지 않을 경우 Test', () => {
-      bridgeGame.updateBridge(['U', 'D', 'U']);
-      const moveBridge = bridgeGame.move(['D']);
-      const result = bridgeGame.draw(moveBridge);
-      expect(result).toEqual([' ', 'X']);
-    });
-  });
-
-  describe('사용자의 입력값이 처음이 아닌 경우', () => {
-    test('2번째 사용자의 입력값이 일치하는 경우 Test', () => {
-      bridgeGame.updateBridge(['U', 'D', 'U']);
-      const moveBridge = bridgeGame.move(['U', 'D']);
-      const result = bridgeGame.draw(moveBridge);
-      expect(result).toEqual(['O |  ', '  | O']);
-    });
-
-    test('2번째 사용자의 입력값이 일치하지 않는 경우 Test', () => {
-      bridgeGame.updateBridge(['U', 'D', 'U']);
-      const moveBridge = bridgeGame.move(['U', 'U']);
-      const result = bridgeGame.draw(moveBridge);
-      expect(result).toEqual(['O | X', '  |  ']);
-    });
-  });
-});
-
-describe('Bridge Game reTry Test', () => {
-  let bridgeGame;
-  beforeEach(() => {
-    bridgeGame = new BridgeGame();
-  });
-  test('reTry userBridge 초기화 테스트 ', () => {
-    bridgeGame.addBridgeFromUser(['U', 'D']);
-    bridgeGame.retry();
-    const result = bridgeGame.getUserBridge();
-    expect(result).toEqual([]);
-  });
-
-  test('reTry userBridge 초기화 테스트 ', () => {
-    bridgeGame.addBridgeFromUser(['U', 'D']);
-    bridgeGame.retry();
-    const result = bridgeGame.getUserBridge();
-    expect(result).toEqual([]);
-  });
-
-  test('reTry 시도 횟수 4회 일경우 테스트 ', () => {
-    console.log(bridgeGame.getNumberOfAttempts());
-    bridgeGame.retry();
-    bridgeGame.retry();
-    bridgeGame.retry();
-    const result = bridgeGame.getNumberOfAttempts();
-    expect(result).toEqual(4);
   });
 });
