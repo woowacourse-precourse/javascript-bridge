@@ -40,7 +40,10 @@ class Player {
             const gameCommandInput = InputView.readGameCommand();
             const isRetried = bridgeGame.retry(gameCommandInput);
             if (isRetried) {
+                bridgeGame.setCurrentBridge([[],[]]);
+                bridgeGame.setCurrent(0);
                 this.repeatMove(bridgeAnswer, bridgeGame);
+                return;
             }
         }
         OutputView.printResult(currentBridge);
