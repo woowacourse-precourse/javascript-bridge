@@ -103,18 +103,10 @@ class GameController {
   checkCanMoveNextStep() {
     const status = this.BridgeGame.checkCurrentStatus()
 
-    if (status === "gameOver") {
-      this.getRetryOrEnd();
-      return;
-    }
+    if (status === "gameOver") return this.getRetryOrEnd();
+    if (status === "arrival") return this.end();
 
-    if (status === "arrival") {
-      this.end();
-      return;
-    }
-
-    this.getMoving();
-    return;
+    return this.getMoving();
   }
 
   getRetryOrEnd() {
