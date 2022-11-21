@@ -43,6 +43,17 @@ class BridgeGame {
     }
   }
 
+  getBridgeSize() {
+    this.view.readBridgeSize('다리의 길이를 입력해주세요. ', (bridgeSize) => {
+      try {
+        this.model.genBridge(bridgeSize);
+      } catch (e) {
+        this.view.printError(e);
+        this.getBridgeSize();
+      }
+    });
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -52,17 +63,19 @@ class BridgeGame {
     this.view.readMoving(
       '이동할 칸을 선택해주세요. (위: U, 아래: D)',
       (userMove) => {
-        this.#userLife = this.model.aliveOrDeath(userMove, this.#turn);
-        this.#turn += 1;
-        this.view.printMap(this.model.upsideBridge, this.model.downSideBridge);
+        try {
+          this.#userLife = this.model.aliveOrDeath(userMove, this.#turn);
+          this.#turn += 1;
+          this.view.printMap(
+            this.model.upsideBridge,
+            this.model.downSideBridge,
+          );
+        } catch (e) {
+          this.view.printError(e);
+          this.move();
+        }
       },
     );
-  }
-
-  getBridgeSize() {
-    this.view.readBridgeSize('다리의 길이를 입력해주세요. ', (bridgeSize) => {
-      this.model.genBridge(bridgeSize);
-    });
   }
 
   /**
@@ -88,8 +101,13 @@ class BridgeGame {
     this.view.readGameCommand(
       '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
       (userRetry) => {
-        Validation.isUserRetryValid(userRetry);
-        this.retryOrQuit(userRetry);
+        try {
+          Validation.isUserRetryValid(userRetry);
+          this.retryOrQuit(userRetry);
+        } catch (e) {
+          this.view.printError(e);
+          this.askUserRetry();
+        }
       },
     );
   }

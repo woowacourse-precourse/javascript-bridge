@@ -38,6 +38,10 @@ class GameView {
     this.outputView.print(`\n 게임 성공 여부: ${userLife ? '성공' : '실패'}`);
     this.outputView.print(`총 시도한 횟수: ${attemptNumber}`);
   }
+
+  printError(message) {
+    this.outputView.print(message);
+  }
 }
 
 module.exports = GameView;
