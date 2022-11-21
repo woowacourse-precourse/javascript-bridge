@@ -2,9 +2,14 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  userInputArray
-  constructor(){
-    this.userInputArray = [];
+  #userInputArray
+  #bridgeInfoArray
+  #tries
+
+  constructor(userIunputArray, bridgeInfoArray, tries){
+    this.#userInputArray = userIunputArray;
+    this.#bridgeInfoArray = bridgeInfoArray;
+    this.#tries = tries;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -13,12 +18,15 @@ class BridgeGame {
    */
   move(moveInput) {
     if(moveInput === 'U'){
-      this.userInputArray.push(1);
+      this.#userInputArray.push(1);
     }
     if(moveInput === 'D'){
-      this.userInputArray.push(0);
+      this.#userInputArray.push(0);
     }
-    return this.userInputArray;
+  }
+
+  getUserInputArray() {
+    return this.#userInputArray;
   }
 
   /**
@@ -27,8 +35,15 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.userInputArray = [];
-    return this.userInputArray;
+    this.#userInputArray = [];
+  }
+  
+  countTries(){
+    this.#tries += 1;
+  }
+
+  getTryCount(){
+    return this.#tries;
   }
 }
 
