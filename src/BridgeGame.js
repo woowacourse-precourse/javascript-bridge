@@ -2,27 +2,16 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 const { Console } = require('@woowacourse/mission-utils');
-const InputView = require("./InputView");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+성const Result = require("./Result");
+const GameManager = require("./GameManager");
 
 class BridgeGame {
   constructor() {
-    this.inputView = InputView;
+    this.size = null;
     this.bridgeAnswerArr = null;
-  }
-
-  setBridgeAnswer() {
-    let size;
-    while(!size) {
-      try {
-        size = this.inputView.readBridgeSize();
-      } catch (err) {
-        Console.print(err.message);
-      }
-    }
-
-    this.bridgeAnswerArr = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.count = 0;
+    this.gameManager = new GameManager();
+    this.result = new Result();
   }
 
   /**
@@ -30,7 +19,35 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {
+  move(answer) {
+      let inputMoving;
+      while(!inputMoving) {
+        try {
+          inputMoving = this.inputView.readMoving();
+        } catch (err) {
+          Console.print(err.message);
+        }
+      }
+      let result = this.compare(answer, inputMoving);
+      this.addResult(result, inputMoving);
+
+      return result;
+    }
+
+    addResult(result, inputMoving) {
+      if(inputMoving === 'U') {
+        this.outputView.upArr.push(result);
+        this.outputView.downArr.push(" ");
+      }
+      if(inputMoving === 'D') {
+        this.outputView.downArr.push(result);
+        this.outputView.upArr.push(" ");
+      }
+    }
+
+    compare(answer, input) {
+      if(answer === input) return "O";
+      return "X";
   }
 
   /**
@@ -38,9 +55,32 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    let inputGameCommand;
+    while(!inputGameCommand) {
+      try {
+        inputGameCommand = this.inputView.readMoving();
+      } catch (err) {
+        Console.print(err.message);
+      }
+
+      if(inputGameCommand === 'R') {
+        this.count = this.count + 1;
+        this.move();
+      }
+    }
+  }
+
 
   start() {
+    Console.print("다리 건너기 게임을 시작합니다.");
+    for (let answer in this.bridgeAnswerArr) {
+      let result = this.move(answer);
+      this.outputView.printMap();
+      if(result === "X") {
+        this.retry();
+      }
+    }
   }
 }
 
