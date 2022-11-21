@@ -5,15 +5,18 @@ const BRIDGE = {
 	DOWN: 'D',
 	CORRECT: 'O',
 	WRONG: 'X',
-	RANDOM_DOWN: 0,
-	RANDOM_UP: 1,
 };
 
 const GAME = {
 	START_MESSAGE: '다리 건너기 게임을 시작합니다.',
 	END_MESSAGE: '\n최종 게임 결과',
 	SUCCESS_MESSAGE: '\n게임 성공 여부: ',
-	TRY_COUNT_MESSAGE: '시도 횟수: ',
+	TRY_COUNT_MESSAGE: '총 시도한 횟수: ',
+};
+
+const RESULT = {
+	SUCCESS: '성공',
+	FAIL: '실패',
 };
 
 /**
@@ -54,7 +57,11 @@ const OutputView = {
 	 * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
 	 */
 	printResult(result) {
-		Console.print(`${GAME.SUCCESS_MESSAGE}${result.isMovable}`);
+		Console.print(
+			`${GAME.SUCCESS_MESSAGE}${
+				result.isMovable ? RESULT.SUCCESS : RESULT.FAIL
+			}`,
+		);
 		Console.print(`${GAME.TRY_COUNT_MESSAGE}${result.tryCount}`);
 	},
 

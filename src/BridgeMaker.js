@@ -3,8 +3,6 @@ const BRIDGE = {
 	DOWN: 'D',
 	CORRECT: 'O',
 	WRONG: 'X',
-	RANDOM_DOWN: 0,
-	RANDOM_UP: 1,
 };
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
