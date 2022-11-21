@@ -50,6 +50,12 @@ const InputView = {
           this.readGameCommand();
         }
 
+        if (this.now >= this.bridge.length) {
+          Console.close();
+
+          return;
+        }
+
         this.readMoving();
       }
     );
