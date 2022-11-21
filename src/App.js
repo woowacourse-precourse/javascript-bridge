@@ -1,6 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const InputView = require("./InputView");
 const { validateReadBridgeSize, validateReadMoving, validateReadGameCommand } = require("./Validator");
+const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
@@ -13,7 +14,8 @@ class App {
   inputBridgeSize() {
     InputView.readBridgeSize((bridgeSize) => {
       if (!validateReadBridgeSize(bridgeSize)) this.inputBridgeSize();
-      BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+      const solutionArr = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+      this.bridgeGame = new BridgeGame(solutionArr);
       this.inputMoving();
     });
   }
