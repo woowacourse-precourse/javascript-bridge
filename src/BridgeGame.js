@@ -44,25 +44,24 @@ class BridgeGame {
     }
   }
 
-  // 리팩토링 사항
   async controlMoving() {
     const current = this.gameResult.getCurrentIndex();
     if (current > -1) {
-      const moved = await this.move(current);
-      OutputView.printMap(this.gameResult.makeHistory());
+      const isMoved = await this.move(current);
+      this.gameResult.printHistory();
+      console.log('>>>>', this.gameResult.getResult());
 
-      return moved ? this.controlMoving() : await this.command();
+      return isMoved ? this.controlMoving() : await this.command();
     }
 
     return this.finish('success');
   }
 
-  // 리팩토링 사항
   async move(current) {
     const direction = await this.getMovingDirection();
-    const moved = this.gameResult.calcutateMatch(current, direction);
+    const isMoved = this.gameResult.calculateMatch(current, direction);
 
-    return moved;
+    return isMoved;
   }
 
   async command() {

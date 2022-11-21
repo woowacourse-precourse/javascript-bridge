@@ -27,17 +27,17 @@ const OutputView = {
    */
   printResult(type, gameResult) {
     this.printMessage(MESSAGE.FINAL);
-    this.printMap(gameResult.makeHistory());
+    gameResult.printHistory();
     this.printMessage(`${MESSAGE.RESULT}${type === 'success' ? MESSAGE.SUCCESS : MESSAGE.FAIL}`);
-    this.printMessage(`${MESSAGE.TRY_COUNT}${gameResult.getTryCount()}`);
-    this.close();
+    gameResult.printTryCount();
+    this.closePrint();
   },
 
   printMessage(message) {
     MissionUtils.Console.print(message);
   },
 
-  close() {
+  closePrint() {
     MissionUtils.Console.close();
   },
 };
