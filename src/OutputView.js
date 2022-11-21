@@ -12,6 +12,14 @@ const OutputView = {
   },
 
   /**
+   * 공백 한 줄을 출력한다.
+  */
+   printOneBlankLine(){
+    MissionUtils.Console.print("")
+  },
+
+
+  /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * @param {[string[],string[]]} checkedMap 현재까지 이동한 다리의 상태에 대한 리스트 내용
    */
