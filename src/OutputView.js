@@ -1,43 +1,42 @@
-// - 제공된 `OutputView` 객체를 활용해 구현해야 한다.
-// - `OutputView`의 파일 경로는 변경할 수 있다.
-// - `OutputView`의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
-// - 값 출력을 위해 필요한 메서드를 추가할 수 있다.
 const MissionUtils = require('@woowacourse/mission-utils');
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
+
+const MSG = {
+  START : '[ ',
+  END : ' ]',
+  FINALRESULT : '최종 게임 결과',
+  ISFINISHED : '게임 성공 여부: ',
+  TRY : '총 시도한 횟수: ',
+  SUCCESS : '성공',
+  FAIL : '실패',
+};
+
 const OutputView = {
   printStart() {
     MissionUtils.Console.print('다리 건너기 게임을 시작합니다.\n')
   },    
-  START : '[ ',
-  END : ' ]',
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+
    mergeMap(map) {
-    return this.START + map.join('') + this.END;
+    return MSG.START + map.join('') + MSG.END;
   },
 
   printMap(map) {
     const upSide = this.mergeMap(map[0]);
     const downSide = this.mergeMap(map[1]);
-    MissionUtils.Console.print(upSide);
-    MissionUtils.Console.print(downSide);
+    const resultMap = upSide +'\n' + downSide +'\n';
+    MissionUtils.Console.print(resultMap);
+    return resultMap;
   },
 
+  printResult(isFinished, tryCount, finalMap) {
+    let successOrFail = MSG.FAIL;
+    if(isFinished === true) successOrFail = MSG.SUCCESS;
+    
+    const final = MSG.FINALRESULT +'\n' + finalMap;
 
-
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult() {},
+    MissionUtils.Console.print(final);
+    MissionUtils.Console.print(MSG.ISFINISHED + successOrFail);
+    MissionUtils.Console.print(MSG.TRY + tryCount);
+  },
 };
-
-// OutputView.printMap([])
 
 module.exports = OutputView;

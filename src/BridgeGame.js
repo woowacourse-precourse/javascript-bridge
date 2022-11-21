@@ -1,14 +1,6 @@
-//BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
-// - 제공된 `BridgeGame` 클래스를 활용해 구현해야 한다.
-// - `BridgeGame`에 필드(인스턴스 변수)를 추가할 수 있다.
-// - `BridgeGame`의 파일 경로는 변경할 수 있다.
-// - `BridgeGame`의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
-// - 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
- const bridgeMaker = require('./BridgeMaker')
- const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
+const MissionUtils = require('@woowacourse/mission-utils')
+const bridgeMaker = require('./BridgeMaker')
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
  
  class BridgeGame {
    #size
@@ -17,7 +9,6 @@
    #MoveData
    #tryCount
    constructor(size) {
-     this.validateSize(size);
      this.#size = size;
      this.bridge();
      this.#bridge;
@@ -26,20 +17,34 @@
      this.#tryCount = 1;
    }
  
-   validateSize(size) {
-     if (isNaN(size) || size < 3 || size > 20){
-       throw new Error('[ERROR] 3 ~ 20사이의 숫자를 입력해주세요.')
-     }
+   validateSize(size, callback) {
+    try{ if (isNaN(size) || size < 3 || size > 20) throw new Error();} 
+    catch{
+      MissionUtils.Console.print('\n\n[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n\n');
+      callback.call(this);
+    };
    }
  
-   validateMoveInput(move) {
-     if (move === 'U' || move === 'D') return
-     throw new Error('[ERROR] "U" 혹은 "D"를 입력해주세요.')
+   validateMoveInput(move, callback) {
+     if (move === 'U' || move === 'D') {
+      return true;
+    }
+     try {throw new Error();}
+     catch {
+      MissionUtils.Console.print('\n\n[ERROR] "U" 혹은 "D"를 입력해주세요.\n\n');
+      callback.call(this);
+     };
    }
  
-   validateRetry(command) {
-     if (command === 'R' || command === 'Q') return
-     throw new Error('[ERROR] "U" 혹은 "D"를 입력해주세요.')
+   validateRetry(command, callback) {
+     if (command === 'R' || command === 'Q') {
+      return true;
+    }
+     try {throw new Error();}
+     catch {
+      MissionUtils.Console.print('\n\n[ERROR] "R" 혹은 "Q"를 입력해주세요.\n\n');
+      callback.call(this);
+     };
    }
  
    bridge() {
