@@ -19,11 +19,11 @@ class BridgeGame {
     const compareIndex = this.result.length;
 
     if (this.bridge[compareIndex] === movingInfo) {
-      this.result.push(movingInfo);
+      this.result.push([movingInfo, 'success']);
       return true;
     } 
       
-    this.result.push('fail');
+    this.result.push([movingInfo, 'fail']);
     return false;
   }
 
