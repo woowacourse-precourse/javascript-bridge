@@ -16,18 +16,30 @@ class BridgeGameController {
   }
 
   initBridgeGame() {
-    this.#bridge = BridgeMaker.makeBridge(
-      +InputView.readBridgeSize(),
-      BridgeRandomNumberGenerator.generate,
-    );
-    this.#bridgeGame = new BridgeGame(this.#bridge);
-    this.playBridgeGame();
+    // this.#bridge = BridgeMaker.makeBridge(
+    //   +InputView.readBridgeSize(),
+    //   BridgeRandomNumberGenerator.generate,
+    // );
+    // this.#bridgeGame = new BridgeGame(this.#bridge);
+    // this.playBridgeGame();
+
+    InputView.readBridgeSize(size => {
+      this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+      this.#bridgeGame = new BridgeGame(this.#bridge);
+      this.playBridgeGame();
+    });
   }
 
   playBridgeGame() {
-    this.#bridgeGame.move(InputView.readMoving());
-    OutputView.printMap(this.#bridge, this.#bridgeGame.getMovingLog());
-    this.checkBridgeGame();
+    // this.#bridgeGame.move(InputView.readMoving());
+    // OutputView.printMap(this.#bridge, this.#bridgeGame.getMovingLog());
+    // this.checkBridgeGame();
+
+    InputView.readMoving(direction => {
+      this.#bridgeGame.move(direction);
+      OutputView.printMap(this.#bridge, this.#bridgeGame.getMovingLog());
+      this.checkBridgeGame();
+    });
   }
 
   checkBridgeGame() {
@@ -38,9 +50,14 @@ class BridgeGameController {
   }
 
   requestRetryBridgeGame() {
-    const command = InputView.readGameCommand();
-    if (command === 'R') this.retryBridgeGame();
-    if (command === 'Q') this.endBridgeGame();
+    // const command = InputView.readGameCommand();
+    // if (command === 'R') this.retryBridgeGame();
+    // if (command === 'Q') this.endBridgeGame();
+
+    InputView.readGameCommand(command => {
+      if (command === 'R') this.retryBridgeGame();
+      if (command === 'Q') this.endBridgeGame();
+    });
   }
 
   retryBridgeGame() {
