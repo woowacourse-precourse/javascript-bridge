@@ -2,9 +2,9 @@ const GAME_SIGNATURE = require('./utils/constant');
 
 class BridgeGame {
   bridge;
+  trials = [];
   constructor() {
     this.trialCount = 1;
-    this.trials = [];
     this.status = GAME_SIGNATURE.gameOn;
   }
 
@@ -13,16 +13,19 @@ class BridgeGame {
   }
 
   move(direction) {
-    this.updateTrialList(direction, this.getStage());
-    this.checkStatus();
+    this.updateTrialList(direction, this.getCurrentStage());
+    this.updateStatus();
   }
 
-  checkStatus() {
-    const lastTrial = [...this.trials].pop();
+  updateStatus() {
+    const lastTrial = this.getLastTrial();
 
     if (this.isGameSuccess(lastTrial)) this.status = GAME_SIGNATURE.gameSuccess;
-    else if (this.isGameFailed(lastTrial)) this.status = GAME_SIGNATURE.gameFail;
-    else this.status = GAME_SIGNATURE.gameOn;
+    if (this.isGameFailed(lastTrial)) this.status = GAME_SIGNATURE.gameFail;
+  }
+
+  getLastTrial() {
+    return [...this.trials].pop();
   }
 
   isGameSuccess(lastTrial) {
@@ -33,7 +36,7 @@ class BridgeGame {
     return lastTrial.result === GAME_SIGNATURE.fail;
   }
 
-  getStage() {
+  getCurrentStage() {
     return this.trials.length;
   }
 
@@ -52,6 +55,7 @@ class BridgeGame {
   retry() {
     this.trialCount += 1;
     this.trials = [];
+    this.status = GAME_SIGNATURE.gameOn;
   }
 }
 
