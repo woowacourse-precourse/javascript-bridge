@@ -17,8 +17,8 @@ class BridgeGame {
   }
 
   move(direction) {
-    const playerPosition = this.#movementLogs.length; // 필드 round 대체 고민중...
-    const isCrossable = this.#bridge.isCrossable(playerPosition, direction);
+    const currentPosition = this.#movementLogs.length;
+    const isCrossable = this.#bridge.isCrossable(currentPosition, direction);
 
     this.saveMovementLog(isCrossable, direction);
   }
