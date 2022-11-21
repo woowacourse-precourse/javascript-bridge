@@ -15,7 +15,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moveDirection) {
-    // moveDirection 예외 처리 함수
+    this.handleMoveDirectionException(moveDirection);
     if (this.bridge[this.tryCount] === moveDirection) {
       this.tryCount += 1;
       return true;
@@ -48,6 +48,14 @@ class BridgeGame {
     if (count === 0) {
       throw new Error(ConstValue.MOVE_DIRECTION_EXCEPTION_ERROR_MESSAGE);
     }
+  }
+
+  checkSuccess() {
+    if (this.bridge.length === this.tryCount) {
+      return true;
+    }
+
+    return false;
   }
 }
 module.exports = BridgeGame;
