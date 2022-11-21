@@ -1,3 +1,5 @@
+const { REPRESENTATION } = require("./constants/values");
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -11,7 +13,9 @@ const BridgeMaker = {
     let upOrDownDecider;
     const movableBridgePath = [];
     while (movableBridgePath.length < size) {
-      upOrDownDecider = Number(generateRandomNumber()) ? "U" : "D";
+      upOrDownDecider = Number(generateRandomNumber())
+        ? REPRESENTATION.UPPER.abbreviatedForm
+        : REPRESENTATION.LOWER.abbreviatedForm;
       movableBridgePath.push(upOrDownDecider);
     }
     return movableBridgePath;

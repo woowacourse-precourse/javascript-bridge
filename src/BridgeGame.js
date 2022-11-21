@@ -1,5 +1,5 @@
-const OutputView = require("./OutputView");
-const InputView = require("./InputView");
+const OutputView = require("./view/OutputView");
+const InputView = require("./view/InputView");
 const BridgeMaker = require("./BridgeMaker");
 const generateRandomNumber = require("./BridgeRandomNumberGenerator").generate;
 const { close } = require("./utils/utils");
@@ -7,6 +7,7 @@ const BridgegLengthValidator = require("./utils/BridgeLengthValidator");
 const DirectionValidator = require("./utils/DirectionValidator");
 const { STATE } = require("./constants/message");
 const RegameCommandValidator = require("./utils/RegameCommandValidator");
+const { REPRESENTATION } = require("./constants/values");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -80,13 +81,13 @@ class BridgeGame {
   }
 
   moveMyPositionForward(direction, symbol) {
-    if (direction === "U") {
+    if (direction === REPRESENTATION.UPPER.abbreviatedForm) {
       this.#currentMap.upperPart.push(symbol);
-      this.fillBlankUnselectedPath(0);
+      this.fillBlankUnselectedPath(REPRESENTATION.UPPER.numericalForm);
     }
-    if (direction === "D") {
+    if (direction === REPRESENTATION.LOWER.abbreviatedForm) {
       this.#currentMap.lowerPart.push(symbol);
-      this.fillBlankUnselectedPath(1);
+      this.fillBlankUnselectedPath(REPRESENTATION.LOWER.numericalForm);
     }
     this.showMovedPath();
   }
@@ -111,7 +112,7 @@ class BridgeGame {
   }
 
   fillBlankUnselectedPath(direction) {
-    direction === 1
+    direction === REPRESENTATION.UPPER.numericalForm
       ? this.#currentMap.upperPart.push("   ")
       : this.#currentMap.lowerPart.push("   ");
   }
