@@ -2,10 +2,11 @@ const { Console } = require("@woowacourse/mission-utils");
 
 const BridgeGame = require("./BridgeGame");
 const { isInvalidBridgeLength, isInvalidMoving } = require("./exception");
-
+const { makeBridge } = require("./BridgeMaker");
 const { toNumber } = require("./helpers/common");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const { printMap } = require("./OutputView");
+const { printMap, printResult } = require("./OutputView");
+const { INPUT_LENGTH, INPUT_MOVE, INPUT_RETRY } = require("./constant/message");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -39,6 +40,12 @@ const InputView = {
         Console.close();
         return;
       }
+
+      if (bridgeGame.isFinish) {
+        InputView.readGameCommand(bridgeGame);
+        return;
+      }
+
       InputView.readMoving(bridgeGame);
     });
   },
@@ -46,7 +53,12 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGame) {
+    Console.readLine(INPUT_RETRY, (input) => {
+      bridgeGame.retry();
+      InputView.readMoving(bridgeGame);
+    });
+  },
 };
 
 module.exports = InputView;
