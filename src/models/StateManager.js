@@ -1,7 +1,12 @@
 class StateManager {
-  #stage = 0;
+  #stage;
 
-  #gameStatus = 'PLAYING';
+  #gameStatus;
+
+  constructor(stage, gameStatus) {
+    this.#stage = stage;
+    this.#gameStatus = gameStatus;
+  }
 
   increaseStage() {
     this.#stage += 1;

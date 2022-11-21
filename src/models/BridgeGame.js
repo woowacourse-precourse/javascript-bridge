@@ -1,5 +1,6 @@
 const { validate, isMovingInput } = require('../Validator');
 const MapGenerator = require('./MapGenerator');
+const StateManager = require('./StateManager');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -8,9 +9,9 @@ class BridgeGame {
 
   #stateManager;
 
-  constructor(bridge, stateManager) {
+  constructor(bridge) {
     this.#bridge = bridge;
-    this.#stateManager = stateManager;
+    this.#stateManager = new StateManager(0, 'PLAYING');
   }
 
   /**
@@ -46,6 +47,10 @@ class BridgeGame {
     if (isFinalStage) {
       this.#stateManager.updateGameStatus('CLEAR');
     }
+  }
+
+  getStateManager() {
+    return this.#stateManager;
   }
 
   /**

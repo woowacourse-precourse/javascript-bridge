@@ -6,14 +6,11 @@ const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 
 const BridgeGame = require('../models/BridgeGame');
 const { validate, isCommandInput } = require('../Validator');
-const StateManager = require('../models/StateManager');
 
 const MapGenerator = require('../models/MapGenerator');
 
 class GameContoller {
   #bridgeGame;
-
-  #stateManager = new StateManager();
 
   #gameStatusMap = {
     PLAYING: this.inputMoving.bind(this),
@@ -35,7 +32,7 @@ class GameContoller {
       size,
       BridgeRandomNumberGenerator.generate,
     );
-    this.#bridgeGame = new BridgeGame(bridge, this.#stateManager);
+    this.#bridgeGame = new BridgeGame(bridge);
 
     this.inputMoving();
   }
@@ -54,7 +51,9 @@ class GameContoller {
   }
 
   checkGameStatus() {
-    const gameStatus = this.#stateManager.getGameStatus();
+    const stateManager = this.#bridgeGame.getStateManager();
+
+    const gameStatus = stateManager.getGameStatus();
     this.#gameStatusMap[gameStatus]();
   }
 
