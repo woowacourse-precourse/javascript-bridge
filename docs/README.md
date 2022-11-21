@@ -90,20 +90,27 @@
  - [x] 배열에 들어갈 값은 `BridgeRandomNumberGenerator`를 통해 생성된 랜덤값이다.
  - [x] for문으로 사용자 입력값의 크기만큼 반복하며, 랜덤값을 생성하고 배열에 저장한다.
 
+### 4️⃣ 사용자가 입력한 값에 따라 다리를 이동하는 기능
+- [ ] 사용자에게 U, D 중 한개의 값을 입력받아서, 이동할 칸을 결정한다.
+- [ ] 사용자의 입력값은 배열에 저장한다. 'U'를 입력하면 1, 'D'를 입력하면 0을 저장한다.
+- [ ] 라운드 정보를 입력하여, 다리를 이동한다. 
+
 ## 커밋 단위 목록
 <!-- - **Git의 커밋 단위는 앞 단계에서 `docs/README.md`에 정리한 기능 목록 단위**로 추가한다. -->
 
 1. docs : `docs/README.md`에서 추가적인 기능 목록, 완료된 목록에서 체크한 사항이 있을경우 커밋
 2. test(OutputView) : `OutputView`에서 출력하는 메시지를 테스트하는 테스트 코드 작성
 3. feat(OutputView) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
-4. test(InputView) : 단위별로테스트 코드 작성
+4. test(InputView) : 도메인 로직 단위별로 테스트 코드 작성
 5. feat(InputView) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
-6. test(BridgeMaker) : 단위별로 테스트 코드 작성
+6. test(BridgeMaker) : 도메인 로직 단위별로 테스트 코드 작성
 7. feat(BridgeMaker) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
 8. feat(Print) : 출력 UI 로직을 구현하는 Print 클래스 및 메서드 구현
 9. feat(GameManager) : 게임을 진행하는 GameManager 클래스 및 메서드 구현
-10. test(OutputView) : `printMap`, `printResult` 메서드 테스트 코드 작성
-11. feat(OutputView) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
+10. test(BrigdeGame) : 도메인 로직 단위별로 테스트 코드 작성
+11. feat(BrigdeGame) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
+12. test(OutputView) : `printMap`, `printResult` 메서드 테스트 코드 작성
+13. feat(OutputView) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
 
 
 ## 프로그래밍 요구사항
