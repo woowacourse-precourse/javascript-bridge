@@ -13,6 +13,9 @@ const WORD = {
   CORRECT : "O",
   WRONG : "X",
   EMPTY : " ",
+  NEW_LINE : "\n",
+  LEFT_BRACKET : "[",
+  RIGHT_BRACKET : "]",
 }
 
 const ERROR = {

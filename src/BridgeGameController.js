@@ -1,6 +1,7 @@
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const OutputView = require("./OutputView");
 
 class BridgeGameController {
   #bridgeGame;
@@ -12,7 +13,7 @@ class BridgeGameController {
 
   manageMoving(moving) {
     const bridgeSketch = this.#bridgeGame.move(moving);
-    console.log(bridgeSketch);
+    OutputView.printMap(bridgeSketch);
   }
 }
 
