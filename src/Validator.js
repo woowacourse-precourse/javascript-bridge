@@ -1,4 +1,4 @@
-const ERROR_MESSAGES = require('./utils/messages');
+const { ERROR_MESSAGES } = require('./utils/messages');
 const { WRONG_BRIDGE_SIZE, WRONG_MOVEMENT } = ERROR_MESSAGES;
 
 const Validator = {
