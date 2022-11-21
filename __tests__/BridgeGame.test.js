@@ -950,4 +950,12 @@ describe('분류된 다리 로그 가져오는 메서드 테스트', () => {
     expect(uBridge).toEqual(RECEIVED2);
     expect(dBridge).toEqual(RECEIVED3);
   });
+
+  test('사용자 위치가 출발하기 전이라면 예외를 발생한다.', () => {
+    bridgeGame.retry();
+
+    expect(() => {
+      bridgeGame.getCurrentClassifiedBridgeLog();
+    }).toThrow(POSITION_ERROR_TEXT);
+  });
 });
