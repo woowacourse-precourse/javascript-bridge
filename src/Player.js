@@ -7,6 +7,14 @@ class Player {
     this.#currentLocation = 0;
   }
 
+  getPath() {
+    return this.#path;
+  }
+
+  getCurrentLocation() {
+    return this.#currentLocation;
+  }
+
   updatePath(direction, mark) {
     if (direction === 'U') {
       this.#path.upside.push(mark);
