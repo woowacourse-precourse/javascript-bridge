@@ -15,11 +15,14 @@ class InputHandling {
     try {
       Validation.checkBridgeSize(size);
       this.#answerBridgeArray = makeBridge(size, generate);
+      InputView.readMoving(this.handleMovingValue.bind(this))
     } catch (error) {
       Console.print(error);
       InputView.readBridgeSize(this.handleBridgeSize.bind(this));
     }
   }
+
+  handleMovingValue(direction) {}
 }
 
 module.exports = InputHandling;
