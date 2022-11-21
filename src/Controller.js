@@ -1,5 +1,6 @@
 const BridgeGame = require("./BridgeGame");
 const { readBridgeSize, readMoving } = require("./InputView");
+const { printMap } = require("./OutputView");
 
 class Controller {
   #bridgeGame;
