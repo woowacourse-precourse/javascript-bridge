@@ -1,3 +1,6 @@
+/**
+ * 다리 건너기 게임 중 사용되는 상수를 모으는 역할을 한다.
+ */
 const Constant = Object.freeze({
   COMMON: Object.freeze({
     newLine: '\n',

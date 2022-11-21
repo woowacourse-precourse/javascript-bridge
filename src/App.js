@@ -4,11 +4,17 @@ const InputView = require('./io/InputView');
 const OutputView = require('./io/OutputView');
 
 class App {
+  /**
+   * 다리 건너기 게임을 실행한다.
+   */
   play() {
     OutputView.printGameStart();
     this.askSize();
   }
 
+  /**
+   * 생성할 다리 길이를 입력 받는다.
+   */
   askSize() {
     InputView.readBridgeSize((input) => {
       this.game = new BridgeGame(+input);
@@ -16,6 +22,9 @@ class App {
     });
   }
 
+  /**
+   * 이동 정보를 입력 받는다.
+   */
   askMove() {
     InputView.readMoving((input) => {
       this.game.move(input);
@@ -26,6 +35,9 @@ class App {
     });
   }
 
+  /**
+   * 재시작 여부를 입력 받는다.
+   */
   askRestart() {
     InputView.readGameCommand((input) => {
       if (input === GAME_RESULT.retry) return this.game.retry(), this.askMove();
@@ -33,6 +45,9 @@ class App {
     });
   }
 
+  /**
+   * 게임을 종료한다.
+   */
   end() {
     OutputView.printResult(
       this.game.movingState,

@@ -48,10 +48,18 @@ class BridgeGame {
     this.tryCnt++;
   }
 
+  /**
+   * 게임 종료 여부를 확인한다.
+   * @returns {boolean}
+   */
   checkGameOver() {
     return Checker.checkGameOver(this.movingState, this.#bridge);
   }
 
+  /**
+   * 게임 성공 여부를 확인한다.
+   * @returns {boolean}
+   */
   judgeGameSuccess() {
     return Judge.judgeGameSuccess(this.movingState, this.#bridge);
   }
