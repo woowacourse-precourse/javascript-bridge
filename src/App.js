@@ -5,19 +5,31 @@ const InputView = require('./InputView')
 class App {
 
   #generatedBridge
-
+  #gameStatus
   
   play(){
     this.makeBridge()
-    this.playerMove()
+    this.startGame()
   }
 
   makeBridge(){
     this.#generatedBridge=InputView.readBridgeSize()
   }
 
+  startGame(){
+    this.#gameStatus={
+      playerLocation:0,
+      bridgeStatus:{
+        up:[],
+        down:[]
+      },
+      wrongFlag:false
+    }
+    this.playerMove() 
+  }
+
   playerMove(){
-    InputView.readMoving()
+    InputView.readMoving(this.#generatedBridge,this.#gameStatus)
   }
 
   
