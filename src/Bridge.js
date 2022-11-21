@@ -10,7 +10,7 @@ class Bridge {
 
   setBridge(bridgeSize) {
     this.bridge = BridgeMaker.makeBridge(bridgeSize, generate);
-    Console.print(this.bridge);
+    // Console.print(this.bridge);
   }
 
   getBridge() {
