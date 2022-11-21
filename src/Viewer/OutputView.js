@@ -41,7 +41,7 @@ const OutputView = {
    * @param {number} line
    * @param {boolean|undefined[]} resultMap
    * @param {number} level
-   * @returns
+   * @returns {string}
    */
   getMessageElement(line, resultMap, level) {
     if (resultMap[line][level] === true) return OUTPUT_MESSAGE.CORRECT;
