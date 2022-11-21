@@ -15,7 +15,7 @@ const BridgeMaker = {
 
     for (let i = 0; i < size; i++) {
       const random = generateRandomNumber();
-      const direction = random === INPUT_FORMAT.UPSIDE_INDEX ? INPUT_FORMAT.UPSIDE : INPUT_FORMAT.DOWNSIDE;
+      const direction = +random === INPUT_FORMAT.UPSIDE_INDEX ? INPUT_FORMAT.UPSIDE : INPUT_FORMAT.DOWNSIDE;
       bridge.push(direction);
     }
 
