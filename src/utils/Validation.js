@@ -12,19 +12,11 @@ const Validation = {
   },
 
   isBridgeWords(userInput) {
-    if (
-      userInput !== BRIDGE_DETAIL.UP.COMMAND ||
-      userInput !== BRIDGE_DETAIL.DOWN.COMMAND
-    )
-      throw ERROR_MESSAGE.IS_BRIDGE_WORDS;
+    if (!/^U|D/.test(userInput)) throw ERROR_MESSAGE.IS_BRIDGE_WORDS;
   },
 
   isRetryWords(userInput) {
-    if (
-      userInput !== BRIDGE_DETAIL.RETRY_COMMAND ||
-      userInput !== BRIDGE_DETAIL.END_COMMAND
-    )
-      throw ERROR_MESSAGE.IS_RETRY_WORDS;
+    if (!/^R|Q/.test(userInput)) throw ERROR_MESSAGE.IS_RETRY_WORDS;
   },
 };
 
