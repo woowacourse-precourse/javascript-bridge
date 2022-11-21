@@ -1,7 +1,7 @@
 const BridgeSizeCheck = require("../src/Check/BridgeSizeCheck");
 
 describe("다리 사이즈 입력 테스트", () => {
-  test.each([[7], [3], [20]])("다리 사이즈 정상 입력 (3-20 사이 정수)", input => {
+  test.each([7, 3, 20])("다리 사이즈 정상 입력 (3-20 사이 정수)", input => {
     expect(() => new BridgeSizeCheck(input)).not.toThrow("[ERROR]");
   });
 
