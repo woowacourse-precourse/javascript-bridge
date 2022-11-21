@@ -1,4 +1,4 @@
-const BridgeMap = require('../src/BridgeMap');
+const BridgeGame = require('../src/BridgeGame');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockQuestions = (answers) => {
@@ -10,22 +10,29 @@ const mockQuestions = (answers) => {
       }), MissionUtils.Console.readLine);
 };
 
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers
+    .reduce((acc, number) => acc
+      .mockReturnValueOnce(number), MissionUtils.Random.pickNumberInRange);
+};
+
 describe('다리 건너기 테스트', () => {
   test('다리 건너기 기록 체크', () => {
-    const pattern = ['U', 'D', 'D'];
+    mockRandoms([1, 0, 0]);
     const input = ['U', 'D', 'U'];
     const historyList = [
       new Map([['U', ['O']], ['D', [' ']]]),
       new Map([['U', ['O', ' ']], ['D', [' ', 'O']]]),
       new Map([['U', ['O', ' ', 'X']], ['D', [' ', 'O', ' ']]]),
     ];
-    const bridgeMap = new BridgeMap();
-    bridgeMap.makePattern(pattern);
+    const bridgeGame = new BridgeGame();
+    bridgeGame.makePattern(3);
     input.forEach((path, index) => {
-      expect(bridgeMap
+      expect(bridgeGame
         .move(path).getHistory())
         .toEqual(historyList[index]);
-      bridgeMap.incrementDistance();
+      bridgeGame.incrementDistance();
     });
   });
 });
