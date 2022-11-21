@@ -10,21 +10,21 @@ const InputValidation = {
   validateBridgeSize(input) {
     const input_int = parseInt(input);
     if (input_int % 1 !== 0 || isNaN(input)) {
-      throw Error(ERR_NOT_NUM);
+      throw new Error(ERR_NOT_NUM);
     }
     if (MIN_BRIDGE_SIZE > input_int || input_int > MAX_BRIDGE_SIZE) {
-      throw Error(ERR_NOT_NUM);
+      throw new Error(ERR_NOT_NUM);
     }
     return input_int;
   },
   validateMoving(input) {
     if (!MOVING_LIST.includes(input)) {
-      throw Error(ERR_MOVING_INVALID);
+      throw new Error(ERR_MOVING_INVALID);
     }
   },
   validateReplay(input) {
     if (!REPLAY_INPUT_LIST.includes(input)) {
-      throw Error(ERR_REPLAY_INVALID);
+      throw new Error(ERR_REPLAY_INVALID);
     }
   },
 };

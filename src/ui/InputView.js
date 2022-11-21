@@ -14,7 +14,7 @@ const InputView = {
         const bridgeSize = validateBridgeSize(input);
         nextStep(bridgeSize);
       } catch (e) {
-        Console.print(e);
+        Console.print(e.message);
         this.readBridgeSize(nextStep);
       }
     });
@@ -28,7 +28,7 @@ const InputView = {
         validateMoving(input);
         nextStep(input);
       } catch (e) {
-        Console.print(e);
+        Console.print(e.message);
         this.readMoving(nextStep);
       }
     });
@@ -43,7 +43,7 @@ const InputView = {
         validateReplay(input);
         nextStep(input);
       } catch (e) {
-        Console.print(e);
+        Console.print(e.message);
         this.readGameCommand(nextStep);
       }
     });
