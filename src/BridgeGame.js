@@ -22,8 +22,12 @@ class BridgeGame {
     return this.#position >= this.#bridge.length;
   }
 
-  isMatchCommand(command) {
-    return command === this.#bridge[this.#position];
+  canMove(command) {
+    return !this.isFinished() && command === this.#bridge[this.#position];
+  }
+
+  geNextRound() {
+    this.#position += 1;
   }
 
   /**
@@ -32,14 +36,9 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(command) {
-    if (this.isFinished()) {
-      return;
+    if (this.canMove(command)) {
+      this.geNextRound();
     }
-    if (this.isMatchCommand(command)) {
-      this.#position += 1;
-      return;
-    }
-    return;
   }
 
   /**
@@ -49,7 +48,5 @@ class BridgeGame {
    */
   retry(command) {}
 }
-
-new BridgeGame(3);
 
 module.exports = BridgeGame;
