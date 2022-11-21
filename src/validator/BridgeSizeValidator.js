@@ -1,12 +1,13 @@
+const { ERROR_MESSAGE } = require('../util/Constant');
 class BridgeSizeValidator {
   constructor(bridgeSize) {
     this.validate(bridgeSize);
   }
 
   validate(bridgeSize) {
-    if (this.isNull(bridgeSize)) throw new Error('[ERROR] 값을 입력해야 합니다.');
-    if (!this.isNumber(bridgeSize)) throw new Error('[ERROR] 숫자만 입력해야 합니다.');
-    if (this.isNotRightRange(bridgeSize)) throw new Error('[ERROR] 3이상 20이하 숫자를 입력해야 합니다.');
+    if (this.isNull(bridgeSize)) throw new Error(ERROR_MESSAGE.IS_EMPTY);
+    if (!this.isNumber(bridgeSize)) throw new Error(ERROR_MESSAGE.BRIDGE_SIZE_NOT_NUMBER);
+    if (this.isNotRightRange(bridgeSize)) throw new Error(ERROR_MESSAGE.BRIDGE_SIZE_NOT_RIGHT_RANGE);
     return this.toInteger(bridgeSize);
   }
 
