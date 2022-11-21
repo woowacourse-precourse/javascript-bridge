@@ -14,4 +14,6 @@ module.exports = {
   D: "D",
   O: "O",
   X: "X",
+
+  BLANK_SPACE: " ",
 };
