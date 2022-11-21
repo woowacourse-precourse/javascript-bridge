@@ -24,7 +24,7 @@ const InputView = {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D) \n', (input) => {
       if (!Validator.validateUpDown(input)) {
         Console.print('[ERROR] U 또는 D 중 한 문자만 입력해주세요.\n');
-        return this.readMoving(callback, model, index);
+        return this.readMoving(callback, index, model);
       }
       callback(input, index);
       return index < model.getBridgeSize() - 1 && this.readMoving(callback, index + 1, model);
