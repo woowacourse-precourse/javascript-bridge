@@ -19,11 +19,14 @@ class App {
 
   play() {
     printStart();
-    readBridgeSize(this.onReadBridgeSize.bind(this));
+    this.readBridgeSize();
   }
 
-  gameStart() {
-    readMoving(this.onReadMoving.bind(this));
+  gameStart(size) {
+    const bridge = makeBridge(parseInt(size, 10), generate);
+    this.#game = new BridgeGame(bridge);
+
+    this.readMoving();
   }
 
   /**
@@ -43,10 +46,20 @@ class App {
   executeByJudgement(judgement) {
     if (judgement === JUDGEMENT.IS_ARRIVE)
       printResult(this.#game.getMovedSpace(), true, this.#game.getTryCount());
-    else if (judgement === JUDGEMENT.IS_SUCCESS_MOVED)
-      readMoving(this.onReadMoving.bind(this));
-    else if (judgement === JUDGEMENT.IS_FAIL_MOVED)
-      readGameCommand(this.onReadGameCommand.bind(this));
+    else if (judgement === JUDGEMENT.IS_SUCCESS_MOVED) this.readMoving();
+    else if (judgement === JUDGEMENT.IS_FAIL_MOVED) this.readGameCommand();
+  }
+
+  readBridgeSize() {
+    readBridgeSize(this.onReadBridgeSize.bind(this));
+  }
+
+  readMoving() {
+    readMoving(this.onReadMoving.bind(this));
+  }
+
+  readGameCommand() {
+    readGameCommand(this.onReadGameCommand.bind(this));
   }
 
   /**
@@ -56,10 +69,7 @@ class App {
   onReadBridgeSize(size) {
     validateReadBridgeSize(size);
 
-    const bridge = makeBridge(parseInt(size, 10), generate);
-    this.#game = new BridgeGame(bridge);
-
-    this.gameStart();
+    this.gameStart(size);
   }
 
   /**

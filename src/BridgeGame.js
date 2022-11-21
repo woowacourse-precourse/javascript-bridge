@@ -46,7 +46,7 @@ class BridgeGame {
   retry(app) {
     this.#tryCount += 1;
     this.#movedSpace = [];
-    app.gameStart();
+    app.readMoving();
   }
 
   /**
