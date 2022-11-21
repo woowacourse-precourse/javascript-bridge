@@ -12,38 +12,40 @@ const InputView = {
     }[type] ?? new Error('[ERROR] 존재하지 않는 타입입니다.');
   },
 
+  retry(error, read, callback) {
+    Console.print(error.message);
+    read(callback);
+  },
+
   readBridgeSize(callback) {
-    Console.readLine(this.message('INPUT_BRIDGE_SIZE'), (size) => {
+    Console.readLine(InputView.message('INPUT_BRIDGE_SIZE'), (size) => {
       try {
         BridgeSize.validate(size);
         callback(size);
       } catch (error) {
-        Console.print(error.message);
-        InputView.readBridgeSize(callback);
+        InputView.retry(error, InputView.readBridgeSize, callback);
       }
     });
   },
 
   readMoving(callback) {
-    Console.readLine(this.message('INPUT_MOVING'), (direction) => {
+    Console.readLine(InputView.message('INPUT_MOVING'), (direction) => {
       try {
         BridgeDirection.validate(direction);
         callback(direction);
       } catch (error) {
-        Console.print(error.message);
-        InputView.readMoving(callback);
+        InputView.retry(error, InputView.readMoving, callback);
       }
     });
   },
 
   readGameCommand(callback) {
-    Console.readLine(this.message('INPUT_GAME_COMMAND'), (answer) => {
+    Console.readLine(InputView.message('INPUT_GAME_COMMAND'), (answer) => {
       try {
         GameCommand.validate(answer);
         callback(answer);
       } catch (error) {
-        Console.print(error.message);
-        InputView.readGameCommand(callback);
+        InputView.retry(error, InputView.readGameCommand, callback);
       }
     });
   },
