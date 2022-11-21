@@ -19,6 +19,9 @@ const BridgeGameController = {
       bridgeGame.move(moving);
 
       if (!bridgeGame.isSuccess()) return BridgeGameController.askRetry(bridgeGame);
+      if (bridgeGame.isFinal()) return BridgeGameController.end(bridgeGame);
+
+      BridgeGameController.moveBridge(bridgeGame);
     });
   },
 
@@ -31,6 +34,10 @@ const BridgeGameController = {
   retry(bridgeGame) {
     bridgeGame.retry();
     BridgeGameController.moveBridge(bridgeGame);
+  },
+
+  end(bridgeGame) {
+    OutputView.printResult();
   },
 };
 
