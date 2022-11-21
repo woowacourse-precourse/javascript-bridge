@@ -11,8 +11,8 @@ const OutputView = {
   printMap(moveBridge) {
     let up = moveBridge.get("U");
     let down = moveBridge.get("D");
-    MissionUtils.Console.print(`[${up.split("").join(" | ")}]`);
-    MissionUtils.Console.print(`[${down.split("").join(" | ")}]`);
+    MissionUtils.Console.print(`[ ${ up.split("").join(" | ") } ]`);
+    MissionUtils.Console.print(`[ ${ down.split("").join(" | ") } ]`);
   },
 
   /**
