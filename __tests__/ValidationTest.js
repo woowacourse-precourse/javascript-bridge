@@ -19,4 +19,11 @@ describe('입력 오류 테스트', () => {
       expect(() => movingValidation(input)).toThrow(`${ERROR.prefix}`);
     }
   );
+
+  test.each([['g'], [9], ['']])(
+    '올바르지 않은 게임 키 입력 테스트',
+    (input) => {
+      expect(() => gameCommandValidation(input)).toThrow(`${ERROR.prefix}`);
+    }
+  );
 });
