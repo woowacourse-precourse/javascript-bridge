@@ -1,5 +1,6 @@
-const { QUESTION } = require("./constants/message");
-const { readLine } = require("./utils/utils");
+const { QUESTION } = require("../constants/message");
+const BridgeLengthValidator = require("../utils/BridgeLengthValidator");
+const { readLine } = require("../utils/utils");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
