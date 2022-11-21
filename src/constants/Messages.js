@@ -9,4 +9,13 @@ const USER_MOVE_MESSAGES = Object.freeze({
   INPUT_ERROR: "[ERROR] 이동할 칸은 U(위) 와 D(아래)만 입력 가능합니다.",
 });
 
-module.exports = { BRIDGE_INPUT_MESSAGES, USER_MOVE_MESSAGES };
+const USER_RESTART_MESSAGES = Object.freeze({
+  INPUT: "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+  INPUT_ERROR: "[ERROR] 재시도 여부는 R(재시도) 와 Q(종료)만 입력 가능합니다.",
+});
+
+module.exports = {
+  BRIDGE_INPUT_MESSAGES,
+  USER_MOVE_MESSAGES,
+  USER_RESTART_MESSAGES,
+};
