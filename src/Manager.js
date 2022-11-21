@@ -22,6 +22,12 @@ class Manager{
     InputView.readMoving((direction) => {
       Validation.isValidDirection(direction);
       this.bridgeGame.move(direction);
+
+      const [upBridge, downBridge] = this.bridgeGame.getCurrentMap();
+      OutputView.printMap(upBridge, downBridge);
+
+      const isCorrect = this.bridgeGame.getIsCorrect();
+      isCorrect ? this.requestDirection() : console.log("게임 결과 출력");
     });
   }
 }
