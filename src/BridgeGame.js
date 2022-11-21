@@ -24,6 +24,13 @@ class BridgeGame {
    */
   retry() {}
 
+  get isGoWay() {
+    for (let i = 0; i < this.way.length; i++) {
+      if(this.way !== this.#root[i]) return true;
+    }
+    return false;
+  }
+
   compareResult(selectWay) {
     let result = [];
     for(let i = 0; i < this.way.length; i++) {
@@ -31,7 +38,7 @@ class BridgeGame {
       result.push(compareResult)
     }
 
-    return result
+    return result;
   }
 
   calculatorOXIndex(selectWay, wayIndex) {

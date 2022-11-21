@@ -25,6 +25,8 @@ class App {
   nextMoving = (way) => {
     this.#bridgeGame.move(way);
     Output.printMap(this.#bridgeGame);
+
+    this.#bridgeGame.isGoWay && Input.readMoving(this.nextMoving)
   }
 }
 
