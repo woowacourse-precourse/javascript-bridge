@@ -1,4 +1,3 @@
-const MapMaker = require("../MapMaker");
 const Console = require("../utils/Console");
 const { OUTPUT } = require("./stringsUI");
 
@@ -14,11 +13,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridgeGamePresenter, { upperBridge, lowerBridge }) {
+  printMap({ upperBridge, lowerBridge }) {
     Console.print(upperBridge.join(" "));
     Console.print(lowerBridge.join(" "));
     this.printLineBreak();
-    bridgeGamePresenter.checkNextMove();
   },
 
   /**

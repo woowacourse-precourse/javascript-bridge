@@ -5,7 +5,7 @@ class Bridge {
     this.#bridgeArr = createdArr;
   }
 
-  crossBridge({ bridgeIndex, selectedMove }) {
+  crossBridge(bridgeIndex, selectedMove) {
     const isMove = this.#bridgeArr[bridgeIndex] === selectedMove;
     return isMove;
   }

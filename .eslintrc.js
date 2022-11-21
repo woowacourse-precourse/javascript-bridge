@@ -16,6 +16,7 @@ module.exports = {
     "arrow-body-style": "off",
     "max-depth": ["error", 2],
     "max-lines-per-function": ["error", 10],
+    "max-params": ["error", 3],
   },
   plugins: ["jest"],
   extends: ["plugin:jest/recommended"],

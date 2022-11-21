@@ -21,13 +21,12 @@ class Player {
     return this.#inputArr.length;
   }
 
-  setInputArray(itemObj) {
+  addInputArrayItem(itemObj) {
     this.#inputArr.push(itemObj);
   }
 
-  createBridgeMap(bridgeGamePresenter) {
+  createBridgeMap() {
     this.#bridgeMap = new MapMaker(this.#inputArr);
-    bridgeGamePresenter.printMove();
   }
 
   getBridgeMap() {

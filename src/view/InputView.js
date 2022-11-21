@@ -11,26 +11,26 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(bridgeGamePresenter) {
+  readBridgeSize(gamePresenter) {
     Console.readLine(INPUT.GET_SIZE, (size) => {
-      bridgeGamePresenter.handleInput(size, INPUT_TYPE.SIZE);
+      gamePresenter.handleInput(size, INPUT_TYPE.SIZE);
     });
   },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridgeGamePresenter) {
+  readMoving(gamePresenter) {
     Console.readLine(INPUT.GET_MOVING, (selectedMove) => {
-      bridgeGamePresenter.handleInput(selectedMove, INPUT_TYPE.MOVING);
+      gamePresenter.handleInput(selectedMove, INPUT_TYPE.MOVING);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridgeGamePresenter) {
+  readGameCommand(gamePresenter) {
     Console.readLine(INPUT.GET_RETRY, (retry) => {
-      bridgeGamePresenter.handleInput(retry, INPUT_TYPE.GAME_COMMAND);
+      gamePresenter.handleInput(retry, INPUT_TYPE.GAME_COMMAND);
     });
   },
 };

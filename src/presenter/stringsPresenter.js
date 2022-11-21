@@ -7,27 +7,36 @@ const PLAYER_STATE = {
 };
 
 const INPUT_TRY_FN = {
-  size(bridgeGamePresenter, size) {
-    bridgeGamePresenter.createBridgeModel(size);
+  size(gamePresenter, size) {
+    gamePresenter.createBridge(size);
   },
-  moving(bridgeGamePresenter, selectedMove) {
-    bridgeGamePresenter.move(selectedMove);
+  moving(gamePresenter, selectedMove) {
+    gamePresenter.checkmove(selectedMove);
   },
-  gameCommand(bridgeGamePresenter, retry) {
-    bridgeGamePresenter.checkRetryInput(retry);
+  gameCommand(gamePresenter, retry) {
+    gamePresenter.checkRetryInput(retry);
   },
 };
 
 const INPUT_CATCH_FN = {
-  size(bridgeGamePresenter) {
-    bridgeGamePresenter.getBridgeSize();
+  size(gamePresenter) {
+    gamePresenter.getBridgeSize();
   },
-  moving(bridgeGamePresenter) {
-    bridgeGamePresenter.getPlayerMove();
+  moving(gamePresenter) {
+    gamePresenter.getPlayerMove();
   },
-  gameCommand(bridgeGamePresenter) {
-    bridgeGamePresenter.getGameCommand();
+  gameCommand(gamePresenter) {
+    gamePresenter.getGameCommand();
   },
 };
 
-module.exports = { PLAYER_STATE, INPUT_CATCH_FN, INPUT_TRY_FN };
+const RETRY_FN = {
+  R(gamePresenter) {
+    gamePresenter.bridgeGameModel.retry();
+  },
+  Q(gamePresenter) {
+    gamePresenter.quit();
+  },
+};
+
+module.exports = { PLAYER_STATE, INPUT_CATCH_FN, INPUT_TRY_FN, RETRY_FN };
