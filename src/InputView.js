@@ -10,17 +10,20 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     Console.readLine("다리의 길이를 입력해주세요.\n", (bridgeSize) => {
+      Console.print("");
       ErrorChecker.checkBridgeSizeValidation(bridgeSize);
       bridgeGame.init(bridgeSize);
+      this.readMoving(bridgeGame);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    MissionUtils.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (movingStep) => {
+  readMoving(bridgeGame) {
+    Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (movingStep) => {
       ErrorChecker.checkValidChar(VALID_CHAR.UP, VALID_CHAR.DOWN, movingStep);
+      bridgeGame.move(movingStep);
     });
   },
 
