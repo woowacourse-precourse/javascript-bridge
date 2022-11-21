@@ -1,6 +1,4 @@
-const Validation = require("./Validation");
 const GameManager = require("./GameManager");
-const { Console } = require("@woowacourse/mission-utils");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
