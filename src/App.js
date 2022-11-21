@@ -50,15 +50,9 @@ class App {
   }
 
   checkGameProgress() {
-    if (!this.#game.isPass()) {
-      this.readGameCommand();
-      return;
-    }
-    if (this.#game.isClear()) {
-      this.endGame();
-      return;
-    }
-    this.readMoving();
+    if (this.#game.isClear()) this.endGame();
+    else if (this.#game.isPass()) this.readMoving();
+    else this.readGameCommand();
   }
 
   endGame() {
