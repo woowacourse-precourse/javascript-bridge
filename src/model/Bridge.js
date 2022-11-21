@@ -15,7 +15,6 @@ class Bridge {
     this.#bridge = makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     this.#map.up = [...defaultArray];
     this.#map.down = [...defaultArray];
-    // console.log(this.#bridge);
   }
 
   makeDefaultArray(bridgeSize) {
@@ -27,10 +26,6 @@ class Bridge {
     return temp;
   }
 
-  print(index) { // deprecated
-    printMap(index, this.#map);
-  }
-
   getLength() {
     return this.#bridge.length;
   }
@@ -39,22 +34,26 @@ class Bridge {
     return this.#level;
   }
 
+  print(index) {
+    printMap(index, this.#map);
+  }
+
   checkBridge(index, command) {
     this.#level = index;
     const comparison = this.#bridge[index] === command;
-    this.updateMap(index, command, comparison);
+    this.updateMap(index, command, comparison ? MAP_VALUE.HIT : MAP_VALUE.MISS);
     this.print(index);
     return comparison;
   }
 
-  updateMap(index, command, comparison) {
+  updateMap(index, command, marker) {
     if (command === COMMAND.UP) {
-      this.#map.up[index] = comparison ? MAP_VALUE.HIT : MAP_VALUE.MISS;
+      this.#map.up[index] = marker;
       this.#map.down[index] = MAP_VALUE.EMPTY;
     }
     if (command === COMMAND.DOWN) {
       this.#map.up[index] = MAP_VALUE.EMPTY;
-      this.#map.down[index] = comparison ? MAP_VALUE.HIT : MAP_VALUE.MISS;
+      this.#map.down[index] = marker;
     }
   }
 }
