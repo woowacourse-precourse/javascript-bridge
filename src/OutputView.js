@@ -30,14 +30,14 @@ const OutputView = {
     gameResult.printHistory();
     this.printMessage(`${MESSAGE.RESULT}${type === 'success' ? MESSAGE.SUCCESS : MESSAGE.FAIL}`);
     gameResult.printTryCount();
-    this.closePrint();
+    this.exit();
   },
 
   printMessage(message) {
     MissionUtils.Console.print(message);
   },
 
-  closePrint() {
+  exit() {
     MissionUtils.Console.close();
   },
 };

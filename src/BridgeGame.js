@@ -11,81 +11,76 @@ const GameResult = require('./GameResult');
 
 class BridgeGame {
   constructor() {
-    this.gameResult = new GameResult();
+    this.resultMap = new GameResult();
   }
 
-  async proceed() {
-    OutputView.printMessage(MESSAGE.ENTRY);
-    await this.makeBridge();
-    await this.controlMoving();
-  }
-
-  async makeBridge() {
-    const size = await this.getBridgeSize();
+  async makeBridge(size) {
+    // const size = await this.getBridgeSize();
     const bridge = BridgeMaker.makeBridge(size, generateRandomNumber);
-    this.gameResult.setDefault(bridge);
+    this.resultMap.setDefault(bridge);
   }
 
-  async getBridgeSize() {
-    try {
-      return await InputView.readBridgeSize();
-    } catch (error) {
-      OutputView.printMessage(error.message);
-      return this.getBridgeSize();
-    }
-  }
+  // async getBridgeSize() {
+  //   try {
+  //     return await InputView.readBridgeSize();
+  //   } catch (error) {
+  //     OutputView.printMessage(error.message);
+  //     return this.getBridgeSize();
+  //   }
+  // }
 
-  async getMovingDirection() {
-    try {
-      return await InputView.readMoving();
-    } catch (error) {
-      OutputView.printMessage(error.message);
-      return this.getMovingDirection();
-    }
-  }
+  // async getMovingDirection() {
+  //   try {
+  //     return await InputView.readMoving();
+  //   } catch (error) {
+  //     OutputView.printMessage(error.message);
+  //     return this.getMovingDirection();
+  //   }
+  // }
 
-  async controlMoving() {
-    const current = this.gameResult.getCurrentIndex();
-    if (current > -1) {
-      const isMoved = await this.move(current);
-      this.gameResult.printHistory();
-      console.log('>>>>', this.gameResult.getResult());
+  // async controlMoving() {
+  //   const current = this.resultMap.getCurrentIndex();
+  //   if (current > -1) {
+  //     const isMoved = await this.move(current);
+  //     this.resultMap.printHistory();
 
-      return isMoved ? this.controlMoving() : await this.command();
-    }
+  //     return isMoved ? this.controlMoving() : await this.command();
+  //   }
 
-    return this.finish('success');
-  }
+  //   return this.finish('success');
+  // }
 
-  async move(current) {
-    const direction = await this.getMovingDirection();
-    const isMoved = this.gameResult.calculateMatch(current, direction);
+  async move(current, asyncCb) {
+    // const direction = await this.getMovingDirection();
+    const direction = asyncCb();
+    const isMoved = this.resultMap.calculateMatch(current, direction);
 
     return isMoved;
   }
 
-  async command() {
-    const command = await this.getGameCommand();
-    command === INPUT_FORMAT.RETRY ? this.retry() : this.finish('fail');
+  async command(controller, command) {
+    // const command = await this.getGameCommand();
+    command === INPUT_FORMAT.RETRY ? this.retry(controller) : this.finish('fail');
   }
 
-  async getGameCommand() {
-    try {
-      return await InputView.readGameCommand();
-    } catch (error) {
-      OutputView.printMessage(error.message);
-      this.getGameCommand();
-    }
+  // async getGameCommand() {
+  //   try {
+  //     return await InputView.readGameCommand();
+  //   } catch (error) {
+  //     OutputView.printMessage(error.message);
+  //     this.getGameCommand();
+  //   }
+  // }
+
+  retry(controller) {
+    this.resultMap.clear();
+    // this.controlMoving();
+    controller();
   }
 
-  retry() {
-    this.gameResult.clear();
-    this.controlMoving();
-  }
-
-  finish(type) {
-    OutputView.printResult(type, this.gameResult);
-  }
+  // finish(type) {
+  //   OutputView.printResult(type, this.resultMap);
+  // }
 }
 
 module.exports = BridgeGame;
