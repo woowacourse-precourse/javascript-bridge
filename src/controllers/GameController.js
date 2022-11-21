@@ -1,11 +1,13 @@
 const OutputView = require('../views/OutputView');
 const InputView = require('../views/InputView');
 
-const BridgeMaker = require('../BridgeMaker');
-const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-
 const BridgeGame = require('../models/BridgeGame');
-const { validate, isCommandInput } = require('../Validator');
+const {
+  validate,
+  isBridgeSize,
+  isMovingInput,
+  isCommandInput,
+} = require('../Validator');
 
 const MapGenerator = require('../models/MapGenerator');
 
@@ -28,11 +30,9 @@ class GameContoller {
   }
 
   onInputBridgeSize(size) {
-    const bridge = BridgeMaker.makeBridge(
-      size,
-      BridgeRandomNumberGenerator.generate,
-    );
-    this.#bridgeGame = new BridgeGame(bridge);
+    validate(size, isBridgeSize);
+
+    this.#bridgeGame = new BridgeGame(size);
 
     this.inputMoving();
   }
@@ -42,6 +42,8 @@ class GameContoller {
   }
 
   onInputMoving(moving) {
+    validate(moving, isMovingInput);
+
     this.#bridgeGame.move(moving);
 
     const map = MapGenerator.toString();

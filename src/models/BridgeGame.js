@@ -1,6 +1,8 @@
-const { validate, isMovingInput } = require('../Validator');
 const MapGenerator = require('./MapGenerator');
 const StateManager = require('./StateManager');
+const BridgeMaker = require('../BridgeMaker');
+const { generate } = require('../BridgeRandomNumberGenerator');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -9,8 +11,8 @@ class BridgeGame {
 
   #stateManager;
 
-  constructor(bridge) {
-    this.#bridge = bridge;
+  constructor(size) {
+    this.#bridge = BridgeMaker.makeBridge(size, generate);
     this.#stateManager = new StateManager(0, 'PLAYING', 1);
   }
 
@@ -20,8 +22,6 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moving) {
-    validate(moving, isMovingInput);
-
     const stage = this.#stateManager.getStage();
     MapGenerator.generate(this.#bridge, stage, moving);
 
