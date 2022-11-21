@@ -11,7 +11,6 @@ class BrideGameController {
   #bridgeGame;
 
   constructor() {
-    this.validator = new Validator();
   }
 
   start() {
@@ -25,7 +24,7 @@ class BrideGameController {
 
   #validateBridgeSize(size) {
     try {
-      this.validator.checkBridgeLengthInput(size);
+      Validator.checkBridgeLengthInput(size);
     } catch (error) {
       OutputView.printErrorMessage(error.message);
       this.#readBridgeSizePhase();
@@ -52,7 +51,7 @@ class BrideGameController {
 
   #validateMoving(direction) {
     try {
-      this.validator.checkDirectionInput(direction);
+      Validator.checkDirectionInput(direction);
     } catch (error) {
       OutputView.printErrorMessage(error.message);
       this.#readMovingPhase();
@@ -86,7 +85,7 @@ class BrideGameController {
 
   #validateGameCommand(retryAnswer) {
     try {
-      this.validator.checkRetryInput(retryAnswer);
+      Validator.checkRetryInput(retryAnswer);
     } catch (error) {
       OutputView.printErrorMessage(error.message);
       this.#readGameCommandPhase();

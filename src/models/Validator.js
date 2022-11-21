@@ -1,41 +1,41 @@
 const { BRIDGE, HOTKEY, ERROR } = require("../constants/constants");
 
 class Validator {
-  checkBridgeLengthInput(bridgeLength) {
-    if (this.isNotNumber(bridgeLength)) {
+  static checkBridgeLengthInput(bridgeLength) {
+    if (this.#isNotNumber(bridgeLength)) {
       throw new Error(ERROR.notNumber);
     }
-    if (this.isNotRangeOfBridgeLength(bridgeLength)) {
+    if (this.#isNotRangeOfBridgeLength(bridgeLength)) {
       throw new Error(ERROR.notRangeOfBridgeLength);
     }
   }
 
-  checkDirectionInput(direction) {
-    if (this.isNotValidDirectionInput(direction)) {
+  static checkDirectionInput(direction) {
+    if (this.#isNotValidDirectionInput(direction)) {
       throw new Error(ERROR.notValidDirectionInput)
     }
   }
 
-  checkRetryInput(input) {
-    if (this.isNotValidRetryInput(input)) {
+  static checkRetryInput(input) {
+    if (this.#isNotValidRetryInput(input)) {
       throw new Error(ERROR.notValidRetryInput)
     }
   }
 
-  isNotNumber(num) {
+  static #isNotNumber(num) {
     const check = /^[0-9]+$/; 
     return !check.test(num);
   }
 
-  isNotRangeOfBridgeLength(bridgeLength) {
+  static #isNotRangeOfBridgeLength(bridgeLength) {
     return bridgeLength < BRIDGE.min || bridgeLength > BRIDGE.max; 
   }
 
-  isNotValidDirectionInput(direction) {
+  static #isNotValidDirectionInput(direction) {
     return direction !== HOTKEY.up && direction !== HOTKEY.down;
   }
 
-  isNotValidRetryInput(input) {
+  static #isNotValidRetryInput(input) {
     return input !== HOTKEY.retry && input !== HOTKEY.quit;
   }
 }
