@@ -16,6 +16,10 @@ const BridgeMaker = {
       return direction;
     });
   },
+
+  getDirection(randomNumber) {
+    return parseInt(randomNumber) ? U : D;
+  },
 };
 
 module.exports = BridgeMaker;
