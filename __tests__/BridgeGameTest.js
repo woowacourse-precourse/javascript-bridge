@@ -14,7 +14,7 @@ describe('bridgeController Test', () => {
 
   test('잘못된 size 입력값이 입력될때 재요청 기능이 다시 실행되는지 Test', () => {
     const spyFn = jest.spyOn(bridgeController, 'requestBridgeSize');
-    bridgeController.controlBridgeSize('a');
+    bridgeController.createBridge('a');
 
     expect(spyFn).toHaveBeenCalledTimes(1);
   });
@@ -58,7 +58,7 @@ describe('bridgeController Test', () => {
 
       bridgeGame.selectMovemomentPosition('U');
       const moveBridge = bridgeGame.move();
-      const drawBridge = bridgeController.draw(moveBridge);
+      const drawBridge = bridgeController.drawBridge(moveBridge);
       expect(drawBridge).toEqual({ upBridge: 'O', downBridge: ' ' });
     });
 
@@ -68,7 +68,7 @@ describe('bridgeController Test', () => {
       bridgeGame.selectMovemomentPosition('D');
 
       const moveBridge = bridgeGame.move();
-      const drawBridge = bridgeController.draw(moveBridge);
+      const drawBridge = bridgeController.drawBridge(moveBridge);
       const spyFn = jest.spyOn(bridgeController, 'requestGameCommand');
       bridgeController.controlNextStep(drawBridge);
 
@@ -82,7 +82,7 @@ describe('bridgeController Test', () => {
       bridgeGame.selectMovemomentPosition('U');
 
       const moveBridge = bridgeGame.move();
-      const drawBridge = bridgeController.draw(moveBridge);
+      const drawBridge = bridgeController.drawBridge(moveBridge);
 
       const spyFn = jest.spyOn(OutputView, 'printResult');
       bridgeController.controlNextStep(drawBridge);
