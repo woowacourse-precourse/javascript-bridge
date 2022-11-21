@@ -8,7 +8,7 @@ const SPACE_TO_MOVE = {
   MOVE_DOWN: "D",
 }
 
-const GAME_CHOICE = {
+const GAME_COMMAND = {
   GAME_RETRY: "R",
   GAME_END: "Q",
 }
@@ -37,7 +37,9 @@ const OUTPUT_MESSAGE = {
   MOVE_SUCCESS: " O ",
   MOVE_FAILURE: " X ",
   BRIDGE_EMPTY: "   ",
+  FINAL_GAME_RESULT: "최종 게임 결과",
   BRIDGE_BETWEEN: "|",
+
   WHETHER_GAME_SUCCESS: "게임 성공 여부: ",
   TOTAL_TRY_COUNT: "총 시도한 횟수: ",
 }

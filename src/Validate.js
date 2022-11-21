@@ -21,7 +21,7 @@ const Validate = {
   },
 
   ValidateCommand(command) {
-    if (command !== GAME_CHOICE.GAME_RETRY && command !== GAME_CHOICE.GAME_END) {
+    if (command !== GAME_COMMAND.GAME_RETRY && command !== GAME_COMMAND.GAME_END) {
       throw new Error(ERROR_MESSAGE.CHOICE_GAME_NOT_PIXED_VALUE);
     }
     return command;
