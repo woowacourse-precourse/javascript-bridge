@@ -6,6 +6,10 @@ const OutputView = {
   printMessage(message) {
     Console.print(message);
   },
+
+  printMap(gameResult) {
+    Console.print(`${gameResult.bridge}\n`);
+  },
 };
 
 module.exports = OutputView;
