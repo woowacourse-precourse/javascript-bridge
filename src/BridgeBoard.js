@@ -19,6 +19,9 @@ class BridgeBoard {
     }
     return false;
   }
+  movePlayer(){
+    this.#movedBoard.push(this.#bridgeBoard.shift())
+  }
 }
 
 module.exports = BridgeBoard;
