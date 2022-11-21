@@ -77,8 +77,10 @@ const InputView = {
     Console.readLine(MESSAGE.INPUT_RESTART_MESSAGE, (input) => {
       try {
         validation.validateRestart(input);
-        const checkingInput = this.restartInputCheck(bridge, input);
-        checkingInput ? this.readMoving(bridge) : OutputView.printResult(moves, moveResult, tryCount);
+        const [checkingInput, trying] = this.restartInputCheck(input);
+        checkingInput
+          ? this.readMoving(bridge)
+          : OutputView.printResult(moves, moveResult, trying);
       } catch (error) {
         Console.print(error);
         this.readGameCommand(bridge);
@@ -86,15 +88,15 @@ const InputView = {
     });
   },
 
-  restartInputCheck(bridge, input) {
+  restartInputCheck(input) {
     if (input === "R") {
       callMove = 0;
       tryCount++;
       brigeGame.retry();
-      return true;
+      return [true, tryCount];
     }
     if (input === "Q") {
-      return false
+      return [false, tryCount];
     }
   },
 };
