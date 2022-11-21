@@ -19,7 +19,9 @@ const RANDOM_NUMBERS = {
 
 const BRIDGE = {
     UP : 'U',
-    DOWN : 'D'
+    DOWN : 'D',
+    MATCH : 'O',
+    UNMATCH : 'X'
 }
 
 module.exports = {

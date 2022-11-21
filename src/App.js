@@ -1,8 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
-const {GAME_MESSAGES} = require('./utils/Constants');
+const {GAME_MESSAGES, BRIDGE} = require('./utils/Constants');
 const InputView = require('./InputView');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
+const BridgeGame = require("./BridgeGame");
 
 class App {
   async play() {
@@ -12,12 +13,15 @@ class App {
     this.startCrossing(Number(bridgeSize), bridge);
   }
 
-  startCrossing(bridgeSize, bridge) {
+  async startCrossing(bridgeSize, bridge) {
+    const gameResult = [[], []];
     for(let i = 0; i < bridgeSize; i++){
-      const moving = InputView.readMoving();
-
+      const moving = await InputView.readMoving();
+      const moveResult = BridgeGame.move(moving, bridge[i]);
+      if(moving == BRIDGE.UP) gameResult[0].push(moveResult);
+      if(moving == BRIDGE.DOWN) gameResult[1].push(moveResult);
     }
-    
+    return gameResult
   }
 }
 
