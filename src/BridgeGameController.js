@@ -10,7 +10,7 @@ const {
   readGameCommand,
   readBridgeSize,
 } = require('./InputView');
-const { printResult, printMap, printStatistic } = require('./OutputView');
+const { printResult, printMap } = require('./OutputView');
 
 class BridgeGameController {
   static readSize(size) {
@@ -25,6 +25,7 @@ class BridgeGameController {
 
   static initBridgeGame(size) {
     const bridge = BridgeMaker.makeBridge(size, generate);
+    console.log(bridge);
     const game = new BridgeGame(bridge);
     return game;
   }
@@ -52,10 +53,10 @@ class BridgeGameController {
 
   static queryRetry(game, command) {
     try {
-      this.checkRetry(game, command);
+      BridgeGameController.checkRetry(game, command);
     } catch (err) {
       Console.print(err);
-      readGameCommand(game, BridgeGameController.checkRetry);
+      readGameCommand(game, BridgeGameController.queryRetry);
     }
   }
 
@@ -78,15 +79,13 @@ class BridgeGameController {
   }
 
   static showResult(game) {
-    printResult();
+    printResult(game);
     BridgeGameController.showBridge(game);
-    printStatistic(game);
     Console.close();
   }
 
   static quit(game) {
-    printResult();
-    printStatistic(game);
+    printResult(game);
     Console.close();
   }
 }
