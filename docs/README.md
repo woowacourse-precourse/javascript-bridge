@@ -1,4 +1,17 @@
-## 요구사항 정리
+### 미션 요구 사항 정리
+
+- [x] `package.json`변경하지 않고 순수 Vanilla JS로만 구현
+- [x] `ApplicationTest`의 모든 테스트가 성공
+- [x] 들여쓰기 3 넘기 않도록 구현
+- [x] 함수는 한 가지 일만 하기.
+- [x] else 지양하기
+- [x] 모메인 로직에 단위 테스트 구현하기
+- [x] 함수(또는 메서드)의 길이가 10라인 넘지 않도록 구현하기
+- [x] 메서드 파라미터의 갯수는 3개
+- [x] `InputView`에서만 `Console.readLine` 사용가능
+- [x] `BridgeGame`에서는 `InputView`, `OutputView`사용 불가능
+
+### 기능 요구사항 정리
 
 - Controller
   - [x] `InputView.readBridgeSize`를 위한 콜백함수 만들기
