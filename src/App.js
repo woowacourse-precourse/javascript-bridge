@@ -17,7 +17,7 @@ class App {
     const views = {
       outputView: OutputView,
       inputView: InputView,
-      validator: Validator,
+      validator: new Validator(),
     };
 
     new Controller(models, views);

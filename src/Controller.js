@@ -23,46 +23,46 @@ class Controller {
   }
 
   askBridgeSize() {
-    this.inputView.readBridgeSize(this.makeBridge.bind(this));
+    this.inputView.readBridgeSize(this.handleMakingBridge.bind(this));
   }
 
-  makeBridge(size) {
+  handleMakingBridge(size) {
     try {
       this.validator.checkBridgeSize(size);
     } catch (error) {
-      this.outputView.printError(error.message);
+      this.outputView.printError(error);
       return;
     }
 
     const bridge = this.bridgeMaker.makeBridge(size, this.bridgeRandomNumberGenerator.generate);
     this.bridgeGame.setBridge(bridge);
-
     this.outputView.newLine();
     this.askMoveDirection();
   }
 
   askMoveDirection() {
-    this.inputView.readMoving(this.move.bind(this));
+    this.inputView.readMoving(this.handleMoving.bind(this));
   }
 
-  move(direction) {
+  handleMoving(direction) {
     try {
-      this.validator.checkMove(direction);
+      this.validator.checkMoving(direction);
     } catch (error) {
-      this.outputView.printError(error.message);
+      this.outputView.printError(error);
       return;
     }
 
     this.bridgeGame.move(direction);
     this.outputView.printMap(this.bridgeGame.trials);
 
+    //TODO: if-else
     if (this.bridgeGame.status === GAME_SIGNATURE.gameOn) {
       this.askMoveDirection();
       return;
     }
 
     if (this.bridgeGame.status === GAME_SIGNATURE.gameFail) {
-      this.gameCommand();
+      this.askGameCommand();
       return;
     }
 
@@ -76,21 +76,20 @@ class Controller {
     this.outputView.printResult(this.bridgeGame);
   }
 
-  gameCommand() {
-    this.inputView.readGameCommand(this.handleCommand.bind(this));
+  askGameCommand() {
+    this.inputView.readGameCommand(this.handleGameCommand.bind(this));
   }
 
-  handleCommand(command) {
+  handleGameCommand(command) {
     try {
-      this.validator.checkGameCommand(command);
+      this.validator.checkGameCommand(direction);
     } catch (error) {
-      this.outputView.printError(error.message);
+      this.outputView.printError(error);
       return;
     }
 
     if (command === 'R') {
       this.retry();
-
       return;
     }
 
