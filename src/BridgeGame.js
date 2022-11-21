@@ -40,7 +40,7 @@ class BridgeGame {
       gameRec.bridgeOutput.firstBridge += BRIDGE.THREE_SPACE + BRIDGE.RIGHT_BRACKET;
       gameRec.bridgeOutput.secondBridge += BRIDGE.SPACE + gameRec.correctOrNot + BRIDGE.SPACE + BRIDGE.RIGHT_BRACKET;
     }
-    this.bridgeGameToView.BridgeGameToOutputView(gameRec); // BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
+    this.bridgeGameToView.bridgeGameToOutputView(gameRec); // BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
   }
 
   /**
