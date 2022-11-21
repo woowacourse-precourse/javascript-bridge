@@ -1,20 +1,36 @@
 const Bridge = require('./Bridge');
-const CurrentLocation = require('./CurrentLocation');
+const CurrentStatus = require('./CurrentStatus');
 const TotalMovingCount = require('./TotalMovingCount');
 
 const DomainInterface = class {
-  constructor(bridge, currentLocation, totalMovingCount) {
-    this.#bridge = bridge;
-    this.#currentLocation = currentLocation;
-    this.#totalMovingCount = totalMovingCount;
+  #bridge;
+  #currentStatus;
+  #totalMovingCount;
+
+  constructor() {
+    this.#bridge = new Bridge();
+    this.#currentStatus = new CurrentStatus();
+    this.#totalMovingCount = new TotalMovingCount();
+  }
+
+  getTotalMovingCount() {
+    return this.#totalMovingCount.getTotalMovingCount();
+  }
+
+  setIsAlive(status) {
+    this.#currentStatus.setIsAlive(status);
+  }
+
+  isAlive() {
+    return this.#currentStatus.isAlive();
   }
 
   resetCurrentLocation() {
-    this.#currentLocation.resetCurrentLocation();
+    this.#currentStatus.resetCurrentLocation();
   }
 
   addMovingCount() {
-    this.#totalMovingCount.plusTotalMovingCount();
+    this.#totalMovingCount.addMovingCount();
   }
 
   setBridgeLength(length) {
@@ -22,11 +38,11 @@ const DomainInterface = class {
   }
 
   moveOneStep() {
-    this.#currentLocation.moveOneStep();
+    this.#currentStatus.moveOneStep();
   }
 
   getCurrentLocation() {
-    return this.#currentLocation.getCurrentLocation();
+    return this.#currentStatus.getCurrentLocation();
   }
 
   getBridgeLength() {
@@ -35,20 +51,20 @@ const DomainInterface = class {
 
   getPartialBridgeMap() {
     return this.#bridge.getPartialBridgeMap(
-      this.#currentLocation.getCurrentLocation()
+      this.#currentStatus.getCurrentLocation()
     );
   }
 
   isMovable(moving) {
     return this.#bridge.isMovable(
       moving,
-      this.#currentLocation.getCurrentLocation()
+      this.#currentStatus.getCurrentLocation()
     );
   }
 
   isEndOfBridge() {
-    const currentLocation = this.getCurrentLocation();
-    const bridgeLength = this.getBridgeLength();
+    const currentLocation = this.#currentStatus.getCurrentLocation();
+    const bridgeLength = this.#bridge.getBridgeLength();
 
     return currentLocation + 1 === bridgeLength;
   }
