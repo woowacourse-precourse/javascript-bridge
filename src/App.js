@@ -82,6 +82,10 @@ class App {
 
     this.#gameEndPhase();
   }
+
+  #gameEndPhase() {
+    OutputView.printResult(this.#gameResult);
+  }
 }
 
 module.exports = App;
