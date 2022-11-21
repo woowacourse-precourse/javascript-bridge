@@ -21,7 +21,11 @@ class App {
 
   requestBridgeSize() {
     InputView.readBridgeSize((bridgeSize) => {
-      this.validate.checkBridgeSize(bridgeSize);
+      const [isValid, errorMsg] = this.validate.checkBridgeSize(bridgeSize);
+      if (!isValid) {
+        OutputView.printMsg(errorMsg);
+        return this.requestBridgeSize();
+      }
 
       this.createBridgeGame(bridgeSize);
       this.requestMoving();
@@ -35,7 +39,11 @@ class App {
 
   requestMoving() {
     InputView.readMoving((direction) => {
-      this.validate.checkMovingDirection(direction);
+      const [isValid, errorMsg] = this.validate.checkMovingDirection(direction);
+      if (!isValid) {
+        OutputView.printMsg(errorMsg);
+        return this.requestMoving();
+      }
 
       const [canCross, playerUpperBridgeState, playerLowerBridgeState] =
         this.bridgeGame.move(direction);
@@ -57,7 +65,11 @@ class App {
 
   requestGameCommand() {
     InputView.readGameCommand((command) => {
-      this.validate.checkGameCommand(command);
+      const [isValid, errorMsg] = this.validate.checkGameCommand(command);
+      if (!isValid) {
+        OutputView.printMsg(errorMsg);
+        return this.requestGameCommand();
+      }
 
       if (command === GAME_OPTION.REPLAY) {
         this.bridgeGame.retry();
