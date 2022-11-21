@@ -8,13 +8,14 @@ const BridgeMaker = {
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
   makeBridge(size, generateRandomNumber) {
-    let RandomNumber = [];
+    let RandomNumbers = [];
 
-    while (RandomNumber.length < size) {
-      RandomNumber.push(generateRandomNumber());
+    while (RandomNumbers.length < size) {
+      const randomNumber = generateRandomNumber();
+      RandomNumbers.push(randomNumber);
     }
 
-    return RandomNumber.map((number) => (number * 1 === 0 ? 'D' : 'U'));
+    return RandomNumbers.map((number) => (number === 0 ? 'D' : 'U'));
   },
 };
 
