@@ -65,7 +65,7 @@ class BridgeController {
    * @param userMoving {string[]} [유저 움직임 기록]
    */
   getMovingRecords(userMoving) {
-    this.bridgeModel.getMovingRecords(userMoving);
+    return this.bridgeModel.getMovingRecords(userMoving);
   }
 }
 
