@@ -32,6 +32,8 @@ const BRIDGE = {
   NUMBER_DOWN: 0,
   STRING_UP: 'U',
   STRING_DOWN: 'D',
+  RESTART: 'R',
+  QUIT: 'Q',
 };
 
 const REGEXP = {
