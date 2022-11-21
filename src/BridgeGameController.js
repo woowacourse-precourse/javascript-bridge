@@ -23,7 +23,14 @@ const BridgeGameController = {
   },
 
   askRetry(bridgeGame) {
-    InputView.readGameCommand((command) => {});
+    InputView.readGameCommand((command) => {
+      if (command === 'R') return BridgeGameController.retry(bridgeGame);
+    });
+  },
+
+  retry(bridgeGame) {
+    bridgeGame.retry();
+    BridgeGameController.moveBridge(bridgeGame);
   },
 };
 
