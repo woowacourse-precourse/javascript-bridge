@@ -46,15 +46,30 @@ const expectBridgeOrder = (received, upside, downside) => {
 
 const getOutput = (logSpy) => [...logSpy.mock.calls].join('');
 
+const runException = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  const app = new App();
+
+  app.play();
+
+  expectLogContains(getOutput(logSpy), ['[ERROR]']);
+};
+
 describe('1. 다리 생성하기', () => {
-  test.each([[['15c']], [['길게']], [['five']]])(
+  test.each([[['15c']], [['길게']], [['five']], [['다섯']]])(
     '사용자가 3과 20사이 숫자로 다리 길이를 입력했는지 확인했다.',
     (input) => {
+      mockQuestions(input);
+      const logSpy = getLogSpy();
+
       const model = new Model();
       const gameView = new GameView(new InputView(), new OutputView());
       const bridgeGame = new BridgeGame(model, gameView);
-      mockQuestions(input);
-      expect(() => bridgeGame.getBridgeSize()).toThrow('[ERROR]');
+
+      bridgeGame.getBridgeSize();
+
+      expectLogContains(getOutput(logSpy), ['[ERROR]']);
     },
   );
   test('다리 생성 테스트', () => {
@@ -72,13 +87,13 @@ describe('3. 플레이어가 이동할 칸 선택하기', () => {
   test.each([[['Up']], [['down']], [['△']]])(
     '사용자가 대문자 U나 D를 입력했는지 확인했다.',
     (input) => {
+      const logSpy = getLogSpy();
       const model = new Model();
       const gameView = new GameView(new InputView(), new OutputView());
       const bridgeGame = new BridgeGame(model, gameView);
       mockQuestions(input);
-      expect(() => bridgeGame.move()).toThrow(
-        '[ERROR] 대문자 U나 D만 입력 가능합니다.',
-      );
+      bridgeGame.move();
+      expectLogContains(getOutput(logSpy), ['[ERROR]']);
     },
   );
   test.skip('다리 출력 테스트', () => {
@@ -101,13 +116,13 @@ describe('4. 잘못된 칸을 밟았을 때', () => {
   test.each([[['r']], [['다시']], [['Restart'], ['Quit']]])(
     '사용자가 대문자 R이나 Q를 입력했는지 확인했다.',
     (input) => {
+      const logSpy = getLogSpy();
       const model = new Model();
       const gameView = new GameView(new InputView(), new OutputView());
       const bridgeGame = new BridgeGame(model, gameView);
       mockQuestions(input);
-      expect(() => bridgeGame.askUserRetry()).toThrow(
-        '[ERROR] 대문자 R이나 Q만 입력 가능합니다.',
-      );
+      bridgeGame.askUserRetry();
+      expectLogContains(getOutput(logSpy), ['[ERROR]']);
     },
   );
   test.skip('R을 눌러 재시작하고 다리 무사히 건넌 경우', () => {
