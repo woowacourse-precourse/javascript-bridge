@@ -5,7 +5,7 @@ class Bridge {
     return this.#answerArray;
   }
 
-  set answerArray(value) {
+  setAnswerArray(value) {
     this.#answerArray = value;
   }
 }

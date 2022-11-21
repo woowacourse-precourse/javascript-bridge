@@ -19,7 +19,8 @@ class BridgeGameController {
   }
 
   createBridgeByUser(bridgeLength) {
-    this.bridge.answerArray = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
+    const bridgeAnswerArray = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
+    this.bridge.setAnswerArray(bridgeAnswerArray);
     InputView.readMoving(this.moveByUser.bind(this));
   }
 
