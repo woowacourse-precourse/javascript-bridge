@@ -54,9 +54,7 @@ class BridgeGame {
   }
 
   getMovedBridge() {
-    const { bridge, movedDirections } = this;
-
-    return movedDirections.map((direction, idx) => ({ direction, correct: direction === bridge[idx] }));
+    return this.movedDirections.map((direction, idx) => ({ direction, correct: direction === this.bridge[idx] }));
   }
 
   nextStep() {
