@@ -86,7 +86,6 @@ class BridgeGame {
     this.#firstRow.push(a);
     this.#secondRow.push(b);
   }
-
 }
 
 module.exports = BridgeGame;
