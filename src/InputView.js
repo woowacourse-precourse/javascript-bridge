@@ -15,18 +15,27 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
 
+  onErrorHandler(condition, errorMessage, retryFunction) {
+    try {
+      if (condition) {
+        throw errorMessage;
+      }
+    } catch (e) {
+      Console.print(e);
+      retryFunction();
+    }
+  },
+
   readBridgeSize() {
-    let randomBridge;
-
-    Console.print("다리 건너기 게임을 시작합니다.\n");
     Console.readLine("다리의 길이를 입력해주세요.\n", (aNumber) => {
-      if (isNaN(aNumber)) throw new Error(ERROR.NOT_A_NUMBER);
-      if (Number(aNumber) > 20 || Number(aNumber) < 3) throw new Error(ERROR.LENGTH_IS_NOT_CORRECT);
+      this.onErrorHandler(isNaN(aNumber), ERROR.NOT_A_NUMBER, () => this.readBridgeSize());
+      this.onErrorHandler(Number(aNumber) > 20 || Number(aNumber) < 3, ERROR.LENGTH_IS_NOT_CORRECT, () => this.readBridgeSize());
 
-      randomBridge = BridgeMaker.makeBridge(Number(aNumber), () => generate());
-      bridgeGame.makeRandomBridge(randomBridge);
-
-      this.readMoving(randomBridge);
+      if (!isNaN(aNumber)) {
+        bridgeGame.makeRandomBridge(BridgeMaker.makeBridge(Number(aNumber), () => generate()));
+        Console.print(bridgeGame.randomBridge);
+        this.readMoving(bridgeGame.randomBridge);
+      }
     });
   },
 
@@ -51,7 +60,7 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (command) => {
-      if (command !== "R" && command !== "Q") throw new Error(ERROR.RETRY_COMMAND);
+      this.onErrorHandler(command !== "R" && command !== "Q", ERROR.RETRY_COMMAND, () => this.readGameCommand());
       if (command === "R") {
         bridgeGame.retry(() => this.readMoving());
       }

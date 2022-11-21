@@ -57,23 +57,11 @@ class BridgeGame {
   move(command) {
     if (command !== "U" && command !== "D") throw new Error(ERROR.UP_DOWN_COMMAND);
     if (this.#randomBridge[this.#index] === command) {
-      if (command === "U") {
-        this.#upperBridge.push("O");
-        this.#lowerBridge.push(" ");
-      }
-      if (command === "D") {
-        this.#upperBridge.push(" ");
-        this.#lowerBridge.push("O");
-      }
+      this.#upperBridge.push(command === "U" ? "O" : " ");
+      this.#lowerBridge.push(command === "U" ? " " : "O");
     } else {
-      if (command === "U") {
-        this.#upperBridge.push("X");
-        this.#lowerBridge.push(" ");
-      }
-      if (command === "D") {
-        this.#upperBridge.push(" ");
-        this.#lowerBridge.push("X");
-      }
+      this.#upperBridge.push(command === "U" ? "X" : " ");
+      this.#lowerBridge.push(command === "U" ? " " : "X");
     }
     this.increaseIndex();
   }
