@@ -56,7 +56,12 @@ class App {
     }
     if (retryInput === 'Q') {
       OutputView.printResult('실패', this.#curBridge, this.#tryNum);
+      this.end();
     }
+  }
+
+  end() {
+    Console.close();
   }
 }
 
