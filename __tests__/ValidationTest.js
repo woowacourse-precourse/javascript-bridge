@@ -1,7 +1,7 @@
 const Validation = require('../src/Validation');
 
 describe('다리 길이 유효성 테스트', () => {
-  test.each([['a'], ['#'], [' ']])('다리 길이가 문자이면 예외가 발생한다.', (input) => {
+  test.each([['a'], ['#'], [' ']])('다리 길이가 문자이거나 값이 없으면 예외가 발생한다.', (input) => {
     expect(() => {
       Validation.checkBridgeSize(input);
     }).toThrow('[ERROR] 숫자를 입력해야 합니다.');
@@ -48,6 +48,14 @@ describe('이동할 칸 유효성 테스트', () => {
       expect(() => {
         Validation.checkMovingValue(input);
       }).toThrow('[ERROR] 이동할 칸은 U나 D만 입력할 수 있습니다.')
+    }
+  )
+  test.each([['U'], ['D']])(
+    '이동할 칸이 U나 D가 들어오면 아무 문제도 발생하지 않는다..', 
+    (input) => {
+      expect(() => {
+        Validation.checkMovingValue(input);
+      }).not.toThrow()
     }
   )
 })
