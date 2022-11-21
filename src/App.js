@@ -14,7 +14,12 @@ class App {
             bridgeLength,
             BridgeRandomNumberGenerator.generate
         );
+
         MissionUtils.Console.print(bridge);
+        const choosen = await InputView.readMoving();
+
+        const bridgeGame = new BridgeGame(bridge);
+
         MissionUtils.Console.close();
     }
 }
