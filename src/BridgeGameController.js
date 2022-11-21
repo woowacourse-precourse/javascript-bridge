@@ -35,6 +35,7 @@ class BridgeGameController {
     if (this.#bridgeGame.isGameOver()) {
       return this.checkSuccessful();
     }
+
     return this.askMove();
   }
 
@@ -42,6 +43,7 @@ class BridgeGameController {
     if (this.#bridgeGame.isSuccessful()) {
       return this.finishGame();
     }
+
     return this.askRetry();
   }
 
@@ -62,6 +64,7 @@ class BridgeGameController {
       this.#bridgeGame.retry();
       return this.askMove();
     }
+
     return this.finishGame();
   }
 }

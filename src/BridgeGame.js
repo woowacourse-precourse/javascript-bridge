@@ -35,6 +35,7 @@ class BridgeGame {
     if (this.#bridgeAnswer[this.#status.getStepCount()] === direction) {
       return true;
     }
+
     return false;
   }
 
@@ -42,14 +43,17 @@ class BridgeGame {
     if (correct) {
       return this.#bridgeMap.mark(direction, 'O');
     }
+
     return this.#bridgeMap.mark(direction, 'X');
   }
 
   updateStatus(correct) {
     this.#status.addStep();
+
     if (correct) {
       return this.checkSuccess();
     }
+
     return this.#status.end();
   }
 
