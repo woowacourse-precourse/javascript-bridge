@@ -7,7 +7,7 @@ const { GAME_MESSAGE } = require('../constants');
 const InputView = {
   /**
    * 다리 길이를 입력받는다.
-   * @param {function(): void} callback
+   * @param {function(string): void} callback
    */
   readBridgeSize(callback) {
     Console.readLine(GAME_MESSAGE.BRIDGE_LENGTH, callback);
