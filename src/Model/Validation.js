@@ -1,23 +1,29 @@
+const { 
+  GAME_NUMBER, 
+  GAME_STRING, 
+  ERROR_INPUT, 
+} = require('../Constants/constant');
+
 const Validation = {
   checkBridgeLength(bridgeSize) {
     if (
-      !(bridgeSize >= 3 
-      && bridgeSize <= 20)
-    ) throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+      !(bridgeSize >= GAME_NUMBER.min 
+      && bridgeSize <= GAME_NUMBER.max)
+    ) throw new Error(ERROR_INPUT.sizeMessage);
   },
 
   checkMoveInput(moveAnswer) {
     if (
-      !(moveAnswer === 'U' 
-      || moveAnswer === 'D')
-    ) throw new Error("[ERROR] U와 D중 하나의 문자를 입력해주세요.");  
+      !(moveAnswer === GAME_STRING.upBridge 
+      || moveAnswer === GAME_STRING.downBridge)
+    ) throw new Error(ERROR_INPUT.moveMessage);  
   },
 
   checkRestartInput(retryAnswer) {
     if (
-      !(retryAnswer === 'R' 
-      || retryAnswer === 'Q')
-    ) throw new Error("[ERROR] R과 Q중 하나의 문자를 입력해주세요.");
+      !(retryAnswer === GAME_STRING.retry
+      || retryAnswer === GAME_STRING.quit)
+    ) throw new Error(ERROR_INPUT.retryMessage);
   },
 };
 

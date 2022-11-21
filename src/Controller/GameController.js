@@ -2,10 +2,11 @@ const InputView = require('../View/InputView');
 const OutputView = require('../View/OutputView');
 const Validation = require('../Model/Validation');
 const BridgeGame = require('../Model/BridgeGame');
+const { GAME_NUMBER, GAME_STRING } = require('../Constants/constant');
 
 class GameController {
   #bridgeGame;
-  #retryCount = 1;
+  #retryCount = GAME_NUMBER.one;
   
   gameStart() {
     this.inputBridgeSize();
@@ -52,10 +53,10 @@ class GameController {
   }
 
   handleRetryOrQuit(retryAnswer) {
-    if (retryAnswer === 'R') {
+    if (retryAnswer === GAME_STRING.retry) {
       this.#bridgeGame.retry();
       OutputView.resetPrintData();
-      this.#retryCount += 1;
+      this.#retryCount += GAME_NUMBER.one;
       return this.inputWhereMoving();
     }
     return OutputView.printResult(this.#retryCount);

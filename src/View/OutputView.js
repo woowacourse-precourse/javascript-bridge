@@ -1,13 +1,19 @@
 const { Console } = require('@woowacourse/mission-utils');
+const {
+  GAME_STRING,
+  GAME_MESSAGE,
+  BRIDGE,
+  GAME_RESULT_MESSAGE,
+} = require('../Constants/constant');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
   moveState: [[], []],
-  isSuccess: '',
+  isSuccess: GAME_STRING.blank,
   
   printStart() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
+    Console.print(GAME_MESSAGE.start);
   },
 
   /**
@@ -17,15 +23,15 @@ const OutputView = {
    */
   printMap(moveResult) {
     this.parseResult(moveResult);
-    Console.print(`[${this.moveState[0].join('|')}]`);
-    Console.print(`[${this.moveState[1].join('|')}]`);
+    Console.print(`[${this.moveState[BRIDGE.up].join(GAME_STRING.pipeString)}]`);
+    Console.print(`[${this.moveState[BRIDGE.down].join(GAME_STRING.pipeString)}]`);
   },
 
   parseResult(moveResult) {
     const [upOrDown, matchBoolean] = moveResult;
   
     const successOrFail = this.toSuccessOrFail(matchBoolean);
-    if (upOrDown === 'U') {
+    if (upOrDown === GAME_STRING.upBridge) {
       this.parseUpBridge(successOrFail);
       return;
     }
@@ -34,25 +40,25 @@ const OutputView = {
 
   toSuccessOrFail(matchBoolean) {
     if (matchBoolean === true) {
-      this.isSuccess = '성공';
-      return ' O ';
+      this.isSuccess = GAME_STRING.success;
+      return GAME_STRING.successMark;
     }
-    this.isSuccess = '실패';
-    return ' X ';
+    this.isSuccess = GAME_STRING.fail;
+    return GAME_STRING.failMark;
   },
 
   parseUpBridge(successOrFail) {
-    this.moveState[0].push(successOrFail);
-    this.moveState[1].push('   ');
+    this.moveState[BRIDGE.up].push(successOrFail);
+    this.moveState[BRIDGE.down].push(GAME_STRING.nothingMark);
   },
 
   parseDownBridge(successOrFail) {
-    this.moveState[0].push('   ');
-    this.moveState[1].push(successOrFail);
+    this.moveState[BRIDGE.up].push(GAME_STRING.nothingMark);
+    this.moveState[BRIDGE.down].push(successOrFail);
   },
 
   resetPrintData() {
-    this.isSuccess = '';
+    this.isSuccess = GAME_STRING.blank;
     this.moveState = [[], []];
   },
 
@@ -62,12 +68,9 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(retryCount) {
-    Console.print('\n최종 게임 결과');
-    Console.print(`[${this.moveState[0].join('|')}]`);
-    Console.print(`[${this.moveState[1].join('|')}]`);
-    Console.print('');
-    Console.print(`게임 성공 여부: ${this.isSuccess}`);
-    Console.print(`총 시도한 횟수: ${retryCount}`);
+    Console.print(
+      GAME_RESULT_MESSAGE(this.moveState, this.isSuccess, retryCount)
+    );
     Console.close();
   },
 };

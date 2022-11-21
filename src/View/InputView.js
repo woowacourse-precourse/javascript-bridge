@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { GAME_MESSAGE } = require('../Constants/constant');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -19,7 +20,7 @@ const InputView = {
    */
   readBridgeSize(callback) {
     this.getUserInput(
-      '다리의 길이를 입력해주세요.\n',
+      GAME_MESSAGE.size,
       callback,
       this.readBridgeSize.bind(this),
     );
@@ -30,7 +31,7 @@ const InputView = {
    */
   readMoving(callback) {
     this.getUserInput(
-      '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
+      GAME_MESSAGE.move,
       callback,
       this.readMoving.bind(this),
     );
@@ -41,7 +42,7 @@ const InputView = {
    */
   readGameCommand(callback) {
     this.getUserInput(
-      '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+      GAME_MESSAGE.retry,
       callback,
       this.readGameCommand.bind(this),
     );
