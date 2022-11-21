@@ -8,6 +8,7 @@ const BridgeGame = require('./BridgeGame');
 class App {
   #bridgeSize;
   #bridge;
+  #curBridge;
 
   play() {
     OutputView.printCommand(command.START);
@@ -27,7 +28,13 @@ class App {
     const bridgeGame = new BridgeGame(this.#bridge);
     for (let brigeIndex = 0; brigeIndex < this.#bridgeSize; brigeIndex++) {
       const moveInput = await InputView.readMoving();
-      OutputView.printMap(bridgeGame.move(moveInput, brigeIndex));
+      this.#curBridge = bridgeGame.makeCurBridge(moveInput, brigeIndex);
+      OutputView.printMap(this.#curBridge);
+
+      if (!bridgeGame.move(moveInput, brigeIndex)) {
+        const retryInput = await InputView.readGameCommand();
+        console.log(retryInput);
+      }
     }
   }
 }
