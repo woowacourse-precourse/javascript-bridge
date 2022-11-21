@@ -1,35 +1,52 @@
 const BridgeGame = require('../src/BridgeGame.js');
+const Bridge = require('../src/Bridge.js');
 
 describe('BridgeGame 클래스 테스트', () => {
   describe('isLatestMoveSucceeded 메서드 테스트', () => {
-    test('다리생성과 이동 이후 호출된 isLatestMoveSucceeded 메서드는 true, false중 하나를 return 해야 한다.', () => {
-      const bridgeGame = new BridgeGame();
-      bridgeGame.build('3');
+    test('생성된 다리와 방향 입력이 일치하면, isLatestMoveSucceeded 메서드는 true를 return한다.', () => {
+      const bridge = new Bridge(['U', 'D', 'U']);
+      const bridgeGame = new BridgeGame(bridge);
+
       bridgeGame.move('U');
 
       const result = bridgeGame.isLatestMoveSucceeded();
 
-      expect([true, false]).toContain(result);
+      expect(result).toBe(true);
+    });
+
+    test('생성된 다리와 방향 입력이 일치하지 않으면, isLatestMoveSucceeded 메서드는 false를 return한다.', () => {
+      const bridge = new Bridge(['U', 'D', 'U']);
+      const bridgeGame = new BridgeGame(bridge);
+
+      bridgeGame.move('D');
+
+      const result = bridgeGame.isLatestMoveSucceeded();
+
+      expect(result).toBe(false);
     });
   });
 
   describe('isEnd 메서드 테스트', () => {
-    test('다리 길이 만큼의 이동 명령이 실행된 후 호출된 isEnd 메서드는 true, false중 하나를 return 해야 한다.', () => {
-      const bridgeGame = new BridgeGame();
-      bridgeGame.build('3');
+    test('생성된 다리 길이 만큼의 방향 입력이 일치하면 isEnd 메서드는 true를 return 해야 한다.', () => {
+      const bridge = new Bridge(['U', 'D', 'U']);
+      const bridgeGame = new BridgeGame(bridge);
+
       bridgeGame.move('U');
-      bridgeGame.move('U');
+      bridgeGame.move('D');
       bridgeGame.move('U');
 
       const result = bridgeGame.isEnd();
 
-      expect([true, false]).toContain(result);
+      expect(result).toBe(true);
     });
 
-    test('다리 길이 만큼의 이동 명령이 실행되지 않고 호출된 isEnd 메서드는 false를 return 해야 한다.', () => {
-      const bridgeGame = new BridgeGame();
-      bridgeGame.build('3');
+    test('생성된 다리 길이 만큼의 방향 입력중 하나라도 일치하지 않으면 isEnd 메서드는 false를 return 해야 한다.', () => {
+      const bridge = new Bridge(['U', 'D', 'U']);
+      const bridgeGame = new BridgeGame(bridge);
+
       bridgeGame.move('U');
+      bridgeGame.move('D');
+      bridgeGame.move('D');
 
       const result = bridgeGame.isEnd();
 
