@@ -17,36 +17,35 @@ class App {
    * 생성할 다리 길이를 입력 받는다.
    */
   askSize() {
-    InputView.readBridgeSize((input) => {
+    const handleSizeInput = (input) => {
       this.#game = new BridgeGame(+input);
       this.askMove();
-    });
+    };
+    InputView.readBridgeSize(handleSizeInput);
   }
 
   /**
    * 이동 정보를 입력 받는다.
    */
   askMove() {
-    InputView.readMoving((input) => {
+    const handleMovingInput = (input) => {
       this.#game.move(input);
       OutputView.printMap(this.#game.getMovingState());
-      if (this.#game.checkGameOver()) {
-        return this.#game.judgeGameSuccess() ? this.end() : this.askRestart();
-      }
-      this.askMove();
-    });
+      if (!this.#game.checkGameOver()) return this.askMove();
+      this.#game.judgeGameSuccess() ? this.end() : this.askRestart();
+    };
+    InputView.readMoving(handleMovingInput);
   }
 
   /**
    * 재시작 여부를 입력 받는다.
    */
   askRestart() {
-    InputView.readGameCommand((input) => {
-      if (input === GAME_RESULT.retry) {
-        return this.#game.retry(), this.askMove();
-      }
-      this.end();
-    });
+    const handleCommandInput = (input) => {
+      if (input === GAME_RESULT.quit) return this.end();
+      this.#game.retry(), this.askMove();
+    };
+    InputView.readGameCommand(handleCommandInput);
   }
 
   /**
