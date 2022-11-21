@@ -4,12 +4,9 @@ const BridgePrint = {
   printBridge(Bridge) {
     OutputView.printMap(Bridge.getUpBridge(), Bridge.getDownBridge());
   },
-  printResultByGamePlay(gamePlay) {
+  printResult(gamePlay) {
     const result = gamePlay.getPrintParams();
     OutputView.printResult(result);
-  },
-  printResult(player, bridge) {
-    OutputView.printResult([player, bridge]);
   },
 };
 
