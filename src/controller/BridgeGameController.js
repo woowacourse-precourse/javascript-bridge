@@ -1,9 +1,9 @@
 const BridgeMaker = require("../BridgeMaker");
-const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
+const BridgeRandomNumberGenerator = require("../utils/BridgeRandomNumberGenerator");
 const { HOTKEY } = require("../constants/constants");
 const Bridge = require("../models/Bridge");
 const BridgeGame = require("../models/BridgeGame");
-const Validator = require("../models/Validator");
+const Validator = require("../utils/Validator");
 const InputView = require("../views/InputView");
 const OutputView = require("../views/OutputView");
 
