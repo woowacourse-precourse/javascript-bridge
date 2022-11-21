@@ -63,10 +63,9 @@ class BridgeGame {
     const { correctMove, wrongMove, endGame } = NEXT_STEP;
     const movedBridge = this.getMovedBridge();
     const isWrongMove = !movedBridge[movedBridge.length - 1].correct;
+    const isEndGame = movedBridge.length === this.size;
 
-    if (isWrongMove) return wrongMove;
-    if (movedBridge.length === this.size) return endGame;
-    return correctMove;
+    return isWrongMove ? wrongMove : isEndGame ? endGame : correctMove;
   }
 
   /**
