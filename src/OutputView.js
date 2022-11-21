@@ -43,10 +43,15 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  checkSuccess(moveResult) {
+    const isSuccess = moveResult.every((ele) => ele === "O") ? "성공" : "실패";
+    return isSuccess;
+  },
+
   printResult(moves, moveResult, tryCount) {
     Console.print(MESSAGE.RESULT_MESSAGE);
     this.printMap(moves, moveResult);
-    const isSuccess = moveResult.every((ele) => ele === "O") ? "성공" : "실패";
+    const isSuccess = this.checkSuccess(moveResult);
     Console.print(`${MESSAGE.SUCCESS_CHECK_MESSAGE}${isSuccess}`);
     Console.print(`${MESSAGE.TRY_COUNT_MESSAGE}${tryCount}`);
     Console.close();
