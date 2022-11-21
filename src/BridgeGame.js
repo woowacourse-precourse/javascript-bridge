@@ -48,6 +48,18 @@ class BridgeGame {
     }
   }
 
+  checkFinish() {
+    if (this.#userDirectionInput.length === this.#bridge.length) {
+      this.#bridgeGameController.outputResult(
+        this.#resultMap,
+        SUCCESS_RESULT.SUCCESS,
+        this.#totalCount
+      );
+    } else if (this.#userDirectionInput.length !== this.#bridge.length) {
+      this.#bridgeGameController.inputDirection();
+    }
+  }
+
   makeMap(userDirectionInput) {
     const upArray = [];
     const downArray = [];
