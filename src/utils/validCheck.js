@@ -8,10 +8,12 @@ const validCheck = {
       return true;
     return false;
   },
+
   moveInput: (input) => {
     if (input.toUpperCase() === 'U' || input.toUpperCase() === 'D') return true;
     return false;
   },
+
   quitInput: (input) => {
     if (input.toUpperCase() === 'R' || input.toUpperCase() === 'Q') return true;
     return false;
