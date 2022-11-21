@@ -6,9 +6,10 @@ const BridgeGame=require('./BridgeGame')
 const bridegame=new BridgeGame()
 
 
-let count=0
+// let count=0
 
 class Input{
+  static count=0
   static originalBridge=''
 
   static checkBride(bridgeLength){
@@ -26,11 +27,11 @@ class Input{
   }
   static checkMovingInput(userSpace,bridgeArray){
     if(userSpace!=='U'&& userSpace!=='D') throw "[ERROR] Only U,D accepted"
-    let correctValue=OutputView.printMap(userSpace,bridgeArray,count)
+    let correctValue=OutputView.printMap(userSpace,bridgeArray,this.count)
     return correctValue
   }
   static checkReadGameInput(gameInput,bridgeArray){
-    count++
+    this.count++
     if(gameInput!=='R' && gameInput!=='Q') throw "[ERROR] Only R,Q accepted"
     if(gameInput==='R'){
       const newBridgeArray=this.originalBridge
@@ -39,7 +40,7 @@ class Input{
     }
     if(gameInput==='Q') {
       OutputView.printBridgeResult(gameInput)
-      OutputView.printResult(bridgeArray,count)
+      OutputView.printResult(bridgeArray,this.count)
     }
   }
 }

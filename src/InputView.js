@@ -8,11 +8,7 @@ const OutputView=require('./OutputView')
 const BrideGame=require('./BridgeGame')
 const bridegame=new BrideGame()
 const InputClass=require('./Input')
-// const inputClass=new Input()
 
-
-let count=0
-let originalBridge;
 const InputView = {
   printGameStart(){
     MissionUtils.Console.print('다리 건너기 게임을 시작합니다\n')
@@ -44,20 +40,20 @@ const InputView = {
   checkMoving(bridgeArray,correctValue){
     if(correctValue==='O'){
       OutputView.printBridgeResult()
-      this.checkIsOValue(bridgeArray,count)
+      this.checkIsOValue(bridgeArray)
     } 
     if(correctValue==='X') {
       OutputView.printBridgeResult()
       this.readGameCommand(bridgeArray)
     }
   },
-  checkIsOValue(bridgeArray,count){
+  checkIsOValue(bridgeArray){
     //다리를 맞췄을 때 bridgegame move 함수에 배열을 보내주고, 다시 U,D를 입력받음
     let shiftedBridge=bridegame.move(bridgeArray)
     if(shiftedBridge.length===0) {
       MissionUtils.Console.print('최종 게임 결과')
       OutputView.printBridgeResult()
-      OutputView.printResult(shiftedBridge,count)
+      OutputView.printResult(shiftedBridge,InputClass.count)
     }
     else this.readMoving(shiftedBridge)
   },
@@ -71,21 +67,6 @@ const InputView = {
       this.readMoving(bridge)
     })
   },
-  // restartGame(bridge){
-    // console.log(bridge);
-    // count++
-    // if(gameInput!=='R' && gameInput!=='Q') throw "[ERROR] Only R,Q accepted"
-    // if(gameInput==='R'){
-    //   bridgeArray=InputClass.originalBridge
-    //   console.log(bridgeArray);
-    //   OutputView.initializeArray()
-    //   InputView.readMoving(bridgeArray)
-    // }
-    // if(gameInput==='Q') {
-    //   OutputView.printBridgeResult(gameInput)
-    //   OutputView.printResult(bridgeArray,count)
-    // }
-  // }
 };
 
 module.exports = InputView;
