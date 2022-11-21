@@ -24,6 +24,7 @@ const InputView = {
     let moving;
     MissionUtils.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)", (movingInput) => {
       moving = movingInput;
+      Validation.checkMovingInputValidation(moving);
     });
     return moving;
   },
