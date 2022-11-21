@@ -16,10 +16,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(cb) {
-    Console.readLine(GAME_MSG.enterToMove + COMMON.newLine, (input) => {
-      Console.print();
-      cb(input);
-    });
+    Console.readLine(GAME_MSG.enterToMove + COMMON.newLine, cb);
   },
 
   /**
