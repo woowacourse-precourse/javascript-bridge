@@ -15,6 +15,7 @@ const BRIDGE = {
 const ERROR_MESSAGE = {
   IS_NOT_NUMBER: '[ERROR] 다리 길이로 숫자를 입력하세요.\n',
   IS_NOT_IN_RANGE: '[ERROR] 다리 길이를 3~20 사이의 숫자로 입력하세요.\n',
+  IS_WRONG_DIRECTION: '[ERROR] 올바른 방향을 입력하세요. (위: U, 아래: D)\n',
 };
 
 module.exports = { GAME_MESSAGE, BRIDGE, ERROR_MESSAGE };

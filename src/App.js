@@ -18,7 +18,7 @@ class App {
     InputView.readBridgeSize(this.makeBridge.bind(this));
   }
   makeBridge(size) {
-    if (!Validation.validateBridgeSize(size)) this.play();
+    if (!Validation.validateBridgeSize(size)) return this.play();
     this.bridgeGame.setBridge(BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate));
     this.inputMoving();
   }
@@ -26,6 +26,7 @@ class App {
     InputView.readMoving(this.passBridge.bind(this));
   }
   passBridge(direction) {
+    if (!Validation.validateDirection(direction)) return this.inputMoving();
     const { fail, success } = this.bridgeGame.move(direction);
     if (success) return this.printSuccess();
     this.printBridge();

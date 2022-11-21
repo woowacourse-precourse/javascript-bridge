@@ -22,6 +22,20 @@ const Validation = {
       throw ERROR_MESSAGE.IS_NOT_IN_RANGE;
     }
   },
+  validateDirection(direction) {
+    try {
+      this.isRightDirection(direction);
+    } catch (error) {
+      Console.print(error);
+      return false;
+    }
+    return true;
+  },
+  isRightDirection(direction) {
+    if (direction !== 'U' && direction !== 'D') {
+      throw ERROR_MESSAGE.IS_WRONG_DIRECTION;
+    }
+  },
 };
 
 module.exports = Validation;
