@@ -3,6 +3,14 @@ const MissionUtils = require("@woowacourse/mission-utils");
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+
+  /**
+   * 게임 시작 메세지를 출력한다.
+  */
+  printStart(){
+    MissionUtils.Console.print("다리 건너기 게임을 시작합니다.")
+  },
+
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * @param {[string[],string[]]} checkedMap 현재까지 이동한 다리의 상태에 대한 리스트 내용
