@@ -36,6 +36,10 @@ class App {
   moveBlock(moveInput) {
     try {
       this.bridgeGame.move(moveInput);
+      const moveInputArray = this.bridgeGame.getMoveInputArray();
+      // moveInputArray 이용해서 printMap 그리기
+      OutputView.printMap(moveInputArray);
+      // 그린 다음에, 게임 종료가 아니면 (O) 이면 다시 입력받고 moveBlock 다시 실행
     } catch (err) {
       OutputView.printGuide(err.message);
       this.tryAgain(this.requestMoving);
