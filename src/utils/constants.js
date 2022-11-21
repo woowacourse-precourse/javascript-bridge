@@ -14,8 +14,6 @@ const ERROR_MESSAGE = Object.freeze({
   VALIDATION_RETRY_OR_QUIT: "[ERROR] 재시도는 'R' 종료는 'Q'를 입력하세요.",
 });
 
-const REGEX_NUM = Object.freeze(/^[0-9]+$/);
-
 const BRIDGE_RULE = Object.freeze({
   MIN_LENGTH: 3,
   MAX_LENGTH: 20,
@@ -33,7 +31,6 @@ const RESULT = Object.freeze({
 module.exports = {
   PRINT_MESSAGE,
   ERROR_MESSAGE,
-  REGEX_NUM,
   BRIDGE_RULE,
   RESULT,
 };
