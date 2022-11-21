@@ -11,8 +11,8 @@ module.exports = {
     true: ({ app, bridgeGame, readAgain }) => {
       bridgeGame.endStep(app, readAgain);
     },
-    false: ({ app }) => {
-      app.askRetry();
+    false: ({ app, bridgeGame }) => {
+      app.askRetry(bridgeGame);
     },
   },
 
