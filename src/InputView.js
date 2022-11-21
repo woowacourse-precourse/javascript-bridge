@@ -35,6 +35,11 @@ const InputView = {
     this.readBridgeSize();
   },
 
+  gameRestart() {
+    this.gameClient.retry();
+    this.readMoving(this.gameClient, this.size);
+  },
+
   readMoving() {
     Console.readLine(GAME_MESSAGES.ASK_TO_MOVE_BLOCKS, (direction) => {
       try {
@@ -69,7 +74,30 @@ const InputView = {
     }
   },
 
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(GAME_MESSAGES.ASK_OPINION_FOR_RESTART, (command) => {
+      try {
+        Validate.checkRetryCommandType(command);
+        this.insertCommand(command);
+      } catch (error) {
+        this.printInputCommandError(error);
+      }
+    });
+  },
+
+  printInputCommandError(error) {
+    OutputView.printError(error);
+    this.readGameCommand();
+  },
+
+  insertCommand(command) {
+    if (command === "R") {
+      this.gameRestart();
+      return;
+    }
+    this.gameClient.fail();
+    return;
+  },
 };
 
 module.exports = InputView;
