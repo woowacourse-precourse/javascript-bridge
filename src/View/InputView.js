@@ -3,12 +3,12 @@ const {
   MESSAGE_INPUT_BRIDGE_LENGTH,
   MESSAGE_NEXT_MOVING_INPUT,
   MESSAGE_RETRY,
-} = require('./constants');
-const Validator = require('./Validator');
+} = require('../constants');
+const Validator = require('../utils/Validator');
 
 const { moveCommandValidator, bridgeLengthValidator, restartCommandValidator } = Validator;
 
-const ModelController = require('./GameModelController');
+const ModelController = require('../Controller/GameModelController');
 
 const { Console } = MissionUtils;
 

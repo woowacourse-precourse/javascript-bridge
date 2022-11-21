@@ -1,5 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const GameViewController = require('./GameViewController');
+const GameViewController = require('../Controller/GameViewController');
 
 const { Console } = MissionUtils;
 

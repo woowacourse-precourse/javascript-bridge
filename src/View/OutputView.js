@@ -1,7 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const { Console } = MissionUtils;
-const { MESSAGE_SUCCESS_BOOLEAN, MESSAGE_TRY_COUNT, MESSAGE_RESULT } = require('./constants');
+const { MESSAGE_SUCCESS_BOOLEAN, MESSAGE_TRY_COUNT, MESSAGE_RESULT } = require('../constants');
 
 let upArea = [];
 let downArea = [];

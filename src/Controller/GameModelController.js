@@ -1,6 +1,6 @@
-const BridgeGame = require('./BridgeGame');
-const BridgeMaker = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
+const BridgeGame = require('../Entity/BridgeGame');
+const BridgeMaker = require('../BridgeMaker');
+const { generate } = require('../utils/BridgeRandomNumberGenerator');
 
 const GAME_MANAGER = new BridgeGame();
 const GameModelController = {

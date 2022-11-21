@@ -2,7 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 const { Console } = MissionUtils;
 const { START_MESSAGE } = require('./constants');
-const InputView = require('./InputView');
+const InputView = require('./View/InputView');
 
 class App {
   play() {
