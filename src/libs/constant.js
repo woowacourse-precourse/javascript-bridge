@@ -7,7 +7,7 @@ const MSG = {
   statisticGame(result, cnt) {
     const resultTxt = result ? '성공' : '실패';
 
-    return `\n게임 성공 여부 : ${resultTxt}\n총 시도 횟수 : ${cnt}`;
+    return `게임 성공 여부: ${resultTxt}\n총 시도한 횟수: ${cnt}`;
   },
 };
 

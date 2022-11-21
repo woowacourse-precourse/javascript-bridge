@@ -13,7 +13,7 @@ const OutputView = {
    */
   printMap(movedBridge) {
     const bridgeRows = this.getBridgeRows(movedBridge);
-    const bridgeRowsStr = bridgeRows.map(TypeConverter.rowArrToStr).join('\n');
+    const bridgeRowsStr = bridgeRows.map(TypeConverter.rowArrToStr).join('\n') + '\n';
 
     Console.print(bridgeRowsStr);
   },
