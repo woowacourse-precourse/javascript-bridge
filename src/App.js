@@ -1,4 +1,5 @@
-const { readGameCommand } = require("./InputView");
+const BridgeGame = require("./BridgeGame");
+const { readGameCommand, readMoving } = require("./InputView");
 const { printResult, returnCheckedMap } = require("./OutputView");
 
 class App {
@@ -11,6 +12,17 @@ class App {
   }
 
   play() {
+  }
+
+    /**
+   * 다리의 길이 값을 인자로 받아 게임을 시작한다.
+   * @param {string} size 다리의 길이가 되었으면 하는 값
+   */
+  startGame(size) {
+    this.#size = Number(size);
+    const bridgeGame = new BridgeGame(this.#size);
+    this.#tryCount += 1;
+    this.repeatGame(bridgeGame);
   }
 
   /**
