@@ -1,4 +1,4 @@
-const { generate } = require("./BridgeRandomNumberGenerator");
+const { generate } = require("./utils/BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker");
 const Values = require("./constants/Values.js");
 

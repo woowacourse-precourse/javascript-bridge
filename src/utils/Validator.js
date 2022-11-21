@@ -1,5 +1,5 @@
-const ErrorMessages = require("./constants/ErrorMessages.js");
-const Values = require("./constants/Values.js");
+const ErrorMessages = require("../constants/ErrorMessages.js");
+const Values = require("../constants/Values.js");
 
 class Validator {
   static checkSizeInput(input) {
