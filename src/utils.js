@@ -1,4 +1,5 @@
 const { BLANK_SPACE } = require("./constants");
+const { printResult } = require("./OutputView");
 
 module.exports = {
   generateColumnMap: {
@@ -12,6 +13,15 @@ module.exports = {
     },
     false: ({ app }) => {
       app.askRetry();
+    },
+  },
+
+  stopWalking: {
+    true: ({}) => {
+      printResult();
+    },
+    false: ({ app, bridgeGame, readAgain }) => {
+      readAgain(app, bridgeGame);
     },
   },
 };
