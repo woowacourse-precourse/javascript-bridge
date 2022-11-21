@@ -52,7 +52,7 @@ class BridgeGame {
 
   /**
    * 다리의 위쪽, 아래쪽 상태를 반환한다.
-   * @return {string[string[]]} 현재 위쪽, 아래쪽 다리 상태를 나태내는 배열
+   * @return {string[][]} 현재 위쪽, 아래쪽 다리 상태를 나태내는 배열
    */
   getUpDownStatus() {
     return [this.#up, this.#down];
