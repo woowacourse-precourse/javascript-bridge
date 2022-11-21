@@ -34,15 +34,15 @@ class Bridge {
     return this.#level;
   }
 
-  print(index) {
-    printMap(index, this.#map);
+  getMap() {
+    return this.#map;
   }
 
   checkBridge(index, command) {
     this.#level = index;
     const comparison = this.#bridge[index] === command;
     this.updateMap(index, command, comparison ? MAP_VALUE.HIT : MAP_VALUE.MISS);
-    this.print(index);
+    printMap(index, this.#map);
     return comparison;
   }
 

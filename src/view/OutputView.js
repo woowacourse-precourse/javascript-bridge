@@ -27,7 +27,7 @@ const OutputView = {
    */
   printResult(success, gameTry, bridge) {
     MissionUtils.Console.print(OUTPUT_MESSAGE.GAME_END);
-    bridge.print(bridge.getLevel());
+    OutputView.printMap(bridge.getLevel(), bridge.getMap());
     MissionUtils.Console.print(`${OUTPUT_MESSAGE.RESULT}${success ? OUTPUT_MESSAGE.SUCCESS : OUTPUT_MESSAGE.FAILURE}`);
     MissionUtils.Console.print(`${OUTPUT_MESSAGE.TRY}${gameTry}`);
   },
