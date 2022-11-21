@@ -1,7 +1,7 @@
 /**
  * 입력값 유효성 검사
  */
-const { BRIDGE_ERROR } = require("./constant/ErrorMessage");
+const { BRIDGE_ERROR, MOVE_ERROR } = require("./constant/ErrorMessage");
 const ValidateInput = {
   /**
    * 다리의 길이가 3~20의 숫자인지 검사
@@ -15,7 +15,9 @@ const ValidateInput = {
   /**
    * 이동할 칸이 U/D인지 검사
    */
-  moving() {},
+  moving(move) {
+    if (move !== "U" && move !== "D") throw new Error(MOVE_ERROR.wrongChar);
+  },
 
   /**
    * 재시도 여부가 R/Q인지 검사
