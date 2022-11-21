@@ -58,8 +58,8 @@ class App {
     this.requestDirection();
   }
   quit() {
-    const { isSuccess } = this.bridgeGame.getResult();
-    OutputView.printResult({ isSuccess });
+    OutputView(this.bridgeGame.getResult());
+    Console.close();
   }
 }
 const app = new App();
