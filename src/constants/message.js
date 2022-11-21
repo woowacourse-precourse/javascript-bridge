@@ -6,6 +6,7 @@ const INPUT_MESSAGE = Object.freeze({
 
 const OUTPUT_MESSAGE = Object.freeze({
   START: "다리 건너기 게임을 시작합니다.\n",
+  MOVING_RESULT: (upResult, downResult) => `[ ${upResult} ]\n[ ${downResult} ]`,
   FINAL_RESULT: (result) => `최종 게임 결과\n${result}`,
   SUCCESS_RESULT: (result) => `게임 성공 여부: ${result}`,
   ATTEMPT_COUNT: (count) => `총 시도한 횟수: ${count}`,
