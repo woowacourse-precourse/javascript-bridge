@@ -30,25 +30,27 @@ function checkMoving(moving) {
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
-   * @param {Function} setBridge 생성한 다리를 저장하는 함수
+   * @param {Function} callback 다리의 길이를 입력받은 후 실행할 콜백 함수
    */
-  readBridgeSize(setBridge) {
+  readBridgeSize(callback) {
     Console.readLine('다리의 길이를 입력해주세요.\n', (input) => {
       const bridgeSize = Number(input);
       checkBridgeSize(bridgeSize);
       const bridge = makeBridge(bridgeSize, generate);
-      setBridge(bridge);
+      callback(bridge);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
+   * @param {Function} callback 이동할 칸을 입력받은 후 실행할 콜백 함수
    */
-  readMoving() {
+  readMoving(callback) {
     Console.readLine(
       '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
       (input) => {
         checkMoving(input);
+        callback(input);
       },
     );
   },

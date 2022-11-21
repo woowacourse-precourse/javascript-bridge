@@ -14,14 +14,14 @@ class BridgeGame {
    */
   init() {
     printGameStart();
-    readBridgeSize(this.setBridge.bind(this));
+    readBridgeSize(this.onReadBridgeSize.bind(this));
   }
 
   /**
-   * 생성한 다리를 저장할 때 사용하는 메서드
+   * readBridgeSize() 메서드의 콜백 함수
    * @param {Bridge} bridge 생성한 다리
    */
-  setBridge(bridge) {
+  onReadBridgeSize(bridge) {
     this.#bridge = bridge;
     this.move();
   }
@@ -32,14 +32,14 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move() {
-    readMoving(this.setMoving.bind(this));
+    readMoving(this.onReadMoving.bind(this));
   }
 
   /**
-   * 이동할 칸을 저장할 때 사용하는 메서드
+   * readMoving() 메서드의 콜백 함수
    * @param {string} moving 이동할 칸
    */
-  setMoving(moving) {
+  onReadMoving(moving) {
     this.#movings.push(moving);
   }
 
