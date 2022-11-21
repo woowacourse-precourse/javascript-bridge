@@ -24,6 +24,12 @@ const Validator = {
 			throw new Error('[ERROR] 이동은 \'위(U)\' 혹은 \'아래(D)\'로만 할 수 있습니다.');
 		}
 	},
+
+	checkGameCommand(command) {
+		if (command !== 'R' || command !== 'Q') {
+			throw new Error('[ERROR] 재시작하려면 \'R\' 종료하려면 \'Q\'를 입력해야 합니다.');
+		}
+	}
 }
 
 module.exports = Validator;
