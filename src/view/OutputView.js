@@ -16,6 +16,10 @@ const OutputView = {
   printStart() {
     Console.print(MESSAGE.GAME_START);
   },
+
+  printNewLine() {
+    Console.print('');
+  },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -24,6 +28,7 @@ const OutputView = {
   printMap(moveTrace) {
     Console.print(`[ ${this.getUpperMap(moveTrace).join(' | ')} ]`);
     Console.print(`[ ${this.getLowerMap(moveTrace).join(' | ')} ]`);
+    this.printNewLine();
   },
 
   getUpperMap(moveTrace) {

@@ -18,6 +18,7 @@ class GameController {
     this.#bridgeGame = new BridgeGame(new Bridge(command));
     this.#history = new History();
 
+    OutputView.printNewLine();
     InputView.readMoving(this.playGame.bind(this));
   }
 
