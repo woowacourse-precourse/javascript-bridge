@@ -10,6 +10,7 @@ const command = Object.freeze({
 
 const error = Object.freeze({
   SIZE: '[ERROR] 다리 길이는 3 이상 20 이하의 숫자여야 합니다.',
+  MOVE: '[ERROR] 위로 이동 시 U, 아래로 이동 시 D를 입력해주세요.',
 });
 
 module.exports = { command, error };

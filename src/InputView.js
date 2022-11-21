@@ -20,9 +20,11 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   async readMoving() {
-    return await new Promise((move) => {
+    const move = await new Promise((move) => {
       Console.readLine(command.MOVE, move);
     });
+    validate.move(move);
+    return move;
   },
 
   /**
@@ -39,6 +41,10 @@ const validate = {
   size(input) {
     if (isNaN(input)) throw new Error(error.SIZE);
     if ((3 > input) | (input > 20)) throw new Error(error.SIZE);
+  },
+
+  move(input) {
+    if (input !== 'U' && input !== 'R') throw new Error(error.MOVE);
   },
 };
 
