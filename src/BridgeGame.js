@@ -23,7 +23,7 @@ class BridgeGame {
   async makeBridge() {
     const size = await this.getBridgeSize();
     const bridge = BridgeMaker.makeBridge(size, generateRandomNumber);
-    bridge.forEach((section, i) => this.gameResult.setResult(i, section));
+    this.gameResult.setDefault(bridge);
   }
 
   async getBridgeSize() {
@@ -46,35 +46,49 @@ class BridgeGame {
 
   // 리팩토링 사항
   async controlMoving() {
-    const until = this.gameResult.size;
+    const until = this.gameResult.getResult().size;
 
     let current = 0;
     while (current < until) {
       const moved = await this.move(current);
-      this.gameResult.printHistory();
 
       moved ? (current += 1) : await this.command();
-      if (current === until) return this.finish('success');
+
+      if (current === until) return;
     }
   }
 
   // 리팩토링 사항
   async move(current) {
     const direction = await this.getMovingDirection();
-    const moved = this.gameResult.calculateMatch(current, direction);
+    const moved = this.gameResult.calcutateMatch(current, direction);
+
+    this.gameResult.printHistory();
 
     return moved;
   }
 
-  async retry() {}
+  async command() {
+    const command = await this.getGameCommand();
+    if (command === INPUT_FORMAT.RETRY) {
+      return this.retry();
+    } else {
+      return;
+    }
+  }
 
   async getGameCommand() {
     try {
-      return await InputView.readGameCommand();
+      await InputView.readGameCommand();
     } catch (error) {
       OutputView.printMessage(error.message);
-      return this.getGameCommand();
+      this.getGameCommand();
     }
+  }
+
+  async retry() {
+    this.gameResult.clear();
+    this.move();
   }
 
   // async finish(type) {}
