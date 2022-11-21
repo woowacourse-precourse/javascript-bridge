@@ -33,4 +33,18 @@ class SizeConstraint {
   }
 }
 
-module.exports = { SizeConstraint };
+class MoveConstraint {
+  #move;
+
+  constructor(move) {
+    this.#move = move;
+  }
+
+  checkInputValue() {
+    if (this.#move !== "U" && this.#move !== "D") {
+      throw new Error("[ERROR] U 또는 D만 입력 가능합니다.");
+    }
+  }
+}
+
+module.exports = { SizeConstraint, MoveConstraint };
