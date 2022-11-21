@@ -50,7 +50,17 @@ class App {
 
   #gotoNextStageAfterMoving() {
     const { currentState } = this.#brideGame.getGameState();
+    if (currentState === MOVEMENT_RESULT.GAME_SUCCESS) this.#quitGame();
     if (currentState === MOVEMENT_RESULT.CORRECT) this.#readMovingStage();
+  }
+
+  #quitGame() {
+    const {
+      currentState, userPath, bridge, attempts,
+    } = this.#brideGame.getGameState();
+    const mapArray = makeMapArray(userPath, bridge);
+    OutputView.printResult(currentState, mapArray, attempts);
+    OutputView.close();
   }
 }
 module.exports = App;
