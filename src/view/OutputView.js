@@ -9,7 +9,7 @@ const OutputView = {
   },
 
   printGameStart() {
-    Console.print(this.message('GAME_START'));
+    Console.print(OutputView.message('GAME_START'));
   },
 
   printMap(crossingBridge) {
@@ -17,8 +17,8 @@ const OutputView = {
   },
 
   printResult({ crossingBridge, attempt, result }) {
-    Console.print(this.message('RESULT'));
-    this.printMap(crossingBridge);
+    Console.print(OutputView.message('RESULT'));
+    OutputView.printMap(crossingBridge);
     Console.print(result);
     Console.print(attempt);
   },
