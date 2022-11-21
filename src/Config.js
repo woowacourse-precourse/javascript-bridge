@@ -31,9 +31,9 @@ const GameLoggerConfig = {
 
 const Message = {
   GAME_START: '다리 건너기 게임을 시작합니다.',
-  ENTER_BRIDGE_LENGTH: '다리의 길이를 입력해주세요.',
-  ENTER_MOVE: `이동할 칸을 선택해주세요. (위: ${BridgeConfig.UP}, 아래: ${BridgeConfig.DOWN})`,
-  ENTER_RETRY: `게임을 다시 시도할지 여부를 입력해주세요. (재시도: ${GameConfig.RETRY}, 종료: ${GameConfig.QUIT})`,
+  ENTER_BRIDGE_LENGTH: '다리의 길이를 입력해주세요.\n',
+  ENTER_MOVE: `이동할 칸을 선택해주세요. (위: ${BridgeConfig.UP}, 아래: ${BridgeConfig.DOWN})\n`,
+  ENTER_RETRY: `게임을 다시 시도할지 여부를 입력해주세요. (재시도: ${GameConfig.RETRY}, 종료: ${GameConfig.QUIT})\n`,
   GAME_END: '최종 게임 결과',
 
   ERROR_BRIDGE_LENGTH: `[ERROR] 다리 길이는 ${BridgeConfig.MIN_LENGTH}부터 ${BridgeConfig.MAX_LENGTH} 사이의 자연수여야 합니다.`,
