@@ -5,7 +5,7 @@ class App {
     this.bridgeGame = new BridgeGame();
   }
   play() {
-    BridgeGame.maker(this.bridgeGame);
+    this.bridgeGame.maker(this.bridgeGame);
   }
 }
 

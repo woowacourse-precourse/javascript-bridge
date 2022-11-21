@@ -1,5 +1,10 @@
 const inputView = require('./InputView');
 const { BRIDGE } = require('../constants/game.constants');
+const outputView = require('./OutputView');
+const InputValidator = require('../validators/InputValidator');
+const { makeBridge } = require('./BridgeMaker');
+const { generate } = require('./BridgeRandomNumberGenerator');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -24,8 +29,20 @@ class BridgeGame {
     return this.#bridge;
   }
 
-  static maker (bridgeGame) {
-    inputView.readBridgeSize(bridgeGame);
+  maker () {
+    inputView.readBridgeSize(this.handleBridgeLength.bind(this));
+  }
+
+  handleBridgeLength (length) {
+    try {
+      InputValidator.isRightBridgeLength(length);
+      const bridge = makeBridge(length, generate);
+      this.setBridge(bridge);
+      this.move(this);
+    } catch (error) {
+      outputView.printError(error);
+      this.maker();
+    }
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
