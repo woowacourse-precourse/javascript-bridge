@@ -22,6 +22,7 @@ class App {
   handleMoving(direction) {
     Validator.checkDirectionInput(direction);
     this.#game.move(direction);
+    OutputView.printMap(this.#game.stepObj);
     if (this.#game.isCleared) this.showGameResult();
     else if (this.#game.isSuccess) this.askMoving();
     else throw new Error("게임 실패");
