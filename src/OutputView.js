@@ -49,7 +49,7 @@ const OutputView = {
     Console.print(printArr.join(''));
 
     if (xNum != 0) {
-      this.readGameCommand();
+      this.readGameCommand(bridge, count);
     } else {
       count++;
       if (count == bridge.length) {
@@ -72,7 +72,16 @@ const OutputView = {
     });
   },
   
-  readGameCommand() {},
+  readGameCommand(bridge, count) {
+    count = 0;
+    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (retry) => {
+      if (retry == 'R') {
+        this.readMoving(bridge, count);
+      } else {
+        this.printResult();
+      }
+    });
+  },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
