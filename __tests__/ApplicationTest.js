@@ -86,4 +86,10 @@ describe('다리 건너기 테스트', () => {
   });
 });
 
-module.exports = { mockQuestions, mockRandoms, getLogSpy, getOutput };
+module.exports = {
+  expectLogContains,
+  mockQuestions,
+  mockRandoms,
+  getLogSpy,
+  getOutput,
+};
