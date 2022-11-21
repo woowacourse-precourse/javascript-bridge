@@ -12,8 +12,15 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요.\n', (size) => {
-      const bridgeGame = new BridgeGame(BridgeMaker.makeBridge(this.checkBridgeSize(size), BridgeRandomNumberGenerator.generate));
-      try { this.readMoving(bridgeGame) } catch (error) { throw new Error("[ERROR]") }
+      try {
+        const BRIDGE = BridgeMaker.makeBridge(this.checkBridgeSize(size), BridgeRandomNumberGenerator.generate);
+        const bridgeGame = new BridgeGame(BRIDGE);
+        console.log(BRIDGE);
+        this.readMoving(bridgeGame);
+      } catch (error) {
+        MissionUtils.Console.print(error);
+        this.readBridgeSize();
+      }
     });
   },
 
@@ -26,7 +33,7 @@ const InputView = {
       size_range.push(String(i));
     }
     if (!size_range.includes(size)) {
-      throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+      throw "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.";
     }
     return parseInt(size);
   },
@@ -36,8 +43,13 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     MissionUtils.Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (nextMove) => {
-      bridgeGame.move(this.checkMoving(nextMove));
-      try { this.readMoving(bridgeGame) } catch (error) { throw new Error("[ERROR]") }
+      try {
+        bridgeGame.move(this.checkMoving(nextMove));
+        this.readMoving(bridgeGame);
+      } catch (error) {
+        MissionUtils.Console.print(error);
+        this.readMoving(bridgeGame);
+      }
     });
   },
 
@@ -48,7 +60,7 @@ const InputView = {
     if ((move === "U") || (move === "D")) {
       return move;
     }
-    throw new Error("[ERROR] 이동할 칸은 U 또는 D로 입력해 주세요.");
+    throw "[ERROR] 이동할 칸은 U 또는 D로 입력해 주세요.";
   },
 
   /**
