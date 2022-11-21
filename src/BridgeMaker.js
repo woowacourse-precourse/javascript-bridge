@@ -1,4 +1,4 @@
-const InputView = require("./InputView");
+const { SPACE_TO_MOVE } = require("./Utils");
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -12,7 +12,7 @@ const BridgeMaker = {
     const bridge = [];
 
     for (let idx = 0; idx < size; idx++) {
-        bridge.push(generateRandomNumber);
+        bridge.push(generateRandomNumber());
       }
     return BridgeMaker.changeBridge(bridge)
   },
@@ -21,8 +21,8 @@ const BridgeMaker = {
     const remakeBridge = [];
 
     bridge.forEach((space) => {
-      if (space === 0) remakeBridge.push("D");
-      if (space === 1) remakeBridge.push("U");
+      if (space === 0) remakeBridge.push(SPACE_TO_MOVE.MOVE_DOWN);
+      if (space === 1) remakeBridge.push(SPACE_TO_MOVE.MOVE_UP);
     })
     return remakeBridge;
   },

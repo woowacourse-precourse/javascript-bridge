@@ -7,7 +7,7 @@ describe("다리를 만드는 메서드 테스트", () => {
       return MissionUtils.Random.pickNumberInRange(0, 1);
     }
     expect(
-      BridgeMaker.makeBridge(3, generate())
+      BridgeMaker.makeBridge(3, generate)
     ).toHaveLength(3);
   });
 
@@ -16,7 +16,7 @@ describe("다리를 만드는 메서드 테스트", () => {
       return MissionUtils.Random.pickNumberInRange(1, 1);
     }
     expect(
-      BridgeMaker.makeBridge(3, generate())
+      BridgeMaker.makeBridge(3, generate)
     ).toEqual(["U", "U", "U"]);
   });
 
@@ -25,7 +25,7 @@ describe("다리를 만드는 메서드 테스트", () => {
       return MissionUtils.Random.pickNumberInRange(0, 0);
     }
     expect(
-      BridgeMaker.makeBridge(3, generate())
+      BridgeMaker.makeBridge(3, generate)
     ).toEqual(["D", "D", "D"]);
   });
 
