@@ -22,10 +22,6 @@ class BridgeGame {
   makeBridge(bridgeSize) {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     console.log(this.#bridge);
-
-    this.#tryCount += 1;
-    this.#moveCount = 0;
-    InputView.readMoving(this.move.bind(this));
   }
 
   /**

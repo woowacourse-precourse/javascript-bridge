@@ -27,7 +27,16 @@ class GameController {
       return this.getBridgeSize();
     }
 
-    return inputBridgeSize;
+    return this.makeBridge(inputBridgeSize);
+  }
+
+  makeBridge(bridgeSize) {
+    this.BridgeGame.makeBridge(bridgeSize);
+    this.getMoving();
+  }
+
+  getMoving() {
+    InputView.readMoving(this.checkMoveValidation.bind(this));
   }
 }
 
