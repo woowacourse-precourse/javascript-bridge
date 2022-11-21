@@ -17,8 +17,8 @@ class BridgeGame {
     this.playerLowerBridge = [];
   }
 
-  isLastPosition(size) {
-    return size >= this.computerBridge.length;
+  isLastPosition(playerBridgeLength) {
+    return playerBridgeLength === this.computerBridge.length;
   }
 
   /**
