@@ -20,6 +20,10 @@ class Bridge {
     if (this.#bridges[index] === direction) return MOVABLE.MOVABLE;
     return MOVABLE.IMMOVABLE;
   }
+
+  getBridgeLength() {
+    return this.#length;
+  }
 }
 
 module.exports = Bridge;

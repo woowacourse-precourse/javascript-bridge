@@ -1,7 +1,7 @@
 const Bridge = require('./Bridge');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { MOVABLE } = require('./data/constants');
+const { MOVABLE, GAME_COMMAND } = require('./data/constants');
 const InputView = require('./InputView');
 const IO = require('./IO');
 const OutputView = require('./OutputView');
@@ -17,6 +17,8 @@ class BridgeGame {
 
   #bridgesProgress;
 
+  #tryCount;
+
   constructor() {
     this.checkLengthValidate();
   }
@@ -31,7 +33,7 @@ class BridgeGame {
           BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate),
         );
         this.#bridgesProgress = [[], []];
-        this.play(length);
+        this.play();
       } catch (error) {
         IO.output(error);
         this.checkLengthValidate();
@@ -39,8 +41,8 @@ class BridgeGame {
     });
   }
 
-  play(length) {
-    this.move(0, length);
+  play() {
+    this.move(0, this.#bridge.getBridgeLength());
   }
 
   /**
@@ -54,9 +56,23 @@ class BridgeGame {
         Validator.validateBridgeDirection(direction);
         const checkCorect = this.#bridge.checkCorrectDirection(direction, index);
 
-        OutputView.printMap(this.#bridgesProgress, checkCorect);
+        OutputView.printMap(this.#bridgesProgress, checkCorect, direction);
 
-        if (index === length - 1) { IO.close(); return; }
+        if (checkCorect === MOVABLE.IMMOVABLE) {
+          InputView.readGameCommand((command) => {
+            try {
+              if (command === GAME_COMMAND.RETRY) {
+                this.retry();
+                return;
+              }
+              IO.output('quit');
+              return;
+            } catch (error) {
+              IO.output(error);
+            }
+          });
+        } else if (index === length - 1) { IO.close(); return; }
+
         this.move(index + 1, length);
       } catch (error) {
         IO.output(error);
@@ -70,7 +86,11 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#tryCount += 1;
+    this.#bridgesProgress = [[], []];
+    this.play();
+  }
 }
 
 module.exports = BridgeGame;
