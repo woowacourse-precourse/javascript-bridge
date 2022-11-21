@@ -7,12 +7,18 @@ const BridgeUtil = {
   },
   validateUserInput(bridge, input) {
     let currentIndx = input.length - 1;
-    if (input[currentIndx] === "U" && bridge[currentIndx] === 1) return true;
-    if (input[currentIndx] === "D" && bridge[currentIndx] === 0) return true;
+    if (input[currentIndx] === bridge[currentIndx]) return true;
+    if (input[currentIndx] === bridge[currentIndx]) return true;
     return false;
   },
   printBridge(bridge, input) {
     OutputView.printMap(bridge, input);
+  },
+  printRetryCommand(bridgeGame) {
+    InputView.readGameCommand(bridgeGame);
+  },
+  printGameResult(bridgeGame) {
+    OutputView.printResult(bridgeGame, "성공");
   },
 };
 
