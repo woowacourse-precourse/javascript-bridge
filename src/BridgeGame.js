@@ -32,7 +32,6 @@ class BridgeGame {
    */
   retry() {
     this.init();
-    console.log("retry", this.moveResult, this.inputMoves);
   }
 }
 
