@@ -25,13 +25,8 @@ class App {
     const bridgeArr = bridgeMaker.makeBridge(size, bridgeRandomNumberGenerator.generate);
     console.log('###bridgeArr:', bridgeArr);
 
-
-    // const movingInput = await inputView.inputMoving(bridgeArr);
-    // console.log('###movingInput:', movingInput);
-
-  
     const bridgeGame = new BridgeGame(bridgeArr, size);
-    bridgeGame.move();
+    bridgeGame.runGame();
 
   }
 
