@@ -1,9 +1,9 @@
 const BridgeGame = require('./BridgeGame');
 const Validator = require('./Utils/Validator');
 const MissionUtils = require("@woowacourse/mission-utils");
-const OutputView = require('./OutputView');
-const InputView = require('./InputView');
-const { MOVEMENT_LOG_CODE, USER_INPUT_CODE, MESSAGES } = require('./constants');
+const OutputView = require('./Views/OutputView');
+const InputView = require('./Views/InputView');
+const { USER_INPUT_CODE, MESSAGES } = require('./constants');
 
 class App {
   play() {

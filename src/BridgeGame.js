@@ -1,5 +1,5 @@
 const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeRandomNumberGenerator = require('./Utils/BridgeRandomNumberGenerator');
 const { USER_INPUT_CODE, MOVEMENT_LOG_CODE } = require('./constants');
 
 class BridgeGame {

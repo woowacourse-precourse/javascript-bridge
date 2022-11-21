@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { MESSAGES } = require('./constants');
-const GameUtils = require('./Utils/GameUtils');
+const { MESSAGES } = require('../constants');
+const GameUtils = require('../Utils/GameUtils');
 
 const OutputView = {
   printMap(log) {

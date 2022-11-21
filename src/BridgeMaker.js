@@ -1,5 +1,5 @@
 const { MOVEMENT_LOG_CODE } = require('./constants');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeRandomNumberGenerator = require('./Utils/BridgeRandomNumberGenerator');
 
 const BridgeMaker = {
   /**
