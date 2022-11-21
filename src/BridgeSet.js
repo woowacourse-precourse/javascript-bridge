@@ -77,6 +77,12 @@ const BridgeSet = {
       this.underBridge.push(OUTPUT_MESSAGE.BRIDGE_BETWEEN + OUTPUT_MESSAGE.MOVE_FAILURE);
     }
   },
+
+  beforeBridge() {
+    this.overBridge.pop();
+    this.underBridge.pop();
+    return OutputView.printMap(this.overBridge, this.underBridge);
+  },
 }
 
 
