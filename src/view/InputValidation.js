@@ -5,7 +5,7 @@ const Validation = {
       throw new Error("[ERROR] 다리 길이는 숫자로 입력해야 합니다.");
     }
     if(sizeInput<3 || sizeInput>20){
-      throw new Error("[ERROR] 다리 길이는 3이상 20이하여야 합니다.");
+      throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
     }
   },
   checkMoving(movingInput){

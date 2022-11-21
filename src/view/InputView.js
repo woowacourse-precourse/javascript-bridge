@@ -4,7 +4,8 @@ const Validation = require("./InputValidation");
 
 const InputView = {
   readBridgeSize(app) {
-    Console.readLine(Messages.input_size(), (size)=>{
+    Console.readLine(Messages.input_size(), (size)=>{ 
+      Console.print("");
       try{
         Validation.checkBridgeSize(size);
         app.init(size);
