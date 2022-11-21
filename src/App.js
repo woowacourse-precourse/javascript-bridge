@@ -33,6 +33,14 @@ class App {
 
   gameControl(input) {
     GameControlValidation.validate(input);
+
+    if (input === 'R') {
+      this.game.retry();
+      InputView.readMoving.bind(this)([this.moveForward, this.gameControl]);
+      return;
+    }
+
+    this.gameEnd();
   }
 
   gameEnd() {
