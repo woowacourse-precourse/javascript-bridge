@@ -22,14 +22,15 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(bridge) {
+  printResult(bridge, result) {
     const [up, down] = bridge;
+    const pass = result.isPass ? '성공' : '실패';
 
     Console.print('최종 게임 결과');
     Console.print('[ ' + up.join(' | ') + ' ]');
     Console.print('[ ' + down.join(' | ') + ' ]');
-    Console.print(`\n게임 성공 여부: `);
-    Console.print(`총 시도한 횟수:`);
+    Console.print(`\n게임 성공 여부: ${pass}`);
+    Console.print(`총 시도한 횟수: ${result.try}`);
   },
 };
 

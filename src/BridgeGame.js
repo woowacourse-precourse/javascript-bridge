@@ -5,10 +5,14 @@ class BridgeGame {
   #bridge;
   #order;
   #map;
+  #tryCount;
+  #isPass;
 
   constructor() {
     this.#order = 0;
     this.#map = [[], []];
+    this.#tryCount = 1;
+    this.#isPass = true;
   }
 
   setBridge(bridge) {
@@ -42,6 +46,7 @@ class BridgeGame {
   }
 
   fail(move) {
+    this.#isPass = false;
     move === 'U' ? this.up('X') : this.down('X');
   }
 
@@ -59,6 +64,9 @@ class BridgeGame {
     return this.#map;
   }
 
+  getResult() {
+    return { try: this.#tryCount, isPass: this.#isPass };
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
@@ -67,6 +75,8 @@ class BridgeGame {
   retry() {
     this.#map = [[], []];
     this.#order = 0;
+    this.#isPass = true;
+    this.#tryCount += 1;
   }
 }
 

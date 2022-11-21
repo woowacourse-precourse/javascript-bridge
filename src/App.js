@@ -75,7 +75,10 @@ class App {
   }
 
   endGame() {
-    OutputView.printResult(this.bridgeGame.getMap());
+    OutputView.printResult(
+      this.bridgeGame.getMap(),
+      this.bridgeGame.getResult(),
+    );
     Console.close();
   }
 }
