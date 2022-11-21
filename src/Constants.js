@@ -1,5 +1,5 @@
-const BRIDGE_MIN_LENGTH = 3;
-const BRIDGE_MAX_LENGTH = 20;
+const MIN_LENGTH = 3;
+const MAX_LENGTH = 20;
 const UP = 'U';
 const DOWN = 'D';
 const RETRY = 'R';
@@ -24,8 +24,8 @@ const ERROR_RANGE = '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 
 const ERROR_STRING = '[ERROR] 올바른 문자를 입력해주세요.';
 
 module.exports = {
-  BRIDGE_MIN_LENGTH,
-  BRIDGE_MAX_LENGTH,
+  MIN_LENGTH,
+  MAX_LENGTH,
   UP,
   DOWN,
   RETRY,
