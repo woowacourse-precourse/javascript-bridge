@@ -4,6 +4,7 @@ const ExceptionCheck = require("../ExceptionCheck");
 const OutputView = require("./OutputView");
 const BridgeMaker = require("../BridgeMaker");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
+const ggg = require("../ggg");
 
 const InputView = {
   BRIDGE_GAME: new BridgeGame(),
@@ -14,19 +15,19 @@ const InputView = {
     MissionUtils.Console.readLine(
       "다리의 길이를 입력해주세요.",
       (bridgeSize) => {
-        try {
-          ExceptionCheck.checkBridgeSize(Number(bridgeSize));
-
-          OutputView.printBridgeSize(bridgeSize);
-          const bridge = BridgeMaker.makeBridge(
-            Number(bridgeSize),
-            BridgeRandomNumberGenerator.generate
-          );
-          this.readMoving(bridge);
-        } catch (err) {
-          MissionUtils.Console.print(err);
-          this.readBridgeSize();
-        }
+        // ggg.ff(bridgeSize, this.readBridgeSize, this.readMoving);
+        // try {
+        //   ExceptionCheck.checkBridgeSize(Number(bridgeSize));
+        //   OutputView.printBridgeSize(bridgeSize);
+        //   const bridge = BridgeMaker.makeBridge(
+        //     Number(bridgeSize),
+        //     BridgeRandomNumberGenerator.generate
+        //   );
+        //   this.readMoving(bridge);
+        // } catch (err) {
+        //   MissionUtils.Console.print(err);
+        //   this.readBridgeSize();
+        // }
       }
     );
   },
@@ -75,7 +76,7 @@ const InputView = {
           this.TRY = this.TRY + 1;
           this.BRIDGE_GAME.retry(bridge);
         } else {
-          OutputView.printResult({ up, down }, this.TRY, compareResult);
+          printResult({ up, down }, this.TRY, compareResult);
         }
       }
     );
