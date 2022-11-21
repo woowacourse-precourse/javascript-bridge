@@ -12,7 +12,6 @@ const InputView = {
   readBridgeSize() {
     let BRIDGE_LENGTH = 0
     MissionUtils.Console.readLine("",(bridgeLength) => {
-      // 유효성 검사 필요 : bridgeLength 가 숫자가 아닌 경우
       if(Checking.bridgeNum(bridgeLength) === 'ERROR') { this.readBridgeSize() }
       if(Checking.bridgeNumCheck(bridgeLength) === 'ERROR') {this.readBridgeSize()}
       BRIDGE_LENGTH = bridgeLength
@@ -26,7 +25,6 @@ const InputView = {
   readMoving() {
     let USER_MOVE = ''
     MissionUtils.Console.readLine("",(userMove) => {
-      // 유효성 검사 필요 : userMove가 U,D가 아닌 경우
       if(Checking.userMoveCheck(userMove) === "ERROR") {this.readMoving()}
       USER_MOVE = userMove
     })

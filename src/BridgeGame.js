@@ -13,7 +13,6 @@ class BridgeGame {
   }
 
   checkBridge(result){
-    // X 인 경우 게임 종료 후 다시 할지 여부 파악
     if (result === 'X') return 'X'
     return result
   }

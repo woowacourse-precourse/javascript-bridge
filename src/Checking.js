@@ -1,10 +1,8 @@
-// 사용자가 잘못된 값을 입력한 경우 throw문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const Checking  = {
     // 다리의 길이가 숫자인가?
     bridgeNum (bridge) {
-        // 소수 인 경우 ERROR 처리
         if(this.isFloat(bridge) === "ERROR") return "ERROR"
         bridge = parseInt(bridge)
         if ( Number.isInteger(bridge) === false ) {
