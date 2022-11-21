@@ -2,10 +2,12 @@ class BridgeGame {
  
   #curIdx;
   #success;
+  #bridge;
   #gameCount;
   
-  constructor(){
+  constructor(bridge){
     this.init();
+    this.#bridge = bridge;
     this.#gameCount = 1;
   }
 
@@ -14,8 +16,12 @@ class BridgeGame {
     this.#success = true;
   }
 
-  getIdx(){
-    return this.#curIdx;
+  gameNotFinished(){
+    return this.#success && this.#curIdx < this.#bridge.length;
+  }
+
+  gameSuccess(){
+    return this.#success && this.#curIdx === this.#bridge.length;
   }
 
   getSuccess(){
@@ -26,8 +32,8 @@ class BridgeGame {
     return this.#gameCount;
   }
 
-  move(dir, bridge) {
-    if(dir === bridge[this.#curIdx]){
+  move(dir) {
+    if(dir === this.#bridge[this.#curIdx]){
       this.#curIdx += 1;
     }
     else{
