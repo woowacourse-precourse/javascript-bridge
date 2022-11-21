@@ -4,16 +4,14 @@ const { PARAMETERS } = require('./utils/constants');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor(bridge) {
-    this.init(bridge);
+  constructor() {
+    this.init();
     this.gameCount = 1;
   }
 
-  init(bridge) {
+  init() {
     this.top = [];
     this.bottom = [];
-    this.bridge = bridge;
-    this.moveCount = 0;
   }
 
   /**
@@ -21,12 +19,14 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(moveDirection) {
-    if (this.bridge[this.moveCount] === moveDirection) {
+  move(bridgeValue, moveDirection) {
+    if (bridgeValue === moveDirection) {
       this.checkDirection(moveDirection, PARAMETERS.movable);
     } else {
       this.checkDirection(moveDirection, PARAMETERS.immovable);
     }
+
+    return [this.top, this.bottom];
   }
 
   checkDirection(moveDirection, mark) {
