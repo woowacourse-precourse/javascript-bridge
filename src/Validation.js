@@ -2,7 +2,17 @@ const { PARAMETERS } = require('./utils/constants');
 const Utils = require('./utils/Utils');
 
 class Validation {
-  checkRestartRequirement() {}
+  checkRestartRequirement(moveCount, bridgeGameLog, bridge) {
+    if (this.hasFailedOnLastMove(moveCount, bridgeGameLog, bridge)) {
+      return true;
+    }
+  
+    if (this.hasFailedInProgress(bridgeGameLog)) {
+      return true;
+    }
+  
+    return false;
+  }
 
   hasFailedOnLastMove(moveCount, bridgeGameLog, bridge) {
     if (
