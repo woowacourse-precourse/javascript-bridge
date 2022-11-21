@@ -1,11 +1,13 @@
 const MIN = 3;
 const MAX = 20;
+
 const LOWER_ZONE_NUMBER = 0;
 const UPPER_ZONE_NUMBER = 1;
 const LOWER_ZONE = "D";
 const UPPER_ZONE = "U";
 const RIGHT_ZONE = "O";
 const WRONG_ZONE = "X";
+
 const RESTART = "R";
 const END = "Q";
 
