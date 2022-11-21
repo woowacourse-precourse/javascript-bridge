@@ -1,4 +1,4 @@
-const Validator = require('../src/Validator');
+const Validator = require('../src/Utils/Validator');
 const BridgeMaker = require('../src/BridgeMaker');
 
 describe('다리 생성 테스트', () => {
@@ -29,5 +29,23 @@ describe('다리 생성 테스트', () => {
 
     const bridge = BridgeMaker.makeBridge(12, mockGenerator);
     expect(bridge).toEqual(['D', 'D', 'D', 'U', 'U', 'U', 'U', 'U', 'U', 'D', 'D', 'D']);
+  });
+
+  test('업 다운 움직임 입력 유효성 테스트', () => {
+    const testCase = [0, 1, 2, 'u', 'd', 'R', 'Q', 'r', 'q', ' ', 'UU', 'DD', 'UD', 'U U', 'D D', 'U D', '   U', 'U   '];
+		testCase.forEach((cases) => {
+			expect(() => {
+				Validator.checkMoving(cases);
+			}).toThrow('[ERROR]');
+		});
+  });
+
+  test('재시작 종료 입력 유효성 테스트', () => {
+    const testCase = [0, 1, 2, 'u', 'U', 'd', 'D', 'e', 'EE', 'QQ', 'RR', 'q', 'Q Q', 'R R', 'Q  ', '   R', ' '];
+		testCase.forEach((cases) => {
+			expect(() => {
+				Validator.checkGameCommand(cases);
+			}).toThrow('[ERROR]');
+		});
   });
 });
