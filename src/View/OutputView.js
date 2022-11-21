@@ -26,11 +26,12 @@ const OutputView = {
    */
   printResult(data) {
     const { retry, success, map } = data;
+    const SUCCESS = success ? START_BRIDGE : FAIL_BRIDGE;
 
-    print("최종 게임 결과");
+    print(END_MESSAGE);
     OutputView.printMap(map);
-    print(`\n게임 성공 여부: ${success ? "성공" : "실패"}`);
-    print(`총 시도한 횟수: ${retry}`);
+    print(END_SUCCESS(SUCCESS));
+    print(END_ATTEMPT(retry));
   },
 
   /**

@@ -11,17 +11,21 @@ const constants = Object.freeze({
   },
   INPUT: {
     READ_BRIDGE: "\n다리의 길이를 입력해주세요.\n",
-    MOVING_BRIDGE: "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+    MOVING_BRIDGE: "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
     RETRY_BRIDGE:
       "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
   },
   OUTPUT: {
     START_BRIDGE: "다리 건너기 게임을 시작합니다.",
-    SUCCESS_BRIDGE: (SUCCESS) => `게임 성공 여부: ${SUCCESS}`,
-    ATTEMPT_BRIDGE: (ATTEMPT) => `총 시도한 횟수: ${ATTEMPT}`,
-    MAP_BRIDGE: () => "",
+    MAP_BLANK: " ",
+    MAP_MIDDLE_DIVIDE: " | ",
+    MAP_DIVIDE: (message) => `[ ${message} ]`,
+    END_MESSAGE: "최종 게임 결과",
+    END_SUCCESS: (SUCCESS) => `\n게임 성공 여부: ${SUCCESS}`,
+    END_ATTEMPT: (ATTEMPT) => `총 시도한 횟수: ${ATTEMPT}`,
   },
   SIZE: {
+    MAP_SIZE: 2,
     MIN_SIZE: 3,
     MAX_SIZE: 20,
   },
