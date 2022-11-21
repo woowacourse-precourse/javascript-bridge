@@ -9,6 +9,8 @@ const BridgeNumber = require('./BridgeRandomNumberGenerator');
 class BridgeGame {
   #turn;
   #try = 0;
+  #isPlay = true;
+  #isClear = false;
   #bridge;
   #upperBridge;
   #lowerBridge;
@@ -31,7 +33,9 @@ class BridgeGame {
   enterMoving() {
     const moving = (input) => {
       this.move(input);
-      this.enterMoving();
+      if (this.#isPlay) this.enterMoving();
+      if (!this.#isPlay) this.enterRegame();
+      if (this.#isClear) this.endGame();
     };
 
     InputView.readMoving('이동할 칸을 선택해주세요.\n', moving);
@@ -49,8 +53,12 @@ class BridgeGame {
     this.#turn += 1;
     if (input === crossable) {
       this.isFirst(GO, input);
+      if (this.#turn === this.#bridge.length) {
+        this.#isClear = true;
+      }
     }
     if (input !== crossable) {
+      this.#isPlay = false;
       this.isFirst(STOP, input);
       this.retry();
     }
@@ -91,6 +99,13 @@ class BridgeGame {
   retry() {
     this.init();
     this.#try += 1;
+  }
+
+  endGame() {
+    const SUCCESS = '성공';
+    const FAIL = '실패';
+    if (this.#isClear) return SUCCESS;
+    return FAIL;
   }
 }
 
