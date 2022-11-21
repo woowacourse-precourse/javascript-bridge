@@ -10,6 +10,16 @@ const Exception = {
     }
   },
 
+    /**
+   * 이동할 칸에 대한 입력이 유효한지 체크
+   * @param {string} input 위 또는 아래에 대한 입력값
+   */
+     checkVaildMoveInput(input) {
+      if(input === "U" || input === "D"){return ;}
+      throw new Error("[ERROR] 'U' 또는 'D' 를 입력하여야 합니다. ");
+    },
+
+  
 };
 
 module.exports = Exception;
