@@ -1,5 +1,6 @@
 const BridgeMaker = require("../BridgeMaker");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
+const { HOTKEY } = require("../constants/constants");
 const Bridge = require("../models/Bridge");
 const BridgeGame = require("../models/BridgeGame");
 const Validator = require("../models/Validator");
@@ -95,7 +96,7 @@ class BrideGameController {
   }
 
   handleGameRetryPhase(retryAnswer) {
-    if (retryAnswer === 'R') {
+    if (retryAnswer === HOTKEY.retry) {
       this.#bridgeGame.retry();
       InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
       return;
