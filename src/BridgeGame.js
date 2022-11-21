@@ -1,8 +1,6 @@
-// InputView, OutputView 사용 금지
-
 const BridgeMaker = require("./utils/BridgeMaker");
 const BridgeRandomNumberGenerator = require("./utils/BridgeRandomNumberGenerator");
-const { UP_AND_DOWN, TRACE_MARKS, RETRY_COMMAND } = require("./constants");
+const { RETRY_COMMAND } = require("./constants");
 const TraceController = require("./utils/TraceController");
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -38,6 +36,12 @@ class BridgeGame {
       this.#currentTrace
     );
     this.#currentTrace = trace;
+    console.log(
+      selectedPath,
+      this.#selectedPathLog,
+      this.#bridge,
+      this.#currentTrace
+    );
     return trace;
   }
 
