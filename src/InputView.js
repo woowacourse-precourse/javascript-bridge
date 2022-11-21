@@ -33,12 +33,13 @@ const InputView = {
     Console.readLine(Constant.INPUT.NEXT_STEP, (inputUpOrDown) => {
       if (Validate.validateUserInputMove(inputUpOrDown)) {
         this.bridgeGame = new BridgeGame();
+        const bridgeLength = this.bridge.length;
         let result = this.bridgeGame.move(inputUpOrDown, this.bridge);
         if (result) {
-          OutputView.printMap();
+          OutputView.printMap(result, inputUpOrDown, bridgeLength);
           this.readMoving();
         } else {
-          OutputView.printMap();
+          OutputView.printMap(result, inputUpOrDown, bridgeLength);
           this.readGameCommand();
           this.bridgeGame.retry();
         }

@@ -10,7 +10,7 @@ class BridgeGame {
    */
 
   move(userInput, bridge) {
-    let now = bridge.pop();
+    let now = bridge.shift();
     if (!bridge.length) return "finish";
     return now === userInput;
   }

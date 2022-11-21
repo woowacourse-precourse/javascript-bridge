@@ -1,4 +1,7 @@
 const Constant = {
+  OPEN: "[",
+  SEPARATE: "|",
+  CLOSE: "]",
   UP: "U",
   DOWN: "D",
   INPUT: {
