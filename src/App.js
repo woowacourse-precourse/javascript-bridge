@@ -1,6 +1,7 @@
 const OutputView = require('./View/OutputView');
 const InputView = require('./View/InputView');
 const BridgeGame = require('./BridgeGame');
+const { makeMapArray } = require('./util/MapMaker');
 
 class App {
   #brideGame;
@@ -31,10 +32,17 @@ class App {
   #readMovingCallback(movement) {
     try {
       this.#brideGame.move(movement);
+      this.#printMap();
     } catch (error) {
       OutputView.print(error.message);
       this.#readMovingStage();
     }
+  }
+
+  #printMap() {
+    const gameState = this.#brideGame.getGameState();
+    const mapArray = makeMapArray(gameState.userPath, gameState.bridge);
+    OutputView.printMap(mapArray);
   }
 }
 module.exports = App;
