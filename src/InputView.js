@@ -1,4 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { generate } = require('./BridgeRandomNumberGenerator.js');
+const { makeBridge } = require('./BridgeMaker.js');
 
 const GET_BRIDGE_SIZE_SENTENCE = '다리의 길이를 입력해주세요.\n'
 
@@ -11,7 +13,8 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(GET_BRIDGE_SIZE_SENTENCE, (bridgeSize) => {
-      console.log(`다리길이 : ${bridgeSize}`);
+      const bridge = makeBridge(bridgeSize, generate);
+      console.log(bridge);
     });
   },
 
