@@ -49,7 +49,13 @@ class App {
       return;
     }
     //game clear
-
+    if (this.#game.isClear()) {
+      const map = this.#game.getMap();
+      const tryCount = this.#game.getTryCount();
+      OutputView.printResult(map, MESSAGE.SUCCESS, tryCount);
+      Console.close();
+      return;
+    }
     InputView.readMoving(this.proceedStepTwo.bind(this));
   }
 }
