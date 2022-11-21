@@ -1,9 +1,25 @@
-const { Console } = require('@woowacourse/mission-utils');
+const BridgeGame = require('./BridgeGame');
 
 class App {
-  play() {
-    Console.print('다리 건너기 게임을 시작합니다.');
+  // eslint-disable-next-line class-methods-use-this,max-lines-per-function
+  async play() {
+    const game = new BridgeGame();
+    const size = await BridgeGame.readBridgeSizeInput();
+    game.start(size);
+    while (game.isPlaying) {
+      game.move(await BridgeGame.readMoveInput());
+      game.printCurrent();
+      if (game.isFailed) {
+        (await BridgeGame.readIsRetry()) ? game.retry() : game.end();
+      }
+      if (game.isSuccess) {
+        game.end();
+      }
+    }
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
