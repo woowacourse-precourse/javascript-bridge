@@ -13,17 +13,17 @@ const {
 const { printResult, printMap } = require('./OutputView');
 
 class BridgeGameController {
-  static readSize(size) {
+  static initGame(size) {
     try {
-      const game = BridgeGameController.initBridgeGame(size);
+      const game = BridgeGameController.createGame(size);
       readMoving(game, BridgeGameController.moveNext);
     } catch (err) {
       Console.print(err);
-      readBridgeSize(BridgeGameController.readSize);
+      readBridgeSize(BridgeGameController.initGame);
     }
   }
 
-  static initBridgeGame(size) {
+  static createGame(size) {
     const bridge = BridgeMaker.makeBridge(size, generate);
     console.log(bridge);
     const game = new BridgeGame(bridge);
