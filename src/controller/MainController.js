@@ -45,6 +45,15 @@ class MainController {
     this.bridgeGame.move(isSuccess, isFinished, userMoving);
   }
 
+  /**
+   * 움직임에 대한 결과 출력 연결 메서드
+   * @param userMoving {string} [유저 이동 기록]
+   */
+  displayCaseResult(userMoving) {
+    const movingStatus = this.bridgeController.getMovingStatus(userMoving);
+    OutputView.printMap(movingStatus);
+  }
+
   // 게임 초기 실행 메서드
   init() {
     this.userController.increaseTryCount();
