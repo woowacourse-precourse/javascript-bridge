@@ -15,11 +15,11 @@ class BridgeGame {
 
   constructor(size) {
     this.size = size;
-    this.validate();
+    this.validateBridgeSize();
     this.initBridge();
   }
 
-  validate() {
+  validateBridgeSize() {
     const isValidBridgeSize = Validator.validBridgeSize(this.size);
 
     if (!isValidBridgeSize) {
