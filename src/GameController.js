@@ -38,6 +38,17 @@ class GameController {
   getMoving() {
     InputView.readMoving(this.checkMoveValidation.bind(this));
   }
+
+  checkMoveValidation(inputMoving) {
+    try {
+      Validation.checkMoving(inputMoving);
+    } catch (Error) {
+      MissionUtils.Console.print(`${Error.message} \n`);
+      return this.getMoving();
+    }
+
+    return inputMoving;
+  }
 }
 
 module.exports = GameController;
