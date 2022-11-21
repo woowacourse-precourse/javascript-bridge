@@ -5,6 +5,8 @@ const { printGameStart } = require('./View/OutputView');
 const RETRY = 'R';
 
 class App {
+  #game;
+
   constructor() {
     printGameStart();
   }
