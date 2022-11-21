@@ -32,7 +32,15 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    MissionUtils.Console.readLine(CONSOLE_MESSAGE.moveInput, (input) => {
+      try {
+        this.exception.validateMove(input);
+      } catch (error) {
+        return this.readMoving();
+      }
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
