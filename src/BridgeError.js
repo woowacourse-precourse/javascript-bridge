@@ -25,10 +25,24 @@ class BridgeError {
     }
 
     stringTest(inputValue) {
-      if (/[^U^D]/g.test(inputValue)) { throw "[ERROR] U나 D가 아닌 값 입니다."; }
+      if (/[^U^D]/g.test(inputValue)) { throw "[ERROR] U와 D 외의 문자는 사용할 수 없습니다."; }
     }
 
+  }
+
+  class SelectOptionError {
+    #strings
+
+    constructor(inputString) {
+      this.stringTest(inputString);
+      this.#strings = inputString;
+    }
+
+    stringTest(inputValue) {
+      if (/[^Q^R]/g.test(inputValue)) { throw "[ERROR] Q와 R 외의 문자는 사용할 수 없습니다."; }
+    }
   }
   
   exports.BridgeError = BridgeError;
   exports.MoveError = MoveError;
+  exports.SelectOptionError = SelectOptionError;
