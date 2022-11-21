@@ -4,6 +4,7 @@ const BridgeMaker = require("../BridgeMaker");
 const Errors = require("../Error");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 let GameStore = require("../GameStore");
+const OutputView = require("./OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -31,6 +32,12 @@ const InputView = {
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
         Errors.movingError(input);
+        if (GameStore.move(input)) {
+          OutputView.printMap();
+        } else {
+          OutputView.printResult();
+          this.readGameCommand();
+        }
       }
     );
   },
