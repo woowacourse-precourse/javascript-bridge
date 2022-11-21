@@ -11,11 +11,11 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
-    const validate = new ValidationCheck();
-    size = validate.isNumber(size) && Number(size);
+    size = ValidationCheck.isNumber(size) && Number(size);
     for (let i = 0; i < size; i++) {
       let randomNumber = generateRandomNumber();
-      randomNumber = validate.isNumber(randomNumber) && Number(randomNumber);
+      randomNumber =
+        ValidationCheck.isNumber(randomNumber) && Number(randomNumber);
       bridge.push(randomNumber === 1 ? "U" : "D");
     }
     return bridge;

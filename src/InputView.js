@@ -5,15 +5,14 @@ const VaildationCheck = require("./VaildationCheck");
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  validate: new VaildationCheck(),
   inputContainer: null,
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
     const bridgeSize = Number(this.inputHelper(InputMessage.readBridgeSize));
-    this.validate.isNumber(bridgeSize);
-    this.validate.isNumberIntheRange([3, 20], bridgeSize);
+    VaildationCheck.isNumber(bridgeSize);
+    VaildationCheck.isNumberIntheRange([3, 20], bridgeSize);
     return bridgeSize;
   },
 
@@ -22,7 +21,7 @@ const InputView = {
    */
   readMoving() {
     const move = this.inputHelper(InputMessage.readMoving);
-    this.validate.isStringIntheList(["U", "D"], move);
+    VaildationCheck.isStringIntheList(["U", "D"], move);
     return move;
   },
 
@@ -31,7 +30,7 @@ const InputView = {
    */
   readGameCommand() {
     const command = this.inputHelper(InputMessage.readGamdCommand);
-    this.validate.isStringIntheList(["R", "Q"], command);
+    VaildationCheck.isStringIntheList(["R", "Q"], command);
     return command;
   },
 

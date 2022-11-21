@@ -4,7 +4,7 @@ const ErrorMessage = require("./utils/const/errorMessage");
 const getVarType = require("./utils/func/getVarType");
 
 class ValidationCheck {
-  isNumber(target) {
+  static isNumber(target) {
     if (!(typeof target === "number" || typeof target === "string"))
       throw new ErrorWithPrifix(ErrorMessage.notNumber);
     if (target === "") throw new ErrorWithPrifix(ErrorMessage.notNumber);
@@ -12,7 +12,7 @@ class ValidationCheck {
       throw new ErrorWithPrifix(ErrorMessage.notNumber);
     return true;
   }
-  isExactVarType(varType, target) {
+  static isExactVarType(varType, target) {
     if (typeof varType !== "string")
       throw new ErrorWithPrifix(ErrorMessage.varTypeIsNotString);
 
@@ -26,7 +26,7 @@ class ValidationCheck {
     return true;
   }
 
-  isNumberIntheRange(numRange, targetNumber) {
+  static isNumberIntheRange(numRange, targetNumber) {
     if (typeof targetNumber !== "number")
       throw new ErrorWithPrifix(ErrorMessage.notNumber);
     if (!Array.isArray(numRange) || numRange.length !== 2)
@@ -40,7 +40,7 @@ class ValidationCheck {
     return true;
   }
 
-  isStringIntheList(stringList, targetString) {
+  static isStringIntheList(stringList, targetString) {
     if (!Array.isArray(stringList))
       throw new ErrorWithPrifix(ErrorMessage.notArray);
     if (typeof targetString !== "string")
@@ -53,7 +53,7 @@ class ValidationCheck {
 
     throw new ErrorWithPrifix(ErrorMessage.stringIsNotInList);
   }
-  isExactObjectStructure(object, targetObject) {
+  static isExactObjectStructure(object, targetObject) {
     const creteriaKeys = Object.keys(object);
     const compareKeys = Object.keys(targetObject);
 
