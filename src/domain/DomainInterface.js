@@ -9,6 +9,10 @@ const DomainInterface = class {
     this.#totalMovingCount = totalMovingCount;
   }
 
+  resetCurrentLocation() {
+    this.#currentLocation.resetCurrentLocation();
+  }
+
   setBridgeLength(length) {
     this.#bridge.setBridgeLength(length);
   }
