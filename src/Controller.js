@@ -20,12 +20,16 @@ class Controller {
 
   inputBridgeSize() {
     const readBridgeSizeCallback = (input) => {
-      const num = parseInt(input, 10);
-      this.inputView.bridgeSize = num;
-      this.inputView.birdgeStrArr = BridgeMaker.makeBridge(num, generate);
+      const bridgeSize = parseInt(input, 10);
+      this.setSizeAndArr(bridgeSize);
       return this.inputMoving();
     };
     return this.inputView.readBridgeSize(readBridgeSizeCallback);
+  }
+
+  setSizeAndArr(num) {
+    this.inputView.bridgeSize = num;
+    this.inputView.birdgeStrArr = BridgeMaker.makeBridge(num, generate);
   }
 
   inputMoving() {
