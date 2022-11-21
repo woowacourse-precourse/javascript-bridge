@@ -10,7 +10,7 @@ const View = require('./View');
 
 class App {
   constructor() {
-    this.bridgeGame;
+    this.game;
   }
 
   play() {
@@ -36,12 +36,9 @@ class App {
   handleInputStep(input) {
     try {
       this.checkValid(input, InputValidator.isValidStep, message.ERROR_STEP);
-      this.bridgeGame.bridgeSteps.push(input);
-      OutputView.printMap(
-        this.bridgeGame.answerSteps,
-        this.bridgeGame.bridgeSteps
-      );
-      this.nextActionByMoveState(this.bridgeGame.move());
+      this.game.bridgeSteps.push(input);
+      OutputView.printMap(this.game.answerSteps, this.game.bridgeSteps);
+      this.nextActionByMoveState(this.game.move());
     } catch (error) {
       OutputView.printMessage(error.message);
       InputView.readMoving(this.handleInputStep.bind(this));
@@ -51,7 +48,7 @@ class App {
   nextActionByMoveState(action) {
     switch (action) {
       case 'WIN':
-        this.bridgeGame.win();
+        this.game.win();
         View.close();
         break;
       case 'MOVE':
@@ -80,11 +77,11 @@ class App {
   nextActionByCommand(action) {
     switch (action) {
       case command.GAME_QUIT:
-        this.bridgeGame.lose();
+        this.game.lose();
         View.close();
         break;
       case command.GAME_RESTART:
-        this.bridgeGame.retry();
+        this.game.retry();
         InputView.readMoving(this.handleInputStep.bind(this));
         break;
       default:
@@ -92,7 +89,7 @@ class App {
   }
 
   initBridges(size) {
-    this.bridgeGame = new BridgeGame(
+    this.game = new BridgeGame(
       BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate)
     );
   }
