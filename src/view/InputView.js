@@ -9,7 +9,7 @@ const { bridgeLength, newLine, selectMoving, selectRestart } = SENTENCE;
 const OutputView = require('./OutputView');
 
 const InputView = {
-  endInput() {
+  endRead() {
     Console.close();
   },
 
