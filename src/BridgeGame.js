@@ -25,7 +25,7 @@ class BridgeGame {
 
   isCorrect(movingInput) {
     if (movingInput === this.#bridgeAnswer[this.#current]) {
-      this.current++;
+      this.#current++;
       return true;
     } 
     return false;
