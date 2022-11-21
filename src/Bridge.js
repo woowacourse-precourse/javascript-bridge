@@ -8,10 +8,10 @@ class Bridge {
     constructor(length) {
         this.bridge = this.makeBridge(length)
         this.movingState = {
-          attempts: 1,
-          currentLocation: 0,
-          upState: [],
-          downState: [],
+            attempts: 1,
+            currentLocation: 0,
+            upState: [],
+            downState: [],
         };
     }
 
@@ -29,14 +29,14 @@ class Bridge {
             [update]: [...this.movingState[update], mark],
             [empty]: [...this.movingState[empty], ' ']
         }
-    }   
+    }
 
     resetMovingState() {
         this.movingState = {
-          attempts: this.movingState.attempts + 1,
-          currentLocation: 0,
-          upState: [],
-          downState: [],
+            attempts: this.movingState.attempts + 1,
+            currentLocation: 0,
+            upState: [],
+            downState: [],
         };
     }
 }
