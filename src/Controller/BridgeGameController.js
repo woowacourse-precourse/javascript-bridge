@@ -3,9 +3,11 @@ const InputView = require("../View/InputView");
 const BridgeMaker = require("../BridgeMaker");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const BridgeGame = require("../Model/BridgeGame");
+const Bridge = require("../Model/Bridge");
+const { BRIDGE_DIRECTION } = require("./constants/GameCondition.js");
 class BridgeGameController {
   #bridge_size;
-
+  #random_bridge;
   start() {
     OutputView.printStartMessage();
     this.#bridge_size = InputView.readBridgeSize();
@@ -18,7 +20,7 @@ class BridgeGameController {
       BridgeRandomNumberGenerator.generate()
     );
     BridgeGame.setBridge(randomBridge);
-    this.move(this.inputMoveDirection());
+    this.#random_bridge = BridgeGame.getBridge();
   }
 
   inputMoveDirection() {
@@ -26,10 +28,21 @@ class BridgeGameController {
   }
 
   /**
-   * 
-   * @param {char} moving 'U', 'D' 둘 중 하나로 들어옴. 
+   *
+   * @param {char} cmd 'U', 'D' 둘 중 하나로 들어옴.
    */
-  move(moving) {}
+  move(step) {
+    const cmd = this.inputMoveDirection();
+    const currentBridge = this.#random_bridge[step];
+    if (currentBridge === BRIDGE_DIRECTION.DOWN) {
+      Bridge.upBridge.push(currentBridge === cmd ? "O" : "X");
+      Bridge.downBridge.push(" ");
+    }
+    if (currentBridge === BRIDGE_DIRECTION.UP) {
+      Bridge.downBridge.push(currentBridge === cmd ? "O" : "X");
+      Bridge.upBridge.push(" ");
+    }
+  }
 }
 
 module.exports = BridgeGameController;
