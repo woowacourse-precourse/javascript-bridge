@@ -1,7 +1,9 @@
+const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumber = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 
 class Player {
     createBridgeAnswer() {
@@ -24,8 +26,10 @@ class Player {
         let isSuccessed = true;
 
         for(let i = 0; i < bridgeAnswer.length; i++) {
+            OutputView.printInputMove();
             const movingInput = InputView.readMoving();
             const currentBridge = bridgeGame.move(movingInput);
+            OutputView.printMap(currentBridge);
             if (!this.checkIncludeFail(currentBridge)) {
                 isSuccessed = false;
                 break;
