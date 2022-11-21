@@ -12,13 +12,9 @@ const InputView = {
    */
   readBridgeSize(nextStep) {
     Console.readLine('다리의 길이를 입력해주세요.', (userInput) => {
-      try {
-        const bridgeSize = this.validateBridgeSize(userInput);
-        return bridgeSize;
-      } catch (error) {
-        OutputView.printError(error);
-        this.readBridgeSize();
-      }
+      const bridgeSize = Number(userInput);
+      this.validateBridgeSize(bridgeSize);
+      nextStep(bridgeSize);
     });
   },
 
@@ -32,14 +28,15 @@ const InputView = {
    */
   readGameCommand() {},
 
-  validateBridgeSize(userInput) {
-    const bridgeSize = Number(userInput);
-    InputValidation.isInteger(bridgeSize);
-    InputValidation.isInRange(bridgeSize);
-    return bridgeSize;
+  validateBridgeSize(bridgeSize) {
+    try {
+      InputValidation.isInteger(bridgeSize);
+      InputValidation.isInRange(bridgeSize);
+    } catch (error) {
+      OutputView.printError(error);
+      this.readBridgeSize();
+    }
   },
 };
-
-InputView.readBridgeSize();
 
 module.exports = InputView;
