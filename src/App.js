@@ -2,6 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const InputView = require("./InputView");
+const OutputView = require("./OutputView");
 const Validation = require("./Validation");
 class App {
   constructor() {
@@ -31,6 +32,8 @@ class App {
         Console.print(errorMsg);
         return this.requestDirection();
       }
+      this.bridgeGame.move(direction);
+      OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
     });
   }
 }
