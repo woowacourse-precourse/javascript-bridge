@@ -27,7 +27,7 @@ const InputView = {
    */
   readGameCommand() {
     MissionUtils.Console.readline('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (game) => {
-
+      this.exceptionOfReadGameCommand(game);
     });
   },
 
@@ -47,8 +47,15 @@ const InputView = {
   exceptionOfReadMoving(){
     if(space != 'U' || space != 'D')
       throw new Error('[ERROR] 이동할 칸은 U 또는 D여야 합니다.');
-  }
+  },
 
+  /**
+   * 게임 재시작, 종료 입력받기 예외처리 
+   */
+  exceptionOfReadGameCommand(){
+    if(space != 'R' || space != 'Q')
+      throw new Error('[ERROR] 이동할 칸은 R 또는 Q여야 합니다.');
+  }
 
 };
 
