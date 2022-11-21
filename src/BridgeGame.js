@@ -36,6 +36,10 @@ class BridgeGame {
     );
   }
 
+  getRunCount() {
+    return this.#runCount;
+  }
+
   hasMovedCorrectly() {
     const lastIndex = this.getIndex() - 1;
 
