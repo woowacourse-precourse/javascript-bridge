@@ -31,12 +31,34 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge, currentBridge, idx, count) {},
+  readMoving(bridge, currentBridge, idx, count) {
+    Console.readLine(`${Message.INPUT_MESSAGE.MOVING_TEXT}\n`, (move) => {
+      if (ErrorHandler.readMovingErrorHandler(move)) {
+        Console.close();
+      }
+      else {
+        const checkField = this.bridgeGame.move(bridge, currentBridge, idx, move, count);
+        if (!checkField) {
+         this.readGameCommand(bridge, currentBridge, idx, count, move, count);
+        }
+        else {
+          idx = checkField[0];
+          if (idx >= bridge.length) { 
+            Console.close();
+          }
+          else{
+           this.readMoving(bridge, currentBridge, idx, count);
+          }
+        }
+      }
+       
+     })
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridge, currentBridge, idx, count, move) {},
-  
+
 };
 module.exports = InputView;
