@@ -20,49 +20,53 @@ class App {
 
   play() {
     OutputView.printCommand(command.START);
-    this.#setBridge();
+    this.getBridgeSize();
   }
 
-  async #setBridge() {
+  async getBridgeSize() {
     this.#bridgeSize = await InputView.readBridgeSize();
+    this.setBridge();
+  }
+
+  setBridge() {
     this.#bridge = BridgeMaker.makeBridge(
       this.#bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
     this.#bridgeGame = new BridgeGame(this.#bridge);
-    this.#doGame();
+    this.doGame();
   }
 
-  async #doGame() {
+  async doGame() {
     let brigeIndex = 0;
     while (brigeIndex < this.#bridgeSize) {
       const moveInput = await InputView.readMoving();
       this.#curBridge = this.#bridgeGame.makeCurBridge(moveInput, brigeIndex);
       OutputView.printMap(this.#curBridge);
       if (!this.#bridgeGame.move(moveInput, brigeIndex)) {
-        this.#doRetry();
+        this.doRetry();
         return;
       }
       brigeIndex += 1;
     }
     OutputView.printResult('성공', this.#curBridge, this.#tryNum);
-    this.#end();
+    this.end();
   }
 
-  async #doRetry() {
+  async doRetry() {
     const retryInput = await InputView.readGameCommand();
     if (retryInput === 'R') {
       this.#tryNum += 1;
       this.#bridgeGame.retry();
-      this.#doGame();
+      this.doGame();
     }
     if (retryInput === 'Q') {
       OutputView.printResult('실패', this.#curBridge, this.#tryNum);
-      this.#end();
+      this.end();
     }
   }
 
-  #end() {
+  end() {
     Console.close();
   }
 }
