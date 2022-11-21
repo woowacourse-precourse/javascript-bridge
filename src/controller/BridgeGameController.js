@@ -63,7 +63,7 @@ class BrideGameController {
 
   handleAnswerCheckPhase(direction) {
     this.#bridgeGame.updateResult(direction);
-    OutputView.printMap(this.#bridgeGame.getResult());
+    OutputView.printMap(this.#bridgeGame.getResult().map);
     if(this.#bridgeGame.isAnswer(direction)) {
       this.handleGameEndPhase();
       return;
@@ -73,7 +73,7 @@ class BrideGameController {
 
   handleGameEndPhase() {
     if(this.#bridgeGame.isGameEnd()) {
-      OutputView.printResult(this.#bridgeGame.getResult(), this.#bridgeGame.getAttempts(), true);
+      OutputView.printResult(this.#bridgeGame.getResult(), true);
       return;
     }
     this.#bridgeGame.move();
@@ -101,7 +101,7 @@ class BrideGameController {
       InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
       return;
     }
-    OutputView.printResult(this.#bridgeGame.getResult(), this.#bridgeGame.getAttempts(), false);
+    OutputView.printResult(this.#bridgeGame.getResult(), false);
   }
 }
 
