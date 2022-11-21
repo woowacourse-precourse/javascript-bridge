@@ -22,5 +22,14 @@ describe("BridgeGameTest", () => {
         expect(bridgeGame_2.addPrintMap("D","X")).toEqual([["O", " "," "],[" ","O","X"]]);
     });
 
+    test("RQ에 따른 처리 함수(retry)_1", () => {
+      expect(bridgeGame_2.retry("R")).toEqual("Retry");
+    });
+
+    test("RQ에 따른 처리 함수(retry)_2", () => {
+        expect(bridgeGame_2.retry("Q")).toEqual("Fail");
+    });
+
+
 });
 
