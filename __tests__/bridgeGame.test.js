@@ -25,11 +25,20 @@ describe('move', () => {
     expect(bridgeGame.status).toBe('실패');
   });
 
+  test('retry: 재시도(초기화)', () => {
+    bridgeGame.retry();
+    expect(bridgeGame.trials).toEqual([]);
+    expect(bridgeGame.status).toBe('진행중');
+    expect(bridgeGame.trialCount).toBe(2);
+  });
+
   test('세 번째 이동(U): trials 에 {U, X} 추가', () => {
+    bridgeGame.move('U');
+    bridgeGame.move('U');
     bridgeGame.move('U');
     expect(bridgeGame.trials).toEqual([
       { direction: 'U', result: 'O' },
-      { direction: 'D', result: 'X' },
+      { direction: 'U', result: 'O' },
       { direction: 'U', result: 'O' },
     ]);
   });
@@ -42,7 +51,7 @@ describe('move', () => {
     bridgeGame.move('D');
     expect(bridgeGame.trials).toEqual([
       { direction: 'U', result: 'O' },
-      { direction: 'D', result: 'X' },
+      { direction: 'U', result: 'O' },
       { direction: 'U', result: 'O' },
       { direction: 'D', result: 'O' },
     ]);
