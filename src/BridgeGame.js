@@ -27,7 +27,6 @@ class BridgeGame {
     this.#userState[invertCommand].push(false);
   }
 
-  // 메세지를 보내야 하는게 옳아 보이지만 일단 userState를 return
   getUserState() {
     return this.#userState;
   }
