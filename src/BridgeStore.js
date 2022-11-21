@@ -31,8 +31,8 @@ class BridgeStore {
 
   getUserInputResult = (idx) => this.#userInputResults[idx];
 
-  isGameClear() {
-    return this.#userInputResults.every((el) => el);
+  isGameClear(moveCount) {
+    return this.isSameWithBridgeLength(moveCount) && this.#userInputResults.every((el) => el);
   }
 
   updateTryCount() {

@@ -54,9 +54,7 @@ class BridgeGame {
     }
     this.moveCount += 1;
 
-    const isGameEnd = this.bridgeStore.isSameWithBridgeLength(this.moveCount);
-
-    if (isGameEnd) {
+    if (this.bridgeStore.isGameClear(this.moveCount)) {
       this.end();
       return;
     }
