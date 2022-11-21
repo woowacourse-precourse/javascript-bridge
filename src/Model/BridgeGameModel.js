@@ -10,10 +10,10 @@ const BridgeGameModel = class {
   #bridge = [];
   #attempt = [];
 
-  try(brige) {
+  init(bridge) {
     const { RETRY } = KEYWORD;
     this.#attempt.push(RETRY);
-    this.#bridge.push(...brige);
+    this.#bridge.push(...bridge);
   }
 
   attempt(attempt) {
@@ -23,6 +23,10 @@ const BridgeGameModel = class {
 
   jump(move) {
     this.#user.push(HASH[move]);
+    return { ...this.survey(), pass: !this.isFail() };
+  }
+
+  survey() {
     const data = { user: this.#user, bridge: this.#bridge };
     return data;
   }
@@ -30,8 +34,7 @@ const BridgeGameModel = class {
   result() {
     const { RETRY } = KEYWORD;
     const retry = this.#attempt.filter((attemp) => attemp === RETRY).length;
-    const success = this.isSuccess();
-    const data = { retry, success };
+    const data = { retry, success: this.isSuccess(), map: this.survey() };
     return data;
   }
 

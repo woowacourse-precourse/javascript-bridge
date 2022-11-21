@@ -18,7 +18,7 @@ const BridgeGameService = class {
       const bridge = makeBridge(size, generate);
       this.#outputView.printBlank();
       this.#bridgeGameModel.checkBridge(bridge);
-      this.#bridgeGameModel.try(bridge);
+      this.#bridgeGameModel.init(bridge);
       task();
     };
 
