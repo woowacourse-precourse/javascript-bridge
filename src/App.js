@@ -1,17 +1,18 @@
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
-const { MESSAGE } = require('./constants');
+const { MESSAGE, INPUT_FORMAT } = require('./constants');
 
 class App {
-  bridgeGame = new BridgeGame();
+  constructor() {
+    this.bridgeGame = new BridgeGame();
+  }
 
   async play() {
     OutputView.printMessage(MESSAGE.ENTRY);
     const size = await this.getBridgeSize();
     await this.bridgeGame.makeBridge(size);
-    // const direction = await this.getMovingDirection();
-    await this.controlMoving(this.getMovingDirection);
+    await this.handleMovement();
   }
 
   async getBridgeSize() {
@@ -41,27 +42,57 @@ class App {
     }
   }
 
-  async controlMoving(asyncCb) {
-    const current = this.bridgeGame.resultMap.getCurrentIndex();
-    if (current > -1) {
-      // const isMoved = await this.move(current);
-      const isMoved = await this.bridgeGame.move(current, asyncCb);
-      this.bridgeGame.resultMap.printHistory();
-
-      if (isMoved) {
-        this.controlMoving(asyncCb);
-      } else {
-        const command = await this.getGameCommand();
-        await this.bridgeGame.command(() => this.controlMoving(asyncCb), command);
-      }
-      // return isMoved ? this.controlMoving() : await this.bridgeGame.command(this.controlMoving, command);
-    }
-
-    return this.finish('success');
+  getCurrentPosition() {
+    return this.bridgeGame.getCurrentPosition();
   }
 
-  finish(type) {
+  isContinue() {
+    return this.getCurrentPosition() > -1;
+  }
+
+  async isSuccessFulMovement() {
+    const current = this.getCurrentPosition();
+    const direction = await this.getMovingDirection();
+    return this.bridgeGame.move(current, direction);
+  }
+
+  async handleSuccess() {
+    return await this.handleMovement();
+  }
+
+  async isRetryCommand() {
+    const command = await this.getGameCommand();
+    return command === INPUT_FORMAT.RETRY;
+  }
+
+  async handleCommand() {
+    return await this.bridgeGame.command(this.handleRetry, this.isRetryCommand(), this.handleFailedFinish);
+  }
+
+  async handleRetry(cb) {
+    cb();
+    await this.handleMovement();
+  }
+
+  async handleMovement() {
+    if (this.isContinue()) {
+      if (await this.isSuccessFulMovement()) return this.handleSuccess();
+      return this.handleCommand();
+    }
+
+    return this.handleFinish('success');
+  }
+
+  handleFinish(type) {
     OutputView.printResult(type, this.bridgeGame.resultMap);
+  }
+
+  handleSuccessFulFinish() {
+    OutputView.printResult('success', this.bridgeGame.resultMap);
+  }
+
+  handleFailedFinish() {
+    OutputView.printResult('fail', this.bridgeGame.resultMap);
   }
 }
 
