@@ -33,7 +33,10 @@ class BridgeGame {
    */
  
   /** 5. 사용자 입력값 대비 건널 수 있는지 여부 비교해서 배열에 결과 값 넣어주기 */
-  move(movingInput) {
+  async move() {
+    const movingInput = await inputView.inputMoving(this.#bridgeArr);
+    console.log('###movingInput:', movingInput);
+
     let result = "X";
     if(this.#bridgeArr[this.#currentBridgeIndex] === movingInput) {
       result = "O";
@@ -58,7 +61,6 @@ class BridgeGame {
       this.retry();
     }
 
-    
   }
 
   /**
@@ -74,8 +76,11 @@ class BridgeGame {
       this.#upBridgeReultArr.pop();
       this.#downBridgeReultArr.pop();
       this.#tryCount++
-
+      this.move();
+    } else if(retryInput === 'Q') {
+      outputView.printResult();
     }
+
   }
 }
 
