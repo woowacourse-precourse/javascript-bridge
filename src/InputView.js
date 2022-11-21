@@ -50,7 +50,12 @@ const InputView = {
         this.readMoving(bridgeGame);
       }
       if (command === COMMAND_VALUE.QUIT) {
-        OutputView.printResult(up, down, successStatus);
+        OutputView.printResult(
+          up,
+          down,
+          successStatus,
+          bridgeGame.getTotalTry()
+        );
         bridgeGame.quit();
       }
     });

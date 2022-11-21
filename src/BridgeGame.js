@@ -11,13 +11,13 @@ class BridgeGame {
   #round;
   #up;
   #down;
-  #try;
+  #totalTry;
 
   constructor() {
     this.#round = -1;
     this.#up = [];
     this.#down = [];
-    this.#try = 1;
+    this.#totalTry = 1;
   }
 
   /**
@@ -37,7 +37,7 @@ class BridgeGame {
    */
   move(move) {
     this.#round += 1;
-    console.log(this.#bridge.getMap(), this.#round);
+
     if (move !== this.#bridge.getMap()[this.#round]) {
       if (move === MOVE_VALUE.UP) this.addUp(MOVE_VALUE.INVALID);
       if (move === MOVE_VALUE.DOWN) this.addDown(MOVE_VALUE.INVALID);
@@ -76,6 +76,14 @@ class BridgeGame {
   }
 
   /**
+   * 총 게임 시도 횟수를 리턴하는 메서드
+   * <p>
+   */
+  getTotalTry() {
+    return this.#totalTry;
+  }
+
+  /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    */
@@ -83,7 +91,7 @@ class BridgeGame {
     this.#round = -1;
     this.#up = [];
     this.#down = [];
-    this.#try += 1;
+    this.#totalTry += 1;
   }
 
   /**

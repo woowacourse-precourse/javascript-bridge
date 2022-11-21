@@ -23,10 +23,11 @@ const OutputView = {
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    */
-  printResult(up, down, successStatus) {
+  printResult(up, down, successStatus, totalTry) {
     printMessage(GAME_MESSAGE.RESULT);
     this.printMap(up, down);
     printMessage(GAME_MESSAGE.SUCCESS_STATUS(successStatus));
+    printMessage(GAME_MESSAGE.TOTAL_TRY(totalTry));
   },
 };
 
