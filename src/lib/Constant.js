@@ -8,22 +8,21 @@ const Constant = Object.freeze({
   DIRECTION: {
     UP: "U",
     DOWN: "D",
-    ONE: "1",
-    ZERO: "0",
+    ONE: 1,
+    ZERO: 0,
     POSSIBLE: " O ",
     IMPOSSIBLE: " X ",
     EMPTY: " N ",
   },
   RETRY: {
-    REPLAY : "R",
-    QUIT: "Q"
+    REPLAY: "R",
+    QUIT: "Q",
   },
   GAME_RESULT: {
     WIN: "성공",
     LOSS: "실패",
     DEFAULT: 1,
   },
-
 });
 
 module.exports = Constant;
