@@ -3,7 +3,8 @@ const { generate } = require('./BridgeRandomNumberGenerator');
 
 /**
  * @typedef {object} GameStatus
- * @property {number} moveCount
+ * @property {number} accMoveCount
+ * @property {number} curMoveCount
  * @property {string[]} movedRoutes
  */
 
@@ -19,7 +20,7 @@ class BridgeGameStatus {
    */
   constructor(size) {
     this.#bridge = BridgeMaker.makeBridge(size, generate);
-    this.#gameStatus = { moveCount: 0, movedRoutes: [] };
+    this.#gameStatus = { accMoveCount: 0, curMoveCount: 0, movedRoutes: [] };
   }
 
   /**
