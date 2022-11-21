@@ -7,6 +7,9 @@ const Constants = {
   QUIT: 'Q',
   BRIDGE_START: '[',
   BRIDGE_END: '\b]',
+  STATUS_SUCCESS: 'success',
+  STATUS_FAIL: 'fail',
+  STATUS_FINISH: 'finish',
 };
 
 module.exports = Constants;
