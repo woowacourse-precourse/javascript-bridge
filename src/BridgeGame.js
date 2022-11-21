@@ -35,6 +35,7 @@ class BridgeGame {
 
   makeBridge(size){
     this.#bridge = BridgeMaker.makeBridge(parseInt(size), BridgeRandomNumberGenerator.generate);
+    console.log(this.#bridge);
   }
 
   compareBridgeWithDirection(direction){

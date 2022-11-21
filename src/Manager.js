@@ -64,13 +64,13 @@ class Manager{
 
   requestGameCommand(){
     InputView.readGameCommand((retryOrQuit) => {
-      this.tryCatch(this.tryBridgeSize.bind(this, retryOrQuit), this.requestGameCommand.bind(this));
+      this.tryCatch(this.tryGameCommand.bind(this, retryOrQuit), this.requestGameCommand.bind(this));
     });
   }
 
-  tryGameCommand(){
+  tryGameCommand(retryOrQuit){
     Validation.isValidRetryOrQuitInput(retryOrQuit);
-    retryOrQuit === "Q" ? this.requestResult() : this.bridgeGame.retry(), this.requestDirection();
+    retryOrQuit === "Q" ? this.requestResult() : (this.bridgeGame.retry(), this.requestDirection());
   }
 }
 
