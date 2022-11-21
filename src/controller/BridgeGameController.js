@@ -48,10 +48,10 @@ class BridgeGameController {
     InputView.readGameCommand((command) => {
       if (command === BRIDGE_MESSAGE.RETRY_SIGN) {
         this.#bridgeGame.retry();
-        return;
+        this.getMoving();
       }
 
-      this.quit();
+      if (command === BRIDGE_MESSAGE.QUIT_SIGN) this.quit();
     });
   }
 
