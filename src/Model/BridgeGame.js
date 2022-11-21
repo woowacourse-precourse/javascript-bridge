@@ -1,6 +1,7 @@
 const Move = require('./Move');
 const Bridge = require('./Bridge');
 const NUMBER = require('../../constants/number');
+const COMMAND = require('../../constants/command');
 
 class BridgeGame {
   #playCount;
@@ -21,6 +22,10 @@ class BridgeGame {
   static mapBridge() {
     const moveCount = Move.showCount();
     return Bridge.makeValidForm(moveCount);
+  }
+
+  static keepPlay(command) {
+    return command === COMMAND.REPLAY;
   }
 
   static move(direction) {

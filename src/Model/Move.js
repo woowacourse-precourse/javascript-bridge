@@ -31,14 +31,13 @@ class Move {
     this.#currentMove = result;
   }
 
+  static isPassed() {
+    const isReached = this.showCount() === Path.getPath().length;
+    return isReached && this.canMove() ? true : false;
+  }
+
   static canMove() {
-    if (this.showCurrentMoveResult() !== STRING.O) {
-      return false;
-    }
-    if (this.showCount() === Path.getPath().length) {
-      return false;
-    }
-    return true;
+    return this.showCurrentMoveResult() === STRING.O ? true : false;
   }
 
   static isSuccess() {
@@ -48,21 +47,16 @@ class Move {
   }
 
   static moveUp(direction) {
-    const moveResult = direction === COMMAND.UP ? STRING.O : STRING.X;
-
-    this.updateCurrentMove(moveResult);
-    return moveResult;
+    return direction === COMMAND.UP ? STRING.O : STRING.X;
   }
 
   static moveDown(direction) {
-    const moveResult = direction === COMMAND.DOWN ? STRING.O : STRING.X;
-
-    this.updateCurrentMove(moveResult);
-    return moveResult;
+    return direction === COMMAND.DOWN ? STRING.O : STRING.X;
   }
 
   static calculateMove(currentPosition, direction) {
     this.countMove();
+
     return currentPosition === COMMAND.UP
       ? this.moveUp(direction)
       : this.moveDown(direction);
@@ -73,6 +67,7 @@ class Move {
     const currentPosition = Path.getPathPositionOf(countIndex);
     const moveResult = this.calculateMove(currentPosition, direction);
 
+    this.updateCurrentMove(moveResult);
     Bridge.setMoveResult(direction, moveResult, countIndex);
   }
 }

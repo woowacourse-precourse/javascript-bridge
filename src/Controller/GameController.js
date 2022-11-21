@@ -5,7 +5,6 @@ const Move = require('../Model/Move');
 const Bridge = require('../Model/Bridge');
 const Exception = require('../components/Exception');
 const Path = require('../Model/Path');
-const { REPLAY } = require('../../constants/command');
 
 class GameController {
   #bridgeGame;
@@ -59,15 +58,29 @@ class GameController {
   }
 
   checkPlay() {
-    if (Move.canMove()) {
+    if (Move.isPassed()) {
+      this.end();
+    } else if (Move.canMove()) {
       this.readDirection();
     } else {
-      InputView.readGameCommand(this.setGameCommand.bind(this));
+      this.readGameCommand();
     }
   }
 
-  setGameCommand(command) {
-    if (command === REPLAY) {
+  readGameCommand() {
+    InputView.readGameCommand(this.validateRetryInput.bind(this));
+  }
+
+  validateRetryInput(command) {
+    if (Exception.gameCommand(command)) {
+      this.retryOrEnd(command);
+    } else {
+      this.readGameCommand();
+    }
+  }
+
+  retryOrEnd(command) {
+    if (BridgeGame.keepPlay(command)) {
       this.#bridgeGame.retry();
       this.readDirection();
     } else {
