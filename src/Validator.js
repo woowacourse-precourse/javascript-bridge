@@ -2,6 +2,8 @@ const { NUMBER, ERROR, DIRECTION } = require('./data/constants');
 
 class Validator {
   static validateBridgeLength(length) {
+    // eslint-disable-next-line no-undef
+    if (!Number(length)) throw ERROR.BRIDGE_SIZE;
     if (
       Validator.isExceedRange(
         length,
