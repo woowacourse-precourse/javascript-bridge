@@ -1,3 +1,12 @@
+const { ERROR_MESSAGES } = require('./constants/Messages');
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./utils/BridgeRandomNumberGenerator');
+
+const BRIDGE_RANGE = {
+  START: 3,
+  END: 20,
+};
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -15,7 +24,18 @@ class BridgeGame {
 
   #userBridge = [];
 
-  setRandomBridge(bridge) {
+  static #validateSize(size) {
+    if (size.length === 0) {
+      throw new Error(ERROR_MESSAGES.BRIDGE_SIZE.EMPTY);
+    }
+    if (!(size >= BRIDGE_RANGE.START && size <= BRIDGE_RANGE.END)) {
+      throw new Error(ERROR_MESSAGES.BRIDGE_SIZE.RANGE);
+    }
+  }
+
+  setRandomBridge(size) {
+    BridgeGame.#validateSize(size);
+    const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.#randomBridge = bridge;
   }
 

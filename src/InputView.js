@@ -1,4 +1,4 @@
-const MESSAGES = require('./constants/Messages');
+const { MESSAGES } = require('./constants/Messages');
 const readLineAsync = require('./utils/readLineAsync');
 
 /**
