@@ -6,10 +6,10 @@ class BridgeGame {
   #bridgeInfoArray
   #tries
 
-  constructor(userIunputArray, bridgeInfoArray, tries){
-    this.#userInputArray = userIunputArray;
-    this.#bridgeInfoArray = bridgeInfoArray;
-    this.#tries = tries;
+  constructor(){
+    this.#userInputArray = [];
+    this.#bridgeInfoArray = [];
+    this.#tries = 1;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
