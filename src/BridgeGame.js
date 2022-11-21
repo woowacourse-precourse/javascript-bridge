@@ -20,6 +20,9 @@ class BridgeGame {
     return this.#moves
   }
 
+  /**
+   * @param {string} newMove
+   */
   move(newMove) {
     if (newMove) {
       this.#moves.push(newMove)
@@ -30,6 +33,9 @@ class BridgeGame {
     this.#moves = []
   }
 
+  /**
+   * @returns {number}
+   */
   getStatus() {
     if (this.#isFailure()) {
       return status.READ_COMMAND
