@@ -3,11 +3,8 @@ const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
 class GameController {
-  #tryCount;
-
   constructor() {
     this.game = new BridgeGame();
-    this.#tryCount = 1;
   }
 
   start() {
@@ -65,14 +62,13 @@ class GameController {
   }
 
   retry() {
-    this.#tryCount += 1;
     this.game.retry();
     this.askMoving();
   }
 
   end(isDone) {
     const result = isDone ? '성공' : '실패';
-    OutputView.printResult(result, this.#tryCount, this.game.getMap());
+    OutputView.printResult(result, this.game.getTryCount(), this.game.getMap());
   }
 }
 

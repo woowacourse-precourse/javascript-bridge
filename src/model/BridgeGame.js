@@ -8,9 +8,11 @@ const GameCommand = require('./GameCommand');
 class BridgeGame {
   #bridge;
   #currentIndex;
+  #tryCount;
 
   constructor() {
     this.#currentIndex = 0;
+    this.#tryCount = 1;
     this.topSide = [];
     this.downSide = [];
   }
@@ -56,6 +58,10 @@ class BridgeGame {
   getMap() {
     return { topSide: this.topSide, downSide: this.downSide };
   }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -83,6 +89,7 @@ class BridgeGame {
    */
   retry() {
     this.initialization();
+    this.#tryCount += 1;
   }
 
   initialization() {
