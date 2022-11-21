@@ -12,11 +12,11 @@ describe('다리 클래스 테스트', () => {
   });
 
   test.each([
-    [0, false],
-    [2, true],
-  ])('마지막 위치인지 확인', (location, expected) => {
-    const bridge = new Bridge(['U', 'D', 'D']);
-    const result = bridge.isLastLocation(location);
+    [['U', 'D', 'D'], 3],
+    [['U', 'D', 'D', 'U'], 4],
+  ])('다리 사이즈 반환', (arr, expected) => {
+    const bridge = new Bridge(arr);
+    const result = bridge.getSize();
 
     expect(result).toEqual(expected);
   });
