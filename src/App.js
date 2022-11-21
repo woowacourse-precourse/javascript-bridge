@@ -113,6 +113,11 @@ class App {
   retry() {
     this.#bridgeGame.retry();
   }
+
+  retryAndMove() {
+    this.retry();
+    this.readMoving();
+  }
 }
 
 module.exports = App;
