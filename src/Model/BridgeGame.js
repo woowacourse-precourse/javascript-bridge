@@ -46,9 +46,10 @@ class BridgeGame {
     return this.#lowerTrack;
   }
 
-  keepGoing() {
-    const lastPath = [this.#upperTrack.pop(), this.#lowerTrack.pop()];
-    return lastPath.includes(PATH.RIGHT) ? true : false;
+  checkWrongPath() {
+    const currentLocation = this.#upperTrack.length - 1;
+    const lastPath = [this.#upperTrack[currentLocation], this.#lowerTrack[currentLocation]];
+    return lastPath.includes(PATH.WRONG) ? true : false;
   }
 
   /**
