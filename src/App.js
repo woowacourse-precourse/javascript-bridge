@@ -8,7 +8,6 @@ const OutputView = require("./OutputView");
 const Validate = require("./utils/Validate");
 
 class App {
-  #print = MissionUtils.Console.print;
   #bridgeGame = new BridgeGame();
   #bridgeSize;
   #bridge;
@@ -16,13 +15,13 @@ class App {
   #totalTry = 1;
 
   play() {
-    this.#print(PRINT_MESSAGE.GAME_START);
+    MissionUtils.Console.print(PRINT_MESSAGE.GAME_START);
     this.inputBridgeSize();
   }
 
   inputBridgeSize() {
     InputView.readBridgeSize((size) => {
-      this.#print("");
+      MissionUtils.Console.print("");
       this.validateSize(size);
     });
   }
@@ -33,7 +32,7 @@ class App {
       this.#bridgeSize = Number(size);
       this.makeBridge();
     } catch (error) {
-      this.#print(error);
+      MissionUtils.Console.print(error);
       this.inputBridgeSize();
     }
   }
@@ -58,7 +57,7 @@ class App {
 
       this.checkResponse(this.#bridgeGame.move(this.#moving, this.#bridge));
     } catch (error) {
-      this.#print(error);
+      MissionUtils.Console.print(error);
       this.inputMoving();
     }
   }
@@ -96,7 +95,7 @@ class App {
       Validate.validateCommand(command);
       this.commandReact(command);
     } catch (error) {
-      this.#print(error);
+      MissionUtils.Console.print(error);
       this.inputGameCommand();
     }
   }

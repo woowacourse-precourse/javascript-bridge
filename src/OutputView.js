@@ -1,33 +1,40 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { OUTPUT_FORM } = require("./constants/OutputForm");
 
 const OutputView = {
   makeBridge(moving, boolean, string) {
     let answer = moving.map((direction, index) => {
       if (direction == string && index === moving.length - 1) {
-        return boolean ? " O " : " X ";
+        this.checkBoolean(boolean);
       } else if (direction == string) {
-        return " O ";
+        return OUTPUT_FORM.MAP_ELEMENT.COINCIDE;
       }
-      return "   ";
+      return OUTPUT_FORM.MAP_ELEMENT.NOT_SELECTED;
     });
 
     return answer;
   },
 
-  printMap(moving, boolean) {
-    let upstairs = this.makeBridge(moving, boolean, "U");
-    let downstairs = this.makeBridge(moving, boolean, "D");
+  checkBoolean(boolean) {
+    if (boolean) {
+      return OUTPUT_FORM.MAP_ELEMENT.COINCIDE;
+    }
+    return OUTPUT_FORM.MAP_ELEMENT.WRONG;
+  },
 
-    MissionUtils.Console.print(`[${upstairs.join("|")}]`);
-    MissionUtils.Console.print(`[${downstairs.join("|")}]` + "\n");
+  printMap(moving, boolean) {
+    let upBridge = this.makeBridge(moving, boolean, "U").join("|");
+    let downBridge = this.makeBridge(moving, boolean, "D").join("|");
+
+    MissionUtils.Console.print(OUTPUT_FORM.MAP(upBridge, downBridge));
   },
 
   printResult(moving, totalTry, success) {
-    MissionUtils.Console.print("최종 게임 결과");
+    MissionUtils.Console.print(OUTPUT_FORM.RESULT.HEADER);
     this.printMap(moving, success);
 
-    MissionUtils.Console.print(`게임 성공 여부: ${success ? "성공" : "실패"}`);
-    MissionUtils.Console.print(`총 시도한 횟수: ${totalTry}`);
+    MissionUtils.Console.print(OUTPUT_FORM.RESULT.IS_SUCCESS(success));
+    MissionUtils.Console.print(OUTPUT_FORM.RESULT.TOTAL_TRY(totalTry));
   },
 };
 
