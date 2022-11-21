@@ -11,18 +11,13 @@ const OutputView = {
   printStart() {
     Console.print(MESSAGE.START);
   },
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   printMap(bridge, turn, isCurrentTurnSuccess) {
     let up = this.makeResultArr(bridge, turn, GAME.UP);
     let down = this.makeResultArr(bridge, turn, GAME.DOWN);
 
     if (!isCurrentTurnSuccess) {
-      up = this.changeLastToFail(up);
-      down = this.changeLastToFail(down);
+      up.push(this.getFailResult(bridge, turn, GAME.UP));
+      down.push(this.getFailResult(bridge, turn, GAME.DOWN));
     }
 
     Console.print(this.makePrintFormat(up));
@@ -31,20 +26,17 @@ const OutputView = {
   makeResultArr(bridge, turn, correct) {
     let resultArr = [];
 
-    for (let i = 0; i < turn + 1; i++) {
+    for (let i = 0; i < turn; i++) {
       const result = bridge[i] === correct ? this.SUCCESS : this.EMPTY;
       resultArr.push(result);
     }
 
     return resultArr;
   },
-  changeLastToFail(arr) {
-    let copyArr = [...arr];
-    if (arr.at(-1) === this.SUCCESS) {
-      copyArr.splice(copyArr.length - 1, 1, this.FAIL);
-    }
+  getFailResult(bridge, turn, correct) {
+    const result = bridge[turn + 1] === correct ? this.EMPTY : this.FAIL;
 
-    return copyArr;
+    return result;
   },
   makePrintFormat(result) {
     const BAR = ' | ';
