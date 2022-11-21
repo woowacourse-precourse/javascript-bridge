@@ -89,9 +89,10 @@ const InputView = {
   },
 
   isGameDone() {
+    // 기능 분리
     if (this.count === this.answerArr.length) {
       OutputView.printResult();
-      OutputView.printWinResult(this.count, this.roundCount, this.answerArr);
+      OutputView.printTotalResult(true, this.roundCount, this.answerArr);
     }
     if (this.count !== this.answerArr.length) {
       this.readMoving(this.answerArr);
@@ -134,7 +135,7 @@ const InputView = {
 
   finishGame() {
     OutputView.printResult();
-    OutputView.printLoseResult(this.count, this.roundCount, this.answerArr);
+    OutputView.printTotalResult(false, this.roundCount, this.answerArr);
   },
 
   resetOutputBridge() {

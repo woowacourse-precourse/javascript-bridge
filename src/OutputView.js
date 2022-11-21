@@ -116,18 +116,14 @@ const OutputView = {
     Console.print(this.upBridge + '\n' + this.downBridge);
   },
 
-  printWinResult(count, roundCount, answerArr) {
-    if (count === answerArr.length) {
+  printTotalResult(answerisRight, roundCount, answerArr) {
+    if (answerisRight) {
       Console.print('게임 성공 여부: 성공');
-      Console.print('총 시도한 횟수: ' + roundCount);
     }
-  },
-
-  printLoseResult(count, roundCount, answerArr) {
-    if (count === answerArr.length) {
+    if (!answerisRight) {
       Console.print('게임 성공 여부: 실패');
-      Console.print('총 시도한 횟수: ' + roundCount);
     }
+    Console.print('총 시도한 횟수: ' + roundCount);
   },
 };
 module.exports = OutputView;
