@@ -1,97 +1,84 @@
+const BridgeGameStatus = require('./BridgeGameStatus');
 const BridgeMaker = require('./BridgeMaker');
+const BridgeMap = require('./BridgeMap');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-
-const OPPOSITE_DIRECTION = { U: 'D', D: 'U' };
 
 class BridgeGame {
   #bridgeAnswer;
 
-  #numberOfAttempts;
+  #bridgeMap;
 
   #status;
 
-  setUp(bridgeSize) {
-    this.makeBridge(Number(bridgeSize));
-    this.initStatus();
+  #numberOfAttempts;
+
+  constructor() {
+    this.#bridgeMap = new BridgeMap();
+    this.#status = new BridgeGameStatus();
     this.#numberOfAttempts = 1;
   }
 
-  makeBridge(bridgeSize) {
+  setBridge(bridgeSize) {
     this.#bridgeAnswer = BridgeMaker.makeBridge(
       bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
   }
 
-  initStatus() {
-    this.#status = {
-      stepCount: 0,
-      crossed: false,
-      gameOver: false,
-      bridgeMap: { U: [], D: [] },
-    };
-  }
-
   move(direction) {
-    const isCorrect = this.isCorrectStep(direction);
-    this.updateBridgeMap(direction, isCorrect);
-    this.updateStatus(isCorrect);
+    const correct = this.isCorrect(direction);
+    this.updateBridgeMap(direction, correct);
+    this.updateStatus(correct);
   }
 
-  isCorrectStep(direction) {
-    if (this.#bridgeAnswer[this.#status.stepCount] === direction) {
+  isCorrect(direction) {
+    if (this.#bridgeAnswer[this.#status.getStepCount()] === direction) {
       return true;
     }
     return false;
   }
 
-  updateBridgeMap(direction, isCorrect) {
-    if (isCorrect) {
-      return this.markBridgeMap(direction, 'O');
+  updateBridgeMap(direction, correct) {
+    if (correct) {
+      return this.#bridgeMap.mark(direction, 'O');
     }
-    return this.markBridgeMap(direction, 'X');
+    return this.#bridgeMap.mark(direction, 'X');
   }
 
-  markBridgeMap(direction, mark) {
-    const oppositeDirection = OPPOSITE_DIRECTION[direction];
-    this.#status.bridgeMap[direction].push(mark);
-    this.#status.bridgeMap[oppositeDirection].push(' ');
+  updateStatus(correct) {
+    this.#status.addStep();
+    if (correct) {
+      return this.checkSuccess();
+    }
+    return this.#status.end();
   }
 
-  updateStatus(isCorrect) {
-    this.#status.stepCount += 1;
-    if (isCorrect) {
-      this.checkCrossed();
-    } else {
-      this.#status.gameOver = true;
+  checkSuccess() {
+    if (this.#status.getStepCount() === this.#bridgeAnswer.length) {
+      this.#status.succeed();
     }
   }
 
-  checkCrossed() {
-    if (this.#status.stepCount === this.#bridgeAnswer.length) {
-      this.#status.crossed = true;
-      this.#status.gameOver = true;
-    }
+  retry() {
+    this.#status.initialize();
+    this.#bridgeMap.initialize();
+    this.#numberOfAttempts += 1;
+  }
+
+  isSuccessful() {
+    return this.#status.isSuccessful();
+  }
+
+  isGameOver() {
+    return this.#status.isGameOver();
   }
 
   getBridgeMap() {
-    return {
-      upperRow: this.#status.bridgeMap.U,
-      lowerRow: this.#status.bridgeMap.D,
-    };
-  }
-
-  getStatus() {
-    return this.#status;
+    return this.#bridgeMap.getRows();
   }
 
   getNumberOfAttempts() {
     return this.#numberOfAttempts;
-  }
-
-  retry() {
-    this.initStatus();
-    this.#numberOfAttempts += 1;
   }
 }
 

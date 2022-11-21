@@ -3,35 +3,35 @@ const { MESSAGE } = require('./Constants');
 const Validator = require('./Validator');
 
 const InputView = {
-  readBridgeSize(setUpGame) {
+  readBridgeSize(setBridge) {
     Console.readLine(MESSAGE.bridgeSize, (bridgeSize) =>
-      this.tryToSetUpGame(bridgeSize, setUpGame)
+      this.tryToSetBridge(bridgeSize, setBridge)
     );
   },
 
-  tryToSetUpGame(bridgeSize, setUpGame) {
+  tryToSetBridge(bridgeSize, setBridge) {
     try {
       Validator.validateBridgeSize(bridgeSize);
-      setUpGame(bridgeSize);
+      setBridge(Number(bridgeSize));
     } catch (e) {
       Console.print(e);
-      this.readBridgeSize(setUpGame);
+      this.readBridgeSize(setBridge);
     }
   },
 
-  readMoving(moveOneStep) {
+  readMoving(move) {
     Console.readLine(MESSAGE.direction, (direction) =>
-      this.tryToMoveOneStep(direction, moveOneStep)
+      this.tryToMove(direction, move)
     );
   },
 
-  tryToMoveOneStep(direction, moveOneStep) {
+  tryToMove(direction, move) {
     try {
       Validator.validateDirection(direction);
-      moveOneStep(direction);
+      move(direction);
     } catch (e) {
       Console.print(e);
-      this.readMoving(moveOneStep);
+      this.readMoving(move);
     }
   },
 

@@ -1,6 +1,6 @@
+const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const BridgeGame = require('./BridgeGame');
 
 const RETRY = { R: true, Q: false };
 
@@ -13,42 +13,32 @@ class BridgeGameController {
 
   run() {
     OutputView.printStartMessage();
-    InputView.readBridgeSize(this.setUpGame.bind(this));
+    InputView.readBridgeSize(this.setBridge.bind(this));
   }
 
-  setUpGame(bridgeLength) {
-    this.#bridgeGame.setUp(bridgeLength);
+  setBridge(bridgeLength) {
+    this.#bridgeGame.setBridge(bridgeLength);
     return this.askMove();
   }
 
   askMove() {
-    InputView.readMoving(this.moveOneStep.bind(this));
+    InputView.readMoving(this.move.bind(this));
   }
 
-  moveOneStep(direction) {
+  move(direction) {
     this.#bridgeGame.move(direction);
     OutputView.printMap(this.#bridgeGame.getBridgeMap());
     return this.checkStatus();
   }
 
   checkStatus() {
-    if (this.isCrossed()) {
+    if (this.#bridgeGame.isSuccessful()) {
       return this.finishGame();
     }
-    if (this.isGameOver()) {
+    if (this.#bridgeGame.isGameOver()) {
       return this.askRetry();
     }
     return this.askMove();
-  }
-
-  isCrossed() {
-    const { crossed } = this.#bridgeGame.getStatus();
-    return crossed;
-  }
-
-  isGameOver() {
-    const { gameOver } = this.#bridgeGame.getStatus();
-    return gameOver;
   }
 
   askRetry() {
@@ -66,7 +56,7 @@ class BridgeGameController {
   finishGame() {
     OutputView.printResult(
       this.#bridgeGame.getBridgeMap(),
-      this.#bridgeGame.getStatus(),
+      this.#bridgeGame.isSuccessful(),
       this.#bridgeGame.getNumberOfAttempts()
     );
   }
