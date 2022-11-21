@@ -1,6 +1,6 @@
 const GAME_NUMBER = {
   startIndex: 0,
-  one: 1,
+  countOne: 1,
   min: 3,
   max: 20,
 };

@@ -6,7 +6,7 @@ const { GAME_NUMBER, GAME_STRING } = require('../Constants/constant');
 
 class GameController {
   #bridgeGame;
-  #retryCount = GAME_NUMBER.one;
+  #retryCount = GAME_NUMBER.countOne;
   
   gameStart() {
     this.inputBridgeSize();
@@ -56,7 +56,7 @@ class GameController {
     if (retryAnswer === GAME_STRING.retry) {
       this.#bridgeGame.retry();
       OutputView.resetPrintData();
-      this.#retryCount += GAME_NUMBER.one;
+      this.#retryCount += GAME_NUMBER.countOne;
       return this.inputWhereMoving();
     }
     return OutputView.printResult(this.#retryCount);

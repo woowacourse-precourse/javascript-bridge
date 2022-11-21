@@ -20,10 +20,10 @@ class BridgeGame {
 
   match(moveAnswer) {
     if (this.#bridge[this.#bridgeIndex] === moveAnswer) {
-      this.#bridgeIndex += GAME_NUMBER.one;
+      this.#bridgeIndex += GAME_NUMBER.countOne;
       return [moveAnswer, true];
     }
-    this.#bridgeIndex += GAME_NUMBER.one;
+    this.#bridgeIndex += GAME_NUMBER.countOne;
     return [moveAnswer, false];
   }
 
