@@ -53,6 +53,15 @@ class BridgeGame {
     return this.#history;
   }
 
+  getResult() {
+    const bridgeLength = this.#bridge.length;
+    const historyLength = this.#history.length;
+    if (bridgeLength == historyLength && this.#history[historyLength - 1][1] == true) {
+      return '성공';
+    }
+    return '실패';
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
