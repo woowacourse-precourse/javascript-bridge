@@ -2,10 +2,13 @@
 
 ## 기능 목록
 
-- [x] [출력] 게임 시작 문구를 출력한다.| OutputView#printStartMessage()
-- [x] [입력] 자동으로 생성할 다리 길이를 입력 받는다.| InputView#readBridgeSize()
-  - [x] [예외처리] 입력 받은 값이 3 이상 20 이하 숫자가 아니면 예외 처리한다.| InputValidator#validateBridgeSize(bridgeSize)
-- [ ] 다리를 생성한다.| BridgeMaker#makeBridge(bridgeSize, generate)
+- App.js#startBridgeGame()
+  - [x] [출력] 게임 시작 문구를 출력한다.| OutputView#printStartMessage()
+  - this.getBridgeSize()
+- [x] [입력] 자동으로 생성할 다리 길이를 입력 받는다.| InputView#readBridgeSize(callback)
+  - [x] [예외처리] 입력 받은 값이 3 이상 20 이하 숫자가 아니면 예외 처리한다.| InputView#validateBridgeSize(bridgeSize)
+  - this.getBridge(bridgeSize)
+- [ ] 다리를 생성한다.| BridgeMaker#makeBridge(bridgeSize, BridgeRandomNumber.generate)
   - [ ] 다리를 생성할 때 위 칸과 아래 칸 중 건널 수 있는 칸은 0과 1 중 무작위 값을 이용해서 정한다.| BridgeRandomNumberGenerator#generate()
     - [ ] [예외처리] 무작위 값이 0 또는 1이 아닌 경우 예외 처리한다.
 - [ ] [입력] 플레이어가 이동할 칸을 선택한다.| InputView#readMoving()
@@ -21,8 +24,6 @@
   - [ ] [출력] 게임 종료 문구를 출력한다.| OutputView#printResult()
 
 ## 추가적으로 신경 쓸 사항
-
-- [ ] 검증 파일을 나눈 것 처럼 예외처리 파일도 나눌 건지 고민 필요.
 
 기능 요구 사항
 
@@ -43,7 +44,23 @@
 - 도메인 로직에 단위 테스트를 구현해야 한다. 단, UI(Console.readLine, Console.print) 로직에 대한 단위 테스트는 제외한다.
   - 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분한다.
 
-## 도메인 로직
+## MVC
+
+Model(BridgeGame.js, BridgeMaker.js, BridgeRandomNumber.js)
+Controller(App.js)
+View(InputView.js, OutputView.js)
+
+## Controller
+
+App
+
+- +startBridgeGame()
+- +getBridgeSize()
+- +getBridge()
+- +getMoving()
+- +getGameCommand()
+
+## 비지니스 로직(Model)
 
 BridgeGame // 사용자가 칸을 이동할 때 사용하는 메서드
 
@@ -58,19 +75,16 @@ BridgeRandomNumberGenerator
 
 - generate()
 
-+InputValidator
-
-- +validateBridgeSize(bridgeSize)
-- +validateMoving(moving)
-- +validateGameCommand(gameCommand)
-
-## UI 로직
+## UI 로직(View)
 
 InputView // 사용자로부터 입력을 받는 역할을 한다.
 
 - readBridgeSize() // 다리의 길이를 입력받는다.
+- +validateBridgeSize(bridgeSize)
 - readMoving() // 사용자가 이동할 칸을 입력받는다.
+- +validateMoving(moving)
 - readGameCommand() // 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+- +validateGameCommand(gameCommand)
 
 OutputView // 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
 
