@@ -1,3 +1,4 @@
+const { readBridgeSize, readMoving } = require('./InputView');
 const { printStart } = require('./OutputView');
 
 /**
@@ -6,6 +7,11 @@ const { printStart } = require('./OutputView');
 class BridgeGame {
   startGame() {
     printStart();
+    readBridgeSize(this.setBridge.bind(this));
+  }
+
+  setBridge(size) {
+    readMoving(this.move.bind(this));
   }
 
   /**
