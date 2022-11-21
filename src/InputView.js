@@ -1,8 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils')
 const BridgeGame = require('./BridgeGame')
-const BridgeMaker = require('./BridgeMaker')
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const OutputView = require('./OutputView');
+const OutputView = require('./OutputView')
 
 // 제공된 InputView 객체를 활용해 구현해야 한다.
 // InputView의 파일 경로는 변경할 수 있다.
@@ -23,19 +21,20 @@ const InputView = {
   // 사용자가 이동할 칸을 입력받는다.
   readMoving(bridgeGame) {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (answer) => {
-      const isSuccess = bridgeGame.move(answer)
-
-      switch (isSuccess) {
+      const status = bridgeGame.move(answer)
+      OutputView.selectMap(status, answer)
+      
+      switch (status) {
         case 'success':
           this.readMoving(bridgeGame)
-          break
-        case 'finish':
-          OutputView.printResult()
           break
         case 'fail':
           this.readGameCommand(bridgeGame)
           break
-        default: '[ERROR]' 
+        case 'finish':
+          OutputView.printResult(answer, bridgeGame.getGameCount())
+          break
+        default: throw new Error('[ERROR] U 또는 D 입력만 가능합니다.')
       }
     })
   },
@@ -44,11 +43,16 @@ const InputView = {
   readGameCommand(bridgeGame) {
     Console.readLine('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (answer) => {
       bridgeGame.retry(answer)
+
       if (answer === 'R') {
+        OutputView.initMap()
         this.readMoving(bridgeGame)
+      }
+      if (answer === 'Q') {
+        OutputView.printResult(answer, bridgeGame.getGameCount())
       }
     })
   },
-};
+}
 
 module.exports = InputView

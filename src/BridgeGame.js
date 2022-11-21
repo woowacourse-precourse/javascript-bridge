@@ -1,4 +1,4 @@
-const { Console } = require("@woowacourse/mission-utils");
+const { Console } = require('@woowacourse/mission-utils')
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
 const BridgeMaker = require('./BridgeMaker')
 // 제공된 BridgeGame 클래스를 활용해 구현해야 한다.
@@ -12,26 +12,34 @@ const BridgeMaker = require('./BridgeMaker')
 class BridgeGame {
   #bridge
   #thisBridge
+  #gameCount
 
   constructor (size) {
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate)
     this.#thisBridge = [...this.#bridge]
+    this.#gameCount = 1
   }
   // 사용자가 칸을 이동할 때 사용하는 메서드
   // 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
 
+  getGameCount() {
+    return this.#gameCount
+  }
+
   move(userInput) {
     const cell = this.#thisBridge.shift()
-    console.log('this bridge', this.#thisBridge)
-
+    
+    if (userInput !== 'D' && userInput !== 'U') {
+      return 'error'
+    }
+    if (cell !== userInput) {
+      return 'fail'
+    }
     if (!this.#thisBridge.length) {
       return 'finish'
     }
     if (cell === userInput) {
       return 'success'
-    }
-    if (cell !== userInput) {
-      return 'fail'
     }
   }
 
@@ -40,13 +48,12 @@ class BridgeGame {
   retry(userInput) {
     if (userInput === 'R') {
       this.#thisBridge = [...this.#bridge]
-      console.log('reset!')
+      this.#gameCount += 1
     } 
-    if (userInput === 'Q') {
-      Console.close()
-      console.log('게임실패')
-    }
+    // if (userInput === 'Q') {
+    //   Console.close()
+    // }
   }
 }
 
-module.exports = BridgeGame;
+module.exports = BridgeGame
