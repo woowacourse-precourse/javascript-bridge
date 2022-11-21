@@ -22,19 +22,18 @@ class App {
     let moveCommand = "";
     while (retry === "R") {
       const gameResults = await bridgeGame.move(bridgeSize, bridge, moveCount);
-      moveCommand += gameResults;
+      moveCommand += gameResults === 'END' ? '' : gameResults
       if (gameResults === "O") {
         OutputView.printMap(bridge.slice(0, moveCount + 1), moveCommand);
         moveCount++;
       } else if (gameResults === "X") {
         OutputView.printMap(bridge.slice(0, moveCount + 1), moveCommand);
+        moveCommand = moveCommand.slice(0, moveCount);
         retry = await bridgeGame.retry();
-        this.isRetry(retry, tryNumber, moveCommand);
+        tryNumber = await this.isRetry(retry, tryNumber, moveCommand);
       } else if (gameResults === "END") {
-        retry = await bridgeGame.retry();
-        this.isRetry(retry, tryNumber, moveCommand);
-      } else {
-        retry == "R";
+        OutputView.printResult(tryNumber, bridge, moveCommand);
+        retry = "Q";
       }
     }
   }
@@ -61,7 +60,7 @@ class App {
 
   isRetry(command, tryNumber, moveCommand) {
     if (command === "R") {
-      return tryNumber++;
+      return tryNumber + 1;
     }
     if (command === "Q") {
       console.log("최종결과 프린트");

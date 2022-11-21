@@ -9,7 +9,7 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(crossBridge, moveResults) {
-    console.log(crossBridge, moveResults)
+    console.log(crossBridge, moveResults);
     let upper = [];
     let lower = [];
     for (let i = 0; i < crossBridge.length; i++) {
@@ -30,8 +30,8 @@ const OutputView = {
         lower.push(" ");
       }
     }
-    console.log(`[ ${upper.join(' | ')} ]`);
-    console.log(`[ ${lower.join(' | ')} ]`);
+    MissionUtils.Console.print(`[ ${upper.join(" | ")} ]`);
+    MissionUtils.Console.print(`[ ${lower.join(" | ")} ]`);
   },
 
   /**
@@ -39,12 +39,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(isSuccess, tryNumber, gameResults) {
-    isSuccess = isSuccess ? "성공" : "실패";
+  printResult(tryNumber, bridge, moveCommand) {
+    isSuccess = bridge.length === moveCommand.length ? "성공" : "실패";
     MissionUtils.Console.print("최종 게임 결과");
-    // for (let i = 0; i < gameResults.length; i++) {
-    //   console.log("이부분을 어케 해야 할지 모르겠네");
-    // }
+    this.printMap(bridge, moveCommand);
     MissionUtils.Console.print("\n");
     MissionUtils.Console.print(`게임 성공 여부: ${isSuccess}`);
     MissionUtils.Console.print(`총 시도한 횟수: ${tryNumber}`);

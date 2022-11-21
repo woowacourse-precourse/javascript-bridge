@@ -1,3 +1,4 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("./App");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
@@ -14,7 +15,6 @@ class BridgeGame {
     let where = null;
     while (bridgeSize > moveCount) {
       where = this.movingValidate(await InputView.readMoving());
-      console.log(where);
       if ((where === "U" || where === "D") && bridge[moveCount] === where) {
         return "O";
       }
@@ -33,7 +33,7 @@ class BridgeGame {
         throw "[ERROR] 이동할 칸은 U나 D만 입력 가능합니다.";
       }
     } catch (err) {
-      return err;
+      MissionUtils.Console.print(err);
     }
   }
   /**
@@ -63,7 +63,7 @@ class BridgeGame {
         throw "[ERROR] 재시작(R)과 그만둠(Q) 중 하나만 선택 가능합니다.";
       }
     } catch (err) {
-      console.log(err);
+      MissionUtils.Console.print(err);
     }
   }
 }
