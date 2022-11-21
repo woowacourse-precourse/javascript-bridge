@@ -1,9 +1,10 @@
 const BridgeGame = require("./BridgeGame");
-const BridgeGameController = require("./BridgeGameController");
+const OutputView = require("./OutputView");
+const InputView = require("./InputView");
 class App {
   play() {
-    const controller = new BridgeGameController(new BridgeGame());
-    controller.start();
+    OutputView.printStart();
+    InputView.readBridgeSize(new BridgeGame());
   }
 }
 
