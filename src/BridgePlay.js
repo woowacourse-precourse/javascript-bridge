@@ -5,7 +5,7 @@ const BridgeGame = require("./BridgeGame");
 class BridgePlay{
   constructor(bridge){
     this.bridge = bridge;
-    this.bridgeGame = new BridgeGame({ bridge:this.bridge, status:[], attempts:1 })
+    this.bridgeGame = new BridgeGame(this.bridge, { moved:[], attempts:1 })
   }
 
   startRound(){
@@ -13,42 +13,37 @@ class BridgePlay{
   }
 
   playRound(moving){
-    const status = this.bridgeGame.move(moving);
-    OutputView.printMap(this.bridge, status);
-    if(status[status.length-1] !== this.bridge[status.length-1]){
-      this.playRoundOver(status);
-      return;
-    }
-    if(status.length === this.bridge.length){
-      this.playRoundComplete();
-      return;
-    }
-    this.playRoundNext(status);
+    const moved = this.bridgeGame.move(moving);
+    OutputView.printMap(this.bridge, moved);  
+    this.playNext();
   }
 
-  playRoundNext(){
-    this.startRound();
+  playNext(){
+    switch(this.bridgeGame.status()){
+      case 0:
+        InputView.readGameCommand(this);
+        break;
+      case 1:
+        this.startRound();
+        break;
+      case 2:
+        this.playEnd();
+    }
   }
 
-  playRoundOver(){
-    InputView.readGameCommand(this);
-  }
-  quitOrRetry(option){
+  endOrRetry(option){
     if(option==='R'){
       this.bridgeGame.retry();
       this.startRound();
-    }
-    else{//option==='Q'
-      OutputView.printResult(this.bridgeGame.get(), false);
-    }
-  }
-  
-  playRoundComplete(){
-    OutputView.printResult(this.bridgeGame.get(), true);
+      return;
+    }//option==='Q'
+    this.playEnd();
   }
 
-  
-
+  playEnd(){
+    const {moved, attempts} = this.bridgeGame.get();
+    OutputView.printResult(this.bridge, moved, attempts);
+  }
 }
 
 module.exports = BridgePlay;

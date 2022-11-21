@@ -31,7 +31,7 @@ const InputView = {
     Console.readLine(Messages.input_command(), (option)=>{
       try{
         Validation.checkOption(option);
-        bridgePlay.quitOrRetry(option);
+        bridgePlay.endOrRetry(option);
       }catch(err){
         Console.print(err.message);
         this.readGameCommand(bridgePlay);
