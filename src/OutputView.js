@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { encodeBridgeSide, encodeGameResult } = require("./utils/func/encode");
-const GameResult = require("./utils/type/gameResult");
-const { MovementStatus } = require("./utils/type/movementStatus");
+const GameStatus = require("./model/GameStatus");
+const MovementStatus = require("./model/movementStatus");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -14,14 +14,8 @@ const OutputView = {
    */
   printMap(movementState) {
     const { moveLength, upperSideStatus, lowerSideStatus } = movementState;
-    const upperSidePrintBody = this.encodeBridgeSide(
-      moveLength,
-      upperSideStatus
-    );
-    const lowerSidePrintBody = this.encodeBridgeSide(
-      moveLength,
-      lowerSideStatus
-    );
+    const upperSidePrintBody = encodeBridgeSide(moveLength, upperSideStatus);
+    const lowerSidePrintBody = encodeBridgeSide(moveLength, lowerSideStatus);
     this.blockPrintHelper([upperSidePrintBody, lowerSidePrintBody]);
   },
 
@@ -29,11 +23,11 @@ const OutputView = {
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   * @param {GameResult} gameResult
+   * @param {GameStatus} gameStatus
    */
 
-  printResult(gameResult) {
-    const resultPrintBody = encodeGameResult(gameResult);
+  printResult(gameStatus) {
+    const resultPrintBody = encodeGameResult(gameStatus);
     this.blockPrintHelper(resultPrintBody);
   },
 

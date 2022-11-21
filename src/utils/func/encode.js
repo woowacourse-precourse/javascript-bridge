@@ -9,8 +9,8 @@ const encodeMethods = {
       if (round === moveLength) printBody += "]";
     }
   },
-  encodeGameResult(gameResult) {
-    const { success, trial } = gameResult;
+  encodeGameResult(gameStatus) {
+    const { success, trial } = gameStatus;
     const succesPrintBody = `${OutputPrintMessage.result}${
       success ? `성공` : `실패`
     }`;
