@@ -1,12 +1,12 @@
 class BridgeGame {
   #round;
-  #count;
+  #totalTry;
   #up;
   #down;
 
   constructor() {
     this.#round = 0;
-    this.#count = 0;
+    this.#totalTry = 0;
     this.#up = [];
     this.#down = [];
   }
@@ -41,9 +41,9 @@ class BridgeGame {
   }
 
   countTry() {
-    this.#count += 1;
+    this.#totalTry += 1;
 
-    return this.#count;
+    return this.#totalTry;
   }
 }
 
