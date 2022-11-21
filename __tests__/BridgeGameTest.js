@@ -59,7 +59,7 @@ describe('bridgeController Test', () => {
       bridgeGame.selectMovemomentPosition('U');
       const moveBridge = bridgeGame.move();
       const drawBridge = bridgeController.drawBridge(moveBridge);
-      expect(drawBridge).toEqual({ upBridge: 'O', downBridge: ' ' });
+      expect(drawBridge).toEqual({ upBridge: '[ O ]', downBridge: '[   ]' });
     });
 
     test('재시작 또는 종료 요청시 사용자가 선택한 값이 건널수 없는 다리인경우 재요청 기능이 작동하는지 Test', () => {
