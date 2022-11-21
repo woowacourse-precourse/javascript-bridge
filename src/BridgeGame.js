@@ -36,15 +36,15 @@ class BridgeGame {
   }
 
   compareDirection(direction) {
-    if (direction === this.#bridge[this.#totalCount - 1]) {
+    if (direction === this.#bridge[this.#userDirectionInput.length]) {
       this.#userDirectionInput.push([DIRECTION_MATCH.RIGHT, direction]);
       this.makeMap(this.#userDirectionInput);
-      this.#bridgeGameController.inputDirection();
-    }
-    if (direction !== this.#bridge[this.#totalCount - 1]) {
+      this.checkFinish();
+    } else if (direction !== this.#bridge[this.#userDirectionInput.length]) {
       this.#userDirectionInput.push([DIRECTION_MATCH.WRONG, direction]);
       this.makeMap(this.#userDirectionInput);
-      this.retry();
+      this.#userDirectionInput.pop();
+      this.#bridgeGameController.inputRetry();
     }
   }
 
