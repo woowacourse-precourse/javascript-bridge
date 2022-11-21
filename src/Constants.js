@@ -12,5 +12,8 @@ const BRIDGE = {
   END: ' ]',
   BETWEEN: ' | ',
 };
+const ERROR_MESSAGE = {
+  IS_NOT_NUMBER: '[ERROR] 다리 길이로 숫자를 입력하세요.',
+};
 
-module.exports = { GAME_MESSAGE, BRIDGE };
+module.exports = { GAME_MESSAGE, BRIDGE, ERROR_MESSAGE };

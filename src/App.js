@@ -3,6 +3,7 @@ const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const Validation = require('./Validation');
 
 class App {
   constructor() {
@@ -17,6 +18,7 @@ class App {
     InputView.readBridgeSize(this.makeBridge.bind(this));
   }
   makeBridge(size) {
+    Validation.isInputNumber(size);
     this.bridgeGame.setBridge(BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate));
     this.inputMoving();
   }
