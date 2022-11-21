@@ -52,4 +52,18 @@ describe("BridgeGame class 테스트", () => {
 
     expect(bridgeGame.isGameSuccess()).toBeTruthy();
   });
+
+  test("이동할 수 있는 칸을 선택했는지 테스트", () => {
+    const answerMovingChoiceCommands = ["U", "D", "D", "D"];
+    const bridgeGame = new BridgeGame();
+    bridgeGame.setBridgeShape(["U", "D", "D", "D", "U"]);
+
+    answerMovingChoiceCommands.forEach((answerMovingChoiceCommand) => {
+      bridgeGame.move(answerMovingChoiceCommand);
+      expect(bridgeGame.isAnswerMovingChoice()).toBeTruthy();
+    });
+
+    bridgeGame.move("D");
+    expect(bridgeGame.isAnswerMovingChoice()).toBeFalsy();
+  });
 });
