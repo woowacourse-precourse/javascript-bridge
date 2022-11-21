@@ -1,5 +1,4 @@
 const { NUMBER, ERROR, DIRECTION } = require('./data/constants');
-const IO = require('./IO');
 
 class Validator {
   static validateBridgeLength(length) {
@@ -9,17 +8,12 @@ class Validator {
         NUMBER.MIN_BRIDGE_SIZE,
         NUMBER.MAX_BRIDGE_SIZE,
       )
-    ) {
-      IO.output(ERROR.BRIDGE_SIZE);
-      return false;
-    }
-    return true;
+    ) throw ERROR.BRIDGE_SIZE;
   }
 
   static validateBridgeDirection(direction) {
-    if (direction === DIRECTION.UP || direction === DIRECTION.DOWN) return true;
-    IO.output(ERROR.BRIDGE_DIRECTION);
-    return false;
+    if (direction === DIRECTION.UP || direction === DIRECTION.DOWN) return;
+    throw ERROR.BRIDGE_DIRECTION;
   }
 
   static isExceedRange(value, from, to) {
