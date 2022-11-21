@@ -15,6 +15,19 @@ class Validation{
             Console.close()
         }
     }
+
+
+    static validationForNextMove(input){
+        if(input.length===0){
+            Console.print(ERROR.EMPTY)
+            Console.close()
+        }
+        if(input!=='U' || input!=='D'){
+            Console.print(ERROR.NEXT_MOVE)
+            Console.close()
+        }
+
+    }
 }
 
 module.exports=Validation

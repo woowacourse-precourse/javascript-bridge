@@ -26,7 +26,7 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(QUESTION.NEXT_MOVE,(input)=>{
-      
+      Validation
     }) 
   },
 
