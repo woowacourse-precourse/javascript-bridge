@@ -39,4 +39,17 @@ describe("BridgeGame 클래스 테스트", () => {
     bridgeGame.checkCorrectOrNot(gameRec);
     expect(gameRec.correctOrNot).toEqual("X");
   });
+
+  test("setBridgeOutput 메서드-1: O/X 표시 추가", () => {
+    const gameRec = {
+      bridgeAnswer: ["U", "D", "D"],
+      bridgeOutput: { firstBridge: "[ O |", secondBridge: "[   |" },
+      correctOrNot: "O",
+      inputUOrD: "U",
+    };
+    const bridgeGame = new BridgeGame();
+    bridgeGame.setBridgeOutput(gameRec);
+    expect(gameRec.bridgeOutput.firstBridge).toEqual("[ O | O ]");
+    expect(gameRec.bridgeOutput.secondBridge).toEqual("[   |   ]");
+  });
 });
