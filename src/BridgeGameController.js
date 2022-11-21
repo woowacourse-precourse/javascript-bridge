@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const { isWrongDirection, isCommandRetry } = require('./BridgeGame');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
-const BridgeParts = require('./BridgeParts');
+const BridgeMap = require('./BridgeMap');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const {
   readMoving,
@@ -42,12 +42,28 @@ class BridgeGameController {
   static checkGameProcess(game) {
     if (isWrongDirection(game)) {
       BridgeGameController.showBridge(game);
-      readGameCommand(game, BridgeGameController.checkRetry);
-    } else if (game.isEndOfBridge()) BridgeGameController.quitBridgeGame(game);
+      readGameCommand(game, BridgeGameController.queryRetry);
+    } else if (game.isEndOfBridge()) BridgeGameController.showResult(game);
     else if (BridgeGameController.canMoveNext(game)) {
       BridgeGameController.showBridge(game);
       repeatReadMoving(game, BridgeGameController.moveNext);
     }
+  }
+
+  static queryRetry(game, command) {
+    try {
+      this.checkRetry(game, command);
+    } catch (err) {
+      Console.print(err);
+      readGameCommand(game, BridgeGameController.checkRetry);
+    }
+  }
+
+  static checkRetry(game, command) {
+    if (isCommandRetry(command)) {
+      game.retry();
+      readMoving(game, BridgeGameController.moveNext);
+    } else BridgeGameController.quit(game);
   }
 
   static canMoveNext(game) {
@@ -55,37 +71,21 @@ class BridgeGameController {
     return false;
   }
 
-  static checkRetry(game, command) {
-    try {
-      if (isCommandRetry(command)) {
-        game.retry();
-        readMoving(game, BridgeGameController.moveNext);
-      } else {
-        printResult();
-        printStatistic(game);
-        Console.close();
-      }
-    } catch (err) {
-      Console.print(err);
-      readGameCommand(game, BridgeGameController.checkRetry);
-    }
-  }
-
-  static createMap(game) {
-    const map = new BridgeParts();
-    map.createMap(game);
-    map.closeBridge();
-    return map;
-  }
-
   static showBridge(game) {
-    const map = BridgeGameController.createMap(game);
+    const map = new BridgeMap();
+    map.create(game);
     printMap(map.getUpperBridge(), map.getDownerBridge());
   }
 
-  static quitBridgeGame(game) {
+  static showResult(game) {
     printResult();
     BridgeGameController.showBridge(game);
+    printStatistic(game);
+    Console.close();
+  }
+
+  static quit(game) {
+    printResult();
     printStatistic(game);
     Console.close();
   }
