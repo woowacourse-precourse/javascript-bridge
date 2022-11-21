@@ -235,6 +235,7 @@ const number = generateRandomNumber();
   - checkCommandOption 메서드 테스트 코드를 작성한다.
 - [ ] test: BridgeGameManager.js 테스트 코드 작성
   - start 메서드 테스트 코드를 작성한다.
+  - createBridgeGame 메서드 테스트 코드를 작성한다.
 
 ---
 
