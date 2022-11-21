@@ -5,6 +5,9 @@ class Values {
   static DOWNARD_MOVEMENT = "D";
   static RESTART = "R";
   static QUIT = "Q";
+  static SUCCESS_MARK = "O";
+  static FAIL_MARK = "X";
+  static BLANK = " ";
 }
 
 module.exports = Object.freeze(Values);
