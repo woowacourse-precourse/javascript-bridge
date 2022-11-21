@@ -8,14 +8,10 @@ class BridgeGame {
   #player;
   #attempts;
 
-  constructor() {
-    this.#bridge;
+  constructor(size) {
+    this.#bridge = makeBridge(size, generate);
     this.#player = new Player();
     this.#attempts = 1;
-  }
-
-  setBridge(size) {
-    this.#bridge = makeBridge(size, generate);
   }
 
   isMovable(direction) {
