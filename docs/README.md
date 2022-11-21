@@ -41,7 +41,13 @@
 [!] 오류 : 게임을 다시시작할때 배열 초기화가 안됨 -> BridgeGame을 통해 초기화가 되게
 --- [Refactor] ---
 - checkIsOValue() : checkMovingInput에서 return 된 값이 'O'일때 실행시키는 함수
-- 
+
+## Input 클래스
+- static count = BridgeGame.count : BridgeGame에 있는 count값을 받아와서 필드에 저장한다
+- checkBridge() : 다리의 길이 입력 값을 확인해준다
+- randomBridge() : 다리의 길이를 받아서 깊은 복사로 original을 살려둔다
+- checkMovingInput() : 'U','D'입력값을 확인해서 'O','X'를 return 시킨다
+- checkReadGameInput() : 'R','Q'를 확인해서 재시작과 끝내는 로직을 관리한다
 
 ## 에러처리
 
