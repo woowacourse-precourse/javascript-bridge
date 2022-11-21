@@ -33,7 +33,18 @@ const Validation = {
   checkMovingValue(inputValue) {
     try {
       if (inputValue !== "U" && inputValue !== "D") {
-        throw new Error(`${ERROR.MOVEMENT}`);
+        throw new Error(`${ERROR.MOVING}`);
+      }
+    } catch (error) {
+      Console.print(error.message);
+      return true;
+    }
+  },
+
+  checkingSelectValue(select) {
+    try {
+      if (select !== "R" && select !== "Q") {
+        throw new Error(`${ERROR.SELECT}`);
       }
     } catch (error) {
       Console.print(error.message);

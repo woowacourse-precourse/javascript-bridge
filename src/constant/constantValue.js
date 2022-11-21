@@ -12,7 +12,8 @@ const INPUT = {
 const ERROR = {
   NUMBER: "[ERROR] 다리 길이는 숫자로 입력해야 합니다.",
   RANGE: "[ERROR] 다리 길이는 3 이상 20 이하의 숫자를 입력해야 합니다.",
-  MOVEMENT: "[ERROR] 이동할 칸은 U와 D 중 하나를 입력해야 합니다.",
+  MOVING: "[ERROR] 이동할 칸은 U와 D 중 하나를 입력해야 합니다.",
+  SELECT: "[ERROR]  R(재시작)과 Q(종료) 중 하나를 입력해야 합니다.",
 };
 
 module.exports = { OUTPUT, INPUT, ERROR };

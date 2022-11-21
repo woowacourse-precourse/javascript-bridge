@@ -40,7 +40,8 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(`\n${INPUT.SELECT}\n`, (select) => {
-      console.log(select);
+      const isSelectValueCorrect = Validation.checkingSelectValue(select);
+      if (isSelectValueCorrect) return this.readGameCommand();
     });
   },
 };
