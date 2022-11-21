@@ -32,6 +32,10 @@ class BridgeGameController {
     OutputView.printMap(result);
   }
 
+  outputResult(resultMap, isSuccess, totalCount) {
+    OutputView.printResult(resultMap, isSuccess, totalCount);
+  }
+
   validateBridgeLength(size) {
     try {
       BridgeValidator.isInRange(size, BRIDGE_LENGTH.START, BRIDGE_LENGTH.END);
