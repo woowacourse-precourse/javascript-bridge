@@ -25,7 +25,7 @@ class App {
   }
 
   createBridge(input) {
-    this.errorHandler(() => {
+    this.tryCatch(() => {
       BridgeValidation(input);
       this.#game = new BridgeGame(input);
       readMoving.bind(this)(this.moveBridge);
@@ -33,7 +33,7 @@ class App {
   }
 
   moveBridge(input) {
-    this.errorHandler(() => {
+    this.tryCatch(() => {
       MoveValidation(input);
       this.#game.move(input);
       printMap(this.#game.result);
@@ -50,7 +50,7 @@ class App {
   }
 
   controlGame(input) {
-    this.errorHandler(() => {
+    this.tryCatch(() => {
       ControlValidation(input);
       if (input === RETRY) {
         this.#game.retry();
@@ -64,17 +64,21 @@ class App {
     end();
   }
 
-  errorHandler(callback) {
+  tryCatch(callback) {
     try {
       callback();
     } catch (err) {
-      printError(err);
-      if (err.name === ERROR_NAME.BRIDGE)
-        readBridgeSize.bind(this)(this.createBridge);
-      if (err.name === ERROR_NAME.CONTROL)
-        readGameCommand.bind(this)(this.controlGame);
-      if (err.name === ERROR_NAME.MOVE) readMoving.bind(this)(this.moveBridge);
+      this.errorHandler(err);
     }
+  }
+  
+  errorHandler(err) {
+    printError(err);
+    if (err.name === ERROR_NAME.BRIDGE)
+      readBridgeSize.bind(this)(this.createBridge);
+    if (err.name === ERROR_NAME.CONTROL)
+      readGameCommand.bind(this)(this.controlGame);
+    if (err.name === ERROR_NAME.MOVE) readMoving.bind(this)(this.moveBridge);
   }
 }
 new App().play();

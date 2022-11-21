@@ -80,6 +80,7 @@ describe('다리 건너기 테스트', () => {
     ]);
     expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
   });
+
   test('기능테스트', () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 0, 0, 1]);
