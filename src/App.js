@@ -5,13 +5,9 @@ class App {
 
 
   play() {
-    this.start();
-  }
-
-  start() {
     OutputView.printStartMessage();
     this.bridgeGame = new BridgeGame();
-    this.bridgeGame.set();
+    this.bridgeGame.start();
   }
 }
 
