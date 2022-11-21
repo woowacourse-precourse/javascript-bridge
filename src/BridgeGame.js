@@ -21,13 +21,18 @@ const RecallUntilCorrect = require("./RecallUntilCorrect.js");
    */
   move(moveCount) {
     const moving = RecallUntilCorrect.recallReadMoving(true);
+    return this.comparePlayerAndMap(moving, moveCount);
+  }
+  comparePlayerAndMap(moving, moveCount){
     if(moving===this.#bridgeMap[moveCount]){
       const MAP = this.isUpOrDown(moving, true);
-      this.addUpDownMap(MAP);
+      if(MAP!=undefined)
+        this.addUpDownMap(MAP);
       return true;
     }else{
       const MAP = this.isUpOrDown(moving, false);
-      this.addUpDownMap(MAP);
+      if(MAP!=undefined)
+        this.addUpDownMap(MAP);
       return false;
     }
   }

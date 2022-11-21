@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const App = require("../src/App");
+const BridgeGame = require("../src/BridgeGame");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -23,10 +23,8 @@ const getOutput = (logSpy) => {
 const runException = (inputs) => {
   mockQuestions(inputs);
   const logSpy = getLogSpy();
-  const app = new App();
-
-  app.play();
-
+  const player = new BridgeGame(["U","D","D"]);
+    player.move(0);
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
 
@@ -36,20 +34,20 @@ const expectLogContains = (received, logs) => {
   });
 };
   
-describe("다리 길이 입력 테스트", () => {
-  test("예외 테스트 - 길이가 범위를 벗어난 경우", () => {
-    runException(["2"]);
+describe("플레이어 이동 입력 테스트", () => {
+  test("예외 테스트 - U,D 가 아닌 경우", () => {
+    runException(["u"]);
   });
-  test("예외 테스트 - 길이가 범위를 벗어난 경우", () => {
-    runException(["22"]);
+  test("예외 테스트 - U,D 가 아닌 경우", () => {
+    runException(["A"]);
   });
-  test("예외 테스트 - 숫자가 아닌 경우", () => {
-    runException(["a"]);
-  });
-  test("예외 테스트 - 숫자가 아닌 경우", () => {
-    runException(["?"]);
-  });
-  test("예외 테스트 - 숫자가 아닌 경우", () => {
+  test("예외 테스트 - U,D 가 아닌 경우", () => {
     runException([" "]);
+  });
+  test("예외 테스트 - 1글자가 아닌 경우", () => {
+    runException(["UD"]);
+  });
+  test("예외 테스트 - 1글자가 아닌 경우", () => {
+    runException(["UU"]);
   });
 });
