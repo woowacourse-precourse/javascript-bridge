@@ -18,15 +18,15 @@ class BridgeMap {
     this.#isFirst = true;
   }
 
-  handleMap(boolean, input) {
+  handleMap(moveStatement, input) {
     if (this.#isFirst) {
-      this.#bridgeMap = this.addMap(boolean, input);
+      this.#bridgeMap = this.addMap(moveStatement, input);
       this.#isFirst = false;
-      return true;
+      return 'isFirst';
     }
     if (!this.#isFirst) {
-      this.#bridgeMap = this.addMap(boolean, input);
-      return true;
+      this.#bridgeMap = this.addMap(moveStatement, input);
+      return 'isNotFirst';
     }
     return true;
   }
