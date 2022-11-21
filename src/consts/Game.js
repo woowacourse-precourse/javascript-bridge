@@ -7,6 +7,8 @@ const GAME = Object.freeze({
     0: 'D',
     1: 'U',
   },
+  RESTART: 'R',
+  QUIT: 'Q',
 });
 
 module.exports = GAME;
