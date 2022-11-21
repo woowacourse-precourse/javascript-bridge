@@ -1,7 +1,3 @@
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
-const { printMap, printResult } = OutputView;
-const { readMoving, readGameCommand } = InputView;
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -54,7 +50,7 @@ class BridgeGame {
       return "over";
     // readGameCommand(this);
     else if (this.bridge.length === nowIndex + 1)
-      return "win" //printResult(this, true);
+      return "win"; //printResult(this, true);
     else return "next"; //readMoving(this);
   }
 
