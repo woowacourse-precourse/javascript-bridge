@@ -23,6 +23,7 @@ InputView)<br>
 OutputView)<br>
 &nbsp; printMap: 이동 상태 배열로 전달받아서 출력<br>
 &nbsp; printResult: 이동 상태 배열/성공 여부/시도 횟수 전달받아서 출력<br>
+&nbsp; printStart: 시작 문구 출력
 
 BridgeGame)<br>
 &nbsp; move: 현재 이동 상태, 만들어진 다리, 이동할 칸 입력받아서 다리 배열의 이동 상태.length번째 값과 이동할 칸의 값이 같으면 해당 자리에 O, 다르면 넣어서 출력<br>
