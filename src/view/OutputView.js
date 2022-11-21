@@ -31,11 +31,11 @@ const OutputView = {
     const [upside, downside] = bridgeGame.toStringMap();
 
     Console.print(`
-      ${GAME_MESSAGE.RESULT_BRIDGE}\n
-      ${upside}\n
-      ${downside}\n
-      ${GAME_MESSAGE.RESULT_STATUS}${success}\n
-      ${GAME_MESSAGE.ROUND}${bridgeGame.getRound()}
+${GAME_MESSAGE.RESULT_BRIDGE}\n
+${upside}\n
+${downside}\n
+${GAME_MESSAGE.RESULT_STATUS}${success}\n
+${GAME_MESSAGE.ROUND}${bridgeGame.getRound()}
     `);
   },
 };
