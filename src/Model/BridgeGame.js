@@ -30,6 +30,20 @@ class BridgeGame {
 
     this.#currentSize++;
   }
+
+  isFinished() {
+    if (this.#size === this.#currentSize) return true;
+    return false;
+  }
+
+  isFailed() {
+    if (this.#failed) return true;
+    return false;
+  }
+
+  checkFail() {
+    this.#failed = true;
+  }
 }
 
 module.exports = BridgeGame;
