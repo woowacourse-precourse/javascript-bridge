@@ -1,4 +1,4 @@
-const { isPlayerPassed, isPlayerCleared } = require('../src/Utils/CheckPlayerStatus');
+const { isPlayerPassed, isPlayerCleared } = require('../src/CheckPlayerStatus');
 
 describe('CheckPlayerStatus 테스트', () => {
   test('[isPlayerPassed] : 입력된 move값과 bridge의 값이 일치하면 true를 반환한다', () => {

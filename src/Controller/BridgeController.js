@@ -1,8 +1,8 @@
-const BridgeGame = require('./BridgeGame');
-const { readBridgeSize, readMoving, readGameCommand, exit } = require('./InputView');
-const { printMap, printResult } = require('./OutputView');
-const { isPlayerPassed, isPlayerCleared } = require('./Utils/CheckPlayerStatus');
-const { INPUT_RETRY } = require('./Constants/InputValues');
+const BridgeGame = require('../Model/BridgeGame');
+const { readBridgeSize, readMoving, readGameCommand, exit } = require('../View/InputView');
+const { printMap, printResult } = require('../View/OutputView');
+const { isPlayerPassed, isPlayerCleared } = require('../CheckPlayerStatus');
+const { INPUT_RETRY } = require('../Constants/InputValues');
 
 /**
  * BridgeGame(모델) 과 InputView, OutputView(뷰)를 조작하는 컨트롤러

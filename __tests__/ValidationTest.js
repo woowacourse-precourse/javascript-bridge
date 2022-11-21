@@ -3,7 +3,7 @@ const {
   isCorrectCharactor,
   isCorrectMoveCommand,
   isCorrectOptionCommand,
-} = require('../src/Utils/Validation');
+} = require('../src/Validation');
 
 describe('Validation 테스트', () => {
   // 조건

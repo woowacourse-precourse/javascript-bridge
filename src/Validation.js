@@ -1,5 +1,5 @@
-const { ERROR_MESSAGE } = require('../Constants/Message');
-const { INPUT_CHAR, INPUT_RETRY } = require('../Constants/InputValues');
+const { ERROR_MESSAGE } = require('./Constants/Message');
+const { INPUT_CHAR, INPUT_RETRY } = require('./Constants/InputValues');
 
 /**
  * 다리 길이가 유효한지 판별하는 메서드

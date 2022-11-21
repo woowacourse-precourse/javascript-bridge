@@ -1,11 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { INPUT_MESSAGE } = require('./Constants/Message');
+const { INPUT_MESSAGE } = require('../Constants/Message');
 const {
   isCorrectBridgeSize,
   isCorrectCharactor,
   isCorrectMoveCommand,
   isCorrectOptionCommand,
-} = require('./Utils/Validation');
+} = require('../Validation');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.

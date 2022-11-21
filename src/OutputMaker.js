@@ -1,5 +1,5 @@
-const { INPUT_CHAR } = require('../Constants/InputValues');
-const { STATUS } = require('../Constants/BridgeStatus');
+const { INPUT_CHAR } = require('./Constants/InputValues');
+const { STATUS } = require('./Constants/BridgeStatus');
 
 /**
  * 이동에 따른 출력을 생성하는 역할을 한다.

@@ -1,4 +1,4 @@
-const OutputMaker = require('../src/Utils/OutputMaker');
+const OutputMaker = require('../src/OutputMaker');
 
 describe('OutputMaker 테스트', () => {
   test('[makeOutput] : 입력된 값에 따라 정상적으로 output을 반환하는지 테스트', () => {

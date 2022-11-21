@@ -1,4 +1,4 @@
-const BridgeGame = require('../src/BridgeGame');
+const BridgeGame = require('../src/Model/BridgeGame');
 const { Random } = require('@woowacourse/mission-utils');
 
 describe('BridgeGame 테스트', () => {
