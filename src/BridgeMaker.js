@@ -11,7 +11,7 @@ const BridgeMaker = {
     let bridge = [];
 
     Array.from({ length: size }).forEach(() => {
-      bridge = [...bridge, generateRandomNumber() === 1 ? "U" : "D"];
+      bridge = [...bridge, generateRandomNumber() === 1 ? 'U' : 'D'];
     });
 
     console.log(bridge);
