@@ -5,4 +5,10 @@ module.exports = {
 
     DIRECTION_ERROR: "[ERROR] U 또는 D를 입력해주세요.",
   },
+
+  GAME_STATE: {
+    SUCCESS: "성공",
+    FAIL: "실패",
+    PASS: "통과",
+  },
 };
