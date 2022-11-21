@@ -11,13 +11,14 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   async move(bridgeSize, bridge, moveCount) {
+    let where = null;
     while (bridgeSize > moveCount) {
-      let where = this.movingValidate(await InputView.readMoving());
-      console.log(where)
-      if (bridge[moveCount] === where) {
+      where = this.movingValidate(await InputView.readMoving());
+      console.log(where);
+      if ((where === "U" || where === "D") && bridge[moveCount] === where) {
         return "O";
       }
-      else {
+      if ((where === "U" || where === "D") && bridge[moveCount] !== where) {
         return "X";
       }
     }
@@ -32,7 +33,7 @@ class BridgeGame {
         throw "[ERROR] 이동할 칸은 U나 D만 입력 가능합니다.";
       }
     } catch (err) {
-      console.log(err);
+      return err;
     }
   }
   /**

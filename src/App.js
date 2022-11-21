@@ -29,9 +29,10 @@ class App {
       } else if (gameResults === "X") {
         OutputView.printMap(bridge.slice(0, moveCount + 1), moveCommand);
         retry = await bridgeGame.retry();
-        this.isRetry();
+        this.isRetry(retry, tryNumber, moveCommand);
       } else if (gameResults === "END") {
-        this.isRetry();
+        retry = await bridgeGame.retry();
+        this.isRetry(retry, tryNumber, moveCommand);
       } else {
         retry == "R";
       }
@@ -58,13 +59,13 @@ class App {
     }
   }
 
-  isRetry(command, tryNumber, gameResults) {
+  isRetry(command, tryNumber, moveCommand) {
     if (command === "R") {
       return tryNumber++;
     }
     if (command === "Q") {
       console.log("최종결과 프린트");
-      OutputView.printResult(false, tryNumber, gameResults);
+      OutputView.printResult(false, tryNumber, moveCommand);
     }
   }
 }
