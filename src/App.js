@@ -27,6 +27,19 @@ class App {
       this.#movingInputPhase();
     });
   }
+
+  #movingInputPhase() {
+    InputView.readMoving((moving) => {
+      try {
+        Validator.errorIfMovingInvalid(moving);
+      } catch (error) {
+        OutputView.printMessage(ERROR.INVALID_MOVING);
+        this.#movingInputPhase();
+        return;
+      }
+      this.#showBridgePhase(moving);
+    });
+  }
 }
 
 module.exports = App;
