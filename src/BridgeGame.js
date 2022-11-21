@@ -1,4 +1,5 @@
 const Bridge = require('./Bridge');
+const Map = require('./Map');
 const { readBridgeSize, readMoving } = require('./InputView');
 const { printStart } = require('./OutputView');
 
@@ -7,9 +8,11 @@ const { printStart } = require('./OutputView');
  */
 class BridgeGame {
   #bridge;
+  #map;
 
   constructor() {
     this.#bridge = new Bridge();
+    this.#map = new Map();
   }
 
   startGame() {
@@ -29,6 +32,8 @@ class BridgeGame {
    */
   move(movingCommand) {
     const isMovable = this.#bridge.judgeIsMovable(movingCommand);
+
+    const mapRows = this.#map.record(isMovable, movingCommand);
   }
 
   /**
