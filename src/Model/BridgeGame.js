@@ -46,6 +46,11 @@ class BridgeGame {
     return this.#lowerTrack;
   }
 
+  keepGoing() {
+    const lastPath = [this.#upperTrack.pop(), this.#lowerTrack.pop()];
+    return lastPath.includes(PATH.RIGHT) ? true : false;
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
