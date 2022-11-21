@@ -20,30 +20,6 @@ const InputView = {
   },
 
   /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {
-    let moveInput;
-    readLine(MESSAGE.INPUT.MOVE(MOVE.UP, MOVE.DOWN), (input) => {
-      Validate.notAvailableMove(input, Object.values(MOVE));
-      moveInput = input;
-    });
-    return moveInput;
-  },
-
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {
-    let restartOrQuit;
-    readLine(MESSAGE.INPUT.RESTART_OR_QUIT(PLAY.RESTART, PLAY.RESTART), (input) => {
-      Validate.notAvailablePlay(input, Object.values(PLAY));
-      restartOrQuit = input;
-    });
-    return restartOrQuit;
-  },
-
-  /**
    * 다리의 길이가 제대로 될 때까지 입력받는다.
    */
   getBridgeSize() {
@@ -55,6 +31,50 @@ const InputView = {
       return bridgeSize;
     }
     this.getBridgeSize();
+  },
+
+  /**
+   * 사용자가 이동할 칸을 입력받는다.
+   */
+  readMoving() {
+    let move;
+    readLine(MESSAGE.INPUT.MOVE(MOVE.UP, MOVE.DOWN), (input) => {
+      move = input;
+    });
+    return move;
+  },
+
+  /**
+   * 사용자가 이동할 칸이 제대로 될 때까지 입력받는다.
+   */
+  getMoving() {
+    const move = this.readMoving();
+    if (Validate.notAvailableMove(move, Object.values(MOVE))) {
+      return move;
+    }
+    this.readMoving();
+  },
+
+  /**
+   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   */
+  readGameCommand() {
+    let gameCommand;
+    readLine(MESSAGE.INPUT.RESTART_OR_QUIT(PLAY.RESTART, PLAY.QUIT), (input) => {
+      gameCommand = input;
+    });
+    return gameCommand;
+  },
+
+  /**
+   * 사용자가 게임을 다시 시도할지 종료할지 여부를 제대로 될 때까지 입력받는다.
+   */
+  getMGameCommand() {
+    const gameCommand = this.readGameCommand();
+    if (Validate.notAvailablePlay(gameCommand, Object.values(PLAY))) {
+      return gameCommand;
+    }
+    this.readGameCommand();
   },
 };
 

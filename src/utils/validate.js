@@ -27,15 +27,27 @@ class Validate {
   }
 
   static notAvailableMove(input, availableMoves) {
-    if (!availableMoves.includes(input)) {
-      throw new Error(ERROR.NOT_AVAILABLE_MOVE(availableMoves));
+    try {
+      if (!availableMoves.includes(input)) {
+        throw new Error(ERROR.NOT_AVAILABLE_MOVE(availableMoves));
+      }
+    } catch (error) {
+      print(error.message);
+      return false;
     }
+    return true;
   }
 
   static notAvailablePlay(input, availablePlay) {
-    if (!availablePlay.includes(input)) {
-      throw new Error(ERROR.NOT_AVAILABLE_PLAY(availablePlay));
+    try {
+      if (!availablePlay.includes(input)) {
+        throw new Error(ERROR.NOT_AVAILABLE_PLAY(availablePlay));
+      }
+    } catch (error) {
+      print(error.message);
+      return false;
     }
+    return true;
   }
 }
 
