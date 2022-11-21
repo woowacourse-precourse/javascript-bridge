@@ -1,4 +1,3 @@
-/* eslint-disable */
 const Validation = require('../src/model/Validaion');
 const BridgeMaker = require('../src/BridgeMaker');
 const { BRIDGESIZE_KEY, MOVEMENT_KEY, COMMAND_KEY } = require('../src/constant/Key');
