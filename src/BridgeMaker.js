@@ -18,7 +18,6 @@ const BridgeMaker = {
     for (let number = 0; number < size; number++) {
       const RANDOM = generateRandomNumber();
       Validator.isBoolNumber(RANDOM);
-      console.log(RANDOM);
       bridgeStatus.push(BRIDGE_ALPHABET[RANDOM]);
     }
 
