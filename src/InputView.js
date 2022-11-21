@@ -29,6 +29,7 @@ const InputView = {
    */
   getBridgeSize() {
     const bridgeSize = this.readBridgeSize();
+    if (bridgeSize === undefined) return;
     try {
       this.validateBridgeSize(bridgeSize);
       return bridgeSize;
@@ -54,6 +55,7 @@ const InputView = {
    */
   getMoving() {
     const move = this.readMoving();
+    if (move === undefined) return;
     try {
       Validate.notAvailableMove(move, Object.values(MOVE));
       return move;
@@ -79,6 +81,7 @@ const InputView = {
    */
   getGameCommand() {
     const gameCommand = this.readGameCommand();
+    if (gameCommand === undefined) return;
     try {
       Validate.notAvailablePlay(gameCommand, Object.values(PLAY));
       return gameCommand;
