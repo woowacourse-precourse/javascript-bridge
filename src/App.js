@@ -99,6 +99,16 @@ class App {
       this.readMoving();
     }
   }
+
+  checkGameOver() {
+    const gameReuslt = !this.isGameOver();
+
+    if (gameReuslt) {
+      this.checkGameFinish();
+    } else {
+      this.readGameCommand();
+    }
+  }
 }
 
 module.exports = App;
