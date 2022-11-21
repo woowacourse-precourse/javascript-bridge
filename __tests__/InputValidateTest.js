@@ -24,4 +24,18 @@ describe("입력값 유효성 검사 테스트", () => {
       InputValidator.checkRestart("U");
     }).toThrow("[ERROR]");
   });
+
+  test("아무것도 입력되지 않는다면 에러를 발생시킨다.", () => {
+    const checkFunc = [
+      InputValidator.checkBridgeSize,
+      InputValidator.checkMove,
+      InputValidator.checkRestart,
+    ];
+
+    for (let i = 0; i < checkFunc.length; i++) {
+      expect(() => {
+        checkFunc[i]("");
+      }).toThrow("[ERROR]");
+    }
+  });
 });

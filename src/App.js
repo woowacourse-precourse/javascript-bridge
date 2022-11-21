@@ -6,8 +6,9 @@ class App {
   constructor() {}
 
   play() {
-    this.#bridgeGameController.startGame();
+    this.#bridgeGameController.start();
   }
 }
 
 module.exports = App;
+new App().play();

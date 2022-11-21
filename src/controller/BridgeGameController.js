@@ -12,23 +12,23 @@ class BridgeGameController {
 
   constructor() {}
 
-  startGame() {
+  start() {
+    OutputView.printStart();
+
     this.inputBridgeSize();
   }
 
   inputBridgeSize() {
-    OutputView.printStart();
-
     InputView.readBridgeSize((size) => {
       InputValidator.checkBridgeSize(size);
 
-      this.handleBridgeMaking(size);
+      this.handleMakeBridge(size);
 
-      this.inputPositionUntilBridgeEnds();
+      this.inputMoveDirection();
     });
   }
 
-  inputPositionUntilBridgeEnds() {
+  inputMoveDirection() {
     InputView.readMoving((input) => {
       InputValidator.checkMove(input);
 
@@ -36,7 +36,16 @@ class BridgeGameController {
     });
   }
 
-  handleBridgeMaking(size) {
+  inputRestartCommand() {
+    InputView.readGameCommand((input) => {
+      InputValidator.checkRestart(input);
+
+      if (input === "R") return this.handleRestart();
+      if (input === "Q") return this.handleQuit();
+    });
+  }
+
+  handleMakeBridge(size) {
     this.#bridgeGame = new BridgeGame(
       BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate)
     );
@@ -46,8 +55,11 @@ class BridgeGameController {
     const isNextDirectionCorrect =
       this.#bridgeGame.getCorrectDirection() === input;
 
-    if (isNextDirectionCorrect) return this.movePosition();
-    return this.stopPosition();
+    if (isNextDirectionCorrect) return this.handleMove();
+
+    OutputView.printMap(this.#bridgeGame.getCrossState("failed"));
+
+    return this.inputRestartCommand();
   }
 
   handleGameSuccess() {
@@ -63,7 +75,7 @@ class BridgeGameController {
   handleRestart() {
     this.#bridgeGame.retry();
 
-    this.inputPositionUntilBridgeEnds();
+    return this.inputMoveDirection();
   }
 
   handleQuit() {
@@ -73,10 +85,10 @@ class BridgeGameController {
       this.#bridgeGame.totalTrial
     );
 
-    Console.close();
+    return Console.close();
   }
 
-  movePosition() {
+  handleMove() {
     this.#bridgeGame.move();
 
     if (this.#bridgeGame.getIsLastPosition()) {
@@ -85,20 +97,7 @@ class BridgeGameController {
 
     OutputView.printMap(this.#bridgeGame.getCrossState("success"));
 
-    this.inputPositionUntilBridgeEnds();
-  }
-
-  stopPosition() {
-    OutputView.printMap(this.#bridgeGame.getCrossState("failed"));
-
-    InputView.readGameCommand((input) => {
-      if (input === "R") {
-        return this.handleRestart();
-      }
-      if (input === "Q") {
-        return this.handleQuit();
-      }
-    });
+    return this.inputMoveDirection();
   }
 }
 

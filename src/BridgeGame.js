@@ -30,7 +30,6 @@ class BridgeGame {
     return this.totalTrial;
   }
 
-  // TODO: 다리 건너는 과정 찍어주는 로직 변경해보기
   getCrossState(state) {
     if (state === "failed")
       return [
