@@ -36,6 +36,13 @@ class Player {
                 break;
             }
         }
+        if (!isSuccessed) {
+            const gameCommandInput = InputView.readGameCommand();
+            const isRetried = bridgeGame.retry(gameCommandInput);
+            if (isRetried) {
+                this.repeatMove(bridgeAnswer, bridgeGame);
+            }
+        }
         OutputView.printResult(currentBridge);
         OutputView.printGameSuccess(isSuccessed);
         OutputView.printTryCount(tryCount);
