@@ -18,10 +18,7 @@ class App {
    */
   play() {
     printStart();
-    readBridgeSize((size) => {
-      checkVaildBridgeSize(size);
-      this.startGame(size)
-    });
+    this.setGame()
   }
 
     /**
