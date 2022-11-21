@@ -10,6 +10,7 @@ const OutputView = {
     MOVE: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
     RETRY: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
   },
+
   validate(text) {
     if (!text) {
       throw new Error('문자열을 입력해야 합니다.');
@@ -33,7 +34,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(successOrFailure, tryCount) {
+    this.print(`
+    게임 성공 여부: ${successOrFailure}
+    총 시도한 횟수: ${tryCount}
+    `);
+  },
 };
 
 module.exports = OutputView;
