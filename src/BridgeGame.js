@@ -39,6 +39,10 @@ class BridgeGame {
     //console.log(this.#bridge);
   }
 
+  getCurrBridge() {
+    return this.#currBridge;
+  }
+
   move(bridgeChoice) {
     //Validate.bridgeChoice(bridgeChoice);
     this.#userLog.push(bridgeChoice);
