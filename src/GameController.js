@@ -12,8 +12,8 @@ class GameController {
   #selectedPath;
 
   constructor() {
-    this.start();
     this.#bridgeGame = new BridgeGame();
+    this.start();
   }
 
   start() {
@@ -27,6 +27,7 @@ class GameController {
         new BridgeSizeValidation(input);
         const bridgeSize = Number(input);
         this.#bridgeGame.saveBridge(bridgeSize);
+        OutputView.printMessage("");
         this.askForPath();
       } catch (e) {
         OutputView.printMessage(e);
