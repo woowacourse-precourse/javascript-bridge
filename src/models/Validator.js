@@ -1,22 +1,24 @@
+const { BRIDGE, HOTKEY, ERROR } = require("../constants/constants");
+
 class Validator {
   checkBridgeLengthInput(bridgeLength) {
     if (this.isNotNumber(bridgeLength)) {
-      throw new Error('[ERROR] 다리 길이는 숫자만 입력 가능합니다.\n');
+      throw new Error(ERROR.notNumber);
     }
     if (this.isNotRangeOfBridgeLength(bridgeLength)) {
-      throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n');
+      throw new Error(ERROR.notRangeOfBridgeLength);
     }
   }
 
   checkDirectionInput(direction) {
     if (this.isNotValidDirectionInput(direction)) {
-      throw new Error('[ERROR] 이동할 칸은 위: U, 아래: D 만 입력 가능합니다.\n')
+      throw new Error(ERROR.notValidDirectionInput)
     }
   }
 
   checkRetryInput(input) {
     if (this.isNotValidRetryInput(input)) {
-      throw new Error('[ERROR] 재시도: R, 종료: Q 만 입력 가능합니다.\n')
+      throw new Error(ERROR.notValidRetryInput)
     }
   }
 
@@ -26,15 +28,15 @@ class Validator {
   }
 
   isNotRangeOfBridgeLength(bridgeLength) {
-    return bridgeLength < 3 || bridgeLength > 20; 
+    return bridgeLength < BRIDGE.min || bridgeLength > BRIDGE.max; 
   }
 
   isNotValidDirectionInput(direction) {
-    return direction !== 'U' && direction !== 'D';
+    return direction !== HOTKEY.up && direction !== HOTKEY.down;
   }
 
   isNotValidRetryInput(input) {
-    return input !== 'R' && input !== 'Q';
+    return input !== HOTKEY.retry && input !== HOTKEY.quit;
   }
 }
 
