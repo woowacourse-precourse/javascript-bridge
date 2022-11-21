@@ -5,11 +5,10 @@ const { printMap, printResult, printResultMap } = require("./OutputView");
 class Controller {
   #bridgeGame;
   #tryingNum;
-  #moving;
 
   constructor() {
-    this.init();
     this.#tryingNum = 1;
+    this.init();
   }
   init() {
     readBridgeSize((bridgeSize)=>{
@@ -19,17 +18,15 @@ class Controller {
   }
   play() {
     readMoving((moving) => {
-      this.#moving = moving;
-      const isMatch = this.#bridgeGame.move(this.#moving);
+      const isMatch = this.#bridgeGame.move(moving);
       this.showMap();
       this.handleBridgeGame(isMatch);
     })
   }
 
   showMap() {
-    const upMap = this.#bridgeGame.getMap(true, this.#moving);
-    const downMap = this.#bridgeGame.getMap(false, this.#moving);
-    printMap(upMap,downMap);
+    const map = this.#bridgeGame.result();
+    printMap(map);
   }
 
   handleBridgeGame(isMatch){
@@ -43,6 +40,7 @@ class Controller {
     }
     this.play();
   }
+
   askReplay(){
     readGameCommand((retry) => {
       if(retry === 'R'){

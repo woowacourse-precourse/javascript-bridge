@@ -18,18 +18,19 @@ class BridgeGame {
 
   move(moving) {
     this.#step += 1;
-    const isMatch = this.#bridge.matchMoveBridge(moving, this.#step);
-    this.#bridgeMap.buildMap(isMatch);
+    const isMatch =  this.#bridge.matchMoveBridge(moving, this.#step);
+    this.#bridgeMap.buildMap(moving, isMatch);
     return isMatch;
   }
-  
-  getMap(isUp, moving) {
-    return isUp ? this.#bridgeMap.upMap(moving) : this.#bridgeMap.downMap(moving);
+
+  result() {
+    return this.#bridgeMap.getMap();
   }
 
   isEnd() {
     return this.#bridge.isReach(this.#step);
   }
+
   retry() {
     this.#bridgeMap = new BridgeMap();
     this.#step = -1;

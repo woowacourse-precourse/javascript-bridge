@@ -2,9 +2,9 @@ const { Console } = require("@woowacourse/mission-utils");
 const { OUTPUT_MESSAGE } = require("./constants/OutputMessage");
 
 const OutputView = {
-  printMap(upMap,downMap) {
-    Console.print(`[ ${upMap.join(' | ')} ]`);
-    Console.print(`[ ${downMap.join(' | ')} ]`);
+  printMap(map) {
+    Console.print(`[ ${map['U'].join(' | ')} ]`);
+    Console.print(`[ ${map['D'].join(' | ')} ]`);
   },
 
   printResult(isMatch, tryingNum) {

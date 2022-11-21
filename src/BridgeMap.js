@@ -2,33 +2,28 @@ class BridgeMap {
   #bridgeMap;
 
   constructor() {
-    this.#bridgeMap = [];
+    this.#bridgeMap = {'U':[],'D':[]};
   }
 
-  buildMap(isMatch) {
+  buildMap(moving, isMatch) {
     const result = isMatch? 'O' : 'X';
-    this.#bridgeMap = [...this.#bridgeMap, result];
+    this.buildUpMap(moving, result);
+    this.buildDownMap(moving, result);
     return this.#bridgeMap;
   }
 
-  upMap(moving){
-    const upMap = this.#bridgeMap.map((result)=>{
-      if(moving === 'U'){
-        return result;
-      }
-      return ' ';
-    });
-    return upMap;
+  buildUpMap(moving, result){
+    const isUp =  moving === 'U';
+    this.#bridgeMap['U'] = [...this.#bridgeMap['U'], isUp? result : ' '];
   }
 
-  downMap(moving){
-    const downMap = this.#bridgeMap.map((result)=>{
-      if(moving === 'D'){
-        return result;
-      }
-      return ' ';
-    });
-    return downMap;
+  buildDownMap(moving, result){
+    const isDown =  moving === 'D';
+    this.#bridgeMap['D'] = [...this.#bridgeMap['D'], isDown? result : ' '];
+  }
+
+  getMap(){
+    return this.#bridgeMap;
   }
 }
 
