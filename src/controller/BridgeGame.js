@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { COMMAND } = require('../utils/constant');
 const { readMoving, readGameCommand } = require('../view/InputView');
 const { printResult } = require('../view/OutputView');
 
@@ -47,10 +48,10 @@ class BridgeGame {
   }
 
   commandProcess(command) {
-    if (command === 'R') {
+    if (command === COMMAND.RETRY) {
       return readMoving(this.#gameManager, 0);
     }
-    if (command === 'Q') {
+    if (command === COMMAND.QUIT) {
       this.quitGame(false, this.#gameManager.getBridge());
     }
     return null;

@@ -1,5 +1,6 @@
 const { makeBridge } = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const { COMMAND } = require('../utils/constant');
 const { printMap } = require('../view/OutputView');
 
 class Bridge {
@@ -47,11 +48,11 @@ class Bridge {
   }
 
   updateMap(index, command, comparison) {
-    if (command === 'U') {
+    if (command === COMMAND.UP) {
       this.#map.up[index] = comparison ? 'O' : 'X';
       this.#map.down[index] = ' ';
     }
-    if (command === 'D') {
+    if (command === COMMAND.DOWN) {
       this.#map.up[index] = ' ';
       this.#map.down[index] = comparison ? 'O' : 'X';
     }

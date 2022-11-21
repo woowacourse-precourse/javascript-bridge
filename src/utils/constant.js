@@ -17,6 +17,12 @@ const OUTPUT_MESSAGE = Object.freeze({
   RESULT: '게임 성공 여부: ',
   TRY: '총 시도한 횟수: ',
 });
+const COMMAND = Object.freeze({
+  UP: 'U',
+  DOWN: 'D',
+  RETRY: 'R',
+  QUIT: 'Q',
+});
 module.exports = {
-  READ_MESSAGE, ERROR_MESSAGE, OUTPUT_MESSAGE,
+  READ_MESSAGE, ERROR_MESSAGE, OUTPUT_MESSAGE, COMMAND,
 };
