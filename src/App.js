@@ -3,6 +3,9 @@ const {gameStart,printMap, printResult, printError} = require("./OutputView");
 const BridgeGame = require("./BridgeGame") ;
 
 class App {
+  constructor(){
+    this.bridgeGame = new BridgeGame()
+  }
   /**
    * 게임 play
    */
@@ -33,6 +36,17 @@ class App {
       return ;
     } 
     this.askRetryFail() ;
+  }
+
+  /**
+   * 다시 할 것인지 물어보고 처리하는 함수
+   */
+   askRetryFail(){
+    readGameCommand((input) => {
+      let retryFail =  this.bridgeGame.retry(input)
+      if (retryFail == "Retry") this.movingBridge() ;
+      else printResult(this.bridgeGame.printMap, this.bridgeGame.tryCount, "Fail")
+    })
   }
 
 }
