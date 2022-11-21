@@ -7,15 +7,18 @@ const { Console } = require('@woowacourse/mission-utils');
 
 class GameManager {
     #bridgeGame
+    #bridgeLength
 
     constructor() {
         this.#bridgeGame = new BridgeGame();
+        this.#bridgeLength = 0;
     }
 
     start() {
         Print.StartMessage();
         Print.Blank();
-        OutputView.readBridgeSize();
+        InputView.readBridgeSize(this.#bridgeLength);
+        Print.UserInput(this.#bridgeLength);
     }
 }
 
