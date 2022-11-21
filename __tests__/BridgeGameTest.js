@@ -14,5 +14,10 @@ describe('다리 건너기 게임 단위 테스트', () => {
         bridgeGame.move('U', [0,1,1]);
         const test = bridgeGame.retry();
         expect(test).toEqual([]);
-    })
+    });
+    it('시도 횟수를 카운트',()=>{
+        let test = 1;
+        const correct = BridgeGame.countTries(test);
+        expect(test).toBe(correct);
+    });
 });
