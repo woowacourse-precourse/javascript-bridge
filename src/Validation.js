@@ -5,10 +5,7 @@ const Validation = {
         let isBridgeSizeValid = true;
         isBridgeSizeValid = this.isBridgeSizeNum(size);
         isBridgeSizeValid = this.isBridgeSizeValue(size);
-        if(Number(size) % 1 !== 0) {
-            Console.print("[ERROR] 다리 길이는 정수여야 합니다.\n");
-            return false;
-        }
+        isBridgeSizeValid = this.isBridgeSizeInt(size);
         return isBridgeSizeValid;
     },
 
@@ -25,6 +22,13 @@ const Validation = {
             return false;
         }
     },
+
+    isBridgeSizeInt(size) {
+        if(Number(size) % 1 !== 0) {
+            Console.print("[ERROR] 다리 길이는 정수여야 합니다.\n");
+            return false;
+        }
+    }
 }
 
 module.exports = Validation;
