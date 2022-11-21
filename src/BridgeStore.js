@@ -29,10 +29,12 @@ class BridgeStore {
     this.#userInputResults = [];
   }
 
+  getUserInputResultLength = () => this.#userInputResults.length;
+
   getUserInputResult = (idx) => this.#userInputResults[idx];
 
-  isGameClear(moveCount) {
-    return this.isSameWithBridgeLength(moveCount)
+  isGameClear() {
+    return this.isSameWithBridgeLength(this.getUserInputResultLength())
     && this.#userInputResults.every(({ result }) => result);
   }
 
@@ -45,11 +47,9 @@ class BridgeStore {
     this.resetUserInputResult();
   }
 
-  /* 게임 성공 여부: 실패
-   총 시도한 횟수: 1 */
-  getGameResult(moveCount) {
+  getGameResult() {
     return {
-      isGameClear: this.isGameClear(moveCount),
+      isGameClear: this.isGameClear(),
       tryCount: this.#tryCount,
     };
   }

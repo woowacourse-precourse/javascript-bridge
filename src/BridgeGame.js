@@ -55,7 +55,7 @@ class BridgeGame {
   };
 
   detectIsGameClear = () => {
-    if (!this.bridgeStore.isGameClear(this.moveCount)) {
+    if (!this.bridgeStore.isGameClear()) {
       return false;
     }
 
@@ -84,7 +84,10 @@ class BridgeGame {
     this.bridgeStore.addUserInputResult(
       { command, result: this.bridgeStore.isMovable(this.moveCount, command) },
     );
-    OutputView.printMap(this.moveCount, this.bridgeStore.getUserInputResult);
+    OutputView.printMap(
+      this.bridgeStore.getUserInputResultLength(),
+      this.bridgeStore.getUserInputResult,
+    );
   };
 
   confirmRetry = (command) => {
@@ -121,9 +124,9 @@ class BridgeGame {
 
   end = () => {
     OutputView.printResult(
-      this.moveCount,
+      this.bridgeStore.getUserInputResultLength(),
       this.bridgeStore.getUserInputResult,
-      this.bridgeStore.getGameResult(this.moveCount),
+      this.bridgeStore.getGameResult(),
     );
     InputView.close();
   };

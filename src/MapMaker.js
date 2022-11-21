@@ -14,16 +14,16 @@ const MapMaker = {
       ? MAP_CHARACTERS.USER_MOVE_RESULT[result] : MAP_CHARACTERS.WHITE_SPACE;
   },
 
-  init(lastMoveCount) {
-    return [[], []].map(() => Array.from({ length: lastMoveCount + 1 }));
+  init(currentResultLength) {
+    return [[], []].map(() => Array.from({ length: currentResultLength }));
   },
 
-  create(lastMoveCount, getUserInputResult) {
-    const bridgeMap = this.init(lastMoveCount)
+  create(currentResultLength, getUserInputResult) {
+    const bridgeMap = this.init(currentResultLength)
       .map((prop, pos) => prop.map((_, idx) => {
         const { command, result } = getUserInputResult(idx);
 
-        return `${this.getMapHead(idx === 0)}${this.getMapCharacter(MAP_CHARACTERS.COMMAND[command] === pos, result)}${this.getMapTail(idx === lastMoveCount)}`;
+        return `${this.getMapHead(idx === 0)}${this.getMapCharacter(MAP_CHARACTERS.COMMAND[command] === pos, result)}${this.getMapTail(idx === currentResultLength - 1)}`;
       }));
 
     return bridgeMap.map((el) => el.join(MAP_CHARACTERS.MIDDLE));

@@ -13,8 +13,8 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(currentMoveCount, getUserInputResult) {
-    const bridgeMap = MapMaker.create(currentMoveCount, getUserInputResult);
+  printMap(totalResultLength, getUserInputResult) {
+    const bridgeMap = MapMaker.create(totalResultLength, getUserInputResult);
 
     this.print(`${bridgeMap.join('\n')}\n`);
   },
@@ -24,14 +24,14 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(lastMoveCount, getUserInputResult, { isGameClear, tryCount }) {
+  printResult(totalResultLength, getUserInputResult, { isGameClear, tryCount }) {
     const gameClearMessage = {
       true: '성공',
       false: '실패',
     };
 
     this.print('최종 게임 결과');
-    this.printMap(lastMoveCount - 1, getUserInputResult);
+    this.printMap(totalResultLength, getUserInputResult);
     this.print(`게임 성공 여부: ${gameClearMessage[isGameClear]}\n총 시도한 횟수: ${tryCount}`);
   },
 };
