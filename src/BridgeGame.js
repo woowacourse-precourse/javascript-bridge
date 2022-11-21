@@ -9,14 +9,45 @@
  */
 class BridgeGame {
   #bridge = [];
+  #process = 0;
+  #map = {
+    U: [],
+    D: [],
+  };
 
   constructor(bridge) {
     this.#bridge = bridge;
   }
 
-  move() {}
+  move(movement) {
+    const result = this.#bridge[this.#process] === movement ? 'success' : 'fail';
+    this.addMap(movement, result);
+    this.#process++;
+
+    if (this.#process === this.#bridge.length) {
+      return result === 'fail' ? result : 'done';
+    }
+    return result;
+  }
 
   retry() {}
+
+  addMap(movement, result) {
+    const sign = result === 'success' ? 'O' : 'X';
+
+    if (movement === 'U') {
+      this.#map['U'].push(sign);
+      this.#map['D'].push(' ');
+    }
+    if (movement === 'D') {
+      this.#map['U'].push(' ');
+      this.#map['D'].push(sign);
+    }
+  }
+
+  getMap() {
+    return this.#map;
+  }
 }
 
 module.exports = BridgeGame;
