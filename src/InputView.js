@@ -35,6 +35,16 @@ const InputView = {
     });
   },
 
+  /**4-1. 이동할 칸 movingInput에 담기*/
+  async inputMoving(bridgeArr) {
+    let movingInput;
+    await this.readMoving()
+    .then(value => {
+      movingInput = value;
+    }).catch(error => Console.print(error.message));
+    return movingInput;
+  },
+
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    * 8. 재시도 여부 입력
@@ -51,7 +61,7 @@ const InputView = {
     })
   )},
 
-  /** 8. 재시도 여부 retryInput에 담기 */
+  /** 8-1. 재시도 여부 retryInput에 담기 */
   async inputRetry() {
     let retryInput;
     await this.readGameCommand()
