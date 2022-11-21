@@ -24,6 +24,10 @@ class BridgeGame {
   checkBridgeCrossed() {
     return this.#upBridge.length === this.#bridge.length;
   }
+
+  canMove(nextDirection) {
+    return nextDirection === this.#bridge[this.#upBridge.length];
+  }
 }
 
 module.exports = BridgeGame;
