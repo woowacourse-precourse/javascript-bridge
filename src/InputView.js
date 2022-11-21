@@ -28,6 +28,7 @@ const InputView = {
       this.readMoving();
     });
   },
+
   getBridgeSize(size) {
     try {
       if (Number(size) < 3 || Number(size) > 20 || isNaN(size)) {
@@ -50,6 +51,7 @@ const InputView = {
       this.judgeContinue(block);
     });
   },
+
   getMoving() {
     try {
       throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.choose_UorD));
@@ -58,14 +60,16 @@ const InputView = {
       this.readMoving();
     }
   },
+
   judgeContinue(block) {
     if (!Controller.checkContinue()) {
-      this.isGameEnd();
+      return this.isGameEnd();
     }
-    if (block === GO.up || (block === GO.down && Controller.checkContinue())) {
-      this.readMoving();
+    if ((block === GO.up || block === GO.down) && Controller.checkContinue()) {
+      return this.readMoving();
     }
   },
+
   isGameEnd() {
     const size = Number(Controller.size);
     if (
@@ -91,6 +95,7 @@ const InputView = {
       }
     });
   },
+  
   getCommand() {
     try {
       throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.choose_RorQ));

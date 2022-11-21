@@ -38,7 +38,7 @@ const Controller = {
     }
   },
 
-  conveyInput(block) {
+  conveyInput(block) { // 이거 수정 굳이 얘를 써서 내려보낼 필요 ㅇ없어짐
     this.addPlayerBlock(block);
   },
 
@@ -100,9 +100,9 @@ const Controller = {
     }
   },
 
-  playerCommand(command) {
-    this.command = command;
-  },
+  // playerCommand(command) {
+  //   this.command = command;
+  // },
 
 };
 
