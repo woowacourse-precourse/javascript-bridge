@@ -16,4 +16,8 @@ const ERROR = Object.freeze({
   RETRY: '[ERROR] 재시도는 R, 종료는 Q 입니다.',
 });
 
-module.exports = { GAME, ERROR };
+const BRIDGE = Object.freeze({
+  MIN_LENGTH: 3,
+  MAX_LENGTH: 20,
+});
+module.exports = { GAME, ERROR, BRIDGE };
