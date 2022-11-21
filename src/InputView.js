@@ -46,6 +46,7 @@ const InputView = {
           if (bridge[idx] === string) {
             return this.readMoving(bridgeGame, idx + 1);
           }
+          bridgeGame.retry(bridgeGame);
         } catch (error) {
           Console.print(error.message);
           this.readMoving(bridgeGame, idx);
@@ -59,7 +60,17 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGame) {
+    Console.print(GAME_MESSAGE.RETRY_INPUT);
+    Console.readLine('', (string) => {
+      try {
+        InputValidator.isRestartQuit(string);
+      } catch (error) {
+        Console.print(error.message);
+        this.readGameCommand(bridgeGame);
+      }
+    });
+  },
 };
 
 module.exports = InputView;
