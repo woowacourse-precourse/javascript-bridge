@@ -52,7 +52,7 @@ class GameController {
       this.quit();
       return;
     }
-    if (this.bridgeGame.isSucceededMove()) {
+    if (this.bridgeGame.isLatestMoveSucceeded()) {
       this.requestDirection();
       return;
     }
@@ -85,10 +85,10 @@ class GameController {
 
   quit() {
     const movementLogs = this.bridgeGame.getMovementLogs();
-    const isSucceeded = this.bridgeGame.isSucceededMove();
+    const isLatestMoveSucceeded = this.bridgeGame.isLatestMoveSucceeded();
     const tryCount = this.bridgeGame.getTryCount();
 
-    OutputView.printResult(movementLogs, isSucceeded, tryCount);
+    OutputView.printResult(movementLogs, isLatestMoveSucceeded, tryCount);
 
     Console.close();
   }

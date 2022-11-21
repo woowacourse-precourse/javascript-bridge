@@ -10,8 +10,8 @@ const OutputView = {
     });
   },
 
-  printResult(logs, isSucceeded, tryCount) {
-    const templates = TemplateMaker.getFinalLogTemplates(logs, isSucceeded, tryCount);
+  printResult(logs, isLatestMoveSucceeded, tryCount) {
+    const templates = TemplateMaker.getFinalLogTemplates(logs, isLatestMoveSucceeded, tryCount);
 
     templates.forEach((template) => {
       Console.print(template);

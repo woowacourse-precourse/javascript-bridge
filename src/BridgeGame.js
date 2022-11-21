@@ -32,7 +32,7 @@ class BridgeGame {
     this.#tryCount += 1;
   }
 
-  isSucceededMove() {
+  isLatestMoveSucceeded() {
     const lastLog = this.#movementLogs.slice(-1)[0];
 
     return lastLog.isCrossable;
@@ -41,9 +41,9 @@ class BridgeGame {
   isEnd() {
     const passedBlockCount = this.#movementLogs.length;
     const isEveryBlockPassed = this.#bridge.isEveryBlockPassed(passedBlockCount);
-    const isSucceededMove = this.isSucceededMove();
+    const isLatestMoveSucceeded = this.isLatestMoveSucceeded();
 
-    return isEveryBlockPassed && isSucceededMove;
+    return isEveryBlockPassed && isLatestMoveSucceeded;
   }
 
   getMovementLogs() {
