@@ -23,6 +23,9 @@ const InputView = {
   },
 
   validateBridgeSize(size) {
+    if (isNaN(Number(size)))
+      throw new Error("[ERROR] 다리 길이는 숫자여야 합니다.");
+
     if (size < 3 || size > 20)
       throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
   },
@@ -49,7 +52,7 @@ const InputView = {
   },
 
   validateMoving(moving) {
-    if (moving !== "U" || moving !== "D")
+    if (moving !== "U" && moving !== "D")
       throw new Error("[ERROR] 이동할 칸은 U 혹은 D 여야 합니다.");
   },
 
@@ -75,7 +78,7 @@ const InputView = {
   },
 
   validateGameCommand(command) {
-    if (command !== "R" || command !== "Q")
+    if (command !== "R" && command !== "Q")
       throw new Error("[ERROR] 재시작 여부는 Q 혹은 R을 입력해야 합니다.");
   },
 };
