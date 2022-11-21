@@ -65,13 +65,15 @@ const InputView = {
    * @param {gameStatusCallback} gameStatusCallback
    */
   readMoving({ getNextGameStatus, setNextGameStatus }) {
-    MissionUtils.Console.readLine(`${this.query.MOVEMENT}\n`, (input) => {
-      const move = input.trim()
+    MissionUtils.Console.readLine(`\n${this.query.MOVEMENT}\n`, (input) => {
+      try {
+        const move = input.trim()
+        this.validateMove(move)
 
-      this.validateMove(move)
-
-      const gameStatus = getNextGameStatus(move)
-      setNextGameStatus(gameStatus)
+        this.handleGameStatus({ getNextGameStatus, setNextGameStatus }, move)
+      } catch (error) {
+        this.handleError(error, setNextGameStatus)
+      }
     })
   },
 

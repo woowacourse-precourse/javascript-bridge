@@ -31,6 +31,7 @@ class App {
       this.#status = nextStatus
     }
 
+    this.#printMap()
     this.#proceedGame()
   }
 
@@ -42,11 +43,22 @@ class App {
         setNextGameStatus: this.#setStatus,
       })
     } else if (this.#status === status.READ_MOVE) {
-      // TODO - InputView.readMoving
+      InputView.readMoving({
+        getNextGameStatus: this.#addBridgeGameMove,
+        setNextGameStatus: this.#setStatus,
+      })
     } else if (this.#status === status.READ_COMMAND) {
       // TODO - InputView.readGameCommand
     } else if (this.#status === status.FINISHED) {
       // TODO - OutputView.printMap + printResult
+    }
+  }
+
+  #printMap() {
+    const needDraw = this.#bridgeGame && this.#bridgeGame.moves.length > 0
+
+    if (needDraw) {
+      OutputView.printMap(this.#bridgeGame.bridge, this.#bridgeGame.moves)
     }
   }
 
@@ -61,6 +73,16 @@ class App {
       BridgeRandomNumberGenerator.generate
     )
     this.#bridgeGame = new BridgeGame(bridge)
+
+    return this.#bridgeGame.getStatus()
+  }
+
+  /**
+   * @param {string} move
+   * @returns {number}
+   */
+  #addBridgeGameMove = (move) => {
+    this.#bridgeGame.move(move)
 
     return this.#bridgeGame.getStatus()
   }
