@@ -1,21 +1,39 @@
+const { Console } = require("@woowacourse/mission-utils");
+const { generate } = require('./BridgeRandomNumberGenerator');
+const { makeBridge } = require("./BridgeMaker");
+const { MESSAGE, ERROR , CONSTANT } = require('./Constant');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
+// - `InputView`의 파일 경로는 변경할 수 있다.
+// - `InputView`의 메서드의 인자는 변경할 수 있다.
+// - 사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
+// - `InputView` 에서만 `MissionUtils`의 `Console.readLine()` 을 이용해 사용자의 입력을 받을 수 있다.
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize() {
+    return Console.readLine(MESSAGE.ASK_BRIDGE_SIZE, (bridgeSize) => {
+      let bridge = makeBridge(bridgeSize, generate);
+      console.log(bridge); // 지워야 될 코드
+      this.readMoving(bridge, CONSTANT.ZERO_INDEX, CONSTANT.FIRST_GAME);      
+    });
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    
+  }
 };
 
 module.exports = InputView;
