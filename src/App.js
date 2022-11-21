@@ -43,4 +43,15 @@ class App {
     );
   }
 
+  upDownCallback(upDownInput) {
+    this.#bridgeGame.move(upDownInput);
+    if (this.bridgeGame.haveBridge()) {
+      this.upDown();
+    }
+    if (!this.bridgeGame.haveBridge()) {
+      this.restart();
+    }
+  }
+}
+
 module.exports = App;
