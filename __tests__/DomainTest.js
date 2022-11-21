@@ -110,4 +110,30 @@ describe('4. 잘못된 칸을 밟았을 때', () => {
       );
     },
   );
+  test('R을 눌러 재시작하고 다리 무사히 건넌 경우', () => {
+    const logSpy = getLogSpy();
+    const model = new Model();
+    const gameView = new GameView(new InputView(), new OutputView());
+    const bridgeGame = new BridgeGame(model, gameView);
+    mockQuestions(['3', 'U', 'D', 'U', 'R', 'U', 'D', 'D']);
+    mockRandoms(['1', '0', '0']);
+
+    bridgeGame.getBridgeSize();
+    bridgeGame.start();
+    const log = getOutput(logSpy);
+
+    expectLogContains(log, [
+      '[ O |   | X ]',
+      '[   | O |   ]',
+      '[ O |   |   ]',
+      '[   | O | O ]',
+    ]);
+    expectBridgeOrder(
+      log,
+      '[ O |   | X ]',
+      '[   | O |   ]',
+      '[ O |   |   ]',
+      '[   | O | O ]',
+    );
+  });
 });
