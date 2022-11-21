@@ -1,18 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const input = async (commandMessage) => {
-  return new Promise((resolve, _) => {
-    Console.readLine(commandMessage, (answer) => {
-      resolve(answer);
-    });
-  });
-}
-
-const handleError = (errorMessage) => {
+const handleInputError = (errorMessage, retry, next) => {
   Console.print(`[ERROR] ${errorMessage}\n`);
+  retry(next);
 }
 
 module.exports = {
-  input,
-  handleError,
+  handleInputError,
 }
