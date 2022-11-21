@@ -8,4 +8,7 @@ const BRIDGE = Object.freeze({
    "1" : "U"
 });
 
-module.exports = {CONSTANT, BRIDGE};
+const MOVE = Object.freeze(["U", "D"]);
+const RETRY = Object.freeze(["R","Q"]);
+
+module.exports = {CONSTANT, BRIDGE, MOVE, RETRY};
