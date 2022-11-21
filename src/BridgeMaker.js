@@ -13,8 +13,7 @@ const BridgeMaker = {
     const bridge = [];
     while (bridge.length < size) {
       const randomNumber = generateRandomNumber();
-      const IS_UP = (randomNumber === 1 || randomNumber === '1');
-      const shape = IS_UP ? BRIDGE_CONSTANTS.up : BRIDGE_CONSTANTS.down;
+      const shape = (randomNumber === 1) ? BRIDGE_CONSTANTS.up : BRIDGE_CONSTANTS.down;
       bridge.push(shape);
     }
 
