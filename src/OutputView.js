@@ -6,7 +6,7 @@ const OutputViewMessages = require("./OutputViewMessages");
 
 const OutputView = {
   startSentence() {
-    MissionUtils.Console.print("다리 건너기 게임을 시작합니다.");
+    MissionUtils.Console.print(OutputViewMessages.startSentence);
   },
   lengthBridgeSentence() {
     MissionUtils.Console.print(OutputViewMessages.lengthBridgeSentence);
