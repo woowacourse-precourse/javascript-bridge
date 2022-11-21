@@ -29,18 +29,19 @@ class App {
   moveUserBridge(answer, bridge, size) {
     bridge.move(answer);
     OutputView.printMap(bridge.getCurrentBridge());
-    this.checkIsGameSuccess(bridge, size);
-    bridge.addStep();
-    this.progressGame(bridge, size);
+    if (!this.checkIsGameSuccess(bridge, size)) {
+      bridge.addStep();
+      this.progressGame(bridge, size);
+    }
   }
 
   checkIsGameSuccess(bridge, size) {
     if (bridge.checkIsLastStep(bridge.step, size - 1)) {
       OutputView.printResult("성공", bridge);
       Console.close();
-
-      return;
+      return true;
     }
+    return false;
   }
 
   stopUserBridge(answer, bridge) {
