@@ -5,26 +5,21 @@ const outputView = require('./outputView');
 
 class App {
   #bridgeGame
-  #remainBridge;
   #isOngoing
 
   constructor() {
     this.#bridgeGame;
-    this.#remainBridge;
     this.#isOngoing;
   }
 
   play() {
     outputView.printStart();
-    inputView.readBridgeSize.call(this,this.generateBridge,this.makeReadMoving);
+    inputView.readBridgeSize.call(this,this.generateBridge);
   }
 
-  generateBridge(size, callbackmakeReadMoving) {
+  generateBridge(size) {
     this.#bridgeGame = new BridgeGame(size);
-    this.#remainBridge = this.#bridgeGame.bridge
-    this.bridgeLength = this.#remainBridge.length
-
-    callbackmakeReadMoving.call(this);
+    this.makeReadMoving.call(this);
   }
 
   makeReadMoving() {
@@ -35,19 +30,17 @@ class App {
   }
 
   makeMovement(userSelect) {
-    const moveResult = this.#bridgeGame.move(userSelect, this.#remainBridge);
+    const moveResult = this.#bridgeGame.move(userSelect);
     this.#isOngoing = moveResult[0];
-    this.#remainBridge = moveResult[1];
-    const moveData = moveResult[2];
+    const moveData = moveResult[1];
 
     this.deliverMapToPrint(moveData);
-    this.checkFinish();
     this.checkOngoing();
   }
 
-  deliverMapToPrint() {
+  deliverMapToPrint(moveData) {
     const map = this.#bridgeGame.readyToPrintMap(moveData);
-    outputView.printMap(map);
+    this.resultMap = outputView.printMap(map);
   }
 
   checkOngoing () {
@@ -55,20 +48,9 @@ class App {
     if (this.#isOngoing === false) return this.makeReadCommand();
   }
 
-  checkFinish() {
-    if (this.#remainBridge.length === 0) {
-      MissionUtils.Console.close();
-      return this.readyToPrintResult();
-    }  
-  }
-
-
   makeReadCommand() {
-
-  }
-
-  readyToPrintResult() {
-    outputView.printResult();
+    const validate = this.#bridgeGame.validateRetry;
+    inputView.readGameCommand.call(this, validate, this.makeRetryOrQuit);
   }
 }
 
