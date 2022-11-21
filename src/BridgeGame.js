@@ -57,6 +57,8 @@ class BridgeGame {
    */
   retry() {}
   play(size) {
+    Validation.validateNumber(size);
+    Validation.validateRange([3,20],size);
     this.#bridgeBoard.makeBoard(size);
     InputView.readMoving(this);
   }
