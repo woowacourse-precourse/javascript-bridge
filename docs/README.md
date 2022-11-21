@@ -11,7 +11,7 @@
 - [ ] 게임 시도 횟수를 센다. - Counter#countTry()
 - [ ] 다리의 정보를 출력한다. - OutputView#printMap()
 - [ ] 게임 결과를 출력한다. - OutputView#printResult()
-- [ ] 게임 시작 메세지를 출력한다. - OutputView#printGameStart()
+- [x] 게임 시작 메세지를 출력한다. - OutputView#printGameStart()
 - [x] 다리의 길이를 입력받고 전달한다. - InputView#readBridgeSize()
 - [x] 사용자가 이동할 칸을 입력받고 전달한다. - InputView#readMoving()
 - [x] 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받고 전달한다. - InputView#readGameCommand()
