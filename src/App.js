@@ -38,6 +38,18 @@ class App {
       InputView.readGameCommand(this.endingBridge.bind(this));
     }
   }
+
+  endingBridge(command) {
+    Validator.checkGameCommand(command);
+    if (command === 'R') {
+      this.#bridgeGame.retry();
+      this.playingBridge();
+    }
+    if (command === 'Q') {
+      OutputView.printResult(this.#bridgeGame);
+      Console.close();
+    }
+  }
 }
 
 module.exports = App;
