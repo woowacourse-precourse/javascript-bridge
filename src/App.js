@@ -156,6 +156,13 @@ class App {
   exit() {
     this.#input.close();
   }
+
+  play() {
+    const moveFunc = this.readMoving.bind(this);
+
+    this.printStartMessage();
+    this.readBridgeSize(moveFunc);
+  }
 }
 
 module.exports = App;
