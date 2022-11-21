@@ -24,7 +24,10 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(re) {
+    if (re !== 'R' && re !== 'Q')
+      throw new Error('[ERROR] 제대로된 값을 입력해주세요!');
+  },
 };
 
 module.exports = InputView;

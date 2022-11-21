@@ -11,13 +11,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridgeHistory) {
-    const line = this.setBridgeMap(bridgeHistory);
+  printMap(bridgeHistory, wrongDirection) {
+    const line = this.setBridgeMap(bridgeHistory, wrongDirection);
     Console.print(line[0]);
     Console.print(line[1]);
   },
 
-  setBridgeMap(bridgeHistory) {
+  setBridgeMap(bridgeHistory, wrongDirection) {
     let line = ['[', '['];
     bridgeHistory.map((direction) => {
       if (direction === 'U') {
@@ -28,6 +28,16 @@ const OutputView = {
         line[1] += correct;
       }
     });
+    if (wrongDirection) {
+      if (wrongDirection === 'U') {
+        line[0] += ' X |';
+        line[1] += '   |';
+      } else {
+        line[0] += '   |';
+        line[1] += ' X |';
+      }
+    }
+
     line[0] = line[0].slice(0, -1);
     line[1] = line[1].slice(0, -1);
     line[0] += ']';

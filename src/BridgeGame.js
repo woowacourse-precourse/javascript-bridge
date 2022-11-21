@@ -29,7 +29,7 @@ class BridgeGame {
   #checkMoveCorrectly(direction, bridge) {
     if (bridge[this.#bridgeHistory.length] === direction)
       this.#moveCorretly(direction, bridge);
-    else this.#moveIncorrectly();
+    else this.#moveIncorrectly(direction, bridge);
   }
 
   #moveCorretly(direction, bridge) {
@@ -39,9 +39,16 @@ class BridgeGame {
     this.move(bridge);
   }
 
-  #moveIncorrectly() {}
+  #moveIncorrectly(direction, bridge) {
+    OutputView.printMap(this.#bridgeHistory, direction);
+    this.#gameSet(bridge);
+  }
 
-  #gameSet() {}
+  #gameSet(bridge) {
+    Console.readLine(MESSAGE.REGAME, (RE) => {
+      InputView.readGameCommand(bridge);
+    });
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
