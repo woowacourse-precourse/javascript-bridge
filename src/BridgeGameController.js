@@ -15,7 +15,9 @@ const BridgeGameController = {
   },
 
   moveBridge(bridgeGame) {
-    InputView.readMoving((moving) => {});
+    InputView.readMoving((moving) => {
+      bridgeGame.move(moving);
+    });
   },
 };
 
