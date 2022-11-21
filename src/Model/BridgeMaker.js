@@ -1,5 +1,3 @@
-const {readBridgeSize} = require("../View/InputView");
-const generateRandomNumber = require("../util/BridgeRandomNumberGenerator");
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -14,11 +12,11 @@ const BridgeMaker = {
     let randomList = [];
     while(size){
       size--
-      randomList.push(generateRandomNumber)
+      randomList.push(generateRandomNumber())
     }
 
     let answerBridgeList = [];
-    answerBridgeList.forEach((value)=>{
+    randomList.forEach((value)=>{
       if(value === 1) answerBridgeList.push("U");
       if(value === 0) answerBridgeList.push("D");
     })
@@ -26,4 +24,5 @@ const BridgeMaker = {
     return answerBridgeList
   },
 };
+
 module.exports = BridgeMaker;
