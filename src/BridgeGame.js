@@ -51,12 +51,20 @@ const { makeBridge } = require("./BridgeMaker");
       return this.printMap ;
     }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * @param {string} userRQ User에게 받은 R/D
-   * @return {string} 사용자가 선택한 결과 반환
-   */
-   retry(userRQ) {
+    /**
+     * 다리의 끝까지 도달했는지 확인하는 함수
+     * @return {string} 다리의 끝까지 도달했다면 Success 반환
+     */
+    success(){
+      if (this.num == this.currSpot) return "Success"
+    }
+
+    /**
+     * 사용자가 게임을 다시 시도할 때 사용하는 메서드
+     * @param {string} userRQ User에게 받은 R/D
+     * @return {string} 사용자가 선택한 결과 반환
+     */
+    retry(userRQ) {
     if (userRQ == "R" ){
       this.currSpot = 0 ;
       this.tryCount++ ;
