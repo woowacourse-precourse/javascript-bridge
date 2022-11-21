@@ -4,9 +4,9 @@ const { MESSAGE, ERROR, BRIDGE } = require('./const.js')
 
 const Validator = {
     validateBridgeSize(bridgeSize) {
-        if(isNaN(bridgeSize) || !Number.isInteger(bridgeSize)) throw Error;
+        if(isNaN(bridgeSize)) throw new Error(ERROR.HEADER+ERROR.BRIDGE_LENGTH);
         if(bridgeSize < BRIDGE.LENGTH_RANGE_LEFT ||
-            bridgeSize > BRIDGE.LENGTH_RANGE_RIGHT) throw Error;
+            bridgeSize > BRIDGE.LENGTH_RANGE_RIGHT) throw new Error(ERROR.HEADER+ERROR.BRIDGE_LENGTH);
     },
 
 }
