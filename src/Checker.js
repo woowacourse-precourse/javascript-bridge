@@ -1,5 +1,7 @@
 const Checker = {
-  checkSpaceCanCross() {},
+  checkSpaceCanCross(movingInput, bridgeSpace) {
+    return movingInput === bridgeSpace;
+  },
   checkCrossBridge() {},
 };
 
