@@ -15,62 +15,53 @@ class App {
   }
 
   progressGame(bridge, size) {
-    console.log(bridge.getBridge());
     InputView.readMoving((answer) => {
-      // if (bridge.checkInputIsCorrect(answer, bridge.step)) {
-      //   OutputView.printMap(bridge.step, bridge.getBridge());
-      //   if (bridge.checkIsLastStep(bridge.step, size - 1)) {
-      //     OutputView.printResult(
-      //       "성공",
-      //       bridge.round,
-      //       bridge.step,
-      //       bridge.getBridge()
-      //     );
-      //     return;
-      //   }
-      //   bridge.addStep();
-      //   this.progressGame(bridge, size);
-      //   return;
-      // }
-      // OutputView.printWrongMap(bridge.step, bridge.getBridge());
-      // this.askRetry(bridge, size);
-
       if (bridge.checkInputIsCorrect(answer, bridge.step)) {
-        bridge.move(answer);
-        OutputView.printMap(bridge.getCurrentBridge());
-        if (bridge.checkIsLastStep(bridge.step, size - 1)) {
-          OutputView.printResult(
-            "성공",
-            bridge.round,
-            bridge.step,
-            bridge.getBridge(),
-            bridge.getCurrentBridge()
-          );
-          return;
-        }
-        bridge.addStep();
-        this.progressGame(bridge, size);
-        return;
+        this.moveUserBridge(answer, bridge, size);
       }
-      bridge.stop(answer);
-      OutputView.printMap(bridge.getCurrentBridge());
+      this.stopUserBridge(answer, bridge);
       this.askRetry(bridge, size);
     });
   }
 
+  moveUserBridge(answer, bridge, size) {
+    bridge.move(answer);
+    OutputView.printMap(bridge.getCurrentBridge());
+    this.checkIsGameSuccess(bridge, size);
+    bridge.addStep();
+    this.progressGame(bridge, size);
+    return;
+  }
+
+  checkIsGameSuccess(bridge, size) {
+    if (bridge.checkIsLastStep(bridge.step, size - 1)) {
+      OutputView.printResult("성공", bridge);
+      return;
+    }
+  }
+
+  stopUserBridge(answer, bridge) {
+    bridge.stop(answer);
+    OutputView.printMap(bridge.getCurrentBridge());
+  }
+
   askRetry(bridge, size) {
     InputView.readGameCommand((answer) => {
-      if (answer === "Q") {
-        OutputView.printResult("실패", bridge.round, bridge.getBridge());
-        return;
-      }
-      if (answer === "R") {
-        bridge.addRound();
-        bridge.resetStep();
-        bridge.resetCurrentBridge();
-        this.progressGame(bridge, size);
+      switch (answer) {
+        case "Q":
+          OutputView.printResult("실패", bridge);
+          return;
+        case "R":
+          this.resetGame(bridge);
+          this.progressGame(bridge, size);
       }
     });
+  }
+
+  resetGame(bridge) {
+    bridge.addRound();
+    bridge.resetStep();
+    bridge.resetCurrentBridge();
   }
   play() {
     this.startGame();
