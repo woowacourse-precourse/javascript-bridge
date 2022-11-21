@@ -1,20 +1,31 @@
 /* eslint-disable class-methods-use-this */
 const { ERROR } = require('../util/Constant');
+const OutputView = require('../view/OutputView');
 
 class CheckInputUd {
-  validate(ud) {
-    this.checkUd(ud);
-    this.checkOneCharacter(ud);
+  validate(inputUd) {
+    try {
+      this.checkUdAndOneCharacter(inputUd);
+      return true;
+    } catch (error) {
+      OutputView.printError(error);
+      return false;
+    }
   }
 
-  checkUd(ud) {
-    if (ud.match(/[^UD]/g) !== null) {
+  checkUdAndOneCharacter(inputUd) {
+    this.checkUd(inputUd);
+    this.checkOneCharacter(inputUd);
+  }
+
+  checkUd(inputUd) {
+    if (!String(inputUd).match(/[UD]/g)) {
       throw new Error(ERROR.UPDOWN_WRONG);
     }
   }
 
-  checkOneCharacter(ud) {
-    if (ud.length > 1) {
+  checkOneCharacter(inputUd) {
+    if (inputUd.length > 1) {
       throw new Error(ERROR.UPDOWN_WRONG);
     }
   }

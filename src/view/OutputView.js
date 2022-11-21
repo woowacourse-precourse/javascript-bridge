@@ -50,6 +50,10 @@ const OutputView = {
     Console.print(`${MESSAGE.COUNT}${count}`);
     Console.close();
   },
+
+  printError(error) {
+    Console.print(error);
+  },
 };
 
 module.exports = OutputView;

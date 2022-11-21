@@ -22,10 +22,16 @@ class Gameflow {
   
     start() {
       InputView.readBridgeSize((size) => {
-        this.CheckBridgeSize .validate(size);
-        this.size = size;
-        this.createBridge();
+        this.isValidBridgeSize(this.CheckBridgeSize .validate(size),size)
       })
+    }
+
+    isValidBridgeSize(valitation, size) {
+      if (!valitation) {
+        return this.start();
+      };
+      this.size = size;
+      return this.createBridge();
     }
 
     createBridge(){
@@ -36,11 +42,18 @@ class Gameflow {
 
     userMoving(){
         InputView.readMoving((inputUd) => {
-            this.CheckInputUd.validate(inputUd);
-            this.userUd.push(inputUd);
-            this.endCheck();
+            this.isValidUpdown(this.CheckInputUd.validate(inputUd), inputUd);
         })
     }
+
+    isValidUpdown(valitation, inputUd) {
+      if (!valitation) {
+        return this.userMoving();
+      };
+      this.userUd.push(inputUd);
+      return this.endCheck();
+    }
+
 
     endCheck() {
       switch (this.bridgeGame.move(this.userUd)) {
@@ -74,9 +87,15 @@ class Gameflow {
 
     askReplay() {
       InputView.readGameCommand((inputRq) => {
-        this.CheckInputRq.validate(inputRq);
-        this.checkingAskReplay(this.bridgeGame.retry(inputRq));
+        this.isValidRepalyQuit(this.CheckInputRq.validate(inputRq), inputRq);
       });
+    }
+
+    isValidRepalyQuit(valitation, inputRq) {
+      if (!valitation) {
+        return this.askReplay();
+      };
+      return this.checkingAskReplay(this.bridgeGame.retry(inputRq));
     }
 
     checkingAskReplay(inputRq) {
