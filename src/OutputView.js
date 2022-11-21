@@ -18,6 +18,8 @@ const OutputView = {
     bridgeGameProgress.forEach((progress) => {
       MissionUtils.Console.print(RESULT_MESSAGE.bridgeLog(progress));
     });
+
+    return bridgeGameProgress;
   },
 
   /**
