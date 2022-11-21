@@ -31,6 +31,7 @@ const InputView = {
       const error = Validation.checkUserMoveInput(userInput);
       if (error) return this.readMoving(bridgeGame);
       bridgeGame.move(userInput);
+      OutputView.printMap(bridgeGame.getLog());
       if (bridgeGame.isWrongZone()) return this.readGameCommand(bridgeGame);
       if (bridgeGame.isReached())
         this.summaryResult(bridgeGame, OUTPUT_MESSAGE.SUCCESS);

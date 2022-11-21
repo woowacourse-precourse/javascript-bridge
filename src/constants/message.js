@@ -6,7 +6,7 @@ const RESULT = "\n최종 게임 결과";
 const LENGTH = "다리의 길이를 입력해주세요.\n";
 const MOVE = "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n";
 const RESTART =
-  "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n";
+  "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n";
 
 const NUMBER = "[ERROR] 숫자만 입력할 수 있습니다.";
 const RANGE = "[ERROR] 다리 길이의 입력은 3부터 20 사이의 숫자여야 합니다.";

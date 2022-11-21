@@ -48,7 +48,6 @@ class BridgeGame {
       this.movingLog.upper.push(BRIDGE.WRONG_ZONE);
       this.movingLog.lower.push(" ");
     }
-    return this.printCurrentBridge();
   }
   /**
    * 유저가 아래 칸으로 이동할 때의 메서드
@@ -62,19 +61,7 @@ class BridgeGame {
       this.movingLog.lower.push(BRIDGE.WRONG_ZONE);
       this.movingLog.upper.push(" ");
     }
-    return this.printCurrentBridge();
   }
-
-  /**
-   * 현재 다리 상황을 출력하는 메서드
-   */
-  printCurrentBridge() {
-    return OutputView.printMap(this.movingLog);
-  }
-
-  /**
-   * 다리를 잘못 건넜는지 판단하는 메서드
-   */
   isWrongZone() {
     if (
       this.movingLog.upper
