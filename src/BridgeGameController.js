@@ -28,7 +28,7 @@ const BridgeGameController = {
     );
     if (this.isPass) this.passData();
     if (this.isPass === false) this.failData();
-    this.mapOutputData();
+    this.outputData(false);
   },
   passData() {
     if (this.isPass && this.chooseBlock === 'U') {
@@ -50,8 +50,16 @@ const BridgeGameController = {
       this.lower.push('X');
     }
   },
-  mapOutputData() {
-    OutputView.printMap(this.upper, this.lower);
+  outputData(isFinal, isSuccess, tryCount) {
+    const upperBlocks = this.upper.join(' | ');
+    const lowerBlocks = this.lower.join(' | ');
+    const isSuccessAndTryCount = [isSuccess, tryCount];
+    if (isFinal) {
+      OutputView.printResult(upperBlocks, lowerBlocks, isSuccessAndTryCount);
+    }
+    if (isFinal === false) {
+      OutputView.printMap(upperBlocks, lowerBlocks);
+    }
   },
 };
 
