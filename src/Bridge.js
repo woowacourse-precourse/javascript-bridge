@@ -1,16 +1,16 @@
 class Bridge {
-  #directionSymbols;
+  #directions;
 
-  constructor(direcionSymbols) {
-    this.#directionSymbols = direcionSymbols;
+  constructor(directions) {
+    this.#directions = directions;
   }
 
   isCrossable(position, direction) {
-    return this.#directionSymbols[position] === direction;
+    return this.#directions[position] === direction;
   }
 
   isEveryBlockPassed(passedBlockCount) {
-    return this.#directionSymbols.length === passedBlockCount;
+    return this.#directions.length === passedBlockCount;
   }
 }
 

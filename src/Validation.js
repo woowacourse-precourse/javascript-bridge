@@ -10,9 +10,9 @@ const { ERROR_MSG } = require('./constants/message.js');
 
 class Validation {
   static validateDirection(direction) {
-    const directionSymbols = [DOWNSIDE_SYMBOL, UPSIDE_SYMBOL];
+    const directions = [DOWNSIDE_SYMBOL, UPSIDE_SYMBOL];
 
-    if (!directionSymbols.includes(direction)) {
+    if (!directions.includes(direction)) {
       throw new Error(ERROR_MSG.invalidDirection);
     }
   }

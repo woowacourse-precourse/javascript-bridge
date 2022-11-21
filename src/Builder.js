@@ -5,9 +5,9 @@ const Bridge = require('./Bridge.js');
 
 class Builder {
   buildBridge(size) {
-    const directionSymbols = makeBridge(Number(size), generate);
+    const directions = makeBridge(Number(size), generate);
 
-    return new Bridge(directionSymbols);
+    return new Bridge(directions);
   }
 }
 
