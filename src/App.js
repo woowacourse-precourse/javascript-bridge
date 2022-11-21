@@ -25,17 +25,35 @@ class App {
     readBridgeSize((size) => {
       const generateRandomNumber = generate;
 
-      validateBridgeSize(size);
       this.bridge = makeBridge(size, generateRandomNumber);
-      this.getUserMoving();
+      this.checkValidateBridgeSize(size);
     });
+  }
+
+  checkValidateBridgeSize(size) {
+    try {
+      validateBridgeSize(size);
+      this.getUserMoving();
+    } catch (error) {
+      Console.print(error);
+      this.createBridge();
+    }
   }
 
   getUserMoving() {
     readMoving((userMove) => {
+      this.checkValidateUserMoving(userMove);
+    });
+  }
+
+  checkValidateUserMoving(userMove) {
+    try {
       checkMoveString(userMove);
       this.moveBridge(userMove);
-    });
+    } catch (error) {
+      Console.print(error);
+      this.getUserMoving();
+    }
   }
 
   moveBridge(userMove) {
@@ -61,9 +79,18 @@ class App {
 
   getUserRetry(bridges) {
     readGameCommand((userRetry) => {
+      this.checkValidateUserRetry(userRetry, bridges);
+    });
+  }
+
+  checkValidateUserRetry(userRetry, bridges) {
+    try {
       checkRetryString(userRetry);
       this.checkRetry(userRetry, bridges);
-    });
+    } catch (error) {
+      Console.print(error);
+      this.getUserRetry(bridges);
+    }
   }
 
   checkRetry(userRetry, bridges) {
