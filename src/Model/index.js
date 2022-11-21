@@ -111,6 +111,17 @@ class Model {
 
     return current === correctLocation
   }
+
+  isSameLocationAndType(type, index) {
+    const isCorrectLocation = this.#bridge[index] === this.#moveList[index];
+    const isSameType = this.#moveList[index] === type;
+
+    return isCorrectLocation && isSameType
+  }
+
+  isWrongLocation(type, index) {
+    return this.#moveList[index] === type && this.#isGameOver
+  }
   
 }
 
