@@ -56,13 +56,6 @@ class BridgeGame {
         }
     }
 
-    showResult(result) {
-        printMap(this.#bridgeHistory);
-        Console.print(result);
-        Console.print(MESSAGE.TRY + this.#gameCount);
-        Console.close();
-    }
-
     resetBridgeSetting() {
         this.#bridgeCount = 0;
         this.#bridgeHistory = [];

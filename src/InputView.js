@@ -4,7 +4,7 @@ const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker.js");
 const BridgeGame = require("./BridgeGame");
 const Validation = require("./Validation.js");
-const { printResult, printFinish, printMap, printGameCount } = require("./OutputView.js");
+const { printResult } = require("./OutputView.js");
 
 const InputView = {
     readBridgeSize() {
@@ -14,16 +14,23 @@ const InputView = {
         });
     },
 
-    createBridgeGame(size) {
-        const bridgeGame = new BridgeGame(makeBridge(size, generate));
-        this.readMoving(bridgeGame);
-    },
-
     readMoving(bridgeGame) {
         Console.readLine(MESSAGE.MOVE, (move) => {
             const isErrorMoving = Validation.checkMoveInput(move);
             isErrorMoving ? this.readMoving(bridgeGame) : this.playMoving(bridgeGame, move);
         });
+    },
+
+    readGameCommand(bridgeGame) {
+        Console.readLine(MESSAGE.RESTART, (answer) => {
+            const isErrorGameCommand = Validation.checkGameCommandInput(answer);
+            isErrorGameCommand ? this.readGameCommand(bridgeGame) : this.playGameCommand(bridgeGame, answer);
+        });
+    },
+
+    createBridgeGame(size) {
+        const bridgeGame = new BridgeGame(makeBridge(size, generate));
+        this.readMoving(bridgeGame);
     },
 
     playMoving(bridgeGame, move) {
@@ -37,24 +44,11 @@ const InputView = {
         this.readMoving(bridgeGame);
     },
 
-    readGameCommand(bridgeGame) {
-        Console.readLine(MESSAGE.RESTART, (answer) => {
-            const isErrorGameCommand = Validation.checkGameCommandInput(answer);
-            isErrorGameCommand ? this.readGameCommand(bridgeGame) : this.playGameCommand(bridgeGame, answer);
-        });
-    },
-
     playGameCommand(bridgeGame, answer) {
         if (bridgeGame.questionRetry(answer)) {
             return this.readMoving(bridgeGame);
         }
         printResult(bridgeGame, MESSAGE.SUCCESS);
-    },
-    showResult(bridgeGame, result) {
-        printFinish();
-        printMap(bridgeGame);
-        printResult(result);
-        printGameCount(bridgeGame);
     },
 };
 
