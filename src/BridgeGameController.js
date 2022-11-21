@@ -40,6 +40,17 @@ class BridgeGameController {
     }
   }
 
+  inputMoving = () => {
+    InputView.readMoving((word) => {
+      this.tryCatch(Validate.movingValidate, word);
+
+      if (word === Constant.UPPER_ALPHABET || word === Constant.LOWER_ALPHABET) {
+        return this.move(word);
+      }
+      return this.inputMoving();
+    });
+  };
+
 }
 
 module.exports = BridgeGameController;

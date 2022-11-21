@@ -12,6 +12,11 @@ const Validate = {
     }
   },
 
+  movingValidate(word) {
+    if (!(word === Constant.UPPER_ALPHABET || word === Constant.LOWER_ALPHABET)) {
+      throw Message.ERROR.invalidMovingValue;
+    }
+  },
 }
 
 module.exports = Validate;
