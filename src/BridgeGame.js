@@ -1,3 +1,4 @@
+const Constant = require('./Constant');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -10,6 +11,8 @@ class BridgeGame {
 
   #bridge = "";
   #bridgeLength = 0;
+  #currentMovingBridge = [];
+
 
   setBridge(bridge) {
     this.#bridge = bridge;
@@ -19,7 +22,14 @@ class BridgeGame {
     this.#bridgeLength = length;
   }
 
-  move() {}
+  move(word) {
+    if (this.#bridge[this.#currentMovingBridge.length] === word) {
+      this.#currentMovingBridge.push({[word]: Constant.SUCCESS_ALPHABET});
+      return [true, this.#currentMovingBridge];
+    }
+    this.#currentMovingBridge.push({[word]: Constant.FAIL_ALPHABET});
+    return [false, this.#currentMovingBridge];
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

@@ -17,7 +17,32 @@ const OutputView = {
     Console.print(error);
   },
   
-  printMap() {},
+  printMap(userInputs) {
+    const movingArray = [[], []];
+    userInputs.forEach((userInput) => {
+      this.pushBridgeArray(userInput, movingArray);
+    });
+
+    Console.print(`[${movingArray[0].join("|")}]\n[${movingArray[1].join("|")}]\n`);
+  },
+
+  pushBridgeArray(userInputObj, movingArray) {
+    const userInput = Object.keys(userInputObj)[0];
+
+    if (userInput === "U") {
+      this.pushMoving([0, 1], movingArray, userInputObj[userInput]);
+    }
+
+    if (userInput === "D") {
+      this.pushMoving([1, 0], movingArray, userInputObj[userInput]);
+    }
+  },
+
+  pushMoving(numbers, movingArray, symbol) {
+    const [number1, number2] = numbers;
+    movingArray[number1].push(` ${symbol} `);
+    movingArray[number2].push("   ");
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.

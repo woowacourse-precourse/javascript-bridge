@@ -51,6 +51,11 @@ class BridgeGameController {
     });
   };
 
+  move(word) {
+    const [isMove, bridgeArray] = this.bridgeGame.move(word);
+    OutputView.printMap(bridgeArray);
+  }
+
 }
 
 module.exports = BridgeGameController;
