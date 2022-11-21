@@ -37,7 +37,7 @@
 - [ ] 입력
     - [x] 다리 길이
         - InputView.readBridgeSize()
-    - [ ] 이동할 칸
+    - [x] 이동할 칸
         - InputView.readMoving()
     - [ ] 게임 재시작 여부
         - InputView.readGameCommand()
