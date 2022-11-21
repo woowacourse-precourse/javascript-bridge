@@ -1,4 +1,3 @@
-const ErrorMessage = require("./messages/ErrorMessage");
 const Directions = require("./utils/Directions");
 const Validator = require("./utils/Validator");
 

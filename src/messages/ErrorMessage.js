@@ -1,10 +1,9 @@
-class ErrorMessage {
-  static base = "[ERROR]";
-  static NOT_INTEGER = ErrorMessage.base + " 숫자값으로만 입력해주세요.";
-  static NOT_VALID_DIRECTION =
-    ErrorMessage.base + " 방향은 U,D 둘 중에 하나로만 입력해주세요.";
-  static NOT_VALID_COMMAND =
-    ErrorMessage.base + " R,Q 중에 하나만 입력해주세요.";
-}
+const BASE = "[ERROR]";
+
+const ErrorMessage = {
+  NOT_INTEGER: BASE + " 숫자값으로만 입력해주세요.",
+  NOT_VALID_DIRECTION: BASE + " 방향은 U,D 둘 중에 하나로만 입력해주세요.",
+  NOT_VALID_COMMAND: BASE + " R,Q 중에 하나만 입력해주세요.",
+};
 
 module.exports = ErrorMessage;

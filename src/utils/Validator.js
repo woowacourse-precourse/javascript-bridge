@@ -1,4 +1,4 @@
-const GameCommands = require("../bridge/GameCommands");
+const GameCommands = require("./GameCommands");
 const ErrorMessage = require("../messages/ErrorMessage");
 const Directions = require("./Directions");
 

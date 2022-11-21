@@ -1,7 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeGame = require("../bridge/BridgeGame");
-const BridgeMapMaker = require("../bridge/BridgeMapMaker");
-const GameStates = require("../bridge/GameStates");
+const GameStates = require("../utils/GameStates");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -30,7 +28,7 @@ const OutputView = {
     const result = state === GameStates.GAME_SUCCESS ? "성공" : "실패";
 
     Console.print("최종 게임 결과");
-    this.printMap(BridgeMapMaker.getCurrentMap());
+    this.printMap(bridgeGame.getCurrentMap());
     Console.print(`게임 성공 여부: ${result}`);
     Console.print(`총 시도한 횟수: ${bridgeGame.getNumberOfAttemps()}`);
   },

@@ -1,12 +1,9 @@
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeGame = require("../bridge/BridgeGame");
-const { makeBridge } = require("../BridgeMaker");
 const { generate } = require("../bridge/BridgeRandomNumberGenerator");
 const InputMessage = require("../messages/InputMessage");
-const OutputView = require("../views/OutputView");
-const GameStates = require("../bridge/GameStates");
 const Validator = require("../utils/Validator");
-const GameCommands = require("../bridge/GameCommands");
+const GameCommands = require("../utils/GameCommands");
+const OutputView = require("./OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -15,19 +12,23 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
+
+  readBridgeSize(bridgeGame) {
     Console.readLine(InputMessage.READ_BRIDGE_SIZE_MESSAGE, (value) => {
-      let bridgeGame;
-      try {
-        const bridge = makeBridge(Number(value), generate);
-        bridgeGame = new BridgeGame(bridge);
-      } catch (error) {
-        OutputView.print(error.message);
-        this.readBridgeSize();
-        return;
-      }
-      this.readMoving(bridgeGame);
+      this.onReadBridgeSize(value, bridgeGame);
     });
+  },
+
+  onReadBridgeSize(value, bridgeGame) {
+    const size = Number(value);
+    try {
+      bridgeGame.buildBridge(size, generate);
+    } catch (error) {
+      OutputView.print(error.message);
+      this.readBridgeSize(bridgeGame);
+      return;
+    }
+    this.readMoving(bridgeGame);
   },
 
   /**
@@ -35,56 +36,58 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     Console.readLine(InputMessage.READ_MOVING_MESSAGE, (value) => {
-      const direction = value;
-      try {
-        bridgeGame.move(direction);
-      } catch (error) {
-        OutputView.print(error.message);
-        this.readMoving(bridgeGame);
-        return;
-      }
-      const state = bridgeGame.getGameState();
-      if (state) {
-        this.afterGameEnded(state, bridgeGame);
-        return;
-      }
-      this.readMoving(bridgeGame);
+      this.onReadMoving(value, bridgeGame);
     });
   },
 
-  afterGameEnded(state, bridgeGame) {
-    switch (state) {
-      case GameStates.GAME_FAILED:
-        this.readGameCommand(bridgeGame);
-        break;
-      case GameStates.GAME_SUCCESS:
-        OutputView.printResult(bridgeGame);
-        Console.close();
-        break;
+  onReadMoving(value, bridgeGame) {
+    const direction = value;
+    try {
+      bridgeGame.move(direction);
+    } catch (error) {
+      OutputView.print(error.message);
+      this.readMoving(bridgeGame);
+      return;
     }
+    if (bridgeGame.getGameState()) return this.onInputEnded(bridgeGame);
+    this.readMoving(bridgeGame);
   },
 
+  onInputEnded(bridgeGame) {
+    bridgeGame.onGameEnded(
+      this.afterInputEnded.bind(this),
+      this.readGameCommand.bind(this)
+    );
+  },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridgeGame) {
     Console.readLine(InputMessage.READ_GAME_COMMAND_MESSAGE, (value) => {
       try {
-        Validator.isValidCommand(value);
+        this.onReadGameCommand(value, bridgeGame);
       } catch (error) {
         OutputView.print(error.message);
         this.readGameCommand(bridgeGame);
         return;
       }
-      if (value === GameCommands.RETRY) {
-        bridgeGame.retry();
-        this.readMoving(bridgeGame);
-        return;
-      }
-      OutputView.printResult(bridgeGame);
-      Console.close();
-      return;
     });
+  },
+
+  onReadGameCommand(value, bridgeGame) {
+    Validator.isValidCommand(value);
+    if (value === GameCommands.RETRY) {
+      bridgeGame.retry();
+      this.readMoving(bridgeGame);
+      return;
+    }
+    this.afterInputEnded(bridgeGame);
+    return;
+  },
+
+  afterInputEnded(bridgeGame) {
+    OutputView.printResult(bridgeGame);
+    Console.close();
   },
 };
 

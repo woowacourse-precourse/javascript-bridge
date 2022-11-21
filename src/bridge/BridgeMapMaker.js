@@ -1,60 +1,55 @@
 const Directions = require("../utils/Directions");
-const BridgeGame = require("./BridgeGame");
 
-const BridgeMapMaker = {
-  map: [[], []],
-  up: 0,
-  down: 1,
+class BridgeMapMaker {
+  static UP = 0;
+  static DOWN = 1;
+  #map = [[], []];
+
   makeMap(direction, isPlaceToPass, distance) {
     for (let i = 0; i < 2; i++) {
       const mapDirection = i % 2;
-      if (mapDirection === this.up) {
+      if (mapDirection === BridgeMapMaker.UP) {
         this.mapUpBlock(direction, isPlaceToPass, distance);
         continue;
       }
       this.mapDownBlock(direction, isPlaceToPass, distance);
     }
-
     return this.getCurrentMap();
-  },
+  }
 
   mapUpBlock(direction, isPlaceToPass, distance) {
     const point = distance > 1 ? "|" : "[";
 
-    this.map[this.up] = this.map[this.up].map((value) => {
-      value = value.replace("]", "");
-      return value;
-    });
+    this.#map[BridgeMapMaker.UP] = this.#map[BridgeMapMaker.UP].map((value) =>
+      value.replace("]", "")
+    );
 
-    if (direction === Directions.UP_DIRECTION) {
-      this.map[this.up].push(`${point} ${isPlaceToPass} ]`);
-      return;
-    }
-    this.map[this.up].push(`${point}   ]`);
-  },
+    if (direction === Directions.UP_DIRECTION)
+      return this.#map[BridgeMapMaker.UP].push(`${point} ${isPlaceToPass} ]`);
+
+    this.#map[BridgeMapMaker.UP].push(`${point}   ]`);
+  }
 
   mapDownBlock(direction, isPlaceToPass, distance) {
     const point = distance > 1 ? "|" : "[";
 
-    this.map[this.down] = this.map[this.down].map((value) => {
-      value = value.replace("]", "");
-      return value;
-    });
+    this.#map[BridgeMapMaker.DOWN] = this.#map[BridgeMapMaker.DOWN].map(
+      (value) => value.replace("]", "")
+    );
 
-    if (direction === Directions.DOWN_DIRECTION) {
-      this.map[this.down].push(`${point} ${isPlaceToPass} ]`);
-      return;
-    }
-    this.map[this.down].push(`${point}   ]`);
-  },
+    if (direction === Directions.DOWN_DIRECTION)
+      return this.#map[BridgeMapMaker.DOWN].push(`${point} ${isPlaceToPass} ]`);
+
+    this.#map[BridgeMapMaker.DOWN].push(`${point}   ]`);
+  }
 
   getCurrentMap() {
-    return [...this.map];
-  },
+    return [...this.#map];
+  }
 
   onRetry() {
-    this.map = [[], []];
-  },
-};
+    this.#map = [[], []];
+  }
+}
 
 module.exports = BridgeMapMaker;
