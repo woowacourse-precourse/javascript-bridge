@@ -22,7 +22,7 @@ class Validation{
             Console.print(ERROR.EMPTY)
             Console.close()
         }
-        if(input!=='U' || input!=='D'){
+        if(!(input==='U' || input==='D')){
             Console.print(ERROR.NEXT_MOVE)
             Console.close()
         }
