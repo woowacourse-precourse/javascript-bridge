@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { NOTICE } = require("./constants");
-const { handleBridgeSizeInput, handleMovingInput, handlerRetrialInput } = require("./InputHandler");
+const { handleBridgeSizeInput, handleMovingInput, handleRetrialInput } = require("./InputHandler");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -32,7 +32,7 @@ const InputView = {
   readGameCommand(app, bridgeGame) {
     Console.readLine(NOTICE.INPUT_RETRY, (answer) => {
       const readAgain = InputView.readGameCommand;
-      handlerRetrialInput({ app, bridgeGame, answer, readAgain });
+      handleRetrialInput({ app, bridgeGame, answer, readAgain });
     });
   },
 };
