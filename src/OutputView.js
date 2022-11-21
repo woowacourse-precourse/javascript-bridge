@@ -21,19 +21,22 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(gameInfo, readFuncs) {
+    Console.print(gameInfo.map);
+
+    this.progressGame(gameInfo, readFuncs);
+  },
+
+  progressGame(gameInfo, readFuncs) {
+    const { RIGHT, WRONG } = RESULT;
     const { map, lastResult, originBridgeSize, currentBridgeSize, tryCount } =
       gameInfo;
     const { readMoving, readGameCommand } = readFuncs;
-
-    Console.print(map);
-
-    const { RIGHT, WRONG } = RESULT;
 
     if (lastResult === WRONG) readGameCommand(map, this.printResult.bind(this));
     if (lastResult === RIGHT && originBridgeSize !== currentBridgeSize)
       readMoving();
     if (lastResult === RIGHT && originBridgeSize === currentBridgeSize)
-      this.printResult(map, IS_SUCCESS.FALSE, tryCount);
+      this.printResult(map, IS_SUCCESS.TRUE, tryCount);
   },
 
   /**
@@ -42,6 +45,12 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(map, isSuccess, tryCount) {
+    Console.print(this.createResultMessage(map, isSuccess, tryCount));
+
+    this.endGame();
+  },
+
+  createResultMessage(map, isSuccess, tryCount) {
     const { RESULT_TITLE, SUCCESS_TITLE, TRY_TITLE } = INFO_MESSAGES;
 
     const gameResult = `${RESULT_TITLE}${map}\n`;
@@ -50,11 +59,7 @@ const OutputView = {
     }`;
     const tryResult = `${TRY_TITLE}${tryCount}`;
 
-    const resultMessage = `${gameResult}${successResult}${tryResult}`;
-
-    Console.print(resultMessage);
-
-    this.endGame();
+    return `${gameResult}${successResult}${tryResult}`;
   },
 
   endGame() {
