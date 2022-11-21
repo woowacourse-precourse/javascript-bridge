@@ -4,7 +4,6 @@ const OutputView = require('../view/OutputView.js');
 const BridgeMaker = require('../BridgeMaker.js');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator.js');
 const Bridge = require('../model/Bridge.js');
-const { isCollectBridgeLength, isValidateMoveInput, isValidateRetryInput } = require('../utils/validator.js');
 const { Console } = require('@woowacourse/mission-utils');
 const StepResult = require('../model/StepResult.js');
 
@@ -21,49 +20,42 @@ class BridgeGameController {
   }
 
   createBridgeByUser(bridgeLength) {
-    try {
-      isCollectBridgeLength(bridgeLength);
-      this.bridge.layout = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
-      InputView.readMoving(this.movingByUser.bind(this));
-    } catch (error) {
-      Console.print(error.message);
-      this.start();
-    }
+    this.bridge.answerArray = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
+    InputView.readMoving(this.moveByUser.bind(this));
   }
 
-  movingByUser(move) {
-    try {
-      isValidateMoveInput(move);
-      const isWrongAnswer = this.bridgeGame.move(move, this.bridge, this.stepResult);
-      OutputView.printMap(this.bridge);
+  moveByUser(move) {
+    const isWrongAnswer = this.playTurn(move);
+    if (isWrongAnswer) return InputView.readGameCommand(this.askWantRetry.bind(this));
 
-      if (isWrongAnswer) {
-        InputView.readGameCommand(this.askWantRetry.bind(this));
-      } else {
-        if (this.bridge.data.turn >= this.bridge.data.length) {
-          OutputView.printResult(true, this.bridgeGame.retryCount, this.bridge);
-        } else InputView.readMoving(this.movingByUser.bind(this));
-      }
-    } catch (error) {
-      Console.print(error.message);
-      InputView.readMoving(this.movingByUser.bind(this));
-    }
+    if (this.isEndGame()) return OutputView.printResult(true, this.bridgeGame.retryCount, this.stepResult);
+
+    return InputView.readMoving(this.moveByUser.bind(this));
+  }
+
+  playTurn(move) {
+    const thisTurnAnswer = this.bridge.answerArray[this.turn];
+    this.bridgeGame.move(thisTurnAnswer, move, this.stepResult);
+    const isWrongAnswer = !this.bridgeGame.isThisTurnCorrect(thisTurnAnswer, move);
+    OutputView.printMap(this.stepResult);
+
+    return isWrongAnswer;
+  }
+
+  isEndGame() {
+    return this.bridgeGame.turn >= this.bridge.answerArray.length;
   }
 
   askWantRetry(answer) {
-    try {
-      isValidateRetryInput(answer);
-      if (answer === 'R') {
-        this.bridgeGame.retry(this.bridge);
-        this.bridgeGame.retryCount += 1;
-        InputView.readMoving(this.movingByUser.bind(this));
-      } else {
-        OutputView.printResult(false, this.bridgeGame.retryCount, this.bridge);
-      }
-    } catch (error) {
-      Console.print(error.message);
-      InputView.readGameCommand(this.askWantRetry.bind(this));
+    if (answer === 'R') {
+      this.bridgeGame.retry(this.bridge);
+      this.bridgeGame.retryCount += 1;
+      InputView.readMoving(this.moveByUser.bind(this));
+    } else {
+      OutputView.printResult(false, this.bridgeGame.retryCount, this.bridge);
     }
+    Console.print(error.message);
+    InputView.readGameCommand(this.askWantRetry.bind(this));
   }
 }
 
