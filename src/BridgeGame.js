@@ -29,6 +29,14 @@ class BridgeGame {
     return nextDirection === this.#bridge[this.#upBridge.length];
   }
 
+  move(nextDirection) {
+    this.mark(nextDirection, this.ABLE_TO_MOVE_MARKER);
+  }
+
+  endGame(nextDirection) {
+    this.mark(nextDirection, this.UNABLE_TO_MOVE_MARKER);
+  }
+
   mark(nextDirection, marker) {
     if (nextDirection === this.UP_DIRECTION) {
       this.#upBridge.push(marker);
