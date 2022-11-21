@@ -28,7 +28,7 @@ const InputView = {
 
         this.readMoving(bridgeGame);
       } catch (e) {
-        console.log(e.message);
+        Console.print(e.message);
         this.readBridgeSize();
       }
     });
@@ -47,7 +47,7 @@ const InputView = {
         const nextStep = bridgeGame.nextStep();
         this.executeNextStep(bridgeGame, nextStep);
       } catch (e) {
-        console.log(e.message);
+        Console.print(e.message);
         this.readMoving(bridgeGame);
       }
     });
@@ -86,7 +86,7 @@ const InputView = {
         bridgeGame.retry();
         this.readMoving(bridgeGame);
       } catch (e) {
-        console.log(e.message);
+        Console.print(e.message);
         this.readGameCommand(bridgeGame);
       }
     });
