@@ -1,15 +1,15 @@
 # 다리 건너기
 
-## 기능 목록
-- [x] 입력 받은 다리 길이로 다리를 생성한다. - BridgeMaker#makeBridge()
+## Model(Domain) 로직
+
+### BridgeGame 로직 
+- [x] 입력 받은 다리 길이로 다리를 생성한다. - BridgeGame#generateBridge()
 - [x] 입력 받은 이동할 칸과 다리를 비교한다. - BridgeGame#match()
-- [x] 입력 받은 이동할 칸으로 이동하여 이동한 상태를 반환한다. - BridgeGame#move()
-- [x] 이동에 성공했는지 확인한다. - BridgeGame#checkMoveSuccess()
+- [x] 입력 받은 이동 칸에 대한 이동 성공여부를 확인한다. - BridgeGame#move()
 - [x] 이동할 다리가 얼마나 남았는지 확인한다. - BridgeGame#checkRemainBridge()
-- [x] 재시작 시 copyBridge와 moveState를 초기화 시키고 시도 횟수를 증가시킨다. - BridgeGame#retry()
+- [x] 재시작 시 bridgeIndex를 초기화 시킨다. - BridgeGame#retry()
 
-
-## 예외 상황
+### 예외 처리 로직
 
 사용자가 잘못된 값을 입력한 경우 throw문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
 

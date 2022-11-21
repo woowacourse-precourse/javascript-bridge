@@ -6,10 +6,7 @@ const BridgeRanDomNumber = require('./BridgeRandomNumberGenerator');
 class BridgeGame {
   #bridgeSize;
   #bridge;
-  #index = 0;
-  #moveState = [[], []];
-  #retryCount = 1;
-  #isSuccess = '';
+  #bridgeIndex = 0;
   
   constructor(bridgeSize) {
     this.#bridgeSize = bridgeSize;
@@ -21,13 +18,11 @@ class BridgeGame {
   }
   
   match(moveAnswer) {
-    if (this.#bridge[this.#index] === moveAnswer) {
-      this.#index += 1;
-      this.#isSuccess = '성공';
+    if (this.#bridge[this.#bridgeIndex] === moveAnswer) {
+      this.#bridgeIndex += 1;
       return [moveAnswer, true];
     }
-    this.#index += 1;
-    this.#isSuccess = '실패';
+    this.#bridgeIndex += 1;
     return [moveAnswer, false];
   }
   
@@ -37,54 +32,15 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moveAnswer) {
-    const matchResult = this.match(moveAnswer);
-    this.parseResult(matchResult);
-    return this.#moveState;
-  }
-
-  parseResult(matchResult) {
-    const [upOrDown, matchBoolean] = matchResult;
-  
-    const successOrFail = this.toSuccessOrFail(matchBoolean);
-    if (upOrDown === 'U') {
-      this.parseUpBridge(successOrFail);
-      return;
-    }
-    this.parseDownBridge(successOrFail);
-  }
-  
-  toSuccessOrFail(matchBoolean) {
-    if (matchBoolean === true) {
-      return ' O ';
-    }
-    return ' X ';
-  }
-
-  parseUpBridge(successOrFail) {
-    this.#moveState[0].push(successOrFail);
-    this.#moveState[1].push('   ');
-  }
-
-  parseDownBridge(successOrFail) {
-    this.#moveState[0].push('   ');
-    this.#moveState[1].push(successOrFail);
+    const moveResult = this.match(moveAnswer);
+    return moveResult;
   }
 
   checkRemainBridge() {
-    if (this.#index !== this.#bridgeSize) {
+    if (this.#bridgeIndex !== this.#bridgeSize) {
       return true;
     }
     return false;
-  }
-
-  checkMoveSuccess() {
-    if (
-      this.#moveState[0].includes(' X ') || 
-      this.#moveState[1].includes(' X ')
-    ) {
-      return false;
-    }
-    return true;
   }
 
   /**
@@ -93,13 +49,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#retryCount += 1;
-    this.#index = 0;
-    this.#moveState = [[], []];
-  }
-
-  getFinalResult() {
-    return [this.#moveState, this.#isSuccess, this.#retryCount];
+    this.#bridgeIndex = 0;
   }
 }
 
