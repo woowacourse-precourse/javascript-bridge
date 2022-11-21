@@ -14,7 +14,7 @@ class BridgeGame {
   constructor() {
     this.#selectBridge = [];
     this.#correctBridge = [];
-    this.#retryCount = 0;
+    this.#retryCount = 1;
   }
 
   set setRetryCount(retryCount) {

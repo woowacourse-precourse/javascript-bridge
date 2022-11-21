@@ -8,6 +8,4 @@ class App {
   }
 }
 
-// App.prototype.play();
-
 module.exports = App;
