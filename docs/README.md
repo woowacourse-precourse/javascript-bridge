@@ -9,10 +9,10 @@
     - [x] 랜덤 숫자 추출
         BridgeRandomNumberGernerator.generate()
 
-- [ ] 게임 시작
+- [x] 게임 시작
     - [x] 플레이어 이동
         BridgeGame.move()
-    - [ ] 이동 성공 여부 판정
+    - [x] 이동 성공 여부 판정
 
 - [ ] 게임 재시작
     - [ ] 게임 재시작 여부 판정
