@@ -65,6 +65,45 @@ const Validation = {
   isValidMoving(input) {
     return input === "U" || input === "D";
   },
+
+  /**
+   * 플레이어가 게임 중 입력한 게임 명령어 값이 형식에 어긋날 경우 예외를 발생시킵니다.
+   * @param {string} playerInput - 플레이어의 입력
+   */
+  validateGameCommand(input) {
+    if (!this.isValidCommandType(input)) {
+      throw new Error("[ERROR] 게임 명령어은 알파벳을 입력해야 합니다.");
+    }
+
+    if (!this.isValidCommandLength(input)) {
+      throw new Error("[ERROR 게임 명령어은 한 개의 문자열을 입력해야 합니다.");
+    }
+
+    if (!this.isValidCommandCase(input)) {
+      throw new Error("[ERROR] 게임 명령어은 대문자로 입력해야 합니다.");
+    }
+
+    if (!this.isValidCommand(input)) {
+      throw new Error("[ERROR] 게임 명령어은 R 또는 Q를 입력해야 합니다.");
+    }
+  },
+
+  isValidCommandType(input) {
+    const regex = /^[a-z|A-Z]+$/;
+    return regex.test(input);
+  },
+
+  isValidCommandLength(input) {
+    return input.length === 1;
+  },
+
+  isValidCommandCase(input) {
+    return 65 <= input.charCodeAt() && input.charCodeAt() <= 90;
+  },
+
+  isValidCommand(input) {
+    return input === "R" || input === "Q";
+  },
 };
 
 module.exports = Validation;
