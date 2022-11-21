@@ -1,4 +1,3 @@
-const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 
 /**
