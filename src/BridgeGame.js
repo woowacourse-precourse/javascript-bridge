@@ -22,7 +22,8 @@ class BridgeGame {
   }
 
   retry() {
-
+    this.move();
+    Console.print('');
   }
 
   fail() {
