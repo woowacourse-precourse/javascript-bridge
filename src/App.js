@@ -86,8 +86,18 @@ class App {
   }
 
   retryOrEnd(input) {
+    this.checkretryOrEndInput(input);
     if (input === 'R') return this.retryGame();
     if (input === 'Q') return this.endGame();
+  }
+
+  checkretryOrEndInput(input) {
+    try {
+      Validate.retryOrEndInput(input);
+    } catch (e) {
+      Console.print(e.message);
+      this.askRetryOrEnd();
+    }
   }
 
   retryGame() {
