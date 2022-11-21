@@ -38,18 +38,18 @@ const expectLogContains = (received, logs) => {
   
 describe("게임 재시작 여부 테스트", () => {
   test("예외 테스트 - R,Q 가 아닌 경우", () => {
-    runException(["r"]);
+    runException(["r","R"]);
   });
   test("예외 테스트 - R,Q 가 아닌 경우", () => {
-    runException(["A"]);
+    runException(["A","R"]);
   });
   test("예외 테스트 - R,Q 가 아닌 경우", () => {
-    runException([" "]);
+    runException([" ","R"]);
   });
   test("예외 테스트 - 1글자가 아닌 경우", () => {
-    runException(["RQ"]);
+    runException(["RQ","R"]);
   });
   test("예외 테스트 - 1글자가 아닌 경우", () => {
-    runException(["RR"]);
+    runException(["RR","R"]);
   });
 });
