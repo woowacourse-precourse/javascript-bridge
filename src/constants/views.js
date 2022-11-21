@@ -6,6 +6,9 @@ const INPUT = Object.freeze({
 
 const OUTPUT = Object.freeze({
   START: '다리 건너기 게임을 시작합니다.',
+  RESULT_TITLE: '최종 게임 결과',
+  ISSUCCESS: (result) => `\n게임 성공 여부: ${result}`,
+  TRIAL: (trial) => `총 시도한 횟수: ${trial}`,
 });
 
 module.exports = {

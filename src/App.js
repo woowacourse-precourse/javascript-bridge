@@ -29,12 +29,24 @@ class App {
     this.bridgeIdx += 1;
 
     OutputView.printMap(upDownCounter[0], upDownCounter[1]);
+    if (isSuccess) return this.endGameRoution(upDownCounter);
     if (!moveResult) return InputView.readGameCommand(this.failRoutine.bind(this));
     this.attemptRoutine();
   }
 
   failRoutine(command) {
-    if (command === COMMAND.RETRY) this.retryRoutine();
+    if (command === COMMAND.RETRY) return this.retryRoutine();
+    this.endGameRoution(this.bridgeModel.getUpDownCounter());
+  }
+
+  endGameRoution(upDownCounter) {
+    const finalResult = {
+      upDownCounter,
+      isSuccess: this.bridgeModel.isSuccess ? '성공' : '실패',
+      trial: this.bridgeModel.trial,
+    };
+
+    OutputView.printResult(finalResult);
   }
 
   retryRoutine() {
