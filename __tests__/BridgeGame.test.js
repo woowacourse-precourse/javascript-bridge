@@ -924,9 +924,30 @@ describe('다리 로그 분류 메서드 테스트', () => {
 });
 
 describe('분류된 다리 로그 가져오는 메서드 테스트', () => {
+  const bridgeGame = new BridgeGame();
+  const POSITION_LOG_1 = [[0, 0], 'O'];
+  const POSITION_LOG_2 = [[1, 1], 'O'];
+  const POSITION_LOG_3 = [[0, 2], 'O'];
+
+  bridgeGame.move();
+  bridgeGame.setBridgeLog(POSITION_LOG_1);
+  bridgeGame.setBridgeLog(POSITION_LOG_2);
+  bridgeGame.setBridgeLog(POSITION_LOG_3);
+
   test('메소드 이름은 "getCurrentClassifiedBridgeLog"로 정의된다.', () => {
     const METHOD_NAME = 'getCurrentClassifiedBridgeLog';
 
-    expect(BridgeGame.getCurrentClassifiedBridgeLog.name).toEqual(METHOD_NAME);
+    expect(bridgeGame.getCurrentClassifiedBridgeLog.name).toEqual(METHOD_NAME);
+  });
+
+  test('[[["O"], [" "], ["O"]], [[" "], ["O"], [" "]]]을 반환한다.', () => {
+    const RECEIVED1 = [[['O'], [' '], ['O']], [[' '], ['O'], [' ']]];
+    const RECEIVED2 = [['O'], [' '], ['O']];
+    const RECEIVED3 = [[' '], ['O'], [' ']];
+    const [uBridge, dBridge] = bridgeGame.getCurrentClassifiedBridgeLog();
+
+    expect(bridgeGame.getCurrentClassifiedBridgeLog()).toEqual(RECEIVED1);
+    expect(uBridge).toEqual(RECEIVED2);
+    expect(dBridge).toEqual(RECEIVED3);
   });
 });
