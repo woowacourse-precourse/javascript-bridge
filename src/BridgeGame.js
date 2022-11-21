@@ -66,6 +66,7 @@ class BridgeGame {
     if (userInput === INPUT_VALUE.UP) {
       this.#currentBridge.push([INPUT_VALUE.UP, STATES.RIGHT]);
     }
+
     if (userInput === INPUT_VALUE.DOWN) {
       this.#currentBridge.push([INPUT_VALUE.DOWN, STATES.RIGHT]);
     }
@@ -75,6 +76,7 @@ class BridgeGame {
     if (userInput === INPUT_VALUE.UP) {
       this.#currentBridge.push([INPUT_VALUE.UP, STATES.FAIL]);
     }
+
     if (userInput === INPUT_VALUE.DOWN) {
       this.#currentBridge.push([INPUT_VALUE.DOWN, STATES.FAIL]);
     }

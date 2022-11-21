@@ -23,10 +23,10 @@ class App {
   progressGame(bridge, size) {
     InputView.readMoving((answer) => {
       if (bridge.checkInputIsCorrect(answer)) {
-        // check 이름, parameter 수정
         this.moveUserBridge(answer, bridge, size);
         return;
       }
+
       this.stopUserBridge(answer, bridge);
       this.askRetry(bridge, size);
     });
@@ -35,6 +35,7 @@ class App {
   moveUserBridge(answer, bridge, size) {
     bridge.move(answer);
     OutputView.printMap(bridge.getCurrentBridge());
+
     if (!this.checkIsGameSuccess(bridge, size)) {
       bridge.addStep();
       this.progressGame(bridge, size);
@@ -47,6 +48,7 @@ class App {
       Console.close();
       return true;
     }
+
     return false;
   }
 
