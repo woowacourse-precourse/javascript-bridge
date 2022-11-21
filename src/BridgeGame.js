@@ -46,24 +46,9 @@ class BridgeGame {
     return this.round;
   }
 
-  setUpResult(reset, round, correct) {
-    if (reset) this.upResult = [];
-    else {
-      if (correct) this.upResult[round] = " O ";
-      else {
-        this.upResult[round] = " X ";
-      }
-    }
-  }
-
-  setDownResult(reset, round, correct) {
-    if (reset) this.downResult = [];
-    else {
-      if (correct) this.downResult[round] = " O ";
-      else {
-        this.downResult[round] = " X ";
-      }
-    }
+  resetResult(reset) {
+    this.upResult = [];
+    this.downResult = [];
   }
 
   getUpResult() {
@@ -76,22 +61,22 @@ class BridgeGame {
 
   upMovement(bridgeUD, round) {
     if (bridgeUD[round] === "U") {
-      this.setUpResult(false, round, true);
-      this.downResult.push("   ");
+      this.upResult[round] = " O ";
+      this.downResult[round] = "   ";
     } else {
-      this.setUpResult(false, round, false);
-      this.downResult.push("   ");
+      this.upResult[round] = " X ";
+      this.downResult[round] = "   ";
       this.setCross(false);
     }
   }
 
   downMovement(bridgeUD, round) {
     if (bridgeUD[round] === "D") {
-      this.setDownResult(false, round, true);
-      this.upResult.push("   ");
+      this.upResult[round] = "   ";
+      this.downResult[round] = " O ";
     } else {
-      this.setDownResult(false, round, false);
-      this.upResult.push("   ");
+      this.upResult[round] = "   ";
+      this.downResult[round] = " X ";
       this.setCross(false);
     }
   }
@@ -116,8 +101,7 @@ class BridgeGame {
   reset() {
     this.setRound(true);
     this.setCross(true);
-    this.setUpResult(true);
-    this.setDownResult(true);
+    this.resetResult(true);
   }
 
   retry(restart) {
