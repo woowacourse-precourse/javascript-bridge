@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 
 const OutputView = {
-   printMap(map) {
+  printMap(map) {
     Console.print('[ '+ map.get('U').join(' | ')+' ]');
     Console.print('[ '+ map.get('D').join(' | ')+' ]\n');
   },
@@ -9,7 +9,7 @@ const OutputView = {
   printResult(map, attempts, success) {
     Console.print(`최종 게임 결과`)
     this.printMap(map);
-    Console.print(`게임 성공 여부: ${success}`)
+    Console.print(`게임 성공 여부: ${success ? '성공' : '실패'}`)
     Console.print(`총 시도한 횟수: ${attempts}`);
     Console.close();
   },
