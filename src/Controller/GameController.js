@@ -2,33 +2,17 @@ const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const BridgeMaker = require("../BridgeMaker");
 const InputView = require("../View/InputView");
 const OutputView = require("../View/OutputView");
+const ExceptionHandler = require("../utils/ExceptionHandler");
 const BridgeGame = require("../Model/BridgeGame");
+const Constant = require("../utils/Constant");
+const Message = require("../utils/Message");
 
 class GameController {
+  #tries;
+
   constructor() {
     this.BridgeGame;
-  }
-
-  startGame() {
-    this.greeting();
-    InputView.readBridgeSize(this.constructBridgeGameAndSaveAnswerBridge.bind(this));
-  }
-
-  greeting() {
-    OutputView.printGreeting();
-  }
-
-  constructBridgeGameAndSaveAnswerBridge(size) {
-    this.constructBridgeGame(size);
-    this.createAndSaveAnswerBridge(size);
-  }
-
-  constructBridgeGame(size) {
-    this.BridgeGame = new BridgeGame(size);
-  }
-
-  createAndSaveAnswerBridge(size) {
-    this.BridgeGame.answerBridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.#tries = 1;
   }
 }
 
