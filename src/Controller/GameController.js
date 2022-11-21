@@ -113,6 +113,50 @@ class GameController {
       this.quitOrRetry();
     }
   }
+
+  /**
+   * 재시작 의사를 묻는다.
+   */
+  quitOrRetry() {
+    InputView.readGameCommand(this.quitOrRetryCallback.bind(this));
+  }
+
+  askQuitorRetryAgain() {
+    InputView.readGameCommand(this.quitOrRetryCallback.bind(this));
+  }
+
+  /**
+   * try/catch구문으로 예외 처리를 한다.
+   * 예외가 아니라면 InputView의 메소드를 호출하여 해당 메소드의 콜백으로 로직을 수행할 메소드를 전달한다.
+   * @param {string} input 사용자가 입력한 "U" 혹은 "D"
+   */
+  quitOrRetryCallback(input) {
+    try {
+      ExceptionHandler.validateRetryInput(input);
+      this.askQuitOrRetry(input);
+    } catch (err) {
+      OutputView.printError(err);
+      this.askQuitorRetryAgain();
+    }
+  }
+
+  askQuitOrRetry(input) {
+    if (input === Constant.QUIT) this.printResultandSuccessOrFail();
+    else if (input === Constant.RETRY) {
+      this.#tries++;
+      this.retryGame();
+    }
+  }
+
+  retryGame() {
+    InputView.readMoving(this.retryGameCallback.bind(this));
+  }
+
+  retryGameCallback(input) {
+    this.BridgeGame.retry(input);
+    this.printMaps();
+    this.keepMovingOrStop();
+  }
 }
 
 module.exports = GameController;
