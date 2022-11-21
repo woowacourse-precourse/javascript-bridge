@@ -11,5 +11,9 @@ const INPUT = {
     NO_NUM: "다리 길이는 숫자여야 합니다.",
     NO_RANGE: "다리 길이는 3이상 20이하여야 합니다.",
   },
+  COMMAND: {
+    RETRY: "R",
+    QUIT: "Q",
+  },
 };
 module.exports = INPUT;

@@ -1,6 +1,6 @@
 const { makeBridge } = require("../BridgeMaker");
 const { generate } = require("../BridgeRandomNumberGenerator");
-const { POS } = require("../constants/bridge.constants");
+const { BRIDGE } = require("../constants/bridge.constants");
 const { INPUT_ERR } = require("../constants/input.constants");
 const InValidInputError = require("../error/InValidInputError");
 const BridgeResult = require("./BridgeResult");
@@ -12,11 +12,13 @@ class BridgeGame {
   bridge;
   idx;
   result;
+  try;
 
   constructor(size) {
     this.validate(size);
     this.bridge = makeBridge(size, generate);
     this.idx = 0;
+    this.try = 1;
   }
 
   validate(size) {
@@ -25,7 +27,7 @@ class BridgeGame {
   }
 
   moveValidate(direction) {
-    if (direction !== POS.UP && direction !== POS.DOWN)
+    if (direction !== BRIDGE.UP && direction !== BRIDGE.DOWN)
       throw new InValidInputError(INPUT_ERR.DIRECTION_ERR);
   }
 
@@ -57,7 +59,10 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.idx = 0;
+    this.try += 1;
+  }
 
   isEnd() {
     return this.bridge.length <= this.idx;

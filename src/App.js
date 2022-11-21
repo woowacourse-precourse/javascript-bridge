@@ -1,6 +1,7 @@
 const BridgeGame = require("./model/BridgeGame");
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
+const { COMMAND } = require("./constants/input.constants");
 
 class App {
   game;
@@ -42,8 +43,26 @@ class App {
 
   gameEndControl() {
     InputView.readGameCommand((input) => {
-      this.game.endValidate(input);
+      try {
+        this.game.endValidate(input);
+        this.decideCommand(input);
+      } catch (err) {
+        OutputView.printError(err.message);
+        this.gameEndControl();
+      }
     });
+  }
+
+  decideCommand(command) {
+    if (command === COMMAND.RETRY) {
+      this.game.retry();
+      return;
+    }
+    this.gameEnd();
+  }
+
+  gameEnd() {
+    OutputView.printResult();
   }
 }
 
