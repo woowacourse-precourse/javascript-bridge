@@ -16,8 +16,8 @@ const BridgeMaker = {
     const randomArr = ARRAY.getArr().map(
       (element) => (element = generateRandomNumber())
     );
-    let newArr = randomArr.map((element) => (element === "1" ? "U" : "D"));
-    return newArr;
+    const answerArr = randomArr.map((element) => (element === "1" ? "U" : "D"));
+    return answerArr;
   },
   changeRandomArray(randomArr) {
     //다리 배열 생성

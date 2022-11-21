@@ -33,11 +33,12 @@ const OutputView = {
     MissionUtils.Console.print(messageObject.RESULT_GAME);
     this.printMap(bridgeArr);
     // X 값 유무 확인
-    if (bridgeArr.includes("X"))
-      MissionUtils.Console.print(`${messageObject.SUCCESS_FAIL} 실패`);
-    else MissionUtils.Console.print(`${messageObject.SUCCESS_FAIL} 성공`);
+    bridgeArr.includes("X")
+      ? MissionUtils.Console.print(`${messageObject.SUCCESS_FAIL} 실패`)
+      : MissionUtils.Console.print(`${messageObject.SUCCESS_FAIL} 성공`);
     // 총 게임 횟수 출력
     MissionUtils.Console.print(`${messageObject.SUM_TRY} ${tryGame}`);
+    MissionUtils.Console.close();
   },
 };
 
