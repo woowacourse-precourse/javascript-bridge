@@ -1,4 +1,5 @@
-const BridgeMaker = require("./BridgeMaker");
+const BridgeCheck = require("./BridgeSet");
+const BridgeSet = require("./BridgeSet");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { GAME_CHOICE, SPACE_TO_MOVE, OUTPUT_MESSAGE } = require("./Utils")
 /**
@@ -28,14 +29,25 @@ class BridgeGame {
    */
   move() {
     if(this.#bridge.length === 0) {
-     
+     this.end(true);
     }
     if(this.moving === this.#bridge[0]) {
-
+      this.moveSuccess();
     }
     if(this.moving !== this.#bridge[0]) {
-
+      this.moveFailure();
     }
+  }
+
+  moveSuccess() {
+    BridgeSet.BridgePass(this.moving);
+    this.#bridge.shift();
+    return BridgeSet.repeat()
+  }
+
+  moveFailure() {
+    BridgeSet.BridgeFail(this.moving);
+    return this.gameWheter();
   }
 
   /**
@@ -44,6 +56,8 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {}
+
+  end() {}
 }
 
 module.exports = BridgeGame;
