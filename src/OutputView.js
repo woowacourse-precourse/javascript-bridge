@@ -15,16 +15,8 @@ const OutputView = {
   printMap(bridge, currentIndex, isCurrentCorrect) {
     let upperArray = bridge.map(v => v == "U"? "O" : " ")
     let lowerArray = bridge.map(v => v == "D"? "O" : " ")
-
     if (!isCurrentCorrect) {
-      if (upperArray[currentIndex] == "O"){
-        lowerArray[currentIndex] = "X";
-        upperArray[currentIndex] = " ";
-      }
-      if (lowerArray[currentIndex] == "O"){
-        upperArray[currentIndex] = "X";
-        lowerArray[currentIndex] = " ";
-      }
+      this.printChangeToX(upperArray, lowerArray, currentIndex);
     }
     Console.print(`[ ${upperArray.join(" | ")} ]`);
     Console.print(`[ ${lowerArray.join(" | ")} ]\n`);
@@ -35,6 +27,17 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  printChangeToX(upperArray, lowerArray, currentIndex){    
+    if (upperArray[currentIndex] == "O"){
+      lowerArray[currentIndex] = "X";
+      upperArray[currentIndex] = " ";
+    }
+    if (lowerArray[currentIndex] == "O"){
+      upperArray[currentIndex] = "X";
+      lowerArray[currentIndex] = " ";
+    }
+  },
+  
   printResult(bridge, totalGames, isPlayerWin) {
     Console.print('최종 게임 결과');
     this.printMap(bridge, bridge.length-1, isPlayerWin);
