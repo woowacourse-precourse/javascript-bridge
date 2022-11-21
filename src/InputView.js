@@ -19,6 +19,7 @@ const InputView = {
         Validator.bridgeSize(+userInput);
 
         BridgeGame.bridge = makeBridge(+userInput, generate);
+        BridgeGame.tryCount += 1;
 
         this.readMoving();
       } catch (error) {
@@ -59,11 +60,9 @@ const InputView = {
       try {
         Validator.retry(userInput);
 
-        BridgeGame.retryCount += 1;
-
         userInput === 'R'
           ? BridgeGame.retry(this.readMoving.bind(this))
-          : printResult(map);
+          : printResult(map, false, BridgeGame.tryCount);
       } catch (error) {
         Console.print(error.message);
 

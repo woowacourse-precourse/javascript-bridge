@@ -1,29 +1,29 @@
-const OutputView = require("./OutputView");
+const OutputView = require('./OutputView');
 
 class BridgeMap {
   static createMap(mapInfo, readFuncs) {
-    const { gameState, originBridgeSize } = mapInfo;
+    const { gameState, originBridgeSize, tryCount } = mapInfo;
 
-    let upBridge = "[ ";
-    let downBridge = "[ ";
+    let upBridge = '[ ';
+    let downBridge = '[ ';
 
     gameState.forEach(([moving, gameResult], index) => {
-      if (moving === "U") {
+      if (moving === 'U') {
         upBridge += `${gameResult} `;
-        downBridge += "  ";
+        downBridge += '  ';
       }
 
-      if (moving === "D") {
+      if (moving === 'D') {
         downBridge += `${gameResult} `;
-        upBridge += "  ";
+        upBridge += '  ';
       }
 
       if (index === gameState.length - 1) {
-        upBridge += "]";
-        downBridge += "]";
+        upBridge += ']';
+        downBridge += ']';
       } else {
-        upBridge += "| ";
-        downBridge += "| ";
+        upBridge += '| ';
+        downBridge += '| ';
       }
     });
 
@@ -32,6 +32,7 @@ class BridgeMap {
       lastResult: gameState.at(-1)[1],
       originBridgeSize,
       currentBridgeSize: gameState.length,
+      tryCount,
     };
 
     OutputView.printMap(gameInfo, readFuncs);
