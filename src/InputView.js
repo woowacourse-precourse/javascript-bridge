@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { BridgeSize, MoveInput } = require("./Utils");
+const { BridgeSize, MoveInput, CommandInput } = require("./Utils");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
@@ -37,7 +37,14 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(
+      "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (command) => {
+        new CommandInput(command);
+      }
+    );
+  },
 };
 
 module.exports = InputView;
