@@ -1,5 +1,5 @@
 const SETTING = require('../src/constants/gameSetting');
-const BridgeMap = require('../src/Model/BridgeMap');
+const BridgeMap = require('../src/Domain/BridgeMap');
 
 describe('BridgeMap 테스트', () => {
   test('위로 세번 이동 성공', () => {

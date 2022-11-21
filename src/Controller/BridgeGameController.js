@@ -1,5 +1,5 @@
 const BridgeMaker = require('../BridgeMaker');
-const BridgeGame = require('../Model/BridgeGame');
+const BridgeGame = require('../Domain/BridgeGame');
 const OutputView = require('../View/OutputView');
 const InputView = require('../View/InputView');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
