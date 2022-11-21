@@ -1,8 +1,9 @@
 const BridgeRepository = require('../repository/BridgeRepository');
-const BridgeCheck = require('./domain/BridgeCheck');
+const BridgeFinalResult = require('./domain/BridgeCheck');
 const BridgeStart = require('./domain/BridgeStart');
 const BridgeRestart = require('./domain/BridgeRestart');
 const UpDownKey = require('./domain/UpDownKey');
+const BridgeUserMap = require('./domain/BridgeUserMap');
 
 class BridgeService {
   #bridgeRepository;
@@ -30,19 +31,19 @@ class BridgeService {
   }
 
   getMoveResult() {
-    const bridgeCheck = new BridgeCheck({
+    const bridgeCheck = new BridgeUserMap({
       repo: this.#bridgeRepository
     });
 
-    return bridgeCheck.getUserBridgeState();
+    return bridgeCheck.getOutput();
   }
 
   getGameResult() {
-    const bridgeCheck = new BridgeCheck({
+    const bridgeCheck = new BridgeFinalResult({
       repo: this.#bridgeRepository
     });
 
-    return bridgeCheck.getGameState();
+    return bridgeCheck.getOutput();
   }
 
   restart() {
