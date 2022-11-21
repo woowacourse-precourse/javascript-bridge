@@ -4,6 +4,7 @@ const BridgeMaker = require("../BridgeMaker");
 const Errors = require("../Error");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
+const BridgeGame = require("../BridgeGame");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -14,12 +15,13 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (size) => {
-      Errors.bridgeSizeError(size);
-      const game = BridgeMaker.makeBridge(
-        size,
-        BridgeRandomNumberGenerator.generate
-      );
-      this.readMoving(game);
+      if (Errors.bridgeSizeError(size)) {
+        const bridge = BridgeMaker.makeBridge(
+          size,
+          BridgeRandomNumberGenerator.generate
+        );
+        this.readMoving(new BridgeGame(bridge));
+      }
     });
   },
 
@@ -30,13 +32,18 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
-        Errors.movingError(input);
-        if (game.move(input)) {
-          return this.correctMove(game, input);
+        if (Errors.movingError(input)) {
+          this.checkmove(game, input);
         }
-        return this.wrongMove(game, input);
       }
     );
+  },
+
+  checkmove(game, input) {
+    if (game.move(input)) {
+      return this.correctMove(game, input);
+    }
+    return this.wrongMove(game, input);
   },
 
   correctMove(game, input) {
@@ -59,13 +66,18 @@ const InputView = {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
-        Errors.readGameError(input);
-        if (input === "R") {
-          return this.restart(game);
+        if (Errors.readGameError(input)) {
+          this.checkCommand(game, input);
         }
-        return OutputView.printResult("실패", game.getTryCount());
       }
     );
+  },
+
+  checkCommand(game, input) {
+    if (input === "R") {
+      return this.restart(game);
+    }
+    return OutputView.printResult("실패", game.getTryCount());
   },
 
   restart(game) {

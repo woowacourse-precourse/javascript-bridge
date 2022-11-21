@@ -17,7 +17,7 @@ const BridgeMaker = {
         bridge.push("U");
       }
     }
-    return new BridgeGame(bridge);
+    return bridge;
   },
 };
 
