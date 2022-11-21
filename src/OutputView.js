@@ -5,6 +5,7 @@ const { print } = require('./utils');
  */
 
 const START_MESSAGE = '다리 건너기 게임을 시작합니다.\n';
+const END_MESSAGE = '최종 게임 결과';
 
 const OutputView = {
   printStart() {
@@ -16,15 +17,18 @@ const OutputView = {
     const curFirstLine = firstLine.slice(0, location).join(' | ');
     const curSecondLine = secondLine.slice(0, location).join(' | ');
     print('[ ' + curFirstLine + ' ]');
-    print('[ ' + curSecondLine + ' ]');
+    print('[ ' + curSecondLine + ' ]\n');
   },
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult() {},
+  printEnd() {
+    print(END_MESSAGE);
+  },
+
+  printResult(isSuccess, tryCount) {
+    const result = isSuccess ? '성공' : '실패';
+    print('게임 성공 여부: ' + result);
+    print('총 시도한 횟수: ' + tryCount);
+  },
 };
 
 module.exports = OutputView;
