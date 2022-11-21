@@ -32,15 +32,22 @@ const InputView = {
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
         Errors.movingError(input);
-        if (game.move(input)) {
-          OutputView.printMap(input);
-          this.readMoving(game);
-        } else {
-          OutputView.printResult();
-          this.readGameCommand();
-        }
+        game.move(input)
+          ? this.correctMove(game, input)
+          : this.wrongMove(game, input);
       }
     );
+  },
+
+  correctMove(game, input) {
+    OutputView.printMap(input);
+    this.readMoving(game);
+  },
+
+  wrongMove(game, input) {
+    Console.print("Wrong");
+    OutputView.printResult();
+    this.readGameCommand();
   },
 
   /**
