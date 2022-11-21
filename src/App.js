@@ -1,10 +1,12 @@
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const BridgeController = require('./controller/BridgeController');
 
 class App {
+  #bridgeController;
+  constructor() {
+    this.#bridgeController = new BridgeController();
+  }
   play() {
-    OutputView.printStartAnnouncement();
-    InputView.readBridgeSize();
+    this.#bridgeController.start();
   }
 }
 const app = new App();
