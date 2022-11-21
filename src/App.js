@@ -36,6 +36,7 @@ class App {
     printMap(bridgeGame, step, moving);
     const isSuccess = bridgeGame.move(step, moving);
     printResult(bridgeGame, isSuccess);
+    Console.close();
   }
 
   readGameCommand() {}
