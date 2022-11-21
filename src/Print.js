@@ -28,8 +28,9 @@ class Print {
   static Blank() {
     Console.print('');
   }
-  static Bridge(array) {
-    Console.print(array.join(''));
+  static BothBridge(upside, downSide) {
+    Console.print(array1.join(''));
+    Console.print(array2.join(''));
   }
 }
 

@@ -39,13 +39,11 @@ const OutputView = {
       bridgeUpside.push(' | ');
       bridgeDownside.push(' | ');
     }
-    bridgeUpside.pop(' | ');
-    bridgeDownside.pop(' | ');
+    bridgeUpside.pop();
+    bridgeDownside.pop();
     bridgeUpside.push(' ]');
     bridgeDownside.push(' ]');
-
-    Print.Bridge(bridgeUpside);
-    Print.Bridge(bridgeDownside);
+    Print.BothBridge(bridgeUpside, bridgeDownside);
   },
 
   /**
