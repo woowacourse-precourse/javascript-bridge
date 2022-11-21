@@ -12,6 +12,14 @@ class BridgeGame {
    */
   move(moving) {
     this.#path.push(moving);
+
+    return checkFall();
+  }
+
+  checkFall() {
+    const index = this.#path.length-1;
+    if(this.#path[index] === this.#bridge[index]) return true;
+    return false;
   }
 
   /**
