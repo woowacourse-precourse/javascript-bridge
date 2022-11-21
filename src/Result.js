@@ -46,14 +46,19 @@ class Result {
 
   addResultLast(last, bool, direction) {
     if (bool) {
-      return direction === last
-        ? RESULT_CHARACTER.RIGHT + RESULT_CHARACTER.CLOSE
-        : RESULT_CHARACTER.EMPTY + RESULT_CHARACTER.CLOSE;
+      return this.addResultLastPart(direction, last);
     }
     if (direction == last) {
       return RESULT_CHARACTER.EMPTY + RESULT_CHARACTER.CLOSE;
     }
     return RESULT_CHARACTER.WRONG + RESULT_CHARACTER.CLOSE;
+  }
+
+  addResultLastPart(direction, last) {
+    if (direction === last) {
+      return RESULT_CHARACTER.RIGHT + RESULT_CHARACTER.CLOSE;
+    }
+    return RESULT_CHARACTER.EMPTY + RESULT_CHARACTER.CLOSE;
   }
 
   print() {
