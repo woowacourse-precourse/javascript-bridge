@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const InputTypeValidator = require('./InputTypeValidator');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -10,6 +11,7 @@ const InputView = {
   readBridgeSize(next) {
     const ASK_BRIDGE_SIZE = '다리의 길이를 입력해주세요.';
     MissionUtils.Console.readLine(ASK_BRIDGE_SIZE, (input) => {
+      InputTypeValidator.isInteger(input);
       next(input);
     });
   },
@@ -20,6 +22,7 @@ const InputView = {
   readMoving(next) {
     const ASK_MOVE = '이동할 칸을 선택해주세요. (위: U, 아래: D)';
     MissionUtils.Console.readLine(ASK_MOVE, (input) => {
+      InputTypeValidator.isChar(input);
       next(input);
     });
   },
@@ -31,6 +34,7 @@ const InputView = {
     const ASK_RETRY =
       '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)';
     MissionUtils.Console.readLine(ASK_RETRY, (input) => {
+      InputTypeValidator.isChar(input);
       next(input);
     });
   },
