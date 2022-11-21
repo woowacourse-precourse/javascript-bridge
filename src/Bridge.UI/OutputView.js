@@ -24,13 +24,14 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(endGamePlayerMoveShape) {
-    Console.print(GAME.END);
-    Console.print(endGamePlayerMoveShape);
+  printResult(resultMap) {
+    Console.print(resultMap);
     return;
   },
 
-  printGameEnd(isGameWin, reTryCount) {
+  printGameEnd(resultMap, isGameWin, reTryCount) {
+    Console.print(GAME.END);
+    Console.print(resultMap);
     if (isGameWin) Console.print(GAME.SUCCESS_END);
     if (!isGameWin) Console.print(GAME.FAILURE_END);
     Console.print(GAME.ALL_RETRY_COUNT(reTryCount));

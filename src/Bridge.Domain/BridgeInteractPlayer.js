@@ -67,12 +67,13 @@ class BridgeInteractPlayer {
   }
 
   playerEndThisGame(bridge, isWin) {
-    OutputView.printResult(
+    OutputView.printGameEnd(
       this.#bridgeGameShape
         .getCurrentBridgeGameShape(bridge, isWin)
-        .getCurrentShape()
+        .getCurrentShape(),
+      isWin,
+      this.#player.getBridgeGameTryCount()
     );
-    OutputView.printGameEnd(isWin, this.#player.getBridgeGameTryCount());
     return;
   }
 }
