@@ -1,5 +1,4 @@
 const { Console } = require("@woowacourse/mission-utils");
-const InputView = require("./InputView");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -10,104 +9,27 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
 
-  printMap(step, bridge) {
-    const currentBridge = ["[", "["];
-    if (step === 0) {
-      if (bridge[0] === "D") {
-        currentBridge[0] += "   ]";
-        currentBridge[1] += " 0 ]";
+  printMap(currentBridge) {
+    const bridgeMap = ["[", "["];
+    for (let i = 0; i < currentBridge.length; i++) {
+      if (currentBridge[i][0] === "U") {
+        bridgeMap[0] += ` ${currentBridge[i][1]} |`;
+        bridgeMap[1] += "   |";
       }
-
-      if (bridge[0] === "U") {
-        currentBridge[0] += " 0 ]";
-        currentBridge[1] += "   ]";
-      }
-      Console.print(currentBridge[0]);
-      Console.print(currentBridge[1]);
-      return;
-    }
-
-    for (let i = 0; i < step + 1; i++) {
-      if (bridge[i] === "D") {
-        currentBridge[0] += "   |";
-        currentBridge[1] += " O |";
-      }
-      if (bridge[i] === "U") {
-        currentBridge[0] += " O |";
-        currentBridge[1] += "   |";
+      if (currentBridge[i][0] === "D") {
+        bridgeMap[0] += "   |";
+        bridgeMap[1] += ` ${currentBridge[i][1]} |`;
       }
     }
-    currentBridge[0] = currentBridge[0].substring(
-      0,
-      currentBridge[0].length - 1
-    );
-    currentBridge[1] = currentBridge[1].substring(
-      0,
-      currentBridge[1].length - 1
-    );
 
-    currentBridge[0] += "]";
-    currentBridge[1] += "]";
+    bridgeMap[0] = bridgeMap[0].substring(0, bridgeMap[0].length - 1);
+    bridgeMap[1] = bridgeMap[1].substring(0, bridgeMap[1].length - 1);
 
-    Console.print(currentBridge[0]);
-    Console.print(currentBridge[1]);
-  },
+    bridgeMap[0] += "]";
+    bridgeMap[1] += "]";
 
-  printWrongMap(step, bridge) {
-    const currentBridge = ["[", "["];
-    if (step === 0) {
-      if (bridge[0] === "D") {
-        currentBridge[0] += " X ]";
-        currentBridge[1] += "   ]";
-      }
-
-      if (bridge[0] === "U") {
-        currentBridge[0] += "   ]";
-        currentBridge[1] += " X ]";
-      }
-      Console.print(currentBridge[0]);
-      Console.print(currentBridge[1]);
-      return;
-    }
-
-    for (let i = 0; i < step + 1; i++) {
-      if (i === step) {
-        if (bridge[i] === "D") {
-          currentBridge[0] += " X |";
-          currentBridge[1] += "   |";
-        }
-        if (bridge[i] === "U") {
-          currentBridge[0] += "   |";
-          currentBridge[1] += " X |";
-        }
-        break;
-      }
-      if (bridge[i] === "D") {
-        currentBridge[0] += "   |";
-        currentBridge[1] += " O |";
-      }
-      if (bridge[i] === "U") {
-        currentBridge[0] += " O |";
-        currentBridge[1] += "   |";
-      }
-    }
-    currentBridge[0] = currentBridge[0].substring(
-      0,
-      currentBridge[0].length - 1
-    );
-    currentBridge[1] = currentBridge[1].substring(
-      0,
-      currentBridge[1].length - 1
-    );
-
-    currentBridge[0] += "]";
-    currentBridge[1] += "]";
-
-    Console.print(currentBridge[0]);
-    Console.print(currentBridge[1]);
-
-    // InputView.readBridgeSize();
-    // InputView.readGameCommand();
+    Console.print(bridgeMap[0]);
+    Console.print(bridgeMap[1]);
   },
 
   /**
@@ -115,13 +37,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(state, round, step, bridge) {
+  printResult(state, round, currentBridge) {
     Console.print("최종 게임 결과");
     if (state === "성공") {
-      this.printMap(step, bridge);
+      this.printMap(currentBridge);
     }
     if (state === "실패") {
-      this.printWrongMap(step, bridge);
+      this.printMap(currentBridge);
     }
 
     Console.print(`게임 성공 여부: ${state}`);

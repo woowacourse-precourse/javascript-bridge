@@ -17,14 +17,34 @@ class App {
   progressGame(bridge, size) {
     console.log(bridge.getBridge());
     InputView.readMoving((answer) => {
+      // if (bridge.checkInputIsCorrect(answer, bridge.step)) {
+      //   OutputView.printMap(bridge.step, bridge.getBridge());
+      //   if (bridge.checkIsLastStep(bridge.step, size - 1)) {
+      //     OutputView.printResult(
+      //       "성공",
+      //       bridge.round,
+      //       bridge.step,
+      //       bridge.getBridge()
+      //     );
+      //     return;
+      //   }
+      //   bridge.addStep();
+      //   this.progressGame(bridge, size);
+      //   return;
+      // }
+      // OutputView.printWrongMap(bridge.step, bridge.getBridge());
+      // this.askRetry(bridge, size);
+
       if (bridge.checkInputIsCorrect(answer, bridge.step)) {
-        OutputView.printMap(bridge.step, bridge.getBridge());
+        bridge.move(answer);
+        OutputView.printMap(bridge.getCurrentBridge());
         if (bridge.checkIsLastStep(bridge.step, size - 1)) {
           OutputView.printResult(
             "성공",
             bridge.round,
             bridge.step,
-            bridge.getBridge()
+            bridge.getBridge(),
+            bridge.getCurrentBridge()
           );
           return;
         }
@@ -32,7 +52,8 @@ class App {
         this.progressGame(bridge, size);
         return;
       }
-      OutputView.printWrongMap(bridge.step, bridge.getBridge());
+      bridge.stop(answer);
+      OutputView.printMap(bridge.getCurrentBridge());
       this.askRetry(bridge, size);
     });
   }
@@ -40,17 +61,13 @@ class App {
   askRetry(bridge, size) {
     InputView.readGameCommand((answer) => {
       if (answer === "Q") {
-        OutputView.printResult(
-          "실패",
-          bridge.round,
-          bridge.step,
-          bridge.getBridge()
-        );
+        OutputView.printResult("실패", bridge.round, bridge.getBridge());
         return;
       }
       if (answer === "R") {
         bridge.addRound();
         bridge.resetStep();
+        bridge.resetCurrentBridge();
         this.progressGame(bridge, size);
       }
     });
