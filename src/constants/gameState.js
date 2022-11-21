@@ -12,4 +12,21 @@ const DIRECTION_MATCH = Object.freeze({
   RIGHT: "O",
   WRONG: "X",
 });
-module.exports = { BRIDGE_LENGTH, DIRECTION, DIRECTION_MATCH };
+
+const RETRY = Object.freeze({
+  RETRY: "R",
+  QUIT: "Q",
+});
+
+const SUCCESS_RESULT = Object.freeze({
+  SUCCESS: "성공",
+  FAIL: "실패",
+});
+
+module.exports = {
+  BRIDGE_LENGTH,
+  DIRECTION,
+  DIRECTION_MATCH,
+  RETRY,
+  SUCCESS_RESULT,
+};
