@@ -1,10 +1,13 @@
 const BridgeGame = require("./controller/BridgeGame");
+const BridgeGameV2 = require("./controller/BridgeGameV2");
+const TwoPositionFactory = require("./model/PositionFactory/TwoPositionFactory");
 
 class App {
   constructor() {
   }
   play() {
-    new BridgeGame();
+    const game = new BridgeGameV2(new TwoPositionFactory());
+    game.next();
   }
 }
 

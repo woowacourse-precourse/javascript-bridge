@@ -1,9 +1,8 @@
 const BridgeMaker = require("../BridgeMaker");
 const InputView = require("../view/InputView");
 const OutputView = require("../view/OutputView");
-const Position = require("../model/Position");
+const PositionFactory = require("../model/PositionFactory/TwoPositionFactory");
 const Bridge = require("../model/Bridge");
-const Result = require("../model/Result");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 
 /**
@@ -12,19 +11,22 @@ const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 class BridgeGame {
   /** @type {Bridge} */
   #bridge;
-  /** @type {Result} */
-  #curResult;
   /** @type {number} */
   #tryCount;
+  /** @type {PositionFactory} */
+  #positionFactory;
 
-  constructor() {
+  constructor(positionFactory) {
     this.#tryCount = 1;
+    this.#positionFactory = positionFactory;
+    OutputView.printStart();
     InputView.readBridgeSize(this.start.bind(this));
   }
+
   start(command) {
-    OutputView.printStart();
     const size = parseInt(command);
-    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.#bridge = new Bridge(bridge.map(position => this.#positionFactory.createPosition(position.toUpperCase())));
     InputView.readMoving(this.move.bind(this));
   }
   /**
@@ -33,19 +35,18 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(command) {
-    const index = command.toUpperCase() === "U" ? 0 : 1;
-    const position = new Position(index);
-    this.#bridge.movePosition(position);
-    this.#curResult = this.#bridge.currentResult();
-    if (this.#curResult.isFailed()) {
+    this.#bridge.movePosition(this.#positionFactory.createPosition(command.toUpperCase()));
+    const curResult = this.#bridge.currentResult();
+    if (curResult.isFailed()) {
+      OutputView.printMap(curResult.stringify());
       InputView.readGameCommand(this.retry.bind(this));
       return;
     }
-    if (this.#curResult.isCompelete()) {
-      OutputView.printResult(this.#curResult.stringify(), this.#tryCount);
+    if (curResult.isCompelete()) {
+      OutputView.printResult(curResult.stringify(), true, this.#tryCount);
       return;
     }
-    OutputView.printMap(this.#curResult.stringify());
+    OutputView.printMap(curResult.stringify());
     InputView.readMoving(this.move.bind(this));
   }
 
@@ -57,10 +58,11 @@ class BridgeGame {
   retry(command) {
     const isRetry = command.toUpperCase() === "R" ? true : false;
     if (!isRetry) {
-      OutputView.printResult(this.#curResult.stringify(), this.#tryCount);
+      OutputView.printResult(this.#bridge.currentResult().stringify(), false, this.#tryCount);
       return;
     }
     this.#bridge.emptyPositions();
+    this.#tryCount += 1;
     InputView.readMoving(this.move.bind(this));
   }
 }
