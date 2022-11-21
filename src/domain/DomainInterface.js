@@ -13,6 +13,10 @@ const DomainInterface = class {
     this.#currentLocation.resetCurrentLocation();
   }
 
+  addMovingCount() {
+    this.#totalMovingCount.plusTotalMovingCount();
+  }
+
   setBridgeLength(length) {
     this.#bridge.setBridgeLength(length);
   }
