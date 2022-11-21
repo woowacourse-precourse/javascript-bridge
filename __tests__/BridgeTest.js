@@ -1,7 +1,13 @@
+const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
 const BridgeMaker = require('../src/BridgeMaker');
 const BridgeGame = require('../src/BridgeGame');
 
 describe('다리 테스트', () => {
+  test('다리 생성이 0과 1로 이루어져 있는지 테스트', () => {
+    const bridgeNumber = BridgeRandomNumberGenerator.generate();
+    expect(bridgeNumber === 0 || bridgeNumber === 1).toBeTruthy();
+  });
+
   test('다리 생성 테스트', () => {
     const randomNumbers = ['1', '0', '1'];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
