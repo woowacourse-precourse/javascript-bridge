@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
+const InputView = require('../src/InputView');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -85,20 +86,23 @@ describe('다리 건너기 테스트', () => {
   });
 });
 
-describe('다리 길이 입력 받아오기 테스트', () => {
+describe('입력 받아오기 테스트', () => {
   test.each([
-    [['3'], 3],
-    [['woowa', '0x13', '12.345', '20'], 20],
-  ])('정상', (inputs, solution) => {
+    [['3'], 3, InputView.readBridgeSize],
+    [['woowa', '0x13', '12.345', '20'], 20, InputView.readBridgeSize],
+    [['Q', '0', 'U'], 'U', InputView.readMoving],
+    [['X', 'D', 'U', '121687', 'Q'], 'Q', InputView.readGameCommand],
+  ])('정상', (inputs, solution, inputFunction) => {
     mockQuestions(inputs);
-    expect(App.requestBridgeSize()).toEqual(solution);
+    expect(App.requestUserInput(inputFunction)).toEqual(solution);
   });
 
   test.each([
-    [['a']],
-    [new Array(200).fill(12.345)],
-  ])('예외: 너무 많이 틀렸을 경우', (inputs) => {
+    [['a'], InputView.readBridgeSize],
+    [new Array(123).fill('\n'), InputView.readMoving],
+    [new Array(123).fill(' '), InputView.readGameCommand],
+  ])('예외 다리 길이 입력: 너무 많이 틀렸을 경우', (inputs, inputFunction) => {
     mockQuestions(inputs);
-    expect(App.requestBridgeSize).toThrow('[ERROR]');
+    expect(() => App.requestUserInput(inputFunction)).toThrow('[ERROR]');
   });
 });
