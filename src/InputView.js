@@ -5,22 +5,37 @@ const Validation = require('./Validation');
 const InputView = {
   readBridgeSize(process) {
     Console.readLine(GAME.BRIDGE_SIZE, (input) => {
-      Validation.bridgeSize(input);
-      process.makeBridge(input);
+      try {
+        Validation.bridgeSize(input);
+        process.makeBridge(input);
+      } catch (error) {
+        Console.print(error.message);
+        this.readBridgeSize(process);
+      }
     });
   },
 
   readMoving(process) {
     Console.readLine(GAME.MOVING, (input) => {
-      Validation.moving(input);
-      process.move(input);
+      try {
+        Validation.moving(input);
+        process.move(input);
+      } catch (error) {
+        Console.print(error.message);
+        this.readMoving(process);
+      }
     });
   },
 
   readGameCommand(process) {
     Console.readLine(GAME.RETRY, (input) => {
-      Validation.gameCommand(input);
-      process.retryOrQuit(input);
+      try {
+        Validation.gameCommand(input);
+        process.retryOrQuit(input);
+      } catch (error) {
+        Console.print(error.message);
+        this.readGameCommand(process);
+      }
     });
   },
 };
