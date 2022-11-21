@@ -3,12 +3,9 @@ const gameConst = require("./const");
 
 const InputView = {
   readBridgeSize(moveStart) {
-    Console.readLine(
-      gameConst.process.INPUT_LENGTH_MESSAGE + "\n",
-      (length) => {
-        try {
-          this.validateBridgeLength(length);
-        } catch (err) {
+    Console.readLine(gameConst.process.INPUT_LENGTH_MESSAGE + "\n", (length) => {
+        try { this.validateBridgeLength(length); } 
+        catch (err) {
           Console.print(err);
           this.readBridgeSize(moveStart);
           return;
@@ -20,28 +17,24 @@ const InputView = {
 
   readMoving(move) {
     Console.readLine(gameConst.process.INPUT_CHOOSE_MESSAGE + "\n", (cmd) => {
-      try {
-        this.validateMoveCommand(cmd);
-      } catch (err) {
+      try { this.validateMoveCommand(cmd); } 
+      catch (err) {
         Console.print(err);
         this.readMoving(move);
         return;
       }
-
       move(cmd);
     });
   },
 
   readGameCommand(makeDecision) {
     Console.readLine(gameConst.process.INPUT_RESART_MESSAGE + "\n", (cmd) => {
-      try {
-        this.validateRetryCommand(cmd);
-      } catch (err) {
+      try { this.validateRetryCommand(cmd); } 
+      catch (err) {
         Console.print(err);
         this.readGameCommand(makeDecision);
         return;
       }
-
       makeDecision(cmd);
     });
   },
@@ -56,13 +49,13 @@ const InputView = {
   },
 
   validateMoveCommand(cmd) {
-    if (cmd !== gameConst.cmd.UP && cmd !== gameConst.cmd.DOWN) {
+    if (cmd !== gameConst.cmd.UP_CMD && cmd !== gameConst.cmd.DOWN_CMD) {
       throw new Error(gameConst.error.MOVE_COMMAND_ERROR);
     }
   },
 
   validateRetryCommand(cmd) {
-    if (cmd !== gameConst.cmd.QUIT && cmd !== gameConst.cmd.RETRY) {
+    if (cmd !== gameConst.cmd.QUIT_CMD && cmd !== gameConst.cmd.RETRY_CMD) {
       throw new Error(gameConst.error.RETRY_COMMAND_ERROR);
     }
   },

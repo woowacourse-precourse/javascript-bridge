@@ -22,17 +22,14 @@ class BridgeGame {
   }
 
   move(cmd) {
-    const mark = this.realBridge[this.curr] === cmd ? gameConst.sign.O_SIGN : gameConst.sign.X_SIGN;
-    if (cmd === "U") {
-      this.userBridge.up.push(mark);
-      this.userBridge.down.push(gameConst.sign.BLANK_SIGN);
-    } else {
-      this.userBridge.down.push(mark);
-      this.userBridge.up.push(gameConst.sign.BLANK_SIGN);
-    }
-    this.curr += 1;
+    const MARK = this.realBridge[this.curr] === cmd ? gameConst.sign.O_SIGN : gameConst.sign.X_SIGN;
+    const MARK_ARR = cmd == gameConst.cmd.UP_CMD ? this.userBridge.up : this.userBridge.down;
+    const BLANK_ARR = cmd == gameConst.cmd.UP_CMD ? this.userBridge.down : this.userBridge.up; 
 
-    return mark;
+    MARK_ARR.push(MARK);
+    BLANK_ARR.push(gameConst.sign.BLANK_SIGN);
+    this.curr += 1;
+    return MARK;
   }
 
   retry() {

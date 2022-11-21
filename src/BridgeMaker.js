@@ -8,7 +8,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     return [...Array(size)].map((x) =>
-      Number(generateRandomNumber()) === 0 ? gameConst.cmd.DOWN : gameConst.cmd.UP
+      Number(generateRandomNumber()) === 0 ? gameConst.cmd.DOWN_CMD : gameConst.cmd.UP_CMD
     );
   },
 };

@@ -2,6 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 const InputView = require("./InputView");
+const gameConst = require("./const");
 
 class App {
   #game;
@@ -30,27 +31,26 @@ class App {
   }
 
   checkFinish(result) {
-    if (result === "O") {
-      if (this.#game.realBridge.length <= this.#game.curr) {
+    if (result === gameConst.sign.O_SIGN && this.#game.realBridge.length <= this.#game.curr) {
         OutputView.printResult(this.#game.userBridge, this.#game.tryCnt, true);
         Console.close();
         return;
-      }
-      this.readMoving();
-    } else {
-      InputView.readGameCommand(this.makeDecision.bind(this));
     }
+    if(result === gameConst.sign.O_SIGN) {
+      this.readMoving();
+      return;
+    }  
+    InputView.readGameCommand(this.makeDecision.bind(this));
   }
 
   makeDecision(cmd) {
-    if (cmd === "R") {
+    if (cmd === gameConst.cmd.RETRY_CMD) {
       this.#game.retry();
       this.readMoving();
-    } else {
-      OutputView.printResult(this.#game.userBridge, this.#game.tryCnt, false);
-      Console.close();
-    }
+      return;
+    } 
+    OutputView.printResult(this.#game.userBridge, this.#game.tryCnt, false);
+    Console.close();
   }
 }
-
 module.exports = App;
