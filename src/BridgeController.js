@@ -1,7 +1,12 @@
 const Exception = require('./utils/Exceptions');
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeGame = require('./BridgeGame');
+
 // 게임 로직 관리
 class BridgeController {
     constructor(views) {
+        this.bridgeGame = new BridgeGame();
         this.inputView = views.inputView,
         this.outputView = views.outputView
         this.start()
@@ -13,7 +18,9 @@ class BridgeController {
     }
 
     createBridge(bridgeSize) {
-        this.bridgeSizeException(bridgeSize)
+        this.bridgeSizeException(bridgeSize);
+        const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+        this.bridgeGame.setBridge(bridge);
     }
 
     bridgeSizeException(bridgeSize) {
