@@ -22,6 +22,10 @@ const OUTPUT_MESSAGES = {
     return `최종 시도 횟수 : ${count}`;
   },
   OUTPUT_STARTGAME: '다리 건너기 게임을 시작합니다.',
+  OUTPUT_ISWINNING(isWinning) {
+    return `게임 성공 여부: ${isWinning ? '성공' : '실패'}`;
+  },
+  OUTPUT_FINSHED: '최종 게임 결과',
 };
 
 const ERROR_MESSAGES = {
