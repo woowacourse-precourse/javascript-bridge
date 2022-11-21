@@ -8,7 +8,7 @@ const bridgeGame = new BridgeGame();
 const MESSAGE = {
   start: "다리 건너기 게임을 시작합니다.\n",
   getLength: "다리의 길이를 입력해주세요.\n",
-  move: "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+  move: "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
   end: "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
 };
 
@@ -46,6 +46,7 @@ const InputView = {
     Console.print(MESSAGE.start);
     Console.readLine(MESSAGE.getLength, (number) => {
       this.validate(number, TYPE.length);
+      Console.print("");
       const randomBridge = makeBridge(Number(number), () => generate());
       bridgeGame.makeBridge(randomBridge);
       this.readMoving();
@@ -60,7 +61,12 @@ const InputView = {
       this.validate(command, TYPE.move);
       bridgeGame.move(command);
       OutPutView.printMap(bridgeGame.upperBridge, bridgeGame.lowerBridge);
-      bridgeGame.isSuccess ? this.readMoving() : this.readGameCommand();
+      if (bridgeGame.end) {
+        OutPutView.printResult(bridgeGame);
+        Console.close();
+      } else {
+        bridgeGame.isSuccess ? this.readMoving() : this.readGameCommand();
+      }
     });
   },
 

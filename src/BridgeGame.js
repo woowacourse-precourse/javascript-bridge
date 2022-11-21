@@ -16,10 +16,11 @@ class BridgeGame {
     this.count = 1;
     this.index = 0;
     this.isSuccess = true;
+    this.end = false;
   }
 
-  makeBridge(number) {
-    this.randomBridge = number;
+  makeBridge(array) {
+    this.randomBridge = array;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -51,6 +52,10 @@ class BridgeGame {
           this.lowerBridge.push(RESULT.fail);
           break;
       }
+    }
+
+    if (this.randomBridge.length === this.index + 1 && this.isSuccess === true) {
+      this.end = true;
     }
 
     this.index++;
