@@ -1,6 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { makeBridge } = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
 
 /**
  * 입력받은 다리의 길이를 검증한다.
@@ -34,10 +32,8 @@ const InputView = {
    */
   readBridgeSize(callback) {
     Console.readLine('다리의 길이를 입력해주세요.\n', (input) => {
-      const bridgeSize = Number(input);
-      checkBridgeSize(bridgeSize);
-      const bridge = makeBridge(bridgeSize, generate);
-      callback(bridge);
+      checkBridgeSize(Number(input));
+      callback(Number(input));
     });
   },
 

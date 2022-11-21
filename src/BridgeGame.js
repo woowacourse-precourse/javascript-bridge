@@ -1,5 +1,7 @@
 const { printGameStart } = require('./OutputView');
 const { readBridgeSize, readMoving } = require('./InputView');
+const { makeBridge } = require('./BridgeMaker');
+const { generate } = require('./BridgeRandomNumberGenerator');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -19,10 +21,10 @@ class BridgeGame {
 
   /**
    * readBridgeSize() 메서드의 콜백 함수
-   * @param {Bridge} bridge 생성한 다리
+   * @param {number} bridgeSize 다리의 크기
    */
-  onReadBridgeSize(bridge) {
-    this.#bridge = bridge;
+  onReadBridgeSize(bridgeSize) {
+    this.#bridge = makeBridge(bridgeSize, generate);
     this.move();
   }
 
