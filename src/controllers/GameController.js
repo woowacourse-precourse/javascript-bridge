@@ -5,9 +5,18 @@ const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 
 const BridgeGame = require('../models/BridgeGame');
+const StateManager = require('../models/StateManager');
+
+const MapGenerator = require('../models/MapGenerator');
 
 class GameContoller {
   #bridgeGame;
+
+  #stateManager = new StateManager();
+
+  #gameStatusMap = {
+    PLAYING: this.inputMoving.bind(this),
+  };
 
   start() {
     OutputView.printStarting();
@@ -23,7 +32,7 @@ class GameContoller {
       size,
       BridgeRandomNumberGenerator.generate,
     );
-    this.#bridgeGame = new BridgeGame(bridge);
+    this.#bridgeGame = new BridgeGame(bridge, this.#stateManager);
 
     this.inputMoving();
   }
@@ -33,9 +42,17 @@ class GameContoller {
   }
 
   onInputMoving(moving) {
-    const map = this.#bridgeGame.move(moving);
+    this.#bridgeGame.move(moving);
 
+    const map = MapGenerator.toString();
     OutputView.printMap(map);
+
+    this.checkGameStatus();
+  }
+
+  checkGameStatus() {
+    const gameStatus = this.#stateManager.getGameStatus();
+    this.#gameStatusMap[gameStatus]();
   }
 }
 

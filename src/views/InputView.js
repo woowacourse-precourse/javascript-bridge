@@ -12,7 +12,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    Console.readLine(`${QUERY.SIZE}\n`, callback);
+    Console.readLine(`\n${QUERY.SIZE}\n`, callback);
   },
 
   /**

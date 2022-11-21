@@ -8,7 +8,7 @@ const MESSAGE = Object.freeze({
  */
 const OutputView = {
   printStarting() {
-    Console.print(`${MESSAGE.START}\n`);
+    Console.print(`${MESSAGE.START}`);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
