@@ -4,10 +4,14 @@ const OutputView = require("./view/OutputView");
 
 class App {
   game;
+  isPossible;
+  isEnd;
 
   play() {
     OutputView.printStart();
-    InputView.readBridgeSize.bind(this)([this.createGame, this.movePlayer]);
+    const { createGame, movePlayer, getGameState, gameEndControl } = this;
+    const callbackArr = [createGame, movePlayer, getGameState, gameEndControl];
+    InputView.readBridgeSize.bind(this)(callbackArr);
   }
 
   createGame(input) {
@@ -15,7 +19,16 @@ class App {
   }
 
   movePlayer(direction) {
-    const isPossibleMove = this.game.move(direction);
+    this.isPossible = this.game.move(direction);
+    this.isEnd = this.game.isEnd();
+  }
+
+  getGameState() {
+    return { isPossible: this.isPossible, isEnd: this.isEnd };
+  }
+
+  gameEndControl(input) {
+    this.game.endValidate(input);
   }
 }
 
