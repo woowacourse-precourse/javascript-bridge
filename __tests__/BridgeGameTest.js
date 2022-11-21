@@ -35,4 +35,21 @@ describe("다리 건너기 게임 진행 테스트", () => {
       expect(matchSymbol).toBe(matchSymbols[index]);
     });
   });
+
+  test("이동 표식 테스트", () => {
+    const bridge = ["U", "D", "D"];
+    const bridgeGame = new BridgeGame(bridge);
+    const directions = [
+      ["U", "U"],
+      ["U", "D"],
+      ["D", "U"],
+      ["D", "D"],
+    ];
+    const matchSymbols = ["O", "X", "X", "O"];
+
+    directions.forEach(([dir1, dir2], index) => {
+      const symbol = bridgeGame.getMatchSymbol(dir1, dir2);
+      expect(symbol).toBe(matchSymbols[index]);
+    });
+  });
 });
