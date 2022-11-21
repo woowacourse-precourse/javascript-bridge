@@ -40,10 +40,8 @@ class App {
       InputView.readMoving(this.moveCallback),
     );
     if (!isDirectionValidate) return;
-
     const { inputHistory, bridge } = this.bridgeGame.move(input);
-    OutputView.printMap(inputHistory, bridge, "D");
-    OutputView.printMap(inputHistory, bridge, "U");
+    OutputView.printUserInput(inputHistory, bridge);
 
     const nextMove = this.bridgeGame.getNextMove(input);
     this.doNextMove(nextMove);
@@ -63,8 +61,7 @@ class App {
 
   endCallback = ({ inputHistory, bridge, isSuccess, tryCount }) => {
     OutputView.printGameEnd();
-    OutputView.printMap(inputHistory, bridge, "D");
-    OutputView.printMap(inputHistory, bridge, "U");
+    OutputView.printUserInput(inputHistory, bridge);
     OutputView.printResult({ isSuccess, tryCount });
   };
 

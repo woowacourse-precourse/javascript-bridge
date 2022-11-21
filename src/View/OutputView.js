@@ -41,6 +41,11 @@ const OutputView = {
   printGameEnd() {
     Console.print("최종 게임 결과");
   },
+
+  printUserInput(inputHistory, bridge) {
+    OutputView.printMap(inputHistory, bridge, "D");
+    OutputView.printMap(inputHistory, bridge, "U");
+  },
 };
 
 module.exports = OutputView;
