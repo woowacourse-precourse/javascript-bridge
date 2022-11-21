@@ -67,6 +67,20 @@ class BridgeModel {
     if (userMoving[index] === standard && !movingRecords[index]) return "X";
     return " ";
   }
+
+  /**
+   * 유저 이동 기록과 다리를 대조하여 다리별 움직임에 대한 성공여부를 반환한다.
+   * @param userMoving {string[]} [유저 이동 기록]
+   * @return {{up: string[], down: string[]}} [다리별 움직임 성공여부]
+   */
+  getMovingStatus(userMoving) {
+    const movingStatus = { up: [], down: [] };
+    for (let index = 0; index < userMoving.length; index++) {
+      movingStatus.up.push(this.getSignFromMove(userMoving, index, "up"));
+      movingStatus.down.push(this.getSignFromMove(userMoving, index, "down"));
+    }
+    return movingStatus;
+  }
 }
 
 module.exports = BridgeModel;
