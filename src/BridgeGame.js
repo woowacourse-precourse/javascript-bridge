@@ -45,8 +45,8 @@ class BridgeGame {
   }
 
   #gameSet(bridge) {
-    Console.readLine(MESSAGE.REGAME, (RE) => {
-      InputView.readGameCommand(bridge);
+    Console.readLine(MESSAGE.REGAME, (re) => {
+      InputView.readGameCommand(re);
     });
   }
 
