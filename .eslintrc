@@ -11,6 +11,7 @@
   },
   "rules": {
     "no-console": "off",
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "max-lines-per-function": ["error", 10]
   }
 }
