@@ -82,15 +82,17 @@ describe('유틸 함수 동작 테스트', () => {
     expect(validCheck.moveInput('U')).toBe(true);
     expect(validCheck.moveInput('D')).toBe(true);
     expect(validCheck.moveInput('1')).toBe(false);
-    expect(validCheck.moveInput('u')).toBe(false);
-    expect(validCheck.moveInput('d')).toBe(false);
+    expect(validCheck.moveInput('u')).toBe(true);
+    expect(validCheck.moveInput('d')).toBe(true);
+    expect(validCheck.moveInput('UD')).toBe(false);
   });
 
   test('재시작/종료 입력값 검증 함수', () => {
     expect(validCheck.quitInput('Q')).toBe(true);
     expect(validCheck.quitInput('R')).toBe(true);
     expect(validCheck.quitInput('1')).toBe(false);
-    expect(validCheck.quitInput('q')).toBe(false);
-    expect(validCheck.quitInput('r')).toBe(false);
+    expect(validCheck.quitInput('q')).toBe(true);
+    expect(validCheck.quitInput('r')).toBe(true);
+    expect(validCheck.quitInput('QR')).toBe(false);
   });
 });
