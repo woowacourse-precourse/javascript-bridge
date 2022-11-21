@@ -1,3 +1,5 @@
+const { ERROR_MESSAGE } = require("./Constants");
+
 class CheckBridgeSizeException{
     #size
     constructor(size){
@@ -12,13 +14,13 @@ class CheckBridgeSizeException{
 
     checkBridgeSize(size){
         if(size > 20 || size < 3){
-            throw new Error("[ERROR] 다리의 길이는 3초과 20미만이여야 합니다.");
+            throw new Error(ERROR_MESSAGE.NOT_BETWEEN_SIZE);
         }
     }
 
     checkBridgeNum(size){
         if(isNaN(size)){
-            throw new Error("[ERROR] 숫자를 입력해주세요.");
+            throw new Error(ERROR_MESSAGE.IS_NOT_NUMBER);
         }
     }
 }
@@ -32,7 +34,7 @@ class CheckUserMove{
 
     CheckInputString(SelectUpOrDown){
         if(SelectUpOrDown !== "U" && SelectUpOrDown !== "D"){
-            throw new Error("[ERROR] U(위) 또는 D(아래)을 입력해주세요.");
+            throw new Error(ERROR_MESSAGE.IS_NOT_GIVEN_MOVE_VALUE);
         }
     } 
 }
@@ -45,7 +47,7 @@ class CheckWhetherGameRunning{
     }
     CheckInputValue(value){
         if(value !== "Q" && value !== "R"){
-            throw new Error("[ERROR] Q(종료) 또는 R(재시작)을 입력해주세요. ");
+            throw new Error(ERROR_MESSAGE.IS_NOT_GIVEN_RUNNING_VALUE);
         }
     }
 }

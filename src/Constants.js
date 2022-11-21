@@ -12,4 +12,11 @@ const PRINT_MESSAGE = {
     GAME_TOTAL_TRY : "총 시도한 횟수: "
 }
 
-module.exports = {INPUT_MESSAGE, PRINT_MESSAGE};
+const ERROR_MESSAGE = {
+    NOT_BETWEEN_SIZE : "[ERROR] 다리의 길이는 3초과 20미만이여야 합니다.",
+    IS_NOT_NUMBER : "[ERROR] 숫자를 입력해주세요.",
+    IS_NOT_GIVEN_MOVE_VALUE : "[ERROR] U(위) 또는 D(아래)을 입력해주세요.",
+    IS_NOT_GIVEN_RUNNING_VALUE : "[ERROR] Q(종료) 또는 R(재시작)을 입력해주세요. "
+}
+
+module.exports = {INPUT_MESSAGE, PRINT_MESSAGE, ERROR_MESSAGE};
