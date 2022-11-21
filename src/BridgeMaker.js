@@ -1,5 +1,5 @@
-const { step } = require('./lib/constants')
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
+const { step } = require('./lib/constants');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 const BridgeMaker = {
   /**
@@ -8,17 +8,17 @@ const BridgeMaker = {
    * @return {string[]}
    */
   makeBridge(size, generateRandomNumber) {
-    const bridge = []
+    const bridge = [];
 
     while (bridge.length !== size) {
-      const randomNumber = generateRandomNumber()
+      const randomNumber = generateRandomNumber();
       if (randomNumber in step) {
-        bridge.push(step[randomNumber])
+        bridge.push(step[randomNumber]);
       }
     }
 
-    return bridge
+    return bridge;
   },
-}
+};
 
-module.exports = BridgeMaker
+module.exports = BridgeMaker;

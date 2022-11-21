@@ -1,5 +1,5 @@
-const MissionUtils = require('@woowacourse/mission-utils')
-const { step } = require('./lib/constants')
+const MissionUtils = require('@woowacourse/mission-utils');
+const { step } = require('./lib/constants');
 
 const OutputView = {
   map: {
@@ -18,7 +18,7 @@ const OutputView = {
   },
 
   gameStart() {
-    MissionUtils.Console.print('다리 건너기 게임을 시작합니다.')
+    MissionUtils.Console.print('다리 건너기 게임을 시작합니다.');
   },
 
   /**
@@ -28,16 +28,16 @@ const OutputView = {
    * @returns {boolean} success - 게임 성공 / 실패 여부
    */
   printMap(bridge, moves, last = false) {
-    const [upside, downside] = this.drawMap(bridge, moves)
+    const [upside, downside] = this.drawMap(bridge, moves);
 
-    if (last) MissionUtils.Console.print(`\n${this.result.LAST}`)
-    MissionUtils.Console.print(this.formatSide(upside))
-    MissionUtils.Console.print(this.formatSide(downside))
+    if (last) MissionUtils.Console.print(`\n${this.result.LAST}`);
+    MissionUtils.Console.print(this.formatSide(upside));
+    MissionUtils.Console.print(this.formatSide(downside));
 
     return (
       upside.every((result) => result !== this.map.WRONG) &&
       downside.every((result) => result !== this.map.WRONG)
-    )
+    );
   },
 
   /**
@@ -46,15 +46,15 @@ const OutputView = {
    * @returns {string[][]}
    */
   drawMap(bridge, moves) {
-    const [upside, downside] = this.initializeMap(moves.length)
+    const [upside, downside] = this.initializeMap(moves.length);
 
     moves.forEach((move, index) => {
-      const side = move === step[0] ? downside : upside
+      const side = move === step[0] ? downside : upside;
 
-      side[index] = move === bridge[index] ? this.map.RIGHT : this.map.WRONG
-    })
+      side[index] = move === bridge[index] ? this.map.RIGHT : this.map.WRONG;
+    });
 
-    return [upside, downside]
+    return [upside, downside];
   },
 
   /**
@@ -62,9 +62,9 @@ const OutputView = {
    * @returns {string[][]}
    */
   initializeMap(length) {
-    const side = Array(length).fill(this.map.DEFAULT)
+    const side = Array(length).fill(this.map.DEFAULT);
 
-    return [[...side], [...side]]
+    return [[...side], [...side]];
   },
 
   /**
@@ -74,7 +74,7 @@ const OutputView = {
   formatSide(side) {
     return `${this.map.PREFIX} ${side.join(` ${this.map.SEPARATOR} `)} ${
       this.map.SUFFIX
-    }`
+    }`;
   },
 
   /**
@@ -83,14 +83,14 @@ const OutputView = {
    */
   printResult(success, trial) {
     MissionUtils.Console.print(
-      `\n${this.result.SUCCESS}: ${success ? '성공' : '실패'}`
-    )
-    MissionUtils.Console.print(`${this.result.TRIAL}: ${trial}`)
+      `\n${this.result.SUCCESS}: ${success ? '성공' : '실패'}`,
+    );
+    MissionUtils.Console.print(`${this.result.TRIAL}: ${trial}`);
   },
 
   close() {
-    MissionUtils.Console.close()
+    MissionUtils.Console.close();
   },
-}
+};
 
-module.exports = OutputView
+module.exports = OutputView;

@@ -1,23 +1,23 @@
-const { status } = require('./lib/constants')
+const { status } = require('./lib/constants');
 
 class BridgeGame {
-  #bridge
-  #moves
+  #bridge;
+  #moves;
 
   /**
    * @param {string[]=} bridge
    */
   constructor(bridge = []) {
-    this.#bridge = bridge
-    this.#moves = []
+    this.#bridge = bridge;
+    this.#moves = [];
   }
 
   get bridge() {
-    return this.#bridge
+    return this.#bridge;
   }
 
   get moves() {
-    return this.#moves
+    return this.#moves;
   }
 
   /**
@@ -25,12 +25,12 @@ class BridgeGame {
    */
   move(newMove) {
     if (newMove) {
-      this.#moves.push(newMove)
+      this.#moves.push(newMove);
     }
   }
 
   retry() {
-    this.#moves = []
+    this.#moves = [];
   }
 
   /**
@@ -38,20 +38,20 @@ class BridgeGame {
    */
   getStatus() {
     if (this.#isFailure()) {
-      return status.READ_COMMAND
+      return status.READ_COMMAND;
     }
 
     return this.#bridge.length === this.#moves.length
       ? status.FINISHED
-      : status.READ_MOVE
+      : status.READ_MOVE;
   }
 
   /**
    * @returns {boolean}
    */
   #isFailure() {
-    return this.#moves.some((move, index) => this.#bridge[index] !== move)
+    return this.#moves.some((move, index) => this.#bridge[index] !== move);
   }
 }
 
-module.exports = BridgeGame
+module.exports = BridgeGame;

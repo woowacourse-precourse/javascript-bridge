@@ -1,5 +1,5 @@
-const MissionUtils = require('@woowacourse/mission-utils')
-const { step, option } = require('./lib/constants')
+const MissionUtils = require('@woowacourse/mission-utils');
+const { step, option } = require('./lib/constants');
 
 /**
  * @typedef {Object} gameStatusCallback
@@ -36,14 +36,14 @@ const InputView = {
   readBridgeSize({ getNextGameStatus, setNextGameStatus }) {
     MissionUtils.Console.readLine(`\n${this.query.BRIDGE_SIZE}\n`, (input) => {
       try {
-        const size = Number(input)
-        this.validateSize(size)
+        const size = Number(input);
+        this.validateSize(size);
 
-        this.handleGameStatus({ getNextGameStatus, setNextGameStatus }, size)
+        this.handleGameStatus({ getNextGameStatus, setNextGameStatus }, size);
       } catch (error) {
-        this.handleError(error, setNextGameStatus)
+        this.handleError(error, setNextGameStatus);
       }
-    })
+    });
   },
 
   /**
@@ -54,10 +54,10 @@ const InputView = {
       isNaN(size) ||
       !Number.isInteger(size) ||
       size < this.bridgeLength.MIN ||
-      this.bridgeLength.MAX < size
+      this.bridgeLength.MAX < size;
 
     if (isInValid) {
-      throw Error(this.error.BRIDGE_SIZE)
+      throw Error(this.error.BRIDGE_SIZE);
     }
   },
 
@@ -67,25 +67,25 @@ const InputView = {
   readMoving({ getNextGameStatus, setNextGameStatus }) {
     MissionUtils.Console.readLine(`\n${this.query.MOVEMENT}\n`, (input) => {
       try {
-        const move = input.trim()
-        this.validateMove(move)
+        const move = input.trim();
+        this.validateMove(move);
 
-        this.handleGameStatus({ getNextGameStatus, setNextGameStatus }, move)
+        this.handleGameStatus({ getNextGameStatus, setNextGameStatus }, move);
       } catch (error) {
-        this.handleError(error, setNextGameStatus)
+        this.handleError(error, setNextGameStatus);
       }
-    })
+    });
   },
 
   /**
    * @param {string} move
    */
   validateMove(move) {
-    const moveValues = Object.values(step)
-    const isInValid = !moveValues.includes(move)
+    const moveValues = Object.values(step);
+    const isInValid = !moveValues.includes(move);
 
     if (isInValid) {
-      throw Error(this.error.MOVEMENT)
+      throw Error(this.error.MOVEMENT);
     }
   },
 
@@ -95,28 +95,28 @@ const InputView = {
   readGameCommand({ getNextGameStatus, setNextGameStatus }) {
     MissionUtils.Console.readLine(`\n${this.query.COMMAND}\n`, (input) => {
       try {
-        const command = input.trim()
-        this.validateCommand(command)
+        const command = input.trim();
+        this.validateCommand(command);
 
         this.handleGameStatus(
           { getNextGameStatus, setNextGameStatus },
-          option[command]
-        )
+          option[command],
+        );
       } catch (error) {
-        this.handleError(error, setNextGameStatus)
+        this.handleError(error, setNextGameStatus);
       }
-    })
+    });
   },
 
   /**
    * @param {string} command
    */
   validateCommand(command) {
-    const optionKeys = Object.keys(option)
-    const isInValid = !optionKeys.includes(command)
+    const optionKeys = Object.keys(option);
+    const isInValid = !optionKeys.includes(command);
 
     if (isInValid) {
-      throw Error(this.error.COMMAND)
+      throw Error(this.error.COMMAND);
     }
   },
 
@@ -125,9 +125,9 @@ const InputView = {
    * @param {number | string} size
    */
   handleGameStatus({ getNextGameStatus, setNextGameStatus }, input) {
-    const gameStatus = getNextGameStatus(input)
+    const gameStatus = getNextGameStatus(input);
 
-    setNextGameStatus(gameStatus)
+    setNextGameStatus(gameStatus);
   },
 
   /**
@@ -135,10 +135,10 @@ const InputView = {
    * @param {function(number=): void} setNextGameStatus
    */
   handleError(error, setNextGameStatus) {
-    MissionUtils.Console.print(error.message)
+    MissionUtils.Console.print(error.message);
 
-    setNextGameStatus()
+    setNextGameStatus();
   },
-}
+};
 
-module.exports = InputView
+module.exports = InputView;
