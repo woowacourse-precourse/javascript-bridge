@@ -66,13 +66,21 @@ class GameContoller {
 
     if (command === 'R') {
       this.onRetryCommand();
+      return;
     }
+
+    this.onQuitCommand();
   }
 
   onRetryCommand() {
     this.#bridgeGame.retry();
 
     this.checkGameStatus();
+  }
+
+  onQuitCommand() {
+    const map = MapGenerator.toString();
+    OutputView.printResult(map);
   }
 }
 
