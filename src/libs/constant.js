@@ -8,6 +8,7 @@ const MSG = {
 const ERROR_MSG = {
   invalidBridgeSize: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
   invalidMoveDirection: '[ERROR] 이동할 칸은 U(위) 혹은 D(아래)여야 합니다.',
+  invalidGameCmd: '[ERROR] 입력은 R(재시도) 혹은 Q(종료)여야 합니다.',
 };
 
 const DIRECTION = {
@@ -30,4 +31,9 @@ const NEXT_STEP = {
   endGame: 'endGame',
 };
 
-module.exports = { MSG, ERROR_MSG, DIRECTION, ROW_IDX, EMPTY, NEXT_STEP };
+const GAME_CMD = {
+  restart: 'R',
+  quit: 'Q',
+};
+
+module.exports = { MSG, ERROR_MSG, DIRECTION, ROW_IDX, EMPTY, NEXT_STEP, GAME_CMD };

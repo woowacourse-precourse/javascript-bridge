@@ -1,4 +1,4 @@
-const { DIRECTION } = require('./libs/constant');
+const { DIRECTION, GAME_CMD } = require('./libs/constant');
 
 const Validator = {
   validBridgeSize(size) {
@@ -8,6 +8,11 @@ const Validator = {
     const { up, down } = DIRECTION;
 
     return [up, down].includes(direction);
+  },
+  validGameCommand(cmd) {
+    const { restart, quit } = GAME_CMD;
+
+    return [restart, quit].includes(cmd);
   },
 };
 

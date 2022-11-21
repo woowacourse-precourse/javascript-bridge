@@ -2,7 +2,8 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./OutputView');
 const TypeConverter = require('./TypeConverter');
-const { MSG, NEXT_STEP } = require('./libs/constant');
+const Validator = require('./Validator');
+const { MSG, NEXT_STEP, ERROR_MSG, GAME_CMD } = require('./libs/constant');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -70,7 +71,26 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGame) {
+    Console.readLine(MSG.inputRestartOrQuitGame, (answer) => {
+      try {
+        const gameCmd = TypeConverter.toString(answer);
+        const isValidCmd = Validator.validGameCommand(gameCmd);
+
+        if (!isValidCmd) {
+          throw new Error(ERROR_MSG.invalidGameCmd);
+        }
+
+        if (gameCmd === GAME_CMD.quit) return OutputView.printResult();
+
+        bridgeGame.retry();
+        this.readMoving(bridgeGame);
+      } catch (e) {
+        console.log(e.message);
+        this.readGameCommand(bridgeGame);
+      }
+    });
+  },
 };
 
 module.exports = InputView;
