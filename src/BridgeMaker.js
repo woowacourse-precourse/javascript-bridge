@@ -9,10 +9,15 @@ const BridgeMaker = {
    */
 
   makeBridge(size, generateRandomNumber) {
-    let bridge = [];
-    for (let index = 0; index < size * 2; index++) {
-      bridge.push(generateRandomNumber.generate());
+    let bridge = [[], []];
+
+    for (let index = 0; index < size; index++) {
+      bridge[0].push(generateRandomNumber.generate());
     }
+    for (let index = 0; index < size; index++) {
+      bridge[1].push(generateRandomNumber.generate());
+    }
+
     return bridge;
   },
 };
