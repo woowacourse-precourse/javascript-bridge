@@ -4,7 +4,7 @@
 
 - [x] 0과 1 중 무작위 값을 생성한다. - BridgeRandomNumberGenerator#generate()
 - [x] 특정 길이의 다리를 생성한다. - BridgeMaker#makeBridge()
-- [ ] 게임 성공 여부를 판단한다. - Judge#judgeGameSuccess()
+- [x] 게임 성공 여부를 판단한다. - Judge#judgeGameSuccess()
 
 - [ ] 입력 값에 따라 이동한다. - BridgeGame#move()
 - [ ] 게임을 재시작한다. - BridgeGame#retry()
