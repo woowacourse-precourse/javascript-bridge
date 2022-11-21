@@ -1,6 +1,9 @@
 /* eslint-disable class-methods-use-this */
 const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('./InputView');
+const BridgeSize = require('./BridgeSize');
+const Moving = require('./Moving');
+const GameCommand = require('./GameCommand');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -14,7 +17,8 @@ class BridgeGameControl {
 
   make() {
     const bridgeSizeCallback = (input) => {
-      Console.print(input);
+      const bridgeSize = new BridgeSize(input);
+      Console.print(bridgeSize.getBridgeSize());
       this.move();
     };
     this.#inputView.readBridgeSize(bridgeSizeCallback);
@@ -27,11 +31,11 @@ class BridgeGameControl {
    */
   move() {
     const movingCallback = (input) => {
-      Console.print(input);
+      const moving = new Moving(input);
+      Console.print(moving.getMoving());
       this.retry();
     };
     this.#inputView.readMoving(movingCallback);
-    Console.print('move');
   }
 
   /**
@@ -41,11 +45,11 @@ class BridgeGameControl {
    */
   retry() {
     const gameCommandCallback = (input) => {
-      Console.print(input);
+      const gameCommand = new GameCommand(input);
+      Console.print(gameCommand.getGameCommand());
       Console.close();
     };
     this.#inputView.readGameCommand(gameCommandCallback);
-    Console.print('retry');
   }
 }
 
