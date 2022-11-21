@@ -49,6 +49,7 @@ const OutputView = {
       OutputViewMessages.printResultCheckSuccess(resultMessage)
     );
     MissionUtils.Console.print(OutputViewMessages.printResultCount(count));
+    MissionUtils.Console.close();
   },
 };
 
