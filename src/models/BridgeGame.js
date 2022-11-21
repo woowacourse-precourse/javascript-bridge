@@ -51,11 +51,11 @@ class BridgeGame {
     const index = selected.length - 1;
 
     if (selected[index] === BRIDGE_GAME.INCORRECT) {
-      this.#data.gameProgress.state = GAME_STATE.FAIL_QUIT;
+      this.#data.gameProgress.state = GAME_STATE.FAIL_STOP;
     }
 
     if (selected[index] === BRIDGE_GAME.CORRECT && selected.length === this.#data.bridge.length) {
-      this.#data.gameProgress.state = GAME_STATE.SUCCESS_QUIT;
+      this.#data.gameProgress.state = GAME_STATE.SUCCESS_STOP;
     }
   }
 
@@ -71,7 +71,7 @@ class BridgeGame {
 
   getResult() {
     const successOrFailure =
-      this.#data.gameProgress.state === GAME_STATE.SUCCESS_QUIT
+      this.#data.gameProgress.state === GAME_STATE.SUCCESS_STOP
         ? MESSAGE_RESULT.SUCCESS
         : MESSAGE_RESULT.FAILURE;
 

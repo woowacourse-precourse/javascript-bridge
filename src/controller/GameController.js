@@ -36,9 +36,11 @@ class GameController {
   }
 
   #startGame() {
-    if (this.#instance.bridgeGame.checkState() === GAME_STATE.PLAYING) {
-      InputView.readMoving(this.#move.bind(this));
+    if (this.#instance.bridgeGame.checkState() !== GAME_STATE.PLAYING) {
+      return;
     }
+
+    InputView.readMoving(this.#move.bind(this));
   }
 
   #move(direction) {
@@ -54,11 +56,7 @@ class GameController {
   }
 
   #stopGame() {
-    if (this.#instance.bridgeGame.checkState() === GAME_STATE.PLAYING) {
-      return;
-    }
-
-    if (this.#instance.bridgeGame.checkState() === GAME_STATE.FAIL_QUIT) {
+    if (this.#instance.bridgeGame.checkState() === GAME_STATE.FAIL_STOP) {
       InputView.readGameCommand(this.#restartOrQuit.bind(this));
       return;
     }
