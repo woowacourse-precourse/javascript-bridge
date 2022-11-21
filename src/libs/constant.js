@@ -9,4 +9,9 @@ const ERROR_MSG = {
   invalidBridgeSize: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
 };
 
-module.exports = { MSG, ERROR_MSG };
+const DIRECTION = {
+  up: 'U',
+  down: 'D',
+};
+
+module.exports = { MSG, ERROR_MSG, DIRECTION };
