@@ -21,7 +21,7 @@ class BridgeGame {
     this.#bridge = bridge;
   }
 
-  isEnd(move) {
+  isEnd() {
     if (this.#bridge.length === this.#order) return true;
   }
 

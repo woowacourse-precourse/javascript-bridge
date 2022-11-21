@@ -52,7 +52,7 @@ class App {
 
   crossingBridge(move) {
     this.bridgeGame.move(move) ? this.success(move) : this.fail(move);
-    if (this.bridgeGame.isEnd(move)) {
+    if (this.bridgeGame.isEnd()) {
       return OutputView.printResult(
         this.bridgeGame.getMap(),
         this.bridgeGame.getResult(),
