@@ -44,8 +44,6 @@ describe('Map 출력 테스트', () => {
 
     gameController.getBridgeSize();
     gameController.getMoving();
-    gameController.getMoving();
-    gameController.getMoving();
 
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
@@ -73,8 +71,6 @@ describe('Map 출력 테스트', () => {
 
     gameController.getBridgeSize();
     gameController.getMoving();
-    gameController.getMoving();
-    gameController.getMoving();
 
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
@@ -94,8 +90,6 @@ describe('Map 출력 테스트', () => {
     const gameController = new BridgeGameController();
 
     gameController.getBridgeSize();
-    gameController.getMoving();
-    gameController.getMoving();
     gameController.getMoving();
 
     messages.forEach((output) => {
