@@ -31,7 +31,7 @@ class Referee {
     if (Referee.#isOver(compareResult)) {
       InputView.readGameCommand((answer) => this.gameCommand(answer));
     } else if (this.bridgeGame.bridge.bridge.length === compareResult[0].length) {
-      OutputView.printResult();
+      this.endGame();
     } else {
       this.start();
     }
@@ -43,6 +43,13 @@ class Referee {
       return;
     }
     this.endGame();
+  }
+
+  endGame() {
+    const compareResult = this.bridgeGame.bridge.getCompareResult();
+    const executionCount = this.bridgeGame.bridge.getExecutionCount();
+    const gameStatus = Referee.#isOver(compareResult);
+    OutputView.printResult(compareResult, executionCount, gameStatus);
   }
 
   static #isOver(compareResult) {

@@ -13,6 +13,10 @@ class Bridge {
     return this.compareResult;
   }
 
+  getExecutionCount() {
+    return this.executionCount;
+  }
+
   makeBridge(size, init) {
     try {
       Bridge.#bridgeSizeValidate(size, init);
