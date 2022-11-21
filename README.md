@@ -16,19 +16,19 @@
 - [x] InputView : 이동할 방향 입력
 - [x] 이동방향 BridgeGame으로 전달
 - [x] BridgeGame : 생사 판단
-- [ ] 이동방향과 생사여부 InputView에 전달
-- [ ] OutputView : 이동방향과 생사여부 출력
-- [ ] 생의 경우→ InputView : 이동 방향 추가 입력
-- [ ] 사의 경우→ InputView : 다시 도전할지 포기할지 선택
-  - [ ] 다시 도전→ InputView : 같은다리로 처음부터 다시 시작
-  - [ ] 포기→ OutputView : 최종 게임 결과 출력(실패)
+- [x] 이동방향과 생사여부 InputView에 전달
+- [x] OutputView : 이동방향과 생사여부 출력
+- [x] 생의 경우→ InputView : 이동 방향 추가 입력
+- [x] 사의 경우→ InputView : 다시 도전할지 포기할지 선택
+  - [x] 다시 도전→ InputView : 같은다리로 처음부터 다시 시작
+  - [x] 포기→ OutputView : 최종 게임 결과 출력(실패)
 
 #### 게임 클리어
 
-- [ ] 마지막 방향 전달
-- [ ] BridgeGame : 생사판단 & 마지막인지 판단
-- [ ] 이동방향 & 생사결과 & 게임횟수 OutputView에 전달
-- [ ] OutputView : 최종결과 출력
+- [x] 마지막 방향 전달
+- [x] BridgeGame : 생사판단 & 마지막인지 판단
+- [x] 이동방향 & 생사결과 & 게임횟수 OutputView에 전달
+- [x] OutputView : 최종결과 출력
 
 ## 🔍 진행 방식
 
