@@ -2,13 +2,16 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 const BridgeValidator = require("./utils/BridgeValidator");
-const { BRIDGE_LENGTH, DIRECTION_MATCH } = require("./constants/gameState");
+const {
+  BRIDGE_LENGTH,
+  DIRECTION,
+  DIRECTION_MATCH,
+} = require("./constants/gameState");
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const DirectionValidator = require("./utils/DirectionValidator");
 const BridgeGameController = require("./BridgeGameController");
 const { Console } = require("@woowacourse/mission-utils");
-const { DIRECTION } = require("./constants/gameState");
 
 class BridgeGame {
   #bridge;
