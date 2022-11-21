@@ -29,7 +29,7 @@ const OutputView = {
     this.printMessage(MESSAGE.FINAL);
     gameResult.printHistory();
     this.printMessage(`${MESSAGE.RESULT}${type === 'success' ? MESSAGE.SUCCESS : MESSAGE.FAIL}`);
-    gameResult.printTryCount();
+    this.printMessage(gameResult.showTryCountSummary());
     this.exit();
   },
 
