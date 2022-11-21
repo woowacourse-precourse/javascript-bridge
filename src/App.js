@@ -41,21 +41,26 @@ class App {
         this.bridgeGame.answerSteps,
         this.bridgeGame.bridgeSteps
       );
-      const result = this.bridgeGame.move();
-      if (result === 'WIN') {
-        this.bridgeGame.win();
-        View.close();
-      }
-      if (result === 'MOVE') {
-        InputView.readMoving(this.handleInputStep.bind(this));
-      }
-      if (result === 'FAIL') {
-        this.bridgeGame.gameStatus = '실패';
-        InputView.readGameCommand(this.handleInputCommand.bind(this));
-      }
+      this.nextActionByMoveState(this.bridgeGame.move());
     } catch (error) {
       OutputView.printMessage(error.message);
       InputView.readMoving(this.handleInputStep.bind(this));
+    }
+  }
+
+  nextActionByMoveState(action) {
+    switch (action) {
+      case 'WIN':
+        this.bridgeGame.win();
+        View.close();
+        break;
+      case 'MOVE':
+        InputView.readMoving(this.handleInputStep.bind(this));
+        break;
+      case 'FAIL':
+        this.bridgeGame.gameStatus = '실패';
+        InputView.readGameCommand(this.handleInputCommand.bind(this));
+      default:
     }
   }
 
