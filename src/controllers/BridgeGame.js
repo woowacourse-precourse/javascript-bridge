@@ -40,8 +40,7 @@ class BridgeGame {
 
   #adjustmentGameStatus() {
     this.#executionCount += 1;
-    this.bridge.locationNumber = 0;
-    this.bridge.compareResult = [[], []];
+    this.bridge.resetResult();
   }
 }
 
