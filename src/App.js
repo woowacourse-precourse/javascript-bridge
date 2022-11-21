@@ -14,7 +14,13 @@ class App {
   }
 
   proceedStepOne(input) {
-    Validator.validateBridgeSize(input);
+    try {
+      Validator.validateBridgeSize(input);
+    } catch (e) {
+      Console.print(e.message);
+      InputView.readBridgeSize(this.proceedStepOne.bind(this));
+      return;
+    }
     const game = new BridgeGame(input);
     this.#game = game;
   }
