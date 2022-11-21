@@ -16,35 +16,36 @@ const InputView = {
       if (isBridgeLengthCorrect) return this.readBridgeSize(bridgeGame);
 
       bridgeGame.make(length);
-      this.readMoving(bridgeGame);
+      this.readMoving(bridgeGame, length);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridgeGame) {
+  readMoving(bridgeGame, length) {
     Console.readLine(`\n${INPUT.MOVING}\n`, (moving) => {
       const isMovingValueCorrect = Validation.checkMovingValue(moving);
-      if (isMovingValueCorrect) return this.readMoving(bridgeGame);
-      const movingDirection = bridgeGame.move(moving);
+      if (isMovingValueCorrect) return this.readMoving(bridgeGame, length);
+      const movingDirection = bridgeGame.move(moving, length);
       const outputBridge = OutputView.printMap(movingDirection);
-
-      if (!movingDirection[2]) this.readGameCommand(bridgeGame, outputBridge);
-      this.readMoving(bridgeGame);
+      if (!movingDirection[2])
+        this.readGameCommand(bridgeGame, outputBridge, length);
+      if (movingDirection[3] < length) this.readMoving(bridgeGame, length);
+      else bridgeGame.success(outputBridge);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridgeGame, outputBridge) {
+  readGameCommand(bridgeGame, outputBridge, length) {
     Console.readLine(`\n${INPUT.SELECT}\n`, (select) => {
       const isSelectValueCorrect = Validation.checkingSelectValue(select);
       if (isSelectValueCorrect) return this.readGameCommand(bridgeGame);
 
       const selectResult = bridgeGame.retry(select, outputBridge);
-      if (selectResult) this.readMoving(bridgeGame);
+      if (selectResult) this.readMoving(bridgeGame, length);
     });
   },
 };
