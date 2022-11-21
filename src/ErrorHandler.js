@@ -2,7 +2,7 @@ const { printInputErrorMessage, printMap } = require("./OutputView");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { ERROR } = require("./constants");
-const { takeNextStep } = require("./utils");
+const { takeNextStep, Command } = require("./utils");
 
 const ErrorHandler = {
   BridgeSize: {
@@ -30,6 +30,17 @@ const ErrorHandler = {
 
       const movedCorrect = bridgeGame.hasMovedCorrectly();
       takeNextStep[movedCorrect]({ app, bridgeGame, readAgain });
+    },
+  },
+
+  Retrial: {
+    true: ({ app, bridgeGame, readAgain }) => {
+      printInputErrorMessage(ERROR.WRONG_COMMAND);
+      readAgain({ app, bridgeGame });
+    },
+
+    false: ({ app, bridgeGame, answer }) => {
+      Command[answer]({ app, bridgeGame });
     },
   },
 };
