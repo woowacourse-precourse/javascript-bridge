@@ -118,4 +118,17 @@ describe('플레이어 입력값의 유효성 검사', () => {
       expectLogContains(getOutput(logSpy), [ERROR.INPUT_GAME_COMMAND]);
     });
   });
+
+  test('플레이어는 게임을 재시도한다.', () => {
+    const result = new GameResult();
+
+    result.setDefault(['U', 'D', 'U']);
+    result.clear();
+
+    expect([...result.getResult()]).toEqual([
+      [0, { machine: 'U', player: null }],
+      [1, { machine: 'D', player: null }],
+      [2, { machine: 'U', player: null }],
+    ]);
+  });
 });
