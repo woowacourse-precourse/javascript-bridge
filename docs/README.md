@@ -113,6 +113,7 @@ readBridgeSize() - 다리의 길이를 입력받는다. ✔
         숫자이외의 문자 입력시  ✔
 readMoving() - 사용자가 이동할 칸을 입력받는다. ✔
     예외) U와 D 이외 입력 시 ✔
+helpMoving() - 사용가 입력한 이동칸을 기반으로 다음 행동을 정한다. ✔
 readGameCommand() -사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다 ✔
     예외)R과 Q 이외의 문자 입력 시 ✔
 
@@ -121,6 +122,9 @@ printMap() - 현재까지 이동한 다리의 상태를 정해진 형식에 맞�
                 출력을 위해 필요한 메서드의 인자(parameter)는 추가하거나 변경 가능
 printResult() - 게임의 최종 결과를 정해진 형식에 맞춰 출력. ✔
                 출력을 위해 필요한 메서드의 인자(parameter)는 추가하거나 변경 가능
+printBridgeSizeError() - readBridgeSize의 오류를 출력
+printMovingError() - readMoving의 오류를 출력
+printGameCommandError() - readGameCommand의 오류를 출력
 
 <BridgeGame> // 필드 추가 가능, 메서드 이름 변경불가, 인자 추가/변경 가능, 메서드 
                 추가/변경 가능
