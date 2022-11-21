@@ -2,7 +2,6 @@ const BridgeGame = require('../BridgeGame');
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 const InputValidator = require('../utils/InputValidator');
-const { Console } = require('@woowacourse/mission-utils');
 const { BRIDGE, GAME } = require('../utils/constants');
 
 class BridgeGameController {
@@ -86,7 +85,6 @@ class BridgeGameController {
   quit() {
     const { bridgeMap, isSuccess, tryCount } = this.#bridgeGame.quit();
     OutputView.printResult({ bridgeMap, isSuccess, tryCount });
-    Console.close();
   }
 }
 

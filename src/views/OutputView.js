@@ -30,6 +30,7 @@ const OutputView = {
     if (isSuccess) Console.print(OUTPUT_MESSAGE.gameSuccess);
     if (!isSuccess) Console.print(OUTPUT_MESSAGE.gameFail);
     Console.print(OUTPUT_MESSAGE.gameTryCount(tryCount));
+    Console.close();
   },
 
   printError(errorMessage) {
