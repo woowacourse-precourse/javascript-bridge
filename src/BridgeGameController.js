@@ -2,9 +2,11 @@ const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView = require('./OutputView');
+const Validator = require('./Validator');
 
 const BridgeGameController = {
   getSize(value) {
+    Validator.bridgeSize(value);
     this.bridgeSize = Number(value);
     this.upper = [];
     this.lower = [];
