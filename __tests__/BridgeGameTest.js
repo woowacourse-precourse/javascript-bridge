@@ -122,7 +122,7 @@ const moveTest = () => {
     const expectCallbackFunction = (...params) => {
       const [input] = params;
       game.move(input);
-      const { round, lowerSideStatus, upperSideStatus } = game.currentStatus;
+      const { round, lowerSideStatus, upperSideStatus } = game.movementStatus;
       return [round, upperSideStatus, lowerSideStatus];
     };
 
@@ -170,7 +170,7 @@ const moveTest = () => {
       param.forEach((moveInput) => {
         game.move(moveInput);
       });
-      return game.gameState;
+      return game.gameStatus.playing;
     };
     testEachCaseFromFormat(testCase, expectCallback);
   });
@@ -204,6 +204,44 @@ const retryTest = () => {
     const expectCallbackFunction = (...param) => {
       const [input] = param;
       return game.retry(input);
+    };
+
+    testEachCaseFromFormat(testCase, expectCallbackFunction);
+  });
+  describe("3-2 게임 재시작 후 게임상태 처리가 잘 되는가?", () => {
+    const testCase = [
+      {
+        testId: "3-2-2",
+        explain: "이동 리셋 확인",
+        param: ["R", "movementStatus", ["D"]],
+        expected: {
+          round: 0,
+          upperSideStatus: [],
+          lowerSideStatus: [],
+        },
+      },
+      {
+        testId: "3-2-2",
+        explain: "시도 횟수 확인",
+        param: ["R", "gameStatus", ["D"]],
+        expected: { success: false, playing: false, trial: 1 },
+      },
+      {
+        testId: "3-2-3",
+        explain: "재시작이 잘 되는가?",
+        param: ["R", "gameStatus", ["U", "D", "D", "U"]],
+        expected: { success: true, playing: false, trial: 1 },
+      },
+    ];
+
+    const expectCallbackFunction = (...param) => {
+      const [input, checkStatus, move] = param;
+      const game = new BridgeGame(4);
+      move.forEach((moveInput) => {
+        game.move(moveInput);
+      });
+      game.retry(input);
+      return game[checkStatus];
     };
 
     testEachCaseFromFormat(testCase, expectCallbackFunction);
