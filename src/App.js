@@ -1,11 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { PRINT_MESSAGE } = require("./constants/Message");
-const InputView = require("./InputView");
+
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
-const BridgeGame = require("./BridgeGame");
-const OutputView = require("./OutputView");
 const Validate = require("./utils/Validate");
+const InputView = require("./InputView");
+const OutputView = require("./OutputView");
+
+const BridgeGame = require("./BridgeGame");
 
 class App {
   #bridgeGame = new BridgeGame();
@@ -54,7 +56,6 @@ class App {
     try {
       Validate.validateMoving(moving);
       this.#moving.push(moving);
-
       this.checkResponse(this.#bridgeGame.move(this.#moving, this.#bridge));
     } catch (error) {
       MissionUtils.Console.print(error);
