@@ -36,7 +36,7 @@ class App {
 
     InputView.readMoving((command) => {
       const next = this.bridgeGame.move(command);
-      OutputView.printMap(this.bridgeGame.progress.desc());
+      OutputView.printMap(this.bridgeGame.progress);
       next ? this.showInputMoveCommand() : this.showInputRetry();
     });
   }

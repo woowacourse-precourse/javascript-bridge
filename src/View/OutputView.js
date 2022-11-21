@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("../BridgeGame");
+const Progress = require("../Progress");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -14,7 +15,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap({ firstBridge, secondBridge }) {
+  printMap(progress) {
+    if (!progress instanceof Progress) {
+      throw new TypeError("progress's instance must be Progress.");
+    }
+    const { firstBridge, secondBridge } = progress.desc();
     Console.print(`${firstBridge}\n${secondBridge}\n`);
   },
 
@@ -25,10 +30,10 @@ const OutputView = {
    */
   printResult(isSuccess, bridgeGame) {
     if (!bridgeGame instanceof BridgeGame) {
-      throw new TypeError("bridgeGame must be BridgeGame.");
+      throw new TypeError("bridgeGame's instance must be BridgeGame.");
     }
     Console.print("최종 게임 결과");
-    OutputView.printMap(bridgeGame.progress.desc());
+    OutputView.printMap(bridgeGame.progress);
     Console.print(`게임 성공 여부: ${isSuccess ? "성공" : "실패"}`);
     Console.print(`총 시도한 횟수: ${bridgeGame.totalTrial}`);
     Console.close();
