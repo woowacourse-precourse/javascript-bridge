@@ -15,8 +15,13 @@ class App {
         return this.initBridge();
       }
 
-      const bridge = BridgeMaker.makeBridge(parseInt(length, 10), generate);
-      InputView.readMoving();
+      this.#bridge = BridgeMaker.makeBridge(parseInt(length, 10), generate);
+      this.movingBridge();
+    });
+  }
+  movingBridge() {
+    InputView.readMoving((moving) => {
+      if (!InputView.moveValidate(moving)) return this.movingBridge();
     });
   }
 }
