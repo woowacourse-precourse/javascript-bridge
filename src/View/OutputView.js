@@ -19,11 +19,18 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(result, count, status) {
-    const isSuccess = status ? MESSAGE.SUCCESS : MESSAGE.FAIL;
+    const isSuccess = OutputView.gameResult(status);
     Console.print(MESSAGE.RESULT);
     Console.print(result);
     Console.print(`${MESSAGE.CONDITION}${isSuccess}`);
     Console.print(`${MESSAGE.TRY_COUNT}${count}`);
+  },
+
+  gameResult(status) {
+    if (status) {
+      return MESSAGE.SUCCESS;
+    }
+    return MESSAGE.FAIL;
   },
 
   printMessage(message) {
