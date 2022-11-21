@@ -27,7 +27,9 @@
 -> 오류처리 없음
 
 [!] 오류 : 게임을 다시시작할때 배열 초기화가 안됨 -> BridgeGame을 통해 초기화가 되게
----
+--- [Refactor] ---
+- checkIsOValue() : checkMovingInput에서 return 된 값이 'O'일때 실행시키는 함수
+- 
 
 ## 에러처리
 
