@@ -13,8 +13,8 @@ class App {
       return 0;
     }
     const BRIDGE = BridgeMaker.makeBridge(BRIDGE_SIZE,BridgeRandomNumberGenerator.generate);
-    const bridge_game = new BridgeGame(BRIDGE_SIZE, BRIDGE);
-    this.moving(bridge_game);
+    const BRIDGE_GAME = new BridgeGame(BRIDGE_SIZE, BRIDGE);
+    this.moving(BRIDGE_GAME);
     MissionUtils.Console.close();
   }
 
