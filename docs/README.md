@@ -13,7 +13,7 @@
     - [x] [예외처리] 무작위 값이 0 또는 1이 아닌 경우 예외 처리한다.
 - [x] [입력] 플레이어가 이동할 칸을 선택한다.| InputView#readMoving()
   - [x] [예외처리] 입력 받은 값이 U 또는 D가 아닌 경우 예외 처리한다.| InputView#validateMoving(moving)
-- [ ] 플레이어가 칸을 이동한다.| BridgeGame#move()
+- [x] 플레이어가 칸을 이동한다.| BridgeGame#move()
 - [ ] [출력] 다리 건너기 결과를 출력한다.| OutputView#printMap()
 - 다리를 끝까지 건너면 게임이 종료된다.
   - [ ] [출력] 게임 종료 문구를 출력한다.| OutputView#printResult()

@@ -34,6 +34,8 @@ class App {
   controllMoving() {
     InputView.readMoving((moving) => {
       console.log("(callback 확인용) moving: ", moving);
+      this.bridgeGame.move(moving);
+      console.log("(확인용) movements: ", this.bridgeGame.movements);
     });
   }
 }
