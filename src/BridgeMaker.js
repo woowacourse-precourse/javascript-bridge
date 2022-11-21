@@ -15,8 +15,8 @@ const BridgeMaker = {
     const UPPER_BRIDGE_LETTER = "U";
 
     return Array.from({ length: size }, () => generateRandomNumber()).map((number) => {
-      if (Number(number) === LOWER_BRIDGE_NUMBER) return LOWER_BRIDGE_LETTER;
-      if (Number(number) === UPPER_BRIDGE_NUMBER) return UPPER_BRIDGE_LETTER;
+      if (number === LOWER_BRIDGE_NUMBER) return LOWER_BRIDGE_LETTER;
+      if (number === UPPER_BRIDGE_NUMBER) return UPPER_BRIDGE_LETTER;
     });
   },
 };
