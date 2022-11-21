@@ -52,6 +52,13 @@ class App {
         setNextGameStatus: this.#setStatus,
       })
     } else if (this.#status === status.FINISHED) {
+      const success = OutputView.printMap(
+        this.#bridgeGame.bridge,
+        this.#bridgeGame.moves,
+        true
+      )
+      OutputView.printResult(success, this.#trial)
+      OutputView.close()
     }
   }
 
