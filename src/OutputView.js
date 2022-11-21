@@ -16,6 +16,7 @@ const OutputView = {
   printMap(currBridge) {
     MissionUtils.Console.print(currBridge[UP]);
     MissionUtils.Console.print(currBridge[DOWN]);
+    MissionUtils.Console.print("\n");
   },
 
   /**
