@@ -10,10 +10,10 @@ const BridgeRandomNumberGenerator = {
     );
   },
 
-  createRandomLocation(size) {
+  createRandomLocation(size, generateRandomNumber) {
     const randomLocations = [];
     for (let i = 0; i < size; i++) {
-      randomLocations.push(this.generate());
+      randomLocations.push(generateRandomNumber());
     }
     return randomLocations;
   },
