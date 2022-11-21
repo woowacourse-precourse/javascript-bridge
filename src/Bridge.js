@@ -2,10 +2,12 @@ class Bridge {
   #answerBridge = [];
   #upBridge;
   #downBridge;
-  #stage = 0;
+
+  constructor(bridge) {
+    this.#answerBridge = bridge;
+  }
 
   move(command, stage) {
-    this.#stage++;
     if (this.#answerBridge[stage] === command) {
       return this.passableBridge(command);
     }

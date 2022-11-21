@@ -6,6 +6,7 @@ const Bridge = requier("./Bridge");
 class BridgeGame {
   #bridge = new Bridge();
   #attemp = 1;
+  #stage = 0;
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
