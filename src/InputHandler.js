@@ -2,10 +2,10 @@ const { checkBridgeSizeInput } = require("./ErrorCase");
 const { BridgeSize } = require("./ErrorHandler");
 
 const InputHandler = {
-  handleBridgeSizeInput({ app, input }, readAgain) {
-    const isError = checkBridgeSizeInput(input);
+  handleBridgeSizeInput({ app, bridgeSize, readAgain }) {
+    const isError = checkBridgeSizeInput(bridgeSize);
 
-    BridgeSize[isError](app, input, readAgain);
+    BridgeSize[isError]({ app, bridgeSize, readAgain });
   },
 };
 
