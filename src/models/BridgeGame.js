@@ -29,7 +29,7 @@ class BridgeGame {
     const unSelected = this.#data.gameProgress[DataHandler.getUnselectedIndex(direction)];
 
     this.#setResultOfSelect({ direction, selected, unSelected });
-    this.#setGameState(selected);
+    this.#setGameState({ selected, index: selected.length - 1 });
 
     return {
       upBridge: this.#data.gameProgress.upBridge,
@@ -48,9 +48,7 @@ class BridgeGame {
     this.#data.gameProgress.step += BRIDGE_GAME.STEP;
   }
 
-  #setGameState(selected) {
-    const index = selected.length - 1;
-
+  #setGameState({ selected, index }) {
     if (selected[index] === BRIDGE_GAME.INCORRECT) {
       this.#data.gameProgress.state = GAME_STATE.FAIL_STOP;
     }
@@ -72,7 +70,7 @@ class BridgeGame {
 
   getResult() {
     const successOrFailure =
-      this.#data.gameProgress.state === GAME_STATE.SUCCESS_STOP
+      this.checkState() === GAME_STATE.SUCCESS_STOP
         ? MESSAGE_RESULT.SUCCESS
         : MESSAGE_RESULT.FAILURE;
 
