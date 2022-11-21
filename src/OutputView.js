@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_MSG, COMMON } = require('./Constant');
+const { GAME_MSG, COMMON, GAME_RESULT } = require('./Constant');
 const { convertToBridgeMap } = require('./Converter');
 
 /**
@@ -16,10 +16,19 @@ const OutputView = {
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {[string, boolean][]} movingState 게임 상태
+   * @param {boolean} isSuccess 게임 성공 여부
+   * @param {number} tryCnt 시도한 횟수
    */
-  printResult() {},
+  printResult(movingState, isSuccess, tryCnt) {
+    const { successOrNot, totalTryCount, result } = GAME_MSG;
+    const { success, fail } = GAME_RESULT;
+    Console.print(result);
+    this.printMap(movingState);
+    Console.print(successOrNot + (isSuccess ? success : fail));
+    Console.print(totalTryCount + tryCnt);
+    Console.close();
+  },
 
   /**
    * 게임 시작 메세지를 출력한다.
