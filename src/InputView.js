@@ -7,6 +7,7 @@ const { toNumber } = require("./helpers/common");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { printMap, printResult } = require("./OutputView");
 const { INPUT_LENGTH, INPUT_MOVE, INPUT_RETRY } = require("./constant/message");
+const { RESTART_COMMAND, QUIT_COMMAND } = require("./constant");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -56,8 +57,13 @@ const InputView = {
   readGameCommand(bridgeGame) {
     Console.readLine(INPUT_RETRY, (input) => {
       isInvalidGameCommand(input) && InputView.readGameCommand(bridgeGame);
-      bridgeGame.retry();
-      InputView.readMoving(bridgeGame);
+      if (input === RESTART_COMMAND) {
+        bridgeGame.retry();
+        InputView.readMoving(bridgeGame);
+        return;
+      }
+
+      Console.close();
     });
   },
 };
