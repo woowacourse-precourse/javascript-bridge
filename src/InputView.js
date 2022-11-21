@@ -1,45 +1,43 @@
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
-const { BRIDGE_SIZE } = require('./constructor.js');
-const { input, handleError } = require('./utill.js');
+ const { Console } = require('@woowacourse/mission-utils');
+const { INPUT_MESSAGE } = require('./constructor.js');
+const { handleInputError } = require('./utill.js');
 const { validBridgeSize, validMoving, validCommand } = require('./Validation.js');
 
-const InputView = {  
-  async readBridgeSize() {
-    while(true) {
+const InputView = {
+  readBridgeSize(nextStep) {
+    return Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, size => {
       try {
-        const answer = await input(`다리의 길이를 입력해주세요. (${BRIDGE_SIZE.MIN}~${BRIDGE_SIZE.MAX} 사이)\n`);
-        validBridgeSize(answer);
-        return parseInt(answer);
+        validBridgeSize(size);
+        nextStep(size);
       } catch (e) {
-        handleError(e.message);
+        handleInputError(e.message, InputView.readBridgeSize, nextStep);
       }
-    }
+    });
   },
 
-  async readMoving() {
-    while(true) {
+  readMoving(nextStep) {
+    return Console.readLine(INPUT_MESSAGE.MOVEMENT , movement => {
       try {
-        const answer = await input('이동할 칸을 선택해주세요. (위: U, 아래: D)\n');
-        validMoving(answer);
-        return answer;
+        validMoving(movement);
+        nextStep(movement);
       } catch (e) {
-        handleError(e.message);
+        handleInputError(e.message, InputView.readMoving, nextStep);
       }
-    }
+    });
   },
 
-  async readGameCommand() {
-    while (true) {
-      const answer = await input('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n');
+  readGameCommand(nextStep) {
+    return Console.readLine(INPUT_MESSAGE.COMMAND, command => {
       try {
-        validCommand(answer);
-        return answer;
+        validCommand(command);
+        nextStep(command);
       } catch (e) {
-        handleError(e.message);
+        handleInputError(e.message, InputView.readGameCommand, nextStep);
       }
-    }
+    })
   },
 };
 
