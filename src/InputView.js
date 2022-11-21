@@ -31,6 +31,9 @@ const InputView = {
 
       const bridgeGame = new BridgeGame();
       const gameReult = bridgeGame.move(movingCommand, bridge, movingRoute);
+      if (gameReult[0].includes('X') || gameReult[1].includes('X')) {
+        this.readGameCommand();
+      }
       return this.readMoving(bridge, gameReult);
     });
   },
@@ -39,7 +42,15 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    Console.readLine(INPUT_MESSAGE.GAME_COMMAND, (gameCommand) => {});
+    Console.readLine(INPUT_MESSAGE.GAME_COMMAND, (gameCommand) => {
+      const RESTART_COMMAND = 'R';
+      const END_COMMAND = 'Q';
+
+      if (gameCommand === RESTART_COMMAND) {
+      }
+      if (gameCommand === END_COMMAND) {
+      }
+    });
   },
 };
 
