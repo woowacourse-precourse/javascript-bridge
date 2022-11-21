@@ -8,9 +8,11 @@ const Judge = require('./utils/Judge');
  */
 class BridgeGame {
   #bridge;
+  #tryCnt;
+  #movingState;
   constructor(n) {
     this.#bridge = makeBridge(n, generate);
-    this.tryCnt = 0;
+    this.#tryCnt = 0;
     this.init();
   }
 
@@ -18,7 +20,7 @@ class BridgeGame {
    * 다리 건너기 게임 라운드 초기화
    */
   init() {
-    this.movingState = [];
+    this.#movingState = [];
     this.countTry();
   }
 
@@ -28,9 +30,9 @@ class BridgeGame {
    * @returns {[string, boolean][]}
    */
   move(dir) {
-    this.movingState.push([
+    this.#movingState.push([
       dir,
-      Checker.checkSpaceCanMove(dir, this.#bridge[this.movingState.length]),
+      Checker.checkSpaceCanMove(dir, this.#bridge[this.#movingState.length]),
     ]);
   }
 
@@ -45,7 +47,7 @@ class BridgeGame {
    * 게임 시도 횟수를 센다.
    */
   countTry() {
-    this.tryCnt++;
+    this.#tryCnt++;
   }
 
   /**
@@ -53,7 +55,7 @@ class BridgeGame {
    * @returns {boolean}
    */
   checkGameOver() {
-    return Checker.checkGameOver(this.movingState, this.#bridge);
+    return Checker.checkGameOver(this.#movingState, this.#bridge);
   }
 
   /**
@@ -61,7 +63,23 @@ class BridgeGame {
    * @returns {boolean}
    */
   judgeGameSuccess() {
-    return Judge.judgeGameSuccess(this.movingState, this.#bridge);
+    return Judge.judgeGameSuccess(this.#movingState, this.#bridge);
+  }
+
+  /**
+   * 게임 실행 횟수를 조회한다.
+   * @returns {number}
+   */
+  getTryCnt() {
+    return this.#tryCnt;
+  }
+
+  /**
+   * 게임 이동 상태를 조회한다.
+   * @returns {[string, boolean][]}
+   */
+  getMovingState() {
+    return this.#movingState;
   }
 }
 

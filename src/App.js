@@ -4,6 +4,7 @@ const InputView = require('./io/InputView');
 const OutputView = require('./io/OutputView');
 
 class App {
+  #game;
   /**
    * 다리 건너기 게임을 실행한다.
    */
@@ -17,7 +18,7 @@ class App {
    */
   askSize() {
     InputView.readBridgeSize((input) => {
-      this.game = new BridgeGame(+input);
+      this.#game = new BridgeGame(+input);
       this.askMove();
     });
   }
@@ -27,10 +28,10 @@ class App {
    */
   askMove() {
     InputView.readMoving((input) => {
-      this.game.move(input);
-      OutputView.printMap(this.game.movingState);
-      if (this.game.checkGameOver())
-        return this.game.judgeGameSuccess() ? this.end() : this.askRestart();
+      this.#game.move(input);
+      OutputView.printMap(this.#game.getMovingState());
+      if (this.#game.checkGameOver())
+        return this.#game.judgeGameSuccess() ? this.end() : this.askRestart();
       this.askMove();
     });
   }
@@ -40,7 +41,8 @@ class App {
    */
   askRestart() {
     InputView.readGameCommand((input) => {
-      if (input === GAME_RESULT.retry) return this.game.retry(), this.askMove();
+      if (input === GAME_RESULT.retry)
+        return this.#game.retry(), this.askMove();
       this.end();
     });
   }
@@ -50,9 +52,9 @@ class App {
    */
   end() {
     OutputView.printResult(
-      this.game.movingState,
-      this.game.judgeGameSuccess(),
-      this.game.tryCnt
+      this.#game.getMovingState(),
+      this.#game.judgeGameSuccess(),
+      this.#game.getTryCnt()
     );
   }
 }
