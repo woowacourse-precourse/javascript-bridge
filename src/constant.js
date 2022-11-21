@@ -12,7 +12,14 @@ const KEY=Object.freeze({
   END:'Q',
 });
 
+const ERROR=Object.freeze({
+  BRIDGE_ERROR : '다리 길이가 올바르지 않습니다.',
+  MOVING_ERROR : '이동할 칸이 올바르지 않습니다.',
+  RESTART_ERROR : '재시작 입력이 올바르지 않습니다.',
+})
+
 module.exports=Object.freeze({
   MESSAGE,
   KEY,
+  ERROR,
 });
