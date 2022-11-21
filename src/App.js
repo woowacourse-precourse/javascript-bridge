@@ -1,7 +1,7 @@
 const OutputView = require('./view/OutputView');
 const InputView = require('./view/InputView');
 const BridgeGame = require('./domain/BridgeGame');
-const Validator = require('./view/Validator');
+const Validator = require('./validate/Validator');
 const { GAME_COMMAND } = require('./constants/bridgeGame');
 
 class App {
