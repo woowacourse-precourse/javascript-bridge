@@ -34,12 +34,6 @@ class BridgeGameController {
     });
   }
 
-  setUserMoving(step) {
-    BridgeMap.generate(this.#model.getBridge(), this.#model.getUserMove());
-    printMap();
-    this.checkResult();
-  }
-
   readUserMoving(resolve) {
     readMoving((step) => {
       try {
