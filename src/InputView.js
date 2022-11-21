@@ -1,6 +1,8 @@
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { Console } = require("@woowacourse/mission-utils");
 const { COMMAND } = require("./Constant");
+const Exception = require("./Exception");
+let exception = new Exception();
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -10,7 +12,8 @@ const InputView = {
    */
   readBridgeSize(bridge) {
     Console.readLine(COMMAND.INPUT, (bridgeSize) => {
-      // if (validateBridgeSize) return this.readBridgeSize();
+      exception.checkBridgeSize(bridgeSize);
+      // if(exception.checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge);
 
       bridge.setBridge(Number(bridgeSize));
       this.readMoving();
