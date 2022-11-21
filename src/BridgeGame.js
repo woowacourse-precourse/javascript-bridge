@@ -2,15 +2,28 @@ const Bridge = require('./Bridge');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
+const IO = require('./IO');
+const Validator = require('./Validator');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  static #instance;
   #bridge;
 
   constructor() {
+    if (BridgeGame.#instance) return BridgeGame.#instance;
+    this.checkLengthValidate();
+    BridgeGame.#instance = this;
+  }
+
+  checkLengthValidate() {
     InputView.readBridgeSize(length => {
+      if (!Validator.validateBridgeLength(length)) {
+        this.checkLengthValidate();
+        return;
+      }
       this.#bridge = new Bridge(
         length,
         BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate),

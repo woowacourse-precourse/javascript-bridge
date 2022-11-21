@@ -1,3 +1,5 @@
+const Validator = require('./Validator');
+
 /**
  * 다리 객체
  */
