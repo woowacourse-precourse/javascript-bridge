@@ -1,27 +1,42 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const Validator = require('./Validator');
-const BridgeMaker = require('./BridgeMaker');
-const { Utils } = require('./Utils');
+const BridgeGame = require('./BridgeGame');
+const { Console } = require('@woowacourse/mission-utils');
 
 class App {
+  #bridgeGame;
+
   play() {
     OutputView.printGameStart();
-    InputView.readBridgeSize(this.settingBridge);
+    InputView.readBridgeSize(this.settingBridge.bind(this));
   }
   
   settingBridge(size) {
     Validator.checkBridgeSize(size);
-    let bridge = BridgeMaker.makeBridge(size, Utils.generateRandomNumber);
-    InputView.readMoving(this.playingBridge);
+    this.#bridgeGame = new BridgeGame(size);
+    // this.playingBridge();
   }
-
+  
   playingBridge() {
-    InputView.readGameCommand(this.endingBridge);
+    InputView.readMoving(this.movingSteps.bind(this));
   }
-
-  endingBridge() {
-
+  
+  movingSteps(step) {
+    Validator.checkMoving(move);
+    if (this.#bridgeGame.move(step) === true) {
+      OutputView.printMap(this.#bridgeGame, true);
+      if (this.#bridgeGame.isDone() == true) {
+        OutputView.printResult(this.#bridgeGame);
+      }
+      else {
+        this.playingBridge();
+      }
+    }
+    if (this.#bridgeGame.move(step) === false) {
+      OutputView.printMap(this.#bridgeGame, false);
+      InputView.readGameCommand(this.endingBridge.bind(this));
+    }
   }
 }
 
