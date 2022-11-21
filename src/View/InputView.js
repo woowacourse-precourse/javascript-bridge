@@ -1,5 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { printError } = require('./OutputView');
 
 const INPUT = {
 	BRIDGE_SIZE: '\n다리의 길이를 입력해주세요.\n',
