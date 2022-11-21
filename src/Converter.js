@@ -11,22 +11,20 @@ const Converter = {
     return +number === 1 ? BRIDGE_MSG.upward : BRIDGE_MSG.downward;
   },
 
+  /**
+   *
+   * @param {['U'|'D', boolean][]} movingState
+   * @returns {string}
+   */
   convertToBridgeMap(movingState) {
-    return [
-      Converter.convertToBridgeLine(movingState, upward),
-      Converter.convertToBridgeLine(movingState, downward),
-    ].join(newLine);
-  },
-
-  convertToBridgeLine(movingState, point) {
-    return (
+    const convertToSqr = ([dir, isPossible], point) =>
+      dir === point ? (isPossible ? possible : impossible) : blank;
+    const convertToBridgeLine = (point) =>
       LEFT_EDGE +
-      movingState
-        .map(([dir, isPossible]) =>
-          dir === point ? (isPossible ? possible : impossible) : blank
-        )
-        .join(DIVIDER) +
-      RIGHT_EDGE
+      movingState.map((el) => convertToSqr(el, point)).join(DIVIDER) +
+      RIGHT_EDGE;
+    return [convertToBridgeLine(upward), convertToBridgeLine(downward)].join(
+      newLine
     );
   },
 };
