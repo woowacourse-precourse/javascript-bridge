@@ -20,7 +20,6 @@ class App {
         this.constructBridgeInput();
         return;
       }
-
       this.constructBridge(size);
     });
   }
@@ -38,7 +37,6 @@ class App {
         this.crossBridgeInput();
         return;
       }
-
       this.crossBridge(direction);
     });
   }
@@ -46,7 +44,7 @@ class App {
   crossBridge(direction) {
     const moveResult = this.#bridgeGame.move(direction);
     OutputView.printMap(this.#bridgeGame.getMap());
-    if (this.#bridgeGame.isSuccess()) {
+    if (this.#bridgeGame.isClear()) {
       this.showResult();
       return;
     }
@@ -59,7 +57,6 @@ class App {
         this.retryOrNotInput();
         return;
       }
-
       this.retryOrNot(command);
     });
   }
@@ -75,8 +72,8 @@ class App {
   }
 
   showResult() {
-    const [map, success, tryCount] = this.#bridgeGame.getResult();
-    OutputView.printResult(map, success, tryCount);
+    const [map, isClear, tryCount] = this.#bridgeGame.getResult();
+    OutputView.printResult(map, isClear, tryCount);
     MissionUtils.Console.close();
   }
 

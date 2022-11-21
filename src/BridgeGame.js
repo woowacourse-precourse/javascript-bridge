@@ -15,7 +15,7 @@ class BridgeGame {
     this.#tryCount = 1;
   }
 
-  isSuccess() {
+  isClear() {
     return this.#bridge.isLastPosition(this.#player);
   }
 
@@ -55,7 +55,7 @@ class BridgeGame {
   }
 
   getResult() {
-    return [this.getMap(), this.isSuccess(), this.#tryCount];
+    return [this.getMap(), this.isClear(), this.#tryCount];
   }
 }
 
