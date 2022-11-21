@@ -58,7 +58,10 @@ class BridgeGame {
     this.init();
   }
 
-  end() {}
+  end(game) {
+    OutputView.printResult(game);
+    Console.close();
+  }
 }
 
 module.exports = BridgeGame;
