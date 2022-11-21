@@ -32,9 +32,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(isSuccess, playCount) {
+  printResult(isSuccess, playCount, map) {
     MissionUtils.Console.print(GAME.end);
-    OutputView.printMap();
+    OutputView.printMap(map);
     OutputView.printEmptyLine();
     if (isSuccess) MissionUtils.Console.print(GAME.success);
     if (!isSuccess) MissionUtils.Console.print(GAME.fail);

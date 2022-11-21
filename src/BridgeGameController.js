@@ -102,7 +102,11 @@ class BridgeGameController {
   renderResult() {
     const isSuccess = this.#model.getIsSuccess();
     const playCount = this.#model.getPlayCount();
-    printResult(isSuccess, playCount);
+    const map = BridgeMap.generate(
+      this.#model.getBridge(),
+      this.#model.getUserMove(),
+    );
+    printResult(isSuccess, playCount, map);
   }
 }
 
