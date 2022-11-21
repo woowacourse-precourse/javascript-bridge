@@ -12,6 +12,10 @@ class BridgeSize {
       throw new Error('[ERROR] 다리 길이는 3이상 20이하 숫자를 입력하시길 바랍니다.');
     }
   }
+
+  getBridgeSize() {
+    return this.#bridgeSize;
+  }
 }
 
 module.export = BridgeSize;
