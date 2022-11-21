@@ -4,6 +4,14 @@ const {
   FAIL_MSG,
   SUCCESS_MSG,
   TOTAL_COUNT_MSG,
+  MOVE_UP,
+  MOVE_DOWN,
+  START_BRIDGE,
+  END_BRIDGE,
+  SUCCESS,
+  FAIL,
+  BAR,
+  BLANK,
 } = require('./constants');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -15,46 +23,58 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(moveInputArray) {
-    // moveInputArray = [{isRightDirect:true, moveInput},{},{}]
-    const resultMap = [];
-    let upsideBridge = '';
-    let downsideBridge = '';
-    for (let idx = 0; idx < 2; idx += 1) {
-      // idx==0 이면 위칸
-      // idx==1 이면 아래칸
-      if (idx === 0) {
-        // 위칸
-        const upsideBlock = moveInputArray
-          .map(({ isRightDirect, moveInput }) => {
-            if (moveInput === 'U') {
-              if (isRightDirect) return 'O';
-              return 'X';
-            }
-            return ' ';
-          })
-          .join(' | ');
-        upsideBridge = `[ ${upsideBlock} ]`;
-        resultMap.push(upsideBridge);
-      }
-      if (idx === 1) {
-        const downSideBlock = moveInputArray
-          .map(({ isRightDirect, moveInput }) => {
-            if (moveInput === 'D') {
-              if (isRightDirect) return 'O';
-              return 'X';
-            }
-            return ' ';
-          })
-          .join(' | ');
-        downsideBridge = `[ ${downSideBlock} ]`;
-        resultMap.push(downsideBridge);
-      }
-    }
+    const resultMap = this.makeResultMap(moveInputArray);
     resultMap.forEach((bridge) => {
       Console.print(bridge);
     });
   },
 
+  makeResultMap(moveInputArray) {
+    let resultMap = [];
+    for (let floor = 0; floor < 2; floor += 1) {
+      resultMap = this.mergeTwoBlock(floor, moveInputArray, resultMap);
+    }
+    return resultMap;
+  },
+
+  mergeTwoBlock(floor, moveInputArray, resultMap) {
+    let block = '';
+    if (floor === 0) {
+      block = this.makeUpSideBlock(moveInputArray);
+    }
+    if (floor === 1) {
+      block = this.makeDownSideBlock(moveInputArray);
+    }
+    const bridge = `${START_BRIDGE} ${block} ${END_BRIDGE}`;
+    resultMap.push(bridge);
+    return resultMap;
+  },
+
+  makeUpSideBlock(moveInputArray) {
+    const upsideBlock = moveInputArray
+      .map(({ isRightDirect, moveInput }) => {
+        if (moveInput === MOVE_UP) {
+          if (isRightDirect) return SUCCESS;
+          return FAIL;
+        }
+        return BLANK;
+      })
+      .join(BAR);
+    return upsideBlock;
+  },
+
+  makeDownSideBlock(moveInputArray) {
+    const downSideBlock = moveInputArray
+      .map(({ isRightDirect, moveInput }) => {
+        if (moveInput === MOVE_DOWN) {
+          if (isRightDirect) return SUCCESS;
+          return FAIL;
+        }
+        return BLANK;
+      })
+      .join(BAR);
+    return downSideBlock;
+  },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
