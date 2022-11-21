@@ -18,11 +18,11 @@ class BridgeGame {
   }
 
   makeMap(oneBridge, upOrDown) {
-    let upAndDown = { U: ' ', D: ' ' };
-    oneBridge === upOrDown ? (upAndDown[upOrDown] = 'O') : (upAndDown[upOrDown] = 'X');
+    let map = { U: ' ', D: ' ' };
+    oneBridge === upOrDown ? (map[upOrDown] = 'O') : (map[upOrDown] = 'X');
 
-    this.#up.push(upAndDown['U']);
-    this.#down.push(upAndDown['D']);
+    this.#up.push(map['U']);
+    this.#down.push(map['D']);
 
     return [this.#up, this.#down, oneBridge === upOrDown];
   }
