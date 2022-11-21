@@ -15,17 +15,14 @@ const InputView = {
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (size) => {
       const error = Validation.isVaildBridgeSize(size);
-      if (error) {
-        this.readBridgeSize();
-      } else {
-        const bridge = BridgeMaker.makeBridge(
-          size,
-          BridgeRandomNumberGenerator.generate
-        );
-        let attemptCount = 1;
-        let moveList = [[], []];
-        this.readMoving(bridge, moveList, attemptCount);
-      }
+      if (error) return this.readBridgeSize();
+      const bridge = BridgeMaker.makeBridge(
+        size,
+        BridgeRandomNumberGenerator.generate
+      );
+      let attemptCount = 1;
+      let moveList = [[], []];
+      this.readMoving(bridge, moveList, attemptCount);
     });
   },
 
@@ -41,11 +38,13 @@ const InputView = {
 
         const bridgeGame = new BridgeGame();
         const checkContinue = bridgeGame.move(moving, bridge, moveList);
+
         if (checkContinue[0].includes("X") || checkContinue[1].includes("X"))
-          this.readGameCommand(bridge, attempt, moveList);
-        else if (bridge.length === checkContinue[0].length)
-          OutputView.printResult("성공", attempt, moveList);
-        else this.readMoving(bridge, checkContinue, attempt);
+          return this.readGameCommand(bridge, attempt, moveList);
+        if (bridge.length === checkContinue[0].length)
+          return OutputView.printResult("성공", attempt, moveList);
+
+        return this.readMoving(bridge, checkContinue, attempt);
       }
     );
   },
