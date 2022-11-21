@@ -2,19 +2,15 @@ const ERROR = require('../constants/error');
 const Validator = require('../Validator');
 
 class Bridge {
-  #bridge = [];
+  #bridge;
 
-  canMove(moveCount, moving) {
-    return this.#bridge[moveCount] === moving;
-  }
-
-  setBridge(bridge) {
+  constructor(bridge) {
     this.validateBridge(bridge);
     this.#bridge = bridge;
   }
 
-  getBridgeSize() {
-    return this.#bridge.length;
+  canICross(moveCount, moving) {
+    return this.#bridge[moveCount] === moving;
   }
 
   validateBridge(bridge) {
