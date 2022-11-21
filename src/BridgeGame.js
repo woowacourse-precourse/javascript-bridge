@@ -39,11 +39,17 @@ class BridgeGame {
     inputView.readBridgeSize(this.handleBridgeLength.bind(this));
   }
 
+  makeAndSaveBridge (length) {
+    const bridge = makeBridge(length, generate);
+    this.setBridge(bridge);
+  }
+
   handleBridgeLength (length) {
     try {
       InputValidator.isRightBridgeLength(length);
-      const bridge = makeBridge(length, generate);
-      this.setBridge(bridge);
+      // const bridge = makeBridge(length, generate);
+      // this.setBridge(bridge);
+      this.makeAndSaveBridge(length);
       this.move(this);
     } catch (error) {
       outputView.printError(error);
