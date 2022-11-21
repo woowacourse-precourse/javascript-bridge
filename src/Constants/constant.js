@@ -23,6 +23,8 @@ const SIGN = Object.freeze({
 const BRIDGE = Object.freeze({
   min_length: 3,
   max_length: 20,
+  crossable: 'O',
+  uncrossable: 'X',
 });
 
 const DIRECTION = Object.freeze({
