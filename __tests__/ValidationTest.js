@@ -1,7 +1,7 @@
 const {
-  isSizeInRange,
-  isRightUserMove,
-  isRightUserCommand,
+  checkSizeInRange,
+  checkUserMove,
+  checkUserCommand,
   isCurrentLastIndexValueSame,
 } = require('../src/Validation');
 
@@ -9,21 +9,21 @@ describe('유효성 검사 테스트', () => {
   test('다리 사이즈 입력 시 예외 테스트', () => {
     const mockSizes = ['a', -1, 0, 1, 21, 4.5];
     mockSizes.forEach((size) => {
-      expect(isSizeInRange(size)).toBe(false);
+      expect(() => checkSizeInRange(size)).toThrow();
     });
   });
 
   test('위 칸/아래 칸 선택 시 예외 테스트', () => {
     const mockMove = ['u', 'd', 1, 'T'];
     mockMove.forEach((move) => {
-      expect(isRightUserMove(move)).toBe(false);
+      expect(() => checkUserMove(move)).toThrow();
     });
   });
 
   test('게임 재시작 여부 예외 테스트', () => {
     const mockCommand = ['r', 'q', 2, 'G'];
     mockCommand.forEach((command) => {
-      expect(isRightUserCommand(command)).toBe(false);
+      expect(() => checkUserCommand(command)).toThrow();
     });
   });
 
