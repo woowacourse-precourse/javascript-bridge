@@ -16,18 +16,21 @@ const OutputView = {
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * @param {[string, boolean][]} movingState 게임 상태
    * @param {boolean} isSuccess 게임 성공 여부
    * @param {number} tryCnt 시도한 횟수
    */
-  printResult(movingState, isSuccess, tryCnt) {
-    const { successOrNot, totalTryCount, result } = GAME_MSG;
+  printResult(isSuccess, tryCnt) {
     const { success, fail } = GAME_RESULT;
-    Console.print(result);
-    OutputView.printMap(movingState);
-    Console.print(successOrNot + (isSuccess ? success : fail));
-    Console.print(totalTryCount + tryCnt);
+    Console.print(GAME_MSG.successOrNot + (isSuccess ? success : fail));
+    Console.print(GAME_MSG.totalTryCount + tryCnt);
     Console.close();
+  },
+
+  /**
+   * 게임 종료 메세지를 출력한다.
+   */
+  printGameEnd() {
+    Console.print(GAME_MSG.result);
   },
 
   /**

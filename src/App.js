@@ -30,8 +30,9 @@ class App {
     InputView.readMoving((input) => {
       this.#game.move(input);
       OutputView.printMap(this.#game.getMovingState());
-      if (this.#game.checkGameOver())
+      if (this.#game.checkGameOver()) {
         return this.#game.judgeGameSuccess() ? this.end() : this.askRestart();
+      }
       this.askMove();
     });
   }
@@ -41,8 +42,9 @@ class App {
    */
   askRestart() {
     InputView.readGameCommand((input) => {
-      if (input === GAME_RESULT.retry)
+      if (input === GAME_RESULT.retry) {
         return this.#game.retry(), this.askMove();
+      }
       this.end();
     });
   }
@@ -51,8 +53,9 @@ class App {
    * 게임을 종료한다.
    */
   end() {
+    OutputView.printGameEnd();
+    OutputView.printMap(this.#game.getMovingState());
     OutputView.printResult(
-      this.#game.getMovingState(),
       this.#game.judgeGameSuccess(),
       this.#game.getTryCnt()
     );
