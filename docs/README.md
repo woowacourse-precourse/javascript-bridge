@@ -20,8 +20,8 @@
         - [x] compare user input with the bridge answer (e.g., ["U", "D", "D"]) and record "O" or "X"
 - [x] print movement status
 - [x] print results (if user input is "Q" or when user succeeds to cross the bridge)
-- [ ] get game command input from user
-    - [ ] check if input is valid (e.g., "R" or "Q")
+- [x] get game command input from user
+    - [x] check if input is valid (e.g., "R" or "Q")
 - [ ] retry game (if user input is "R")
 
 <br/>
