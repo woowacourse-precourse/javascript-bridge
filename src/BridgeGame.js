@@ -30,7 +30,18 @@ class BridgeGame {
     return movable;
   }
 
-  retry() {}
+  isGameClear() {
+    return this.#player.getCurrentLocation() === this.#bridge.length;
+  }
+
+  isRetry(command) {
+    return command === 'R';
+  }
+
+  retry() {
+    this.#attempts += 1;
+    this.#player.resetPath();
+  }
 }
 
 module.exports = BridgeGame;
