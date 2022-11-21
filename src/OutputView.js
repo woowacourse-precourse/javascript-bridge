@@ -17,15 +17,12 @@ const OutputView = {
     Console.print(`${upBridge}\n${downBridge}`);
   },
   makeMap(inputMoves, moveResult) {
-    let upBridge = "[ ";
-    let downBridge = "[ ";
+    let upBridge = "[ "; let downBridge = "[ ";
     if (inputMoves[0] === "U") {
-      upBridge += moveResult[0] + " ]";
-      downBridge += "  ]";
+      upBridge += moveResult[0] + " ]"; downBridge += "  ]";
     }
     if (inputMoves[0] === "D") {
-      downBridge += moveResult[0] + " ]";
-      upBridge += "  ]";
+      downBridge += moveResult[0] + " ]"; upBridge += "  ]";
     }
     return [upBridge, downBridge];
   },
@@ -37,7 +34,7 @@ const OutputView = {
       } if (inputMoves[i] === "D") {
         downBridge.push(moveResult[i]); upBridge.push(" ");
       }}
-    upBridge = upBridge.join(" | "); downBridge = downBridge.join(" | ");
+    upBridge = "[ " + upBridge.join(" | ") + " ]"; downBridge = "[ " + downBridge.join(" | ") + " ]";
     return [upBridge, downBridge];
   },
 
