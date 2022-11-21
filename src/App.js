@@ -2,11 +2,18 @@ const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 
 class App {
-  constructor() {}
+  constructor() {
+    this.handleBridgeSize = this.handleBridgeSize.bind(this);
+  }
 
   play() {
     OutputView.outputGameStart();
-    InputView.readBridgeSize();
+    InputView.readBridgeSize(this.handleBridgeSize);
+  }
+
+  handleBridgeSize(size) {
+    this.bridgeGame = new BridgeGame(size);
+    InputView.readMoving(this.handleBridgeMoveing);
   }
 }
 
