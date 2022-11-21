@@ -30,6 +30,11 @@ class BridgeGame {
       this.#gameStatus.movingDirection
     );
   }
+
+  retry() {
+    this.#gameStatus.attempt += 1;
+    this.#gameStatus.bridgeCrossCount = 0;
+  }
 }
 
 module.exports = BridgeGame;
