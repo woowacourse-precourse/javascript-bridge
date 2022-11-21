@@ -27,4 +27,16 @@
 <br/>
 <br/>
 
+## **🧪 테스트 구현 목록** ##
+- [ ] check if bridge size input is valid
+    - [ ] check if input is an integer
+    - [ ] check if input is in range (3~20)
+- [ ] check if movement input is valid
+    - [ ] check if input is "U" or "D"
+- [ ] check if game command input is valid
+    - [ ] check if input is "R" or "Q"
+    
+<br/>
+<br/>
+
 ## **🗂️ 파일 구성**
