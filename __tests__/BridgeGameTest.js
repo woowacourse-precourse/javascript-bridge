@@ -29,6 +29,35 @@ describe('BridgeGame 클래스 테스트', () => {
     token.forEach((token) => expect(binaryRegExp.test(token)).toBe(true));
   });
 
+  test('move - 이동할 방향을 입력받고 올바르게 기록하는지 검사', () => {
+    // Given
+    const direction = 'U';
+    const records = ['D', 'D'];
+
+    // When
+    const game = new BridgeGame();
+    const result = game.move(direction, records);
+    const nextRecords = ['D', 'D', 'U'];
+
+    // Then
+    expect(result).toEqual(nextRecords);
+  });
+
+  test('move - 잘못된 방향을 입력받을 경우 예외처리', () => {
+    // Given
+    const directionList = ['Z', '!', 3, 'UU', 'DU', 'UD', 'DD'];
+
+    // When
+    const game = new BridgeGame();
+
+    // Then
+    directionList.forEach((direction) => {
+      expect(() => {
+        game.move(direction);
+      }).toThrow(ERROR_MESSAGE.unexpected_input);
+    });
+  });
+
   test('isSelectUpper - 유저 입력이 U일 때만 참값을 반환하는지 검사', () => {
     // Given
     const userDirectionList = ['U', 'D'];
