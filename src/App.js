@@ -34,14 +34,16 @@ class App {
     this.showInputMove();
   }
 
+  moveCallback(command) {
+    this.bridgeGame.move(
+      command,
+      this.moveSuccess.bind(this),
+      this.moveFail.bind(this),
+    );
+  }
+
   showInputMove() {
-    InputView.readMoving((command) => {
-      this.bridgeGame.move(
-        command,
-        this.moveSuccess.bind(this),
-        this.moveFail.bind(this),
-      );
-    });
+    InputView.readMoving(this.moveCallback.bind(this));
   }
 
   moveSuccess() {
@@ -54,15 +56,17 @@ class App {
     this.showInputRetry();
   }
 
+  retryCallback(command) {
+    if (command === RETRY) {
+      this.bridgeGame.retry(command);
+      this.beforeShowInputMove();
+      return;
+    }
+    this.showResult(false);
+  }
+
   showInputRetry() {
-    InputView.readGameCommand((command) => {
-      if (command === RETRY) {
-        this.bridgeGame.retry(command);
-        this.beforeShowInputMove();
-        return;
-      }
-      this.showResult(false);
-    });
+    InputView.readGameCommand(this.retryCallback.bind(this));
   }
 
   showResult(isSuccess) {
