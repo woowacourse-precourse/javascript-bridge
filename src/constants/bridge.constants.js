@@ -9,4 +9,4 @@ const BRIDGE = {
   NO_RANGE: "다리 길이는 3이상 20이하여야 합니다.",
 };
 
-export { BRIDGE };
+module.exports = { BRIDGE };

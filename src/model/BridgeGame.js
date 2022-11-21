@@ -1,7 +1,24 @@
+const { makeBridge } = require("../BridgeMaker");
+const { generate } = require("../BridgeRandomNumberGenerator");
+const { BRIDGE } = require("../constants/bridge.constants");
+const InValidInputError = require("../error/InValidInputError");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  bridge;
+
+  constructor(size) {
+    this.validate(size);
+    this.bridge = makeBridge(size, generate);
+  }
+
+  validate(size) {
+    if (!/^[0-9]+$/.test(size)) throw new InValidInputError(BRIDGE.NO_NUM);
+    if (size < 3 || size > 20) throw new InValidInputError(BRIDGE.NO_RANGE);
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
