@@ -1,7 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeGame = require('../src/BridgeGame');
-const { createTokens } = require('../src/BridgeGame');
+const { createTokens, isCommandRetry } = require('../src/BridgeGame');
 const { generate } = require('../src/BridgeRandomNumberGenerator');
 const { ERROR_MESSAGE } = require('../src/Constants/message');
 
@@ -123,5 +123,29 @@ describe('BridgeGame 클래스 테스트', () => {
 
     // Then
     expect(isEndOfBridge).toBe(false);
+  });
+
+  test('IsCommandRetry - 커맨드에 맞게 올바른 값을 반환하는지 검사', () => {
+    // Given
+    const commands = ['R', 'Q'];
+
+    // When
+    const expected = commands.map((command) => isCommandRetry(command));
+    const result = [true, false];
+
+    // Then
+    expect(expected).toStrictEqual(result);
+  });
+
+  test('isCommandRetry - 잘못된 커맨드가 입력되면 예외처리', () => {
+    // Given
+    const commands = ['D', 34, '!', 'U', 'RU', 'Qq', 'r', 'q'];
+
+    // Then
+    commands.forEach((command) => {
+      expect(() => {
+        console.log('isCommandRety', isCommandRetry(command));
+      }).toThrow(ERROR_MESSAGE.unexpected_input);
+    });
   });
 });
