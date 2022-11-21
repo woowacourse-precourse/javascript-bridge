@@ -46,7 +46,7 @@ class App {
   }
 
   getMoving() {
-    InputView.readMoving(this.crossingBridge.bind(this));
+    InputView.readMoving(this.checkMove.bind(this));
   }
 
   crossingBridge(move) {
@@ -58,6 +58,16 @@ class App {
       );
     }
     this.getMoving();
+  }
+
+  checkMove(move) {
+    try {
+      Validate.move(move);
+      this.crossingBridge(move);
+    } catch (e) {
+      Console.print(e.message);
+      return this.getMoving();
+    }
   }
 
   success(move) {
