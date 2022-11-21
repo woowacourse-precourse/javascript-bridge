@@ -23,7 +23,12 @@ class InputHandling {
   }
 
   handleMovingValue(direction) {
-    Validation.checkMovingValue(direction);
+    try{
+      Validation.checkMovingValue(direction);
+    } catch (error) {
+      Console.print(error);
+      InputView.readMoving(this.handleMovingValue.bind(this));
+    }
   }
 }
 
