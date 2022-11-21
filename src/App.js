@@ -14,6 +14,7 @@ class App {
     this.#currentPosition = 0;
     this.#inputHistory = [];
   }
+
   play() {
     Console.print("다리 건너기 게임을 시작합니다.\n");
 
