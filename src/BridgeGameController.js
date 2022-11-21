@@ -69,7 +69,8 @@ class BridgeGameController {
   static showBridge(game) {
     const map = new BridgeMap();
     map.create(game);
-    printMap(map.getUpperBridge(), map.getDownerBridge());
+    const { upperBridge, downerBridge } = map.getBridge();
+    printMap(upperBridge, downerBridge);
   }
 
   static showResult(game) {

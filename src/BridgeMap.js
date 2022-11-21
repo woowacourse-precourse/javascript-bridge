@@ -60,12 +60,10 @@ class BridgeMap {
     ];
   }
 
-  getUpperBridge() {
-    return this.#upperBridge.join(' ');
-  }
-
-  getDownerBridge() {
-    return this.#downerBridge.join(' ');
+  getBridge() {
+    const upperBridge = this.#upperBridge.join(' ');
+    const downerBridge = this.#downerBridge.join(' ');
+    return { upperBridge, downerBridge };
   }
 }
 
