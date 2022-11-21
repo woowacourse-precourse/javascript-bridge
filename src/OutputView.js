@@ -3,27 +3,15 @@ const MissionUtils = require("@woowacourse/mission-utils");
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
-    /**
+  /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * @param {string[]} bridge 만들어진 다리의 모양
-   * @param {number} tempPosition 현재 서 있는 다리의 위치(인덱스)
-   * @param {boolean} status 다리 건너기를 성공했는지 실패했는지에 대한 내용 (true/false)
+   * @param {[string[],string[]]} checkedMap 현재까지 이동한 다리의 상태에 대한 리스트 내용
    */
-     printMap(bridge, tempPosition, status) {
-      const checkedBridge = [[], []];
-      for (let i = 0; i <= tempPosition; i++) {
-        if(bridge[i] === "U"){((checkedBridge[0][i] = " O "), (checkedBridge[1][i] = "   "))};
-        if(bridge[i] === "D"){((checkedBridge[0][i] = "   "), (checkedBridge[1][i] = " O "))};
-      }
-      if(status === false){
-        if(bridge[tempPosition] === "U"){((checkedBridge[0][tempPosition] = "   "), (checkedBridge[1][tempPosition] = " X "))};
-        if(bridge[tempPosition] === "D"){((checkedBridge[0][tempPosition] = " X "), (checkedBridge[1][tempPosition] = "   "))};
-      }
-      MissionUtils.Console.print(`[${checkedBridge[0].join('|')}]\n[${checkedBridge[1].join('|')}]`);
+     printMap(checkedMap) {
+      MissionUtils.Console.print(
+      `[${checkedMap[0].join('|')}]\n[${checkedMap[1].join('|')}]`);
     },
   
-
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
