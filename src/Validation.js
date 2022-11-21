@@ -7,22 +7,22 @@ class Validation {
     checkSizeInputValidation(bridgeSize) {
         // 1. 숫자가 아닌 입력
         if (isNaN(bridgeSize)) 
-            throw new Error(this.#NAN_ERROR_MESSAGE);
+            throw this.#NAN_ERROR_MESSAGE;
         // 2. 3 ~ 20이 아닌 입력
         if (bridgeSize < 3 || bridgeSize > 20)
-            throw new Error(this.#NOT_IN_RANGE_ERROR_MESSAGE);
+            throw this.#NOT_IN_RANGE_ERROR_MESSAGE;
     }
 
     checkMovingInputValidation(movingInput) {
         // U, D 아닌 입력
         if (movingInput !== 'U' && movingInput !== 'D')
-            throw new Error(this.#MOVING_INPUT_ERROR_MESSAGE);
+            throw this.#MOVING_INPUT_ERROR_MESSAGE;
     }
 
     checkRetryInputValidation(gameCommandInput) {
         // R, Q 아닌 입력
         if (gameCommandInput !== 'R' && gameCommandInput !== 'Q')
-            throw new Error(this.#RETRY_INPUT_ERROR_MESSAGE);
+            throw this.#RETRY_INPUT_ERROR_MESSAGE;
     }
 }
 
