@@ -6,7 +6,11 @@ class Validation {
 
     checkSizeInputValidation(bridgeSize) {
         // 1. 숫자가 아닌 입력
+        if (isNaN(Number(bridgeSize))) 
+            throw new Error(this.#NAN_ERROR_MESSAGE);
         // 2. 3 ~ 20이 아닌 입력
+        if (Number(bridgeSize) < 3 || Number(bridgeSize) > 20)
+            throw new Error(this.#NOT_IN_RANGE_ERROR_MESSAGE);
     }
 
     checkMovingInputValidation(movingInput) {
