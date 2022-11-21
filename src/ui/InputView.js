@@ -11,7 +11,7 @@ const InputView = {
   readBridgeSize() {
     return new Promise((resolve) => {
       Console.readLine("다리의 길이를 입력해주세요.\n", (inputSize) => {
-        if (this.validateInput(inputSize)) {
+        if (this.validateSize(inputSize)) {
           resolve(inputSize);
         }
       });
@@ -21,18 +21,36 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    return new Promise((resolve) => {
+      Console.readLine(
+        "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
+        (inputDirection) => {
+          if (this.validateDirection(inputDirection)) {
+            resolve(inputDirection);
+          }
+        }
+      );
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {},
 
-  validateInput(inputSize) {
+  validateSize(inputSize) {
     if (inputSize >= 3 && inputSize <= 20) {
       return true;
     }
     throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+  },
+
+  validateDirection(inputDirection) {
+    if (inputDirection === "U" || inputDirection === "D") {
+      return true;
+    }
+    throw new Error("[ERROR] 진행 방향은 'U'거나 'D'여야 합니다.");
   },
 };
 

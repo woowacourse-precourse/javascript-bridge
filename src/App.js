@@ -12,10 +12,12 @@ class App {
     OutputView.printStart();
 
     const size = await InputView.readBridgeSize();
-    Console.print(size);
 
     const bridge = this.#bridgeGame.make(size);
     Console.print(bridge);
+
+    const direction = await InputView.readMoving();
+    Console.print(direction);
   }
 }
 
