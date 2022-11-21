@@ -14,7 +14,6 @@ const {
  */
 class BridgeGame {
   #bridge;
-  #route = [];
   #tryCount = 1;
   #up = [];
   #down = [];
@@ -29,7 +28,6 @@ class BridgeGame {
 
   move(move) {
     this.moveValidate(move);
-    this.#route.push(move);
     this.addUpDown(move, this.#bridge);
   }
 
@@ -62,22 +60,22 @@ class BridgeGame {
   }
 
   addUp(move, answer) {
-    if (answer[this.#route.length - 1] === move) {
+    if (answer[this.#up.length] === move) {
       this.#up.push(SUCCESS_SHAPE);
       return;
     }
-    if (answer[this.#route.length - 1] !== move) {
+    if (answer[this.#up.length] !== move) {
       this.#up.push(FAIL_SHAPE);
       return;
     }
   }
 
   addDown(move, answer) {
-    if (answer[this.#route.length - 1] === move) {
+    if (answer[this.#down.length] === move) {
       this.#down.push(SUCCESS_SHAPE);
       return;
     }
-    if (answer[this.#route.length - 1] !== move) {
+    if (answer[this.#down.length] !== move) {
       this.#down.push(FAIL_SHAPE);
       return;
     }
@@ -105,14 +103,13 @@ class BridgeGame {
   }
 
   lengthCompare() {
-    if (this.#bridge.length !== this.#route.length) {
+    if (this.#bridge.length !== this.#up.length) {
       return false;
     }
     return true;
   }
 
   clean() {
-    this.#route = [];
     this.#up = [];
     this.#down = [];
   }
