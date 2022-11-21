@@ -1,4 +1,5 @@
 const User = require('../src/User');
+const Bridge = require('../src/Bridge');
 
 describe('User 테스트', () => {
   test('user.setRoute()를 통해 필드에 데이터가 추가 되어야 한다.', () => {
@@ -28,5 +29,13 @@ describe('User 테스트', () => {
     user.setRoute('D');
 
     expect(user.getIndex()).toEqual(1);
+  });
+});
+
+describe('Bridge 테스트', () => {
+  test('Bridge 를 생성하며 값을 설정한다.', () => {
+    const bridge = new Bridge(['U', 'D', 'D']);
+
+    expect(bridge.getRoute()).toEqual(['U', 'D', 'D']);
   });
 });
