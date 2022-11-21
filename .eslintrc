@@ -1,22 +1,25 @@
 {
-  "extends": ["airbnb", "plugin:prettier/recommended","plugin:jsdoc/recommended"],
+  "extends": ["airbnb", "plugin:prettier/recommended", "plugin:jsdoc/recommended"],
   "rules": {
     "no-restricted-syntax": ["error", "BinaryExpression[operator='in']"],
     "no-nested-ternary": ["off"],
     "no-unused-expressions": ["off"],
-    "jsdoc/require-param-description":["off"],
-    "jsdoc/require-returns-description":["off"],
+    "jsdoc/require-param-description": ["off"],
+    "jsdoc/require-returns-description": ["off"],
     "max-depth": ["error", 2],
     "max-lines-per-function": ["error", 10],
     "prettier/prettier": [
       "error",
       {
-        "endOfLine": "auto",
-        "bracketSpacing": true,
-        "printWidth": 80,
+        "singleQuote": true,
         "semi": true,
+        "useTabs": false,
+        "tabWidth": 2,
         "trailingComma": "all",
-        "tabWidth": 2
+        "printWidth": 100,
+        "bracketSpacing": true,
+        "arrowParens": "always",
+        "endOfLine": "auto"
       }
     ]
   },

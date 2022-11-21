@@ -19,6 +19,10 @@ class GameController {
     this.#game = game;
   }
 
+  static isRetry(input) {
+    return input === RETRY_MESSAGE.RETRY;
+  }
+
   start() {
     InputView.readBridgeSize(this);
   }
@@ -39,9 +43,9 @@ class GameController {
    */
   setNextTurn(input) {
     this.#game.move(input);
-    OutputView.printMap(this.#game);
+    OutputView.printMap(this.#game.result);
     if (this.#game.isReMoving()) return InputView.readMoving(this);
-    OutputView.printResult(this.#game);
+    OutputView.printResult(this.#game.result, this.#game.isWin(), this.#game.tryNumber);
     if (this.#game.isEnd()) return Console.close();
     return InputView.readGameCommand(this);
   }
@@ -53,11 +57,11 @@ class GameController {
    */
   setRetryOrQuit(input) {
     isRightRetryString(input);
-    if (input === RETRY_MESSAGE.RETRY) {
+    if (this.isRetry(input)) {
       this.#game.retry();
       return InputView.readMoving(this);
     }
-    OutputView.printResult(this.#game);
+    OutputView.printResult(this.#game.result, this.#game.isWin(), this.#game.tryNumber);
     return Console.close();
   }
 }

@@ -28,9 +28,7 @@ describe('Bridge 유닛 테스트', () => {
 
     for (let i = 0; i < randomNumbers.length; i += 1) {
       expect(bridge.getElement(i)).toBe(
-        randomNumbers[i] === BRIDGE_ELEMENT.UP
-          ? INPUT_MESSAGE.UP
-          : INPUT_MESSAGE.DOWN,
+        randomNumbers[i] === BRIDGE_ELEMENT.UP ? INPUT_MESSAGE.UP : INPUT_MESSAGE.DOWN,
       );
     }
   });

@@ -1,5 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const BridgeGame = require('../BridgeGame');
 const { OUTPUT_MESSAGE } = require('../Utils/Constant');
 
 /**
@@ -11,25 +10,24 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    *
-   * @param {BridgeGame} game
+   * @param {boolean|undefined[]} result
    */
-  printMap(game) {
-    const resultMap = game.result;
-    Console.print(this.getPrintLine(0, resultMap));
-    Console.print(this.getPrintLine(1, resultMap));
+  printMap(result) {
+    Console.print(this.getPrintLine(0, result));
+    Console.print(this.getPrintLine(1, result));
   },
 
   /**
    *
    * @param {number} line
-   * @param {boolean|undefined[]} resultMap
+   * @param {boolean|undefined[]} result
    * @returns {string}
    */
-  getPrintLine(line, resultMap) {
+  getPrintLine(line, result) {
     let messageLine = OUTPUT_MESSAGE.START;
-    for (let level = 0; level < resultMap[line].length; level += 1) {
-      messageLine += this.getMessageElement(line, resultMap, level);
-      if (!this.isLastLine(level, resultMap[line].length)) {
+    for (let level = 0; level < result[line].length; level += 1) {
+      messageLine += this.getMessageElement(line, result, level);
+      if (!this.isLastLine(level, result[line].length)) {
         messageLine += OUTPUT_MESSAGE.LINE;
       }
     }
@@ -39,13 +37,13 @@ const OutputView = {
   /**
    *
    * @param {number} line
-   * @param {boolean|undefined[]} resultMap
+   * @param {boolean|undefined[]} result
    * @param {number} level
    * @returns {string}
    */
-  getMessageElement(line, resultMap, level) {
-    if (resultMap[line][level] === true) return OUTPUT_MESSAGE.CORRECT;
-    if (resultMap[line][level] === false) return OUTPUT_MESSAGE.INCORRECT;
+  getMessageElement(line, result, level) {
+    if (result[line][level] === true) return OUTPUT_MESSAGE.CORRECT;
+    if (result[line][level] === false) return OUTPUT_MESSAGE.INCORRECT;
     return OUTPUT_MESSAGE.EMPTY;
   },
 
@@ -64,13 +62,15 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    *
-   * @param {BridgeGame} game
+   * @param {boolean|undefined[]} result
+   * @param {boolean} isWin
+   * @param {number} tryCnt
    */
-  printResult(game) {
+  printResult(result, isWin, tryCnt) {
     Console.print(OUTPUT_MESSAGE.GAME_RESULT);
-    this.printMap(game);
-    Console.print(OUTPUT_MESSAGE.GAME_IS_SUCCESS(game.isWin()));
-    Console.print(OUTPUT_MESSAGE.GAME_TRY_CNT(game.tryNumber));
+    this.printMap(result);
+    Console.print(OUTPUT_MESSAGE.GAME_IS_SUCCESS(isWin));
+    Console.print(OUTPUT_MESSAGE.GAME_TRY_CNT(tryCnt));
   },
 };
 
