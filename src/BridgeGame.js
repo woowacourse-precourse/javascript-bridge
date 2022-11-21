@@ -72,8 +72,10 @@ class BridgeGame {
   };
 
   setMovedData = (command) => {
-    this.bridgeStore.addUserInputResult(this.bridgeStore.isMovable(this.moveCount, command));
-    OutputView.printMap(this.moveCount, command, this.bridgeStore.getUserInputResult);
+    this.bridgeStore.addUserInputResult(
+      { command, result: this.bridgeStore.isMovable(this.moveCount, command) },
+    );
+    OutputView.printMap(this.moveCount, this.bridgeStore.getUserInputResult);
   };
 
   confirmRetry = (command) => {

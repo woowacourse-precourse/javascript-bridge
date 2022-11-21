@@ -12,6 +12,10 @@ const OutputView = {
     true: 'O',
     false: 'X',
   },
+  MAP_COMMAND: {
+    U: 0,
+    D: 1,
+  },
   print(message) {
     Console.print(message);
   },
@@ -20,30 +24,20 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(currentMoveCount, userInput, callback) {
+  printMap(currentMoveCount, getUserInputResult) {
     let idx = 0;
-    // const map = Array.from(
-    //   { length: 2 },
-    //   () => Array.from({ length: currentMoveCount + 1 }).fill(this.MAP_CHARACTER.WHITE_SPACE),
-    // );
     const map = [[], []];
-
-    const command = {
-      U: 0,
-      D: 1,
-    };
 
     while (idx <= currentMoveCount) {
       const head = idx === 0 ? this.MAP_CHARACTER.START : '';
       const tail = idx === currentMoveCount ? this.MAP_CHARACTER.END : '';
+      const { command, result } = getUserInputResult(idx);
 
       map[0].push(`${head}${this.MAP_CHARACTER.WHITE_SPACE}${tail}`);
       map[1].push(`${head}${this.MAP_CHARACTER.WHITE_SPACE}${tail}`);
-
-      map[command[userInput]][idx] = `${head}${this.MAP_CHARACTER[callback(idx)]}${tail}`;
+      map[this.MAP_COMMAND[command]][idx] = `${head}${this.MAP_CHARACTER[result]}${tail}`;
       idx += 1;
     }
-
     Console.print(map.map((el) => el.join(this.MAP_CHARACTER.MIDDLE)).join('\n'));
   },
 
