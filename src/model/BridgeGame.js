@@ -43,16 +43,8 @@ class BridgeGame {
     return this.#retryCount;
   }
 
-  set retryCount(value) {
-    this.#retryCount = value;
-  }
-
   get turn() {
     return this.#turn;
-  }
-
-  set turn(value) {
-    this.#turn = value;
   }
 }
 

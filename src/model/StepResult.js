@@ -44,16 +44,8 @@ class StepResult {
     return this.#upperBridge;
   }
 
-  set upperBridge(value) {
-    this.#upperBridge = value;
-  }
-
   get lowerBridge() {
     return this.#lowerBridge;
-  }
-
-  set lowerBridge(value) {
-    this.#lowerBridge = value;
   }
 }
 
