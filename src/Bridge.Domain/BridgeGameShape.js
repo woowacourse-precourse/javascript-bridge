@@ -1,6 +1,6 @@
 const OutputView = require("../Bridge.UI/OutputView");
 const BRIDGE_PRINT = require("../lib/Bridge");
-const BRIDGE = require("../lib/Const");
+const { BRIDGE } = require("../lib/Const");
 
 class BridgeGameShape {
   #currentShape;
@@ -34,7 +34,7 @@ class BridgeGameShape {
   }
 
   makeDownShape(bridgeArr, result) {
-    const arr = downBridgeShapeWithResult(bridgeArr, result);
+    const arr = this.downBridgeShapeWithResult(bridgeArr, result);
     const DownShape = `${BRIDGE_PRINT.START}${arr.join(BRIDGE_PRINT.DIVISION)}${
       BRIDGE_PRINT.END
     }`;
@@ -52,6 +52,10 @@ class BridgeGameShape {
       }
       if (direction === BRIDGE.UP.SHAPE) return BRIDGE_PRINT.BLANK;
     });
+  }
+
+  getCurrentShape() {
+    return this.#currentShape;
   }
 
   OutputResultMap() {
