@@ -6,6 +6,10 @@ const Player = {
   movingArray: [],
   state: [[], []],
 
+  updateMovingArray(move) {
+    this.movingArray.push(move);
+  },
+
   stateUpdate(move, correct) {
     if (move === "U" && correct) {
       this.state[0].push(" O ");
