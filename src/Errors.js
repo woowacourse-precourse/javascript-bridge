@@ -13,7 +13,7 @@ const Errors = {
   },
 
   validateUserDirection(answer) {
-    if (answer.toUpperCase() !== "U" || answer.toUpperCase() !== "D")
+    if (answer.toUpperCase() !== "U" && answer.toUpperCase() !== "D")
       throw Error("[ERROR] U 혹은 D 를 입력해주세요.");
   },
 

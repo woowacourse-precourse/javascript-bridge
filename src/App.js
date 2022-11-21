@@ -12,7 +12,9 @@ class App {
     InputView.readBridgeSize((size) => {
       size = Number(size);
       const bridge = new BridgeGame(
-        BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate)
+        BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate),
+        0,
+        1
       );
       this.progressGame(bridge, Number(size));
     });
@@ -20,7 +22,7 @@ class App {
 
   progressGame(bridge, size) {
     InputView.readMoving((answer) => {
-      if (bridge.checkInputIsCorrect(answer, bridge.step)) {
+      if (bridge.checkInputIsCorrect(answer)) {
         // check 이름, parameter 수정
         this.moveUserBridge(answer, bridge, size);
         return;
@@ -40,7 +42,7 @@ class App {
   }
 
   checkIsGameSuccess(bridge, size) {
-    if (bridge.checkIsLastStep(bridge.step, size - 1)) {
+    if (bridge.checkIsLastStep(size - 1)) {
       OutputView.printResult(STATES.SUCCESS, bridge);
       Console.close();
       return true;
@@ -65,22 +67,6 @@ class App {
           this.progressGame(bridge, size);
       }
     });
-  }
-
-  validateInputSize(size) {
-    this.validateIsNumber(size);
-    this.validateRange(size);
-  }
-
-  validateIsNumber(size) {
-    if (isNaN(size)) {
-      throw Error("[ERROR] 숫자를 입력해주세요");
-    }
-  }
-
-  validateRange(size) {
-    if (size < 3 || size > 20)
-      throw Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
   }
 
   play() {
