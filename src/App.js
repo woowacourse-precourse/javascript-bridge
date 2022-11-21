@@ -8,48 +8,48 @@ const GAME = require('./consts/Game');
 class App {
   play() {
     OutputView.printStart();
+    const bridgeGame = this.makeBridgeGame();
+    const [turnSuccess, gameCount] = this.executeGame(bridgeGame);
+    OutputView.printResult(bridgeGame, turnSuccess, gameCount);
+  }
+
+  makeBridgeGame() {
     const bridgeSize = InputView.readBridgeSize();
     const bridge = BridgeMaker.makeBridge(
       bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
 
-    const bridgeGame = new BridgeGame(bridge);
-
-    let isContinue = true;
-    let count = 0;
-    let turnSuccess;
-    while (isContinue) {
-      count += 1;
-      turnSuccess = this.excuteGame(bridgeGame);
-      isContinue = bridgeGame.retry(InputView.readGameCommand());
-    }
-    OutputView.printResult(
-      bridgeGame.getBridge(),
-      bridgeGame.getTurn(),
-      turnSuccess,
-      count
-    );
+    return new BridgeGame(bridge);
   }
 
-  excuteGame(bridgeGame) {
-    let turnSuccess = true;
-    while (
-      bridgeGame.getTurn() < bridgeGame.getBridge().length &&
-      turnSuccess
-    ) {
+  executeGame(bridgeGame) {
+    let isContinue = true;
+    let gameCount = 0;
+    let turnSuccess;
+    while (isContinue) {
+      gameCount += 1;
       turnSuccess = this.executeTurn(bridgeGame);
-
-      OutputView.printMap(
-        bridgeGame.getBridge(),
-        bridgeGame.getTurn(),
-        turnSuccess
-      );
+      isContinue = bridgeGame.retry(InputView.readGameCommand());
     }
-    return turnSuccess;
+
+    return [turnSuccess, gameCount];
   }
 
   executeTurn(bridgeGame) {
+    let turnSuccess = true;
+    let turnValidation = bridgeGame.getTurn() < bridgeGame.getBridge().length;
+
+    while (turnValidation && turnSuccess) {
+      turnSuccess = this.executeMoving(bridgeGame);
+      OutputView.printMap(bridgeGame, turnSuccess);
+      turnValidation = bridgeGame.getTurn() < bridgeGame.getBridge().length;
+    }
+
+    return turnSuccess;
+  }
+
+  executeMoving(bridgeGame) {
     const moving = InputView.readMoving();
     const turnSuccess = bridgeGame.move(moving);
 
