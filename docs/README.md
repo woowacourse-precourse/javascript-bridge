@@ -17,13 +17,21 @@
 - [x] 이동할 칸 입력이 U 또는 D인지 확인한다. - Validation#checkMoveInput()
 - [x] 개임 재시작 혹은 종료 여부 입력이 R 또는 Q인지 확인한다. - Validation#checkRestartInput()
 
-## UI 로직
-- [x] 게임 시작 문구를 출력한다. - OutputView#printStart()
-- [x] 다리의 길이를 입력 받고 bridgeSize를 private로 BridgeGame 클래스 필드에 추가. - InputView#readBridgeSize()
+## View(UI) 로직
+
+### InputView 로직
+- [x] 입력을 실행하고 입력 받으면 callback을 실행한 뒤 callback에서 에러가 있으면 에러를 출력하고 입력을 다시 실행한다. - InputView#getUserInput()
+- [x] 다리의 길이를 입력 받는다 - InputView#readBridgeSize()
 - [x] 이동할 칸을 입력 받는다. - InputView#readMoving()
-- [x] 이동하고 난 결과를 출력한다. - OutputView#printMap()
-- [x] 건널 다리가 남았고 다리를 건너는데 실패했으면 게임 재시작 여부를 입력받는다. - InputView#readGameCommand()
-  - 건널 다리가 남았고 다리를 건너는데 성공했다면 이동할 칸을 입력 받는다.
+- [x] 게임 재시작 여부를 입력받는다 - InputView#readGameCommand()
+
+### OutputView 로직
+- [x] 게임 시작 문구를 출력한다. - OutputView#printStart()
+- [x] 이동결과를 출력한다. - OutputView#printMap()
+  - 이동하고 난 결과를 출력하기 위해 다리 모양을 만든다. - OutputView#parseResult()
+    - 건너는데 성공했으면 ' O '를 반환하고 실패했으면 ' X '를 반환한다 - OutputView#toSuccessOrFail()
+    -  moveResult 결과에 따라 toSuccessOrFail의 반환 값을 각 다리에 저장한다. OutputView#parseUpbridge(), OutputView#parseDownBridge()
+- [x] 출력 데이터를 초기화한다. - OutputView#resetPrintData()
 - [x] 다리를 끝까지 건너면 게임의 최종 결과를 정해진 형식에 맞춰 출력한다. - OutputView#printResult()
 
 ## 기능 요구 사항
