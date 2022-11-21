@@ -21,6 +21,10 @@ class App {
     InputView.readMoving(this.tryBuildMoving.bind(this));
   }
 
+  requestCommand() {
+    InputView.readGameCommand(this.tryBuildRetry.bind(this))
+  }
+
   tryBuildBridge(size) {
     try {
       this.brideGame.ready(size);
@@ -38,16 +42,33 @@ class App {
     }
   }
 
+  tryBuildRetry(command) {
+    try{
+      let controlKey = this.brideGame.retry(command);
+      this.decideControl(controlKey);
+    } catch(error) {
+      this.retryRequestCommand();
+    }
+  }
+
+  decideControl(controlKey) {
+
+  }
+
   retryRequestBridgeSize() {
     OutputView.printValidateSizeError();
     this.requestBridgeSize();
   }
-
+ 
   retryRequestMoving() {
     OutputView.printValidateStringError();
     this.requestMoving();
   }
 
+  retryRequestCommand() {
+    OutputView.printValidateStringCommandError();
+    this.requestCommand();
+  }
 }
 
 const app = new App();
