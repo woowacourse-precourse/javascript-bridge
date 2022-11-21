@@ -1,4 +1,5 @@
 const BridgeRandomNumberGenerator = require('../../BridgeRandomNumberGenerator');
+const BridgeRandomNumberException = require('../../exception/BridgeRandomNumberException');
 
 class BridgeDirection {
   static #DIRECTION = Object.freeze({
@@ -15,10 +16,10 @@ class BridgeDirection {
 
   static validateRandomNumber(number) {
     if (number < BridgeRandomNumberGenerator.RANDOM_LOWER_INCLUSIVE) {
-      throw new Error('[ERROR] 랜덤 숫자가 범위에 포함되지 않습니다.');
+      throw new BridgeRandomNumberException();
     }
     if (number > BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE) {
-      throw new Error('[ERROR] 랜덤 숫자가 범위에 포함되지 않습니다.');
+      throw new BridgeRandomNumberException();
     }
   }
 
