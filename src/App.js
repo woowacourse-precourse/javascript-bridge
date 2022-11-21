@@ -9,7 +9,7 @@ class App {
   /**
    * 게임 play
    */
-   play() {
+  play() {
     gameStart() ;
     readBridgeSize( (input) => {
       this.bridgeGame.makeRandomBridge(input);
@@ -27,7 +27,7 @@ class App {
   /**
    * readMoving 안에 들어가는 콜백함수
    */
-   readMovingCallback = (input) => {
+  readMovingCallback = (input) => {
     let goStop = this.bridgeGame.move(input) ;
     printMap(this.bridgeGame.printMap) ;
     if ( goStop == "Go") {
@@ -41,7 +41,7 @@ class App {
   /**
    * 다시 할 것인지 물어보고 처리하는 함수
    */
-   askRetryFail(){
+  askRetryFail(){
     readGameCommand((input) => {
       let retryFail =  this.bridgeGame.retry(input)
       if (retryFail == "Retry") this.movingBridge() ;
