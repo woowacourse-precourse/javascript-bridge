@@ -19,8 +19,8 @@ const ERROR = {
 const INPUT_FORMAT = {
   UPSIDE: 'U',
   DOWNSIDE: 'D',
-  UPSIDE_INDEX: 1,
-  DOWNSIDE_INDEX: 0,
+  UPSIDE_INDEX: '1',
+  DOWNSIDE_INDEX: '0',
   RETRY: 'R',
   TERMINATE: 'Q',
 };
