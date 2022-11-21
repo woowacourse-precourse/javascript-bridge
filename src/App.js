@@ -5,19 +5,20 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const Validation = require("./Validation");
 const { generate } = require("./BridgeRandomNumberGenerator");
+
 class App {
   constructor() {
     this.bridgeGame = null;
   }
   play() {
-    Console.print("다리 건너기 게임을 시작합니다.\n");
+    OutputView.printStartMessage();
     this.requestBridgeSize();
   }
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
       const { errorMsg } = Validation.validateBridgeSize(size);
       if (errorMsg) {
-        Console.print(errorMsg);
+        OutputView.printErrorMessage(errorMsg);
         return this.requestBridgeSize();
       }
       const bridge = BridgeMaker.makeBridge(Number(size), generate);
@@ -30,7 +31,7 @@ class App {
     InputView.readMoving((direction) => {
       const { errorMsg } = Validation.validateDirection(direction);
       if (errorMsg) {
-        Console.print(errorMsg);
+        OutputView.printErrorMessage(errorMsg);
         return this.requestDirection();
       }
       this.bridgeGame.move(direction);
@@ -45,9 +46,9 @@ class App {
   }
   requestRestartOrQuit() {
     InputView.readGameCommand((commandOption) => {
-      const { errorMsg } = Validation.checkCommandOptioni(commandOption);
+      const { errorMsg } = Validation.validateCommandOption(commandOption);
       if (errorMsg) {
-        Console.print(errorMsg);
+        OutputView.printErrorMessage(errorMsg);
         return this.requestRestartOrQuit();
       }
       if (commandOption === "R") return this.restart();
@@ -59,8 +60,7 @@ class App {
     this.requestDirection();
   }
   quit() {
-    const isFail = this.bridgeGame.isFail();
-    Console.print(`${!isFail ? "\n" : ""}최종 게임 결과`);
+    OutputView.printEndMessage(this.bridgeGame.isFail());
     OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
     OutputView.printResult(this.bridgeGame.getResult());
     Console.close();
