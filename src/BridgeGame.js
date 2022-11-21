@@ -30,13 +30,10 @@ class BridgeGame {
 
   makeBridge(bridgeSize) {
     this.#bridgeSize = Number(bridgeSize);
-    try {
-      BridgegLengthValidator.validate(this.#bridgeSize);
-    } catch (e) {
-      OutputView.printErrorLog(e);
-      this.getBridgeLengthFromUser();
-      return;
-    }
+    this.handleError(
+      () => BridgegLengthValidator.validate(this.#bridgeSize),
+      this.getBridgeLengthFromUser.bind(this)
+    );
     this.#validPath = BridgeMaker.makeBridge(this.#bridgeSize, generateRandomNumber);
     this.getMoveDirectionFromUser();
   }
@@ -58,55 +55,60 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    try {
-      DirectionValidator.validate(direction);
-    } catch (e) {
-      OutputView.printErrorLog(e);
-      this.getMoveDirectionFromUser();
-      return;
-    }
+    this.handleError(
+      () => DirectionValidator.validate(direction),
+      this.getMoveDirectionFromUser.bind(this)
+    );
 
     if (this.isValidPath(direction)) {
-      this.moveMyPositionForward(direction, STATE.VALID.symbol);
-      this.updateMyPositionForward();
-      this.getMoveDirectionFromUser();
+      this.updateMyPositionForward(direction, STATE.VALID.symbol).getMoveDirectionFromUser();
       return;
     }
-    this.moveMyPositionForward(direction, STATE.NOT_VALID.symbol);
-    this.askUserRestart();
+    this.updateMyPositionForward(direction, STATE.NOT_VALID.symbol).askUserRestart();
   }
 
-  updateMyPositionForward() {
+  updateMyPositionForward(direction, symbol) {
+    this.fillPathAccordingInput(direction, symbol);
     this.#myPosition += 1;
+    this.showMovedPath();
+    return this;
   }
 
-  moveMyPositionForward(direction, symbol) {
-    if (direction === REPRESENTATION.UPPER.abbreviatedForm) {
+  fillPathAccordingInput(input, symbol) {
+    if (input === REPRESENTATION.UPPER.abbreviatedForm) {
       this.#currentMap.upperPart.push(symbol);
-      this.fillBlankUnselectedPath(REPRESENTATION.UPPER.numericalForm);
-    }
-    if (direction === REPRESENTATION.LOWER.abbreviatedForm) {
-      this.#currentMap.lowerPart.push(symbol);
       this.fillBlankUnselectedPath(REPRESENTATION.LOWER.numericalForm);
     }
-    this.showMovedPath();
+    if (input === REPRESENTATION.LOWER.abbreviatedForm) {
+      this.#currentMap.lowerPart.push(symbol);
+      this.fillBlankUnselectedPath(REPRESENTATION.UPPER.numericalForm);
+    }
   }
 
   askUserRestart() {
     InputView.readGameCommand(this.updateRestartOrNot.bind(this));
   }
 
-  updateRestartOrNot(restartStatus) {
+  handleError(validator, playback) {
     try {
-      RegameCommandValidator.validate(restartStatus);
-    } catch (e) {
-      OutputView.printErrorLog(e);
-      this.askUserRestart();
-      return;
+      validator();
+    } catch (occuredError) {
+      OutputView.printErrorLog(occuredError);
+      playback();
+      return true;
     }
+  }
+
+  updateRestartOrNot(restartStatus) {
+    this.handleError(
+      () => RegameCommandValidator.validate(restartStatus),
+      this.askUserRestart.bind(this)
+    );
+
     if (restartStatus === "R") this.retry();
     if (restartStatus === "Q") this.quit();
   }
+
   showMovedPath() {
     OutputView.printMap(this.#currentMap);
   }
