@@ -16,4 +16,11 @@ const ERROR = {
   SELECT: "[ERROR]  R(재시작)과 Q(종료) 중 하나를 입력해야 합니다.",
 };
 
-module.exports = { OUTPUT, INPUT, ERROR };
+const RESULT = {
+  SUCCESS: "성공",
+  FAILURE: "실패",
+  RESULT: "게임 성공 여부",
+  ATTEMPTS: "총 시도한 횟수",
+};
+
+module.exports = { OUTPUT, INPUT, ERROR, RESULT };

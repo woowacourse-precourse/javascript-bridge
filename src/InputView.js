@@ -28,9 +28,9 @@ const InputView = {
       const isMovingValueCorrect = Validation.checkMovingValue(moving);
       if (isMovingValueCorrect) return this.readMoving(bridgeGame);
       const movingDirection = bridgeGame.move(moving);
-      OutputView.printMap(movingDirection);
+      const outputBridge = OutputView.printMap(movingDirection);
 
-      if (!movingDirection[2]) this.readGameCommand(bridgeGame);
+      if (!movingDirection[2]) this.readGameCommand(bridgeGame, outputBridge);
       this.readMoving(bridgeGame);
     });
   },
@@ -38,13 +38,13 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridgeGame) {
+  readGameCommand(bridgeGame, outputBridge) {
     Console.readLine(`\n${INPUT.SELECT}\n`, (select) => {
       const isSelectValueCorrect = Validation.checkingSelectValue(select);
       if (isSelectValueCorrect) return this.readGameCommand(bridgeGame);
 
-      const selectResult = bridgeGame.retry(select);
-      if (select) this.readMoving(bridgeGame);
+      const selectResult = bridgeGame.retry(select, outputBridge);
+      if (selectResult) this.readMoving(bridgeGame);
     });
   },
 };
