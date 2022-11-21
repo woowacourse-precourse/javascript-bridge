@@ -6,22 +6,16 @@ const OutputView = require("./OutputView");
 class App {
   play() {
     OutputView.printGameStart();
-    const BridgeGame = new BridgeGame();
-    this.prepareGame(BridgeGame);
+    const bridgeGame = new BridgeGame();
+    this.inputBridgeSize(bridgeGame);
   }
 
-  prepareGame(BridgeGame) {
-    this.inputBridgeSize(BridgeGame);
-    this.setBridge(BridgeGame);
-  }
-
-  inputBridgeSize(BridgeGame) {
-    InputView.readBridgeSize(BridgeGame);
-  }
-
-  setBridge(BridgeGame) {
-    BridgeGame.setBridge();
+  inputBridgeSize(bridgeGame) {
+    InputView.readBridgeSize(bridgeGame);
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
