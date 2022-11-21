@@ -20,7 +20,7 @@ class BridgeGame {
 
   constructor() {
     this.#bridgeGameController = new BridgeGameController();
-    this.#totalCount = 0;
+    this.#totalCount = 1;
     this.#userDirectionInput = [];
     this.#resultMap = [];
   }
@@ -38,7 +38,6 @@ class BridgeGame {
    */
   move(direction) {
     if (this.#bridgeGameController.validateDirection(direction)) {
-      this.#totalCount++;
       this.compareDirection(direction);
     }
   }
@@ -97,7 +96,10 @@ class BridgeGame {
    */
   retry(isRetry) {
     if (this.#bridgeGameController.validateRetry(isRetry)) {
-      if (isRetry === RETRY.RETRY) this.#bridgeGameController.inputDirection();
+      if (isRetry === RETRY.RETRY) {
+        this.#totalCount++;
+        this.#bridgeGameController.inputDirection();
+      }
       if (isRetry === RETRY.QUIT) {
         this.#bridgeGameController.outputResult(
           this.#resultMap,
