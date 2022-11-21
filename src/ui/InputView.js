@@ -13,7 +13,9 @@ const InputView = {
   readBridgeSize() {
     const bridgeGame = new BridgeGame();
     Console.readLine("다리의 길이를 입력해주세요.\n", (inputSize) => {
-      return bridgeGame.make(inputSize);
+      if (this.validateInput(inputSize)) {
+        return bridgeGame.make(inputSize);
+      }
     });
   },
 
@@ -26,6 +28,13 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {},
+
+  validateInput(inputSize) {
+    if (inputSize >= 3 && inputSize <= 20) {
+      return true;
+    }
+    throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+  },
 };
 
 module.exports = InputView;
