@@ -1,3 +1,4 @@
+const { CHOICE } = require('../constants');
 const GameCtrl = require('./GameCtrl');
 
 const BridgeGame = class extends GameCtrl {
@@ -90,7 +91,7 @@ const BridgeGame = class extends GameCtrl {
   }
 
   #quitOrRetryByCommand({ replayCommand, bridgeMap, isGameSuccess }) {
-    if (replayCommand === 'R') return this.#retry();
+    if (replayCommand === CHOICE.replay) return this.#retry();
     return this.#end({ bridgeMap, isGameSuccess });
   }
 
