@@ -34,6 +34,15 @@
 - [x] 출력 데이터를 초기화한다. - OutputView#resetPrintData()
 - [x] 다리를 끝까지 건너면 게임의 최종 결과를 정해진 형식에 맞춰 출력한다. - OutputView#printResult()
 
+## Controller 로직
+- [x] 게임을 시작한다. - Controller#gameStart()
+- [x] 게임 시작 문구를 출력 후 다리 사이즈를 입력 받은 뒤 유효성 검사를 하고 다리를 만든다. - Controller#inputBridgeSize()
+  - 다리를 만든다. Controller#makeBridge()
+- [x] 어디로 건널지 입력받은 뒤 유효성 검사를하고 움직임 결과에 따라 게임을 어떻게 진행할지 결정한다. - Controller#inputWhereMoving()
+  - 게임을 어떻게 진행할지 결정한다. - Controller#handleGame()
+- [x] 재시작 여부에 대한 입력값을 유효성 검사하고 재시작과 종료에 대한 게임진행을 결정한다. - Controller#inputRetryOrQuit()
+  - 재시작과 종료에 대한 게임진행을 결정한다 - Controller#handleRetryOrQuit()
+
 ## 기능 요구 사항
 
 위아래 둘 중 하나의 칸만 건널 수 있는 다리를 끝까지 건너가는 게임이다.

@@ -1,10 +1,10 @@
-const OutputView = require('./OutputView');
-const InputView = require('./InputView');
+const Controller = require('./Controller');
 
 class App {
+  #controller = new Controller();
+
   play() {
-    OutputView.printStart();
-    InputView.readBridgeSize();
+    this.#controller.gameStart();
   }
 }
 
