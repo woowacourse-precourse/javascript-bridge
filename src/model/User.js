@@ -27,7 +27,7 @@ class User {
     return this.#tryCount;
   }
 
-  isSameLocation(gameMapLength) {
+  isArrival(gameMapLength) {
     return this.#location === gameMapLength;
   }
 }

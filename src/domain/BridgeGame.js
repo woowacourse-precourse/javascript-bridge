@@ -37,25 +37,18 @@ class BridgeGame {
 
   isSuccess() {
     if (!this.bridgeMapPainter.isCorrectLocation()) {
-      this.changeStateIntoFailure();
+      this.#changeStateIntoFailure();
       return false;
     }
-    return this.checkGameArrived();
+    return this.isArrival();
   }
 
-  changeStateIntoFailure() {
+  #changeStateIntoFailure() {
     this.#isGameOver = true;
   }
 
-  checkGameArrived() {
-    if (this.isArrival()) {
-      return true;
-    }
-    return false;
-  }
-
   isArrival() {
-    return this.user.isSameLocation(this.gameMap.getMapLength());
+    return this.user.isArrival(this.gameMap.getMapLength());
   }
 
   getUserBridgeMap() {
