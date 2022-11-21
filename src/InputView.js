@@ -30,7 +30,6 @@ const InputView = {
   startBridgeGame(size) {
     const generateRandomNumber = BridgeRandomNumberGenerator.generate;
     const ANSWER = BridgeMaker.makeBridge(size, generateRandomNumber);
-    // console.log(ANSWER);
     const GAME = new BridgeGame(ANSWER, size);
     return GAME;
   },
