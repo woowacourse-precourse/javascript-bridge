@@ -2,7 +2,7 @@ const Manager = require("./Manager");
 
 class App {
   play(){
-    const manager = new Manager();
+    new Manager();
   }
 }
 

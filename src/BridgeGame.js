@@ -1,6 +1,3 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
  
@@ -38,7 +35,6 @@ class BridgeGame {
 
   makeBridge(size){
     this.#bridge = BridgeMaker.makeBridge(parseInt(size), BridgeRandomNumberGenerator.generate);
-    console.log(this.#bridge);
   }
 
   compareBridgeWithDirection(direction){
