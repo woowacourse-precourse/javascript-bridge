@@ -41,14 +41,14 @@ const InputView = {
       case "성공":
         return printResult(this.Game, "성공");
       case "X":
-        return this.readGameCommand("실패");
+        return this.readGameCommand();
     }
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(result) {
+  readGameCommand() {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
@@ -57,11 +57,7 @@ const InputView = {
           return this.readMoving();
         }
         if (input == "Q") {
-          return OutputView.printResult(
-            this.Game.getBridgeMap(),
-            result,
-            this.Game.getRetryCount()
-          );
+          return printResult(this.Game, "실패");
         }
       }
     );
