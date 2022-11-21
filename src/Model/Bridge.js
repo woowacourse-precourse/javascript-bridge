@@ -19,6 +19,7 @@ class Bridge {
       this.#bridgeLength,
       BridgeRandomNumberGenerator.generate()
     );
+    console.log(bridge);
     return bridge;
   }
 
