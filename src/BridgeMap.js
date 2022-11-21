@@ -1,8 +1,9 @@
 const OutputView = require('./OutputView');
+const { BRIDGE, DIRECTION } = require('./utils/constants');
 
 class BridgeMap {
-  static upBridge = '[ ';
-  static downBridge = '[ ';
+  static upBridge = BRIDGE.INITIAL;
+  static downBridge = BRIDGE.INITIAL;
 
   static createMap(gameInfo, readFuncs) {
     gameInfo.gameState.forEach(([moving, gameResult], index) => {
@@ -18,12 +19,12 @@ class BridgeMap {
   }
 
   static buildBridge(moving, gameResult) {
-    if (moving === 'U') {
+    if (moving === DIRECTION.UP) {
       this.upBridge += `${gameResult} `;
       this.downBridge += '  ';
     }
 
-    if (moving === 'D') {
+    if (moving === DIRECTION.DOWN) {
       this.downBridge += `${gameResult} `;
       this.upBridge += '  ';
     }
@@ -31,17 +32,17 @@ class BridgeMap {
 
   static completeBridge(isEndOfBridge) {
     if (isEndOfBridge) {
-      this.upBridge += ']';
-      this.downBridge += ']';
+      this.upBridge += BRIDGE.END;
+      this.downBridge += BRIDGE.END;
     } else {
-      this.upBridge += '| ';
-      this.downBridge += '| ';
+      this.upBridge += BRIDGE.NOT_END;
+      this.downBridge += BRIDGE.NOT_END;
     }
   }
 
   static resetBridge() {
-    this.upBridge = '[ ';
-    this.downBridge = '[ ';
+    this.upBridge = BRIDGE.INITIAL;
+    this.downBridge = BRIDGE.INITIAL;
   }
 
   static createMapInfo({ gameState, originBridgeSize, tryCount }) {
