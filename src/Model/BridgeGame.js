@@ -1,16 +1,14 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { PATH } = require('../Constant/value');
+const { PATH, BLOCK } = require('../Constant/value');
 
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 class BridgeGame {
   #bridge;
   #upperTrack;
   #lowerTrack;
 
-  constructor() {
+  constructor(size) {
+    this.set(size);
     this.#upperTrack = [];
     this.#lowerTrack = [];
   }
@@ -18,15 +16,15 @@ class BridgeGame {
   set(size) {
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
   }
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+
+  getBridge() {
+    return this.#bridge;
+  }
+
   move(direction) {
     const nextBlock = this.#upperTrack.length;
-    if (direction === BridgeMaker.LOWER_BLOCK) return this.moveDown(direction, nextBlock);
-    if (direction === BridgeMaker.UPPER_BLOCK) return this.moveUp(direction, nextBlock);
+    if (direction === BLOCK.LOWER) return this.moveDown(direction, nextBlock);
+    if (direction === BLOCK.UPPER) return this.moveUp(direction, nextBlock);
   }
 
   moveUp(direction, nextBlock) {
@@ -39,6 +37,14 @@ class BridgeGame {
     this.#upperTrack.push(PATH.NOT_CHOSEN);
     if (direction === this.#bridge[nextBlock]) this.#lowerTrack.push(PATH.RIGHT);
     if (direction !== this.#bridge[nextBlock]) this.#lowerTrack.push(PATH.WRONG);
+  }
+
+  getUpperTrack() {
+    return this.#upperTrack;
+  }
+
+  getLowerTrack() {
+    return this.#lowerTrack;
   }
 
   /**
