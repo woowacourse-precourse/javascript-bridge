@@ -3,7 +3,7 @@
 ## 기능 목록
 
 - [x] 0과 1 중 무작위 값을 생성한다. - BridgeRandomNumberGenerator#generate()
-- [ ] 특정 길이의 다리를 생성한다. - BridgeMaker#makeBridge()
+- [x] 특정 길이의 다리를 생성한다. - BridgeMaker#makeBridge()
 - [x] 1, 0을 각각 U, D로 변환한다. - Converter#convertToUpDown()
 - [x] 특정 칸이 건널 수 있는지 확인한다. - Checker#checkSpaceCanCross()
 - [x] 다리 끝까지 건넜는지 판단한다. - Checker#checkCrossBridge()
