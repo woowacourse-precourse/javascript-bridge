@@ -6,23 +6,24 @@ const validateBridgeSize = {
     this.isRange(number);
   },
   isNumber(number) {
-    if (isNaN(+number)) throw new Error(ERROR.BRIDGE_SIZE_TYPE);
+    if (isNaN(+number)) {
+      throw ERROR.BRIDGE_SIZE_TYPE;
+    }
   },
   isRange(number) {
-    if (+number < 3 || +number > 30) throw new Error(ERROR.BRIDGE_SIZE_RANGE);
+    if (+number < 3 || +number > 30) throw ERROR.BRIDGE_SIZE_RANGE;
   },
 };
 
 const validateNext = {
   validate(next) {
-    if (next !== 'U' && next !== 'D')
-      throw new Error(ERROR.MOVING_DIRECTION_TYPE);
+    if (next !== 'U' && next !== 'D') throw ERROR.MOVING_DIRECTION_TYPE;
   },
 };
 
 const validateGameCommand = {
   validate(next) {
-    if (next !== 'R' && next !== 'Q') throw new Error(ERROR.GAME_COMMAND_TYPE);
+    if (next !== 'R' && next !== 'Q') throw ERROR.GAME_COMMAND_TYPE;
   },
 };
 

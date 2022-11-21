@@ -1,7 +1,7 @@
 const BridgeGame = require('../src/model/BridgeGame');
 const Bridge = require('../src/model/Bridge');
 
-describe.only('Bridge Test', () => {
+describe('Bridge Test', () => {
   test.each(['500', '1', 'a'])('다리 개수 유효성 테스트', (input) => {
     expect(() => {
       const game = new BridgeGame();

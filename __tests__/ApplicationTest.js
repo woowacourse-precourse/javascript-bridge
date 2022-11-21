@@ -1,8 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
-const InputView = require('../src/view/InputView');
-const GameController = require('../src/controller/GameController');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -73,6 +71,7 @@ describe('다리 건너기 테스트', () => {
     app.play();
 
     const log = getOutput(logSpy);
+    console.log(log);
     expectLogContains(log, [
       '최종 게임 결과',
       '[ O |   | O ]',

@@ -31,6 +31,10 @@ const OutputView = {
     Console.print(GAME.GAME_TRY_COUNT + tryCount);
     Console.close();
   },
+
+  printMessage(message) {
+    Console.print(message);
+  },
 };
 
 module.exports = OutputView;

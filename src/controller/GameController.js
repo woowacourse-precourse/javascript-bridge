@@ -20,8 +20,13 @@ class GameController {
   }
 
   setBridge(size) {
-    this.game.setBridge(size);
-    this.askMoving();
+    try {
+      this.game.setBridge(size);
+      this.askMoving();
+    } catch (err) {
+      OutputView.printMessage(err);
+      this.askBridge();
+    }
   }
 
   askMoving() {
@@ -29,13 +34,18 @@ class GameController {
   }
 
   setMoving(next) {
-    this.game.setMoving(next);
+    try {
+      this.game.setMoving(next);
 
-    const isSuccess = this.game.move(next);
-    OutputView.printMap(this.game.getMap(), isSuccess);
+      const isSuccess = this.game.move(next);
+      OutputView.printMap(this.game.getMap(), isSuccess);
 
-    if (isSuccess) this.game.isEnd() ? this.end(true) : this.askMoving();
-    if (!isSuccess) this.askGameCommand();
+      if (isSuccess) this.game.isEnd() ? this.end(true) : this.askMoving();
+      if (!isSuccess) this.askGameCommand();
+    } catch (err) {
+      OutputView.printMessage(err);
+      this.askMoving();
+    }
   }
 
   askGameCommand() {
@@ -43,10 +53,15 @@ class GameController {
   }
 
   setGameCommand(gameCommand) {
-    this.game.setGameCommand(gameCommand);
+    try {
+      this.game.setGameCommand(gameCommand);
 
-    if (gameCommand === 'R') this.retry();
-    if (gameCommand === 'Q') this.end(false);
+      if (gameCommand === 'R') this.retry();
+      if (gameCommand === 'Q') this.end(false);
+    } catch (err) {
+      OutputView.printMessage(err);
+      this.askGameCommand();
+    }
   }
 
   retry() {
