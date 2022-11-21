@@ -5,6 +5,8 @@ const BridgeMaker = require("./BridgeMaker");
 const RandomGenerator = require("./BridgeRandomNumberGenerator");
 const GameLogic = require("./utils/GameLogic");
 
+// 로직 분리 -> Map 만들기 로직 -> Map 프린트 로직 -> test
+
 /**
  * 객체
  * 사용자로부터 입력을 받는 역할을 한다. : Console.readLine() -> 이 클래스에서만 사용 가능
@@ -77,7 +79,7 @@ const InputView = {
    */
   readGameCommand(bridgeSize, bridge, stepArray, index, count) {
     Console.readLine("\nRQ선택\n", (select) => {
-      Check.moveFormat(select);
+      Check.selectFormat(select);
       if (select === "R") {
         count++;
         stepArray = [];

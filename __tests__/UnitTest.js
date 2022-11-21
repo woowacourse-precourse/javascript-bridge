@@ -13,4 +13,16 @@ describe("Input 테스트", () => {
       Check.bridgeLength([1]);
     }).toThrow(ABOUT.NUMBER_RANGE);
   });
+
+  test("3: (player move) 이동값이 U나 D가 아닐 경우 예외 발생", () => {
+    expect(() => {
+      Check.moveFormat("Y");
+    }).toThrow(ABOUT.BRIDGE_ELEMENT);
+  });
+
+  test("4: (player select) 게임 종료 후 선택값이 R이나 Q가 아닐 경우 예외 발생", () => {
+    expect(() => {
+      Check.moveFormat("Y");
+    }).toThrow(ABOUT.SELECT_ELEMEN);
+  });
 });
