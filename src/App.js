@@ -10,7 +10,7 @@ class App {
     InputView.readBridgeSize(this);
   }
   init(bridgeSize){
-    const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+    const bridge = BridgeMaker.makeBridge(parseInt(bridgeSize), BridgeRandomNumberGenerator.generate);
     const bridgePlay = new BridgePlay(bridge);
     bridgePlay.newRound();
   }
