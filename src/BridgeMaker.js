@@ -10,7 +10,8 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridgeShape = [];
     for (let i = 0; i < size; i++) {
-      bridgeShape.push(generateRandomNumber());
+      const shape = generateRandomNumber() === 1 ? "U" : "D";
+      bridgeShape.push(shape);
     }
 
     return bridgeShape;
