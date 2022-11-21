@@ -20,9 +20,15 @@ const MAP_MARK = Object.freeze({
   WRONG: 'X',
 });
 
+const RESULT_GROUP = Object.freeze({
+  SUCCESS: '성공',
+  FAIL: '실패',
+});
+
 module.exports = {
   POSITION,
   GAME_STATUS,
   FINAL_COMMAND_GROUP,
   MAP_MARK,
+  RESULT_GROUP,
 };
