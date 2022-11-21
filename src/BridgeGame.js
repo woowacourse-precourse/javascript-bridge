@@ -33,7 +33,7 @@ class BridgeGame {
     this.mark(nextDirection, this.ABLE_TO_MOVE_MARKER);
   }
 
-  endGame(nextDirection) {
+  stopMoving(nextDirection) {
     this.mark(nextDirection, this.UNABLE_TO_MOVE_MARKER);
   }
 
