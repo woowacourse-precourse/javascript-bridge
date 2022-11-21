@@ -23,13 +23,13 @@ const WORD = {
   NEW_LINE : "\n",
   LEFT_BRACKET : "[",
   RIGHT_BRACKET : "]",
-  BAR : "|"
+  BAR : "|",
 }
 
 const ERROR = {
   SIZE_ERROR : "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n",
   MOVING_ERROR : "[ERROR] 위나 아래로 이동하려면 U나 D를 입력해야 합니다.\n",
-  COMMAND_ERROR : "[ERROR] 다시 시작하거나 종료하려면 R이나 Q를 입력해야 합니다.\n"
+  COMMAND_ERROR : "[ERROR] 다시 시작하거나 종료하려면 R이나 Q를 입력해야 합니다.\n",
 }
 
 module.exports = { PROMPT, COMMAND, WORD, ERROR };
