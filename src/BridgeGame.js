@@ -18,6 +18,9 @@ class BridgeGame {
     this.setBridge();
   }
 
+  /**
+   * 사용자가 다리 길이를 설정하는 메서드
+   */
   setBridge = () => {
     this.view.readBridgeSize((size) => {
       const bridge = BridgeMaker.makeBridge(
@@ -32,8 +35,6 @@ class BridgeGame {
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move = () => {
     this.view.readMoving((space) => {
@@ -47,12 +48,22 @@ class BridgeGame {
     });
   };
 
+  /**
+   * @param {string[]} 다리 배열
+   * @param {string[]} 사용자 이동 배열
+   * @return {Object} 첫번째줄, 두번째줄 출력
+   */
   calculateMoveResult = (bridge, userSpaces) => {
     const firstLine = this.calculateFirstLine(bridge, userSpaces);
     const secondLine = this.calculateSecondLine(bridge, userSpaces);
     return { firstLine: firstLine, secondLine: secondLine };
   };
 
+  /**
+   * @param {string[]} 다리 배열
+   * @param {string[]} 사용자 이동 배열
+   * @return {string} 첫번째줄 출력
+   */
   calculateFirstLine = (bridge, userSpaces) => {
     let firstLine = MOVE_RESULT.START_SPACE;
     for (let i = 0; i < userSpaces.length; i++) {
@@ -66,6 +77,11 @@ class BridgeGame {
     return firstLine + MOVE_RESULT.END_SPACE;
   };
 
+  /**
+   * @param {string[]} 다리 배열
+   * @param {string[]} 사용자 이동 배열
+   * @return {string} 두번째줄 출력
+   */
   calculateSecondLine = (bridge, userSpaces) => {
     let secondLine = MOVE_RESULT.START_SPACE;
     for (let i = 0; i < userSpaces.length; i++) {
