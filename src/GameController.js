@@ -59,14 +59,15 @@ class GameController {
     const [upString, downString] = this.bridgeGame.getBridgeString();
     OutputView.printMap(upString, downString);
     if (result) {
-      this.continueGame();
+      this.checkContinueGame();
     } else {
       this.askStopGame();
     }
   }
-  continueGame() {
+  checkContinueGame() {
     if (this.bridgeGame.checkLast()) {
-      console.log("END!!", this.bridgeGame.getTryCount());
+      //   console.log("END!!", this.bridgeGame.getTryCount());
+      this.showGameResult("성공");
     } else {
       this.inputStep();
     }
@@ -85,11 +86,18 @@ class GameController {
       this.bridgeGame.retry();
       this.inputStep();
     } else if (input === "Q") {
-      console.log("END!!", this.bridgeGame.getTryCount());
+      //   console.log("END!!", this.bridgeGame.getTryCount());
+      this.showGameResult("실패");
     }
   }
-  showGameResult() {
-    //게임 결과보여주고 종료
+  showGameResult(result) {
+    const [upString, downString] = this.bridgeGame.getBridgeString();
+    const gameResult = {
+      upString,
+      downString,
+    };
+    const tryCount = this.bridgeGame.getTryCount();
+    OutputView.printResult(gameResult, result, tryCount);
   }
 }
 
