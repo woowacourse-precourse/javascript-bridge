@@ -10,6 +10,7 @@
 class BridgeGame {
   #bridge = [];
   #process = 0;
+  #try = 1;
   #map = {
     U: [],
     D: [],
@@ -30,7 +31,14 @@ class BridgeGame {
     return result;
   }
 
-  retry() {}
+  retry() {
+    this.#process = 0;
+    this.#map = {
+      U: [],
+      D: [],
+    };
+    this.#try++;
+  }
 
   addMap(movement, result) {
     const sign = result === 'success' ? 'O' : 'X';
@@ -43,6 +51,10 @@ class BridgeGame {
       this.#map['U'].push(' ');
       this.#map['D'].push(sign);
     }
+  }
+
+  getTry() {
+    return this.#try;
   }
 
   getMap() {
