@@ -10,15 +10,10 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridge = '';
     for (let i = 0; i < size; ++i) {
+      // generateRandomNumber 함수는 항상 0 또는 1 return
       const number = generateRandomNumber();
-      switch (number) {
-        case 0:
-          bridge += 'D';
-          break;
-        case 1:
-          bridge += 'U';
-          break;
-      }
+      if (number === 0) bridge += 'D';
+      else if (number === 1) bridge += 'U';
     }
 
     return bridge;
