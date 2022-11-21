@@ -3,6 +3,9 @@ const CONSTANT = {
     START_GAME: '다리 건너기 게임을 시작합니다',
     INPUT_BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',
     UPDOWN: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
+    END_GAME: '\n최종 게임 결과',
+    COUNT: '총 시도한 횟수: ',
+    CHECK_ANSWER: '게임 성공 여부: ',
   },
 
   ERROR: {

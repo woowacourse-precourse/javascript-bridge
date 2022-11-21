@@ -1,20 +1,49 @@
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
-const OutputView = {
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printMap() {},
+const { Console } = require('@woowacourse/mission-utils');
+const { MESSAGE } = require('../util/Constant');
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult() {},
+const OutputView = {
+  upfloor: [],
+  downfloor: [],
+
+  printMap(userUd, OX) {
+    OutputView.fillPrintMap(userUd, userUd.length - 1);
+    OutputView.fillMapLastUd(userUd[userUd.length - 1], OX);
+
+    Console.print(OutputView.fillEndMap());
+
+    OutputView.printPlayingMap();
+  },
+
+  fillPrintMap(userUd, userInputLength) {
+    for (let i = 0; i < userInputLength; i++) {
+      OutputView.upfloor.push(userUd[i] === 'U' ? 'O' : ' ');
+      OutputView.downfloor.push(userUd[i] === 'D' ? 'O' : ' ');
+    }
+  },
+
+  fillMapLastUd(recentUd, OX) {
+    OutputView.upfloor.push(recentUd === 'U' ? OX : ' ');
+    OutputView.downfloor.push(recentUd === 'D' ? OX : ' ');
+  },
+
+  fillEndMap() {
+    let outputMap = `[ ${OutputView.upfloor.join(' | ')} ]\n`;
+    outputMap += `[ ${OutputView.downfloor.join(' | ')} ]\n`;
+    return outputMap;
+  },
+
+  printPlayingMap() {
+    OutputView.upfloor = [];
+    OutputView.downfloor = [];
+  },
+
+  printResult(userMove, OX) {
+    Console.print(MESSAGE.END_GAME);
+    OutputView.printMap(userMove, OX);
+    Console.print(MESSAGE.CHECK_ANSWER);
+    Console.print(MESSAGE.COUNT);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
