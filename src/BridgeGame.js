@@ -18,7 +18,6 @@ class BridgeGame {
 
   setUserBridge(command, isLoss) {
     const invertCommand = command === "U" ? "D" : "U";
-
     if (isLoss) {
       this.#userBridge[command].push("X");
       this.#userBridge[invertCommand].push(false);
@@ -28,21 +27,9 @@ class BridgeGame {
     this.#userBridge[invertCommand].push(false);
   }
 
+  // 메세지를 보내야 하는게 옳아 보이지만 일단 userBridge를 return
   getUserBridge() {
     return this.#userBridge;
-  }
-
-  compare(command) {
-    const isLoss = this.#bridge[this.bridgeStep] !== command;
-    if (isLoss) {
-      this.setUserBridge(command, isLoss);
-      this.isFinish = true;
-      this.bridgeStep++;
-      return;
-    }
-
-    this.setUserBridge(command, isLoss);
-    this.bridgeStep++;
   }
 
   isVictory() {
@@ -56,7 +43,13 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(command) {
-    this.compare(command);
+    const isLoss = this.#bridge[this.bridgeStep] !== command;
+    this.setUserBridge(command, isLoss);
+    if (isLoss) {
+      this.isFinish = true;
+      return;
+    }
+    this.bridgeStep++;
   }
 
   /**
