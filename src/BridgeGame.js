@@ -6,7 +6,6 @@ const { makeUserBridge } = require("./BridgeMaker");
 class BridgeGame {
   constructor(mainBridge) {
     this.mainBridge = mainBridge;
-    this.bridgeSize = mainBridge.length;
     this.count = 0;
     this.retrycount = 1;
     this.hasNext = true;
@@ -34,12 +33,15 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    if (this.hasFalse() && this.bridgeSize === this.count) {
+    if (
+      this.userBridge.flat().indexOf("X") === -1 &&
+      this.mainBridge.length === this.count
+    ) {
       this.hasNext = false;
       this.finish = true;
       return;
     }
-    if (!this.hasFalse()) {
+    if (this.userBridge.flat().indexOf("X") !== -1) {
       this.hasNext = false;
       this.retrycount++;
     }
@@ -49,11 +51,6 @@ class BridgeGame {
     this.userBridge = [[], []];
     this.count = 0;
     this.hasNext = true;
-  }
-
-  hasFalse() {
-    if (this.userBridge.flat().indexOf("X") === -1) return true;
-    if (this.userBridge.flat().indexOf("X") !== -1) return false;
   }
 }
 
