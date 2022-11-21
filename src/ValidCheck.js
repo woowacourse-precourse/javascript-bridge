@@ -11,6 +11,7 @@ const ValidCheck = {
   },
   gameCommandValidCheck(gameCommand){
     this.isCorrectRetryQuit(gameCommand);
+    this.isOneLetter(gameCommand);
   },
   isInRange(bridgeSize){
     if (bridgeSize<3 || bridgeSize>20) {
@@ -63,12 +64,12 @@ const ValidCheck = {
       return false;
     }
   },
-  isOneLetter(moving){
-    if(moving.length!==1){
+  isOneLetter(letter){
+    if(letter.length!==1){
       try{
         throw new Error();
       }catch(e){
-        OutputView.printErrorMessageAboutMoving();
+        OutputView.printErrorMessageAboutOneLetter();
         return true;
       }
     }else{
