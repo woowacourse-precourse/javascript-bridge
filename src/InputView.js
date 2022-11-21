@@ -61,10 +61,11 @@ const InputView = {
   
   readGameCommandCallback(command) {
     try {
+      ValidCheck.commandInput(command);
       const isRetry = this.bridgeGameControl.manageCommand(command);
       isRetry ? this.readMoving() : this.bridgeGameControl.gameOver();
     } catch (error) {
-      OutputView.printErrorMessage(error);
+      OutputView.printErrorMessage(ERROR.COMMAND_ERROR);
       this.readGameCommand();
     }
   },

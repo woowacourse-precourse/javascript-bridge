@@ -7,6 +7,10 @@ const ValidCheck = {
 
   movingInput: function(moving) {
     if (!(moving === "U" || moving === "D")) throw new Error(ERROR.MOVING_ERROR);
+  },
+
+  commandInput: function(command) {
+    if (!(command === "R" || command === "Q")) throw new Error(ERROR.COMMAND_ERROR);
   }
 };
 
