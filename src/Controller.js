@@ -1,5 +1,5 @@
 const { printMessage, close } = require('./Utils.js');
-const { GAME_RESULT } = require('./Constants.js');
+const { GAME_RESULT, MOVE, IS_RETRY } = require('./Constants.js');
 const BridgeSize = require('./Validate/BridgeSize.js');
 const BridgeCommand = require('./Validate/BridgeCommand.js');
 const InputView = require('./View/InputView.js');
@@ -68,11 +68,11 @@ class Controller {
   }
 
   isWrong(compareResult) {
-    if (compareResult === 'X') {
+    if (compareResult === MOVE.FAIL) {
       this.safeBridgeList = JSON.parse(JSON.stringify(this.originalBridgeList));
       this.selectRetry();
     }
-    if (compareResult === 'O') {
+    if (compareResult === MOVE.PASS) {
       this.isEndGame();
     }
   }
@@ -95,12 +95,12 @@ class Controller {
   }
 
   selectRegameOrQuit(input) {
-    if (input === 'R') {
+    if (input === IS_RETRY.YES) {
       this.bridgeShape.initBridgeMap();
       this.counting.addCount();
       this.inputMoving();
     }
-    if (input === 'Q') {
+    if (input === IS_RETRY.NO) {
       this.Quit(GAME_RESULT.FAIL);
     }
   }

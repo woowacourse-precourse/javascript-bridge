@@ -1,10 +1,10 @@
-const { MESSAGE } = require('../Constants.js');
+const { MESSAGE, COMMAND } = require('../Constants.js');
 const { printMessage } = require('../Utils.js');
 
 const OutputView = {
   printMap(bridgeMap) {
-    const upperBridge = `[ ${bridgeMap['U'].join(' | ')} ]`;
-    const lowerBridge = `[ ${bridgeMap['D'].join(' | ')} ]`;
+    const upperBridge = `[ ${bridgeMap[COMMAND.UP].join(' | ')} ]`;
+    const lowerBridge = `[ ${bridgeMap[COMMAND.DOWN].join(' | ')} ]`;
     printMessage(`${upperBridge}\n${lowerBridge}`);
   },
 

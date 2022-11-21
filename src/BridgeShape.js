@@ -1,3 +1,5 @@
+const { COMMAND } = require('./Constants.js');
+
 class BridgeShape {
   #bridgeMap;
 
@@ -6,13 +8,13 @@ class BridgeShape {
   }
 
   initBridgeMap() {
-    this.#bridgeMap['U'] = [];
-    this.#bridgeMap['D'] = [];
+    this.#bridgeMap[COMMAND.UP] = [];
+    this.#bridgeMap[COMMAND.DOWN] = [];
   }
 
   addBridgeMap(inputCommand, compareResult) {
-    this.#bridgeMap['U'].push(' ');
-    this.#bridgeMap['D'].push(' ');
+    this.#bridgeMap[COMMAND.UP].push(' ');
+    this.#bridgeMap[COMMAND.DOWN].push(' ');
     this.#bridgeMap[inputCommand].pop();
     this.#bridgeMap[inputCommand].push(compareResult);
   }
