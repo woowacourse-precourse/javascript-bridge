@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-
+// const BridgeMaker = require("./BridgeMaker");
+// const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -12,10 +12,11 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(bridgeMake, randomNumber) {
-    console.log("readBridgeSize: 실행");
     MissionUtils.Console.readLine(
       "다리의 길이를 입력해 주세요.\n",
       (answer) => {
+        if (isNaN(answer))
+          throw new Error("[ERROR] 다리 길이는 숫자여야 합니다.");
         this.readMoving(bridgeMake(answer, randomNumber), answer);
       }
     );
@@ -25,21 +26,26 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(answerBridge, bridgeLength) {
-    console.log("readMoving: 실행");
-    console.log(answerBridge);
     MissionUtils.Console.readLine(
-      "이동할 칸을 선택해주세요.\n",
+      "\n이동할 칸을 선택해주세요.\n",
       (strAnswer) => {
-        console.log(this.count);
-        if (this.count === bridgeLength)
-          return MissionUtils.Console.print("성공");
+        if (strAnswer !== "U" && strAnswer !== "D")
+          throw new Error("[ERROR] 이동할 칸은 U 또는 D로 입력해야 합니다.");
         if (answerBridge[this.count] === strAnswer) {
           this.count++;
-          console.log(this.count);
-          if (this.count === Number(bridgeLength))
-            return MissionUtils.Console.print("성공");
+          if (this.count === Number(bridgeLength)) {
+            OutputView.printMap(strAnswer, " O ");
+            return OutputView.printResult(
+              this.count,
+              OutputView.upBridge,
+              OutputView.downBridge,
+              "성공"
+            );
+          }
+          OutputView.printMap(strAnswer, " O ");
           this.readMoving(answerBridge, bridgeLength);
         } else {
+          OutputView.printMap(strAnswer, " X ");
           this.readGameCommand(answerBridge, bridgeLength);
         }
       }
@@ -50,23 +56,27 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(answerBridge, bridgeLength) {
-    console.log("readGameCommand: 실행");
     MissionUtils.Console.readLine(
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (answer) => {
+        if (answer !== "R" && answer !== "Q")
+          throw new Error("[ERROR] 재시도는 R 종료는 Q를 입력해야 합니다.");
         if (answer === "R") {
-          tryCount++;
+          this.tryCount++;
+          OutputView.upBridge = ["[", "]"];
+          OutputView.downBridge = ["[", "]"];
           this.readMoving(answerBridge, bridgeLength);
         }
         if (answer === "Q")
-          return MissionUtils.Console.print("최종 게임 결과 \n");
+          return OutputView.printResult(
+            this.count,
+            OutputView.upBridge,
+            OutputView.downBridge,
+            "실패"
+          );
       }
     );
   },
 };
-
-console.log(
-  InputView.readBridgeSize(BridgeMaker.makeBridge, BridgeRandomNumberGenerator)
-);
 
 module.exports = InputView;
