@@ -2,45 +2,45 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridge;
   #playerUp;
   #playerDown;
   #playerMoveResult;
-  #finishCheck;
   #i;
+  #totalTryNumber;
 
-  constructor(){
+  constructor(bridge){
+    this.#bridge=bridge;
     this.#playerDown = [];
     this.#playerUp = [];
-    this.#finishCheck=0;
-    this.#i=0
+    this.#totalTryNumber=1;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(playerMoveList,bridgeList) {
+  move(playerMoveList) {
+    this.#playerDown = [];
+    this.#playerUp = [];
+    this.#i=0;
     playerMoveList.map((move)=>{
-      console.log(bridgeList)
-      this.moveCompareUpDown(bridgeList, move)
+      console.log(this.#bridge, this.#i, playerMoveList),
+      this.moveCompareUpDown(move)
       this.#i++;
     })
     this.#playerMoveResult="[ "+this.#playerUp.join(' | ')+" ]\n"+"[ "+this.#playerDown.join(' | ')+" ]";
     return this.#playerMoveResult
   }
 
-  moveCompareUpDown(bridgeList, move){
+  moveCompareUpDown(move){
     if(move==='U'){
-      bridgeList[this.#i] === move ? this.#playerUp.push('O') : this.#playerUp.push('X');
+      this.#bridge[this.#i] === move ? this.#playerUp.push('O') : this.#playerUp.push('X');
       this.#playerDown.push(" ");
     }else if(move==='D'){
-      bridgeList[this.#i] === move ? this.#playerDown.push('O') : this.#playerDown.push('X');
+      this.#bridge[this.#i] === move ? this.#playerDown.push('O') : this.#playerDown.push('X');
       this.#playerUp.push(" ");
     }
-  }
-
-  moveFinishCheck(playerMoveLength, size){
-    return playerMoveLength === Number(size);
   }
 
   /**
@@ -48,7 +48,13 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#totalTryNumber++;
+  }
+
+  getTotalTry(){
+    return this.#totalTryNumber
+  }
 }
 
 module.exports = BridgeGame;

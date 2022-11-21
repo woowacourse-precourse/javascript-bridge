@@ -2,10 +2,12 @@ const OutputView = require("./views/OutputView.js")
 const InputView = require("./views/InputView.js")
 
 class App {
+
   constructor(){
     OutputView.printGameStart();
     InputView.readBridgeSize();
   }
+
   play() {
   }
 }
