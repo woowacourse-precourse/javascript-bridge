@@ -1,4 +1,4 @@
-const { MOVEMENT, COMMAND, BRIDGE_SIZE, ERROR_MESSAGE } = require('./constructor.js');
+const { MOVEMENT, COMMAND, BRIDGE_SIZE, ERROR_MESSAGE } = require('./constructor');
 
 const Validation = {
   validBridgeSize(input) {

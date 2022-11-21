@@ -1,9 +1,10 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const { makeBridge } = require('./BridgeMaker.js');
-const { generate } = require('./BridgeRandomNumberGenerator.js');
-const { MOVEMENT, BRIDGE_POSITION, MARK } = require('./constructor.js');
+const { makeBridge } = require('./BridgeMaker');
+const { generate } = require('./BridgeRandomNumberGenerator');
+const { MOVEMENT, BRIDGE_POSITION, MARK } = require('./utils/constructor');
+
 class BridgeGame {
   #bridge
   #currentIndex

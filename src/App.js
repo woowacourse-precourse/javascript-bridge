@@ -1,7 +1,7 @@
-const BridgeGame = require('./BridgeGame.js');
-const { COMMAND } = require('./constructor.js');
-const InputView = require('./InputView.js');
-const OutputView = require('./OutputView.js');
+const BridgeGame = require('./BridgeGame');
+const InputView = require('./InputView');
+const OutputView = require('./OutputView');
+const { COMMAND } = require('./utils/constructor');
 
 class App {
   #game
