@@ -9,7 +9,7 @@ const {
   expectBridgeOrder,
   expectLogContains,
 } = require('./lib/utils')
-const { step } = require('../src/lib/constants')
+const { status, step } = require('../src/lib/constants')
 
 describe('다리 생성 테스트', () => {
   const randomNumbers = [1, 0, 0]
@@ -45,6 +45,34 @@ describe('다리 게임 테스트', () => {
     bridgeGame.retry()
 
     expect(bridgeGame.moves).toEqual([])
+  })
+
+  test(`실패하면 ${status.READ_COMMAND}를 반환해야 한다`, () => {
+    const bridgeGame = new BridgeGame(['U', 'U', 'U'])
+
+    bridgeGame.move('U')
+    bridgeGame.move('D')
+
+    expect(bridgeGame.getStatus()).toEqual(status.READ_COMMAND)
+  })
+
+  test(`성공하면 ${status.FINISHED}를 반환해야 한다`, () => {
+    const bridgeGame = new BridgeGame(['U', 'U', 'U'])
+
+    bridgeGame.move('U')
+    bridgeGame.move('U')
+    bridgeGame.move('U')
+
+    expect(bridgeGame.getStatus()).toEqual(status.FINISHED)
+  })
+
+  test(`결과가 정해지지 않았다면 ${status.READ_MOVE}를 반환해야 한다`, () => {
+    const bridgeGame = new BridgeGame(['U', 'U', 'U'])
+
+    bridgeGame.move('U')
+    bridgeGame.move('U')
+
+    expect(bridgeGame.getStatus()).toEqual(status.READ_MOVE)
   })
 })
 

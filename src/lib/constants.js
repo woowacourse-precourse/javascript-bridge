@@ -1,8 +1,9 @@
 const status = {
-  OFF: 0,
+  START: 0,
   READ_SIZE: 1,
-  READ_MOVEMENT: 2,
+  READ_MOVE: 2,
   READ_COMMAND: 3,
+  FINISHED: 4,
 }
 
 const step = {
