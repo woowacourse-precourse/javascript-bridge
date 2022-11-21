@@ -2,6 +2,7 @@ const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
+const { Console } = require("@woowacourse/mission-utils");
 
 class BridgeGameController {
   #bridgeGame;
@@ -26,6 +27,12 @@ class BridgeGameController {
   isGameEnd() {
     const isGameEnd = this.#bridgeGame.isGameEnd();
     return isGameEnd;
+  }
+
+  gameOver() {
+    const resultMap = this.#bridgeGame.bringSketch();
+    OutputView.printResult(resultMap);
+    Console.close();
   }
 }
 
