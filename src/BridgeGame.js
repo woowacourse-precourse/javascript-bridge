@@ -6,6 +6,8 @@ class BridgeGame {
   constructor(){
     this.inputCount = 0;
     this.bridgeMap=[[],[]];
+    this.moveResult = '';
+    this.tryCount = 1;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -15,22 +17,24 @@ class BridgeGame {
   move(input, bridge) {
     if(input === bridge[this.inputCount]){
       this.inputCount++;
-      return 'O'
+      this.moveResult = 'O'
+      return this.drawMap(input)
     }
     if(input !== bridge[this.inputCount]){
       this.inputCount++;
-      return 'X'
+      this.moveResult = 'X'
+      return this.drawMap(input)
     }
   }
 
-  drawMap(input,moveResult){
+  drawMap(input){
     if(input === 'U') {
-      this.bridgeMap[0].push(moveResult);
+      this.bridgeMap[0].push(this.moveResult);
       this.bridgeMap[1].push(' ')
     }
     if(input === 'D') {
       this.bridgeMap[0].push(' ')
-      this.bridgeMap[1].push(moveResult);
+      this.bridgeMap[1].push(this.moveResult);
     }
     return this.bridgeMap;
   }
@@ -43,6 +47,7 @@ class BridgeGame {
   retry() {
     this.inputCount = 0;
     this.bridgeMap = [[],[]];
+    this.tryCount = this.tryCount + 1 
   }
 }
 
