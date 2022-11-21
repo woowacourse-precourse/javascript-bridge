@@ -1,7 +1,7 @@
 const { GAME_CONSTANTS } = require('./utils/constants');
 
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const InputView = require('./views/InputView');
+const OutputView = require('./views/OutputView');
 
 const BridgeGame = require('./BridgeGame');
 const Validator = require('./Validator');
