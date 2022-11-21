@@ -1,4 +1,4 @@
-![bridge_mvc 001](https://user-images.githubusercontent.com/111125577/203160031-5b4bb891-42f8-4377-b63b-65818650f7c0.jpeg)
+![bridge_mvc 001](https://user-images.githubusercontent.com/111125577/203161141-7ff7c881-b0de-4c65-bc9a-eca11219ed20.jpeg)
 
 
 1. UI 담당 로직
