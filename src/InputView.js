@@ -93,13 +93,18 @@ const InputView = {
    * @param {gameStatusCallback} gameStatusCallback
    */
   readGameCommand({ getNextGameStatus, setNextGameStatus }) {
-    MissionUtils.Console.readLine(`${this.query.COMMAND}\n`, (input) => {
-      const command = input.trim()
+    MissionUtils.Console.readLine(`\n${this.query.COMMAND}\n`, (input) => {
+      try {
+        const command = input.trim()
+        this.validateCommand(command)
 
-      this.validateCommand(command)
-
-      const gameStatus = getNextGameStatus(option[command])
-      setNextGameStatus(gameStatus)
+        this.handleGameStatus(
+          { getNextGameStatus, setNextGameStatus },
+          option[command]
+        )
+      } catch (error) {
+        this.handleError(error, setNextGameStatus)
+      }
     })
   },
 

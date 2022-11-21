@@ -3,7 +3,7 @@ const BridgeMaker = require('./BridgeMaker')
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
 const InputView = require('./InputView')
 const OutputView = require('./OutputView')
-const { status } = require('./lib/constants')
+const { status, option } = require('./lib/constants')
 
 class App {
   #trial
@@ -35,7 +35,6 @@ class App {
     this.#proceedGame()
   }
 
-  // TOOD: refactor. 객체로 변형
   #proceedGame() {
     if (this.#status === status.READ_SIZE) {
       InputView.readBridgeSize({
@@ -48,9 +47,11 @@ class App {
         setNextGameStatus: this.#setStatus,
       })
     } else if (this.#status === status.READ_COMMAND) {
-      // TODO - InputView.readGameCommand
+      InputView.readGameCommand({
+        getNextGameStatus: this.#retryOrQuit,
+        setNextGameStatus: this.#setStatus,
+      })
     } else if (this.#status === status.FINISHED) {
-      // TODO - OutputView.printMap + printResult
     }
   }
 
@@ -82,9 +83,26 @@ class App {
    * @returns {number}
    */
   #addBridgeGameMove = (move) => {
+    // callback this binding
     this.#bridgeGame.move(move)
 
     return this.#bridgeGame.getStatus()
+  }
+
+  /**
+   * @param {string} command
+   * @returns {number}
+   */
+  #retryOrQuit = (command) => {
+    // callback this binding
+    if (command === option.R) {
+      this.#trial++
+      this.#bridgeGame.retry()
+
+      return status.READ_MOVE
+    }
+
+    return status.FINISHED
   }
 }
 

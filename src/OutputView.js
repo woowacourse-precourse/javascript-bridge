@@ -30,7 +30,7 @@ const OutputView = {
   printMap(bridge, moves, last = false) {
     const [upside, downside] = this.drawMap(bridge, moves)
 
-    if (last) MissionUtils.Console.print(this.result.LAST)
+    if (last) MissionUtils.Console.print(`\n${this.result.LAST}`)
     MissionUtils.Console.print(this.formatSide(upside))
     MissionUtils.Console.print(this.formatSide(downside))
 
@@ -86,6 +86,10 @@ const OutputView = {
       `\n${this.result.SUCCESS}: ${success ? '성공' : '실패'}`
     )
     MissionUtils.Console.print(`${this.result.TRIAL}: ${trial}`)
+  },
+
+  close() {
+    MissionUtils.Console.close()
   },
 }
 
