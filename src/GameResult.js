@@ -1,5 +1,4 @@
 const { OUTPUT_FORMAT, INPUT_FORMAT } = require('./constants');
-const OutputView = require('./OutputView');
 
 class GameResult {
   #resultMap;
@@ -12,7 +11,6 @@ class GameResult {
 
   setDefault(values) {
     values.map((value, index) => this.#resultMap.set(index, { machine: value, player: null }));
-    console.log(values, this.#resultMap);
   }
 
   updateResult(index, value) {
@@ -30,28 +28,31 @@ class GameResult {
     return existing.machine === existing.player;
   }
 
+  getAsArray() {
+    return [...this.#resultMap];
+  }
+
   getCurrentIndex() {
-    const entries = [...this.#resultMap];
-    return entries.findIndex(([key, value]) => !value.player);
+    return this.getAsArray().findIndex(([, value]) => !value.player);
   }
 
   // 리팩토링 사항
   makeHistory() {
-    const entries = [...this.#resultMap];
-    const upside = [];
-    const downside = [];
+    const history = this.getAsArray().filter(([, value]) => value.player);
+    const [upside, downside] = Array.from({ length: 2 }, () => []);
 
-    for (let i = 0; i < entries.length; i++) {
-      const { machine, player } = entries[i][1];
-      const isMatch = machine === player;
-      if (player === INPUT_FORMAT.UPSIDE) {
-        upside.push(isMatch ? OUTPUT_FORMAT.MATCH : OUTPUT_FORMAT.UNMATCH);
-        downside.push(OUTPUT_FORMAT.NOT_SELECTED);
-      } else if (player === INPUT_FORMAT.DOWNSIDE) {
-        upside.push(OUTPUT_FORMAT.NOT_SELECTED);
-        downside.push(isMatch ? OUTPUT_FORMAT.MATCH : OUTPUT_FORMAT.UNMATCH);
-      }
+    for (let i = 0; i < history.length; i++) {
+      const { machine, player } = history[i][1];
+      const [selected, notSeleted] = [
+        machine === player ? OUTPUT_FORMAT.MATCH : OUTPUT_FORMAT.UNMATCH,
+        OUTPUT_FORMAT.NOT_SELECTED,
+      ];
+      const [up, down] = player === INPUT_FORMAT.UPSIDE ? [selected, notSeleted] : [notSeleted, selected];
+
+      upside.push(up);
+      downside.push(down);
     }
+
     return [upside, downside];
   }
 
@@ -60,9 +61,7 @@ class GameResult {
   }
 
   clear() {
-    const entries = [...this.#resultMap];
-
-    entries.forEach(([key, value]) => {
+    this.getAsArray().forEach(([key, value]) => {
       this.#resultMap.set(key, { ...value, player: null });
     });
 
