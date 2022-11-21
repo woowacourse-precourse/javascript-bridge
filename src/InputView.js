@@ -1,10 +1,11 @@
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
+const { isRetry } = require('./BridgeGameReferee');
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { printResult, printMap, printResultFalse } = require("./OutputView");
 const {
-  validateRetryInput,
+  validateRetryInputCatch,
   validateisRepeat,
   validateInputCatch,
 } = require("./Validator");
@@ -33,13 +34,9 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (moveInput) => {
-        validateisRepeat(moveInput)
-          ? InputView.readMoving(mainBridge, bridgeGame)
-          : null;
+        validateisRepeat(moveInput)? InputView.readMoving(mainBridge, bridgeGame): null;
         InputView.doMove(moveInput, bridgeGame);
-        !bridgeGame.hasNext
-          ? InputView.readGameCommand(mainBridge, bridgeGame)
-          : null;
+        !bridgeGame.hasNext? InputView.readGameCommand(mainBridge, bridgeGame): null;
         InputView.readMoving(mainBridge, bridgeGame);
       }
     );
@@ -52,16 +49,12 @@ const InputView = {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
       (retryInput) => {
-        validateRetryInputCatch(retryInput)
-          ? InputView.readGameCommand(mainBridge, bridgeGame)
-          : null;
-        if (retryInput === "R") {
+        validateRetryInputCatch(retryInput)? InputView.readGameCommand(mainBridge, bridgeGame) : null;
+        if (isRetry(retryInput)) {
           bridgeGame.init();
           InputView.readMoving(mainBridge, bridgeGame);
-        }
-        if (retryInput === "Q") {
-          printResultFalse(bridgeGame);
-        }
+        } 
+        if (!isRetry(retryInput)) printResultFalse(bridgeGame)
       }
     );
   },
