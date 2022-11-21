@@ -1,6 +1,7 @@
 const Console = require("@woowacourse/mission-utils");
 const {BridgeMaker, makeBridge} = require("./BridgeMaker.js");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
+const OutputView = require("./OutputView.js");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -29,12 +30,15 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridgeGame) {
-    Console.readLine("게임을 다시 시작할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (str) => {
-      bridgeGame.retry(str)
-      ? this.readMoving(bridgeGame)
-      : Console.Console();
+    Console.readLine("\n게임을 다시 시작할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (str) => {
+      this.checkInput(str, bridgeGame);
     })
   },
+
+  checkInput(str, bridgeGame){
+    if(str === "R") bridgeGame.retry();
+    else if(str === "R") OutputView.printResult(bridgeGame, false);
+  }
 };
 
 module.exports = InputView;

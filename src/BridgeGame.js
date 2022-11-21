@@ -1,4 +1,5 @@
 const OutputView = require("./OutputView.js");
+const InputView = require("./InputView.js");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -15,6 +16,10 @@ class BridgeGame {
   init(bridge){
     this.#bridge = bridge;
   }
+
+  getMoveBridge(){
+    return this.#moveBridge;
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -24,6 +29,7 @@ class BridgeGame {
     const state = this.#moveBridge.get("U").length;
     this.checkMove(str, state);
     OutputView.printMap(this.#moveBridge);
+    if(this.#moveBridge.get("U")[state] === "X" || this.#moveBridge.get("D")[state] === "X") InputView.readGameCommand(this);
   }
 
   checkMove(str, state){
