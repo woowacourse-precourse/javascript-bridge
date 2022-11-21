@@ -65,6 +65,42 @@ class BridgeGame {
     OutputView.printMap(this, this.#resultBridge);
   }
 
+  NextMove() {
+    const { isEnd, isMove } = this.moveEndBool();
+    if (!isEnd) {
+      return this.nextInput(isMove);
+    }
+    if (isEnd) {
+      this.end();
+    }
+  }
+
+  moveEndBool() {
+    const currIdx = this.#playerArr.length - 1;
+    const isEnd = this.#bridgeShape.length === this.#playerArr.length;
+    const { isMove } = this.#playerArr[currIdx];
+    return { isEnd, isMove };
+  }
+
+  nextInput(isMove) {
+    if (isMove) {
+      return InputView.readMoving(this);
+    }
+    return InputView.readGameCommand(this);
+  }
+
+  end() {
+    const { isEnd, isMove } = this.moveEndBool();
+    const isSuccess = isEnd && isMove;
+    const success = this.sucessResult(isSuccess);
+    OutputView.printResult(this.#resultBridge, this.#totalTry, success);
+  }
+
+  sucessResult(result) {
+    const resultStr = result ? '성공' : '실패';
+    return resultStr;
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
