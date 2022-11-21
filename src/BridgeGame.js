@@ -83,6 +83,10 @@ class BridgeGame {
     this.gameResult.clear();
     this.controlMoving();
   }
+
+  finish(type) {
+    OutputView.printResult(type, this.gameResult);
+  }
 }
 
 module.exports = BridgeGame;
