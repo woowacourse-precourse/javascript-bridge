@@ -54,13 +54,19 @@ class BridgeGame {
         if (bridge.length === this.userMoveArray.length) {
           return "allRight";
         }
-        console.log(bridge[i]);
-        console.log(userMoveArray[i]);
         return "right";
-      } else {
-        return "wrong";
       }
+      return "wrong";
     }
+  }
+
+  /**
+   * O, X 받아오는 로직
+   */
+  getMap(userMoveArray) {
+    this.userMoveArray = userMoveArray;
+    console.log(this.userMoveArray);
+    return this.userMoveArray;
   }
 
   /**
