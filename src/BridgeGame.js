@@ -13,7 +13,7 @@ class BridgeGame {
   constructor(){
     this.#upBridge = [];
     this.#downBridge = [];
-    this.#tryNumber = 1
+    this.#tryNumber = 1;
     this.#currentIndex = 0;
   }
 

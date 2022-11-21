@@ -2,12 +2,12 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const { OutputMessage } = require("./constant/Constants");
 
 const OutputView = {
-  printErrorMessage(message){
-    MissionUtils.Console.print(message);
-  },
-
   printStartMessage(){
     MissionUtils.Console.print(OutputMessage.START);
+  },
+
+  printErrorMessage(message){
+    MissionUtils.Console.print(message);
   },
 
   printMap(currentBridge) {

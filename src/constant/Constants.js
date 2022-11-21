@@ -15,7 +15,7 @@ const ErrorMessage = {
 
 const OutputMessage = {
   START : "다리 건너기 게임을 시작합니다.",
-  RESULT_TITLE : `\n최종 게임 결과`,
+  RESULT_TITLE : "\n최종 게임 결과",
   FORMAT : (content) => `[ ${content.join(" | ")} ]`,
   RESULT : (isSuccess) => `\n게임 성공 여부: ${isSuccess? "성공" : "실패"}`,
   TRY_NUMBER : (tryCnt) => `총 시도한 횟수: ${tryCnt}`, 
