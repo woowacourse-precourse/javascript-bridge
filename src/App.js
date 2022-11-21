@@ -17,40 +17,25 @@ class App {
     console.log("bridge", bridge);
     const bridgeGame = new BridgeGame();
 
-    // let moveCount = 0;
-    // let traceMap = [];
-    // let retry = "R";
-
-    // while (retry === "R") {
-    //   const gameResults = await bridgeGame.move(
-    //     bridgeSize,
-    //     bridge,
-    //     moveCount,
-    //     traceMap
-    //   );
-    //   console.log(gameResults, "gameResults");
-    //   if (gameResults === "O") {
-    //     moveCount++;
-    //     console.log("중간결과프린트");
-    //     OutputView.printMap();
-    //   }
-    //   if (gameResults === "X") {
-    //     console.log("중간결과프린트, 리겜할꺼?");
-    //     OutputView.printMap();
-    //     retry = await bridgeGame.retry();
-    //     if(command === 'R'){
-    //       tryNumber++
-    //     }
-    //     if(command === 'Q'){
-    //       console.log("최종결과 프린트");
-    //       OutputView.printResult(false, tryNumber, gameResults[1]);
-    //     }
-    //   }
-    //   if (gameResults === "END") {
-    //     console.log("최종결과 프린트");
-    //     OutputView.printResult(true, tryNumber, gameResults[1]);
-    //   }
-    // }
+    let moveCount = 0;
+    let retry = "R";
+    let moveCommand = "";
+    while (retry === "R") {
+      const gameResults = await bridgeGame.move(bridgeSize, bridge, moveCount);
+      moveCommand += gameResults;
+      if (gameResults === "O") {
+        OutputView.printMap(bridge.slice(0, moveCount + 1), moveCommand);
+        moveCount++;
+      } else if (gameResults === "X") {
+        OutputView.printMap(bridge.slice(0, moveCount + 1), moveCommand);
+        retry = await bridgeGame.retry();
+        this.isRetry();
+      } else if (gameResults === "END") {
+        this.isRetry();
+      } else {
+        retry == "R";
+      }
+    }
   }
 
   async makeBridgeSize(bridgeSize = 0) {
@@ -73,13 +58,13 @@ class App {
     }
   }
 
-  isRetry(command){
-    if(command === 'R'){
-      return tryNumber++
+  isRetry(command, tryNumber, gameResults) {
+    if (command === "R") {
+      return tryNumber++;
     }
-    if(command === 'Q'){
+    if (command === "Q") {
       console.log("최종결과 프린트");
-      OutputView.printResult(false, tryNumber, gameResults[1]);
+      OutputView.printResult(false, tryNumber, gameResults);
     }
   }
 }

@@ -10,15 +10,14 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  async move(bridgeSize, bridge, moveCount, traceMap) {
+  async move(bridgeSize, bridge, moveCount) {
     while (bridgeSize > moveCount) {
-      let where =
-        this.movingValidate(await InputView.readMoving()) === "U" ? 0 : 1;
-      traceMap.push([where, bridge[where][moveCount]]);
-      if (bridge[where][moveCount] === "O") {
+      let where = this.movingValidate(await InputView.readMoving());
+      console.log(where)
+      if (bridge[moveCount] === where) {
         return "O";
       }
-      if (bridge[where][moveCount] === "X") {
+      else {
         return "X";
       }
     }
