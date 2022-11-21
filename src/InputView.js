@@ -10,8 +10,7 @@ const InputView = {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, size => {
       const VALIDATION = this.validateBridgeSize(size);
       if (VALIDATION) {
-        size = parseInt(size);
-        const GAME = this.startBridgeGame(size);
+        const GAME = this.startBridgeGame(parseInt(size));
         this.repeatMoving(GAME, -1);
       }
     });
