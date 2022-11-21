@@ -16,9 +16,9 @@
 # 구현 기능
 
 InputView)<br>
-&nbsp; readBridgeSize: 다리 길이 숫자로 입력받아서 올바르지 않은 값이면 `ErrorHandler.bridgeSize` 호출, 올바른 값이면 `BridgeMaker.makeBridge` 호출 <br>
-&nbsp; readMoving: 이동할 칸 U/D로 입력받아서 올바르지 않은 값이면 `ErrorHandler.moving` 호출, 올바른 값이면 `BridgeGame.move` 호출 <br>
-&nbsp; readGameCommand: 게임 재시도 여부 R/Q로 입력받아서 올바르지 않은 값이면 `ErrorHandler.gameCommand` 호출, 올바른 값이면 `BridgeGame.retry` 호출 <br>
+&nbsp; readBridgeSize: 다리 길이 숫자로 입력받아서 유효성 검사, 올바른 값이면 `BridgeMaker.makeBridge` 호출, 올바르지 않은 값이면 에러메세지 출력 후 다시 입력받기 <br>
+&nbsp; readMoving: 이동할 칸 U/D로 입력받아서 유효성 검사, 올바른 값이면 `BridgeGame.move` 호출, 올바르지 않은 값이면 에러메세지 출력 후 다시 입력받기 <br>
+&nbsp; readGameCommand: 게임 재시도 여부 R/Q로 입력받아서 유효성 검사, 올바른 값이면 `BridgeGame.retry` 호출, 올바르지 않은 값이면 에러메세지 출력 후 다시 입력받기 <br>
 
 OutputView)<br>
 &nbsp; printMap: 이동 상태 배열로 전달받아서 출력<br>
@@ -32,7 +32,7 @@ BridgeGame)<br>
 BridgeMaker)<br>
 &nbsp; makeBridge: 다리 길이 전달받아서 해당 크기만큼 `BridgeRandomNumberGenerator.generate()` 호출, 호출한 결과를 배열에 담아서 리턴
 
-ErrorHandler)<br>
-&nbsp; bridgeSize: `throw Error` 후 `InputView.readBridgeSize` 호출
-&nbsp; moving: `throw Error` 후 `InputView.readMoving` 호출<br>
-&nbsp; gameCommand: `throw Error` 후 `InputView.readGameCommand` 호출<br>
+ValidateInput)<br>
+&nbsp; bridgeSize: 입력값이 숫자가 아니거나 3~20의 범위가 아니면 `throw Error`<br>
+&nbsp; moving: 입력값이 U/D가 아니면 `throw Error`<br>
+&nbsp; gameCommand: 입력값이 R/Q가 아니면 `throw Error`<br>
