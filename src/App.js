@@ -40,6 +40,13 @@ class App {
       this.#showBridgePhase(moving);
     });
   }
+
+  #showBridgePhase(moving) {
+    this.#bridgeGame.move(moving);
+    this.#gameResult = this.#bridgeGame.getGameResult();
+    OutputView.printMap(this.#gameResult);
+    this.#decideNextPhaseByRoundResult();
+  }
 }
 
 module.exports = App;

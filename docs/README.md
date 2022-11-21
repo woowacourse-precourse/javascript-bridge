@@ -95,7 +95,7 @@
 - [x] `play` : 게임 시작 기능 구현하기
 - [x] `bridgeSizeInputPhase` : 다리의 길이를 묻는 단계 구현하기
 - [x] `movingInputPhase` : 이동 방향을 묻는 단계 구현하기
-- [ ] `showBridgePhase` : 해당 라운드에 대해 다리의 결과를 보여주는 단계 구현하기
+- [x] `showBridgePhase` : 해당 라운드에 대해 다리의 결과를 보여주는 단계 구현하기
 - [ ] `decideNextPhaseByRoundResult` : 라운드 결과를 바탕으로 다음에 어떤 작업을 할 지 판단하는 단계 구현하기
 - [ ] `retryCommandInputPhase` : 실패 시 재시작 여부를 묻는 단계 구현하기
 - [ ] `decideNextPhaseByRetryCommand` : 재시작 커맨드를 바탕으로 다음에 어떤 작업을 할 지 판단하는 단계
