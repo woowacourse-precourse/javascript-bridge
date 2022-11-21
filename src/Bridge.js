@@ -12,7 +12,7 @@ class Bridge {
     this.map = new Map();
     this.#step = 0;
     this.#size;
-    this.#tries = 0;
+    this.#tries = 1;
   }
 
   make(size) {
