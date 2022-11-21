@@ -13,7 +13,7 @@ const BridgeMaker = {
     const bridge = new Array(size).fill(0).map(() => {
       const number = generateRandomNumber();
 
-      if (+number === 0) return GAME_RULE.DOWNSIDE;
+      if (number === 0) return GAME_RULE.DOWNSIDE;
 
       return GAME_RULE.UPSIDE;
     });
