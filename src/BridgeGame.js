@@ -1,9 +1,14 @@
 const { STATE } = require('./Constant');
 const { flowController } = require('./InputView');
 
+const RESULT = Object.freeze({
+  SUCCESS: '성공',
+  FAIL: '실패',
+});
+
 const OBJECT = Object.freeze({
-  [STATE.MOVE]: 'O',
-  [STATE.FAIL]: 'X',
+  [RESULT.SUCCESS]: 'O',
+  [RESULT.FAIL]: 'X',
   BLANK: ' ',
 });
 
@@ -11,12 +16,16 @@ const OBJECT = Object.freeze({
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  try = 0;
+
   constructor(bridge) {
     this.bridge = bridge;
     this.reset();
   }
 
   reset() {
+    this.try += 1;
+    this.result = RESULT.SUCCESS;
     this.state = STATE.MOVE;
     this.playerPosition = -1;
     this.moveMap = {
@@ -35,6 +44,7 @@ class BridgeGame {
 
     this.playerPosition += 1;
     if (moving !== bridge[this.playerPosition]) {
+      this.result = RESULT.FAIL;
       this.state = STATE.FAIL;
     } else if (this.playerPosition + 1 === bridge.length) {
       this.state = STATE.QUIT;
@@ -42,10 +52,10 @@ class BridgeGame {
   }
 
   drawMap(moving) {
-    const { moveMap, state } = this;
+    const { moveMap, result } = this;
     const unchosen = 'UD'.replace(moving, '');
 
-    moveMap[moving].push(OBJECT[state]);
+    moveMap[moving].push(OBJECT[result]);
     moveMap[unchosen].push(OBJECT.BLANK);
   }
 

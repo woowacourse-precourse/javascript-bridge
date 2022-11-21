@@ -61,7 +61,7 @@ const InputView = {
       case STATE.RETRY:
         return this.bridgeGame.retry();
     }
-    printResult();
+    printResult(this.bridgeGame);
   },
 };
 
