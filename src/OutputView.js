@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const BridgePartsController = require('./BridgePartsController');
+const BridgeGameController = require('./BridgeGameController');
 const { OUTPUT_MESSAGE, RESULT_MESSAGE } = require('./Constants/message');
 
 /**
@@ -18,13 +18,17 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(game) {
-    const controller = new BridgePartsController();
-    controller.createMap(game);
-    controller.closeBridge();
+  printMap(upperBridge, downerBridge) {
+    Console.print(upperBridge);
+    Console.print(downerBridge);
+  },
 
-    Console.print(controller.getUpperBridge());
-    Console.print(controller.getDownerBridge());
+  printUpperBridge(upperBridge) {
+    Console.print(upperBridge);
+  },
+
+  printDownerBridge(downerBridge) {
+    Console.print(downerBridge);
   },
 
   /**
@@ -32,12 +36,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(game) {
+  printResult() {
     Console.print(OUTPUT_MESSAGE.result);
-    OutputView.printMap(game);
+  },
+
+  printStatistic(game) {
     Console.print(RESULT_MESSAGE.result(game.getGameResult()));
     Console.print(RESULT_MESSAGE.attempt_count(game.getRetryCount()));
-    Console.close();
   },
 };
 
