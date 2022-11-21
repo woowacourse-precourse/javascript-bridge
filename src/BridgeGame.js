@@ -48,7 +48,12 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(gameRec) {
+    gameRec.moveNum = 0; // 재시도 시 moveNum 초기화
+    gameRec.attemptNum += 1; // 재시도 시 attemptNum 1 증가
+    const InputView = require("./InputView");
+    InputView.readMoving(gameRec);
+  }
 }
 
 module.exports = BridgeGame;
