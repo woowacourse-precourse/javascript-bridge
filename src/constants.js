@@ -1,3 +1,16 @@
+const UI_COMPONENT = {
+  SUCCESS: '성공',
+  FAIL: '실패',
+  CORRECT: 'O',
+  INCORRECT: 'X',
+}
+
+const GAME_STATUS = {
+  END: 'END',
+  NEXT: 'NEXT',
+  FAIL: 'FAIL',
+}
+
 const OPERATION_KEY = {
   UP: 'U',
   DOWN: 'D',
@@ -38,4 +51,4 @@ const ERROR_MESSAGE = {
   OPERATION_GAME_COMMAND: `[ERROR] 입력은 ${OPERATION_KEY.RETRY}, ${OPERATION_KEY.QUIT}만 가능합니다.`,
 };
 
-module.exports = { OPERATION_KEY, LIMIT, MESSAGE, ERROR_MESSAGE };
+module.exports = { UI_COMPONENT, GAME_STATUS, OPERATION_KEY, LIMIT, MESSAGE, ERROR_MESSAGE };

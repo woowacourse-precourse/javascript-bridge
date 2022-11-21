@@ -1,6 +1,7 @@
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
 const User = require('./User');
+const { UI_COMPONENT, GAME_STATUS } = require('./constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -39,11 +40,11 @@ class BridgeGame {
     const isCorrect = this.#bridge[index] === this.user.getRoute()[index];
     const isEnd = index + 1 === this.#bridge.length;
     if (isEnd && isCorrect) {
-      this.#status = 'END';
+      this.#status = GAME_STATUS.END;
     } else if (!isEnd && isCorrect) {
-      this.#status = 'NEXT';
+      this.#status = GAME_STATUS.NEXT;
     } else if (!isCorrect) {
-      this.#status = 'FAIL';
+      this.#status = GAME_STATUS.FAIL;
     }
     return this;
   }
@@ -55,7 +56,9 @@ class BridgeGame {
   setFootprint() {
     const index = this.user.getIndex();
     const result =
-      this.user.getRoute()[index] === this.#bridge[index] ? 'O' : 'X';
+      this.user.getRoute()[index] === this.#bridge[index]
+        ? UI_COMPONENT.CORRECT
+        : UI_COMPONENT.INCORRECT;
     this.MAKE_MOVE_MAP[this.user.getRoute()[index]](result);
   }
 
@@ -85,7 +88,10 @@ class BridgeGame {
   getResult() {
     return {
       footprint: this.#footprint,
-      endStatus: this.#status === 'END' ? '성공' : '실패',
+      endStatus:
+        this.#status === GAME_STATUS.END
+          ? UI_COMPONENT.SUCCESS
+          : UI_COMPONENT.FAIL,
       tryCount: this.user.getTryCount(),
     };
   }
