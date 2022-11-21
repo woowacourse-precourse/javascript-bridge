@@ -10,6 +10,7 @@ class BridgeGame {
   movingLog;
   attemptNumber;
   bridge;
+
   constructor() {
     this.movingLog = { upper: [], lower: [] };
     this.attemptNumber = 1;

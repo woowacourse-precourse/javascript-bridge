@@ -16,12 +16,9 @@ const InputView = {
   readBridgeSize(bridgeGame) {
     Console.readLine(INPUT_MESSAGE.LENGTH, (length) => {
       const error = Validation.checkBridgeLength(length);
-      if (error) {
-        this.readBridgeSize();
-      } else {
-        bridgeGame.makeBridge(length);
-        this.readMoving(bridgeGame);
-      }
+      if (error) return this.readBridgeSize();
+      bridgeGame.makeBridge(length);
+      this.readMoving(bridgeGame);
     });
   },
 
@@ -34,9 +31,9 @@ const InputView = {
       if (error) return this.readMoving(bridgeGame);
       bridgeGame.move(userInput);
       if (bridgeGame.isWrongZone()) return this.readGameCommand(bridgeGame);
-      else if (bridgeGame.isReached())
+      if (bridgeGame.isReached())
         return bridgeGame.finish(OUTPUT_MESSAGE.SUCCESS);
-      else return this.readMoving(bridgeGame);
+      return this.readMoving(bridgeGame);
     });
   },
 
@@ -46,16 +43,12 @@ const InputView = {
   readGameCommand(bridgeGame) {
     Console.readLine(INPUT_MESSAGE.RESTART, (commandInput) => {
       const error = Validation.checkCommandInput(commandInput);
-      if (error) {
-        return this.readGameCommand(bridgeGame);
-      }
+      if (error) return this.readGameCommand(bridgeGame);
       if (commandInput === COMMAND.RESTART) {
         bridgeGame.retry();
         return this.readMoving(bridgeGame);
       }
-      if (commandInput === COMMAND.END) {
-        bridgeGame.finish(OUTPUT_MESSAGE.FAIL);
-      }
+      return bridgeGame.finish(OUTPUT_MESSAGE.FAIL);
     });
   },
 };
