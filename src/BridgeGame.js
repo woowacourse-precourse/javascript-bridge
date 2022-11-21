@@ -1,43 +1,43 @@
 class BridgeGame {
- 
+
   #curIdx;
   #success;
   #bridge;
   #gameCount;
-  
-  constructor(bridge){
+
+  constructor(bridge) {
     this.init();
     this.#bridge = bridge;
     this.#gameCount = 1;
   }
 
-  init(){
-    this.#curIdx =0;
+  init() {
+    this.#curIdx = 0;
     this.#success = true;
   }
 
-  gameNotFinished(){
+  gameNotFinished() {
     return this.#success && this.#curIdx < this.#bridge.length;
   }
 
-  gameSuccess(){
+  gameSuccess() {
     return this.#success && this.#curIdx === this.#bridge.length;
   }
 
-  getSuccess(){
+  getSuccess() {
     return this.#success;
   }
 
-  getCount(){
+  getCount() {
     return this.#gameCount;
   }
 
   move(dir) {
-    if(dir === this.#bridge[this.#curIdx]){
+    if (dir === this.#bridge[this.#curIdx]) {
       this.#curIdx += 1;
     }
-    else{
-      this.#curIdx +=1;
+    else {
+      this.#curIdx += 1;
       this.#success = false;
     }
   }

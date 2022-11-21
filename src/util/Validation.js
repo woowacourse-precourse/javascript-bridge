@@ -1,10 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
+const {ERROR_MESSAGE, BRIDGE, DIRECTION, COMMAND} = require("./Constant");
 
 const validateBridge = (bridgeInput) => {
     try {
-        if (Number.isNaN(bridgeInput)) throw new Error("[ERROR] 다리길이는 숫자여야 합니다.");
-        if (!(3 <= bridgeInput && bridgeInput <= 20)) throw new Error("[ERROR] 다리길이는 3에서 20사이의 숫자여야 합니다.");
+        if (Number.isNaN(bridgeInput)) throw new Error(ERROR_MESSAGE.BRIDGE_TYPE);
+        if (!(BRIDGE.MIN_LENGTH <= bridgeInput && bridgeInput <= BRIDGE.MAX_LENGTH)) throw new Error(ERROR_MESSAGE.BRIDGE_RANGE);
     } catch (err) {
         Console.print(err.message);
         return true;
@@ -13,20 +14,20 @@ const validateBridge = (bridgeInput) => {
 
 const validateMove = (move) => {
     try {
-        if (!(move === "U" || move === "D")) throw new Error("[ERROR] 이동할 칸을 잘못 입력하셨습니다.");
+        if (!(move === DIRECTION.UP || move === DIRECTION.DOWN)) throw new Error(ERROR_MESSAGE.MOVE);
     } catch (err) {
         Console.print(err.message);
         return true;
     }
 }
 
-const validateStart = (start) => {
+const validateCommand = (command) => {
     try {
-        if (!(start === "R" || start === "Q")) throw new Error("[ERROR] 다시시도 여부를 잘못 입력하셨습니다.");
+        if (!(command === COMMAND.RESTART || command === COMMAND.QUIT)) throw new Error(ERROR_MESSAGE.COMMAND);
     } catch (err) {
         Console.print(err.message);
         return true;
     }
 }
 
-module.exports = {validateBridge, validateMove, validateStart};
+module.exports = {validateBridge, validateMove, validateCommand};
