@@ -5,8 +5,9 @@ class App {
   play() {
     const play = new Player();
     const answer = play.createBridgeAnswer();
+    const obj = play.setBridgeGame(answer);
     MissionUtils.Console.print(answer);
-    play.repeatMove(answer);
+    play.repeatMove(answer, obj);
   }
 }
 

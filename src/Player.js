@@ -21,10 +21,10 @@ class Player {
         return true;
     }
 
-    repeatMove(bridgeAnswer) {
-        const bridgeGame = new BridgeGame(bridgeAnswer);
+    repeatMove(bridgeAnswer, bridgeGame) {
         let currentBridge;
         let isSuccessed = true;
+        let tryCount = bridgeGame.getTryCount();
 
         for(let i = 0; i < bridgeAnswer.length; i++) {
             OutputView.printInputMove();
@@ -38,7 +38,12 @@ class Player {
         }
         OutputView.printResult(currentBridge);
         OutputView.printGameSuccess(isSuccessed);
-        OutputView.printTryCount();
+        OutputView.printTryCount(tryCount);
+    }
+
+    setBridgeGame(bridgeAnswer) {
+        const bridgeGame = new BridgeGame(bridgeAnswer); //
+        return bridgeGame;
     }
 
 }
