@@ -71,3 +71,4 @@ test가 잘 되지 않았던 이유는 요구 사항이 throw문을 사용해서
 우선 ExceptionHandler에서는 throw로 예외 처리를 한다. 그런데 내보내는 것은 new Error()가 아니라 문자열이다.  
 그리고 이것을 처리하려면 GameController.js 에서는 try/catch 구문을 사용해야 한다.  
 이렇게 하면 throw를 사용한 에러 문구 출력과 에러가 일어난 시점부터 다시 입력을 받아 게임을 진행하는 것이 가능하고 테스트에서는 예외처리 부분을 toThrow("[ERROR]")로 테스트를 할 수 있다.
+새롭게 변경된 사항은 bridgeMaker의 test에서 문자열이 아니라 숫자가 맞았던 것이고 적용시켰다.
