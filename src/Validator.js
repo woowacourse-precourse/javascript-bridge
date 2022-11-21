@@ -18,6 +18,12 @@ const Validator = {
 		this.isNum(size);
 		this.isInRange(size);
 	},
+
+	checkMoving(move) {
+		if (move !== 'U' || move !== 'D') {
+			throw new Error('[ERROR] 이동은 \'위(U)\' 혹은 \'아래(D)\'로만 할 수 있습니다.');
+		}
+	},
 }
 
 module.exports = Validator;
