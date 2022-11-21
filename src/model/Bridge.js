@@ -1,12 +1,12 @@
 class Bridge {
-  #layout;
+  #answerArray;
 
-  get layout() {
-    return this.#layout;
+  get answerArray() {
+    return this.#answerArray;
   }
 
-  set layout(value) {
-    this.#layout = value;
+  set answerArray(value) {
+    this.#answerArray = value;
   }
 }
 
