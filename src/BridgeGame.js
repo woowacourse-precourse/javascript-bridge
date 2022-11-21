@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { INPUT_VALUE } = require("./constants/InputValue");
 
 class BridgeGame {
   move(moving, bridge) {
@@ -9,9 +9,9 @@ class BridgeGame {
   }
 
   retry(command) {
-    if (command == "R") {
+    if (command == INPUT_VALUE.RETRY) {
       return true;
-    } else if (command == "Q") {
+    } else if (command == INPUT_VALUE.QUIT) {
       return false;
     }
   }

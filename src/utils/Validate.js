@@ -1,4 +1,5 @@
 const { ERROR_MESSAGE } = require("../constants/Message");
+const { INPUT_VALUE } = require("../constants/InputValue");
 
 const Validate = {
   validateSize(size) {
@@ -10,12 +11,12 @@ const Validate = {
     }
   },
   validateMoving(moving) {
-    if (moving !== "U" && moving !== "D") {
+    if (moving !== INPUT_VALUE.UP && moving !== INPUT_VALUE.DOWN) {
       throw new Error(ERROR_MESSAGE.MOVING);
     }
   },
   validateCommand(command) {
-    if (command !== "R" && command !== "Q") {
+    if (command !== INPUT_VALUE.RETRY && command !== INPUT_VALUE.QUIT) {
       throw new Error(ERROR_MESSAGE.COMMAND);
     }
   },
