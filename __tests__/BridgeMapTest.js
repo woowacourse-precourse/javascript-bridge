@@ -81,4 +81,26 @@ describe('Map 출력 테스트', () => {
     });
     expect();
   });
+
+  test("Map 출력 - ['U', 'D', 'D'], 두번째 실패 경우", () => {
+    const logSpy = getLogSpy();
+    const input = ['3', 'U', 'U', 'D'];
+    const random = ['1', '0', '0'];
+    const messages = ['[ O ]', '[   ]', '[ O | X ]', '[   |   ]'];
+
+    mockRandom(random);
+    mockInput(input);
+
+    const gameController = new BridgeGameController();
+
+    gameController.getBridgeSize();
+    gameController.getMoving();
+    gameController.getMoving();
+    gameController.getMoving();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+    expect();
+  });
 });
