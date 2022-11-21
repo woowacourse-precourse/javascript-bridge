@@ -33,7 +33,7 @@ const InputView = {
    */
   readMoving(playerMoveList,bridgeGame, bridgeSize) {
     MissionUtils.Console.readLine(PLAYER_MOVE_INPUT, (playerMove) => {
-      if(userMoveValidate(playerMove)) return this.readMoving([], bridgeGame, bridgeSize)
+      if(userMoveValidate(playerMove)) return this.readMoving(playerMoveList, bridgeGame, bridgeSize)
       playerMoveList=moveListPush(playerMoveList, playerMove)
       const gameResult=bridgeGame.move(playerMoveList, bridgeSize);
       if(playerMoveList.length===Number(bridgeSize)) return OutputView.printResult(gameResult, SUCCESS, bridgeGame.getTotalTry())
