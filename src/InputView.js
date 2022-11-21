@@ -46,7 +46,7 @@ const InputView = {
 
   isGameEnd() {
     const isGameEnd = this.bridgeGameControl.isGameEnd();
-    isGameEnd ? this.bridgeGameControl.isGameEnd(isGameEnd) : this.readMoving();
+    isGameEnd ? this.bridgeGameControl.gameOver(isGameEnd) : this.readMoving();
   },
 
   /**

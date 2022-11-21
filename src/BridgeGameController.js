@@ -29,9 +29,9 @@ class BridgeGameController {
     return isGameEnd;
   }
 
-  gameOver() {
+  gameOver(state = false) {
     const resultMap = this.#bridgeGame.bringSketch();
-    OutputView.printResult(resultMap);
+    OutputView.printResult(resultMap, state);
     Console.close();
   }
 }
