@@ -29,8 +29,6 @@ class BridgeGame {
    */
   move(userInput) {
     const currentZone = this.movingLog.upper.length;
-    console.log(userInput);
-    console.log(userInput === BRIDGE.UPPER_ZONE);
     if (userInput === BRIDGE.UPPER_ZONE)
       return this.moveUpper(userInput, currentZone);
     if (userInput === BRIDGE.LOWER_ZONE)
@@ -41,7 +39,6 @@ class BridgeGame {
    * 유저가 위 칸으로 이동할 때의 메서드
    */
   moveUpper(userInput, currentZone) {
-    console.log(this.bridge);
     if (userInput === this.bridge[currentZone]) {
       this.movingLog.upper.push(BRIDGE.RIGHT_ZONE);
       this.movingLog.lower.push(" ");
@@ -56,7 +53,6 @@ class BridgeGame {
    * 유저가 아래 칸으로 이동할 때의 메서드
    */
   moveLower(userInput, currentZone) {
-    console.log(currentZone);
     if (userInput === this.bridge[currentZone]) {
       this.movingLog.lower.push(BRIDGE.RIGHT_ZONE);
       this.movingLog.upper.push(" ");
