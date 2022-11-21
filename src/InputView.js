@@ -58,7 +58,7 @@ const InputView = {
 
         if (this.now >= this.bridge.length - 1) {
           Console.close();
-          OutputView.printResult("성공");
+          OutputView.printResult("성공", this.retry);
           return;
         }
 
@@ -82,7 +82,7 @@ const InputView = {
         }
         if (answer == "Q") {
           Console.close();
-          OutputView.printResult("실패");
+          OutputView.printResult("실패", this.retry);
         }
       }
     );
