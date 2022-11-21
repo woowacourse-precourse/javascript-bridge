@@ -1,5 +1,3 @@
-// TODO: Bridge 클래스랑 합쳐보기
-// TODO: 정답 다리를 저장하는 프로퍼티를 answer로 만들어보기
 class BridgeGame {
   #answer;
   currentPosition;
