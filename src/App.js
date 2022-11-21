@@ -38,12 +38,30 @@ class App {
       this.bridgeGame.move(moveInput);
       const moveInputArray = this.bridgeGame.getMoveInputArray();
       // moveInputArray 이용해서 printMap 그리기
+      OutputView.printGuide(this.bridgeGame.getBridge());
       OutputView.printMap(moveInputArray);
-      // 그린 다음에, 게임 종료가 아니면 (O) 이면 다시 입력받고 moveBlock 다시 실행
+      // OutputView.printGuide(moveInputArray.length);
+      if (moveInputArray.slice(-1)[0].isRightDirect === true) {
+        // 마지막까지 성공하면 게임 종료
+        if (moveInputArray.length === this.bridgeGame.getBridgeLength()) {
+          // 게임 결과 출력 후 게임 종료
+          OutputView.printGuide('게임결과 출력');
+          Console.close();
+        } else {
+          this.requestMoving();
+        }
+      } else {
+        // false 는 X 나옴 -> 실패이면, 다시 시작할지 종료할지 물어봐야 함.
+        OutputView.printGuide('실패');
+      }
     } catch (err) {
       OutputView.printGuide(err.message);
       this.tryAgain(this.requestMoving);
     }
+  }
+
+  requestRetryOrExit() {
+    InputView.readGameCommand();
   }
 
   tryAgain(tryAgainFunc) {
