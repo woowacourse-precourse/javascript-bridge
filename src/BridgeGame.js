@@ -22,12 +22,21 @@ class BridgeGame {
 
   retry() {
       OutputView.printResult();
-      Console.print(this.#currentResult);
+      this.printResultBridge();
       Console.print('');
       OutputView.printFail();
       this.countRound();
       Console.close();
   }
+
+  win() {
+    OutputView.printResult()
+    this.printResultBridge();
+    Console.print('');
+    OutputView.printWin()
+    this.countRound();
+    Console.close();
+}
 
   printResultBridge() {
     Console.print(this.#currentResult);
