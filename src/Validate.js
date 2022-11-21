@@ -21,7 +21,15 @@ const Validate = {
     if (check === "U" || check === "D") {
       return check;
     }
-    throw new Error("입력에러");
+    throw new Error(ERR_MESSAGE.ERR_COMMAND_KEY);
+  },
+
+  checkRetryOrCloseKey(value) {
+    const check = value.toUpperCase();
+    if (check === "R" || check === "Q") {
+      return check;
+    }
+    throw new Error(ERR_MESSAGE.ERR_COMMAND_KEY);
   },
 };
 module.exports = Validate;
