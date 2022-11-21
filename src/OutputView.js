@@ -12,14 +12,14 @@ const OutputView = {
    */
      printMap(bridge, tempPosition, status) {
       const checkedBridge = [[], []];
-      for (let i = 0; i < tempPosition -1 ; i++) {
-        bridge[i] === "U"
-          ? ((checkedBridge[0][i] = " O "), (checkedBridge[1][i] = "   "))
-          : ((checkedBridge[0][i] = "   "), (checkedBridge[1][i] = " O "));
+      for (let i = 0; i <= tempPosition; i++) {
+        if(bridge[i] === "U"){((checkedBridge[0][i] = " O "), (checkedBridge[1][i] = "   "))};
+        if(bridge[i] === "D"){((checkedBridge[0][i] = "   "), (checkedBridge[1][i] = " O "))};
       }
-      status
-        ? ((checkedBridge[0][tempPosition -1 ] = " O "), (checkedBridge[1][tempPosition -1 ] = "   "))
-        : ((checkedBridge[0][tempPosition -1 ] = "   "), (checkedBridge[1][tempPosition -1 ] = " X "))
+      if(status === false){
+        if(bridge[tempPosition] === "U"){((checkedBridge[0][tempPosition] = "   "), (checkedBridge[1][tempPosition] = " X "))};
+        if(bridge[tempPosition] === "D"){((checkedBridge[0][tempPosition] = " X "), (checkedBridge[1][tempPosition] = "   "))};
+      }
       MissionUtils.Console.print(`[${checkedBridge[0].join('|')}]\n[${checkedBridge[1].join('|')}]`);
     },
   
