@@ -11,6 +11,7 @@ class BridgeGame {
   #bridgeSize;
   #trial;
   #fail;
+  #gameWin;
 
   constructor() {
     this.#userLocation = -1;
@@ -19,6 +20,7 @@ class BridgeGame {
     this.#trial = 0;
     this.#bridgeSize = 0;
     this.#fail = false;
+    this.#gameWin = false;
   }
 
   initCurrBridge() {
@@ -51,6 +53,10 @@ class BridgeGame {
     return this.#fail;
   }
 
+  getGameWinFlag() {
+    return this.#gameWin;
+  }
+
   getTrial() {
     return this.#trial;
   }
@@ -80,6 +86,9 @@ class BridgeGame {
       }
       this.#fail = true;
     }
+    if((this.#userLocation === (this.#bridgeSize - 1)) && (!this.#fail)) {
+      this.#gameWin = true;
+    }
   }
 
   increaseTrial() {
@@ -93,6 +102,7 @@ class BridgeGame {
    */
   retry() {
     this.increaseTrial();
+    this.#fail = false;
     this.#userLocation = -1;
     this.initCurrBridge();
   }

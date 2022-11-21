@@ -25,10 +25,16 @@ const InputView = {
       const currBridge = bridgeGame.getCurrBridge();
       OutputView.printMap(currBridge);
       const failFlag = bridgeGame.getFailFlag();
+      const gameWinFlag = bridgeGame.getGameWinFlag();
       if(failFlag) {
         this.readGameCommand(bridgeGame);
       }
-      if(!failFlag) {
+      if(!failFlag && gameWinFlag) {
+        const trial = bridgeGame.getTrial();
+        OutputView.printResult(currBridge, true, trial);
+        Console.close();
+      }
+      if(!failFlag && !gameWinFlag) {
         this.readMoving(bridgeGame);
       }
     });
