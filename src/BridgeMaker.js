@@ -16,13 +16,6 @@ const BridgeMaker = {
     return bridge;
   },
   handleBridgeSizeException(size) {
-    try {
-      this.throwException(size);
-    } catch (e) {
-      Exception.printError(e.message);
-    }
-  },
-  throwException(size) {
     switch (false) {
       case this.isInteger(size):
         Exception.throwError(EXCEPTION_MESSAGE.BRIDGE_SIZE.INTEGER);

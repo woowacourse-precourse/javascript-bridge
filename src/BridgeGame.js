@@ -31,14 +31,6 @@ class BridgeGame {
   }
 
   handleMovingException(moving) {
-    try {
-      this.throwException(moving);
-    } catch (e) {
-      Exception.printError(e.message);
-    }
-  }
-
-  throwException(moving) {
     switch (false) {
       case [GAME.UP, GAME.DOWN].includes(moving):
         Exception.throwError(EXCEPTION_MESSAGE.MOVING.CHARACTER);
@@ -69,14 +61,6 @@ class BridgeGame {
   }
 
   handleRetryException(command) {
-    try {
-      this.throwException(command);
-    } catch (e) {
-      Exception.printError(e.message);
-    }
-  }
-
-  throwException(command) {
     switch (false) {
       case [GAME.RESTART, GAME.QUIT].includes(command):
         Exception.throwError(EXCEPTION_MESSAGE.RETRY);
