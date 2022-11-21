@@ -27,6 +27,9 @@ class BridgeGame {
         this.#length,
         BridgeRandomNumberGenerator.generate,
       );
+      InputView.readMoving(input => {
+        ValidateCheck.moveMessageCheck(input);
+      });
     });
   }
 

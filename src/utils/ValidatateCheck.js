@@ -6,6 +6,11 @@ const ValidateCheck = {
       throw new Error(`[ERROR] ${MESSAGE.error.bridge.length}`);
     }
   },
+  moveMessageCheck(move) {
+    if (!(move === 'U' || move === 'D')) {
+      throw new Error(`[ERROR] ${MESSAGE.error.move}`);
+    }
+  },
 };
 
 module.exports = ValidateCheck;
