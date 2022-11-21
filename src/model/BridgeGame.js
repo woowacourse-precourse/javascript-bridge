@@ -39,14 +39,12 @@ class BridgeGame {
   }
 
   makeBridge() {
-    const setBridge = (size) => {
+    const bridgeSetter = (size) => {
       const bridge = BridgeMaker.makeBridge(size, Generator.generate);
       this.#bridge.setOriginalBridge(bridge);
     };
     const nextCallback = this.selectDirection.bind(this);
-    const errorCallback = this.makeBridge.bind(this);
-
-    InputView.readBridgeSize(setBridge, nextCallback, errorCallback);
+    this.#viewPrinter.insertBridgeSize(bridgeSetter, nextCallback);
   }
 
   selectDirection() {
