@@ -2,14 +2,14 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 const { Console } = require('@woowacourse/mission-utils');
-성const Result = require("./Result");
+const Result = require("./Result");
 const GameManager = require("./GameManager");
 
 class BridgeGame {
   constructor() {
-    this.size = null;
+    this.isSuccess = null;
     this.bridgeAnswerArr = null;
-    this.count = 0;
+    this.attempts = 1;
     this.gameManager = new GameManager();
     this.result = new Result();
   }
@@ -19,35 +19,11 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(answer) {
-      let inputMoving;
-      while(!inputMoving) {
-        try {
-          inputMoving = this.inputView.readMoving();
-        } catch (err) {
-          Console.print(err.message);
-        }
-      }
-      let result = this.compare(answer, inputMoving);
-      this.addResult(result, inputMoving);
+  move(answer, inputMoving) {
+    let result = this.result.compare(answer, inputMoving);
+    this.result.addResult(result, inputMoving);
 
-      return result;
-    }
-
-    addResult(result, inputMoving) {
-      if(inputMoving === 'U') {
-        this.outputView.upArr.push(result);
-        this.outputView.downArr.push(" ");
-      }
-      if(inputMoving === 'D') {
-        this.outputView.downArr.push(result);
-        this.outputView.upArr.push(" ");
-      }
-    }
-
-    compare(answer, input) {
-      if(answer === input) return "O";
-      return "X";
+    return result;
   }
 
   /**
@@ -56,31 +32,32 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    let inputGameCommand;
-    while(!inputGameCommand) {
-      try {
-        inputGameCommand = this.inputView.readMoving();
-      } catch (err) {
-        Console.print(err.message);
-      }
-
-      if(inputGameCommand === 'R') {
-        this.count = this.count + 1;
-        this.move();
-      }
-    }
+    this.attempts = this.attempts + 1;
+    this.result = new Result();
+    let gameCommand = this.gameManager.setGameCommand();
+    if (gameCommand === 'R') this.play();
+    if (gameCommand === 'Q') this.result.printFinalResult(this.isSuccess, this.attempts);
   }
-
 
   start() {
     Console.print("다리 건너기 게임을 시작합니다.");
+    this.play();
+  }
+
+  play() {
+
     for (let answer in this.bridgeAnswerArr) {
-      let result = this.move(answer);
-      this.outputView.printMap();
+      let inputMoving = this.gameManager.setMoving();
+      let result = this.move(answer, inputMoving);
+      this.result.printResult();
+
       if(result === "X") {
+        this.isSuccess = false;
         this.retry();
       }
     }
+    this.isSuccess = true;
+    this.retry()
   }
 }
 

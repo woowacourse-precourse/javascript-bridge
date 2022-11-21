@@ -20,10 +20,33 @@ class GameManager {
                 Console.print(err.message);
             }
         }
-
         const bridgeAnswer = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
 
         this.bridgeGame = new BridgeGame(size, bridgeAnswer);
+    }
+
+    setMoving() {
+        let moving;
+        while(!moving) {
+            try {
+                moving = this.inputView.readMoving();
+            } catch (err) {
+                Console.print(err.message);
+            }
+        }
+        return moving;
+    }
+
+    setGameCommand() {
+        let gameCommand;
+        while(!gameCommand) {
+            try {
+                gameCommand = this.inputView.readGameCommand();
+            } catch (err) {
+                Console.print(err.message);
+            }
+        }
+        return gameCommand;
     }
 }
 

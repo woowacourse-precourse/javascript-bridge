@@ -1,19 +1,34 @@
+const OutputView = require("./OutputView");
+
 class Result {
     constructor() {
+        this.outputView = OutputView;
         this.upArr = [];
         this.downArr = [];
     }
 
-    printLine(arr) {
-        let str = "[ ";
-        for (let i = 0; i < arr.length(); i++) {
-            if (i === arr.length() - 1) {
-                str += arr.get(i) + " ]";
-                break;
-            }
-            str += arr.get(i) + " | ";
+    compare(answer, input) {
+        if(answer === input) return "O";
+        return "X";
+    }
+
+    addResult(result, inputMoving) {
+        if(inputMoving === 'U') {
+            this.upArr.push(result);
+            this.downArr.push(" ");
         }
-        return str;
+        if(inputMoving === 'D') {
+            this.upArr.push(" ");
+            this.downArr.push(result);
+        }
+    }
+
+    printResult() {
+        this.outputView.printMap([this.upArr, this.downArr])
+    }
+
+    printFinalResult(isSuccess, attempts) {
+        this.outputView.printResult([this.upArr, this.downArr], isSuccess, attempts)
     }
 }
 
