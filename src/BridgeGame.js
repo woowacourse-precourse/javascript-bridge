@@ -1,6 +1,7 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
+const { DEFAULT } = require("./utils/constant.js");
 
 class BridgeGame {
   /**
@@ -11,11 +12,11 @@ class BridgeGame {
   #state;
   constructor() {
     this.#state = {
-      currentPosition: 0,
-      inputHistory: [],
-      bridge: [],
-      tryCount: 1,
-      length: 0,
+      currentPosition: DEFAULT.ZERO,
+      inputHistory: DEFAULT.EMPTY_ARRAY,
+      bridge: DEFAULT.EMPTY_ARRAY,
+      tryCount: DEFAULT.ONE,
+      length: DEFAULT.ZERO,
     };
   }
 
@@ -36,7 +37,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(input) {
-    if (input === "Q") {
+    if (input === DEFAULT.QUIT) {
       return false;
     }
     this.setRetryState();
@@ -58,13 +59,13 @@ class BridgeGame {
   getNextMove(input) {
     const { currentPosition, bridge, length } = this.#state;
     if (input !== bridge[currentPosition - 1]) {
-      return "Retry";
+      return DEFAULT.RETRY;
     }
     if (currentPosition === length) {
-      return "End";
+      return DEFAULT.END;
     }
 
-    return "Move"; // 반복
+    return DEFAULT.MOVE; // 반복
   }
 
   setState(nextState) {
@@ -76,9 +77,9 @@ class BridgeGame {
 
   setRetryState() {
     this.setState({
-      currentPosition: 0,
+      currentPosition: DEFAULT.ZERO,
       tryCount: this.#state.tryCount + 1,
-      inputHistory: [],
+      inputHistory: DEFAULT.EMPTY_ARRAY,
     });
   }
 }
