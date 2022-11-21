@@ -19,11 +19,11 @@ class BridgeGame {
 
   getBridge(bridge) {
     this.#bridges = bridge;
-    this.setBridgeRow();
+    this.openBridgeRow();
     this.getSpace();
   }
   
-  setBridgeRow() {
+  openBridgeRow() {
     this.#firstRow = ['['];
     this.#secondRow = ['['];
   }
@@ -31,11 +31,6 @@ class BridgeGame {
   getSpace() {
     this.gameManager.inputMovingSpace(this.move.bind(this));
   }
-
-  move(space) {
-
-  }
-
 
 }
 
