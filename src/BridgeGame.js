@@ -43,6 +43,7 @@ class BridgeGame {
 
         if (move !== this.bridgeForm[lastMovingIndex]) {
           this.retry();
+          this.print(this.userChoice);
         }
       } catch (err) {
         this.print(err);

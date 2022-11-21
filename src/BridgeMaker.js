@@ -11,7 +11,7 @@ const BridgeMaker = {
     const bridgePattern = [];
     while (bridgePattern.length < size) {
       const randomNumber = generateRandomNumber();
-      const bridgeAlphabet = ["U", "D"];
+      const bridgeAlphabet = ["D", "U"];
       bridgePattern.push(bridgeAlphabet[randomNumber]);
     }
     return bridgePattern;
