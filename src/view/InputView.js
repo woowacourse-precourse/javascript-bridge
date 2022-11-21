@@ -8,40 +8,32 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    const bridgeSize = new Promise((resolve) => {
-      MissionUtils.Console.readLine(READ_BRIDGE_SIZE, (answer) => {
-        isBridgeSizeValid(answer);
-        return resolve(answer);
-      });
+  readBridgeSize(gameManager) {
+    MissionUtils.Console.readLine(READ_BRIDGE_SIZE, (answer) => {
+      isBridgeSizeValid(answer);
+      gameManager.makeBridge(answer);
     });
-    return bridgeSize;
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    const moving = new Promise((resolve) => {
-      MissionUtils.Console.readLine(READ_MOVING, (answer) => {
-        isUserMovingInputValid(answer);
-        return resolve(answer);
-      });
+  readMoving(gameManager, level) {
+    MissionUtils.Console.readLine(READ_MOVING, (answer) => {
+      isUserMovingInputValid(answer);
+      gameManager.getBridgeGame().move(gameManager, level, answer);
     });
-    return moving;
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-    const gameCommand = new Promise((resolve) => {
-      MissionUtils.Console.readLine(READ_GAME_COMMAND, (answer) => {
-        isGameCommandValid(answer);
-        resolve(answer);
-      });
+  readGameCommand(gameManager, bridgeGame) {
+    MissionUtils.Console.readLine(READ_GAME_COMMAND, (answer) => {
+      isGameCommandValid(answer);
+      // resolve(answer);
+      bridgeGame.commandProcess(gameManager, answer);
     });
-    return gameCommand;
   },
 };
 

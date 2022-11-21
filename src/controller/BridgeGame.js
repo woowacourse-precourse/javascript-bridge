@@ -1,7 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const Bridge = require('../model/Bridge');
-const { readBridgeSize, readMoving, readGameCommand } = require('../view/InputView');
-const { printGameStart, printResult } = require('../view/OutputView');
+const { readMoving, readGameCommand } = require('../view/InputView');
+const { printResult } = require('../view/OutputView');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -11,29 +10,20 @@ class BridgeGame {
 
   #gameTry = 1;
 
-  async execute() {
-    printGameStart();
-    this.#bridge = new Bridge(await readBridgeSize());
-    const result = await this.move(0, await readMoving());
-    if (result) {
-      this.quitGame(true);
-    }
-  }
-
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  async move(level, command) {
-    const result = this.#bridge.checkBridge(level, command);
-    if (result && level === this.#bridge.getLength() - 1) {
-      return true;
+  move(gameManager, level, command) {
+    const result = gameManager.getBridge().checkBridge(level, command);
+    if (result && level === gameManager.getBridge().getLength() - 1) {
+      return this.win(gameManager);
     }
     if (result) {
-      return this.move(level + 1, await readMoving());
+      return readMoving(gameManager, level + 1);
     }
-    return this.retry();
+    return this.retry(gameManager);
   }
 
   /**
@@ -41,24 +31,27 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  async retry() {
+  retry(gameManager) {
     this.#gameTry += 1;
-    const command = await readGameCommand();
-    return this.commandProcess(command);
+    readGameCommand(gameManager, this);
   }
 
-  async commandProcess(command) {
+  win(gameManager) {
+    this.quitGame(true, gameManager.getBridge());
+  }
+
+  commandProcess(gameManager, command) {
     if (command === 'R') {
-      return this.move(0, await readMoving());
+      return readMoving(gameManager, 0);
     }
     if (command === 'Q') {
-      this.quitGame(false);
+      this.quitGame(false, gameManager.getBridge());
     }
     return null;
   }
 
-  quitGame(result) {
-    printResult(result, this.#gameTry, this.#bridge);
+  quitGame(result, bridge) {
+    printResult(result, this.#gameTry, bridge);
     MissionUtils.Console.close();
   }
 }
