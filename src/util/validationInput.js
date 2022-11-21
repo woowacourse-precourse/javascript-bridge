@@ -17,7 +17,7 @@ const checkBridgeSize = input => {
 const checkMoveInput = input => {
 	const reg = /^[UD]$/;
 	if (!reg.test(input)) {
-		throw ERROR.MOVE_INPUT;
+		throw ERROR.MOVING;
 	}
 };
 

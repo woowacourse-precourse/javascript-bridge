@@ -45,12 +45,9 @@ class App {
 
 	controlGame(input) {
 		this.tryCatch(() => {
-			if (input === 'R') {
-				this.#bridgeGame.retry(input);
-				readMoving.bind(this)(this.move);
-			} else {
-				this.gameEnd();
-			}
+			if (input === 'Q') this.gameEnd();
+			this.#bridgeGame.retry(input);
+			readMoving.bind(this)(this.move);
 		}, 'COMMAND');
 	}
 
