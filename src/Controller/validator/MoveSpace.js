@@ -11,10 +11,10 @@ class MoveSpace {
 
   checkInput() {
     try {
-      if (!this.isAllowOrder()) throw new Error();
+      if (!this.isAllowOrder()) throw new Error(`${ERROR.MOVE_ORDER}`);
       return ISALLOW.TRUE;
-    } catch (e) {
-      OutputView.printError(`\n${ERROR.MOVE_ORDER}`);
+    } catch (errorMessage) {
+      OutputView.printError(errorMessage);
       return ISALLOW.FALSE;
     }
   }

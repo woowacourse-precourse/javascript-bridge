@@ -2,9 +2,9 @@ const BridgeGame = require("../Models/BridgeGame");
 const BridgeSize = require("./validator/BridgeSize");
 const MoveSpace = require("./validator/MoveSpace");
 const GameCommand = require("./validator/GAMECOMMAND");
-const CheckModel = require("../Models/CheckModel");
-const OutputView = require("../View/OutputView");
 const InputView = require("../View/InputView");
+const OutputView = require("../View/OutputView");
+
 const { RESULT } = require("../utils/constants");
 
 class Controller {
