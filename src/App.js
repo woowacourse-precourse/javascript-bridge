@@ -36,6 +36,12 @@ class App {
     this.printFinalGameResult();
     this.exit();
   }
+
+  printMap() {
+    const classifiedBridgeLog = this.#bridgeGame.getCurrentClassifiedBridgeLog();
+
+    this.#output.printMap(classifiedBridgeLog);
+  }
 }
 
 module.exports = App;
