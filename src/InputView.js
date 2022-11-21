@@ -1,9 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
 
-const Bridge = require("./Bridge");
+const BridgeGame = require("./BridgeGame");
 
 const Exception = require("./Exception");
+const OutputView = require("./OutputView");
+
+let bridgeGame;
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -14,8 +17,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine('다리의 길이를 입력해주세요.\n', (length) => {
       if (Exception.lengthException(length)) {
-        const bridge = new Bridge(length);
-        bridge.makeBridge();
+        bridgeGame = new BridgeGame(length);
         this.readMoving();
       }
       else this.readBridgeSize();
@@ -28,6 +30,9 @@ const InputView = {
   readMoving() {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (moving) => {
       if (Exception.movingException(moving)) {
+        const result = bridgeGame.move(moving);
+        OutputView.printMap(bridgeGame.movingState);
+        this.readMoving();
       }
       else this.readMoving();
     })
