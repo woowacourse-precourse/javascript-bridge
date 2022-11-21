@@ -96,18 +96,22 @@ class BridgeGame {
    */
   retry(isRetry) {
     if (this.#bridgeGameController.validateRetry(isRetry)) {
-      if (isRetry === RETRY.RETRY) {
-        this.#totalCount++;
-        this.#bridgeGameController.inputDirection();
-      }
-      if (isRetry === RETRY.QUIT) {
-        this.#bridgeGameController.outputResult(
-          this.#resultMap,
-          SUCCESS_RESULT.FAIL,
-          this.#totalCount
-        );
-      }
+      if (isRetry === RETRY.RETRY) this.doRetry();
+      if (isRetry === RETRY.QUIT) this.doQuit();
     }
+  }
+
+  doRetry() {
+    this.#totalCount++;
+    this.#bridgeGameController.inputDirection();
+  }
+
+  doQuit() {
+    this.#bridgeGameController.outputResult(
+      this.#resultMap,
+      SUCCESS_RESULT.FAIL,
+      this.#totalCount
+    );
   }
 }
 
