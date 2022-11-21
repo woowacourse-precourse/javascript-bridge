@@ -51,6 +51,7 @@
 
 ### InputTest.js
 - readBridegeSize() - 음수,문자,범위에서 벗어나는 수 에러처리
+-> .match is not a function 이 에러 떄문에 실행 불가 해결 X ㅠ
 - readMoving() : U,D가 아닌 모든 것들 에러처리
 - readGameCommand() : R,Q가 아닌 값 에러처리
 
