@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 const { Console } = require('@woowacourse/mission-utils');
-const InputView = require('../InputView');
+const { InputView } = require('../view');
 const { BridgeSize, Moving, GameCommand } = require('../model');
 /**
  * 다리 건너기 게임을 관리하는 클래스
