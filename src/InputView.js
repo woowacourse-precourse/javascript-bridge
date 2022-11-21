@@ -11,8 +11,8 @@ const InputView = {
   readBridgeSize() {
     let bridgeLength = 0;
     Console.readLine(ConstValue.INPUT_BRIDGE_LENGTH_MESSAGE, value => {
-      this.handleBridgeLengthInput(value);
-      bridgeLength = value;
+      this.handleBridgeLengthInput(Number(value));
+      bridgeLength = Number(value);
     });
 
     return bridgeLength;
