@@ -20,6 +20,12 @@ class BridgeGame {
     this.#moveCount++;
   }
 
+  isGameEnd() {
+    if (this.#moveCount === this.#bridge.length) {
+      return true;
+    }
+  }
+
   haveBridge() {
     if (this.#playerInput === this.#bridge[this.#moveCount - 1]) {
       return true;
