@@ -31,8 +31,8 @@ class App {
 
   playerMove(){
     InputView.readMoving(this.#generatedBridge,this.#gameStatus)
-    console.log(this.#gameStatus)
-    //OutputView.printMap(this.#gameStatus)
+    
+    OutputView.printMap(this.#gameStatus)
   }
 
   
