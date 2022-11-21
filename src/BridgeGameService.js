@@ -1,16 +1,17 @@
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./utils/BridgeRandomNumberGenerator");
+const Bridge = require("./Bridge");
+const BridgeGame = require("./BridgeGame");
 
 class BridgeGameService {
   #bridge;
+  #bridgeGame;
 
-  //prettier-ignore
   generateBridge(size) {
-    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.#bridge = new Bridge(size);
+    this.#bridge.createBridge();
   }
 
   canMove(space) {
-    console.log(space);
+    this.#bridgeGame.move(space, this.#bridge);
   }
 }
 
