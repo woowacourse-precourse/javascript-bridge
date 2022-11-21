@@ -22,6 +22,10 @@ const ViewInterface = class {
     this.#inputView.readGameCommand(isRetry);
   }
 
+  endRead() {
+    this.#inputView.endRead();
+  }
+
   printStart() {
     this.#outputView.printStart();
   }
