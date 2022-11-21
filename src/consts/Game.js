@@ -3,9 +3,9 @@ const GAME = Object.freeze({
   BRIDGE_SIZE_END: 20,
   UP: 'U',
   DOWN: 'D',
-  POSSIBLE: {
-    [UP]: 1,
-    [DOWN]: 0,
+  NUMBER_TO_CHARACTER: {
+    0: 'D',
+    1: 'U',
   },
 });
 

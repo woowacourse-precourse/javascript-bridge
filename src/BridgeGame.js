@@ -14,7 +14,7 @@ class BridgeGame {
   move(moving) {
     this.handleMovingException(moving);
 
-    if (this.bridge[turn] === GAME.POSSIBLE[moving]) {
+    if (this.bridge[this.turn] === moving) {
       this.increaseTurn();
       return true;
     }
@@ -24,13 +24,21 @@ class BridgeGame {
 
   handleMovingException(moving) {
     switch (false) {
-      case moving in [GAME.UP, GAME.DOWN]:
+      case [GAME.UP, GAME.DOWN].includes(moving):
         Exception.throwError(EXCEPTION_MESSAGE.MOVING.CHARACTER);
     }
   }
 
   increaseTurn() {
     this.turn += 1;
+  }
+
+  isSuccess() {
+    if (this.bridge.length === turn) {
+      return true;
+    }
+
+    return false;
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

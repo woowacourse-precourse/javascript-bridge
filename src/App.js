@@ -13,9 +13,18 @@ class App {
       BridgeRandomNumberGenerator.generate
     );
 
-    const bridgeGame = BridgeGame(bridge);
-    const moving = InputView.readMoving();
-    bridgeGame.move(moving);
+    const bridgeGame = new BridgeGame(bridge);
+
+    for (let i = 0; i < bridgeSize; i++) {
+      const moving = InputView.readMoving();
+      const turnSuccess = bridgeGame.move(moving);
+
+      OutputView.printMap(bridge, i, turnSuccess);
+
+      if (!turnSuccess) {
+        break;
+      }
+    }
   }
 }
 

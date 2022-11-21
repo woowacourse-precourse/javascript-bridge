@@ -8,7 +8,9 @@ const BridgeMaker = {
 
     let bridge = [];
     for (let i = 0; i < size; i++) {
-      bridge.push(generateRandomNumber());
+      const number = generateRandomNumber();
+      const character = this.changeNumberToCharacter(number);
+      bridge.push(character);
     }
 
     return bridge;
@@ -30,6 +32,9 @@ const BridgeMaker = {
     }
 
     return false;
+  },
+  changeNumberToCharacter(number) {
+    return GAME.NUMBER_TO_CHARACTER[number];
   },
 };
 
