@@ -12,7 +12,14 @@ const InputView = {
     Console.readLine(
       gameConst.process.INPUT_LENGTH_MESSAGE + "\n",
       (length) => {
-        moveStart(length);
+        try {
+          this.validateBridgeLength(length);
+        } catch (err) {
+          Console.print(err);
+          this.readBridgeSize(moveStart);
+          return;
+        }
+        moveStart(Number(length));
       }
     );
   },
@@ -22,6 +29,14 @@ const InputView = {
    */
   readMoving(move) {
     Console.readLine(gameConst.process.INPUT_CHOOSE_MESSAGE + "\n", (cmd) => {
+      try {
+        this.validateMoveCommand(cmd);
+      } catch (err) {
+        Console.print(err);
+        this.readMoving(move);
+        return;
+      }
+
       move(cmd);
     });
   },
@@ -31,8 +46,37 @@ const InputView = {
    */
   readGameCommand(makeDecision) {
     Console.readLine(gameConst.process.INPUT_RESART_MESSAGE + "\n", (cmd) => {
+      try {
+        this.validateRetryCommand(cmd);
+      } catch (err) {
+        Console.print(err);
+        this.readGameCommand(makeDecision);
+        return;
+      }
+
       makeDecision(cmd);
     });
+  },
+
+  validateBridgeLength(length) {
+    if (isNaN(length)) {
+      throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+    }
+    if (Number(length) < 3 || Number(length) > 20) {
+      throw new Error("[ERROR] 다리 길이는 3부터 20 사이여야 합니다.");
+    }
+  },
+
+  validateMoveCommand(cmd) {
+    if (cmd !== "U" && cmd !== "D") {
+      throw new Error("[ERROR] 'U' 또는 'D'를 입력해주세요.");
+    }
+  },
+
+  validateRetryCommand(cmd) {
+    if (cmd !== "R" && cmd !== "Q") {
+      throw new Error("[ERROR] 'R' 또는 'Q'를 입력해주세요.");
+    }
   },
 };
 
