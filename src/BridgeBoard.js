@@ -22,6 +22,9 @@ class BridgeBoard {
   movePlayer(){
     this.#movedBoard.push(this.#bridgeBoard.shift())
   }
+  getClearedBridge(){
+    return this.#movedBoard;
+  }
 }
 
 module.exports = BridgeBoard;
