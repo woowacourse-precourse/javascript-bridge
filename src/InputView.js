@@ -73,11 +73,12 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge) {
+  readGameCommand(moves, moveResult, bridge) {
     Console.readLine(MESSAGE.INPUT_RESTART_MESSAGE, (input) => {
       try {
         validation.validateRestart(input);
-        this.restartInputCheck(input);
+        const checkingInput = this.restartInputCheck(bridge, input);
+        checkingInput ? this.readMoving(bridge) : OutputView.printResult(moves, moveResult, tryCount);
       } catch (error) {
         Console.print(error);
         this.readGameCommand(bridge);
@@ -85,15 +86,15 @@ const InputView = {
     });
   },
 
-  restartInputCheck(input) {
+  restartInputCheck(bridge, input) {
     if (input === "R") {
       callMove = 0;
       tryCount++;
       brigeGame.retry();
-      this.readMoving(bridge);
+      return true;
     }
     if (input === "Q") {
-      OutputView.printResult(moves, moveResult, tryCount);
+      return false
     }
   },
 };
