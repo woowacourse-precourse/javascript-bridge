@@ -1,10 +1,8 @@
-const { Console } = require('@woowacourse/mission-utils');
-
-const { isCollectRange, isValidateNumber } = require('./validation');
+const { isCollectRange, isValidateNumber } = require('./common.js');
 
 const isCollectBridgeLength = (input) => {
   isValidateNumber(input);
-  isCollectRange(input);
+  isCollectRange(input, 3, 20);
 };
 
 const isValidateMoveInput = (number) => {

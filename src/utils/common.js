@@ -1,5 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
-
 const isValidateNumber = (number) => {
   const numberRegex = /^[0-9]+$/g;
   if (!number.match(numberRegex)) {
@@ -7,9 +5,9 @@ const isValidateNumber = (number) => {
   }
 };
 
-const isCollectRange = (number) => {
-  if (number < 3 || number > 20) {
-    throw new Error('[ERROR] 3부터 20사이의 숫자만 입력할 수 있습니다.');
+const isCollectRange = (number, min, max) => {
+  if (number < min || number > max) {
+    throw new Error(`[ERROR] ${min}부터 ${max}사이의 숫자만 입력할 수 있습니다.`);
   }
 };
 
