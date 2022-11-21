@@ -20,12 +20,16 @@ class BridgeGame {
     this.#step += 1;
     const isMatch = this.#bridge.matchMoveBridge(moving, this.#step);
     this.#bridgeMap.buildMap(isMatch);
+    return isMatch;
   }
   
   getMap(isUp, moving) {
     return isUp ? this.#bridgeMap.upMap(moving) : this.#bridgeMap.downMap(moving);
   }
 
+  isEnd(isMatch) {
+    return isMatch;
+  }
   retry() {}
   
   

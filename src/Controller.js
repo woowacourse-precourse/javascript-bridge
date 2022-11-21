@@ -16,8 +16,9 @@ class Controller {
   }
   play() {
     readMoving((moving) => {
-      this.#bridgeGame.move(moving);
+      const isMatch = this.#bridgeGame.move(moving);
       this.showResult(moving);
+      this.handleBridgeGame(isMatch);
     })
   }
   showResult(moving) {
@@ -25,6 +26,9 @@ class Controller {
     const downMap = this.#bridgeGame.getMap(false, moving);
     printMap(upMap);
     printMap(downMap);
+  }
+  handleBridgeGame(isMatch){
+    isMatch? this.play() : '';
   }
 }
 
