@@ -26,9 +26,15 @@ class Bridge {
 		return this.#bridge[index] === direction;
 	}
 
-	printBridge(index, isMovable) {
+	printBridge(lastIndex, isMovable) {
+		let bridge = [...this.#bridge].slice(0, lastIndex);
+		if (!isMovable) {
+			bridge.push(
+				this.#bridge[lastIndex] === BRIDGE.UP ? BRIDGE.DOWN : BRIDGE.UP,
+			);
+		} else bridge.push(this.#bridge[lastIndex]);
 		[BRIDGE.UP, BRIDGE.DOWN].forEach(direction => {
-			printMap([...this.#bridge].slice(0, index + 1), direction, isMovable);
+			printMap(bridge, direction, isMovable);
 		});
 	}
 }
