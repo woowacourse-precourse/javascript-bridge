@@ -16,9 +16,13 @@ class BridgeGame {
     printMap(this.#bridge, this.#user);
   }
 
-  isFail(move) {
+  isEnd() {
+    return this.#user.length === this.#bridge.length;
+  }
+
+  isFail() {
     const current = this.#user.length - 1;
-    if (this.#bridge[current] !== move) return true;
+    if (this.#bridge[current] !== this.#user[current]) return true;
     return false;
   }
 
