@@ -1,17 +1,12 @@
-const { printMessage } = require("../View/OutputView");
-const { MESSAGE } = require("../constants/Message");
-const Control = require("./Control");
+const { printGameStart } = require('./View/OutputView');
 
 class App {
   constructor() {
-    printMessage(MESSAGE.START);
-    this.control = new Control();
+    printGameStart();
   }
-  play() {
-    this.control.gameStart();
-  }
+
+  play() {}
 }
 
-const app = new App().play();
-
+new App().play();
 module.exports = App;
