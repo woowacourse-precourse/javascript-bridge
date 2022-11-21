@@ -14,7 +14,19 @@ class App {
   createBridge(size) {
     Validator.checkSizeInput(size);
     this.#game = new BridgeGame(size);
+    this.askMoving();
   }
+  askMoving() {
+    InputView.readMoving.bind(this)(this.handleMoving);
+  }
+  handleMoving(direction) {
+    Validator.checkDirectionInput(direction);
+    this.#game.move(direction);
+    if (this.#game.isCleared) this.showGameResult();
+    else if (this.#game.isSuccess) this.askMoving();
+    else throw new Error("게임 실패");
+  }
+  showGameResult() {}
 }
 
 const app = new App();
