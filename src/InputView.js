@@ -26,6 +26,7 @@ const InputView = {
   readMoving() {
     Console.readLine(COMMAND.MOVE, (space) => {
       Console.print(space);
+      exception.checkSpace(space);
     });
   },
 
