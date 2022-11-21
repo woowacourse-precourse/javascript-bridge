@@ -18,7 +18,7 @@ class BridgeGame {
       return this.moveisTrue();
     }
     if (inputLetter !== this.answerArr[this.#count]) {
-      this.moveisFalse();
+      return this.moveisFalse();
     }
   }
 
