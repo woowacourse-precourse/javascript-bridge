@@ -70,8 +70,9 @@ class BridgeGame {
       this.movings = [];
       return true
     }
-    if (RorQ === 'Q')
+    if (RorQ === 'Q') {
       return false
+    }
   }
 
   isVaildSize(number) {
