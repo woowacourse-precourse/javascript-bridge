@@ -6,7 +6,7 @@ class App {
     this.#bridge = new Bridge();
   }
   play () {
-    this.#bridge.askBridgeSizes();
+    this.#bridge.start();
   }
 }
 

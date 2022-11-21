@@ -1,116 +1,117 @@
-const { generate } = require('./BridgeRandomNumberGenerator');
-
 const { GAME_CONSTANTS } = require('./utils/constants');
 
-const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
-const BridgeMap = require('./BridgeMap');
+const BridgeGame = require('./BridgeGame');
 const Validator = require('./Validator');
 
 class Bridge {
-  #tryCount;
-  #bridgeMap;
+  #bridgeGame;
 
   constructor () {
     OutputView.printStart();
-    this.#bridgeMap = new BridgeMap();
-    this.#tryCount = 1;
+    this.#bridgeGame = new BridgeGame();
   }
 
-  askBridgeSizes () {
-    InputView.readBridgeSize(this.handleMakePattern.bind(this));
+  start () {
+    this.#askBridgeSize();
   }
 
-  handleMakePattern (size) {
+  #askBridgeSize () {
+    InputView.readBridgeSize(this.#handleMakePattern.bind(this));
+  }
+
+  #handleMakePattern (size) {
     try {
-      this.createPattern(size);
+      this.#validatorBridgeSize(size);
     } catch (error) {
       OutputView.printError(error);
-      this.askBridgeSizes();
+      this.#askBridgeSize();
     }
   }
 
-  createPattern (size) {
+  #validatorBridgeSize (size) {
     if (Validator.validatorBridgeLength(size)) {
-      this.#bridgeMap
-        .setPattern(BridgeMaker.makeBridge(Number(size), generate));
-      this.askNextStep();
+      this.#createPattern(size);
     }
   }
 
-  askNextStep () {
-    InputView.readMoving(this.handleMovingStep.bind(this));
+  #createPattern (size) {
+    this.#bridgeGame.makePattern(size);
+    this.#askNextStep();
   }
 
-  handleMovingStep (chooseStep) {
+  #askNextStep () {
+    InputView.readMoving(this.#handleMovingStep.bind(this));
+  }
+
+  #handleMovingStep (chooseStep) {
     try {
-      this.getNextStep(chooseStep);
+      this.#validatorNextStep(chooseStep);
     } catch (error) {
       OutputView.printError(error);
-      this.askNextStep();
+      this.#askNextStep();
     }
   }
 
-  getNextStep (chooseStep) {
+  #validatorNextStep (chooseStep) {
     if (Validator.checkStep(chooseStep)) {
       this.#moveMap(chooseStep);
     }
   }
 
-  askRetry () {
-    InputView.readGameCommand(this.handleRetryGame.bind(this));
+  #moveMap (chooseStep) {
+    this.#showMap(chooseStep);
+    if (!this.#bridgeGame.checkPath(chooseStep)) {
+      return this.#askRetry();
+    }
+    this.#bridgeGame.incrementDistance();
+    if (this.#bridgeGame.isEndGame()) {
+      return this.#showResult(GAME_CONSTANTS.resultSuccess);
+    }
+    this.#askNextStep();
   }
 
-  handleRetryGame (chooseRetry) {
+  #showMap (chooseStep) {
+    OutputView.printMap(this.#bridgeGame
+      .setHistoryWithChooseStep(chooseStep)
+      .getHistory());
+  }
+
+  #askRetry () {
+    InputView.readGameCommand(this.#handleRetryGame.bind(this));
+  }
+
+  #handleRetryGame (chooseRetry) {
     try {
-      this.getRetry(chooseRetry);
+      this.#validatorRetry(chooseRetry);
     } catch (error) {
       OutputView.printError(error);
-      this.askRetry();
+      this.#askRetry();
     }
   }
 
-  getRetry (chooseRetry) {
+  #validatorRetry (chooseRetry) {
     if (Validator.checkRetry(chooseRetry)) {
       this.#runRetry(chooseRetry);
     }
-  }
-
-  #moveMap (chooseStep) {
-    this.#showMap(chooseStep);
-    if (!this.#bridgeMap.checkPath(chooseStep)) {
-      return this.askRetry();
-    }
-    this.#bridgeMap.incrementDistance();
-    if (this.#bridgeMap.isEndGame()) {
-      return this.#showResult(GAME_CONSTANTS.resultSuccess);
-    }
-    this.askNextStep();
   }
 
   #runRetry (chooseRetry) {
     if (chooseRetry === GAME_CONSTANTS.quitGame) {
       return this.#showResult(GAME_CONSTANTS.resultFailure);
     }
-    this.#bridgeMap.initHistory();
-    this.#tryCount += 1;
-    this.askNextStep();
+    this.#bridgeGame.retry();
+    this.#askNextStep();
   }
 
   #showResult (isSuccess) {
     OutputView.printResult(
       isSuccess,
-      this.#bridgeMap.getHistory(),
-      this.#tryCount,
+      this.#bridgeGame.getHistory(),
+      this.#bridgeGame.getTryCount(),
     );
-  }
-
-  #showMap (chooseStep) {
-    OutputView.printMap(this.#bridgeMap
-      .setHistoryWithChooseStep(chooseStep)
-      .getHistory());
   }
 }
 
