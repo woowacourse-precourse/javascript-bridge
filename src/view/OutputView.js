@@ -50,6 +50,13 @@ const OutputView = {
     MissionUtils.Console.print(bridgeView);
   },
 
+  FINALMAP_MESSAGE: '최종 게임 결과',
+
+  printFinalMap(moveStatus, movesPossible) {
+    MissionUtils.Console.print(this.FINALMAP_MESSAGE);
+    this.printMap(moveStatus, movesPossible);
+  },
+
   RESULT_VIEW: (gameResult, tryCount) =>
     `게임 성공 여부: ${
       gameResult ? '성공' : '실패'

@@ -53,6 +53,10 @@ class BridgeCtrl {
 
   closeGame() {
     const result = this.#game.isGameWin();
+    OutputView.printFinalMap(
+      this.#game.getMoves(),
+      this.#game.isMovesPossible()
+    );
     OutputView.printResult(result, this.#game.getTryCount());
   }
 }
