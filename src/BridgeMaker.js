@@ -14,7 +14,8 @@ const BridgeMaker = {
       randomLocations.push(generateRandomNumber());
     }
     randomLocations.forEach((randomNum) => {
-      randomNum === "1" ? bridge.push("U") : bridge.push("D");
+      randomNum === 1 ? bridge.push("U") : bridge.push("D");
+      // console.log(typeof randomNum, randomNum);
     });
     return bridge;
   },
