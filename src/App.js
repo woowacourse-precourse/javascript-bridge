@@ -13,6 +13,11 @@ class App {
     QUESTION_RETRY: 5,
   };
 
+  #APP_VALIDATE_CONDITION = {
+    MOVE: 'move',
+    OPTION: 'option',
+  };
+
   #appStatus = this.#APP_STATUS.QUESTION_BRIDGE;
 
   #bridge;
@@ -61,7 +66,7 @@ class App {
   questionBridgeMove() {
     InputView.readMoving((moveAnswer) => {
       try {
-        Validator.confirmByCondition(moveAnswer, 'move');
+        Validator.confirmByCondition(moveAnswer, this.#APP_VALIDATE_CONDITION.MOVE);
         this.runBridgeMove(moveAnswer);
         this.#appStatus = this.#APP_STATUS.QUESTION_RETRY;
       } catch (e) {
@@ -100,7 +105,7 @@ class App {
   questionGameRetry() {
     InputView.readGameCommand((retryAnswer) => {
       try {
-        Validator.confirmByCondition(retryAnswer, 'option');
+        Validator.confirmByCondition(retryAnswer, this.#APP_VALIDATE_CONDITION.OPTION);
         this.runGameRetry(this.#brdigeGame.retry(retryAnswer));
       } catch (e) {
         Utils.print(e);
