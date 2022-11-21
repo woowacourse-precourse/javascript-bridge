@@ -46,23 +46,23 @@ class App {
       brigeIndex += 1;
     }
     OutputView.printResult('성공', this.#curBridge, this.#tryNum);
-    this.end();
+    this.#end();
   }
 
   async #doRetry() {
     const retryInput = await InputView.readGameCommand();
     if (retryInput === 'R') {
       this.#tryNum += 1;
-      this.#curBridge = this.#bridgeGame.retry();
+      this.#bridgeGame.retry();
       this.#doGame();
     }
     if (retryInput === 'Q') {
       OutputView.printResult('실패', this.#curBridge, this.#tryNum);
-      this.end();
+      this.#end();
     }
   }
 
-  end() {
+  #end() {
     Console.close();
   }
 }
