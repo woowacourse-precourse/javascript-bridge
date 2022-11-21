@@ -1,108 +1,85 @@
-const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const OUTPUT_MESSAGE = require("./constans/OutputMessage");
-const { printResult } = require("./OutputView");
+const BridgeGame = require("./BridgeGame");
 class App {
   constructor() {
     this.bridge = [];
-    this.upperTrack = [];
-    this.lowerTrack = [];
     this.gameMap = [];
   }
-  makeLine(track) {
-    let line = "[";
-    for (let i = 0; i < track.length; i++) {
-      line += track[i];
-      if (i == track.length - 1) {
-        line += "]";
-        break;
-      }
-      line += "|";
-    }
-    return line;
-  }
 
-  marking(movePoint) {
-    if (movePoint === "U") {
-      this.upperTrack.push(" O ");
-      this.lowerTrack.push("   ");
-      return;
-    }
-    this.upperTrack.push("   ");
-    this.lowerTrack.push(" X ");
-  }
-  bridgeDrawing(movePoint) {
-    this.marking(movePoint);
-    const upper = this.makeLine(this.upperTrack);
-    const lower = this.makeLine(this.lowerTrack);
-    return [upper, lower];
-  }
   gameResultPrint(count, winOrLose) {
     const result = winOrLose
       ? OUTPUT_MESSAGE.SUCCESS_RESULT
       : OUTPUT_MESSAGE.FAILURE_RESULT;
     OutputView.printResult(result, count, this.gameMap);
   }
-  moveing(movePoint, obstacle) {
-    return obstacle === movePoint ? true : false;
-  }
-  BridgeMove() {
-    const movePoint = InputView.readMoving();
-    this.bridge.forEach((obstacle) => {
-      if (!this.moveing(movePoint, obstacle)) {
-        this.gameMap = this.bridgeDrawing(movePoint);
+  matchOneStep(obstacle, bridgeGame) {
+    try {
+      const movePoint = InputView.readMoving();
+      if (!bridgeGame.move(movePoint, obstacle)) {
+        this.gameMap = bridgeGame.bridgeDrawing(movePoint, false);
         OutputView.printMap(this.gameMap);
         return false;
       }
-    });
-    this.gameMap = this.bridgeDrawing(movePoint);
-    OutputView.printMap(this.gameMap);
-    return true;
+      this.gameMap = bridgeGame.bridgeDrawing(movePoint, true);
+      OutputView.printMap(this.gameMap);
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
   }
-  reStartCheck(command) {
-    if (command == "R") return true;
-    return false;
+  BridgeMove(bridge) {
+    const bridgeGame = new BridgeGame();
+    for (let i = 0; i < bridge.length; i++) {
+      if (!this.matchOneStep(bridge[i], bridgeGame)) {
+        return false;
+      }
+      return true;
+    }
   }
   reStart(result) {
     let retry;
-    if (result) return false;
+    if (result) {
+      return false;
+    }
     const command = InputView.readGameCommand();
+    const bridgeGame = new BridgeGame();
     try {
-      retry = this.reStartCheck(command);
+      retry = bridgeGame.retry(command);
     } catch (error) {
       console.log(error);
     }
     return retry;
   }
-  gamePlaying() {
-    let result = false;
-    let count = 0;
-    while (1) {
-      result = this.BridgeMove();
-      count++;
-      if (!this.reStart(result)) break;
-    }
-    this.gameResultPrint(count, result);
-  }
   BridgeMaker() {
+    let bridge;
     try {
       const birdgeSize = InputView.readBridgeSize();
-      this.bridge = BridgeMaker.makeBridge(
+      bridge = BridgeMaker.makeBridge(
         birdgeSize,
         BridgeRandomNumberGenerator.generate
       );
     } catch (error) {
       console.log(error);
     }
-    this.gamePlaying();
+    return bridge;
   }
   play() {
     OutputView.gameStart();
-    this.BridgeMaker();
+    const bridge = this.BridgeMaker();
+    let result = false;
+    let count = 0;
+    while (1) {
+      result = this.BridgeMove(bridge);
+      count++;
+      if (!this.reStart(result)) break;
+    }
+    this.gameResultPrint(count, result);
   }
 }
-
 module.exports = App;
+
+// 실패시 브릿지 스택 초기화 안되는 상태임

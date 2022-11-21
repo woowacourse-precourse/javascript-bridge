@@ -14,8 +14,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(map) {
-    MissionUtils.Console.print(map[0]);
     MissionUtils.Console.print(map[1]);
+    MissionUtils.Console.print(map[0]);
   },
 
   /**
@@ -25,8 +25,8 @@ const OutputView = {
    */
   printResult(result, count, map) {
     MissionUtils.Console.print(OUTPUT_MESSAGE.GAME_RESULT);
-    MissionUtils.Console.print(map[0]);
     MissionUtils.Console.print(map[1]);
+    MissionUtils.Console.print(map[0]);
     MissionUtils.Console.print(OUTPUT_MESSAGE.SUCCESS_OR_FAILURE + result);
     MissionUtils.Console.print(OUTPUT_MESSAGE.TOTAL_ATTEMPT + count);
   },

@@ -17,6 +17,7 @@ const InputView = {
     });
     return input;
   },
+
   validBridgeSize(bridgeSize) {
     if (isNaN(bridgeSize)) {
       throw new Error(ERROR_MESSAGE.ONLY_NUMBER);
@@ -34,7 +35,6 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT_MESSAGE.MOVE_POINT, (answer) => {
       input = answer;
       this.validMovePoint(input);
-      MissionUtils.Console.print(input);
     });
     return input;
   },
@@ -51,7 +51,7 @@ const InputView = {
     MissionUtils.Console.readLine(INPUT_MESSAGE.RESTART_QUIT, (answer) => {
       input = answer;
     });
-    validreadGameCommand(input);
+    // this.validreadGameCommand(input);
     return input;
   },
   validreadGameCommand(command) {
