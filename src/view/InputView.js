@@ -3,7 +3,6 @@ const { Console } = MissionUtils;
 const BridgeMaker = require("../BridgeMaker");
 const Errors = require("../Error");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
-let GameStore = require("../GameStore");
 const OutputView = require("./OutputView");
 
 /**
@@ -16,24 +15,26 @@ const InputView = {
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (size) => {
       Errors.bridgeSizeError(size);
-      GameStore = BridgeMaker.makeBridge(
+      const game = BridgeMaker.makeBridge(
         size,
         BridgeRandomNumberGenerator.generate
       );
-      this.readMoving();
+      Console.print(game.getBridge());
+      this.readMoving(game);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(game) {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
         Errors.movingError(input);
-        if (GameStore.move(input)) {
+        if (game.move(input)) {
           OutputView.printMap(input);
+          this.readMoving(game);
         } else {
           OutputView.printResult();
           this.readGameCommand();
