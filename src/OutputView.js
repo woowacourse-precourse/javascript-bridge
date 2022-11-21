@@ -19,7 +19,6 @@ const OutputView = {
     const downBridge = currBridge[DOWN].join(" | ");
     Console.print("[ " + upBridge + " ]");
     Console.print("[ " + downBridge + " ]");
-    Console.print("\n");
   },
 
   /**
@@ -37,7 +36,7 @@ const OutputView = {
     if(!gameResult) {
       GAME_RESULT = "실패";
     }
-    Console.print(`게임 성공 여부: ${GAME_RESULT}`);
+    Console.print(`\n게임 성공 여부: ${GAME_RESULT}`);
     Console.print(`총 시도한 횟수: ${trial}`);
   },
 };
