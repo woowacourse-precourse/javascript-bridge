@@ -11,6 +11,7 @@ const ERROR_MSG = {
   INPUT_BRIDGE: `다리 길이는 ${BRIDGE.MIN}이상 ${BRIDGE.MAX}이하만 가능합니다.`,
   INPUT_MOVING: `${Command.UP}랑 ${Command.DOWN}만 입력할수있습니다. `,
   INPUT_GAME_COMMAND: `${Command.RETRY}랑 ${Command.QUIT}만 입력할수있습니다. `,
+  MAKE_BRIDGE: "다리 생성 중 문제가 발생했습니다.",
 };
 
 const GAME_MSG = {
