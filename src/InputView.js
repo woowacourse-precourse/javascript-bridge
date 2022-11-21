@@ -13,7 +13,7 @@ const InputView = {
   readBridgeSize(bridgeGame) {
     Console.readLine(`${INPUT.LENGTH}\n`, (length) => {
       const isBridgeLengthCorrect = Validation.checkBridgeLength(length);
-      if (isBridgeLengthCorrect) return this.readBridgeSize();
+      if (isBridgeLengthCorrect) return this.readBridgeSize(bridgeGame);
 
       bridgeGame.make(length);
       this.readMoving(bridgeGame);
@@ -26,16 +26,23 @@ const InputView = {
   readMoving(bridgeGame) {
     Console.readLine(`\n${INPUT.MOVING}\n`, (moving) => {
       const isMovingValueCorrect = Validation.checkMovingValue(moving);
-      if (isMovingValueCorrect) return this.readMoving();
+      if (isMovingValueCorrect) return this.readMoving(bridgeGame);
       const movingDirection = bridgeGame.move(moving);
       OutputView.printMap(movingDirection);
-      if (movingDirection[2]) this.readMoving(bridgeGame);
+
+      if (!movingDirection[2]) this.readGameCommand();
+      this.readMoving(bridgeGame);
     });
   },
+
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(`\n${INPUT.SELECT}\n`, (select) => {
+      console.log(select);
+    });
+  },
 };
 
 module.exports = InputView;
