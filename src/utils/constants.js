@@ -19,7 +19,7 @@ const ERROR_MESSAGE = {
 };
 
 const BRIDGE = {
-  ZERO: "0",
+  ZERO: 0,
   UP: "U",
   DOWN: "D",
   RETRY: "R",
