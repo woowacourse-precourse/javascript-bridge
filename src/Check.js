@@ -31,7 +31,7 @@ const Check = {
   },
 
   endGame(gamePlay) {
-    BridgePrint.printResultByGamePlay(gamePlay);
+    BridgePrint.printResult(gamePlay);
   },
 
   retryGame(gamePlay) {
@@ -43,7 +43,6 @@ const Check = {
   checkIsFinshed(Player, Bridge) {
     if (Player.getIsGameOver() === false) {
       Player.setIsWinnging(true);
-      BridgePrint.printResult(Player, Bridge);
     }
     Player.setIsGameOver(true);
     return Player.getIsGameOver();

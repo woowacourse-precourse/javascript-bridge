@@ -3,8 +3,9 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const Check = require('./Check');
-const { INPUT_MESSAGES } = require('./common/messages');
+const BridgePrint = require('./BridgePrint');
 
+const { INPUT_MESSAGES } = require('./common/messages');
 const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine(`${INPUT_MESSAGES.INPUT_BRIDGESIZE}`, (size) => {
@@ -28,6 +29,7 @@ const InputView = {
 
   checkGameOver(gamePlay) {
     if (gamePlay.getIsWinnging()) {
+      BridgePrint.printResult(gamePlay);
       MissionUtils.Console.close();
       return 0;
     }
