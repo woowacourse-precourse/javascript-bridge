@@ -915,4 +915,10 @@ describe('다리 로그 분류 메서드 테스트', () => {
 
     expect(BridgeGame.logClassification(BRIDGE_LOG)[0]).toEqual(RECEIVED);
   });
+
+  test('두 번째 반환값은 [[" "], ["O"], ["O"]]을 반환한다.', () => {
+    const RECEIVED = [[' '], ['O'], ['O']];
+
+    expect(BridgeGame.logClassification(BRIDGE_LOG)[1]).toEqual(RECEIVED);
+  });
 });
