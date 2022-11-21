@@ -85,15 +85,30 @@ const InputView = {
 
   readGameCommand() {
     MissionUtils.Console.readLine(
-      "게임을 다시 시도할지 여부를 입력해주세요.\n",
-      (number) => {
-        this.checkRetryInput(number);
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (input) => {
+        try {
+          this.checkRetryInput(input);
+        } catch (e) {
+          MissionUtils.Console.print(e);
+          this.readGameCommand();
+        }
       }
     );
   },
 
-  checkRetryInput(number) {
-    console.log(number);
+  checkRetryInput(input) {
+    if (input !== "R" && input !== "Q") {
+      throw "[ERROR] R 혹은 Q을 입력해라!!";
+    }
+  },
+
+  chooseRetry(input) {
+    if (input === "R") {
+      mainBridge.retry();
+    }
+    if (input === "Q") {
+    }
   },
 };
 

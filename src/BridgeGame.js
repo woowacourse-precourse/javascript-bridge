@@ -36,6 +36,10 @@ class BridgeGame {
     this.location += 1;
   }
 
+  getRetry() {
+    this.retry;
+  }
+
   move(playerInput, index) {
     if (index === this.size - 1) throw 2;
     if (playerInput === this.bridge[index]) {
