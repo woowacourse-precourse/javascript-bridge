@@ -16,6 +16,12 @@ class InputValidator {
     throw new Error(INPUT_ERROR.IS_NOT_IN_RANGE);
   }
 
+  static isRightBridgeLength (string) {
+    this.isBlank(string);
+    this.isNumber(string);
+    this.isRightRange(string);
+  }
+
 }
 
 module.exports = InputValidator;

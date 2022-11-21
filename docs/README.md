@@ -26,7 +26,7 @@
 ## 🚫 예외 처리 사항 정리  
 - 공통 예외 사항
    - [v] 값을 입력하지 않은 경우 `isBlank`
-- [ ] 다리 길이 입력 시 `isRightBridgeLength`  
+- [v] 다리 길이 입력 시 `isRightBridgeLength`  
     - [v] 숫자가 아닌 값을 입력한 경우 `isNumber`
     - [v] 3 이상 20 이하의 숫자가 아닌 경우 `isRightRange`
 - 이동할 칸 입력 시    
