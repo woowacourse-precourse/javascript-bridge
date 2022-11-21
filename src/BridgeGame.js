@@ -1,3 +1,5 @@
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const ValidateCheck = require('./utils/ValidatateCheck');
 const InputView = require('./Views/InputView');
 const OutputView = require('./Views/OutputView');
@@ -7,8 +9,10 @@ const OutputView = require('./Views/OutputView');
  */
 class BridgeGame {
   #length = 0;
+  #bridge = [];
   constructor() {
     this.#length = this.#length;
+    this.#bridge = this.#bridge;
   }
 
   /**
@@ -19,9 +23,11 @@ class BridgeGame {
     InputView.readBridgeSize(input => {
       ValidateCheck.lengthCheck(input);
       this.#length = input;
+      this.#bridge = BridgeMaker.makeBridge(
+        this.#length,
+        BridgeRandomNumberGenerator.generate,
+      );
     });
-
-    // InputView.readBridgeSize();
   }
 
   /**
