@@ -14,6 +14,17 @@ class BridgeGame {
     this.#records = [];
   }
 
+  static createTokens(size, generateRandomNumber) {
+    Validator.chekcBridgeSizeValue(size);
+    const tokens = [];
+    let count = 0;
+    while (count < size) {
+      tokens.push(generateRandomNumber());
+      count += 1;
+    }
+    return tokens;
+  }
+
   move(direction, records = this.#records) {
     Validator.checkCorrectDirection(direction);
     const dir = BridgeGame.isSelectUpper(direction)
@@ -30,6 +41,7 @@ class BridgeGame {
 
   recordDirection(direction, records) {
     this.#records = [...records, direction];
+    return this.#records;
   }
 
   retry() {
@@ -45,26 +57,12 @@ class BridgeGame {
     this.#records = [];
   }
 
-  static createTokens(size, generateRandomNumber) {
-    const tokens = [];
-    let count = 0;
-    while (count < size) {
-      tokens.push(generateRandomNumber());
-      count += 1;
-    }
-    return tokens;
-  }
-
   getCurrentDistance() {
     return this.#records.length - 1;
   }
 
-  static process(game, direction) {
-    return game.move(direction);
-  }
-
-  isEndOfBridge() {
-    if (this.#records.length === this.#bridge.length) return true;
+  isEndOfBridge(bridge = this.#bridge, records = this.#records) {
+    if (bridge.length === records.length) return true;
     return false;
   }
 
@@ -95,17 +93,13 @@ class BridgeGame {
     return false;
   }
 
-  isSameDirection() {
-    if (
-      this.#records[this.getCurrentDistance()] ===
-      this.#bridge[this.getCurrentDistance()]
-    )
-      return true;
+  isSameDirection(direction) {
+    if (direction === this.#bridge[this.getCurrentDistance()]) return true;
     return false;
   }
 
-  static isWrongDirection(game) {
-    if (!game.isSameDirection()) return true;
+  static isWrongDirection(game, direction) {
+    if (!game.isSameDirection(direction)) return true;
     return false;
   }
 
