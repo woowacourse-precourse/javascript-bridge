@@ -27,65 +27,65 @@ class BridgeGame {
   #bridge;
 
   start = () => {
-    GameProgress.printGameStart(this.validateBridgeSize);
+    GameProgress.printGameStart(this.#validateBridgeSize);
   };
 
-  validateBridgeSize = (size) => {
+  #validateBridgeSize = (size) => {
     const IS_NUMBER = /^\d{1,2}$/.test(size);
     const BRIDGE_LOWER_BOUND = 3;
     const BRIDGE_UPPER_BOUND = 20;
     const IS_BOUNDED = +(size) >= BRIDGE_LOWER_BOUND && +(size) <= BRIDGE_UPPER_BOUND;
     const IS_VALID_NUMBER = IS_NUMBER && IS_BOUNDED;
-    this.bridgeSizeExceptionHandler(IS_VALID_NUMBER);
+    this.#bridgeSizeExceptionHandler(IS_VALID_NUMBER);
     GameProgress.printBlankLine();
-    this.makeBridge(+size);
+    this.#makeBridge(+size);
   };
 
-  bridgeSizeExceptionHandler = (isValidNumber) => {
+  #bridgeSizeExceptionHandler = (isValidNumber) => {
     try {
       BridgeError.throwErrorHandler(this.#bridgeErrorMessages[0], !isValidNumber);
     } catch {
-      GameProgress.readBridgeSize(this.validateBridgeSize);
+      GameProgress.readBridgeSize(this.#validateBridgeSize);
     }
   };
 
-  makeBridge = (size) => {
+  #makeBridge = (size) => {
     const BRIDGE = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.#bridge = BRIDGE;
-    this.move();
+    this.#move();
   };
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {
+  #move() {
     this.#bridgeMoveCount = 0;
-    GameProgress.readMoving(this.validateBridgeMove);
+    GameProgress.readMoving(this.#validateBridgeMove);
   }
 
-  validateBridgeMove = (input) => {
+  #validateBridgeMove = (input) => {
     const IS_VALID_MOVING = /^[U|D]{1}$/.test(input);
-    this.bridgeMoveExceptionHandler(input, IS_VALID_MOVING);
+    this.#bridgeMoveExceptionHandler(input, IS_VALID_MOVING);
   };
 
-  bridgeMoveExceptionHandler = (input, isValidMoving) => {
+  #bridgeMoveExceptionHandler = (input, isValidMoving) => {
     try {
       BridgeError.throwErrorHandler(this.#bridgeErrorMessages[1], !isValidMoving);
       GameProgress.printMap(this.#bridge, this.#bridgeMoveCount, input);
       GameProgress.printBlankLine();
-      this.moveNext(input);
+      this.#moveNext(input);
     } catch {
-      GameProgress.readMoving(this.validateBridgeMove);
+      GameProgress.readMoving(this.#validateBridgeMove);
     }
   };
 
-  moveNext = (input) => {
+  #moveNext = (input) => {
     this.#bridgeMoveCount += 1;
     if (input !== this.#bridge[this.#bridgeMoveCount - 1]) {
-      this.retry();
+      this.#retry();
     } else if (this.#bridgeMoveCount < this.#bridge.length) {
-      GameProgress.readMoving(this.validateBridgeMove);
+      GameProgress.readMoving(this.#validateBridgeMove);
     } else if (this.#bridgeMoveCount === this.#bridge.length) {
       GameProgress.printResult('성공', this.#tryCount);
     }
@@ -95,32 +95,32 @@ class BridgeGame {
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry = () => {
-    GameProgress.readGameCommand(this.validateRetryInput);
+  #retry = () => {
+    GameProgress.readGameCommand(this.#validateRetryInput);
   };
 
-  validateRetryInput = (input) => {
+  #validateRetryInput = (input) => {
     const IS_VALID_INPUT = /^[R|Q]{1}$/.test(input);
-    this.bridgeRetryInputExceptionHandler(IS_VALID_INPUT);
-    this.gameRestartOrOver(input);
+    this.#bridgeRetryInputExceptionHandler(IS_VALID_INPUT, input);
   };
 
-  bridgeRetryInputExceptionHandler = (isValidInput) => {
+  #bridgeRetryInputExceptionHandler = (isValidInput, input) => {
     try {
       BridgeError.throwErrorHandler(this.#bridgeErrorMessages[2], !isValidInput);
+      this.#gameRestartOrOver(input);
     } catch {
-      GameProgress.readGameCommand(this.validateRetryInput);
+      GameProgress.readGameCommand(this.#validateRetryInput);
     }
   };
 
-  gameRestartOrOver = (input) => {
+  #gameRestartOrOver = (input) => {
     if (input === 'R') {
       this.#tryCount += 1;
       GameProgress.clearPreviousProgress();
-      this.move();
-    } else if (input === 'Q') {
-      GameProgress.printResult('실패', this.#tryCount);
+      this.#move();
+      return;
     }
+    GameProgress.printResult('실패', this.#tryCount);
   };
 }
 
