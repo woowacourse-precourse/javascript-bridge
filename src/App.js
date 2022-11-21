@@ -5,11 +5,19 @@ const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 
 class App {
-  play() {
+  async play() {
     Console.print(GAME_MESSAGES.START);
-    const bridgeSize = InputView.readBridgeSize();
+    const bridgeSize = await InputView.readBridgeSize();
     const bridge = makeBridge(Number(bridgeSize), generate);
-    const moving = InputView.readMoving();
+    this.startCrossing(Number(bridgeSize), bridge);
+  }
+
+  startCrossing(bridgeSize, bridge) {
+    for(let i = 0; i < bridgeSize; i++){
+      const moving = InputView.readMoving();
+
+    }
+    
   }
 }
 
