@@ -1,5 +1,4 @@
 const RecallUntilCorrect = require("./RecallUntilCorrect.js");
-const OutputView = require("./OutputView.js");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -23,17 +22,17 @@ const OutputView = require("./OutputView.js");
   move(moveCount) {
     const moving = RecallUntilCorrect.recallReadMoving(true);
     if(moving===this.#bridgeMap[moveCount]){
-      const Map = this.isUpOrDown(moving, true);
-      this.addUpDownMap(Map);
+      const MAP = this.isUpOrDown(moving, true);
+      this.addUpDownMap(MAP);
       return true;
     }else{
-      const Map = this.isUpOrDown(moving, false);
-      this.addUpDownMap(Map);
+      const MAP = this.isUpOrDown(moving, false);
+      this.addUpDownMap(MAP);
       return false;
     }
   }
-  addUpDownMap(Map){
-    this.#upMap += Map[0], this.#downMap += Map[1];
+  addUpDownMap(map){
+    this.#upMap += map[0], this.#downMap += map[1];
   }
   isUpOrDown(moving, canMove){
     if(moving === "U" && canMove) 

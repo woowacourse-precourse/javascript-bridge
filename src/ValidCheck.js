@@ -1,5 +1,4 @@
 const OutputView = require("./OutputView.js");
-const MissionUtils = require("@woowacourse/mission-utils");
 const ValidCheck = {
   bridgeSizeValidCheck(bridgeSize){
     this.sizeIsNumber(bridgeSize);
