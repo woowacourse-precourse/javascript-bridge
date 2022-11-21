@@ -82,3 +82,6 @@ JSON.stringify 사용???? Ok
 - move() : 'O'일때 bridgeArray를 받아와서 앞부분을 하나씩 날려준다.
 배열을 깊은 복사를 사용해 shift()시 원본배열을 참조하지 않도록한다
 - retry(): count를 올려주는 로직추가
+
+## Const
+- 변하지 않는 문자들은 여기다가 담아서 export시켜 사용한다
