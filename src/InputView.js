@@ -17,7 +17,7 @@ const InputView = {
    */
   constructor() {
     this.bridgeGame = new BridgeGame();
-  }
+  },
 
   readBridgeSize() {
     const gameRec = { moveNum: 0, attemptNum: 1, bridgeAnswer: [] };
