@@ -38,7 +38,7 @@ const InputView = {
           return  InputView.readMoving(mainBridge, bridgeGame)
         }
         InputView.doMove(moveInput, bridgeGame);
-        !bridgeGame.hasNext? InputView.readGameCommand(mainBridge, bridgeGame): null;
+        !bridgeGame.hasNext && !bridgeGame.finish? InputView.readGameCommand(mainBridge, bridgeGame): null;
         InputView.readMoving(mainBridge, bridgeGame);
       }
     );
