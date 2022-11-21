@@ -8,7 +8,7 @@ class BridgeGame {
   constructor(length) {
     this.#bridgeArr = makeBridge(length, generate);
     this.stepObj = { upperPart: [], lowerPart: [] };
-    this.numOfTrials = 0;
+    this.numOfTrials = 1;
   }
 
   move(inputDirection) {
