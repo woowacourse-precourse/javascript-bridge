@@ -20,6 +20,8 @@
 
 10. 재시작 시 초기화하는 기능
 
+<br>
+
 ## 예외처리
 
 1. 다리길이 입력 값에 대한 예외 처리 
@@ -27,3 +29,14 @@
 2. 이동할 칸 입력 값에 대한 예외 처리
 
 3. 재시작 여부에 따른 입력 값에 대한 예외 처리
+
+<br>
+
+## 플로우차트
+
+<div align="center" w="300px">
+
+
+  [![](https://mermaid.ink/img/pako:eNp1ktFuwiAUhl-FcK0v0IslKlPn5pLpsqh0F6QcW5ICDdAlpvjuoxQzG7NekOb7Tz849HS40BxwhkvDmgp9klyh8Myodcy4bzSdPvm5EbwE9AaqdJVH8-6L1YIzJ7S6DuXzvg75M6st-Nu3o8iZFvyCSv0DKVgMQZITYaDojR6RRz-5948s5E5_pI0RyqEta1J6jOmhE3Ynysqh2TtBwhKtIIkP_4oPd-Il3YFt61tLyxit6L4tCrB2RNd0yUSd0HpwFFpKprg_PTZ2ihUb-tGKm31AL2FLZy6JvUQ2Ot8molf6rHgiqwfyt-IJlmAkEzz86q4nOXYVSMhxFl45nFnoL8e5uoZS1jq9v6gCZ337E9w24dBABAtDInEWb2uCgQunzXYYnzhF119n8bev?type=png)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNp1ktFuwiAUhl-FcK0v0IslKlPn5pLpsqh0F6QcW5ICDdAlpvjuoxQzG7NekOb7Tz849HS40BxwhkvDmgp9klyh8Myodcy4bzSdPvm5EbwE9AaqdJVH8-6L1YIzJ7S6DuXzvg75M6st-Nu3o8iZFvyCSv0DKVgMQZITYaDojR6RRz-5948s5E5_pI0RyqEta1J6jOmhE3Ynysqh2TtBwhKtIIkP_4oPd-Il3YFt61tLyxit6L4tCrB2RNd0yUSd0HpwFFpKprg_PTZ2ihUb-tGKm31AL2FLZy6JvUQ2Ot8molf6rHgiqwfyt-IJlmAkEzz86q4nOXYVSMhxFl45nFnoL8e5uoZS1jq9v6gCZ337E9w24dBABAtDInEWb2uCgQunzXYYnzhF119n8bev)
+
+</div>
