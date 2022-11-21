@@ -4,6 +4,7 @@ const InputView = require('./views/InputView');
 
 class App {
   #game;
+  #attempts = 0;
 
   play() {
     OutputView.printStartMessage();
@@ -14,7 +15,7 @@ class App {
     this.#game = new BridgeGame();
     await this.#tryCatch(this.#getAndSetBridgeSize.bind(this));
     this.#game.makeBridge();
-    // this.#makeAttempt();
+    this.#makeAttempt();
   }
 
   async #getAndSetBridgeSize() {
@@ -22,7 +23,14 @@ class App {
     this.#game.setSize(input);
   }
 
-  #makeAttempt() {}
+  #makeAttempt() {
+    this.#attempts++;
+  }
+
+  async playRound() {
+    let command = await InputView.readMoving();
+    console.log(command);
+  }
 
   async #tryCatch(tryfunc) {
     while (true) {
@@ -38,4 +46,4 @@ class App {
 
 module.exports = App;
 const app = new App();
-app.play();
+app.playRound();
