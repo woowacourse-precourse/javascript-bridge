@@ -1,3 +1,5 @@
+const { Symbol } = require("./constant/Constants");
+
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -9,7 +11,7 @@ const BridgeMaker = {
     const bridge = [];
     for (let i=0; i<size; i++){
       number = generateRandomNumber();
-      bridge.push((number === 1? "U" : "D"));
+      bridge.push((number === 1? Symbol.UP : Symbol.DOWN));
     }
     return bridge;
   },

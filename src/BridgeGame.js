@@ -1,5 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { Symbol } = require("./constant/Constants");
  
 class BridgeGame {
   #bridge
@@ -42,20 +43,16 @@ class BridgeGame {
     this.#isCorrect = this.#bridge[this.#currentIndex] === direction ? true : false;
   }
 
-  addUpMap(isCorrect){
-    this.#upBridge.push(isCorrect ? "O" : "X");
-    this.#downBridge.push(" ");
-  }
-
-  addDownMap(isCorrect){
-    this.#downBridge.push(isCorrect ? "O" : "X");
-    this.#upBridge.push(" ");
+  addSymbolToEachBridge(choicedBrdige, notChoicedBridge, isCorrect){
+    choicedBrdige.push(isCorrect ? Symbol.RIGHT : Symbol.WRONG);
+    notChoicedBridge.push(Symbol.NOTHING);
   }
 
   move(direction) {
     this.compareBridgeWithDirection(direction);
     this.isSuccess();
-    direction === "U" ? this.addUpMap(this.#isCorrect) : this.addDownMap(this.#isCorrect);
+    direction === Symbol.UP ? this.addSymbolToEachBridge(this.#upBridge, this.#downBridge, this.#isCorrect) 
+    : this.addSymbolToEachBridge(this.#downBridge, this.#upBridge, this.#isCorrect);
     this.#currentIndex += 1;
   }
 

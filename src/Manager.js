@@ -2,6 +2,8 @@ const InputView = require('./InputView.js');
 const OutputView = require('./OutputView.js');
 const Validation = require('./Validation.js');
 const BridgeGame = require('./BridgeGame.js');
+const { Symbol } = require("./constant/Constants");
+
 
 class Manager{
   constructor(){
@@ -70,7 +72,7 @@ class Manager{
 
   tryGameCommand(retryOrQuit){
     Validation.isValidRetryOrQuitInput(retryOrQuit);
-    retryOrQuit === "Q" ? this.requestResult() : (this.bridgeGame.retry(), this.requestDirection());
+    retryOrQuit === Symbol.QUIT ? this.requestResult() : (this.bridgeGame.retry(), this.requestDirection());
   }
 }
 

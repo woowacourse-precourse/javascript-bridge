@@ -1,3 +1,13 @@
+const Symbol = {
+  UP : "U",
+  DOWN : "D",
+  RIGHT : "O",
+  WRONG : "X",
+  NOTHING : " ",
+  RETRY : "R",
+  QUIT : "Q",
+};
+
 const InputMessage = {
   BRIDGE_SIZE : "\n다리의 길이를 입력해주세요.\n",
   MOVING_DIRECTION : "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
@@ -5,9 +15,9 @@ const InputMessage = {
 };
 
 const ErrorMessage = {
-  MINIMUM_SIZE_RANGE: 3,
-  MAXIMUM_SIZE_RANGE: 20,
-  IS_NOT_NUMBER: "[ERROR] 다리 길이는 숫자여야합니다.",
+  MINIMUM_SIZE_RANGE : 3,
+  MAXIMUM_SIZE_RANGE : 20,
+  IS_NOT_NUMBER : "[ERROR] 다리 길이는 숫자여야합니다.",
   BRIDGE_SIZE : "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
   MOVING_DIRECTION : "[ERROR] U(위 칸)와 D(아래 칸) 중 하나의 문자만 입력할 수 있습니다.",
   RETRY_OR_QUIT : "[ERROR] (재시작)과 Q(종료) 중 하나의 문자만 입력할 수 있습니다.",
@@ -19,6 +29,6 @@ const OutputMessage = {
   FORMAT : (content) => `[ ${content.join(" | ")} ]`,
   RESULT : (isSuccess) => `\n게임 성공 여부: ${isSuccess? "성공" : "실패"}`,
   TRY_NUMBER : (tryCnt) => `총 시도한 횟수: ${tryCnt}`, 
-}
+};
 
-module.exports = { InputMessage, ErrorMessage, OutputMessage };
+module.exports = { Symbol, InputMessage, ErrorMessage, OutputMessage };

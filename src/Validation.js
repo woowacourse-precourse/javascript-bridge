@@ -1,5 +1,6 @@
 const { ErrorMessage } = require("./constant/Constants");
 const OutputMessage = require("./OutputView");
+const { Symbol } = require("./constant/Constants");
 
 Validation = {
   isNumber(size){
@@ -17,14 +18,14 @@ Validation = {
   },
 
   isValidDirection(direction){
-    if (direction !== "U" && direction !== "D"){
+    if (direction !== Symbol.UP && direction !== Symbol.DOWN){
       OutputMessage.printErrorMessage(ErrorMessage.MOVING_DIRECTION);
       throw new Error(ErrorMessage.MOVING_DIRECTION);
     }
   },
 
   isValidRetryOrQuitInput(retryOrQuit){
-    if (retryOrQuit !== "R" && retryOrQuit !== "Q"){
+    if (retryOrQuit !== Symbol.RETRY && retryOrQuit !== Symbol.QUIT){
       OutputMessage.printErrorMessage(ErrorMessage.RETRY_OR_QUIT);
       throw new Error(ErrorMessage.RETRY_OR_QUIT);
     }
