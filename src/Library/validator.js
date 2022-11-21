@@ -13,7 +13,12 @@ const Validator = {
   },
 
   isBridgeLength(bridgeLength) {
-    if (this.isNaturalNumber(bridgeLength) === false || bridgeLength < 21) {
+    const BRIDGE_LENGTH = parseInt(bridgeLength);
+
+    if (this.isNaturalNumber(bridgeLength) === false) {
+      ErrorHandler.inputError("bridge");
+    }
+    if (BRIDGE_LENGTH > 20 || BRIDGE_LENGTH < 3) {
       ErrorHandler.inputError("bridge");
     }
     return true;

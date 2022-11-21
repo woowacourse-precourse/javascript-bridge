@@ -1,23 +1,19 @@
 const InputView = require("../GameIO/InputView");
 const Bridge = require("./Bridge.js");
 const BridgeGame = require("../Controller/BridgeGame");
+const OutputView = require("../GameIO/OutputView");
 
 class Game {
   #bridge;
   #playCount;
   #bridgeLength;
   #bridgeStatus;
-  constructor() {
+  constructor(bridgeLength) {
+    this.#bridgeLength = bridgeLength;
     this.setPlayCount();
-    this.initializeBridgeLength();
-    this.#bridge = new Bridge(bridgeLength);
+    this.#bridge = new Bridge(this.#bridgeLength);
     this.#bridgeStatus = this.#bridge.getBridgeStatus;
     this.bridgeGame = new BridgeGame(this.#bridgeStatus);
-  }
-
-  initializeBridgeLength() {
-    const BRIDGE_LENGTH = InputView.readBridgeSize();
-    this.#bridgeLength = BRIDGE_LENGTH;
   }
 
   setPlayCount() {
@@ -32,20 +28,15 @@ class Game {
     this.#playCount += 1;
   }
 
-  gameAlgorithms() {
-    // 이미 게임이 시작되어 bridge 객체가 만들어짐
-    const BRIDGE_LENGTH = this.#bridgeLength;
-    for (let moveCount = 0; moveCount < BRIDGE_LENGTH; moveCount++) {
+  playAlgorithms() {
+    let moveCount = 0;
+    for (moveCount = 0; moveCount < this.#bridgeLength; moveCount++) {
       const NEXT_DIRECTION = InputView.readMoving();
-      if (this.bridgeGame.move(NEXT_DIRECTION)) {
+      if (this.bridgeGame.move(NEXT_DIRECTION, moveCount) === false) {
         break; //
       }
     }
-  }
-
-  gameStartPoint() {
-    const bridgeLength = this.#bridgeLength;
-    this.createBridge(bridgeLength);
+    return true;
   }
 }
 

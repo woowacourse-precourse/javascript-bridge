@@ -19,6 +19,7 @@ class Bridge {
       this.#bridgeLength,
       BridgeRandomNumberGenerator.generate()
     );
+    return bridge;
   }
 
   getBridgeStatus() {
