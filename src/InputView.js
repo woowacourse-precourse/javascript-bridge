@@ -21,6 +21,10 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
+    Consolee.readline("이동할 칸을 선택해주세요. (위: U, 아래: D) \n", (moves) => {
+      //예외 처리 2
+    });
+    return moves;
   },
 
   /**

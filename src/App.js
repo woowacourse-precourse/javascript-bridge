@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const { readBridgeSize } = require("./InputView");
+const { readBridgeSize, readMoving } = require("./InputView");
 const Consolee = MissionUtils.Console;
 
 class App {
@@ -9,17 +9,23 @@ class App {
     this.size = 0;
     this.randomBridge = [];
     this.bridge = [];
+    this.userMove = '';
   }
   play() {
     Consolee.print("다리 건너기 게임을 시작합니다.");
-    this.startGame();
+    this.settingGame();
   }
-  startGame(){
+  settingGame(){
     this.size = readBridgeSize();
     for(let i = 0; i < size; i++){
       this.randomBridge[i] = generate();
     }
     this.bridge = makeBridge(this.size, this.randomBridge);
+    this.startGame();
+  }
+  startGame(){
+    this.userMove = readMoving();
+    
   }
 }
 
