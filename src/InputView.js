@@ -5,8 +5,14 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
-
+  readBridgeSize() {
+      let result = 0;
+      MissionUtils.Console.readLine(Const.MESSAGE.GAME_START, (input) => {
+        if (!validation.validateBridgeLength(input)) throw new Error(Const.ERROR_MESSAGE.ERROR_SIZE);
+        result = input;
+      });
+      return result;
+  },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
