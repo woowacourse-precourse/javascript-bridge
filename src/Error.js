@@ -12,9 +12,10 @@ const Errors = {
   },
 
   movingError(str) {
-    if (str !== "U" || str !== "D") {
-      throw new Error(ERROR_MOVING);
+    if (str === "U" || str === "D") {
+      return;
     }
+    throw new Error(ERROR_MOVING);
   },
 };
 
