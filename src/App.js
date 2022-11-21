@@ -145,6 +145,13 @@ class App {
 
     this.#input.readBridgeSize(message, callbackFn);
   }
+
+  readGameCommand() {
+    const message = this.#output.message.RETRY;
+    const retryGameCommandFunc = this.retryGameCommand.bind(this);
+
+    this.#input.readGameCommand(message, retryGameCommandFunc);
+  }
 }
 
 module.exports = App;
