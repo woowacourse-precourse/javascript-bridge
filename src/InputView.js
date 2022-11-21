@@ -33,7 +33,7 @@ const InputView = {
     Console.readLine(GET_MOVIING_INFO_SENTENCE, (movingInfo) => {
       const tf = bridgeGame.move(movingInfo);
       
-      printMap(bridgeGame, movingInfo, tf);
+      printMap(bridgeGame);
 
       if (tf) {
         this.readMoving();

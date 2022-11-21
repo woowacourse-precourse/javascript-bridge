@@ -1,3 +1,7 @@
+const CORRECT_MOVING = ' O ';
+const INCORRECT_MOVING = ' X ';
+const NONE_MOVING = '   ';
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -18,11 +22,16 @@ class BridgeGame {
    */
   move(movingInfo) {
     const compareIndex = this.nowMap['U'].length;
+    const other = movingInfo === 'U' ? 'D' : 'U';
 
     if (this.bridge[compareIndex] === movingInfo) {
+      this.nowMap[movingInfo].push(CORRECT_MOVING);
+      this.nowMap[other].push(NONE_MOVING);
       return true;
     } 
-      
+
+    this.nowMap[movingInfo].push(INCORRECT_MOVING);
+    this.nowMap[other].push(NONE_MOVING);
     return false;
   }
 

@@ -2,7 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 
 const GAME_START_SENTENCE = '다리 건너기 게임을 시작합니다.\n'
 const END_RESULT_SENTENCE = '\n최종 게임 결과';
-const SUCCESS_OR_FAILURE_SENTENCE = '게임 성공 여부: ';
+const SUCCESS_OR_FAILURE_SENTENCE = '\n게임 성공 여부: ';
 const TOTAL_COUNT_SENTENCE = '총 시도한 횟수: ';
 
 /**
@@ -23,13 +23,7 @@ const OutputView = {
    * bridge = ['U', 'U', 'D'];
    * result = [['U', 'success'], ['D', 'fail']];
    */
-  printMap(bridgeGame, movingInfo, tf) {
-    const other = movingInfo === 'U' ? 'D' : 'U';
-    const addString = tf ? ' O ' : ' X ';
-    
-    bridgeGame.nowMap[movingInfo].push(addString);
-    bridgeGame.nowMap[other].push('   ');
-
+  printMap(bridgeGame) {
     Console.print(`[${bridgeGame.nowMap['U'].join('|')}]`);
     Console.print(`[${bridgeGame.nowMap['D'].join('|')}]`);
   },
@@ -42,8 +36,7 @@ const OutputView = {
   printResult(bridgeGame, result) {
     Console.print(END_RESULT_SENTENCE);
 
-    Console.print(`[${bridgeGame.nowMap['U'].join('|')}]`);
-    Console.print(`[${bridgeGame.nowMap['D'].join('|')}]\n`);
+    this.printMap(bridgeGame);
 
     const strResult = result === 'success' ? '성공' : '실패';
     Console.print(SUCCESS_OR_FAILURE_SENTENCE + strResult);
