@@ -51,6 +51,10 @@ const InputView = {
   readGameCommand(message, callbackFn) {
     this.readLine(message, callbackFn);
   },
+
+  close() {
+    this.console.close();
+  },
 };
 
 module.exports = InputView;
