@@ -139,4 +139,14 @@ describe("기능 목록 테스트", () => {
 
     expectLogContains(getOutput(logSpy), ["다리 건너기 게임을 시작합니다."]);
   });
+
+  test("다리 생성 테스트", () => {
+    const numbers = [0, 0, 1];
+    const mockFn = jest.fn();
+    const generateRandomNumber = numbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, mockFn);
+    const bridge = BridgeMaker.makeBridge(3, generateRandomNumber);
+    expect(bridge).toEqual(["D", "D", "U"]);
+  });
 });
