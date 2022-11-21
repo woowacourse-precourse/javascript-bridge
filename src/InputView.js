@@ -1,3 +1,4 @@
+const BridgeGame = require("./BridgeGame");
 const MissionUtils = require("@woowacourse/mission-utils");
 const Validate = require("./Validate");
 const { INPUT_MESSAGE } = require("./Utils");
@@ -10,7 +11,7 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(INPUT_MESSAGE.INPUT_BRIDGE_LENGTH, (size) => {
-      return Validate.validateBridgeLength(size);
+      return BridgeGame.getBridge(Validate.validateBridgeLength(size));
     })
   },
 
@@ -19,7 +20,7 @@ const InputView = {
    */
   readMoving() {
     MissionUtils.Console.readLine(INPUT_MESSAGE.CHOICE_SPACE_TO_MOVE, (move) => {
-      return Validate.validateMoving(move);
+      return BridgeGame.getMoving(Validate.validateMoving(move));
     })
   },
 
