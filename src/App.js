@@ -53,7 +53,7 @@ class App {
   }
 
   deliverMapToPrint(moveData) {
-    const map = this.#bridgeGame.readyToPrintMap(moveData);
+    const map = outputView.readyToPrintMap(moveData);
     this.resultMap = outputView.printMap(map);
   }
 
