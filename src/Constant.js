@@ -7,4 +7,15 @@ const MOVE_RESULT = {
   NONE: " ",
 };
 
-module.exports = MOVE_RESULT;
+const GAME_RESULT = {
+  FALSE: "false",
+  CONTINUE: "continue",
+  SUCCESS: "success",
+};
+
+const MESSAGE = {
+  MOVE_RESULT,
+  GAME_RESULT,
+};
+
+module.exports = MESSAGE;
