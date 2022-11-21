@@ -3,8 +3,18 @@ const OutputView = require("./OutputView");
 
 class App {
   play() {
+    this.startBridgeGame();
+  }
+
+  startBridgeGame() {
     OutputView.printStartMessage();
-    InputView.readBridgeSize();
+    this.getBridgeSize();
+  }
+
+  getBridgeSize() {
+    InputView.readBridgeSize((bridgeSize) => {
+      console.log("(callback 확인용) bridgeSize: ", bridgeSize);
+    });
   }
 }
 

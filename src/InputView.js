@@ -8,25 +8,25 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
+  readBridgeSize(callback) {
     MissionUtils.Console.readLine(MESSAGE.INPUT.BRIDGE_SIZE, (answer) => {
-      console.log(answer);
-      this.validateBridgeSize(answer);
+      try {
+        console.log(answer);
+        this.validateBridgeSize(answer);
+        callback(answer);
+      } catch (error) {
+        console.error(error);
+        this.readBridgeSize(callback);
+      }
     });
   },
   /**
    * + 입력 받은 다리 길이를 검증한다.
    */
   validateBridgeSize(bridgeSize) {
-    try {
-      if (WORD.START_SIZE <= bridgeSize && bridgeSize <= WORD.END_SIZE) {
-        return bridgeSize;
-      }
-      throw MESSAGE.ERROR.BRIDGE_SIZE;
-    } catch (error) {
-      console.error(error);
-      this.readBridgeSize();
-    }
+    if (WORD.START_SIZE <= bridgeSize && bridgeSize <= WORD.END_SIZE)
+      return bridgeSize;
+    throw MESSAGE.ERROR.BRIDGE_SIZE;
   },
 
   /**
