@@ -33,12 +33,25 @@
 
 - [o] **사용자가 잘못된 값을 입력한 경우 `throw`문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.** try catch 사용
 
+### 🚨 테스트 구현 리스트
+
+- [ ] **다리 길이 입력 받아서 readMoving 실행** InputView #readBridgeSize 우선순위 낮음
+  - [ ] **인풋이 정상이면 true 실패면 에러 출력** Validator #validateInputCatch
+    - [ ] **3 이상 20 이하의 숫자만 입력 가능합니다.** Validator #validateInput
+- [ ] **이동할 칸 선택 받아서 실행** InputView #readMoving
+  - [ ] **인풋이 정상이면 true 실패면 에러 출력** Validator #validateisRepeat 
+  - [ ] **다리게임 실행 후 결과값 출력** InputView #doMove 
+    - [ ] **내부 필드 업데이트** BridgeGame #move 
+
+
 # 🚀 공부
 
 ## 🧾 공부 목록
 
 콜백 함수를 동기적으로 처리하는 방법은?
 한번에 최종 모습을 그리며 코드를 짜려하니 멍하니 손놓고 있는 시간이 길어진다. 일단 그냥 만들고 나중에 모듈화 하기
+최종 테스트는 통과 하는데 디테일한 값이 달라져서 테스트가 필요하다
+필요한 필수 테스트 먼저 구현하기 - 인풋값 먼저
 
 ### 🚨 체크리스트
 
