@@ -15,44 +15,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(usersMove) {
-    const mapSize = usersMove.length;
-    let upMap = "[ ";
-    let downMap = "[ ";
-
-    for (mapIdx = 0; mapIdx < mapSize; mapIdx++) {
-      const nowMove = usersMove[mapIdx];
-
-      if ((nowMove[0] === 'U') && (nowMove[1] === 'O')) {
-        upMap += 'O';
-        downMap += ' ';
-      } 
-      
-      if ((nowMove[0] === 'U') && (nowMove[1] === 'X')) {
-        upMap += 'X';
-        downMap += ' ';
-      }
-      
-      if ((nowMove[0] === 'D') && (nowMove[1] === 'O')) {
-        upMap += ' ';
-        downMap += 'O';
-      } 
-      
-      if ((nowMove[0] === 'D') && (nowMove[1] === 'X')) {
-        upMap += ' ';
-        downMap += 'X';
-      }
-
-      if (mapIdx !== (mapSize - 1)) {
-        upMap += ' | ';
-        downMap += ' | ';
-      }
-    }
-    upMap += ' ]';
-    downMap += ' ]';
-
-    MissionUtils.Console.print(upMap);
-    MissionUtils.Console.print(downMap, '\n');
+  printMap(map) {
+    console.log(typeof map);
+    map.forEach((map) => {
+      MissionUtils.Console.print(`[ ${map.join(" | ")} ]`);
+    })
   },
 
   /**
@@ -60,12 +27,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-   printResult(gameResult) {
-    [usersMove, gameOver, tryCount] = gameResult;
+   printResult(gameResult, map) {
+    [gameOver, tryCount] = gameResult;
     gameOver === false ? checkForSuccess = '성공' : checkForSuccess = '실패'
 
     MissionUtils.Console.print('최종 게임 결과');
-    this.printMap(usersMove);
+    this.printMap(map);
     MissionUtils.Console.print(`게임 성공 여부: ${checkForSuccess}`);
     MissionUtils.Console.print(`총 시도한 횟수: ${tryCount}`);    
     MissionUtils.Console.close();

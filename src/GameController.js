@@ -53,8 +53,50 @@ class GameController {
   moveCycle(moving) {
     const usersMove = this.BridgeGame.move(moving);
 
-    OutputView.printMap(usersMove);
+    this.makeMapCycle(usersMove);
     this.checkCanMoveNextStep();
+  }
+
+  makeMapCycle(usersMove) {
+    const map = this.makeMap(usersMove);
+    OutputView.printMap(map);
+  }
+
+  makeMap(usersMove) {
+    const mapSize = usersMove.length;
+    let upMap = "", downMap = "";
+
+    for (let mapIdx = 0; mapIdx < mapSize; mapIdx++) {
+      const nowMove = usersMove[mapIdx];
+      upMap += this.makeUpBridge(nowMove);
+      downMap += this.makeDownBridge(nowMove);
+    }
+
+    return [this.changeStrToArray(upMap), this.changeStrToArray(downMap)];
+  }
+
+  changeStrToArray(str) {
+    return Array.from(str);
+  }
+
+  makeUpBridge(nowMove) {
+    if (nowMove[0] === 'U') {
+      if (nowMove[1] === 'O') {
+        return 'O';
+      }
+      return 'X';
+    }
+    return ' ';
+  }
+
+  makeDownBridge(nowMove) {
+    if (nowMove[0] === 'D') {
+      if (nowMove[1] === 'O') {
+        return 'O';
+      }
+      return 'X';
+    }
+    return ' ';
   }
 
   checkCanMoveNextStep() {
@@ -96,7 +138,10 @@ class GameController {
 
   end() {
     const gameResult = this.BridgeGame.endResult();
-    OutputView.printResult(gameResult);
+    const usersMove = gameResult.shift();
+    const map = this.makeMap(usersMove);
+
+    OutputView.printResult(gameResult, map);
   }
 }
 
