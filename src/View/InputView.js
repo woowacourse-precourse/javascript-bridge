@@ -7,11 +7,11 @@ const InputView = {
   },
 
   readMoving(callback) {
-    playerInput(MESSAGE.INPUT_SPACE_TO_MOVE, callback);
+    playerInput(MESSAGE.INPUT_DIRECTION, callback);
   },
 
   readGameCommand(callback) {
-    playerInput(MESSAGE.INPUT_WANT_RETRY, callback);
+    playerInput(MESSAGE.INPUT_COMMAND, callback);
   },
 };
 
