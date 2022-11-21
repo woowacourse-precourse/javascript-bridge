@@ -11,7 +11,7 @@
 [O] 파생된 문제 : count가 초기화되는듯 -> 수정완료
 [] ApplicationTest가 원하는대로 로직수정
 [] 테스트 케이스 작성
-[O] 버그 발견 : 게임 실패가 나온 후에 입력값을 받음 
+[O] 버그 발견 : 게임 실패가 나온 후에 입력값을 받음 -> 수정완료
 
 ## 테스트케이스에 맞도록 재수정
 1. BridgeMaker "U" "D" "U" 이런식으로 배열이 생성되도록 O
@@ -69,6 +69,6 @@ JSON.stringify 사용???? Ok
 
 
 ### BrideGame
-- move() : 'O'일때 bridgeArray를 받아와서 앞부분을 하나씩 날려준다
-- moveEnd() : bridgeArray가 [] 빈 배열이 되면 게임을 끝내는 로직
-- retry(): 'X' 일때 재시작하게 하는 로직 추가
+- move() : 'O'일때 bridgeArray를 받아와서 앞부분을 하나씩 날려준다.
+배열을 깊은 복사를 사용해 shift()시 원본배열을 참조하지 않도록한다
+- retry(): count를 올려주는 로직추가
