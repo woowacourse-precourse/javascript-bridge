@@ -43,7 +43,7 @@ class App {
 
   determineNextAction() {
     const Move = this.#game.status;
-    const NOT_END = this.#game.isEnd() === true;
+    const NOT_END = this.#game.isNotEnd() === true;
     if (Move && !NOT_END) this.gameEnd();
     if (Move && NOT_END) readMoving.bind(this)(this.moveBridge);
     if (!Move) readGameCommand.bind(this)(this.controlGame);

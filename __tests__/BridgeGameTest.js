@@ -9,7 +9,7 @@ describe('BridgeGame 테스트', () => {
     bridgeGame.retry();
     expect(bridgeGame.tryCount).toBe(2);
   });
-  test('isEnd 테스트', () => {
-    expect(bridgeGame.isEnd()).toBe(true);
+  test('isNotEnd 테스트', () => {
+    expect(bridgeGame.isNotEnd()).toBe(true);
   });
 });

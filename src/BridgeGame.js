@@ -36,7 +36,7 @@ class BridgeGame {
     this.#index += 1;
   }
 
-  isEnd() {
+  isNotEnd() {
     return this.#bridge.checkLength(this.#index);
   }
   /**
