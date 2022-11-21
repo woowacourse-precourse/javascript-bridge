@@ -21,6 +21,8 @@ class Validation {
 
     checkRetryInputValidation(gameCommandInput) {
         // R, Q 아닌 입력
+        if (gameCommandInput !== 'R' && gameCommandInput !== 'Q')
+            throw new Error(this.#RETRY_INPUT_ERROR_MESSAGE);
     }
 }
 
