@@ -37,13 +37,13 @@ class App {
     InputView.readMoving((direction) => {
       this.validate.checkMovingDirection(direction);
 
-      const [canCross, upperBridge, lowerBridge] =
+      const [canCross, playerUpperBridgeState, playerLowerBridgeState] =
         this.bridgeGame.move(direction);
 
       // 현재까지 이동한 다리 상태
-      this.printCurrBridgeState(upperBridge, lowerBridge);
+      this.printCurrBridgeState(playerUpperBridgeState, playerLowerBridgeState);
 
-      this.bridgeGame.isLastPosition(upperBridge.length) && canCross
+      this.bridgeGame.isLastPosition(playerUpperBridgeState.length) && canCross
         ? this.quit()
         : canCross
         ? this.requestMoving()
@@ -51,8 +51,8 @@ class App {
     });
   }
 
-  printCurrBridgeState(upperBridge, lowerBridge) {
-    OutputView.printMap(upperBridge, lowerBridge);
+  printCurrBridgeState(playerUpperBridgeState, playerLowerBridgeState) {
+    OutputView.printMap(playerUpperBridgeState, playerLowerBridgeState);
   }
 
   requestGameCommand() {
@@ -72,11 +72,11 @@ class App {
   }
 
   quit() {
-    const [playerUpperBridge, playerLowerBridge, isSuccess, attempsCount] =
+    const [playerUpperBridgeState, playerLowerBridgeState, isSuccess, attempsCount] =
       this.bridgeGame.getResult();
 
     OutputView.printMsg(GAME_MESSAGE.TOTAL_RESULT);
-    OutputView.printMap(playerUpperBridge, playerLowerBridge);
+    OutputView.printMap(playerUpperBridgeState, playerLowerBridgeState);
     OutputView.printResult(isSuccess, attempsCount);
     OutputView.end();
   }

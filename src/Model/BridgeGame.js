@@ -6,15 +6,15 @@ const { GAME_OPTION, BRIDGE_SIGN, OUTPUT_MARK } = require("../Utils/Constants");
 class BridgeGame {
   constructor(computerBridge) {
     this.computerBridge = computerBridge;
-    this.playerUpperBridge = [];
-    this.playerLowerBridge = [];
-    this.attempsCount = GAME_OPTION.ATTEMPTS_COUNT_INIT;
+    this.playerUpperBridgeState = [];
+    this.playerLowerBridgeState = [];
     this.isSuccess = GAME_OPTION.SUCCESS;
+    this.attempsCount = GAME_OPTION.ATTEMPTS_COUNT_INIT;
   }
 
   init() {
-    this.playerUpperBridge = [];
-    this.playerLowerBridge = [];
+    this.playerUpperBridgeState = [];
+    this.playerLowerBridgeState = [];
   }
 
   isLastPosition(playerBridgeLength) {
@@ -32,11 +32,11 @@ class BridgeGame {
 
     this.makePlayerBridgeState(direction, canCross);
 
-    return [canCross, this.playerUpperBridge, this.playerLowerBridge];
+    return [canCross, this.playerUpperBridgeState, this.playerLowerBridgeState];
   }
 
   isSameDirection(direction) {
-    const currPosition = this.playerUpperBridge.length;
+    const currPosition = this.playerUpperBridgeState.length;
 
     return this.computerBridge[currPosition] === direction;
   }
@@ -44,16 +44,16 @@ class BridgeGame {
   makePlayerBridgeState(direction, canCross) {
     if (direction === BRIDGE_SIGN.UPPER) {
       canCross
-        ? this.playerUpperBridge.push(BRIDGE_SIGN.POSSIBLE)
-        : this.playerUpperBridge.push(BRIDGE_SIGN.IMPOSSIBLE);
-      this.playerLowerBridge.push(OUTPUT_MARK.BLANK);
+        ? this.playerUpperBridgeState.push(BRIDGE_SIGN.POSSIBLE)
+        : this.playerUpperBridgeState.push(BRIDGE_SIGN.IMPOSSIBLE);
+      this.playerLowerBridgeState.push(OUTPUT_MARK.BLANK);
     }
 
     if (direction === BRIDGE_SIGN.LOWER) {
       canCross
-        ? this.playerLowerBridge.push(BRIDGE_SIGN.POSSIBLE)
-        : this.playerLowerBridge.push(BRIDGE_SIGN.IMPOSSIBLE);
-      this.playerUpperBridge.push(OUTPUT_MARK.BLANK);
+        ? this.playerLowerBridgeState.push(BRIDGE_SIGN.POSSIBLE)
+        : this.playerLowerBridgeState.push(BRIDGE_SIGN.IMPOSSIBLE);
+      this.playerUpperBridgeState.push(OUTPUT_MARK.BLANK);
     }
   }
 
@@ -69,8 +69,8 @@ class BridgeGame {
 
   getResult() {
     return [
-      this.playerUpperBridge,
-      this.playerLowerBridge,
+      this.playerUpperBridgeState,
+      this.playerLowerBridgeState,
       this.isSuccess,
       this.attempsCount,
     ];
