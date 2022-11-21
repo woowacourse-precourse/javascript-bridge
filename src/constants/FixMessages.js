@@ -13,7 +13,7 @@ const INPUT = {
 
 const ERROR = {
   INPUT_BRIDGE_SIZE: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
-  INPUT_MOVING: "[ERROR] 입력은 U 또는 P 여야 합니다.",
+  INPUT_MOVING: "[ERROR] 입력은 U 또는 D 여야 합니다.",
   INPUT_RETRY: "[ERROR] 입력은 R 또는 Q 여야 합니다.",
 };
 
