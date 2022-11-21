@@ -73,18 +73,32 @@ const InputView = {
       : this.repeatMoving(GAME, cnt);
   },
 
-  readGameCommand() {
-    return new Promise(resolve => {
-      Console.readLine(INPUT_MESSAGE.READ_GAME_COMMAND, restart => {
-        const VALIDATION = this.vadlidateGameCommand(restart);
-        resolve(VALIDATION);
-      });
+  readGameCommand(GAME) {
+    Console.readLine(INPUT_MESSAGE.READ_GAME_COMMAND, restart => {
+      const VALIDATION = this.vadlidateGameCommand(restart, GAME);
+      if (VALIDATION) this.continueGame(GAME, restart);
     });
   },
 
-  vadlidateGameCommand(restart) {
-    if (restart === 'R' || restart === 'Q') return restart;
-    throw new Error(ERROR_MESSAGE.RESTART_ERROR);
+  continueGame(GAME, restart) {
+    const [RESULT, CNT] = [GAME.getResult(), GAME.getCnt()];
+    if (restart === 'R') {
+      GAME.retry();
+      this.repeatMoving(GAME, -1);
+    } else {
+      OutputView.printResult(RESULT, CNT);
+      Console.close();
+    }
+  },
+
+  vadlidateGameCommand(restart, GAME) {
+    if (restart === 'R' || restart === 'Q') return true;
+    try {
+      throw new Error(ERROR_MESSAGE.RESTART_ERROR);
+    } catch (e) {
+      Console.print(e);
+      this.readGameCommand(GAME);
+    }
   },
 };
 

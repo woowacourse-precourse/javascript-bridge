@@ -31,17 +31,17 @@ class App {
   // }
 
   //실패하면 Restart여부 선택
-  async selectRestart(size, GAME) {
-    const RESTART_OR_END = await InputView.readGameCommand();
-    const [RESULT, CNT] = [GAME.getResult(), GAME.getCnt()];
-    if (RESTART_OR_END === 'R') {
-      GAME.retry();
-      this.repeatMove(size, GAME);
-    } else {
-      OutputView.printResult(RESULT, CNT);
-      Console.close();
-    }
-  }
+  // async selectRestart(size, GAME) {
+  //   const RESTART_OR_END = await InputView.readGameCommand();
+  //   const [RESULT, CNT] = [GAME.getResult(), GAME.getCnt()];
+  //   if (RESTART_OR_END === 'R') {
+  //     GAME.retry();
+  //     this.repeatMove(size, GAME);
+  //   } else {
+  //     OutputView.printResult(RESULT, CNT);
+  //     Console.close();
+  //   }
+  // }
 }
 
 module.exports = App;
