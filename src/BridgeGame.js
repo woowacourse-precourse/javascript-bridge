@@ -13,10 +13,10 @@ class BridgeGame {
     const currentPosition = this.getCurrentPosition();
     const isCrossable = this.#bridge.isCrossable(currentPosition, direction);
 
-    this.saveMovementLog(isCrossable, direction);
+    this.#saveMovementLog(isCrossable, direction);
   }
 
-  saveMovementLog(isCrossable, direction) {
+  #saveMovementLog(isCrossable, direction) {
     this.#movementLogs.push({ isCrossable, direction });
   }
 
