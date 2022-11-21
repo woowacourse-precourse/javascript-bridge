@@ -44,7 +44,7 @@ const expectBridgeOrder = (received, upside, downside) => {
 describe('브릿지 게임 컨트롤러 테스트', () => {
   test('기능 테스트', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1']);
+    mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'D', 'R', 'U', 'D', 'D', 'R', 'U', 'D', 'U']);
 
     const bridgeGameController = new BridgeGameController();
@@ -71,7 +71,7 @@ describe('브릿지 게임 컨트롤러 테스트', () => {
 
   test('재입력 테스트', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1']);
+    mockRandoms([1, 0, 1]);
     mockQuestions(['2', '3', 'u', 'U', 'R', 'D', 'Q', 'U']);
 
     const bridgeGameController = new BridgeGameController();
