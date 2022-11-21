@@ -31,14 +31,14 @@ class BridgeMap {
     return true;
   }
 
-  addMap(boolean, input) {
+  addMap(moveStatement, input) {
     if (this.#isFirst) {
-      if (boolean) return this.addCorrect(input, this.#FIRST_MAP_SOURCE);
-      if (!boolean) return this.addIncorrect(input, this.#FIRST_MAP_SOURCE);
+      if (moveStatement) return this.addCorrect(input, this.#FIRST_MAP_SOURCE);
+      if (!moveStatement) return this.addIncorrect(input, this.#FIRST_MAP_SOURCE);
     }
     if (!this.#isFirst) {
-      if (boolean) return this.addCorrect(input, this.#MAP_SOURCE);
-      if (!boolean) return this.addIncorrect(input, this.#MAP_SOURCE);
+      if (moveStatement) return this.addCorrect(input, this.#MAP_SOURCE);
+      if (!moveStatement) return this.addIncorrect(input, this.#MAP_SOURCE);
     }
     return true;
   }
