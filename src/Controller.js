@@ -1,5 +1,5 @@
 const BridgeGame = require("./BridgeGame");
-const { readBridgeSize } = require("./InputView");
+const { readBridgeSize, readMoving } = require("./InputView");
 
 class Controller {
   #bridgeGame;
@@ -11,6 +11,11 @@ class Controller {
     readBridgeSize((bridgeSize)=>{
       this.#bridgeGame = new BridgeGame(Number(bridgeSize));
     });
+  }
+  play() {
+    readMoving((moving) => {
+      this.#bridgeGame.move(moving);
+    })
   }
 }
 
