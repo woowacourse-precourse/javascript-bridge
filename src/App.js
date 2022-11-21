@@ -8,6 +8,7 @@ class App {
   play() {
     InputView.readBridgeSize(size => {
       this.#bridgeGame.makeBridge(size)
+      OutputView.linkBreak()
       this.getUserMove()
     })
   }

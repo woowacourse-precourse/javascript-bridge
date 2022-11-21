@@ -3,7 +3,7 @@ const Message = require('../src/MessageContent')
 
 const OutputView = {
   printMap(map) {
-    MissionUtils.Console.print(`[ ${map[0].join(' | ')} ]\n[ ${map[1].join(' | ')} ]`)
+    MissionUtils.Console.print(`[ ${map[0].join(' | ')} ]\n[ ${map[1].join(' | ')} ]\n`)
   },
 
   printResult(result) {
@@ -13,6 +13,10 @@ const OutputView = {
     MissionUtils.Console.print(`${result.moveCount}`)
     MissionUtils.Console.close()
   },
+
+  linkBreak() {
+    MissionUtils.Console.print('\r')
+  }
 };
 
 module.exports = OutputView;
