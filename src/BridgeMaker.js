@@ -29,4 +29,6 @@ const BridgeMaker = {
   },
 };
 
-module.exports = BridgeMaker;
+module.exports = {
+  BridgeMaker,
+};

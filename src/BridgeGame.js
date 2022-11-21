@@ -1,4 +1,4 @@
-const BridgeMaker = require('./BridgeMaker');
+const { BridgeMaker } = require('./BridgeMaker');
 const { Utils } = require('./Utils');
 
 class BridgeGame {
@@ -42,4 +42,6 @@ class BridgeGame {
     }
 }
 
-module.exports = BridgeGame;
+module.exports = {
+  BridgeGame,
+};
