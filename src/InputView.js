@@ -6,12 +6,9 @@ const Validator = require('./Validator');
  */
 const InputView = {
 
-  readInput() {
+  readInput(message) {
     let input;
-    MissionUtils.Console.readLine(
-      Message.ENTER_BRIDGE_LENGTH,
-      (answer) => { input = answer; },
-    );
+    MissionUtils.Console.readLine(message, (answer) => { input = answer; });
     return input;
   },
 
@@ -19,7 +16,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    const input = InputView.readInput();
+    const input = InputView.readInput(Message.ENTER_BRIDGE_LENGTH);
     Validator.bridgeSize(input);
     return Number(input);
   },
@@ -28,7 +25,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    const input = InputView.readInput().trim();
+    const input = InputView.readInput(Message.ENTER_MOVE).trim();
     Validator.direction(input);
     return input;
   },
@@ -37,7 +34,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    const input = InputView.readInput().trim();
+    const input = InputView.readInput(Message.ENTER_RETRY).trim();
     Validator.retry(input);
     return input;
   },
