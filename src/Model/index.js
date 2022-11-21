@@ -3,17 +3,15 @@ const { bridgeSizeValidation, movingValidation, gameCommandValidation } = requir
 class Model {
   #size = 0;
 
-  #current = 0;
-
   #retryCount = 1;
 
   #bridge = [];
 
   #moveList = [];
 
-  #move;
-
   #isGameWin = false;
+
+  #isGameOver = false;
 
   #gameCommand;
 
@@ -26,21 +24,16 @@ class Model {
     return this.#gameCommand;
   }
 
+  resetGameWin() {
+    this.#isGameWin = false;
+  }
+
   setGameWin(isGameWin) {
     this.#isGameWin = isGameWin;
   }
 
   getGameWin() {
     return this.#isGameWin;
-  }
-
-  setMove(move) {
-    movingValidation(move);
-    this.#move = move;
-  }
-
-  getMove() {
-    return this.#move;
   }
 
   resetBridge() {
@@ -53,14 +46,6 @@ class Model {
 
   getBridge() {
     return this.#bridge;
-  }
-
-  resetCurrent() {
-    this.#current = 0;
-  }
-
-  updateCurrent() {
-    this.#current += 1;
   }
 
   updateRetryCount() {
@@ -76,22 +61,57 @@ class Model {
     return this.#size;
   }
 
-  getCurrent() {
-    return this.#current;
-  }
-
   getRetryCount() {
     return this.#retryCount;
   }
 
-  // setMoveList(move) {
-  //   movingValidation(move);
-  //   this.#moveList.push(move)
-  // }
+  getCurrent() {
+    return this.#moveList.length;
+  }
 
-  // getMoveList() {
-  //   return this.#moveList;
-  // }
+  resetMoveList() {
+    this.#moveList = [];
+  }
+
+  setMoveList(move) {
+    movingValidation(move);
+    this.#moveList.push(move)
+  }
+
+  getMoveList() {
+    return this.#moveList;
+  }
+
+  resetGameOver(){
+    this.#isGameOver = false;
+  }
+
+  setGameOver(gameOver) {
+    this.#isGameOver = gameOver;
+  }
+
+  getGameOver() {
+    return this.#isGameOver;
+  }
+
+  reset() {
+    this.resetGameOver();
+    this.resetGameWin();
+    this.resetMoveList();
+  }
+
+  isWin() {
+    return this.#moveList.toString() === this.#bridge.toString();
+  }
+
+  isCorrectLocation() {
+    const { length } = this.#moveList;
+    const current = this.#moveList[length - 1];
+    const correctLocation = this.#bridge[length - 1];
+
+    return current === correctLocation
+  }
+  
 }
 
 module.exports = Model;
