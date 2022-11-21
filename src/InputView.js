@@ -74,3 +74,6 @@ const InputView = {
 };
 
 module.exports = InputView;
+module.exports.checkBridgeSize = checkBridgeSize;
+module.exports.checkMoving = checkMoving;
+module.exports.checkGameCommand = checkGameCommand;
