@@ -4,7 +4,12 @@ const { step, option } = require('./lib/constants')
 /**
  * @typedef {Object} gameStatusCallback
  * @property {function(): number} getNextGameStatus
- * @property {function(number): void} setNextGameStatus
+ * @property {function(number=): void} setNextGameStatus
+ */
+
+/**
+ * @typedef {Object} error
+ * @property {string} message
  */
 
 const InputView = {
@@ -29,13 +34,15 @@ const InputView = {
    * @param {gameStatusCallback} gameStatusCallback
    */
   readBridgeSize({ getNextGameStatus, setNextGameStatus }) {
-    MissionUtils.Console.readLine(`${this.query.BRIDGE_SIZE}\n`, (input) => {
-      const size = Number(input)
+    MissionUtils.Console.readLine(`\n${this.query.BRIDGE_SIZE}\n`, (input) => {
+      try {
+        const size = Number(input)
+        this.validateSize(size)
 
-      this.validateSize(size)
-
-      const gameStatus = getNextGameStatus(size)
-      setNextGameStatus(gameStatus)
+        this.handleGameStatus({ getNextGameStatus, setNextGameStatus }, size)
+      } catch (error) {
+        this.handleError(error, setNextGameStatus)
+      }
     })
   },
 
@@ -104,6 +111,26 @@ const InputView = {
     if (isInValid) {
       throw new Error(this.error.COMMAND)
     }
+  },
+
+  /**
+   * @param {gameStatusCallback} gameStatusCallback
+   * @param {number | string} size
+   */
+  handleGameStatus({ getNextGameStatus, setNextGameStatus }, input) {
+    const gameStatus = getNextGameStatus(input)
+
+    setNextGameStatus(gameStatus)
+  },
+
+  /**
+   * @param {error} error
+   * @param {function(number=): void} setNextGameStatus
+   */
+  handleError(error, setNextGameStatus) {
+    MissionUtils.Console.print(error.message)
+
+    setNextGameStatus()
   },
 }
 
