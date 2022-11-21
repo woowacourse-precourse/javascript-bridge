@@ -1,9 +1,9 @@
-const Validator = require('./Validator');
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const Validator = require('../Utils/Validator');
+const InputView = require('../View/InputView');
+const OutputView = require('../View/OutputView');
 const BridgeGame = require('./BridgeGame');
 const { Console } = require('@woowacourse/mission-utils');
-const { RESULT } = require('./constants');
+const { RESULT } = require('../Utils/constants');
 
 class App {
   #bridgeGame;
@@ -56,6 +56,3 @@ class App {
 }
 
 module.exports = App;
-
-// const app = new App();
-// app.play();
