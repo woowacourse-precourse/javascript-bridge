@@ -23,6 +23,13 @@ class Exception {
       throw new Error(ERROR_MESSAGE.invalidMove);
     }
   }
+
+  validateRestartInput(input) {
+    if (input !== PARAMETERS.restartControl && input !== PARAMETERS.quitControl) {
+      MissionUtils.Console.print(ERROR_MESSAGE.invalidRestart);
+      throw new Error(ERROR_MESSAGE.invalidRestart);
+    }
+  }
 }
 
 module.exports = Exception;
