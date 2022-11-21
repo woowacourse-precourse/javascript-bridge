@@ -163,8 +163,17 @@ class BridgeGame {
    * @param {[string[], string[]]} 위 이동 경로, 아래 이동 경로
    */
   isFailMove([upHistory, downHistory]) {
-    if ([...upHistory, ...downHistory].includes(HISTORY.DIE))
+    if (this.hasDIEHistory([upHistory, downHistory]))
       throw new Error(ERROR.FAIL_MOVE);
+  }
+
+  /**
+   * 이동 경로 데이터에 X 가 있는지 확인하는 메서드
+   * @param {[string[], string[]]} 위 이동 경로, 아래 이동 경로
+   * @returns 
+   */
+  hasDIEHistory([upHistory, downHistory]) {
+    return [...upHistory, ...downHistory].includes(HISTORY.DIE);
   }
 
   /**
