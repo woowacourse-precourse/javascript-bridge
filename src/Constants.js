@@ -5,4 +5,27 @@ const GAME_MESSAGES = Object.freeze({
   ASK_OPINION_FOR_RESTART: "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
 });
 
-module.exports = { GAME_MESSAGES };
+const RESULT_MESSAGES = Object.freeze({
+  PRINT_END_GAME: "\n최종 게임 결과",
+  PRINT_MAP: (direction) => `[${direction}]`,
+  PRINT_COUNT: (count) => `\n총 시도한 횟수: ${count}`,
+  PRINT_SUCCESS_OR_FAILURE: (status) => `게임 성공 여부: ${status}`,
+});
+
+const BLOCK = Object.freeze({
+  FIRST_BLOCK: (item) => ` ${item} `,
+  NOT_FIRST_BLOCK: (item) => `| ${item} `,
+});
+
+const SIGN = Object.freeze({
+  TOTAL_DIRECTION: 2,
+  UP_DIRECTION_SIGN: "U",
+  DOWN_DIRECTION_SIGN: "D",
+  BLANK_SIGN: " ",
+  SUCCESS_SIGN: "O",
+  FAILURE_SIGN: "X",
+  SUCCESS: "성공",
+  FAILURE: "실패",
+});
+
+module.exports = { GAME_MESSAGES, RESULT_MESSAGES, BLOCK, SIGN };
