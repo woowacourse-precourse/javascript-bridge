@@ -26,7 +26,7 @@ const OutputView = {
       const stringMap = way.join(' | ');
       MissionUtils.Console.print(`[ ${stringMap} ]`);
     });
-    MissionUtils.Console.print('');
+    OutputView.printEmptyLine();
   },
 
   /**
@@ -37,7 +37,7 @@ const OutputView = {
   printResult(isSuccess, playCount) {
     MissionUtils.Console.print(GAME.end);
     OutputView.printMap();
-    MissionUtils.Console.print('');
+    OutputView.printEmptyLine();
     if (isSuccess) MissionUtils.Console.print(GAME.success);
     if (!isSuccess) MissionUtils.Console.print(GAME.fail);
     MissionUtils.Console.print(`${GAME.try}${playCount}`);
