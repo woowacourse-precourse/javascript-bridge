@@ -1,15 +1,12 @@
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const { OPTION, RANDOM_NUMBER, BRIDGE_VALUE } = require('./constants');
 
 const generateRandomNumber = () => {
   return BridgeRandomNumberGenerator.generate();
 };
 
-const convertReverse = (number) => {
-  return number === 1 ? 0 : 1;
-};
-
 const convertNumberToUpDown = (number) => {
-  return number === 1 ? 'U' : 'D';
+  return number === RANDOM_NUMBER.ONE ? OPTION.UP : OPTION.DOWN;
 };
 
 const convertBlueprintToBridge = (array) => {
@@ -18,12 +15,11 @@ const convertBlueprintToBridge = (array) => {
 };
 
 const createBlueprint = (size) => {
-  return new Array(size).fill(false);
+  return new Array(size).fill(BRIDGE_VALUE.BLUEPRINT_DEFAULT);
 };
 
 module.exports = {
   generateRandomNumber,
-  convertReverse,
   convertBlueprintToBridge,
   createBlueprint,
 };

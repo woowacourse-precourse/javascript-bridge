@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE } = require('../utils/constants');
+const { MESSAGE, OPTION, PROGRESS_MAP, RESULT } = require('../utils/constants');
 const { createBlueprint } = require('../utils/bridgeHandler');
 
 /**
@@ -8,7 +8,7 @@ const { createBlueprint } = require('../utils/bridgeHandler');
 const OutputView = {
   printStart() {
     Console.print(MESSAGE.START);
-    Console.print('');
+    Console.print(MESSAGE.BLANK);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
@@ -19,14 +19,14 @@ const OutputView = {
     const progressMap = this.createMap(progressData);
     Console.print(progressMap.up);
     Console.print(progressMap.down);
-    Console.print('');
+    Console.print(MESSAGE.BLANK);
   },
 
   createMap(progressData) {
-    const upRow = this.drawMap(progressData, 'U');
-    const downRow = this.drawMap(progressData, 'D');
-    const upString = `[${upRow.join('|')}]`;
-    const downString = `[${downRow.join('|')}]`;
+    const upRow = this.drawMap(progressData, OPTION.UP);
+    const downRow = this.drawMap(progressData, OPTION.DOWN);
+    const upString = `[${upRow.join(PROGRESS_MAP.SEPARATOR)}]`;
+    const downString = `[${downRow.join(PROGRESS_MAP.SEPARATOR)}]`;
 
     return { up: upString, down: downString };
   },
@@ -35,9 +35,9 @@ const OutputView = {
     const blueprint = createBlueprint(progressData.length);
     const progressMap = [...blueprint].map((_, index) => {
       const data = progressData[index];
-      if (data.select !== position) return '   ';
+      if (data.select !== position) return PROGRESS_MAP.BLANK;
 
-      return data.alive ? ' O ' : ' X ';
+      return data.alive ? PROGRESS_MAP.ALIVE : PROGRESS_MAP.DIE;
     });
 
     return progressMap;
@@ -49,10 +49,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(progressData, playCount, gameResult) {
-    Console.print('최종 게임 결과');
+    Console.print(RESULT.TITLE);
     this.printMap(progressData);
-    Console.print(`게임 성공 여부: ${gameResult}`);
-    Console.print(`총 시도한 횟수: ${playCount}`);
+    Console.print(RESULT.GAME_RESULT(gameResult));
+    Console.print(RESULT.PLAY_COUNT(playCount));
     Console.close();
   },
 };

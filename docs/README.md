@@ -66,3 +66,4 @@
 - [ ] getter를 최대한 제한한다. 객체 내에서 값을 가져와 비즈니스 로직을 구현하지 말고 객체 내부에서 비즈니스 로직을 메서드로 구현해 값을 이용한다. 
 
 - [ ] progressData, playCount, gameResult를 하나의 gameData에서 관리하기.
+- [x] 하드코딩 되어있는 값들 constant로 이동

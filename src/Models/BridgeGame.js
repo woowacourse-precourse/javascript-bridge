@@ -1,6 +1,6 @@
 const BridgeMaker = require('../BridgeMaker');
-const generateRandomNumber = require('../utils/bridgeHandler');
-const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const { generateRandomNumber } = require('../utils/bridgeHandler');
+const { BRIDGE_VALUE } = require('../utils/constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -8,15 +8,15 @@ const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 
 class BridgeGame {
   #myBridge;
-  #gameProgress = [];
-  #round = 0;
-  #alive = true;
-  #playCount = 0;
-  #gameResult = '성공';
+  #gameProgress = BRIDGE_VALUE.DEFAULT_GAME_PROGRESS;
+  #round = BRIDGE_VALUE.DEFAULT_ROUND;
+  #alive = BRIDGE_VALUE.DEFAULT_ALIVE_VALUE;
+  #playCount = BRIDGE_VALUE.DEFAULT_COUNT;
+  #gameResult = BRIDGE_VALUE.RESULT_WIN;
 
   createBridge(size) {
-    this.#playCount += 1;
-    this.#myBridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.#playCount += BRIDGE_VALUE.COUNT_UNIT;
+    this.#myBridge = BridgeMaker.makeBridge(size, generateRandomNumber);
     console.log(this.#myBridge);
   }
 
@@ -29,7 +29,7 @@ class BridgeGame {
   move(select) {
     this.#alive = this.checkAlive(select);
     this.#gameProgress.push({ select, alive: this.#alive });
-    this.#round += 1;
+    this.#round += BRIDGE_VALUE.ROUND_UNIT;
   }
 
   checkGameEnd() {
@@ -61,14 +61,14 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#gameProgress = [];
-    this.#round = 0;
-    this.#alive = true;
-    this.#playCount += 1;
+    this.#gameProgress = BRIDGE_VALUE.DEFAULT_GAME_PROGRESS;
+    this.#round = BRIDGE_VALUE.DEFAULT_ROUND;
+    this.#alive = BRIDGE_VALUE.DEFAULT_ALIVE_VALUE;
+    this.#playCount += BRIDGE_VALUE.COUNT_UNIT;
   }
 
   defeat() {
-    this.#gameResult = '실패';
+    this.#gameResult = BRIDGE_VALUE.RESULT_WIN;
   }
 }
 

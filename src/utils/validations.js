@@ -1,8 +1,8 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { ERROR, MESSAGE } = require('./constants');
+const { ERROR, BRIDGE_VALUE, REGEX, OPTION } = require('./constants');
 
 const checkNumberValidation = (userInput) => {
-  const numberRegex = /^\d+$/g;
+  const numberRegex = REGEX.NUMBER;
   if (userInput.match(numberRegex)) return true;
 
   Console.close();
@@ -10,7 +10,7 @@ const checkNumberValidation = (userInput) => {
 };
 
 const validateBridgeRange = (userInput) => {
-  if (userInput >= 3 && userInput <= 20) return;
+  if (userInput >= BRIDGE_VALUE.RANGE_MIN && userInput <= BRIDGE_VALUE.RANGE_MAX) return;
 
   Console.close();
   throw new Error(ERROR.INVALID_RANGE);
@@ -23,7 +23,7 @@ const validateBridgeSize = (userInput) => {
 
 /* Moving Input Validation */
 const validateMovingInput = (userInput) => {
-  const options = ['U', 'D'];
+  const options = [OPTION.UP, OPTION.DOWN];
   if (options.includes(userInput)) return;
 
   throw new Error(ERROR.MOVING);
@@ -31,7 +31,7 @@ const validateMovingInput = (userInput) => {
 
 /* Continue Validation */
 const validateContinue = (userInput) => {
-  const options = ['R', 'Q'];
+  const options = [OPTION.RETRY, OPTION.QUIT];
   if (options.includes(userInput)) return;
 
   throw new Error(ERROR.CONTINUE);

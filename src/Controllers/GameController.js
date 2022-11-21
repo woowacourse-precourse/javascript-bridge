@@ -1,6 +1,7 @@
 const BridgeGame = require('../Models/BridgeGame');
 const InputView = require('../Views/InputView');
 const OutputView = require('../Views/OutputView');
+const { OPTION } = require('../utils/constants');
 
 class GameController {
   constructor() {
@@ -45,7 +46,7 @@ class GameController {
 
   askRetry() {
     this.inputView.readGameCommand((userInput) => {
-      if (userInput === 'R') return this.replay();
+      if (userInput === OPTION.RETRY) return this.replay();
 
       return this.defeat();
     });
