@@ -1,5 +1,7 @@
 const InputView = require("../InputView");
 const OutputView = require("../OutputView");
+const BridgeMaker = require("../BridgeMaker");
+const RandomGenerator = require("../BridgeRandomNumberGenerator");
 
 /**
  * 객체
@@ -7,15 +9,28 @@ const OutputView = require("../OutputView");
  */
 
 const GameLogic = {
-  step() {
-    //InputView 실행 결과 (U,.. D,.. ) return
-  },
+  // getBridge(resolved, values, result){
+  //   const bridge = BridgeMaker.makeBridge(resolved, RandomGenerator);
+  //   InputView.readMoving(bridge, values, result)
+  // }
 
-  compare(bridge, stepArray, index) {
-    console.log(bridge, stepArray, index);
-    // BridgeMaker에서 가져오기: bridgeArray // 0100010
-    // step() 과 비교
-  },
+
+
+
+  // step() {
+  //   //InputView 실행 결과 (U,.. D,.. ) return
+  // },
+
+  // compare(bridge, stepArray, index) {
+  //   console.log(bridge, stepArray, index);
+  //   // BridgeMaker에서 가져오기: bridgeArray // 0100010
+  //   // step() 과 비교
+  // },
+
+  // readBridge(resolved, values, result) {
+  //   const bridge = BridgeMaker.makeBridge(resolved, RandomGenerator);
+  //   InputView.readMoving(bridge, values, result);
+  // },
 
   returnHistory() {
     //없어질 것 같음
