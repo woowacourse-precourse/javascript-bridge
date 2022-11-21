@@ -10,15 +10,15 @@ const Map = {
   },
 
   upSide(bridgeInfo) {
-    let map = '[';
+    let upsideMap = '[';
     bridgeInfo.userMove.forEach((direction, index) => {
       if (direction === BRIDGE_RULE.MOVE_UP) {
-        map += this.isSameDirection(direction, bridgeInfo.bridge[index]);
-      } else map += '   ';
-      map += '|';
+        upsideMap += this.isSameDirection(direction, bridgeInfo.bridge[index]);
+      } else upsideMap += '   ';
+      upsideMap += '|';
     });
-    map = map.replace(REGEX_LAST_VERTICAL_LINE, ']');
-    return map;
+    upsideMap = upsideMap.replace(REGEX_LAST_VERTICAL_LINE, ']');
+    return upsideMap;
   },
 
   isSameDirection(users, bridge) {
@@ -27,15 +27,15 @@ const Map = {
   },
 
   downSide(bridgeInfo) {
-    let map = '[';
+    let downMap = '[';
     bridgeInfo.userMove.forEach((direction, index) => {
       if (direction === BRIDGE_RULE.MOVE_DOWN) {
-        map += this.isSameDirection(direction, bridgeInfo.bridge[index]);
-      } else map += '   ';
-      map += '|';
+        downMap += this.isSameDirection(direction, bridgeInfo.bridge[index]);
+      } else downMap += '   ';
+      downMap += '|';
     });
-    map = map.replace(REGEX_LAST_VERTICAL_LINE, ']');
-    return map;
+    downMap = downMap.replace(REGEX_LAST_VERTICAL_LINE, ']');
+    return downMap;
   },
 };
 
