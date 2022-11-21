@@ -12,7 +12,7 @@ class BridgeStart {
     this.#repo.create(this.#input);
   }
 
-  doAction() {
+  store() {
     this.#createBridgeData();
   }
 }
