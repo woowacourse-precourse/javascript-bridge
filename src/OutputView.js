@@ -52,6 +52,11 @@ const OutputView = {
     if (value == 'D' && !result) (up += '|   '), (down += '| X ');
     return [up, down];
   },
+
+  printError(error, method, object) {
+    Console.print(error);
+    return method(object);
+  },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
