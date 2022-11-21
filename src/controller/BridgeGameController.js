@@ -3,7 +3,6 @@ const BridgeGame = require('../BridgeGame');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../utils/BridgeRandomNumberGenerator');
 const { GameState } = require('../constants/Constant');
-const Validator = require('../utils/Validator');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
@@ -17,29 +16,18 @@ class BridgeGameController {
   }
 
   initBridgeGame() {
-    try {
-      const bridgeSize = InputView.readBridgeSize();
-      Validator.validateBridgeSize(bridgeSize);
-      this.#bridge = BridgeMaker.makeBridge(+bridgeSize, BridgeRandomNumberGenerator.generate);
-      this.#bridgeGame = new BridgeGame(this.#bridge);
-      this.playBridgeGame();
-    } catch (err) {
-      Console.print(err.message);
-      if (err instanceof TypeError || err instanceof RangeError) this.initBridgeGame();
-    }
+    this.#bridge = BridgeMaker.makeBridge(
+      +InputView.readBridgeSize(),
+      BridgeRandomNumberGenerator.generate,
+    );
+    this.#bridgeGame = new BridgeGame(this.#bridge);
+    this.playBridgeGame();
   }
 
   playBridgeGame() {
-    try {
-      const direction = InputView.readMoving();
-      Validator.validateMoving(direction);
-      this.#bridgeGame.move(direction);
-      OutputView.printMap(this.#bridge, this.#bridgeGame.getMovingLog());
-      this.checkBridgeGame();
-    } catch (err) {
-      Console.print(err.message);
-      if (err instanceof RangeError) this.playBridgeGame();
-    }
+    this.#bridgeGame.move(InputView.readMoving());
+    OutputView.printMap(this.#bridge, this.#bridgeGame.getMovingLog());
+    this.checkBridgeGame();
   }
 
   checkBridgeGame() {
@@ -50,15 +38,9 @@ class BridgeGameController {
   }
 
   requestRetryBridgeGame() {
-    try {
-      const command = InputView.readGameCommand();
-      Validator.validateGameCommand(command);
-      if (command === 'R') this.retryBridgeGame();
-      if (command === 'Q') this.endBridgeGame();
-    } catch (err) {
-      Console.print(err.message);
-      if (err instanceof RangeError) this.requestRetryBridgeGame();
-    }
+    const command = InputView.readGameCommand();
+    if (command === 'R') this.retryBridgeGame();
+    if (command === 'Q') this.endBridgeGame();
   }
 
   retryBridgeGame() {
