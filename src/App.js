@@ -6,7 +6,7 @@ const {
   Message,
 } = require('./Config');
 const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('BridgeRandomNumberGenerator');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const Bridge = require('./Bridge');
 const BridgeGame = require('./BridgeGame');
 const GameLogger = require('./GameLogger');
@@ -49,6 +49,16 @@ class App {
     bridge = new Bridge(bridge);
     this.#game = new BridgeGame(bridge);
     this.#logger = new GameLogger();
+  }
+
+  playSingleGame() {
+    let resultStatus = GameConfig.STATUS_PLAY;
+    while (!App.isSingleGameEnd(resultStatus)) {
+      const direction = App.requestUserInput(InputView.readMoving);
+      resultStatus = this.movePlayer(direction);
+      OutputView.printMap(this.#logger);
+    }
+    return resultStatus;
   }
 
   movePlayer(direction) {
