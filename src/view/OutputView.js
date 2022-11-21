@@ -14,8 +14,8 @@ const OutputView = {
   printMap() {
     const bridge = Player.getBridgeStateArray();
 
-    Console.print(MESSAGE.BRIDGE_STATE_MESSAGE(bridge[0]));
-    Console.print(`${MESSAGE.BRIDGE_STATE_MESSAGE(bridge[1])}\n`);
+    Console.print(MESSAGE.BRIDGE_STATE_MESSAGE(bridge[1]));
+    Console.print(`${MESSAGE.BRIDGE_STATE_MESSAGE(bridge[0])}\n`);
   },
 
   /**

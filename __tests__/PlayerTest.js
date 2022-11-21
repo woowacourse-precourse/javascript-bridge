@@ -8,30 +8,30 @@ describe("플레이어 상태 테스트", () => {
 
   test("위쪽 다리를 맞출 경우 상태 테스트", () => {
     Player.checkUpperBridgeCorrect("U", true);
-    expect(Player.bridgeStateArray).toStrictEqual([[" O "], ["   "]]);
+    expect(Player.bridgeStateArray).toStrictEqual([["   "], [" O "]]);
   });
 
   test("위쪽 다리를 틀릴 경우 상태 테스트", () => {
     Player.checkUpperBridgeWrong("U", false);
     expect(Player.bridgeStateArray).toStrictEqual([
-      [" O ", " X "],
       ["   ", "   "],
+      [" O ", " X "],
     ]);
   });
 
   test("아래 다리를 맞출 경우 상태 테스트", () => {
     Player.checkLowerBridgeCorrect("D", true);
     expect(Player.bridgeStateArray).toStrictEqual([
-      [" O ", " X ", "   "],
       ["   ", "   ", " O "],
+      [" O ", " X ", "   "],
     ]);
   });
 
   test("아래 다리를 틀릴 경우 상태 테스트", () => {
     Player.checkLowerBridgeWrong("D", false);
     expect(Player.bridgeStateArray).toStrictEqual([
-      [" O ", " X ", "   ", "   "],
       ["   ", "   ", " O ", " X "],
+      [" O ", " X ", "   ", "   "],
     ]);
   });
 
