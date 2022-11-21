@@ -13,6 +13,7 @@ const OutputView = {
   printMap(map) {
     Console.print(`[ ${map[BRIDGE_POSITION.UP].join(' | ')} ]`);
     Console.print(`[ ${map[BRIDGE_POSITION.DOWN].join(' | ')} ]`);
+    Console.print('\n');
   },
 
   /**
@@ -20,11 +21,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(map, count, isSuccess) {
-    Console.print('최종 게임 결과');
+  printResult(result) {
+    const { map, count, isCorrect: isSuccess } = result;
+    Console.print('최종 게임 결과\n');
     OutputView.printMap(map);
     Console.print(`게임 성공 여부: ${isSuccess ? '성공' : '실패'}`);
     Console.print(`총 시도한 횟수: ${count}`);
+    Console.close();
   },
 
   printStartMessage() {

@@ -25,16 +25,17 @@ const expectBridgeOrder = (received, upside, downside) => {
 };
 
 describe("Outview 테스트", () => {
+  const map = { 1: [ "O", " ", "O" ] , 0: [ " ", "O", " " ] }
   test("지도 출력 테스트", () => {
     const logSpy = getLogSpy();
-    OutputView.printMap({ 1: [ "O", " ", "O" ] , 0: [ " ", "O", " " ] });
+    OutputView.printMap(map);
     const log = getOutput(logSpy);
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
   test("결과 출력 테스트", () => {
     const logSpy = getLogSpy();
-    OutputView.printResult({ 1: [ "O", " ", "O" ] , 0: [ " ", "O", " " ] }, 1, true);
+    OutputView.printResult({map, count: 1, isCorrect: true});
     const log = getOutput(logSpy);
     expectLogContains(log, [
       "최종 게임 결과",
