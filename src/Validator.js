@@ -3,6 +3,7 @@ const {
   IS_MOVING_INPUT_ERROR,
   IS_RETRY_INPUT_ERROR,
 } = require('./constants/errors');
+const { FINAL_COMMAND_GROUP, POSITION } = require('./enums');
 
 const Validator = {
   validateBridgeSizeInput: (bridgeSizeInput) => {
@@ -12,13 +13,13 @@ const Validator = {
   },
 
   validateMoveInput: (moveInput) => {
-    if (!(moveInput === 'U' || moveInput === 'D')) {
+    if (!(moveInput === POSITION.UP || moveInput === POSITION.DOWN)) {
       throw new Error(IS_MOVING_INPUT_ERROR);
     }
   },
 
   validateRetryInput: (retryInput) => {
-    if (!(retryInput === 'R' || retryInput === 'Q')) {
+    if (!(retryInput === FINAL_COMMAND_GROUP.RETRY || retryInput === FINAL_COMMAND_GROUP.QUIT)) {
       throw new Error(IS_RETRY_INPUT_ERROR);
     }
   },
