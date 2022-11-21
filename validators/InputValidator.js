@@ -27,6 +27,11 @@ class InputValidator {
     if (string !== 'U' && string !== 'D') throw new Error(INPUT_ERROR.MOVE_INPUT_IS_U_OR_D);
   }
 
+  static isRestartQuit (string) {
+    this.isBlank(string);
+    if (string !== 'R' && string !== 'Q') throw new Error(INPUT_ERROR.GAME_RESTART_IS_R_OR_Q);
+  }
+
 }
 
 module.exports = InputValidator;
