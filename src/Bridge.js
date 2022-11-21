@@ -71,8 +71,8 @@ class Bridge {
     this.#downsideBridge = [];
   }
 
-  showFinalResult(upsideBridge, downsideBridge, gameResult, gameRound) {
-    OutputView.printResult(upsideBridge, downsideBridge, gameResult, gameRound);
+  showFinalResult(upsideBridge, downsideBridge, gameState) {
+    OutputView.printResult(upsideBridge, downsideBridge, gameState);
   }
 }
 

@@ -9,13 +9,16 @@ class BridgeGame {
   #bridge;
   #bridgeIndex;
   #bridgeArray;
-  #gameRound;
-  #gameResult = "실패";
+  #state = {
+    round: 1,
+    result: "",
+  };
+  // #gameRound = 1;
+  // #gameResult = "실패";
 
   constructor() {
     this.#bridge = new Bridge();
     this.#bridgeIndex = 0;
-    this.#gameRound = 1;
   }
 
   makeBridge(bridgeSize) {
@@ -41,6 +44,10 @@ class BridgeGame {
     return this.#bridge.hasX();
   }
 
+  setState(result) {
+    this.#state.result = result;
+  }
+
   move(moving) {
     this.#bridge.setBridge(this.#bridgeArray, this.#bridgeIndex++, moving);
   }
@@ -51,12 +58,13 @@ class BridgeGame {
    */
   retry() {
     this.#bridge.setInitial();
-    this.#gameRound++;
+    this.#state.round++;
+    // this.#gameRound++;
     this.#bridgeIndex = 0;
   }
 
-  getGameRound() {
-    return this.#gameRound;
+  getState() {
+    return this.#state;
   }
 
   getResultBridge() {

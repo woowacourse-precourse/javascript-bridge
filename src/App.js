@@ -48,27 +48,22 @@ class App {
   }
 
   askRetryOrQuit() {
-    const gameRound = this.#bridgeGame.getGameRound();
+    const gameState = this.#bridgeGame.getState();
     if (this.#bridgeGame.loseGame()) {
       InputView.readGameCommand((playerInput) => {
         const command = InputView.getGameCommand(playerInput);
         if (command === "R") this.retryGame();
-        if (command === "Q") this.quitGame(gameRound);
+        if (command === "Q") this.quitGame(gameState);
       });
     } else {
-      this.winGame(gameRound);
+      this.winGame(gameState);
     }
   }
 
-  winGame(gameRound) {
-    const result = "성공";
+  winGame(gameState) {
+    this.#bridgeGame.setState("성공");
     const [upsideBridge, downsideBridge] = this.#bridgeGame.getResultBridge();
-    this.#bridge.showFinalResult(
-      upsideBridge,
-      downsideBridge,
-      result,
-      gameRound
-    );
+    this.#bridge.showFinalResult(upsideBridge, downsideBridge, gameState);
     this.endGame();
   }
 
@@ -77,15 +72,10 @@ class App {
     this.inputMoving();
   }
 
-  quitGame(gameRound) {
-    const result = "실패";
+  quitGame(gameState) {
+    this.#bridgeGame.setState("실패");
     const [upsideBridge, downsideBridge] = this.#bridgeGame.getResultBridge();
-    this.#bridge.showFinalResult(
-      upsideBridge,
-      downsideBridge,
-      result,
-      gameRound
-    );
+    this.#bridge.showFinalResult(upsideBridge, downsideBridge, gameState);
     this.endGame();
   }
 
