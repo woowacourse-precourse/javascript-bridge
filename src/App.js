@@ -21,8 +21,18 @@ class App {
       readMoving(this.readMovingCallback)
   }
 
-  readMovingCallback = (input) => {
-    
+  /**
+   * readMoving 안에 들어가는 콜백함수
+   */
+   readMovingCallback = (input) => {
+    let goStop = this.bridgeGame.move(input) ;
+    printMap(this.bridgeGame.printMap) ;
+    if ( goStop == "Go") {
+      this.movingBridge() ;
+      if (this.bridgeGame.success()== "Success") printResult(this.bridgeGame.printMap, this.bridgeGame.tryCount, "Success") ;
+      return ;
+    } 
+    this.askRetryFail() ;
   }
 
 }
