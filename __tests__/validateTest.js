@@ -36,5 +36,17 @@ describe("사용자에게 입력받는 값들의 테스트", () => {
       Validate.validateMoving(move)
     ).toBe(move);
   });
+
+  test.each([1, "", "P"]) ("게임 재시작/종료시 입력 값이 R 또는 Q가 아니면 예외가 발생한다", (command) => {
+    expect(() => {
+      Validate.ValidateCommand(command);
+    }).toThrow("[ERROR]");
+  });
+
+  test.each(["R", "Q"]) ("게임 재시작/종료시 입력 값이 R 또는 Q이면 성공한다.", (command) => {
+    expect(
+      Validate.ValidateCommand(command)
+    ).toBe(command)
+  });
 })
 

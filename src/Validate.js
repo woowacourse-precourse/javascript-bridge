@@ -14,11 +14,18 @@ const Validate = {
   },
 
   validateMoving(move) {
-    if (move !== "U" && move !== "D") {
+    if (move !== SPACE_TO_MOVE.MOVE_UP && move !== SPACE_TO_MOVE.MOVE_DOWN) {
       throw new Error(ERROR_MESSAGE.CHOICE_SPACE_NOT_PIXED_VALUE);
     };
     return move;
   },
+
+  ValidateCommand(command) {
+    if (command !== GAME_CHOICE.GAME_RETRY && command !== GAME_CHOICE.GAME_END) {
+      throw new Error(ERROR_MESSAGE.CHOICE_GAME_NOT_PIXED_VALUE);
+    }
+    return command;
+  }
 }
 
 module.exports = Validate;
