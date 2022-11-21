@@ -1,8 +1,9 @@
+const OutputView = require("./OutputView");
+const InputView = require("./InputView");
+
 class BridgeGameToView {
   BridgeGameToOutputView(gameRec) {
-    console.log(gameRec.bridgeOutput.firstBridge);
-    console.log(gameRec.bridgeOutput.secondBridge);
-    // OutputView.printMap(gameRec);
+    OutputView.printMap(gameRec);
   }
 
   BridgeGameToInputView(gameRec) {
