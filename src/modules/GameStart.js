@@ -1,7 +1,6 @@
 const BridgeGame = require("../BridgeGame");
 
 class GameStart {
-  #toWalkCount = 0;
   #brigeArr = [];
   #BRIDGEGAME;
   #answer = false;
@@ -21,16 +20,16 @@ class GameStart {
   }
   // 다리 U/D 값 -> O/X 값으로 변경
   changeOX(upOrDown, arrUp, arrDown) {
+    let toWalkCount = 0;
     upOrDown.some((move) => {
       move === "U"
-        ? this.#BRIDGEGAME.move(arrUp, this.#toWalkCount, move)
-        : this.#BRIDGEGAME.move(arrDown, this.#toWalkCount, move);
-      this.#toWalkCount += 1;
+        ? this.#BRIDGEGAME.move(arrUp, toWalkCount, move)
+        : this.#BRIDGEGAME.move(arrDown, toWalkCount, move);
+      toWalkCount += 1;
       // "X" 값 유무로 게임 중지
-      if (arrUp.includes("X") || arrDown.includes("X")) {
-        this.#answer = this.#BRIDGEGAME.retry();
-        return true;
-      }
+      const includeX = this.#BRIDGEGAME.retry(arrUp, arrDown);
+      this.#answer = this.#BRIDGEGAME.answer;
+      if (includeX) return true;
     });
   }
 }

@@ -4,10 +4,9 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const GameStart = require("./modules/GameStart");
 const OutputView = require("./OutputView");
 class App {
-  size;
+  static size;
   tryGame = 1; // 시도 횟수
-  #answer;
-  #randomArr = [];
+  #randomArr;
   constructor() {
     // 다리의 길이
     this.size = InputView.readBridgeSize();
@@ -24,10 +23,10 @@ class App {
     const [arrUp, arrDown] = BridgeMaker.changeRandomArray(this.#randomArr);
     // 게임 시작
     const GAMESTART = new GameStart(upOrDown, arrUp, arrDown);
-    this.#answer = GAMESTART.getAnswer();
+    const answer = GAMESTART.getAnswer();
     const bridgeArr = GAMESTART.getBrigeArr();
     //게임 재시작
-    this.restart(this.#answer);
+    this.restart(answer);
     //출력
     OutputView.printResult(bridgeArr, this.tryGame);
   }
