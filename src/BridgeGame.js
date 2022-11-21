@@ -16,6 +16,10 @@ class BridgeGame {
     this.#map = [[], []];
   }
 
+  getTryCount() {
+    return this.#tryCount;
+  }
+
   getMap() {
     return this.#map;
   }
