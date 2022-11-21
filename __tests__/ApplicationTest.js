@@ -5,7 +5,7 @@ const BridgeMaker = require('../src/BridgeMaker');
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers
-    .reduce((acc, input) => acc.mockImplementationOnce((_, callback) => {
+    .reduce((acc, input) => acc.mockImplementationOnce((__, callback) => {
       callback(input);
     }), MissionUtils.Console.readLine);
 };

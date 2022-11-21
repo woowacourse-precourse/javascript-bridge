@@ -20,7 +20,7 @@ describe('다리 건너기 테스트', () => {
       new Map([['U', ['O', ' ', 'X']], ['D', [' ', 'O', ' ']]]),
     ];
     const bridgeMap = new BridgeMap();
-    bridgeMap.setPattern(pattern);
+    bridgeMap.makePattern(pattern);
     input.forEach((path, index) => {
       expect(bridgeMap
         .setHistoryWithChooseStep(path).getHistory())
