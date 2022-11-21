@@ -30,6 +30,11 @@ class GameResult {
     return existing.machine === existing.player;
   }
 
+  getCurrentIndex() {
+    const entries = [...this.#resultMap];
+    return entries.findIndex(([key, value]) => !value.player);
+  }
+
   // 리팩토링 사항
   makeHistory() {
     const entries = [...this.#resultMap];
@@ -48,11 +53,6 @@ class GameResult {
       }
     }
     return [upside, downside];
-  }
-
-  printHistory() {
-    const result = this.makeHistory();
-    OutputView.printMap(result);
   }
 
   getTryCount() {

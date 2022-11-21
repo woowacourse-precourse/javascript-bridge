@@ -46,16 +46,15 @@ class BridgeGame {
 
   // 리팩토링 사항
   async controlMoving() {
-    const until = this.gameResult.getResult().size;
-
-    let current = 0;
-    while (current < until) {
+    const current = this.gameResult.getCurrentIndex();
+    if (current > -1) {
       const moved = await this.move(current);
+      OutputView.printMap(this.gameResult.makeHistory());
 
-      moved ? (current += 1) : await this.command();
-
-      if (current === until) return;
+      return moved ? this.controlMoving() : await this.command();
     }
+
+    return this.finish('success');
   }
 
   // 리팩토링 사항
@@ -63,35 +62,27 @@ class BridgeGame {
     const direction = await this.getMovingDirection();
     const moved = this.gameResult.calcutateMatch(current, direction);
 
-    this.gameResult.printHistory();
-
     return moved;
   }
 
   async command() {
     const command = await this.getGameCommand();
-    if (command === INPUT_FORMAT.RETRY) {
-      return this.retry();
-    } else {
-      return;
-    }
+    command === INPUT_FORMAT.RETRY ? this.retry() : this.finish('fail');
   }
 
   async getGameCommand() {
     try {
-      await InputView.readGameCommand();
+      return await InputView.readGameCommand();
     } catch (error) {
       OutputView.printMessage(error.message);
       this.getGameCommand();
     }
   }
 
-  async retry() {
+  retry() {
     this.gameResult.clear();
-    this.move();
+    this.controlMoving();
   }
-
-  // async finish(type) {}
 }
 
 module.exports = BridgeGame;
