@@ -65,6 +65,12 @@ const InputView = {
     Console.readLine('', (string) => {
       try {
         InputValidator.isRestartQuit(string);
+        if (string === 'R') {
+          bridgeGame.setList();
+          bridgeGame.move(bridgeGame);
+          bridgeGame.incrementTryCount();
+        }
+        if (string === 'Q') printResult(false, bridgeGame);
       } catch (error) {
         Console.print(error.message);
         this.readGameCommand(bridgeGame);

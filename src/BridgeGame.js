@@ -97,6 +97,11 @@ class BridgeGame {
   retry(bridgeGame) {
     inputView.readGameCommand(bridgeGame);
   }
+
+  setList () {
+    this.#upList = [];
+    this.#downList = [];
+  }
 }
 
 module.exports = BridgeGame;
