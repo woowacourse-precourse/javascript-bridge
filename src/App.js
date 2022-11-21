@@ -1,16 +1,11 @@
-const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const InputView = require("./InputView");
-const { OUTPUT } = require("./constants/messages");
+const OutputView = require("./OutputView");
 
 class App {
   play() {
-    this.printStart();
+    OutputView.printStart();
     this.playGame();
-  }
-
-  printStart() {
-    Console.print(`${OUTPUT.START}${OUTPUT.LINE}`);
   }
 
   playGame() {
