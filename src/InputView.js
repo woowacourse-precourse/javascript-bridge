@@ -38,20 +38,20 @@ const InputView = {
         let check = game.move(answer, this.bridge, this.now);
 
         if (check == true && answer == "U") {
-          OutputView.printMap("O", " ");
+          OutputView.printMap("O", " ", "성공");
         }
 
         if (check == true && answer == "D") {
-          OutputView.printMap(" ", "O");
+          OutputView.printMap(" ", "O", "성공");
         }
 
         if (check == false && answer == "U") {
-          OutputView.printMap("X", " ");
+          OutputView.printMap("X", " ", "실패");
           this.readGameCommand();
           return;
         }
         if (check == false && answer == "D") {
-          OutputView.printMap(" ", "X");
+          OutputView.printMap(" ", "X", "실패");
           this.readGameCommand();
           return;
         }
