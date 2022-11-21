@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const OutputView = require("../src/OutputView");
+const { printMap, printResult } = require("../src/OutputView");
 const BridgeMaker = require("../src/BridgeMaker");
 const BridgeGame = require("../src/BridgeGame");
 
@@ -28,25 +28,20 @@ const InputView = {
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
         this.Game.fillMap(input);
-        OutputView.printMap(this.Game.getBridgeMap());
+        printMap(this.Game);
         return this.nextRound(this.Game.move(input));
       }
     );
   },
 
   nextRound(gameState) {
-    if (gameState == "O") {
-      return this.readMoving();
-    }
-    if (gameState == "성공") {
-      return OutputView.printResult(
-        this.Game.getBridgeMap(),
-        gameState,
-        this.Game.getRetryCount()
-      );
-    }
-    if (gameState == "X") {
-      return this.readGameCommand("실패");
+    switch (gameState) {
+      case "O":
+        return this.readMoving();
+      case "성공":
+        return printResult(this.Game, "성공");
+      case "X":
+        return this.readGameCommand("실패");
     }
   },
 
