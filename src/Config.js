@@ -42,4 +42,9 @@ const Message = {
   },
 };
 
-module.exports = { BridgeConfig, GameConfig, AppConfig, Message };
+module.exports = {
+  BridgeConfig,
+  GameConfig,
+  AppConfig,
+  Message,
+};
