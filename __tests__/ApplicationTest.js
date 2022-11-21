@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
+const { INPUT_ERROR } = require('../src/utils/constants');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -85,6 +86,14 @@ describe('다리 건너기 테스트', () => {
     runException(['a']);
   });
 
+  // 추가한 테스트 코드
+  const noRetryFailResult = [
+    '최종 게임 결과',
+    '[ O | X ]',
+    '[   |   ]',
+    '게임 성공 여부: 실패',
+    '총 시도한 횟수: 1',
+  ];
   test('재시도 없이 게임종료를 선택하여 다리건너기에 실패한 경우', () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 0]);
@@ -94,16 +103,17 @@ describe('다리 건너기 테스트', () => {
     app.play();
 
     const log = getOutput(logSpy);
-    expectLogContains(log, [
-      '최종 게임 결과',
-      '[ O | X ]',
-      '[   |   ]',
-      '게임 성공 여부: 실패',
-      '총 시도한 횟수: 1',
-    ]);
+    expectLogContains(log, noRetryFailResult);
     expectBridgeOrder(log, '[ O | X ]', '[   |   ]');
   });
 
+  const oneRetrySuccessResult = [
+    '최종 게임 결과',
+    '[ O |   |   ]',
+    '[   | O | O ]',
+    '게임 성공 여부: 성공',
+    '총 시도한 횟수: 2',
+  ];
   test('재시도 1번 후 다리건너기에 성공한 경우', () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 0]);
@@ -113,16 +123,17 @@ describe('다리 건너기 테스트', () => {
     app.play();
 
     const log = getOutput(logSpy);
-    expectLogContains(log, [
-      '최종 게임 결과',
-      '[ O |   |   ]',
-      '[   | O | O ]',
-      '게임 성공 여부: 성공',
-      '총 시도한 횟수: 2',
-    ]);
+    expectLogContains(log, oneRetrySuccessResult);
     expectBridgeOrder(log, '[ O |   |   ]', '[   | O | O ]');
   });
 
+  const oneRetryFailResult = [
+    '최종 게임 결과',
+    '[ O |   |   ]',
+    '[   | O | X ]',
+    '게임 성공 여부: 실패',
+    '총 시도한 횟수: 2',
+  ];
   test('재시도 1번 후 게임종료를 선택하여 다리건너기에 실패한 경우', () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
@@ -132,43 +143,26 @@ describe('다리 건너기 테스트', () => {
     app.play();
 
     const log = getOutput(logSpy);
-    expectLogContains(log, [
-      '최종 게임 결과',
-      '[ O |   |   ]',
-      '[   | O | X ]',
-      '게임 성공 여부: 실패',
-      '총 시도한 횟수: 2',
-    ]);
+    expectLogContains(log, oneRetryFailResult);
     expectBridgeOrder(log, '[ O |   |   ]', '[   | O | X ]');
   });
 
-  const runInvalidMovingException = (inputs) => {
-    mockRandoms([1, 0, 1]);
+  const runInvalidInputException = (numbers, inputs, errorMessage) => {
+    mockRandoms(numbers);
     mockQuestions(inputs);
     const logSpy = getLogSpy();
     const app = new App();
 
     app.play();
 
-    expectLogContains(getOutput(logSpy), ['[ERROR] 이동할 칸은 U 또는 D를 입력하여야 합니다.']);
-  };
-
-  const runInvalidGameCommandException = (inputs) => {
-    mockRandoms([1, 0, 1]);
-    mockQuestions(inputs);
-    const logSpy = getLogSpy();
-    const app = new App();
-
-    app.play();
-
-    expectLogContains(getOutput(logSpy), ['[ERROR] 게임 명령어는 R 또는 Q를 입력하여야 합니다.']);
+    expectLogContains(getOutput(logSpy), [errorMessage]);
   };
 
   test('이동할 칸을 잘못 입력했을 경우 예외 테스트', () => {
-    runInvalidMovingException(['3', 'd']);
+    runInvalidInputException([1, 0, 1], ['3', 'd'], INPUT_ERROR.moving);
   });
 
   test('게임명령어를 잘못 입력했을 경우 예외 테스트', () => {
-    runInvalidGameCommandException(['3', 'D', 'r']);
+    runInvalidInputException([1, 0, 1], ['3', 'D', 'r'], INPUT_ERROR.gameCommand);
   });
 });
