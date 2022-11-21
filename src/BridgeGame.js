@@ -1,10 +1,12 @@
 const WinningBridge = require('./WinningBridge');
 const CurrBridge = require('./CurrBridge');
+const Validation = require('./utils/Validation');
+const { ONE_TIME } = require('./utils/constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #tryingCount = 1;
+  #retryingCount = ONE_TIME;
 
   constructor() {
     this.winningBridge = new WinningBridge();
@@ -29,11 +31,11 @@ class BridgeGame {
   }
 
   move(direction) {
-    const canMove = this.currBridge.canMove(direction, this.winningBridge);
+    const CAN_MOVE = this.currBridge.canMove(direction, this.winningBridge);
 
-    this.currBridge.makeBridge(direction, canMove);
-    const [upperBridge, lowerBridge] = this.currBridge.getBridge();
-    return [canMove, upperBridge, lowerBridge];
+    this.currBridge.makeBridge(direction, CAN_MOVE);
+    const [UPPER_BRIDGE, LOWER_BRIDGE] = this.currBridge.getBridge();
+    return [CAN_MOVE, UPPER_BRIDGE, LOWER_BRIDGE];
   }
 
   isLastStage() {
@@ -48,8 +50,8 @@ class BridgeGame {
   }
 
   getResult() {
-    const [upperBridge, lowerBridge] = this.currBridge.getBridge();
-    return [this.#tryingCount, upperBridge, lowerBridge];
+    const [UPPER_BRIDGE, LOWER_BRIDGE] = this.currBridge.getBridge();
+    return [this.#retryingCount, UPPER_BRIDGE, LOWER_BRIDGE];
   }
 
   /**
@@ -58,7 +60,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#tryingCount += 1;
+    this.#retryingCount += ONE_TIME;
     this.currBridge.delete();
   }
 }

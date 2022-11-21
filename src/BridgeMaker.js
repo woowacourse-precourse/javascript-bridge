@@ -1,4 +1,5 @@
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { UP, DOWN, NUMBER_TO_MOVE_UP } = require('./utils/constants');
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -10,11 +11,11 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
-    for (let count = 0; count < size; count += 1) {
+    while (bridge.length !== size) {
       const number = generateRandomNumber();
-      if (Number(number) === 1) bridge.push('U');
-      if (Number(number) === 0) bridge.push('D');
+      bridge.push(Number(number) === NUMBER_TO_MOVE_UP ? UP : DOWN);
     }
+
     return bridge;
   },
 };

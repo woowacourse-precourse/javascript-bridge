@@ -1,8 +1,14 @@
 const BridgeGame = require('../BridgeGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const { MESSAGE } = require('../utils/constants');
-const Validation = require('../utils/Validation');
+const {
+  MESSAGE,
+  LINE_BREAK,
+  RETRY,
+  QUIT,
+  SUCCESS,
+  FAIL,
+} = require('../utils/constants');
 const { close } = require('../utils/utils');
 
 class Controller {
@@ -24,7 +30,7 @@ class Controller {
     try {
       this.bridgeGame.validateSize(Number(size));
     } catch (error) {
-      OutputView.printMessage(error);
+      OutputView.printError(error);
       return this.inputBrideSize();
     }
 
@@ -32,7 +38,7 @@ class Controller {
   }
 
   makeWinningBridge(size) {
-    OutputView.printMessage('');
+    OutputView.printMessage(LINE_BREAK);
     this.bridgeGame.makeWinningBridge(Number(size));
 
     this.inputMoving();
@@ -46,7 +52,7 @@ class Controller {
     try {
       this.bridgeGame.validateDirection(direction);
     } catch (error) {
-      OutputView.printMessage(error);
+      OutputView.printError(error);
       return this.inputMoving();
     }
 
@@ -54,25 +60,26 @@ class Controller {
   }
 
   move(direction) {
-    const [canMove, upperBridge, lowerBridge] = this.bridgeGame.move(direction);
+    const [CAN_MOVE, UPPER_BRIDGE, LOWER_BRIDGE] =
+      this.bridgeGame.move(direction);
 
-    this.printMoving(canMove, upperBridge, lowerBridge);
+    this.printMoving(CAN_MOVE, UPPER_BRIDGE, LOWER_BRIDGE);
   }
 
-  printMoving(canMove, upperBridge, lowerBridge) {
-    OutputView.printMap(upperBridge, lowerBridge);
+  printMoving(CAN_MOVE, UPPER_BRIDGE, LOWER_BRIDGE) {
+    OutputView.printMap(UPPER_BRIDGE, LOWER_BRIDGE);
 
-    this.checkSuccess(canMove);
+    this.checkSuccess(CAN_MOVE);
   }
 
-  checkSuccess(canMove) {
-    if (canMove && this.bridgeGame.isLastStage()) {
-      const isSucceeded = true;
-      return this.getResult(isSucceeded);
+  checkSuccess(CAN_MOVE) {
+    if (CAN_MOVE && this.bridgeGame.isLastStage()) {
+      const IS_SUCCEEDED = true;
+      return this.getResult(IS_SUCCEEDED);
     }
 
-    if (canMove) return this.inputMoving();
-    if (!canMove) return this.inputGameCommand();
+    if (CAN_MOVE) return this.inputMoving();
+    if (!CAN_MOVE) return this.inputGameCommand();
   }
 
   inputGameCommand() {
@@ -83,7 +90,7 @@ class Controller {
     try {
       this.bridgeGame.validateCommand(command);
     } catch (error) {
-      OutputView.printMessage(error);
+      OutputView.printError(error);
       return this.inputGameCommand();
     }
 
@@ -91,10 +98,10 @@ class Controller {
   }
 
   executeCommand(command) {
-    if (command === 'R') this.retry();
-    if (command === 'Q') {
-      const isSucceeded = false;
-      this.getResult(isSucceeded);
+    if (command === RETRY) this.retry();
+    if (command === QUIT) {
+      const IS_SUCCEEDED = false;
+      this.getResult(IS_SUCCEEDED);
     }
   }
 
@@ -103,14 +110,20 @@ class Controller {
     this.inputMoving();
   }
 
-  getResult(isSucceeded) {
-    const GAME_RESULT = isSucceeded ? '성공' : '실패';
-    const [tryingCount, upperBridge, lowerBridge] = this.bridgeGame.getResult();
-    this.printResult(tryingCount, GAME_RESULT, upperBridge, lowerBridge);
+  getResult(IS_SUCCEEDED) {
+    const GAME_RESULT = IS_SUCCEEDED ? SUCCESS : FAIL;
+    const [RETRY_COUNT, UPPER_BRIDGE, LOWER_BRIDGE] =
+      this.bridgeGame.getResult();
+    this.printResult(RETRY_COUNT, GAME_RESULT, UPPER_BRIDGE, LOWER_BRIDGE);
   }
 
-  printResult(tryingCount, GAME_RESULT, upperBridge, lowerBridge) {
-    OutputView.printResult(tryingCount, GAME_RESULT, upperBridge, lowerBridge);
+  printResult(RETRY_COUNT, GAME_RESULT, UPPER_BRIDGE, LOWER_BRIDGE) {
+    OutputView.printResult(
+      RETRY_COUNT,
+      GAME_RESULT,
+      UPPER_BRIDGE,
+      LOWER_BRIDGE
+    );
 
     this.close();
   }

@@ -1,4 +1,17 @@
-const { ERROR } = require('./constants');
+const {
+  ERROR,
+  UP,
+  DOWN,
+  MIN_SIZE,
+  MAX_SIZE,
+  RETRY,
+  QUIT,
+  ZERO,
+  LOWERCASE_UP,
+  LOWERCASE_DOWN,
+  LOWERCASE_RETRY,
+  LOWERCASE_QUIT,
+} = require('./constants');
 
 const Validation = {
   checkNumberType(input) {
@@ -10,27 +23,31 @@ const Validation = {
   },
 
   checkBlank(input) {
-    if (input.length === 0) throw ERROR.mustNotBeBlank;
+    if (input.length === ZERO) throw ERROR.mustNotBeBlank;
   },
 
   checkRange(input) {
-    if (input < 3 || input > 20) throw ERROR.mustBeInRange;
+    if (input < MIN_SIZE || input > MAX_SIZE) throw ERROR.mustBeInRange;
   },
 
   checkValidDirection(input) {
-    if (!(input === 'U' || input === 'D')) throw ERROR.mustBeValidDirection;
+    if (!(input === UP || input === DOWN)) throw ERROR.mustBeValidDirection;
   },
 
   checkUpperCaseOfDirection(input) {
-    if (input === 'u' || input === 'd') throw ERROR.mustBeUpperCase;
+    if (input === LOWERCASE_UP || input === LOWERCASE_DOWN) {
+      throw ERROR.mustBeUpperCase;
+    }
   },
 
   checkValidCommand(input) {
-    if (!(input === 'R' || input === 'Q')) throw ERROR.mustBeValidCommand;
+    if (!(input === RETRY || input === QUIT)) throw ERROR.mustBeValidCommand;
   },
 
   checkUpperCaseOfCommand(input) {
-    if (input === 'r' || input === 'q') throw ERROR.mustBeUpperCase;
+    if (input === LOWERCASE_RETRY || input === LOWERCASE_QUIT) {
+      throw ERROR.mustBeUpperCase;
+    }
   },
 };
 

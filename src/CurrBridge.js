@@ -1,4 +1,5 @@
 const Validation = require('./utils/Validation');
+const { UP, DOWN, CROSSED, BLOCKED, BLANK } = require('./utils/constants');
 
 class CurrBridge {
   #upperBridge = [];
@@ -15,15 +16,15 @@ class CurrBridge {
     return winningBridge.isSameDirection(direction, this.#upperBridge.length);
   }
 
-  makeBridge(direction, canMove) {
-    if (direction === 'U') {
-      canMove ? this.#upperBridge.push('O') : this.#upperBridge.push('X');
-      this.#lowerBridge.push(' ');
+  makeBridge(direction, CAN_MOVE) {
+    if (direction === UP) {
+      this.#upperBridge.push(CAN_MOVE ? CROSSED : BLOCKED);
+      this.#lowerBridge.push(BLANK);
     }
 
-    if (direction === 'D') {
-      canMove ? this.#lowerBridge.push('O') : this.#lowerBridge.push('X');
-      this.#upperBridge.push(' ');
+    if (direction === DOWN) {
+      this.#lowerBridge.push(CAN_MOVE ? CROSSED : BLOCKED);
+      this.#upperBridge.push(BLANK);
     }
   }
 
