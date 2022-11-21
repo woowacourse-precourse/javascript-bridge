@@ -18,7 +18,7 @@ class App {
    */
   askSize() {
     const handleSizeInput = (input) => {
-      this.#game = new BridgeGame(+input);
+      this.#game = new BridgeGame(Number(input));
       this.askMove();
     };
     InputView.readBridgeSize(handleSizeInput);
@@ -32,7 +32,8 @@ class App {
       this.#game.move(input);
       OutputView.printMap(this.#game.getMovingState());
       if (!this.#game.checkGameOver()) return this.askMove();
-      this.#game.judgeGameSuccess() ? this.end() : this.askRestart();
+      if (this.#game.judgeGameSuccess()) return this.end();
+      this.askRestart();
     };
     InputView.readMoving(handleMovingInput);
   }
@@ -43,7 +44,8 @@ class App {
   askRestart() {
     const handleCommandInput = (input) => {
       if (input === GAME_RESULT.quit) return this.end();
-      this.#game.retry(), this.askMove();
+      this.#game.retry();
+      this.askMove();
     };
     InputView.readGameCommand(handleCommandInput);
   }

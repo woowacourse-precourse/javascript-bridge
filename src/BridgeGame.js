@@ -27,7 +27,6 @@ class BridgeGame {
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * @param {string} dir 이동 방향
-   * @returns {[string, boolean][]}
    */
   move(dir) {
     this.#movingState.push([
