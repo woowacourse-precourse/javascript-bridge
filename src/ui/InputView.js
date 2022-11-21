@@ -37,7 +37,18 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    return new Promise((resolve) => {
+      Console.readLine(
+        "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+        (commandInput) => {
+          if (this.validateCommand(commandInput)) {
+            resolve(commandInput);
+          }
+        }
+      );
+    });
+  },
 
   close() {
     Console.print("끄으으읕");
@@ -56,6 +67,13 @@ const InputView = {
       return true;
     }
     throw new Error("[ERROR] 진행 방향은 'U'거나 'D'여야 합니다.");
+  },
+
+  validateCommand(commandInput) {
+    if (commandInput === "R" || commandInput === "Q") {
+      return true;
+    }
+    throw new Error("[ERROR] 명령어는 'R'이거나 'Q'여야 합니다.");
   },
 };
 
