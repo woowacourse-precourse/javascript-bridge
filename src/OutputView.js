@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { OUTPUT } = require("./constants/messages");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -62,13 +63,13 @@ const OutputView = {
   },
 
   printFianlResult(bridge) {
-    Console.print("최종 게임 결과");
+    Console.print(OUTPUT.FINAL_RESULT);
     this.printMap(bridge.getCurrentBridge());
   },
 
   printGameSummury(state, bridge) {
-    Console.print(`게임 성공 여부: ${state}`);
-    Console.print(`총 시도한 횟수: ${bridge.getRound()}`);
+    Console.print(`${OUTPUT.WHETHER_SUCCESS_OR_FALI}: ${state}`);
+    Console.print(`${OUTPUT.TOTAL_ROUND}: ${bridge.getRound()}`);
   },
 };
 
