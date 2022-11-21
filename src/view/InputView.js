@@ -12,7 +12,7 @@ const InputView = {
         Console.print(err.message);
         this.readBridgeSize(app);
       }
-    })
+    });
   },
 
   readMoving(bridgePlay) {
@@ -24,7 +24,7 @@ const InputView = {
         Console.print(err.message);
         this.readMoving(bridgePlay);
       }
-    })
+    });
   },
 
   readGameCommand(bridgePlay) {
@@ -36,7 +36,7 @@ const InputView = {
         Console.print(err.message);
         this.readGameCommand(bridgePlay);
       }
-    })
+    });
   },
 };
 

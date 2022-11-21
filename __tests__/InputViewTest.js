@@ -52,7 +52,7 @@ describe("입력 예외 처리 테스트", () => {
     InputView.readGameCommand(bridgePlay);
 
     expectLogContains(getOutput(logSpy), ["[ERROR] 종료", "최종 게임 결과"]);
-    expect(spyFunc).toBeCalledWith("Q")
+    expect(spyFunc).toBeCalledWith("Q");
   });
 
 });

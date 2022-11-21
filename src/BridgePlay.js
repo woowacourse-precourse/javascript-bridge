@@ -3,9 +3,10 @@ const InputView = require("./view/InputView");
 const BridgeGame = require("./BridgeGame");
 
 class BridgePlay{
+
   constructor(bridge){
     this.bridge = bridge;
-    this.bridgeGame = new BridgeGame(this.bridge, { moved:[], attempts:1 })
+    this.bridgeGame = new BridgeGame(this.bridge, { moved:[], attempts:1 });
   }
 
   newRound(){
@@ -44,6 +45,7 @@ class BridgePlay{
     const {moved, attempts} = this.bridgeGame.get();
     OutputView.printResult(this.bridge, moved, attempts);
   }
+
 }
 
 module.exports = BridgePlay;
