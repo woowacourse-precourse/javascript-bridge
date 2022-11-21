@@ -1,9 +1,9 @@
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
-const Validation = require('./Validation');
-const BridgeGame = require('./BridgeGame');
+const InputView = require('../View/InputView');
+const OutputView = require('../View/OutputView');
+const Validation = require('../Model/Validation');
+const BridgeGame = require('../Model/BridgeGame');
 
-class Controller {
+class GameController {
   #bridgeGame;
   #retryCount = 1;
   
@@ -60,4 +60,4 @@ class Controller {
   }
 }
 
-module.exports = Controller;
+module.exports = GameController;
