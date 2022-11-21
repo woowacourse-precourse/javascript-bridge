@@ -10,22 +10,15 @@ class BridgeGame {
    */
 
   move(dir, bridge, now) {
-    if (dir === "U") {
-      if (bridge[0][now] == 1) {
-        return true;
-      }
-      if (bridge[0][now] == 0) {
-        return false;
-      }
+    if (dir === "U" && bridge[now] == 1) {
+      return true;
     }
-    if (dir === "D") {
-      if (bridge[1][now] == 1) {
-        return true;
-      }
-      if (bridge[1][now] == 0) {
-        return false;
-      }
+
+    if (dir === "D" && bridge[now] == 0) {
+      return true;
     }
+
+    return false;
   }
 
   /**

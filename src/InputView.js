@@ -35,7 +35,7 @@ const InputView = {
       "\n이동할 칸을 선택해주세요. (위: U, 아래: D) \n",
       (answer) => {
         let check = game.move(answer, this.bridge, this.now);
-        console.log(check + " " + this.now);
+
         if (check == true && answer == "U") {
           OutputView.printMap("O", " ");
           this.now += 1;
