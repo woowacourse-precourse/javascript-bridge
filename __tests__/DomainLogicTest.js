@@ -1,12 +1,29 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const ValidCheck = require("../src/ValidCheck");
+const BridgeMaker = require("../src/BridgeMaker");
+const BridgeGame = require("../src/BridgeGame");
 const {
   VALID_CHECK_ERROR,
   VALID_CHECK_PASS,
   VALID_CHECK_DO,
 } = require("../src/Constant");
-const BridgeMaker = require("../src/BridgeMaker");
+
+const mockQuestions = (answers) => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce((acc, input) => {
+    return acc.mockImplementationOnce((_, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
+
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
 
 describe("도메인 로직 단위 테스트", () => {
   test("사용자가 입력한 다리 길이가 올바른 값인지 검사한다.", () => {
@@ -37,7 +54,20 @@ describe("도메인 로직 단위 테스트", () => {
     });
   });
 
-  test("사용자가 입력한 값으로 다리를 건널 수 있는지 검사한다.", () => {});
+  test("사용자가 입력한 값이 정답인지 검사한다.", () => {
+    const userMoving = ["U", "D", "U"];
+    const answers = [true, true, false];
+    mockRandoms(["1", "0", "0"]);
+    mockQuestions(["3"]);
+
+    const bridgeGame = new BridgeGame();
+    bridgeGame.init();
+
+    answers.forEach((answer, round) => {
+      const check = bridgeGame.checkCurrMoving(round, userMoving[round]);
+      expect(check).toEqual(answer);
+    })
+  });
 
   test("오답을 선택하여 재시작 시, 사용자의 재시작 커맨드가 올바른 값인지 검사한다.", () => {});
 
