@@ -36,7 +36,8 @@ const InputView = {
       if(bridgeGame.move(bridge,steps)){
         OutputView.printMap(bridge,steps);
       }else{
-
+        OutputView.printMap(bridge,steps);
+        this.readGameCommand(attempt);
       }
     });
   },
@@ -44,8 +45,13 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-    
+  readGameCommand(attempt) {
+    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (retry) => {
+      const inputCheck = new InputCheck();
+      inputCheck.retryCheck(retry);
+      const bridgeGame = new BridgeGame();
+      bridgeGame.retry(retry,attempt);
+    })
   },
 };
 module.exports = InputView;
