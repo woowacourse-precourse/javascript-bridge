@@ -55,7 +55,8 @@ const MESSAGES = Object.freeze({
     INVALID_DIRECTION: `${HEADERS.ERROR} ${USER_INPUT_CODE.MOVE.UPPER} 혹은 ${USER_INPUT_CODE.MOVE.LOWER}를 입력해주세요.`,
     INVALID_RETRY: `${HEADERS.ERROR} ${USER_INPUT_CODE.RETRY.AGREE} 혹은 ${USER_INPUT_CODE.RETRY.QUIT}를 입력해주세요.`,
     IS_DEMICAL: `${HEADERS.ERROR} 소수가 아닌 정수를 입력해주세요.`,
-    IS_NOT_NUMBER: `${HEADERS.ERROR} 숫자를 입력해주세요`
+    IS_NOT_NUMBER: `${HEADERS.ERROR} 숫자를 입력해주세요.`,
+    IS_LOWERCASE: `대문자인 값을 입력해주세요.`,
   },
   CLEARED: {
     SUCESS: '성공',

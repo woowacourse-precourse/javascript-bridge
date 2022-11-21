@@ -30,9 +30,8 @@ class App {
   }
 
   #submitDirection() {
-    InputView.readMoving((value) => {
+    InputView.readMoving((direction) => {
       try {
-        const direction = value.toUpperCase();
         Validator.directionCheck(direction);
         this.#moveSpace(direction);
       } catch(err) {
@@ -52,9 +51,8 @@ class App {
   }
 
   #submitRetry() {
-    InputView.readGameCommand((value) => {      
+    InputView.readGameCommand((command) => {      
       try {
-        const command = value.toUpperCase();
         Validator.retryCheck(command);
         this.#runCommand(command);
       } catch(err) {
