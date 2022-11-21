@@ -31,11 +31,11 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(MESSAGES.INPUT_MOVE_BLOCK, (block) => {
-      // TODO block validation check
       bridgeGame.setUserBlock(block);
       const formattedBridges = bridgeGame.move();
       OutputView.printMap(formattedBridges);
-      if (bridgeGame.isGameOver(formattedBridges)) this.readGameCommand();
+      if (bridgeGame.isFail(formattedBridges)) this.readGameCommand();
+      else if (bridgeGame.isSuccess(formattedBridges)) OutputView.printResult();
       else this.readMoving();
     });
   },
