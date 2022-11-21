@@ -42,7 +42,9 @@ class BridgeGame {
   /**
    * 사용자가 게임을 시작할 때 사용하는 메서드
    */
-  start() {}
+  start() {
+    this.#bridgeGameService.startGame(this.move.bind(this));
+  }
 
   /**
    * 게임이 끝날 때 사용하는 메서드
