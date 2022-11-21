@@ -15,8 +15,14 @@ const FINAL_COMMAND_GROUP = Object.freeze({
   QUIT: 'Q',
 });
 
+const MAP_MARK = Object.freeze({
+  CORRECT: 'O',
+  WRONG: 'X',
+});
+
 module.exports = {
   POSITION,
   GAME_STATUS,
   FINAL_COMMAND_GROUP,
+  MAP_MARK,
 };
