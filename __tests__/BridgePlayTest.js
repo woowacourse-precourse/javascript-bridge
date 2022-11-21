@@ -1,6 +1,6 @@
 const BridgePlay = require("../src/BridgePlay");
-const InputView = require("../src/InputView");
-const OutputView = require("../src/OutputView");
+const InputView = require("../src/view/InputView");
+const OutputView = require("../src/view/OutputView");
 
 describe("게임 플레이 클래스 테스트", () => {
   const bridgePlay = new BridgePlay(['U','D','D']);
