@@ -4,13 +4,16 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
 
+const BridgeGame = require("../BridgeGame");
+
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
+    const bridgeGame = new BridgeGame();
     Console.readLine("다리의 길이를 입력해주세요.\n", (inputSize) => {
-      console.log(`입력 : ${inputSize}`);
+      return bridgeGame.make(inputSize);
     });
   },
 

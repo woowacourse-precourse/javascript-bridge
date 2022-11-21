@@ -7,7 +7,7 @@ class App {
 
   play() {
     OutputView.printStart();
-    // this.#bridgeGame.make();
+    InputView.readBridgeSize();
   }
 }
 
