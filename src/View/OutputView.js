@@ -1,6 +1,7 @@
 const { print } = require("../utils/Io.js");
 const {
-  OUTPUT: { START_BRIDGE },
+  OUTPUT: { START_BRIDGE, END_MESSAGE, END_ATTEMPT, END_SUCCESS },
+  KEYWORD: { SUCCESS_BRIDGE, FAIL_BRIDGE },
 } = require("../constants/index.js");
 const { getMapMessage } = require("../utils/Message.js");
 /**
@@ -26,7 +27,7 @@ const OutputView = {
    */
   printResult(data) {
     const { retry, success, map } = data;
-    const SUCCESS = success ? START_BRIDGE : FAIL_BRIDGE;
+    const SUCCESS = success ? SUCCESS_BRIDGE : FAIL_BRIDGE;
 
     print(END_MESSAGE);
     OutputView.printMap(map);
