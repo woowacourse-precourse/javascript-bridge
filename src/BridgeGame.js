@@ -1,15 +1,20 @@
 class BridgeGame {
+  #round;
+  #count;
+  #up;
+  #down;
+
   constructor() {
-    this.round = 0;
-    this.count = 0;
-    this.up = [];
-    this.down = [];
+    this.#round = 0;
+    this.#count = 0;
+    this.#up = [];
+    this.#down = [];
   }
 
   move() {
-    this.round += 1;
+    this.#round += 1;
 
-    return this.round;
+    return this.#round;
   }
 
   makeMap(oneBridge, upOrDown) {
@@ -17,28 +22,28 @@ class BridgeGame {
     if (oneBridge === upOrDown) upAndDown[upOrDown] = 'O';
     else upAndDown[upOrDown] = 'X';
 
-    this.up.push(upAndDown['U']);
-    this.down.push(upAndDown['D']);
+    this.#up.push(upAndDown['U']);
+    this.#down.push(upAndDown['D']);
 
-    return [this.up, this.down, oneBridge === upOrDown];
+    return [this.#up, this.#down, oneBridge === upOrDown];
   }
 
   getMap() {
-    return [this.up, this.down];
+    return [this.#up, this.#down];
   }
 
   retry() {
-    this.round = 0;
-    this.up = [];
-    this.down = [];
+    this.#round = 0;
+    this.#up = [];
+    this.#down = [];
 
-    return this.round;
+    return this.#round;
   }
 
   countTry() {
-    this.count += 1;
+    this.#count += 1;
 
-    return this.count;
+    return this.#count;
   }
 }
 
