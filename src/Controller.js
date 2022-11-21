@@ -1,7 +1,6 @@
 const Model = require('./Model');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const Validator = require('./Validator');
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
@@ -28,14 +27,14 @@ class Controller {
 
   inputMoving() {
     const callback = (input, index) => {
-      Validator.validateUpDown(input);
+      const bridgeSize = this.model.getBridgeSize();
       const computerBridgeArr = this.model.getComputerBridgeArr();
       const OX = input === computerBridgeArr[index] ? ' O ' : ' X ';
-      if (OX === ' X ') return InputView.readGameCommand(this.inputGameCommandCallback);
       BridgeGame.move(input, OX, this.model);
-      return OutputView.printMap(this.model);
+      OutputView.printMap(this.model);
+      if (OX === ' X ') return this.inputGameCommand();
     };
-    InputView.readMoving(callback, this.model, 0);
+    InputView.readMoving(callback, 0, this.model);
   }
 }
 module.exports = Controller;
