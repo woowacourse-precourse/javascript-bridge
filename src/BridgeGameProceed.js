@@ -48,7 +48,6 @@ class BridgeGameProceed {
             const result = this.bridge();
             this.bridgeGame.storage(result);
             this.dividePath(result);
-            this.game();
         } catch (error) {
             Console.print(error.message);
             this.game.call(this);
@@ -61,8 +60,9 @@ class BridgeGameProceed {
             return this.fail(result);
         }
         if (this.#playersBridge.length === this.#winBridge.length) {
-            return this.bridgeGame.win();
+            return this.callWin.call(this);
         }
+        this.game();
     }
 
     bridge() {
@@ -80,15 +80,19 @@ class BridgeGameProceed {
         try {
             Validation.retry(retryOrNot);
             if (retryOrNot === "R") this.choiceRetry();
-            if (retryOrNot === "Q") this.callResult.call(this); 
+            if (retryOrNot === "Q") this.callFail.call(this); 
         } catch (error) {
             Console.print(error.message);
             this.fail.call(this);
         }
     }
 
-    callResult() {
+    callFail() {
         this.bridgeGame.retry();
+    }
+
+    callWin() {
+        this.bridgeGame.win();
     }
 
     choiceRetry() {
