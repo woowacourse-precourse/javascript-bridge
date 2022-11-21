@@ -18,7 +18,25 @@ const InputView = {
       InputView.readMoving(game);
     });
   },
-  readMoving() {},
+  readMoving(game) {
+    Console.readLine(GAME_MESSAGE.MOVING, (answer) => {
+      Validation.moving(answer);
+
+      const move = game.move(answer);
+
+      if (move === false) {
+        InputView.readGameCommand(game);
+        return;
+      }
+
+      if (game.isEnd === false) {
+        InputView.readMoving(game);
+        return;
+      }
+
+      game.end(game);
+    });
+  },
   readGameCommand() {},
 };
 
