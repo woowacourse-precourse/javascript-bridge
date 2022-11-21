@@ -89,6 +89,16 @@ class App {
       this.printFinalGameResultAndClose();
     }
   }
+
+  checkGameFinish() {
+    const gameReuslt = this.isGameSuccess();
+
+    if (gameReuslt) {
+      this.printFinalGameResultAndClose();
+    } else {
+      this.readMoving();
+    }
+  }
 }
 
 module.exports = App;
