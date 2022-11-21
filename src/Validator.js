@@ -15,13 +15,13 @@ class Validator {
   }
 
   static validateUpDown(value) {
-    if (value !== 'U' || value !== 'D') {
+    if (value !== 'U' && value !== 'D') {
       throw new Error('[ERROR] U 또는 D 중 한 문자만 입력해주세요.');
     }
   }
 
   static validateGameCommand(value) {
-    if (value !== 'R' || value !== 'Q') {
+    if (value !== 'R' && value !== 'Q') {
       throw new Error('[ERROR] R 또는 Q 중 한 문자만 입력해주세요.');
     }
   }
