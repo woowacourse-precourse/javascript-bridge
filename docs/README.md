@@ -8,7 +8,7 @@
 ### BridgeGame 로직 
 - [x] 입력 받은 이동할 칸과 다리를 비교한다. - BridgeGame#match()
 - [x] 입력 받은 이동 칸에 대한 이동 성공여부를 확인한다. - BridgeGame#move()
-- [x] 이동할 다리가 얼마나 남았는지 확인한다. - BridgeGame#checkRemainBridge()
+- [x] 건널 다리가 남았는지 모두 건넌건지 확인한다. - BridgeGame#checkRemainBridge()
 - [x] 재시작 시 bridgeIndex를 초기화 시킨다. - BridgeGame#retry()
 
 ### 예외 처리 로직
