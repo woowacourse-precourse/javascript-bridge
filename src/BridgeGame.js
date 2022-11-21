@@ -1,9 +1,12 @@
+const BridgeMap = require("./BridgeMap");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   static bridge;
   static movingCount = 0;
+  static currentState = [];
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -14,8 +17,14 @@ class BridgeGame {
     const movingResult = this.bridge[this.movingCount] === moving;
 
     this.movingCount += 1;
+    this.currentState = [
+      ...this.currentState,
+      [moving, movingResult ? "O" : "X"],
+    ];
 
-    return movingResult;
+    const newState = this.currentState;
+
+    BridgeMap.createMap(this.bridge.length, newState);
   }
 
   /**
