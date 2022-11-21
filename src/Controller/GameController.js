@@ -3,7 +3,7 @@ const OutputView = require('../View/OutputView');
 const BridgeGame = require('../Model/BridgeGame');
 const Move = require('../Model/Move');
 const Bridge = require('../Model/Bridge');
-const Exception = require('../components/Exception');
+const Validate = require('../components/Validate');
 const Path = require('../Model/Path');
 
 class GameController {
@@ -19,11 +19,11 @@ class GameController {
   }
 
   readSize() {
-    InputView.readBridgeSize(this.setSize.bind(this));
+    InputView.readBridgeSize(this.validateSize.bind(this));
   }
 
-  setSize(size) {
-    if (Exception.bridgeSize(size)) {
+  validateSize(size) {
+    if (Validate.bridgeSize(size)) {
       Bridge.setSize(size);
       this.makeBridge(size);
     } else {
@@ -38,11 +38,11 @@ class GameController {
   }
 
   readDirection() {
-    InputView.readMoving(this.setDirection.bind(this));
+    InputView.readMoving(this.validateDirection.bind(this));
   }
 
-  setDirection(direction) {
-    if (Exception.moveInput(direction)) {
+  validateDirection(direction) {
+    if (Validate.moveInput(direction)) {
       this.move(direction);
     } else {
       this.readDirection();
@@ -58,13 +58,19 @@ class GameController {
     const bridgeMap = BridgeGame.mapBridge();
 
     OutputView.printMap(bridgeMap);
-    this.checkPlay();
+    this.checkArrive();
   }
 
-  checkPlay() {
-    if (Move.isPassed()) {
+  checkArrive() {
+    if (Move.isArrived()) {
       this.end();
-    } else if (Move.canMove()) {
+    } else {
+      this.checkMove();
+    }
+  }
+
+  checkMove() {
+    if (Move.canMove()) {
       this.readDirection();
     } else {
       this.readGameCommand();
@@ -72,20 +78,21 @@ class GameController {
   }
 
   readGameCommand() {
-    InputView.readGameCommand(this.validateRetryInput.bind(this));
+    InputView.readGameCommand(this.validateGameCommand.bind(this));
   }
 
-  validateRetryInput(command) {
-    if (Exception.gameCommand(command)) {
-      this.retryOrEnd(command);
+  validateGameCommand(command) {
+    if (Validate.gameCommand(command)) {
+      this.checkRetry(command);
     } else {
       this.readGameCommand();
     }
   }
 
-  retryOrEnd(command) {
+  checkRetry(command) {
     if (BridgeGame.keepPlay(command)) {
       this.#bridgeGame.retry();
+      BridgeGame.init();
       this.readDirection();
     } else {
       this.end();
@@ -96,6 +103,7 @@ class GameController {
     const bridgeMap = BridgeGame.mapBridge();
     const playCount = this.#bridgeGame.getPlayCount();
     const sucessMessage = Move.isSuccess();
+
     OutputView.printResult(bridgeMap, playCount, sucessMessage);
   }
 }

@@ -1,6 +1,6 @@
-const COMMAND = require('../../constants/command');
-const NUMBER = require('../../constants/number');
-const STRING = require('../../constants/string');
+const COMMAND = require('../constants/command');
+const NUMBER = require('../constants/number');
+const STRING = require('../constants/string');
 
 class Bridge {
   static #size = NUMBER.ZERO;

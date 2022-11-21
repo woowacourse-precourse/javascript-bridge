@@ -1,4 +1,4 @@
-const COMMAND = require('../constants/command');
+const COMMAND = require('./constants/command');
 
 const BridgeMaker = {
   // @param {number} size 다리의 길이

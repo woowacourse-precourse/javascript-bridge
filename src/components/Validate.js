@@ -1,17 +1,19 @@
-const COMMAND = require('../../constants/command');
-const ERROR_MESSAGE = require('../../constants/error message');
-const OutputView = require('../View/OutputView');
+const COMMAND = require('../constants/command');
+const ERROR_MESSAGE = require('../constants/error message');
+const NUMBER = require('../constants/number');
+const ErrorCatcher = require('./ErrorCatcher');
 
-class Exception {
+class Validate {
   static validateNumberType(input) {
     const notNumberReg = /[^0-9]/;
+
     if (notNumberReg.test(input)) {
       throw new Error(ERROR_MESSAGE.TYPE_ERROR);
     }
   }
 
   static validateBridgeSize(input) {
-    if (input < 3 || input > 20) {
+    if (input < NUMBER.MIN || input > NUMBER.MAX) {
       throw new Error(ERROR_MESSAGE.SIZE_ERROR);
     }
   }
@@ -34,29 +36,18 @@ class Exception {
 
   static bridgeSize(input) {
     return (
-      this.catchError(this.validateBridgeSize, input) &&
-      this.catchError(this.validateNumberType, input)
+      ErrorCatcher.catch(this.validateBridgeSize, input) &&
+      ErrorCatcher.catch(this.validateNumberType, input)
     );
   }
 
   static moveInput(input) {
-    return this.catchError(this.validateMoveInput, input);
+    return ErrorCatcher.catch(this.validateMoveInput, input);
   }
 
   static gameCommand(input) {
-    return this.catchError(this.validateGameCommand, input);
-  }
-
-  static catchError(validateFunction, input) {
-    let isValid = true;
-    try {
-      validateFunction(input);
-    } catch (error) {
-      OutputView.printError(error.message);
-      isValid = false;
-    }
-    return isValid;
+    return ErrorCatcher.catch(this.validateGameCommand, input);
   }
 }
 
-module.exports = Exception;
+module.exports = Validate;

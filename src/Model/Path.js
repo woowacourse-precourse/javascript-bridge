@@ -9,7 +9,7 @@ class Path {
     return this.#path;
   }
 
-  static getPathPositionOf(countIndex) {
+  static positionOf(countIndex) {
     return this.#path[countIndex];
   }
 

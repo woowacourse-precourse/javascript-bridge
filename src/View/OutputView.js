@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const SYSTEM_MESSAGE = require('../../constants/system message');
+const SYSTEM_MESSAGE = require('../constants/system message');
 
 const OutputView = {
   printStart() {
@@ -18,7 +18,7 @@ const OutputView = {
     Console.close();
   },
 
-  printError(message) {
+  print(message) {
     Console.print(message);
   },
 };
