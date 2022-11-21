@@ -21,12 +21,12 @@ class BridgeMap {
   static buildBridge(moving, gameResult) {
     if (moving === DIRECTION.UP) {
       this.upBridge += `${gameResult} `;
-      this.downBridge += '  ';
+      this.downBridge += BRIDGE.NO_RESULT;
     }
 
     if (moving === DIRECTION.DOWN) {
       this.downBridge += `${gameResult} `;
-      this.upBridge += '  ';
+      this.upBridge += BRIDGE.NO_RESULT;
     }
   }
 
