@@ -7,7 +7,7 @@ class Map {
     this.#originMap;
   }
 
-  makeOrginBridgeMap(bridge) {
+  makeOriginBridgeMap(bridge) {
     let bridgeMap = [[], []];
     bridgeMap[0] = this.makeUpperBridge(bridge);
     bridgeMap[1] = this.makeLowerBridge(bridge);
