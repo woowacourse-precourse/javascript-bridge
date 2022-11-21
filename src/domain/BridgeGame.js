@@ -1,3 +1,5 @@
+const BridgeGameValidator = require('./BridgeGameValidator');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -19,6 +21,7 @@ class BridgeGame {
    * @return {void}
    */
   move(choice) {
+    BridgeGameValidator.validateMove(choice);
     this.#moveStack.push(choice);
   }
 
