@@ -18,13 +18,13 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(moveCallback, printCallback, errorCallBack) {
+  readMoving(moveCallback, nextCallback, errorCallBack) {
     MissionUtils.Console.readLine(Message.BRIDGE_DIRECTION, (direction) => {
       const target = () => Validate.bridgeDirection(direction);
       const doCallBack = () => moveCallback(direction);
 
       ErrorHandler.test(target, errorCallBack, doCallBack);
-      printCallback();
+      nextCallback();
     });
   },
 
