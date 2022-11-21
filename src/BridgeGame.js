@@ -5,12 +5,14 @@ const { INPUT_VALUE, STATES } = require("./constants/values");
 class BridgeGame {
   #bridge;
   #currentBridge;
+  #step;
+  #round;
 
-  constructor(bridge) {
+  constructor(bridge, step, round) {
     this.#bridge = bridge;
     this.#currentBridge = [];
-    this.step = 0;
-    this.round = 1;
+    this.#step = step;
+    this.#round = round;
   }
 
   getBridge() {
@@ -18,22 +20,23 @@ class BridgeGame {
   }
 
   resetStep() {
-    this.step = 0;
-    return this.step;
+    this.#step = 0;
+  }
+
+  getStep() {
+    return this.#step;
   }
 
   addStep() {
-    this.step += 1;
-    return this.step;
+    this.#step += 1;
   }
 
   getRound() {
-    return this.round;
+    return this.#round;
   }
 
   addRound() {
-    this.round += 1;
-    return this.round;
+    this.#round += 1;
   }
 
   getCurrentBridge() {
@@ -51,12 +54,12 @@ class BridgeGame {
    */
 
   checkInputIsCorrect(inputAnswer) {
-    if (inputAnswer === this.#bridge[this.step]) return true;
+    if (inputAnswer === this.#bridge[this.#step]) return true;
     return false;
   }
 
-  checkIsLastStep(step, size) {
-    return step === size ? true : false;
+  checkIsLastStep(size) {
+    return this.#step === size ? true : false;
   }
 
   move(userInput) {
