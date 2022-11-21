@@ -12,36 +12,45 @@ const BridgeGame = class extends GameCtrl {
     this.#gameProcess();
   }
 
-  // TODO: 메서드 10줄 이내로 수정 -> errorHandler, successHandler 로직 분리
   #gameProcess() {
     this.view.readBridgeSize((bridgeSize) => {
-      const errorHandler = (error) => {
-        this.view.printErrorMessage(error.message);
-        this.#gameProcess(bridgeSize);
-      };
-
-      const successHandler = () => {
-        this.model.createBridge(bridgeSize);
-        this.#getUserCommand();
-      };
-
       bridgeSize = parseInt(bridgeSize);
+
+      const { errorHandler, successHandler } = this.#defineGameProcessHandlers(bridgeSize);
       this.model.validateBridgeSize({ bridgeSize, errorHandler, successHandler });
     });
   }
 
-  // TODO: 메서드 10줄 이내로 수정 -> errorHandler, successHandler 로직 분리
+  #defineGameProcessHandlers(bridgeSize) {
+    const errorHandler = (error) => {
+      this.view.printErrorMessage(error.message);
+      this.#gameProcess(bridgeSize);
+    };
+
+    const successHandler = () => {
+      this.model.createBridge(bridgeSize);
+      this.#getUserCommand();
+    };
+
+    return { errorHandler, successHandler };
+  }
+
   #getUserCommand() {
     this.view.readMoving((command) => {
-      const errorHandler = (error) => {
-        this.view.printErrorMessage(error.message);
-        this.#getUserCommand();
-      };
-
-      const successHandler = () => this.#move(command);
-
+      const { errorHandler, successHandler } = this.#defineGetUserCommandHandlers(command);
       this.model.validateBridgeCommand({ command, errorHandler, successHandler });
     });
+  }
+
+  #defineGetUserCommandHandlers(command) {
+    const errorHandler = (error) => {
+      this.view.printErrorMessage(error.message);
+      this.#getUserCommand();
+    };
+
+    const successHandler = () => this.#move(command);
+
+    return { errorHandler, successHandler };
   }
 
   #move(command) {
@@ -53,23 +62,31 @@ const BridgeGame = class extends GameCtrl {
 
     if (!isPassed) return this.#askToReplayGame({ bridgeMap, isGameSuccess });
     if (isGameSuccess) return this.#end({ bridgeMap, isGameSuccess });
-
     return this.#getUserCommand();
   }
 
-  // TODO: 메서드 10줄 이내로 수정 -> errorHandler, successHandler 로직 분리
   #askToReplayGame({ bridgeMap, isGameSuccess }) {
     this.view.readGameCommand((replayCommand) => {
-      const errorHandler = (error) => {
-        this.view.printErrorMessage(error.message);
-        this.#askToReplayGame({ bridgeMap, isGameSuccess });
-      };
-
-      const successHandler = () =>
-        this.#quitOrRetryByCommand({ replayCommand, bridgeMap, isGameSuccess });
+      const { errorHandler, successHandler } = this.#defineAskToReplayGameHandlers({
+        replayCommand,
+        bridgeMap,
+        isGameSuccess,
+      });
 
       this.model.validateBridgeReplayCommand({ replayCommand, errorHandler, successHandler });
     });
+  }
+
+  #defineAskToReplayGameHandlers({ replayCommand, bridgeMap, isGameSuccess }) {
+    const errorHandler = (error) => {
+      this.view.printErrorMessage(error.message);
+      this.#askToReplayGame({ bridgeMap, isGameSuccess });
+    };
+
+    const successHandler = () =>
+      this.#quitOrRetryByCommand({ replayCommand, bridgeMap, isGameSuccess });
+
+    return { errorHandler, successHandler };
   }
 
   #quitOrRetryByCommand({ replayCommand, bridgeMap, isGameSuccess }) {
