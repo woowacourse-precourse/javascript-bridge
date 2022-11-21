@@ -84,3 +84,21 @@ describe('다리 건너기 테스트', () => {
     runException(['a']);
   });
 });
+
+describe('다리 길이 입력 받아오기 테스트', () => {
+  test.each([
+    [['3'], 3],
+    [['woowa', '0x13', '12.345', '20'], 20],
+  ])('정상', (inputs, solution) => {
+    mockQuestions(inputs);
+    expect(App.requestBridgeSize()).toEqual(solution);
+  });
+
+  test.each([
+    [['a']],
+    [new Array(200).fill(12.345)],
+  ])('예외: 너무 많이 틀렸을 경우', (inputs) => {
+    mockQuestions(inputs);
+    expect(App.requestBridgeSize).toThrow('[ERROR]');
+  });
+});
