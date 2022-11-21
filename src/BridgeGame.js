@@ -1,21 +1,22 @@
-const BridgeMaker = require('./BridgeMaker.js');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const Player = new require('./player');
+const GameManager = require('./GameManager');
+const gameManager = new GameManager();
+const Bridge = require('./Bridge');
+const bridge = new Bridge();
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor() {
-    this.bridge;
-    this.player = new Player();
-  }
+  constructor() {}
 
   start() {
-    this.bridge = this.player.askBridgeSize(this.makeBridge);
+    gameManager.askBridgeSize(this.makeBridge);
   }
 
   makeBridge(size) {
-    return BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    bridge.make(size);
+    gameManager.askWhereToGo(BridgeGame.move);
+    // this.retry();
   }
 
   /**
