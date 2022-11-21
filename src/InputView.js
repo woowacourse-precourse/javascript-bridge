@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { NEW_LINE } = require('./constants/BridgeGameSetting');
+const { GAME_STATUS, NEW_LINE } = require('./constants/BridgeGameSetting');
 const MESSAGE = require('./constants/BridgeGameMessage');
 const Validator = require('./utils/Validator');
 /**
@@ -25,7 +25,6 @@ const InputView = {
     Console.readLine(MESSAGE.PROCESS.SELECT_UP_DOWN, (select) => {
       Validator.isUpOrDown(select);
       Console.print(NEW_LINE);
-      this.readGameCommand();
     });
   },
 
@@ -35,10 +34,16 @@ const InputView = {
   readGameCommand() {
     Console.readLine(MESSAGE.PROCESS.SELECT_RESTART_OR_QUIT, (select) => {
       Validator.isRestartOrQuit(select);
+      if (select === GAME_STATUS.GAME_RESTART) {
+        this.readMoving();
+      }
+      if (select === GAME_STATUS.GAME_QUIT) {
+        Console.print(MESSAGE.PROCESS.GAME_RESULT);
+      }
     });
   },
 };
 
-Console.print(InputView);
+Console.print(InputView.readGameCommand());
 
 module.exports = InputView;
