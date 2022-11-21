@@ -7,6 +7,7 @@ class BridgeGame {
   #playerInput;
   #nowUpBridge = [];
   #nowDownBridge = [];
+  #tryCount = 1;
 
   constructor(bridge) {
     this.#bridge = bridge;
@@ -47,6 +48,13 @@ class BridgeGame {
       this.#nowUpBridge.push("X");
       this.#nowDownBridge.push(" ");
     }
+  }
+
+  retry() {
+    this.#moveCount = 0;
+    this.#nowUpBridge = [];
+    this.#nowDownBridge = [];
+    this.#tryCount++;
   }
 }
 
