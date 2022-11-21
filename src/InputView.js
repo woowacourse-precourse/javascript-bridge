@@ -1,5 +1,4 @@
 const { Console } = require("@woowacourse/mission-utils");
-const Validator = require("./Validator.js");
 const InfoMessages = require("./constants/InfoMessages.js");
 
 const InputView = {
@@ -17,7 +16,6 @@ const InputView = {
 
   readGameCommand(handleGameCommand) {
     Console.readLine(InfoMessages.RESTART_OR_QUIT, (command) => {
-      Validator.checkCommandInput(command);
       handleGameCommand.call(this, command);
     });
   },

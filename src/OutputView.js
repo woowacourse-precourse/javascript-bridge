@@ -7,6 +7,11 @@ const OutputView = {
     Console.print(InfoMessages.OPENING_REMARKS);
   },
 
+  printErrorMessage(error) {
+    Console.print(error.message);
+    Console.close();
+  },
+
   printMap(stepObj) {
     const upperPart = stepObj.upperPart.join(" | ");
     const lowerPart = stepObj.lowerPart.join(" | ");
