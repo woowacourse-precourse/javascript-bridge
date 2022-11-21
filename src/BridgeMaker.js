@@ -10,7 +10,8 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     while (size > 0) {
-      const direction = this.makeDirection(generateRandomNumber());
+      const number = generateRandomNumber();
+      const direction = this.makeDirection(number);
       bridge.push(direction);
       size--;
     }
