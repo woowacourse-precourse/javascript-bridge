@@ -32,6 +32,7 @@ class GameController {
 
   makeBridge(bridgeSize) {
     this.BridgeGame.makeBridge(bridgeSize);
+    OutputView.printSpace();
     this.getMoving();
   }
 

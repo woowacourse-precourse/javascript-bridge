@@ -2,6 +2,10 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 const OutputView = {
 
+  printSpace() {
+    MissionUtils.Console.print(' ');
+  },
+
   printStart() {
     MissionUtils.Console.print('다리 건너기 게임을 시작합니다.\n');
   },
@@ -10,6 +14,7 @@ const OutputView = {
     map.forEach((map) => {
       MissionUtils.Console.print(`[ ${map.join(" | ")} ]`);
     })
+    this.printSpace();
   },
 
   printResult(gameResult, map) {
