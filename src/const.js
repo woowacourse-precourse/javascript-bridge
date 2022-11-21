@@ -32,6 +32,7 @@ const QUERY = {
 
 const ERROR = {
     HEADER : "[ERROR] ",
+    BRIDGE_LENGTH : "다리의 길이는 3이상 20이하의 정수입니다.",
 
 }
 

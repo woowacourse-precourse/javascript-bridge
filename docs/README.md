@@ -35,7 +35,7 @@
         - [x] 총 시도한 횟수
 
 - [ ] 입력
-    - [ ] 다리 길이
+    - [x] 다리 길이
         - InputView.readBridgeSize()
     - [ ] 이동할 칸
         - InputView.readMoving()
