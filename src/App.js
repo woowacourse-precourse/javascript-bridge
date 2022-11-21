@@ -2,6 +2,7 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
 const Validator = require("./Validator.js");
+const Values = require("./constants/Values.js");
 
 class App {
   #game;
@@ -23,9 +24,24 @@ class App {
     Validator.checkDirectionInput(direction);
     this.#game.move(direction);
     OutputView.printMap(this.#game.stepObj);
-    if (this.#game.isCleared) this.showGameResult();
-    else if (this.#game.isSuccess) this.askMoving();
-    else throw new Error("게임 실패");
+    this.checkStatus();
+  }
+  checkStatus() {
+    if (this.#game.isCleared) return this.showGameResult();
+    if (this.#game.isSuccess) return this.askMoving();
+    return this.askGameCommand();
+  }
+  askGameCommand() {
+    InputView.readGameCommand.bind(this)(this.handleGameCommand);
+  }
+  handleGameCommand(direction) {
+    Validator.checkCommandInput(direction);
+    if (direction === Values.RESTART) return this.restartGame();
+    return this.showGameResult();
+  }
+  restartGame() {
+    this.#game.retry();
+    this.askMoving();
   }
   showGameResult() {}
 }
