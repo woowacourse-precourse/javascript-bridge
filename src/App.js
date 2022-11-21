@@ -5,5 +5,4 @@ class App {
   }
 }
 
-// git hub push test
 module.exports = App;

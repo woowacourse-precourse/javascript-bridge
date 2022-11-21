@@ -34,7 +34,10 @@ const InputView = {
     const ONLY_NUMBER = /^[3-9]{1}$|^[1-2]{1}[0-9]{1}$|^3{1}0{1}$/;
     if (!ONLY_NUMBER.test(answer)) {
       throw '[ERROR] 3 이상 20 이하의 숫자를 입력해주세요.';
-    } else this.bridgeSizetoArr(answer);
+    }
+    if (ONLY_NUMBER.test(answer)) {
+      return this.bridgeSizetoArr(answer);
+    }
   },
 
   bridgeSizetoArr(number) {
@@ -63,7 +66,8 @@ const InputView = {
     const LimitedMovement = /[UD]/;
     if (!LimitedMovement.test(letter)) {
       throw '[ERROR] 대문자 U 와 D 를 입력해주세요.';
-    } else {
+    }
+    if (LimitedMovement.test(letter)) {
       this.letter = letter;
       this.inputtoMove();
     }
@@ -118,8 +122,9 @@ const InputView = {
     const LimitedMovement = /[RQ]/;
     if (!LimitedMovement.test(finishLetter)) {
       throw '[ERROR] 대문자 R 과 Q 를 입력해주세요.';
-    } else {
-      this.finishorRestartGame(finishLetter);
+    }
+    if (LimitedMovement.test(finishLetter)) {
+      return this.finishorRestartGame(finishLetter);
     }
   },
 
