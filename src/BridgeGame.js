@@ -5,9 +5,10 @@ const { COMMAND } = require("./constants/game");
  */
 class BridgeGame {
   #bridgeShape = [];
-  #totalTryCount = 1;
-  #currentBridgeCount = 0;
   #movingCommand = "";
+  #currentBridgeCount = 0;
+  #totalTryCount = 1;
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -18,6 +19,16 @@ class BridgeGame {
     this.#currentBridgeCount += 1;
   }
 
+  /**
+   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
+   * <p>
+   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   */
+  retry() {
+    this.#currentBridgeCount = 0;
+    this.#totalTryCount += 1;
+  }
+
   isGameSuccess() {
     return this.isAnswerMovingChoice() && this.#isLastMove();
   }
@@ -26,10 +37,6 @@ class BridgeGame {
     return (
       this.#movingCommand === this.#bridgeShape[this.#currentBridgeCount - 1]
     );
-  }
-
-  #isLastMove() {
-    return this.#currentBridgeCount === this.#bridgeShape.length;
   }
 
   setBridgeShape(bridgeSahpe) {
@@ -48,8 +55,8 @@ class BridgeGame {
     return { upsideBridgeMap, downsideBridgeMap };
   }
 
-  #getCurrentBridgeShape() {
-    return this.#bridgeShape.slice(0, this.#currentBridgeCount);
+  getTotalTryCount() {
+    return this.#totalTryCount;
   }
 
   #makeAnswerBridgeMap(upDown) {
@@ -58,18 +65,12 @@ class BridgeGame {
     );
   }
 
-  getTotalTryCount() {
-    return this.#totalTryCount;
+  #isLastMove() {
+    return this.#currentBridgeCount === this.#bridgeShape.length;
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {
-    this.#currentBridgeCount = 0;
-    this.#totalTryCount += 1;
+  #getCurrentBridgeShape() {
+    return this.#bridgeShape.slice(0, this.#currentBridgeCount);
   }
 }
 
