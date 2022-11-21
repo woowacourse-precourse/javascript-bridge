@@ -1,46 +1,60 @@
-const Validator = require('../Validator');
-const BridgeStatistics = require('./BridgeGameStatistics');
 const BridgeMap = require('./BridgeMap');
+const Bridge = require('./Bridge');
 
 class BridgeGame {
   #bridgeMap = new BridgeMap();
-  #statistics = new BridgeStatistics();
-  #bridge;
+  #bridge = new Bridge();
+  #gameStat = new Map();
 
-  try() {
-    this.#statistics.increaseAttempt();
+  constructor() {
+    this.gameInit();
   }
 
-  move(moving, canMove) {
-    this.#bridgeMap.addMoveMark(moving, canMove);
-    this.#statistics.increaseMoveCount();
+  gameInit() {
+    this.#gameStat.set('attempt', 0).set('moveCount', 0).set('isAlive', null);
+  }
+
+  try() {
+    this.#gameStat.set('isAlive', true).set('attempt', this.#gameStat.get('attempt') + 1);
+  }
+
+  move(moving) {
+    const canIMove = this.#bridge.canMove(this.#gameStat.get('moveCount'), moving);
+
+    this.#bridgeMap.addMoveMark(moving, canIMove);
+    if (canIMove) return this.#gameStat.set('moveCount', this.#gameStat.get('moveCount') + 1);
+
+    return this.gameOver();
+  }
+
+  gameOver() {
+    this.#gameStat.set('isAlive', false);
   }
 
   retry() {
+    this.#gameStat.set('moveCount', 0);
     this.#bridgeMap.reset();
-    this.#statistics.resetMoveCount();
     this.try();
+  }
+
+  getAttempt() {
+    return this.#gameStat.get('attempt');
   }
 
   getBridgeMap() {
     return this.#bridgeMap.getBridgeMap();
   }
 
-  getAttempt() {
-    return this.#statistics.getAttempt();
-  }
-
-  setBridgeGame(bridge) {
-    this.#bridge = bridge;
-    this.#statistics.setBridgeSize(bridge.length);
+  setBridge(bridge) {
+    this.#bridge.setBridge(bridge);
   }
 
   isGameSuccess() {
-    return this.#statistics.isGameSuccess();
+    return this.#bridge.getBridgeSize() === this.#gameStat.get('moveCount');
   }
 
-  canMove(moving) {
-    return this.#bridge[this.#statistics.getMoveCount()] === moving;
+  isAlive() {
+    return this.#gameStat.get('isAlive');
   }
 }
 

@@ -6,58 +6,54 @@ const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const SETTING = require('../constants/gameSetting');
 
 class BridgeGameController {
-  #bridgeGame;
+  #bridgeGame = new BridgeGame();
 
   gameStart() {
-    this.#bridgeGame = new BridgeGame();
     this.#bridgeGame.try();
-
     OutputView.printGameStart();
-    InputView.readBridgeSize(this.setBridgeGame.bind(this));
+    InputView.readBridgeSize(this.setBridge.bind(this));
+  }
+
+  gameEnd() {
+    OutputView.printResult(
+      this.#bridgeGame.getBridgeMap(),
+      this.#bridgeGame.isGameSuccess(),
+      this.#bridgeGame.getAttempt()
+    );
   }
 
   inputMove() {
     InputView.readMoving(this.move.bind(this));
   }
 
-  gameEnd() {
-    const map = this.#bridgeGame.getBridgeMap();
-    const isGameSuccess = this.#bridgeGame.isGameSuccess();
-    const attempt = this.#bridgeGame.getAttempt();
-
-    OutputView.printResult(map, isGameSuccess, attempt);
+  inputGameCommand() {
+    InputView.readGameCommand(this.gameCommand.bind(this));
   }
 
-  retry(gameCommand) {
+  gameCommand(gameCommand) {
     if (gameCommand === SETTING.GAME_RESTART) {
       this.#bridgeGame.retry();
       return this.inputMove();
     }
 
-    if (gameCommand === SETTING.GAME_QUIT) {
-      return this.gameEnd();
-    }
-  }
-
-  gameRestart() {
-    InputView.readGameCommand(this.retry.bind(this));
+    return this.gameEnd();
   }
 
   move(moving) {
-    const canMove = this.#bridgeGame.canMove(moving);
-
-    this.#bridgeGame.move(moving, canMove);
+    this.#bridgeGame.move(moving);
     OutputView.printMap(this.#bridgeGame.getBridgeMap());
-    if (canMove) return this.#bridgeGame.isGameSuccess() ? this.gameEnd() : this.inputMove();
+    if (this.#bridgeGame.isAlive()) {
+      if (this.#bridgeGame.isGameSuccess()) return this.gameEnd();
 
-    return this.gameRestart();
+      return this.inputMove();
+    }
+
+    return this.inputGameCommand();
   }
 
-  setBridgeGame(bridgeSize) {
+  setBridge(bridgeSize) {
     const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-
-    this.#bridgeGame.setBridgeGame(bridge);
-
+    this.#bridgeGame.setBridge(bridge);
     this.inputMove();
   }
 }
