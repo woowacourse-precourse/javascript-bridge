@@ -36,7 +36,7 @@ const ErrorHandler = {
   Retrial: {
     true: ({ app, bridgeGame, readAgain }) => {
       printInputErrorMessage(ERROR.WRONG_COMMAND);
-      readAgain({ app, bridgeGame });
+      readAgain(app, bridgeGame);
     },
 
     false: ({ app, bridgeGame, answer }) => {
