@@ -17,7 +17,11 @@ const OutputView = {
   },
 
   printMoveInputError() {
-    Console.print('[ERROR] 이동할 칸은 (위: U, 아래: D)만 입력가능합니다');
+    Console.print('[ERROR] 이동할 칸은 (위: U, 아래: D)만 입력가능합니다.');
+  },
+
+  printGameCommandError() {
+    Console.print('[ERROR] 재시도: R, 종료: Q 만 입력가능합니다.');
   },
 
   printMap(results) {

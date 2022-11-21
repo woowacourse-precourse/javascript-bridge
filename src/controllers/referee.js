@@ -43,16 +43,19 @@ class Referee {
   }
 
   gameCommand(answer) {
-    if (answer === 'R') {
-      this.bridgeGame.retry(() => this.resultAnalysis());
-      return;
+    try {
+      Referee.#gameCommandValidate(answer);
+      if (answer === 'R') this.bridgeGame.retry(() => this.resultAnalysis());
+      else this.endGame();
+    } catch {
+      OutputView.printGameCommandError();
+      InputView.readGameCommand((reanswer) => this.gameCommand(reanswer));
     }
-    this.endGame();
   }
 
   endGame() {
     const compareResult = this.bridgeGame.bridge.getCompareResult();
-    const executionCount = this.bridgeGame.bridge.getExecutionCount();
+    const executionCount = this.bridgeGame.getExecutionCount();
     const gameStatus = Referee.#isOver(compareResult);
     OutputView.printResult(compareResult, executionCount, gameStatus);
     this.isStart = false;
@@ -67,6 +70,12 @@ class Referee {
     }
 
     return false;
+  }
+
+  static #gameCommandValidate(answer) {
+    if (!(answer === 'R' || answer === 'Q')) {
+      throw new Error('입력오류');
+    }
   }
 }
 module.exports = Referee;
