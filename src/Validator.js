@@ -6,7 +6,9 @@ const Validator = {
   validateNumber(number) {
     if (/\D+/g.test(number)) throw new Error(prefix + isNotANumber);
   },
-  validateNumberRange() {},
+  validateNumberRange(number) {
+    if (number < 3 || 20 < number) throw new Error(prefix + isOutOfRange);
+  },
   validateMove() {},
   validateRetry() {},
 };

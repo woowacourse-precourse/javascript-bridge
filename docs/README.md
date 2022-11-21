@@ -20,7 +20,7 @@
 ### BridgeMaker
 
 - [x] 숫자 이외의 값이 입력될 경우 - Validator#validateNumber()
-- [ ] 3 미만 20 초과의 숫자가 입력될 경우 - Validator#validateNumberRange()
+- [x] 3 미만 20 초과의 숫자가 입력될 경우 - Validator#validateNumberRange()
 
 ### BridgeGame
 
