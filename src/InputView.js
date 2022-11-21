@@ -24,34 +24,28 @@ const InputView = {
     Console.readLine(GAME_MESSAGE.MOVE, (inputMove) => {
       if (validateMove(inputMove)) return this.readMoving(bridgeGame);
       bridgeGame.move(inputMove);
-      OutputView.pushResult(inputMove, bridgeGame.getSuccess());
-      OutputView.printMap();
+      bridgeGame.makeResult(inputMove, bridgeGame.getSuccess());
+      OutputView.printMap(bridgeGame);
       this.next(bridgeGame);
     });
   },
 
   next(bridgeGame) {
     if (bridgeGame.gameNotFinished()) return this.readMoving(bridgeGame);
-    else if (bridgeGame.gameSuccess()) return OutputView.printResult(bridgeGame.getCount(), bridgeGame.getSuccess());
+    else if (bridgeGame.gameSuccess()) return OutputView.printResult(bridgeGame.getCount(), bridgeGame.getSuccess(),bridgeGame);
     else return this.readGameCommand(bridgeGame);
   },
 
   readGameCommand(bridgeGame) {
     Console.readLine(GAME_MESSAGE.RESTART, (command) => {
       if (validateCommand(command)) return this.readGameCommand(bridgeGame);
-      if (command === COMMAND.QUIT) OutputView.printResult(bridgeGame.getCount(), bridgeGame.getSuccess());
+      if (command === COMMAND.QUIT) OutputView.printResult(bridgeGame.getCount(), bridgeGame.getSuccess(),bridgeGame);
       if (command === COMMAND.RESTART) {
-        this.initGame(bridgeGame);
+        bridgeGame.initGame();
         this.readMoving(bridgeGame);
       }
     });
   },
-
-  initGame(bridgeGame) {
-    bridgeGame.retry();
-    OutputView.upper.length = 0;
-    OutputView.downer.length = 0;
-  }
 };
 
 module.exports = InputView;
