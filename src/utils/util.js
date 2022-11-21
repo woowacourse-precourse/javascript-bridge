@@ -1,16 +1,22 @@
 const Console = require('@woowacourse/mission-utils');
+const { REGEX_NUM, ERROR_MESSAGE, BRIDGE_RULE } = require('./constants');
 
-const consoleCloseAndThrow = (errorMessage) => {
-  Console.close();
-  throw new Error(errorMessage);
+const isNum = (size) => {
+  if (size.match(REGEX_NUM) === null) throw ERROR_MESSAGE.VALIDATION_SIZE;
 };
 
-const binaryToUAndD = (binary) => {
-  if (binary == 1) return (binary = 'U');
-  return (binary = 'D');
+const isInRange = (size) => {
+  if (size < BRIDGE_RULE.MIN_LENGTH || size > BRIDGE_RULE.MAX_LENGTH)
+    throw ERROR_MESSAGE.VALIDATION_SIZE;
+};
+
+const binaryToDirection = (binary) => {
+  if (binary == 1) return (binary = BRIDGE_RULE.MOVE_UP);
+  return (binary = BRIDGE_RULE.MOVE_DOWN);
 };
 
 module.exports = {
-  consoleCloseAndThrow,
-  binaryToUAndD,
+  isNum,
+  isInRange,
+  binaryToDirection,
 };

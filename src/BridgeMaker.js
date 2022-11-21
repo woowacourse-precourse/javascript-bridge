@@ -1,4 +1,4 @@
-const { binaryToUAndD } = require('./utils/util');
+const { binaryToDirection } = require('./utils/util');
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -12,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     for (let i = 0; i < size; i++) bridge.push(generateRandomNumber());
-    return bridge.map(binaryToUAndD);
+    return bridge.map(binaryToDirection);
   },
 };
 

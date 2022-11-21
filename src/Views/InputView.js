@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { isNum, isInRange } = require('../utils/validation');
+const { isNum, isInRange } = require('../utils/util');
 const {
   PRINT_MESSAGE,
   ERROR_MESSAGE,
