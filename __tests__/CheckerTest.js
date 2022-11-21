@@ -13,6 +13,7 @@ describe('가능 검토자 테스트', () => {
     expect(checkSpaceCanCross(inputDownward, bridgeSpaceDownward)).toBeTruthy();
     expect(checkSpaceCanCross(inputDownward, bridgeSpaceUpward)).toBeFalsy();
   });
+
   test('종료된 라운드와 다리의 길이가 같은지 비교한다.', () => {
     const curRound = 5;
     const correctLength = curRound;

@@ -3,6 +3,7 @@ const Constant = Object.freeze({
     newLine: '\n',
     blank: ' ',
   }),
+
   BRIDGE_MSG: Object.freeze({
     leftEdge: '[',
     rightEdge: ']',
@@ -12,6 +13,7 @@ const Constant = Object.freeze({
     upward: 'U',
     downward: 'D',
   }),
+
   GAME_MSG: Object.freeze({
     start: '다리 건너기 게임을 시작합니다.',
     enterLength: '다리의 길이를 입력해주세요.',
@@ -22,12 +24,14 @@ const Constant = Object.freeze({
     successOrNot: '게임 성공 여부: ',
     totalTryCount: '총 시도한 횟수: ',
   }),
+
   GAME_RESULT: Object.freeze({
     success: '성공',
     fail: '실패',
     retry: 'R',
     quit: 'Q',
   }),
+
   ERROR_MSG: Object.freeze({
     prefix: '[ERROR] ',
     isOutOfRange: '다리 길이는 3부터 20 사이의 숫자여야 합니다.',
