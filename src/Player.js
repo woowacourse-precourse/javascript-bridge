@@ -18,6 +18,21 @@ class Player {
         }
         return true;
     }
+
+    repeatMove(bridgeAnswer) {
+        const bridgeGame = new BridgeGame(bridgeAnswer);
+        let isSuccessed = true;
+
+        for(let i = 0; i < bridgeAnswer.length; i++) {
+            const movingInput = InputView.readMoving();
+            const currentBridge = bridgeGame.move(movingInput);
+            if (!this.checkIncludeFail(currentBridge)) {
+                isSuccessed = false;
+                break;
+            }
+        }
+    }
+
 }
 
 
