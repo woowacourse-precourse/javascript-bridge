@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 
-const { END, RESULT_VICTORY, RESULT_COUNT } = require("./constant/message");
+const { START, END, RESULT_VICTORY, RESULT_COUNT } = require("./constant/message");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -30,6 +30,10 @@ const OutputView = {
     Console.print(`${END}`);
     OutputView.printMap(userBridge);
     Console.print(`${RESULT_VICTORY(isVictory)}\n${RESULT_COUNT(count)}`);
+  },
+
+  printStart() {
+    Console.print(START);
   },
 };
 
