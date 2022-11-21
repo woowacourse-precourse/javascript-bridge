@@ -120,7 +120,11 @@ class BridgeGame {
   }
 
   end = () => {
-    OutputView.printResult(this.bridgeStore.getGameResult(this.moveCount));
+    OutputView.printResult(
+      this.moveCount,
+      this.bridgeStore.getUserInputResult,
+      this.bridgeStore.getGameResult(this.moveCount),
+    );
     InputView.close();
   };
 
