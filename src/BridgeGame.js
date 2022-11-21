@@ -20,6 +20,15 @@ class BridgeGame {
     }
   }
 
+  clearRound(){
+    this.#bridgeBoard.movePlayer();
+    if(this.#bridgeBoard.isLastRound()){
+      this.moveFinalRound();
+    }else{
+      this.moveNextRound(this.#bridgeBoard.getClearedBridge())
+    }
+  }
+  
   moveNextRound(board){
     this.#round++;
     OutputView.printMap(board);
