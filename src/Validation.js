@@ -15,6 +15,8 @@ class Validation {
 
     checkMovingInputValidation(movingInput) {
         // U, D 아닌 입력
+        if (movingInput !== 'U' && movingInput !== 'D')
+            throw new Error(this.#MOVING_INPUT_ERROR_MESSAGE);
     }
 
     checkRetryInputValidation(gameCommandInput) {
