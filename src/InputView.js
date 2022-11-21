@@ -32,24 +32,24 @@ const InputView = {
 
   readBridge(resolved, values, result) {
     const bridge = BridgeMaker.makeBridge(resolved, RandomGenerator);
-    this.readMoving(resolved, bridge, values, result);
+    this.readMoving(bridge, values, result);
   },
 
-  readMoving(bridgeSize, bridge, values, result) {
-    if (values.index !== bridgeSize - 1) {
+  readMoving(bridge, values, result) {
+    if (values.index !== bridge.length - 1) {
       Console.readLine(ASKS.PLAYER_MOVING, (step) => {
         Check.moveFormat(step);
         values.stepArray.push(step);
 
         //다리와 비교 로직
-        this.compare(bridgeSize, bridge, values, result);
+        this.compare(bridge, values, result);
 
         //맞으면 map print
         //틀려도 map 프린트
       });
     }
 
-    if (values.index === bridgeSize - 1) {
+    if (values.index === bridge.length - 1) {
       //성공 로직
       console.log(
         "결과\n",
@@ -62,27 +62,27 @@ const InputView = {
     }
   },
 
-  compare(bridgeSize, bridge, values, result) {
+  compare(bridge, values, result) {
     values.index++;
     console.log(bridge, values.stepArray, result.count);
 
     if (bridge[values.index] === values.stepArray[values.index]) {
-      this.readMoving(bridgeSize, bridge, values, result);
+      this.readMoving(bridge, values, result);
     }
 
     if (bridge[values.index] !== values.stepArray[values.index]) {
-      this.readGameCommand(bridgeSize, bridge, values, result);
+      this.readGameCommand(bridge, values, result);
     }
   },
 
-  readGameCommand(bridgeSize, bridge, values, result) {
+  readGameCommand(bridge, values, result) {
     Console.readLine("\nRQ선택\n", (select) => {
       Check.selectFormat(select);
       if (select === "R") {
         result.count++;
         values.stepArray = [];
         values.index = -1;
-        this.readMoving(bridgeSize, bridge, values, result);
+        this.readMoving(bridge, values, result);
       }
 
       if (select === "Q") {
