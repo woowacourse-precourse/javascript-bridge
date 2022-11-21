@@ -21,5 +21,36 @@
 
 ### 폴더 구조 🗂
 
+```
+📦 src
+ ┣ 📂 Controller
+ ┃ ┣ 📜 BridgeGame.js
+ ┃ ┣ 📜 BridgeMap.js
+ ┃ ┗ 📜 UserInput.js
+ ┣ 📂 CustomError
+ ┃ ┗ 📜 index.js
+ ┣ 📂 Model
+ ┃ ┗ 📜 index.js
+ ┣ 📂 View
+ ┃ ┣ 📜 InputView.js
+ ┃ ┣ 📜 OutputView.js
+ ┃ ┗ 📜 index.js
+ ┣ 📂 utils
+ ┃ ┣ 📂 constants
+ ┃ ┃ ┣ 📜 ErrorMessage.js
+ ┃ ┃ ┗ 📜 GameSystem.js
+ ┃ ┗ 📂 services
+ ┃ ┃ ┣ 📜 map.js
+ ┃ ┃ ┣ 📜 system.js
+ ┃ ┃ ┗ 📜 validate.js
+ ┣ 📜 App.js
+ ┣ 📜 BridgeMaker.js
+ ┗ 📜 BridgeRandomNumberGenerator.js
+```
+
 ## 클래스 구조 🏡
+
+```
+
+```
 
