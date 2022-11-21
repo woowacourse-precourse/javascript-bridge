@@ -57,6 +57,20 @@ class BridgeGame {
     return recordAllSteps;
   }
 
+  getCurrentCondition() {
+    if(this.#userInformation.upside.indexOf(MOVING.UNPASSED) > -1 || this.#userInformation.downside.indexOf(MOVING.UNPASSED) > -1) return CONTROL.GAME_OVER;
+    if(this.#userInformation.track.length !== this.#bridgeInformation.bridge.length) return CONTROL.PASS_STEP;
+    if(this.#userInformation.track.length === this.#bridgeInformation.bridge.length) {
+      this.getRecordSteps();
+      this.getSucessValue();
+      return CONTROL.GAME_END;
+    }
+  }
+
+  getSucessValue() {
+
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
