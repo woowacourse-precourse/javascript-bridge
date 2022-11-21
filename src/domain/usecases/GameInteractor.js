@@ -2,8 +2,8 @@ const GameMetaData = require('../entities/GameMetaData');
 
 const RULE = require('../constants');
 
-const ERORR_MESSAGE = require('../error/error.constants');
-const GameCommandError = require('../error/GameCommandError');
+const ERORR_MESSAGE = require('../../error/error.constants');
+const GameCommandError = require('../../error/GameCommandError');
 
 class GameInteractor {
   #game;
