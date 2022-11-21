@@ -52,13 +52,8 @@ const InputView = {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
-        if (input == "R") {
-          this.Game.retry();
-          return this.readMoving();
-        }
-        if (input == "Q") {
-          return printResult(this.Game, "실패");
-        }
+        if (this.Game.isRetry(input)) return this.readMoving();
+        return printResult(this.Game, "실패");
       }
     );
   },
