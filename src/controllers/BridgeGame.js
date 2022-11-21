@@ -23,8 +23,13 @@ class BridgeGame {
   }
 
   #handleInputBridgeSize(size) {
-    const bridgeSize = Number(size);
-    this.#model.setBridge(bridgeSize);
+    try {
+      const bridgeSize = Number(size);
+      this.#model.setBridge(bridgeSize);
+    } catch (error) {
+      this.#view.print(`\n${error.message}\n`);
+      this.#requestBridgeSize();
+    }
   }
 
   /**
