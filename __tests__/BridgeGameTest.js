@@ -96,4 +96,17 @@ describe("다리 건너기 게임 진행 테스트", () => {
     const crossed = bridgeGame.hasCrossedCompletely();
     expect(crossed).toBe(true);
   });
+
+  test("게임 클리어 테스트", () => {
+    const bridge = ["U", "D", "D"];
+    const directions = ["U", "D", "D"];
+    const bridgeGame = new BridgeGame(bridge);
+
+    directions.forEach((direction, index) => {
+      bridgeGame.move(direction);
+    });
+
+    const isClear = bridgeGame.isClear();
+    expect(isClear).toBe(true);
+  });
 });
