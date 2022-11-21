@@ -9,7 +9,7 @@ const START_MESSAGE = '다리 건너기 게임을 시작합니다.\n';
 const END_MESSAGE = '최종 게임 결과';
 
 const IS_SUCCEED_MESSAGE = '게임 성공 여부: ';
-const TRY_COUNT_MESSAGE = '시도 횟수: ';
+const TRY_COUNT_MESSAGE = '총 시도한 횟수: ';
 
 const OutputView = {
   printStart() {
