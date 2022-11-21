@@ -49,7 +49,9 @@ class BridgeGame {
   /**
    * 게임이 끝날 때 사용하는 메서드
    */
-  end() {}
+  end() {
+    this.#bridgeGameService.endGame();
+  }
 }
 
 module.exports = BridgeGame;
