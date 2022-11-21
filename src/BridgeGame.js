@@ -1,4 +1,5 @@
 const RecallUntilCorrect = require("./RecallUntilCorrect.js");
+const OutputView = require("./OutputView.js");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -6,12 +7,14 @@ const RecallUntilCorrect = require("./RecallUntilCorrect.js");
   #cumulativeCount
   #bridgeSize
   #bridgeMap
-  #upMap = [];
-  #downMap = [];
+  #upMap
+  #downMap
   constructor(bridgeSize, bridgeMap){
     this.#cumulativeCount = 1;
     this.#bridgeSize = bridgeSize;
     this.#bridgeMap = bridgeMap;
+    this.#upMap = "";
+    this.#downMap = "";
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -23,8 +26,14 @@ const RecallUntilCorrect = require("./RecallUntilCorrect.js");
       const moving = RecallUntilCorrect.recallReadMoving(true);
       if(moving===this.#bridgeMap[moveCount]){  //움직이려고 하는 곳이 이동할 수 있는 곳이면 O표시 후 맵을 보여주고 계속진행
         this.isUpOrDown(moving, moveCount, true);
+        const upMap = this.#upMap.slice(0,-1);
+        const downMap = this.#downMap.slice(0,-1);
+        OutputView.printMap(upMap, downMap);
       }else{  //움직이려고 하는 곳이 이동할 수 없는 곳이면 X표시 후 맵을 보여주고 재시작 여부를 묻는다.
         this.isUpOrDown(moving, moveCount, false);
+        const upMap = this.#upMap.slice(0,-1);
+        const downMap = this.#downMap.slice(0,-1);
+        OutputView.printMap(upMap, downMap);
       }
     }
   }
@@ -44,8 +53,8 @@ const RecallUntilCorrect = require("./RecallUntilCorrect.js");
   }
   saveCurLocation(moveCount, upState, downState){
     console.log("moveCount"+moveCount+"upState"+upState+"downState"+downState);
-    this.#upMap[moveCount] = upState;
-    this.#downMap[moveCount] = downState;
+    this.#upMap+= (upState +"|");
+    this.#downMap+=(downState +"|");
   }
 
   /**
