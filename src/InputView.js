@@ -3,6 +3,7 @@ const {
   isBridgeLengthValid,
   isMoveValid,
   isCommandValid,
+  printMessage,
 } = require("./utils/index");
 const { GAME_MESSAGE, COMMAND_VALUE } = require("./constants/index");
 const OutputView = require("./OutputView");
@@ -15,9 +16,14 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     inputUserValue(GAME_MESSAGE.INPUT_BRIDGE_LENGTH, (length) => {
-      isBridgeLengthValid(length);
-      bridgeGame.createBridge(Number(length));
-      this.readMoving(bridgeGame);
+      try {
+        isBridgeLengthValid(length);
+        bridgeGame.createBridge(Number(length));
+        this.readMoving(bridgeGame);
+      } catch (error) {
+        printMessage(error);
+        this.readBridgeSize(bridgeGame);
+      }
     });
   },
 
@@ -26,20 +32,30 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     inputUserValue(GAME_MESSAGE.INPUT_MOVE, (move) => {
-      isMoveValid(move);
+      try {
+        isMoveValid(move);
 
-      let proceedMove = bridgeGame.move(move);
-      let [up, down] = bridgeGame.getUpDownStatus();
+        let proceedMove = bridgeGame.move(move);
+        let [up, down] = bridgeGame.getUpDownStatus();
+        OutputView.printMap(up, down);
 
-      OutputView.printMap(up, down);
-
-      if (!proceedMove) this.readGameCommand(bridgeGame, up, down, proceedMove);
-      if (proceedMove && bridgeGame.isArriveToEnd()) {
-        bridgeGame.quit();
-        OutputView.printResult(up, down, proceedMove, bridgeGame.getTotalTry());
-      }
-      if (proceedMove && !bridgeGame.isArriveToEnd())
+        if (!proceedMove)
+          this.readGameCommand(bridgeGame, up, down, proceedMove);
+        if (proceedMove && bridgeGame.isArriveToEnd()) {
+          bridgeGame.quit();
+          OutputView.printResult(
+            up,
+            down,
+            proceedMove,
+            bridgeGame.getTotalTry()
+          );
+        }
+        if (proceedMove && !bridgeGame.isArriveToEnd())
+          this.readMoving(bridgeGame);
+      } catch (error) {
+        printMessage(error);
         this.readMoving(bridgeGame);
+      }
     });
   },
 
@@ -48,19 +64,24 @@ const InputView = {
    */
   readGameCommand(bridgeGame, up, down, successStatus) {
     inputUserValue(GAME_MESSAGE.RESTART, (command) => {
-      isCommandValid(command);
-      if (command === COMMAND_VALUE.RESTART) {
-        bridgeGame.retry();
-        this.readMoving(bridgeGame);
-      }
-      if (command === COMMAND_VALUE.QUIT) {
-        OutputView.printResult(
-          up,
-          down,
-          successStatus,
-          bridgeGame.getTotalTry()
-        );
-        bridgeGame.quit();
+      try {
+        isCommandValid(command);
+        if (command === COMMAND_VALUE.RESTART) {
+          bridgeGame.retry();
+          this.readMoving(bridgeGame);
+        }
+        if (command === COMMAND_VALUE.QUIT) {
+          OutputView.printResult(
+            up,
+            down,
+            successStatus,
+            bridgeGame.getTotalTry()
+          );
+          bridgeGame.quit();
+        }
+      } catch (error) {
+        printMessage(error);
+        this.readGameCommand(bridgeGame, up, down, successStatus);
       }
     });
   },
