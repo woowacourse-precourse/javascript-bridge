@@ -39,6 +39,7 @@ class BridgeGamePlay {
    * 게임 한 판 진행
    */
   playGame() {
+    this.myMoves = [];
     this.tryCount += 1;
     this.move();
   }
@@ -91,6 +92,9 @@ class BridgeGamePlay {
       const gameCommand = InputView.getGameCommand();
       if (gameCommand === PLAY.QUIT) {
         this.loseGame();
+      }
+      if (gameCommand === PLAY.RESTART) {
+        this.playGame();
       }
       return;
     }
