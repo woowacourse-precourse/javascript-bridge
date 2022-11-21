@@ -2,7 +2,7 @@
 
 이미 만들어져 있는 BridgeRandomNumberGenerator 를 제외하고
 
-파일 순서대로 , 함수 작성 순서대로 작성하였습니다
+파일 순서대로 , 함수 작성 순서대로 작성
 
 - [x] 객체 공통 Object.freeze 로 상태접근 제한
 
@@ -12,7 +12,7 @@
 
 - [x] (위: U, 아래: D)
 
-\*\* 그 밖에 나머지 상수는 최대한 해당 객체에서 사용하게끔 분리 적용하였습니다.
+\*\* 그 밖에 나머지 상수는 최대한 해당 객체에서 사용하게끔 분리 적용
 
 ## App 클래스
 
@@ -36,7 +36,7 @@ input view 기준으로 기능 구현 작성
 
 - [x] 게임 종료 (앱 종료) 판별 -[x] 질문을 받아 input 검증에서 예외발생시 status 대로 error handle 기능 구현
 
-### Bridge Game.js
+## Bridge Game.js
 
 ### initBridgeLengthStatus
 
@@ -181,10 +181,10 @@ input view 기준으로 기능 구현 작성
 - [x] BirdgeMap handleMap 어떤 map을 처음인지 아닌지에 따른 isFirst 상태변경 map추가 기능실행 의사 결정
 - [x] BridgeMap addMap 맞췄는지 틀렸는지에 따라 어떤 자원을 추가할지 의사결정
 
-- [] App progressMovementTrue 게임 이 끝날것인지에 대한 의사 결정이 들어있음
+- [ ] App progressMovementTrue 게임 이 끝날것인지에 대한 의사 결정이 들어있음
   (Utils.console 관련 로직 테스트)
 
-- [] App progressApp appstatus 에 따라 게임을 어느 시점으로 실행시킬것인지 에 따른 의사 결정이 들어가있음
+- [ ] App progressApp appstatus 에 따라 게임을 어느 시점으로 실행시킬것인지 에 따른 의사 결정이 들어가있음
   (Utils.console 관련 로직 테스트)
 
 # 객체 관련 제한 사항
