@@ -47,7 +47,7 @@ const InputView = {
         }
 
         if (check == false) {
-          console.log(" 건너기 실패 했습니다");
+          this.readGameCommand();
         }
 
         this.readMoving();
@@ -58,7 +58,15 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (answer) => {
+        if (answer == "R") this.readMoving();
+        if (answer == "Q") Console.close();
+      }
+    );
+  },
 };
 
 module.exports = InputView;
