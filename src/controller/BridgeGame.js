@@ -1,79 +1,66 @@
-const OutputView = require('../view/OutputView');
-const InputView = require('../view/InputView');
-const Bridge = require('../domain/Bridge');
-const MovingCount = require('../domain/MovingCount');
-const CurrentLocation = require('../domain/CurrentLocation');
 const { GAME } = require('../constants/Constants');
 const { Console } = require('@woowacourse/mission-utils');
 
 class BridgeGame {
-  #bridge;
-  #totalMovingCount;
-  #currentLocation;
-  #partialBridgeMap;
-  #result;
+  #view;
+  #domain;
 
-  constructor() {
-    this.#bridge;
-    this.#totalMovingCount = new MovingCount();
-    this.#currentLocation = new CurrentLocation();
-    this.#partialBridgeMap;
-    OutputView.printStart();
+  constructor(view, domain) {
+    this.#view = view;
+    this.#domain = domain;
   }
 
   start() {
-    InputView.readBridgeLength(this.#initBridge.bind(this));
+    this.#view.printStart();
+    this.#view.readBridgeLength(this.#initBridge.bind(this));
   }
 
   #initBridge(length) {
-    this.#bridge = new Bridge(length);
+    this.#domain.setBridgeLength(length);
     this.#move();
   }
 
   #move() {
-    this.#isEndOfBridge()
-      ? this.#end()
-      : InputView.readMoving(this.#moveResult.bind(this));
+    this.#domain.moveOneStep();
+    this.#view.readMoving(this.#printCurrentBridge.bind(this));
   }
 
-  #moveResult(direction) {
-    this.#currentLocation.moveOneStep();
-    const location = this.#currentLocation.getCurrentLocation();
+  #printCurrentBridge(moving) {
+    const step = this.#domain.isMovable(moving);
+    this.#domain.setIsAlive(step);
 
-    this.#result = this.#bridge.isMovable(direction, location);
-    this.#partialBridgeMap = this.#bridge.getPartialBridgeMap(location);
+    const isAlive = this.#domain.isAlive();
+    const partialBridgeMap = this.#domain.getPartialBridgeMap();
+    this.#view.printMap(partialBridgeMap, isAlive);
 
-    OutputView.printMap(this.#partialBridgeMap, this.#result);
+    if (this.#domain.isEndOfBridge()) this.#result();
+    else isAlive ? this.#move() : this.#inputRetry();
+  }
 
-    this.#result
-      ? this.#move()
-      : InputView.readGameCommand(this.#isRetry.bind(this));
+  #inputRetry() {
+    this.#view.readGameCommand(this.#isRetry.bind(this));
   }
 
   #isRetry(gameCommand) {
-    this.#totalMovingCount.plusTotalMovingCount();
     if (gameCommand === GAME.restart) {
-      this.#currentLocation.resetCurrentLocation();
+      this.#domain.addMovingCount();
+      this.#domain.resetCurrentLocation();
       this.#move();
     }
-    if (gameCommand === GAME.quit) this.#end();
+    if (gameCommand === GAME.quit) this.#result();
+  }
+
+  #result() {
+    const partialBridgeMap = this.#domain.getPartialBridgeMap();
+    const isAlive = this.#domain.isAlive();
+    const totalMovingCount = this.#domain.getTotalMovingCount();
+    this.#view.printResult(partialBridgeMap, isAlive, totalMovingCount);
+    this.#end();
   }
 
   #end() {
-    this.#totalMovingCount.plusTotalMovingCount();
-    OutputView.printResult(
-      this.#partialBridgeMap,
-      this.#result,
-      this.#totalMovingCount.getTotalMovingCount()
-    );
+    // this.#view.endRead();
     Console.close();
-  }
-
-  #isEndOfBridge() {
-    return (
-      this.#bridge.getBridgeLength() ===
-      this.#currentLocation.getCurrentLocation() + 1
-    );
   }
 }
 
