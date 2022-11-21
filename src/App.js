@@ -1,14 +1,20 @@
+const MissionUtils = require('@woowacourse/mission-utils');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame');
-const MissionUtils = require('@woowacourse/mission-utils');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 class App {
     async play() {
         MissionUtils.Console.print('다리 건너기 게임을 시작합니다.\n');
-        const result = await InputView.readBridgeSize();
-        MissionUtils.Console.print(result);
+        const bridgeLength = await InputView.readBridgeSize();
+
+        const bridge = BridgeMaker.makeBridge(
+            bridgeLength,
+            BridgeRandomNumberGenerator.generate
+        );
+        MissionUtils.Console.print(bridge);
         MissionUtils.Console.close();
     }
 }
