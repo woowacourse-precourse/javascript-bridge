@@ -3,17 +3,23 @@
  */
 class BridgeGame {
   #bridge = [];
+
   #movingCount = 0;
+
   #downBridgeRecord = [];
+
   #upBridgeRecord = [];
+
   #tryCount = 1;
 
   setBridge(bridge) {
     this.#bridge = bridge;
   }
+
   getBridge() {
     return this.#bridge;
   }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -23,6 +29,7 @@ class BridgeGame {
     if (direction === 'U') return this.goToUpBridge();
     if (direction === 'D') return this.goToDownBridge();
   }
+
   goToUpBridge() {
     let fail = false;
     let success = false;
@@ -32,8 +39,9 @@ class BridgeGame {
     this.#upBridgeRecord.push(moveable);
     this.#movingCount += 1;
     success = this.checkSuccess(moveable);
-    return { fail: fail, success: success };
+    return { fail, success };
   }
+
   goToDownBridge() {
     let fail = false;
     let success = false;
@@ -43,18 +51,22 @@ class BridgeGame {
     this.#downBridgeRecord.push(moveable);
     this.#movingCount += 1;
     success = this.checkSuccess(moveable);
-    return { fail: fail, success: success };
+    return { fail, success };
   }
+
   checkSuccess(moveable) {
     if (moveable === 'O' && this.#bridge.length === this.#movingCount) return true;
     return false;
   }
+
   getTryCount() {
     return this.#tryCount;
   }
+
   getBridgeRecord() {
     return { upBridgeRecord: this.#upBridgeRecord, downBridgeRecord: this.#downBridgeRecord };
   }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
