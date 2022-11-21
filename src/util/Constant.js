@@ -24,8 +24,8 @@ const MAP = Object.freeze({
 
 const JUDGEMENT = Object.freeze({
   IS_ARRIVE: 0,
-  IS_SUCCESS_CURRENT_SPACE: 1,
-  IS_FAIL_CURRENT_SPACE: 2,
+  IS_SUCCESS_MOVED: 1,
+  IS_FAIL_MOVED: 2,
 });
 
 const OUTPUT_MESSAGE = Object.freeze({

@@ -15,7 +15,7 @@ const BridgeGame = require("./BridgeGame");
 const { RETRY_OR_QUIT, JUDGEMENT } = require("./util/Constant");
 
 class App {
-  #bridgeGame;
+  #game;
 
   play() {
     printStart();
@@ -28,24 +28,25 @@ class App {
 
   /**
    * 다리 한 칸 이동 마다 결과를 판정 (끝까지 도착 / 한 칸 이동 성공 / 한 칸 이동 실패)
-   * @param {string[]} movedSpace 현재까지 이동한 칸
-   * @param {boolean} isSuccessCurrentSpace 현재 칸이 성공인지 실패인지 여부
+   * @return {boolean} 판정 결과 (judgement)
    */
-  judge(isSuccessCurrentSpace) {
-    if (this.#bridgeGame.isArrive()) return JUDGEMENT.IS_ARRIVE;
-    if (isSuccessCurrentSpace) return JUDGEMENT.IS_SUCCESS_CURRENT_SPACE;
-    return JUDGEMENT.IS_FAIL_CURRENT_SPACE;
+  judge() {
+    if (this.#game.isArrive()) return JUDGEMENT.IS_ARRIVE;
+    if (this.#game.isSuccessMoved()) return JUDGEMENT.IS_SUCCESS_MOVED;
+    return JUDGEMENT.IS_FAIL_MOVED;
   }
 
+  /**
+   * 판정 결과에 따라 함수 실행
+   * @param {number} judgement 판정 결과
+   */
   executeByJudgement(judgement) {
-    if (judgement === JUDGEMENT.IS_ARRIVE) {
-      const movedSpace = this.#bridgeGame.getMovedSpace();
-      printResult(movedSpace, true, this.#bridgeGame.getTryCount());
-    } else if (judgement === JUDGEMENT.IS_SUCCESS_CURRENT_SPACE) {
+    if (judgement === JUDGEMENT.IS_ARRIVE)
+      printResult(this.#game.getMovedSpace(), true, this.#game.getTryCount());
+    else if (judgement === JUDGEMENT.IS_SUCCESS_MOVED)
       readMoving(this.onReadMoving.bind(this));
-    } else if (judgement === JUDGEMENT.IS_FAIL_CURRENT_SPACE) {
+    else if (judgement === JUDGEMENT.IS_FAIL_MOVED)
       readGameCommand(this.onReadGameCommand.bind(this));
-    }
   }
 
   /**
@@ -56,7 +57,7 @@ class App {
     validateReadBridgeSize(size);
 
     const bridge = makeBridge(parseInt(size, 10), generate);
-    this.#bridgeGame = new BridgeGame(bridge);
+    this.#game = new BridgeGame(bridge);
 
     this.gameStart();
   }
@@ -65,15 +66,13 @@ class App {
    * 사용자에게 이동할 칸을 입력받은 뒤 실행할 callback function
    * @param {string} movingSpace 이동할 칸("U" or "D")
    */
-  /* eslint-disable */
   onReadMoving(movingSpace) {
     validateReadMoving(movingSpace);
 
-    const isSuccess = this.#bridgeGame.move(movingSpace);
+    this.#game.move(movingSpace);
+    printMap(this.#game.getMovedSpace(), this.#game.isSuccessMoved());
 
-    printMap(this.#bridgeGame.getMovedSpace(), isSuccess);
-
-    this.executeByJudgement(this.judge(isSuccess));
+    this.executeByJudgement(this.judge());
   }
 
   /**
@@ -82,12 +81,11 @@ class App {
    */
   onReadGameCommand(retryOrQuit) {
     validateReadGameCommand(retryOrQuit);
-    
+
     if (retryOrQuit === RETRY_OR_QUIT.RETRY) {
-      this.#bridgeGame.retry(this);
+      this.#game.retry(this);
     } else if (retryOrQuit === RETRY_OR_QUIT.QUIT) {
-      const movedSpace = this.#bridgeGame.getMovedSpace();
-      printResult(movedSpace, false, this.#bridgeGame.getTryCount());
+      printResult(this.#game.getMovedSpace(), false, this.#game.getTryCount());
     }
   }
 }
