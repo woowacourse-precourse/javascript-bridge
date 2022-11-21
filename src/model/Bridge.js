@@ -1,6 +1,6 @@
 const { makeBridge } = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const { COMMAND } = require('../utils/constant');
+const { COMMAND, MAP_VALUE } = require('../utils/constant');
 const { printMap } = require('../view/OutputView');
 
 class Bridge {
@@ -49,12 +49,12 @@ class Bridge {
 
   updateMap(index, command, comparison) {
     if (command === COMMAND.UP) {
-      this.#map.up[index] = comparison ? 'O' : 'X';
-      this.#map.down[index] = ' ';
+      this.#map.up[index] = comparison ? MAP_VALUE.HIT : MAP_VALUE.MISS;
+      this.#map.down[index] = MAP_VALUE.EMPTY;
     }
     if (command === COMMAND.DOWN) {
-      this.#map.up[index] = ' ';
-      this.#map.down[index] = comparison ? 'O' : 'X';
+      this.#map.up[index] = MAP_VALUE.EMPTY;
+      this.#map.down[index] = comparison ? MAP_VALUE.HIT : MAP_VALUE.MISS;
     }
   }
 }

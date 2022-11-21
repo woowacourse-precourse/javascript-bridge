@@ -23,6 +23,11 @@ const COMMAND = Object.freeze({
   RETRY: 'R',
   QUIT: 'Q',
 });
+const MAP_VALUE = Object.freeze({
+  HIT: 'O',
+  MISS: 'X',
+  EMPTY: ' ',
+});
 module.exports = {
-  READ_MESSAGE, ERROR_MESSAGE, OUTPUT_MESSAGE, COMMAND,
+  READ_MESSAGE, ERROR_MESSAGE, OUTPUT_MESSAGE, COMMAND, MAP_VALUE,
 };
