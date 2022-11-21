@@ -15,7 +15,7 @@ describe('Game 유닛 테스트', () => {
   beforeEach(() => {
     game = new BridgeGame(new Selected(), new TryCnt());
   });
-  test('getter 테스트 totalLevel: 생성할때 입력한 Bridge의 길이와 totalLevel이 같다.', () => {
+  test('totalLevel getter 테스트 : 생성할때 입력한 Bridge의 길이와 totalLevel이 같다.', () => {
     const numberInput = 3;
 
     expect(game.totalLevel).toBe(0);
@@ -24,7 +24,7 @@ describe('Game 유닛 테스트', () => {
     expect(game.totalLevel).toBe(3);
   });
 
-  test('getter 테스트 levelCnt: move 전의 levelCnt는 0, move를 반복한 수와 levelCnt의 값이 같다.', () => {
+  test('levelCnt getter 테스트 : move 전의 levelCnt는 0, move를 반복한 수와 levelCnt의 값이 같다.', () => {
     const inputArray = ['U', 'D', 'U'];
 
     expect(game.levelCnt).toBe(0);
@@ -32,7 +32,7 @@ describe('Game 유닛 테스트', () => {
 
     expect(game.levelCnt).toBe(3);
   });
-  test('getter 테스트 tryNumber: 처음 tryCnt는 1, 시도횟수 +1이 tryNumber를 통해 출력', () => {
+  test('tryNumber getter 테스트 : 처음 tryCnt는 1, 시도횟수 +1이 tryNumber를 통해 출력', () => {
     const cnt = 1;
 
     expect(game.tryNumber).toBe(cnt);
@@ -40,7 +40,7 @@ describe('Game 유닛 테스트', () => {
 
     expect(game.tryNumber).toBe(cnt + 1);
   });
-  test('getter 테스트 result: 빈 이중배열로 초기화되며, 일치하는 값에 맞게 result가 출력', () => {
+  test('result getter 테스트: 빈 이중배열로 초기화되며, 일치하는 값에 맞게 result가 출력', () => {
     const numberInput = 3;
     const randomNumbers = ['1', '0', '0'];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
