@@ -21,6 +21,37 @@ const OutputView = {
       Console.print(bridge);
     });
   },
+
+  /**
+   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
+   * @param {string[]} bridges 문자열 upBridge와 downBridge가 순서대로 담긴 배열
+   * @param {string} message 성공/실패 여부를 담은 문자열
+   * @param {number} tries 게임 시도 횟수
+   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   */
+  printResult(bridges, message, tries) {
+    Console.print(Message.RESULT);
+    this.printResultMaps(bridges);
+    this.printSuccessOrFail(message);
+    this.printTries(tries);
+    this.consoleClose();
+  },
+
+  printResultMaps(bridges) {
+    this.printMap(bridges);
+  },
+
+  printSuccessOrFail(message) {
+    Console.print(message);
+  },
+
+  printTries(tries) {
+    Console.print(Message.returnTries(tries));
+  },
+
+  consoleClose() {
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
