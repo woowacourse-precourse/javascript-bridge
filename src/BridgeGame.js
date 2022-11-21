@@ -34,5 +34,20 @@ class BridgeGame {
 
     return true;
   }
+
+  handleMoveDirectionException(moveDirection) {
+    let count = 0;
+    if (moveDirection === 'U') {
+      count += 1;
+    }
+
+    if (moveDirection === 'D') {
+      count += 1;
+    }
+
+    if (count === 0) {
+      throw new Error(ConstValue.MOVE_DIRECTION_EXCEPTION_ERROR_MESSAGE);
+    }
+  }
 }
 module.exports = BridgeGame;
