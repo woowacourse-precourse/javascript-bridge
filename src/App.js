@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const BridgeGame = require("./BridgeGame");
 const InputView = require("./View/InputView");
 const OutputView = require("./View/OutputView");
 
@@ -8,29 +10,48 @@ class App {
 
   showGreeting() {
     OutputView.printGreeting();
+    this.showInputBridgeNumber();
   }
 
   showInputBridgeNumber() {
     InputView.readBridgeSize((bridgeSize) => {
-      // TODO
-      // 입력받은 다리크기로 BridgeGame 을 생성한다.
+      this.bridgeGame = new BridgeGame(parseInt(bridgeSize, 10));
       this.showInputMoveCommand();
     });
   }
 
   showInputMoveCommand() {
-    InputView.readGameCommand((command) => {
-      // TODO
-      // 다리를 건널 수 있다면 다리를 건넌다.
-      // 다리를 건널 수 없다면 this.showInputRetry()를 호출한다.
+    if (this.bridgeGame.isFinished()) {
+      this.showResult(true);
+      return;
+    }
+
+    InputView.readMoving((command) => {
+      const next = this.bridgeGame.move(command);
+      OutputView.printMap(this.bridgeGame.progress.desc());
+      next ? this.showInputMoveCommand() : this.showInputRetry();
     });
   }
 
   showInputRetry() {
     InputView.readGameCommand((command) => {
-      // command에 따라서 게임을 재시작하거나 종료한다.
+      if (command === "R") {
+        this.bridgeGame.retry(command);
+        this.showInputMoveCommand();
+        return;
+      }
+      this.showResult(false);
     });
   }
+
+  showResult(isSuccess) {
+    console.log("최종 게임 결과");
+    OutputView.printMap(this.bridgeGame.progress.desc());
+    OutputView.printResult(isSuccess, this.bridgeGame.totalTrial);
+  }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;

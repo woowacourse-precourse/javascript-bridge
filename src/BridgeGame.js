@@ -1,21 +1,27 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const Progress = require("./Progress");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
-  #position;
-  #totalTrial;
+  #position = 0;
+  totalTrial = 0;
 
   constructor(bridgeSize) {
     this.#bridge = BridgeMaker.makeBridge(
       bridgeSize,
       BridgeRandomNumberGenerator.generate,
     );
+    this.reInit();
+  }
+
+  reInit() {
+    this.progress = new Progress();
     this.#position = 0;
-    this.#totalTrial = 1;
+    this.totalTrial += 1;
   }
 
   isFinished() {
@@ -38,7 +44,11 @@ class BridgeGame {
   move(command) {
     if (this.canMove(command)) {
       this.geNextRound();
+      this.progress.success(command);
+      return true;
     }
+    this.progress.fail(command);
+    return false;
   }
 
   /**
@@ -48,8 +58,7 @@ class BridgeGame {
    */
   retry(command) {
     if (command === "R") {
-      this.#position = 0;
-      this.#totalTrial += 1;
+      this.reInit();
     }
   }
 }
