@@ -59,7 +59,7 @@ class BridgeGameController {
         this.#model.setCommand(command);
         resolve();
       } catch (error) {
-        this.controlException(error, this.readUserCommand(resolve));
+        this.controlException(error, () => this.readUserCommand(resolve));
       }
     });
   }
