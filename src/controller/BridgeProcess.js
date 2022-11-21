@@ -8,8 +8,7 @@ class BridgeProcess {
 
   checkValidation(key, checkElement) {
     try {
-      new Validation(key.CHECK_VALIDATION, checkElement).showResult();
-      return true;
+      return new Validation(key.CHECK_VALIDATION, checkElement).showResult();
     } catch (error) {
       this.#outputView.printError(error);
       return false;
@@ -17,7 +16,7 @@ class BridgeProcess {
   }
 
   makeBridge(bridgeSize) {
-    this.#gameReport.round.total === 1 ? this.#gameReport.makeBridgeInfo(bridgeSize) : '';
+    this.#gameReport.round.total === 1 ? this.#gameReport.makeBridgeInfo(Number(bridgeSize)) : '';
   }
 
   moveToBridge(movement) {
