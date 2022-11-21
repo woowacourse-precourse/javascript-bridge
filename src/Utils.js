@@ -1,4 +1,4 @@
-const { SizeConstraint } = require("./Constraint");
+const { SizeConstraint, MoveConstraint } = require("./Constraint");
 
 class BridgeSize {
   #size;
@@ -17,4 +17,15 @@ class BridgeSize {
   }
 }
 
-module.exports = { BridgeSize };
+class MoveInput {
+  constructor(move) {
+    this.checkMoveInput(move);
+  }
+
+  checkMoveInput(move) {
+    const moveConstraint = new MoveConstraint(move);
+    moveConstraint.checkInputValue();
+  }
+}
+
+module.exports = { BridgeSize, MoveInput };
