@@ -125,6 +125,27 @@ class BridgeGame {
     let newBridge = bridge.slice(0, -1);
     return newBridge + Constant.BAR;
   }
+
+  /**
+   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
+   * @param {string} input 사용자가 입력한 "U" 혹은 "D"
+   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   */
+  retry(input) {
+    this.initializeCurrentSize();
+    this.bridges.initializeBridges();
+    this.initializeFail();
+
+    this.move(input);
+  }
+
+  initializeCurrentSize() {
+    this.#currentSize = 0;
+  }
+
+  initializeFail() {
+    this.#failed = false;
+  }
 }
 
 module.exports = BridgeGame;
