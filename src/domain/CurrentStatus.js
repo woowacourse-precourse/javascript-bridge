@@ -6,7 +6,7 @@ const CurrentStatus = class {
     this.#currentLocation = -1;
   }
 
-  IsAlive() {
+  isAlive() {
     return this.#isAlive;
   }
 
