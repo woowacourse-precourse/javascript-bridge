@@ -1,8 +1,17 @@
-const CurrentLocation = class {
+const CurrentStatus = class {
   #currentLocation;
+  #isAlive;
 
   constructor() {
     this.#currentLocation = -1;
+  }
+
+  IsAlive() {
+    return this.#isAlive;
+  }
+
+  setIsAlive(status) {
+    this.#isAlive = status;
   }
 
   getCurrentLocation() {
@@ -18,4 +27,4 @@ const CurrentLocation = class {
   }
 };
 
-module.exports = CurrentLocation;
+module.exports = CurrentStatus;
