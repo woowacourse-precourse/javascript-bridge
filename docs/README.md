@@ -42,6 +42,8 @@
     - [x] check if retry method works properly
 - [x] check if BridgeRandomNumberGenerator object works properly
     - [x] check if generate method works properly
+
+🚨 InputView, OutputView object is excluded from the test since UI logic test is not required 🚨 
     
 <br/>
 <br/>
