@@ -49,9 +49,7 @@ class BridgeGame {
     OutputView.printMap(this.moveCount, command, this.bridgeStore.getUserInputResult);
 
     if (!isMovable) {
-      // TODO: 게임 재시작 여부 확인
-      this.moveCount = 0;
-      InputView.readGameCommand(this.retryMessage, this.confirmRetry);
+      this.fail();
       return;
     }
     this.moveCount += 1;
@@ -73,6 +71,11 @@ class BridgeGame {
     };
 
     run[command]();
+  };
+
+  fail = () => {
+    this.moveCount = 0;
+    InputView.readGameCommand(this.retryMessage, this.confirmRetry);
   };
 
   /**
