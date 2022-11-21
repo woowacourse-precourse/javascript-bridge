@@ -21,12 +21,12 @@ class BridgeGame {
   }
 
   retry() {
-      OutputView.printResult();
-      this.printResultBridge();
-      Console.print('');
-      OutputView.printFail();
-      this.countRound();
-      Console.close();
+    OutputView.printResult();
+    this.printResultBridge();
+    Console.print('');
+    OutputView.printFail();
+    this.countRound();
+    Console.close();
   }
 
   win() {
@@ -36,7 +36,7 @@ class BridgeGame {
     OutputView.printWin()
     this.countRound();
     Console.close();
-}
+  }
 
   printResultBridge() {
     Console.print(this.#currentResult);

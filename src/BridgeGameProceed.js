@@ -32,8 +32,7 @@ class BridgeGameProceed {
             console.log(this.#winBridge);
             this.game();
         } catch (error) {
-            Console.print(error.message);
-            Console.print('');
+            Console.print(`${error.message}\n`);
             this.start.call(this);
         }
     }
@@ -46,7 +45,7 @@ class BridgeGameProceed {
         try {
             Validation.nextStep(nextStep);
             this.#playersBridge.push(nextStep);
-            const result = this.bridge()
+            const result = this.bridge();
             this.bridgeGame.storage(result);
             this.dividePath(result);
             this.game();
