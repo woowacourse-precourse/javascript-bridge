@@ -1,5 +1,13 @@
 const InputValidator = {
-  checkBridgeSize(bridgeSize) {},
+  checkBridgeSize(bridgeSize) {
+    const size = Number(bridgeSize);
+
+    if (Number.isInteger(size)) {
+      if (size >= 3 && size <= 20) return;
+    }
+
+    throw new Error("[ERROR] 이동할 칸은 U나 D만 입력하셔야 합니다.");
+  },
 
   checkMoving(direction) {
     if (direction === "U" || direction === "D") {
