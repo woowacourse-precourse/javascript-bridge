@@ -52,7 +52,8 @@ const expectBridgeOrder = (received, upside, downside) => {
 };
 
 describe("다리 건너기 테스트", () => {
-  test("다리 생성 테스트", () => {
+  test("다리 생성 테스트", () => {  //이건 단순히 내가 다리만들기 기능을 하면 추가적으로 잘 되는지 확인하는 것이다
+                                //이 로직때문에 전체로직을 바꾸거나 할 필요가 없다
     const randomNumbers = ["1", "0", "0"];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
@@ -64,8 +65,8 @@ describe("다리 건너기 테스트", () => {
 
   test("기능 테스트", () => {
     const logSpy = getLogSpy();
-    mockRandoms(["1", "0", "1"]);
-    mockQuestions(["3", "U", "D", "U"]);
+    mockRandoms(["1", "0", "1"]); //2) 이 랜덤값으로 다리를 생성
+    mockQuestions(["3", "U", "D", "U"]); //1) 3을 입력받고
 
     const app = new App();
     app.play();
