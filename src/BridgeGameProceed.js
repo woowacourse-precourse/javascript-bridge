@@ -80,11 +80,7 @@ class BridgeGameProceed {
     gameOverChoice(retryOrNot) {
         try {
             Validation.retry(retryOrNot);
-            if (retryOrNot === "R") {
-                this.bridgeGame.move();
-                Console.print('');
-                this.game.call(this);
-            }
+            if (retryOrNot === "R") this.choiceRetry();
             if (retryOrNot === "Q") this.callResult.call(this); 
         } catch (error) {
             Console.print(error.message);
@@ -94,6 +90,12 @@ class BridgeGameProceed {
 
     callResult() {
         this.bridgeGame.retry();
+    }
+
+    choiceRetry() {
+        this.bridgeGame.move();
+        Console.print('');
+        this.game.call(this);
     }
 }
 
