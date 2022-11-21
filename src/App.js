@@ -1,9 +1,11 @@
 const GameController = require("./GameController");
 
 class App {
+  constructor() {
+    this.gameController = new GameController();
+  }
   play() {
-    const gameController = new GameController();
-    gameController.play();
+    this.gameController.play();
   }
 }
 const app = new App();
