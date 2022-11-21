@@ -14,6 +14,10 @@ const OutputView = {
     Console.print(MESSAGE.START);
   },
 
+  printMessage(message) {
+    Console.print(message);
+  },
+
   printMap() {},
 
   /**
