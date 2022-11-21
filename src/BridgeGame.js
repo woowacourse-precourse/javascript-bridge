@@ -51,8 +51,7 @@ class BridgeGame {
   retry(gameRec) {
     gameRec.moveNum = 0; // 재시도 시 moveNum 초기화
     gameRec.attemptNum += 1; // 재시도 시 attemptNum 1 증가
-    const InputView = require("./InputView");
-    InputView.readMoving(gameRec);
+    this.bridgeGameToView.bridgeGameToInputView(gameRec);
   }
 }
 
