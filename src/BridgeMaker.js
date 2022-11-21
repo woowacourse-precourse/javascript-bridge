@@ -14,7 +14,7 @@ const BridgeMaker = {
     const bridge = [];
     while (size) {
       size -= 1;
-      bridge.push(Number(generateRandomNumber()) ? UP : DOWN);
+      bridge.push(generateRandomNumber() ? UP : DOWN);
     }
 
     return bridge;
