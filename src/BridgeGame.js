@@ -2,6 +2,7 @@ const Bridge = require("./Bridge");
 const View = require("./View");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const MOVE_RESULT = require("./Constant");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -38,11 +39,45 @@ class BridgeGame {
     this.view.readMoving((space) => {
       this.model.pushSpace(space);
       console.log(this.model.userSpaces);
-      this.view.printMap(this.model.bridge, this.model.userSpaces);
+      const { firstLine, secondLine } = this.calculateMoveResult(
+        this.model.bridge,
+        this.model.userSpaces
+      );
+      this.view.printMap(firstLine, secondLine);
     });
   };
 
-  calculateMoveResult = () => {};
+  calculateMoveResult = (bridge, userSpaces) => {
+    const firstLine = this.calculateFirstLine(bridge, userSpaces);
+    const secondLine = this.calculateSecondLine(bridge, userSpaces);
+    return { firstLine: firstLine, secondLine: secondLine };
+  };
+
+  calculateFirstLine = (bridge, userSpaces) => {
+    let firstLine = MOVE_RESULT.START_SPACE;
+    for (let i = 0; i < userSpaces.length; i++) {
+      if (i !== 0) firstLine += MOVE_RESULT.CONTINUE_SPACE;
+      if (userSpaces[i] === "U" && bridge[i] === "U")
+        firstLine += MOVE_RESULT.RIGHT;
+      if (userSpaces[i] === "U" && bridge[i] === "D")
+        firstLine += MOVE_RESULT.WRONG;
+      if (userSpaces[i] === "D") firstLine += MOVE_RESULT.NONE;
+    }
+    return firstLine + MOVE_RESULT.END_SPACE;
+  };
+
+  calculateSecondLine = (bridge, userSpaces) => {
+    let secondLine = MOVE_RESULT.START_SPACE;
+    for (let i = 0; i < userSpaces.length; i++) {
+      if (i !== 0) secondLine += MOVE_RESULT.CONTINUE_SPACE;
+      if (userSpaces[i] === "D" && bridge[i] === "U")
+        secondLine += MOVE_RESULT.WRONG;
+      if (userSpaces[i] === "D" && bridge[i] === "D")
+        secondLine += MOVE_RESULT.RIGHT;
+      if (userSpaces[i] === "U") secondLine += MOVE_RESULT.NONE;
+    }
+    return secondLine + MOVE_RESULT.END_SPACE;
+  };
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
