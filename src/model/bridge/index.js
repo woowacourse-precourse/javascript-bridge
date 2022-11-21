@@ -2,6 +2,7 @@ const GameModel = require('../GameModel');
 const { makeBridge } = require('../../BridgeMaker');
 const { generate } = require('../../BridgeRandomNumberGenerator');
 const BridgeMap = require('./BridgeMap');
+const Validation = require('../../validation');
 const { GAME_MESSAGE } = require('../../constants');
 
 const BridgeModel = class extends GameModel {
@@ -12,6 +13,7 @@ const BridgeModel = class extends GameModel {
 
   constructor() {
     super();
+    this.validation = new Validation();
   }
 
   createBridge(bridgeSize) {

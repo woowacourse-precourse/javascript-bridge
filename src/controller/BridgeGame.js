@@ -1,13 +1,11 @@
 const { CHOICE } = require('../constants');
 const GameCtrl = require('./GameCtrl');
-const Validation = require('../validation');
 
 const BridgeGame = class extends GameCtrl {
   constructor(view, model) {
     super();
     this.view = view;
     this.model = model;
-    this.validation = new Validation();
   }
 
   start() {
@@ -19,8 +17,8 @@ const BridgeGame = class extends GameCtrl {
     this.view.readBridgeSize((bridgeSize) => {
       bridgeSize = parseInt(bridgeSize);
 
-      const { errorHandler, successHandler } = this.#defineGameProcessHandlers(bridgeSize);
-      this.validation.validateBridgeSize({ bridgeSize, errorHandler, successHandler });
+      const callbackHandler = this.#defineGameProcessHandlers(bridgeSize);
+      this.model.validation.validateBridgeSize(bridgeSize, callbackHandler);
     });
   }
 
@@ -40,8 +38,8 @@ const BridgeGame = class extends GameCtrl {
 
   #getUserCommand() {
     this.view.readMoving((command) => {
-      const { errorHandler, successHandler } = this.#defineGetUserCommandHandlers(command);
-      this.validation.validateBridgeCommand({ command, errorHandler, successHandler });
+      const callbackHandler = this.#defineGetUserCommandHandlers(command);
+      this.model.validation.validateBridgeCommand(command, callbackHandler);
     });
   }
 
@@ -68,26 +66,20 @@ const BridgeGame = class extends GameCtrl {
     return this.#getUserCommand();
   }
 
-  #askToReplayGame({ bridgeMap, isGameSuccess }) {
+  #askToReplayGame(gameResult) {
     this.view.readGameCommand((replayCommand) => {
-      const { errorHandler, successHandler } = this.#defineAskToReplayGameHandlers({
-        replayCommand,
-        bridgeMap,
-        isGameSuccess,
-      });
-
-      this.validation.validateBridgeReplayCommand({ replayCommand, errorHandler, successHandler });
+      const callbackHandler = this.#defineAskToReplayGameHandlers(replayCommand, gameResult);
+      this.model.validation.validateBridgeReplayCommand(replayCommand, callbackHandler);
     });
   }
 
-  #defineAskToReplayGameHandlers({ replayCommand, bridgeMap, isGameSuccess }) {
+  #defineAskToReplayGameHandlers(replayCommand, gameResult) {
     const errorHandler = (error) => {
       this.view.printErrorMessage(error.message);
-      this.#askToReplayGame({ bridgeMap, isGameSuccess });
+      this.#askToReplayGame(gameResult);
     };
 
-    const successHandler = () =>
-      this.#quitOrRetryByCommand({ replayCommand, bridgeMap, isGameSuccess });
+    const successHandler = () => this.#quitOrRetryByCommand(replayCommand, gameResult);
 
     return { errorHandler, successHandler };
   }
