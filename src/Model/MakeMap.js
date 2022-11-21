@@ -1,4 +1,4 @@
-const {mapContent} = require('./StringModule');
+const {mapContent} = require('../Utils/StringModule');
 
 class MakeMap {
   firstfloor;
