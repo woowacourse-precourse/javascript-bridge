@@ -8,6 +8,7 @@ class App {
     this.startGame();
   }
   startGame(){
+    const size = readBridgeSize();
   }
 }
 
