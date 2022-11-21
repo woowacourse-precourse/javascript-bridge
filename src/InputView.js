@@ -59,7 +59,7 @@ const InputView = {
       return move;
     } catch (error) {
       print(error.message);
-      this.readMoving();
+      this.getMoving();
     }
   },
 
@@ -77,14 +77,14 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 제대로 될 때까지 입력받는다.
    */
-  getMGameCommand() {
+  getGameCommand() {
     const gameCommand = this.readGameCommand();
     try {
       Validate.notAvailablePlay(gameCommand, Object.values(PLAY));
       return gameCommand;
     } catch (error) {
       print(error.message);
-      this.readGameCommand();
+      this.getGameCommand();
     }
   },
 };
