@@ -19,4 +19,11 @@ const ERROR_MESSAGE = {
     IS_NOT_GIVEN_RUNNING_VALUE : "[ERROR] Q(종료) 또는 R(재시작)을 입력해주세요. "
 }
 
-module.exports = {INPUT_MESSAGE, PRINT_MESSAGE, ERROR_MESSAGE};
+const COMMAND = {
+    BRIDGE_UP : "U",
+    BRIDGE_DOWN : "D",
+    RESTART : "R",
+    QUIT : "Q"
+}
+
+module.exports = {INPUT_MESSAGE, PRINT_MESSAGE, ERROR_MESSAGE, COMMAND};

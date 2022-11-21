@@ -1,5 +1,4 @@
-const { Console } = require("@woowacourse/mission-utils");
-
+const { COMMAND } = require("./Constants");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -24,26 +23,26 @@ const { Console } = require("@woowacourse/mission-utils");
   }
 
   moveUpIsCorrect(createBridge, selectUpOrDown){
-    if(createBridge == selectUpOrDown && selectUpOrDown == "U"){
+    if(createBridge == selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_UP){
       this.userPickedUpOrDown[0].push("O");
       this.userPickedUpOrDown[1].push(" ");
     }
   }
 
   moveDownIsCorrect(createBridge, selectUpOrDown){
-    if(createBridge == selectUpOrDown && selectUpOrDown == "D"){
+    if(createBridge == selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_DOWN){
       this.userPickedUpOrDown[0].push(" ");
       this.userPickedUpOrDown[1].push("O")
     }
   }
   moveUpIsWrong(createBridge, selectUpOrDown){
-    if(createBridge !== selectUpOrDown && selectUpOrDown == "U"){
+    if(createBridge !== selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_UP){
       this.userPickedUpOrDown[0].push("X");
       this.userPickedUpOrDown[1].push(" ");
     }
   }
   moveDownIsWrong(createBridge, selectUpOrDown){
-    if(createBridge !== selectUpOrDown && selectUpOrDown == "D"){
+    if(createBridge !== selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_DOWN){
       this.userPickedUpOrDown[0].push(" ");
       this.userPickedUpOrDown[1].push("X");
     }  

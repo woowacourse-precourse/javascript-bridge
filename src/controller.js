@@ -6,6 +6,7 @@ const bridgeGame = new BridgeGame();
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const userBridgeCorrect = bridgeGame.userPickedUpOrDown;
+const { COMMAND } = require("./Constants");
 
 class Controller{
     #number;
@@ -43,14 +44,14 @@ class Controller{
     }
 
     gameFail(value){
-        if(value == 'Q'){
+        if(value == COMMAND.QUIT){
           OutputView.printFailResult(userBridgeCorrect[0], userBridgeCorrect[1], bridgeGame.attemptCount);
           Console.close();
         }
     }
 
     gameRestart(value){
-        if(value == 'R'){
+        if(value == COMMAND.RESTART){
           bridgeGame.retry();
           this.gameProgress();
         }

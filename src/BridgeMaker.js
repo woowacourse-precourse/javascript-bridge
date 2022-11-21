@@ -1,3 +1,4 @@
+const { COMMAND } = require("./Constants");
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -11,7 +12,7 @@
     let answerBridgeShape = [];
     while (answerBridgeShape.length < size){
       const selectValue = generateRandomNumber();
-      String(selectValue) == '1' ? answerBridgeShape.push('U') : answerBridgeShape.push('D');
+      String(selectValue) == '1' ? answerBridgeShape.push(COMMAND.BRIDGE_UP) : answerBridgeShape.push(COMMAND.BRIDGE_DOWN);
     }
     return answerBridgeShape;
   },

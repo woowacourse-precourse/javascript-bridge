@@ -1,4 +1,5 @@
 const { ERROR_MESSAGE } = require("./Constants");
+const { COMMAND } = require("./Constants");
 
 class CheckBridgeSizeException{
     #size
@@ -33,7 +34,7 @@ class CheckUserMove{
     }
 
     CheckInputString(SelectUpOrDown){
-        if(SelectUpOrDown !== "U" && SelectUpOrDown !== "D"){
+        if(SelectUpOrDown !== COMMAND.BRIDGE_UP && SelectUpOrDown !== COMMAND.BRIDGE_DOWN){
             throw new Error(ERROR_MESSAGE.IS_NOT_GIVEN_MOVE_VALUE);
         }
     } 
@@ -46,7 +47,7 @@ class CheckWhetherGameRunning{
         this.CheckInputValue(value);
     }
     CheckInputValue(value){
-        if(value !== "Q" && value !== "R"){
+        if(value !== COMMAND.QUIT && value !== COMMAND.RESTART){
             throw new Error(ERROR_MESSAGE.IS_NOT_GIVEN_RUNNING_VALUE);
         }
     }
