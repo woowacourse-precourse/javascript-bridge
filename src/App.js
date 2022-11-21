@@ -16,7 +16,6 @@ class App {
 	}
 
 	createBridge(input) {
-		checkBridgeSize(input);
 		this.bridgeGame = new BridgeGame(input);
 	}
 

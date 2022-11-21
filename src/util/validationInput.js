@@ -1,13 +1,16 @@
 const ERROR = {
 	BRIDGE_SIZE: '다리의 길이는 3 이상 20 이하의 자연수여야 합니다.',
+	IS_NUMBER: '다리의 길이는 자연수여야 합니다.',
 	MOVING: 'U 또는 D를 입력해주세요.',
 	GAME_COMMAND: 'R 또는 Q를 입력해주세요.',
 };
 
 const checkBridgeSize = input => {
-	const reg = /^[3-9]|[1-9][0-9]|20$/;
-	if (!reg.test(input)) {
+	if (input < 3 || input > 20) {
 		throw ERROR.BRIDGE_SIZE;
+	}
+	if (!Number.isInteger(Number(input))) {
+		throw ERROR.IS_NUMBER;
 	}
 };
 
