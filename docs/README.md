@@ -25,14 +25,14 @@
 
 ## 🚫 예외 처리 사항 정리  
 - 공통 예외 사항
-   - [v] 값을 입력하지 않은 경우 `isBlank`
-- [v] 다리 길이 입력 시 `isRightBridgeLength`  
-    - [v] 숫자가 아닌 값을 입력한 경우 `isNumber`
-    - [v] 3 이상 20 이하의 숫자가 아닌 경우 `isRightRange`
+   - [x] 값을 입력하지 않은 경우 `isBlank`
+- [x] 다리 길이 입력 시 `isRightBridgeLength`  
+    - [x] 숫자가 아닌 값을 입력한 경우 `isNumber`
+    - [x] 3 이상 20 이하의 숫자가 아닌 경우 `isRightRange`
 - 이동할 칸 입력 시    
-    - [v] U나 D가 아닌 값을 입력한 경우 `isUpDown`
+    - [x] U나 D가 아닌 값을 입력한 경우 `isUpDown`
 - 게임 재시작 / 종료 입력 시
-    - [v] R이나 Q가 아닌 값을 입력한 경우 `isRestartQuit`
+    - [x] R이나 Q가 아닌 값을 입력한 경우 `isRestartQuit`
 
 
 ## 🕹 게임 진행 과정  
