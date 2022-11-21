@@ -1,4 +1,4 @@
-const {DIRECTION,BRIDGE,JOINER} = require("./util/Constant");
+const {DIRECTION,BRIDGE,JOINER} = require("../util/Constant");
 
 
 class BridgeResult {

@@ -1,10 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
-const {GAME_MESSAGE, COMMAND} =  require("./util/Constant");
-const BridgeGame = require("./BridgeGame");
-const { generate } = require("./BridgeRandomNumberGenerator");
-const { makeBridge } = require("./BridgeMaker");
-const { validateBridge, validateMove, validateCommand } = require("./util/Validation");
+const {GAME_MESSAGE, COMMAND} =  require("../util/Constant");
+const BridgeGame = require("../class/BridgeGame");
+const { generate } = require("../util/BridgeRandomNumberGenerator");
+const { makeBridge } = require("../BridgeMaker");
+const { validateBridge, validateMove, validateCommand } = require("../util/Validation");
 const OutputView = require("./OutputView");
 
 

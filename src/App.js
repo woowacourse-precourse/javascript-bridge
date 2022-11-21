@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const InputView = require("./InputView");
+const InputView = require("./view/InputView");
 const {GAME_MESSAGE} =  require("./util/Constant");
 const Console = MissionUtils.Console;
 
