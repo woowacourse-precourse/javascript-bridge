@@ -1,13 +1,25 @@
 const OutputView = require("./OutputView");
 
 class Bridge {
-  #upsideBridge;
-  #downsideBridge;
+  #upsideBridge = [];
+  #downsideBridge = [];
 
   constructor() {
-    this.#upsideBridge = [];
-    this.#downsideBridge = [];
+    // this.#upsideBridge = [];
+    // this.#downsideBridge = [];
     // this.#bridgeArray = BridgeMaker.makeBridge(bridgeSize, generate);
+  }
+
+  getUpsideBridge() {
+    return this.#upsideBridge;
+  }
+
+  getDownsideBridge() {
+    return this.#downsideBridge;
+  }
+
+  getResultBridge() {
+    return [this.getUpsideBridge(), this.getDownsideBridge()];
   }
 
   hasX() {
@@ -27,6 +39,7 @@ class Bridge {
       this.setDownsideBridge(bridgeArray, bridgeIndex, moving);
 
     this.showResult(this.#upsideBridge, this.#downsideBridge);
+    // this.showResult();
   }
 
   setUpsideBridge(bridgeArray, bridgeIndex, moving) {
@@ -34,7 +47,6 @@ class Bridge {
       this.#upsideBridge.push(" O ");
     }
     if (bridgeArray[bridgeIndex] !== moving) {
-      console.log("UpX");
       this.#upsideBridge.push(" X ");
     }
     this.#downsideBridge.push("   ");
@@ -57,6 +69,10 @@ class Bridge {
   setInitial() {
     this.#upsideBridge = [];
     this.#downsideBridge = [];
+  }
+
+  showFinalResult(upsideBridge, downsideBridge, gameResult, gameRound) {
+    OutputView.printResult(upsideBridge, downsideBridge, gameResult, gameRound);
   }
 }
 

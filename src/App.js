@@ -2,6 +2,7 @@ const OutputView = require("./OutputView");
 const InputView = require("./InputView");
 const Bridge = require("./Bridge");
 const BridgeGame = require("./BridgeGame");
+const { Console } = require("@woowacourse/mission-utils");
 
 class App {
   #bridge;
@@ -47,13 +48,28 @@ class App {
   }
 
   askRetryOrQuit() {
+    const gameRound = this.#bridgeGame.getGameRound();
     if (this.#bridgeGame.loseGame()) {
       InputView.readGameCommand((playerInput) => {
         const command = InputView.getGameCommand(playerInput);
         if (command === "R") this.retryGame();
-        if (command === "Q") this.quitGame();
+        if (command === "Q") this.quitGame(gameRound);
       });
+    } else {
+      this.winGame(gameRound);
     }
+  }
+
+  winGame(gameRound) {
+    const result = "성공";
+    const [upsideBridge, downsideBridge] = this.#bridgeGame.getResultBridge();
+    this.#bridge.showFinalResult(
+      upsideBridge,
+      downsideBridge,
+      result,
+      gameRound
+    );
+    this.endGame();
   }
 
   retryGame() {
@@ -61,7 +77,21 @@ class App {
     this.inputMoving();
   }
 
-  quitGame() {}
+  quitGame(gameRound) {
+    const result = "실패";
+    const [upsideBridge, downsideBridge] = this.#bridgeGame.getResultBridge();
+    this.#bridge.showFinalResult(
+      upsideBridge,
+      downsideBridge,
+      result,
+      gameRound
+    );
+    this.endGame();
+  }
+
+  endGame() {
+    Console.close();
+  }
 }
 
 const app = new App();
