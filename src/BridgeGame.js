@@ -1,6 +1,4 @@
-const BridgeMaker = require("./BridgeMaker");
 const OutputView = require("./OutputView");
-const { Console } = require("@woowacourse/mission-utils");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -10,10 +8,27 @@ class BridgeGame {
 
   constructor(bridge) {
     this.#bridge = bridge;
+    this.step = 0;
+    this.round = 1;
   }
 
   getBridge() {
     return this.#bridge;
+  }
+
+  resetStep() {
+    this.step = 0;
+    return this.step;
+  }
+
+  addStep() {
+    this.step += 1;
+    return this.step;
+  }
+
+  addRound() {
+    this.round += 1;
+    return this.round;
   }
 
   /**
@@ -21,9 +36,12 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  checkInputIsCorrect(inputAnswer, step) {
-    Console.print(this.#bridge);
-    if (inputAnswer === this.#bridge[step]) return true;
+  // checkInputIsCorrect(inputAnswer, step) {
+  //   if (inputAnswer === this.#bridge[step]) return true;
+  //   return false;
+  // }
+  checkInputIsCorrect(inputAnswer) {
+    if (inputAnswer === this.#bridge[this.step]) return true;
     return false;
   }
 
@@ -31,14 +49,25 @@ class BridgeGame {
     return step === size ? true : false;
   }
 
-  move(step, size, locations) {
+  move(step, size) {
     if (this.checkIsLastStep(step, size - 1)) {
       OutputView.printMap(step, this.#bridge);
-      OutputView.printResult("성공", 1);
       return true;
     }
     OutputView.printMap(step, this.#bridge);
     return false;
+  }
+
+  move(answer, step, round, size) {
+    if (this.checkInputIsCorrect(answer, step)) {
+      OutputView.printMap(step, this.#bridge);
+      if (this.checkIsLastStep(step, size - 1)) {
+        OutputView.printResult("성공", round, step, this.#bridge);
+        return;
+      }
+      // InputView.readMoving(this.#bridge, size, step + 1, round);
+      return;
+    }
   }
 
   /**
