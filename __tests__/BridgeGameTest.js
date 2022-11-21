@@ -15,35 +15,49 @@ describe('BridgeGame 클래스의 stackOfUserMovingInput() 메서드 테스트',
   });
 });
 
-describe('bridgeGame 클래스의 bridgeCloseConverter() 메서드 테스트', () => {
-  test('배열의 마지막값이 "|" 일때 "]" 로 바뀌는지 확인', () => {
+describe('BridgeGame 클래스의 다리 만드는 기능 테스트', () => {
+  test('readyForDrawingBridge() 메서드가 정상적으로 다리 만들기 위한 준비가 되는지 확인', () => {
     const bridgeGame = new BridgeGame();
-    const lastString = ['|'];
-    const convertedLastString = [']'];
-    expect(bridgeGame.bridgeCloseConverter(lastString)).toEqual(
-      convertedLastString,
-    );
+    const userMoveInputCollection = ['U', 'D', 'U'];
+    const password = ['U', 'D', 'D'];
+    const result = [
+      [' O ', '   ', ' X '],
+      ['   ', ' O ', '   '],
+    ];
+    expect(bridgeGame.readyForDrawingBridge(userMoveInputCollection, password)).toEqual(result);
   });
-  test.each([['a'], ['@'], [']'], [2]])(
-    '배열의 마지막값이 "|"가 아닐때 "]" 로 바뀌지 않는지 확인',
-    input => {
+  test.failing(
+    'readyForDrawingBridge() 메서드가 정상적으로 다리 만들기 위한 준비가 실패인지 확인',
+    () => {
       const bridgeGame = new BridgeGame();
-      const lastString = input;
-      const convertedLastString = [']'];
-      expect(bridgeGame.bridgeCloseConverter(lastString)).toEqual(
-        expect.not.arrayContaining(convertedLastString),
-      );
-    },
+      const userMoveInputCollection = ['U', 'D', 'U'];
+      const password = ['U', 'D', 'D'];
+      const result = [
+        [' O ', '   ', ' O '],
+        ['   ', ' O ', '   '],
+      ];
+      expect(bridgeGame.readyForDrawingBridge(userMoveInputCollection, password)).toEqual(result);
+    }
   );
-  test.failing.each([['|']])(
-    '옳은값을 넣었을때 테스트가 실패하는지 test.failing 테스트',
-    input => {
+  test('bridgeToStringConverter() 메서드가 원하는 모양의 string으로 변환되는지 확인', () => {
+    const bridgeGame = new BridgeGame();
+    const notStringBridge = [
+      [' O ', '   ', ' X '],
+      ['   ', ' O ', '   '],
+    ];
+    const convertedBridge = ['[ O |   | X ]', '[   | O |   ]'];
+    expect(bridgeGame.bridgeToStringConverter(notStringBridge)).toEqual(convertedBridge);
+  });
+  test.failing(
+    'bridgeToStringConverter() 메서드가 잘못된 모양으로 변환되어 실패하는지 확인',
+    () => {
       const bridgeGame = new BridgeGame();
-      const lastString = input;
-      const convertedLastString = [']'];
-      expect(bridgeGame.bridgeCloseConverter(lastString)).toEqual(
-        expect.not.arrayContaining(convertedLastString),
-      );
-    },
+      const notStringBridge = [
+        [' O ', '   ', ' X '],
+        ['   ', ' O ', '  '],
+      ];
+      const convertedBridge = ['[ O       X ]', '[     O      ]'];
+      expect(bridgeGame.bridgeToStringConverter(notStringBridge)).toEqual(convertedBridge);
+    }
   );
 });
