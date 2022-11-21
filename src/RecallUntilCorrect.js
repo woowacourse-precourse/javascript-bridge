@@ -16,6 +16,14 @@ const RecallUntilCorrect = {
       recallUntilCorrect = ValidCheck.movingValidCheck(moving);
     }
     return moving;
-  }
+  },
+  recallreadGameCommand(recallUntilCorrect){
+    let gameCommand;
+    while(recallUntilCorrect){
+      gameCommand = InputView.readGameCommand();
+      recallUntilCorrect = ValidCheck.movingValidCheck(gameCommand);
+    }
+    return gameCommand;
+  },
 }
 module.exports = RecallUntilCorrect;
