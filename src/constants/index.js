@@ -10,7 +10,7 @@ const MOVE_VALUE = Object.freeze({
   INVALID: "X",
 });
 
-const RESTART_VALUE = Object.freeze({
+const COMMAND_VALUE = Object.freeze({
   RESTART: "R",
   QUIT: "Q",
 });
@@ -35,7 +35,7 @@ const ERROR_MESSAGE = Object.freeze({
 module.exports = {
   BRIDGE_VALUE,
   MOVE_VALUE,
-  RESTART_VALUE,
+  COMMAND_VALUE,
   GAME_MESSAGE,
   ERROR_MESSAGE,
 };
