@@ -50,9 +50,9 @@ class BridgeGame {
     this.#BridgeData.tryOrder = 0;
     this.#BridgeData.tryCount += 1;
   }
-
-  static end() {
-    Console.close();
+  // static 불가
+  end() {
+    return Console.close();
   }
 
   pass(state, upOrDown) {
@@ -90,7 +90,8 @@ class BridgeGame {
     this.#BridgeData.down += ` ${passOrFail} `;
   }
 
-  static isRetry(input) {
+  // static 불가
+  isRetry(input) {
     const RETRY = 'R';
     return input === RETRY;
   }
@@ -120,10 +121,7 @@ class BridgeGame {
   }
 
   precompose(size) {
-    this.#BridgeData.prebuilt = BridgeMaker.makeBridge(
-      size,
-      BridgeRandomNumberGenerator.generate
-    );
+    this.#BridgeData.prebuilt = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
   }
   getDate() {
     return this.#BridgeData;
