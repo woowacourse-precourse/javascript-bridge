@@ -47,7 +47,13 @@ class GameController {
       return this.getMoving();
     }
 
-    return inputMoving;
+    return this.moveCycle(inputMoving);
+  }
+
+  moveCycle(moving) {
+    const usersMove = this.BridgeGame.move(moving);
+
+    OutputView.printMap(usersMove);
   }
 }
 

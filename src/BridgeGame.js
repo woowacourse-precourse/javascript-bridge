@@ -32,15 +32,14 @@ class BridgeGame {
   move(inputMoving) {
     console.log(this.#bridge);
     if (this.#bridge[this.#moveCount] === inputMoving) {
-      this.usersMove.push([inputMoving, 'O']);
+      this.#usersMove.push([inputMoving, 'O']);
     } else {
-      this.usersMove.push([inputMoving, 'X']);
+      this.#usersMove.push([inputMoving, 'X']);
       this.#gameOver = true;
     } 
-
-    printMap(this.usersMove);
     this.#moveCount += 1;
-    this.checkCanMoveNextStep();
+
+    return this.#usersMove;
   }
 
   checkCanMoveNextStep() {
