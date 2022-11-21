@@ -18,8 +18,8 @@ const InputView = {
   readMoving() {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      (moveCommand) => {
-        return moveCommand;
+      (command) => {
+        bridgeGame.move(command);
       }
     );
   },
