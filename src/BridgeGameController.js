@@ -17,7 +17,13 @@ const BridgeGameController = {
   moveBridge(bridgeGame) {
     InputView.readMoving((moving) => {
       bridgeGame.move(moving);
+
+      if (!bridgeGame.isSuccess()) return BridgeGameController.askRetry(bridgeGame);
     });
+  },
+
+  askRetry(bridgeGame) {
+    InputView.readGameCommand((command) => {});
   },
 };
 
