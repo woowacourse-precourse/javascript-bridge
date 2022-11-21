@@ -1,12 +1,18 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { INFO_MESSAGES } = require('./utils/messages');
+const {
+  RESULT,
+  IS_SUCCESS,
+  SUCCESS_STRING,
+  FAILURE_STRING,
+} = require('./utils/constants');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
   printStartMessage() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
+    Console.print(INFO_MESSAGES.GAME_START);
   },
 
   /**
@@ -21,11 +27,13 @@ const OutputView = {
 
     Console.print(map);
 
-    if (lastResult === 'X') readGameCommand(map, this.printResult.bind(this));
-    if (lastResult === 'O' && originBridgeSize !== currentBridgeSize)
+    const { RIGHT, WRONG } = RESULT;
+
+    if (lastResult === WRONG) readGameCommand(map, this.printResult.bind(this));
+    if (lastResult === RIGHT && originBridgeSize !== currentBridgeSize)
       readMoving();
-    if (lastResult === 'O' && originBridgeSize === currentBridgeSize)
-      this.printResult(map, true, tryCount);
+    if (lastResult === RIGHT && originBridgeSize === currentBridgeSize)
+      this.printResult(map, IS_SUCCESS.FALSE, tryCount);
   },
 
   /**
@@ -37,7 +45,9 @@ const OutputView = {
     const { RESULT_TITLE, SUCCESS_TITLE, TRY_TITLE } = INFO_MESSAGES;
 
     const gameResult = `${RESULT_TITLE}${map}\n`;
-    const successResult = `${SUCCESS_TITLE}${isSuccess ? '성공' : '실패'}`;
+    const successResult = `${SUCCESS_TITLE}${
+      isSuccess ? SUCCESS_STRING : FAILURE_STRING
+    }`;
     const tryResult = `${TRY_TITLE}${tryCount}`;
 
     const resultMessage = `${gameResult}${successResult}${tryResult}`;
