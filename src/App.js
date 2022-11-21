@@ -40,10 +40,10 @@ class App {
 
   #handleGameCommand(gameCommand) {
     if (gameCommand === GAME_COMMAND_STRING.retry) {
-      OutputView.printResult(this.#model.getMoveList(), this.#model.getTryCount());
-    } else {
       this.#model.retry();
       InputView.readMoving(this.#handleMoving.bind(this));
+    } else {
+      OutputView.printResult(this.#model.getMoveList(), this.#model.getTryCount());
     }
   }
 }
