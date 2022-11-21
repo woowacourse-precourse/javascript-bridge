@@ -24,8 +24,8 @@ const GameLoggerConfig = {
   MOVE_OK: 'O',
   MOVE_FAIL: 'X',
   NO_MOVE: ' ',
-  LOG_PREFIX: '[',
-  LOG_SUFFIX: ']',
+  LOG_PREFIX: '[ ',
+  LOG_SUFFIX: ' ]',
   LOG_SEPARATOR: ' | ',
 };
 

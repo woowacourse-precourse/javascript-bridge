@@ -7,6 +7,14 @@ class GameLogger {
 
   #trials = 0;
 
+  static #makeLogString(moveLog) {
+    return (
+      GameLoggerConfig.LOG_PREFIX
+      + moveLog.join(GameLoggerConfig.LOG_SEPARATOR)
+      + GameLoggerConfig.LOG_SUFFIX
+    );
+  }
+
   resetMoveLog() {
     this.#upLog = [];
     this.#downLog = [];
@@ -25,6 +33,14 @@ class GameLogger {
       target.push(GameLoggerConfig.MOVE_FAIL);
     }
     other.push(GameLoggerConfig.NO_MOVE);
+  }
+
+  getLog() {
+    return {
+      upLog: GameLogger.#makeLogString(this.#upLog),
+      downLog: GameLogger.#makeLogString(this.#downLog),
+      trials: this.#trials,
+    };
   }
 
   #findTargetArray(direction) {
