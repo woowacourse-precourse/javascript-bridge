@@ -106,7 +106,7 @@ class BridgeGame {
    * 게임을 종료할 때 사용하는 메서드
    */
   finish() {
-    printResult(this.isFinished(), this.#attempt);
+    printResult(this.isFinished(), this.#attempt, this.#bridge, this.#movings);
   }
 }
 

@@ -42,7 +42,7 @@ const InputView = {
    * @param {Function} callback 다리의 길이를 입력받은 후 실행할 콜백 함수
    */
   readBridgeSize(callback) {
-    Console.readLine('다리의 길이를 입력해주세요.\n', (input) => {
+    Console.readLine('\n다리의 길이를 입력해주세요.\n', (input) => {
       checkBridgeSize(Number(input));
       callback(Number(input));
     });
@@ -53,7 +53,7 @@ const InputView = {
    * @param {Function} callback 이동할 칸을 입력받은 후 실행할 콜백 함수
    */
   readMoving(callback) {
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
+    Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
       checkMoving(input);
       callback(input);
     });
@@ -64,7 +64,7 @@ const InputView = {
    */
   readGameCommand(callback) {
     Console.readLine(
-      '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+      '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
       (input) => {
         checkGameCommand(input);
         callback(input);
