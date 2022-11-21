@@ -75,14 +75,6 @@ class BridgeMapPainter {
       this.#appendVerticalBar();
     }
   }
-
-  isCorrectLocation() {
-    const hasX = [...this.#upperBridge, ...this.#lowerBridge].join(' ').includes('X');
-    if (hasX) {
-      return false;
-    }
-    return true;
-  }
 }
 
 module.exports = BridgeMapPainter;
