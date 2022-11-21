@@ -46,21 +46,23 @@ class App {
 
   validateBridgeSize(size) {
     if (validator.isOverSize(size)) {
-      OutputView.printError(ERROR_MESSAGE.SIZE_RANGE)
-      Console.close();
-      return;
+      throw new Error(ERROR_MESSAGE.SIZE_RANGE)
     }
     if (!validator.isInteger(size)) {
-      OutputView.printError(ERROR_MESSAGE.SIZE_INTEGER)
-      Console.close();
-      return;
+      throw new Error(ERROR_MESSAGE.SIZE_INTEGER)
     }
   }
 
   makeBridge(response) {
-    this.validateBridgeSize(response);
-    this.bridgeGame.setBridge(response);
-    this.requestDirection();
+    try {
+      this.validateBridgeSize(response);
+      this.bridgeGame.setBridge(response);
+      this.requestDirection();
+    } catch (error) {
+      OutputView.printError(error);
+      Console.close();
+    }
+    
   }
 
   requestDirection() {
@@ -69,17 +71,20 @@ class App {
 
   validateMoveCommand(command) {
     if (validator.isNotUorD(command)) {
-      OutputView.printError(ERROR_MESSAGE.OPERATION_MOVE)
-      Console.close();
-      return;
+      throw new Error(ERROR_MESSAGE.OPERATION_MOVE)
     }
   }
 
   moveUser(response) {
-    this.validateMoveCommand(response);
-    this.bridgeGame.move(response).setStaus();
-    OutputView.printMap(this.bridgeGame);
-    this.MOVE_TO_FORK_MAP[this.bridgeGame.getStatus()]();
+    try {
+      this.validateMoveCommand(response);
+      this.bridgeGame.move(response).setStaus();
+      OutputView.printMap(this.bridgeGame);
+      this.MOVE_TO_FORK_MAP[this.bridgeGame.getStatus()]();
+    } catch(error) {
+      OutputView.printError(error);
+      Console.close();
+    }
   }
 
   requestIsTry() {
@@ -88,15 +93,18 @@ class App {
 
   validateGameCommand(command) {
     if (validator.isNotRorQ(command)) {
-      OutputView.printError(ERROR_MESSAGE.OPERATION_GAME_COMMAND)
-      Console.close();
-      return;
+      throw new Error(ERROR_MESSAGE.OPERATION_GAME_COMMAND)
     }
   }
 
   isRetry(response) {
-    this.validateGameCommand(response)
-    this.FAIL_TO_FORK_MAP[response]();
+    try {
+      this.validateGameCommand(response)
+      this.FAIL_TO_FORK_MAP[response]();
+    } catch(error) {
+      OutputView.printError(error);
+      Console.close();
+    }
   }
 }
 
