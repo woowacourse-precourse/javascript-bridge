@@ -922,3 +922,11 @@ describe('다리 로그 분류 메서드 테스트', () => {
     expect(BridgeGame.logClassification(BRIDGE_LOG)[1]).toEqual(RECEIVED);
   });
 });
+
+describe('분류된 다리 로그 가져오는 메서드 테스트', () => {
+  test('메소드 이름은 "getCurrentClassifiedBridgeLog"로 정의된다.', () => {
+    const METHOD_NAME = 'getCurrentClassifiedBridgeLog';
+
+    expect(BridgeGame.getCurrentClassifiedBridgeLog.name).toEqual(METHOD_NAME);
+  });
+});
