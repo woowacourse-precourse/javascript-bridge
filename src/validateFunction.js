@@ -3,14 +3,13 @@ const {
   bridgeRangeCheck,
   userMoveInputCheck,
   userRetryInputCheck,
-  bridgeInputStringCheck,
   isBridgeLengthFloat,
 } = require('./utils/validation')
 
 const bridgeLengthValidate = (number)=>{
   try{
     if(!bridgeRangeCheck(number)) throw new Error("[ERROR]")
-    
+
     if(!isBridgeLengthFloat(number)) throw new Error("[ERROR]")
   }catch(error){
     MissionUtils.Console.print(error.message)

@@ -10,10 +10,6 @@ const userRetryInputCheck = (retry)=>{
   return retry==="R" || retry==="Q"
 }
 
-const bridgeInputStringCheck = (number)=>{
-  return !isNaN(number)
-}
-
 const isBridgeLengthFloat = (number)=>{
   return !number.includes('.');
 }
@@ -22,6 +18,5 @@ module.exports = {
   bridgeRangeCheck,
   userMoveInputCheck,
   userRetryInputCheck,
-  bridgeInputStringCheck,
   isBridgeLengthFloat,
 };
