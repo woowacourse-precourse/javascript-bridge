@@ -24,6 +24,11 @@ const INPUT = {
   END: 'Q',
 };
 
+const IS_SUCCESS = {
+  TRUE: true,
+  FALSE: false,
+};
+
 module.exports = {
   INITIAL_COUNT,
   INITIAL_STATE,
@@ -31,4 +36,5 @@ module.exports = {
   RESULT,
   BRIDGE,
   INPUT,
+  IS_SUCCESS,
 };
