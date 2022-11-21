@@ -7,12 +7,7 @@ const bridge = new Bridge();
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  step;
-  constructor() {
-    // this.#step = 0;
-    this.size = 0;
-    this.step = 0;
-  }
+  constructor() {}
 
   start() {
     gameManager.askBridgeSize(this.makeBridge);
@@ -21,7 +16,6 @@ class BridgeGame {
   makeBridge(size) {
     bridge.make(size);
     gameManager.askWhereToGo(BridgeGame.move);
-    // this.retry();
   }
 
   /**
@@ -30,28 +24,18 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   static move(userPosition) {
-    const STEP = 10;
-
-    // 현재 건널 위치를 step으로 보낸다.
-    // const STEP = this.step;
-    // 1. 갈 수 있는 지 다리한테 물어봐
-    const IS_USER_CAN_GO = bridge.askUserCanGo(userPosition, STEP);
-    // 2.1 갈 수 있으면 또 어디로 가겠냐고 물어봐
+    const IS_USER_CAN_GO = bridge.askUserCanGo(userPosition);
     if (IS_USER_CAN_GO) {
       const GO = 'O';
-      // 1. 지도를 그려
-
-      bridge.drawMap(GO, STEP);
+      bridge.drawMap(GO);
       return gameManager.askWhereToGo(BridgeGame.move);
     }
-    // 2.2 못 가면 종료 시켜
-    // 1. 지도를 그려
     if (!IS_USER_CAN_GO) {
       const CANT_GO = 'X';
-      bridge.drawMap(CANT_GO, STEP);
+      bridge.drawMap(CANT_GO);
       return gameManager.askRetry(BridgeGame.retry);
-      // this.step += 1;
     }
+    BridgeGame.step += 1;
   }
 
   /**

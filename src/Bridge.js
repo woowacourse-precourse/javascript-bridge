@@ -4,12 +4,17 @@ const Map = require('./Map');
 
 class Bridge {
   #bridge;
+  #step;
+  #size;
   constructor() {
     this.map = new Map();
+    this.#step = 0;
+    this.#size;
   }
 
   make(size) {
     this.validate(size);
+    this.#size = size;
     this.#bridge = BridgeMaker.makeBridge(
       size,
       BridgeRandomNumberGenerator.generate
@@ -19,13 +24,14 @@ class Bridge {
 
   validate(size) {}
 
-  askUserCanGo(userPosition, step) {
-    if (this.#bridge[step] === userPosition) return true;
+  askUserCanGo(userPosition) {
+    if (this.#bridge[this.#step] === userPosition) return true;
     return false;
   }
 
-  drawMap(go, step) {
-    this.map.draw(go, step);
+  drawMap(go) {
+    this.map.draw(go, this.#step);
+    this.#step += 1;
   }
 }
 
