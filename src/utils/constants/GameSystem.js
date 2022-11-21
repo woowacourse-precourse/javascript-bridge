@@ -28,10 +28,15 @@ const GAME_COMMAND = deepFreeze({
   Q: false,
 });
 
+const MIN_SIZE = 3;
+const MAX_SIZE =  20;
+
 module.exports = {
   LINE_BREAK,
   GAME_MESSAGE,
   DIRECTION,
   STEP_TYPE,
   GAME_COMMAND,
+  MIN_SIZE,
+  MAX_SIZE
 };
