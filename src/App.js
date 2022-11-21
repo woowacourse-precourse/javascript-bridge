@@ -2,7 +2,7 @@ const BridgeGameController = require('./BridgeGameController');
 
 class App {
   constructor() {
-    const bridgeGameController = new BridgeGameController();
+    this.bridgeGameController = new BridgeGameController();
   }
 
   play() {

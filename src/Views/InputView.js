@@ -16,7 +16,7 @@ const InputView = {
    */
   readBridgeSize(makeBridgeAndMove) {
     Console.readLine(PRINT_MESSAGE.BRIDGE_LENGTH, (size) => {
-      validateBridgeSize(size);
+      this.validateBridgeSize(size);
       makeBridgeAndMove(size);
     });
   },
@@ -31,7 +31,7 @@ const InputView = {
    */
   readMoving(moveBridge) {
     Console.readLine(PRINT_MESSAGE.BRIDGE_TO_MOVE, (moveDirection) => {
-      validateMove(moveDirection);
+      this.validateMove(moveDirection);
       moveBridge(moveDirection);
     });
   },

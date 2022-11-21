@@ -5,31 +5,34 @@ const BridgeGame = require('./BridgeGame');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 class BridgeGameController {
-  #bridgeInfo = {
-    userMove: [],
-    moveCount: 0,
-  };
+  #bridgeInfo;
 
   constructor() {
+    this.#bridgeInfo = {
+      userMove: [],
+      moveCount: 0,
+    };
     const bridgeGame = new BridgeGame();
   }
 
   start() {
-    this.OutputView.printStartMessage();
-    this.inputView.readBridgeSize(this.makeBridgeAndMove.bind(this));
+    OutputView.printStartMessage();
+    InputView.readBridgeSize(this.makeBridgeAndMove.bind(this));
   }
 
   makeBridgeAndMove(size) {
     this.#bridgeInfo.bridge = Object.freeze(
-      BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator)
+      BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate)
     );
-    this.inputView.readMoving(this.GameResult.bind(this.moveBridge(this)));
+    InputView.readMoving(this.moveBridge.bind(this));
   }
 
   moveBridge(moveDirection) {
+    this.#bridgeInfo.moveCount++;
     this.#bridgeInfo.userMove.push(moveDirection);
-    this.bridgeGame();
-    this.this.moveAgainOrReGame(this.isSafeBridge());
+    console.log(this.#bridgeInfo);
+    // this.bridgeGame.move();
+    // this.this.moveAgainOrReGame(this.isSafeBridge());
   }
 
   moveAgainOrReGame() {}
