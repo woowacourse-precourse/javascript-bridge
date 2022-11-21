@@ -1,9 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./constants');
 
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
 const InputView = {
   readBridgeSize(settingBridge) {
     Console.readLine(MESSAGE.INPUT_BRIDGE_SIZE, (size) => {
@@ -16,9 +13,6 @@ const InputView = {
     });
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
   readMoving(movingSteps) {
     Console.readLine(MESSAGE.INPUT_MOVING, (move) => {
       try {
@@ -30,9 +24,6 @@ const InputView = {
     })
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand(endingBridge) {
     Console.readLine(MESSAGE.INPUT_ENDING, (command) => {
       try {
@@ -45,4 +36,6 @@ const InputView = {
   },
 };
 
-module.exports = InputView;
+module.exports = {
+  InputView,
+};
