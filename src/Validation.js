@@ -2,15 +2,26 @@ const { PARAMETERS } = require('./utils/constants');
 const Utils = require('./utils/Utils');
 
 class Validation {
+  checkGameSuccess(moveCount, bridgeGameLog, bridge) {
+    if (
+      this.checkIsLastMove(moveCount, bridge) &&
+      checkMoveSuccess(bridgeGameLog, bridge.length - 1)
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
   checkRestartRequirement(moveCount, bridgeGameLog, bridge) {
     if (this.hasFailedOnLastMove(moveCount, bridgeGameLog, bridge)) {
       return true;
     }
-  
+
     if (this.hasFailedInProgress(bridgeGameLog)) {
       return true;
     }
-  
+
     return false;
   }
 
@@ -21,16 +32,16 @@ class Validation {
     ) {
       return true;
     }
-  
+
     return false;
   }
 
   hasFailedInProgress(bridgeGameLog) {
-    const MOVE_POSITION = bridgeGameLog[0].length - 1; 
-  
+    const MOVE_POSITION = bridgeGameLog[0].length - 1;
+
     if (!this.checkMoveSuccess(bridgeGameLog, MOVE_POSITION)) return true;
-    
-    return false; 
+
+    return false;
   }
 
   checkIsLastMove(moveCount, bridge) {
@@ -46,7 +57,7 @@ class Validation {
     ) {
       return false;
     }
-  
+
     return true;
   }
 }
