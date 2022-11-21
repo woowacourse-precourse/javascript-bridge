@@ -47,7 +47,9 @@ class App {
   }
 
   askRetryOrQuit() {
-    console.log("retry or quit?");
+    InputView.readMoving((playerInput) => {
+      const command = InputView.getGameCommand(playerInput);
+    });
   }
 }
 

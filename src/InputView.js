@@ -8,7 +8,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
+    Console.readLine("\n다리의 길이를 입력해주세요.\n", (input) => {
       try {
         Validation.validateBridgeSize(input);
       } catch (error) {
@@ -48,7 +48,24 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(
+      "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (input) => {
+        try {
+          Validation.validateGameCommand(input);
+        } catch (error) {
+          Console.print(error);
+          InputView.readGameCommand();
+        }
+        callback(input);
+      }
+    );
+  },
+
+  getGameCommand(command) {
+    return command;
+  },
 };
 
 module.exports = InputView;
