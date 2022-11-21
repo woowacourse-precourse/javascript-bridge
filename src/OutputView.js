@@ -5,15 +5,26 @@ const { ANNOUNCEMENT_MESSAGE, BRIDGE_DETAIL } = require("./constant/Constant");
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 
-// function mapStart(up,down){
-//   if (index === 0) {
-//     up += "[ ";
-//     down += "[ ";
-//   } else {
-//     up += "| ";
-//     down += "| ";
-//   }
-// }
+function makePrint(up, down, printArr) {
+  printArr.forEach((objectValue, index) => {
+    if (index !== 0) {
+      up += "| ";
+      down += "| ";
+    }
+    if (objectValue.userCommand === BRIDGE_DETAIL.UP.COMMAND) {
+      up += `${objectValue.compareResultToPrint} `;
+      down += "  ";
+    } else if (objectValue.userCommand === BRIDGE_DETAIL.DOWN.COMMAND) {
+      down += `${objectValue.compareResultToPrint} `;
+      up += "  ";
+    }
+    if (index === printArr.length - 1) {
+      up += "]";
+      down += "]";
+    }
+  });
+  return { up, down };
+}
 
 const OutputView = {
   printStart() {
@@ -26,30 +37,11 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(printArr) {
-    let up = "";
-    let down = "";
-    printArr.forEach((objectValue, index) => {
-      if (index === 0) {
-        up += "[ ";
-        down += "[ ";
-      } else {
-        up += "| ";
-        down += "| ";
-      }
-      if (objectValue.userCommand === BRIDGE_DETAIL.UP.COMMAND) {
-        up += `${objectValue.compareResultToPrint} `;
-        down += "  ";
-      } else if (objectValue.userCommand === BRIDGE_DETAIL.DOWN.COMMAND) {
-        down += `${objectValue.compareResultToPrint} `;
-        up += "  ";
-      }
-      if (index === printArr.length - 1) {
-        up += "]";
-        down += "]";
-      }
-    });
-    Console.print(up);
-    Console.print(down);
+    let up = "[ ";
+    let down = "[ ";
+    const madePrint = makePrint(up, down, printArr);
+    Console.print(madePrint.up);
+    Console.print(madePrint.down);
   },
 
   /**

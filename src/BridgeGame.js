@@ -1,15 +1,11 @@
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { BRIDGE_DETAIL } = require("./constant/Constant");
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  // tries = 0;
   count = 0;
   printArr = [];
+  tries = 1;
   constructor(bridge) {
     this.bridge = bridge;
   }
@@ -28,12 +24,10 @@ class BridgeGame {
     this.count += 1;
     if (compareResult) {
       this.toPrintBridge.bind(this)(compareResult, userCommand);
-      if (this.count === this.bridge.length) return "끝";
-      // this.tries += 1;
+      if (this.count === this.bridge.length) return "END";
       return true;
     } else {
       this.toPrintBridge.bind(this)(compareResult, userCommand);
-      // this.tries += 1;
       return false;
     }
   }
@@ -50,16 +44,17 @@ class BridgeGame {
    */
   retry(userInput) {
     const result = this.checkRetryOrEnd(userInput);
+    this.count = 0;
     return result;
   }
 
   checkRetryOrEnd(userAnswer) {
     if (userAnswer === BRIDGE_DETAIL.RETRY_COMMAND) {
       this.printArr = [];
+      this.tries += 1;
       return userAnswer;
     }
     if (userAnswer === BRIDGE_DETAIL.END_COMMAND) {
-      // OutputView.printResult(this.count, BRIDGE_DETAIL.FAIL);
       return userAnswer;
     }
   }

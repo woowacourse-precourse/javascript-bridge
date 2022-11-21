@@ -3,7 +3,6 @@ const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { BRIDGE_DETAIL } = require("./constant/Constant");
 
 class BridgeController {
   bridge;
@@ -46,7 +45,7 @@ class BridgeController {
     InputView.readMoving(
       this.moving.bind(this),
       this.getRetryCommand.bind(this),
-      this.printWin.bind(this)
+      this.printResult.bind(this)
     );
   }
 
@@ -54,7 +53,7 @@ class BridgeController {
     InputView.readGameCommand(
       this.retrying.bind(this),
       this.getUpDownCommand.bind(this),
-      this.printGameEnd.bind(this)
+      this.printResult.bind(this)
     );
   }
 
@@ -64,16 +63,8 @@ class BridgeController {
     return result;
   }
 
-  printWin() {
-    this.printMap.bind(this)(this.bridgeGame.printArr);
-    OutputView.printFinalResult();
-    OutputView.printResult(this.tries, BRIDGE_DETAIL.SUCCESS);
-    OutputView.gameEnd();
-  }
-
   retrying(userInput) {
     const result = this.bridgeGame.retry(userInput);
-    this.tries += 1;
     return result;
   }
 
@@ -81,10 +72,10 @@ class BridgeController {
     OutputView.printMap(bridgeArr);
   }
 
-  printGameEnd() {
-    this.printMap.bind(this)(this.bridgeGame.printArr);
+  printResult(isSuccess) {
     OutputView.printFinalResult();
-    OutputView.printResult(this.tries, BRIDGE_DETAIL.FAIL);
+    this.printMap.bind(this)(this.bridgeGame.printArr);
+    OutputView.printResult(this.bridgeGame.tries, isSuccess);
     OutputView.gameEnd();
   }
 }

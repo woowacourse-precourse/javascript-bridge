@@ -11,8 +11,7 @@ function validateNumber(toNumberUserInput, callback, nextCallback) {
     return true;
   } catch (e) {
     Console.print(e);
-    InputView.readBridgeSize(callback, nextCallback);
-    return;
+    return InputView.readBridgeSize(callback, nextCallback);
   }
 }
 
@@ -22,8 +21,7 @@ function validateIsBridge(toNumberUserInput, callback, nextCallback) {
     return true;
   } catch (e) {
     Console.print(e);
-    InputView.readBridgeSize(callback, nextCallback);
-    return;
+    return InputView.readBridgeSize(callback, nextCallback);
   }
 }
 
@@ -33,8 +31,7 @@ function validateIsBridgeWords(userInput, callback, nextCallback) {
     return true;
   } catch (e) {
     Console.print(e);
-    InputView.readMoving(callback, nextCallback);
-    return;
+    return InputView.readMoving(callback, nextCallback);
   }
 }
 
@@ -93,17 +90,12 @@ const InputView = {
       );
       if (validation) {
         const result = callback(userInput);
-        if (result === "끝") return endCallback();
-        if (result) {
-          this.readMoving(callback, nextCallback, endCallback);
-        } else if (!result) {
-          nextCallback();
-        }
+        if (result === "END") return endCallback(BRIDGE_DETAIL.SUCCESS);
+        if (result) this.readMoving(callback, nextCallback, endCallback);
+        else if (!result) nextCallback();
       }
     });
   },
-  //사용자에게 입력값을 받아 -> 맞췄어 -> 다시 받아
-  //사용자에게 입력값을 받아 -> 틀렸어 -> 재시도입력을 받아 -> 처음부터 시작이나 끝 -> 처음부터 시작이면 위로 돌아가
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
@@ -113,11 +105,9 @@ const InputView = {
       const validation = validateIsRetryWords(userInput, callback);
       if (validation) {
         const result = callback(userInput);
-        if (result === BRIDGE_DETAIL.RETRY_COMMAND) {
-          nextCallback();
-        } else if (result === BRIDGE_DETAIL.END_COMMAND) {
-          endCallback();
-        }
+        if (result === BRIDGE_DETAIL.RETRY_COMMAND) nextCallback();
+        else if (result === BRIDGE_DETAIL.END_COMMAND)
+          endCallback(BRIDGE_DETAIL.FAIL);
       }
     });
   },
