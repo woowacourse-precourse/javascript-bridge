@@ -37,6 +37,10 @@ class BridgeGame {
   retry() {
     this.#jumpHistory = [];
   }
+
+  getJumpHistory() {
+    return this.#jumpHistory;
+  }
 }
 
 module.exports = BridgeGame;

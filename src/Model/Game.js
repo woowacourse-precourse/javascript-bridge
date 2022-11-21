@@ -47,14 +47,32 @@ class Game {
     return true;
   }
 
+  moveGetResult(moveCount) {
+    const MOVE_RESULT = this.bridgeGame.move(InputView.readMoving(), moveCount);
+    if (!MOVE_RESULT) {
+      const IS_QUIT = this.askQuit();
+      if (IS_QUIT) {
+        //최종 게임 결과 출력
+        this.getPrintResult();
+        return false;
+      }
+    }
+    return true;
+  }
+
   askQuit() {
     const IS_QUIT = InputView.readGameCommand();
     if (IS_QUIT === "Q") {
-      return false;
-    }
-    if (IS_QUIT === "R") {
       return true;
     }
+    if (IS_QUIT === "R") {
+      return false;
+    }
+  }
+
+  getPrintResult() {
+    const JUMP_HISTORY = this.bridgeGame.getJumpHistory();
+    OutputView.printResult(this.#playCount, this.#bridgeStatus, JUMP_HISTORY);
   }
 }
 
