@@ -36,7 +36,7 @@ const ValidCheck = {
   },
   isCorrectUpDown(moving){
     const IS_UD = /[UD]/g;
-    if(IS_UD.test(moving)){
+    if(IS_UD.test(moving)==false){
       try{
         throw new Error();
       }catch(e){
