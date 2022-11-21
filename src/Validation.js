@@ -22,6 +22,12 @@ class Validation {
     }
   }
 
+  static checkRetryCommand(command) {
+    if (Validation.isValidRetryCommand(command)) {
+      throw new Error('잘못된 입력 값입니다. R 또는 Q를 입력해주세요.');
+    }
+  }
+
   static isEmpty(input) {
     return input.length === 0;
   }
@@ -37,6 +43,11 @@ class Validation {
   static isValidSpace(input) {
     const spaceArr = ['U', 'D'];
     if (spaceArr.includes(input) === false) return true;
+  }
+
+  static isValidRetryCommand(input) {
+    const retryCommandArr = ['R', 'Q'];
+    if (retryCommandArr.includes(input) === false) return true;
   }
 }
 
