@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { generate } = require('./BridgeRandomNumberGenerator.js');
 const { makeBridge } = require('./BridgeMaker.js');
-const { printMap } = require('./OutputView.js');
+const { printMap, printResult } = require('./OutputView.js');
 
 const BridgeGame = require('./BridgeGame.js');
 
@@ -52,7 +52,7 @@ const InputView = {
         bridgeGame.retry();
         this.readMoving();
       } else if (answer === 'Q') {
-
+        printResult(bridgeGame, 'fail');
       }
     })
   },
