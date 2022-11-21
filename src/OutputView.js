@@ -1,6 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Message = require('./Message');
 const BridgeGame = require("./BridgeGame");
+const Constant = require('./Constant');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -25,17 +26,17 @@ const OutputView = {
       this.pushBridgeArray(userInput, movingArray);
     });
 
-    Console.print(`[${movingArray[0].join("|")}]\n[${movingArray[1].join("|")}]\n`);
+    Console.print(`[${movingArray[Constant.UP_ARRAY].join("|")}]\n[${movingArray[Constant.DOWN_ARRAY].join("|")}]\n`);
   },
 
   pushBridgeArray(userInputObj, movingArray) {
-    const userInput = Object.keys(userInputObj)[0];
+    const userInput = Object.keys(userInputObj)[Constant.FIRST_INDEX];
 
-    if (userInput === "U") {
+    if (userInput === Constant.UPPER_ALPHABET) {
       this.pushMoving([0, 1], movingArray, userInputObj[userInput]);
     }
 
-    if (userInput === "D") {
+    if (userInput === Constant.LOWER_ALPHABET) {
       this.pushMoving([1, 0], movingArray, userInputObj[userInput]);
     }
   },

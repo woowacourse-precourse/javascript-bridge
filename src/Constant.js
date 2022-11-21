@@ -9,4 +9,7 @@ module.exports = Object.freeze({
     FAIL_ALPHABET: 'X',
     SUCCESS_TEXT: '성공',
     FAIL_TEXT: '실패',
+    FIRST_INDEX: 0,
+    UP_ARRAY: 0,
+    DOWN_ARRAY: 1
 })
