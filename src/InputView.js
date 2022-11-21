@@ -4,12 +4,11 @@ const { makeBridge } = require('./BridgeMaker.js');
 const { printMap, printResult } = require('./OutputView.js');
 
 const BridgeGame = require('./BridgeGame.js');
+const bridgeGame = new BridgeGame();
 
 const GET_BRIDGE_SIZE_SENTENCE = '다리의 길이를 입력해주세요.\n';
 const GET_MOVIING_INFO_SENTENCE = '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n';
 const ASK_RESTART_OR_END_SENTENCE = '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n';
-
-const bridgeGame = new BridgeGame();
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -21,6 +20,8 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(GET_BRIDGE_SIZE_SENTENCE, (bridgeSize) => {
       bridgeGame.bridge = makeBridge(bridgeSize, generate);
+      Console.print(bridgeGame.bridge);
+      bridgeGame.bridgeSize = parseInt(bridgeSize);
 
       this.readMoving();
     });
@@ -34,8 +35,10 @@ const InputView = {
       const tf = bridgeGame.move(movingInfo);
       
       printMap(bridgeGame);
-
-      if (tf) {
+      
+      if (tf && (bridgeGame.roundCount - 1) === (bridgeGame.bridgeSize - 1)) {
+        printResult(bridgeGame, 'success');
+      } else if (tf) {
         this.readMoving();
       } else {
         this.readGameCommand();

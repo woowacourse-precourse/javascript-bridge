@@ -19,9 +19,6 @@ const OutputView = {
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   * 
-   * bridge = ['U', 'U', 'D'];
-   * result = [['U', 'success'], ['D', 'fail']];
    */
   printMap(bridgeGame) {
     Console.print(`[${bridgeGame.nowMap['U'].join('|')}]`);
@@ -34,14 +31,13 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(bridgeGame, result) {
-    Console.print(END_RESULT_SENTENCE);
-
-    this.printMap(bridgeGame);
-
     const strResult = result === 'success' ? '성공' : '실패';
-    Console.print(SUCCESS_OR_FAILURE_SENTENCE + strResult);
 
+    Console.print(END_RESULT_SENTENCE);
+    OutputView.printMap(bridgeGame);
+    Console.print(SUCCESS_OR_FAILURE_SENTENCE + strResult);
     Console.print(TOTAL_COUNT_SENTENCE);
+    
     Console.close()
   },
 };
