@@ -11,12 +11,12 @@ class Map {
     let bridgeMap = [[], []];
     for (let i = 0; i < bridge.length; i += 1) {
       if (bridge[i] === 'U') {
-        bridgeMap[0][i] = 'O';
-        bridgeMap[1][i] = 'X';
-      }
-      if (bridge[i] === 'D') {
         bridgeMap[0][i] = 'X';
         bridgeMap[1][i] = 'O';
+      }
+      if (bridge[i] === 'D') {
+        bridgeMap[0][i] = 'O';
+        bridgeMap[1][i] = 'X';
       }
     }
     this.#map = bridgeMap;
