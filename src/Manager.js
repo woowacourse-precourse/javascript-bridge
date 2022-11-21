@@ -12,23 +12,29 @@ class Manager{
 
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
-      Validation.isValidSize(size);
-      this.bridgeGame.makeBridge(size);
-
-      this.requestDirection();
+      try{
+        Validation.isNumber(size);
+        Validation.isValidRangeSize(size);
+        this.bridgeGame.makeBridge(size);
+        this.requestDirection();
+      }catch{
+        this.requestBridgeSize();
+      }
     });
   }
   
-  requestDirection() {
+  requestDirection(){
     InputView.readMoving((direction) => {
-      Validation.isValidDirection(direction);
-      this.bridgeGame.move(direction);
-
-      this.requestMap();
-
-      const isCorrect = this.bridgeGame.getIsCorrect();
-      const isSuccess = this.bridgeGame.getIsSuccess();
-      isSuccess ? this.requestResult() : (isCorrect ? this.requestDirection() : this.requestGameCommand());
+      try{
+        Validation.isValidDirection(direction);
+        this.bridgeGame.move(direction);
+        this.requestMap();
+        const isCorrect = this.bridgeGame.getIsCorrect();
+        const isSuccess = this.bridgeGame.getIsSuccess();
+        isSuccess ? this.requestResult() : (isCorrect ? this.requestDirection() : this.requestGameCommand());
+      }catch{
+        this.requestDirection();
+      }
     });
   }
 
@@ -47,12 +53,11 @@ class Manager{
   requestGameCommand(){
     InputView.readGameCommand((retryOrQuit) => {
       Validation.isValidRetryOrQuitInput(retryOrQuit);
-      if (retryOrQuit === "Q"){
-        this.requestResult();
-        return;
+      try{
+        retryOrQuit === "Q" ? this.requestResult() : this.bridgeGame.retry(), this.requestDirection();
+      }catch{
+        this.requestGameCommand();
       }
-      this.bridgeGame.retry();
-      this.requestDirection();
     });
   }
 }

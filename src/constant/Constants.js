@@ -7,7 +7,7 @@ const InputMessage = {
 const ErrorMessage = {
   MINIMUM_SIZE_RANGE: 3,
   MAXIMUM_SIZE_RANGE: 20,
-  IS_NOTNUMBER: "[ERROR] 다리 길이는 숫자여야합니다.",
+  IS_NOT_NUMBER: "[ERROR] 다리 길이는 숫자여야합니다.",
   BRIDGE_SIZE : "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
   MOVING_DIRECTION : "[ERROR] U(위 칸)와 D(아래 칸) 중 하나의 문자만 입력할 수 있습니다.",
   RETRY_OR_QUIT : "[ERROR] (재시작)과 Q(종료) 중 하나의 문자만 입력할 수 있습니다.",
