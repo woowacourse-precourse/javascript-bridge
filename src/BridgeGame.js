@@ -42,6 +42,14 @@ class BridgeGame {
     this.#attempts += 1;
     this.#player.resetPath();
   }
+
+  getAttempts() {
+    return this.#attempts;
+  }
+
+  getPath() {
+    return this.#player.getPath();
+  }
 }
 
 module.exports = BridgeGame;
