@@ -28,10 +28,13 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
+    let moveDirection = "";
     MissionUtils.Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      (moveDirection) => {
-        Validator.isMoveDirection(moveDirection);
+      (input) => {
+        if (Validator.isMoveDirection(input)) {
+          moveDirection = input;
+        }
       }
     );
     return moveDirection;
@@ -41,14 +44,16 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
+    let rq = "";
     MissionUtils.Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
         if (Validator.isQuit(input)) {
-          return input;
+          rq = input;
         }
       }
     );
+    return rq;
   },
 };
 

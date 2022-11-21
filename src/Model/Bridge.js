@@ -17,7 +17,7 @@ class Bridge {
   buildBridge() {
     const bridge = BridegMaker.makeBridge(
       this.#bridgeLength,
-      BridgeRandomNumberGenerator.generate()
+      BridgeRandomNumberGenerator.generate
     );
 
     return bridge;

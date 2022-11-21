@@ -10,8 +10,7 @@ class Game {
   #bridgeLength;
   #bridgeStatus;
   constructor(bridgeLength) {
-    this.bridgeLength = bridgeLength;
-    console.log(bridgeLength);
+    this.#bridgeLength = bridgeLength;
     this.setPlayCount();
     this.#bridge = new Bridge(this.#bridgeLength);
     this.#bridgeStatus = this.#bridge.getBridgeStatus;
@@ -36,7 +35,6 @@ class Game {
     for (let moveCount = 0; moveCount < this.#bridgeLength; moveCount++) {
       const DIRECTION = InputView.readMoving();
       const MOVE_RESULT = this.bridgeGame.move(DIRECTION, moveCount);
-      console.log("hi");
 
       if (!MOVE_RESULT) {
         quitResult = this.askQuit();
