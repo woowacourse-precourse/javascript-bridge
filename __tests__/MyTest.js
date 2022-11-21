@@ -44,17 +44,23 @@ describe('다리 길이를 입력하면 다리를 생성한다.', () => {
 });
 
 describe('입력 받은 이동할 칸과 정답이 일치하는지 판별한다.', () => {
-  test('입력 받은 이동할 칸과 정답이 일치하면 true 를 return 한다.', () => {
-    const bridgeGame = new BridgeGame();
-    const result = bridgeGame.move(['U', 'D', 'D'], 'U');
+  test.each([[0], [1], [2]])(
+    '입력 받은 이동할 칸과 정답이 일치하면 true 를 return 한다.',
+    (count) => {
+      const bridgeGame = new BridgeGame(count);
+      const result = bridgeGame.move(['D', 'D', 'D'], 'D');
 
-    expect(result).toEqual(true);
-  });
+      expect(result).toEqual(true);
+    }
+  );
 
-  test('입력 받은 이동할 칸과 정답이 일치하면 false 를 return 한다.', () => {
-    const bridgeGame = new BridgeGame();
-    const result = bridgeGame.move(['U', 'D', 'D'], 'D');
+  test.each([[0], [1], [2]])(
+    '입력 받은 이동할 칸과 정답이 불일치하면 false 를 return 한다.',
+    (count) => {
+      const bridgeGame = new BridgeGame(count);
+      const result = bridgeGame.move(['D', 'D', 'D'], 'U');
 
-    expect(result).toEqual(false);
-  });
+      expect(result).toEqual(false);
+    }
+  );
 });
