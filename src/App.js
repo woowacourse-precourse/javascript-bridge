@@ -34,6 +34,7 @@ class App {
         const isEnd = this.game.isEnd();
         if (!isEnd && isPossible) this.movePlayer();
         if (!isPossible) this.gameEndControl();
+        if (isEnd && isPossible) this.gameEnd(true);
       } catch (err) {
         OutputView.printError(err.message);
         this.movePlayer();
@@ -56,13 +57,16 @@ class App {
   decideCommand(command) {
     if (command === COMMAND.RETRY) {
       this.game.retry();
+      this.movePlayer();
       return;
     }
-    this.gameEnd();
+    this.gameEnd(false);
   }
 
-  gameEnd() {
-    OutputView.printResult();
+  gameEnd(isSuccess) {
+    const { gameResult, tryNum } = this.game;
+    OutputView.printResult(gameResult.result, isSuccess, tryNum);
+    InputView.close();
   }
 }
 
