@@ -1,15 +1,7 @@
 const Player = require("./Player");
 class BridgeGame {
-  #move;
-  #bridgeShape;
-
-  constructor(bridgeShape, move) {
-    this.#bridgeShape = bridgeShape;
-    this.#move = move;
-  }
-
-  move() {
-    Player.movingArray.push(this.#move);
+  move(bridgeShape, move) {
+    Player.movingArray(move);
     const currentIndex = Player.movingArray.length - 1;
 
     if (Player.movingArray[currentIndex] === this.#bridgeShape[currentIndex]) {
