@@ -6,7 +6,7 @@ const InputView = {
   readBridgeSize(createBridge) {
     Console.readLine(InfoMessages.ENTER_BRIDGE_SIZE, (size) => {
       createBridge.call(this, size);
-      this.readMoving();
+      InputView.readMoving();
     });
   },
 
