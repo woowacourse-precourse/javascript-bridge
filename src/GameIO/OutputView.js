@@ -20,11 +20,12 @@ const OutputView = {
 
   printMapLine(direction, bridgeStatus, jumpHistory) {
     MissionUtils.Console.print("[ ");
-    for (let index = 0; index < bridgeLength; index++) {
-      if (direction === bridgeLength[index]) {
-        const PRINT_PART = this.printMapPart(index, bridgeStatus, jumpHistory);
-        MissionUtils.Console.print(PRINT_PART, " ");
-      }
+    for (let index = 0; index < bridgeStatus.length; index++) {
+      const PRINT_PART =
+        bridgeStatus[index] === direction
+          ? this.printMapPart(index, bridgeStatus, jumpHistory)
+          : " ";
+      MissionUtils.Console.print(PRINT_PART, " ");
       if (index < bridgeStatus.length - 1) {
         MissionUtils.Console.print("| ");
       }
@@ -33,7 +34,7 @@ const OutputView = {
   },
 
   printMapPart(index, bridgeStatus, jumpHistory) {
-    if (index < jumpHistory.bridgeLength) {
+    if (index < jumpHistory.length) {
       if (bridgeStatus[index] === jumpHistory[index]) {
         return "O";
       }
@@ -66,8 +67,8 @@ const OutputView = {
     MissionUtils.Console.print("최종 게임 결과\n");
     this.printMap(bridgeStatus, jumpHistory);
     const RESULT_INDEX = this.calculateResult(bridgeStatus, jumpHistory);
-    MissionUtils.Console.print("게임 성공 여부: ", RESULT[RESULT_INDEX], "\n");
-    MissionUtils.Console.print("총 시도한 횟수: ", playCount);
+    MissionUtils.Console.print(`게임 성공 여부: ${RESULT[RESULT_INDEX]}\n`);
+    MissionUtils.Console.print(`총 시도한 횟수: ${playCount}\n`);
   },
 
   printBeginAnnouncement() {

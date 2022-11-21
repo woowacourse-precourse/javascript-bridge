@@ -2,6 +2,7 @@ const InputView = require("../GameIO/InputView");
 const Bridge = require("./Bridge.js");
 const BridgeGame = require("../Controller/BridgeGame");
 const OutputView = require("../GameIO/OutputView");
+const { MissionUtils } = require("@woowacourse/mission-utils");
 
 class Game {
   #bridge;
@@ -9,7 +10,8 @@ class Game {
   #bridgeLength;
   #bridgeStatus;
   constructor(bridgeLength) {
-    this.#bridgeLength = bridgeLength;
+    this.bridgeLength = bridgeLength;
+    console.log(bridgeLength);
     this.setPlayCount();
     this.#bridge = new Bridge(this.#bridgeLength);
     this.#bridgeStatus = this.#bridge.getBridgeStatus;
@@ -32,10 +34,9 @@ class Game {
     let quitResult = true;
 
     for (let moveCount = 0; moveCount < this.#bridgeLength; moveCount++) {
-      const MOVE_RESULT = this.bridgeGame.move(
-        InputView.readMoving(),
-        moveCount
-      );
+      const DIRECTION = InputView.readMoving();
+      const MOVE_RESULT = this.bridgeGame.move(DIRECTION, moveCount);
+      console.log("hi");
 
       if (!MOVE_RESULT) {
         quitResult = this.askQuit();
