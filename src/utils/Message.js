@@ -1,15 +1,26 @@
 const {
-  OUTPUT: { MAP_DIVIDE_LAST, MAP_DIVIDE_NOT_LAST, MAP_BLANK, MAP_LOCATION },
+  OUTPUT: { MAP_BLANK, MAP_MIDDLE_DIVIDE, MAP_DIVIDE },
   KEYWORD: { SUCCESS_JUMP, FALI_JUMP },
+  SIZE: { MAP_SIZE },
+  HASH,
 } = require("../constants/index.js");
 
 const Message = class {
-  static mapMessage(isPass, isLocation, isLast) {
-    const divide = isLast ? MAP_DIVIDE_LAST : MAP_DIVIDE_NOT_LAST;
-    if (isLocation) return MAP_BLANK + divide;
-    return (
-      (isPass ? MAP_LOCATION(SUCCESS_JUMP) : MAP_LOCATION(FALI_JUMP)) + divide
-    );
+  static getLineMessage(isPass, isLocation) {
+    if (isLocation) return MAP_BLANK;
+    return isPass ? SUCCESS_JUMP : FALI_JUMP;
+  }
+
+  static getMapMessage(user, bridge) {
+    return Array.from({ length: MAP_SIZE }, (_, line) =>
+      user.reduce((map, move, location) => {
+        const isPass = move === bridge[location];
+        const isLocation = move === HASH[line];
+        return (map += Message.getLineMessage(isPass, isLocation));
+      }, "")
+    )
+      .map((message) => message.split("").join(MAP_MIDDLE_DIVIDE))
+      .map((message) => MAP_DIVIDE(message));
   }
 };
 
