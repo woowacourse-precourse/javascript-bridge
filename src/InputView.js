@@ -3,6 +3,7 @@ const Validation = require('./Validation');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeCompare = require('./BridgeCompare');
+const OutputView = require('./OutputView');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -22,12 +23,14 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(SIZE, BridgeStatus, index) {
+  readMoving(SIZE, BridgeStatus, index, array) {
     Io.input('이동할 칸을 선택해주세요. (위: U, 아래: D)', (userChoice) => {
-      console.log(userChoice, BridgeStatus)
+      console.log(userChoice, BridgeStatus);
       const result = BridgeCompare.moveBridge(userChoice, BridgeStatus[index]);
-      console.log(result)
-      if(result) { this.readMoving(SIZE, BridgeStatus, index + 1)}
+      array = BridgeCompare.makeBridgeResultArray(userChoice, result, array);
+      console.log(array);
+      OutputView.printMap(userChoice, result);
+      if(result) { this.readMoving(SIZE, BridgeStatus, index + 1, array)}
     });
   },
 
