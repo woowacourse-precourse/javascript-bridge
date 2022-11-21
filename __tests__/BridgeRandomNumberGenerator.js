@@ -1,7 +1,7 @@
 const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
 
 describe('BridgeRandomNumberGenerator 클래스 테스트', () => {
-  const isInRange = function (number) {
+  const isInRange = function isInRange(number) {
     const numbers = [0, 1];
 
     return numbers.includes(number);
