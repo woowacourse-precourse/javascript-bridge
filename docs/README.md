@@ -1,3 +1,24 @@
+# 목차
+
+📦src
+┣ 📂Constants
+┃ ┣ 📜BridgeStatus.js
+┃ ┣ 📜InputValues.js
+┃ ┗ 📜Message.js
+┣ 📂Controller
+┃ ┗ 📜BridgeController.js
+┣ 📂Model
+┃ ┗ 📜BridgeGame.js
+┣ 📂View
+┃ ┣ 📜InputView.js
+┃ ┗ 📜OutputView.js
+┣ 📜App.js
+┣ 📜BridgeMaker.js
+┣ 📜BridgeRandomNumberGenerator.js
+┣ 📜CheckPlayerStatus.js
+┣ 📜OutputMaker.js
+┗ 📜Validation.js
+
 # 기능 목록
 
 ## 1. `InputView`의 `readBridgeSize()`를 통해 다리의 길이를 입력받는 기능 구현
