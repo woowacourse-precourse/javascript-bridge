@@ -5,7 +5,7 @@ const InputView = require('./InputView');
 const Validation = require('./Validation');
 
 class InputHandling {
-  #answerBridgeArray
+  #answerBridgeArray;
 
   play() {
     InputView.readBridgeSize(this.handleBridgeSize.bind(this));
@@ -15,14 +15,16 @@ class InputHandling {
     try {
       Validation.checkBridgeSize(size);
       this.#answerBridgeArray = makeBridge(size, generate);
-      InputView.readMoving(this.handleMovingValue.bind(this))
+      InputView.readMoving(this.handleMovingValue.bind(this));
     } catch (error) {
       Console.print(error);
       InputView.readBridgeSize(this.handleBridgeSize.bind(this));
     }
   }
 
-  handleMovingValue(direction) {}
+  handleMovingValue(direction) {
+    Validation.checkMovingValue(direction);
+  }
 }
 
 module.exports = InputHandling;

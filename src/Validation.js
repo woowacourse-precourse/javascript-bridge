@@ -7,6 +7,8 @@ const Validation = {
   },
 
   checkMovingValue(direction) {
+    if (direction === 'u' || direction === 'd') 
+      throw new Error(ERROR.NOT_UPPERCASE)
     if (/[^UD]/g.test(direction) || direction.length !== 1) 
       throw new Error(ERROR.NOT_U_OR_D);
   }
