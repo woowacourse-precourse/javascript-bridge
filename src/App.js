@@ -1,8 +1,15 @@
 const BridgeGame = require("./BridgeGame");
+const InputView = require("./InputView");
+const OutputView = require("./OutputView");
 class App {
   play() {
+    this.printPlay();
     const bridgeGame = new BridgeGame();
-    bridgeGame.start();
+    InputView.readBridgeSize(bridgeGame);
+  }
+
+  printPlay() {
+    OutputView.printStart();
   }
 }
 
