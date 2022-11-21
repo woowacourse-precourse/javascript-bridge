@@ -4,20 +4,10 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const Controller = require("./Controller");
 const OutputView = require("./OutputView");
-const {
-  GO,
-  SIGN,
-  MESSAGE,
-  ERROR_MESSAGE,
-} = require("./constant");
+const { GO, SIGN, MESSAGE, ERROR_MESSAGE } = require("./constant");
 
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
+
   readBridgeSize() {
     MissionUtils.Console.readLine(MESSAGE.inputLength, (size) => {
       MissionUtils.Console.print(SIGN.blank);
@@ -40,9 +30,6 @@ const InputView = {
     }
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
   readMoving() {
     MissionUtils.Console.readLine(MESSAGE.inputMove, (block) => {
       Controller.addRound();
@@ -62,10 +49,12 @@ const InputView = {
   },
 
   moveContinue(block) {
-    if (!Controller.checkMoveContinue()) {
-      return this.isGameEnd();
-    }
-    if ((block === GO.up || block === GO.down) && Controller.checkMoveContinue()) {
+    if (!Controller.checkMoveContinue()) return this.isGameEnd();
+
+    if (
+      (block === GO.up || block === GO.down) &&
+      Controller.checkMoveContinue()
+    ) {
       return this.readMoving();
     }
   },
@@ -73,18 +62,14 @@ const InputView = {
   isGameEnd() {
     const size = Number(Controller.size);
     if (
-      OutputView.nowArray[0].includes(SIGN.fail) || OutputView.nowArray[1].includes(SIGN.fail)
+      OutputView.nowArray[0].includes(SIGN.fail) ||
+      OutputView.nowArray[1].includes(SIGN.fail)
     ) {
       return this.readGameCommand();
     }
-    if (Controller.playerArr.length === size) {
-      return this.executePrintResult();
-    }
+    if (Controller.playerArr.length === size) return this.executePrintResult();
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand() {
     MissionUtils.Console.readLine(MESSAGE.inputCommand, (command) => {
       if (Controller.isCommandError(command)) {
