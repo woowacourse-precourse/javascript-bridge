@@ -34,9 +34,21 @@ class App {
 
       this.bridgeGame.move(this.#bridge, moving);
       OutputView.printMap(this.bridgeGame.getMoving());
+
+      if (this.bridgeGame.isFail(this.#bridge, moving)) return this.askGameCommand();
+
       if (this.bridgeGame.getIndex() !== this.#bridge.length) return this.movingBridge();
     });
   }
+
+  askGameCommand() {
+    InputView.readGameCommand((command) => {
+      if (!InputView.commandValidate(command)) return this.askGameCommand();
+
+      if (command === BRIDGE.RESTART) {
+        this.bridgeGame.retry();
+        return this.movingBridge();
+      }
     });
   }
 }

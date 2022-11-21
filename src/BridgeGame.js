@@ -33,6 +33,16 @@ class BridgeGame {
     this.#down.push(bridge[this.#index] === STRING_DOWN ? SUCCESS : FAIL);
     this.#up.push(BLANK);
   }
+
+  isFail(bridge, moving) {
+    if (
+      (moving === STRING_UP && bridge[this.#index] === STRING_DOWN) ||
+      (moving === STRING_DOWN && bridge[this.#index] === STRING_UP)
+    ) {
+      return true;
+    }
+
+    return false;
   }
 
   /**
@@ -40,7 +50,11 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#index = -1;
+    this.#up = [];
+    this.#down = [];
+  }
 
   getMoving() {
     return { up: this.#up, down: this.#down };

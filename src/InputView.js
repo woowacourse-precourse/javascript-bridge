@@ -22,7 +22,9 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(callBack) {
+    Console.readLine(MESSAGE.INPUT_CHECK_TRY, callBack);
+  },
 
   sizeValidate(length) {
     try {
@@ -49,6 +51,19 @@ const InputView = {
     try {
       if (moving !== 'U' && moving !== 'D') {
         throw new Error(ERROR_MESSAGE.INVALID_MOVE_VALUE);
+      }
+    } catch (error) {
+      Console.print(error);
+      return false;
+    }
+
+    return true;
+  },
+
+  commandValidate(command) {
+    try {
+      if (command !== 'R' && command !== 'Q') {
+        throw new Error(ERROR_MESSAGE.INVALID_TRY_VALUE);
       }
     } catch (error) {
       Console.print(error);
