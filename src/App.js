@@ -1,8 +1,7 @@
-const { Console } = require("@woowacourse/mission-utils");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
 const BridgeMaker = require("./BridgeMaker.js");
-const InputView = require("./InputView.js");
-const OutputView = require("./OutputView.js");
+const InputView = require("./View/InputView.js");
+const OutputView = require("./View/OutputView.js");
 const BridgeGame = require("./BridgeGame.js");
 
 class App {
