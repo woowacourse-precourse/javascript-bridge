@@ -1,5 +1,5 @@
-const { MESSAGE, COMMAND } = require('../Constants.js');
-const { printMessage } = require('../Utils.js');
+const { MESSAGE, COMMAND } = require('../Utils/Constants.js');
+const { printMessage } = require('../Utils/Utils.js');
 
 const OutputView = {
   printMap(bridgeMap) {
@@ -8,10 +8,10 @@ const OutputView = {
     printMessage(`${upperBridge}\n${lowerBridge}`);
   },
 
-  printResult(bridgeMap, str, count) {
+  printResult(bridgeMap, result, count) {
     printMessage('최종 게임 결과');
     this.printMap(bridgeMap);
-    printMessage(`게임 성공 여부: ${str} `);
+    printMessage(`\n게임 성공 여부: ${result} `);
     printMessage(`총 시도한 횟수: ${count} `);
   },
 
