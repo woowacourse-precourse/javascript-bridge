@@ -19,12 +19,21 @@ const InputView = {
 
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (answer) => {
+      this.stringValidation(Number(answer));
+
       this.bridge = BridgeMaker.makeBridge(answer, Generator.generate);
       this.now = 0;
       this.retry = 1;
 
       this.readMoving();
     });
+  },
+
+  stringValidation(answer) {
+    if (isNaN(answer)) {
+      Console.print("[ERROR] 다리 길이는 숫자여야 합니다. 다시 입력해 주세요!");
+      this.readBridgeSize();
+    }
   },
 
   /**
@@ -72,6 +81,8 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
+
+  //game.retry(answer) -> if (answer == "R" return true)
   readGameCommand() {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",

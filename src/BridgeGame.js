@@ -13,11 +13,9 @@ class BridgeGame {
     if (dir === bridge[now]) {
       return true;
     }
-
     if (dir === bridge[now]) {
       return true;
     }
-
     return false;
   }
 

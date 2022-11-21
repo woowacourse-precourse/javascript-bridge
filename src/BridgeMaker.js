@@ -12,7 +12,6 @@ const BridgeMaker = {
 
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
-
     for (let index = 0; index < size; index++) {
       let dir;
       const number = generateRandomNumber();
@@ -25,7 +24,6 @@ const BridgeMaker = {
       }
       bridge.push(dir);
     }
-
     return bridge;
   },
 };
