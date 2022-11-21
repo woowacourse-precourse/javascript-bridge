@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const BridgeMaker = require("./BridgeMaker");
 const InputView = require("./InputView");
 const Validation = require("./Validation");
 class App {
@@ -13,6 +14,7 @@ class App {
         Console.print(errorMsg);
         return this.requestBridgeSize();
       }
+      BridgeMaker.makeBridge(Number(size), generate);
     });
   }
 }
