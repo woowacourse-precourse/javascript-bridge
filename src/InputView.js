@@ -33,6 +33,7 @@ const InputView = {
    */
   readGameCommand(selectRestartEnd) {
     MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)", (input) => {
+      try {new BridgeError.SelectOptionError(input.toUpperCase())} catch (errorMSG) {MissionUtils.Console.print(errorMSG);};
       selectRestartEnd(input.toUpperCase());
     });
   },
