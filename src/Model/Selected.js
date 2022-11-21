@@ -1,5 +1,5 @@
 // @ts-checkts-check
-const { isRightLevelString } = require('../Utils/Validator');
+const { isRightLevelString } = require('../Utils/Validator/SelectedValidator');
 
 class Selected {
   /** @type {string[]}  */

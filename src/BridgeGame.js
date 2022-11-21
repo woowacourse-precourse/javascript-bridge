@@ -90,9 +90,7 @@ class BridgeGame {
 
   #setInitialResultMap() {
     const length = this.levelCnt;
-    this.#result = Array.from({ length: 2 }, () =>
-      Array.from({ length }, () => undefined),
-    );
+    this.#result = Array.from({ length: 2 }, () => Array.from({ length }, () => undefined));
   }
 
   /**
@@ -129,8 +127,7 @@ class BridgeGame {
    * @param {boolean} isCorrect
    */
   #setBoolean(level, isCorrect) {
-    if (this.#selected.getElement(level) === INPUT_MESSAGE.UP)
-      this.#result[0][level] = isCorrect;
+    if (this.#selected.getElement(level) === INPUT_MESSAGE.UP) this.#result[0][level] = isCorrect;
     else if (this.#selected.getElement(level) === INPUT_MESSAGE.DOWN)
       this.#result[1][level] = isCorrect;
   }

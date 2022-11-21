@@ -10,9 +10,7 @@ class App {
   #gameController;
 
   constructor() {
-    this.#gameController = new GameController(
-      new BridgeGame(new Selected(), new TryCnt()),
-    );
+    this.#gameController = new GameController(new BridgeGame(new Selected(), new TryCnt()));
   }
 
   play() {

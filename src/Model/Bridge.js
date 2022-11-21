@@ -4,7 +4,7 @@ const {
   isNumber,
   isNaturalNumber,
   isRightNumberRange,
-} = require('../Utils/Validator');
+} = require('../Utils/Validator/BridgeValidator');
 
 class Bridge {
   /** @type {string[]} */

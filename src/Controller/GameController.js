@@ -3,7 +3,7 @@ const BridgeGame = require('../BridgeGame');
 const { generate } = require('../BridgeRandomNumberGenerator');
 const Bridge = require('../Model/Bridge');
 const { RETRY_MESSAGE } = require('../Utils/Constant');
-const { isRightRetryString } = require('../Utils/Validator');
+const { isRightRetryString } = require('../Utils/Validator/ControllerValidator');
 const InputView = require('../Viewer/InputView');
 const OutputView = require('../Viewer/OutputView');
 
@@ -57,7 +57,7 @@ class GameController {
    */
   setRetryOrQuit(input) {
     isRightRetryString(input);
-    if (this.isRetry(input)) {
+    if (this.constructor.isRetry(input)) {
       this.#game.retry();
       return InputView.readMoving(this);
     }
