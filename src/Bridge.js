@@ -10,11 +10,11 @@ class Bridge {
   #bridgeGame;
 
   constructor () {
-    OutputView.printStart();
     this.#bridgeGame = new BridgeGame();
   }
 
   start () {
+    OutputView.printStart();
     this.#askBridgeSize();
   }
 
@@ -38,7 +38,7 @@ class Bridge {
   }
 
   #createPattern (size) {
-    this.#bridgeGame.makePattern(size);
+    this.#bridgeGame.setPattern(BridgeGame.makePattern(size));
     this.#askNextStep();
   }
 
@@ -98,8 +98,12 @@ class Bridge {
     }
   }
 
+  static isQuitGame (chooseRetry) {
+    return chooseRetry === GAME_CONSTANTS.quitGame;
+  }
+
   #runRetry (chooseRetry) {
-    if (chooseRetry === GAME_CONSTANTS.quitGame) {
+    if (Bridge.isQuitGame(chooseRetry)) {
       return this.#showResult(GAME_CONSTANTS.resultFailure);
     }
     this.#bridgeGame.retry();

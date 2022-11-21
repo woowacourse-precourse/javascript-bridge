@@ -15,9 +15,13 @@ class BridgeGame {
     this.#tryCount = 1;
   }
 
-  makePattern (size) {
-    this.#pattern = BridgeMaker.makeBridge(Number(size), generate);
+  setPattern (pattern) {
+    this.#pattern = pattern;
     console.log(this.#pattern);
+  }
+
+  static makePattern (size) {
+    return BridgeMaker.makeBridge(Number(size), generate);
   }
 
   #initHistory () {
