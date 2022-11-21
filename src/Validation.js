@@ -19,6 +19,10 @@ const Validation = {
     if (!["U", "D"].includes(direction))
       throw INPUT_ERROR_MESSAGE.DIRECTION_ERROR;
   },
+
+  checkGameCommand(command) {
+    if (!["R", "Q"].includes(command)) throw INPUT_ERROR_MESSAGE.COMMAND_ERROR;
+  },
 };
 
 module.exports = Validation;
