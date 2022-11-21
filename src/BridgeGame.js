@@ -4,6 +4,43 @@
 class BridgeGame {
   constructor(bridge) {
     this.bridge = bridge;
+    this.index = 0;
+    this.map = [[], []];
+    this.isEnd = false;
+    this.isSuccess = false;
+  }
+
+  compare(answer) {
+    if (answer === 'U' && this.bridge[this.index] === 'U') {
+      return ['O', ' ', true];
+    }
+
+    if (answer === 'U' && this.bridge[this.index] === 'D') {
+      return ['X', ' ', false];
+    }
+
+    if (answer === 'D' && this.bridge[this.index] === 'U') {
+      return [' ', 'X', false];
+    }
+
+    if (answer === 'D' && this.bridge[this.index] === 'D') {
+      return [' ', 'O', true];
+    }
+  }
+
+  move(answer) {
+    const [upCheck, downCheck, compare] = this.compare(answer);
+    const [up, down] = this.map;
+
+    up.push(upCheck);
+    down.push(downCheck);
+    OutputView.printMap([up, down]);
+
+    this.index += 1;
+    this.isEnd = this.index === this.bridge.length;
+    this.isSuccess = this.isEnd && compare;
+
+    return compare;
   }
 
   retry() {}
