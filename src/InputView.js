@@ -1,5 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const OutputView = require('./OutputView');
 const Validator = require('./Validator');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -14,7 +13,7 @@ const InputView = {
         Console.print('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n');
         return this.readBridgeSize(callback);
       }
-      callback(input);
+      return callback(input);
     });
   },
 
