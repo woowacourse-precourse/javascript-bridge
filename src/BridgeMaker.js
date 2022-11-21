@@ -17,5 +17,4 @@ const BridgeMaker = {
   },
 };
 
-// MissionUtils.Console.print(BridgeMaker.makeBridge(3))
-module.exports = BridgeMaker; // 배열이 나감
+module.exports = BridgeMaker; 

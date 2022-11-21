@@ -1,11 +1,8 @@
-const MissionUtils = require("@woowacourse/mission-utils"); // 지우기
 const {
   GO,
   COMMAND,
   SIGN,
   IS_SUCCESS,
-  MESSAGE,
-  ERROR_MESSAGE,
 } = require("./constant");
 const OutputView = require("./OutputView");
 
@@ -41,11 +38,8 @@ const Controller = {
     }
   },
 
-
   conveyInput(block) {
     this.addPlayerBlock(block);
-    // this.successMove(block);
-    // this.failMove(block);
   },
 
   addPlayerBlock(block) {
@@ -90,9 +84,6 @@ const Controller = {
       }
     }
   },
-
-
-
 
   initializeAll() {
     OutputView.nowArray = [],

@@ -1,3 +1,4 @@
+const {COMMAND } = require("./constant");
 const Controller = require("./Controller");
 
 // BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
