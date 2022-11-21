@@ -13,7 +13,7 @@ const mockGenerator = (randomNumbers) => {
 
 describe('다리 생성 테스트', () => {
   test('다리 길이가 3일 때', () => {
-    const randomNumbers = ['1', '0', '0'];
+    const randomNumbers = [1, 0, 0];
     const length = 3;
     mockGenerator(randomNumbers);
 
@@ -25,7 +25,7 @@ describe('다리 생성 테스트', () => {
   });
 
   test('다리 길이가 5일 때', () => {
-    const randomNumbers = ['1', '0', '0', '1', '1'];
+    const randomNumbers = [1, 0, 0, 1, 1];
     const length = 5;
     mockGenerator(randomNumbers);
 
