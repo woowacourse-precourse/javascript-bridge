@@ -52,6 +52,29 @@ class App {
     const { currentState } = this.#brideGame.getGameState();
     if (currentState === MOVEMENT_RESULT.GAME_SUCCESS) this.#quitGame();
     if (currentState === MOVEMENT_RESULT.CORRECT) this.#readMovingStage();
+    if (currentState === MOVEMENT_RESULT.WRONG) this.#selectRetryStage();
+  }
+
+  #selectRetryStage() {
+    InputView.readGameCommand(this.#readGameCommandCallback.bind(this));
+  }
+
+  #readGameCommandCallback(command) {
+    try {
+      this.#selectRetry(command);
+    } catch (error) {
+      OutputView.print(error.message);
+      this.#selectRetryStage();
+    }
+  }
+
+  #selectRetry(command) {
+    Validator.commandValidate(command);
+    if (command === COMMAND.QUIT) this.#quitGame();
+    if (command === COMMAND.RETRY) {
+      this.#brideGame.retry();
+      this.#readMovingStage();
+    }
   }
 
   #quitGame() {
