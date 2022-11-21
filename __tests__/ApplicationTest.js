@@ -51,8 +51,13 @@ const expectBridgeOrder = (received, upside, downside) => {
   expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
+<<<<<<< HEAD
 describe('다리 건너기 테스트', () => {
   test('다리 생성 테스트', () => {
+=======
+describe("다리 건너기 테스트", () => {
+  test("다리 생성 테스트", () => {
+>>>>>>> 4ff61afbe060cdab700d15a9e0afddb2376fe18b
     const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
@@ -64,8 +69,13 @@ describe('다리 건너기 테스트', () => {
 
   test('기능 테스트', () => {
     const logSpy = getLogSpy();
+<<<<<<< HEAD
     mockRandoms(['1', '0', '1']);
     mockQuestions(['3', 'U', 'D', 'U']);
+=======
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["3", "U", "D", "U"]);
+>>>>>>> 4ff61afbe060cdab700d15a9e0afddb2376fe18b
 
     const app = new App();
     app.play();
