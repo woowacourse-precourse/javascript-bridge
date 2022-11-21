@@ -1,7 +1,19 @@
+const { PARAMETERS } = require('./utils/constants');
 const Utils = require('./utils/Utils');
 
 class Validation {
   checkRestartRequirement() {}
+
+  hasFailedOnLastMove(moveCount, bridgeGameLog, bridge) {
+    if (
+      !this.checkIsLastMove(moveCount, bridge) ||
+      !this.checkMoveSuccess(bridgeGameLog, bridge.length - 1)
+    ) {
+      return true;
+    }
+  
+    return false;
+  }
 
   hasFailedInProgress(bridgeGameLog) {
     const MOVE_POSITION = bridgeGameLog[0].length - 1; 
