@@ -2,6 +2,16 @@ const { Console } = require("@woowacourse/mission-utils");
 const { INPUT_MESSAGE } = require("./Constant");
 
 /**
+ * @param {object} error 발생한 에러 객체
+ * @param {function} recursiveFunction 호출할 함수
+ * @param {function} callback recursiveFunction 전달할 callback 함수
+ */
+const handleError = (error, recursiveFunction, callback) => {
+  Console.print(error.message);
+  recursiveFunction(callback);
+};
+
+/**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
@@ -15,7 +25,7 @@ const InputView = {
         Console.print("");
         callback(answer);
       } catch (error) {
-        InputView.handleError(error, InputView.readBridgeSize, callback);
+        handleError(error, InputView.readBridgeSize, callback);
       }
     });
   },
@@ -29,7 +39,7 @@ const InputView = {
       try {
         callback(answer);
       } catch (error) {
-        InputView.handleError(error, InputView.readMoving, callback);
+        handleError(error, InputView.readMoving, callback);
       }
     });
   },
@@ -43,19 +53,9 @@ const InputView = {
       try {
         callback(answer);
       } catch (error) {
-        InputView.handleError(error, InputView.readGameCommand, callback);
+        handleError(error, InputView.readGameCommand, callback);
       }
     });
-  },
-
-  /**
-   * @param {object} error 발생한 에러 객체
-   * @param {function} callFunction 호출할 함수
-   * @param {function} callback callFunction에 전달할 callback 함수
-   */
-  handleError(error, callFunction, callback) {
-    Console.print(error.message);
-    callFunction(callback);
   },
 };
 
