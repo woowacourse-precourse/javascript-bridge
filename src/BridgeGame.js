@@ -64,8 +64,8 @@ class BridgeGame {
     this.#gameOver = false;
   }
 
-  end() {
-    OutputView.printResult(this.usersMove, this.#gameOver, this.#tryCount);
+  endResult() {
+    return [this.#usersMove, this.#gameOver, this.#tryCount];
   }
 }
 

@@ -95,6 +95,8 @@ class GameController {
   }
 
   end() {
+    const gameResult = this.BridgeGame.endResult();
+    OutputView.printResult(gameResult);
   }
 }
 
