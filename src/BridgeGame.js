@@ -1,9 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const Random = require("./BridgeRandomNumberGenerator");
-const Validate = require("./Validation");
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+
 class BridgeGame {
   #userLocation;
   #bridge;
@@ -28,21 +25,15 @@ class BridgeGame {
     this.#currBridge.push([]);
     this.#currBridge.push([]);
   }
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+
   setBridgeSize(size) {
     //Validate.bridgeSize(size);
     this.#bridgeSize = Number(size);
-    //console.log(this.#bridgeSize);
   }
 
   setBridge() {
     const bridge = BridgeMaker.makeBridge(this.#bridgeSize, Random.generate);
     this.#bridge = bridge;
-    //console.log(this.#bridge);
   }
 
   getCurrBridge() {
@@ -61,33 +52,35 @@ class BridgeGame {
     return this.#trial;
   }
 
+  prepareGame(bridgeSize) {
+    this.setBridgeSize(bridgeSize);
+    this.setBridge();
+    this.increaseTrial();
+  }
+
   move(bridgeChoice) {
     //Validate.bridgeChoice(bridgeChoice);
-    //this.#userLog.push(bridgeChoice);
     this.#userLocation++;
     if(bridgeChoice === this.#bridge[this.#userLocation]) {
-      if(bridgeChoice === "U") {
-        this.#currBridge[0].push(" ");
-        this.#currBridge[1].push("O");
-      }
-      if(bridgeChoice === "D") {
-        this.#currBridge[0].push("O");
-        this.#currBridge[1].push(" ");
-      }
+      this.updateCurrBridge(bridgeChoice, "O");
     }
     if(bridgeChoice !== this.#bridge[this.#userLocation]) {
-      if(bridgeChoice === "U") {
-        this.#currBridge[0].push(" ");
-        this.#currBridge[1].push("X");
-      }
-      if(bridgeChoice === "D") {
-        this.#currBridge[0].push("X");
-        this.#currBridge[1].push(" ");
-      }
+      this.updateCurrBridge(bridgeChoice, "X");
       this.#fail = true;
     }
     if((this.#userLocation === (this.#bridgeSize - 1)) && (!this.#fail)) {
       this.#gameWin = true;
+    }
+  }
+  
+  updateCurrBridge(bridgeChoice, result) {
+    if(bridgeChoice === "U") {
+      this.#currBridge[0].push(" ");
+      this.#currBridge[1].push(result);
+    }
+    if(bridgeChoice === "D") {
+      this.#currBridge[0].push(result);
+      this.#currBridge[1].push(" ");
     }
   }
 
