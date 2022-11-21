@@ -8,7 +8,6 @@ class BridgeGame {
   bridge;
   try;
   index;
-  answer;
   result;
 
   constructor(size) {
