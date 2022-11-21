@@ -1,4 +1,4 @@
-const BRIDGE = require("./Constants");
+const { BRIDGE } = require("./Constants");
 
 const Utilities = {
   isSuccess(status) {

@@ -4,7 +4,7 @@ const BridgeGame = require('./models/BridgeGame');
 const MovingValidation = require('./utils/MovingValidation');
 const RetryValidation = require('./utils/RetryValidation');
 const Utilities = require('./utils/Utilities');
-const BRIDGE = require('./utils/Constants');
+const { BRIDGE } = require('./utils/Constants');
 
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');

@@ -1,4 +1,4 @@
-const BRIDGE = require('./Constants');
+const { BRIDGE, ERROR_MESSAGE } = require('./Constants');
 
 class RetryValidation {
   constructor(input) {
@@ -11,7 +11,7 @@ class RetryValidation {
 
   validForm(input) {
     if (input !== BRIDGE.game.quit && input !== BRIDGE.game.retry) {
-      throw new Error('[ERROR] 사용자의 입력이 잘못되었습니다.');
+      throw new Error(ERROR_MESSAGE.retry.form);
     }
   }
 }
