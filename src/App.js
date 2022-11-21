@@ -16,37 +16,34 @@ class App {
   makeBridge(input) {
     try {
       Validator.validateBridgeSize(input);
+      const game = new BridgeGame(input);
+      this.#game = game;
+      this.readMoving();
     } catch {
       this.readBridgeSize();
-      return;
     }
-    const game = new BridgeGame(input);
-    this.#game = game;
-    this.readMoving();
   }
 
   moveSpace(input) {
     try {
       Validator.validateSpace(input);
+      this.#game.move(input);
+      const map = this.#game.getMap();
+      OutputView.printMap(map);
+      this.checkGameProgress();
     } catch {
       this.readMoving();
-      return;
     }
-    this.#game.move(input);
-    const map = this.#game.getMap();
-    OutputView.printMap(map);
-    this.checkGameProgress();
   }
 
   selectRetryOrQuit(input) {
     try {
       Validator.validateCommand(input);
+      if (input === COMMAND.QUIT) this.endGame();
+      else this.retryGame();
     } catch {
       this.readGameCommand();
-      return;
     }
-    if (input === COMMAND.QUIT) this.endGame();
-    else this.retryGame();
   }
 
   checkGameProgress() {
