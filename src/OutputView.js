@@ -20,7 +20,7 @@ const OutputView = {
   compareOneSideBridge(myMoves, bridge) {
     return myMoves.map((move, index) => {
       if (move === bridge[index] && bridge[index] !== '') return MOVE_PICK.RIGHT;
-      if (move !== bridge[index]) return MOVE_PICK.WRONG;
+      if (move !== bridge[index] && bridge[index] === '') return MOVE_PICK.WRONG;
       return ' ';
     });
   },
