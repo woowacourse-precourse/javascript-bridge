@@ -6,9 +6,7 @@ const {
 } = require("./core/BridgeGameCore");
 
 class App {
-  constructor() {
-    this.bridgeGame = null;
-  }
+  #bridgeGame = null;
 
   play() {
     this.showGreeting();
@@ -21,13 +19,13 @@ class App {
 
   showInputBridgeNumber() {
     InputView.readBridgeSize((bridgeSize) => {
-      this.bridgeGame = new BridgeGame(parseInt(bridgeSize, 10));
+      this.#bridgeGame = new BridgeGame(parseInt(bridgeSize, 10));
       this.beforeShowInputMove();
     });
   }
 
   beforeShowInputMove() {
-    if (this.bridgeGame.isFinished()) {
+    if (this.#bridgeGame.isFinished()) {
       this.showResult(true);
       return;
     }
@@ -35,7 +33,7 @@ class App {
   }
 
   moveCallback(command) {
-    this.bridgeGame.move(
+    this.#bridgeGame.move(
       command,
       this.moveSuccess.bind(this),
       this.moveFail.bind(this),
@@ -47,18 +45,18 @@ class App {
   }
 
   moveSuccess() {
-    OutputView.printMap(this.bridgeGame.progress);
+    OutputView.printMap(this.#bridgeGame.progress);
     this.beforeShowInputMove();
   }
 
   moveFail() {
-    OutputView.printMap(this.bridgeGame.progress);
+    OutputView.printMap(this.#bridgeGame.progress);
     this.showInputRetry();
   }
 
   retryCallback(command) {
     if (command === RETRY) {
-      this.bridgeGame.retry(command);
+      this.#bridgeGame.retry(command);
       this.beforeShowInputMove();
       return;
     }
@@ -70,11 +68,8 @@ class App {
   }
 
   showResult(isSuccess) {
-    OutputView.printResult(isSuccess, this.bridgeGame);
+    OutputView.printResult(isSuccess, this.#bridgeGame);
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
