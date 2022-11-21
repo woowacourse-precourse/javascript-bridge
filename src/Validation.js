@@ -1,5 +1,5 @@
-const { ERROR_MESSAGE } = require('./Constants');
 const { Console } = require('@woowacourse/mission-utils');
+const { ERROR_MESSAGE } = require('./Constants');
 
 const Validation = {
   validateBridgeSize(size) {
@@ -13,12 +13,12 @@ const Validation = {
     return true;
   },
   isInputNumber(input) {
-    if (Number.isNaN(parseInt(input))) {
+    if (Number.isNaN(parseInt(input, 10))) {
       throw ERROR_MESSAGE.IS_NOT_NUMBER;
     }
   },
   isNotInRange(input) {
-    if (3 > input || input > 20) {
+    if (input < 3 || input > 20) {
       throw ERROR_MESSAGE.IS_NOT_IN_RANGE;
     }
   },

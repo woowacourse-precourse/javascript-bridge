@@ -17,7 +17,7 @@ describe('다리 길이 입력값 테스트', () => {
 
 describe('다리 이동 입력값 테스트', () => {
   test('입력값이 U/D 가 아닌 경우', () => {
-    const inputValues = ['a', 'b', '\n', '1', 'u'];
+    const inputValues = ['a', 'b', '\n', '1', 'u', 'd'];
     inputValues.forEach((inputValue) => {
       expect(Validation.validateDirection(inputValue)).toBeFalsy();
     });

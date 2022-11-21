@@ -14,7 +14,7 @@ const OutputView = {
    */
   printBridge(upBridgeRecord, downBridgeRecord) {
     Console.print(BRIDGE.START + upBridgeRecord.join(' | ') + BRIDGE.END);
-    Console.print(BRIDGE.START + downBridgeRecord.join(' | ') + BRIDGE.END + '\n');
+    Console.print(`${BRIDGE.START + downBridgeRecord.join(' | ') + BRIDGE.END}\n`);
   },
 
   /**
