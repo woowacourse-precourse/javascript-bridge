@@ -13,7 +13,7 @@ const mockRandoms = (numbers) => {
 
 describe('다리 길이 테스트', () => {
   test('(다리 길이가 3일 때) 랜덤 배열 체크하기', () => {
-    const randoms = ['1', '0', '1'];
+    const randoms = [1, 0, 1];
 
     const bridgeLength = '3';
 
@@ -28,7 +28,7 @@ describe('다리 길이 테스트', () => {
   });
 
   test('(다리 길이가 3일 때) 랜덤 배열 체크하기', () => {
-    const randoms = ['1', '0', '1', '1'];
+    const randoms = [1, 0, 1, 1];
 
     const bridgeLength = '4';
 
