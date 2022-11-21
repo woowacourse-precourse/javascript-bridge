@@ -76,7 +76,6 @@ const InputView = {
     if (isNaN(input)) {
       return false;
     }
-
     if(Number(input) < 2 || Number(input) > 20) {
       return false;
     }

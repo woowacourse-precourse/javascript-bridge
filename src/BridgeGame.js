@@ -1,7 +1,6 @@
-const app = require("./App");
-const bridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const outputView = require("./OutputView");
 const inputView = require("./InputView");
+const BridgeResult = require("./BridgeRsult");
 
 
 
@@ -16,6 +15,7 @@ class BridgeGame {
   #tryCount;
   #upBridgeReultArr;
   #downBridgeReultArr;
+  #gameResult;
 
   constructor(bridgeArr, size) {
     this.#bridgeArr = bridgeArr;
@@ -27,29 +27,19 @@ class BridgeGame {
   }
 
   async runGame() {
-    // for(let i = 0; i < this.#size; i++) {
-    //   const result = this.move();
-
-    //   let retryInput;
-    //   if(result === 'X') {
-    //     retryInput = this.retry();
-    //   }
-    // }
-
     while(this.#currentBridgeIndex < this.#size) {
       const result = await this.move();
-      console.log('###re:', result);
       if(result === 'X') {
         await this.retry();
       }
-      console.log('###tryCnt:',this.#tryCount);
     }
-
-    outputView.printResult();
+    this.#gameResult = '성공';
+    outputView.printResult(this.makeBridgeResult());
   }
 
-
-
+  makeBridgeResult() {
+    return new BridgeResult(this.#upBridgeReultArr, this.#downBridgeReultArr,this.#gameResult, this.#tryCount);
+  }
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -59,7 +49,6 @@ class BridgeGame {
   /** 5. 사용자 입력값 대비 건널 수 있는지 여부 비교해서 배열에 결과 값 넣어주기 */
   async move() {
     const movingInput = await inputView.inputMoving(this.#bridgeArr);
-    console.log('###movingInput:', movingInput);
 
     let result = "X";
     if(this.#bridgeArr[this.#currentBridgeIndex] === movingInput) {
@@ -77,8 +66,7 @@ class BridgeGame {
         this.#upBridgeReultArr.push(' ');
         break;
     }
-    console.log(this.#upBridgeReultArr);
-    console.log(this.#downBridgeReultArr);
+    outputView.printMap(this.#upBridgeReultArr, this.#downBridgeReultArr);
 
     return result;
   }
@@ -90,18 +78,19 @@ class BridgeGame {
    */
   async retry() {
     const retryInput = await inputView.inputRetry();
-    console.log('###retry:', retryInput);
 
     if(retryInput === 'R') {
       this.#upBridgeReultArr.pop();
       this.#downBridgeReultArr.pop();
-      this.#tryCount++
-      this.runGame();
+      // console.log('###up:', this.#upBridgeReultArr);
+      // console.log('###dw:', this.#downBridgeReultArr);
+
+      this.#tryCount++;
     } else if(retryInput === 'Q') {
-      outputView.printResult();
+      this.#gameResult = '실패';
+      outputView.printResult(this.makeBridgeResult());
     }
     return retryInput;
-
   }
 }
 

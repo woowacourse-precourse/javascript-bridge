@@ -1,10 +1,8 @@
-const { Console, Random } = require("@woowacourse/mission-utils");
-const { GUIDE_MESSAGE, ERROR_MESSAGE } = require("./Constant");
+const { Console } = require("@woowacourse/mission-utils");
 const outputView = require("./OutputView");
 const inputView = require("./InputView");
 const bridgeMaker = require("./BridgeMaker");
 const bridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { vaildSizeInput } = require("./InputView");
 const BridgeGame = require("./BridgeGame");
 
 
@@ -23,8 +21,8 @@ class App {
     }
 
     const bridgeArr = bridgeMaker.makeBridge(size, bridgeRandomNumberGenerator.generate);
-    console.log('###bridgeArr:', bridgeArr);
 
+    console.log('#### ', bridgeArr);
     const bridgeGame = new BridgeGame(bridgeArr, size);
     bridgeGame.runGame();
 

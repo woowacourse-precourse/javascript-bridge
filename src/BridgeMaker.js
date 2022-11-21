@@ -1,14 +1,6 @@
-const { Console, Random } = require("@woowacourse/mission-utils");
-const { GUIDE_MESSAGE } = require("./Constant");
-const app = require("./App");
-
-
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
-
-const size = app.inputSize;
-
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -18,12 +10,12 @@ const BridgeMaker = {
 
   /**3. 입력받은 길이 만큼 다리 생성해서 "U/D" 배열 생성 */
   makeBridge(size, generateRandomNumber) {
-    const bridgeArr = [];
+    let bridgeArr = [];
     for(let i = 0; i < size; i++) {
       const number = generateRandomNumber();
-      if(number === 0) {
+      if(number == 0) {
         bridgeArr.push("D"); 
-      } else if(number === 1) {
+      } else if(number == 1) {
         bridgeArr.push("U");
       }
     }
