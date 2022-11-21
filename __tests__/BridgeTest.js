@@ -2,12 +2,22 @@ const Bridge = require('../src/models/Bridge');
 
 describe('다리 클래스 테스트', () => {
   test.each([
-    ['U', true],
-    ['D', false],
-  ])('현재 위치와 같은 값인지 판단한다.', (input, expected) => {
+    [0, 'U'],
+    [1, 'D'],
+  ])('현재 위치를 반환', (location, expected) => {
     const bridge = new Bridge(['U', 'D', 'D']);
-    const location = 0;
+    const result = bridge.current(location);
 
-    expect(bridge.isCrossed(input, location)).toEqual(expected);
+    expect(result).toEqual(expected);
+  });
+
+  test.each([
+    [0, false],
+    [2, true],
+  ])('마지막 위치인지 확인', (location, expected) => {
+    const bridge = new Bridge(['U', 'D', 'D']);
+    const result = bridge.isLastLocation(location);
+
+    expect(result).toEqual(expected);
   });
 });
