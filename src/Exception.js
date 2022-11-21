@@ -16,7 +16,16 @@ const Exception = {
    */
      checkVaildMoveInput(input) {
       if(input === "U" || input === "D"){return ;}
-      throw new Error("[ERROR] 'U' 또는 'D' 를 입력하여야 합니다. ");
+      throw new Error("[ERROR] 'U' 또는 'D' 를 입력하여야 합니다.");
+    },
+
+    /**
+   * 게임 재시도에 대한 입력이 유효한지 체크
+   * @param {string} input 게임을 다시 시도할 지 여부에 대한 입력값
+   */
+     checkVaildRetryInput(input) {
+      if(input === "R" || input === "Q"){return ;}
+      throw new Error("[ERROR] 'R' 또는 'Q' 를 입력하여야 합니다.");
     },
 
   
