@@ -55,15 +55,14 @@ describe('validator 테스트', () => {
   });
 
   test('유효한 입력값만 받아야 한다.', () => {
-    const input = "Q";
+    const input = 'Q';
 
     expect(validator.isNotUorD(input)).toEqual(true);
   });
 
   test('유효한 입력값만 받아야 한다.', () => {
-    const input = "r";
+    const input = 'r';
 
     expect(validator.isNotRorQ(input)).toEqual(true);
   });
 });
-
