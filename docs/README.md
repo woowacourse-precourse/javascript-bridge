@@ -14,7 +14,7 @@
 - [x] 이동 정보를 다리 결과로 변환한다. - Converter#convertToBridgeMap()
 
 - [x] 특정 칸이 건널 수 있는지 확인한다. - Checker#checkSpaceCanMove()
-- [ ] 게임이 종료되었는지 확인한다. - Checker#checkGameOver()
+- [x] 게임이 종료되었는지 확인한다. - Checker#checkGameOver()
 
 - [x] 다리의 정보를 출력한다. - OutputView#printMap()
 - [ ] 게임 결과를 출력한다. - OutputView#printResult()

@@ -13,7 +13,7 @@ const Converter = {
 
   /**
    *
-   * @param {['U'|'D', boolean][]} movingState
+   * @param {[string, boolean][]} movingState
    * @returns {string}
    */
   convertToBridgeMap(movingState) {

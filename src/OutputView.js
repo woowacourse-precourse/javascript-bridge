@@ -8,7 +8,7 @@ const { convertToBridgeMap } = require('./Converter');
 const OutputView = {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * @param {['U'|'D', boolean][]} movingState 게임 상태
+   * @param {[string, boolean][]} movingState 게임 상태
    */
   printMap(movingState) {
     Console.print(convertToBridgeMap(movingState));
