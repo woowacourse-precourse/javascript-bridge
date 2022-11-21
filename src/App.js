@@ -32,25 +32,46 @@ class App {
         return;
       }
 
-      this.displaySuccessState();
+      this.successState();
     });
   }
 
-  displaySuccessState() {
+  successState() {
     const isSuccess = this.bridgeGame.move();
     if (isSuccess) {
-      if (this.bridgeGame.gameFinish()) {
-        OutputView.printMap(isSuccess);
-      }
+      this.displaySuccessState(isSuccess);
+    }
+  }
+
+  displaySuccessState(isSuccess) {
+    if (this.bridgeGame.gameFinish()) {
       OutputView.printMap(isSuccess);
+    }
+    OutputView.printMap(isSuccess);
+    this.inputMoving();
+  }
+
+  inputGameCommand(isFail) {
+    InputView.readGameCommand((retryKey) => {
+      if (!validateReadGameCommand(retryKey)) this.inputGameCommand();
+
+      this.insertRKey(retryKey);
+      this.insertQKey(retryKey, isFail);
+    });
+  }
+
+  insertRKey(retryKey) {
+    if (retryKey === "R") {
+      this.bridgeGame.retry();
       this.inputMoving();
     }
   }
 
-  inputGameCommand() {
-    InputView.readGameCommand((retryKey) => {
-      if (!validateReadGameCommand(retryKey)) this.inputGameCommand();
-    });
+  insertQKey(retryKey, isFail) {
+    if (retryKey === "Q") {
+      OutputView.printMap(isFail);
+      return Console.close();
+    }
   }
 }
 
