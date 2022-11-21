@@ -5,6 +5,9 @@ const TypeConverter = {
   toString(input) {
     return input.toString().trim();
   },
+  rowArrToStr(input) {
+    return '[ ' + input.join(' | ') + ' ]';
+  },
 };
 
 module.exports = TypeConverter;

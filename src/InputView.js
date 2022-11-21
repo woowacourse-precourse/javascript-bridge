@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
+const OutputView = require('./OutputView');
 const TypeConverter = require('./TypeConverter');
 const { MSG } = require('./libs/constant');
 
@@ -40,6 +41,7 @@ const InputView = {
       try {
         const moveDirection = TypeConverter.toString(answer);
         bridgeGame.move(moveDirection);
+        OutputView.printMap(bridgeGame.getMovedBridge());
       } catch (e) {
         console.log(e.message);
         this.readMoving(bridgeGame);

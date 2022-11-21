@@ -13,6 +13,15 @@ const ERROR_MSG = {
 const DIRECTION = {
   up: 'U',
   down: 'D',
+  correct: 'O',
+  wrong: 'X',
 };
 
-module.exports = { MSG, ERROR_MSG, DIRECTION };
+const ROW_IDX = {
+  U: 0,
+  D: 1,
+};
+
+const EMPTY = ' ';
+
+module.exports = { MSG, ERROR_MSG, DIRECTION, ROW_IDX, EMPTY };
