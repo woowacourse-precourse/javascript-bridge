@@ -18,6 +18,10 @@ class BridgeGame {
     this.#bridge = makeBridge(size, generate);
   }
 
+  isMovable(direction) {
+    return direction === this.#bridge[this.#player.getCurrentLocation()];
+  }
+
   move() {}
 
   retry() {}
