@@ -1,8 +1,8 @@
 const GAME = Object.freeze({
   START: '다리 건너기 게임을 시작합니다.',
   END: '\n최종 게임 결과',
-  GAME_SUCCESS: '게임 성공 여부 : ',
-  GAME_TRY_COUNT: '총 시도한 횟수 : ',
+  GAME_SUCCESS: '게임 성공 여부: ',
+  GAME_TRY_COUNT: '총 시도한 횟수: ',
 });
 
 const ERROR = Object.freeze({
