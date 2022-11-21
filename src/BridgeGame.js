@@ -5,6 +5,10 @@ class BridgeGame {
   constructor() {
     this.bridge;
     this.result = [];
+    this.nowMap = {
+      'U': [],
+      'D': []
+    };
   }
 
   /**
@@ -12,8 +16,8 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    * 
-   * 성공, 실패 여부를 배열에 저장한다.
-   * EX) ['U', 'D', 'fail']
+   * 성공, 실패 여부를 [방향, 실패여부] 형태로 배열에 저장한다.
+   * EX) [['U', 'success'], ['D', 'success'], ['U', 'fail']]
    */
   move(movingInfo) {
     const compareIndex = this.result.length;

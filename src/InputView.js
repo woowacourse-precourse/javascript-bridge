@@ -1,6 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { generate } = require('./BridgeRandomNumberGenerator.js');
 const { makeBridge } = require('./BridgeMaker.js');
+const { printMap } = require('./OutputView.js');
 
 const BridgeGame = require('./BridgeGame.js');
 
@@ -29,14 +30,16 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(GET_MOVIING_INFO_SENTENCE, (movingInfo) => {
-      const result = bridgeGame.move(movingInfo);
+      const tf = bridgeGame.move(movingInfo);
+      
+      printMap(bridgeGame, movingInfo, tf);
 
-      if (result) {
+      if (tf) {
         this.readMoving();
       } else {
         this.readGameCommand();
       }
-    })
+    });
   },
 
   /**

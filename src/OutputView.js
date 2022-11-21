@@ -16,8 +16,20 @@ const OutputView = {
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * 
+   * bridge = ['U', 'U', 'D'];
+   * result = [['U', 'success'], ['D', 'fail']];
    */
-  printMap() {},
+  printMap(bridgeGame, movingInfo, tf) {
+    const other = movingInfo === 'U' ? 'D' : 'U';
+    const addString = tf ? ' O ' : ' X ';
+    
+    bridgeGame.nowMap[movingInfo].push(addString);
+    bridgeGame.nowMap[other].push('   ');
+
+    Console.print(`[${bridgeGame.nowMap['U'].join('|')}]`);
+    Console.print(`[${bridgeGame.nowMap['D'].join('|')}]`);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
