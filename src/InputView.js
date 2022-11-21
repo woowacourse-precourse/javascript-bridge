@@ -48,6 +48,9 @@ const InputView = {
   readGameCommand(upAndDown, bridgeList) {
     Console.readLine(RETRY, (retryOrQuit) => {
       if(retryOrQuit === 'R') {
+        InputView.bridgeGame = new BridgeGame();
+        this.retryNum += 1;
+        InputView.readMoving(bridgeList);
       } else if(retryOrQuit === 'Q') {
       }
     })
