@@ -22,6 +22,7 @@
     "import/extensions": "off",
     "prefer-template": "off",
     "max-depth": ["error", 2],
+    "max-params": ["error", 3],
     "max-lines-per-function": ["error", 10],
     "eol-last": ["error", "always"]
   }
