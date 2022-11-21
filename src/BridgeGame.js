@@ -1,7 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
-const OutputView = require("./OutputView");
 const { MOVING, CALCULATION } = require("./constants/values");
 const { OUTPUT } = require("./constants/messages");
 /**
@@ -53,7 +52,7 @@ class BridgeGame {
       this.#movingList.lower.push(MOVING.BLANK);
     }
 
-    return this.#movingList;
+    return this.getResult();
   }
 
   /**
@@ -68,7 +67,7 @@ class BridgeGame {
       this.#movingList.upper.push(MOVING.BLANK);
     }
 
-    return this.#movingList;
+    return this.getResult();
   }
 
   /**
@@ -103,11 +102,10 @@ class BridgeGame {
   }
 
   /**
-   * 최종 결과를 출력하고 게임을 종료하는 메서드
+   * 게임 결과 데이터를 받을 때 사용하는 메서드
    */
-  finish(result) {
-    OutputView.printResult(this.#movingList, result, this.#attempts);
-    Console.close();
+  getResult() {
+    return { movingList: this.#movingList, attempts: this.#attempts };
   }
 }
 

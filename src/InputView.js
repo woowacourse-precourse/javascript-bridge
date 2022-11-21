@@ -28,10 +28,10 @@ const InputView = {
       const error = Check.hasMoving(moving);
       if (error) return this.readMoving(bridgeGame);
 
-      const movingList = bridgeGame.move(moving);
-      OutputView.printMap(movingList);
-      if (bridgeGame.hasWrong()) return this.readGameCommand(bridgeGame);
-      if (bridgeGame.hasAll()) return bridgeGame.finish(RESULT.SUCCESS);
+      const result = bridgeGame.move(moving);
+      OutputView.printMap(result.movingList);
+      if (bridgeGame.hasWrong()) return this.readGameCommand(bridgeGame, result);
+      if (bridgeGame.hasAll()) return OutputView.printResult(result.movingList, RESULT.SUCCESS, result.attempts);
       return this.readMoving(bridgeGame);
     });
   },
@@ -39,12 +39,12 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridgeGame) {
+  readGameCommand(bridgeGame, result) {
     Console.readLine(`${INPUT.COMMAND}${OUTPUT.LINE}`, (command) => {
       const error = Check.hasCommand(command);
-      if (error) return this.readGameCommand(bridgeGame);
+      if (error) return this.readGameCommand(bridgeGame, result);
 
-      if (command === COMMAND.END) return bridgeGame.finish(RESULT.FAIL);
+      if (command === COMMAND.END) return OutputView.printResult(result.movingList, RESULT.FAIL, result.attempts);
       bridgeGame.retry();
       return this.readMoving(bridgeGame);
     });

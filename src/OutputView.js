@@ -27,6 +27,7 @@ const OutputView = {
     this.printMap(movingList);
     Console.print(OUTPUT.SUCCESS(result));
     Console.print(`${OUTPUT.ATTEMPTS(attempts)}`);
+    Console.close();
   },
 };
 
