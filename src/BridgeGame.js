@@ -59,6 +59,10 @@ class BridgeGame {
     return this.#trial;
   }
 
+  getUserLocation() {
+    return this.#userLocation;
+  }
+
   move(bridgeChoice) {
     //Validate.bridgeChoice(bridgeChoice);
     //this.#userLog.push(bridgeChoice);
