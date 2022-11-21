@@ -9,12 +9,13 @@ const BridgeSizeCheck = require("./Check/BridgeSizeCheck");
 const MoveCheck = require("./Check/MoveCheck");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
+const RetryQuitCheck = require("./Check/RetryQuitCheck");
 
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-   constructor() {
+  constructor() {
     this.bridgeGame = new BridgeGame();
   }
 
