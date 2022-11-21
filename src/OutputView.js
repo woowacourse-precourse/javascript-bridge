@@ -27,7 +27,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(game) {},
+  printResult(game) {
+    MissionUtils.Console.close();
+    MissionUtils.Console.print(MESSAGES.FINAL_RESULT);
+    this.printMap(game);
+    this.printSuccess(game);
+    this.printCount(game);
+  },
 
   getPrintCharacter(selectedDirection, success) {
     if (!selectedDirection) {
@@ -46,6 +52,20 @@ const OutputView = {
       line += this.getPrintCharacter(selectedDirection, success) + MAP.DIVIDER;
     });
     return line.slice(0, line.length - 3);
+  },
+
+  printSuccess(game) {
+    const successMsg = game.checkClear()
+      ? MESSAGES.GAME_SUCCESS
+      : MESSAGES.GAME_FAIL;
+
+    MissionUtils.Console.print(`${MESSAGES.GAME_RESULT}${successMsg}`);
+  },
+
+  printCount(game) {
+    const count = game.getCount();
+
+    MissionUtils.Console.print(`${MESSAGES.TOTAL_TRY}${count}`);
   },
 };
 
