@@ -13,6 +13,25 @@ class App {
   play() {
   }
 
+  /**
+   * 게임을 결과에 따라 반복 실행한다.
+   * @param {class} bridgeGame 다리 건너기 게임의 인스턴스
+   */
+  repeatGame(bridgeGame) {
+    if (bridgeGame.tempPosition === this.#size) {
+      this.endGame(bridgeGame, true);
+      return;
+    }
+    readMoving((direction) => {
+      printMap(
+        returnCheckedMap(bridgeGame.bridge,bridgeGame.tempPosition,bridgeGame.move(direction))
+      ),
+        bridgeGame.move(direction)
+          ? (bridgeGame.cross(), this.repeatGame(bridgeGame))
+          : this.restartGame(bridgeGame);
+    });
+  }
+
     /**
    * 게임을 재시작한다.
    * @param {class} bridgeGame 다리 건너기 게임의 인스턴스
