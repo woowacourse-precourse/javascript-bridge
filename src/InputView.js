@@ -15,90 +15,87 @@ const GameLogic = require("./utils/GameLogic");
  */
 
 const InputView = {
-  flow() {
-    const stepArray = [];
-    let count = 1;
-    let index = -1;
-    return this.readBridgeSize(stepArray, index, count);
+  start() {
+    let values = { stepArray: [], index: -1 };
+    let result = { upper: "", lower: "", count: 1 };
+    return this.readBridgeSize(values, result);
   },
 
-  readBridgeSize(stepArray, index, count) {
+  readBridgeSize(values, result) {
     Console.readLine(ASKS.BRIDGE_SIZE, (size) => {
       const resolved = Number(size);
       Check.bridgeLength(resolved);
 
-      this.readBridge(resolved, stepArray, index, count);
+      this.readBridge(resolved, values, result);
     });
   },
 
-  readBridge(resolved, stepArray, index, count) {
+  readBridge(resolved, values, result) {
     const bridge = BridgeMaker.makeBridge(resolved, RandomGenerator);
-    this.readMoving(resolved, bridge, stepArray, index, count);
+    this.readMoving(resolved, bridge, values, result);
   },
 
-  readMoving(bridgeSize, bridge, stepArray, index, count) {
-    if (index !== bridgeSize - 1) {
+  readMoving(bridgeSize, bridge, values, result) {
+    if (values.index !== bridgeSize - 1) {
       Console.readLine(ASKS.PLAYER_MOVING, (step) => {
         Check.moveFormat(step);
-        stepArray.push(step);
+        values.stepArray.push(step);
 
         //다리와 비교 로직
-        this.compare(bridgeSize, bridge, stepArray, index, count);
+        this.compare(bridgeSize, bridge, values, result);
 
         //맞으면 map print
         //틀려도 map 프린트
       });
     }
-    if (index === bridgeSize - 1) {
+
+    if (values.index === bridgeSize - 1) {
       //성공 로직
       console.log(
         "결과\n",
-        stepArray,
+        values.stepArray,
         "\n게임성공여부:성공",
         "\n시도횟수:",
-        count
+        result.count
       );
       Console.close();
     }
   },
 
-  compare(bridgeSize, bridge, stepArray, index, count) {
-    index++;
-    console.log(bridge, stepArray, count);
+  compare(bridgeSize, bridge, values, result) {
+    values.index++;
+    console.log(bridge, values.stepArray, result.count);
 
-    if (bridge[index] === stepArray[index]) {
-      this.readMoving(bridgeSize, bridge, stepArray, index, count);
+    if (bridge[values.index] === values.stepArray[values.index]) {
+      this.readMoving(bridgeSize, bridge, values, result);
     }
-    if (bridge[index] !== stepArray[index]) {
-      this.readGameCommand(bridgeSize, bridge, stepArray, index, count);
+
+    if (bridge[values.index] !== values.stepArray[values.index]) {
+      this.readGameCommand(bridgeSize, bridge, values, result);
     }
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand(bridgeSize, bridge, stepArray, index, count) {
+  readGameCommand(bridgeSize, bridge, values, result) {
     Console.readLine("\nRQ선택\n", (select) => {
       Check.selectFormat(select);
       if (select === "R") {
-        count++;
-        stepArray = [];
-        index = -1;
-        this.readMoving(bridgeSize, bridge, stepArray, index, count);
+        result.count++;
+        values.stepArray = [];
+        values.index = -1;
+        this.readMoving(bridgeSize, bridge, values, result);
       }
+
       if (select === "Q") {
         console.log(
           "결과\n",
-          stepArray,
+          values.stepArray,
           "\n게임성공여부:실패",
           "\n시도횟수:",
-          count
+          result.count
         );
         Console.close();
       }
     });
-    //유효성:
-    //R: 재시도의 경우:: 다시 게임시작 로직 띄움 -> BridgeGame: retry
   },
 };
 

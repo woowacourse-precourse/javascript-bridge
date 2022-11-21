@@ -12,7 +12,6 @@ const GameLogic = {
   },
 
   compare(bridge, stepArray, index) {
-
     console.log(bridge, stepArray, index);
     // BridgeMaker에서 가져오기: bridgeArray // 0100010
     // step() 과 비교

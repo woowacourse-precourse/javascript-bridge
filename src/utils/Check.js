@@ -1,8 +1,6 @@
 const { ABOUT } = require("../constants/Message");
 /**
- * 객체
- * 유효성 체크 기능
- * 코드 짜다가 검증 필요없는 validation 삭제하기
+ * 객체 - 유효성 체크 기능
  */
 
 const Check = {
