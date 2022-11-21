@@ -9,32 +9,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(userInputArray, bridgeInfoArray) {
-    const bridgeUpside = [];
-    const bridgeDownside = [];
+  printMap(userInputArray, bridgeInfoArray, bridgeUpside=[], bridgeDownside=[]) {
     const CurrentRound = userInputArray.length;
     this.addLeftBracket(bridgeUpside, bridgeDownside);
     for (let i = 0; i < CurrentRound; i++) {
-      if (bridgeInfoArray[i] === 1) {
-        if (userInputArray[i] === 1) {
-          bridgeUpside.push('O');
-          bridgeDownside.push('\u00A0');
-        }
-        if (userInputArray[i] === 0) {
-          bridgeUpside.push(`\u00A0`);
-          bridgeDownside.push('X');
-        }
-      }
-      if (bridgeInfoArray[i] === 0) {
-        if (userInputArray[i] === 1) {
-          bridgeUpside.push('X');
-          bridgeDownside.push('\u00A0');
-        }
-        if (userInputArray[i] === 0) {
-          bridgeUpside.push('\u00A0');
-          bridgeDownside.push('O');
-        }
-      }
+      this.getAllgameResult(bridgeUpside, bridgeDownside, userInputArray, bridgeInfoArray, i);
       this.addDivision(bridgeUpside, bridgeDownside);
     }
     this.deleteItem(bridgeUpside, bridgeDownside);
@@ -65,6 +44,34 @@ const OutputView = {
     upside.pop();
     downside.pop();
   },
+  getAllgameResult(userInputArray, bridgeInfoArray,upside, downside, count) {
+    this.getUpsideResult(userInputArray, bridgeInfoArray, upside, downside, count);
+    this.getDownsideResult(userInputArray, bridgeInfoArray, upside, downside, count);
+  },
+  getUpsideResult(userInputArray, bridgeInfoArray, upside, downside, count) {
+    if (bridgeInfoArray[count] === 1) {
+      if (userInputArray[count] === 1) {
+        upside.push('O');
+        downside.push('\u00A0');
+      }
+      if (userInputArray[count] === 0) {
+        upside.push(`\u00A0`);
+        downside.push('X');
+      }
+    }
+  },
+  getDownsideResult(userInputArray, bridgeInfoArray, upside, downside, count) {
+    if (bridgeInfoArray[count] === 0) {
+      if (userInputArray[count] === 1) {
+        upside.push('X');
+        downside.push('\u00A0');
+      }
+      if (userInputArray[count] === 0) {
+        upside.push('\u00A0');
+        downside.push('O');
+      }
+    }
+  }
 };
 
 module.exports = OutputView;
