@@ -1,9 +1,9 @@
-const { ERROR } = require('./Resource');
+const { ERROR, BRIDGE_LENGTH_MIN, BRIDGE_LENGTH_MAX } = require('./Resource');
 
 class BridgeValidator {
-  static checkInputBridgeLength(number, min, max) {
+  static checkInputBridgeLength(number) {
     this.isNumber(number);
-    this.#isCheckGap(number, min, max);
+    this.#isCheckGap(number, BRIDGE_LENGTH_MIN, BRIDGE_LENGTH_MAX);
   }
   static checkBridge(bridge, min, max) {
     this.#isArray(bridge);

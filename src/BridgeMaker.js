@@ -12,19 +12,23 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
     while (bridge.length < size) {
-      let position = '';
       const randomNumber = generateRandomNumber();
       BridgeValidator.isNumber(randomNumber);
 
-      if (randomNumber == 1) {
-        position = 'U';
-      } else if (randomNumber == 0) {
-        position = 'D';
-      }
-
+      const position = this.setPosition(randomNumber);
       bridge.push(position);
     }
     return bridge;
+  },
+
+  setPosition(randomNumber) {
+    let position = '';
+    if (randomNumber == 1) {
+      position = 'U';
+    } else if (randomNumber == 0) {
+      position = 'D';
+    }
+    return position;
   },
 };
 
