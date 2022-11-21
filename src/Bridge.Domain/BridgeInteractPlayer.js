@@ -28,10 +28,11 @@ class BridgeInteractPlayer {
       direction
     );
     //모양 출력
-    this.#bridgeGameShape
-      .getCurrentBridgeGameShape(bridgeArr, result)
-      .OutputResultMap();
-
+    OutputView.printResult(
+      this.#bridgeGameShape
+        .getCurrentBridgeGameShape(bridgeArr, result)
+        .getCurrentShape()
+    );
     this.playerGoBridgeNext(result, status);
     return;
   }

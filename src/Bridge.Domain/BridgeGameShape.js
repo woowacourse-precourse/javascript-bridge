@@ -57,11 +57,6 @@ class BridgeGameShape {
   getCurrentShape() {
     return this.#currentShape;
   }
-
-  OutputResultMap() {
-    OutputView.printMap(this.#currentShape);
-    return;
-  }
 }
 
 module.exports = BridgeGameShape;
