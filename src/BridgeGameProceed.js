@@ -29,7 +29,6 @@ class BridgeGameProceed {
             Console.print('');
             Validation.bridgeLength(bridgeLength);
             this.#winBridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
-            console.log(this.#winBridge);
             this.game();
         } catch (error) {
             Console.print(`${error.message}\n`);
