@@ -1,7 +1,7 @@
 const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const { RESULT } = require('./constant/constant');
+const { RESULT, PLAY } = require('./constant/constant');
 const { makeRandomNumber } = require('./utils/util');
 const BridgeGame = require('./BridgeGame');
 
@@ -73,6 +73,11 @@ class BridgeGamePlay {
     OutputView.printResult(map, RESULT.WIN, this.tryCount);
   }
 
+  loseGame() {
+    const map = OutputView.getMap(this.myMoves, this.bridge);
+    OutputView.printResult(map, RESULT.FAIL, this.tryCount);
+  }
+
   move() {
     const currentMove = InputView.getMoving();
     // const currentMove = this.bridgeGame.move();
@@ -83,7 +88,10 @@ class BridgeGamePlay {
       return;
     }
     if (!this.validateMove()) {
-      // X 나오면서 게임 끝
+      const gameCommand = InputView.getGameCommand();
+      if (gameCommand === PLAY.QUIT) {
+        this.loseGame();
+      }
       return;
     }
     this.move();
