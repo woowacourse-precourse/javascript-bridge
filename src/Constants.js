@@ -1,3 +1,6 @@
+const WRONG = 'X';
+const RIGHT = 'O';
+
 const MOVE = {
   up: 'U',
   down: 'D',
@@ -30,6 +33,8 @@ const GAME = {
 };
 
 module.exports = {
+  WRONG,
+  RIGHT,
   MOVE,
   MOVE_INDEX,
   INPUT,
