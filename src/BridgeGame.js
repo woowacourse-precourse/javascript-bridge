@@ -17,12 +17,15 @@ class BridgeGame {
 
   getBridge(bridge) {
     this.#bridges = bridge;
+    this.getSpace();
   }  
   
-  move() {
-    InputView.readMoving('이동할 칸을 선택해주세요.', (space) => {
-      Validation.checkSpace(space);
-    });
+  getSpace() {
+    this.gameManager.inputMovingSpace(this.move.bind(this));
+  }
+
+  move(space) {
+    console.log(space);
   }
 
 
