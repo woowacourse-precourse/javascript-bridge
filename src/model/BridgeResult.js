@@ -19,14 +19,20 @@ class BridgeResult {
     }, "[ ");
   }
 
-  makeCurrent(isPossibleMove, curPos, answer) {
-    if (isPossibleMove) {
-      if (answer === curPos) return "O ]";
-      return "  ]";
-    }
+  getAnswerWhenPossible(curPos, answer) {
+    if (answer === curPos) return "O ]";
+    return "  ]";
+  }
+
+  getAnswerWhenImPossible(curPos, answer) {
     if (answer === BRIDGE.DOWN && curPos === BRIDGE.UP) return "X ]";
     if (answer === BRIDGE.UP && curPos === BRIDGE.DOWN) return "X ]";
     return "  ]";
+  }
+
+  makeCurrent(isPossibleMove, curPos, answer) {
+    if (isPossibleMove) return this.getAnswerWhenPossible(curPos, answer);
+    return this.getAnswerWhenImPossible(curPos, answer);
   }
 
   printResult() {
