@@ -5,6 +5,14 @@ const OutputView = require("./View/OutputView");
 
 class App {
   play() {
+    try {
+      this.run();
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+    }
+  }
+
+  run() {
     this.showGreeting();
   }
 
@@ -45,13 +53,8 @@ class App {
   }
 
   showResult(isSuccess) {
-    console.log("최종 게임 결과");
-    OutputView.printMap(this.bridgeGame.progress.desc());
-    OutputView.printResult(isSuccess, this.bridgeGame.totalTrial);
+    OutputView.printResult(isSuccess, this.bridgeGame);
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
