@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { MESSAGES } = require("./constants");
+const { MESSAGES } = require("../constants");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.

@@ -1,6 +1,6 @@
 const BridgeGame = require("./BridgeGame");
 const BridgeSizeValidation = require("./validation/BridgeSizeValidation");
-const InputView = require("./InputView");
+const InputView = require("./views/InputView");
 const OutputView = require("./OutputView");
 const MovingValidation = require("./validation/MovingValidation");
 const { MESSAGES } = require("./constants");
