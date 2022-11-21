@@ -1,3 +1,34 @@
+# 디렉토리 구조
+```
+├── __test__
+│    ├── Validation
+│    │  ├─── BridgeTest.js
+│    │  ├─── ControlTest.js
+│    │  └─── MoveTest.js
+│    ├── ApplicationTest.js
+│    ├── BridgeGameTest.js
+│    └── ResultMakerTest.js
+├── docs
+│    └── README.md
+└── src
+     ├── Constant
+     │   └── constant.js
+     ├── Validation
+     │   ├─── BridgeValidation.js
+     │   ├─── ControlValidation.js
+     │   ├─── CustomError.js
+     │   └─── MoveValidation.js
+     ├── View
+     │   ├─── InputView.js
+     │   └─── OutputView.js
+     ├── App.js
+     ├── Bridge.js
+     ├── BridgeGame.js
+     ├── BridgeMaker.js
+     ├── BridgeRandomNumberGenerator.js
+     └── ResultMaker.js
+``` 
+
 # 기능명세
 
 1. [x] 다리 길이를 입력 받는 기능
