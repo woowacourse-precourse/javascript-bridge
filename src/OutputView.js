@@ -62,7 +62,7 @@ const OutputView = {
    * @returns {string[][]}
    */
   initializeMap(length) {
-    const side = new Array(length).fill(this.map.DEFAULT)
+    const side = Array(length).fill(this.map.DEFAULT)
 
     return [[...side], [...side]]
   },

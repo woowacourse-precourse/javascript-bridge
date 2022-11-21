@@ -57,7 +57,7 @@ const InputView = {
       this.bridgeLength.MAX < size
 
     if (isInValid) {
-      throw new Error(this.error.BRIDGE_SIZE)
+      throw Error(this.error.BRIDGE_SIZE)
     }
   },
 
@@ -85,7 +85,7 @@ const InputView = {
     const isInValid = !moveValues.includes(move)
 
     if (isInValid) {
-      throw new Error(this.error.MOVEMENT)
+      throw Error(this.error.MOVEMENT)
     }
   },
 
@@ -116,7 +116,7 @@ const InputView = {
     const isInValid = !optionKeys.includes(command)
 
     if (isInValid) {
-      throw new Error(this.error.COMMAND)
+      throw Error(this.error.COMMAND)
     }
   },
 
