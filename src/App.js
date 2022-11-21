@@ -3,6 +3,7 @@ const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const { COMMAND } = require('./utils/constructor');
 const { generate } = require('./BridgeRandomNumberGenerator');
+
 class App {
   #game
 
@@ -30,7 +31,7 @@ class App {
   checkRetry(result) {
     InputView.readGameCommand((command) => {
       if (command === COMMAND.QUIT) {
-        return OutputView.printResult(result)
+        return OutputView.printResult(result);
       }
       return this.retryGame();
     });
