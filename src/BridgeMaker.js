@@ -3,7 +3,7 @@ const { DOWNSIDE_SYMBOL_NUM, DOWNSIDE_SYMBOL, UPSIDE_SYMBOL } = require('./const
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size }, () => {
-      const randomNum = Number(generateRandomNumber());
+      const randomNum = generateRandomNumber();
 
       if (randomNum === DOWNSIDE_SYMBOL_NUM) return DOWNSIDE_SYMBOL;
 
