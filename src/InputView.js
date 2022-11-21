@@ -69,10 +69,11 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(MESSAGE.end, (command) => {
-      this.validate(command.TYPE.end);
+      this.validate(command, TYPE.end);
       switch (command) {
         case "R":
           bridgeGame.retry();
+          this.readMoving();
           break;
         case "Q":
           OutPutView.printResult(bridgeGame);
