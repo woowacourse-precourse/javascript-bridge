@@ -13,13 +13,13 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    * 
    * 성공, 실패 여부를 배열에 저장한다.
-   * EX) ['success', 'success', 'fail']
+   * EX) ['U', 'D', 'fail']
    */
   move(movingInfo) {
     const compareIndex = this.result.length;
 
     if (this.bridge[compareIndex] === movingInfo) {
-      this.result.push('success');
+      this.result.push(movingInfo);
       return true;
     } 
       
