@@ -10,8 +10,14 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine('다리의 길이를 입력해주세요.', (size) => {
+      this.validateBridge(size);
       BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate());
     })
+  },
+
+  validateBridge(size) {
+    if (size < 3 || size > 20)
+      throw Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
   },
 
   /**

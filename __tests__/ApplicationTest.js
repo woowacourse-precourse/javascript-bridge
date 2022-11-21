@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
+const InputView = require("../src/InputView");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -61,6 +62,16 @@ describe("다리 건너기 테스트", () => {
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
     expect(bridge).toEqual(["U", "D", "D"]);
   });
+
+  ['-10', '2', '21', '100'].map((testSize) => {
+    test("다리 길이 예외 테스트", () => {
+      mockQuestions([testSize]);
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow("[ERROR]");
+    });
+  })
 
   // test("기능 테스트", () => {
   //   const logSpy = getLogSpy();
