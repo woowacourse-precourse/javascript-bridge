@@ -1,11 +1,13 @@
 const { CHOICE } = require('../constants');
 const GameCtrl = require('./GameCtrl');
+const Validation = require('../validation');
 
 const BridgeGame = class extends GameCtrl {
   constructor(view, model) {
     super();
     this.view = view;
     this.model = model;
+    this.validation = new Validation();
   }
 
   start() {
@@ -18,7 +20,7 @@ const BridgeGame = class extends GameCtrl {
       bridgeSize = parseInt(bridgeSize);
 
       const { errorHandler, successHandler } = this.#defineGameProcessHandlers(bridgeSize);
-      this.model.validateBridgeSize({ bridgeSize, errorHandler, successHandler });
+      this.validation.validateBridgeSize({ bridgeSize, errorHandler, successHandler });
     });
   }
 
@@ -39,7 +41,7 @@ const BridgeGame = class extends GameCtrl {
   #getUserCommand() {
     this.view.readMoving((command) => {
       const { errorHandler, successHandler } = this.#defineGetUserCommandHandlers(command);
-      this.model.validateBridgeCommand({ command, errorHandler, successHandler });
+      this.validation.validateBridgeCommand({ command, errorHandler, successHandler });
     });
   }
 
@@ -74,7 +76,7 @@ const BridgeGame = class extends GameCtrl {
         isGameSuccess,
       });
 
-      this.model.validateBridgeReplayCommand({ replayCommand, errorHandler, successHandler });
+      this.validation.validateBridgeReplayCommand({ replayCommand, errorHandler, successHandler });
     });
   }
 

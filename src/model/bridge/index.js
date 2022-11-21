@@ -1,6 +1,4 @@
 const GameModel = require('../GameModel');
-const ErrorBoundary = require('../../error/ErrorBoundary');
-const { SizeValidation, CommandValidation, ReplayValidation } = require('../../validation');
 const { makeBridge } = require('../../BridgeMaker');
 const { generate } = require('../../BridgeRandomNumberGenerator');
 const BridgeMap = require('./BridgeMap');
@@ -14,7 +12,6 @@ const BridgeModel = class extends GameModel {
 
   constructor() {
     super();
-    this.errorBoundary = new ErrorBoundary();
   }
 
   createBridge(bridgeSize) {
@@ -60,34 +57,6 @@ const BridgeModel = class extends GameModel {
     const { is_success, success, fail } = GAME_MESSAGE;
     const gameResult = isGameSuccess ? success : fail;
     return is_success + gameResult;
-  }
-
-  validateUserInput(callbackFuncs) {
-    this.errorBoundary.validateInput(callbackFuncs);
-  }
-
-  validateBridgeSize({ bridgeSize, errorHandler, successHandler }) {
-    this.validateUserInput({
-      validateValueCallback: () => new SizeValidation().validate(bridgeSize),
-      errorHandler,
-      successHandler,
-    });
-  }
-
-  validateBridgeCommand({ command, errorHandler, successHandler }) {
-    this.validateUserInput({
-      validateValueCallback: () => new CommandValidation().validate(command),
-      errorHandler,
-      successHandler,
-    });
-  }
-
-  validateBridgeReplayCommand({ replayCommand, errorHandler, successHandler }) {
-    this.validateUserInput({
-      validateValueCallback: () => new ReplayValidation().validate(replayCommand),
-      errorHandler,
-      successHandler,
-    });
   }
 };
 
