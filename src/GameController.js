@@ -4,6 +4,7 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const MovingValidation = require("./validation/MovingValidation");
 const { MESSAGES } = require("./constants");
+const TraceMaker = require("./utils/TraceMaker");
 
 class GameController {
   #bridgeGame;
@@ -47,7 +48,8 @@ class GameController {
   }
 
   printTrace() {
-    this.#bridgeGame.makeTrace(this.#selectedPath);
+    const trace = this.#bridgeGame.move(this.#selectedPath);
+    TraceMaker.printTrace(trace);
   }
 }
 

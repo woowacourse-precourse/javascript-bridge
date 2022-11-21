@@ -3,17 +3,18 @@
 const BridgeMaker = require("./utils/BridgeMaker");
 const BridgeRandomNumberGenerator = require("./utils/BridgeRandomNumberGenerator");
 const { UP_AND_DOWN, TRACE_MARKS } = require("./constants");
+const TraceMaker = require("./utils/TraceMaker");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
   #selectedPathLog;
-  #trace;
+  #currentTrace;
 
   constructor() {
     this.#selectedPathLog = [];
-    this.#trace = [[], []];
+    this.#currentTrace = [[], []];
   }
 
   saveBridge(bridgeSize) {
@@ -26,23 +27,17 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  makeTrace(selectedPath) {
+  move(selectedPath) {
     this.#selectedPathLog.push(selectedPath);
-    const index = this.#selectedPathLog.length - 1;
-    const correctionMark =
-      selectedPath === this.#bridge[index]
-        ? TRACE_MARKS.CORRECT
-        : TRACE_MARKS.INCORRECT;
-    this.#trace[0].push(
-      selectedPath === UP_AND_DOWN[1] ? correctionMark : TRACE_MARKS.BLANK
+    const trace = TraceMaker.makeTrace(
+      selectedPath,
+      this.#selectedPathLog,
+      this.#bridge,
+      this.#currentTrace
     );
-    this.#trace[1].push(
-      selectedPath === UP_AND_DOWN[0] ? correctionMark : TRACE_MARKS.BLANK
-    );
-    console.log(this.#trace);
+    this.#currentTrace = trace;
+    return trace;
   }
-
-  move() {}
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
