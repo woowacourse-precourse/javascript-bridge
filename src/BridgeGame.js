@@ -11,6 +11,14 @@ class BridgeGame {
     this.turn = 0;
   }
 
+  getBridge() {
+    return this.bridge;
+  }
+
+  getTurn() {
+    return this.turn;
+  }
+
   move(moving) {
     this.handleMovingException(moving);
 
