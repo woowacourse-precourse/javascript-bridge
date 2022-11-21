@@ -29,9 +29,7 @@ class App {
     try {
       const isPossible = this.game.move(direction);
       const isEnd = this.game.isEnd();
-      if (!isEnd && isPossible) this.movePlayer();
-      if (!isPossible) this.gameEndControl();
-      if (isEnd && isPossible) this.gameEnd(true);
+      this.decideNextAction(isEnd, isPossible);
     } catch (err) {
       OutputView.printError(err.message);
       this.movePlayer();
@@ -58,6 +56,12 @@ class App {
 
   gameEndControl() {
     InputView.readGameCommand(this.gameEndControlCallback);
+  }
+
+  decideNextAction(isEnd, isPossible) {
+    if (!isEnd && isPossible) this.movePlayer();
+    if (!isPossible) this.gameEndControl();
+    if (isEnd && isPossible) this.gameEnd(true);
   }
 
   decideCommand(command) {
