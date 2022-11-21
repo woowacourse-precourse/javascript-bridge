@@ -47,6 +47,31 @@ class BridgeGame {
   }
 
   /**
+   * 다리를 건너다 실패했는지 확인하는 메서드
+   */
+  isFailed() {
+    const index = this.#movings.length - 1;
+    if (this.#bridge[index] === this.#movings[index]) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * 다리를 성공적으로 건넜는지 확인하는 메서드
+   */
+  isFinished() {
+    const index = this.#movings.length - 1;
+    if (
+      this.#bridge.length === this.#movings.length
+      && this.#bridge[index] === this.#movings[index]
+    ) {
+      return true;
+    }
+    return true;
+  }
+
+  /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
