@@ -1,6 +1,3 @@
-const SUCCESS = '성공';
-const FAILURE = '실패';
-
 const BRIDGE = Object({
   front: '[ ',
   correct: 'O',
@@ -10,4 +7,4 @@ const BRIDGE = Object({
   back: ' ]',
 });
 
-module.exports = { SUCCESS, FAILURE, BRIDGE };
+module.exports = { BRIDGE };
