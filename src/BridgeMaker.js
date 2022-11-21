@@ -6,6 +6,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
     BridgeMaker의 파일 경로는 변경할 수 없다.
     BridgeMaker의 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
  */
+
+const {UP_MOVING, DOWN_MOVING} = require("./Constant");
+
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -14,7 +17,6 @@ const BridgeMaker = {
    */
   makeBridge(bridgeSize, generateRandomNumber) {
     const bridgeStyle = [];
-    const [UP_MOVING, DOWN_MOVING] = ["U", "D"];
 
     for (let step = 0; step < bridgeSize; step++) {
       const randomNumber = Number(generateRandomNumber());
@@ -22,7 +24,7 @@ const BridgeMaker = {
         ? bridgeStyle.push(DOWN_MOVING)
         : bridgeStyle.push(UP_MOVING);
     }
-    console.log(bridgeStyle);
+    
     return bridgeStyle;
   },
 };

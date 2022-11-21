@@ -40,7 +40,6 @@ class BridgeGame {
         termination = !this.retry();
       }
     }
-
     OutputView.printResult(this.#bridge, userMoving, this.#tryCount);
   }
 

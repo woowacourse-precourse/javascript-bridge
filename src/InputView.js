@@ -8,18 +8,17 @@ const ValidCheck = require("./ValidCheck");
     InputView의 메서드의 인자는 변경할 수 있다.
     사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
  */
+const { VALID_CHECK_DO } = require("./Constant");
+
 const InputView = {
-  VALID_CHECK_ERROR: -1,
-  VALID_CHECK_DO: 0,
-  VALID_CHECK_PASS: 1,
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
     let bridgeSize = undefined;
-    let flagValid = InputView.VALID_CHECK_DO;
+    let flagValid = VALID_CHECK_DO;
 
-    while (flagValid === InputView.VALID_CHECK_DO) {
+    while (flagValid === VALID_CHECK_DO) {
       bridgeSize = InputView.receiveSize();
       flagValid = ValidCheck.validBridgeSize(bridgeSize);
       ValidCheck.raiseError(flagValid);
@@ -46,9 +45,9 @@ const InputView = {
    */
   readMoving() {
     let moving = undefined;
-    let flagValid = InputView.VALID_CHECK_DO;
+    let flagValid = VALID_CHECK_DO;
 
-    while (flagValid === InputView.VALID_CHECK_DO) {
+    while (flagValid === VALID_CHECK_DO) {
       moving = InputView.receiveMoving();
       flagValid = ValidCheck.validMoving(moving);
       ValidCheck.raiseError(flagValid);
@@ -73,9 +72,9 @@ const InputView = {
    */
   readGameCommand() {
     let readGameCommand = undefined;
-    let flagValid = InputView.VALID_CHECK_DO;
+    let flagValid = VALID_CHECK_DO;
 
-    while (flagValid === InputView.VALID_CHECK_DO) {
+    while (flagValid === VALID_CHECK_DO) {
       readGameCommand = InputView.receiveReadGameCommand();
       flagValid = ValidCheck.validReadGameCommand(readGameCommand);
       ValidCheck.raiseError(flagValid);
