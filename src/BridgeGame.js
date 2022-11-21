@@ -3,6 +3,7 @@
  */
 class BridgeGame {
   #bridge;
+  #userBridge;
 
   constructor(bridge) {
     this.#bridge = bridge;
@@ -10,6 +11,8 @@ class BridgeGame {
       U: [],
       D: [],
     };
+    this.retryCount = 1;
+    this.bridgeStep = 0;
     this.isFinish = false;
   }
 
@@ -40,6 +43,11 @@ class BridgeGame {
 
     this.setUserBridge(command, isLoss);
     this.bridgeStep++;
+  }
+
+  isVictory() {
+    if (this.bridgeStep === this.#bridge.length) return true;
+    return false;
   }
 
   /**

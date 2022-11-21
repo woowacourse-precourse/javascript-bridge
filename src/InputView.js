@@ -33,6 +33,13 @@ const InputView = {
       isInvalidMoving(input) && this.readMoving(bridgeGame);
       bridgeGame.move(input);
       printMap(bridgeGame.getUserBridge());
+
+      if (bridgeGame.isVictory()) {
+        printResult(bridgeGame);
+        Console.close();
+        return;
+      }
+      InputView.readMoving(bridgeGame);
     });
   },
 
