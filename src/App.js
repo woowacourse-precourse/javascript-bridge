@@ -2,6 +2,7 @@ const { printStartingMessage } = require("./OutputView");
 const { readBridgeSize } = require("./InputView");
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
+const { readMoving } = require("./InputView");
 
 class App {
   play() {
@@ -15,7 +16,7 @@ class App {
   }
 
   runGame(bridgeGame) {
-    InputView.readMoving(this, bridgeGame);
+    readMoving(this, bridgeGame);
   }
 
   terminate() {
