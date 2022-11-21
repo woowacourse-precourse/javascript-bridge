@@ -31,9 +31,13 @@ class BridgeGame {
   }
 
   handleMovingException(moving) {
-    switch (false) {
-      case [GAME.UP, GAME.DOWN].includes(moving):
-        Exception.throwError(EXCEPTION_MESSAGE.MOVING.CHARACTER);
+    try {
+      switch (false) {
+        case [GAME.UP, GAME.DOWN].includes(moving):
+          Exception.throwError(EXCEPTION_MESSAGE.MOVING.CHARACTER);
+      }
+    } catch (e) {
+      Exception.printError(e.message);
     }
   }
 
@@ -48,12 +52,31 @@ class BridgeGame {
 
     return false;
   }
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+
+  retry(command) {
+    try {
+      switch (false) {
+        case [GAME.RESTART, GAME.QUIT].includes(command):
+          Exception.throwError(EXCEPTION_MESSAGE.RETRY);
+      }
+    } catch (e) {
+      Exception.printError(e.message);
+    }
+
+    if (this.isCommandContinue(command)) {
+      this.turn = 0;
+      return true;
+    }
+
+    return false;
+  }
+
+  isCommandContinue(command) {
+    if (command === GAME.RESTART) {
+      return true;
+    }
+    return false;
+  }
 }
 
 module.exports = BridgeGame;

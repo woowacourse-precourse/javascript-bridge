@@ -21,13 +21,8 @@ class App {
     let turnSuccess;
     while (isContinue) {
       count += 1;
-
       turnSuccess = this.excuteGame(bridgeGame);
-      isContinue = false;
-
-      if (!turnSuccess) {
-        isContinue = this.getIsContinue(InputView.readGameCommand());
-      }
+      isContinue = bridgeGame.retry(InputView.readGameCommand());
     }
     OutputView.printResult(
       bridgeGame.getBridge(),
@@ -39,10 +34,10 @@ class App {
 
   excuteGame(bridgeGame) {
     let turnSuccess = true;
-    const bridge = bridgeGame.getBridge();
-    const turn = bridgeGame.getTurn();
-
-    while (turn < bridge.length && turnSuccess) {
+    while (
+      bridgeGame.getTurn() < bridgeGame.getBridge().length &&
+      turnSuccess
+    ) {
       turnSuccess = this.executeTurn(bridgeGame);
 
       OutputView.printMap(
@@ -59,13 +54,6 @@ class App {
     const turnSuccess = bridgeGame.move(moving);
 
     return turnSuccess;
-  }
-
-  getIsContinue(command) {
-    if (command === GAME.RESTART) {
-      return true;
-    }
-    return false;
   }
 }
 
