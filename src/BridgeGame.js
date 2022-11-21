@@ -66,7 +66,10 @@ class BridgeGame {
     for (let i = 0; i < userDirectionInput.length; i++) {
       this.checkUpDown(userDirectionInput[i], upArray, downArray);
     }
-    this.#bridgeGameController.outputMap(upArray, downArray);
+    this.#resultMap = `[ ${upArray.join(" | ")} ]\n[ ${downArray.join(
+      " | "
+    )} ]`;
+    this.#bridgeGameController.outputMap(this.#resultMap);
   }
 
   checkUpDown(input, upArray, downArray) {
