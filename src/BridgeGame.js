@@ -10,16 +10,15 @@ const Validator = require('./Validator');
  */
 class BridgeGame {
   static #instance;
+
   #bridge;
 
   constructor() {
-    if (BridgeGame.#instance) return BridgeGame.#instance;
     this.checkLengthValidate();
-    BridgeGame.#instance = this;
   }
 
   checkLengthValidate() {
-    InputView.readBridgeSize(length => {
+    InputView.readBridgeSize((length) => {
       if (!Validator.validateBridgeLength(length)) {
         this.checkLengthValidate();
         return;
@@ -28,7 +27,12 @@ class BridgeGame {
         length,
         BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate),
       );
+      this.play(length);
     });
+  }
+
+  play(length) {
+    this.move(0, length);
   }
 
   /**
@@ -36,7 +40,14 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move(index, length) {
+    InputView.readMoving((direction) => {
+      this.#bridge.checkCorrectDirection(direction, index);
+
+      if (index === length - 1) { IO.close(); return; }
+      this.move(index + 1, length);
+    });
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

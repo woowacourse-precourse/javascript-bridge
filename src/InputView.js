@@ -12,15 +12,15 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    IO.input(MESSAGE.INPUT_BRIDGE_SIZE, length => {
-      callback(length);
-    });
+    IO.input(MESSAGE.INPUT_BRIDGE_SIZE, (length) => callback(length));
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(callback) {
+    IO.input(MESSAGE.MOVE_DIRECTION, (direction) => callback(direction));
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
