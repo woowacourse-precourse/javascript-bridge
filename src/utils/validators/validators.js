@@ -1,4 +1,5 @@
 const { MESSAGES, ALLOWED_CHAR } = require("../../constraints/constarints");
+const { Console } = require("@woowacourse/mission-utils");
 const isInteger = Number.isInteger;
 
 /**
@@ -11,7 +12,8 @@ const validateBridgeSizeInput = (input) => {
   if (input.length > 2)
     throw new Error(MESSAGES.EXCEPTIONS.BRIDGE.COUNT_EXCEPTION);
   if (isNaN(convertedInput) || !isInteger(convertedInput))
-    throw new Error(MESSAGES.EXCEPTIONS.BRIDGE.TYPE_EXCEPTION);
+    // throw new Error(MESSAGES.EXCEPTIONS.BRIDGE.TYPE_EXCEPTION);
+    Console.print(MESSAGES.EXCEPTIONS.BRIDGE.TYPE_EXCEPTION);
   if (convertedInput < 3 || convertedInput > 20)
     throw new Error(MESSAGES.EXCEPTIONS.BRIDGE.RANGE_EXCEPTION);
   return true;
