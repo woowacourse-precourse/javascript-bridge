@@ -15,12 +15,13 @@ const MESSAGE = {
 const TYPE = {
   length: "LENGTH",
   move: "MOVE",
-  END: "END",
+  end: "END",
 };
 
 const ERROR_MESSAGE = {
   outOfRange: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
   moveCommand: "[ERROR] 이동은 'U' 와 'D'로 가능합니다. ",
+  endCommand: "[ERROR] 재시도 는 'R' 종료는 'Q'로 가능합니다. ",
 };
 
 const InputView = {
@@ -36,6 +37,7 @@ const InputView = {
         if (command !== "U" && command !== "D") throw new Error(ERROR_MESSAGE.moveCommand);
         break;
       case "END":
+        if (command !== "R" && command !== "Q") throw new Error(ERROR_MESSAGE.endCommand);
         break;
     }
   },
@@ -58,14 +60,27 @@ const InputView = {
       this.validate(command, TYPE.move);
       bridgeGame.move(command);
       OutPutView.printMap(bridgeGame.upperBridge, bridgeGame.lowerBridge);
-      bridgeGame.isSuccess() ? this.readMoving() : this.readGameCommand();
+      bridgeGame.isSuccess ? this.readMoving() : this.readGameCommand();
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(MESSAGE.end, (command) => {
+      this.validate(command.TYPE.end);
+      switch (command) {
+        case "R":
+          bridgeGame.retry();
+          break;
+        case "Q":
+          OutPutView.printResult(bridgeGame);
+          Console.close();
+          break;
+      }
+    });
+  },
 };
 
 module.exports = InputView;

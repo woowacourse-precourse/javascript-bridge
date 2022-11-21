@@ -1,12 +1,20 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
+
+const RESULT = {
+  success: " O ",
+  fail: " X ",
+  empty: "   ",
+};
+
 class BridgeGame {
   constructor() {
     this.randomBridge;
     this.upperBridge = [];
     this.lowerBridge = [];
     this.count = 1;
+    this.isSuccess = true;
   }
 
   makeBridge(number) {
@@ -19,36 +27,31 @@ class BridgeGame {
    */
   move(command) {
     if (this.randomBridge[this.count] === command) {
+      this.isSuccess = true;
       switch (command) {
         case "U":
-          this.upperBridge.push("O");
-          this.lowerBridge.push(" ");
+          this.upperBridge.push(RESULT.success);
+          this.lowerBridge.push(RESULT.empty);
           break;
         case "D":
-          this.upperBridge.push(" ");
-          this.lowerBridge.push("O");
+          this.upperBridge.push(RESULT.empty);
+          this.lowerBridge.push(RESULT.success);
           break;
       }
     } else {
+      this.isSuccess = false;
       switch (command) {
         case "U":
-          this.upperBridge.push("X");
-          this.lowerBridge.push(" ");
+          this.upperBridge.push(RESULT.fail);
+          this.lowerBridge.push(RESULT.empty);
           break;
         case "D":
-          this.upperBridge.push(" ");
-          this.lowerBridge.push("X");
+          this.upperBridge.push(RESULT.empty);
+          this.lowerBridge.push(RESULT.fail);
           break;
       }
     }
     this.count++;
-  }
-
-  isSuccess() {
-    if (this.lowerBridge[this.count - 1] === "X" || this.upperBridge[this.count - 1] === "X") {
-      return false;
-    }
-    return true;
   }
 
   /**
