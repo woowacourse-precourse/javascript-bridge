@@ -31,20 +31,20 @@ class Bridge {
   }
 
   moveUpside(direction, index) {
-    if (direction === this.#originalBridge[index]) {
+    if (direction === this.moveOkPosition(index)) {
       this.#upsideBridge.push(Constant.DIRECTION.POSSIBLE);
     }
-    if (direction !== this.#originalBridge[index]) {
+    if (direction !== this.moveOkPosition(index)) {
       this.#upsideBridge.push(Constant.DIRECTION.IMPOSSIBLE);
     }
     this.moveOthersideEmpty(direction);
   }
 
   moveDownside(direction, index) {
-    if (direction === this.#originalBridge[index]) {
+    if (direction === this.moveOkPosition(index)) {
       this.#downsideBridge.push(Constant.DIRECTION.POSSIBLE);
     }
-    if (direction !== this.#originalBridge[index]) {
+    if (direction !== this.moveOkPosition(index)) {
       this.#downsideBridge.push(Constant.DIRECTION.IMPOSSIBLE);
     }
     this.moveOthersideEmpty(direction);
@@ -69,6 +69,10 @@ class Bridge {
     const lengthOrigin = this.#originalBridge.length;
     const lengthAnother = this.#upsideBridge.length;
     return lengthOrigin === lengthAnother;
+  }
+
+  moveOkPosition(index){
+    return this.#originalBridge[index]
   }
 }
 
