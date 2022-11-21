@@ -43,7 +43,8 @@ class Bridge {
 
   drawResultMap(go, result) {
     const STEP = this.#step - 1;
-    this.map.drawNowMapWithResult(go, STEP, this.#tries, result);
+    const RESULT = { tries: this.#tries, status: result };
+    this.map.drawNowMapWithResult(go, STEP, RESULT);
   }
 
   resetStep() {

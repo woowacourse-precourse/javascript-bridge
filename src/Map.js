@@ -65,8 +65,8 @@ class Map {
     OutputView.printMap(this.makeNowMap(go, step));
   }
 
-  drawNowMapWithResult(go, step, tries, result) {
-    OutputView.printResult(this.makeNowMap(go, step), tries, result);
+  drawNowMapWithResult(go, step, result) {
+    OutputView.printResult(this.makeNowMap(go, step), result);
   }
 }
 

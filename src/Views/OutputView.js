@@ -8,11 +8,8 @@ const OutputView = {
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   * @param {string[]} position 현재까지 이동한 다리의 상태
-   * @param {string}
    */
   printMap(nowMap) {
-    // Console.print(nowMap[1]);
     const [downArray, upArray] = nowMap;
     Console.print(`[ ${upArray.join(' | ')} ]`);
     Console.print(`[ ${downArray.join(' | ')} ]\n`);
@@ -24,11 +21,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(finalMap, tries, result) {
+  printResult(finalMap, result) {
     Console.print('최종 게임 결과');
     this.printMap(finalMap);
-    Console.print(`게임 성공 여부: ${result}`);
-    Console.print(`총 시도한 횟수: ${tries}`);
+    Console.print(
+      `게임 성공 여부: ${result.status}\n총 시도한 횟수: ${result.tries}`
+    );
+    Console.close();
   },
 
   /**
