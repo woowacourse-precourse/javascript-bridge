@@ -14,7 +14,7 @@ class BridgeSize {
   }
 
   getBridgeSize() {
-    return this.#bridgeSize;
+    return parseInt(this.#bridgeSize, 10);
   }
 }
 
