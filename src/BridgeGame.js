@@ -70,6 +70,7 @@ class BridgeGame {
    */
   move = (command) => {
     // TODO: command확인
+    this.bridgeValidator.isValidMoveCommand(command);
     this.setMovedData(command);
 
     if (!this.detectIsMovable(command) || this.detectIsGameClear()) {
