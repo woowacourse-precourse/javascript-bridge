@@ -22,7 +22,6 @@ class BridgeGame {
 
   move(movingStep) {
     this.state = this.correctBridge[this.currentStep] === movingStep;
-
     if (this.state) this.drawBridge(movingStep, BRIDGE_SHAPE.SUCCESS);
     else this.drawBridge(movingStep, BRIDGE_SHAPE.FAILURE);
 
@@ -30,7 +29,7 @@ class BridgeGame {
     OutputView.printMap(this.upLineOfBridge, this.downLineOfBridge);
 
     if (!this.state) return InputView.readGameCommand(this);
-    if (this.currentStep === this.bridgeSize) return OutputView.printResult(this.upLineOfBridge, this.downLineOfBridge, SUCCESS_WORD, this.try); //최종 게임 결과 출력
+    if (this.currentStep === this.bridgeSize) return OutputView.printResult(this.upLineOfBridge, this.downLineOfBridge, SUCCESS_WORD, this.try);
     return InputView.readMoving(this);
   }
 
