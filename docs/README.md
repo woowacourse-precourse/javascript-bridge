@@ -91,13 +91,6 @@ GameController를 초기화하고 게임을 시작하는 클래스
 Bridge 클래스와 메세지를 주고 받으며 사용자 입력값에 대한 동작을 수행
 ```
 
-### Builder
-
-```
-게임에 필요한 다리를 만드는 클래스
-이 곳에서 BridgeMaker 객체의 도움을 받아 다리를 생성
-```
-
 ### Bridge
 
 ```
@@ -123,10 +116,8 @@ GameController 클래스의 입력값 전달 전 단계에 실행하여
 
 ## 테스트 코드 🔍
 
-- [x] Builder 클래스 테스트 완료
-- [x] BridgeMaker 객체 테스트 완료
-- [x] Validation 클래스 테스트 완료
-- [x] BridgeGame 클래스 테스트 완료
-- [x] Bridge 클래스 테스트 완료
-
 - [x] `Application 테스트 완료`
+- [x] BridgeGame 클래스 테스트 완료
+- [x] BridgeMaker 객체 테스트 완료
+- [x] Bridge 클래스 테스트 완료
+- [x] Validation 클래스 테스트 완료
