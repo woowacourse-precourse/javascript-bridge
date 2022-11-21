@@ -211,7 +211,7 @@ describe('이동 입력 예외 테스트', () => {
 describe('다리 건너기 맵 출력 테스트', () => {
   test('라운드 별 결과 확인하는 경우', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['0', '0', '1']);
+    mockRandoms([0, 0, 1]);
     mockQuestions(['3', 'D', 'D', 'U']);
 
     const app = new App();
@@ -233,7 +233,7 @@ describe('다리 건너기 맵 출력 테스트', () => {
 
   test('마지막 라운드 출력만 확인 - 끝까지 도달한 경우', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1', '1', '0', '1', '1', '0', '1', '1']);
+    mockRandoms([1, 0, 1, 1, 0, 1, 1, 0, 1, 1]);
     mockQuestions(['10', 'U', 'D', 'U', 'U', 'D', 'U', 'U', 'D', 'U', 'U']);
 
     const app = new App();
@@ -249,7 +249,7 @@ describe('다리 건너기 맵 출력 테스트', () => {
 
   test('마지막 라운드 출력만 확인 - 중간에 틀린 경우', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1', '0', '1', '1', '1']);
+    mockRandoms([1, 0, 1, 0, 1, 1, 1]);
     mockQuestions(['7', 'U', 'D', 'U', 'D', 'U', 'D']);
 
     const app = new App();
@@ -267,7 +267,7 @@ describe('다리 건너기 맵 출력 테스트', () => {
 describe('다리 건너기 결과 출력 테스트 (재시작X)', () => {
   test('다리를 끝까지 건넌 경우 (다리 길이 20)', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['0', '0', '1', '0', '0', '1', '0', '0', '1', '0', '0', '1', '0', '0', '1', '0', '0', '1', '0', '0']);
+    mockRandoms([0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0]);
     mockQuestions(['20', 'D', 'D', 'U', 'D', 'D', 'U', 'D', 'D', 'U', 'D', 'D', 'U', 'D', 'D', 'U', 'D', 'D', 'U', 'D', 'D']);
 
     const app = new App();
@@ -286,7 +286,7 @@ describe('다리 건너기 결과 출력 테스트 (재시작X)', () => {
 
   test('다리를 건너다 실패한 경우', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['0', '0', '1', '0', '0', '1']);
+    mockRandoms([0, 0, 1, 0, 0, 1]);
     mockQuestions(['6', 'D', 'D', 'U', 'D', 'U', 'Q']);
 
     const app = new App();
@@ -357,7 +357,7 @@ describe('재시작/종료 입력 예외 테스트', () => {
 describe('다리 건너기 결과 출력 테스트 (재시작O)', () => {
   test('재시작 1번 후 실패한 경우', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['0', '0', '1']);
+    mockRandoms([0, 0, 1]);
     mockQuestions(['3', 'U', 'R', 'D', 'U', 'Q']);
 
     const app = new App();
@@ -383,7 +383,7 @@ describe('다리 건너기 결과 출력 테스트 (재시작O)', () => {
 
   test('재시작 2번 후 성공한 경우', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['0', '0', '1']);
+    mockRandoms([0, 0, 1]);
     mockQuestions(['3', 'U', 'R', 'D', 'U', 'R', 'D', 'D', 'U']);
 
     const app = new App();
