@@ -1,8 +1,8 @@
 const validateBridgeSize = (size) => {
-  if (3 > size || size > 20) {
-    const MESSAGE = '다리 길이는 3부터 20 사이의 숫자여야 합니다.';
-    throw MESSAGE;
-  }
+  const NOT_NUM = '숫자로 입력해주세요.';
+  const MESSAGE = '다리 길이는 3부터 20 사이의 숫자여야 합니다.';
+  if (!Number(size)) throw NOT_NUM;
+  if (3 > size || size > 20) throw MESSAGE;
   return true;
 };
 
