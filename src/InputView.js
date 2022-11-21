@@ -59,21 +59,21 @@ const InputView = {
    */
   readMoving({ getNextGameStatus, setNextGameStatus }) {
     MissionUtils.Console.readLine(`${this.query.MOVEMENT}\n`, (input) => {
-      const movement = input.trim()
+      const move = input.trim()
 
-      this.validateMovement(movement)
+      this.validateMove(move)
 
-      const gameStatus = getNextGameStatus(movement)
+      const gameStatus = getNextGameStatus(move)
       setNextGameStatus(gameStatus)
     })
   },
 
   /**
-   * @param {string} movement
+   * @param {string} move
    */
-  validateMovement(movement) {
-    const movementValues = Object.values(step)
-    const isInValid = !movementValues.includes(movement)
+  validateMove(move) {
+    const moveValues = Object.values(step)
+    const isInValid = !moveValues.includes(move)
 
     if (isInValid) {
       throw new Error(this.error.MOVEMENT)
