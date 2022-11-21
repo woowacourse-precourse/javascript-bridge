@@ -13,8 +13,8 @@ const InputView = {
   
   readBridgeSize() {
     Console.readLine(`${COMMAND.INPUT}`,(bridgeSize) => {
-      if (validateBridgeSize) return this.readBridgeSize();
-
+      // if (validateBridgeSize) return this.readBridgeSize();
+      
       BridgeMaker.makeBridge(bridgeSize,generateRandomNumber);
     })
 
@@ -23,7 +23,11 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(`${COMMAND.MOVE}`,(space) => {
+      Console.print(space);
+    })
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
@@ -32,3 +36,4 @@ const InputView = {
 };
 
 module.exports = InputView;
+
