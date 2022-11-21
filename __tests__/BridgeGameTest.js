@@ -25,14 +25,6 @@ describe('bridgeController Test', () => {
       moveBridge = bridgeGame.move();
     });
 
-    test('사용자가 이동한 다리의 위치 Test', () => {
-      bridgeGame.selectMovemomentPosition('U');
-      bridgeGame.selectMovemomentPosition('D');
-      const result = bridgeGame.getUserBridge();
-
-      expect(result).toEqual(['U', 'D']);
-    });
-
     describe('사용자가 이동한 위치의 성공, 실패 여부 Test', () => {
       test('U로 성공 Test', () => {
         bridgeGame.updateBridge(['U', 'D', 'D', 'U']);

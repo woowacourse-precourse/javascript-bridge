@@ -25,10 +25,6 @@ class BridgeGame {
     return false;
   }
 
-  getUserBridge() {
-    return this.#userBridge;
-  }
-
   getNumberOfAttempts() {
     return this.#numberOfAttempts;
   }
