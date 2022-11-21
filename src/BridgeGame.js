@@ -12,8 +12,10 @@ class BridgeGame {
   }
   compareBridge(input) {
     const result = this.#bridge[this.#nowIndex] === input;
-    this.move();
     return result;
+  }
+  getNowIndex() {
+    return this.#nowIndex;
   }
   getBridgeString() {
     return [this.#upString, this.#downString];
@@ -33,6 +35,7 @@ class BridgeGame {
       this.#upString += BRIDGE_DRAWER.NOTHING;
       this.#downString += BRIDGE_DRAWER.CORRECT;
     }
+    this.move();
   }
   addSeperate() {
     if (this.checkLast()) {

@@ -38,18 +38,17 @@ class GameController {
     this.inputStep();
   }
   inputStep() {
+    console.log(this.bridgeGame.getNowIndex());
     InputView.readMoving((input) => {
       errorController(
         this.compareStep.bind(this, input),
         this.inputStep.bind(this)
       );
-      //   Validation.stepInput(input);
-      //   this.compareStep(input);
     });
   }
   compareStep(input) {
-    Validation.stepInput(input);
     const result = this.bridgeGame.compareBridge(input);
+    Validation.stepInput(input);
     if (result) {
       this.bridgeGame.addCorrect();
       this.bridgeGame.addSeperate();
