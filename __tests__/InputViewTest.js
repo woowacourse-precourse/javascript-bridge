@@ -16,4 +16,20 @@ describe("InputView 테스트 코드", () => {
       expect(result).toBe(input);
     }
   );
+
+  test.each([[1], ["Q"], [undefined]])(
+    "입력 받은 값이 U 또는 D가 아닌 경우 예외 처리",
+    (input) => {
+      expect(() => {
+        InputView.validateMoving(input);
+      }).toThrow;
+    }
+  );
+  test.each([["U"], ["D"]])(
+    "입력 받은 값이 U 또는 D인 경우 그 문자열을 반환",
+    (input) => {
+      const result = InputView.validateMoving(input);
+      expect(result).toBe(input);
+    }
+  );
 });
