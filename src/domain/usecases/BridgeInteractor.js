@@ -46,7 +46,7 @@ class BridgeInteractor {
     return this.#bridge.getSize();
   }
 
-  validate(size) {
+  static validate(size) {
     // if not number return true
     if (/[^0-9]/.test(size)) return false;
     if (size < 3) return false;

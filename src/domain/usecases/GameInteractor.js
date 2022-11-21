@@ -20,7 +20,7 @@ class GameInteractor {
     return this.#game.getTryCount();
   }
 
-  triggerGameCommand(command, { restart, exit }) {
+  static triggerGameCommand(command, { restart, exit }) {
     if (command === RULE.GAME_COMMAND.RETRY) return restart();
     if (command === RULE.GAME_COMMAND.EXIT) return exit(false);
     throw new GameCommandError(ERORR_MESSAGE.INVALID_GAME_COMMAND);
