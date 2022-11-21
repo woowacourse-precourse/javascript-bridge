@@ -8,11 +8,16 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeSizeCheck = require("./Check/BridgeSizeCheck");
 const MoveCheck = require("./Check/MoveCheck");
 const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
 
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
+   constructor() {
+    this.bridgeGame = new BridgeGame();
+  }
+
   readBridgeSize() {
     const gameRec = { moveNum: 0, attemptNum: 1, bridgeAnswer: [] };
     MissionUtils.Console.readLine(MESSAGES.ENTER_SIZE, inputLen => {
@@ -67,24 +72,29 @@ const InputView = {
    */
   readGameCommand(gameRec) {
     MissionUtils.Console.readLine(MESSAGES.ENTER_RETRYQUIT, inputROrQ => {
-      try {
-        (() => new RetryQuitCheck(inputROrQ))(); // check valid input
-      } catch (error) {
-        MissionUtils.Console.print(error);
-        this.readGameCommand(gameRec);
-        return;
-      }
-      switch (inputROrQ) {
-        case "R": // retry
-          const bridgeGame = new BridgeGame();
-          bridgeGame.retry(gameRec);
-          break;
-        case "Q": // quit
-          OutputView.printResult(gameRec);
-          break;
-        default:
-      }
+      this.checkGameCommandInput(inputROrQ, gameRec);
     });
+  },
+
+  checkGameCommandInput(inputROrQ, gameRec) {
+    try {
+      (() => new RetryQuitCheck(inputROrQ))(); // check valid input
+    } catch (error) {
+      MissionUtils.Console.print(error);
+      this.readGameCommand(gameRec);
+      return;
+    }
+    this.decideNextPrompt(inputROrQ, gameRec);
+  },
+
+  decideNextPrompt(inputROrQ, gameRec) {
+    if (inputROrQ === "R") {
+      const bridgeGame = new BridgeGame();
+      bridgeGame.retry(gameRec);
+    } 
+    if (inputROrQ === "Q") {
+      OutputView.printResult(gameRec);
+    }
   },
 };
 
