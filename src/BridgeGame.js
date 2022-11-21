@@ -35,7 +35,13 @@ class BridgeGame {
   
   getSpace() {
     this.gameManager.inputMovingSpace(this.move.bind(this));
+  }
+
+  move(userSelectSpace) {
+    const bridge = [...this.#bridges];
+    const bridgeSpace = bridge[0];
     this.checkSpace(bridgeSpace, userSelectSpace);
+    this.gameManager.printSpace(this.#firstRow, this.#secondRow);
   }
 
   checkSpace(bridge, user) {
