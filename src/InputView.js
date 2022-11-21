@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { bridgeSizeValidate } = require("./ValidateCheck");
 const Consolee = MissionUtils.Console;
 
 /**
@@ -11,6 +12,7 @@ const InputView = {
   readBridgeSize() {
     Consolee.readline("다리의 길이를 입력해주세요. \n", (bridges) => {
       //예외 처리 1
+      bridgeSizeValidate(bridges);
     });
     return bridges;
   },
