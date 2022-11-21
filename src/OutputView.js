@@ -4,9 +4,8 @@ const OutputView = {
     MissionUtils.Console.print('게임 시작');
   },
   printMap(movingList) {
-    const [upList, downList] = movingList
-    MissionUtils.Console.print(`[ ${upList.join(' | ')} ]`)
-    MissionUtils.Console.print(`[ ${downList.join(' | ')} ]`)
+    MissionUtils.Console.print(`[ ${movingList[0].join(' | ')} ]`)
+    MissionUtils.Console.print(`[ ${movingList[1].join(' | ')} ]`)
     MissionUtils.Console.print('')
   },
 
