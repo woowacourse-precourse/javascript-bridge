@@ -30,7 +30,23 @@ class Bridge {
    * @param {string} direction
    * @param {number} index
    */
-  isMovableCompartment(direction, index) {}
+  isMovable(direction, index) {
+    this.#validateDirection(direction);
+  }
+
+  #validateDirection(direction) {
+    if (direction === 'U' || direction === 'D') {
+      return;
+    }
+
+    throw new Error(
+      '[ERROR] 이동할 칸은 위(U), 아래(D) 아래 중에 입력할 수 있습니다.',
+    );
+  }
+
+  size() {
+    return this.#bridge ? this.#bridge.length : 0;
+  }
 }
 
 module.exports = Bridge;

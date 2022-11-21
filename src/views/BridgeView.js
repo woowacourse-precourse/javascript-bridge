@@ -14,8 +14,8 @@ class BridgeView {
     this.#input.readBridgeSize(onInput);
   }
 
-  readMoving() {
-    this.#input.readMoving();
+  readMoving(onInput) {
+    this.#input.readMoving(onInput);
   }
 
   readGameCommand() {

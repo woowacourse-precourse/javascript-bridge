@@ -26,6 +26,7 @@ class BridgeGame {
     try {
       const bridgeSize = Number(size);
       this.#model.setBridge(bridgeSize);
+      this.move(0);
     } catch (error) {
       this.#view.print(`\n${error.message}\n`);
       this.#requestBridgeSize();
@@ -37,7 +38,23 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move(moveCount) {
+    if (moveCount >= this.#model.size()) {
+      return;
+    }
+
+    this.#view.readMoving(this.#handleInputMoving.bind(this, moveCount));
+  }
+
+  #handleInputMoving(moveCount, direction) {
+    try {
+      this.#model.isMovable(direction, moveCount);
+      this.move(moveCount + 1);
+    } catch (error) {
+      this.#view.print(`\n${error.message}\n`);
+      this.move(moveCount);
+    }
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
