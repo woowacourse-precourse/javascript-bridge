@@ -9,8 +9,8 @@ const MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-    ERROR_SIZE : "[ERROR] 입력한 다리 길이가 올바르지 않습니다. 3 ~ 20 사이의 값을 입력해주세요."
+    ERROR_SIZE : "[ERROR] 입력한 다리 길이가 올바르지 않습니다. 3 ~ 20 사이의 값을 입력해주세요.",
+    ERROR_MOVE : "[ERROR] 입력된 값이 U 또는 D가 아닙니다. U 또는 D를 입력하여 게임을 진행해주세요."
 });
-
 
 module.exports = {MESSAGE, ERROR_MESSAGE};
