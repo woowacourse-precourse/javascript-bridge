@@ -23,6 +23,7 @@ class App {
   }
 
   /**
+   * 게임 시작
    * @param {number} size 다리의 길이
    */
   gameStart(size) {
@@ -52,14 +53,23 @@ class App {
     else if (judgement === JUDGEMENT.IS_FAIL_MOVED) this.readGameCommand();
   }
 
+  /**
+   * 사용자에게 다리 길이를 입력받을 함수 호출
+   */
   readBridgeSize() {
     readBridgeSize(this.onReadBridgeSize.bind(this));
   }
 
+  /**
+   * 사용자에게 이동할 칸을 입력받을 함수 호출
+   */
   readMoving() {
     readMoving(this.onReadMoving.bind(this));
   }
 
+  /**
+   * 사용자에게 재시도 여부를 입력받을 함수 호출
+   */
   readGameCommand() {
     readGameCommand(this.onReadGameCommand.bind(this));
   }
@@ -94,11 +104,9 @@ class App {
   onReadGameCommand(retryOrQuit) {
     validateReadGameCommand(retryOrQuit);
 
-    if (retryOrQuit === RETRY_OR_QUIT.RETRY) {
-      this.#game.retry(this);
-    } else if (retryOrQuit === RETRY_OR_QUIT.QUIT) {
-      printResult(this.#game);
-    }
+    if (retryOrQuit === RETRY_OR_QUIT.RETRY)
+      this.#game.retry(this.readMoving.bind(this));
+    else if (retryOrQuit === RETRY_OR_QUIT.QUIT) printResult(this.#game);
   }
 }
 
