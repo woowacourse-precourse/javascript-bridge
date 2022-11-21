@@ -47,8 +47,6 @@ class BridgeGame {
   handleBridgeLength (length) {
     try {
       InputValidator.isRightBridgeLength(length);
-      // const bridge = makeBridge(length, generate);
-      // this.setBridge(bridge);
       this.makeAndSaveBridge(length);
       this.move(this);
     } catch (error) {
@@ -69,6 +67,12 @@ class BridgeGame {
     }
   }
 
+  drawBridgeMap (string) {
+    this.setInputUpDown(string);
+      this.setMapArray(this.sameBridge(this.#moveIndex), string);
+      outputView.printMap(this);
+  }
+
   handleMoveInput (string) {
     if (this.#bridge[this.#moveIndex] === string) {
       this.incrementMoveIndex();
@@ -80,9 +84,7 @@ class BridgeGame {
   handleMoveBridge (string) {
     try {
       InputValidator.isUpDown(string);
-      this.setInputUpDown(string);
-      this.setMapArray(this.sameBridge(this.#moveIndex), string);
-      outputView.printMap(this);
+      this.drawBridgeMap(string);
       this.handleMoveInput(string);
     } catch (error) {
       outputView.printError(error);
