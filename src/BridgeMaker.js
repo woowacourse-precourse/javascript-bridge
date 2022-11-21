@@ -11,9 +11,9 @@ const BridgeMaker = {
     let bridgeArray = [];
     for(let count=0;count<size;count++){
       let randomNumber = generateRandomNumber();
-      if(randomNumber==="1") 
+      if(randomNumber===1) 
         bridgeArray.push("U"); 
-      if(randomNumber==="0") 
+      if(randomNumber===0) 
         bridgeArray.push("D"); 
     }
     return bridgeArray;
