@@ -74,5 +74,4 @@ class App {
     if (err.name === ERROR_NAME.MOVE) readMoving.bind(this)(this.moveBridge);
   }
 }
-new App().play();
 module.exports = App;
