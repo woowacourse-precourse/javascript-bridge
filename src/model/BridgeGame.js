@@ -1,6 +1,7 @@
 const { makeBridge } = require("../BridgeMaker");
 const { generate } = require("../BridgeRandomNumberGenerator");
 const { BRIDGE } = require("../constants/bridge.constants");
+const MOVE = require("../constants/move.constants");
 const InValidInputError = require("../error/InValidInputError");
 
 /**
@@ -8,10 +9,12 @@ const InValidInputError = require("../error/InValidInputError");
  */
 class BridgeGame {
   bridge;
+  idx;
 
   constructor(size) {
     this.validate(size);
     this.bridge = makeBridge(size, generate);
+    this.idx = 0;
   }
 
   validate(size) {
@@ -19,12 +22,25 @@ class BridgeGame {
     if (size < 3 || size > 20) throw new InValidInputError(BRIDGE.NO_RANGE);
   }
 
+  moveValidate(direction) {
+    if (direction !== "U" && direction !== "D")
+      throw new InValidInputError(MOVE.DIRECTION);
+  }
+
+  isPossibleMove(idx, direction) {
+    return this.bridge[idx] === direction;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move(input) {
+    this.moveValidate(input);
+    const isPossible = this.isPossibleMove(this.idx, input);
+    return isPossible;
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
