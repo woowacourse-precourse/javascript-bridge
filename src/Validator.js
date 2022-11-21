@@ -1,4 +1,4 @@
-const { NUMBER, ERROR } = require('./data/constants');
+const { NUMBER, ERROR, DIRECTION } = require('./data/constants');
 const IO = require('./IO');
 
 class Validator {
@@ -17,7 +17,7 @@ class Validator {
   }
 
   static validateBridgeDirection(direction) {
-    if (direction === 'U' || direction === 'D') return true;
+    if (direction === DIRECTION.UP || direction === DIRECTION.DOWN) return true;
     IO.output(ERROR.BRIDGE_DIRECTION);
     return false;
   }
