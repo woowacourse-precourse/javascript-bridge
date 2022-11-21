@@ -74,7 +74,3 @@ const BridgeGameModel = class {
 };
 
 module.exports = BridgeGameModel;
-
-// ? 데이터를 받고
-// ? data: 사용자의 위치 히스토리 / 맵 / 시도 횟수
-// ? method:  jumpUp, jumpDown, checkBridgeMap, checkUser
