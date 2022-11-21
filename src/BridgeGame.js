@@ -53,7 +53,7 @@ class BridgeGame {
       this.#movingList.lower.push(MOVING.BLANK);
     }
 
-    return this.print();
+    return this.#movingList;
   }
 
   /**
@@ -68,14 +68,7 @@ class BridgeGame {
       this.#movingList.upper.push(MOVING.BLANK);
     }
 
-    return this.print();
-  }
-
-  /**
-   * 게임 진행 상황을 출력할 때 사용하는 메서드
-   */
-  print() {
-    return OutputView.printMap(this.#movingList);
+    return this.#movingList;
   }
 
   /**

@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Check = require("./Check");
+const OutputView = require("./OutputView");
 const { COMMAND, RESULT } = require("./constants/values");
 const { OUTPUT, INPUT } = require("./constants/messages");
 /**
@@ -27,7 +28,8 @@ const InputView = {
       const error = Check.hasMoving(moving);
       if (error) return this.readMoving(bridgeGame);
 
-      bridgeGame.move(moving);
+      const movingList = bridgeGame.move(moving);
+      OutputView.printMap(movingList);
       if (bridgeGame.hasWrong()) return this.readGameCommand(bridgeGame);
       if (bridgeGame.hasAll()) return bridgeGame.finish(RESULT.SUCCESS);
       return this.readMoving(bridgeGame);
