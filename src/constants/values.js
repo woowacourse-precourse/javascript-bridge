@@ -24,6 +24,7 @@ const RESULT = {
 };
 
 const CALCULATION = {
+  ONE_ATTEMPT: 1,
   DECIMAL_NUMBER: 10,
 };
 
