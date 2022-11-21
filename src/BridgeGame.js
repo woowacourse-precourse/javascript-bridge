@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 
 const OutputView = require('./view/OutputView');
+const BridgeGameProceed = require('./BridgeGameProceed')
 
 class BridgeGame {
   #round = 1;
@@ -21,6 +22,10 @@ class BridgeGame {
   }
 
   retry() {
+
+  }
+
+  fail() {
     OutputView.printResult();
     this.printResultBridge();
     Console.print('');

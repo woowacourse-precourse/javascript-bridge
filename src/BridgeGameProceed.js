@@ -88,7 +88,7 @@ class BridgeGameProceed {
     }
 
     callFail() {
-        this.bridgeGame.retry();
+        this.bridgeGame.fail();
     }
 
     callWin() {
