@@ -13,8 +13,14 @@ const BRIDGE_SIZE = {
   MAX: 20,
 }
 
+const BRIDGE_POSITION = {
+  UP: 1,
+  DOWN: 0,
+}
+
 module.exports = {
   MOVEMENT,
   COMMAND,
   BRIDGE_SIZE,
+  BRIDGE_POSITION,
 }
