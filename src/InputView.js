@@ -66,12 +66,13 @@ const InputView = {
   },
 
   readMovingOrGameCommand(bridge, round, upOrDown) {
-    const hasCorrect = OutputView.printMap(bridge[round - 1], upOrDown);
+    const [up, down, hasCorrect] = this.bridgeGame.makeMap(bridge[round - 1], upOrDown);
+    OutputView.printMap(up, down);
 
     if (!hasCorrect) this.readGameCommand(bridge);
-    if (round === bridge.length && hasCorrect) {
+    else if (round === bridge.length && hasCorrect) {
       const totalCount = this.bridgeGame.countTry();
-      OutputView.printResult(totalCount, hasCorrect);
+      OutputView.printResult(totalCount, hasCorrect, [up, down]);
     } else this.readMoving(bridge);
   },
 
