@@ -17,7 +17,7 @@ const OutputView = {
    */
      printMap(checkedMap) {
       MissionUtils.Console.print(
-      `[${checkedMap[0].join('|')}]\n[${checkedMap[1].join('|')}]`);
+      `[${checkedMap[0].join('|')}]\n[${checkedMap[1].join('|')}]\n`);
     },
   
   /**
