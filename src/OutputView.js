@@ -8,15 +8,10 @@ const OutputView = {
   },
 
   printResult(bridge, isWin, tryCount) {
-    if (isWin) {
-      Console.print('최종 게임 결과');
-      this.printMap(bridge);
-      Console.print(`게임 성공 여부: 성공`);
-      Console.print(`총 시도한 횟수: ${tryCount}`);
-    } else {
-      Console.print(`게임 성공 여부: 실패`);
-      Console.print(`총 시도한 횟수: ${tryCount}`);
-    }
+    Console.print('최종 게임 결과');
+    this.printMap(bridge);
+    Console.print(`게임 성공 여부: ${isWin ? '성공' : '실패'}`);
+    Console.print(`총 시도한 횟수: ${tryCount}`);
   },
 
   printGameStartMsg() {
