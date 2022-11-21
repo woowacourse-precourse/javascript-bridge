@@ -46,6 +46,10 @@ class BridgeGame {
       this.#upBridge.push(" ");
     }
   }
+
+  getBridgeMap() {
+    return [this.#upBridge, this.#downBridge];
+  }
 }
 
 module.exports = BridgeGame;
