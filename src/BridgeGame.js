@@ -9,11 +9,13 @@ class BridgeGame {
   #bridge;
   #bridgeMap;
   #step;
+  #tryingNum;
 
   constructor(bridgeSize){
     this.#bridge = new Bridge(makeBridge(bridgeSize, generate));
     this.#bridgeMap = new BridgeMap();
     this.#step = -1;
+    this.#tryingNum = 1;
   }
 
   move(moving) {
@@ -30,7 +32,11 @@ class BridgeGame {
   isEnd() {
     return this.#bridge.isReach(this.#step);
   }
-  retry() {}
+  retry() {
+    this.#bridgeMap = new BridgeMap();
+    this.#step = -1;
+    this.#tryingNum += 1;
+  }
   
   
 }

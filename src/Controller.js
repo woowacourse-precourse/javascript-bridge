@@ -1,5 +1,5 @@
 const BridgeGame = require("./BridgeGame");
-const { readBridgeSize, readMoving } = require("./InputView");
+const { readBridgeSize, readMoving, readGameCommand } = require("./InputView");
 const { printMap } = require("./OutputView");
 
 class Controller {
@@ -28,11 +28,21 @@ class Controller {
     printMap(downMap);
   }
   handleBridgeGame(isMatch){
-    if(this.#bridgeGame.isEnd() || !isMatch){
-      this.end();
+    if(!isMatch){
+      this.askReplay();
       return;
     }
     this.play();
+  }
+  askReplay(){
+    readGameCommand((retry) => {
+      if(retry === 'R'){
+        this.#bridgeGame.retry();
+        this.play();
+      }
+    })
+  }
+  end(){
   }
 }
 
