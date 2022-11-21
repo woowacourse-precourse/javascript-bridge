@@ -2,7 +2,6 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
 const Bridge = require('./Bridge');
 const User = require('./User');
-
 const { UI_COMPONENT, GAME_STATUS } = require('./constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -38,6 +37,18 @@ class BridgeGame {
     return this.#status;
   }
 
+  setStaus() {
+    const current = this.getCurrent();
+    if (current.isEnd && current.isCorrect) {
+      this.#status = GAME_STATUS.END;
+    } else if (!current.isEnd && current.isCorrect) {
+      this.#status = GAME_STATUS.NEXT;
+    } else if (!current.isCorrect) {
+      this.#status = GAME_STATUS.FAIL;
+    }
+    return this;
+  }
+
   getCurrent() {
     const index = this.user.getIndex();
     const isCorrect =
@@ -49,18 +60,6 @@ class BridgeGame {
       isCorrect,
       isEnd,
     };
-  }
-
-  setStaus() {
-    const current = this.getCurrent();
-    if (current.isEnd && current.isCorrect) {
-      this.#status = GAME_STATUS.END;
-    } else if (!current.isEnd && current.isCorrect) {
-      this.#status = GAME_STATUS.NEXT;
-    } else if (!current.isCorrect) {
-      this.#status = GAME_STATUS.FAIL;
-    }
-    return this;
   }
 
   getFootprint() {
