@@ -22,6 +22,15 @@ class App {
 
     this.#output.print(message);
   }
+
+  printFinalGameResult() {
+    const gameReuslt = !this.isGameOver();
+    const tryCount = this.getTryCount();
+    const classifiedBridgeLog = this.#bridgeGame.getCurrentClassifiedBridgeLog();
+
+    this.#output.finalGameResult(classifiedBridgeLog);
+    this.#output.printResult(gameReuslt, tryCount);
+  }
 }
 
 module.exports = App;
