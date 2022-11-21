@@ -29,7 +29,20 @@ class BridgeGame {
     this.checkSuccess();
   }
 
-  retry() {}
+  retry() {
+    this.#tryCount += 1;
+    this.#inputIndex = -1;
+    this.#movingRoute = [];
+    this.#info.resetRoute();
+  }
+
+  fail() {
+    this.#info.finishGame(this.#tryCount, SIGN.FAILURE);
+  }
+
+  getRouteMap() {
+    this.#info.printRouteMap();
+  }
 
   getMatchSize() {
     return this.#info.checkMatchLength(this.#movingRoute.length);
