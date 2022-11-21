@@ -5,7 +5,10 @@ const InputView = require('./InputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame');
 
+const { Console } = require('@woowacourse/mission-utils');
+
 class App {
+  #bridgeGame;
   #bridgeSize;
   #bridge;
   #curBridge;
@@ -26,24 +29,33 @@ class App {
       this.#bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
+    this.#bridgeGame = new BridgeGame(this.#bridge);
     this.#doGame();
   }
 
   async #doGame() {
-    const bridgeGame = new BridgeGame(this.#bridge);
-    for (let brigeIndex = 0; brigeIndex < this.#bridgeSize; brigeIndex++) {
+    let brigeIndex = 0;
+    while (brigeIndex < this.#bridgeSize) {
       const moveInput = await InputView.readMoving();
-      this.#curBridge = bridgeGame.makeCurBridge(moveInput, brigeIndex);
+      this.#curBridge = this.#bridgeGame.makeCurBridge(moveInput, brigeIndex);
       OutputView.printMap(this.#curBridge);
-
-      if (!bridgeGame.move(moveInput, brigeIndex)) {
-        const retryInput = await InputView.readGameCommand();
-        if (retryInput === 'R') {
-          this.#tryNum += 1;
-          this.#curBridge = bridgeGame.retry();
-          this.#doGame();
-        }
+      if (!this.#bridgeGame.move(moveInput, brigeIndex)) {
+        this.#doRetry();
+        return;
       }
+      brigeIndex += 1;
+    }
+  }
+
+  async #doRetry() {
+    const retryInput = await InputView.readGameCommand();
+    if (retryInput === 'R') {
+      this.#tryNum += 1;
+      this.#curBridge = this.#bridgeGame.retry();
+      this.#doGame();
+    }
+    if (retryInput === 'Q') {
+      OutputView.printResult('실패', this.#curBridge, this.#tryNum);
     }
   }
 }
