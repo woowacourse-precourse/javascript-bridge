@@ -14,8 +14,12 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine('다리의 길이를 입력해주세요.\n', (bridgeSize) => {
-      inputErrorCheck.bridgeSize(bridgeSize);
-      bridgeGame.set(bridgeSize);
+      try {
+        inputErrorCheck.bridgeSize(bridgeSize);
+        bridgeGame.set(bridgeSize);
+      } catch (e) {
+        Console.print(e);
+      }
       this.readMoving();
     });
   },
