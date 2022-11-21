@@ -1,12 +1,31 @@
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const InputView = require('./InputView');
+const MakeMap = require('./MakeMap');
 const OutputView = require('./OutputView');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridgeShape;
 
   start() {
     OutputView.startMessage();
+    this.getSize();
+  }
+
+  getSize() {
+    InputView.readBridgeSize(this);
+  }
+
+  createMap(size) {
+    const bridgeShape = BridgeMaker.makeBridge(size, this.randNum);
+    this.#bridgeShape = bridgeShape;
+  }
+
+  randNum() {
+    return BridgeRandomNumberGenerator.generate();
   }
 
   /**
