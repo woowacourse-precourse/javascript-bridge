@@ -1,7 +1,7 @@
 const { UP_AND_DOWN, TRACE_MARKS } = require("../constants");
 const OutputView = require("../OutputView");
 
-const TraceMaker = {
+const TraceController = {
   makeTrace(selectedPath, log, bridge, current) {
     let trace = current.map((el) => el.slice());
     const correctionMark = this.makeCorrectionMark(log, selectedPath, bridge);
@@ -30,4 +30,4 @@ const TraceMaker = {
   },
 };
 
-module.exports = TraceMaker;
+module.exports = TraceController;
