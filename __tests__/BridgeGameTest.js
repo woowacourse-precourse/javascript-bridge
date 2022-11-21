@@ -41,6 +41,7 @@ describe('BridgeGame 테스트', () => {
       [true, true],
       [false, false],
     ];
+
     // 실행 및 평가
     const game = new BridgeGame();
     testInput.forEach((input, index) => {
