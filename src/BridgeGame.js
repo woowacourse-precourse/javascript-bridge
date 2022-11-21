@@ -21,13 +21,6 @@ class BridgeGame {
     this.#bridge = bridge;
   }
 
-  isSuccess(move) {
-    if (this.#bridge[this.#order].includes(move)) {
-      return true;
-    }
-    return false;
-  }
-
   isEnd(move) {
     if (this.#bridge.length === this.#order) return true;
   }
@@ -38,8 +31,10 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(move) {
-    this.isSuccess(move) ? this.success(move) : this.fail(move);
-    return this.#map;
+    if (this.#bridge[this.#order].includes(move)) {
+      return true;
+    }
+    return false;
   }
 
   success(move) {

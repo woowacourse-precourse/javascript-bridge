@@ -51,7 +51,7 @@ class App {
   }
 
   crossingBridge(move) {
-    this.bridgeGame.isSuccess(move) ? this.success(move) : this.fail(move);
+    this.bridgeGame.move(move) ? this.success(move) : this.fail(move);
     if (this.bridgeGame.isEnd(move)) {
       return OutputView.printResult(
         this.bridgeGame.getMap(),
