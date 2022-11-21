@@ -15,6 +15,14 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   static move(moving, readFuncs) {
+    this.saveState(moving);
+
+    const gameInfo = this.createGameInfo();
+
+    BridgeMap.createMap(gameInfo, readFuncs);
+  }
+
+  static saveState(moving) {
     const movingResult = this.bridge[this.movingCount] === moving;
 
     this.movingCount += 1;
@@ -22,14 +30,14 @@ class BridgeGame {
       ...this.currentState,
       [moving, movingResult ? 'O' : 'X'],
     ];
+  }
 
-    const mapInfo = {
+  static createGameInfo() {
+    return {
       gameState: this.currentState,
       originBridgeSize: this.bridge.length,
       tryCount: this.tryCount,
     };
-
-    BridgeMap.createMap(mapInfo, readFuncs);
   }
 
   /**
