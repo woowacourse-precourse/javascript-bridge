@@ -13,7 +13,12 @@ const InputView = {
     const bridgeSize = await new Promise (answer => {
       Console.readLine(INPUT_MESSAGES.BRIDGE_SIZE, answer);
     })
-    Validator.validateBridgeSize(bridgeSize);
+    try{
+      Validator.validateBridgeSize(bridgeSize);
+    } catch {
+      this.readBridgeSize();
+    }
+    
     return bridgeSize
   },
 
