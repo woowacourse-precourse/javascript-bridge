@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const OutputView = require("./OutputView");
+const Validation = require("./Validation");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -9,10 +10,13 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     Console.readLine("다리의 길이를 입력해주세요.\n", (bridgeSize) => {
-      bridgeGame.setBridgeSize(bridgeSize);
-      bridgeGame.setBridge();
-      bridgeGame.increaseTrial();
-      this.readMoving(bridgeGame);
+      if(!Validation.checkBridgeSize(bridgeSize)) {
+        this.readBridgeSize(bridgeGame);
+      }
+      else{
+        bridgeGame.prepareGame(bridgeSize);
+        this.readMoving(bridgeGame);
+      }
     });
   },
 
