@@ -1,3 +1,5 @@
+const { status } = require('./lib/constants')
+
 class BridgeGame {
   #bridge
   #moves
@@ -26,6 +28,23 @@ class BridgeGame {
 
   retry() {
     this.#moves = []
+  }
+
+  getStatus() {
+    if (this.#isFailure()) {
+      return status.READ_COMMAND
+    }
+
+    return this.#bridge.length === this.#moves.length
+      ? status.FINISHED
+      : status.READ_MOVE
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  #isFailure() {
+    return this.#moves.some((move, index) => this.#bridge[index] !== move)
   }
 }
 
