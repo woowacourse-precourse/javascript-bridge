@@ -1,4 +1,4 @@
-const MESSAGE = {
+const MESSAGE = Object.freeze({
   START: "다리 건너기 게임을 시작합니다.",
   INPUT_LENGTH: "다리 길이를 입력해주세요.\n",
   INPUT_MOVE: "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
@@ -18,6 +18,6 @@ const MESSAGE = {
 
     INVALID_MOVE: "[ERROR] U 또는 D를 입력해주세요.",
   },
-};
+});
 
 module.exports = MESSAGE;
