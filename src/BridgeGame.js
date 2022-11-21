@@ -41,6 +41,21 @@ class BridgeGame {
     InputView.readMoving('이동할 칸을 선택해주세요.\n', moving);
   }
 
+  enterRegame() {
+    const regame = (input) => {
+      if (input === 'R') {
+        this.#isPlay = true;
+        this.enterMoving();
+      }
+
+      if (input === 'Q') {
+        this.endGame();
+      }
+    };
+
+    InputView.readMoving('게임을 다시 시도할지 여부를 입력해주세요.\n', regame);
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
