@@ -1,17 +1,12 @@
-const { InputView } = require('./InputView');
-const { OutputView } = require('./OutputView');
-const { Validator } = require('./Validator');
-const { BridgeGame}  = require('./BridgeGame');
+const Validator = require('./Validator');
+const InputView = require('./InputView');
+const OutputView = require('./OutputView');
+const BridgeGame = require('./BridgeGame');
 const { Console } = require('@woowacourse/mission-utils');
 const { RESULT } = require('./constants');
 
 class App {
   #bridgeGame;
-  #currentSteps;
-
-  constructor() {
-    this.#currentSteps = [];
-  }
 
   play() {
     OutputView.printGameStart();
@@ -30,29 +25,28 @@ class App {
   
   movingSteps(move) {
     Validator.checkMoving(move);
-    this.#currentSteps.push(move);
-
-    let result = OutputView.printMap(this.#currentSteps, this.#bridgeGame);
+    let result = this.#bridgeGame.move(move);
+    OutputView.printMap (this.#bridgeGame);
     this.checkingStep(result);
   }
   
   checkingStep(result) {
-    if (result == RESULT.FAIL) {
+    if (result == RESULT.BAD) {
       InputView.readGameCommand(this.endingBridge.bind(this));
     }
-    if (result == RESULT.SUCCESS) {
+    if (result == RESULT.GOOD) {
       this.playingBridge();     
     }
     if (result == RESULT.FINISH) {
       OutputView.printResult(this.#bridgeGame);
+      Console.close();
     }
   }
 
   endingBridge(command) {
     Validator.checkGameCommand(command);
     if (command === 'R') {
-      this.#bridgeGame.retry();
-      this.playingBridge();
+      this.#bridgeGame.retry(this.playingBridge.bind(this));
     }
     if (command === 'Q') {
       OutputView.printResult(this.#bridgeGame);
@@ -61,9 +55,7 @@ class App {
   }
 }
 
-module.exports = {
-  App,
-};
+module.exports = App;
 
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();
