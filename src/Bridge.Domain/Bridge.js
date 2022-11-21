@@ -9,7 +9,7 @@ class Bridge {
   }
 
   getBridgeSliceArrFirstToPosition(pos) {
-    return this.#bridgeArr.slice(0, pos);
+    return this.#bridgeArr.slice(0, pos + 1);
   }
 
   getBridgeArray() {

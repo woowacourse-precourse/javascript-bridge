@@ -27,7 +27,7 @@ class BridgeGame {
     if (playerDirection === answerDirection) goResult = true;
     if (playerDirection !== answerDirection) goResult = false;
     //bridge , index , result -> shape
-    return [this.#bridge.getBridgeSliceArrFirstToPosition(), index, goResult];
+    return [this.#bridge.getBridgeSliceArrFirstToPosition(index), goResult];
   }
 
   /**

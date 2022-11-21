@@ -1,9 +1,10 @@
 const BRIDGE_PRINT = {
   CAN_MOVE: "O",
   CANT_MOVE: "X",
-  START: "[",
-  END: "]",
-  DIVISIOB: "|",
+  START: "[ ",
+  END: " ]",
+  DIVISION: " | ",
+  BLANK: " ",
 };
 
 module.exports = BRIDGE_PRINT;
