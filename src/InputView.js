@@ -1,4 +1,4 @@
-const Console = require("@woowacourse/mission-utils");
+const MissionUtils = require("@woowacourse/mission-utils");
 const {BridgeMaker, makeBridge} = require("./BridgeMaker.js");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator.js");
 const OutputView = require("./OutputView.js");
@@ -11,7 +11,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(bridgeGame) {
-    Console.readLine("다리의 길이를 입력해주세요.\n", (length) => {
+    MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (length) => {
       bridgeGame.init(makeBridge(length,BridgeRandomNumberGenerator.generate()));
       this.readMoving(bridgeGame);
     })
@@ -21,7 +21,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgeGame) {
-    Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (str) => {
+    MissionUtils.Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (str) => {
       if(["U", "D"].includes(str)) bridgeGame.move(str);
     })
   },
@@ -30,7 +30,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridgeGame) {
-    Console.readLine("\n게임을 다시 시작할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (str) => {
+    MissionUtils.Console.readLine("\n게임을 다시 시작할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (str) => {
       this.checkInput(str, bridgeGame);
     })
   },
