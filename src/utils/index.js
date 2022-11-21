@@ -1,12 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const readLineAsync = (query) =>
-  new Promise((resolve) => {
-    Console.readLine(query, resolve);
-  });
+const read = (query, callback) => Console.readLine(query, callback);
 
 const print = (message) => Console.print(message);
 
 const close = () => Console.close();
 
-module.exports = { readLineAsync, print, close };
+module.exports = { read, print, close };

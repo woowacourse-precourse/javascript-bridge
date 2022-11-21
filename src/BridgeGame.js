@@ -5,7 +5,6 @@ const OutputView = require('./OutputView');
 
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { GAME_STATUS, FINAL_COMMAND_GROUP, POSITION, MAP_MARK } = require('./enums');
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -13,17 +12,13 @@ const { GAME_STATUS, FINAL_COMMAND_GROUP, POSITION, MAP_MARK } = require('./enum
 class BridgeGame {
   #status = GAME_STATUS.WAITING;
 
-  #currentLocation = 0;
-
   #bridge = null;
 
   #map = null;
 
-  #tryCount = 0;
+  #currentLocation = 0;
 
-  constructor() {
-    OutputView.printStart();
-  }
+  #tryCount = 0;
 
   get isPlaying() {
     return this.#status === GAME_STATUS.PLAYING;
@@ -37,42 +32,61 @@ class BridgeGame {
     return this.#status === GAME_STATUS.SUCCEEDED;
   }
 
-  start(bridgeSize) {
+  init() {
     this.#status = GAME_STATUS.PLAYING;
-    this.#currentLocation = 0;
-    this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+    InputView.readBridgeSize(this.build.bind(this));
+  }
+
+  build(size) {
+    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.#map = Array.from({ length: 2 }, () => Array(this.#bridge.length).fill(' '));
+    this.#currentLocation = 0;
+    console.log(this.#bridge);
+    InputView.readMoving(this.move.bind(this));
   }
 
   move(position) {
+    this.#tryCount += 1;
     this.#currentLocation += 1;
     const isCorrect = this.#bridge[this.#currentLocation - 1] === position;
     if (!isCorrect) {
-      this.#status = GAME_STATUS.FAILED;
-      this.#setCurrentMap(position, MAP_MARK.WRONG);
+      this.#fail(position);
       return;
     }
-    this.#setCurrentMap(position, MAP_MARK.CORRECT);
-    if (this.#currentLocation === this.#bridge.length) this.#status = GAME_STATUS.SUCCEEDED;
+    this.#pass();
+    if (this.#currentLocation === this.#bridge.length) this.#success();
   }
 
   retry() {
-    this.#tryCount += 1;
     this.#status = GAME_STATUS.PLAYING;
     this.#currentLocation = 0;
     this.#map = Array.from({ length: 2 }, () => Array(this.#bridge.length).fill(' '));
+    InputView.readMoving(this.move.bind(this));
   }
 
   end() {
-    this.#tryCount += 1;
     OutputView.printEnd();
     OutputView.printMap(this.#map, this.#currentLocation);
     OutputView.printResult(this.isSuccess, this.#tryCount);
     this.#status = GAME_STATUS.WAITING;
   }
 
-  printCurrent() {
-    OutputView.printMap(this.#map, this.#currentLocation);
+  #pass(position) {
+    this.#setCurrentMap(position, MAP_MARK.CORRECT);
+    this.#printCurrent();
+    InputView.readMoving(this.move.bind(this));
+  }
+
+  #fail(position) {
+    this.#status = GAME_STATUS.FAILED;
+    this.#setCurrentMap(position, MAP_MARK.WRONG);
+    this.#printCurrent();
+    InputView.readGameCommand(this.retry.bind(this), this.end.bind(this));
+  }
+
+  #success() {
+    this.#status = GAME_STATUS.SUCCEEDED;
+    this.end();
   }
 
   #setCurrentMap(position, mark) {
@@ -83,22 +97,8 @@ class BridgeGame {
     this.#map[1][this.#currentLocation - 1] = mark;
   }
 
-  static async readBridgeSizeInput() {
-    const input = await InputView.readBridgeSize();
-    Validator.validateBridgeSizeInput(input);
-    return input;
-  }
-
-  static async readMoveInput() {
-    const input = await InputView.readMoving();
-    Validator.validateMoveInput(input);
-    return input;
-  }
-
-  static async readIsRetry() {
-    const input = await InputView.readGameCommand();
-    Validator.validateRetryInput(input);
-    return input === FINAL_COMMAND_GROUP.RETRY;
+  #printCurrent() {
+    OutputView.printMap(this.#map, this.#currentLocation);
   }
 }
 
