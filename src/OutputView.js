@@ -19,7 +19,15 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+   printResult(result, count) {
+    let message = "실패";
+    if (result === true){
+      message = "성공";
+    }
+    console.log("게임 성공 여부: ", message);
+    console.log("총 시도한 횟수: ", count);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;

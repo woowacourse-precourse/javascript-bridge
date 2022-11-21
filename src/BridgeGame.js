@@ -6,6 +6,7 @@ class BridgeGame {
   constructor(){
     this.answer = [];
     this.user = '';
+    this.result = true;
     this.count = 1;
     this.map=[[],[]];
   }
