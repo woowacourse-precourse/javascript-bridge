@@ -33,8 +33,8 @@ const ERROR_INPUT = {
 };
 
 const BRIDGE = {
-  up: 0,
-  down: 1,
+  up: 1,
+  down: 0,
 };
 
 const GAME_RESULT_MESSAGE = (moveState, isSuccess, retryCount) => `
