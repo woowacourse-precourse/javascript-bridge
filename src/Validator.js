@@ -1,6 +1,11 @@
 const { BRIDGE_SIZE_RANGE, UP, DOWN, RETRY, QUIT } = require('./constants');
 
 class Validator {
+  static validateSize(value) {
+    this.validateNumber(value);
+    this.validateNumberInRange(value);
+  }
+
   static validateNumber(value) {
     const regExp = /[0-9]/;
     const matchArr = value.match(regExp);
