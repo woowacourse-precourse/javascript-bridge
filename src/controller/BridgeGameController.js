@@ -15,6 +15,7 @@ class BridgeGameController {
   }
 
   start() {
+    OutputView.welcomeMessage();
     InputView.readBridgeSize(this.createBridgeByUser.bind(this));
   }
 
