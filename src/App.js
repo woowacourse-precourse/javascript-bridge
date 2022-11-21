@@ -47,7 +47,7 @@ class App {
   }
 
   askRetryOrQuit() {
-    InputView.readMoving((playerInput) => {
+    InputView.readGameCommand((playerInput) => {
       const command = InputView.getGameCommand(playerInput);
     });
   }
