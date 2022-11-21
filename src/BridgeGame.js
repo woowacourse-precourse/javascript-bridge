@@ -63,18 +63,21 @@ class BridgeGame {
     }
   }
 
+  handleMoveInput (string) {
+    if (this.#bridge[this.#moveIndex] === string) {
+      this.incrementMoveIndex();
+      return this.move(this);
+    }
+    this.retry(this);
+  }
+
   handleMoveBridge (string) {
     try {
       InputValidator.isUpDown(string);
-
       this.setInputUpDown(string);
       this.setMapArray(this.sameBridge(this.#moveIndex), string);
       outputView.printMap(this);
-      if (this.#bridge[this.#moveIndex] === string) {
-        this.incrementMoveIndex();
-        return this.move(this);
-      }
-      this.retry(this);
+      this.handleMoveInput(string);
     } catch (error) {
       outputView.printError(error);
       this.move(this);
