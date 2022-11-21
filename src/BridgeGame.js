@@ -19,12 +19,30 @@ class BridgeGame {
     return this.bridgeResult();
   }
 
+  checkFail(moveKey) {
+    if (moveKey !== this.#solutionArr[this.#moveCount]) {
+      const { topBridge, bottomBridge } = this.bridgeResult();
+      this.insertFailValue({ topBridge, bottomBridge });
+      return { topBridge, bottomBridge };
+    }
+    return false;
+  }
+
+  insertFailValue({ topBridge, bottomBridge }) {
+    if ("D" === this.#solutionArr[this.#moveCount]) {
+      topBridge.push(" ");
+      bottomBridge.push("X");
+      return { topBridge, bottomBridge };
+    }
+    bottomBridge.push("X");
+    topBridge.push(" ");
+  }
+
   bridgeResult() {
     const topBridge = [];
     const bottomBridge = [];
 
     this.#solutionArr.slice(0, this.#moveCount).forEach((solutionStr) => {
-      if (moveKey !== this.#solutionArr[this.#moveCount]) return false;
       this.insertSuccessValue(solutionStr, topBridge, bottomBridge);
     });
     return { topBridge, bottomBridge };
