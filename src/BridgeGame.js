@@ -1,9 +1,18 @@
-const OutputView = require("./OutputView");
-const InputView = require("./InputView");
+const BridgeMaker = require("./BridgeMaker");
+const { generate } = require("./BridgeRandomNumberGenerator");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  bridge;
+
+  constructor() {
+    this.bridge = [];
+  }
+
+  makeBridge(size) {
+    this.bridge = BridgeMaker.makeBridge(size, generate);
+  }
   /**
    *
    * 사용자가 칸을 이동할 때 사용하는 메서드
