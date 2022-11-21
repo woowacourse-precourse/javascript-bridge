@@ -34,6 +34,10 @@ const OutputView = {
     this.printMap(model);
     const count = model.getTryCount();
     Console.print(`게임 성공 여부: ${successOrFail} \n총 시도한 횟수: ${count}`);
+    this.close();
+  },
+
+  close() {
     Console.close();
   },
 };
