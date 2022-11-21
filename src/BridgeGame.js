@@ -9,7 +9,7 @@ const { ERROR_MSG } = require('./libs/constant');
 class BridgeGame {
   size;
   bridge = [];
-  pos = [];
+  movedDirections = [];
   try = 1;
   result = true;
 
@@ -40,7 +40,7 @@ class BridgeGame {
    */
   move(direction) {
     this.validateMoveDirection(direction);
-    this.pos.push(direction);
+    this.movedDirections.push(direction);
   }
 
   validateMoveDirection(direction) {
@@ -51,6 +51,12 @@ class BridgeGame {
     }
 
     return isValidMoveDirection;
+  }
+
+  getMovedBridge() {
+    const { bridge, movedDirections } = this;
+
+    return movedDirections.map((direction, idx) => ({ direction, correct: direction === bridge[idx] }));
   }
 
   /**
