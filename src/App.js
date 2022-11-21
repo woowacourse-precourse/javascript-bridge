@@ -4,19 +4,36 @@ const outputView = require("./OutputView");
 const inputView = require("./InputView");
 const bridgeMaker = require("./BridgeMaker");
 const bridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { vaildSizeInput } = require("./InputView");
 
 class App {
-  play() {
+  async play() {
     outputView.printStart();
-    inputView.readBridgeSize((size) => {
-      if(size < 2 || size > 20) {
-        throw new Error(ERROR_MESSAGE.LENGTH);
-      }
-      const bridgeArr = bridgeMaker.makeBridge(size, bridgeRandomNumberGenerator.generate);
-      console.log(bridgeArr);  
 
-      this.move(bridgeArr);    
+    let size = 0;
+    while(size===0) {
+      try {
+        size = await this.inputSize();
+      } catch(e) {
+        Console.print(e.message);
+      }
+    }
+
+    const bridgeArr = bridgeMaker.makeBridge(size, bridgeRandomNumberGenerator.generate);
+
+    this.move(bridgeArr);
+  }
+
+  /** 2-1. 다리 길이 입력 받아 size에 담기  */
+  async inputSize() {
+    let size = 0;
+    await inputView.readBridgeSize()
+    .then(value => {
+      size = Number(value);
+    }).catch(error => {
+      throw error;
     });
+    return size;
   }
 
   /** 4-1. 이동할 칸 입력 및 입력값 */
