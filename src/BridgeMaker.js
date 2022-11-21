@@ -12,10 +12,12 @@ const BridgeMaker = {
    */
 
   canMakeBridge(size) {
-    if (size < 3 && size > 20)
-      throw new InputError("3-20", "[ERROR] 3과 20사이의 자연수가 아닙니다.");
-    if (size % 1 != 0)
-      throw new InputError("3-20", "[ERROR] 3과 20사이의 자연수가 아닙니다.");
+    const isValidInput = size < 3 || size > 20 || size % 1 != 0;
+    if (isValidInput)
+      throw new InputError(
+        "3-20",
+        "[ERROR] 3과 20사이의 자연수를 입력해주세요."
+      );
     return this.makeBridge(size, BridgeRandomNumberGenerator.generate);
   },
 
