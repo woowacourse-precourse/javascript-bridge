@@ -7,6 +7,14 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
 
 class App {
+  #retryCount;
+  #successOrFailure;
+
+  constructor() {
+    this.#retryCount = 1;
+    this.#successOrFailure;
+  }
+
   play() {
     Console.print("다리 건너기 게임을 시작합니다.\n");
     this.inputBridgeSize();
@@ -45,7 +53,9 @@ class App {
 
   displaySuccessState(isSuccess) {
     if (this.bridgeGame.gameFinish()) {
+      this.#successOrFailure = "성공";
       OutputView.printMap(isSuccess);
+      return Console.close();
     }
     OutputView.printMap(isSuccess);
     this.inputMoving();
@@ -62,6 +72,7 @@ class App {
 
   insertRKey(retryKey) {
     if (retryKey === "R") {
+      this.#retryCount += 1;
       this.bridgeGame.retry();
       this.inputMoving();
     }
@@ -69,6 +80,7 @@ class App {
 
   insertQKey(retryKey, isFail) {
     if (retryKey === "Q") {
+      this.#successOrFailure = "실패";
       OutputView.printMap(isFail);
       return Console.close();
     }
