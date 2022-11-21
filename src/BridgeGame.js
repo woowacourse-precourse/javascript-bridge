@@ -24,13 +24,16 @@ const OutputView = require("./OutputView.js");
     const moving = RecallUntilCorrect.recallReadMoving(true);
     if(moving===this.#bridgeMap[moveCount]){
       const Map = this.isUpOrDown(moving, true);
-      this.#upMap += Map[0], this.#downMap += Map[1];
+      this.addUpDownMap(Map);
       return true;
     }else{
       const Map = this.isUpOrDown(moving, false);
-      this.#upMap += Map[0], this.#downMap += Map[1];
+      this.addUpDownMap(Map);
       return false;
     }
+  }
+  addUpDownMap(Map){
+    this.#upMap += Map[0], this.#downMap += Map[1];
   }
   isUpOrDown(moving, canMove){
     if(moving === "U" && canMove) 
