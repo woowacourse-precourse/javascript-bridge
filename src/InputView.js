@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { bridgeSizeValidate } = require("./ValidateCheck");
+const { bridgeSizeValidate, movingValidate } = require("./ValidateCheck");
 const Consolee = MissionUtils.Console;
 
 /**
@@ -23,6 +23,7 @@ const InputView = {
   readMoving() {
     Consolee.readline("이동할 칸을 선택해주세요. (위: U, 아래: D) \n", (moves) => {
       //예외 처리 2
+      movingValidate(moves);
     });
     return moves;
   },
