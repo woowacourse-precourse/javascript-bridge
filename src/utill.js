@@ -8,13 +8,12 @@ const input = async (commandMessage) => {
   });
 }
 
-const throwError = (errorMessage) => {
-  Console.print(errorMessage);
-  Console.close();
-  throw new Error("[ERROR]");
+const handleError = (errorMessage, nextStep) => {
+  Console.print(`[ERROR] ${errorMessage}\n`);
+  nextStep();
 }
 
 module.exports = {
   input,
-  throwError,
+  handleError,
 }
