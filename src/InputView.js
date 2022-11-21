@@ -19,18 +19,23 @@ const InputView = {
     return bridgeSize;
   },
 
+  validateBridgeSize(bridgeSize) {
+    Validate.notNumber(bridgeSize);
+    Validate.notInRange(bridgeSize, BRIDGE_SIZE.MAXIMUM, BRIDGE_SIZE.MINIMUM);
+  },
+
   /**
    * 다리의 길이가 제대로 될 때까지 입력받는다.
    */
   getBridgeSize() {
     const bridgeSize = this.readBridgeSize();
-    if (
-      Validate.notNumber(bridgeSize) &&
-      Validate.notInRange(bridgeSize, BRIDGE_SIZE.MAXIMUM, BRIDGE_SIZE.MINIMUM)
-    ) {
+    try {
+      this.validateBridgeSize(bridgeSize);
       return bridgeSize;
+    } catch (error) {
+      print(error.message);
+      this.getBridgeSize();
     }
-    this.getBridgeSize();
   },
 
   /**
@@ -49,10 +54,13 @@ const InputView = {
    */
   getMoving() {
     const move = this.readMoving();
-    if (Validate.notAvailableMove(move, Object.values(MOVE))) {
+    try {
+      Validate.notAvailableMove(move, Object.values(MOVE));
       return move;
+    } catch (error) {
+      print(error.message);
+      this.readMoving();
     }
-    this.readMoving();
   },
 
   /**
@@ -71,10 +79,13 @@ const InputView = {
    */
   getMGameCommand() {
     const gameCommand = this.readGameCommand();
-    if (Validate.notAvailablePlay(gameCommand, Object.values(PLAY))) {
+    try {
+      Validate.notAvailablePlay(gameCommand, Object.values(PLAY));
       return gameCommand;
+    } catch (error) {
+      print(error.message);
+      this.readGameCommand();
     }
-    this.readGameCommand();
   },
 };
 
