@@ -36,6 +36,16 @@ describe('다리 게임 테스트', () => {
     bridgeGame.move('U')
     expect(bridgeGame.moves).toHaveLength(2)
   })
+
+  test('재시작하면 moves는 초기화된다.', () => {
+    const bridgeGame = new BridgeGame()
+
+    bridgeGame.move('U')
+    bridgeGame.move('U')
+    bridgeGame.retry()
+
+    expect(bridgeGame.moves).toEqual([])
+  })
 })
 
 describe('다리 건너기 테스트', () => {
