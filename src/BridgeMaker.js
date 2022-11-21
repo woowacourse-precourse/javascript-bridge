@@ -9,11 +9,12 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = new Array(2).fill(0).map(() => new Array(size).fill("x"));
+    
     for (let i = 0; i < size; i++) {
       let number = generateRandomNumber();
-      if (number === 0) bridge[1][i] = "U";
+      if (number === 0) bridge[1][i] = "D";
 
-      if (number === 1) bridge[0][i] = "D";
+      if (number === 1) bridge[0][i] = "U";
     }
 
     return bridge;
