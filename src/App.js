@@ -37,6 +37,10 @@ class App {
     this.bridgeGame.move(movingCommand);
     OutputView.printMap(this.bridgeGame.getCurrentBridgeMap());
 
+    this.afterMove();
+  }
+
+  afterMove() {
     if (!this.bridgeGame.isAnswerMovingChoice()) {
       this.inputRetryCommand();
       return;
