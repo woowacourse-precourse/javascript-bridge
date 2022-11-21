@@ -1,6 +1,7 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const { readGameCommand, readMoving, readBridgeSize } = require("./InputView");
-const { printResult, returnCheckedMap, printStart, printMap } = require("./OutputView");
+const { printResult, returnCheckedMap, printStart, printMap, printOneBlankLine } = require("./OutputView");
 
 class App {
   #size;
@@ -24,6 +25,7 @@ class App {
    * @param {string} size 다리의 길이가 되었으면 하는 값
    */
   startGame(size) {
+    printOneBlankLine();
     this.#size = Number(size);
     const bridgeGame = new BridgeGame(this.#size);
     this.#tryCount += 1;
@@ -77,5 +79,8 @@ class App {
     );
   }
 }
+
+const app = new App;
+app.play()
 
 module.exports = App;
