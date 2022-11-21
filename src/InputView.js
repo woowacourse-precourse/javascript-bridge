@@ -18,7 +18,7 @@ const InputView = {
 
   readBridgeSizeCallback(size) {
     try {
-      this.bridgeGameControl.makeBridge(size); // 다리 만들기
+      this.bridgeGameControl.makeBridgeGame(size); // 다리 만들기
       this.readMoving(); // 무빙 입력받기
     } 
     catch (error) {
@@ -36,9 +36,10 @@ const InputView = {
 
   readMovingCallback(moving) {
     try {
+      this.bridgeGameControl.manageMoving(moving);
       this.readGameCommand();
     } catch (error) {
-      OutputView.printErrorMessage(MOVING_ERROR);
+      OutputView.printErrorMessage(ERROR.MOVING_ERROR);
       this.readMoving();
     }
   },

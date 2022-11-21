@@ -4,9 +4,20 @@ const PROMPT = {
   READ_MOVING : "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
 }
 
+const COMMAND = {
+  UP : "U",
+  DOWN : "D",
+}
+
+const WORD = {
+  CORRECT : "O",
+  WRONG : "X",
+  EMPTY : " ",
+}
+
 const ERROR = {
   SIZE_ERROR : "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n",
   MOVING_ERROR : "[ERROR] 위나 아래로 이동하려면 U나 D를 입력해야 합니다.\n",
 }
 
-module.exports = { PROMPT, ERROR };
+module.exports = { PROMPT, COMMAND, WORD, ERROR };
