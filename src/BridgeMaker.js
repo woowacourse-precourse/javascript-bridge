@@ -13,7 +13,7 @@ const BridgeMaker = {
     const bridge = [];
     const shapes = Object.keys(BridgeGame.BRIDGE_SHAPE);
 
-    for (let index = 0; index < size; index++) {
+    while (bridge.length < size) {
       const number = generateRandomNumber();
       bridge.push(shapes[number]);
     }
