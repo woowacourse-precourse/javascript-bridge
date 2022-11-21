@@ -2,6 +2,7 @@ const BridgeGame = require('../domain/BridgeGame');
 const OutputView = require('../view/OutputView');
 const InputView = require('../view/InputView');
 const BridgeCtrlValidator = require('./BridgeCtrlValidator');
+const { RETRY, QUIT } = require('../contants/Options');
 
 class BridgeCtrl {
   #game;
@@ -39,8 +40,8 @@ class BridgeCtrl {
   askMoreChance() {
     const onReadGameCommand = (gameCommand) => {
       BridgeCtrlValidator.validateGameCommand(gameCommand);
-      if (gameCommand === 'R') this.retryGame();
-      if (gameCommand === 'Q') this.closeGame();
+      if (gameCommand === RETRY) this.retryGame();
+      if (gameCommand === QUIT) this.closeGame();
     };
     InputView.readGameCommand(onReadGameCommand);
   }

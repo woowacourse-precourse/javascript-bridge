@@ -1,3 +1,5 @@
+const { UP, DOWN } = require('./contants/Options');
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -10,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     return Array(size)
       .fill()
-      .map(() => (generateRandomNumber() === 1 ? 'U' : 'D'));
+      .map(() => (generateRandomNumber() === 1 ? UP : DOWN));
   },
 };
 

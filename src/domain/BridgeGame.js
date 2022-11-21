@@ -20,7 +20,7 @@ class BridgeGame {
   }
 
   /**
-   * @param {'U' | 'D'} choice 다리의 길이
+   * @param {string} choice 다리의 길이
    * @return {void}
    */
   move(choice) {

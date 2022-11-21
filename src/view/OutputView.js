@@ -1,5 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-
+const { UP, DOWN } = require('../contants/Options');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -30,17 +30,17 @@ const OutputView = {
    */
   makeBridgeView(moveStatus, movesPossible) {
     return `${this.makeOneLinefBridgeView(
-      moveStatus.map((elem) => elem === 'U'),
+      moveStatus.map((elem) => elem === UP),
       movesPossible
     )}\n${this.makeOneLinefBridgeView(
-      moveStatus.map((elem) => elem === 'D'),
+      moveStatus.map((elem) => elem === DOWN),
       movesPossible
     )}`;
   },
 
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * @param {('U' | 'D')[]} moveStatus 여태까지의 움직임 점보를 받는다.
+   * @param {string[]} moveStatus 여태까지의 움직임 점보를 받는다.
    * @param {boolean[]} movesPossible 각각의 움직임이 가능한지 받는다.
    * @return {void} 출력
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
