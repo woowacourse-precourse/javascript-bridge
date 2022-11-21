@@ -8,13 +8,17 @@
 [O] Retry일 때 배열이 초기화 되는 로직추가
 [O] 출력문 초기화
 [] ApplicationTest가 원하는대로 로직수정
+[O] 문제 : 원본배열에 shift를 해서 Restart할 때 문제가 생기므로 이 부분 수정
 
 ## 테스트케이스에 맞도록 재수정
 1. BridgeMaker "U" "D" "U" 이런식으로 배열이 생성되도록
 
 ## 리팩토링 진행 시작
 1. 함수 길이줄이기
+- InputView,OutputView에 있는 함수 줄이는중
 2. 클래스 사용하는 로직짜기
+- Input 클래스에 검증로직 구현
+- OutPut 클래스 선언
 3. 변수이름, 따로 빼두는 로직
 
 ## InputView
