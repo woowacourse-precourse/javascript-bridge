@@ -157,6 +157,21 @@ class GameController {
     this.printMaps();
     this.keepMovingOrStop();
   }
+
+  /**
+   * 결과를 출력한다.
+   */
+  printResultandSuccessOrFail() {
+    OutputView.printResult(
+      this.BridgeGame.bridges.getAllBridges(),
+      Message.returnResultMessage(this.BridgeGame.isFailed()),
+      this.getTries()
+    );
+  }
+
+  getTries() {
+    return this.#tries;
+  }
 }
 
 module.exports = GameController;
