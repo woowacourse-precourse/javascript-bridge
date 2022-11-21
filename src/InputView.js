@@ -7,24 +7,41 @@ const { MESSAGE } = require('./constants');
 const InputView = {
   readBridgeSize(settingBridge) {
     Console.readLine(MESSAGE.INPUT_BRIDGE_SIZE, (size) => {
-      settingBridge(size);
+      try {
+        settingBridge(size);
+      } catch(e) {
+        Console.print(e);
+        this.readBridgeSize(settingBridge);
+      }
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridgeGame) {
+  readMoving(movingSteps) {
     Console.readLine(MESSAGE.INPUT_MOVING, (move) => {
-      bridgeGame.move(move);
+      try {
+        movingSteps(move);
+      } catch(e) {
+        Console.print(e);
+        this.readMoving(movingSteps);
+      }
     })
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-
+  readGameCommand(endingBridge) {
+    Console.readLine(MESSAGE.INPUT_ENDING, (command) => {
+      try {
+        endingBridge(command);
+      } catch(e) {
+        Console.print(e);
+        this.readGameCommand(endingBridge);
+      }
+    })
   },
 };
 
