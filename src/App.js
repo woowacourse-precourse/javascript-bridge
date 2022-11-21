@@ -12,6 +12,7 @@ class App {
     this.size = 0;
     this.randomBridge = [];
     this.userMove = '';
+    this.run = 1;
   }
   play() {
     Consolee.print("다리 건너기 게임을 시작합니다.");
@@ -29,7 +30,7 @@ class App {
     let num = this.size;
     let i = 0;
     let ok = true;
-    while(ok == true){
+    while(i != num){
       ok = this.readMove(i);
       if(ok == false) break;
       i += 1;
@@ -56,12 +57,13 @@ class App {
     if(read == 'R'){
       bridgeGame.retry();
       this.userMove = '';
-      this.settingGame();
+      this.run += 1;
+      this.startGame();
     }
     this.finish();
   }
   finish(){
-
+    
   }
 }
 

@@ -15,7 +15,7 @@ class BridgeGame {
     let isCheckOk = false;
     this.check[i] = "X";
     if(this.bridge[i] == user){
-      this.check[i] = "O";
+      this.check[i] = this.bridge[i];
       isCheckOk = true;
     }
     return isCheckOk;
