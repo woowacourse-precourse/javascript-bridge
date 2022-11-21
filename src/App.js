@@ -2,6 +2,8 @@ const OutputView = require('./View/OutputView');
 const InputView = require('./View/InputView');
 const BridgeGame = require('./BridgeGame');
 const { makeMapArray } = require('./util/MapMaker');
+const { MOVEMENT_RESULT, COMMAND } = require('./Constants');
+const Validator = require('./Validator');
 
 class App {
   #brideGame;
@@ -33,6 +35,7 @@ class App {
     try {
       this.#brideGame.move(movement);
       this.#printMap();
+      this.#gotoNextStageAfterMoving();
     } catch (error) {
       OutputView.print(error.message);
       this.#readMovingStage();
@@ -43,6 +46,11 @@ class App {
     const gameState = this.#brideGame.getGameState();
     const mapArray = makeMapArray(gameState.userPath, gameState.bridge);
     OutputView.printMap(mapArray);
+  }
+
+  #gotoNextStageAfterMoving() {
+    const { currentState } = this.#brideGame.getGameState();
+    if (currentState === MOVEMENT_RESULT.CORRECT) this.#readMovingStage();
   }
 }
 module.exports = App;
