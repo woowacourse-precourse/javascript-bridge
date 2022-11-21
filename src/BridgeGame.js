@@ -1,20 +1,28 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const { DIRECTION, DIRECTION_MATCH } = require("./constants/gameState");
+const {
+  DIRECTION,
+  DIRECTION_MATCH,
+  RETRY,
+  SUCCESS_RESULT,
+} = require("./constants/gameState");
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const BridgeGameController = require("./BridgeGameController");
+
 class BridgeGame {
   #bridge;
   #totalCount;
   #bridgeGameController;
   #userDirectionInput;
+  #resultMap;
 
   constructor() {
     this.#bridgeGameController = new BridgeGameController();
     this.#totalCount = 0;
     this.#userDirectionInput = [];
+    this.#resultMap = [];
   }
 
   startGame(bridgeSize) {
@@ -87,7 +95,17 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(isRetry) {
+    this.#bridgeGameController.validateRetry(isRetry);
+    if (isRetry === RETRY.RETRY) this.#bridgeGameController.inputDirection();
+    if (isRetry === RETRY.QUIT) {
+      this.#bridgeGameController.outputResult(
+        this.#resultMap,
+        SUCCESS_RESULT.FAIL,
+        this.#totalCount
+      );
+    }
+  }
 }
 
 module.exports = BridgeGame;
