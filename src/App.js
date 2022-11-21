@@ -48,14 +48,17 @@ class App {
   };
 
   retryCallback = (input) => {
-    // input 값 보고 결정할 것.
-    // 값 검증
-    // 재시작 관련로직 정리하기
+    const isGameContinueValidate = gameContinue(input, () =>
+      InputView.readGameCommand(this.retryCallback),
+    );
+    if (!isGameContinueValidate) return;
+
     const result = this.bridgeGame.retry(input);
     if (!result) {
       this.endCallback(this.bridgeGame.end());
       return;
     }
+
     InputView.readMoving(this.moveCallback);
   };
 

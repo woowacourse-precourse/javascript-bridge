@@ -28,7 +28,17 @@ const bridgeDirection = function bridgeDirectionValidation(input, callback) {
   }
 };
 
-const gameContinue = function gameContinueValidation(input, callback) {};
+const gameContinue = function gameContinueValidation(input, callback) {
+  try {
+    if (input !== "R" && input !== "Q")
+      throw new Error("R 또는 Q만 입력 가능합니다.");
+    return true;
+  } catch (e) {
+    Console.print(`[ERROR]${e}`);
+    callback();
+    return false;
+  }
+};
 
 module.exports = {
   bridgeLength,
