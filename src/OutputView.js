@@ -11,17 +11,19 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(gameRec) {
-    MissionUtils.Console.print(
-      `${gameRec.bridgeOutput.firstBridge}\n${gameRec.bridgeOutput.secondBridge}`,
-    );
+    MissionUtils.Console.print(`${gameRec.bridgeOutput.firstBridge}\n${gameRec.bridgeOutput.secondBridge}`);
+    this.decideNextPrompt(gameRec);
+  },
+
+  decideNextPrompt(gameRec) {
     const InputView = require("./InputView");
-    if (gameRec.correctOrNot === "X") { // 실패 => 게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)
-      InputView.readGameCommand(gameRec);
+    if (gameRec.correctOrNot === "X") {
+      InputView.readGameCommand(gameRec); // 실패 => 게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)
     } else if (gameRec.correctOrNot === "O" && gameRec.bridgeAnswer.length === gameRec.moveNum) {
       gameRec.success = true;
-      OutputView.printResult(gameRec); // 끝까지 성공
-    } else { // readMoving 반복
-      InputView.readMoving(gameRec); // 여기: gameRec에 들어가는 변수 확인하고 딸려 들어갈 때 뭐 체크해야 하는지 확인!
+      OutputView.printResult(gameRec); // 끝까지 성공 => printResult
+    } else {
+      InputView.readMoving(gameRec); // 아직 진행 중 => readMoving 반복
     }
   },
   /**
