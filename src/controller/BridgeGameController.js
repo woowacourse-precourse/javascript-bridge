@@ -1,3 +1,4 @@
+const { Console } = require("@woowacourse/mission-utils");
 const BridgeMaker = require("../BridgeMaker");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const Bridge = require("../models/Bridge");
@@ -19,25 +20,24 @@ class BrideGameController {
   }
 
   readBridgeSizePhase() {
-    InputView.readBridgeSize(this.handleGameStartPhase.bind(this));
+    InputView.readBridgeSize(this.validateBridgeSize.bind(this));
   }
 
-  handleGameStartPhase(size) {
+  validateBridgeSize(size) {
     try {
       this.validator.checkBridgeLengthInput(size);
     } catch (error) {
-      console.log(error.message);
+      Console.print(error.message);
       this.readBridgeSizePhase();
       return;
     }
+    this.handleGameStartPhase(size);
+  }
+
+  handleGameStartPhase(size) {
     this.generateBridgeGame(size);
     OutputView.printNewLine();
     this.readMovingPhase();
-  }
-
-  readMovingPhase() {
-    InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
-
   }
 
   generateBridgeGame(size) {
@@ -46,14 +46,22 @@ class BrideGameController {
     );
   }
 
-  handleAnswerCheckPhase(direction) {
+  readMovingPhase() {
+    InputView.readMoving(this.validateMoving.bind(this));
+  }
+
+  validateMoving(direction) {
     try {
       this.validator.checkDirectionInput(direction);
     } catch (error) {
-      console.log(error.message);
+      Console.print(error.message);
       this.readMovingPhase();
       return;
     }
+    this.handleAnswerCheckPhase(direction);
+  }
+
+  handleAnswerCheckPhase(direction) {
     this.#bridgeGame.updateResult(direction);
     OutputView.printMap(this.#bridgeGame.getResult());
     if(this.#bridgeGame.isAnswer(direction)) {
@@ -61,10 +69,6 @@ class BrideGameController {
       return;
     }
     this.readGameCommandPhase();
-  }
-
-  readGameCommandPhase() {
-    InputView.readGameCommand(this.handleGameRetryPhase.bind(this));
   }
 
   handleGameEndPhase() {
@@ -76,14 +80,22 @@ class BrideGameController {
     InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
   }
 
-  handleGameRetryPhase(retryAnswer) {
+  readGameCommandPhase() {
+    InputView.readGameCommand(this.validateGameCommand.bind(this));
+  }
+
+  validateGameCommand(retryAnswer) {
     try {
       this.validator.checkRetryInput(retryAnswer);
     } catch (error) {
-      console.log(error.message);
+      Console.print(error.message);
       this.readGameCommandPhase();
       return;
     }
+    this.handleGameRetryPhase(retryAnswer)
+  }
+
+  handleGameRetryPhase(retryAnswer) {
     if (retryAnswer === 'R') {
       this.#bridgeGame.retry();
       InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
