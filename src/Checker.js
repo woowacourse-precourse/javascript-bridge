@@ -2,7 +2,9 @@ const Checker = {
   checkSpaceCanCross(movingInput, bridgeSpace) {
     return movingInput === bridgeSpace;
   },
-  checkCrossBridge() {},
+  checkCrossBridge(endRound, bridgeLength) {
+    return endRound === bridgeLength;
+  },
 };
 
 module.exports = Checker;
