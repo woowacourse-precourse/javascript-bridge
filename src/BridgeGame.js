@@ -19,7 +19,6 @@ class BridgeGame {
    */
   initializeBridge(size) {
     this.#Status.bridge = makeBridge(size, generate);
-    console.log(this.#Status.bridge); // FOR TEST
   }
 
   /**

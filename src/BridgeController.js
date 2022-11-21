@@ -124,8 +124,4 @@ class BridgeController {
   };
 }
 
-// FOR TEST!!
-// const controller = new BridgeController();
-// controller.getBridgeSize();
-
 module.exports = BridgeController;
