@@ -10,13 +10,6 @@ const BridgeMaker = {
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
   makeBridge(size, generateRandomNumber) {
-    // 다리 N*M 배율
-    // 2*size 배율을 만들어야함
-    // 다리의 길이를 숫자로 입력받고 생성한다.
-    // 다리를 생성할 때 위 칸과 아래 칸 중 건널 수 있는 칸은 0과 1 중 무작위 값을 이용해서 정한다.
-    // 위 칸을 건널 수 있는 경우 U, 아래 칸을 건널 수 있는 경우 D값으로 나타낸다.
-    // 무작위 값이 0인 경우 아래 칸, 1인 경우 위 칸이 건널 수 있는 칸이 된다.
-
     let BRIDGE = []    
     for (let i = 0 ; i < size ; i ++) {
       this.makeBridgePush(BRIDGE,generateRandomNumber())
