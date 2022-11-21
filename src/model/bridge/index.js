@@ -1,6 +1,6 @@
 const GameModel = require('../GameModel');
 const ErrorBoundary = require('../../error/ErrorBoundary');
-const { SizeValidation, CommandValidation, ReplayValidation } = require('../../validate');
+const { SizeValidation, CommandValidation, ReplayValidation } = require('../../validation');
 const { makeBridge } = require('../../BridgeMaker');
 const { generate } = require('../../BridgeRandomNumberGenerator');
 const BridgeMap = require('./BridgeMap');
