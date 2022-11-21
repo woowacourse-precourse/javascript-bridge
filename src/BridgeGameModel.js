@@ -1,4 +1,3 @@
-const { checkSizeInRange } = require('./Validation');
 const { makeBridge } = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
@@ -8,10 +7,19 @@ class BridgeGameModel {
   #userMove;
   #playCount;
   #isSuccess;
+  #step;
 
-  setUserMove(userMove) {
-    checkSizeInRange(userMove);
-    this.#userMove = userMove;
+  constructor() {
+    this.#bridge = [];
+    this.#bridgeSize = 0;
+    this.#userMove = [];
+    this.#playCount = 0;
+    this.#isSuccess = false;
+    this.#step = '';
+  }
+
+  setUserMove(move) {
+    this.#userMove.push(move);
   }
 
   getUserMove() {
@@ -19,9 +27,7 @@ class BridgeGameModel {
   }
 
   setBridgeSize(size) {
-    const sizeInput = Number(size);
-    checkSizeInRange(sizeInput);
-    this.#bridgeSize = sizeInput;
+    this.#bridgeSize = size;
     this.setBridge();
   }
 
@@ -34,6 +40,14 @@ class BridgeGameModel {
 
   getBridge() {
     return this.#bridge;
+  }
+
+  setStep(step) {
+    this.#step = step;
+  }
+
+  getStep() {
+    return this.#step;
   }
 }
 

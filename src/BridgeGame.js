@@ -1,9 +1,6 @@
-const BridgeMap = require('./BridgeMap');
-const { ERROR } = require('./Constants');
-const { readGameCommand, readMoving } = require('./InputView');
-const { printResult, printMap, printError } = require('./OutputView');
+const { readGameCommand } = require('./InputView');
+const { printResult, printError } = require('./OutputView');
 const {
-  checkUserMove,
   checkUserCommand,
   isCurrentLastIndexValueSame,
   isLengthSame,
@@ -17,20 +14,21 @@ class BridgeGame {
   #userMove;
   #playCount;
   #isSuccess;
+  #model;
+  #controller;
 
-  constructor(bridge) {
-    this.#bridge = bridge;
-    this.#userMove = [];
-    this.#playCount = 0;
-    this.#isSuccess = false;
+  constructor(model, controller) {
+    this.#model = model;
+    this.#controller = controller;
   }
 
   initialize() {
     this.#userMove = [];
   }
 
-  move(step) {
-    this.#userMove.push(step);
+  move() {
+    this.#controller.renderMap();
+    this.checkResult();
   }
 
   retry() {
@@ -60,35 +58,16 @@ class BridgeGame {
         this.#isSuccess = true;
         return this.end();
       }
-      return this.getUserMove();
+      return this.#controller.readUserMoving(() => this.move());
     }
     return this.getUserCommand();
   }
 
-  #setUserMove(step) {
-    this.move(step);
-    BridgeMap.generate(this.#bridge, this.#userMove);
-    printMap();
-    this.checkResult();
-  }
-
-  getUserMove() {
-    readMoving((step) => {
-      try {
-        checkUserMove(step);
-        return this.#setUserMove(step);
-      } catch (error) {
-        printError(error);
-        return this.getUserMove();
-      }
-    });
-  }
-
   start() {
-    console.log(this.#bridge);
+    console.log(this.#model.getBridge());
     this.#playCount += 1;
     this.initialize();
-    this.getUserMove();
+    this.#controller.readUserMoving(() => this.move());
   }
 }
 

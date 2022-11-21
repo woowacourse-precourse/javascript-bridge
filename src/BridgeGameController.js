@@ -1,6 +1,8 @@
 const { readBridgeSize, readMoving } = require('./InputView');
-const { printError } = require('./OutputView');
+const { printError, printMap } = require('./OutputView');
+const BridgeMap = require('./BridgeMap');
 const BridgeGame = require('./BridgeGame');
+const { checkSizeInRange, checkUserMove } = require('./Validation');
 
 class BridgeGameController {
   #model;
@@ -14,31 +16,40 @@ class BridgeGameController {
     return callback();
   }
 
-  setBridgeGame() {
-    const bridgeGame = new BridgeGame(this.#model);
-    bridgeGame.start();
-  }
-
-  setUserBridgeSize() {
+  readUserBridgeSize(resolve) {
     readBridgeSize((size) => {
       try {
-        this.#model.setBridgeSize(size);
-        this.setBridgeGame();
+        const sizeInput = Number(size);
+        checkSizeInRange(sizeInput);
+        this.#model.setBridgeSize(sizeInput);
+        resolve();
       } catch (error) {
-        this.controlException(error, () => this.setUserBridgeSize());
+        this.controlException(error, () => this.readUserBridgeSize(resolve));
       }
     });
   }
 
-  setMoving(resolve) {
+  setUserMoving(step) {
+    BridgeMap.generate(this.#model.getBridge(), this.#model.getUserMove());
+    printMap();
+    this.checkResult();
+  }
+
+  readUserMoving(resolve) {
     readMoving((step) => {
       try {
+        checkUserMove(step);
         this.#model.setUserMove(step);
-        return resolve();
+        resolve();
       } catch (error) {
-        return this.controlException(error, this.setMoving);
+        this.controlException(error, () => this.readUserMoving(resolve));
       }
     });
+  }
+
+  renderMap() {
+    BridgeMap.generate(this.#model.getBridge(), this.#model.getUserMove());
+    printMap();
   }
 }
 
