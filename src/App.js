@@ -152,6 +152,10 @@ class App {
 
     this.#input.readGameCommand(message, retryGameCommandFunc);
   }
+
+  exit() {
+    this.#input.close();
+  }
 }
 
 module.exports = App;
