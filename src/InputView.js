@@ -15,7 +15,7 @@ const InputView = {
   start() {
     this.count = 0;
     this.roundCount = 1;
-    this.bridgeGame = new BridgeGame();
+    this.bridgeGame = new BridgeGame(this.count);
     this.readBridgeSize();
   },
 
