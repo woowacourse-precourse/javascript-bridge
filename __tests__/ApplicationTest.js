@@ -13,8 +13,10 @@ const mockQuestions = (answers) => {
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers
-    .reduce((acc, number) => acc
-      .mockReturnValueOnce(number), MissionUtils.Random.pickNumberInRange);
+    .reduce(
+      (acc, number) => acc.mockReturnValueOnce(number),
+      MissionUtils.Random.pickNumberInRange,
+    );
 };
 
 const getLogSpy = () => {

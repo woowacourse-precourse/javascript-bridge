@@ -27,7 +27,8 @@ describe('다리 건너기 테스트', () => {
       new Map([['U', ['O', ' ', 'X']], ['D', [' ', 'O', ' ']]]),
     ];
     const bridgeGame = new BridgeGame();
-    bridgeGame.makePattern(3);
+    bridgeGame.setPattern(BridgeGame.makePattern(3));
+
     input.forEach((path, index) => {
       expect(bridgeGame
         .move(path).getHistory())
