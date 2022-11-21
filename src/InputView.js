@@ -41,11 +41,7 @@ const InputView = {
       if (this.index === this.bridgeSize)
         BridgeGameController.outputData(true, true, this.tryCount);
     }
-    if (this.isPass === false) {
-      if (this.index < this.bridgeSize) this.readGameCommand();
-      if (this.index === this.bridgeSize)
-        BridgeGameController.outputData(true, false, this.tryCount);
-    }
+    if (this.isPass === false) this.readGameCommand();
   },
 
   /**
