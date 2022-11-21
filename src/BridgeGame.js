@@ -69,6 +69,17 @@ class BridgeGame {
     return copiedArray.map(extractBridge);
   }
 
+  static logClassification(bridgeLog) {
+    return bridgeLog.reduce((classifiedBridge, [uBridge, dBridge]) => {
+      const [ZERO, ONE] = [0, 1];
+
+      classifiedBridge[ZERO].push(uBridge);
+      classifiedBridge[ONE].push(dBridge);
+
+      return classifiedBridge;
+    }, [[], []]);
+  }
+
   isBeforeStart() {
     return this.#userPosition === null;
   }
