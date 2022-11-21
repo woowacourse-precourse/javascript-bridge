@@ -1,6 +1,7 @@
 const { readBridgeSize } = require('./Views/InputView');
 const BridgeGame = require('./BridgeGame');
 const { Console } = require('@woowacourse/mission-utils');
+const { BRIDGE_GAME_SENTENCE } = require('./Constant/PrintSentence');
 
 class App {
   constructor() {
@@ -8,7 +9,7 @@ class App {
   }
   
   play() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
+    Console.print(BRIDGE_GAME_SENTENCE.start);
     this.bridge = readBridgeSize();
     if(this.bridge === '[ERROR]') return Console.print(this.bridge);
     const bridgeGame = new BridgeGame(this.bridge);

@@ -1,4 +1,4 @@
-export const BRIDGE_GAME = {
+const BRIDGE_GAME = {
   move_correct: 'O',
   move_fail: 'X',
   move_up: 'U',
@@ -7,7 +7,12 @@ export const BRIDGE_GAME = {
   retry_game: 'R',
 }
 
-export const BRIDGE_GAME_RESULT = {
+const BRIDGE_GAME_RESULT = {
   success: "성공",
   fail: "실패",
+}
+
+module.exports = {
+  BRIDGE_GAME,
+  BRIDGE_GAME_RESULT,
 }

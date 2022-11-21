@@ -1,6 +1,10 @@
 const { isValidateInputGameCommand, isValidateInputMoveDirection } = require('./Validate');
 const { readMoving, readGameCommand } = require('./Views/InputView');
 const { printMap, printResult } = require('./Views/OutputView');
+const { 
+  BRIDGE_GAME,
+  BRIDGE_GAME_RESULT,
+} = require('./Constant/Bridge');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -24,13 +28,13 @@ class BridgeGame {
     if (isValidateInputMoveDirection(move)) return this.move();
     switch(true) {
       case this.bridgeState[this.nowPosition] === move:
-        this.passBridge(move, 'O');
+        this.passBridge(move, BRIDGE_GAME.move_correct);
         printMap(this.nowBridge);
-        if (this.bridgeState.length === this.nowPosition) return printResult('성공', this.nowBridge, this.tryCount);
+        if (this.bridgeState.length === this.nowPosition) return printResult(BRIDGE_GAME_RESULT.success, this.nowBridge, this.tryCount);
         this.move();
         break;
       default:
-        this.passBridge(move, 'X');
+        this.passBridge(move, BRIDGE_GAME.move_fail);
         printMap(this.nowBridge);
         this.retry();
     }
@@ -45,10 +49,10 @@ class BridgeGame {
   passBridge(move, check) {
     this.nowPosition += 1;
     switch(true) {
-      case move === 'U':
+      case move === BRIDGE_GAME.move_up:
         this.updateNowBridge(check, ' ');
         break;
-      case move === 'D':
+      case move === BRIDGE_GAME.move_down:
         this.updateNowBridge(' ', check);
         break;
     }
@@ -85,8 +89,8 @@ class BridgeGame {
     let gameCommand = readGameCommand();
     if (isValidateInputGameCommand(gameCommand)) return this.retry();
     switch(true) {
-      case gameCommand === 'Q':
-        printResult('실패', this.nowBridge, this.tryCount);
+      case gameCommand === BRIDGE_GAME.quit_game:
+        printResult(BRIDGE_GAME_RESULT.fail, this.nowBridge, this.tryCount);
         break;
       default:
         this.clear();
