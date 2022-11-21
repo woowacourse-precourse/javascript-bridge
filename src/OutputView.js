@@ -9,7 +9,22 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(currentState) {
+    const upperRow = [];
+    const lowerRow = [];
+    for (let i = 0; i < currentState.length; i++) {
+      if (currentState[i][0] === "U") {
+        upperRow.push(currentState[i][1] ? "O" : "X");
+        lowerRow.push(" ");
+      }
+      if (currentState[i][0] === "D") {
+        lowerRow.push(currentState[i][1] ? "O" : "X");
+        upperRow.push(" ");
+      }
+    }
+    Console.print("[ " + upperRow.join(" | ") + " ]");
+    Console.print("[ " + lowerRow.join(" | ") + " ]");
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.

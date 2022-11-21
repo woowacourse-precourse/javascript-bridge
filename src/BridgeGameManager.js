@@ -20,16 +20,18 @@ class BridgeGameManager {
     Validation.checkBridgeSize(size);
     this.#bridgeSize = size;
     this.#bridge = makeBridge(size, generate);
+    console.log(this.#bridge);
     return InputView.readMoving(this.manageMoving.bind(this));
   }
 
   manageMoving(direction) {
     Validation.checkDirection(direction);
-    const state = bridgeGame.move(this.#bridge, direction);
-    if (state === GAME_STATE.PASS)
+    const gameState = bridgeGame.move(this.#bridge, direction);
+    if (gameState === GAME_STATE.SUCCESS) return OutputView.printResult();
+    OutputView.printMap(bridgeGame.getCurrentState());
+    if (gameState === GAME_STATE.PASS)
       return InputView.readMoving(this.manageMoving.bind(this));
-    if (state === GAME_STATE.FAIL) return InputView.readGameCommand();
-    if (state === GAME_STATE.SUCCESS) return OutputView.printResult();
+    if (gameState === GAME_STATE.FAIL) return InputView.readGameCommand();
   }
 }
 
