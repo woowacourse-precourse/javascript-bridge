@@ -23,9 +23,17 @@ class BridgeGame {
    */
   move(moveDirection) {
     if (this.bridge[this.moveCount] === moveDirection) {
-      // check direction: top or bottom and deliver movable mark 
+      this.checkDirection(moveDirection, PARAMETERS.movable);
     } else {
-      // check direction: top or bottom and deliver immovable mark 
+      this.checkDirection(moveDirection, PARAMETERS.immovable);
+    }
+  }
+
+  checkDirection(moveDirection, mark) {
+    if (moveDirection === PARAMETERS.upControl) {
+      // mark game result -> deliver mark and where to record mark | space 
+    } else if (moveDirection === PARAMETERS.downControl) {
+      // mark game result -> deliver mark and where to record mark | space 
     }
   }
 
