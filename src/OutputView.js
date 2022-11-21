@@ -39,6 +39,9 @@ const OutputView = {
     Console.print('게임 성공 여부: 성공\n');
     Console.print(`총 시도한 횟수: ${round}`);
   },
+  printStart(){
+    Console.print('다리 건너기 게임을 시작합니다.\n')
+  }
 };
 
 module.exports = OutputView;
