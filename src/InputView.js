@@ -10,7 +10,7 @@ const InputView = {
     Console.readLine("다리의 길이를 입력해주세요.\n", (bridgeSize) => {
       bridgeGame.setBridgeSize(bridgeSize);
       bridgeGame.setBridge();
-      bridgeGame.setTrial();
+      bridgeGame.increaseTrial();
       this.readMoving(bridgeGame);
     });
   },

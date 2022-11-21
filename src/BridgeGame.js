@@ -35,6 +35,9 @@ class BridgeGame {
     console.log(this.#bridge);
   }
 
+  increaseTrial() {
+    this.#trial++;
+  }
 
   move(bridgeChoice) {
     //Validate.bridgeChoice(bridgeChoice);
