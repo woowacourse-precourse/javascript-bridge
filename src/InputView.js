@@ -38,7 +38,7 @@ const InputView = {
       try {
         Validator.moving(userInput);
 
-        OutputView.printMap(BridgeGame.move(userInput));
+        BridgeGame.move(userInput);
       } catch (error) {
         Console.print(error.message);
 
