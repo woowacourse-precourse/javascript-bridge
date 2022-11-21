@@ -20,6 +20,15 @@ const AppConfig = {
   MAX_ERROR_PATIENCE: 100,
 };
 
+const GameLoggerConfig = {
+  MOVE_OK: 'O',
+  MOVE_FAIL: 'X',
+  NO_MOVE: ' ',
+  LOG_PREFIX: '[',
+  LOG_SUFFIX: ']',
+  LOG_SEPARATOR: ' | ',
+};
+
 const Message = {
   GAME_START: '다리 건너기 게임을 시작합니다.',
   ENTER_BRIDGE_LENGTH: '다리의 길이를 입력해주세요.',
@@ -46,5 +55,6 @@ module.exports = {
   BridgeConfig,
   GameConfig,
   AppConfig,
+  GameLoggerConfig,
   Message,
 };
