@@ -38,23 +38,31 @@ class Referee {
 
   judgement(compareResult) {
     if (Referee.#isOver(compareResult)) {
-      InputView.readGameCommand((answer) => this.gameCommand(answer));
-    } else if (this.bridgeGame.bridge.bridge.length === compareResult[0].length) {
-      this.endGame();
-    } else {
-      this.start();
+      return InputView.readGameCommand((answer) => this.gameCommand(answer));
     }
+
+    if (this.bridgeGame.bridge.bridge.length === compareResult[0].length) return this.endGame();
+
+    return this.start();
   }
 
   gameCommand(answer) {
     try {
       Referee.#gameCommandValidate(answer);
-      if (answer === RESTART_MARK) this.bridgeGame.retry(() => this.resultAnalysis());
-      else this.endGame();
+      this.endOrRestart(answer);
     } catch {
       OutputView.printGameCommandError();
       InputView.readGameCommand((reanswer) => this.gameCommand(reanswer));
     }
+  }
+
+  endOrRestart(answer) {
+    if (answer === RESTART_MARK) {
+      this.bridgeGame.retry(() => this.resultAnalysis());
+      return;
+    }
+
+    this.endGame();
   }
 
   endGame() {
