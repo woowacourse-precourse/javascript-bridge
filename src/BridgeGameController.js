@@ -13,6 +13,7 @@ const BridgeGameController = {
     this.getRightBlocks();
   },
   getMoving(block, index) {
+    Validator.moving(block);
     this.chooseBlock = block;
     this.getMove(index);
     return this.isPass;
