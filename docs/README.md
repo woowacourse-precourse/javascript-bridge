@@ -37,7 +37,7 @@
 
 - 하드코딩된 부분들을 `Constants` 폴더에 상수 파일들을 생성하여 분리.
 - 비구조화할당 되어있지 않던 함수들을 비구조화 할당.
-- 유효성 검사 함수들을 `Utils/Validation.js`로 분리 예정
+- 유효성 검사 함수들을 `Validation.js`로 분리 예정
 - MVC 디자인 패턴을 적용하여 Model(`BridgeGame`), Controller(`BridgeController`), View(`InputView`, `OutputView`) 분리
 
 ## Validation.js에서 검사해야하는 항목들
@@ -55,10 +55,6 @@
 
 - 이동할 칸을 입력 받을 때 문자가 맞는지 (1자리)
 - 입력받은 문자가 R 또는 Q가 맞는지
-
-## 미구현된 항목
-
-- (`22. 11. 20.) Jest 테스트 파일 구현 필요
 
 # 기능 흐름
 
