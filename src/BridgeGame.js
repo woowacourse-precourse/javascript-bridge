@@ -1,6 +1,8 @@
 const Validate = require("./Validate");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
+const { MOVING, RETRY, RESULT, CONTROL } =  require("./constants/Values");
+const{ Console } = require("@woowacourse/mission-utils"); //테스트용 추가, 완료 후 삭제
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -17,6 +19,8 @@ class BridgeGame {
     validate.validateBridgeSize(size);
     const bridgeInformation = makeBridge(Number(size), generate);
     this.#bridgeInformation = bridgeInformation;
+    Console.print(this.#bridgeInformation) //테스트용 추가, 완료 후 삭제
+    
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
