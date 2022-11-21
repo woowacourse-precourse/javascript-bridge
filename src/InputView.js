@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Message = require('../src/MessageContent')
-const isNumber = require('../src/validator/isNumber')
+const isNumber = require('./validator/IsValid')
 
 const InputView = {
 

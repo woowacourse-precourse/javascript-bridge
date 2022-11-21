@@ -9,5 +9,4 @@ const isNumber = (number) => {
 
   return number
 }
-
 module.exports = isNumber
