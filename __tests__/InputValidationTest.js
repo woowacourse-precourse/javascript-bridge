@@ -9,5 +9,8 @@ describe("사용자 입력값 예외 테스트", () => {
     expect(() => Validation.checkSpace(input)).toThrow(); 
   });
 
+  test.each([[""], [1], ["r"], ["q"], ["RQ"]])("재시도 여부 입력값에 대한 예외 테스트", (input) => {
+    expect(() => Validation.checkRetryCommand(input)).toThrow(); 
+  });
 });
 
