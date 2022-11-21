@@ -37,12 +37,15 @@ const InputView = {
       const keepGaming = bridgeGame.compareMove(bridge, userArray);
 
       if (keepGaming === 1) {
+        // 맟줬음 계속
         this.readMoving(bridgeGame, bridge, userMoveArray);
       }
       if (keepGaming === 0) {
+        // 다 맞췄음 끝 !
         OutputView.printResult();
       }
       if (keepGaming === 2) {
+        // 틀렸음
         console.log("틀렸음 다시할거임?");
         this.readGameCommand(bridgeGame, bridge, userMoveArray);
       }
@@ -58,10 +61,12 @@ const InputView = {
       const retryOrCloseKey = Validate.checkRetryOrCloseKey(userInput);
       const command = bridgeGame.retry(retryOrCloseKey);
       if (command === 0) {
+        // 다시시도
         OutputView.printResult(command);
       }
       if (command === 1) {
-        // this.readMoving(bridgeGame, bridge, userMoveArray);
+        const userMoveArray = [];
+        this.readMoving(bridgeGame, bridge, userMoveArray);
       }
     });
   },
