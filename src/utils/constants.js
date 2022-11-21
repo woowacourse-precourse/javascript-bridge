@@ -9,6 +9,7 @@ const PRINT_MESSAGE = Object.freeze({
 
 const ERROR_MESSAGE = Object.freeze({
   VALIDATION_SIZE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+  VALIDATION_MOVE: "[ERROR] 이동할 칸은 'U' 또는 'D'여야 합니다.",
 });
 
 const REGEX_NUM = Object.freeze(/^[0-9]+$/);
@@ -16,6 +17,8 @@ const REGEX_NUM = Object.freeze(/^[0-9]+$/);
 const BRIDGE_RULE = Object.freeze({
   MIN_LENGTH: 3,
   MAX_LENGTH: 20,
+  MOVE_UP: 'U',
+  MOVE_DOWN: 'D',
 });
 
 module.exports = {
