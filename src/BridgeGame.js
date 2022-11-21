@@ -1,7 +1,26 @@
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { GAME_CHOICE, SPACE_TO_MOVE, OUTPUT_MESSAGE } = require("./Utils")
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridge
+
+  constructor() {
+    this.moving = "";
+  }
+
+  getBridge(size) {
+    this.#bridge = BridgeMaker.makeBridge(size,
+      BridgeRandomNumberGenerator.generate());
+  }
+
+  getMoving(move) {
+    this.moving = move;
+    return this.move();
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
