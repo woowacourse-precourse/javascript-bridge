@@ -1,13 +1,13 @@
 /* eslint-disable class-methods-use-this */
 const { ERROR } = require('../util/Constant');
 
-class CheckUD {
+class CheckInputUd {
   validate(ud) {
-    this.checkUorD(ud);
+    this.checkUd(ud);
     this.checkOneCharacter(ud);
   }
 
-  checkUorD(ud) {
+  checkUd(ud) {
     if (ud.match(/[^UD]/g) !== null) {
       throw new Error(ERROR.UPDOWN_WRONG);
     }
@@ -20,4 +20,4 @@ class CheckUD {
   }
 }
 
-module.exports = CheckUD;
+module.exports = CheckInputUd;

@@ -1,12 +1,12 @@
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 const CheckBridgeSize = require('./validate/CheckBridgeSize');
-const CheckUD = require('./validate/CheckUD');
+const CheckInputUd = require('./validate/CheckInputUd');
+const CheckInputRq = require('./validate/CheckInputRq');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const { MESSAGE } = require('./util/Constant');
-
 
 class Gameflow {
     size
@@ -16,7 +16,8 @@ class Gameflow {
 
     constructor() {
       this.CheckBridgeSize  = new CheckBridgeSize ();
-      this.CheckUD = new CheckUD();
+      this.CheckInputUd = new CheckInputUd();
+      this.CheckInputRq = new CheckInputRq();
     }
   
     start() {
@@ -31,10 +32,11 @@ class Gameflow {
       this.bridgeGame = new BridgeGame(BridgeMaker.makeBridge(this.size,BridgeRandomNumberGenerator.generate));
       this.userMoving();
     }
-    
+
+
     userMoving(){
         InputView.readMoving((inputUd) => {
-            this.CheckUD.validate(inputUd);
+            this.CheckInputUd.validate(inputUd);
             this.userUd.push(inputUd);
             this.endCheck();
         })
@@ -69,8 +71,10 @@ class Gameflow {
       OutputView.printFinalResult(this.count, this.middleResult);
     }
 
+
     askReplay() {
       InputView.readGameCommand((inputRq) => {
+        this.CheckInputRq.validate(inputRq);
         this.checkingAskReplay(this.bridgeGame.retry(inputRq));
       });
     }

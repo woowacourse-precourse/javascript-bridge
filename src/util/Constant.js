@@ -16,7 +16,8 @@ const CONSTANT = {
   ERROR: {
     NOT_NUMBER: '[ERROR] 숫자 이외의 값은 입력할 수 없습니다.',
     NOT_RANGE: '[ERROR] 3 ~ 20 사이의 값만 입력 가능합니다.',
-    UPDOWN_WRONG: '[ERROR] 이동 시, 입력은 U / D 만 입력 가능합니다.',
+    UPDOWN_WRONG: '[ERROR] 이동 시, 입력은 U / D 만 가능합니다.',
+    REPLAY_WRONG: '[ERROR] 입력은 R / Q 만 가능합니다.',
   },
 };
 
