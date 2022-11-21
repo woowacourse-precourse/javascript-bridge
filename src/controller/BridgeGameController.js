@@ -33,7 +33,7 @@ class BridgeGameController {
       new MovingValidator(moving).validate();
 
       const isSuccess = this.#bridgeGame.move(moving);
-      this.printCurrentMap();
+      OutputView.printMap(this.#bridgeGame);
 
       this.checkNextProcess(isSuccess);
     });
@@ -47,12 +47,6 @@ class BridgeGameController {
     }
 
     return this.getMoving();
-  }
-
-  printCurrentMap() {
-    const [upside, downside] = this.#bridgeGame.toStringMap();
-
-    OutputView.printMap(upside, downside);
   }
 
   getQuitMessage(isSuccess) {
