@@ -11,7 +11,6 @@ const InputView = {
   readBridgeSize() {
     let bridgeLength = 0;
     Console.readLine(ConstValue.INPUT_BRIDGE_LENGTH_MESSAGE, value => {
-      this.handleBridgeLengthInput(Number(value));
       bridgeLength = Number(value);
     });
 
@@ -35,32 +34,6 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {},
-
-  handleBridgeLengthInput(length) {
-    if (this.checkIsNaN(length)) {
-      throw new Error(ConstValue.BRIDGE_LENGTH_INPUT_ERROR_MESSAGE.NOT_A_NUMBER_EXCEPTION);
-    }
-
-    if (this.checkNotInRange(length)) {
-      throw new Error(ConstValue.BRIDGE_LENGTH_INPUT_ERROR_MESSAGE.NOT_IN_RANGE_EXCEPTION);
-    }
-  },
-
-  checkIsNaN(length) {
-    if (isNaN(length)) {
-      return true;
-    }
-
-    return false;
-  },
-
-  checkNotInRange(length) {
-    if (length < ConstValue.MIN_BRIDGE_LENGTH || length > ConstValue.MAX_BRIDGE_LENGTH) {
-      return true;
-    }
-
-    return false;
-  },
 };
 
 module.exports = InputView;
