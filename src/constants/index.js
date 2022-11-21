@@ -18,6 +18,7 @@ const ERROR_MESSAGE = Object.freeze({
     range: '다리 길이는 3-20사이의 숫자를 입력해주어야 합니다.',
   },
   command: '플레이어가 이동할 칸은 대문자 U 또는 D중 하나만 입력할 수 있습니다.',
+  replay: '게임 재시작 또는 종료를 하기 위해서는 각각 대문자 R, Q를 입력해주셔야 합니다.',
 });
 
 const RANGE = Object.freeze({

@@ -4,7 +4,7 @@ const ReplayValidation = class {
   validate(command) {
     const isValid = ['R', 'Q'].includes(command);
 
-    if (!isValid) return { status: false, message: ERROR_MESSAGE.command };
+    if (!isValid) return { status: false, message: ERROR_MESSAGE.replay };
     return { status: true };
   }
 };
