@@ -14,8 +14,7 @@ const BridgeMaker = {
       randomLocations.push(generateRandomNumber());
     }
     randomLocations.forEach((randomNum) => {
-      Number(randomNum) === 1 ? bridge.push("U") : bridge.push("D");
-      // console.log(typeof randomNum, randomNum);
+      Number(randomNum) === 1 ? bridge.push("U") : bridge.push("D"); // 함수 분리, 상수 변경
     });
     return bridge;
   },
