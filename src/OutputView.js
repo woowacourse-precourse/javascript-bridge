@@ -6,9 +6,6 @@ const { Console } = require('@woowacourse/mission-utils');
 const Messages = require('./Messages');
 
 const OutputView = {
-  up: [],
-  down: [],
-
   startGame() {
     Console.print(Messages.START_GAME);
   },
