@@ -9,16 +9,16 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(userInputArray, bridgeInfoArray, bridgeUpside=[], bridgeDownside=[]) {
-    const CurrentRound = userInputArray.length;
-    this.addLeftBracket(bridgeUpside, bridgeDownside);
+  printMap(userInput, bridgeInfo, upside = [], downside = []) {
+    const CurrentRound = userInput.length;
+    this.addLeftBracket(upside, downside);
     for (let i = 0; i < CurrentRound; i++) {
-      this.getAllgameResult(bridgeUpside, bridgeDownside, userInputArray, bridgeInfoArray, i);
-      this.addDivision(bridgeUpside, bridgeDownside);
+      this.getAllgameResult(userInput, bridgeInfo, upside, downside, i);
+      this.addDivision(upside, downside);
     }
-    this.deleteItem(bridgeUpside, bridgeDownside);
-    this.addRightBracket(bridgeUpside, bridgeDownside);
-    Print.BothBridge(bridgeUpside, bridgeDownside);
+    this.deleteItem(upside, downside);
+    this.addRightBracket(upside, downside);
+    Print.BothBridge(upside, downside);
   },
 
   /**
@@ -26,7 +26,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(userInput, bridgeInfo, result, count) {
+    Print.ResultTitle();
+    this.printMap(userInput, bridgeInfo);
+    Print.Blank();
+    Print.GameTryCount(result);
+    Print.GameTryCount(count);
+  },
 
   addLeftBracket(upside, downside) {
     upside.push('[ ');
@@ -44,9 +50,21 @@ const OutputView = {
     upside.pop();
     downside.pop();
   },
-  getAllgameResult(userInputArray, bridgeInfoArray,upside, downside, count) {
-    this.getUpsideResult(userInputArray, bridgeInfoArray, upside, downside, count);
-    this.getDownsideResult(userInputArray, bridgeInfoArray, upside, downside, count);
+  getAllgameResult(userInputArray, bridgeInfoArray, upside, downside, count) {
+    this.getUpsideResult(
+      userInputArray,
+      bridgeInfoArray,
+      upside,
+      downside,
+      count
+    );
+    this.getDownsideResult(
+      userInputArray,
+      bridgeInfoArray,
+      upside,
+      downside,
+      count
+    );
   },
   getUpsideResult(userInputArray, bridgeInfoArray, upside, downside, count) {
     if (bridgeInfoArray[count] === 1) {
@@ -71,7 +89,7 @@ const OutputView = {
         downside.push('O');
       }
     }
-  }
+  },
 };
 
 module.exports = OutputView;

@@ -29,8 +29,8 @@ class Print {
     Console.print('');
   }
   static BothBridge(upside, downSide) {
-    Console.print(array1.join(''));
-    Console.print(array2.join(''));
+    Console.print(upside.join(''));
+    Console.print(downSide.join(''));
   }
 }
 
