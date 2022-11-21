@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { PROMPT, ERROR } = require("./Constants/Constants");
 const OutputView = require("./OutputView");
-const ValidCheck = require("./ValidCheck");
+const ValidCheck = require("./ValidCheck/ValidCheck");
 const BridgeGameController = require("./BridgeGameController");
 
 /**

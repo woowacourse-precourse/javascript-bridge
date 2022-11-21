@@ -1,4 +1,4 @@
-const { ERROR } = require("./Constants/Constants"); 
+const { ERROR } = require("../Constants/Constants"); 
 
 const ValidCheck = {
   sizeInput: function(size) {
@@ -11,7 +11,7 @@ const ValidCheck = {
 
   commandInput: function(command) {
     if (!(command === "R" || command === "Q")) throw new Error(ERROR.COMMAND_ERROR);
-  }
+  },
 };
 
 module.exports = ValidCheck;
