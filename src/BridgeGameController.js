@@ -81,8 +81,11 @@ class BridgeGameController {
   }
 
   renderMap() {
-    BridgeMap.generate(this.#model.getBridge(), this.#model.getUserMove());
-    printMap();
+    const map = BridgeMap.generate(
+      this.#model.getBridge(),
+      this.#model.getUserMove(),
+    );
+    printMap(map);
     printEmptyLine();
   }
 

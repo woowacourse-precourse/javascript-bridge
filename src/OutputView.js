@@ -1,5 +1,4 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const BridgeMap = require('./BridgeMap');
 const { ERROR, GAME } = require('./Constants');
 
 /**
@@ -20,8 +19,7 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {
-    const { map } = BridgeMap;
+  printMap(map) {
     map.forEach((way) => {
       const stringMap = way.join(' | ');
       MissionUtils.Console.print(`[ ${stringMap} ]`);
