@@ -11,7 +11,6 @@ class BridgeGame {
     upside: [],
     downside: [],
   };
-
   MAKE_MOVE_MAP = {
     U: (result) => {
       this.#footprint.upside.push(result);
@@ -31,20 +30,14 @@ class BridgeGame {
     );
   }
 
-  getTryCount() {
-    return this.user.getTryCount();
-  }
-
   getStatus() {
     return this.#status;
   }
+
   setStaus() {
-
-    const index = this.user.getRoute().length - 1;
-    const isCorrect =
-      this.#bridge[index] === this.user.getRoute()[index];
-    const isEnd = (index + 1 === this.#bridge.length);
-
+    const index = this.user.getIndex();
+    const isCorrect = this.#bridge[index] === this.user.getRoute()[index];
+    const isEnd = index + 1 === this.#bridge.length;
     if (isEnd && isCorrect) {
       this.#status = 'END';
     } else if (!isEnd && isCorrect) {
@@ -60,11 +53,11 @@ class BridgeGame {
   }
 
   setFootprint() {
-    const index = this.user.getRoute().length - 1;
-    const result = this.user.getRoute()[index] === this.#bridge[index] ? 'O' : 'X';
+    const index = this.user.getIndex();
+    const result =
+      this.user.getRoute()[index] === this.#bridge[index] ? 'O' : 'X';
     this.MAKE_MOVE_MAP[this.user.getRoute()[index]](result);
   }
-  
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -93,8 +86,8 @@ class BridgeGame {
     return {
       footprint: this.#footprint,
       endStatus: this.#status === 'END' ? '성공' : '실패',
-      tryCount: this.user.getTryCount()
-    }
+      tryCount: this.user.getTryCount(),
+    };
   }
 }
 

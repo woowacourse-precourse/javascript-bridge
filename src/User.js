@@ -7,7 +7,7 @@ class User {
   }
 
   getTryCount() {
-    return this.#tryCount
+    return this.#tryCount;
   }
 
   getRoute() {
@@ -16,6 +16,10 @@ class User {
 
   setRoute(direction) {
     this.#route.push(direction);
+  }
+
+  getIndex() {
+    return this.#route.length - 1;
   }
 
   clear() {
