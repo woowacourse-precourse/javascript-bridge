@@ -10,8 +10,13 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {
-
+  move(bridge,step) {
+    for(let idx=0; idx<step.length; idx++){
+      if(bridge[idx]!=step[idx]){
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
