@@ -20,7 +20,6 @@ const SUCCESS = "성공";
 const FAIL = "실패";
 
 const SEPARATOR = " | ";
-const CO_INPUT_UP = "U";
 
 module.exports = {
   GUIDE_MSG,
@@ -29,7 +28,6 @@ module.exports = {
   SUCCESS,
   FAIL,
   SEPARATOR,
-  CO_INPUT_UP,
   SUCCESS_OR_NOT,
   COUNT_TRY,
 };

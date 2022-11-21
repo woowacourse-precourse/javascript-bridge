@@ -1,5 +1,12 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { PRINT_FINISH_MSG, SEPARATOR } = require("../Messages/constants");
+const {
+  PRINT_FINISH_MSG,
+  SEPARATOR,
+  SUCCESS,
+  FAIL,
+  SUCCESS_OR_NOT,
+  COUNT_TRY,
+} = require("../Messages/constants");
 
 let upsideBridge = [];
 let downsideBridge = [];
@@ -41,13 +48,20 @@ const OutputView = {
     downsideBridge = [];
   },
 
-  printResult() {
+  printResult(isClear, gameCount) {
     Console.print(
       `${PRINT_FINISH_MSG}\n\[ ${upsideBridge.join(
         SEPARATOR
       )} \]\n\[ ${downsideBridge.join(SEPARATOR)} \]\n`
     );
     this.clearMap();
+    this.printFinishMsg(isClear, gameCount);
+  },
+
+  printFinishMsg(isClear, gameCount) {
+    Console.print(
+      SUCCESS_OR_NOT + `${isClear ? SUCCESS : FAIL}` + COUNT_TRY + gameCount
+    );
   },
 };
 
