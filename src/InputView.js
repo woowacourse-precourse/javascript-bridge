@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { MESSAGE } = require("./Constants");
-const InputValidator = require("./InputValidator");
+const { MESSAGE, WORD } = require("./Constants");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -12,14 +11,22 @@ const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine(MESSAGE.INPUT.BRIDGE_SIZE, (answer) => {
       console.log(answer);
-      try {
-        if (InputValidator.validateBridgeSize(answer) === answer) return answer;
-        throw MESSAGE.ERROR.BRIDGE_SIZE;
-      } catch (error) {
-        console.error(error);
-        this.readBridgeSize();
-      }
+      this.validateBridgeSize(answer);
     });
+  },
+  /**
+   * + 입력 받은 다리 길이를 검증한다.
+   */
+  validateBridgeSize(bridgeSize) {
+    try {
+      if (WORD.START_SIZE <= bridgeSize && bridgeSize <= WORD.END_SIZE) {
+        return bridgeSize;
+      }
+      throw MESSAGE.ERROR.BRIDGE_SIZE;
+    } catch (error) {
+      console.error(error);
+      this.readBridgeSize();
+    }
   },
 
   /**
