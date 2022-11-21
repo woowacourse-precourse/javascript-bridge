@@ -7,7 +7,9 @@ const { INPUT_MESSAGES } = require('./common/messages');
 
 const InputView = {
   readBridgeSize() {
-    MissionUtils.Console.readLine(`${INPUT_MESSAGES.INPUT_BRIDGESIZE}\n`, (size) => {
+    MissionUtils.Console.readLine(`${INPUT_MESSAGES.INPUT_BRIDGESIZE}`, (size) => {
+      MissionUtils.Console.print('');
+      Check.isVaildSize(size);
       const brige = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
       const gamePlay = new BridgeGame(brige);
       this.readMoving(gamePlay);
