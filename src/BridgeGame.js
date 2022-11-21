@@ -60,11 +60,8 @@ class BridgeGame {
   retry() {
     this.#moveCount = 0;
     this.#tryCount += 1;
-    this.usersMove = [];
+    this.#usersMove = [];
     this.#gameOver = false;
-
-    console.log('tryCount', this.#tryCount);
-    InputView.readMoving(this.move.bind(this));
   }
 
   end() {

@@ -90,6 +90,8 @@ class GameController {
   }
 
   retry() {
+    this.BridgeGame.retry();
+    this.getMoving();
   }
 
   end() {
