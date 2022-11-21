@@ -105,4 +105,16 @@ describe('다리 건너기 테스트', () => {
     const log = getOutput(logSpy);
     expectLogContains(log, [ERROR_MESSAGE.SPACE]);
   });
+
+  test('게임 재시도 여부를 잘못 입력해 예외가 발생한다.', () => {
+    const logSpy = getLogSpy();
+    mockRandoms([BRIDGE.UPPER, BRIDGE.UPPER, BRIDGE.UPPER]);
+    mockQuestions(['3', BRIDGE.DOWN, 'q']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [ERROR_MESSAGE.COMMAND]);
+  });
 });
