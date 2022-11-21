@@ -20,7 +20,13 @@ const OutputView = {
     Console.print("[ " + row["D"].join(" | ") + " ]");
   },
 
-  printResult(currentState) {},
+  printResult(currentState) {
+    Console.print("최종 게임 결과");
+    this.printMap(currentState.bridgeState);
+    Console.print(`\n게임 성공 여부: ${currentState.gameState}`);
+    Console.print(`총 시도한 횟수: ${currentState.attempts}`);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
