@@ -11,7 +11,7 @@ const OutputView = {
    * @param {[string, boolean][]} movingState 게임 상태
    */
   printMap(movingState) {
-    Console.print(convertToBridgeMap(movingState));
+    Console.print(convertToBridgeMap(movingState) + COMMON.newLine);
   },
 
   /**
