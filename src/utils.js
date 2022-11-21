@@ -17,11 +17,21 @@ module.exports = {
   },
 
   stopWalking: {
-    true: ({}) => {
-      printResult();
+    true: ({ bridgeGame }) => {
+      printResult(bridgeGame);
     },
     false: ({ app, bridgeGame, readAgain }) => {
       readAgain(app, bridgeGame);
+    },
+  },
+
+  Command: {
+    R: ({ app, bridgeGame }) => {
+      bridgeGame.retry(app);
+    },
+    Q: ({ app, bridgeGame }) => {
+      printResult(bridgeGame);
+      app.terminate();
     },
   },
 };
