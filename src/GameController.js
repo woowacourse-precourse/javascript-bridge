@@ -22,6 +22,7 @@ class GameController {
         input,
         BridgeRandomNumberGenerator.generate
       );
+      console.log(bridge);
       this.bridgeGame.setBridge(bridge);
       this.inputStep();
     });
@@ -34,6 +35,32 @@ class GameController {
   }
   compareStep(input) {
     const result = this.bridgeGame.compareBridge(input);
+    if (result) {
+      this.bridgeGame.addCorrect();
+      this.bridgeGame.addSeperate();
+    } else {
+      this.bridgeGame.addWrong();
+    }
+    this.showBridgeResult(result);
+  }
+  showBridgeResult(result) {
+    const [upString, downString] = this.bridgeGame.getBridgeString();
+    OutputView.printMap(upString, downString);
+    if (result) {
+      this.correctAnswer();
+    } else {
+      this.worngAnwer();
+    }
+  }
+  correctAnswer() {
+    if (this.bridgeGame.checkLast()) {
+      console.log("END!!");
+    } else {
+      this.inputStep();
+    }
+  }
+  worngAnwer() {
+    this.bridgeGame.retry();
   }
 }
 
