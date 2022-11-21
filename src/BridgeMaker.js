@@ -15,7 +15,7 @@ const BridgeMaker = {
   },
 
   makeBridgeByNumbers(numbers) {
-    return numbers.map(this.convertNumberToBridge.bind(this));
+    return numbers.map((number) => this.convertNumberToBridge(number));
   },
 
   convertNumberToBridge(number) {
