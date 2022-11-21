@@ -12,6 +12,7 @@ const InputView = {
   readBridgeSize(callback) {
     return Io.input(INPUT.BRIDGE_SIZE, (size) => {
       Validator.isVaildSize(size);
+      Io.output('');
       callback(size);
     });
   },

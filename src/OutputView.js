@@ -13,7 +13,7 @@ const OutputView = {
    */
   printMap(upCounter, downCounter) {
     Io.output(this.setBrigeTemplete(upCounter));
-    Io.output(this.setBrigeTemplete(downCounter));
+    Io.output(`${this.setBrigeTemplete(downCounter)}\n`);
   },
 
   /**
