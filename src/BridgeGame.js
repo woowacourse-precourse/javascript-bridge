@@ -11,16 +11,27 @@ class BridgeGame {
   #bridgeInformation;
 
   constructor() {
-    this.#bridgeInformation = [];
+    this.#bridgeInformation = { bridge: [] };
+
   }
 
   ready(size) {
     const validate = new Validate();
     validate.validateBridgeSize(size);
-    const bridgeInformation = makeBridge(Number(size), generate);
-    this.#bridgeInformation = bridgeInformation;
-    Console.print(this.#bridgeInformation) //테스트용 추가, 완료 후 삭제
-    
+    const bridge = makeBridge(Number(size), generate);
+    this.#bridgeInformation.bridge = bridge;
+    Console.print(this.#bridgeInformation.bridge) //테스트용 추가, 완료 후 삭제
+    this.addBridgeCondition();
+  }
+
+  addBridgeCondition() {
+    const bridgeSize = this.#bridgeInformation.bridge.length;
+    this.#bridgeInformation.upside = new Array(bridgeSize + 1).fill(MOVING.PASS);
+    this.#bridgeInformation.downside = new Array(bridgeSize + 1).fill(MOVING.PASS);
+    for(let index = 0; index < bridgeSize; index++) {
+      if(this.#bridgeInformation.bridge[index] === MOVING.UPSIDE_STRING) this.#bridgeInformation.downside.splice(index, 1, MOVING.UNPASSED);
+      if(this.#bridgeInformation.bridge[index] === MOVING.DOWNSIDE_STRING) this.#bridgeInformation.upside.splice(index, 1, MOVING.UNPASSED);
+    }
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
