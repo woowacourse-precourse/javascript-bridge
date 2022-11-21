@@ -13,8 +13,8 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine(CONSOLE_MESSAGE.INPUT_MOVE, (move) => {
-      Validator.validateMove(move);
+    Console.readLine(CONSOLE_MESSAGE.INPUT_MOVE, (direction) => {
+      Validator.validateMove(direction);
     });
   },
 
@@ -24,5 +24,4 @@ const InputView = {
   readGameCommand() {},
 };
 
-InputView.readMoving();
 module.exports = InputView;
