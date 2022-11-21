@@ -24,9 +24,9 @@ class BridgeGame {
   constructor(
     bridgeSize = INITIAL_BRIDGE_SIZE,
     welcomeMessage = '다리 건너기 게임을 시작합니다.',
-    bridgeSizeMessage = '다리의 길이를 입력해주세요.\n',
-    movingMessage = '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
-    retryMessage = '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+    bridgeSizeMessage = '\n다리의 길이를 입력해주세요.\n',
+    movingMessage = '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
+    retryMessage = '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
   ) {
     this.bridgeValidator = new BridgeValidator({ bridgeSize });
     this.welcomeMessage = welcomeMessage;

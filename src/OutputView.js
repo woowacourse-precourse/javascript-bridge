@@ -31,7 +31,7 @@ const OutputView = {
     };
 
     this.print(
-      `게임 성공 여부: ${gameClearMessage[isGameClear]}\n총 시도한 횟수: ${tryCount}`,
+      `\n게임 성공 여부: ${gameClearMessage[isGameClear]}\n총 시도한 횟수: ${tryCount}`,
     );
   },
 };
