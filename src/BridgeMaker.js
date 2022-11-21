@@ -12,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size }, () => {
       const randomNumber = generateRandomNumber();
-      const direction = this.getDirection(randomNumber);
+      const direction = BridgeMaker.getDirection(randomNumber);
       return direction;
     });
   },
