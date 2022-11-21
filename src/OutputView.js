@@ -8,7 +8,7 @@ const OutputView = {
    * 게임 시작 메세지를 출력한다.
   */
   printStart(){
-    MissionUtils.Console.print("다리 건너기 게임을 시작합니다.")
+    MissionUtils.Console.print("다리 건너기 게임을 시작합니다.\n")
   },
 
   /**
