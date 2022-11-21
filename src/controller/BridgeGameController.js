@@ -16,89 +16,89 @@ class BrideGameController {
 
   start() {
     OutputView.printIntialMessage();
-    this.readBridgeSizePhase();
+    this.#readBridgeSizePhase();
   }
 
-  readBridgeSizePhase() {
-    InputView.readBridgeSize(this.validateBridgeSize.bind(this));
+  #readBridgeSizePhase() {
+    InputView.readBridgeSize(this.#validateBridgeSize.bind(this));
   }
 
-  validateBridgeSize(size) {
+  #validateBridgeSize(size) {
     try {
       this.validator.checkBridgeLengthInput(size);
     } catch (error) {
       OutputView.printErrorMessage(error.message);
-      this.readBridgeSizePhase();
+      this.#readBridgeSizePhase();
       return;
     }
-    this.handleGameStartPhase(size);
+    this.#handleGameStartPhase(size);
   }
 
-  handleGameStartPhase(size) {
-    this.generateBridgeGame(size);
+  #handleGameStartPhase(size) {
+    this.#generateBridgeGame(size);
     OutputView.printNewLine();
-    this.readMovingPhase();
+    this.#readMovingPhase();
   }
 
-  generateBridgeGame(size) {
+  #generateBridgeGame(size) {
     this.#bridgeGame = new BridgeGame(
       new Bridge(BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate))
     );
   }
 
-  readMovingPhase() {
-    InputView.readMoving(this.validateMoving.bind(this));
+  #readMovingPhase() {
+    InputView.readMoving(this.#validateMoving.bind(this));
   }
 
-  validateMoving(direction) {
+  #validateMoving(direction) {
     try {
       this.validator.checkDirectionInput(direction);
     } catch (error) {
       OutputView.printErrorMessage(error.message);
-      this.readMovingPhase();
+      this.#readMovingPhase();
       return;
     }
-    this.handleAnswerCheckPhase(direction);
+    this.#handleAnswerCheckPhase(direction);
   }
 
-  handleAnswerCheckPhase(direction) {
+  #handleAnswerCheckPhase(direction) {
     this.#bridgeGame.updateResult(direction);
     OutputView.printMap(this.#bridgeGame.getResult().map);
     if(this.#bridgeGame.isAnswer(direction)) {
-      this.handleGameEndPhase();
+      this.#handleGameEndPhase();
       return;
     }
-    this.readGameCommandPhase();
+    this.#readGameCommandPhase();
   }
 
-  handleGameEndPhase() {
+  #handleGameEndPhase() {
     if(this.#bridgeGame.isGameEnd()) {
       OutputView.printResult(this.#bridgeGame.getResult(), true);
       return;
     }
     this.#bridgeGame.move();
-    InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
+    InputView.readMoving(this.#handleAnswerCheckPhase.bind(this));
   }
 
-  readGameCommandPhase() {
-    InputView.readGameCommand(this.validateGameCommand.bind(this));
+  #readGameCommandPhase() {
+    InputView.readGameCommand(this.#validateGameCommand.bind(this));
   }
 
-  validateGameCommand(retryAnswer) {
+  #validateGameCommand(retryAnswer) {
     try {
       this.validator.checkRetryInput(retryAnswer);
     } catch (error) {
       OutputView.printErrorMessage(error.message);
-      this.readGameCommandPhase();
+      this.#readGameCommandPhase();
       return;
     }
-    this.handleGameRetryPhase(retryAnswer)
+    this.#handleGameRetryPhase(retryAnswer)
   }
 
-  handleGameRetryPhase(retryAnswer) {
+  #handleGameRetryPhase(retryAnswer) {
     if (retryAnswer === HOTKEY.retry) {
       this.#bridgeGame.retry();
-      InputView.readMoving(this.handleAnswerCheckPhase.bind(this));
+      InputView.readMoving(this.#handleAnswerCheckPhase.bind(this));
       return;
     }
     OutputView.printResult(this.#bridgeGame.getResult(), false);
