@@ -11,10 +11,17 @@ const isInRange = size => {
   return false;
 };
 
+const isUOrD = input => {
+  if (input === 'U' || input === 'D') return true;
+  return false;
+};
 const Validate = {
   validateReadBridgeSize(input) {
     if (!isNum(input)) throw new Error(ERROR_MESSAGE.BRIDGE_SIZE);
     if (!isInRange(input)) throw new Error(ERROR_MESSAGE.BRIDGE_SIZE);
+  },
+  validateReadMoving(input) {
+    if (!isUOrD(input)) throw new Error(ERROR_MESSAGE.MOVING);
   },
 };
 
