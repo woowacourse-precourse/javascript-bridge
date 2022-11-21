@@ -33,7 +33,7 @@ class BridgeGame {
   }
 
   isSucceededMove() {
-    const lastLog = this.#movementLogs[this.#movementLogs.length - 1];
+    const lastLog = this.#movementLogs.slice(-1)[0];
 
     return lastLog.isCrossable;
   }
