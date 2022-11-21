@@ -1,7 +1,9 @@
 const BridgeGame = require('./BridgeGame');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
+const { RETRY } = require('./constant/constants');
 const { readMoving, readBridgeSize, readGameCommand } = require('./ui/InputView');
+const { printMap, printResult } = require('./ui/OutputView');
 
 class App {
   #bridgeString;
@@ -32,8 +34,12 @@ class App {
     console.log(
       `round : ${this.#round}, bridge: ${this.#bridgeString}, userInput : ${this.#userInputString}`
     );
-    const { status } = this.brideGame.move(this.#round, this.#bridgeString, this.#userInputString);
-    this.brideGame.showCurrentBridge();
+    const { upperBridge, lowerBridge, status } = this.brideGame.move(
+      this.#round,
+      this.#bridgeString,
+      this.#userInputString
+    );
+    printMap(upperBridge, lowerBridge);
     this.doAfterCheck(status);
   };
 
@@ -53,8 +59,14 @@ class App {
   };
   askRetry = () => {
     readGameCommand((input) => {
-      if(input ==='R'){
+      if (input === RETRY) {
+        this.#round = 0;
+        this.#try += 1;
+        this.#userInputString = '';
+        this.brideGame.retry();
         readMoving(this.check);
+      } else {
+        printResult();
       }
     });
   };

@@ -1,3 +1,5 @@
+const { UP } = require("./constant/constants");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -12,22 +14,17 @@ class BridgeGame {
 
   move(round, bridgeString, userInputString) {
     //n번째 round에서 bridgeString과 userInputString을 보고 다리 현황 만들기
-    const roundResult = {};
     if (bridgeString[round] === userInputString[round]) {
-      roundResult.status = 'success';
       this.pushO(this.#upperBridge, this.#lowerBridge, bridgeString[round]);
     } else {
       this.pushX(this.#upperBridge, this.#lowerBridge, bridgeString[round]);
-      roundResult.status = 'fail';
     }
-    if (round === bridgeString.length - 1) {
-      roundResult.status = 'end';
-    }
-    return roundResult;
+    const status = this.checkStatus(round, bridgeString, userInputString);
+    return { upperBridge: this.#upperBridge, lowerBridge: this.#lowerBridge, status };
   }
 
   pushO(bridge1, bridge2, uOrD) {
-    if (uOrD === 'U') {
+    if (uOrD === UP) {
       bridge1.push('o');
       bridge2.push('n');
     } else {
@@ -37,12 +34,27 @@ class BridgeGame {
   }
 
   pushX(bridge1, bridge2, uOrD) {
-    if (uOrD === 'U') {
+    if (uOrD === UP) {
       bridge1.push('n');
       bridge2.push('x');
     } else {
       bridge1.push('x');
       bridge2.push('n');
+    }
+  }
+  checkStatus(round, bridgeString, userInputString) {
+    const total_round = bridgeString.length;
+    console.log(
+      `checkStatus... round : ${round}, total_round : ${total_round}, upper : ${
+        this.#upperBridge
+      }, lower : ${this.#lowerBridge}, userInput : ${userInputString}`
+    );
+    if (userInputString[round] !== bridgeString[round]) {
+      return 'fail';
+    } else if (this.#upperBridge.length === total_round) {
+      return 'finish';
+    } else {
+      return 'success';
     }
   }
 
@@ -52,32 +64,9 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    //bridge 한칸씩 지우기? 아니면 round 줄이면 되려나...
-    
-  }
-  showCurrentBridge() {
-    let upperStr = '[';
-    let lowerStr = '[';
-    for (let i in this.#upperBridge) {
-      upperStr += this.modifyCurStr(this.#upperBridge[i]);
-      lowerStr += this.modifyCurStr(this.#lowerBridge[i]);
-    }
-    upperStr += '\b]';
-    lowerStr += '\b]';
-    console.log(upperStr);
-    console.log(lowerStr);
-  }
-  modifyCurStr(char) {
-    switch (char) {
-      case 'o':
-        return ' O |';
-      case 'n':
-        return '   |';
-      case 'x':
-        return ' X |';
-      default:
-        break;
-    }
+    //bridge 한칸씩 지우기
+    this.#upperBridge = [];
+    this.#lowerBridge = [];
   }
 }
 
