@@ -15,6 +15,7 @@ const InputView = {
   readBridgeSize(callback) {
       Io.input('다리의 길이를 입력해주세요.', (input) => {
         Validation.validatePositiveInteger(input);
+        Validation.validateNumberRange(input);
         const SIZE = Number(input);
         const BridgeStatus = BridgeMaker.makeBridge(SIZE, BridgeRandomNumberGenerator.generate);
         callback(SIZE, BridgeStatus);

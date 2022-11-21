@@ -6,6 +6,10 @@ describe("입력 테스트", () => {
             Validaton.validatePositiveInteger("a");
         }).toThrow("[ERROR]");
     });
-
+    test("이동할 칸은 U 또는 D가 아니면 예외가 발생한다.", () => {
+        expect(() => {
+            Validaton.validateUserChoice("R");
+        }).toThrow("[ERROR]");
+    });
     // 아래에 추가 테스트 작성 가능
 });
