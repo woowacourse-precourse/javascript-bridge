@@ -23,7 +23,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   async readGameCommand() {
-    return readLineAsync(MESSAGES.INPUT_BRIDGE_SIZE);
+    return readLineAsync(MESSAGES.INPUT_RETRY);
   },
 };
 
