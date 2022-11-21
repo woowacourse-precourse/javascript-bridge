@@ -15,6 +15,10 @@ class GameView {
     this.inputView.readLine(query, callback);
   }
 
+  readGameCommand(query, callback) {
+    this.inputView.readLine(query, callback);
+  }
+
   printMap(upsideBridge, downsideBridge) {
     this.outputView.print(
       `[${upsideBridge.slice(0, upsideBridge.length - 1)}]`,
@@ -22,6 +26,10 @@ class GameView {
     this.outputView.print(
       `[${downsideBridge.slice(0, downsideBridge.length - 1)}]`,
     );
+  }
+
+  end() {
+    this.outputView.close();
   }
 }
 

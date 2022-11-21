@@ -6,8 +6,8 @@ const { generate } = BridgeRandomNumberGenerator;
 
 class Model {
   #bridge;
-  #upperBridge = '';
-  #lowerBridge = '';
+  #upsideBridge = '';
+  #downSideBridge = '';
 
   genBridge(bridgeSize) {
     Validation.isBridgeSizeValid(bridgeSize);
@@ -30,24 +30,29 @@ class Model {
 
   alive(userMove) {
     if (userMove === 'U') {
-      this.#upperBridge += ' O |';
-      this.#lowerBridge += '   |';
+      this.#upsideBridge += ' O |';
+      this.#downSideBridge += '   |';
     }
     if (userMove === 'D') {
-      this.#upperBridge += '   |';
-      this.#lowerBridge += ' O |';
+      this.#upsideBridge += '   |';
+      this.#downSideBridge += ' O |';
     }
   }
 
   death(userMove) {
     if (userMove === 'U') {
-      this.#upperBridge += ' X |';
-      this.#lowerBridge += '   |';
+      this.#upsideBridge += ' X |';
+      this.#downSideBridge += '   |';
     }
     if (userMove === 'D') {
-      this.#upperBridge += '   |';
-      this.#lowerBridge += ' X |';
+      this.#upsideBridge += '   |';
+      this.#downSideBridge += ' X |';
     }
+  }
+
+  reset() {
+    this.#upsideBridge = '';
+    this.#downSideBridge = '';
   }
 
   get bridge() {
@@ -55,11 +60,11 @@ class Model {
   }
 
   get upsideBridge() {
-    return this.#upperBridge;
+    return this.#upsideBridge;
   }
 
   get downSideBridge() {
-    return this.#lowerBridge;
+    return this.#downSideBridge;
   }
 }
 

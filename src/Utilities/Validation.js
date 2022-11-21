@@ -15,8 +15,8 @@ class Validation {
   }
 
   static isUserMoveValid(userMove) {
-    if (!(this.isUserMoveChar(userMove) && this.isUserMoveLength(userMove))) {
-      throw new Error('[ERROR] 대문자 U나 D만 입력 가능합니다');
+    if (!(this.isUserMoveChar(userMove) && this.isUserInputLength(userMove))) {
+      throw new Error('[ERROR] 대문자 U나 D만 입력 가능합니다.');
     }
   }
 
@@ -25,8 +25,21 @@ class Validation {
     return Regex.test(userMove);
   }
 
-  static isUserMoveLength(userMove) {
+  static isUserRetryChar(userMove) {
+    const Regex = /[R|Q]/g;
+    return Regex.test(userMove);
+  }
+
+  static isUserInputLength(userMove) {
     return userMove.length === 1;
+  }
+
+  static isUserRetryValid(userRetry) {
+    if (
+      !(this.isUserRetryChar(userRetry) && this.isUserInputLength(userRetry))
+    ) {
+      throw new Error('[ERROR] 대문자 R이나 Q만 입력 가능합니다.');
+    }
   }
 }
 

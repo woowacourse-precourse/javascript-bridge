@@ -1,9 +1,11 @@
+const Validation = require('../Utilities/Validation');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #turn = 0;
-  #isUserAlive = true;
+  #userLife = true;
 
   constructor(model, view) {
     this.model = model;
@@ -12,8 +14,11 @@ class BridgeGame {
 
   start() {
     this.move();
-    if (this.#isUserAlive && this.#turn !== this.model.bridge.length) {
+    if (this.#userLife && this.#turn !== this.model.bridge.length) {
       this.start();
+    }
+    if (!this.#userLife) {
+      this.retry();
     }
   }
 
@@ -26,7 +31,7 @@ class BridgeGame {
     this.view.readMoving(
       '이동할 칸을 선택해주세요. (위: U, 아래: D)',
       (userMove) => {
-        this.#isUserAlive = this.model.aliveOrDeath(userMove, this.#turn);
+        this.#userLife = this.model.aliveOrDeath(userMove, this.#turn);
         this.#turn += 1;
         this.view.printMap(this.model.upsideBridge, this.model.downSideBridge);
       },
@@ -44,7 +49,35 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#turn = 0;
+    this.#userLife = true;
+    this.askUserRetry();
+  }
+
+  end() {
+    this.view.end();
+  }
+
+  askUserRetry() {
+    this.view.readGameCommand(
+      '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
+      (userRetry) => {
+        Validation.isUserRetryValid(userRetry);
+        this.retryOrQuit(userRetry);
+      },
+    );
+  }
+
+  retryOrQuit(userRetry) {
+    if (userRetry === 'R') {
+      this.model.reset();
+      this.start();
+    }
+    if (userRetry === 'Q') {
+      this.end();
+    }
+  }
 }
 
 module.exports = BridgeGame;
