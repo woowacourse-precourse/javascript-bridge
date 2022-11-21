@@ -1,6 +1,6 @@
-const BRIDGE_SETTINGS = Object.freeze({
-  minLength: 3,
-  maxLength: 20,
+const BRIDGE_SIZE = Object.freeze({
+  min: 3,
+  max: 20,
 });
 
-module.exports = BRIDGE_SETTINGS;
+module.exports = { BRIDGE_SIZE };

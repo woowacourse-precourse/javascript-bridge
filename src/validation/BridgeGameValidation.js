@@ -1,7 +1,7 @@
-const BridgeError = require('../errors/BridgeError');
 const { BRIDGE_SIZE } = require('../constants/BridgeSettings');
-
 const { ERROR_MESSAGES, FORM } = require('../constants/Error');
+
+const BridgeError = require('../errors/BridgeError');
 
 const BridgeGameValidation = {
   isNumber(input) {
