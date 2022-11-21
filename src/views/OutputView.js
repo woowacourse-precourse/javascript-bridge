@@ -1,20 +1,23 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGE, RESULT, RESULT_MAP } = require("../constants/constants");
 
 const OutputView = {
   printMap(map) {
-    Console.print('[ '+ map.get('U').join(' | ')+' ]');
-    Console.print('[ '+ map.get('D').join(' | ')+' ]\n');
+    const { first, separator, last } = RESULT_MAP;
+    for (let direction of map.keys()) {
+      Console.print(first + map.get(direction).join(separator) + last);
+    }
   },
 
   printResult(result, success) {
-    Console.print(`최종 게임 결과`)
+    Console.print(MESSAGE.printResultTitle)
     this.printMap(result.map);
-    Console.print(`게임 성공 여부: ${success ? '성공' : '실패'}`)
-    Console.print(`총 시도한 횟수: ${result.attempts}`);
+    Console.print(`${MESSAGE.printResult}${success ? RESULT.success : RESULT.fail}`)
+    Console.print(`${MESSAGE.printRetry}${result.attempts}`);
   },
 
   printIntialMessage() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
+    Console.print(MESSAGE.printInitial);
   },
 
   printNewLine() {
