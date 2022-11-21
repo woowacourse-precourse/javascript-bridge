@@ -3,11 +3,11 @@
  */
 class BridgeGame {
   #bridge;
-  #userBridge;
+  #userState;
 
   constructor(bridge) {
     this.#bridge = bridge;
-    this.#userBridge = {
+    this.#userState = {
       U: [],
       D: [],
     };
@@ -19,17 +19,17 @@ class BridgeGame {
   setUserBridge(command, isLoss) {
     const invertCommand = command === "U" ? "D" : "U";
     if (isLoss) {
-      this.#userBridge[command].push("X");
-      this.#userBridge[invertCommand].push(false);
+      this.#userState[command].push("X");
+      this.#userState[invertCommand].push(false);
       return;
     }
-    this.#userBridge[command].push("O");
-    this.#userBridge[invertCommand].push(false);
+    this.#userState[command].push("O");
+    this.#userState[invertCommand].push(false);
   }
 
-  // 메세지를 보내야 하는게 옳아 보이지만 일단 userBridge를 return
-  getUserBridge() {
-    return this.#userBridge;
+  // 메세지를 보내야 하는게 옳아 보이지만 일단 userState를 return
+  getUserState() {
+    return this.#userState;
   }
 
   isVictory() {
@@ -40,7 +40,7 @@ class BridgeGame {
   initState() {
     this.retryCount++;
     this.bridgeStep = 0;
-    this.#userBridge = {
+    this.#userState = {
       U: [],
       D: [],
     };

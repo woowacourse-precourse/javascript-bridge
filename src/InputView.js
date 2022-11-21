@@ -36,7 +36,7 @@ const InputView = {
         return;
       }
       bridgeGame.move(input);
-      printMap(bridgeGame.getUserBridge());
+      printMap(bridgeGame.getUserState());
       if (bridgeGame.isVictory()) {
         printResult(bridgeGame);
         Console.close();
