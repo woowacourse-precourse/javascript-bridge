@@ -107,3 +107,13 @@ U 또는 D를 입력 받는다.
 최종 결과를 출력한다.  
 게임 성공 여부와 총 시도 횟수를 출력한다.  
 **MissionUtils 라이브러리**에서 제공하는 `Console.print()`를 활용한다.
+
+</br>
+
+# ➕ 추가 설명
+게임을 관리하는 BridgeGame 클래스에서 "InputView, OutputView를 사용하지 말라"는 요구 사항에 따라, 입력과 출력을 받고 그에 따라 동작하는 **GameController** 클래스를 추가하였다.  
+
+**BridgeGame** 클래스에서는 다리와 유저의 이동, 게임 오버 유무, 시도 횟수 등을 관리한다.   GameController의 Input에 따라 동작하고 결과를 **리턴**해준다.
+
+길이가 10라인을 넘어가지 않도록 최대한 기능을 분할하였다.
+예를들어 InputView의 경우 기존 try-catch문을 사용하여 입력값이 올바르지 않다면 다시 호출하여 입력 받는 식으로 구현하였는데, try-catch문은 GameController로 옮겨 InputView에서는 단순히 입력을 받고 그 결과를 넘겨주는 역할만 수행하도록 변경하였다. 
