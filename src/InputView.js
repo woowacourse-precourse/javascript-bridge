@@ -12,6 +12,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (bridgeSize) => {
       Validation.validateBridgeSize(bridgeSize);
+
       const bridge = BridgeMaker.makeBridge(
         parseInt(bridgeSize, 10),
         BridgeRandomNumberGenerator.generate
@@ -32,7 +33,7 @@ const InputView = {
       const bridgeGame = new BridgeGame();
       const gameReult = bridgeGame.move(movingCommand, bridge, movingRoute);
       if (gameReult[0].includes('X') || gameReult[1].includes('X')) {
-        this.readGameCommand();
+        this.readGameCommand(bridge);
       }
       return this.readMoving(bridge, gameReult);
     });
@@ -41,7 +42,7 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(bridge) {
     Console.readLine(INPUT_MESSAGE.GAME_COMMAND, (gameCommand) => {
       const RESTART_COMMAND = 'R';
       const END_COMMAND = 'Q';
@@ -49,6 +50,9 @@ const InputView = {
       Validation.validateInputCommand(gameCommand);
 
       if (gameCommand === RESTART_COMMAND) {
+        const bridgeGame = new BridgeGame();
+        const resetMovingRoute = bridgeGame.retry(bridge);
+        return this.readMoving(bridge, resetMovingRoute);
       }
       if (gameCommand === END_COMMAND) {
       }
