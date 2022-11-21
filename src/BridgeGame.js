@@ -1,5 +1,3 @@
-const OutputView = require("./OutputView");
-const InputView = require("./InputView");
 const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGE } = require("./constants/Constant");
 const Validate = require("./Validate");
@@ -10,6 +8,7 @@ const Validate = require("./Validate");
  * 파일경로 변경가능
  * 인자는 필요에따라 추가/변경할 수 있음
  * 메소드 추가/변경할 수 있음
+ * inputView, OutputView 사용금지 ! ! ! !
  */
 class BridgeGame {
   /**
@@ -17,11 +16,9 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(size) {
-    console.log(size);
-    // Console.readLine(MESSAGE.CHOOSE_MOVE_SPACE, (userInput) => {
-    //   Validate.checkMovingKey(userInput);
-    // });
+  move(moveKey) {
+    console.log("move 메소드");
+    console.log(moveKey);
   }
 
   /**

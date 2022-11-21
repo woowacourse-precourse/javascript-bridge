@@ -16,21 +16,25 @@ const InputView = {
       Validate.isNumber(inputBridgeSize);
       Validate.checkLength(inputBridgeSize);
 
-      BridgeMaker.makeBridge(
+      const bridge = BridgeMaker.makeBridge(
         inputBridgeSize,
         BridgeRandomNumberGenerator.generate
       );
-
-      // this.readMoving();
+      this.readMoving(bridgeGame, bridge);
+      // bridgeGame.move();
     });
   },
+
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(bridgeGame, bridge) {
+    console.log(bridge);
     Console.readLine(MESSAGE.CHOOSE_MOVE_SPACE, (userInput) => {
-      Validate.checkMovingKey(userInput);
+      const moveKey = Validate.checkMovingKey(userInput);
+      bridgeGame.move(moveKey);
     });
+    return;
   },
 
   /**
