@@ -23,17 +23,17 @@ class App {
 
   play() {
     printGameStart();
-    readBridgeSize(this.actWithBridgeNumber.bind(this));
+    readBridgeSize(this.actWithBridgeSize.bind(this));
   }
 
-  actWithBridgeNumber(input) {
+  actWithBridgeSize(input) {
     try {
       validateBridgeNumber(Number(input));
       this.#bridgeGame.setBridge(Number(input));
       readMoving(this.actWithUserMoveInput.bind(this));
     } catch (e) {
       printErrorMessage(e);
-      readBridgeSize(this.actWithBridgeNumber.bind(this));
+      readBridgeSize(this.actWithBridgeSize.bind(this));
     }
   }
 
@@ -65,6 +65,7 @@ class App {
 
   actWithUserCommandInput(input) {
     const letter = input.toUpperCase();
+
     try {
       validateCommandInput(letter);
       this.actWithCommand(letter);
@@ -87,6 +88,7 @@ class App {
 
   endGame(result) {
     const { map, trialTime } = this.#bridgeGame.getResult();
+
     printResult(map, result, trialTime);
     Console.close();
   }
