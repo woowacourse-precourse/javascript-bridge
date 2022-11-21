@@ -4,8 +4,7 @@ const validate = (length) => {
 }
 
 const notNumber = (input) => {
-    const inputRegex = /^\d+$/g;
-    if (!input.match(inputRegex)) {
+    if (parseInt(input) === NaN) {
         throw new Error('[ERROR] 숫자만 입력해주세요.');
     }
 }
