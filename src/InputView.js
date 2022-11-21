@@ -20,7 +20,6 @@ const InputView = {
     Console.readLine(INPUT_LENGTH, (input) => {
       isInvalidBridgeLength(input) && InputView.readBridgeSize();
       const bridgeSize = toNumber(input);
-
       const bridge = makeBridge(bridgeSize, generate);
       const bridgeGame = new BridgeGame(bridge);
       InputView.readMoving(bridgeGame);
@@ -32,21 +31,21 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     Console.readLine(INPUT_MOVE, (input) => {
-      isInvalidMoving(input) && this.readMoving(bridgeGame);
+      if (isInvalidMoving(input)) {
+        InputView.readMoving(bridgeGame);
+        return;
+      }
       bridgeGame.move(input);
       printMap(bridgeGame.getUserBridge());
-
       if (bridgeGame.isVictory()) {
         printResult(bridgeGame);
         Console.close();
         return;
       }
-
       if (bridgeGame.isFinish) {
         InputView.readGameCommand(bridgeGame);
         return;
       }
-
       InputView.readMoving(bridgeGame);
     });
   },
@@ -56,7 +55,10 @@ const InputView = {
    */
   readGameCommand(bridgeGame) {
     Console.readLine(INPUT_RETRY, (input) => {
-      isInvalidGameCommand(input) && InputView.readGameCommand(bridgeGame);
+      if (isInvalidGameCommand(input)) {
+        InputView.readGameCommand(bridgeGame);
+        return;
+      }
       if (input === RESTART_COMMAND) {
         bridgeGame.retry();
         InputView.readMoving(bridgeGame);
