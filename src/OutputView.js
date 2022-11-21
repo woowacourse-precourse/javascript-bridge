@@ -6,10 +6,10 @@ const bridge=new BridegGame();
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
-bridge.bridgePrinterAbove=[]
-bridge.bridgePrinterBelow=[]
-let bridgePrinterAbove=bridge.bridgePrinterAbove
-let bridgePrinterBelow=bridge.bridgePrinterBelow
+bridgePrinterAbove=[]
+bridgePrinterBelow=[]
+// let bridgePrinterAbove=bridgePrinterAbove
+// let bridgePrinterBelow=bridgePrinterBelow
 const OutputView = {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
@@ -18,25 +18,26 @@ const OutputView = {
    */
   printMap(userSpace,bridgeArray,restart) {
     const correctValue=this.printMapHelper(userSpace,bridgeArray,restart)
+    // console.log(correctValue);
     return correctValue
   },
   printMapHelper(userSpace,bridgeArray){
-    if(userSpace==='D'&&bridgeArray[0]===0){
+    if(userSpace==='D'&&bridgeArray[0]==='D'){
       bridgePrinterAbove.push('empty')
       bridgePrinterBelow.push('O')
       return 'O'
     }
-    if(userSpace==='U'&&bridgeArray[0]===1) {
+    if(userSpace==='U'&&bridgeArray[0]==='U') {
       bridgePrinterAbove.push('O')
       bridgePrinterBelow.push('empty')
       return 'O'
     }
-    if(userSpace==="D"&&bridgeArray[0]===1){
+    if(userSpace==="D"&&bridgeArray[0]==='U'){
       bridgePrinterAbove.push('empty')
       bridgePrinterBelow.push('X')
       return 'X'
     }    
-    if(userSpace==='U'&&bridgeArray[0]===0) {
+    if(userSpace==='U'&&bridgeArray[0]==='D') {
       bridgePrinterAbove.push('X')
       bridgePrinterBelow.push('empty')
       return 'X'
@@ -47,6 +48,8 @@ const OutputView = {
     bridgePrinterBelow=[]
   },
   printArrays(bridgePrinterAbove,bridgePrinterBelow){
+    // console.log(bridgePrinterAbove);
+    // console.log(bridgePrinterBelow);
     let bridgeAbove=''
     let bridgeBelow=''
     bridgeAbove=JSON.stringify(bridgePrinterAbove).replace(/,/g,'|')
