@@ -13,7 +13,7 @@ const BridgeMaker = {
     let upOrDownDecider;
     const movableBridgePath = [];
     while (movableBridgePath.length < size) {
-      upOrDownDecider = Number(generateRandomNumber())
+      upOrDownDecider = generateRandomNumber()
         ? REPRESENTATION.UPPER.abbreviatedForm
         : REPRESENTATION.LOWER.abbreviatedForm;
       movableBridgePath.push(upOrDownDecider);
