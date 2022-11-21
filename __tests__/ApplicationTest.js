@@ -90,14 +90,14 @@ describe("다리 건너기 테스트", () => {
 });
 
 
-describe("다리 길이 입력 에러 검증", () => {
-  test("다리 길이 입력테스트", () => {
-    // const inputView = InputView
-    expect(() => { 
-      const validation = new Validation();
-      validation.validateBridgeSize(21);
-      // inputView.readBridgeSize(21);
-      // expect(bridge).toEqual(["U", "D", "D"]);
-    }).toThrow("[ERROR]");
-  });
-});
+// describe("다리 길이 입력 에러 검증", () => {
+//   test("다리 길이 입력테스트", () => {
+//     // const inputView = InputView
+//     expect(() => { 
+//       const validation = new Validation();
+//       validation.validateBridgeSize(21);
+//       // inputView.readBridgeSize(21);
+//       // expect(bridge).toEqual(["U", "D", "D"]);
+//     }).toThrow("[ERROR]");
+//   });
+// });

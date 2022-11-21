@@ -1,13 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const Controller = require("./Controller");
 const BridgeMaker = require("./BridgeMaker");
 const OutputView = require("./OutputView");
 const {
   GO,
-  COMMAND,
   SIGN,
-  IS_SUCCESS,
   MESSAGE,
   ERROR_MESSAGE,
 } = require("./constant");
@@ -21,20 +20,21 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(MESSAGE.inputLength, (size) => {
-      MissionUtils.Console.print(SIGN.blank)
+      MissionUtils.Console.print(SIGN.blank);
       this.getBridgeSize(Number(size));
       Controller.getSize(Number(size));
-      this.savedBridge = BridgeMaker.makeBridge(Number(size));
-      this.readMoving(); 
+      const generateBridge = BridgeRandomNumberGenerator.generate;
+      this.savedBridge = BridgeMaker.makeBridge(Number(size), generateBridge);
+      this.readMoving();
     });
   },
   getBridgeSize(size) {
     try {
-      if (Number(size) < 3 || Number(size) > 20) {
+      if (Number(size) < 3 || Number(size) > 20 || isNaN(size)) {
         throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.inputRange));
       }
     } catch (err) {
-      Controller.size -= Number(size)
+      Controller.size -= Number(size);
       this.readBridgeSize();
     }
   },
@@ -46,33 +46,35 @@ const InputView = {
     MissionUtils.Console.readLine(MESSAGE.inputMove, (block) => {
       Controller.addRound();
       new BridgeGame().move(block, this.savedBridge);
-      if(Controller.isBlockError(block)) return this.getMoving()
-      this.judgeContinue(block)
+      if (Controller.isBlockError(block)) return this.getMoving();
+      this.judgeContinue(block);
     });
   },
   getMoving() {
     try {
-        throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.choose_UorD));
+      throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.choose_UorD));
     } catch (err) {
       Controller.initializeBlock();
       this.readMoving();
     }
   },
-  judgeContinue(block){
-    if(!Controller.checkContinue()){
-      this.isGameEnd()
+  judgeContinue(block) {
+    if (!Controller.checkContinue()) {
+      this.isGameEnd();
     }
-    if(block === GO.up || block === GO.down && Controller.checkContinue()){
-      this.readMoving()
+    if (block === GO.up || (block === GO.down && Controller.checkContinue())) {
+      this.readMoving();
     }
   },
   isGameEnd() {
-    const size = Number(Controller.size);    // MissionUtils.Console.print(OutputView.nowArray)
-    if (OutputView.nowArray[0].includes(SIGN.fail) || OutputView.nowArray[1].includes(SIGN.fail)) {
+    const size = Number(Controller.size);
+    if (
+      OutputView.nowArray[0].includes(SIGN.fail) || OutputView.nowArray[1].includes(SIGN.fail)
+    ) {
       return this.readGameCommand();
     }
     if (Controller.playerArr.length === size) {
-      return this.executePrintResult()
+      return this.executePrintResult();
     }
   },
 
@@ -81,19 +83,19 @@ const InputView = {
    */
   readGameCommand() {
     MissionUtils.Console.readLine(MESSAGE.inputCommand, (command) => {
-      if(Controller.isCommandError(command)){
+      if (Controller.isCommandError(command)) {
         this.getCommand();
       }
-      if(!Controller.isCommandError(command)){
+      if (!Controller.isCommandError(command)) {
         this.isRetry(command);
       }
     });
   },
   getCommand() {
     try {
-        throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.choose_RorQ));
+      throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.choose_RorQ));
     } catch (err) {
-        this.readGameCommand();
+      this.readGameCommand();
     }
   },
 
@@ -108,7 +110,7 @@ const InputView = {
     }
   },
 
-  executePrintResult(){
+  executePrintResult() {
     Controller.checkSuccess();
     OutputView.printResult(Controller.tryCount, Controller.gameResult);
   },

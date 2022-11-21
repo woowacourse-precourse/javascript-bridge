@@ -88,9 +88,6 @@ const Controller = {
       if (OutputView.nowArray[i].includes(SIGN.fail)) {
         return (this.gameResult = IS_SUCCESS.failedIt);
       }
-      // if (!OutputView.nowArray[i].includes(SIGN.fail)) {
-      //   return (this.gameResult = IS_SUCCESS.nailedIt);
-      // }
     }
   },
 
@@ -101,11 +98,9 @@ const Controller = {
     OutputView.nowArray = [],
     this.arrayState = [[], []],
     this.playerArr = [],
-    // this.gameResult = "",
     this.gameResult = IS_SUCCESS.nailedIt,
     this.round = 0,
-    // this.size = 0,
-    this.tryCount += 1; // 시도 마다 올라감
+    this.tryCount += 1; 
   },
 
   isCommandError(command){
@@ -118,10 +113,6 @@ const Controller = {
     this.command = command;
   },
 
-
-  // resultArray(playerArr) {
-  //   OutputView.printMap(playerArr);
-  // },
 };
 
 module.exports = Controller;
