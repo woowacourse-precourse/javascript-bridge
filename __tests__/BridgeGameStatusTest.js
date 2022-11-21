@@ -14,7 +14,7 @@ describe('다리 게임 초기 설정 테스트', () => {
 
   test('원하는 초기 값으로 게임 상태가 설정된다.', () => {
     const gameStatus = bridgeGameStatus.getGameStatus();
-    const initValue = { moveCount: 0, current: [] };
+    const initValue = { accMoveCount: 0, curMoveCount: 0, movedRoutes: [] };
 
     expect(gameStatus).toEqual(initValue);
   });
