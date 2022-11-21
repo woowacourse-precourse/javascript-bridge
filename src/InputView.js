@@ -6,7 +6,10 @@ const Vaildation = require("./Vaildation");
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
-   */  
+   */
+  MINIMUM_BRIDGE_SIZE: 3,
+  MAXIMUM_BRIDGE_SIZE: 20,
+  
   readBridgeSize( callback ) {
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요.', (answer) => {
       const size = Number(answer);
@@ -29,6 +32,7 @@ const InputView = {
 
 function vaildation_bridgeSize(size) {
   Vaildation.isNumber(size);
+  Vaildation.inRange(size, InputView.MINIMUM_BRIDGE_SIZE, InputView.MAXIMUM_BRIDGE_SIZE);
 }
 
 module.exports = InputView;
