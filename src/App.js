@@ -52,7 +52,14 @@ class App {
   }
 
   decideControl(controlKey) {
-
+    if(controlKey === CONTROL.PASS_STEP) this.requestMoving();
+    if(controlKey === CONTROL.GAME_END) {
+      const recordMoving = this.brideGame.getRecordSteps();
+      let result = this.brideGame.getSucessValue();
+      let replay = this.brideGame.getCountReplyNumber();
+      OutputView.printResult(recordMoving, result, replay);
+    }
+    if(controlKey === CONTROL.GAME_OVER) this.requestCommand();
   }
 
   retryRequestBridgeSize() {
