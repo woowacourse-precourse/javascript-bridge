@@ -19,45 +19,84 @@ class Bridge {
     this.#tryCount = 1;
   }
 
-  getBridgeSizes (moveGame) {
-    InputView.readBridgeSize(moveGame, this.createPattern.bind(this));
+  askBridgeSizes () {
+    InputView.readBridgeSize(this.handleMakePattern.bind(this));
   }
 
-  createPattern (moveGame, size) {
+  handleMakePattern (size) {
+    try {
+      this.createPattern(size);
+    } catch (error) {
+      OutputView.printError(error);
+      this.askBridgeSizes();
+    }
+  }
+
+  createPattern (size) {
     if (Validator.validatorBridgeLength(size)) {
       this.#bridgeMap
         .setPattern(BridgeMaker.makeBridge(Number(size), generate));
-      moveGame();
+      this.askNextStep();
     }
   }
 
-  askNextStep (retryGame) {
-    InputView.readMoving(retryGame, this.getNextStep.bind(this));
+  askNextStep () {
+    InputView.readMoving(this.handleMovingStep.bind(this));
   }
 
-  getNextStep (retryGame, chooseStep) {
+  handleMovingStep (chooseStep) {
+    try {
+      this.getNextStep(chooseStep);
+    } catch (error) {
+      OutputView.printError(error);
+      this.askNextStep();
+    }
+  }
+
+  getNextStep (chooseStep) {
     if (Validator.checkStep(chooseStep)) {
-      this.#moveMap(retryGame, chooseStep);
+      this.#moveMap(chooseStep);
     }
   }
 
-  askRetry (retryGame) {
-    InputView.readGameCommand(retryGame, this.getRetry.bind(this));
+  askRetry () {
+    InputView.readGameCommand(this.handleRetryGame.bind(this));
   }
 
-  getRetry (retryGame, chooseRetry) {
+  handleRetryGame (chooseRetry) {
+    try {
+      this.getRetry(chooseRetry);
+    } catch (error) {
+      OutputView.printError(error);
+      this.askRetry();
+    }
+  }
+
+  getRetry (chooseRetry) {
     if (Validator.checkRetry(chooseRetry)) {
-      this.#runRetry(retryGame, chooseRetry);
+      this.#runRetry(chooseRetry);
     }
   }
 
-  #runRetry (retryGame, chooseRetry) {
+  #moveMap (chooseStep) {
+    this.#showMap(chooseStep);
+    if (!this.#bridgeMap.checkPath(chooseStep)) {
+      return this.askRetry();
+    }
+    this.#bridgeMap.incrementDistance();
+    if (this.#bridgeMap.isEndGame()) {
+      return this.#showResult(GAME_CONSTANTS.resultSuccess);
+    }
+    this.askNextStep();
+  }
+
+  #runRetry (chooseRetry) {
     if (chooseRetry === GAME_CONSTANTS.quitGame) {
       return this.#showResult(GAME_CONSTANTS.resultFailure);
     }
     this.#bridgeMap.initHistory();
     this.#tryCount += 1;
-    this.askNextStep(retryGame);
+    this.askNextStep();
   }
 
   #showResult (isSuccess) {
@@ -72,18 +111,6 @@ class Bridge {
     OutputView.printMap(this.#bridgeMap
       .setHistoryWithChooseStep(chooseStep)
       .getHistory());
-  }
-
-  #moveMap (retryGame, chooseStep) {
-    this.#showMap(chooseStep);
-    if (!this.#bridgeMap.checkPath(chooseStep)) {
-      return retryGame();
-    }
-    this.#bridgeMap.incrementDistance();
-    if (this.#bridgeMap.isEndGame()) {
-      return this.#showResult(GAME_CONSTANTS.resultSuccess);
-    }
-    this.askNextStep(retryGame);
   }
 }
 
