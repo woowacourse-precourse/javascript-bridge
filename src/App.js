@@ -66,13 +66,18 @@ class App {
     });
   }
 
+  
+
     /**
    * 게임을 재시작한다.
    * @param {class} bridgeGame 다리 건너기 게임의 인스턴스
    */
   restartGame(bridgeGame) {
     readGameCommand((response) => {
-      checkVaildRetryInput(response);
+      if(checkVaildRetryInput(response) === false){
+        this.restartGame(bridgeGame);
+        return;
+      }
       if (bridgeGame.retry(response)) {
         this.#tryCount += 1;
         this.repeatGame(bridgeGame);
