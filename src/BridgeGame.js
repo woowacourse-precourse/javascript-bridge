@@ -9,7 +9,6 @@ class BridgeGame {
   #bridge;
   #bridgeMap;
   #step;
-  #tryingNum;
 
   constructor(bridgeSize){
     this.#bridge = new Bridge(makeBridge(bridgeSize, generate));
@@ -35,7 +34,6 @@ class BridgeGame {
   retry() {
     this.#bridgeMap = new BridgeMap();
     this.#step = -1;
-    this.#tryingNum += 1;
   }
   
   

@@ -4,9 +4,11 @@ const { printMap } = require("./OutputView");
 
 class Controller {
   #bridgeGame;
+  #tryingNum;
 
   constructor() {
     this.init();
+    this.#tryingNum = 1;
   }
   init() {
     readBridgeSize((bridgeSize)=>{
@@ -37,6 +39,7 @@ class Controller {
   askReplay(){
     readGameCommand((retry) => {
       if(retry === 'R'){
+        this.#tryingNum += 1;
         this.#bridgeGame.retry();
         this.play();
       }
