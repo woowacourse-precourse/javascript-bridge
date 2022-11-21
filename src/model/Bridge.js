@@ -10,9 +10,6 @@ class Bridge {
     return isMove;
   }
 
-  getBridgeArray() {
-    return this.#bridgeArr;
-  }
   getBridgeLength() {
     return this.#bridgeArr.length;
   }

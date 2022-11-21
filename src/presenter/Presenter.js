@@ -50,13 +50,13 @@ class Presenter {
   }
 
   // Control InputView
-  handleInput(input, InputType) {
+  handleInput(input, inputType) {
     try {
-      Validation[InputType](input);
-      INPUT_TRY_FN[InputType](this, input);
+      Validation[inputType](input);
+      INPUT_TRY_FN[inputType](this, input);
     } catch (errorMsg) {
       OutputView.printError(errorMsg);
-      INPUT_CATCH_FN[InputType](this);
+      INPUT_CATCH_FN[inputType](this);
     }
   }
 

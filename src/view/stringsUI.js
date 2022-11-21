@@ -30,6 +30,13 @@ const BRIDGE = {
   0: "D",
 };
 
+const USER_INPUT = {
+  UP: "U",
+  DOWN: "D",
+  RETRY: "R",
+  QUIT: "Q",
+};
+
 const MAP = {
   UPPER: "U",
   LOWER: "L",
@@ -47,4 +54,5 @@ module.exports = {
   OUTPUT,
   BRIDGE,
   MAP,
+  USER_INPUT,
 };
