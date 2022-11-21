@@ -39,7 +39,7 @@ class App {
   selectRetryOrQuit(input) {
     try {
       Validator.validateCommand(input);
-      if (input === COMMAND.QUIT) this.endGame();
+      if (input === COMMAND.QUIT) this.endGame(MESSAGE.FAIL);
       else this.retryGame();
     } catch {
       this.readGameCommand();
@@ -47,15 +47,15 @@ class App {
   }
 
   checkGameProgress() {
-    if (this.#game.isClear()) this.endGame();
+    if (this.#game.isClear()) this.endGame(MESSAGE.SUCCESS);
     else if (this.#game.isPass()) this.readMoving();
     else this.readGameCommand();
   }
 
-  endGame() {
+  endGame(gameResult) {
     const map = this.#game.getMap();
     const tryCount = this.#game.getTryCount();
-    OutputView.printResult(map, MESSAGE.SUCCESS, tryCount);
+    OutputView.printResult(map, gameResult, tryCount);
     Console.close();
   }
 
