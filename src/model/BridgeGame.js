@@ -1,4 +1,6 @@
 const { STATE } = require('../constant/Constant');
+const { makeBridge } = require('../BridgeMaker');
+const { generate } = require('../BridgeRandomNumberGenerator');
 
 const RESULT = Object.freeze({
   SUCCESS: '성공',
@@ -17,8 +19,8 @@ const OBJECT = Object.freeze({
 class BridgeGame {
   try = 0;
 
-  constructor(bridge) {
-    this.bridge = bridge;
+  constructor(size) {
+    this.bridge = makeBridge(size, generate);
     this.reset();
   }
 

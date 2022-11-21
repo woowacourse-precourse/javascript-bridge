@@ -2,13 +2,10 @@ const { STATE } = require('../constant/Constant');
 const BridgeGame = require('../model/BridgeGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const { makeBridge } = require('../BridgeMaker');
-const { generate } = require('../BridgeRandomNumberGenerator');
 
 class Controller {
   startGame(input) {
-    this.bridge = makeBridge(input, generate);
-    this.bridgeGame = new BridgeGame(this.bridge);
+    this.bridgeGame = new BridgeGame(input);
     this.flow(this.bridgeGame.state);
   }
 
