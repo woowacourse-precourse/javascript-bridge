@@ -38,9 +38,14 @@ class BridgeGame {
     for (let i = 0; i < this.userMoveArray.length; i++) {
       if (bridge[i] === this.userMoveArray[i]) {
         console.log("같음");
-        return true;
+        if (bridge.length === this.userMoveArray.length) {
+          return 0;
+        }
+        return 1;
       } else {
         console.log("다름");
+
+        return 2;
       }
     }
   }

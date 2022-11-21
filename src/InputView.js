@@ -35,8 +35,15 @@ const InputView = {
       const moveKey = Validate.checkMovingKey(userInput);
       const userArray = bridgeGame.move(moveKey, userMoveArray);
       const keepGaming = bridgeGame.compareMove(bridge, userArray);
-      if (keepGaming) {
+      if (keepGaming === 1) {
         this.readMoving(bridgeGame, bridge, userMoveArray);
+      }
+      if (keepGaming === 0) {
+        console.log("다맞춤");
+      }
+      if (keepGaming === 2) {
+        console.log("틀렸음 다시할거임?");
+        this.readGameCommand();
       }
     });
     return;
@@ -45,7 +52,9 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(MESSAGE.SELECT_RETRY, (userInput) => {});
+  },
 };
 
 module.exports = InputView;
