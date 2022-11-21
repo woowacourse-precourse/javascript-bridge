@@ -44,6 +44,36 @@ class BridgeGame {
   checkFail() {
     this.#failed = true;
   }
+
+  /**
+   * 최초 다리 생성
+   * @param {string} input 사용자가 입력한 "U" 혹은 "D"
+   */
+  createBridges(input) {
+    this.bridges.saveBridges(this.createUpDownBridges(input));
+  }
+
+  createUpDownBridges(input) {
+    let upBridge = LEFT_BRACKET;
+    let downBridge = LEFT_BRACKET;
+
+    if (this.isCorrectOrWrong(input)) [upBridge, downBridge] = this.buildCorrectBridge(input, upBridge, downBridge);
+    else [upBridge, downBridge] = this.buildWrongBridge(input, upBridge, downBridge);
+
+    return [upBridge, downBridge];
+  }
+
+  isCorrectOrWrong(input) {
+    if (input === this.answerBridge[this.#currentSize]) return true;
+    this.checkFail();
+
+    return false;
+  }
+
+  isUpOrDown(input) {
+    if (input === Constant.UP) return true;
+    return false;
+  }
 }
 
 module.exports = BridgeGame;
