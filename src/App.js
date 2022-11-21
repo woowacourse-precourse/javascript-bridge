@@ -84,7 +84,8 @@ class App {
     while (true) {
       this.#logger.logNewTrial();
       if (this.playSingleGame() === GameConfig.STATUS_SUCCESS) return true;
-      if (this.requestUserInput(InputView.readGameCommand) === GameConfig.QUIT) return false;
+      if (App.requestUserInput(InputView.readGameCommand) === GameConfig.QUIT) return false;
+      this.#game.retry();
     }
   }
 }
