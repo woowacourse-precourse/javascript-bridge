@@ -1,18 +1,17 @@
 const { RESTART_COMMAND, QUIT_COMMAND } = require('./constants/condition.js');
 const { GAME_MSG_START } = require('./constants/message.js');
 
+const tryCatchHandler = require('./utils/tryCatchHandler.js');
+const { makeBridge } = require('./BridgeMaker.js');
+const { generate } = require('./utils/BridgeRandomNumberGenerator.js');
 const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('./views/InputView.js');
 const OutputView = require('./views/OutputView.js');
 const BridgeGame = require('./BridgeGame.js');
 const Validation = require('./Validation.js');
-const tryCatchHandler = require('./utils/tryCatchHandler.js');
+const Bridge = require('./Bridge.js');
 
 class GameController {
-  constructor() {
-    this.bridgeGame = new BridgeGame();
-  }
-
   play() {
     OutputView.printMsg(GAME_MSG_START);
     this.requestBridgeSize();
@@ -26,7 +25,11 @@ class GameController {
 
   buildBridgePhase(size) {
     Validation.validateSize(size);
-    this.bridgeGame.build(size);
+
+    const directions = makeBridge(Number(size), generate);
+    const bridge = new Bridge(directions);
+
+    this.bridgeGame = new BridgeGame(bridge);
 
     this.requestDirection();
   }
