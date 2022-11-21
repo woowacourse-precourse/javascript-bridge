@@ -17,8 +17,9 @@ module.exports = {
   },
 
   stopWalking: {
-    true: ({ bridgeGame }) => {
+    true: ({ app, bridgeGame }) => {
       printResult(bridgeGame);
+      app.terminate();
     },
     false: ({ app, bridgeGame, readAgain }) => {
       readAgain(app, bridgeGame);
