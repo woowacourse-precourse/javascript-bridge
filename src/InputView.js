@@ -38,6 +38,7 @@ const InputView = {
 
   readMovingCallback(moving) {
     try {
+      ValidCheck.movingInput(moving);
       const isWrong = this.bridgeGameControl.manageMoving(moving); // moving 값으로 출력까지 완료
       isWrong ? this.isGameEnd() : this.readGameCommand();
     } catch (error) {
