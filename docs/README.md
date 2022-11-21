@@ -85,8 +85,8 @@
   - [ ] 다리건너기 게임의 다리 출력 모양을 계산하는 객체 #BridgeGameShape
 
     - [ ] 다리건너기 게임의 중간 결과를 문자열로 반환하는 기능#getCurrentBridgeGameShape
-    - [ ] 다리 위쪽 모양을 만드는 기능#makeUpShape
-    - [ ] 다리 아래쪽 모양을 만드는 기능#makeDownShape
+    - [x] 다리 위쪽 모양을 만드는 기능#makeUpShape
+    - [x] 다리 아래쪽 모양을 만드는 기능#makeDownShape
 
   - [ ] 다리 건너기 게임 #BridgeGame
 
