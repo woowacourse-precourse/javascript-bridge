@@ -21,3 +21,12 @@ const isBridgeLengthFloat = (number)=>{
 const isBridgeLengthVaccum = (number)=>{
   return !(number ===" ");
 }
+
+module.exports = {
+  bridgeRangeCheck,
+  userMoveInputCheck,
+  userRetryInputCheck,
+  bridgeInputStringCheck,
+  isBridgeLengthFloat,
+  isBridgeLengthVaccum
+};

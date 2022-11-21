@@ -4,6 +4,9 @@ const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator.js")
 const BridgeMaker = require("../BridgeMaker.js");
 const BridgeGame = require("../BridgeGame.js");
 const OutputView = require("./OutputView")
+const {
+  bridgeLengthValidate
+} = require('../validateFunction')
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -13,6 +16,7 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(BRIDGE_NUMBER_INPUT, (bridgeSize) => {
+      bridgeLengthValidate(bridgeSize);
       const bridge=BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
       const bridgeGame= new BridgeGame(bridge, bridgeSize);
       this.readMoving([],bridgeGame, bridgeSize);
