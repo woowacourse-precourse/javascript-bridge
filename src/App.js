@@ -72,6 +72,16 @@ class App {
       this.#decideNextPhaseByRetryCommand(command);
     });
   }
+
+  #decideNextPhaseByRetryCommand(command) {
+    if (command === COMMAND.RETRY) {
+      this.#bridgeGame.retry();
+      this.#movingInputPhase();
+      return;
+    }
+
+    this.#gameEndPhase();
+  }
 }
 
 module.exports = App;
