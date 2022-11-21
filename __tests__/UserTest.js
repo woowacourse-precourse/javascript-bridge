@@ -25,4 +25,11 @@ describe('🎮 User 클래스 테스트', () => {
 
     expect(user.getLocation()).toBe(1);
   });
+
+  test('⭐ 유저의 게임 트라이 횟수를 증가시킬 수 있습니다. ▶ 초기값 : 1, 증가 후 : 2', () => {
+    const user = new User();
+    user.increaseCount();
+
+    expect(user.getTryCount()).toBe(2);
+  });
 });
