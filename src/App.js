@@ -27,7 +27,7 @@ class App {
     const bridgeGame = new BridgeGame(this.#bridge);
     for (let brigeIndex = 0; brigeIndex < this.#bridgeSize; brigeIndex++) {
       const moveInput = await InputView.readMoving();
-      bridgeGame.move(moveInput, brigeIndex);
+      OutputView.printMap(bridgeGame.move(moveInput, brigeIndex));
     }
   }
 }
