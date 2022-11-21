@@ -26,7 +26,7 @@ const ERROR = {
 };
 
 const MAKER = {
-	LOWER_BRIDGE_NUMBER: '0',
+	LOWER_BRIDGE_NUMBER: 0,
 };
 
 const PLAYER = {

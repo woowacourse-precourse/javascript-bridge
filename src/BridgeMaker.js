@@ -13,7 +13,7 @@ const BridgeMaker = {
 		let canWalkBridge = [];
 
 		while (canWalkBridge.length < size) {
-			String(generateRandomNumber()) === MAKER.LOWER_BRIDGE_NUMBER
+			generateRandomNumber() === MAKER.LOWER_BRIDGE_NUMBER
 				? canWalkBridge.push(COMMAND.LOWER_BRIDGE_STRING)
 				: canWalkBridge.push(COMMAND.UPPER_BRIDGE_STRING);
 		}
