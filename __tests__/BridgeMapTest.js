@@ -6,50 +6,50 @@ describe('다리 지도 클래스 테스트', () => {
     const bridgeMap = new BridgeMap();
     const result = bridgeMap.getMap();
 
-    expect(result).toStrictEqual({ U: [], D: [] });
+    expect(result).toStrictEqual([[], []]);
   });
 
   test.each([
-    ['U', 'U', [true]],
-    ['D', 'D', [true]],
+    ['U', 'U', 0, [true]],
+    ['D', 'D', 1, [true]],
   ])(
     '현재 위치의 값이 입력값과 같으면 해당 다리 배열에 true 추가',
-    (command, current, expected) => {
+    (command, current, index, expected) => {
       const movingCommand = new MovingCommand(command);
 
       const bridgeMap = new BridgeMap();
       bridgeMap.add(movingCommand, current);
-      const result = bridgeMap.getMap()[command];
+      const result = bridgeMap.getMap()[index];
 
       expect(result).toStrictEqual(expected);
     },
   );
 
   test.each([
-    ['D', 'U', [false]],
-    ['U', 'D', [false]],
+    ['U', 'D', 0, [false]],
+    ['D', 'U', 1, [false]],
   ])(
     '현재 위치의 값이 입력값과 다르면 해당 다리 배열에 false 추가',
-    (command, current, expected) => {
+    (command, current, index, expected) => {
       const movingCommand = new MovingCommand(command);
 
       const bridgeMap = new BridgeMap();
       bridgeMap.add(movingCommand, current);
-      const result = bridgeMap.getMap()[command];
+      const result = bridgeMap.getMap()[index];
 
       expect(result).toStrictEqual(expected);
     },
   );
 
   test.each([
-    ['D', 'U', 'U', [null]],
-    ['U', 'D', 'D', [null]],
-  ])('입력값과 다른 위치의 다리 배열에 null 추가', (command, current, otherSide, expected) => {
+    ['U', 'D', 1, [null]],
+    ['D', 'U', 0, [null]],
+  ])('입력값과 다른 위치의 다리 배열에 null 추가', (command, current, index, expected) => {
     const movingCommand = new MovingCommand(command);
 
     const bridgeMap = new BridgeMap();
     bridgeMap.add(movingCommand, current);
-    const result = bridgeMap.getMap()[otherSide];
+    const result = bridgeMap.getMap()[index];
 
     expect(result).toStrictEqual(expected);
   });
@@ -62,6 +62,6 @@ describe('다리 지도 클래스 테스트', () => {
     bridgeMap.reset();
     const result = bridgeMap.getMap();
 
-    expect(result).toStrictEqual({ U: [], D: [] });
+    expect(result).toStrictEqual([[], []]);
   });
 });
