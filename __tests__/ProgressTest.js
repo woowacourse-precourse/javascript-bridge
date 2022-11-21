@@ -27,11 +27,4 @@ describe("Progress 테스트", () => {
     expect(firstBridge).toEqual("[ O |   | X ]");
     expect(secondBridge).toEqual("[   | O |   ]");
   });
-
-  test("만약 U나 D가 아닌 값이 들어온다면 예외처리", () => {
-    const progress = new Progress();
-    expect(() => {
-      progress.success("Z");
-    }).toThrow("[ERROR]");
-  });
 });

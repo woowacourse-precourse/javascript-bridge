@@ -2,6 +2,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const InputView = require("./View/InputView");
 const OutputView = require("./View/OutputView");
+const {
+  RETRY_COMMAND: { RETRY },
+} = require("./core/BridgeGameCore");
 
 class App {
   play() {
@@ -43,7 +46,7 @@ class App {
 
   showInputRetry() {
     InputView.readGameCommand((command) => {
-      if (command === "R") {
+      if (command === RETRY) {
         this.bridgeGame.retry(command);
         this.showInputMoveCommand();
         return;

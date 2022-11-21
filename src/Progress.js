@@ -1,17 +1,17 @@
-const Validator = require("./Validator");
+const {
+  MOVE_COMMAND: { UP },
+} = require("./core/BridgeGameCore");
 
 class Progress {
   #firstBridge = [];
   #secondBridge = [];
 
   success(command) {
-    Validator.validateMoveCommand(command);
-    command === "U" ? this.#addFirstBridge("O") : this.#addSecondBridge("O");
+    command === UP ? this.#addFirstBridge("O") : this.#addSecondBridge("O");
   }
 
   fail(command) {
-    Validator.validateMoveCommand(command);
-    command === "U" ? this.#addFirstBridge("X") : this.#addSecondBridge("X");
+    command === UP ? this.#addFirstBridge("X") : this.#addSecondBridge("X");
   }
 
   desc() {

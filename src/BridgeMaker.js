@@ -1,3 +1,5 @@
+const { MOVE_COMMAND } = require("./core/BridgeGameCore");
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -18,14 +20,14 @@ const BridgeMaker = {
 
   convertNumberToBridge(number) {
     const numberToBridgeMap = {
-      0: "D",
-      1: "U",
+      0: MOVE_COMMAND.DOWN,
+      1: MOVE_COMMAND.UP,
     };
     return numberToBridgeMap[number] || this.throwRangeError();
   },
 
   throwRangeError() {
-    throw new Error("[ERROR] 다리를 만들기 위한 숫자는 0이나 1이어야 합니다.");
+    throw new Error("Random numbers'range is wrong. range must be 0 ~ 1.");
   },
 };
 
