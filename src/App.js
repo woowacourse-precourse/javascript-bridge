@@ -3,9 +3,15 @@ const { OutputView } = require('./OutputView');
 const { Validator } = require('./Validator');
 const { BridgeGame}  = require('./BridgeGame');
 const { Console } = require('@woowacourse/mission-utils');
+const { RESULT } = require('./constants');
 
 class App {
   #bridgeGame;
+  #currentSteps;
+
+  constructor() {
+    this.#currentSteps = [];
+  }
 
   play() {
     OutputView.printGameStart();
@@ -15,27 +21,30 @@ class App {
   settingBridge(size) {
     Validator.checkBridgeSize(size);
     this.#bridgeGame = new BridgeGame(size);
-    // this.playingBridge();
+    this.playingBridge();
   }
   
   playingBridge() {
     InputView.readMoving(this.movingSteps.bind(this));
   }
   
-  movingSteps(step) {
+  movingSteps(move) {
     Validator.checkMoving(move);
-    if (this.#bridgeGame.move(step) === true) {
-      OutputView.printMap(this.#bridgeGame, true);
-      if (this.#bridgeGame.isDone() == true) {
-        OutputView.printResult(this.#bridgeGame);
-      }
-      else {
-        this.playingBridge();
-      }
-    }
-    if (this.#bridgeGame.move(step) === false) {
-      OutputView.printMap(this.#bridgeGame, false);
+    this.#currentSteps.push(move);
+
+    let result = OutputView.printMap(this.#currentSteps, this.#bridgeGame);
+    this.checkingStep(result);
+  }
+  
+  checkingStep(result) {
+    if (result == RESULT.FAIL) {
       InputView.readGameCommand(this.endingBridge.bind(this));
+    }
+    if (result == RESULT.SUCCESS) {
+      this.playingBridge();     
+    }
+    if (result == RESULT.FINISH) {
+      OutputView.printResult(this.#bridgeGame);
     }
   }
 
