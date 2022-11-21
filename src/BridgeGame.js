@@ -4,21 +4,28 @@ const outputView = require('./OutputView');
 const InputValidator = require('../validators/InputValidator');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
+const InputView = require('./InputView');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
+  #moveIndex;
   #tryCount;
   #inputUpDown;
   #upList;
   #downList;
 
   constructor () {
+    this.#moveIndex = 0;
     this.#tryCount = 1;
     this.#upList = [];
     this.#downList = [];
+  }
+
+  incrementMoveIndex(){
+    this.#moveIndex += 1;
   }
 
   setBridge (bridge) {
@@ -50,7 +57,33 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(bridgeGame) {
-    inputView.readMoving(bridgeGame);
+    if (this.#moveIndex !== this.#bridge.length) {
+      inputView.readMoving(this.handleMoveBridge.bind(this));
+    } else {
+      outputView.printResult(true, bridgeGame);
+    }
+  }
+
+  handleMoveBridge (string) {
+    try {
+      InputValidator.isUpDown(string);
+
+      this.setInputUpDown(string);
+      this.setMapArray(this.sameBridge(this.#moveIndex), string);
+      outputView.printMap(this);
+      if (this.#bridge[this.#moveIndex] === string) {
+        this.incrementMoveIndex();
+        return this.move(this);
+      }
+      this.retry(this);
+    } catch (error) {
+      outputView.printError(error);
+      this.move(this);
+    }
+  }
+
+  getMoveIndex () {
+    return this.#moveIndex;
   }
 
   incrementTryCount () {
@@ -116,6 +149,7 @@ class BridgeGame {
   }
 
   setList () {
+    this.#moveIndex = 0;
     this.#upList = [];
     this.#downList = [];
   }

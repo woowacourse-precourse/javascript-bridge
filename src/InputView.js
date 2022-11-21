@@ -18,30 +18,9 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridgeGame, idx = 0) {
-    const bridge = bridgeGame.getBridge();
-
-    if (idx !== bridge.length) {
+  readMoving(handleMoveBridge) {
       Console.print(GAME_MESSAGE.UPDOWN_INPUT);
-      Console.readLine('', (string) => {
-        try {
-          InputValidator.isUpDown(string);
-
-          bridgeGame.setInputUpDown(string);
-          bridgeGame.setMapArray(bridgeGame.sameBridge(idx), string);
-          printMap(bridgeGame);
-          if (bridge[idx] === string) {
-            return this.readMoving(bridgeGame, idx + 1);
-          }
-          bridgeGame.retry(bridgeGame);
-        } catch (error) {
-          Console.print(error.message);
-          this.readMoving(bridgeGame, idx);
-        }
-      });
-    } else {
-      printResult(true, bridgeGame);
-    }
+      Console.readLine('', handleMoveBridge);
   },
 
   /**
