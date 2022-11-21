@@ -36,14 +36,14 @@ class BridgeGame {
     const BRIDGE_UPPER_BOUND = 20;
     const IS_BOUNDED = +(size) >= BRIDGE_LOWER_BOUND && +(size) <= BRIDGE_UPPER_BOUND;
     const IS_VALID_NUMBER = IS_NUMBER && IS_BOUNDED;
-    this.#bridgeSizeExceptionHandler(IS_VALID_NUMBER);
-    GameProgress.printBlankLine();
-    this.#makeBridge(+size);
+    this.#bridgeSizeExceptionHandler(IS_VALID_NUMBER, +size);
   };
 
-  #bridgeSizeExceptionHandler = (isValidNumber) => {
+  #bridgeSizeExceptionHandler = (isValidNumber, size) => {
     try {
       BridgeError.throwErrorHandler(this.#bridgeErrorMessages[0], !isValidNumber);
+      GameProgress.printBlankLine();
+      this.#makeBridge(size);
     } catch {
       GameProgress.readBridgeSize(this.#validateBridgeSize);
     }
