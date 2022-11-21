@@ -15,7 +15,7 @@ const ERROR_MESSAGE = Object.freeze({
   interface_class: '메서드 구현이 필요합니다',
   size: {
     type: '다리 길이는 숫자여야 합니다.',
-    range: '다리 길이는 1-25사이의 숫자를 입력해주어야 합니다.',
+    range: '다리 길이는 3-20사이의 숫자를 입력해주어야 합니다.',
   },
   command: '플레이어가 이동할 칸은 대문자 U 또는 D중 하나만 입력할 수 있습니다.',
 });
