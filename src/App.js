@@ -33,6 +33,17 @@ class App {
     return this.runGame();
   }
 
+  async runGame() {
+    const { isCorrect, isEnd, count, map } = await this.crossingBridge();
+    await OutputView.printMap(map);
+
+    if (isCorrect) {
+      return isEnd ? OutputView.printResult(map, count, isCorrect) : this.runGame();
+    }
+    const isRetry = await this.checkRetry();
+    return isRetry ? this.retryGame() : OutputView.printResult(map, count, isCorrect);
+  }
+
   play() {
     (async() => {
         const bridge = await this.initBridge();
