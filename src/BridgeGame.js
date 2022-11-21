@@ -3,7 +3,6 @@ const { generate } = require('./BridgeRandomNumberGenerator');
 const { RETRY, UP, STATUS_SUCCESS, STATUS_FAIL, STATUS_FINISH } = require('./constant/constants');
 const { readMoving, readBridgeSize, readGameCommand } = require('./ui/InputView');
 const OutputView = require('./ui/OutputView');
-const { printMap, printResult, printStart } = require('./ui/OutputView');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -18,20 +17,18 @@ class BridgeGame {
   #userInputString;
   #try; //총 시도 횟수
   #round; //현재 사용자의 입력 칸 수
-  #upperBridge;
-  #lowerBridge;
+  #isAnswerList; //정답 여부 배열
 
   constructor() {
     this.#bridgeString = '';
     this.#userInputString = '';
     this.#try = 1;
     this.#round = 0;
-    this.#upperBridge = [];
-    this.#lowerBridge = [];
+    this.#isAnswerList = [];
   }
 
   start() {
-    printStart();
+    OutputView.printStart();
     readBridgeSize(this.bridgeSetting);
   }
 
@@ -45,9 +42,13 @@ class BridgeGame {
     console.log(
       `round : ${this.#round}, bridge: ${this.#bridgeString}, userInput : ${this.#userInputString}`
     );
-    this.move();
-    const status = this.checkStatus(this.#round, this.#bridgeString, this.#userInputString);
-    printMap(this.#upperBridge, this.#lowerBridge);
+    this.move(this.#bridgeString[this.#round], this.#userInputString[this.#round]);
+    console.log(this.#isAnswerList);
+    const status = this.checkStatus(
+      this.#bridgeString[this.#round],
+      this.#userInputString[this.#round]
+    );
+    OutputView.printMap(this.#isAnswerList, this.#userInputString);
     this.doAfterCheck(status);
   };
 
@@ -60,10 +61,9 @@ class BridgeGame {
       case STATUS_FAIL:
         this.askRetry();
         break;
-      case STATUS_SUCCESS:
+      case STATUS_FINISH:
         //TODO 총 시도 횟수, 성공 여부 보여주기
-        // printResult(STATUS_SUCCESS, this.#try);
-        OutputView.printResult(this.#upperBridge, this.#lowerBridge, this.#try);
+        OutputView.printResult(this.#isAnswerList, this.#userInputString, this.#try);
         break;
     }
   };
@@ -71,56 +71,33 @@ class BridgeGame {
   askRetry = () => {
     readGameCommand((input) => {
       if (input === RETRY) {
-        this.#round = 0;
-        this.#try += 1;
-        this.#userInputString = '';
         this.retry();
-        readMoving(this.check);
       } else {
         // printResult(STATUS_FAIL, this.#try);
+        OutputView.printResult(this.#isAnswerList, this.#userInputString, this.#try);
       }
     });
   };
 
-  move() {
+  move(answerChar, userChar) {
     //n번째 round에서 bridgeString과 userInputString을 보고 다리 현황 만들기
-    if (this.#bridgeString[this.#round] === this.#userInputString[this.#round]) {
-      this.pushO(this.#upperBridge, this.#lowerBridge, this.#bridgeString[this.#round]);
+    if (answerChar === userChar) {
+      this.#isAnswerList.push(true);
     } else {
-      this.pushX(this.#upperBridge, this.#lowerBridge, this.#bridgeString[this.#round]);
+      this.#isAnswerList.push(false);
     }
   }
 
-  pushO(bridge1, bridge2, uOrD) {
-    if (uOrD === UP) {
-      bridge1.push('o');
-      bridge2.push('n');
-    } else {
-      bridge1.push('n');
-      bridge2.push('o');
-    }
-  }
-
-  pushX(bridge1, bridge2, uOrD) {
-    if (uOrD === UP) {
-      bridge1.push('n');
-      bridge2.push('x');
-    } else {
-      bridge1.push('x');
-      bridge2.push('n');
-    }
-  }
-
-  checkStatus(round, bridgeString, userInputString) {
-    const total_round = bridgeString.length;
+  checkStatus(answerChar, userChar) {
+    const total_round = this.#bridgeString.length;
     console.log(
-      `checkStatus... round : ${round}, total_round : ${total_round}, upper : ${
-        this.#upperBridge
-      }, lower : ${this.#lowerBridge}, userInput : ${userInputString}`
+      `checkStatus... round : ${this.#round}, total_round : ${total_round}, userInput : ${
+        this.#userInputString
+      }`
     );
-    if (userInputString[round] !== bridgeString[round]) {
+    if (answerChar !== userChar) {
       return STATUS_FAIL;
-    } else if (this.#upperBridge.length === total_round) {
+    } else if (this.#isAnswerList.length === total_round) {
       return STATUS_FINISH;
     } else {
       return STATUS_SUCCESS;
@@ -134,8 +111,14 @@ class BridgeGame {
    */
   retry() {
     //bridge 초기화
-    this.#upperBridge = [];
-    this.#lowerBridge = [];
+    this.#round = 0;
+    this.#try += 1;
+    this.#userInputString = '';
+    this.#isAnswerList = [];
+    readMoving(this.check);
+
+    // this.#upperBridge = [];
+    // this.#lowerBridge = [];
   }
 }
 

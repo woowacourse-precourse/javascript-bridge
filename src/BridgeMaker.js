@@ -1,6 +1,7 @@
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
+const { DOWN, UP } = require('./constant/constants');
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -8,11 +9,11 @@ const BridgeMaker = {
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
   makeBridge(size, generateRandomNumber) {
-    const answerList = [];
+    let bridgeString = '';
     for (let i = 0; i < size; i++) {
-      answerList.push(generateRandomNumber() === 0 ? 'D' : 'U');
+      bridgeString += generateRandomNumber() === 0 ? DOWN : UP;
     }
-    return answerList;
+    return bridgeString;
   },
 };
 
