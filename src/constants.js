@@ -7,6 +7,7 @@ module.exports = {
 
   ERROR: Object.freeze({
     WRONG_BRIDGE_SIZE: "\n[ERROR] 다리 길이는 3 이상 20 이하의 정수여야 합니다.\n",
+    WRONG_DIRECTION: "\n[ERROR] 위로 이동하기 위해서는 U를, 아래로 이동하기 위해서는 D를 입력하셔야 합니다.\n",
   }),
 
   U: "U",
