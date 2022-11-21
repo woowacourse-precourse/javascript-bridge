@@ -24,8 +24,9 @@ const InputView = {
    * + 입력 받은 다리 길이를 검증한다.
    */
   validateBridgeSize(bridgeSize) {
-    if (WORD.START_SIZE <= bridgeSize && bridgeSize <= WORD.END_SIZE)
+    if (WORD.START_SIZE <= bridgeSize && bridgeSize <= WORD.END_SIZE) {
       return bridgeSize;
+    }
     throw MESSAGE.ERROR.BRIDGE_SIZE;
   },
 
