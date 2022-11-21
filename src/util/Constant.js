@@ -22,6 +22,12 @@ const MAP = Object.freeze({
   END: " ]",
 });
 
+const JUDGEMENT = Object.freeze({
+  IS_ARRIVE: 0,
+  IS_SUCCESS_CURRENT_SPACE: 1,
+  IS_FAIL_CURRENT_SPACE: 2,
+});
+
 const OUTPUT_MESSAGE = Object.freeze({
   START: "다리 건너기 게임을 시작합니다.\n",
   RESULT: "최종 게임 결과",
@@ -52,6 +58,7 @@ module.exports = {
   MOVING_SPACE,
   RETRY_OR_QUIT,
   MAP,
+  JUDGEMENT,
   OUTPUT_MESSAGE,
   INPUT_MESSAGE,
   ERROR_MESSAGE,
