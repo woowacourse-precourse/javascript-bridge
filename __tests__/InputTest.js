@@ -15,19 +15,19 @@ describe('다리 길이 입력값 테스트', () => {
     }).toThrow(ERROR_MESSAGES.NAN);
   });
 
-  test('다리 길이 범위 테스트 (*3 ~ 20)', () => {
+  test('다리 길이 범위 테스트 1', () => {
     expect(() => {
       InputView.validateBridgeSize('2');
     }).toThrow(ERROR_MESSAGES.SIZE);
   });
 
-  test('다리 길이 범위 테스트 (*3 ~ 20)', () => {
+  test('다리 길이 범위 테스트 2', () => {
     expect(() => {
       InputView.validateBridgeSize('21');
     }).toThrow(ERROR_MESSAGES.SIZE);
   });
 
-  test('다리 길이 범위 테스트 (*3 ~ 20)', () => {
+  test('다리 길이 범위 테스트 3', () => {
     expect(() => {
       InputView.validateBridgeSize('3');
     }).toBeTruthy();
