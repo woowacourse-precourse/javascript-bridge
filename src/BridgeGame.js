@@ -23,13 +23,19 @@ class BridgeGame {
    */
   move(moving) {
     moving === COMMAND.UP ? this.#currentBridge.push(COMMAND.UP) : this.#currentBridge.push(COMMAND.DOWN);
-    this.sketch(moving);
-    return [this.#up, this.#down];
+    const isWrong = this.sketch(moving);
+    return isWrong;
   }
 
   sketch(moving) {
-    if (this.#bridge[this.#currentBridge.length - 1] === moving) this.sketchCorrectMap();
-    if (this.#bridge[this.#currentBridge.length - 1] !== moving) this.sketchWrongMap(moving);
+    if (this.#bridge[this.#currentBridge.length - 1] === moving) {
+      this.sketchCorrectMap();
+      return true;
+    }
+    if (this.#bridge[this.#currentBridge.length - 1] !== moving) {
+      this.sketchWrongMap(moving);
+      return false;
+    }
   }
 
   sketchCorrectMap() {
@@ -42,6 +48,10 @@ class BridgeGame {
   sketchWrongMap(moving) {
     moving === COMMAND.UP ? this.#up.push(WORD.WRONG) : this.#down.push(WORD.WRONG);
     this.#up.length === this.#down.length - 1 ? this.#up.push(WORD.EMPTY) : this.#down.push(WORD.EMPTY);
+  }
+
+  bringSketch() {
+    return [this.#up, this.#down];
   }
 
   /**

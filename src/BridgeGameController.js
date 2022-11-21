@@ -12,8 +12,10 @@ class BridgeGameController {
   }
 
   manageMoving(moving) {
-    const bridgeSketch = this.#bridgeGame.move(moving);
+    const isWrong = this.#bridgeGame.move(moving);
+    const bridgeSketch = this.#bridgeGame.bringSketch();
     OutputView.printMap(bridgeSketch);
+    return isWrong;
   }
 
   isGameEnd() {

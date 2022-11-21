@@ -30,18 +30,23 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-   readMoving() {
+  readMoving() {
     Console.readLine(PROMPT.READ_MOVING, this.readMovingCallback.bind(this));
   },
 
   readMovingCallback(moving) {
     try {
-      this.bridgeGameControl.manageMoving(moving);
-      this.bridgeGameControl.isGameEnd() ? this.readGameCommand() : this.readMoving(); 
+      const isWrong = this.bridgeGameControl.manageMoving(moving); // moving 값으로 출력까지 완료
+      isWrong ? this.isGameEnd() : this.readGameCommand();
     } catch (error) {
       OutputView.printErrorMessage(ERROR.MOVING_ERROR);
       this.readMoving();
     }
+  },
+
+  isGameEnd() {
+    const isGameEnd = this.bridgeGameControl.isGameEnd();
+    isGameEnd ? this.bridgeGameControl.isGameEnd(isGameEnd) : this.readMoving();
   },
 
   /**
