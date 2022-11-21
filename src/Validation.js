@@ -1,46 +1,46 @@
 const {
-  SizeConstraints,
-  MoveConstraints,
-  CommandConstraints,
-} = require("./Constraints");
+	SizeConstraints,
+	MoveConstraints,
+	CommandConstraints,
+} = require('./Constraints');
 
 class BridgeSizeValidation {
-  constructor(size) {
-    this.checkBridgesizeConstraints(size);
-  }
+	constructor(size) {
+		this.checkBridgesizeConstraints(size);
+	}
 
-  checkBridgesizeConstraints(size) {
-    const sizeConstraints = new SizeConstraints(size);
-    sizeConstraints.checkOnlyNumber();
-    sizeConstraints.checkNumberRange();
-    sizeConstraints.checkStartZero();
-  }
+	checkBridgesizeConstraints(size) {
+		const sizeConstraints = new SizeConstraints(size);
+		sizeConstraints.checkOnlyNumber();
+		sizeConstraints.checkNumberRange();
+		sizeConstraints.checkStartZero();
+	}
 }
 
 class MoveInputValidation {
-  constructor(moving) {
-    this.checkMoveInput(moving);
-  }
+	constructor(moving) {
+		this.checkMoveInput(moving);
+	}
 
-  checkMoveInput(moving) {
-    const moveConstraints = new MoveConstraints(moving);
-    moveConstraints.checkInputUorD();
-  }
+	checkMoveInput(moving) {
+		const moveConstraints = new MoveConstraints(moving);
+		moveConstraints.checkInputUorD();
+	}
 }
 
 class CommandInputValidation {
-  constructor(command) {
-    this.checkCommandInput(command);
-  }
+	constructor(command) {
+		this.checkCommandInput(command);
+	}
 
-  checkCommandInput(command) {
-    const commandConstraints = new CommandConstraints(command);
-    commandConstraints.checkInputRorQ();
-  }
+	checkCommandInput(command) {
+		const commandConstraints = new CommandConstraints(command);
+		commandConstraints.checkInputRorQ();
+	}
 }
 
 module.exports = {
-  BridgeSizeValidation,
-  MoveInputValidation,
-  CommandInputValidation,
+	BridgeSizeValidation,
+	MoveInputValidation,
+	CommandInputValidation,
 };

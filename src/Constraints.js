@@ -1,70 +1,70 @@
-const { CONSTRAINTS, COMMAND, ERROR } = require("./constant/Constants");
+const { CONSTRAINTS, COMMAND, ERROR } = require('./constant/Constants');
 
 class SizeConstraints {
-  #size;
+	#size;
 
-  constructor(size) {
-    this.#size = size;
-  }
+	constructor(size) {
+		this.#size = size;
+	}
 
-  checkOnlyNumber() {
-    const regex = /^\d+$/;
+	checkOnlyNumber() {
+		const regex = /^\d+$/;
 
-    if (!regex.test(this.#size)) {
-      throw ERROR.ERROR_NOT_ONLY_NUMBER;
-    }
-  }
+		if (!regex.test(this.#size)) {
+			throw ERROR.ERROR_NOT_ONLY_NUMBER;
+		}
+	}
 
-  checkNumberRange() {
-    const numberdSize = Number(this.#size);
+	checkNumberRange() {
+		const numberdSize = Number(this.#size);
 
-    if (
-      numberdSize < CONSTRAINTS.MINIMUM_SIZE_RANGE ||
-      numberdSize > CONSTRAINTS.MAXIMUM_SIZE_RANGE
-    ) {
-      throw ERROR.ERROR_NOT_IN_RANGE;
-    }
-  }
+		if (
+			numberdSize < CONSTRAINTS.MINIMUM_SIZE_RANGE ||
+			numberdSize > CONSTRAINTS.MAXIMUM_SIZE_RANGE
+		) {
+			throw ERROR.ERROR_NOT_IN_RANGE;
+		}
+	}
 
-  checkStartZero() {
-    if (this.#size[0] === CONSTRAINTS.START_STRING_OF_SIZE) {
-      throw ERROR.ERROR_DONT_START_ZERO;
-    }
-  }
+	checkStartZero() {
+		if (this.#size[0] === CONSTRAINTS.START_STRING_OF_SIZE) {
+			throw ERROR.ERROR_DONT_START_ZERO;
+		}
+	}
 }
 
 class MoveConstraints {
-  #moving;
+	#moving;
 
-  constructor(moving) {
-    this.#moving = moving;
-  }
+	constructor(moving) {
+		this.#moving = moving;
+	}
 
-  checkInputUorD() {
-    if (
-      this.#moving !== COMMAND.UPPER_BRIDGE_STRING &&
-      this.#moving !== COMMAND.LOWER_BRIDGE_STRING
-    ) {
-      throw ERROR.ERROR_NOT_ONLY_U_OR_D;
-    }
-  }
+	checkInputUorD() {
+		if (
+			this.#moving !== COMMAND.UPPER_BRIDGE_STRING &&
+			this.#moving !== COMMAND.LOWER_BRIDGE_STRING
+		) {
+			throw ERROR.ERROR_NOT_ONLY_U_OR_D;
+		}
+	}
 }
 
 class CommandConstraints {
-  #command;
+	#command;
 
-  constructor(command) {
-    this.#command = command;
-  }
+	constructor(command) {
+		this.#command = command;
+	}
 
-  checkInputRorQ() {
-    if (
-      this.#command !== COMMAND.RETRY_STRING &&
-      this.#command !== COMMAND.END_GAME_STRING
-    ) {
-      throw ERROR.ERROR_NOT_ONLY_R_OR_Q;
-    }
-  }
+	checkInputRorQ() {
+		if (
+			this.#command !== COMMAND.RETRY_STRING &&
+			this.#command !== COMMAND.END_GAME_STRING
+		) {
+			throw ERROR.ERROR_NOT_ONLY_R_OR_Q;
+		}
+	}
 }
 
 module.exports = { SizeConstraints, MoveConstraints, CommandConstraints };
