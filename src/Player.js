@@ -3,42 +3,27 @@ class Player {
   #out;
 
   constructor() {
-    this.#bridgePath = [];
-    this.#out = "";
+    this.#bridgePath = { upperBridge: [], lowerBridge: [] };
+    this.#out = false;
   }
 
   move(direction) {
-    if (!this.#out) {
-      this.#bridgePath.push(direction);
-    }
+    if (this.#out) return;
+    this.#bridgePath.upperBridge.push(direction === "U" ? "O" : " ");
+    this.#bridgePath.lowerBridge.push(direction === "D" ? "O" : " ");
   }
 
   out(direction) {
-    this.#out = direction;
+    this.#out = true;
+    this.#bridgePath.upperBridge.push(direction === "U" ? "X" : " ");
+    this.#bridgePath.lowerBridge.push(direction === "D" ? "X" : " ");
   }
 
   getCurrentPosition() {
-    return this.#bridgePath.length;
+    return this.#bridgePath.upperBridge.length;
   }
 
-  #getBridgeArray() {
-    const upperBridge = this.#bridgePath.map((direction) => (direction === "U" ? "O" : " "));
-    const lowerBridge = this.#bridgePath.map((direction) => (direction === "D" ? "O" : " "));
-    return [upperBridge, lowerBridge];
-  }
-
-  #addOutMark(upperBridge, lowerBridge) {
-    if (this.#out === "U") {
-      upperBridge.push("X");
-      lowerBridge.push(" ");
-    }
-    if (this.#out === "D") {
-      upperBridge.push(" ");
-      lowerBridge.push("X");
-    }
-  }
-
-  #toString(upperBridge, lowerBridge) {
+  #toString({ upperBridge, lowerBridge }) {
     const upperBridgeString = `[ ${upperBridge.join(" | ")} ]`;
     const lowerBridgeString = `[ ${lowerBridge.join(" | ")} ]`;
 
@@ -46,11 +31,7 @@ class Player {
   }
 
   getMap() {
-    const [upperBridge, lowerBridge] = this.#getBridgeArray();
-    if (this.#out) {
-      this.#addOutMark(upperBridge, lowerBridge);
-    }
-    return this.#toString(upperBridge, lowerBridge);
+    return this.#toString(this.#bridgePath);
   }
 }
 
