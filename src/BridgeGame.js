@@ -22,7 +22,13 @@ class BridgeGame {
     return direction === this.#bridge[this.#player.getCurrentLocation()];
   }
 
-  move() {}
+  move(direction) {
+    const movable = this.isMovable(direction);
+    const mark = movable ? ' O ' : ' X ';
+    this.#player.updatePath(direction, mark);
+
+    return movable;
+  }
 
   retry() {}
 }
