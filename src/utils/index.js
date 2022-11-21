@@ -5,4 +5,8 @@ const readLineAsync = (query) =>
     Console.readLine(query, resolve);
   });
 
-module.exports = { readLineAsync };
+const print = (message) => Console.print(message);
+
+const close = () => Console.close();
+
+module.exports = { readLineAsync, print, close };
