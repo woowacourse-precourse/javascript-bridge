@@ -10,7 +10,7 @@ const Validator = {
    * 다리 길이 입력 유효성을 검사한다.
    * @param {number} number
    */
-  validateBridgeLength(number) {
+  validateBridgeSize(number) {
     Validator.validateNumber(number);
     Validator.validateNumberRange(number);
   },

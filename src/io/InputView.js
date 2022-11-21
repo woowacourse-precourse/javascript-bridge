@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { GAME_MSG, COMMON } = require('../common/Constant');
 const {
-  validateBridgeLength,
+  validateBridgeSize,
   validateMove,
   validateRetry,
 } = require('../utils/Validator');
@@ -17,7 +17,7 @@ const InputView = {
   readBridgeSize(cb) {
     Console.readLine(GAME_MSG.enterLength + COMMON.newLine, (input) => {
       try {
-        validateBridgeLength(input);
+        validateBridgeSize(input);
         cb(input);
       } catch (e) {
         OutputView.printError(e);
