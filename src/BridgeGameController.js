@@ -28,8 +28,8 @@ class BridgeGameController {
     InputView.readGameCommand();
   }
 
-  outputMap(upArray, downArray) {
-    OutputView.printMap(upArray.join(" | "), downArray.join(" | "));
+  outputMap(result) {
+    OutputView.printMap(result);
   }
 
   validateBridgeLength(size) {
