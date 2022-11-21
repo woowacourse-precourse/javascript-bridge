@@ -67,10 +67,36 @@ describe("Validation 클래스 테스트", () => {
     expect(() => Validation.nextStep(input)).toThrow('[ERROR] U 또는 D를 입력해주세요.');
   });
 
-//   test("다리 길이 입력 값이 비었을 경우", () => {
-//     const input = "";
+  test("게임오버시 입력 값이 없을 경우", () => {
+    const input = "";
 
-//     expect(() => Validation.bridgeLength(input)).toThrow('[ERROR] 값을 입력해주세요.');
+    expect(() => Validation.retry(input)).toThrow('[ERROR] 값을 입력해주세요.');
+  });
+
+  test("게임오버시 여러개의 값을 입력했을 경우", () => {
+    const input = "RQ";
+
+    expect(() => Validation.retry(input)).toThrow("[ERROR] 1개의 값을 입력해주세요.");
+  });
+
+  test("게임오버시 여러개의 값을 입력했을 경우", () => {
+    const input = "QR";
+
+    expect(() => Validation.retry(input)).toThrow("[ERROR] 1개의 값을 입력해주세요.");
+  });
+
+//   test("bridge 이동 값이 올바르지 않을 경우", () => {
+//     const input = "d";
+
+//     expect(() => Validation.retry(input)).toThrow('[ERROR] U 또는 D를 입력해주세요.');
 //   });
+
+//   test("bridge 이동 값이 올바르지 않을 경우", () => {
+//     const input = "d";
+
+//     expect(() => Validation.retry(input)).toThrow('[ERROR] U 또는 D를 입력해주세요.');
+//   });
+
+
 
 });
