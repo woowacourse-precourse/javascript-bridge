@@ -18,6 +18,7 @@ const InputView = {
    */
   readMoving() {
     MissionUtils.Console.readline('이동할 칸을 선택해주세요. (위: U, 아래: D)', (space) => {
+      this.exceptionOfReadMoving(space);
     });
   },
 
@@ -32,9 +33,16 @@ const InputView = {
    * 다리길이 입력받기 예외처리 
    */
   exceptionOfReadBridgeSize(){
-    if(size < 3 || size > 20){
+    if(size < 3 || size > 20)
       throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
-    }
+  },
+
+  /**
+   * 이동할 칸 입력받기 예외처리 
+   */
+  exceptionOfReadMoving(){
+    if(space != 'U' || space != 'D')
+      throw new Error('[ERROR] 이동할 칸은 U 또는 D여야 합니다.');
   }
 
 
