@@ -24,7 +24,7 @@ const OutputView = {
     const { successOrNot, totalTryCount, result } = GAME_MSG;
     const { success, fail } = GAME_RESULT;
     Console.print(result);
-    this.printMap(movingState);
+    OutputView.printMap(movingState);
     Console.print(successOrNot + (isSuccess ? success : fail));
     Console.print(totalTryCount + tryCnt);
     Console.close();
