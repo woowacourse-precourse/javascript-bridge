@@ -101,7 +101,7 @@
   - 다음과 같은 관계를 `A->B`로 표현한다.
 
 - 입력을 받는 **`뷰`** 와 출력을 하는 **`뷰`**
-  - 출력을 하는 뷰, 프레젠터에 의존성이 없어야한다.
+  - 본인을 제외한 뷰, 프레젠터에 의존성이 없어야한다.
   - 모델을 의존할 수는 있으나 이 경우는 사용자에 따라 다른 정보를 보여줘야할 경우로 한정한다.
     - 이번 프로그램의 경우 사용자에 따라 같은 정보를 보여주므로 **모델에도 의존성을 두지 않는다.**
     - 입력에 필요한 인자 값은 반드시 프레젠터에서부터 받는다.
@@ -131,10 +131,8 @@
 ### 구조 그려보기
 
 ```mermaid
-  flowchart TD
-    A[OutputView] --> B[BridgeGamePresenter]
-    E[InputValidation] --> B
-    F[InputView] --> B
-    G[BridgeGame] --> B
-    B --> H[App.play]
+  flowchart LR
+    A[BridgeGamePresenter] <--> |사용자 입력으로 UI 갱신|B[OutputView & InputView]
+    A <--> |데이터 변경 및 사용|D[BridgeGame  'Model']
+    A --> |실행|H[App.play]
 ```
