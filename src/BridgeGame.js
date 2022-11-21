@@ -58,6 +58,12 @@ class BridgeGame {
     }
   }
 
+  /**
+   * 사용자가 서있는 다리 위치를 한 칸 앞으로 이동시키는 메서드
+   */
+  cross(){
+    this.#tempPosition += 1;
+  }
 }
 
 
