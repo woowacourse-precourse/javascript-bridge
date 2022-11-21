@@ -1,14 +1,33 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
+const OutputView = require('./OutputView');
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
+  INPUT_ERROR_TEXT: '[ERROR] 입력이 없으면 안됩니다.',
   console: MissionUtils.Console,
+
+  validate(userInput) {
+    if (!userInput) {
+      throw new Error(this.INPUT_ERROR_TEXT);
+    }
+  },
+
+  exceptionHandling(message, userInput, callbackFn) {
+    try {
+      this.validate(userInput);
+      callbackFn(userInput);
+    } catch (error) {
+      OutputView.print(error.message);
+      this.readLine(message, callbackFn);
+    }
+  },
 
   readLine(message, callbackFn) {
     this.console.readLine(message, (userInput) => {
-      callbackFn(userInput);
+      this.exceptionHandling(message, userInput, callbackFn);
     });
   },
 
