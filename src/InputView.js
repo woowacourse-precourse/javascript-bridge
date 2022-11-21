@@ -12,7 +12,10 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine('다리의 길이를 입력해주세요.\n', (length) => {
-      if (Exception.lengthException(length)) new Bridge(length);
+      if (Exception.lengthException(length)) {
+        const bridge = new Bridge(length);
+        bridge.makeBridge();
+      }
       else this.readBridgeSize();
     })
   },
