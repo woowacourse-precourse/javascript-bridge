@@ -102,6 +102,29 @@ class BridgeGame {
 
     return [upBridge, downBridge];
   }
+
+  /**
+   * 최초 생성 이후 게임 진행 시 다리 연장
+   * @param {string} input 사용자가 입력한 "U" 혹은 "D"
+   */
+  extendBridge(input) {
+    this.bridges.saveBridges(this.extendUpDownBridges(input));
+  }
+
+  extendUpDownBridges(input) {
+    let upBridge = this.removeRightBrackets(this.bridges.getUpBridge());
+    let downBridge = this.removeRightBrackets(this.bridges.getDownBridge());
+
+    if (this.isCorrectOrWrong(input)) [upBridge, downBridge] = this.buildCorrectBridge(input, upBridge, downBridge);
+    else [upBridge, downBridge] = this.buildWrongBridge(input, upBridge, downBridge);
+
+    return [upBridge, downBridge];
+  }
+
+  removeRightBrackets(bridge) {
+    let newBridge = bridge.slice(0, -1);
+    return newBridge + Constant.BAR;
+  }
 }
 
 module.exports = BridgeGame;
