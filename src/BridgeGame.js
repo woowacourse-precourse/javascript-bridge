@@ -4,6 +4,7 @@ const BridgeStore = require('./BridgeStore');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
+const INITIAL_GAME_COUNT = 1;
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -11,6 +12,8 @@ class BridgeGame {
   bridgeStore;
 
   moveCount;
+
+  tryCount = 1;
 
   // TODO: 메세지들 많아짐, 정리
   constructor(
@@ -41,7 +44,7 @@ class BridgeGame {
     if (!isMovable) {
       // TODO: 게임 재시작 여부 확인
       this.moveCount = 0;
-      InputView.readGameCommand(this.retryMessage, this.retry);
+      InputView.readGameCommand(this.retryMessage, this.confirmRetry);
       return;
     }
     this.moveCount += 1;
@@ -56,36 +59,36 @@ class BridgeGame {
     InputView.readMoving(this.movingMessage, this.move);
   };
 
+  confirmRetry = (command) => {
+    const run = {
+      R: this.retry,
+      Q: this.end,
+    };
+
+    run[command]();
+  };
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry = (command) => {
-    const run = {
-      R: InputView.readMoving,
-      Q: this.end,
-    };
-
-    const params = {
-      R: [this.movingMessage, this.move],
-      Q: [],
-    };
-
-    run[command](...params[command]);
+  retry = () => {
+    this.bridgeStore.retry();
+    InputView.readMoving(this.movingMessage, this.move);
   };
 
   createBridge(bridgeSize) {
     // TODO: bridge길이 확인
     const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-    this.bridgeStore = new BridgeStore(bridge);
+    this.bridgeStore = new BridgeStore(bridge, INITIAL_GAME_COUNT);
   }
 
-  end() {
+  end = () => {
     // TODO: 게임 결과 출력
-
+    OutputView.printResult(this.bridgeStore.getGameResult());
     InputView.close();
-  }
+  };
 
   runGame = (bridgeSize) => {
     this.createBridge(bridgeSize);

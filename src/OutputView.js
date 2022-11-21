@@ -52,7 +52,16 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult({ isGameClear, tryCount }) {
+    const gameClearMessage = {
+      true: '성공',
+      false: '실패',
+    };
+
+    Console.print(
+      `게임 성공 여부: ${gameClearMessage[isGameClear]}\n총 시도한 횟수: ${tryCount}`,
+    );
+  },
 };
 
 module.exports = OutputView;

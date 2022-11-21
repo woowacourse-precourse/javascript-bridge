@@ -1,11 +1,15 @@
 class BridgeStore {
   #bridge;
 
+  #tryCount;
+
   #userInputResults = [];
 
-  constructor(bridge) {
+  constructor(bridge, tryCount) {
+    // REMOVE: 임시 다리 확인
     console.log(bridge);
     this.#bridge = bridge;
+    this.#tryCount = tryCount;
   }
 
   isSameWithBridgeLength(number) {
@@ -13,6 +17,7 @@ class BridgeStore {
   }
 
   isMovable(count, command) {
+    // TODO: 이미 완료한 경우 추가
     return this.#bridge[count] === command;
   }
 
@@ -20,7 +25,33 @@ class BridgeStore {
     this.#userInputResults = [...this.#userInputResults, result];
   }
 
+  resetUserInputResult() {
+    this.#userInputResults = [];
+  }
+
   getUserInputResult = (idx) => this.#userInputResults[idx];
+
+  isGameClear() {
+    return this.#userInputResults.every((el) => el);
+  }
+
+  updateTryCount() {
+    this.#tryCount += 1;
+  }
+
+  retry() {
+    this.updateTryCount();
+    this.resetUserInputResult();
+  }
+
+  /* 게임 성공 여부: 실패
+   총 시도한 횟수: 1 */
+  getGameResult() {
+    return {
+      isGameClear: this.isGameClear(),
+      tryCount: this.#tryCount,
+    };
+  }
 }
 
 module.exports = BridgeStore;
