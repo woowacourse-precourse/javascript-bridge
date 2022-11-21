@@ -1,10 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = require("../src/InputView");
 const OutputView = require("../src/OutputView");
+const BridgeGame = require("./BridgeGame");
+
 class App {
   play() {
     OutputView.printStart();
     let size = this.makeSize();
+    const bridgeGame = new BridgeGame(size);
+    let moving = this.makeMoving();
 
     MissionUtils.Console.print("pass");
   }

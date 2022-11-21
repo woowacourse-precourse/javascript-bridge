@@ -25,7 +25,7 @@ const InputView = {
         moving = answer;
       }
     );
-    return size;
+    return moving;
   },
 
   /**
