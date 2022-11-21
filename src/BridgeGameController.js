@@ -59,6 +59,14 @@ class BridgeGameController {
       return;
     }
   }
+
+  gameOver() {
+    OutputView.printResult(
+      this.bridgeGame.bridgeMap,
+      this.#bridgeInfo.tryCount,
+      this.bridgeGame.result
+    );
+  }
 }
 
 module.exports = BridgeGameController;
