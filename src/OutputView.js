@@ -12,6 +12,10 @@ const OutputView = {
    printStart() {
     Console.print(Message.INFORMATION.gameStart);
   },
+
+  printError(error) {
+    Console.print(error);
+  },
   
   printMap() {},
 
