@@ -13,8 +13,8 @@ const BridgeMaker = {
     const bridge = [];
     for (let x = 0; x < size; x++) {
       const randomNumbers = generateRandomNumber();
-      if (randomNumbers == '1') bridge.push(UP);
-      if (randomNumbers == '0') bridge.push(DOWN);
+      if (randomNumbers === 1) bridge.push(UP);
+      if (randomNumbers === 0) bridge.push(DOWN);
     }
     return bridge;
   },
