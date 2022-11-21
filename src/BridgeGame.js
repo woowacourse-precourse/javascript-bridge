@@ -9,7 +9,7 @@ class BridgeGame {
   #bridge;
   #currBridge;
   #bridgeSize;
-  #userLog;
+  //#userLog;
   #trial;
   #survived;
 
@@ -19,7 +19,7 @@ class BridgeGame {
     this.#currBridge = [];
     this.#currBridge.push([]);
     this.#currBridge.push([]);
-    this.#userLog = [];
+    //this.#userLog = [];
     this.#trial = 0;
     this.#bridgeSize = 0;
     this.#fail = false;
@@ -45,9 +45,13 @@ class BridgeGame {
     return this.#currBridge;
   }
 
+  getFailFlag() {
+    return this.#fail;
+  }
+
   move(bridgeChoice) {
     //Validate.bridgeChoice(bridgeChoice);
-    this.#userLog.push(bridgeChoice);
+    //this.#userLog.push(bridgeChoice);
     this.#userLocation++;
     if(bridgeChoice === this.#bridge[this.#userLocation]) {
       if(bridgeChoice === "U") {
@@ -81,7 +85,13 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.increaseTrial();
+    this.#userLocation = -1;
+    this.#currBridge = [];
+    this.#currBridge.push([]);
+    this.#currBridge.push([]);
+  }
 }
 
 module.exports = BridgeGame;
