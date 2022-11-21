@@ -23,7 +23,6 @@ class App {
 
   cross(bridge) {
     const bridgeGame = new BridgeGame(bridge);
-    Console.print(bridge); //지워
     this.step(bridgeGame, 0);
   }
 

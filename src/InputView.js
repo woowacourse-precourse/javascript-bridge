@@ -46,6 +46,7 @@ const InputView = {
       const gameCommand = validateGameCommand(inputStr);
       switch (gameCommand) {
         case 'R':
+          bridgeGame.retry(app);
           break;
         case 'Q':
           app.printResult(bridgeGame, step, false);
