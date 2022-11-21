@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { GameConfig } = require('../src/Config');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
 const InputView = require('../src/InputView');
@@ -104,5 +105,49 @@ describe('입력 받아오기 테스트', () => {
   ])('예외 다리 길이 입력: 너무 많이 틀렸을 경우', (inputs, inputFunction) => {
     mockQuestions(inputs);
     expect(() => App.requestUserInput(inputFunction)).toThrow('[ERROR]');
+  });
+});
+
+describe('단판전 진행 테스트', () => {
+  test.each([
+    [
+      ['U', 'D', 'U'],
+      GameConfig.STATUS_SUCCESS,
+      [
+        '[ O ]',
+        '[   ]',
+        '[ O |   ]',
+        '[   | O ]',
+        '[ O |   | O ]',
+        '[   | O |   ]',
+      ],
+    ],
+    [
+      ['U', 'U'],
+      GameConfig.STATUS_FAIL,
+      [
+        '[ O ]',
+        '[   ]',
+        '[ O | X ]',
+        '[   |   ]',
+      ],
+    ]
+  ])('단판전 진행', (directions, solutionStatus, solutionLog) => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions(directions);
+
+    const app = new App();
+    app.startGame(3);
+    const result = app.playSingleGame();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, solutionLog);
+    expectBridgeOrder(
+      log,
+      solutionLog[solutionLog.length - 2],
+      solutionLog[solutionLog.length - 1],
+    );
+    expect(result).toEqual(solutionStatus);
   });
 });
