@@ -39,8 +39,6 @@ const runException = (inputs) => {
 };
 
 const expectLogContains = (received, logs) => {
-  console.log('recieved : ', received);
-  console.log('logs : ', logs);
   logs.forEach((log) => {
     expect(received).toEqual(expect.stringContaining(log));
   });

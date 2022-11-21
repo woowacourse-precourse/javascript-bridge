@@ -15,13 +15,27 @@ const InputView = {
   readBridgeSize() {
     Console.readLine('다리의 길이를 입력해주세요.\n', (bridgeSize) => {
       try {
-        inputErrorCheck.bridgeSize(bridgeSize);
-        bridgeGame.set(bridgeSize);
-      } catch (e) {
-        Console.print(e);
+        this.bridgeSizeSet(bridgeSize);
+      } catch (error) {
+        this.readBridgeSize();
       }
-      this.readMoving();
     });
+  },
+
+  readBridgeProcessor(bridgeSize) {
+    try {
+      inputErrorCheck.bridgeSize(bridgeSize);
+      bridgeGame.set(bridgeSize);
+      this.readMoving();
+    } catch (error) {
+      this.readBridgeSize();
+    }
+  },
+
+  bridgeSizeSet(bridgeSize) {
+    inputErrorCheck.bridgeSize(bridgeSize);
+    bridgeGame.set(bridgeSize);
+    this.readMoving();
   },
 
   /**
@@ -29,11 +43,19 @@ const InputView = {
    */
   readMoving() {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (way) => {
-      inputErrorCheck.way(way);
-      const { nextInput, nextOutput, gameStatus } = bridgeGame.move(way);
-      if (nextOutput) OutputView[nextOutput](gameStatus);
-      if (nextInput) this[nextInput]();
+      try {
+        this.moveSet(way);
+      } catch (error) {
+        this.readMoving();
+      }
     });
+  },
+
+  moveSet(way) {
+    inputErrorCheck.way(way);
+    const { nextInput, nextOutput, gameStatus } = bridgeGame.move(way);
+    if (nextOutput) OutputView[nextOutput](gameStatus);
+    if (nextInput) this[nextInput]();
   },
 
   /**
@@ -42,12 +64,19 @@ const InputView = {
   readGameCommand() {
     Console.readLine(
       '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
-      (doOrDie) => {
-        const { nextInput, nextOutput, gameStatus } = bridgeGame.retry(doOrDie);
-        if (nextInput) this[nextInput]();
-        if (nextOutput) OutputView[nextOutput](gameStatus);
-      },
+      this.readGameProcessor,
     );
+  },
+
+  readGameProcessor(doOrDie) {
+    try {
+      inputErrorCheck.gameCommand(doOrDie);
+      const { nextInput, nextOutput, gameStatus } = bridgeGame.retry(doOrDie);
+      if (nextInput) this[nextInput]();
+      if (nextOutput) OutputView[nextOutput](gameStatus);
+    } catch (error) {
+      this.readGameCommand();
+    }
   },
 };
 
