@@ -1,3 +1,5 @@
+const {mapContent} = require('./StringModule');
+
 class MakeMap {
   firstfloor;
 
@@ -19,25 +21,13 @@ class MakeMap {
   }
 
   createPlayerBridge({ userInput, isMove }) {
-    if (userInput === 'U') {
-      if (isMove) {
-        this.firstfloor.push('O');
-        this.secondfloor.push(' ');
-      }
-      if (!isMove) {
-        this.firstfloor.push('X');
-        this.secondfloor.push(' ');
-      }
+    if(userInput === 'U'){
+      this.firstfloor.push(mapContent[isMove]);
+      this.secondfloor.push(mapContent.NONE);
     }
-    if (userInput === 'D') {
-      if (isMove) {
-        this.firstfloor.push(' ');
-        this.secondfloor.push('O');
-      }
-      if (!isMove) {
-        this.firstfloor.push(' ');
-        this.secondfloor.push('X');
-      }
+    if(userInput === 'D') {
+      this.firstfloor.push(mapContent.NONE);
+      this.secondfloor.push(mapContent[isMove]);
     }
   }
 
@@ -61,5 +51,6 @@ class MakeMap {
       secondfloor: this.secondfloor,
     };
   }
+
 }
 module.exports = MakeMap;
