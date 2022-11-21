@@ -1,3 +1,17 @@
+const INITIAL_COUNT = 0;
+
+const INITIAL_STATE = [];
+
+const DIRECTION = {
+  UP: 'U',
+  DOWN: 'D',
+};
+
+const RESULT = {
+  RIGHT: 'O',
+  WRONG: 'X',
+};
+
 const BRIDGE = {
   INITIAL: '[ ',
   NO_RESULT: '  ',
@@ -5,14 +19,16 @@ const BRIDGE = {
   NOT_END: '| ',
 };
 
-const DIRECTION = {
-  UP: 'U',
-  DOWN: 'D',
-};
-
 const INPUT = {
   RETRY: 'R',
   END: 'Q',
 };
 
-module.exports = { BRIDGE, DIRECTION, INPUT };
+module.exports = {
+  INITIAL_COUNT,
+  INITIAL_STATE,
+  DIRECTION,
+  RESULT,
+  BRIDGE,
+  INPUT,
+};
