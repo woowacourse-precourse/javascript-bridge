@@ -27,7 +27,7 @@ const OutputView = {
       OutputView.printMap(bridgeGame.userBridge);
       OutputView.printMessege(`게임 성공 여부: 성공`);
       OutputView.printMessege(`총 시도한 횟수: ${bridgeGame.retrycount}`);
-      return;
+      Console.close();
     }
   },
 
@@ -42,6 +42,10 @@ const OutputView = {
   printMessege(messege) {
     Console.print(messege);
   },
+
+  Close() {
+    Console.close();
+  }
 };
 
 module.exports = OutputView;
