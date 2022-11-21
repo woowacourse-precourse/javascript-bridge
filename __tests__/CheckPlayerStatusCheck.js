@@ -15,6 +15,7 @@ describe('CheckPlayerStatus 테스트', () => {
   });
 
   test('[isPlayerPassed] : 입력된 move값과 bridge의 값이 일치하지 않으면 false를 반환한다', () => {
+    // 조건
     const testMove = ['U', 'D'];
     const testStage = ['D', 'U'];
 
@@ -43,8 +44,8 @@ describe('CheckPlayerStatus 테스트', () => {
   // 조건
   test('[isPlayerCleared] : 현재 스테이지가 bridge의 size와 같지 않거나 다리 건너기에 성공하지 못했다면 false를 반환한다', () => {
     // 조건
-    const testPlayerStage = 3;
-    const testBridgeSize = 4;
+    const testPlayerStage = [3, 4, 5, 6];
+    const testBridgeSize = [4, 5, 6, 7];
     const testIsPassed = false;
 
     // 실행 및 평가
