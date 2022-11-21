@@ -27,7 +27,7 @@ class BridgeGame {
     let fail = false;
     let success = false;
     this.#downBridgeRecord.push(' ');
-    const moveable = this.#bridge[this.#movingCount] === 1 ? 'O' : 'X';
+    const moveable = this.#bridge[this.#movingCount] === 'U' ? 'O' : 'X';
     if (moveable === 'X') fail = true;
     this.#upBridgeRecord.push(moveable);
     this.#movingCount += 1;
@@ -38,7 +38,7 @@ class BridgeGame {
     let fail = false;
     let success = false;
     this.#upBridgeRecord.push(' ');
-    const moveable = this.#bridge[this.#movingCount] === 0 ? 'O' : 'X';
+    const moveable = this.#bridge[this.#movingCount] === 'D' ? 'O' : 'X';
     if (moveable === 'X') fail = true;
     this.#downBridgeRecord.push(moveable);
     this.#movingCount += 1;
