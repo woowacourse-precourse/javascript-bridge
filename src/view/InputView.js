@@ -45,9 +45,8 @@ const InputView = {
   },
 
   wrongMove(game, input) {
-    Console.print("Wrong");
-    OutputView.printResult();
-    this.readGameCommand();
+    OutputView.printResultFalse(input);
+    this.readGameCommand(game);
   },
 
   /**

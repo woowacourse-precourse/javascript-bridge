@@ -9,6 +9,17 @@ let bridgeStep = function (str) {
     currentBridgeUp.push("   ");
   }
 };
+
+let bridgeStepFalse = function (str) {
+  if (str === "U") {
+    currentBridgeUp.push(" X ");
+    currentBridgeDown.push("   ");
+  } else {
+    currentBridgeDown.push(" X ");
+    currentBridgeUp.push("   ");
+  }
+};
+
 const currentBridgeUp = [];
 const currentBridgeDown = [];
 const START = "[";
@@ -26,6 +37,12 @@ const OutputView = {
    */
   printMap(str) {
     bridgeStep(str);
+    Console.print(START + currentBridgeUp.join(SPLIT) + END);
+    Console.print(START + currentBridgeDown.join(SPLIT) + END);
+  },
+
+  printResultFalse(str) {
+    bridgeStepFalse(str);
     Console.print(START + currentBridgeUp.join(SPLIT) + END);
     Console.print(START + currentBridgeDown.join(SPLIT) + END);
   },
