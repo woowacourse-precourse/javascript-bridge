@@ -1,63 +1,85 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const App = require("../src/Controller/App");
-const BridgeMaker = require("../src/Model/BridgeMaker");
+const Validate = require("../src/Model/Validate");
 const { ERROR_MESSAGE } = require("../src/Utils/Constants");
 
-const mockQuestions = (answers) => {
-  MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((_, callback) => {
-      callback(input);
-    });
-  }, MissionUtils.Console.readLine);
-};
-
 describe("[입력 테스트]", () => {
-  test("다리 길이의 범위를 3 미만으로 입력한 경우 예외가 발생한다.", () => {
-    mockQuestions(["1"]);
-    expect(() => {
-      const app = new App();
-      app.requestBridgeSize();
-    }).toThrow(ERROR_MESSAGE.BRIDGE_SIZE_RANGE);
-  });
+  test.each([["3"], ["10"], ["20"]])(
+    "다리 길이를 3 이상 20 이하의 숫자로 올바른 값을 입력한 경우",
+    (input) => {
+      const validate = new Validate();
+      const [isValid, errorMsg] = validate.checkBridgeSize(input);
 
-  test("다리 길이의 범위를 21 이상으로 입력한 경우 예외가 발생한다.", () => {
-    mockQuestions(["30"]);
-    expect(() => {
-      const app = new App();
-      app.requestBridgeSize();
-    }).toThrow(ERROR_MESSAGE.BRIDGE_SIZE_RANGE);
-  });
+      expect(isValid).toBe(true);
+      expect(errorMsg).toBeNull();
+    }
+  );
 
-  test("다리 길이에 숫자가 아닌 입력이 들어오는 경우 예외가 발생한다.", () => {
-    mockQuestions(["three"]);
-    expect(() => {
-      const app = new App();
-      app.requestBridgeSize();
-    }).toThrow(ERROR_MESSAGE.BRIDGE_SIZE_IS_NAN);
-  });
+  test.each([["1"], ["-100"], ["21"]])(
+    "다리 길이에 3 이상 20 이하의 숫자 범위를 벗어난 입력이 들어오는 경우",
+    (input) => {
+      const validate = new Validate();
+      let [isValid, errorMsg] = validate.checkBridgeSize(input);
 
-  test("다리 길이에 숫자가 아닌 입력이 들어오는 경우 예외가 발생한다.", () => {
-    mockQuestions(["1t40"]);
-    expect(() => {
-      const app = new App();
-      app.requestBridgeSize();
-    }).toThrow(ERROR_MESSAGE.BRIDGE_SIZE_IS_NAN);
-  });
+      expect(isValid).toBe(false);
+      errorMsg = String(errorMsg).replace("Error: ", "");
+      expect(String(errorMsg)).toBe(ERROR_MESSAGE.BRIDGE_SIZE_RANGE);
+    }
+  );
 
-  test("이동하려는 칸에 U(위 칸), D(아래 칸)이 아닌 다른 문자가 입력으로 들어오는 경우 예외가 발생한다.", () => {
-    mockQuestions(["UPPER"]);
-    expect(() => {
-      const app = new App();
-      app.requestMoving();
-    }).toThrow(ERROR_MESSAGE.MOVING_DIRECTION);
-  });
+  test.each([["1t5"], ["two"], ["NaN"]])(
+    "다리 길이에 숫자가 아닌 문자 입력이 들어오는 경우",
+    (input) => {
+      const validate = new Validate();
+      let [isValid, errorMsg] = validate.checkBridgeSize(input);
 
-  test("게임 재시작 여부에 R(재시작), Q(종료)가 아닌 다른 문자가 입력으로 들어오는 경우 예외가 발생한다.", () => {
-    mockQuestions(["S"]);
-    expect(() => {
-      const app = new App();
-      app.requestGameCommand();
-    }).toThrow(ERROR_MESSAGE.GAME_COMMAND);
-  });
+      expect(isValid).toBe(false);
+      errorMsg = String(errorMsg).replace("Error: ", "");
+      expect(String(errorMsg)).toBe(ERROR_MESSAGE.BRIDGE_SIZE_IS_NAN);
+    }
+  );
+
+  test.each([["U"], ["D"]])(
+    "이동하려는 칸을 U(위 칸)와 D(아래 칸) 중 하나의 문자인 올바른 값을 입력한 경우",
+    (input) => {
+      const validate = new Validate();
+      const [isValid, errorMsg] = validate.checkMovingDirection(input);
+
+      expect(isValid).toBe(true);
+      expect(errorMsg).toBeNull();
+    }
+  );
+
+  test.each([["UPPER"], ["111"], ["UP"], ["21"], ["*-+"]])(
+    "이동하려는 칸에 올바른 입력이 들어오지 않는 경우",
+    (input) => {
+      const validate = new Validate();
+      let [isValid, errorMsg] = validate.checkMovingDirection(input);
+
+      expect(isValid).toBe(false);
+      errorMsg = String(errorMsg).replace("Error: ", "");
+      expect(String(errorMsg)).toBe(ERROR_MESSAGE.MOVING_DIRECTION);
+    }
+  );
+
+  test.each([["R"], ["Q"]])(
+    "게임 재시작/종료 여부를 R(재시작)과 Q(종료) 중 하나의 문자인 올바른 값을 입력한 경우",
+    (input) => {
+      const validate = new Validate();
+      const [isValid, errorMsg] = validate.checkGameCommand(input);
+
+      expect(isValid).toBe(true);
+      expect(errorMsg).toBeNull();
+    }
+  );
+
+  test.each([["STOP"], ["N"], ["GO"], ["456"]])(
+    "게임 재시작/종료 여부에 올바른 입력이 들어오지 않는 경우",
+    (input) => {
+      const validate = new Validate();
+      let [isValid, errorMsg] = validate.checkGameCommand(input);
+
+      expect(isValid).toBe(false);
+      errorMsg = String(errorMsg).replace("Error: ", "");
+      expect(String(errorMsg)).toBe(ERROR_MESSAGE.GAME_COMMAND);
+    }
+  );
 });
