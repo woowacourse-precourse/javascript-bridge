@@ -20,10 +20,15 @@ class App {
       try {
         checkValidBridgeLength(parseInt(bridgeLength));
         this.bridge = new BridgeGame(bridgeLength);
+        this.move();
       } catch (err) {
         this.print(err);
       }
     });
+  }
+
+  move() {
+    this.bridge.move();
   }
 }
 
