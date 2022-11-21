@@ -1,9 +1,8 @@
 const BridgeGame = require('./BridgeGame.js');
+const { COMMAND } = require('./constructor.js');
 const InputView = require('./InputView.js');
 const OutputView = require('./OutputView.js');
-const { makeBridge } = require('./BridgeMaker.js');
-const { generate } = require('./BridgeRandomNumberGenerator.js');
-const { COMMAND } = require('./constructor.js');
+
 class App {
   #game
 
@@ -11,45 +10,39 @@ class App {
     this.#game = new BridgeGame();
   }
 
-  async initBridge() {
-    const bridgeSize = await InputView.readBridgeSize();
-    const bridge = makeBridge(bridgeSize, generate);
-    return bridge;
+  initBridge(size) {
+    this.#game.setBridge(size);
+    InputView.readMoving((movement) => this.runGame(movement));
   }
 
-  async checkRetry() {
-    const retryGame = await InputView.readGameCommand();
-    return retryGame === COMMAND.RETRY;
-  }
-
-  async crossingBridge() {
-    const movement = await InputView.readMoving();
+  runGame(movement) {
     const result = this.#game.move(movement);
-    return result;
+    OutputView.printMap(result.map);
+    if (result.isGameEnd) {
+      return OutputView.printResult(result);
+    }
+    if (result.isCorrect) {
+      return InputView.readMoving(movement => this.runGame(movement));
+    }
+    return this.checkRetry(result);
+  }
+
+  checkRetry(result) {
+    InputView.readGameCommand((command) => {
+      if (command === COMMAND.QUIT) {
+        return OutputView.printResult(result)
+      }
+      return this.retryGame();
+    });
   }
 
   retryGame() {
     this.#game.retry();
-    return this.runGame();
-  }
-
-  async runGame() {
-    const { isCorrect, isEnd, count, map } = await this.crossingBridge();
-    await OutputView.printMap(map);
-
-    if (isCorrect) {
-      return isEnd ? OutputView.printResult(map, count, isCorrect) : this.runGame();
-    }
-    const isRetry = await this.checkRetry();
-    return isRetry ? this.retryGame() : OutputView.printResult(map, count, isCorrect);
+    return InputView.readMoving(movement => this.runGame(movement));
   }
 
   play() {
-    (async() => {
-        const bridge = await this.initBridge();
-        this.#game.setBridge(bridge);
-        await this.runGame();
-    })();
+    InputView.readBridgeSize((size) => this.initBridge(size));
   }
 }
 
