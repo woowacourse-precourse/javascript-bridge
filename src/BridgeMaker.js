@@ -12,6 +12,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     Validator.isInteger(size);
+    Validator.isInRange(size, 3, 20);
     const bridge = [];
 
     for (let i = 0; i < size; i++) {

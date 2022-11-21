@@ -22,6 +22,10 @@ class Validator {
       throw new Error(ErrorMessage.NOT_VALID_COMMAND);
     }
   }
+
+  static isInRange(num, min, max) {
+    if (num < min || num > max) throw new Error(ErrorMessage.NOT_IN_RANGE);
+  }
 }
 
 module.exports = Validator;
