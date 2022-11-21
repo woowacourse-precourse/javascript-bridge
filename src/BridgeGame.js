@@ -1,24 +1,15 @@
-const { printResult } = require('./OutputView');
 const { isCurrentLastIndexValueSame } = require('./Validation');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridge;
-  #userMove;
-  #playCount;
-  #isSuccess;
   #model;
   #controller;
 
   constructor(model, controller) {
     this.#model = model;
     this.#controller = controller;
-  }
-
-  initialize() {
-    this.#userMove = [];
   }
 
   // FIXME: change the function
@@ -33,7 +24,7 @@ class BridgeGame {
   }
 
   end() {
-    printResult(this.#isSuccess, this.#playCount);
+    this.#controller.renderResult();
   }
 
   fail() {
@@ -59,8 +50,8 @@ class BridgeGame {
 
   start() {
     console.log(this.#model.getBridge());
-    this.#playCount += 1;
-    this.initialize();
+    this.#model.setPlayCount();
+    this.#model.initialize();
     this.#controller.readUserMoving(() => this.move());
   }
 }

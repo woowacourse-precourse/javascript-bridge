@@ -1,5 +1,5 @@
 const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
-const { printError, printMap } = require('./OutputView');
+const { printError, printMap, printResult } = require('./OutputView');
 const BridgeMap = require('./BridgeMap');
 const {
   checkSizeInRange,
@@ -58,8 +58,6 @@ class BridgeGameController {
         checkUserCommand(command);
         this.#model.setCommand(command);
         resolve();
-        if (command === 'R') return this.retry();
-        return this.end();
       } catch (error) {
         this.controlException(error, this.readUserCommand(resolve));
       }
@@ -79,6 +77,12 @@ class BridgeGameController {
         this.#model.setIsSuccess(true);
       }
     }
+  }
+
+  renderResult() {
+    const isSuccess = this.#model.getIsSuccess();
+    const playCount = this.#model.getPlayCount();
+    printResult(isSuccess, playCount);
   }
 }
 

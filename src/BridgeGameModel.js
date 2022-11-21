@@ -20,6 +20,13 @@ class BridgeGameModel {
     this.command = '';
   }
 
+  initialize() {
+    this.#userMove = [];
+    this.#isSuccess = false;
+    this.#step = '';
+    this.command = '';
+  }
+
   setUserMove(move) {
     this.#userMove.push(move);
   }
@@ -66,6 +73,14 @@ class BridgeGameModel {
 
   getIsSuccess() {
     return this.#isSuccess;
+  }
+
+  setPlayCount() {
+    this.#playCount += 1;
+  }
+
+  getPlayCount() {
+    return this.#playCount;
   }
 }
 
