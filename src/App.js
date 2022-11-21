@@ -124,6 +124,17 @@ class App {
     this.checkIsR(userInput);
     this.checkIsQ(userInput);
   }
+
+  readMoving() {
+    const message = this.#output.message.MOVE;
+    const callbackFn = (userInput) => {
+      this.setGameLog(userInput);
+      this.printMap();
+      this.checkGameOver();
+    };
+
+    this.#input.readMoving(message, callbackFn);
+  }
 }
 
 module.exports = App;
