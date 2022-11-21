@@ -1,7 +1,7 @@
 const InputView = require('../views/InputView');
 
 class Player {
-  move(compareSpace) {
+  static move(compareSpace) {
     InputView.readMoving(compareSpace);
   }
 }
