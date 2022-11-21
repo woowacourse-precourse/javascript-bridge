@@ -13,9 +13,9 @@
 
 사용자가 잘못된 값을 입력한 경우 throw문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
 
-- [x] 다리길이가 3에서 20사이인지 확인한다. - InputView#checkBridgeLength()
-- [x] 이동할 칸 입력이 U 또는 D인지 확인한다. - InputView#checkMoveInput()
-- [x] 개임 재시작 혹은 종료 여부 입력이 R 또는 Q인지 확인한다. - InputView#checkRestartInput()
+- [x] 다리길이가 3에서 20사이인지 확인한다. - Validation#checkBridgeLength()
+- [x] 이동할 칸 입력이 U 또는 D인지 확인한다. - Validation#checkMoveInput()
+- [x] 개임 재시작 혹은 종료 여부 입력이 R 또는 Q인지 확인한다. - Validation#checkRestartInput()
 
 ## UI 로직
 - [x] 게임 시작 문구를 출력한다. - OutputView#printStart()
