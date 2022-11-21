@@ -1,6 +1,6 @@
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker");
-const InputView = require("./InputView");
+const Values = require("./constants/Values.js");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -12,12 +12,13 @@ class BridgeGame {
 
   constructor(length) {
     this.#bridgeArr = makeBridge(length, generate);
-    this.stepArr = [];
+    this.stepObj = { upperPart: [], lowerPart: [] };
   }
 
   move(inputDirection) {
     this.judgeSuccess(this.getNumOfSteps(), inputDirection);
     this.updateProgressOfGame(inputDirection);
+    this.judgeGameCleard();
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
@@ -27,16 +28,35 @@ class BridgeGame {
   retry() {
     // 처음에 만든 정답 다리 리스트, 총 시도 횟수 기억한채로 iii.으로 다시 돌아감
   }
-  updateProgressOfGame(inputDirection) {
-    this.stepArr.push(inputDirection);
-    if (this.stepArr.length === this.#bridgeArr.length) this.isCleared = true;
-  }
-  getNumOfSteps() {
-    return this.stepArr.length;
-  }
-
   judgeSuccess(index, inputDirection) {
     this.isSuccess = this.#bridgeArr[index] === inputDirection;
+  }
+  updateProgressOfGame(inputDirection) {
+    const MARK = this.getCurrentMark();
+    if (inputDirection === Values.UPWARD_MOVEMENT) return this.moveToUpper(MARK);
+    return this.moveToLower(MARK);
+  }
+  moveToUpper(MARK) {
+    this.stepObj.upperPart.push(MARK);
+    this.stepObj.lowerPart.push(Values.BLANK);
+  }
+
+  moveToLower(MARK) {
+    this.stepObj.lowerPart.push(MARK);
+    this.stepObj.upperPart.push(Values.BLANK);
+  }
+
+  getCurrentMark() {
+    if (this.isSuccess) return Values.SUCCESS_MARK;
+    return Values.FAIL_MARK;
+  }
+
+  getNumOfSteps() {
+    return this.stepObj.upperPart.length;
+  }
+
+  judgeGameCleard() {
+    if (this.getNumOfSteps() === this.#bridgeArr.length) this.isCleared = true;
   }
 }
 
