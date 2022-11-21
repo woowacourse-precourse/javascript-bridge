@@ -56,7 +56,8 @@ const OutputView = {
   printResult(message, retry) {
     Console.print("최종 게임 결과");
     Console.print(this.upString);
-    Console.print(this.downString);
+    Console.print(this.downString + "\n");
+
     Console.print("게임 성공 여부: " + message);
     Console.print("총 시도한 횟수: " + retry);
   },
