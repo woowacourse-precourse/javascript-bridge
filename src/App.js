@@ -29,6 +29,7 @@ class App {
     if (!isBridgeValidate) return;
 
     const bridge = this.getBridgeMake(length);
+    console.log(bridge, "BRIDGE!!!");
     this.bridgeGame.setState({ length, bridge });
     InputView.readMoving(this.moveCallback);
   };
