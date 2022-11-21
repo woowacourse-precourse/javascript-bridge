@@ -9,6 +9,7 @@ const BrideGame=require('./BridgeGame')
 const bridegame=new BrideGame()
 
 let count=0
+let originalBridge;
 const InputView = {
   printGameStart(){
     MissionUtils.Console.print('다리 건너기 게임을 시작합니다\n')
@@ -31,6 +32,8 @@ const InputView = {
   randomBridge(bridgeLength) {
     const number=BridgeRandomNumberGenerator.generate
     const bridgeArray=BridgeMaker.makeBridge(bridgeLength,number)
+    originalBridge=JSON.parse(JSON.stringify(bridgeArray))
+    bridegame.saveBridge(originalBridge)
     this.readMoving(bridgeArray)
   },
   /**
@@ -49,7 +52,7 @@ const InputView = {
       bridegame.move(bridgeArray)
       if(bridgeArray.length===0) {
         MissionUtils.Console.print('최종 게임 결과')
-        OutputView.printBridgeResult()
+        // OutputView.printBridgeResult()
         OutputView.printResult(bridgeArray,count)
       }
       if(bridgeArray.length!==0) {
@@ -58,8 +61,8 @@ const InputView = {
       }
     }
     if(correctValue==='X') {
-      OutputView.printBridgeResult()
       this.readGameCommand(bridgeArray)
+      OutputView.printBridgeResult()
     }
   },
   /**
@@ -68,13 +71,13 @@ const InputView = {
   readGameCommand(bridgeArray) {
     MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",(gameInput)=>{
       this.checkReadGameInput(gameInput,bridgeArray)
-      
     })
   },
   checkReadGameInput(gameInput,bridgeArray){
     count++
     if(gameInput!=='R' && gameInput!=='Q') throw "[ERROR] Only R,Q accepted"
     if(gameInput==='R'){
+      bridgeArray=originalBridge
       bridegame.retry(gameInput)
       InputView.readMoving(bridgeArray)
     }
