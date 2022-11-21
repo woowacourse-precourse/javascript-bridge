@@ -5,9 +5,13 @@ const {
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #up;
+
+  #down;
+
   constructor() {
-    this.up = [];
-    this.down = [];
+    this.#up = [];
+    this.#down = [];
   }
 
   /**
@@ -17,13 +21,14 @@ class BridgeGame {
    */
   move(bridge, moving, index) {
     if (moving === STRING_UP) {
-      bridge[index] === STRING_UP ? this.up.push(SUCCESS) : this.up.push(FAIL);
-      this.down.push(BLANK);
+      bridge[index] === STRING_UP ? this.#up.push(SUCCESS) : this.#up.push(FAIL);
+      this.#down.push(BLANK);
       return;
     }
 
-    bridge[index] === STRING_DOWN ? this.down.push(SUCCESS) : this.down.push(FAIL);
-    this.up.push(BLANK);
+    bridge[index] === STRING_DOWN ? this.#down.push(SUCCESS) : this.#down.push(FAIL);
+    this.#up.push(BLANK);
+  }
   }
 
   /**
@@ -34,7 +39,7 @@ class BridgeGame {
   retry() {}
 
   getMoving() {
-    return { up: this.up, down: this.down };
+    return { up: this.#up, down: this.#down };
   }
 }
 
