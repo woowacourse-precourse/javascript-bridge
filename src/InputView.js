@@ -25,7 +25,18 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgegame) {
-    Console.readLine(MESSAGE.ANNOUNCE.INPUT_MOVE, (answer) => {});
+    Console.readLine(MESSAGE.ANNOUNCE.INPUT_MOVE, (answer) => {
+      try {
+        Validate.validateReadMoving(answer);
+        const moveresult = bridgegame.move(answer);
+        OutputView.printMap(bridgegame);
+        if (!moveresult) return this.readGameCommand(bridgegame);
+        if (moveresult == 'END') return OutputView.printResult(bridgegame);
+        return this.readMoving(bridgegame);
+      } catch (error) {
+        OutputView.printError(error, this.readMoving.bind(InputView), bridgegame);
+      }
+    });
   },
 
   /**
