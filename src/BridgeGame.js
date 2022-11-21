@@ -15,7 +15,7 @@ class BridgeGame {
 
   getInput(userInput) {
     console.log(userInput);
-    BridgeMaker.makeBridge(userInput, BridgeRandomNumberGenerator.generate());
+    BridgeMaker.makeBridge(userInput, BridgeRandomNumberGenerator);
   }
 
   /**

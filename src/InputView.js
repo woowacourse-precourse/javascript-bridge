@@ -9,7 +9,6 @@ const InputView = {
    */
   readBridgeSize(message, getInput) {
     Console.readLine(message, (size) => {
-      console.log(size);
       getInput(size);
     });
   },
