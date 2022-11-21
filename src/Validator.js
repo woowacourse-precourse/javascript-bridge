@@ -31,6 +31,4 @@ const Validator = {
 	}
 }
 
-module.exports = {
-	Validator,
-};
+module.exports = Validator;

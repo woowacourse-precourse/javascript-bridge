@@ -4,6 +4,7 @@ const { MESSAGE } = require('./constants');
 const InputView = {
   readBridgeSize(settingBridge) {
     Console.readLine(MESSAGE.INPUT_BRIDGE_SIZE, (size) => {
+      Console.print('');
       try {
         settingBridge(size);
       } catch(e) {
@@ -36,6 +37,4 @@ const InputView = {
   },
 };
 
-module.exports = {
-  InputView,
-};
+module.exports = InputView;

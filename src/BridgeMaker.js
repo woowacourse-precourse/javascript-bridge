@@ -5,8 +5,7 @@ const { STEP } = require('./constants');
  */
 const BridgeMaker = {
   
-  makeOneBlock(generateRandomNumber) {
-    const randomNum = generateRandomNumber();
+  makeOneBlock(randomNum) {
     if (randomNum === 0) {
       return STEP.DOWN;
     }
@@ -23,12 +22,11 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
     for (let i = 0; i < size; i++) {
-      bridge.push(this.makeOneBlock(generateRandomNumber));
+      let randomNum = generateRandomNumber();
+      bridge.push(this.makeOneBlock(randomNum));
     }
     return bridge;
   },
 };
 
-module.exports = {
-  BridgeMaker,
-};
+module.exports = BridgeMaker;
