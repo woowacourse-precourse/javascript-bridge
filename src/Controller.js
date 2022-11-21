@@ -18,11 +18,10 @@ class Controller {
 
   inputBridgeSize() {
     const readBridgeSizeCallback = (input) => {
-      Validator.validateNumber(input);
-      Validator.validateNumberInRange(input);
-      this.model.setBridgeSize(parseInt(input, 10));
-      this.model.setComputerBridgeArr(BridgeMaker.makeBridge(parseInt(input, 10), generate));
-      this.inputMoving();
+      const num = parseInt(input, 10);
+      this.model.setBridgeSize(num);
+      this.model.setComputerBridgeArr(BridgeMaker.makeBridge(num, generate));
+      return this.inputMoving();
     };
     InputView.readBridgeSize(readBridgeSizeCallback);
   }
