@@ -1,4 +1,4 @@
-const { checkBridgeSizeInput } = require("./ErrorCase");
+const { checkBridgeSizeInput, checkMovingInput } = require("./ErrorCase");
 const { BridgeSize } = require("./ErrorHandler");
 
 const InputHandler = {
@@ -6,6 +6,12 @@ const InputHandler = {
     const isError = checkBridgeSizeInput(bridgeSize);
 
     BridgeSize[isError]({ app, bridgeSize, readAgain });
+  },
+
+  handleMovingInput({ app, bridgeGame, direction, readAgain }) {
+    const isError = checkMovingInput(direction);
+
+    Moving[isError]({ app, bridgeGame, direction, readAgain });
   },
 };
 
