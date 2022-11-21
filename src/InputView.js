@@ -4,6 +4,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
+const Player = require("./Player");
 
 const InputView = {
   readBridgeSize() {
@@ -25,6 +26,7 @@ const InputView = {
     Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (move) => {
       new MoveInput(move);
       const correct = new BridgeGame(bridgeShape, move);
+      Player.stateUpdate(move, correct);
 
       OutputView.printMap();
 
