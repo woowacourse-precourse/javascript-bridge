@@ -1,6 +1,6 @@
 const { MODEL_KEY } = require('../../utils/constants');
 
-class UpDownKey {
+class BridgeDirection {
   #input;
 
   #repo;
@@ -14,13 +14,11 @@ class UpDownKey {
     const oldData = this.#repo.read(MODEL_KEY.userBridge) || [];
 
     this.#repo.update(MODEL_KEY.userBridge, [...oldData, this.#input]);
-
-    return this;
   }
 
-  doAction() {
+  store() {
     this.#updateUserBridge();
   }
 }
 
-module.exports = UpDownKey;
+module.exports = BridgeDirection;
