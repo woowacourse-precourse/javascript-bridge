@@ -75,7 +75,7 @@ class GameController {
   runCommand(command) {
     if (command === RESTART_COMMAND) {
       this.bridgeGame.retry();
-      this.requestBridgeSize();
+      this.requestDirection();
       return;
     }
     if (command === QUIT_COMMAND) {
