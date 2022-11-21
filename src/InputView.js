@@ -14,43 +14,40 @@ const InputView = {
    */
   init() {
     Console.print(MSG.startGame);
-    this.readBridgeSize();
+    this.readLine(MSG.inputBridgeSize, this.readBridgeSize.bind(this));
+  },
+
+  readLine(msg, cb) {
+    return Console.readLine(msg, (answer) => {
+      try {
+        cb(answer);
+      } catch (e) {
+        Console.print(e.message);
+        this.readLine(msg, cb);
+      }
+    });
   },
 
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    Console.readLine(MSG.inputBridgeSize, (answer) => {
-      try {
-        const bridgeSize = TypeConverter.toNumber(answer);
-        const bridgeGame = new BridgeGame(bridgeSize);
+  readBridgeSize(answer) {
+    const bridgeSize = TypeConverter.toNumber(answer);
+    const bridgeGame = new BridgeGame(bridgeSize);
 
-        this.readMoving(bridgeGame);
-      } catch (e) {
-        Console.print(e.message);
-        this.readBridgeSize();
-      }
-    });
+    this.readLine(MSG.inputMoveDirection, this.readMoving.bind(this, bridgeGame));
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridgeGame) {
-    Console.readLine(MSG.inputMoveDirection, (answer) => {
-      try {
-        const moveDirection = TypeConverter.toString(answer);
-        bridgeGame.move(moveDirection);
-        OutputView.printMap(bridgeGame.getMovedBridge());
+  readMoving(bridgeGame, answer) {
+    const moveDirection = TypeConverter.toString(answer);
+    bridgeGame.move(moveDirection);
+    OutputView.printMap(bridgeGame.getMovedBridge());
 
-        const nextStep = bridgeGame.nextStep();
-        this.executeNextStep(bridgeGame, nextStep);
-      } catch (e) {
-        Console.print(e.message);
-        this.readMoving(bridgeGame);
-      }
-    });
+    const nextStep = bridgeGame.nextStep();
+    this.executeNextStep(bridgeGame, nextStep);
   },
 
   executeNextStep(bridgeGame, nextStep) {
@@ -58,38 +55,30 @@ const InputView = {
 
     switch (nextStep) {
       case correctMove:
-        return this.readMoving(bridgeGame);
+        return this.readLine(MSG.inputMoveDirection, this.readMoving.bind(this, bridgeGame));
       case wrongMove:
-        return this.readGameCommand(bridgeGame);
+        return this.readLine(MSG.inputRestartOrQuitGame, this.readGameCommand.bind(this, bridgeGame));
       case endGame:
         return OutputView.printResult(bridgeGame);
-      default:
-        return;
     }
+    return;
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridgeGame) {
-    Console.readLine(MSG.inputRestartOrQuitGame, (answer) => {
-      try {
-        const gameCmd = TypeConverter.toString(answer);
-        const isValidCmd = Validator.validGameCommand(gameCmd);
+  readGameCommand(bridgeGame, answer) {
+    const gameCmd = TypeConverter.toString(answer);
+    const isValidCmd = Validator.validGameCommand(gameCmd);
+    const isEndGame = gameCmd === GAME_CMD.quit;
 
-        if (!isValidCmd) {
-          throw new Error(ERROR_MSG.invalidGameCmd);
-        }
+    if (!isValidCmd) {
+      throw new Error(ERROR_MSG.invalidGameCmd);
+    }
+    if (isEndGame) return OutputView.printResult(bridgeGame);
 
-        if (gameCmd === GAME_CMD.quit) return OutputView.printResult(bridgeGame);
-
-        bridgeGame.retry();
-        this.readMoving(bridgeGame);
-      } catch (e) {
-        Console.print(e.message);
-        this.readGameCommand(bridgeGame);
-      }
-    });
+    bridgeGame.retry();
+    this.readLine(MSG.inputMoveDirection, this.readMoving.bind(this, bridgeGame));
   },
 };
 
