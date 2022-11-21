@@ -65,7 +65,7 @@ const InputView = {
   setMovingInfo(inputUOrD, gameRec) {
     gameRec.inputUOrD = inputUOrD;
     const bridgeGame = new BridgeGame();
-    bridgeGame.move(gameRec); // moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD
+    bridgeGame.move(gameRec); // gameRec: moveNum, attemptNum, bridgeAnswer, bridgeOutput, inputUOrD
   },
 
   /**
