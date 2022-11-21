@@ -88,7 +88,7 @@ class BridgeController {
     const { isPassed, isCleared } = this.#Game.getStatus();
     if (isPassed) this.getMove();
     if (!isPassed) this.getCommand();
-    if (isCleared) this.finishControl(false);
+    if (isCleared) this.finishControl();
   };
 
   /**
