@@ -33,7 +33,14 @@ class App {
       BridgeRandomNumberGenerator.generate
     );
     this.#bridgeGame = new BridgeGame(this.#bridge);
+    this.upDown();
   }
-}
+
+  upDown() {
+    this.inputView.readMoving(
+      this.upDownCallback.bind(this),
+      "이동할 칸을 선택해주세요. (위: U, 아래: D) "
+    );
+  }
 
 module.exports = App;
