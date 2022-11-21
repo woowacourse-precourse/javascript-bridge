@@ -15,17 +15,18 @@ const InputView = {
         const SIZE = Number(input);
         const GENERATE_RANDOM_NUMBER = BridgeRandomNumberGenerator.generate;
         const BRIDGE_STATUS = BridgeMaker.makeBridge(SIZE, GENERATE_RANDOM_NUMBER);
-        console.log(BRIDGE_STATUS)
+        this.readMoving(BRIDGE_STATUS);
       });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
+  readMoving(BRIDGE_STATUS) {
+    Io.input('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
       const USER_CHIOCE = input;
       console.log(USER_CHIOCE);
+      console.log(BRIDGE_STATUS);
     });
   },
 
