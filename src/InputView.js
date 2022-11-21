@@ -38,15 +38,18 @@ const InputView = {
 
         const bridgeGame = new BridgeGame();
         const checkContinue = bridgeGame.move(moving, bridge, moveList);
-
-        if (checkContinue[0].includes("X") || checkContinue[1].includes("X"))
-          return this.readGameCommand(bridge, attempt, moveList);
-        if (bridge.length === checkContinue[0].length)
-          return OutputView.printResult("성공", attempt, moveList);
-
-        return this.readMoving(bridge, checkContinue, attempt);
+        this.helpMoving(bridge, attempt, checkContinue);
       }
     );
+  },
+
+  helpMoving(bridge, attempt, checkContinue) {
+    if (checkContinue[0].includes("X") || checkContinue[1].includes("X"))
+      return this.readGameCommand(bridge, attempt, checkContinue);
+    if (bridge.length === checkContinue[0].length)
+      return OutputView.printResult("성공", attempt, checkContinue);
+
+    return this.readMoving(bridge, checkContinue, attempt);
   },
 
   /**
