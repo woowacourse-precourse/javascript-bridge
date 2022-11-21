@@ -1,25 +1,27 @@
-const { makeBridge } = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
 const { readBridgeSize } = require('./InputView');
-const OutputView = require('./OutputView');
+const { printStartGame, printError } = require('./OutputView');
 const { bridgeSizeValidator } = require('./Validator');
+const BridgeGame = require('./BridgeGame');
 
 class BridgeGameHandler {
-  #bridge;
+  #bridgeGame;
 
   startGame() {
-    OutputView.printStartGame();
-    readBridgeSize(() => this.setBridge());
+    printStartGame();
+    this.requestBridgeSize();
   }
 
-  setBridge(size) {
-    try {
-      bridgeSizeValidator.isBridgeSizeValid(size);
-      this.#bridge = makeBridge(size, generate());
-    } catch (errorMessage) {
-      OutputView.printError(errorMessage);
-      readBridgeSize(readBridgeSize(() => this.setBridge));
-    }
+  requestBridgeSize() {
+    readBridgeSize((size) => {
+      try {
+        bridgeSizeValidator.isBridgeSizeValid(size);
+        this.#bridgeGame = new BridgeGame(size);
+        this.requestMoveDirection();
+      } catch (errorMessage) {
+        printError(errorMessage);
+        this.requestBridgeSize();
+      }
+    });
   }
 }
 
