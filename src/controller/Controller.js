@@ -102,8 +102,6 @@ class Controller {
       case BRIDGE.QUIT:
         this.quitGame();
         break;
-      default:
-        break;
     }
     this.#try += 1;
   }
