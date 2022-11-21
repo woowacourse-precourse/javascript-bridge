@@ -26,35 +26,15 @@ class BridgeGame {
     },
   };
 
-  getResultMap() {
-    return this.#resultMap;
-  }
-
-  setResultMap() {
-    const index = this.#moveCount - 1;
-    const result = this.#user[index] === this.#bridge[index] ? 'O' : 'X';
-    this.MAKE_MOVE_MAP[this.#user[index]](result);
-  }
-
-  getTryCount() {
-    return this.#tryCount;
-  }
-  getMoveCount() {
-    return this.#moveCount;
-  }
-
-  getBride() {
-    return this.#bridge;
-  }
-  setBridge(input) {
+  constructor(size) {
     this.#bridge = BridgeMaker.makeBridge(
-      Number(input),
+      Number(size),
       BridgeRandomNumberGenerator.generate,
     );
   }
 
-  getUser() {
-    return this.#user;
+  getTryCount() {
+    return this.#tryCount;
   }
 
   getStatus() {
@@ -73,6 +53,16 @@ class BridgeGame {
       this.#status = 'FAIL';
     }
     return this;
+  }
+
+  getResultMap() {
+    return this.#resultMap;
+  }
+
+  setResultMap() {
+    const index = this.#moveCount - 1;
+    const result = this.#user[index] === this.#bridge[index] ? 'O' : 'X';
+    this.MAKE_MOVE_MAP[this.#user[index]](result);
   }
 
   /**

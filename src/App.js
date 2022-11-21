@@ -30,10 +30,6 @@ class App {
     },
   };
 
-  constructor() {
-    this.bridgeGame = new BridgeGame();
-  }
-
   play() {
     OutputView.printStart();
     this.requestBridgeSize();
@@ -55,7 +51,7 @@ class App {
   makeBridge(response) {
     try {
       this.validateBridgeSize(response);
-      this.bridgeGame.setBridge(response);
+      this.bridgeGame = new BridgeGame(response);
       this.requestDirection();
     } catch (error) {
       OutputView.printError(error);
