@@ -13,7 +13,7 @@ class BridgeGame {
     this.randomBridge;
     this.upperBridge = [];
     this.lowerBridge = [];
-    this.count = 1;
+    this.count = 0;
     this.index = 0;
     this.isSuccess = true;
   }
