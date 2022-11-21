@@ -12,7 +12,6 @@ const InputView = {
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요.\n', (bridgeSize) => {
       if(validateBridgeSize(bridgeSize)) return this.readBridgeSize();
       const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate)
-      console.log(bridge)
       MissionUtils.Console.print('')
       const bridgeGame = new BridgeGame(bridge, BRIDGE_MOVING.list)
       this.readMoving(bridgeGame, bridge)
