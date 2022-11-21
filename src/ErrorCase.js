@@ -1,4 +1,4 @@
-const { U, D } = require("./constants");
+const { U, D, R, Q } = require("./constants");
 
 const ErrorCase = {
   checkBridgeSizeInput(input) {
@@ -15,6 +15,12 @@ const ErrorCase = {
 
   checkMovingInput(input) {
     if (input === U || input === D) return false;
+
+    return true;
+  },
+
+  checkRetrialInput(answer) {
+    if (answer === R || answer === Q) return false;
 
     return true;
   },
