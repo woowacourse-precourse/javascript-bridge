@@ -23,10 +23,7 @@ const ERROR_MESSAGE = Object.freeze({
 const InputView = {
 
   validateSize(size) {
-    const inputSizeArr = Array.from(size).map((i) => Number(i)); //문자열을 Number형 배열로 변환 
-    inputSizeArr.forEach((element)=> {
-      if(isNaN(element)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
-    })
+    if(isNaN(size[0])) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
 
     if(size < BRIDGE_SIZE.START || size > BRIDGE_SIZE.END) throw new Error(ERROR_MESSAGE.RANGE_ERROR);
   },  
