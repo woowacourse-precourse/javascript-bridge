@@ -1,10 +1,9 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeMaker = require("../src/BridgeMaker");
-const InputView = require('../src/InputView');
-const App = require('../src/App');
-const BridgeGame = require("../src/BridgeGame");
+const MissionUtils = require('@woowacourse/mission-utils');
+const BridgeMaker = require('../src/BridgeMaker');
+const BridgeGame = require('../src/BridgeGame');
+const CrossBrigeGame = require('../src/CrossBridgeGame');
 
-const mockQuestions = (answers) => {
+const mockInput = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
     return acc.mockImplementationOnce((_, callback) => {
@@ -13,40 +12,38 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
-describe("다리 건너기 테스트", () => {
-  test("다리 생성 테스트", () => {
-    const randoms = ["1", "1", "0"];
-    const mockGenerator = randoms.reduce(
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
+
+const getOutput = (logSpy) => {
+  return [...logSpy.mock.calls].join("");
+};
+
+describe('다리 건너기 테스트', () => {
+  test.each(['g', 1])('다리 길이에 문자나 범위 외 숫자는 입력할 수 없다', (input) => {
+    mockInput([input]);
+    const logSpy = getLogSpy();
+
+    const crossBrigeGame = new CrossBrigeGame();
+    crossBrigeGame.gameStart();
+    const log = getOutput(logSpy);
+
+    expect(log).toContain("[ERROR]");
+  });
+
+  test('다리 생성 테스트', () => {
+    const randoms = ['1', '0', '0'];
+    MissionUtils.Random.pickNumberInRange = jest.fn();
+    const mockRandom = randoms.reduce(
       (acc, number) => acc.mockReturnValueOnce(number),
-      jest.fn()
+      MissionUtils.Random.pickNumberInRange,
     );
 
-    const bridge = BridgeMaker.makeBridge(3, mockGenerator);
-    expect(bridge).toEqual(["U", "U", "D"]);
-  });
-
-  test.each(["g",2])("다리 길이에 문자나 범위 외 숫자는 입력할 수 없다", (input) => {
-    InputView.readBridgeSize = jest
-      .fn()
-      .mockImplementationOnce((callback) => callback(input));
-
-    const app = new App();
-
-    expect(() => {
-      app.play();
-    }).toThrow("[ERROR]");
-  });
-
-  test.each(["g",2,"u"])("이동할 칸에 'U', 'D'외 무엇도 입력할 수 없다", (input) => {
-    InputView.readMoving = jest
-      .fn()
-      .mockImplementationOnce((callback) => callback(input));
-
-    const app = new App();
-
-    expect(() => {
-      app.setBridge();
-    }).toThrow("[ERROR]");
+    const bridge = BridgeMaker.makeBridge(3, mockRandom);
+    expect(bridge).toEqual(['U', 'D', 'D']);
   });
 
   test("이동 결과를 제대로 출력하는지", () => {
