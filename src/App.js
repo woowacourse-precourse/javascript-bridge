@@ -1,11 +1,15 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-const inputView = require('./view/InputView');
-const Message = require('./constant/PrintConstant');
+const { Console } = require('@woowacourse/mission-utils');
+const Message = require('./constant/PrintMessage');
+const GameControl = require('./controller/GameControl');
 
 class App {
+  constructor() {
+    this.gameController = new GameControl();
+  }
+
   play() {
-    MissionUtils.Console.print(Message.START);
-    inputView.readBridgeSize();
+    Console.print(Message.START);
+    this.gameController.start();
   }
 }
 
