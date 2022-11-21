@@ -1,13 +1,12 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
-const { EITHER, MOVE_RESULT, COMMAND } = require('./constants/bridge');
+const { COMMAND } = require('./constants/bridge');
 
 class App {
   constructor() {
     this.bridgeModel = new BridgeGame();
-    this.upCounter = [];
-    this.downCounter = [];
+    this.bridgeIdx = 0;
   }
 
   play() {
@@ -25,25 +24,13 @@ class App {
   }
 
   setMovingRoutine(input) {
-    const result = this.bridgeModel.move(input);
-    this.setCounter(input, result);
-    OutputView.printMap(this.upCounter, this.downCounter);
+    const result = this.bridgeModel.move(input, this.bridgeIdx);
+    const { moveResult, isSuccess, upDownCounter } = result;
+    this.bridgeIdx += 1;
 
-    if (result === MOVE_RESULT.INCORRECT) InputView.readGameCommand(this.failRoutine.bind(this));
+    OutputView.printMap(upDownCounter[0], upDownCounter[1]);
+    if (!moveResult) return InputView.readGameCommand(this.failRoutine.bind(this));
     this.attemptRoutine();
-  }
-
-  setCounter(userInput, result) {
-    if (userInput === EITHER.UP) {
-      if (result === MOVE_RESULT.CORRECT) this.upCounter.push(MOVE_RESULT.CORRECT);
-      if (result === MOVE_RESULT.INCORRECT) this.upCounter.push(MOVE_RESULT.INCORRECT);
-      this.downCounter.push(MOVE_RESULT.BLACK);
-    }
-    if (userInput === EITHER.DOWN) {
-      if (result === MOVE_RESULT.CORRECT) this.downCounter.push(MOVE_RESULT.CORRECT);
-      if (result === MOVE_RESULT.INCORRECT) this.downCounter.push(MOVE_RESULT.INCORRECT);
-      this.upCounter.push(MOVE_RESULT.BLACK);
-    }
   }
 
   failRoutine(command) {
@@ -56,8 +43,7 @@ class App {
   }
 
   reset() {
-    this.upCounter = [];
-    this.downCounter = [];
+    this.bridgeIdx = 0;
     this.bridgeModel.retry();
   }
 }

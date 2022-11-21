@@ -1,6 +1,6 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { MOVE_RESULT } = require('./constants/bridge');
+const { EITHER, MOVE_RESULT } = require('./constants/bridge');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -10,9 +10,10 @@ class BridgeGame {
 
   constructor() {
     this.#bridge;
-    this.pointer = -1;
     this.trial = 1;
-    this.success = false;
+    this.isSuccess = false;
+    this.upCounter = [];
+    this.downCounter = [];
   }
 
   /**
@@ -20,11 +21,43 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(char) {
-    this.pointer += 1;
+  move(input, pointer) {
+    const moveResult = this.isCorrectMove(input, pointer);
 
-    if (char === this.#bridge[this.pointer]) return MOVE_RESULT.CORRECT;
-    return MOVE_RESULT.INCORRECT;
+    moveResult ? this.setCorrectCounter(input) : this.setInCorrectCounter(input);
+    if (moveResult && this.isFinalMove(pointer)) this.setSuccess();
+
+    return { moveResult, isSuccess: this.isSuccess, upDownCounter: this.getUpDownCounter() };
+  }
+
+  isCorrectMove(input, pointer) {
+    return input === this.#bridge[pointer];
+  }
+
+  isFinalMove(pointer) {
+    return pointer === this.#bridge.length - 1;
+  }
+
+  setCorrectCounter(input) {
+    if (input === EITHER.UP) {
+      this.upCounter.push(MOVE_RESULT.CORRECT);
+      this.downCounter.push(MOVE_RESULT.BLACK);
+    }
+    if (input === EITHER.DOWN) {
+      this.upCounter.push(MOVE_RESULT.BLACK);
+      this.downCounter.push(MOVE_RESULT.CORRECT);
+    }
+  }
+
+  setInCorrectCounter(input) {
+    if (input === EITHER.UP) {
+      this.upCounter.push(MOVE_RESULT.INCORRECT);
+      this.downCounter.push(MOVE_RESULT.BLACK);
+    }
+    if (input === EITHER.DOWN) {
+      this.upCounter.push(MOVE_RESULT.BLACK);
+      this.downCounter.push(MOVE_RESULT.INCORRECT);
+    }
   }
 
   /**
@@ -33,17 +66,21 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.pointer = -1;
     this.trial += 1;
+    this.upCounter = [];
+    this.downCounter = [];
   }
 
-  success() {
-    this.success = true;
+  getUpDownCounter() {
+    return [this.upCounter, this.downCounter];
+  }
+
+  setSuccess() {
+    this.isSuccess = true;
   }
 
   setBridge(bridgeSize) {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
   }
 }
-
 module.exports = BridgeGame;
