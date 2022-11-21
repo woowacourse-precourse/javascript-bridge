@@ -10,9 +10,9 @@ const INFO_MESSAGES = Object.freeze({
 const ERROR_MESSAGES = Object.freeze({
   WRONG_BRIDGE_SIZE:
     '[ERROR] 다리 길이는 3 ~ 20 사이의 숫자로 입력해야 합니다.\n',
-  WRONG_MOVEMENT: '[ERROR] 이동할 칸은 "U" 또는 "D"로 입력해야 합니다.\n',
+  WRONG_MOVEMENT: '[ERROR] 이동할 칸은 "U" 또는 "D"로 입력해야 합니다.',
   WRONG_WHETHER_TO_RETRY:
-    '[ERROR] 재시도 여부는 "R" 또는 "Q"로 입력해야 합니다.\n',
+    '[ERROR] 재시도 여부는 "R" 또는 "Q"로 입력해야 합니다.',
 });
 
 module.exports = { INFO_MESSAGES, ERROR_MESSAGES };
