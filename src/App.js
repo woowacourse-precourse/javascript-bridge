@@ -3,6 +3,7 @@ const Validation = require('./Validation');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const GameMessage = require('./constants/GameMessage');
+const BridgeGameError = require('./BridgeGameError');
 
 class App {
   /** @type {BridgeGame} */
@@ -14,7 +15,22 @@ class App {
   #getMoveDirection(input) {
     Validation.Game(input, 'DIRECTION');
 
-    this.#BridgeGame.move(input);
+    const moveResult = this.#BridgeGame.move(input);
+    OutputView.printMap(moveResult);
+
+    switch (moveResult.flag) {
+      case 'GAME_OVER':
+        // TODO: 오답 입력으로 재시작, 종료를 물어보는 경우
+        break;
+      case 'GAME_END':
+        // TODO: 게임이 완전히 종료된 경우
+        break;
+      case 'CONTINUE':
+        InputView.readMoving(this.#getMoveDirection.bind(this));
+        break;
+      default:
+        throw new BridgeGameError('게임 진행에 오류가 발생했습니다.');
+    }
   }
 
   /**
