@@ -1,9 +1,9 @@
 const InputView = require("../Bridge.Input/InputView");
+const OutputView = require("../Bridge.UI/OutputView");
 const BridgeGame = require("./BridgeGame");
 const BridgeGameShape = require("./BridgeGameShape");
 const Player = require("./Player");
 const { BRIDGE, GAME } = require("../lib/Const");
-const OutputView = require("../Bridge.UI/OutputView");
 
 class BridgeInteractPlayer {
   #player;
@@ -17,7 +17,7 @@ class BridgeInteractPlayer {
 
   playerInputBridgeSize(size) {
     this.#bridgeGame = new BridgeGame(size);
-    this.#bridgeGame.start();
+    OutputView.printGameStart();
     InputView.readMoving(this.playerInputBridgeDirection.bind(this));
   }
 
@@ -37,30 +37,36 @@ class BridgeInteractPlayer {
 
   playerGoBridgeNext(result, status) {
     if (status === GAME.STATUS.END) {
-      //todo: true 고치기
       this.playerEndThisGame(
         this.#bridgeGameShape.getCurrentShape(),
         GAME.RESULT.WIN
       );
       return;
     }
-    if (result)
+    if (result) {
       InputView.readMoving(this.playerInputBridgeDirection.bind(this));
-    if (!result)
+      return;
+    }
+
+    if (!result) {
       InputView.readGameCommand(this.playerInputCommandBridgeRetry.bind(this));
-    return;
+      return;
+    }
   }
 
+  //BridgeGame 에 분리
   playerInputCommandBridgeRetry(command) {
-    switch (command) {
-      case BRIDGE.GAME.RETRY:
-        this.#player.bridgeGameRetry();
-        InputView.readMoving(this.playerInputBridgeDirection.bind(this));
-      case BRIDGE.GAME.END:
-        this.playerEndThisGame(
-          this.#bridgeGameShape.getCurrentShape(),
-          GAME.RESULT.FAIL
-        );
+    if (command === BRIDGE.GAME.RETRY) {
+      this.#player.bridgeGameRetry();
+      InputView.readMoving(this.playerInputBridgeDirection.bind(this));
+      return;
+    }
+    if (command === BRIDGE.GAME.END) {
+      this.playerEndThisGame(
+        this.#bridgeGameShape.getCurrentShape(),
+        GAME.RESULT.FAIL
+      );
+      return;
     }
   }
 
@@ -73,9 +79,5 @@ class BridgeInteractPlayer {
     return;
   }
 }
-
-const bi = new BridgeInteractPlayer();
-
-InputView.readBridgeSize(bi.playerInputBridgeSize.bind(bi));
 
 module.exports = BridgeInteractPlayer;

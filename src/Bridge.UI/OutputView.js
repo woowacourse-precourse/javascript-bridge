@@ -35,6 +35,7 @@ const OutputView = {
     if (isGameWin) Console.print(GAME.SUCCESS_END);
     if (!isGameWin) Console.print(GAME.FAILURE_END);
     Console.print(GAME.ALL_RETRY_COUNT(reTryCount));
+    Console.close();
     return;
   },
 };
