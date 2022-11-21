@@ -69,29 +69,21 @@ class BridgeGamePlay {
     return true;
   }
 
-  winGame() {
-    const map = OutputView.getMap(this.myMoves, this.bridge);
-    OutputView.printResult(map, RESULT.WIN, this.tryCount);
-  }
-
-  loseGame() {
-    const map = OutputView.getMap(this.myMoves, this.bridge);
-    OutputView.printResult(map, RESULT.FAIL, this.tryCount);
-  }
-
   move() {
     const currentMove = InputView.getMoving();
-    // const currentMove = this.bridgeGame.move();
     this.myMoves.push(currentMove);
-    OutputView.printMap(this.myMoves, this.bridge);
+    const currentBridge = this.bridgeGame.move(this.myMoves, this.bridge);
+    const currentMyMoves = this.bridgeGame.move(this.myMoves, this.myMoves);
+    let result = this.bridgeGame.compareBridge(currentMyMoves, currentBridge);
+    OutputView.printMap(result);
     if (this.validateWin()) {
-      this.winGame();
+      OutputView.printResult(result, RESULT.WIN, this.tryCount);
       return;
     }
     if (!this.validateMove()) {
       const gameCommand = InputView.getGameCommand();
       if (gameCommand === PLAY.QUIT) {
-        this.loseGame();
+        OutputView.printResult(result, RESULT.FAIL, this.tryCount);
       }
       if (gameCommand === PLAY.RESTART) {
         this.playGame();
