@@ -32,7 +32,7 @@ class App {
   }
 
   printResult(bridgeGame, step, moving) {
-    Console.print(`${MESSAGE.RESULT.FINAL_GAME_RESULT}`);
+    Console.print(`\n${MESSAGE.RESULT.FINAL_GAME_RESULT}`);
     printMap(bridgeGame, step, moving);
     const isSuccess = bridgeGame.move(step, moving);
     printResult(bridgeGame, isSuccess);

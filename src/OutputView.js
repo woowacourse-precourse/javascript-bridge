@@ -59,8 +59,9 @@ const OutputView = {
    */
   printResult(bridgeGame, isSuccess) {
     const result = isSuccess ? '성공' : '실패';
-    Console.print(`${MESSAGE.RESULT.GAME_SUCCESS_OR_FAILURE}${result}`);
-    Console.print(`${MESSAGE.RESULT.TOTAL_ATTEMPTS}`);
+    const totalAttempts = bridgeGame.getTotalAttempts();
+    Console.print(`\n${MESSAGE.RESULT.GAME_SUCCESS_OR_FAILURE}${result}`);
+    Console.print(`${MESSAGE.RESULT.TOTAL_ATTEMPTS}${totalAttempts}`);
   },
 };
 

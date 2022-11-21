@@ -4,6 +4,7 @@ const { Console } = require('@woowacourse/mission-utils');
  */
 class BridgeGame {
   #bridge;
+  #totalAttempts = 1;
 
   constructor(bridge) {
     this.#bridge = bridge;
@@ -28,6 +29,10 @@ class BridgeGame {
 
   getBridgeSize() {
     return this.#bridge.length;
+  }
+
+  getTotalAttempts() {
+    return this.#totalAttempts;
   }
 
   /**

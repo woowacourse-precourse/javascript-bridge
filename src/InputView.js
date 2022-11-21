@@ -11,7 +11,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(app) {
-    Console.readLine(`${MESSAGE.ENTER_BRIDGE_SIZE}`, (inputStr) => {
+    Console.readLine(`\n${MESSAGE.ENTER_BRIDGE_SIZE}\n`, (inputStr) => {
       const bridgeSize = validateBridgeSize(inputStr);
       app.makeBridge(bridgeSize);
     });
@@ -21,7 +21,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgeGame, step, app) {
-    Console.readLine(`${MESSAGE.SELECT_MOVING}`, (inputStr) => {
+    Console.readLine(`\n${MESSAGE.SELECT_MOVING}\n`, (inputStr) => {
       const moving = validateMoving(inputStr);
       printMap(bridgeGame, step, moving);
       const isMovable = bridgeGame.move(step, moving);
