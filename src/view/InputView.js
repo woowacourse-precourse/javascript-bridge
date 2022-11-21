@@ -2,6 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const {
   BRIDGE_INPUT_MESSAGES,
   USER_MOVE_MESSAGES,
+  USER_RESTART_MESSAGES,
 } = require("../constants/Messages");
 
 const InputView = {
@@ -29,8 +30,14 @@ const InputView = {
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   * @param callbackFunction {callbackFunction} [실행될 콜백 함수]
+   * @param controller [컨트롤러]
    */
-  readGameCommand() {},
+  readGameCommand(callbackFunction, controller) {
+    Console.readLine(USER_RESTART_MESSAGES.INPUT, (restartInput) =>
+      callbackFunction(restartInput, controller)
+    );
+  },
 };
 
 module.exports = InputView;
