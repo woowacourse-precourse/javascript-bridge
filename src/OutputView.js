@@ -42,6 +42,19 @@ const OutputView = {
 
     Console.print('최종 게임 결과');
     this.printMap(movingState);
+
+    this.printSuccess(success);
+    this.printAttempts(movingState.attempts);
+  },
+
+  printSuccess(success) {
+    const successResult = success ? `성공` : '실패';
+    Console.print(`\n게임 성공 여부: ${successResult}`);
+  },
+
+  printAttempts(attempts) {
+    Console.print(`총 시도한 횟수: ${attempts}`);
+    Console.close();
   },
 
   printError(e) {
