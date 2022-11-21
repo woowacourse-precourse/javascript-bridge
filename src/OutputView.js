@@ -1,3 +1,5 @@
+const {BRIDGE} = require('./const');
+const {Console} = require("@woowacourse/mission-utils");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  * 파일 경로 변경 가능
@@ -11,7 +13,50 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(bridge, location, isSuccess) {
+    this.printBridgeUpper(bridge, location, isSuccess);
+    this.printBridgeLowwer(bridge, location, isSuccess);
+  },
+
+  printBridgeUpper(bridge, location, isSuccess) {
+    let upperMap = BRIDGE.LEFT_SIDE;
+    upperMap += this.getBridgeUpperBody(bridge, location, isSuccess);
+    upperMap += BRIDGE.RIGHT_SIDE;
+    Console.print(upperMap);
+  },
+
+  getBridgeUpperBody(bridge, location, isSuccess) {
+    let upperBody = "";
+    for (let index = 0; index < location-1; index++) {
+      if(bridge[index] == BRIDGE.INPUT_RANGE[0]) upperBody += BRIDGE.MOVE_SUCCESS;
+      if(bridge[index] == BRIDGE.INPUT_RANGE[1]) upperBody += BRIDGE.EMPTY;
+      upperBody += BRIDGE.DELIMITER;
+    }
+    if( isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[0]) upperBody += BRIDGE.MOVE_SUCCESS;
+    if(!isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[0]) upperBody += BRIDGE.MOVE_FAIL;
+    if(bridge[location-1] == BRIDGE.INPUT_RANGE[1]) upperBody += BRIDGE.EMPTY;
+    return upperBody;
+  },
+
+  printBridgeLowwer(bridge, location, isSuccess) {
+    let lowwerMap = BRIDGE.LEFT_SIDE;
+    lowwerMap += this.getBridgeLowwerBody(bridge, location, isSuccess);
+    lowwerMap += BRIDGE.RIGHT_SIDE;
+    Console.print(lowwerMap);
+  },
+
+  getBridgeLowwerBody(bridge, location, isSuccess) {
+    let lowwerBody = "";
+    for (let index = 0; index < location-1; index++) {
+      if(bridge[index] == BRIDGE.INPUT_RANGE[1]) lowwerBody += BRIDGE.MOVE_SUCCESS;
+      if(bridge[index] == BRIDGE.INPUT_RANGE[0]) lowwerBody += BRIDGE.EMPTY;
+      lowwerBody += BRIDGE.DELIMITER;
+    }
+    if( isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[1]) lowwerBody += BRIDGE.MOVE_SUCCESS;
+    if(!isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[1]) lowwerBody += BRIDGE.MOVE_FAIL;
+    if(bridge[location-1] == BRIDGE.INPUT_RANGE[0]) lowwerBody += BRIDGE.EMPTY;
+    return lowwerBody;
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.

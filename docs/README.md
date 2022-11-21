@@ -26,7 +26,7 @@
 
 - [ ] 출력
     - [ ] 게임 시작 메시지
-    - [ ] 이동 결과
+    - [x] 이동 결과
         - OutputView.printMap()
     - [ ] 최종 게임 결과
         - OutputView.printResult()
