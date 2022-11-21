@@ -9,6 +9,10 @@ const OutputView = {
     MissionUtils.Console.print('다리 건너기 게임을 시작합니다.');
   },
 
+  cmpUD(input, ans){
+    return input == ans ? 'O':'X';
+  },
+
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -24,17 +28,11 @@ const OutputView = {
         lowerBridge += '| ';
       }
       if(userInput[i] == 'U'){
-        if(userInput[i] == answer[i])
-          upperBridge += 'O ';
-        else
-          upperBridge += 'X ';
+        upperBridge += this.cmpUD(userInput[i], answer[i]) + ' ';
         lowerBridge += '  ';
       }
       if(userInput[i] == 'D'){
-        if(userInput[i] == answer[i])
-          lowerBridge += 'O ';
-        else
-          lowerBridge += 'X ';
+        lowerBridge += this.cmpUD(userInput[i], answer[i]) + ' ';
         upperBridge += '  ';
       }
     }
@@ -50,7 +48,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(userInput, ans) {
+    MissionUtils.Console.print('최종 게임 결과');
+    printMap(userInput, ans);
+  },
+
 };
 
 module.exports = OutputView;
