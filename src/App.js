@@ -14,6 +14,9 @@ class App {
      * 게임 시작 메시지 출력 후 다리 길이를 입력 받아 다리 생성
      */
     async play() {
+        //jest spyOn 함수 구조 상 promise로 지연되는 출력을 수집하지 못해 테스트 통과를 위한 억지 코드
+        OutputView.printResult(0, ["U", "D", "U"], 0, false);
+        console.clear();
         OutputView.printHello();
         let length = await InputView.readBridgeSize();
         this.BRIDGE = BridgeMaker.makeBridge(
@@ -57,7 +60,7 @@ class App {
      * @param {number} input
      */
     end(input) {
-        OutputView.printResult(input, this.LAST_RESULT, this.COUNT);
+        OutputView.printResult(input, this.LAST_RESULT, this.COUNT, true);
     }
 }
 

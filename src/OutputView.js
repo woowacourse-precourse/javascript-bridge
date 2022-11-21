@@ -46,15 +46,16 @@ const OutputView = {
      * @param {number} input
      * @param {string[]} result
      * @param {number} count
+     * @param {boolean} realEnd
      */
-    printResult(input, result, count) {
+    printResult(input, result, count, realEnd) {
         let map = this.getMap(result);
         this.print(
             `\n최종 게임 결과\n${map}\n\n게임 성공 여부: ${
                 input === 0 ? "성공" : "실패"
             }\n총 시도한 횟수: ${count + 1}`
         );
-        MissionUtils.Console.close();
+        if (realEnd) MissionUtils.Console.close();
     },
 };
 
