@@ -22,7 +22,8 @@ class BridgeGame {
 
   enterBridgeLength() {
     const bridgeLength = (input) => {
-      this.#bridge = BridgeMaker.makeBridge(input, BridgeNumber);
+      OutputView.enter();
+      this.#bridge = BridgeMaker.makeBridge(input, BridgeNumber.generate);
       this.enterMoving();
     };
     InputView.readBridgeSize('다리의 길이를 입력해주세요.\n', bridgeLength);
