@@ -22,4 +22,22 @@ describe("BridgeGame 클래스 테스트", () => {
 
     expect(bridgeGame.attempsCount).toEqual(2);
   });
+
+  test("사용자의 위치가 다리의 마지막 위치인 경우", () => {
+    const bridgeGame = new BridgeGame(["U", "U", "D", "D"]);
+    const playerBridgeLength = 4;
+
+    const isLast = bridgeGame.isLastPosition(playerBridgeLength);
+
+    expect(isLast).toBe(true);
+  });
+
+  test("사용자의 위치가 다리의 마지막 위치가 아닌 경우", () => {
+    const bridgeGame = new BridgeGame(["U", "U", "D", "D"]);
+    const playerBridgeLength = 2;
+
+    const isLast = bridgeGame.isLastPosition(playerBridgeLength);
+
+    expect(isLast).toBe(false);
+  });
 });
