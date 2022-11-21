@@ -1,11 +1,11 @@
 const BridgeMaker = require("../src/BridgeMaker");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
-const GameController = require("../src/Controller/GameController");
 const BridgeGame = require("../src/Model/BridgeGame");
-
 const ExceptionHandler = require("../src/utils/ExceptionHandler");
 
-const gameController = new GameController();
+const validateTest = (input, callback) => {
+  callback(input);
+};
 
 describe("다리 건너기 테스트", () => {
   test("다리 생성 길이 테스트", () => {
@@ -24,11 +24,25 @@ describe("다리 건너기 테스트", () => {
 
   test.each([["2"], ["21"]])("다리 길이 입력 범위에 대한 예외 처리", (input) => {
     const size = input;
-    const validateTest = (size) => {
-      ExceptionHandler.validateSizeInput(size);
-    };
+
     expect(() => {
-      validateTest(size);
+      validateTest(size, ExceptionHandler.validateSizeInput);
+    }).toThrow("[ERROR]");
+  });
+
+  test.each([["u"], ["d"]])("게임 진행(move)에 필요한 입력에 대한 예외 처리", (input) => {
+    const char = input;
+
+    expect(() => {
+      validateTest(char, ExceptionHandler.validateGameInput);
+    }).toThrow("[ERROR]");
+  });
+
+  test.each([["r"], ["q"]])("재시작/종료를 물을 때 필요한 입력에 대한 예외 처리", (input) => {
+    const char = input;
+
+    expect(() => {
+      validateTest(char, ExceptionHandler.validateRetryInput);
     }).toThrow("[ERROR]");
   });
 
@@ -44,6 +58,9 @@ describe("다리 건너기 테스트", () => {
     bridgeGame.answerBridge = ["U", "U"];
 
     bridgeGame.createBridges("U");
+
+    // 마지막 괄호 삭제 후 바 추가 테스트
+    expect(bridgeGame.removeRightBrackets(bridgeGame.bridges.getUpBridge())).toEqual("[ O |");
 
     expect(bridgeGame.extendUpDownBridges("U")).toEqual(["[ O | O ]", "[   |   ]"]);
   });
