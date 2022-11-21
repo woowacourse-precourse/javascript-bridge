@@ -42,7 +42,7 @@ class MainController {
     const isSuccess = this.bridgeController.getIsSuccessMoving(userMoving);
     const isFinished = this.bridgeController.getIsFinished(userMoving);
 
-    this.bridgeGame.move(isSuccess, isFinished);
+    this.bridgeGame.move(isSuccess, isFinished, userMoving);
   }
 
   // 게임 초기 실행 메서드
