@@ -1,17 +1,17 @@
-const {DIRECTION,BRIDGE,JOINER} = require("../util/Constant");
-
+const { DIRECTION, BRIDGE, JOINER } = require("../util/Constant");
 
 class BridgeResult {
     #upperResult;
     #downerResult;
 
     constructor() {
-        this.initResult();
-    }
-
-    initResult(){
         this.#upperResult = [];
         this.#downerResult = [];
+    }
+
+    initResult() {
+        this.#upperResult.length = 0;
+        this.#downerResult.length = 0;
     }
 
     addValue(upperValue, downerValue) {
@@ -30,15 +30,15 @@ class BridgeResult {
         }
     }
 
-    resultToString(array){
+    resultToString(array) {
         return JOINER.START + array.join(JOINER.SEPARATOR) + JOINER.END;
     }
 
-    getResult(){
+    getResult() {
         const upperString = this.resultToString(this.#upperResult);
         const downerString = this.resultToString(this.#downerResult);
 
-        return {upperString, downerString};
+        return { upperString, downerString };
     }
 
 }

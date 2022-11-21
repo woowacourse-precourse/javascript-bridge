@@ -41,7 +41,7 @@ const InputView = {
       if (validateCommand(command)) return this.readGameCommand(bridgeGame);
       if (command === COMMAND.QUIT) OutputView.printResult(bridgeGame.getCount(), bridgeGame.getSuccess(),bridgeGame);
       if (command === COMMAND.RESTART) {
-        bridgeGame.initGame();
+        bridgeGame.retry();
         this.readMoving(bridgeGame);
       }
     });
