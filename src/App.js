@@ -11,60 +11,60 @@ class App {
 
   play() {
     OutputView.printOpening();
-    this.constructBridgeInput();
+    this.requestBridgeSize();
   }
 
-  constructBridgeInput() {
+  requestBridgeSize() {
     InputView.readBridgeSize((size) => {
       if (!this.#tryValidate(InputValidate.checkBridgeSize, size)) {
-        this.constructBridgeInput();
+        this.requestBridgeSize();
         return;
       }
-      this.constructBridge(size);
+      this.setBridgeGame(size);
     });
   }
 
-  constructBridge(size) {
+  setBridgeGame(size) {
     const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
     this.#bridgeGame = new BridgeGame(bridge);
 
-    this.crossBridgeInput();
+    this.requestMovingDirection();
   }
 
-  crossBridgeInput() {
+  requestMovingDirection() {
     InputView.readMoving((direction) => {
       if (!this.#tryValidate(InputValidate.checkMovingDirection, direction)) {
-        this.crossBridgeInput();
+        this.requestMovingDirection();
         return;
       }
-      this.crossBridge(direction);
+      this.moveToDirection(direction);
     });
   }
 
-  crossBridge(direction) {
-    const moveResult = this.#bridgeGame.move(direction);
+  moveToDirection(direction) {
+    this.#bridgeGame.move(direction);
     OutputView.printMap(this.#bridgeGame.getMap());
     if (this.#bridgeGame.isClear()) {
       this.showResult();
       return;
     }
-    moveResult ? this.crossBridgeInput() : this.retryOrNotInput();
+    this.#bridgeGame.isFailure() ? this.requsetRetryCommand() : this.requestMovingDirection();
   }
 
-  retryOrNotInput() {
+  requsetRetryCommand() {
     InputView.readGameCommand((command) => {
       if (!this.#tryValidate(InputValidate.checkRetryOrQuitCommand, command)) {
-        this.retryOrNotInput();
+        this.requsetRetryCommand();
         return;
       }
-      this.retryOrNot(command);
+      this.runRetryOrQuit(command);
     });
   }
 
-  retryOrNot(command) {
+  runRetryOrQuit(command) {
     if (command === "R") {
       this.#bridgeGame.retry();
-      this.crossBridgeInput();
+      this.requestMovingDirection();
     }
     if (command === "Q") {
       this.showResult();
