@@ -12,8 +12,13 @@ class BridgeGame {
 
   #playerArr;
 
+  #resultBridge;
+
+  #totalTry = 1;
+
   constructor() {
     this.#playerArr = [];
+    this.#resultBridge = {};
   }
 
   start() {
@@ -44,6 +49,11 @@ class BridgeGame {
     const idx = this.#playerArr.length;
     const isMove = this.checkMovePosible({ idx, userInput });
     this.#playerArr.push({ userInput, isMove });
+    this.createPrintMap(this.#playerArr);
+  }
+
+  createPrintMap(playerArr) {
+    this.#resultBridge = new MakeMap(playerArr);
   }
 
   checkMovePosible({ idx, userInput }) {
