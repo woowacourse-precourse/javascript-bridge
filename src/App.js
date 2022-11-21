@@ -1,8 +1,8 @@
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
+const InputView = require("./view/InputView");
+const OutputView = require("./view/OutputView");
 const { COMMAND } = require("./constants/game");
 
 class App {
