@@ -33,7 +33,7 @@ class BridgeGame {
       isNaN(bridgeSize) ||
       bridgeSize < MIN_BRIDGE_SIZE ||
       bridgeSize > MAX_BRIDGE_SIZE ||
-      bridgeSize === ''
+      bridgeSize === '' || bridgeSize.startsWith('0')
     ) return false;
     return true;
   }
