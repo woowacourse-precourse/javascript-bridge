@@ -10,6 +10,10 @@ const Validator = {
     if (!(inputValue === 'U' || inputValue === 'D'))
       throw Error('[ERROR] 위 칸은 U, 아래 칸은 D를 입력해주세요.');
   },
+  retryOrQuit(inputValue) {
+    if (!(inputValue === 'R' || inputValue === 'Q'))
+      throw Error('[ERROR] 재시작은 R, 종료는 Q를 입력해주세요.');
+  },
 };
 
 module.exports = Validator;
