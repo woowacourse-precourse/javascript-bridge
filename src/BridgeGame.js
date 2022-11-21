@@ -1,12 +1,8 @@
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const {
-  BRIDGE_SIZE_ERROR,
-  MOVE_INPUT_ERROR,
-  MIN_BRIDGE_SIZE,
-  MAX_BRIDGE_SIZE,
-  MOVE_UP,
-  MOVE_DOWN,
+  ERROR,
+  BRIDGE,
 } = require('./constants');
 
 class BridgeGame {
@@ -23,7 +19,7 @@ class BridgeGame {
 
   buildBridge(size) {
     if (!this.isValidBridgeSize(size)) {
-      throw new Error(BRIDGE_SIZE_ERROR);
+      throw new Error(ERROR.BRIDGE_SIZE_ERROR);
     }
     this.#bridge = BridgeMaker.makeBridge(size, generate);
   }
@@ -31,8 +27,8 @@ class BridgeGame {
   isValidBridgeSize(bridgeSize) {
     if (
       isNaN(bridgeSize) ||
-      bridgeSize < MIN_BRIDGE_SIZE ||
-      bridgeSize > MAX_BRIDGE_SIZE ||
+      bridgeSize < BRIDGE.MIN_BRIDGE_SIZE ||
+      bridgeSize > BRIDGE.MAX_BRIDGE_SIZE ||
       bridgeSize === '' || bridgeSize.startsWith('0')
     ) return false;
     return true;
@@ -40,7 +36,7 @@ class BridgeGame {
 
   move(moveInput) {
     if (!this.isValidMove(moveInput)) {
-      throw new Error(MOVE_INPUT_ERROR);
+      throw new Error(ERROR.MOVE_INPUT_ERROR);
     }
     const nowMoveIdx = this.#moveInputArray.length;
     let isRightDirect = false;
@@ -49,7 +45,7 @@ class BridgeGame {
   }
 
   isValidMove(moveInput) {
-    if (moveInput === MOVE_DOWN || moveInput === MOVE_UP) return true;
+    if (moveInput === BRIDGE.MOVE_DOWN || moveInput === BRIDGE.MOVE_UP) return true;
     return false;
   }
 

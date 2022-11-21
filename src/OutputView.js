@@ -1,17 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const {
-  RESULT_MSG,
-  FAIL_MSG,
-  SUCCESS_MSG,
-  TOTAL_COUNT_MSG,
-  MOVE_UP,
-  MOVE_DOWN,
-  START_BRIDGE,
-  END_BRIDGE,
-  SUCCESS,
-  FAIL,
-  BAR,
-  BLANK,
+  RESULT,
+  BRIDGE,
 } = require('./constants');
 
 const OutputView = {
@@ -34,7 +24,7 @@ const OutputView = {
     let block = '';
     if (floor === 0) block = this.makeUpSideBlock(moveInputArray);
     if (floor === 1) block = this.makeDownSideBlock(moveInputArray);
-    const bridge = `${START_BRIDGE} ${block} ${END_BRIDGE}`;
+    const bridge = `${BRIDGE.START_BRIDGE} ${block} ${BRIDGE.END_BRIDGE}`;
     resultMap.push(bridge);
     return resultMap;
   },
@@ -42,31 +32,31 @@ const OutputView = {
   makeUpSideBlock(moveInputArray) {
     const upsideBlock = moveInputArray
       .map(({ isRightDirect, moveInput }) => {
-        if (moveInput === MOVE_UP) {
-          if (isRightDirect) return SUCCESS;
-          return FAIL;
-        } return BLANK;
-      }).join(BAR);
+        if (moveInput === BRIDGE.MOVE_UP) {
+          if (isRightDirect) return BRIDGE.SUCCESS;
+          return BRIDGE.FAIL;
+        } return BRIDGE.BLANK;
+      }).join(BRIDGE.BAR);
     return upsideBlock;
   },
 
   makeDownSideBlock(moveInputArray) {
     const downSideBlock = moveInputArray
       .map(({ isRightDirect, moveInput }) => {
-        if (moveInput === MOVE_DOWN) {
-          if (isRightDirect) return SUCCESS;
-          return FAIL;
-        } return BLANK;
-      }).join(BAR);
+        if (moveInput === BRIDGE.MOVE_DOWN) {
+          if (isRightDirect) return BRIDGE.SUCCESS;
+          return BRIDGE.FAIL;
+        } return BRIDGE.BLANK;
+      }).join(BRIDGE.BAR);
     return downSideBlock;
   },
 
   printResult(moveInputArray, isSuccess, gameCount) {
-    Console.print(RESULT_MSG);
+    Console.print(RESULT.RESULT_MSG);
     this.printMap(moveInputArray);
-    if (isSuccess) Console.print(SUCCESS_MSG);
-    else Console.print(FAIL_MSG);
-    Console.print(`${TOTAL_COUNT_MSG}${gameCount}`);
+    if (isSuccess) Console.print(RESULT.SUCCESS_MSG);
+    else Console.print(RESULT.FAIL_MSG);
+    Console.print(`${RESULT.TOTAL_COUNT_MSG}${gameCount}`);
   },
 
   printGuide(message) {

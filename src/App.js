@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
-const { START_GAME_MSG, RETRY_INPUT_ERROR } = require('./constants');
+const { START_GAME_MSG, ERROR } = require('./constants');
 const BridgeGame = require('./BridgeGame');
 
 class App {
@@ -38,7 +38,7 @@ class App {
       OutputView.printMap(moveInputArray);
       this.determinePath(moveInputArray);
     } catch (err) {
-      this.tryAgain(err.msg, this.requestMoving);
+      this.tryAgain(err.message, this.requestMoving);
     }
   }
 
@@ -59,7 +59,7 @@ class App {
   checkValidCommand(tryInput) {
     try {
       if (tryInput !== 'Q' && tryInput !== 'R') {
-        throw new Error(RETRY_INPUT_ERROR);
+        throw new Error(ERROR.RETRY_INPUT_ERROR);
       }
       this.determineTryOrExit(tryInput);
     } catch (err) {
