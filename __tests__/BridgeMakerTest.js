@@ -1,6 +1,8 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { INPUT_ERROR } = require('../constants/error.constants');
 const InputValidator = require('../validators/InputValidator');
+const BridgeMaker = require('../src/BridgeMaker');
+const { generate } = require('../src/BridgeRandomNumberGenerator');
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
@@ -10,6 +12,15 @@ const mockRandoms = (numbers) => {
       MissionUtils.Random.pickNumberInRange,
     );
 };
+
+describe('다리 생성 테스트', () => {
+  test('입력값에 따른 다리 생성', () => {
+    const length = 3;
+    mockRandoms([1, 0, 1]);
+    const bridge = BridgeMaker.makeBridge(length, generate);
+    expect(bridge).toEqual(['U', 'D', 'U']);
+  });
+});
 
 describe('다리길이 입력 예외 테이스', () => {
   test('다리길이 입력값이 숫자가 아니면 예외가 발생한다.', () => {
