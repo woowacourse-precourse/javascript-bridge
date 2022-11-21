@@ -101,6 +101,18 @@ class GameController {
     OutputView.printMap(this.BridgeGame.bridges.getAllBridges());
     this.keepMovingOrStop();
   }
+
+  keepMovingOrStop() {
+    if (!this.BridgeGame.isFinished() && !this.BridgeGame.isFailed()) {
+      this.startMove();
+    } else if (this.BridgeGame.isFinished() && !this.BridgeGame.isFailed()) {
+      this.printResultandSuccessOrFail();
+    } else if (this.BridgeGame.isFinished() && this.BridgeGame.isFailed()) {
+      this.quitOrRetry();
+    } else if (!this.BridgeGame.isFinished() && this.BridgeGame.isFailed()) {
+      this.quitOrRetry();
+    }
+  }
 }
 
 module.exports = GameController;
