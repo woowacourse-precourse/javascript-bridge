@@ -6,10 +6,18 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 class BridgeGame {
   #bridge;
+  #usersMove;
   #moveCount;
-  #tryCount = 0;
-  #gameOver = false;
-  usersMove = [];
+  #gameOver;
+  #tryCount;
+  
+  constructor() {
+    this.#bridge = [];
+    this.#usersMove = [];
+    this.#moveCount = 0;
+    this.#gameOver = false;
+    this.#tryCount = 1;
+  }
 
   makeBridge(bridgeSize) {
     this.#bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
