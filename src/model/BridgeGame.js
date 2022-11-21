@@ -21,21 +21,21 @@ class BridgeGame {
     this.winningBridge.makeWinningBridge(size);
   }
 
+  validateDirection(direction) {
+    this.currBridge.validate(direction);
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  validateDirection(direction) {
-    this.currBridge.validate(direction);
+  canMove(direction) {
+    return this.currBridge.canMove(direction, this.winningBridge);
   }
 
-  move(direction) {
-    const CAN_MOVE = this.currBridge.canMove(direction, this.winningBridge);
-
-    this.currBridge.makeBridge(direction, CAN_MOVE);
-    const [UPPER_BRIDGE, LOWER_BRIDGE] = this.currBridge.getBridge();
-    return [CAN_MOVE, UPPER_BRIDGE, LOWER_BRIDGE];
+  move(direction, CAN_MOVE) {
+    this.currBridge.move(direction, CAN_MOVE);
   }
 
   isLastStage() {
@@ -49,9 +49,8 @@ class BridgeGame {
     Validation.checkValidCommand(command);
   }
 
-  getResult() {
-    const [UPPER_BRIDGE, LOWER_BRIDGE] = this.currBridge.getBridge();
-    return [this.#retryingCount, UPPER_BRIDGE, LOWER_BRIDGE];
+  getRetryingCount() {
+    return this.#retryingCount;
   }
 
   /**

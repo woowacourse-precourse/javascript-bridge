@@ -8,7 +8,6 @@ const {
   FINISHING_POINT,
   EDGE,
 } = require('../utils/constants');
-// const { GAME_RESULT } = require('../utils/constants');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -26,9 +25,17 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(UPPER_BRIDGE, LOWER_BRIDGE) {
-    print(STARTING_POINT + UPPER_BRIDGE.join(EDGE) + FINISHING_POINT);
-    print(STARTING_POINT + LOWER_BRIDGE.join(EDGE) + FINISHING_POINT);
+  printMap(bridgeGame) {
+    print(
+      STARTING_POINT +
+        bridgeGame.currBridge.getUpperBridge().join(EDGE) +
+        FINISHING_POINT
+    );
+    print(
+      STARTING_POINT +
+        bridgeGame.currBridge.getLowerBridge().join(EDGE) +
+        FINISHING_POINT
+    );
     print(LINE_BREAK);
   },
 
@@ -37,12 +44,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(RETRY_COUNT, GAME_RESULT, UPPER_BRIDGE, LOWER_BRIDGE) {
-    // 파라미터 3개 제한 요구사항 구현 위해 리팩토링 필요
+  printResult(GAME_RESULT, bridgeGame) {
     print(MESSAGE.totalGameResult);
-    this.printMap(UPPER_BRIDGE, LOWER_BRIDGE);
+    this.printMap(bridgeGame);
     print(SHOW_GAME_RESULT(GAME_RESULT));
-    print(SHOW_RETRY_COUNT(RETRY_COUNT));
+    print(SHOW_RETRY_COUNT(bridgeGame.getRetryingCount()));
   },
 };
 

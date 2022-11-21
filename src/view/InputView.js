@@ -1,4 +1,3 @@
-// const WinningBridge = require('../WinningBridge');
 const { input } = require('../utils/utils');
 const { MESSAGE } = require('../utils/constants');
 /**

@@ -16,7 +16,7 @@ class CurrBridge {
     return winningBridge.isSameDirection(direction, this.#upperBridge.length);
   }
 
-  makeBridge(direction, CAN_MOVE) {
+  move(direction, CAN_MOVE) {
     if (direction === UP) {
       this.#upperBridge.push(CAN_MOVE ? CROSSED : BLOCKED);
       this.#lowerBridge.push(BLANK);
@@ -28,8 +28,12 @@ class CurrBridge {
     }
   }
 
-  getBridge() {
-    return [this.#upperBridge, this.#lowerBridge];
+  getUpperBridge() {
+    return this.#upperBridge;
+  }
+
+  getLowerBridge() {
+    return this.#lowerBridge;
   }
 
   isLast(winningBridge) {

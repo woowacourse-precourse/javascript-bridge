@@ -60,14 +60,14 @@ class Controller {
   }
 
   move(direction) {
-    const [CAN_MOVE, UPPER_BRIDGE, LOWER_BRIDGE] =
-      this.bridgeGame.move(direction);
+    const CAN_MOVE = this.bridgeGame.canMove(direction);
+    this.bridgeGame.move(direction, CAN_MOVE);
 
-    this.printMoving(CAN_MOVE, UPPER_BRIDGE, LOWER_BRIDGE);
+    this.printMoving(CAN_MOVE);
   }
 
-  printMoving(CAN_MOVE, UPPER_BRIDGE, LOWER_BRIDGE) {
-    OutputView.printMap(UPPER_BRIDGE, LOWER_BRIDGE);
+  printMoving(CAN_MOVE) {
+    OutputView.printMap(this.bridgeGame);
 
     this.checkSuccess(CAN_MOVE);
   }
@@ -75,7 +75,7 @@ class Controller {
   checkSuccess(CAN_MOVE) {
     if (CAN_MOVE && this.bridgeGame.isLastStage()) {
       const IS_SUCCEEDED = true;
-      return this.getResult(IS_SUCCEEDED);
+      return this.printResult(IS_SUCCEEDED);
     }
 
     if (CAN_MOVE) return this.inputMoving();
@@ -101,7 +101,7 @@ class Controller {
     if (command === RETRY) this.retry();
     if (command === QUIT) {
       const IS_SUCCEEDED = false;
-      this.getResult(IS_SUCCEEDED);
+      this.printResult(IS_SUCCEEDED);
     }
   }
 
@@ -110,20 +110,9 @@ class Controller {
     this.inputMoving();
   }
 
-  getResult(IS_SUCCEEDED) {
+  printResult(IS_SUCCEEDED) {
     const GAME_RESULT = IS_SUCCEEDED ? SUCCESS : FAIL;
-    const [RETRY_COUNT, UPPER_BRIDGE, LOWER_BRIDGE] =
-      this.bridgeGame.getResult();
-    this.printResult(RETRY_COUNT, GAME_RESULT, UPPER_BRIDGE, LOWER_BRIDGE);
-  }
-
-  printResult(RETRY_COUNT, GAME_RESULT, UPPER_BRIDGE, LOWER_BRIDGE) {
-    OutputView.printResult(
-      RETRY_COUNT,
-      GAME_RESULT,
-      UPPER_BRIDGE,
-      LOWER_BRIDGE
-    );
+    OutputView.printResult(GAME_RESULT, this.bridgeGame);
 
     this.close();
   }
