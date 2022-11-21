@@ -17,10 +17,10 @@ class TemplateMaker {
     return [upsideTemplate, downsideTemplate];
   }
 
-  static getFinalLogTemplates(logs, isLatestMoveSucceeded, tryCount) {
+  static getFinalLogTemplates(logs, isEnd, tryCount) {
     const logTemplates = TemplateMaker.getLogTemplates(logs);
     const title = '\n최종 게임 결과\n';
-    const successOrFail = `\n게임 성공 여부: ${isLatestMoveSucceeded ? '성공' : '실패'}`;
+    const successOrFail = `\n게임 성공 여부: ${isEnd ? '성공' : '실패'}`;
     const totalTry = `총 시도한 횟수: ${tryCount}`;
 
     return [title, ...logTemplates, successOrFail, totalTry];

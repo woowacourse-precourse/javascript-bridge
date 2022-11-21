@@ -85,10 +85,10 @@ class GameController {
 
   quit() {
     const movementLogs = this.bridgeGame.getMovementLogs();
-    const isLatestMoveSucceeded = this.bridgeGame.isLatestMoveSucceeded();
+    const isEnd = this.bridgeGame.isEnd();
     const tryCount = this.bridgeGame.getTryCount();
 
-    OutputView.printResult(movementLogs, isLatestMoveSucceeded, tryCount);
+    OutputView.printResult(movementLogs, isEnd, tryCount);
 
     Console.close();
   }
