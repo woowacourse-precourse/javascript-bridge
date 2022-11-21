@@ -2,6 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeGame = require('../src/BridgeGame');
 const { MESSAGE, ERROR } = require('../src/constants');
 const GameResult = require('../src/GameResult');
+const App = require('../src/App');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -31,8 +32,12 @@ const getOutput = (logSpy) => {
 
 const runException = (inputs) => {
   mockQuestions(inputs);
-  const logSpy = getLogSpy();
-  const game = new BridgeGame();
+  const app = new App();
+
+  app.play().then(() => {
+    const logSpy = getLogSpy();
+    expectLogContains(getOutput(logSpy), ['[ERROR]']);
+  });
 };
 
 const expectLogContains = (received, logs) => {
@@ -52,11 +57,11 @@ describe('플레이어 입력값의 유효성 검사', () => {
   test('게임 시작 메시지를 출력한다.', () => {
     const logSpy = getLogSpy();
 
-    const game = new BridgeGame();
-    game.initiate();
+    const app = new App();
 
     const log = getOutput(logSpy);
-    game.initiate().then(() => {
+
+    app.play().then(() => {
       expectLogContains(log, [MESSAGE.ENTRY]);
     });
   });
@@ -64,9 +69,9 @@ describe('플레이어 입력값의 유효성 검사', () => {
   test('다리 길이 - 예외처리', () => {
     mockQuestions(['2', '31', '0']);
     const logSpy = getLogSpy();
-    const game = new BridgeGame();
+    const app = new App();
 
-    game.getBridgeSize().then(() => {
+    app.play().then(() => {
       expectLogContains(getOutput(logSpy), [ERROR.INPUT_BRIDGE_SIZE]);
     });
   });
@@ -74,11 +79,10 @@ describe('플레이어 입력값의 유효성 검사', () => {
   test('주어진 길이의 다리를 만든다', () => {
     mockQuestions(['4']);
 
-    const game = new BridgeGame();
+    const app = new App();
 
-    game.makeBridge().then(() => {
-      // console.log('>>>', game.gameResult.getResult());
-      expect(game.resultMap.getResult().size).toEqual(4);
+    app.play().then(() => {
+      expect(app.bridgeGame.resultMap.getResultAsArray().length).toEqual(4);
     });
   });
 
@@ -87,9 +91,9 @@ describe('플레이어 입력값의 유효성 검사', () => {
 
     const logSpy = getLogSpy();
 
-    const game = new BridgeGame();
+    const app = new App();
 
-    game.getMovingDirection().then(() => {
+    app.getMovingDirection().then(() => {
       expectLogContains(getOutput(logSpy), [ERROR.INPUT_MOVING_DIRECTION]);
     });
   });
@@ -98,14 +102,14 @@ describe('플레이어 입력값의 유효성 검사', () => {
     mockRandoms(['1', '0', '1']);
     mockQuestions(['3', 'U', 'D', 'U']);
 
-    const game = new BridgeGame();
-    game.initiate().then(() => {
-      console.log(game.resultMap.getResult());
-      // expect([...game.gameResult.getResult()]).toEqual([
-      //   [0, { machine: 'U', player: 'U' }],
-      //   [1, { machine: 'D', player: 'D' }],
-      //   [2, { machine: 'U', player: 'U' }],
-      // ]);
+    const app = new App();
+
+    app.play().then(() => {
+      expect([...app.bridgeGame.resultMap.getResultAsArray()]).toEqual([
+        [0, { machine: 'U', player: 'U' }],
+        [1, { machine: 'D', player: 'D' }],
+        [2, { machine: 'U', player: 'U' }],
+      ]);
     });
   });
 
@@ -114,9 +118,9 @@ describe('플레이어 입력값의 유효성 검사', () => {
 
     const logSpy = getLogSpy();
 
-    const game = new BridgeGame();
+    const app = new App();
 
-    game.getGameCommand().then(() => {
+    app.getGameCommand().then(() => {
       expectLogContains(getOutput(logSpy), [ERROR.INPUT_GAME_COMMAND]);
     });
   });
@@ -124,10 +128,10 @@ describe('플레이어 입력값의 유효성 검사', () => {
   test('플레이어는 게임을 재시도한다.', () => {
     const result = new GameResult();
 
-    result.setDefault(['U', 'D', 'U']);
+    result.generate(['U', 'D', 'U']);
     result.clear();
 
-    expect([...result.getResult()]).toEqual([
+    expect(result.getResultAsArray()).toEqual([
       [0, { machine: 'U', player: null }],
       [1, { machine: 'D', player: null }],
       [2, { machine: 'U', player: null }],
