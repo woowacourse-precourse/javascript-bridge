@@ -1,9 +1,9 @@
-const { Console } = require('@woowacourse/mission-utils');
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const {
   BRIDGE_SIZE_ERROR,
   MOVE_INPUT_ERROR,
+
   MIN_BRIDGE_SIZE,
   MAX_BRIDGE_SIZE,
   MOVE_UP,
@@ -18,8 +18,11 @@ class BridgeGame {
 
   #moveInputArray;
 
+  #gameCount;
+
   constructor() {
     this.#moveInputArray = [];
+    this.#gameCount = 1;
   }
 
   buildBridge(size) {
@@ -81,7 +84,14 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#moveInputArray = [];
+    this.#gameCount += 1;
+  }
+
+  getGameCount() {
+    return this.#gameCount;
+  }
 }
 
 module.exports = BridgeGame;
