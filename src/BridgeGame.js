@@ -18,15 +18,15 @@ class BridgeGame {
     const idx = this.bridgeList[0].length;
     if(direction === 'U') this.upMoving(direction,this.bridge[idx])
     if(direction === 'D') this.downMoving(direction,this.bridge[idx])
-    console.log(this.bridge)
     return this.bridgeList
   }
 
   upMoving(direction, bridge) {
     if(direction === bridge) {
-      this.bridgeList[0].push('O');
-      this.bridgeList[1].push(' ');
-      return
+      return (
+      this.bridgeList[0].push('O'),
+      this.bridgeList[1].push(' ')
+      )
     }
     this.bridgeList[0].push('X');
     this.bridgeList[1].push(' ');
@@ -34,9 +34,10 @@ class BridgeGame {
   
   downMoving(direction, bridge) {
     if (direction === bridge) {
-      this.bridgeList[1].push('O');
-      this.bridgeList[0].push(' ');
-      return
+      return (
+      this.bridgeList[1].push('O'),
+      this.bridgeList[0].push(' ')
+      )
     }
     this.bridgeList[1].push('X');
     this.bridgeList[0].push(' ');
