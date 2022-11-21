@@ -61,3 +61,30 @@ describe('BridgeGame 클래스의 다리 만드는 기능 테스트', () => {
     }
   );
 });
+describe('BridgeGame클래스의 retry() 기능 테스트', () => {
+  test('retry()의 argument로 "R"을 넣었을때 true 반환 확인', () => {
+    const bridgeGame = new BridgeGame();
+    const result = bridgeGame.retry('R');
+    expect(result).toEqual(true);
+  });
+  test('retry()의 argument로 "Q"을 넣었을때 false 반환 확인', () => {
+    const bridgeGame = new BridgeGame();
+    const result = bridgeGame.retry('Q');
+    expect(result).toEqual(false);
+  });
+  test('retry()의 argument로 "R"을 넣었을때 user의 시도 횟수가 1에서 2로 증가하는지 확인', () => {
+    const bridgeGame = new BridgeGame();
+    bridgeGame.retry('R');
+    const result = bridgeGame.tryCount;
+    expect(result).toEqual(2);
+  });
+  test.failing(
+    'retry()의 argument로 "R"을 넣었을때 user의 시도 횟수가 증가하는지 실패 테스트',
+    () => {
+      const bridgeGame = new BridgeGame();
+      bridgeGame.retry('R');
+      const result = bridgeGame.tryCount;
+      expect(result).toEqual(1);
+    }
+  );
+});
