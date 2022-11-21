@@ -5,10 +5,15 @@ const {
   AppConfig,
   Message,
 } = require('./Config');
+const GameLogger = require('./GameLogger');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
 class App {
+  #game;
+
+  #logger;
+
   static requestUserInput(inputFunction) {
     let errorCount;
     let input = false;
@@ -29,6 +34,12 @@ class App {
   }
 
   play() {}
+
+  movePlayer(direction) {
+    const resultStatus = this.#game.move(direction);
+    this.#logger.logMoveResult(direction, resultStatus);
+    return resultStatus;
+  }
 }
 
 module.exports = App;
