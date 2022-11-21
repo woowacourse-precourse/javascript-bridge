@@ -12,11 +12,11 @@ class BridgeGame {
     this.#bridgeSize = bridgeSize;
     this.#bridge = this.generateBridge();
   }
-  
+
   generateBridge() {
     return BridgeMaker.makeBridge(this.#bridgeSize, BridgeRanDomNumber.generate);
   }
-  
+
   match(moveAnswer) {
     if (this.#bridge[this.#bridgeIndex] === moveAnswer) {
       this.#bridgeIndex += 1;
@@ -25,7 +25,7 @@ class BridgeGame {
     this.#bridgeIndex += 1;
     return [moveAnswer, false];
   }
-  
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>

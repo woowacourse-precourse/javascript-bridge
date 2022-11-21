@@ -13,7 +13,7 @@ class GameController {
 
   inputBridgeSize() {
     OutputView.printStart();
-    InputView.readBridgeSize(bridgeSize => {
+    InputView.readBridgeSize((bridgeSize) => {
       Validation.checkBridgeLength(+bridgeSize);
       this.makeBridge(+bridgeSize);
       this.inputWhereMoving();
@@ -25,7 +25,7 @@ class GameController {
   }
 
   inputWhereMoving() {
-    InputView.readMoving(moveAnswer => {
+    InputView.readMoving((moveAnswer) => {
       Validation.checkMoveInput(moveAnswer);
       this.handleGame(moveAnswer);
     });
@@ -35,15 +35,17 @@ class GameController {
     const moveResult = this.#bridgeGame.move(moveAnswer);
     const [_, matchBoolean] = moveResult;
     OutputView.printMap(moveResult);
-    if (this.#bridgeGame.checkRemainBridge() && matchBoolean)
+    if (this.#bridgeGame.checkRemainBridge() && matchBoolean) {
       return this.inputWhereMoving();
-    if (this.#bridgeGame.checkRemainBridge() && !matchBoolean)
+    }
+    if (this.#bridgeGame.checkRemainBridge() && !matchBoolean) {
       return this.inputRetryOrQuit();
+    }
     return OutputView.printResult(this.#retryCount);
   }
 
   inputRetryOrQuit() {
-    InputView.readGameCommand(retryAnswer => {
+    InputView.readGameCommand((retryAnswer) => {
       Validation.checkRestartInput(retryAnswer);
       this.handleRetryOrQuit(retryAnswer);
     });

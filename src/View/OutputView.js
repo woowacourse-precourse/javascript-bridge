@@ -50,12 +50,12 @@ const OutputView = {
     this.moveState[0].push('   ');
     this.moveState[1].push(successOrFail);
   },
-  
+
   resetPrintData() {
     this.isSuccess = '';
     this.moveState = [[], []];
   },
-  
+
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -70,7 +70,6 @@ const OutputView = {
     Console.print(`총 시도한 횟수: ${retryCount}`);
     Console.close();
   },
-
 };
 
 module.exports = OutputView;

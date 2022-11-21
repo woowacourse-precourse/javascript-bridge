@@ -13,7 +13,7 @@ const InputView = {
       }
     });
   },
-  
+
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -21,7 +21,7 @@ const InputView = {
     this.getUserInput(
       '다리의 길이를 입력해주세요.\n',
       callback,
-      this.readBridgeSize.bind(this)
+      this.readBridgeSize.bind(this),
     );
   },
 
@@ -32,7 +32,7 @@ const InputView = {
     this.getUserInput(
       '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
       callback,
-      this.readMoving.bind(this)
+      this.readMoving.bind(this),
     );
   },
 
@@ -43,7 +43,7 @@ const InputView = {
     this.getUserInput(
       '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
       callback,
-      this.readGameCommand.bind(this)
+      this.readGameCommand.bind(this),
     );
   },
 };
