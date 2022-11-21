@@ -9,8 +9,8 @@
 - [x] `gameStart()`(게임 실행)
   - [x] `다리의 길이를 입력해주세요`를 출력한다
   - [x] 다리의 길이를 입력받는다
-- [] `makeBridge()` (다리 생성)
-  - [] `InputView` 클래스를 통해 다리 길이를 입력받는다(`readBridgeSize()`)
+- [x] `makeBridge()` (다리 생성)
+  - [x] `InputView` 클래스를 통해 다리 길이를 입력받는다(`readBridgeSize()`)
   - [] `BridgeMaker` 클래스에 다리 길이를 전달한다
     - [] 다리 길이 유효성 검사를 진행한다
     - [] 3이상 20 이하의 숫자를 입력해야 한다
