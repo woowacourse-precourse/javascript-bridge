@@ -6,14 +6,12 @@ const InputView = {
   readBridgeSize(createBridge) {
     Console.readLine(InfoMessages.ENTER_BRIDGE_SIZE, (size) => {
       createBridge.call(this, size);
-      InputView.readMoving();
     });
   },
 
-  readMoving(callback) {
+  readMoving(handleMoving) {
     Console.readLine(InfoMessages.ENTER_MOVEMENT_DIRECTION, (direction) => {
-      Validator.checkDirectionInput(direction);
-      callback(direction);
+      handleMoving.call(this, direction);
     });
   },
 
