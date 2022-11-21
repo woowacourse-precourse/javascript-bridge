@@ -11,16 +11,21 @@ const InputView = {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (number) => {
       try {
         this.checkPlayerInput(number);
-        mainBridge = new BridgeGame();
-        mainBridge.setBridge(
-          BridgeMaker.makeBridge(number, BridgeRandomNumberGenerator)
-        );
+        this.makeBridge(number);
         this.readMoving();
         console.log(mainBridge.bridge);
       } catch {
         this.readBridgeSize();
       }
     });
+  },
+
+  makeBridge(number) {
+    OutputView.setSize(number);
+    mainBridge = new BridgeGame();
+    mainBridge.setBridge(
+      BridgeMaker.makeBridge(number, BridgeRandomNumberGenerator)
+    );
   },
 
   checkPlayerInput(input) {
@@ -63,10 +68,27 @@ const InputView = {
     }
   },
 
+  printRight(input) {
+    let tmplocation = mainBridge.getLocation();
+    tmpbridge = mainBridge.getBridge();
+    console.log(tmpbridge, tmplocation, input);
+    OutputView.printRight(input, tmplocation - 1);
+    OutputView.printMap();
+  },
+
+  printWrong(input) {
+    let tmplocation = mainBridge.getLocation();
+    tmpbridge = mainBridge.getBridge();
+    console.log(tmpbridge, tmplocation, input);
+    OutputView.printRight(input, tmplocation - 1);
+    OutputView.printMap();
+  },
+
   checkAndMove(input) {
     try {
       mainBridge.move(input, mainBridge.getLocation());
       mainBridge.changeLocation();
+      this.printRight(input);
       this.readMoving();
     } catch (e) {
       this.checkEndError(e);
@@ -74,8 +96,11 @@ const InputView = {
   },
 
   checkEndError(e) {
-    if (e == 2) {
+    if (e == 3) {
+      console.log("게임 성공!");
       this.readGameCommand();
+    }
+    if (e == 4) {
     }
     if (e == 0) {
       this.readGameCommand();
@@ -110,7 +135,8 @@ const InputView = {
       this.readMoving();
     }
     if (input === "Q") {
-      MissionUtils.Console.print(`총 시도한 횟수: 1`);
+      let result = mainBridge.getRetry();
+      MissionUtils.Console.print(`총 시도한 횟수: ${result}`);
       MissionUtils.Console.close();
     }
   },

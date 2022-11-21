@@ -1,6 +1,7 @@
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
+
 const MissionUtils = require("@woowacourse/mission-utils");
 const OutputView = {
   /**
@@ -8,33 +9,49 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  size: 20,
+  UPPER: new Array(this.size),
+  LOWER: new Array(this.size),
 
+  setSize(number) {
+    this.size = number;
+  },
   printstart() {
     MissionUtils.Console.print("다리 건너기 게임을 시작합니다.\n");
   },
-  printMap(input, index) {
-    this.printFirst();
-    this.printLast();
+  printMap() {
+    console.log(this.UPPER);
+    console.log(this.LOWER);
   },
-  First() {
-    string = "[\n[";
-    return string;
+
+  printFirst() {
+    MissionUtils.Console.print("[]");
+    MissionUtils.Console.print("[]");
   },
-  Last() {
-    string = "]\n]";
-    return string;
+  printRight(input, index) {
+    if (input === "U") {
+      this.UPPER[index] = "0";
+      this.LOWER[index] = " ";
+    }
+    if (input == "D") {
+      this.UPPER[index] = " ";
+      this.LOWER[index] = "0";
+    }
   },
-  correctU() {
-    string = "0\n";
-    return string;
+  printWrong(input, index) {
+    if (input === "U") {
+      this.UPPER[index] = "X";
+      this.LOWER[index] = " ";
+    }
+    if (input == "D") {
+      this.UPPER[index] = " ";
+      this.LOWER[index] = "X";
+    }
   },
-  wrongU() {
-    string = "0\n";
-    return string;
-  },
-  corretD() {
-    string = "\n0";
-    return string;
+
+  reSet() {
+    this.UPPER = new Array(this.size);
+    this.LOWER = new Array(this.size);
   },
   printBetween() {},
   /**
@@ -43,7 +60,7 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult() {
-    MissionUtils.Console.print("게임 끝");
+    MissionUtils.Console.print("최종 게임 결과");
   },
 };
 
