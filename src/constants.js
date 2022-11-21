@@ -12,4 +12,6 @@ module.exports = {
 
   U: "U",
   D: "D",
+  O: "O",
+  X: "X",
 };
