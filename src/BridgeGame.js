@@ -15,25 +15,15 @@ class BridgeGame {
       bridgeSize,
       BridgeRandomNumberGenerator.generate,
     );
-    this.reInit();
-  }
-
-  reInit() {
-    this.progress = new Progress();
-    this.#position = 0;
-    this.totalTrial += 1;
+    this.#reInit();
   }
 
   isFinished() {
     return this.#position >= this.#bridge.length;
   }
 
-  canMove(command) {
-    return !this.isFinished() && command === this.#bridge[this.#position];
-  }
-
-  geNextRound() {
-    this.#position += 1;
+  isMatchCommand(command) {
+    return command === this.#bridge[this.#position];
   }
 
   /**
@@ -41,14 +31,17 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(command) {
-    if (this.canMove(command)) {
-      this.geNextRound();
-      this.progress.success(command);
-      return true;
+  move(command, resolve, reject) {
+    if (this.isFinished()) {
+      return;
     }
-    this.progress.fail(command);
-    return false;
+    if (this.isMatchCommand(command)) {
+      this.#moveSuccess(command);
+      resolve();
+      return;
+    }
+    this.#moveFail(command);
+    reject();
   }
 
   /**
@@ -57,7 +50,22 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.reInit();
+    this.#reInit();
+  }
+
+  #moveSuccess(command) {
+    this.#position += 1;
+    this.progress.success(command);
+  }
+
+  #moveFail(command) {
+    this.progress.fail(command);
+  }
+
+  #reInit() {
+    this.progress = new Progress();
+    this.#position = 0;
+    this.totalTrial += 1;
   }
 }
 
