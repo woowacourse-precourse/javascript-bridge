@@ -7,52 +7,37 @@ const BridgeNumber = require('./BridgeRandomNumberGenerator');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #turn;
+  #turn = 0;
   #try = 0;
   #isPlay = true;
-  #isClear = false;
+  #isEnd = false;
   #bridge;
-  #upperBridge;
-  #lowerBridge;
-
-  init() {
-    this.#turn = 0;
-    this.#upperBridge = [];
-    this.#lowerBridge = [];
-  }
+  #upperBridge = [];
+  #lowerBridge = [];
 
   enterBridgeLength() {
     const bridgeLength = (input) => {
       this.#bridge = BridgeMaker.makeBridge(input, BridgeNumber);
       this.enterMoving();
     };
-
     InputView.readBridgeSize('다리의 길이를 입력해주세요.\n', bridgeLength);
   }
 
   enterMoving() {
     const moving = (input) => {
       this.move(input);
-      if (this.#isPlay) this.enterMoving();
-      if (!this.#isPlay) this.enterRegame();
-      if (this.#isClear) this.endGame();
+      if (this.#isEnd) this.clearGame();
+      if (!this.#isEnd && this.#isPlay) this.enterMoving();
+      if (!this.#isEnd && !this.#isPlay) this.enterRegame();
     };
-
     InputView.readMoving('이동할 칸을 선택해주세요.\n', moving);
   }
 
   enterRegame() {
     const regame = (input) => {
-      if (input === 'R') {
-        this.#isPlay = true;
-        this.enterMoving();
-      }
-
-      if (input === 'Q') {
-        this.endGame();
-      }
+      if (input === 'R') this.retry();
+      if (input === 'Q') this.giveupGame();
     };
-
     InputView.readMoving('게임을 다시 시도할지 여부를 입력해주세요.\n', regame);
   }
 
@@ -62,20 +47,21 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(input) {
-    const GO = 'O';
-    const STOP = 'X';
     const crossable = this.#bridge[this.#turn];
     this.#turn += 1;
-    if (input === crossable) {
-      this.isFirst(GO, input);
-      if (this.#turn === this.#bridge.length) {
-        this.#isClear = true;
-      }
-    }
+    this.isMove(input, crossable);
+  }
+
+  isMove(input, crossable) {
+    const GO = 'O';
+    const STOP = 'X';
+    if (input === crossable) this.isFirst(GO, input);
     if (input !== crossable) {
       this.#isPlay = false;
       this.isFirst(STOP, input);
-      this.retry();
+    }
+    if (input === crossable && this.#turn === this.#bridge.length) {
+      this.#isEnd = true;
     }
   }
 
@@ -112,14 +98,27 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.init();
+    this.#isPlay = true;
     this.#try += 1;
+    this.init();
+    this.enterMoving();
   }
 
-  endGame() {
+  init() {
+    this.#turn = 0;
+    this.#upperBridge = [];
+    this.#lowerBridge = [];
+  }
+
+  clearGame() {
     const SUCCESS = '성공';
+    InputView.closeRead();
+    return SUCCESS;
+  }
+
+  giveupGame() {
     const FAIL = '실패';
-    if (this.#isClear) return SUCCESS;
+    InputView.closeRead();
     return FAIL;
   }
 }
