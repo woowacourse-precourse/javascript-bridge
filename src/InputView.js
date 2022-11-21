@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const generateRandomNumber = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
@@ -27,15 +28,26 @@ const InputView = {
     Console.readLine(`이동할 칸을 선택해주세요. (위: U, 아래: D)\n`,(getUser)=>{
       game.user =getUser;
       if (game.move(current++)) {
+        OutputView.printMap(game.map);
         return this.readMoving();
       }
+      OutputView.printMap(game.map);
+      return this.readGameCommand();
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)", (getRetry)=>{
+      if(game.retry(getRetry)){
+        current = 0;
+        return this.readMoving();
+      }
+      return OutputView.printResult(game.result, game.count);
+    })
+  },
 };
 
 module.exports = InputView;
