@@ -1,5 +1,4 @@
-const Bridge = require("./model/Bridge");
-const Position = require("./model/Position");
+const { POSITION_TWO } = require("./enum");
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -11,8 +10,10 @@ const BridgeMaker = {
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
   makeBridge(size, generateRandomNumber) {
-    const positions = Array.from({length: size}).map(() => new Position(generateRandomNumber()));
-    return new Bridge(positions);
+    const dictionary = Object.fromEntries(Object.entries(POSITION_TWO).map(item => item.reverse()));
+    return Array
+      .from({ length: size })
+      .map(() => dictionary[generateRandomNumber()]);
   },
 };
 
