@@ -1,3 +1,4 @@
+const OutputView = require('./OutputView');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  * + 필드 추가 가능
@@ -42,6 +43,16 @@ class BridgeGame {
   retry() {
     this.bridgeSteps = [];
     this.gameCount += 1;
+  }
+
+  win() {
+    this.gameStatus = '성공';
+    OutputView.printResult(
+      this.answerSteps,
+      this.bridgeSteps,
+      this.gameStatus,
+      this.gameCount
+    );
   }
 }
 

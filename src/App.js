@@ -43,13 +43,7 @@ class App {
       );
       const result = this.bridgeGame.move();
       if (result === 'WIN') {
-        this.bridgeGame.gameStatus = '성공';
-        OutputView.printResult(
-          this.bridgeGame.answerSteps,
-          this.bridgeGame.bridgeSteps,
-          this.bridgeGame.gameStatus,
-          this.bridgeGame.gameCount
-        );
+        this.bridgeGame.win();
         View.close();
       }
       if (result === 'MOVE') {
