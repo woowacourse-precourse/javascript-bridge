@@ -16,7 +16,17 @@ const bridgeLength = function bridgeLengthValidation(input, callback) {
   }
 };
 
-const bridgeDirection = function bridgeDirectionValidation(input, callback) {};
+const bridgeDirection = function bridgeDirectionValidation(input, callback) {
+  try {
+    if (input !== "U" && input !== "D")
+      throw new Error("U 또는 D만 입력 가능합니다.");
+    return true;
+  } catch (e) {
+    Console.print(`[ERROR]${e}`);
+    callback();
+    return false;
+  }
+};
 
 const gameContinue = function gameContinueValidation(input, callback) {};
 

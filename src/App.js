@@ -7,6 +7,7 @@ const {
   bridgeDirection,
   gameContinue,
 } = require("./utils/validate.js");
+
 const BridgeGame = require("./BridgeGame.js");
 
 class App {
@@ -35,6 +36,11 @@ class App {
     BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate);
 
   moveCallback = (input) => {
+    const isDirectionValidate = bridgeDirection(input, () =>
+      InputView.readMoving(this.moveCallback),
+    );
+    if (!isDirectionValidate) return;
+
     const { inputHistory, bridge } = this.bridgeGame.move(input);
     OutputView.printMap(inputHistory, bridge, "D");
     OutputView.printMap(inputHistory, bridge, "U");
