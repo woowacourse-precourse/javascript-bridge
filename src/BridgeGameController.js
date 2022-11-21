@@ -49,6 +49,16 @@ class BridgeGameController {
       return true;
     return false;
   }
+
+  keepGoing() {
+    if (this.bridgeGame.result === RESULT.FAILURE) {
+      InputView.readGameCommand(
+        this.retryGame.bind(this),
+        this.gameOver.bind(this)
+      );
+      return;
+    }
+  }
 }
 
 module.exports = BridgeGameController;

@@ -16,8 +16,14 @@ const InputView = {
    */
   readBridgeSize(makeBridgeAndMove) {
     Console.readLine(PRINT_MESSAGE.BRIDGE_LENGTH, (size) => {
-      this.validateBridgeSize(size);
-      makeBridgeAndMove(size);
+      try {
+        Console.print('');
+        this.validateBridgeSize(size);
+        makeBridgeAndMove(size);
+      } catch (error) {
+        Console.print(error);
+        this.readBridgeSize(makeBridgeAndMove);
+      }
     });
   },
 
@@ -31,20 +37,44 @@ const InputView = {
    */
   readMoving(moveBridge) {
     Console.readLine(PRINT_MESSAGE.BRIDGE_TO_MOVE, (moveDirection) => {
-      this.validateMove(moveDirection);
-      moveBridge(moveDirection);
+      try {
+        this.validateMove(moveDirection);
+        moveBridge(moveDirection);
+      } catch (error) {
+        Console.print(error);
+        this.readMoving(moveBridge);
+      }
     });
   },
 
   validateMove(moveDirection) {
-    if (moveDirection !== BRIDGE_RULE.MOVE_UP && move !== BRIDGE_RULE.MOVE_DOWN)
-      throw new Error(ERROR_MESSAGE.VALIDATION_MOVE);
+    if (
+      moveDirection !== BRIDGE_RULE.MOVE_UP &&
+      moveDirection !== BRIDGE_RULE.MOVE_DOWN
+    )
+      throw ERROR_MESSAGE.VALIDATION_MOVE;
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(retryGame, gameOver) {
+    Console.readLine(PRINT_MESSAGE.RETRY, (RetryOrQuit) => {
+      try {
+        this.validadteRetryOrQuit(RetryOrQuit);
+        if (RetryOrQuit === BRIDGE_RULE.QUIT) gameOver();
+        else retryGame();
+      } catch (error) {
+        Console.print(error);
+        this.readGameCommand(retryGame, gameOver);
+      }
+    });
+  },
+
+  validadteRetryOrQuit(retryOrQuit) {
+    if (retryOrQuit !== BRIDGE_RULE.RETRY && retryOrQuit !== BRIDGE_RULE.QUIT)
+      throw ERROR_MESSAGE.VALIDATION_RETRY_OR_QUIT;
+  },
 };
 
 module.exports = InputView;
