@@ -12,4 +12,11 @@ describe('입력 오류 테스트', () => {
       expect(() => bridgeLengthValidation(input)).toThrow(`${ERROR.prefix}`);
     }
   );
+
+  test.each([['u'], [1], ['']])(
+    '올바르지 않은 이동 키 입력 테스트',
+    (input) => {
+      expect(() => movingValidation(input)).toThrow(`${ERROR.prefix}`);
+    }
+  );
 });
