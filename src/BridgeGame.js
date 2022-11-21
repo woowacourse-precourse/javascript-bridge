@@ -12,7 +12,7 @@ class BridgeGame {
    */
   init() {
     printGameStart();
-    readBridgeSize(this.setBridge);
+    readBridgeSize(this.setBridge.bind(this));
   }
 
   /**
