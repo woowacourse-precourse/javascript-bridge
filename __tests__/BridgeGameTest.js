@@ -87,4 +87,26 @@ describe('BridgeGame 클래스 테스트', () => {
     const output = game.isClear();
     expect(output).toEqual(expectedOutput);
   });
+
+  test('재시도를 위한 설정을 한다.', () => {
+    mockRandoms([1, 0, 0]);
+    //bridge = ['U','D','D']
+
+    const inputs = [BRIDGE.UP, BRIDGE.DOWN, BRIDGE.UP];
+    const upper = [MAP.PASS];
+    const lower = [MAP.BLANK];
+    const expectedTryCount = 2;
+    const expectedMap = [lower, upper];
+    const game = new BridgeGame(3);
+
+    inputs.forEach((input) => {
+      game.move(input);
+    });
+    game.retry();
+    game.move(BRIDGE.UP);
+    const tryCount = game.getTryCount();
+    const map = game.getMap();
+    expect(tryCount).toBe(expectedTryCount);
+    expect(map).toEqual(expectedMap);
+  });
 });
