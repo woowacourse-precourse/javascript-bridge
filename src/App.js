@@ -1,5 +1,9 @@
+const { printStartingMessage } = require("./OutputView");
+
 class App {
-  play() {}
+  play() {
+    printStartingMessage();
+  }
 }
 
 module.exports = App;
