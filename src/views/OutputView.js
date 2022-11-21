@@ -1,38 +1,30 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_MESSAGE } = require('../utils/message');
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
+const GAME_MESSAGE = require('../utils/message');
+
 const OutputView = {
   printStartMessage() {
     Console.print(GAME_MESSAGE.start);
   },
 
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   printMap(trials) {
     const [upperSide, lowerSide] = this.getBridgeMap(trials);
     Console.print(`${upperSide}\n${lowerSide}\n`);
   },
 
   getBridgeMap(trials) {
-    let [upperSide, lowerSide] = trials.reduce(this.handleMakeBridgeMap, ['[', '[']);
+    let [upperSide, lowerSide] = trials.reduce(this.handleMakingBridgeMap, ['[', '[']);
 
     return [upperSide.slice(0, -1) + ']', lowerSide.slice(0, -1) + ']', '\n'];
   },
 
-  handleMakeBridgeMap(bridgeMap, trial) {
+  //TODO: 깔끔하게 작성할 수 있는 방법
+  handleMakingBridgeMap(bridgeMap, trial) {
     let [upperSide, lowerSide] = bridgeMap;
 
     if (trial.direction === 'U') {
       upperSide += ` ${trial.result} |`;
       lowerSide += '   |';
-    }
-
-    if (trial.direction === 'D') {
+    } else if (trial.direction === 'D') {
       upperSide += `   |`;
       lowerSide += ` ${trial.result} |`;
     }
@@ -49,11 +41,7 @@ const OutputView = {
     Console.close();
   },
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+  //TODO: 템플릿을 뺄 것
   printResult(bridgeGame) {
     const [bridgeUpperSide, bridgeLowerSide] = this.getBridgeMap(bridgeGame.trials);
     const trialCount = bridgeGame.trialCount;

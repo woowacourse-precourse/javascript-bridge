@@ -1,4 +1,4 @@
-const GAME_SIGNATURE = {
+const GAME_SIGNATURE = Object.freeze({
   up: 'U',
   down: 'D',
   pass: 'O',
@@ -6,6 +6,6 @@ const GAME_SIGNATURE = {
   gameOn: '진행중',
   gameSuccess: '성공',
   gameFail: '실패',
-};
+});
 
 module.exports = GAME_SIGNATURE;

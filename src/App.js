@@ -10,13 +10,13 @@ class App {
   play() {
     const models = {
       bridgeGame: new BridgeGame(),
-      bridgeRandomNumberGenerator: BridgeRandomNumberGenerator,
       bridgeMaker: BridgeMaker,
+      bridgeRandomNumberGenerator: BridgeRandomNumberGenerator,
     };
 
     const views = {
-      outputView: OutputView,
       inputView: InputView,
+      outputView: OutputView,
       validator: new Validator(),
     };
 

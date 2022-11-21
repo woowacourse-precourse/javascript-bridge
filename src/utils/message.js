@@ -5,4 +5,9 @@ const GAME_MESSAGE = Object.freeze({
   askGameCommand: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
 });
 
-module.exports = { GAME_MESSAGE };
+const BRIDGE_MAP = Object({
+  openingBracket: '[',
+  closedBracket: ']',
+});
+
+module.exports = GAME_MESSAGE;
