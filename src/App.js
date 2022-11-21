@@ -14,7 +14,7 @@ class App {
   constructor() {
     this.#bridgeString = '';
     this.#userInputString = '';
-    this.#try = 0;
+    this.#try = 1;
     this.#round = 0;
     this.brideGame = new BridgeGame();
   }
@@ -54,6 +54,7 @@ class App {
         break;
       case 'finish':
         //TODO 총 시도 횟수, 성공 여부 보여주기
+        printResult('success', this.#try);
         break;
     }
   };
@@ -66,7 +67,7 @@ class App {
         this.brideGame.retry();
         readMoving(this.check);
       } else {
-        printResult();
+        printResult('fail', this.#try);
       }
     });
   };
