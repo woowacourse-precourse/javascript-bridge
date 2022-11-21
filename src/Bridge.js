@@ -53,6 +53,11 @@ class Bridge {
   showResult() {
     OutputView.printMap(this.#upsideBridge, this.#downsideBridge);
   }
+
+  setInitial() {
+    this.#upsideBridge = [];
+    this.#downsideBridge = [];
+  }
 }
 
 module.exports = Bridge;

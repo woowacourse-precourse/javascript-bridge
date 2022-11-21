@@ -50,10 +50,18 @@ class App {
     if (this.#bridgeGame.loseGame()) {
       InputView.readGameCommand((playerInput) => {
         const command = InputView.getGameCommand(playerInput);
+        if (command === "R") this.retryGame();
+        if (command === "Q") this.quitGame();
       });
     }
-    console.log("최종게임결과");
   }
+
+  retryGame() {
+    this.#bridgeGame.retry();
+    this.inputMoving();
+  }
+
+  quitGame() {}
 }
 
 const app = new App();
