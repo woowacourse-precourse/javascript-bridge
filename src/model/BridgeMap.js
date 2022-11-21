@@ -1,49 +1,45 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-const { BRIDGE_MESSAGE, BRIDGE_INFO } = require('../utils/constant');
+const { INPUT_SIGN, BRIDGE_STRUCTURE } = require('../utils/constant');
 
 class BridgeMap {
-  #upside;
-  #downside;
+  #map;
 
   constructor() {
-    this.#upside = [];
-    this.#downside = [];
+    this.#map = {
+      [INPUT_SIGN.UP]: [],
+      [INPUT_SIGN.DOWN]: [],
+    };
   }
 
   update(isCorrect, moving) {
-    isCorrect ? this.updateCorrect(moving) : this.updateIncorrect(moving);
+    const sign = this.isPassable(isCorrect);
+
+    moving === INPUT_SIGN.UP
+      ? this.updateUpside(sign)
+      : this.updateDownside(sign);
   }
 
-  updateCorrect(moving) {
-    if (moving === BRIDGE_MESSAGE.UP_SIGN) {
-      this.#upside.push('O');
-      this.#downside.push(' ');
-      return;
-    }
-
-    this.#upside.push(' ');
-    this.#downside.push('O');
+  updateUpside(sign) {
+    this.#map[INPUT_SIGN.UP].push(sign);
+    this.#map[INPUT_SIGN.DOWN].push(' ');
   }
 
-  updateIncorrect(moving) {
-    if (moving === BRIDGE_MESSAGE.UP_SIGN) {
-      this.#upside.push('X');
-      this.#downside.push(' ');
-      return;
-    }
+  updateDownside(sign) {
+    this.#map[INPUT_SIGN.UP].push(' ');
+    this.#map[INPUT_SIGN.DOWN].push(sign);
+  }
 
-    this.#upside.push(' ');
-    this.#downside.push('X');
+  isPassable(isCorrect) {
+    return isCorrect ? BRIDGE_STRUCTURE.PASSABLE : BRIDGE_STRUCTURE.UNPASSABLE;
   }
 
   toString() {
     return [
-      `${BRIDGE_INFO.BEGIN} ${this.#upside.join(BRIDGE_INFO.WALL)} ${
-        BRIDGE_INFO.END
-      }`,
-      `${BRIDGE_INFO.BEGIN} ${this.#downside.join(BRIDGE_INFO.WALL)} ${
-        BRIDGE_INFO.END
-      }`,
+      `${BRIDGE_STRUCTURE.BEGIN} ${this.#map[INPUT_SIGN.UP].join(
+        BRIDGE_STRUCTURE.WALL
+      )} ${BRIDGE_STRUCTURE.END}`,
+      `${BRIDGE_STRUCTURE.BEGIN} ${this.#map[INPUT_SIGN.DOWN].join(
+        BRIDGE_STRUCTURE.WALL
+      )} ${BRIDGE_STRUCTURE.END}`,
     ];
   }
 }

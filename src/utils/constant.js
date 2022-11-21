@@ -13,21 +13,19 @@ const INPUT_MESSAGE = Object.freeze({
   RETRY: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
 });
 
-const BRIDGE_INFO = Object.freeze({
+const BRIDGE_STRUCTURE = Object.freeze({
   BEGIN: '[',
   END: ']',
   WALL: ' | ',
-  MIN_LENGTH: 3,
-  MAX_LENGTH: 20,
-});
-
-const BRIDGE_MESSAGE = Object.freeze({
   PASSABLE: 'O',
   UNPASSABLE: 'X',
-  UP_SIGN: 'U',
-  DOWN_SIGN: 'D',
-  RETRY_SIGN: 'R',
-  QUIT_SIGN: 'Q',
+});
+
+const INPUT_SIGN = Object.freeze({
+  UP: 'U',
+  DOWN: 'D',
+  RETRY: 'R',
+  QUIT: 'Q',
 });
 
 const PREFIX = '[ERROR]';
@@ -41,7 +39,7 @@ const ERROR_MESSAGE = Object.freeze({
 module.exports = {
   GAME_MESSAGE,
   INPUT_MESSAGE,
-  BRIDGE_INFO,
-  BRIDGE_MESSAGE,
+  BRIDGE_STRUCTURE,
+  INPUT_SIGN,
   ERROR_MESSAGE,
 };

@@ -1,5 +1,5 @@
 const BridgeGame = require('../model/BridgeGame');
-const { BRIDGE_MESSAGE } = require('../utils/constant');
+const { INPUT_SIGN } = require('../utils/constant');
 const BridgeLengthValidator = require('../validator/BridgeLengthValidator');
 const GameCommandValidator = require('../validator/GameCommandValidator');
 const MovingValidator = require('../validator/MovingValidator');
@@ -53,12 +53,12 @@ class BridgeGameController {
     InputView.readGameCommand((command) => {
       new GameCommandValidator(command).validate();
 
-      if (command === BRIDGE_MESSAGE.RETRY_SIGN) {
+      if (command === INPUT_SIGN.RETRY) {
         this.#bridgeGame.retry();
         this.getMoving();
       }
 
-      if (command === BRIDGE_MESSAGE.QUIT_SIGN) this.quit(isSuccess);
+      if (command === INPUT_SIGN.QUIT) this.quit(isSuccess);
     });
   }
 
