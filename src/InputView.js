@@ -20,7 +20,6 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(GET_BRIDGE_SIZE_SENTENCE, (bridgeSize) => {
       bridgeGame.bridge = makeBridge(bridgeSize, generate);
-      Console.print(bridgeGame.bridge);
       bridgeGame.bridgeSize = parseInt(bridgeSize);
 
       this.readMoving();
