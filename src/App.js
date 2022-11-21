@@ -10,14 +10,14 @@ class App {
 
   play() {
     Console.print(MESSAGE.START);
-    InputView.readBridgeSize(this.makeBridge.bind(this));
+    this.readBridgeSize();
   }
 
   makeBridge(input) {
     try {
       Validator.validateBridgeSize(input);
     } catch {
-      InputView.readBridgeSize(this.makeBridge.bind(this));
+      this.readBridgeSize();
       return;
     }
     const game = new BridgeGame(input);
@@ -71,6 +71,10 @@ class App {
   retryGame() {
     this.#game.retry();
     InputView.readMoving(this.moveSpace.bind(this));
+  }
+
+  readBridgeSize() {
+    InputView.readBridgeSize(this.makeBridge.bind(this));
   }
 }
 
