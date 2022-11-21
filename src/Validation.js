@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { ERROR } = require("./constants");
 
 const Validation = {
   isVaildBridgeSize(size) {
@@ -14,7 +15,7 @@ const Validation = {
   isVaildNumber(size) {
     try {
       if (isNaN(size)) {
-        throw new Error("[ERROR] 다리 길이는 숫자여야 합니다.");
+        throw new Error(ERROR.NUMBER);
       }
     } catch (error) {
       Console.print(error.message);
@@ -25,7 +26,7 @@ const Validation = {
   isVaildRange(size) {
     try {
       if (size < 3 || size > 20) {
-        throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+        throw new Error(ERROR.RANGE);
       }
     } catch (error) {
       Console.print(error.message);
@@ -39,7 +40,7 @@ const Validation = {
 
     try {
       if (moving !== UPPER_MOVING && moving !== LOWER_MOVING) {
-        throw new Error("[ERROR] 대문자 U와 D만 입력가능합니다.");
+        throw new Error(ERROR.MOVING);
       }
     } catch (error) {
       Console.print(error.message);
@@ -52,9 +53,7 @@ const Validation = {
   isVaildCommand(command) {
     try {
       if (command !== "R" && command !== "Q") {
-        throw new Error(
-          "[ERROR] 올바른 입력이 아닙니다. 입력값을 확인해주세요."
-        );
+        throw new Error(ERROR.COMMAND);
       }
     } catch (error) {
       Console.print(error.message);
