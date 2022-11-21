@@ -14,8 +14,6 @@ const INPUT_MESSAGE = Object.freeze({
 });
 
 const BRIDGE_STRUCTURE = Object.freeze({
-  BEGIN: '[',
-  END: ']',
   WALL: ' | ',
   PASSABLE: 'O',
   UNPASSABLE: 'X',
