@@ -9,6 +9,11 @@ class App {
   #bridgeSize;
   #bridge;
   #curBridge;
+  #tryNum;
+
+  constructor() {
+    this.#tryNum = 1;
+  }
 
   play() {
     OutputView.printCommand(command.START);
@@ -33,7 +38,11 @@ class App {
 
       if (!bridgeGame.move(moveInput, brigeIndex)) {
         const retryInput = await InputView.readGameCommand();
-        console.log(retryInput);
+        if (retryInput === 'R') {
+          this.#tryNum += 1;
+          this.#curBridge = bridgeGame.retry();
+          this.#doGame();
+        }
       }
     }
   }
