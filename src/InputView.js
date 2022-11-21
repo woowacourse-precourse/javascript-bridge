@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { NOTICE } = require("./constants");
-const { handleBridgeSizeInput } = require("./InputHandler");
+const { handleBridgeSizeInput, handleMovingInput } = require("./InputHandler");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.

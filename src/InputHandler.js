@@ -1,5 +1,5 @@
 const { checkBridgeSizeInput, checkMovingInput } = require("./ErrorCase");
-const { BridgeSize } = require("./ErrorHandler");
+const { BridgeSize, Moving } = require("./ErrorHandler");
 
 const InputHandler = {
   handleBridgeSizeInput({ app, bridgeSize, readAgain }) {
