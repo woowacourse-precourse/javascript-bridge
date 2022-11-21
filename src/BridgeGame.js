@@ -5,6 +5,13 @@ const OutputView = require('./view/OutputView');
 class BridgeGame {
   #round = 1;
 
+  #currentResult
+
+  storage(result) {
+    this.#currentResult = result;
+    return ;
+  }
+
   move() {
     this.#round += 1;
   }
@@ -13,17 +20,17 @@ class BridgeGame {
     OutputView.printAttemptCount(this.#round);
   }
 
-  retry(result) {
+  retry() {
       OutputView.printResult();
-      Console.print(result);
+      Console.print(this.#currentResult);
       Console.print('');
       OutputView.printFail();
       this.countRound();
       Console.close();
   }
 
-  printResultBridge(result) {
-    Console.print(result);
+  printResultBridge() {
+    Console.print(this.#currentResult);
   }
 }
 

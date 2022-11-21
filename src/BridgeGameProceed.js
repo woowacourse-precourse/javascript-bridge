@@ -46,7 +46,9 @@ class BridgeGameProceed {
         try {
             Validation.nextStep(nextStep);
             this.#playersBridge.push(nextStep);
-            this.dividePath(this.bridge());
+            const result = this.bridge()
+            this.bridgeGame.storage(result);
+            this.dividePath(result);
             this.game();
         } catch (error) {
             Console.print(error.message);
@@ -72,38 +74,43 @@ class BridgeGameProceed {
         return result;
     }
 
-    fail(result) {
-        InputView.readGameCommand((retryOrNot) => {
-            try {
-                Validation.retry(retryOrNot);
-                if (retryOrNot === "R") {
-                    Console.print('');
-                    return this.game();
-                }
-                if (retryOrNot === "Q") this.bridgeGame.retry(result); 
-            } catch (error) {
-                Console.print(error.message);
-                this.fail.call(this);
-            }
-        });
+    // fail(result) {
+    //     InputView.readGameCommand((retryOrNot) => {
+    //         try {
+    //             Validation.retry(retryOrNot);
+    //             if (retryOrNot === "R") {
+    //                 Console.print('');
+    //                 return this.game();
+    //             }
+    //             if (retryOrNot === "Q") this.bridgeGame.retry(result); 
+    //         } catch (error) {
+    //             Console.print(error.message);
+    //             this.fail.call(this);
+    //         }
+    //     });
+    // }
+
+    fail() {
+        InputView.readGameCommand(this.gameOverChoice.bind(this));
     }
 
-    // fail(result) {
-    //     InputView.readGameCommand(this.gameOverChoice.bind(result));
-    // }
+    gameOverChoice(retryOrNot) {
+        try {
+            Validation.retry(retryOrNot);
+            if (retryOrNot === "R") {
+                Console.print('');
+                this.game.call(this);
+            }
+            if (retryOrNot === "Q") this.callResult.call(this); 
+        } catch (error) {
+            Console.print(error.message);
+            this.fail.call(this);
+        }
+    }
 
-    // gameOverChoice(retryOrNot) {
-    //     try {
-    //         Validation.retry(retryOrNot);
-    //         if (retryOrNot === "R") {
-    //             this.game.call();
-    //         }
-    //         if (retryOrNot === "Q") this.bridgeGame.retry(result); 
-    //     } catch (error) {
-    //         Console.print(error.message);
-    //         this.fail.call(this);
-    //     }
-    // }
+    callResult() {
+        this.bridgeGame.retry();
+    }
     
     win(result) {
         OutputView.printResult()
