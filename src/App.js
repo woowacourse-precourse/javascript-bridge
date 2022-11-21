@@ -118,6 +118,12 @@ class App {
     this.retry();
     this.readMoving();
   }
+
+  retryGameCommand(userInput) {
+    BridgeGame.checkIncludeRandQ(userInput);
+    this.checkIsR(userInput);
+    this.checkIsQ(userInput);
+  }
 }
 
 module.exports = App;
