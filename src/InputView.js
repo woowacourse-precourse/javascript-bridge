@@ -49,6 +49,7 @@ const InputView = {
         bridgeGame.retry();
         this.readMoving(bridgeGame);
       }
+      if (restart === RESTART_VALUE.QUIT) bridgeGame.quit();
     });
   },
 };

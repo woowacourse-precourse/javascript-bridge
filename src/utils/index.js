@@ -1,4 +1,4 @@
-const { inputUserValue, printMessage } = require("./missionUtils");
+const { inputUserValue, printMessage, quitGame } = require("./missionUtils");
 const {
   isBridgeLengthValid,
   isMoveValid,
@@ -9,6 +9,7 @@ const { createMap } = require("./mapMaker");
 module.exports = {
   inputUserValue,
   printMessage,
+  quitGame,
   isBridgeLengthValid,
   isMoveValid,
   isRestartValid,

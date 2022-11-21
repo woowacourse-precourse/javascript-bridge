@@ -8,4 +8,8 @@ const printMessage = (message) => {
   Console.print(message);
 };
 
-module.exports = { inputUserValue, printMessage };
+const quitGame = () => {
+  Console.close();
+};
+
+module.exports = { inputUserValue, printMessage, quitGame };
