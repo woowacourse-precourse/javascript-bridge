@@ -1,5 +1,10 @@
 const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
-const { printStartGame, printError, printMap } = require('./OutputView');
+const {
+  printStartGame,
+  printError,
+  printMap,
+  printResult,
+} = require('./OutputView');
 const {
   bridgeSizeValidator,
   directionValidator,
@@ -66,6 +71,12 @@ class BridgeGameHandler {
         this.requestGameCommand();
       }
     });
+  }
+
+  exitGame(gameResult) {
+    const attempts = this.#bridgeGame.getAttempts();
+
+    printResult(this.#bridgeGame.getPath(), gameResult, attempts);
   }
 }
 
