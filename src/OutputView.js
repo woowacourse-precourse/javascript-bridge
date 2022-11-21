@@ -10,13 +10,13 @@ const OutputView = {
   printStart() {
     print(START_MESSAGE);
   },
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printMap() {
-    console.log('printMap');
+
+  printMap(map, location) {
+    const [firstLine, secondLine] = map;
+    const curFirstLine = firstLine.slice(0, location).join(' | ');
+    const curSecondLine = secondLine.slice(0, location).join(' | ');
+    print('[ ' + curFirstLine + ' ]');
+    print('[ ' + curSecondLine + ' ]');
   },
 
   /**
