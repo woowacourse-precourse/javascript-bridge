@@ -59,7 +59,7 @@ const InputView = {
     readGameCommandCallback(command) {
       try {
       } catch (error) {
-        OutputView.printErrorMessage(err);
+        OutputView.printErrorMessage(error);
         this.readGameCommand();
       }
     },
