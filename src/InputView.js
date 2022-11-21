@@ -1,10 +1,10 @@
-const { Console } = require("@woowacourse/mission-utils");
-const Validator = require("./Validator");
-const { generate } = require("./BridgeRandomNumberGenerator");
-const { makeBridge } = require("./BridgeMaker");
+const { Console } = require('@woowacourse/mission-utils');
+const Validator = require('./Validator');
+const { generate } = require('./BridgeRandomNumberGenerator');
+const { makeBridge } = require('./BridgeMaker');
 
-const { INFO_MESSAGES } = require("./utils/messages");
-const BridgeGame = require("./BridgeGame");
+const { INFO_MESSAGES } = require('./utils/messages');
+const BridgeGame = require('./BridgeGame');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -46,7 +46,7 @@ const InputView = {
       } catch (error) {
         Console.print(error.message);
 
-        InputView.readMoving();
+        this.readMoving();
       }
     });
   },
@@ -54,8 +54,22 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
-    console.log("hi!");
+  readGameCommand(map, printResult) {
+    Console.readLine(INFO_MESSAGES.RETRY, (userInput) => {
+      try {
+        Validator.retry(userInput);
+
+        BridgeGame.retryCount += 1;
+
+        userInput === 'R'
+          ? BridgeGame.retry(this.readMoving.bind(this))
+          : printResult(map);
+      } catch (error) {
+        Console.print(error.message);
+
+        this.readGameCommand();
+      }
+    });
   },
 };
 
