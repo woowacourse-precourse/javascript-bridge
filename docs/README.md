@@ -66,6 +66,27 @@
 - [x] 다리를 그리는 메서드 수정 및 분리
 - [ ] try catch를 어디에 선언하고 유효성 검사를 어디서 진행할 지 확정하기
 
+## 파일 구조
+
+```
+📦src
+ ┣ 📂constants
+ ┃ ┣ 📜Bridge.js
+ ┃ ┣ 📜Messages.js
+ ┃ ┗ 📜Number.js
+ ┣ 📂model
+ ┃ ┗ 📜BridgeGame.js
+ ┣ 📂presenter
+ ┃ ┗ 📜BridgeGamePresenter.js
+ ┣ 📂view
+ ┃ ┣ 📜InputView.js
+ ┃ ┗ 📜OutputView.js
+ ┣ 📜App.js
+ ┣ 📜BridgeMaker.js
+ ┣ 📜BridgeRandomNumberGenerator.js
+ ┗ 📜InputValidation.js
+```
+
 ## 구조 및 전제 설정
 
 ### 구조 분리
@@ -128,11 +149,6 @@
 
 이를 바탕으로 기능 목록을 재작성하였다.
 
-### 구조 그려보기
+### MVP구조 그려보기
 
-```mermaid
-  flowchart LR
-    A[BridgeGamePresenter] <--> |사용자 입력으로 UI 갱신|B[OutputView & InputView]
-    A <--> |데이터 변경 및 사용|D[BridgeGame  'Model']
-    A --> |실행|H[App.play]
-```
+<img src="https://imgur.com/rDFRQyq.png">
