@@ -72,7 +72,7 @@ class App {
   moveUser(response) {
     try {
       this.validateMoveCommand(response);
-      this.bridgeGame.move(response).setStaus().setResultMap();
+      this.bridgeGame.move(response).setStaus().setFootprint();
       OutputView.printMap(this.bridgeGame);
       this.MOVE_TO_FORK_MAP[this.bridgeGame.getStatus()]();
     } catch (error) {

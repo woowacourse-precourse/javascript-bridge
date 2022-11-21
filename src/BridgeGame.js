@@ -1,32 +1,30 @@
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
-
+const User = require('./User');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #tryCount = 1;
-  #moveCount = 0;
   #bridge = [];
-  #user = [];
   #status = '';
-  #resultMap = {
+  #footprint = {
     upside: [],
     downside: [],
   };
 
   MAKE_MOVE_MAP = {
     U: (result) => {
-      this.#resultMap.upside.push(result);
-      this.#resultMap.downside.push(' ');
+      this.#footprint.upside.push(result);
+      this.#footprint.downside.push(' ');
     },
     D: (result) => {
-      this.#resultMap.upside.push(' ');
-      this.#resultMap.downside.push(result);
+      this.#footprint.upside.push(' ');
+      this.#footprint.downside.push(result);
     },
   };
 
   constructor(size) {
+    this.user = new User();
     this.#bridge = BridgeMaker.makeBridge(
       Number(size),
       BridgeRandomNumberGenerator.generate,
@@ -34,16 +32,18 @@ class BridgeGame {
   }
 
   getTryCount() {
-    return this.#tryCount;
+    return this.user.getTryCount();
   }
 
   getStatus() {
     return this.#status;
   }
   setStaus() {
+
+    const index = this.user.getRoute().length - 1;
     const isCorrect =
-      this.#bridge[this.#moveCount - 1] === this.#user[this.#moveCount - 1];
-    const isEnd = this.#moveCount === this.#bridge.length;
+      this.#bridge[index] === this.user.getRoute()[index];
+    const isEnd = (index + 1 === this.#bridge.length);
 
     if (isEnd && isCorrect) {
       this.#status = 'END';
@@ -55,24 +55,24 @@ class BridgeGame {
     return this;
   }
 
-  getResultMap() {
-    return this.#resultMap;
+  getFootprint() {
+    return this.#footprint;
   }
 
-  setResultMap() {
-    const index = this.#moveCount - 1;
-    const result = this.#user[index] === this.#bridge[index] ? 'O' : 'X';
-    this.MAKE_MOVE_MAP[this.#user[index]](result);
+  setFootprint() {
+    const index = this.user.getRoute().length - 1;
+    const result = this.user.getRoute()[index] === this.#bridge[index] ? 'O' : 'X';
+    this.MAKE_MOVE_MAP[this.user.getRoute()[index]](result);
   }
+  
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(input) {
-    this.#moveCount += 1;
-    this.#user.push(input);
+  move(command) {
+    this.user.setRoute(command);
 
     return this;
   }
@@ -83,11 +83,18 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#tryCount += 1;
-    this.#moveCount = 0;
-    this.#user = [];
-    this.#resultMap.upside = [];
-    this.#resultMap.downside = [];
+    this.user.count();
+    this.user.clear();
+    this.#footprint.upside = [];
+    this.#footprint.downside = [];
+  }
+
+  getResult() {
+    return {
+      footprint: this.#footprint,
+      endStatus: this.#status === 'END' ? '성공' : '실패',
+      tryCount: this.user.getTryCount()
+    }
   }
 }
 
