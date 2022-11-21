@@ -52,6 +52,14 @@ const OutputView = {
   consoleClose() {
     Console.close();
   },
+
+  /**
+   * 에러가 throw 되었을 때 catch해서 출력할 때 사용한다.
+   * @param {string} err 에러 문구
+   */
+  printError(err) {
+    Console.print(err);
+  },
 };
 
 module.exports = OutputView;
