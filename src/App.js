@@ -15,13 +15,17 @@ class App {
   }
 
   constructBridgeInput() {
-    InputView.readBridgeSize(this.constructBridge.bind(this));
+    InputView.readBridgeSize((size) => {
+      if (!this.#tryValidate(InputValidate.checkBridgeSize, size)) {
+        this.constructBridgeInput();
+        return;
+      }
+
+      this.constructBridge(size);
+    });
   }
 
   constructBridge(size) {
-    if (!this.#tryValidate(InputValidate.checkBridgeSize, size)) {
-      this.constructBridgeInput();
-    }
     const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
     this.#bridgeGame = new BridgeGame(bridge);
 
@@ -29,42 +33,44 @@ class App {
   }
 
   crossBridgeInput() {
-    InputView.readMoving(this.crossBridge.bind(this));
+    InputView.readMoving((direction) => {
+      if (!this.#tryValidate(InputValidate.checkMovingDirection, direction)) {
+        this.crossBridgeInput();
+        return;
+      }
+
+      this.crossBridge(direction);
+    });
   }
 
   crossBridge(direction) {
-    if (!this.#tryValidate(InputValidate.checkMovingDirection, direction)) {
-      this.crossBridgeInput();
+    const moveResult = this.#bridgeGame.move(direction);
+    OutputView.printMap(this.#bridgeGame.getMap());
+    if (this.#bridgeGame.isSuccess()) {
+      this.showResult();
+      return;
     }
-    if (this.#bridgeGame.isMovable(direction)) {
-      this.#bridgeGame.move(direction);
-      OutputView.printMap(this.#bridgeGame.getMap());
-      if (this.#bridgeGame.isSuccess()) {
-        this.showResult();
-        return;
-      }
-      this.crossBridgeInput();
-    } else {
-      this.#bridgeGame.out(direction);
-      OutputView.printMap(this.#bridgeGame.getMap());
-      this.retryOrNotInput();
-    }
+    moveResult ? this.crossBridgeInput() : this.retryOrNotInput();
   }
 
   retryOrNotInput() {
-    InputView.readGameCommand(this.retryOrNot.bind(this));
+    InputView.readGameCommand((command) => {
+      if (!this.#tryValidate(InputValidate.checkRetryOrQuitCommand, command)) {
+        this.retryOrNotInput();
+        return;
+      }
+
+      this.retryOrNot(command);
+    });
   }
 
   retryOrNot(command) {
-    if (!this.#tryValidate(InputValidate.checkRetryOrQuitCommand, command)) {
-      this.retryOrNotInput();
-    }
     if (command === "R") {
       this.#bridgeGame.retry();
       this.crossBridgeInput();
     }
     if (command === "Q") {
-      this.success();
+      this.showResult();
     }
   }
 
