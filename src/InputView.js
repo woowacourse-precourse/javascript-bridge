@@ -2,6 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeGame = require('./BridgeGame');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const Validate = require('./Validate');
 const Constants = require('./Constants');
 
 /**
@@ -19,6 +20,11 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(Constants.Input.bridgeSize, (size) => {
+      try {
+        Validate.bridge(size);
+      } catch (error) {
+        MissionUtils.Console.print(error);
+      }
       const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
       game = new BridgeGame(bridge);
       InputView.readMoving();
@@ -30,6 +36,11 @@ const InputView = {
    */
   readMoving() {
     MissionUtils.Console.readLine(Constants.Input.move, (movement) => {
+      try {
+        Validate.upOrDown(movement);
+      } catch (error) {
+        MissionUtils.Console.print(error);
+      }
       const moveResult = game.move(movement);
       InputView.readMoveResult(moveResult);
     });
@@ -44,7 +55,7 @@ const InputView = {
       case 'fail':
         return InputView.readGameCommand();
       case 'done':
-        return; // 최종 결과 내보내기
+        return;
     }
   },
 
