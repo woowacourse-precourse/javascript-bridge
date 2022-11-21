@@ -8,7 +8,7 @@ class BridgeSize {
   checkBridgeSize(size) {
     const sizeConstraint = new SizeConstraint(size);
     SizeConstraint.checkStartZero();
-    sizeConstraint.checkStartZero();
+    sizeConstraint.checkOnlyNumber();
     sizeConstraint.checkNumberRange();
   }
 
