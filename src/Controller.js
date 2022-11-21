@@ -1,4 +1,5 @@
 const { printMessage, close } = require('./Utils.js');
+const { GAME_RESULT } = require('./Constants.js');
 const BridgeSize = require('./Validate/BridgeSize.js');
 const BridgeCommand = require('./Validate/BridgeCommand.js');
 const InputView = require('./View/InputView.js');
@@ -100,22 +101,21 @@ class Controller {
       this.inputMoving();
     }
     if (input === 'Q') {
-      this.Quit();
+      this.Quit(GAME_RESULT.FAIL);
     }
   }
 
   isEndGame() {
     if (!this.safeBridgeList.length) {
-      OutputView.printResult(this.bridgeShape.currentBridgeMap(), '성공', this.counting.getCount());
-      close();
+      this.Quit(GAME_RESULT.SUCCESS);
     }
     if (this.safeBridgeList.length) {
       this.inputMoving();
     }
   }
 
-  Quit() {
-    OutputView.printResult(this.bridgeShape.currentBridgeMap(), '실패', this.counting.getCount());
+  Quit(gameResult) {
+    OutputView.printResult(this.bridgeShape.currentBridgeMap(), `${gameResult}`, this.counting.getCount());
     close();
   }
 }
