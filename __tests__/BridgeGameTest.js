@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeGame = require('../src/BridgeGame');
 const { MESSAGE, ERROR } = require('../src/constants');
+const GameResult = require('../src/GameResult');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -93,19 +94,28 @@ describe('플레이어 입력값의 유효성 검사', () => {
   });
 
   test('플레이어는 자신이 선택한 방향으로 이동한다.', () => {
-    const logSpy = getLogSpy();
     mockRandoms(['1', '0', '1']);
     mockQuestions(['3', 'U', 'D', 'U']);
 
     const game = new BridgeGame();
-    game.proceed();
-
     game.proceed().then(() => {
-      [...game.gameResult.getResult].toEqual([
+      expect([...game.gameResult.getResult()]).toEqual([
         [0, { machine: 'U', player: 'U' }],
         [1, { machine: 'D', player: 'D' }],
         [2, { machine: 'U', player: 'U' }],
       ]);
+    });
+  });
+
+  test('재시도 여부 - 예외처리', () => {
+    mockQuestions(['K', 'V', 'C']);
+
+    const logSpy = getLogSpy();
+
+    const game = new BridgeGame();
+
+    game.getGameCommand().then(() => {
+      expectLogContains(getOutput(logSpy), [ERROR.INPUT_GAME_COMMAND]);
     });
   });
 });
