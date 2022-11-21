@@ -28,26 +28,31 @@ const InputView = {
   validate(command, type) {
     switch (type) {
       case "LENGTH":
-        if (command >= 3 && command <= 20) {
-          return;
-        } else {
-          throw new Error(ERROR_MESSAGE.outOfRange);
-        }
+        if (isNaN(command) || command < 3 || command > 20) throw ERROR_MESSAGE.outOfRange;
+        break;
       case "MOVE":
-        if (command !== "U" && command !== "D") throw new Error(ERROR_MESSAGE.moveCommand);
+        if (command !== "U" && command !== "D") throw ERROR_MESSAGE.moveCommand;
         break;
       case "END":
-        if (command !== "R" && command !== "Q") throw new Error(ERROR_MESSAGE.endCommand);
+        if (command !== "R" && command !== "Q") throw ERROR_MESSAGE.endCommand;
         break;
+    }
+  },
+
+  errorHandelr(command, type, func) {
+    try {
+      this.validate(command, type);
+    } catch (error) {
+      Console.print(error);
+      func();
     }
   },
 
   readBridgeSize() {
     Console.print(MESSAGE.start);
-    Console.readLine(MESSAGE.getLength, (number) => {
-      this.validate(number, TYPE.length);
-      Console.print("");
-      const randomBridge = makeBridge(Number(number), () => generate());
+    Console.readLine(MESSAGE.getLength, (command) => {
+      this.errorHandelr(command, TYPE.length, () => this.readBridgeSize());
+      const randomBridge = makeBridge(Number(command), () => generate());
       bridgeGame.makeBridge(randomBridge);
       this.readMoving();
     });
@@ -58,7 +63,7 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(MESSAGE.move, (command) => {
-      this.validate(command, TYPE.move);
+      this.errorHandelr(command, TYPE.move, () => this.readMoving());
       bridgeGame.move(command);
       OutPutView.printMap(bridgeGame.upperBridge, bridgeGame.lowerBridge);
       if (bridgeGame.end) {
@@ -75,16 +80,13 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(MESSAGE.end, (command) => {
-      this.validate(command, TYPE.end);
-      switch (command) {
-        case "R":
-          bridgeGame.retry();
-          this.readMoving();
-          break;
-        case "Q":
-          OutPutView.printResult(bridgeGame);
-          Console.close();
-          break;
+      this.errorHandelr(command, TYPE.end, () => this.readGameCommand());
+      if (command === "R") {
+        bridgeGame.retry();
+        this.readMoving();
+      } else {
+        OutPutView.printResult(bridgeGame);
+        Console.close();
       }
     });
   },
