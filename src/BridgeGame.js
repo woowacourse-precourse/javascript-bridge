@@ -54,6 +54,11 @@ class BridgeGame {
       this.#map[BRIDGE.LOWER][this.#currentPosition] === MAP.PASS
     );
   }
+
+  isClear() {
+    if (this.#currentPosition !== this.#bridge.length - 1) return false;
+    return this.isPass();
+  }
 }
 
 module.exports = BridgeGame;
