@@ -15,19 +15,10 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(callBack) {
     Console.readLine(
       "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      (direction) => {
-        try {
-          if (Validation.checkDirectionInput(direction));
-        } catch {
-          Console.print(
-            "\n[ERROR] 이동할 칸은 위: U, 아래: D로 입력해야 합니다."
-          );
-          this.readMoving();
-        }
-      }
+      callBack
     );
   },
 

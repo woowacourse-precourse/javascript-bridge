@@ -31,7 +31,19 @@ class BridgeGameController {
   }
 
   getDirection() {
-    InputView.readMoving();
+    InputView.readMoving((direction) => {
+      try {
+        Validation.checkDirectionInput(direction);
+        this.moveDirection(direction);
+      } catch (err) {
+        OutputView.printDirectionError();
+        this.getDirection();
+      }
+    });
+  }
+
+  moveDirection(direction) {
+    this.bridgeGame.move(direction);
   }
 }
 
