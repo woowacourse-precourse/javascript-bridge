@@ -2,16 +2,16 @@
 
 ## Model(Domain) 로직
 
-### BridgeMaker 로직
-- [x] 입력 받은 다리 길이로 다리를 생성한다. - BridgeMaker#makeBridge() -> ApplicationTest에서 다리생성 테스트를 한다.
+### BridgeMaker 로직 -> ApplicationTest에서 테스트
+- [x] 입력 받은 다리 길이로 다리를 생성한다. - BridgeMaker#makeBridge()
 
-### BridgeGame 로직 
+### BridgeGame 로직 -> BridgeGameTest에서 테스트
 - [x] 입력 받은 이동할 칸과 다리를 비교한다. - BridgeGame#match()
 - [x] 입력 받은 이동 칸에 대한 이동 성공여부를 확인한다. - BridgeGame#move()
 - [x] 건널 다리가 남았는지 모두 건넌건지 확인한다. - BridgeGame#checkRemainBridge()
 - [x] 재시작 시 bridgeIndex를 초기화 시킨다. - BridgeGame#retry()
 
-### 예외 처리 로직
+### 예외 처리 로직 -> InputValidationTest에서 테스트
 
 사용자가 잘못된 값을 입력한 경우 throw문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
 
