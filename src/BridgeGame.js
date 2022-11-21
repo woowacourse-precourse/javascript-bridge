@@ -2,6 +2,7 @@ const GameManager = require('./GameManager');
 const gameManager = new GameManager();
 const Bridge = require('./Bridge');
 const bridge = new Bridge();
+const { MOVE, RESULT } = require('./constants/constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -26,28 +27,24 @@ class BridgeGame {
   static move(userPosition) {
     const IS_BRIDGE_LEFT = bridge.isBridgeLeft();
     const IS_USER_CAN_GO = bridge.askUserCanGo(userPosition);
-    const GO = 'O';
-    const CANT_GO = 'X';
-    const SUCCESS = '성공';
-    const FAIL = '실패';
 
     if (IS_BRIDGE_LEFT) {
       if (IS_USER_CAN_GO) {
-        bridge.drawNowMap(GO);
+        bridge.drawNowMap(MOVE.GO);
         return gameManager.askWhereToGo(BridgeGame.move);
       }
       if (!IS_USER_CAN_GO) {
-        bridge.drawNowMap(CANT_GO);
+        bridge.drawNowMap(MOVE.FALL);
         return gameManager.askRetry(BridgeGame.retry);
       }
     }
     if (!IS_BRIDGE_LEFT) {
       if (IS_USER_CAN_GO) {
-        bridge.drawNowMap(GO);
-        bridge.drawResultMap(GO, SUCCESS);
+        bridge.drawNowMap(MOVE.GO);
+        bridge.drawResultMap(MOVE.GO, RESULT.SUCCESS);
       }
       if (!IS_USER_CAN_GO) {
-        bridge.drawNowMap(CANT_GO);
+        bridge.drawNowMap(MOVE.FALL);
         gameManager.askRetry(BridgeGame.retry);
       }
     }
@@ -60,9 +57,7 @@ class BridgeGame {
    */
   static retry(answer) {
     if (answer === 'Q') {
-      const RESULT = '실패';
-      const CANT_GO = 'X';
-      bridge.drawResultMap(CANT_GO, RESULT);
+      bridge.drawResultMap(MOVE.FALL, RESULT.FAIL);
     }
     if (answer === 'R') {
       bridge.resetStep();
