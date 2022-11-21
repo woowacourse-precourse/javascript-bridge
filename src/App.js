@@ -25,7 +25,7 @@ class App {
 
   printFinalGameResult() {
     const gameReuslt = !this.isGameOver();
-    const tryCount = this.getTryCount();
+    const tryCount = this.#bridgeGame.getTryCount();
     const classifiedBridgeLog = this.#bridgeGame.getCurrentClassifiedBridgeLog();
 
     this.#output.finalGameResult(classifiedBridgeLog);
@@ -55,6 +55,10 @@ class App {
     BridgeGame.checkIncludeUandD(userInput);
     this.#bridgeGame.move();
     this.#bridgeGame.setGameLog(userInput);
+  }
+
+  getBridgeLength() {
+    return this.#bridgeGame.getBridge().length;
   }
 }
 
