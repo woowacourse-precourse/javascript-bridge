@@ -12,17 +12,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(inputHistory, bridge) {
+  printMap(inputHistory, bridge, bridgeOpposition) {
     Console.print(
       `[${inputHistory.reduce((acc, cur, idx) => {
-        if (cur === "D") return (acc += idx === 0 ? "   " : "|   ");
-        if (cur !== bridge[idx]) return (acc += idx === 0 ? " X " : "| X ");
-        return (acc += idx === 0 ? " O " : "| O ");
-      }, "")}]`,
-    );
-    Console.print(
-      `[${inputHistory.reduce((acc, cur, idx) => {
-        if (cur === "U") return (acc += idx === 0 ? "   " : "|   ");
+        if (cur === bridgeOpposition)
+          return (acc += idx === 0 ? "   " : "|   ");
         if (cur !== bridge[idx]) return (acc += idx === 0 ? " X " : "| X ");
         return (acc += idx === 0 ? " O " : "| O ");
       }, "")}]`,
