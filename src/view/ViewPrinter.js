@@ -15,6 +15,16 @@ class ViewPrinter {
     InputView.readBridgeSize(bridgeSetter, nextCallback, errorCallback);
   }
 
+  selectBridgeDirection(moveCallback, printCallback) {
+    const errorCallback = this.#bridgeGame.selectDirection.bind(this.#bridgeGame)
+    InputView.readMoving(moveCallback, printCallback, errorCallback)
+  }
+
+  selectRetry(restartCallback, quitCallback){
+    const errorCallback = this.#bridgeGame.retry.bind(this.#bridgeGame)
+    InputView.readGameCommand(restartCallback,quitCallback,errorCallback)
+  }
+
   printEndResult(bridges, gameState) {
     const [upside, downside] = bridges;
     OutputView.printResult(gameState, upside, downside);

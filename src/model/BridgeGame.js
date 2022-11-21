@@ -53,8 +53,7 @@ class BridgeGame {
       this.#viewPrinter.printBridge(this.#bridge.getBridges());
       this.continue();
     };
-    const errorCallback = this.selectDirection.bind(this);
-    InputView.readMoving(moveCallback, printCallback, errorCallback);
+    this.#viewPrinter.selectBridgeDirection(moveCallback, printCallback);
   }
 
   continue() {
@@ -92,9 +91,8 @@ class BridgeGame {
   retry() {
     const restartCallback = this.restartGame.bind(this);
     const quitCallback = this.endGame.bind(this);
-    const errorCallback = this.retry.bind(this);
 
-    InputView.readGameCommand(restartCallback, quitCallback, errorCallback);
+    this.#viewPrinter.selectRetry(restartCallback, quitCallback);
   }
 
   endGame() {
