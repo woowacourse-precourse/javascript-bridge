@@ -1,3 +1,4 @@
+/* eslint-disable */
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
