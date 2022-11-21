@@ -43,7 +43,9 @@ class App {
     });
   }
   requestRestartOrQuit() {
-    InputView.readGameCommand((commandOption) => {});
+    InputView.readGameCommand((commandOption) => {
+      const { errorMsg } = Validation.checkCommandOptioni(commandOption);
+    });
   }
 }
 const app = new App();
