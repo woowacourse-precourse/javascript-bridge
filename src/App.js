@@ -46,7 +46,9 @@ class App {
       return;
     }
     if (this.bridgeGame.isEnd()) {
-      OutputView.printResult();
+      //Console.close();
+      this.bridgeGame.end();
+      return;
     }
     InputView.readMoving(this.getMoveInput.bind(this));
   }

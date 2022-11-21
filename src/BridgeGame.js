@@ -5,10 +5,12 @@ const { printMap, printResult } = require('./OutputView');
 class BridgeGame {
   #bridge;
   #user;
+  #round;
 
   constructor(bridge) {
     this.#bridge = bridge;
     this.#user = [];
+    this.#round = 1;
   }
 
   move(move) {
@@ -27,11 +29,13 @@ class BridgeGame {
   }
 
   end() {
-    printResult(this.#bridge, this.#user);
+    const gameResult = this.isFail() ? '실패' : '성공';
+    printResult(this.#bridge, this.#user, this.#round, gameResult);
   }
 
   retry() {
     this.#user = [];
+    this.#round += 1;
   }
 }
 
