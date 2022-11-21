@@ -1,35 +1,35 @@
-const InputView = require('../src/InputView');
+const validator = require('../src/validator/validator');
 const ERROR_MESSAGES = require('../src/constants/ErrorMessages');
 
 describe('다리 길이 입력값 테스트', () => {
   // Bridge Length
   test('다리 길이 입력값 테스트 ( 문자 )', () => {
     expect(() => {
-      InputView.validateBridgeSize('a');
+      validator.validateBridgeSize('a');
     }).toThrow(ERROR_MESSAGES.NAN);
   });
 
   test('다리 길이 입력값 테스트 ( 특수문자 )', () => {
     expect(() => {
-      InputView.validateBridgeSize('@');
+      validator.validateBridgeSize('@');
     }).toThrow(ERROR_MESSAGES.NAN);
   });
 
   test('다리 길이 범위 테스트 1', () => {
     expect(() => {
-      InputView.validateBridgeSize('2');
+      validator.validateBridgeSize('2');
     }).toThrow(ERROR_MESSAGES.SIZE);
   });
 
   test('다리 길이 범위 테스트 2', () => {
     expect(() => {
-      InputView.validateBridgeSize('21');
+      validator.validateBridgeSize('21');
     }).toThrow(ERROR_MESSAGES.SIZE);
   });
 
   test('다리 길이 범위 테스트 3', () => {
     expect(() => {
-      InputView.validateBridgeSize('3');
+      validator.validateBridgeSize('3');
     }).toBeTruthy();
   });
 });
@@ -37,19 +37,19 @@ describe('다리 길이 입력값 테스트', () => {
 describe('사용자 이동 입력값 테스트', () => {
   test('사용자 이동 입력값 테스트 ( 문자 )', () => {
     expect(() => {
-      InputView.validateMoving('a');
+      validator.validateMove('a');
     }).toThrow(ERROR_MESSAGES.MOVING);
   });
 
   test('사용자 이동 입력값 테스트 ( 문자 )', () => {
     expect(() => {
-      InputView.validateMoving('UD');
+      validator.validateMove('UD');
     }).toThrow(ERROR_MESSAGES.MOVING);
   });
 
   test('사용자 이동 입력값 테스트 ( 문자 )', () => {
     expect(() => {
-      InputView.validateMoving('U');
+      validator.validateMove('U');
     }).toBeTruthy();
   });
 });
