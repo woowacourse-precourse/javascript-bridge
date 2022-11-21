@@ -9,6 +9,9 @@ const ValidCheck = {
     this.isCorrectUpDown(moving);
     this.isOneLetter(moving);
   },
+  gameCommandValidCheck(gameCommand){
+    this.isCorrectRetryQuit(gameCommand);
+  },
   isInRange(bridgeSize){
     if (bridgeSize<3 || bridgeSize>20) {
       try{
@@ -41,6 +44,19 @@ const ValidCheck = {
         throw new Error();
       }catch(e){
         OutputView.printErrorMessageAboutMoving();
+        return true;
+      }
+    }else{
+      return false;
+    }
+  },
+  isCorrectRetryQuit(gameCommand){
+    const IS_RQ = /[RQ]/g;
+    if(IS_RQ.test(gameCommand)==false){
+      try{
+        throw new Error();
+      }catch(e){
+        OutputView.printErrorMessageAboutGameCommand();
         return true;
       }
     }else{
