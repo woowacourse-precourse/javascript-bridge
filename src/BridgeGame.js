@@ -7,6 +7,7 @@ class BridgeGame {
     this.answer = [];
     this.user = '';
     this.count = 1;
+    this.map=[[],[]];
   }
 
   /**
@@ -14,11 +15,43 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(number){
-    if (this.answer[number] === this.user){
+  move(now){
+    this.makeIMap(now);
+    if (this.answer[now] === this.user){
+      this.makeOMap();
       return true;
     }
+    this.makeXMap();
     return false;
+  }
+
+  makeOMap(){
+    if(this.user === 'U'){
+      this.map[0].push('O');
+      this.map[1].push(' ');
+    }
+    else {
+      this.map[1].push('O');
+      this.map[0].push(' ');
+    }
+  }
+
+  makeXMap(){
+    if(this.user === 'U'){
+      this.map[0].push('X');
+      this.map[1].push(' ');
+    }
+    else {
+      this.map[1].push('X');
+      this.map[0].push(' ');
+    }
+  }
+
+  makeIMap(now){
+    if ( now !== 0 ){
+      this.map[0].push('|');
+      this.map[1].push('|');
+    }
   }
 
   /**
