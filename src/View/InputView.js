@@ -11,6 +11,7 @@ const InputView = {
   readBridgeSize(cb) {
     Console.readLine("다리의 길이를 입력해주세요.\n", (inputBridgeSize) => {
       Validator.validateBridgeSize(inputBridgeSize);
+      Console.print("\n");
       cb(parseInt(inputBridgeSize, 10));
     });
   },
