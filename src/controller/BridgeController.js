@@ -1,8 +1,8 @@
 const BridgeGame = require('../model/BridgeGame');
-const OutputView = require('../OutputView');
 const BridgeMaker = require('../BridgeMaker.js');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator.js');
 const InputView = require('../InputView');
+const OutputView = require('../OutputView');
 const Validate = require('../utils/Validate');
 const { Console } = require('@woowacourse/mission-utils');
 
@@ -31,6 +31,16 @@ class BridgeController {
 
     OutputView.printLineBreak();
     this.requestBridgeMovemoment();
+  }
+
+  controlValidate(validate, input) {
+    try {
+      validate(input);
+      return true;
+    } catch (error) {
+      OutputView.printErrorMessage(error);
+      return false;
+    }
   }
 
   requestBridgeMovemoment() {
@@ -92,16 +102,6 @@ class BridgeController {
     const attemps = this.#bridgeGame.getNumberOfAttempts();
     const drawBridge = this.getDrawBridge();
     return OutputView.printResult(drawBridge, result, attemps) || Console.close();
-  }
-
-  controlValidate(validate, input) {
-    try {
-      validate(input);
-      return true;
-    } catch (error) {
-      OutputView.printErrorMessage(error);
-      return false;
-    }
   }
 }
 module.exports = BridgeController;

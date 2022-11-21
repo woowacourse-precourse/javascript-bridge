@@ -1,6 +1,6 @@
+const { Console } = require('@woowacourse/mission-utils');
 const BridgeController = require('../src/controller/BridgeController');
 const BridgeGame = require('../src/model/BridgeGame');
-const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('../src/OutputView');
 
 describe('bridgeController Test', () => {
