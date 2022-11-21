@@ -44,7 +44,7 @@ const Player = {
 
   reset() {
     this.state = [[], []];
-    this.movingArr = [];
+    this.movingArray = [];
     this.playerAnswer = [];
     this.tryingCount += 1;
   },
