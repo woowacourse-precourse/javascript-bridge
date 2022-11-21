@@ -38,11 +38,17 @@ class BridgeGame {
     const IS_USER_CAN_GO = bridge.askUserCanGo(userPosition, STEP);
     // 2.1 갈 수 있으면 또 어디로 가겠냐고 물어봐
     if (IS_USER_CAN_GO) {
+      const GO = 'O';
+      // 1. 지도를 그려
+
+      bridge.drawMap(GO, STEP);
       return gameManager.askWhereToGo(BridgeGame.move);
     }
     // 2.2 못 가면 종료 시켜
     // 1. 지도를 그려
     if (!IS_USER_CAN_GO) {
+      const CANT_GO = 'X';
+      bridge.drawMap(CANT_GO, STEP);
       return gameManager.askRetry(BridgeGame.retry);
       // this.step += 1;
     }
