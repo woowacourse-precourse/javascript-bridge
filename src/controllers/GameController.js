@@ -15,7 +15,7 @@ class GameContoller {
   #gameStatusMap = {
     PLAYING: this.inputMoving.bind(this),
     FAIL: this.inputGameCommand.bind(this),
-    CLEAR: this.onGameClear.bind(this),
+    CLEAR: this.onGameOver.bind(this, '성공'),
   };
 
   start() {
@@ -69,7 +69,7 @@ class GameContoller {
       return;
     }
 
-    this.onQuitCommand();
+    this.onGameOver('실패');
   }
 
   onRetryCommand() {
@@ -78,14 +78,13 @@ class GameContoller {
     this.checkGameStatus();
   }
 
-  onQuitCommand() {
+  onGameOver(status) {
     const map = MapGenerator.toString();
-    OutputView.printResult(map, '실패');
-  }
 
-  onGameClear() {
-    const map = MapGenerator.toString();
-    OutputView.printResult(map, '성공');
+    const stateManager = this.#bridgeGame.getStateManager();
+    const tryCount = stateManager.getTryCount();
+
+    OutputView.printResult(map, status, tryCount);
   }
 }
 
