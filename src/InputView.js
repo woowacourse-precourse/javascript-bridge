@@ -20,7 +20,7 @@ const InputView = {
   },
 
   error: {
-    BRIDGE_SIZE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+    BRIDGE_SIZE: '[ERROR] 다리 길이는 3부터 20 사이의 정수여야 합니다.',
     MOVEMENT: '[ERROR] 이동할 칸은 U 또는 D만 가능합니다.',
     COMMAND: '[ERROR] 게임 옵션은 R 또는 Q만 가능합니다.',
   },
@@ -45,6 +45,7 @@ const InputView = {
   validateSize(size) {
     const isInValid =
       isNaN(size) ||
+      !Number.isInteger(size) ||
       size < this.bridgeLength.MIN ||
       this.bridgeLength.MAX < size
 
