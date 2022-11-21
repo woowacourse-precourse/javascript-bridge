@@ -114,7 +114,7 @@ class BridgeController {
       this.#Game.retry();
       this.getMove();
     }
-    if (command === INPUT_RETRY.quit) this.finishControl(false);
+    if (command === INPUT_RETRY.quit) this.finishControl();
   };
 
   /**
