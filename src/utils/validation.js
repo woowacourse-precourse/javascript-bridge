@@ -13,3 +13,11 @@ const userRetryInputCheck = (retry)=>{
 const bridgeInputStringCheck = (number)=>{
   return !isNaN(number)
 }
+
+const isBridgeLengthFloat = (number)=>{
+  return !number.includes('.');
+}
+
+const isBridgeLengthVaccum = (number)=>{
+  return !(number ===" ");
+}
