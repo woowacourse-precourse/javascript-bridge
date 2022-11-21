@@ -28,12 +28,28 @@ const { makeBridge } = require("./BridgeMaker");
    */
     move(userUD) {
       let nowbridge = this.bridge[this.currSpot] ;
-      if (userUD == nowbridge) this.addPrintMap(userUD, "O") ;  //addPrintMap = 프린트용 배열에 요소 넣기 함수
+      if (userUD == nowbridge) this.addPrintMap(userUD, "O") ; 
       else this.addPrintMap(userUD, "X")
       this.currSpot++ ;
       return userUD == nowbridge ? "Go" : "Stop" ;
     }
-  
+
+    /**
+     * User의 UpDown과 그 결과를 print를 위한 배열에 추가하는 함수
+     * @param {string} UD User에게 받은 U/D
+     * @param {string} correct User에게 받은 U/D과 정답다리를 비교한 결과 (ex. "O","X")
+     * @return {arr} 다리를 프린팅하기 위한 배열 (ex.[["   "," O "],[" O ","   "]])
+     */
+    addPrintMap(UD, correct){
+      if (UD == "U") {
+        this.printMap[0].push(correct)
+        this.printMap[1].push(" ") ;
+      } else {
+        this.printMap[0].push(" ") ;
+        this.printMap[1].push(correct) ;
+      }
+      return this.printMap ;
+    }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
