@@ -5,21 +5,22 @@ const GAME_SIGNATURE = require('./utils/constant');
  */
 class Controller {
   constructor(
-    { bridgeRandomNumberGenerator, bridgeMaker, bridgeGame },
-    { outputView, inputView, validator }
+    { bridgeGame, bridgeMaker, bridgeRandomNumberGenerator },
+    { inputView, outputView, validator }
   ) {
     this.bridgeGame = bridgeGame;
-    this.bridgeRandomNumberGenerator = bridgeRandomNumberGenerator;
     this.bridgeMaker = bridgeMaker;
-    this.outputView = outputView;
+    this.bridgeRandomNumberGenerator = bridgeRandomNumberGenerator;
     this.inputView = inputView;
+    this.outputView = outputView;
     this.validator = validator;
+
     this.start();
-    this.askBridgeSize();
   }
 
   start() {
     this.outputView.printStartMessage();
+    this.askBridgeSize();
   }
 
   askBridgeSize() {
@@ -28,7 +29,6 @@ class Controller {
 
   handleMakingBridge(size) {
     this.validateBy(this.validator.checkBridgeSize, size);
-
     const bridge = this.bridgeMaker.makeBridge(size, this.bridgeRandomNumberGenerator.generate);
     this.bridgeGame.setBridge(bridge);
     this.outputView.newLine();
@@ -41,13 +41,13 @@ class Controller {
 
   handleMoving(direction) {
     this.validateBy(this.validator.checkMoving, direction);
-
     this.bridgeGame.move(direction);
     this.outputView.printMap(this.bridgeGame.trials);
 
     if (this.bridgeGame.status === GAME_SIGNATURE.gameOn) this.askMoveDirection();
     else if (this.bridgeGame.status === GAME_SIGNATURE.gameFail) this.askGameCommand();
     else if (this.bridgeGame.status === GAME_SIGNATURE.gameSuccess) this.end();
+
     return;
   }
 
@@ -62,10 +62,8 @@ class Controller {
   handleGameCommand(command) {
     this.validateBy(this.validator.checkGameCommand, command);
 
+    if (command === 'Q') this.end();
     if (command === 'R') this.retry();
-    else if (command === 'Q') this.end();
-
-    return;
   }
 
   validateBy(handleChecking, input) {
