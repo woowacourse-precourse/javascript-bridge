@@ -6,7 +6,7 @@ const InputView = {
       try {
         callback(answer);
       } catch (e) {
-        console.log(e);
+        Console.print(e);
         this.readBridgeSize(callback);
       }
     });
@@ -19,7 +19,7 @@ const InputView = {
         try {
           callback(answer);
         } catch (e) {
-          console.log(e);
+          Console.print(e);
           this.readMoving(callback);
         }
       }
@@ -33,7 +33,7 @@ const InputView = {
         try {
           callback(answer);
         } catch (e) {
-          console.log(e);
+          Console.print(e);
           this.readGameCommand(callback);
         }
       }
