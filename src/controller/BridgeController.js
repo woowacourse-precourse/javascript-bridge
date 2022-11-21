@@ -61,11 +61,12 @@ class BridgeController {
   }
 
   /**
-   * 현재까지의 유저의 움직임 성공유무들을 반환하는 메서드 연결체
-   * @param userMoving {string[]} [유저 움직임 기록]
+   * 이동 기록과 다리를 대조하여 다리별 성공여부를 반환하는 메서드 연결체
+   * @param userMoving [유저 이동 기록]
+   * @return {{up: string[], down: string[]}} [다리별 움직임 성공여부]
    */
-  getMovingRecords(userMoving) {
-    return this.bridgeModel.getMovingRecords(userMoving);
+  getMovingStatus(userMoving) {
+    return this.bridgeModel.getMovingStatus(userMoving);
   }
 }
 
