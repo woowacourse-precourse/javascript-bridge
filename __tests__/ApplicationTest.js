@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
+const { ERROR_MESSAGE } = require('../src/constants/constants');
 
 // readLine 통해 들어온 값들 answer로.
 const mockQuestions = (answers) => {
@@ -94,7 +95,7 @@ describe('다리 건너기 테스트', () => {
     const app = new App();
     app.play();
     const log = getOutput(logSpy);
-    expectLogContains(log, ['[ERROR] U와 D중 한 글자만 입력해 주세요.']);
+    expectLogContains(log, [ERROR_MESSAGE.INVALID_MOVE]);
   });
 
   test('재시작 시 예외처리 테스트', () => {
@@ -105,7 +106,7 @@ describe('다리 건너기 테스트', () => {
     const app = new App();
     app.play();
     const log = getOutput(logSpy);
-    expectLogContains(log, ['[ERROR] R와 Q중 한 글자만 입력해 주세요.']);
+    expectLogContains(log, [ERROR_MESSAGE.INVALID_QUIT]);
   });
 
   test('예외 테스트', () => {
