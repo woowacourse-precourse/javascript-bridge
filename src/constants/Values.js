@@ -11,6 +11,9 @@ const SIZE = {
     PASS: "O",
     UNPASSED: "X",
     BLANK: " ",
+    JUMP: " | ",
+    START_BRIDGE: "[",
+    END_BRIDGE: "]",
   };
 
   const RETRY = {
@@ -23,4 +26,10 @@ const SIZE = {
     FAIL: "실패",
   };
 
-module.exports = { SIZE, MOVING, RETRY, RESULT };
+  const CONTROL = {
+    PASS_STEP: 1,
+    GAME_END: 2,
+    GAME_OVER: 3,
+  };
+
+module.exports = { SIZE, MOVING, RETRY, RESULT, CONTROL };
