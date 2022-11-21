@@ -15,52 +15,40 @@ class App {
   }
 
   requestBridgeLength() {
-    InputView.readBridgeSize(this.makeBridge.bind(this));
+    InputView.readBridgeSize.call(this, this.makeBridge);
   }
 
   makeBridge(length) {
-    try {
-      InputVaildation.ofBridgeLength(length);
-      this.bridgeGame.buildBridge(length);
-      this.requestMove();
-    } catch {
-      OutputView.printWrongInputOfBridgeLength();
-      this.requestBridgeLength();
-    }
+    this.bridgeGame.buildBridge(length);
+    this.requestMove();
   }
 
   requestMove() {
-    InputView.readMoving(this.moveUser.bind(this));
+    InputView.readMoving.call(this, this.moveUser);
   }
 
   moveUser(upOrDown) {
-    try {
-      InputVaildation.ofMove(upOrDown);
-      this.bridgeGame.move(upOrDown);
-      const bridge = this.bridgeGame.moveTracking();
-      OutputView.printMap(bridge);
-    } catch {
-      OutputView.printWrongInputOfMoving();
-      this.requestMove();
-    }
+    this.bridgeGame.move(upOrDown);
+    OutputView.printMap(this.bridgeGame.moveTracking());
     if (this.bridgeGame.isMovable()) {
-      if (this.bridgeGame.isWin()) {
-        OutputView.printResult(
-          this.bridgeGame.moveTracking(),
-          this.bridgeGame.isWin(),
-          this.bridgeGame.tryCount
-        );
-        Console.close();
-      } else {
-        this.requestMove();
-      }
+      this.requestMove();
     } else {
       this.requestContinue();
+    }
+    if (this.bridgeGame.isWin()) {
+      OutputView.printResult(
+        this.bridgeGame.moveTracking(),
+        this.bridgeGame.isWin(),
+        this.bridgeGame.tryCount
+      );
+      Console.close();
+    } else {
+      this.requestMove();
     }
   }
 
   requestContinue() {
-    InputView.readRetryOrQuit(this.retryOrQuit.bind(this));
+    InputView.readRetryOrQuit.call(this, this.retryOrQuit);
   }
 
   retryOrQuit(userChoice) {
@@ -68,10 +56,12 @@ class App {
       this.requestMove();
     }
     if (this.bridgeGame.quit(userChoice)) {
-      const map = this.bridgeGame.moveTracking();
-      const gameResult = this.bridgeGame.isWin();
-      OutputView.printMap(map);
-      OutputView.printResult(gameResult);
+      OutputView.printMap(this.bridgeGame.moveTracking());
+      OutputView.printResult(
+        this.bridgeGame.moveTracking(),
+        this.bridgeGame.isWin(),
+        this.bridgeGame.tryCount
+      );
     }
   }
 }
