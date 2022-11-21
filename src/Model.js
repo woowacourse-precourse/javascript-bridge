@@ -52,6 +52,10 @@ class Model {
     this.#userDownBridgeArr = [];
     this.#userUpBridgeArr = [];
   }
+
+  getTryCount() {
+    return this.#totalTryCount;
+  }
 }
 
 module.exports = Model;
