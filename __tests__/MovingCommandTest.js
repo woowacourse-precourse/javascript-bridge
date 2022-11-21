@@ -30,9 +30,9 @@ describe('이동 커맨드 클래스 테스트', () => {
   test.each([
     ['U', 'U', true],
     ['U', 'D', false],
-  ])('다리를 건넜는지 확인', (command, current, expected) => {
+  ])('다리를 건넜는지 확인', (command, currentBridge, expected) => {
     const movingCommand = new MovingCommand(command);
-    const result = movingCommand.isCrossed(current);
+    const result = movingCommand.isCrossed(currentBridge);
 
     expect(result).toEqual(expected);
   });

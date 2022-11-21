@@ -6,7 +6,7 @@ describe('다리 클래스 테스트', () => {
     [1, 'D'],
   ])('현재 위치를 반환', (location, expected) => {
     const bridge = new Bridge(['U', 'D', 'D']);
-    const result = bridge.current(location);
+    const result = bridge.getCurrentBridge(location);
 
     expect(result).toEqual(expected);
   });

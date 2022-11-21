@@ -14,11 +14,11 @@ describe('다리 지도 클래스 테스트', () => {
     ['D', 'D', 1, [true]],
   ])(
     '현재 위치의 값이 입력값과 같으면 해당 다리 배열에 true 추가',
-    (command, current, index, expected) => {
+    (command, currentBridge, index, expected) => {
       const movingCommand = new MovingCommand(command);
 
       const bridgeMap = new BridgeMap();
-      bridgeMap.add(movingCommand, current);
+      bridgeMap.add(movingCommand, currentBridge);
       const result = bridgeMap.getMap()[index];
 
       expect(result).toStrictEqual(expected);
@@ -30,11 +30,11 @@ describe('다리 지도 클래스 테스트', () => {
     ['D', 'U', 1, [false]],
   ])(
     '현재 위치의 값이 입력값과 다르면 해당 다리 배열에 false 추가',
-    (command, current, index, expected) => {
+    (command, currentBridge, index, expected) => {
       const movingCommand = new MovingCommand(command);
 
       const bridgeMap = new BridgeMap();
-      bridgeMap.add(movingCommand, current);
+      bridgeMap.add(movingCommand, currentBridge);
       const result = bridgeMap.getMap()[index];
 
       expect(result).toStrictEqual(expected);
@@ -44,11 +44,11 @@ describe('다리 지도 클래스 테스트', () => {
   test.each([
     ['U', 'D', 1, [null]],
     ['D', 'U', 0, [null]],
-  ])('입력값과 다른 위치의 다리 배열에 null 추가', (command, current, index, expected) => {
+  ])('입력값과 다른 위치의 다리 배열에 null 추가', (command, currentBridge, index, expected) => {
     const movingCommand = new MovingCommand(command);
 
     const bridgeMap = new BridgeMap();
-    bridgeMap.add(movingCommand, current);
+    bridgeMap.add(movingCommand, currentBridge);
     const result = bridgeMap.getMap()[index];
 
     expect(result).toStrictEqual(expected);
