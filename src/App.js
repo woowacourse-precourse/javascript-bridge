@@ -1,12 +1,15 @@
-const { Bridge } = require('./models');
-const { BridgeGame } = require('./controllers');
-const { BridgeView } = require('./views');
+const { BridgeGame } = require('./models');
+const { BridgeGameController } = require('./controllers');
+const { BridgeGameView } = require('./views');
 
 class App {
   #game;
 
   constructor() {
-    this.#game = new BridgeGame(new Bridge(), new BridgeView());
+    this.#game = new BridgeGameController(
+      new BridgeGame(),
+      new BridgeGameView(),
+    );
   }
 
   play() {

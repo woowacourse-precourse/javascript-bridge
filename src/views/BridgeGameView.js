@@ -1,7 +1,7 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
-class BridgeView {
+class BridgeGameView {
   #input;
   #output;
 
@@ -39,4 +39,4 @@ class BridgeView {
   }
 }
 
-module.exports = BridgeView;
+module.exports = BridgeGameView;

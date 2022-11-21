@@ -1,7 +1,4 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-class BridgeGame {
+class BridgeGameController {
   #model;
   #view;
 
@@ -10,9 +7,6 @@ class BridgeGame {
     this.#view = view;
   }
 
-  /**
-   * 사용자가 게임을 시작할 때 사용하는 메서드
-   */
   start() {
     this.#view.printStart();
     this.#requestBridgeSize();
@@ -25,43 +19,36 @@ class BridgeGame {
   #handleInputBridgeSize(size) {
     try {
       const bridgeSize = Number(size);
-      this.#model.setBridge(bridgeSize);
-      this.move(0);
+
+      this.#model.makeBridge(bridgeSize);
+      this.#requestMoveDirection();
     } catch (error) {
       this.#view.print(`\n${error.message}\n`);
       this.#requestBridgeSize();
     }
   }
 
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move(moveCount) {
-    if (moveCount >= this.#model.size()) {
+  #requestMoveDirection(round = 0) {
+    if (this.#model.isLastRound(round)) {
       return;
     }
 
-    this.#view.readMoving(this.#handleInputMoving.bind(this, moveCount));
+    this.#view.readMoving(this.#handleInputMoveDirection.bind(this, round));
   }
 
-  #handleInputMoving(moveCount, direction) {
+  #handleInputMoveDirection(round, direction) {
     try {
-      const isMovable = this.#model.isMovable(direction, moveCount);
-      const progress = isMovable
-        ? this.#moveNext.bind(this, moveCount)
+      const { map, movingState } = this.#model.move(round, direction);
+      const progress = movingState
+        ? this.#requestMoveDirection.bind(this, round + 1)
         : this.retry.bind(this);
 
+      this.#view.printMap(map, movingState);
       progress();
     } catch (error) {
       this.#view.print(`\n${error.message}\n`);
-      this.move(moveCount);
+      this.#requestMoveDirection(round);
     }
-  }
-
-  #moveNext(moveCount) {
-    this.move(moveCount + 1);
   }
 
   /**
@@ -77,4 +64,4 @@ class BridgeGame {
   quit() {}
 }
 
-module.exports = BridgeGame;
+module.exports = BridgeGameController;

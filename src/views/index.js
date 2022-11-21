@@ -1,9 +1,9 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const BridgeView = require('./BridgeView');
+const BridgeGameView = require('./BridgeGameView');
 
 module.exports = {
   InputView,
   OutputView,
-  BridgeView,
+  BridgeGameView,
 };

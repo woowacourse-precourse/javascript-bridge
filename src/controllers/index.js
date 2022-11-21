@@ -1,5 +1,5 @@
-const BridgeGame = require('./BridgeGame');
+const BridgeGameController = require('./BridgeGameController');
 
 module.exports = {
-  BridgeGame,
+  BridgeGameController,
 };
