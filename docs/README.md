@@ -7,9 +7,10 @@
 [O] 입력한 수만큼 다리를 생성해준뒤 배열로 return 해주는 기능구현
 [O] Retry일 때 배열이 초기화 되는 로직추가
 [O] 출력문 초기화
-[] ApplicationTest가 원하는대로 로직수정
 [O] 문제 : 원본배열에 shift를 해서 Restart할 때 문제가 생기므로 이 부분 수정
 [O] 파생된 문제 : count가 초기화되는듯 -> 수정완료
+[] ApplicationTest가 원하는대로 로직수정
+[] 테스트 케이스 작성
 
 ## 테스트케이스에 맞도록 재수정
 1. BridgeMaker "U" "D" "U" 이런식으로 배열이 생성되도록
@@ -43,7 +44,7 @@
 
 ## 에러처리
 
-### InputViewTest.js
+### InputTest.js
 - readBridegeSize() - 음수,문자,범위에서 벗어나는 수 에러처리
 - readMoving() : U,D가 아닌 모든 것들 에러처리
 - readGameCommand() : R,Q가 아닌 값 에러처리
