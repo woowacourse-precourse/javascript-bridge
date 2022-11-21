@@ -1,5 +1,5 @@
-const { printMessage, createMap } = require("./utils/index");
-const { GAME_MESSAGE } = require("./constants");
+const { printMessage, createMap } = require("../utils/index");
+const { GAME_MESSAGE } = require("../constants/index");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */

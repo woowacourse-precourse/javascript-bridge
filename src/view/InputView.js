@@ -4,8 +4,8 @@ const {
   isMoveValid,
   isCommandValid,
   printMessage,
-} = require("./utils/index");
-const { GAME_MESSAGE, COMMAND_VALUE } = require("./constants/index");
+} = require("../utils/index");
+const { GAME_MESSAGE, COMMAND_VALUE } = require("../constants/index");
 const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
