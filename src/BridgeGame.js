@@ -20,7 +20,7 @@ const RecallUntilCorrect = require("./RecallUntilCorrect.js");
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moveCount) {
-    const moving = RecallUntilCorrect.recallReadMoving(true);
+    const moving = RecallUntilCorrect.recallReadMoving();
     return this.comparePlayerAndMap(moving, moveCount);
   }
   comparePlayerAndMap(moving, moveCount){
@@ -50,7 +50,7 @@ const RecallUntilCorrect = require("./RecallUntilCorrect.js");
       return["  "+" |", " X"+" |"]; 
   }
   isRetryOrQuit(){
-    const gameCommand = RecallUntilCorrect.recallreadGameCommand(true);
+    const gameCommand = RecallUntilCorrect.recallreadGameCommand();
     if(gameCommand==="R"){
       return this.retry();
     }

@@ -10,84 +10,86 @@ const ValidCheck = {
       ApplicationTest를 수정하면 안될 것 같아 반복 기능을 멈추게 해두었다.
     */
   bridgeSizeValidCheck(bridgeSize){
-      let flag1 = this.sizeIsNumber(bridgeSize);
-      let flag2 = this.isInRange(bridgeSize);
-      return false;
-      //return (flag1 || flag2);
+    let flag1 = this.sizeIsNumber(bridgeSize);
+    let flag2 = this.isInRange(bridgeSize);
+    //return false;
+    return (flag1 || flag2);
   },
+
   movingValidCheck(moving){
-      let flag1 = this.isCorrectUpDown(moving);
-      let flag2 = this.isOneLetter(moving);
-      return false;
-      //return (flag1 || flag2);
+    let flag1 = this.isCorrectUpDown(moving);
+    let flag2 = this.isOneLetter(moving);
+    //return false;
+    return (flag1 || flag2);
   },
+
   gameCommandValidCheck(gameCommand){
-      let flag1 = this.isCorrectRetryQuit(gameCommand);
-      let flag2 = this.isOneLetter(gameCommand);
-      return false;
-      //return (flag1 || flag2);  
+    let flag1 = this.isCorrectRetryQuit(gameCommand);
+    let flag2 = this.isOneLetter(gameCommand);
+    //return false;
+    return (flag1 || flag2);  
   },
+
   isInRange(bridgeSize){
-    if (bridgeSize<3 || bridgeSize>20) {
-      try{
+    try{
+      if (bridgeSize<3 || bridgeSize>20) {
         throw new Error();
-      }catch(e){
-        OutputView.printErrorMessageAboutBridgeSize();
-        return true;
       }
-    }else{
       return false;
+    }catch(e){
+      OutputView.printErrorMessageAboutBridgeSize();
+      return true;
     }
   },
+
   sizeIsNumber(bridgeSize){
     const IS_NOT_NUMBER = /\D/g;
-    if(IS_NOT_NUMBER.test(bridgeSize)){
-      try{
+    try{
+      if(IS_NOT_NUMBER.test(bridgeSize)){
         throw new Error();
-      }catch(e){
-        OutputView.printErrorMessageAboutBridgeSize();
-        return true;
       }
-    }else{
       return false;
+    }catch(e){
+      OutputView.printErrorMessageAboutBridgeSize();
+      return true;
     }
   },
+
   isCorrectUpDown(moving){
-    const IS_UD = /[UD]/g;
-    if(IS_UD.test(moving)==false){
-      try{
+    const IS_UD = /[UD]/g;  
+    try{
+      if(IS_UD.test(moving)==false){
         throw new Error();
-      }catch(e){
-        OutputView.printErrorMessageAboutMoving();
-        return true;
       }
-    }else{
-      return false;
+        return false;
+    }catch(e){
+      OutputView.printErrorMessageAboutMoving();
+      return true;
     }
   },
+
   isCorrectRetryQuit(gameCommand){
     const IS_RQ = /[RQ]/g;
-    if(IS_RQ.test(gameCommand)==false){
-      try{
+    try{
+      if(IS_RQ.test(gameCommand)==false){
         throw new Error();
-      }catch(e){
-        OutputView.printErrorMessageAboutGameCommand();
-        return true;
       }
-    }else{
       return false;
+    }catch(e){
+      OutputView.printErrorMessageAboutGameCommand();
+      return true;
     }
   },
+
   isOneLetter(letter){
-    if(letter.length!==1){
-      try{
+    try{
+      if(letter.length!==1){
         throw new Error();
-      }catch(e){
-        OutputView.printErrorMessageAboutOneLetter();
-        return true;
       }
-    }else{
       return false;
+    }catch(e){
+      OutputView.printErrorMessageAboutOneLetter();
+      return true;
     }
   }
 };

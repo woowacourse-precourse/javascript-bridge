@@ -1,28 +1,31 @@
 const InputView = require("./InputView.js");
 const ValidCheck = require("./ValidCheck.js");
 const RecallUntilCorrect = {
-  recallReadBridgeSize(recallUntilCorrect){
+  recallReadBridgeSize(){
     let bridgeSize;
-    while(recallUntilCorrect){
-      bridgeSize = InputView.readBridgeSize();
-      recallUntilCorrect = ValidCheck.bridgeSizeValidCheck(bridgeSize);
+    bridgeSize = InputView.readBridgeSize();
+    let recallUntilCorrect = ValidCheck.bridgeSizeValidCheck(bridgeSize);
+    if(recallUntilCorrect === true){
+      this.recallReadBridgeSize();
     }
     return bridgeSize;
   },
-  recallReadMoving(recallUntilCorrect){
+  recallReadMoving(){
     let moving;
-    while(recallUntilCorrect){
-      moving = InputView.readMoving();
-      recallUntilCorrect = ValidCheck.movingValidCheck(moving);
+    moving = InputView.readMoving();
+    let recallUntilCorrect = ValidCheck.movingValidCheck(moving);
+    if(recallUntilCorrect === true){
+      this.recallReadMoving();
     }
     return moving;
   },
-  recallreadGameCommand(recallUntilCorrect){
+  recallreadGameCommand(){
     let gameCommand;
-    while(recallUntilCorrect){
-      gameCommand = InputView.readGameCommand();
-      recallUntilCorrect = ValidCheck.gameCommandValidCheck(gameCommand);
-    }
+    gameCommand = InputView.readGameCommand();
+    let recallUntilCorrect = ValidCheck.gameCommandValidCheck(gameCommand);
+    if(recallUntilCorrect === true){
+      this.recallreadGameCommand();
+    }    
     return gameCommand;
   },
 }

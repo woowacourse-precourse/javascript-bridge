@@ -6,7 +6,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 class App {
   setting(){
     OutputView.printGameStart();
-    const BRIDGE_SIZE = RecallUntilCorrect.recallReadBridgeSize(true);
+    const BRIDGE_SIZE = RecallUntilCorrect.recallReadBridgeSize();
     const BRIDGE_MAP = BridgeMaker.makeBridge(BRIDGE_SIZE,BridgeRandomNumberGenerator.generate);
     return BRIDGE_MAP;
   }
