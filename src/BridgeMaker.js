@@ -11,10 +11,9 @@ const BridgeMaker = {
         const bridge = []
 
         for (let i = 0; i < size; i++) {
-            const randomNumber = generateRandomNumber()
-            console.log(randomNumber)
-            if (randomNumber === 1) bridge.push('U')
-            if (randomNumber === 0) bridge.push('D')
+            const randomNumber = generateRandomNumber().toString()
+            if (randomNumber === "1") bridge.push('U')
+            if (randomNumber === "0") bridge.push('D')
         }
         return bridge
     },

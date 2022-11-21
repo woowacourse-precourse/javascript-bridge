@@ -25,7 +25,6 @@ class BridgeGame {
     this.#playerUp = [];
     this.#i=0;
     playerMoveList.map((move)=>{
-      console.log(this.#bridge, this.#i, playerMoveList),
       this.moveCompareUpDown(move)
       this.#i++;
     })
