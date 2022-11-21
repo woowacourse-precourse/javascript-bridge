@@ -1,3 +1,5 @@
+const GameCommandException = require('../exception/GameCommandException');
+
 class GameCommand {
   static #COMMAND = {
     retry: 'R',
@@ -6,8 +8,9 @@ class GameCommand {
 
   static validate(command) {
     const { values } = Object;
-    if (!values(GameCommand.#COMMAND).includes(command)) {
-      throw new Error('[ERROR] 존재하지 않는 커맨트 입니다.');
+    const commands = values(GameCommand.#COMMAND);
+    if (!commands.includes(command)) {
+      throw new GameCommandException(commands);
     }
   }
 
