@@ -26,10 +26,10 @@ const InputView = {
       printMap(bridgeGame, step, moving);
       const isMovable = bridgeGame.move(step, moving);
       const bridgeSize = bridgeGame.getBridgeSize();
-      if (!isMovable) app.printResult(bridgeGame, step, moving);
+      if (!isMovable) app.readGameCommand();
       else {
         if (step < bridgeSize - 1) app.step(bridgeGame, step + 1);
-        else app.readGameCommand();
+        else app.printResult(bridgeGame, step, moving);
       }
     });
   },
