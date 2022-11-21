@@ -16,6 +16,7 @@ const OutputView = {
     this.printMap(upBridge, downBridge);
     MissionUtils.Console.print(OutputMessage.RESULT(isSuccess));
     MissionUtils.Console.print(OutputMessage.TRY_NUMBER(tryNumber));
+    MissionUtils.Console.close();
   },
 };
 

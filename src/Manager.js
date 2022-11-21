@@ -14,6 +14,7 @@ class Manager{
     InputView.readBridgeSize((size) => {
       Validation.isValidSize(size);
       this.bridgeGame.makeBridge(size);
+
       this.requestDirection();
     });
   }
@@ -23,11 +24,35 @@ class Manager{
       Validation.isValidDirection(direction);
       this.bridgeGame.move(direction);
 
-      const [upBridge, downBridge] = this.bridgeGame.getCurrentMap();
-      OutputView.printMap(upBridge, downBridge);
+      this.requestMap();
 
       const isCorrect = this.bridgeGame.getIsCorrect();
-      isCorrect ? this.requestDirection() : console.log("게임 결과 출력");
+      const isSuccess = this.bridgeGame.getIsSuccess();
+      isSuccess ? this.requestResult() : (isCorrect ? this.requestDirection() : this.requestGameCommand());
+    });
+  }
+
+  requestMap(){
+    const [upBridge, downBridge] = this.bridgeGame.getCurrentMap();
+    OutputView.printMap(upBridge, downBridge);
+  }
+
+  requestResult(){
+    const [upBridge, downBridge] = this.bridgeGame.getCurrentMap();
+    const isSuccess = this.bridgeGame.getIsSuccess();
+    const tryNumber = this.bridgeGame.getTryNumber();
+    OutputView.printResult(upBridge, downBridge, isSuccess, tryNumber);
+  }
+
+  requestGameCommand(){
+    InputView.readGameCommand((retryOrQuit) => {
+      Validation.isValidRetryOrQuitInput(retryOrQuit);
+      if (retryOrQuit === "Q"){
+        this.requestResult();
+        return;
+      }
+      this.bridgeGame.retry();
+      this.requestDirection();
     });
   }
 }

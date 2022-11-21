@@ -11,12 +11,29 @@ class BridgeGame {
   #currentIndex;
   #tryNumber;
   #isCorrect;
+  #isSuccess;
 
   constructor(){
     this.#upBridge = [];
     this.#downBridge = [];
     this.#tryNumber = 1
     this.#currentIndex = 0;
+  }
+
+  getCurrentMap(){
+    return [this.#upBridge, this.#downBridge];
+  }
+  
+  getIsCorrect(){
+    return this.#isCorrect;
+  }
+
+  getIsSuccess(){
+    return this.#isSuccess;
+  }
+
+  getTryNumber(){
+    return this.#tryNumber;
   }
 
   makeBridge(size){
@@ -26,14 +43,6 @@ class BridgeGame {
 
   compareBridgeWithDirection(direction){
     this.#isCorrect = this.#bridge[this.#currentIndex] === direction ? true : false;
-  }
-
-  getCurrentMap(){
-    return [this.#upBridge, this.#downBridge];
-  }
-  
-  getIsCorrect(){
-    return this.#isCorrect;
   }
 
   addUpMap(isCorrect){
@@ -48,11 +57,25 @@ class BridgeGame {
 
   move(direction) {
     this.compareBridgeWithDirection(direction);
+    this.isSuccess();
     direction === "U" ? this.addUpMap(this.#isCorrect) : this.addDownMap(this.#isCorrect);
     this.#currentIndex += 1;
   }
 
-  retry() {}
+  isSuccess(){
+    this.#isSuccess = (this.#bridge.length-1 === this.#currentIndex && this.#isCorrect) ? true : false;
+  }
+
+  countTryNumber() {
+    this.#tryNumber += 1;
+  }
+
+  retry() {
+    this.#isSuccess ? this.#tryNumber = 1 : this.countTryNumber();
+    this.#upBridge = [];
+    this.#downBridge = [];
+    this.#currentIndex = 0;
+  }
 }
 
 module.exports = BridgeGame;
