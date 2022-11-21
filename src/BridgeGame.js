@@ -1,7 +1,7 @@
 const Bridge = require('./Bridge');
 const Map = require('./Map');
 const { readBridgeSize, readMoving } = require('./InputView');
-const { printStart } = require('./OutputView');
+const { printStart, printMap } = require('./OutputView');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -34,6 +34,7 @@ class BridgeGame {
     const isMovable = this.#bridge.judgeIsMovable(movingCommand);
 
     const mapRows = this.#map.record(isMovable, movingCommand);
+    printMap(mapRows);
   }
 
   /**
