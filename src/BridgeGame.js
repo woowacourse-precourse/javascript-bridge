@@ -7,7 +7,6 @@ const BridgeMaker = require("./BridgeMaker");
 class BridgeGame {
   #tryCount = 1;
   #moveCount = 0;
-  #bridgeSize = 0;
   #bridge = [];
   #user = [];
   #status = "";
@@ -23,9 +22,8 @@ class BridgeGame {
     return this.#bridge
   }
   setBridge(input) {
-    this.#bridgeSize = Number(input);
     this.#bridge = BridgeMaker.makeBridge(
-      this.#bridgeSize, 
+      Number(input), 
       BridgeRandomNumberGenerator.generate
     );
   }
@@ -39,7 +37,7 @@ class BridgeGame {
   }
   setStaus() {
     const isCorrect = this.#bridge[this.#moveCount - 1] === this.#user[this.#moveCount - 1];
-    const isEnd = this.#moveCount === this.#bridgeSize
+    const isEnd = this.#moveCount === this.#bridge.length
 
     if (isEnd && isCorrect) {
       this.#status = "END"
