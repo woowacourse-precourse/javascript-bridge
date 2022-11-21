@@ -42,7 +42,7 @@ describe('Game 유닛 테스트', () => {
   });
   test('result getter 테스트: 빈 이중배열로 초기화되며, 일치하는 값에 맞게 result가 출력', () => {
     const numberInput = 3;
-    const randomNumbers = ['1', '0', '0'];
+    const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
@@ -68,7 +68,7 @@ describe('Game 유닛 테스트', () => {
   });
   test('isRemoving 메소드 테스트: 총 bridge의 length보다 입력값이 작으면 true', () => {
     const inputNumber = 3;
-    const randomNumbers = ['1', '0', '0'];
+    const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
@@ -81,7 +81,7 @@ describe('Game 유닛 테스트', () => {
   });
   test('isEnd 메소드 테스트: input의 값을 넣지 않으면 false input값과 bridge가 맞아떨어지면 true', () => {
     const inputNumber = 3;
-    const randomNumbers = ['1', '0', '0'];
+    const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
@@ -95,7 +95,7 @@ describe('Game 유닛 테스트', () => {
   });
   test('isWin 메소드 테스트:input 값이 없으면 false, input과 bridge가 맞아떨어지면 true', () => {
     const inputNumber = 3;
-    const randomNumbers = ['1', '0', '0'];
+    const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());

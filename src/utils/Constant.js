@@ -23,8 +23,8 @@ const RETRY_MESSAGE = Object.freeze({
 });
 
 const BRIDGE_ELEMENT = Object.freeze({
-  UP: '1',
-  DOWN: '0',
+  UP: 1,
+  DOWN: 0,
 });
 
 const OUTPUT_MESSAGE = Object.freeze({

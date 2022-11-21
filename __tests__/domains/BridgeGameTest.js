@@ -28,7 +28,7 @@ describe('Game 도메인 로직 테스트', () => {
   });
 
   test('게임 실패 및 성공여부 출력', () => {
-    const randomNumbers = ['1', '0', '0'];
+    const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
@@ -43,7 +43,7 @@ describe('Game 도메인 로직 테스트', () => {
   });
 
   test('게임의 resultMap 출력 테스트', () => {
-    const randomNumbers = ['1', '0', '0'];
+    const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());

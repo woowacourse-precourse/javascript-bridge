@@ -9,7 +9,7 @@ const Bridge = require('../../src/Model/Bridge');
 
 describe('Bridge 도메인 로직 테스트', () => {
   test('다리 생성 함수 테스트', () => {
-    const randomNumbers = ['1', '0', '0'];
+    const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
