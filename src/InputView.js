@@ -34,8 +34,12 @@ const InputView = {
       OutputView.printMap(up, down);
 
       if (!proceedMove) this.readGameCommand(bridgeGame, up, down, proceedMove);
-
-      this.readMoving(bridgeGame);
+      if (proceedMove && bridgeGame.isArriveToEnd()) {
+        bridgeGame.quit();
+        OutputView.printResult(up, down, proceedMove, bridgeGame.getTotalTry());
+      }
+      if (proceedMove && !bridgeGame.isArriveToEnd())
+        this.readMoving(bridgeGame);
     });
   },
 

@@ -84,6 +84,14 @@ class BridgeGame {
   }
 
   /**
+   * 다리의 끝 지점에 도착했는지 리턴하는 메서드
+   * <p>
+   */
+  isArriveToEnd() {
+    return this.#bridge.getLength() === this.#round + 1;
+  }
+
+  /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    */

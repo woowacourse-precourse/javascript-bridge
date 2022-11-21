@@ -7,6 +7,10 @@ class Bridge {
     this.#map = map;
   }
 
+  getLength() {
+    return this.#length;
+  }
+
   getMap() {
     return this.#map;
   }
