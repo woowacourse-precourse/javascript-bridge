@@ -118,7 +118,7 @@ class BridgeGame {
   }
 
   /**
-   * 
+   * 이동 경로 출력 배열에 O 또는 X를 저장하는 메서드
    * @param {string[2][]} upDownHistory 위 다리의 이동 경로는 upDownHistory[0], 아래 다리의 이동경로는 upDownHistory[1] 
    * @param {number} position 현재 위치
    * @param {*} type 성공적으로 지났으면 O, 실패했으면 X
