@@ -2,7 +2,6 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
-const OUTPUT_MESSAGE = require("./constans/OutputMessage");
 const BridgeGame = require("./BridgeGame");
 class App {
   constructor() {
@@ -11,10 +10,16 @@ class App {
   }
 
   gameResultPrint(count, winOrLose) {
-    const result = winOrLose
-      ? OUTPUT_MESSAGE.SUCCESS_RESULT
-      : OUTPUT_MESSAGE.FAILURE_RESULT;
-    OutputView.printResult(result, count, this.gameMap);
+    if (winOrLose) {
+      OutputView.printResult("성공", count, this.gameMap);
+    } else {
+      OutputView.printResult("실패", count, this.gameMap);
+    }
+
+    // const result = winOrLose
+    //   ? OUTPUT_MESSAGE.SUCCESS_RESULT
+    //   : OUTPUT_MESSAGE.FAILURE_RESULT;
+    // OutputView.printResult(result, count, this.gameMap);
   }
   matchOneStep(obstacle, bridgeGame) {
     try {
@@ -42,9 +47,7 @@ class App {
   }
   reStart(result) {
     let retry;
-    if (result) {
-      return false;
-    }
+    if (result) return false;
     const command = InputView.readGameCommand();
     const bridgeGame = new BridgeGame();
     try {
@@ -70,6 +73,7 @@ class App {
   play() {
     OutputView.gameStart();
     const bridge = this.BridgeMaker();
+    if (!bridge) return;
     let result = false;
     let count = 0;
     while (1) {
@@ -81,5 +85,3 @@ class App {
   }
 }
 module.exports = App;
-
-// 실패시 브릿지 스택 초기화 안되는 상태임
