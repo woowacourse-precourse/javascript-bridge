@@ -2,7 +2,7 @@
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const MissionUtils = require("@woowacourse/mission-utils");
-const { MESSAGES } = require("./Constants/Constants");
+const { MESSAGES, BRIDGE } = require("./Constants/Constants");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeSizeCheck = require("./Check/BridgeSizeCheck");
@@ -33,7 +33,7 @@ const InputView = {
 
   setBridgeInfo(inputLen, gameRec) {
     gameRec.bridgeAnswer = BridgeMaker.makeBridge(inputLen, BridgeRandomNumberGenerator.generate);
-    gameRec.bridgeOutput = { firstBridge: "", secondBridge: "" };
+    gameRec.bridgeOutput = { firstBridge: BRIDGE.LEFT_BRACKET, secondBridge: BRIDGE.LEFT_BRACKET };
     this.readMoving(gameRec); // moveNum, attemptNum, bridgeAnswer, bridgeOutput
   },
   /**
