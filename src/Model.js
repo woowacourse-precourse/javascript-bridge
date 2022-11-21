@@ -3,24 +3,12 @@ class Model {
 
   #userDownBridgeArr;
 
-  #computerBridgeArr;
-
   #totalTryCount;
-
-  #bridgeSize;
 
   constructor() {
     this.#totalTryCount = 1;
     this.#userUpBridgeArr = [];
     this.#userDownBridgeArr = [];
-  }
-
-  setComputerBridgeArr(arr) {
-    this.#computerBridgeArr = arr;
-  }
-
-  setBridgeSize(num) {
-    this.#bridgeSize = num;
   }
 
   setUpBridgeArr(answer) {
@@ -29,14 +17,6 @@ class Model {
 
   setDownBridgeArr(answer) {
     this.#userDownBridgeArr.push(answer);
-  }
-
-  getBridgeSize() {
-    return this.#bridgeSize;
-  }
-
-  getComputerBridgeArr() {
-    return this.#computerBridgeArr;
   }
 
   getUpBridgeArr() {

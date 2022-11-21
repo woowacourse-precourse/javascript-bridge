@@ -20,14 +20,14 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(callback, index, model) {
+  readMoving(callback, index, size) {
     Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D) \n', (input) => {
       if (!Validator.validateUpDown(input)) {
         Console.print('[ERROR] U 또는 D 중 한 문자만 입력해주세요.\n');
-        return this.readMoving(callback, index, model);
+        return this.readMoving(callback, index, size);
       }
       callback(input, index);
-      return index < model.getBridgeSize() - 1 && this.readMoving(callback, index + 1, model);
+      return index < size - 1 && this.readMoving(callback, index + 1, size);
     });
   },
 
