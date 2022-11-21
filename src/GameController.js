@@ -50,7 +50,6 @@ class GameController {
     Validation.stepInput(input);
     if (result) {
       this.bridgeGame.addCorrect();
-      this.bridgeGame.addSeperate();
     } else {
       this.bridgeGame.addWrong();
     }
