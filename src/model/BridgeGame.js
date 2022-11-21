@@ -18,18 +18,18 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(move, bridge, stepResult) {
+  move(turnAnswer, move, stepResult) {
     if (this.#turn > 0) stepResult.insert('|', '|');
 
-    if (this.isAnswer(bridge.layout[this.#turn], move)) {
+    if (this.isThisTurnCorrect(turnAnswer, move)) {
       stepResult.correctStepRecord(move);
       return;
     }
-    stepResult.correctStepRecord(move);
+    stepResult.wrongStepRecord(move);
     this.#turn += 1;
   }
 
-  isAnswer(bridgeAnswer, move) {
+  isThisTurnCorrect(bridgeAnswer, move) {
     return bridgeAnswer === move;
   }
 
