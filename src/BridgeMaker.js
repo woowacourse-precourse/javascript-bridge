@@ -1,5 +1,5 @@
 const { COMMAND } = require('./constants/Messages');
-const { ONE_STRING } = require('./constants/Number');
+const { ONE } = require('./constants/Number');
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -12,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: Number(size) }, () => {
       const number = generateRandomNumber();
-      return String(number) === ONE_STRING ? COMMAND.up : COMMAND.down;
+      return number === ONE ? COMMAND.up : COMMAND.down;
     });
   },
 };
