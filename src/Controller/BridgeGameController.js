@@ -4,41 +4,52 @@ const BridgeMaker = require("../BridgeMaker");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const BridgeGame = require("../Model/BridgeGame");
 const Bridge = require("../Model/Bridge");
-const { BRIDGE_DIRECTION } = require("./constants/GameCondition.js");
+const { BRIDGE_DIRECTION } = require("../constants/GameCondition.js");
 class BridgeGameController {
   #bridge_size;
-  #random_bridge;
+  //   #random_bridge;
+  #BridgeGame = new BridgeGame();
+
   start() {
     OutputView.printStartMessage(); // 시작 문구 출력
-    this.#bridge_size = InputView.readBridgeSize(); // 다리 사이즈 입력
-    this.generateBridge(this.#bridge_size); // 랜덤 다리 생성
+    this.generateBridge(InputView.readBridgeSize()); // 랜덤 다리 생성
   }
 
   generateBridge(size) {
     // 랜덤 다리 정보 Model에 저장.
     const randomBridge = BridgeMaker.makeBridge(
       size,
-      BridgeRandomNumberGenerator.generate()
+      BridgeRandomNumberGenerator.generate
     );
-    BridgeGame.setBridge(randomBridge);
-    this.#random_bridge = BridgeGame.getBridge();
+    this.#BridgeGame.setBridge(randomBridge);
     this.inputMoveDirection();
   }
 
   inputMoveDirection() {
     const cmd = InputView.readMoving();
-    this.move(cmd);
+    // this.move(cmd);
   }
 
-  gameProgress() {}
   /**
    *
    * @param {char} cmd 'U', 'D' 둘 중 하나로 들어옴.
    */
-  move(cmd, step) {
-    BridgeGame.move(cmd, step);
-    OutputView.printMap();
-    this.inputMoveDirection();
+  move(cmd) {
+    const isSuccess = this.#BridgeGame.move(cmd);
+    const map = this.#BridgeGame.getCurrentMap();
+    OutputView.printMap(map[0], map[1]);
+    if (!isSuccess) {
+      //실패하면 게임 재시작 or 끝내기.
+      const cmd = InputView.readGameCommand();
+      if (cmd === "R") {
+      }
+      if (cmd === "Q") {
+      }
+    }
+    if (isSuccess) {
+      //성공이면 게임이 끝났는지 안끝났는지 확인해야한다.
+      this.inputMoveDirection();
+    }
   }
 }
 
