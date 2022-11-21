@@ -56,9 +56,9 @@ class GameController {
 
   stirUp() {
     const isFailed = this.#bridgeGame.checkFailure();
-    if (isFailed) this.askRetry();
-    else if (!isFailed) this.askForPath();
     const isOvered = this.#bridgeGame.checkOvered();
+    if (isFailed) this.askRetry();
+    else if (!isOvered && !isFailed) this.askForPath();
     if (isOvered && !isFailed) this.printEnding();
   }
 
@@ -76,6 +76,7 @@ class GameController {
 
   stirUpRetry(command) {
     if (this.#bridgeGame.checkRetry(command)) {
+      this.#selectedPath;
       this.#bridgeGame.retry();
       this.askForPath();
     } else if (!this.#bridgeGame.checkRetry(command)) this.printEnding();

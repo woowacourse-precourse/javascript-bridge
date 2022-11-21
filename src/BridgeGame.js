@@ -51,7 +51,9 @@ class BridgeGame {
   }
 
   checkRetry(command) {
-    return command === RETRY_COMMAND.RETRY ? true : false;
+    const retrySelected = command === RETRY_COMMAND.RETRY ? true : false;
+    retrySelected && this.#selectedPathLog.pop();
+    return retrySelected;
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
