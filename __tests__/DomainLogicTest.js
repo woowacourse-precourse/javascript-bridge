@@ -120,7 +120,28 @@ describe("도메인 로직 단위 테스트", () => {
       "게임 성공 여부: 실패",
       "총 시도한 횟수: 1"
     ]);
-  })
+  });
+
+  test("재시작을 선택한 경우 게임을 다시 시작한다.", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "0"]);
+    mockQuestions(["3", "D", "R", "U", "D", "D"]);
+
+    const bridgeGame = new BridgeGame();
+    bridgeGame.init();
+    bridgeGame.gameStart();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[   ]",
+      "[ X ]",
+      "최종 게임 결과",
+      "[ O |   |   ]",
+      "[   | O | O ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2"
+    ]);
+  });
 
   test("라운드가 모두 종료되면, 성공 여부를 판별한다.", () => {
     const logspy = getLogSpy();
