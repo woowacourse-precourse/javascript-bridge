@@ -1,17 +1,26 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Player = require("./Player");
+const { OutputConstants } = require("./constant/Constants");
 
 const OutputView = {
   printStart() {
-    Console.print("다리 건너기 게임을 시작합니다.\n");
+    Console.print(OutputConstants.START_MESSAGE);
   },
 
   printMap() {
-    Console.print(`[${Player.state[0].join("|")}]`);
-    Console.print(`[${Player.state[1].join("|")}]`);
+    Console.print(OutputConstants.BRIDGE_STATE(Player.state[0]));
+    Console.print(OutputConstants.BRIDGE_STATE(Player.state[1]));
   },
 
-  printResult() {},
+  printResult() {
+    Console.print(OutputConstants.RESULT_MESSAGE);
+    Console.print(OutputConstants.BRIDGE_STATE(Player.state[0]));
+    Console.print(OutputConstants.BRIDGE_STATE(Player.state[1]));
+    Console.print("");
+    Console.print(OutputConstants.SUCCESS_STATE(Player.gameSuccess));
+    Console.print(OutputConstants.TRYING_COUNT(Player.tryingCount));
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
