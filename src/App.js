@@ -1,35 +1,37 @@
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeGame = require("./BridgeGame");
+const { generate } = require("./BridgeRandomNumberGenerator");
 
 class App {
+  constructor() {
+    this.bridgeGame = new BridgeGame();
+  }
   play() {
     this.startBridgeGame();
   }
 
   startBridgeGame() {
     OutputView.printStartMessage();
-    this.getBridgeSize();
+    this.controllBridgeSize();
   }
 
-  getBridgeSize() {
+  controllBridgeSize() {
     InputView.readBridgeSize((bridgeSize) => {
       console.log("(callback 확인용) bridgeSize: ", bridgeSize);
-      this.getBridge(bridgeSize);
-      this.getMoving();
+      this.controllBridges(bridgeSize);
+      this.controllMoving();
     });
   }
 
-  getBridge(bridgeSize) {
-    const bridges = BridgeMaker.makeBridge(
-      bridgeSize,
-      BridgeRandomNumberGenerator.generate
-    );
-    console.log("(확인용) bridges: ", bridges);
+  controllBridges(bridgeSize) {
+    const bridges = BridgeMaker.makeBridge(bridgeSize, generate);
+    this.bridgeGame.getBridges(bridges);
+    console.log("(확인용) bridges: ", this.bridgeGame.bridges);
   }
 
-  getMoving() {
+  controllMoving() {
     InputView.readMoving((moving) => {
       console.log("(callback 확인용) moving: ", moving);
     });
