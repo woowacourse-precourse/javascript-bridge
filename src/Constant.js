@@ -28,6 +28,13 @@ const Constant = Object.freeze({
     retry: 'R',
     quit: 'Q',
   }),
+  ERROR_MSG: Object.freeze({
+    prefix: '[ERROR] ',
+    isOutOfRange: '다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+    isNotANumber: '숫자를 입력해야 합니다.',
+    isNotUpOrDown: '이동은 U 또는 D로 입력해야 합니다.',
+    isNotRetryOrQuit: '재시작/종료는 R/Q를 입력해야 합니다.',
+  }),
 });
 
 module.exports = Constant;
