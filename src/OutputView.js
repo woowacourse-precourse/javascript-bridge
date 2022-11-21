@@ -34,7 +34,10 @@ const OutputView = {
     Console.print(string);
   },
 
-  end() {
+  end(bridgeGame, bridge) {
+    this.print('\n' + '최종 게임 결과');
+    this.printMap(bridgeGame, bridge);
+    this.printResult(bridgeGame);
     Console.close();
   }
 };
