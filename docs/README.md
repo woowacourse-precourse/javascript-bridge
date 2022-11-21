@@ -14,7 +14,7 @@
 
 ## 🥇MapMaker
 
-- [ ] bridge와 이동정보를 받아서 'O','X',' '의 map으로 바꾸는 기능
+- [x] bridge와 이동정보를 받아서 'O','X',' '의 map으로 바꾸는 기능
 
 ## 🥇BridgeGame
 
