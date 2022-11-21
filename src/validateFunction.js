@@ -4,11 +4,10 @@ const {
   userRetryInputCheck,
   bridgeInputStringCheck,
   isBridgeLengthFloat,
-  isBridgeLengthVaccum
 } = require('./utils/validation')
 
 const bridgeLengthValidate = (number)=>{
-  if(!bridgeRangeCheck(number)) throw new Error()
+  if(!bridgeRangeCheck(number)) throw new Error("[ERROR]")
 }
 
 module.exports = {

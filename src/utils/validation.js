@@ -1,5 +1,5 @@
 const bridgeRangeCheck = (number)=>{
-  return Number(number)>=3 && Number(number)<=20
+  return number>=3 && number<=20
 }
 
 const userMoveInputCheck = (move)=>{
@@ -18,15 +18,10 @@ const isBridgeLengthFloat = (number)=>{
   return !number.includes('.');
 }
 
-const isBridgeLengthVaccum = (number)=>{
-  return !(number ===" ");
-}
-
 module.exports = {
   bridgeRangeCheck,
   userMoveInputCheck,
   userRetryInputCheck,
   bridgeInputStringCheck,
   isBridgeLengthFloat,
-  isBridgeLengthVaccum
 };
