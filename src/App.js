@@ -77,6 +77,12 @@ class App {
 
     return this.#bridgeGame.isBridgeEnd(length);
   }
+
+  checkIsR(userInput) {
+    if (userInput === 'R') {
+      this.retryAndMove();
+    }
+  }
 }
 
 module.exports = App;
