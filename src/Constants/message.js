@@ -15,8 +15,8 @@ const RESULT_MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  unexpected_input: '[ERROR] 잘못된 입력입니다.',
-  exceed_bridge_size: '[ERROR] 다리 길이는 3~20의 입력만 가능합니다.',
+  unexpected_input: '[ERROR] 잘못된 입력입니다.\n',
+  exceed_bridge_size: '[ERROR] 다리 길이는 3~20의 입력만 가능합니다.\n',
 });
 
 module.exports = {
