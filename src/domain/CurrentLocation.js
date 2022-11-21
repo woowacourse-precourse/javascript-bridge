@@ -1,4 +1,4 @@
-class CurrentLocation {
+const CurrentLocation = class {
   #currentLocation;
 
   constructor() {
@@ -16,6 +16,6 @@ class CurrentLocation {
   resetCurrentLocation() {
     this.#currentLocation = -1;
   }
-}
+};
 
 module.exports = CurrentLocation;
