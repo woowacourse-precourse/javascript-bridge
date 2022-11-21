@@ -8,6 +8,7 @@ const Validate = require("./utils/Validate");
 const BridgeMaker = require("./BridgeMaker");
 const randomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
@@ -16,10 +17,11 @@ const InputView = {
     Console.readLine(Constant.INPUT.BRIDGE_SIZE, (bridgeSize) => {
       let numberBridgeSize = Number(bridgeSize) ?? NaN;
       if (Validate.validateBridgeSize(numberBridgeSize)) {
-        return BridgeMaker.makeBridge(
+        this.bridge = BridgeMaker.makeBridge(
           numberBridgeSize,
           randomNumberGenerator.generate
         );
+        this.readMoving();
       }
     });
   },
@@ -30,8 +32,16 @@ const InputView = {
   readMoving() {
     Console.readLine(Constant.INPUT.NEXT_STEP, (inputUpOrDown) => {
       if (Validate.validateUserInputMove(inputUpOrDown)) {
-        let bridgeGame = new BridgeGame();
-        bridgeGame.move(inputUpOrDown);
+        this.bridgeGame = new BridgeGame();
+        let result = this.bridgeGame.move(inputUpOrDown, this.bridge);
+        if (result) {
+          OutputView.printMap();
+          this.readMoving();
+        } else {
+          OutputView.printMap();
+          this.readGameCommand();
+          this.bridgeGame.retry();
+        }
       }
     });
   },
