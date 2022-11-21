@@ -109,6 +109,10 @@ class App {
       this.readGameCommand();
     }
   }
+
+  retry() {
+    this.#bridgeGame.retry();
+  }
 }
 
 module.exports = App;
