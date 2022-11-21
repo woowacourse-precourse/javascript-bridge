@@ -13,8 +13,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(upAndDown) {
-    console.log(upAndDown[0]);
-    console.log(upAndDown[1]);
+    Console.print(upAndDown[0]);
+    Console.print(upAndDown[1]);
   },
 
   /**
@@ -23,15 +23,15 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(upAndDown, retryNum, isSuccess) {
-    console.log(END_GAME.RESULT);
+    Console.print(END_GAME.RESULT);
     OutputView.printMap(upAndDown);
     if(isSuccess === true) {
       isSuccess = '성공';
     } else {
       isSuccess = '실패';
     }
-    console.log(END_GAME.IS_SUCCESS.concat(isSuccess));
-    console.log(END_GAME.TOTAL_RETRY.concat(retryNum));
+    Console.print(END_GAME.IS_SUCCESS.concat(isSuccess));
+    Console.print(END_GAME.TOTAL_RETRY.concat(retryNum));
     Console.close();
   },
 };
