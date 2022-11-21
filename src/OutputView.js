@@ -52,6 +52,7 @@ const OutputView = {
     Console.print("최종 게임 결과 \n");
     Console.print(this.upString);
     Console.print(this.downString);
+    Console.print("게임 성공 여부: " + message);
   },
 };
 
