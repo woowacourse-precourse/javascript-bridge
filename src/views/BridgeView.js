@@ -22,6 +22,10 @@ class BridgeView {
     this.#input.readGameCommand();
   }
 
+  print(message) {
+    this.#output.print(message);
+  }
+
   printStart() {
     this.#output.printStart();
   }
