@@ -21,3 +21,15 @@ describe('move 유효성 검사', () => {
     });
   });
 });
+
+describe('checkValidCommand 테스트', () => {
+  test('R,Q가 아닌 경우, error throw 후 다시 입력 받는 tryAgain 함수 실행', () => {
+    const testInput = ['F', 'r', '123', '!', '입력'];
+    testInput.forEach((element) => {
+      const app = new App();
+      const spyTryAgain = jest.spyOn(app, 'tryAgain');
+      app.checkValidCommand(element);
+      expect(spyTryAgain).toBeCalledTimes(1);
+    });
+  });
+});
