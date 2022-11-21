@@ -1,5 +1,6 @@
 const GAME = {
   START: "다리 건너기 게임을 시작합니다.",
+  END: "최종 게임 결과",
   SUCCESS_END: "게임 성공 여부: 성공",
   FAILURE_END: "게임 성공 여부: 실패",
   ALL_RETRY_COUNT: (count) => {
