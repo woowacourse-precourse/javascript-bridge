@@ -9,5 +9,13 @@ const ERROR_MESSAGE = {
   STEP_ERROR: "[ERROR] U 또는 D를 입력해주세요",
   RESTART_ERROR: "[ERROR] R 또는 Q를 입력해주세요",
 };
+const BRIDGE_DRAWER = {
+  START: "[",
+  END: "]",
+  CORRECT: " O ",
+  WRONG: " X ",
+  BAR: "|",
+  NOTHING: "   ",
+};
 
-module.exports = { INPUT_MESSAGE, ERROR_MESSAGE };
+module.exports = { INPUT_MESSAGE, ERROR_MESSAGE, BRIDGE_DRAWER };
