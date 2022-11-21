@@ -1,35 +1,11 @@
 const BridgeSizeCheck = require("../src/Check/BridgeSizeCheck");
 
 describe("다리 사이즈 입력 테스트", () => {
-  test("다리 사이즈 정수 입력 시 통과", () => {
-    expect(() => new BridgeSizeCheck(7)).not.toThrow("[ERROR]");
+  test.each([[7], [3], [20]])("다리 사이즈 정상 입력 (3-20 사이 정수)", input => {
+    expect(() => new BridgeSizeCheck(input)).not.toThrow();
   });
 
-  test("다리 사이즈 소수 입력 시 에러", () => {
-    expect(() => new BridgeSizeCheck(3.3)).toThrow("[ERROR]");
-  });
-
-  test("다리 사이즈 문자 입력 시 에러", () => {
-    expect(() => new BridgeSizeCheck("a")).toThrow("[ERROR]");
-  });
-
-  test("다리 사이즈 3-20 범위 충족 시 통과", () => {
-    expect(() => new BridgeSizeCheck(3)).not.toThrow("[ERROR]");
-  });
-
-  test("다리 사이즈 3-20 범위 충족 시 통과", () => {
-    expect(() => new BridgeSizeCheck(20)).not.toThrow("[ERROR]");
-  });
-
-  test("다리 사이즈 3-20 범위 벗어날 시 에러", () => {
-    expect(() => new BridgeSizeCheck(1)).toThrow("[ERROR]");
-  });
-
-  test("다리 사이즈 3-20 범위 벗어날 시 에러", () => {
-    expect(() => new BridgeSizeCheck(21)).toThrow("[ERROR]");
-  });
-
-  test("다리 사이즈 3-20 범위 벗어날 시 에러", () => {
-    expect(() => new BridgeSizeCheck(-1)).toThrow("[ERROR]");
+  test.each([3.3, "a", 2, 21, -1])("다리 사이즈 비정상 입력 (소수, 문자, 3-20 이외 정수)", input => {
+    expect(() => new BridgeSizeCheck(input)).toThrow();
   });
 });
