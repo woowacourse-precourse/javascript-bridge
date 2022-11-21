@@ -39,10 +39,16 @@ const Exception = {
    * @param {string} input 게임을 다시 시도할 지 여부에 대한 입력값
    */
   checkVaildRetryInput(input) {
-    if (input === "R" || input === "Q") {
-      return;
+
+    try {
+      if (input === "R" || input === "Q") {
+        return true;
+      }
+      throw new Error()
+    } catch {
+      MissionUtils.Console.print("[ERROR] 'R' 또는 'Q' 를 입력하여야 합니다.");
+      return false;
     }
-    throw new Error("[ERROR] 'R' 또는 'Q' 를 입력하여야 합니다.");
   },
 };
 
