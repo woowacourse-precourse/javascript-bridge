@@ -67,7 +67,7 @@
 
 ## ✅ To Do List
 - [x] 입력 기능 구현하기 - (InputView.js, Validation.js)
-    - [ ] 입력 예외처리 test 코드 작성 후, test 실행하기 - (InputVaildationTest.js)
+    - [x] 입력 예외처리 test 코드 작성 후, test 실행하기 - (InputVaildationTest.js)
 - [ ] 처리 기능 구현하기
 - [ ] 출력 기능 구현하기
 - [ ] 입력 - 처리 - 출력 연결
