@@ -1,7 +1,28 @@
+const { printGameStart } = require('./OutputView');
+const { readBridgeSize } = require('./InputView');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridge;
+
+  /**
+   * 게임을 시작할 때 사용하는 메서드
+   */
+  init() {
+    printGameStart();
+    readBridgeSize(this.setBridge);
+  }
+
+  /**
+   * 생성한 다리를 저장할 때 사용하는 메서드
+   * @param {Bridge} bridge 생성한 다리
+   */
+  setBridge(bridge) {
+    this.#bridge = bridge;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>

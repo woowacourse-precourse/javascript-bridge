@@ -8,12 +8,14 @@ const { generate } = require('./BridgeRandomNumberGenerator');
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
+   * @param {Function} setBridge 생성한 다리를 저장하는 함수
    */
-  readBridgeSize() {
+  readBridgeSize(setBridge) {
     Console.readLine('다리의 길이를 입력해주세요.\n', (input) => {
       const bridgeSize = Number(input);
       this.checkBridgeSize(bridgeSize);
-      makeBridge(bridgeSize, generate);
+      const bridge = makeBridge(bridgeSize, generate);
+      setBridge(bridge);
     });
   },
 
