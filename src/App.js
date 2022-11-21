@@ -18,6 +18,7 @@ class App {
     InputView.readMoving((answer) => {
       if (bridge.checkInputIsCorrect(answer, bridge.step)) {
         this.moveUserBridge(answer, bridge, size);
+        return;
       }
       this.stopUserBridge(answer, bridge);
       this.askRetry(bridge, size);
@@ -30,7 +31,6 @@ class App {
     this.checkIsGameSuccess(bridge, size);
     bridge.addStep();
     this.progressGame(bridge, size);
-    return;
   }
 
   checkIsGameSuccess(bridge, size) {
