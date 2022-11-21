@@ -1,5 +1,8 @@
-class BridgeValidator {
+const Validator = require('./Validator');
+
+class BridgeValidator extends Validator {
   constructor({ bridgeSize: { min, max } }) {
+    super();
     this.min = min;
     this.max = max;
   }
