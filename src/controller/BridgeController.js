@@ -59,6 +59,14 @@ class BridgeController {
     this.bridgeModel.setBridge(this.getCreatedBridge(bridgeLengthInput));
     this.mainController.readUserMovingInput();
   }
+
+  /**
+   * 현재까지의 유저의 움직임 성공유무들을 반환하는 메서드 연결체
+   * @param userMoving {string[]} [유저 움직임 기록]
+   */
+  getMovingRecords(userMoving) {
+    this.bridgeModel.getMovingRecords(userMoving);
+  }
 }
 
 module.exports = BridgeController;
