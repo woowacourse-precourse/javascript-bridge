@@ -38,6 +38,20 @@ const Exception = {
     movingCheck(moving) {
         if(moving !== 'U' && moving !== 'D') throw '[ERROR] "U" 혹은 "D"를 입력하여 주세요.'
     },
+
+    retryingException(answer) {
+        try {
+            this.retryAnswerCheck(answer);
+        } catch (e) {
+            OutputView.printError(e);
+            return false;
+        }
+        return true;
+    },
+
+    retryAnswerCheck(answer) {
+        if(answer !== 'R' && answer !== 'Q') throw '[ERROR] "R" 혹은 "Q"를 입력하여 주세요.'
+    }
 };
 
 module.exports = Exception;

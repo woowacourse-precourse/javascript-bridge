@@ -19,3 +19,10 @@ describe('이동 시 입력 값 예외처리 테스트', () => {
         expect(boolean).toBe(false);
     });
 });
+
+describe('재시작 및 종료를 결정하는 입력 값 예외처리 테스트', () => {
+    test.each([['123'], ['string'], ['10'], ['string123']])("입력값이 'R' 혹은 'Q'가 아닐 경우 예외처리", (input) => {
+        const boolean = Exception.retryingException(input);
+        expect(boolean).toBe(false);
+    });
+});

@@ -22,3 +22,21 @@ describe('현재 결과값 테스트', () => {
         expect(result === true ? 'O' : 'X').toBe(compareValue);
     });
 })
+
+describe('재시작 및 종료를 결정하는 기능 테스트', () => {
+    beforeEach(() => {
+        bridgeGame = new BridgeGame(10);
+        for(let i = 0; i < 10; i++) bridgeGame.updateState('U', true);
+    });
+
+    test("재시작 시 이동을 관리하는 객체가 초기화 되는지 확인하는 테스트", () => {
+        testData = { currentLocation: 0, upState: [], downState: [], };
+        expect(bridgeGame.movingState).not.toEqual(testData);
+        bridgeGame.resetMovingState();
+        expect(bridgeGame.movingState).toEqual(testData);
+    });
+
+    test.each([['R', true], ['Q', false]])("재시작 혹은 종료 시 해당되는 리턴값이 반환되는지 확인하는 테스트", (answer, returnValue) => {
+        expect(bridgeGame.retry(answer)).toBe(returnValue);
+    });
+});

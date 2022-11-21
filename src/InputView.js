@@ -32,16 +32,31 @@ const InputView = {
       if (Exception.movingException(moving)) {
         const result = bridgeGame.move(moving);
         OutputView.printMap(bridgeGame.movingState);
-        this.readMoving();
+        this.determineNext(result);
       }
       else this.readMoving();
     })
   },
 
+  determineNext(result) {
+    if(result) {
+      this.readMoving();
+      return;
+    }
+    this.readGameCommand();
+  },
+
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() { },
+  readGameCommand() {
+    Console.readLine('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (answer) => {
+      if (Exception.retryingException(answer)) {
+        bridgeGame.retry(answer) ? this.readMoving() : OutputView.printResult();
+      }
+      else this.readGameCommand();
+    })
+  },
 };
 
 module.exports = InputView;

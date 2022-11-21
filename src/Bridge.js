@@ -28,6 +28,14 @@ class Bridge {
             [empty]: [...this.movingState[empty], ' ']
         }
     }   
+
+    resetMovingState() {
+        this.movingState = {
+          currentLocation: 0,
+          upState: [],
+          downState: [],
+        };
+    }
 }
 
 module.exports = Bridge;
