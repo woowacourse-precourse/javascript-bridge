@@ -2,7 +2,7 @@ const BridgeGame = require('../src/BridgeGame');
 const { Random } = require('@woowacourse/mission-utils');
 
 describe('BridgeGame 테스트', () => {
-  test('[initializeBridge] 다리가 정상적으로 생성되는지 테스트', () => {
+  test('[initializeBridge] : 다리가 정상적으로 생성되는지 테스트', () => {
     // 조건
     const size = 3;
 
@@ -15,7 +15,7 @@ describe('BridgeGame 테스트', () => {
     expect(expectResult).toBe(size);
   });
 
-  test('[move] 움직임 입력이 정상적으로 모델에 반영되는지 테스트', () => {
+  test('[move] : 움직임 입력이 정상적으로 모델에 반영되는지 테스트', () => {
     // 조건
     const testMove = ['U', 'U', 'D'];
     const correctInput = [['U'], ['U', 'U'], ['U', 'U', 'D']];
