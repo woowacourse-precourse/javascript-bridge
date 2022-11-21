@@ -5,9 +5,14 @@ const BridgeGame = require('./BridgeGame');
 class Referee {
   constructor() {
     this.bridgeGame = new BridgeGame();
+    this.isStart = false;
   }
 
   init() {
+    if (this.isStart === false) {
+      OutputView.printStartMessage();
+      this.isStart = true;
+    }
     InputView.readBridgeSize((answer) => {
       this.bridgeGame.bridge.makeBridge(answer, () => this.init());
       this.start();
@@ -50,6 +55,7 @@ class Referee {
     const executionCount = this.bridgeGame.bridge.getExecutionCount();
     const gameStatus = Referee.#isOver(compareResult);
     OutputView.printResult(compareResult, executionCount, gameStatus);
+    this.isStart = false;
   }
 
   static #isOver(compareResult) {
