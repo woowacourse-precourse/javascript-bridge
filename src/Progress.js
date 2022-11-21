@@ -1,33 +1,52 @@
-const {
-  MOVE_COMMAND: { UP },
-} = require("./core/BridgeGameCore");
+const { MOVE_COMMAND } = require("./core/BridgeGameCore");
 
 class Progress {
-  #firstBridge = [];
-  #secondBridge = [];
+  #upBridges;
+  #downBridges;
+  #factory;
 
-  success(command) {
-    command === UP ? this.#addFirstBridge("O") : this.#addSecondBridge("O");
-  }
-
-  fail(command) {
-    command === UP ? this.#addFirstBridge("X") : this.#addSecondBridge("X");
+  constructor() {
+    this.#upBridges = [];
+    this.#downBridges = [];
+    this.#factory = {
+      [MOVE_COMMAND.UP]: (value) => this.#addUpBridge(value),
+      [MOVE_COMMAND.DOWN]: (value) => this.#addDownBridge(value),
+    };
   }
 
   desc() {
-    const firstBridge = `[ ${this.#firstBridge.join(" | ")} ]`;
-    const secondBridge = `[ ${this.#secondBridge.join(" | ")} ]`;
-    return { firstBridge, secondBridge };
+    const upBridges = [...this.#upBridges];
+    const downBridges = [...this.#downBridges];
+    return [upBridges, downBridges];
   }
 
-  #addFirstBridge(value) {
-    this.#firstBridge.push(value);
-    this.#secondBridge.push(" ");
+  success(command) {
+    this.#setBridge(command, "O");
   }
 
-  #addSecondBridge(value) {
-    this.#firstBridge.push(" ");
-    this.#secondBridge.push(value);
+  fail(command) {
+    this.#setBridge(command, "X");
+  }
+
+  #setBridge(command, value) {
+    this.#validate(command);
+    this.#factory[command](value);
+  }
+
+  #addUpBridge(value) {
+    this.#upBridges.push(value);
+    this.#downBridges.push(" ");
+  }
+
+  #addDownBridge(value) {
+    this.#upBridges.push(" ");
+    this.#downBridges.push(value);
+  }
+
+  #validate(command) {
+    if (!Object.values(MOVE_COMMAND).includes(command)) {
+      throw new Error("command must be U or D.");
+    }
   }
 }
 
