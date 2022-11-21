@@ -12,17 +12,20 @@ class GameController {
   }
   play() {
     // 게임 최초 시작
+    this.startMessage();
+  }
+  startMessage() {
     OutputView.printGameStart();
     this.createBridge();
   }
   createBridge() {
     InputView.readBridgeSize((input) => {
-      Validation.bridgeInput(input);
+      Validation.bridgeInput(Number(input));
       const bridge = BridgeMaker.makeBridge(
         input,
         BridgeRandomNumberGenerator.generate
       );
-      console.log(bridge);
+      //   console.log(bridge);
       this.bridgeGame.setBridge(bridge);
       this.inputStep();
     });
