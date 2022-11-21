@@ -26,30 +26,31 @@ class BridgeGameController {
   static createGame(size) {
     const bridge = BridgeMaker.makeBridge(size, generate);
     console.log(bridge);
-    const game = new BridgeGame(bridge);
-    return game;
+    return new BridgeGame(bridge);
   }
 
   static moveNext(game, direction) {
     try {
       game.move(direction);
-      BridgeGameController.checkGameProcess(game);
+      BridgeGameController.checkGameProcess(game, direction);
     } catch (err) {
       Console.print(err);
       repeatReadMoving(game, BridgeGameController.moveNext);
     }
   }
 
-  static checkGameProcess(game) {
-    if (isWrongDirection(game)) {
+  static checkGameProcess(game, direction) {
+    if (isWrongDirection(game, direction)) {
       BridgeGameController.showBridge(game);
       readGameCommand(game, BridgeGameController.queryRetry);
     } else if (game.isEndOfBridge()) BridgeGameController.showResult(game);
-    else if (BridgeGameController.canMoveNext(game)) {
+    else {
       BridgeGameController.showBridge(game);
       repeatReadMoving(game, BridgeGameController.moveNext);
     }
   }
+
+  // if (BridgeGameController.canMoveNext(game))
 
   static queryRetry(game, command) {
     try {
