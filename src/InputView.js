@@ -20,36 +20,26 @@ const InputView = {
         inputBridgeSize,
         BridgeRandomNumberGenerator.generate
       );
-      this.readMoving(bridgeGame, bridge);
-      // bridgeGame.move();
+      console.log(bridge);
+      let userMoveArray = [];
+      this.readMoving(bridgeGame, bridge, userMoveArray);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridgeGame, bridge) {
+  readMoving(bridgeGame, bridge, userMoveArray) {
+    console.log(userMoveArray);
     Console.readLine(MESSAGE.CHOOSE_MOVE_SPACE, (userInput) => {
       const moveKey = Validate.checkMovingKey(userInput);
-      const userMoveArray = bridgeGame.move(moveKey);
-      this.compareMove(bridge, userMoveArray);
+      const userArray = bridgeGame.move(moveKey, userMoveArray);
+      const keepGaming = bridgeGame.compareMove(bridge, userArray);
+      if (keepGaming) {
+        this.readMoving(bridgeGame, bridge, userMoveArray);
+      }
     });
     return;
-  },
-
-  /**
-   * 생성된 값과 사용자 입력값 비교
-   */
-  compareMove(bridge, userMoveArray) {
-    console.log(bridge);
-    console.log(userMoveArray);
-    for (let i = 0; i < userMoveArray.length; i++) {
-      if (bridge[i] === userMoveArray[i]) {
-        console.log("같음");
-      } else {
-        console.log("다름");
-      }
-    }
   },
 
   /**

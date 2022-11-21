@@ -19,9 +19,7 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(moveKey) {
-    let userMoveArray = [];
-
+  move(moveKey, userMoveArray) {
     if (moveKey === "U") {
       userMoveArray.push(1);
     } else if (moveKey === "D") {
@@ -29,6 +27,22 @@ class BridgeGame {
     }
     this.userMoveArray = userMoveArray;
     return userMoveArray;
+  }
+
+  /**
+   * 생성된 값과 사용자 입력값 비교
+   */
+  compareMove(bridge, userMoveArray) {
+    this.userMoveArray = userMoveArray;
+    console.log(this.userMoveArray);
+    for (let i = 0; i < this.userMoveArray.length; i++) {
+      if (bridge[i] === this.userMoveArray[i]) {
+        console.log("같음");
+        return true;
+      } else {
+        console.log("다름");
+      }
+    }
   }
 
   /**
