@@ -1,7 +1,7 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
-class ViewInterFace {
+const ViewInterface = class {
   #inputView;
   #outputView;
 
@@ -37,6 +37,6 @@ class ViewInterFace {
   printError(errorMessage) {
     this.#outputView.printError(errorMessage);
   }
-}
+};
 
-module.exports = ViewInterFace;
+module.exports = ViewInterface;
