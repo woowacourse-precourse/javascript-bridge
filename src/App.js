@@ -52,12 +52,9 @@ class App {
     if (!isGameContinueValidate) return;
 
     const result = this.bridgeGame.retry(input);
-    if (!result) {
-      this.endCallback(this.bridgeGame.end());
-      return;
-    }
-
-    InputView.readMoving(this.moveCallback);
+    return result
+      ? InputView.readMoving(this.moveCallback)
+      : this.endCallback(this.bridgeGame.end());
   };
 
   endCallback = ({ inputHistory, bridge, isSuccess, tryCount }) => {
