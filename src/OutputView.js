@@ -43,9 +43,9 @@ const OutputView = {
   },
 
   checkSuccess(results) {
-    let SUCCESS = true;
+    let SUCCESS;
     results.forEach((result) => {
-      if (result[1] === 'X') SUCCESS = false;
+      SUCCESS = !(result[1] === 'X');
     });
     return SUCCESS;
   },
