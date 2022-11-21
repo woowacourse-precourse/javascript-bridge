@@ -11,6 +11,10 @@ const WRONG_ZONE = "X";
 const RESTART = "R";
 const END = "Q";
 
+const DECIMAL = 10;
+const REPEAT_START = 0;
+const ATTEMPT_START = 1;
+
 const LENGTH = {
   MIN,
   MAX,
@@ -30,4 +34,11 @@ const COMMAND = {
   END,
 };
 
-module.exports = { LENGTH, BRIDGE, COMMAND };
+module.exports = {
+  LENGTH,
+  BRIDGE,
+  COMMAND,
+  DECIMAL,
+  REPEAT_START,
+  ATTEMPT_START,
+};

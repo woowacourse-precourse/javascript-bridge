@@ -1,7 +1,7 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { BRIDGE } = require("./constants/data");
-const OutputView = require("./OutputView");
+const { BRIDGE, DECIMAL, ATTEMPT_START } = require("./constants/data");
+const { OUTPUT_MESSAGE } = require("./constants/message");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -13,12 +13,12 @@ class BridgeGame {
 
   constructor() {
     this.movingLog = { upper: [], lower: [] };
-    this.attemptNumber = 1;
+    this.attemptNumber = ATTEMPT_START;
     this.bridge = [];
   }
   makeBridge(length) {
     const bridge = BridgeMaker.makeBridge(
-      parseInt(length, 10),
+      parseInt(length, DECIMAL),
       BridgeRandomNumberGenerator.generate
     );
     this.bridge = bridge;
@@ -42,11 +42,11 @@ class BridgeGame {
   moveUpper(userInput, currentZone) {
     if (userInput === this.bridge[currentZone]) {
       this.movingLog.upper.push(BRIDGE.RIGHT_ZONE);
-      this.movingLog.lower.push(" ");
+      this.movingLog.lower.push(OUTPUT_MESSAGE.BLANK);
     }
     if (userInput !== this.bridge[currentZone]) {
       this.movingLog.upper.push(BRIDGE.WRONG_ZONE);
-      this.movingLog.lower.push(" ");
+      this.movingLog.lower.push(OUTPUT_MESSAGE.BLANK);
     }
   }
   /**
@@ -55,11 +55,11 @@ class BridgeGame {
   moveLower(userInput, currentZone) {
     if (userInput === this.bridge[currentZone]) {
       this.movingLog.lower.push(BRIDGE.RIGHT_ZONE);
-      this.movingLog.upper.push(" ");
+      this.movingLog.upper.push(OUTPUT_MESSAGE.BLANK);
     }
     if (userInput !== this.bridge[currentZone]) {
       this.movingLog.lower.push(BRIDGE.WRONG_ZONE);
-      this.movingLog.upper.push(" ");
+      this.movingLog.upper.push(OUTPUT_MESSAGE.BLANK);
     }
   }
   isWrongZone() {

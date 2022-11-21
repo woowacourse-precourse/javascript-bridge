@@ -1,4 +1,4 @@
-const { BRIDGE } = require("./constants/data");
+const { BRIDGE, REPEAT_START, DECIMAL } = require("./constants/data");
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -10,8 +10,8 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     let bridge = [];
-    for (let zoneNumber = 0; zoneNumber < size; zoneNumber++) {
-      const randomNumber = parseInt(generateRandomNumber(), 10);
+    for (let zoneNumber = REPEAT_START; zoneNumber < size; zoneNumber++) {
+      const randomNumber = parseInt(generateRandomNumber(), DECIMAL);
       if (randomNumber === BRIDGE.LOWER_ZONE_NUMBER)
         bridge.push(BRIDGE.LOWER_ZONE);
       if (randomNumber === BRIDGE.UPPER_ZONE_NUMBER)

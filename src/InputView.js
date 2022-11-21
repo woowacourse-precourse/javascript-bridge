@@ -1,7 +1,4 @@
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { COMMAND } = require("./constants/data");
 const { INPUT_MESSAGE, OUTPUT_MESSAGE } = require("./constants/message");
 const OutputView = require("./OutputView");

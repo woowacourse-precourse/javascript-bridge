@@ -25,7 +25,7 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.RESULT);
     this.printMap(movingLog);
     Console.print(message);
-    Console.print(`총 시도한 횟수: ${attemptNumber}`);
+    Console.print(OUTPUT_MESSAGE.ATTEMP(attemptNumber));
     Console.close();
   },
 };
