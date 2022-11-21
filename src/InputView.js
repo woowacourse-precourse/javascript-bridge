@@ -46,23 +46,19 @@ const InputView = {
   checkMovingInput(userSpace,bridgeArray){
     if(userSpace!=='U'&& userSpace!=='D') throw "[ERROR] Only U,D accepted"
     let correctValue=OutputView.printMap(userSpace,bridgeArray,count)
-    if(correctValue==='O') {
-      //다리를 맞췄을 때 bridgegame move 함수에 배열을 보내주고, 다시 U,D를 입력받음
-      bridegame.move(bridgeArray)
-      if(bridgeArray.length===0) {
-        MissionUtils.Console.print('최종 게임 결과')
-        OutputView.printBridgeResult()
-        OutputView.printResult(bridgeArray,count)
-      }
-      if(bridgeArray.length!==0) {
-        OutputView.printBridgeResult()
-        this.readMoving(bridgeArray)
-      }
-    }
-    if(correctValue==='X') {
+    OutputView.printBridgeResult()
+    if(correctValue==='O') this.checkIsOValue(bridgeArray,count)
+    if(correctValue==='X') this.readGameCommand(bridgeArray)
+  },
+  checkIsOValue(bridgeArray,count){
+    //다리를 맞췄을 때 bridgegame move 함수에 배열을 보내주고, 다시 U,D를 입력받음
+    bridegame.move(bridgeArray)
+    if(bridgeArray.length===0) {
+      MissionUtils.Console.print('최종 게임 결과')
       OutputView.printBridgeResult()
-      this.readGameCommand(bridgeArray)
+      OutputView.printResult(bridgeArray,count)
     }
+    else this.readMoving(bridgeArray)
   },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
