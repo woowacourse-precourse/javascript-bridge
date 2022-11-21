@@ -96,14 +96,15 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(isRetry) {
-    this.#bridgeGameController.validateRetry(isRetry);
-    if (isRetry === RETRY.RETRY) this.#bridgeGameController.inputDirection();
-    if (isRetry === RETRY.QUIT) {
-      this.#bridgeGameController.outputResult(
-        this.#resultMap,
-        SUCCESS_RESULT.FAIL,
-        this.#totalCount
-      );
+    if (this.#bridgeGameController.validateRetry(isRetry)) {
+      if (isRetry === RETRY.RETRY) this.#bridgeGameController.inputDirection();
+      if (isRetry === RETRY.QUIT) {
+        this.#bridgeGameController.outputResult(
+          this.#resultMap,
+          SUCCESS_RESULT.FAIL,
+          this.#totalCount
+        );
+      }
     }
   }
 }
