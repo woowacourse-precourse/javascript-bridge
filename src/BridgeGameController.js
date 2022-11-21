@@ -10,7 +10,12 @@ const BridgeGameController = {
   setBridge(bridgeGame) {
     InputView.readBridgeSize((size) => {
       bridgeGame.setBridge(size);
+      BridgeGameController.moveBridge(bridgeGame);
     });
+  },
+
+  moveBridge(bridgeGame) {
+    InputView.readMoving((moving) => {});
   },
 };
 
