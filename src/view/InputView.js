@@ -10,8 +10,12 @@ const InputView = {
    */
   readBridgeSize(gameManager) {
     MissionUtils.Console.readLine(READ_BRIDGE_SIZE, (answer) => {
-      isBridgeSizeValid(answer);
-      gameManager.makeBridge(answer);
+      try {
+        isBridgeSizeValid(answer);
+        gameManager.makeBridge(answer);
+      } catch (error) {
+        InputView.readBridgeSize(gameManager);
+      }
     });
   },
 

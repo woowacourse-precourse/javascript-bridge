@@ -1,11 +1,22 @@
+const OutputView = require('../view/OutputView');
+const { ERROR_IS_NUMBER_NAN, ERROR_IS_NUMBER_IN_RANGE } = require('./constant');
+
+const isNumberNaN = (num) => {
+  if (Number.isNaN(num)) {
+    OutputView.print(ERROR_IS_NUMBER_NAN);
+    throw new Error(ERROR_IS_NUMBER_NAN);
+  }
+};
+const isNumberInRange = (num) => {
+  if (num < 3 || num > 20) {
+    OutputView.print(ERROR_IS_NUMBER_IN_RANGE);
+    throw new Error(ERROR_IS_NUMBER_IN_RANGE);
+  }
+};
 const isBridgeSizeValid = (number) => {
   const num = Number(number);
-  if (Number.isNaN(number)) {
-    throw new Error('[ERROR] 입력 값이 숫자여야 합니다.');
-  }
-  if (num < 3 || num > 20) {
-    throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
-  }
+  isNumberNaN(num);
+  isNumberInRange(num);
 };
 const isUserMovingInputValid = (input) => {
   if (input !== 'U' && input !== 'D') {
