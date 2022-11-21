@@ -3,11 +3,11 @@ const { bridgeLengthValidation } = require('../utils/BridgeValidation');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 
-class Bridge {
+const Bridge = class {
   #bridgeLength;
   #bridgeMap;
 
-  constructor(bridgeLength) {
+  setBridgeLength(bridgeLength) {
     this.#bridgeLength = bridgeLength;
     this.#setBridgeMap();
   }
@@ -30,6 +30,6 @@ class Bridge {
   getPartialBridgeMap(index) {
     return this.#bridgeMap.slice(0, index + 1);
   }
-}
+};
 
 module.exports = Bridge;
