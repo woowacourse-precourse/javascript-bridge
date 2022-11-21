@@ -1,4 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const { checkVaildBridgeSize, checkVaildMoveInput, checkVaildRetryInput } = require("./Exception");
 const { readGameCommand, readMoving, readBridgeSize } = require("./InputView");
@@ -53,19 +52,13 @@ class App {
   repeatGame(bridgeGame) {
     if (bridgeGame.tempPosition === this.#size) {
       this.endGame(bridgeGame, true);
-      return;
-    }
+      return; }
     readMoving((direction) => {
       if(checkVaildMoveInput(direction)===false){
         this.repeatGame(bridgeGame);
-        return;
-      }
-      printMap(
-        returnCheckedMap(bridgeGame.bridge,bridgeGame.tempPosition,bridgeGame.move(direction))
-      ),
-        bridgeGame.move(direction)
-          ? (bridgeGame.cross(), this.repeatGame(bridgeGame))
-          : this.restartGame(bridgeGame);
+        return; }
+      printMap(returnCheckedMap(bridgeGame.bridge,bridgeGame.tempPosition,bridgeGame.move(direction))),
+        bridgeGame.move(direction) ? (bridgeGame.cross(), this.repeatGame(bridgeGame)) : this.restartGame(bridgeGame);
     });
   }
 
@@ -79,13 +72,11 @@ class App {
     readGameCommand((response) => {
       if(checkVaildRetryInput(response) === false){
         this.restartGame(bridgeGame);
-        return;
-      }
+        return; }
       if (bridgeGame.retry(response)) {
         this.#tryCount += 1;
         this.repeatGame(bridgeGame);
-        return;
-      }
+        return; }
       this.endGame(bridgeGame, false);
     });
   }
@@ -103,8 +94,5 @@ class App {
     );
   }
 }
-
-const app = new App;
-app.play()
 
 module.exports = App;
