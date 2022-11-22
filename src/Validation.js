@@ -23,23 +23,23 @@ class Validation {
   }
 
   static nextStepLowerCase(value) {
-    return value === 'u' || value === 'd'
+    return value === VALIDATION.lower_u || value === VALIDATION.lower_d
   }
 
   static retryLowerCase(value) {
-    return value === 'r' || value === 'q'
+    return value === VALIDATION.lower_r || value === VALIDATION.lower_q
   }
 
   static retryOrNotValue(value) {
-    return value === 'R' || value === 'Q'
+    return value === VALIDATION.upper_r || value === VALIDATION.upper_q
   }
 
   static nextStepValue(value) {
-    return value === 'U' || value === 'D'
+    return value === VALIDATION.upper_u || value === VALIDATION.upper_d
   }
 
   static oneValue(value) {
-    return value.length === 1;
+    return value.length === VALIDATION.one_value;
   }
 
   static isNumberEmpty(value) {
@@ -51,13 +51,13 @@ class Validation {
   }
 
   static numberNet(number) {
-    return number > 2 && number < 21;
+    return number > VALIDATION.min_value && number < VALIDATION.max_value;
   }
 
 
   
   static isNumber(number) {
-    const RegExp = /^[0-9]+$/;
+    const RegExp = VALIDATION.number_role;
     return RegExp.test(number);
   }
 }
