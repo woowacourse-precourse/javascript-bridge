@@ -11,8 +11,8 @@ const MESSAGE = {
 };
 
 const OPTION = {
-    MINIMUM_LENGTH: 3,
-    MAXIMUM_LENGTH: 20,
+    MIN_LENGTH: 3,
+    MAX_LENGTH: 20,
 };
 
 const STRUCTURE = {
@@ -32,8 +32,8 @@ const KEY = {
 };
 
 const ERROR = {
-    BRIDGE_OVER_RANGE: "[ERROR] 다리 길이는 3에서 20사이의 자연수를 입력해주세요.",
-    BRIDGE_INVALID_NUMBER: "[ERROR] 유효하지 않은 입력입니다.",
+    BRIDGE_RANGE: "[ERROR] 다리 길이는 3에서 20사이의 자연수를 입력해주세요.",
+    INVALID_NUMBER: "[ERROR] 유효하지 않은 입력입니다.",
     MOVE: '[ERROR] 위로 이동하려면 "U" 아래로 이동하려면 "D"를 입력해주세요.',
     RESTART: '[ERROR] 다시 시작하려면 "R" 종료하려면 "Q"를 입력해주세요.',
 };

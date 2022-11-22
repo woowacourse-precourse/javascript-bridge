@@ -40,26 +40,31 @@ const InputView = {
         if (bridgeGame.isBadMove(isKeyUp)) {
             return this.fail(bridgeGame, isKeyUp);
         }
+
         if (bridgeGame.isClear()) {
             return this.clear(bridgeGame, isKeyUp);
         }
+
         this.goodMove(bridgeGame, isKeyUp);
     },
 
     fail(bridgeGame, isKeyUp) {
         bridgeGame.pushBridgeTrace(isKeyUp, STRUCTURE.BAD);
         printMap(bridgeGame);
+
         this.readGameCommand(bridgeGame);
     },
 
     clear(bridgeGame, isKeyUp) {
         bridgeGame.pushBridgeTrace(isKeyUp, STRUCTURE.GOOD);
-        printResult(bridgeGame, MESSAGE.SUCCESS);
+
+        return printResult(bridgeGame, MESSAGE.SUCCESS);
     },
 
     goodMove(bridgeGame, isKeyUp) {
         bridgeGame.pushBridgeTrace(isKeyUp, STRUCTURE.GOOD);
         printMap(bridgeGame);
+
         this.readMoving(bridgeGame);
     },
 

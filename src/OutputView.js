@@ -23,11 +23,11 @@ const OutputView = {
 
     // Error Message
     printErrorInvalidNumber() {
-        Console.print(ERROR.BRIDGE_INVALID_NUMBER);
+        Console.print(ERROR.INVALID_NUMBER);
     },
 
     printErrorBridgeSize() {
-        Console.print(ERROR.BRIDGE_OVER_RANGE);
+        Console.print(ERROR.BRIDGE_RANGE);
     },
 
     printErrorMoving() {

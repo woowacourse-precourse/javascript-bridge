@@ -19,8 +19,10 @@ class BridgeGame {
     }
 
     isBadMove(isKeyUp) {
-        const isKeyBadUp = isKeyUp && this.#bridgeArray[this.#moveCount - 1] === KEY.DOWN;
-        const isKeyBadDown = !isKeyUp && this.#bridgeArray[this.#moveCount - 1] === KEY.UP;
+        const currentBridgeState = this.#bridgeArray[this.#moveCount - 1];
+        const isKeyBadUp = isKeyUp && currentBridgeState === KEY.DOWN;
+        const isKeyBadDown = !isKeyUp && currentBridgeState === KEY.UP;
+
         return isKeyBadUp || isKeyBadDown;
     }
 
@@ -31,6 +33,7 @@ class BridgeGame {
     questionRetry(answer) {
         if (answer === KEY.RESTART) {
             this.resetBridgeSetting();
+
             return true;
         }
     }
@@ -46,6 +49,7 @@ class BridgeGame {
     makeBridgeTraceForPrint() {
         const upBridgeTrace = this.#trace.map((bridge) => bridge[0]).join(STRUCTURE.LINK);
         const downBridgeTrace = this.#trace.map((bridge) => bridge[1]).join(STRUCTURE.LINK);
+
         return [upBridgeTrace, downBridgeTrace];
     }
 

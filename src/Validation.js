@@ -12,7 +12,7 @@ class Validation {
         const isNotNumber = !/^\d+$/g.test(number);
         try {
             if (isNotNumber) {
-                throw new Error(ERROR.BRIDGE_INVALID_NUMBER);
+                throw new Error(ERROR.INVALID_NUMBER);
             }
         } catch {
             printErrorInvalidNumber();
@@ -20,10 +20,10 @@ class Validation {
         }
     }
     static checkBridgeSizeRange(size) {
-        const isNotValidRange = size < OPTION.MINIMUM_LENGTH || size > OPTION.MAXIMUM_LENGTH;
+        const isNotValidRange = size < OPTION.MIN_LENGTH || size > OPTION.MAX_LENGTH;
         try {
             if (isNotValidRange) {
-                throw new Error(ERROR.BRIDGE_OVER_RANGE);
+                throw new Error(ERROR.BRIDGE_RANGE);
             }
         } catch {
             printErrorBridgeSize();
@@ -32,9 +32,7 @@ class Validation {
     }
 
     static checkMoveInput(move) {
-        const isKeyUp = move === KEY.UP;
-        const isKeyDown = move === KEY.DOWN;
-        if (isKeyUp || isKeyDown) {
+        if (move === KEY.UP || move === KEY.DOWN) {
             return false;
         }
         try {
@@ -45,10 +43,8 @@ class Validation {
         }
     }
 
-    static checkGameCommandInput(answer) {
-        const isKeyRestart = answer === KEY.RESTART;
-        const isKeyQuit = answer === KEY.QUIT;
-        if (isKeyRestart || isKeyQuit) {
+    static checkGameCommandInput(input) {
+        if (input === KEY.RESTART || input === KEY.QUIT) {
             return false;
         }
         try {
