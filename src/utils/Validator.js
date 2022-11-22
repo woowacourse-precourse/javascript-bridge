@@ -1,6 +1,6 @@
 const {
   NUMBER, ERROR, DIRECTION, GAME_COMMAND,
-} = require('./data/constants');
+} = require('../data/constants');
 const IO = require('./IO');
 
 class Validator {

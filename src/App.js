@@ -1,15 +1,9 @@
-const BridgeGame = require('./BridgeGame');
-const { MESSAGE } = require('./data/constants');
-const IO = require('./IO');
+const GameController = require('./controller/GameController');
 
 class App {
-  constructor() {
-    IO.output(MESSAGE.START);
-    this.game = new BridgeGame();
-  }
-
   play() {
-    this.game.init();
+    const gameController = new GameController();
+    gameController.init();
   }
 }
 
