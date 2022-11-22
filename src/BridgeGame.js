@@ -68,17 +68,16 @@ class BridgeGame {
   }
 
   checkBridge(bridge) {
-    if (this.#upRow.includes(BRIDGE_CHECK.wrong) === true || this.#downRow.includes(BRIDGE_CHECK.wrong) === true) {
-      this.gameManager.printRow(this.#upRow, this.#downRow);
+    this.gameManager.printRow(this.#upRow, this.#downRow);
+
+    if (this.#upRow.includes(BRIDGE_CHECK.wrong) || this.#downRow.includes(BRIDGE_CHECK.wrong)) {
       return this.inputRetry();
     }
 
     if (bridge.length === 0) {
-      this.gameManager.printRow(this.#upRow, this.#downRow);
       return this.finish();  
     }
 
-    this.gameManager.printRow(this.#upRow, this.#downRow);
     this.addPartition(bridge);
   }
 
