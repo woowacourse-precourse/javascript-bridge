@@ -1,20 +1,82 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+const OutputView = require("./view/OutputView");
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+class BridgeGame {
+  #bridge;
+  #moveCount = 0;
+  #playerInput;
+  #nowUpBridge = [];
+  #nowDownBridge = [];
+  #tryCount = 1;
+
+  constructor(bridge) {
+    this.#bridge = bridge;
+    this.outputView = OutputView;
+  }
+
+  get nowBridge() {
+    return [this.#nowUpBridge, this.#nowDownBridge];
+  }
+
+  get tryCount() {
+    return this.#tryCount;
+  }
+
+  move(playerInput) {
+    this.#playerInput = playerInput;
+    this.nowBridgeState();
+    this.outputView.printMap([this.#nowUpBridge, this.#nowDownBridge]);
+    this.#moveCount++;
+  }
+
+  isGameEnd() {
+    if (this.#moveCount === this.#bridge.length) {
+      return true;
+    }
+  }
+
+  haveBridge() {
+    if (this.#playerInput === this.#bridge[this.#moveCount - 1]) {
+      return true;
+    }
+  }
+
+  nowBridgeState() {
+    if (this.#bridge[this.#moveCount] === "U") {
+      this.makeUpBridgeState();
+    }
+    if (this.#bridge[this.#moveCount] === "D") {
+      this.makeDownBridgeState();
+    }
+  }
+
+  makeUpBridgeState() {
+    if (this.#playerInput === "U") {
+      this.#nowUpBridge.push("O");
+      this.#nowDownBridge.push(" ");
+    }
+    if (this.#playerInput === "D") {
+      this.#nowUpBridge.push(" ");
+      this.#nowDownBridge.push("X");
+    }
+  }
+
+  makeDownBridgeState() {
+    if (this.#playerInput === "D") {
+      this.#nowUpBridge.push(" ");
+      this.#nowDownBridge.push("O");
+    }
+    if (this.#playerInput === "U") {
+      this.#nowUpBridge.push("X");
+      this.#nowDownBridge.push(" ");
+    }
+  }
+
+  retry() {
+    this.#moveCount = 0;
+    this.#nowUpBridge = [];
+    this.#nowDownBridge = [];
+    this.#tryCount++;
+  }
 }
 
 module.exports = BridgeGame;
