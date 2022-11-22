@@ -5,7 +5,12 @@ const DOWN_LETTER = "D";
 
 const Validate = {
   bridgeSize(bridgeLength) {
-    if (bridgeLength < 3 || bridgeLength > 20) {
+    if (
+      bridgeLength < 3 ||
+      bridgeLength > 20 ||
+      typeof +bridgeLength !== "number" ||
+      Number.isNaN(+bridgeLength)
+    ) {
       throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
     }
   },
