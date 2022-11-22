@@ -88,7 +88,7 @@ class GameController {
    */
   startMoveCallback(input) {
     try {
-      ExceptionHandler.validateGameInput(input);
+      ExceptionHandler.validateMoveInput(input);
       this.BridgeGame.move(input);
       this.printMaps();
     } catch (err) {
@@ -132,7 +132,7 @@ class GameController {
    */
   quitOrRetryCallback(input) {
     try {
-      ExceptionHandler.validateRetryInput(input);
+      ExceptionHandler.validateRetryOrQuitInput(input);
       this.askQuitOrRetry(input);
     } catch (err) {
       OutputView.printError(err);

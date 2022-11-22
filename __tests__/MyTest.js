@@ -34,7 +34,7 @@ describe("다리 건너기 테스트", () => {
     const char = input;
 
     expect(() => {
-      validateTest(char, ExceptionHandler.validateGameInput);
+      validateTest(char, ExceptionHandler.validateMoveInput);
     }).toThrow("[ERROR]");
   });
 
@@ -42,7 +42,7 @@ describe("다리 건너기 테스트", () => {
     const char = input;
 
     expect(() => {
-      validateTest(char, ExceptionHandler.validateRetryInput);
+      validateTest(char, ExceptionHandler.validateQuitOrRetryInput);
     }).toThrow("[ERROR]");
   });
 

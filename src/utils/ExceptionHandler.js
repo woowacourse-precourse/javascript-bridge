@@ -14,13 +14,13 @@ const ExceptionHandler = {
     }
   },
 
-  validateGameInput(input) {
+  validateMoveInput(input) {
     if (input !== Constant.UP && input !== Constant.DOWN) {
       throw "\n[ERROR] 대문자 U, D를 정확히 입력해주세요.\n";
     }
   },
 
-  validateRetryInput(input) {
+  validateQuitOrRetryInput(input) {
     if (input !== Constant.QUIT && input !== Constant.RETRY) {
       throw "\n[ERROR] 대문자 Q, R을 정확히 입력해주세요.\n";
     }
