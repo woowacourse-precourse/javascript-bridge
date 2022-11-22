@@ -1,5 +1,10 @@
-const { MIN_BRIDGE_SIZE, MAX_BRIDGE_SIZE, UP, DOWN } = require('./Command');
-const { BRIDGE_SIZE_NATURAL_NUMBER, BRIDGE_SIZE_RANGE, MOVING_COMMAND } = require('./ErrorMessage');
+const { MIN_BRIDGE_SIZE, MAX_BRIDGE_SIZE, UP, DOWN, RETRY, QUIT } = require('./Command');
+const {
+  BRIDGE_SIZE_NATURAL_NUMBER,
+  BRIDGE_SIZE_RANGE,
+  MOVING_COMMAND,
+  GAME_COMMAND,
+} = require('./ErrorMessage');
 
 const ErrorHandling = {
   throwError(isInvalid, message) {},
@@ -16,6 +21,11 @@ const ErrorHandling = {
   validateMovingCommand(movingCommand) {
     const isInvalid = movingCommand !== UP && movingCommand !== DOWN;
     ErrorHandling.throwError(isInvalid, MOVING_COMMAND);
+  },
+
+  validateGameCommand(gameCommand) {
+    const isInvalid = gameCommand !== RETRY && gameCommand !== QUIT;
+    ErrorHandling.throwError(isInvalid, GAME_COMMAND);
   },
 };
 
