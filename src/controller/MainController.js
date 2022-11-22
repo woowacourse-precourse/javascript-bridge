@@ -100,6 +100,13 @@ class MainController {
     InputView.readGameCommand(this.onUserRestartInput, this, userMoving);
   }
 
+  // 게임 재시작 메서드
+  restartGame() {
+    this.userController.increaseTryCount();
+    this.userController.resetUserMoving();
+    this.readUserMovingInput();
+  }
+
   // 게임 초기 실행 메서드
   init() {
     this.userController.increaseTryCount();
