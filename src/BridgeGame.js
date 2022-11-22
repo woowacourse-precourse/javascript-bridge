@@ -1,5 +1,6 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const MoveMapMaker = require('./MapMaker');
 
 class BridgeGame {
   #bridge;
@@ -22,8 +23,8 @@ class BridgeGame {
 
   currentUserMoveMap() {
     const notConvertMap = this.checkUserMoveLogs(this.moveLogs, this.#bridge);
-    const oxCheckedMap = this.makeUserMoveMap(notConvertMap);
-    const convertedMap = this.mapToString(oxCheckedMap);
+    const oxCheckedMap = MoveMapMaker.makeUserMoveMap(notConvertMap);
+    const convertedMap = MoveMapMaker.mapToString(oxCheckedMap);
     return convertedMap;
   }
 
@@ -32,19 +33,6 @@ class BridgeGame {
       log === bridge[index] ? [log, 'O'] : [log, 'X']
     );
     return checkedUserMap;
-  }
-
-  makeUserMoveMap(moveMap) {
-    const upperBridge = moveMap.map((move) => (move[0] === 'U' ? move[1] : ' '));
-    const lowerBridge = moveMap.map((move) => (move[0] === 'D' ? move[1] : ' '));
-    return [upperBridge, lowerBridge];
-  }
-
-  mapToString(bridge) {
-    const notConvertBridge = bridge.map((bridgeSide) => {
-      return '[ ' + bridgeSide.join(' | ') + ' ]';
-    });
-    return notConvertBridge;
   }
 
   isWin() {
