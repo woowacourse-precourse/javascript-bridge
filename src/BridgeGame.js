@@ -140,6 +140,17 @@ class BridgeGame {
     return MAX_INDEX_POINT === CURRENT_INDEX;
   }
 
+  isGameOver() {
+    const FAILURE = 'X';
+    const [GAMR_OVER, NO_GAME_OVER] = [true, false];
+
+    if (this.getCurrentBridgeReuslt() === FAILURE) {
+      return GAMR_OVER;
+    }
+
+    return NO_GAME_OVER;
+  }
+
   setBridge(bridgeResult) {
     const copiedBridgeResult = Application.copyArray(bridgeResult);
     const bridgelength = Application.getArrayLength(copiedBridgeResult);
@@ -208,6 +219,8 @@ class BridgeGame {
   }
 
   getCurrentBridgeReuslt() {
+    this.checkBeforeStart();
+
     const ONE = 1;
     const USER_POSITION = this.findUserPosition();
 
