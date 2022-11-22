@@ -4,12 +4,14 @@ const InputView = require("./ui/InputView");
 const OutputView = require("./ui/OutputView");
 
 class App {
-  constructor() {
+  init() {
     GameInfo.numberOfPlayGames = INITIALIZE_VALUES.zero;
     GameInfo.gameResult = INITIALIZE_VALUES.failure;
+    GameInfo.bridge = [];
   }
 
   play() {
+    this.init();
     OutputView.printMessage(GAME_MESSAGES.gameStart);
     InputView.readBridgeSize();
   }

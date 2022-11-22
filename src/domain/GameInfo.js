@@ -3,15 +3,11 @@ const GameInfo = {
 
   bridgeSize: 0,
 
-  bridge: null,
-
   indexingArray: ["U", "D"],
 
   moveBridge: [[], []],
 
   position: -1,
-
-  moving: null,
 
   numberOfPlayGames: 0,
 
