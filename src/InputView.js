@@ -9,7 +9,7 @@ const Print = require('./Print');
    */
 
   readBridgeSize(callBack) {
-    Console.readLine('다리의 길이를 입력해주세요.', callBack);
+    Console.readLine('다리의 길이를 입력해주세요.\n', callBack);
   },
 
   /**
@@ -17,7 +17,7 @@ const Print = require('./Print');
    */
 
   readMoving(callBack) {
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', callBack);
+    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', callBack);
   },
 
   /**
@@ -25,7 +25,7 @@ const Print = require('./Print');
    */
 
   readGameCommand(callBack) {
-    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', callBack);
+    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', callBack);
   },
 };
 
