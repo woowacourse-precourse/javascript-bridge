@@ -27,6 +27,6 @@ describe('BridgeGame 클래스 테스트', () => {
 
   test('⭐ checkGameStatus 메서드 테스트 : 현재 게임 상태를 false를 반환합니다. (초기값 false) ', () => {
     const bridgeGame = new BridgeGame();
-    expect(bridgeGame.checkGameFinishStatus()).toBeFalsy();
+    expect(bridgeGame.checkGameOverState()).toBeFalsy();
   });
 });
