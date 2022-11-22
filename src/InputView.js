@@ -42,10 +42,10 @@ const InputView = {
   readGameCommand(callback) {
     Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (key) => {
       try {
-        //checkRetryKey(key);
+        checkRetryKey(key);
         callback(key === 'R');
       } catch (e) {
-        //Console.print(e);
+        Console.print(e);
         this.readGameCommand(callback);
       }
     });
