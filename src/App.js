@@ -1,15 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const InputView = require("./view/InputView");
+const {readBridgeSize} = require("./view/InputView");
 const {GAME_MESSAGE} =  require("./util/Constant");
 const Console = MissionUtils.Console;
-
-
 
 class App {
 
   play() {
     this.greeting();
-    InputView.readBridgeSize();
+    readBridgeSize;
   }
 
   greeting() {
