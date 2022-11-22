@@ -8,3 +8,13 @@
 - [x] 실패시 : 다시 시도할지 여부 판별
 
 ## 고민해본점
+
+- 객체를 분리하고 코드를 최대한 쪼개는데 어떻게 진행할까? 일단은 기능이 작동하도록 구현-!
+- 리팩토링
+  - MVC 패턴을 이용하여 M(Game), V(InputView,OuputView), C(GameController)로 구성
+  - 함수의 간결성을 위하여 유효성 체크함수 return값이 아닌 Error를 터트리도록 변경
+  - 출력타입은( [ O , X , emtpy ] ) View가 아닌 유틸함수로 변경
+  - print함수 간결하게
+  - 콜백지옥형성 될 가능성으로 Contoroller의 콜백 함수 분리
+  - tryCount 분리와 move리턴값에서 제거
+  - InputView 함수형태가 동일하여서 InputHandler라는 통합함수 재사용
