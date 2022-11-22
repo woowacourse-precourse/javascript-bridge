@@ -1,3 +1,4 @@
+const constant = require('./constant');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -51,7 +52,7 @@ class BridgeGame {
 
   calculatorOXIndex(selectWay, wayIndex) {
     if(this.way[wayIndex] === selectWay) {
-      return this.way[wayIndex] === this.#root[wayIndex] ? "O" : "X"
+      return this.way[wayIndex] === this.#root[wayIndex] ? constant.O : constant.X
     }
     return " ";
   }

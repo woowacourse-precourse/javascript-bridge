@@ -4,6 +4,7 @@ const BridgeMaker = require("./BridgeMaker");
 const RandomNumber = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
 const MissionUtils = require("@woowacourse/mission-utils");
+const constant = require('./constant');
 
 class App {
   #bridgeGame;
@@ -35,11 +36,11 @@ class App {
   }
 
   selectRestartEnd = (keyOption) => {
-    if(keyOption === 'R') {
+    if(keyOption === constant.RETRY) {
       this.#bridgeGame.retry();
       Input.readMoving(this.nextMoving);
     };
-    if(keyOption === "Q") this.finish();
+    if(keyOption === constant.QUIT) this.finish();
   }
 
   finish = () => {

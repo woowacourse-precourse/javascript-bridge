@@ -1,3 +1,5 @@
+const constant = require('./constant');
+
 class BridgeError {
     #numbers;
   
@@ -8,11 +10,11 @@ class BridgeError {
     }
   
     stringTest(inputValue) {
-      if (/[^\d]/g.test(inputValue)) { throw "[ERROR] 문자가 포함 되있습니다."; }
+      if (/[^\d]/g.test(inputValue)) { throw constant.ERROR.CONTAIN_STRING; }
     }
 
     valueLength(inputValue) {
-      if (inputValue < 3 || inputValue > 20) {throw "[ERROR] 3 ~ 20 숫자에 포함되지 않습니다."; }
+      if (inputValue < constant.CONTAIN_LOW || inputValue > constant.CONTAIN_HIGH) {throw constant.ERROR.NOT_CONTAIN_NUMBER; }
     }
   }
 
@@ -25,7 +27,7 @@ class BridgeError {
     }
 
     stringTest(inputValue) {
-      if (/[^U^D]/g.test(inputValue)) { throw "[ERROR] U와 D 외의 문자는 사용할 수 없습니다."; }
+      if (/[^U^D]/g.test(inputValue)) { throw constant.ERROR.NOT_CONTAIN_U_D; }
     }
 
   }
@@ -39,7 +41,7 @@ class BridgeError {
     }
 
     stringTest(inputValue) {
-      if (/[^Q^R]/g.test(inputValue)) { throw "[ERROR] Q와 R 외의 문자는 사용할 수 없습니다."; }
+      if (/[^Q^R]/g.test(inputValue)) { throw constant.ERROR.NOT_CONTAIN_Q_R; }
     }
   }
   
