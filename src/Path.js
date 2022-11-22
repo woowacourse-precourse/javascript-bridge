@@ -10,7 +10,7 @@ class Path {
 
   constructor() {
     this.#path = [];
-    this.#pathMap = new Array(2).fill(0).map(() => []);
+    this.#pathMap = [[], []];
   }
 
   /**
