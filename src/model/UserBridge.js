@@ -10,6 +10,10 @@ class UserBridge {
   addMovement(movement) {
     this.condition.push(movement);
   }
+
+  refreshCondition() {
+    this.condition = [];
+  }
 }
 
 module.exports = UserBridge;

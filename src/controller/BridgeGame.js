@@ -1,14 +1,17 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
+
+const UserBridge = require('../model/UserBridge');
+
 class BridgeGame {
   gameCount;
   bridge;
   userBridge;
-  constructor(bridge, userBridge) {
+  constructor(bridge) {
     this.gameCount = 0;
     this.bridge = bridge;
-    this.userBridge = userBridge;
+    this.userBridge = new UserBridge();
   }
 
   /**
@@ -23,6 +26,7 @@ class BridgeGame {
    * @param {number} bridgeSize 다리 길이
    */
   buildBridge(bridgeSize) {
+    this.addGameCount();
     this.bridge.setBridge(bridgeSize);
   }
 
@@ -49,7 +53,7 @@ class BridgeGame {
     let up = [];
     let down = [];
     for (let i = 0; i < this.userBridge.condition.length; i++) {
-      const currentResult = this.createCurrentMap(this.bridge.condition[i], this.userBridge.condition[i]);
+      const currentResult = this.getCurrentMap(this.bridge.condition[i], this.userBridge.condition[i]);
       up.push(currentResult[0]);
       down.push(currentResult[1]);
     }
@@ -62,7 +66,7 @@ class BridgeGame {
    * @param {string} valid 생성된 다리에서 플레이어가 건넜는지에 대한 여부. O 또는 X가 저장돼있다.
    * @returns 해당 다리 칸을 건넜는지에 대한 여부를 다리 모양에 맞게 배열로 반환한다.
    */
-  createCurrentMap(coordinate, valid) {
+  getCurrentMap(coordinate, valid) {
     if (coordinate === 'U' && valid === 'O') return ['O', ' '];
     else if (coordinate === 'D' && valid === 'O') return [' ', 'O'];
     else if (coordinate === 'U' && valid === 'X') return [' ', 'X'];
@@ -81,11 +85,12 @@ class BridgeGame {
   }
 
   /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * 사용자가 게임을 다시 시도할 때 사용하는 메서드로 사용자 입력에 따른 현재 다리 모양을 초기화한다.
    */
-  retry() {}
+  retry() {
+    this.addGameCount();
+    this.userBridge = new UserBridge();
+  }
 }
 
 module.exports = BridgeGame;

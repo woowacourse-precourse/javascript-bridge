@@ -44,7 +44,18 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(nextStep) {
+    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (userInput) => {
+      try {
+        const restartOrQuit = userInput;
+        this.validateGameCommand(restartOrQuit);
+        nextStep(restartOrQuit);
+      } catch (error) {
+        OutputView.printError(error);
+        this.readGameCommand(nextStep);
+      }
+    });
+  },
 
   /**
    * 플레이어가 입력한 다리 길이에 대한 유효성 검사 메서드
@@ -57,10 +68,18 @@ const InputView = {
 
   /**
    * 플레이어가 입력한 이동에 대한 유효성 검사 메서드
-   * @param {number} movement 플레이어가 입력한 이동
+   * @param {string} movement 플레이어가 입력한 이동
    */
   validateMovement(movement) {
     InputValidation.isMovementAvailable(movement);
+  },
+
+  /**
+   * 플레이어가 입력한 게임 재시작 명령에 대한 유효성 검사 메서드
+   * @param {string} restartOrQuit 플레이어가 입력한 명령
+   */
+  validateGameCommand(restartOrQuit) {
+    InputValidation.isGameCommandAvailable(restartOrQuit);
   },
 };
 

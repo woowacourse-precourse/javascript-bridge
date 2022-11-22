@@ -20,7 +20,7 @@ const OutputView = {
    */
   printMap(up, down) {
     Console.print(`[ ${up.join(' | ')} ]`);
-    Console.print(`[ ${down.join(' | ')} ]`);
+    Console.print(`[ ${down.join(' | ')} ]\n`);
   },
 
   /**

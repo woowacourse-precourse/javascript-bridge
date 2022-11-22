@@ -1,19 +1,16 @@
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 const Bridge = require('./model/Bridge');
-const UserBridge = require('./model/UserBridge');
 const BridgeGame = require('./controller/BridgeGame');
 
 const { Console } = require('@woowacourse/mission-utils');
 
 class App {
   bridge;
-  userBridge;
   bridgeGame;
   moveCount;
   constructor() {
     this.bridge = new Bridge();
-    this.userBridge = new UserBridge();
     this.bridgeGame = new BridgeGame(this.bridge, this.userBridge);
     this.moveCount = 0;
   }
@@ -22,17 +19,16 @@ class App {
     this.startGame();
   }
   startGame() {
-    this.bridgeGame.addGameCount();
     this.buildBridge();
   }
   buildBridge() {
     InputView.readBridgeSize((bridgeSize) => {
       this.bridgeGame.buildBridge(bridgeSize);
-      Console.print(this.bridge);
       this.moveOnBridge();
     });
   }
   moveOnBridge() {
+    Console.print(this.bridge.condition);
     InputView.readMoving((movement) => {
       this.bridgeGame.move(movement, this.moveCount);
       this.moveCount += 1;
@@ -48,8 +44,18 @@ class App {
   showMap(up, down) {
     OutputView.printMap(up, down);
     const gameSet = this.bridgeGame.checkGameSet(up, down);
-    Console.print(gameSet);
-    this.moveOnBridge();
+    if (gameSet === true) {
+      this.askRetry();
+    } else this.moveOnBridge();
+  }
+  askRetry() {
+    InputView.readGameCommand((restartOrQuit) => {
+      if (restartOrQuit === 'R') {
+        this.bridgeGame.retry();
+        this.moveOnBridge();
+      } else if (restartOrQuit === 'Q') {
+      }
+    });
   }
 }
 
