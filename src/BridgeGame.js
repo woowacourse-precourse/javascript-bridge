@@ -1,20 +1,61 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+const { Console } = require("@woowacourse/mission-utils");
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+class BridgeGame {
+  constructor() {
+    this.mapIndex = 0;
+    this.map = [];
+    this.tryCount = 1;
+    this.upperBridge = [];
+    this.downBridge = [];
+  }
+
+  move(answer, bridge) {
+    if (answer === bridge[this.mapIndex]) {
+      this.mapIndex += 1;
+      this.map.push({ position: answer, result: "O" });
+      return this.map;
+    } else {
+      this.mapIndex += 1;
+      this.map.push({ position: answer, result: "X" });
+      return this.map;
+    }
+  }
+
+  mapToBridgeshape(map) {
+    this.upperBridge = [];
+    this.downBridge = [];
+    this.makeBridgeMap(map);
+    this.makeBridgeMapRightShape();
+    return [this.upperBridge, this.downBridge];
+  }
+
+  makeBridgeMap(map) {
+    map.map((el) => {
+      if (el.position === "U") {
+        this.upperBridge.push(` ${el.result} `);
+        this.downBridge.push("   ");
+      }
+      if (el.position === "D") {
+        this.upperBridge.push("   ");
+        this.downBridge.push(` ${el.result} `);
+      }
+    });
+  }
+
+  makeBridgeMapRightShape() {
+    this.upperBridge = JSON.stringify(this.upperBridge)
+      .replaceAll('"', "")
+      .replaceAll(",", "|");
+    this.downBridge = JSON.stringify(this.downBridge)
+      .replaceAll('"', "")
+      .replaceAll(",", "|");
+  }
+
+  retry() {
+    this.tryCount += 1;
+    this.mapIndex = 0;
+    this.map = [];
+  }
 }
 
 module.exports = BridgeGame;
