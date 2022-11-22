@@ -3,6 +3,7 @@ const ERROR_MESSAGE = {
   invalidCommand:
     '[ERROR] 게임을 다시 시도 하려면 R, 종료하려면 Q를 대문자로 입력해주세요.',
   invalidRange: '[ERROR] 다리의 길이는 3이상 20이하의 숫자여야 합니다.',
+  invalidType: '[ERROR] 다리의 길이는 숫자여야 합니다.',
 };
 
 module.exports = ERROR_MESSAGE;
