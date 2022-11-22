@@ -1,6 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
-const BridgeMaker = require('../src/BridgeMaker');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -35,39 +34,12 @@ const expectLogContains = (received, logs) => {
   });
 };
 
-const expectBridgeOrder = (received, upside, downside) => {
-  const upsideIndex = received.indexOf(upside);
-  const downsideIndex = received.indexOf(downside);
-
-  expect(upsideIndex).toBeLessThan(downsideIndex);
-};
-
-const runException = (inputs) => {
-  mockQuestions(inputs);
-  const logSpy = getLogSpy();
-  const app = new App();
-
-  app.play();
-
-  expectLogContains(getOutput(logSpy), ['[ERROR]']);
-};
-
-describe('다리 건너기 테스트', () => {
-  test('다리 생성 테스트', () => {
-    const randomNumbers = [1, 0, 0];
-    const mockGenerator = randomNumbers.reduce(
-      (acc, number) => acc.mockReturnValueOnce(number),
-      jest.fn(),
-    );
-
-    const bridge = BridgeMaker.makeBridge(3, mockGenerator);
-    expect(bridge).toEqual(['U', 'D', 'D']);
-  });
-
-  test('기능 테스트', () => {
+describe('값 일치 테스트', () => {
+  test('다리 길이가 20개이며 한 번에 모두 성공할 경우', () => {
+    const size = 20;
     const logSpy = getLogSpy();
-    mockRandoms([1, 0, 1]);
-    mockQuestions(['3', 'U', 'D', 'U']);
+    mockRandoms([...Array(size).fill(1)]);
+    mockQuestions([size, ...Array(size).fill('U')]);
 
     const app = new App();
     app.play();
@@ -75,15 +47,29 @@ describe('다리 건너기 테스트', () => {
     const log = getOutput(logSpy);
     expectLogContains(log, [
       '최종 게임 결과',
-      '[ O |   | O ]',
-      '[   | O |   ]',
+      '[ O | O | O | O | O | O | O | O | O | O | O | O | O | O | O | O | O | O | O | O ]',
+
       '게임 성공 여부: 성공',
       '총 시도한 횟수: 1',
     ]);
-    expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
   });
 
-  test('예외 테스트', () => {
-    runException(['a']);
+  test('다리 길이가 20개이며 100번 시도 후 성공할 경우', () => {
+    const size = 20;
+    const logSpy = getLogSpy();
+    mockRandoms([...Array(size).fill(1)]);
+    mockQuestions([size, ...Array(100).fill(['D', 'R']).flat(), ...Array(size).fill('U')]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '최종 게임 결과',
+      '[ O | O | O | O | O | O | O | O | O | O | O | O | O | O | O | O | O | O | O | O ]',
+
+      '게임 성공 여부: 성공',
+      '총 시도한 횟수: 101',
+    ]);
   });
 });
