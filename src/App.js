@@ -45,6 +45,27 @@ class App {
     }
   }
 
+  executeTry(bridgeGame) {
+    let lastTrySuccess = true;
+    let tryCountValidate = this.checkTryCountValidation(bridgeGame);
+
+    while (lastTrySuccess && tryCountValidate) {
+      lastTrySuccess = this.executeMove(bridgeGame);
+      OutputView.printMap(bridgeGame, lastTrySuccess);
+      tryCountValidate = this.checkTryCountValidation(bridgeGame);
+    }
+
+    return lastTrySuccess;
+  }
+
+  checkTryCountValidation(bridgeGame) {
+    if (bridgeGame.tryCountGetter() < bridgeGame.bridgeGetter().length) {
+      return true;
+    }
+
+    return false;
+  }
+
   executeMove(bridgeGame) {
     try {
       const moveDirection = InputView.readMoving();
