@@ -31,7 +31,7 @@ class BridgeGameController {
 
   moveBridge(moveDirection) {
     this.bridgeGame.move(this.#bridgeInfo, moveDirection);
-    OutputView.printMap(this.bridgeGame.bridgeMap);
+    OutputView.printMap(this.bridgeGame.getBridgeMap());
     this.gameResult();
   }
 
@@ -51,7 +51,7 @@ class BridgeGameController {
   }
 
   keepGoing() {
-    if (this.bridgeGame.result === RESULT.FAILURE) {
+    if (this.bridgeGame.getResult() === RESULT.FAILURE) {
       InputView.readGameCommand(
         this.retryGame.bind(this),
         this.gameOver.bind(this)
@@ -63,9 +63,9 @@ class BridgeGameController {
 
   gameOver() {
     OutputView.printResult(
-      this.bridgeGame.bridgeMap,
+      this.bridgeGame.getBridgeMap(),
       this.#bridgeInfo.tryCount,
-      this.bridgeGame.result
+      this.bridgeGame.getResult()
     );
   }
 
