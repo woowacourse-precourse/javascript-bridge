@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { OUTPUT } = require("./constants/messages");
-const { INPUT_VALUE } = require("./constants/values");
+const { INPUT_VALUE, DIRECTION_INDEX } = require("./constants/values");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -16,8 +16,8 @@ const OutputView = {
     const bridgeMap = this.createBridgeMap(currentBridge);
     this.transformBridgeMap(bridgeMap);
 
-    Console.print(bridgeMap[0]);
-    Console.print(bridgeMap[1]);
+    Console.print(bridgeMap[DIRECTION_INDEX.UPSIDE]);
+    Console.print(bridgeMap[DIRECTION_INDEX.DOWNSIDE]);
   },
 
   createBridgeMap(currentBridge) {
@@ -30,12 +30,12 @@ const OutputView = {
 
   createSinglBridge(currentBridge, bridgeMap, index) {
     if (currentBridge[index][0] === INPUT_VALUE.UP) {
-      bridgeMap[0] += ` ${currentBridge[index][1]} |`;
-      bridgeMap[1] += "   |";
+      bridgeMap[DIRECTION_INDEX.UPSIDE] += ` ${currentBridge[index][1]} |`;
+      bridgeMap[DIRECTION_INDEX.DOWNSIDE] += "   |";
     }
     if (currentBridge[index][0] === INPUT_VALUE.DOWN) {
-      bridgeMap[0] += "   |";
-      bridgeMap[1] += ` ${currentBridge[index][1]} |`;
+      bridgeMap[DIRECTION_INDEX.UPSIDE] += "   |";
+      bridgeMap[DIRECTION_INDEX.DOWNSIDE] += ` ${currentBridge[index][1]} |`;
     }
   },
 
@@ -48,10 +48,10 @@ const OutputView = {
   },
 
   transformBridgeMap(bridgeMap) {
-    bridgeMap[0] = this.sliceLastString(bridgeMap[0]);
-    bridgeMap[1] = this.sliceLastString(bridgeMap[1]);
-    bridgeMap[0] = this.addLastCloseMark(bridgeMap[0]);
-    bridgeMap[1] = this.addLastCloseMark(bridgeMap[1]);
+    bridgeMap[DIRECTION_INDEX.UPSIDE] = this.sliceLastString(bridgeMap[0]);
+    bridgeMap[DIRECTION_INDEX.DOWNSIDE] = this.sliceLastString(bridgeMap[1]);
+    bridgeMap[DIRECTION_INDEX.UPSIDE] = this.addLastCloseMark(bridgeMap[0]);
+    bridgeMap[DIRECTION_INDEX.DOWNSIDE] = this.addLastCloseMark(bridgeMap[1]);
   },
 
   /**

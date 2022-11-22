@@ -16,7 +16,13 @@ const STATES = {
   INITIAL_ROUND: 1,
 };
 
+const DIRECTION_INDEX = {
+  UPSIDE: 0,
+  DOWNSIDE: 1,
+};
+
 module.exports = {
   INPUT_VALUE,
   STATES,
+  DIRECTION_INDEX,
 };
