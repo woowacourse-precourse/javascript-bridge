@@ -72,7 +72,7 @@ const InputView = {
   },
   gameCommandTryCatch(inputValue) {
     try {
-      BridgeGameController.getCommand(inputValue);
+      BridgeGameController.validationCommand(inputValue);
       this.checkRetry(inputValue);
     } catch (error) {
       BridgeGameController.errorMessage(error.message);

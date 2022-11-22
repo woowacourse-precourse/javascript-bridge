@@ -30,8 +30,11 @@ const BridgeGameController = {
     );
     this.outputData(false);
   },
-  getCommand(inputValue) {
+  validationCommand(inputValue) {
     Validator.retryOrQuit(inputValue);
+  },
+  getCommand() {
+    this.bridgeGame.retry();
   },
   errorMessage(message) {
     OutputView.printError(message);
