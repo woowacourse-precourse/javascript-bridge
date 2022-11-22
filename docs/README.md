@@ -1,5 +1,6 @@
 ## 📗디렉토리 구조
 
+```
 📦src
 ┣ 📂controller
 ┃ ┣ 📜BridgeController.js
@@ -18,6 +19,7 @@
 ┣ 📜BridgeMaker.js
 ┣ 📜BridgeRandomNumberGenerator.js
 ┗ 📜Constants.js
+```
 
 ## 🇰🇷다이어그램
 
