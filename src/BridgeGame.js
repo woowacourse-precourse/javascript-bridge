@@ -1,3 +1,5 @@
+const { makeBridge } = require("./BridgeMaker");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -13,6 +15,10 @@ class BridgeGame {
     this.#numberOfAttempts = 1;
   }
 
+  setBridge(bridgeSize) {
+    this.#bridge = makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+  }
+
   getNumberOfAttempts() {
     return this.#numberOfAttempts;
   }
@@ -20,7 +26,7 @@ class BridgeGame {
   getCurrentPosition() {
     return this.#currentPosition;
   }
-  
+
   getBridgeMap() {
     return this.#bridgeMap;
   }
