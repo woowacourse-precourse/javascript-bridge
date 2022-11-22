@@ -1,3 +1,5 @@
+const { errorMessage } = require("./constant/message.js");
+
 const Validation = {
   /**
    * @param {number} start : 범위의 시작값에 해당하는 숫자
@@ -12,8 +14,7 @@ const Validation = {
     return !this.isSame(elem1, elem2);
   },
   isInRange(start, end, number) {
-    if (end < start)
-      throw new Error("[ERROR] end는 start보다 항상 크거나 같아야 합니다.");
+    if (end < start) throw new Error(errorMessage.endExceedsStart);
     if (number < start || number > end) return false;
     return true;
   },
@@ -24,11 +25,11 @@ const Validation = {
    */
   validateBridgeLength(length) {
     if (isNaN(length)) {
-      throw new Error("[ERROR] 2~20 사이의 숫자를 입력해 주세요");
+      throw new Error(errorMessage.betweenNumber(2, 20));
     }
     const parsedLength = parseInt(length, 10);
     if (!this.isInRange(2, 20, parsedLength)) {
-      throw new Error("[ERROR] 입력할 수 있는 숫자의 범위를 초과하였습니다.");
+      throw new Error(errorMessage.outOfRange);
     }
     return parsedLength;
   },
@@ -40,7 +41,7 @@ const Validation = {
    */
   validateCommand(command, permission) {
     if (!permission.includes(command)) {
-      throw new Error("[ERROR] 허용되지 않은 문자열입니다.");
+      throw new Error(errorMessage.notAllowed);
     }
     return command;
   },
