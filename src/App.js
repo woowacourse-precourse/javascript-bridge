@@ -1,6 +1,6 @@
 const GameController = require("./Controller/GameController");
 
-class App { //
+class App {
   constructor() {
     this.controller = new GameController();
   }
