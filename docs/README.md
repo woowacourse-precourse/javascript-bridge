@@ -8,15 +8,17 @@
 [ ] BridgeMaker.js 구현
 ​	[ ] makeBridge 구현
 
-[X] InputView.js 구현
-​	[X] readBridgeSize 구현
-​	[X] readMoving 구현
-​	[X] readGameCommand 구현
+[x] InputView.js 구현
+​	[x] readBridgeSize 구현
+​	[x] readMoving 구현
+​	[x] readGameCommand 구현
 
 [ ] OutputView.js 구현
 ​	[ ] printMap 구현
 ​	[ ] printResult 구현
 
+[ ] Constants.js 구현
+​	[ ] MESSAGE 구현
 
 
 ## 기능 구현 방향
@@ -29,3 +31,4 @@
 
 우선 가장 쉬운 InputView를 구현한 뒤에 이미 구현된 BridgeRandomNumberGenerator를 사용하게될 BridgeMaker를 구현해야겠다.
 
+메시지들을 상수화 하기로 결정하고 Constants.js 파일을 만들었음
