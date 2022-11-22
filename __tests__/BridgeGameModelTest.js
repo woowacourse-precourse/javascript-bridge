@@ -7,7 +7,6 @@ describe("BridgeGameModel 클래스 테스트", () => {
     expect(bridgeGameModel.update("U")).toEqual({
       directions: ["U"],
       bridge: [],
-      pass: false,
     });
   });
 
@@ -17,7 +16,6 @@ describe("BridgeGameModel 클래스 테스트", () => {
     expect(bridgeGameModel.update("D")).toEqual({
       directions: ["D"],
       bridge: [],
-      pass: false,
     });
   });
 

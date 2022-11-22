@@ -26,7 +26,7 @@ const BridgeGameModel = class {
 
   update(move) {
     this.#directions.push(HASH[move]);
-    return { ...this.read(), pass: !this.isPass() };
+    return this.read();
   }
 
   read() {
