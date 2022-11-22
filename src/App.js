@@ -1,5 +1,9 @@
+const BridgeMaker = require("./BridgeMaker");
+
 class App {
-  play() {}
+  play() {
+    BridgeMaker();
+  }
 }
 
 module.exports = App;
