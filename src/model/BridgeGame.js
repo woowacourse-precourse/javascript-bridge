@@ -1,25 +1,25 @@
 const Bridge = require("./Bridge");
 
 class BridgeGame extends Bridge {
-  move(moving) {
-    const result = this.checkAnswer(moving)
-    this.updateState(moving, result);
+  move(moving, crosserLocation) {
+    const correct = this.checkCorrect(crosserLocation);
+    const result = moving === correct ? 'success' : 'failure';
     return result;
   }
 
-  checkAnswer(moving) {
-    const currentLocation = this.movingState.currentLocation
-    const correct = this.bridge[currentLocation];
-
-    return correct === moving ? true : false
+  checkCorrect(crosserLocation) {
+    const correct = this.bridge[crosserLocation];
+    return correct;
   }
 
-  retry(answer) {
-    if(answer === 'R') {
-      this.resetMovingState();
-      return true;
-    }
-    return false;
+  endCheck(state) {
+    const currentStatus = this.bridge.length === state.location ? 'end' : 'notYet';
+    return currentStatus;
+  }
+
+  retry(retry) {
+    if(retry === 'R') return 'reset';
+    return 'end';
   }
 }
 
