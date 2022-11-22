@@ -53,13 +53,21 @@ class BridgeGame {
     this.#currentPosition = 0;
     this.#numberOfAttempts += 1;
   }
+  /**
+   * 사용자가 실패했을 때 사용하는 메서드
+   */ 
+  fail() {
+    this.setBridgeMap();
+    this.setFailBridgeMap();
+    OutputView.printMap(this.getBridgeMap());
+  }
 
   insertCorrectBridge(upBridge, downBridge, answerDirection) {
-    if (answerDirection === Constant.UP_DIRECTION_STRING) {
+    if (answerDirection === Constant.COMMAND_UP_DIRECTION_STRING) {
       upBridge.push(Constant.CORRECT_STRING);
       downBridge.push(Constant.BLANK_STRING);
     }
-    if (answerDirection === Constant.DOWN_DIRECTION_STRING) {
+    if (answerDirection === Constant.COMMAND_DOWN_DIRECTION_STRING) {
       upBridge.push(Constant.BLANK_STRING);
       downBridge.push(Constant.CORRECT_STRING);
     }
@@ -73,7 +81,7 @@ class BridgeGame {
   }
 
   shallWeQuit(command) {
-    if (command === "Q") {
+    if (command === Constant.COMMAND_QUIT_STRING) {
       return true;
     }
     return false;
