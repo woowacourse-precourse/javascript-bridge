@@ -19,7 +19,7 @@ const OutputView = {
     let upBridge = [];
     for (let index = 0; index <= location; index++) {
       if (bridge[index] == 1) upBridge.push(" O ");
-      if (bridge[index] == 2) upBridge.push(" X ");
+      else if (bridge[index] == 2) upBridge.push(" X ");
       else upBridge.push("   ");
     }
     upBridge = "[" + upBridge.join("|") + "]";
@@ -29,7 +29,7 @@ const OutputView = {
     let downBridge = [];
     for (let index = 0; index <= location; index++) {
       if (bridge[index] == 3) downBridge.push(" X ");
-      if (bridge[index] == 4) downBridge.push(" O ");
+      else if (bridge[index] == 4) downBridge.push(" O ");
       else downBridge.push("   ");
     }
     downBridge = "[" + downBridge.join("|") + "]";
@@ -46,11 +46,11 @@ const OutputView = {
     MissionUtils.Console.print(
       `게임 성공 여부: ${this.printSuccess(bridge, location)}\n`
     );
-    MissionUtils.Console.print(`총 시도한 횟수 ${gameCnt}\n`);
+    MissionUtils.Console.print(`총 시도한 횟수: ${gameCnt}\n`);
   },
   printSuccess(bridge, location) {
-    if (bridge[location] == 2 || bridge[location] == 3) return "성공";
-    return "실패";
+    if (bridge[location] == 2 || bridge[location] == 3) return "실패";
+    return "성공";
   },
 };
 

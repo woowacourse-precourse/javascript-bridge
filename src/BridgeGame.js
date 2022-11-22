@@ -23,13 +23,13 @@ class BridgeGame {
   move(moving) {
     this.location++;
     if (this.bridge[this.location] == moving && moving == "U")
-      this.bridge[this.location] = 1;
-    if (this.bridge[this.location] != moving && moving == "U")
-      this.bridge[this.location] = 2;
-    if (this.bridge[this.location] != moving && moving == "D")
-      this.bridge[this.location] = 3;
-    if (this.bridge[this.location] == moving && moving == "D")
-      this.bridge[this.location] = 4;
+      this.bridge[this.location] = "1";
+    else if (this.bridge[this.location] != moving && moving == "U")
+      this.bridge[this.location] = "2";
+    else if (this.bridge[this.location] != moving && moving == "D")
+      this.bridge[this.location] = "3";
+    else if (this.bridge[this.location] == moving && moving == "D")
+      this.bridge[this.location] = "4";
   }
 
   /**

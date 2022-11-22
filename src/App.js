@@ -4,16 +4,21 @@ const OutputView = require("../src/OutputView");
 const BridgeGame = require("./BridgeGame");
 
 class App {
-  gameCnt = 0;
+  gameCnt = 1;
   movingCount = 0;
   play() {
     OutputView.printStart();
     let size = this.makeSize();
+    MissionUtils.Console.print(size);
     const bridgeGame = new BridgeGame(size);
+    MissionUtils.Console.print(bridgeGame.bridge);
     let command;
     do {
       let moving = this.makeMoving();
+      MissionUtils.Console.print(moving);
+      MissionUtils.Console.print(bridgeGame.location);
       bridgeGame.move(moving);
+      MissionUtils.Console.print(bridgeGame.bridge);
       OutputView.printMap(bridgeGame.bridge, bridgeGame.location);
       command = true;
       if (this.checkFail(bridgeGame.bridge, bridgeGame.location)) {
