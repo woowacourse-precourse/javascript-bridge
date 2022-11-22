@@ -44,7 +44,7 @@ class BridgeGame {
   }
 
   printResultBridge() {
-    Console.print(this.#currentResult);
+    OutputView.printMap(this.#currentResult);
   }
 }
 

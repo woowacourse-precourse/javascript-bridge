@@ -3,6 +3,10 @@ const { OUTPUT_MESSAGE } = require('../constants/Message');
 
 const OutputView = {
 
+  printMap(map) {
+    Console.print(map);
+  },
+
   printStart() {
     Console.print(OUTPUT_MESSAGE.GAME_START);
   },
