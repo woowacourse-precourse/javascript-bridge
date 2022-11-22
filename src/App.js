@@ -4,6 +4,10 @@ const InputView = require('./InputView');
 class App {
   constructor() {
     this.handleBridgeSize = this.handleBridgeSize.bind(this);
+    this.handleBridgeMoveing = this.handleBridgeMoveing.bind(this);
+    this.bridge;
+    this.userState;
+    this.countTry;
   }
 
   play() {
@@ -14,6 +18,25 @@ class App {
   handleBridgeSize(size) {
     this.bridgeGame = new BridgeGame(size);
     InputView.readMoving(this.handleBridgeMoveing);
+  }
+
+  handleBridgeMoveing(und) {
+    const [condition, bridge, userState, countTry] = this.bridgeGame.move(und);
+
+    OutputView.printMap(bridge, userState);
+
+    if (condition === 0) {
+      OutputView.printResult(bridge, userState, countTry, true);
+      InputView.close();
+    } else if (condition === 1) {
+      InputView.readMoving(this.handleBridgeMoveing);
+    } else if (condition === 2) {
+      InputView.readGameCommand(this.handleGameCommand);
+    }
+
+    this.bridge = bridge;
+    this.userState = userState;
+    this.countTry = countTry;
   }
 }
 
