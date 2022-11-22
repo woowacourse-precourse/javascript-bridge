@@ -62,6 +62,11 @@ const Controller = {
         Controller.move(bridgeGame);    
     },
 
+    exit(bridgeGame) {
+        const result = bridgeGame.getResult();
+        const map = bridgeGame.getMap();
+        OutputView.printResult({map, result});
+    }
 }
 
 module.exports = Controller;
