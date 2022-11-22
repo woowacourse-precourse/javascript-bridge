@@ -26,26 +26,37 @@ class BridgeGame {
   start() {
     this.#totalNumber += 1;
     OutputView.printStartMessage();
-    this.bridgeMake();
+    this.bridgeSize();
   }
 
-  bridgeMake() {
+  bridgeSize() {
     InputView.readBridgeSize(input => {
       this.validateCheck(
         () => Validation.lengthCheck(input),
-        () => this.bridgeMake(),
+        () => this.bridgeSize(),
       );
 
       this.#length = input;
-      this.#bridge = BridgeMaker.makeBridge(
-        this.#length,
-        BridgeRandomNumberGenerator.generate,
-      );
+      this.bridgeMake();
+    });
+  }
 
-      InputView.readMoving(input => {
-        Validation.moveMessageCheck(input);
-        this.move(input);
-      });
+  bridgeMake() {
+    this.#bridge = BridgeMaker.makeBridge(
+      this.#length,
+      BridgeRandomNumberGenerator.generate,
+    );
+
+    this.step();
+  }
+
+  step() {
+    InputView.readMoving(input => {
+      this.validateCheck(
+        () => Validation.moveMessageCheck(input),
+        () => this.step(),
+      );
+      this.move(input);
     });
   }
 
@@ -66,33 +77,52 @@ class BridgeGame {
   move(message) {
     this.#moveList.push(message);
     if (message === this.#bridge[this.#moveList.length - 1]) {
-      OutputView.printMap(this.#bridge, this.#moveList);
-      if (this.#bridge.toString() == this.#moveList.toString()) {
-        OutputView.printResult(this.#bridge, this.#moveList, this.#totalNumber);
-      } else {
-        InputView.readMoving(input => {
-          Validation.moveMessageCheck(input);
-          this.move(input);
-        });
-      }
+      this.nextMove();
     }
 
     if (message !== this.#bridge[this.#moveList.length - 1]) {
-      OutputView.printMap(this.#bridge, this.#moveList);
-      InputView.readGameCommand(input => {
-        Validation.restartMessageCheck(input);
-        if (input === 'R') {
-          this.retry();
-        }
-        if (input === 'Q') {
-          OutputView.printResult(
-            this.#bridge,
-            this.#moveList,
-            this.#totalNumber,
-          );
-        }
-      });
+      this.die();
     }
+  }
+
+  nextMove() {
+    OutputView.printMap(this.#bridge, this.#moveList);
+    if (this.#bridge.toString() == this.#moveList.toString()) {
+      OutputView.printResult(this.#bridge, this.#moveList, this.#totalNumber);
+      return;
+    }
+
+    InputView.readMoving(input => {
+      this.validateCheck(
+        () => Validation.moveMessageCheck(input),
+        () => this.step(),
+      );
+      this.move(input);
+    });
+  }
+
+  die() {
+    OutputView.printMap(this.#bridge, this.#moveList);
+    InputView.readGameCommand(input => {
+      this.validateCheck(
+        () => Validation.restartMessageCheck(input),
+        () => this.die(),
+      );
+      this.handleRestartMessage(input);
+    });
+  }
+
+  handleRestartMessage(message) {
+    if (message === 'R') {
+      this.retry();
+    }
+    if (message === 'Q') {
+      this.end();
+    }
+  }
+
+  end() {
+    OutputView.printResult(this.#bridge, this.#moveList, this.#totalNumber);
   }
 
   /**
