@@ -33,7 +33,7 @@ const InputView = {
       Validation.validateUserChoice(userInput);
       console.log(bridgeGame.BridgeStatus, userInput);
       const data = bridgeGame.move(userInput);
-      if(data === "win") OutputView.printResult(bridgeGame.BridgeResultArray, bridgeGame.CompareResult, 10);
+      if(data === "win") OutputView.printResult(bridgeGame.BridgeResultArray, bridgeGame.CompareResult, bridgeGame.count);
       if(data === "end") this.readGameCommand();
       this.readMoving();
     });

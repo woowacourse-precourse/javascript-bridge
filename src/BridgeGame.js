@@ -7,9 +7,10 @@ const OutputView = require('./OutputView');
 class BridgeGame {
   constructor(SIZE, BridgeStatus){
     this.SIZE = SIZE;
-    this.BridgeStatus = BridgeStatus;
+    this.BridgeStatus = BridgeStatus; 
     this.BridgeIndex = 0;
     this.BridgeResultArray = [[], []];
+    this.count = 1;
   }
 
   /**
@@ -36,6 +37,7 @@ class BridgeGame {
   retry() {
     this.BridgeResultArray = [[], []];
     this.BridgeIndex = 0;
+    this.count += 1;
   }
 }
 
