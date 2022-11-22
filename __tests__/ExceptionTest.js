@@ -21,3 +21,18 @@ describe('1. 다리 길이 입력에 대한 예외처리', () => {
         } ).toThrow();
     })
 })
+
+describe('2. 사용자가 이동할 칸 입력에 대한 예외처리', () => {
+    const controller = new BridgeController(views);
+    test.each([
+        ',',
+        '1ㄷ',
+        '40',
+        ' ',
+        'abc'
+    ])('사용자가 이동할 칸 입력값 %s일 때 에러를 반환한다.', (input) => {
+        expect(() => { 
+             controller.movingException(input)
+        } ).toThrow();
+    })
+})
