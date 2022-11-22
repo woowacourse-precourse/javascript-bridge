@@ -709,12 +709,22 @@ describe('현재 다리 위치의 결과를 가져오는 메서드 테스트', (
 });
 
 describe('게임 오버 파악하는 메서드 테스트', () => {
-  const bridgeGame = new BridgeGame();
-
   test('메소드 이름은 "isGameOver"로 정의된다.', () => {
+    const bridgeGame = new BridgeGame();
     const METHOD_NAME = 'isGameOver';
 
     expect(bridgeGame.isGameOver.name).toEqual(METHOD_NAME);
+  });
+
+  test('true를 반환한다.', () => {
+    const bridgeGame = new BridgeGame();
+    const POSITION_LOG = [[0, 0], 'X'];
+    const RECEIVED = true;
+
+    bridgeGame.move();
+    bridgeGame.setPositionLog(...POSITION_LOG);
+
+    expect(bridgeGame.isGameOver()).toEqual(RECEIVED);
   });
 });
 
