@@ -51,13 +51,54 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(turnNumber) {
     MissionUtils.Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (answer) => {
-        console.log(`다리의 길이: ${answer}`);
+        this.movingExceptionCatch(answer, turnNumber);
+        const brgGame = new BridgeGame();
+        this.gameContinue = brgGame.move(turnNumber, this.bridge, answer);
+        this.isGameContinueQuestion(turnNumber, answer);
       }
     );
+  },
+
+  isGameContinueQuestion(turnNumber, answer) {
+    if (this.gameContinue > 0) this.successContinueGame(turnNumber, answer);
+    if (this.gameContinue < 0) this.inputWrongAnswer(turnNumber, answer);
+    if (this.gameContinue == 0) this.gameOver(turnNumber, answer);
+  },
+
+  successContinueGame(turnNumber, answer) {
+    let moveAndBool = answer + "T";
+    OutputView.makeBridgeMap(turnNumber, this.bridge, moveAndBool);
+    this.readMoving(turnNumber + 1);
+  },
+
+  inputWrongAnswer(turnNumber, answer) {
+    let moveAndBool = answer + "F";
+    OutputView.makeBridgeMap(turnNumber, this.bridge, moveAndBool);
+    this.readGameCommand(turnNumber, answer);
+  },
+
+  gameOver(turnNumber, answer) {
+    let moveAndBool = answer + "T";
+    OutputView.printResult(turnNumber, moveAndBool, this.tryCount);
+    MissionUtils.Console.close();
+  },
+
+  movingExceptionCatch(answer, turnNumber) {
+    try {
+      this.movingException(answer);
+    } catch (e) {
+      MissionUtils.Console.print(e);
+      this.readMoving(turnNumber);
+    }
+  },
+
+  movingException(answer) {
+    if (answer != this.MOVE_UP && answer != this.MOVE_DOWN)
+      throw "[ERROR] U 혹은 D만 입력할 수 있습니다.";
   },
 
   /**
