@@ -224,24 +224,24 @@ const retryTest = () => {
         testId: "3-2-2",
         explain: "시도 횟수 확인",
         param: ["R", "gameStatus", ["D"]],
-        expected: { success: false, playing: false, trial: 1 },
+        expected: { success: false, playing: true, trial: 2 },
       },
       {
         testId: "3-2-3",
         explain: "재시작이 잘 되는가?",
-        param: ["R", "gameStatus", ["U", "D", "D", "U"]],
-        expected: { success: true, playing: false, trial: 1 },
+        param: ["R", "gameStatus", ["U", "D", "D", "D"]],
+        expected: { success: false, playing: true, trial: 2 },
       },
     ];
 
     const expectCallbackFunction = (...param) => {
-      const [input, checkStatus, move] = param;
+      const [input, checkMethod, move] = param;
       const game = new BridgeGame(4);
       move.forEach((moveInput) => {
         game.move(moveInput);
       });
       game.retry(input);
-      return game[checkStatus];
+      return game[checkMethod];
     };
 
     testEachCaseFromFormat(testCase, expectCallbackFunction);
