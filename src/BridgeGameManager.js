@@ -46,19 +46,19 @@ class BridgeGameManager {
         return throwException(errorMsg, this.requestDirection.bind(this));
 
       this.#bridgeGame.move(direction);
-      this.printBridgeCrossingResult();
+      this.printMovingResult();
 
-      this.actionAboutBridgeGame();
+      this.actionAboutMoving();
     });
   }
 
-  printBridgeCrossingResult() {
+  printMovingResult() {
     const bridgeCrossingResult = this.#bridgeGame.getBridgeCrossingResult();
 
     OutputView.printMap(bridgeCrossingResult);
   }
 
-  actionAboutBridgeGame() {
+  actionAboutMoving() {
     if (this.#bridgeGame.isFail()) return this.requestRestartOrQuit();
 
     if (this.#bridgeGame.isLast()) return this.quit();

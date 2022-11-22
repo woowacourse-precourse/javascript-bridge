@@ -32,13 +32,13 @@ class BridgeGame {
   }
 
   setBridgeCrossingResult(bridgeCrossingResult) {
-    this.#crossingOrder.forEach(([direction, directionNumber], idx) => {
+    this.#crossingOrder.forEach(([direction, position], idx) => {
       const isCross = direction === this.#bridge[idx];
 
-      bridgeCrossingResult[directionNumber].push(
+      bridgeCrossingResult[position].push(
         isCross ? CROSSING_RESULT.pass : CROSSING_RESULT.fail
       );
-      bridgeCrossingResult[Math.abs(directionNumber - 1)].push(
+      bridgeCrossingResult[Math.abs(position - 1)].push(
         CROSSING_RESULT.notSeleted
       );
     });
