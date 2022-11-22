@@ -19,15 +19,29 @@ class BridgeGame {
     if(this.mainBridges[i] === user) this.result = true;
     if(this.mainBridges[i] !== user) this.settingXBridge(user);
     switch(this.result){
-    
+      case user == "U":
+        this.makeUpDownBridge('O', ' ');
+        break;
+      case user == "D":
+        this.makeUpDownBridge(' ', 'O');
+        break;
     }
     return this.result;
   }
   settingXBridge(user){
     switch(true){
+      case user == "U":
+        this.makeUpDownBridge('X', ' ');
+        break;
+      case user == "D":
+        this.makeUpDownBridge(' ', 'X');
+        break;
+
     }
   }
-  makeUpDownBridge(){
+  makeUpDownBridge(check1, check2){
+    this.setBridge.upBridge.push(check1);
+    this.setBridge.downBridge.push(check2);
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
