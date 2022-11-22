@@ -1,14 +1,12 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { GAME_START_MESSAGE } = require("./constants");
 const InputView  = require("./InputView");
-const OutputView = require("./OutputView");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeGame = require("./BridgeGame");
 
 class App {
 
   play() {
-    Console.print('다리 건너기 게임을 시작합니다.\n\n');  
-    InputView.readBridgeSize();   
+    Console.print(GAME_START_MESSAGE);  
+    InputView.readBridgeSize(); //첫 입력 시작
   }
 }
 

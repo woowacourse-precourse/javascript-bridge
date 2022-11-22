@@ -1,6 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { BRIDGE_SIZE, BRIDGE_MOVING, GAME_COMMAND } = require("./constants");
 
+//에러 메시지들
 const BASE_MESSAGE = "[ERROR] ";
 const ERROR_MESSAGE = Object.freeze({
     BRIDGE_RANGE_ERROR: BASE_MESSAGE + "다리 길이는 3부터 20 사이의 숫자여야 합니다.",

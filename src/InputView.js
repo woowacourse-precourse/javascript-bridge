@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { BRIDGE_INPUT_MESSAGE, MOVE_INPUT_MESSAGE, COMMAND_INPUT_MESSAGE } = require("./constants");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
@@ -19,24 +20,21 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine('다리의 길이를 입력해주세요.\n', (length) => {
+    Console.readLine(BRIDGE_INPUT_MESSAGE, (length) => {
         if(InputValidation.validateBridgeSize(length)) this.readBridgeSize();
         else {
           const bridgeList = BridgeMaker.makeBridge(length, RandomNumGenerator.generate);
           console.log(bridgeList);
           const bridgeGame = new BridgeGame(bridgeList, length);
-          this.readMoving(length, bridgeGame);
-      
-        }
-      //this.validateSize(length);
-      
+          this.readMoving(length, bridgeGame);      
+        }    
     })
   },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(length, bridgeGame) {
-    Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (upDown) => {
+    Console.readLine(MOVE_INPUT_MESSAGE, (upDown) => {
       if(InputValidation.validateMove(upDown)) {
         this.readMoving(length,bridgeGame);
       } else {
@@ -58,7 +56,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridgeGame) {
-    Console.readLine('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (command)=> {
+    Console.readLine(COMMAND_INPUT_MESSAGE, (command)=> {
       if(InputValidation.validateCommand(command)) this.readGameCommand(bridgeGame);
       else {
         const gameCount = bridgeGame.increaseGameCount();
