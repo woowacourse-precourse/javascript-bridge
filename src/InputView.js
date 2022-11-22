@@ -3,68 +3,57 @@ const { Console } = require('@woowacourse/mission-utils');
 const { MOVING, GAME_COMMANDS, GAME_RESULT } = require('./constants/index');
 const BridgeGame = require('./BridgeGame');
 const Validation = require('./Validation');
-const OutputView = require('./OutputView');
 
 const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (bridgeSize) => {
       const checkedSize = Validation.validateBridgeSize(bridgeSize);
-      if (checkedSize) {
-        this.readBridgeSize();
-      }
+      if (checkedSize) this.readBridgeSize();
+
       const bridgeGame = new BridgeGame();
-      const bridge = bridgeGame.prepare(bridgeSize);
-      let movingRoute = [[], []];
-      let UserTryCount = 1;
-      this.readMoving(bridge, movingRoute, UserTryCount);
+      bridgeGame.prepare(bridgeSize);
+      this.readMoving(bridgeGame, bridgeSize);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge, movingRoute, UserTryCount) {
+  readMoving(bridgeGame, bridgeSize) {
     Console.readLine(INPUT_MESSAGE.MOVING_COMMAND, (movingCommand) => {
       const checkedMoving = Validation.validateMovingCommand(movingCommand);
 
-      if (checkedMoving) {
-        return this.readMoving(bridge, movingRoute, UserTryCount);
-      }
+      if (checkedMoving) return this.readMoving(bridgeGame, bridgeSize);
 
-      const bridgeGame = new BridgeGame();
-      const gameReult = bridgeGame.move(movingCommand, bridge, movingRoute);
-
+      const movingRoute = bridgeGame.move(movingCommand);
       if (
-        gameReult[0].includes(MOVING.WRONG_ANSWER) ||
-        gameReult[1].includes(MOVING.WRONG_ANSWER)
+        movingRoute[0].includes(MOVING.WRONG_ANSWER) ||
+        movingRoute[1].includes(MOVING.WRONG_ANSWER)
       ) {
-        return this.readGameCommand(bridge, UserTryCount, movingRoute);
+        return this.readGameCommand(bridgeGame, bridgeSize);
       }
-      if (gameReult[0].length === bridge.length) {
-        return OutputView.printResult(GAME_RESULT.SUCCESS, UserTryCount, movingRoute);
+      if (movingRoute[0].length === parseInt(bridgeSize, 10)) {
+        return bridgeGame.finish(GAME_RESULT.SUCCESS);
       }
-      return this.readMoving(bridge, gameReult, UserTryCount);
+      return this.readMoving(bridgeGame, bridgeSize);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge, UserTryCount, movingRoute) {
+  readGameCommand(bridgeGame, bridgeSize) {
     Console.readLine(INPUT_MESSAGE.GAME_COMMAND, (gameCommand) => {
       const checkedGameCommand = Validation.validateGameCommand(gameCommand);
-      if (checkedGameCommand) {
-        return this.readGameCommand(bridge, UserTryCount, movingRoute);
-      }
+
+      if (checkedGameCommand) return this.readGameCommand(bridgeGame);
 
       if (gameCommand === GAME_COMMANDS.RETRY) {
-        UserTryCount += 1;
-        const bridgeGame = new BridgeGame();
-        const resetMovingRoute = bridgeGame.retry(bridge);
-        return this.readMoving(bridge, resetMovingRoute, UserTryCount);
+        bridgeGame.retry();
+        return this.readMoving(bridgeGame, bridgeSize);
       }
       if (gameCommand === GAME_COMMANDS.QUIT) {
-        OutputView.printResult(GAME_COMMANDS.QUIT, UserTryCount, movingRoute);
+        return bridgeGame.finish(GAME_RESULT.FAIL);
       }
     });
   },
