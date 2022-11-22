@@ -42,15 +42,10 @@ class BridgeGame {
 
     const lastIndex = this.#userState.length - 1;
 
-    if (this.#bridge[lastIndex] === this.#userState[lastIndex]) {
-      if (this.#bridge.length === this.#userState.length) {
-        this.#condition = 0;
-      } else {
-        this.#condition = 1;
-      }
-    } else {
-      this.#condition = 2;
-    }
+    const isCorrect = this.#bridge[lastIndex] === this.#userState[lastIndex];
+    const isFinish = this.#bridge.length === this.#userState.length;
+    this.#condition = isCorrect ? (isFinish ? 0 : 1) : 2;
+
     return [this.#condition, this.#bridge, this.#userState, this.#countTry];
   }
   /**
