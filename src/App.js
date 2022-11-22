@@ -1,29 +1,28 @@
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./views/OutputView');
 const InputView = require('./views/InputView');
-const { command } = require('./constants/Messages');
 
+// app 싱글톤으로 만들기
 class App {
   #game;
   #attempts = 0;
 
-  play() {
+  async play() {
     OutputView.printStartMessage();
-    this.#startGame();
+    let size = await this.#startGame();
+    await this.#temp(size);
+    return this.#end();
   }
 
   async #startGame() {
     this.#game = new BridgeGame();
     let size = await this.#tryCatch(this.#getAndSetBridgeSize.bind(this));
     this.#game.makeBridge();
-    const result = await this.#makeAttempt(size);
-    // 져서 끝난 것이라면 retry 묻기!
-    if (!result) {
-      // retry 입력문
-      // 사용자 결과~
-      let answer = await InputView.readGameCommand();
-      this.#game.retry(answer);
-    }
+    return size;
+  }
+
+  #end() {
+    console.log('~~끗~~');
   }
 
   async #getAndSetBridgeSize() {
@@ -32,16 +31,26 @@ class App {
     return Number(input);
   }
 
+  async #temp(size) {
+    let attemptResult = await this.#makeAttempt(size);
+
+    if (!attemptResult) {
+      let reply = await InputView.readGameCommand();
+      let retry = await this.#game.retry(reply);
+      if (retry) return this.#temp(size);
+    }
+  }
+
   async #makeAttempt(size) {
     this.#attempts++;
     let round = 0;
     let moves = [];
 
     while (round < size) {
-      let roundResult = await this.#playRound(round, moves);
-      moves[round++] = [roundResult, command];
+      let [moveResult, command] = await this.#playRound(round, moves);
+      moves[round++] = [moveResult, command];
 
-      if (!roundResult) return false;
+      if (!moveResult) return false;
     }
 
     return true;
@@ -55,7 +64,7 @@ class App {
         let command = await InputView.readMoving();
         let moveResult = await this.#game.move(command, currentRound);
         OutputView.printMap(moves.concat([[moveResult, command]]));
-        break;
+        return [moveResult, command];
       } catch (error) {
         OutputView.printError(error);
       }
