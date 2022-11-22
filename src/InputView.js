@@ -29,20 +29,16 @@ const InputView = {
       game.pushInput(reply);
       const map = game.makeMap();
       OutputView.printMap(map);
+
       const flag = game.move();
-      if (flag === 0) {
-        this.readGameCommand(game);
-        return;
-      }
-      if (flag === 1) {
+      if (flag === 0) this.readGameCommand(game);
+      else if (flag === 1) {
         const map = game.makeMap();
         OutputView.printResult(map);
         OutputView.printGameResult(true);
         OutputView.printTryGame(game.getCount());
         Console.close();
-        return;
-      }
-      this.readMoving(game);
+      } else this.readMoving(game);
     });
   },
 
