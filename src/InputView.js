@@ -86,7 +86,7 @@ const InputView = {
       return this.isGameDone();
     }
     if (!Boolean) {
-      this.printMapWhenLose();
+      return this.printMapWhenLose();
     }
   },
 

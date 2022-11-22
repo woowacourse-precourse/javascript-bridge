@@ -47,7 +47,9 @@ class BridgeGame {
       this.downBridge = BRIDGE.INITAIL_DOWN;
       return this.printFirstMap(this.boolean, letter);
     }
-    if (count !== 0) return this.printAfterMap(this.boolean, letter);
+    if (count !== 0) {
+      return this.printAfterMap(this.boolean, letter);
+    }
   }
 
   printFirstMap(boolean, letter) {
