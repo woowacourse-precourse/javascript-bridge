@@ -5,6 +5,11 @@ const UPANDDOWN = {
   D: 1,
   U: 0
 }
+const BOOLEAN = {
+  true: "성공",
+  false: "실패"
+}
+
 const SAME = 'O';
 const DIFFERENT = 'X';
 const ROW = 2;
@@ -15,7 +20,7 @@ const OutputView = {
     bigBridgeArr = this.createPrintBridge(bridgeDirection, movingDirection, bigBridgeArr);
     const [upString, downString] = this.printScript(bigBridgeArr);
     MissionUtils.Console.print(`${upString.join('')}`);
-    MissionUtils.Console.print(`${downString.join('')}`);
+    MissionUtils.Console.print(`${downString.join('')}\n`);
     return bigBridgeArr;
   },
   
@@ -48,7 +53,15 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridgeArr, bool, cnt) {
+    const [upString, downString] = this.printScript(bridgeArr);
+    MissionUtils.Console.print(`${Script.RESULT}`);
+    MissionUtils.Console.print(`${upString.join('')}`);
+    MissionUtils.Console.print(`${downString.join('')}\n`);
+    MissionUtils.Console.print(`${Script.BOOL}${BOOLEAN[bool]}`);
+    MissionUtils.Console.print(`${Script.CNT}${cnt}`);
+    MissionUtils.Console.close();
+  },
 };
 
 module.exports = OutputView;
