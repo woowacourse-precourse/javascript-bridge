@@ -31,6 +31,10 @@ class Result {
     return this.#result;
   }
 
+  get result() {
+    return this.#result;
+  }
+
   addResult(bridge, right, index) {
     let string = RESULT_CHARACTER.OPEN;
     for (let x = 0; x < index; x++) {
