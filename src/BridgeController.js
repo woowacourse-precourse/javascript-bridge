@@ -43,15 +43,20 @@ class BridgeController {
 
     createMoving(moving) {
         this.movingException(moving);
-        this.handleMovingResult(this.bridgeGame.move(moving));   
+        this.handleMovingResult(this.bridgeGame.move(moving)); 
     }
 
     movingException(moving) {
-        Exception.isInvalidMoving(moving);
+        try{
+            Exception.isInvalidMoving(moving);
+        } catch(err) {
+            this.outputView.printError(err);
+            this.requestMoving();
+        }
     }
 
     handleMovingResult(result) {
-        this.bridgeGame.printBridge(this.outputView);
+        this.bridgeGame.printBridge(this.outputView); 
         switch (result) {
             case 'next': this.requestMoving(); break;
             case 'fail': this.requestRetry(); break;
@@ -79,7 +84,12 @@ class BridgeController {
     }
 
     commandException(command) {
-        Exception.isInvalidCommand(command);
+        try {
+            Exception.isInvalidCommand(command);
+        } catch(err) {
+            this.outputView.printError(err);
+            this.requestRetry();
+        }
     }
 
 }
