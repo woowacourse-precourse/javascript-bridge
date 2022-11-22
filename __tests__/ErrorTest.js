@@ -14,3 +14,9 @@ describe("[기능9] 이동할 칸 입력 예외처리", () => {
     expect(CheckError.checkChoiceUpDown(input)).toBeFalsy();
   });
 });
+
+describe("[기능14] 재시작(R) or 종료(Q) 입력 예외 처리", () => {
+  test.each([["I"], ["j"], [""]])("[14-1] R, Q 외 다른 문자 입력하면 false", (input) => {
+    expect(CheckError.checkGameConnand(input)).toBeFalsy();
+  });
+});
