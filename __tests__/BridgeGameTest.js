@@ -13,15 +13,15 @@ describe('이동하기와 재시작하기 테스트', () => {
     mockRandoms([1, 0, 1]);
 
     const game = new BridgeGame(3);
-    let currentResult = game.move('U');
-    expect(currentResult.passedUpperBridgePads).toEqual(['O']);
-    expect(currentResult.passedLowerBridgePads).toEqual([' ']);
-    expect(currentResult.isCorrectPad).toEqual(true);
+    let isCorrect = game.move('U');
+    expect(game.passedUpperBridgePads).toEqual(['O']);
+    expect(game.passedLowerBridgePads).toEqual([' ']);
+    expect(isCorrect).toEqual(true);
 
-    currentResult = game.move('U');
-    expect(currentResult.passedUpperBridgePads).toEqual(['O', 'X']);
-    expect(currentResult.passedLowerBridgePads).toEqual([' ', ' ']);
-    expect(currentResult.isCorrectPad).toEqual(false);
+    isCorrect = game.move('U');
+    expect(game.passedUpperBridgePads).toEqual(['O', 'X']);
+    expect(game.passedLowerBridgePads).toEqual([' ', ' ']);
+    expect(isCorrect).toEqual(false);
   });
 
   test('다시 하기 테스트', () => {
