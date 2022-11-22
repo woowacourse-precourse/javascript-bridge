@@ -11,6 +11,12 @@ const Validation = {
       return { error: "[ERROR] undefined" };
     return { error: `\n[ERROR] "U" 또는 "D"만 입력가능합니다.` };
   },
+
+  validateRetryQuit(retryQuit) {
+    if (retryQuit === "R" || retryQuit === "Q")
+      return { error: "[ERROR] undefined" };
+    return { error: `\n[ERROR] "R" 또는 "Q"만 입력가능합니다.` };
+  },
 };
 
 module.exports = Validation;

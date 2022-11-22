@@ -39,14 +39,16 @@ class App {
       this.bridgeGame.move(upsideDown);
       OutputView.printMap(this.bridgeGame.getResult());
 
-      if(this.bridgeGame.isFail()) return this.inputRetryQuit()
-      if(this.bridgeGame.isSuccess()) return Console.print("게임 종료로 이동")
-      return this.inputUpsideDown()
+      if (this.bridgeGame.isFail()) return this.inputRetryQuit();
+      if (this.bridgeGame.isSuccess()) return Console.print("게임 종료로 이동");
+      return this.inputUpsideDown();
     });
   }
 
   inputRetryQuit() {
-    InputView.readGameCommand((retryQuit) => {})
+    InputView.readGameCommand((retryQuit) => {
+      const { error } = Validation.validateRetryQuit(retryQuit);
+    });
   }
 }
 
