@@ -16,27 +16,29 @@ describe('BridgeGame 클래스의 move() 메서드 테스트', () => {
 });
 
 describe('BridgeGame 클래스의 유저가 움직인 다리 맵 만드는 기능 테스트', () => {
-  test('makeUserMoveMap() 유저가 입력한 movelogs에 따라 map을 만드는지 테스트', () => {
+  test('checkUserMoveLogs() 유저가 입력한 movelogs에 따라 "O, X" 제대로 입력하는지 확인', () => {
     const bridgeGame = new BridgeGame();
     const moveLogs = ['U', 'D', 'U'];
     const bridge = ['U', 'D', 'D'];
     const result = [
-      ['O', ' ', 'X'],
-      [' ', 'O', ' '],
+      ['U', 'O'],
+      ['D', 'O'],
+      ['U', 'X'],
     ];
-    expect(bridgeGame.makeUserMoveMap(moveLogs, bridge)).toEqual(result);
+    expect(bridgeGame.checkUserMoveLogs(moveLogs, bridge)).toEqual(result);
   });
-  test.failing('makeUserMoveMap() 에 반대되는 결과값을 비교할시에 실패하는지 테스트', () => {
+  test.failing('checkUserMoveLogs() 에 반대되는 결과값을 비교할시에 실패하는지 테스트', () => {
     const bridgeGame = new BridgeGame();
     const moveLogs = ['U', 'D', 'U'];
     const bridge = ['U', 'D', 'D'];
     const result = [
-      ['O', ' ', ' '],
-      [' ', 'O', 'X'],
+      ['U', 'O'],
+      ['D', 'O'],
+      ['U', 'O'],
     ];
-    expect(bridgeGame.makeUserMoveMap(moveLogs, bridge)).toEqual(result);
+    expect(bridgeGame.checkUserMoveLogs(moveLogs, bridge)).toEqual(result);
   });
-  test('checkingUserMoveLogs()에 O X 검사한 배열을 넘길때 제대로된 map으로 변환되는지 확인', () => {
+  test('makeUserMoveMap()에 O X 검사한 배열을 넘길때 제대로된 map으로 변환되는지 확인', () => {
     const bridgeGame = new BridgeGame();
     const checkedMap = [
       ['U', 'O'],
@@ -47,10 +49,10 @@ describe('BridgeGame 클래스의 유저가 움직인 다리 맵 만드는 기�
       ['O', ' ', 'X'],
       [' ', 'O', ' '],
     ];
-    expect(bridgeGame.checkingUserMoveLogs(checkedMap)).toEqual(result);
+    expect(bridgeGame.makeUserMoveMap(checkedMap)).toEqual(result);
   });
   test.failing(
-    'checkingUserMoveLogs()에 O X 검사한 배열을 argument로 넘기고 잘못된 값이 나오면 실패 확인',
+    'makeUserMoveMap()에 O X 검사한 배열을 argument로 넘기고 잘못된 값이 나오면 실패 확인',
     () => {
       const bridgeGame = new BridgeGame();
       const checkedMap = [
@@ -62,14 +64,15 @@ describe('BridgeGame 클래스의 유저가 움직인 다리 맵 만드는 기�
         ['O', ' ', 'O'],
         [' ', 'O', ' '],
       ];
-      expect(bridgeGame.checkingUserMoveLogs(checkedMap)).toEqual(result);
+      expect(bridgeGame.makeUserMoveMap(checkedMap)).toEqual(result);
     }
   );
   test('mapToString() 메서드가 원하는 모양의 string으로 변환되는지 확인', () => {
     const bridgeGame = new BridgeGame();
     const moveLogs = ['U', 'D', 'U'];
     const bridge = ['U', 'D', 'D'];
-    const map = bridgeGame.makeUserMoveMap(moveLogs, bridge);
+    const checkUserMoveLog = bridgeGame.checkUserMoveLogs(moveLogs, bridge);
+    const map = bridgeGame.makeUserMoveMap(checkUserMoveLog);
     const result = ['[ O |   | X ]', '[   | O |   ]'];
     expect(bridgeGame.mapToString(map)).toEqual(result);
   });
@@ -77,7 +80,8 @@ describe('BridgeGame 클래스의 유저가 움직인 다리 맵 만드는 기�
     const bridgeGame = new BridgeGame();
     const moveLogs = ['U', 'D', 'U'];
     const bridge = ['U', 'D', 'D'];
-    const map = bridgeGame.makeUserMoveMap(moveLogs, bridge);
+    const checkUserMoveLog = bridgeGame.checkUserMoveLogs(moveLogs, bridge);
+    const map = bridgeGame.makeUserMoveMap(checkUserMoveLog);
     const result = ['[ O |   | X ]', '[   | X |   ]'];
     expect(bridgeGame.mapToString(map)).toEqual(result);
   });
