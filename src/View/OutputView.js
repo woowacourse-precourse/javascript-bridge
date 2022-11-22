@@ -1,14 +1,8 @@
 const { Console } =require('@woowacourse/mission-utils');
 const NOTICE = require('../Constants/Notice')
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
+
 const OutputView = {
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+
   printMap(userInput, bridgeInfo) {
     const upside = this.generateUpside(userInput, bridgeInfo);
     const downside = this.generateDownside(userInput, bridgeInfo);
@@ -16,11 +10,6 @@ const OutputView = {
     Console.print(`${downside.join('')}\n`);
   },
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   printResult(userInput, bridgeInfo, count) {
     Console.print(NOTICE.GAME_RESULT);
     this.printMap(userInput, bridgeInfo);
@@ -33,6 +22,7 @@ const OutputView = {
     Console.print(NOTICE.TOTAL_TRY_COUNT + count);
     Console.close();
   },
+  
   generateUpside(userInput, bridgeInfo) {
     const upside = [];
     this.addOpenBracketTo(upside);
@@ -43,6 +33,7 @@ const OutputView = {
     this.addCloseBracketTo(upside);
     return upside;
   },
+
   makeEachSectionAtUpside (userInput, bridgeInfo, upside){
     if(bridgeInfo === 'U') {
       this.printOMarkAtUpside(userInput, upside);
@@ -53,21 +44,25 @@ const OutputView = {
     }
     this.addDivisionTo(upside);
   },
+
   printOMarkAtUpside(userInput, upside){
     if(userInput === 'U'){
       upside.push('O');
     }
   },
+
   printXMarkAtUpside(userInput, upside){
     if(userInput === 'D'){
       upside.push('X');
     }
   },
+
   printBlankAtUpside(userInput, upside){
     if(userInput === 'D'){
       upside.push(' ');
     }
   },
+
   generateDownside(userInput, bridgeInfo) {
     const downside = [];
     this.addOpenBracketTo(downside);
@@ -78,6 +73,7 @@ const OutputView = {
     this.addCloseBracketTo(downside);
     return downside;
   },
+
   makeEachSectionAtDownside (userInput, bridgeInfo, downside) {
     if(bridgeInfo === 'D') {
       this.printOMarkAtDownside(userInput, downside);
@@ -88,30 +84,37 @@ const OutputView = {
     };
     this.addDivisionTo(downside);
   },
+
   printXMarkAtDownside(userInput, downside){
     if(userInput === 'U'){
       downside.push('X');
     }
   },
+
   printOMarkAtDownside(userInput, downside){
     if(userInput === 'D'){
       downside.push('O');
     }
   },
+  
   printBlankAtDownside(userInput, downside){
     if(userInput === 'U'){
       downside.push(' ');
     }
   },
+
   addCloseBracketTo(bridge){
     bridge.push(' ]');
   },
+
   addOpenBracketTo(bridge){
     bridge.push('[ ');
   },
+  
   addDivisionTo(bridge){
     bridge.push(' | ');
   },
+
   ErrorMessage(error) {
     Console.print(error);
   },

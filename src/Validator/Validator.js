@@ -1,4 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
 const ERROR = require('../Constants/ErrorMessage');
 const OutputView = require('../View/OutputView');
 
@@ -11,7 +10,8 @@ class BridgeLengthInput {
 
   check() {
     try {
-      if (this.isNotValidNumber() || this.isNotValidRange() || this.isNotInteger())
+      if (this.isNotValidNumber() || this.isNotValidRange() || this.isNotInteger()
+      )
         throw new Error(OutputView.ErrorMessage(ERROR.INVALID_LENGTH));
       return true;
     } catch {
