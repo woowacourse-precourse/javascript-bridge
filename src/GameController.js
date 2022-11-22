@@ -38,39 +38,45 @@ class GameController {
     try {
       this.bridgeGame.move(direction);
 
-      const movementLogs = this.bridgeGame.getMoveRecord();
-      OutputView.printMap(movementLogs);
-
-      if (!this.bridgeGame.isSucceed()) return this.getRetryOrQuit();
-      if (this.bridgeGame.isLastGame()) {
-        this.printFinalResult();
-        Console.close();
-        return;
-      }
-      this.getDirection();
+      const moveRecord = this.bridgeGame.getMoveRecord();
+      OutputView.printMap(moveRecord);
+      this.#checkSuccess();
     } catch {
       this.errorReinput(this.getDirection, ERROR_MSG.DIRECTION);
     }
+  }
+
+  #checkSuccess() {
+    if (!this.bridgeGame.isSucceed()) return this.getRetryOrQuit();
+    if (this.bridgeGame.isLastGame()) {
+      this.printFinalResult();
+      Console.close();
+      return;
+    }
+    this.getDirection();
   }
 
   getRetryOrQuit() {
     InputView.readGameCommand(this.retryProcess.bind(this));
   }
 
-  retryProcess(gameCommand) {
+  retryProcess(restartInput) {
     try {
-      Validation.checkRestartInput(gameCommand);
-
-      if (gameCommand === DIRECTION_KEY.RESTART) {
-        this.bridgeGame.retry();
-        return this.getDirection();
-      }
-      if (gameCommand === DIRECTION_KEY.QUIT) {
-        this.printFinalResult();
-        Console.close();
-      }
+      Validation.checkRestartInput(restartInput);
+      this.#checkRestart(restartInput);
     } catch {
       this.errorReinput(this.getRetryOrQuit, ERROR_MSG.RESTART);
+    }
+  }
+
+  #checkRestart(restartInput) {
+    if (restartInput === DIRECTION_KEY.RESTART) {
+      this.bridgeGame.retry();
+      return this.getDirection();
+    }
+    if (restartInput === DIRECTION_KEY.QUIT) {
+      this.printFinalResult();
+      Console.close();
     }
   }
 

@@ -18,7 +18,6 @@ const OutputView = {
   printResult(record, isSucceeded, tryCount) {
     const maps = MapMaker.getMapResult(record);
     const successOrfail = isSucceeded ? RESULT_MSG.SUCCESS : RESULT_MSG.FAIL;
-
     Console.print(RESULT_MSG.FINAL);
     maps.forEach((map) => {
       Console.print(map);
