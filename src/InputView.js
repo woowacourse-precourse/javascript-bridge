@@ -25,8 +25,8 @@ const InputView = {
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
       try {
-        this.Game = new BridgeGame(canMakeBridge(Number(input)));
-        this.readMoving();
+        InputView.Game = new BridgeGame(canMakeBridge(Number(input)));
+        InputView.readMoving();
       } catch (error) {
         InputView.executeError(error);
       }
@@ -41,9 +41,9 @@ const InputView = {
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
         try {
-          this.Game.fillMap(input);
-          printMap(this.Game);
-          return this.nextRound(this.Game.move(input));
+          InputView.Game.fillMap(input);
+          printMap(InputView.Game);
+          return InputView.nextRound(InputView.Game.move(input));
         } catch (error) {
           InputView.executeError(error);
         }
@@ -54,11 +54,11 @@ const InputView = {
   nextRound(gameState) {
     switch (gameState) {
       case "O":
-        return this.readMoving();
+        return InputView.readMoving();
       case "성공":
-        return printResult(this.Game, "성공");
+        return printResult(InputView.Game, "성공");
       case "X":
-        return this.readGameCommand();
+        return InputView.readGameCommand();
     }
   },
 
@@ -70,8 +70,8 @@ const InputView = {
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
         try {
-          if (this.Game.isRetry(input)) return InputView.readMoving();
-          printResult(this.Game, "실패");
+          if (InputView.Game.isRetry(input)) return InputView.readMoving();
+          printResult(InputView.Game, "실패");
           return InputView.gameOver();
         } catch (error) {
           InputView.executeError(error);
