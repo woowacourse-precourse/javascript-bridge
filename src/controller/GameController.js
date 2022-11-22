@@ -33,10 +33,8 @@ class GameController {
   setMoving(next) {
     try {
       this.game.setMoving(next);
-
       const isSuccess = this.game.move(next);
       OutputView.printMap(this.game.getMap(), isSuccess);
-
       if (isSuccess) this.game.isEnd() ? this.end(true) : this.askMoving();
       if (!isSuccess) this.askGameCommand();
     } catch (err) {
@@ -52,7 +50,6 @@ class GameController {
   setGameCommand(gameCommand) {
     try {
       this.game.setGameCommand(gameCommand);
-
       if (gameCommand === 'R') this.retry();
       if (gameCommand === 'Q') this.end(false);
     } catch (err) {
