@@ -7,7 +7,11 @@ const {
 } = require('./ErrorMessage');
 
 const ErrorHandling = {
-  throwError(isInvalid, message) {},
+  throwError(isInvalid, message) {
+    if (isInvalid) {
+      throw new Error(message);
+    }
+  },
 
   validateBridgeSize(size) {
     const isNotNaturalNumber = !(/^\d+$/.test(size) && Number(size));
