@@ -12,10 +12,8 @@ const OutputView = {
      * @param {string} choice
      */
     printMap(bridgeGame, choice) {
-        const bridge = bridgeGame.getBridge();
-        const position = bridgeGame.getPosition();
-        const upperMap = this.getMapString(bridge, position, choice, 'U');
-        const lowerMap = this.getMapString(bridge, position, choice, 'D');
+        const upperMap = this.getMapString(bridgeGame, choice, 'U');
+        const lowerMap = this.getMapString(bridgeGame, choice, 'D');
         MissionUtils.Console.print(upperMap);
         MissionUtils.Console.print(lowerMap);
         MissionUtils.Console.print('');
@@ -29,7 +27,9 @@ const OutputView = {
      * @param {string} direction
      * @return {string} 요구사항에 맞는 문자열.
      */
-    getMapString(bridge, position, choice, direction) {
+    getMapString(bridgeGame, choice, direction) {
+        const bridge = bridgeGame.getBridge();
+        const position = bridgeGame.getPosition();
         const result = ['['];
         for (let i = 0; i < position; i++) {
             if (bridge[i] === direction) result.push('O');
