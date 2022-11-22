@@ -36,7 +36,8 @@ const GAME_QUESTION = Object.freeze({
 });
 
 const GAME_MESSAGE = Object.freeze({
-  final: '최종 게임 결과'
+  final: '최종 게임 결과',
+  startCommand: '다리 건너기 게임을 시작합니다.'
 });
 
 const BRIDGE_CHECK = Object.freeze({
