@@ -1,6 +1,6 @@
 const Io = require('../utils/io');
 const { OUTPUT } = require('../constants/views');
-const { CONTAINER } = require('../constants/bridge');
+const UiView = require('./UiView');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -12,8 +12,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(upCounter, downCounter) {
-    Io.output(this.setBrigeTemplete(upCounter));
-    Io.output(`${this.setBrigeTemplete(downCounter)}\n`);
+    Io.output(UiView.setBrigeUi(upCounter));
+    Io.output(`${UiView.setBrigeUi(downCounter)}\n`);
   },
 
   /**
@@ -33,11 +33,6 @@ const OutputView = {
 
   printStart() {
     return Io.output(OUTPUT.START);
-  },
-
-  setBrigeTemplete(arr) {
-    const mid = arr.join(CONTAINER.MID);
-    return `${CONTAINER.START}${mid}${CONTAINER.END}`;
   },
 };
 
