@@ -79,11 +79,13 @@ class MainController {
    * @param userMoving {string[]} [유저 이동기록]
    */
   onUserRestartInput(userRestartInput, mainController, userMoving) {
-    validate(userRestartInput);
-    mainController.bridgeGame.processUserRestartInput(
-      userRestartInput,
-      userMoving
-    );
+    try {
+      validate(userRestartInput);
+      mainController.bridgeGame.processRestart(userRestartInput, userMoving);
+    } catch (errorLog) {
+      mainController.printError(errorLog);
+      mainController.readUserRestartInput(userMoving);
+    }
   }
 
   /**
