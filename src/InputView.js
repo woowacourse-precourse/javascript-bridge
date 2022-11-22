@@ -39,6 +39,36 @@ const InputView = {
       }
     );
   },
+  //숫자 입력 예외 확인
+  exceptionInputNumberCheck(answer) {
+    const input = this.splitInput(answer);
+    this.numberCheck(input);
+    const number = parseInt(input.join(""));
+    return this.numberRangeCheck(number);
+  },
+
+  splitInput(input) {
+    return input.split(""); //배열 return
+  },
+
+  numberCheck(input) {
+    //모두 숫자인지 확인
+    const isNumber = input
+      .map((item) => parseInt(item))
+      .every((item) => isNaN(item) !== true);
+    if (!isNumber) {
+      MissionUtils.Console.close();
+      throw new Error(message.NOT_A_NUMBER_MESSAGE);
+    }
+  },
+
+  numberRangeCheck(input) {
+    if (input < 3 || 20 < input) {
+      MissionUtils.Console.close();
+      throw new Error(message.NOT_NUMBER_RANGE_MESSAGE);
+    }
+    return input;
+  },
 };
 
 module.exports = InputView;
