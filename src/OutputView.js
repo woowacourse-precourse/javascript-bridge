@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { OUTPUT } = require("./constants/messages");
-const { INPUT_VALUE, DIRECTION_INDEX } = require("./constants/values");
+const { INPUT_VALUE, DIRECTION_INDEX, STATES } = require("./constants/values");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -60,7 +60,11 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(state, bridgeGame) {
+    if (state === STATES.SUCCESS) {
+      this.printBlank();
+    }
     this.printFianlResult(bridgeGame);
+    this.printBlank();
     this.printGameSummury(state, bridgeGame);
   },
 
@@ -72,6 +76,10 @@ const OutputView = {
   printGameSummury(state, bridgeGame) {
     Console.print(`${OUTPUT.WHETHER_SUCCESS_OR_FALI}: ${state}`);
     Console.print(`${OUTPUT.TOTAL_ROUND}: ${bridgeGame.getRound()}`);
+  },
+
+  printBlank() {
+    Console.print("");
   },
 };
 
