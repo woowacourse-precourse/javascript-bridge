@@ -49,7 +49,6 @@ const OutputView = {
     Console.print(`${PHRASE.RESULT}`);
     this.printMap(game);
     Console.print(`${result}${PHRASE.TOTAL_TRY}${totalTry}`);
-    Console.close();
   },
 };
 
