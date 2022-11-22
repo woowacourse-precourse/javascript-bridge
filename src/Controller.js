@@ -25,7 +25,7 @@ class Controller {
   }
 
   handleMakingBridge(size) {
-    this.validateBy(this.validator.checkBridgeSize, size);
+    if (!this.validateBy(this.validator.checkBridgeSize, size)) return;
 
     const bridge = this.bridgeMaker.makeBridge(size, this.bridgeRandomNumberGenerator.generate);
     this.bridgeGame.setBridge(bridge);
@@ -38,7 +38,7 @@ class Controller {
   }
 
   handleMoving(direction) {
-    this.validateBy(this.validator.checkMoving, direction);
+    if (!this.validateBy(this.validator.checkMoving, direction)) return;
 
     this.bridgeGame.move(direction);
     this.outputView.printMap(this.bridgeGame.trials);
@@ -59,7 +59,7 @@ class Controller {
   }
 
   handleGameCommand(command) {
-    this.validateBy(this.validator.checkGameCommand, command);
+    if (!this.validateBy(this.validator.checkGameCommand, command)) return;
 
     if (command === 'Q') this.end();
     if (command === 'R') this.retry();
@@ -68,8 +68,10 @@ class Controller {
   validateBy(handleChecking, input) {
     try {
       handleChecking(input);
+      return true;
     } catch (error) {
       this.outputView.printError(error);
+      return false;
     }
   }
 
