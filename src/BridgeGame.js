@@ -1,5 +1,5 @@
 const BridgeMaker = require('../src/BridgeMaker');
-const randomNumber = require('../src/controller/GenerateRandomNumber');
+const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator')
 const MESSAGE = require('../src/MessageContent');
 
 class BridgeGame {
@@ -11,7 +11,7 @@ class BridgeGame {
   };
 
   makeBridge(size) {
-    this.#bridge = BridgeMaker.makeBridge(size, randomNumber);
+    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
   }
 
   moveCompare(move) {
