@@ -1,6 +1,6 @@
 const OutputView = require('../View/OutputView');
 const InputView = require('../View/InputView');
-const BridgeMaker = require('../Model/BridgeMaker');
+const BridgeMaker = require('../BridgeMaker');
 const {generate} = require('../util/BridgeRandomNumberGenerator');
 const BridgeGame = require('../Model/BridgeGame')
 const  MissionUtils  = require('@woowacourse/mission-utils');
