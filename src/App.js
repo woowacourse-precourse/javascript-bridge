@@ -31,20 +31,15 @@ class App {
     this.bridgeGame.move(upOrDown);
     OutputView.printMap(this.bridgeGame.moveTracking());
     const walkable = this.bridgeGame.walkable();
-    this.gameAnalysis(walkable);
+    this.checkGameStatus(walkable);
   }
 
-  gameAnalysis(walkable) {
-    if (walkable) {
-      if (this.bridgeGame.isWin()) {
-        this.gameEnd();
-        return;
-      }
-      this.requestMove();
-      return;
-    }
-    this.fail();
-    return;
+  checkGameStatus(gameStatus) {
+    if (gameStatus && this.bridgeGame.isWin()) this.gameEnd();
+
+    if (gameStatus && !this.bridgeGame.isWin()) this.requestMove();
+
+    if (!gameStatus) this.fail();
   }
 
   fail() {
