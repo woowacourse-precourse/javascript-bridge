@@ -12,14 +12,6 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.new_line);
   },
 
-  printUpperBridge(upperBridge) {
-    Console.print(upperBridge);
-  },
-
-  printDownerBridge(downerBridge) {
-    Console.print(downerBridge);
-  },
-
   printResult(game, map) {
     Console.print(OUTPUT_MESSAGE.result);
     OutputView.printMap(map);
