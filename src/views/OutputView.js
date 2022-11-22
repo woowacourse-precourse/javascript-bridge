@@ -29,6 +29,13 @@ const OutputView = {
   },
 
   printMap(map) {
+    const [upperPart, lowerPart] = this.getParts(map);
+
+    Console.print(`[ ${upperPart.join(MOVE_RESULT.seperator)} ]`);
+    Console.print(`[ ${lowerPart.join(MOVE_RESULT.seperator)} ]\n`);
+  },
+
+  getParts(map) {
     const parts = map.map(([direction, movingState]) => {
       const mark = movingState ? MOVE_RESULT.success : MOVE_RESULT.failure;
       const currentPart = [mark, MOVE_RESULT.notSelected];
@@ -39,8 +46,7 @@ const OutputView = {
     const upperPart = parts.map(([upper]) => upper);
     const lowerPart = parts.map(([, lower]) => lower);
 
-    Console.print(`[ ${upperPart.join(MOVE_RESULT.seperator)} ]`);
-    Console.print(`[ ${lowerPart.join(MOVE_RESULT.seperator)} ]\n`);
+    return [upperPart, lowerPart];
   },
 
   printResult({ map, attempts, isSuccess }) {
