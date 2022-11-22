@@ -14,4 +14,16 @@ describe('유효성 검증 테스트', () => {
   ])('bridgeSize:%s => success', (input) => {
     expect(() => Validator.bridgeSizeValidate(input)).not.toThrow();
   });
+  test.each([
+    ['u'], ['d'], ['1'], ['2'],
+    ['UD'], ['DU'], ['Z'], [''],
+  ])('movement: %s => error', (input) => {
+    expect(() => Validator.movingValidate(input)).toThrow();
+  });
+
+  test.each([
+    ['U'], ['D'],
+  ])('movement: %s => success', (input) => {
+    expect(() => Validator.movingValidate(input)).not.toThrow();
+  });
 });
