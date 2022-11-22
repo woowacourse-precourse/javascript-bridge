@@ -3,23 +3,23 @@ const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 
 class BridgeGame {
   #bridge = [];
-  #user = [];
+  #userMap = [];
   #isSuccess = true;
   #score = 1;
 
   move(direction) {
     this.#isSuccess = this.#bridge[this.round] === direction;
-    this.#user = [...this.#user, direction];
+    this.#userMap = [...this.#userMap, direction];
   }
 
   retry() {
-    this.#user = [];
+    this.#userMap = [];
     this.#isSuccess = true;
     this.#score += 1;
   }
 
   get round() {
-    return this.#user.length;
+    return this.#userMap.length;
   }
 
   get isSuccess() {
@@ -27,7 +27,7 @@ class BridgeGame {
   }
 
   get isEnd() {
-    return this.isSuccess && this.#user.length === this.#bridge.length;
+    return this.isSuccess && this.#userMap.length === this.#bridge.length;
   }
 
   get score() {
@@ -41,8 +41,8 @@ class BridgeGame {
     );
   }
 
-  get bridge() {
-    return this.#user;
+  get userMap() {
+    return this.#userMap;
   }
 }
 

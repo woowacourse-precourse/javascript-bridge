@@ -7,10 +7,10 @@ const OutputView = {
   },
 
   makeMap(game) {
-    return game.bridge.reduce(
+    return game.userMap.reduce(
       (direction, current, i) => {
         const result =
-          i === game.bridge.length - 1 && !game.isSuccess ? 'X' : 'O';
+          i === game.userMap.length - 1 && !game.isSuccess ? 'X' : 'O';
         const [nU, nD] = current === 'U' ? [result, ' '] : [' ', result];
         return {
           upside: [...direction['upside'], nU],
