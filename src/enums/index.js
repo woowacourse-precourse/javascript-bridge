@@ -25,10 +25,16 @@ const RESULT_GROUP = Object.freeze({
   FAIL: '실패',
 });
 
+const BRIDGE_SIZE_RANGE = Object.freeze({
+  MIN: 3,
+  MAX: 20,
+});
+
 module.exports = {
   POSITION,
   GAME_STATUS,
   FINAL_COMMAND_GROUP,
   MAP_MARK,
   RESULT_GROUP,
+  BRIDGE_SIZE_RANGE,
 };
