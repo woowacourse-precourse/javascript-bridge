@@ -27,7 +27,10 @@ class App {
   startGame(){ 
     let i = 0;
     const bridgeGame = new BridgeGame(this.bridges);
-
+    while(this.size > i){
+      this.userBridges.push(readMoving());
+      i += 1;
+    }
   }
 }
 
