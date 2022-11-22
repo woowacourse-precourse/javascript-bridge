@@ -25,8 +25,8 @@ class Controller {
 
   isAllowSize(input) {
     this.bridgeSize = new BridgeSize(input);
-    if (!this.bridgeSize.checkInput()) return this.orderInputSize();
-    return this.orderMake(input);
+    if (!this.bridgeSize.checkInput()) this.orderInputSize();
+    else this.orderMake(input);
   }
 
   orderMake(size) {
@@ -40,16 +40,16 @@ class Controller {
 
   isAllowMoving(input) {
     this.moveSpace = new MoveSpace(input);
-    if (!this.moveSpace.checkInput()) return this.orderInputMoving();
-    return this.orderMoving(input);
+    if (!this.moveSpace.checkInput()) this.orderInputMoving();
+    else this.orderMoving(input);
   }
 
   orderMoving(moving) {
     const [currentMap, isSafe, isEnd] = this.#BridgeGame.move(moving);
     this.orderPrint(currentMap);
-    if (!isSafe) return this.orderInputCommand();
-    if (isEnd) return this.orderGameEnd(RESULT.SUCCESS);
-    return this.orderInputMoving();
+    if (!isSafe) this.orderInputCommand();
+    if (isEnd) this.orderGameEnd(RESULT.SUCCESS);
+    else this.orderInputMoving();
   }
 
   orderPrint(currentMap) {
@@ -62,13 +62,13 @@ class Controller {
 
   isAllowCommand(input) {
     this.gameCommand = new GameCommand(input);
-    if (!this.gameCommand.checkInput()) return this.orderInputCommand();
-    return this.orderProcessCommand(input);
+    if (!this.gameCommand.checkInput()) this.orderInputCommand();
+    else this.orderProcessCommand(input);
   }
 
   orderProcessCommand(command) {
-    if (this.#BridgeGame.retry(command)) return this.orderInputMoving();
-    return this.orderGameEnd(RESULT.FAIL);
+    if (this.#BridgeGame.retry(command)) this.orderInputMoving();
+    else this.orderGameEnd(RESULT.FAIL);
   }
 
   orderGameEnd(isSuccess) {
