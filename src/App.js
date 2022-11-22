@@ -1,4 +1,4 @@
-const Game = require("./GameDatabase/Game");
+const Game = require("./Component/Game");
 const OutputView = require("./GameIO/OutputView");
 const InputView = require("./GameIO/InputView");
 
