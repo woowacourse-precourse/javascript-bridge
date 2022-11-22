@@ -4,10 +4,13 @@ const { Console, Random } = MissionUtils;
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const Validation = require("./Validation");
+const BridgeGame = require("./BridgeGame");
+const BridgeMaker = require("./BridgeMaker")
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 class App {
   constructor() {
-
+    this.bridgeGame = new BridgeGame();
   }
 
   play() {
@@ -18,6 +21,8 @@ class App {
   createBridge() {
     InputView.readBridgeSize((input) => {
       Validation.bridgeInput(input);
+      const bridge = BridgeMaker.makeBridge(input,BridgeRandomNumberGenerator.generate);
+      this.BridgeGame.setBridge(bridge);
     });
   }
 }
