@@ -45,15 +45,17 @@ const InputView = {
     console.log(currentBridge[0].length, bridge.length);
     if(currentBridge[0].length === bridge.length) {
       // 게임 종료 -> 출력
+      OutputView.printResult(currentBridge);
       console.log('게임 종료');
       console.log(currentBridge);
-      OutputView.printResult(currentBridge);
     }
 
     // 틀렸는지 확인
     else if(currentBridge[0].includes('X') || currentBridge[1].includes('X')){
       // 게임 틀림 -> 게임 종료할지, 재시작 할 지 결정
+      OutputView.printMap(currentBridge);
       console.log('틀림. 재시작? 종료?');
+      this.readGameCommand(currentBridge, bridge);
     }
 
     // 게임 진행가능한지 확인
@@ -68,7 +70,19 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(currentBridge, bridge) {
+    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (input) => {
+      console.log(`재시작 여부 : ${input}`);
+      if(input==='R') {
+        console.log('재시작 O');
+        this.readMoving(game.retry(currentBridge), bridge);
+      }
+      else if(input==='Q') {
+        console.log('재시작 X');
+        OutputView.printResult(currentBridge);
+      }
+    })
+  },
 };
 
 module.exports = InputView;
