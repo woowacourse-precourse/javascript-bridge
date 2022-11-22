@@ -1,14 +1,33 @@
 const InputView = require('../src/InputView');
 const OutputView = require('../src/OutputView');
-const BridgeMaker = require('../src/BridgeMaker');
-const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
+const BridgeGame = require('./BridgeGame');
+
 
 class App {
   play() {
     OutputView.printGameStart();
-    const size = InputView.readBridgeSize();
-    BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    InputView.readMoving();
+    this.startGame();
+  }
+
+  startGame() {
+    InputView.readBridgeSize(BridgeGame.initAnsBridge);
+    for (let i = 0; i < BridgeGame.getBridgeLen(); i++) {
+      InputView.readMoving(BridgeGame.move);
+      if (BridgeGame.isFail()) break;
+    }
+    InputView.readGameCommand((choice) => {
+      if (choice == 'R') { retryGame(); return; } 
+      this.quitGame();
+    });
+  }
+
+  quitGame() {
+    OutputView.printResult(BridgeGame.getBridge(), BridgeGame.isFail(), BridgeGame.getGameCnt())
+  }
+
+  retryGame() {
+    BridgeGame.retry();
+    this.startGame();
   }
 }
 
