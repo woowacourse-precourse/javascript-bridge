@@ -74,7 +74,7 @@ class BridgeGameHandler {
 
   requestGameCommand() {
     readGameCommand((command) => {
-      readGameCommand(command);
+      this.readGameCommandCallback(command);
     });
   }
 
