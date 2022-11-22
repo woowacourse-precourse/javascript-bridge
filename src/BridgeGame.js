@@ -1,4 +1,4 @@
-const { COMMAND } = require("./constants/game");
+const { COMMAND, BRIDGE } = require("./constants/game");
 const { getArrayLastIndex } = require("./utils");
 
 /**
@@ -63,12 +63,16 @@ class BridgeGame {
 
   #makeAnswerCorssedBridgeMap(direction) {
     return this.#getCorssedAnswerDirections().map((answerDirection) => {
-      return answerDirection === direction ? "O" : " ";
+      return answerDirection === direction
+        ? BRIDGE.MAP.ANSWER
+        : BRIDGE.MAP.SPACE;
     });
   }
 
   #markNotAnswerBridgeMap(direction) {
-    return this.#movingCommand === direction ? "X" : " ";
+    return this.#movingCommand === direction
+      ? BRIDGE.MAP.NOT_ANSWER
+      : BRIDGE.MAP.SPACE;
   }
 
   #isLastMove() {

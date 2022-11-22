@@ -8,6 +8,9 @@ const BRIDGE = {
     START: "[ ",
     END: " ]",
     DIVIDING_LINE: " | ",
+    ANSWER: "O",
+    NOT_ANSWER: "X",
+    SPACE: " ",
   },
   SIZE: {
     MINIMUN: 3,
