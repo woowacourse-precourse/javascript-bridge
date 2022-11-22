@@ -113,5 +113,3 @@ class App {
 }
 
 module.exports = App;
-const app = new App();
-app.play();
