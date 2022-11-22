@@ -28,15 +28,14 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moveInput) {
-    const movementStatus = this.movementStatus;
-    const gameStatus = this.gameStatus;
+    const [movementStatus, gameStatus] = [this.movementStatus, this.gameStatus];
     const { upperResult, lowerResult, roundCheckResult } = this.roundCheck(
       moveInput,
       movementStatus.round
     );
-    const success = movementStatus.round === this.#bridge.length - 1;
+    const { success, playing } = this.gameStatusCheck(roundCheckResult);
     this.#movementStatusUpdate({ upperResult, lowerResult });
-    this.#gameStatusUpdate({ playing: roundCheckResult, success });
+    this.#gameStatusUpdate({ playing, success });
     return { movementStatus, gameStatus };
   }
 
@@ -50,7 +49,7 @@ class BridgeGame {
     const { trial } = this.gameStatus;
     if (retryInput === "R") {
       this.#moventStatusReset();
-      this.#gameStatusUpdate({ playing: false, trial: trial + 1 });
+      this.#gameStatusUpdate({ playing: true, trial: trial + 1 });
       return true;
     }
     return false;
@@ -61,9 +60,17 @@ class BridgeGame {
     const upperResult = moveInput === "U" ? moveInput === bridge[round] : null;
     const lowerResult = moveInput === "D" ? moveInput === bridge[round] : null;
     const roundCheckResult =
-      moveInput === bridge[round] && round < bridge.length - 1;
+      moveInput === bridge[round] && round <= bridge.length - 1;
     return { upperResult, lowerResult, roundCheckResult };
   }
+  gameStatusCheck(roundCheckResult) {
+    const [success, playing] = [
+      this.movementStatus.round === this.#bridge.length - 1 && roundCheckResult,
+      roundCheckResult && this.movementStatus.round < this.#bridge.length - 1,
+    ];
+    return { success, playing };
+  }
+
   #movementStatusUpdate(movementResult) {
     const { upperResult, lowerResult } = movementResult;
     this.#movementStatus.upperSideStatus.push(upperResult);
