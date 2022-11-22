@@ -52,12 +52,12 @@ const expectBridgeOrder = (received, upside, downside) => {
 };
 
 describe("다리 길이 입력 에러 테스트", () => {
-  // test("범위를 벗어난 입력", () => {
-  //   runException(["1"]);
-  // });
-  // test("숫자가 아닌 입력", () => {
-  //   runException(["a"]);
-  // });  
+  test("범위를 벗어난 입력", () => {
+    runException(["1"]);
+  });
+  test("숫자가 아닌 입력", () => {
+    runException(["a"]);
+  });  
   test("범위를 벗어난 입력 후 재입력", () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
@@ -68,6 +68,7 @@ describe("다리 길이 입력 에러 테스트", () => {
 
     const log = getOutput(logSpy);
     expectLogContains(log, [
+      "[ERROR]",
       "최종 게임 결과",
       "[ O |   | O ]",
       "[   | O |   ]",
@@ -77,3 +78,29 @@ describe("다리 길이 입력 에러 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 });
+
+describe.only("이동할 칸 입력 에러 테스트", () => {
+  test("이동할 칸 올바르지 않은 입력", () => {
+    runException(["3", "A"]);
+  });
+  test("이동할 칸 올바르지 않은 입력 후 재입력", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["3", "A", "U", "D", "U"]);
+  
+    const app = new App();
+    app.play();
+  
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ERROR]",
+      "최종 게임 결과",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 1",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+  });
+});
+

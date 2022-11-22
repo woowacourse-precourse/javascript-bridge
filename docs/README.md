@@ -27,6 +27,9 @@
   - [x] 다리 생성 테스트(BridgeCreateTest.js)
   - [x] 게임 재시작 테스트(RetryGameTest.js)
   - [ ] 에러 테스트(ErrorTest.js)
+    - [x] 다리 길이 입력 에러
+    - [x] 플레이어 이동할 칸 입력 에러
+    - [ ] 재시작/종료 여부 입력 에러
 ---
 
 ## 추가된 요구사항
