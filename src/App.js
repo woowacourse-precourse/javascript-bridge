@@ -5,6 +5,7 @@ const inputView = require("./InputView");
 const bridgeMaker = require("./BridgeMaker");
 const bridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
+const BridgeResult = require("./BridgeRsult");
 
 class App {
   #bridgeGame;
@@ -27,8 +28,6 @@ class App {
       try {
         this.vaildSizeInput(size);
         this.#size = Number(size);
-
-        console.log('### size ', this.#size);
         this.#bridgeArr = bridgeMaker.makeBridge(this.#size, bridgeRandomNumberGenerator.generate);
         console.log('#### ', this.#bridgeArr);
 
@@ -41,52 +40,49 @@ class App {
     });
   }
 
-  /** 4-5 이동할 칸 입력 및 사용자 입력값과 답 비교한 결과 출력 */
+  /** 4~5 이동할 칸 입력 및 사용자 입력값과 답 비교한 결과 출력 */
   repeatMovingInput() {
-    // console.log('### repeatMovingInput ');
-    // console.log('### cu ', this.#currentBridgeIndex);
-    // console.log('### s ', this.#size);
-    if (this.#currentBridgeIndex === this.#size) {
-      // console.log('###### if');
-      this.#bridgeGame.gameResult = '성공';
-      outputView.printResult(this.#bridgeGame.makeBridgeResult());
-      return;
-    }
-
     inputView.readMoving((move) => {
       try { 
         this.validMovingInput(move);
-        
         const movingResult = this.#bridgeGame.move(this.#bridgeArr[this.#currentBridgeIndex], move);
-        console.log('#### m re', movingResult);
-        // console.log('#### m up', this.#bridgeGame.upBridgeReultArr);
-        // console.log('#### m down', this.#bridgeGame.downBridgeReultArr);
-        
         outputView.printMap(this.#bridgeGame.upBridgeReultArr, this.#bridgeGame.downBridgeReultArr);
+        
         if (movingResult === 'O') {
           this.#currentBridgeIndex++;
-          if (this.#currentBridgeIndex <= this.#size) {
+          if (this.#currentBridgeIndex === this.#size) {
+            this.#bridgeGame.gameResult = '성공';
+            outputView.printResult(this.#bridgeGame.makeBridgeResult());
+            return;
+          } else if (this.#currentBridgeIndex < this.#size) {
             this.repeatMovingInput();
           }
         } else if (movingResult === 'X') {
-          // retry 호출
+          this.retry();
         }
       } catch(e) {
         Console.print(e.message);
         this.repeatMovingInput();
       }
     })
-
-    
   }
 
-  /** 8. 다리 선택 실패시 재시작 기능 */
-  inputRetry() {
-    const retryInput = inputView.inputRetry();
-    const retryResult = this.#bridgeGame.retry(retryInput);
-    if(retryResult === 'Q') {
-      outputView.printResult(this.#bridgeGame.makeBridgeResult());
-    }
+  /** 8. X가 나올 경우 재시작 여부 묻기 */
+  retry() {
+    inputView.readGameCommand((input) => {
+      try {
+        this.validRetryInput(input);
+        const retryResult = this.#bridgeGame.retry(input);
+        if(retryResult) {
+          this.repeatMovingInput();
+        } else {
+          outputView.printResult(this.#bridgeGame.makeBridgeResult());
+        }
+      } catch(e) {
+        Console.print(e.message);
+        this.retry();
+      }
+    })
   }
 
 
@@ -105,6 +101,14 @@ class App {
   validMovingInput(input) {
     if(input !== "U" && input !== "D") {
       return false;
+    }
+    return true;
+  }
+
+   /** 8-2. reTry 입력값 유효성 및 에러시 입력 재시작 */
+   validRetryInput(input) {
+    if(input !== "R" && input !== "Q") {
+      throw new Error(ERROR_MESSAGE.RE_TRY);
     }
     return true;
   }
