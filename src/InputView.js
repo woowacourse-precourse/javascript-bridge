@@ -43,7 +43,16 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    MissionUtils.Console.readLine(ServiceMessages.RETRY, (restartOrQuit) => {
+      try {
+        validator.checkRestartOrQuit(restartOrQuit);
+      } catch (error) {
+        OutputView.printErrorMessages(error);
+        this.readBridgeSize();
+      }
+    });
+  },
 };
 
 module.exports = InputView;

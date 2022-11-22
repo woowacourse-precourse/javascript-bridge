@@ -15,5 +15,11 @@ class Validator {
       throw new Error(ErrorMessages.U_OR_D);
     }
   }
+
+  checkRestartOrQuit(input) {
+    if (input !== 'R' && input !== 'Q') {
+      throw new Error('[ERROR] 대문자 R 또는 Q를 입력해주세요.');
+    }
+  }
 }
 module.exports = Validator;
