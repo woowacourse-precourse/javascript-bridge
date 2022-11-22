@@ -1,7 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { QUESTION } = require("../constants/constants");
 const Validation = require("../Utils/Validation");
-
 // prettier-ignore
 const InputView = {
   readBridgeSize() {
@@ -12,7 +11,7 @@ const InputView = {
       });
       return length;
     } catch (e) {
-      MissionUtils.Console.print(e);
+      Console.print(e);
       this.readBridgeSize();
     }
   },
@@ -25,7 +24,7 @@ const InputView = {
         move = input; });
       return move;
     } catch (e) {
-      MissionUtils.Console.print(e);
+      Console.print(e);
       this.readMoving();
     }
   },
@@ -38,7 +37,7 @@ const InputView = {
         command = input; });
       return command;
     } catch (e) {
-      MissionUtils.Console.print(e);
+      Console.print(e);
       this.readGameCommand();
     }
   },
