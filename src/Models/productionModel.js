@@ -1,10 +1,11 @@
 const BridgeMaker = require("../BridgeMaker");
+const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 
 const { SPACE, PASS } = require("../utils/constants");
 
 class ProductionModel {
   makeBridge(size) {
-    return BridgeMaker.orderMake(size);
+    return BridgeMaker.makeBridge(+size, BridgeRandomNumberGenerator.generate);
   }
 
   makeMap(nowMap, movingProcess) {

@@ -30,7 +30,7 @@ class Controller {
   }
 
   orderMake(size) {
-    this.#BridgeGame.orderMakeBridge(size);
+    this.#BridgeGame.create(size);
     this.orderInputMoving();
   }
 

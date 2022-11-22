@@ -25,8 +25,8 @@ class BridgeGame {
     this.#currentMap = [];
   }
 
-  orderMakeBridge(size) {
-    this.#bridge = this.#production.makeBridge(size);
+  create(size) {
+    this.#bridge = this.#production.makeBridge(+size);
   }
 
   move(moving) {
