@@ -29,13 +29,21 @@ class UserController {
   }
 
   /**
+   * 유저 이동 동선 추가 연결 메서드
+   * @param userMovingInput {string} [유저 이동 입력]
+   */
+  appendUserMoving(userMovingInput) {
+    this.#userModel.appendUserMoving(userMovingInput);
+  }
+
+  /**
    * 유저의 이동 입력을 처리하는 메서드
    * @param userMovingInput {string} [유저 이동 입력]
    */
   processUserMovingInput(userMovingInput) {
     try {
       validate(userMovingInput);
-      this.#userModel.appendUserMoving(userMovingInput);
+      this.appendUserMoving(userMovingInput);
       this.#mainController.tryMove(this.#userModel.getUserMoving());
     } catch (errorLog) {
       this.#mainController.printError(errorLog);
