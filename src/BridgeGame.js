@@ -12,7 +12,6 @@ class BridgeGame {
 
   constructor(bridge) {
     this.#bridge = bridge;
-    console.log(this.#bridge);
     this.#currentIdx = 0;
     this.#bridgeMap = [[], []]; // 0 ≒ D , 1 ≒ U
     this.#retryCount = 1;
