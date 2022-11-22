@@ -1,20 +1,53 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+const { MOVE, GAME_RESULT, DIRECTION } = require('./Utils/Constants.js');
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+class BridgeGame {
+  #bridgeMap;
+  #attemptNumber;
+  #compareResult;
+
+  constructor() {
+    this.#bridgeMap = { U: [], D: [] };
+    this.#attemptNumber = 1;
+    this.#compareResult;
+  }
+
+  initBridgeMap() {
+    this.#bridgeMap[DIRECTION.UP] = [];
+    this.#bridgeMap[DIRECTION.DOWN] = [];
+  }
+
+  addBridgeMap(inputCommand, compareResult) {
+    this.#bridgeMap[DIRECTION.UP].push(' ');
+    this.#bridgeMap[DIRECTION.DOWN].push(' ');
+    this.#bridgeMap[inputCommand].pop();
+    this.#bridgeMap[inputCommand].push(compareResult);
+  }
+
+  currentBridgeMap() {
+    return this.#bridgeMap;
+  }
+
+  move(inputCommand, correctCommand) {
+    this.#compareResult = inputCommand === correctCommand ? MOVE.PASS : MOVE.FAIL;
+    this.addBridgeMap(inputCommand, this.#compareResult);
+  }
+
+  isPass() {
+    return this.#compareResult === MOVE.PASS;
+  }
+
+  isFail() {
+    return this.#compareResult === MOVE.FAIL;
+  }
+
+  retry() {
+    this.#attemptNumber += 1;
+    this.initBridgeMap();
+  }
+
+  gameResult() {
+    return [this.currentBridgeMap(), GAME_RESULT[this.#compareResult], this.#attemptNumber];
+  }
 }
 
 module.exports = BridgeGame;
