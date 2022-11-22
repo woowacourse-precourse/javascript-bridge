@@ -38,7 +38,7 @@ const OutputView = {
    * 게임을 시작하기 전에 출력할 메시지를 출력한다.
    */
   printStartMessage() {
-    Console.print(`${OutputView.MESSAGE_START_BRIDGE_GAME}\n`);
+    Console.print(`${OutputView.MESSAGE_START_BRIDGE_GAME}`);
   },
 
   /**
@@ -46,7 +46,7 @@ const OutputView = {
    * @param {String} message - 출력할 메시지
    */
   printErrorMessage(message) {
-    Console.print(message);
+    Console.print(`${message}`);
   },
 };
 

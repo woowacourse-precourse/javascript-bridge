@@ -12,7 +12,7 @@ const InputView = {
    * @param {function(): void} callback - 다리의 길이를 입력받은 후 실행할 콜백 함수
    */
   readBridgeSize(callback) {
-    Console.readLine(`${InputView.MESSAGE_INPUT_BRIDGE_LENGTH}\n`, callback);
+    Console.readLine(`\n${InputView.MESSAGE_INPUT_BRIDGE_LENGTH}\n`, callback);
   },
   /**
    * 사용자가 이동할 칸을 입력받는다.
@@ -27,7 +27,7 @@ const InputView = {
    * @param {function(): void} callback - 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받은 후 실행할 콜백 함수
    */
   readGameCommand(callback) {
-    Console.readLine(`${InputView.MESSAGE_INPUT_COMMAND}\n`, callback);
+    Console.readLine(`\n${InputView.MESSAGE_INPUT_COMMAND}\n`, callback);
   },
 };
 

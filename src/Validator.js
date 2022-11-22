@@ -30,7 +30,7 @@ const Validator = {
   },
 
   validateDirection(direction) {
-    if (direction !== Validator.MOVE_UPSIDE_STRING || direction !== Validator.MOVE_DOWNSIDE_STRING) {
+    if (direction !== Validator.MOVE_UPSIDE_STRING && direction !== Validator.MOVE_DOWNSIDE_STRING) {
       throw new Error(Validator.ERROR_MESSEAGE_MUST_U_OR_D);
     }
   },
