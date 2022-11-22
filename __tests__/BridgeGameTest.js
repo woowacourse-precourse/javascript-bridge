@@ -22,10 +22,9 @@ describe("BridgeGame 클래스 테스트", () => {
     expect(bridgeGame.getFormattedMap()).toEqual(["[ O ]", "[   ]"]);
   });
 
-  test("진행 상황 되돌리기 테스트", () => {
-    bridgeGame.setBridge(["U", "U", "D"]);
-    bridgeGame.move("U");
-    bridgeGame.undo();
+  test("지도 되돌리기 테스트", () => {
+    bridgeGame.updateMap(true, "U");
+    bridgeGame.undoMap();
 
     expect(bridgeGame.getFormattedMap()).toEqual(["", ""]);
   });

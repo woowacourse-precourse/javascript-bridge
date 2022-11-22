@@ -27,7 +27,8 @@ class BridgeGame {
     const moved = direction === correct;
 
     this.updateMap(moved, direction);
-    this.stepForward();
+
+    if (moved) this.stepForward();
 
     return moved;
   }
@@ -54,15 +55,6 @@ class BridgeGame {
     this.#step += 1;
   }
 
-  stepBackward() {
-    this.#step -= 1;
-  }
-
-  undo() {
-    this.stepBackward();
-    this.undoMap();
-  }
-
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
@@ -75,7 +67,7 @@ class BridgeGame {
 
   setUpRetry() {
     this.countTry();
-    this.undo();
+    this.undoMap();
   }
 
   countTry() {
