@@ -21,7 +21,7 @@ const OutputView = {
   printMap(totalResultLength, getUserInputResult) {
     const bridgeMap = MapMaker.create(totalResultLength, getUserInputResult);
 
-    this.print(`${bridgeMap.join('\n')}\n`);
+    this.print(`${bridgeMap}\n`);
   },
 
   /**
