@@ -28,7 +28,7 @@ class BridgeGame {
   move() {
     this.#nowIndex += 1;
   }
-  addCorrect() {
+  addCorrectPosition() {
     if (this.#bridge[this.#nowIndex] === "U") {
       this.#up.push(BRIDGE_DRAWER.CORRECT);
       this.#down.push(BRIDGE_DRAWER.NOTHING);
@@ -38,7 +38,7 @@ class BridgeGame {
     }
     this.move();
   }
-  addWrong() {
+  addWrongPosition() {
     if (this.#bridge[this.#nowIndex] === "U") {
       this.#up.push(BRIDGE_DRAWER.NOTHING);
       this.#down.push(BRIDGE_DRAWER.WRONG);

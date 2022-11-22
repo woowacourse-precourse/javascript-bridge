@@ -19,7 +19,7 @@ describe("BridgeGame 클래스 테스트", () => {
     const testBridge = ["U", "D", "U", "U"];
     bridgeGame.setBridge(testBridge);
     testBridge.forEach((e) => {
-      bridgeGame.addCorrect();
+      bridgeGame.addCorrectPosition();
     });
     const [upString, downString] = bridgeGame.getBridgeString();
     test("정답 입력한 경우 출력 값 테스트", () => {

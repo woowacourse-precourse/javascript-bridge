@@ -38,9 +38,9 @@ class GameController {
     const result = this.bridgeGame.compareBridge(input);
     Validation.stepInput(input);
     if (result) {
-      this.bridgeGame.addCorrect();
+      this.bridgeGame.addCorrectPosition();
     } else {
-      this.bridgeGame.addWrong();
+      this.bridgeGame.addWrongPosition();
     }
     this.showBridgeResult(result);
   }
