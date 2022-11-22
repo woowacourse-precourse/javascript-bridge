@@ -65,4 +65,39 @@ describe("Validate 객체 테스트", () => {
       expect(info.makeOutputType()).toEqual(testResultSample[index]);
     });
   });
+
+  test("새로운 입력값이 들어올 때 마다 잘못된 경로가 있는지 테스트", () => {
+    const testInputSample = [
+      ["U", 0],
+      ["D", 1],
+      ["U", 2],
+    ];
+
+    const testResultSampe = [true, true, false];
+
+    testInputSample.forEach((item, index) => {
+      info.makeRouteMap(item[0], item[1]);
+      expect(info.getWrongRoute()).toEqual(testResultSampe[index]);
+    });
+  });
+
+  test("다리 길이만큼 입력값을 받았는지 테스트", () => {
+    const testInputSample = [1, 2, 3];
+
+    const testResultSample = [false, false, true];
+
+    testInputSample.forEach((item, index) => {
+      expect(info.checkMatchLength(item)).toEqual(testResultSample[index]);
+    });
+  });
+
+  test("다리 완성의 여부를 확인하는 테스트", () => {
+    const testInputSample = [1, 2, 3];
+
+    const testResultSample = [false, false, true];
+
+    testInputSample.forEach((item, index) => {
+      expect(info.successStatus(item)).toEqual(testResultSample[index]);
+    });
+  });
 });
