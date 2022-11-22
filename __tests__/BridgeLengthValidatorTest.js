@@ -1,4 +1,4 @@
-const BridgegLengthValidator = require("../../src/utils/BridgeLengthValidator");
+const BridgeLengthValidator = require("../src/utils/BridgeLengthValidator");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const getLogSpy = () => {
@@ -8,7 +8,6 @@ const getLogSpy = () => {
 };
 
 const mockQuestions = (answers) => {
-  console.log(answers);
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
     return acc.mockImplementationOnce((_, callback) => {
@@ -24,7 +23,7 @@ const getOutput = (logSpy) => {
 const runException = (inputs) => {
   mockQuestions(inputs);
   const logSpy = getLogSpy();
-  BridgegLengthValidator.validate(inputs);
+  BridgeLengthValidator.validate(inputs);
 
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
@@ -32,9 +31,9 @@ const runException = (inputs) => {
 const runNormal = (inputs) => {
   mockQuestions(inputs);
   const logSpy = getLogSpy();
-  BridgegLengthValidator.validate(inputs);
+  BridgeLengthValidator.validate(inputs);
 
-  expectLogContains(getOutput(logSpy), [""]);
+  expect(getOutput(logSpy)).toEqual("");
 };
 
 const expectLogContains = (received, logs) => {
@@ -53,7 +52,7 @@ describe("다리 생성 테스트", () => {
     runException(input)
   );
 
-  test.each([[["3"]], [["5"]], [["11"]], [["20"]]])("입력숫자가 유효한 범위 인지 체크", (input) =>
+  test.each([[["3"]], [["5"]], [["11"]], [["20"]]])("입력숫자가 정상일 때", (input) =>
     runNormal(input)
   );
 });
