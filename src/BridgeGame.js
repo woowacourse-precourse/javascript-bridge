@@ -1,6 +1,11 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { INFO_MESSAGE, INPUT_MESSAGE, STATE_CONSTANT } = require("./Constants");
+const {
+  INFO_MESSAGE,
+  INPUT_MESSAGE,
+  STATE_CONSTANT,
+  RESULT_MESSAGE,
+} = require("./Constants");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const { printMessage } = require("./OutputView");
@@ -83,7 +88,26 @@ class BridgeGame {
   }
 
   retryOrEnd() {
-    console.log("retry? end ?");
+    InputView.readGameCommand(
+      `${INPUT_MESSAGE.retryEnd} ${INPUT_MESSAGE.retryEnd}`,
+      (input) => {
+        input === STATE_CONSTANT.retry ? this.retryGame() : this.endGame();
+      }
+    );
+  }
+
+  retryGame() {
+    this.resetUserBridges();
+    this.userMoving();
+  }
+  endGame() {
+    OutputView.printResult();
+  }
+
+  resetUserBridges() {
+    this.#userBridge = [];
+    this.#bridgeViewTop = [];
+    this.#bridgeViewBottom = [];
   }
 
   /**

@@ -5,7 +5,7 @@ const INFO_MESSAGE = Object.freeze({
 const INPUT_MESSAGE = Object.freeze({
   bridgeLength: `\n다리의 길이를 입력해주세요.\n`,
   selectNextPosition: `\n이동할 칸을 선택해주세요.`,
-  retryOrEnd: `\n게임을 다시 시도할지 여부를 입력해주세요.\n`,
+  retryOrEnd: `\n게임을 다시 시도할지 여부를 입력해주세요.`,
 
   UpDown: `(위: U, 아래: D)\n`,
   retryEnd: `(재시도: R, 종료: Q)\n`,
@@ -14,6 +14,8 @@ const INPUT_MESSAGE = Object.freeze({
 const STATE_CONSTANT = Object.freeze({
   up: "U",
   down: "D",
+  retry: "R",
+  end: "Q",
   canMovePlace: "O",
   cantMovePlace: " ",
 });

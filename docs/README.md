@@ -21,14 +21,14 @@
 - [] `userMoveResult` (사용자 이동 결과)
   - [x] 이동할 수 있는 칸일 경우 `userMove()`를 재진행한다
   - [x] 이동할 수 없는 칸일 경우 `retryOrEnd()`를 호출한다
-- [] `retryOrEnd()` (다시 시도할지 여부 확인)
-  - [] `InputView` 클래스를 통해 사용자가 게임을 다시 시도할지 여부를 입력받는다
-  - [] `R`이 입력될 경우
-    - [] `#currentPosition`을 초기화시킨다
-    - [] `userMove()`를 실행시킨다
+- [x] `retryOrEnd()` (다시 시도할지 여부 확인)
+  - [x] `InputView` 클래스를 통해 사용자가 게임을 다시 시도할지 여부를 입력받는다
+  - [x] `R`이 입력될 경우
+    - [x] `#currentPosition`을 초기화시킨다
+    - [x] `userMove()`를 실행시킨다
   - [] `Q`가 입력될 경우
     - [] `OutputView`의 `printResult()`을 이용해 결과를 출력한다
-    - [] 게임을 종료한다
+    - [x] 게임을 종료한다
 - [] 칸을 끝까지 이동했을 경우
   - [] `OutputView`의 `printResult()`을 이용해 결과를 출력한다
   - [] 게임을 종료한다
