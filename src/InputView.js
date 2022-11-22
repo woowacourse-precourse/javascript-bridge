@@ -8,46 +8,56 @@ const Validation = require('./Validation');
 const InputView = {
   readBridgeSize() {
     Console.readLine(GAME_MESSAGE.LENGTH, (answer) => {
-      Validation.bridgeSize(answer);
+      try {
+        Validation.bridgeSize(answer);
+        const bridge = makeBridge(Number(answer), generate);
+        const game = new BridgeGame(bridge);
 
-      const size = Number(answer);
-      const bridge = makeBridge(size, generate);
-      const game = new BridgeGame(bridge);
-
-      Console.print('');
-      InputView.readMoving(game);
+        Console.print('');
+        InputView.readMoving(game);
+      } catch (e) {
+        Console.print(e.message);
+        InputView.readBridgeSize();
+      }
     });
   },
   readMoving(game) {
     Console.readLine(GAME_MESSAGE.MOVING, (answer) => {
-      Validation.moving(answer);
+      try {
+        Validation.moving(answer);
+        const move = game.move(answer);
 
-      const move = game.move(answer);
+        if (move === false) {
+          InputView.readGameCommand(game);
+          return;
+        }
+        if (game.isEnd === false) {
+          InputView.readMoving(game);
+          return;
+        }
 
-      if (move === false) {
-        InputView.readGameCommand(game);
-        return;
-      }
-
-      if (game.isEnd === false) {
+        game.end(game);
+      } catch (e) {
+        Console.print(e.message);
         InputView.readMoving(game);
-        return;
       }
-
-      game.end(game);
     });
   },
   readGameCommand(game) {
     Console.readLine(GAME_MESSAGE.RESTART, (answer) => {
-      Validation.gameCommand(answer);
+      try {
+        Validation.gameCommand(answer);
+        if (answer === 'R') {
+          game.retry(game);
+          InputView.readMoving(game);
+          return;
+        }
 
-      if (answer === 'R') {
-        game.retry(game);
-        InputView.readMoving(game);
-        return;
+        game.end(game);
+      } catch (e) {
+        Console.print(e.message);
+        InputView.readGameCommand(game);
       }
-
-      game.end(game);
     });
   },
 };
