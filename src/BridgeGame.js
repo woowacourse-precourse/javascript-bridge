@@ -49,10 +49,6 @@ class BridgeGame {
     this.#input.push(userReply);
   }
 
-  popInput() {
-    return this.#input.pop();
-  }
-
   makeMap() {
     const obj = makeMapObj(this.#bridge, this.#input);
     const map = makeMap(this.#input, obj);
