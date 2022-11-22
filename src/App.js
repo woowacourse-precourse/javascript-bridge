@@ -14,7 +14,7 @@ class App {
     })
   }
 
-  playOnce() {
+  moveOnce() {
     InputView.readMoving((side) => {
       this.game.move(side);
       printMap(this.game);
@@ -23,10 +23,10 @@ class App {
         this.askRetryOrNot();
       }else{
         if(this.game.isLastStep){
-          //printResult(this.game);
+          printResult(this.game);
         }
         else{
-          this.playOnce();
+          this.moveOnce();
         }
       }
 
@@ -37,7 +37,7 @@ class App {
   askRetryOrNot(){
     readGameCommand((key) => {
       if(this.game.retry(toRetry)){
-        this.playOnce();
+        this.moveOnce();
       }
       else{
         //printResult(this.game);
