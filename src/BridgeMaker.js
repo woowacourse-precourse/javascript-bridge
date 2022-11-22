@@ -1,3 +1,5 @@
+const { GAME_SIGNATURE } = require('./utils/constant');
+
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -8,8 +10,9 @@ const BridgeMaker = {
     const bridge = [];
 
     for (let step = 0; step < size; step++) {
-      const direction = Number(generateRandomNumber()) === 1 ? 'U' : 'D';
-      bridge.push(direction);
+      const movingDirection =
+        Number(generateRandomNumber()) === 1 ? GAME_SIGNATURE.up : GAME_SIGNATURE.down;
+      bridge.push(movingDirection);
     }
 
     return bridge;

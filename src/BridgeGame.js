@@ -46,10 +46,10 @@ class BridgeGame {
     return answerDirection === trialDirection ? GAME_SIGNATURE.pass : GAME_SIGNATURE.fail;
   }
 
-  updateTrialList(trialDirection, stage) {
+  updateTrialList(movingDirection, stage) {
     this.trials.push({
-      direction: trialDirection,
-      result: this.getTrialResult(trialDirection, stage),
+      direction: movingDirection,
+      result: this.getTrialResult(movingDirection, stage),
     });
   }
 

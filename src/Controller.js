@@ -1,8 +1,5 @@
 const { GAME_SIGNATURE } = require('./utils/constant');
 
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 class Controller {
   constructor(
     { bridgeGame, bridgeMaker, bridgeRandomNumberGenerator },
