@@ -110,6 +110,8 @@ node src/app.js
  ┃ ┗ 📜ValidatorTest.js
 ```
 
+![](https://user-images.githubusercontent.com/23312485/203320600-620b8931-e92a-4e96-8303-d004478b8c0a.png)
+
 UI 로직과 도메인 로직을 분리하고, 컨트롤러로 게임을 동작시킵니다.
 
 # src/
