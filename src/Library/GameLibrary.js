@@ -1,35 +1,6 @@
-const InputView = require("../GameIO/InputView");
-const Bridge = require("./Bridge.js");
-const BridgeGame = require("./BridgeGame");
-const OutputView = require("../GameIO/OutputView");
+const InputView = require("../GameIO/InputView.js");
 
-const MOVE = {
-  MOVE: "MOVE",
-  RESTART: "RESTART",
-  QUIT: "QUIT",
-};
-
-class Game {
-  #bridge;
-  #playCount;
-  #bridgeLength;
-  #bridgeStatus;
-  constructor(bridgeLength) {
-    this.#bridgeLength = bridgeLength;
-    this.#playCount = 1;
-    this.#bridge = new Bridge(this.#bridgeLength);
-    this.#bridgeStatus = this.#bridge.getBridgeStatus();
-    this.bridgeGame = new BridgeGame(this.#bridgeStatus);
-  }
-
-  get getPlayCount() {
-    return this.#playCount;
-  }
-
-  increasePlayCount() {
-    this.#playCount += 1;
-  }
-
+const GameLibrary = {
   playAlgorithms(bridgeLength) {
     for (let moveCount = 0; moveCount < bridgeLength; moveCount++) {
       const DIRECTION = InputView.readMoving();
@@ -43,7 +14,7 @@ class Game {
       }
     }
     return true;
-  }
+  },
 
   moveTurn(direction, moveCount) {
     const MOVE_RESULT = this.bridgeGame.move(direction, moveCount);
@@ -52,7 +23,7 @@ class Game {
       return IS_QUIT;
     }
     return "M";
-  }
+  },
 
   askQuit() {
     const IS_QUIT = InputView.readGameCommand();
@@ -60,17 +31,15 @@ class Game {
       this.getPrintResult();
     }
     if (IS_QUIT === "R") {
-      console.log("increase");
       this.increasePlayCount();
       this.bridgeGame.retry();
     }
     return IS_QUIT;
-  }
+  },
 
   gameResult() {
     const JUMP_HISTORY = this.bridgeGame.getJumpHistory;
     OutputView.printResult(this.#playCount, this.#bridgeStatus, JUMP_HISTORY);
-  }
-}
-
-module.exports = Game;
+  },
+};
+modult.exports = GameLibrary;

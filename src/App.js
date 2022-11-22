@@ -4,12 +4,10 @@ const InputView = require("./GameIO/InputView");
 
 class App {
   #bridgeLength;
-  #playCount;
   #game;
   constructor() {
     this.#bridgeLength = InputView.readBridgeSize();
     this.#game = new Game(this.#bridgeLength);
-    this.#playCount = 1;
   }
 
   play() {
@@ -18,13 +16,14 @@ class App {
   }
 
   processingGame() {
-    for (let playCounter = 0; playCounter < this.#playCount; playCounter++) {
-      this.#game.increasePlayCount();
+    let totalPlayCount = this.#game.getPlayCount;
+    for (let playCounter = 0; playCounter < totalPlayCount; playCounter++) {
       const PLAY_RESULT = this.#game.playAlgorithms(this.#bridgeLength); //여기서 물어보는 작업까지 끝내야함
 
       if (!PLAY_RESULT) {
         break;
       }
+      totalPlayCount = this.#game.getPlayCount;
     }
     this.#game.gameResult();
   }
