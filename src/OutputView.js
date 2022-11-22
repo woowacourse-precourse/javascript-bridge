@@ -26,5 +26,12 @@ const OutputView = {
     Console.print("");
     this.printResultInfo(tryCnt, success);
    },
+
+   printResultInfo(success, tryCnt) {
+    const STATUS = success ? gameConst.result.value.SUCCESS : gameConst.result.value.FAIL;
+    const TRIAL_CNT = tryCnt;
+    Console.print(gameConst.result.message.SUCCESS_MESSAGE + " " + STATUS);
+    Console.print(gameConst.result.message.TRIAL_MESSAGE + " " + TRIAL_CNT);
+  },
   }
 module.exports = OutputView;
