@@ -3,18 +3,25 @@ const { MOVE_RESULT, BRIDGE_MOVING } = require("./constants");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor(answer, size) {
-    this.gameAnswer = answer; //게임 정답 리스트
-    this.bridgeSize = size; //다리 길이
+  #gameAnswer;
+  #bridgeSize; 
+
+  constructor(gameAnswer, bridgeSize) {
+    this.#gameAnswer = gameAnswer; //게임 정답 리스트
+    this.#bridgeSize = bridgeSize; //다리 길이
     this.readCnt = 0; //입력 횟수
     this.gameCount = 0; //총 시도 횟수
     this.upList = []; //위 칸 리스트(O, X 저장)
     this.downList = [];  //아래 칸 리스트(O, X 저장)
     this.answerCnt = 0; //정답 맞춘 횟수
   }
+
+  getAnswer() {
+    return this.#gameAnswer;
+  }
   //다리 길이 조회
   getBridgeSize(){
-    return this.bridgeSize;
+    return this.#bridgeSize;
   }
   //upList, downList 조회
   getUpDownList(){
@@ -66,7 +73,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(upDown) {
-    const isAnswer = upDown == this.gameAnswer[this.readCnt++];
+    const isAnswer = upDown == this.getAnswer()[this.readCnt++];
     this.updateUpDownList(upDown, isAnswer);
     
     return isAnswer; //움직인 결과가 정답인지 반환
