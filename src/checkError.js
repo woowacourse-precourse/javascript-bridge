@@ -1,6 +1,4 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const App = require("./App");
-const InputView = require("./View/InputView");
 
 const CheckError = {
   checkBridgeLength(input) {

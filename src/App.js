@@ -34,7 +34,6 @@ class App {
   }
 
   printBridge(ox, upBridge, downBridge) {
-    // MissionUtils.Console.print(`ox :${ox}, up: ${upBridge}, down: ${downBridge}`);
     OutputView.updateBridge(upBridge, downBridge);
     this.userTry += 1;
     if (ox == "O") InputView.readMoving(this);
