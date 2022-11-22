@@ -12,13 +12,14 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    readLine('다리의 길이를 입력해주세요.\n', input => {
-      const size = Number(input);
-      validateBridgeLength(size);
-      bg.setGame(size);
-      readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', this.readMoving.bind(this));
-      // BridgeMaker(input);
-    });
+    readLine('다리의 길이를 입력해주세요.\n', this.onInputBridge.bind(this));
+  },
+
+  onInputBridge(input) {
+    const size = Number(input);
+    validateBridgeLength(input);
+    bg.initGame();
+    readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', this.readMoving.bind(this));
   },
 
   /**
@@ -31,10 +32,16 @@ const InputView = {
       OutputView.printMap(bg);
       return readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', this.readMoving.bind(this));
     }
-    OutputView.printMap(bg);
+    // OutputView.printMap(bg);
+
+    if (bg.isFinish()) {
+      OutputView.printMap(bg);
+      OutputView.printResult(bg);
+      return;
+    }
     readLine(
       '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
-      this.readGameCommand
+      this.readGameCommand.bind(this)
     );
   },
   /**
@@ -43,7 +50,8 @@ const InputView = {
   readGameCommand(input) {
     validateEndValue(input);
 
-    if (bg.retry(input)) console.log('재시도!');
+    if (bg.retry(input))
+      readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', this.readMoving.bind(this));
     else OutputView.printResult();
   }
 };

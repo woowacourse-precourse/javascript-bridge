@@ -1,30 +1,31 @@
 const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
+const { print } = require('./Utils');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const movingMap = {
-  U: 0,
-  D: 1
-};
 
 class BridgeGame {
   #size;
   #bridge;
   #tryCount;
   #userInputArray;
-  #result;
+  #gameStatus;
 
-  constructor() {
+  initGame(size) {
+    this.#size = size;
+    this.#bridge = BridgeMaker.makeBridge(this.#size, generate);
+    this.#userInputArray = [];
     this.#tryCount = 1;
-    this.#result = '';
-    this.top = '';
-    this.bottom = '';
+    this.#gameStatus = false;
+    this.topText = '';
+    this.bottomText = '';
+    console.log(this.#bridge);
   }
 
   showResult() {
-    return `[${this.top}]\n[${this.bottom}]\n`;
+    return `[${this.topText}]\n[${this.bottomText}]\n`;
   }
 
   buildResult(flag) {
@@ -33,33 +34,28 @@ class BridgeGame {
     const ox = flag ? ' O ' : ' X ';
 
     if (value == 'U') {
-      this.top =
+      this.topText =
         len == 1
-          ? this.buildTextResult(this.top, `${ox}`)
-          : this.buildTextResult(this.top, `|${ox}`);
-      this.bottom =
+          ? this.buildTextResult(this.topText, `${ox}`)
+          : this.buildTextResult(this.topText, `|${ox}`);
+      this.bottomText =
         len == 1
-          ? this.buildTextResult(this.bottom, '   ')
-          : this.buildTextResult(this.bottom, '|   ');
+          ? this.buildTextResult(this.bottomText, '   ')
+          : this.buildTextResult(this.bottomText, '|   ');
     } else {
-      this.top =
-        len == 1 ? this.buildTextResult(this.top, '   ') : this.buildTextResult(this.top, '|   ');
-      this.bottom =
+      this.topText =
         len == 1
-          ? this.buildTextResult(this.bottom, `${ox}`)
-          : this.buildTextResult(this.bottom, `|${ox}`);
+          ? this.buildTextResult(this.topText, '   ')
+          : this.buildTextResult(this.topText, '|   ');
+      this.bottomText =
+        len == 1
+          ? this.buildTextResult(this.bottomText, `${ox}`)
+          : this.buildTextResult(this.bottomText, `|${ox}`);
     }
   }
 
   buildTextResult(totalText, text) {
     return (totalText += text);
-  }
-
-  setGame(size) {
-    this.#size = size;
-    this.#bridge = BridgeMaker.makeBridge(this.#size, generate);
-    this.#userInputArray = [];
-    console.log(this.#bridge);
   }
 
   isMove(input) {
@@ -96,6 +92,17 @@ class BridgeGame {
     }
 
     return false;
+  }
+
+  isFinish() {
+    if (this.#userInputArray.length == this.#size) this.#gameStatus = true;
+    return this.#gameStatus;
+  }
+
+  finishGame() {
+    print(
+      `게임 성공 여부: ${this.#gameStatus ? '성공' : '실패'}\n 총 시도한 횟수: ${this.#tryCount}`
+    );
   }
 }
 
