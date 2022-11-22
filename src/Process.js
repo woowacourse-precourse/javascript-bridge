@@ -48,11 +48,13 @@ class Process {
   }
 
   result() {
-    OutputView.printResult(
-      this.bridgeGame.getBridgeResult(),
-      this.count,
-      this.resultMessage
-    );
+    if (this.bridgeGame.getBridgeResult()[0].length !== 0) {
+      OutputView.printResult(
+        this.bridgeGame.getBridgeResult(),
+        this.count,
+        this.resultMessage
+      );
+    }
   }
 }
 
