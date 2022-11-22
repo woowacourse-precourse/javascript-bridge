@@ -1,12 +1,6 @@
-<<<<<<< HEAD:src/Controller/GameManager.js
 const OutputView = require('../View/OutputView');
 const InputView = require('../View/InputView');
 const BridgeGame = require('../Model/BridgeGame');
-=======
-const OutputView = require('./View/OutputView');
-const InputView = require('./View/InputView');
-const BridgeGame = require('./Model/BridgeGame');
->>>>>>> namjun:src/GameManager.js
 const {
   BridgeLengthInput,
   DirectionChoiceInput,
