@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const Io = class {
+const IO = class {
   static print(message) {
     MissionUtils.Console.print(message);
   }
@@ -14,4 +14,4 @@ const Io = class {
   }
 };
 
-module.exports = Io;
+module.exports = IO;

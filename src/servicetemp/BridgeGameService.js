@@ -1,7 +1,7 @@
 const { generate } = require("../BridgeRandomNumberGenerator.js");
 const { makeBridge } = require("../BridgeMaker.js");
 const { pipe } = require("../utils/Misc.js");
-const { close } = require("../utils/Io.js");
+const { close } = require("../utils/IOtemp.js");
 
 const BridgeGameService = class {
   #inputView;
@@ -15,8 +15,8 @@ const BridgeGameService = class {
 
   startGame(moveTask) {
     const callback = (size) => {
-      const bridge = makeBridge(size, generate);
       this.#outputView.printBlank();
+      const bridge = makeBridge(size, generate);
       this.#bridgeGameModel.checkBridge(bridge);
       this.#bridgeGameModel.start(bridge);
       moveTask();

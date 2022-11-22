@@ -1,8 +1,8 @@
-const BridgeGame = require("./Controller/BridgeGame.js");
-const BridgeGameService = require("./Service/BridgeGameService.js");
-const BridgeGameModel = require("./Model/BridgeGameModel.js");
-const InputView = require("./View/InputView.js");
-const OutputView = require("./View/OutputView.js");
+const BridgeGame = require("./controller/BridgeGame.js");
+const BridgeGameService = require("./service/BridgeGameService.js");
+const BridgeGameModel = require("./model/BridgeGameModel.js");
+const InputView = require("./view/InputView.js");
+const OutputView = require("./view/OutputView.js");
 
 class App {
   #bridgeGameService;
