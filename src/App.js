@@ -48,6 +48,10 @@ class App {
   inputRetryQuit() {
     InputView.readGameCommand((retryQuit) => {
       const { error } = Validation.validateRetryQuit(retryQuit);
+      if (error) {
+        Console.print(error);
+        return this.inputRetryQuit();
+      }
     });
   }
 }
