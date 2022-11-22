@@ -1,4 +1,4 @@
-const Constant = require("./lib/Constant");
+const CONSTANT = require("./lib/Constant");
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -20,11 +20,11 @@ const BridgeMaker = {
   },
 
   numberToUpDown(number) {
-    if (number === Constant.DIRECTION.ZERO) {
-      return Constant.DIRECTION.DOWN;
+    if (number === CONSTANT.DIRECTION.ZERO) {
+      return CONSTANT.DIRECTION.DOWN;
     }
-    if (number === Constant.DIRECTION.ONE) {
-      return Constant.DIRECTION.UP;
+    if (number === CONSTANT.DIRECTION.ONE) {
+      return CONSTANT.DIRECTION.UP;
     }
   },
 };

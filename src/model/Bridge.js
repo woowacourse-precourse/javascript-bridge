@@ -1,4 +1,4 @@
-const Constant = require("../lib/Constant");
+const CONSTANT = require("../lib/Constant");
 
 class Bridge {
   #bridgeGame;
@@ -32,36 +32,36 @@ class Bridge {
 
   moveUpside(direction, index) {
     if (direction === this.moveOkPosition(index)) {
-      this.#upsideBridge.push(Constant.DIRECTION.POSSIBLE);
+      this.#upsideBridge.push(CONSTANT.DIRECTION.POSSIBLE);
     }
     if (direction !== this.moveOkPosition(index)) {
-      this.#upsideBridge.push(Constant.DIRECTION.IMPOSSIBLE);
+      this.#upsideBridge.push(CONSTANT.DIRECTION.IMPOSSIBLE);
     }
     this.moveOthersideEmpty(direction);
   }
 
   moveDownside(direction, index) {
     if (direction === this.moveOkPosition(index)) {
-      this.#downsideBridge.push(Constant.DIRECTION.POSSIBLE);
+      this.#downsideBridge.push(CONSTANT.DIRECTION.POSSIBLE);
     }
     if (direction !== this.moveOkPosition(index)) {
-      this.#downsideBridge.push(Constant.DIRECTION.IMPOSSIBLE);
+      this.#downsideBridge.push(CONSTANT.DIRECTION.IMPOSSIBLE);
     }
     this.moveOthersideEmpty(direction);
   }
 
   moveOthersideEmpty(direction) {
-    if (direction === Constant.DIRECTION.UP) {
-      this.#downsideBridge.push(Constant.DIRECTION.EMPTY);
+    if (direction === CONSTANT.DIRECTION.UP) {
+      this.#downsideBridge.push(CONSTANT.DIRECTION.EMPTY);
     }
-    if (direction === Constant.DIRECTION.DOWN) {
-      this.#upsideBridge.push(Constant.DIRECTION.EMPTY);
+    if (direction === CONSTANT.DIRECTION.DOWN) {
+      this.#upsideBridge.push(CONSTANT.DIRECTION.EMPTY);
     }
   }
 
   haveXValue() {
-    const upX = this.#upsideBridge.includes(Constant.DIRECTION.IMPOSSIBLE);
-    const downX = this.#downsideBridge.includes(Constant.DIRECTION.IMPOSSIBLE);
+    const upX = this.#upsideBridge.includes(CONSTANT.DIRECTION.IMPOSSIBLE);
+    const downX = this.#downsideBridge.includes(CONSTANT.DIRECTION.IMPOSSIBLE);
     return upX || downX;
   }
 
@@ -71,8 +71,8 @@ class Bridge {
     return lengthOrigin === lengthAnother;
   }
 
-  moveOkPosition(index){
-    return this.#originalBridge[index]
+  moveOkPosition(index) {
+    return this.#originalBridge[index];
   }
 }
 

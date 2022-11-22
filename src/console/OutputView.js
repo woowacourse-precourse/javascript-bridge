@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const Message = require("../lib/Message");
+const MESSAGE = require("../lib/Message");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -12,10 +12,10 @@ const OutputView = {
    */
   printMap(upsideBridge, downsideBridge) {
     MissionUtils.Console.print(
-      `[${upsideBridge.join(Message.SEPARATOR).replace(/N/g, " ")}]`
+      `[${upsideBridge.join(MESSAGE.SEPARATOR).replace(/N/g, " ")}]`
     );
     MissionUtils.Console.print(
-      `[${downsideBridge.join(Message.SEPARATOR).replace(/N/g, " ")}]`
+      `[${downsideBridge.join(MESSAGE.SEPARATOR).replace(/N/g, " ")}]`
     );
   },
 
@@ -25,10 +25,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(gameState, upside, downside) {
-    MissionUtils.Console.print(Message.FINAL_RESULT);
+    MissionUtils.Console.print(MESSAGE.FINAL_RESULT);
     this.printMap(upside, downside);
-    MissionUtils.Console.print(`${Message.WIN_OR_LOSS} ${gameState.isWin}`);
-    MissionUtils.Console.print(`${Message.TRIED} ${gameState.tried}`);
+    MissionUtils.Console.print(`${MESSAGE.WIN_OR_LOSS} ${gameState.isWin}`);
+    MissionUtils.Console.print(`${MESSAGE.TRIED} ${gameState.tried}`);
   },
 
   /**

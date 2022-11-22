@@ -6,5 +6,4 @@ class App {
     bridgeGame.play();
   }
 }
-
 module.exports = App;

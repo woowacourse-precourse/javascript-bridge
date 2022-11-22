@@ -1,5 +1,5 @@
 const OutputView = require("../console/OutputView");
-const Message = require("../lib/Message");
+const MESSAGE = require("../lib/Message");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class ViewPrinter {
@@ -10,7 +10,7 @@ class ViewPrinter {
   }
 
   sayHello() {
-    OutputView.printLine(Message.GAME_START);
+    OutputView.printLine(MESSAGE.GAME_START);
   }
 
   printBridge() {
