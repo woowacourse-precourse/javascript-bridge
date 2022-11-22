@@ -12,8 +12,9 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(GAME_MESSAGE.BRIDGE_SIZE, answer => {
-      //TODO:유효성검사 - 숫자인가? 3~20 사이인가?
-      return answer;
+      if (Validator.isValidRange(answer)) {
+        return answer;
+      }
     });
   },
 
