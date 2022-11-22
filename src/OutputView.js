@@ -15,9 +15,10 @@ const OutputView = {
     Console.print(Messages.END_GAME);
     this.printMap(up, down);
 
-    Console.print(`게임 성공 여부: ${hasCorrect ? '성공' : '실패'}`);
-    Console.print(`총 시도한 횟수: ${totalTry}`);
-
+    const SUCCESS = '성공';
+    const FAIL = '실패';
+    Console.print(`${Messages.GAME_RESULT} ${hasCorrect ? SUCCESS : FAIL}`);
+    Console.print(`${Messages.TOTAL_TRY} ${totalTry}`);
     Console.close();
   },
 };
