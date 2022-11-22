@@ -21,7 +21,7 @@ describe("다리 건너기 게임 사용자 입력 예외 사항", () => {
 
     test("사용자 게임 진행 입력이 Q 혹은 R이 아닐 경우", () => {
         expect(() => {
-            new CheckUserMove("재시작")
+            new CheckWhetherGameRunning("재시작")
         }).toThrow("[ERROR]");
     })
 })
