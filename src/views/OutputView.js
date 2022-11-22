@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const createMaps = require('../utils/createMaps');
+const GameMessage = require('../constants/GameMessage');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -9,7 +10,7 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    *
-   * @param {import('../BridgeGame').Flag} result
+   * @param {import('../BridgeGame').Result} result
    */
   printMap(result) {
     const maps = createMaps(result);
@@ -22,15 +23,15 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    *
-   * @param {import('../BridgeGame').Flag} result
+   * @param {import('../BridgeGame').Result} result
    */
   printResult(result) {
     const messages = [
       `\n게임 성공 여부: ${result.flag === 'GAME_END' ? '성공' : '실패'}`,
-      `총 시도한 횟수: ${result.status.accMoveCount}`,
+      `총 시도한 횟수: ${result.status.playCount}`,
     ];
 
-    this.printMessage('\n최종 게임 결과');
+    this.printMessage(GameMessage.END);
     this.printMap(result);
     messages.forEach((message) => this.printMessage(message));
 

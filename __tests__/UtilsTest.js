@@ -2,7 +2,7 @@ const createMaps = require('../src/utils/createMaps');
 
 describe('지도 생성 테스트', () => {
   test('원하는 결과의 지도를 생성한다.', () => {
-    const status = { accMoveCount: 3, curMoveCount: 3, movedRoutes: ['U', 'U', 'D'] };
+    const status = { playCount: 3, moveCount: 3, movedRoutes: ['U', 'U', 'D'] };
 
     const result1 = { flag: 'GAME_OVER', status };
     const result2 = { flag: 'CONTINUE', status };

@@ -33,7 +33,7 @@ class BridgeGame {
     const defaultResult = { flag: Flag.CONTINUE, status: gameStatus };
     const bridge = this.#BridgeGameStatus.getBridge();
 
-    if (bridge[gameStatus.curMoveCount - 1] !== gameStatus.movedRoutes[gameStatus.curMoveCount - 1])
+    if (bridge[gameStatus.moveCount - 1] !== gameStatus.movedRoutes[gameStatus.moveCount - 1])
       return { ...defaultResult, flag: Flag.OVER };
 
     if (JSON.stringify(bridge) === JSON.stringify(gameStatus.movedRoutes))
@@ -52,7 +52,7 @@ class BridgeGame {
     const currentStatus = this.#BridgeGameStatus.getGameStatus();
     const movedStatus = {
       ...currentStatus,
-      curMoveCount: currentStatus.curMoveCount + 1,
+      moveCount: currentStatus.moveCount + 1,
       movedRoutes: [...currentStatus.movedRoutes, direction],
     };
 
@@ -65,8 +65,8 @@ class BridgeGame {
   retry() {
     const currentStatus = this.#BridgeGameStatus.getGameStatus();
     const resetedStatus = {
-      accMoveCount: currentStatus.accMoveCount + 1,
-      curMoveCount: 0,
+      playCount: currentStatus.playCount + 1,
+      moveCount: 0,
       movedRoutes: [],
     };
 

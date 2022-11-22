@@ -4,7 +4,7 @@
  * @returns {boolean}
  */
 const isLastMoveAndGameOver = (index, result) =>
-  index === result.status.curMoveCount - 1 && result.flag === 'GAME_OVER';
+  index === result.status.moveCount - 1 && result.flag === 'GAME_OVER';
 
 const checkBridgeStatus = (index, result) => {
   if (isLastMoveAndGameOver(index, result)) {
