@@ -24,6 +24,12 @@ describe('Bridge 클래스 테스트', () => {
     expect(bridge.getTiles()).toEqual(tiles);
   });
 
+  test('배열이 아닌 값을 넣었을 때 예외가 잘 발생하는지', () => {
+    expect(() => {
+      new Bridge(1234);
+    }).toThrow(ValidationError);
+  });
+
   test('지정된 타일 이외에 잘못된 값을 넣었을 때 예외가 잘 발생하는지', () => {
     const tiles = [Tile.UP, Tile.UP, Tile.DOWN, '#', Tile.UP];
 
