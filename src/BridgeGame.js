@@ -37,6 +37,28 @@ class BridgeGame {
   }
 
   /**
+   * 게임 이겼는지 확인
+   */
+  validateWin(myMoves, bridge) {
+    const currentIndex = myMoves.length - 1;
+    if (myMoves[currentIndex] === bridge[currentIndex] && currentIndex + 1 === bridge.length) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * 게임 이동 가능한지 확인
+   */
+  validateMove(myMoves, bridge) {
+    const currentIndex = myMoves.length - 1;
+    if (myMoves[currentIndex] !== bridge[currentIndex]) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
