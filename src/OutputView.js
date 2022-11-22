@@ -16,14 +16,24 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(oneLinedBridge) {
+    Console.print(BRIDGE.START + oneLinedBridge.join(BRIDGE.SEPERATOR) + BRIDGE.END);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(result) {
+    Console.print(MESSAGE.FINAL_RESULT);
+    this.printMap(result.upperBridge);
+    this.printMap(result.lowerBridge);
+    const finalResult = result.isCompleted ? MESSAGE.COMPLETE : MESSAGE.FAIL;
+    Console.print(MESSAGE.IS_COMPLETED + finalResult);
+    Console.print(MESSAGE.NUMBER_OF_TRIES + result.tries);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
