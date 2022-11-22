@@ -10,50 +10,50 @@ const { UTIL, INPUT } = require('./constant/constant');
  */
 class BridgeGame {
   #turn;
-  #try;
+  #tries;
   #isPlay;
-  #isEnd;
-  #bridge;
-  #bridgeRecord;
+  #isSuccess;
+  #answers;
+  #bridgeRecords;
 
   constructor() {
     this.#turn = UTIL.INIT;
-    this.#try = UTIL.FIRST;
+    this.#tries = UTIL.FIRST;
     this.#isPlay = true;
-    this.#isEnd = false;
-    this.#bridgeRecord = new BridgeRecorder([], []);
+    this.#isSuccess = false;
+    this.#bridgeRecords = new BridgeRecorder([], []);
   }
 
   startGame() {
-    OutputView.start();
-    this.enterBridgeLength();
+    OutputView.startMent();
+    this.inputBridgeLength();
   }
 
-  enterBridgeLength() {
+  inputBridgeLength() {
     const bridgeLength = (input) => {
-      OutputView.enter();
-      this.#bridge = BridgeMaker.makeBridge(input, BridgeNumber.generate);
-      this.enterMoving();
+      OutputView.newLine();
+      this.#answers = BridgeMaker.makeBridge(input, BridgeNumber.generate);
+      this.inputMoving();
     };
     InputView.readBridgeSize(INPUT.BRIDGE_SIZE, bridgeLength);
   }
 
-  enterMoving() {
+  inputMoving() {
     const moving = (input) => {
       this.move(input);
-      if (this.#isEnd) this.clearGame();
-      if (!this.#isEnd && this.#isPlay) this.enterMoving();
-      if (!this.#isEnd && !this.#isPlay) this.enterRegame();
+      if (this.#isSuccess) this.clearGame();
+      if (!this.#isSuccess && this.#isPlay) this.inputMoving();
+      if (!this.#isSuccess && !this.#isPlay) this.inputReGame();
     };
     InputView.readMoving(INPUT.CHOOSE_BLOCK, moving);
   }
 
-  enterRegame() {
-    const regame = (input) => {
+  inputReGame() {
+    const reGame = (input) => {
       if (input === UTIL.RETRY) this.retry();
       if (input === UTIL.QUIT) this.giveupGame();
     };
-    InputView.readMoving(INPUT.RESTART, regame);
+    InputView.readMoving(INPUT.RESTART, reGame);
   }
 
   /**
@@ -62,19 +62,19 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(input) {
-    const crossable = this.#bridge[this.#turn];
+    const crossable = this.#answers[this.#turn];
     this.#turn += 1;
-    this.isMove(input, crossable);
+    this.isCorrect(input, crossable);
   }
 
-  isMove(input, crossable) {
+  isCorrect(input, crossable) {
     if (input === crossable) this.isFirst(UTIL.GO, input);
     if (input !== crossable) {
       this.#isPlay = false;
       this.isFirst(UTIL.STOP, input);
     }
-    if (input === crossable && this.#turn === this.#bridge.length) {
-      this.#isEnd = true;
+    if (input === crossable && this.#turn === this.#answers.length) {
+      this.#isSuccess = true;
     }
   }
 
@@ -85,19 +85,23 @@ class BridgeGame {
 
   firstBlock(state, input) {
     if (input === UTIL.UP) {
-      OutputView.printMap(this.#bridgeRecord.addFirstUpBlock(state));
+      const bridgeRecords = this.#bridgeRecords.addFirstUpBlock(state);
+      OutputView.printMap(bridgeRecords);
     }
     if (input === UTIL.DOWN) {
-      OutputView.printMap(this.#bridgeRecord.addFirstDownBlock(state));
+      const bridgeRecords = this.#bridgeRecords.addFirstDownBlock(state);
+      OutputView.printMap(bridgeRecords);
     }
   }
 
   afterFirstBlock(state, input) {
     if (input === UTIL.UP) {
-      OutputView.printMap(this.#bridgeRecord.addUpBlock(state));
+      const bridgeRecords = this.#bridgeRecords.addUpBlock(state);
+      OutputView.printMap(bridgeRecords);
     }
     if (input === UTIL.DOWN) {
-      OutputView.printMap(this.#bridgeRecord.addDownBlock(state));
+      const bridgeRecords = this.#bridgeRecords.addDownBlock(state);
+      OutputView.printMap(bridgeRecords);
     }
   }
 
@@ -107,27 +111,27 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
+    this.#tries += 1;
     this.#isPlay = true;
-    this.#try += 1;
     this.init();
-    this.enterMoving();
+    this.inputMoving();
   }
 
   init() {
     this.#turn = UTIL.INIT;
-    this.#bridgeRecord.init();
+    this.#bridgeRecords.init();
   }
 
   clearGame() {
     InputView.closeRead();
-    const records = this.#bridgeRecord.getResult();
-    OutputView.printResult(UTIL.SUCCESS, this.#try, records);
+    const records = this.#bridgeRecords.getResult();
+    OutputView.printResult(UTIL.SUCCESS, this.#tries, records);
   }
 
   giveupGame() {
     InputView.closeRead();
-    const records = this.#bridgeRecord.getResult();
-    OutputView.printResult(UTIL.FAIL, this.#try, records);
+    const records = this.#bridgeRecords.getResult();
+    OutputView.printResult(UTIL.FAIL, this.#tries, records);
   }
 }
 
