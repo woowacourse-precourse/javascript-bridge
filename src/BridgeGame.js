@@ -31,7 +31,7 @@ class BridgeGame {
   }
   checkFall() {
     const index = this.#path.length-1;
-    if (this.#path[index] === this.#bridge[index]) return true;
+    if (this.#path[index] != this.#bridge[index]) return true;
     return false; 
   }
   checkSuccess() {
