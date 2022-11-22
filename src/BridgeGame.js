@@ -31,7 +31,15 @@ class BridgeGame {
     return this.#bridge.length === this.#crossingOrder.length;
   }
 
-  retry() {}
+  retry() {
+    this.#attemptCount += 1;
+    this.#crossingOrder = [];
+  }
+
+  getResult() {
+    const isSuccess = !this.isFail() && this.isLast();
+    return {isSuccess, attempCount: this.#attemptCount};
+  }
 }
 
 module.exports = BridgeGame;
