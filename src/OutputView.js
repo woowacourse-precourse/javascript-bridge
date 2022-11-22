@@ -1,4 +1,3 @@
-const Print = require('../src/Print');
 const { Console } =require('@woowacourse/mission-utils');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -12,8 +11,8 @@ const OutputView = {
   printMap(userInput, bridgeInfo) {
     const upside = this.generateUpside(userInput, bridgeInfo);
     const downside = this.generateDownside(userInput, bridgeInfo);
-    Console.print(`${upside.join('').trim()}\n`);
-    Console.print(`${downside.join('').trim()}\n`);
+    Console.print(`${upside.join('')}\n`);
+    Console.print(`${downside.join('')}\n`);
   },
 
   /**
@@ -111,7 +110,35 @@ const OutputView = {
   },
   addDivisionTo(bridge){
     bridge.push(' | ');
-  }
+  },
+  StartMessage(){
+    Console.print('다리 건너기 게임을 시작합니다.');
+  },
+  UserInput(input) {
+    Console.print(`${input}`);
+  },
+  GameResultIsWin() {
+    Console.print(`게임 성공 여부: 성공`);
+  },
+  GameResultIsDefeat() {
+    Console.print(`게임 성공 여부: 실패`);
+  },
+  GameTryCount(count) {
+    Console.print(`총 시도한 횟수: ${count}`);
+  },
+  ResultTitle() {
+    Console.print('최종 게임 결과');
+  },
+  Blank() {
+    Console.print('');
+  },
+  BothBridge(upside, downSide) {
+    Console.print(upside.join(''));
+    Console.print(downSide.join(''));
+  },
+  ErrorMessage(error) {
+    Console.print(error);
+  },
 };
 
 module.exports = OutputView;

@@ -1,4 +1,4 @@
-const Print = require('../Print');
+const { Console } = require('@woowacourse/mission-utils');
 
 class BridgeLengthInput {
   #userInput;
@@ -10,7 +10,7 @@ class BridgeLengthInput {
   check() {
     try {
       if (this.isNotValidNumber() || this.isNotValidRange() || this.isNotInteger())
-        {throw new Error('[ERROR] 3~20 사이의 숫자만 입력 가능합니다.');}
+        throw new Error(Console.print('[ERROR] 3~20 사이의 숫자만 입력 가능합니다.'));
       return true;
     } catch {
       return false;

@@ -6,7 +6,7 @@ describe('다리길이 입력 기능 테스트', () => {
         const test = () => userInput.check();
         expect(test()).toBe(true);
     });
-    it.each([["2"], ["4.99"], ["-1"], ["21"], ['abc'], ['NaN'], ['undefined']])('다리 길이 입력 예외처리', (input) => {
+    it.each([["2"], ["4.99"], ["-1"], ["21"], ["a"], ['NaN'], ['undefined']])('다리 길이 입력 예외처리', (input) => {
         const userInput = new BridgeLengthInput(input);
         const test = () => userInput.check();
         expect(test()).toBe(false);

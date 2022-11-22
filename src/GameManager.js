@@ -1,4 +1,3 @@
-const Print = require('./Print');
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeGame = require('./BridgeGame');
@@ -13,11 +12,11 @@ class GameManager {
   #bridgeGame;
 
   constructor() {
+    Console.print('다리 건너기 게임을 시작합니다.\n');
     this.#bridgeGame = new BridgeGame();
   }
 
   startGame() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
     this.setBridgeLength();
   }
 
