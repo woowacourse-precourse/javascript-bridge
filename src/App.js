@@ -7,14 +7,15 @@ const BridgeGame = require("./BridgeGame");
 
 class App {
   play() {
-    this.gameStart();
+    this.gameStart((newGame) => {
+      newGame.gamePlay();
+    });
   }
 
-  gameStart() {
+  gameStart(newGame) {
     OutputView.gameStart();
     InputView.readBridgeSize((size) => {
-      let bridgeGame = this.generateBridge(size);
-      this.stopProgram();
+      newGame(this.generateBridge(size));
     });
   }
 

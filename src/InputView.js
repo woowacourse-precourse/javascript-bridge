@@ -18,7 +18,10 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(callback) {
-    Console.readLine();
+    Console.readLine(MESSAGES.WHERE_TO_MOVE, (input) => {
+      //진행 입력 예외처리 들어갈 부분
+      callback(input);
+    });
   },
 
   /**
