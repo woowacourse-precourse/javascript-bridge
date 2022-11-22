@@ -100,6 +100,13 @@ class BridgeGame {
     Console.close();
   }
 
+  isMoveFail(direction) {
+    if (direction !== this.#bridge[this.#currentPosition]) {
+      return true;
+    }
+    return false;
+  }
+  
   isFinish() {
     if (this.#currentPosition === this.#bridge.length) {
       return true;
