@@ -12,7 +12,9 @@ class App {
     this.#bridgeGame = new BridgeGame(
       BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate)
     );
+    this.playing();
   }
+  playing() {}
 }
 
 module.exports = App;
