@@ -1,4 +1,4 @@
-const { INPUT_VALUE } = require('./util/Constant');
+const { INPUT_VALUE } = require('./Util/Constant');
 
 const BridgeMaker = {
   /**

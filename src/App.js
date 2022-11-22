@@ -1,4 +1,4 @@
-const Gameflow = require('./Gameflow');
+const Gameflow = require('./Controller/Gameflow');
 
 class App {
   constructor() {

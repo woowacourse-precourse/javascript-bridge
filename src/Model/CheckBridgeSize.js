@@ -1,5 +1,5 @@
-const { ERROR } = require('../util/Constant');
-const OutputView = require('../view/OutputView');
+const { ERROR } = require('../Util/Constant');
+const OutputView = require('../View/OutputView');
 
 class CheckBridgeSize {
   validate(size) {

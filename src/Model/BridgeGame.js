@@ -1,9 +1,9 @@
-const { INPUT_VALUE } = require('./util/Constant');
+const { INPUT_VALUE } = require('../Util/Constant');
 
 class BridgeGame {
-  #randomBridge
+  #randomBridge;
 
-  constructor(randomBridge){
+  constructor(randomBridge) {
     this.#randomBridge = randomBridge;
   }
 
@@ -23,10 +23,8 @@ class BridgeGame {
   }
 
   retry(inputReplayQuit) {
-    if (inputReplayQuit === INPUT_VALUE.REPLAY)
-      return 1;
-    if (inputReplayQuit === INPUT_VALUE.QUIT)
-      return 0;
+    if (inputReplayQuit === INPUT_VALUE.REPLAY) return 1;
+    if (inputReplayQuit === INPUT_VALUE.QUIT) return 0;
   }
 }
 
