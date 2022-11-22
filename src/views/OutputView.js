@@ -24,7 +24,7 @@ const OutputView = {
 
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * @param {BridgeMaps} bridgeMap
+   * @param {BridgeMaps} bridgeMaps
    */
   printMap(bridgeMaps) {
     const [upside, downside] = bridgeMaps.getMaps();
@@ -50,11 +50,11 @@ const OutputView = {
 
   /**
    * 에러 메시지를 출력한다.
-   * @param {string} message
+   * @param {string} error
    */
-  printError(message) {
+  printError(error) {
     OutputView.printEmptyLine();
-    Console.print(message);
+    Console.print(error);
     OutputView.printEmptyLine();
   },
 };

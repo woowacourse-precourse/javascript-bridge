@@ -4,8 +4,13 @@ const BridgeGame = require('../models/BridgeGame');
 const { SizeCommand, MovingCommand, GameCommand } = require('../models/command');
 
 const { readBridgeSize, readMoving, readGameCommand } = require('../views/InputView');
-const OutputView = require('../views/OutputView');
-const { printMap, printResult, printError } = require('../views/OutputView');
+const {
+  printGameStart,
+  printEmptyLine,
+  printMap,
+  printResult,
+  printError,
+} = require('../views/OutputView');
 
 /**
  * 다리 건너기 게임 컨트롤러 클래스
@@ -18,9 +23,12 @@ class BridgeGameController {
    */
   #game;
 
+  /**
+   * 다리 건너기 게임 시작할 때 사용하는 메서드
+   */
   play() {
     this.#game = new BridgeGame();
-    OutputView.printGameStart();
+    printGameStart();
     this.#game.start();
     readBridgeSize(this.#onBridgeSizeSubmit.bind(this));
   }
@@ -44,7 +52,7 @@ class BridgeGameController {
   #tryBridgeSizeSubmit(command) {
     const sizeCommand = new SizeCommand(command);
     this.#game.setBridge(sizeCommand);
-    OutputView.printEmptyLine();
+    printEmptyLine();
     readMoving(this.#onMovingSubmit.bind(this));
   }
 
@@ -68,8 +76,8 @@ class BridgeGameController {
     const movingCommand = new MovingCommand(command);
     const currentBridge = this.#game.move(movingCommand);
     const isCrossed = movingCommand.isCrossed(currentBridge);
-    const bridgeMap = this.#game.getMap();
-    printMap(bridgeMap);
+    printMap(this.#game.getMap());
+
     if (this.#game.isWin(isCrossed)) {
       this.#runQuit(isCrossed);
       return;
@@ -129,6 +137,7 @@ class BridgeGameController {
 
   /**
    * 종료 커맨드 입력할 때 사용하는 메서드
+   * @param {boolean} isCrossed
    */
   #runQuit(isCrossed = false) {
     const finalStatus = this.#game.quit(isCrossed);
@@ -138,12 +147,12 @@ class BridgeGameController {
 
   /**
    * 에러가 발생할 때 사용하는 메서드
-   * @param {string} message
+   * @param {string} error
    * @param {function(callback): void} readLine
    * @param {function(string): void} callback
    */
-  static #runError(message, readLine, callback) {
-    printError(message);
+  static #runError(error, readLine, callback) {
+    printError(error);
     readLine(callback);
   }
 }
