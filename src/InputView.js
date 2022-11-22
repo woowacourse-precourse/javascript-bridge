@@ -4,7 +4,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const OutputView = require('./OutputView');
 const BridgeGame = require("./BridgeGame");
-const { INPUT_MESSAGES } = require("./utils/constants");
+const { INPUT_MESSAGES, OUTPUT_MESSAGES } = require("./utils/constants");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -30,7 +30,29 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() { },
+  readMoving(bridge, previous, attempt) {
+    let steps = previous;
+    Console.readLine(INPUT_MESSAGES.MOVE_SQUARE, (step) => {
+      const inputCheck = new InputCheck();
+      inputCheck.stepCheck(step);
+      steps += step;
+      const bridgeGame = new BridgeGame();
+      if (bridgeGame.move(bridge, steps)) {
+        OutputView.printMap(bridge, steps);
+        if (steps.length != bridge.length) {
+          this.readMoving(bridge, steps, attempt);
+        } else {
+          Console.print(OUTPUT_MESSAGES.RESULT);
+          OutputView.printMap(bridge, steps);
+          OutputView.printResult(true, attempt);
+          Console.close();
+        }
+      } else {
+        OutputView.printMap(bridge, steps);
+        this.readGameCommand(bridge, attempt);
+      }
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
