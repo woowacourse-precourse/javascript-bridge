@@ -19,7 +19,6 @@ class App {
     validateBridge(size);
     const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.bridgeGame = new BridgeGame(bridge);
-    console.log(bridge);
     InputView.readMoving(this.getMoveInput.bind(this));
   }
 

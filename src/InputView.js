@@ -1,5 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { validateMove } = require('./utils/validate');
 
 const InputView = {
   /**
