@@ -7,6 +7,7 @@ class Validation {
         const isValidSizeRange = this.checkBridgeSizeRange(size);
         return isValidNumber || isValidSizeRange === true;
     }
+
     static checkNumber(number) {
         const isNotNumber = !/^\d+$/g.test(number);
         try {

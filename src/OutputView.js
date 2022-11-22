@@ -4,8 +4,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const OutputView = {
     printMap(bridgeGame) {
         const bridgeTrace = bridgeGame.makeBridgeTraceForPrint();
-        Console.print(STRUCTURE.ENTRANCE + bridgeTrace[0] + STRUCTURE.EXIT);
-        Console.print(STRUCTURE.ENTRANCE + bridgeTrace[1] + STRUCTURE.EXIT);
+        bridgeTrace.forEach((trace) => Console.print(STRUCTURE.ENTRANCE + trace + STRUCTURE.EXIT));
         Console.print("");
     },
 

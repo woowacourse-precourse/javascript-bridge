@@ -28,11 +28,13 @@ const InputView = {
         });
     },
 
+    // 다리 생성 이벤트
     createBridgeGame(size) {
         const bridgeGame = new BridgeGame(makeBridge(size, generate));
         this.readMoving(bridgeGame);
     },
 
+    // 이동 이벤트
     playMoving(bridgeGame, move) {
         const isKeyUp = bridgeGame.move(move);
         if (bridgeGame.isBadMove(isKeyUp)) {
@@ -61,6 +63,7 @@ const InputView = {
         this.readMoving(bridgeGame);
     },
 
+    // 재시작 이벤트
     playGameCommand(bridgeGame, answer) {
         if (bridgeGame.questionRetry(answer)) {
             return this.readMoving(bridgeGame);

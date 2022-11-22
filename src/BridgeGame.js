@@ -18,14 +18,6 @@ class BridgeGame {
         return move === KEY.UP;
     }
 
-    pushBridgeTrace(isKeyUp, structureState) {
-        if (isKeyUp) {
-            return this.#trace.push([structureState, STRUCTURE.BLANK]);
-        } else {
-            return this.#trace.push([STRUCTURE.BLANK, structureState]);
-        }
-    }
-
     isBadMove(isKeyUp) {
         const isKeyBadUp = isKeyUp && this.#bridgeArray[this.#moveCount - 1] === KEY.DOWN;
         const isKeyBadDown = !isKeyUp && this.#bridgeArray[this.#moveCount - 1] === KEY.UP;
@@ -41,6 +33,20 @@ class BridgeGame {
             this.resetBridgeSetting();
             return true;
         }
+    }
+
+    pushBridgeTrace(isKeyUp, structureState) {
+        if (isKeyUp) {
+            return this.#trace.push([structureState, STRUCTURE.BLANK]);
+        } else {
+            return this.#trace.push([STRUCTURE.BLANK, structureState]);
+        }
+    }
+
+    makeBridgeTraceForPrint() {
+        const upBridgeTrace = this.#trace.map((bridge) => bridge[0]).join(STRUCTURE.LINK);
+        const downBridgeTrace = this.#trace.map((bridge) => bridge[1]).join(STRUCTURE.LINK);
+        return [upBridgeTrace, downBridgeTrace];
     }
 
     resetBridgeSetting() {
@@ -59,12 +65,6 @@ class BridgeGame {
 
     getGameCount() {
         return this.#gameCount;
-    }
-
-    makeBridgeTraceForPrint() {
-        const upBridgeTrace = this.#trace.map((bridge) => bridge[0]).join(STRUCTURE.LINK);
-        const downBridgeTrace = this.#trace.map((bridge) => bridge[1]).join(STRUCTURE.LINK);
-        return [upBridgeTrace, downBridgeTrace];
     }
 }
 module.exports = BridgeGame;
