@@ -44,14 +44,31 @@ const expectLogContains = (received, logs) => {
   });
 };
 
-const expectBridgeOrder = (received, upside, downside) => {
-  const upsideIndex = received.indexOf(upside);
-  const downsideIndex = received.indexOf(downside);
-  expect(upsideIndex).toBeLessThan(downsideIndex);
-};
-
 describe("예외 테스트", () => {
-  test("예외 테스트 1", () => {
+  mockRandoms([0, 1, 1, 0, 1, 1, 1]);
+
+  test("1. 다리 길이 입력값 예외 : 입력 값이 정수 일 때 ", () => {
+    // 다리 길이 입력 시, 정수가 아닌 문자를 입력
     runException(["a"]);
+  });
+  test("2. 다리 길이 입력값 예외 : 입력 값이 3부터 20 사이의 수가 아닐 때", () => {
+    // 다리 길이 입력 시, 3 미만의 값을 입력
+    runException(["2"]);
+  });
+  test("3. 다리 길이 입력값 예외 : 입력 값이 3부터 20 사이의 수가 아닐 때", () => {
+    // 다리 길이 입력 시, 20을 초과하는 값을 입력
+    runException(["21"]);
+  });
+  test("4. 이동 입력값 예외('U', 'D') : 입력 값이 여러 개 일때", () => {
+    // 첫 번째 칸을 건너고 두 번째 칸 이동 시 UD를 입력
+    runException(["5", "D", "UD"]);
+  });
+  test("5. 이동 입력값 예외('U', 'D') : 입력 값이 U 또는 D가 아닐 때", () => {
+    // 첫 번째 칸을 건너고 두 번째 칸 이동 시 K를 입력
+    runException(["5", "D", "K"]);
+  });
+  test("6. 재시작 예외('R', 'Q') : 입력 값이 R 또는 Q가 아닐 때", () => {
+    // 3번째 다리에서 실패 후, 재시작 시 K를 입력
+    runException(["5", "D", "U", "U", "K"]);
   });
 });
