@@ -3,6 +3,8 @@
  */
 
 const UserBridge = require('../model/UserBridge');
+const { USER_MOVEMENT, VALID_MOVEMENT } = require('../constants/game.constants');
+const { GAME_RESULT } = require('../constants/message.constants');
 
 class BridgeGame {
   // gameCount: 총 게임 시도 횟수를 저장할 변수
@@ -44,9 +46,9 @@ class BridgeGame {
    */
   move(movement) {
     if (movement === this.bridge.condition[this.moveCount]) {
-      this.userBridge.addMovement('O');
+      this.userBridge.addMovement(VALID_MOVEMENT.SUCCESS);
     } else {
-      this.userBridge.addMovement('X');
+      this.userBridge.addMovement(VALID_MOVEMENT.FAIL);
     }
     this.addMoveCount();
   }
@@ -78,10 +80,14 @@ class BridgeGame {
    * @returns 해당 다리 칸을 건넜는지에 대한 여부를 다리 모양에 맞게 배열로 반환한다.
    */
   getCurrentMap(coordinate, valid) {
-    if (coordinate === 'U' && valid === 'O') return ['O', ' '];
-    else if (coordinate === 'D' && valid === 'O') return [' ', 'O'];
-    else if (coordinate === 'U' && valid === 'X') return [' ', 'X'];
-    else if (coordinate === 'D' && valid === 'X') return ['X', ' '];
+    if (coordinate === USER_MOVEMENT.UP && valid === VALID_MOVEMENT.SUCCESS)
+      return [VALID_MOVEMENT.SUCCESS, VALID_MOVEMENT.VACANT];
+    else if (coordinate === USER_MOVEMENT.DOWN && valid === VALID_MOVEMENT.SUCCESS)
+      return [VALID_MOVEMENT.VACANT, VALID_MOVEMENT.SUCCESS];
+    else if (coordinate === USER_MOVEMENT.UP && valid === VALID_MOVEMENT.FAIL)
+      return [VALID_MOVEMENT.VACANT, VALID_MOVEMENT.FAIL];
+    else if (coordinate === USER_MOVEMENT.DOWN && valid === VALID_MOVEMENT.FAIL)
+      return [VALID_MOVEMENT.FAIL, VALID_MOVEMENT.VACANT];
   }
 
   /**
@@ -92,7 +98,7 @@ class BridgeGame {
   checkGameSet(currentMap) {
     const up = currentMap[0];
     const down = currentMap[1];
-    if (up.includes('X') || down.includes('X')) return true;
+    if (up.includes(VALID_MOVEMENT.FAIL) || down.includes(VALID_MOVEMENT.FAIL)) return true;
     else if (this.userBridge.condition.length === this.bridge.condition.length) {
       this.failOrSuccess = true;
       return true;
@@ -114,9 +120,9 @@ class BridgeGame {
   getGameResult() {
     let gameResult;
     if (this.failOrSuccess) {
-      gameResult = '성공';
+      gameResult = GAME_RESULT.SUCCESS;
     } else {
-      gameResult = '실패';
+      gameResult = GAME_RESULT.FAIL;
     }
     return gameResult;
   }

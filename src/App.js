@@ -2,6 +2,7 @@ const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 const Bridge = require('./model/Bridge');
 const BridgeGame = require('./controller/BridgeGame');
+const { GAME_COMMAND } = require('./constants/game.constants');
 
 class App {
   // bridge: 생성된 다리를 저장하는 객체
@@ -72,9 +73,9 @@ class App {
   // 게임 재시작 여부를 입력 받는 메서드
   askRetry() {
     InputView.readGameCommand((restartOrQuit) => {
-      if (restartOrQuit === 'R') {
+      if (restartOrQuit === GAME_COMMAND.RESTART) {
         this.restartGame();
-      } else if (restartOrQuit === 'Q') {
+      } else if (restartOrQuit === GAME_COMMAND.QUIT) {
         this.quitGame();
       }
     });

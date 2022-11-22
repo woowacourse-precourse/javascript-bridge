@@ -5,6 +5,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
 const InputValidation = require('../validation/InputValidation');
+const { INPUT_MESSAGE } = require('../constants/message.constants');
 
 const InputView = {
   /**
@@ -12,7 +13,7 @@ const InputView = {
    * @param {callback} nextStep 해당 메서드가 종료되고 실행할 콜백함수
    */
   readBridgeSize(nextStep) {
-    Console.readLine('다리의 길이를 입력해주세요.\n', (userInput) => {
+    Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (userInput) => {
       try {
         const bridgeSize = Number(userInput);
         this.validateBridgeSize(bridgeSize);
@@ -29,7 +30,7 @@ const InputView = {
    * @param {callback} nextStep 해당 메서드가 종료되고 실행할 콜백함수
    */
   readMoving(nextStep) {
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (userInput) => {
+    Console.readLine(INPUT_MESSAGE.MOVEMENT, (userInput) => {
       try {
         const movement = userInput;
         this.validateMovement(movement);
@@ -46,7 +47,7 @@ const InputView = {
    * @param {callback} nextStep 해당 메서드가 종료되고 실행할 콜백함수
    */
   readGameCommand(nextStep) {
-    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (userInput) => {
+    Console.readLine(INPUT_MESSAGE.RESTART_OR_QUIT, (userInput) => {
       try {
         const restartOrQuit = userInput;
         this.validateGameCommand(restartOrQuit);

@@ -1,10 +1,17 @@
+/**
+ * 사용자의 입력에 대해 유효성 검사를 진행한다.
+ */
+
+const { BRIDGE_SIZE_ERROR, MOVEMENT_ERROR, GAME_COMMAND_ERROR } = require('../constants/error.constants');
+const { USER_MOVEMENT, GAME_COMMAND } = require('../constants/game.constants');
+
 const InputValidation = {
   /**
    * 플레이어가 입력한 다리의 길이가 정수인지 검사하는 메서드
    * @param {number} bridgeSize 플레이어가 입력한 다리의 길이
    */
   isBridgeSizeInteger(bridgeSize) {
-    if (!Number.isInteger(bridgeSize)) throw new Error('[ERROR] 다리의 길이는 정수만 입력이 가능합니다.');
+    if (!Number.isInteger(bridgeSize)) throw new Error(BRIDGE_SIZE_ERROR.NOT_INTEGER);
   },
 
   /**
@@ -12,7 +19,7 @@ const InputValidation = {
    * @param {number} bridgeSize 플레이어가 입력한 다리의 길이
    */
   isBridgeSizeInRange(bridgeSize) {
-    if (bridgeSize < 3 || bridgeSize > 20) throw new Error('[ERROR] 다리의 길이는 3 이상 20 이하의 숫자만 입력이 가능합니다.');
+    if (bridgeSize < 3 || bridgeSize > 20) throw new Error(BRIDGE_SIZE_ERROR.OUT_OF_RANGE);
   },
 
   /**
@@ -20,7 +27,7 @@ const InputValidation = {
    * @param {string} movement 플레이어가 입력한 입력 명령
    */
   isMovementAvailable(movement) {
-    if (movement !== 'U' && movement !== 'D') throw new Error('[ERROR] 이동할 칸은 U 또는 D만 입력이 가능합니다.');
+    if (movement !== USER_MOVEMENT.UP && movement !== USER_MOVEMENT.DOWN) throw new Error(MOVEMENT_ERROR.NOT_AVAILABLE);
   },
 
   /**
@@ -28,7 +35,8 @@ const InputValidation = {
    * @param {string} restartOrQuit 플레이어가 입력한 게임 재시작 및 종료 명령
    */
   isGameCommandAvailable(restartOrQuit) {
-    if (restartOrQuit !== 'R' && restartOrQuit !== 'Q') throw new Error('[ERROR] 게임 재시작 명령은 R 또는 Q만 입력이 가능합니다.');
+    if (restartOrQuit !== GAME_COMMAND.RESTART && restartOrQuit !== GAME_COMMAND.QUIT)
+      throw new Error(GAME_COMMAND_ERROR.NOT_AVAILABLE);
   },
 };
 
