@@ -1,11 +1,14 @@
 const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
+const {
+  BRIDGE_SIZE,
+  ERROR_MESSAGE,
+  DIRECTION,
+  COMMAND_OPTION,
+} = require('../constants');
 
 const Bridge = require('./Bridge');
 
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 class BridgeGame {
   #bridge;
   #map = [];
@@ -14,91 +17,89 @@ class BridgeGame {
   makeBridge(size) {
     this.#validateSize(size);
 
-    const compartments = makeBridge(size, generate);
-    this.#bridge = new Bridge(compartments);
+    const directions = makeBridge(size, generate);
+    this.#bridge = new Bridge(directions);
   }
 
   #validateSize(size) {
-    if (this.#isNumber(size)) {
-      return;
-    }
+    const validations = {
+      invalidType: this.#isNumber.bind(this),
+      invalidRange: this.#isInRange.bind(this),
+    };
 
-    throw new Error('[ERROR] 다리의 길이는 3이상 20이하의 숫자여야 합니다.');
+    Object.entries(validations).forEach(([key, validateFunc]) => {
+      this.#validate(size, validateFunc, ERROR_MESSAGE[key]);
+    });
   }
 
-  #isNumber(value) {
-    return typeof value === 'number';
-  }
-
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   move(round, direction) {
     this.#validateDirection(direction);
 
-    const map = this.#map;
     const movingState = this.#bridge.isMovable(round, direction);
-    map.push([direction, movingState]);
+    this.#map.push([direction, movingState]);
 
-    return { map, movingState };
+    return { map: this.#map, movingState };
   }
 
   #validateDirection(direction) {
-    if (direction === 'U' || direction === 'D') {
-      return;
-    }
-
-    throw new Error(
-      '[ERROR] 이동할 칸은 위(U), 아래(D) 아래 중에 입력할 수 있습니다.',
+    this.#validate(
+      direction,
+      this.#isValidDirection,
+      ERROR_MESSAGE.invalidDirection,
     );
   }
 
   isLastRound(round) {
-    if (!this.#bridge) {
-      return false;
-    }
-
-    return round >= this.#bridge.size();
+    return round === this.#bridge.size();
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   retry(command) {
     this.#validateCommand(command);
 
-    if (command === 'Q') {
+    if (command === COMMAND_OPTION.quit) {
       return false;
     }
 
     this.#reset();
-    this.#attempts += 1;
 
     return true;
   }
 
   #validateCommand(command) {
-    if (command === 'R' || command === 'Q') {
-      return;
-    }
-
-    throw new Error(
-      '[ERROR] 게임을 다시 시도 하려면 R, 종료하려면 Q를 대문자로 입력해주세요.',
-    );
+    this.#validate(command, this.#isValidCommand, ERROR_MESSAGE.invalidCommand);
   }
 
   #reset() {
     this.#map = [];
+    this.#attempts += 1;
   }
 
   getGameResult() {
     const isSuccess = this.#bridge.size() === this.#map.length;
 
     return { map: this.#map, attempts: this.#attempts, isSuccess };
+  }
+
+  #isValidDirection(direction) {
+    return direction === DIRECTION.up || direction === DIRECTION.down;
+  }
+
+  #isValidCommand(command) {
+    return command === COMMAND_OPTION.retry || command === COMMAND_OPTION.quit;
+  }
+
+  #validate(value, validateFunc, errorMessage) {
+    if (!validateFunc(value)) {
+      throw new Error(errorMessage);
+    }
+  }
+
+  #isNumber(value) {
+    return typeof value === 'number';
+  }
+
+  #isInRange(number) {
+    return number >= BRIDGE_SIZE.min && number <= BRIDGE_SIZE.max;
   }
 }
 
