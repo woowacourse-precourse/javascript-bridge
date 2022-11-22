@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable import/no-useless-path-segments */
 /* eslint-disable max-len */
 /* eslint-disable class-methods-use-this */
@@ -46,9 +47,11 @@ class BridgeGameControl {
 
   bridgeSizeCallback(input) {
     const bridgeSize = new BridgeSize(input);
-    this.makeRandomNumber(bridgeSize);
-    this.makeMap(bridgeSize);
-    this.move();
+    if (!bridgeSize.getClose()) {
+      this.makeRandomNumber(bridgeSize);
+      this.makeMap(bridgeSize);
+      this.move();
+    }
   }
 
   make() {
@@ -62,12 +65,14 @@ class BridgeGameControl {
    */
   movingCallback(input) {
     const moving = new Moving(input);
-    this.#bridgeGame.importMap(this.#map);
-    this.#bridgeGame.move();
-    this.#survive = this.#bridgeGame.matchResult(moving.getMoving());
-    this.#outputView.printMap(this.#map, this.#bridgeGame.getCurrentPosition());
-    // eslint-disable-next-line no-unused-expressions
-    this.#survive ? this.move() : this.retry();
+    if (!moving.getClose()) {
+      this.#bridgeGame.importMap(this.#map);
+      this.#bridgeGame.move();
+      this.#survive = this.#bridgeGame.matchResult(moving.getMoving());
+      this.#outputView.printMap(this.#map, this.#bridgeGame.getCurrentPosition());
+      // eslint-disable-next-line no-unused-expressions
+      this.#survive ? this.move() : this.retry();
+    }
   }
 
   move() {
@@ -82,8 +87,10 @@ class BridgeGameControl {
   retry() {
     const gameCommandCallback = (input) => {
       const gameCommand = new GameCommand(input);
-      Console.print(gameCommand.getGameCommand());
-      Console.close();
+      if (!gameCommand.getClose()) {
+        Console.print(gameCommand.getGameCommand());
+        Console.close();
+      }
     };
     this.#inputView.readGameCommand(gameCommandCallback);
   }
