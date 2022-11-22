@@ -10,10 +10,11 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(makeBridge) {
-    Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (bridgeSize) => {
+    Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (inputBridgeSize) => {
       try {
-        Validation.bridgeSize(Number(bridgeSize));
-        makeBridge(Number(bridgeSize));
+        const bridgeSize = Number(inputBridgeSize);
+        Validation.bridgeSize(bridgeSize);
+        makeBridge(bridgeSize);
       } catch {
         this.readBridgeSize(makeBridge);
       }
