@@ -5,36 +5,36 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridge;
-  #bridgeResult;
+  bridge;
+  bridgeResult;
 
   constructor(bridge, bridgeResult) {
-    this.#bridge = bridge;
-    this.#bridgeResult = bridgeResult;
+    this.bridge = bridge;
+    this.bridgeResult = bridgeResult;
   }
 
   setBridge(bridge) {
-    this.#bridge = bridge;
+    this.bridge = bridge;
   }
 
   getBridge() {
-    return this.#bridge;
+    return this.bridge;
   }
 
   setBridgeResult(bridgeResult) {
-    this.#bridgeResult = bridgeResult;
+    this.bridgeResult = bridgeResult;
   }
 
   getBridgeResult() {
-    return this.#bridgeResult;
+    return this.bridgeResult;
   }
 
   createBridge(size) {
-    this.#bridge = BridgeMaker.makeBridge(
+    this.bridge = BridgeMaker.makeBridge(
       size,
       BridgeRandomNumberGenerator.generate
     );
-    return this.#bridge;
+    return this.bridge;
   }
 
   /**
@@ -45,27 +45,27 @@ class BridgeGame {
   move(moving, position) {
     this.bridgeOX(moving, position);
     this.bridgeBlank();
-    return this.#bridgeResult;
+    return this.bridgeResult;
   }
 
   bridgeOX(moving, position) {
     if (moving === "U")
-      this.#bridgeResult[0].push(this.returnXOrO(moving, position));
+      this.bridgeResult[0].push(this.returnXOrO(moving, position));
     if (moving === "D")
-      this.#bridgeResult[1].push(this.returnXOrO(moving, position));
+      this.bridgeResult[1].push(this.returnXOrO(moving, position));
   }
 
   returnXOrO(moving, position) {
-    if (moving === this.#bridge[position]) return "O";
+    if (moving === this.bridge[position]) return "O";
     else return "X";
   }
 
   bridgeBlank() {
-    if (this.#bridgeResult[0].length > this.#bridgeResult[1].length) {
-      this.#bridgeResult[1].push(" ");
+    if (this.bridgeResult[0].length > this.bridgeResult[1].length) {
+      this.bridgeResult[1].push(" ");
     }
-    if (this.#bridgeResult[0].length < this.#bridgeResult[1].length) {
-      this.#bridgeResult[0].push(" ");
+    if (this.bridgeResult[0].length < this.bridgeResult[1].length) {
+      this.bridgeResult[0].push(" ");
     }
   }
 
@@ -76,12 +76,12 @@ class BridgeGame {
    */
   retry() {
     if (
-      this.#bridgeResult[0].includes("X") ||
-      this.#bridgeResult[1].includes("X")
+      this.bridgeResult[0].includes("X") ||
+      this.bridgeResult[1].includes("X")
     ) {
-      this.#bridgeResult = [[], []];
+      this.bridgeResult = [[], []];
     }
-    return this.#bridgeResult;
+    return this.bridgeResult;
   }
 }
 
