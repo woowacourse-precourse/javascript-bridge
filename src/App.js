@@ -9,6 +9,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 class App {
   bridgeArray;
   userTry = 0;
+  gameTry = 1;
   play() {
     OutputView.printGameStart(Message.GAME_START);
     this.inputBridgeLength();
@@ -20,21 +21,33 @@ class App {
 
   makingBridge(size) {
     this.bridgeArray = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.inputUserMove();
+  }
+  inputUserMove() {
     InputView.readMoving(this);
   }
 
-  inputUserMove(userChoice) {
+  userMove(userChoice) {
     const bridgeGame = new BridgeGame(this.bridgeArray);
 
     bridgeGame.move(this, userChoice, this.userTry);
   }
 
   printBridge(ox, upBridge, downBridge) {
-    MissionUtils.Console.print(`ox :${ox}, up: ${upBridge}, down: ${downBridge}`);
+    // MissionUtils.Console.print(`ox :${ox}, up: ${upBridge}, down: ${downBridge}`);
     OutputView.updateBridge(upBridge, downBridge);
     this.userTry += 1;
     if (ox == "O") InputView.readMoving(this);
     InputView.readGameCommand(this);
+  }
+
+  inputGameCommand(userChoice) {
+    const bridgeGame_ = new BridgeGame();
+    if (userChoice == "R") {
+      this.gameTry += 1;
+      this.userTry = 0;
+    }
+    if (userChoice == "Q") bridgeGame_.printResult();
   }
 }
 

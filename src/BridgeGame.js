@@ -20,7 +20,6 @@ class BridgeGame {
   compare(input, userTry) {
     if (this.bridgeArray[userTry] == input) this.ox = "O";
     else this.ox = "X";
-    MissionUtils.Console.print(userTry);
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -30,7 +29,7 @@ class BridgeGame {
     if (input == "U") {
       this.upBridge += `${this.ox}`;
       this.downBridge += ` `;
-    } else if (input == "D") {
+    } else {
       this.upBridge += ` `;
       this.downBridge += `${this.ox}`;
     }
@@ -39,7 +38,12 @@ class BridgeGame {
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    */
-  retry() {}
+  retry(app) {
+    MissionUtils.Console.print("retry");
+    this.upBridge = "";
+    this.downBridge = "";
+    app.inputUserMove();
+  }
 }
 
 module.exports = BridgeGame;

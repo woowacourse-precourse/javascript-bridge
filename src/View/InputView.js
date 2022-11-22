@@ -24,7 +24,7 @@ const InputView = {
     MissionUtils.Console.readLine(Message.CHOICE_UPDOWN, (userChoice) => {
       checkBoolean = CheckError.checkChoiceUpDown(userChoice);
       if (!checkBoolean) return this.readMoving(app);
-      app.inputUserMove(userChoice);
+      app.userMove(userChoice);
     });
   },
   /**
@@ -34,6 +34,7 @@ const InputView = {
     MissionUtils.Console.readLine(Message.RETRY_OR_QUIT, (userChoice) => {
       checkBoolean = CheckError.checkGameConnand(userChoice);
       if (!checkBoolean) return this.readGameCommand(app);
+      app.inputGameCommand(userChoice);
     });
   },
 };
