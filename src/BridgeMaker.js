@@ -1,5 +1,4 @@
-const BRIDGE_BLOCK_TYPE = require("./BridgeBlockType");
-const Validation = require('./Validations')
+const BRIDGE_BLOCK_TYPE = require('./BridgeBlockType');
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -11,7 +10,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = Array.from({ length: size }, () =>
-      this.makeBridgeBlock(generateRandomNumber())
+      this.makeBridgeBlock(generateRandomNumber()),
     );
     return bridge;
   },

@@ -1,20 +1,20 @@
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeMaker = require('./BridgeMaker');
+
 class BridgeBoard {
-  #bridgeBoard
-  #movedBoard
-  #backupBoard
+  #bridgeBoard;
+  #movedBoard;
+  #backupBoard;
   constructor() {
     this.#bridgeBoard = [];
     this.#movedBoard = [];
-    this.#backupBoard = []
+    this.#backupBoard = [];
   }
   makeBoard(size) {
     this.#bridgeBoard = BridgeMaker.makeBridge(
       size,
-      BridgeRandomNumberGenerator.generate
+      BridgeRandomNumberGenerator.generate,
     );
-    this.#backupBoard = [...this.#bridgeBoard]
+    this.#backupBoard = [...this.#bridgeBoard];
   }
   moveTo(direction) {
     if (this.#bridgeBoard[0] === direction) {
@@ -22,16 +22,16 @@ class BridgeBoard {
     }
     return false;
   }
-  movePlayer(){
-    this.#movedBoard.push(this.#bridgeBoard.shift())
+  movePlayer() {
+    this.#movedBoard.push(this.#bridgeBoard.shift());
   }
-  getClearedBridge(){
+  getClearedBridge() {
     return this.#movedBoard;
   }
-  isLastRound(){
+  isLastRound() {
     return this.#bridgeBoard.length === 0;
   }
-  resetBoard(){
+  resetBoard() {
     this.#bridgeBoard = [...this.#backupBoard];
     this.#movedBoard = [];
   }

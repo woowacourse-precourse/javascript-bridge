@@ -1,13 +1,14 @@
-const InputView = require("./InputView");
-const OutputView = require("./OutputView")
-const BridgeGame = require("./BridgeGame");
-const BridgeController = require('./BridgeController')
+const InputView = require('./InputView');
+const OutputView = require('./OutputView');
+const BridgeGame = require('./BridgeGame');
+const BridgeController = require('./BridgeController');
+
 class App {
-  #bridgeController
-  #bridgeGame
+  #bridgeGame;
+  #bridgeController;
   constructor() {
-    this.#bridgeController = new BridgeController()
-    this.#bridgeGame = new BridgeGame()
+    this.#bridgeController = new BridgeController();
+    this.#bridgeGame = new BridgeGame();
   }
   play() {
     OutputView.printStart();
