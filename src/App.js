@@ -38,6 +38,35 @@ class App {
     const bridge = BridgeMaker.makeBridgeMain(Number(size));
     this.#game = new BridgeGame(bridge);
   }
+
+  moveAfterValidation() {
+    InputView.readMoving((select) => {
+      if (Error.isThrow(Checker.select, select)) {
+        this.startMove(select);
+        return;
+      }
+      this.moveAfterValidation();
+    });
+  }
+
+  startMove(select) {
+    if (this.#game.checkCorrectSelect(select)) {
+      this.#game.move();
+      this.printCurrentBridge("성공");
+      this.checkIsComplete();
+      return;
+    }
+    this.printCurrentBridge("실패");
+    this.readFailedGameCommand();
+  }
+
+  printCurrentBridge(result) {
+    let currentBridge = this.#game.getSuccessBridge();
+    if (result === "실패") {
+      currentBridge = this.#game.getFailureBridge(currentBridge);
+    }
+    OutputView.printMap(currentBridge);
+  }
   }
 }
 
