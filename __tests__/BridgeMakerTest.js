@@ -1,14 +1,17 @@
 /* eslint-disable max-lines-per-function */
 const BridgeMaker = require('../src/BridgeMaker');
-const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
+const BridgeRandomNumberGenerator = require('../src/utils/BridgeRandomNumberGenerator');
 
 describe('BridgeMaker 테스트', () => {
-  test.each(['-1', '0', '3.3', '21', 'abc'])(
-    'makeBridge 메서드는 다리의 길이가 유효하지 않으면 에러를 발생',
+  test.each(['3', '10', '20'])(
+    'makeBridge 메서드는 입력받은 길이만큼의 다리를 생성하여 반환',
     (size) => {
-      expect(() => {
-        BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-      }).toThrow('[ERROR]');
+      const bridge = BridgeMaker.makeBridge(
+        size,
+        BridgeRandomNumberGenerator.generate,
+      );
+
+      expect(bridge.length).toBe(Number(size));
     },
   );
 });
