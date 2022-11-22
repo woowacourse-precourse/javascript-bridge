@@ -48,7 +48,7 @@ class GameManager {
 
     afterMove(bridge) {
         let currLocation = this.#isSuccessArray.length - 1;
-        OutputView.printMap(bridge, currLocation+1, this.#isSuccessArray[currLocation]);
+        OutputView.printMap(bridge, this.#isSuccessArray)
         if(this.#isSuccessArray[currLocation]) return this.getMoveDirection(bridge);
         // to retry;
     }

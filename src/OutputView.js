@@ -17,9 +17,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridge, location, isSuccess) {
-    this.printBridgeUpper(bridge, location, isSuccess);
-    this.printBridgeLowwer(bridge, location, isSuccess);
+  printMap(bridge, isSuccessArray) {
+    const location = isSuccessArray.length;
+    this.printBridgeUpper(bridge, location, isSuccessArray[location-1]);
+    this.printBridgeLowwer(bridge, location, isSuccessArray[location-1]);
   },
 
   printBridgeUpper(bridge, location, isSuccess) {
@@ -67,11 +68,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(bridge, location, isSuccess, totalAttempt) {
+  printResult(bridge, isSuccessArray, totalAttempt) {
+    const location = isSuccessArray.length;
     Console.print(MESSAGE.FINAL_RESULT);
-    this.printMap(bridge, location, isSuccess);
+    this.printMap(bridge, isSuccessArray);
     Console.print("");
-    this.printIsWin(isSuccess);
+    this.printIsWin(isSuccessArray[location-1]);
     this.printTotalAttempt(totalAttempt);    
   },
 
