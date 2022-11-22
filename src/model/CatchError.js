@@ -18,6 +18,7 @@ const catchError = {
       bridgeSizeError(size);
     } catch (error) {
       printBridgeSizeErr();
+      return false;
     }
     return true;
   },
@@ -28,6 +29,7 @@ const catchError = {
       movingError(move);
     } catch (error) {
       printUserMoveErr();
+      return false;
     }
     return true;
   },
@@ -38,6 +40,7 @@ const catchError = {
       reGameError(retry);
     } catch (error) {
       printRestart();
+      return false;
     }
     return true;
   },

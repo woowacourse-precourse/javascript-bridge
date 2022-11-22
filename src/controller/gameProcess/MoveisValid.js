@@ -3,7 +3,7 @@ const { catchMoveError } = require('../../model/CatchError');
 
 const MoveValidControl = () => {
   let usermove = readMoving();
-  while (!catchMoveError(usermove)) {
+  if (catchMoveError(usermove) === false) {
     usermove = readMoving();
   }
   return usermove;

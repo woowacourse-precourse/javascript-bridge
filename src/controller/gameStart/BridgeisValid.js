@@ -3,7 +3,7 @@ const { catchSizeError } = require('../../model/CatchError');
 
 const BridgeSizeControll = () => {
   let bridgeSize = readBridgeSize();
-  while (!catchSizeError(bridgeSize)) {
+  if (catchSizeError(bridgeSize) === false) {
     bridgeSize = readBridgeSize();
   }
   return bridgeSize;

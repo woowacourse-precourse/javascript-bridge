@@ -102,7 +102,7 @@ class BridgeGame {
    */
   retry() {
     let userinput = readGameCommand();
-    while (!catchRetryError(userinput)) {
+    if (catchRetryError(userinput) === false) {
       userinput = readGameCommand();
     }
     return userinput;
