@@ -12,36 +12,36 @@ const Validator = {
     return true;
   },
 
-  isBridgeLength(bridgeLength) {
+  isBridgeLength(callback, bridgeLength) {
     const BRIDGE_LENGTH = parseInt(bridgeLength);
 
     if (this.isNaturalNumber(bridgeLength) === false) {
-      ErrorHandler.inputError("bridge");
+      ErrorHandler.tryCatch(callback, "bridge");
     }
     if (BRIDGE_LENGTH > 20 || BRIDGE_LENGTH < 3) {
-      ErrorHandler.inputError("bridge");
+      ErrorHandler.tryCatch(callback, "bridge");
     }
     return true;
   },
 
-  isMoveDirection(moveDirection) {
+  isMoveDirection(callback, moveDirection) {
     if (moveDirection === "U" || moveDirection === "D") {
       return true;
     }
-    ErrorHandler.inputError("jump");
+    ErrorHandler.tryCatch(callback, "jump");
   },
 
-  isBoolNumber(number) {
+  isBoolNumber(callback, number) {
     if (number !== 0 && number !== 1) {
-      ErrorHandler.computeError();
+      ErrorHandler.tryCatch(callback, "compute");
     }
   },
 
-  isQuit(rq) {
+  isQuit(callback, rq) {
     if (rq === "R" || rq === "Q") {
       return true;
     }
-    ErrorHandler.inputError("quit");
+    ErrorHandler.tryCatch(callback, "quit");
   },
 };
 

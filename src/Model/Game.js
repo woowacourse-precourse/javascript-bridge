@@ -13,7 +13,7 @@ class Game {
     this.#bridgeLength = bridgeLength;
     this.setPlayCount();
     this.#bridge = new Bridge(this.#bridgeLength);
-    this.#bridgeStatus = this.#bridge.getBridgeStatus;
+    this.#bridgeStatus = this.#bridge.getBridgeStatus();
     this.bridgeGame = new BridgeGame(this.#bridgeStatus);
   }
 
@@ -48,14 +48,18 @@ class Game {
 
   moveGetResult(moveCount) {
     const MOVE_RESULT = this.bridgeGame.move(InputView.readMoving(), moveCount);
+    if (MOVE_RESULT) {
+      return true;
+    }
     if (!MOVE_RESULT) {
       const IS_QUIT = this.askQuit();
       if (IS_QUIT) {
-        //최종 게임 결과 출력
         this.getPrintResult();
         return false;
       }
     }
+    this.increasePlayCount();
+    this.bridgeGame.retry();
     return true;
   }
 

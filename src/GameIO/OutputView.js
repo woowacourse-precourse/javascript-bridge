@@ -19,18 +19,18 @@ const OutputView = {
   },
 
   printMapLine(direction, bridgeStatus, jumpHistory) {
-    MissionUtils.Console.print("[ ");
-    for (let index = 0; index < bridgeStatus.length; index++) {
+    let printFormat = "[ ";
+    for (let index = 0; index < jumpHistory.length; index++) {
       const PRINT_PART =
         bridgeStatus[index] === direction
           ? this.printMapPart(index, bridgeStatus, jumpHistory)
           : " ";
-      MissionUtils.Console.print(PRINT_PART, " ");
-      if (index < bridgeStatus.length - 1) {
-        MissionUtils.Console.print("| ");
+      printFormat += PRINT_PART + " ";
+      if (index < jumpHistory.length - 1) {
+        printFormat += "| ";
       }
     }
-    MissionUtils.Console.print("]\n");
+    MissionUtils.Console.print(printFormat + "]\n");
   },
 
   printMapPart(index, bridgeStatus, jumpHistory) {
@@ -73,6 +73,10 @@ const OutputView = {
 
   printBeginAnnouncement() {
     MissionUtils.Console.print("다리 건너기 게임을 시작합니다.\n");
+  },
+
+  printError(errorMessage) {
+    MissionUtils.Console.print(errorMessage);
   },
 };
 

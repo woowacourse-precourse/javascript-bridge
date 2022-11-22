@@ -22,13 +22,12 @@ class App {
       const PLAY_RESULT = this.game.playAlgorithms(); //여기서 물어보는 작업까지 끝내야함
 
       if (PLAY_RESULT) {
-        this.game.increasePlayCount();
+        playCounter = 0;
       }
       if (!PLAY_RESULT) {
         break;
       }
     }
-
     this.game.getPrintResult();
   }
 }

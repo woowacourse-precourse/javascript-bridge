@@ -17,8 +17,12 @@ const InputView = {
   readBridgeSize() {
     let bridgeLength = 0;
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
-      if (Validator.isBridgeLength(input)) {
+      const VALIDATED = Validator.isBridgeLength(this.readBridgeSize, input);
+      if (VALIDATED) {
         bridgeLength = parseInt(input);
+      }
+      if (!VALIDATED) {
+        this.readBridgeSize();
       }
     });
     return bridgeLength;
@@ -32,8 +36,12 @@ const InputView = {
     MissionUtils.Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
-        if (Validator.isMoveDirection(input)) {
+        const VALIDATED = Validator.isMoveDirection(this.readMoving, input);
+        if (VALIDATED) {
           moveDirection = input;
+        }
+        if (!VALIDATED) {
+          this.readMoving();
         }
       }
     );
@@ -48,8 +56,12 @@ const InputView = {
     MissionUtils.Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
-        if (Validator.isQuit(input)) {
+        const VALIDATED = Validator.isQuit(input);
+        if (VALIDATED) {
           rq = input;
+        }
+        if (!VALIDATED) {
+          this.readGameCommand();
         }
       }
     );
