@@ -18,6 +18,42 @@ const mockRandoms = (numbers) => {
 };
 
 describe('다리 건너기 테스트', () => {
+  test('사이즈 테스트', () => {
+    mockRandoms([1, 0, 0]);
+    const result = ['U', 'D', 'D'];
+
+    expect(BridgeGame.makePattern(3))
+      .toEqual(result);
+  });
+  test.each([[['U', 'D', 'D'], 3, true], [['U', 'D', 'D'], 2, false], [['U', 'D', 'D', 'D'], 4, true]])(
+    'pattern 길이와 distance가 같으면 게임 완료 테스트',
+    (pattern, incrementCount, result) => {
+      const bridgeGame = new BridgeGame();
+      Array.from({ length: incrementCount }, () => bridgeGame.incrementDistance());
+      bridgeGame.setPattern(pattern);
+      expect(bridgeGame.isEndGame())
+        .toEqual(result);
+    },
+  );
+  test.each([[1, 2], [3, 4], [4, 5]])(
+    '재시도 횟수 테스트',
+    (incrementRetryCount, result) => {
+      const bridgeGame = new BridgeGame();
+      Array.from({ length: incrementRetryCount }, () => bridgeGame.retry());
+      expect(bridgeGame.getTryCount())
+        .toEqual(result);
+    },
+  );
+  test.each([[2, 'D', true], [2, 'U', false], [1, 'D', true]])(
+    'path 체크 테스트 일치하면 true, 틀리면 false 출력',
+    (distance, chooseStep, result) => {
+      const bridgeGame = new BridgeGame();
+      Array.from({ length: distance }, () => bridgeGame.incrementDistance());
+      bridgeGame.setPattern(['U', 'D', 'D']);
+      expect(bridgeGame.checkPath(chooseStep))
+        .toEqual(result);
+    },
+  );
   test('다리 건너기 기록 체크', () => {
     mockRandoms([1, 0, 0]);
     const input = ['U', 'D', 'U'];
