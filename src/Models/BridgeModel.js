@@ -1,6 +1,6 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-
+const { BRIDGE, INPUT } = require('../Constants');
 const { generate } = BridgeRandomNumberGenerator;
 
 class Model {
@@ -22,25 +22,25 @@ class Model {
   }
 
   alive(userMove) {
-    if (userMove === 'U') {
-      this.#upsideBridge += ' O |';
-      this.#downSideBridge += '   |';
+    if (userMove === INPUT.UP) {
+      this.#upsideBridge += BRIDGE.SUCESS;
+      this.#downSideBridge += BRIDGE.NOTHING;
     }
-    if (userMove === 'D') {
-      this.#upsideBridge += '   |';
-      this.#downSideBridge += ' O |';
+    if (userMove === INPUT.DOWN) {
+      this.#upsideBridge += BRIDGE.NOTHING;
+      this.#downSideBridge += BRIDGE.SUCESS;
     }
     return true;
   }
 
   death(userMove) {
-    if (userMove === 'U') {
-      this.#upsideBridge += ' X |';
-      this.#downSideBridge += '   |';
+    if (userMove === INPUT.UP) {
+      this.#upsideBridge += BRIDGE.FAIL;
+      this.#downSideBridge += BRIDGE.NOTHING;
     }
-    if (userMove === 'D') {
-      this.#upsideBridge += '   |';
-      this.#downSideBridge += ' X |';
+    if (userMove === INPUT.DOWN) {
+      this.#upsideBridge += BRIDGE.NOTHING;
+      this.#downSideBridge += BRIDGE.FAIL;
     }
     return false;
   }

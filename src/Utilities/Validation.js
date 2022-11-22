@@ -1,7 +1,9 @@
+const { ERROR } = require('../Constants');
+
 class Validation {
   static isBridgeSizeValid(number) {
     if (!(this.isValidRange(number) && this.isValidType(number))) {
-      throw new Error('[ERROR] 3~20 사이 숫자만 입력 가능합니다.');
+      throw new Error(ERROR.SIZE);
     }
   }
 
@@ -16,7 +18,7 @@ class Validation {
 
   static isUserMoveValid(userMove) {
     if (!(this.isUserMoveChar(userMove) && this.isUserInputLength(userMove))) {
-      throw new Error('[ERROR] 대문자 U나 D만 입력 가능합니다.');
+      throw new Error(ERROR.MOVE);
     }
   }
 
@@ -38,7 +40,7 @@ class Validation {
     if (
       !(this.isUserRetryChar(userRetry) && this.isUserInputLength(userRetry))
     ) {
-      throw new Error('[ERROR] 대문자 R이나 Q만 입력 가능합니다.');
+      throw new Error(ERROR.RETRY);
     }
   }
 }
