@@ -14,6 +14,18 @@ const OutputView = {
     });
   },
 
+  printResult(record, isSucceeded, tryCount) {
+    const maps = MapMaker.getMapResult(record);
+    const successOrfail = isSucceeded ? "성공" : "실패";
+
+    Console.print("최종 게임 결과\n");
+    maps.forEach((map) => {
+      Console.print(map);
+    });
+    Console.print(`\n게임 성공 여부: ${successOrfail}`);
+    Console.print(`총 시도한 횟수: ${tryCount}`);
+  },
+
   printError(message) {
     Console.print(message);
   },
