@@ -88,4 +88,38 @@ describe('다리 건너기 테스트', () => {
   test('예외 테스트2 - U,D가 아닌 입력을 했을 경우', () => {
     runException(['3,R']);
   });
+
+  test('기능 테스트2 - 게임 재시작 후 결과', () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 1, 0]);
+    mockQuestions(['3', 'U', 'D', 'R', 'U', 'U', 'D']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(
+      log,
+      [
+        '[ O ]',
+        '[   ]',
+        '[ O |   ]',
+        '[   | X ]',
+        '[ O ]',
+        '[   ]',
+        '[ O | O ]',
+        '[   |   ]',
+        '[ O | O |   ]',
+        '[   |   | O ]',
+      ],
+      [
+        '최종 게임 결과',
+        '[ O | O |   ]',
+        '[   |   | O ]',
+        '게임 성공 여부: 성공',
+        '총 시도한 횟수: 2',
+      ],
+    );
+    expectBridgeOrder(log, '[ O | O |   ]', '[   |   | O ]');
+  });
 });
