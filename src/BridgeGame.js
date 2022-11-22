@@ -2,7 +2,7 @@ const BridgeBoard = require('./BridgeBoard');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const Validation = require('./Validations');
-const ERROR = require('./Error');
+const ERROR = require('./Static/Error');
 
 const BridgeController = require('./BridgeController');
 /**

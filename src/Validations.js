@@ -1,4 +1,4 @@
-const ERROR = require('./Error');
+const ERROR = require('./Static/Error');
 
 const validation = {
   validateRange(range, number) {
