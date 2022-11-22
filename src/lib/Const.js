@@ -11,6 +11,10 @@ const BRIDGE = {
     RETRY: "R",
     END: "Q",
   },
+  SIZE: {
+    MAX: 20,
+    MIN: 3,
+  },
 };
 
 const GAME = {
