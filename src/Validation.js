@@ -15,7 +15,13 @@ const Validation = {
     if (inputMoving !== "U" && inputMoving !== "D") {
       throw '[ERROR] 이동할 칸은 U와 D 중 하나로 입력해야 합니다.'
     }
-  }
+  },
+
+  readCommand(inputCommand) {
+    if (inputCommand !== "R" && inputCommand !== "Q") {
+      throw '[ERROR] 다시 시도할지 여부는 R과 Q 중 하나로 입력해야 합니다.'
+    }
+  },
 
 };
 

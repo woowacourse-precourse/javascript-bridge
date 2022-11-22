@@ -8,7 +8,6 @@ const { generate } = require('./BridgeRandomNumberGenerator');
 class App {
 
   constructor() {
-    this.count = 1;
     this.bridge = [];
   }
 
@@ -39,16 +38,34 @@ class App {
     };
   };
 
+  readGameCommandCallBack(userInput) {
+    try {
+      Validation.readCommand(userInput);
+      this.checkCommand(userInput);
+    } catch (error) {
+      OutputView.printError(error);
+      InputView.readGameCommand(this.readGameCommandCallBack.bind(this));  
+    };
+  }
+
   afterMoving(userInput) {
     const isMove = this.bridgeGame.move(userInput);
 
-    if (isMove) {
+    if (isMove === true) {
       this.bridgeGame.moveSuccess();
-      this.bridgeGame.makeBridgeResult(this.count);
-      InputView.readMoving(this.readMovingCallBack.bind(this));
+      this.bridgeGame.checkSuccess() ? this.bridgeGame.printSuccess() : InputView.readMoving(this.readMovingCallBack.bind(this));  
     } else {
       this.bridgeGame.moveFail();
-      this.bridgeGame.makeBridgeResult(this.count);
+      InputView.readGameCommand(this.readGameCommandCallBack.bind(this));
+    };
+  };
+
+  checkCommand(userInput) {
+    if (userInput === 'Q') {
+      this.bridgeGame.printFail();
+    } else {
+      this.bridgeGame.retry();
+      InputView.readMoving(this.readMovingCallBack.bind(this));  
     }
   }
 }
