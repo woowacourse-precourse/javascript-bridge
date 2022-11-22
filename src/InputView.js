@@ -37,6 +37,16 @@ const InputView = {
     );
     game.move(this.MOVE);
   },
+  moveSelectCheck(){
+    if(!(this.MOVE==="U" || this.MOVE==="D")){
+      throw new Error("[ERROR] 이동하는 칸은 U 또는 Q 입니다.");
+    };
+  },
+  moveLowerCheck(){
+    if(this.MOVE === this.MOVE.toLowerCase()){
+      throw new Error("[ERROR] 이동하는 칸은 대문자로 입력해야 합니다.");
+    };
+  },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
