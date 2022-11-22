@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable object-curly-newline */
 /* eslint-disable import/no-useless-path-segments */
 /* eslint-disable max-len */
@@ -24,6 +25,10 @@ class BridgeGameControl {
 
   #survive;
 
+  #movingCount;
+
+  #tryCount;
+
   constructor() {
     const inputView = Object.create(InputView);
     this.#inputView = inputView;
@@ -31,6 +36,7 @@ class BridgeGameControl {
     this.#outputView = outputView;
     const bridgeGame = new BridgeGame();
     this.#bridgeGame = bridgeGame;
+    this.#movingCount = 0;
   }
 
   start() {
@@ -68,20 +74,47 @@ class BridgeGameControl {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  movingMove() {
+    this.#bridgeGame.importMap(this.#map);
+    this.#bridgeGame.move();
+  }
+
+  movingMatch(moving) {
+    this.#survive = this.#bridgeGame.matchResult(moving.getMoving());
+  }
+
+  movingPrint() {
+    this.#outputView.printMap(this.#map, this.#bridgeGame.getCurrentPosition());
+  }
+
+  movingSurvive() {
+    this.#movingCount += 1;
+    this.move();
+  }
+
+  movingDie() {
+    this.retry();
+  }
+
+  movingProcess(moving) {
+    this.movingMove();
+    this.movingMatch(moving);
+    this.movingPrint();
+    this.#survive ? this.movingSurvive() : this.movingDie();
+  }
+
   movingCallback(input) {
     const moving = new Moving(input);
-    if (!moving.getClose()) {
-      this.#bridgeGame.importMap(this.#map);
-      this.#bridgeGame.move();
-      this.#survive = this.#bridgeGame.matchResult(moving.getMoving());
-      this.#outputView.printMap(this.#map, this.#bridgeGame.getCurrentPosition());
-      // eslint-disable-next-line no-unused-expressions
-      this.#survive ? this.move() : this.retry();
-    }
+    if (!moving.getClose()) this.movingProcess(moving);
   }
 
   move() {
-    this.#inputView.readMoving(this.movingCallback.bind(this));
+    if (this.#map.getMapLength() > this.#movingCount) {
+      this.#inputView.readMoving(this.movingCallback.bind(this));
+    }
+    if (this.#map.getMapLength() === this.#movingCount) {
+      this.end();
+    }
   }
 
   /**
@@ -90,6 +123,7 @@ class BridgeGameControl {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
+    this.#movingCount = 0;
     const gameCommandCallback = (input) => {
       const gameCommand = new GameCommand(input);
       if (!gameCommand.getClose()) {
@@ -98,6 +132,10 @@ class BridgeGameControl {
       }
     };
     this.#inputView.readGameCommand(gameCommandCallback);
+  }
+
+  end() {
+    console.log(`map len ${this.#map.getMapLength()} movingCount ${this.#movingCount}`);
   }
 }
 

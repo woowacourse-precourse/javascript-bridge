@@ -33,6 +33,10 @@ class Map {
     return this.#map;
   }
 
+  getMapLength() {
+    return Object.keys(this.#map).length;
+  }
+
   getUpMap() {
     return Object.entries(this.#map).map(([index, stage]) => stage.getUpStage());
   }
