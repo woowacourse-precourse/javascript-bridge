@@ -11,16 +11,14 @@ const { makeBridge } = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 
 class App {
-  #bridge;
   #location;
   #tryCount;
 
   constructor() {
-    this.#bridge;
     this.#location = 0;
     this.#tryCount = 1;
 
-    this.bridgeGame = new BridgeGame();
+    this.bridgeGame;
   }
 
   play() {
@@ -36,7 +34,8 @@ class App {
   }
 
   make(size) {
-    this.#bridge = makeBridge(size, generate);
+    const bridge = makeBridge(size, generate);
+    this.bridgeGame = new BridgeGame(bridge);
 
     this.moving();
   }
@@ -52,14 +51,14 @@ class App {
   }
 
   move(moving) {
-    const isSafe = this.bridgeGame.move(moving, this.#bridge, this.#location);
-    const current = { isSafe, bridge: this.#bridge, location: this.#location };
+    const bridge = this.bridgeGame.get();
+    const isSafe = this.bridgeGame.move(moving, this.#location);
+    const current = { isSafe, bridge, location: this.#location };
 
     printMap(current);
-    if (!isSafe) return this.select(current);
     this.#location += 1;
-    if (this.#location === this.#bridge.length)
-      return this.result(true, current);
+    if (!isSafe) return this.select(current);
+    if (this.#location === bridge.length) return this.result(true, current);
 
     this.moving();
   }
