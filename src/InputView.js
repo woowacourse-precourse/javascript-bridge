@@ -10,40 +10,66 @@ const Player = require("./Player");
 const InputView = {
   readBridgeSize() {
     Console.readLine(InputConstants.ASK_BRIDGE_LENGTH, (inputSize) => {
-      const bridgeSize = new BridgeSize(inputSize);
-      const size = bridgeSize.makeStringToNumber();
-      Player.sizeUpdate(size);
-
-      const generater = BridgeRandomNumberGenerator.generate;
-      this.bridgeShape = BridgeMaker.makeBridge(size, generater);
-
-      this.readMoving();
+      try {
+        this.createComputerBridge(inputSize);
+        this.readMoving();
+      } catch (error) {
+        Console.print(error);
+        this.readBridgeSize();
+      }
     });
   },
 
   readMoving() {
     Console.readLine(InputConstants.ASK_WHERE_WANT_TO_GO, (move) => {
-      new MoveInput(move);
-      const correct = new BridgeGame().move(this.bridgeShape, move);
-      Player.stateUpdate(move, correct);
-
-      OutputView.printMap();
-      if (Player.gameSuccess) {
-        OutputView.printResult();
-      } else {
-        correct ? this.readMoving() : this.readGameCommand();
+      try {
+        this.comparePlayerMove(move);
+      } catch (error) {
+        Console.print(error);
+        this.readMoving();
       }
     });
   },
 
   readGameCommand() {
-    Console.readLine(InputConstants.ASK_RETRY_OR_QUIT, (command) => {
-      new CommandInput(command);
-
-      new BridgeGame().retry(command)
-        ? (Player.reset(), this.readMoving(this.bridgeShape))
-        : OutputView.printResult();
+    Console.readLine(InputConstants.ASK_RETRY_OR_QUIT, () => {
+      try {
+        this.selectRetryOrQuit(move);
+      } catch (error) {
+        Console.print(error);
+        this.readGameCommand();
+      }
     });
+  },
+
+  createComputerBridge(inputSize) {
+    const bridgeSize = new BridgeSize(inputSize);
+    const size = bridgeSize.makeStringToNumber();
+    Player.sizeUpdate(size);
+
+    const generater = BridgeRandomNumberGenerator.generate;
+    this.bridgeShape = BridgeMaker.makeBridge(size, generater);
+  },
+
+  comparePlayerMove(move) {
+    new MoveInput(move);
+    const correct = new BridgeGame().move(this.bridgeShape, move);
+    Player.stateUpdate(move, correct);
+
+    OutputView.printMap();
+    if (Player.gameSuccess) {
+      OutputView.printResult();
+    } else {
+      correct ? this.readMoving() : this.readGameCommand();
+    }
+  },
+
+  selectRetryOrQuit(command) {
+    new CommandInput(command);
+
+    new BridgeGame().retry(command)
+      ? (Player.reset(), this.readMoving(this.bridgeShape))
+      : OutputView.printResult();
   },
 };
 
