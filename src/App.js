@@ -7,63 +7,82 @@ const { REGEX } = require("./constant");
 class App {
   #bridgeGame;
 
+  getBridgeGame() {
+    return this.#bridgeGame;
+  }
+
   play() {
     OutputView.printStart();
     this.#bridgeGame = new BridgeGame();
-    this.controller();
+    this.#controller();
   }
 
-  controller() {
+  #controller() {
     switch (this.#bridgeGame.getStatus()) {
       case "start":
-        InputView.readBridgeSize(this.readBridgeSizeCallback);
+        InputView.readBridgeSize(this.#readBridgeSizeCallback);
         break;
       case "move":
-        InputView.readMoving(this.readMovingCallback);
+        InputView.readMoving(this.#readMovingCallback);
         break;
       case "retry":
-        InputView.readGameCommand(this.readGameCommandCallback);
+        InputView.readGameCommand(this.#readGameCommandCallback);
         break;
       case "end":
         OutputView.printResult(this.#bridgeGame);
     }
   }
 
-  readBridgeSizeCallback = (size) => {
+  #startToMove(size) {
+    this.#bridgeGame.makeBridge(size);
+    this.#bridgeGame.setStatus("move");
+    this.#controller();
+  }
+
+  #moveToMove(moving) {
+    this.#bridgeGame.move(moving);
+    OutputView.printMap(this.#bridgeGame.getBridgeResult());
+    this.#controller();
+  }
+
+  #moveToRetry(gameCommand) {
+    this.#bridgeGame.retry(gameCommand);
+    this.#controller();
+  }
+
+  #readBridgeSizeCallback = (size) => {
     try {
       if (!this.#validateBridgeSize(size))
         throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
-      this.#bridgeGame.makeBridge(size);
-      this.#bridgeGame.setStatus("move");
-      this.controller();
+
+      this.#startToMove(size);
     } catch (err) {
       MissionUtils.Console.print(err.message);
-      this.controller();
+      this.#controller();
     }
   };
 
-  readMovingCallback = (moving) => {
+  #readMovingCallback = (moving) => {
     try {
       if (!this.#validateMoving(moving))
         throw new Error("[ERROR] U 또는 D를 입력해 주세요.");
-      this.#bridgeGame.move(moving);
-      OutputView.printMap(this.#bridgeGame.getBridgeResult());
-      this.controller();
+
+      this.#moveToMove(moving);
     } catch (err) {
       MissionUtils.Console.print(err.message);
-      this.controller();
+      this.#controller();
     }
   };
 
-  readGameCommandCallback = (gameCommand) => {
+  #readGameCommandCallback = (gameCommand) => {
     try {
       if (!this.#validateGameCommand(gameCommand))
         throw new Error("[ERROR] R 또는 Q를 입력해 주세요.");
-      this.#bridgeGame.retry(gameCommand);
-      this.controller();
+
+      this.#moveToRetry();
     } catch (err) {
       MissionUtils.Console.print(err.message);
-      this.controller();
+      this.#controller();
     }
   };
 
