@@ -59,6 +59,16 @@ const InputView = {
     );
     game.retry(this.COMMAND);
   },
+  commandSelectCheck(){
+    if(!(this.MOVE==="U" || this.MOVE==="D")){
+      throw new Error("[ERROR] 이동하는 칸은 U 또는 Q 입니다.");
+    };
+  },
+  commandLowerCheck(){
+    if(this.MOVE === this.MOVE.toLowerCase()){
+      throw new Error("[ERROR] 이동하는 칸은 대문자로 입력해야 합니다.");
+    };
+  },
 };
 
 module.exports = InputView;
