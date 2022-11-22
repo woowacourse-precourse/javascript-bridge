@@ -1,7 +1,9 @@
+const OutputView = require("./OutputView");
+
 class Bridge {
-  #answerBridge = [];
-  #upBridge;
-  #downBridge;
+  #answerBridge;
+  #upBridge = [];
+  #downBridge = [];
 
   constructor(bridge) {
     this.#answerBridge = bridge;
@@ -9,21 +11,23 @@ class Bridge {
 
   move(command, stage) {
     if (this.#answerBridge[stage] === command) {
-      return this.passableBridge(command);
+      this.passableBridge(command);
+      return [this.#upBridge, this.#downBridge, true];
     }
-    return this.unPassableBridge(command);
+    this.unPassableBridge(command);
+    return [this.#upBridge, this.#downBridge, false];
   }
 
   passableBridge(command) {
     switch (command) {
       case "U": {
-        this.#upBridge.push("O");
-        this.#downBridge.push(" ");
+        this.#upBridge.push(" O ");
+        this.#downBridge.push("   ");
         break;
       }
       case "D": {
-        this.#upBridge.push(" ");
-        this.#downBridge.push("O");
+        this.#upBridge.push("   ");
+        this.#downBridge.push(" O ");
         break;
       }
     }
@@ -31,17 +35,31 @@ class Bridge {
   unPassableBridge(command) {
     switch (command) {
       case "U": {
-        this.#upBridge.push("X");
-        this.#downBridge.push(" ");
+        this.#upBridge.push(" X ");
+        this.#downBridge.push("   ");
         break;
       }
       case "D": {
-        this.#upBridge.push(" ");
-        this.#downBridge.push("X");
+        this.#upBridge.push("   ");
+        this.#downBridge.push(" X ");
         break;
       }
     }
     //gameOver()
   }
+
+  setRetry() {
+    this.#downBridge = [];
+    this.#upBridge = [];
+  }
+
+  getResult() {
+    return [this.#upBridge, this.#downBridge];
+  }
+
+  isFinal(stage) {
+    return this.#answerBridge.length === stage;
+  }
 }
 
+module.exports = Bridge;

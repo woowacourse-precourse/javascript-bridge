@@ -9,7 +9,7 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(upBridge, downBridge) {
-    Console.print(`[${upBridge.join(" | ")}]\n[${downBridge.join(" | ")}]`);
+    Console.print(`[${upBridge.join("|")}]\n[${downBridge.join("|")}]`);
   },
 
   /**
@@ -18,9 +18,13 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   /*
-    ( 최종그림 ,성공실패여부, 시도횟수 ) 
+    ( 성공실패여부, 시도횟수 ) 
   */
-  printResult() {},
+  printResult(result, attemp) {
+    Console.print(`\n게임 성공 여부: ${result}`);
+    Console.print(`총 시도한 횟수: ${attemp}`);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
