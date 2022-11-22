@@ -18,17 +18,21 @@ const InputView = {
     });
   },
 
-  validateBridgeSize(size, callback) {
+  validateBridgeSize(bridgeSize, callback) {
     try {
-      this.handleEmptyBrigeSizeException(size);
-      const bridgeSize = Number(size);
-      this.handleBrigeSizeTypeException(bridgeSize);
-      this.handleBrigeSizeOutOfRangeException(bridgeSize);
-      callback(bridgeSize);
+      this.handleWrongBridgeSizeException(bridgeSize);
+      callback(Number(bridgeSize));
     } catch (error) {
       Console.print(error);
       this.readBridgeSize(callback);
     }
+  },
+
+  handleWrongBridgeSizeException(bridgeSize) {
+    this.handleEmptyBrigeSizeException(bridgeSize);
+    this.handleBrigeSizeIncludeEmptyException(bridgeSize);
+    this.handleBrigeSizeTypeException(Number(bridgeSize));
+    this.handleBrigeSizeOutOfRangeException(Number(bridgeSize));
   },
 
   handleEmptyBrigeSizeException(bridgeSize) {
@@ -38,7 +42,9 @@ const InputView = {
         throw ERROR_MESSAGES_BRIDGE.blank;
       }
     });
+  },
 
+  handleBrigeSizeIncludeEmptyException(bridgeSize) {
     if (bridgeSize.includes(' ')) {
       throw ERROR_MESSAGES_BRIDGE.blank;
     }
