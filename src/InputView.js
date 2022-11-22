@@ -39,9 +39,10 @@ const InputView = {
   readMoving(bridgeGame) {
     Console.readLine(
       "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      (move) => {
+      (answer) => {
         try {
-          InputView.validateMoving(move);
+          InputView.validateMoving(answer);
+          bridgeGame.move(answer);
         } catch (error) {
           Console.print(error.message);
           InputView.readMoving(bridgeGame);
