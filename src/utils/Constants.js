@@ -1,8 +1,3 @@
-const GAME_NUMBER = Object.freeze({
-  min: 3,
-  max: 20,
-})
-
 const INPUT_QUESTION = Object.freeze({
   bridgeLen: '다리의 길이를 입력해주세요.\n',
   move: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
@@ -10,7 +5,7 @@ const INPUT_QUESTION = Object.freeze({
 });
 
 const PRINT_MESSAGE = Object.freeze({
-  enter: '\n',
+  blank: ' ',
   start: `다리 건너기 게임을 시작합니다.\n`,
   finish: `최종 게임 결과`,
   result: (result) => `게임 성공 여부: ${result}`,
@@ -37,6 +32,11 @@ const BRIDGE_CHECK = Object.freeze({
   blank: ' ',
 });
 
+const GAME_NUMBER = Object.freeze({
+  min: 3,
+  max: 20,
+});
+
 const GAME_RESULT = Object.freeze({
   success: '성공',
   fail: '실패',
@@ -52,10 +52,10 @@ const GAME_COMMAND = Object.freeze({
 module.exports = {
   INPUT_QUESTION,
   ERROR_MESSAGE,
-  GAME_NUMBER,
+  PRINT_MESSAGE,
   BRIDGE_ROW,
   BRIDGE_CHECK,
+  GAME_NUMBER,
   GAME_RESULT,
   GAME_COMMAND,
-  PRINT_MESSAGE,
 }
