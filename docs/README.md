@@ -47,12 +47,11 @@
   - [x] 각 다리마다 0 과 1 무작위 값 생성(0인 경우 아래, 1인 경우 위칸 이동 가능)
 - [x] 총 시도한 횟수 누적
 - [x] 입력받은 이동할 칸과 현재 건너는 다리 비교해서 성공 여부 가리기
-- [x] 오류시 throw '[Error] 에러메세지)'
+- [x] 오류시 `throw '[Error] 에러메세지'`
 
 ## MVC 패턴 사용
 
-Model : utils/ {contants, util}
-src/ {BridgeGame, BridgeMaker, BridgeRandomMaker, Map}
+Model : utils/ {contants, util}, src/ {BridgeGame, BridgeMaker, BridgeRandomMaker, Map}
 
 View : Views/ {Inputview, OuputView}
 
