@@ -1,7 +1,7 @@
-const Controller = require('./Controller/Controller');
+const Controller = require("./Controller/Controller");
 
 class App {
-  constructor(){
+  constructor() {
     this.controller = new Controller();
   }
 
