@@ -33,8 +33,15 @@ class BridgeGame {
    */
   move(direction) {
     checkValidDirection(direction);
+    this.checkBridge(direction);
+  }
+
+  checkBridge(direction) {
+    console.log(this.#bridge);
+    if (this.#bridge[this.#bridgeStack.length] !== direction) {
+      //terminate
+    }
     this.#bridgeStack.push(direction);
-    console.log(this.#bridgeStack);
     InputView.readMoving(this);
   }
 
