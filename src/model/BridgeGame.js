@@ -23,6 +23,8 @@ class BridgeGame {
 
   try = 0;
 
+  moveMap = new Map();
+
   constructor(size) {
     this.#bridge = makeBridge(size, generate);
     this.#reset();
@@ -32,10 +34,14 @@ class BridgeGame {
     this.#playerPosition = -1;
     this.try += 1;
     this.result = RESULT.SUCCESS;
-    this.moveMap = {
-      [DIRECTION[0]]: [],
-      [DIRECTION[1]]: [],
-    };
+    this.#resetMap();
+  }
+
+  #resetMap() {
+    const { moveMap } = this;
+
+    moveMap.set(DIRECTION[1], []);
+    moveMap.set(DIRECTION[0], []);
   }
 
   /**
@@ -59,10 +65,13 @@ class BridgeGame {
 
   drawMap(moving) {
     const { moveMap, result } = this;
-    const unchosen = Object.values(DIRECTION).join('').replace(moving, '');
+    const unchosen = new Set(moveMap.keys());
 
-    moveMap[moving].push(this.#OBJECT[result]);
-    moveMap[unchosen].push(this.#OBJECT.BLANK);
+    moveMap.get(moving).push(this.#OBJECT[result]);
+    unchosen.delete(moving);
+    unchosen.forEach((direction) => {
+      moveMap.get(direction).push(this.#OBJECT.BLANK);
+    });
   }
 
   /**

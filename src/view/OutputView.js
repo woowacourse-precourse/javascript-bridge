@@ -33,9 +33,9 @@ const OutputView = {
   printMap(moveMap) {
     const { FIRST, LAST, MIDDLE } = STRUCTURE;
 
-    for (const direction in moveMap) {
-      Console.print(`${FIRST}${moveMap[direction].join(MIDDLE)}${LAST}`);
-    }
+    moveMap.forEach((value) => {
+      Console.print(`${FIRST}${value.join(MIDDLE)}${LAST}`);
+    });
     this.nextLine();
   },
 
