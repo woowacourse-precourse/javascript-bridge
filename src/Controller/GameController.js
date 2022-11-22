@@ -72,7 +72,6 @@ class GameController {
       this.#game.retry();
       return InputView.readMoving(this);
     }
-    Console.print('');
     OutputView.printResult(this.#game.result, this.#game.isWin(), this.#game.tryNumber);
     return Console.close();
   }
