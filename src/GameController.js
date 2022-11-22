@@ -31,26 +31,30 @@ class GameController {
 
   crossBridge(index) {
     const onDeliveryMoving = (moving) => {
-      const CAN_MOVE_NEXT = this.game.move(moving, index);
+      const IS_CORRECT_MOVE = this.game.move(moving, index);
       this.outputView.printMap(this.game.getMaps());
-      this.resultOfCrossing(CAN_MOVE_NEXT, index);
+      this.resultOfCrossing(IS_CORRECT_MOVE, index);
     };
 
     this.inputView.readMoving(onDeliveryMoving);
   }
 
-  resultOfCrossing(CAN_MOVE_NEXT, index) {
-    if (CAN_MOVE_NEXT) {
-      if (index === this.game.getBridgeLength() - 1) {
-        this.finalGameResult(true);
-        return;
-      }
-
-      this.crossBridge(index + 1);
+  resultOfCrossing(IS_CORRECT_MOVE, index) {
+    if (IS_CORRECT_MOVE) {
+      this.nextAction(index);
       return;
     }
 
     this.gameOver();
+  }
+
+  nextAction(index) {
+    if (index === this.game.getBridgeLength() - 1) {
+      this.finalGameResult(true);
+      return;
+    }
+
+    this.crossBridge(index + 1);
   }
 
   gameOver() {
