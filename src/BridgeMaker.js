@@ -10,15 +10,13 @@ const BridgeMaker = {
   
   makeBridge(size, generateRandomNumber) {
     const MissionUtils = require("@woowacourse/mission-utils");
-    var command = [];
+    var bridges = [];
     for(var i =0;i<size;i++){
-      const number = generateRandomNumber();
-      if (number == 0) command.push("D");
-      else command.push("U");
+      if (generateRandomNumber() == 0) bridges.push("D");
+      else bridges.push("U");
     };
-    return command; 
+    return bridges; 
   },
-
 };
 
 module.exports = BridgeMaker;
