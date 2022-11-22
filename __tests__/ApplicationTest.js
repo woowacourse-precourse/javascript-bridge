@@ -177,4 +177,16 @@ describe('플레이어 입력값의 유효성 검사', () => {
       expect(app.isContinue()).toEqual(true);
     });
   });
+
+  test('사용자의 이동한 칸이 이동할 수 있는 칸인지 확인', () => {
+    mockRandoms([1, 0, 1]);
+    mockQuestions(['3', 'U', 'D', 'U']);
+    const app = new App();
+
+    app.play().then(() => {
+      app.isSuccessFulMovement().then((res) => {
+        expect(res).toEqual(true);
+      });
+    });
+  });
 });
