@@ -15,9 +15,15 @@ const GameCommand = {
   QUIT: 'Q',
 };
 
+const Survived = {
+  YES: 'O',
+  NO: 'X',
+};
+
 module.exports = {
   Tile,
   SPAWNABLE_TILES,
   BridgeSize,
   GameCommand,
+  Survived,
 };

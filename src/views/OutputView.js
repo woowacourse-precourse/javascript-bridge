@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { Tile } = require('../constants');
+const { Tile, Survived } = require('../constants');
 const BridgeGame = require('../domains/BridgeGame');
 const Moving = require('../domains/Moving');
 const Messages = require('../intl/Messages');
@@ -29,8 +29,8 @@ const OutputView = {
     return `[${movingHistory
       .map((moving) => {
         if (moving.getTile() !== tile) return ' ';
-        if (moving.isSurvived()) return 'O';
-        return 'X';
+        if (moving.isSurvived()) return Survived.YES;
+        return Survived.NO;
       })
       .map((tileDisplay) => ` ${tileDisplay} `)
       .join('|')}]`;
