@@ -47,22 +47,25 @@ describe('BridgeGame테스트', () => {
     });
   });
 
-  describe('이동', () => {
+  describe('이동 및 이동 여부 확인', () => {
     beforeEach(() => {
       bridgeGame.bridgeStore = new BridgeStore(['U', 'D', 'U'], 1);
     });
-    test('올바른 입력으로 이동 성공', () => {
-      expect(bridgeGame.move('U')).toBeTruthy();
-    });
 
-    test('올바르지 않은 입력(잘못된 칸 선택)으로 이동 실패', () => {
-      expect(bridgeGame.move('D')).toBeFalsy();
-    });
+    describe('move 메서드', () => {
+      test('올바른 입력으로 이동 성공', () => {
+        expect(bridgeGame.move('U')).toBeTruthy();
+      });
 
-    test.each(['', ' ', '1', 'Y', '다시'])('올바르지 않은 입력 발생시 에러 throw', (input) => {
-      expect(
-        () => bridgeGame.move(input),
-      ).toThrow('[ERROR]');
+      test('올바르지 않은 입력(잘못된 칸 선택)으로 이동 실패', () => {
+        expect(bridgeGame.move('D')).toBeFalsy();
+      });
+
+      test.each(['', ' ', '1', 'Y', '다시'])('올바르지 않은 입력 발생시 에러 throw', (input) => {
+        expect(
+          () => bridgeGame.move(input),
+        ).toThrow('[ERROR]');
+      });
     });
   });
 });
