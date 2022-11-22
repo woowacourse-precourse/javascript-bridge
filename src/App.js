@@ -42,13 +42,12 @@ class App {
 
   controlBridgeMoveResult() {
     if (!this.bridgeGame.isAnswerMovingCommand()) {
-      this.inputGameCommand();
-      return;
+      return this.inputGameCommand();
     }
     if (this.bridgeGame.isGameSuccess()) {
-      OutputView.printResult(this.sendPrintResult());
-      return;
+      return OutputView.printResult(this.sendPrintResult());
     }
+
     this.inputMovingCommand();
   }
 
@@ -58,9 +57,9 @@ class App {
 
   retryQuit(gameCommand) {
     if (gameCommand === COMMAND.GAME.QUIT) {
-      OutputView.printResult(this.sendPrintResult());
-      return;
+      return OutputView.printResult(this.sendPrintResult());
     }
+
     this.bridgeGame.retry();
     this.inputMovingCommand();
   }
