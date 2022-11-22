@@ -1,17 +1,38 @@
 const Bridge = require("./Bridge");
 const BridgeGame = require("./BridgeGame");
+const BridgeMaker = require("./BridgeMaker");
 
 class BridgeGameService {
-  #bridge;
   #bridgeGame;
+  #generator;
 
-  generateBridge(size) {
-    this.#bridge = new Bridge(size);
-    this.#bridge.createBridge();
+  constructor(generator) {
+    this.#generator = generator;
   }
 
-  canMove(space) {
-    this.#bridgeGame.move(space, this.#bridge);
+  generateBridge(size) {
+    const bridge = BridgeMaker.makeBridge(size, this.#generator);
+    this.#bridgeGame = new BridgeGame(new Bridge(bridge));
+  }
+
+  moveBridge(position) {
+    return this.#bridgeGame.move(position);
+  }
+
+  getMap() {
+    return this.#bridgeGame.getMap();
+  }
+
+  retryGame() {
+    return this.#bridgeGame.retry();
+  }
+
+  checkGameEnd() {
+    return this.#bridgeGame.checkGameEnd();
+  }
+
+  getResult() {
+    return this.#bridgeGame.getResult();
   }
 }
 
