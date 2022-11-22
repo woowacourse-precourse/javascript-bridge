@@ -2,7 +2,7 @@
  * 다리 건너기 게임을 관리하는 클래스
  * InputView, OutputView 사용 X
  */
-const { BUTTON } = require('./Utils/constant');
+const { BUTTON, BRIDGE } = require('./Utils/constant');
 
 class BridgeGame {
   realBridge = [[], []];
@@ -25,24 +25,24 @@ class BridgeGame {
 
   moveIsU(move) {
     if (this.bridge[this.#index] === move) {
-      this.realBridge[0].push('O');
-      this.realBridge[1].push(' ');
+      this.realBridge[0].push(BRIDGE.CORRECT);
+      this.realBridge[1].push(BRIDGE.BLANK);
     }
     if (this.bridge[this.#index] !== move) {
-      this.realBridge[0].push('X');
-      this.realBridge[1].push(' ');
+      this.realBridge[0].push(BRIDGE.IN_CORRECT);
+      this.realBridge[1].push(BRIDGE.BLANK);
     }
     this.getRealBridge();
   }
 
   moveIsD(move) {
     if (this.bridge[this.#index] === move) {
-      this.realBridge[1].push('O');
-      this.realBridge[0].push(' ');
+      this.realBridge[1].push(BRIDGE.CORRECT);
+      this.realBridge[0].push(BRIDGE.BLANK);
     }
     if (this.bridge[this.#index] !== move) {
-      this.realBridge[1].push('X');
-      this.realBridge[0].push(' ');
+      this.realBridge[1].push(BRIDGE.IN_CORRECT);
+      this.realBridge[0].push(BRIDGE.BLANK);
     }
     this.getRealBridge();
   }

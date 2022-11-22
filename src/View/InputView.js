@@ -67,9 +67,9 @@ const InputView = {
 
   isFinish(bridgeGame) {
     if ((bridgeGame.realBridge[0].length === this.size
-      && bridgeGame.realBridge[0][bridgeGame.realBridge[0].length - 1] === 'O')
+      && bridgeGame.realBridge[0][bridgeGame.realBridge[0].length - 1] === BRIDGE.CORRECT)
     || (bridgeGame.realBridge[0].length === this.size
-      && bridgeGame.realBridge[1][bridgeGame.realBridge[1].length - 1] === 'O')
+      && bridgeGame.realBridge[1][bridgeGame.realBridge[1].length - 1] === BRIDGE.CORRECT)
     ) {
       return true;
     }
@@ -77,28 +77,28 @@ const InputView = {
   },
 
   printUpO(bridgeGame) {
-    if (bridgeGame.realBridge[0][bridgeGame.realBridge[0].length - 1] === 'O') {
+    if (bridgeGame.realBridge[0][bridgeGame.realBridge[0].length - 1] === BRIDGE.CORRECT) {
       this.printBridge(bridgeGame);
     }
     this.printDownO(bridgeGame);
   },
 
   printDownO(bridgeGame) {
-    if (bridgeGame.realBridge[1][bridgeGame.realBridge[1].length - 1] === 'O') {
+    if (bridgeGame.realBridge[1][bridgeGame.realBridge[1].length - 1] === BRIDGE.CORRECT) {
       this.printBridge(bridgeGame);
     }
     this.printUpX(bridgeGame);
   },
 
   printUpX(bridgeGame) {
-    if (bridgeGame.realBridge[0][bridgeGame.realBridge[0].length - 1] === 'X') {
+    if (bridgeGame.realBridge[0][bridgeGame.realBridge[0].length - 1] === BRIDGE.IN_CORRECT) {
       this.readGameCommand(bridgeGame);
     }
     this.printDownX(bridgeGame);
   },
 
   printDownX(bridgeGame) {
-    if (bridgeGame.realBridge[1][bridgeGame.realBridge[1].length - 1] === 'X') {
+    if (bridgeGame.realBridge[1][bridgeGame.realBridge[1].length - 1] === BRIDGE.IN_CORRECT) {
       this.readGameCommand(bridgeGame);
     }
   },
@@ -114,7 +114,7 @@ const InputView = {
   },
 
   answerIsR(bridgeGame, answer) {
-    if (answer === 'R') {
+    if (answer === BUTTON.RETRY) {
       if (bridgeGame.realBridge[0].length <= 1) {
         return this.readMoving(this.bridge, this.size);
       }

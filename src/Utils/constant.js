@@ -18,6 +18,9 @@ const MESSAGE = {
 const BRIDGE = {
   MIN_LENGTH: 3,
   MAX_LENGTH: 20,
+  CORRECT: 'O',
+  IN_CORRECT: 'X',
+  BLANK: ' ',
 };
 
 const ERROR = {
