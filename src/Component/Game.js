@@ -8,12 +8,13 @@ class Game {
   #playCount;
   #bridgeLength;
   #bridgeStatus;
+  #bridgeGame;
   constructor(bridgeLength) {
     this.#bridgeLength = bridgeLength;
     this.#playCount = 1;
     this.#bridge = new Bridge(this.#bridgeLength);
     this.#bridgeStatus = this.#bridge.getBridgeStatus();
-    this.bridgeGame = new BridgeGame(this.#bridgeStatus);
+    this.#bridgeGame = new BridgeGame(this.#bridgeStatus);
   }
 
   get getPlayCount() {
@@ -24,15 +25,19 @@ class Game {
     this.#playCount += 1;
   }
 
+  get getBridgeGame() {
+    return this.#bridgeGame;
+  }
+
   playAlgorithms(bridgeLength) {
     for (let moveCount = 0; moveCount < bridgeLength; moveCount++) {
       const DIRECTION = InputView.readMoving();
 
       const MOVE_RESULT = this.moveTurn(DIRECTION, moveCount);
-      if (MOVE[MOVE_RESULT] === "R") {
+      if (MOVE_RESULT === "R") {
         moveCount = 0;
       }
-      if (MOVE[MOVE_RESULT] === "Q") {
+      if (MOVE_RESULT === "Q") {
         return false;
       }
     }
@@ -40,7 +45,7 @@ class Game {
   }
 
   moveTurn(direction, moveCount) {
-    const MOVE_RESULT = this.bridgeGame.move(direction, moveCount);
+    const MOVE_RESULT = this.#bridgeGame.move(direction, moveCount);
     if (!MOVE_RESULT) {
       const IS_QUIT = this.askQuit();
       return IS_QUIT;
@@ -55,13 +60,13 @@ class Game {
     }
     if (IS_QUIT === "R") {
       this.increasePlayCount();
-      this.bridgeGame.retry();
+      this.#bridgeGame.retry();
     }
     return IS_QUIT;
   }
 
-  gameResult() {
-    const JUMP_HISTORY = this.bridgeGame.getJumpHistory;
+  getGameResult() {
+    const JUMP_HISTORY = this.#bridgeGame.getJumpHistory;
     OutputView.printResult(this.#playCount, this.#bridgeStatus, JUMP_HISTORY);
   }
 }
