@@ -8,12 +8,21 @@
 
 ## 실행 화면
 프로그램 실행 시 콘솔을 통해 입출력을 진행한다. <br/><br/>
-<!-- <img src='./lotto.jpg' style='width: 300px'/><br/><br/> -->
+<img src='./play.gif' style='width: 500px'/><br/><br/>
 
 ---
 
 ## 실행 방법
+다음 명령어를 통해 프로그램을 실행할 수 있다.
 
+    1. clone을 통해 자신의 pc로 복제
+    git clone https://github.com/SuHwa-Lee/javascript-bridge.git
+    2. 브랜치 변경
+    git checkout SuHwa-Lee
+    3. src 폴더로 이동
+    cd src
+    4. index.js 실행파일 실행
+    node index.js
 
 ---
 
@@ -69,25 +78,71 @@
 
 <br/>
 
-####  모든 경우에 대해 사용자가 잘못된 값을 입력할 경우, throw문을 사용해 예외를 발생시키고, <code>"[ERROR]"</code>로 시작하는 에러메세지를 출력후 종료한다. <br/><br/>
+####  사용자가 잘못된 값을 입력한 경우 throw문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다. <br/><br/>
 
 ---
 
 ## 클래스 설계
-클래스의 필드와 메서드를 표로 나타낸 것이다.
+클래스의 필드와 메서드를 표로 나타낸 것이다. 클래스는 총 3개를 생성하여 구현하였다. 
 
-|--|BridgeGame|--|--|--|
-|--|--|--|--|--|
-|필드|--|--|--|--|
-|메서드|move<br/>retry|--|--|--|
+|--|App|BridgeController|BridgeGame|
+|--|--|--|--|
+|필드|--|--|#bridgeInfo<br/>#moveCnt<br/>#moveInfo<br/>#tryCnt|
+|메서드||start()<br/>requestBridegeSize()<br/>createBridge(bridgeSize)<br/>bridgeSizeException(bridgeSize)<br/>requestMoving()<br/>createMoving(moving)<br/>movingException(moving)<br/>handleMovingResult(result)<br/>requestRetry()<br/>createRetry(command)<br/>handleRetryResult(result)<br/>commandException(command)|move(moving)<br/>retry(command)<br/>retrySetting()
+|설명|BridgeController을 생성 후 실행|프로그램 전체 흐름 진행|다리 데이터 관리 및 주요 로직 처리|--|
 
 ---
 <br/>
 
 ## 클래스 상세 설명
 
-총 4개의 클래스로 분리하였다. 다음은 각각의 메서드에 대한 상세 기능 설명이다. 
-(추후 추가)
+총 3개의 클래스로 분리하였다. 다음은 각각의 메서드에 대한 상세 기능 설명이다. 
+
+### 1. App
+
+    play(): BridgeController 객체를 생성하여 실행시킨다.
+
+### 2. BridgeController
+
+    여기서는 프로그램의 주요 흐름을 함수 호출을 통해 실행시켜 주었다. 
+    아래와 같이 3가지의 주요 흐름으로 나눌 수 있다.
+    
+    1. 사용자가 다리 길이를 입력하고, 입력한 다리 길이만큼 다리를 생성하여 저장한다. 
+    2. 사용자가 이동 방향을 입력하고, 갈 수 있는지 판단하여 결과를 보여준다. 
+    3. 사용자가 실패 시 재시작/종료여부를 선택하고, 재시작과 종료에 맞는 로직을 처리해준다.
+
+    3가지의 흐름에 대한 로직이 반복되어 함수명을 통일시켜 주었다. 
+    
+    1. request-- : 해당 함수는 사용자의 입력을 받는 함수이다. inputView 객체의 read--함수를 호출하며, this 바인딩을 사용하여 callback함수로 create--함수를 바인딩해주었다. 
+    2. create-- : 해당 함수는 사용자 입력값에 대한 예외처리 이후, 예외가 발생하지 않는다면 입력을 받은 이후의 로직을 처리한다. 
+    3. --Exception : 해당 함수는 사용자 입력값에 대한 예외처리를 구현한다. try-catch문으로 구현하였으며, 요구사항에 맞게 try에서 에러 발생시, catch문을 통해 잘못된 입력에 대해 재입력을 요청하도록 해주었다. 
+  
+    start()함수는 BridgeController 객체 생성시 생성자로 실행되는 함수이자 프로그램을 시작시키는 함수이다.   
+<br/>
+
+### 3. BridgeGame
+
+  ### Field
+
+    - bridgeInfo: 랜덤으로 생성된 다리를 저장한다.
+    - moveCnt: 지금까지의 이동 횟수를 저장한다.
+    - moveInfo: 지금까지의 이동 정보를 U, D의 값을 가진 배열 형태로 저장한다. 
+    - tryCnt: 지금까지의 시도 횟수를 저장한다.
+    
+  ### Method
+    move(이동하고 싶은 값): 사용자가 U 또는 D를 입력하면 해당 입력에 대한 결과값을 반환하며 다음과 같은 로직을 가진다. 
+    
+    1. 생성된 다리와 사용자가 입력한 다리에 대한 값이 일치하지 않는다면 'fail'을 반환한다.
+    2. 생성된 다리와 일치하며, 생성된 다리 길이와 이동 횟수 +1을 한 값이 일치하면 다리를 모두 건넌 것이므로 'success'를 반환한다.
+    3. 생성된 다리와 일치하지만, 2번의 경우가 아닌 경우는 아직 다리를 다 건너지 못한 것이므로 'next'를 반환한다. 
+    
+    retry(명령어): 사용자가 R 또는 Q를 입력하면 해당 입력에 대한 결과값을 반환하며, 다음과 같은 로직을 가진다. 
+
+    1. 사용자의 입력이 R인 경우에는 재시도를 하고싶다는 것이므로 BridgeGame내의 retrySetting 메서드를 실행시키고 'retry'를 반환한다. 
+    2. 사용자의 입력이 Q인 경우에는 종료를 하고싶다는 것이므로 'quit'을 반환한다. 
+
+    retrySetting(): 재시도를 할 때 호출되는 함수로, 시도 횟수를 1 증가하고, 지금까지의 이동 정보와 횟수를 모두 0으로 초기화시킨다.
+
 
 <br/>
 
@@ -97,12 +152,16 @@
 |--|InputView|OutputView|BridgeMaker|BridgeRandomNumberGenerator|
 |--|--|--|--|--|
 |프로퍼티|--|--|--|--|
-|메서드|readBridgeSize<br/>readMoving<br/>readGameCommand|printMap<br/>printResult|makeBridge|--|
+|메서드|readBridgeSize<br/>readMoving<br/>readGameCommand|printMap(moveInfo)<br/>printResult(moveInfo, tryCnt, successFlag)<br/>printStart()<br/>printError(err)<br/>printClose()<br/>processMap(move)|makeBridge(size, generateRandomNumber)|generate() |
 
 ## 객체 상세 설명
 
-총 4개의 객체로 분리하였다. 다음은 각각의 메서드에 대한 상세 기능 설명이다. 
-(추후 추가)
+총 4개의 객체로 분리하였다. 다음은 각각의 객체에 대한 기능을 설명하였다.
+
+    InputView : 사용자로부터 입력을 받는 역할을 한다.
+    OutputView : 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
+    BridgeMaker : 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
+    BridgeRandomNumberGenerator : 0과 1사이의 난수를 생성한다.
 
 <br/>
 
