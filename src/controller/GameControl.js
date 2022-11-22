@@ -9,6 +9,9 @@ class GameControl {
 
   start() {
     const size = InputView.readBridgeSize();
+    if (isNaN(size)) {
+      return;
+    }
     this.bridgeGame.make(size);
     this.orderMoving();
   }
