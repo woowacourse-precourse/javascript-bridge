@@ -33,14 +33,15 @@ class App {
     while(this.#gameStatus.playerLocation!==this.#generatedBridge.length){
       InputView.readMoving(this.#generatedBridge,this.#gameStatus)
       OutputView.printMap(this.#gameStatus)
-      // if(this.#gameStatus.wrongFlag){
-      //  this.chooseWrong()
-      // }
+      if(this.#gameStatus.wrongFlag){
+       this.chooseWrong()
+      }
     }
   }
 
+  
   chooseWrong(){
-    
+    InputView.readGameCommand(this.#gameStatus)
   }
 
   
