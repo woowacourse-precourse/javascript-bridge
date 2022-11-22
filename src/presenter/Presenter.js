@@ -1,6 +1,6 @@
 const OutputView = require("../view/OutputView");
 const InputView = require("../view/InputView");
-const Validation = require("../utils/Validation");
+const Validation = require("../validation/Validation");
 const {
   INPUT_TRY_FN,
   INPUT_CATCH_FN,

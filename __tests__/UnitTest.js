@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 
-const { INPUT_VAL } = require("../src/utils/stringsUtils");
-const Validation = require("../src/utils/Validation");
+const { INPUT_VAL } = require("../src/validation/stringsValidation");
+const Validation = require("../src/validation/Validation");
 
 describe("Input Validation 클래스 테스트", () => {
   test("Bridge size validation 테스트", () => {

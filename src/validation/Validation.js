@@ -1,5 +1,5 @@
 const { BRIDGE, USER_INPUT } = require("../view/stringsUI");
-const { INPUT_VAL } = require("./stringsUtils");
+const { INPUT_VAL } = require("./stringsValidation");
 
 // validation을 model 생성자 내부로 바꿔보자
 class Validation {
