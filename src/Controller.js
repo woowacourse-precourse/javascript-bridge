@@ -66,6 +66,7 @@ class Controller {
       }
     });
   }
+  
   end(isMatch){
     printResultMap();
     this.showMap();

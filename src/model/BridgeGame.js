@@ -44,8 +44,6 @@ class BridgeGame {
     }
     return false;
   }
-  
-  
 }
 
 module.exports = BridgeGame;
