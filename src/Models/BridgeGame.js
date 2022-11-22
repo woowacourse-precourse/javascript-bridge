@@ -15,6 +15,7 @@ class BridgeGame {
       gameResult: BRIDGE_VALUE.RESULT_WIN,
     };
   }
+
   createBridge(size) {
     this.#resultData.playCount += BRIDGE_VALUE.COUNT_UNIT;
     this.#myBridge = BridgeMaker.makeBridge(size, generateRandomNumber);

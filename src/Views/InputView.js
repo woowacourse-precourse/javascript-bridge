@@ -8,18 +8,10 @@ const InputView = {
     });
   },
 
-  getBridgeSize(size) {
-    return Number(size);
-  },
-
   readMoving(callback) {
     Console.readLine(MESSAGE.GUESS, (userInput) => {
       callback(userInput);
     });
-  },
-
-  getUserMoving(userInput) {
-    return userInput;
   },
 
   readGameCommand(callback) {

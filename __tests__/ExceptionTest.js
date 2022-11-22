@@ -88,7 +88,7 @@ describe("예외처리 테스트", () => {
   test("반복적인 입력오류가 동반된 3회차 도전 중단", () => {
     const logSpy = getLogSpy();
     mockRandoms(["1", "0", "0", "1"]);
-    mockQuestions(["GGYU", "4", "D", "X", "R", "U", "U", "R", "U", "X", "D", "D", "D", "Q"]);
+    mockQuestions(["GGYU", "4", "D", "X", "R", "U", "U", "R", "U", "X", "D", "D", "D","Q"]);
 
     const app = new App();
     app.play();

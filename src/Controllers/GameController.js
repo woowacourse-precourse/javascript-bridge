@@ -43,7 +43,7 @@ class GameController {
   }
 
   makeBridge(userInput) {
-    const size = this.#inputView.getBridgeSize(userInput);
+    const size = Number(userInput);
     this.#bridgeGame.createBridge(size);
     this.selectMoving();
   }
@@ -65,8 +65,7 @@ class GameController {
   }
 
   moving(userInput) {
-    const select = this.#inputView.getUserMoving(userInput);
-    this.#bridgeGame.move(select);
+    this.#bridgeGame.move(userInput);
     this.checkResult();
   }
 
