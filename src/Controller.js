@@ -21,7 +21,7 @@ class Controller {
         this.play();
       }
       catch(error){
-        printMessage(error);
+        printMessage(error.message);
         this.init();
       }
     });
@@ -34,7 +34,7 @@ class Controller {
         this.showMap();
         this.handleBridgeGame(isMatch);
       }catch(error){
-        printMessage(error);
+        printMessage(error.message);
         this.play();
       }
     });
@@ -68,7 +68,7 @@ class Controller {
         }
         this.end();
       }catch(error){
-        printMessage(error);
+        printMessage(error.message);
         this.askReplay();
       }
     });
