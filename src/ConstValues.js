@@ -1,6 +1,11 @@
-export const FIRST_GAME = 1;
 
-export const PLAYING = 'playing...';
-export const SUCCESS = 'success';
-export const GAME_END = 'game end';
-export const FAILURE = 'failure';
+const ConstValues = {
+    FIRST_GAME : 1,
+
+    PLAYING : 'playing...',
+    SUCCESS : 'success',
+    GAME_END : 'game end',
+    FAILURE : 'failure',
+}
+
+module.exports = ConstValues;
