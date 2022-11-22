@@ -38,13 +38,8 @@ class App {
 	checkMoveResult() {
 		OutputView.printMap(this.bridgeGame.getMovingLogs());
 
-		if (this.bridgeGame.isNotMatched()) {
-			return this.askRetryOrQuit();
-		}
-
-		if (this.bridgeGame.checkFinish()) {
-			return this.win();
-		}
+		if (this.bridgeGame.isNotMatched()) return this.askRetryOrQuit();
+		if (this.bridgeGame.checkFinish()) return this.win();
 
 		return this.selectMove();
 	}
