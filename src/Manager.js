@@ -14,7 +14,7 @@ class Manager {
     this.#bridgeGame = null;
   }
   start() {
-    OutputView.printStartMessage(INTRO_MESSAGE.start);
+    OutputView.printMessage(INTRO_MESSAGE.start);
     this.requestBridgeSize();
   }
   requestBridgeSize() {
