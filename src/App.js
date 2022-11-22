@@ -2,6 +2,7 @@ const BridgeGame = require("./model/BridgeGame");
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
 const { COMMAND } = require("./constants/input.constants");
+const Validator = require("./Validator");
 
 class App {
   game;
@@ -38,7 +39,7 @@ class App {
 
   gameEndControlCallback = (input) => {
     try {
-      this.game.endValidate(input);
+      Validator.endValidate(input);
       this.decideCommand(input);
     } catch (err) {
       OutputView.printError(err.message);
