@@ -34,10 +34,10 @@ class BridgeGame {
     const bridgeLength = (size) => {
       OutputView.newLine();
       const input = Number(size);
+      this.#answers = BridgeMaker.makeBridge(input, BridgeNumber.generate);
       const validation = this.bridgeLengthValidation(input);
       if (validation) this.inputMoving();
       if (!validation) this.inputBridgeLength();
-      this.#answers = BridgeMaker.makeBridge(input, BridgeNumber.generate);
     };
     InputView.readBridgeSize(INPUT.BRIDGE_SIZE, bridgeLength);
   }
