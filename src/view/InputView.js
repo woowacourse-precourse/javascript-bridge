@@ -1,11 +1,11 @@
-const { Console } = require('@woowacourse/mission-utils');
-const Validator = require('./Validator');
-const BridgeGame = require('./BridgeGame');
-const { makeBridge } = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
-const { INFO_MESSAGES } = require('./utils/messages');
-const { INPUT, IS_SUCCESS } = require('./utils/constants');
-const errorHandler = require('./utils/errorHandler');
+const { Console } = require("@woowacourse/mission-utils");
+const validator = require("../utils/validator");
+const BridgeGame = require("../model/BridgeGame");
+const { makeBridge } = require("../BridgeMaker");
+const { generate } = require("../BridgeRandomNumberGenerator");
+const { INFO_MESSAGES } = require("../utils/messages");
+const { INPUT, IS_SUCCESS } = require("../utils/constants");
+const errorHandler = require("../utils/errorHandler");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -17,7 +17,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(INFO_MESSAGES.BRIDGE_SIZE, (userInput) => {
       try {
-        Validator.bridgeSize(+userInput);
+        validator.bridgeSize(+userInput);
 
         this.saveBridgeGameState(+userInput);
 
@@ -39,7 +39,7 @@ const InputView = {
   readMoving() {
     Console.readLine(INFO_MESSAGES.MOVING, (userInput) => {
       try {
-        Validator.moving(userInput);
+        validator.moving(userInput);
 
         BridgeGame.move(userInput, this.createReadFuncs());
       } catch ({ message }) {
@@ -61,7 +61,7 @@ const InputView = {
   readGameCommand(map, printResult) {
     Console.readLine(INFO_MESSAGES.RETRY, (userInput) => {
       try {
-        Validator.retry(userInput);
+        validator.retry(userInput);
 
         this.processCommand(userInput, map, printResult);
       } catch ({ message }) {

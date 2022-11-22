@@ -1,5 +1,5 @@
-const OutputView = require('./OutputView');
-const { BRIDGE, DIRECTION } = require('./utils/constants');
+const OutputView = require("../view/OutputView");
+const { BRIDGE, DIRECTION } = require("../utils/constants");
 
 class BridgeMap {
   static upBridge = BRIDGE.INITIAL;

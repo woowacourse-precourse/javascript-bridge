@@ -1,11 +1,11 @@
-const { Console } = require('@woowacourse/mission-utils');
-const { INFO_MESSAGES } = require('./utils/messages');
+const { Console } = require("@woowacourse/mission-utils");
+const { INFO_MESSAGES } = require("../utils/messages");
 const {
   RESULT,
   IS_SUCCESS,
   SUCCESS_STRING,
   FAILURE_STRING,
-} = require('./utils/constants');
+} = require("../utils/constants");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
