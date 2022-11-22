@@ -40,11 +40,11 @@ class App {
         return this.requestDirection();
       }
       this.#bridgeGame.move(userDirection);
-      this.printBridgeTrack(userDirection);
+      this.printBridgeTrack();
     });
   }
 
-  printBridgeTrack(direction) {
+  printBridgeTrack() {
     OutputView.printMap(this.#bridgeGame);
     this.showNextStep();
   }
@@ -86,7 +86,4 @@ class App {
 }
 
 module.exports = App;
-
-const app = new App();
-app.play();
 
