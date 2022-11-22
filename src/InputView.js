@@ -74,13 +74,17 @@ const InputView = {
     Console.readLine(RETRY, (retryOrQuit) => {
       try {
         Validation.validateGameCommand(retryOrQuit);
-        if(retryOrQuit === 'R') {
-          this.retryGame(bridgeList);
-        } if(retryOrQuit === 'Q') {
-          this.quitGame(upAndDownList);
-        }
+        this.retryOrQuit(retryOrQuit, upAndDownList, bridgeList);
       } catch(error) { this.printError(error); }
     })
+  },
+
+  retryOrQuit(retryOrQuit, upAndDownList, bridgeList) {
+    if(retryOrQuit === 'R') {
+      this.retryGame(bridgeList);
+    } if(retryOrQuit === 'Q') {
+      this.quitGame(upAndDownList);
+    }
   },
 
   retryGame(bridgeList) {

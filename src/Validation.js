@@ -1,4 +1,4 @@
-const { ERROR, RETRY } = require("./Messages");
+const { ERROR } = require("./Messages");
 
 const CONSTANTS = {
   BRIDGE_MIN_LENGTH: 3,
