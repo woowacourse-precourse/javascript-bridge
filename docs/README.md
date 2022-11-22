@@ -2,12 +2,12 @@
 
 ### BridgeRandomNumberGenerator
 
-- [ ] 0과 1 중 무작위 값을 생성한다. -generate()
+- [x] 0과 1 중 무작위 값을 생성한다. -generate()
 
 ### BridgeMaker
 
-- [ ] 입력받은 값 만큼 다리를 생성한다. -makeBridge()
-  - [ ] 생성된 무작위 값이 0인 경우 = 'D', 1인 경우 = 'U'로 표시한다. -BridgeRandomNumberGenerator#generate()
+- [x] 입력받은 값 만큼 다리를 생성한다. -makeBridge()
+  - [x] 생성된 무작위 값이 0인 경우 = 'D', 1인 경우 = 'U'로 표시한다. -BridgeRandomNumberGenerator#generate()
 
 ### InputView
 
