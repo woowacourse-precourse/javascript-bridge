@@ -57,7 +57,6 @@ describe('다리 건너기 테스트', () => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
-    console.log('birdge', bridge);
     expect(bridge).toEqual(['U', 'D', 'D']);
   });
 
