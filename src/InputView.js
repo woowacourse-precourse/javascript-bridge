@@ -1,4 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
+const BridgeMaker = requre("./BridgeMaker")
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 const InputView = {
   readBridgeSize() {
@@ -10,6 +12,7 @@ const InputView = {
   validateBridgeSize(bridgeSize) {
     if (!(bridgeSize >= 3 && bridgeSize <= 20))
       throw new Error("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
+      const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
   },
 
   readMoving() {
