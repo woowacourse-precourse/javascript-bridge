@@ -26,19 +26,6 @@ const InputView = {
     Console.readLine(MESSAGE.INPUT_CHECK_TRY, callBack);
   },
 
-  moveValidate(moving) {
-    try {
-      if (moving !== 'U' && moving !== 'D') {
-        throw new Error(ERROR_MESSAGE.INVALID_MOVE_VALUE);
-      }
-    } catch (error) {
-      Console.print(error);
-      return false;
-    }
-
-    return true;
-  },
-
   commandValidate(command) {
     try {
       if (command !== 'R' && command !== 'Q') {

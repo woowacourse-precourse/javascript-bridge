@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { REGEXP, ERROR_MESSAGE } = require('./constant/constant');
+const { REGEXP, ERROR_MESSAGE, BRIDGE } = require('./constant/constant');
 
 class Validator {
   sizeValidate(size) {
@@ -11,6 +11,17 @@ class Validator {
       Console.print(error);
       return false;
     }
+  }
+
+  moveValidate(moving) {
+    try {
+      this.checkMoveValue(moving);
+    } catch (error) {
+      Console.print(error);
+      return false;
+    }
+
+    return true;
   }
 
   checkNumber(size) {
@@ -28,6 +39,12 @@ class Validator {
   checkSizeRange(size) {
     if (parseInt(size, 10) < 3 || parseInt(size, 10) > 20) {
       throw new Error(ERROR_MESSAGE.INVALID_SIZE_RANGE);
+    }
+  }
+
+  checkMoveValue(moving) {
+    if (moving !== BRIDGE.STRING_UP && moving !== BRIDGE.STRING_DOWN) {
+      throw new Error(ERROR_MESSAGE.INVALID_MOVE_VALUE);
     }
   }
 }

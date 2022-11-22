@@ -37,7 +37,7 @@ class App {
 
   movingBridge() {
     InputView.readMoving((moving) => {
-      if (!InputView.moveValidate(moving)) return this.movingBridge();
+      if (!this.validator.moveValidate(moving)) return this.movingBridge();
 
       this.bridgeGame.move(this.#bridge, moving);
       OutputView.printMap(this.bridgeGame.getMoving());
