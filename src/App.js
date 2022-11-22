@@ -24,6 +24,19 @@ class App {
       game.cnt +=1;
     }
   };
+  exceptionSize(){
+    InputView.bridgeTextCheck();
+    InputView.bridgeSizeCheck();
+  };
+  exceptionMove(){
+    InputView.moveSelectCheck();
+    InputView.moveLowerCheck();
+  };
+  exceptionCommand(){
+    InputView.commandSelectCheck();
+    InputView.commandLowerCheck();
+  };
+
 }
 
 module.exports = App;
