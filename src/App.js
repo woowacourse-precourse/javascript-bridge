@@ -8,9 +8,11 @@ const { vaildSizeInput } = require("./InputView");
 const BridgeGame = require("./BridgeGame");
 
 
+
 class App {
-    async play() {
+  async play() {
     outputView.printStart();
+
     let size = 0;
     while(size===0) {
       try {
@@ -24,14 +26,12 @@ class App {
     console.log('###bridgeArr:', bridgeArr);
 
 
-    const movingInput = await inputView.inputMoving(bridgeArr);
-    console.log('###movingInput:', movingInput);
-    
+    // const movingInput = await inputView.inputMoving(bridgeArr);
+    // console.log('###movingInput:', movingInput);
 
-
-
+  
     const bridgeGame = new BridgeGame(bridgeArr, size);
-    bridgeGame.move(movingInput);
+    bridgeGame.move();
 
   }
 
@@ -47,16 +47,6 @@ class App {
     return size;
   }
 
-  
-  // /**4-1. 이동할 칸 movingInput에 담기*/
-  // async inputMoving(bridgeArr) {
-  //   let movingInput;
-  //   await inputView.readMoving()
-  //   .then(value => {
-  //     movingInput = value;
-  //   }).catch(error => Console.print(error.message));
-  //   return movingInput;
-  // }
 }
 
 const app = new App();
