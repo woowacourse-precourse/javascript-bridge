@@ -15,6 +15,7 @@ class BridgeGame {
     this.copy = [...bridge];
   }
   move(answer) {
+    answer = answer.toUpperCase();
     this.blankAdd();
     return this.checkAnswer(answer);
   }
