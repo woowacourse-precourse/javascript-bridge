@@ -1,3 +1,4 @@
+const { NUMBER, STRING, ERROR } = require('./Contents')
 
 const BridgeMaker = {
   /**
@@ -20,21 +21,24 @@ const BridgeMaker = {
   },
 
   exceptionHandler(size) {
-    if (size < 3 || size > 20) {
-      throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.')
+    if (size < NUMBER.SIZE_MIN || size > NUMBER.SIZE_MAX) {
+      throw new Error(ERROR.BRIDGE_RANGE)
     }
     if (isNaN(size)) {
-      throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.')
+      throw new Error(ERROR.BRIDGE_RANGE)
+    }
+    if (Number(size) % parseInt(size) !== 0) {
+      throw new Error(ONLY_INTEGER)
     }
   },
 
   formatBridge(numbers) {
     let bridge = numbers.map((number) => {
       if (number) {
-        return 'U'
+        return STRING.TOP_BRIDGE
       }
       if (!number) {
-        return 'D'
+        return STRING.BOTTOM_BRIDGE
       }
     })
 

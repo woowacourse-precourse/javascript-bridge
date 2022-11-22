@@ -1,12 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils')
-// 제공된 OutputView 객체를 활용해 구현해야 한다.
-// OutputView의 파일 경로는 변경할 수 있다.
-// OutputView의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
-// 값 출력을 위해 필요한 메서드를 추가할 수 있다.
-
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
+const { STRING, OUTPUT } = require('./Contents')
 const OutputView = {
   topMap: [],
 
@@ -18,10 +11,11 @@ const OutputView = {
   },
 
   printStart() {
-    Console.print('다리 건너기 게임을 시작합니다.\n')
+    Console.print(OUTPUT.START)
   },
 
-  selectMap(status, userInput) {
+  selectMap(userInput, status, count) {
+
     switch(status) {
     case 'success':
       this.makeSuccessMap(userInput)
@@ -30,67 +24,61 @@ const OutputView = {
       this.makeFailMap(userInput)
       break
     case 'finish':
-      this.makeFinishMap(userInput)
+      this.printResult(status, count, userInput)
     }
   },
 
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-
   makeSuccessMap(userInput) {
-    if (userInput === 'U') {
-      this.topMap.push('O')
-      this.buttomMap.push(' ')
+    if (userInput === STRING.TOP_BRIDGE) {
+      this.topMap.push(STRING.SUCCESS)
+      this.buttomMap.push(STRING.BLANK)
     }
-    if (userInput === 'D') {
-      this.topMap.push(' ')
-      this.buttomMap.push('O')
+    if (userInput === STRING.BOTTOM_BRIDGE) {
+      this.topMap.push(STRING.BLANK)
+      this.buttomMap.push(STRING.SUCCESS)
     }
     this.printMap()
   },
 
   makeFailMap(userInput) {
-    if (userInput === 'U') {
-      this.topMap.push('X')
-      this.buttomMap.push(' ')
+    if (userInput === STRING.TOP_BRIDGE) {
+      this.topMap.push(STRING.FAIL)
+      this.buttomMap.push(STRING.BLANK)
     }
-    if (userInput === 'D') {
-      this.topMap.push(' ')
-      this.buttomMap.push('X')
+    if (userInput === STRING.BOTTOM_BRIDGE) {
+      this.topMap.push(STRING.BLANK)
+      this.buttomMap.push(STRING.FAIL)
     }
     this.printMap()
   },
 
   makeFinishMap(userInput) {
-    Console.print('\n최종 게임 결과')
     this.makeSuccessMap(userInput)
-    Console.print('게임 성공 여부: 성공')
+    Console.print(OUTPUT.GAME_RESULT)
+    this.printMap()
+    Console.print(OUTPUT.SUCCESS)
   },
 
-  makeOverMap() {
-    Console.print('\n최종 게임 결과')
+  makeStopMap() {
+    Console.print(OUTPUT.GAME_RESULT)
     this.printMap()
-    Console.print('게임 성공 여부: 실패')
+    Console.print(OUTPUT.FAIL)
   },
 
   printMap() {
-    Console.print(`[ ${this.topMap.join(' | ')} ]\n[ ${this.buttomMap.join(' | ')} ]\n`)
+    Console.print(`[ ${this.topMap.join(' | ')} ]`)
+    Console.print(`[ ${this.buttomMap.join(' | ')} ]`)
   },
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult(answer, count) {
-    if (answer === 'Q') {
-      this.makeOverMap()
+  printResult(status, count, userInput) {
+    if (status === 'finish') {
+      this.makeFinishMap(userInput)
+    }
+    if (status === STRING.QUIT) {
+      this.makeStopMap()
     }
     
-    Console.print(`총 시도한 횟수: ${count}`)
+    Console.print(`${OUTPUT.FULL_COUNT} ${count}`)
     Console.close()
   },
 }
