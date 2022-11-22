@@ -12,25 +12,6 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-
-  // wrappingInput(message, callback) {
-  //   Console.readLine(
-  //     message,
-  //     this.wrappingLogic(callback, () => this.wrappingInput(message, callback))
-  //   );
-  // },
-
-  // wrappingLogic(logicFunction, errorFunction) {
-  //   return (input) => {
-  //     try {
-  //       logicFunction(input);
-  //     } catch (e) {
-  //       Console.print(e.message);
-  //       errorFunction(e);
-  //     }
-  //   };
-  // },
-
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요", (bridgesize) => {
       try {
