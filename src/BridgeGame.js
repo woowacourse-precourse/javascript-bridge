@@ -1,5 +1,6 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { MOVING, MAP, RESULT } = require('./constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -45,8 +46,8 @@ class BridgeGame {
   }
 
   getMap() {
-    const upFloorsMap = this.#getFloorsMap('U');
-    const downFloorsMap = this.#getFloorsMap('D');
+    const upFloorsMap = this.#getFloorsMap(MOVING.UP_FLOOR);
+    const downFloorsMap = this.#getFloorsMap(MOVING.DOWN_FLOOR);
 
     return { upFloorsMap, downFloorsMap };
   }
@@ -54,15 +55,15 @@ class BridgeGame {
   #getFloorsMap(type) {
     const floors = this.#history.map((floor, i) => {
       if (floor !== type) return ' ';
-      if (floor === this.#bridge[i]) return 'O';
-      if (floor !== this.#bridge[i]) return 'X';
+      if (floor === this.#bridge[i]) return MAP.SUCCESS;
+      if (floor !== this.#bridge[i]) return MAP.FAIL;
     });
 
     return `[ ${floors.join(' | ')} ]`;
   }
 
   getResult() {
-    const isCompleted = this.isFinal() && this.isSuccess() ? '성공' : '실패';
+    const isCompleted = this.isFinal() && this.isSuccess() ? RESULT.COMPLETE : RESULT.FAIL;
     const tryCount = String(this.#tryCount);
 
     return { isCompleted, tryCount };

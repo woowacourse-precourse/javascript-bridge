@@ -1,9 +1,9 @@
+const { GENERATE_NUMBER, MOVING } = require('./constants');
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
 const BridgeMaker = {
-  UP_FLOOR: 1,
-  DOWN_FLOOR: 0,
   /**
    * @param {number} size 다리의 길이
    * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
@@ -12,8 +12,8 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size }, () => {
       const number = generateRandomNumber();
-      if (number === BridgeMaker.UP_FLOOR) return 'U';
-      if (number === BridgeMaker.DOWN_FLOOR) return 'D';
+      if (number === GENERATE_NUMBER.UP_FLOOR) return MOVING.UP_FLOOR;
+      if (number === GENERATE_NUMBER.DOWN_FLOOR) return MOVING.DOWN_FLOOR;
     });
   },
 };

@@ -1,5 +1,6 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const { COMMAND } = require('./constants');
 
 const BridgeGameController = {
   run(bridgeGame) {
@@ -31,8 +32,8 @@ const BridgeGameController = {
 
   askRetry(bridgeGame) {
     InputView.readGameCommand((command) => {
-      if (command === 'R') return BridgeGameController.retry(bridgeGame);
-      if (command === 'Q') return BridgeGameController.end(bridgeGame);
+      if (command === COMMAND.RETRY) return BridgeGameController.retry(bridgeGame);
+      if (command === COMMAND.QUIT) return BridgeGameController.end(bridgeGame);
     });
   },
 
