@@ -50,7 +50,23 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    MissionUtils.Console.readLine(MESSAGE.INPUT.GAME_COMMAND, (answer) => {
+      try {
+        console.log(answer.toUpperCase()); // 삭제 가능
+        this.validateGameCommand(answer.toUpperCase());
+        callback(answer.toUpperCase());
+      } catch (error) {
+        console.error(error);
+        this.readGameCommand(callback);
+      }
+    });
+  },
+  validateGameCommand(gameCommand) {
+    if (gameCommand === WORD.RETRY || gameCommand === WORD.QUIT)
+      return gameCommand;
+    throw MESSAGE.ERROR.GAME_COMMAND;
+  },
 };
 
 module.exports = InputView;

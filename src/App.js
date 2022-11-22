@@ -4,6 +4,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const MapMaker = require("./MapMaker");
+const { WORD } = require("./Constants");
 
 class App {
   constructor() {
@@ -23,7 +24,6 @@ class App {
     InputView.readBridgeSize((bridgeSize) => {
       console.log("(callback 확인용) bridgeSize: ", bridgeSize);
       this.controlBridges(bridgeSize);
-      this.controlMoving();
     });
   }
 
@@ -31,7 +31,7 @@ class App {
     const bridges = BridgeMaker.makeBridge(bridgeSize, generate);
     this.bridgeGame = new BridgeGame(bridges);
     console.log("(확인용) bridges: ", this.bridgeGame.getBridges());
-    this.controlMoving;
+    this.controlMoving();
   }
 
   controlMoving() {
@@ -50,11 +50,20 @@ class App {
     OutputView.printMap(map);
     let isEnd = this.bridgeGame.isEnd();
     console.log("(확인용) isEnd: ", isEnd);
-    if (!isEnd) this.controlMoving();
-    else this.controlRetry;
+    if (!isMoving) this.controlRetry();
+    else if (isEnd) this.controlEnd();
+    else this.controlMoving();
   }
 
-  controlRetry() {}
+  controlRetry() {
+    console.log("controlRetry");
+    InputView.readGameCommand((gameCommand) => {
+      if (gameCommand === WORD.RETRY) this.bridgeGame.retry();
+      else this.controlEnd();
+    });
+  }
+
+  controlEnd() {}
 }
 
 const app = new App();

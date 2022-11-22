@@ -26,11 +26,11 @@ this.controlMoving()
 this.controlResult()
 MapMaker.makeMap()
 
-- [ ] [출력] 다리 건너기 결과를 출력한다.| OutputView#printMap()
+- [x] [출력] 다리 건너기 결과를 출력한다.| OutputView#printMap()
 - 다리를 끝까지 건너면 게임이 종료된다.
-  - [ ] [출력] 게임 종료 문구를 출력한다.| OutputView#printResult()
-- [ ] [입력] 다리를 건너다 실패하면 게임 재시작/종료 여부를 입력 받는다.| InputView#readGameCommand()
-  - [ ] [예외처리] 입력 받은 값이 R 또는 Q가 아닌 경우 예외 처리한다.| InputValidator#validateGameCommand(gameCommand)
+  - [x] [출력] 게임 종료 문구를 출력한다.| OutputView#printResult()
+- [x] [입력] 다리를 건너다 실패하면 게임 재시작/종료 여부를 입력 받는다.| InputView#readGameCommand()
+  - [x] [예외처리] 입력 받은 값이 R 또는 Q가 아닌 경우 예외 처리한다.| InputValidator#validateGameCommand(gameCommand)
 - [ ] 입력 받은 값이 R인 경우 게임을 재시작한다.| BridgeGame#retry()
 - [ ] 입력 받은 값이 Q인 경우 게임을 종료한다.
   - [ ] [출력] 게임 종료 문구를 출력한다.| OutputView#printResult()
