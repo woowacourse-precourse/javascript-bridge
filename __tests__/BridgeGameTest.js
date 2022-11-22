@@ -1,5 +1,9 @@
 const BridgeGame = require('../src/domain/BridgeGame');
 
+const mockBridgeGame = bridge => {
+  return new BridgeGame(bridge);
+};
+
 describe('다리 건너기 게임을 관리하는 클래스 테스트', () => {
   test.each([
     [['U'], [{ block: 'U', isCorrect: true }]],
@@ -28,8 +32,7 @@ describe('다리 건너기 게임을 관리하는 클래스 테스트', () => {
   ])(
     '사용자로부터 이동할 칸을 입력받아 이동할 수 있다.',
     (movingList, expected) => {
-      const bridge = ['U', 'D', 'D'];
-      const bridgeGame = new BridgeGame(bridge);
+      const bridgeGame = mockBridgeGame(['U', 'D', 'D']);
 
       movingList.forEach(moving => bridgeGame.move(moving));
 
@@ -38,8 +41,7 @@ describe('다리 건너기 게임을 관리하는 클래스 테스트', () => {
   );
 
   test('게임을 재시작할 경우 이동 내역을 초기화하고, 총 시도 횟수를 1 증가시킨다.', () => {
-    const bridge = ['U', 'D', 'D'];
-    const bridgeGame = new BridgeGame(bridge);
+    const bridgeGame = mockBridgeGame(['U', 'D', 'D']);
 
     bridgeGame.move('D');
     bridgeGame.retry();
@@ -54,8 +56,7 @@ describe('다리 건너기 게임을 관리하는 클래스 테스트', () => {
   ])(
     '사용자의 이동 성공 여부를 기반으로 게임의 재시작 여부를 판단한다.',
     (moving, expected) => {
-      const bridge = ['U', 'D', 'D'];
-      const bridgeGame = new BridgeGame(bridge);
+      const bridgeGame = mockBridgeGame(['U', 'D', 'D']);
 
       bridgeGame.move(moving);
 
@@ -72,8 +73,7 @@ describe('다리 건너기 게임을 관리하는 클래스 테스트', () => {
   ])(
     '사용자의 이동 내역을 기반으로 게임의 성공 여부를 판단한다.',
     (movingList, expected) => {
-      const bridge = ['U', 'D', 'D'];
-      const bridgeGame = new BridgeGame(bridge);
+      const bridgeGame = mockBridgeGame(['U', 'D', 'D']);
 
       movingList.forEach(moving => bridgeGame.move(moving));
 
