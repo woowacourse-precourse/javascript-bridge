@@ -19,6 +19,7 @@ const OutputView = {
     this.printMap(nowMap);
     Console.print(`${TEXT.IS_SUCCESS}: ${RESULT[isSuccess]}`);
     Console.print(`${TEXT.TOTAL_ATTEMPT_CNT}: ${attemptCnt}`);
+
     Console.close();
   },
 
