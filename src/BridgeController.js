@@ -14,6 +14,10 @@ class BridgeController {
 
     start() {
         this.outputView.printStart();
+        this.requestBridegeSize();
+    }
+    
+    requestBridegeSize() {
         this.inputView.readBridgeSize(this.createBridge.bind(this));
     }
 
@@ -29,8 +33,12 @@ class BridgeController {
     }
 
     bridgeSizeException(bridgeSize) {
-        Exception.isNotNumber(bridgeSize);
-        Exception.bridgeSizeOutofIndex(bridgeSize);
+        try{
+            Exception.isInvalidBridgeSize(bridgeSize);
+        } catch(err) {
+            this.outputView.printError(err);
+            this.requestBridegeSize();
+        }
     }
 
     createMoving(moving) {
@@ -45,18 +53,11 @@ class BridgeController {
     handleMovingResult(result) {
         this.bridgeGame.printBridge(this.outputView);
         switch (result) {
-            case 'next': { // 다음 칸 이동
-                this.requestMoving();
+            case 'next': this.requestMoving(); break;
+            case 'fail': this.requestRetry(); break;
+            case 'success': // 게임 성공
+                this.bridgeGame.printResults(this.outputView, true);
                 break;
-            }
-            case 'fail': { // 게임 실패
-                this.requestRetry();
-                break;
-            }
-            case 'success': { // 게임 성공
-                this.outputView.printResult();
-                break;
-            }
         }
     }
 
@@ -65,7 +66,20 @@ class BridgeController {
     }
 
     createRetry(command) {
-        // 재시작 여부 처리 함수
+        this.commandException(command);
+        this.handleRetryResult(this.bridgeGame.retry(command));   
+    }
+
+    handleRetryResult(result) {
+        if(result === 'retry') {
+            this.requestMoving();
+        } else if(result === 'quit') {
+            this.bridgeGame.printResults(this.outputView, false);
+        }
+    }
+
+    commandException(command) {
+        Exception.isInvalidCommand(command);
     }
 
 }

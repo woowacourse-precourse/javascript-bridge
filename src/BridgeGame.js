@@ -14,23 +14,25 @@ class BridgeGame {
   #bridgeInfo;
   #moveCnt;
   #moveInfo;
+  #tryCnt;
 
   constructor() {
     this.#bridgeInfo = [];
     this.#moveCnt = 0;
     this.#moveInfo = [];
+    this.#tryCnt = 1;
   }
 
   setBridge(bridge) {
     this.#bridgeInfo = bridge;
   }
 
-  setMoveCnt(count) {
-    this.#moveCnt = count;
-  }
-
   printBridge(outputView) {
     outputView.printMap(this.#moveInfo);
+  }
+
+  printResults(outputView, successFlag) {
+    outputView.printResult(this.#moveInfo, this.#tryCnt, successFlag);
   }
 
   /**
@@ -62,7 +64,20 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(command) {
+    if(command === 'R') {
+      this.retrySetting();
+      return 'retry';
+    } else if(command === 'Q') {
+      return 'quit';
+    }
+  }
+
+  retrySetting() {
+    this.#tryCnt += 1;
+    this.#moveCnt = 0;
+    this.#moveInfo = [];
+  }
 
 }
 
