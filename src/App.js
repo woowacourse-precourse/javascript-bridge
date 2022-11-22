@@ -13,10 +13,11 @@ class App {
   #bridge;
   #curBridge;
   #tryNum;
+  #bridgeIndex;
 
   constructor() {
     this.#tryNum = 1;
-    this.bridgeIndex = 0;
+    this.#bridgeIndex = 0;
   }
 
   play() {
@@ -30,7 +31,8 @@ class App {
 
   setBridge(size) {
     this.#bridgeSize = size;
-    if (!this.validateBridgeSize()) return this.getBridgeSize();
+    if (!this.validate(Validate.size, this.#bridgeSize))
+      return this.getBridgeSize();
     this.#bridge = BridgeMaker.makeBridge(
       this.#bridgeSize,
       BridgeRandomNumberGenerator.generate
@@ -44,25 +46,29 @@ class App {
   }
 
   doGame(moveInput) {
-    if (!this.validateMove(moveInput)) return this.getMove();
-    // 현재까지 건넌 다리 만들기
+    if (!this.validate(Validate.move, moveInput)) return this.getMove();
     this.#curBridge = this.#bridgeGame.makeCurBridge(
       moveInput,
-      this.bridgeIndex
+      this.#bridgeIndex
     );
     OutputView.printMap(this.#curBridge);
-    // 건널 수 없다면
-    if (!this.#bridgeGame.move(moveInput, this.bridgeIndex)) {
-      return this.getRetry();
-    }
-    // 다리를 끝까지 건너지 않았다면
-    if (this.bridgeIndex !== this.#bridgeSize - 1) {
-      this.bridgeIndex += 1;
-      return this.getMove();
-    }
-
+    this.isAbleToMove(moveInput);
+    this.isEndOfBridge();
     OutputView.printResult('성공', this.#curBridge, this.#tryNum);
     this.end();
+  }
+
+  isAbleToMove(moveInput) {
+    if (!this.#bridgeGame.move(moveInput, this.#bridgeIndex)) {
+      return this.getRetry();
+    }
+  }
+
+  isEndOfBridge() {
+    if (this.#bridgeIndex !== this.#bridgeSize - 1) {
+      this.#bridgeIndex += 1;
+      return this.getMove();
+    }
   }
 
   getRetry() {
@@ -70,9 +76,13 @@ class App {
   }
 
   doRetry(retryInput) {
-    if (!this.validateRetry(retryInput)) return this.getRetry();
+    if (!this.validate(Validate.retry, retryInput)) return this.getRetry();
+    this.judgeRetryResponse(retryInput);
+  }
+
+  judgeRetryResponse(retryInput) {
     if (retryInput === 'R') {
-      this.bridgeIndex = 0;
+      this.#bridgeIndex = 0;
       this.#tryNum += 1;
       this.#bridgeGame.retry();
       this.getMove();
@@ -83,29 +93,9 @@ class App {
     }
   }
 
-  validateBridgeSize() {
+  validate(callback, input) {
     try {
-      Validate.size(parseInt(this.#bridgeSize));
-      return true;
-    } catch (e) {
-      OutputView.printError(e.message);
-      return false;
-    }
-  }
-
-  validateMove(moveInput) {
-    try {
-      Validate.move(moveInput);
-      return true;
-    } catch (e) {
-      OutputView.printError(e.message);
-      return false;
-    }
-  }
-
-  validateRetry(retryInput) {
-    try {
-      Validate.retry(retryInput);
+      callback(input);
       return true;
     } catch (e) {
       OutputView.printError(e.message);
