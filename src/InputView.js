@@ -26,7 +26,7 @@ const InputView = {
       bridgeGame.move(moving);
       OutputView.printMap(bridgeGame);
       if (bridgeGame.isWin()) {
-        OutputView.printResult(bridgeGame.isWin(), bridgeGame.tryCount);
+        OutputView.printResult(bridgeGame);
       } else if (bridgeGame.isPlaying) {
         this.readMoving();
       } else {
@@ -45,7 +45,7 @@ const InputView = {
         bridgeGame.retry();
         this.readMoving();
       } else if (command === 'Q') {
-        OutputView.printResult(bridgeGame.isWin(), bridgeGame.tryCount);
+        OutputView.printResult(bridgeGame);
       }
     });
   },
