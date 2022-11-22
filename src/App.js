@@ -4,7 +4,7 @@ const Message = require("./Message");
 
 class App {
   play() {
-    Console.print(`${Message.START_MESSAGE.START_TEXT}\n`);1
+    Console.print(`${Message.START_MESSAGE.START_TEXT}\n`);
     InputView.readBridgeSize();
   }
 }

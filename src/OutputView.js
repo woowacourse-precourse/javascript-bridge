@@ -53,6 +53,7 @@ const OutputView = {
 
     Console.print(up);
     Console.print(down);
+    Console.print('\n');
 
   
 
