@@ -1,6 +1,7 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+const { CELL } = require("../model/component");
+let resultUp = [];
+let resultDown = [];
+
 class BridgeGame {
   constructor(upDown, computer, count) {
     this.upDown = upDown;
@@ -28,6 +29,9 @@ class BridgeGame {
     if (this.upDown === "U") {
       this.saveUp();
     }
+    if (this.upDown === "D") {
+      this.saveDown();
+    }
   }
 
   saveUp() {
@@ -38,6 +42,17 @@ class BridgeGame {
     if (this.computer[this.count] === "U") {
       resultUp.push(CELL.ONE);
       resultDown.push(" ");
+    }
+  }
+
+  saveDown() {
+    if (this.computer[this.count] !== "D") {
+      resultUp.push(" ");
+      resultDown.push(CELL.ZERO);
+    }
+    if (this.computer[this.count] === "D") {
+      resultUp.push(" ");
+      resultDown.push(CELL.ONE);
     }
   }
 
