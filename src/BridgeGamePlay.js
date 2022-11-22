@@ -7,10 +7,14 @@ const { RESULT } = require('./constant/constant');
  * 다리 건너기 게임 진행을 관리하는 클래스
  */
 class BridgeGamePlay {
+  #bridge;
+
+  #myMoves;
+
   constructor() {
     this.bridgeGame = new BridgeGame();
-    this.bridge = [];
-    this.myMoves = [];
+    this.#bridge = [];
+    this.#myMoves = [];
   }
 
   /**
@@ -19,7 +23,7 @@ class BridgeGamePlay {
   start() {
     OutputView.printStart();
     const bridgeSize = InputView.getBridgeSize();
-    this.bridge = this.bridgeGame.makeBridge(bridgeSize);
+    this.#bridge = this.bridgeGame.makeBridge(bridgeSize);
     this.playGame();
   }
 
@@ -27,27 +31,27 @@ class BridgeGamePlay {
    * 게임 한 판 진행
    */
   playGame() {
-    this.myMoves = [];
+    this.#myMoves = [];
     this.bridgeGame.addTryCount();
     this.move();
   }
 
   move() {
     const currentMove = InputView.getMoving();
-    this.myMoves.push(currentMove);
-    const result = this.bridgeGame.getMoveResult(this.myMoves, this.bridge);
+    this.#myMoves.push(currentMove);
+    const result = this.bridgeGame.getMoveResult(this.#myMoves, this.#bridge);
     OutputView.printMap(result);
-    if (this.bridgeGame.validateWin(this.myMoves, this.bridge)) {
+    if (this.bridgeGame.validateWin(this.#myMoves, this.#bridge)) {
       OutputView.printResult(result, RESULT.WIN, this.bridgeGame.getTryCount());
     }
     this.check(result);
   }
 
   check(result) {
-    if (!this.bridgeGame.validateMove(this.myMoves, this.bridge)) {
+    if (!this.bridgeGame.validateMove(this.#myMoves, this.#bridge)) {
       this.checkRetry(result, InputView.getGameCommand());
     }
-    if (this.bridgeGame.checkIfCanMove(this.myMoves, this.bridge)) {
+    if (this.bridgeGame.checkIfCanMove(this.#myMoves, this.#bridge)) {
       this.move();
     }
   }
