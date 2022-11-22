@@ -30,6 +30,10 @@ class App {
       this.#userGame.move(userMove);
     });
     OutputView.printMap(this.#userGame.getCurrentBridge());
+    this.gameover();
+  }
+
+  gameover() {
     if (!this.#userGame.checkUserPath()) {
       InputView.readGameCommand((input) => this.regame(input));
       return;
@@ -49,7 +53,7 @@ class App {
       }
     } catch (e) {
       Console.print(e);
-      this.regame(input);
+      this.gameover();
     }
   }
 
