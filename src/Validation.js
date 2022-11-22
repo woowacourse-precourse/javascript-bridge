@@ -1,6 +1,7 @@
 const {
   BRIDGE_LENGTH_NOT_NUMBE_ERROR,
   BRIDGE_LENGTH_RANGE_OUT_ERROR,
+  MOVE_COMMAND_ELSE_CHAR_ERROR,
 } = require("./Constant");
 
 const Validation = {
@@ -10,6 +11,12 @@ const Validation = {
     }
     if (Number(input) < 3 || Number(input) > 20) {
       throw new Error(BRIDGE_LENGTH_RANGE_OUT_ERROR);
+    }
+  },
+
+  moveCommandValidation(input) {
+    if (input !== "U" && input !== "D") {
+      throw new Error(MOVE_COMMAND_ELSE_CHAR_ERROR);
     }
   },
 };

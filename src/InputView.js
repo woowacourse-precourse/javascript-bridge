@@ -3,7 +3,12 @@ const { makeBridge } = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const {
   BRIDGE_LENGTH_QUERY,
+  MOVE_COMMAND_QUERY,
+  MOVE_SUCCESS,
+  MOVE_FAIL,
+  MOVE_END,
 } = require("./Constant");
+const OutputView = require("./OutputView");
 const Validation = require("./Validation");
 
 /**
@@ -46,7 +51,36 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+   readMoving(gameManager) {
+    MissionUtils.Console.readLine(
+      `\n${MOVE_COMMAND_QUERY}\n`,
+      this.readMovingCallBack(gameManager)
+    );
+  },
+
+  readMovingCallBack(gameManager) {
+    return (answer) => {
+      try {
+        this.readMovingNormalWork(gameManager, answer);
+      } catch (error) {
+        this.readMovingErrorWork(gameManager, error);
+      }
+    };
+  },
+
+  readMovingNormalWork(gameManager, answer) {
+    Validation.moveCommandValidation(answer);
+    const moveResult = gameManager.move(answer);
+    OutputView.printMap(gameManager.getBridge(),gameManager.getOrder(),moveResult === "FAIL");
+    if (moveResult === MOVE_SUCCESS) this.readMoving(gameManager);
+    if (moveResult === MOVE_FAIL) this.readGameCommand(gameManager);
+    if (moveResult === MOVE_END) OutputView.printResult(gameManager, true);
+  },
+
+  readMovingErrorWork(gameManager, error) {
+    MissionUtils.Console.print(error);
+    this.readMoving(gameManager);
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
