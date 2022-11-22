@@ -26,10 +26,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {
+  printResult({ gameResult, gametry }) {
     Console.print(RESULT_MESSAGE.resultMessage);
-    Console.print(RESULT_MESSAGE.successInfo);
-    Console.print(RESULT_MESSAGE.tryCount);
+    Console.print(RESULT_MESSAGE.successInfo + gameResult);
+    Console.print(RESULT_MESSAGE.tryCount + gametry);
 
     Console.close();
   },

@@ -24,6 +24,9 @@ class BridgeGame {
   #bridgeViewTop = [];
   #bridgeViewBottom = [];
 
+  #gameResult;
+  #gametry = 1;
+
   gameStart() {
     printMessage(INFO_MESSAGE.start);
     InputView.readBridgeSize(INPUT_MESSAGE.bridgeLength, (input) => {
@@ -89,6 +92,9 @@ class BridgeGame {
   }
 
   nextTurn(userCanGo) {
+    this.#gameResult = !userCanGo
+      ? RESULT_MESSAGE.isFail
+      : RESULT_MESSAGE.isSuccess;
     userCanGo && !this.isCrossAllBridge()
       ? this.userMoving()
       : this.retryOrEnd();
@@ -109,11 +115,15 @@ class BridgeGame {
   }
 
   retryGame() {
+    this.#gametry += 1;
     this.resetUserBridges();
     this.userMoving();
   }
   endGame() {
-    OutputView.printResult();
+    OutputView.printResult({
+      gameResult: this.#gameResult,
+      gametry: this.#gametry,
+    });
   }
 
   resetUserBridges() {
