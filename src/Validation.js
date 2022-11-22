@@ -20,6 +20,16 @@ const Validation = {
       throw new Error(ERROR.MOVING_MUST_BE_U_OR_D);
     }
   },
+
+  isValidCommand(command) {
+    if (!command) return;
+    if (command.length >= 2 || command.length < 1) {
+      throw new Error(ERROR.COMMAND_MUST_BE_ONE_LETTER);
+    }
+    if (moving.match(/[^RQ]/g)) {
+      throw new Error(ERROR.COMMAND_MUST_BE_R_OR_Q);
+    }
+  },
 }
 
 module.exports = Validation;
