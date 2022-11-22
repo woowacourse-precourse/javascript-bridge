@@ -49,6 +49,12 @@ class BridgeGame {
     this.count++;
   }
 
+  getResult() {
+    const isCompleted = this.canMove() && this.checkDone() ? '성공' : '실패';
+    const count = String(this.count);
+
+    return { isCompleted, count };
+  }
 }
 
 module.exports = BridgeGame;
