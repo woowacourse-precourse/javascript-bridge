@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const InterfaceView = require('./InterFaceView');
+const { ERROR } = require('../Constants');
 
 const { Console } = MissionUtils;
 /**
@@ -19,8 +20,8 @@ const OutputView = class extends InterfaceView {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
 
-  printMap(message) {
-    throw new Error('메서드 구현 요망');
+  printMap(upsideBridge, downsideBridge) {
+    throw new Error(ERROR.INTERFACE.METHOD);
   }
 
   /**
@@ -28,8 +29,8 @@ const OutputView = class extends InterfaceView {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(message) {
-    throw new Error('메서드 구현 요망');
+  printResult(userLife, attemptNumber) {
+    throw new Error(ERROR.INTERFACE.METHOD);
   }
 };
 
