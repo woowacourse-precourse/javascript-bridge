@@ -13,15 +13,19 @@ const InputView = {
 
   validateBridgeSize(bridgeSize) {
     try {
-      if (/[^0-9]/.test(bridgeSize)) throw MESSAGE_ERROR.BRIDGE_ONLY_NUMBER;
-      if (Number(bridgeSize) < BRIDGE_SIZE_RANGE.MIN || Number(bridgeSize) > BRIDGE_SIZE_RANGE.MAX) {
-        throw MESSAGE_ERROR.BRIDGE_OUT_OF_RANGE;
-      }
+      this.exceptionBridgeSize(bridgeSize);
       this.setBridgeSize(bridgeSize);
     } catch(e) {
       OutputView.printError(e);
       this.readBridgeSize();
     }
+  },
+
+  exceptionBridgeSize(bridgeSize) {
+    if (/[^0-9]/.test(bridgeSize)) throw MESSAGE_ERROR.BRIDGE_ONLY_NUMBER;
+      if (Number(bridgeSize) < BRIDGE_SIZE_RANGE.MIN || Number(bridgeSize) > BRIDGE_SIZE_RANGE.MAX) {
+        throw MESSAGE_ERROR.BRIDGE_OUT_OF_RANGE;
+      }
   },
 
   setBridgeSize(bridgeSize) {
@@ -35,13 +39,17 @@ const InputView = {
 
   valitateMoving(moving) {
     try {
-      if (moving.length !== 1) throw MESSAGE_ERROR.MOVING_ONLY_CHAR;
-      if (moving !== MOVING.UP && moving !== MOVING.DOWN ) throw MESSAGE_ERROR.MOVING_ONLY_U_OR_D;
+      this.exceptionMoving(moving);
       this.setMoving(moving);
     } catch(e) {
       OutputView.printError(e);
       this.readMoving();
     }
+  },
+
+  exceptionMoving(moving) {
+    if (moving.length !== 1) throw MESSAGE_ERROR.MOVING_ONLY_CHAR;
+    if (moving !== MOVING.UP && moving !== MOVING.DOWN ) throw MESSAGE_ERROR.MOVING_ONLY_U_OR_D;
   },
 
   setMoving(moving) {
@@ -63,14 +71,18 @@ const InputView = {
 
   valitateGameCommand(command) {
     try {
-      if (command.length !== 1) throw MESSAGE_ERROR.GAME_COMMAND_ONLY_CHAR;
-      if (command !== GAME_COMMAND.RETRY && command !== GAME_COMMAND.QUIT ) {
-        throw MESSAGE_ERROR.GAME_COMMAND_ONLY_R_OR_Q;
-      }
+      this.exceptionGameCommand(command);
       this.setGameCommand(command);
     } catch(e) {
       OutputView.printError(e);
       this.readGameCommand();
+    }
+  },
+
+  exceptionGameCommand(command) {
+    if (command.length !== 1) throw MESSAGE_ERROR.GAME_COMMAND_ONLY_CHAR;
+    if (command !== GAME_COMMAND.RETRY && command !== GAME_COMMAND.QUIT ) {
+      throw MESSAGE_ERROR.GAME_COMMAND_ONLY_R_OR_Q;
     }
   },
 
