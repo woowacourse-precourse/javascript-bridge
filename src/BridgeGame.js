@@ -23,12 +23,19 @@ class BridgeGame {
   get bridgeString() {
     return this.#bridgeString;
   }
+
+  set bridgeString(str) {
+    this.#bridgeString = str;
+  }
+
   get userInputString() {
     return this.#userInputString;
   }
+
   get isAnswerList() {
     return this.#isAnswerList;
   }
+
   get try() {
     return this.#try;
   }
@@ -36,11 +43,13 @@ class BridgeGame {
   plusRound = () => {
     this.#round += 1;
   };
-
+  /**
+   * number만큼 bridge를 생성하는 메서드
+   * @param {number} bridgeSize 
+   */
   bridgeSetting = (bridgeSize) => {
     this.#bridgeString = makeBridge(bridgeSize, generate).join('');
   };
-  
   /**
    *
    * @param {char} userChar
@@ -65,11 +74,11 @@ class BridgeGame {
     }
   }
   /**
-   * 
+   * 해당 라운드의 결과가 O인지, X인지, 아니면 게임이 종료되었는지의 상태를 리턴하는 메서드
    * @param {char} answerChar
    * @param {char} userChar
    * @returns {string} STATUS
-   * 해당 라운드의 결과가 O인지, X인지, 아니면 게임이 종료되었는지의 상태를 리턴한다
+   * 
    */
   checkStatus(answerChar, userChar) {
     const total_round = this.#bridgeString.length;
@@ -84,8 +93,7 @@ class BridgeGame {
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * 
    */
   retry() {
     //bridge 초기화

@@ -56,6 +56,11 @@ const InputView = {
       }
     });
   },
+  
+  /**
+   * status에 따라 다음에 해야할 일을 수행하는 메서드
+   * @param {string} status 
+   */
   doAfterCheck(status) {
     switch (status) {
       case STATUS_SUCCESS:
@@ -70,6 +75,9 @@ const InputView = {
         break;
     }
   },
+  /**
+   * 다시 시도할지 물어볼 때 사용하는 메서드
+   */
   askRetry() {
     this.readGameCommand((input) => {
       if (input === RETRY) {
