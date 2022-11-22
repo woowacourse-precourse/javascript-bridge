@@ -11,7 +11,7 @@ const notNumber = (input) => {
             throw new Error('[ERROR] 숫자만 입력해주세요.');
         }
     } catch (e) {
-        MissionUtils.Console.print(e);
+        MissionUtils.Console.print(e.message);
         return false;
     }
 }
@@ -22,7 +22,7 @@ const lengthCheck = (input) => {
             throw new Error('[ERROR] 3 이상 20 이하의 숫자를 입력해주세요.');
         }
     } catch (e) {
-        MissionUtils.Console.print(e);
+        MissionUtils.Console.print(e.message);
         return false;
     }
 }
