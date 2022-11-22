@@ -52,8 +52,8 @@ class BridgeGame {
   }
 
   retry() {
-    this.#array[0] = this.#array[0].slice(0, this.#array[0].length - 1);
-    this.#array[1] = this.#array[1].slice(0, this.#array[1].length - 1);
+    this.#array[0] = [];
+    this.#array[1] = [];
     this.#rightAnswer = false;
   }
 }
