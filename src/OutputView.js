@@ -42,8 +42,8 @@ const OutputView = {
       }
     });
 
-    Console.print(`[${upBridge.join("|")}]`);
-    Console.print(`[${downBridge.join("|")}]`);
+    Console.print(`[ ${upBridge.join(" | ")} ]`);
+    Console.print(`[ ${downBridge.join(" | ")} ]`);
   },
 
   /**
@@ -51,7 +51,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(result, gameCount) {
+    Console.print(`게임 성공 여부: ${result ? "성공" : "실패"}`);
+    Console.print(`총 시도한 횟수: ${gameCount}`);
+  },
 };
 
 module.exports = OutputView;
