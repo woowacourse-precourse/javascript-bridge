@@ -20,7 +20,7 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    * @param callbackFunction {callbackFunction} [실행될 콜백 함수]
-   * @param controller [컨트롤러]
+   * @param controller {object} [컨트롤러]
    */
   readMoving(callbackFunction, controller) {
     Console.readLine(USER_MOVE_MESSAGES.INPUT, (movingInput) =>
@@ -31,11 +31,12 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    * @param callbackFunction {callbackFunction} [실행될 콜백 함수]
-   * @param controller [컨트롤러]
+   * @param controller {object} [컨트롤러]
+   * @param userMoving {string[]} [유저 이동기록]
    */
-  readGameCommand(callbackFunction, controller) {
+  readGameCommand(callbackFunction, controller, userMoving) {
     Console.readLine(USER_RESTART_MESSAGES.INPUT, (restartInput) =>
-      callbackFunction(restartInput, controller)
+      callbackFunction(restartInput, controller, userMoving)
     );
   },
 };
