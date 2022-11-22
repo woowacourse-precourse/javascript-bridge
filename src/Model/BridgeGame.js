@@ -1,7 +1,9 @@
 const Move = require('./Move');
+const Path = require('./Path');
 const Bridge = require('./Bridge');
 const NUMBER = require('../constants/number');
 const COMMAND = require('../constants/command');
+const SYSTEM_MESSAGE = require('../constants/system message');
 
 class BridgeGame {
   #playCount;
@@ -19,21 +21,41 @@ class BridgeGame {
     Move.init();
   }
 
+  static makePath() {
+    const size = Bridge.getSize();
+    Path.makePath(size);
+  }
+
   static mapBridge() {
     const moveCount = Move.getCount();
     return Bridge.makeValidForm(moveCount);
+  }
+
+  static move(direction) {
+    const moveCount = Move.getCount();
+    const currentPosition = Path.positionOf(moveCount);
+    const moveResult = Move.calculateMoveResult(currentPosition, direction);
+
+    Move.updateCurrentMove(moveResult);
+    Bridge.setMoveResult(direction, moveResult, moveCount);
+  }
+
+  static isPassed() {
+    const isArrived = Move.getCount() === Path.getPathSize();
+    return !!(isArrived && Move.canMove());
+  }
+
+  static showSucceedMessage() {
+    return this.isPassed() ? SYSTEM_MESSAGE.SUCCESS : SYSTEM_MESSAGE.FAIL;
   }
 
   static keepPlay(command) {
     return command === COMMAND.REPLAY;
   }
 
-  static move(direction) {
-    Move.byDirection(direction);
-  }
-
   retry() {
     this.#playCount += NUMBER.ONE;
+    BridgeGame.init();
   }
 }
 

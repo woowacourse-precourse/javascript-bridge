@@ -27,10 +27,10 @@ class Bridge {
     });
   }
 
-  static makeValidForm(countIndex) {
+  static makeValidForm(moveCount) {
     return COMMAND.DIRECTIONS.map((direction) => {
       const validBridgeForm = this.#bridge[direction]
-        .slice(NUMBER.ZERO, countIndex)
+        .slice(NUMBER.ZERO, moveCount)
         .join(STRING.VERTICAL_BAR);
       return `${STRING.LEFT_BAR} ${validBridgeForm} ${STRING.RIGHT_BAR}`;
     });

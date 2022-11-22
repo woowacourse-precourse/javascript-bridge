@@ -25,15 +25,15 @@ class GameController {
   validateSize(size) {
     if (Validate.bridgeSize(size)) {
       Bridge.setSize(size);
-      this.makeBridge(size);
+      this.init(size);
     } else {
       this.readSize();
     }
   }
 
-  makeBridge() {
-    Path.makePath();
+  init() {
     BridgeGame.init();
+    BridgeGame.makePath();
     this.readDirection();
   }
 
@@ -58,11 +58,11 @@ class GameController {
     const bridgeMap = BridgeGame.mapBridge();
 
     OutputView.printMap(bridgeMap);
-    this.checkArrive();
+    this.checkPassed();
   }
 
-  checkArrive() {
-    if (Move.isArrived()) {
+  checkPassed() {
+    if (BridgeGame.isPassed()) {
       this.end();
     } else {
       this.checkMove();
@@ -92,7 +92,6 @@ class GameController {
   checkRetry(command) {
     if (BridgeGame.keepPlay(command)) {
       this.#bridgeGame.retry();
-      BridgeGame.init();
       this.readDirection();
     } else {
       this.end();
@@ -102,9 +101,9 @@ class GameController {
   end() {
     const bridgeMap = BridgeGame.mapBridge();
     const playCount = this.#bridgeGame.getPlayCount();
-    const sucessMessage = Move.isSuccess();
+    const successMessage = BridgeGame.showSucceedMessage();
 
-    OutputView.printResult(bridgeMap, playCount, sucessMessage);
+    OutputView.printResult(bridgeMap, playCount, successMessage);
   }
 }
 
