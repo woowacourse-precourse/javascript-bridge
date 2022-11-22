@@ -39,14 +39,8 @@ const InputView = {
   readGameCommand(bridgeGame, step, app) {
     Console.readLine(`\n${MESSAGE.ENTER_GAME_COMMAND}\n`, (inputStr) => {
       const gameCommand = validateGameCommand(inputStr);
-      switch (gameCommand) {
-        case 'R':
-          bridgeGame.retry(app);
-          break;
-        case 'Q':
-          app.printResult(bridgeGame, step, false);
-          break;
-      }
+      if (gameCommand === 'R') bridgeGame.retry(app);
+      else if (gameCommand === 'Q') app.printResult(bridgeGame, step, false);
     });
   },
 };
