@@ -7,10 +7,9 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
 
-    while (size > 0) {
+    for (let step = 0; step < size; step++) {
       const direction = Number(generateRandomNumber()) === 1 ? 'U' : 'D';
       bridge.push(direction);
-      size -= 1;
     }
 
     return bridge;
