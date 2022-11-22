@@ -14,6 +14,8 @@ class App {
       const moveResult = bridgeGame.move(direction)
 
       const map = bridgeGame.getMap()
+      
+      OutputView.printMap(map)
 
       if(!moveResult){
         const retryInput = await InputView.readGameCommand()
@@ -23,9 +25,11 @@ class App {
           break;
         }
       }
-      OutputView.printMap(map)
-    }
 
+      if(bridgeGame.isEnd())break
+    }
+    
+    OutputView.printResult(bridgeGame.getResult(), bridgeGame.getMap())
   }
 }
 
