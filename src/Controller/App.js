@@ -46,12 +46,16 @@ class App {
         return this.requestMoving();
       }
 
-      const [canCross, playerUpperState, playerLowerState] =
-        this.bridgeGame.move(direction);
-      this.printCurrBridgeState(playerUpperState, playerLowerState);
-
-      this.calculateNextStep(canCross, playerUpperState);
+      this.moving(direction);
     });
+  }
+
+  moving(direction) {
+    const [canCross, playerUpperState, playerLowerState] =
+      this.bridgeGame.move(direction);
+
+    this.printCurrBridgeState(playerUpperState, playerLowerState);
+    this.calculateNextStep(canCross, playerUpperState);
   }
 
   printCurrBridgeState(playerUpperBridgeState, playerLowerBridgeState) {
@@ -76,7 +80,7 @@ class App {
       command === GAME_OPTION.REPLAY ? this.retry() : this.quit();
     });
   }
-  
+
   retry() {
     this.bridgeGame.retry();
     this.requestMoving();
