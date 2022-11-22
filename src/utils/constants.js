@@ -21,28 +21,28 @@ const ERROR = Object.freeze({
   mustBeValidCommand: '[ERROR] R (재시도) 와 Q (종료) 중에서만 입력해주세요.',
 });
 
-const LINE_BREAK = '';
-const RETRY = 'R';
-const QUIT = 'Q';
-const LOWERCASE_RETRY = 'r';
-const LOWERCASE_QUIT = 'q';
-const UP = 'U';
-const DOWN = 'D';
-const LOWERCASE_UP = 'u';
-const LOWERCASE_DOWN = 'd';
-const SUCCESS = '성공';
-const FAIL = '실패';
-const ONE_TIME = 1;
-const STARTING_POINT = '[ ';
-const FINISHING_POINT = ' ]';
-const EDGE = ' | ';
-const CROSSED = 'O';
-const BLOCKED = 'X';
-const BLANK = ' ';
-const NUMBER_TO_MOVE_UP = 1;
-const MIN_SIZE = 3;
-const MAX_SIZE = 20;
-const ZERO = 0;
+const LINE_BREAK = Object.freeze('');
+const RETRY = Object.freeze('R');
+const QUIT = Object.freeze('Q');
+const LOWERCASE_RETRY = Object.freeze('r');
+const LOWERCASE_QUIT = Object.freeze('q');
+const UP = Object.freeze('U');
+const DOWN = Object.freeze('D');
+const LOWERCASE_UP = Object.freeze('u');
+const LOWERCASE_DOWN = Object.freeze('d');
+const SUCCESS = Object.freeze('성공');
+const FAIL = Object.freeze('실패');
+const ONE_TIME = Object.freeze(1);
+const STARTING_POINT = Object.freeze('[ ');
+const FINISHING_POINT = Object.freeze(' ]');
+const EDGE = Object.freeze(' | ');
+const CROSSED = Object.freeze('O');
+const BLOCKED = Object.freeze('X');
+const BLANK = Object.freeze(' ');
+const NUMBER_TO_MOVE_UP = Object.freeze(1);
+const MIN_SIZE = Object.freeze(3);
+const MAX_SIZE = Object.freeze(20);
+const ZERO = Object.freeze(0);
 
 module.exports = {
   MESSAGE,
