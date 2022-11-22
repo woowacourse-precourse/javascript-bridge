@@ -1,7 +1,9 @@
+const ERROR = require("./util/Error");
+
 const Validator = {
   isNotANumber(input) {
     if (isNaN(input)) {
-      throw new Error("[ERROR] 다리 개수는 숫자로 입력하셔야 합니다.");
+      throw new Error(ERROR.IS_NOT_A_NUMBER);
       return true;
     }
     return false;
@@ -9,7 +11,7 @@ const Validator = {
 
   isRangeIn(start, end, input) {
     if (start > input || input > end) {
-      throw new Error("[ERROR] 3부터 20사이의 숫자만 입력하셔야 합니다.");
+      throw new Error(ERROR.IS_NOT_RANGE_IN);
       return false;
     }
     return true;
@@ -17,7 +19,7 @@ const Validator = {
 
   isMoveInputValidate(input) {
     if (input !== "U" || input !== "D") {
-      throw new Error("[ERROR] 이동할 칸은 U 또는 D로 입력하셔야 합니다.");
+      throw new Error(ERROR.IS_NOT_VALID_MOVE);
       return false;
     }
     return true;
@@ -25,7 +27,7 @@ const Validator = {
 
   isRestartInputValidate(input) {
     if (input !== "R" || input !== "Q") {
-      throw new Error("[ERROR] 재시작 여부는 R 또는 Q로 입력하셔야 합니다.");
+      throw new Error(ERROR.IS_NOT_VALID_RESTART);
       return false;
     }
     return true;
