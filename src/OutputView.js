@@ -33,23 +33,25 @@ const OutputView = {
   },
 
   makeFailMap(bridge, direction){
-    const{upBridge, downBridge} = this.makeBridge(bridge)
-    if(direction==='U'){
-      downBridge.push('X')
-      upBridge.push(' ')
-    }else{
-      upBridge.push('X')
-      downBridge.push('O')
+    const {upBridge, downBridge} = this.makeBridge(bridge.slice(0,bridge.length))
+    const [upBlock, downBlock] = this.makeFailBlock(direction)
+    const upLine = [...upBridge, upBlock]
+    const downLine = [...downBridge, downBlock]
+    return {upLine, downLine}
+  },
+  makeFailBlock(direction){
+    if(direction === 'U'){
+      return ['X', ' ']
     }
-    return {upBridge, downBridge}
+    return [' ','X']
   },
   printFailMap(bridge, direction){
-    const {upBridge,downBridge} = this.makeFailMap(bridge, direction)
-    Console.print(this.makeMap(upBridge))
-    Console.print(this.makeMap(downBridge) + '\n')
+    const {upLine,downLine} = this.makeFailMap(bridge, direction)
+    Console.print(this.makeMap(upLine))
+    Console.print(this.makeMap(downLine) + '\n')
   },
 
-  /**
+  /**ㅃ
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
