@@ -12,6 +12,12 @@ const GAME_MESSAGE = deepFreeze({
   attempts: (count) => `총 시도한 횟수: ${count}`,
 });
 
+const MAP_ROW_MESSAGE = deepFreeze({
+  open: '[',
+  join: ' | ',
+  close: ']'
+})
+
 const DIRECTION = deepFreeze({
   1: 'U',
   0: 'D',
@@ -38,5 +44,6 @@ module.exports = {
   STEP_TYPE,
   GAME_COMMAND,
   MIN_SIZE,
-  MAX_SIZE
+  MAX_SIZE,
+  MAP_ROW_MESSAGE
 };
