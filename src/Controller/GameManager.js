@@ -1,11 +1,11 @@
-const OutputView = require('./View/OutputView');
-const InputView = require('./View/InputView');
-const BridgeGame = require('./Model/BridgeGame');
+const OutputView = require('../View/OutputView');
+const InputView = require('../View/InputView');
+const BridgeGame = require('../Model/BridgeGame');
 const {
   BridgeLengthInput,
   DirectionChoiceInput,
   RetryInput,
-} = require('./Validator/Validator');
+} = require('../Validator/Validator');
 const { Console } = require('@woowacourse/mission-utils');
 
 class GameManager {
