@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MAP, MESSAGE } = require('./constants');
+const Map = require('./Map');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -12,42 +13,10 @@ const OutputView = {
    */
   printMap(bridgeGame, step, isMovable) {
     const [previousSteps, currentStep] = bridgeGame.getStepsSoFar(step);
-    let up = `${MAP.BEGINNING_OF_THE_BRIDGE}`;
-    let down = `${MAP.BEGINNING_OF_THE_BRIDGE}`;
-    for (let i = 0; i < step; ++i) {
-      switch (previousSteps.charAt(i)) {
-        case 'U':
-          up += `${MAP.MOVABLE}${MAP.DIVISION_OF_THE_BRIDGE}`;
-          down += `${MAP.UNSELECTED}${MAP.DIVISION_OF_THE_BRIDGE}`;
-          break;
-        case 'D':
-          up += `${MAP.UNSELECTED}${MAP.DIVISION_OF_THE_BRIDGE}`;
-          down += `${MAP.MOVABLE}${MAP.DIVISION_OF_THE_BRIDGE}`;
-          break;
-      }
-    }
-
-    switch (currentStep) {
-      case 'U':
-        if (isMovable) {
-          up += `${MAP.MOVABLE}${MAP.END_OF_THE_BRIDGE}`;
-          down += `${MAP.UNSELECTED}${MAP.END_OF_THE_BRIDGE}`;
-        } else {
-          up += `${MAP.UNSELECTED}${MAP.END_OF_THE_BRIDGE}`;
-          down += `${MAP.UNMOVABLE}${MAP.END_OF_THE_BRIDGE}`;
-        }
-        break;
-      case 'D':
-        if (isMovable) {
-          up += `${MAP.UNSELECTED}${MAP.END_OF_THE_BRIDGE}`;
-          down += `${MAP.MOVABLE}${MAP.END_OF_THE_BRIDGE}`;
-        } else {
-          up += `${MAP.UNMOVABLE}${MAP.END_OF_THE_BRIDGE}`;
-          down += `${MAP.UNSELECTED}${MAP.END_OF_THE_BRIDGE}`;
-        }
-        break;
-    }
-
+    const map = new Map();
+    map.printPreviousSteps(previousSteps, step);
+    map.printCurrentStep(currentStep, isMovable);
+    const { up, down } = map.getMap();
     Console.print(`${up}\n${down}`);
   },
 
