@@ -13,14 +13,31 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(bridge) {
+    let bridgePrint = '[';
+    for (let i = 0; i < bridge.length; i++) {
+      bridgePrint += bridge[i];
+      if (i !== bridge.length - 1) bridgePrint += '|';
+    }
+    bridgePrint += ']';
+    Console.print(bridgePrint);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridgeGame) {
+    Console.print(`${GAME_MESSAGES.GAME_RESULT}`);
+    this.printMap(bridgeGame.upBridge);
+    this.printMap(bridgeGame.downBridge);
+    if (bridgeGame.moveAvailable === 'O')
+      Console.print(`${GAME_MESSAGES.GAME_WIN}`);
+    if (bridgeGame.moveAvailable === 'X')
+      Console.print(`${GAME_MESSAGES.GAME_LOSE}`);
+    Console.print(`${GAME_MESSAGES.GAME_TRY}${bridgeGame.gameTry}`);
+  },
 };
 
 module.exports = OutputView;

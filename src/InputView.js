@@ -11,7 +11,7 @@ const InputView = {
   readBridgeSize() {
     let bridgeSize;
 
-    Console.readLine(`${GAME_MESSAGES.INPUT_BRIDGESIZE}`, inputBridgeSize => {
+    Console.readLine(`${GAME_MESSAGES.INPUT_BRIDGE_SIZE}`, inputBridgeSize => {
       this.validateBridgeSize(inputBridgeSize);
       bridgeSize = inputBridgeSize;
     });
@@ -42,12 +42,62 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    let gameMove;
+
+    Console.readLine(`${GAME_MESSAGES.INPUT_GAME_MOVE}`, inputMove => {
+      this.validateMoving(inputMove);
+      gameMove = inputMove;
+    });
+
+    return gameMove;
+  },
+
+  validateMoving(gameMove) {
+    if (gameMove !== 'U' && gameMove !== 'D') {
+      throw new Error(`${ERROR_MESSAGES.VALID_MOVE}`);
+    }
+  },
+
+  getMoving() {
+    let gameMove;
+    try {
+      gameMove = this.readMoving();
+    } catch (error) {
+      Console.print(error.message);
+      this.getMoving();
+    }
+    return gameMove;
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    let gameCommand;
+
+    Console.readLine(`${GAME_MESSAGES.INPUT_GAME_RETRY}`, inputCommand => {
+      this.validateCommand(inputCommand);
+      gameCommand = inputCommand;
+    });
+  },
+
+  validateCommand(inputCommand) {
+    if (inputCommand !== 'R' && gameMove !== 'Q') {
+      throw new Error(`${ERROR_MESSAGES.VALID_MOVE}`);
+    }
+  },
+
+  getCommand() {
+    let gameCommand;
+    try {
+      gameCommand = this.readGameCommand();
+    } catch (error) {
+      Console.print(error.message);
+      this.getCommand();
+    }
+    return gameCommand;
+  },
 };
 
 module.exports = InputView;
