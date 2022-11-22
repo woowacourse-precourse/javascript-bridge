@@ -12,3 +12,14 @@ describe('다리 예외 케이스', () => {
     });
   });
 });
+
+describe('사용자 움직임 예외 케이스', () => {
+  test.each(['A', 'd'])(
+    '사용자 움직임으로 U와 D를 제외한 값이 들어오면 에러가 발생한다.',
+    (input) => {
+      expect(() => {
+        validateMove(input).toThrow('[ERROR]');
+      });
+    },
+  );
+});
