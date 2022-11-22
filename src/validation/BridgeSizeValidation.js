@@ -1,4 +1,4 @@
-const { SizeConstraints } = require('../Constraints');
+const SizeConstraints = require('../constraints/SizeConstraints');
 
 class BridgeSizeValidation {
 	constructor(size) {

@@ -1,8 +1,6 @@
-const {
-	SizeConstraints,
-	MoveConstraints,
-	CommandConstraints,
-} = require('../src/Constraints');
+const SizeConstraints = require('../src/constraints/SizeConstraints');
+const MoveConstraints = require('../src/constraints/MoveConstraints');
+const CommandConstraints = require('../src/constraints/CommandConstraints');
 
 describe('제한 조건 테스트', () => {
 	test.each(['3 ', '1', '04'])('다리 길이 입력값 예외 처리', (input) => {

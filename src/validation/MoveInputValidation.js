@@ -1,4 +1,4 @@
-const { MoveConstraints } = require('../Constraints');
+const MoveConstraints = require('../constraints/MoveConstraints');
 
 class MoveInputValidation {
 	constructor(moving) {

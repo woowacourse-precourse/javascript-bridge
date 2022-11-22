@@ -1,4 +1,4 @@
-const { CommandConstraints } = require('../Constraints');
+const CommandConstraints = require('../constraints/CommandConstraints');
 
 class CommandInputValidation {
 	constructor(command) {
