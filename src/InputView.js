@@ -14,7 +14,7 @@ const InputView = {
    * @param {function} next
    */
   readBridgeSize(current, next) {
-    const message = gameMessage.bridgeSize;
+    const message = gameMessage.BRIDGE_SIZE;
     const validateLength = Validation.validateBridgeLength.bind(Validation);
     Console.readLine(message, withError(validateLength, current, next));
   },
@@ -23,7 +23,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(current, next) {
-    const message = gameMessage.move;
+    const message = gameMessage.MOVE;
     const validateMoveCommand = (inputs) =>
       Validation.validateCommand(inputs, ["U", "D"]);
 
@@ -34,7 +34,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(current, next) {
-    const message = gameMessage.retry;
+    const message = gameMessage.RETRY;
     const validateEndCommand = (inputs) =>
       Validation.validateCommand(inputs, ["R", "Q"]);
 

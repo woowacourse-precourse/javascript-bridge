@@ -14,7 +14,7 @@ const Validation = {
     return !this.isSame(elem1, elem2);
   },
   isInRange(start, end, number) {
-    if (end < start) throw new Error(errorMessage.endExceedsStart);
+    if (end < start) throw new Error(errorMessage.End_Exceed_Start);
     if (number < start || number > end) return false;
     return true;
   },
@@ -25,11 +25,11 @@ const Validation = {
    */
   validateBridgeLength(length) {
     if (isNaN(length)) {
-      throw new Error(errorMessage.betweenNumber(2, 20));
+      throw new Error(errorMessage.BETWEEN_NUMBER);
     }
     const parsedLength = parseInt(length, 10);
     if (!this.isInRange(2, 20, parsedLength)) {
-      throw new Error(errorMessage.outOfRange);
+      throw new Error(errorMessage.OUT_OF_RANGE);
     }
     return parsedLength;
   },
@@ -41,7 +41,7 @@ const Validation = {
    */
   validateCommand(command, permission) {
     if (!permission.includes(command)) {
-      throw new Error(errorMessage.notAllowed);
+      throw new Error(errorMessage.NOT_ALLOWED);
     }
     return command;
   },
