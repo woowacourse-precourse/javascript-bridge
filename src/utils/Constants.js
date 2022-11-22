@@ -26,9 +26,9 @@ const ERROR_MESSAGE = Object.freeze({
 });
 
 const BRIDGE_ROW = Object.freeze({
-  open: '[',
-  close: ']',
-  partition: '|',
+  open: '[ ',
+  close: ' ]',
+  partition: ' | ',
 });
 
 const BRIDGE_CHECK = Object.freeze({
