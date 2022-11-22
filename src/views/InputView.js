@@ -10,40 +10,16 @@ const InputView = {
     gameCommand: `\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: ${GAME_COMMAND_STRING.retry}, 종료: ${GAME_COMMAND_STRING.quit})\n`,
   },
 
-  readBridgeSize(handleBridgeSize) {
-    Console.readLine(InputView.INPUT_MESSAGE.bridgeSize, (input) => {
-      try {
-        Validator.checkBridgeSize(input);
-        handleBridgeSize(Number(input));
-      } catch (e) {
-        OutputView.printError(e.message);
-        InputView.readBridgeSize(handleBridgeSize);
-      }
-    });
+  readBridgeSize(handleInput) {
+    Console.readLine(InputView.INPUT_MESSAGE.bridgeSize, handleInput);
   },
 
-  readMoving(handleMoving) {
-    Console.readLine(InputView.INPUT_MESSAGE.moving, (input) => {
-      try {
-        Validator.checkMoving(input);
-        handleMoving(input);
-      } catch (e) {
-        OutputView.printError(e.message);
-        InputView.readMoving(handleMoving);
-      }
-    });
+  readMoving(handleInput) {
+    Console.readLine(InputView.INPUT_MESSAGE.moving, handleInput);
   },
 
-  readGameCommand(handleGameCommand) {
-    Console.readLine(InputView.INPUT_MESSAGE.gameCommand, (input) => {
-      try {
-        Validator.checkGameCommand(input);
-        handleGameCommand(input);
-      } catch (e) {
-        OutputView.printError(e.message);
-        InputView.readGameCommand(handleGameCommand);
-      }
-    });
+  readGameCommand(handleInput) {
+    Console.readLine(InputView.INPUT_MESSAGE.gameCommand, handleInput);
   },
 };
 
