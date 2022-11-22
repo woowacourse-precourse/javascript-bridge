@@ -8,10 +8,7 @@ class Game {
   }
 
   start() {
-    InputView.readBridgeSize(
-      this.#manage.playerInputBridgeSize.bind(this.#manage)
-    );
+    this.#manage.playerInputBridgeSize();
   }
 }
-
 module.exports = Game;

@@ -17,7 +17,11 @@ class BridgeInteractPlayer {
     this.#bridgeGame = new BridgeGame();
   }
 
-  playerInputBridgeSize(size) {
+  playerInputBridgeSize() {
+    InputView.readBridgeSize(this.playerCheckBridgeSize.bind(this));
+  }
+
+  playerCheckBridgeSize(size) {
     try {
       InputException.BridgeSizeValidate(size);
     } catch (error) {
@@ -25,11 +29,15 @@ class BridgeInteractPlayer {
     }
     this.#bridgeGame.init(size);
     OutputView.printGameStart();
-    InputView.readMoving(this.playerInputBridgeDirection.bind(this));
+    this.playerInputBridgeDirection();
     return;
   }
 
-  playerInputBridgeDirection(direction) {
+  playerInputBridgeDirection() {
+    InputView.readMoving(this.playerCheckBridgeDirection.bind(this));
+  }
+
+  playerCheckBridgeDirection(direction) {
     try {
       InputException.playerDirectionValidate(direction);
     } catch (error) {
@@ -51,16 +59,19 @@ class BridgeInteractPlayer {
   playerGoBridgeNext(status) {
     switch (status) {
       case GAME.STATUS.PLAY:
-        InputView.readMoving(this.playerInputBridgeDirection.bind(this));
+        this.playerInputBridgeDirection();
       case GAME.STATUS.FAIL:
-        InputView.readGameCommand(this.playerInputCommand.bind(this));
+        this.playerInputCommand();
       case GAME.STATUS.END:
         this.playerEndThisGame(GAME.RESULT.WIN);
     }
   }
 
-  //BridgeGame 에 분리
-  playerInputCommand(command) {
+  playerInputCommand() {
+    InputView.readGameCommand(this.playerCheckCommand.bind(this));
+  }
+
+  playerCheckCommand(command) {
     try {
       InputException.playerCommandValidate(command);
     } catch (error) {
@@ -73,7 +84,7 @@ class BridgeInteractPlayer {
     if (command === BRIDGE.GAME.RETRY) {
       this.#player.bridgeGameRetry();
       this.#bridgeGame.retry();
-      InputView.readMoving(this.playerInputBridgeDirection.bind(this));
+      this.playerInputBridgeDirection();
     }
     if (command === BRIDGE.GAME.END) {
       this.playerEndThisGame(

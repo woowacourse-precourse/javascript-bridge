@@ -4,23 +4,23 @@
 
 ### 자바스크립트 컨벤션 요구사항
 
-- [ ] indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
+- [x] indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
   - 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
-- [ ] 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들어라.
-- [ ] Jest를 이용하여 본인이 정리한 기능 목록이 정상 동작함을 테스트 코드로 확인한다.
+- [?] 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들어라.
+- [x] Jest를 이용하여 본인이 정리한 기능 목록이 정상 동작함을 테스트 코드로 확인한다.
 - [x] else를 지양한다.
       힌트: if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
       때로는 if/else, switch문을 사용하는 것이 더 깔끔해 보일 수 있다. 어느 경우에 쓰는 것이 적절할지 스스로 고민해 본다.
 - [ ] 도메인 로직에 단위 테스트를 구현해야 한다. 단, UI(Console.readLine, Console.print) 로직에 대한 단위 테스트는 제외한다.
 - [x] 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분한다.
-- [ ] 함수(또는 메서드)의 길이가 10라인을 넘어가지 않도록 구현한다.
+- [x] 함수(또는 메서드)의 길이가 10라인을 넘어가지 않도록 구현한다.
   - 함수(또는 메서드)가 한 가지 일만 잘하도록 구현한다.
   - 메서드의 파라미터 개수는 최대 3개까지만 허용한다.
-- [ ] 아래 있는 `InputView`, `OutputView`, `BridgeGame`, `BridgeMaker` 클래스(또는 객체)의 요구사항을 참고하여 구현한다.
+- [x] 아래 있는 `InputView`, `OutputView`, `BridgeGame`, `BridgeMaker` 클래스(또는 객체)의 요구사항을 참고하여 구현한다.
 - 각 클래스(또는 객체)의 제약 사항은 아래 클래스별 세부 설명을 참고한다.
 - 이외 필요한 클래스(또는 객체)와 메서드는 자유롭게 구현할 수 있다.
-- [ ] `InputView` 에서만 `MissionUtils`의 `Console.readLine()` 을 이용해 사용자의 입력을 받을 수 있다.
-- [ ] `BridgeGame` 클래스에서 `InputView`, `OutputView` 를 사용하지 않는다.
+- [x] `InputView` 에서만 `MissionUtils`의 `Console.readLine()` 을 이용해 사용자의 입력을 받을 수 있다.
+- [x] `BridgeGame` 클래스에서 `InputView`, `OutputView` 를 사용하지 않는다.
 
 ## **🚀 기능 요구 사항**
 
@@ -43,7 +43,7 @@
 - 사용자가 잘못된 값을 입력한 경우 `throw`문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러
 - 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
 
-- [ ] 메인 로직
+- [x] 메인 로직
 
   - [x] 다리 게임 시작 하기#Game -[x] 다리게임을 시작하는 기능#start
 
@@ -79,11 +79,13 @@
 
   - [x] 다리와 플레이어의 상호작용을 책임지는 객체#BridgeInteractPlayer
 
-    - [x] 플레이어가 다리를 만드는 기능#playerInputBridgeSize
-
-    - [x] 플레이어가 위 아래 선택해서 전진하는 기능 #playerInputBridgeDirection
+    - [x] 플레이어가 다리를 사이즈를 입력하는 기능#playerInputBridgeSize
+    - [x] 다리사이즈를 체크하고 만드는기능#playerCheckBridgeSize
+    - [x] 플레이어가 위 아래를 입력하는 기능#playerInputBridgeDirection
+    - [x] 플레이어가 위 아래를 체크 하고 전진하는 기능#playerCheckBridgeDirection
     - [x] 플레이어가 전진하고 결과를 처리하는 기능 #playerGoBridgeNext
-    - [x] 플레이어가 게임을 재시작 여부를 정하는 기능 #playerInputCommandBridgeRetry
+    - [x] 플레이어가 게임을 재시작 여부 커맨드를 입력하는 기능 #playerInputCommand
+    - [x] 플레이어가 게임을 재시작을 정하는 기능 #playerDicisionRetry
     - [x] 플레이어가 게임을 끝내는 기능#playerEndThisGame
 
   - [x] 다리건너기 게임의 다리 출력 모양을 계산하는 객체 #BridgeGameShape
