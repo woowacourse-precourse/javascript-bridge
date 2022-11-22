@@ -76,6 +76,8 @@ class BridgeGame {
     this.#map = new Map();
     this.#bridge.reset();
     this.#tryCount += 1;
+
+    readMoving(this.move.bind(this));
   }
 
   quit(isSuccess) {}
