@@ -64,14 +64,25 @@ const InputView = {
   },
 
   handleGameStatus(status, game) {
+    this.handleStatusSuccess(status, game);
+    this.handleStatusFail(status, game);
+    this.handleStatusNext(status, game);
+  },
+
+  handleStatusSuccess(status, game) {
     if (status === STATUS.SUCCESS) {
       OutputView.printResult(game);
       return;
     }
+  },
+
+  handleStatusFail(status, game) {
     if (status === STATUS.FAIL) {
       this.readGameCommand(game);
-      return;
     }
+  },
+
+  handleStatusNext(status, game) {
     if (status === STATUS.NEXT) {
       this.readMoving(game);
     }
