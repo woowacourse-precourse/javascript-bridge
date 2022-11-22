@@ -22,6 +22,33 @@ class BridgeGameController {
       }
     });
   }
+
+  getMovingDirection() {
+    InputView.readMoving((direction) => {
+      try {
+        InputValidator.checkMoving(direction);
+        if (this.#BridgeGame.canMove(direction)) {
+          this.#BridgeGame.move(direction);
+          OutputView.printMap(this.#BridgeGame.getBridgeMap());
+
+          const isBridgeCrossed = this.#BridgeGame.checkBridgeCrossed();
+          if (isBridgeCrossed) {
+            OutputView.printResult(isBridgeCrossed, this.#BridgeGame.getAttemptCount(), this.#BridgeGame.getBridgeMap());
+            Console.close();
+          } else {
+            this.getMovingDirection();
+          }
+        } else {
+          this.#BridgeGame.stopMoving(direction);
+          OutputView.printMap(this.#BridgeGame.getBridgeMap());
+          this.getCommand();
+        }
+      } catch (error) {
+        Console.print(error.message);
+        this.getMovingDirection();
+      }
+    });
+  }
 }
 
 module.exports = BridgeGameController;
