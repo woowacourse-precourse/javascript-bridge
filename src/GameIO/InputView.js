@@ -18,6 +18,7 @@ const InputView = {
     let bridgeLength = 0;
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
       const VALIDATED = Validator.isBridgeLength(this.readBridgeSize, input);
+
       if (VALIDATED) {
         bridgeLength = parseInt(input);
       }

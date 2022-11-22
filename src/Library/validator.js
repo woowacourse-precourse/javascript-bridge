@@ -16,10 +16,12 @@ const Validator = {
     const BRIDGE_LENGTH = parseInt(bridgeLength);
 
     if (this.isNaturalNumber(bridgeLength) === false) {
-      ErrorHandler.tryCatch(callback, "bridge");
+      ErrorHandler.errorGenerate("bridge");
+      return false;
     }
     if (BRIDGE_LENGTH > 20 || BRIDGE_LENGTH < 3) {
       ErrorHandler.tryCatch(callback, "bridge");
+      return false;
     }
     return true;
   },
@@ -29,6 +31,7 @@ const Validator = {
       return true;
     }
     ErrorHandler.tryCatch(callback, "jump");
+    return false;
   },
 
   isBoolNumber(callback, number) {
@@ -42,6 +45,7 @@ const Validator = {
       return true;
     }
     ErrorHandler.tryCatch(callback, "quit");
+    return false;
   },
 };
 

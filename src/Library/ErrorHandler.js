@@ -18,6 +18,7 @@ const ErrorHandler = {
 
   errorGenerate(causation) {
     if (causation === "bridge") {
+      console.log("[ERROR]");
       OutputView.printError(ERROR_MESSAGES.bridgeLength);
     }
     if (causation === "jump") {

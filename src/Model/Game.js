@@ -57,14 +57,17 @@ class Game {
         this.getPrintResult();
         return false;
       }
+      if (!IS_QUIT) {
+        this.increasePlayCount();
+        this.bridgeGame.retry();
+        return true;
+      }
     }
-    this.increasePlayCount();
-    this.bridgeGame.retry();
-    return true;
   }
 
   askQuit() {
     const IS_QUIT = InputView.readGameCommand();
+
     if (IS_QUIT === "Q") {
       return true;
     }
