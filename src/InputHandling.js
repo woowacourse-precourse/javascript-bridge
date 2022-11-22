@@ -38,6 +38,7 @@ class InputHandling {
   decideNextConsolePrint(direction) {
     const gameOutcome = this.bridgeGame.decideMoveOrStop(direction);
     if (gameOutcome === '실패') InputView.readGameCommand();
+    if (gameOutcome === '우승') Console.close();
     if (gameOutcome === '성공') InputView.readMoving(this.handleMovingValue.bind(this));
   }
 }

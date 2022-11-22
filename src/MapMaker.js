@@ -32,6 +32,11 @@ class MapMaker {
     }
     OutputView.printMap(this.#upperMapArray, this.#lowerMapArray);
   }
+
+  makeFinalSuccess(direction) {
+    this.selectRightBridge(direction);
+    OutputView.printResult();
+  }
 }
 
 module.exports = MapMaker;
