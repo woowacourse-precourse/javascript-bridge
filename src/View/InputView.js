@@ -1,4 +1,4 @@
-const {INPUT_QUERY} = require("./Constants")
+const {INPUT_QUERY} = require("../Constants")
 const { Console } = require('@woowacourse/mission-utils');
 
 const InputView = {

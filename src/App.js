@@ -1,4 +1,4 @@
-const InputHandling = require('./InputHandling');
+const InputHandling = require('./UserInput/InputHandling');
 
 class App {
   play() {

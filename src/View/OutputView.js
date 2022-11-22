@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { OUTPUT, GAME_OUTCOME, LETTER_SIGN } = require('./Constants');
+const { OUTPUT, GAME_OUTCOME, LETTER_SIGN } = require('../Constants');
 
 const OutputView = {
   printMap(upperMapArray, lowerMapArray) {

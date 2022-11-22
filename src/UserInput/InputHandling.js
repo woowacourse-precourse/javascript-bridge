@@ -1,10 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { makeBridge } = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
-const { GAME_OUTCOME, GAME_COMMAND } = require('./Constants');
-const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
-const { checkBridgeSize, checkMovingValue, checkRestartOrDone } = require('./Validation');
-const BridgeGame = require('./BridgeGame');
+const { makeBridge } = require('../BridgeMaker');
+const { generate } = require('../BridgeRandomNumberGenerator');
+const { GAME_OUTCOME, GAME_COMMAND } = require('../Constants');
+const { readBridgeSize, readMoving, readGameCommand } = require('../View/InputView');
+const { checkBridgeSize, checkMovingValue, checkRestartOrDone } = require('../UserInput/Validation');
+const BridgeGame = require('../BridgeGame/BridgeGame');
 
 class InputHandling {
   #answerBridgeArray;

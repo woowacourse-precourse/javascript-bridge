@@ -1,4 +1,4 @@
-const { GAME_OUTCOME } = require('./Constants');
+const { GAME_OUTCOME } = require('../Constants');
 const MapMaker = require('./MapMaker');
 
 class BridgeGame {

@@ -1,5 +1,5 @@
-const OutputView = require('./OutputView');
-const { LETTER_SIGN, DIRECTION } = require('./Constants');
+const OutputView = require('../View/OutputView');
+const { LETTER_SIGN, DIRECTION } = require('../Constants');
 
 class MapMaker {
   #upperMapArray;
