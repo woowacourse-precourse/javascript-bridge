@@ -25,7 +25,6 @@ class App {
 
   moveSpace(input) {
     try {
-      Validator.validateSpace(input);
       this.#game.move(input);
       const map = this.#game.getMap();
       OutputView.printMap(map);

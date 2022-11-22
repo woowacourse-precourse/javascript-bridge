@@ -27,6 +27,7 @@ class BridgeGame {
   }
 
   move(space) {
+    Validator.validateSpace(space);
     const currentPosition = this.#map[BRIDGE.UPPER].length;
     const passResult = space === this.#bridge[currentPosition] ? MAP.PASS : MAP.NONPASS;
     if (space === BRIDGE.UP) {
