@@ -14,6 +14,7 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     Console.readLine(MESSAGE.INPUT_BRIDGE_LENGTH, (inputBridgeSize) => {
+      Console.print("");
       Validate.isNumber(inputBridgeSize);
       Validate.checkLength(inputBridgeSize);
       let gameTryCount = 0;

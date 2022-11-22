@@ -50,6 +50,7 @@ const OutputView = {
     }
     Console.print(resultArr[GAME_RESOURCE.UPSIDE]);
     Console.print(resultArr[GAME_RESOURCE.DOWNSIDE]);
+    Console.print("");
     return resultArr;
   },
 
@@ -62,14 +63,15 @@ const OutputView = {
     Console.print(MESSAGE.PRINT_RESULT);
     Console.print(result[GAME_RESOURCE.UPSIDE]);
     Console.print(result[GAME_RESOURCE.DOWNSIDE]);
+    Console.print("");
     if (command === 0) {
-      Console.print(MESSAGE.PRINT_GAME_RESULT + " " + MESSAGE.FAIL);
-      Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + " " + count);
+      Console.print(MESSAGE.PRINT_GAME_RESULT + MESSAGE.FAIL);
+      Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + count);
       Console.close();
       return;
     }
-    Console.print(MESSAGE.PRINT_GAME_RESULT + " " + MESSAGE.SUCCESS);
-    Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + " " + count);
+    Console.print(MESSAGE.PRINT_GAME_RESULT + MESSAGE.SUCCESS);
+    Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + count);
     Console.close();
   },
 };
