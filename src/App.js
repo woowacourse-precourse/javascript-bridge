@@ -10,30 +10,35 @@ class App {
     InputView.readBridgeSize(size => {
       this.#bridgeGame.makeBridge(size)
       OutputView.linkBreak()
-      this.getUserMove()
+      this.userMoving()
     })
   }
 
-  getUserMove() {
+  userMoving() {
     InputView.readMoving(move => {
       this.#bridgeGame.moveCompare(move)
       OutputView.printMap(this.#bridgeGame.moveResult())
       this.#bridgeGame.isClear(stats => {
-        if (stats) {
-          OutputView.printResult(this.#bridgeGame.mapResult(stats))
-        }
-        else if (stats === false) {
-          InputView.readGameCommand(callback => {
-            if (callback === 'R') {
-              this.#bridgeGame.retry()
-              this.getUserMove()
-            }
-            if (callback === 'Q') OutputView.printResult(this.#bridgeGame.mapResult(stats))
-          })
-        } else {
-          this.getUserMove()
-        }
+        this.bridgeStats(stats)
       })
+    })
+  }
+
+  bridgeStats(stats) {
+    if (stats) {
+      OutputView.printResult(this.#bridgeGame.mapResult(stats))
+    } else if (stats === false) {
+      this.gameOver(stats)
+    } else {
+      this.userMoving()
+    }
+  }
+
+  gameOver(stats) {
+    InputView.readGameCommand(callback => {
+      this.#bridgeGame.retry(callback) 
+      ? this.userMoving()
+      : OutputView.printResult(this.#bridgeGame.mapResult(stats))
     })
   }
 }
