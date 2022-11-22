@@ -10,7 +10,6 @@ const { init, retry, result } = require('./utils/constant');
 
 class App {
   #bridgeGame;
-  #bridgeSize;
   #bridge;
   #curBridge;
   #tryNum;
