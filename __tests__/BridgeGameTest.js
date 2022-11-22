@@ -46,7 +46,7 @@ describe('BridgeGame 클래스 단위 테스트', () => {
     expect(result).toEqual(1);
   });
 
-  test('플레이어가 게임을 재시작 한다면 게임 count를 올린다.', () => {
+  test('플레이어가 게임을 재시작 한다면 시도 횟수를 올린다.', () => {
     const bridgeGame = new BridgeGame('3');
     bridgeGame.retry();
 
