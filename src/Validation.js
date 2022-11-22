@@ -11,6 +11,13 @@ const Validation = {
     return;
   },
 
+  validateMoving(moving) {
+    if ([MOVING.DOWN, MOVING.UP].includes(moving)) {
+      return;
+    }
+    throw new Error(ERROR.MOVING);
+  },
+
 };
 
 module.exports = Validation;
