@@ -42,24 +42,47 @@ javascript-bridge
 ### 🔸 Start Game
 
 - [x] 게임을 시작하는 문구를 출력한다.
+  - 게임 시작 - `App.#startGame`
+  - 시작 메시지 출력 - `OutputView.printStartMessage`
 - [x] 다리의 길이를 입력해달라는 안내 문구를 출력하고, 3 ~ 20 사이의 숫자를 입력 값으로 받는다.
+  - 다리 길이 입력 - `InputView.readBridgeSize`
 
 ### 🔸 Progress Game
 
 - [x] 플레이어의 입력 값에 따라 0 혹은 1의 숫자로 구성된 다리 배열을 생성한다.
+  - 다리 생성 - `BridgeRandomNumberGenerator.generate`
 - [x] 생성한 다리 배열의 요소를 "U" 혹은 "D"로 변환한다.
+  - 다리 변환 - `BridgeMaker.makeBridge`
 - [x] 다리 생성이 완료되면 이동할 칸을 선택해달라는 안내 문구를 출력하고, 플레이어에게 "U" 혹은 "D"를 입력 값으로 받는다.
-- [x] 플레이어의 입력 값에 따라 "O" 혹은 "X"로 현재 라운드의 진행 상황을 출력한다.
+  - 이동할 칸 입력 - `InputView.readMoving`
+  - 칸 이동 - `BridgeGame.move`
+- [x] 플레이어의 입력 값에 따라 "O" 혹은 "X"로 게임 상태를 저장한다.
+  - 게임 상태 저장 - `BridgeGame.saveState`
+- [x] 게임 상태에 따라 지도를 생성한다.
+  - 게임 상태 생성 - `BridgeGame.createGameInfo`
+  - 지도 생성 - `BridgeMap.createMap`
+- [x] 생성한 지도를 출력한다.
+  - 지도 출력 - `OutputView.printMap`
 - [x] 다리 배열의 마지막까지 플레이어에게 입력 값을 받고 진행 상황을 출력하는 과정을 반복한다.
+  - 게임 반복 - `OutputView.progessGmae`
 
 ### 🔸 End Game
 
 - [x] 다리 배열의 마지막까지 "O"가 반복해서 출력되면 게임 성공을 안내하는 문구와 시도한 횟수를 출력하고, 게임을 종료한다.
+  - 게임 결과 출력 - `OutputView.printResult`
 - [x] "X"가 출력되면 게임 실패를 안내하는 문구와 시도한 횟수를 출력하고, 플레이어에게 재시도 여부를 입력 값으로 받는다.
+  - 재시도 여부 입력 - `InputView.readGameCommand`
 - [x] 플레이어의 입력 값에 따라 재시도 혹은 종료한다.
+  - 재시도 - `BridgeGame.retry`
+  - 게임 종료 - `OutputView.endGame`
+- [x] 재시도 시 게임 상태를 초기화한다.
+  - 게임 상태 초기화 - `BridgeGame.resetState`
 
 ### 🔸 Error Case
 
 - [x] 다리 길이의 입력 값이 3 ~ 20 사이의 숫자가 아니면 에러 메시지를 출력하고, 입력을 다시 받는다.
+  - 입력 값 검증 - `validator.bridgeSize`
 - [x] 이동할 칸의 입력 값이 "U" 혹은 "D"가 아니면 에러 메시지를 출력하고, 입력을 다시 받는다.
+  - 입력 값 검증 - `validator.moving`
 - [x] 재시도 여부의 입력 값이 "R" 혹은 "Q"가 아니면 에러 메시지를 출력하고, 입력을 다시 받는다.
+  - 입력 값 검증 - `validator.retry`
