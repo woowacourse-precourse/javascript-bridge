@@ -46,7 +46,10 @@ const InputView = {
             throw "[ERROR] U 혹은 D만 입력 가능합니다.";
           }
           const bridgeGame = new BridgeGame();
-          bridgeGame.move();
+          if (bridgeGame.move(moveLocation) === false)
+            return this.readGameCommand();
+          return this.readMoving();
+          //bridgeGame.move(moveLocation);
         } catch (e) {
           MissionUtils.Console.print(e);
           this.readMoving();
@@ -58,7 +61,18 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    MissionUtils.Console.readLine(
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (handleRestart) => {
+        if (handleRestart === "R") {
+          const bridgeGame = new BridgeGame();
+          bridgeGame.retry(handleRestart);
+          return this.readMoving();
+        }
+      }
+    );
+  },
 };
 
 module.exports = InputView;
