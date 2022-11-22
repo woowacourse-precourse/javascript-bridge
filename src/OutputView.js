@@ -15,7 +15,14 @@ const OutputView = {
     Console.print(`[${game.generateMap(BRIDGE.UP_CHAR)}]`);
     Console.print(`[${game.generateMap(BRIDGE.DOWN_CHAR)}]`);
   },
-  printResult(game) {},
+  printResult(game) {
+    this.printEndMessage();
+    this.printMap(game);
+
+    const [isSuccess, trial] = game.result();
+    Console.print(`${QUERY.RESULT}: ${isSuccess}`);
+    Console.print(`${QUERY.TRIAL}: ${trial}`);
+  },
 };
 
 module.exports = OutputView;
