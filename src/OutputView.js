@@ -1,20 +1,28 @@
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
-const OutputView = {
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printMap() {},
+const { BRIDGE, FINAL } = require("./Constant");
+const { Console } = require("@woowacourse/mission-utils");
+const { COMMAND } = require("./Constant");
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult() {},
+const OutputView = {
+  start(){
+    Console.print(COMMAND.START);
+  },
+
+  printMap(bridgeGame) {
+    const upBridge = bridgeGame.getUpBridgeList();
+    const downBridge = bridgeGame.getDownBridgeList();
+    Console.print(`${BRIDGE.LEFT}${upBridge.join(`${BRIDGE.DIVISION}`)}${BRIDGE.RIGHT}`);
+    Console.print(`${BRIDGE.LEFT}${downBridge.join(`${BRIDGE.DIVISION}`)}${BRIDGE.RIGHT}`);
+    Console.print("");
+  },
+
+  printResult(success, bridgeGame) {
+    Console.print(FINAL.RESULT_BRIDGE);
+    this.printMap(bridgeGame);
+    Console.print(`${FINAL.RESULT} ${success}`);
+    Console.print(`${FINAL.TRY} ${bridgeGame.getCountRetry()}`);
+    Console.close();
+    
+  },
 };
 
 module.exports = OutputView;
