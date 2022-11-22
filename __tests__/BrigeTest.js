@@ -59,13 +59,22 @@ describe('다리 건너기 테스트', () => {
     expect(log).toContain('[ERROR]');
   });
 
+  test('BridgeGame이 이동 성공 여부를 제대로 출력하는지', () => {
+    const bridge = ['U', 'U', 'D'];
+    const input = 'U';
+    const output = true;
+
+    const bridgeGame = new BridgeGame(bridge);
+
+    expect(bridgeGame.isMoveSuccess(input)).toEqual(output);
+  });
+
   test('BridgeGame이 이동 여부를 제대로 출력하는지', () => {
     const bridge = ['U', 'U', 'D'];
     const input = 'U';
-    const output = [true, [1], [0]];
+    const output = [[1], [0]];
 
-    const bridgeGame = new BridgeGame();
-    bridgeGame.setBridge(bridge);
+    const bridgeGame = new BridgeGame(bridge);
 
     expect(bridgeGame.move(input)).toEqual(output);
   });
