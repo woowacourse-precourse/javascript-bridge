@@ -1,3 +1,5 @@
+const RandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeMaker = require("./BridgeMaker");
 const BridgeInformation = require("./BridgeInformation");
 const { SIGN } = require("./Constants");
 
@@ -8,8 +10,8 @@ class BridgeGame {
   #inputIndex = -1;
 
   constructor(size) {
-    this.size = size;
-    this.#info = new BridgeInformation(size);
+    const correctRoute = BridgeMaker.makeBridge(size, RandomNumberGenerator.generate);
+    this.#info = new BridgeInformation(size, correctRoute);
   }
 
   changeState(direction) {
