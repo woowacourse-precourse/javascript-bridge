@@ -32,7 +32,6 @@ class BridgeGame {
     return this.#userBridge.isEnd(this.#bridge);
   }
   isGameFinish(direction) {
-    console.log(this.isEnd() && this.isCorrectDirection(direction));
     return this.isEnd() && this.isCorrectDirection(direction);
   }
   getResult() {

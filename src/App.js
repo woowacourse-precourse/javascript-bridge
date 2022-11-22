@@ -27,7 +27,6 @@ class App {
       Number(size),
       BridgeRandomNumberGenerator.generate
     );
-    console.log(bridge);
     this.#bridgeGame = new BridgeGame(bridge);
     OutputView.lineBreak();
     this.requestMove();

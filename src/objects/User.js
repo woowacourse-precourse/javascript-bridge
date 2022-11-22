@@ -60,7 +60,6 @@ class User {
     this.#userBridge.push(direction);
   }
   isCorrectDirection(direction, bridge) {
-    console.log(bridge[this.#userBridge.length - 1]);
     if (direction === bridge[this.#userBridge.length - 1]) {
       return true;
     }
