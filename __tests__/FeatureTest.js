@@ -8,10 +8,11 @@ describe("기능 동작 테스트", () => {
     expect(logSpy).toHaveBeenNthCalledWith(2, lowerBridge);
   };
 
+  const LOG_SPY = jest.spyOn(MissionUtils.Console, "print");
+
   describe("다리 이동 테스트", () => {
     test("건널 수 있는 위쪽 다리로 이동할 경우 [ O ], [   ]순으로 출력되어야 한다.", () => {
       const Game = new BridgeGame();
-      const LOG_SPY = jest.spyOn(MissionUtils.Console, "print");
       LOG_SPY.mockClear();
 
       Game.handleCorrectMove("U");
@@ -21,7 +22,6 @@ describe("기능 동작 테스트", () => {
 
     test("건널 수 있는 아래쪽 다리로 이동할 경우 [   ], [ O ]순으로 출력되어야 한다.", () => {
       const Game = new BridgeGame();
-      const LOG_SPY = jest.spyOn(MissionUtils.Console, "print");
       LOG_SPY.mockClear();
 
       Game.handleCorrectMove("D");
@@ -31,7 +31,6 @@ describe("기능 동작 테스트", () => {
 
     test("건널 수 없는 위쪽 다리로 이동할 경우 [ X ], [   ]순으로 출력되어야 한다.", () => {
       const Game = new BridgeGame();
-      const LOG_SPY = jest.spyOn(MissionUtils.Console, "print");
       LOG_SPY.mockClear();
 
       Game.handleWrongMove("U");
@@ -41,7 +40,6 @@ describe("기능 동작 테스트", () => {
 
     test("건널 수 없는 아래쪽 다리로 이동할 경우 [   ], [ X ]순으로 출력되어야 한다.", () => {
       const Game = new BridgeGame();
-      const LOG_SPY = jest.spyOn(MissionUtils.Console, "print");
       LOG_SPY.mockClear();
 
       Game.handleWrongMove("D");
@@ -67,7 +65,7 @@ describe("입력 예외 테스트", () => {
     INPUT_LENGTH: [["UU"], ["DD"], ["UUU"], ["DDD"], ["ASDF"], ["asdf"], ["uuu"], ["ddd"], ["uu"], ["dd"]],
   };
 
-  describe("다리 길이", () => {
+  describe("다리 길이 입력 테스트", () => {
     test.each(CASES_FOR_BRIDGE_SIZE.NOT_NUMBER)("숫자 이외의 문자일 경우 예외가 발생한다.", (input) => {
       expect(() => {
         checkBridgeSize(input);
@@ -99,7 +97,7 @@ describe("입력 예외 테스트", () => {
     });
   });
 
-  describe("이동/재시작/종료", () => {
+  describe("이동/재시작/종료 입력 테스트", () => {
     test.each(CASES_FOR_MOVES_AND_COMMND.NOT_ALPHABET)("알파벳 이외의 문자일 경우 예외가 발생한다.", (input) => {
       expect(() => {
         checkMoves(input);
