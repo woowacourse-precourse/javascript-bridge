@@ -27,6 +27,22 @@ class BridgeGame {
     userMove === "U" ? this.updateUpPath() : this.updateDownPath();
   }
 
+  updateUpPath() {
+    this.checkUserPath()
+      ? (this.#currentBridge.upPath.push(" O "),
+        this.#currentBridge.downPath.push("   "))
+      : (this.#currentBridge.upPath.push(" X "),
+        this.#currentBridge.downPath.push("   "));
+  }
+
+  updateDownPath() {
+    this.checkUserPath()
+      ? (this.#currentBridge.downPath.push(" O "),
+        this.#currentBridge.upPath.push("   "))
+      : (this.#currentBridge.downPath.push(" X "),
+        this.#currentBridge.upPath.push("   "));
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
