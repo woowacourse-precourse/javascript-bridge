@@ -14,10 +14,10 @@ class MoveSpace {
     try {
       if (!this.isAllowOrder())
         throw new Error(OutputView.printErrorMessage(ERROR.MOVE_ORDER));
-      return ISALLOW.TRUE;
     } catch {
       return ISALLOW.FALSE;
     }
+    return ISALLOW.TRUE;
   }
 
   isAllowOrder() {

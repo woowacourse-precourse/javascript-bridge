@@ -26,6 +26,7 @@ class BridgeGame {
   }
 
   create(size) {
+    console.log(+size);
     this.#bridge = this.#production.makeBridge(+size);
   }
 

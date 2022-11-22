@@ -12,16 +12,20 @@ class BridgeSize {
 
   checkInput() {
     try {
-      if (this.isAllowNumber() || this.isAllowRange())
+      if (this.isDecimal() || !this.isAllowNumber() || this.isAllowRange())
         throw new Error(OutputView.printErrorMessage(ERROR.BRIDGE_SIZE));
-      return ISALLOW.TRUE;
     } catch {
       return ISALLOW.FALSE;
     }
+    return ISALLOW.TRUE;
+  }
+
+  isDecimal() {
+    return String(this.#input).length !== String(~~this.#input).length;
   }
 
   isAllowNumber() {
-    return isNaN(this.#input);
+    return /^[0-9]*$/g.test(this.#input);
   }
 
   isAllowRange() {
