@@ -82,7 +82,11 @@ describe("다리 건너기 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
-  test("예외 테스트", () => {
+  test("예외 테스트 - 사이즈 문자 입력시 에러", () => {
     runException(["a"]);
+  });
+
+  test("예외 테스트 2 - 방향 입력시 U D 제외한 입력값 들어갈 시 에러", () => {
+    runException([3, "F"]);
   });
 });
