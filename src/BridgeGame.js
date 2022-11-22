@@ -76,14 +76,22 @@ class BridgeGame {
       this.#moveResult === VALUE.SUCCESS &&
       this.#playerAt === this.#bridge.length
     ) {
-      this.#gameStatus = STATUS.SUCCESS;
-      this.#gameWin = true;
+      this.#setGameSuccess();
       return;
     }
     if (this.#moveResult === VALUE.SUCCESS) {
       this.#gameStatus = STATUS.NEXT;
       return;
     }
+    this.#setGameFail();
+  }
+
+  #setGameSuccess() {
+    this.#gameStatus = STATUS.SUCCESS;
+    this.#gameWin = true;
+  }
+
+  #setGameFail() {
     this.#gameStatus = STATUS.FAIL;
     this.#gameWin = false;
   }
