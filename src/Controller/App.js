@@ -37,27 +37,20 @@ class App {
   }
 
   createBridgeGame(bridgeSize) {
-    const bridge = makeBridge(bridgeSize, generate);
-    this.bridgeGame = new BridgeGame(bridge);
+    const directions = makeBridge(bridgeSize, generate);
+    this.bridgeGame = new BridgeGame(directions);
   }
 
   requestMoving() {
     InputView.readMoving((direction) => {
       this.checkMovingDirection(direction);
-      const [canCross, playerUpperBridgeState, playerLowerBridgeState] =
+
+      const [canCross, playerUpperState, playerLowerState] =
         this.bridgeGame.move(direction);
-      this.printCurrBridgeState(playerUpperBridgeState, playerLowerBridgeState);
+      this.printCurrBridgeState(playerUpperState, playerLowerState);
 
-      this.calculateNextStep(canCross, playerUpperBridgeState);
+      this.calculateNextStep(canCross, playerUpperState);
     });
-  }
-
-  calculateNextStep(canCross, playerBridgeState) {
-    this.bridgeGame.isLastPosition(playerBridgeState.length) && canCross
-      ? this.quit()
-      : canCross
-      ? this.requestMoving()
-      : this.requestGameCommand();
   }
 
   checkMovingDirection(direction) {
@@ -65,12 +58,20 @@ class App {
     if (!isValid) {
       OutputView.printMsg(errorMsg);
 
-      return this.requestMoving();
+      this.requestMoving();
     }
   }
 
   printCurrBridgeState(playerUpperBridgeState, playerLowerBridgeState) {
     OutputView.printMap(playerUpperBridgeState, playerLowerBridgeState);
+  }
+
+  calculateNextStep(canCross, playerBridgeState) {
+    this.bridgeGame.isQuit()
+      ? this.quit()
+      : canCross
+      ? this.requestMoving()
+      : this.requestGameCommand();
   }
 
   requestGameCommand() {
@@ -85,7 +86,7 @@ class App {
     if (!isValid) {
       OutputView.printMsg(errorMsg);
 
-      return this.requestGameCommand();
+      this.requestGameCommand();
     }
   }
 
