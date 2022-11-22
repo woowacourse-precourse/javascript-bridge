@@ -16,6 +16,10 @@ const OutputView = {
 
   printResultMap(){
     Console.print(OUTPUT_MESSAGE.PRINT_RESULT_MAP);
+  },
+  
+  printError(error){
+    Console.print(error);
   }
 };
 

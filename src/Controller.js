@@ -1,6 +1,6 @@
 const BridgeGame = require("./model/BridgeGame");
 const { readBridgeSize, readMoving, readGameCommand } = require("./view/InputView");
-const { printMap, printResult, printResultMap } = require("./view/OutputView");
+const { printMap, printResult, printResultMap, printError } = require("./view/OutputView");
 
 class Controller {
   #bridgeGame;
@@ -13,16 +13,27 @@ class Controller {
 
   init() {
     readBridgeSize((bridgeSize)=>{
-      this.#bridgeGame = new BridgeGame(Number(bridgeSize));
-      this.play();
+      try{
+        this.#bridgeGame = new BridgeGame(Number(bridgeSize));
+        this.play();
+      }
+      catch(error){
+        printError(error);
+        this.init();
+      }
     });
   }
 
   play() {
     readMoving((moving) => {
-      const isMatch = this.#bridgeGame.move(moving);
-      this.showMap();
-      this.handleBridgeGame(isMatch);
+      try{
+        const isMatch = this.#bridgeGame.move(moving);
+        this.showMap();
+        this.handleBridgeGame(isMatch);
+      }catch(error){
+        printError(error);
+        this.play();
+      }
     })
   }
 
@@ -45,11 +56,16 @@ class Controller {
 
   askReplay(){
     readGameCommand((retry) => {
-      const isRetry = this.#bridgeGame.retry(retry);
-      if(isRetry){
-        this.play();
+      try{
+        const isRetry = this.#bridgeGame.retry(retry);
+        if(isRetry){
+          this.play();
+        }
+        this.end();
+      }catch(error){
+        printError(error);
+        this.askReplay();
       }
-      this.end();
     })
   }
   end(isMatch){
