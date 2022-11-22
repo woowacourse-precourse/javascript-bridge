@@ -3,6 +3,7 @@ const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
 const Validation = require('./Validation');
+const BridgeGame = require('./BridgeGame')
 
 class InputHandling {
   #answerBridgeArray;
@@ -25,6 +26,8 @@ class InputHandling {
   handleMovingValue(direction) {
     try{
       Validation.checkMovingValue(direction);
+      this.bridgeGame = new BridgeGame(this.#answerBridgeArray);
+      this.bridgeGame.decideMoveOrStop(direction);
     } catch (error) {
       Console.print(error);
       InputView.readMoving(this.handleMovingValue.bind(this));
