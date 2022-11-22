@@ -50,7 +50,7 @@ class App {
       this.endGame()
     }
     if(!this.#gameStatus.wrongFlag){
-      this.startAagin()
+      this.startAgain()
     }
   }
 
