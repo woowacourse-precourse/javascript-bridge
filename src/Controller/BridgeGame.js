@@ -43,8 +43,7 @@ class BridgeGame {
   }
 
   checkMoving() {
-    if (this.#model.isCorrectLocation()) return this.keepGoing();
-    return this.lose();
+    return this.#model.isCorrectLocation() ? this.keepGoing() : this.lose()
   }
 
   keepGoing() {
@@ -56,8 +55,7 @@ class BridgeGame {
     const isWin = this.#model.isWin();
     this.#model.setWin(isWin);
 
-    if (isWin) return this.end();
-    return this.move();
+    return isWin ?  this.end() : this.move();
   }
 
   lose() {
@@ -69,8 +67,7 @@ class BridgeGame {
 
   retryOrQuit() {
     const command = this.#model.getGameCommand();
-    if (GAME_COMMAND[command]) return this.retry();
-    return this.end();
+    return GAME_COMMAND[command] ? this.retry() : this.end();
   }
 
   retry() {
