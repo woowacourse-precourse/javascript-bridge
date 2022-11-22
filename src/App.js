@@ -1,6 +1,7 @@
 const OutputView = require("./OutputView");
 const InputView = require("./InputView");
 const BridgeGame = require("./BridgeGame");
+const{ CONTROL } = require("./constants/Values");
 
 class App {
 
@@ -37,9 +38,10 @@ class App {
   tryBuildMoving(moving) {
     try {
       this.brideGame.move(moving);
-      let recordMoving = this.brideGame.getRecordSteps();
-      OutputView.printMap(recordMoving);
-      let firstDesideKey = this.brideGame.getCurrentCondition();
+      let upStep = this.brideGame.getup();
+      let downStep = this.brideGame.getdown();
+      OutputView.printMap(upStep,downStep);
+      let firstDesideKey = this.brideGame.getscore();
       this.decideControl(firstDesideKey);
     } catch(error) {
       this.retryRequestMoving();
@@ -58,10 +60,10 @@ class App {
   decideControl(controlKey) {
     if(controlKey === CONTROL.PASS_STEP) this.requestMoving();
     if(controlKey === CONTROL.GAME_END) {
-      let recordMoving = this.brideGame.getRecordSteps();
+      let movingList = this.brideGame.getRecordSteps();
       let result = this.brideGame.getSucessValue();
       let replay = this.brideGame.getCountReplyNumber();
-      OutputView.printResult(recordMoving, result, replay);
+      OutputView.printResult(movingList, result, replay);
     }
     if(controlKey === CONTROL.GAME_OVER) this.requestCommand();
   }
@@ -70,7 +72,7 @@ class App {
     OutputView.printValidateSizeError();
     this.requestBridgeSize();
   }
- 
+
   retryRequestMoving() {
     OutputView.printValidateStringError();
     this.requestMoving();
