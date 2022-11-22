@@ -20,17 +20,17 @@
 ---
 
 - 게임 시작 알리기 #OutputView.printStart()
-  - 게임 시도한 횟수 세기
+  - 게임 시도한 횟수 세기 #BridgeGame.gameCnt
 - 다리 길이 입력받기 #InputView.readBridgeSize()
-- 입력 받은 길이만큼 다리 생성하기
+- 입력 받은 길이만큼 다리 생성하기 #BridgeMaker.makeBridge()
 - 이동할 칸 입력받기 #InputView.readMoving()
-- 입력 값에 대해 통과 여부 판단하기
-- 입력 값에 대한 결과 출력하기
-- 통과라면 계속해서 이동할 칸을 입력받기
+- 입력 값에 대해 통과 여부 판단하기 #InputView.validateMoving()
+- 입력 값에 대한 결과 출력하기 #OutputView.printMap()
+- 통과라면 계속해서 이동할 칸을 입력받기 #InputView.readMoving()
 - 실패라면 재시도 여부 물어보기 #InputView.readGameCommand()
-- 재시도 여부에 따라 재시작 or 종료하기
-  - 재시작 시 시도한 횟수 증가하기
-- 게임 종료시 게임 결과 출력하기
+- 재시도 여부에 따라 재시작 or 종료하기 #BridgeGame.retry()
+  - 재시작 시 시도한 횟수 증가하기 #BridgeGame.gameCnt 증가
+- 게임 종료시 게임 결과 출력하기 #OutputView.printResult()
 - 총 시도한 횟수 출력하기
 
 ## 예외 사항 목록
