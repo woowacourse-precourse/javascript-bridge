@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const {GAME_MESSAGES, BRIDGE} = require('./utils/Constants');
+const {GAME_MESSAGES, BRIDGE, RESTART} = require('./utils/Constants');
 const InputView = require('./InputView');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
@@ -20,9 +20,19 @@ class App {
       const moving = await InputView.readMoving();
       const bridgeGame = new BridgeGame;
       const moveResult = bridgeGame.move(moving, bridge[i]);
-      await this.recordCross(moving, moveResult, gameResult);
-      OutputView.printMap(gameResult, moving)
+      const matchOrNot = this.processCrossing(moving, moveResult, gameResult);
+      if(!matchOrNot) {
+        this.restartOrNot(bridgeSize, bridge);
+        return
+      }
     }
+  }
+
+  processCrossing(moving, moveResult, gameResult) {
+    this.recordCross(moving, moveResult, gameResult);
+    OutputView.printMap(gameResult, moving);
+    if(moveResult === BRIDGE.UNMATCH) return false;
+    return true;
   }
 
   recordCross(moving, moveResult, gameResult) {
@@ -34,6 +44,11 @@ class App {
     gameResult[1].push(moveResult);
     gameResult[0].push(' ');
     return gameResult
+  }
+
+  async restartOrNot(bridgeSize, bridge) {
+    const decide = await InputView.readGameCommand();
+    if(decide == RESTART.TRUE) this.startCrossing(bridgeSize, bridge)
   }
 }
 

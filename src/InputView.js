@@ -29,6 +29,7 @@ const InputView = {
     const moving = await new Promise (answer => {
       Console.readLine(INPUT_MESSAGES.BRIDGE_MOVE, answer)
     });
+    Console.close();
     Validator.validateMoving(moving)
     return moving
   },
@@ -36,7 +37,13 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+   async readGameCommand() {
+    const decide = await new Promise (answer => {
+      Console.readLine(INPUT_MESSAGES.RESTART, answer);
+    })
+    Console.close();
+    return decide
+  },
 };
 
 module.exports = InputView;
