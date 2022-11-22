@@ -38,3 +38,31 @@ describe("BridgeMaker 객체 테스트", () => {
   });
 });
 
+describe("BridgeGame 객체 테스트", () => {
+  const gameManager = new BridgeGame();
+  const bridge = ["U", "D", "U"];
+  gameManager.setBridge(bridge);
+  test("setBridge가 저장한 객체와 getBridge함수가 반환하는 객체가 내용은 같지만 주소값은 다른지", () => {
+    const newBridge = gameManager.getBridge();
+    expect(bridge).toEqual(newBridge);
+    expect(bridge === newBridge).toEqual(false);
+  });
+  test("retry 함수가 순서를 초기화하고 횟수값을 증가시키는지", () => {
+    gameManager.retry();
+    expect(gameManager.getTrial()).toEqual(2);
+    expect(gameManager.getOrder()).toEqual(-1);
+  });
+  test("move 함수가 일치하는 방향 입력시 성공을 반환하는지 ", () => {
+    const moveResult = gameManager.move("U");
+    expect(moveResult).toEqual("SUCCESS");
+  });
+  test("move 함수가 불일치 하는 입력시 실패를 반환하는지 ", () => {
+    const moveResult = gameManager.move("U");
+    expect(moveResult).toEqual("FAIL");
+  });
+  test("move 함수가 마지막으로 일치하는 방향을 입력시 끝을 반환하는지 ", () => {
+    const moveResult = gameManager.move("U");
+    expect(moveResult).toEqual("END");
+  });
+});
+
