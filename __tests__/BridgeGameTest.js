@@ -73,4 +73,17 @@ describe('Bridge Class 테스트', () => {
     const isRight = game.checkRightDirection('D');
     expect(isRight).toEqual(false);
   });
+
+  test('출력 테스트', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['0', '0', '1']);
+    mockQuestions(['3', 'D', 'D', 'U']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, ['[   |   | O ]', '[ O | O |   ]', '게임 성공 여부: 성공']);
+    expectBridgeOrder(log, '[   |   | O ]', '[ O | O |   ]');
+  });
 });
