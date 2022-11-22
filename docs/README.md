@@ -5,8 +5,8 @@
 ​	[ ] move 구현
 ​	[ ] retry 구현
 
-[ ] BridgeMaker.js 구현
-​	[ ] makeBridge 구현
+[x] BridgeMaker.js 구현
+​	[x] makeBridge 구현
 
 [x] InputView.js 구현
 ​	[x] readBridgeSize 구현
