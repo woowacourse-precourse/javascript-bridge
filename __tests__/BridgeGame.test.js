@@ -741,10 +741,9 @@ describe('게임 로그 기록 메서드 테스트', () => {
 
   test('"U", "D"을 제외한 문자열을 전달하면 예외를 발생한다.', () => {
     const bridgeGame2 = new BridgeGame();
-    bridgeGame2.setBridge(generateBridge);
-
     const USER_WRONG_INPUT = 'u';
 
+    bridgeGame2.setBridge(generateBridge);
     bridgeGame2.move();
 
     expect(() => {
