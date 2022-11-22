@@ -72,14 +72,16 @@ class Presenter {
     PLAYER_STATE_FN[playerState](this);
   }
 
-  quit() {
+  retryGame() {
+    this.#bridgeGameModel.retry();
+  }
+
+  quitGame() {
+    const resultMap = this.#bridgeGameModel.getPlayerBridgeMap();
     const isSuccess =
       this.#bridgeGameModel.getPlayerState() === PLAYER_STATE.SUCCESS;
-    OutputView.printResult({
-      resultMap: this.#bridgeGameModel.getPlayerBridgeMap(),
-      isSuccess,
-      totalTrial: this.#bridgeGameModel.getPlayerTotalTrial(),
-    });
+    const totalTrial = this.#bridgeGameModel.getPlayerTotalTrial();
+    OutputView.printResult(resultMap, isSuccess, totalTrial);
   }
 }
 

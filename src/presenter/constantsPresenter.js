@@ -23,7 +23,7 @@ const PLAYER_STATE_FN = {
     gamePresenter.getPlayerMove();
   },
   success(gamePresenter) {
-    gamePresenter.quit();
+    gamePresenter.quitGame();
   },
 };
 
@@ -53,10 +53,10 @@ const INPUT_CATCH_FN = {
 
 const RETRY_FN = {
   R(gamePresenter) {
-    gamePresenter.bridgeGameModel.retry();
+    gamePresenter.retryGame();
   },
   Q(gamePresenter) {
-    gamePresenter.quit();
+    gamePresenter.quitGame();
   },
 };
 
