@@ -1,6 +1,9 @@
 const BridgeMaker = require('../src/BridgeMaker');
 
 describe('다리가 올바르게 생성되는지 테스트한다.', () => {
+  /**
+   * 테스트 값 변경 전 로직 테스트 케이스
+   */
   test('문자 0, 1이 들어온 경우 U, D로 바꿔 반환한다.', () => {
     const randomNumbers = ['0', '0', '0', '1', '1', '1'];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
