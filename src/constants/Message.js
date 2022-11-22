@@ -2,7 +2,7 @@ const { CONFIG, ENTITY, KEY, WORD, RESULT } = require("./Token");
 
 const SAYS = Object.freeze({
   START: "다리 건너기 게임을 시작합니다." + ENTITY.NEW_LINE,
-  END: "다리 건너기 게임을 종료합니다.",
+  FINISH: "다리 건너기 게임을 종료합니다.",
 });
 
 const ASKS = Object.freeze({
@@ -17,7 +17,7 @@ const ASKS = Object.freeze({
 });
 
 const ABOUT = Object.freeze({
-  // TYPE_NUMBER: "[ERROR] 입력 타입은 숫자여야 합니다.",
+  TYPE_NUMBER: `${WORD.ERROR} 입력 타입은 숫자여야 합니다.`,
   RANGE: `${WORD.ERROR} 입력 숫자 범위는 ${CONFIG.BRIDGE_START} ~ ${CONFIG.BRIDGE_END}이어야 합니다.`,
   BRIDGE_SIZE: `${WORD.ERROR}  입력한 다리 size와 생성된 다리 길이가 일치하지 않습니다.`,
   BRIDGE_ELEMENT: `${WORD.ERROR} 다리 요소는 ${KEY.BRIDGE_UP} 혹은 ${KEY.BRIDGE_DOWN} 여야 합니다.`,

@@ -2,7 +2,12 @@ const InputView = require("../View/InputView");
 const OutputView = require("../View/OutputView");
 const BridgeGame = require("../Model/BridgeGame");
 const BridgeMaker = require("../BridgeMaker");
-const Check = require("../Utils/Check");
+const {
+  Check,
+  checkBridgeLength,
+  checkMoveFormat,
+  checkSelectFormat,
+} = require("../Utils/Check");
 const BridgeRandomNumberGenerator = require("../Utils/BridgeRandomNumberGenerator");
 
 class GameController {
@@ -12,7 +17,6 @@ class GameController {
       input: InputView,
       output: OutputView,
     };
-    this.check = Check;
   }
 
   startGame() {
@@ -22,24 +26,34 @@ class GameController {
 
   createBridge() {
     this.view.input.readBridgeSize((sizeInput) => {
-      this.check.bridgeLength(sizeInput);
+      Check(sizeInput, checkBridgeLength, this.createBridge.bind(this));
 
       const bridge = BridgeMaker.makeBridge(
         sizeInput,
         BridgeRandomNumberGenerator.generate
       );
 
-      console.log(bridge); //TODO: 구현 후 삭제
+      console.log(bridge); //TODO: 구현 후 삭제 //TODO: application test: type console error
 
       this.model.setState({ bridge });
-      this.startRound();
+      this.playRound();
     });
   }
 
-  startRound() {}
+  playRound() {
+    this.view.input.readMoving((moveInput) => {
+      Check(moveInput, checkMoveFormat, this.playRound.bind(this));
 
-  end() {
-    this.view.output.printMessage("end");
+      //비교로직 : 현재 걸음이랑, bridge랑 비교
+    });
+  }
+
+  selectNextStep() {}
+
+  retryOrFinish() {}
+
+  finishGame() {
+    this.view.output.printMessage("finish");
   }
 }
 

@@ -34,30 +34,36 @@ const InputView = {
     });
   },
 
-  readBridge(resolved, values, result) {
-    const bridge = BridgeMaker.makeBridge(resolved, RandomGenerator.generate);
-    console.log(bridge);
-    this.readMoving(bridge, values, result);
-  },
+  // readBridge(resolved, values, result) {
+  //   const bridge = BridgeMaker.makeBridge(resolved, RandomGenerator.generate);
+  //   console.log(bridge);
+  //   this.readMoving(bridge, values, result);
+  // },
 
-  readMoving(bridge, values, result) {
-    if (values.index !== bridge.length - 1) {
-      Console.readLine(ASKS.PLAYER_MOVING, (step) => {
-        Check.moveFormat(step);
-        values.stepArray.push(step);
+  // readMoving(bridge, values, result) {
+  //   if (values.index !== bridge.length - 1) {
+  //     Console.readLine(ASKS.PLAYER_MOVING, (step) => {
+  //       Check.moveFormat(step);
+  //       values.stepArray.push(step);
 
-        this.compare(bridge, values, result);
-      });
-    }
+  //       this.compare(bridge, values, result);
+  //     });
+  //   }
 
-    if (values.index === bridge.length - 1) {
-      Console.print(`\n최종 게임 결과`);
-      Console.print(result.upper);
-      Console.print(result.lower);
-      Console.print("\n게임 성공 여부: 성공");
-      Console.print(`총 시도한 횟수: ${result.trial}`);
-      Console.close();
-    }
+  //   if (values.index === bridge.length - 1) {
+  //     Console.print(`\n최종 게임 결과`);
+  //     Console.print(result.upper);
+  //     Console.print(result.lower);
+  //     Console.print("\n게임 성공 여부: 성공");
+  //     Console.print(`총 시도한 횟수: ${result.trial}`);
+  //     Console.close();
+  //   }
+  // },
+
+  readMoving(moveController) {
+    Console.readLine(ASKS.PLAYER_MOVING, (moveInput) => {
+      moveController(moveInput);
+    });
   },
 
   compare(bridge, values, result) {

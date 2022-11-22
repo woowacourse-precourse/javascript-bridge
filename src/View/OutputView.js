@@ -12,10 +12,11 @@ const OutputView = {
     if (context === "start") {
       Console.print(SAYS.START);
     }
-    if (context === "end") {
-      Console.print(SAYS.END);
+    if (context === "finish") {
+      Console.print(SAYS.FINISH);
       Console.close();
     }
+    Console.print(context);
   },
 
   printMap(map) {
@@ -28,7 +29,7 @@ const OutputView = {
     Console.print(result.lower);
     Console.print(FINAL.TEXT(result.text));
     Console.print(FINAL.TRIAL(result.count));
-    Console.print(SAYS.END);
+    Console.print(SAYS.FINISH);
     Console.close();
   },
 };
