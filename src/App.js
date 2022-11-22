@@ -6,14 +6,17 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
 
 class App {
+  constructor() {
+    this.gameManager = new BridgeGame();
+  }
   play() {
     this.start();
-    this.readBridgeSize();
+    this.startGame();
   }
   start() {
     Console.print("다리 건너기 게임을 시작합니다.\n");
   }
-  readBridgeSize() {
+  startGame() {
     InputView.readBridgeSize((size) => {
       this.gameManager.size = +size;
       this.makeBridge();
@@ -27,13 +30,9 @@ class App {
     InputView.readMoving((moving) => {
       const movingResult = this.gameManager.move(this.gameManager.bridge, this.gameManager.currentPosition, moving);
       this.gameManager.resultMap.push(this.handleResultMap(moving, movingResult));
+      OutputView.printMap(this.gameManager.resultMap);
+      this.checkArrival(movingResult);
     });
-  }
-  handleResultMap(moving, result) {
-    return {
-      moving,
-      result,
-    };
   }
   checkArrival(result) {
     if (result && this.gameManager.currentPosition < this.gameManager.size) {
@@ -45,6 +44,12 @@ class App {
       return;
     }
     this.readGameCommand(result);
+  }
+  handleResultMap(moving, result) {
+    return {
+      moving,
+      result,
+    };
   }
   readGameCommand(result) {
     InputView.readGameCommand((command) => {
