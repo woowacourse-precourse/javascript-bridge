@@ -21,7 +21,7 @@ const BridgeGameController = {
   getRightBlocks() {
     this.rightBlocks = BridgeMaker.makeBridge(
       this.bridgeSize,
-      BridgeRandomNumberGenerator
+      BridgeRandomNumberGenerator.generate
     );
   },
   getMove(index) {
