@@ -8,18 +8,12 @@ afterEach(() => {
 
 describe('BridgeMaker 객체의 makeBridge() 메서드 테스트', () => {
   test('입력한 사이즈 만큼의 다리 개수가 만들어지는지 확인', () => {
-    const bridge = BridgeMaker.makeBridge(
-      3,
-      BridgeRandomNumberGenerator.generate,
-    );
+    const bridge = BridgeMaker.makeBridge(3, BridgeRandomNumberGenerator.generate);
     const bridgeLength = bridge.length;
     expect(bridgeLength).toEqual(3);
   });
   test('다리의 길이를 많이 만들어도 내부의 값은 U or D 만 있는지 확인', () => {
-    const longBridge = BridgeMaker.makeBridge(
-      15,
-      BridgeRandomNumberGenerator.generate,
-    );
+    const longBridge = BridgeMaker.makeBridge(15, BridgeRandomNumberGenerator.generate);
     const notDuplicated = [...new Set(longBridge)];
     expect([
       ['U', 'D'],
@@ -36,9 +30,7 @@ describe('BridgeMaker 객체의 randomNumberToUpAndDown() 메서드 테스트', 
   });
   test('키값으로 0이 들어왔을떄 "D", 1이 들어왔을때 "U"를 반환하는지 확인', () => {
     const randomNumber = [0, 1];
-    const stringUOrD = randomNumber.map(x =>
-      BridgeMaker.randomNumberToUpAndDown(x),
-    );
+    const stringUOrD = randomNumber.map((number) => BridgeMaker.randomNumberToUpAndDown(number));
     expect(stringUOrD).toEqual(['D', 'U']);
   });
 });

@@ -82,6 +82,7 @@ describe('BridgeGame 클래스의 유저가 움직인 다리 맵 만드는 기�
     expect(bridgeGame.bridgeToString(map)).toEqual(result);
   });
 });
+
 describe('BridgeGame클래스의 retry() 기능 테스트', () => {
   test('retry()호출했을때 this.moveLogs 멤버변수가 초기화 되는지 확인', () => {
     const bridgeGame = new BridgeGame();
@@ -108,8 +109,4 @@ describe('BridgeGame클래스의 retry() 기능 테스트', () => {
     const result = bridgeGame.tryCount;
     expect(result).toEqual(1);
   });
-});
-
-describe('', () => {
-  test('', () => {});
 });

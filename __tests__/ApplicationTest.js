@@ -2,7 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
 
-const mockQuestions = answers => {
+const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
     return acc.mockImplementationOnce((_, callback) => {
@@ -11,7 +11,7 @@ const mockQuestions = answers => {
   }, MissionUtils.Console.readLine);
 };
 
-const mockRandoms = numbers => {
+const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce((acc, number) => {
     return acc.mockReturnValueOnce(number);
@@ -24,11 +24,11 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-const getOutput = logSpy => {
+const getOutput = (logSpy) => {
   return [...logSpy.mock.calls].join('');
 };
 
-const runException = inputs => {
+const runException = (inputs) => {
   mockQuestions(inputs);
   const logSpy = getLogSpy();
   const app = new App();
@@ -39,7 +39,7 @@ const runException = inputs => {
 };
 
 const expectLogContains = (received, logs) => {
-  logs.forEach(log => {
+  logs.forEach((log) => {
     expect(received).toEqual(expect.stringContaining(log));
   });
 };
@@ -93,10 +93,9 @@ describe('user가 잘못된 입력 넣었을때 에러메세지 출력 테스트
     const app = new App();
     app.play();
     const log = getOutput(logSpy);
-    expectLogContains(log, [
-      '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
-    ]);
+    expectLogContains(log, ['[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.']);
   });
+
   test('유저 다리 이동 입력 에러 핸들링 테스트', () => {
     const logSpy = getLogSpy();
     mockRandoms(['1', '0', '1']);
@@ -104,6 +103,6 @@ describe('user가 잘못된 입력 넣었을때 에러메세지 출력 테스트
     const app = new App();
     app.play();
     const log = getOutput(logSpy);
-    expectLogContains(log, ['[ERROR] 다리 이동 입력은 "U"와 "D"만 가능합니다']);
+    expectLogContains(log, ["[ERROR] 다리 이동 입력은 'U'와 'D'만 가능합니다."]);
   });
 });
