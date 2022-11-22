@@ -1,4 +1,4 @@
-const OutputView = require('./OutputView');
+const OutputView = require('../OutputView');
 const Message = require('./Message');
 
 const Check = {
