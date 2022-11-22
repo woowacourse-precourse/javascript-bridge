@@ -35,7 +35,6 @@ describe("BridgeGame 클래스 도메인 로직 테스트", () => {
     [['U', 'D', 'D'], ['U', 'D'], ['[ O |   ]', '[   | O ]']],
     [['U', 'D', 'D'], ['U', 'U'], ['[ O | X ]', '[   |   ]']],
     [['U', 'D', 'D'], ['U', 'D', 'D'], ['[ O |   |   ]', '[   | O | O ]']],
-
   ])('다리 출력 배열에 대한 생성 기능 구현 테스트', (first, second, expected) => {
     const bridgeGame = new BridgeGame();
     const result = bridgeGame.makeBridgeString(first, second);
@@ -46,7 +45,6 @@ describe("BridgeGame 클래스 도메인 로직 테스트", () => {
     [['U', 'U'], ['U', 'D', 'D'], 1, 0],
     [['U', 'D'], ['U', 'D', 'D'], 1, 1],
     [['U', 'D', 'D'], ['U', 'D', 'D'], 2, 2],
-
   ])('사용자가 이동한 칸에 대한 결과 기능 구현 테스트', (first, second, third, expected) => {
     const bridgeGame = new BridgeGame();
     const result = bridgeGame.getMoveResult(first, second, third);
