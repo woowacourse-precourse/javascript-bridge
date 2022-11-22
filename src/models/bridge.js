@@ -11,6 +11,8 @@ class Bridge {
 
   #compareResult;
 
+  #bridge;
+
   constructor() {
     this.#locationNumber = 0;
     this.#compareResult = [[], []];
@@ -28,7 +30,7 @@ class Bridge {
   makeBridge(size, init) {
     try {
       Validate.bridgeSizeValidate(size, init);
-      this.bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+      this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     } catch {
       OutputView.printMakeBridgeError();
       init();
@@ -46,8 +48,12 @@ class Bridge {
     }
   }
 
+  isGameOver() {
+    return this.#bridge.length === this.#compareResult[0].length;
+  }
+
   sameCheck(value) {
-    if (this.bridge[this.#locationNumber] === value) {
+    if (this.#bridge[this.#locationNumber] === value) {
       this.#correct(value);
       this.#locationNumber += 1;
       return;

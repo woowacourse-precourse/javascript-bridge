@@ -41,7 +41,7 @@ class Referee {
       return InputView.readGameCommand((answer) => this.gameCommand(answer));
     }
 
-    if (this.bridgeGame.bridge.bridge.length === compareResult[0].length) return this.endGame();
+    if (this.bridgeGame.bridge.isGameOver()) return this.endGame();
 
     return this.start();
   }
