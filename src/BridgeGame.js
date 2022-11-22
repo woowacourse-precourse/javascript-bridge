@@ -4,17 +4,21 @@ const { BRIDGE_CONSTANTS } = require('./GameConstants');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridgeAnswer;
+  #bridge;
   #upMap = [BRIDGE_CONSTANTS.shapeOfBeginning];
   #downMap = [BRIDGE_CONSTANTS.shapeOfBeginning];
   #numberOfAttempts = 1;
 
-  setBridgeAnswer(bridge) {
-    this.#bridgeAnswer = bridge;
+  setBridge(bridge) {
+    this.#bridge = bridge;
   }
 
   getBridgeAnswer() {
-    return this.#bridgeAnswer;
+    return this.#bridge;
+  }
+
+  getBridgeLength() {
+    return this.#bridge.length;
   }
 
   getMaps() {
@@ -32,13 +36,13 @@ class BridgeGame {
    */
   move(moving, index) {
     this.pushDividingLine(index);
-    const answerShape = this.#bridgeAnswer[index];
-    const IS_MOVE = (moving === answerShape);
+    const answerShape = this.#bridge[index];
+    const IS_CORRECT_MOVE = (moving === answerShape);
     if (moving === BRIDGE_CONSTANTS.up) {
-      return this.selectUp(IS_MOVE);
+      return this.selectUp(IS_CORRECT_MOVE);
     }
 
-    return this.selectDown(IS_MOVE);
+    return this.selectDown(IS_CORRECT_MOVE);
   }
 
   pushDividingLine(index) {
@@ -50,26 +54,26 @@ class BridgeGame {
     this.#downMap.push(BRIDGE_CONSTANTS.dividingLine);
   }
 
-  selectUp(IS_MOVE) {
+  selectUp(IS_CORRECT_MOVE) {
     this.#downMap.push(BRIDGE_CONSTANTS.notSelect);
-    if (IS_MOVE) {
+    if (IS_CORRECT_MOVE) {
       this.#upMap.push(BRIDGE_CONSTANTS.success);
-      return IS_MOVE;
+      return IS_CORRECT_MOVE;
     }
 
     this.#upMap.push(BRIDGE_CONSTANTS.failure);
-    return IS_MOVE;
+    return IS_CORRECT_MOVE;
   }
 
-  selectDown(IS_MOVE) {
+  selectDown(IS_CORRECT_MOVE) {
     this.#upMap.push(BRIDGE_CONSTANTS.notSelect);
-    if (IS_MOVE) {
+    if (IS_CORRECT_MOVE) {
       this.#downMap.push(BRIDGE_CONSTANTS.success);
-      return IS_MOVE;
+      return IS_CORRECT_MOVE;
     }
 
     this.#downMap.push(BRIDGE_CONSTANTS.failure);
-    return IS_MOVE;
+    return IS_CORRECT_MOVE;
   }
 
   /**

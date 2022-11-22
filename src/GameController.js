@@ -15,68 +15,72 @@ class GameController {
 
   start() {
     this.outputView.printStartMessage();
+    this.makeBridge();
+  }
+
+  makeBridge() {
     const onDeliverySizeInputted = (brigeSize) => {
-      const bridgeAnswer = BridgeMaker.makeBridge(brigeSize, BridgeRandomNumberGenerator.generate);
-      this.game.setBridgeAnswer(bridgeAnswer);
+      const bridge = BridgeMaker.makeBridge(brigeSize, BridgeRandomNumberGenerator.generate);
+      this.game.setBridge(bridge);
       const START_INDEX = 0;
-      this.move(START_INDEX);
+      this.crossBridge(START_INDEX);
     };
 
     this.inputView.readBridgeSize(onDeliverySizeInputted);
   }
 
-  move(index) {
+  crossBridge(index) {
     const onDeliveryMoving = (moving) => {
-      const IS_MOVE = this.game.move(moving, index);
-      const maps = this.game.getMaps();
-      this.outputView.printMap(maps);
-      if (IS_MOVE) {
-        this.move(index + 1);
-      } else {
-        this.retryOrQuit();
-      }
+      const CAN_MOVE_NEXT = this.game.move(moving, index);
+      this.outputView.printMap(this.game.getMaps());
+      this.resultOfCrossing(CAN_MOVE_NEXT, index);
     };
-
-    const bridgeAnswerLength = this.game.getBridgeAnswer().length;
-    if (index === bridgeAnswerLength) {
-      this.successResult();
-      return;
-    }
 
     this.inputView.readMoving(onDeliveryMoving);
   }
 
-  successResult() {
-    const maps = this.game.getMaps();
-    const totalAttempts = this.game.getNumberOfAttempts();
-    this.outputView.printResult(maps, true, totalAttempts);
-    this.end();
+  resultOfCrossing(CAN_MOVE_NEXT, index) {
+    if (index === this.game.getBridgeLength() - 1) {
+      this.finalGameResult(true);
+      return;
+    }
+
+    if (CAN_MOVE_NEXT) {
+      this.crossBridge(index + 1);
+      return;
+    }
+
+    this.gameOver();
   }
 
-  failureResult() {
-    const maps = this.game.getMaps();
-    const totalAttempts = this.game.getNumberOfAttempts();
-    this.outputView.printResult(maps, false, totalAttempts);
-    this.end();
-  }
-
-  retryOrQuit() {
+  gameOver() {
     const onDeliveryCommand = (command) => {
-      if (command === BRIDGE_CONSTANTS.retry) {
-        this.game.retry();
-        this.restart();
-      } else {
-        this.failureResult();
-        this.end();
-      }
+      this.retryOrQuit(command);
     };
 
     this.inputView.readGameCommand(onDeliveryCommand);
   }
 
-  restart() {
+  retryOrQuit(command) {
+    if (command === BRIDGE_CONSTANTS.retry) {
+      this.retryGame();
+      return;
+    }
+
+    this.finalGameResult(false);
+  }
+
+  retryGame() {
+    this.game.retry();
     const START_INDEX = 0;
-    this.move(START_INDEX);
+    this.crossBridge(START_INDEX);
+  }
+
+  finalGameResult(IS_SUCCESS) {
+    const maps = this.game.getMaps();
+    const totalAttempts = this.game.getNumberOfAttempts();
+    this.outputView.printResult(maps, IS_SUCCESS, totalAttempts);
+    this.end();
   }
 
   end() {
