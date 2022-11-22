@@ -31,7 +31,7 @@ class App {
   }
 
   checkFinish(result) {
-    if (result === gameConst.sign.O_SIGN && this.#game.realBridge.length <= this.#game.curr) {
+    if (result === gameConst.sign.O_SIGN && this.#game.ifFinish()) {
         OutputView.printResult(this.#game.userBridge, this.#game.tryCnt, true);
         Console.close();
         return;
