@@ -8,7 +8,7 @@ const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
- const game = new BridgeGame();
+const game = new BridgeGame();
 const InputView = {
   // ERROR control
   bridgeLenError(bridgeLen){
