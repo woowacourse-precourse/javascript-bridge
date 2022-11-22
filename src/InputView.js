@@ -1,8 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { GAME_MESSAGE, RESTART_OR_END, RESULT_ENGLISH } = require('./Constant.js');
 
-const { generate } = require('./BridgeRandomNumberGenerator.js');
-const { makeBridge } = require('./BridgeMaker.js');
 const { printMap, printResult } = require('./OutputView.js');
 const { checkBridgeSize, checkMovingInfo, checkRestartOrFail } = require('./ValidityCheck.js');
 
@@ -21,7 +19,7 @@ const InputView = {
       try {
         checkBridgeSize(bridgeSize);
 
-        bridgeGame.bridge = makeBridge(bridgeSize, generate);
+        bridgeGame.generateBridge(bridgeSize);
         this.readMoving();
       } catch (e) {
         Console.print(e);
