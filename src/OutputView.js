@@ -24,7 +24,7 @@ const OutputView = {
     Console.print(FINAL.RESULT_BRIDGE);
     this.printMap(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList());
     Console.print(`${FINAL.RESULT} ${success}`);
-    Console.print(`${FINAL.TRY}`);
+    Console.print(`${FINAL.TRY} ${bridgeGame.getCountRetry()}`);
     Console.close();
     
   },
