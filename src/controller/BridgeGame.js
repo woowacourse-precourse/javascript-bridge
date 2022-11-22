@@ -31,7 +31,8 @@ class BridgeGame {
   }
 
   inputBridgeLength() {
-    const bridgeLength = (input) => {
+    const bridgeLength = (size) => {
+      const input = Number(size);
       Validation.validateSize(input);
       OutputView.newLine();
       this.#answers = BridgeMaker.makeBridge(input, BridgeNumber.generate);
