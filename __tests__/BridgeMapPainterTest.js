@@ -40,4 +40,18 @@ describe('🎨 BridgeMapPainter 클래스 테스트', () => {
     const result = '[   ]\n[ X ]\n';
     expect(bridgeMapPainter.getUserBridgeMap()).toBe(result);
   });
+
+  test('⭐ isCorrectLocation 메서드 : upperBridge 또는 lowerBridge에 O가 포함되어 있으면 true를 반환합니다', () => {
+    const bridgeMapPainter = new BridgeMapPainter();
+    bridgeMapPainter.drawOX('U', 0, ['U', 'U', 'U']);
+
+    expect(bridgeMapPainter.isCorrectLocation()).toBeTruthy();
+  });
+
+  test('⭐ isCorrectLocation 메서드 : upperBridge 또는 lowerBridge에 X가 포함되어 있으면 false를 반환합니다', () => {
+    const bridgeMapPainter = new BridgeMapPainter();
+    bridgeMapPainter.drawOX('D', 0, ['U', 'D', 'D']);
+
+    expect(bridgeMapPainter.isCorrectLocation()).toBeFalsy();
+  });
 });
