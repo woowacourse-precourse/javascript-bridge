@@ -18,27 +18,15 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridge, userState) {
+    const commandList = ['U', 'D'];
     for (let i = 0; i < 2; i++) {
-      let string = '[';
+      let string = '';
       for (let j = 0; j < userState.length; j++) {
-        if (
-          (i == 0 && userState[j] === 'U') ||
-          (i == 1 && userState[j] === 'D')
-        ) {
-          if (bridge[j] === userState[j]) {
-            string += ' O ';
-          } else {
-            string += ' X ';
-          }
-        } else {
-          string += '   ';
-        }
-        if (j != userState.length - 1) {
-          string += '|';
-        }
+        const temp = bridge[j] === userState[j] ? ' O ' : ' X ';
+        const temp2 = j != userState.length - 1 ? '|' : '';
+        string += (userState[j] === commandList[i] ? temp : '   ') + temp2;
       }
-      string += ']';
-      Console.print(string);
+      Console.print('[' + string + ']');
     }
     Console.print('');
   },
