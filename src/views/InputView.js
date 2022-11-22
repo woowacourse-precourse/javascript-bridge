@@ -5,36 +5,36 @@ const { Console } = require('@woowacourse/mission-utils');
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
-   * @param {Object} appController 게임을 총괄하는 컨트롤러
+   * @param {function(string): void} callback 입력값을 전달할 콜백 함수
    */
-  readBridgeSize(appController) {
-    Console.readLine('\n다리의 길이를 입력해주세요.\n', bridgeSize => {
-      appController.validateBridgeSize(bridgeSize);
+  readBridgeSize(callback) {
+    Console.readLine('\n다리의 길이를 입력해주세요.\n', bridgeSizeInput => {
+      callback(bridgeSizeInput);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
-   * @param {Object} appController 게임을 총괄하는 컨트롤러
+   * @param {function(string): void} callback 입력값을 전달할 콜백 함수
    */
-  readMoving(appController) {
+  readMoving(callback) {
     Console.readLine(
       '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
       moving => {
-        appController.validateMoving(moving);
+        callback(moving);
       },
     );
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   * @param {Object} appController 게임을 총괄하는 컨트롤러
+   * @param {function(string): void} callback 입력값을 전달할 콜백 함수
    */
-  readGameCommand(appController) {
+  readGameCommand(callback) {
     Console.readLine(
       '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
       gameCommand => {
-        appController.validateGameCommand(gameCommand);
+        callback(gameCommand);
       },
     );
   },

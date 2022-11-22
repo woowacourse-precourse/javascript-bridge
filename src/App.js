@@ -19,7 +19,9 @@ class App {
   }
 
   inputBridgeSize() {
-    InputView.readBridgeSize(this);
+    InputView.readBridgeSize(bridgeSizeInput =>
+      this.validateBridgeSize(bridgeSizeInput),
+    );
   }
 
   validateBridgeSize(bridgeSizeInput) {
@@ -41,7 +43,7 @@ class App {
   }
 
   inputMoving() {
-    InputView.readMoving(this);
+    InputView.readMoving(moving => this.validateMoving(moving));
   }
 
   validateMoving(moving) {
@@ -80,7 +82,9 @@ class App {
   }
 
   inputGameCommand() {
-    InputView.readGameCommand(this);
+    InputView.readGameCommand(gameCommand =>
+      this.validateGameCommand(gameCommand),
+    );
   }
 
   validateGameCommand(gameCommand) {
