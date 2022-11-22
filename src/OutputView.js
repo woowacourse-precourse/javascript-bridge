@@ -16,39 +16,61 @@ const OutputView = {
   // todo : 중간에 틀리면 o | o | x 로 출력되어야하는데
   //                 -> x | x | x 로 바뀜(중간에 맞춘 값들도 )
   // 값을 하나씩 비교해야되나 ? ?
+  // 틀린부분만 x넣으면 됨
   printMap(keepGaming, getMap) {
     const resultArr = new Array(2);
     resultArr[GAME_RESOURCE.UPSIDE] = "";
     resultArr[GAME_RESOURCE.DOWNSIDE] = "";
+    console.log(getMap);
 
     for (let i = 0; i < getMap.length; i++) {
       if (i == 0) {
-        resultArr[GAME_RESOURCE.UPSIDE] += "[ ";
-        resultArr[GAME_RESOURCE.DOWNSIDE] += "[ ";
+        resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.LEFT_BRACKET;
+        resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.LEFT_BRACKET;
       } else {
-        resultArr[GAME_RESOURCE.UPSIDE] += " | ";
-        resultArr[GAME_RESOURCE.DOWNSIDE] += " | ";
+        resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.VERTICAL;
+        resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.VERTICAL;
       }
+
+      // if (getMap[i] === GAME_RESOURCE.UPSIDE) {
+      //   if (keepGaming === "right" || keepGaming === "allRight") {
+      //     resultArr[GAME_RESOURCE.UPSIDE] += "O";
+      //     resultArr[GAME_RESOURCE.DOWNSIDE] += " ";
+      //   } else {
+      //     resultArr[GAME_RESOURCE.UPSIDE] += "X";
+      //     resultArr[GAME_RESOURCE.DOWNSIDE] += " ";
+      //   }
+      // } else if (getMap[i] === GAME_RESOURCE.DOWNSIDE) {
+      //   if (keepGaming === "right" || keepGaming === "allRight") {
+      //     resultArr[GAME_RESOURCE.UPSIDE] += " ";
+      //     resultArr[GAME_RESOURCE.DOWNSIDE] += "O";
+      //   } else {
+      //     resultArr[GAME_RESOURCE.UPSIDE] += " ";
+      //     resultArr[GAME_RESOURCE.DOWNSIDE] += "X";
+      //   }
+      // }
+
       if (getMap[i] === GAME_RESOURCE.UPSIDE) {
-        if (keepGaming === "right" || keepGaming === "allRight") {
-          resultArr[GAME_RESOURCE.UPSIDE] += "O";
+        if (keepGaming === "wrong") {
+          resultArr[GAME_RESOURCE.UPSIDE] += "X";
           resultArr[GAME_RESOURCE.DOWNSIDE] += " ";
         } else {
-          resultArr[GAME_RESOURCE.UPSIDE] += "X";
+          resultArr[GAME_RESOURCE.UPSIDE] += "O";
           resultArr[GAME_RESOURCE.DOWNSIDE] += " ";
         }
       } else if (getMap[i] === GAME_RESOURCE.DOWNSIDE) {
-        if (keepGaming === "right" || keepGaming === "allRight") {
-          resultArr[GAME_RESOURCE.UPSIDE] += " ";
-          resultArr[GAME_RESOURCE.DOWNSIDE] += "O";
-        } else {
+        if (keepGaming === "wrong") {
           resultArr[GAME_RESOURCE.UPSIDE] += " ";
           resultArr[GAME_RESOURCE.DOWNSIDE] += "X";
+        } else {
+          resultArr[GAME_RESOURCE.UPSIDE] += " ";
+          resultArr[GAME_RESOURCE.DOWNSIDE] += "O";
         }
       }
+
       if (i == getMap.length - 1) {
-        resultArr[GAME_RESOURCE.UPSIDE] += " ] ";
-        resultArr[GAME_RESOURCE.DOWNSIDE] += " ] ";
+        resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.RIGHT_BRACKET;
+        resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.RIGHT_BRACKET;
       }
     }
     Console.print(resultArr[GAME_RESOURCE.UPSIDE]);
@@ -63,20 +85,15 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(command, count, result) {
-    // 투두 : 칸 추가 하기
-
+    Console.print(MESSAGE.PRINT_RESULT);
+    Console.print(result[GAME_RESOURCE.UPSIDE]);
+    Console.print(result[GAME_RESOURCE.DOWNSIDE]);
     if (command === 0) {
-      Console.print(MESSAGE.PRINT_RESULT);
-      Console.print(result[GAME_RESOURCE.UPSIDE]);
-      Console.print(result[GAME_RESOURCE.DOWNSIDE]);
       Console.print(MESSAGE.PRINT_GAME_RESULT + " " + MESSAGE.FAIL);
       Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + " " + count);
       Console.close();
       return;
     }
-    Console.print(MESSAGE.PRINT_RESULT);
-    Console.print(result[GAME_RESOURCE.UPSIDE]);
-    Console.print(result[GAME_RESOURCE.DOWNSIDE]);
     Console.print(MESSAGE.PRINT_GAME_RESULT + " " + MESSAGE.SUCCESS);
     Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + " " + count);
     Console.close();
