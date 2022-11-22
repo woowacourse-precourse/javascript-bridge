@@ -19,14 +19,13 @@ class App {
 
   requestBridgeSize() {
     InputView.readBridgeSize((userInput) => {
-      const userInputNumber = Number(userInput);
       try {
-        Validator.bridgeSize(userInputNumber);
+        Validator.bridgeSize(Number(userInput));
       } catch (error) {
         Console.print(error.message);
         return this.requestBridgeSize();
       }
-      this.#bridgeGame.setBridge(userInputNumber);
+      this.#bridgeGame.setBridge(Number(userInput));
       this.requestDirection();
     });
   }
