@@ -15,10 +15,23 @@ class App {
     InputView.readBridgeSize((size) => {
       this.gameManager.size = +size;
       this.makeBridge();
+      this.readMoving();
     });
   }
   makeBridge() {
     this.gameManager.bridge = BridgeMaker.makeBridge(this.gameManager.size, BridgeRandomNumberGenerator.generate);
+  }
+  readMoving() {
+    InputView.readMoving((moving) => {
+      const movingResult = this.gameManager.move(this.gameManager.bridge, this.gameManager.currentPosition, moving);
+      this.gameManager.resultMap.push(this.handleResultMap(moving, movingResult));
+    });
+  }
+  handleResultMap(moving, result) {
+    return {
+      moving,
+      result,
+    };
   }
 }
 
