@@ -23,6 +23,7 @@ const COMMAND_VALUE = {
   UP: "U",
   DOWN: "D",
 };
+
 const GAME_RESOURCE = {
   LEFT_BRACKET: "[ ",
   RIGHT_BRACKET: " ]",

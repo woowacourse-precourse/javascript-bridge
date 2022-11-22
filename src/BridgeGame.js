@@ -54,7 +54,6 @@ class BridgeGame {
       return "wrong";
     }
   }
-
   getMap(userMoveArray) {
     this.userMoveArray = userMoveArray;
     return this.userMoveArray;

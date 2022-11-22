@@ -7,7 +7,6 @@ class App {
     const bridgeGame = new BridgeGame();
     InputView.readBridgeSize(bridgeGame);
   }
-
   printPlay() {
     OutputView.printStart();
   }
