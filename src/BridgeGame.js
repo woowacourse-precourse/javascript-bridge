@@ -1,5 +1,4 @@
-const { SIGN, STATUS } = require('./constants/values');
-const { KEYS } = require('./constants/keys');
+const { SIGN, STATUS, KEYS } = require('./utils/constants');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 

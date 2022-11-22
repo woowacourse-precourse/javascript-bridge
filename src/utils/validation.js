@@ -1,5 +1,4 @@
-const { MIN_BRIDGE_SIZE, MAX_BRIDGE_SIZE } = require('../constants/numbers');
-const { KEYS } = require('../constants/keys');
+const { BRIDGE_SIZE, KEYS } = require('./constants');
 
 const Validate = {
   userInputSize(input) {
@@ -7,7 +6,7 @@ const Validate = {
     if (isNaN(size) || size === undefined || !Number.isInteger(size)) {
       throw new Error();
     }
-    if (size < MIN_BRIDGE_SIZE || size > MAX_BRIDGE_SIZE) {
+    if (size < BRIDGE_SIZE.MIN || size > BRIDGE_SIZE.MAX) {
       throw new Error();
     }
   },
