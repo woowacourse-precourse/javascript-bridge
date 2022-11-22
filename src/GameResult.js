@@ -1,5 +1,5 @@
-// const { OUTPUT_FORMAT, INPUT_FORMAT, MESSAGE } = require('./constants');
-// const OutputView = require('./OutputView');
+const { OUTPUT_FORMAT, INPUT_FORMAT, MESSAGE } = require('./constants');
+const OutputView = require('./OutputView');
 
 class GameResult {
   #result;
@@ -39,6 +39,10 @@ class GameResult {
     });
 
     this.#tryCount += 1;
+  }
+
+  showTryCountSummary() {
+    return `${MESSAGE.TRY_COUNT}${this.#tryCount}`;
   }
 }
 
