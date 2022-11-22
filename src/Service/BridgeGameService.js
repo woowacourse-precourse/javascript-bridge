@@ -18,7 +18,7 @@ const BridgeGameService = class {
       const bridge = makeBridge(size, generate);
       this.#outputView.printBlank();
       this.#bridgeGameModel.checkBridge(bridge);
-      this.#bridgeGameModel.init(bridge);
+      this.#bridgeGameModel.start(bridge);
       task();
     };
 
@@ -27,9 +27,9 @@ const BridgeGameService = class {
   }
 
   retryGame(processRetryTask) {
-    const callback = (attempt) => {
-      this.#bridgeGameModel.checkRetry(attempt);
-      this.#bridgeGameModel.attempt(attempt);
+    const callback = (input) => {
+      this.#bridgeGameModel.checkRetry(input);
+      this.#bridgeGameModel.retry(input);
       processRetryTask();
     };
 
@@ -48,7 +48,7 @@ const BridgeGameService = class {
     const callback = (move) => {
       this.#bridgeGameModel.checkUser(move);
       pipe(move)(
-        this.#bridgeGameModel.jump.bind(this.#bridgeGameModel),
+        this.#bridgeGameModel.update.bind(this.#bridgeGameModel),
         this.#outputView.printMap,
         processMoveTask
       );
@@ -59,6 +59,7 @@ const BridgeGameService = class {
 
   processRetry(moveTask, endTask) {
     if (this.#bridgeGameModel.isRetry()) {
+      this.#bridgeGameModel.initialize();
       moveTask();
       return;
     }
@@ -72,7 +73,7 @@ const BridgeGameService = class {
       return;
     }
 
-    this.#bridgeGameModel.isFail() ? retryTask() : moveTask();
+    this.#bridgeGameModel.isPass() ? retryTask() : moveTask();
   }
 };
 

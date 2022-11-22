@@ -34,13 +34,13 @@ const mockOutView = () => {
 
 const mockBridgeGameModel = () => {
   const mock = new BridgeGameModel();
-  jest.spyOn(mock, "init").mockImplementation((bridge) => {
+  jest.spyOn(mock, "start").mockImplementation((bridge) => {
     return bridge;
   });
-  jest.spyOn(mock, "attempt").mockImplementation((attempt) => {
+  jest.spyOn(mock, "retry").mockImplementation((attempt) => {
     return attempt;
   });
-  jest.spyOn(mock, "jump").mockImplementation((bridge) => {
+  jest.spyOn(mock, "update").mockImplementation((bridge) => {
     return bridge;
   });
   jest.spyOn(mock, "result").mockImplementation((result) => {
@@ -55,7 +55,7 @@ const mockBridgeGameModel = () => {
   jest.spyOn(mock, "checkRetry").mockImplementation((retry) => {
     return retry;
   });
-  jest.spyOn(mock, "isFail").mockImplementation((attemp) => {
+  jest.spyOn(mock, "isPass").mockImplementation((attemp) => {
     return attemp;
   });
   jest.spyOn(mock, "isSuccess").mockImplementation((bridge) => {
@@ -106,7 +106,7 @@ describe("BridgeGameService 클래스 테스트", () => {
 
     expect(outputView.printStart).toHaveBeenCalledTimes(1);
     expect(bridgeGameModel.checkBridge).toHaveBeenCalledTimes(1);
-    expect(bridgeGameModel.init).toHaveBeenCalledTimes(1);
+    expect(bridgeGameModel.start).toHaveBeenCalledTimes(1);
   });
 
   test("retryGame 로직 테스트", () => {

@@ -8,47 +8,48 @@ const {
 const BridgeGameModel = class {
   #user = [];
   #bridge = [];
-  #attempt = [];
+  #retry = [];
 
-  init(bridge) {
-    const { RETRY } = KEYWORD;
-    this.#attempt.push(RETRY);
-    this.#bridge.push(...bridge);
-  }
-
-  attempt(attempt) {
-    this.#attempt.push(HASH[attempt]);
+  initialize() {
     this.#user = [];
   }
 
-  jump(move) {
-    this.#user.push(HASH[move]);
-    return { ...this.survey(), pass: !this.isFail() };
+  start(bridge) {
+    const { RETRY } = KEYWORD;
+    this.#retry.push(RETRY);
+    this.#bridge.push(...bridge);
   }
 
-  survey() {
-    const data = { user: this.#user, bridge: this.#bridge };
-    return data;
+  retry(attempt) {
+    this.#retry.push(HASH[attempt]);
+  }
+
+  update(move) {
+    this.#user.push(HASH[move]);
+    return { ...this.read(), pass: !this.isPass() };
+  }
+
+  read() {
+    return { user: this.#user, bridge: this.#bridge };
   }
 
   result() {
     const { RETRY } = KEYWORD;
-    const retry = this.#attempt.filter((attemp) => attemp === RETRY).length;
-    const data = { retry, success: this.isSuccess(), map: this.survey() };
-    return data;
+    const retry = this.#retry.filter((retry) => retry === RETRY).length;
+    return { retry, success: this.isSuccess(), map: this.read() };
   }
 
   isRetry() {
-    const attempt = this.#attempt[this.#attempt.length - 1];
+    const retry = this.#retry[this.#retry.length - 1];
     const { RETRY } = KEYWORD;
-    return attempt === RETRY;
+    return retry === RETRY;
   }
 
   isSuccess() {
     return JSON.stringify(this.#user) === JSON.stringify(this.#bridge);
   }
 
-  isFail() {
+  isPass() {
     const currentIndex = this.#user.length - 1;
     return this.#user[currentIndex] !== this.#bridge[currentIndex];
   }
@@ -58,18 +59,21 @@ const BridgeGameModel = class {
     const { MIN_SIZE, MAX_SIZE } = SIZE;
     const isBrige = length >= MIN_SIZE && length <= MAX_SIZE;
     if (!isBrige) throw new BridgeGameSizeError();
+    return bridge;
   }
 
   checkUser(move) {
     const { UP, DOWN } = KEYWORD;
     const isMove = move === UP || move === DOWN;
     if (!isMove) throw new BridgeGameMoveError();
+    return move;
   }
 
   checkRetry(input) {
     const { RETRY, QUIT } = KEYWORD;
     const isRetry = input === RETRY || input === QUIT;
     if (!isRetry) throw new BridgeGameRetryError();
+    return input;
   }
 };
 
