@@ -1,11 +1,36 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE } = require('./constants');
+const { MESSAGE, ERROR_MESSAGE } = require('./constants');
+const { throwError } = require('./utils');
+const {
+  inValidString,
+  inValidSize,
+} = require('./Invalidator');
+
 const InputView = {
   readBridgeSize(makeBridge) {
+    try {
       Console.readLine(MESSAGE.INPUT_SIZE, (input) => {
         const size = Number(input);
+        this.validateSize(size);
         makeBridge(size);
       });
+    } catch (error) {
+      Console.print(error);
+    }
+  },
+
+  validateSize(size) {
+    if (inValidString(size)) {
+      throw ERROR_MESSAGE.INPUT_NUM;
+    }
+
+    if (inValidSize(size)) {
+      throw ERROR_MESSAGE.BRIDGE_SIZE;
+    }
+  },
+    }
+  },
+
   },
 
   /**
