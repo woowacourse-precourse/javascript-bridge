@@ -1,5 +1,5 @@
-const BridgeMaker = require('../../src/BridgeMaker');
-const { SPAWNABLE_TILES } = require('../../src/constants');
+const BridgeMaker = require('../src/BridgeMaker');
+const { SPAWNABLE_TILES } = require('../src/constants');
 
 describe('BridgeMaker 테스트', () => {
   test('generateRandomNumber 함수에 따라 Bridge를 잘 생성하는지', () => {
