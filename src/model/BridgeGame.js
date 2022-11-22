@@ -35,6 +35,12 @@ class BridgeGame {
       this.#bridge_map.upBridge.push(" ");
     }
     this.addStep();
+    return this.checkSuccess(step, current);
+  }
+
+  checkSuccess(step, current) {
+    if (step === current) return true;
+    if (step !== current) return false;
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

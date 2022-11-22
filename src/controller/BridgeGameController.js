@@ -8,32 +8,46 @@ const { BRIDGE_DIRECTION } = require("../util/Constants");
 
 class BridgeGameController {
   #bridge_length;
-  #rand_bridge;
+  #bridgegame = new BridgeGame();
   start() {
     OutputView.printStart();
-    this.#bridge_length = InputView.measureLength();
-    this.makeBridge(this.#bridge_length);
+    this.makeBridge(InputView.measureLength());
   }
 
   addBridge(length) {
     const randBridge = BridgeMaker.makeBridge(
       length,
-      BridgeRandomNumberGenerator.generate()
+      BridgeRandomNumberGenerator.generate
     );
-    BridgeGame.setBridge(randBridge);
-    this.#rand_bridge = BridgeGame.getBridge();
+    this.#bridgegame.setBridge(randBridge);
     this.moveDirection();
   }
 
   moveDirection() {
     const direction = InputView.readMoving();
-    this.move(direction);
+    //this.move(direction);
   }
 
   move(step, movement) {
     BridgeGame.move(step, movement);
     OutputView.printMap();
     this.moveDirection();
+  }
+
+  move(step) {
+    const isSuccess = this.#bridgegame.move(step);
+    const map = this.#BridgeGame.currentMap();
+    OutputView.printMap(map[0], map[1]);
+    if (!isSuccess) {
+      const step = InputView.readGameCommand();
+      if (step === "R") {
+      }
+      if (step === "Q") {
+      }
+    }
+    if (isSuccess) {
+      this.moveDirection();
+    }
   }
 }
 
