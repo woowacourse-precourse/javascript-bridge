@@ -37,6 +37,11 @@ class BridgeGame {
   }
 }
 
+  checkGameCommand(input){
+    if(!(input =='R' || input == 'Q')){
+      Console.print("[ERROR] 재시작 여부는 R이나 Q 여야 합니다."); 
+    }
+  }
 
 }
 
