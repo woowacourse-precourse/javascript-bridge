@@ -52,7 +52,7 @@ class BridgeGameController {
     if (answer === 'R') return this.retry();
 
     const isSuccess = false;
-    return OutputView.printResult(isSuccess, this.bridgeGame.retryCount, this.bridge);
+    return OutputView.printResult(isSuccess, this.bridgeGame.retryCount, this.stepResult);
   }
 
   retry() {
