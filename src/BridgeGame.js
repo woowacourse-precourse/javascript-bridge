@@ -29,11 +29,7 @@ class BridgeGame {
   }
 
   checkMove(player) {
-    if (player == 'U' && this.#bridge[this.#history.length] == 'U') {
-      this.#history.push([player, true]);
-      return true;
-    }
-    if (player == 'D' && this.#bridge[this.#history.length] == 'D') {
+    if (player == this.#bridge[this.#history.length]) {
       this.#history.push([player, true]);
       return true;
     }
