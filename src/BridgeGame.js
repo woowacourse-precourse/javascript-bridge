@@ -18,9 +18,9 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
    }
  
    validateSize(size, callback) {
-    try{ if (isNaN(size) || size < 3 || size > 20) throw new Error();} 
-    catch{
-      MissionUtils.Console.print('\n\n[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n\n');
+    try{ if (isNaN(size) || size < 3 || size > 20) throw '\n\n[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n\n';} 
+    catch(e) {
+      MissionUtils.Console.print(e);
       callback.call(this);
     };
    }
@@ -29,9 +29,9 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
      if (move === 'U' || move === 'D') {
       return true;
     }
-     try {throw new Error();}
-     catch {
-      MissionUtils.Console.print('\n\n[ERROR] "U" 혹은 "D"를 입력해주세요.\n\n');
+     try {throw '\n\n[ERROR] "U" 혹은 "D"를 입력해주세요.\n\n';}
+     catch(e) {
+      MissionUtils.Console.print(e);
       callback.call(this);
      };
    }
@@ -40,11 +40,11 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
      if (command === 'R' || command === 'Q') {
       return true;
     }
-     try {throw new Error();}
-     catch {
-      MissionUtils.Console.print('\n\n[ERROR] "R" 혹은 "Q"를 입력해주세요.\n\n');
+     try {throw '\n\n[ERROR] "R" 혹은 "Q"를 입력해주세요.\n\n';}
+     catch(e) {
+      MissionUtils.Console.print(e);
       callback.call(this);
-     };
+     }
    }
  
    bridge() {
