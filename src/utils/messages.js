@@ -1,4 +1,4 @@
-const { DIRECTION, COMMAND } = require("./constants");
+const { BRIDGE_SIZE, DIRECTION, COMMAND } = require("./constants");
 
 module.exports = {
   MESSAGE_INPUT: {
@@ -16,4 +16,10 @@ module.exports = {
 
   CLAER: `성공`,
   FAILURE: `실패`,
+
+  ERROR_MESSAGE: {
+    BRIDGE_SIZE: `[ERROR] 다리 길이는 ${BRIDGE_SIZE.MIN}부터 ${BRIDGE_SIZE.MAX} 사이의 숫자여야 합니다.`,
+    MOVING_DIRECTION: `[ERROR] 이동할 칸은 ${DIRECTION.TO_UPPER} 혹은 ${DIRECTION.TO_LOWER} 여야 합니다.`,
+    RETRY_COMMAND: `[ERROR] 입력 명령어는 ${COMMAND.RETRY} 혹은 ${COMMAND.QUIT} 여야 합니다.`,
+  },
 };

@@ -1,4 +1,5 @@
 const { BRIDGE_SIZE, DIRECTION, COMMAND } = require("./constants");
+const { ERROR_MESSAGE } = require("./messages");
 
 const InputValidate = {
   checkBridgeSize(size) {
@@ -6,19 +7,19 @@ const InputValidate = {
       throw new Error("[ERROR] 다리 길이는 숫자 형식이어야 합니다.");
     }
     if (Number(size) < BRIDGE_SIZE.MIN || Number(size) > BRIDGE_SIZE.MAX) {
-      throw new Error(`[ERROR] 다리 길이는 ${BRIDGE_SIZE.MIN}부터 ${BRIDGE_SIZE.MAX} 사이의 숫자여야 합니다.`);
+      throw new Error(ERROR_MESSAGE.BRIDGE_SIZE);
     }
   },
 
   checkMovingDirection(direction) {
     if (direction !== DIRECTION.TO_UPPER && direction !== DIRECTION.TO_LOWER) {
-      throw new Error(`[ERROR] 이동할 칸은 ${DIRECTION.TO_UPPER} 혹은 ${DIRECTION.TO_LOWER} 여야 합니다.`);
+      throw new Error(ERROR_MESSAGE.MOVING_DIRECTION);
     }
   },
 
   checkRetryOrQuitCommand(command) {
     if (command !== COMMAND.RETRY && command !== COMMAND.QUIT) {
-      throw new Error(`[ERROR] 입력 명령어는 ${COMMAND.RETRY} 혹은 ${COMMAND.QUIT} 여야 합니다.`);
+      throw new Error(ERROR_MESSAGE.RETRY_COMMAND);
     }
   },
 };
