@@ -1,6 +1,7 @@
 // BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const validator = require('./validator/validator');
 
 class BridgeGame {
   #bridge;
@@ -19,6 +20,13 @@ class BridgeGame {
   }
 
   retry(command) {}
+
+  over() {
+    return validator.isSameArr(
+      this.#bridge.slice(0, this.#history.length),
+      this.#history
+    );
+  }
 
   generateBridge(size) {
     this.#bridge = BridgeMaker.makeBridge(
