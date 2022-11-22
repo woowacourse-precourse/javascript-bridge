@@ -8,6 +8,10 @@ const OutputView = {
     Console.print(`${MANAGER.NOTICE_START}`);
   },
 
+  printBlank() {
+    Console.print("");
+  },
+
   printMap(nowMap) {
     nowMap.forEach((bridge) => {
       Console.print(`[ ${bridge.join(" | ")} ]`);
