@@ -2,9 +2,9 @@ const InputView = require("../View/InputView");
 const OutputView = require("../View/OutputView");
 
 const { makeBridge } = require("../Model/BridgeMaker");
-const BridgeGame = require("../Model/BridgeGame");
 const { generate } = require("../Model/BridgeRandomNumberGenerator");
 const Validate = require("../Model/Validate");
+const BridgeGame = require("../Model/BridgeGame");
 
 const { GAME_OPTION, GAME_MESSAGE } = require("../Utils/Constants");
 
@@ -21,15 +21,19 @@ class App {
 
   requestBridgeSize() {
     InputView.readBridgeSize((bridgeSize) => {
-      const [isValid, errorMsg] = this.validate.checkBridgeSize(bridgeSize);
-      if (!isValid) {
-        OutputView.printMsg(errorMsg);
-        return this.requestBridgeSize();
-      }
-
+      this.checkBridgeSize(bridgeSize);
       this.createBridgeGame(bridgeSize);
       this.requestMoving();
     });
+  }
+
+  checkBridgeSize(bridgeSize) {
+    const [isValid, errorMsg] = this.validate.checkBridgeSize(bridgeSize);
+    if (!isValid) {
+      OutputView.printMsg(errorMsg);
+
+      this.requestBridgeSize();
+    }
   }
 
   createBridgeGame(bridgeSize) {
@@ -39,24 +43,30 @@ class App {
 
   requestMoving() {
     InputView.readMoving((direction) => {
-      const [isValid, errorMsg] = this.validate.checkMovingDirection(direction);
-      if (!isValid) {
-        OutputView.printMsg(errorMsg);
-        return this.requestMoving();
-      }
-
+      this.checkMovingDirection(direction);
       const [canCross, playerUpperBridgeState, playerLowerBridgeState] =
         this.bridgeGame.move(direction);
-
-      // 현재까지 이동한 다리 상태
       this.printCurrBridgeState(playerUpperBridgeState, playerLowerBridgeState);
 
-      this.bridgeGame.isLastPosition(playerUpperBridgeState.length) && canCross
-        ? this.quit()
-        : canCross
-        ? this.requestMoving()
-        : this.requestGameCommand();
+      this.calculateNextStep(canCross, playerUpperBridgeState);
     });
+  }
+
+  calculateNextStep(canCross, playerBridgeState) {
+    this.bridgeGame.isLastPosition(playerBridgeState.length) && canCross
+      ? this.quit()
+      : canCross
+      ? this.requestMoving()
+      : this.requestGameCommand();
+  }
+
+  checkMovingDirection(direction) {
+    const [isValid, errorMsg] = this.validate.checkMovingDirection(direction);
+    if (!isValid) {
+      OutputView.printMsg(errorMsg);
+
+      return this.requestMoving();
+    }
   }
 
   printCurrBridgeState(playerUpperBridgeState, playerLowerBridgeState) {
@@ -65,22 +75,23 @@ class App {
 
   requestGameCommand() {
     InputView.readGameCommand((command) => {
-      const [isValid, errorMsg] = this.validate.checkGameCommand(command);
-      if (!isValid) {
-        OutputView.printMsg(errorMsg);
-        return this.requestGameCommand();
-      }
-
-      if (command === GAME_OPTION.REPLAY) {
-        this.bridgeGame.retry();
-        this.requestMoving();
-
-        return;
-      }
-
-      // Q
-      this.quit();
+      this.checkGameCommand(command);
+      command === GAME_OPTION.REPLAY ? this.retry() : this.quit();
     });
+  }
+
+  checkGameCommand(command) {
+    const [isValid, errorMsg] = this.validate.checkGameCommand(command);
+    if (!isValid) {
+      OutputView.printMsg(errorMsg);
+
+      return this.requestGameCommand();
+    }
+  }
+
+  retry() {
+    this.bridgeGame.retry();
+    this.requestMoving();
   }
 
   quit() {
