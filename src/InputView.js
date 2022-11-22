@@ -10,7 +10,7 @@ const InputView = {
    */
   readBridgeSize() {
     let bridgeSize;
-    MissionUtils.Console.readLine("다리의 길이를 입력해주세요.", (bridgeSizeInput) => {
+    MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (bridgeSizeInput) => {
       bridgeSize = Number(bridgeSizeInput);
       this.handleSizeError(bridgeSize);
     });
@@ -32,7 +32,7 @@ const InputView = {
   readMoving() {
     const validation = new Validation();
     let moving;
-    MissionUtils.Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)", (movingInput) => {
+    MissionUtils.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)", (movingInput) => {
       moving = movingInput;
       validation.checkMovingInputValidation(moving);
     });
@@ -55,7 +55,7 @@ const InputView = {
   readGameCommand() {
     const validation = new Validation();
     let gameCommand; 
-    MissionUtils.Console.readLine("\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)", (gameCommandInput) => {
+    MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)", (gameCommandInput) => {
       gameCommand = gameCommandInput;
       validation.checkRetryInputValidation(gameCommand);
     });
