@@ -13,7 +13,7 @@ const Validation = {
   },
 
   validateUserInput(input) {
-    if (input !== "R" || input !== "Q")
+    if (input !== "R" && input !== "Q")
       throw new Error("[ERROR] R 혹은 Q만 입력할 수 있습니다.");
   },
 };
