@@ -6,13 +6,8 @@ const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 const { printResult } = require("./OutputView");
 const Validation = require("./Validation");
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
   bridgeGame: new BridgeGame(),
   retryNum: 1,
   isSuccess: END_GAME.SUCCESSED,
@@ -24,13 +19,10 @@ const InputView = {
         const bridgeList = makeBridge(size, generate);
         InputView.readMoving(bridgeList);
       } 
-      catch (error) { this.printError(error); }
+      catch (error) { this.printError(error); this.readBridgeSize();}
       });
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
   readMoving(bridgeList) {
     Console.readLine(USER_INPUT.ENTER_MOVEMENT, (upOrDown) => {
       try { 
@@ -38,7 +30,7 @@ const InputView = {
         const [isInputRight, result] = this.getValueFromBridgeGame(bridgeList, upOrDown);
         this.repeatMovingOrNot(bridgeList, result, isInputRight);
       } 
-      catch(error) { this.printError(error); }
+      catch(error) { this.printError(error); this.readMoving(bridgeList); }
     })
   },
 
@@ -72,15 +64,12 @@ const InputView = {
     OutputView.printMap(upAndDownList);
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand(upAndDownList, bridgeList) {
     Console.readLine(RETRY, (retryOrQuit) => {
       try {
         Validation.validateGameCommand(retryOrQuit);
         this.retryOrQuit(retryOrQuit, upAndDownList, bridgeList);
-      } catch(error) { this.printError(error); }
+      } catch(error) { this.printError(error); this.readGameCommand(upAndDownList, bridgeList); }
     })
   },
 
@@ -105,7 +94,6 @@ const InputView = {
 
   printError(error) {
     Console.print(error);
-    Console.close();
   },
 };
 
