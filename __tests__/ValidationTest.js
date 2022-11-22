@@ -23,3 +23,14 @@ describe('사용자 움직임 예외 케이스', () => {
     },
   );
 });
+
+describe('게임 종료/재시작 커맨드 예외 케이스', () => {
+  test.each(['r', 'q', 'A'])(
+    '게임 종료/재시작 커맨드로 R, Q를 제외한 값이 들어오면 에러가 발생한다.',
+    (input) => {
+      expect(() => {
+        validateRetry(input).toThrow('[ERROR]');
+      });
+    },
+  );
+});
