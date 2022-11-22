@@ -1,9 +1,18 @@
-const GameController = require('./GameController');
+const InputView = require("./view/InputView");
+const OutputView = require("./view/OutputView");
 
 class App {
   play() {
-    const gameController = new GameController;
-    gameController.startGame();
+    this.opening();
+  }
+
+  opening() {
+    OutputView.printOpening();
+    this.readBridgeSize();
+  }
+
+  readBridgeSize() {
+    InputView.readBridgeSize();
   }
 }
 

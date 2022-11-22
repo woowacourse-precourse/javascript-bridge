@@ -1,10 +1,10 @@
-const OutputView = require("./OutputView");
+const OutputView = require("../view/OutputView");
 
-const Exception = {
-    lengthException(length) {
+const ExceptionController = {
+    sizeException(size) {
         try {
-            this.numberCheck(length);
-            this.rangeCheck(length);
+            this.numberCheck(size);
+            this.rangeCheck(size);
         } catch (e) {
             OutputView.printError(e);
             return false;
@@ -12,17 +12,14 @@ const Exception = {
         return true;
     },
 
-    numberCheck(value) {
-        if(!Number.isInteger(Number(value))) {
-            throw '[ERROR] 다리 길이는 숫자를 입력해야 합니다.';
-        }
+    numberCheck(size) {
+        const integerSize = Number(size);
+        if(!Number.isInteger(integerSize)) throw '[ERROR] 다리 길이는 숫자를 입력해야 합니다.';
     },
 
-    rangeCheck(value) {
-        const number = Number(value);
-        if(number < 3 || number > 20) {
-            throw '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.';
-        }
+    rangeCheck(size) {
+        const integerSize = Number(size);
+        if(integerSize < 3 || integerSize > 20) throw '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.';
     },
 
     movingException(moving) {
@@ -54,5 +51,5 @@ const Exception = {
     }
 };
 
-module.exports = Exception;
+module.exports = ExceptionController;
 
