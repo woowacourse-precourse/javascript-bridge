@@ -62,6 +62,7 @@ class BridgeGame {
     OutputView.printMap(this.getBridgeMap());
   }
 
+
   insertCorrectBridge(upBridge, downBridge, answerDirection) {
     if (answerDirection === Constant.COMMAND_UP_DIRECTION_STRING) {
       upBridge.push(Constant.CORRECT_STRING);
@@ -83,6 +84,17 @@ class BridgeGame {
       topBridge.push(Constant.FAIL_STRING);
       bottomBridge.push(Constant.EMPTY_STRING);
     }
+  }
+
+  endWithFailure() {
+    OutputView.printResult(this.getBridgeMap(), "실패", this.getNumberOfAttempts());
+    Console.close();
+    return;
+  }
+
+  endWithSuccess() {
+    OutputView.printResult(this.getBridgeMap(), "성공", this.getNumberOfAttempts());
+    Console.close();
   }
 
   isFinish() {
