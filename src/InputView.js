@@ -6,7 +6,7 @@ const Console = MissionUtils.Console;
  */
 const InputView = {
 	read(message, callback) {
-		Console.readLine(message, callback);
+		Console.readLine('\n' + message + '\n', callback);
 	},
 
 	/**
