@@ -1,4 +1,5 @@
 const BridgeGame = require('../src/BridgeGame');
+const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
 
 describe('게임 기능 테스트', () => {
   test('validateSizeRange', () => {
