@@ -10,4 +10,14 @@ describe('게임 기능 테스트', () => {
     expect(() => bridgeGame.validateSizeRange(3)).not.toThrowError();
     expect(() => bridgeGame.validateSizeRange(20)).not.toThrowError();
   });
+
+  test('validateUnd', () => {
+    const bridgeGame = new BridgeGame(3);
+
+    expect(() => bridgeGame.validateUnd('F')).toThrowError('[ERROR]');
+    expect(() => bridgeGame.validateUnd('S')).toThrowError('[ERROR]');
+
+    expect(() => bridgeGame.validateUnd('U')).not.toThrowError();
+    expect(() => bridgeGame.validateUnd('D')).not.toThrowError();
+  });
 });
