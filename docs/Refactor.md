@@ -37,7 +37,11 @@
 - [x] refactor: 파일명 파스칼 규칙으로 수정
 
 - [x] refactor: 한 가지 함수가 한 가지 기능만 하도록 수정
+
   - 에러 메세지와 함수를 호출 하는 Util 함수 추가
+
+- [x] refactor: InputView에 있던 함수를 다른 클래스로 분리
+- bind를 이용하여 InputView의 목적에 맞지 않던 함수 분리
 
 ### 테스트
 

@@ -1,4 +1,3 @@
-/* eslint-disable operator-linebreak */
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { GAME_RESULT, GAME_STRING, SHORT_CUT, NUMBER } = require('./Constants');

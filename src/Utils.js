@@ -6,9 +6,9 @@ const Utils = {
     Console.print(message);
     Console.readLine(GAME_STRING.empty, callback);
   },
-  showErrorMessage(errorMessage, bridgeFunction, bridgeGame) {
+  showErrorMessage(errorMessage, inputFunction, bridgeFunction) {
     Console.print(errorMessage);
-    bridgeFunction(bridgeGame);
+    inputFunction(bridgeFunction);
   },
 };
 
