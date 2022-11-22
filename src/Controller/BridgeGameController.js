@@ -15,17 +15,17 @@ class BridgeGameController {
   gameStart() {
     this.#bridgeGame.try();
     OutputView.printGameStart();
-    this.inputBridgeSize();
+    this.#inputBridgeSize();
   }
 
-  gameRetry() {
+  #gameRetry() {
     this.#bridgeGame.retry();
     this.#bridgeMap.reset();
 
-    return this.inputMove();
+    return this.#inputMove();
   }
 
-  gameResult(isGameSuccess) {
+  #gameResult(isGameSuccess) {
     OutputView.printResult(
       this.#bridgeMap.getBridgeMap(),
       isGameSuccess,
@@ -33,47 +33,47 @@ class BridgeGameController {
     );
   }
 
-  gameCommand(gameCommand) {
-    if (gameCommand === SETTING.GAME_RESTART) return this.gameRetry();
+  #gameCommand(gameCommand) {
+    if (gameCommand === SETTING.GAME_RESTART) return this.#gameRetry();
 
-    return this.gameResult(false);
+    return this.#gameResult(false);
   }
 
-  move(moving) {
+  #move(moving) {
     const canICross = this.#bridge.canICross(this.#bridgeGame.getMoveCount(), moving);
 
     this.#bridgeGame.move(moving);
     this.#bridgeMap.addMoveMark(moving, canICross);
     OutputView.printMap(this.#bridgeMap.getBridgeMap());
 
-    this.nextStep(canICross);
+    this.#nextStep(canICross);
   }
 
-  nextStep(canICross) {
-    if (!canICross) return this.inputGameCommand();
+  #nextStep(canICross) {
+    if (!canICross) return this.#inputGameCommand();
 
     return this.#bridgeGame.isGameSuccess(this.#bridge.getBridgeSize())
-      ? this.gameResult(true)
-      : this.inputMove();
+      ? this.#gameResult(true)
+      : this.#inputMove();
   }
 
-  setBridgeSize(bridgeSize) {
+  #setBridgeSize(bridgeSize) {
     const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     this.#bridge = new Bridge(bridge);
 
-    this.inputMove();
+    this.#inputMove();
   }
 
-  inputBridgeSize() {
-    InputView.readBridgeSize(this.setBridgeSize.bind(this));
+  #inputBridgeSize() {
+    InputView.readBridgeSize(this.#setBridgeSize.bind(this));
   }
 
-  inputMove() {
-    InputView.readMoving(this.move.bind(this));
+  #inputMove() {
+    InputView.readMoving(this.#move.bind(this));
   }
 
-  inputGameCommand() {
-    InputView.readGameCommand(this.gameCommand.bind(this));
+  #inputGameCommand() {
+    InputView.readGameCommand(this.#gameCommand.bind(this));
   }
 }
 
