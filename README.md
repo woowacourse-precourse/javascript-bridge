@@ -1,4 +1,4 @@
-<h1 align="middle">프리코스 4주차 - 다리 건너기 🎱</h1>
+<h1 align="middle">프리코스 4주차 - 다리 건너기 🌉</h1>
 <p align="middle">Console을 통해 작동하는 다리 건너기 게임</p>
 <br>
 
