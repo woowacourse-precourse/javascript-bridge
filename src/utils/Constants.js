@@ -28,8 +28,8 @@ const ERROR_MESSAGE = {
 const BRIDGE_MAP = {
   up_moving: "U",
   down_moving: "D",
-  up_space: 0,
-  down_space: 1,
+  up_space: 1,
+  down_space: 0,
   pass: " O ",
   fail: " X ",
   empty: "   ",
