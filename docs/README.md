@@ -2,13 +2,11 @@
 
 우아한형제들 테크코스 3주차 다리 건너기 게임을 구현한 레포입니다.
 
-## 3주차 목표
+## 3주차 요구사항
 
-1. 클래스(객체)를 분리하는 연습
-2. 리팩터링
+아래 요구사항에 맞춰 구현하였습니다. 코딩 컨벤션의 경우 AirBnb Java Style Guide를 따르도록 노력하였습니다.
 
-### 3주차 요구사항
-
+```
 - indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
 - 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들어라.
 - Jest를 이용하여 본인이 정리한 기능 목록이 정상 동작함을 테스트 코드로 확인한다.
@@ -23,31 +21,65 @@
   - 이외 필요한 클래스(또는 객체)와 메서드는 자유롭게 구현할 수 있다.
   - `InputView` 에서만 `MissionUtils`의 `Console.readLine()` 을 이용해 사용자의 입력을 받을 수 있다.
   - `BridgeGame` 클래스에서 `InputView`, `OutputView` 를 사용하지 않는다.
-
-## 기능 목록
-
-- [] 1. 자동으로 생성할 다리 길이를 입력 받는다. 3 이상 20 이하의 숫자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.
-- [] 2. 0, 1 중 무작위 값을 생성한다. `BridgeRandomNumberGenerator.generate()`
-- [] 3. 0, 1 중 무작위 값을 생성하여 다리를 생성한다. `BridgeMaker.makeBridge()`
-  - [] 3-1. 무작위 값의 문자열에 따라 다리 모양으로 변환하여 배열에 추가한다. `BridgeMaker.convertToBridge()`
-- [] 4. 라운드마다 플레이어가 이동할 칸을 입력 받는다. U(위 칸)와 D(아래 칸) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.
-- [] 5. 게임 재시작/종료 여부를 입력 받는다. R(재시작)과 Q(종료) 중 하나의 문자를 입력할 수 있으며 올바른 값이 아니면 예외 처리한다.
-
-## 클래스 설계
+```
+## 클래스 설계 - 기능 목록
 
 ### InputView
 
 - 사용자의 입력을 받는다.
-- `MissionUtils`의 `Console.readLine()` 을 이용해 사용자의 입력을 받을 수 있다.
+- `MissionUtils`의 `Console.readLine()` 을 이용해 사용자의 입력을 받는다.
+
+- readBridgeSize() : 다리 길이를 입력 받는다.
+- readMoving() : 플레이어가 이동할 칸을 입력 받는다.
+- readGameCommand() : 게임 재시작/종료 여부를 입력 받는다.
+
+- 기존의 readline()은 2번째 인자로 callback함수를 받지 않아서 함수의 기능 분리 및 가독성을 위해 readline()을 재정의하였다.
 
 ### OutputView
 
 - 사용자에게 출력을 보여준다.
+- `MissionUtils`의 `Console.print()` 을 이용해 사용자에게 출력을 보여준다.
+
+- printStartMessage() : 게임 시작 메시지를 출력한다.
+- printMap() : 다리를 출력한다.
+- printResult() : 게임 결과를 출력한다.
+- printErrorMessage(message) : 에러 메시지를 출력한다.
 
 ### BridgeGame
 
 - 사다리 게임을 진행한다.
+- `InputView`, `OutputView` 를 사용하지 않는다.
 
-### BridgeMaker
+#### 필드
 
-- 사다리를 만든다.
+- #bridge : 랜덤 생성된 다리의 배열 ex) ['U' , 'D', 'U']
+- #bridgeMap : 게임에서 출력될 다리의 Map
+- #currentPostion : 플레이어의 현재 위치
+- #numberOfAttempts : 게임을 진행한 횟수
+
+#### 메소드
+
+- setBridge(bridgeSize) : 다리를 설정한다.
+- setBridgeMap() : 다리를 출력할 Map을 설정한다.
+- getNumberOfAttempts() : 게임을 진행한 횟수를 반환한다.
+- getCurrentPostion() : 플레이어의 현재 위치를 반환한다.
+- getBridgeMap() : 다리를 출력할 Map을 반환한다.
+- move() : 플레이어를 이동시킨다.
+- fail() : 실패했을 경우 플레이어의 맵을 나타낸다.
+- retry() : 게임을 재시작할 때 횟수를 더하고 위치를 초기화한다.
+- isFinish() : 게임이 종료되었는지 확인한다.
+- isMoveFail(direction) : 플레이어가 이동할 수 있는지 확인한다.
+- insertCorrectBridge(up, down, answerDirection) : 플레이어가 이동할 수 있을 때 다리를 추가한다.
+- insertFailBridge(up, down, answerDirection) : 플레이어가 이동할 수 없을 때 다리를 추가한다.
+- shallWeQuit() : 게임을 종료할지 확인한다.
+
+### Validator
+
+- 입력값의 유효성을 검사한다.
+
+- isValidBridgeSize(bridgeSize) : 다리 길이의 유효성을 검사한다.
+  - 다리 길이는 3 이상의 20이하의 정수여야 한다.
+- isValidMoving(moving) : 플레이어가 이동할 칸의 유효성을 검사한다.
+  - 플레이어는 'U', 'D'만 입력할 수 있다.
+- isValidGameCommand(gameCommand) : 게임 재시작/종료 여부의 유효성을 검사한다.
+  - 게임 재시작/종료 여부는 'Q', 'R'만 입력할 수 있다.
