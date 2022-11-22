@@ -1,3 +1,4 @@
+const { COMMAND } = require('./constants/constants');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const validator = require('./validator/validator');
@@ -18,7 +19,14 @@ class BridgeGame {
     this.#history.push(char);
   }
 
-  retry(command) {}
+  retry(command) {
+    if (command === COMMAND.RETRY) {
+      this.#history = [];
+      this.#trial += 1;
+      return true;
+    }
+    return false;
+  }
 
   result() {
     const isSuccess = this.clear() ? '성공' : '실패';
