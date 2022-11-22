@@ -6,12 +6,12 @@ const Exception = {
       validatorMethod(inputData);
       return false;
     } catch (error) {
+      Console.print(error);
       return true;
     }
   },
 
   throw(message) {
-    Console.print(message);
     throw new Error(message);
   },
 };
