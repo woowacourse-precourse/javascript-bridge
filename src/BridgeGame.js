@@ -43,10 +43,10 @@ class BridgeGame {
   mark(nextDirection, marker) {
     if (nextDirection === SETTING.UP_DIRECTION) {
       this.#upBridge.push(marker);
-      this.#downBridge.push(" ");
+      this.#downBridge.push(this.NO_MOVE_MARKER);
     } else {
       this.#downBridge.push(marker);
-      this.#upBridge.push(" ");
+      this.#upBridge.push(this.NO_MOVE_MARKER);
     }
   }
 
