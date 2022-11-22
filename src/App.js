@@ -4,12 +4,17 @@ const Validation = require("./validation/Validation");
 
 class App {
   play() {
-    Console.print("다리 건너기 게임을 시작합니다.");
+    Console.print("다리 건너기 게임을 시작합니다.\n");
+    this.InputBridgeSize()
   }
 
   InputBridgeSize() {
     InputView.readBridgeSize((size) => {
-      Validation.validateBridgeSize(size);
+      const { error } = Validation.validateBridgeSize(size);
+      if (error) {
+        Console.print(error);
+        return this.InputBridgeSize();
+      }
     });
   }
 }
