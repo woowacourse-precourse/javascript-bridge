@@ -22,8 +22,9 @@ const InputView = {
         upDown = 0;
       } else if (upDown == 'D') {
         upDown = 1;
+      } else {
+        throw new Error('[ERROR] U 또는 D를 입력하여야 합니다.');
       }
-
       OutputView.printMap(bridge, count, upDown);
     });
   },
