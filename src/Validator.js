@@ -11,15 +11,16 @@ class Validator {
     if (isNaN(command)) {
       throw new Error(ERROR_MESSAGE.unexpected_input);
     }
+    return true;
   }
 
-  // 난 정규식 썻음
   static checkBridgeSizeRange(size) {
-    if (size < BRIDGE.min_length || size > BRIDGE.max_length)
+    if (size < BRIDGE.min_length || size > BRIDGE.max_length) {
       throw Error(ERROR_MESSAGE.exceed_bridge_size);
+    }
+    return true;
   }
 
-  // 이것도 간단하게 줄일 수 있지 않을까 너무 돌아가는 것 같은데
   static checkCorrectDirection(directions) {
     if (directions instanceof Array) {
       directions.forEach((dir) => {
@@ -32,8 +33,10 @@ class Validator {
   }
 
   static checkCorrectCommand(command) {
-    if (command !== COMMAND.retry && command !== COMMAND.quit)
+    if (command !== COMMAND.retry && command !== COMMAND.quit) {
       throw Error(ERROR_MESSAGE.unexpected_input);
+    }
+    return true;
   }
 }
 
