@@ -3,6 +3,7 @@ const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const { BRIDGE, RESULT } = require('./constants');
 
 class App {
   constructor() {
@@ -26,13 +27,31 @@ class App {
   }
 
   movePlayer(moving) {
+    const crossResult = this.bridgeGame.move(moving);
     this.printMap();
+
+    if (crossResult === BRIDGE.CROSS) {
+      this.crossBridge();
+      return;
+    }
+  }
+
+  crossBridge() {
+    if (this.bridgeGame.isArrived()) {
+      this.quit(RESULT.SUCCESS);
+      return;
+    }
+
+    this.play();
+
   }
 
   printMap() {
     const map = this.bridgeGame.getMap();
     OutputView.printMap(map);
   }
+
+  quit(gameResult) {}
 }
 
 module.exports = App;

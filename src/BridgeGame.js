@@ -10,6 +10,11 @@ class BridgeGame {
     return this.#map;
   }
 
+  getMovingNum() {
+    const [upSide] = this.#map;
+    return upSide.length;
+  }
+
   saveBridge(bridge) {
     this.#bridge = bridge;
   }
@@ -42,6 +47,11 @@ class BridgeGame {
     }
 
     return BRIDGE.UN_CROSS;
+  }
+
+  isArrived() {
+    const movingNum = this.getMovingNum();
+    return this.#bridge.length === movingNum;
   }
 
 }
