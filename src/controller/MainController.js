@@ -78,7 +78,7 @@ class MainController {
    * @param mainController {object} [컨트롤러]
    * @param userMoving {string[]} [유저 이동기록]
    */
-  onUserRestartInput(userRestartInput, mainController, userMoving) {
+  processUserRestartInput(userRestartInput, mainController, userMoving) {
     try {
       validate(userRestartInput);
       mainController.bridgeGame.processRestart(userRestartInput, userMoving);
@@ -93,7 +93,7 @@ class MainController {
    * @param userMoving {string[]} [유저 이동기록]
    */
   readUserRestartInput(userMoving) {
-    InputView.readGameCommand(this.onUserRestartInput, this, userMoving);
+    InputView.readGameCommand(this.processUserRestartInput, this, userMoving);
   }
 
   // 게임 재시작 메서드
