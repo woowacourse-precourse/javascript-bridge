@@ -18,34 +18,48 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
 
-  printMap(up, down, message) {
-    this.printUpBridge.push(up);
-    this.printDownBridge.push(down);
-
-    this.upString = "";
-    this.downString = "";
-
+  makeUpBridge() {
     this.upString += "[ ";
     for (let index = 0; index < this.printUpBridge.length; index++) {
       this.upString += this.printUpBridge[index];
       if (index < this.printUpBridge.length - 1) this.upString += " | ";
     }
     this.upString += " ]";
-
+  },
+  makeDownBridge() {
     this.downString += "[ ";
     for (let index = 0; index < this.printDownBridge.length; index++) {
       this.downString += this.printDownBridge[index];
       if (index < this.printDownBridge.length - 1) this.downString += " | ";
     }
     this.downString += " ]";
+  },
 
-    Console.print(this.upString);
-    Console.print(this.downString + "\n");
-
+  popBridge(message) {
     if (message == "실패") {
       this.printUpBridge.pop();
       this.printDownBridge.pop();
     }
+  },
+
+  pushBridge(up, down) {
+    this.printUpBridge.push(up);
+    this.printDownBridge.push(down);
+  },
+
+  printMap(up, down, message) {
+    this.pushBridge(up, down);
+    this.upString = "";
+    this.downString = "";
+    this.makeUpBridge();
+    this.makeDownBridge();
+    this.printBridge();
+    this.popBridge(message);
+  },
+
+  printBridge() {
+    Console.print(this.upString);
+    Console.print(this.downString + "\n");
   },
 
   /**
@@ -57,7 +71,6 @@ const OutputView = {
     Console.print("최종 게임 결과");
     Console.print(this.upString);
     Console.print(this.downString + "\n");
-
     Console.print("게임 성공 여부: " + message);
     Console.print("총 시도한 횟수: " + retry);
   },

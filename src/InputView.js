@@ -20,11 +20,9 @@ const InputView = {
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (answer) => {
       this.stringValidation(Number(answer));
-
       this.bridge = BridgeMaker.makeBridge(answer, Generator.generate);
       this.now = 0;
       this.retry = 1;
-
       this.readMoving();
     });
   },
@@ -40,42 +38,52 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
 
+  checkSuccess(check) {
+    if (check == "upSuccess") {
+      OutputView.printMap("O", " ", "성공");
+    }
+    if (check == "downSuccess") {
+      OutputView.printMap(" ", "O", "성공");
+    }
+  },
+
+  checkFail(check) {
+    if (check == "upFail") {
+      OutputView.printMap("X", " ", "실패");
+      this.readGameCommand();
+      return;
+    }
+    if (check == "downFail") {
+      OutputView.printMap(" ", "X", "실패");
+      this.readGameCommand();
+      return;
+    }
+  },
+
+  checkFailAndSuccess(check) {
+    this.checkSuccess(check);
+    this.checkFail(check);
+  },
+
   readMoving() {
     Console.readLine(
       "\n이동할 칸을 선택해주세요. (위: U, 아래: D) \n",
       (answer) => {
         let check = game.move(answer, this.bridge, this.now);
-
-        if (check == true && answer == "U") {
-          OutputView.printMap("O", " ", "성공");
-        }
-
-        if (check == true && answer == "D") {
-          OutputView.printMap(" ", "O", "성공");
-        }
-
-        if (check == false && answer == "U") {
-          OutputView.printMap("X", " ", "실패");
-          this.readGameCommand();
-          return;
-        }
-        if (check == false && answer == "D") {
-          OutputView.printMap(" ", "X", "실패");
-          this.readGameCommand();
-          return;
-        }
-
-        if (this.now >= this.bridge.length - 1) {
-          Console.close();
-          OutputView.printResult("성공", this.retry);
-          return;
-        }
-
-        this.now += 1;
-
-        this.readMoving();
+        this.checkFailAndSuccess(check);
+        if (check != "downFail" && check != "upFail") this.now += 1;
+        this.processEnd();
+        if (!this.end) this.readMoving();
       }
     );
+  },
+
+  processEnd() {
+    if (this.now >= this.bridge.length) {
+      Console.close();
+      OutputView.printResult("성공", this.retry);
+      this.end = true;
+    }
   },
 
   /**
@@ -88,16 +96,20 @@ const InputView = {
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (answer) => {
         const retrycheck = game.retry(answer);
-        if (retrycheck) {
-          this.retry += 1;
-          this.readMoving();
-        }
-        if (!retrycheck) {
-          Console.close();
-          OutputView.printResult("실패", this.retry);
-        }
+        this.retryCommand(retrycheck);
       }
     );
+  },
+
+  retryCommand(retrycheck) {
+    if (retrycheck) {
+      this.retry += 1;
+      this.readMoving();
+    }
+    if (!retrycheck) {
+      Console.close();
+      OutputView.printResult("실패", this.retry);
+    }
   },
 };
 
