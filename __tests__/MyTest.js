@@ -69,19 +69,19 @@ describe('입력 받은 이동할 칸과 정답이 일치하는지 판별한다.
 
 describe('움직인 다리의 결과를 생성한다.', () => {
   test('처음으로 위 칸으로 정답을 맞춘 후 생성된 다리를 생성한다.', () => {
-    OutputView.printMap(true, 'U');
+    OutputView.discernBridge(true, 'U', 0);
     expect(OutputView.upBridge).toEqual('[ O ]');
     expect(OutputView.downBridge).toEqual('[   ]');
   });
 
   test('두번째로 아래 칸으로 정답을 맞춘 후 생성된 다리를 생성한다.', () => {
-    OutputView.printMap(true, 'D');
+    OutputView.discernBridge(true, 'D', 1);
     expect(OutputView.upBridge).toEqual('[ O |   ]');
     expect(OutputView.downBridge).toEqual('[   | O ]');
   });
 
   test('세번째로 아래 칸으로 정답을 틀린 후 생성된 다리를 생성한다.', () => {
-    OutputView.printMap(false, 'D');
+    OutputView.discernBridge(false, 'D', 2);
     expect(OutputView.upBridge).toEqual('[ O |   |   ]');
     expect(OutputView.downBridge).toEqual('[   | O | X ]');
   });

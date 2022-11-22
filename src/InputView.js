@@ -80,7 +80,7 @@ const InputView = {
   },
 
   printMapBasedOnInput(Boolean) {
-    OutputView.printMap(Boolean, this.letter);
+    OutputView.discernBridge(Boolean, this.letter, this.bridgeCount);
     this.bridgeCount++;
     if (Boolean) {
       return this.isGameDone();
