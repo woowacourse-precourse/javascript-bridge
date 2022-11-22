@@ -168,6 +168,16 @@ describe('플레이어 입력값의 유효성 검사', () => {
     });
   });
 
+  test('사용자가 게임을 진행할 수 있는지 위치값 확인', () => {
+    mockRandoms([1, 0, 1]);
+    mockQuestions(['3', 'U', 'D']);
+    const app = new App();
+
+    app.play().then(() => {
+      expect(app.isContinue()).toEqual(true);
+    });
+  });
+
   test('사용자의 이동한 칸이 이동할 수 있는 칸인지 확인', () => {
     mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'D', 'U']);
