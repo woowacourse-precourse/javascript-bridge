@@ -32,7 +32,7 @@ const { COMMAND, BRIDGE_MAP, CONSTRAINTS_NUMBER } = require("./Constants");
   moveDownIsCorrect(createBridge, selectUpOrDown){
     if(createBridge == selectUpOrDown && selectUpOrDown == COMMAND.BRIDGE_DOWN){
       this.userPickedUpOrDown[CONSTRAINTS_NUMBER.BRIDGE_DOWN].push(BRIDGE_MAP.BLANK);
-      this.userPickedUpOrDown[CONSTRAINTS_NUMBER.BRIDGE_UP].push(BRIDGE_MAP.CORRECT)
+      this.userPickedUpOrDown[CONSTRAINTS_NUMBER.BRIDGE_UP].push(BRIDGE_MAP.CORRECT);
     }
   }
   moveUpIsWrong(createBridge, selectUpOrDown){

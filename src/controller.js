@@ -17,7 +17,7 @@ class Controller{
         OutputView.printStart();
         this.#number = InputView.readBridgeSize();
         this.createBridge = makeBridge(this.#number, generate);
-        this.gameProgress()
+        this.gameProgress();
     }
 
     gameProgress(){
