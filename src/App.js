@@ -3,8 +3,13 @@ const InputView = require("./InputView");
 const Validation = require("./validation/Validation");
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
+const BridgeGame = require("./BridgeGame");
 
 class App {
+  constructor() {
+    this.bridgeGame = null;
+  }
+  
   play() {
     Console.print("다리 건너기 게임을 시작합니다.\n");
     this.InputBridgeSize();
@@ -17,7 +22,8 @@ class App {
         Console.print(error);
         return this.InputBridgeSize();
       }
-      BridgeMaker.makeBridge(Number(size), generate);
+      const bridge = BridgeMaker.makeBridge(Number(size), generate);
+      this.bridgeGame = new BridgeGame(bridge);
     });
   }
 }
