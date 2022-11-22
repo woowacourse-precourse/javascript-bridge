@@ -42,6 +42,15 @@ class Validator {
     return new ValidatorClass(this.#value);
   }
 
+  /**
+   * 주어진 validate 함수로 값을 파이프합니다.
+   *
+   * @param {function(any)} validate
+   */
+  pipe(validate) {
+    return validate(this.#value);
+  }
+
   get() {
     return this.#value;
   }

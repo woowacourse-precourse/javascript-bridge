@@ -14,13 +14,19 @@ function validate(value) {
 /**
  * @param {any} value
  */
+function validateTile(value) {
+  return new StringValidator(value).shouldOneOf(Object.values(Tile));
+}
+
+/**
+ * @param {any} value
+ */
 function validateTiles(value) {
-  return new ArrayValidator(value).each((validator) =>
-    validator.as(StringValidator).shouldOneOf(Object.values(Tile)),
-  );
+  return new ArrayValidator(value).each((validator) => validator.pipe(validateTile));
 }
 
 module.exports = {
   validate,
+  validateTile,
   validateTiles,
 };
