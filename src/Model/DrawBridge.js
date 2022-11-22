@@ -10,6 +10,10 @@ const OUTPUT_CORRECT = "O";
 const OUTPUT_INCORRECT = "X";
 
 const DrawBridge = {
+  /**
+   * @param {string} input 사용자 입력 U/D
+   * @param {function(): boolean} isCorrect 입력과 다음 단계 일치 여부를 판단하는 함수
+   */
   makeMap(input, isCorrect) {
     this.drawBridge(input, isCorrect);
     OutputView.printMap(upsideBridge, downsideBridge);

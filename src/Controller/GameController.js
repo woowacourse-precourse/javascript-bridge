@@ -11,6 +11,10 @@ const GameController = {
     bridgeGame.start(answer);
   },
 
+  /**
+   * @param {string} answer Map을 만들기 위해 U/D를 넘기는 인자.
+   * @returns {function(): boolean} 다리를 전부 건넜는지 판단하고 boolean 반환하는 함수.
+   */
   crossBridgeCompletely(answer) {
     this.makeMap(answer);
     return bridgeGame.crossBridgeCompletely();
