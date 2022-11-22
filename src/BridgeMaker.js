@@ -16,9 +16,9 @@ const BridgeMaker = {
     if (isValidInput)
       throw new InputError(
         "3-20",
-        "[ERROR] 3과 20사이의 자연수를 입력해주세요."
+        "[ERROR] 3과 20사이의 자연수를 입력해주세요.\n"
       );
-    return this.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    return BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
   },
 
   makeBridge(size, generateRandomNumber) {
