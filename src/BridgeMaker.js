@@ -1,19 +1,19 @@
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
-    let bridgeByNumber = [];
+    let numberBridge = [];
     for (let i = 0; i < size; i++) {
-      bridgeByNumber.push(generateRandomNumber());
+      numberBridge.push(generateRandomNumber());
     }
-    return this.changeBridgeElements(bridgeByNumber);
+    return this.changeBridgeElements(numberBridge);
   },
 
-  changeBridgeElements(bridgeByNumber) {
-    let bridgeByDirection = [];
-    for (let i = 0; i < bridgeByNumber.length; i++) {
-      if (bridgeByNumber[i] === 1) bridgeByDirection.push("U");
-      if (bridgeByNumber[i] === 0) bridgeByDirection.push("D");
+  changeBridgeElements(numberBridge) {
+    let directionBridge = [];
+    for (let i = 0; i < numberBridge.length; i++) {
+      if (numberBridge[i] === 1) directionBridge.push("U");
+      if (numberBridge[i] === 0) directionBridge.push("D");
     }
-    return bridgeByDirection;
+    return directionBridge;
   },
 };
 
