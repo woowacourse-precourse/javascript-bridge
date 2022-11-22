@@ -69,6 +69,27 @@ describe('게임 결과 출력 테스트', () => {
     expect(logSpy.mock.calls[indexForCompare[2]].shift()).toEqual('[   | O |   ]')
   })
 
+  test('2번의 재시도를 하다가 그만둔 경우 ', () => {
+    const logSpy = getLogSpy()
+
+    mockRandoms(['1', '0', '1'])
+    mockQuestions(['3', 'U', 'D', 'D','R','D','R','U', 'U', 'Q'])
+    let app = new App()
+    app.play()
+
+    let indexForCompare = [
+      logSpy.mock.calls.length - 1, //총 시도 횟수
+      logSpy.mock.calls.length - 3, //성공 여부
+      logSpy.mock.calls.length - 5, //그림 두번째 행
+      logSpy.mock.calls.length - 6, //그림 첫번째 행
+    ]
+
+    expect(logSpy.mock.calls[indexForCompare[0]].shift()).toEqual(3)
+    expect(logSpy.mock.calls[indexForCompare[1]].shift()).toEqual('실패')
+    expect(logSpy.mock.calls[indexForCompare[3]].shift()).toEqual('[ O | X ]')
+    expect(logSpy.mock.calls[indexForCompare[2]].shift()).toEqual('[   |   ]')
+  })
+
 
 
 })

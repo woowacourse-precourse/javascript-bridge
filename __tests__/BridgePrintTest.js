@@ -89,8 +89,6 @@ describe('다리 현황 출력 테스트', () => {
      * 마지막에 지도를 한번 더 출력한 다음 이 결과를 가지고 테스트를 하게 됩니다
      */
 
-    console.log(logSpy.mock.calls)
-
     let indexForPrintTest = [
       4,
       5,

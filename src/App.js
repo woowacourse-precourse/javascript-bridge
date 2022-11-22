@@ -41,10 +41,14 @@ class App {
   //다음 움직임 선택
   playerMove(){
     while(this.#gameStatus.playerLocation!==this.#generatedBridge.length){
-      InputView.readMoving(this.#generatedBridge,this.#gameStatus)
-      this.printBridge()
+      if(!this.#gameStatus.wrongFlag){
+        InputView.readMoving(this.#generatedBridge,this.#gameStatus)
+        this.printBridge()
+      }
+      
       if(this.#gameStatus.wrongFlag){
        this.chooseWrong()
+       return
       }
     }
     this.endGame()
