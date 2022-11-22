@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Validation = require("./Validation");
+const { GAME_MESSAGE } = require("./utils/Constants");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -8,7 +9,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    Console.readLine("\n다리의 길이를 입력해주세요.\n", (input) => {
+    Console.readLine(GAME_MEESAGE.input_bridge_size, (input) => {
       try {
         Validation.validateBridgeSize(input);
       } catch (error) {
@@ -27,18 +28,15 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(callback) {
-    Console.readLine(
-      "\n이동할 칸을 선택해주세요.(위: U, 아래: D)\n",
-      (input) => {
-        try {
-          Validation.validateMoving(input);
-        } catch (error) {
-          Console.print(error);
-          InputView.readMoving();
-        }
-        callback(input);
+    Console.readLine(GAME_MESSAGE.input_moving, (input) => {
+      try {
+        Validation.validateMoving(input);
+      } catch (error) {
+        Console.print(error);
+        InputView.readMoving();
       }
-    );
+      callback(input);
+    });
   },
 
   getMoving(moving) {
@@ -49,18 +47,15 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(callback) {
-    Console.readLine(
-      "\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
-      (input) => {
-        try {
-          Validation.validateGameCommand(input);
-        } catch (error) {
-          Console.print(error);
-          InputView.readGameCommand();
-        }
-        callback(input);
+    Console.readLine(GAME_MESSAGE.input_command, (input) => {
+      try {
+        Validation.validateGameCommand(input);
+      } catch (error) {
+        Console.print(error);
+        InputView.readGameCommand();
       }
-    );
+      callback(input);
+    });
   },
 
   getGameCommand(command) {

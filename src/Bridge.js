@@ -1,4 +1,5 @@
 const OutputView = require("./OutputView");
+const { BRIDGE_MAP } = require("./utils/Constants");
 
 class Bridge {
   #upsideBridge = [];
@@ -24,7 +25,8 @@ class Bridge {
 
   hasX() {
     return (
-      this.#upsideBridge.includes(" X ") || this.#downsideBridge.includes(" X ")
+      this.#upsideBridge.includes(BRIDGE_MAP.fail) ||
+      this.#downsideBridge.includes(BRIDGE_MAP.fail)
     );
   }
 
@@ -34,8 +36,9 @@ class Bridge {
 
   setBridge(bridgeArray, bridgeIndex, moving) {
     console.log("setBridge", bridgeArray, bridgeIndex, moving);
-    if (moving === "U") this.setUpsideBridge(bridgeArray, bridgeIndex, moving);
-    if (moving === "D")
+    if (moving === BRIDGE_MAP.up_moving)
+      this.setUpsideBridge(bridgeArray, bridgeIndex, moving);
+    if (moving === BRIDGE_MAP.down_moving)
       this.setDownsideBridge(bridgeArray, bridgeIndex, moving);
 
     this.showResult(this.#upsideBridge, this.#downsideBridge);
@@ -44,22 +47,22 @@ class Bridge {
 
   setUpsideBridge(bridgeArray, bridgeIndex, moving) {
     if (bridgeArray[bridgeIndex] === moving) {
-      this.#upsideBridge.push(" O ");
+      this.#upsideBridge.push(BRIDGE_MAP.pass);
     }
     if (bridgeArray[bridgeIndex] !== moving) {
-      this.#upsideBridge.push(" X ");
+      this.#upsideBridge.push(BRIDGE_MAP.fail);
     }
-    this.#downsideBridge.push("   ");
+    this.#downsideBridge.push(BRIDGE_MAP.empty);
   }
 
   setDownsideBridge(bridgeArray, bridgeIndex, moving) {
     if (bridgeArray[bridgeIndex] === moving) {
-      this.#downsideBridge.push(" O ");
+      this.#downsideBridge.push(BRIDGE_MAP.pass);
     }
     if (bridgeArray[bridgeIndex] !== moving) {
-      this.#downsideBridge.push(" X ");
+      this.#downsideBridge.push(BRIDGE_MAP.fail);
     }
-    this.#upsideBridge.push("   ");
+    this.#upsideBridge.push(BRIDGE_MAP.empty);
   }
 
   showResult() {

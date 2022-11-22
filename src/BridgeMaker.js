@@ -1,3 +1,5 @@
+const { BRIDGE_MAP } = require("./utils/Constants");
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -11,8 +13,8 @@ const BridgeMaker = {
     const bridge = Array.from({ length: size }, () =>
       generateRandomNumber()
     ).map((block) => {
-      if (block === 0) return "D";
-      else if (block === 1) return "U";
+      if (block === BRIDGE_MAP.up_space) return BRIDGE_MAP.down_moving;
+      else if (block === BRIDGE_MAP.down_space) return BRIDGE_MAP.up_moving;
     });
     return bridge;
   },

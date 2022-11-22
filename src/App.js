@@ -1,5 +1,6 @@
 const OutputView = require("./OutputView");
 const InputView = require("./InputView");
+const { GAME_MESSAGE, PLAYER_CHOICE } = require("./utils/Constants");
 const Bridge = require("./Bridge");
 const BridgeGame = require("./BridgeGame");
 const { Console } = require("@woowacourse/mission-utils");
@@ -52,8 +53,8 @@ class App {
     if (this.#bridgeGame.loseGame()) {
       InputView.readGameCommand((playerInput) => {
         const command = InputView.getGameCommand(playerInput);
-        if (command === "R") this.retryGame();
-        if (command === "Q") this.quitGame(gameState);
+        if (command === PLAYER_CHOICE.retry) this.retryGame();
+        if (command === PLAYER_CHOICE.exit) this.quitGame(gameState);
       });
     } else {
       this.winGame(gameState);
@@ -61,7 +62,7 @@ class App {
   }
 
   winGame(gameState) {
-    this.#bridgeGame.setState("성공");
+    this.#bridgeGame.setState(GAME_MESSAGE.success);
     const [upsideBridge, downsideBridge] = this.#bridgeGame.getResultBridge();
     this.#bridge.showFinalResult(upsideBridge, downsideBridge, gameState);
     this.endGame();
@@ -73,7 +74,7 @@ class App {
   }
 
   quitGame(gameState) {
-    this.#bridgeGame.setState("실패");
+    this.#bridgeGame.setState(GAME_MESSAGE.fail);
     const [upsideBridge, downsideBridge] = this.#bridgeGame.getResultBridge();
     this.#bridge.showFinalResult(upsideBridge, downsideBridge, gameState);
     this.endGame();
