@@ -1,26 +1,24 @@
-const { KEY } = require("./constant");
+const { ERROR, KEY, UTILS } = require("./constant");
 
-const Validate={
-  bridgeSizeValidate(bridgeLength){
-    if(Number(bridgeLength)<3||Number(bridgeLength)>20){
-      throw Error;
-    }
-    if(typeof bridgeLength!="number"){
-      throw Error;
+const Validate = {
+  movingValidate(move)  {
+    if (!(move === KEY.MOVE_UP || move === KEY.MOVE_DOWN)) {
+      throw ERROR.MOVING_ERROR;
     }
   },
-
-  movingValidate(move){
-    if(move!==KEY.MOVE_UP&&move!==KEY.MOVE_DOWN){
-      throw Error;
+  bridgeValidate (bridgeLength)  {
+    if (/[^0-9]/g.test(bridgeLength)) {
+      throw ERROR.BRIDGE_ERROR;
+    }
+    if (Number(bridgeLength) < UTILS.BRIDGE_MIN || Number(bridgeLength) > UTILS.BRIDGE_MAX) {
+      throw ERROR.BRIDGE_ERROR;
     }
   },
-
-  restartValidate(restart){
-    if(restart!==KEY.RESTART&&restart!==KEY.END){
-      throw Error;
+  restartValidate (restart)  {
+    if (!(restart === KEY.RESTART || restart === KEY.END)) {
+      throw ERROR.RESTART_ERROR;
     }
   },
 };
 
-module.exports=Validate;
+module.exports = Validate;
