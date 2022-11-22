@@ -1,8 +1,8 @@
 const { INITIAL_VALUE } = require("./constants");
 const { OUTPUT_MESSAGE } = require("./constants/OutputMessage");
-const BridgeGame = require("./model/BridgeGame");
-const { readBridgeSize, readMoving, readGameCommand } = require("./view/InputView");
-const { printMap, printResult, printMessage } = require("./view/OutputView");
+const BridgeGame = require("./BridgeGame");
+const { readBridgeSize, readMoving, readGameCommand } = require("./InputView");
+const { printMap, printResult, printMessage } = require("./OutputView");
 
 class Controller {
   #bridgeGame;

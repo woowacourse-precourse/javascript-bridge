@@ -1,4 +1,4 @@
-const BridgeValidator = require("../validator/BridgeValidator");
+const BridgeValidator = require("./validator/BridgeValidator");
 
 class Bridge {
   #bridge

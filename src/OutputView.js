@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { MOVE_STRING, RESULT_STRING } = require("../constants");
-const { OUTPUT_MESSAGE } = require("../constants/OutputMessage");
+const { MOVE_STRING, RESULT_STRING } = require("./constants");
+const { OUTPUT_MESSAGE } = require("./constants/OutputMessage");
 
 const OutputView = {
   printMap(map) {

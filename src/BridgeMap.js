@@ -1,4 +1,4 @@
-const { MOVE_STRING } = require("../constants");
+const { MOVE_STRING } = require("./constants");
 
 class BridgeMap {
   #bridgeMap;
