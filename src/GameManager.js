@@ -2,8 +2,8 @@ const Print = require('./Print');
 const OutputView  = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeGame = require('./BridgeGame');
-const { BridgeLengthInput, DirectionChoiceInput, RetryInput} = require('./Validator/Validator');
-
+const { BridgeLengthInput, DirectionChoiceInput, RetryInput } = require('./Validator/Validator');
+const { Console } = require('@woowacourse/mission-utils');
 class GameManager {
     #bridgeGame
 
@@ -51,7 +51,7 @@ class GameManager {
         const [thisRound, bridge] = this.#bridgeGame.getGameInfo();
         OutputView.printMap(thisRound, bridge);
         if(!correctChoice) return this.askRetry();
-        if(UserIsWinnner) return this.quitGame(true);
+        if(UserIsWinnner) return this.quitGame();
         return this.playRound();
     };
 

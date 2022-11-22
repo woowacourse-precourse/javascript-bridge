@@ -1,4 +1,5 @@
 const Print = require('../src/Print');
+const { Console } =require('@woowacourse/mission-utils');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -22,7 +23,6 @@ const OutputView = {
   printResult(userInput, bridgeInfo, count) {
     Print.ResultTitle();
     this.printMap(userInput, bridgeInfo);
-    Print.Blank();
     if(userInput.length === bridgeInfo.length){
       Print.GameResultIsWin();
     }
@@ -30,6 +30,7 @@ const OutputView = {
       Print.GameResultIsDefeat();
     }
     Print.GameTryCount(count);
+    Console.close();
   },
   generateUpside(userInput, bridgeInfo) {
     const upside = [];
