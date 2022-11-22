@@ -6,12 +6,7 @@ const InputView = {
   readBridgeSize(callback, message) {
     MissionUtils.Console.readLine(message, (answer) => {
       try {
-        Validator.isNotANumber(answer);
-        Validator.isRangeIn(
-          GameConfig.MIN_IN_RANGE,
-          GameConfig.MAX_IN_RANGE,
-          answer
-        );
+        Validator.isBridgeSizeValidate(answer);
       } catch (e) {
         MissionUtils.Console.print(e.message);
         this.readBridgeSize(callback, message);

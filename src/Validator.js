@@ -17,6 +17,15 @@ const Validator = {
     return true;
   },
 
+  isBridgeSizeValidate(input) {
+    Validator.isNotANumber(input);
+    Validator.isRangeIn(
+      GameConfig.MIN_IN_RANGE,
+      GameConfig.MAX_IN_RANGE,
+      input
+    );
+  },
+
   isMoveInputValidate(input) {
     if (input !== "U" && input !== "D") {
       throw new Error(ERROR.IS_NOT_VALID_MOVE);
