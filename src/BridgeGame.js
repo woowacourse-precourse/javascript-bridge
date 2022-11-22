@@ -19,7 +19,7 @@ class BridgeGame {
       upResult: [],
       downResult: [],
     };
-    this.#isSuccess = false;
+    this.#isSuccess = true;
   }
 
   getStatus() {
@@ -55,6 +55,7 @@ class BridgeGame {
 
   initGame() {
     this.setStatus("move");
+    this.setIsSuccess(true);
     this.#trialNumber++;
     this.#order = 0;
     this.#bridgeResult = {
@@ -65,29 +66,30 @@ class BridgeGame {
 
   check(input) {
     let up = " ",
-      down = " ",
-      isEnd = false;
+      down = " ";
+
     if (this.#bridge[this.#order] === input)
       input == VALUE.UP ? (up = VALUE.SIGN_O) : (down = VALUE.SIGN_O);
     if (this.#bridge[this.#order] !== input) {
       input == VALUE.UP ? (up = VALUE.SIGN_X) : (down = VALUE.SIGN_X);
-      isEnd = true;
       this.setIsSuccess(false);
     }
-    return { up, down, isEnd };
+    return { up, down };
+  }
+
+  handleEnd() {
+    if (!this.#isSuccess) {
+      this.setStatus("retry");
+      return;
+    }
+    if (this.#bridge.length - 1 == this.#order) this.setStatus("end");
   }
 
   move(input) {
-    const { up, down, isEnd } = this.check(input);
+    const { up, down } = this.check(input);
     this.#bridgeResult.upResult.push(up);
     this.#bridgeResult.downResult.push(down);
-
-    if (isEnd) this.setStatus("retry");
-
-    if (this.#bridge.length - 1 == this.#order) {
-      this.setIsSuccess(true);
-      this.setStatus("end");
-    }
+    this.handleEnd();
     this.#order++;
   }
 
