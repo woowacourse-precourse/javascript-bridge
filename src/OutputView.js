@@ -10,10 +10,6 @@ const OutputView = {
     MissionUtils.Console.print('다리 건너기 게임을 시작합니다.');
   },
 
-  //사용자 입력과 정답이 같은지 확인하기
-  cmpUD(input, ans){
-    return input == ans ? 'O':'X';
-  },
 
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
@@ -56,6 +52,11 @@ const OutputView = {
       }
       this.verifyInputAndAnswer(input, answer);   
     }
+  },
+
+  //사용자 입력과 정답이 같은지 확인하기
+  cmpUD(input, ans){
+    return input == ans ? 'O':'X';
   },
 
   /**
