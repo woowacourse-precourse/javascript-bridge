@@ -18,6 +18,12 @@ const Validation = {
     throw new Error(ERROR.MOVING);
   },
 
+  validateCommand(command) {
+    if ([COMMAND.RETRY, COMMAND.QUIT].includes(command)) {
+      return;
+    }
+    throw new Error(ERROR.COMMAND);
+  },
 };
 
 module.exports = Validation;
