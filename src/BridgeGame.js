@@ -9,6 +9,7 @@ const {
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const { printMessage } = require("./OutputView");
+const { InputValidator } = require("./utils/InputValidation");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -26,6 +27,7 @@ class BridgeGame {
   gameStart() {
     printMessage(INFO_MESSAGE.start);
     InputView.readBridgeSize(INPUT_MESSAGE.bridgeLength, (input) => {
+      InputValidator.bridgeSizeValidator(input);
       this.#bridgeSize = input;
       this.getInput(input);
     });

@@ -28,8 +28,8 @@ const OutputView = {
     Console.close();
   },
 
-  printMessage() {
-    // Console.print(message);
+  printMessage(message) {
+    Console.print(message);
   },
 };
 

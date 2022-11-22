@@ -18,6 +18,9 @@ const STATE_CONSTANT = Object.freeze({
   end: "Q",
   canMovePlace: "O",
   cantMovePlace: " ",
+
+  BridgeMinLength: 3,
+  BridgeMaxLength: 20,
 });
 
 const RESULT_MESSAGE = Object.freeze({
@@ -29,9 +32,16 @@ const RESULT_MESSAGE = Object.freeze({
   isFail: `실패`,
 });
 
+const ERROR_MESSAGE = Object.freeze({
+  error: "[ERROR]",
+  onlyNumber: "숫자만 입력할 수 있습니다.",
+  betweenRange: "3부터 20 사이의 숫자만 입력할 수 있습니다.",
+});
+
 module.exports = {
   INFO_MESSAGE,
   INPUT_MESSAGE,
   STATE_CONSTANT,
   RESULT_MESSAGE,
+  ERROR_MESSAGE,
 };
