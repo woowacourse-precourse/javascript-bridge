@@ -13,13 +13,9 @@ const BridgeMaker = {
     const BRIDGE = [];
 
     for (let count = 0; count < size; count += 1) {
-      const RANDOM_NUMBER = generateRandomNumber();
-
-      if (String(RANDOM_NUMBER) === String(PARAMETERS.upCount)) {
-        BRIDGE.push(PARAMETERS.upControl);
-      } else if (String(RANDOM_NUMBER) === String(PARAMETERS.downCount)) {
-        BRIDGE.push(PARAMETERS.downControl);
-      }
+      String(generateRandomNumber()) === PARAMETERS.upCount
+        ? BRIDGE.push(PARAMETERS.upControl)
+        : BRIDGE.push(PARAMETERS.downControl);
     }
 
     return BRIDGE;
