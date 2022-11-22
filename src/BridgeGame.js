@@ -1,20 +1,64 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+const RandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeMaker = require("./BridgeMaker");
+const BridgeInformation = require("./BridgeInformation");
+const { SIGN } = require("./Constants");
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+class BridgeGame {
+  #movingRoute = [];
+  #info;
+  #tryCount = 1;
+  #inputIndex = -1;
+
+  constructor(size) {
+    const correctRoute = BridgeMaker.makeBridge(size, RandomNumberGenerator.generate);
+    this.#info = new BridgeInformation(size, correctRoute);
+  }
+
+  changeState(direction) {
+    this.#movingRoute.push(direction);
+    this.#inputIndex += 1;
+  }
+
+  move(direction) {
+    this.changeState(direction);
+    this.#info.makeRouteMap(direction, this.#inputIndex);
+    this.checkStatus();
+  }
+
+  checkStatus() {
+    this.getRouteMap();
+    this.checkWrongInput();
+    this.checkSuccess();
+  }
+
+  retry() {
+    this.#tryCount += 1;
+    this.#inputIndex = -1;
+    this.#movingRoute = [];
+    this.#info.resetRoute();
+  }
+
+  fail() {
+    this.#info.finishGame(this.#tryCount, SIGN.FAILURE);
+  }
+
+  getRouteMap() {
+    this.#info.printRouteMap();
+  }
+
+  getMatchSize() {
+    return this.#info.checkMatchLength(this.#movingRoute.length);
+  }
+
+  checkWrongInput() {
+    return this.#info.getWrongRoute();
+  }
+
+  checkSuccess() {
+    if (this.#info.successStatus(this.#movingRoute.length)) {
+      this.#info.finishGame(this.#tryCount, SIGN.SUCCESS);
+    }
+  }
 }
 
 module.exports = BridgeGame;
