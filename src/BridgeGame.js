@@ -1,5 +1,4 @@
 const { Console } = require("@woowacourse/mission-utils");
-const InputView = require("./InputView");
 
 class BridgeGame {
   constructor() {
@@ -25,6 +24,12 @@ class BridgeGame {
   mapToBridgeshape(map) {
     this.upperBridge = [];
     this.downBridge = [];
+    this.makeBridgeMap(map);
+    this.makeBridgeMapRightShape();
+    return [this.upperBridge, this.downBridge];
+  }
+
+  makeBridgeMap(map) {
     map.map((el) => {
       if (el.position === "U") {
         this.upperBridge.push(` ${el.result} `);
@@ -35,14 +40,15 @@ class BridgeGame {
         this.downBridge.push(` ${el.result} `);
       }
     });
+  }
+
+  makeBridgeMapRightShape() {
     this.upperBridge = JSON.stringify(this.upperBridge)
       .replaceAll('"', "")
       .replaceAll(",", "|");
     this.downBridge = JSON.stringify(this.downBridge)
       .replaceAll('"', "")
       .replaceAll(",", "|");
-
-    return [this.upperBridge, this.downBridge];
   }
 
   retry() {

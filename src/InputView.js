@@ -8,6 +8,7 @@ const Validation = require("./Validation");
 
 const InputView = {
   readBridgeSize() {
+    Console.print("다리의 길이 3 ~ 20 이외의 수 입력시 [ERROR]가 발생합니다");
     Console.readLine("다리의 길이를 입력해주세요.", (answer) => {
       try {
         Validation.validateBridgeSize(answer);
@@ -19,8 +20,6 @@ const InputView = {
       } catch (e) {
         Console.print(e);
         this.readBridgeSize();
-      } finally {
-        return answer;
       }
     });
   },
@@ -45,8 +44,8 @@ const InputView = {
           } else {
             this.readGameCommand(bridgeMap, map, bridge);
           }
-        } catch {
-          Console.print("[ERROR] U나 D 중에 하나를 선택하세요");
+        } catch (e) {
+          Console.print(e);
           this.readMoving(bridge);
         }
       }
@@ -66,8 +65,8 @@ const InputView = {
             OutputView.printResult(bridgeMap, "실패", bridgeGame.tryCount);
             return;
           }
-        } catch {
-          Console.print("[ERROR] R이나 Q 중에 하나를 선택하세요");
+        } catch (e) {
+          Console.print(e);
           InputView.readGameCommand(bridgeMap, map, bridge);
         }
       }

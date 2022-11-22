@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const InputView = require("./InputView");
 
 const OutputView = {
   printMap(bridgeMap) {
