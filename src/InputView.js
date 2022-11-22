@@ -72,7 +72,7 @@ const InputView = {
       this.bridgeGame.retry();
       this.readMoving(bridge);
     }
-    if (this.restartGame === 'Q') {
+    if (restartGame === 'Q') {
       OutputView.printResult(totalGame, false, this.bridgeGame.getBridge());
     }
   },
