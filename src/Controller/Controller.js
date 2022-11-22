@@ -25,12 +25,8 @@ class Controller {
 
   isAllowSize(input) {
     this.bridgeSize = new BridgeSize(input);
-    try {
-      this.bridgeSize.checkInput();
-      this.orderMake(input);
-    } catch {
-      this.orderInputSize();
-    }
+    if (!this.bridgeSize.checkInput()) return this.orderInputSize();
+    return this.orderMake(input);
   }
 
   orderMake(size) {
@@ -44,12 +40,8 @@ class Controller {
 
   isAllowMoving(input) {
     this.moveSpace = new MoveSpace(input);
-    try {
-      this.moveSpace.checkInput();
-      this.orderMoving(input);
-    } catch {
-      this.orderInputMoving();
-    }
+    if (!this.moveSpace.checkInput()) return this.orderInputMoving();
+    return this.orderMoving(input);
   }
 
   orderMoving(moving) {
@@ -70,12 +62,8 @@ class Controller {
 
   isAllowCommand(input) {
     this.gameCommand = new GameCommand(input);
-    try {
-      this.gameCommand.checkInput();
-      this.orderProcessCommand(input);
-    } catch {
-      this.orderInputCommand();
-    }
+    if (!this.gameCommand.checkInput()) return this.orderInputCommand();
+    return this.orderProcessCommand(input);
   }
 
   orderProcessCommand(command) {

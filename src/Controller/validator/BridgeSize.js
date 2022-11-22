@@ -11,8 +11,13 @@ class BridgeSize {
   }
 
   checkInput() {
-    if (!this.isAllowNumber() && this.isAllowRange()) return;
-    throw OutputView.printErrorMessage(ERROR.BRIDGE_SIZE);
+    try {
+      if (this.isAllowNumber() || this.isAllowRange())
+        throw new Error(OutputView.printErrorMessage(ERROR.BRIDGE_SIZE));
+      return ISALLOW.TRUE;
+    } catch {
+      return ISALLOW.FALSE;
+    }
   }
 
   isAllowNumber() {
@@ -20,7 +25,7 @@ class BridgeSize {
   }
 
   isAllowRange() {
-    return this.#input >= SIZE.MIN && this.#input <= SIZE.MAX;
+    return this.#input < SIZE.MIN || this.#input > SIZE.MAX;
   }
 }
 

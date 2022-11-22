@@ -11,8 +11,13 @@ class GameCommand {
   }
 
   checkInput() {
-    if (this.isAllowOrder()) return;
-    throw OutputView.printErrorMessage(ERROR.GAMECOMMAND);
+    try {
+      if (!this.isAllowOrder())
+        throw new Error(OutputView.printErrorMessage(ERROR.GAMECOMMAND));
+      return ISALLOW.TRUE;
+    } catch {
+      return ISALLOW.FALSE;
+    }
   }
 
   isAllowOrder() {
