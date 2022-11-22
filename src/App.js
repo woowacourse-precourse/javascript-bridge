@@ -62,9 +62,8 @@ class App {
   #chooseGameAgain() {
     errorHandler(() => {
       InputView.readGameCommand((command) => {
-        if (BRIDGE_GAME.COMMAND.R === command) {
-          return this.#retryGame();
-        }
+        validator.validateCommand(command);
+        if (BRIDGE_GAME.COMMAND.R === command) return this.#retryGame();
         return this.#exitGame();
       });
     });
