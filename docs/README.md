@@ -1,3 +1,63 @@
+# 미션 - 다리 건너기
+![App Screenshot](../bridge.jpg)
+
+## Project Structure
+
+프로젝트 구조는 다음과 같습니다.
+
+    .
+    ├── controller
+    │   └── BridgeGame.js
+    ├── model
+    │   └── Bridge.js
+    ├── utils
+    │   ├── constant.js
+    │   └── validation.js
+    ├── view
+    │   ├── InputView.js
+    │   └── OutputView.js
+    ├── App.js
+    ├── BridgeMaker.js
+    └── BridgeRandomNumberGenerator.js
+
+- App.js
+
+    프로젝트를 실행하는 역할. 게임에 필요한 BridgeGame 객체와 Bridge 객체를 생성하기 위해 유도한다.
+
+- BridgeMaker.js
+
+    Bridge 객체를 만들 때 사용할 객체다. 랜덤 생성된 숫자가 1이면 U, 0이면 D를 돌려준다.
+
+- BridgeRandomNumberGenerator.js
+
+    랜덤 숫자를 생성하는 객체다. 0 또는 1을 생성
+
+- BridgeGame.js
+
+    다리 건너기 게임을 관리하는 객체. Bridge를 어떻게 조작할 지에 집중한다.
+
+- Bridge.js
+
+    다리의 정보를 담고 있는 객체. 몇번 째 칸 까지 도달했는지, 다음 칸으로 건너기, 현재 상태 지도 업데이트 기능도 들어있다. 단, 스스로 판단하기 보다 외부에 있는 BridgeGame의 명령을 받아 움직이도록 설계되어있다.
+
+- InputView.js
+
+    입력을 담당하는 함수
+
+
+- OutputView.js
+
+    출력을 담당하는 함수
+
+- constant.js
+
+    변수의 상수를 담당해줄 함수. 수정 금지!
+
+- validation.js
+
+    입력 값에 대한 검증을 담당한다.
+
+
 ## 🎖️ 기능 목록
 - [x] 다리 길이 입력받는 기능
 
