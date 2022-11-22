@@ -1,5 +1,5 @@
-const {Console} = require("@woowacourse/mission-utils");
-const {MESSAGE} = require("../constants/CONSTANT");
+const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGE } = require("../constants/CONSTANT");
 const InputView = require("./InputView");
 
 /**
@@ -34,8 +34,8 @@ const OutputView = {
   },
 
   start() {
-    Console.print(MESSAGE.START)
-  }
+    Console.print(MESSAGE.START);
+  },
 };
 
 module.exports = OutputView;

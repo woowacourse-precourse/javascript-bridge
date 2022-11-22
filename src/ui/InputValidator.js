@@ -1,5 +1,5 @@
 const BridgeError = require("../BridgeError");
-const {BRIDGE} = require("../constants/CONSTANT");
+const { BRIDGE } = require("../constants/CONSTANT");
 
 const InputValidator = {
   bridgeSize(size) {
@@ -16,19 +16,19 @@ const InputValidator = {
 
   checkNumber(number) {
     const isNumber = new RegExp("[0-9]", "g");
-    const isLength = (Number(number) < BRIDGE.LENGTH.MIN || Number(number) > BRIDGE.LENGTH.MAX);
-    return (!isNumber.test(number) || isLength) ? true : false;
+    const isLength = Number(number) < BRIDGE.LENGTH.MIN || Number(number) > BRIDGE.LENGTH.MAX;
+    return !isNumber.test(number) || isLength ? true : false;
   },
 
   checkMoveInput(moveInput) {
     const isMoveInput = new RegExp("U|D", "g");
-    return (!isMoveInput.test(moveInput) || moveInput.length !== 1) ? true : false;
+    return !isMoveInput.test(moveInput) || moveInput.length !== 1 ? true : false;
   },
 
   checkCommand(command) {
     const isCommand = new RegExp("Q|R", "g");
-    return (!isCommand.test(command) || command.length !== 1) ? true : false;
-  }
-}
+    return !isCommand.test(command) || command.length !== 1 ? true : false;
+  },
+};
 
 module.exports = InputValidator;

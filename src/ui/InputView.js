@@ -1,5 +1,5 @@
-const {Console} = require("@woowacourse/mission-utils");
-const {MESSAGE} = require("../constants/CONSTANT");
+const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGE } = require("../constants/CONSTANT");
 const OutputView = require("./OutputView");
 const InputValidator = require("./InputValidator");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
@@ -14,7 +14,7 @@ const InputView = {
   readBridgeSize(bridgeGame) {
     Console.readLine(MESSAGE.INPUT.SIZE, (sizeInput) => {
       if (InputValidator.bridgeSize(sizeInput)) {
-        bridgeGame.setAnswer(Number(sizeInput),BridgeRandomNumberGenerator.generate);
+        bridgeGame.setAnswer(Number(sizeInput), BridgeRandomNumberGenerator.generate);
         return this.readMoving(bridgeGame);
       }
       return this.readBridgeSize(bridgeGame);
@@ -28,13 +28,13 @@ const InputView = {
     if (bridgeGame.getRound() === bridgeGame.getEndRound()) return OutputView.printResult(bridgeGame);
     Console.readLine(MESSAGE.INPUT.MOVE, (moveInput) => {
       if (InputValidator.bridgeMove(moveInput)) {
-        if (bridgeGame.move(moveInput)){
+        if (bridgeGame.move(moveInput)) {
           OutputView.printMap(bridgeGame);
           return this.readMoving(bridgeGame);
-        };
+        }
         OutputView.printMap(bridgeGame);
         return this.readGameCommand(bridgeGame);
-      };
+      }
       return this.readMoving(bridgeGame);
     });
   },
@@ -45,12 +45,12 @@ const InputView = {
   readGameCommand(bridgeGame) {
     Console.readLine(MESSAGE.INPUT.COMMAND, (command) => {
       if (InputValidator.bridgeCommand(command)) {
-        if (command === 'Q') {
+        if (command === "Q") {
           return OutputView.printResult(bridgeGame);
         }
         bridgeGame.retry();
         this.readMoving(bridgeGame);
-      };
+      }
       return this.readGameCommand(bridgeGame);
     });
   },

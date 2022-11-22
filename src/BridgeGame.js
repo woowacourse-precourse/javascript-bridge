@@ -12,7 +12,7 @@ class BridgeGame {
     this.#attempt = 1;
     this.#round = 0;
     this.#answer = [];
-    this.#bridge = [[],[]];
+    this.#bridge = [[], []];
   }
 
   setAnswer(size, generateRandomNumber) {
@@ -20,13 +20,13 @@ class BridgeGame {
   }
 
   setBridge(moveInput, answer) {
-    const mark = answer ? 'O' : 'X';
-    const space = ' ';
-    if(moveInput === "U") {
+    const mark = answer ? "O" : "X";
+    const space = " ";
+    if (moveInput === "U") {
       this.#bridge[0].push(mark);
       this.#bridge[1].push(space);
-      return 
-    };
+      return;
+    }
     this.#bridge[0].push(space);
     this.#bridge[1].push(mark);
   }
@@ -40,8 +40,8 @@ class BridgeGame {
   }
 
   drawBridge() {
-    const upLine = this.#bridge[0].join(' | ');
-    const downLine = this.#bridge[1].join(' | ');
+    const upLine = this.#bridge[0].join(" | ");
+    const downLine = this.#bridge[1].join(" | ");
     const result = {
       up: upLine,
       down: downLine,
@@ -52,7 +52,7 @@ class BridgeGame {
   drawGameResult() {
     const result = [];
     result.push(this.#attempt);
-    result.push((this.#round === this.#answer.length) ? '성공' : '실패');
+    result.push(this.#round === this.#answer.length ? "성공" : "실패");
     return result;
   }
 
@@ -80,7 +80,7 @@ class BridgeGame {
    */
   retry() {
     this.#round = 0;
-    this.#bridge = [[],[]];
+    this.#bridge = [[], []];
     this.#attempt++;
   }
 }
