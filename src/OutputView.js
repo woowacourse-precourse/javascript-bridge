@@ -11,16 +11,20 @@ const OutputView = {
     MissionUtils.Console.print('다리 건너기 게임을 시작합니다.');
   },
 
-
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(input, answer) {
-    BridgeGame.move(input, answer);
-    upperBridge += ']';
-    lowerBridge += ']';
+  printMap(bridge) {
+    let upperBridge = '[ ';
+    let lowerBridge = '[ ';
+    for (let i = 0; i < bridge['uBridge'].length; i++){
+      if (i != 0) { upperBridge += '|'; lowerBridge += '|';}
+      upperBridge += bridge['uBridge'][i] + ' ';
+      lowerBridge += bridge['dBridge'][i] + ' ';
+    }
+    upperBridge += ']'; lowerBridge += ']';
 
     MissionUtils.Console.print(upperBridge, lowerBridge)
   },
@@ -31,17 +35,17 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(input, ans) {
+  printResult(bridge, res, cnt) {
     MissionUtils.Console.print('최종 게임 결과');
-    this.printMap(input, ans);
-    this.printSuccess();
-    this.printTryCount();
+    this.printMap(bridge['uBridge'], bridge['dBridge']);
+    this.printSuccess(res);
+    this.printTryCount(cnt);
   },
 
   //성공여부 출력하기
-  printSuccess(){
+  printSuccess(res){
     MissionUtils.Console.print('게임 성공 여부: ');
-    if(BridgeGame.isSuccess(input, answer)){
+    if(res){
       MissionUtils.Console.print('성공');
     }else{
       MissionUtils.Console.print('실패');
@@ -49,7 +53,7 @@ const OutputView = {
   },
 
   //시도횟수 출력하기
-  printTryCount(){
+  printTryCount(tryCount){
     MissionUtils.Console.print('총 시도한 횟수: ');
     MissionUtils.Console.print(tryCount);
   }
