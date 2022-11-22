@@ -21,7 +21,7 @@ class App {
       const moving = await InputView.readMoving();
       const bridgeGame = new BridgeGame;
       const moveResult = bridgeGame.move(moving, bridge[i]);
-      const matchOrNot = this.processCrossing(moving, moveResult, gameResult);
+      const matchOrNot = await this.processCrossing(moving, moveResult, gameResult);
       if(!matchOrNot) {
         this.restartOrNot(bridgeSize, bridge);
         return gameResult
@@ -30,9 +30,9 @@ class App {
     return gameResult
   }
 
-  processCrossing(moving, moveResult, gameResult) {
-    this.recordCross(moving, moveResult, gameResult);
-    OutputView.printMap(gameResult, moving);
+  async processCrossing(moving, moveResult, gameResult) {
+    const currentResult = await this.recordCross(moving, moveResult, gameResult);
+    OutputView.printMap(currentResult, moving);
     if(moveResult === BRIDGE.UNMATCH) return false;
     return true;
   }

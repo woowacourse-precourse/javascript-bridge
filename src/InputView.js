@@ -13,7 +13,6 @@ const InputView = {
     const bridgeSize = await new Promise (answer => {
       Console.readLine(INPUT_MESSAGES.BRIDGE_SIZE, answer);
     })
-    Console.close();
     try{
       Validator.validateBridgeSize(bridgeSize);
     } catch {
@@ -27,10 +26,13 @@ const InputView = {
    */
   async readMoving() {
     const moving = await new Promise (answer => {
-      Console.readLine(INPUT_MESSAGES.BRIDGE_MOVE, answer)
+      Console.readLine(INPUT_MESSAGES.BRIDGE_MOVE, answer);
     });
-    Console.close();
-    Validator.validateMoving(moving)
+    try{
+      Validator.validateMoving(moving)
+    } catch {
+      this.readMoving();
+    }
     return moving
   },
 
@@ -38,7 +40,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
    async readGameCommand() {
-    const decide = await new Promise (answer => {
+    const decide = await Promise (answer => {
       Console.readLine(INPUT_MESSAGES.RESTART, answer);
     })
     Console.close();

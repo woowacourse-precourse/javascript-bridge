@@ -10,9 +10,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(gameResult, moving) {
-    Console.print(moving);
     Console.print(`${BRIDGE_PRINT.START}${gameResult[0].join(BRIDGE_PRINT.MIDDLE)}${BRIDGE_PRINT.END}`);
-    Console.print(`${BRIDGE_PRINT.START}${gameResult[1].join(BRIDGE_PRINT.MIDDLE)}${BRIDGE_PRINT.END}`);
+    Console.print(`${BRIDGE_PRINT.START}${gameResult[1].join(BRIDGE_PRINT.MIDDLE)}${BRIDGE_PRINT.END}\n`);
   },
 
   /**
