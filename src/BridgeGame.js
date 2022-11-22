@@ -6,10 +6,12 @@ const bridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
 class BridgeGame {
   #bridge
   #steps
+  #map
 
   constructor(size){
     this.#steps=[]
-
+    this.#map = {up: [], down: []}
+    
     this.buildBridge(size)
     console.log(this.#bridge)
   }
@@ -25,15 +27,26 @@ class BridgeGame {
   move(direction) {
     this.#steps.push(direction)
 
-    return this.#bridge[this.#steps.length-1] === direction
+    const isDirectionRight = this.#bridge[this.#steps.length-1] === direction
+    
+    this.fillMap(direction, isDirectionRight)
+    
+    return isDirectionRight
   }
 
-  printSteps(){
+  fillMap(direction, isDirectionRight){
+    const mark = isDirectionRight? 'O' : 'X'
 
+    if(direction === 'U'){
+      this.#map.up.push(mark)
+      this.#map.down.push(' ')
+    }else{
+      this.#map.up.push(' ')
+      this.#map.down.push(mark)
+    }
   }
-
-  printBridge(){
-
+  getMap(){
+    return this.#map
   }
 
   isEnd(){
