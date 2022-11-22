@@ -1,9 +1,5 @@
 const Validator = require('./Validator');
-
-const VALID_INPUT = {
-  move: ['U', 'D'],
-  retry: ['R', 'Q'],
-};
+const { VALID_INPUT } = require('./constants');
 
 class BridgeValidator extends Validator {
   #min;

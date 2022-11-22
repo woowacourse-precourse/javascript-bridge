@@ -24,4 +24,9 @@ const MESSAGES = {
   },
 };
 
-module.exports = { MAP_CHARACTERS, MESSAGES };
+const VALID_INPUT = {
+  move: ['U', 'D'],
+  retry: ['R', 'Q'],
+};
+
+module.exports = { MAP_CHARACTERS, MESSAGES, VALID_INPUT };
