@@ -27,3 +27,26 @@ describe('사이즈 입력 값 유효성 테스트', () => {
     }).toThrow('[ERROR]');
   });
 });
+
+describe('이동할 칸 입력 값 유효성 테스트', () => {
+  test('숫자를 입력한 경우 예외 처리한다.', () => {
+    expect(() => {
+      Validator.moving(1);
+    }).toThrow('[ERROR]');
+  });
+  test('U(위 칸), D(아래 칸) 이외의 한글 문자를 입력한 경우 예외 처리한다.', () => {
+    expect(() => {
+      Validator.moving('위');
+    }).toThrow('[ERROR]');
+  });
+  test('U(위 칸), D(아래 칸) 이외의 영어 문자를 입력한 경우 예외 처리한다.', () => {
+    expect(() => {
+      Validator.moving('T');
+    }).toThrow('[ERROR]');
+  });
+  test('특수 문자를 입력한 경우 예외 처리한다.', () => {
+    expect(() => {
+      Validator.moving('@');
+    }).toThrow('[ERROR]');
+  });
+});
