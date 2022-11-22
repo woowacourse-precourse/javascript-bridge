@@ -55,7 +55,7 @@ const expectBridgeOrder = (received, upside, downside) => {
 
 describe("다리 건너기 테스트", () => {
   test("다리 생성 테스트", () => {
-    const randomNumbers = ["1", "0", "0"];
+    const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
@@ -66,7 +66,7 @@ describe("다리 건너기 테스트", () => {
 
   test("기능 테스트", () => {
     const logSpy = getLogSpy();
-    mockRandoms(["1", "0", "1"]);
+    mockRandoms([1, 0, 1]);
     mockQuestions(["3", "U", "D", "U"]);
 
     const app = new App();
@@ -129,7 +129,7 @@ describe("다리 건너기 테스트", () => {
 
   test("실패 게임 후 종료 테스트", () => {
     const logSpy = getLogSpy();
-    mockRandoms(["1", "0", "0"]);
+    mockRandoms([1, 0, 0]);
     mockQuestions(["3", "U", "D", "U", "Q"]);
     const messages = [
       "최종 게임 결과",
@@ -148,7 +148,7 @@ describe("다리 건너기 테스트", () => {
 
   test("실패 게임 후 재시작 후 성공 테스트", () => {
     const logSpy = getLogSpy();
-    mockRandoms(["1", "0", "0", "1"]);
+    mockRandoms([1, 0, 0, 1]);
     mockQuestions(["4", "U", "U", "R", "U", "D", "D", "U"]);
     const messages = [
       "최종 게임 결과",
