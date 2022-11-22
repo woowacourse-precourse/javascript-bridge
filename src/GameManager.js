@@ -13,7 +13,6 @@ class GameManager {
     }
 
     startGame() {
-        Print.StartMessage();
         this.setBridgeLength();
     }
 
@@ -48,8 +47,8 @@ class GameManager {
 
     moveBridge(userInput) {
         const [correctChoice, UserIsWinnner] = this.#bridgeGame.move(userInput);
-        const [thisRound, bridge] = this.#bridgeGame.getGameInfo();
-        OutputView.printMap(thisRound, bridge);
+        // const [thisRound, bridge] = this.#bridgeGame.getGameInfo();
+        // OutputView.printMap(thisRound, bridge);
         if(!correctChoice) return this.askRetry();
         if(UserIsWinnner) return this.quitGame();
         return this.playRound();
