@@ -1,7 +1,7 @@
-const { Console } = require('@woowacourse/mission-utils');
-const BridgeMaker = require('../BridgeMaker');
-const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const { BRIDGE_GAME } = require('../Constants');
+const { Console } = require("@woowacourse/mission-utils");
+const BridgeMaker = require("../BridgeMaker");
+const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
+const { BRIDGE_GAME } = require("../Constants");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -20,8 +20,8 @@ class BridgeGame {
     size: null,
     tryCount: 1,
     tryOrder: 0,
-    up: '',
-    down: '',
+    up: "",
+    down: "",
     upOrDown: null,
     state: null,
     prebuilt: null,
@@ -46,14 +46,10 @@ class BridgeGame {
    */
 
   retry() {
-    this.#BridgeData.up = '';
-    this.#BridgeData.down = '';
+    this.#BridgeData.up = "";
+    this.#BridgeData.down = "";
     this.#BridgeData.tryOrder = 0;
     this.#BridgeData.tryCount += 1;
-  }
-  // static 불가
-  end() {
-    return Console.close();
   }
 
   pass(state, upOrDown) {

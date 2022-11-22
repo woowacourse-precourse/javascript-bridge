@@ -1,10 +1,11 @@
-const GameController = require('./GameController');
+const GameController = require("./GameController");
 // inputCheck
-const BridgeSize = require('../inputCheck/BridgeSize');
-const Moving = require('../inputCheck/Moving');
-const GameCommand = require('../inputCheck/GameCommand');
+const BridgeSize = require("../inputCheck/BridgeSize");
+const Moving = require("../inputCheck/Moving");
+const GameCommand = require("../inputCheck/GameCommand");
 // constants
-const { INPUT_VIEW } = require('../Constants');
+const { INPUT_VIEW } = require("../Constants");
+const { Console } = require("@woowacourse/mission-utils");
 
 const BridgeController = class extends GameController {
   constructor(inputView, outputView, bridgeGame) {
@@ -83,7 +84,7 @@ const BridgeController = class extends GameController {
     this.bridgeGame.increaseTryOrder();
     if (this.bridgeGame.isAllPass()) {
       this.outputView.printResult(this.bridgeGame.returnBridgeData());
-      return this.bridgeGame.end();
+      return Console.close();
     }
     return this.inputMoving();
   }
@@ -113,11 +114,11 @@ const BridgeController = class extends GameController {
       return this.inputMoving();
     }
     this.outputView.printResult(this.bridgeGame.returnBridgeData());
-    this.bridgeGame.end();
+    Console.close();
   }
 
   static isRetry(input) {
-    const RETRY = 'R';
+    const RETRY = "R";
     return input === RETRY;
   }
 
