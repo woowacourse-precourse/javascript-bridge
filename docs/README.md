@@ -83,47 +83,47 @@ javascript-bridge
 ## **🗄️ 파일 설명**
 **`<__tests__>`**  
 - **`ApplicationTest.js`**  
-    - 프로그램 전반에 대한 테스트 코드
+    - test on overall program
 - **`BridgeGameTest.js`**  
-    - BridgeGame class를 테스트하기 위한 테스트 코드
+    - test on BridgeGame class
 - **`BridgeMakerTest.js`**  
-    - BridgeMaker object를 테스트하기 위한 테스트 코드
+    - test on BridgeMaker object
 - **`BridgeRandomNumberGeneratorTest.js`**  
-    - BridgeRandomNumberGenerator object를 테스트하기 위한 테스트 코드
+    - test on BridgeRandomNumberGenerator object
 - **`BridgeSizeCheckTest.js`**  
-    - BridgeSizeCheck class를 테스트하기 위한 테스트 코드
+    - test on BridgeSizeCheck class
 - **`MoveCheckTest.js`**  
-    - MoveCheck class를 테스트하기 위한 테스트 코드
+    - test on MoveCheck class
 - **`RetryQuitCheckTest.js`**  
-    - RetryQuitCheck class를 테스트하기 위한 테스트 코드  
+    - test on RetryQuitCheck class  
 
 **`<docs>`**
 - **`README.md`**  
-    - 미션에 대한 설명을 담은 문서
+    - document file on the project
 
 **`<src>`**
 - **`<Check>`**
     - **`BridgeSizeCheck.js`**  
-        - 사용자가 입력한 다리 길이가 유효한지 확인하는 클래스
+        - validate bridge size input (3-20)
     - **`MoveCheck.js`**  
-        - 사용자가 입력한 움직임이 유효한지 확인하는 클래스
+        - validate movement input ("U" or "D")
     - **`RetryQuitCheck.js`**  
-        - 사용자가 입력한 재시도/종료 명령이 유효한지 확인하는 클래스
+        - validate game command input ("R" or "Q")
 
 - **`<Constants>`**
     - **`Constants.js`**  
-        - 프로젝트에서 사용되는 상수 및 메시지를 정의한 클래스
+        - constant numbers and messages used in the project
 - **`App.js`**  
-    - 프로그램의 시작점
+    - starting point of the program
 - **`BridgeGame.js`**  
-    - 다리를 건너는 게임을 진행하는 클래스
+    - main logic of the program
 - **`BridgeGameToView.js`**  
-    - BridgeGame과 In/OutputView를 연결하는 클래스
+    - link BridgeGame with In/OutputView
 - **`BridgeMaker.js`**  
-    - 다리를 만드는 클래스
+    - make bridge of designated size
 - **`BridgeRandomNumberGenerator.js`**  
-    - 다리를 만드는 데 사용되는 랜덤 숫자를 생성하는 클래스
+    - generate random number for bridge
 - **`InputView.js`**  
-    - 사용자의 입력을 받는 클래스
+    - get user input
 - **`OutputView.js`**  
-    - 출력을 담당하는 클래스
+    - print output
