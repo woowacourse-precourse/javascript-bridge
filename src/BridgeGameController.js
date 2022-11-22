@@ -36,7 +36,7 @@ class BridgeGameController {
     try {
       validate(value);
     } catch (e) {
-      OutputView.printError(e);
+      OutputView.printError(e.message);
     }
   }
 
