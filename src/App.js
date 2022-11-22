@@ -10,12 +10,22 @@ class App {
   readBridgeSizeCallBack(userInput) {
     try {
       Validation.bridgeSize(userInput);
-      InputView.readMoving();
+      InputView.readMoving(this.readMovingCallBack.bind(this));
     } catch (error) {
       OutputView.printError(error);
       InputView.readBridgeSize(this.readBridgeSizeCallBack.bind(this));  
     };
   };
+
+  readMovingCallBack(userInput) {
+    try {
+      Validation.moving(userInput);
+      InputView.readGameCommand();
+    } catch (error) {
+      OutputView.printError(error);
+      InputView.readMoving(this.readMovingCallBack.bind(this));  
+    };
+  }
 }
 
 const app = new App();
