@@ -1,8 +1,10 @@
+const { readBridgeSize } = require("./InputView");
 const { printStartMessage } = require("./OutputView");
 
 class App {
   play() {
     printStartMessage();
+    readBridgeSize();
   }
 }
 
