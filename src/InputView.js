@@ -82,18 +82,27 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(currentBridge, bridge, count) {
-    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (input) => {
-      console.log(`재시작 여부 : ${input}, count: ${count}`);
-      if(input==='R') {
-        count += 1;
-        console.log('재시작 O');
-        this.readMoving(game.retry(currentBridge), bridge, count);
-      }
-      else if(input==='Q') {
-        console.log('재시작 X');
-        OutputView.printResult(currentBridge, count, 0);
-      }
-    })
+    try{
+      Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (input) => {
+        console.log(`재시작 여부 : ${input}, count: ${count}`);
+        if(input==='R') {
+          count += 1;
+          console.log('재시작 O');
+          this.readMoving(game.retry(currentBridge), bridge, count);
+        }
+        else if(input==='Q') {
+          console.log('재시작 X');
+          OutputView.printResult(currentBridge, count, 0);
+        }
+        else{
+          throw "[ERROR] R와 Q중 하나만 입력 가능합니다.";
+        }
+      })
+    } catch(e) {
+      Console.print(e);
+      this.readGameCommand(currentBridge, bridge, count);
+    }
+
   },
 };
 

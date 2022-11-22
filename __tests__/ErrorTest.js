@@ -79,7 +79,7 @@ describe("다리 길이 입력 에러 테스트", () => {
   });
 });
 
-describe.only("이동할 칸 입력 에러 테스트", () => {
+describe("이동할 칸 입력 에러 테스트", () => {
   test("이동할 칸 올바르지 않은 입력", () => {
     runException(["3", "A"]);
   });
@@ -104,3 +104,27 @@ describe.only("이동할 칸 입력 에러 테스트", () => {
   });
 });
 
+describe("재시작/종료 입력 에러 테스트", () => {
+  test("재시작/종료 올바르지 않은 입력", () => {
+    runException(["3", "D", "A"]);
+  });
+  test("재시작/종료 올바르지 않은 입력 후 재입력", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["3", "D", "A", "R", "U", "D", "U"]);
+  
+    const app = new App();
+    app.play();
+  
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ERROR]",
+      "최종 게임 결과",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+  });
+});
