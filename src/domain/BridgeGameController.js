@@ -61,7 +61,7 @@ class BridgeGameController {
   }
 
   #isGameOver() {
-    return this.bridgeGame.checkGameFinishStatus();
+    return this.bridgeGame.checkGameOverState();
   }
 
   requestGameOverCommand() {
@@ -103,7 +103,7 @@ class BridgeGameController {
   #showResult() {
     OutputView.printResult({
       userGameMap: this.bridgeGame.getUserBridgeMap(),
-      isSuccess: this.bridgeGame.checkGameFinishStatus(),
+      isGameOver: this.bridgeGame.checkGameOverState(),
       userTryCount: this.bridgeGame.getUserTryCount(),
     });
     return this.#exitGame();

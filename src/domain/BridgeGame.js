@@ -28,7 +28,7 @@ class BridgeGame {
     return this.bridgeMapPainter.drawOX(moveCommand, this.getUserLocation(), this.getGameMap());
   }
 
-  checkGameFinishStatus() {
+  checkGameOverState() {
     if (this.#isGameOver) {
       return true;
     }
