@@ -1,4 +1,4 @@
-const { GAME_RULE } = require('../../constants');
+const { GAME_RULE, ERROR_MESSAGE } = require('../../constants');
 
 const Command = require('./Command');
 
@@ -23,7 +23,7 @@ class GameCommand extends Command {
    */
   static #validate(command) {
     if (!GameCommand.#isValid(command)) {
-      throw '[ERROR] 재시도 여부 입력값은 R 또는 Q여야 합니다.';
+      throw ERROR_MESSAGE.RULE_GAME_COMMAND;
     }
   }
 

@@ -1,4 +1,4 @@
-const { BRIDGE_RULE } = require('../../constants');
+const { BRIDGE_RULE, ERROR_MESSAGE } = require('../../constants');
 const InputValidator = require('../../utils/InputValidator');
 
 const Command = require('./Command');
@@ -28,7 +28,7 @@ class SizeCommand extends Command {
     InputValidator.validateNumber(command);
 
     if (!SizeCommand.#isValid(command)) {
-      throw '[ERROR] 다리의 길이는 3이상 20이하의 숫자여야 합니다.';
+      throw ERROR_MESSAGE.RULE_SIZE;
     }
   }
 

@@ -1,4 +1,4 @@
-const { GAME_RULE } = require('../../constants');
+const { GAME_RULE, ERROR_MESSAGE } = require('../../constants');
 
 const Command = require('./Command');
 
@@ -23,7 +23,7 @@ class MovingCommand extends Command {
    */
   static #validate(command) {
     if (!MovingCommand.#isValid(command)) {
-      throw '[ERROR] 이동할 칸 입력 값은 U 또는 D여야 합니다.';
+      throw ERROR_MESSAGE.RULE_MOVING_COMMAND;
     }
   }
 
