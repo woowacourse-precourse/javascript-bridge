@@ -7,6 +7,7 @@ const INPUT_MESSAGE = Object.freeze({
 const OUTPUT_MESSAGE = Object.freeze({
   start: '다리 건너기 게임을 시작합니다.\n',
   result: '최종 게임 결과',
+  new_line: '',
 });
 
 const RESULT_MESSAGE = Object.freeze({
