@@ -6,6 +6,7 @@ const Bridge = require('./Bridge');
 class BridgeGame {
   #bridge;
   #map = [];
+  #attempts = 1;
 
   makeBridge(bridgeSize) {
     this.#bridge = new Bridge(bridgeSize);
@@ -52,7 +53,14 @@ class BridgeGame {
   retry(command) {
     this.#validateCommand(command);
 
-    return command === 'R';
+    if (command === 'Q') {
+      return false;
+    }
+
+    this.#reset();
+    this.#attempts += 1;
+
+    return true;
   }
 
   #validateCommand(command) {
@@ -63,6 +71,16 @@ class BridgeGame {
     throw new Error(
       '[ERROR] 게임을 다시 시도 하려면 R, 종료하려면 Q를 대문자로 입력해주세요.',
     );
+  }
+
+  #reset() {
+    this.#map = [];
+  }
+
+  getGameResult() {
+    const isSuccess = this.#bridge.size() === this.#map.length;
+
+    return { map: this.#map, attempts: this.#attempts, isSuccess };
   }
 }
 

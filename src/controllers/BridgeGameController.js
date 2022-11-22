@@ -30,6 +30,7 @@ class BridgeGameController {
 
   #requestMoveDirection(round = 0) {
     if (this.#model.isLastRound(round)) {
+      this.#quit();
       return;
     }
 
@@ -61,6 +62,7 @@ class BridgeGameController {
       const retryOrQuit = isRetry
         ? this.#requestMoveDirection.bind(this)
         : this.#quit.bind(this);
+
       retryOrQuit();
     } catch (error) {
       this.#view.print(`\n${error.message}\n`);
@@ -71,7 +73,11 @@ class BridgeGameController {
   /**
    * 사용자가 게임을 종료할 때 사용하는 메서드
    */
-  #quit() {}
+  #quit() {
+    const gameResult = this.#model.getGameResult();
+
+    this.#view.printResult(gameResult);
+  }
 }
 
 module.exports = BridgeGameController;

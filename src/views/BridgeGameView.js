@@ -34,8 +34,8 @@ class BridgeGameView {
     this.#output.printMap(map);
   }
 
-  printResult() {
-    this.#output.printResult();
+  printResult(gameResult) {
+    this.#output.printResult(gameResult);
   }
 }
 
