@@ -99,7 +99,7 @@ describe('user가 잘못된 입력 넣었을때 에러메세지 출력 테스트
   test('유저 다리 이동 입력 에러 핸들링 테스트', () => {
     const logSpy = getLogSpy();
     mockRandoms(['1', '0', '1']);
-    mockQuestions(['3', 'Z']);
+    mockQuestions(['3', 'Q']);
     const app = new App();
     app.play();
     const log = getOutput(logSpy);
