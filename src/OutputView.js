@@ -33,6 +33,7 @@ const OutputView = {
   },
 
   printException(error) {
+    MissionUtils.Console.close();
     if (error === "숫자 입력이 아님") {
       MissionUtils.Console.print(ERROR_MESSAGE.ONLY_NUMBER);
     }
