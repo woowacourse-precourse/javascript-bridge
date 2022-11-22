@@ -12,18 +12,22 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap([topBridge, bottomBridge]) {
+    Console.print(`[ ${topBridge.join(" | ")} ]`);
+    Console.print(`[ ${bottomBridge.join(" | ")} ]`);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult({ topBridge, bottomBridge }, numberOfAttempts, successOrFailure) {
-    Console.print(`${OutputView.RESULT_MESSAGE_HEADER}`);
-    this.printMap({ topBridge, bottomBridge });
-    Console.print(`${OutputView.RESULT_MESSAGE_IS_SUCCESS(successOrFailure)}`);
+  printResult(bridgeMap, successOrFailure, numberOfAttempts) {
+    Console.print(`\n${OutputView.RESULT_MESSAGE_HEADER}`);
+    this.printMap(bridgeMap);
+    Console.print(`\n${OutputView.RESULT_MESSAGE_IS_SUCCESS(successOrFailure)}`);
     Console.print(`${OutputView.RESULT_MESSAGE_TOTAL_ATTEMPTS(numberOfAttempts)}`);
+    Console.close();
   },
 
   printStartMessage() {
