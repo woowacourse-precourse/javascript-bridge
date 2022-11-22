@@ -123,3 +123,35 @@ describe('유효성 검사 후 모델에 데이터 저장 확인 테스트', () 
     expect(storeSuccess).toBe(true);
   });
 });
+
+describe('예외 처리로 데이터가 안 담기는 지 테스트', () => {
+  let storeSuccess = false;
+  let wrongInput = ['S', 'X', 'u', 'd', 'r', 'q', '5', 'I'];
+
+  beforeEach(() => {
+    model.initialize();
+    storeSuccess = false;
+  });
+
+  test('유저가 움직이는 방향(U, D)을 정확하지 않게 입력했을 경우', () => {
+    wrongInput.forEach((input) => {
+      controller.setUserMoving(input, () => {
+        storeSuccess = true;
+      });
+
+      expect(model.getStep().length).toEqual(0);
+      expect(storeSuccess).toBe(false);
+    });
+  });
+
+  test('유저가 명령어(R, Q)을 정확하지 않게 입력했을 경우', () => {
+    wrongInput.forEach((input) => {
+      controller.setUserCommand(input, () => {
+        storeSuccess = true;
+      });
+
+      expect(model.getCommand().length).toEqual(0);
+      expect(storeSuccess).toBe(false);
+    });
+  });
+});
