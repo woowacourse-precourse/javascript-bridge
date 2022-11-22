@@ -62,14 +62,7 @@ class App {
   }
 
   isGameOver() {
-    const FAILURE = 'X';
-    const [GAMR_OVER, NO_GAME_OVER] = [true, false];
-
-    if (this.#bridgeGame.getCurrentBridgeReuslt() === FAILURE) {
-      return GAMR_OVER;
-    }
-
-    return NO_GAME_OVER;
+    return this.#bridgeGame.isGameOver();
   }
 
   isGameSuccess() {
@@ -169,4 +162,7 @@ class App {
   }
 }
 
+const app = new App();
+
+app.play();
 module.exports = App;
