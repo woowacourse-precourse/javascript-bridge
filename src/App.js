@@ -6,9 +6,14 @@ const BridgeGame = require("./BridgeGame");
 class App {
   gameCnt = 1;
   movingCount = 0;
-  play() {
+
+  constructor() {
     OutputView.printStart();
+  }
+
+  play() {
     let size = this.makeSize();
+    if (size == "err") return;
     MissionUtils.Console.print(size);
     const bridgeGame = new BridgeGame(size);
     MissionUtils.Console.print(bridgeGame.bridge);
@@ -29,7 +34,7 @@ class App {
           bridgeGame.retry();
         }
       }
-      if (this.movingCount == 3) command = false;
+      if (this.movingCount == size) command = false;
     } while (command);
 
     OutputView.printResult(
@@ -63,7 +68,7 @@ class App {
       return size;
     } catch (e) {
       MissionUtils.Console.print(e.message);
-      return InputView.readBridgeSize();
+      return "err";
     }
   }
 
