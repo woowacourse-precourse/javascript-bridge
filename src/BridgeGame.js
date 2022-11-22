@@ -3,16 +3,20 @@ const { BridgeMaker, makeBridge } = require("./BridgeMaker");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #num;
+  #upList;
+  #downList;
+  
   constructor() {
-    this.num = 0;
-    this.upList = [];
-    this.downList = [];
+    this.#num = 0;
+    this.#upList = [];
+    this.#downList = [];
   }
   /**
     * 사용자 입력값 - O, X 판단
     */
   isUserInputRightOrWrong(bridgeList, userUpOrDown) {
-    return (bridgeList[this.num] === userUpOrDown);
+    return (bridgeList[this.#num] === userUpOrDown);
   }
 
 /**
@@ -22,8 +26,8 @@ class BridgeGame {
    */
   move(bridgeList, userUpOrDown) {
     this.addResultToList(bridgeList, userUpOrDown);
-    this.num += 1;
-    return [[this.upList, this.downList], this.num];
+    this.#num += 1;
+    return [[this.#upList, this.#downList], this.#num];
   }
 
   addResultToList(bridgeList, userUpOrDown) {
@@ -36,23 +40,23 @@ class BridgeGame {
   }
 
   addUserUp(bridgeList) {
-    if(bridgeList[this.num] === 'U') {
-      this.upList.push('O');
+    if(bridgeList[this.#num] === 'U') {
+      this.#upList.push('O');
     } 
     else {
-      this.upList.push('X');
+      this.#upList.push('X');
     }
-    this.downList.push(' ');
+    this.#downList.push(' ');
   }
 
   addUserDown(bridgeList) {
-    if(bridgeList[this.num] === 'D') {
-      this.downList.push('O');
+    if(bridgeList[this.#num] === 'D') {
+      this.#downList.push('O');
     } 
     else {
-      this.downList.push('X');
+      this.#downList.push('X');
     }
-    this.upList.push(' ');
+    this.#upList.push(' ');
   }
  
 
@@ -62,9 +66,9 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.num = 0;
-    this.upList = [];
-    this.downList = [];
+    this.#num = 0;
+    this.#upList = [];
+    this.#downList = [];
   }
 }
 module.exports = BridgeGame;
