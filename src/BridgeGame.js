@@ -2,18 +2,47 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #upperBridge = [];
-  #lowerBridge = [];
 
+  constructor(){
+    this.upperBridge = '[ ';
+    this.lowerBridge = '[ ';
+  }
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(command) {
-    
+  move(input, answer) {
+    for(let i = 0; i < input.length; i++){
+      if(i != 0){
+        this.printSpaceDivision();
+      }
+      this.verifyInputAndAnswer(input, answer);   
+    }
+  }
 
+  //다리 칸 구분 출력하기
+  printSpaceDivision(){
+    upperBridge += '| ';
+    lowerBridge += '| ';
+  }
+
+  //사용자 입력과 정답이 맞는지 검증하기
+  verifyInputAndAnswer(input, answer){
+    if(input[i] == 'U'){
+      upperBridge += this.cmpUD(input[i], answer[i]) + ' ';
+      lowerBridge += '  ';
+    }
+    if(input[i] == 'D'){
+      lowerBridge += this.cmpUD(input[i], answer[i]) + ' ';
+      upperBridge += '  ';
+    }
+  }
+
+  //사용자 입력과 정답이 같은지 확인하기
+  cmpUD(input, ans){
+    return input == ans ? 'O':'X';
   }
 
   /**

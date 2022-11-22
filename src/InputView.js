@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require('./BridgeMaker');
+const BridgeGame = require('./BridgeGame');
 
 
 
@@ -24,6 +25,7 @@ const InputView = {
   readMoving() {
     MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (space) => {
       this.exceptionOfReadMoving(space);
+      BridgeGame.move(space);
     });
   },
 
