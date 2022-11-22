@@ -1,5 +1,6 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 const OutputView = require("./OutputView.js");
+const Exception = require("./Exception.js");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -10,8 +11,11 @@ const InputView = {
   readBridgeSize(bridgeGame) {
     Console.print("다리 건너기 게임을 시작합니다.\n");
     Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
-      bridgeGame.makeBridge(parseInt(input));
-      bridgeGame.move();
+      if (!Exception.checkBridgeLength(input)) {
+        Console.print("");
+        bridgeGame.makeBridge(parseInt(input));
+        bridgeGame.move();
+      }
     }); //예외 처리(범위, 숫자)
   },
 
@@ -22,9 +26,11 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
-        bridgeGame.moveInput.push(input);
-        bridgeGame.validate();
-      } //readGameCommand 실행 여부 판단하고
+        if (!Exception.checkGameMove(input)) {
+          bridgeGame.moveInput.push(input);
+          bridgeGame.validate();
+        }
+      }
     );
   },
 
@@ -35,8 +41,10 @@ const InputView = {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
-        if (input === "R") bridgeGame.initializeMove();
-        if (input === "Q") OutputView.printResult(bridgeGame, "실패");
+        if (!Exception.checkGameCommand(input)) {
+          if (input === "R") bridgeGame.initializeMove();
+          if (input === "Q") OutputView.printResult(bridgeGame, "실패");
+        }
       }
     );
   },
