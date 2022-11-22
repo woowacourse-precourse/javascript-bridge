@@ -46,10 +46,24 @@ const InputView = {
    */
   readMoving(bridgeList) {
     Console.readLine(USER_INPUT.ENTER_MOVEMENT, (upOrDown) => {
-      const isInputRight = this.bridgeGame.isUserInputRightOrWrong(bridgeList, upOrDown);
-      const result = this.bridgeGame.move(bridgeList, upOrDown);
-      this.repeatMovingOrNot(bridgeList, result, isInputRight);
+      try {
+        this.validateUserMove(upOrDown);
+        const isInputRight = this.bridgeGame.isUserInputRightOrWrong(bridgeList, upOrDown);
+        const result = this.bridgeGame.move(bridgeList, upOrDown);
+        this.repeatMovingOrNot(bridgeList, result, isInputRight);
+      } catch(error) {
+        this.printError(error);
+      }
     })
+  },
+
+  validateUserMove(upOrDown) {
+    if(!['U', 'D'].includes(upOrDown)) {
+      throw new Error(ERROR.USER_MOVE_INPUT_ERROR);
+    }
+    if(upOrDown.length !== 1) {
+      throw new Error(ERROR.USER_MOVE_INPUT_LENGTH_ERROR);
+    }
   },
 
   repeatMovingOrNot(bridgeList, result, isInputRight) {
