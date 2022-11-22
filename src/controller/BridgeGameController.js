@@ -5,7 +5,7 @@ const { close } = require("../utils/utils");
 const BridgegLengthValidator = require("../utils/BridgeLengthValidator");
 const DirectionValidator = require("../utils/DirectionValidator");
 const RegameCommandValidator = require("../utils/RegameCommandValidator");
-const ValidPathBridge = require("../BridgeAnswerPath");
+const ValidPathBridge = require("../BridgeAnswerGenerator");
 const { STATUS, STATE } = require("../constants/message");
 const BridgeMap = require("../BridgeMap");
 
@@ -19,10 +19,10 @@ class BridgeGameController {
   }
 
   updateBridgeLengthFromUser() {
-    return InputView.readBridgeSize(this.updateBridgeAccordingInput.bind(this));
+    return InputView.readBridgeSize(this.#updateBridgeAccordingInput.bind(this));
   }
 
-  updateBridgeAccordingInput(bridgeSize) {
+  #updateBridgeAccordingInput(bridgeSize) {
     this.model.validPath.size = Number(bridgeSize);
     if (this.#isBridgeLengthNotValid()) return this.updateBridgeLengthFromUser();
     this.model.validPath.setAnswerBridge();
@@ -34,58 +34,60 @@ class BridgeGameController {
   }
 
   updateMoveDirectionFromUser() {
-    this.#isGameCleared() ? this.quit() : InputView.readMoving(this.updateUserMovement.bind(this));
+    this.#isGameCleared()
+      ? this.#quit()
+      : InputView.readMoving(this.#updateUserMovement.bind(this));
   }
 
   #isGameCleared() {
-    return this.model.validPath.size === this.model.bridgeGame.myCurrentPosition;
+    return this.model.validPath.size === this.model.bridgeGame.getMyCurrentPosition();
   }
 
-  updateUserMovement(direction) {
+  #updateUserMovement(direction) {
     if (this.#isDirectionNotValid(direction)) return this.updateMoveDirectionFromUser();
     if (this.model.bridgeGame.move(direction, this.model.validPath.getbridge())) {
       this.model.bridgeMap.updateMyPositionForward(direction, STATE.VALID.symbol);
-      return this.showMovedPath().updateMoveDirectionFromUser();
+      return this.#showMovedPath().updateMoveDirectionFromUser();
     }
     this.model.bridgeMap.updateMyPositionForward(direction, STATE.NOT_VALID.symbol);
-    return this.showMovedPath().askUserRestart();
+    return this.#showMovedPath().#askUserRestart();
   }
 
   #isDirectionNotValid(direction) {
     return !DirectionValidator.validate(direction);
   }
 
-  askUserRestart() {
-    InputView.readGameCommand(this.updateRestartOrNot.bind(this));
+  #askUserRestart() {
+    InputView.readGameCommand(this.#updateRestartOrNot.bind(this));
   }
 
-  updateRestartOrNot(restartStatus) {
-    if (this.#isRegameCommandNotValid(restartStatus)) this.askUserRestart();
-    if (restartStatus === STATUS.HOPE_RESTART) this.regame();
-    if (restartStatus === STATUS.HOPE_QUIT) this.quit();
+  #updateRestartOrNot(restartStatus) {
+    if (this.#isRegameCommandNotValid(restartStatus)) this.#askUserRestart();
+    if (restartStatus === STATUS.HOPE_RESTART) this.#regame();
+    if (restartStatus === STATUS.HOPE_QUIT) this.#quit();
   }
 
   #isRegameCommandNotValid(restartStatus) {
     return !RegameCommandValidator.validate(restartStatus);
   }
 
-  showMovedPath() {
+  #showMovedPath() {
     OutputView.printMap(this.model.bridgeMap.getMyBridgeMap());
     return this;
   }
 
-  quit() {
+  #quit() {
     OutputView.printResult(this.model.bridgeMap.getMyBridgeMap());
     OutputView.printIsGameClear(this.#isGameCleared());
-    OutputView.printAttemptsCount(this.model.bridgeGame.numberOfAttempt);
-    this.close();
+    OutputView.printAttemptsCount(this.model.bridgeGame.getNumberOfAttempt());
+    this.#close();
   }
 
-  close() {
+  #close() {
     close();
   }
 
-  regame() {
+  #regame() {
     this.model.bridgeGame.retry();
     this.model.bridgeMap.init();
     this.updateMoveDirectionFromUser();
