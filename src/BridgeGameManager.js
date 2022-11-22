@@ -40,11 +40,11 @@ class BridgeGameManager {
 
   manageRetry(command) {
     Validation.checkGameCommand(command);
-    if (command === "R") {
+    if (command === GAME_STATE.RETRY) {
       this.#bridgeGame.retry();
       InputView.readMoving(this.manageMoving.bind(this));
     }
-    if (command === "Q")
+    if (command === GAME_STATE.QUIT)
       return OutputView.printResult(this.#bridgeGame.getCurrentState());
   }
 

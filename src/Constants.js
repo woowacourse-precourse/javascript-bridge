@@ -13,5 +13,7 @@ module.exports = {
     PASS: "통과",
     TRUE: "O",
     FALSE: "X",
+    RETRY: "R",
+    QUIT: "Q",
   },
 };
