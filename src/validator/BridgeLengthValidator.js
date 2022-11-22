@@ -4,7 +4,7 @@ const { ERROR_MESSAGE } = require('../utils/constant');
 class BridgeLengthValidator extends Validator {
   #bridgeLength;
 
-  #regex = /^[3-9]{1}$|^1{1}\d{1}$|^20$/;
+  #regex = /^[3-9]{1}$|^1{1}[0-9]{1}$|^20$/;
 
   constructor(bridgeLength) {
     super();
