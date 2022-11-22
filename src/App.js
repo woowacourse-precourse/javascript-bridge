@@ -1,5 +1,5 @@
-const { readBridgeSize } = require("./InputView");
-const { gameStart } = require("./OutputView");
+const { readBridgeSize, readMoving } = require("./InputView");
+const { gameStart, printResult } = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
 
 class App {
@@ -7,10 +7,23 @@ class App {
     this.bridgeGame = new BridgeGame();
   }
 
+  moveBridge() {
+    readMoving(this.readMoveCallback);
+  }
+
+  readMoveCallback = (moveValue) => {
+    let [moveCount, restartCheck, tryCount, printTry] =
+      this.bridgeGame.move(moveValue);
+    if (moveCount <= 2) {
+      this.moveBridge();
+    }
+  };
+
   play() {
     gameStart();
     readBridgeSize((bridgeLength) => {
       this.bridgeGame.createBridge(bridgeLength);
+      this.moveBridge();
     });
   }
 }
