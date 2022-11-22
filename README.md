@@ -235,4 +235,168 @@ Q
 
 <br>
 
-# 🔧 도메인 클래스별 생성자, 메소드 설명
+# 🔧 도메인 클래스별 필드, 생성자, 메소드 설명
+
+### 🌉 Bridge Class
+
+다리의 경로를 다루는 다리 클래스
+
+#### Class Field
+
+`#bridge`
+
+- 다리의 경로를 가지고 있는 필드
+- 다리의 경로 방향은 위(U) 아래(D) 형태로만 저장한다.
+- type: `Array<string>`
+
+#### Class Constructor & Method
+
+`constructor(bridge)`
+
+- 생성자로 다리의 경로를 가지고 있는 배열을 입력 받고 필드로 저장한다.
+- parameter type: `Array<string>`
+
+`isLastPosition(player)`
+
+- 플레이어 객체를 인자로 받고, 해당 플레이어가 다리의 마지막 칸에 존재하는지 확인하는 메소드
+- parameter type: `Player`
+- return type: `boolean`
+
+`getNextDirection(player)`
+
+- 플레이어 객체를 인자로 받고, 플레이어의 다음 칸의 건널 수 있는 방향이 무엇인지 반환하는 메소드
+- 플레이어의 다음 칸 중 건널 수 있는 칸이 윗칸이라면 "U"를 반환한다.
+- 플레이어의 다음 칸 중 건널 수 있는 칸이 아랫칸이라면 "D"를 반환한다.
+- parameter type: `Player`
+- return type: `string`
+
+### 🙍‍♂️ Player Class
+
+플레이어의 이동 경로와 탈락 상태를 다루는 클래스
+
+#### Class Field
+
+`#bridgePath`
+
+- 사용자가 이동한 경로를 저장하는 필드
+- 객체 형태이며, 객체에는 upperBridge와 lowerBridge를 각각 배열 형태로 저장한다.
+- 경로 방향은 위(U) 아래(D) 형태로만 저장한다.
+- type: `Object<upperBridge: Array<string>, lowerBridge: Array<string>>`
+
+#### Class Constructor & Method
+
+`constructor()`
+
+- 플레이어가 처음 생성될 때 필드의 초기값을 설정한다.
+- bridgePath의 upperBridge와 lowerBridge를 빈 배열로 저장한다.
+
+`move(direction)`
+
+- 플레이어의 위치를 이동시키는 메소드
+- 이동 방향(U or D)를 인자로 입력받는다.
+- 이동 방향이 위쪽(U)라면 bridgePath의 upperBridge에 "O"를 추가하고, lowerBridge에 " "를 추가한다.
+- 이동 방향이 아래쪽(D)라면 bridgePath의 lowerBridge에 "O"를 추가하고, upperBridge에 " "를 추가한다.
+- 이 때, 플레이어가 떨어진 상태라면 bridgePath에 저장하지 않고 메소드를 바로 종료한다.
+- parameter type: `string`
+- return type: `void`
+
+`fall(direction)`
+
+- 플레이어가 잘못된 칸을 건넜을 때, 플레이어를 떨어뜨려 탈락시키는 메소드
+- 이동 방향(U or D)를 인자로 입력받는다.
+- 이동 방향이 위쪽(U)라면 bridgePath의 upperBridge에 "X"를 추가하고, lowerBridge에 " "를 추가한다.
+- 이동 방향이 아래쪽(D)라면 bridgePath의 lowerBridge에 "X"를 추가하고, upperBridge에 " "를 추가한다.
+- 이 때, 플레이어가 이미 떨어진 bridgePath에 저장하지 않고 메소드를 바로 종료한다.
+- parameter type: `string`
+- return type: `void`
+
+`isFallen()`
+
+- 플레이어가 떨어진 상태(탈락된 상태)인지 확인하는 메소드
+- bridgePath를 통해 탈락 상태를 확인하고, 탈락 상태라면 `true`, 탈락 상태가 아니라면 `false`를 출력한다.
+- return type: `boolean`
+
+`getCurrentPosition()`
+
+- 플레이어가 다리의 몇 번째 칸에 위치하는지 반환하는 메소드
+- return type: `number`
+
+`getMap()`
+
+- 플레이어가 이동한 경로를 문자열로 변환해서 반환하는 메소드
+- 다리 경로의 윗칸을 문자열로 변환해 upperBridgeMap에 저장하고, 아랫칸을 문자열로 변환해 lowerBridgeMap에 저장한 객체를 반환한다.
+- return type: `Object<upperBridgeMap: string, lowerBridgeMap: string>`
+
+### 🕹 BridgeGame Class
+
+다리 건너기 게임을 진행하는 클래스
+
+#### Class Field
+
+`#bridge`
+
+- 다리를 저장하는 필드
+- type: `Bridge`
+
+`#player`
+
+- 플레이어를 저장하는 필드
+- type: `Player`
+
+`#tryCount`
+
+- 게임의 시도횟수를 저장하는 필드
+- type: `number`
+
+#### Class Constructor & Method
+
+`constructor(bridge)`
+
+- 인자로 다리 경로를 저장한 배열을 입력 받는다.
+- 입력 받은 배열로 다리(Bridge)를 생성한다.
+- 플레이어(Player)를 새로 생성한다.
+- 게임 시도 횟수를 초기값(1)으로 설정한다.
+
+`move(direction)`
+
+- 플레이어를 입력 받은 방향으로 이동시키는 메소드
+- 이동 방향(U or D)를 인자로 입력받는다.
+- `isMovable()` 함수로 이동할 수 있는지 확인하고 이동할 수 있다면 player 객체의 `move()` 메소드 를 실행한다.
+- 이동할 수 없다면 player 객체의 `fall()` 메소드를 실행해 플레이어를 탈락시킨다.
+- parameter type: `string`
+- return type: `void`
+
+`retry()`
+
+- 게임을 재시도 할 때 실행하는 메소드
+- 새로운 플레이어를 생성한다.
+- 시도 횟수를 올린다.
+- return type: `void`
+
+`isMovable(direction)`
+
+- 이동 방향을 인자로 입력받고, 해당 방향으로 이동할 수 있는지 확인하는 메소드
+- parameter type: `string`
+- return type: `boolean`
+
+`isFallen()`
+
+- 현재 진행 중인 플레이어가 떨어진 상태(탈락 상태)인지 확인하는 메소드
+- return type: `boolean`
+
+`isClear()`
+
+- 다리 건너기를 끝까지 성공했는지 확인하는 메소드
+- return type: `boolean`
+
+`getMap()`
+
+- 플레이어가 현재까지 이동한 경로를 반환하는 메소드
+- Player 객체의 getMap()의 반환 결과를 그대로 반환한다.
+- return type: `Object<upperBridgeMap: string, lowerBridgeMap: string>`
+
+`getResult()`
+
+- 게임의 최종 결과를 반환하는 메소드
+- 플레이어의 이동 경로, 게임 클리어 상태, 시도 횟수를 반환한다.
+- return type: `Object<map: Object<string>, isClear: boolean, tryCount: number>`
