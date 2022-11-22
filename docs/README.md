@@ -1,30 +1,36 @@
 # 미션 - 다리 건너기
 
+## 프로젝트 설계
+
+<img width="850" alt="설계" src="https://user-images.githubusercontent.com/66871265/203291116-ed15b46a-dbdf-4d7f-af0d-1ed42419f5cf.png">
+
 ## 기능 목록
 
 ### `Model`
 
 1. BridgeGameModel
 
-- [x] try
-  - 게임을 시도하면, try의 값을 1로 set한다
-  - bridge 데이터를 set한다
-  - user 데이터를 초기화한다.
-- [x] attempt
-  - try의 값을 +1 한다.
-  - user 데이터를 초기화한다.
+- [x] initialize
+  - 재시작시, 필드를 초기화한다.
+- [x] start
+  - 게임 시작 후, 다리 데이터를 받아와 필드를 업데이트를 한다
+- [x] retry
+  - 재시작을 한다면 retry 필드에 유저의 키워드 값을 넣는다.
+- [x] update
+  - directions 필드에 사용자가 입력한 방향 데이터를 업데이트한다.
+  - directions, bridge 필드 데이터를 리턴한다
 - [x] result
-  - 시도 횟수와 게임 성공 여부를 알려준다
-- [x] jump
-  - 유저가 점프한 후 위치 데이터를 갱신한다.
+  - 시도 횟수와 게임 성공 여부, 그리고 bridge와 directions 데이터를 준다.
+- [x] read
+  - bridge와 directions 데이터를 준다.
 - [x] checkBridge
   - 메세지를 통해 유효한 bridge 데이터인지 확인하고 유효하지 않다면 Error를 던진다.
-- [x] checkUser
-  - 메세지를 통해 유효한 user 데이터인지 확인하고 유효하지 않다면 Error를 던진다.
+- [x] checkDirection
+  - 메세지를 통해 유효한 direction 데이터인지 확인하고 유효하지 않다면 Error를 던진다.
 - [x] isSuccess
   - 메세지를 통해 게임 결과를 알려준다.
-- [x] isFail
-  - 메세지를 통해 게임이 실패했는지 알려준다.
+- [x] isPass
+  - 메세지를 통해 다리를 통과했는지 알려준다.
 - [x] isRetry
   - 메세지를 통해 게임을 재시작했는지 알려준다.
 
@@ -32,12 +38,14 @@
 
 1. OutputView
 
-- [ ] printMap
+- [x] printMap
   - 데이터를 받아와 다리를 그려준다.
-- [ ] printResult
+- [x] printResult
   - 데이터를 받아와 게임 결과를 그려준다
-- [ ] printStart
+- [x] printStart
   - 게임 시작을 그려준다
+- [x] printBlank
+  - 공백을 출력해 줄바꿈을 해준다.
 
 1. InputView
 
@@ -76,16 +84,21 @@
 - [x] retryGame
   - 컨트롤러의 retry 요청에 대한 로직을 담당한다.
   - 모델의 메세지를 사용하여 사용자의 재시작 데이터를 검증하고 시도 횟수를 저장한다.
-- [ ] endGame
+- [x] endGame
   - 컨트롤러의 end 요청에 대한 로직을 담당한다.
   - 아웃풋 뷰의 게임 종료 결과 뷰를 호출한다
   - 게임을 종료한다.
+- [x] processMove
+  - 성공했다면 게임을 종료하는 로직을 담당한다.
+  - 다리를 통과했다면 이후 이어질 로직을 호출한다.
+- [x] processRetry
+  - 사용자의 재시작 여부에 따라 이어질 로직을 호출한다.
 
 ## 예외 처리
 
 1. 다리의 길이
    1. 3 ~ 20까지의 숫자
-   2. - 값 처리
+   2. 음수 값 처리
    3. 숫자가 아닌 경우
 2. 이동할 칸의 값
    1. "U", "D"가 아닌 경우
