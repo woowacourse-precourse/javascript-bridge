@@ -29,6 +29,7 @@ class Player {
 
   resetPath() {
     this.#path = { upside: [], downside: [] };
+    this.#currentLocation = 0;
   }
 }
 
