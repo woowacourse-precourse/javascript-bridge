@@ -7,6 +7,12 @@ const Controller = {
         Controller.makeBridge(bridgeGame);
     },
 
+    makeBridge(bridgeGame) {
+        InputView.readBridgeSize(input => {
+            Controller.makeBridgeCallBack(bridgeGame, input);
+        })
+    },
+
 }
 
 module.exports = Controller;
