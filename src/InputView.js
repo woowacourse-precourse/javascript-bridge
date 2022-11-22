@@ -1,10 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
-const BridgeGame = require('./BridgeGame');
-const BridgeMaker = require('./BridgeMaker');
-const makeBridge = BridgeMaker.makeBridge;
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const generate = BridgeRandomNumberGenerator.generate;
+const BridgeGameSetter = require('./BridgeGameSetter');
 const validator = require('./InputValidators');
 
 const InputView = {
@@ -12,11 +8,16 @@ const InputView = {
     Console.readLine('다리의 길이를 입력해 주세요.', (num) => {
       try {
         validator.is3To20(num);
-        this.readMoving(setBridgeGame(num));
+        this.readMoving(BridgeGameSetter(num));
       } catch (error) {
-        ErrorHandlers.errorHandlerInReadBridgeSize(error);
+        this.errorHandlerInReadBridgeSize(error);
       }
     });
+  },
+
+  errorHandlerInReadBridgeSize(error) {
+    Console.print(error);
+    InputView.readBridgeSize();
   },
 
   readMoving(bridgeGame) {
@@ -25,9 +26,14 @@ const InputView = {
         validator.isUorD(input);
         moveAndCheck(input, bridgeGame);
       } catch (error) {
-        ErrorHandlers.errorHandlerInReadMoving(error, bridgeGame);
+        this.errorHandlerInReadMoving(error, bridgeGame);
       }
     });
+  },
+
+  errorHandlerInReadMoving(error, bridgeGame) {
+    Console.print(error);
+    InputView.readMoving(bridgeGame);
   },
 
   readGameCommand(bridgeGame, blocks) {
@@ -36,31 +42,15 @@ const InputView = {
         validator.isRorQ(input);
         retryOrQuit(input, bridgeGame, blocks);
       } catch (error) {
-        ErrorHandlers.errorHandlerInReadGameCommand(error, bridgeGame, blocks);
+        this.errorHandlerInReadGameCommand(error, bridgeGame, blocks);
       }
     });
   },
-};
 
-const ErrorHandlers = {
-  errorHandlerInReadBridgeSize(error) {
-    Console.print(error);
-    InputView.readBridgeSize();
-  },
-  errorHandlerInReadMoving(error, bridgeGame) {
-    Console.print(error);
-    InputView.readMoving(bridgeGame);
-  },
   errorHandlerInReadGameCommand(error, bridgeGame, blocks) {
     Console.print(error);
     InputView.readGameCommand(bridgeGame, blocks);
   },
-};
-
-const setBridgeGame = (num) => {
-  const bridge = makeBridge(num, generate);
-  const bridgeGame = new BridgeGame(bridge);
-  return bridgeGame;
 };
 
 const moveAndCheck = (input, bridgeGame) => {
