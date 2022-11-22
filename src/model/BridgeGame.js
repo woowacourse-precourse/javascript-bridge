@@ -21,7 +21,6 @@ class BridgeGame {
   setBridge(size) {
     const bridge = new Bridge(size);
     this.#bridge = bridge.getBridge();
-    console.log(this.#bridge);
   }
 
   setMoving(next) {
