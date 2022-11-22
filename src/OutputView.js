@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const MSG = {
+  GAMESTART : '다리 건너기 게임을 시작합니다.\n',
   START : '[ ',
   MIDDLE : ' | ',
   END : ' ]',
@@ -13,7 +14,7 @@ const MSG = {
 
 const OutputView = {
   printStart() {
-    MissionUtils.Console.print('다리 건너기 게임을 시작합니다.\n')
+    MissionUtils.Console.print(MSG.GAMESTART);
   },
 
   readyToPrintMap(moveData) {
@@ -53,7 +54,6 @@ const OutputView = {
     MissionUtils.Console.print(final);
     MissionUtils.Console.print(MSG.ISFINISHED + successOrFail);
     MissionUtils.Console.print(MSG.TRY + tryCount);
-    MissionUtils.Console.close();
   },
 };
 
