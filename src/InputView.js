@@ -38,6 +38,14 @@ const InputView = {
       MissionUtils.Console.print(e.message);
     }
   },
+  checkMoving(moving) {
+    try {
+      if (moving !== "U" && moving !== "D")
+        throw new Error("[ERROR] U나 D를 입력해야 합니다.");
+    } catch (e) {
+      MissionUtils.Console.print(e.message);
+    }
+  },
 };
 
 module.exports = InputView;
