@@ -2,7 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const bridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const bridgeMaker = require("./BridgeMaker");
 const outputView = require("./OutputView");
-const Exception = require("./InputException");
+const Exception = require("./Exception");
 const BridgeGame = require("./BridgeGame");
 let bridgeGame = new BridgeGame();
 let exception = new Exception();
@@ -64,6 +64,5 @@ const InputView = {
   },
 };
 
-console.log(InputView.readBridgeSize())
 
 module.exports = InputView;
