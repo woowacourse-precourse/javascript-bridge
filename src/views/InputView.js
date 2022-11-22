@@ -16,10 +16,9 @@ const InputView = {
    */
   readBridgeSize(game, readMoving) {
     const readBridgeSizeCallback = (res) => {
-      if (validateBridgeSizeInput(res)) {
-        let bridge = makeBridge(res, generate);
-        return readMoving(game, bridge);
-      }
+      validateBridgeSizeInput(res);
+      let bridge = makeBridge(res, generate);
+      return readMoving(game, bridge);
     };
     Console.readLine(MESSAGES.READ_BRIDGE_SIZE, readBridgeSizeCallback);
   },
@@ -54,8 +53,7 @@ const InputView = {
       if (input === "R") {
         game.retry();
         return InputView.readMoving(game, bridge);
-      }
-      return printResult(game);
+      } else if (input === "Q") return printResult(game);
     };
     Console.readLine(MESSAGES.RETRY, readGameCommandCallback);
   },
