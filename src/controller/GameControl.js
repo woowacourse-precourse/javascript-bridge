@@ -14,6 +14,8 @@ class GameControl {
 
   orderMoving() {
     const direction = InputView.readMoving();
+    this.bridgeGame.move(direction);
+    this.checkResult();
   }
 }
 module.exports = GameControl;
