@@ -45,6 +45,14 @@ const runException = (inputs, error) => {
   expectLogContains(getOutput(logSpy), [error || ERROR_PREFIX]);
 };
 
+const runBridgeGame = (randoms, questions) => {
+  mockRandoms(randoms);
+  mockQuestions(questions);
+
+  const app = new App();
+  app.play();
+};
+
 const expectBridgeOrder = (received, upside, downside) => {
   const upsideIndex = received.indexOf(upside);
   const downsideIndex = received.indexOf(downside);
@@ -58,6 +66,7 @@ module.exports = {
   getLogSpy,
   getOutput,
   runException,
+  runBridgeGame,
   expectLogContains,
   expectBridgeOrder,
 };
