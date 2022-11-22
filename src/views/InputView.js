@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { generate } = require("../bridge/BridgeRandomNumberGenerator");
+const { generate } = require("../BridgeRandomNumberGenerator");
 const InputMessage = require("../messages/InputMessage");
 const Validator = require("../utils/Validator");
 const GameCommands = require("../utils/GameCommands");
@@ -9,10 +9,6 @@ const OutputView = require("./OutputView");
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-
   readBridgeSize(bridgeGame) {
     Console.readLine(InputMessage.READ_BRIDGE_SIZE_MESSAGE, (value) => {
       this.onReadBridgeSize(value, bridgeGame);
@@ -31,9 +27,6 @@ const InputView = {
     this.readMoving(bridgeGame);
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
   readMoving(bridgeGame) {
     Console.readLine(InputMessage.READ_MOVING_MESSAGE, (value) => {
       this.onReadMoving(value, bridgeGame);
@@ -59,13 +52,11 @@ const InputView = {
       this.readGameCommand.bind(this)
     );
   },
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand(bridgeGame) {
+
+  readGameCommand(bridgeGame, map) {
     Console.readLine(InputMessage.READ_GAME_COMMAND_MESSAGE, (value) => {
       try {
-        this.onReadGameCommand(value, bridgeGame);
+        this.onReadGameCommand(value, bridgeGame, map);
       } catch (error) {
         OutputView.print(error.message);
         this.readGameCommand(bridgeGame);
@@ -74,19 +65,19 @@ const InputView = {
     });
   },
 
-  onReadGameCommand(value, bridgeGame) {
-    Validator.isValidCommand(value);
-    if (value === GameCommands.RETRY) {
+  onReadGameCommand(command, bridgeGame, map) {
+    Validator.isValidCommand(command);
+    if (command === GameCommands.RETRY) {
       bridgeGame.retry();
       this.readMoving(bridgeGame);
       return;
     }
-    this.afterInputEnded(bridgeGame);
+    this.afterInputEnded(bridgeGame, map);
     return;
   },
 
-  afterInputEnded(bridgeGame) {
-    OutputView.printResult(bridgeGame);
+  afterInputEnded(bridgeGame, map) {
+    OutputView.printResult(bridgeGame, map);
     Console.close();
   },
 };

@@ -18,12 +18,6 @@ class BridgeGame {
   #isGameFailed = false;
   #isGameSucess = false;
 
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-
   constructor(bridgeMaker, bridgeMapMaker) {
     this.#numberOfAttemps++;
     this.#bridgeMaker = bridgeMaker;
@@ -57,6 +51,10 @@ class BridgeGame {
     this.afterMove(direction, isPlaceToPass, this.#distance);
   }
 
+  isPlaceToPass(block, direction) {
+    return direction === block ? BridgeGame.PASS : BridgeGame.NOT_PASS;
+  }
+
   pass(isPlaceToPass) {
     if (isPlaceToPass === BridgeGame.NOT_PASS) {
       this.#isGameFailed = true;
@@ -69,35 +67,21 @@ class BridgeGame {
       isPlaceToPass,
       distance
     );
-
     OutputView.printMap(map);
-  }
-
-  getCurrentMap() {
-    return this.#bridgeMapMaker.getCurrentMap();
-  }
-
-  isPlaceToPass(block, direction) {
-    return direction === block ? BridgeGame.PASS : BridgeGame.NOT_PASS;
   }
 
   onGameEnded(onSuccess, onFail) {
     const state = this.getGameState();
     switch (state) {
       case GameStates.GAME_FAILED:
-        onFail(this);
+        onFail(this, this.#bridgeMapMaker.getCurrentMap());
         break;
       case GameStates.GAME_SUCCESS:
-        onSuccess(this);
+        onSuccess(this, this.#bridgeMapMaker.getCurrentMap());
         break;
     }
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   retry() {
     this.#distance = 0;
     this.#isGameFailed = false;
