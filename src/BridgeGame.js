@@ -58,7 +58,7 @@ class BridgeGame {
    */
   retry() {
     this.#bridge.setInitial();
-    this.#state.round++;
+    this.#state.round += 1;
     // this.#gameRound++;
     this.#bridgeIndex = 0;
   }
