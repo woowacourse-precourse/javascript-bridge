@@ -10,24 +10,40 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridgeArray) {
-    Console.print(bridgeArray[0] + '\n' + bridgeArray[1]);
-  },
+  printMap(bridgeGame, lastTrySuccess) {},
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(bridgeArray, tryCount) {
+  printResult(bridgeArray, tryCount, isSuccess) {
     Console.print('최종 게임 결과\n' + bridgeArray[0] + '\n' + bridgeArray[1]);
-
-    Console.print('게임 성공 여부: 성?');
+    const successMessage = '';
+    if (isSuccess) {
+      successMessage = '성공';
+    } else {
+      successMessage = '실패';
+    }
+    Console.print('게임 성공 여부: ' + successMessage);
     Console.print('총 시도한 횟수: ' + tryCount);
   },
 
   printStartMessage() {
     Console.print(ConstValue.START_MESSAGE);
+  },
+
+  makeUpperBridge(bridgeGame) {
+    const bridge = bridgeGame.bridgeGetter();
+    const tryCount = bridgeGame.tryCountGetter();
+
+    let uppereBridge = [];
+    for (let i = 0; i < tryCount; i++) {
+      let result = bridge[i] === 'U' ? ConstValue.APPEND_BRIDGE.CORRECT : ConstValue.APPEND_BRIDGE.NONE;
+      uppereBridge.push(result);
+    }
+
+    return uppereBridge;
   },
 };
 
