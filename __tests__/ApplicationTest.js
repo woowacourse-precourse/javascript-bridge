@@ -31,7 +31,8 @@ const getOutput = (logSpy) => {
 const runException = (inputs) => {
   mockQuestions(inputs);
   const logSpy = getLogSpy();
-  App.play();
+  const app = new App();
+  app.play();
 
   expectLogContains(getOutput(logSpy), ['[ERROR]']);
 };
@@ -66,7 +67,8 @@ describe('다리 건너기 테스트', () => {
     mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'D', 'U']);
 
-    App.play();
+    const app = new App();
+    app.play();
 
     const log = getOutput(logSpy);
     expectLogContains(log, [
