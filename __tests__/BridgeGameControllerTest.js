@@ -1,5 +1,6 @@
 const BridgeGameController = require('../src/BridgeGameController');
 const BridgeGameModel = require('../src/BridgeGameModel');
+const { MOVE, COMMAND } = require('../src/Constants');
 const {
   isCurrentLastIndexValueSame,
   isLengthSame,
@@ -52,11 +53,8 @@ describe('다리 건너기 컨트롤러 테스트', () => {
     const bridge = model.getBridge();
     let wrongStep;
 
-    if (bridge[2] === 'U') {
-      wrongStep = 'D';
-    } else {
-      wrongStep = 'U';
-    }
+    if (bridge[2] === MOVE.up) wrongStep = MOVE.down;
+    if (bridge[2] === MOVE.down) wrongStep = MOVE.up;
 
     const userMove = [...bridge.slice(0, 2), ...[wrongStep]];
     const modelUserMove = getModelUserMove(userMove);
@@ -74,11 +72,8 @@ describe('다리 건너기 컨트롤러 테스트', () => {
 
     let wrongStep;
 
-    if (bridge[3] === 'U') {
-      wrongStep = 'D';
-    } else {
-      wrongStep = 'U';
-    }
+    if (bridge[3] === MOVE.up) wrongStep = MOVE.down;
+    if (bridge[3] === MOVE.down) wrongStep = MOVE.up;
 
     const userMove = [...bridge.slice(0, 3), ...[wrongStep]];
     const modelUserMove = getModelUserMove(userMove);
@@ -111,23 +106,22 @@ describe('유효성 검사 후 모델에 데이터 저장 확인 테스트', () 
   test('유저가 움직이는 방향(U, D)를 정확하게 입력했을 경우', () => {
     let storeSuccess = false;
 
-    controller.setUserMoving('U', () => {
+    controller.setUserMoving(MOVE.up, () => {
       storeSuccess = true;
     });
 
-    expect(model.getStep()).toEqual('U');
+    expect(model.getStep()).toEqual(MOVE.up);
     expect(storeSuccess).toBe(true);
   });
 
   test('유저가 명령어(R, Q)를 정확하게 입력했을 경우', () => {
     let storeSuccess = false;
-    const QUIT = 'Q';
 
-    controller.setUserCommand(QUIT, () => {
+    controller.setUserCommand(COMMAND.quit, () => {
       storeSuccess = true;
     });
 
-    expect(model.getCommand()).toEqual(QUIT);
+    expect(model.getCommand()).toEqual(COMMAND.quit);
     expect(storeSuccess).toBe(true);
   });
 });
