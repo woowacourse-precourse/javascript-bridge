@@ -14,6 +14,8 @@ const MOVE_END = "END";
 const RETRY_GAME = "R";
 const QUIT_GAME = "Q";
 
+const START_GAME_TITLE = "다리 건너기 게임을 시작합니다."
+
 const END_GAME_RESULT_TITLE = "최종 게임 결과";
 const END_GAME_RESULT_SUB_TITLE = "게임 성공 여부:";
 const END_GAME_SUCCESS = "성공";
@@ -39,6 +41,7 @@ module.exports={
   MOVE_END,
   RETRY_GAME,
   QUIT_GAME,
+  START_GAME_TITLE,
   END_GAME_RESULT_TITLE,
   END_GAME_RESULT_SUB_TITLE,
   END_GAME_SUCCESS,
