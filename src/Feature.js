@@ -42,4 +42,37 @@ class Feature {
 
         return result;
     }
+
+    crossBridge(bridge) {
+        let userMove = "";
+        let INDEX = 0;
+        let GAME_COUNT = 1;
+        let SUCCESS = "실패"
+
+        while(true) {
+            if (INDEX > bridge.length-1)  {
+                SUCCESS = "성공"
+                break;
+            }
+
+            userMove = this.inputUserMove();
+            if (bridge[INDEX] == userMove) {
+                MissionUtils.Console.print("success");
+                INDEX += 1;
+            }
+            else {
+                MissionUtils.Console.print("failed");
+                if (this.gameOver()) {
+                    INDEX = 0;
+                    GAME_COUNT += 1;
+                }
+                MissionUtils.Console.print("real failed");
+                break;
+            }
+        }
+
+        MissionUtils.Console.print(`성공여부 : ${SUCCESS}`);
+        MissionUtils.Console.print(`시도횟수 : ${GAME_COUNT}`);
+        MissionUtils.Console.close();
+    }
 }
