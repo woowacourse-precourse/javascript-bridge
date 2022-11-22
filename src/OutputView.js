@@ -21,6 +21,13 @@ const OutputView = {
   printError(error) {
     Console.print(error);
   },
+
+  /**
+   * 게임 시작 문구를 출력한다.
+   */
+  printStart() {
+    Console.print('다리 건너기 게임을 시작합니다.');
+  },
 };
 
 module.exports = OutputView;
