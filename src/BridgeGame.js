@@ -43,13 +43,8 @@ class BridgeGame {
     }
   }
 
-  moveResult() {
-    return this.#collectInputResult.bridgeMap;
-  }
-
   isClear(callback) {
     const mapIndex = this.#collectInputResult.bridgeMap
-
     callback(this.checkBridgeStats(mapIndex));
   }
 
@@ -60,14 +55,6 @@ class BridgeGame {
     if (this.#collectInputResult.bridgeMap[0].length === this.#bridge.length) {
       return true;
     }
-  }
-
-  mapResult(stats) {
-    return {
-      bridgeMap: this.#collectInputResult.bridgeMap,
-      gameOver: stats ? MESSAGE.SUCCESSS : MESSAGE.FAILURE,
-      moveCount: `${MESSAGE.TRY}${this.#collectInputResult.tryCount}`,
-    };
   }
 
   retry(callback) {
@@ -85,10 +72,18 @@ class BridgeGame {
     this.#collectInputResult.moveIndex -= 1
     this.#collectInputResult.tryCount += 1
   }
-}
 
-class controlBridge {
-  
+  moveResult() {
+    return this.#collectInputResult.bridgeMap;
+  }
+
+  mapResult(stats) {
+    return {
+      bridgeMap: this.#collectInputResult.bridgeMap,
+      gameOver: stats ? MESSAGE.SUCCESSS : MESSAGE.FAILURE,
+      moveCount: `${MESSAGE.TRY}${this.#collectInputResult.tryCount}`,
+    };
+  }
 }
 
 module.exports = BridgeGame;
