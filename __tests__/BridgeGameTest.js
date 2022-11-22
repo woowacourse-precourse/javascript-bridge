@@ -86,4 +86,25 @@ describe('Bridge Class 테스트', () => {
     expectLogContains(log, ['[   |   | O ]', '[ O | O |   ]', '게임 성공 여부: 성공']);
     expectBridgeOrder(log, '[   |   | O ]', '[ O | O |   ]');
   });
+
+  test('전체 테스트', () => {
+    const logSpy = getLogSpy();
+    mockRandoms(['0', '0', '1']);
+    mockQuestions(['3', 'U', 'D', 'R', 'D', 'D', 'U']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '[ X ]',
+      '[   ]',
+      '[ERROR]',
+      '[   |   | O ]',
+      '[ O | O |   ]',
+      '게임 성공 여부: 성공',
+      '총 시도한 횟수: 2',
+    ]);
+    expectBridgeOrder(log, '[   |   | O ]', '[ O | O |   ]', '[   |   | O ]', '[ O | O |   ]');
+  });
 });
