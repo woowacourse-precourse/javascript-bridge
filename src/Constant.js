@@ -3,11 +3,15 @@ const BRIDGE_LENGTH_RANGE_OUT_ERROR =
   "[ERROR] 3 에서 20 사이의 수만 입력가능합니다";
 const MOVE_COMMAND_ELSE_CHAR_ERROR = "[ERROR] U 또는 D 만 입력해 주세요";
 
+
 const MOVE_SUCCESS = "SUCCESS";
 const MOVE_FAIL = "FAIL";
 const MOVE_END = "END";
 const DOWN_BRIDGE_SYMBOL = "D";
 const UP_BRIDGE_SYMBOL = "U";
+const CORRECT_BRIDGE_SYMBOL = "O";
+const NOT_CORRECT_BRIDGE_SYMBOL = "X";
+
 
 const BRIDGE_LENGTH_QUERY = "다리의 길이를 입력해주세요.";
 const MOVE_COMMAND_QUERY = "이동할 칸을 선택해주세요. (위: U, 아래: D)";
@@ -21,6 +25,8 @@ module.exports={
   MOVE_END,
   DOWN_BRIDGE_SYMBOL,
   UP_BRIDGE_SYMBOL,
+  CORRECT_BRIDGE_SYMBOL,
+  NOT_CORRECT_BRIDGE_SYMBOL,
   BRIDGE_LENGTH_QUERY,
   MOVE_COMMAND_QUERY
 }
