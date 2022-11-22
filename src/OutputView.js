@@ -59,7 +59,7 @@ const OutputView = {
   printResult(number, ifsuccess) {
     MissionUtils.Console.print("최종 게임 결과");
     this.printMap();
-    this.checkSucces();
+    this.checkSucces(ifsuccess);
     MissionUtils.Console.print(`총 시고한 횟수: ${number}`);
   },
 

@@ -15,7 +15,6 @@ const InputView = {
         this.checkPlayerInput(number);
         this.makeBridge(number);
         this.readMoving();
-        console.log(this.mainBridge.bridge);
       } catch {
         this.readBridgeSize();
       }
@@ -57,6 +56,10 @@ const InputView = {
         } catch (e) {
           MissionUtils.Console.print(e);
           this.checkEndError(e);
+          if (e === 3) {
+            console.log("dha?");
+            MissionUtils.Console.close();
+          }
         }
       }
     );
@@ -89,13 +92,14 @@ const InputView = {
       this.printRight(input);
       this.readMoving();
     } catch (e) {
-      this.checkEndError(e, input);
+      this.checkifEnd(e, input);
     }
   },
 
-  checkEndError(e, input) {
+  checkifEnd(e, input) {
     if (e == 3) {
       this.printRightEnd(input);
+      return e;
     }
     if (e == 0) {
       this.printWrongEnd(input);
@@ -155,7 +159,7 @@ const InputView = {
 
   finish() {
     let result = this.mainBridge.getRetry();
-    MissionUtils.Console.print(`총 시도한 횟수: ${result}`);
+    OutputView.printResult(this.mainBridge.getRetry(), false);
     MissionUtils.Console.close();
   },
 };
