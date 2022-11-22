@@ -1,6 +1,6 @@
 const Bridge = require('./Bridge');
 const Map = require('./Map');
-const { readBridgeSize, readMoving } = require('./InputView');
+const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
 const { printStart, printMap } = require('./OutputView');
 
 /**
@@ -49,6 +49,8 @@ class BridgeGame {
       readMoving(this.move.bind(this));
       return;
     }
+
+    readGameCommand();
   }
 
   /**
