@@ -58,7 +58,10 @@ const InputView = {
       const RESTART_COMMAND = 'R';
       const END_COMMAND = 'Q';
 
-      Validation.validateGameCommand(gameCommand);
+      const checkedGameCommand = Validation.validateGameCommand(gameCommand);
+      if (checkedGameCommand) {
+        return this.readGameCommand(bridge, UserTryCount, movingRoute);
+      }
 
       if (gameCommand === RESTART_COMMAND) {
         UserTryCount += 1;

@@ -52,9 +52,16 @@ const Validation = {
   validateGameCommand(gameCommand) {
     const RESTART_COMMAND = 'R';
     const END_COMMAND = 'Q';
-    if (gameCommand !== RESTART_COMMAND && gameCommand !== END_COMMAND) {
-      throw new Error('[ERROR] 게임 진행 옵션은 R과 Q만 입력 가능합니다.');
+    try {
+      if (gameCommand !== RESTART_COMMAND && gameCommand !== END_COMMAND) {
+        throw new Error('[ERROR] 게임 진행 옵션은 R과 Q만 입력 가능합니다.');
+      }
+    } catch (error) {
+      Console.print(error.message);
+      return true;
     }
+
+    return false;
   },
 };
 
