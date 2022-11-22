@@ -1,3 +1,4 @@
+const { UP, DOWN, RETRY, QUIT, CORRECT, WRONG, SPACE } = require('./Constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -7,14 +8,85 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  #step;
+  #tryCount;
+  #upBridge;
+  #downBridge;
+
+  constructor() {
+    this.#step = 0;
+    this.#tryCount = 1;
+    this.#upBridge = [];
+    this.#downBridge = [];
+  }
+
+  countStep() {
+    this.#step += 1;
+  }
+
+  correct(userMove) {
+    if (userMove === UP) {
+      this.#upBridge.push(CORRECT);
+      this.#downBridge.push(SPACE);
+    }
+    if (userMove === DOWN) {
+      this.#upBridge.push(SPACE);
+      this.#downBridge.push(CORRECT);
+    }
+  }
+
+  wrong(userMove) {
+    if (userMove === UP) {
+      this.#upBridge.push(WRONG);
+      this.#downBridge.push(SPACE);
+    }
+    if (userMove === DOWN) {
+      this.#upBridge.push(SPACE);
+      this.#downBridge.push(WRONG);
+    }
+  }
+
+  move(bridge, userMove) {
+    if (bridge[this.#step] === userMove) {
+      this.countStep();
+      this.correct(userMove);
+      return true;
+    }
+    if (bridge[this.#step] !== userMove) {
+      this.wrong(userMove);
+      return false;
+    }
+  }
+
+  getStep() {
+    return this.#step;
+  }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
+
+  getBridges() {
+    const bridge = [this.#upBridge, this.#downBridge];
+    return bridge;
+  }
+
+  init() {
+    this.#step = 0;
+    this.#tryCount += 1;
+    this.#upBridge = [];
+    this.#downBridge = [];
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(userRetry) {
+    if (userRetry === RETRY) return true;
+    if (userRetry === QUIT) return false;
+  }
 }
 
 module.exports = BridgeGame;
