@@ -18,6 +18,17 @@ class BridgeGame {
     this.#tryCount = CONSTANTS.TRY_COUNT;
   }
 
+  get index() {
+    return this.#index;
+  }
+
+  get tryCount() {
+    return this.#tryCount;
+  }
+
+  get result() {
+    return this.#result;
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
