@@ -14,8 +14,7 @@ const BridgeMaker = {
     const tiles = [...Array(size)]
       .map(() => generateRandomNumber())
       .map((index) => SPAWNABLE_TILES[index]);
-    const bridge = new Bridge(tiles);
-    return bridge;
+    return tiles;
   },
 };
 
