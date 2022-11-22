@@ -3,13 +3,21 @@
  */
  class BridgeGame {
   constructor() {
-    this.bridge;
+    this.bridge = [];
+    this.userSpaces = [];
   }
   /**
    * 다리를 저장하는 메서드
    */
   setBridge = (bridge) => {
     this.bridge = bridge;
+  };
+
+  /**
+   * 이동한 칸을 추가하는 메서드
+   */
+  pushSpace = (space) => {
+    this.userSpaces.push(space);
   };
 
   /**
