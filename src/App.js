@@ -97,12 +97,18 @@ class App {
   resultGame(result) {
     Console.print("\n최종 게임 결과");
     this.printCurrentBridge(result);
+    OutputView.printResult(result, this.#tryCount);
     this.end();
   }
 
   end() {
     Console.close();
   }
+
+  replay() {
+    this.#tryCount += 1;
+    this.#game.retry();
+    this.moveAfterValidation();
   }
 }
 

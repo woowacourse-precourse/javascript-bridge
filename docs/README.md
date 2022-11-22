@@ -20,7 +20,7 @@
 |:heavy_check_mark:|게임 종료 후 'R'을 입력하면 게임을 재시작한다.||
 |:heavy_check_mark:|게임 종료 후 'Q'를 입력하면 게임을 완전히 종료한다.||
 |:heavy_check_mark:|게임 성공 여부를 표시한다.||
-|:heavy_minus_sign:|총 시도한 횟수를 표시한다.||
+|:heavy_check_mark:|총 시도한 횟수를 표시한다.||
 
 
 <br>
