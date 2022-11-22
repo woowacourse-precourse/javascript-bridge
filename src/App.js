@@ -13,10 +13,17 @@ class App {
     this.startGame()
   }
 
+  printBridge(){
+    OutputView.printMap(this.#gameStatus)
+  }
+
+
+  //다리 생성
   makeBridge(){
     this.#generatedBridge=InputView.readBridgeSize()
   }
 
+  //최초 게임 시작
   startGame(){
     this.#gameStatus={
       playerLocation:0,
@@ -30,11 +37,8 @@ class App {
     this.playerMove() 
   }
 
-  printBridge(){
-    OutputView.printMap(this.#gameStatus)
-  }
 
-
+  //다음 움직임 선택
   playerMove(){
     while(this.#gameStatus.playerLocation!==this.#generatedBridge.length){
       InputView.readMoving(this.#generatedBridge,this.#gameStatus)
@@ -48,7 +52,7 @@ class App {
 
 
 
-  
+  //오답시
   chooseWrong(){
     InputView.readGameCommand(this.#gameStatus)
     if(this.#gameStatus.wrongFlag){
@@ -59,6 +63,8 @@ class App {
     }
   }
 
+
+  //재시도
   startAgain(){
     let getNextCount=(this.#gameStatus.tryCount+1)
     this.#gameStatus={
@@ -73,6 +79,7 @@ class App {
     this.playerMove() 
   }
 
+  //게임 종료 및 결과출력
   endGame(){
     Console.print(RESULT.GAME_RESULT_PRINT)
     this.printBridge()

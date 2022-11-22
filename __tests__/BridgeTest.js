@@ -52,7 +52,17 @@ describe('다리 현황 출력 테스트', () => {
 
     mockRandoms(['1', '0', '1'])
     mockQuestions(['3', 'U', 'D', 'D', 'Q']) //마지막에 오답, 게임종료 선택
-    new App().play()
+    let app=new App()
+    app.play()
+    app.printBridge()  
+
+    /**
+     * 지도를 현재 Console.print()로 출력하고 있고
+     *     테스트 또한 logSpy.mock.calls를 통해 비교하고 있으므로
+     * 마지막에 지도를 한번 더 출력한 다음 이 결과를 가지고 테스트를 하게 됩니다
+    */
+
+  
 
     let lastTwoIndex = [
       logSpy.mock.calls.length - 2,
@@ -65,14 +75,24 @@ describe('다리 현황 출력 테스트', () => {
     
   })
 
-  test('중간에 틀린 곳을 갔을 경우 재시도를 선택한 경우의 다리를 그려낸다', () => {
+  test('중간에 틀린 곳을 갔을 경우, 재시도를 선택했을 때의 다리를 그려낸다', () => {
     const logSpy = getLogSpy()
 
     mockRandoms(['1', '0', '1'])
     mockQuestions(['3', 'U', 'D', 'D', 'R', 'U', 'D', 'U']) //마지막에 오답, 재시도 선택
-    new App().play()
+    let app=new App()
+    app.play()
+    app.printBridge()  
 
-    console.log(logSpy.mock.calls)
+    /**
+     * 지도를 현재 Console.print()로 출력하고 있고
+     *     테스트 또한 logSpy.mock.calls를 통해 비교하고 있으므로
+     * 마지막에 지도를 한번 더 출력한 다음 이 결과를 가지고 테스트를 하게 됩니다
+    */
+
+    
+
+
     let lastTwoIndex = [
       logSpy.mock.calls.length - 2,
       logSpy.mock.calls.length - 1,
@@ -82,6 +102,6 @@ describe('다리 현황 출력 테스트', () => {
     expect(logSpy.mock.calls[lastTwoIndex[1]].shift()).toEqual('[   | O |   ]')
   })
 
-  //최종 결과를 테스트
+  // //최종 결과를 테스트
   //test('최종 결과를 테스트한다',()=>{})
 })
