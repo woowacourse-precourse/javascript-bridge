@@ -2,14 +2,19 @@
 const MovingHistory = require('../src/models/MovingHistory');
 
 describe('MovingHistory 테스트', () => {
-  test('toString 메서드는 다리 건너기 결과를 문자열로 반환', () => {
-    const bridge = ['U', 'D', 'D'];
-    const moving = ['U', 'D', 'D'];
+  test.each([
+    [0, 'U', ['[ O ]', '[   ]']],
+    [1, 'D', ['[ O |   ]', '[   | O ]']],
+    [2, 'D', ['[ O |   |   ]', '[   | O | X ]']],
+  ])(
+    'toString 메서드는 다리 건너기 결과를 문자열로 반환',
+    (stage, moving, expected) => {
+      const bridge = ['U', 'D', 'U'];
 
-    moving.forEach((move, stage) => MovingHistory.log(bridge, stage, move));
-    const movingHistory = MovingHistory.toString();
-    const expected = ['[ O |   |   ]', '[   | O | O ]'];
+      MovingHistory.log(bridge, stage, moving);
+      const movingHistory = MovingHistory.toString();
 
-    expect(movingHistory).toEqual(expect.arrayContaining(expected));
-  });
+      expected.forEach((row) => expect(movingHistory).toContain(row));
+    },
+  );
 });
