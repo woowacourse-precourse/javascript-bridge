@@ -36,6 +36,7 @@ describe("OutputView 객체 테스트", () => {
 
   test("게임 결과를 출력한다.", () => {
     OutputView.printResult("성공", 2);
+
     expect(logSpy).not.toHaveBeenCalledWith(
       expect.stringContaining("게임 성공 여부 : 성공")
     );

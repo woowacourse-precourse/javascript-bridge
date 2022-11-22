@@ -10,6 +10,7 @@ const {
   GAME_COMMAND_QUIT,
 } = require("./Utils");
 const { Console } = require("@woowacourse/mission-utils");
+
 class App {
   #bridgeGame;
   #playCount;
@@ -61,10 +62,13 @@ class App {
     OutputView.printResult(endMessage, this.#playCount);
     Console.close();
   }
+
   increasePlayCount() {
     this.#playCount++;
   }
 }
+
 const app = new App();
 app.play();
+
 module.exports = App;
