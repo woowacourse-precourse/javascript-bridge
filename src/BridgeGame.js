@@ -1,11 +1,15 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const InputView = require("./View/InputView");
 // 필드 추가 가능, 파일 경로 변경 가능, 메서드 이름 변경 불가능, 인자 변경 가능, 메서드 추가 가능
 // BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
+const { printResult, printMap } = require("./View/OutputView");
 class BridgeGame {
+  #correct;
+  #command;
   #tryCount;
   #bridgeMap;
 
@@ -43,6 +47,28 @@ class BridgeGame {
 
   getBridgeMap() {
     return this.#bridgeMap;
+  }
+
+  start() {
+    let location = 0;
+    while (location <= this.#bridgeMap.length - 1) {
+      this.#correct = this.move(location++, InputView.readMoving());
+      printMap(this.getBridgeMap(), location, this.#correct);
+      // if (this.#correct && location === this.#bridgeMap.length - 1) break;
+      if (!this.#correct) {
+        location = this.getCommand(game, location);
+      }
+    }
+    printResult(this, location, this.#correct);
+  }
+
+  getCommand(location) {
+    this.#command = InputView.readGameCommand();
+    if (this.#command === KEY.RETRY) {
+      this.retry();
+      return 0;
+    }
+    return this.#bridgeMap.length;
   }
 }
 
