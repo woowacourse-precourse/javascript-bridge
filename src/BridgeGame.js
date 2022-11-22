@@ -2,18 +2,21 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #myPosition = 0;
-  #numberOfAttempt = 1;
+  #bridgeGameStatus = {
+    myPosition: 0,
+    numberOfAttempt: 1,
+  };
+
   get myCurrentPosition() {
-    return this.#myPosition;
+    return this.#bridgeGameStatus.myPosition;
   }
 
   get numberOfAttempt() {
-    return this.#numberOfAttempt;
+    return this.#bridgeGameStatus.numberOfAttempt;
   }
 
   #isCorrectPath(toBeMoveDirection, answerPath) {
-    return toBeMoveDirection === answerPath[this.#myPosition];
+    return toBeMoveDirection === answerPath[this.#bridgeGameStatus.myPosition];
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -22,10 +25,10 @@ class BridgeGame {
    */
   move(direction, answerPath) {
     if (this.#isCorrectPath(direction, answerPath)) {
-      this.#myPosition += 1;
+      this.#bridgeGameStatus.myPosition += 1;
       return true;
     }
-    this.#myPosition += 1;
+    this.#bridgeGameStatus.myPosition += 1;
     return false;
   }
   /**
@@ -35,11 +38,11 @@ class BridgeGame {
    */
   retry() {
     this.#initPosition();
-    this.#numberOfAttempt += 1;
+    this.#bridgeGameStatus.numberOfAttempt += 1;
   }
 
   #initPosition() {
-    this.#myPosition = 0;
+    this.#bridgeGameStatus.myPosition = 0;
   }
 }
 
