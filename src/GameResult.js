@@ -2,7 +2,7 @@
 // const OutputView = require('./OutputView');
 
 class GameResult {
-  #resultMap;
+  #result;
   #tryCount;
 
   constructor() {
@@ -20,7 +20,7 @@ class GameResult {
 
   calculateMatch(index, value) {
     this.update(index, value);
-    const existing = this.#resultMap.get(index);
+    const existing = this.#result.get(index);
     return existing.machine === existing.player;
   }
 
