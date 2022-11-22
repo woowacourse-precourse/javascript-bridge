@@ -1,9 +1,9 @@
 const BridgeGame = require("./BridgeGame");
 const { Console } = require("@woowacourse/mission-utils");
-const { GAME_MSG } = require("./Constants/Message");
+const { GAME_MSG } = require("./constants/Message");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
-const Command = require("./Constants/Command");
+const Command = require("./constants/Command");
 
 class App {
   #bridgeGame;

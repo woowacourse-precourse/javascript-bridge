@@ -1,5 +1,5 @@
-const Command = require("./Constants/Command");
-const { ERROR_MSG } = require("./Constants/Message");
+const Command = require("./constants/Command");
+const { ERROR_MSG } = require("./constants/Message");
 const utils = require("./Utils");
 
 /**
