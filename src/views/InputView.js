@@ -72,7 +72,7 @@ const InputView = {
         this.validateMovingDirection(movingDirection);
         const result = Game.move(this.bridge, movingDirection, this.gameRound);
         this.checkMovingResult(result);
-        if (result != gameOutputMessage.MOVING_UP_FAILED && result != gameOutputMessage.MOVING_DOWN_FAILED) this.gameRound++;
+        if (result !== gameOutputMessage.MOVING_UP_FAILED && result !== gameOutputMessage.MOVING_DOWN_FAILED) this.gameRound++;
         this.endGame();
         if (!this.end) this.readMoving();
       } catch (e) {
