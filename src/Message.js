@@ -24,3 +24,9 @@ const COMMAND = {
   QUIT: 'Q',
 };
 
+const ERROR = {
+  MOVING: '[ERROR] 방향 입력은 U, D로 입력해야 합니다.',
+  COMMAND: '[ERROR] 재시작 여부는 R, Q로 입력해야 합니다.',
+  SIZE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+};
+
