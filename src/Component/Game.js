@@ -13,7 +13,7 @@ class Game {
     this.#bridgeLength = bridgeLength;
     this.#playCount = 1;
     this.#bridge = new Bridge(this.#bridgeLength);
-    this.#bridgeStatus = this.#bridge.getBridgeStatus();
+    this.#bridgeStatus = this.#bridge.getBridgeStatus;
     this.#bridgeGame = new BridgeGame(this.#bridgeStatus);
   }
 

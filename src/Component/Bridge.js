@@ -7,10 +7,10 @@ class Bridge {
 
   constructor(bridgeLength) {
     this.#bridgeLength = bridgeLength;
-    this.#bridgeStatus = this.buildBridge();
+    this.#bridgeStatus = this.setBridge();
   }
 
-  buildBridge() {
+  setBridge() {
     const bridge = BridegMaker.makeBridge(
       this.#bridgeLength,
       BridgeRandomNumberGenerator.generate
@@ -19,7 +19,7 @@ class Bridge {
     return bridge;
   }
 
-  getBridgeStatus() {
+  get getBridgeStatus() {
     return this.#bridgeStatus;
   }
 }
