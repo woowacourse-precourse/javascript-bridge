@@ -8,6 +8,9 @@ BridgeGame
   - 이동할 칸을 입력받는다. : U 또는 D (InputView.readMoving -> Moving)
     - 이동할 칸 유효성 검증(Moving.js)
     - 이동한 칸을 출력한다. (OutputView.printMap)
+    - 성공 실패 여부를 반환 받는다. (BridegeGame.matchResult)
+    - 성공시 칸 이동을 계속해서 다시 시작한다.(BridgeGameControl.move 재귀)
+      - 시도 횟수를 카운트 한다.
     - 실패시 재시작하는지 종료하는지 입력받는다. R 또는 Q (InputView.readGameCommand -> GameCommand)
       - 재시작 및 종료 입력 유효성 검증(GameCommand.js)
       - Q 라면 게임 결과를 출력한다. (OutputView.printResult)
