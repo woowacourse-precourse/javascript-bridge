@@ -15,11 +15,22 @@ class App {
             BridgeRandomNumberGenerator.generate
         );
 
-        MissionUtils.Console.print(bridge);
-        const choosen = await InputView.readMoving();
-
         const bridgeGame = new BridgeGame(bridge);
-        bridgeGame.move(choosen);
+        for (let i = 0; i < bridgeLength; i++) {
+            MissionUtils.Console.print(bridge);
+            const choosen = await InputView.readMoving();
+
+            const crossSuccess = bridgeGame.move(choosen);
+            if (!crossSuccess) {
+                const retryOrQuit = await InputView.readGameCommand();
+                if (retryOrQuit === 'R') {
+                    bridgeGame.retry();
+                    break;
+                } else {
+                    break;
+                }
+            }
+        }
 
         MissionUtils.Console.close();
     }

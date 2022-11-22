@@ -32,10 +32,13 @@ class BridgeGame {
      * <p>
      * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      * @param {string} choice
+     * @return {boolean} 건널 수 있는지(true), 건널 수 없는지(false) 리턴한다.
      */
     move(choice) {
+        const cross = this.isCrossable(choice);
         this.#position += 1;
         OutputView.printMap(this.#bridge, this.#position, choice);
+        return cross;
     }
 
     /**

@@ -36,7 +36,6 @@ const OutputView = {
         } else if (choice !== direction && result[result.length - 1] === 'O') {
             result[result.length - 1] = ' ';
         }
-
         result.push(']');
         return result.join(' ');
     },
