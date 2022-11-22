@@ -53,6 +53,17 @@ class BridgeGame {
     this.#currentPosition = 0;
     this.#numberOfAttempts += 1;
   }
+
+  insertCorrectBridge(upBridge, downBridge, answerDirection) {
+    if (answerDirection === "U") {
+      upBridge.push("O");
+      downBridge.push(" ");
+    }
+    if (answerDirection === "D") {
+      upBridge.push(" ");
+      downBridge.push("O");
+    }
+  }
 }
 
 module.exports = BridgeGame;
