@@ -1,5 +1,3 @@
-// run `node index.js` in the terminal
-const MissionUtils = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeGame = require('./BridgeGame');
@@ -15,8 +13,6 @@ class App {
   }
 
   afterReadBridgeSize(bridgeLength = 0) {
-    //bridgeLength exception 만들기
-
     let bridge = BridgeMaker.makeBridge(
       bridgeLength,
       BridgeRandomNumberGenerator.generate

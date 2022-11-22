@@ -9,7 +9,7 @@ const OutputView = {
   },
 
   //현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-  printMap(movingUpDown, currentBridge, bridgePrintString = ['', '']) {
+  printMap(bridgePrintString = ['', '']) {
     MissionUtils.Console.print('[' + bridgePrintString[0] + ']');
     MissionUtils.Console.print('[' + bridgePrintString[1] + ']');
   },

@@ -22,35 +22,38 @@ class BridgeGame {
 
   //사용자가 칸을 이동할 때 사용하는 메서드
   move(movingUpDown = '') {
-    console.log('move실행');
     this.afterReadMoving(movingUpDown);
-    //게임 이어서
-    if (
-      movingUpDown === this.#bridge[this.#repeatReadMovingCount] &&
-      this.#repeatReadMovingCount !== this.#bridge.length - 1
-    ) {
-      console.log(this.#repeatReadMovingCount);
+
+    const ifAllFinish = this.#repeatReadMovingCount === this.#bridge.length - 1;
+    const ifCorrect =
+      movingUpDown === this.#bridge[this.#repeatReadMovingCount];
+
+    return [this, this.nextAction(ifCorrect, ifAllFinish)];
+  }
+
+  nextAction(ifCorrect, ifAllFinish) {
+    if (ifCorrect && !ifAllFinish) {
       this.#repeatReadMovingCount++;
-      return [this, PLAYING];
+      return PLAYING;
     }
-    //게임 종료(틀림)
-    if (movingUpDown !== this.#bridge[this.#repeatReadMovingCount]) {
-      return [this, FAILURE];
+    if (!ifCorrect) {
+      return FAILURE;
     }
-    //다 맞은 경우
-    if (this.#repeatReadMovingCount === this.#bridge.length - 1) {
-      OutputView.printResult(
-        SUCCESS,
-        this.#bridgePrintString,
-        this.#resetGameCount
-      );
-      return [this, GAME_END];
+    if (ifAllFinish) {
+      return this.success();
     }
   }
 
-  afterReadMoving(movingUpDown = '') {
-    //movingUpDown exception 만들기
+  success() {
+    OutputView.printResult(
+      SUCCESS,
+      this.#bridgePrintString,
+      this.#resetGameCount
+    );
+    return GAME_END;
+  }
 
+  afterReadMoving(movingUpDown = '') {
     let currentBridge = this.#bridge[this.#repeatReadMovingCount];
     //다리 출력
     this.#bridgePrintString = this.editBridgeString(
@@ -58,7 +61,7 @@ class BridgeGame {
       currentBridge,
       this.#bridgePrintString
     );
-    OutputView.printMap(movingUpDown, currentBridge, this.#bridgePrintString);
+    OutputView.printMap(this.#bridgePrintString);
   }
 
   editBridgeString(movingUpDown = '', currentBridge, bridgePrintString) {
