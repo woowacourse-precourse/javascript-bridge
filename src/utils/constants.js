@@ -46,6 +46,11 @@ const BRIDGE_CHECK = Object.freeze({
   blank: ' '
 });
 
+const GAMEOVER_COMMAND = Object.freeze({
+  restart: 'R',
+  exit: 'Q'
+});
+
 module.exports = {
   REGEX,
   ERROR_MESSAGE,
@@ -54,5 +59,6 @@ module.exports = {
   GAME_RESULT_STATE,
   GAME_QUESTION,
   GAME_MESSAGE,
-  BRIDGE_CHECK
+  BRIDGE_CHECK,
+  GAMEOVER_COMMAND
 };

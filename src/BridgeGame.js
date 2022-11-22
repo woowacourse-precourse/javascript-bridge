@@ -2,7 +2,11 @@ const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 
-const { GAME_QUESTION, GAME_RESULT_STATE } = require('./utils/constants');
+const {
+  GAME_QUESTION,
+  GAME_RESULT_STATE,
+  GAMEOVER_COMMAND
+} = require('./utils/constants');
 
 const controller = require('./controller/BridgeController');
 
@@ -49,12 +53,12 @@ class BridgeGame {
   }
 
   #checkGameCommand(command) {
-    if (command === 'R') {
+    if (command === GAMEOVER_COMMAND.restart) {
       controller.inputRestart();
       this.move();
     }
 
-    if (command === 'Q') {
+    if (command === GAMEOVER_COMMAND.exit) {
       OutputView.printResult();
     }
   }
