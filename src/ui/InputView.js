@@ -17,10 +17,6 @@ const BridgeRandomNumberGenerator = require("../domain/BridgeRandomNumberGenerat
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  validateMoving: null,
-
-  validateGameCommand: null,
-
   inputErrorProcess: new InputErrorProcess(),
 
   bridgeGame: new BridgeGame(),
@@ -70,7 +66,7 @@ const InputView = {
         .inputErrorProcess(ValidateGameCommand, gameCommand, "gameCommand"))
         return this.readGameCommand();
 
-      return (BridgeGame.retry(gameCommand) && UseGameInfo.initializeGameInfo()) ?
+      return (this.bridgeGame.retry(gameCommand) && UseGameInfo.initializeGameInfo()) ?
         this.readMoving() : OutputView.printResult();
     });
   },
