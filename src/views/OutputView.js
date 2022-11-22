@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { COMMAND_TYPE, MOVE_TYPE, COMMAND_MATCH_INDEX } = require('../constants/Settings');
+const { GAME_COMMAND, MOVE_TYPE, COMMAND_MATCH_INDEX } = require('../constants/Settings');
 const MESSAGES = require('../constants/Messages');
 
 /**

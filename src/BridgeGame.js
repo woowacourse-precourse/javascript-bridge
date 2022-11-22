@@ -1,6 +1,7 @@
-const BridgeGameValidation = require('./validation/BridgeGameValidation');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeSizeValidation = require('./validation/BridgeSizeValidation');
+const MoveCommandValidation = require('./validation/MoveCommandValidation');
+const BridgeMaker = require('./lib/BridgeMaker');
+const BridgeRandomNumberGenerator = require('./lib/BridgeRandomNumberGenerator');
 
 class BridgeGame {
   #size;
@@ -11,6 +12,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(command, round) {
+    MoveCommandValidation(command);
     return this.#isMovable(command, round);
   }
 
@@ -22,7 +24,7 @@ class BridgeGame {
   retry() {}
 
   setSize(input) {
-    BridgeGameValidation(input);
+    BridgeSizeValidation(input);
     this.#size = input;
   }
 

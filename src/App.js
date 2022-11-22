@@ -17,8 +17,13 @@ class App {
     let size = await this.#tryCatch(this.#getAndSetBridgeSize.bind(this));
     this.#game.makeBridge();
     const result = await this.#makeAttempt(size);
-    console.log(result);
     // 져서 끝난 것이라면 retry 묻기!
+    if (!result) {
+      // retry 입력문
+      // 사용자 결과~
+      let answer = await InputView.readGameCommand();
+      this.#game.retry(answer);
+    }
   }
 
   async #getAndSetBridgeSize() {
@@ -44,10 +49,17 @@ class App {
 
   // round 에서 프린트까지!
   async #playRound(currentRound, moves) {
-    let command = await InputView.readMoving();
-    let moveResult = await this.#game.move(command, currentRound);
-
-    OutputView.printMap(moves.concat([[moveResult, command]]));
+    while (true) {
+      try {
+        // 이거 3개를 함수로 묶어버리면 될 듯
+        let command = await InputView.readMoving();
+        let moveResult = await this.#game.move(command, currentRound);
+        OutputView.printMap(moves.concat([[moveResult, command]]));
+        break;
+      } catch (error) {
+        OutputView.printError(error);
+      }
+    }
   }
 
   async #tryCatch(tryfunc) {

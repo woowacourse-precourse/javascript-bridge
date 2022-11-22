@@ -3,7 +3,7 @@ const { ERROR_MESSAGES, FORM } = require('../constants/Error');
 
 const BridgeError = require('../errors/BridgeError');
 
-const BridgeGameValidation = (input) => {
+const BridgeSizeValidation = (input) => {
   const isNumber = (input) => FORM.number.test(input);
   const checkType = (input) => {
     if (!isNumber(input)) throw new BridgeError(ERROR_MESSAGES.onlyNumber);
@@ -12,7 +12,7 @@ const BridgeGameValidation = (input) => {
   const checkRange = (input) => {
     const num = Number(input);
 
-    if (isOutOfRange(num)) new BridgeError(ERROR_MESSAGES.outOfRange);
+    if (isOutOfRange(num)) throw new BridgeError(ERROR_MESSAGES.outOfRange);
   };
 
   const validate = (input) => {
@@ -23,4 +23,4 @@ const BridgeGameValidation = (input) => {
   return validate(input);
 };
 
-module.exports = BridgeGameValidation;
+module.exports = BridgeSizeValidation;
