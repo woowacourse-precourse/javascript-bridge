@@ -21,7 +21,13 @@ class Exception{
 
 
     checkSpace(space){
-        if (space !== "U" || space !== "D") throw new Error("[ERROR] U 또는 D를 입력해주세요.");
+        try{
+            if (space !== "U" || space !== "D") throw new Error("[ERROR] U 또는 D를 입력해주세요.");
+        }catch(error){
+            Console.print(error.message);
+            return true;
+        }
+        
     }
 }
 

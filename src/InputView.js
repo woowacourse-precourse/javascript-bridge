@@ -27,7 +27,7 @@ const InputView = {
    */
   readMoving(bridge, bridgeGame) {
     Console.readLine(COMMAND.MOVE, (space) => {
-      // exception.checkSpace(space);
+      if(exception.checkSpace(space)) return this.readMoving(bridge,bridgeGame);
 
       bridgeGame.move(space, bridge);
       OutputView.printMap(bridgeGame);
