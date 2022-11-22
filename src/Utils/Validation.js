@@ -11,7 +11,7 @@ const Validation = {
       throw new Error(ERROR.NOT_INTEGER);
     }
     
-    if (input < RANGE.BRIDGE_LEN_MIN || RANGE.BRIDGE_LEN_MAXRIDGE_ < input) {
+    if (input < RANGE.BRIDGE_LEN_MIN || RANGE.BRIDGE_LEN_MAX < input) {
       throw new Error(ERROR.RANGE_IS_WRONG);
     }
   },
