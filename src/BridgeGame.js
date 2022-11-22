@@ -25,7 +25,7 @@ class BridgeGame {
   }
 
   move(direction) {
-    Validation.validateDirection(direction);
+    Validation.checkDirection(direction);
 
     const playerPosition = this.#movingRecord.length;
     const checkPass = this.#bridge.checkPass(playerPosition, direction);
@@ -35,6 +35,11 @@ class BridgeGame {
 
   saveMovingRecord(checkPass, direction) {
     this.#movingRecord.push({ checkPass, direction });
+  }
+
+  retry() {
+    this.#movingRecord = [];
+    this.#tryCount += 1;
   }
 }
 

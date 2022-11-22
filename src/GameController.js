@@ -49,6 +49,26 @@ class GameController {
     OutputView.printError(errMessage);
     reAsk.call(this);
   }
+
+  getRetryOrQuit() {
+    InputView.readGameCommand(this.retryProcess.bind(this));
+  }
+
+  retryProcess(gameCommand) {
+    try {
+      Validation.checkRestartInput(gameCommand);
+
+      if (gameCommand === DIRECTION_KEY.RESTART) {
+        this.bridgeGame.retry();
+        return this.getDirection();
+      }
+      if (gameCommand === DIRECTION_KEY.QUIT) {
+        Console.close();
+      }
+    } catch (message) {
+      this.errorReinput(this.getRetryOrQuit, message);
+    }
+  }
 }
 
 module.exports = GameController;
