@@ -1,15 +1,21 @@
 const { BRIDGE, MAP } = require('./constant/Bridge');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const Validator = require('./Validator');
 
 class BridgeGame {
   #bridge;
   #tryCount;
   #map;
   constructor(size) {
+    this.validate(size);
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.#tryCount = 1;
     this.#map = [[], []];
+  }
+
+  validate(size) {
+    Validator.validateBridgeSize(size);
   }
 
   getTryCount() {

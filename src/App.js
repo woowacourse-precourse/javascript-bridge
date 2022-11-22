@@ -15,7 +15,6 @@ class App {
 
   makeBridge(input) {
     try {
-      Validator.validateBridgeSize(input);
       const game = new BridgeGame(input);
       this.#game = game;
       this.readMoving();
