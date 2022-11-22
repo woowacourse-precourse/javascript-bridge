@@ -1,5 +1,5 @@
 const { RESULT, DIRECTION, COMMAND } = require('./Constants/constant');
-const Validator = require('./Validator');
+const { checkCorrectDirection, checkCorrectCommand } = require('./Validator');
 
 class BridgeGame {
   #bridge;
@@ -14,19 +14,8 @@ class BridgeGame {
     this.#records = [];
   }
 
-  static createTokens(size, generateRandomNumber) {
-    Validator.chekcBridgeSizeValue(size);
-    const tokens = [];
-    let count = 0;
-    while (count < size) {
-      tokens.push(generateRandomNumber());
-      count += 1;
-    }
-    return tokens;
-  }
-
   move(direction, records = this.#records) {
-    Validator.checkCorrectDirection(direction);
+    checkCorrectDirection(direction);
     const dir = BridgeGame.isSelectUpper(direction)
       ? DIRECTION.up
       : DIRECTION.down;
@@ -34,7 +23,7 @@ class BridgeGame {
   }
 
   static isSelectUpper(direction) {
-    Validator.checkCorrectDirection(direction);
+    checkCorrectDirection(direction);
     if (direction === DIRECTION.up) return true;
     return false;
   }
@@ -104,7 +93,7 @@ class BridgeGame {
   }
 
   static isCommandRetry(command) {
-    Validator.checkCorrectCommand(command);
+    checkCorrectCommand(command);
     if (command === COMMAND.retry) return true;
     return false;
   }
