@@ -15,10 +15,16 @@ class Bridge {
 
   judgeIsMovable(movingCommand) {
     const isMovable = movingCommand === this.#targetBridge[this.#currentIndex];
+    const isSuccess = this.judgeIsSuccess(isMovable);
 
     this.#currentIndex += 1;
 
-    return isMovable;
+    return { isMovable, isSuccess };
+  }
+
+  judgeIsSuccess(isMovable) {
+    const isEnd = this.#currentIndex === this.#targetBridge.length - 1;
+    return isMovable && isEnd;
   }
 }
 
