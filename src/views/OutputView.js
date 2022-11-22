@@ -3,7 +3,12 @@ const OutputView = {
   printMessage(message) {
     Console.print(message);
   },
-  printMap() {},
+  printMap(bridgeList) {
+    [highBridge, lowBridge] = bridgeList;
+    Console.print(highBridge);
+    Console.print(lowBridge);
+    Console.print("\n");
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
