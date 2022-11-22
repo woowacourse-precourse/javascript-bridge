@@ -57,7 +57,7 @@ describe('BridgeGame 클래스 테스트', () => {
   test('다리를 반환한다.', () => {
     const bridgeGame = initBridgeGame(['U', 'D', 'D']);
 
-    expect(bridgeGame.getBridge()).toEqual(['U', 'D', 'D']);
+    expect(bridgeGame.getBridgeDirections()).toEqual(['U', 'D', 'D']);
   });
 
   test('사용자의 이동들을 반환한다.', () => {
@@ -65,6 +65,51 @@ describe('BridgeGame 클래스 테스트', () => {
     bridgeGame.move('U');
     bridgeGame.move('U');
 
-    expect(bridgeGame.getUserMoves()).toEqual(['U', 'U']);
+    expect(bridgeGame.getUserDirections()).toEqual(['U', 'U']);
   });
+
+  // test('사용자의 이동 결과를 반환한다.', () => {
+  //   const bridgeGame = initBridgeGame(['U', 'D', 'D']);
+  //   bridgeGame.move('U');
+  //   const map = bridgeGame.getMap();
+
+  //   expect(map).toEqual([['O'], ['']]);
+  // });
+
+  // test('사용자의 이동 결과를 반환한다.', () => {
+  //   const bridgeGame = initBridgeGame(['U', 'D', 'D']);
+  //   bridgeGame.move('U');
+  //   bridgeGame.move('U');
+  //   const map = bridgeGame.getMap();
+
+  //   expect(map).toEqual([
+  //     ['O', 'X'],
+  //     ['', ''],
+  //   ]);
+  // });
+
+  // test('사용자의 이동 결과를 반환한다.', () => {
+  //   const bridgeGame = initBridgeGame(['U', 'D', 'D']);
+  //   bridgeGame.move('U');
+  //   bridgeGame.move('D');
+  //   const map = bridgeGame.getMap();
+
+  //   expect(map).toEqual([
+  //     ['O', ''],
+  //     ['', 'O'],
+  //   ]);
+  // });
+
+  // test('사용자의 이동 결과를 반환한다.', () => {
+  //   const bridgeGame = initBridgeGame(['U', 'D', 'D']);
+  //   bridgeGame.move('U');
+  //   bridgeGame.move('D');
+  //   bridgeGame.move('D');
+  //   const map = bridgeGame.getMap();
+
+  //   expect(map).toEqual([
+  //     ['O', '', ''],
+  //     ['', 'O', 'O'],
+  //   ]);
+  // });
 });
