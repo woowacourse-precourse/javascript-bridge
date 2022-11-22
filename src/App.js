@@ -35,6 +35,31 @@ class App {
       result,
     };
   }
+  checkArrival(result) {
+    if (result && this.gameManager.currentPosition < this.gameManager.size) {
+      this.readMoving();
+      return;
+    }
+    if (this.gameManager.currentPosition === this.gameManager.size) {
+      this.printResult(result);
+      return;
+    }
+    this.readGameCommand(result);
+  }
+  readGameCommand(result) {
+    InputView.readGameCommand((command) => {
+      if (command === "Q") {
+        this.printResult(result);
+        return;
+      }
+      this.gameManager.retry();
+      this.readMoving();
+    });
+  }
+  printResult(result) {
+    OutputView.printResult(result, this.gameManager.tryCount, this.gameManager.resultMap);
+    Console.close();
+  }
 }
 
 module.exports = App;
