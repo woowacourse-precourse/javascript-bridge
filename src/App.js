@@ -1,12 +1,19 @@
 const InputView = require("./View/InputView");
 const OutputView = require("./View/OutputView");
-const BridgeMaker = require("./BridgeMaker");
-const RandomGenerator = require("./Utils/BridgeRandomNumberGenerator");
+const GameController = require("./Controller/GameController");
 
 class App {
+  // play() {
+  //   OutputView.printMessage("start");
+  //   const bridgeSize = InputView.start();
+  // }
+
+  constructor() {
+    this.controller = new GameController();
+  }
+
   play() {
-    OutputView.printMessage("start"); //게임 시작
-    const bridgeSize = InputView.start();
+    this.controller.start();
   }
 }
 

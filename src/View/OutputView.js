@@ -14,6 +14,7 @@ const OutputView = {
     }
     if (context === "end") {
       Console.print(SAYS.END);
+      Console.close();
     }
   },
 
