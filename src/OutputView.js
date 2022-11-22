@@ -48,16 +48,25 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(currentBridge, isCorrect) {
+  printResult(currentBridge, isCorrect, attemps) {
     Console.print("최종 게임 결과");
     this.printMap(currentBridge, isCorrect);
-    Console.print(`게임 성공 여부: ${this.print(isCorrect)}`)
+    this.printIsSuccess(isCorrect);
+    this.printAttemps(attemps);
   },
 
-  print(isSuccess) {
-    if (isSuccess === "correct") return "성공";
-    if (isSuccess === "wrong") return "실패";
-  }
+  printIsSuccess(isCorrect) {
+    if (isCorrect === "correct") {
+      Console.print(`게임 성공 여부: 성공`);
+    }
+    if (isCorrect === "wrong") {
+      Console.print(`게임 성공 여부: 실패`);
+    }
+  },
+
+  printAttemps(attemps) {
+    Console.print(`총 시도한 횟수: ${attemps}`);
+  },
 };
 
 module.exports = OutputView;
