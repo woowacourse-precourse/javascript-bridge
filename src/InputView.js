@@ -23,7 +23,7 @@ const InputView = {
 	readMoving(info) {
 		Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래 : D)\n', input => {
 			if (input !== 'D' && input !== 'U') throw new Error('[Error] 입력 값이 잘못 되었습니다.');
-			if (info.bridgeGameManager.move(info, input)) console.log('맞음');
+			if (info.bridgeGameManager.move(info, input))
 			else console.log('틀림');
 		});
 	},
