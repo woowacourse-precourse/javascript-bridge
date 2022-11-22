@@ -19,19 +19,20 @@ const InputView = {
       );
     }
   },
+
   readBridgeSize(bridgeGame) {
-    Console.readLine("다리의 길이를 입력해주세요.", (answer) => {
+    Console.readLine("다리의 길이를 입력해주세요.\n", (answer) => {
       try {
         InputView.validateBridgeSize(Number(answer));
         const bridge = makeBridge(answer, generate);
         bridgeGame.setBridge(bridge);
         InputView.readMoving(bridgeGame);
-      } catch {
+      } catch (err) {
+        Console.print(err);
         InputView.readBridgeSize(bridgeGame);
       }
     });
   },
-
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
