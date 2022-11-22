@@ -12,8 +12,8 @@ class PlayersMap {
         for (let i = START; i < playersBridge.length; i += PLAYERS_MAP.one_value) {
             this.make(playersBridge[i], winBridge[i]);
         }
-        this.#upSpace = this.cover(this.divideLine(this.#upSpace));
-        this.#downSpace = this.cover(this.divideLine(this.#downSpace));
+        this.#upSpace = PlayersMap.cover(PlayersMap.divideLine(this.#upSpace));
+        this.#downSpace = PlayersMap.cover(PlayersMap.divideLine(this.#downSpace));
 
         return `${this.#upSpace}\n${this.#downSpace}`;
     }
@@ -37,11 +37,11 @@ class PlayersMap {
         }
     }
 
-    divideLine(value) {
+    static divideLine(value) {
         return value.join(' | ');
     }
 
-    cover(space) {
+    static cover(space) {
         return `${PLAYERS_MAP.left_block}${PLAYERS_MAP.empty}${space}${PLAYERS_MAP.empty}${PLAYERS_MAP.right_block}`;
     }
 }
