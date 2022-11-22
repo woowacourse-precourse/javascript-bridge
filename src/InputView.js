@@ -6,7 +6,6 @@ const ValidateInput = require("./ValidateInput");
 const { printError } = require("./OutputView");
 
 const InputView = {
-  bridge: null,
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -18,7 +17,7 @@ const InputView = {
         InputView.readMoving(bridgeGame);
       } catch (e) {
         printError(e);
-        InputView.readBridgeSize();
+        InputView.readBridgeSize(bridgeGame);
       }
     });
   },
