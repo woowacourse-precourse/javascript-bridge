@@ -43,6 +43,7 @@ const InputView = {
   readGameCommand(gameStatus) {
     Console.readline(QUESTION.RETRY,(input)=>{
       Validation.validationForRetry(input)
+      new BridgeGame().retry(input,gameStatus)
     })
   },
 };

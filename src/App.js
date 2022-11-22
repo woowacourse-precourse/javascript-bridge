@@ -37,14 +37,23 @@ class App {
        this.chooseWrong()
       }
     }
+    this.endGame()
   }
 
   
   chooseWrong(){
     InputView.readGameCommand(this.#gameStatus)
+    if(this.#gameStatus.wrongFlag){
+      this.endGame()
+    }
+    if(!this.#gameStatus.wrongFlag){
+      this.startGame()
+    }
   }
 
-  
+  endGame(){
+
+  }  
 
 
 }
