@@ -35,7 +35,7 @@ const InputView = {
   readGameCommand() {
     let command;
     Console.readLine(ConstValue.INPUT_RESTART_MESSAGE, value => {
-      input = value;
+      command = value;
     });
 
     return command;
