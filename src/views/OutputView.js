@@ -1,31 +1,21 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MOVE_TYPE, COMMAND_MATCH_INDEX } = require('../constants/Settings');
+const { attempts } = require('../constants/Result');
 
 const MESSAGES = require('../constants/Messages');
 const RESULT = require('../constants/Result');
-const { attempts } = require('../constants/Result');
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
+
 const OutputView = {
   printStartMessage() {
     Console.print(MESSAGES.start);
   },
-
   printError(error) {
     Console.print(error.message);
   },
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printMap(moves) {
-    // utils 폴더 만들어서 빼기?
-    const gameMap = moves.reduce(
+  makeGameMap(moves) {
+    return moves.reduce(
       (acc, [result, command]) => {
         let row = COMMAND_MATCH_INDEX[command];
-
         acc[row].push(MOVE_TYPE[result]);
         acc[(row + 1) % 2].push(' ');
 
@@ -33,21 +23,20 @@ const OutputView = {
       },
       [[], []]
     );
-
-    Console.print(gameMap.map((row) => `[ ${row.join(' | ')} ]`).join('\n'));
   },
+  printMap(moves) {
+    const gameMap = this.makeGameMap(moves);
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult(isSuccess, attempts) {
+    Console.print(`${gameMap.map((row) => `[ ${row.join(' | ')} ]`).join('\n')}\n`);
+  },
+  printResult(isSuccess, attempts, moves) {
     let result = isSuccess ? '성공' : '실패';
 
-    Console.print(
-      `${RESULT.title}\n${RESULT.successOrFailure(result)}\n${RESULT.attempts(attempts)}`
-    );
+    Console.print(`${RESULT.title}`);
+    this.printMap(moves);
+    Console.print(`${RESULT.successOrFailure(result)}\n${RESULT.attempts(attempts)}`);
+  },
+  close() {
     Console.close();
   },
 };

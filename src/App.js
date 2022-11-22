@@ -86,6 +86,7 @@ class App {
 
   async #end(result, moves) {
     OutputView.printResult(result, this.#attempts, moves);
+    OutputView.close();
   }
 
   async #tryCatch(tryfunc, ...args) {
