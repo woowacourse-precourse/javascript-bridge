@@ -1,4 +1,4 @@
-const { MOVE, COMMAND } = require("./constants/Constants")
+const { MOVE, COMMAND, RANGE } = require("./constants/Constants")
 const { ERROR } = require("./constants/MessageConstants")
 
 const Validation = {
@@ -11,7 +11,7 @@ const Validation = {
       throw new Error(ERROR.NOT_INTEGER);
     }
     
-    if (input < 3 || 20 < input) {
+    if (input < RANGE.BRIDGE_LEN_MIN || RANGE.BRIDGE_LEN_MAXRIDGE_ < input) {
       throw new Error(ERROR.RANGE_IS_WRONG);
     }
   },

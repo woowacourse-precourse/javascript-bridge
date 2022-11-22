@@ -27,4 +27,9 @@ const COMMAND = Object.freeze({
     QUIT: 'Q'
 });
 
-module.exports = { BRIDGE, MOVE, MAP, STATUS, COMMAND };
+const RANGE = Object.freeze({
+    BRIDGE_LEN_MIN: 3,
+    BRIDGE_LEN_MAX: 20
+});
+
+module.exports = { BRIDGE, MOVE, MAP, STATUS, COMMAND, RANGE };
