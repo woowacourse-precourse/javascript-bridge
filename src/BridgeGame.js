@@ -1,4 +1,4 @@
-const { UP_OR_DOWN, PRINT_MAP, JUDGE_NEXT_STEP } = require('./Constant.js');
+const { UP_OR_DOWN, PRINT_MAP, NEXT_STEP } = require('./Constant.js');
 const { makeBridge } = require('./BridgeMaker.js');
 const { generate } = require('./BridgeRandomNumberGenerator.js');
 
@@ -42,11 +42,11 @@ class BridgeGame {
 
   judgeNextStep(tf) {
     if (tf && (this.roundCount - 1) === this.getBridgeSize() - 1) {
-      return JUDGE_NEXT_STEP.END;
+      return NEXT_STEP.END;
     } else if (tf) {
-      return JUDGE_NEXT_STEP.ONGOING;
+      return NEXT_STEP.ONGOING;
     } else if (!tf) {
-      return JUDGE_NEXT_STEP.RESTART_OR_FAIL;
+      return NEXT_STEP.RESTART_OR_FAIL;
     }
   }
 

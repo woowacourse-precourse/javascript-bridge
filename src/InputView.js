@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { GAME_MESSAGE, RESTART_OR_END, RESULT_ENGLISH, JUDGE_NEXT_STEP } = require('./Constant.js');
+const { GAME_MESSAGE, RESTART_OR_END, RESULT_ENGLISH, NEXT_STEP } = require('./Constant.js');
 
 const { printMap, printResult } = require('./OutputView.js');
 const { checkBridgeSize, checkMovingInfo, checkRestartOrFail } = require('./ValidityCheck.js');
@@ -19,10 +19,10 @@ const InputView = {
         checkBridgeSize(bridgeSize);
 
         bridgeGame.generateBridge(bridgeSize);
-        this.readMoving();
+        this.moveNextStep(NEXT_STEP.ONGOING);
       } catch (e) {
         Console.print(e);
-        this.readBridgeSize();
+        this.moveNextStep(NEXT_STEP.MAKE_BRIDGE);
       }
     });
   },
@@ -34,14 +34,10 @@ const InputView = {
 
         const tf = bridgeGame.move(movingInfo);
         printMap(bridgeGame);
-        
-        const nextStep = bridgeGame.judgeNextStep(tf);
-        if (nextStep === JUDGE_NEXT_STEP.END) printResult(bridgeGame, RESULT_ENGLISH.SUCCESS);
-        else if (nextStep === JUDGE_NEXT_STEP.ONGOING) this.readMoving();
-        else if (nextStep === JUDGE_NEXT_STEP.RESTART_OR_FAIL) this.readGameCommand();
+        this.moveNextStep(bridgeGame.judgeNextStep(tf));
       } catch(e) {
         Console.print(e);
-        this.readMoving();
+        this.moveNextStep(NEXT_STEP.ONGOING);
       }
     });
   },
@@ -52,17 +48,37 @@ const InputView = {
         checkRestartOrFail(answer);
       
         if (answer === RESTART_OR_END.END) {
-          printResult(bridgeGame, RESULT_ENGLISH.FAIL);
+          this.moveNextStep(NEXT_STEP.END, RESULT_ENGLISH.FAIL);
         } else {
           bridgeGame.retry();
-          this.readMoving();
+          this.moveNextStep(NEXT_STEP.ONGOING);
         }
       } catch (e) {
         Console.print(e);
-        this.readGameCommand();
+        this.moveNextStep(NEXT_STEP.RESTART_OR_FAIL);
       }
     });
   },
+
+  moveNextStep(nextStep, successOrFail = RESULT_ENGLISH.SUCCESS) {
+    switch (nextStep) {
+      case NEXT_STEP.MAKE_BRIDGE:
+        this.readBridgeSize();
+        break;
+
+      case NEXT_STEP.END:
+        printResult(bridgeGame, successOrFail);
+        break;
+
+      case NEXT_STEP.ONGOING:
+        this.readMoving();
+        break;
+
+      case NEXT_STEP.RESTART_OR_FAIL:
+        this.readGameCommand();
+        break;
+    }
+  }
 };
 
 module.exports = InputView;
