@@ -55,6 +55,7 @@ const InputView = {
           }
         } else if (LOCATION[LOCATION.length - 1] !== BRIDGE[LOCATION.length - 1]) { // 가장 최근에 입력받은게 다를 때
           OutputView.printMap(LOCATION, BRIDGE[LOCATION.length - 1]);
+          this.readGameCommand(bridgeGame, LOCATION, BRIDGE);
         }
       } catch (error) {
         MissionUtils.Console.print(error);
@@ -76,7 +77,27 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() { },
+  readGameCommand(bridgeGame, location, bridge) {
+    MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (replay) => {
+      try {
+        if (this.checkReplay(replay) === "R") {
+          bridgeGame.retry();
+          this.readMoving(bridgeGame);
+        }
+        if (this.checkReplay(replay) === "Q") MissionUtils.Console.close();
+      } catch (error) {
+        MissionUtils.Console.print(error);
+        this.readGameCommand(bridgeGame, location, bridge);
+      }
+    });
+  },
+
+  checkReplay(replay) {
+    if ((replay === "R") || (replay === "Q")) {
+      return replay;
+    }
+    throw "[ERROR] R(재시작) 또는 Q(종료)를 입력해 주세요."
+  },
 };
 
 module.exports = InputView;
