@@ -35,19 +35,23 @@ class Controller {
 
   getUpDownTotalPrintList () {
     return `${this.getPrintList(
-        this.#bridgeGame.getUpList(),
-      )}\n${this.getPrintList(this.#bridgeGame.getDownList())}`;
+      this.#bridgeGame.getUpList(),
+    )}\n${this.getPrintList(this.#bridgeGame.getDownList())}`;
+  }
+
+  outputResultPrint () {
+    outputView.printResult(
+        true,
+        this.getUpDownTotalPrintList(),
+        this.#bridgeGame.getTryCount(),
+      );
   }
 
   moveBrige (controller) {
-    if (this.getMoveIndex() !== this.getBridge().length) {
+    if (this.#bridgeGame.getMoveIndex() !== this.#bridgeGame.getBridge().length) {
       inputView.readMoving(this.handleMoveBridge.bind(this));
     } else {
-      outputView.printResult(
-        true,
-        this.getUpDownTotalPrintList(),
-        this.getTryCount(),
-      );
+        this.outputResultPrint();
     }
   }
 
@@ -60,9 +64,7 @@ class Controller {
   }
 
   handleMoveInput (string) {
-    if (
-      this.#bridgeGame.getBridge()[this.#bridgeGame.getMoveIndex()] === string
-    ) {
+    if (this.#bridgeGame.getBridge()[this.#bridgeGame.getMoveIndex()] === string) {
       this.#bridgeGame.incrementMoveIndex();
       return this.moveBrige(this);
     }
@@ -117,8 +119,7 @@ class Controller {
   inputQuit (string) {
     if (string === 'Q') outputView.printResult(
       false,
-      `${this.getPrintList(this.#bridgeGame.getUpList())}
-      \n${this.getPrintList(this.#bridgeGame.getDownList())}`,
+      this.getUpDownTotalPrintList(),
       this.#bridgeGame.getTryCount(),
     );
   }
