@@ -12,8 +12,8 @@ describe('다리의 길이를 입력받아 다리를 생성하는 객체 테스�
       const mockGenerator = randomNumbers.reduce((acc, number) => {
         return acc.mockReturnValueOnce(number);
       }, jest.fn());
-
       const bridge = BridgeMaker.makeBridge(bridgeSize, mockGenerator);
+
       expect(bridge).toEqual(expected);
     },
   );
