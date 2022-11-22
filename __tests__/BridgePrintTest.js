@@ -102,6 +102,4 @@ describe('다리 현황 출력 테스트', () => {
     expect(logSpy.mock.calls[lastTwoIndex[1]].shift()).toEqual('[   | O |   ]')
   })
 
-  // //최종 결과를 테스트
-  //test('최종 결과를 테스트한다',()=>{})
 })
