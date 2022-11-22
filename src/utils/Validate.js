@@ -1,4 +1,4 @@
-const { BRIDGE } = require("../constants/constants");
+const { BRIDGE, COMMAND } = require("../constants/constants");
 
 const Validate = {
   validateBridgeLength(userInput) {
@@ -11,8 +11,15 @@ const Validate = {
     return false;
   },
 
-  validateMove(userInput) {
+  validateMoveCommand(userInput) {
     if (this.isMoveCommand(userInput)) {
+      return true;
+    }
+    return false;
+  },
+
+  validateGameCommand(userInput) {
+    if (this.isGameCommand(userInput)) {
       return true;
     }
     return false;
@@ -20,6 +27,13 @@ const Validate = {
 
   isMoveCommand(userInput) {
     if (userInput === BRIDGE.UP || userInput === BRIDGE.DOWN) {
+      return true;
+    }
+    return false;
+  },
+
+  isGameCommand(userInput) {
+    if (userInput === COMMAND.RESTART || userInput === COMMAND.QUIT) {
       return true;
     }
     return false;
