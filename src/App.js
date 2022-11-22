@@ -1,8 +1,8 @@
 const {Console} = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const InputView = require("./InputView");
-const { readBridgeSize, readMoving } = require("./InputView");
-const { printMap } = require("./OutputView");
+const { readBridgeSize, readMoving, readGameCommand } = require("./InputView");
+const { printMap, printResult } = require("./OutputView");
 class App {
 
   play() {
@@ -22,6 +22,16 @@ class App {
     })
   }
 
+  askRetryOrNot(){
+    readGameCommand((key) => {
+      if(this.game.retry(toRetry)){
+        this.playOnce();
+      }
+      else{
+        //printResult(this.game);
+      }
+    })
+  }
 
 
 }
