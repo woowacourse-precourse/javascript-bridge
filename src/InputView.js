@@ -20,6 +20,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (answer) => {
       this.stringValidation(Number(answer));
+      this.rangeValidation(Number(answer));
       this.bridge = BridgeMaker.makeBridge(answer, Generator.generate);
       this.now = 0;
       this.retry = 1;
@@ -32,7 +33,8 @@ const InputView = {
       Console.print("[ERROR] 다리 길이는 숫자여야 합니다. 다시 입력해 주세요!");
       this.readBridgeSize();
     }
-  },
+
+
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
@@ -69,6 +71,8 @@ const InputView = {
     Console.readLine(
       "\n이동할 칸을 선택해주세요. (위: U, 아래: D) \n",
       (answer) => {
+        this.udValidation(answer);
+
         let check = game.move(answer, this.bridge, this.now);
         this.checkFailAndSuccess(check);
         if (check != "downFail" && check != "upFail") this.now += 1;
