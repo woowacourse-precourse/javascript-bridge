@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./Model/BridgeGame');
 const InputView = require('./View/InputView');
 const OutputView = require('./View/OutputView');
-const Validator = require('./Validation/Validator');
+const Validator = require('./Model/Validator');
 const { COMMAND, MESSAGE } = require('./Constants');
 
 class App {
