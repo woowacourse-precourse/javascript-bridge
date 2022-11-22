@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { GAME_BOOLEAN, GAME_MESSAGE, SHORT_CUT } = require('./Constants');
 const { printMap, printResult } = require('./OutputView');
-const { readLine } = require('./Utils');
+const { readLine, showErrorMessage } = require('./Utils');
 const {
   moveValidation,
   retryValidation,
@@ -17,17 +17,15 @@ const InputView = {
   readBridgeSize(bridgeGame) {
     readLine(GAME_MESSAGE.inputLength, (userInput) => {
       try {
+        sizeValdation(Number(userInput));
         this.bridgeSize(userInput, bridgeGame);
       } catch (error) {
-        Console.print(error.message);
-        this.readBridgeSize(bridgeGame);
+        showErrorMessage(error.message, this.readBridgeSize, bridgeGame);
       }
     });
   },
-
   bridgeSize(userInput, bridgeGame) {
     const size = Number(userInput);
-    sizeValdation(size);
     bridgeGame.setBridge(size);
     this.readMoving(bridgeGame);
   },
@@ -38,22 +36,23 @@ const InputView = {
   readMoving(bridgeGame) {
     readLine(GAME_MESSAGE.move, (userInput) => {
       try {
+        moveValidation(userInput);
         this.moveBridge(userInput, bridgeGame);
       } catch (error) {
-        Console.print(error.message);
-        this.readMoving(bridgeGame);
+        showErrorMessage(error.message, this.readMoving, bridgeGame);
       }
     });
   },
-
   moveBridge(userInput, bridgeGame) {
-    moveValidation(userInput);
-    bridgeGame.move(userInput);
-    const bridgeResult = bridgeGame.getMap();
-    printMap(bridgeResult);
+    bridgeGame.setAnswer(userInput);
+    bridgeGame.move();
+    this.showMoveResult(bridgeGame);
     this.checkFinish(bridgeGame);
   },
-
+  showMoveResult(bridgeGame) {
+    const bridgeResult = bridgeGame.getMap();
+    printMap(bridgeResult);
+  },
   checkFinish(bridgeGame) {
     const isFinish = bridgeGame.isFinish();
     if (isFinish) {
@@ -75,34 +74,32 @@ const InputView = {
     }
     return this.readGameCommand(bridgeGame);
   },
-
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(bridgeGame) {
     readLine(GAME_MESSAGE.retry, (userInput) => {
       try {
+        retryValidation(userInput);
         this.checkRetry(userInput, bridgeGame);
       } catch (error) {
-        Console.print(error.message);
-        this.readGameCommand(bridgeGame);
+        showErrorMessage(error.message, this.readGameCommand, bridgeGame);
       }
     });
   },
   checkRetry(userInput, bridgeGame) {
-    retryValidation(userInput);
     if (userInput === SHORT_CUT.retry) {
-      this.showReStart(bridgeGame);
+      this.getReStart(bridgeGame);
     }
     if (userInput === SHORT_CUT.quit) {
-      this.showQuit(bridgeGame);
+      this.getQuit(bridgeGame);
     }
   },
-  showReStart(bridgeGame) {
+  getReStart(bridgeGame) {
     bridgeGame.retry();
     this.readMoving(bridgeGame);
   },
-  showQuit(bridgeGame) {
+  getQuit(bridgeGame) {
     const bridgeResult = bridgeGame.getMap();
     const numberAttempts = bridgeGame.getAttempts();
     printResult(bridgeResult, GAME_BOOLEAN.fail, numberAttempts);

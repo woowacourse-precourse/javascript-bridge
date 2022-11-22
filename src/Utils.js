@@ -6,6 +6,10 @@ const Utils = {
     Console.print(message);
     Console.readLine(GAME_STRING.empty, callback);
   },
+  showErrorMessage(errorMessage, bridgeFunction, bridgeGame) {
+    Console.print(errorMessage);
+    bridgeFunction(bridgeGame);
+  },
 };
 
 module.exports = Utils;

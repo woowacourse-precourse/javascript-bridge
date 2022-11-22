@@ -21,7 +21,27 @@
 - [x] refactor: InputView에 있던 예외 처리 함수를 분리
 - Validations 파일 추가
 
+- [x] refactor: bridgeGame의 필드 수를 줄이기 위해 isAnswer 삭제
+
+  - 정답을 맞췄는 지 알려주는 함수를 추가
+
+- [x] refactor: bridgeGame의 필드 isAnswer 추가
+
+  - 기능상 오류로 isAnswer 필드 다시 추가
+  - bridge Game의 함수 기능 분리
+
+- [x] refactor: InputView의 함수 이름 수정
+
+- [x] refactor: 파일 Import 순서 정렬
+
+- [x] refactor: 파일명 파스칼 규칙으로 수정
+
+- [x] refactor: 한 가지 함수가 한 가지 기능만 하도록 수정
+  - 에러 메세지와 함수를 호출 하는 Util 함수 추가
+
 ### 테스트
 
 - [x] test: 사용자 입력 예외 함수 테스트 파일 추가
 - [x] test: 다리 건너기 게임 함수 테스트 파일 추가
+- [x] test: 다리 건너기 게임 테스트 파일 추가
+- [x] test: 다리 건너기 게임 예외 케이스 추가

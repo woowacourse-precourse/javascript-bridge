@@ -3,7 +3,7 @@ const {
   ERROR_PLAYING_MESSAGE,
   ERROR_RETRY_MESSAGE,
   SHORT_CUT,
-} = require('../src/constants');
+} = require('../src/Constants');
 const {
   checkBridgeInteger,
   checkBridgeRange,

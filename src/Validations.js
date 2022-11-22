@@ -47,7 +47,6 @@ const Validations = {
     Validations.checkRetryLowercase(userInput);
     Validations.checkRetryWrong(userInput);
   },
-
   checkRetryLowercase(userInput) {
     const lowerCaseRetry = SHORT_CUT.retry.toLowerCase();
     const lowerCaseQuit = SHORT_CUT.quit.toLowerCase();

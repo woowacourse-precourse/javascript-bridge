@@ -1,5 +1,5 @@
 const BridgeGame = require('../src/BridgeGame');
-const { GAME_STRING, SHORT_CUT, GAME_RESULT } = require('../src/constants');
+const { GAME_STRING, SHORT_CUT, GAME_RESULT } = require('../src/Constants');
 
 describe('다리 건너기 클래스 테스트', () => {
   test('다리 건너기 이동 결과값 성공 테스트', () => {
@@ -7,7 +7,8 @@ describe('다리 건너기 클래스 테스트', () => {
     bridge.setBridge(3);
     const answer = bridge.getBridge();
     expect(bridge.getSteps()).toEqual(0);
-    bridge.move(answer[0]);
+    bridge.setAnswer(answer[0]);
+    bridge.move();
     const upMoveResult = { upBridgeResult: '[ O ]', downBridgeResult: '[   ]' };
     const downMoveResult = {
       upBridgeResult: '[   ]',
@@ -25,7 +26,8 @@ describe('다리 건너기 클래스 테스트', () => {
     expect(bridge.getSteps()).toEqual(0);
     const inputShortCut =
       answer[0] === SHORT_CUT.up ? SHORT_CUT.down : SHORT_CUT.up;
-    bridge.move(inputShortCut);
+    bridge.setAnswer(inputShortCut);
+    bridge.move();
     const upMoveResult = { upBridgeResult: '[ X ]', downBridgeResult: '[   ]' };
     const downMoveResult = {
       upBridgeResult: '[   ]',
@@ -42,7 +44,8 @@ describe('다리 건너기 클래스 테스트', () => {
     const answer = bridge.getBridge();
     answer.forEach((shortCut, index) => {
       expect(bridge.getSteps()).toEqual(index);
-      bridge.move(shortCut);
+      bridge.setAnswer(shortCut);
+      bridge.move();
     });
     expect(bridge.getSteps()).toEqual(3);
   });
@@ -52,7 +55,8 @@ describe('다리 건너기 클래스 테스트', () => {
     bridge.setBridge(3);
     const answer = bridge.getBridge();
     answer.forEach((shortCut) => {
-      bridge.move(shortCut);
+      bridge.setAnswer(shortCut);
+      bridge.move();
     });
     expect(bridge.isFinish()).toBe(true);
   });
@@ -70,7 +74,8 @@ describe('다리 건너기 클래스 테스트', () => {
     const bridge = new BridgeGame();
     bridge.setBridge(3);
     const answer = bridge.getBridge();
-    bridge.move(answer[0]);
+    bridge.setAnswer(answer[0]);
+    bridge.move();
     const succeseResult = [GAME_STRING.success];
     const normalResult = [GAME_STRING.normal];
     if (answer[0] === SHORT_CUT.up) {
