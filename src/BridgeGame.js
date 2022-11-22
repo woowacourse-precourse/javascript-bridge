@@ -1,5 +1,4 @@
 const BridgeCompare = require('./BridgeCompare');
-const OutputView = require('./OutputView');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -23,9 +22,8 @@ class BridgeGame {
     const NowBridgeValue = this.BridgeStatus[this.BridgeIndex];
     const CompareResult = BridgeCompare.isSameBridge(userInput, NowBridgeValue);
     this.BridgeResultArray = BridgeCompare.makeBridgeResultArray(userInput, CompareResult, this.BridgeResultArray);
-    OutputView.printMap(this.BridgeResultArray);
     this.BridgeIndex += 1; 
-    if(BridgeCompare.isCompleteBridge(this.SIZE, this.BridgeIndex)){
+    if(CompareResult && BridgeCompare.isCompleteBridge(this.SIZE, this.BridgeIndex)){
       this.gameResult = true;
       return "종료";
     }  

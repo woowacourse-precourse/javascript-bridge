@@ -33,11 +33,13 @@ const InputView = {
       Validation.validateUserChoice(userInput);
       console.log(bridgeGame.BridgeStatus, userInput);
       const data = bridgeGame.move(userInput);
+      OutputView.printMap(bridgeGame.BridgeResultArray);
+      console.log(data);
       if(data === "종료") {
         OutputView.printResult(bridgeGame.BridgeResultArray, bridgeGame.gameResult, bridgeGame.count);
-        Io.close();
+        return Io.close();
       } 
-      if(data === "재시작") this.readGameCommand();
+      if(data === "재시작") return this.readGameCommand();
       this.readMoving();
     });
   },
@@ -54,7 +56,7 @@ const InputView = {
       }
       if(userInput == 'Q'){
         console.log('Q');
-        OutputView.printResult(bridgeGame.BridgeResultArray, bridgeGame.CompareResult, 10);
+        OutputView.printResult(bridgeGame.BridgeResultArray, bridgeGame.gameResult, bridgeGame.count);
       }
     })
   },
