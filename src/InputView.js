@@ -28,7 +28,6 @@ const InputView = {
   makeBridge(bridgeSize) {
     return BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
   },
-
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
@@ -52,11 +51,9 @@ const InputView = {
     else this.readMoving(bridge);
   },
 
-
   checkMove(moving){
     if (moving !== 'U' && moving !== 'D') throw new Error('[ERROR] 이동할 칸은 "U"와 "D" 두 값중 하나여야합니다.');
   },
-
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
@@ -67,9 +64,11 @@ const InputView = {
       if (command == 'Q') { 
         Console.print(command);
         const trial = this.bridgeGame.retry(); 
+        OutputView.printResult(up, down, trial, hasCorrect);
       }
     });
-  },
+  }
+
 };
 
 module.exports = InputView;
