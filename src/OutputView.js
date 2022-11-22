@@ -8,7 +8,9 @@ const OutputView = {
   printEndMessage() {
     Console.print(QUERY.END);
   },
-
+  printError(err) {
+    Console.print(err);
+  },
   printMap(game) {
     Console.print(`[${game.generateMap(BRIDGE.UP_CHAR)}]`);
     Console.print(`[${game.generateMap(BRIDGE.DOWN_CHAR)}]`);
