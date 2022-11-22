@@ -1,5 +1,6 @@
 const BridgeGame = require('./BridgeGame');
 const { handleError } = require('./ErrorHandler');
+const MapMaker = require('./MapMaker');
 const InputView = require('./View/InputView');
 const OutputView = require('./View/OutputView');
 
@@ -11,10 +12,12 @@ class Controller {
   }
 
   printMap = () => {
-    this.outputView.printMap(
+    const mapMaker = new MapMaker(
       this.game.bridgeStore.getUserInputResultLength(),
       this.game.bridgeStore.getUserInputResult,
     );
+
+    this.outputView.printMap(mapMaker);
   };
 
   fail = () => {
@@ -22,11 +25,12 @@ class Controller {
   };
 
   end = () => {
-    this.outputView.printResult(
+    const mapMaker = new MapMaker(
       this.game.bridgeStore.getUserInputResultLength(),
       this.game.bridgeStore.getUserInputResult,
-      this.game.bridgeStore.getGameResult(),
     );
+
+    this.outputView.printResult(mapMaker, this.game.bridgeStore.getGameResult());
     this.inputView.close();
   };
 
