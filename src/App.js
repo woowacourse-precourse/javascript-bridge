@@ -43,7 +43,8 @@ class App {
     if (input === BRIDGE.game.retry) {
       this.bridgeGame.retry();
       InputView.readMoving.call(this, this.inputMove, this.inputRetry);
-    } else {
+    }
+    if (input === BRIDGE.game.quit) {
       this.finishGame(false);
       InputView.gameEnd();
     }

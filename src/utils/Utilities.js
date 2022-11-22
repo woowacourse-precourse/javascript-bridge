@@ -38,7 +38,8 @@ const ResultStringConverter = {
     if (isMovable) {
       resultStringArr[0].push(...['O', '|']);
       resultStringArr[1].push(...[' ', '|']);
-    } else {
+    }
+    if (!isMovable) {
       resultStringArr[0].push(...['X', '|']);
       resultStringArr[1].push(...[' ', '|']);
     }
@@ -49,7 +50,8 @@ const ResultStringConverter = {
     if (isMovable) {
       resultStringArr[0].push(...[' ', '|']);
       resultStringArr[1].push(...['O', '|']);
-    } else {
+    }
+    if (!isMovable) {
       resultStringArr[0].push(...[' ', '|']);
       resultStringArr[1].push(...['X', '|']);
     }

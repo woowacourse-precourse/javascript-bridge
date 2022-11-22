@@ -28,7 +28,6 @@ const InputView = {
         try {
           const gameStatus = func_two.call(this, input);
           const funcList = [func_two, func_three];
-
           InputView.checkGameStatus.call(this, gameStatus, funcList);
         } catch (error) {
           InputView.inputError(error);
@@ -65,8 +64,8 @@ const InputView = {
     const [func_two, func_three] = funcList;
     
     if (isWin) InputView.gameEnd();
-    else if (isEnd) InputView.readGameCommand.call(this, func_three);
-    else InputView.readMoving.call(this, func_two, func_three);
+    if (!isWin && isEnd) InputView.readGameCommand.call(this, func_three);
+    if (!isEnd && !isWin) InputView.readMoving.call(this, func_two, func_three);
   },
 };
 
