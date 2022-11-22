@@ -1,8 +1,15 @@
-const { BRIDGE } = require('./constants');
+const { BRIDGE, MAP } = require('./constants');
+
 const Invalidator = {
+  inValidBlank: (input) => input.includes(' '),
+
+  inValidNumber: (input) => !Number.isNaN(Number(input)),
+
   inValidString: (input) => Number.isNaN(input),
 
   inValidSize: (size) => size < BRIDGE.MIN_SIZE || size > BRIDGE.MAX_SIZE,
+
+  inValidMoving: (moving) => moving !== MAP.UP_SIDE_STR && moving !== MAP.DOWN_SIDE_STR,
 
 };
 

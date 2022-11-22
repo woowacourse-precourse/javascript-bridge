@@ -2,8 +2,11 @@ const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE, ERROR_MESSAGE } = require('./constants');
 const { throwError } = require('./utils');
 const {
+  inValidBlank,
+  inValidNumber,
   inValidString,
   inValidSize,
+  inValidMoving,
 } = require('./Invalidator');
 
 const InputView = {
@@ -29,15 +32,30 @@ const InputView = {
     }
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(MESSAGE.INPUT_MOVING, (moving) => {
+      try {
+        this.validateMoving(moving);
+      } catch (error) {
+        Console.print(error);
+      }
+    });
+  },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+  validateMoving(moving) {
+    if (inValidNumber(moving)) {
+      throwError(ERROR_MESSAGE.INPUT_STR);
+    }
+
+    if (inValidBlank(moving)) {
+      throwError(ERROR_MESSAGE.INPUT_BLANK);
+    }
+
+    if (inValidMoving(moving)) {
+      throwError(ERROR_MESSAGE.MOVING);
+    }
+  },
+
 };
 
 module.exports = InputView;
