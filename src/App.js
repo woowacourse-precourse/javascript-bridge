@@ -1,63 +1,68 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const { BRIDGE_GAME } = require('./constants/Game');
+
+const InputView = require('./views/InputView');
+const OutputView = require('./views/OutputView');
 
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./utils/BridgeRandomNumberGenerator');
 
 class App {
+  #size = 0;
+
   #tryCount = 1;
 
   #result = false;
 
-  #addTryCount() {
-    this.#tryCount += 1;
-  }
+  #formatBridge = [[], []];
 
   async play() {
     this.bridgeGame = new BridgeGame();
-    await this.#createRandomBridge();
-    await this.#inputMoveBlock();
+    this.#size = await InputView.readBridgeSize();
+    this.bridgeGame.setRandomBridge(this.#createRandomBridge());
+    this.#gameProcess();
   }
 
-  async #createRandomBridge() {
-    const size = await InputView.readBridgeSize();
-    BridgeGame.validateSize(size);
-    const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-    this.bridgeGame.setRandomBridge(bridge);
+  async #gameProcess() {
+    this.bridgeGame.setUserBlock(await InputView.readMoving());
+    this.#formatBridge = this.bridgeGame.move();
+    OutputView.printMap(this.#formatBridge);
+
+    return this.#handleGame();
   }
 
-  async #inputMoveBlock() {
-    const block = await InputView.readMoving();
-    BridgeGame.validateBlock(block);
-    this.bridgeGame.setUserBlock(block);
-    const formattedBridges = this.bridgeGame.move();
-    OutputView.printMap(formattedBridges);
-    this.#handleFinish(formattedBridges);
+  #handleGame() {
+    const [isFail, isSuccess] = this.bridgeGame.getGameResult(this.#formatBridge);
+    if (isFail) return this.#chooseGameAgain();
+    if (isSuccess) return this.#exitGame(isSuccess);
+    return this.#gameProcess();
   }
 
-  #handleFinish(formattedBridges) {
-    if (this.bridgeGame.isFail(formattedBridges)) this.#finishMoveBlock(formattedBridges);
-    else if (this.bridgeGame.isSuccess(formattedBridges)) {
-      this.#result = true;
-      OutputView.printResult(this.#tryCount, this.#result, formattedBridges);
-      Console.close();
-    } else this.#inputMoveBlock(formattedBridges);
+  #createRandomBridge() {
+    return BridgeMaker.makeBridge(this.#size, BridgeRandomNumberGenerator.generate);
   }
 
-  async #finishMoveBlock(formattedBridges) {
+  async #chooseGameAgain() {
     const command = await InputView.readGameCommand();
-    BridgeGame.validateCommand(command);
-    if (command === 'Q') {
-      OutputView.printResult(this.#tryCount, this.#result, formattedBridges);
-      Console.close();
+    if (BRIDGE_GAME.COMMAND.Q === command) {
+      this.#exitGame();
     } else {
-      this.#addTryCount();
-      this.bridgeGame.retry();
-      this.#inputMoveBlock();
+      this.#retryGame();
+      this.#gameProcess();
     }
+  }
+
+  #retryGame() {
+    this.#tryCount += 1;
+    this.bridgeGame.retry();
+  }
+
+  #exitGame(isSuccess) {
+    this.#result = isSuccess;
+    OutputView.printResult(this.#tryCount, this.#result, this.#formatBridge);
+    Console.close();
   }
 }
 
