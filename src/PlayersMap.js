@@ -1,3 +1,6 @@
+const { PLAYERS_MAP } = require('./constants/settings')
+const { START } = require('./constants/settings')
+
 const leftBlock = '[';
 const rightBlock = ']';
 const emptySpace = ' ';
@@ -10,7 +13,7 @@ class PlayersMap {
     show(playersBridge, winBridge) {
         this.#upSpace = [];
         this.#downSpace = [];
-        for (let i = 0; i < playersBridge.length; i += 1) {
+        for (let i = START; i < playersBridge.length; i += PLAYERS_MAP.one_value) {
             this.make(playersBridge[i], winBridge[i]);
         }
         this.#upSpace = this.cover(this.divideLine(this.#upSpace));
@@ -25,16 +28,16 @@ class PlayersMap {
     }
 
     isU(playersBridge, winBridge) {
-        if (playersBridge === 'U') {
-            this.#upSpace.push(playersBridge === winBridge ? 'O' : 'X');
-            this.#downSpace.push(' ');
+        if (playersBridge === PLAYERS_MAP.up) {
+            this.#upSpace.push(playersBridge === winBridge ? PLAYERS_MAP.win : PLAYERS_MAP.fail);
+            this.#downSpace.push(PLAYERS_MAP.empty);
         }
     }
 
     isD(playersBridge, winBridge) {
-        if (playersBridge === 'D') {
-            this.#upSpace.push(' ');
-            this.#downSpace.push(playersBridge === winBridge ? 'O' : 'X');
+        if (playersBridge === PLAYERS_MAP.down) {
+            this.#upSpace.push(PLAYERS_MAP.empty);
+            this.#downSpace.push(playersBridge === winBridge ? PLAYERS_MAP.win : PLAYERS_MAP.fail);
         }
     }
 
@@ -43,7 +46,7 @@ class PlayersMap {
     }
 
     cover(space) {
-        return `${leftBlock}${emptySpace}${space}${emptySpace}${rightBlock}`;
+        return `${PLAYERS_MAP.left_block}${PLAYERS_MAP.empty}${space}${PLAYERS_MAP.empty}${PLAYERS_MAP.right_block}`;
     }
 }
 
