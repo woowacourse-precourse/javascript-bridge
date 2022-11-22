@@ -3,7 +3,7 @@ const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const BridgeMaker = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
-const BridgeGame = require('../BridgeGame');
+const BridgeGame = require('./BridgeGame');
 const Validator = require('../utils/Validator');
 const { SUCCESS, FAIL, QUIT, CROSS_OR_NOT, RETRY } = require('../utils/constants');
 

@@ -1,4 +1,4 @@
-const BridgeGame = require('../src/BridgeGame');
+const BridgeGame = require('../src/controller/BridgeGame');
 const Model = require('../src/model/Model');
 
 describe('BridgeGame 클래스 테스트 1', () => {
