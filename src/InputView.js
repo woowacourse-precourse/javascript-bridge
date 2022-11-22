@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Validate = require("../src/Validate");
+const BridgeMaker = require("../src/BridgeMaker");
 
 const InputView = {
   readBridgeSize() {
@@ -7,8 +8,7 @@ const InputView = {
       "다리의 길이를 입력해주세요.\n",
       (bridgeLength) => {
         Validate.bridgeSize(bridgeLength);
-        console.log(bridgeLength);
-        return bridgeLength;
+        this.readMoving();
       }
     );
   },
@@ -28,7 +28,7 @@ const InputView = {
         Validate.retry(inputLetter);
 
         if (inputLetter === "R") {
-          return this.readBridgeSize();
+          return this.readMoving();
         } else if (inputLetter === "Q") {
           return MissionUtils.Console.close();
         }
