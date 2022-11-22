@@ -108,10 +108,8 @@ class BridgeGame {
     let upDownHistory = new Array(2).fill(0).map(() => new Array(this.#moveHistory.length).fill(" "));
 
     for (let position = 0; position < this.#moveHistory.length; position++) {
-      if (this.#moveHistory[position] === this.#bridge[position])
-        this.changeUpDownHistory(upDownHistory, position, HISTORY.ALIVE);
-      if (this.#moveHistory[position] !== this.#bridge[position])
-        this.changeUpDownHistory(upDownHistory, position, HISTORY.DIE);
+      if (this.#moveHistory[position] === this.#bridge[position]) this.changeUpDownHistory(upDownHistory, position, HISTORY.ALIVE);
+      if (this.#moveHistory[position] !== this.#bridge[position]) this.changeUpDownHistory(upDownHistory, position, HISTORY.DIE);
     }
     return [upDownHistory[0], upDownHistory[1]];
   }
