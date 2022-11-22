@@ -22,13 +22,20 @@ class App {
 
   selectMove(){
     InputView.readMoving((playerMoving)=>{
-        this.#bridgeGame.move(playerMoving);
-        OutputView.printMap(this.#bridgeGame.getPlayerMovingRecord(), this.#bridgeGame.isSuccess());
-        if (this.#bridgeGame.isSuccess() && !(this.#bridgeGame.isFinish()))
-          this.selectMove();
-
-        this.selectRetry();
+      this.#bridgeGame.move(playerMoving);
+      this.moveResult();
     });
+  }
+
+  moveResult(){
+    OutputView.printMap(this.#bridgeGame.getPlayerMovingRecord(), this.#bridgeGame.isSuccess());
+    
+    if (this.#bridgeGame.isSuccess() && !(this.#bridgeGame.isFinish()))
+      this.selectMove();
+    else if(!this.#bridgeGame.isFinish())
+      this.selectRetry();
+    else 
+      this.finish();
   }
 
   selectRetry(){
@@ -37,7 +44,16 @@ class App {
         this.#bridgeGame.retry();
         this.selectMove();
       }
+      else if(retry === 'Q')
+       this.finish();
     });
+  }
+
+  finish(){
+    OutputView.printResult(this.#bridgeGame.getPlayerMovingRecord(),
+        this.#bridgeGame.isFinish(), this.#bridgeGame.getAttemptNumber());
+    
+    Console.close();
   }
 }
 
