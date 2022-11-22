@@ -1,5 +1,13 @@
+const InputView = require("./InputView");
+
 class App {
-  play() {}
+  constructor() {
+    this.gameData;
+  }
+
+  play() {
+    InputView.readBridgeSize(this.gameData);
+  }
 }
 
 module.exports = App;
