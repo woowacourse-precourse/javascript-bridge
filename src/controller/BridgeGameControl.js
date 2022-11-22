@@ -29,6 +29,8 @@ class BridgeGameControl {
 
   #tryCount;
 
+  #isWin;
+
   constructor() {
     const inputView = Object.create(InputView);
     this.#inputView = inputView;
@@ -37,6 +39,8 @@ class BridgeGameControl {
     const bridgeGame = new BridgeGame();
     this.#bridgeGame = bridgeGame;
     this.#movingCount = 0;
+    this.#tryCount = 1;
+    this.#isWin = false;
   }
 
   start() {
@@ -113,6 +117,7 @@ class BridgeGameControl {
       this.#inputView.readMoving(this.movingCallback.bind(this));
     }
     if (this.#map.getMapLength() === this.#movingCount) {
+      this.#isWin = true;
       this.end();
     }
   }
@@ -122,20 +127,40 @@ class BridgeGameControl {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {
+
+  gameCommandRestart() {
+    this.#tryCount += 1;
     this.#movingCount = 0;
-    const gameCommandCallback = (input) => {
-      const gameCommand = new GameCommand(input);
-      if (!gameCommand.getClose()) {
-        Console.print(gameCommand.getGameCommand());
-        Console.close();
-      }
-    };
-    this.#inputView.readGameCommand(gameCommandCallback);
+    this.#bridgeGame.retry();
+    this.move();
+  }
+
+  gameCommandQuit() {
+    this.end();
+  }
+
+  gameCommandProcess(gameCommand) {
+    if (gameCommand.getGameCommand() === 'R') this.gameCommandRestart();
+    if (gameCommand.getGameCommand() === 'Q') this.gameCommandQuit();
+    // Console.print(gameCommand.getGameCommand());
+    // Console.close();
+  }
+
+  gameCommandCallback(input) {
+    const gameCommand = new GameCommand(input);
+    if (!gameCommand.getClose()) {
+      this.gameCommandProcess(gameCommand);
+    }
+  }
+
+  retry() {
+    this.#inputView.readGameCommand(this.gameCommandCallback.bind(this));
   }
 
   end() {
-    console.log(`map len ${this.#map.getMapLength()} movingCount ${this.#movingCount}`);
+    this.#outputView.printEnd();
+    this.movingPrint();
+    this.#outputView.printResult(this.#isWin, this.#tryCount);
   }
 }
 
