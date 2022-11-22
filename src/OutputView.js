@@ -7,19 +7,30 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
-
+  printMap(movingMap, isEnd) {
+    const prefix = isEnd ? "최종 게임 결과\n" : "";
+    const message = OutputView.convertMapForView(movingMap);
+    Console.print(`${prefix}${message}\n`);
+  },
+  convertMapForView(movingMap) {
+    const map = [[], []];
+    movingMap.forEach((mapItems) => {
+      mapItems.forEach((mapItem, index) => map[index].push(mapItem));
+    });
+    const message = map.map((result) => `[ ${result.join(" | ")} ]`).join("\n");
+    return message;
+  },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult({ result, totalTry }) {
-    Console.print(`\n게임 성공 여부: ${result}\n총 시도한 횟수: ${totalTry}`);
+    Console.print(`게임 성공 여부: ${result}\n총 시도한 횟수: ${totalTry}\n`);
   },
 
   printStart() {
-    Console.print("\n다리 건너기 게임을 시작합니다");
+    Console.print("다리 건너기 게임을 시작합니다\n");
   },
 };
 
