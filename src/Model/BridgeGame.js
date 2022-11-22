@@ -21,26 +21,26 @@ class BridgeGame {
   }
 
   move(direction) {
-    const nextBlock = this.#upperTrack.length;
-    if (direction === BLOCK.LOWER) return this.moveDown(direction, nextBlock);
-    if (direction === BLOCK.UPPER) return this.moveUp(direction, nextBlock);
+    const nextPath = this.#upperTrack.length;
+    if (direction === BLOCK.LOWER) return this.moveDown(direction, nextPath);
+    if (direction === BLOCK.UPPER) return this.moveUp(direction, nextPath);
   }
 
-  moveUp(direction, nextBlock) {
+  moveUp(direction, nextPath) {
     this.#lowerTrack.push(PATH.NOT_CHOSEN);
-    if (direction === this.#bridge[nextBlock]) this.#upperTrack.push(PATH.RIGHT);
-    if (direction !== this.#bridge[nextBlock]) this.#upperTrack.push(PATH.WRONG);
+    if (direction === this.#bridge[nextPath]) this.#upperTrack.push(PATH.RIGHT);
+    if (direction !== this.#bridge[nextPath]) this.#upperTrack.push(PATH.WRONG);
   }
 
-  moveDown(direction, nextBlock) {
+  moveDown(direction, nextPath) {
     this.#upperTrack.push(PATH.NOT_CHOSEN);
-    if (direction === this.#bridge[nextBlock]) this.#lowerTrack.push(PATH.RIGHT);
-    if (direction !== this.#bridge[nextBlock]) this.#lowerTrack.push(PATH.WRONG);
+    if (direction === this.#bridge[nextPath]) this.#lowerTrack.push(PATH.RIGHT);
+    if (direction !== this.#bridge[nextPath]) this.#lowerTrack.push(PATH.WRONG);
   }
 
   isWrongPath() {
-    const currentLocation = this.#upperTrack.length - 1;
-    const lastPath = [this.#upperTrack[currentLocation], this.#lowerTrack[currentLocation]];
+    const location = this.#upperTrack.length - 1;
+    const lastPath = [this.#upperTrack[location], this.#lowerTrack[location]];
     return lastPath.includes(PATH.WRONG) ? true : false;
   }
 
