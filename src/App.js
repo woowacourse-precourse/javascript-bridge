@@ -35,12 +35,13 @@ class App {
   }
 
   actWithBridgeSize(input) {
+    const number = Number(input);
     try {
-      validateBridgeNumber(Number(input));
-      this.#bridgeGame.setBridge(Number(input));
+      validateBridgeNumber(number);
+      this.#bridgeGame.setBridge(number);
       this.askMoveInput();
     } catch (e) {
-      this.askAgain(e, this.askBridgeSize.bind(this));
+      this.askAgainWithError(e, this.askBridgeSize.bind(this));
     }
   }
 
@@ -99,15 +100,15 @@ class App {
     }
   }
 
-  askAgain(e, itself) {
+  askAgainWithError(e, itself) {
     printErrorMessage(e);
     itself();
   }
 
-  endGame(result) {
+  endGame(finalResult) {
     const { map, trialTime } = this.#bridgeGame.getResult();
 
-    printResult(map, result, trialTime);
+    printResult(map, finalResult, trialTime);
     Console.close();
   }
 }
