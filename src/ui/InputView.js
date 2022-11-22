@@ -33,7 +33,7 @@ const InputView = {
       try {
         validateMoving(input);
         const status = bridgeGame.check(input);
-        OutputView.printMap(bridgeGame.getAnswerList(), bridgeGame.getuserInputString());
+        OutputView.printMap(bridgeGame.isAnswerList, bridgeGame.userInputString);
         this.doAfterCheck(status);
       } catch (e) {
         Console.print(e.message);
@@ -66,11 +66,7 @@ const InputView = {
         this.askRetry();
         break;
       case STATUS_FINISH:
-        OutputView.printResult(
-          bridgeGame.getAnswerList(),
-          bridgeGame.getuserInputString(),
-          bridgeGame.getTry()
-        );
+        OutputView.printResult(bridgeGame.isAnswerList, bridgeGame.userInputString, bridgeGame.try);
         break;
     }
   },
@@ -80,11 +76,7 @@ const InputView = {
         bridgeGame.retry();
         this.readMoving();
       } else {
-        OutputView.printResult(
-          bridgeGame.getAnswerList(),
-          bridgeGame.getuserInputString(),
-          bridgeGame.getTry()
-        );
+        OutputView.printResult(bridgeGame.isAnswerList, bridgeGame.userInputString, bridgeGame.try);
       }
     });
   },

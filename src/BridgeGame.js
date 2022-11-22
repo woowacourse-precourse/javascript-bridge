@@ -24,18 +24,18 @@ class BridgeGame {
     this.#round = 0;
     this.#isAnswerList = [];
   }
-  getBridgeString = () => {
+  get bridgeString() {
     return this.#bridgeString;
-  };
-  getuserInputString = () => {
+  }
+  get userInputString() {
     return this.#userInputString;
-  };
-  getAnswerList = () => {
+  }
+  get isAnswerList() {
     return this.#isAnswerList;
-  };
-  getTry = () => {
+  }
+  get try() {
     return this.#try;
-  };
+  }
   plusRound = () => {
     this.#round += 1;
   };
