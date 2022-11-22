@@ -1,4 +1,4 @@
-const { DIRECTION_KEY } = require("./constants/rule.js");
+const { DIRECTION_KEY } = require("./constants/rule");
 
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {

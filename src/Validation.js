@@ -1,4 +1,4 @@
-const { DIRECTION_KEY, BRIDGE_SIZE } = require("./constants/rule.js");
+const { DIRECTION_KEY, BRIDGE_SIZE } = require("./constants/rule");
 
 class Validation {
   static checkBridgeSize(size) {

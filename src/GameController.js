@@ -1,11 +1,11 @@
-const { DIRECTION_KEY } = require("./constants/rule.js");
-const { ERROR_MSG } = require("./constants/message.js");
+const { DIRECTION_KEY } = require("./constants/rule");
+const { ERROR_MSG } = require("./constants/message");
 const { Console } = require("@woowacourse/mission-utils");
 
-const InputView = require("./View/InputView.js");
-const OutputView = require("./View/OutputView.js");
-const BridgeGame = require("./Model/BridgeGame.js");
-const Validation = require("./Validation.js");
+const InputView = require("./View/InputView");
+const OutputView = require("./View/OutputView");
+const BridgeGame = require("./Model/BridgeGame");
+const Validation = require("./Validation");
 
 class GameController {
   constructor() {

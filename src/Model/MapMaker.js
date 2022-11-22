@@ -1,4 +1,4 @@
-const { DIRECTION_KEY, MAP } = require("../constants/rule.js");
+const { DIRECTION_KEY, MAP } = require("../constants/rule");
 
 class MapMaker {
   static getMapResult(record) {
