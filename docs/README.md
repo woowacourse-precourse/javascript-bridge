@@ -126,11 +126,12 @@
 17. feat(Bridge) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
 18. test(roundProcess) : 라운드의 진행을 판별하는 roundProcess 클래스 테스트 코드 작성
 19. feat(roundProcess) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
+20. gameManager : GameManager 클래스의 메서드를 이용하여 게임을 진행하는 메서드 구현
 ## 프로그래밍 요구사항
 
 - [x] package.json을 변경하지 않는다. 
 - [x] JS code 컨벤션을 지키며 프로그래밍 한다.
-- [] 프로그램 구현이 완료되면 ApplicationText의 모든 테스트가 성공해야 한다.
+- [x] 프로그램 구현이 완료되면 ApplicationText의 모든 테스트가 성공해야 한다.
 - [x] 파일, 패키지 이름을 수정하거나 이동하지 않는다. (별도의 요구사항이 없다면)
 - [x] 인덴트의 depth는 2까지만 허용한다.
 - [x] 함수는 한가지의 일만 담당하도록 구현한다.
