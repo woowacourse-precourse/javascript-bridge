@@ -4,13 +4,16 @@ const OutputView = require("../src/OutputView");
 const BridgeGame = require("./BridgeGame");
 
 class App {
+  gameCnt = 0;
+  movingCount = 0;
   play() {
     OutputView.printStart();
     let size = this.makeSize();
     const bridgeGame = new BridgeGame(size);
     let moving = this.makeMoving();
-
-    MissionUtils.Console.print("pass");
+    bridgeGame.move(moving);
+    OutputView.printMap(bridgeGame.bridge, bridgeGame.location);
+    MissionUtils.Console.print(bridgeGame.location);
   }
 
   makeSize() {
@@ -43,6 +46,7 @@ class App {
     try {
       if (moving !== "U" && moving !== "D")
         throw new Error("[ERROR] U나 D를 입력해야 합니다.");
+      return moving;
     } catch (e) {
       MissionUtils.Console.print(e.message);
       return InputView.readMoving();
