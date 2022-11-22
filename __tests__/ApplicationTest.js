@@ -1,6 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
+const BridgeGame = require("../src/BridgeGame");
+const Intercessor = require("../src/Intercessor");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -84,4 +86,107 @@ describe("다리 건너기 테스트", () => {
   test("예외 테스트", () => {
     runException(["a"]);
   });
+
+  test("이동 한 칸 매칭 테스트", () => {
+    const bridgeGame = new BridgeGame();
+    const bool = bridgeGame.move("U", "D");
+    expect(bool).toBe(false);
+  });
+
+  test("현재 이동 기록 테스트", () => {
+    const bridgeGame = new BridgeGame();
+    const gameMap = bridgeGame.combineTracks("D", true);
+    expect(gameMap).toEqual(["[ O ]", "[   ]"]);
+  });
+
+  test("전체 이동 후 출력 테스트", () => {
+    const bridge = ["U", "D", "U", "D", "U"];
+    const messages = [
+      "[ O ]",
+      "[   ]",
+      "[ O |   ]",
+      "[   | O ]",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "[ O |   | O |   ]",
+      "[   | O |   | O ]",
+      "[ O |   | O |   |   ]",
+      "[   | O |   | O | X ]",
+    ]
+    mockQuestions(["U", "D", "U", "D", "D"]);
+    const logSpy = getLogSpy();
+    Intercessor.matchMove(bridge);
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("재시작 확인 테스트", () => {
+    mockQuestions(["R"]);
+    const retry = Intercessor.checkRetry();
+    expect(retry).toBe(true);
+  });
+
+  test("실패 게임 후 종료 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 0]);
+    mockQuestions(["3", "U", "D", "U", "Q"]);
+    const messages = [
+      "최종 게임 결과",
+      "[ O |   | X ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ];
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("실패 게임 후 재시작 후 성공 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 0, 1]);
+    mockQuestions(["4", "U", "U", "R", "U", "D", "D", "U"]);
+    const messages = [
+      "최종 게임 결과",
+      "[ O |   |   | O ]",
+      "[   | O | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ];
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test.each([["T"], ["30"], ["-1"]])("예외 테스트: 다리 길이 입력 에러", (input) => {
+    const logSpy = getLogSpy();
+    mockQuestions([input]);
+    Intercessor.bridgeMake();
+    const message = "[ERROR]";
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
+  });
+
+  test.each([["UP"], ["Down"], ["01"]])("예외 테스트: 이동할 칸 입력 에러", (input) => {
+    const logSpy = getLogSpy();
+    mockQuestions([input]);
+    Intercessor.matchMove("U", "D", "D");
+    const message = "[ERROR]";
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
+  });
+
+  test.each([["Re"], ["Done"]])("예외 테스트: 재시작/종료 입력 에러", (input) => {
+    const logSpy = getLogSpy();
+    mockQuestions([input]);
+    Intercessor.checkRetry();
+    const message = "[ERROR]";
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
+  });
+
 });
