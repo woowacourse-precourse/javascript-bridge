@@ -19,9 +19,7 @@ const ERROR_MSG = Object.freeze({
   emptyInput: '[ERROR] 입력값이 비었습니다. 값을 입력해주세요',
   invalidInputType: '[ERROR] 숫자가 아닌 문자를 입력했습니다. 숫자만 입력해 주세요',
   isStartedZero: '[ERROR] 입력값이 0으로 시작합니다. 올바른 숫자를 입력해 주세요',
-  invalidInputRange:
-    '[ERROR] 유효하지 않은 입력 범위입니다. ' +
-    `${BRIDGE_SIZE_MIN_RANGE} ~ ${BRIDGE_SIZE_MAX_RANGE} 사이의 값을 입력해주세요.`,
+  invalidInputRange: `[ERROR] 유효하지 않은 입력 범위입니다. ${BRIDGE_SIZE_MIN_RANGE} ~ ${BRIDGE_SIZE_MAX_RANGE} 사이의 값을 입력해주세요.`,
   invalidDirection: `[ERROR] 유효하지 않은 이동방향입니다. (위: ${UPSIDE_SYMBOL}, 아래: ${DOWNSIDE_SYMBOL}) 를 입력해주세요`,
   inValidCommand: `[ERROR] 유효하지 않은 입력입니다. (재시도: ${RESTART_COMMAND}, 종료: ${QUIT_COMMAND}) 를 입력해주세요`,
 });
