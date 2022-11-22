@@ -54,8 +54,9 @@ const OutputView = {
   printResult(successOrFailure, tryCount) {
     const SUCCESS = '성공';
     const FAILURE = '실패';
+    const resultText = successOrFailure ? SUCCESS : FAILURE;
 
-    this.print(`게임 성공 여부: ${successOrFailure ? SUCCESS : FAILURE}\n총 시도한 횟수: ${tryCount}`);
+    this.print(`게임 성공 여부: ${resultText}\n총 시도한 횟수: ${tryCount}`);
   },
 };
 
