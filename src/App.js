@@ -1,4 +1,4 @@
-const BridgeGame = require("./BridgeGame");
+const BridgeGame = require("./objects/BridgeGame");
 const game = new BridgeGame();
 class App {
   play() {
