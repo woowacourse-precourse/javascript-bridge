@@ -80,7 +80,7 @@ const InputView = {
   },
 
   printMapBasedOnInput(Boolean) {
-    OutputView.discernBridge(Boolean, this.letter, this.bridgeCount);
+    OutputView.printMap(this.letter, this.bridgeCount, this.bridgeGame);
     this.bridgeCount++;
     if (Boolean) {
       return this.isGameDone();
@@ -91,13 +91,13 @@ const InputView = {
   },
 
   printMapWhenLose() {
-    OutputView.printResult();
+    OutputView.printResult(this.bridgeGame);
     this.readGameCommand();
   },
 
   isGameDone() {
     if (this.bridgeCount === this.answerArr.length) {
-      OutputView.printResult();
+      OutputView.printResult(this.bridgeGame);
       OutputView.printTotalResult(true, this.roundCount);
     }
     if (this.bridgeCount !== this.answerArr.length) {
@@ -141,14 +141,13 @@ const InputView = {
   },
 
   finishGameWithLose() {
-    OutputView.printResult();
+    OutputView.printResult(this.bridgeGame);
     OutputView.printTotalResult(false, this.roundCount);
   },
 
   resetOutputBridge() {
     this.bridgeCount = NUMBER.INITAIL_BRIDGE;
     this.bridgeGame.retry();
-    OutputView.resetOutputBridge();
   },
 };
 module.exports = InputView;
