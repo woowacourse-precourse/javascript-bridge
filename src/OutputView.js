@@ -15,6 +15,8 @@ const OutputView = {
     let underBridge = this.makeUnderBridge(bridgeGame);
 
     if (!lastTrySuccess) {
+      upperBridge.push(this.pushUpperFailResult(bridgeGame));
+      underBridge.push(this.pushUnderFailResult(bridgeGame));
     }
   },
 
@@ -81,6 +83,12 @@ const OutputView = {
     let failResult = bridge[tryCount + 1] === 'U' ? ConstValue.APPEND_BRIDGE.WRONG : ConstValue.APPEND_BRIDGE.NONE;
 
     return failResult;
+  },
+
+  makePrintFormat(bridge) {
+    const bridgeOutput = ['[', bridge.join('|'), ']'].join(' ');
+
+    return bridgeOutput;
   },
 };
 
