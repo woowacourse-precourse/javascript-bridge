@@ -60,7 +60,7 @@ const OutputView = {
   printResult(bridgegame) {
     Console.print(MESSAGE.RESULT.TITLE);
     this.printMap(bridgegame);
-    Console.print(`${MESSAGE.RESULT.SUCESS}${bridgegame.getResult()}`);
+    Console.print(`${MESSAGE.RESULT.SUCESS}${bridgegame.result()}`);
     Console.print(`${MESSAGE.RESULT.TRY}${bridgegame.getTry()}`);
     Console.close();
   },

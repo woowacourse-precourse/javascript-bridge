@@ -52,7 +52,7 @@ class BridgeGame {
     return this.#history;
   }
 
-  getResult() {
+  result() {
     const bridgeLength = this.#bridge.length;
     const historyLength = this.#history.length;
     if (bridgeLength == historyLength && this.#history[historyLength - 1][1] == true) {
