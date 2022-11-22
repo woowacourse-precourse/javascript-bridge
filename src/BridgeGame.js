@@ -1,3 +1,4 @@
+const { COMMAND } = require('./Constants');
 const { isCurrentLastIndexValueSame } = require('./Validation');
 
 /**
@@ -34,8 +35,8 @@ class BridgeGame {
 
   checkCommand() {
     const command = this.#model.getCommand();
-    if (command === 'R') this.retry();
-    if (command === 'Q') this.end();
+    if (command === COMMAND.retry) this.retry();
+    if (command === COMMAND.quit) this.end();
   }
 
   checkCurrentResult() {

@@ -6,6 +6,11 @@ const MOVE = {
   down: 'D',
 };
 
+const COMMAND = {
+  retry: 'R',
+  quit: 'Q',
+};
+
 const MOVE_INDEX = {
   [MOVE.up]: 0,
   [MOVE.down]: 1,
@@ -37,6 +42,7 @@ module.exports = {
   WRONG,
   RIGHT,
   MOVE,
+  COMMAND,
   MOVE_INDEX,
   INPUT,
   ERROR,
