@@ -5,7 +5,6 @@ const Controller = {
   size: 0,
   command: "",
   tryCount: 1,
-  round: 0,
   arrayState: [[], []],
   playerArr: [],
   gameResult: IS_SUCCESS.nailedIt,
@@ -25,16 +24,11 @@ const Controller = {
     }
   },
 
-  addRound() {
-    this.round += 1;
-  },
-
   addTrialCount() {
     this.tryCount += 1;
   },
 
   initializeBlock() {
-    this.round -= 1;
     this.playerArr = [];
   },
 
@@ -96,7 +90,6 @@ const Controller = {
       (this.arrayState = [[], []]),
       (this.playerArr = []),
       (this.gameResult = IS_SUCCESS.nailedIt),
-      (this.round = 0),
       (this.tryCount += 1);
   },
 

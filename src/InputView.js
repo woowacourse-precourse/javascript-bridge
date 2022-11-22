@@ -11,7 +11,7 @@ const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine(MESSAGE.inputLength, (size) => {
       MissionUtils.Console.print(SIGN.blank);
-      this.getBridgeSize(Number(size));
+      this.validateBridgeSize(Number(size));
       Controller.getSize(Number(size));
       const generateBridge = BridgeRandomNumberGenerator.generate;
       this.savedBridge = BridgeMaker.makeBridge(Number(size), generateBridge);
@@ -19,7 +19,7 @@ const InputView = {
     });
   },
 
-  getBridgeSize(size) {
+  validateBridgeSize(size) {
     try { 
       if (Controller.isSizeError(size)) {
         throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.inputRange));
@@ -32,14 +32,13 @@ const InputView = {
 
   readMoving() {
     MissionUtils.Console.readLine(MESSAGE.inputMove, (block) => {
-      Controller.addRound();
       new BridgeGame().move(block, this.savedBridge);
-      if (Controller.isBlockError(block)) return this.getMoving();
+      if (Controller.isBlockError(block)) return this.validateMoving();
       this.moveContinue(block);
     });
   },
 
-  getMoving() {
+  validateMoving() {
     try {
       throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.choose_UorD));
     } catch (err) {
@@ -73,7 +72,7 @@ const InputView = {
   readGameCommand() {
     MissionUtils.Console.readLine(MESSAGE.inputCommand, (command) => {
       if (Controller.isCommandError(command)) {
-        this.getCommand();
+        this.validateCommand();
       }
       if (!Controller.isCommandError(command)) {
         this.isRetry(command);
@@ -81,7 +80,7 @@ const InputView = {
     });
   },
 
-  getCommand() {
+  validateCommand() {
     try {
       throw new Error(MissionUtils.Console.print(ERROR_MESSAGE.choose_RorQ));
     } catch (err) {
