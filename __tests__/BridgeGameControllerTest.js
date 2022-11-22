@@ -72,7 +72,7 @@ describe('브릿지 게임 컨트롤러 테스트', () => {
   test('재입력 테스트', () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
-    mockQuestions(['2', '3', 'u', 'U', 'R', 'D', 'Q', 'U']);
+    mockQuestions(['2', '3', 'u', 'U', '1', 'R', 'D', 'Q', 'U']);
 
     const bridgeGameController = new BridgeGameController();
     bridgeGameController.start();
