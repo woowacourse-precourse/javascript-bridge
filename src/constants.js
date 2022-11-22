@@ -1,12 +1,11 @@
 const Tile = {
-  /** @type {string[]} */
-  ALL_TILES: [this.DOWN, this.UP],
-  SPAWNABLE_TILES: [this.DOWN, this.UP],
-
   UP: 'U',
   DOWN: 'D',
 };
 
+const SPAWNABLE_TILES = [Tile.DOWN, Tile.UP];
+
 module.exports = {
   Tile,
+  SPAWNABLE_TILES,
 };

@@ -1,4 +1,4 @@
-const { Tile } = require('./constants');
+const { SPAWNABLE_TILES } = require('./constants');
 const Bridge = require('./domains/Bridge');
 
 /**
@@ -13,7 +13,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const tiles = [...Array(size)]
       .map(() => generateRandomNumber())
-      .map((index) => Tile.SPAWNABLE_TILES[index]);
+      .map((index) => SPAWNABLE_TILES[index]);
     const bridge = new Bridge(tiles);
     return bridge;
   },
