@@ -17,16 +17,24 @@ class BridgeSize {
     this.#bridgeSize = bridgeSize;
   }
 
-  validate(bridgeSize) {
+  validateNumber(bridgeSize) {
     const isNumber = bridgeSize.match(/^[0-9]+$/g);
     if (!isNumber) {
       this.#close = true;
       this.#outputView.printError(ERROR_INPUT_NUMBER_LINE);
     }
+  }
+
+  validateRange(bridgeSize) {
     if (bridgeSize < BRIDGE_SIZE_RANGE_START || bridgeSize > BRIDGE_SIZE_RANGE_END) {
       this.#close = true;
       this.#outputView.printError(ERROR_INPUT_RANGE_LINE);
     }
+  }
+
+  validate(bridgeSize) {
+    this.validateNumber(bridgeSize);
+    this.validateRange(bridgeSize);
   }
 
   getClose() {
