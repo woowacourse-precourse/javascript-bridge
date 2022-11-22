@@ -31,7 +31,20 @@ const InputView = {
       const ckeckMove = new Validation();
       ckeckMove.checkMove(moveInputValue);
       moves += moveInputValue;
+      this.moveBridgeGame(bridge, moves)
     });
+  },
+
+  /**
+   * 사용자의 입력된 값에 따른 BridgeGame
+   */
+  moveBridgeGame(bridge, moves) {
+    const bridgeGame = new BridgeGame();
+    if(bridgeGame.move(bridge, moves)) {
+      
+    } else {
+
+    }
   },
 
   /**
