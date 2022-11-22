@@ -14,7 +14,7 @@ class GameManager {
     }
 
     startGame() {
-        Console.Print('다리 건너기 게임을 시작합니다.');
+        Print.StartMessage();
         this.setBridgeLength();
     }
 
@@ -32,12 +32,54 @@ class GameManager {
 
     generateBridge(userInput) {
         this.#bridgeGame.createBridge(userInput);
+        this.playRound();
     }
     
     playRound() {
-        // InputView.readMoving(this) 
+        InputView.readMoving(this.isValidDirection.bind(this));
     }
+
+    isValidDirection(userInput) {
+        this.directionChoiceInput = new DirectionChoiceInput(userInput);
+        if(!this.directionChoiceInput.check()){
+            return this.playRound();
+        }
+        return this.moveBridge(userInput);
+    }
+
+    moveBridge(userInput) {
+        const [correctChoice, UserIsWinnner] = this.#bridgeGame.move(userInput);
+        if(!correctChoice) return this.askRetry();
+        if(UserIsWinnner) return this.quitGame(true);
+        return this.playRound();
+    };
+
+    askRetry() {
+        InputView.readGameCommand(this.isValidCommand.bind(this));
+    }
+
+    isValidCommand(userInput) {
+        this.retryInput = new RetryInput(userInput);
+        if(!this.retryInput.check()){
+            return this.askRetry();
+        }
+        return this.Continue(userInput);
+    }
+
+    Continue(userCommand) {
+        if(this.#bridgeGame.retry(userCommand)){
+            return this.playRound();
+        }
+        return this.quitGame();
+    }
+
+    quitGame() {
+        const [userchoice, bridge, tryCount] = this.#bridgeGame.getGameInfo();
+        OutputView.printResult(userchoice, bridge, tryCount);
+    }
+
     
+
 }
 
 module.exports = GameManager;

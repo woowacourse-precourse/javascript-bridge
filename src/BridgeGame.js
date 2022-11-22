@@ -28,8 +28,8 @@ class BridgeGame {
    */
   move(userInput) {
     this.#roundInfo.push(userInput);
-    const [correctChoice, UserIsWin] = this.#roundProcess.checkProcess(this.#bridge, this.#roundInfo);
-    return [correctChoice, UserIsWin];
+    const [correctChoice, UserIsWinner] = this.#roundProcess.checkProcess(this.#bridge, this.#roundInfo);
+    return [correctChoice, UserIsWinner];
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
@@ -46,7 +46,7 @@ class BridgeGame {
   }
 
   getGameInfo() {
-    return [this.#bridge, this.#roundInfo, this.#tryCount];
+    return [this.#roundInfo, this.#bridge, this.#tryCount];
   }
 
   getRoundInfo() {

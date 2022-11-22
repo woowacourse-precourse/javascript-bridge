@@ -38,25 +38,25 @@ const OutputView = {
       this.makeEachSectionAtUpside(userInput[i], bridgeInfo[i], upside);
     }
     upside.pop();
-    this.CloseBracketTo(upside);
+    this.addCloseBracketTo(upside);
     return upside;
   },
   makeEachSectionAtUpside (userInput, bridgeInfo, upside){
     if(bridgeInfo === 'U') {
       this.printOMarkAtUpside(userInput, upside);
-      this.printXMarkAtDownside(userInput, upside);
+      this.printXMarkAtUpside(userInput, upside);
     }
     if(bridgeInfo === 'D') {
       this.printBlankAtUpside(userInput, upside);
     }
-    addDivisionTo(upside);
+    this.addDivisionTo(upside);
   },
   printOMarkAtUpside(userInput, upside){
     if(userInput === 'U'){
-      upside.push('0');
+      upside.push('O');
     }
   },
-  printXMarkAtDownside(userInput, upside){
+  printXMarkAtUpside(userInput, upside){
     if(userInput === 'D'){
       upside.push('X');
     }
@@ -79,12 +79,12 @@ const OutputView = {
   makeEachSectionAtDownside (userInput, bridgeInfo, downside) {
     if(bridgeInfo === 'D') {
       this.printOMarkAtDownside(userInput, downside);
-      this.printXMarkAtUpside(userInput, downside);
+      this.printXMarkAtDownside(userInput, downside);
     };
     if(bridgeInfo === 'U') {
       this.printBlankAtDownside(userInput, downside);
     };
-    addDivisionTo(downside);
+    this.addDivisionTo(downside);
   },
   printXMarkAtDownside(userInput, downside){
     if(userInput === 'U'){
@@ -93,7 +93,7 @@ const OutputView = {
   },
   printOMarkAtDownside(userInput, downside){
     if(userInput === 'D'){
-      downside.push('0');
+      downside.push('O');
     }
   },
   printBlankAtDownside(userInput, downside){
