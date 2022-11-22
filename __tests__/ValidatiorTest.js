@@ -18,4 +18,12 @@ describe('입력값 예외 처리 테스트', () => {
     runException(input, error);
   });
 
+  test.each([
+    [['3', 'U', 'D', 'D', 0], ERROR_MESSAGE.INPUT_STR],
+    [['3', 'U', 'D', 'D', ' Q'], ERROR_MESSAGE.INPUT_BLANK],
+    [['3', 'U', 'D', 'D', 'W'], ERROR_MESSAGE.COMMNAD],
+  ])('명령어가 재시도(R) 또는 종료 명령어(Q)가 아닌 경우 예외 처리한다.', (input, error) => {
+    mockRandoms([1, 0, 1]);
+    runException(input, error);
+  });
 });
