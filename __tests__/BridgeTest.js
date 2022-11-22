@@ -1,6 +1,5 @@
 const BridgeMaker = require('../src/BridgeMaker');
 const Bridge = require('../src/models/Bridge');
-const BridgeGame = require('../src/models/BridgeGame');
 
 const mockBridgeClass = (bridge) => {
   BridgeMaker.makeBridge = jest.fn();
