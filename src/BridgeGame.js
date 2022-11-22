@@ -42,7 +42,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(command, retryCallback, quitCallback) {
-    command === RETRY ? retryCallback() : quitCallback();
+    command === RETRY ? this.#selectRetry(retryCallback) : quitCallback();
   }
 
   #judgeMove(command, successCallback, failCallback) {
@@ -63,6 +63,11 @@ class BridgeGame {
 
   #moveFail(command, cb) {
     this.progress.fail(command);
+    cb();
+  }
+
+  #selectRetry(cb) {
+    this.#reInit();
     cb();
   }
 
