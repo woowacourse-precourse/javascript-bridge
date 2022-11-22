@@ -33,11 +33,11 @@ class BridgeGame {
     InputView.readBridgeSize(INPUT_MESSAGE.bridgeLength, (input) => {
       // InputValidator.bridgeSizeValidator(input);
 
-      try {
-        InputValidator.bridgeSizeValidator(input);
-      } catch (err) {
-        this.gameStart();
-      }
+      // try {
+      //   InputValidator.bridgeSizeValidator(input);
+      // } catch (err) {
+      //   this.gameStart();
+      // }
 
       this.#bridgeSize = parseInt(input);
       this.getInput(input);
@@ -55,11 +55,11 @@ class BridgeGame {
     InputView.readMoving(
       `${INPUT_MESSAGE.selectNextPosition} ${INPUT_MESSAGE.UpDown}`,
       (input) => {
-        try {
-          InputValidator.userMoveValidator(input);
-        } catch (err) {
-          this.userMoving();
-        }
+        // try {
+        //   InputValidator.userMoveValidator(input);
+        // } catch (err) {
+        //   this.userMoving();
+        // }
 
         this.move(input);
       }
@@ -121,7 +121,6 @@ class BridgeGame {
   }
 
   isCrossAllBridge() {
-    console.log(this.#bridgeSize, this.#userBridge.length);
     return this.#bridgeSize === this.#userBridge.length ? true : false;
   }
 
@@ -129,13 +128,13 @@ class BridgeGame {
     InputView.readGameCommand(
       `${INPUT_MESSAGE.retryOrEnd} ${INPUT_MESSAGE.retryEnd}`,
       (input) => {
-        try {
-          InputValidator.retryOrEndValidator(input);
-        } catch (err) {
-          throw new Error(ERROR_MESSAGE.betweenRange);
+        // try {
+        //   InputValidator.retryOrEndValidator(input);
+        // } catch (err) {
+        //   throw new Error(ERROR_MESSAGE.betweenRange);
 
-          this.retryOrEnd();
-        }
+        //   this.retryOrEnd();
+        // }
 
         input === STATE_CONSTANT.retry ? this.retry() : this.end();
       }

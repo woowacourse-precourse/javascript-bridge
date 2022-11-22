@@ -12,7 +12,7 @@ const InputView = {
    */
   readBridgeSize(message, callback) {
     Console.readLine(message, (size) => {
-      // InputValidator.bridgeSizeValidator(size);
+      InputValidator.bridgeSizeValidator(size);
       callback(size);
     });
   },
@@ -22,7 +22,7 @@ const InputView = {
    */
   readMoving(message, callback) {
     Console.readLine(message, (nextStep) => {
-      // InputValidator.userMoveValidator(nextStep);
+      InputValidator.userMoveValidator(nextStep);
       callback(nextStep);
     });
   },
@@ -32,7 +32,7 @@ const InputView = {
    */
   readGameCommand(message, callback) {
     Console.readLine(message, (retryOrEndInput) => {
-      // InputValidator.retryOrEndValidator(retryOrEndInput);
+      InputValidator.retryOrEndValidator(retryOrEndInput);
       callback(retryOrEndInput);
     });
   },

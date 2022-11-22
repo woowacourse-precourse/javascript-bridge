@@ -15,7 +15,7 @@ const InputValidator = {
 
   checkNumberRange(input, start, end) {
     if (input < start || input > end) {
-      throw new Error(ERROR_MESSAGE.betweenRange);
+      throw new Error();
     }
   },
 
