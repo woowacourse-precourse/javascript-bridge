@@ -18,8 +18,7 @@ const OutputView = {
     const [upside, downside] = bridgeGame.getStringMap();
 
     Console.print(upside);
-    Console.print(downside);
-    Console.print('');
+    Console.print(downside + '\n');
   },
 
   /**
