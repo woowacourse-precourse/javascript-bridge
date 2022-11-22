@@ -1,4 +1,4 @@
-const GameCommand = require('../../src/InputCheck/GameCommand');
+const GameCommand = require('../../src/inputCheck/GameCommand');
 
 describe('checkInput() ', () => {
   it('R 또는 Q를 입력하였을 경우 해당 값을 return', () => {

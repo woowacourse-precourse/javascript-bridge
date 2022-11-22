@@ -1,4 +1,4 @@
-const Base = require('../../src/InputCheck/Base');
+const Base = require('../../src/inputCheck/Base');
 
 describe('Base 클래스 테스트', () => {
   let base;

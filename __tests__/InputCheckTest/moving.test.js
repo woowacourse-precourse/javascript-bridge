@@ -1,4 +1,4 @@
-const Moving = require('../../src/InputCheck/Moving');
+const Moving = require('../../src/inputCheck/Moving');
 
 describe('checkInput', () => {
   it('U 또는 D를 입력하였을 경우 입력할 문자를 출력', () => {

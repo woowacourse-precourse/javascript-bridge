@@ -1,4 +1,4 @@
-const BridgeSize = require('../../src/InputCheck/BridgeSize');
+const BridgeSize = require('../../src/inputCheck/BridgeSize');
 describe('checkInput ', () => {
   it('3~20사이의 숫자를 입력시 입력 숫자 return', () => {
     // given
