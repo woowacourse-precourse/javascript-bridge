@@ -30,37 +30,45 @@ class App {
   moveUser(upOrDown) {
     this.bridgeGame.move(upOrDown);
     OutputView.printMap(this.bridgeGame.moveTracking());
-    if (this.bridgeGame.walkable()) {
-      this.requestMove();
-    } else {
-      this.requestContinue();
-    }
-    if (this.bridgeGame.isWin()) {
-      const uesrfootprint = this.bridgeGame.moveTracking();
-      OutputView.printResult(uesrfootprint, this.bridgeGame.isWin(), this.bridgeGame.tryCount);
-      Console.close();
-    } else {
-      this.requestMove();
-    }
+    const walkable = this.bridgeGame.walkable();
+    this.gameAnalysis(walkable);
   }
 
-  requestContinue() {
+  gameAnalysis(walkable) {
+    if (walkable) {
+      if (this.bridgeGame.isWin()) {
+        this.gameEnd();
+        return;
+      }
+      this.requestMove();
+      return;
+    }
+    this.fail();
+    return;
+  }
+
+  fail() {
     InputView.readRetryOrQuit.call(this, this.retryOrQuit);
   }
 
   retryOrQuit(userChoice) {
     if (userChoice === 'R') {
-      this.bridgeGame.retry();
-      this.requestMove();
+      this.restartGame();
     }
     if (userChoice === 'Q') {
       this.gameEnd();
     }
   }
 
+  restartGame() {
+    this.bridgeGame.retry();
+    this.requestMove();
+  }
+
   gameEnd() {
     const uesrfootprint = this.bridgeGame.moveTracking();
     OutputView.printResult(uesrfootprint, this.bridgeGame.isWin(), this.bridgeGame.tryCount);
+    Console.close();
   }
 }
 
