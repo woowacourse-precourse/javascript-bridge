@@ -10,6 +10,9 @@ class Controller {
   constructor(){
     this.#answerBirdgeList;
     this.bridgeGame = new BridgeGame();
+    this.showResult;
+    this.SUCCESS = "성공";
+    this.FAILURE = "실패";
   }
   start(){
     OutputView.printStart();
@@ -34,11 +37,10 @@ class Controller {
   compare(moveInput){
     const compareMove = this.bridgeGame.move(moveInput,this.#answerBirdgeList);
 
-    
-    OutputView.printMap(this.bridgeGame.upList,this.bridgeGame.downList);
-    if(compareMove === 'END') this.finalResult();
+    this.showResult = OutputView.printMap(this.bridgeGame.upList,this.bridgeGame.downList);
+    if(compareMove === 'END') this.finalResult(this.SUCCESS)
     else if(compareMove) this.getMove();
-    if(!compareMove) this.getRetryOrStop();
+    else if(!compareMove) this.getRetryOrStop();
   }
   
 
@@ -51,11 +53,17 @@ class Controller {
       this.bridgeGame.retry()
       this.getMove()
     }
-    if(reTryOrStop === "Q") this.GameStop()
+    if(reTryOrStop === "Q") {
+      this.finalResult(this.FAILURE)
+      this.GameStop();
+    }
+    
   }
-  
-  finalResult(){
-    MissionUtils.Console.close();
+
+  finalResult(successOrFailure){
+    OutputView.printResult(this.showResult,successOrFailure,this.bridgeGame.retryCount)
+    this.GameStop();
+    
   }
   GameStop(){
     MissionUtils.Console.close();
