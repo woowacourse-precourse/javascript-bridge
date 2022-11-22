@@ -12,13 +12,19 @@ const {
     EMPTY,
     RIGHT,
     WRONG,
+    START_GAME,
+    RESULT_COMMENT,
+    END_COMMENT,
+    COUNT_COMMENT,
+    SUCCESS,
+    FAIL,
   },
 } = require("./utils/constant");
 const { isZero } = require("./utils/utilityFuncions");
 
 const OutputView = {
   printInitialComment() {
-    Console.print("다리 건너기 게임을 시작합니다.\n");
+    Console.print(START_GAME);
   },
 
   printMap(inputHistory, bridge, bridgeOpposition) {
@@ -34,17 +40,14 @@ const OutputView = {
   },
 
   printResult({ isSuccess, tryCount }) {
-    Console.print(
-      `\n게임 성공 여부: ${
-        isSuccess ? "성공" : "실패"
-      }\n총 시도한 횟수: ${tryCount}`,
-    );
+    Console.print(`${RESULT_COMMENT}: ${isSuccess ? SUCCESS : FAIL}`);
+    Console.print(`${COUNT_COMMENT}: ${tryCount}`);
 
     Console.close();
   },
 
   printGameEnd() {
-    Console.print("최종 게임 결과");
+    Console.print(END_COMMENT);
   },
 
   printUserInput(inputHistory, bridge) {
