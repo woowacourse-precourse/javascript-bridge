@@ -59,7 +59,7 @@ const OutputView = {
   },
 
   printResult(playCount, bridgeStatus, jumpHistory) {
-    MissionUtils.Console.print("최종 게임 결과\n");
+    MissionUtils.Console.print("\n최종 게임 결과\n");
     this.printMap(bridgeStatus, jumpHistory);
     const RESULT_INDEX = this.calculateResult(bridgeStatus, jumpHistory);
     MissionUtils.Console.print("\n");
