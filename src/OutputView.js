@@ -65,7 +65,7 @@ const OutputView = {
   },
   printBlankAtUpside(userInput, upside){
     if(userInput === 'D'){
-      upside.push('\u00A0');
+      upside.push(' ');
     }
   },
   generateDownside(userInput, bridgeInfo) {
@@ -100,7 +100,7 @@ const OutputView = {
   },
   printBlankAtDownside(userInput, downside){
     if(userInput === 'U'){
-      downside.push('\u00A0');
+      downside.push(' ');
     }
   },
   addCloseBracketTo(bridge){

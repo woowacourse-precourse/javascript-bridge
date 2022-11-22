@@ -128,112 +128,27 @@
 19. feat(roundProcess) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
 ## 프로그래밍 요구사항
 
-- [ ] package.json을 변경하지 않는다. 
-- [ ] JS code 컨벤션을 지키며 프로그래밍 한다.
-- [ ] 프로그램 구현이 완료되면 ApplicationText의 모든 테스트가 성공해야 한다.
-- [ ] 파일, 패키지 이름을 수정하거나 이동하지 않는다. (별도의 요구사항이 없다면)
-- [ ] 인덴트의 depth는 2까지만 허용한다.
-- [ ] 함수는 한가지의 일만 담당하도록 구현한다.
-- [ ] Jest를 사용한 테스트 코드를 작성한다.
-- [ ] else를 지양한다.
-- [ ] 도메인 로직에 단위 테스트를 구현한다.UI 로직에 대한 단위 테스트는 제외한다.
-- [ ] 핵심 로직을 구현하는 코드와 UI를 담당하는 코드는 구분한다.
-- [ ] 함수의 길이가 10라인을 넘어가지 않도록 구현한다.
-- [ ] 메서드의 파라미터는 최대 3개까지만 허용한다.
-- [ ] 예시로 주어진 `InputView`, `OutputView`, `BridgeGame`, `BridgeMaker` 클래스(또는 객체)의 요구사항을 참고하여 구현한다.
-
-### 추가된 요구 사항
-
-- 함수(또는 메서드)의 길이가 10라인을 넘어가지 않도록 구현한다.
-  - 함수(또는 메서드)가 한 가지 일만 잘하도록 구현한다.
-- 메서드의 파라미터 개수는 최대 3개까지만 허용한다.
-- 아래 있는 `InputView`, `OutputView`, `BridgeGame`, `BridgeMaker` 클래스(또는 객체)의 요구사항을 참고하여 구현한다.
-  - 각 클래스(또는 객체)의 제약 사항은 아래 클래스별 세부 설명을 참고한다.
-  - 이외 필요한 클래스(또는 객체)와 메서드는 자유롭게 구현할 수 있다.
-  - `InputView` 에서만 `MissionUtils`의 `Console.readLine()` 을 이용해 사용자의 입력을 받을 수 있다.
-  - `BridgeGame` 클래스에서 `InputView`, `OutputView` 를 사용하지 않는다.
-
-### InputView 객체
-
-- 제공된 `InputView` 객체를 활용해 구현해야 한다.
-- `InputView`의 파일 경로는 변경할 수 있다.
-- `InputView`의 메서드의 인자는 변경할 수 있다.
-- 사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
-
-```javascript
-const InputView = {
-  readBridgeSize() {},
-
-  readMoving() {},
-
-  readGameCommand() {},
-};
-```
-
-### OutputView 객체
-
-- 제공된 `OutputView` 객체를 활용해 구현해야 한다.
-- `OutputView`의 파일 경로는 변경할 수 있다.
-- `OutputView`의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
-- 값 출력을 위해 필요한 메서드를 추가할 수 있다.
-
-```javascript
-const OutputView = {
-  printMap() {},
-
-  printResult() {},
-};
-```
-
-### BridgeGame 클래스
-
-- 제공된 `BridgeGame` 클래스를 활용해 구현해야 한다.
-- `BridgeGame`에 필드(인스턴스 변수)를 추가할 수 있다.
-- `BridgeGame`의 파일 경로는 변경할 수 있다.
-- `BridgeGame`의 메서드의 이름은 변경할 수 없고, 인자는 필요에 따라 추가하거나 변경할 수 있다.
-- 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
-
-```javascript
-class BridgeGame {
-  move() {}
-
-  retry() {}
-}
-```
-
-### BridgeMaker 객체
-
-- 제공된 `BridgeMaker` 객체를 활용해 구현해야 한다.
-- `BridgeMaker`에 프로퍼티를 추가할 수 없다.
-- `BridgeMaker`의 파일 경로는 변경할 수 없다.
-- `BridgeMaker`의 메서드의 시그니처(인자, 이름)와 반환 타입은 변경할 수 없다.
-
-```javascript
-const BridgeMaker = {
-  makeBridge(size, generateRandomNumber) {},
-};
-```
-
-### BridgeRandomNumberGenerator 객체
-
-- Random 값 추출은 제공된 `BridgeRandomNumberGenerator`의 `generate()`를 활용한다.
-- `BridgeRandomNumberGenerator`의 코드는 변경할 수 없다.
-
-#### 사용 예시
-
-- 다리 칸을 생성하기 위한 Random 값은 아래와 같이 추출한다.
-
-```javascript
-const number = generateRandomNumber();
-```
+- [x] package.json을 변경하지 않는다. 
+- [x] JS code 컨벤션을 지키며 프로그래밍 한다.
+- [] 프로그램 구현이 완료되면 ApplicationText의 모든 테스트가 성공해야 한다.
+- [x] 파일, 패키지 이름을 수정하거나 이동하지 않는다. (별도의 요구사항이 없다면)
+- [x] 인덴트의 depth는 2까지만 허용한다.
+- [x] 함수는 한가지의 일만 담당하도록 구현한다.
+- [x] Jest를 사용한 테스트 코드를 작성한다.
+- [x] else를 지양한다.
+- [x] 도메인 로직에 단위 테스트를 구현한다.UI 로직에 대한 단위 테스트는 제외한다.
+- [x] 핵심 로직을 구현하는 코드와 UI를 담당하는 코드는 구분한다.
+- [x] 함수의 길이가 10라인을 넘어가지 않도록 구현한다.
+- [x] 메서드의 파라미터는 최대 3개까지만 허용한다.
+- [x] 예시로 주어진 `InputView`, `OutputView`, `BridgeGame`, `BridgeMaker` 클래스(또는 객체)의 요구사항을 참고하여 구현한다.
 ## 공통 피드백 고려사항
 
-- [ ] 함수 메서드 라인 제한을 준수했는가?
-- [ ] 예외 상황에 대해 철저히 고민하였는가?
-- [ ] 비즈니스 로직 / UI 로직을 분리하지 않은 클래스가 있는가?
-- [ ] 필드를 private class field로 구현했는가? 
-- [ ] 객체를 객체스럽게 사용하였는가?(접근자 프로퍼티 사용을 지양하였는가?)
-- [ ] 필드에 중복이 있거나, 불필요한 필드가 없는가?
+- [x] 함수 메서드 라인 제한을 준수했는가?
+- [x] 예외 상황에 대해 철저히 고민하였는가?
+- [x] 비즈니스 로직 / UI 로직을 분리하지 않은 클래스가 있는가?
+- [x] 필드를 private class field로 구현했는가? 
+- [x] 객체를 객체스럽게 사용하였는가?(접근자 프로퍼티 사용을 지양하였는가?)
+- [x] 필드에 중복이 있거나, 불필요한 필드가 없는가?
 - [ ] 테스트 코드도 리팩토링, 개선할 수 있다면 개선하였는가?
-- [ ] 테스트를 위한 편의 메서드를 구현 코드에 구현하진 않았는가?
+- [x] 테스트를 위한 편의 메서드를 구현 코드에 구현하진 않았는가?
 - [ ] 단위테스트가 어려운 코드는 클래스 외부로 분리하였는가?
