@@ -2,12 +2,12 @@ const { printMessage } = require('./Utils/ConsoleUtils.js');
 const { isRetry, isQuit } = require('./Utils/CommandUtils.js');
 const BridgeSize = require('./Validate/BridgeSize.js');
 const BridgeDirection = require('./Validate/BridgeDirection.js');
-const InputView = require('./View/InputView.js');
-const OutputView = require('./View/OutputView.js');
-const BridgeGame = require('./BridgeGame.js');
 const BridgeCommand = require('./Validate/BridgeCommand.js');
+const BridgeGame = require('./BridgeGame.js');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator.js');
+const InputView = require('./View/InputView.js');
+const OutputView = require('./View/OutputView.js');
 
 class Controller {
   constructor() {
