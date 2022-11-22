@@ -47,11 +47,11 @@ const InputView = {
    */
   readMoveResult(moveResult) {
     switch (moveResult) {
-      case 'success':
+      case Constants.Result.success:
         return InputView.readMoving();
-      case 'fail':
+      case Constants.Result.fail:
         return InputView.readGameCommand();
-      case 'done':
+      case Constants.Result.done:
         return OutputView.printResult(game.getMap(), game.getTry(), '성공');
     }
   },

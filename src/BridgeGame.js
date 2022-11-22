@@ -1,3 +1,5 @@
+const Constants = require('./Constants');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
 - 제공된 `BridgeGame` 클래스를 활용해 구현해야 한다.
@@ -21,12 +23,13 @@ class BridgeGame {
   }
 
   move(movement) {
-    const result = this.#bridge[this.#process] === movement ? 'success' : 'fail';
+    const result =
+      this.#bridge[this.#process] === movement ? Constants.Result.success : Constants.Result.fail;
     this.addMap(movement, result);
     this.#process++;
 
     if (this.#process === this.#bridge.length) {
-      return result === 'fail' ? result : 'done';
+      return result === Constants.Result.fail ? result : Constants.Result.done;
     }
     return result;
   }
@@ -41,8 +44,7 @@ class BridgeGame {
   }
 
   addMap(movement, result) {
-    const sign = result === 'success' ? 'O' : 'X';
-
+    const sign = result === Constants.Result.success ? 'O' : 'X';
     if (movement === 'U') {
       this.#map['U'].push(sign);
       this.#map['D'].push(' ');
