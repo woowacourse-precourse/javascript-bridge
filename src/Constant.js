@@ -31,11 +31,6 @@ const RESULT_KOREAN = {
   FAIL: '실패'
 }
 
-const RESULT_ENGLISH = {
-  SUCCESS: 'success',
-  FAIL: 'fail'
-}
-
 const NEXT_STEP = {
   MAKE_BRIDGE: 'MAKE_BRIDGE',
   END: 'END',
@@ -56,7 +51,6 @@ module.exports = {
   UP_OR_DOWN,
   PRINT_MAP,
   RESULT_KOREAN,
-  RESULT_ENGLISH,
   NEXT_STEP,
   ERROR_MESSAGE
 }
