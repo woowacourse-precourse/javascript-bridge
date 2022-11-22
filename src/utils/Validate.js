@@ -11,6 +11,20 @@ const Validate = {
     return false;
   },
 
+  validateMove(userInput) {
+    if (this.isMoveCommand(userInput)) {
+      return true;
+    }
+    return false;
+  },
+
+  isMoveCommand(userInput) {
+    if (userInput === BRIDGE.UP || userInput === BRIDGE.DOWN) {
+      return true;
+    }
+    return false;
+  },
+
   isBridgeLengthNum(userInput) {
     if (isNaN(userInput) || Number(userInput) % 1 !== 0) {
       return false;
