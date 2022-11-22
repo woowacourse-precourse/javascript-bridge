@@ -20,10 +20,10 @@ class App {
   }
 
   play() {
-    this.outputView.print("다리 건너기 게임을 시작합니다.");
+    this.outputView.print("다리 건너기 게임을 시작합니다\n");
     this.inputView.readBridgeSize(
       this.playCallback.bind(this),
-      "다리의 길이를 입력해주세요. "
+      "다리의 길이를 입력해주세요."
     );
   }
 
@@ -48,7 +48,7 @@ class App {
 
     this.inputView.readMoving(
       this.upDownCallback.bind(this),
-      "이동할 칸을 선택해주세요. (위: U, 아래: D) "
+      "이동할 칸을 선택해주세요. (위: U, 아래: D)"
     );
   }
 

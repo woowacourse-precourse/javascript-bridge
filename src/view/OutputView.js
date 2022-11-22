@@ -8,16 +8,17 @@ const OutputView = {
   printMap(nowBridge) {
     const [upBridge, downBridge] = nowBridge;
     MissionUtils.Console.print(
-      `[ ${upBridge.join(" | ")} ]
-[ ${downBridge.join(" | ")} ]`
+      `
+ [ ${upBridge.join(" | ")} ]
+ [ ${downBridge.join(" | ")} ]`
     );
   },
 
   printResult(nowBridge, isSuccess, playCount) {
-    this.print("최종 게임 결과");
+    this.print("\n최종 게임 결과");
     this.printMap(nowBridge);
-    this.print("게임 성공 여부:" + isSuccess);
-    this.print("총 시도된 횟수:" + playCount);
+    this.print("\n게임 성공 여부: " + isSuccess);
+    this.print("\n총 시도한 횟수: " + playCount);
   },
 };
 
