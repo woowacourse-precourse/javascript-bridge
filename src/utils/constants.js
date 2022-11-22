@@ -7,4 +7,11 @@ const ERROR = {
   WRONG_COMMAND: `${ERROR_PREFIX} 재시작/종료는 R 도는 Q로 입력해야 합니다.`,
 };
 
-module.exports = { ERROR };
+const COMMAND = {
+  UP: 'U',
+  DOWN: 'D',
+  RETRY: 'R',
+  QUIT: 'Q',
+};
+
+module.exports = { ERROR, COMMAND };

@@ -1,3 +1,5 @@
+const { COMMAND } = require('../src/utils/constants');
+
 const convertBridge = (bridge, user, upOrDown) => {
   const convertedBridge = user.map((status, i) => {
     if (status !== upOrDown) return ' ';
@@ -10,8 +12,8 @@ const convertBridge = (bridge, user, upOrDown) => {
 
 const createCurrentBridge = (bridge, user) => {
   const currentBridge = [];
-  currentBridge.push(convertBridge(bridge, user, 'U'));
-  currentBridge.push(convertBridge(bridge, user, 'D'));
+  currentBridge.push(convertBridge(bridge, user, COMMAND.UP));
+  currentBridge.push(convertBridge(bridge, user, COMMAND.DOWN));
   return currentBridge;
 };
 
