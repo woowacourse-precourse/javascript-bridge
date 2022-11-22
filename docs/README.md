@@ -38,6 +38,8 @@
 
 -   [x] 다리를 끝까지 건너면 게임이 `종료`된다.
 
+---
+
 #### BridgeGame 함수 역할
 
 -   move() `return type: boolean`
