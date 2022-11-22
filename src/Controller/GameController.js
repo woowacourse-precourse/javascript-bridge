@@ -1,9 +1,9 @@
-const InputView = require('../View/InputView');
-const OutputView = require('../View/OutputView');
-const BridgeGame = require('../Model/BridgeGame');
 const Move = require('../Model/Move');
 const Bridge = require('../Model/Bridge');
 const Validate = require('../components/Validate');
+const BridgeGame = require('../Model/BridgeGame');
+const InputView = require('../View/InputView');
+const OutputView = require('../View/OutputView');
 
 class GameController {
   #bridgeGame;

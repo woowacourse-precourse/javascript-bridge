@@ -1,8 +1,7 @@
 const App = require('../src/App');
-const BridgeGame = require('../src/Model/BridgeGame');
 const MissionUtils = require('@woowacourse/mission-utils');
+const BridgeGame = require('../src/Model/BridgeGame');
 const SYSTEM_MESSAGE = require('../src/constants/system message');
-const Path = require('../src/Model/Path');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -20,14 +19,14 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickNumberInRange);
 };
 
-describe('다리 테스트', () => {
-  test('이동 테스트', () => {
+describe('BridgeGame 테스트', () => {
+  test('게임 결과 메시지 확인', () => {
     mockRandoms([1, 0, 1]);
-    mockQuestions(['3', 'U', 'D', 'U']);
+    mockQuestions(['3', 'U', 'D', 'D']);
 
     const app = new App();
     app.play();
 
-    expect(BridgeGame.isPassed()).toEqual(true);
+    expect(BridgeGame.showSucceedMessage()).toEqual(SYSTEM_MESSAGE.FAIL);
   });
 });

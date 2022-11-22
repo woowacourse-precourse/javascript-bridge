@@ -4,8 +4,8 @@ const { generate } = require('../BridgeRandomNumberGenerator');
 class Path {
   static #path;
 
-  static getPathSize() {
-    return this.#path.length;
+  static getPath() {
+    return this.#path;
   }
 
   static positionOf(countIndex) {

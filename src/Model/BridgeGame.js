@@ -41,7 +41,7 @@ class BridgeGame {
   }
 
   static isPassed() {
-    const isArrived = Move.getCount() === Path.getPathSize();
+    const isArrived = Move.getCount() === Path.getPath().length;
     return !!(isArrived && Move.canMove());
   }
 

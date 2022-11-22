@@ -1,8 +1,6 @@
 const App = require('../src/App');
-const BridgeGame = require('../src/Model/BridgeGame');
-const MissionUtils = require('@woowacourse/mission-utils');
-const SYSTEM_MESSAGE = require('../src/constants/system message');
 const Path = require('../src/Model/Path');
+const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -20,14 +18,17 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickNumberInRange);
 };
 
-describe('다리 테스트', () => {
-  test('이동 테스트', () => {
-    mockRandoms([1, 0, 1]);
-    mockQuestions(['3', 'U', 'D', 'U']);
+describe('올바른 경로 테스트', () => {
+  test('경로의 특정 위치값 반환 테스트', () => {
+    mockRandoms([1, 0, 1, 0, 1]);
+    mockQuestions(['3', 'U', 'D', 'U', 'D', 'U']);
 
     const app = new App();
     app.play();
 
-    expect(BridgeGame.isPassed()).toEqual(true);
+    const path = Path.getPath();
+    const index = 3;
+
+    expect(path[index]).toEqual(Path.positionOf(index));
   });
 });
