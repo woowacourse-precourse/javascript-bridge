@@ -16,7 +16,6 @@ class App {
   }
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
-      const { errorMsg } = Validation.validateBridgeSize(size);
       try {
         Validation.validateBridgeSize(size);
       } catch (error) {
@@ -50,7 +49,6 @@ class App {
   }
   requestRestartOrQuit() {
     InputView.readGameCommand((commandOption) => {
-      const { errorMsg } = Validation.validateCommandOption(commandOption);
       try {
         Validation.validateCommandOption(commandOption);
       } catch {
