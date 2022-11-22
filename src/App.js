@@ -25,7 +25,17 @@ class App {
       InputView.readGameCommand((input) => this.regame(input));
       return;
     }
-    this.temp();
+  }
+
+  regame(input) {
+    console.log(input);
+    if (input === "R") {
+      this.#userGame.retry();
+      this.moveUserBridge();
+    } else if (input === "Q") {
+      OutputView.printResult(this.#userGame);
+      return;
+    }
   }
 }
 
