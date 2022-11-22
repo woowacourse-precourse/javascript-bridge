@@ -453,3 +453,52 @@ classDiagram
     ],
     ```
   </details>
+
+## 테스트 커버리지
+
+jest 의 커버리지 기능을 사용하였습니다.
+
+```
+npx jest --coverage
+```
+
+<details>
+<summary>자세히 보기</summary>
+
+```
+---------------------------------|---------|----------|---------|---------|-------------------
+File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------------------|---------|----------|---------|---------|-------------------
+All files                        |      98 |    87.32 |   97.46 |   98.31 |                   
+ src                             |     100 |      100 |     100 |     100 |                   
+  App.js                         |     100 |      100 |     100 |     100 |                   
+  BridgeMaker.js                 |     100 |      100 |     100 |     100 |                   
+  BridgeRandomNumberGenerator.js |     100 |      100 |     100 |     100 | 
+  constants.js                   |     100 |      100 |     100 |     100 | 
+ src/domains                     |     100 |      100 |     100 |     100 | 
+  Bridge.js                      |     100 |      100 |     100 |     100 | 
+  BridgeGame.js                  |     100 |      100 |     100 |     100 | 
+  Moving.js                      |     100 |      100 |     100 |     100 | 
+  Player.js                      |     100 |      100 |     100 |     100 | 
+ src/errors                      |     100 |      100 |     100 |     100 | 
+  AppError.js                    |     100 |      100 |     100 |     100 | 
+  BridgeError.js                 |     100 |      100 |     100 |     100 | 
+  ValidationError.js             |     100 |      100 |     100 |     100 | 
+ src/intl                        |     100 |      100 |     100 |     100 | 
+  Messages.js                    |     100 |      100 |     100 |     100 | 
+ src/utils                       |   96.77 |    91.66 |     100 |     100 | 
+  Routine.js                     |   96.15 |     87.5 |     100 |     100 | 69
+  deepFreeze.js                  |     100 |      100 |     100 |     100 | 
+ src/validators                  |   94.82 |    83.72 |      92 |   94.54 |
+  ArrayValidator.js              |     100 |      100 |     100 |     100 |
+  NumberValidator.js             |      90 |    82.35 |      75 |      90 | 48
+  StringValidator.js             |     100 |      100 |     100 |     100 |
+  Validator.js                   |   94.44 |    76.47 |     100 |   93.75 | 30
+  index.js                       |    92.3 |      100 |   85.71 |   91.66 | 18
+ src/views                       |   98.07 |       90 |     100 |      98 |
+  InputView.js                   |   96.29 |       75 |     100 |   96.29 | 41
+  OutputView.js                  |     100 |      100 |     100 |     100 |
+---------------------------------|---------|----------|---------|---------|-------------------
+```
+
+</details>
