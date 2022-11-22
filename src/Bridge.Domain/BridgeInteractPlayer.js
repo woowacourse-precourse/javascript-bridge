@@ -57,17 +57,9 @@ class BridgeInteractPlayer {
   }
 
   playerGoBridgeNext(status) {
-    switch (status) {
-      case GAME.STATUS.PLAY:
-        this.playerInputBridgeDirection();
-        break;
-      case GAME.STATUS.FAIL:
-        this.playerInputCommand();
-        break;
-      case GAME.STATUS.END:
-        this.playerEndThisGame(GAME.RESULT.WIN);
-        break;
-    }
+    if (status === GAME.STATUS.PLAY) this.playerInputBridgeDirection();
+    if (status === GAME.STATUS.FAIL) this.playerInputCommand();
+    if (status === GAME.STATUS.END) this.playerEndThisGame(GAME.RESULT.WIN);
   }
 
   playerInputCommand() {
@@ -85,9 +77,7 @@ class BridgeInteractPlayer {
 
   playerDicisionRetry(command) {
     if (command === BRIDGE.GAME.RETRY) {
-      this.#player.bridgeGameRetry();
-      this.#bridgeGame.retry();
-      this.playerInputBridgeDirection();
+      this.bridgeGameRetry();
     }
     if (command === BRIDGE.GAME.END) {
       this.playerEndThisGame(
@@ -95,6 +85,12 @@ class BridgeInteractPlayer {
         GAME.RESULT.FAIL
       );
     }
+  }
+
+  bridgeGameRetry() {
+    this.#player.bridgeGameRetry();
+    this.#bridgeGame.retry();
+    this.playerInputBridgeDirection();
   }
 
   playerEndThisGame(isWin) {
