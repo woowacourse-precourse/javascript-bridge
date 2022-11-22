@@ -29,7 +29,8 @@ class BridgeGame {
   }
 
   /**
-   * @returns {object} 윗길, 아랫길로 각각 파싱한 값을 반환
+   * 윗길, 아랫길로 각각 정해진 형식에 맞게 파싱한 값을 반환
+   * @returns {object}
    */
   getRoadStates() {
     return {
@@ -39,8 +40,9 @@ class BridgeGame {
   }
 
   /**
+   * 해당 길의 기록을 정해진 형식에 맞게 반환 (ex: "[ O |   | X ]")
    * @param {string} road 윗길or아랫길 ("U" or "D")
-   * @returns {string} 해당 길의 기록을 정해진 형식에 맞게 반환 (ex: "[ O |   | X ]")
+   * @returns {string}
    */
   #getRoadState(road) {
     return (
@@ -51,8 +53,9 @@ class BridgeGame {
   }
 
   /**
+   * 해당 길의 기록을 반환 (ex: ["O", " ", "X"])
    * @param {string} road 윗길or아랫길 ("U" or "D")
-   * @returns {string[]} 해당 길의 기록을 반환 (ex: ["O", " ", "X"])
+   * @returns {string[]}
    */
   #parseMovedSpaceToRoadLog(road) {
     return this.#movedSpace.map((space, index) => {
@@ -62,6 +65,11 @@ class BridgeGame {
     });
   }
 
+  /**
+   * 마지막 이동이 성공인지 실패인지 알려주는 메서드
+   * @param {number} index 검사할 요소의 인덱스
+   * @returns {boolean}
+   */
   #isLastMoveFailed(index) {
     if (index !== this.#movedSpace.length - 1) return false;
     return !this.isSuccessMoved();
