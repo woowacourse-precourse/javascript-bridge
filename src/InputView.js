@@ -5,7 +5,7 @@ const BridgeMaker = require('./BridgeMaker');
 const makeBridge = BridgeMaker.makeBridge;
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const generate = BridgeRandomNumberGenerator.generate;
-const validator = require('./validators');
+const validator = require('./InputValidators');
 
 const InputView = {
   readBridgeSize() {

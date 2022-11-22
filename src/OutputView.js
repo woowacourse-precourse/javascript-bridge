@@ -1,23 +1,14 @@
 const { Console } = require('@woowacourse/mission-utils');
+const BlockProcessor = require('./BlockProcessor');
 
 const OutputView = {
   printStart() {
     Console.print('다리 건너기 게임을 시작합니다.');
   },
 
-  processBlock(block) {
-    let mappedBlock = block.map((value, index) => {
-      if (index !== block.length - 1) {
-        value += ' | ';
-      }
-      return value;
-    });
-    return mappedBlock.join('');
-  },
-
   printMap(UBlock, DBlock) {
-    const processedUBlock = this.processBlock(UBlock);
-    const processedDBlock = this.processBlock(DBlock);
+    const processedUBlock = BlockProcessor(UBlock);
+    const processedDBlock = BlockProcessor(DBlock);
 
     Console.print(`[ ${processedUBlock} ]`);
     Console.print(`[ ${processedDBlock} ]`);
