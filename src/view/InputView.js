@@ -1,9 +1,8 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-// const { makeBridge } = require('../BridgeMaker');
+const { Console } = require('@woowacourse/mission-utils');
 const Message = require('../constant/PrintMessage');
-// const BridgeGame = require('../controller/BridgeGame');
 const BridgeSize = require('../model/BridgeSize');
 const Direction = require('../model/Direction');
+const Retry = require('../model/Retry');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -14,11 +13,11 @@ const InputView = {
    */
   readBridgeSize() {
     let size = 0;
-    MissionUtils.Console.readLine(Message.INPUT_LENGTH, answer => {
+    Console.readLine(Message.INPUT_LENGTH, answer => {
       try {
         const bridgeSize = new BridgeSize(Number(answer));
       } catch (error) {
-        MissionUtils.Console.print(error.message);
+        Console.print(error.message);
         this.readBridgeSize();
       }
       size = answer;
@@ -31,12 +30,12 @@ const InputView = {
    */
   readMoving() {
     let direction = '';
-    MissionUtils.Console.readLine(Message.MOVE, answer => {
+    Console.readLine(Message.MOVE, answer => {
       try {
         const orderDirection = new Direction(answer);
       } catch (error) {
-        MissionUtils.Console.print(error.message);
-        this.readBridgeSize();
+        Console.print(error.message);
+        this.readMoving();
       }
       direction = answer;
     });
