@@ -3,6 +3,7 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
 const Validation = require("./Validation");
+const { MOVE, MAP, STATUS, COMMAND } = require("./constants/Constants");
 
 class GameController {
 
@@ -65,7 +66,7 @@ class GameController {
 
   makeMap(usersMove) {
     const mapSize = usersMove.length;
-    let upMap = "", downMap = "";
+    let upMap = MAP.EMPTY, downMap = MAP.EMPTY;
 
     for (let mapIdx = 0; mapIdx < mapSize; mapIdx++) {
       const nowMove = usersMove[mapIdx];
@@ -81,30 +82,30 @@ class GameController {
   }
 
   makeUpBridge(nowMove) {
-    if (nowMove[0] === 'U') {
-      if (nowMove[1] === 'O') {
-        return 'O';
+    if (nowMove[0] === MOVE.UP) {
+      if (nowMove[1] === MOVE.CAN) {
+        return MAP.SUCCESS;
       }
-      return 'X';
+      return MAP.FAIL;
     }
-    return ' ';
+    return MAP.NOT_RELEVANT;
   }
 
   makeDownBridge(nowMove) {
-    if (nowMove[0] === 'D') {
-      if (nowMove[1] === 'O') {
-        return 'O';
+    if (nowMove[0] === MOVE.DOWN) {
+      if (nowMove[1] === MOVE.CAN) {
+        return MAP.SUCCESS;
       }
-      return 'X';
+      return MAP.FAIL;
     }
-    return ' ';
+    return MAP.NOT_RELEVANT;
   }
 
   checkCanMoveNextStep() {
     const status = this.BridgeGame.checkCurrentStatus()
 
-    if (status === "gameOver") return this.getRetryOrEnd();
-    if (status === "arrival") return this.end();
+    if (status === STATUS.GAMEOVER) return this.getRetryOrEnd();
+    if (status === STATUS.ARRIVAL) return this.end();
 
     return this.getMoving();
   }
@@ -121,7 +122,7 @@ class GameController {
       return this.getRetryOrEnd();
     }
 
-    (inputRetryOrEnd === 'R') ? this.retry() : this.end();
+    (inputRetryOrEnd === COMMAND.RETRY) ? this.retry() : this.end();
   }
 
   retry() {

@@ -1,5 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { MOVE, STATUS } = require("./constants/Constants");
 
 class BridgeGame {
   #bridge;
@@ -22,9 +23,9 @@ class BridgeGame {
 
   move(inputMoving) {
     if (this.#bridge[this.#moveCount] === inputMoving) {
-      this.#usersMove.push([inputMoving, 'O']);
+      this.#usersMove.push([inputMoving, MOVE.CAN]);
     } else {
-      this.#usersMove.push([inputMoving, 'X']);
+      this.#usersMove.push([inputMoving, MOVE.CANT]);
       this.#gameOver = true;
     } 
     this.#moveCount += 1;
@@ -34,11 +35,11 @@ class BridgeGame {
 
   checkCurrentStatus() {
     if (this.#gameOver === true) {
-      return "gameOver"
+      return STATUS.GAMEOVER;
     }
 
     if (this.#moveCount === this.#bridge.length) {
-      return "arrival"
+      return STATUS.ARRIVAL;
     }
   }
 

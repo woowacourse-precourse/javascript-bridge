@@ -1,3 +1,5 @@
+const { MOVE, COMMAND } = require("./constants/Constants")
+
 const Validation = {
   checkBridgeSize(input) {
     if (isNaN(input) === true) {
@@ -14,13 +16,13 @@ const Validation = {
   },
 
   checkMoving(input) {
-    if (!(input === 'U' || input === 'D')) {
+    if (!(input === MOVE.UP || input === MOVE.DOWN)) {
       throw new Error('[ERROR] 이동할 칸을 선택하기 위해선 \'U\' 또는 \'D\'를 입력해야 합니다.');
     }
   },
 
   checkInputRetryOrEnd(input) {
-    if (!(input === 'R' || input === 'Q')) {
+    if (!(input === COMMAND.RETRY || input === COMMAND.QUIT)) {
       throw new Error('[ERROR] 재시도하려면 \'R\'를, 종료하려면 \'Q\'를 입력해야 합니다.');
     }
   }
