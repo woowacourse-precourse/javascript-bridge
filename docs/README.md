@@ -2,10 +2,21 @@
 
 ## 게임 설명
 
-- 위아래 둘 중 하나의 칸만 건널 수 있는 다리를 끝까지 건너가는 게임
-  <br/>
+![징검다리 게임](https://postfiles.pstatic.net/MjAyMTA5MTlfMjI2/MDAxNjMyMDA4NDU0MTk1.73bbe8K8o65tnYNE9_bfz6FfHXMg9GdWXz_3sXqmR-Mg.z489-QVzWMpcRPTu_EuW5xJRknYCA95ocsBaLcN3i1wg.GIF.ryuri666/r43ews.gif?type=w773)
+
+- 인기 콘텐츠 '오징어 게임' 속 유리 징검다리 게임에서 착안한 콘솔 게임
+  <br/><br/>
 
 ## 게임 규칙
+
+![시연 영상](../demo/game.gif)
+
+1. 게임을 시작합니다.
+2. 다리 길이를 입력하면 다리가 생성됩니다.
+3. 다리의 U(위)와 D(아래) 중 건너고 싶은 칸을 입력합니다.
+4. 선택한 칸을 건널 수 있다면 다리를 모두 건널 때까지 3,4번 단계를 반복합니다.
+5. 선택한 칸을 건널 수 없다면 게임이 일시정지되며, 다리의 처음으로 돌아가 재시도하거나 종료할 수 있습니다.
+6. 다리를 끝까지 건너면 게임이 종료됩니다.
 
 <br/><br/>
 
