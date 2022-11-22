@@ -22,32 +22,48 @@ class BridgeGameHandler {
 
   requestBridgeSize() {
     readBridgeSize((size) => {
-      try {
-        bridgeSizeValidator.isBridgeSizeValid(size);
-        this.#bridgeGame = new BridgeGame(size);
-        this.requestMoveDirection();
-      } catch (errorMessage) {
-        printError(errorMessage);
-        this.requestBridgeSize();
-      }
+      this.readBridgeSizeCallback(size);
     });
+  }
+
+  readBridgeSizeCallback(size) {
+    try {
+      this.tryReadBridgeSize(size);
+    } catch (errorMessage) {
+      this.catchError(errorMessage, this.requestBridgeSize);
+    }
+  }
+
+  tryReadBridgeSize(size) {
+    bridgeSizeValidator.isBridgeSizeValid(size);
+    this.#bridgeGame = new BridgeGame(size);
+    this.requestMoveDirection();
+  }
+
+  catchError(errorMessage, retryInput) {
+    printError(errorMessage);
+    retryInput();
   }
 
   requestMoveDirection() {
     readMoving((direction) => {
-      try {
-        directionValidator.isDirectionValid(direction);
-        if (this.#bridgeGame.move(direction)) {
-          printMap(this.#bridgeGame.getPath());
-          this.isSuccess();
-        } else {
-          this.requestGameCommand();
-        }
-      } catch (errorMessage) {
-        printError(errorMessage);
-        this.requestMoveDirection();
-      }
+      this.readMovingCallback(direction);
     });
+  }
+
+  readMovingCallback(direction) {
+    try {
+      this.tryReadMoving(direction);
+    } catch (errorMessage) {
+      this.catchError(errorMessage, this.requestMoveDirection);
+    }
+  }
+
+  tryReadMoving(direction) {
+    directionValidator.isDirectionValid(direction);
+    const movable = this.#bridgeGame.move(direction);
+    printMap(this.#bridgeGame.getPath());
+    movable ? this.isSuccess() : this.requestGameCommand();
   }
 
   isSuccess() {
@@ -58,19 +74,26 @@ class BridgeGameHandler {
 
   requestGameCommand() {
     readGameCommand((command) => {
-      try {
-        commandValidator.isCommandValid(command);
-        if (this.#bridgeGame.isRetry(command)) {
-          this.#bridgeGame.retry();
-          this.requestMoveDirection();
-        } else {
-          this.exitGame('실패');
-        }
-      } catch (errorMessage) {
-        printError(errorMessage);
-        this.requestGameCommand();
-      }
+      readGameCommand(command);
     });
+  }
+
+  readGameCommandCallback(command) {
+    try {
+      this.tryGameCommand(command);
+    } catch (errorMessage) {
+      this.catchError(errorMessage, this.requestGameCommand);
+    }
+  }
+
+  tryGameCommand(command) {
+    commandValidator.isCommandValid(command);
+    if (this.#bridgeGame.isRetry(command)) {
+      this.#bridgeGame.retry();
+      this.requestMoveDirection();
+    } else {
+      this.exitGame('실패');
+    }
   }
 
   exitGame(gameResult) {
