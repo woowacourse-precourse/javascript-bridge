@@ -69,7 +69,7 @@ class MainController {
   }
 
   /**
-   * 유저 재시작여 여부 입력을 검증한다.
+   * 유저 재시작 여부 입력을 검증한다.
    * @param userRestartInput {string} [유저 재시작 여부 입력]
    */
   validateUserRestart(userRestartInput) {
