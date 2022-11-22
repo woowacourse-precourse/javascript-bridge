@@ -18,6 +18,25 @@ describe("게임 진행 테스트", () => {
     }),
     test("게임 성공 테스트", () => {
       const bridgeGame = new BridgeGame(["U", "D", "U"]);
+      const input = ["U", "D", "U"];
+      let result = true;
+      for (let i = 0; i < input.length; i++) {
+        const isCorrect = bridgeGame.move(input[i]);
+        if (!isCorrect) {
+          result = false;
+          break;
+        }
+        if (bridgeGame.isFinished()) {
+          if (isCorrect) continue;
+          result = false;
+          break;
+        }
+        if (isCorrect) continue;
+      }
+      expect(result).toEqual(true);
+    }),
+    test("게임 실패 테스트", () => {
+      const bridgeGame = new BridgeGame(["U", "D", "U"]);
       const input = ["U", "U", "U"];
       let result = true;
       for (let i = 0; i < input.length; i++) {
@@ -34,7 +53,5 @@ describe("게임 진행 테스트", () => {
         if (isCorrect) continue;
       }
       expect(result).toEqual(false);
-    }),
-    
-    
+    });
 });
