@@ -30,6 +30,7 @@ const OutputView = {
         for (let i = 0; i < position; i++) {
             if (bridge[i] === direction) result.push('O');
             else result.push(' ');
+            if (i + 1 !== position) result.push('|');
         }
         if (choice === direction && result[result.length - 1] === ' ') {
             result[result.length - 1] = 'X';
