@@ -5,14 +5,16 @@ const { close } = require("../utils/utils");
 const BridgegLengthValidator = require("../utils/BridgeLengthValidator");
 const DirectionValidator = require("../utils/DirectionValidator");
 const RegameCommandValidator = require("../utils/RegameCommandValidator");
-const ValidPathBridge = require("../AnswerBridgeModel");
-const { STATUS } = require("../constants/message");
+const ValidPathBridge = require("../BridgeAnswer");
+const { STATUS, STATE } = require("../constants/message");
+const BridgeMap = require("../BridgeMap");
 
 class BridgeGameController {
   constructor() {
     this.model = {
       bridgeGame: new BridgeGame(),
       validPath: new ValidPathBridge(),
+      bridgeMap: new BridgeMap(),
     };
   }
 
@@ -42,11 +44,11 @@ class BridgeGameController {
   updateUserMovement(direction) {
     if (this.isDirectionNotValid(direction)) return this.getMoveDirectionFromUser();
     if (this.model.bridgeGame.move(direction, this.model.validPath.getbridge())) {
-      this.showMovedPath();
-      return this.getMoveDirectionFromUser();
+      this.model.bridgeMap.updateMyPositionForward(direction, STATE.VALID.symbol);
+      return this.showMovedPath().getMoveDirectionFromUser();
     }
-    this.showMovedPath();
-    return this.askUserRestart();
+    this.model.bridgeMap.updateMyPositionForward(direction, STATE.NOT_VALID.symbol);
+    return this.showMovedPath().askUserRestart();
   }
 
   isDirectionNotValid(direction) {
@@ -68,11 +70,12 @@ class BridgeGameController {
   }
 
   showMovedPath() {
-    OutputView.printMap(this.model.bridgeGame.currentMap);
+    OutputView.printMap(this.model.bridgeMap.getMyBridgeMap());
+    return this;
   }
 
   quit() {
-    OutputView.printResult(this.model.bridgeGame.currentMap);
+    OutputView.printResult(this.model.bridgeMap.getMyBridgeMap());
     OutputView.printIsGameClear(this.isGameCleared());
     OutputView.printAttemptsCount(this.model.bridgeGame.numberOfAttempt);
     this.close();
@@ -84,6 +87,7 @@ class BridgeGameController {
 
   regame() {
     this.model.bridgeGame.retry();
+    this.model.bridgeMap.init();
     this.getMoveDirectionFromUser();
   }
 }
