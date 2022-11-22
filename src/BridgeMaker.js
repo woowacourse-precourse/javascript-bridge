@@ -12,7 +12,7 @@ const { COMMAND, CONSTRAINTS_NUMBER } = require("./Constants");
     let answerBridgeShape = [];
     while (answerBridgeShape.length < size){
       const selectValue = generateRandomNumber();
-      String(selectValue) == CONSTRAINTS_NUMBER.BRIDGE_UP ? answerBridgeShape.push(COMMAND.BRIDGE_UP) : answerBridgeShape.push(COMMAND.BRIDGE_DOWN);
+      selectValue == CONSTRAINTS_NUMBER.BRIDGE_UP ? answerBridgeShape.push(COMMAND.BRIDGE_UP) : answerBridgeShape.push(COMMAND.BRIDGE_DOWN);
     } 
     return answerBridgeShape;
   },
