@@ -73,7 +73,7 @@ class Controller {
     }
 
     if (input === COMMAND.RETRY) {
-      this.#bridgeGame.retry(this.goTo.bind(this));
+      this.goTo(this.#bridgeGame.retry());
       return;
     }
     this.goTo(PHASE.RESULT);

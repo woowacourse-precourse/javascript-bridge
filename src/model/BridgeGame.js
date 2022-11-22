@@ -42,14 +42,12 @@ class BridgeGame {
   }
 
   move(moving) {
-    const bridge = this.#bridge;
-
     this.#playerPosition += 1;
-    if (moving !== bridge[this.#playerPosition]) {
+    if (moving !== this.#bridge[this.#playerPosition]) {
       this.result = RESULT.FAIL;
       return PHASE.COMMAND;
     }
-    if (this.#playerPosition + 1 === bridge.length) {
+    if (this.#playerPosition + 1 === this.#bridge.length) {
       return PHASE.RESULT;
     }
     return PHASE.MOVE;
@@ -66,9 +64,9 @@ class BridgeGame {
     });
   }
 
-  retry(goTo) {
+  retry() {
     this.#reset();
-    goTo(PHASE.MOVE);
+    return PHASE.MOVE;
   }
 }
 
