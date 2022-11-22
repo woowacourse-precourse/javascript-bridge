@@ -18,7 +18,7 @@ const MOVING = Object.freeze({
 	down: 'D',
 });
 
-const CHOICE = Object.freeze({
+const SELECT = Object.freeze({
 	retry: 'R',
 	quit: 'Q',
 });
@@ -45,7 +45,7 @@ module.exports = {
 	MESSAGES,
 	ERROR_MESSAGES,
 	MOVING,
-	CHOICE,
+	SELECT,
 	BRIDGE_SIZE,
 	REGEXP,
 	BRIDGE_VIEW,
