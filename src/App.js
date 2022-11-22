@@ -10,4 +10,5 @@ class App {
     this.controller.start();
   }
 }
+
 module.exports = App;
