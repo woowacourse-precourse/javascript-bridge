@@ -1,4 +1,4 @@
-const { NUMBER, STRING, ERROR } = require('./Contents')
+const { NUMBER, STRING, ERROR } = require('./common/Contents')
 
 const BridgeMaker = {
   /**

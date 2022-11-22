@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils')
-const { STRING, OUTPUT } = require('./Contents')
+const { STRING, OUTPUT } = require('./common/Contents')
 const OutputView = {
   topMap: [],
 

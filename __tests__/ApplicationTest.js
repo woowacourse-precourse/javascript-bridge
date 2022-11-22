@@ -33,9 +33,10 @@ const runException = (inputs) => {
   const logSpy = getLogSpy();
   const app = new App();
 
-  app.play();
+  app.play().then(() => {
+    expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+  });
 
-  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
 
 const expectLogContains = (received, logs) => {
@@ -68,17 +69,17 @@ describe("다리 건너기 테스트", () => {
     mockQuestions(["3", "U", "D", "U"]);
 
     const app = new App();
-    app.play();
-
-    const log = getOutput(logSpy);
-    expectLogContains(log, [
-      "최종 게임 결과",
-      "[ O |   | O ]",
-      "[   | O |   ]",
-      "게임 성공 여부: 성공",
-      "총 시도한 횟수: 1",
-    ]);
-    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+    app.play().then(() => {
+      const log = getOutput(logSpy);
+      expectLogContains(log, [
+        "최종 게임 결과",
+        "[ O |   | O ]",
+        "[   | O |   ]",
+        "게임 성공 여부: 성공",
+        "총 시도한 횟수: 1",
+      ]);
+      expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+    });
   });
 
   test("예외 테스트", () => {

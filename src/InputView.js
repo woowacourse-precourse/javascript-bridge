@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils')
-const { STRING, INPUT, ERROR } = require('./Contents')
+const { STRING, INPUT, ERROR } = require('./common/Contents')
 
 const InputView = {
   bridge: [],
