@@ -1,19 +1,13 @@
 const { Console } = require("@woowacourse/mission-utils");
-const validator = require("../utils/validator");
 const BridgeGame = require("../model/BridgeGame");
 const { makeBridge } = require("../BridgeMaker");
 const { generate } = require("../BridgeRandomNumberGenerator");
+const validator = require("../utils/validator");
 const { INFO_MESSAGES } = require("../utils/messages");
 const { INPUT, IS_SUCCESS } = require("../utils/constants");
 const errorHandler = require("../utils/errorHandler");
 
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
   readBridgeSize() {
     Console.readLine(INFO_MESSAGES.BRIDGE_SIZE, (userInput) => {
       try {
@@ -33,9 +27,6 @@ const InputView = {
     BridgeGame.tryCount += 1;
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
   readMoving() {
     Console.readLine(INFO_MESSAGES.MOVING, (userInput) => {
       try {
@@ -55,9 +46,6 @@ const InputView = {
     };
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand(map, printResult) {
     Console.readLine(INFO_MESSAGES.RETRY, (userInput) => {
       try {
