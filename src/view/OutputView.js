@@ -4,7 +4,7 @@ const Messages = require("./Messages");
 const OutputView = {
 
   printStart() {
-    Console.print(Messages.output_start());
+    Console.print(Messages.GAMESTART());
   },
 
   printMap(bridge, moved){
@@ -20,10 +20,10 @@ const OutputView = {
   printResult(bridge, moved, attempts) {
     const isSuccess = JSON.stringify(bridge)===JSON.stringify(moved);
 
-    Console.print(Messages.output_result());
+    Console.print(Messages.GAMERESULT());
     this.printMap(bridge, moved);
-    Console.print(Messages.output_success(isSuccess));
-    Console.print(Messages.output_attempts(attempts));
+    Console.print(Messages.IS_SUCCESS(isSuccess));
+    Console.print(Messages.GAME_ATTEMPTS(attempts));
     
     Console.close();
   },

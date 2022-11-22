@@ -3,8 +3,9 @@ const Messages = require("./Messages");
 const Validation = require("./InputValidation");
 
 const InputView = {
+
   readBridgeSize(app) {
-    Console.readLine(Messages.input_size(), (size)=>{ 
+    Console.readLine(Messages.BRIDGE_SIZE(), (size)=>{ 
       Console.print("");
       try{
         Validation.checkBridgeSize(size);
@@ -17,7 +18,7 @@ const InputView = {
   },
 
   readMoving(bridgePlay) {
-    Console.readLine(Messages.input_moving(), (moving)=>{
+    Console.readLine(Messages.MOVE_TO_WHERE(), (moving)=>{
       try{
         Validation.checkMoving(moving);
         bridgePlay.playRound(moving);
@@ -29,7 +30,7 @@ const InputView = {
   },
 
   readGameCommand(bridgePlay) {
-    Console.readLine(Messages.input_command(), (option)=>{
+    Console.readLine(Messages.GAME_QUIT_OR_RETRY(), (option)=>{
       try{
         Validation.checkOption(option);
         bridgePlay.endOrRetry(option);
@@ -38,7 +39,8 @@ const InputView = {
         this.readGameCommand(bridgePlay);
       }
     });
-  },
+  }
+
 };
 
 module.exports = InputView;
