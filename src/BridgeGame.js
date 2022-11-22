@@ -11,16 +11,18 @@ class BridgeGame {
   tryCount;
   bridgeBoard;
   moveBridge;
+  Success;
 
   constructor() {
     this.tryCount = 1;
     this.bridgeBoard = []
     this.moveBridge = { upBridge : [], downBridge : []}
+    this.Success = false;
   }
 
   createBridge(size){
     this.bridgeBoard = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator);
-    console.log(this.bridgeBoard,"ehoTsk?")
+    // console.log(this.bridgeBoard,"ehoTsk?")
   }
 
   /**
@@ -70,6 +72,10 @@ class BridgeGame {
     else{
       return false;
     }
+  }
+
+  checkSuccess(){
+
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

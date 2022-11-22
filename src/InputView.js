@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView")
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -28,15 +29,14 @@ const InputView = {
   },
   
   repeatMoving(moveBridge,bridgeGame){
-    console.log(moveBridge.upBridge,"\n" ,moveBridge.downBridge) // 출력 및 재시작 포함  
-    if (moveBridge.upBridge.length != bridgeGame.bridgeBoard.length){
-      if(bridgeGame.checkBridgeInX(moveBridge) == false){
-        this.readGameCommand(bridgeGame);
+    OutputView.printMap(moveBridge);
+    if (moveBridge.upBridge.length == bridgeGame.bridgeBoard.length || bridgeGame.checkBridgeInX(moveBridge) == false){ 
+      if(bridgeGame.checkBridgeInX(moveBridge) == true){
+        OutputView.printResult(moveBridge,bridgeGame,"성공");
       }
-      else {
-        this.readMoving(bridgeGame);
-      }
+      else {this.readGameCommand(bridgeGame);}
     }
+    else {this.readMoving(bridgeGame);}
   },
 
   /**
@@ -49,8 +49,7 @@ const InputView = {
         this.readMoving(bridgeGame);
       }
       else if (value == "Q"){
-        console.log("성공여부 및 시도 횟수");
-        console.log(bridgeGame.tryCount, "trycount");
+        OutputView.printResult(bridgeGame.moveBridge,bridgeGame,"실패");
       }
     });
   },
