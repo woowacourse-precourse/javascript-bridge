@@ -6,12 +6,15 @@ const VALID_INPUT = {
 };
 
 class BridgeValidator extends Validator {
-  constructor({ bridgeSize: { min, max } }) {
+  #min;
+
+  #max;
+
+  constructor({ bridgeSize: { min, max } }, validInput = VALID_INPUT) {
     super();
-    this.min = min;
-    this.max = max;
-    // TODO: 상수화, 생성자 인자로 바꿀지 고민
-    this.validInput = VALID_INPUT;
+    this.#min = min;
+    this.#max = max;
+    this.validInput = validInput;
   }
 
   isValidBridgeSize(value) {
@@ -20,8 +23,8 @@ class BridgeValidator extends Validator {
 
     const size = Number(value);
 
-    if (size < this.min || size > this.max) {
-      throw new Error(`${this.ERROR_MESSAGE_HEADER} 다리 길이는 ${this.min}부터 ${this.max}사이의 숫자여야 합니다.`);
+    if (size < this.#min || size > this.#max) {
+      throw new Error(`${this.ERROR_MESSAGE_HEADER} 다리 길이는 ${this.#min}부터 ${this.#max}사이의 숫자여야 합니다.`);
     }
   }
 

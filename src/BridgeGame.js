@@ -24,25 +24,25 @@ class BridgeGame {
     this.moveCount = 0;
   }
 
-  increaseMoveCount = () => {
+  #increaseMoveCount = () => {
     this.moveCount += 1;
   };
 
-  resetMoveCount = () => {
+  #resetMoveCount = () => {
     this.moveCount = 0;
   };
 
-  detectIsMovable = (command) => {
+  #detectIsMovable = (command) => {
     if (!this.bridgeStore.isMovable(this.moveCount, command)) {
-      this.resetMoveCount();
+      this.#resetMoveCount();
       return false;
     }
 
-    this.increaseMoveCount();
+    this.#increaseMoveCount();
     return true;
   };
 
-  detectIsGameClear = () => {
+  #detectIsGameClear = () => {
     if (!this.bridgeStore.isGameClear()) {
       return false;
     }
@@ -51,7 +51,7 @@ class BridgeGame {
   };
 
   isMoved(command) {
-    if (!this.detectIsMovable(command) || this.detectIsGameClear()) {
+    if (!this.#detectIsMovable(command) || this.#detectIsGameClear()) {
       return false;
     }
 
@@ -67,7 +67,7 @@ class BridgeGame {
    */
   move = (command) => {
     this.bridgeValidator.isValidCommand('move', command);
-    this.setMovedData(command);
+    this.#setMovedData(command);
 
     if (!this.isMoved(command)) {
       return false;
@@ -76,7 +76,7 @@ class BridgeGame {
     return true;
   };
 
-  setMovedData = (command) => {
+  #setMovedData = (command) => {
     this.bridgeStore.addUserInputResult(
       { command, result: this.bridgeStore.isMovable(this.moveCount, command) },
     );

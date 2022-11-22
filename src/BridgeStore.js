@@ -17,7 +17,6 @@ class BridgeStore {
   }
 
   isMovable(count, command) {
-    // TODO: 이미 완료한 경우 추가
     return this.#bridge[count] === command;
   }
 
@@ -25,7 +24,7 @@ class BridgeStore {
     this.#userInputResults = [...this.#userInputResults, result];
   }
 
-  resetUserInputResult() {
+  #resetUserInputResult() {
     this.#userInputResults = [];
   }
 
@@ -38,13 +37,13 @@ class BridgeStore {
     && this.#userInputResults.every(({ result }) => result);
   }
 
-  updateTryCount() {
+  #updateTryCount() {
     this.#tryCount += 1;
   }
 
   retry() {
-    this.updateTryCount();
-    this.resetUserInputResult();
+    this.#updateTryCount();
+    this.#resetUserInputResult();
   }
 
   getGameResult() {
