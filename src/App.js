@@ -7,15 +7,17 @@ const BridgeGame = require('./BridgeGame');
 const OutputView = require('./OutputView');
 
 class App {
+  trial = 1;
+
   async play() {
     Console.print(GAME_MESSAGES.START);
     const bridgeSize = await InputView.readBridgeSize();
     const bridge = makeBridge(Number(bridgeSize), generate);
-    const gameResult = await this.startCrossing(Number(bridgeSize), bridge);
-    OutputView.printResult(gameResult);
+    const gameResult = await this.startCrossing(Number(bridgeSize), bridge, this.trial);
+    OutputView.printResult(gameResult, this.trial);
   }
 
-  async startCrossing(bridgeSize, bridge) {
+  async startCrossing(bridgeSize, bridge, trial) {
     let gameResult = [[], []];
     for(let i = 0; i < bridgeSize; i++){
       const moving = await InputView.readMoving();
@@ -50,7 +52,10 @@ class App {
 
   async restartOrNot(bridgeSize, bridge) {
     const decide = await InputView.readGameCommand();
-    if(decide == RESTART.TRUE) this.startCrossing(bridgeSize, bridge)
+    if(decide == RESTART.TRUE) {
+      this.trial += 1;
+      this.startCrossing(bridgeSize, bridge)
+    }
   }
 }
 
