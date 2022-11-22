@@ -1,20 +1,76 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+const { BRIDGE, MAP } = require('./constants');
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+class BridgeGame {
+  #bridge = [];
+
+  #map = [[], []];
+
+  #attemptsNum = 1;
+
+  #initMap() {
+    this.#map = [[], []];
+  }
+
+  getMap() {
+    return this.#map.map((side) => BRIDGE.START + side.join(BRIDGE.SPLIT) + BRIDGE.END);
+  }
+
+  getAttemptsNum() {
+    return this.#attemptsNum;
+  }
+
+  saveBridge(bridge) {
+    this.#bridge = bridge;
+  }
+
+  move(moving) {
+    const [crossSide, unCrossSide] = this.#defineCrossSide(moving);
+    const crossResult = this.#judgeCross(moving);
+
+    crossSide.push(crossResult);
+    unCrossSide.push(BRIDGE.ROOM);
+
+    return crossResult;
+  }
+
+  #defineCrossSide(moving) {
+    const [upSide, downSide] = this.#map;
+
+    if (moving === MAP.UP_SIDE_STR) {
+      return [upSide, downSide];
+    }
+
+    return [downSide, upSide];
+  }
+
+  #judgeCross(moving) {
+    const movingNum = this.#calcMovingNum();
+
+    if (this.#bridge[movingNum] === moving) {
+      return BRIDGE.CROSS;
+    }
+
+    return BRIDGE.UN_CROSS;
+  }
+
+  isArrived() {
+    const movingNum = this.#calcMovingNum();
+    return this.#bridge.length === movingNum;
+  }
+
+  #calcMovingNum() {
+    const [upSide] = this.#map;
+    return upSide.length;
+  }
+
+  retry() {
+    this.#initMap();
+    this.#updateAttemptsNum();
+  }
+
+  #updateAttemptsNum() {
+    this.#attemptsNum += 1;
+  }
 }
 
 module.exports = BridgeGame;

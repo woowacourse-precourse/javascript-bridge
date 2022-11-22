@@ -1,21 +1,90 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { Console } = require('@woowacourse/mission-utils');
+const { MESSAGE, ERROR_MESSAGE } = require('./constants');
+const { throwError } = require('./utils');
+const {
+  inValidBlank,
+  inValidNumber,
+  inValidString,
+  inValidSize,
+  inValidMoving,
+  inValidCommand,
+} = require('./Invalidator');
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  readBridgeSize(makeBridge) {
+    try {
+      Console.readLine(MESSAGE.INPUT_SIZE, (input) => {
+        const size = Number(input);
+        this.validateSize(size);
+        makeBridge(size);
+      });
+    } catch (error) {
+      Console.print(error);
+      this.readBridgeSize(makeBridge);
+    }
+  },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+  validateSize(size) {
+    if (inValidString(size)) {
+      throwError(ERROR_MESSAGE.INPUT_NUM);
+    }
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+    if (inValidSize(size)) {
+      throwError(ERROR_MESSAGE.BRIDGE_SIZE);
+    }
+  },
+
+  readMoving(movePlayer) {
+    Console.readLine(MESSAGE.INPUT_MOVING, (moving) => {
+      try {
+        this.validateMoving(moving);
+        movePlayer(moving);
+      } catch (error) {
+        Console.print(error);
+        this.readMoving(movePlayer);
+      }
+    });
+  },
+
+  validateMoving(moving) {
+    if (inValidNumber(moving)) {
+      throwError(ERROR_MESSAGE.INPUT_STR);
+    }
+
+    if (inValidBlank(moving)) {
+      throwError(ERROR_MESSAGE.INPUT_BLANK);
+    }
+
+    if (inValidMoving(moving)) {
+      throwError(ERROR_MESSAGE.MOVING);
+    }
+  },
+
+  readGameCommand(retryOrQuit) {
+    try {
+      Console.readLine(MESSAGE.INPUT_COMMNAD, (command) => {
+        this.validateCommand(command);
+        retryOrQuit(command);
+      });
+    } catch (error) {
+      Console.print(error);
+      this.readGameCommand(retryOrQuit);
+    }
+  },
+
+  validateCommand(command) {
+    if (inValidNumber(command)) {
+      throwError(ERROR_MESSAGE.INPUT_STR);
+    }
+
+    if (inValidBlank(command)) {
+      throwError(ERROR_MESSAGE.INPUT_BLANK);
+    }
+
+    if (inValidCommand(command)) {
+      throwError(ERROR_MESSAGE.COMMNAD);
+    }
+  },
 };
 
 module.exports = InputView;
