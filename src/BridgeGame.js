@@ -7,9 +7,37 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  upper = [];
+  lower = [];
   move(chooseBlock, rightBlock) {
-    if (chooseBlock === rightBlock) return true;
-    if (chooseBlock !== rightBlock) return false;
+    if (chooseBlock === rightBlock) {
+      this.passData(chooseBlock);
+      return [true, this.upper, this.lower];
+    }
+    if (chooseBlock !== rightBlock) {
+      this.failData(chooseBlock);
+      return [false, this.upper, this.lower];
+    }
+  }
+  passData(chooseBlock) {
+    if (chooseBlock === 'U') {
+      this.upper.push('O');
+      this.lower.push(' ');
+    }
+    if (chooseBlock === 'D') {
+      this.upper.push(' ');
+      this.lower.push('O');
+    }
+  }
+  failData(chooseBlock) {
+    if (chooseBlock === 'U') {
+      this.upper.push('X');
+      this.lower.push(' ');
+    }
+    if (chooseBlock === 'D') {
+      this.upper.push(' ');
+      this.lower.push('X');
+    }
   }
 
   /**
