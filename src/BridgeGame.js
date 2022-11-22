@@ -47,7 +47,6 @@ class BridgeGame {
   move(moving) {
     if (this.#bridges[this.#movements.length] === moving) {
       this.#movements.push(WORD.SUCCESS);
-      console.log("movements", this.#movements);
       return true;
     }
     this.#movements.push(WORD.FAILURE);

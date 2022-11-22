@@ -32,4 +32,20 @@ describe("InputView 테스트 코드", () => {
       expect(result).toBe(input);
     }
   );
+
+  test.each([[1], ["Q"], [undefined]])(
+    "입력 받은 값이 R 또는 Q가 아닌 경우 예외 처리",
+    (input) => {
+      expect(() => {
+        InputView.validateGameCommand(input);
+      }).toThrow;
+    }
+  );
+  test.each([["R"], ["Q"]])(
+    "입력 받은 값이 R 또는 Q인 경우 그 문자열을 반환",
+    (input) => {
+      const result = InputView.validateGameCommand(input);
+      expect(result).toBe(input);
+    }
+  );
 });
