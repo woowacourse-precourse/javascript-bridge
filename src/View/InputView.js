@@ -43,6 +43,15 @@ const InputView = {
     throw new Error(`[ERROR] 유효하지 않은 움직임입니다.`);
   },
 
+  correctCommand(input) {
+    if (input === 'Q' || input === 'R') {
+      return true;
+    }
+    
+    Io.close();
+    throw new Error(`[ERROR] 유효하지 않은 입력입니다.`);
+  },
+
 
 };
 
