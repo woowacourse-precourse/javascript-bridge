@@ -1,6 +1,30 @@
-const { makeMapObj, makeMap } = require("../src/Util/OutputView.util");
+const {
+  makeMapObj,
+  makeMap,
+  validationMakeMapObjProps,
+} = require("../src/Util/OutputView.util");
 
 describe("OutputView Util Func Test", () => {
+  test("validationMakeMapObjProps execute false", () => {
+    //given
+    const answer = 0;
+    const input = 1;
+    //when
+    const result = validationMakeMapObjProps(answer, input);
+    const expectResult = false;
+    //then
+    expect(result).toBe(expectResult);
+  });
+  test("validationMakeMapObjProps execute true", () => {
+    //given
+    const answer = 0;
+    const input = 2;
+    //when
+    const result = validationMakeMapObjProps(answer, input);
+    const expectResult = true;
+    //then
+    expect(result).toBe(expectResult);
+  });
   test("makeMapObj execute", () => {
     //given
     const answer = [0, 1, 0, 1];
