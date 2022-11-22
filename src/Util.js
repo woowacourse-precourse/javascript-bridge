@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const {
   MIN_BRIDGE_SIZE,
   MAX_BRIDGE_SIZE,
@@ -29,9 +30,15 @@ const getMapState = (isSamePos, success, last) => {
   return MAP_STATE.empty;
 };
 
+const errorHandler = (message, repeatFunc) => {
+  Console.print(message);
+  repeatFunc();
+};
+
 module.exports = {
   validateBridgeSize,
   validatePosition,
   validateRetryCommand,
-  getMapState
+  getMapState,
+  errorHandler
 };
