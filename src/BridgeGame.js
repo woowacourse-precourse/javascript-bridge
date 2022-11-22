@@ -1,7 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { BRIDGE_SHAPE, VALID_CHAR, SUCCESS_WORD, FAILURE_WORD } = require("./constants");
-const InputView = require("./InputView");
+const { BRIDGE_SHAPE, VALID_CHAR, SUCCESS_WORD, FAILURE_WORD, FLAG } = require("./constants");
 const OutputView = require("./OutputView");
 
 class BridgeGame {
@@ -25,9 +24,9 @@ class BridgeGame {
     if (this.state) this.drawBridge(movingStep, BRIDGE_SHAPE.SUCCESS);
     else this.drawBridge(movingStep, BRIDGE_SHAPE.FAILURE);
 
-    if (!this.state) return this.getNextRead("readGameCommand");
+    if (!this.state) return this.getNextRead(FLAG.READ_GAME_COMMAND);
     if (this.reachEndOfBridge()) return this.getPrintResult(SUCCESS_WORD);
-    return this.getNextRead("readMoving");
+    return this.getNextRead(FLAG.READ_MOVING);
   }
 
   canMove(movingStep) {
@@ -40,7 +39,7 @@ class BridgeGame {
 
   getPrintResult(successOrfailure) {
     return {
-      flag: "printResult",
+      flag: FLAG.PRINT_RESULT,
       upLineOfBridge: this.upLineOfBridge,
       downLineOfBridge: this.downLineOfBridge,
       successOrfailure: successOrfailure,
@@ -80,7 +79,7 @@ class BridgeGame {
     this.upLineOfBridge = BRIDGE_SHAPE.START;
     this.downLineOfBridge = BRIDGE_SHAPE.START;
     this.try++;
-    return this.getNextRead("readMoving");
+    return this.getNextRead(FLAG.READ_MOVING);
   }
 
   quit() {

@@ -1,13 +1,13 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { VALID_CHAR } = require("./constants");
+const { VALID_CHAR, FLAG } = require("./constants");
 const ErrorChecker = require("./ErrorChecker");
 const OutputView = require("./OutputView");
 
 const InputView = {
   interpretFlag(obj) {
-    if (obj.flag === "printResult") return OutputView.printResult([obj.upLineOfBridge, obj.downLineOfBridge], obj.successOrfailure, obj.tryCount);
-    if (obj.flag === "readGameCommand") return this.readGameCommand(obj.bridgeGame);
-    if (obj.flag === "readMoving") return this.readMoving(obj.bridgeGame);
+    if (obj.flag === FLAG.PRINT_RESULT) return OutputView.printResult([obj.upLineOfBridge, obj.downLineOfBridge], obj.successOrfailure, obj.tryCount);
+    if (obj.flag === FLAG.READ_GAME_COMMAND) return this.readGameCommand(obj.bridgeGame);
+    if (obj.flag === FLAG.READ_MOVING) return this.readMoving(obj.bridgeGame);
   },
 
   readBridgeSize(bridgeGame) {

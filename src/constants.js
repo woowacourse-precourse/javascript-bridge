@@ -25,10 +25,17 @@ const SUCCESS_WORD = "성공";
 
 const FAILURE_WORD = "실패";
 
+const FLAG = {
+    READ_GAME_COMMAND: "readGameCommand",
+    READ_MOVING: "readMoving",
+    PRINT_RESULT: "printResult",
+}
+
 module.exports = {
     ERROR_MESSAGE,
     VALID_CHAR,
     BRIDGE_SHAPE,
     SUCCESS_WORD,
-    FAILURE_WORD
+    FAILURE_WORD,
+    FLAG
 };
