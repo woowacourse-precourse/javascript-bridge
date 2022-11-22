@@ -42,7 +42,7 @@ class BridgeController {
       bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
-    Console.print(bridge);
+
     return bridge;
   }
 
