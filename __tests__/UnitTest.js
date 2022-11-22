@@ -1,3 +1,4 @@
+const BridgeMaker = require("../src/BridgeMaker");
 const Validation = require("../src/Validation");
 
 describe("Validation 객체 테스트", () => {
@@ -23,6 +24,17 @@ describe("Validation 객체 테스트", () => {
     expect(() => {
       Validation.retryCommandValidation("C");
     }).toThrow("[ERROR] R 또는 Q 만 입력해 주세요");
+  });
+});
+
+describe("BridgeMaker 객체 테스트", () => {
+  test("makeBridge가 주어진 대로 다리를 잘 만들어 내는지", () => {
+    const randomNumbers = ["1", "0", "0"];
+    const mockGenerator = randomNumbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, jest.fn());
+    const bridge = BridgeMaker.makeBridge(3, mockGenerator);
+    expect(bridge).toEqual(["U", "D", "D"]);
   });
 });
 
