@@ -18,15 +18,17 @@ class BridgeGame {
 
     this.state.push(currentSide === userInput);
     this.currentPos += 1;
+    this.currentState();
+    return this.state[this.state.length - 1];
+  }
 
+  currentState(){
     if(this.currentPos === this.bridge.length){
       this.isLastStep = true;
     }
     if(this.state[this.state.length- 1] === false){
       this.isGameOver = true;
     }
-
-    return this.state[this.state.length - 1];
   }
 
   retry(toRetry) {
