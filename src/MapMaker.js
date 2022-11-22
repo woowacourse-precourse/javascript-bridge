@@ -41,6 +41,10 @@ class MapMaker {
     this.selectRightBridge(direction);
     OutputView.printResult(this.#upperMapArray, this.#lowerMapArray, attemptNumber);
   }
+
+  selectGameOver(attemptNumber) {
+    OutputView.printResult(this.#upperMapArray, this.#lowerMapArray, attemptNumber);
+  }
 }
 
 module.exports = MapMaker;

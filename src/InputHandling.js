@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const { GAME_OUTCOME } = require('./Constants')
+const { GAME_OUTCOME, GAME_COMMAND } = require('./Constants');
 const InputView = require('./InputView');
 const Validation = require('./Validation');
 const BridgeGame = require('./BridgeGame');
@@ -37,9 +37,11 @@ class InputHandling {
 
   decideNextConsolePrint(direction) {
     const gameOutcome = this.bridgeGame.decideMoveOrStop(direction);
-    if (gameOutcome === GAME_OUTCOME.FAIL) InputView.readGameCommand(this.handleGameCommand.bind(this));
+    if (gameOutcome === GAME_OUTCOME.FAIL)
+      InputView.readGameCommand(this.handleGameCommand.bind(this));
     if (gameOutcome === GAME_OUTCOME.FINAL_SUCCESS) Console.close();
-    if (gameOutcome === GAME_OUTCOME.SUCCESS) InputView.readMoving(this.handleMovingValue.bind(this));
+    if (gameOutcome === GAME_OUTCOME.SUCCESS)
+      InputView.readMoving(this.handleMovingValue.bind(this));
   }
 
   handleGameCommand(command) {
@@ -53,9 +55,14 @@ class InputHandling {
   }
 
   decideRetryOrDone(command) {
-    const gameOutcome = this.bridgeGame.retry(command);
-    if (gameOutcome === GAME_OUTCOME.RESTART) InputView.readMoving(this.handleMovingValue.bind(this));
-    if (gameOutcome === GAME_OUTCOME.QUIT) Console.close();
+    if (command === GAME_COMMAND.RESTART) {
+      this.bridgeGame.retry();
+      InputView.readMoving(this.handleMovingValue.bind(this));
+    }
+    if (command === GAME_COMMAND.QUIT) {
+      this.bridgeGame.quit();
+      Console.close();
+    }
   }
 }
 
