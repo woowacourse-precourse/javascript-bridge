@@ -1,7 +1,7 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const { DEFAULT } = require("./constant.js");
+const { DEFAULT } = require("./utils/constant");
 
 class BridgeGame {
   #state;

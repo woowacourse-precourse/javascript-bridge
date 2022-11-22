@@ -13,8 +13,8 @@ const {
     RIGHT,
     WRONG,
   },
-} = require("./utils/constant.js");
-const { isZero } = require("./utils/utilityFuncions.js");
+} = require("./utils/constant");
+const { isZero } = require("./utils/utilityFuncions");
 
 const OutputView = {
   printInitialComment() {

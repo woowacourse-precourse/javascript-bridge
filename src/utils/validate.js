@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { ERROR, DEFAULT } = require("./constant.js");
-const { isNumber, isOverBridgeRange } = require("./utilityFuncions.js");
+const { ERROR, DEFAULT } = require("./constant");
+const { isNumber, isOverBridgeRange } = require("./utilityFuncions");
 
 const bridgeLength = function bridgeLengthValidation(input, callback) {
   try {
