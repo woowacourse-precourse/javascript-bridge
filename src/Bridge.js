@@ -45,7 +45,6 @@ class Bridge {
         break;
       }
     }
-    //gameOver()
   }
 
   setRetry() {
