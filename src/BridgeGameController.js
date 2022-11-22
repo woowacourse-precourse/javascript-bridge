@@ -18,12 +18,15 @@ const BridgeGameController = {
     InputView.readMoving((moving) => {
       bridgeGame.move(moving);
       OutputView.printMap(bridgeGame.getMap());
-
-      if (!bridgeGame.isSuccess()) return BridgeGameController.askRetry(bridgeGame);
-      if (bridgeGame.isFinal()) return BridgeGameController.end(bridgeGame);
-
-      BridgeGameController.moveBridge(bridgeGame);
+      BridgeGameController.judge(bridgeGame);
     });
+  },
+
+  judge(bridgeGame) {
+    if (!bridgeGame.isSuccess()) return BridgeGameController.askRetry(bridgeGame);
+    if (bridgeGame.isFinal()) return BridgeGameController.end(bridgeGame);
+
+    BridgeGameController.moveBridge(bridgeGame);
   },
 
   askRetry(bridgeGame) {
