@@ -14,7 +14,7 @@
 </figure>
 
 - Result
-	- [x] `isCompelete()`
+	- [x] `isComplete()`
 	- [x] `isFailed()`
 	- [x] `stringify()`
 - Bridge
