@@ -1,12 +1,15 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const OutputView = require('./view/OutputView');
-const BridgeGameProceed = require('./BridgeGameProceed')
+const BridgeUnit = require('./BridgeUnit');
 
 class BridgeGame {
   #round = 1;
 
   #currentResult
+
+  constructor() {
+    this.bridgeUnit = new BridgeUnit();
+  }
 
   storage(result) {
     this.#currentResult = result;
@@ -18,7 +21,7 @@ class BridgeGame {
   }
 
   countRound() {
-    OutputView.printAttemptCount(this.#round);
+    this.bridgeUnit.countRoundConsole(this.#round);
   }
 
   retry() {
@@ -27,19 +30,19 @@ class BridgeGame {
   }
 
   fail() {
-    OutputView.printResult();
+    this.bridgeUnit.resultConsole();
     this.printResultBridge();
     Console.print('');
-    OutputView.printFail();
+    this.bridgeUnit.failConsole();
     this.countRound();
     Console.close();
   }
 
   win() {
-    OutputView.printResult()
+    this.bridgeUnit.resultConsole();
     this.printResultBridge();
     Console.print('');
-    OutputView.printWin()
+    this.bridgeUnit.winConsole();
     this.countRound();
     Console.close();
   }
