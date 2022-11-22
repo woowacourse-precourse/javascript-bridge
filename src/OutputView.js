@@ -20,43 +20,38 @@ const OutputView = {
   },
 
   makeMap(bridgegame) {
-    let up = '';
-    let down = '';
-    for (const history of bridgegame.getHistory()) {
-      if (up.length == 0 || down.length == 0) {
-        [up, down] = this.firstDraw(history);
-        continue;
-      }
-      [up, down] = this.addDraw(up, down, history);
-    }
+    let [up, down] = ['', ''];
+    bridgegame.getHistory().forEach((history, index) => {
+      index ? ([up, down] = this.addDraw(up, down, history)) : ([up, down] = this.firstDraw(history));
+    });
     return [up, down];
   },
 
   firstDraw(history) {
-    const value = history[0],
-      result = history[1];
-    if (value == 'U') {
-      if (result) return [' O ', '   '];
-      return [' X ', '   '];
+    const [value, result] = history;
+    switch (value) {
+      case 'U':
+        return result ? [' O ', '   '] : [' X ', '   '];
+      case 'D':
+        return result ? ['   ', ' O '] : ['   ', ' X '];
     }
-    if (result) return ['   ', ' O '];
-    return ['   ', ' X '];
   },
 
   addDraw(up, down, history) {
-    const value = history[0],
-      result = history[1];
-    if (value == 'U' && result) (up += '| O '), (down += '|   ');
-    if (value == 'U' && !result) (up += '| X '), (down += '|   ');
-    if (value == 'D' && result) (up += '|   '), (down += '| O ');
-    if (value == 'D' && !result) (up += '|   '), (down += '| X ');
-    return [up, down];
+    const [value, result] = history;
+    switch (value) {
+      case 'U':
+        return result ? [(up += '| O '), (down += '|   ')] : [(up += '| X '), (down += '|   ')];
+      case 'D':
+        return result ? [(up += '|   '), (down += '| O ')] : [(up += '|   '), (down += '| X ')];
+    }
   },
 
   printError(error, method, object) {
     Console.print(error);
     return method(object);
   },
+
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
