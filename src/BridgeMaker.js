@@ -12,7 +12,7 @@ const BridgeMaker = {
 
     for (let i = 0; i < size; i++) {
       const randomNumber = generateRandomNumber();
-      const IS_UPPER_CORRECT = randomNumber === '1';
+      const IS_UPPER_CORRECT = Number(randomNumber) === 1;
       const position = IS_UPPER_CORRECT ? 'U' : 'D';
       bridge.push(position);
     }
