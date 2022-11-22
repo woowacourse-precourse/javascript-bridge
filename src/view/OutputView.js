@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const MapMaker = require('../Model/MapMaker');
-const { MESSAGE, OX } = require('../util/Constant');
+const { MESSAGE, OX, RESULT } = require('../util/Constant');
 
 const OutputView = {
   printError(error) {
@@ -14,7 +14,7 @@ const OutputView = {
 
   printResult(userUd, middleResult) {
     Console.print(MESSAGE.FINAL);
-    if (middleResult === MESSAGE.SUCCESS) {
+    if (middleResult === RESULT.SUCCESS) {
       return OutputView.printMap(userUd, OX.CORRECT);
     }
     return OutputView.printMap(userUd, OX.WRONG);

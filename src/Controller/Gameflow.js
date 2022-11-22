@@ -80,7 +80,7 @@ class GameFlow {
   endGame() {
     this.middleResult = RESULT.SUCCESS;
     OutputView.printMap(this.userUpDown, OX.CORRECT);
-    OutputView.printResult(this.userUpDown, OX.CORRECT);
+    OutputView.printResult(this.userUpDown, this.middleResult);
     OutputView.printFinalResult(this.count, this.middleResult);
   }
 
