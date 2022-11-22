@@ -13,7 +13,6 @@ const BridgeMaker = {
     const bridge = Array.from({ length: size }, () =>
       this.makeBridgeBlock(generateRandomNumber())
     );
-    console.log(bridge)
     return bridge;
   },
 
