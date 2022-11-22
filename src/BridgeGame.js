@@ -44,6 +44,11 @@ class BridgeGame {
       this.quit(true);
       return;
     }
+
+    if (isMovable) {
+      readMoving(this.move.bind(this));
+      return;
+    }
   }
 
   /**
