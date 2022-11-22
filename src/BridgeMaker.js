@@ -12,10 +12,10 @@ const BridgeMaker = {
     let bridge = [];
     while(size > bridge.length) {
       switch(generateRandomNumber()) {
-        case '1':
+        case 1:
           bridge.push(BRIDGE_GAME.move_up);
           break;
-        case '0':
+        case 0:
           bridge.push(BRIDGE_GAME.move_down);
           break;
       }
