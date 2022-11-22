@@ -1,5 +1,15 @@
+const OutputView = require('./views/OutputView.js')
+const InputView = require('./views/InputView.js')
+const Controller = require('./controller/controller.js')
+
 class App {
-  play() {}
+
+    play() {
+        const controller = new Controller();
+        controller.gameStart();
+    }
 }
 
-module.exports = App;
+const app = new App()
+app.play()
+module.exports = App
