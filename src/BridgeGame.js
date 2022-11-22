@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const Bridge = require('./Bridge');
 const Map = require('./Map');
 const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
@@ -81,7 +82,8 @@ class BridgeGame {
   }
 
   quit(isSuccess) {
-    printResult(this.#map.getMapRows(), isSuccess);
+    printResult(this.#map.getMapRows(), isSuccess, this.#tryCount);
+    Console.close();
   }
 }
 

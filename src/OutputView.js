@@ -1,5 +1,13 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_START, RESULT, SUCCESS_OR_FAILURE, SUCCESS, FAILURE, map } = require('./Message');
+const {
+  GAME_START,
+  RESULT,
+  SUCCESS_OR_FAILURE,
+  SUCCESS,
+  FAILURE,
+  TRY_COUNT,
+  map,
+} = require('./Message');
 
 const { BEGINNING, MIDDLE, END } = map;
 
@@ -29,10 +37,14 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(mapRows, isSuccess) {
+  printResult(mapRows, isSuccess, tryCount) {
     const map = OutputView.getMap(mapRows);
 
-    Console.print(`\n${RESULT}${map}\n${SUCCESS_OR_FAILURE}${isSuccess ? SUCCESS : FAILURE}}`);
+    Console.print(
+      `\n${RESULT}${map}\n${SUCCESS_OR_FAILURE}${
+        isSuccess ? SUCCESS : FAILURE
+      }${TRY_COUNT}${tryCount}`,
+    );
   },
 };
 
