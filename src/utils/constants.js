@@ -1,3 +1,3 @@
-const USER_INPUT = ["U", "D"];
+const USER_INPUT = ["D", "U"];
 
 module.exports = USER_INPUT;
