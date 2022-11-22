@@ -47,6 +47,16 @@ const Controller = {
        })
     },
     
+    retryBoolCallBack(bridgeGame, input) {
+        if (input === 'R') {
+            return Controller.reGame(bridgeGame);
+        }
+        if (input === 'Q') {
+            return Controller.exit(bridgeGame);
+        }
+        Controller.move(bridgeGame)
+    },
+
 }
 
 module.exports = Controller;
