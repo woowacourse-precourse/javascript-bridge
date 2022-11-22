@@ -90,12 +90,6 @@ class BridgeGame {
     this.#BridgeData.down += `3${passOrFail}3`;
   }
 
-  // static 불가
-  isRetry(input) {
-    const RETRY = 'R';
-    return input === RETRY;
-  }
-
   saveSize(input) {
     this.#BridgeData.size = Number(input);
   }

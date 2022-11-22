@@ -108,12 +108,17 @@ const BridgeController = class extends GameController {
   }
 
   retryOrQuit(input) {
-    if (this.bridgeGame.isRetry(input)) {
+    if (this.isRetry(input)) {
       this.bridgeGame.retry();
       return this.inputMoving();
     }
     this.outputView.printResult(this.bridgeGame.returnBridgeData());
     this.bridgeGame.end();
+  }
+
+  isRetry(input) {
+    const RETRY = 'R';
+    return input === RETRY;
   }
 };
 
