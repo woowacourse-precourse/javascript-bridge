@@ -6,6 +6,7 @@ const {
   CROSSED,
   BLOCKED,
   BLANK,
+  ZERO,
 } = require('../utils/constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -73,8 +74,8 @@ class BridgeGame {
    */
   retry() {
     this.#retryingCount += ONE_TIME;
-    this.#upperBridge.splice(0, this.#upperBridge.length);
-    this.#lowerBridge.splice(0, this.#lowerBridge.length);
+    this.#upperBridge.splice(ZERO, this.#upperBridge.length);
+    this.#lowerBridge.splice(ZERO, this.#lowerBridge.length);
   }
 }
 

@@ -90,7 +90,24 @@ describe('다리 건너기 테스트', () => {
   test('기능 테스트 : 이동할 수 없는 칸 선택한 이후 재시도를 선택하면 게임 재기한다', () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 0, 1, 1, 1]);
-    mockQuestions(['6', 'U', 'D', 'U', 'R', 'D', 'D', 'R', 'U', 'U', 'U']);
+    mockQuestions([
+      '6',
+      'U',
+      'D',
+      'U',
+      'R',
+      'U',
+      'D',
+      'D',
+      'D',
+      'R',
+      'U',
+      'D',
+      'D',
+      'U',
+      'U',
+      'U',
+    ]);
 
     const app = new App();
     app.play();
