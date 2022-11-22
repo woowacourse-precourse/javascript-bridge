@@ -8,6 +8,7 @@ const BridgeGame = require('./BridgeGame');
 
 class InputHandling {
   #answerBridgeArray;
+  #bridgeGame;
 
   play() {
     InputView.readBridgeSize(this.handleBridgeSize.bind(this));
@@ -16,13 +17,17 @@ class InputHandling {
   handleBridgeSize(size) {
     try {
       Validation.checkBridgeSize(size);
-      this.#answerBridgeArray = makeBridge(size, generate);
-      this.bridgeGame = new BridgeGame(this.#answerBridgeArray);
-      InputView.readMoving(this.handleMovingValue.bind(this));
+      this.generateAnswerBridge(size);
     } catch (error) {
       Console.print(error);
       InputView.readBridgeSize(this.handleBridgeSize.bind(this));
     }
+  }
+
+  generateAnswerBridge(size) {
+    this.#answerBridgeArray = makeBridge(size, generate);
+    this.#bridgeGame = new BridgeGame(this.#answerBridgeArray);
+    InputView.readMoving(this.handleMovingValue.bind(this));
   }
 
   handleMovingValue(direction) {
@@ -36,10 +41,11 @@ class InputHandling {
   }
 
   decideNextConsolePrint(direction) {
-    const gameOutcome = this.bridgeGame.decideMoveOrStop(direction);
+    const gameOutcome = this.#bridgeGame.decideMoveOrStop(direction);
     if (gameOutcome === GAME_OUTCOME.FAIL)
       InputView.readGameCommand(this.handleGameCommand.bind(this));
-    if (gameOutcome === GAME_OUTCOME.FINAL_SUCCESS) Console.close();
+    if (gameOutcome === GAME_OUTCOME.FINAL_SUCCESS) 
+      Console.close();
     if (gameOutcome === GAME_OUTCOME.SUCCESS)
       InputView.readMoving(this.handleMovingValue.bind(this));
   }
@@ -56,11 +62,11 @@ class InputHandling {
 
   decideRetryOrDone(command) {
     if (command === GAME_COMMAND.RESTART) {
-      this.bridgeGame.retry();
+      this.#bridgeGame.retry();
       InputView.readMoving(this.handleMovingValue.bind(this));
     }
     if (command === GAME_COMMAND.QUIT) {
-      this.bridgeGame.quit();
+      this.#bridgeGame.quit();
       Console.close();
     }
   }
