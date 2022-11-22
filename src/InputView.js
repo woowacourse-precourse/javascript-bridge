@@ -22,9 +22,8 @@ const InputView = {
         this.validateBridgeSize(size);
         const bridgeList = makeBridge(size, generate);
         InputView.readMoving(bridgeList);
-      } catch (error) {
-        this.printError(error);
-      }
+      } 
+      catch (error) { this.printError(error); }
       });
   },
   
@@ -46,14 +45,13 @@ const InputView = {
    */
   readMoving(bridgeList) {
     Console.readLine(USER_INPUT.ENTER_MOVEMENT, (upOrDown) => {
-      try {
+      try { 
         this.validateUserMove(upOrDown);
         const isInputRight = this.bridgeGame.isUserInputRightOrWrong(bridgeList, upOrDown);
         const result = this.bridgeGame.move(bridgeList, upOrDown);
         this.repeatMovingOrNot(bridgeList, result, isInputRight);
-      } catch(error) {
-        this.printError(error);
-      }
+      } 
+      catch(error) { this.printError(error); }
     })
   },
 
@@ -97,8 +95,7 @@ const InputView = {
     Console.readLine(RETRY, (retryOrQuit) => {
       if(retryOrQuit === 'R') {
         this.retryGame(bridgeList);
-      } 
-      if(retryOrQuit === 'Q') {
+      } if(retryOrQuit === 'Q') {
         this.quitGame(upAndDownList);
       }
     })
