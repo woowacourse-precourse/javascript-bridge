@@ -45,8 +45,7 @@ const InputView = {
       } catch(e) {
         Console.print(e.message);
         InputView.readGameCommand(handler);
-      }
-    });
+      }});
   },
 };
 
