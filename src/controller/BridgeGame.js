@@ -84,13 +84,13 @@ const BridgeGame = class extends GameCtrl {
     return { errorHandler, successHandler };
   }
 
-  #quitOrRetryByCommand({ replayCommand, bridgeMap, isGameSuccess }) {
+  #quitOrRetryByCommand(replayCommand, { bridgeMap, isGameSuccess }) {
     if (replayCommand === CHOICE.replay) return this.#retry();
     return this.#end({ bridgeMap, isGameSuccess });
   }
 
-  #end({ bridgeMap, isGameSuccess }) {
-    const result = this.model.makeBridgeGameResult({ bridgeMap, isGameSuccess });
+  #end(gameResult) {
+    const result = this.model.makeBridgeGameResult(gameResult);
     this.view.printResult(result);
   }
 
