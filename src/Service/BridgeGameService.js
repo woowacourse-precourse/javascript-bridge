@@ -13,13 +13,13 @@ const BridgeGameService = class {
     this.#bridgeGameModel = bridgeGameModel;
   }
 
-  startGame(task) {
+  startGame(moveTask) {
     const callback = (size) => {
       const bridge = makeBridge(size, generate);
       this.#outputView.printBlank();
       this.#bridgeGameModel.checkBridge(bridge);
       this.#bridgeGameModel.start(bridge);
-      task();
+      moveTask();
     };
 
     this.#outputView.printStart();
@@ -28,9 +28,11 @@ const BridgeGameService = class {
 
   retryGame(processRetryTask) {
     const callback = (input) => {
-      this.#bridgeGameModel.checkRetry(input);
-      this.#bridgeGameModel.retry(input);
-      processRetryTask();
+      pipe(input)(
+        this.#bridgeGameModel.checkRetry.bind(this.#bridgeGameModel),
+        this.#bridgeGameModel.retry.bind(this.#bridgeGameModel),
+        processRetryTask
+      );
     };
 
     this.#inputView.readGameCommand(callback);
