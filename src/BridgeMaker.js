@@ -14,8 +14,7 @@ const BridgeMaker = {
       const randomNumber = generateRandomNumber();
 
       if (Number(randomNumber) === 1) return DIRECTION.UP;
-      if (Number(randomNumber) === 0) return DIRECTION.DOWN;
-      return undefined;
+      return DIRECTION.DOWN;
     });
   },
 };
