@@ -4,6 +4,37 @@
 
 - 이승환(sh981013s)
 
+## 🛠 구조
+
+![](.README_images/c25cf096.png)
+
+```markdown
+🗳__tests__
+ ┣ 📜ApplicationTest.js
+ ┣ 📜BridgeMakerTest.js
+ ┣ 📜BridgeTest.js
+ ┗ 📜UserTest.js
+🗳src
+ ┣ 📂constants
+ ┃ ┣ 📜GeneralConstants.js
+ ┃ ┗ 📜Messages.js
+ ┣ 📂controller
+ ┃ ┣ 📜BridgeController.js
+ ┃ ┣ 📜BridgeGame.js
+ ┃ ┣ 📜MainController.js
+ ┃ ┗ 📜UserController.js
+ ┣ 📂model
+ ┃ ┣ 📜BridgeModel.js
+ ┃ ┗ 📜UserModel.js
+ ┣ 📂validation
+ ┃ ┣ 📜BridgeSizeValidation.js
+ ┃ ┣ 📜MovingInputValidation.js
+ ┃ ┗ 📜RestartInputValidation.js
+ ┣ 📜App.js
+ ┣ 📜BridgeMaker.js
+ ┗ 📜BridgeRandomNumberGenerator.js
+```
+
 ## 🧾 기능 요구사항
 
 ```markdown
@@ -26,33 +57,33 @@
 
 ## 💡 구현 목록
 
-- [ ] 첫번째 시도인 경우 시작 메세지를 출력한다.
+- [x] 첫번째 시도인 경우 시작 메세지를 출력한다.
 
-- [ ] 시도 횟수를 증가시킨다.
+- [x] 시도 횟수를 증가시킨다.
 
-- [ ] 첫번째 시도인 경우 유저로부터 다리 길이 입력을 받는다.
-    -  [ ] 예외 케이스(validation) 확인
+- [x] 첫번째 시도인 경우 유저로부터 다리 길이 입력을 받는다.
+    -  [x] 예외 케이스(validation) 확인
 
-- [ ] 유저의 입력에 따라 다리 생성
-    - [ ] 입력과 동일한 길이 만큼 생성
-    - [ ] 무작위 값에 따라 건널 수 있는 칸 구별하며 생성
+- [x] 유저의 입력에 따라 다리 생성
+    - [x] 입력과 동일한 길이 만큼 생성
+    - [x] 무작위 값에 따라 건널 수 있는 칸 구별하며 생성
 
-- [ ] 유저로부터 이동할 칸을 입력받는다.
-    - [ ] 예외 케이스(validation) 확인
+- [x] 유저로부터 이동할 칸을 입력받는다.
+    - [x] 예외 케이스(validation) 확인
 
-- [ ] 유저의 입력에 따라 오른쪽으로 이동한다.
-    - [ ] 이동 후 건너기 결과의 출력 형식에 따라 출력한다.
+- [x] 유저의 입력에 따라 오른쪽으로 이동한다.
+    - [x] 이동 후 건너기 결과의 출력 형식에 따라 출력한다.
 
-- [ ] 건너기를 성공했다면 이동할 칸을 입력받는다.
+- [x] 건너기를 성공했다면 이동할 칸을 입력받는다.
 
-- [ ] 건너기를 완수했다면 최종게임 결과, 성공 여부 메세지와 총 시도 횟수를 출력한다.
+- [x] 건너기를 완수했다면 최종게임 결과, 성공 여부 메세지와 총 시도 횟수를 출력한다.
 
-- [ ] 건너기를 실패했다면 유저로부터 재시작 여부를 입력받는다.
-    - [ ] 예외 케이스(validation) 확인
+- [x] 건너기를 실패했다면 유저로부터 재시작 여부를 입력받는다.
+    - [x] 예외 케이스(validation) 확인
 
-- [ ] 재시작시 시도 횟수 증가 이후 다시 처음으로 돌아간다.
+- [x] 재시작시 시도 횟수 증가 이후 다시 처음으로 돌아간다.
 
-- [ ] 종료시 최종 게임 결과, 성공여부, 시도 횟수를 출력한다.
+- [x] 종료시 최종 게임 결과, 성공여부, 시도 횟수를 출력한다.
 
 
 ## ❌ 예외 사항
