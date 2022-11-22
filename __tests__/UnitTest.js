@@ -89,3 +89,63 @@ describe('BridgeGame테스트', () => {
     });
   });
 });
+
+describe('BridgeStore 테스트', () => {
+  let store;
+
+  beforeEach(() => {
+    store = new BridgeStore(['U', 'D', 'U'], 1);
+  });
+
+  test.each([[0, 'U', true], [0, 'D', false], [1, 'D', true], [2, 'D', false]])('이동가능 여부 확인', (idx, input, expected) => {
+    expect(store.isMovable(idx, input)).toBe(expected);
+  });
+
+  test.each([[3, true], [1, false], [2, false], [10, false]])('다리 길이 테스트', (number, expected) => {
+    expect(store.isSameWithBridgeLength(number)).toBe(expected);
+  });
+
+  describe('사용자 입력 저장 테스트', () => {
+    const testData = '테스트';
+
+    test('사용자 입력 저장', () => {
+      store.addUserInputResult(testData);
+      expect(store.getUserInputResultLength()).toBe(1);
+    });
+
+    test('사용자 입력 조회', () => {
+      store.addUserInputResult(testData);
+      expect(store.getUserInputResult(0)).toBe(testData);
+    });
+  });
+
+  describe('게임결과 테스트', () => {
+    beforeEach(() => {
+      Array.from({ length: 3 })
+        .fill({ result: true })
+        .map((el) => store.addUserInputResult(el));
+    });
+
+    test('게임 결과 조회 테스트', () => {
+      const expected = {
+        isGameClear: true,
+        tryCount: 1,
+      };
+
+      expect(store.getGameResult()).toEqual(expect.objectContaining(expected));
+    });
+
+    test('게임 종료 여부 확인 테스트', () => {
+      expect(store.isGameClear()).toEqual(true);
+    });
+  });
+
+  test('재시도 테스트', () => {
+    Array.from({ length: 2 })
+      .fill({ result: false })
+      .map((el) => store.addUserInputResult(el));
+
+    store.retry();
+    expect(store.getUserInputResultLength()).toEqual(0);
+  });
+});
