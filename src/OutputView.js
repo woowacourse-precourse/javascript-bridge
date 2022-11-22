@@ -14,7 +14,9 @@ const OutputView = {
   },
 
   validate(text) {
-    if (!text) {
+    const EMPTY_TEXT = !text;
+
+    if (EMPTY_TEXT) {
       throw new Error(this.INPUT_ERROR_TEXT);
     }
   },
