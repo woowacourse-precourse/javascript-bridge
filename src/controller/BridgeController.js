@@ -7,6 +7,7 @@ const Validate = require('../utils/Validate');
 const { Console } = require('@woowacourse/mission-utils');
 const { CROSSING_RESULT, COMMAND } = require('../utils/constants');
 const { CROSSING_RESULT_MESSAGE } = require('../utils/message');
+const HandleValidate = require('../utils/handleValidate');
 
 class BridgeController {
   #bridgeGame;
@@ -25,7 +26,7 @@ class BridgeController {
   }
 
   createBridge(size) {
-    if (!this.checkValidate(Validate.validateSizeRange, Number(size))) {
+    if (!HandleValidate.checkValidate(Validate.validateSizeRange, Number(size))) {
       return this.requestBridgeSize();
     }
     const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
@@ -35,22 +36,12 @@ class BridgeController {
     this.requestBridgeMovemoment();
   }
 
-  checkValidate(validate, input) {
-    try {
-      validate(input);
-      return true;
-    } catch (error) {
-      OutputView.printErrorMessage(error);
-      return false;
-    }
-  }
-
   requestBridgeMovemoment() {
     InputView.readMoving(this.controlMovemoment.bind(this));
   }
 
   controlMovemoment(movePosition) {
-    if (!this.checkValidate(Validate.validateMovePosition, movePosition)) {
+    if (!HandleValidate.checkValidate(Validate.validateMovePosition, movePosition)) {
       return this.requestBridgeMovemoment();
     }
 
@@ -92,7 +83,7 @@ class BridgeController {
   }
 
   controlGameCommand(input) {
-    if (!this.checkValidate(Validate.validateRetryOfQuit, input)) {
+    if (!HandleValidate.checkValidate(Validate.validateRetryOfQuit, input)) {
       return this.requestGameCommand();
     }
 
