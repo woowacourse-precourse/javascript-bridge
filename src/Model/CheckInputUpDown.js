@@ -1,7 +1,7 @@
 const { ERROR } = require('../Util/Constant');
 const OutputView = require('../View/OutputView');
 
-class CheckInputUd {
+class CheckInputUpDown {
   validate(inputUpDown) {
     try {
       this.checkError(inputUpDown);
@@ -30,4 +30,4 @@ class CheckInputUd {
   }
 }
 
-module.exports = CheckInputUd;
+module.exports = CheckInputUpDown;

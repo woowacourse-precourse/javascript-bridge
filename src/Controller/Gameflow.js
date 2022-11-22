@@ -1,8 +1,8 @@
 const InputView = require('../View/InputView');
 const OutputView = require('../View/OutputView');
 const CheckBridgeSize = require('../Model/CheckBridgeSize');
-const CheckInputUd = require('../Model/CheckInputUd');
-const CheckInputRq = require('../Model/CheckInputRq');
+const CheckInputUpDown = require('../Model/CheckInputUpDown');
+const CheckInputReplayQuit = require('../Model/CheckInputReplayQuit');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const BridgeGame = require('../Model/BridgeGame');
@@ -16,8 +16,8 @@ class Gameflow {
 
   constructor() {
     this.CheckBridgeSize = new CheckBridgeSize();
-    this.CheckInputUd = new CheckInputUd();
-    this.CheckInputRq = new CheckInputRq();
+    this.CheckInputUpDown = new CheckInputUpDown();
+    this.CheckInputReplayQuit = new CheckInputReplayQuit();
   }
 
   start() {
@@ -43,7 +43,7 @@ class Gameflow {
 
   userMoving() {
     InputView.readMoving(inputUpDown => {
-      this.isValidUpdown(this.CheckInputUd.validate(inputUpDown), inputUpDown);
+      this.isValidUpdown(this.CheckInputUpDown.validate(inputUpDown), inputUpDown);
     });
   }
 
@@ -87,7 +87,7 @@ class Gameflow {
   askReplay() {
     InputView.readGameCommand(inputReplayQuit => {
       this.isValidRepalyQuit(
-        this.CheckInputRq.validate(inputReplayQuit),
+        this.CheckInputReplayQuit.validate(inputReplayQuit),
         inputReplayQuit
       );
     });

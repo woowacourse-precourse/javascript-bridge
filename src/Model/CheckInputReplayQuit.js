@@ -1,7 +1,7 @@
 const { ERROR } = require('../Util/Constant');
 const OutputView = require('../View/OutputView');
 
-class CheckInputRq {
+class CheckInputReplayQuit {
   validate(inputReplayQuit) {
     try {
       this.checkError(inputReplayQuit);
@@ -30,4 +30,4 @@ class CheckInputRq {
   }
 }
 
-module.exports = CheckInputRq;
+module.exports = CheckInputReplayQuit;
