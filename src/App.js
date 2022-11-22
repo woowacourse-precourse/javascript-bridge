@@ -1,12 +1,12 @@
-const InputView = require("../View/InputView");
-const OutputView = require("../View/OutputView");
+const InputView = require("./View/InputView");
+const OutputView = require("./View/OutputView");
 
-const { makeBridge } = require("../Model/BridgeMaker");
-const { generate } = require("../Model/BridgeRandomNumberGenerator");
-const Validate = require("../Model/Validate");
-const BridgeGame = require("../Model/BridgeGame");
+const { makeBridge } = require("./BridgeMaker");
+const { generate } = require("./Model/BridgeRandomNumberGenerator");
+const Validate = require("./Model/Validate");
+const BridgeGame = require("./Model/BridgeGame");
 
-const { GAME_OPTION, GAME_MESSAGE } = require("../Utils/Constants");
+const { GAME_OPTION, GAME_MESSAGE } = require("./Utils/Constants");
 
 class App {
   constructor() {
