@@ -32,7 +32,7 @@ class UserController {
    * 유저의 이동 입력을 처리하는 메서드
    * @param userMovingInput {string} [유저 이동 입력]
    */
-  onUserMovingInput(userMovingInput) {
+  processUserMovingInput(userMovingInput) {
     try {
       validate(userMovingInput);
       this.#userModel.appendUserMoving(userMovingInput);

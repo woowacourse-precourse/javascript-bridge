@@ -37,7 +37,7 @@ class MainController {
    * @param mainController [메인 컨트롤러]
    */
   processUserMovingInput(userMovingInput, mainController) {
-    mainController.#userController.onUserMovingInput(userMovingInput);
+    mainController.#userController.processUserMovingInput(userMovingInput);
   }
 
   // 유저 이동 입력 연결 메서드
