@@ -13,18 +13,18 @@ class BridgeGame {
     this.bridgeMapPainter = new BridgeMapPainter();
   }
 
+  setupGameMap(size) {
+    const bridgeGameMap = this.makeBridgeMap(size);
+    this.gameMap.setBridgeGameMap(bridgeGameMap);
+  }
+
   makeBridgeMap(size) {
     const { makeBridge } = BridgeMaker;
     const { generate } = BridgeRandomNumberGenerator;
     return makeBridge(size, generate);
   }
 
-  setupGameMap(size) {
-    const bridgeGameMap = this.makeBridgeMap(size);
-    this.gameMap.setBridgeGameMap(bridgeGameMap);
-  }
-
-  drawBridgeMap(moveCommand) {
+  drawUserBridgeMap(moveCommand) {
     return this.bridgeMapPainter.drawOX(moveCommand, this.getUserLocation(), this.getGameMap());
   }
 
@@ -51,22 +51,6 @@ class BridgeGame {
     return this.user.isArrival(this.gameMap.getMapLength());
   }
 
-  getUserBridgeMap() {
-    return this.bridgeMapPainter.getUserBridgeMap(this.getUserLocation());
-  }
-
-  getUserLocation() {
-    return this.user.getLocation();
-  }
-
-  getUserTryCount() {
-    return this.user.getTryCount();
-  }
-
-  getGameMap() {
-    return this.gameMap.getGameMap();
-  }
-
   move() {
     this.user.increaseLocation();
   }
@@ -84,6 +68,22 @@ class BridgeGame {
 
   #initUserLocation() {
     this.user.initLocation();
+  }
+
+  getUserBridgeMap() {
+    return this.bridgeMapPainter.getUserBridgeMap(this.getUserLocation());
+  }
+
+  getUserLocation() {
+    return this.user.getLocation();
+  }
+
+  getUserTryCount() {
+    return this.user.getTryCount();
+  }
+
+  getGameMap() {
+    return this.gameMap.getGameMap();
   }
 }
 

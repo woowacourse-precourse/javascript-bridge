@@ -37,7 +37,7 @@ class BridgeGameController {
   requestMovementDirection(command) {
     try {
       this.validator.checkMoveCommand(command);
-      OutputView.printMap(this.bridgeGame.drawBridgeMap(command));
+      OutputView.printMap(this.bridgeGame.drawUserBridgeMap(command));
       this.checkGameState();
     } catch (errorType) {
       OutputView.printError(errorType);
