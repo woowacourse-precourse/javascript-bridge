@@ -31,11 +31,15 @@ const InputView = {
 
       const bridgeGame = new BridgeGame();
       const gameReult = bridgeGame.move(movingCommand, bridge, movingRoute);
+
       if (gameReult[0].includes('X') || gameReult[1].includes('X')) {
-        this.readGameCommand(bridge, UserTryCount);
-      } else {
-        this.readMoving(bridge, gameReult, UserTryCount);
+        return this.readGameCommand(bridge, UserTryCount);
       }
+      if (gameReult[0].length === bridge.length) {
+        const GAME_SUCCESS = '성공';
+        return OutputView.printResult(GAME_SUCCESS, UserTryCount);
+      }
+      return this.readMoving(bridge, gameReult, UserTryCount);
     });
   },
 
