@@ -19,8 +19,7 @@ const OutputView = {
   printMap(currentMap) {
     const up = currentMap[0];
     const down = currentMap[1];
-    Console.print(`[ ${up.join(' | ')} ]`);
-    Console.print(`[ ${down.join(' | ')} ]\n`);
+    Console.print(`[ ${up.join(' | ')} ]\n[ ${down.join(' | ')} ]\n`);
   },
 
   /**
@@ -37,8 +36,7 @@ const OutputView = {
   printResult(currentMap, gameResult, gameCount) {
     Console.print('최종 게임 결과');
     this.printMap(currentMap);
-    Console.print(`게임 성공 여부: ${gameResult}`);
-    Console.print(`총 시도한 횟수: ${gameCount}`);
+    Console.print(`게임 성공 여부: ${gameResult}\n총 시도한 횟수: ${gameCount}`);
     Console.close();
   },
 
