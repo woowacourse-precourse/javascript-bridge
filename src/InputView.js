@@ -53,7 +53,36 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGame) {
+    Console.readLine(
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (answer) => {
+        try {
+          InputView.validateGameCommand(answer);
+          InputView.judgeGameCommand(answer, bridgeGame);
+        } catch (error) {
+          Console.print(error.message);
+          InputView.readGameCommand(bridgeGame);
+        }
+      }
+    );
+  },
+
+  validateGameCommand(value) {
+    const movingReg = /^[R|Q]$/;
+    if (!movingReg.test(value)) {
+      throw new Error("[ERROR] 재시도는 R, 종료는 Q를 입력해 주세요.");
+    }
+  },
+
+  judgeGameCommand(command, bridgeGame) {
+    if (command === "R") {
+      bridgeGame.retry();
+    }
+    if (command === "Q") {
+      printResult(bridgeGame, "fail");
+    }
+  },
 };
 
 module.exports = InputView;
