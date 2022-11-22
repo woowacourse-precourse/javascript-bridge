@@ -19,7 +19,7 @@ const Validations = {
   },
 
   validateRetryCorrect(answer) {
-    if (answer !== INPUT_VALUE.QUIT || answer !== INPUT_VALUE.RETRY)
+    if (answer !== INPUT_VALUE.QUIT && answer !== INPUT_VALUE.RETRY)
       throw Error(ERROR_MESSAGE.INVALID_INPUT_RETRY);
   },
 };
