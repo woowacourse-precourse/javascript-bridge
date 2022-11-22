@@ -17,6 +17,7 @@ const InputView = {
       try {
         this.bridgeSizeSet(bridgeSize);
       } catch (error) {
+        Console.print(error);
         this.readBridgeSize();
       }
     });
@@ -28,6 +29,7 @@ const InputView = {
       bridgeGame.set(bridgeSize);
       this.readMoving();
     } catch (error) {
+      Console.print(error);
       this.readBridgeSize();
     }
   },
@@ -46,6 +48,7 @@ const InputView = {
       try {
         this.moveSet(way);
       } catch (error) {
+        Console.print(error);
         this.readMoving();
       }
     });
@@ -71,12 +74,16 @@ const InputView = {
   readGameProcessor(doOrDie) {
     try {
       inputErrorCheck.gameCommand(doOrDie);
-      const { nextInput, nextOutput, gameStatus } = bridgeGame.retry(doOrDie);
-      if (nextInput) this[nextInput]();
-      if (nextOutput) OutputView[nextOutput](gameStatus);
+      this.inputOutputMover(bridgeGame.retry(doOrDie));
     } catch (error) {
+      Console.print(error);
       InputView.readGameCommand();
     }
+  },
+
+  inputOutputMover({ nextInput, nextOutput, gameStatus }) {
+    if (nextInput) this[nextInput]();
+    if (nextOutput) OutputView[nextOutput](gameStatus);
   },
 };
 
