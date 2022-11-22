@@ -44,9 +44,15 @@ class GameController {
   playRound() {
     this.view.input.readMoving((moveInput) => {
       const step = Check(moveInput, checkMoveFormat, this.playRound.bind(this));
+
+      if (step === undefined) {
+        return;
+      }
+
       this.model.move(step);
 
       const { isAlive, currentIndex, bridge, currentMap } = this.model.state;
+
       const isEnd = currentIndex === bridge.length;
 
       this.view.output.printMap(currentMap);
