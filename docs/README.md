@@ -37,6 +37,10 @@ javascript-bridge
       └─ BridgeMapTest.js
 ```
 
+## 📌 Structual Diagram
+
+![bridge game structure](./structualDiagram.png)
+
 ## 📌 Cases
 
 ### 🔸 Start Game
