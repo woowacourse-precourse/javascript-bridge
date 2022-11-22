@@ -1,4 +1,4 @@
-const { GAME_VALUES } = require("../constants/constant");
+const { GAME_VALUES, ERROR_MESSAGES } = require("../constants/constant");
 
 class ValidateGameCommand {
   constructor(gameCommand) {
@@ -10,7 +10,7 @@ class ValidateGameCommand {
   }
 
   set gameCommand(gameCommand) {
-    if (this.validate(gameCommand) === false) throw new Error("[ERROR]");
+    if (this.validate(gameCommand) === false) throw new Error(ERROR_MESSAGES.gameCommand);
     this._gameCommand = gameCommand;
   }
 
