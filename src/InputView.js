@@ -19,7 +19,7 @@ const InputView = {
       );
     }
   },
-  readBridgeSize() {
+  readBridgeSize(bridgeGame) {
     Console.readLine("다리의 길이를 입력해주세요.", (answer) => {
       try {
         InputView.validateBridgeSize(Number(answer));
@@ -38,16 +38,23 @@ const InputView = {
   readMoving(bridgeGame) {
     Console.readLine(
       "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      (move) => {
+      (answer) => {
         try {
-          InputView.validateMoving(move);
-          bridgeGame.move(move);
+          InputView.validateMoving(answer);
+          bridgeGame.move(answer);
         } catch (error) {
           Console.print(error.message);
           InputView.readMoving(bridgeGame);
         }
       }
     );
+  },
+
+  validateMoving(value) {
+    const movingReg = /^[U|D]$/;
+    if (!movingReg.test(value)) {
+      throw new Error("[ERROR] 위 칸은 U, 아래 칸은 D를 입력해 주세요.");
+    }
   },
 
   /**
