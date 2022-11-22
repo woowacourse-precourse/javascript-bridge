@@ -14,17 +14,12 @@ const BRIDGE_PARTS = Object.freeze({
   pier: '|',
 });
 
-const SIGN = Object.freeze({
-  O: 'O',
-  X: 'X',
-  empty_space: ' ',
-});
-
 const BRIDGE = Object.freeze({
   min_length: 3,
   max_length: 20,
   crossable: 'O',
   uncrossable: 'X',
+  empty_space: ' ',
 });
 
 const DIRECTION = Object.freeze({
@@ -32,4 +27,4 @@ const DIRECTION = Object.freeze({
   down: 'D',
 });
 
-module.exports = { COMMAND, RESULT, BRIDGE_PARTS, SIGN, BRIDGE, DIRECTION };
+module.exports = { COMMAND, RESULT, BRIDGE_PARTS, BRIDGE, DIRECTION };
