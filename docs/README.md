@@ -70,7 +70,7 @@
 
   - [ ] 최종 결과가 성공인지 실패인지 여부를 판단하고 최종 게임 결과 메시지를 출력한다.
 
-### 7. 게임 재시작 여부를 입력받는다. (readGameCommand - InputView.js)
+### 7. 게임 재시작 여부를 입력받는다. (readGameCommand - InputView.js) ✔
 
 **⬇ (InputHandling.js)**
 
