@@ -19,11 +19,19 @@ class BridgeGameController {
   }
 
   updateBridgeLengthFromUser() {
-    return InputView.readBridgeSize(this.#updateBridgeAccordingInput.bind(this));
+    return InputView.readBridgeSize(this.#updateAnswerBridgeAccordingInput.bind(this));
   }
 
-  #updateBridgeAccordingInput(bridgeSize) {
+  #updateAnswerBridgeAccordingInput(bridgeSize) {
+    this.#updateAnswerBridgeSize(bridgeSize);
+    this.#updateAnswerBridgePath();
+  }
+
+  #updateAnswerBridgeSize(bridgeSize) {
     this.model.validPath.size = Number(bridgeSize);
+  }
+
+  #updateAnswerBridgePath() {
     if (this.#isBridgeLengthNotValid()) return this.updateBridgeLengthFromUser();
     this.model.validPath.setAnswerBridge();
     this.updateMoveDirectionFromUser();
