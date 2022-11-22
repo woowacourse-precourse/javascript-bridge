@@ -1,3 +1,5 @@
+const { Console } = require('@woowacourse/mission-utils');
+
 const OutputView = require('./view/OutputView');
 
 class BridgeUnit {
@@ -15,6 +17,18 @@ class BridgeUnit {
 
     countRoundConsole(round) {
         OutputView.printAttemptCount(round);
+    }
+
+    emptyConsole() {
+        Console.print('');
+    }
+
+    closeConsole() {
+        Console.close();
+    }
+
+    bridgeConsole(result) {
+        Console.print(result);
     }
 }
 

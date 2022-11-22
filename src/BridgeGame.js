@@ -1,5 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
-
 const BridgeUnit = require('./BridgeUnit');
 
 class BridgeGame {
@@ -20,35 +18,27 @@ class BridgeGame {
     this.#round += 1;
   }
 
-  countRound() {
-    this.bridgeUnit.countRoundConsole(this.#round);
-  }
-
   retry() {
     this.move();
-    Console.print('');
+    this.bridgeUnit.emptyConsole()
   }
 
   fail() {
     this.bridgeUnit.resultConsole();
-    this.printResultBridge();
-    Console.print('');
+    this.bridgeUnit.bridgeConsole(this.#currentResult)
+    this.bridgeUnit.emptyConsole()
     this.bridgeUnit.failConsole();
-    this.countRound();
-    Console.close();
+    this.bridgeUnit.countRoundConsole(this.#round);
+    this.bridgeUnit.closeConsole();
   }
 
   win() {
     this.bridgeUnit.resultConsole();
-    this.printResultBridge();
-    Console.print('');
+    this.bridgeUnit.bridgeConsole(this.#currentResult)
+    this.bridgeUnit.emptyConsole()
     this.bridgeUnit.winConsole();
-    this.countRound();
-    Console.close();
-  }
-
-  printResultBridge() {
-    Console.print(this.#currentResult);
+    this.bridgeUnit.countRoundConsole(this.#round);
+    this.bridgeUnit.closeConsole();
   }
 }
 
