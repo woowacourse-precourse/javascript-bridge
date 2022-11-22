@@ -24,6 +24,17 @@ class Validator {
   }
 
   /**
+   * 값이 일치하는지 검증합니다.
+   *
+   * @param {any} value
+   * @param {function()} errorExpression
+   * @returns {this}
+   */
+  shouldBe(value, errorExpression = undefined) {
+    return this.should(this.#value === value, errorExpression ?? `${value} 값이어야 합니다.`);
+  }
+
+  /**
    * 값이 boolean인지 검증합니다.
    *
    * @param {function()} errorExpression
