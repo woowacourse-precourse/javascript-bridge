@@ -19,10 +19,15 @@ const InputView = {
       "다리의 길이를 입력해주세요.\n",
       function (length) {
         length = Number(length);
-        validateBridgeLength(length);
-        const bridgeGame = new BridgeGame(length);
-        this.readMoving(bridgeGame);
-      }.bind(this)
+        try {
+          validateBridgeLength(length);
+          const bridgeGame = new BridgeGame(length);
+          this.readMoving(bridgeGame);
+        } catch (err) {
+          Console.print(err);
+          this.readBridgeSize();
+        }
+      }.bind(InputView)
     );
   },
 
@@ -33,11 +38,16 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       function (direction) {
-        validateDirection(direction);
-        const [marking, isEnd] = bridgeGame.move(direction);
-        OutputView.printMap(bridgeGame.board);
-        this.makeResult(marking, isEnd, bridgeGame);
-      }.bind(this)
+        try {
+          validateDirection(direction);
+          const [marking, isEnd] = bridgeGame.move(direction);
+          OutputView.printMap(bridgeGame.board);
+          this.makeResult(marking, isEnd, bridgeGame);
+        } catch (err) {
+          Console.print(err);
+          this.readMoving(bridgeGame);
+        }
+      }.bind(InputView)
     );
   },
   makeResult(marking, isEnd, bridgeGame) {
@@ -53,9 +63,14 @@ const InputView = {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       function (command) {
-        validateCommand(command);
-        this.executeCommand(command, bridgeGame);
-      }.bind(this)
+        try {
+          validateCommand(command);
+          this.executeCommand(command, bridgeGame);
+        } catch (err) {
+          Console.print(err);
+          this.readGameCommand(bridgeGame);
+        }
+      }.bind(InputView)
     );
   },
 
