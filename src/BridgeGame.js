@@ -72,7 +72,7 @@ class BridgeGame {
       this.tryCnt+=1;
       return;
     };
-    this.cnt=2;
+    this.cnt=this.size-1;
     this.success = "실패";
   };
 }
