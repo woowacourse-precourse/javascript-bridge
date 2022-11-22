@@ -23,7 +23,7 @@ describe("예외 테스트", () => {
   });
 
   test("게임 재시작/종료 입력이 Q 나 R 이 아닌 경우", () => {
-    mockRandoms(["0", "0", "0"]);
+    mockRandoms([0, 0, 0]);
     mockQuestions(["3", "U", "X"]);
     const logSpy = getLogSpy();
     const app = new App();
