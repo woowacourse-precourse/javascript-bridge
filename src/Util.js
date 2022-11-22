@@ -2,7 +2,9 @@ const {
   MIN_BRIDGE_SIZE,
   MAX_BRIDGE_SIZE,
   POSITIONS,
-  RETRY_COMMAND_TYPE
+  RETRY_COMMAND_TYPE,
+  MAP_STATE,
+  ERROR_MSG
 } = require('./constants');
 
 const validateBridgeSize = len => {
@@ -20,4 +22,16 @@ const validateRetryCommand = command => {
     throw new Error(ERROR_MSG.invalidRetryCommand);
 };
 
-module.exports = { validateBridgeSize, validatePosition, validateRetryCommand };
+const getMapState = (isSamePos, success, last) => {
+  if (isSamePos && last) return success ? MAP_STATE.success : MAP_STATE.fail;
+  if (isSamePos) return MAP_STATE.success;
+
+  return MAP_STATE.empty;
+};
+
+module.exports = {
+  validateBridgeSize,
+  validatePosition,
+  validateRetryCommand,
+  getMapState
+};

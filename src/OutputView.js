@@ -1,15 +1,12 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { POSITIONS, MAP_STATE, OUTPUT_MSG, GAME_STATE } = require('./constants');
+const { getMapState } = require('./Util');
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
-  getMapState(isSamePos, success, last) {
-    if (isSamePos && last) return success ? MAP_STATE.success : MAP_STATE.fail;
-    if (isSamePos) return MAP_STATE.success;
-
-    return MAP_STATE.empty;
-  },
+  //
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -20,8 +17,8 @@ const OutputView = {
       const map = [];
       for (let c = 0; c < state.length; c += 1) {
         map.push(
-          this.getMapState(
-            state[c] === POSITIONS[POSITIONS.length - 1 - r],
+          getMapState(
+            state[c] === POSITIONS[1 - r],
             success,
             c === state.length - 1
           )
