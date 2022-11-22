@@ -30,7 +30,7 @@ class BridgeGame {
   #bridgeSizeInputHandler = (size) => {
     try {
       const IS_VALID_SIZE = BridgeError.isValidBridgeSize(size);
-      BridgeError.throwErrorHandler(BridgeModel.ErrorMessages[0], !IS_VALID_SIZE);
+      BridgeError.throwErrorHandler(BridgeModel.errorMessages[0], !IS_VALID_SIZE);
       GameProgress.printBlankLine();
       this.#makeBridge(+size);
     } catch {
@@ -59,7 +59,7 @@ class BridgeGame {
   #bridgeMoveInputHandler = (input) => {
     try {
       const IS_VALID_MOVING = BridgeError.isValidMoving(input);
-      BridgeError.throwErrorHandler(BridgeModel.ErrorMessages[1], !IS_VALID_MOVING);
+      BridgeError.throwErrorHandler(BridgeModel.errorMessages[1], !IS_VALID_MOVING);
       GameProgress.printMap(BridgeModel.bridge, this.#bridgeMoveCount, input);
       this.#moveNext(input);
     } catch {
@@ -69,7 +69,7 @@ class BridgeGame {
 
   #moveNext = (input) => {
     this.#bridgeMoveCount += 1;
-    if (input !== BridgeModel.bridge[this.#bridgeMoveCount - 1]) {
+    if (BridgeModel.failToCross(input, this.#bridgeMoveCount)) {
       this.#retry();
     } else if (this.#bridgeMoveCount < BridgeModel.bridge.length) {
       GameProgress.readMoving(this.#bridgeMoveInputHandler);
@@ -93,7 +93,7 @@ class BridgeGame {
   #bridgeRetryInputHandler = (input) => {
     try {
       const IS_VALID_INPUT = BridgeError.isValidRetryInput(input);
-      BridgeError.throwErrorHandler(BridgeModel.ErrorMessages[2], !IS_VALID_INPUT);
+      BridgeError.throwErrorHandler(BridgeModel.errorMessages[2], !IS_VALID_INPUT);
       this.#gameRestartOrOver(input);
     } catch {
       GameProgress.readGameCommand(this.#bridgeRetryInputHandler);
