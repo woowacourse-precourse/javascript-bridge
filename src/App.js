@@ -20,10 +20,10 @@ class App {
 
   makeBridge(length) {
     this.bridgeGame.buildBridge(length);
-    this.requestMove();
+    this.#requestMove();
   }
 
-  requestMove() {
+  #requestMove() {
     InputView.readMoving.call(this, this.moveUser);
   }
 
@@ -31,33 +31,33 @@ class App {
     this.bridgeGame.move(direction);
     OutputView.printMap(this.bridgeGame.currentUserMoveMap());
     const walkable = this.bridgeGame.walkable();
-    this.checkGameStatus(walkable);
+    this.#checkGameStatus(walkable);
   }
 
-  checkGameStatus(gameStatus) {
-    if (gameStatus && this.bridgeGame.isWin()) this.gameEnd();
+  #checkGameStatus(gameStatus) {
+    if (gameStatus && this.bridgeGame.isWin()) this.#gameEnd();
 
-    if (gameStatus && !this.bridgeGame.isWin()) this.requestMove();
+    if (gameStatus && !this.bridgeGame.isWin()) this.#requestMove();
 
-    if (!gameStatus) this.fail();
+    if (!gameStatus) this.#fail();
   }
 
-  fail() {
-    InputView.readRetryOrQuit.call(this, this.retryOrQuit);
+  #fail() {
+    InputView.readRetryOrQuit.call(this, this.#retryOrQuit);
   }
 
-  retryOrQuit(command) {
-    if (command === GAME_BUTTON.restart) this.restartGame();
+  #retryOrQuit(command) {
+    if (command === GAME_BUTTON.restart) this.#restartGame();
 
-    if (command === GAME_BUTTON.end) this.gameEnd();
+    if (command === GAME_BUTTON.end) this.#gameEnd();
   }
 
-  restartGame() {
+  #restartGame() {
     this.bridgeGame.retry();
-    this.requestMove();
+    this.#requestMove();
   }
 
-  gameEnd() {
+  #gameEnd() {
     const userMoveMap = this.bridgeGame.currentUserMoveMap();
     OutputView.printResult(userMoveMap, this.bridgeGame.isWin(), this.bridgeGame.tryCount);
     Console.close();
