@@ -4,7 +4,7 @@ const { ERROR_MESSAGE } = require("./messages");
 const InputValidate = {
   checkBridgeSize(size) {
     if (!Number(size)) {
-      throw new Error("[ERROR] 다리 길이는 숫자 형식이어야 합니다.");
+      throw new Error(ERROR_MESSAGE.BRIDGE_NUMBER_TYPE);
     }
     if (Number(size) < BRIDGE_SIZE.MIN || Number(size) > BRIDGE_SIZE.MAX) {
       throw new Error(ERROR_MESSAGE.BRIDGE_SIZE);

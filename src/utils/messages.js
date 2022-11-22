@@ -18,6 +18,7 @@ module.exports = {
   FAILURE: `실패`,
 
   ERROR_MESSAGE: {
+    BRIDGE_NUMBER_TYPE: `[ERROR] 다리 길이는 숫자 형식이어야 합니다.`,
     BRIDGE_SIZE: `[ERROR] 다리 길이는 ${BRIDGE_SIZE.MIN}부터 ${BRIDGE_SIZE.MAX} 사이의 숫자여야 합니다.`,
     MOVING_DIRECTION: `[ERROR] 이동할 칸은 ${DIRECTION.TO_UPPER} 혹은 ${DIRECTION.TO_LOWER} 여야 합니다.`,
     RETRY_COMMAND: `[ERROR] 입력 명령어는 ${COMMAND.RETRY} 혹은 ${COMMAND.QUIT} 여야 합니다.`,
