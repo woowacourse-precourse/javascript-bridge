@@ -1,41 +1,67 @@
 const { BRIDGE_RULE } = require('./utils/constants');
+
 const REGEX_LAST_VERTICAL_LINE = /\|$/;
+const FORMAT = {
+  FIRST: '[',
+  VERTICAL_LINE: '|',
+  SAME: ' O ',
+  DIFFERENT: ' X ',
+  NOTHING: '   ',
+  LAST: ']',
+};
 
 const Map = {
   makeMap(bridgeInfo) {
-    bridgeMap = [];
-    bridgeMap.push(this.upSide(bridgeInfo));
-    bridgeMap.push(this.downSide(bridgeInfo));
+    this.init(bridgeInfo);
+    const bridgeMap = [];
+    bridgeMap.push(this.makeUpSideMap(bridgeInfo));
+    bridgeMap.push(this.makeDownSideMap(bridgeInfo));
     return bridgeMap;
   },
 
-  upSide(bridgeInfo) {
-    let upsideMap = '[';
-    bridgeInfo.userMove.forEach((direction, index) => {
-      if (direction === BRIDGE_RULE.MOVE_UP) {
-        upsideMap += this.isSameDirection(direction, bridgeInfo.bridge[index]);
-      } else upsideMap += '   ';
-      upsideMap += '|';
-    });
-    upsideMap = upsideMap.replace(REGEX_LAST_VERTICAL_LINE, ']');
-    return upsideMap;
+  init(bridgeInfo) {
+    this.upSideMap = '';
+    this.downSideMap = '';
+    this.bridge = bridgeInfo.bridge;
+  },
+
+  makeUpSideMap(bridgeInfo) {
+    this.upSideMap += FORMAT.FIRST;
+    bridgeInfo.userMove.forEach(this.addUpSideMap.bind(this));
+    this.upSideMap = this.upSideMap.replace(
+      REGEX_LAST_VERTICAL_LINE,
+      FORMAT.LAST
+    );
+    return this.upSideMap;
+  },
+
+  addUpSideMap(direction, index) {
+    if (direction === BRIDGE_RULE.MOVE_UP) {
+      this.upSideMap += this.isSameDirection(direction, this.bridge[index]);
+    } else this.upSideMap += FORMAT.NOTHING;
+    this.upSideMap += FORMAT.VERTICAL_LINE;
   },
 
   isSameDirection(users, bridge) {
-    if (users === bridge) return ' O ';
-    return ' X ';
+    if (users === bridge) return FORMAT.SAME;
+    return FORMAT.DIFFERENT;
   },
 
-  downSide(bridgeInfo) {
-    let downMap = '[';
-    bridgeInfo.userMove.forEach((direction, index) => {
-      if (direction === BRIDGE_RULE.MOVE_DOWN) {
-        downMap += this.isSameDirection(direction, bridgeInfo.bridge[index]);
-      } else downMap += '   ';
-      downMap += '|';
-    });
-    downMap = downMap.replace(REGEX_LAST_VERTICAL_LINE, ']');
-    return downMap;
+  makeDownSideMap(bridgeInfo) {
+    this.downSideMap = FORMAT.FIRST;
+    bridgeInfo.userMove.forEach(this.addDownSideMap.bind(this));
+    this.downSideMap = this.downSideMap.replace(
+      REGEX_LAST_VERTICAL_LINE,
+      FORMAT.LAST
+    );
+    return this.downSideMap;
+  },
+
+  addDownSideMap(direction, index) {
+    if (direction === BRIDGE_RULE.MOVE_DOWN) {
+      this.downSideMap += this.isSameDirection(direction, this.bridge[index]);
+    } else this.downSideMap += FORMAT.NOTHING;
+    this.downSideMap += FORMAT.VERTICAL_LINE;
   },
 };
 
