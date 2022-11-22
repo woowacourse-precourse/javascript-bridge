@@ -36,6 +36,19 @@ class DirectionChoiceInput {
     constructor (userInput) {
         this.#userInput = userInput;
     }
+
+    check() {
+        try{
+            if (!this.isValidInput())
+                throw new Error(Print.ErrorMessage('[ERROR] U 또는 D만 입력 가능합니다.'));
+                return true;
+        }catch {
+            return false;
+        }
+    }
+    isValidInput() {
+        return this.#userInput === 'U' || this.#userInput === 'D';
+    }
 }
 
 class RetryInput {
@@ -43,6 +56,20 @@ class RetryInput {
 
     constructor (userInput) {
         this.#userInput = userInput;
+    }
+
+    check() {
+        try{
+            if (!this.isValidInput())
+                throw new Error(Print.ErrorMessage('[ERROR] Q 또는 R만 입력 가능합니다.'));
+                return true;
+        }catch {
+            return false;
+        }
+    }
+
+    isValidInput() {
+        return this.#userInput === 'Q' || this.#userInput === 'R';
     }
 }
 
