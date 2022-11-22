@@ -20,4 +20,9 @@ const BRIDGE = Object.freeze({
   MIN_LENGTH: 3,
   MAX_LENGTH: 20,
 });
-module.exports = { GAME, ERROR, BRIDGE };
+
+const SIDE = {
+  DOWN: 0,
+  UP: 1,
+};
+module.exports = { GAME, ERROR, BRIDGE, SIDE };
