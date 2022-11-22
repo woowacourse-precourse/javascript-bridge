@@ -23,9 +23,7 @@ const OutputView = {
    */
   printResult(resultBridge, round, gameResult) {
     Console.print('최종 게임 결과');
-    resultBridge.map((el) => {
-      Console.print('[ ' + `${el.join(' | ')}` + ' ]');
-    });
+    this.printMap(resultBridge);
     Console.print('게임 성공 여부: ' + gameResult);
     Console.print('총 시도한 횟수: ' + round);
     Console.close();
