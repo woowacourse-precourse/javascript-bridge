@@ -18,4 +18,10 @@ const checkValidDirection = (direction) => {
   }
 };
 
-module.exports = { checkValidSize, checkValidDirection };
+const checkValidCommand = (command) => {
+  if (!(command === 'R' || command === 'Q')) {
+    throw new Error(MESSAGE.ERROR.RETRY);
+  }
+};
+
+module.exports = { checkValidSize, checkValidDirection, checkValidCommand };
