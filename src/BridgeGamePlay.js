@@ -6,7 +6,7 @@ const OutputView = require("./OutputView");
 const Validation = require("./Validation");
 const BridgeGame = require("./BridgeGame");
 
-class BridgeGameManager {
+class BridgeGamePlay {
   constructor() {
     this.bridgeGame = null;
   }
@@ -67,4 +67,4 @@ class BridgeGameManager {
   }
 }
 
-module.exports = BridgeGameManager;
+module.exports = BridgeGamePlay;
