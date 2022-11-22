@@ -2,6 +2,11 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  static BRIDGE_HEIGHT = 2;
+  static ROW = {
+    U: 0,
+    D: 1,
+  };
   #userDirections = [];
   #bridgeDirections = [];
 
@@ -50,12 +55,16 @@ class BridgeGame {
       .every((isSame) => isSame);
   }
 
-  getBridgeDirections() {
-    return [...this.#bridgeDirections];
-  }
+  getMap() {
+    const [bridgeDirections, userDirections] = [this.#bridgeDirections, this.#userDirections];
+    const bridegeMap = userDirections.map((direction, index) => {
+      const checks = Array.from({length: BridgeGame.BRIDGE_HEIGHT}, () => ' ');
+      checks[BridgeGame.ROW[direction]] = direction === bridgeDirections[index] ? 'O' : 'X';
 
-  getUserDirections() {
-    return [...this.#userDirections];
+      return checks;
+    });
+
+    return [bridegeMap.map((checks) => checks[0]), bridegeMap.map((checks) => checks[1])];
   }
 
   /**
