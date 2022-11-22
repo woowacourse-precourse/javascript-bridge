@@ -42,8 +42,7 @@ const OUTPUT_MESSAGE = Object.freeze({
 const INPUT_MESSAGE = Object.freeze({
   BRIDGE_SIZE: "다리의 길이를 입력해주세요.\n",
   MOVING_SPACE: `이동할 칸을 선택해주세요. (위: ${MOVING_SPACE.UP}, 아래: ${MOVING_SPACE.DOWN})\n`,
-  RETRY_OR_QUIT:
-    "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+  RETRY_OR_QUIT: `게임을 다시 시도할지 여부를 입력해주세요. (재시도: ${RETRY_OR_QUIT.RETRY}, 종료: ${RETRY_OR_QUIT.QUIT})\n`,
 });
 
 const ERROR = "[ERROR]";
