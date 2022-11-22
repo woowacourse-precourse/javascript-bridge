@@ -3,10 +3,12 @@ const {
   ERROR_MOVE_MESSAGE,
   ERROR_RETRY_MESSAGE
 } = require('./constants/Message');
+const { GAME_RANGE } = require('./constants/Constants');
 
 const validateBridgeLength = userInput => {
   if (isNaN(userInput)) throw new Error(ERROR_BRIDGE_MESSAGE.ONLY_STRING);
-  if (userInput < 3 || userInput > 20) throw new Error(ERROR_BRIDGE_MESSAGE.RANGE);
+  if (userInput < GAME_RANGE.START_INCLUSIVE || userInput > GAME_RANGE.END_INCLUSIVE)
+    throw new Error(ERROR_BRIDGE_MESSAGE.RANGE);
 };
 
 const validateMovingValue = userInput => {
