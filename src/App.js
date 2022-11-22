@@ -30,9 +30,17 @@ class App {
   }
 
   playerMove(){
-    InputView.readMoving(this.#generatedBridge,this.#gameStatus)
+    while(this.#gameStatus.playerLocation!==this.#generatedBridge.length){
+      InputView.readMoving(this.#generatedBridge,this.#gameStatus)
+      OutputView.printMap(this.#gameStatus)
+      // if(this.#gameStatus.wrongFlag){
+      //  this.chooseWrong()
+      // }
+    }
+  }
+
+  chooseWrong(){
     
-    OutputView.printMap(this.#gameStatus)
   }
 
   
