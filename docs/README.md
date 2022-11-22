@@ -37,3 +37,48 @@
   - [X] Q를 입력하면 false를 반환한다.
 
 - [X] 게임 종료시 최종 게임 결과, 성공/실패 여부, 시도 횟수를 출력한다.
+
+## 클래스 구조
+![image](https://github.com/gyeongminpark/javascript-bridge/blob/gyeongminpark/img/class.png)
+
+### BridgeGame
+
+- create() : 다리 생성
+- move() : 칸 이동
+- retry() : 게임 재시작
+
+### GameException
+
+- handleBridgeSizeException() : 다리 길이 입력값 예외 처리
+- handleMovingException() : 칸 이동 입력값 예외 처리
+- handleRetryException() : 재시작 입력값 예외 처리
+
+### Bridge
+
+- cross() : 칸 이동 관련 결과 반환
+- reStart() : 재시작 관련 결과 반환
+
+### BridgeStatus
+
+- getStatus() : 현재까지의 다리 이동 결과 반환
+- add() : 다리 이동 결과 추가
+- init() : 다리 이동 결과 초기화
+
+### ViewManager
+
+- start() : 입력 및 출력 시작
+
+### InputView
+
+- readBridgeSize() : 다리 길이 입력
+- readMoving() : 이동할 칸 입력
+- readGameCommand() : 재시도 여부 입력
+
+### Output
+
+- printStartMessage() : 게임 시작 메시지 출력
+- printMap() : 현재까지의 다리 이동 결과 출력
+- printResult() : 최종 게임 결과 출력
+
+
+
