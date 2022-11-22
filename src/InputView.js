@@ -50,16 +50,16 @@ const InputView = {
    * 이동할 칸 입력받기 예외처리 
    */
   exceptionOfReadMoving(space){
-    if(space != 'U' || space != 'D')
+    if(space != 'U' && space != 'D')
       throw new Error('[ERROR] 이동할 칸은 U 또는 D여야 합니다.');
   },
 
   /**
    * 게임 재시작, 종료 입력받기 예외처리 
    */
-  exceptionOfReadGameCommand(space){
-    if(space != 'R' || space != 'Q')
-      throw new Error('[ERROR] 이동할 칸은 R 또는 Q여야 합니다.');
+  exceptionOfReadGameCommand(game){
+    if(game != 'R' && game != 'Q')
+      throw new Error('[ERROR] 입력은 R 또는 Q여야 합니다.');
   }
 
 };
