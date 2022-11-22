@@ -67,11 +67,21 @@ class App {
   }
 
   #printResult(isCompleted) {
-    return;
+    const result = {
+      upperBridge: this.#bridgeGame.passedUpperBridgePads,
+      lowerBridge: this.#bridgeGame.passedLowerBridgePads,
+      isCompleted: isCompleted,
+      tries: this.#bridgeGame.tries,
+    }
+    OutputView.printResult(result);
   }
 
   #retry(isRetry) {
-    return;
+    if (isRetry) {
+      this.#readMoving();
+      return;
+    }
+    this.#printResult(GAME.FAIL);
   }
 }
 
