@@ -9,4 +9,13 @@ describe('예외처리 테스트', () => {
       }).toThrow('[ERROR]');
     });
   });
+
+  test('이동 예외 테스트', () => {
+    const exceptionInputs = ['1', 'U ', 'u', 'd', 'ㅓ'];
+    exceptionInputs.map((input) => {
+      expect(() => {
+        InputErrorCheck.way(input);
+      }).toThrow('[ERROR]');
+    });
+  });
 });
