@@ -45,13 +45,13 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(input) {
-    this.checkMovement(input, this.#bridge, this.#playerAt);
-    this.setBridgeForm(input);
-    this.setGameStatus();
+    this.#checkMovement(input, this.#bridge, this.#playerAt);
+    this.#setBridgeForm(input);
+    this.#setGameStatus();
     return [this.#bridgeUpper, this.#bridgeLower, this.#gameStatus];
   }
 
-  checkMovement(input, bridge, idx) {
+  #checkMovement(input, bridge, idx) {
     if (input === bridge[idx]) {
       this.#moveResult = VALUE.SUCCESS;
       this.#playerAt = this.#playerAt + 1;
@@ -60,7 +60,7 @@ class BridgeGame {
     this.#moveResult = VALUE.FAILURE;
   }
 
-  setBridgeForm(input) {
+  #setBridgeForm(input) {
     if (input === KEYS.UP) {
       this.#bridgeUpper.push(this.#moveResult);
       this.#bridgeLower.push(VALUE.EMPTY);
@@ -71,7 +71,7 @@ class BridgeGame {
     return;
   }
 
-  setGameStatus() {
+  #setGameStatus() {
     if (
       this.#moveResult === VALUE.SUCCESS &&
       this.#playerAt === this.#bridge.length
