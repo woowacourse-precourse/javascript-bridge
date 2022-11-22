@@ -6,6 +6,11 @@ class BridgeGame {
   #numberOfAttempts;
   #bridgeSize;
 
+  constructor(bridge, list, attempt) {
+    this.#bridgeSize = bridge;
+    this.#movingList = list;
+    this.#numberOfAttempts = attempt;
+  }
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
