@@ -1,5 +1,5 @@
 const { makeBridge } = require("./BridgeMaker");
-
+const Constant = require("./Constant");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -55,13 +55,13 @@ class BridgeGame {
   }
 
   insertCorrectBridge(upBridge, downBridge, answerDirection) {
-    if (answerDirection === "U") {
-      upBridge.push("O");
-      downBridge.push(" ");
+    if (answerDirection === Constant.UP_DIRECTION_STRING) {
+      upBridge.push(Constant.CORRECT_STRING);
+      downBridge.push(Constant.BLANK_STRING);
     }
-    if (answerDirection === "D") {
-      upBridge.push(" ");
-      downBridge.push("O");
+    if (answerDirection === Constant.DOWN_DIRECTION_STRING) {
+      upBridge.push(Constant.BLANK_STRING);
+      downBridge.push(Constant.CORRECT_STRING);
     }
   }
 }
