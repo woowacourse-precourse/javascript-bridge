@@ -34,6 +34,7 @@ const InputView = {
       (location) => {
         //console.log(location);
         this.checkSign(location);
+        //MissionUtils.Console.close();
       }
     );
   },
