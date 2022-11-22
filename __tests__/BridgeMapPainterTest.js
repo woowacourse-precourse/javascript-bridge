@@ -54,4 +54,11 @@ describe('🎨 BridgeMapPainter 클래스 테스트', () => {
 
     expect(bridgeMapPainter.isCorrectLocation()).toBeFalsy();
   });
+
+  test('⭐ drawOX 메서드 : moveCommand, userLocation, gameMap를 인자로 받아 유저의 현재 다리 상태를 그린 후 반환합니다.', () => {
+    const bridgeMapPainter = new BridgeMapPainter();
+    const result = `[ O ]\n[   ]\n`;
+
+    expect(bridgeMapPainter.drawOX('U', 0, ['U', 'D', 'D'])).toBe(result);
+  });
 });
