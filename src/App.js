@@ -37,10 +37,10 @@ class App {
         return this.inputUpsideDown();
       }
       this.bridgeGame.move(upsideDown);
-      OutputView.printMap(this.bridgeGame.getResult());
+      OutputView.printMap(this.bridgeGame.getBridgeResult());
 
       if (this.bridgeGame.isFail()) return this.inputRetryQuit();
-      if (this.bridgeGame.isSuccess()) return Console.print("게임 종료로 이동");
+      if (this.bridgeGame.isSuccess()) return this.quitGame();
       return this.inputUpsideDown();
     });
   }
@@ -53,12 +53,21 @@ class App {
         return this.inputRetryQuit();
       }
       if (retryQuit === "R") return this.retryGame();
+      return this.quitGame();
     });
   }
 
   retryGame() {
     this.bridgeGame.retry();
     this.inputUpsideDown();
+  }
+
+  quitGame() {
+    const isFail = this.bridgeGame.isFail();
+    Console.print(`${!isFail ? "\n" : ""}최종 게임 결과`);
+    OutputView.printMap(this.bridgeGame.getBridgeResult());
+    OutputView.printResult(this.bridgeGame.getResult());
+    Console.close();
   }
 }
 

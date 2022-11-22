@@ -21,7 +21,7 @@ class BridgeGame {
     this.#upsideDown.push([upsideDown, upsideDown === "U" ? 0 : 1]);
   }
 
-  getResult() {
+  getBridgeResult() {
     let result = [[], []];
 
     this.#upsideDown.forEach(([upsideDown, number], index) => {
@@ -51,6 +51,11 @@ class BridgeGame {
   retry() {
     this.#count++;
     this.#upsideDown = [];
+  }
+
+  getResult() {
+    const isSuccess = !this.isFail() && this.isSuccess();
+    return { isSuccess, count: this.#count };
   }
 }
 
