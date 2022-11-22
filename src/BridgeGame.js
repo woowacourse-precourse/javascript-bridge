@@ -32,7 +32,7 @@ class BridgeGame {
     }
   }
 
-  finish(steps, bridge, attempt) {
+  gameFinish(steps, bridge, attempt) {
     if (steps.length != bridge.length) {
       InputView.readMoving(bridge, steps, attempt);
     } else {

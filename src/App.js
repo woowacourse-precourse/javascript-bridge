@@ -7,10 +7,10 @@ const InputView = require("./InputView");
 class App {
   play() {
     Console.print(OUTPUT_MESSAGES.START_GAME);
-    this.startGame();
+    this.gameStart();
   }
 
-  startGame() {
+  gameStart() {
     InputView.readBridgeSize();
   }
 }

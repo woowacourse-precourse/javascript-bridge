@@ -11,9 +11,9 @@ const BridgeMaker = {
     let bridge = [];
     for (let i = 0; i < size; i++) {
       const number = generateRandomNumber();
-      if (number == 1) { // 위칸
+      if (number == 1) {
         bridge.push("U");
-      } else { // 아래칸
+      } else {
         bridge.push("D");
       }
     }
