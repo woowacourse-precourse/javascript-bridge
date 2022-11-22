@@ -4,10 +4,7 @@ const OutputView = require("../src/OutputView");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const BridgeGame = require("../src/BridgeGame");
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  mainBridge: new BridgeGame(),
+  MAINBRIDGE: new BridgeGame(),
   BRIGDETEXT: "다리의 길이를 입력해주세요.\n",
   MOVETEXT: "이동할 칸을 선택해주세요. (위: U 아래: D)\n",
   RETRYTEXT: "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
@@ -25,7 +22,7 @@ const InputView = {
   },
 
   makeBridge(number) {
-    this.mainBridge.setBridge(
+    this.MAINBRIDGE.setBridge(
       BridgeMaker.makeBridge(number, BridgeRandomNumberGenerator.generate)
     );
   },
@@ -74,21 +71,21 @@ const InputView = {
   },
 
   printRight(input) {
-    let tmplocation = this.mainBridge.getLocation();
-    tmpbridge = this.mainBridge.getBridge();
+    let tmplocation = this.MAINBRIDGE.getLocation();
+    tmpbridge = this.MAINBRIDGE.getBridge();
     OutputView.printRight(input, tmplocation - 1);
   },
 
   printWrong(input) {
-    let tmplocation = this.mainBridge.getLocation();
-    tmpbridge = this.mainBridge.getBridge();
+    let tmplocation = this.MAINBRIDGE.getLocation();
+    tmpbridge = this.MAINBRIDGE.getBridge();
     OutputView.printWrong(input, tmplocation - 1);
   },
 
   checkAndMove(input) {
     try {
-      this.mainBridge.move(input, this.mainBridge.getLocation());
-      this.mainBridge.changeLocation();
+      this.MAINBRIDGE.move(input, this.MAINBRIDGE.getLocation());
+      this.MAINBRIDGE.changeLocation();
       this.printRight(input);
       this.readMoving();
     } catch (e) {
@@ -109,14 +106,14 @@ const InputView = {
   },
 
   printRightEnd(input) {
-    this.mainBridge.changeLocation();
+    this.MAINBRIDGE.changeLocation();
     this.printRight(input);
-    OutputView.printResult(this.mainBridge.getRetry(), true);
+    OutputView.printResult(this.MAINBRIDGE.getRetry(), true);
     MissionUtils.Console.close();
   },
 
   printWrongEnd(input) {
-    this.mainBridge.changeLocation();
+    this.MAINBRIDGE.changeLocation();
     this.printWrong(input);
   },
 
@@ -145,14 +142,13 @@ const InputView = {
   },
 
   retry() {
-    this.mainBridge.retry();
+    this.MAINBRIDGE.retry();
     OutputView.reset();
     this.readMoving();
   },
 
   finish() {
-    let result = this.mainBridge.getRetry();
-    OutputView.printResult(this.mainBridge.getRetry(), false);
+    OutputView.printResult(this.MAINBRIDGE.getRetry(), false);
     MissionUtils.Console.close();
   },
 };
