@@ -19,6 +19,18 @@ class App {
       this.game.move(side);
       printMap(this.game);
 
+      if(this.game.isGameOver){
+        this.askRetryOrNot();
+      }else{
+        if(this.game.isLastStep){
+          //printResult(this.game);
+        }
+        else{
+          this.playOnce();
+        }
+      }
+
+
     })
   }
 

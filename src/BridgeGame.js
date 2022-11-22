@@ -14,8 +14,9 @@ class BridgeGame {
     this.bridge = makeBridge();
     this.state = [];
     this.currentPos = 0;
-    // this.isLastStep = false;
-    // this.isGameOver = false;
+    this.isLastStep = false;
+    this.isGameOver = false;
+    this.tryCount = 0;
   }
 
   move(userInput) {
@@ -25,6 +26,13 @@ class BridgeGame {
     else this.state.push('X');
 
     this.currentPos+=1;
+
+    if(this.currentPos === this.bridge.length){
+      this.isLastStep = true;
+    }
+    if(this.state[this.state.length- 1] === false){
+      this.isGameOver = true;
+    }
 
     return this.state[this.state.length - 1];
   }
@@ -36,7 +44,21 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(toRetry) {
+    if(toRetry === true){
+      this.state = [];
+      this.currentPos = 0;
+      this.isLastStep = false;
+      this.isGameOver = false;
+      this.tryCount += 1;
+
+      return true;
+    }
+    else{
+      return false;
+    }
+
+  }
 }
 
 module.exports = BridgeGame;
