@@ -10,7 +10,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(`\n${MESSAGE.BRIDGE_LEN}\n`, answer => {
       try {
-        Validator.validateBridgeSize(+answer);
+        Validator.validateBridge(+answer);
         bridge.setBridge(answer);
         Console.print('');
         this.readMoving();
@@ -24,7 +24,7 @@ const InputView = {
   readMoving() {
     Console.readLine(`${MESSAGE.CHOOSE_CELL}\n`, answer => {
       try {
-        Validator.validateDirection(answer);
+        Validator.validateDirect(answer);
         bridge.move(answer);
         OutputView.printMap(bridge);
 
@@ -41,7 +41,7 @@ const InputView = {
   readGameCommand() {
     Console.readLine(`${MESSAGE.CHOOSE_RESTART}\n`, answer => {
       try {
-        Validator.validateRestartInput(answer);
+        Validator.validateReInput(answer);
         if (answer === RESTART.RESTART) {
           bridge.retry();
           this.readMoving();
