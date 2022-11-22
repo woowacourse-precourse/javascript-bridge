@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { NUMBER, COMMAND, MESSAGE, ERROR, } = require('./BridgeConstant');
+const { NUMBER, COMMAND, MESSAGE, ERROR } = require('./BridgeConstant');
 const OutputView = require('./OutputView');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
@@ -18,7 +18,7 @@ const InputView = {
       try {
         this.exceptionBridgeSize(answer);
         this.setBridgeSize(answer);
-      } catch(error) {
+      } catch (error) {
         OutputView.printError(error);
         this.readBridgeSize();
       }
@@ -29,7 +29,7 @@ const InputView = {
     if (/[^0-9]/g.test(answer)) {
       throw ERROR.BRIDGE_SIZE_NUMBER;
     }
-    if (Number(answer) < NUMBER.BIRDGE_SIZE_MINIMUM || Number(answer) > NUMBER.BIRDGE_SIZE_MAXIMUM) {
+    if (Number(answer) < NUMBER.BIRDGE_MINIMUM || Number(answer) > NUMBER.BIRDGE_MAXIMUM) {
       throw ERROR.BRIDGE_SIZE_RANGE;
     }
   },
@@ -47,7 +47,7 @@ const InputView = {
       try {
         this.exceptionMoving(answer);
         this.setMoving(answer);
-      } catch(error) {
+      } catch (error) {
         OutputView.printError(error);
         this.readMoving();
       }
@@ -80,7 +80,7 @@ const InputView = {
       try {
         this.exceptionGameCommand(answer);
         this.setGameCommand(answer);
-      } catch(error) {
+      } catch (error) {
         OutputView.printError(error);
         this.readGameCommand();
       }
@@ -101,7 +101,7 @@ const InputView = {
     if (answer === COMMAND.QUIT) {
       OutputView.printResult(bridgeGame.getGameResult());
     }
-  }
+  },
 };
 
 module.exports = InputView;

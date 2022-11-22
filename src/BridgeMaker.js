@@ -8,8 +8,8 @@ const BridgeMaker = {
     const bridge = [];
     for (let stage = 0; stage < size; stage++) {
       const randomNumber = generateRandomNumber();
-      if(randomNumber === NUMBER.RANDOM_UP) bridge.push(COMMAND.UP);
-      if(randomNumber === NUMBER.RANDOM_DOWN) bridge.push(COMMAND.DOWN);
+      if (randomNumber === NUMBER.RANDOM_UP) bridge.push(COMMAND.UP);
+      if (randomNumber === NUMBER.RANDOM_DOWN) bridge.push(COMMAND.DOWN);
     }
     return bridge;
   },
