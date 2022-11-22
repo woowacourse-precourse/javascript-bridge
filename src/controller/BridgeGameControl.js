@@ -39,12 +39,9 @@ class BridgeGameControl {
   #isWin;
 
   constructor() {
-    const inputView = Object.create(InputView);
-    this.#inputView = inputView;
-    const outputView = Object.create(OutputView);
-    this.#outputView = outputView;
-    const bridgeGame = new BridgeGame();
-    this.#bridgeGame = bridgeGame;
+    this.#inputView = Object.create(InputView);
+    this.#outputView = Object.create(OutputView);
+    this.#bridgeGame = new BridgeGame();
     this.#movingCount = MOVE_COUNT_INITIAL;
     this.#tryCount = TRY_COUNT_INITIAL;
     this.#isWin = false;
@@ -62,8 +59,7 @@ class BridgeGameControl {
   }
 
   makeMap(bridgeSize) {
-    const map = new Map(bridgeSize.getBridgeSize());
-    this.#map = map;
+    this.#map = new Map(bridgeSize.getBridgeSize());
     this.#map.setMap(this.#canMovingCommands);
   }
 
