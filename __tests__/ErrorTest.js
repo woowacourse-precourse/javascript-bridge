@@ -1,49 +1,28 @@
-// const MissionUtils = require("@woowacourse/mission-utils");
-// const App = require("../src/App");
+const MissionUtils = require("@woowacourse/mission-utils");
+const App = require("../src/App");
+const { runException, getLogSpy, getOutput, mockQuestions, mockRandoms, expectLogContains } = require('../util/TestUtil');
 
-// const mockQuestions = (answers) => {
-//     MissionUtils.Console.readLine = jest.fn();
-//     answers.reduce((acc, input) => {
-//         return acc.mockImplementationOnce((_, callback) => {
-//             callback(input);
-//         });
-//     }, MissionUtils.Console.readLine);
-// };
 
-// const getLogSpy = () => {
-//     const logSpy = jest.spyOn(MissionUtils.Console, "print");
-//     logSpy.mockClear();
-//     return logSpy;
-// };
+describe("입력값 에러 테스트", () => {
 
-// const getOutput = (logSpy) => {
-//     return [...logSpy.mock.calls].join("");
-// };
+    test("다리길이 type 테스트", () => {
+        runException(["a"]);
+    });
 
-// const runException = (inputs) => {
-//     mockQuestions(inputs);
-//     const logSpy = getLogSpy();
-//     const app = new App();
-//     app.play();
-//     expectLogContains(getOutput(logSpy), ["[ERROR]"]);
-// };
+    test("다리길이 range 테스트", () => {
+        runException(["100"]);
+    });
 
-// describe("입력값 에러 테스트", () => {
+    test("Move 값 테스트", () => {
+        runException(["3", "z"]);
+    });
 
-//     test("다리길이 type 테스트", () => {
-//         runException(["a"]);
-//     });
-
-//     test("다리길이 range 테스트", () => {
-//         runException(["100"]);
-//     });
-
-//     test("Move 값 테스트", () => {
-//         runException(["3", "z"]);
-//     });
-
-//     test("Move 값 테스트", () => {
-//         runException(["3", "z"]);
-//     });
-
-// });
+    test("Commnad 값 테스트", () => {
+        const logSpy = getLogSpy();
+        mockRandoms([1, 0, 1]);
+        mockQuestions(["3", "U", "D", "D", "K"]);
+        const app = new App();
+        app.play();
+        expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+    });
+});
