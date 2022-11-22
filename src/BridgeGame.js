@@ -3,7 +3,9 @@ const { makeBridge } = require('./BridgeMaker.js');
 const { generate } = require('./BridgeRandomNumberGenerator.js');
 
 /**
- * 다리 건너기 게임을 관리하는 클래스
+ * 다리 건너기 게임을 관리하는 클래스이다.
+ * 
+ * InputView와 OutputView가 하는 역할을 제외한 모든 로직이 포함되어 있다.
  */
 class BridgeGame {
   constructor() {
@@ -15,13 +17,6 @@ class BridgeGame {
       'D': []
     };
   }
-
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   * 
-   */
 
   generateBridge(bridgeSize) {
     this.bridge = makeBridge(bridgeSize, generate)
@@ -55,11 +50,6 @@ class BridgeGame {
     }
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   retry() {
     this.totalCount++;
     this.roundCount = 0;
