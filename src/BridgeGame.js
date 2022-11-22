@@ -1,5 +1,3 @@
-const OutputView = require("./OutputView");
-
 class BridgeGame {
   constructor() {
     this.round = 0;
