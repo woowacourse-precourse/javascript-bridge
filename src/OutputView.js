@@ -9,6 +9,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  bridgeIdx: {
+    U: 0,
+    D: 1,
+  },
   printMap(bridge, input) {
     const [upper, lower] = this.getBridgeArray(bridge, input);
     Console.print(`[${upper.join("|")}]`);
@@ -18,22 +22,11 @@ const OutputView = {
   getBridgeArray(bridge, input) {
     let mapResult = [[], []];
     for (let i = 0; i < input.length; i++) {
-      if (input[i] === "U" && bridge[i] === "U") {
-        mapResult[0].push(" O ");
-        mapResult[1].push("   ");
-      }
-      if (input[i] === "D" && bridge[i] === "D") {
-        mapResult[0].push("   ");
-        mapResult[1].push(" O ");
-      }
-      if (input[i] === "U" && bridge[i] === "D") {
-        mapResult[0].push(" X ");
-        mapResult[1].push("   ");
-      }
-      if (input[i] === "D" && bridge[i] === "U") {
-        mapResult[0].push("   ");
-        mapResult[1].push(" X ");
-      }
+      if (input[i] === bridge[i])
+        mapResult[this.bridgeIdx[input[i]]].push(" O ");
+      if (input[i] !== bridge[i])
+        mapResult[this.bridgeIdx[input[i]]].push(" X ");
+      mapResult[(this.bridgeIdx[input[i]] + 1) % 2].push("   ");
     }
     return mapResult;
   },
