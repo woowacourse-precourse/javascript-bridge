@@ -8,6 +8,11 @@ const { printMap, printResult } = require("../view/OutputView");
 const InputView = {
   lengthInput: null,
   computerNum: null,
+  startCount: 1,
+  count: 0,
+  result: null,
+  restart: null,
+  cellInput: null,
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -73,8 +78,27 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    new RestartError(input);
-    this.restart = input;
+    Console.readLine(INPUT_MESSAGE.RESTART_MESSAGE, (input) => {
+      new RestartError(input);
+      this.restart = input;
+      this.choiceRestart();
+      this.choiceEnd();
+    });
+  },
+
+  choiceRestart() {
+    if (this.restart === "R") {
+      this.startCount += 1;
+      this.readMoving();
+    }
+  },
+
+  choiceEnd() {
+    if (this.restart === "Q") {
+      this.result[2] = "실패";
+      this.result[3] = this.startCount;
+      printResult(this.result);
+    }
   },
 };
 
