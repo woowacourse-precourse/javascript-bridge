@@ -26,7 +26,7 @@ const InputView = {
   },
 
   readMoving(bridge) {
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
+    Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (input) => {
       this.validateMoving(input);
       const round = this.bridgeGame.move();
 
@@ -51,10 +51,13 @@ const InputView = {
   },
 
   readGameCommand(bridge) {
-    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (input) => {
-      this.validateGameCommand(input);
-      this.restartGame(bridge, input);
-    });
+    Console.readLine(
+      '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+      (input) => {
+        this.validateGameCommand(input);
+        this.restartGame(bridge, input);
+      }
+    );
   },
 
   validateGameCommand(endingKey) {
