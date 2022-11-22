@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
-const InputVaildation = require('./InputValidation');
+const { GAME_BUTTON } = require('./Constants');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
@@ -27,9 +27,9 @@ class App {
     InputView.readMoving.call(this, this.moveUser);
   }
 
-  moveUser(upOrDown) {
-    this.bridgeGame.move(upOrDown);
-    OutputView.printMap(this.bridgeGame.moveTracking());
+  moveUser(direction) {
+    this.bridgeGame.move(direction);
+    OutputView.printMap(this.bridgeGame.currentUserMoveMap());
     const walkable = this.bridgeGame.walkable();
     this.checkGameStatus(walkable);
   }
@@ -46,13 +46,10 @@ class App {
     InputView.readRetryOrQuit.call(this, this.retryOrQuit);
   }
 
-  retryOrQuit(userChoice) {
-    if (userChoice === 'R') {
-      this.restartGame();
-    }
-    if (userChoice === 'Q') {
-      this.gameEnd();
-    }
+  retryOrQuit(command) {
+    if (command === GAME_BUTTON.restart) this.restartGame();
+
+    if (command === GAME_BUTTON.end) this.gameEnd();
   }
 
   restartGame() {
@@ -61,8 +58,8 @@ class App {
   }
 
   gameEnd() {
-    const uesrfootprint = this.bridgeGame.moveTracking();
-    OutputView.printResult(uesrfootprint, this.bridgeGame.isWin(), this.bridgeGame.tryCount);
+    const userMoveMap = this.bridgeGame.currentUserMoveMap();
+    OutputView.printResult(userMoveMap, this.bridgeGame.isWin(), this.bridgeGame.tryCount);
     Console.close();
   }
 }

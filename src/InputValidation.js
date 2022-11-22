@@ -1,17 +1,23 @@
+const { ERROR_MESSAGE, GAME_BUTTON } = require('./Constants');
+
 const InputVaildation = {
-  ofBridgeLength(bridgeLength) {
+  ofBridgeLength(length) {
     const regExag = /(^[3-9]{1}$|^[1]{1}[0-9]{1}$|^20$)/gm;
-    if (!regExag.test(bridgeLength)) {
-      throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+    if (!regExag.test(length)) {
+      throw new Error(ERROR_MESSAGE.invalidRangeInput);
     }
-    return;
   },
 
-  ofMove(movingInput) {
-    if (movingInput !== 'U' && movingInput !== 'D') {
-      throw new Error('[ERROR] 다리 이동 입력은 "U"와 "D"만 가능합니다');
+  ofMove(direction) {
+    if (direction !== GAME_BUTTON.moveUp && direction !== GAME_BUTTON.moveDown) {
+      throw new Error(ERROR_MESSAGE.invalidMoveInput);
     }
-    return;
+  },
+
+  ofRetryOrQuit(command) {
+    if (command !== GAME_BUTTON.restart && command !== GAME_BUTTON.end) {
+      throw new Error(ERROR_MESSAGE.invalidCommandInput);
+    }
   },
 };
 

@@ -5,7 +5,7 @@ const upDownMap = {
 
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
-    return Array.from({ length: size }, () => generateRandomNumber()).map(zeroOrOne =>
+    return Array.from({ length: size }, () => generateRandomNumber()).map((zeroOrOne) =>
       this.randomNumberToUpAndDown(zeroOrOne)
     );
   },
