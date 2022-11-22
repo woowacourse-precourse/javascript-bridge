@@ -60,15 +60,6 @@ const getReadSpy = () => {
 };
 
 describe('다리 건너기 테스트', () => {
-  test('다리 생성 테스트', () => {
-    const randomNumbers = [1, 0, 0, 0];
-    const answers = ['4', 'U'];
-    mockQuestions(answers);
-    mockRandoms(randomNumbers);
-    const app = new App();
-    app.play();
-    expect(app.referee.bridgeGame.bridge.bridge).toHaveLength(4);
-  });
   test('건널수있는지 확인 테스트', () => {
     const randomNumbers = [1, 0, 0, 0];
     const answers = ['4', 'U', 'D', 'U'];
@@ -89,6 +80,16 @@ describe('다리 건너기 테스트', () => {
     const app = new App();
     app.play();
     expect(app.referee.bridgeGame.getExecutionCount()).toEqual(2);
+  });
+  test('종료입력시 종료 테스트', () => {
+    const randomNumbers = [1, 0, 0, 0];
+    const answers = ['4', 'U', 'D', 'U', 'Q'];
+    mockRandoms(randomNumbers);
+    mockQuestions(answers);
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).not.toThrow();
   });
   test('결과 변환 테스트', () => {
     expect(Conversion.convertResult(['O', 'N', 'N'])).toEqual('[ O |   |   ]');
