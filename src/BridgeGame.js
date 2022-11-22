@@ -1,51 +1,52 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { BRIDGE_GAME } = require('./constants/Settings')
 
-// const OutputView = require('./view/OutputView');
+const OutputView = require('./view/OutputView');
+const BridgeGameProceed = require('./BridgeGameProceed')
 
 class BridgeGame {
-  #round = BRIDGE_GAME.start_value;
+  #round = 1;
 
   #currentResult
 
-  // storage(result) {
-  //   this.#currentResult = result;
-  // }
+  storage(result) {
+    this.#currentResult = result;
+    return ;
+  }
 
-  // move() {
-  //   this.#round += BRIDGE_GAME.start_value;
-  // }
+  move() {
+    this.#round += 1;
+  }
 
-  // countRound() {
-  //   OutputView.printAttemptCount(this.#round);
-  // }
+  countRound() {
+    OutputView.printAttemptCount(this.#round);
+  }
 
-  // retry() {
-  //   this.move();
-  //   Console.print(BRIDGE_GAME.new_line);
-  // }
+  retry() {
+    this.move();
+    Console.print('');
+  }
 
-  // fail() {
-  //   OutputView.printResult();
-  //   this.printResultBridge();
-  //   Console.print(BRIDGE_GAME.new_line);
-  //   OutputView.printFail();
-  //   this.countRound();
-  //   Console.close();
-  // }
+  fail() {
+    OutputView.printResult();
+    this.printResultBridge();
+    Console.print('');
+    OutputView.printFail();
+    this.countRound();
+    Console.close();
+  }
 
-  // win() {
-  //   OutputView.printResult()
-  //   this.printResultBridge();
-  //   Console.print(BRIDGE_GAME.new_line);
-  //   OutputView.printWin()
-  //   this.countRound();
-  //   Console.close();
-  // }
+  win() {
+    OutputView.printResult()
+    this.printResultBridge();
+    Console.print('');
+    OutputView.printWin()
+    this.countRound();
+    Console.close();
+  }
 
-  // printResultBridge() {
-  //   OutputView.printMap(this.#currentResult);
-  // }
+  printResultBridge() {
+    Console.print(this.#currentResult);
+  }
 }
 
 module.exports = BridgeGame;

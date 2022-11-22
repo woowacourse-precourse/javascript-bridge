@@ -1,5 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { BRIDGE_GAME_PROCEED } = require('./constants/Settings');
 
 const OutputView = require('./view/OutputView');
 const InputView = require('./view/InputView');
@@ -27,7 +26,7 @@ class BridgeGameProceed {
 
     makeMap(bridgeLength) {
         try {
-            Console.print(BRIDGE_GAME_PROCEED.new_line);
+            Console.print('');
             Validation.bridgeLength(bridgeLength);
             this.#winBridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
             this.game();
@@ -49,25 +48,26 @@ class BridgeGameProceed {
             this.bridgeGame.storage(result);
             this.dividePath(result);
         } catch (error) {
-            Console.print(`${error.message}\n`);
+            Console.print(error.message);
             this.game.call(this);
-    }}
+        }
+    }
 
     dividePath(result) {
-        if (result.includes(BRIDGE_GAME_PROCEED.fail)) {
+        if (result.includes('X')) {
             this.#playersBridge = [];
             return this.fail(result);
         }
         if (this.#playersBridge.length === this.#winBridge.length) {
             return this.callWin.call(this);
         }
-        return this.game();
+        this.game();
     }
 
     bridge() {
-        const result = this.playersMap.show(this.#playersBridge, this.#winBridge);
+        const result = this.playersMap.show(this.#playersBridge, this.#winBridge)
         Console.print(result);
-        Console.print(BRIDGE_GAME_PROCEED.new_line);
+        Console.print('')
         return result;
     }
     
@@ -78,10 +78,10 @@ class BridgeGameProceed {
     gameOverChoice(retryOrNot) {
         try {
             Validation.retry(retryOrNot);
-            if (retryOrNot === BRIDGE_GAME_PROCEED.retry) this.callRetry();
-            if (retryOrNot === BRIDGE_GAME_PROCEED.quit) this.callFail.call(this); 
+            if (retryOrNot === "R") this.callRetry();
+            if (retryOrNot === "Q") this.callFail.call(this); 
         } catch (error) {
-            Console.print(`${error.message}\n`);
+            Console.print(error.message);
             this.fail.call(this);
         }
     }
