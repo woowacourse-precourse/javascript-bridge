@@ -1,11 +1,24 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { Console } = require("@woowacourse/mission-utils");
+const { INPUT_MESSAGE } = require("../model/component");
+const LengthError = require("../error/LengthError");
+const BridgeMaker = require("../BridgeMaker");
+const { generate } = require("../BridgeRandomNumberGenerator");
+
 const InputView = {
+  lengthInput: null,
+  computerNum: null,
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize() {
+    console.log(INPUT_MESSAGE.START_MESSAGE);
+    Console.readLine(INPUT_MESSAGE.BRIDGE_MESSAGE, (input) => {
+      new LengthError(input);
+      this.lengthInput = input;
+      this.computerNum = BridgeMaker.makeBridge(this.lengthInput, generate);
+      this.readMoving();
+    });
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
