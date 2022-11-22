@@ -20,7 +20,7 @@ class BridgeGame {
   }
 
   resetStep() {
-    this.#step = 0;
+    this.#step = STATES.INITIAL_STEP;
   }
 
   getStep() {

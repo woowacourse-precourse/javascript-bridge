@@ -12,8 +12,8 @@ class App {
       size = Number(size);
       const bridgeGame = new BridgeGame(
         BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate),
-        0,
-        1
+        STATES.INITIAL_STEP,
+        STATES.INITIAL_ROUND
       );
       this.progressGame(bridgeGame);
     });

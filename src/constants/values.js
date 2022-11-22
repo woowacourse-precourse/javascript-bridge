@@ -11,6 +11,9 @@ const STATES = {
 
   RIGHT: "O",
   WRONG: "X",
+
+  INITIAL_STEP: 0,
+  INITIAL_ROUND: 1,
 };
 
 module.exports = {
