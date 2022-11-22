@@ -1,5 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const Random = require("./BridgeRandomNumberGenerator");
+const {BRIDGE, BRIDGE_INDEX, BRIDGE_FORMAT, EMPTY} = require("./Constants");
 
 class BridgeGame {
   #userLocation;
@@ -27,7 +28,6 @@ class BridgeGame {
   }
 
   setBridgeSize(size) {
-    //Validate.bridgeSize(size);
     this.#bridgeSize = Number(size);
   }
 
@@ -59,13 +59,13 @@ class BridgeGame {
   }
 
   move(bridgeChoice) {
-    //Validate.bridgeChoice(bridgeChoice);
     this.#userLocation++;
-    if(bridgeChoice === this.#bridge[this.#userLocation]) {
-      this.updateCurrBridge(bridgeChoice, "O");
+    const answer = this.#bridge[this.#userLocation];
+    if(bridgeChoice === answer) {
+      this.updateCurrBridge(bridgeChoice, BRIDGE_FORMAT.SUCCESS);
     }
-    if(bridgeChoice !== this.#bridge[this.#userLocation]) {
-      this.updateCurrBridge(bridgeChoice, "X");
+    if(bridgeChoice !== answer) {
+      this.updateCurrBridge(bridgeChoice, BRIDGE_FORMAT.FAIL);
       this.#fail = true;
     }
     if((this.#userLocation === (this.#bridgeSize - 1)) && (!this.#fail)) {
@@ -74,13 +74,13 @@ class BridgeGame {
   }
   
   updateCurrBridge(bridgeChoice, result) {
-    if(bridgeChoice === "U") {
-      this.#currBridge[0].push(" ");
-      this.#currBridge[1].push(result);
+    if(bridgeChoice === BRIDGE.UP) {
+      this.#currBridge[BRIDGE_INDEX.DOWN_INDEX].push(EMPTY);
+      this.#currBridge[BRIDGE_INDEX.UP_INDEX].push(result);
     }
-    if(bridgeChoice === "D") {
-      this.#currBridge[0].push(result);
-      this.#currBridge[1].push(" ");
+    if(bridgeChoice === BRIDGE.DOWN) {
+      this.#currBridge[BRIDGE_INDEX.DOWN_INDEX].push(result);
+      this.#currBridge[BRIDGE_INDEX.UP_INDEX].push(EMPTY);
     }
   }
 

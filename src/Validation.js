@@ -1,4 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
+const {BRIDGE, BRIDGE_SIZE, GAME_COMMAND} = require("./Constants");
+const {ERROR_MESSAGE_BRIDGE_SIZE, ERROR_MESSAGE_USERCHOICE, ERROR_MESSAGE_GAMERESTART} = require("./Message");
 
 const Validation = {
     checkBridgeSize(size) {
@@ -36,15 +38,15 @@ const Validation = {
 
     isBridgeSizeNum(size) {
         if(isNaN(size)) {
-            Console.print("[ERROR] 다리 길이는 숫자여야 합니다.\n");
+            Console.print(ERROR_MESSAGE_BRIDGE_SIZE.NUM);
             return false;
         }
         return true;
     },
 
     isBridgeSizeValue(size) {
-        if((Number(size) < 3) || (20 < Number(size))) {
-            Console.print("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n");
+        if((Number(size) < BRIDGE_SIZE.MIN) || (BRIDGE_SIZE.MAX < Number(size))) {
+            Console.print(ERROR_MESSAGE_BRIDGE_SIZE.VALUE);
             return false;
         }
         return true;
@@ -52,7 +54,7 @@ const Validation = {
 
     isBridgeSizeInt(size) {
         if((Number(size) % 1) !== 0) {
-            Console.print("[ERROR] 다리 길이는 정수여야 합니다.\n");
+            Console.print(ERROR_MESSAGE_BRIDGE_SIZE.INT);
             return false;
         }
         return true;
@@ -60,15 +62,15 @@ const Validation = {
 
     isUserChoiceLength(userChoice) {
         if(userChoice.length !== 1) {
-            Console.print("[ERROR] 다리를 선택하는 커맨드는 한 글자여야 합니다.");
+            Console.print(ERROR_MESSAGE_USERCHOICE.LENGTH);
             return false;
         }
         return true;
     },
 
     isUserChoiceValue(userChoice) {
-        if(!(userChoice === "U" || userChoice === "D")) {
-            Console.print("[ERROR] 다리 선택 커맨드는 U 또는 D 여야 합니다.");
+        if(!(userChoice === BRIDGE.UP || userChoice === BRIDGE.DOWN)) {
+            Console.print(ERROR_MESSAGE_USERCHOICE.VALUE);
             return false;
         }
         return true;
@@ -76,15 +78,15 @@ const Validation = {
 
     isGameRestartLength(gameRestart) {
         if(gameRestart.length !== 1) {
-            Console.print("[ERROR] 게임 재시작 및 종료 커맨드는 한 글자여야 합니다.");
+            Console.print(ERROR_MESSAGE_GAMERESTART.LENGTH);
             return false;
         }
         return true;
     },
 
     isGameRestartValue(gameRestart) {
-        if(!(gameRestart === "R" || gameRestart === "Q")) {
-            Console.print("[ERROR] 다리 선택 커맨드는 R 또는 Q 여야 합니다.");
+        if(!(gameRestart === GAME_COMMAND.RESTART || gameRestart === GAME_COMMAND.QUIT)) {
+            Console.print(ERROR_MESSAGE_GAMERESTART.VALUE);
             return false;
         }
         return true;
