@@ -4,7 +4,7 @@ const InputView = {
 
   readBridgeSize(callback) {
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요.\n',(input)=>{
-      return callback.call(this, input);
+      return callback.call(this, Number(input));
     });
   },
 
