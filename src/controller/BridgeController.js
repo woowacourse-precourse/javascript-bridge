@@ -30,7 +30,7 @@ const BridgeController = class extends GameController {
       const bridgeSize = new BridgeSize(input);
       confirmedInput = bridgeSize.checkInput();
     } catch (error) {
-      Console.print(`[${error}]`);
+      this.outputView.printError(error);
     } finally {
       if (confirmedInput !== input) return this.inputBridgeSize();
     }
@@ -51,7 +51,7 @@ const BridgeController = class extends GameController {
       const moving = new Moving(input);
       confirmedInput = moving.checkInput();
     } catch (error) {
-      Console.print(`[${error}]`);
+      this.outputView.printError(error);
     } finally {
       if (confirmedInput !== input) return this.inputMoving();
     }
@@ -89,7 +89,7 @@ const BridgeController = class extends GameController {
       const gameCommand = new GameCommand(input);
       confirmedInput = gameCommand.checkInput();
     } catch (error) {
-      Console.print(error);
+      this.outputView.printError(error);
     } finally {
       if (confirmedInput !== input) return this.inputMoving();
     }
