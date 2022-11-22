@@ -81,9 +81,7 @@ const InputView = {
         throw new Error(ERROR_MSG.invalidGameCmd);
       }
 
-      if (isQuitGame) return this.quitGame(bridgeGame);
-
-      this.retryGame(bridgeGame);
+      return isQuitGame ? this.quitGame(bridgeGame) : this.retryGame(bridgeGame);
     };
   },
 
