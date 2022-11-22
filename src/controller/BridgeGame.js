@@ -42,6 +42,7 @@ class BridgeGame {
 
   inputMoving() {
     const moving = (input) => {
+      Validation.validateMove(input);
       this.move(input);
       if (this.#isSuccess) this.isSuccessGame(this.#isSuccess);
       if (!this.#isSuccess && this.#isPlay) this.inputMoving();
