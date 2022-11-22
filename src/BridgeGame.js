@@ -2,7 +2,6 @@ const { Console } = require('@woowacourse/mission-utils');
 const { BRIDGE_GAME } = require('./constants/settings')
 
 const OutputView = require('./view/OutputView');
-const BridgeGameProceed = require('./BridgeGameProceed')
 
 class BridgeGame {
   #round = BRIDGE_GAME.start_value;
@@ -11,7 +10,6 @@ class BridgeGame {
 
   storage(result) {
     this.#currentResult = result;
-    return ;
   }
 
   move() {

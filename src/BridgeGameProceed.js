@@ -62,7 +62,7 @@ class BridgeGameProceed {
         if (this.#playersBridge.length === this.#winBridge.length) {
             return this.callWin.call(this);
         }
-        this.game();
+        return this.game();
     }
 
     bridge() {
@@ -80,7 +80,7 @@ class BridgeGameProceed {
         try {
             Validation.retry(retryOrNot);
             if (retryOrNot === BRIDGE_GAME_PROCEED.retry) this.callRetry();
-            if (retryOrNot === BRIDGE_GAME_PROCEED.fail) this.callFail.call(this); 
+            if (retryOrNot === BRIDGE_GAME_PROCEED.quit) this.callFail.call(this); 
         } catch (error) {
             Console.print(`${error.message}\n`);
             this.fail.call(this);

@@ -1,10 +1,6 @@
 const { PLAYERS_MAP } = require('./constants/settings')
 const { START } = require('./constants/settings')
 
-const leftBlock = '[';
-const rightBlock = ']';
-const emptySpace = ' ';
-
 class PlayersMap {
     #upSpace;
 

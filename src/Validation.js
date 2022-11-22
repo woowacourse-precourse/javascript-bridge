@@ -1,5 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
-
 class Validation {
   static bridgeLength(number) {
     if (Validation.isEmpty(number)) throw new Error('[ERROR] 값을 입력해주세요.'); 
