@@ -3,9 +3,8 @@ const { Console } = require("@woowacourse/mission-utils");
 const OutputView = {
   printMap(game) {
     Console.print(
-      `[ ${game.getBridgeMap()[1].join(" | ")} ]\n[ ${game
-        .getBridgeMap()[0]
-        .join(" | ")} ]\n`
+      `[ ${game.getBridgeMap()[1].join(" | ")} ]\n
+      [ ${game.getBridgeMap()[0].join(" | ")} ]\n`
     );
   },
 
