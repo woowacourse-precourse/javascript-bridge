@@ -9,7 +9,7 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine('다리의 길이를 입력해주세요.\n', (inputValue) => {
-      this.BridgeSizeTryCatch(inputValue);
+      this.bridgeSizeTryCatch(inputValue);
     });
   },
   bridgeSizeTryCatch(inputValue) {
@@ -35,11 +35,19 @@ const InputView = {
     Console.readLine(
       '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
       (inputValue) => {
-        this.isPass = BridgeGameController.getMoving(inputValue, this.index);
-        this.index += 1;
-        this.checkPass();
+        this.movingTryCatch(inputValue);
       }
     );
+  },
+  movingTryCatch(inputValue) {
+    try {
+      this.isPass = BridgeGameController.getMoving(inputValue, this.index);
+      this.index += 1;
+      this.checkPass();
+    } catch (error) {
+      BridgeGameController.errorMessage(error.message);
+      this.readMoving();
+    }
   },
 
   checkPass() {
