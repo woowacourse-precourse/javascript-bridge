@@ -4,6 +4,7 @@ const { generate } = require('./BridgeRandomNumberGenerator');
 const { BRIDGE, GAME_RESULT } = require('./constant/constant');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const Validator = require('./Validator');
 
 class App {
   #bridge;
@@ -14,6 +15,7 @@ class App {
 
   constructor() {
     this.bridgeGame = new BridgeGame();
+    this.validator = new Validator();
     this.#tryCount = 1;
     this.#gameResult = GAME_RESULT.FAIL;
   }
@@ -24,8 +26,8 @@ class App {
   }
 
   initBridge() {
-      if (!InputView.sizeValidate(length)) return this.initBridge();
     InputView.readBridgeSize((size) => {
+      if (this.validator.sizeValidate(size) === false) return this.initBridge();
 
       this.#bridge = BridgeMaker.makeBridge(parseInt(size, 10), generate);
       OutputView.printEnter();
