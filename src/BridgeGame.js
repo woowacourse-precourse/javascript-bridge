@@ -58,8 +58,8 @@ class BridgeGame {
     return false;
   }
 
-  checkIsLastStep(size) {
-    return this.#step === size ? true : false;
+  checkIsLastStep() {
+    return this.#step === this.#bridge.length - 1 ? true : false;
   }
 
   move(userInput) {

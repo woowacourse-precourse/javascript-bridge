@@ -47,16 +47,14 @@ describe("BridgeGame class 함수 기능테스트", () => {
   });
 
   test("마지막 단계인지 확인하는 함수 테스트_1", () => {
-    const size = 3;
     const bridge = new BridgeGame(["U", "D", "D"], 1, 1);
 
-    expect(bridge.checkIsLastStep(size)).toBe(false);
+    expect(bridge.checkIsLastStep()).toBe(false);
   });
 
   test("마지막 단계인지 확인하는 함수 테스트_@", () => {
-    const size = 3;
-    const bridge = new BridgeGame(["U", "D", "D"], 3, 1);
+    const bridge = new BridgeGame(["U", "D", "D"], 2, 1);
 
-    expect(bridge.checkIsLastStep(size)).toBe(true);
+    expect(bridge.checkIsLastStep()).toBe(true);
   });
 });
