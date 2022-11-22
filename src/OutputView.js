@@ -18,6 +18,7 @@ const OutputView = {
     [ O |   ]
     [   | O ]
     */
+
   },
 
   /**

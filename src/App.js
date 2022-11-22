@@ -1,7 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { readBridgeSize, readMoving, readGameCommand } = require("./InputView");
-const { makeBridge } = require('../BridgeMaker');
-const { generate } = require('../BridgeRandomNumberGenerator');
+const { generate } = require('./BridgeRandomNumberGenerator');
+const { makeBridge } = require('./BridgeMaker.js');
+const { printMap, printResult } = require('./OutputView');
+const BridgeGame = require('./BridgeGame');
 
 const Consolee = MissionUtils.Console;
 
@@ -9,16 +11,20 @@ class App {
   constructor(){
     this.size = 0;
     this.bridges = [];
+    this.userBridges = [];
+    this.state = true;
+    this.count = 1;
   }
   play() {
     Consolee.print("다리 건너기 게임을 시작합니다.");
     this.settingGame();
   }
-  startGame(){
+  settingGame(){
     this.size = readBridgeSize();
-    this.bridges = makeBridge(this.size, generate());
+    this.bridges = makeBridge(this.size, generate);
+    this.startGame();
   }
-  
+  startGame(){ }
 }
 
 module.exports = App;
