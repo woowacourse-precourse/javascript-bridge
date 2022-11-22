@@ -1,4 +1,5 @@
 const InputView = require("./InputView");
+const OutputView = require("./OutputView");
 const { Console } = require("@woowacourse/mission-utils");
 const { COMMAND } = require("./Constant");
 const Bridge = require("./Bridge");
@@ -9,11 +10,11 @@ class App {
     const bridge = new Bridge();
     const bridgeGame = new BridgeGame();
 
-    Console.print(`${COMMAND.START}`);
+    OutputView.start();
     InputView.readBridgeSize(bridge,bridgeGame);
   }
 }
 
-// module.exports = App;
-const app = new App();
-app.play();
+module.exports = App;
+// const app = new App();
+// app.play();
