@@ -8,7 +8,7 @@ const Exception = {
     return;
   },
   onlyAlphabet(answer, type) {
-    console.log(answer, type);
+    answer = answer.toUpperCase();
     if (type === 'move' && answer !== 'U' && answer !== 'D') {
       throw new Error('[ERROR] U 또는 D를(을) 입력해주세요.');
     }
