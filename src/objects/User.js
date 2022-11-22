@@ -15,7 +15,6 @@ class User {
     return [highBridge, lowBridge];
   }
   makeTwoErrorBridge(bridge) {
-    console.log("dsdsdsds");
     const highBridge = bridge.map((direction, index) => {
       if (index === this.#userBridge.length - 1) {
         return direction === "U" ? "X" : " ";
@@ -39,8 +38,14 @@ class User {
     const [highBridge, lowBridge] = this.makeTwoBridge(this.#userBridge);
     return this.changeBridgeOutfit(highBridge, lowBridge);
   }
-  mapErrorBridge(bridge) {
-    const [highBridge, lowBridge] = this.makeTwoErrorBridge(bridge);
+  isEnd(bridge) {
+    if (bridge.length === this.#userBridge.length) {
+      return true;
+    }
+    return false;
+  }
+  mapErrorBridge() {
+    const [highBridge, lowBridge] = this.makeTwoErrorBridge(this.#userBridge);
     return this.changeBridgeOutfit(highBridge, lowBridge);
   }
   move(direction, bridge) {

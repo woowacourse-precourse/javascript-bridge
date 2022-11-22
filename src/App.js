@@ -31,17 +31,36 @@ class App {
     if (this.#bridgeGame.isCorrectDirection(direction)) {
       this.#bridgeGame.move(direction);
       OutputView.printMap(this.#bridgeGame.mapBridge());
-      //   if (this.#userBridge.length === bridge.length) {
-      //     this.winGame(true);
-      //     return;
-      //   }
+      if (this.#bridgeGame.isEnd()) {
+        this.winGame(true);
+        return;
+      }
       this.requestMove();
       return;
-      // }
-      // this.#userBridge.push(direction);
-      // OutputView.printMap(this.mapErrorBridge(this.#userBridge));
     }
-    // this.requestRetry();
+    this.#bridgeGame.move(direction);
+    OutputView.printMap(this.#bridgeGame.mapErrorBridge());
+    this.requestRetry();
+  }
+  winGame(result) {
+    const [bridge, playCount] = this.#bridgeGame.getResult();
+    OutputView.printResult(bridge, playCount, result);
+  }
+  loseGame(result) {
+    const [bridge, playCount] = this.#bridgeGame.getResult();
+    OutputView.printResult(bridge, playCount, result);
+  }
+  requestRetry() {
+    InputView.readGameCommand(this.retryOrQuit.bind(this));
+  }
+  retryOrQuit(command) {
+    if (command === "R") {
+      this.#bridgeGame.retry();
+      this.requestMove();
+    }
+    if (command === "Q") {
+      this.loseGame(false);
+    }
   }
 }
 const app = new App();
