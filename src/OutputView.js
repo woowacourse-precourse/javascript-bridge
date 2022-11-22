@@ -18,8 +18,17 @@ const OutputView = {
     Console.print(downBridge+MESSAGE.bridge.bridgeEnd);
   },
 
-  printResult(){ 
-
+  printResult(score){ 
+    Console.print('최종 게임 결과');
+    Console.print(arr1+MESSAGE.bridge.bridgeEnd);
+    Console.print(arr2+MESSAGE.bridge.bridgeEnd);
+    if(score =='success') {
+      Console.print(`게임 성공 여부: ${MESSAGE.gameScore.success}`)
+    }
+    else if(score == 'fail') {
+      Console.print(`게임 성공 여부: ${MESSAGE.gameScore.fail}`)
+    }
+    Console.print(`총 시도한 횟수: ${OutputView.checkRestartCount()}`)//카운트 세기
   },
 
   /**
