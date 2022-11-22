@@ -46,7 +46,7 @@ class App {
   handleMovement = async () => {
     if (this.isContinue()) {
       if (await this.isSuccessFulMovement()) {
-        // return await this.handleSuccess();
+        return await this.handleSuccess();
       }
     }
 
@@ -66,6 +66,10 @@ class App {
     const direction = await this.getDirection();
 
     return this.game.move(current, direction);
+  };
+
+  handleSuccess = async () => {
+    return await this.handleMovement();
   };
 }
 
