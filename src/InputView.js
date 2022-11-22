@@ -81,14 +81,22 @@ const InputView = {
         throw new Error(ERROR_MSG.invalidGameCmd);
       }
 
-      if (isQuitGame) {
-        bridgeGame.quit();
-        return OutputView.printResult(bridgeGame);
-      }
+      if (isQuitGame) return this.quitGame(bridgeGame);
 
-      bridgeGame.retry();
-      this.readLine(MSG.inputMoveDirection, this.readMoving(bridgeGame));
+      this.retryGame(bridgeGame);
     };
+  },
+
+  quitGame(bridgeGame) {
+    bridgeGame.quit();
+
+    return OutputView.printResult(bridgeGame);
+  },
+
+  retryGame(bridgeGame) {
+    bridgeGame.retry();
+
+    return this.readLine(MSG.inputMoveDirection, this.readMoving(bridgeGame));
   },
 };
 
