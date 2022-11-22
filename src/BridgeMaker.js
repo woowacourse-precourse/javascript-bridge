@@ -1,4 +1,4 @@
-const { GAME_COMMAND } = require("../utils/Constant");
+const { GAME_COMMAND } = require("./utils/Constant");
 
 const BridgeMaker = {
   /**

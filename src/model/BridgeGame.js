@@ -1,4 +1,4 @@
-const BridgeMaker = require("./BridgeMaker");
+const BridgeMaker = require("../BridgeMaker");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const { GAME_COMMAND } = require("../utils/Constant");
 
