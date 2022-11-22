@@ -71,9 +71,9 @@ class BridgeGamePresenter {
     });
   }
 
-  #retry(input) {
-    checkValidRetry(input);
-    return this.#bridgeGame.retry(input) ? this.#checkMoving() : this.#result();
+  #retry(command) {
+    checkValidRetry(command);
+    return this.#bridgeGame.retry(command) ? this.#checkMoving() : this.#result();
   }
 
   #result() {
