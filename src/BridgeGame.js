@@ -53,18 +53,26 @@ class BridgeGame {
     Console.readLine(MESSAGE.REGAME, (re) => {
       InputView.readGameCommand(re);
       if (re === 'R') {
-        this.#attempts++;
-        this.#bridgeHistory = [];
-        this.move(bridge);
+        this.#startRegame(bridge);
       } else {
-        OutputView.printResult(
-          '실패',
-          this.#bridgeHistory,
-          this.#attempts,
-          direction,
-        );
+        this.#endgame(direction);
       }
     });
+  }
+
+  #startRegame(bridge) {
+    this.#attempts++;
+    this.#bridgeHistory = [];
+    this.move(bridge);
+  }
+
+  #endgame(direction) {
+    OutputView.printResult(
+      '실패',
+      this.#bridgeHistory,
+      this.#attempts,
+      direction,
+    );
   }
 }
 
