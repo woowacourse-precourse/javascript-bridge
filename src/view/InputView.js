@@ -1,4 +1,4 @@
-const Console = require("../utils/Console");
+const { Console } = require("@woowacourse/mission-utils");
 const { INPUT } = require("./stringsUI");
 const { INPUT_TYPE } = require("./stringsUI");
 
