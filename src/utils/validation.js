@@ -21,6 +21,16 @@ class Validator {
   static isRightMove(move) {
     return move === "U" || move === "D";
   }
+
+  static validateRestartOrQuit(input) {
+    if (!this.isRightInput(input)) {
+      throw new Error(ERROR_MESSAGE.NOT_RIGHT_INPUT);
+    }
+  }
+
+  static isRightInput(input) {
+    return input === "R" || input === "Q";
+  }
 }
 
 module.exports = Validator;

@@ -50,6 +50,7 @@ const InputView = {
    */
   readGameCommand(bridgeGame) {
     this.wrappingInput(CONSOLE_MESSAGE.RESTART, (input) => {
+      Validator.validateRestartOrQuit(input);
       if (input === "R") {
         bridgeGame.retry();
         return this.readMoving(bridgeGame);
