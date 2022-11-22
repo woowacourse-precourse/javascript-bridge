@@ -8,7 +8,10 @@ const OutputView = require("./OutputView");
 const InputView = {
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (inputBridgeSize) => {
-      InputCheck.checkBridgeSize(inputBridgeSize);
+      const inputBridgeSizeError = InputCheck.checkBridgeSize(inputBridgeSize);
+      if (inputBridgeSizeError) {
+        return this.readBridgeSize();
+      }
 
       const bridge = BridgeMaker.makeBridge(
         inputBridgeSize,
@@ -24,7 +27,11 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (inputBridgeChoice) => {
-        InputCheck.checkMoving(inputBridgeChoice);
+        const inputBridgeChoiceError =
+          InputCheck.checkMoving(inputBridgeChoice);
+        if (inputBridgeChoiceError)
+          return this.readMoving(bridge, bridgeList, attempts);
+
         const bridgeGamge = new BridgeGame();
         const movingResult = bridgeGamge.move(
           inputBridgeChoice,
@@ -48,7 +55,10 @@ const InputView = {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (choice) => {
-        InputCheck.checkRestart(choice);
+        const choiceError = InputCheck.checkRestart(choice);
+        if (choiceError) {
+          this.readGameCommand(bridgeList, bridge, attempts);
+        }
 
         const restart = "R";
         const quit = "Q";
