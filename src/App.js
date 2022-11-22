@@ -35,8 +35,12 @@ class App {
   }
 
   afterFailResult(command) {
-    if (command === COMMAND.RETRY) return this.retryRoutine();
-    this.printResultEndGame(this.bridgeModel.getUpDownCounter());
+    switch (command) {
+      case COMMAND.RETRY:
+        return this.retryRoutine();
+      case COMMAND.QUIT:
+        this.printResultEndGame(this.bridgeModel.getUpDownCounter());
+    }
   }
 
   printResultEndGame(upDownCounter) {
