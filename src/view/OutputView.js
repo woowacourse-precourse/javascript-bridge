@@ -4,14 +4,14 @@ const { openBracket, closeBracket, divider } = RESULT;
 
 const OutputView = {
   printStart() {
-    Console.print(SENTENCE.start);
+    Console.print(`${SENTENCE.start}${SENTENCE.newLine}`);
   },
 
   printMap(partialBridgeMap, lastMoving) {
     const partialBridgeLength = partialBridgeMap.length;
     const resultPrintMap = this.initPrintBridgeMap(partialBridgeLength); // ' '로 초기화된 다리 배열
     const lastDirection = partialBridgeMap[partialBridgeLength - 1];
-    partialBridgeMap.reduce(this.checkDirection, resultPrintMap); //
+    partialBridgeMap.reduce(this.checkDirection, resultPrintMap);
     if (!lastMoving)
       this.amendLastBridge(resultPrintMap, lastDirection, partialBridgeLength); // 다리의 끝을 건넌 결과에 따라 O, X로 변경
     resultPrintMap.forEach((direction) =>
@@ -52,6 +52,10 @@ const OutputView = {
 
   printError(errorMessage) {
     Console.print(errorMessage);
+  },
+
+  printNewLine() {
+    Console.print(SENTENCE.newLine);
   },
 };
 
