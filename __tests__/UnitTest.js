@@ -2,6 +2,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker = require("../src/BridgeMaker");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const InputValidator = require("../src/InputValidator");
+const OutputView = require("../src/OutputView");
+const command = require("../src/utils/command");
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
@@ -32,5 +34,20 @@ describe("BridgeMaker 테스트", () => {
     expect(
       BridgeMaker.makeBridge(6, BridgeRandomNumberGenerator.generate)
     ).toEqual(["D", "U", "U", "D", "D", "U"]);
+  });
+});
+
+describe("OutputView 테스트", () => {
+  test("다리 건넌 상태 문자열로 만드는 기능", () => {
+    expect(
+      OutputView.makeBridgeString(["U", "D", "D"], ["U", "D", "U"], command.UP)
+    ).toEqual(" O |   | X ");
+    expect(
+      OutputView.makeBridgeString(
+        ["U", "D", "D"],
+        ["U", "D", "U"],
+        command.DOWN
+      )
+    ).toEqual("   | O |   ");
   });
 });
