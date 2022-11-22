@@ -1,5 +1,6 @@
 const { ERROR_MESSAGE } = require("../constants/message");
 const { handleError } = require("./HandleError");
+const { STATUS } = require("../constants/message");
 
 class RegameCommandValidator {
   static validate(letter) {
@@ -9,7 +10,7 @@ class RegameCommandValidator {
     return true;
   }
   static #isLetterRorQ(letter) {
-    return letter === "R" || letter === "Q";
+    return letter === STATUS.HOPE_RESTART || letter === STATUS.HOPE_QUIT;
   }
 }
 module.exports = RegameCommandValidator;

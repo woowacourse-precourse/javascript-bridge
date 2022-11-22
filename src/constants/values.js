@@ -9,4 +9,9 @@ const REPRESENTATION = Object.freeze({
   },
 });
 
-module.exports = { REPRESENTATION };
+const VALID_BRIDGE_LENGTH = Object.freeze({
+  MAX: 20,
+  MIN: 3,
+});
+
+module.exports = { REPRESENTATION, VALID_BRIDGE_LENGTH };

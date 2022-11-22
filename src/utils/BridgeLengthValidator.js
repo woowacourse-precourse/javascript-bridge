@@ -1,4 +1,5 @@
 const { ERROR_MESSAGE } = require("../constants/message");
+const { VALID_BRIDGE_LENGTH } = require("../constants/values");
 const { handleError } = require("./HandleError");
 class BridgeLengthValidator {
   static validate(number) {
@@ -16,7 +17,7 @@ class BridgeLengthValidator {
     return !isNumber.test(number);
   }
   static #isValidRange(number) {
-    return number > 20 || number < 3;
+    return number > VALID_BRIDGE_LENGTH.MAX || number < VALID_BRIDGE_LENGTH.MIN;
   }
 }
 module.exports = BridgeLengthValidator;

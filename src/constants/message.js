@@ -5,6 +5,13 @@ const STATE = Object.freeze({
   VALID: {
     symbol: " O ",
   },
+  NOT_VISITED: {
+    symbol: "   ",
+  },
+});
+const STATUS = Object.freeze({
+  HOPE_RESTART: "R",
+  HOPE_QUIT: "Q",
 });
 
 const ERROR_MESSAGE = Object.freeze({
@@ -23,7 +30,7 @@ const QUESTION = Object.freeze({
 const OUTPUT = Object.freeze({
   NOTIFY_START: "다리 건너기 게임을 시작합니다.",
   NOTIFY_RESULT: "\n최종 게임 결과",
-  NOTIFY_GAME_CLEAR_OR_NOT: isGameClear => `\n게임 성공 여부: ${isGameClear ? "성공" : "실패"}`,
-  NOTIFY_TOTAL_TRIAL: attempts => `총 시도한 횟수: ${attempts}`,
+  NOTIFY_GAME_CLEAR_OR_NOT: (isGameClear) => `\n게임 성공 여부: ${isGameClear ? "성공" : "실패"}`,
+  NOTIFY_TOTAL_TRIAL: (attempts) => `총 시도한 횟수: ${attempts}`,
 });
-module.exports = { STATE, ERROR_MESSAGE, QUESTION, OUTPUT };
+module.exports = { STATE, ERROR_MESSAGE, QUESTION, OUTPUT, STATUS };
