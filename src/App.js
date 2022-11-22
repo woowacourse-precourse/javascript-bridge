@@ -15,12 +15,7 @@ class App {
 
   play() {
     Console.print(MESSAGE.GAME_START);
-    try {
-      this.#gameController.start();
-    } catch (error) {
-      Console.print(error);
-      Console.close();
-    }
+    this.#gameController.start();
   }
 }
 
