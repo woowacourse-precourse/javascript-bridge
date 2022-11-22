@@ -34,8 +34,9 @@ const OutputView = {
   printMap(bridgeLog) {
     const framework = (bridge) => {
       const SEPARATOR = ' | ';
+      const SQUARE_BRACKET = (text) => `[ ${text} ]`;
 
-      return `[ ${bridge.join(SEPARATOR)} ]`;
+      return SQUARE_BRACKET(bridge.join(SEPARATOR));
     };
 
     bridgeLog.forEach((bridge) => this.print(framework(bridge)));
@@ -55,8 +56,9 @@ const OutputView = {
     const SUCCESS = '성공';
     const FAILURE = '실패';
     const resultText = successOrFailure ? SUCCESS : FAILURE;
+    const RESULT_TEXT = `게임 성공 여부: ${resultText}\n총 시도한 횟수: ${tryCount}`;
 
-    this.print(`게임 성공 여부: ${resultText}\n총 시도한 횟수: ${tryCount}`);
+    this.print(RESULT_TEXT);
   },
 };
 
