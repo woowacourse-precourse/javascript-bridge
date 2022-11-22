@@ -23,16 +23,16 @@ const OutputView = {
    printResult(map, result, count) {
     Console.print('최종 게임 결과');
     this.printMap(map);
-    let message = "실패";
-    if (result === true){
-      message = "성공";
+    let message = '실패';
+    if (result){
+      message = '성공';
     }
     Console.print(`게임 성공 여부: ${message}`);
     Console.print(`총 시도한 횟수: ${count}`);
     Console.close();
   },
 
-  printStart(){
+  printStart() {
     Console.print(`다리 건너기 게임을 시작합니다.\n`);
   },
 };

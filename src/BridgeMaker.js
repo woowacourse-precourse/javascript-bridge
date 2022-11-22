@@ -9,11 +9,12 @@ const BridgeMaker = {
    */
    makeBridge(size, generateRandomNumber) {
     let bridge = [];
-    for(let i=0; i<size; i++){
+    for (let i=0; i<size; i++) {
       const randomnumber = generateRandomNumber();
-      if (randomnumber === 0){
+      if (randomnumber === 0) {
         bridge.push("D");
       }
+
       else bridge.push("U");
     }
     return bridge;

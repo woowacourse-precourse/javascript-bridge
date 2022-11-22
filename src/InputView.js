@@ -16,8 +16,8 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Console.readLine(`다리의 길이를 입력해주세요.\n`,(getSize)=>{
-      while(ErrorCheck.checkSize(getSize)) return this.readBridgeSize();
+    Console.readLine(`다리의 길이를 입력해주세요.\n`, (getSize) => {
+      while (ErrorCheck.checkSize(getSize)) return this.readBridgeSize();
       bridgeSize = parseInt(getSize);
       game.setAnswer(BridgeMaker.makeBridge(getSize, BridgeRandomNumberGenerator.generate));
       this.readMoving();
@@ -32,10 +32,12 @@ const InputView = {
     Console.readLine(`\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n`,(getUser)=>{
       while(ErrorCheck.checkUpDown(getUser)) return this.readMoving();
       game.setUser(getUser);
-      if (game.move(current++)) {
+      if (game.move(current)) {
+        current += 1;
         OutputView.printMap(game.getMap());
         return this.readMoving();
       }
+
       OutputView.printMap(game.getMap());
       return this.readGameCommand();
     });
@@ -46,12 +48,13 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(`게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n`, (getRetry)=>{
-      while(ErrorCheck.checkRetryQuit(getRetry)) return this.readGameCommand();
-      if(game.retry(getRetry)){
+      while (ErrorCheck.checkRetryQuit(getRetry)) return this.readGameCommand();
+      if (game.retry(getRetry)) {
         current = 0;
         iteration++;
         return this.readMoving();
       }
+
       return OutputView.printResult(game.getMap(), game.getResult(), iteration);
     })
   },
