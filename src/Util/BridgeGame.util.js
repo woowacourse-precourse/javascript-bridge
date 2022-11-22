@@ -1,4 +1,4 @@
-const validationMakeMapObjProps = (answer) => answer !== "U" || answer !== "D";
+const validationMakeMapObjProps = (answer) => answer !== "U" && answer !== "D";
 
 const makeMapObj = (answer, input) => {
   const length = Math.min(answer.length, input.length);
@@ -27,7 +27,7 @@ const makeMap = (input, obj) => {
       throw new Error("[ERROR] obj의 value는 boolean 타입이어야합니다.");
     }
     const target = input[i] === "U" ? firstFloor : secondFloor;
-    const other = input[i] === "D" ? secondFloor : firstFloor;
+    const other = input[i] === "U" ? secondFloor : firstFloor;
     target.push(obj[i] ? " O " : " X ");
     other.push("   ");
   }
