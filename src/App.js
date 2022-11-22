@@ -4,15 +4,11 @@ const BridgeGame = require('./BridgeGame');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
 class App {
-  bidgeGame;
-
-  constructor() {
-    this.game = new BridgeGame();
-  }
+  bridgeGame;
 
   play() {
     OutputView.printGreeting();
-    this.makeBridgeGame();
+    this.bridgeGame = this.makeBridgeGame();
   }
 
   makeBridgeGame() {
@@ -21,6 +17,43 @@ class App {
       BridgeRandomNumberGenerator.generate(),
     );
     return new BridgeGame(bridge);
+  }
+
+  progressGame(bridgeGame) {
+    let isContinue = true;
+    let trialCount = 1;
+    let isSuccess;
+    while (isContinue) {
+      trialCount += 1;
+      isSuccess = this.progressTrial(bridgeGame);
+      isContinue = this.getRetry(isSuccess, bridgeGame);
+    }
+
+    return [isSuccess, trialCount];
+  }
+
+  progressTrial(bridgeGame) {
+    let isSuccess = true;
+    while (isSuccess) {
+      isSuccess = this.progressGame;
+      OutputView.printMap(bridgeGame, isSuccess);
+    }
+    return isSuccess;
+  }
+
+  getRetry(isSuccess, bridgeGame) {
+    if (isSuccess) {
+      return false;
+    }
+    const command = InputView.readGameCommand();
+    const isContinue = bridgeGame.retry(command);
+    return isContinue;
+  }
+
+  progressMoving(bridgeGame) {
+    const moving = InputView.readMoving();
+    const isSuccess = bridgeGame.move(moving);
+    return isSuccess;
   }
 }
 
