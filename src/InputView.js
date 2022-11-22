@@ -1,21 +1,53 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { Console } = require('@woowacourse/mission-utils');
+const BridgeGame = require('./BridgeGame');
+const OutputView = require('./OutputView');
+const Validate = require('./Validate');
+const { MESSAGE } = require('./constant');
+
+const bridgeGame = new BridgeGame();
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
-
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
-
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+  readBridgeSize() {
+    Console.readLine(MESSAGE.BRIDGE_SIZE, (bridgeLength) => {
+      try {
+        this.makeBridge(bridgeLength);
+      } catch (error) {
+        Console.print(error);
+        this.readBridgeSize();
+      }
+    });
+  },
+  makeBridge(bridgeLength) {
+    Validate.bridgeValidate(bridgeLength);
+    bridgeGame.setBridge(bridgeLength);
+    this.readMoving();
+  },
+  readMoving() {
+    Console.readLine(MESSAGE.MOVE_MESSAGE, (move) => {
+      try {
+        this.makeMove(move);
+      } catch (error) {
+        Console.print(error);
+        this.readMoving();
+      }
+    });
+  },
+  makeMove(move) {
+    Validate.movingValidate(move);
+    const { input, output, status } = bridgeGame.move(move);
+    if (output) OutputView[output](status);
+    if (input) this[input]();
+  },
+  readGameCommand() {
+    Console.readLine(MESSAGE.RESTART_MESSAGE,(restart)=>{
+      try{
+        Validate.restartValidate(restart);
+      }
+      catch(error){
+        Console.print(error);
+        this.readGameCommand()
+      }
+    });
+  },
 };
 
 module.exports = InputView;
