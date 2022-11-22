@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const NOTICE = require('../src/Constants/Notice')
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -8,7 +9,7 @@ const { Console } = require('@woowacourse/mission-utils');
    */
 
   readBridgeSize(callBack) {
-    Console.readLine('다리의 길이를 입력해주세요.\n', callBack);
+    Console.readLine(NOTICE.INPUT_BRIDGE_LENGTH_ASK, callBack);
   },
 
   /**
@@ -16,7 +17,7 @@ const { Console } = require('@woowacourse/mission-utils');
    */
 
   readMoving(callBack) {
-    Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', callBack);
+    Console.readLine(NOTICE.INPUT_MOVE_ASK, callBack);
   },
 
   /**
@@ -24,7 +25,7 @@ const { Console } = require('@woowacourse/mission-utils');
    */
 
   readGameCommand(callBack) {
-    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', callBack);
+    Console.readLine(NOTICE.INPUT_RETRY_ASK, callBack);
   },
 };
 
