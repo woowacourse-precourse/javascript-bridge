@@ -41,6 +41,10 @@ const InputView = {
         const moveRoute = bridgeGame.move(selectedBlock);
         OutputView.printMap(moveRoute);
 
+        if (bridgeGame.isWrongRoute(moveRoute)) {
+          return this.readGameCommand(bridge, bridgeGame, moveRoute);
+        }
+
         return this.readMoving(bridge, bridgeGame);
       }
     );
@@ -49,13 +53,19 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(bridge, bridgeGame, moveRoute) {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (answer) => {
-        if (Validator.checkRetryOrQuit(answer)) return this.readGameCommand();
+        if (Validator.checkRetryOrQuit(answer))
+          return this.readGameCommand(bridge, bridgeGame, moveRoute);
 
-        return;
+        if (answer === "R") {
+          return this.readMoving(bridge, bridgeGame);
+        }
+        if (answer === "Q") {
+          return;
+        }
       }
     );
   },
