@@ -1,4 +1,4 @@
-const Bridge = require("./model/Bridge");
+const Bridge = require("../model/Bridge");
 const View = require("../view/View");
 const BridgeMaker = require("../BridgeMaker");
 const BridgeRandomNumberGenerator = require("../utils/BridgeRandomNumberGenerator");
@@ -72,6 +72,7 @@ class BridgeGame {
       gameUtils.validateCommand(command, this.view);
       if (command === "R") {
         this.model.initSpace();
+        this.model.addCount();
         return this.move();
       }
       return this.end(result);
@@ -79,11 +80,12 @@ class BridgeGame {
   }
 
   end(result) {
+    this.model.addCount();
     const map = gameUtils.calculateMoveResult(
       this.model.bridge,
       this.model.userSpaces
     );
-    this.view.printResult(map, result);
+    this.view.printResult(map, result, this.model.count);
   }
 }
 

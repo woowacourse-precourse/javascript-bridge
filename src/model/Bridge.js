@@ -5,6 +5,7 @@
   constructor() {
     this.bridge = [];
     this.userSpaces = [];
+    this.count = 0;
   }
 
   /**
@@ -26,6 +27,10 @@
    */
   initSpace = () => {
     this.userSpaces = [];
+  };
+
+  addCount = () => {
+    this.count++;
   };
 }
 

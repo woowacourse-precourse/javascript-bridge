@@ -80,7 +80,7 @@ const gameUtils = {
    * @param {object} view object
    */
   validateCommand: (command, view) => {
-    if (command !== "R" || command !== "Q")
+    if (command !== "R" && command !== "Q")
       view.printError("[ERROR] 입력한 값이 R 또는 Q가 아닙니다.");
   },
 };
