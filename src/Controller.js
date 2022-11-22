@@ -77,7 +77,7 @@ class Controller {
   gameOver() {
     OutputView.resultMessage();
     OutputView.printMap(this.#currentBridge);
-    OutputView.printResult();
+    OutputView.printResult(this.#try, false);
     Console.close;
   }
 }
