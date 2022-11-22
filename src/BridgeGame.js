@@ -3,6 +3,7 @@ const InputView = require('./InputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeNumber = require('./BridgeRandomNumberGenerator');
 const BridgeRecorder = require('./BridgeRecorder');
+const { UTIL, INPUT } = require('./constant/constant');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -16,8 +17,8 @@ class BridgeGame {
   #bridgeRecord;
 
   constructor() {
-    this.#turn = 0;
-    this.#try = 1;
+    this.#turn = UTIL.INIT;
+    this.#try = UTIL.FIRST;
     this.#isPlay = true;
     this.#isEnd = false;
     this.#bridgeRecord = new BridgeRecorder([], []);
@@ -34,7 +35,7 @@ class BridgeGame {
       this.#bridge = BridgeMaker.makeBridge(input, BridgeNumber.generate);
       this.enterMoving();
     };
-    InputView.readBridgeSize('다리의 길이를 입력해주세요.\n', bridgeLength);
+    InputView.readBridgeSize(INPUT.BRIDGE_SIZE, bridgeLength);
   }
 
   enterMoving() {
@@ -44,15 +45,15 @@ class BridgeGame {
       if (!this.#isEnd && this.#isPlay) this.enterMoving();
       if (!this.#isEnd && !this.#isPlay) this.enterRegame();
     };
-    InputView.readMoving('이동할 칸을 선택해주세요.\n', moving);
+    InputView.readMoving(INPUT.CHOOSE_BLOCK, moving);
   }
 
   enterRegame() {
     const regame = (input) => {
-      if (input === 'R') this.retry();
-      if (input === 'Q') this.giveupGame();
+      if (input === UTIL.RETRY) this.retry();
+      if (input === UTIL.QUIT) this.giveupGame();
     };
-    InputView.readMoving('게임을 다시 시도할지 여부를 입력해주세요.\n', regame);
+    InputView.readMoving(INPUT.RESTART, regame);
   }
 
   /**
@@ -67,12 +68,10 @@ class BridgeGame {
   }
 
   isMove(input, crossable) {
-    const GO = 'O';
-    const STOP = 'X';
-    if (input === crossable) this.isFirst(GO, input);
+    if (input === crossable) this.isFirst(UTIL.GO, input);
     if (input !== crossable) {
       this.#isPlay = false;
-      this.isFirst(STOP, input);
+      this.isFirst(UTIL.STOP, input);
     }
     if (input === crossable && this.#turn === this.#bridge.length) {
       this.#isEnd = true;
@@ -80,24 +79,24 @@ class BridgeGame {
   }
 
   isFirst(state, input) {
-    if (this.#turn === 1) this.firstBlock(state, input);
-    if (this.#turn !== 1) this.afterFirstBlock(state, input);
+    if (this.#turn === UTIL.FIRST) this.firstBlock(state, input);
+    if (this.#turn !== UTIL.FIRST) this.afterFirstBlock(state, input);
   }
 
   firstBlock(state, input) {
-    if (input === 'U') {
+    if (input === UTIL.UP) {
       OutputView.printMap(this.#bridgeRecord.addFirstUpBlock(state));
     }
-    if (input === 'D') {
+    if (input === UTIL.DOWN) {
       OutputView.printMap(this.#bridgeRecord.addFirstDownBlock(state));
     }
   }
 
   afterFirstBlock(state, input) {
-    if (input === 'U') {
+    if (input === UTIL.UP) {
       OutputView.printMap(this.#bridgeRecord.addUpBlock(state));
     }
-    if (input === 'D') {
+    if (input === UTIL.DOWN) {
       OutputView.printMap(this.#bridgeRecord.addDownBlock(state));
     }
   }
@@ -115,22 +114,20 @@ class BridgeGame {
   }
 
   init() {
-    this.#turn = 0;
+    this.#turn = UTIL.INIT;
     this.#bridgeRecord.init();
   }
 
   clearGame() {
-    const SUCCESS = '성공';
     InputView.closeRead();
     const records = this.#bridgeRecord.getResult();
-    OutputView.printResult(SUCCESS, this.#try, records);
+    OutputView.printResult(UTIL.SUCCESS, this.#try, records);
   }
 
   giveupGame() {
-    const FAIL = '실패';
     InputView.closeRead();
     const records = this.#bridgeRecord.getResult();
-    OutputView.printResult(FAIL, this.#try, records);
+    OutputView.printResult(UTIL.FAIL, this.#try, records);
   }
 }
 
