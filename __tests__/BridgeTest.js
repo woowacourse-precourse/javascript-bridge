@@ -51,9 +51,9 @@ const mockQuestions = (answers) => {
     expect(upsideIndex).toBeLessThan(downsideIndex);
   };
   
-describe("다리 테스트", () => {
-    test("생성 테스트", () => {
-      const randomNumbers = ["0", "1", "1", "0"];
+describe("다리 테스트2", () => {
+    test("생성 테스트2", () => {
+      const randomNumbers = [0, 1, 1, 0];
       const mockGenerator = randomNumbers.reduce((acc, number) => {
         return acc.mockReturnValueOnce(number);
       }, jest.fn());
@@ -64,7 +64,7 @@ describe("다리 테스트", () => {
   
     test("이동 예외 테스트", () => {
       const logSpy = getLogSpy();
-      mockRandoms(["1", "1", "0", "1"]);
+      mockRandoms([1, 1, 0, 1]);
       mockQuestions(["4", "P"]);
   
       const app = new App();
@@ -75,7 +75,7 @@ describe("다리 테스트", () => {
   
     test("재시도 예외 테스트", () => {
       const logSpy = getLogSpy();
-      mockRandoms(["1", "1", "0", "1"]);
+      mockRandoms([1, 1, 0, 1]);
       mockQuestions(["4", "U", "D", "X"]);
   
       const app = new App();
@@ -87,7 +87,7 @@ describe("다리 테스트", () => {
   
     test("실패 테스트", () => {
       const logSpy = getLogSpy();
-      mockRandoms(["1", "0", "1", "1"]);
+      mockRandoms([1, 0, 1, 1]);
       mockQuestions(["4", "U", "D", "D", "Q"]);
   
       const app = new App();
@@ -106,7 +106,7 @@ describe("다리 테스트", () => {
   
     test("횟수 테스트", () => {
       const logSpy = getLogSpy();
-      mockRandoms(["1", "0", "1", "1"]);
+      mockRandoms([1, 0, 1, 1]);
       mockQuestions(["4", "D", "R", "U", "D", "U", "U"]);
   
       const app = new App();
