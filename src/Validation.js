@@ -14,7 +14,7 @@ const Validation = {
   },
 
   checkRestartOrDone(command) {
-    if (command === 'r' || command === 'd') {
+    if (command === 'r' || command === 'q') {
       throw new Error(ERROR.NOT_UPPERCASE);
     }
     if (/[^RQ]/g.test(command) || command.length !== 1) 
