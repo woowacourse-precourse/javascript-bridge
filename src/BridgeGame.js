@@ -34,6 +34,10 @@ class BridgeGame {
 
     return [this.up, this.down, Bridge === upDown];
   }
+
+  getBridge() {
+    return [this.up, this.down];
+  }
 }
 
 module.exports = BridgeGame;
