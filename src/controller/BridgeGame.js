@@ -5,11 +5,17 @@
 const UserBridge = require('../model/UserBridge');
 
 class BridgeGame {
+  // gameCount: 총 게임 시도 횟수를 저장할 변수
   gameCount;
+  // moveCount: 총 이동 횟수를 저장할 변수
   moveCount;
+  // bridge: 생성된 다리를 저장하는 객체
   bridge;
+  // userBridge: 플레이어의 다리 위 이동 경로를 저장하는 객체
   userBridge;
+  // failOrSuccess: 플레이어의 현재 게임 성공 여부를 저장하는 변수
   failOrSuccess;
+
   constructor(bridge) {
     this.gameCount = 0;
     this.moveCount = 0;
@@ -18,9 +24,7 @@ class BridgeGame {
     this.failOrSuccess = false;
   }
 
-  /**
-   * 총 시도 횟수 +1만큼 증가시키는 메서드
-   */
+  // 총 시도 횟수 +1만큼 증가시키는 메서드
   addGameCount() {
     this.gameCount += 1;
   }
@@ -40,16 +44,14 @@ class BridgeGame {
    */
   move(movement) {
     if (movement === this.bridge.condition[this.moveCount]) {
-      this.userBridge.condition.push('O');
+      this.userBridge.addMovement('O');
     } else {
-      this.userBridge.condition.push('X');
+      this.userBridge.addMovement('X');
     }
     this.addMoveCount();
   }
 
-  /**
-   * 플레이어의 총 이동 횟수를 +1만큼 증가시키는 메서드
-   */
+  // 플레이어의 총 이동 횟수를 +1만큼 증가시키는 메서드
   addMoveCount() {
     this.moveCount += 1;
   }
@@ -98,13 +100,11 @@ class BridgeGame {
     return false;
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드로 사용자 입력에 따른 현재 다리 모양을 초기화한다.
-   */
+  // 사용자가 게임을 다시 시도할 때 사용하는 메서드로 사용자 입력에 따른 현재 다리 모양을 초기화한다.
   retry() {
     this.addGameCount();
     this.moveCount = 0;
-    this.userBridge = new UserBridge();
+    this.userBridge.refreshCondition();
   }
 
   /**

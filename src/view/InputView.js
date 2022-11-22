@@ -8,8 +8,8 @@ const InputValidation = require('../validation/InputValidation');
 
 const InputView = {
   /**
-   * 플레이어로부터 다리의 길이를 입력 받는다.
-   * @param {function()} nextStep readBridgeSize의 실행이 끝나고 실행 될 콜백 함수
+   * 플레이어로부터 다리의 길이를 입력 받는 메서드
+   * @param {callback} nextStep 해당 메서드가 종료되고 실행할 콜백함수
    */
   readBridgeSize(nextStep) {
     Console.readLine('다리의 길이를 입력해주세요.\n', (userInput) => {
@@ -25,8 +25,8 @@ const InputView = {
   },
 
   /**
-   * 플레이어로부터 이동할 칸을 입력 받는다.
-   * @param {function()} nextStep readMoving의 실행이 끝나고 실행 될 콜백 함수
+   * 플레이어로부터 이동할 경로를 입력 받는 메서드
+   * @param {callback} nextStep 해당 메서드가 종료되고 실행할 콜백함수
    */
   readMoving(nextStep) {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (userInput) => {
@@ -42,7 +42,8 @@ const InputView = {
   },
 
   /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는 메서드
+   * @param {callback} nextStep 해당 메서드가 종료되고 실행할 콜백함수
    */
   readGameCommand(nextStep) {
     Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (userInput) => {

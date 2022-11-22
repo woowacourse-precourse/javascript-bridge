@@ -6,7 +6,9 @@ const { generate } = require('../BridgeRandomNumberGenerator');
 const { makeBridge } = require('../BridgeMaker');
 
 class Bridge {
+  // condition: 생성된 다리의 건널 수 있는 칸('U' 또는 'D')들을 저장하는 배열
   condition;
+
   constructor() {
     this.condition = [];
   }
