@@ -1,8 +1,8 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { Tile, Survived } = require('../constants');
+const { Survived, Tile } = require('../constants');
 const BridgeGame = require('../domains/BridgeGame');
-const Moving = require('../domains/Moving');
 const Messages = require('../intl/Messages');
+const Moving = require('../domains/Moving');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.

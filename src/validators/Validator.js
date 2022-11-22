@@ -1,5 +1,5 @@
-const ValidationError = require('../errors/ValidationError');
 const Messages = require('../intl/Messages');
+const ValidationError = require('../errors/ValidationError');
 
 /**
  * 값을 검증하는 클래스입니다.

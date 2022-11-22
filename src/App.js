@@ -3,10 +3,10 @@
 const Bridge = require('./domains/Bridge');
 const BridgeGame = require('./domains/BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
-const InputView = require('./views/InputView');
-const Routine = require('./utils/Routine');
-const OutputView = require('./views/OutputView');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const InputView = require('./views/InputView');
+const OutputView = require('./views/OutputView');
+const Routine = require('./utils/Routine');
 
 class App {
   /** @type {BridgeGame} */

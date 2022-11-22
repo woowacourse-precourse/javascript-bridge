@@ -1,4 +1,4 @@
-const { validateTile, validate } = require('../validators');
+const { validate, validateTile } = require('../validators');
 
 /**
  * 플레이어가 이동한 흔적을 나타내는 클래스입니다.

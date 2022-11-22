@@ -1,8 +1,8 @@
-const { validate } = require('../validators');
 const Bridge = require('./Bridge');
-const Moving = require('./Moving');
 const BridgeError = require('../errors/BridgeError');
 const Messages = require('../intl/Messages');
+const Moving = require('./Moving');
+const { validate } = require('../validators');
 
 /**
  * 다리를 건너는 플레이어 클래스 입니다.

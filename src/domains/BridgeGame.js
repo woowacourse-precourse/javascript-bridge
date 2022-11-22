@@ -1,7 +1,7 @@
-const { validate } = require('../validators');
 const Bridge = require('./Bridge');
 const Moving = require('./Moving');
 const Player = require('./Player');
+const { validate } = require('../validators');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스

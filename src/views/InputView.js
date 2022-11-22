@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
-const ValidationError = require('../errors/ValidationError');
+const { validateBridgeSize, validateGameCommand, validateTile } = require('../validators');
 const Messages = require('../intl/Messages');
-const { validateBridgeSize, validateTile, validateGameCommand } = require('../validators');
+const ValidationError = require('../errors/ValidationError');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.

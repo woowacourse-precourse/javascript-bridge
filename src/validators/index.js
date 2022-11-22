@@ -1,8 +1,8 @@
+const { BridgeSize, GameCommand, Tile } = require('../constants');
 const ArrayValidator = require('./ArrayValidator');
-const StringValidator = require('./StringValidator');
 const NumberValidator = require('./NumberValidator');
+const StringValidator = require('./StringValidator');
 const Validator = require('./Validator');
-const { Tile, BridgeSize, GameCommand } = require('../constants');
 
 /**
  * @param {any} value
