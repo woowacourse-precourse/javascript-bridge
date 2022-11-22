@@ -48,7 +48,7 @@ const InputView = {
         validator.checkUserMoving(upOrDown);
       } catch (error) {
         OutputView.printErrorMessages(error);
-        this.readBridgeSize();
+        this.readMoving();
       }
 
       this.moving = upOrDown;
@@ -95,7 +95,7 @@ const InputView = {
         validator.checkRestartOrQuit(restartOrQuit);
       } catch (error) {
         OutputView.printErrorMessages(error);
-        this.readBridgeSize();
+        this.readGameCommand();
       }
       if (bridgeGame.retry(restartOrQuit)) {
         this.totalCount += 1;
