@@ -12,6 +12,11 @@ class MainController {
     this.bridgeGame = new BridgeGame(this);
   }
 
+  // 다리 길이 입력 연결 메서드
+  readBridgeSizeInput() {
+    InputView.readBridgeSize(this.onBridgeSizeInput, this);
+  }
+
   /**
    * 다리 길이 입력 후 실행 될 연결 메서드
    * @param bridgeLengthInput {string} [다리 길이 input]
@@ -100,7 +105,7 @@ class MainController {
   init() {
     this.userController.increaseTryCount();
     OutputView.printOpening();
-    InputView.readBridgeSize(this.onBridgeSizeInput, this);
+    this.readBridgeSizeInput();
   }
 }
 
