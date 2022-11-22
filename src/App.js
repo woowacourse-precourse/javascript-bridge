@@ -1,7 +1,7 @@
 const OutputView = require('./OutputView.js');
 const InputView = require('./InputView.js');
 const BridgeGame = require('./BridgeGame.js');
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 
 class App {
   /**
@@ -38,7 +38,7 @@ class App {
       if (this.game.retry(willRetry)) this.playOneStep();
       else {
         OutputView.printResult(this.game);
-        // MissionUtils.Console.close();
+        Console.close();
       }
     });
   }
