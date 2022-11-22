@@ -54,9 +54,7 @@ class BridgeGame {
 
   makeUserBridge(newState) {
     this.#userBridge.push(newState);
-    if (this.isCrossAllBridge()) {
-      return;
-    }
+
     let userCanGo = false;
     if (
       this.#userBridge[this.#userBridge.length - 1] ===
@@ -91,7 +89,9 @@ class BridgeGame {
   }
 
   nextTurn(userCanGo) {
-    userCanGo ? this.userMoving() : this.retryOrEnd();
+    userCanGo && !this.isCrossAllBridge()
+      ? this.userMoving()
+      : this.retryOrEnd();
   }
 
   isCrossAllBridge() {
@@ -101,7 +101,7 @@ class BridgeGame {
 
   retryOrEnd() {
     InputView.readGameCommand(
-      `${INPUT_MESSAGE.retryEnd} ${INPUT_MESSAGE.retryEnd}`,
+      `${INPUT_MESSAGE.retryOrEnd} ${INPUT_MESSAGE.retryEnd}`,
       (input) => {
         input === STATE_CONSTANT.retry ? this.retryGame() : this.endGame();
       }
