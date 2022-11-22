@@ -1,5 +1,4 @@
 const Bridge = require("../Model/Bridge");
-const { BRIDGE_DIRECTION } = require("../constants/GameCondition.js");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -7,18 +6,21 @@ class BridgeGame {
   #bridge = [];
   #bridge_map = new Bridge();
   #step = 0;
+
   setBridge(bridge) {
-    // bridge 설정.
+    // 랜덤으로 생성된 bridge 설정하는 함수
     this.#bridge = bridge;
   }
 
   getBridge() {
+    // 랜덤으로 생성된 bridge정보 받아오는 함수.
     return this.#bridge;
   }
 
   increaseStep() {
     this.#step += 1;
   }
+
   getCurrentMap() {
     return this.#bridge_map.getTotalBridge();
   }
@@ -34,16 +36,15 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    * return : 성공하면 true, 성공안하면 false
    */
-  move(cmd) {
+  move(moveCmd) {
     const step = this.#step;
-    // const currentBridge = this.getBridge();
-    this.#bridge_map.currentBridgeMap(cmd, this.#bridge[step]);
-    return this.checkSuccess(cmd, this.#bridge[step]);
+    this.#bridge_map.currentBridgeMap(moveCmd, this.#bridge[step]);
+    return this.checkSuccess(moveCmd, this.#bridge[step]);
   }
 
-  checkSuccess(cmd, currentBridge) {
-    if (cmd === currentBridge) return true;
-    if (cmd !== currentBridge) return false;
+  checkSuccess(moveCmd, currentBridge) {
+    if (moveCmd === currentBridge) return true;
+    if (moveCmd !== currentBridge) return false;
   }
 
   /**
@@ -59,6 +60,7 @@ class BridgeGame {
   resetMoveBridgeMap() {
     this.#bridge_map.resetMark();
   }
+
   resetStep() {
     this.#step = 0;
   }
