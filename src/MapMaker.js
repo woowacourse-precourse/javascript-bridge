@@ -1,8 +1,8 @@
-const OutputView = require('./OutputView')
+const OutputView = require('./OutputView');
 
 class MapMaker {
-  #upperMapArray
-  #lowerMapArray
+  #upperMapArray;
+  #lowerMapArray;
 
   constructor() {
     this.#upperMapArray = [];
@@ -10,7 +10,7 @@ class MapMaker {
   }
 
   selectRightBridge(direction) {
-    if(direction === 'U') {
+    if (direction === 'U') {
       this.#upperMapArray.push('O');
       this.#lowerMapArray.push(' ');
     }
@@ -18,7 +18,19 @@ class MapMaker {
       this.#upperMapArray.push(' ');
       this.#lowerMapArray.push('O');
     }
-    OutputView.printMap(this.#upperMapArray, this.#lowerMapArray)
+    OutputView.printMap(this.#upperMapArray, this.#lowerMapArray);
+  }
+
+  selectWrongBridge(direction) {
+    if (direction === 'U') {
+      this.#upperMapArray.push('X');
+      this.#lowerMapArray.push(' ');
+    }
+    if (direction === 'D') {
+      this.#upperMapArray.push(' ');
+      this.#lowerMapArray.push('X');
+    }
+    OutputView.printMap(this.#upperMapArray, this.#lowerMapArray);
   }
 }
 
