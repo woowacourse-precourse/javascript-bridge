@@ -6,9 +6,8 @@ describe("[입력 테스트]", () => {
     "다리 길이를 3 이상 20 이하의 숫자로 올바른 값을 입력한 경우",
     (input) => {
       const validate = new Validate();
-      const [isValid, errorMsg] = validate.checkBridgeSize(input);
+      const errorMsg = validate.checkBridgeSize(input);
 
-      expect(isValid).toBe(true);
       expect(errorMsg).toBeNull();
     }
   );
@@ -17,9 +16,8 @@ describe("[입력 테스트]", () => {
     "다리 길이에 3 이상 20 이하의 숫자 범위를 벗어난 입력이 들어오는 경우",
     (input) => {
       const validate = new Validate();
-      let [isValid, errorMsg] = validate.checkBridgeSize(input);
+      let errorMsg = validate.checkBridgeSize(input);
 
-      expect(isValid).toBe(false);
       errorMsg = String(errorMsg).replace("Error: ", "");
       expect(String(errorMsg)).toBe(ERROR_MESSAGE.BRIDGE_SIZE_RANGE);
     }
@@ -29,9 +27,8 @@ describe("[입력 테스트]", () => {
     "다리 길이에 숫자가 아닌 문자 입력이 들어오는 경우",
     (input) => {
       const validate = new Validate();
-      let [isValid, errorMsg] = validate.checkBridgeSize(input);
+      let errorMsg = validate.checkBridgeSize(input);
 
-      expect(isValid).toBe(false);
       errorMsg = String(errorMsg).replace("Error: ", "");
       expect(String(errorMsg)).toBe(ERROR_MESSAGE.BRIDGE_SIZE_IS_NAN);
     }
@@ -41,9 +38,8 @@ describe("[입력 테스트]", () => {
     "이동하려는 칸을 U(위 칸)와 D(아래 칸) 중 하나의 문자인 올바른 값을 입력한 경우",
     (input) => {
       const validate = new Validate();
-      const [isValid, errorMsg] = validate.checkMovingDirection(input);
+      const errorMsg = validate.checkMovingDirection(input);
 
-      expect(isValid).toBe(true);
       expect(errorMsg).toBeNull();
     }
   );
@@ -52,9 +48,8 @@ describe("[입력 테스트]", () => {
     "이동하려는 칸에 올바른 입력이 들어오지 않는 경우",
     (input) => {
       const validate = new Validate();
-      let [isValid, errorMsg] = validate.checkMovingDirection(input);
+      let errorMsg = validate.checkMovingDirection(input);
 
-      expect(isValid).toBe(false);
       errorMsg = String(errorMsg).replace("Error: ", "");
       expect(String(errorMsg)).toBe(ERROR_MESSAGE.MOVING_DIRECTION);
     }
@@ -64,9 +59,8 @@ describe("[입력 테스트]", () => {
     "게임 재시작/종료 여부를 R(재시작)과 Q(종료) 중 하나의 문자인 올바른 값을 입력한 경우",
     (input) => {
       const validate = new Validate();
-      const [isValid, errorMsg] = validate.checkGameCommand(input);
+      const errorMsg = validate.checkGameCommand(input);
 
-      expect(isValid).toBe(true);
       expect(errorMsg).toBeNull();
     }
   );
@@ -75,9 +69,8 @@ describe("[입력 테스트]", () => {
     "게임 재시작/종료 여부에 올바른 입력이 들어오지 않는 경우",
     (input) => {
       const validate = new Validate();
-      let [isValid, errorMsg] = validate.checkGameCommand(input);
+      let errorMsg = validate.checkGameCommand(input);
 
-      expect(isValid).toBe(false);
       errorMsg = String(errorMsg).replace("Error: ", "");
       expect(String(errorMsg)).toBe(ERROR_MESSAGE.GAME_COMMAND);
     }
