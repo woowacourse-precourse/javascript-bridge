@@ -6,6 +6,20 @@ const { MOVE, MOVE_PICK, PLAY } = require('./constant/constant');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #tryCount;
+
+  constructor() {
+    this.#tryCount = 0;
+  }
+
+  addTryCount() {
+    this.#tryCount += 1;
+  }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
+
   compareOneSideBridge(myMoves, bridge) {
     return myMoves.map((move, index) => {
       if (move === bridge[index] && bridge[index] !== '') return MOVE_PICK.RIGHT;

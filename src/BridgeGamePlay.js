@@ -10,7 +10,6 @@ class BridgeGamePlay {
   constructor() {
     this.bridgeGame = new BridgeGame();
     this.bridge = [];
-    this.tryCount = 0;
     this.myMoves = [];
   }
 
@@ -29,7 +28,7 @@ class BridgeGamePlay {
    */
   playGame() {
     this.myMoves = [];
-    this.tryCount += 1;
+    this.bridgeGame.addTryCount();
     this.move();
   }
 
@@ -39,7 +38,7 @@ class BridgeGamePlay {
     const result = this.bridgeGame.getMoveResult(this.myMoves, this.bridge);
     OutputView.printMap(result);
     if (this.bridgeGame.validateWin(this.myMoves, this.bridge)) {
-      OutputView.printResult(result, RESULT.WIN, this.tryCount);
+      OutputView.printResult(result, RESULT.WIN, this.bridgeGame.getTryCount());
     }
     this.check(result);
   }
@@ -55,7 +54,7 @@ class BridgeGamePlay {
 
   checkRetry(result, gameCommand) {
     if (!this.bridgeGame.retry(gameCommand)) {
-      OutputView.printResult(result, RESULT.FAIL, this.tryCount);
+      OutputView.printResult(result, RESULT.FAIL, this.bridgeGame.getTryCount());
     }
     if (this.bridgeGame.retry(gameCommand)) {
       this.playGame();
