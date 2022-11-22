@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { MESSAGE } = require("./Constants");
 const { Console } = MissionUtils;
 
 const OutputView = {
@@ -27,8 +28,10 @@ const OutputView = {
   
   makeLastRecord(playerMovingRecord, isSuccess, upOrDown){
     let lastRecord;
-    if(isSuccess) lastRecord = (upOrDown === playerMovingRecord[playerMovingRecord.length - 1] ? 'O' : ' ');
-    else lastRecord = (upOrDown === playerMovingRecord[playerMovingRecord.length - 1] ? 'X' : ' ');
+    if(isSuccess) 
+      lastRecord = (upOrDown === playerMovingRecord[playerMovingRecord.length - 1] ? 'O' : ' ');
+    else 
+      lastRecord = (upOrDown === playerMovingRecord[playerMovingRecord.length - 1] ? 'X' : ' ');
       
     return lastRecord;
   },
@@ -44,9 +47,8 @@ const OutputView = {
     return map;
   },
 
-
   printResult(playerMovingRecord ,isFinish, attemptNumber) {
-    Console.print(`최종 게임 결과`);   
+    Console.print(MESSAGE.RESULT);   
     this.printMap(playerMovingRecord ,isFinish);
     
     const successOrFail = (isFinish ? `성공` : `실패`);

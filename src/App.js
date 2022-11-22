@@ -3,12 +3,13 @@ const { Console } = MissionUtils;
 const BridgeGame = require("./BridgeGame.js");
 const InputView = require("./InputView.js");
 const OutputView = require("./OutputView.js");
+const {MESSAGE} = require("./Constants.js");
 
 class App {
   #bridgeGame;
 
   play() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
+    Console.print(MESSAGE.GAME_START);
     this.start();
   }
 
