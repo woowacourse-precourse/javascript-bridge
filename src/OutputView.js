@@ -13,8 +13,8 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(firstRow, secondRow) {
-    Console.print(firstRow.join(' '));
+  printMap(upRow, secondRow) {
+    Console.print(upRow.join(' '));
     Console.print(secondRow.join(' '));
     Console.print(PRINT_MESSAGE.enter);
   },
@@ -24,9 +24,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(firstRow, secondRow) {
+  printResult(upRow, secondRow) {
     Console.print(PRINT_MESSAGE.finish);
-    this.printMap(firstRow, secondRow);
+    this.printMap(upRow, secondRow);
   },
 
   printInfo(count, result) {

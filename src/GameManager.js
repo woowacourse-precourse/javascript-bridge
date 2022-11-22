@@ -32,12 +32,12 @@ class GameManager {
     })
   }
 
-  printSpace(firstRow, secondRow) {
-    OutputView.printMap(firstRow, secondRow);
+  printSpace(upRow, secondRow) {
+    OutputView.printMap(upRow, secondRow);
   }
 
-  printResult(firstRow, secondRow) {
-    OutputView.printResult(firstRow, secondRow);
+  printResult(upRow, secondRow) {
+    OutputView.printResult(upRow, secondRow);
   }
 
   printInfo(count, result) {

@@ -6,7 +6,7 @@ const { BRIDGE_ROW, BRIDGE_CHECK, GAME_COMMAND, GAME_RESULT } = require("./utils
 class BridgeGame {
   #originBridges
   #bridges
-  #firstRow
+  #upRow
   #secondRow
   #count
   #result
@@ -17,17 +17,17 @@ class BridgeGame {
   }
 
   openBridgeRow() {
-    this.#firstRow = [BRIDGE_ROW.open];
+    this.#upRow = [BRIDGE_ROW.open];
     this.#secondRow = [BRIDGE_ROW.open];
   }
 
   closeBridgeRow() {
-    this.#firstRow.push(BRIDGE_ROW.close);
+    this.#upRow.push(BRIDGE_ROW.close);
     this.#secondRow.push(BRIDGE_ROW.close);
   }
 
   addResultInRow(a, b) {
-    this.#firstRow.push(a);
+    this.#upRow.push(a);
     this.#secondRow.push(b);
   }
 
@@ -66,8 +66,8 @@ class BridgeGame {
   }
 
   checkBridge(bridge) {
-    if (this.#firstRow.includes(BRIDGE_CHECK.wrong) === true || this.#secondRow.includes(BRIDGE_CHECK.wrong) === true) {
-      this.gameManager.printSpace(this.#firstRow, this.#secondRow);
+    if (this.#upRow.includes(BRIDGE_CHECK.wrong) === true || this.#secondRow.includes(BRIDGE_CHECK.wrong) === true) {
+      this.gameManager.printSpace(this.#upRow, this.#secondRow);
       return this.inputRetry();
     }
 
@@ -75,12 +75,12 @@ class BridgeGame {
       return this.finish();  
     }
 
-    this.gameManager.printSpace(this.#firstRow, this.#secondRow);
+    this.gameManager.printSpace(this.#upRow, this.#secondRow);
     this.addPartition(bridge);
   }
 
   addPartition(bridge) {
-    this.#firstRow.splice(-1,1, BRIDGE_ROW.partition);
+    this.#upRow.splice(-1,1, BRIDGE_ROW.partition);
     this.#secondRow.splice(-1,1, BRIDGE_ROW.partition);
     this.#bridges = bridge;
 
@@ -88,7 +88,7 @@ class BridgeGame {
   }
 
   addResultInRow(a, b) {
-    this.#firstRow.push(a);
+    this.#upRow.push(a);
     this.#secondRow.push(b);
   }
 
@@ -117,7 +117,7 @@ class BridgeGame {
   }
 
   printFinalResult() {
-    this.gameManager.printResult(this.#firstRow, this.#secondRow);
+    this.gameManager.printResult(this.#upRow, this.#secondRow);
     this.gameManager.printInfo(this.#count, this.#result);
   }
 }
