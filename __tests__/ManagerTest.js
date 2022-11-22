@@ -1,6 +1,6 @@
 const { describe, expect, test } = require("@jest/globals");
 const { Console, Random } = require("@woowacourse/mission-utils");
-const { ERROR_MESSAGE } = require("../src/libs/Const");
+const { ERROR_MESSAGE } = require("../src/lConst");
 const Manager = require("../src/Manager");
 
 const printSpy = jest.spyOn(Console, "print");
@@ -25,8 +25,8 @@ describe("전체적인 게임 흐름 테스트", () => {
   test("올바른 값을 입력하지 않으면 에러 메시지가 출력된다.", () => {
     mockQuestions(["a"]);
 
-    const manager = new Manager();
-    manager.start();
+    const Manager = new Manager();
+    Manager.start();
 
     expect(printSpy).toHaveBeenLastCalledWith(ERROR_MESSAGE.number);
 
@@ -36,8 +36,8 @@ describe("전체적인 게임 흐름 테스트", () => {
   test("방향을 U 또는 D를 입력하지 않으면 에러 메시지가 출력된다.", () => {
     mockQuestions(["3", "A"]);
 
-    const manager = new Manager();
-    manager.start();
+    const Manager = new Manager();
+    Manager.start();
 
     expect(printSpy).toHaveBeenLastCalledWith(ERROR_MESSAGE.direction);
 
@@ -49,8 +49,8 @@ describe("전체적인 게임 흐름 테스트", () => {
 
     mockQuestions(["3", "U", "D", "L"]);
 
-    const manager = new Manager();
-    manager.start();
+    const Manager = new Manager();
+    Manager.start();
 
     expect(printSpy).toHaveBeenLastCalledWith(ERROR_MESSAGE.commandOption);
 
@@ -62,8 +62,8 @@ describe("전체적인 게임 흐름 테스트", () => {
 
     mockQuestions(["3", "U", "U"]);
 
-    const manager = new Manager();
-    manager.start();
+    const Manager = new Manager();
+    Manager.start();
 
     expect(printSpy).toHaveBeenNthCalledWith(2, "[ O ]");
     expect(printSpy).toHaveBeenNthCalledWith(3, "[   ]");
@@ -78,8 +78,8 @@ describe("전체적인 게임 흐름 테스트", () => {
 
     mockQuestions(["3", "D"]);
 
-    const manager = new Manager();
-    manager.start();
+    const Manager = new Manager();
+    Manager.start();
 
     expect(printSpy).toHaveBeenNthCalledWith(3, "[ X ]");
 
@@ -91,8 +91,8 @@ describe("전체적인 게임 흐름 테스트", () => {
 
     mockQuestions(["3", "D", "Q"]);
 
-    const manager = new Manager();
-    manager.start();
+    const Manager = new Manager();
+    Manager.start();
 
     expect(printSpy).toHaveBeenNthCalledWith(7, "\n게임 성공 여부: 실패");
 
@@ -103,8 +103,8 @@ describe("전체적인 게임 흐름 테스트", () => {
     setNumber();
     mockQuestions(["3", "D", "R", "U", "D", "R", "U", "U", "U", "Q"]);
 
-    const manager = new Manager();
-    manager.start();
+    const Manager = new Manager();
+    Manager.start();
 
     expect(printSpy).toHaveBeenLastCalledWith("총 시도한 횟수: 3");
 
@@ -116,8 +116,8 @@ describe("전체적인 게임 흐름 테스트", () => {
 
     mockQuestions(["3", "U", "U", "D"]);
 
-    const manager = new Manager();
-    manager.start();
+    const Manager = new Manager();
+    Manager.start();
 
     expect(printSpy).toHaveBeenNthCalledWith(11, "\n게임 성공 여부: 성공");
 
@@ -129,8 +129,8 @@ describe("전체적인 게임 흐름 테스트", () => {
 
     mockQuestions(["3", "U", "U", "D"]);
 
-    const manager = new Manager();
-    manager.start();
+    const Manager = new Manager();
+    Manager.start();
 
     expect(printSpy).toHaveBeenNthCalledWith(8, "\n최종 게임 결과");
     expect(printSpy).toHaveBeenNthCalledWith(9, "[ O | O |   ]");

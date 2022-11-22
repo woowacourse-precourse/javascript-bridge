@@ -5,7 +5,7 @@ const Error = {
     try {
       throw errorMsg;
     } catch (errorMsg) {
-      OutputView.printErrorMessage(errorMsg);
+      OutputView.printMessage(errorMsg);
 
       return callback();
     }

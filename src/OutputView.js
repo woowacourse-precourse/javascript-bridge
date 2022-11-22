@@ -1,11 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { INTRO_MESSAGE } = require("./libs/const");
 const OutputView = {
-  printStartMessage() {
-    Console.print(INTRO_MESSAGE.start);
-  },
-  printErrorMessage(errorMsg) {
-    Console.print(errorMsg);
+  printMessage(message) {
+    Console.print(message);
   },
   printMap([upBridge, downBridge]) {
     Console.print(`[ ${upBridge.join(" | ")} ]`);

@@ -63,7 +63,7 @@ describe("printMap 메서드 테스트", () => {
 
 describe("printResult 메서드 테스트", () => {
   test("Console.print가 총 2번 호출된다.", () => {
-    OutputView.printResult({ isSuccess: true, attemptCount: 3 });
+    OutputView.printResult({ isSuccess: true, attempCount: 3 });
 
     expect(printSpy).toHaveBeenCalledTimes(2);
 
@@ -71,8 +71,8 @@ describe("printResult 메서드 테스트", () => {
   });
 
   test.each([
-    [{ isSuccess: true, attemptCount: 1 }, "성공"],
-    [{ isSuccess: false, attemptCount: 1 }, "실패"],
+    [{ isSuccess: true, attempCount: 1 }, "성공"],
+    [{ isSuccess: false, attempCount: 1 }, "실패"],
   ])("성공여부 출력 테스트", (result, isSuccess) => {
     OutputView.printResult(result);
 
@@ -85,23 +85,23 @@ describe("printResult 메서드 테스트", () => {
   });
 
   test.each([
-    [{ isSuccess: true, attemptCount: 1 }],
-    [{ isSuccess: true, attemptCount: 3 }],
-    [{ isSuccess: true, attemptCount: 20 }],
+    [{ isSuccess: true, attempCount: 1 }],
+    [{ isSuccess: true, attempCount: 3 }],
+    [{ isSuccess: true, attempCount: 20 }],
   ])("시도 횟수 출력 테스트", (result) => {
     OutputView.printResult(result);
 
     expect(printSpy).toHaveBeenNthCalledWith(
       2,
-      `총 시도한 횟수: ${result.attemptCount}`
+      `총 시도한 횟수: ${result.attempCount}`
     );
 
     printSpy.mockClear();
   });
 
   test.each([
-    [{ isSuccess: true, attemptCount: 5 }, "성공"],
-    [{ isSuccess: false, attemptCount: 10 }, "실패"],
+    [{ isSuccess: true, attempCount: 5 }, "성공"],
+    [{ isSuccess: false, attempCount: 10 }, "실패"],
   ])("결과 전체 출력 테스트", (result, isSuccess) => {
     OutputView.printResult(result);
 
@@ -111,7 +111,7 @@ describe("printResult 메서드 테스트", () => {
     );
     expect(printSpy).toHaveBeenNthCalledWith(
       2,
-      `총 시도한 횟수: ${result.attemptCount}`
+      `총 시도한 횟수: ${result.attempCount}`
     );
 
     printSpy.mockClear();

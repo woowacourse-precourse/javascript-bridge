@@ -40,7 +40,7 @@ describe("move 메서드 테스트", () => {
   });
 
   test("move 메서드가 3번 실행되면 crossingOrder의 길이는 3이다.", () => {
-    ["U", "D", "D"].forEach((direction) => moveMockFn(direction));
+    ["U", "D", "D"].forEach((dircetion) => moveMockFn(dircetion));
 
     expect(crossingOrder).toHaveLength(3);
     crossingOrder = [];
@@ -65,7 +65,7 @@ describe("isFail 메서드 테스트", () => {
   test.each([[["U", "D", "U"]], [["U", "D", "D", "D"]]])(
     "crossingOrder 배열의 마지막 요소의 문자열 방향과 같은 위치의 bridge 요소가 다르다면 true를 반환한다.",
     (array) => {
-      array.forEach((direction) => moveMockFn(direction));
+      array.forEach((dircetion) => moveMockFn(dircetion));
 
       expect(isFailMockFn()).toBeTruthy();
       crossingOrder = [];
@@ -73,7 +73,7 @@ describe("isFail 메서드 테스트", () => {
   );
 
   test("다리 건너기가 끝까지 성공하면 false를 반환한다.", () => {
-    ["U", "D", "D", "U"].forEach((direction) => moveMockFn(direction));
+    ["U", "D", "D", "U"].forEach((dircetion) => moveMockFn(dircetion));
 
     expect(isFailMockFn()).toBeFalsy();
     crossingOrder = [];
@@ -82,14 +82,14 @@ describe("isFail 메서드 테스트", () => {
 
 describe("isLast 메서드 테스트", () => {
   test("#bridge의 길이와 #crossingOrder의 길이가 다르다면 false를 반환한다.", () => {
-    ["U", "D", "D"].forEach((direction) => moveMockFn(direction));
+    ["U", "D", "D"].forEach((dircetion) => moveMockFn(dircetion));
 
     expect(isLastMockFn()).toBeFalsy();
     crossingOrder = [];
   });
 
   test("#bridge의 길이와 #crossingOrder의 길이가 다르다면 false를 반환한다.", () => {
-    ["U", "D", "D", "U"].forEach((direction) => moveMockFn(direction));
+    ["U", "D", "D", "U"].forEach((dircetion) => moveMockFn(dircetion));
 
     expect(isLastMockFn()).toBeTruthy();
   });
@@ -139,8 +139,8 @@ describe("getResult 메서드 테스트", () => {
 
     crossingOrder = [];
 
-    array.forEach((direction) => {
-      moveMockFn(direction);
+    array.forEach((dircetion) => {
+      moveMockFn(dircetion);
     });
 
     getResultMockFn();
@@ -159,20 +159,20 @@ describe("getResult 메서드 테스트", () => {
 
     crossingOrder = [];
 
-    ["U", "U"].forEach((direction) => {
-      moveMockFn(direction);
+    ["U", "U"].forEach((dircetion) => {
+      moveMockFn(dircetion);
     });
 
     retryMockFn();
 
-    ["U", "D", "U"].forEach((direction) => {
-      moveMockFn(direction);
+    ["U", "D", "U"].forEach((dircetion) => {
+      moveMockFn(dircetion);
     });
 
     retryMockFn();
 
-    ["U", "D", "D", "U"].forEach((direction) => {
-      moveMockFn(direction);
+    ["U", "D", "D", "U"].forEach((dircetion) => {
+      moveMockFn(dircetion);
     });
 
     getResultMockFn();

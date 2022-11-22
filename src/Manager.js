@@ -5,7 +5,7 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const Validation = require("./libs/Validation");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const { COMMAND_OPTION } = require("./libs/const");
+const { COMMAND_OPTION, INTRO_MESSAGE } = require("./libs/const");
 const { throwException } = require("./libs/Error");
 class Manager {
   #bridgeGame;
@@ -14,12 +14,12 @@ class Manager {
     this.#bridgeGame = null;
   }
   start() {
-    OutputView.printStartMessage();
+    OutputView.printStartMessage(INTRO_MESSAGE.start);
     this.requestBridgeSize();
   }
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
-      const { errorMsg } = Validation.validateBridgeSize(size);
+      const { errorMsg } = Validation.checkBridgeSize(size);
       if (errorMsg)
         return throwException(errorMsg, () => this.requestBridgeSize());
 
@@ -35,9 +35,9 @@ class Manager {
   }
   requestDirection() {
     InputView.readMoving((direction) => {
-      const { errorMsg } = Validation.validateDirection(direction);
+      const { errorMsg } = Validation.checkDirection(direction);
       if (errorMsg)
-        return throwException(errorMsg, () => this.requestDirection());
+        return throwException(errorMsg, () => this.requestDirection.bind(this));
 
       this.#bridgeGame.move(direction);
       this.printBridgeCrossingResult();
@@ -59,9 +59,9 @@ class Manager {
   }
   requestRestartOrQuit() {
     InputView.readGameCommand((commandOption) => {
-      const { errorMsg } = Validation.validateCommandOption(commandOption);
-      if (errorMsg)
-        return throwException(errorMsg, () => this.requestRestartOrQuit());
+      const { errorMsg } = Validation.checkCommandOption(commandOption);
+      const callback = this.requestRestartOrQuit.bind(this);
+      if (errorMsg) return throwException(errorMsg, callback);
 
       this.actionAboutGameCommand(commandOption);
     });
