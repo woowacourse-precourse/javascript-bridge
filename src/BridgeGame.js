@@ -39,6 +39,16 @@ class BridgeGame {
   }
 
   /**
+   * 사용자가 이동하고 난 결과 (OX 표시)
+   */
+  getMoveResult(myMoves, bridge) {
+    const currentBridge = this.move(myMoves, bridge);
+    const currentMyMoves = this.move(myMoves, myMoves);
+    const result = this.compareBridge(currentMyMoves, currentBridge);
+    return result;
+  }
+
+  /**
    * 다리 생성
    */
   makeBridge(bridgeSize) {

@@ -36,9 +36,7 @@ class BridgeGamePlay {
   move() {
     const currentMove = InputView.getMoving();
     this.myMoves.push(currentMove);
-    const currentBridge = this.bridgeGame.move(this.myMoves, this.bridge);
-    const currentMyMoves = this.bridgeGame.move(this.myMoves, this.myMoves);
-    const result = this.bridgeGame.compareBridge(currentMyMoves, currentBridge);
+    const result = this.bridgeGame.getMoveResult(this.myMoves, this.bridge);
     OutputView.printMap(result);
     this.check(result);
   }
