@@ -3,7 +3,6 @@ const Validator = require("./Library/Validator");
 const BRIDGE_ALPHABET = ["D", "U"];
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
- *
  * BridgeMaker의 파일 경로는 변경할 수 없다. ******
  */
 const BridgeMaker = {
@@ -16,13 +15,17 @@ const BridgeMaker = {
     const bridgeStatus = [];
 
     for (let number = 0; number < size; number++) {
-      const RANDOM = generateRandomNumber();
-      Validator.isBoolNumber(generateRandomNumber, RANDOM);
-
+      const RANDOM = this.bridgeGenerate(generateRandomNumber);
       bridgeStatus.push(BRIDGE_ALPHABET[RANDOM]);
     }
 
     return bridgeStatus;
+  },
+
+  bridgeGenerate(generateRandomNumber) {
+    const RANDOM = generateRandomNumber();
+    Validator.isBoolNumber(this.bridgeGenerate, RANDOM);
+    return RANDOM;
   },
 };
 

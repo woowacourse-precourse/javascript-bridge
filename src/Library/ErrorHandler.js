@@ -17,7 +17,7 @@ const ErrorHandler = {
       OutputView.printError(ERROR_MESSAGES[causation]);
     } finally {
       if (!result) {
-        callback();
+        callback;
       }
     }
   },

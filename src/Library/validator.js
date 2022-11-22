@@ -24,6 +24,10 @@ const Validator = {
   },
 
   isMoveDirection(callback, moveDirection) {
+    if (moveDirection === null) {
+      ErrorHandler.tryCatch(false, callback, "jump");
+      return false;
+    }
     if (moveDirection === "U" || moveDirection === "D") {
       return true;
     }
@@ -34,7 +38,9 @@ const Validator = {
   isBoolNumber(callback, number) {
     if (number !== 0 && number !== 1) {
       ErrorHandler.tryCatch(false, callback, "compute");
+      return false;
     }
+    return true;
   },
 
   isQuit(callback, rq) {
