@@ -84,12 +84,17 @@ class BridgeGame {
 
   /**
    * 게임 재시작 및 종료를 위해 플레이어가 건너지 못하였는지 여부를 판단하는 메서드
-   * @param {string[]} up 윗쪽 다리에서 건넌 여부를 저장한 배열
-   * @param {string[]} down 아랫쪽 다리에서 건넌 여부를 저장한 배열
-   * @returns {boolean} 플레이어가 건너지 못하여 X를 저장한 배열이 존재하는 경우 게임 재시작 여부 판단을 위해 참 또는 거짓을 반환한다.
+   * @param {string[][]} currentMap 현재 플레이어가 건넌 다리 상황을 저장한 [윗쪽 다리, 아랫쪽 다리] 배열
+   * @returns {boolean} 플레이어가 건넌 여부에 따라 게임 재시작 및 종료 여부 판단을 위해 참 또는 거짓을 반환한다.
    */
-  checkGameSet(up, down) {
+  checkGameSet(currentMap) {
+    const up = currentMap[0];
+    const down = currentMap[1];
     if (up.includes('X') || down.includes('X')) return true;
+    else if (this.userBridge.condition.length === this.bridge.condition.length) {
+      this.failOrSuccess = true;
+      return true;
+    }
     return false;
   }
 
@@ -100,6 +105,20 @@ class BridgeGame {
     this.addGameCount();
     this.moveCount = 0;
     this.userBridge = new UserBridge();
+  }
+
+  /**
+   * 성공 및 실패를 메시지를 전달하는 메서드
+   * @returns {string} failOrSuccess 값에 따라 성공 및 실패 메시지를 반환한다.
+   */
+  getGameResult() {
+    let gameResult;
+    if (this.failOrSuccess) {
+      gameResult = '성공';
+    } else {
+      gameResult = '실패';
+    }
+    return gameResult;
   }
 }
 

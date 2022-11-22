@@ -8,10 +8,12 @@ const { Console } = require('@woowacourse/mission-utils');
 class App {
   bridge;
   bridgeGame;
+  currentMap;
 
   constructor() {
     this.bridge = new Bridge();
     this.bridgeGame = new BridgeGame(this.bridge, this.userBridge);
+    this.currentMap = [];
   }
 
   play() {
@@ -34,15 +36,18 @@ class App {
     });
   }
   comparisonOperator() {
-    const currentMap = this.bridgeGame.comparisonOperator();
-    const up = currentMap[0];
-    const down = currentMap[1];
-    this.showMap(up, down);
+    this.currentMap = this.bridgeGame.comparisonOperator();
+    this.showMap();
   }
-  showMap(up, down) {
-    OutputView.printMap(up, down);
-    const gameSet = this.bridgeGame.checkGameSet(up, down);
-    if (gameSet === true) {
+  showMap() {
+    OutputView.printMap(this.currentMap);
+    this.checkGameSet();
+  }
+  checkGameSet() {
+    const gameSet = this.bridgeGame.checkGameSet(this.currentMap);
+    if (this.bridgeGame.failOrSuccess) {
+      this.quitGame();
+    } else if (gameSet) {
       this.askRetry();
     } else this.moveOnBridge();
   }
@@ -60,7 +65,8 @@ class App {
     this.moveOnBridge();
   }
   quitGame() {
-    OutputView.printResult(this.bridgeGame.failOrSuccess, this.bridgeGame.gameCount);
+    const gameResult = this.bridgeGame.getGameResult();
+    OutputView.printResult(this.currentMap, gameResult, this.bridgeGame.gameCount);
   }
 }
 

@@ -18,7 +18,9 @@ const OutputView = {
    * @param {string[]} up 사용자가 이동한 다리 현황 중 윗쪽 다리 배열
    * @param {string[]} up 사용자가 이동한 다리 현황 중 아랫쪽 다리 배열
    */
-  printMap(up, down) {
+  printMap(currentMap) {
+    const up = currentMap[0];
+    const down = currentMap[1];
     Console.print(`[ ${up.join(' | ')} ]`);
     Console.print(`[ ${down.join(' | ')} ]\n`);
   },
@@ -28,8 +30,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(failOrSuccess, gameCount) {
-    Console.print(`게임 성공 여부: ${failOrSuccess}`);
+  printResult(currentMap, gameResult, gameCount) {
+    Console.print('최종 게임 결과');
+    this.printMap(currentMap);
+    Console.print(`게임 성공 여부: ${gameResult}`);
     Console.print(`총 시도한 횟수: ${gameCount}`);
     Console.close();
   },
