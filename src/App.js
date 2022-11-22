@@ -24,10 +24,10 @@ class App {
   }
 
   initBridge() {
-    InputView.readBridgeSize((length) => {
       if (!InputView.sizeValidate(length)) return this.initBridge();
+    InputView.readBridgeSize((size) => {
 
-      this.#bridge = BridgeMaker.makeBridge(parseInt(length, 10), generate);
+      this.#bridge = BridgeMaker.makeBridge(parseInt(size, 10), generate);
       OutputView.printEnter();
       return this.movingBridge();
     });

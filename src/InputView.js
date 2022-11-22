@@ -9,7 +9,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callBack) {
-    Console.readLine(MESSAGE.INPUT_LENGTH, callBack);
+    Console.readLine(MESSAGE.INPUT_SIZE, callBack);
   },
 
   /**
@@ -29,7 +29,7 @@ const InputView = {
   sizeValidate(length) {
     try {
       if (!REGEXP.CHECK_NUMBER.test(length)) {
-        throw new Error(ERROR_MESSAGE.INVALID_LENGTH_NUMBER);
+        throw new Error(ERROR_MESSAGE.INVALID_SIZE_NUMBER);
       }
 
       if (REGEXP.CHECK_START_NUMBER.test(length)) {
@@ -37,7 +37,7 @@ const InputView = {
       }
 
       if (parseInt(length, 10) < 3 || parseInt(length, 10) > 20) {
-        throw new Error(ERROR_MESSAGE.INVALID_LENGTH_RANGE);
+        throw new Error(ERROR_MESSAGE.INVALID_SIZE_RANGE);
       }
     } catch (error) {
       Console.print(error);
