@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const { MIN_BRIDGE_SIZE, MAX_BRIDGE_SIZE, UP, DOWN, RETRY, QUIT } = require('./Command');
 const {
   BRIDGE_SIZE_NATURAL_NUMBER,
@@ -9,6 +10,7 @@ const {
 const ErrorHandling = {
   throwError(isInvalid, message) {
     if (isInvalid) {
+      Console.print(message);
       throw new Error(message);
     }
   },
