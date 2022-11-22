@@ -1,20 +1,51 @@
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
-const OutputView = {
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printMap() {},
+const { Console } = require('@woowacourse/mission-utils');
+const { OUTPUT } = require('../src/const/Text');
+const { MOVING_INPUT, PRINT } = require('../src/const/Bridge');
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult() {},
+const OutputView = {
+  UPPER: [],
+  LOWER: [],
+
+  printStart() {
+    Console.print(OUTPUT.start);
+  },
+
+  printError(err) {
+    Console.print(err);
+  },
+
+  printClose() {
+    Console.close();
+  },
+
+  processMap(move) {
+    const printFlag = move.success ? PRINT.O:PRINT.X;
+    if(move.moving === MOVING_INPUT.up) {
+      OutputView.UPPER.push(printFlag);
+      OutputView.LOWER.push(PRINT.space);
+    } else if(move.moving === MOVING_INPUT.down) {
+      OutputView.UPPER.push(PRINT.space);
+      OutputView.LOWER.push(printFlag);
+    }
+  },
+
+  printMap(moveInfo) {
+    OutputView.UPPER = [];
+    OutputView.LOWER = [];
+    moveInfo.forEach((move) => {
+      this.processMap(move);
+    })
+    Console.print(`[ ${OutputView.UPPER.join(PRINT.bar)} ]`);
+    Console.print(`[ ${OutputView.LOWER.join(PRINT.bar)} ]\n`);
+  },
+
+  printResult(moveInfo, tryCnt, successFlag) {
+    Console.print(OUTPUT.resultText);
+    this.printMap(moveInfo);
+    Console.print(OUTPUT.resultSuccess(successFlag));
+    Console.print(OUTPUT.resultTryCount(tryCnt));
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
