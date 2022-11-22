@@ -49,10 +49,6 @@ class BridgeGame {
     );
   }
 
-  isLastRound(round) {
-    return round === this.#bridge.size();
-  }
-
   retry(command) {
     this.#validateCommand(command);
 
@@ -78,6 +74,10 @@ class BridgeGame {
     const isSuccess = this.#bridge.size() === this.#map.length;
 
     return { map: this.#map, attempts: this.#attempts, isSuccess };
+  }
+
+  isLastRound(round) {
+    return round === this.#bridge.size();
   }
 
   #isValidDirection(direction) {
