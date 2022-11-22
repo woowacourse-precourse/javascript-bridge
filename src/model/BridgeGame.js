@@ -1,6 +1,6 @@
 const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
-const { DIRECTION, PHASE } = require('../constant/Constant');
+const { DIRECTION, DIRECTIONS, PHASE } = require('../constant/Constant');
 
 const RESULT = Object.freeze({
   SUCCESS: '성공',
@@ -55,7 +55,7 @@ class BridgeGame {
 
   drawMap(moving) {
     const { moveMap, result } = this;
-    const unchosen = new Set(moveMap.keys());
+    const unchosen = new Set(DIRECTIONS);
 
     moveMap.get(moving).push(this.#OBJECT[result]);
     unchosen.delete(moving);
