@@ -44,7 +44,11 @@ const InputView = {
   gameManager(bridge, count, moving) {
     const [up, down, hasCorrect] = this.bridgeGame.move(bridge[count-1], moving);
     OutputView.printMap(up,down);
-    if (count === bridge.length && hasCorrect) { }
+    if (!hasCorrect) this.readGameCommand(up, down, bridge, hasCorrect);
+    if (count === bridge.length && hasCorrect) {
+      const trial = this.bridgeGame.retry();
+      OutputView.printResult(up, down, trial, hasCorrect);
+    }
     else this.readMoving(bridge);
   },
 
@@ -56,7 +60,16 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)", (command) => {
+      this.checkCommand(command);
+      if (command == 'R') {Console.print(command); this.bridgeGame.retry(); this.readMoving(bridge);}
+      if (command == 'Q') { 
+        Console.print(command);
+        const trial = this.bridgeGame.retry(); 
+      }
+    });
+  },
 };
 
 module.exports = InputView;
