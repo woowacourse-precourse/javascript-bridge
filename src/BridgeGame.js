@@ -73,6 +73,18 @@ class BridgeGame {
     }
   }
 
+  insertFailBridge() {
+    const [topBridge, bottomBridge] = this.#bridgeMap;
+    if (this.#bridge[this.getCurrentPosition()] === Constant.COMMAND_UP_DIRECTION_STRING) {
+      topBridge.push(Constant.EMPTY_STRING);
+      bottomBridge.push(Constant.FAIL_STRING);
+    }
+    if (this.#bridge[this.getCurrentPosition()] === Constant.COMMAND_DOWN_DIRECTION_STRING) {
+      topBridge.push(Constant.FAIL_STRING);
+      bottomBridge.push(Constant.EMPTY_STRING);
+    }
+  }
+
   isFinish() {
     if (this.#currentPosition === this.#bridge.length) {
       return true;
