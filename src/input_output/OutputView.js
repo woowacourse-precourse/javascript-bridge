@@ -36,9 +36,8 @@ const OutputView = {
 		const image = paper.map((element, index) => {
 			const log = movingLogs[index];
 
-			if (log.moving !== MOVING.up) {
-				return BRIDGE_VIEW.blank;
-			}
+			if (log.moving !== MOVING.up) return BRIDGE_VIEW.blank;
+
 			return log.state ? BRIDGE_VIEW.matched : BRIDGE_VIEW.notMatched;
 		});
 
@@ -50,9 +49,8 @@ const OutputView = {
 		const image = paper.map((element, index) => {
 			const log = movingLogs[index];
 
-			if (log.moving !== MOVING.down) {
-				return BRIDGE_VIEW.blank;
-			}
+			if (log.moving !== MOVING.down) return BRIDGE_VIEW.blank;
+
 			return log.state ? BRIDGE_VIEW.matched : BRIDGE_VIEW.notMatched;
 		});
 
