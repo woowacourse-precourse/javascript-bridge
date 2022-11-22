@@ -1,9 +1,6 @@
 const InputError = require("../src/InputError");
 const { ERROR } = require("./Constant/Constant");
 
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 class BridgeGame {
   #bridge;
   #currentIdx;
