@@ -48,6 +48,7 @@ const InputView = {
           OutputView.printMap(FIELD, select);
           trial += 1;
           this.readMoving();
+          MissionUtils.Console.close();
         }
       }
     );
