@@ -1,5 +1,6 @@
 const ArrayValidator = require('./ArrayValidator');
 const StringValidator = require('./StringValidator');
+const NumberValidator = require('./NumberValidator');
 const Validator = require('./Validator');
 const { Tile } = require('../constants');
 
@@ -8,6 +9,13 @@ const { Tile } = require('../constants');
  */
 function validate(value) {
   return new Validator(value);
+}
+
+/**
+ * @param {number} value
+ */
+function validateNumber(value) {
+  return new NumberValidator(value);
 }
 
 /**
@@ -26,6 +34,7 @@ function validateTiles(value) {
 
 module.exports = {
   validate,
+  validateNumber,
   validateTile,
   validateTiles,
 };
