@@ -21,6 +21,7 @@ class BridgeGame {
   move(input) {
     this.paintMap(input);
     printMap(this.bridgeMap);
+    this.judgeNextGame();
   }
 
   paintMap(input) {
@@ -30,7 +31,16 @@ class BridgeGame {
     const other = input === "U" ? "D" : "U";
     this.bridgeMap[other].push(" ");
   }
-
+  judgeNextGame() {
+    const curIdx = this.bridgeMap.U.length;
+    if (this.bridgeMap.U[curIdx] === "X" || this.bridgeMap.D[curIdx] === "X") {
+      return readGameCommand(this.bridge);
+    }
+    if (curIdx + 1 === this.bridge.length) {
+      return "win";
+    }
+    return readMoving(this.bridge);
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
