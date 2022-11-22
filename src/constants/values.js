@@ -3,6 +3,9 @@ const INPUT_VALUE = {
   DOWN: "D",
   QUIT: "Q",
   RETRY: "R",
+
+  MAX_LENGTH: 20,
+  MIN_LENGTH: 3,
 };
 
 const STATES = {
