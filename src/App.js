@@ -1,5 +1,6 @@
 const BridgeGame = require('./BridgeGame')
 const InputView = require('./InputView')
+const OutputView = require('./OutputView')
 
 class App {
   async play() {
@@ -10,7 +11,11 @@ class App {
     while(!bridgeGame.isEnd()){
       const direction = await InputView.readMoving()
 
-      bridgeGame.move(direction)
+      const moveResult = bridgeGame.move(direction)
+
+      const map = bridgeGame.getMap()
+
+      OutputView.printMap(map)
     }
   }
 }
