@@ -14,7 +14,7 @@ const MESSAGE = {
     BRIDGE_SIZE_RANGE: '\n[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
     BRIDGE_SIZE_EMPTY: '\n[ERROR] 다리 길이를 입력하셔야 합니다.',
     BRIDGE_MOVE: '\n[ERROR] 이동하실 방향은 (위: U, 아래: D)만을 입력하셔야 합니다.',
-    BRIDGE_MOVE_EMPTY: '\n[ERROR} 이동하실 방향 위: U, 아래: D)에 대해 입력하셔야 합니다.',
+    BRIDGE_MOVE_EMPTY: '\n[ERROR] 이동하실 방향 위: U, 아래: D)에 대해 입력하셔야 합니다.',
     BRIDGE_MOVE_OVER: '\n[ERROR] 한번에 한칸에 대한 명령(위: U, 아래: D)만을 입력하셔야 합니다.',
     BRIDGE_GAME_COMMAND: '\n[ERROR] 게임을 다시 시도할지 여부는 (재시도: R, 종료: Q)만을 입력하셔야 합니다.',
     BRIDGE_GAME_COMMAND_EMPTY: '\n[ERROR] 게임을 다시 시도할지 여부 (재시도: R, 종료: Q)를 입력하셔야 합니다.',
