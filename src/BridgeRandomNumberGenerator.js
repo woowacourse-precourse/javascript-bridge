@@ -6,7 +6,7 @@ const BridgeRandomNumberGenerator = {
   generate() {
     return MissionUtils.Random.pickNumberInRange(
       BridgeRandomNumberGenerator.RANDOM_LOWER_INCLUSIVE,
-      BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE
+      BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE,
     );
   },
 };
