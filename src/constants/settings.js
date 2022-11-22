@@ -1,5 +1,6 @@
 const BRIDGE_GAME = Object.freeze({
     start_value: 1,
+    new_line: '',
 });
 
 const BRIDGE_GAME_PROCEED = Object.freeze({

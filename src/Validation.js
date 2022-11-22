@@ -8,17 +8,17 @@ class Validation {
   }
 
   static nextStep(value) {
-    if (Validation.isStringEmpty(value)) throw new Error('[ERROR] 값을 입력해주세요.');
-    if (!Validation.oneValue(value)) throw new Error('[ERROR] 1개의 값을 입력해주세요.');
-    if (Validation.nextStepLowerCase(value)) throw new Error('[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.')
-    if (!Validation.nextStepValue(value)) throw new Error('[ERROR] U 또는 D를 입력해주세요.');
+    if (Validation.isStringEmpty(value)) throw new Error('\n[ERROR] 값을 입력해주세요.');
+    if (!Validation.oneValue(value)) throw new Error('\n[ERROR] 1개의 값을 입력해주세요.');
+    if (Validation.nextStepLowerCase(value)) throw new Error('\n[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.')
+    if (!Validation.nextStepValue(value)) throw new Error('\n[ERROR] U 또는 D를 입력해주세요.');
   }
 
   static retry(value) {
-    if (Validation.isStringEmpty(value)) throw new Error('[ERROR] 값을 입력해주세요.');
-    if (!Validation.oneValue(value)) throw new Error('[ERROR] 1개의 값을 입력해주세요.');
-    if (Validation.retryLowerCase(value)) throw new Error('[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.')
-    if (!Validation.retryOrNotValue(value)) throw new Error('[ERROR] R 또는 Q를 입력해주세요.');
+    if (Validation.isStringEmpty(value)) throw new Error('\n[ERROR] 값을 입력해주세요.');
+    if (!Validation.oneValue(value)) throw new Error('\n[ERROR] 1개의 값을 입력해주세요.');
+    if (Validation.retryLowerCase(value)) throw new Error('\n[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.')
+    if (!Validation.retryOrNotValue(value)) throw new Error('\n[ERROR] R 또는 Q를 입력해주세요.');
   }
 
   static nextStepLowerCase(value) {
