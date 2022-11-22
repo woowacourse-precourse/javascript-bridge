@@ -50,7 +50,7 @@ class GameController {
     if (result) {
       this.checkContinueGame();
     } else {
-      this.askStopGame();
+      this.inputRetry();
     }
   }
   checkContinueGame() {
@@ -60,9 +60,9 @@ class GameController {
       this.inputStep();
     }
   }
-  askStopGame() {
+  inputRetry() {
     InputView.readGameCommand((input) => {
-      errorController(this.chooseRetryGame.bind(this, input), this.askStopGame.bind(this));
+      errorController(this.chooseRetryGame.bind(this, input), this.inputRetry.bind(this));
     });
   }
   chooseRetryGame(input) {
