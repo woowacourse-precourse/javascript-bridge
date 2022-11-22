@@ -7,10 +7,14 @@ const Exception = require('./Exception');
 
 class App {
   play() {
-    OutputView.printStart();
-    const bridgeGame = this.makeBridgeGame();
-    const [turnSuccess, gameCount] = this.executeGame(bridgeGame);
-    OutputView.printResult(bridgeGame, turnSuccess, gameCount);
+    try {
+      OutputView.printStart();
+      const bridgeGame = this.makeBridgeGame();
+      const [turnSuccess, gameCount] = this.executeGame(bridgeGame);
+      OutputView.printResult(bridgeGame, turnSuccess, gameCount);
+    } catch (e) {
+      Exception.printError(e.message);
+    }
   }
 
   makeBridgeGame() {
@@ -70,7 +74,7 @@ class App {
       return isContinue;
     } catch (e) {
       Exception.printError(e.message);
-      return this.getRetry(bridgeGame);
+      return this.getRetry(turnSuccess, bridgeGame);
     }
   }
 
