@@ -1,4 +1,3 @@
-
 const BridgeResult = require("./BridgeResult");
 
 class BridgeGame {
