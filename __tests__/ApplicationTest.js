@@ -11,6 +11,7 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
+
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce((acc, number) => {
