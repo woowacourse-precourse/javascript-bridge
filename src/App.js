@@ -1,9 +1,6 @@
 const BridgeGame = require("./BridgeGame");
 const InputView = require("./View/InputView");
 const OutputView = require("./View/OutputView");
-const {
-  RETRY_COMMAND: { RETRY },
-} = require("./core/BridgeGameCore");
 
 class App {
   #bridgeGame = null;
@@ -14,57 +11,54 @@ class App {
 
   showGreeting() {
     OutputView.printGreeting();
-    this.showInputBridgeNumber();
-  }
-
-  showInputBridgeNumber() {
-    InputView.readBridgeSize((bridgeSize) => {
-      this.#bridgeGame = new BridgeGame(parseInt(bridgeSize, 10));
-      this.beforeShowInputMove();
-    });
-  }
-
-  beforeShowInputMove() {
-    if (this.#bridgeGame.isFinished()) {
-      this.showResult(true);
-      return;
-    }
-    this.showInputMove();
-  }
-
-  moveCallback(command) {
-    this.#bridgeGame.move(
-      command,
-      this.moveSuccess.bind(this),
-      this.moveFail.bind(this),
+    InputView.readBridgeSize((bridgeSize) =>
+      this.readBridgeSizeCallback(bridgeSize),
     );
   }
 
-  showInputMove() {
-    InputView.readMoving(this.moveCallback.bind(this));
+  readBridgeSizeCallback(bridgeSize) {
+    this.#bridgeGame = new BridgeGame(parseInt(bridgeSize, 10));
+    this.routeReadMoving();
   }
 
-  moveSuccess() {
-    OutputView.printMap(this.#bridgeGame.progress);
-    this.beforeShowInputMove();
+  routeReadMoving() {
+    this.#bridgeGame.isFinished()
+      ? this.showResult(true)
+      : this.showReadMoving();
   }
 
-  moveFail() {
+  showReadMoving() {
+    InputView.readMoving((command) => this.readMovingCallback(command));
+  }
+
+  readMovingCallback(command) {
+    this.#bridgeGame.move(
+      command,
+      () => this.showMoveSuccess(),
+      () => this.showMoveFail(),
+    );
+  }
+
+  showMoveSuccess() {
     OutputView.printMap(this.#bridgeGame.progress);
-    this.showInputRetry();
+    this.routeReadMoving();
+  }
+
+  showMoveFail() {
+    OutputView.printMap(this.#bridgeGame.progress);
+    this.showReadGameCommand();
   }
 
   retryCallback(command) {
-    if (command === RETRY) {
-      this.#bridgeGame.retry(command);
-      this.beforeShowInputMove();
-      return;
-    }
-    this.showResult(false);
+    this.#bridgeGame.retry(
+      command,
+      () => this.routeReadMoving(),
+      () => this.showResult(false),
+    );
   }
 
-  showInputRetry() {
-    InputView.readGameCommand(this.retryCallback.bind(this));
+  showReadGameCommand() {
+    InputView.readGameCommand((command) => this.retryCallback(command));
   }
 
   showResult(isSuccess) {
