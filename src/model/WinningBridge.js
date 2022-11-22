@@ -5,7 +5,7 @@ const BridgeMaker = require('../BridgeMaker');
 class WinningBridge {
   #winningBridge;
 
-  validate(size) {
+  static validate(size) {
     Validation.checkBlank(size);
     Validation.checkNumberType(size);
     Validation.checkRange(size);

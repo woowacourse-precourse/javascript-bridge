@@ -14,7 +14,7 @@ class BridgeGame {
   #upperBridge = [];
   #lowerBridge = [];
 
-  validateDirection(direction) {
+  static validateDirection(direction) {
     Validation.checkBlank(direction);
     Validation.checkStringType(direction);
     Validation.checkUpperCaseOfDirection(direction);
@@ -41,7 +41,7 @@ class BridgeGame {
     return winningBridge.isSameLength(this.#upperBridge);
   }
 
-  validateCommand(command) {
+  static validateCommand(command) {
     Validation.checkBlank(command);
     Validation.checkStringType(command);
     Validation.checkUpperCaseOfCommand(command);

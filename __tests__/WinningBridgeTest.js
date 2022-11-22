@@ -2,7 +2,7 @@ const WinningBridge = require('../src/model/WinningBridge');
 
 const validateSize = (input) => {
   const winningBridge = new WinningBridge();
-  return winningBridge.validate(input);
+  return WinningBridge.validate(input);
 };
 
 describe('WinningBridge 클래스 테스트', () => {

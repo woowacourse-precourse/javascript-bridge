@@ -51,35 +51,35 @@ describe('BridgeGame 클래스 테스트', () => {
     (input) => {
       expect(() => {
         const bridgeGame = new BridgeGame();
-        bridgeGame.validateDirection(input);
+        BridgeGame.validateDirection(input);
       }).toThrow('[ERROR]');
     }
   );
 
   test('예외 테스트 : 이동할 칸에 대한 입력값이 빈칸인 경우 알맞은 에러 메시지 출력한다', () => {
     const bridgeGame = new BridgeGame();
-    expect(() => bridgeGame.validateDirection('')).toThrow(
+    expect(() => BridgeGame.validateDirection('')).toThrow(
       '[ERROR] 공백을 입력할 수 없습니다. 값을 입력해주세요.'
     );
   });
 
   test('예외 테스트 : 이동할 칸에 대한 입력값이 문자가 아닌 경우 알맞은 에러 메시지 출력한다', () => {
     const bridgeGame = new BridgeGame();
-    expect(() => bridgeGame.validateDirection('30')).toThrow(
+    expect(() => BridgeGame.validateDirection('30')).toThrow(
       '[ERROR] 숫자를 제외한 문자를 입력해주세요.'
     );
   });
 
   test('예외 테스트 : 이동할 칸에 대한 입력값이 대문자가 아닌 소문자(u 또는 d)인 경우 알맞은 에러 메시지 출력한다', () => {
     const bridgeGame = new BridgeGame();
-    expect(() => bridgeGame.validateDirection('u')).toThrow(
+    expect(() => BridgeGame.validateDirection('u')).toThrow(
       '[ERROR] 소문자가 아닌 대문자를 입력해주세요.'
     );
   });
 
   test('예외 테스트 : 이동할 칸에 대한 입력값이 U 또는 D가 아닌 경우 알맞은 에러 메시지 출력한다', () => {
     const bridgeGame = new BridgeGame();
-    expect(() => bridgeGame.validateDirection('DOWN')).toThrow(
+    expect(() => BridgeGame.validateDirection('DOWN')).toThrow(
       '[ERROR] U (위칸) 와 D (아래칸) 중에서만 이동할 칸을 정해 입력해주세요.'
     );
   });
@@ -101,35 +101,35 @@ describe('BridgeGame 클래스 테스트', () => {
     (input) => {
       expect(() => {
         const bridgeGame = new BridgeGame();
-        bridgeGame.validateCommand(input);
+        BridgeGame.validateCommand(input);
       }).toThrow('[ERROR]');
     }
   );
 
   test('예외 테스트 : 게임 재시작 여부에 대한 입력값이 빈칸인 경우 알맞은 에러 메시지 출력한다', () => {
     const bridgeGame = new BridgeGame();
-    expect(() => bridgeGame.validateCommand('')).toThrow(
+    expect(() => BridgeGame.validateCommand('')).toThrow(
       '[ERROR] 공백을 입력할 수 없습니다. 값을 입력해주세요.'
     );
   });
 
   test('예외 테스트 : 게임 재시작 여부에 대한 입력값이 문자가 아닌 경우 알맞은 에러 메시지 출력한다', () => {
     const bridgeGame = new BridgeGame();
-    expect(() => bridgeGame.validateCommand('2')).toThrow(
+    expect(() => BridgeGame.validateCommand('2')).toThrow(
       '[ERROR] 숫자를 제외한 문자를 입력해주세요.'
     );
   });
 
   test('예외 테스트 : 게임 재시작 여부에 대한 입력값이 대문자가 아닌 소문자(r 또는 q)인 경우 알맞은 에러 메시지 출력한다', () => {
     const bridgeGame = new BridgeGame();
-    expect(() => bridgeGame.validateCommand('q')).toThrow(
+    expect(() => BridgeGame.validateCommand('q')).toThrow(
       '[ERROR] 소문자가 아닌 대문자를 입력해주세요.'
     );
   });
 
   test('예외 테스트 : 게임 재시작 여부에 대한 입력값이 R 또는 Q가 아닌 경우 알맞은 에러 메시지 출력한다', () => {
     const bridgeGame = new BridgeGame();
-    expect(() => bridgeGame.validateCommand('retry')).toThrow(
+    expect(() => BridgeGame.validateCommand('retry')).toThrow(
       '[ERROR] R (재시도) 와 Q (종료) 중에서만 입력해주세요.'
     );
   });

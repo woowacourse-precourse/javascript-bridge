@@ -30,7 +30,7 @@ class Controller {
 
   validateSize(size) {
     try {
-      this.winningBridge.validate(Number(size));
+      WinningBridge.validate(Number(size));
     } catch (error) {
       OutputView.printError(error);
       return this.inputBridgeSize();
@@ -52,7 +52,7 @@ class Controller {
 
   validateDirection(direction) {
     try {
-      this.bridgeGame.validateDirection(direction);
+      BridgeGame.validateDirection(direction);
     } catch (error) {
       OutputView.printError(error);
       return this.inputMoving();
@@ -89,7 +89,7 @@ class Controller {
 
   validateCommand(command) {
     try {
-      this.bridgeGame.validateCommand(command);
+      BridgeGame.validateCommand(command);
     } catch (error) {
       OutputView.printError(error);
       return this.inputGameCommand();

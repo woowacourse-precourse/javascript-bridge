@@ -1,6 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
-const BridgeGame = require('../src/model/BridgeGame');
 const Controller = require('../src/controller/Controller');
 const BridgeMaker = require('../src/BridgeMaker');
 
