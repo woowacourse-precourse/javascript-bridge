@@ -22,7 +22,6 @@ class App {
     }
     result === 2 ? this.gameSuccess() : this.gameOver();
   }
-  gameSuccess() {}
   gameOver() {}
 }
 
