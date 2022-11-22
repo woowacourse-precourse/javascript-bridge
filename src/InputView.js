@@ -15,7 +15,12 @@ const InputView = {
     readBridgeSize() {
         const query = '다리의 길이를 입력해주세요.\n';
         MissionUtils.Console.readLine(query, (userInput) => {
-            exceptionHandler.validateBridgeLength(Number(userInput));
+            try {
+                exceptionHandler.validateBridgeLength(Number(userInput));
+            } catch (err) {
+                MissionUtils.Console.print(err);
+                this.readBridgeSize();
+            }
             const bridge = BridgeMaker.makeBridge(
                 Number(userInput),
                 BridgeRandomNumberGenerator.generate
@@ -37,7 +42,12 @@ const InputView = {
         }
         const query = '이동할 칸을 선택해주세요. (위: U, 아래: D)\n';
         MissionUtils.Console.readLine(query, (choosen) => {
-            exceptionHandler.validateChoice(choosen);
+            try {
+                exceptionHandler.validateChoice(choosen);
+            } catch (err) {
+                MissionUtils.Console.print(err);
+                this.readMoving(bridgeGame, iter, lastChoice);
+            }
             const cross = bridgeGame.move(choosen);
             OutputView.printMap(
                 bridgeGame.getBridge(),
@@ -61,7 +71,12 @@ const InputView = {
         const query =
             '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n';
         MissionUtils.Console.readLine(query, (retryOrQuit) => {
-            exceptionHandler.validateRestartInput(retryOrQuit);
+            try {
+                exceptionHandler.validateRestartInput(retryOrQuit);
+            } catch (err) {
+                MissionUtils.Console.print(err);
+                this.readGameCommand(bridgeGame, choosen);
+            }
             if (retryOrQuit === 'R') {
                 bridgeGame.retry();
                 InputView.readMoving(bridgeGame, 0);
