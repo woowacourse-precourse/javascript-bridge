@@ -7,7 +7,22 @@ const BridgeMaker = {
    * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
-  makeBridge(size, generateRandomNumber) {},
+
+  makeBridge(size, generateRandomNumber) {
+    let randomList = [];
+    while (size) {
+      size--;
+      randomList.push(generateRandomNumber());
+    }
+
+    let answerBridgeList = [];
+    randomList.forEach((value) => {
+      if (value === 1) answerBridgeList.push("U");
+      if (value === 0) answerBridgeList.push("D");
+    });
+
+    return answerBridgeList;
+  },
 };
 
 module.exports = BridgeMaker;
