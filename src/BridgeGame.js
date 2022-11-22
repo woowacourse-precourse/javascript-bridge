@@ -2,7 +2,7 @@ const OutputView = require('./OutputView');
 const { MOVING } = require('./constants/index');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
-const { Console } = require('@woowacourse/mission-utils');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -13,7 +13,7 @@ class BridgeGame {
 
   constructor() {
     this.#bridge = [];
-    this.#movingRoute = [[], []];
+    this.#movingRoute = { upper: [], lower: [] };
     this.#UserTryCount = 1;
   }
 
@@ -26,7 +26,7 @@ class BridgeGame {
   }
 
   move(movingCommand) {
-    const movingRouteIndex = this.#movingRoute[0].length;
+    const movingRouteIndex = this.#movingRoute.upper.length;
 
     if (movingCommand === MOVING.UPPER) {
       return this.moveToUpper(movingCommand, movingRouteIndex);
@@ -37,40 +37,41 @@ class BridgeGame {
 
   moveToUpper(movingCommand, movingRouteIndex) {
     if (movingCommand === this.#bridge[movingRouteIndex]) {
-      this.#movingRoute[0].push(MOVING.RIGHT_ANSWER);
-      this.#movingRoute[1].push(MOVING.SPACE);
+      this.#movingRoute.upper.push(MOVING.RIGHT_ANSWER);
+      this.#movingRoute.lower.push(MOVING.SPACE);
     } else {
-      this.#movingRoute[0].push(MOVING.WRONG_ANSWER);
-      this.#movingRoute[1].push(MOVING.SPACE);
+      this.#movingRoute.upper.push(MOVING.WRONG_ANSWER);
+      this.#movingRoute.lower.push(MOVING.SPACE);
     }
     return this.print();
   }
 
   moveToLower(movingCommand, movingRouteIndex) {
     if (movingCommand === this.#bridge[movingRouteIndex]) {
-      this.#movingRoute[1].push(MOVING.RIGHT_ANSWER);
-      this.#movingRoute[0].push(MOVING.SPACE);
+      this.#movingRoute.lower.push(MOVING.RIGHT_ANSWER);
+      this.#movingRoute.upper.push(MOVING.SPACE);
     } else {
-      this.#movingRoute[1].push(MOVING.WRONG_ANSWER);
-      this.#movingRoute[0].push(MOVING.SPACE);
+      this.#movingRoute.lower.push(MOVING.WRONG_ANSWER);
+      this.#movingRoute.upper.push(MOVING.SPACE);
     }
     return this.print();
   }
 
   hasWrongAnswer() {
-    const result = this.#movingRoute.flat().includes(MOVING.WRONG_ANSWER);
+    const movingItems = Object.values(this.#movingRoute).flat();
+    const result = movingItems.includes(MOVING.WRONG_ANSWER);
     return result;
   }
 
   /**
    */
   hasAllAnswer() {
-    const result = this.#movingRoute[0].length === this.#bridge.length;
+    const result = this.#movingRoute.upper.length === this.#bridge.length;
     return result;
   }
 
   retry() {
-    this.#movingRoute = [[], []];
+    this.#movingRoute = { upper: [], lower: [] };
     this.#UserTryCount += 1;
   }
 

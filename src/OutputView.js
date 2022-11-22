@@ -15,8 +15,8 @@ const OutputView = {
   },
 
   printMap(movingRoute) {
-    const UpperBlock = movingRoute[0].join(' ㅣ ');
-    const LowerBlock = movingRoute[1].join(' ㅣ ');
+    const UpperBlock = movingRoute.upper.join(' ㅣ ');
+    const LowerBlock = movingRoute.lower.join(' ㅣ ');
 
     Console.print(`[ ${UpperBlock} ]`);
     Console.print(`[ ${LowerBlock} ]`);
