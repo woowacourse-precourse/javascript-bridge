@@ -52,10 +52,7 @@ class BridgeGame {
   }
 
   gameFinish() {
-    if (this.#solutionArr.length === this.#moveCount) {
-      return true;
-    }
-    return false;
+    return this.#solutionArr.length === this.#moveCount;
   }
 
   retry() {
