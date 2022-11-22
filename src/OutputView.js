@@ -1,4 +1,3 @@
-const { MOVE, MOVE_PICK } = require('./constant/constant');
 const { START, RESULT } = require('./constant/message');
 const { print } = require('./utils/util');
 
@@ -23,15 +22,19 @@ const OutputView = {
     print(`${mapResult}\n`);
   },
 
+  getMap(result) {
+    return result.reduce((allMap, side) => `${allMap}\n${this.makeOneSideMap(side)}`, '');
+  },
+
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(map, result, tryCount) {
-    print(RESULT.MAP(map));
-    print(RESULT.GAME(result));
-    print(RESULT.TOTAL_TRY_COUNT(tryCount));
+    print(`${RESULT.MAP(this.getMap(map))}
+${RESULT.GAME(result)}
+${RESULT.TOTAL_TRY_COUNT(tryCount)}`);
   },
 
   /**
