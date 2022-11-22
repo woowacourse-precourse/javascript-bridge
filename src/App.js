@@ -27,6 +27,7 @@ class App {
       if (this.game.reachedEndOfBridge && !this.game.isGameOver) OutputView.printResult(this.game);
       else if (this.game.isGameOver) this.askRetryGame();
       else this.playOneStep();
+      Console.close();
     });
   }
 
