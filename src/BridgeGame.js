@@ -25,6 +25,13 @@ class BridgeGame {
     return this.downBridgeList;
   }
 
+
+  isWrong(upBridge,downBridge){
+    if(upBridge.includes("X") || downBridge.includes("X")) return true;
+
+    return false;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -33,7 +40,7 @@ class BridgeGame {
   move(space,bridge) {
     const standardBridge = bridge.getBridge();;
     let count = this.getCount();
-    
+
     if(space === "U") this.upMove(standardBridge,count);
     if(space === "D") this.downMove(standardBridge,count);
     

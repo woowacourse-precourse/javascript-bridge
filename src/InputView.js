@@ -4,6 +4,7 @@ const { COMMAND } = require("./Constant");
 const Exception = require("./Exception");
 const OutputView = require("./OutputView");
 let exception = new Exception();
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -31,6 +32,9 @@ const InputView = {
       
       bridgeGame.move(space,bridge);
       OutputView.printMap(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList());
+
+      if(bridgeGame.isWrong(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList())) return this.readGameCommand();
+      
     });
   },
 
