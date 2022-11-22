@@ -12,8 +12,8 @@ const BridgeMaker = {
 
   makeBridge(size, generateRandomNumber) {
     const blueprintArray = createBlueprint(size);
-    const blueprint = blueprintArray.map(() => Number(generateRandomNumber()));
-    const bridge = convertBlueprintToBridge(blueprint);
+    const blueprintBridge = blueprintArray.map(() => Number(generateRandomNumber()));
+    const bridge = convertBlueprintToBridge(blueprintBridge);
 
     return bridge;
   },

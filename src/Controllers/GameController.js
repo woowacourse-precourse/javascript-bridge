@@ -121,6 +121,12 @@ class GameController {
     this.selectMoving();
   }
 
+  getResult() {
+    const gameResultData = this.#bridgeGame.getResultData();
+    const currentProgressMap = this.#progressMap.createMap(gameResultData.gameProgress);
+    this.#outputView.printResult(currentProgressMap, gameResultData);
+  }
+
   win() {
     this.#bridgeGame.win();
     this.getResult();
@@ -129,12 +135,6 @@ class GameController {
   defeat() {
     this.#bridgeGame.defeat();
     this.getResult();
-  }
-
-  getResult() {
-    const gameResultData = this.#bridgeGame.getResultData();
-    const currentProgressMap = this.#progressMap.createMap(gameResultData.gameProgress);
-    this.#outputView.printResult(currentProgressMap, gameResultData);
   }
 }
 
