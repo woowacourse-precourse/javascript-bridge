@@ -41,7 +41,7 @@ describe("Validation 객체 테스트", () => {
 
 describe("BridgeMaker 객체 테스트", () => {
   test("makeBridge가 주어진 대로 다리를 잘 만들어 내는지", () => {
-    const randomNumbers = ["1", "0", "0"];
+    const randomNumbers = [1, 0, 0];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());

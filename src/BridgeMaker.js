@@ -12,7 +12,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     for (let i = 0; i < size; i += 1) {
-      const direction = Number(generateRandomNumber());
+      const direction = generateRandomNumber()
       if (!direction) bridge[i] = DOWN_BRIDGE_SYMBOL;
       if (direction) bridge[i] = UP_BRIDGE_SYMBOL;
     }
