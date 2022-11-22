@@ -5,7 +5,7 @@ const { BridgeGameControl } = require('./controller');
 class App {
   play() {
     const bridgeGameControl = new BridgeGameControl();
-    bridgeGameControl.make();
+    bridgeGameControl.start();
   }
 }
 

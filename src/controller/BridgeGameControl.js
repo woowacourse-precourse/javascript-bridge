@@ -33,6 +33,11 @@ class BridgeGameControl {
     this.#bridgeGame = bridgeGame;
   }
 
+  start() {
+    this.#outputView.printStart();
+    this.make();
+  }
+
   makeRandomNumber(bridgeSize) {
     const bridgeMaker = Object.create(BridgeMaker);
     const bridgeRandomNumberGenerator = Object.create(BridgeRandomNumberGenerator);
