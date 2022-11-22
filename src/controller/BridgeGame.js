@@ -9,11 +9,13 @@ class BridgeGame {
   moveCount;
   bridge;
   userBridge;
+  failOrSuccess;
   constructor(bridge) {
     this.gameCount = 0;
     this.moveCount = 0;
     this.bridge = bridge;
     this.userBridge = new UserBridge();
+    this.failOrSuccess = false;
   }
 
   /**
@@ -45,6 +47,9 @@ class BridgeGame {
     this.addMoveCount();
   }
 
+  /**
+   * 플레이어의 총 이동 횟수를 +1만큼 증가시키는 메서드
+   */
   addMoveCount() {
     this.moveCount += 1;
   }
@@ -57,8 +62,6 @@ class BridgeGame {
     let up = [];
     let down = [];
     for (let i = 0; i < this.userBridge.condition.length; i++) {
-      console.log(this.bridge);
-      console.log(this.userBridge);
       const currentResult = this.getCurrentMap(this.bridge.condition[i], this.userBridge.condition[i]);
       up.push(currentResult[0]);
       down.push(currentResult[1]);

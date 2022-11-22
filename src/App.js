@@ -28,7 +28,6 @@ class App {
     });
   }
   moveOnBridge() {
-    Console.print(this.bridge.condition);
     InputView.readMoving((movement) => {
       this.bridgeGame.move(movement);
       this.comparisonOperator();
@@ -38,7 +37,6 @@ class App {
     const currentMap = this.bridgeGame.comparisonOperator();
     const up = currentMap[0];
     const down = currentMap[1];
-    console.log('up: ', up, ', down: ', down);
     this.showMap(up, down);
   }
   showMap(up, down) {
@@ -51,12 +49,18 @@ class App {
   askRetry() {
     InputView.readGameCommand((restartOrQuit) => {
       if (restartOrQuit === 'R') {
-        this.bridgeGame.retry();
-        this.moveOnBridge();
+        this.restartGame();
       } else if (restartOrQuit === 'Q') {
-        Console.close();
+        this.quitGame();
       }
     });
+  }
+  restartGame() {
+    this.bridgeGame.retry();
+    this.moveOnBridge();
+  }
+  quitGame() {
+    OutputView.printResult(this.bridgeGame.failOrSuccess, this.bridgeGame.gameCount);
   }
 }
 
