@@ -7,13 +7,15 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
+  mainBridge: new BridgeGame(),
+
   readBridgeSize() {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (number) => {
       try {
         this.checkPlayerInput(number);
         this.makeBridge(number);
         this.readMoving();
-        console.log(mainBridge.bridge);
+        console.log(this.mainBridge.bridge);
       } catch {
         this.readBridgeSize();
       }
@@ -21,9 +23,7 @@ const InputView = {
   },
 
   makeBridge(number) {
-    OutputView.setSize(number);
-    mainBridge = new BridgeGame();
-    mainBridge.setBridge(
+    this.mainBridge.setBridge(
       BridgeMaker.makeBridge(number, BridgeRandomNumberGenerator)
     );
   },
@@ -69,44 +69,54 @@ const InputView = {
   },
 
   printRight(input) {
-    let tmplocation = mainBridge.getLocation();
-    tmpbridge = mainBridge.getBridge();
-    console.log(tmpbridge, tmplocation, input);
+    let tmplocation = this.mainBridge.getLocation();
+    tmpbridge = this.mainBridge.getBridge();
     OutputView.printRight(input, tmplocation - 1);
     OutputView.printMap();
   },
 
   printWrong(input) {
-    let tmplocation = mainBridge.getLocation();
-    tmpbridge = mainBridge.getBridge();
-    console.log(tmpbridge, tmplocation, input);
-    OutputView.printRight(input, tmplocation - 1);
+    let tmplocation = this.mainBridge.getLocation();
+    tmpbridge = this.mainBridge.getBridge();
+    OutputView.printWrong(input, tmplocation - 1);
     OutputView.printMap();
   },
 
   checkAndMove(input) {
     try {
-      mainBridge.move(input, mainBridge.getLocation());
-      mainBridge.changeLocation();
+      this.mainBridge.move(input, this.mainBridge.getLocation());
+      this.mainBridge.changeLocation();
       this.printRight(input);
       this.readMoving();
     } catch (e) {
-      this.checkEndError(e);
+      this.checkEndError(e, input);
     }
   },
 
-  checkEndError(e) {
+  checkEndError(e, input) {
     if (e == 3) {
-      console.log("게임 성공!");
-      this.readGameCommand();
-    }
-    if (e == 4) {
+      this.printRightEnd(input);
     }
     if (e == 0) {
+      this.printWrongEnd(input);
       this.readGameCommand();
     }
     this.readMoving();
   },
+
+  printRightEnd(input) {
+    this.mainBridge.changeLocation();
+    this.printRight(input);
+    OutputView.printResult(this.mainBridge.getRetry(), true);
+    MissionUtils.Console.close();
+  },
+
+  printWrongEnd(input) {
+    this.mainBridge.changeLocation();
+    this.printWrong(input);
+  },
+
+  printEndMove() {},
 
   readGameCommand() {
     MissionUtils.Console.readLine(
@@ -131,14 +141,22 @@ const InputView = {
 
   chooseRetry(input) {
     if (input === "R") {
-      mainBridge.retry();
-      this.readMoving();
+      this.retry();
     }
     if (input === "Q") {
-      let result = mainBridge.getRetry();
-      MissionUtils.Console.print(`총 시도한 횟수: ${result}`);
-      MissionUtils.Console.close();
+      this.finish();
     }
+  },
+  retry() {
+    this.mainBridge.retry();
+    OutputView.reset();
+    this.readMoving();
+  },
+
+  finish() {
+    let result = this.mainBridge.getRetry();
+    MissionUtils.Console.print(`총 시도한 횟수: ${result}`);
+    MissionUtils.Console.close();
   },
 };
 

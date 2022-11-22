@@ -3,25 +3,22 @@
  */
 
 const MissionUtils = require("@woowacourse/mission-utils");
+const BridgeGame = require("./BridgeGame");
 const OutputView = {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  size: 20,
-  UPPER: new Array(this.size),
-  LOWER: new Array(this.size),
+  UPPER: new Array(),
+  LOWER: new Array(),
 
-  setSize(number) {
-    this.size = number;
-  },
   printstart() {
     MissionUtils.Console.print("다리 건너기 게임을 시작합니다.\n");
   },
   printMap() {
-    console.log(this.UPPER);
-    console.log(this.LOWER);
+    console.log("[ " + this.UPPER.join(" | ") + " ]");
+    console.log("[ " + this.LOWER.join(" | ") + " ]");
   },
 
   printFirst() {
@@ -49,9 +46,9 @@ const OutputView = {
     }
   },
 
-  reSet() {
-    this.UPPER = new Array(this.size);
-    this.LOWER = new Array(this.size);
+  reset() {
+    this.UPPER = new Array();
+    this.LOWER = new Array();
   },
   printBetween() {},
   /**
@@ -59,8 +56,16 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {
+  printResult(number, ifsuccess) {
     MissionUtils.Console.print("최종 게임 결과");
+    this.printMap();
+    this.checkSucces();
+    MissionUtils.Console.print(`총 시고한 횟수: ${number}`);
+  },
+
+  checkSucces(ifsuccess) {
+    if (ifsuccess) return MissionUtils.Console.print("\n최종 게임 결과: 성공");
+    MissionUtils.Console.print("\n최종 게임 결과: 실패");
   },
 };
 

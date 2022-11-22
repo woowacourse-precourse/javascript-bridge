@@ -11,7 +11,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   size;
-  retryTime = 0;
+  retryTime = 1;
   bridge;
   location = 0;
 
@@ -22,7 +22,6 @@ class BridgeGame {
   setBridge(string) {
     this.bridge = string;
     this.size = string.length;
-    OutputView.setSize(this.size);
   }
 
   getBridge() {
@@ -42,9 +41,6 @@ class BridgeGame {
   }
 
   move(playerInput, index) {
-    if (index === this.size - 1) {
-      throw 2;
-    }
     this.checkRight(playerInput, index);
     this.checkWrong(playerInput, index);
   }
@@ -52,7 +48,7 @@ class BridgeGame {
   checkRight(playerInput, index) {
     if (playerInput === this.bridge[index]) {
       if (index === this.size - 1) {
-        throw 2;
+        throw 3;
       }
       return 1;
     }
@@ -60,9 +56,6 @@ class BridgeGame {
 
   checkWrong(playerInput, index) {
     if (playerInput !== this.bridge[index]) {
-      if (index === this.size - 1) {
-        throw 2;
-      }
       throw 0;
     }
   }
