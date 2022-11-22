@@ -1,5 +1,5 @@
 const GameManager = require("./GameManager");
-
+const { BRIDGE_ROW, BRIDGE_CHECK, GAME_COMMAND, GAME_RESULT } = require("./utils/Constants");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -17,13 +17,13 @@ class BridgeGame {
   }
 
   openBridgeRow() {
-    this.#firstRow = ['['];
-    this.#secondRow = ['['];
+    this.#firstRow = [BRIDGE_ROW.open];
+    this.#secondRow = [BRIDGE_ROW.open];
   }
 
   closeBridgeRow() {
-    this.#firstRow.push(']');
-    this.#secondRow.push(']');
+    this.#firstRow.push(BRIDGE_ROW.close);
+    this.#secondRow.push(BRIDGE_ROW.close);
   }
 
   addResultInRow(a, b) {
@@ -57,15 +57,17 @@ class BridgeGame {
   }
 
   checkSpace(bridge, user) {
-    if (bridge === user && 'U' === user) this.addResultInRow(0,' ');
-    if (bridge === user && 'D' === user) this.addResultInRow(' ', 0);
-    if (bridge !== user && bridge === 'U') this.addResultInRow(' ', 'X');
-    if (bridge !== user && bridge === 'D') this.addResultInRow('X', ' ');
+    if (bridge === user && GAME_COMMAND.up === user) this.addResultInRow(BRIDGE_CHECK.correct, BRIDGE_CHECK.blank);
+    if (bridge === user && GAME_COMMAND.down === user) this.addResultInRow(BRIDGE_CHECK.blank, BRIDGE_CHECK.correct);
+    if (bridge !== user && bridge === GAME_COMMAND.up) this.addResultInRow(BRIDGE_CHECK.blank, BRIDGE_CHECK.wrong);
+    if (bridge !== user && bridge === GAME_COMMAND.down) this.addResultInRow(BRIDGE_CHECK.wrong, BRIDGE_CHECK.blank);
+
     this.closeBridgeRow();
   }
 
   checkBridge(bridge) {
-    if (this.#firstRow.includes("X") === true || this.#secondRow.includes("X") === true) {
+    if (this.#firstRow.includes(BRIDGE_CHECK.wrong) === true || this.#secondRow.includes(BRIDGE_CHECK.wrong) === true) {
+      this.gameManager.printSpace(this.#firstRow, this.#secondRow);
       return this.inputRetry();
     }
 
@@ -78,9 +80,10 @@ class BridgeGame {
   }
 
   addPartition(bridge) {
-    this.#firstRow.splice(-1,1,'|');
-    this.#secondRow.splice(-1,1,'|');
+    this.#firstRow.splice(-1,1, BRIDGE_ROW.partition);
+    this.#secondRow.splice(-1,1, BRIDGE_ROW.partition);
     this.#bridges = bridge;
+
     this.inputSpace();
   }
 
@@ -95,21 +98,21 @@ class BridgeGame {
 
   retry(command) {
     this.#count += 1;
-    
-    if (command === 'R') {
+
+    if (command === GAME_COMMAND.retry) {
       this.#bridges = this.#originBridges;
       this.openBridgeRow();
       this.inputSpace();
       return;
     }
 
-    this.#result = '실패';
+    this.#result = GAME_RESULT.fail;
     this.printFinalResult();
   }
 
   finish() {
     this.#count += 1;
-    this.#result = '성공';
+    this.#result = GAME_RESULT.success;
     this.printFinalResult();
   }
 

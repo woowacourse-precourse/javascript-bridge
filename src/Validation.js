@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE, GAME_NUMBER } = require('./utils/Constants');
+const { ERROR_MESSAGE, GAME_NUMBER, GAME_COMMAND } = require('./utils/Constants');
 
 class Validation {
 
@@ -18,13 +18,13 @@ class Validation {
 
   static checkSpace(space) {
     if (Validation.isValidSpace(space)) {
-      throw new Error('잘못된 입력 값입니다. U 또는 D 를 입력해주세요.');
+      throw new Error(ERROR_MESSAGE.upDown);
     }
   }
 
   static checkRetryCommand(command) {
     if (Validation.isValidRetryCommand(command)) {
-      throw new Error('잘못된 입력 값입니다. R 또는 Q를 입력해주세요.');
+      throw new Error(ERROR_MESSAGE.retryQuit);
     }
   }
 
@@ -41,12 +41,12 @@ class Validation {
   }
 
   static isValidSpace(input) {
-    const spaceArr = ['U', 'D'];
+    const spaceArr = [GAME_COMMAND.up, GAME_COMMAND.down];
     if (spaceArr.includes(input) === false) return true;
   }
 
   static isValidRetryCommand(input) {
-    const retryCommandArr = ['R', 'Q'];
+    const retryCommandArr = [GAME_COMMAND.retry, GAME_COMMAND.quit];
     if (retryCommandArr.includes(input) === false) return true;
   }
 }
