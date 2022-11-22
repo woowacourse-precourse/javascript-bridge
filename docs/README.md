@@ -127,3 +127,9 @@ javascript-bridge
     - get user input
 - **`OutputView.js`**  
     - print output
+
+<br/>
+<br/>
+
+## **📚 참고 자료: 프로그램 로직**
+![pipeline](../bridge_pipeline.jpeg)
