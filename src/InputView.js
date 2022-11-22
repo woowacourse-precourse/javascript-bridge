@@ -4,11 +4,29 @@ const { CONSOLE_MESSAGE } = require("./constants/Message");
 const Validator = require("./utils/Validation");
 
 const InputView = {
+  wrappingInput(message, callback) {
+    Console.readLine(
+      message,
+      this.catchError(callback, () => this.wrappingInput(message, callback))
+    );
+  },
+
+  catchError(logicFunc, errorFunc) {
+    return (input) => {
+      try {
+        logicFunc(input);
+      } catch (e) {
+        Console.print(e.message);
+        errorFunc(e);
+      }
+    };
+  },
+
   readBridgeSize(bridgeGame) {
-    Console.readLine(CONSOLE_MESSAGE.INPUT_BRIDGE_LENGTH, (size) => {
+    this.wrappingInput(CONSOLE_MESSAGE.INPUT_BRIDGE_LENGTH, (size) => {
       Validator.validateBridgeSize(size);
       bridgeGame.makeBridge(size);
-      return this.readMoving();
+      this.readMoving();
     });
   },
 
@@ -26,5 +44,8 @@ const InputView = {
    */
   readGameCommand() {},
 };
+
+const bridgeGame = new BridgeGame();
+InputView.readBridgeSize(bridgeGame);
 
 module.exports = InputView;
