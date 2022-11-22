@@ -30,7 +30,6 @@ class BridgeGame {
         BridgeRandomNumberGenerator.generate
       );
       this.model.setBridge(bridge);
-      console.log(this.model.bridge);
       this.move();
     });
   };
@@ -41,7 +40,6 @@ class BridgeGame {
   move = () => {
     this.view.readMoving((space) => {
       this.model.pushSpace(space);
-      console.log(this.model.userSpaces);
       this.moveResult();
     });
   };
