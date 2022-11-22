@@ -1,20 +1,58 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+const { BRIDGE, MAP } = require('./constant/Bridge');
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const Validator = require('./Validator');
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+class BridgeGame {
+  #bridge;
+  #tryCount;
+  #map;
+  constructor(size) {
+    Validator.validateBridgeSize(size);
+    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.#tryCount = 1;
+    this.#map = [[], []];
+  }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
+
+  getMap() {
+    return this.#map;
+  }
+
+  move(space) {
+    Validator.validateSpace(space);
+    const currentPosition = this.#map[BRIDGE.UPPER].length;
+    const passResult = space === this.#bridge[currentPosition] ? MAP.PASS : MAP.NONPASS;
+    if (space === BRIDGE.UP) {
+      this.#map[BRIDGE.UPPER].push(passResult);
+      this.#map[BRIDGE.LOWER].push(MAP.BLANK);
+    } else {
+      this.#map[BRIDGE.UPPER].push(MAP.BLANK);
+      this.#map[BRIDGE.LOWER].push(passResult);
+    }
+  }
+
+  retry() {
+    this.#tryCount += 1;
+    this.#map = [[], []];
+  }
+
+  isPass() {
+    const currentPosition = this.#map[BRIDGE.UPPER].length - 1;
+    return (
+      this.#map[BRIDGE.UPPER][currentPosition] === MAP.PASS ||
+      this.#map[BRIDGE.LOWER][currentPosition] === MAP.PASS
+    );
+  }
+
+  isClear() {
+    const currentPosition = this.#map[BRIDGE.UPPER].length - 1;
+    if (currentPosition !== this.#bridge.length - 1) return false;
+    return this.isPass();
+  }
 }
 
 module.exports = BridgeGame;
