@@ -51,13 +51,13 @@ class Map {
   }
 
   markUnpassedStep(nowMap, go, step) {
-    if (go === 'O') {
-      if (nowMap[0][step] === 'X') nowMap[0][step] = ' ';
-      if (nowMap[1][step] === 'X') nowMap[1][step] = ' ';
+    if (go === GAME.GO) {
+      if (nowMap[0][step] === GAME.FALL) nowMap[0][step] = ' ';
+      if (nowMap[1][step] === GAME.FALL) nowMap[1][step] = ' ';
     }
-    if (go === 'X') {
-      if (nowMap[0][step] === 'O') nowMap[0][step] = ' ';
-      if (nowMap[1][step] === 'O') nowMap[1][step] = ' ';
+    if (go === GAME.FALL) {
+      if (nowMap[0][step] === GAME.GO) nowMap[0][step] = ' ';
+      if (nowMap[1][step] === GAME.GO) nowMap[1][step] = ' ';
     }
     return nowMap;
   }
