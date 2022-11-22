@@ -71,12 +71,11 @@ class Controller {
   }
 
   judgeLastInput() {
+    printMessage('');
     if (!this.safeBridgeList.length) {
-      printMessage('');
       this.printResult();
     }
     if (this.safeBridgeList.length) {
-      printMessage('');
       this.inputMoving();
     }
   }
