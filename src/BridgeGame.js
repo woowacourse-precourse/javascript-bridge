@@ -1,20 +1,56 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
+const SUCCESS_MOVE = 1;
+const SUCCESS_GAME = 2;
+const FAIL_MOVE = -1;
 class BridgeGame {
+  #bridge;
+  #numberOfTry;
+  #currentPosition;
+
+  constructor(bridge) {
+    this.#bridge = bridge;
+    this.#numberOfTry = 1;
+    this.#currentPosition = -1;
+  }
+  getCurrentMap(result) {
+    const currentBridge = this.#bridge.slice(0, this.#currentPosition + 1);
+    let mapForUp = currentBridge.map((space) => space === "U" ? " O " : "   ");
+    let mapForDown = currentBridge.map((space) => space === "D" ? " O " : "   ");
+    if (result === -1) {
+      mapForUp[mapForUp.length - 1] = mapForUp[mapForUp.length - 1] === " O " ? "   " : " X ";
+      mapForDown[mapForDown.length - 1] = mapForDown[mapForDown.length - 1] === " O " ? "   " : " X ";
+    }
+    return ["[" + mapForUp.join("|") + "]", "[" + mapForDown.join("|") + "]"];
+  }
+  getNumberOfTry() {
+    return this.#numberOfTry;
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move(spaceToMove) {
+    this.#currentPosition++;
+    if (this.#currentPosition > this.#bridge.length - 1) return FAIL_MOVE;
+    if (this.#bridge[this.#currentPosition] === spaceToMove) {
+      if (this.#currentPosition === this.#bridge.length - 1) return SUCCESS_GAME;
+      return SUCCESS_MOVE;
+    }
+    return FAIL_MOVE;
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#numberOfTry++;
+    this.#currentPosition = -1;
+  }
 }
 
 module.exports = BridgeGame;
