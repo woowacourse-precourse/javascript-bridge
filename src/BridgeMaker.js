@@ -9,14 +9,10 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = new Array(size).fill(null);
-    const upAndDown = {
-      0: "D",
-      1: "U",
-    };
 
     for (let i = 0; i < bridge.length; i++) {
-      const num = generateRandomNumber();
-      bridge[i] = upAndDown[`${num}`];
+      const randomNumber = generateRandomNumber();
+      bridge[i] = randomNumber === 0 ? "D" : "U";
     }
 
     return bridge;
