@@ -67,6 +67,32 @@ class App {
     }
     OutputView.printMap(currentBridge);
   }
+
+  checkIsComplete() {
+    if (this.#game.checkIsComplete()) {
+      this.resultGame("성공");
+      return;
+    }
+    this.moveAfterValidation();
+  }
+
+  readFailedGameCommand() {
+    InputView.readGameCommand((input) => {
+      if (Error.isThrow(Checker.finalGame, input)) {
+        this.failureGame(input);
+        return;
+      }
+      this.readFailedGameCommand();
+    });
+  }
+
+  failureGame(input) {
+    if (input === "R") {
+      this.replay();
+      return;
+    }
+    this.resultGame("실패");
+  }
   }
 }
 
