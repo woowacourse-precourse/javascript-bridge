@@ -1,35 +1,52 @@
 const { ERR_MESSAGE, COMMAND_VALUE } = require("./constants/constant");
+const { Console } = require("@woowacourse/mission-utils");
 
 const Validate = {
   isNumber(value) {
-    const check = isNaN(value);
-    if (check) {
-      throw new Error(ERR_MESSAGE.ERR_ISNUMBER);
+    try {
+      const check = isNaN(value);
+      if (check) {
+        throw err;
+      }
+    } catch (err) {
+      Console.print(ERR_MESSAGE.ERR_ISNUMBER);
     }
     return;
   },
 
   checkLength(value) {
-    if (value <= 20 && value >= 3) {
-      return;
+    try {
+      if (value <= 20 && value >= 3) {
+        return;
+      }
+      throw err;
+    } catch (err) {
+      Console.print(ERR_MESSAGE.ERR_BRIDGE_LENGTH);
     }
-    throw new Error(ERR_MESSAGE.ERR_BRIDGE_LENGTH);
   },
 
   checkMovingKey(value) {
-    const check = value.toUpperCase();
-    if (check === COMMAND_VALUE.UP || check === COMMAND_VALUE.DOWN) {
-      return check;
+    try {
+      const check = value.toUpperCase();
+      if (check === COMMAND_VALUE.UP || check === COMMAND_VALUE.DOWN) {
+        return check;
+      }
+      throw err;
+    } catch (err) {
+      Console.print(ERR_MESSAGE.ERR_COMMAND_KEY);
     }
-    throw new Error(ERR_MESSAGE.ERR_COMMAND_KEY);
   },
 
   checkRetryOrCloseKey(value) {
-    const check = value.toUpperCase();
-    if (check === COMMAND_VALUE.RETRY || check === COMMAND_VALUE.QUIT) {
-      return check;
+    try {
+      const check = value.toUpperCase();
+      if (check === COMMAND_VALUE.RETRY || check === COMMAND_VALUE.QUIT) {
+        return check;
+      }
+      throw err;
+    } catch (err) {
+      Console.print(ERR_MESSAGE.ERR_COMMAND_KEY);
     }
-    throw new Error(ERR_MESSAGE.ERR_COMMAND_KEY);
   },
 };
 module.exports = Validate;
