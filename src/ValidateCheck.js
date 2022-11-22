@@ -20,9 +20,10 @@ const ValidateCheck = {
      * 종료, 재시작 예외처리 검사
      */
      gameCommandValidate(game){
-        if(game != 'R' || move != 'Q'){
+        if(game != "R" || move != "Q"){
             throw new Error("[ERROR] 종료/재시작은 R, Q로만 입력해 주세요.");
         }
+        return game;
     },
 }
 

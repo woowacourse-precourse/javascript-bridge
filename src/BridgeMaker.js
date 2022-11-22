@@ -12,8 +12,8 @@ const BridgeMaker = {
     //0: 아래(D), 1: 위(U)
     let strBridge = [];
     for(let i = 0; i < size; i++){
-      if(generateRandomNumber[i] === 0) strBridge[i] = 'D';
-      if(generateRandomNumber[i] === 1) strBridge[i] = 'U';
+      if(generateRandomNumber[i] == 0) strBridge[i] = "D";
+      if(generateRandomNumber[i] == 1) strBridge[i] = "U";
     }
     return strBridge;
   },
