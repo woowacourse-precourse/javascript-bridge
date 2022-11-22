@@ -13,4 +13,7 @@ const isCollectRange = (number, min, max) => {
   }
 };
 
-module.exports = { isValidateNumber, isCollectRange };
+const newLine = () => {
+  console.log();
+};
+module.exports = { isValidateNumber, isCollectRange, newLine };
