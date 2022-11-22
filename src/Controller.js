@@ -61,7 +61,7 @@ class Controller {
       run[command]();
     },
   )(() => {
-    this.inputView.readGameCommand(this.retryMessage, this.confirmRetry);
+    this.inputView.readGameCommand(this.confirmRetry);
   });
 
   move = handleError(
