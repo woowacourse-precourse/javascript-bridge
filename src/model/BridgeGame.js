@@ -34,9 +34,14 @@ class BridgeGame {
     return this.#bridge.isReach(this.#step);
   }
 
-  retry() {
-    this.#bridgeMap = new BridgeMap();
-    this.#step = -1;
+  retry(retry) {
+    new BridgeGameValidator().retryValidate(retry);
+    if(retry === 'R'){
+      this.#bridgeMap = new BridgeMap();
+      this.#step = -1;
+      return true;
+    }
+    return false;
   }
   
   

@@ -45,11 +45,9 @@ class Controller {
 
   askReplay(){
     readGameCommand((retry) => {
-      if(retry === 'R'){
-        this.#tryingNum += 1;
-        this.#bridgeGame.retry();
+      const isRetry = this.#bridgeGame.retry(retry);
+      if(isRetry){
         this.play();
-        return;
       }
       this.end();
     })

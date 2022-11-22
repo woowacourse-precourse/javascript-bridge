@@ -12,6 +12,12 @@ class BridgeGameValidator {
     }
   }
 
+  retryValidate(retry){
+    if(retry !== 'R' && retry !== 'Q'){
+      throw ERROR_MESSAGE.INPUT_RETRY;
+    }
+  }
+
   sizeValidate(bridgeSize) {
     if(bridgeSize < 3 || bridgeSize > 20) {
       throw ERROR_MESSAGE.BRIDGE_LENGTH;
