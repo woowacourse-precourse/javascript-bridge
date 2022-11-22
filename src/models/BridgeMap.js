@@ -1,4 +1,3 @@
-const { GAME_RULE } = require('../constants');
 const { MovingCommand } = require('./command');
 
 /**
