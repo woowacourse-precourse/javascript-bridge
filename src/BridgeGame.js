@@ -1,5 +1,5 @@
 const { printMap, printResult } = require("./OutputView");
-const { readGameCommand } = require("./InputView");
+const { readGameCommand, readMoving } = require("./InputView");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -15,6 +15,10 @@ class BridgeGame {
     this.bridge = bridge;
   }
 
+  getBridgeMap() {
+    return this.bridgeMap;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -28,7 +32,7 @@ class BridgeGame {
 
   paintMap(input) {
     const curIdx = this.bridgeMap.U.length;
-    const check = this.bidge[curIdx] === input ? "O" : "X";
+    const check = this.bridge[curIdx] === input ? "O" : "X";
     this.bridgeMap[input].push(check);
     const other = input === "U" ? "D" : "U";
     this.bridgeMap[other].push(" ");
@@ -37,12 +41,12 @@ class BridgeGame {
   judgeNext() {
     const curIdx = this.bridgeMap.U.length;
     if (this.bridgeMap.U[curIdx] === "X" || this.bridgeMap.D[curIdx] === "X") {
-      return readGameCommand(this.bridge);
+      return readGameCommand(this);
     }
-    if (curIdx + 1 === this.bridge.length) {
-      return printResult();
+    if (curIdx === this.bridge.length) {
+      return printResult(this, "success");
     }
-    return readMoving(this.bridge);
+    return readMoving(this);
   }
 
   /**

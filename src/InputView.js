@@ -88,7 +88,7 @@ const InputView = {
       bridgeGame.retry();
     }
     if (command === "Q") {
-      printResult();
+      printResult(bridgeGame, "fail");
     }
   },
 };
