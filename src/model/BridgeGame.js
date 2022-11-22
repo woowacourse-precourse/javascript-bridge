@@ -1,7 +1,7 @@
 const Bridge = require("./Bridge");
 const { makeBridge } = require("../BridgeMaker");
 const BridgeMap = require("./BridgeMap");
-const { generate } = require("../BridgeRandomNumberGenerator");
+const BridgeRandom = require("../BridgeRandomNumberGenerator");
 const BridgeGameValidator = require("../validator/BridgeGameValidator");
 const { INPUT_RETRY, INITIAL_VALUE } = require("../constants");
 /**
@@ -14,7 +14,7 @@ class BridgeGame {
 
   constructor(bridgeSize){
     new BridgeGameValidator().bridgeSizeValidate(bridgeSize);
-    this.#bridge = new Bridge(makeBridge(bridgeSize, generate));
+    this.#bridge = new Bridge(makeBridge(bridgeSize, BridgeRandom.generate));
     this.#bridgeMap = new BridgeMap();
     this.#step = INITIAL_VALUE.STEP;
   }
