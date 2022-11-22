@@ -9,6 +9,18 @@ const Validation = {
             throw new Error(ERROR_MESSAGE.BRIDGE_ERROR);
         }
     },
+
+    moveInput : (input) => {
+        if (!(input === "U" || input === "D")) {
+            throw new Error(ERROR_MESSAGE.MOVE_ERROR);
+        }
+    },
+
+    restartInput : (input) => {
+        if (!(input === "R" || input === "Q")) {
+            throw new Error(ERROR_MESSAGE.RESTART_ERROR);
+        }
+    },
 };
 
 module.exports = { Validation };

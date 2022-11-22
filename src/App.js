@@ -23,7 +23,12 @@ class App {
       Validation.bridgeInput(input);
       const bridge = BridgeMaker.makeBridge(input,BridgeRandomNumberGenerator.generate);
       this.BridgeGame.setBridge(bridge);
+      this.inputStep();
     });
+  }
+
+  inputStep() {
+    InputView.readMoving(() => {});
   }
 }
 const app = new App();
