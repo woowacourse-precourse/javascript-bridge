@@ -17,6 +17,10 @@ class Bridge {
   getTotalBridge() {
     return [this.upBridge, this.downBridge];
   }
+  resetMark() {
+    this.upBridge = [];
+    this.downBridge = [];
+  }
 }
 
 module.exports = Bridge;
