@@ -12,7 +12,6 @@ const OutputView = {
   printMap(currentBridge) {
     Console.print('[ '+ currentBridge[0].join(' | ') + ' ]');
     Console.print('[ '+ currentBridge[1].join(' | ') + ' ]');
-
   },
 
   /**
@@ -21,7 +20,6 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(currentBridge, count, isWin) { // result : 1: 성공 0: 실패
-
     Console.print(`최종 게임 결과`);
     this.printMap(currentBridge);
     const result = isWin===1?'성공':'실패';

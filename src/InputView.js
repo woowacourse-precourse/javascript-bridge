@@ -20,7 +20,6 @@ const InputView = {
         if(isNaN(bridgeLen)) throw "[ERROR] 숫자만 입력하세요.";
         const bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
         currentBridge = this.readMoving([[],[]], bridge, 1);
-        // 이동 후, 게임 진행 가능한지 확인
       })
     } catch(e){
       Console.print(e);
@@ -50,22 +49,12 @@ const InputView = {
    * 게임 진행이 가능한지, 게임이 종료되었는지, 게임을 진행할 수 없는지 확인
    */
   stillMoving(currentBridge, bridge, count) {
-    // 게임 종료되었는지 확인
-    if(currentBridge[0].length === bridge.length) {
-      // 게임 종료 -> 출력
-      OutputView.printResult(currentBridge, count, 1);
-    }
-
-    // 틀렸는지 확인
+    if(currentBridge[0].length === bridge.length) OutputView.printResult(currentBridge, count, 1);
     else if(currentBridge[0].includes('X') || currentBridge[1].includes('X')){
-      // 게임 틀림 -> 게임 종료할지, 재시작 할 지 결정
       OutputView.printMap(currentBridge);
       this.readGameCommand(currentBridge, bridge, count);
     }
-
-    // 게임 진행가능한지 확인
     else {
-      // 게임 다시 진행
       this.readMoving(currentBridge, bridge, count);
       OutputView.printMap(currentBridge);
     }
@@ -81,12 +70,8 @@ const InputView = {
           count += 1;
           this.readMoving(game.retry(currentBridge), bridge, count);
         }
-        else if(input==='Q') {
-          OutputView.printResult(currentBridge, count, 0);
-        }
-        else{
-          throw "[ERROR] R와 Q중 하나만 입력 가능합니다.";
-        }
+        else if(input==='Q') OutputView.printResult(currentBridge, count, 0);
+        else throw "[ERROR] R와 Q중 하나만 입력 가능합니다.";
       })
     } catch(e) {
       Console.print(e);
