@@ -5,10 +5,6 @@ class Bridge {
     this.#bridge = numbers;
   }
 
-  get answer() {
-    return this.#bridge;
-  }
-
   checkAnswer(moveCount, input) {
     return [this.#isRight(moveCount, input), this.#isDone(moveCount)];
   }

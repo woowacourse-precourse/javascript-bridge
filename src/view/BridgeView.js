@@ -16,7 +16,6 @@ class BridgeView {
   getBridgeLength(printLength) {
     const validation = (length) => {
       const pass = this.inputValidation(length, TYPE.SIZE);
-
       pass ? printLength(length) : this.getBridgeLength(printLength);
     };
 
@@ -30,7 +29,6 @@ class BridgeView {
   getWhereToGo(updateMove) {
     const validation = (destination) => {
       const pass = this.inputValidation(destination, TYPE.STEP);
-
       pass ? updateMove(destination) : this.getWhereToGo(updateMove);
     };
     this.input.readMoving(validation);
@@ -43,7 +41,6 @@ class BridgeView {
   getWhatToDo(getCommand) {
     const validation = (command) => {
       const pass = this.inputValidation(command, TYPE.RETRY);
-
       pass ? getCommand(command) : this.getWhatToDo(getCommand);
     };
     this.input.readGameCommand(validation);
