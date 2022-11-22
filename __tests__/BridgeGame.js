@@ -62,10 +62,10 @@ describe("BridgeGame class 테스트", () => {
 
     playerChoiceMovingCommands.forEach((playerChoiceMovingCommand) => {
       bridgeGame.move(playerChoiceMovingCommand);
-      expect(bridgeGame.isAnswerMovingChoice()).toBeTruthy();
+      expect(bridgeGame.isAnswerMovingCommand()).toBeTruthy();
     });
 
     bridgeGame.move("D");
-    expect(bridgeGame.isAnswerMovingChoice()).toBeFalsy();
+    expect(bridgeGame.isAnswerMovingCommand()).toBeFalsy();
   });
 });

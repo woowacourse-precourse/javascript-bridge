@@ -31,10 +31,10 @@ class BridgeGame {
   }
 
   isGameSuccess() {
-    return this.isAnswerMovingChoice() && this.#isLastMove();
+    return this.isAnswerMovingCommand() && this.#isLastMove();
   }
 
-  isAnswerMovingChoice() {
+  isAnswerMovingCommand() {
     const currentBridgeIndex = this.#currentBridgeCount - 1;
     return this.#movingCommand === this.#bridgeShape[currentBridgeIndex];
   }
@@ -46,7 +46,7 @@ class BridgeGame {
   getCurrentBridgeMap() {
     const upsideBridgeMap = this.#makeAnswerBridgeMap(COMMAND.MOVING.UP);
     const downsideBridgeMap = this.#makeAnswerBridgeMap(COMMAND.MOVING.DOWN);
-    if (!this.isAnswerMovingChoice()) {
+    if (!this.isAnswerMovingCommand()) {
       upsideBridgeMap[getArrayLastIndex(upsideBridgeMap)] =
         this.#movingCommand === COMMAND.MOVING.UP ? "X" : " ";
       downsideBridgeMap[getArrayLastIndex(downsideBridgeMap)] =

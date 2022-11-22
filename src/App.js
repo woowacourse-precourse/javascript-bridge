@@ -41,7 +41,7 @@ class App {
   }
 
   controlBridgeMoveResult() {
-    if (!this.bridgeGame.isAnswerMovingChoice()) {
+    if (!this.bridgeGame.isAnswerMovingCommand()) {
       this.inputGameCommand();
       return;
     }
