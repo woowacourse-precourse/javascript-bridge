@@ -25,9 +25,9 @@ const OUTPUT_MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  bridge_size: '다리 길이는 3부터 20 사이의 숫자여야 합니다.',
-  moving: `입력값은 문자 '${COMMAND.up}'이거나 '${COMMAND.down}'여야 합니다.`,
-  game_command: `입력값은 문자 '${COMMAND.retry}'이거나 '${COMMAND.quit}'여야 합니다.`,
+  bridge_size: `${ERROR} 다리 길이는 3부터 20 사이의 숫자여야 합니다.`,
+  moving: `${ERROR} 입력값은 문자 '${COMMAND.up}'이거나 '${COMMAND.down}'여야 합니다.`,
+  game_command: `${ERROR} 입력값은 문자 '${COMMAND.retry}'이거나 '${COMMAND.quit}'여야 합니다.`,
 });
 
 module.exports = { SUCCESS, FAILURE, ERROR, COMMAND, INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE };
