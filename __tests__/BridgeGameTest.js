@@ -1,4 +1,4 @@
-const BridgeGame = require("../src/BridgeGame");
+const BridgeGame = require("../src/domain/BridgeGame");
 
 const runRetry = (bridgeGame, retryCount) => {
   for (let count = 0; count < retryCount; count++) {

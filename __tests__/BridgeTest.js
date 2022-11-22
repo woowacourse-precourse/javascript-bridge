@@ -1,5 +1,5 @@
-const Bridge = require("../src/Bridge");
-const Player = require("../src/Player");
+const Bridge = require("../src/domain/Bridge");
+const Player = require("../src/domain/Player");
 
 const getMovedPlayer = (moveCount) => {
   const player = new Player();

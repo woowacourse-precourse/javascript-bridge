@@ -1,4 +1,4 @@
-const Player = require("../src/Player");
+const Player = require("../src/domain/Player");
 
 describe("Player 클래스 테스트", () => {
   test("getCurrentPosition(): 플레이어가 두 번 이동했다면 플레이어의 위치는 2", () => {
