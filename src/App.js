@@ -1,5 +1,5 @@
 const BridgeGame = require('./Controllers/BridgeGame');
-const Model = require('./Models/Model');
+const Model = require('./Models/BridgeModel');
 const GameView = require('./Views/GameView');
 const InputView = require('./Views/InputView');
 const OutputView = require('./Views/OutputView');
@@ -15,5 +15,8 @@ class App {
     this.controller.start();
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;

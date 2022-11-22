@@ -1,5 +1,5 @@
 const { RESULT } = require('../Constants');
-const editBridge = require('../Utilities/EditBridge');
+const { editBridge } = require('../Utilities');
 
 class GameView {
   constructor(inputView, outputView) {
@@ -7,10 +7,7 @@ class GameView {
     this.outputView = outputView;
   }
 
-  close() {
-    this.outputView.close();
-  }
-
+  // inputView 메서드
   readBridgeSize(query, callback) {
     this.inputView.readLine(query, callback);
   }
@@ -23,6 +20,7 @@ class GameView {
     this.inputView.readLine(query, callback);
   }
 
+  // outputView 메서드
   printMap(upsideBridge, downsideBridge) {
     this.outputView.print(editBridge(upsideBridge));
     this.outputView.print(editBridge(downsideBridge));
@@ -41,6 +39,10 @@ class GameView {
 
   printError(message) {
     this.outputView.print(message);
+  }
+
+  close() {
+    this.outputView.close();
   }
 }
 
