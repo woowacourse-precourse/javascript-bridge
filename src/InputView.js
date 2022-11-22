@@ -21,7 +21,7 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGES.BRIDGE_LENGTH, (length) => {
       const inputCheck = new InputCheck();
-      inputCheck.lengthCheck(length);
+      inputCheck.inputLengthCheck(length);
       const bridge = BridgeMaker.makeBridge(length, generateRandomNumber);
       this.readMoving(bridge, [], 1);
     });
@@ -34,7 +34,7 @@ const InputView = {
     let steps = previous;
     Console.readLine(INPUT_MESSAGES.MOVE_SQUARE, (step) => {
       const inputCheck = new InputCheck();
-      inputCheck.stepCheck(step);
+      inputCheck.inputSquareCheck(step);
       steps += step;
       const bridgeGame = new BridgeGame();
       if (bridgeGame.move(bridge, steps)) {
@@ -60,7 +60,7 @@ const InputView = {
   readGameCommand(bridge, attempt) {
     Console.readLine(INPUT_MESSAGES.RETRY, (retry) => {
       const inputCheck = new InputCheck();
-      inputCheck.retryCheck(retry);
+      inputCheck.inputRetryCheck(retry);
       const bridgeGame = new BridgeGame();
       bridgeGame.retry(bridge, retry, attempt);
       if (retry == "R") {

@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const {
   OUTPUT_MESSAGES,
-} = require("./constants");
+} = require("./utils/constants");
 const InputView = require("./InputView");
 
 class App {
@@ -14,5 +14,8 @@ class App {
     InputView.readBridgeSize();
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
