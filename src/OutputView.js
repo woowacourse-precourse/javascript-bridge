@@ -33,5 +33,10 @@ const OutputView = {
     Console.print(gameConst.result.message.SUCCESS_MESSAGE + " " + STATUS);
     Console.print(gameConst.result.message.TRIAL_MESSAGE + " " + TRIAL_CNT);
   },
-  }
+  
+  printStartMessage() {
+    Console.print(gameConst.process.START_MESSAGE);
+  },
+};
+  
 module.exports = OutputView;
