@@ -28,7 +28,7 @@ describe("BridgeGame 테스트", () => {
         mockRandoms(bridge);
         const bridgeGame = new BridgeGame();
         bridgeGame.setBridge(bridge);
-        console.log('bridge', bridge);
+
         for (let moveType of moveTypes)
             bridgeGame.move(moveType);
         expect(bridgeGame.getUpDownHistory()).toEqual([upHistory, downHistory]);
