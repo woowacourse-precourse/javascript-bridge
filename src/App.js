@@ -12,6 +12,23 @@ class App {
     OutputView.printStartMessage();
     this.buildBridge();
   }
+
+  buildBridge() {
+    InputView.readBridgeSize(this.tryValidateBridge.bind(this));
+  }
+
+  tryValidateBridge(bridgeSize) {
+    try {
+      Validator.validateBridgeSize(bridgeSize);
+    } catch (error) {
+      OutputView.printErrorMessage(error.message);
+      this.buildBridge();
+      return;
+    }
+    this.manageBridge(bridgeSize);
+  }
+
+  
 }
 
 module.exports = App;
