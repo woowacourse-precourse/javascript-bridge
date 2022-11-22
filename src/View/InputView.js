@@ -4,40 +4,31 @@ const Validator = require('../Validator');
 const OutputView = require('./OutputView');
 
 const { Console } = MissionUtils;
-const InputView = {
 
+const InputView = {
   readBridgeSize(callback) {
-    Console.readLine(MESSAGE.ASK_BRIDGE_SIZE, (bridgeSize) => {
-      try {
-        Validator.bridgeSizeValidate(bridgeSize);
-        callback(bridgeSize);
-      } catch (error) {
-        InputView.inputErrorHandler(error.message, InputView.readBridgeSize.bind(null, callback));
-      }
-    });
+    InputView.read(MESSAGE.ASK_BRIDGE_SIZE, callback, Validator.bridgeSizeValidate);
   },
 
   readMoving(callback) {
-    Console.readLine(MESSAGE.ASK_MOVING, (moving) => {
+    InputView.read(MESSAGE.ASK_MOVING, callback, Validator.movingValidate);
+  },
+
+  readGameCommand(callback) {
+    InputView.read(MESSAGE.ASK_GAME_COMMAND, callback, Validator.commandValidate);
+  },
+
+  read(msg, callback, validator) {
+    Console.readLine(msg, (input) => {
       try {
-        Validator.movingValidate(moving);
-        callback(moving);
+        validator(input);
+        callback(input);
       } catch (error) {
-        InputView.inputErrorHandler(error.message, InputView.readMoving.bind(null, callback));
+        InputView.inputErrorHandler(error.message, InputView.read.bind(null, callback));
       }
     });
   },
 
-  readGameCommand(callback) {
-    Console.readLine(MESSAGE.ASK_GAME_COMMAND, (command) => {
-      try {
-        Validator.commandValidate(command);
-        callback(command);
-      } catch (error) {
-        InputView.inputErrorHandler(error.message, InputView.readGameCommand.bind(null, callback));
-      }
-    });
-  },
   inputErrorHandler(msg, retryFunction) {
     OutputView.print(msg);
     retryFunction();
