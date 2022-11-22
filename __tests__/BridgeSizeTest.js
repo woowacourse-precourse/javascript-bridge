@@ -1,6 +1,6 @@
 const BridgeSize = require('../src/model/BridgeSize');
 
-describe('다리 사이즈 테스트', () => {
+describe('다리 사이즈 예외 테스트', () => {
   test('3~20 사이의 수가 아니면 예외가 발생한다.', () => {
     expect(() => {
       new BridgeSize(1);
