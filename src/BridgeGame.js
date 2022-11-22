@@ -10,18 +10,10 @@ class BridgeGame {
    */
 
   move(dir, bridge, now) {
-    if (dir === bridge[now] && dir == "U") {
-      return "upSuccess";
-    }
-    if (dir === bridge[now] && dir == "D") {
-      return "downSuccess";
-    }
-    if (dir == "U") {
-      return "upFail";
-    }
-    if (dir == "D") {
-      return "downFail";
-    }
+    if (dir === bridge[now] && dir == "U") return "upSuccess";
+    if (dir === bridge[now] && dir == "D") return "downSuccess";
+    if (dir == "U") return "upFail";
+    if (dir == "D") return "downFail";
   }
 
   /**
