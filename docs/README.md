@@ -34,3 +34,8 @@
   - 최종 게임 결과 => printMap
   - 게임 성공 여부 문구 => printGameResult
   - 총 시도한 횟수 문구 => printTryGame
+
+# Util
+
+- makeMapObj (answer,input) => { [index] : true | flase }
+- makeMap (input,obj) =>
