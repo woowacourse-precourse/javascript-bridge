@@ -14,6 +14,7 @@ const END = "Q";
 const DECIMAL = 10;
 const REPEAT_START = 0;
 const ATTEMPT_START = 1;
+const ATTEMPT_INCREASE = 1;
 
 const LENGTH = {
   MIN,
@@ -41,4 +42,5 @@ module.exports = {
   DECIMAL,
   REPEAT_START,
   ATTEMPT_START,
+  ATTEMPT_INCREASE,
 };

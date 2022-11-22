@@ -4,6 +4,8 @@ const FAIL = "\n게임 성공 여부: 실패";
 const RESULT = "\n최종 게임 결과";
 const BLANK = " ";
 const ATTEMP = (attemptNumber) => `총 시도한 횟수: ${attemptNumber}`;
+const BOUNDARY = " | ";
+const BRIDGE_CONDITION = (log) => `[ ${log} ]`;
 
 const LENGTH = "다리의 길이를 입력해주세요.\n";
 const MOVE = "\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n";
@@ -22,6 +24,8 @@ const OUTPUT_MESSAGE = {
   RESULT,
   BLANK,
   ATTEMP,
+  BOUNDARY,
+  BRIDGE_CONDITION,
 };
 
 const INPUT_MESSAGE = {

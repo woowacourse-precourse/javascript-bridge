@@ -1,6 +1,11 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const { BRIDGE, DECIMAL, ATTEMPT_START } = require("./constants/data");
+const {
+  BRIDGE,
+  DECIMAL,
+  ATTEMPT_START,
+  ATTEMPT_INCREASE,
+} = require("./constants/data");
 const { OUTPUT_MESSAGE } = require("./constants/message");
 
 /**
@@ -89,7 +94,7 @@ class BridgeGame {
    */
   retry() {
     this.movingLog = { upper: [], lower: [] };
-    this.attemptNumber += 1;
+    this.attemptNumber += ATTEMPT_INCREASE;
   }
 
   getLog() {

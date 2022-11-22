@@ -10,10 +10,10 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(movingLog) {
-    const upperLog = movingLog.upper.join(" | ");
-    const lowerLog = movingLog.lower.join(" | ");
-    Console.print(`[ ${upperLog} ]`);
-    Console.print(`[ ${lowerLog} ]`);
+    const upperLog = movingLog.upper.join(OUTPUT_MESSAGE.BOUNDARY);
+    const lowerLog = movingLog.lower.join(OUTPUT_MESSAGE.BOUNDARY);
+    Console.print(OUTPUT_MESSAGE.BRIDGE_CONDITION(upperLog));
+    Console.print(OUTPUT_MESSAGE.BRIDGE_CONDITION(lowerLog));
   },
 
   /**
