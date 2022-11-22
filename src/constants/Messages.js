@@ -2,8 +2,8 @@ const PRINT_MESSAGE = Object.freeze({
   START: "다리 건너기 게임을 시작합니다.\n",
   MAP: (upBridge, downBridge) =>
     `[ ${upBridge.join(" | ")} ]\n[ ${downBridge.join(" | ")} ]\n`,
-  RESULT: "최종 게임 결과",
-  IS_SUCCESS: (isSuccess) => `게임 성공 여부: ${isSuccess}`,
+  RESULT: "최종 게임 결과\n",
+  IS_SUCCESS: (isSuccess) => `게임 성공 여부: ${isSuccess}\n`,
   ATTEMPT: (attempt) => `총 시도한 횟수: ${attempt}`,
 });
 const REQUEST_MESSAGE = Object.freeze({
