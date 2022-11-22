@@ -1,8 +1,12 @@
-const OutputView = require("./OutputView");
+const BridgeGamePlay = require("./BridgeGamePlay");
 
 class App {
+  constructor() {
+    this.bridgeGamePlay = new BridgeGamePlay();
+  }
+
   play() {
-    OutputView.printStart();
+    this.bridgeGamePlay.start();
   }
 }
 
