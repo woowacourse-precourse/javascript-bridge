@@ -14,9 +14,14 @@ class UserController {
     return this.userModel.getTryCount();
   }
 
-  // 유저의 시도 횟수 증가 메서드
+  // 유저의 시도 횟수 증가 연결 메서드
   increaseTryCount() {
     this.userModel.increaseTryCount();
+  }
+
+  // 유저의 이동 기록을 초기화하는 연결 메서드
+  resetUserMoving() {
+    this.userModel.resetUserMoving();
   }
 
   /**
