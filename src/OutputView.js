@@ -82,8 +82,10 @@ const OutputView = {
         tryNum++;
         count = 0;
         this.readMoving(bridge, count);
-      } else {
+      } else if (retry == 'Q') {
         this.printResult(bridge, count, upDown, success);
+      } else {
+        throw new Error('[ERROR] R 또는 Q를 입력하여야 합니다.');
       }
     });
   },
