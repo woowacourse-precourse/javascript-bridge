@@ -1,4 +1,4 @@
-const { RESULT } = require('./utils/Constants');
+const { RESULT, SELECT } = require('./utils/Constants');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./utils/BridgeRandomNumberGenerator');
 /**
@@ -47,6 +47,10 @@ class BridgeGame {
 
 	getTryCount() {
 		return this.#infomation.try;
+	}
+
+	checkRetry(select) {
+		return select === SELECT.retry;
 	}
 
 	/**
