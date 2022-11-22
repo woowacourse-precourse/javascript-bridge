@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
 
@@ -76,7 +77,7 @@ describe("다리 건너기 테스트", () => {
       "[ O |   | O ]",
       "[   | O |   ]",
       "게임 성공 여부: 성공",
-      "총 시도한 횟수: 1",
+      "총 시도한 횟수: 1"
     ]);
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
