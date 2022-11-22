@@ -92,5 +92,3 @@ class BridgeGameController {
   }
 }
 module.exports = BridgeGameController;
-const app = new BridgeGameController();
-app.getBridgeLengthFromUser();
