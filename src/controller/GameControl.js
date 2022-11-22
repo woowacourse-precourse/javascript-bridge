@@ -42,5 +42,17 @@ class GameControl {
     const size = this.bridgeGame.getSize();
     return size === position;
   }
+
+  askRetry() {
+    const retry = InputView.readGameCommand();
+    if (retry === 'R') {
+      this.bridgeGame.retry();
+      this.orderMoving();
+    }
+    if (retry === 'Q') {
+      const success = false;
+      this.runFinalOutput(success);
+    }
+  }
 }
 module.exports = GameControl;
