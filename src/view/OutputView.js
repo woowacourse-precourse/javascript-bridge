@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { OUTPUT_FORM } = require("./constants/OutputForm");
-const { INPUT_VALUE } = require("./constants/InputValue");
+const { OUTPUT_FORM } = require("../constants/OutputForm");
+const { INPUT_VALUE } = require("../constants/InputValue");
 
 const OutputView = {
   makeBridge(moving, boolean, string) {

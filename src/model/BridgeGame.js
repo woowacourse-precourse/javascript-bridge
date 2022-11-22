@@ -1,4 +1,4 @@
-const { INPUT_VALUE } = require("./constants/InputValue");
+const { INPUT_VALUE } = require("../constants/InputValue");
 
 class BridgeGame {
   move(moving, bridge) {
