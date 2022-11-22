@@ -39,6 +39,14 @@ class BridgeGame {
     return returnTF;
   }
 
+  judgeEnd(bridgeGame, tf) {
+    if (tf && (bridgeGame.roundCount - 1) === bridgeGame.getBridgeSize() - 1) {
+      return true;
+    }
+
+    return false;
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>

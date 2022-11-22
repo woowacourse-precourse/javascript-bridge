@@ -1,9 +1,10 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { GAME_MESSAGE, RESTART_OR_END, RESULT_ENGLISH } = require('./Constant.js');
+
 const { generate } = require('./BridgeRandomNumberGenerator.js');
 const { makeBridge } = require('./BridgeMaker.js');
 const { printMap, printResult } = require('./OutputView.js');
 const { checkBridgeSize, checkMovingInfo, checkRestartOrFail } = require('./ValidityCheck.js');
-const { GAME_MESSAGE, RESTART_OR_END, RESULT_ENGLISH } = require('./Constant.js');
 
 const BridgeGame = require('./BridgeGame.js');
 const bridgeGame = new BridgeGame();
@@ -41,7 +42,7 @@ const InputView = {
       
         printMap(bridgeGame);
         
-        if (tf && (bridgeGame.roundCount - 1) === (bridgeGame.getBridgeSize() - 1)) printResult(bridgeGame, RESULT_ENGLISH.SUCCESS);
+        if (bridgeGame.judgeEnd(bridgeGame, tf)) printResult(bridgeGame, RESULT_ENGLISH.SUCCESS);
         else if (tf) this.readMoving();
         else this.readGameCommand();
       } catch(e) {
@@ -59,17 +60,16 @@ const InputView = {
       try {
         checkRestartOrFail(answer);
       
-        if (answer === RESTART_OR_END.RESTART) {
+        if (answer === RESTART_OR_END.END) printResult(bridgeGame, RESULT_ENGLISH.FAIL);
+        else {
           bridgeGame.retry();
           this.readMoving();
-        } else if (answer === RESTART_OR_END.END) {
-          printResult(bridgeGame, RESULT_ENGLISH.FAIL);
         }
       } catch (e) {
         Console.print(e);
         this.readGameCommand();
       }
-    })
+    });
   },
 };
 

@@ -17,6 +17,7 @@ const BridgeMaker = {
     for (let i = 0; i < size; i++) {
       const number = generateRandomNumber().toString();
       const bridgeShape = number === '0' ? UP_OR_DOWN.DOWN : UP_OR_DOWN.UP;
+      
       bridge.push(bridgeShape);
     }
 
