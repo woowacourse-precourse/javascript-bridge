@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const GameController = require("../src/GameController");
+const GameController = require("../src/Controller/GameController");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();

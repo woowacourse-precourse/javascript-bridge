@@ -1,4 +1,4 @@
-const GameController = require("./GameController");
+const GameController = require("./Controller/GameController");
 
 class App {
   #gameController;

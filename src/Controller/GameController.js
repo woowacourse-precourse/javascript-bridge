@@ -1,9 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
-const BridgeGame = require("./BridgeGame");
-const Validation = require("./Validation");
-const { MOVE, MAP, STATUS, COMMAND } = require("./constants/Constants");
+const InputView = require("../View/InputView");
+const OutputView = require("../View/OutputView");
+const BridgeGame = require("../BridgeGame");
+const Validation = require("../Utils/Validation");
+const { MOVE, MAP, STATUS, COMMAND } = require("../Utils/constants/Constants");
 
 class GameController {
 

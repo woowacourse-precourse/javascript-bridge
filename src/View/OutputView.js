@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { OUTPUT, RESULT, MAP } = require("./constants/MessageConstants");
+const { OUTPUT, RESULT, MAP } = require("../Utils/constants/MessageConstants");
 
 const OutputView = {
   printSpace() {
