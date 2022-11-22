@@ -17,7 +17,12 @@ const InputView = {
     MissionUtils.Console.readLine(Constant.USER_INPUT_MESSAGE.BRIDGE_SIZE, (bridgeLength) => {
       console.log(`${Constant.USER_INPUT_MESSAGE.BRIDGE_SIZE}${bridgeLength}`);
       const ckeckNum = new Validation();
-      ckeckNum.checkNum(bridgeLength);
+      try {
+        ckeckNum.checkNum(bridgeLength);
+      } catch(err) {
+        MissionUtils.Console.print(Constant.ERROR_MESSAGE.CHECK_NUM_ERROR);
+        return this.readBridgeSize()
+      }
       const bridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
       this.readMoving(bridge, [], 1);
     });
@@ -31,7 +36,12 @@ const InputView = {
     MissionUtils.Console.readLine(Constant.USER_INPUT_MESSAGE.BRIDGE_MOVE, (moveInputValue) => {
       console.log(`${Constant.USER_INPUT_MESSAGE.BRIDGE_MOVE}${moveInputValue}`);
       const ckeckMove = new Validation();
-      ckeckMove.checkMove(moveInputValue);
+      try {
+        ckeckMove.checkMove(moveInputValue);
+      } catch(err) {
+        MissionUtils.Console.print(Constant.ERROR_MESSAGE.CHECK_MOVE_ERROR);
+        return this.readMoving(bridge, arr, count)
+      }
       moves += moveInputValue;
       this.moveBridgeGame(bridge, moves, count)
     });
@@ -65,7 +75,12 @@ const InputView = {
     MissionUtils.Console.readLine(Constant.USER_INPUT_MESSAGE.BRIDGE_GAME_RETRY, (gameRetry) => {
       console.log(`${Constant.USER_INPUT_MESSAGE.BRIDGE_GAME_RETRY}${gameRetry}`);
       const checkRetry = new Validation();
-      checkRetry.checkRetry(gameRetry);
+      try {
+        checkRetry.checkRetry(gameRetry);
+      } catch(err) {
+        MissionUtils.Console.print(Constant.ERROR_MESSAGE.CHECK_RERTY_ERROR);
+        return this.readGameCommand(count)
+      }
       this.readGameCommand(gameRetry, count)
     });
   },
