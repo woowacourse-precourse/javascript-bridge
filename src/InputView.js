@@ -1,17 +1,23 @@
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeMaker = requre("./BridgeMaker");
+const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
 
 const InputView = {
+  bridgeGame: new BridgeGame(),
+
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
-      this.validateBridgeSize(Number(input));
-      const bridge = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator.generate);
+      this.validateBridgeSize(input);
+      input = Number(input);
 
-      this.readMoving(bridge);
+      this.readMoving(this.bridgeMaker(input));
     });
+  },
+
+  bridgeMaker(bridgeSize) {
+    return BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
   },
 
   validateBridgeSize(bridgeSize) {
@@ -22,8 +28,21 @@ const InputView = {
   readMoving(bridge) {
     Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (input) => {
       this.validateMoving(input);
-      const BridgeGame = require("./BridgeGame");
+      const round = this.bridgeGame.move();
+
+      this.proceedRound(bridge, round, input);
     });
+  },
+
+  proceedRound(bridge, round, upDown) {
+    const [up, down, gameResult] = this.bridgeGame.makeMap(bridge[round - 1], upDown);
+    OutputView.printMap(up, down);
+
+    if (!gameResult) this.readGameCommand(bridge);
+    else if (round === bridge.length && gameResult) {
+      const totalTry = this.bridgeGame.countTry();
+      OutputView.printResult(totalGame, gameResult, [up, down]);
+    } else this.readMoving(bridge);
   },
 
   validateMoving(upDown) {
