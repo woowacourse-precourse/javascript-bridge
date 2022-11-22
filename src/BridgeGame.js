@@ -1,7 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { makeBridge } = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const OutputView = require('./OutputView');
 const Constant = require('./Constant');
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -68,7 +67,6 @@ class BridgeGame {
   fail() {
     this.setBridgeMap();
     this.insertFailBridge();
-    OutputView.printMap(this.getBridgeMap());
   }
 
   static insertCorrectBridge(upBridge, downBridge, answerDirection) {
@@ -92,16 +90,6 @@ class BridgeGame {
       topBridge.push(Constant.FAIL_STRING);
       bottomBridge.push(Constant.BLANK_STRING);
     }
-  }
-
-  endWithFailure() {
-    OutputView.printResult(this.getBridgeMap(), Constant.FAIL_MESSAGE, this.getNumberOfAttempts());
-    Console.close();
-  }
-
-  endWithSuccess() {
-    OutputView.printResult(this.getBridgeMap(), Constant.SUCCESS_MESSAGE, this.getNumberOfAttempts());
-    Console.close();
   }
 
   isMoveFail(direction) {

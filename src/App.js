@@ -2,6 +2,8 @@ const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeGame = require('./BridgeGame');
 const Validator = require('./Validator');
+const Constant = require('./Constant');
+const { Console } = require('@woowacourse/mission-utils');
 
 class App {
   constructor() {
@@ -36,6 +38,7 @@ class App {
 
   manageFailCase() {
     this.bridgeGame.fail();
+    OutputView.printMap(this.bridgeGame.getBridgeMap());
     this.askRetry();
   }
 
@@ -56,10 +59,20 @@ class App {
     this.bridgeGame.move();
     OutputView.printMap(this.bridgeGame.getBridgeMap());
     if (this.bridgeGame.isFinish()) {
-      this.bridgeGame.endWithSuccess();
+      this.endWithSuccess();
       return;
     }
     this.mainRound();
+  }
+
+  endWithFailure() {
+    OutputView.printResult(this.bridgeGame.getBridgeMap(), Constant.FAIL_MESSAGE, this.bridgeGame.getNumberOfAttempts());
+    Console.close();
+  }
+
+  endWithSuccess() {
+    OutputView.printResult(this.bridgeGame.getBridgeMap(), Constant.SUCCESS_MESSAGE, this.bridgeGame.getNumberOfAttempts());
+    Console.close();
   }
 
   tryValidateBridge(bridgeSize) {
