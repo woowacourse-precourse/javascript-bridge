@@ -1,6 +1,9 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const Progress = require("./Progress");
+const {
+  RETRY_COMMAND: { RETRY },
+} = require("./core/BridgeGameCore");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -31,17 +34,15 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(command, resolve, reject) {
+  move(command, successCallback, failCallback) {
     if (this.isFinished()) {
       return;
     }
     if (this.isMatchCommand(command)) {
-      this.#moveSuccess(command);
-      resolve();
+      this.#moveSuccess(command, successCallback);
       return;
     }
-    this.#moveFail(command);
-    reject();
+    this.#moveFail(command, failCallback);
   }
 
   /**
@@ -49,17 +50,23 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {
-    this.#reInit();
+  retry(command, retryCallback, quitCallback) {
+    if (command === RETRY) {
+      retryCallback();
+      return;
+    }
+    quitCallback();
   }
 
-  #moveSuccess(command) {
+  #moveSuccess(command, cb) {
     this.#position += 1;
     this.progress.success(command);
+    cb();
   }
 
-  #moveFail(command) {
+  #moveFail(command, cb) {
     this.progress.fail(command);
+    cb();
   }
 
   #reInit() {
