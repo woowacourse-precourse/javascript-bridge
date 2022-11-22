@@ -9,7 +9,7 @@ describe('다리 생성 테스트', () => {
 
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
 
-    expect(bridge === ['U', 'D', 'D']).toEqual(false);
+    expect(bridge === ['U', 'D', 'D']).not.toBeTruthy();
   });
 
   test('랜덤 값이 1인데 다리가 "D"인 경우', () => {
@@ -20,6 +20,6 @@ describe('다리 생성 테스트', () => {
 
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
 
-    expect(bridge === ['D', 'U', 'U']).toEqual(false);
+    expect(bridge === ['D', 'U', 'U']).not.toBeTruthy();
   });
 });
