@@ -18,47 +18,13 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(input, answer) {
-    let upperBridge = '[ ';
-    let lowerBridge = '[ ';
-    repeatVerifyInputAndAnswer(input, answer);
+    BridgeGame.move(input, answer);
     upperBridge += ']';
     lowerBridge += ']';
 
     MissionUtils.Console.print(upperBridge, lowerBridge)
   },
 
-  //다리 칸 구분 출력하기
-  printSpaceDivision(){
-    upperBridge += '| ';
-    lowerBridge += '| ';
-  },
-
-  //사용자 입력과 정답이 맞는지 검증하기
-  verifyInputAndAnswer(input, answer){
-    if(input[i] == 'U'){
-      upperBridge += this.cmpUD(input[i], answer[i]) + ' ';
-      lowerBridge += '  ';
-    }
-    if(input[i] == 'D'){
-      lowerBridge += this.cmpUD(input[i], answer[i]) + ' ';
-      upperBridge += '  ';
-    }
-  },
-
-  //사용자 입력 개수만큼 검증과정 반복하기
-  repeatVerifyInputAndAnswer(input, answer){
-    for(let i = 0; i < input.length; i++){
-      if(i != 0){
-        this.printSpaceDivision();
-      }
-      this.verifyInputAndAnswer(input, answer);   
-    }
-  },
-
-  //사용자 입력과 정답이 같은지 확인하기
-  cmpUD(input, ans){
-    return input == ans ? 'O':'X';
-  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.

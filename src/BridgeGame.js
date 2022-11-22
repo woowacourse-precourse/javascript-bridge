@@ -18,8 +18,9 @@ class BridgeGame {
       if(i != 0){
         this.printSpaceDivision();
       }
-      this.verifyInputAndAnswer(input, answer);   
+      this.verifyInputAndAnswer(this.input, answer);   
     }
+
   }
 
   //다리 칸 구분 출력하기
@@ -31,11 +32,11 @@ class BridgeGame {
   //사용자 입력과 정답이 맞는지 검증하기
   verifyInputAndAnswer(input, answer){
     if(input[i] == 'U'){
-      upperBridge += this.cmpUD(input[i], answer[i]) + ' ';
+      upperBridge += cmpUD(input[i], answer[i]) + ' ';
       lowerBridge += '  ';
     }
     if(input[i] == 'D'){
-      lowerBridge += this.cmpUD(input[i], answer[i]) + ' ';
+      lowerBridge += cmpUD(input[i], answer[i]) + ' ';
       upperBridge += '  ';
     }
   }
@@ -54,10 +55,7 @@ class BridgeGame {
 
   }
 
-  //사용자가 게임을 종료할 때 사용하는 메서드
-  end(){
 
-  }
 
   /**
    * 게임 성공 여부를 반환하는 메서드
