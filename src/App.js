@@ -31,7 +31,7 @@ class App {
   getRetry(answer) {
     validateRetry(answer);
     if (answer === COMMAND.QUIT) {
-      this.bridgeGame.end();
+      this.endGame();
       return;
     }
     this.bridgeGame.retry(answer);
