@@ -7,7 +7,6 @@ const userInputMessage = require('../constants/userInputMessage');
 const gameOutputMessage = require('../constants/gameOutputMessage');
 const OutputView = require('./OutputView');
 
-
 const Game = new BridgeGame();
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -44,10 +43,10 @@ const InputView = {
 
   successMoving(result) {
     OutputView.sucessOrFailed(true);
-    if (result === 'movingUp'){
+    if (result === 'movingUp') {
       OutputView.printMap('O', ' ');
     }
-    if (result === 'movingDown'){
+    if (result === 'movingDown') {
       OutputView.printMap(' ', 'O');
     }
   },
@@ -55,13 +54,13 @@ const InputView = {
   failMoving(result) {
     OutputView.sucessOrFailed(false);
     if (result === 'movingUpFailed') {
-      OutputView.printMap('X', ' ')
+      OutputView.printMap('X', ' ');
       this.readGameCommand();
-    };
+    }
     if (result === 'movingDownFailed') {
-      OutputView.printMap(' ', 'X')
+      OutputView.printMap(' ', 'X');
       this.readGameCommand();
-    };
+    }
   },
 
   /**
@@ -73,7 +72,7 @@ const InputView = {
         this.validateMovingDirection(movingDirection);
         const result = Game.move(this.bridge, movingDirection, this.gameRound);
         this.checkMovingResult(result);
-        if (result != "movingDownFailed" && result != "movingUpFailed") this.gameRound ++;
+        if (result != 'movingDownFailed' && result != 'movingUpFailed') this.gameRound++;
         this.endGame();
         if (!this.end) this.readMoving();
       } catch (e) {
