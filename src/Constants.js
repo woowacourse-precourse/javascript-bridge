@@ -38,6 +38,7 @@ const ERROR_MESSAGE = Object.freeze({
 
   onlyNumber: `${this.error} 숫자만 입력할 수 있습니다.`,
   betweenRange: `${this.error} 다리 길이는 3부터 20 사이의 숫자여야 합니다.`,
+  onlyRetryOrEnd: `${this.error} R 혹은 Q만 입력할 수 있습니다.`,
 });
 
 module.exports = {

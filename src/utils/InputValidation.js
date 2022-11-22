@@ -17,6 +17,12 @@ const InputValidator = {
       throw new Error(ERROR_MESSAGE.betweenRange);
     }
   },
+
+  retryOrEndValidator(input) {
+    if (input !== STATE_CONSTANT.retry && input !== STATE_CONSTANT.end) {
+      throw new Error(ERROR_MESSAGE.onlyRetryOrEnd);
+    }
+  },
 };
 
 module.exports = {
