@@ -1,5 +1,5 @@
-const { UP } = require('./Command');
-const { CORRECT, WRONG, UNSELECT } = require('./Message').map;
+const { UP } = require('../constants/Command');
+const { CORRECT, WRONG, UNSELECT } = require('../constants/Message').map;
 
 class Map {
   #upperRow;

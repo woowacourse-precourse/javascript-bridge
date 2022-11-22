@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
-const Bridge = require('./Bridge');
-const Map = require('./Map');
-const { RETRY, QUIT } = require('./Command');
+const Bridge = require('../Model/Bridge');
+const Map = require('../Model/Map');
+const { RETRY, QUIT } = require('../constants/Command');
 const { VIEW_NAME, readInput, printOutput } = require('./ViewController');
 
 const { bridgeSize, moving, gameCommand, start, map, result } = VIEW_NAME;

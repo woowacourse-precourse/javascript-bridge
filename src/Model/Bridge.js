@@ -1,5 +1,5 @@
-const { makeBridge } = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
+const { makeBridge } = require('../BridgeMaker');
+const { generate } = require('../BridgeRandomNumberGenerator');
 
 class Bridge {
   #targetBridge;

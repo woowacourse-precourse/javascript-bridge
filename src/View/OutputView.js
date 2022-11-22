@@ -7,7 +7,7 @@ const {
   FAILURE,
   TRY_COUNT,
   map,
-} = require('./Message');
+} = require('../constants/Message');
 
 const { BEGINNING, MIDDLE, END } = map;
 

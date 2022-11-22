@@ -1,10 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { BRIDGE_SIZE, MOVING_COMMAND, GAME_COMMAND } = require('./Message');
+const { BRIDGE_SIZE, MOVING_COMMAND, GAME_COMMAND } = require('../constants/Message');
 const {
   validateBridgeSize,
   validateMovingCommand,
   validateGameCommand,
-} = require('./ErrorHandling');
+} = require('../Controller/ErrorHandling');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.

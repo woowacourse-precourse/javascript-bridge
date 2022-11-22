@@ -1,5 +1,5 @@
-const { readBridgeSize, readMoving, readGameCommand } = require('./InputView');
-const { printStart, printMap, printResult } = require('./OutputView');
+const { readBridgeSize, readMoving, readGameCommand } = require('../View/InputView');
+const { printStart, printMap, printResult } = require('../View/OutputView');
 
 const ViewController = {
   VIEW_NAME: {
