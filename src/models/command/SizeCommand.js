@@ -1,4 +1,5 @@
 const { BRIDGE_RULE, ERROR_MESSAGE } = require('../../constants');
+const CustomError = require('../../utils/CustomError');
 
 const Command = require('./Command');
 
@@ -24,11 +25,11 @@ class SizeCommand extends Command {
    */
   static #validate(command) {
     if (SizeCommand.#isIncludeLetter(command)) {
-      throw ERROR_MESSAGE.NOT_NUMBER;
+      throw new CustomError(ERROR_MESSAGE.NOT_NUMBER);
     }
 
     if (!SizeCommand.#isValid(command)) {
-      throw ERROR_MESSAGE.RULE_SIZE;
+      throw new CustomError(ERROR_MESSAGE.RULE_SIZE);
     }
   }
 

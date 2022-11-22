@@ -1,5 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 
+const CustomError = require('../utils/CustomError');
+
 const BridgeGame = require('../models/BridgeGame');
 const { SizeCommand, MovingCommand, GameCommand } = require('../models/command');
 
@@ -147,12 +149,12 @@ class BridgeGameController {
 
   /**
    * 에러가 발생할 때 사용하는 메서드
-   * @param {string} error
+   * @param {CustomError} error
    * @param {function(callback): void} readLine
    * @param {function(string): void} callback
    */
   static #runError(error, readLine, callback) {
-    printError(error);
+    printError(error.message);
     readLine(callback);
   }
 }

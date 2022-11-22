@@ -1,4 +1,5 @@
 const { ERROR_MESSAGE } = require('../../constants');
+const CustomError = require('../../utils/CustomError');
 
 /**
  * 커맨드를 관리하는 클래스
@@ -25,11 +26,11 @@ class Command {
 
   static validate(command) {
     if (command === '') {
-      throw ERROR_MESSAGE.EMPTY;
+      throw new CustomError(ERROR_MESSAGE.EMPTY);
     }
 
     if (Command.#isSpaceBeforeOrAfter(command)) {
-      throw ERROR_MESSAGE.SPACE;
+      throw new CustomError(ERROR_MESSAGE.SPACE);
     }
   }
 

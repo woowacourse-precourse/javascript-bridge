@@ -21,15 +21,13 @@ const GAME_MESSAGE = Object.freeze({
   TRY_COUNT: '총 시도한 횟수: ',
 });
 
-const ERROR_MESSAGE_BEGINNING = '[ERROR]';
-
 const ERROR_MESSAGE = Object.freeze({
-  EMPTY: `${ERROR_MESSAGE_BEGINNING} 빈 값을 입력하였습니다.`,
-  SPACE: `${ERROR_MESSAGE_BEGINNING} 앞 또는 뒤에 공백을 포함해 입력하였습니다.`,
-  NOT_NUMBER: `${ERROR_MESSAGE_BEGINNING} 입력 값은 숫자여야 합니다.`,
-  RULE_SIZE: `${ERROR_MESSAGE_BEGINNING} 다리의 길이는 ${BRIDGE_RULE.LENGTH_MIN}이상 ${BRIDGE_RULE.LENGTH_MAX}이하의 숫자여야 합니다.`,
-  RULE_MOVING_COMMAND: `${ERROR_MESSAGE_BEGINNING} 이동할 칸 입력 값은 ${GAME_RULE.UPSIDE} 또는 ${GAME_RULE.DOWNSIDE}여야 합니다.`,
-  RULE_GAME_COMMAND: `${ERROR_MESSAGE_BEGINNING} 재시도 여부 입력값은 ${GAME_RULE.RETRY} 또는 ${GAME_RULE.QUIT}여야 합니다.`,
+  EMPTY: '빈 값을 입력하였습니다.',
+  SPACE: '앞 또는 뒤에 공백을 포함해 입력하였습니다.',
+  NOT_NUMBER: '입력 값은 숫자여야 합니다.',
+  RULE_SIZE: `다리의 길이는 ${BRIDGE_RULE.LENGTH_MIN}이상 ${BRIDGE_RULE.LENGTH_MAX}이하의 숫자여야 합니다.`,
+  RULE_MOVING_COMMAND: `이동할 칸 입력 값은 ${GAME_RULE.UPSIDE} 또는 ${GAME_RULE.DOWNSIDE}여야 합니다.`,
+  RULE_GAME_COMMAND: `재시도 여부 입력값은 ${GAME_RULE.RETRY} 또는 ${GAME_RULE.QUIT}여야 합니다.`,
 });
 
 module.exports = { BRIDGE_MESSAGE, GAME_MESSAGE, ERROR_MESSAGE };

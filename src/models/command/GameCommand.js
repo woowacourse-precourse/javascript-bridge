@@ -1,4 +1,5 @@
 const { GAME_RULE, ERROR_MESSAGE } = require('../../constants');
+const CustomError = require('../../utils/CustomError');
 
 const Command = require('./Command');
 
@@ -24,7 +25,7 @@ class GameCommand extends Command {
    */
   static #validate(command) {
     if (!GameCommand.#isValid(command)) {
-      throw ERROR_MESSAGE.RULE_GAME_COMMAND;
+      throw new CustomError(ERROR_MESSAGE.RULE_GAME_COMMAND);
     }
   }
 
