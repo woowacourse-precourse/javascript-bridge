@@ -12,46 +12,44 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(bridge,bridgeGame) {
+  readBridgeSize(bridge, bridgeGame) {
     Console.readLine(COMMAND.INPUT, (bridgeSize) => {
       exception.checkBridgeSize(bridgeSize);
       // if(exception.checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge);
 
       bridge.setBridge(Number(bridgeSize));
       Console.print(bridge.getBridge());
-      this.readMoving(bridge,bridgeGame);
+      this.readMoving(bridge, bridgeGame);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(bridge,bridgeGame) {
+  readMoving(bridge, bridgeGame) {
     Console.readLine(COMMAND.MOVE, (space) => {
       // exception.checkSpace(space);
-      
-      bridgeGame.move(space,bridge);
-      OutputView.printMap(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList());
 
-      if(bridgeGame.isWrong(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList())) return this.readGameCommand(bridge,bridgeGame);
-      if(bridgeGame.getCount() === bridge.getBridge().length) return OutputView.printResult("성공", bridgeGame);
+      bridgeGame.move(space, bridge);
+      OutputView.printMap(bridgeGame);
 
-      return this.readMoving(bridge,bridgeGame);
+      if (bridgeGame.isWrong(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList())) return this.readGameCommand(bridge, bridgeGame);
+      if (bridgeGame.getCount() === bridge.getBridge().length) return OutputView.printResult("성공", bridgeGame);
+
+      return this.readMoving(bridge, bridgeGame);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(bridge,bridgeGame) {
+  readGameCommand(bridge, bridgeGame) {
     Console.readLine(COMMAND.RESTART, (restart) => {
-      if(restart === "R"){
+      if (restart === "R") {
         bridgeGame.retry(bridge);
-        return this.readMoving(bridge,bridgeGame);
+        return this.readMoving(bridge, bridgeGame);
       }
-      if(restart === "Q"){
-        OutputView.printResult("실패", bridgeGame);
-      }
+      if (restart === "Q") OutputView.printResult("실패", bridgeGame);
     });
   },
 };

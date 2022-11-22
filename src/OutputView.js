@@ -9,9 +9,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(upBridgeList,downBridgeList) {
-    Console.print(`${BRIDGE.LEFT} ${upBridgeList.join(` ${BRIDGE.DIVISION} `)} ${BRIDGE.RIGHT}`);
-    Console.print(`${BRIDGE.LEFT} ${downBridgeList.join(` ${BRIDGE.DIVISION} `)} ${BRIDGE.RIGHT}`);
+  printMap(bridgeGame) {
+    const upBridge = bridgeGame.getUpBridgeList();
+    const downBridge = bridgeGame.getDownBridgeList();
+    Console.print(`${BRIDGE.LEFT} ${upBridge.join(` ${BRIDGE.DIVISION} `)} ${BRIDGE.RIGHT}`);
+    Console.print(`${BRIDGE.LEFT} ${downBridge.join(` ${BRIDGE.DIVISION} `)} ${BRIDGE.RIGHT}`);
     Console.print("");
   },
 
@@ -22,7 +24,7 @@ const OutputView = {
    */
   printResult(success, bridgeGame) {
     Console.print(FINAL.RESULT_BRIDGE);
-    this.printMap(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList());
+    this.printMap(bridgeGame);
     Console.print(`${FINAL.RESULT} ${success}`);
     Console.print(`${FINAL.TRY} ${bridgeGame.getCountRetry()}`);
     Console.close();
