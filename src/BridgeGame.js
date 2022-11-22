@@ -65,9 +65,17 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(previousWork) {
-    this.tried += 1;
-    this.undo();
+    this.setUpRetry();
     previousWork();
+  }
+
+  setUpRetry() {
+    this.countTry();
+    this.undo();
+  }
+
+  countTry() {
+    this.tried += 1;
   }
 }
 
