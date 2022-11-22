@@ -12,13 +12,12 @@ const InputView = {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.\n", (answer) => {
       try {
         this.validateBridgeSize(answer);
+        bridgeSize = answer;
       } catch (error) {
         MissionUtils.Console.print(error);
-        this.readBridgeSize();
+        bridgeSize = this.readBridgeSize();
       }
-      bridgeSize = answer;
     });
-
     return bridgeSize;
   },
 
@@ -35,19 +34,15 @@ const InputView = {
    */
   readMoving() {
     let moving = "";
-    MissionUtils.Console.readLine(
-      "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      (answer) => {
-        try {
-          this.validateMoving(answer);
-        } catch (error) {
-          MissionUtils.Console.print(error);
-          this.readMoving();
-        }
+    MissionUtils.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (answer) => {
+      try {
+        this.validateMoving(answer);
         moving = answer;
+      } catch (error) {
+        MissionUtils.Console.print(error);
+        moving = this.readMoving();
       }
-    );
-
+    });
     return moving;
   },
 
@@ -61,19 +56,15 @@ const InputView = {
    */
   readGameCommand() {
     let command = "";
-    MissionUtils.Console.readLine(
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
-      (answer) => {
-        try {
-          this.validateGameCommand(answer);
-        } catch (error) {
-          MissionUtils.Console.print(error);
-          this.readGameCommand();
-        }
+    MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (answer) => {
+      try {
+        this.validateGameCommand(answer);
         command = answer;
+      } catch (error) {
+        MissionUtils.Console.print(error);
+        command = this.readGameCommand();
       }
-    );
-
+    });
     return command;
   },
 
