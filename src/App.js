@@ -1,4 +1,4 @@
-const InputView = require('./InputView');
+const InputView = require('./Ui/InputView');
 class App {
   play() {
     InputView.start();

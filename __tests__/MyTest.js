@@ -1,7 +1,7 @@
 const BridgeMaker = require('../src/BridgeMaker');
 const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
-const InputView = require('../src/InputView');
-const BridgeGame = require('../src/BridgeGame');
+const InputView = require('../src/Ui/InputView');
+const BridgeGame = require('../src/Domain/BridgeGame');
 
 describe('입력값 예외 테스트', () => {
   test.each([['1'], ['31'], ['!'], ['A']])(
