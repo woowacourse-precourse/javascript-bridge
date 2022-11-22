@@ -65,6 +65,7 @@ describe('기능 - 게임 상태 판단 검사', () => {
     const bridgeGame = new BridgeGame(['U', 'U', 'D']);
     bridgeGame.move('U');
     bridgeGame.move('D');
+    bridgeGame.retry();
     expect(bridgeGame.isGameOver()).toBeFalsy();
     expect(bridgeGame.isSuccessful()).toBeFalsy();
   });
