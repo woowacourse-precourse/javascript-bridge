@@ -33,7 +33,7 @@ const Application = {
     return [...target];
   },
 
-  hasContain(criterions) {
+  checkContain(criterions) {
     const copiedCriterions = this.copyArray(criterions);
 
     return function isContain(target) {

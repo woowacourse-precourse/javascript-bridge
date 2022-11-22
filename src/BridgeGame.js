@@ -40,14 +40,14 @@ class BridgeGame {
 
   static checkIncludeUandD(userInput) {
     const INPUT_TARGET = ['U', 'D'];
-    const isIncludeUandD = Application.hasContain(INPUT_TARGET);
+    const isIncludeUandD = Application.checkContain(INPUT_TARGET);
 
     return isIncludeUandD(userInput);
   }
 
   static checkIncludeRandQ(userInput) {
     const INPUT_TARGET = ['R', 'Q'];
-    const isIncludeRandQ = Application.hasContain(INPUT_TARGET);
+    const isIncludeRandQ = Application.checkContain(INPUT_TARGET);
 
     return isIncludeRandQ(userInput);
   }
