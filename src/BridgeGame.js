@@ -7,19 +7,14 @@ const{ MOVING, RETRY, RESULT, CONTROL } = require("./constants/Values");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridgeInformation;
+  
   #stairs;
-  #user;
-  #currentUpsidePosition;
-  #currentDownsidePosition;
+  #player;
   #count;
 
   constructor() {
-    this.#bridgeInformation = [];
-    this.#stairs = {};
-    this.#user = [];
-    this.#currentUpsidePosition = [];
-    this.#currentDownsidePosition = [];
+    this.#stairs = { bridge: [] };
+    this.#player = { step: [], upsides: [], downsides: [] };
     this.#count = 1;
   }
 
@@ -27,17 +22,18 @@ class BridgeGame {
     const validate = new Validate();
     validate.validateBridgeSize(size);
     const bridgeInformation = makeBridge(Number(size), generate);
-    this.#bridgeInformation = bridgeInformation;
+    this.#stairs.bridge = bridgeInformation;
     this.addBridgeCondition();
+    Console.print(this.#player.step);
   }
 
   addBridgeCondition() {
-    let bridgeSize = this.#bridgeInformation.length;
+    let bridgeSize = this.#stairs.bridge.length;
     this.#stairs.upside = new Array(bridgeSize + 1).fill(MOVING.PASS);
     this.#stairs.downside = new Array(bridgeSize + 1).fill(MOVING.PASS);
     for(let index = 0; index < bridgeSize; index++) {
-      if(this.#bridgeInformation[index] === MOVING.UPSIDE_STRING) this.#stairs.downside.splice(index, 1, MOVING.UNPASSED);
-      if(this.#bridgeInformation[index] === MOVING.DOWNSIDE_STRING) this.#stairs.upside.splice(index, 1, MOVING.UNPASSED);
+      if(this.#stairs.bridge[index] === MOVING.UPSIDE_STRING) this.#stairs.downside.splice(index, 1, MOVING.UNPASSED);
+      if(this.#stairs.bridge[index] === MOVING.DOWNSIDE_STRING) this.#stairs.upside.splice(index, 1, MOVING.UNPASSED);
     }
   }
 
@@ -47,20 +43,20 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moving) {
-    let step = this.#user.length;
+    let step = this.#player.step.length;
     if(moving === MOVING.UPSIDE_STRING) this.#stairs.downside.splice(step, 1, MOVING.BLANK);
     if(moving === MOVING.DOWNSIDE_STRING) this.#stairs.upside.splice(step, 1, MOVING.BLANK);
-    this.#currentUpsidePosition = this.#stairs.upside.slice(0, step + 1);
-    this.#currentDownsidePosition = this.#stairs.downside.slice(0, step + 1);
+    this.#player.upsides = this.#stairs.upside.slice(0, step + 1);
+    this.#player.downsides= this.#stairs.downside.slice(0, step + 1);
     this.getup();
     this.getdown();
-    this.#user.push(moving);
+    this.#player.step.push(moving);
   }
 
   getscore() {
-    if(this.#currentUpsidePosition.indexOf(MOVING.UNPASSED) > -1 || this.#currentDownsidePosition.indexOf(MOVING.UNPASSED) > -1) return CONTROL.GAME_OVER;
-    if(this.#user.length !== this.#bridgeInformation.length) return CONTROL.PASS_STEP;
-    if(this.#user.length === this.#bridgeInformation.length) {
+    if(this.#player.upsides.indexOf(MOVING.UNPASSED) > -1 || this.#player.downsides.indexOf(MOVING.UNPASSED) > -1) return CONTROL.GAME_OVER;
+    if(this.#player.step.length !== this.#stairs.bridge.length) return CONTROL.PASS_STEP;
+    if(this.#player.step.length === this.#stairs.bridge.length) {
       this.getRecordSteps();
       this.getSucessValue();
       return CONTROL.GAME_END;
@@ -73,24 +69,24 @@ class BridgeGame {
 
   getSucessValue() {
     let lastStep = this.getRecordSteps();
-    if(this.#currentUpsidePosition.length !== this.#bridgeInformation.length) return RESULT.FAIL;
+    if(this.#player.upsides.length !== this.#stairs.bridge.length) return RESULT.FAIL;
     if(lastStep[0].indexOf(MOVING.UNPASSED) > -1 || lastStep[1].indexOf(MOVING.UNPASSED) > -1) return RESULT.FAIL;
-    if(this.#currentUpsidePosition.length === this.#bridgeInformation.length) return RESULT.SUCCESS;
+    if(this.#player.upsides.length === this.#stairs.bridge.length) return RESULT.SUCCESS;
   }
 
   getup() {
-    return this.#currentUpsidePosition.join(MOVING.JUMP);
+    return this.#player.upsides.join(MOVING.JUMP);
   }
 
   getdown() {
-    return this.#currentDownsidePosition.join(MOVING.JUMP);
+    return this.#player.downsides.join(MOVING.JUMP);
   }
 
   getRecordSteps() {
     let recordAllSteps = [];
     recordAllSteps.push(
-      this.#currentUpsidePosition.join(MOVING.JUMP),
-      this.#currentDownsidePosition.join(MOVING.JUMP)
+      this.#player.upsides.join(MOVING.JUMP),
+      this.#player.downsides.join(MOVING.JUMP)
     );
     return recordAllSteps;
   }
@@ -112,9 +108,7 @@ class BridgeGame {
   }
 
   initialize() {
-    this.#currentUpsidePosition = [];
-    this.#user = [];
-    this.#currentDownsidePosition = [];
+    this.#player = { step: [], upsides: [], downsides: [] };
     this.addBridgeCondition();
   }
 }

@@ -44,7 +44,8 @@ const OutputView = {
   printResult(movingList, result, replay) {
     Console.print(`${OUTPUT.RESULT}`)
     this.printMap(
-      movingList[POSITION_SYMBOLL.UP_STREET], movingList[POSITION_SYMBOLL.DOWN_STREET]
+      movingList[POSITION_SYMBOLL.UP_STREET],
+      movingList[POSITION_SYMBOLL.DOWN_STREET]
     );
     Console.print(`\n${OUTPUT.SUCCESS(result)}`);
     Console.print(OUTPUT.CHALLENGE(replay));
