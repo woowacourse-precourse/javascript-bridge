@@ -11,14 +11,51 @@
  */
 
 class BridgeGame {
-  #bridge;
+  #bridgeInfo;
+  #moveCnt;
+  #moveInfo;
+
+  constructor() {
+    this.#bridgeInfo = [];
+    this.#moveCnt = 0;
+    this.#moveInfo = [];
+  }
+
+  setBridge(bridge) {
+    this.#bridgeInfo = bridge;
+  }
+
+  setMoveCnt(count) {
+    this.#moveCnt = count;
+  }
+
+  printBridge(outputView) {
+    outputView.printMap(this.#moveInfo);
+  }
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+
+  // 1. 실패 : 일치하지 않으면 갈 수 없음
+  // 2. 성공 : 사용자가 입력했을 때 bridgeInfo의 해당 인덱스의 값이 일치하면 갈 수 있음, 일치한다면 moveCnt++
+  // 3. 게임 종료 : 만약에 moveCnt가 다리 길이와 같다면 게임 성공한 것임
+  // 즉, 결과 리턴여부는 1. 실패 / 2. 성공 / 3. 게임 종료 
+  move(moving) {
+    if(this.#bridgeInfo[this.#moveCnt] !== moving) {
+      this.#moveInfo.push({'moving': moving, 'success': false});
+      return 'fail';
+    } else if(this.#moveCnt + 1 === this.#bridgeInfo.length) {
+      this.#moveInfo.push({'moving': moving, 'success': true});
+      return 'success';
+    } else if(this.#bridgeInfo[this.#moveCnt] === moving) {
+      this.#moveInfo.push({'moving': moving, 'success': true});
+      this.#moveCnt += 1;
+      return 'next';
+    }
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
@@ -27,9 +64,6 @@ class BridgeGame {
    */
   retry() {}
 
-  setBridge(bridge) {
-    this.#bridge = bridge;
-  }
 }
 
 module.exports = BridgeGame;

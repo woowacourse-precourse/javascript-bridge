@@ -9,15 +9,38 @@ const { Console } = require('@woowacourse/mission-utils');
  */
 
 const OutputView = {
+  UPPER: [],
+  LOWER: [],
+
   printStart() {
     Console.print('다리 건너기 게임을 시작합니다.\n');
   },
+
+  processMap(move) {
+    const printFlag = move.success ? 'O':'X';
+    if(move.moving === 'U') {
+      OutputView.UPPER.push(printFlag);
+      OutputView.LOWER.push(' ');
+    } else if(move.moving === 'D') {
+      OutputView.UPPER.push(' ');
+      OutputView.LOWER.push(printFlag);
+    }
+  },
+
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(moveInfo) {
+    OutputView.UPPER = [];
+    OutputView.LOWER = [];
+    moveInfo.forEach((move) => {
+      this.processMap(move);
+    })
+    Console.print(`[ ${OutputView.UPPER.join(' | ')} ]`);
+    Console.print(`[ ${OutputView.LOWER.join(' | ')} ]\n`);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
