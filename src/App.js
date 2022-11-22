@@ -37,17 +37,21 @@ class App {
 
   upDown() {
     if (this.#bridgeGame.isGameEnd()) {
-      this.outputView.printResult(
-        this.#bridgeGame.nowBridge,
-        "성공",
-        this.#bridgeGame.tryCount
-      );
-      this.inputView.close();
+      this.successGame();
     }
     this.inputView.readMoving(
       this.upDownCallback.bind(this),
       "이동할 칸을 선택해주세요. (위: U, 아래: D)"
     );
+  }
+
+  successGame() {
+    this.outputView.printResult(
+      this.#bridgeGame.nowBridge,
+      "성공",
+      this.#bridgeGame.tryCount
+    );
+    this.inputView.close();
   }
 
   upDownCallback(upDownInput) {
