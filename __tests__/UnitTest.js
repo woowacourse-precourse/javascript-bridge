@@ -17,6 +17,13 @@ describe("Validator 테스트", () => {
     expect(InputValidator.isValidLength("-22")).toEqual(false);
     expect(InputValidator.isValidLength("22")).toEqual(false);
   });
+
+  test("다리 건너기 입력 유효성 검사", () => {
+    expect(InputValidator.isValidStep("U")).toEqual(true);
+    expect(InputValidator.isValidStep("D")).toEqual(true);
+    expect(InputValidator.isValidStep("a")).toEqual(false);
+    expect(InputValidator.isValidStep("A")).toEqual(false);
+  });
 });
 
 describe("BridgeMaker 테스트", () => {
