@@ -11,7 +11,7 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(MESSAGE.GAME.INPUT, (size) => {
-      makeBridge(size, BridgeRandomNumberGenerator);
+      makeBridge(size, BridgeRandomNumberGenerator.generate);
     });
   },
 
