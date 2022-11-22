@@ -26,20 +26,40 @@ class Controller {
 
   getBirdgeAnswer(sizeNumber){
     this.#answerBirdgeList = BridgeMaker.makeBridge(sizeNumber,generate);
-    // MissionUtils.Console.print(this.#answerBirdgeList)
+    //삭제해야함
+    MissionUtils.Console.print(this.#answerBirdgeList)
     this.getMove()
   }
 
   compare(moveInput){
-    if(this.bridgeGame.move(moveInput,this.#answerBirdgeList)){
-      OutputView.printMap(this.bridgeGame.upList,this.bridgeGame.downList)
-      this.getMove()
-    } else {
-      OutputView.printMap(this.bridgeGame.upList,this.bridgeGame.downList)
-    }
+    const compareMove = this.bridgeGame.move(moveInput,this.#answerBirdgeList);
+
+    
+    OutputView.printMap(this.bridgeGame.upList,this.bridgeGame.downList);
+    if(compareMove === 'END') this.finalResult();
+    else if(compareMove) this.getMove();
+    if(!compareMove) this.getRetryOrStop();
+  }
+  
+
+  getRetryOrStop(){
+    InputView.readGameCommand(this.judgment.bind(this));
   }
 
-
+  judgment(reTryOrStop){
+    if(reTryOrStop === "R"){
+      this.bridgeGame.retry()
+      this.getMove()
+    }
+    if(reTryOrStop === "Q") this.GameStop()
+  }
+  
+  finalResult(){
+    MissionUtils.Console.close();
+  }
+  GameStop(){
+    MissionUtils.Console.close();
+  }
 
 }
 
