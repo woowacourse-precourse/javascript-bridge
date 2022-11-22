@@ -1,8 +1,13 @@
 const InputView = require("../GameIO/InputView");
 const Bridge = require("./Bridge.js");
-const BridgeGame = require("../Library/BridgeGame");
+const BridgeGame = require("./BridgeGame");
 const OutputView = require("../GameIO/OutputView");
-const { MissionUtils } = require("@woowacourse/mission-utils");
+
+const MOVE = {
+  MOVE: "MOVE",
+  RESTART: "RESTART",
+  QUIT: "QUIT",
+};
 
 class Game {
   #bridge;
@@ -26,50 +31,39 @@ class Game {
   }
 
   playAlgorithms(bridgeLength) {
-    let quitResult = true;
-
     for (let moveCount = 0; moveCount < bridgeLength; moveCount++) {
       const DIRECTION = InputView.readMoving();
-      const MOVE_RESULT = this.bridgeGame.move(DIRECTION, moveCount);
 
-      if (!MOVE_RESULT) {
-        quitResult = this.askQuit();
+      const MOVE_RESULT = this.moveGetResult(DIRECTION, moveCount);
+      if (MOVE[MOVE_RESULT] === "R") {
+        moveCount = 0;
       }
-      if (quitResult === false) {
+      if (MOVE[MOVE_RESULT] === "Q") {
         return false;
       }
     }
     return true;
   }
 
-  moveGetResult(moveCount) {
-    const MOVE_RESULT = this.bridgeGame.move(InputView.readMoving(), moveCount);
-    if (MOVE_RESULT) {
-      return true;
-    }
+  moveGetResult(direction, moveCount) {
+    const MOVE_RESULT = this.bridgeGame.move(direction, moveCount);
     if (!MOVE_RESULT) {
       const IS_QUIT = this.askQuit();
-      if (IS_QUIT) {
-        this.getPrintResult();
-        return false;
-      }
-      if (!IS_QUIT) {
-        this.increasePlayCount();
-        this.bridgeGame.retry();
-        return true;
-      }
+      return IS_QUIT;
     }
+    return "M";
   }
 
   askQuit() {
     const IS_QUIT = InputView.readGameCommand();
-
     if (IS_QUIT === "Q") {
-      return true;
+      this.getPrintResult();
     }
     if (IS_QUIT === "R") {
-      return false;
+      this.increasePlayCount();
+      this.bridgeGame.retry();
     }
+    return IS_QUIT;
   }
 
   getPrintResult() {

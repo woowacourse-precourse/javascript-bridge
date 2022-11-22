@@ -9,7 +9,6 @@ const ERROR_MESSAGES = {
 
 const ErrorHandler = {
   tryCatch(result, callback, causation) {
-    let isError = true;
     try {
       if (!result) {
         throw ERROR_MESSAGES[causation];
