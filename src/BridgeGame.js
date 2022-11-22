@@ -79,15 +79,15 @@ class BridgeGame {
   }
 
   moveToUp(state) {
-    const passOrFail = state ? 'O' : 'X';
-    this.#BridgeData.up += ` ${passOrFail} `;
-    this.#BridgeData.down += '   ';
+    const passOrFail = state ? '1' : '0';
+    this.#BridgeData.up += `3${passOrFail}3`;
+    this.#BridgeData.down += '333';
   }
 
   moveToDown(state) {
-    const passOrFail = state ? 'O' : 'X';
-    this.#BridgeData.up += '   ';
-    this.#BridgeData.down += ` ${passOrFail} `;
+    const passOrFail = state ? '1' : '0';
+    this.#BridgeData.up += '333';
+    this.#BridgeData.down += `3${passOrFail}3`;
   }
 
   // static 불가
@@ -129,8 +129,8 @@ class BridgeGame {
 
   divideSpace() {
     if (this.#BridgeData.up.length) {
-      this.#BridgeData.up += '|';
-      this.#BridgeData.down += '|';
+      this.#BridgeData.up += '2';
+      this.#BridgeData.down += '2';
     }
   }
 }

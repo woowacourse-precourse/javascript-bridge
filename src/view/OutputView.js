@@ -11,8 +11,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap({ up, down }) {
-    Console.print(OUTPUT_VIEW.up_bridge(up));
-    Console.print(OUTPUT_VIEW.down_bridge(down));
+    Console.print(OUTPUT_VIEW.up_bridge(this.decode(up)));
+    Console.print(OUTPUT_VIEW.down_bridge(this.decode(down)));
   },
 
   /**
@@ -20,12 +20,26 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(state, { up, down, tryCount }) {
+  printResult({ up, down, tryCount }) {
     Console.print(NEW_LINE + OUTPUT_VIEW.end_game_result_message);
-    Console.print(OUTPUT_VIEW.up_bridge(up));
-    Console.print(OUTPUT_VIEW.down_bridge(down));
-    Console.print(NEW_LINE + OUTPUT_VIEW.state_message(state));
+    Console.print(OUTPUT_VIEW.up_bridge(this.decode(up)));
+    Console.print(OUTPUT_VIEW.down_bridge(this.decode(down)));
+    Console.print(NEW_LINE + OUTPUT_VIEW.state_message(this.inferState(up, down)));
     Console.print(OUTPUT_VIEW.total_tryCount(tryCount));
+  },
+
+  decode(upOrDown) {
+    const PASS = 'O';
+    const FAIL = 'X';
+    const DIVIDE = '|';
+    const SPACE = ' ';
+    return upOrDown.replace(/0/g, FAIL).replace(/1/g, PASS).replace(/2/g, DIVIDE).replace(/3/g, SPACE);
+  },
+
+  inferState(up, down) {
+    const findLastPassFromUp = up[up.length - 2] === '1';
+    const FindLastPassFromDown = down[down.length - 2] === '1';
+    return findLastPassFromUp || FindLastPassFromDown ? '성공' : '실패';
   },
 };
 
