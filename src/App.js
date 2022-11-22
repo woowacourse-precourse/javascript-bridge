@@ -1,6 +1,6 @@
-const BridgeGame = require("./BridgeGame");
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
+const BridgeGame = require('./BridgeGame');
+const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 
 class App {
   play() {
@@ -8,8 +8,4 @@ class App {
     InputView.readBridgeSize();
   }
 }
-
-const app = new App();
-app.play();
-
 module.exports = App;
