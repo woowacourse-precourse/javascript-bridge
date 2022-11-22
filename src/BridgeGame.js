@@ -1,3 +1,9 @@
+const {
+  UP,
+DOWN,
+RIGHT,
+WRONG
+} = require("./utils/constant")
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -41,23 +47,23 @@ class BridgeGame {
   }
 
   moveCompareUpDown(move){
-    if(move==='U'){
+    if(move===UP){
       this.moveUp(move);
     }
-    if(move==='D'){
+    if(move===DOWN){
       this.moveDown(move);
     }
   }
 
   moveUp(move){
-    if(this.#bridge[this.#indexValue] === move) this.#playerUp.push('O')
-    else this.#playerUp.push('X');
+    if(this.#bridge[this.#indexValue] === move) this.#playerUp.push(RIGHT)
+    else this.#playerUp.push(WRONG);
     this.#playerDown.push(" ");
   }
 
   moveDown(move){
-    if(this.#bridge[this.#indexValue] === move) this.#playerDown.push('O')
-    else this.#playerDown.push('X');
+    if(this.#bridge[this.#indexValue] === move) this.#playerDown.push(RIGHT)
+    else this.#playerDown.push(WRONG);
     this.#playerUp.push(" ");
   }
 
