@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeSizeValidation = require("./Validation/BridgeSizeValidation");
-const MovingValidation = require("./validation/MovingValidation");
-const GameCommandValidation = require("./validation/GameCommandValidation");
+const BridgeSizeValidation = require("./BridgeSizeValidation");
+const MovingValidation = require("./MovingValidation");
+const GameCommandValidation = require("./GameCommandValidation");
 const {
   MESSAGE_GET_BRIDGE_SIZE,
   MESSAGE_GET_MOVING,

@@ -1,6 +1,6 @@
-const BridgeSizeValidation = require("../src/Validation/BridgeSizeValidation");
-const MovingValidation = require("../src/validation/MovingValidation");
-const GameCommandValidation = require("../src/validation/GameCommandValidation");
+const BridgeSizeValidation = require("../src/BridgeSizeValidation");
+const MovingValidation = require("../src/MovingValidation");
+const GameCommandValidation = require("../src/GameCommandValidation");
 
 describe("BridgeSizeValidation 객체 테스트", () => {
   test("입력받은 다리 길이의 유효성을 검증하여 예외를 발생시킨다.", () => {
