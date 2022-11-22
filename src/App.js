@@ -6,12 +6,20 @@ const OutputView = require("./OutputView");
 const Constants = require("./Constants");
 
 class App {
+  #gameprocess;
+
   play() {
     OutputView.printStartMessage();
     this.startGame(judgeTryInput(InputView.readBridgeSize()));
   }
 
-  startGame() {}
+  startGame(bridgeLength) {
+    let bridgesize = BridgeMaker.makeBridge(
+      bridgeLength,
+      BridgeRandomNumberGenerator.generate
+    );
+    this.#gameprocess = new BridgeGame(bridgesize);
+  }
 
   static #tryInput(readBridgeSize) {
     try {
