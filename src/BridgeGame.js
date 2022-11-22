@@ -24,14 +24,20 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    Validation.validateCommand(['U','D'], ERROR.notGameCommand, direction)
+    try{
+      Validation.validateCommand(['U','D'], ERROR.notPlayCommand, direction)
+      this.decideSuccess(direction)
+    }catch(error){
+      this.#bridgeController.printError(error, this.#bridgeController.moveBlock ,this)
+    }
+  }
+  decideSuccess(direction){
     if (this.#bridgeBoard.moveTo(direction)) {
       this.clearRound();
     }else{
       this.faildRound(direction);
     }
   }
-
   clearRound(){
     this.#bridgeBoard.movePlayer();
     if(this.#bridgeBoard.isLastRound()){
@@ -56,6 +62,11 @@ class BridgeGame {
   }
 
   setGameCommand(command){
+    try{
+      Validation.validateCommand(['R','Q'], ERROR.notGameCommand, command)
+    }catch(error){
+      this.#bridgeController.printError(error, this.#bridgeController.readGameCommand ,this)
+    }
     if(command === 'Q'){
       this.#bridgeController.close()
     }else{
@@ -77,11 +88,11 @@ class BridgeGame {
   play(size) {
     try{
       this.validateSize(size)   
+      this.#bridgeBoard.makeBoard(size);
+      this.#bridgeController.moveBlock(this)
     }catch(error){
-      this.#bridgeController.printError(error, this)
+      this.#bridgeController.printError(error, this.#bridgeController.readSize,this)
     }
-    this.#bridgeBoard.makeBoard(size);
-    this.#bridgeController.moveBlock(this)
   }
   
   validateSize(size){

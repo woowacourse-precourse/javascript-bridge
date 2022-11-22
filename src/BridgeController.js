@@ -3,6 +3,10 @@ const OutputView = require('./OutputView')
 class BridgeController{
     startGame(bridgeGame){
         OutputView.printStart()
+        this.readSize(bridgeGame)
+    }
+
+    readSize(bridgeGame){
         InputView.readBridgeSize(bridgeGame);
     }
 
