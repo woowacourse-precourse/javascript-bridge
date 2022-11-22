@@ -5,6 +5,9 @@ const { Console } = require("@woowacourse/mission-utils");
 const OutputView = {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
+   * @param {Object} map 현재까지 이동한 다리의 상태를 지도 형식으로 만든 객체
+   * @param {string} map.upper 다리 윗줄에 해당하는 지도
+   * @param {string} map.lower 다리 아랫줄에 해당하는 지도
    */
   printMap(map) {
     Console.print(`${map.upper}\n${map.lower}`);
@@ -12,6 +15,11 @@ const OutputView = {
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
+   * @param {Object} map 현재까지 이동한 다리의 상태를 지도 형식으로 만든 객체
+   * @param {string} map.upper 다리 윗줄에 해당하는 지도
+   * @param {string} map.lower 다리 아랫줄에 해당하는 지도
+   * @param {number} tryNum 총 시도 횟수
+   * @param {string} result 게임의 성공 여부
    */
   printResult(map, tryNum, result) {
     Console.print(
@@ -29,6 +37,7 @@ const OutputView = {
 
   /**
    * 에러 메세지를 출력한다.
+   * @param {string} errorMessage 에러가 발생했을 때 원인에 대한 메세지
    */
   printError(errorMessage) {
     Console.print(errorMessage);

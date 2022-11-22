@@ -9,6 +9,7 @@ const {
 const ValidateInput = {
   /**
    * 다리의 길이가 3~20의 숫자인지 검사
+   * @param {number} size 입력받은 다리 길이
    */
   bridgeSize(size) {
     if (isNaN(size)) throw new Error(BRIDGE_ERROR.notANumber);
@@ -18,6 +19,7 @@ const ValidateInput = {
 
   /**
    * 이동할 칸이 U/D인지 검사
+   * @param {string} move 입력받은 이동 칸
    */
   moving(move) {
     if (move !== "U" && move !== "D") throw new Error(MOVE_ERROR.wrongChar);
@@ -25,6 +27,7 @@ const ValidateInput = {
 
   /**
    * 재시도 여부가 R/Q인지 검사
+   * @param {string} response 입력받은 재시도 여부
    */
   gameCommand(response) {
     if (response !== "Q" && response !== "R")
