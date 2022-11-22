@@ -14,8 +14,7 @@ const InputView = {
    */
   readBridgeSize(bridge, bridgeGame) {
     Console.readLine(COMMAND.INPUT, (bridgeSize) => {
-      exception.checkBridgeSize(bridgeSize);
-      // if(exception.checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge);
+      if(exception.checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge);
 
       bridge.setBridge(Number(bridgeSize));
       Console.print(bridge.getBridge());
