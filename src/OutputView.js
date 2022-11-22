@@ -34,6 +34,7 @@ const OutputView = {
       `\n게임 성공 여부: ${userGame.getFinish() ? "성공" : "실패"}`
     );
     Console.print(`총 시도한 횟수: ${userGame.getCount()}`);
+    Console.close();
   },
 };
 
