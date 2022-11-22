@@ -26,7 +26,6 @@ class BridgeGame {
     else this.drawBridge(movingStep, BRIDGE_SHAPE.FAILURE);
 
     this.currentStep++;
-    OutputView.printMap(this.upLineOfBridge, this.downLineOfBridge);
 
     if (!this.state) return InputView.readGameCommand(this);
     if (this.currentStep === this.bridgeSize) return OutputView.printResult(this.upLineOfBridge, this.downLineOfBridge, SUCCESS_WORD, this.try);
@@ -47,6 +46,7 @@ class BridgeGame {
       this.upLineOfBridge += BRIDGE_SHAPE.BLANK;
       this.downLineOfBridge += bridgeShape;
     }
+    OutputView.printMap(this.upLineOfBridge, this.downLineOfBridge);
   }
 
   delimiter() {
