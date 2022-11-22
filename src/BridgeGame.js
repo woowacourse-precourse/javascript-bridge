@@ -11,20 +11,15 @@ class BridgeGame {
   #try;
   #result;
 
-  constructor() {
+  constructor(size) {
     this.#map = {
       upStair: [],
       downStair: [],
     };
-    this.#bridge = [];
+    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomGenerator.generate);
     this.#phase = 1;
     this.#try = 1;
     this.#result = "실패";
-  }
-
-  makeBridge(size) {
-    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomGenerator.generate);
-    return this.#bridge;
   }
 
   pushResult(direction) {

@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const BridgeGame = require("./BridgeGame");
 const { CONSOLE_MESSAGE } = require("./constants/Message");
 const OutputView = require("./OutputView");
 const Validator = require("./utils/Validation");
@@ -24,8 +25,8 @@ const InputView = {
 
   readBridgeSize(bridgeGame) {
     this.wrappingInput(CONSOLE_MESSAGE.INPUT_BRIDGE_LENGTH, (size) => {
+      const bridgeGame = new BridgeGame(size);
       Validator.validateBridgeSize(size);
-      bridgeGame.makeBridge(size);
       this.readMoving(bridgeGame);
     });
   },
