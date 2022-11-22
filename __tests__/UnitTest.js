@@ -68,4 +68,18 @@ describe('BridgeGame테스트', () => {
       });
     });
   });
+
+  describe('isMoved 메서드', () => {
+    beforeEach(() => {
+      bridgeGame.bridgeStore = new BridgeStore(['U', 'D', 'U'], 1);
+    });
+
+    test('올바른 이동 확인', () => {
+      expect(bridgeGame.isMoved('U')).toBeTruthy();
+    });
+
+    test('올바르지 않은 이동 확인', () => {
+      expect(bridgeGame.isMoved('D')).toBeFalsy();
+    });
+  });
 });
