@@ -66,6 +66,9 @@ class BridgeGame {
     this.#map = {up:[], down:[]}
     this.#result.count++
   }
+  getResult(){
+    return this.#result
+  }
 }
 
 module.exports = BridgeGame;
