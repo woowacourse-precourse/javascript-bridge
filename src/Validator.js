@@ -21,7 +21,7 @@ class Validator {
 
   #format(regExp, input) {
     if (!regExp.test(input)) {
-      throw new InputError(`${InputError.MESSAGE.FORMAT}`);
+      throw new InputError(InputError.MESSAGE.FORMAT);
     }
   }
 
@@ -30,7 +30,7 @@ class Validator {
 
     this.#format(regExp, input);
     if (input < 3 || input > 20) {
-      throw new InputError(`${InputError.MESSAGE.BRIDGE_SIZE}`);
+      throw new InputError(InputError.MESSAGE.BRIDGE_SIZE);
     }
   }
 
@@ -40,7 +40,7 @@ class Validator {
 
     this.#format(regExp, input);
     if (!directions.has(input)) {
-      throw new InputError(`${InputError.MESSAGE.MOVING}`);
+      throw new InputError(InputError.MESSAGE.MOVING);
     }
   }
 
@@ -50,7 +50,7 @@ class Validator {
 
     this.#format(regExp, input);
     if (!commands.has(input)) {
-      throw new InputError(`${InputError.MESSAGE.GAME_COMMAND}`);
+      throw new InputError(InputError.MESSAGE.GAME_COMMAND);
     }
   }
 }
