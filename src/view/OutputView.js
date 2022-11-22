@@ -19,6 +19,7 @@ const OutputView = {
 
     Console.print(upside);
     Console.print(downside);
+    Console.print('');
   },
 
   /**
