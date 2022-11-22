@@ -15,10 +15,10 @@ class App {
 
   play() {
     OutputView.printMessage(message.GAME_START);
-    InputView.readBridgeSize(this.handleInputLength.bind(this));
+    InputView.readBridgeSize(this.handleInputBridgeSize.bind(this));
   }
 
-  handleInputLength(input) {
+  handleInputBridgeSize(input) {
     try {
       this.checkValid(
         input,
@@ -29,7 +29,7 @@ class App {
       InputView.readMoving(this.handleInputStep.bind(this));
     } catch (error) {
       OutputView.printMessage(error.message);
-      InputView.readBridgeSize(this.handleInputLength.bind(this));
+      InputView.readBridgeSize(this.handleInputBridgeSize.bind(this));
     }
   }
 
