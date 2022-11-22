@@ -33,8 +33,15 @@ const InputView = {
       Console.print("[ERROR] 다리 길이는 숫자여야 합니다. 다시 입력해 주세요!");
       this.readBridgeSize();
     }
-
-
+  },
+  rangeValidation(answer) {
+    if (answer < 3 || answer > 20) {
+      Console.print(
+        "[ERROR] 다리 길이는 3이상 20 이하의 숫자만 입력 가능합니다. 다시 입력해 주세요!"
+      );
+      this.readBridgeSize();
+    }
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
