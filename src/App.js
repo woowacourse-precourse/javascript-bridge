@@ -1,4 +1,4 @@
-const InputView = require('./Ui/InputView');
+const InputView = require('./UiLogic/InputView');
 class App {
   play() {
     InputView.start();
