@@ -54,7 +54,7 @@ describe('다리 현황 출력 테스트', () => {
 
     // 마지막에 오답, 게임종료 선택
     mockQuestions(['3', 'U', 'D', 'D', 'Q']); 
-    let app = new App();
+    const app = new App();
     app.play();
     app.printBridge();
 

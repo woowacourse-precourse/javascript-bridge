@@ -72,7 +72,7 @@ describe('최종 결과에 대한 단위테스트', () => {
 
     mockRandoms(['1', '0', '1']);
     mockQuestions(['3', 'U', 'D', 'D','R','D','R','U', 'U', 'Q']);
-    let app = new App();
+    const app = new App();
     app.play();
 
     let indexForCompare = [
