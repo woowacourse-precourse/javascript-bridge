@@ -1,6 +1,5 @@
 const { printMap, printResult } = require('./View/OutputView');
-const UP = 'U';
-const DOWN = 'D';
+const { COMMAND } = require('../constants/Message');
 const RESULT_CHARACTER = {
   OPEN: '[',
   CLOSE: ']',
@@ -16,11 +15,19 @@ class Result {
 
   constructor(bridge, index, bool) {
     this.#status = bool;
-    this.#result = this.addResult(bridge, UP, index);
-    this.#result += this.addResultLast(bridge.getbridgePart(index), bool, UP);
+    this.#result = this.addResult(bridge, COMMAND.UP, index);
+    this.#result += this.addResultLast(
+      bridge.getbridgePart(index),
+      bool,
+      COMMAND.UP
+    );
     this.#result += '\n';
-    this.#result += this.addResult(bridge, DOWN, index);
-    this.#result += this.addResultLast(bridge.getbridgePart(index), bool, DOWN);
+    this.#result += this.addResult(bridge, COMMAND.DOWN, index);
+    this.#result += this.addResultLast(
+      bridge.getbridgePart(index),
+      bool,
+      COMMAND.DOWN
+    );
     return this.#result;
   }
 

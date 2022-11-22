@@ -1,7 +1,4 @@
-const UPDOWN = {
-  UP: 'U',
-  DOWN: 'D',
-};
+const { COMMAND } = require('../constants/Message');
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -15,10 +12,10 @@ const BridgeMaker = {
     let solutionBridge = [];
     for (let index = 0; index < size; index++) {
       if (Number(generateRandomNumber())) {
-        solutionBridge.push(UPDOWN.UP);
+        solutionBridge.push(COMMAND.UP);
         continue;
       }
-      solutionBridge.push(UPDOWN.DOWN);
+      solutionBridge.push(COMMAND.DOWN);
     }
     return solutionBridge;
   },
