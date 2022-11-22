@@ -33,6 +33,7 @@ class Controller {
 
   #validatorBridgeSize (size) {
     if (Validator.validatorBridgeLength(size)) {
+      OutputView.printBlankLine();
       this.#createPattern(size);
     }
   }
