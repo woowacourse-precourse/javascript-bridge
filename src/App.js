@@ -33,6 +33,10 @@ class App {
     }
   }
 
+  gameEnd() {
+    resetCount();
+    Console.close();
+  }
 
   makeBridgeBase() {
     bridgeSize=readBridgeSize()
