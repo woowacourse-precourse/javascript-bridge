@@ -5,6 +5,7 @@ class Bridge {
   constructor() {
     this.bridge = [];
     this.userSpaces = [];
+    this.count = 0;
   }
 
   /**
@@ -26,6 +27,10 @@ class Bridge {
    */
   initSpace = () => {
     this.userSpaces = [];
+  };
+
+  addCount = () => {
+    this.count++;
   };
 }
 

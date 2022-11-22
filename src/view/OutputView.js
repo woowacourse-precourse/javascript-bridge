@@ -30,12 +30,13 @@ const OutputView = {
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    */
-  printResult(map, result) {
+  printResult(map, result, count) {
     Console.print("최종 게임 결과");
     Console.print(map.firstLine);
     Console.print(map.secondLine);
     Console.print("");
     Console.print(`게임 성공 여부: ${result === "success" ? "성공" : "실패"}`);
+    Console.print(`총 시도한 횟수: ${count}`);
   },
 };
 
