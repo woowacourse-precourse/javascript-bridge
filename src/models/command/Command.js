@@ -1,5 +1,9 @@
 const { ERROR_MESSAGE } = require('../../constants');
 
+/**
+ * 커맨드를 관리하는 클래스
+ * @extends Command
+ */
 class Command {
   #command;
 

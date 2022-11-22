@@ -1,7 +1,7 @@
 const Bridge = require('./Bridge');
+const BridgeGameStatus = require('./status/BridgeGameStatus');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const BridgeGameStatus = require('./status/BridgeGameStatus');
 
 const BridgeMaps = require('./map/BridgeMaps');
 const { SizeCommand, MovingCommand } = require('./command');

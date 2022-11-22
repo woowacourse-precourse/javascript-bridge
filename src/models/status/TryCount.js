@@ -1,3 +1,7 @@
+/**
+ * 다리 건너기 게임 시도 횟수 상태 클래스
+ * @class
+ */
 class TryCount {
   static #INITIAL_STATE = 0;
 

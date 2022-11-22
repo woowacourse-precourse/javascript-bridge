@@ -1,3 +1,7 @@
+/**
+ * 다리 건너기 게임 위치 상태 클래스
+ * @class
+ */
 class Location {
   static #INITIAL_STATE = -1;
 

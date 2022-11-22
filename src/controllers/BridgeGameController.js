@@ -6,6 +6,10 @@ const { SizeCommand, MovingCommand, GameCommand } = require('../models/command')
 const { readBridgeSize, readMoving, readGameCommand } = require('../views/InputView');
 const { printMap, printResult, printError } = require('../views/OutputView');
 
+/**
+ * 다리 건너기 게임 컨트롤러 클래스
+ * @class
+ */
 class BridgeGameController {
   /**
    * 게임 타입
