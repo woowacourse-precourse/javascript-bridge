@@ -10,39 +10,71 @@ class App {
   #BridgeGame = new BridgeGame();
 
   /**
+   * 게임 오버 시 재시도 또는 종료를 처리하는 메소드
+   *
    * @param {string} input
    */
-  #getMoveDirection(input) {
-    Validation.Game(input, 'DIRECTION');
+  #getGameCommand(input) {
+    try {
+      Validation.Game(input, 'GAMESTATUS');
 
-    const moveResult = this.#BridgeGame.move(input);
-    OutputView.printMap(moveResult);
-
-    switch (moveResult.flag) {
-      case 'GAME_OVER':
-        // TODO: 오답 입력으로 재시작, 종료를 물어보는 경우
-        break;
-      case 'GAME_END':
-        // TODO: 게임이 완전히 종료된 경우
-        break;
-      case 'CONTINUE':
+      if (input === 'R') {
+        this.#BridgeGame.retry();
         InputView.readMoving(this.#getMoveDirection.bind(this));
-        break;
-      default:
-        throw new BridgeGameError('게임 진행에 오류가 발생했습니다.');
+      } else OutputView.printResult(this.#BridgeGame.quit());
+    } catch (err) {
+      OutputView.printMessage(err.message);
+      InputView.readGameCommand(this.#getGameCommand.bind(this));
     }
   }
 
   /**
+   * 다리 이동 시 방향을 입력받아 처리하는 메소드
+   *
+   * @param {string} input
+   */
+  #getMoveDirection(input) {
+    try {
+      Validation.Game(input, 'DIRECTION');
+      const moveResult = this.#BridgeGame.move(input);
+      OutputView.printMap(moveResult);
+
+      switch (moveResult.flag) {
+        case 'GAME_OVER':
+          InputView.readGameCommand(this.#getGameCommand.bind(this));
+          break;
+        case 'GAME_END':
+          OutputView.printResult(moveResult);
+          break;
+        case 'CONTINUE':
+          InputView.readMoving(this.#getMoveDirection.bind(this));
+          break;
+        default:
+          throw new BridgeGameError('게임 진행에 오류가 발생했습니다.');
+      }
+    } catch (err) {
+      OutputView.printMessage(err.message);
+      InputView.readMoving(this.#getMoveDirection.bind(this));
+    }
+  }
+
+  /**
+   * 다리 크기를 입력받아 초기 설정을 진행하는 메소드
+   *
    * @param {string} input
    */
   #getBridgeSize(input) {
-    Validation.Bridge(input);
+    try {
+      Validation.Bridge(input);
 
-    const bridgeSize = Number(input);
-    this.#BridgeGame.init(bridgeSize);
+      const bridgeSize = Number(input);
+      this.#BridgeGame.init(bridgeSize);
 
-    InputView.readMoving(this.#getMoveDirection.bind(this));
+      InputView.readMoving(this.#getMoveDirection.bind(this));
+    } catch (err) {
+      OutputView.printMessage(err.message);
+      InputView.readBridgeSize(this.#getBridgeSize.bind(this));
+    }
   }
 
   play() {
@@ -50,7 +82,5 @@ class App {
     InputView.readBridgeSize(this.#getBridgeSize.bind(this));
   }
 }
-
-new App().play();
 
 module.exports = App;
