@@ -34,7 +34,7 @@ class Controller {
         printError(error);
         this.play();
       }
-    })
+    });
   }
 
   showMap() {
@@ -58,15 +58,12 @@ class Controller {
     readGameCommand((retry) => {
       try{
         const isRetry = this.#bridgeGame.retry(retry);
-        if(isRetry){
-          this.play();
-        }
-        this.end();
+        isRetry? this.play() : this.end();
       }catch(error){
         printError(error);
         this.askReplay();
       }
-    })
+    });
   }
   end(isMatch){
     printResultMap();
