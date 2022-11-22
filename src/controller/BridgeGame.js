@@ -2,9 +2,9 @@ const OutputView = require('../view/OutputView');
 const InputView = require('../view/InputView');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeNumber = require('../BridgeRandomNumberGenerator');
-const Validation = require('../constant/Validation');
+const Validation = require('../utils/Validation');
 const BridgeRecorder = require('../model/BridgeRecorder');
-const { UTIL, INPUT } = require('../constant/constant');
+const { UTIL, INPUT } = require('../utils/constant');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
