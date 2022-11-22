@@ -85,3 +85,41 @@ describe("다리 건너기 테스트", () => {
     runException(["a"]);
   });
 });
+
+const runExceptionForRange = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  const app = new App();
+
+  app.play();
+
+  expectLogContains(getOutput(logSpy), ["[ERROR]", "범위"]);
+};
+
+const runExceptionForInteger = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  const app = new App();
+
+  app.play();
+
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
+
+describe("(추가) 비지니스 로직 예외 테스트", () => {
+  test("다리의 길이가 3보다 작을 때 에러 문구 출력", () => {
+    runExceptionForRange(["2"]);
+  });
+
+  test("다리의 길이가 20보다 클 때 에러 문구 출력", () => {
+    runExceptionForRange(["21"]);
+  });
+
+  test("다리의 길이가 소수일 때 에러 문구 출력", () => {
+    runExceptionForInteger(["3.4"]);
+  });
+
+  test("U/D 이외의 문자 입력 시 에러 문구 출력", () => {
+    runExceptionForInteger(["3", "A"]);
+  });
+});
