@@ -1,5 +1,9 @@
+const BrideGameController = require("./controller/BridgeGameController");
+
 class App {
-  play() {}
+  play() {
+    new BrideGameController().start();
+  }
 }
 
 module.exports = App;
