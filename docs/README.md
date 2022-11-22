@@ -120,6 +120,10 @@
 
 ## 기능 테스트 목록
 
+* [x] Validation.js 테스트
+* [x] Application.js 테스트
+* [x] BridgeMaker.js 테스트
+
 ## 마무리
 
 ## 참고사항
