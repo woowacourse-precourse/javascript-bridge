@@ -9,7 +9,6 @@ class App {
     this.inputView = Object.create(InputView);
     this.outputView = Object.create(OutputView);
     this.game = null;
-    this.gameCount = 0;
   }
 
   play() {

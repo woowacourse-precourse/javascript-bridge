@@ -13,6 +13,7 @@ class BridgeGame {
       length,
       BridgeRandomNumberGenerator.generate,
     );
+    this.gameCount = 1;
     this.count = 0;
   }
   /**
@@ -36,7 +37,7 @@ class BridgeGame {
     this.outputView.printMap(this.count, true, this.bridge);
 
     if (this.bridge.length === this.count) {
-      // 게임 종료
+      this.outputView.printResult(true, this.gameCount);
       return;
     }
 
