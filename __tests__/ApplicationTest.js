@@ -52,15 +52,15 @@ const expectBridgeOrder = (received, upside, downside) => {
 };
 
 describe("다리 건너기 테스트", () => {
-  // test("다리 생성 테스트", () => {
-  //   const randomNumbers = [1, 0, 0];
-  //   const mockGenerator = randomNumbers.reduce((acc, number) => {
-  //     return acc.mockReturnValueOnce(number);
-  //   }, jest.fn());
+  test("다리 생성 테스트", () => {
+    const randomNumbers = [1, 0, 0];
+    const mockGenerator = randomNumbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, jest.fn());
 
-  //   const bridge = BridgeMaker.makeBridge(3, mockGenerator);
-  //   expect(bridge).toEqual(["U", "D", "D"]);
-  // });
+    const bridge = BridgeMaker.makeBridge(3, mockGenerator);
+    expect(bridge).toEqual(["U", "D", "D"]);
+  });
 
   test("기능 테스트", () => {
     const logSpy = getLogSpy();
@@ -81,7 +81,7 @@ describe("다리 건너기 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
-  // test("예외 테스트", () => {
-  //   runException(["a"]);
-  // });
+  test("예외 테스트", () => {
+    runException(["a"]);
+  });
 });

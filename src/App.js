@@ -5,6 +5,8 @@ const { generate } = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const Validation = require('./Validation');
+const {ERROR_MESSAGE, KEY_VALUE, WAY} = require('./constant');
+const { RESTART_KEY, QUIT_KEY} = KEY_VALUE;
 
 class App {
 
@@ -49,8 +51,8 @@ class App {
   }
   getGameCommand(key){
     InputView.readGameCommand((command) => {
-      if(command === 'R') return this.restart();
-      if(command === 'Q') return this.quit(key);
+      if(command === RESTART_KEY) return this.restart();
+      if(command === QUIT_KEY) return this.quit(key);
     });
   }
   restart(){
