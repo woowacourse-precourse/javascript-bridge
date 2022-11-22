@@ -1,4 +1,4 @@
-const Validator = require('../src/Validation/Validator');
+const Validator = require('../src/Model/Validator');
 const { ERROR } = require('../src/Constants');
 
 describe('입력값 유효성 검증 테스트', () => {
