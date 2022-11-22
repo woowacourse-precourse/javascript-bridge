@@ -56,6 +56,10 @@ const OutputView = {
   printResult(choices, bridge, retry) {
     MissionUtils.Console.print("최종게임결과\n");
     this.printMap(choices, bridge);
+    MissionUtils.Console.print(
+      `\n게임 성공 여부: ${choices.length === bridge.length ? 성공 : 실패}`
+    );
+    MissionUtils.Console.print(`\n총 시도한 횟수: ${retry}`);
   },
 };
 
