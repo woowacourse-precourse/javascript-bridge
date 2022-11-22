@@ -52,7 +52,13 @@ class App {
         Console.print(error);
         return this.inputRetryQuit();
       }
+      if (retryQuit === "R") return this.retryGame();
     });
+  }
+
+  retryGame() {
+    this.bridgeGame.retry();
+    this.inputUpsideDown();
   }
 }
 
