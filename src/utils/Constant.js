@@ -2,8 +2,6 @@ const ERROR = "[ERROR]";
 const NEW_LINE = "\n";
 
 const MAP = Object.freeze({
-  leftWall: "[ ",
-  rightWall: " ]",
   divider: " | ",
   blank: " ",
   correct: "O",

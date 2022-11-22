@@ -1,4 +1,4 @@
-const BridgeMaker = require("../utils/BridgeMaker");
+const BridgeMaker = require("../BridgeMaker");
 const { generate } = require("../utils/BridgeRandomNumberGenerator");
 const { LETTER, NEW_LINE, MAP } = require("../utils/Constant");
 
