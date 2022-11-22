@@ -11,8 +11,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     Validate.readBridgeSizeValidate(size);
-    size = parseInt(size);
-    const tempBridge = new Array(size).fill(0);
+    const tempBridge = new Array(parseInt(size)).fill(0);
     const bridge = tempBridge.map((elem) => {
       const tempNumber = generateRandomNumber();
 

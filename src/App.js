@@ -1,3 +1,4 @@
+const { MissionUtils } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandom = require("./BridgeRandomNumberGenerator");
@@ -19,6 +20,6 @@ class App {
     }
   }
 }
-// const app = new App();
-// app.play();
+const app = new App();
+app.play();
 module.exports = App;

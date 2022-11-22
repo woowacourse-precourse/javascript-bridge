@@ -5,9 +5,9 @@ const OutputView = require("./OutputView");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  tryCnt;
-  currentIdx;
-  isPlaying;
+  #tryCnt;
+  #currentIdx;
+  #isPlaying;
 
   constructor(bridge) {
     this.tryCnt = 1;
@@ -75,13 +75,16 @@ class BridgeGame {
       this.isPlaying = false;
     }
   }
+
   wrongAnswer(direction) {
     this.makeGameStatus(direction, false);
     this.isPlaying = false;
   }
+
   gameClear() {
     OutputView.printResult(this.bridgeStatics, true, this.tryCnt);
   }
+
   makeGameStatus(direction, isCorrect) {
     if (direction === "U") this.makeUpBridge(isCorrect);
     if (direction === "D") this.makeDownBridge(isCorrect);
@@ -97,7 +100,6 @@ class BridgeGame {
     if (!isCorrect) {
       this.bridgeStatics[0] = (this.bridgeStatics[0] || []).concat(["X"]);
       this.bridgeStatics[1] = (this.bridgeStatics[1] || []).concat([" "]);
-      return;
     }
   }
   makeDownBridge(isCorrect) {
@@ -109,7 +111,6 @@ class BridgeGame {
     if (!isCorrect) {
       this.bridgeStatics[0] = (this.bridgeStatics[0] || []).concat([" "]);
       this.bridgeStatics[1] = (this.bridgeStatics[1] || []).concat(["X"]);
-      return;
     }
   }
 }
