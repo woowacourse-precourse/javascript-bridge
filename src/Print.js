@@ -26,6 +26,9 @@ class Print {
     Console.print(upside.join(''));
     Console.print(downSide.join(''));
   }
+  static ErrorMessage(error) {
+    Console.print(error);
+  }
 }
 
 module.exports = Print;
