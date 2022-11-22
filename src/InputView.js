@@ -8,12 +8,23 @@ const InputView = {
    */
   readBridgeSize() {
     let size;
-    MissionUtils.Console.readLine("다리의 길이를 입력해주세요.", (answer) => {
-      size = answer;
-    });
+    try {
+      MissionUtils.Console.readLine("다리의 길이를 입력해주세요.", (answer) => {
+        size = answer;
+        this.validateSize(answer);
+      });
+    } catch (e) {
+      MissionUtils.Console.print(e.message);
+      return "err";
+    }
     return size;
   },
 
+  validateSize(size) {
+    if (isNaN(Number(size))) throw new Error("[ERROR] 숫자를 입력해야 합니다.");
+    if (size < 3 && 20 < size)
+      throw new Error("[ERROR] 3이상 20이하의 size를 입력해야 합니다.");
+  },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
