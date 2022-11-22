@@ -5,7 +5,7 @@ describe("BridgeGame 로직 테스트", () => {
     const brideGame = new BridgeGame();
     brideGame.ready(3);
     brideGame.move("U");
-    result = brideGame.getup();
+    result = brideGame.getUp();
 
     expect(result).toBeDefined();
   });

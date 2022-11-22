@@ -41,11 +41,8 @@ class App {
     try {
       this.validate.validateMove(moving);
       this.brideGame.move(moving);
-      let upStep = this.brideGame.getup();
-      let downStep = this.brideGame.getdown();
-      OutputView.printMap(upStep,downStep);
-      let firstDesideKey = this.brideGame.getscore();
-      this.decideControl(firstDesideKey);
+      OutputView.printMap(this.brideGame.getUp(),this.brideGame.getDown());
+      this.decideControl(this.brideGame.getScore());
     } catch(error) {
       this.retryRequestMoving();
     }

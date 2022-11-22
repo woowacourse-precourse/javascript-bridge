@@ -2,7 +2,7 @@ const Validate = require("./Validate");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const{ MOVING, RETRY, RESULT, CONTROL } = require("./constants/Values");
-const{ Console } = require("@woowacourse/mission-utils");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -17,6 +17,7 @@ class BridgeGame {
     this.#stairs = { bridge: [] };
     this.#player = { step: [], upsides: [], downsides: [] };
     this.#count = 1;
+
   }
 
   ready(size) {
@@ -25,7 +26,6 @@ class BridgeGame {
     const bridgeInformation = makeBridge(Number(size), generate);
     this.#stairs.bridge = bridgeInformation;
     this.addBridgeCondition();
-    Console.print(this.#stairs.bridge)
   }
 
   addBridgeCondition() {
@@ -49,12 +49,12 @@ class BridgeGame {
     if(moving === MOVING.DOWNSIDE_STRING) this.#stairs.upside.splice(step, 1, MOVING.BLANK);
     this.#player.upsides = this.#stairs.upside.slice(0, step + 1);
     this.#player.downsides= this.#stairs.downside.slice(0, step + 1);
-    this.getup();
-    this.getdown();
+    this.getUp();
+    this.getDown();
     this.#player.step.push(moving);
   }
 
-  getscore() {
+  getScore() {
     if(this.#player.upsides.indexOf(MOVING.UNPASSED) > -1 || this.#player.downsides.indexOf(MOVING.UNPASSED) > -1) return CONTROL.GAME_OVER;
     if(this.#player.step.length !== this.#stairs.bridge.length) return CONTROL.PASS_STEP;
     if(this.#player.step.length === this.#stairs.bridge.length) {
@@ -75,11 +75,11 @@ class BridgeGame {
     if(this.#player.upsides.length === this.#stairs.bridge.length) return RESULT.SUCCESS;
   }
 
-  getup() {
+  getUp() {
     return this.#player.upsides.join(MOVING.JUMP);
   }
 
-  getdown() {
+  getDown() {
     return this.#player.downsides.join(MOVING.JUMP);
   }
 
