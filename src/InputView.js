@@ -14,6 +14,7 @@ const InputView = {
    */
 
   start() {
+    Console.print(INPUT_TEXT.STRAT);
     this.bridgeCount = NUMBER.INITAIL_BRIDGE;
     this.roundCount = NUMBER.INITAIL_ROUND;
     this.bridgeGame = new BridgeGame(this.bridgeCount);
