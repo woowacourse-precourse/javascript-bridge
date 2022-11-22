@@ -317,8 +317,8 @@ Lotto(테스트하기 쉬움)
 ```mermaid
 classDiagram
     direction LR
-    Bridge o-- BridgeGame
-    Bridge o-- Player
+    BridgeGame o-- Bridge
+    Player o-- Bridge
     BridgeGame *-- Player
     Player *-- Moving
     class Bridge {
