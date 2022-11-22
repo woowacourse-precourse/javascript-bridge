@@ -28,7 +28,7 @@ class BridgeGame {
         this.trace[this.position] = type;
         if (IS_UP || IS_DOWN) {
           OutputView.printMap({ bridge: this.bridge, trace: this.trace, positon: this.position });
-          if (!IS_CORRECT) retry();
+          if (!IS_CORRECT) this.retry();
           else {
             this.position += 1;
             this.move();
@@ -50,9 +50,10 @@ class BridgeGame {
       func: () => {
         this.position = 0;
         this.tryCount += 1;
-        this.trace = new Array(size).fill(' ');
+        this.trace = new Array(this.size).fill(' ');
         this.move();
       },
+      that: this,
     });
   }
 
