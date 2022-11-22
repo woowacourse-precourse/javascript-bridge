@@ -5,4 +5,15 @@ const ERROR = {
   NOT_UPPERCASE: '[ERROR] 대문자로 입력해주세요.',
 }
 
-module.exports = {ERROR};
+const LETTER_SIGN = {
+  RIGHT: 'O',
+  WRONG: 'X',
+  BLANK: ' ',
+}
+
+const DIRECTION = {
+  UP: 'U',
+  DOWN: 'D',
+}
+
+module.exports = {ERROR, LETTER_SIGN, DIRECTION};

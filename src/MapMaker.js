@@ -1,4 +1,5 @@
 const OutputView = require('./OutputView');
+const { LETTER_SIGN, DIRECTION } = require('./Constants');
 
 class MapMaker {
   #upperMapArray;
@@ -10,27 +11,25 @@ class MapMaker {
   }
 
   selectRightBridge(direction) {
-    if (direction === 'U') {
-      this.#upperMapArray.push('O');
-      this.#lowerMapArray.push(' ');
-    }
-    if (direction === 'D') {
-      this.#upperMapArray.push(' ');
-      this.#lowerMapArray.push('O');
-    }
+    if (direction === DIRECTION.UP) this.drawSignUpperMap(LETTER_SIGN.RIGHT);
+    if (direction === DIRECTION.DOWN) this.drawSignLowerMap(LETTER_SIGN.RIGHT);
     OutputView.printMap(this.#upperMapArray, this.#lowerMapArray);
   }
 
   selectWrongBridge(direction) {
-    if (direction === 'U') {
-      this.#upperMapArray.push('X');
-      this.#lowerMapArray.push(' ');
-    }
-    if (direction === 'D') {
-      this.#upperMapArray.push(' ');
-      this.#lowerMapArray.push('X');
-    }
+    if (direction === DIRECTION.UP) this.drawSignUpperMap(LETTER_SIGN.WRONG);
+    if (direction === DIRECTION.DOWN) this.drawSignLowerMap(LETTER_SIGN.WRONG);
     OutputView.printMap(this.#upperMapArray, this.#lowerMapArray);
+  }
+
+  drawSignUpperMap(sign) {
+    this.#upperMapArray.push(sign);
+    this.#lowerMapArray.push(LETTER_SIGN.BLANK);
+  }
+
+  drawSignLowerMap(sign) {
+    this.#upperMapArray.push(LETTER_SIGN.BLANK);
+    this.#lowerMapArray.push(sign);
   }
 
   makeFinalSuccess(direction) {
