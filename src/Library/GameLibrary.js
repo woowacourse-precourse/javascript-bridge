@@ -1,4 +1,4 @@
-const InputView = require("../GameIO/InputView.js");
+const InputView = require("../View/InputView.js");
 
 const GameLibrary = {
   playAlgorithms(increasePlayCount, bridgeLength, bridgeGame) {

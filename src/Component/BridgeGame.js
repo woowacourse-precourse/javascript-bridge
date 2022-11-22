@@ -1,4 +1,4 @@
-const OutputView = require("../GameIO/OutputView");
+const OutputView = require("../View/OutputView");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  * 
@@ -9,7 +9,7 @@ BridgeGame의 메서드의 이름은 변경할 수 없고, 인자는 필요에 �
 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
  */
 
-const InputView = require("../GameIO/InputView");
+const InputView = require("../View/InputView");
 
 class BridgeGame {
   #jumpHistory;

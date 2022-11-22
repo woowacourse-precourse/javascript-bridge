@@ -58,6 +58,10 @@ const InputView = {
     );
     return rq;
   },
+
+  endCommand() {
+    MissionUtils.Console.close();
+  },
 };
 
 module.exports = InputView;

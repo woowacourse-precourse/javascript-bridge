@@ -1,7 +1,7 @@
-const InputView = require("../GameIO/InputView");
+const InputView = require("../View/InputView");
 const Bridge = require("./Bridge.js");
 const BridgeGame = require("./BridgeGame");
-const OutputView = require("../GameIO/OutputView");
+const OutputView = require("../View/OutputView");
 
 class Game {
   #bridge;

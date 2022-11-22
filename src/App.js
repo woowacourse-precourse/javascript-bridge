@@ -1,6 +1,6 @@
 const Game = require("./Component/Game");
-const OutputView = require("./GameIO/OutputView");
-const InputView = require("./GameIO/InputView");
+const OutputView = require("./View/OutputView");
+const InputView = require("./View/InputView");
 const GameLibrary = require("./Library/GameLibrary");
 
 class App {

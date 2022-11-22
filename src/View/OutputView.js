@@ -1,5 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const RESULT = ["실패", "성공"];
+const RESULT = {
+  fail: "실패",
+  success: "성공",
+};
+const MAP_TABLE = {
+  open: "[ ",
+  space: "  ",
+  close: "]\n",
+};
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  * 제공된 OutputView 객체를 활용해 구현해야 한다.
@@ -19,42 +27,46 @@ const OutputView = {
   },
 
   printMapLine(direction, bridgeStatus, jumpHistory) {
-    let printFormat = "[ ";
+    const SCORE = this.formatScore(direction, bridgeStatus, jumpHistory);
+    const PARTITIONED_SCORE = SCORE.join("| ");
+    MissionUtils.Console.print(
+      MAP_TABLE["open"] + PARTITIONED_SCORE + MAP_TABLE["close"]
+    );
+  },
+
+  formatScore(direction, bridgeStatus, jumpHistory) {
+    const score = [];
+
     for (let index = 0; index < jumpHistory.length; index++) {
       const PRINT_PART =
         bridgeStatus[index] === direction
-          ? this.printMapPart(index, bridgeStatus, jumpHistory)
-          : " ";
-      printFormat += PRINT_PART + " ";
-      if (index < jumpHistory.length - 1) {
-        printFormat += "| ";
-      }
+          ? this.scoreMapPart(index, bridgeStatus, jumpHistory)
+          : MAP_TABLE["space"];
+      score.push(PRINT_PART);
     }
-    MissionUtils.Console.print(printFormat + "]\n");
+    return score;
   },
 
-  printMapPart(index, bridgeStatus, jumpHistory) {
-    if (index < jumpHistory.length) {
-      if (bridgeStatus[index] === jumpHistory[index]) {
-        return "O";
-      }
-      if (bridgeStatus[index] !== jumpHistory[index]) {
-        return "X";
-      }
+  scoreMapPart(index, bridgeStatus, jumpHistory) {
+    if (bridgeStatus[index] === jumpHistory[index]) {
+      return "O ";
     }
-    return " ";
+    if (bridgeStatus[index] !== jumpHistory[index]) {
+      return "X ";
+    }
+    return "  ";
   },
 
   calculateResult(bridgeStatus, jumpHistory) {
     if (bridgeStatus.length > jumpHistory.length || jumpHistory.length === 0) {
-      return 0;
+      return "fail";
     }
     for (let index = 0; index < bridgeStatus.length; index++) {
       if (bridgeStatus[index] !== jumpHistory[index]) {
-        return 0;
+        return "fail";
       }
     }
-    return 1;
+    return "success";
   },
 
   /**
