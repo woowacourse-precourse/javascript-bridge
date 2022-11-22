@@ -18,11 +18,11 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    let bridgeArray = [[], []];
-    let tryCount = 1;
     MissionUtils.Console.readLine(BRIDGE_LENGTH, (length) => {
       if (!inputLengthCheck(length)) return this.readBridgeSize();
       const bridges = BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate());
+      let bridgeArray = [[], []];
+      let tryCount = 1;
       this.readMoving(bridges, tryCount, bridgeArray);
     });
   },
@@ -35,12 +35,15 @@ const InputView = {
     MissionUtils.Console.readLine(MOVE_SPACE, (move) => {
       if (!moveInputCheck(move)) return this.readMoving();
       bridgeArray = bridgeGame.move(move, bridges, bridgeArray);
-      OutputView.printMap(bridgeArray);
-      if (bridgeArray[0].includes('X') || bridgeArray[1].includes('X')) return this.readGameCommand(bridges, tryCount, bridgeArray);
-      if (bridges.length === bridgeArray.length) return OutputView.printResult(SUCCESS_MESSAGE, tryCount, bridgeArray);
-
-      return this.readMoving(bridges, tryCount, bridgeArray);
+      this.moveErrorCheck(bridges, tryCount, bridgeArray)
     });
+  },
+
+  moveErrorCheck(bridges, tryCount, bridgeArray) {
+    if (bridgeArray[0].includes('X') || bridgeArray[1].includes('X')) return this.readGameCommand(bridges, tryCount, bridgeArray);
+    if (bridges.length === bridgeArray.length) return OutputView.printResult(SUCCESS_MESSAGE, tryCount, bridgeArray);
+
+    return this.readMoving(bridges, tryCount, bridgeArray);
   },
 
   /**
@@ -49,12 +52,13 @@ const InputView = {
   readGameCommand(bridges, tryCount, bridgeArray) {
     MissionUtils.Console.readLine(RE_OR_END, (decision) => {
       if (!reOrEndCheck(decision)) return this.readGameCommand();
-      if (decision === 'R') {
+      const bridgeGame = new BridgeGame();
+      if (bridgeGame.retry(decision)) {
         bridgeArray = [[], []];
         tryCount =+ 1;
         return this.readMoving(bridges, tryCount, bridgeArray);
       }
-      if (decision === 'Q') return OutputView.printResult(FAIL_MESSAGE, tryCount, bridgeArray);
+      if (!bridgeGame.retry(decision)) return OutputView.printResult(FAIL_MESSAGE, tryCount, bridgeArray);
     });
   },
 };

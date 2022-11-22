@@ -18,6 +18,7 @@ class BridgeGame {
       this.downPush(moveInput, madeBridge[count], moveArray);
     }
 
+    OutputView.printMap(moveArray);
     return moveArray;
   }
 
