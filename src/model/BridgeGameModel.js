@@ -3,7 +3,7 @@ const {
   BridgeGameSizeError,
   BridgeGameMoveError,
   BridgeGameRetryError,
-} = require("../error/index.js");
+} = require("../error/BridgeGameError.js");
 
 const BridgeGameModel = class {
   #user = [];
