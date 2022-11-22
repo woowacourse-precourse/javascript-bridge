@@ -53,7 +53,7 @@ const OutputView = {
     this.printMap(bridge, userState);
 
     Console.print(
-      `게임 성공 여부:${stringResult} \n총 시도한 횟수: ${countTry}`
+      `게임 성공 여부: ${stringResult} \n총 시도한 횟수: ${countTry}`
     );
   },
 };
