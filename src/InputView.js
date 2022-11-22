@@ -23,10 +23,14 @@ const InputView = {
 
         this.readMoving(data);
       } catch (error) {
-        MissionUtils.Console.print(error);
-        this.readBridgeSize();
+        this.handleSizeError(error);
       }
     });
+  },
+
+  handleSizeError(error) {
+    MissionUtils.Console.print(error);
+    return this.readBridgeSize();
   },
 
   printEmptyString() {
