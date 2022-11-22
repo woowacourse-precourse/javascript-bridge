@@ -42,7 +42,7 @@ const OutputView = {
    */
   printResult(bridge, location, gameCnt) {
     MissionUtils.Console.print("최종 게임 결과\n");
-    this.print(bridge, location);
+    this.printSuccess(bridge, location);
     MissionUtils.Console.print(
       `게임 성공 여부: ${this.printSuccess(bridge, location)}\n`
     );

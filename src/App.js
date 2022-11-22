@@ -10,20 +10,23 @@ class App {
     OutputView.printStart();
     let size = this.makeSize();
     const bridgeGame = new BridgeGame(size);
+    let command;
     do {
       let moving = this.makeMoving();
       bridgeGame.move(moving);
       OutputView.printMap(bridgeGame.bridge, bridgeGame.location);
-      MissionUtils.Console.print(bridgeGame.location);
-      let command = true;
+      command = true;
       if (this.checkFail(bridgeGame.bridge, bridgeGame.location)) {
         if (InputView.readGameCommand() == "Q") command = false;
         else {
           this.gameCnt++;
+          this.movingCount = 0;
           bridgeGame.retry();
         }
       }
+      if (this.movingCount == 3) command = false;
     } while (command);
+
     OutputView.printResult(
       bridgeGame.bridge,
       bridgeGame.location,
@@ -62,6 +65,7 @@ class App {
   makeMoving() {
     let moving = InputView.readMoving();
     moving = this.validateMoving(moving);
+    this.movingCount++;
     return moving;
   }
   validateMoving(moving) {
