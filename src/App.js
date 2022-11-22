@@ -1,7 +1,6 @@
-const OutputView = require("./OutputView");
-const InputView = require("./InputView");
+const OutputView = require("./UI/OutputView");
+const InputView = require("./UI/InputView");
 const BridgeGame = require("./BridgeGame");
-
 class App {
   play() {
     OutputView.printStart();
