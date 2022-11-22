@@ -53,46 +53,6 @@ const expectBridgeOrder = (received, upside, downside) => {
   expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
-const bridgeSizeBlankException = (inputs) => {
-  mockQuestions(inputs);
-  const logSpy = getLogSpy();
-  const app = new App();
-
-  app.play();
-
-  expectLogContains(getOutput(logSpy), [ERROR_MESSAGES_BRIDGE.blank]);
-};
-
-const bridgeSizeTypeRunException = (inputs) => {
-  mockQuestions(inputs);
-  const logSpy = getLogSpy();
-  const app = new App();
-
-  app.play();
-
-  expectLogContains(getOutput(logSpy), [ERROR_MESSAGES_BRIDGE.typeError]);
-};
-
-const bridgeSizeOutOfSizeException = (inputs) => {
-  mockQuestions(inputs);
-  const logSpy = getLogSpy();
-  const app = new App();
-
-  app.play();
-
-  expectLogContains(getOutput(logSpy), [ERROR_MESSAGES_BRIDGE.outOfSize]);
-};
-
-const wrongMovingException = (inputs) => {
-  mockQuestions(inputs);
-  const logSpy = getLogSpy();
-  const app = new App();
-
-  app.play();
-
-  expectLogContains(getOutput(logSpy), [ERROR_MESSAGES_BRIDGE.wrongMoving]);
-};
-
 describe("다리 건너기 테스트", () => {
   test("다리 생성 테스트", () => {
     const randomNumbers = [1, 0, 0];
@@ -129,40 +89,22 @@ describe("다리 건너기 테스트", () => {
 });
 
 describe('다리 길이 입력 예외 테스트', () => {
-  test('다리 길이 입력이 공백인 경우', () => {
-    bridgeSizeBlankException(['']);
+  test.each([[''], [' '], ['\n'], ['3 5']])('공백과 관련된 입력 예외 처리', (input) => {
+    expect(() => {
+      InputView.handleWrongBridgeSizeException(input);
+    }).toThrow(ERROR_MESSAGES_BRIDGE.blank);
   });
 
-  test('다리 길이 입력이 공백 한칸인 경우', () => {
-    bridgeSizeBlankException([' ']);
+  test.each([['a'], ['-15'], ['10.2']])('다리 길이 type이 옳지 않은 경우 예외 처리', (input) => {
+    expect(() => {
+      InputView.handleWrongBridgeSizeException(input);
+    }).toThrow(ERROR_MESSAGES_BRIDGE.typeError);
   });
 
-  test('다리 길이 입력이 줄바꿈인 경우', () => {
-    bridgeSizeBlankException(['\n']);
-  });
-
-  test('다리 길이 입력이 숫자 사이 공백이 있는 경우', () => {
-    bridgeSizeBlankException(['3 5']);
-  });
-
-  test('다리 길이 입력이 문자인 경우', () => {
-    bridgeSizeTypeRunException(['a']);
-  });
-
-  test('다리 길이 입력이 음수인 경우', () => {
-    bridgeSizeTypeRunException(['-15']);
-  });
-
-  test('다리 길이 입력이 소수인 경우', () => {
-    bridgeSizeTypeRunException(['10.5']);
-  });
-
-  test('입력된 다리 길이가 2인 경우', () => {
-    bridgeSizeOutOfSizeException(['2']);
-  });
-
-  test('입력된 다리 길이가 21인 경우', () => {
-    bridgeSizeOutOfSizeException(['21']);
+  test.each([['2'], ['21'], ['100'], ['0']])('3 이상 20 이하의 범위를 벗어난 경우 예외 처리', (input) => {
+    expect(() => {
+      InputView.handleWrongBridgeSizeException(input);
+    }).toThrow(ERROR_MESSAGES_BRIDGE.outOfSize);
   });
 });
 
@@ -179,32 +121,16 @@ describe('다리 생성 테스트2', () => {
 });
 
 describe('이동 입력 예외 테스트', () => {
-  test('입력이 공백인 경우', () => {
-    wrongMovingException(['5', '']);
+  test.each([[''], [' '], ['\n'], [' U'], [' R']])('공백과 관련된 입력 예외 처리', (input) => {
+    expect(() => {
+      InputView.hanldeWrongMovingException(input);
+    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongMoving);
   });
 
-  test('입력이 공백 한칸인 경우', () => {
-    wrongMovingException(['5', ' ']);
-  });
-
-  test('입력이 줄바꿈인 경우', () => {
-    wrongMovingException(['5', '\n']);
-  });
-
-  test('입력에 공백이 있는 경우', () => {
-    wrongMovingException(['5', ' U']);
-  });
-
-  test('입력이 숫자인 경우', () => {
-    wrongMovingException(['5', '3']);
-  });
-
-  test('입력이 U 또는 D가 아닌 문자인 경우', () => {
-    wrongMovingException(['5', 'Z']);
-  });
-
-  test('입력이 소문자 U인 경우', () => {
-    wrongMovingException(['5', 'u']);
+  test.each([['3'], ['1e3'], ['-10'], ['1.2'], ['Z'], ['u'], ['d']])('U 또는 D가 아닌 값이 입력된 경우 예외 처리', (input) => {
+    expect(() => {
+      InputView.hanldeWrongMovingException(input);
+    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongMoving);
   });
 });
 
@@ -305,51 +231,15 @@ describe('다리 건너기 결과 출력 테스트 (재시작X)', () => {
 });
 
 describe('재시작/종료 입력 예외 테스트', () => {
-  test('입력이 공백인 경우', () => {
+  test.each([[''], [' '], ['\n'], [' U'], [' R']])('공백과 관련된 입력 예외 처리', (input) => {
     expect(() => {
-      InputView.hanldeWrongCommandException('', null);
+      InputView.hanldeWrongCommandException(input);
     }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
   });
 
-  test('입력이 공백 한칸인 경우', () => {
+  test.each([['3'], ['1e3'], ['-10'], ['1.2'], ['U'], ['D'], ['Z'], ['r'], ['q']])('R 또는 Q가 아닌 값이 입력된 경우 예외 처리', (input) => {
     expect(() => {
-      InputView.hanldeWrongCommandException(' ');
-    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
-  });
-
-  test('입력이 줄바꿈인 경우', () => {
-    expect(() => {
-      InputView.hanldeWrongCommandException('\n');
-    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
-  });
-
-  test('입력에 공백이 있는 경우', () => {
-    expect(() => {
-      InputView.hanldeWrongCommandException(' R');
-    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
-  });
-
-  test('입력이 숫자인 경우', () => {
-    expect(() => {
-      InputView.hanldeWrongCommandException('3');
-    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
-  });
-
-  test('입력이 R 또는 Q가 아닌 문자인 경우', () => {
-    expect(() => {
-      InputView.hanldeWrongCommandException('U');
-    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
-  });
-
-  test('입력이 소문자 r인 경우', () => {
-    expect(() => {
-      InputView.hanldeWrongCommandException('r');
-    }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
-  });
-
-  test('입력이 소문자 q인 경우', () => {
-    expect(() => {
-      InputView.hanldeWrongCommandException('q');
+      InputView.hanldeWrongCommandException(input);
     }).toThrow(ERROR_MESSAGES_BRIDGE.wrongCommand);
   });
 });
