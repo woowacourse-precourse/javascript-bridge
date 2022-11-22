@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { getResultString } = require('./BridgeGame');
-const { GAME_RESULT } = require('./constants');
+const { GAME_RESULT } = require('./Constants');
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */

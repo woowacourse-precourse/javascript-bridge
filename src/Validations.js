@@ -4,7 +4,7 @@ const {
   ERROR_PLAYING_MESSAGE,
   ERROR_RETRY_MESSAGE,
   SHORT_CUT,
-} = require('./constants');
+} = require('./Constants');
 
 const Validations = {
   sizeValdation(bridgeSize) {

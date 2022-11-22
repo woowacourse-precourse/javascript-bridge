@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_STRING } = require('./constants');
+const { GAME_STRING } = require('./Constants');
 
 const Utils = {
   readLine(message, callback) {

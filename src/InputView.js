@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_BOOLEAN, GAME_MESSAGE, SHORT_CUT } = require('./constants');
+const { GAME_BOOLEAN, GAME_MESSAGE, SHORT_CUT } = require('./Constants');
 const { printMap, printResult } = require('./OutputView');
 const { readLine } = require('./Utils');
 const {
