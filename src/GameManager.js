@@ -18,65 +18,65 @@ class GameManager {
 
     startGame() {
         OutputView.displayMessage(MESSAGE.GAME_START);
-        this.getInputBridgeLength();
+        this.#getInputBridgeLength();
     }
 
-    getInputBridgeLength() {
+    #getInputBridgeLength() {
         InputView.readBridgeSize((bridgeSize) => {
             try {
                 Validator.validateBridgeSize(bridgeSize);
                 let bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-                this.getMoveDirection(bridge, 0)
+                this.#getMoveDirection(bridge, 0)
             } catch(error) {
                 OutputView.displayMessage(error.message)
-                this.getInputBridgeLength();
+                this.#getInputBridgeLength();
             }
         })
     }
 
-    getMoveDirection(bridge) {
+    #getMoveDirection(bridge) {
         InputView.readMoving((moveDirection) => {
             try {
                 Validator.validateMoveDirection(moveDirection);
                 this.#isSuccessArray = this.Game.move(bridge, this.#isSuccessArray, moveDirection);
-                this.afterMove(bridge);
+                this.#afterMove(bridge);
             } catch(error) {
                 OutputView.displayMessage(error.message);
-                this.getMoveDirection(bridge);
+                this.#getMoveDirection(bridge);
             }            
         })
     }
 
-    afterMove(bridge) {
+    #afterMove(bridge) {
         let currLocation = this.#isSuccessArray.length - 1;
         OutputView.printMap(bridge, this.#isSuccessArray)
-        if(!this.#isSuccessArray[currLocation]) return this.getRetryCommand(bridge);
-        if(currLocation < bridge.length - 1) return this.getMoveDirection(bridge);
-        return this.quitGame(bridge);
+        if(!this.#isSuccessArray[currLocation]) return this.#getRetryCommand(bridge);
+        if(currLocation < bridge.length - 1) return this.#getMoveDirection(bridge);
+        return this.#quitGame(bridge);
     }
 
-    getRetryCommand(bridge) {
+    #getRetryCommand(bridge) {
         InputView.readGameCommand((isRetry) => {
             try {
                 Validator.validateGameCommand(isRetry);
-                this.afterGetRetryCommand(bridge, isRetry);
+                this.#afterGetRetryCommand(bridge, isRetry);
             } catch(error) {
                 OutputView.displayMessage(error.message);
-                this.getRetryCommand(bridge);
+                this.#getRetryCommand(bridge);
             }            
         })
     }
 
-    afterGetRetryCommand(bridge, isRetry) {
+    #afterGetRetryCommand(bridge, isRetry) {
         if(isRetry === USER_ANSWER.RETRY) {
             this.#totalAttempt++;
             this.#isSuccessArray = this.Game.retry();
-            this.getMoveDirection(bridge);
+            this.#getMoveDirection(bridge);
         }
-        if(isRetry === USER_ANSWER.QUIT) this.quitGame(bridge)
+        if(isRetry === USER_ANSWER.QUIT) this.#quitGame(bridge)
     }
 
-    quitGame(bridge) {
+    #quitGame(bridge) {
         OutputView.printResult(bridge, this.#isSuccessArray, this.#totalAttempt);
     }
 }
