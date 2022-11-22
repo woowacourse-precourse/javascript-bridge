@@ -1,4 +1,9 @@
-const { MIN_BRIDGE_SIZE, MAX_BRIDGE_SIZE, POSITIONS } = require('./constants');
+const {
+  MIN_BRIDGE_SIZE,
+  MAX_BRIDGE_SIZE,
+  POSITIONS,
+  RETRY_COMMAND_TYPE
+} = require('./constants');
 
 const validateBridgeSize = len => {
   if (isNaN(+len)) return false;
@@ -11,4 +16,9 @@ const validatePosition = position => {
   return true;
 };
 
-module.exports = { validateBridgeSize, validatePosition };
+const validateRetryCommand = command => {
+  if (!RETRY_COMMAND_TYPE.includes(command)) return false;
+  return true;
+};
+
+module.exports = { validateBridgeSize, validatePosition, validateRetryCommand };

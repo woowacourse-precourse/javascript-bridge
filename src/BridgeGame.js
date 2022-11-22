@@ -15,7 +15,6 @@ class BridgeGame {
   #tryCount;
 
   constructor() {
-    InputView.readBridgeSize(this);
     this.#bridges = [];
     this.#state = [];
     this.#tryCount = 1;
@@ -41,12 +40,15 @@ class BridgeGame {
     if (this.#bridges[this.#state.length - 1] === position) isPossible = true;
     OutputView.printMap(this.#state, isPossible);
     if (isPossible) {
-      if (this.#state.length === this.#bridges.length)
-        OutputView.printResult(this.#state, isPossible, this.#tryCount);
+      if (this.#state.length === this.#bridges.length) this.quit(isPossible);
       if (this.#state.length !== this.#bridges.length)
         InputView.readMoving(this);
     }
-    if (!isPossible) this.retry();
+    if (!isPossible) InputView.readGameCommand(this);
+  }
+
+  quit(isSuccess) {
+    OutputView.printResult(this.#state, isSuccess, this.#tryCount);
   }
 
   /**
@@ -54,7 +56,11 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#state = [];
+    this.#tryCount += 1;
+    InputView.readMoving(this);
+  }
 }
 
 module.exports = BridgeGame;

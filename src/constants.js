@@ -1,6 +1,7 @@
 const MIN_BRIDGE_SIZE = 3;
 const MAX_BRIDGE_SIZE = 20;
 const POSITIONS = ['D', 'U'];
+const RETRY_COMMAND_TYPE = ['R', 'Q'];
 
 const GAME_STATE = Object.freeze({
   success: '성공',
@@ -16,11 +17,13 @@ const OUTPUT_MSG = Object.freeze({
 
 const QUESTIONS = Object.freeze({
   bridgeSize: '다리의 길이를 입력해주세요.',
-  movePosition: '이동할 칸을 선택해주세요. (위: U, 아래: D)'
+  movePosition: '이동할 칸을 선택해주세요. (위: U, 아래: D)',
+  retry: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)'
 });
 const ERROR_MSG = Object.freeze({
   invalidBridgeSize: `[ERROR] 다리 길이는 ${MIN_BRIDGE_SIZE} 이상 ${MAX_BRIDGE_SIZE}이하의 숫자를 입력해주세요`,
-  invalidPosition: '[ERROR] 위: U, 아래: D 를 입력해주세요.'
+  invalidPosition: '[ERROR] 위: U, 아래: D 를 입력해주세요.',
+  invalidRetryCommand: '[ERROR] 재시도: R, 종료: Q 를 입력해주세요.'
 });
 
 const MAP_STATE = Object.freeze({
@@ -39,5 +42,6 @@ module.exports = {
   MIN_BRIDGE_SIZE,
   POSITIONS,
   MAP_STATE,
-  GAME_STATE
+  GAME_STATE,
+  RETRY_COMMAND_TYPE
 };
