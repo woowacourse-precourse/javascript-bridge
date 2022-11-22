@@ -27,7 +27,12 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    Console.readLine(MESSAGES.DO_IT_AGAIN, (input) => {
+      //재시작 입력 예외처리 들어갈 부분
+      callback(input);
+    });
+  },
 };
 
 module.exports = InputView;

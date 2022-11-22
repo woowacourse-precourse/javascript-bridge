@@ -1,5 +1,6 @@
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const { Console } = require("@woowacourse/mission-utils");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -40,7 +41,7 @@ class BridgeGame {
    */
   isEnd() {
     if (this.isFail()) {
-      console.log("패배");
+      this.retry();
       return true;
     }
     if (this.bridge.length === this.userMove.length) {
@@ -61,10 +62,20 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
+    InputView.readGameCommand((input) => {
+      if (input === "R") {
+        this.resetGame();
+        this.move();
+      } else {
+        this.gameEnd();
+      }
+    });
+  }
+
+  resetGame() {
     this.tryCount += 1;
     this.nowstep = -1;
     this.userMove = [];
-    this.move();
   }
 
   gameEnd() {
@@ -74,6 +85,7 @@ class BridgeGame {
       this.isWin,
       this.tryCount
     );
+    Console.close();
   }
 }
 
