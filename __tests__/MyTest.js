@@ -69,21 +69,29 @@ describe('입력 받은 이동할 칸과 정답이 일치하는지 판별한다.
 
 describe('움직인 다리의 결과를 생성한다.', () => {
   test('처음으로 위 칸으로 정답을 맞춘 후 생성된 다리를 생성한다.', () => {
-    OutputView.discernBridge(true, 'U', 0);
-    expect(OutputView.upBridge).toEqual('[ O ]');
-    expect(OutputView.downBridge).toEqual('[   ]');
+    const bridgeGame = new BridgeGame(0);
+    bridgeGame.boolean = true;
+    expect(bridgeGame.discernBridge('U', 0)).toEqual('[ O ]\n[   ]');
   });
 
   test('두번째로 아래 칸으로 정답을 맞춘 후 생성된 다리를 생성한다.', () => {
-    OutputView.discernBridge(true, 'D', 1);
-    expect(OutputView.upBridge).toEqual('[ O |   ]');
-    expect(OutputView.downBridge).toEqual('[   | O ]');
+    const bridgeGame = new BridgeGame(1);
+    bridgeGame.boolean = true;
+    bridgeGame.upBridge = '[ O ]';
+    bridgeGame.downBridge = '[   ]';
+
+    expect(bridgeGame.discernBridge('D', 1)).toEqual('[ O |   ]\n[   | O ]');
   });
 
   test('세번째로 아래 칸으로 정답을 틀린 후 생성된 다리를 생성한다.', () => {
-    OutputView.discernBridge(false, 'D', 2);
-    expect(OutputView.upBridge).toEqual('[ O |   |   ]');
-    expect(OutputView.downBridge).toEqual('[   | O | X ]');
+    const bridgeGame = new BridgeGame(2);
+    bridgeGame.boolean = false;
+    bridgeGame.upBridge = '[ O |   ]';
+    bridgeGame.downBridge = '[   | O ]';
+
+    expect(bridgeGame.discernBridge('D', 2)).toEqual(
+      '[ O |   |   ]\n[   | O | X ]'
+    );
   });
 });
 
@@ -92,7 +100,7 @@ describe('정답이 틀린 후 재시작한다.', () => {
     InputView.bridgeGame = new BridgeGame();
     InputView.resetOutputBridge();
     expect(InputView.bridgeCount).toEqual(0);
-    expect(OutputView.upBridge).toEqual('[');
-    expect(OutputView.downBridge).toEqual('[');
+    expect(InputView.bridgeGame.upBridge).toEqual('[');
+    expect(InputView.bridgeGame.downBridge).toEqual('[');
   });
 });
