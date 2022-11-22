@@ -3,12 +3,10 @@
  */
 class BridgeGame {
   #userInputArray
-  #bridgeInfoArray
   #tries
 
   constructor(){
     this.#userInputArray = [];
-    this.#bridgeInfoArray = [];
     this.#tries = 1;
   }
   /**
@@ -46,15 +44,15 @@ class BridgeGame {
     return this.#tries;
   }
 
-  getGameResult(){
-    const INDEX = this.getUserInputArray().length - 1;
-    if (this.#userInputArray[INDEX] === this.#bridgeInfoArray[INDEX]){
-      return this.isUserWin();
-    }
-    if (this.#userInputArray[INDEX] !== this.#bridgeInfoArray[INDEX]){
-      return this.isUserLose();
-    }
-  }
+  // getGameResult(){
+  //   const INDEX = this.getUserInputArray().length - 1;
+  //   if (this.#userInputArray[INDEX] === this.#bridgeInfoArray[INDEX]){
+  //     return this.isUserWin();
+  //   }
+  //   if (this.#userInputArray[INDEX] !== this.#bridgeInfoArray[INDEX]){
+  //     return this.isUserLose();
+  //   }
+  // }
 
   isUserWin(){
     return true;

@@ -4,22 +4,22 @@ const InputView = require('./InputView');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const { Console } = require('@woowacourse/mission-utils');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 class GameManager {
-    #bridgeGame
-    #bridgeLength
+
 
     constructor() {
-        this.#bridgeGame = new BridgeGame();
-        this.#bridgeLength = 0;
+
     }
 
     start() {
-        Print.StartMessage();
-        Print.Blank();
-        InputView.readBridgeSize(this.#bridgeLength);
-        Print.UserInput(this.#bridgeLength);
+
     }
+    
+    playRound() {
+    }
+    
 }
 
 module.exports = GameManager;
