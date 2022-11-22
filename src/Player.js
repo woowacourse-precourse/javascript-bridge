@@ -26,16 +26,22 @@ class Player {
         let isSuccessed = true;
 
         for(let i = 0; i < bridgeAnswer.length; i++) {
-            OutputView.printInputMove();
-            const movingInput = InputView.readMoving();
-            currentBridge = bridgeGame.move(movingInput);
-            OutputView.printMap(currentBridge);
+            currentBridge = this.moveAndPrint(bridgeGame);
             if (!this.checkIncludeFail(currentBridge)) {
                 isSuccessed = false;
                 break;
             }
         }
         return [isSuccessed, currentBridge];
+    }
+
+    moveAndPrint(bridgeGame) {
+        OutputView.printInputMove();
+        const movingInput = InputView.readMoving();
+        const currentBridge = bridgeGame.move(movingInput);
+        OutputView.printMap(currentBridge);
+        
+        return currentBridge;
     }
 
     playGame(bridgeAnswer, bridgeGame) {
