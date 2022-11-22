@@ -2,7 +2,7 @@ const { MOVE_RESULT, GAME_RESULT } = require("../Constant");
 
 const gameUtils = {
   /**
-   * @param {number | NaN} 다리 사이즈
+   * @param {number | NaN} size 다리 사이즈
    * @param {object} view object
    */
   validateSize: (size, view) => {
@@ -15,8 +15,8 @@ const gameUtils = {
   },
 
   /**
-   * @param {string[]} 다리 배열
-   * @param {string[]} 사용자 이동 배열
+   * @param {string[]} bridge 다리 배열
+   * @param {string[]} userSpaces 사용자 이동 배열
    * @return {Object} 첫번째줄, 두번째줄 출력
    */
   calculateMoveResult: (bridge, userSpaces) => {
@@ -26,8 +26,8 @@ const gameUtils = {
   },
 
   /**
-   * @param {string[]} 다리 배열
-   * @param {string[]} 사용자 이동 배열
+   * @param {string[]} bridge 다리 배열
+   * @param {string[]} userSpaces 사용자 이동 배열
    * @return {string} 첫번째줄 출력
    */
   calculateFirstLine: (bridge, userSpaces) => {
@@ -44,8 +44,8 @@ const gameUtils = {
   },
 
   /**
-   * @param {string[]} 다리 배열
-   * @param {string[]} 사용자 이동 배열
+   * @param {string[]} bridge 다리 배열
+   * @param {string[]} userSpaces 사용자 이동 배열
    * @return {string} 두번째줄 출력
    */
   calculateSecondLine: (bridge, userSpaces) => {
@@ -62,8 +62,8 @@ const gameUtils = {
   },
 
   /**
-   * @param {string[]} 다리 배열
-   * @param {string[]} 사용자 이동 배열
+   * @param {string[]} bridge 다리 배열
+   * @param {string[]} userSpaces 사용자 이동 배열
    * @return {string} 계속 진행할지 여부. 계속 진행하면 continue, 게임 실패라면 false, 게임 성공이라면 success로 표현해야 한다.
    */
   checkContinue: (bridge, userSpaces) => {
@@ -76,7 +76,7 @@ const gameUtils = {
   },
 
   /**
-   * @param {string} 게임 다시 시도 여부 입력, R 또는 Q가 아닐 경우 ERROR 메시지 출력.
+   * @param {string} command 게임 다시 시도 여부 입력, R 또는 Q가 아닐 경우 ERROR 메시지 출력.
    * @param {object} view object
    */
   validateCommand: (command, view) => {

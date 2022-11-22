@@ -28,6 +28,9 @@ const OutputView = {
   },
 
   /**
+   * @param {object} map 게임 결과 맵
+   * @param {string} result 게임 결과, "success" or "false"
+   * @param {number} count 총 시도한 횟수
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    */
   printResult(map, result, count) {

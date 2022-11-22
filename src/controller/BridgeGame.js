@@ -65,6 +65,7 @@ class BridgeGame {
   };
 
   /**
+   * @param {string} result 게임 결과, "success" or "false"
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    */
   retry(result) {
@@ -79,6 +80,10 @@ class BridgeGame {
     });
   }
 
+  /**
+   * @param {string} result 게임 결과, "success" or "false"
+   * 게임이 종료되었을 때 결과를 출력하는 메서드
+   */
   end(result) {
     this.model.addCount();
     const map = gameUtils.calculateMoveResult(
