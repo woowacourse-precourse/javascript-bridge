@@ -80,6 +80,8 @@ class BridgeGame {
   retry() {
     this.#index = 0;
     this.#moveRoute = [[], []];
+    this.#checkFail = false;
+    this.#tryTime += 1;
   }
 }
 
