@@ -46,16 +46,10 @@ class BridgeGame {
     if(toRetry === true){
       this.state = [];
       this.currentPos = 0;
-      //this.isLastStep = false;
       this.isGameOver = false;
       this.tryCount += 1;
-
-      return true;
     }
-    else{
-      return false;
-    }
-
+    return false;
   }
 }
 

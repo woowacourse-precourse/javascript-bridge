@@ -21,17 +21,11 @@ class App {
 
       if(this.game.isGameOver){
         this.askRetryOrNot();
-      }else{
-        if(this.game.isLastStep){
-          OutputView.printResult(this.game);
-        }
-        else{
-          this.moveOnce();
-        }
-      }
-
-
-    })
+        return;
+      } 
+      if(this.game.isLastStep) OutputView.printResult(this.game);
+      else this.moveOnce();
+    });
   }
 
   askRetryOrNot(){
@@ -42,7 +36,7 @@ class App {
       else{
         OutputView.printResult(this.game);
       }
-    })
+    });
   }
 
 
