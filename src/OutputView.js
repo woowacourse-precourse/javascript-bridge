@@ -3,8 +3,9 @@ const MESSAGE = require('./utils/constants');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
-const correct = ' O |';
-const incorrect = '   |';
+const CORRECT = ' O |';
+const INCORRECT = ' X |';
+const SPACE = '   |';
 
 const OutputView = {
   /**
@@ -21,24 +22,40 @@ const OutputView = {
   setBridgeMap(bridgeHistory, wrongDirection) {
     let line = ['[', '['];
     bridgeHistory.map((direction) => {
-      if (direction === 'U') {
-        line[0] += correct;
-        line[1] += incorrect;
-      } else {
-        line[0] += incorrect;
-        line[1] += correct;
-      }
+      line = this.makeOMap(line, direction);
     });
     if (wrongDirection) {
-      if (wrongDirection === 'U') {
-        line[0] += ' X |';
-        line[1] += '   |';
-      } else {
-        line[0] += '   |';
-        line[1] += ' X |';
-      }
+      line = this.makeXMap(line, wrongDirection);
     }
 
+    return this.makeMapClose(line);
+  },
+
+  makeOMap(line, direction) {
+    if (direction === 'U') {
+      line[0] += CORRECT;
+      line[1] += SPACE;
+    } else {
+      line[0] += SPACE;
+      line[1] += CORRECT;
+    }
+
+    return line;
+  },
+
+  makeXMap(line, wrongDirection) {
+    if (wrongDirection === 'U') {
+      line[0] += INCORRECT;
+      line[1] += SPACE;
+    } else {
+      line[0] += SPACE;
+      line[1] += INCORRECT;
+    }
+
+    return line;
+  },
+
+  makeMapClose(line) {
     line[0] = line[0].slice(0, -1);
     line[1] = line[1].slice(0, -1);
     line[0] += ']';

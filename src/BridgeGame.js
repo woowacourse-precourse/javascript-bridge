@@ -55,7 +55,7 @@ class BridgeGame {
       if (re === 'R') {
         this.#startRegame(bridge);
       } else {
-        this.#endgame(direction);
+        this.#endGame(direction);
       }
     });
   }
@@ -66,7 +66,7 @@ class BridgeGame {
     this.move(bridge);
   }
 
-  #endgame(direction) {
+  #endGame(direction) {
     OutputView.printResult(
       '실패',
       this.#bridgeHistory,
