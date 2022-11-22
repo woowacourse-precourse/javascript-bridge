@@ -1,7 +1,7 @@
 const Bridge = require("./Bridge");
-const { makeBridge } = require("./BridgeMaker");
+const { makeBridge } = require("../BridgeMaker");
 const BridgeMap = require("./BridgeMap");
-const { generate } = require("./BridgeRandomNumberGenerator");
+const { generate } = require("../BridgeRandomNumberGenerator");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */

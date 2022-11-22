@@ -1,6 +1,6 @@
-const BridgeGame = require("./BridgeGame");
-const { readBridgeSize, readMoving, readGameCommand } = require("./InputView");
-const { printMap, printResult, printResultMap } = require("./OutputView");
+const BridgeGame = require("./model/BridgeGame");
+const { readBridgeSize, readMoving, readGameCommand } = require("./view/InputView");
+const { printMap, printResult, printResultMap } = require("./view/OutputView");
 
 class Controller {
   #bridgeGame;
@@ -10,12 +10,14 @@ class Controller {
     this.#tryingNum = 1;
     this.init();
   }
+
   init() {
     readBridgeSize((bridgeSize)=>{
       this.#bridgeGame = new BridgeGame(Number(bridgeSize));
       this.play();
     });
   }
+
   play() {
     readMoving((moving) => {
       const isMatch = this.#bridgeGame.move(moving);
