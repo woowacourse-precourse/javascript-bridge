@@ -34,7 +34,7 @@ class BridgeGame {
   #judgeUserMovement() {
     if (!this.#isMovemontCorrect()) return MOVEMENT_RESULT.WRONG;
     if (this.#isFinish()) return MOVEMENT_RESULT.GAME_SUCCESS;
-    if (!this.#isFinish()) return MOVEMENT_RESULT.CORRECT;
+    return MOVEMENT_RESULT.CORRECT;
   }
 
   #isMovemontCorrect() {
