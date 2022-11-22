@@ -19,7 +19,7 @@ const OutputView = {
   },
 
   printResult(bridgeGame) {
-    this.print(`${MESSAGE.RESULT_PASS} ${bridgeGame.result}`);
+    this.print('\n' + `${MESSAGE.RESULT_PASS} ${bridgeGame.result}`);
     this.print(`${MESSAGE.RESULT_TRIALS} ${bridgeGame.trials}`);
   },
 

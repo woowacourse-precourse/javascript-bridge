@@ -37,20 +37,16 @@ class BridgeGame {
   win() {
     if (this.steps === this.bridgeInputs.length && this.getMatching(this.steps - 1)) {
       this.result = INFO.PASS;
-      return true
+      return true;
     }
   }
 
   lose() {
-    if (!this.getMatching(this.steps - 1)) {
-      return true
-    }
+    if (!this.getMatching(this.steps - 1)) return true;
   }
 
   move() {
-    if (this.steps !== this.bridgeInputs.length && this.getMatching(this.steps - 1)) {
-      return true
-    }
+    if (this.steps !== this.bridgeInputs.length && this.getMatching(this.steps - 1)) return true;
   }
 
   retry(RorQ) {
