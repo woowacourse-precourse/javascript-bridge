@@ -20,8 +20,7 @@ class UserInput {
       this.#model.setBridgeSize(answer);
       this.#mainCtrl.makeBridge();
     } catch (e) {
-      this.#view.printError(e.message);
-      this.readBridgeSize();
+      this.errorHandler(e, this.readBridgeSize.bind(this))
     }
   }
 
@@ -34,8 +33,7 @@ class UserInput {
       this.#model.setMoveList(answer);
       this.#mainCtrl.checkMoving(answer);
     } catch (e) {
-      this.#view.printError(e.message);
-      this.readMoving();
+      this.errorHandler(e, this.readMoving.bind(this))
     }
   }
 
@@ -48,13 +46,13 @@ class UserInput {
       this.#model.setGameCommand(answer);
       this.#mainCtrl.retryOrQuit();
     } catch (e) {
-      this.#view.printError(e.message);
-      this.readGameCommand();
+      this.errorHandler(e, this.readGameCommand.bind(this))
     }
   }
-  
-  methodToCatchAllError(error) {
-    this.#view.printError(e.message);
+
+  errorHandler(error, callback){
+    this.#view.printError(error.message);
+    callback();
   }
 }
 
