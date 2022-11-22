@@ -248,19 +248,17 @@ describe('다리 값을 세팅하는 메서드 테스트', () => {
     }).toThrow(ARRAY_ERROR_TEXT);
   });
 
-  test('배열의 길이가 3 이상 20 이하가 아니라면 예외를 발생한다.', () => {
-    const bridgeGame = new BridgeGame();
-    const EXPECTED1 = ['D', 'D'];
-    const EXPECTED2 = Array(21).fill('D');
+  test.each([0, 1])(
+    '배열의 길이가 3 이상 20 이하가 아니라면 예외를 발생한다.',
+    (TEST_INDEX) => {
+      const bridgeGame = new BridgeGame();
+      const EXPECTED = [['D', 'D'], Array(21).fill('D')];
 
-    expect(() => {
-      bridgeGame.setBridge(EXPECTED1);
-    }).toThrow(RANGE_ERROR_TEXT);
-
-    expect(() => {
-      bridgeGame.setBridge(EXPECTED2);
-    }).toThrow(RANGE_ERROR_TEXT);
-  });
+      expect(() => {
+        bridgeGame.setBridge(EXPECTED[TEST_INDEX]);
+      }).toThrow(RANGE_ERROR_TEXT);
+    },
+  );
 });
 
 describe('다리 정보를 가져오는 메소드 테스트', () => {
