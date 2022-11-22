@@ -33,7 +33,7 @@ class Controller{
   playerMoving(){
     InputView.readMoving((playerMove)=>{
       this.#playerMoveList=this.moveListPush(this.#playerMoveList, playerMove)
-      this.#gameResult=this.#bridgeGame.move(this.#playerMoveList, this.#bridgeSize);
+      this.#gameResult=this.#bridgeGame.move(this.#playerMoveList);
       OutputView.printMap(this.#gameResult);
       if(this.#gameResult.includes(WRONG)) return this.gameRetry();
       if(this.#playerMoveList.length===Number(this.#bridgeSize)) return OutputView.printResult(this.#gameResult, SUCCESS, this.#bridgeGame.getTotalTry())
