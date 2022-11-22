@@ -8,10 +8,10 @@ const GameLibrary = {
         increasePlayCount,
         moveCount
       );
-      if (MOVE[MOVE_RESULT] === "R") {
+      if (MOVE_RESULT === "R") {
         moveCount = 0;
       }
-      if (MOVE[MOVE_RESULT] === "Q") {
+      if (MOVE_RESULT === "Q") {
         return false;
       }
     }
@@ -31,7 +31,7 @@ const GameLibrary = {
   askQuit(retry, increasePlayCount) {
     const IS_QUIT = InputView.readGameCommand();
     if (IS_QUIT === "R") {
-      bridgeGame.retry();
+      retry();
       increasePlayCount();
     }
 
