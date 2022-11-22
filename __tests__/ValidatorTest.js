@@ -19,8 +19,21 @@ describe('다리 방향 입력 기능 테스트', () => {
         const test = () => userInput.check();
         expect(test()).toBe(true);
     });
-    it.each([["A"], ["C"], ["1"], ['u'], ['d']])('다리 방향 입력 예외처리', (input) => {
+    it.each([["A"], ["-1"], ["1"], ['u'], ['d']])('다리 방향 입력 예외처리', (input) => {
         const userInput = new DirectionChoiceInput(input);
+        const test = () => userInput.check();
+        expect(test()).toBe(false);
+    });
+});
+
+describe('다시하기 입력 기능 테스트', () => {
+    it.each([['Q'], ['R']])('올바른 입력값이 들어오면 true를 반환', (input) => {
+        const userInput = new RetryInput(input);
+        const test = () => userInput.check();
+        expect(test()).toBe(true);
+    });
+    it.each([["A"], ["-1"], ["1"], ['q'], ['r']])('다시하기 입력 예외처리', (input) => {
+        const userInput = new RetryInput(input);
         const test = () => userInput.check();
         expect(test()).toBe(false);
     });
