@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const BridgePrint = require('./BridgePrint');
-const { ERROR_MESSAGES, USER_VALID_INPUT } = require('./common/messages');
+const BridgePrint = require('../BridgePrint');
+const { ERROR_MESSAGES, USER_VALID_INPUT } = require('../common/messages');
 const Check = {
   checkRestartGame(answer, gamePlay) {
     if (answer === USER_VALID_INPUT.Q) {
@@ -19,15 +19,6 @@ const Check = {
       return Player.getIsGameOver();
     }
     if (isFinshed) return this.checkIsFinshed(Player, Bridge);
-  },
-
-  isVaildSize(size) {
-    if (isNaN(size)) throw new Error('[ERROR] 숫자만 입력이 가능합니다');
-  },
-
-  isVaildInput(input) {
-    if (input === USER_VALID_INPUT.U || input === USER_VALID_INPUT.D) return;
-    throw new Error(ERROR_MESSAGES.ERROR_INVAILD_INPUT(USER_VALID_INPUT.U, USER_VALID_INPUT.D));
   },
 
   endGame(gamePlay) {

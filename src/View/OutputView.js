@@ -1,5 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { OUTPUT_MESSAGES } = require('./common/messages');
+const { OUTPUT_MESSAGES } = require('../common/messages');
 
 const OutputView = {
   printMap(uparray, downarray) {

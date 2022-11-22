@@ -1,4 +1,4 @@
-const Check = require('./Check');
+const Check = require('./Utils/Check');
 const BridgePrint = require('./BridgePrint');
 const Player = require('./Player');
 const Bridge = require('./Bridge');
