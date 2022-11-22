@@ -33,6 +33,16 @@ class App {
 
     return bridge;
   }
+
+  makeBridgeGame() {
+    try {
+      const bridge = this.makeBridge();
+      return new BridgeGame(bridge);
+    } catch (error) {
+      throw new Error(error);
+      return this.makeBridgeGame();
+    }
+  }
 }
 
 module.exports = App;
