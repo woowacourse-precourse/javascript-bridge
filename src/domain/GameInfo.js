@@ -3,7 +3,7 @@ const GameInfo = {
 
   bridgeSize: 0,
 
-  bridge: null,
+  bridge: [],
 
   indexingArray: ["U", "D"],
 
