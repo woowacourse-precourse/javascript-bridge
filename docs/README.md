@@ -126,6 +126,7 @@
 18. test(roundProcess) : 라운드의 진행을 판별하는 roundProcess 클래스 테스트 코드 작성
 19. feat(roundProcess) : 테스트를 통과하는 기능을 올바르게 구현한 경우 커밋
 20. gameManager : GameManager 클래스의 메서드를 이용하여 게임을 진행하는 메서드 구현
+21. refactor : 상수, 디렉토리 분리 등 최종 리펙토링
 ## 프로그래밍 요구사항
 
 - [x] package.json을 변경하지 않는다. 
