@@ -47,9 +47,7 @@ class Player {
             }
         }
         if(currentBridge) {
-            OutputView.printResult(currentBridge);
-            OutputView.printGameSuccess(isSuccessed);
-            OutputView.printTryCount(tryCount);
+            OutputView.printTotalGameResult(currentBridge, isSuccessed, tryCount);
         }
     }
 
