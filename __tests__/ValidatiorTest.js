@@ -1,4 +1,5 @@
 const { ERROR_MESSAGE } = require('../src/constants');
+const InputView = require('../src/InputView');
 const { runException, mockRandoms } = require('../src/utils/testUtils');
 
 describe('입력값 예외 처리 테스트', () => {
@@ -25,5 +26,16 @@ describe('입력값 예외 처리 테스트', () => {
   ])('명령어가 재시도(R) 또는 종료 명령어(Q)가 아닌 경우 예외 처리한다.', (input, error) => {
     mockRandoms([1, 0, 1]);
     runException(input, error);
+  });
+
+  test.each([
+    [[21], 'readBridgeSize'],
+    [['3', 'A'], 'readMoving'],
+    [['3', 'U', 'D', 'D', 'W'], 'readGameCommand'],
+  ])('예외를 발생시키고 다시 입력 받는다.', (input, method) => {
+    const inputViewSpy = jest.spyOn(InputView, method);
+    mockRandoms([1, 0, 1]);
+    runException(input);
+    expect(inputViewSpy).toBeCalledTimes(2);
   });
 });
