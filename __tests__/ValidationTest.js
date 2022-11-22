@@ -2,17 +2,17 @@ const Validation = require("../src/Validation");
 
 describe("입력값 오류 검증 테스트", () => {
 
-  test("다리 길이가 범위를 벗어난 경우", () => {
+  test.each ([['2'], [-10], [90], [0]]) ("다리 길이가 범위를 벗어난 경우", (input) => {
     expect(() => {
-      Validation.validateBridgeSize('2');
+      Validation.validateBridgeSize(input);
     }).toThrow('[ERROR]');
   });
 
-  test("다리 길이 타입이 숫자가 아닌 경우", () => {
+  test.each([['hi'], [true], [[2, 10]]]) ("다리 길이 타입이 숫자가 아닌 경우", (input) => {
     expect(() => {
-      Validation.validateBridgeSize([8, 'hi']);
-    }).toThrow('[ERROR]');
-  });
+      Validation.validateBridgeSize(input);
+    }).toThrow();
+  })
 
   test("이동 칸이 U, D 에 해당하지 않는 경우", () => {
     expect(() => {
@@ -31,7 +31,7 @@ describe("입력값 오류 검증 테스트", () => {
       Validation.validateGameCommand('K');
     }).toThrow('[ERROR]');
   });
-  
+
   test("재시작/종료 명령어가 한 개 이상 입력된 경우", () => {
     expect(() => {
       Validation.validateGameCommand('Q R');
