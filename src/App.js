@@ -1,5 +1,4 @@
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { command } = require('./utils/message');
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeMaker = require('./BridgeMaker');
@@ -25,12 +24,12 @@ class App {
     this.getBridgeSize();
   }
 
-  async getBridgeSize() {
-    this.#bridgeSize = await InputView.readBridgeSize();
-    this.setBridge();
+  getBridgeSize() {
+    InputView.readBridgeSize(this.setBridge.bind(this));
   }
 
-  setBridge() {
+  setBridge(size) {
+    this.#bridgeSize = size;
     if (!this.validateBridgeSize()) return this.getBridgeSize();
     this.#bridge = BridgeMaker.makeBridge(
       this.#bridgeSize,

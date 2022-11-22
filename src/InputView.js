@@ -8,10 +8,8 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  async readBridgeSize() {
-    return await new Promise((size) => {
-      Console.readLine(command.GET_BRIDGE_SIZE, size);
-    });
+  readBridgeSize(size) {
+    Console.readLine(command.GET_BRIDGE_SIZE, size);
   },
 
   /**
