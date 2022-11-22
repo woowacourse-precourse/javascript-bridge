@@ -35,12 +35,12 @@ const InputView = {
   },
 
   proceedRound(bridge, round, upDown) {
-    const [up, down, gameResult] = this.bridgeGame.makeMap(bridge[round - 1], upDown);
+    const [up, down, gameResult] = this.bridgeGame.makeBridge(bridge[round - 1], upDown);
     OutputView.printMap(up, down);
 
     if (!gameResult) this.readGameCommand(bridge);
     else if (round === bridge.length && gameResult) {
-      const totalTry = this.bridgeGame.countTry();
+      const totalGame = this.bridgeGame.countGame();
       OutputView.printResult(totalGame, gameResult, [up, down]);
     } else this.readMoving(bridge);
   },
