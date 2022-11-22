@@ -30,7 +30,16 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(result, gameCount) {
+    Console.print("최종 게임 결과");
+    if (result) {
+      Console.print(`게임 성공 여부: 성공`);
+      Console.print(`총 시도한 횟수: ${gameCount}`);
+      return;
+    }
+    Console.print(`게임 성공 여부: 실패`);
+    Console.print(`총 시도한 횟수: ${gameCount}`);
+  },
 
   printBridge(value, upOrDown) {
     if (upOrDown === Constant.UP) {
@@ -73,7 +82,7 @@ const OutputView = {
         closeIndex
       )}`;
     }
-    return `${bridge.slice(0, closeIndex)} ${
+    return `${bridge.slice(0, closeIndex)}${
       Constant.SEPARATE
     } ${passOrFail} ${bridge.slice(closeIndex)}`;
   },

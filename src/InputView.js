@@ -15,13 +15,17 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(Constant.INPUT.BRIDGE_SIZE, (bridgeSize) => {
-      let numberBridgeSize = Number(bridgeSize) ?? NaN;
-      if (Validate.validateBridgeSize(numberBridgeSize)) {
+      try {
+        let numberBridgeSize = Number(bridgeSize) ?? NaN;
+        Validate.validateBridgeSize(numberBridgeSize);
         this.bridge = BridgeMaker.makeBridge(
           numberBridgeSize,
           randomNumberGenerator.generate
         );
         this.readMoving();
+      } catch (e) {
+        Console.print(e);
+        this.readBridgeSize();
       }
     });
   },
@@ -31,22 +35,35 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(Constant.INPUT.NEXT_STEP, (inputUpOrDown) => {
-      if (Validate.validateUserInputMove(inputUpOrDown)) {
-        this.bridgeGame = new BridgeGame();
-        const bridgeLength = this.bridge.length;
-        let result = this.bridgeGame.move(inputUpOrDown, this.bridge);
-        if (BridgeGame._userInputCount === this.bridge.length) {
+      try {
+        if (Validate.validateUserInputMove(inputUpOrDown)) {
+          this.bridgeGame = new BridgeGame();
+          const bridgeLength = this.bridge.length;
+          //게임 끝났을 때
+          let result = this.bridgeGame.move(inputUpOrDown, this.bridge);
+          if (BridgeGame._userInputCount === this.bridge.length) {
+            if (!result) {
+              OutputView.printMap(result, inputUpOrDown, bridgeLength);
+              this.readGameCommand();
+              return;
+            }
+            OutputView.printMap(result, inputUpOrDown, bridgeLength);
+            OutputView.printResult(result, BridgeGame._gameCount);
+            return;
+          }
+          //맞췄을 때
+          if (result) {
+            OutputView.printMap(result, inputUpOrDown, bridgeLength);
+            this.readMoving();
+            return;
+          }
+          //틀렸을 때
           OutputView.printMap(result, inputUpOrDown, bridgeLength);
-          OutputView.printResult(result);
-          return;
+          this.readGameCommand();
         }
-        if (result) {
-          OutputView.printMap(result, inputUpOrDown, bridgeLength);
-          this.readMoving();
-          return;
-        }
-        OutputView.printMap(result, inputUpOrDown, bridgeLength);
-        this.readGameCommand();
+      } catch (e) {
+        Console.print(e);
+        this.readMoving();
       }
     });
   },
@@ -56,13 +73,22 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(Constant.INPUT.GAME_RETRY, (userInputRetry) => {
-      if (Validate.validateUserInputRetry(userInputRetry)) {
-        if (userInputRetry === "R") {
-          this.bridgeGame.retry();
-          InputView.readMoving();
-          return;
+      try {
+        if (Validate.validateUserInputRetry(userInputRetry)) {
+          if (userInputRetry === "R") {
+            this.bridgeGame.retry();
+            InputView.readMoving();
+            return;
+          }
+          if (userInputRetry === "Q") {
+            OutputView.printResult("", BridgeGame._gameCount);
+            Console.close();
+          }
+          OutputView.printResult("", BridgeGame._gameCount);
         }
-        OutputView.printResult();
+      } catch (e) {
+        Console.print(e);
+        this.readGameCommand();
       }
     });
   },

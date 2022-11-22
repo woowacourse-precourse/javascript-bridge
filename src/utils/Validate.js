@@ -1,14 +1,16 @@
 const Constant = require("./Constant");
 class Validate {
+  //다리 크기 입력검증
   static validateBridgeSize(bridgeSize) {
-    let bridgeSizeLength = String(bridgeSize).length;
+    if (isNaN(bridgeSize)) {
+      throw new Error(Constant.ERROR.ONLY_NUMBER);
+    }
+
     if (bridgeSize < 3 || bridgeSize > 20) {
       throw new Error(Constant.ERROR.BRIDGE_SIZE);
     }
-    if (isNaN(Number(bridgeSize))) {
-      throw new Error(Constant.ERROR.ONLY_NUMBER);
-    }
-    if (bridgeSizeLength > 2) {
+
+    if (String(bridgeSize).length > 2) {
       throw new Error(Constant.ERROR.ONLY_ONE_NUMBER);
     }
     return true;
@@ -31,6 +33,8 @@ class Validate {
     }
     return true;
   }
+
+  //게임 다시 시작할 지 입력할 때 검증
   static validateUserInputRetry(inputRetry) {
     let regexOnlyRorQ = /[RQ]/g;
     if (!regexOnlyRorQ.test(inputRetry)) {
@@ -42,7 +46,6 @@ class Validate {
     if (inputRetry.length >= 2) {
       throw new Error(Constant.ERROR.ONLY_INPUT_ONE);
     }
-
     return true;
   }
 }

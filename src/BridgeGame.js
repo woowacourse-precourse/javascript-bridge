@@ -8,10 +8,9 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  static #gameCount = 1;
+  static _gameCount = 1;
   static _userInputCount = 0;
   move(userInput, bridge) {
-    if (BridgeGame._userInputCount === bridge.length) return "finish";
     return bridge[BridgeGame._userInputCount++] === userInput;
   }
 
@@ -21,7 +20,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    BridgeGame.#gameCount += 1;
+    BridgeGame._gameCount += 1;
     OutputView.upBridge = "[]";
     OutputView.downBridge = "[]";
     OutputView.upCount = 0;
