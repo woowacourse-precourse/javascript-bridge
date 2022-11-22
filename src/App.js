@@ -1,7 +1,7 @@
-const BridgeGame = require('./model/BridgeGame');
-const InputView = require('./view/InputView');
-const OutputView = require('./view/OutputView');
-const BridgeController = require('./controller/BridgeController');
+const BridgeGame = require("./model/BridgeGame");
+const InputView = require("./view/InputView");
+const OutputView = require("./view/OutputView");
+const BridgeController = require("./controller/BridgeController");
 
 class App {
   constructor() {
@@ -15,5 +15,6 @@ class App {
     this.bridgeCntroller.runProcess();
   }
 }
-
+const app = new App();
+app.play();
 module.exports = App;
