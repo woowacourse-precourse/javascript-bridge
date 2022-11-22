@@ -1,41 +1,43 @@
 /**
  * @param {number} index
- * @param {import("../BridgeGame").Flag} result
+ * @param {import("../BridgeGame").Result} result
  * @returns {boolean}
  */
-const isLastAndGameOver = (index, result) =>
+const isLastMoveAndGameOver = (index, result) =>
   index === result.status.curMoveCount - 1 && result.flag === 'GAME_OVER';
 
+const checkBridgeStatus = (index, result) => {
+  if (isLastMoveAndGameOver(index, result)) {
+    return 'X';
+  }
+  return 'O';
+};
+
+const moveToUp = (maps, index, result) => {
+  maps[0].push(checkBridgeStatus(index, result));
+  maps[1].push(' ');
+};
+
+const moveToDown = (maps, index, result) => {
+  maps[0].push(' ');
+  maps[1].push(checkBridgeStatus(index, result));
+};
+
 /**
- * @param {import("../BridgeGame").Flag} result
+ * @param {import("../BridgeGame").Result} result
  * @returns {Array<string[], string[]>}
  */
-const createMaps = (result) => {
-  /** @type {Array<string[], string[]>} */
-  const initMaps = [[], []];
-  const { status } = result;
+const createMaps = (result) =>
+  result.status.movedRoutes.reduce(
+    (acc, route, index) => {
+      const maps = [...acc];
 
-  const maps = status.movedRoutes.reduce((acc, route, index) => {
-    const maps = [...acc];
-    const UP = 0;
-    const DOWN = 1;
+      if (route === 'U') moveToUp(maps, index, result);
+      if (route === 'D') moveToDown(maps, index, result);
 
-    if (route === 'U') {
-      if (isLastAndGameOver(index, result)) maps[UP].push('X');
-      else maps[UP].push('O');
-      maps[DOWN].push(' ');
-    }
-
-    if (route === 'D') {
-      if (isLastAndGameOver(index, result)) maps[DOWN].push('X');
-      else maps[DOWN].push('O');
-      maps[UP].push(' ');
-    }
-
-    return maps;
-  }, initMaps);
-
-  return maps;
-};
+      return maps;
+    },
+    [[], []],
+  );
 
 module.exports = createMaps;

@@ -1,13 +1,39 @@
 const BridgeGame = require('./BridgeGame');
 const Validation = require('./Validations');
-const BridgeGameError = require('./error/BridgeGameError');
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
 const GameMessage = require('./constants/GameMessage');
+const Flag = require('./constants/Flag');
 
 class App {
   /** @type {BridgeGame} */
   #BridgeGame = new BridgeGame();
+
+  #retryOrQuit(input) {
+    switch (input) {
+      case 'R':
+        this.#BridgeGame.retry();
+        InputView.readMoving(this.#getMoveDirection.bind(this));
+        break;
+      case 'Q':
+        OutputView.printResult(this.#BridgeGame.quit());
+        break;
+    }
+  }
+
+  #midTermInspection(movedResult) {
+    switch (movedResult.flag) {
+      case Flag.OVER:
+        InputView.readGameCommand(this.#getGameCommand.bind(this));
+        break;
+      case Flag.END:
+        OutputView.printResult(movedResult);
+        break;
+      case Flag.CONTINUE:
+        InputView.readMoving(this.#getMoveDirection.bind(this));
+        break;
+    }
+  }
 
   /**
    * 게임 오버 시 재시도 또는 종료를 처리하는 메소드
@@ -17,11 +43,7 @@ class App {
   #getGameCommand(input) {
     try {
       Validation.Game(input, 'GAMESTATUS');
-
-      if (input === 'R') {
-        this.#BridgeGame.retry();
-        InputView.readMoving(this.#getMoveDirection.bind(this));
-      } else OutputView.printResult(this.#BridgeGame.quit());
+      this.#retryOrQuit(input);
     } catch (err) {
       OutputView.printMessage(err.message);
       InputView.readGameCommand(this.#getGameCommand.bind(this));
@@ -36,22 +58,10 @@ class App {
   #getMoveDirection(input) {
     try {
       Validation.Game(input, 'DIRECTION');
-      const moveResult = this.#BridgeGame.move(input);
-      OutputView.printMap(moveResult);
+      const movedResult = this.#BridgeGame.move(input);
 
-      switch (moveResult.flag) {
-        case 'GAME_OVER':
-          InputView.readGameCommand(this.#getGameCommand.bind(this));
-          break;
-        case 'GAME_END':
-          OutputView.printResult(moveResult);
-          break;
-        case 'CONTINUE':
-          InputView.readMoving(this.#getMoveDirection.bind(this));
-          break;
-        default:
-          throw new BridgeGameError('게임 진행에 오류가 발생했습니다.');
-      }
+      OutputView.printMap(movedResult);
+      this.#midTermInspection(movedResult);
     } catch (err) {
       OutputView.printMessage(err.message);
       InputView.readMoving(this.#getMoveDirection.bind(this));
@@ -66,9 +76,7 @@ class App {
   #getBridgeSize(input) {
     try {
       Validation.Bridge(input);
-
-      const bridgeSize = Number(input);
-      this.#BridgeGame.init(bridgeSize);
+      this.#BridgeGame.init(Number(input));
 
       InputView.readMoving(this.#getMoveDirection.bind(this));
     } catch (err) {
