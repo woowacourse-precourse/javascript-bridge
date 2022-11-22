@@ -47,6 +47,7 @@ class BridgeGame {
 
   
 }
+module.exports = BridgeGame;
 
 
 // let bg = new BridgeGame(['U', 'D', 'D']);

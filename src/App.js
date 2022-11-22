@@ -25,19 +25,27 @@ class App {
     InputView.readMoving((key) =>{
       this.bridgeGame.move(key)
       OutputView.printMap(this.bridgeGame.getMyWay());
-      if(!this.bridgeGame.isRightWay()) ;
-      //다시할건지 끝낼건지
-      
-      if(this.bridgeGame.isLast()) ;
-      //끝내기
+      if(!this.bridgeGame.isRightWay()) 
+        return this.getGameCommand();      
+      if(this.bridgeGame.isLast())
+        return this.quit();
       return this.getKey();
     });
   }
   getGameCommand(){
     InputView.readGameCommand((command) => {
-      if(command === 'R') ; //다시하기
-      if(command === 'Q'); //끝내기
-    })
+      if(command === 'R') return this.restart();
+      if(command === 'Q') return this.quit();
+    });
+  }
+  restart(){
+    this.bridgeGame.retry();
+    this.getKey();
+  }
+  quit() {
+    const isSuccess = (this.bridgeGame.isRightWay() && this.bridgeGame.isLast());
+    OutputView.printResult(this.bridgeGame.getMyWay(),isSuccess,this.bridgeGame.getAttepts());
+    Console.close();
   }
 }
 
