@@ -50,13 +50,12 @@ class BridgeGame {
   }
 
   getScore() {
-    if(this.#player.upsides.indexOf(MOVING.UNPASSED) > -1 || this.#player.downsides.indexOf(MOVING.UNPASSED) > -1) return CONTROL.GAME_OVER;
+    if(this.#player.upsides.indexOf(MOVING.UNPASSED) > -1 ||
+      this.#player.downsides.indexOf(MOVING.UNPASSED) > -1) { 
+      return CONTROL.GAME_OVER;
+    };
     if(this.#player.step.length !== this.#stairs.bridge.length) return CONTROL.PASS_STEP;
-    if(this.#player.step.length === this.#stairs.bridge.length) {
-      this.getRecordSteps();
-      this.getSucessValue();
-      return CONTROL.GAME_END;
-    }
+    if(this.#player.step.length === this.#stairs.bridge.length) return CONTROL.GAME_END;
   }
 
   getCountReplyNumber() {
@@ -66,7 +65,10 @@ class BridgeGame {
   getSucessValue() {
     let lastStep = this.getRecordSteps();
     if(this.#player.upsides.length !== this.#stairs.bridge.length) return RESULT.FAIL;
-    if(lastStep[0].indexOf(MOVING.UNPASSED) > -1 || lastStep[1].indexOf(MOVING.UNPASSED) > -1) return RESULT.FAIL;
+    if(lastStep[0].indexOf(MOVING.UNPASSED) > -1 ||
+      lastStep[1].indexOf(MOVING.UNPASSED) > -1) {
+      return RESULT.FAIL;
+     }
     if(this.#player.upsides.length === this.#stairs.bridge.length) return RESULT.SUCCESS;
   }
 
