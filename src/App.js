@@ -6,6 +6,12 @@ class App {
     const size = await InputView.readBridgeSize()
 
     const bridgeGame = new BridgeGame(size)
+
+    while(!bridgeGame.isEnd()){
+      const direction = await InputView.readMoving()
+
+      bridgeGame.move(direction)
+    }
   }
 }
 
