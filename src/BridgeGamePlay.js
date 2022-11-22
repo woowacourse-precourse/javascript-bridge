@@ -1,9 +1,7 @@
-const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const { RESULT } = require('./constant/constant');
-const { makeRandomNumber } = require('./utils/util');
 const BridgeGame = require('./BridgeGame');
+const { RESULT } = require('./constant/constant');
 
 /**
  * 다리 건너기 게임 진행을 관리하는 클래스
@@ -22,15 +20,8 @@ class BridgeGamePlay {
   start() {
     OutputView.printStart();
     const bridgeSize = InputView.getBridgeSize();
-    this.makeBridge(bridgeSize);
+    this.bridge = this.bridgeGame.makeBridge(bridgeSize);
     this.playGame();
-  }
-
-  /**
-   * 다리 생성
-   */
-  makeBridge(bridgeSize) {
-    this.bridge = BridgeMaker.makeBridge(bridgeSize, makeRandomNumber);
   }
 
   /**

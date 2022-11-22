@@ -1,3 +1,5 @@
+const BridgeMaker = require('./BridgeMaker');
+const { makeRandomNumber } = require('./utils/util');
 const { MOVE, MOVE_PICK, PLAY } = require('./constant/constant');
 
 /**
@@ -34,6 +36,14 @@ class BridgeGame {
         if (move === MOVE.DOWN) currentBridge[1][index] = MOVE.DOWN;
       });
     return currentBridge;
+  }
+
+  /**
+   * 다리 생성
+   */
+  makeBridge(bridgeSize) {
+    const bridge = BridgeMaker.makeBridge(bridgeSize, makeRandomNumber);
+    return bridge;
   }
 
   /**
