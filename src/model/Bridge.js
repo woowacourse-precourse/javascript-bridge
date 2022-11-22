@@ -11,19 +11,10 @@ class Bridge {
   #map = {};
 
   constructor(bridgeSize) {
-    const defaultArray = this.makeDefaultArray(bridgeSize);
+    const defaultArray = ' '.repeat(bridgeSize).split('');
     this.#bridge = makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     this.#map.up = [...defaultArray];
     this.#map.down = [...defaultArray];
-  }
-
-  makeDefaultArray(bridgeSize) {
-    // Array(Number(bridgeSize)).fill(' ')가 정상적으로 동작하지 않는 버그가 있어 이 메소드를 사용
-    const temp = [];
-    for (let index = 0; index < bridgeSize; index += 1) {
-      temp.push(' ');
-    }
-    return temp;
   }
 
   getLength() {
