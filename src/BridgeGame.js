@@ -18,7 +18,7 @@ class BridgeGame {
   constructor() {
     this.#bridge = [];
     this.#bridgeStack = [];
-    this.#retryCount = 0;
+    this.#retryCount = 1;
     this.#isSuccess = false;
     Console.print(MESSAGE.GAME.START);
   }
@@ -75,6 +75,7 @@ class BridgeGame {
   checkTerminate() {
     const isTerminate = this.#bridge.length === this.#bridgeStack.length;
     if (isTerminate) {
+      this.#isSuccess = true;
       this.close();
     }
     if (!isTerminate) {
@@ -94,7 +95,7 @@ class BridgeGame {
   }
 
   close() {
-    Console.print('게임 성공 여부: 성공');
+    OutputView.printResult(this.#bridge, this.#bridgeStack, this.#isSuccess, this.#retryCount);
     Console.close();
   }
 
