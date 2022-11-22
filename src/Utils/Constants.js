@@ -4,8 +4,8 @@ const MESSAGE = {
   INPUT_DIRECTION: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
   INPUT_COMMAND: '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
   GAME_RESULT_NOTICE: '최종 게임 결과',
-  GAME_RESULT: (result) => `\n게임 성공 여부: ${result} `,
-  ATTEMPT_NUMBER: (count) => `총 시도한 횟수: ${count} `,
+  GAME_RESULT: (result) => `\n게임 성공 여부: ${result}`,
+  ATTEMPT_NUMBER: (count) => `총 시도한 횟수: ${count}`,
 };
 
 const RULE = {
