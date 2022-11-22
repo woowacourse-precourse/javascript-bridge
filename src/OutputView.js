@@ -27,7 +27,7 @@ const OutputView = {
    */
   printResult(type, gameResult) {
     this.printMessage(MESSAGE.FINAL);
-    gameResult.printHistory();
+    this.printMap(gameResult.makeHistory());
     this.printMessage(`${MESSAGE.RESULT}${type === 'success' ? MESSAGE.SUCCESS : MESSAGE.FAIL}`);
     this.printMessage(gameResult.showTryCountSummary());
     this.exit();
