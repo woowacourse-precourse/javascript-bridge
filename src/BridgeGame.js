@@ -18,7 +18,7 @@ class BridgeGame {
         this.moveDownSide(bridge);
         break;
     }
-    return [this.#array[0], this.#array[1]];
+    return [this.#bridgeArray[0], this.#bridgeArray[1], this.#rightAnswer];
   }
 
   moveUpSide(bridge) {
@@ -36,21 +36,25 @@ class BridgeGame {
   moveRightUp() {
     this.#array[0].push(" O ");
     this.#array[1].push("   ");
+    this.#rightAnswer = true;
   }
 
   moveWrongUp() {
     this.#array[0].push("   ");
     this.#array[1].push(" X ");
+    this.#rightAnswer = false;
   }
 
   moveWrongDown() {
     this.#array[0].push(" X ");
     this.#array[1].push("   ");
+    this.#rightAnswer = false;
   }
 
   moveRightDown() {
     this.#array[0].push("   ");
     this.#array[1].push(" O ");
+    this.#rightAnswer = true;
   }
 
   /**

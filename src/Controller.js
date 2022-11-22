@@ -1,4 +1,5 @@
 const InputView = require("./InputView");
+const OutputView = require("./OutputView");
 const Validator = require("./utils/validator.js");
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeMaker = require("./BridgeMaker.js");
@@ -7,7 +8,12 @@ const BridgeGame = require("./BridgeGame");
 
 
 class Controller {
-  #bridge;
+  #bridge = [];
+  #currentBridge = {
+    up: [],
+    down: [],
+  };
+  #correct;
   constructor() {
     this.validator = new Validator();
     this.bridgeGame = new BridgeGame();
@@ -38,12 +44,22 @@ class Controller {
   movingDirectionInput(square) {
     try {
       this.validator.isUpAndDown(square);
-      const [upBridge, downBridge] = this.bridgeGame.move(this.#bridge, square);
+      this.setBridge(square);
       OutputView.printMap(this.#currentBridge);
     } catch (error) {
       Console.print(error);
       this.getDirection();
     }
+  }
+
+  setBridge(square) {
+    const [upBridge, downBridge, correct] = this.bridgeGame.move(
+      this.#bridge,
+      square,
+    );
+    this.#currentBridge.up = upBridge;
+    this.#currentBridge.down = downBridge;
+    this.#correct = correct;
   }
 }
 
