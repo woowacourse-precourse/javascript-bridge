@@ -8,7 +8,7 @@ class Validator {
   }
 
   error(message) {
-    throw Error(this.#errorPrefix + message);
+    throw new Error(this.#errorPrefix + message);
   }
 }
 
