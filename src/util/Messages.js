@@ -9,7 +9,8 @@ const OPTION_MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  LENGTH_ERROR: "[ERROR]: 다리 길이는 3~20사이의 숫자를 입력해야합니다.",
+  LENGTH_ERROR: "[ERROR]: 다리 길이는 3 ~ 20 사이의 숫자를 입력해야 합니다.",
+  MOVE_ERROR: "[ERROR]: 이동할 칸 입력은 U와 D중 하나만 입력해야 합니다.",
 });
 
 module.exports(OUTPUT_MESSAGE, OPTION_MESSAGE, ERROR_MESSAGE);
