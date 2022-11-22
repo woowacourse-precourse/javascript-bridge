@@ -1,4 +1,4 @@
-## # javascript-lotto
+# javascript-bridge
 
 ## 📢3주차 공통 피드백
 
