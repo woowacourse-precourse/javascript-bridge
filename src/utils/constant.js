@@ -3,6 +3,10 @@ const GAME = Object.freeze({
   END: '\n최종 게임 결과',
   SUCCESS: '성공',
   FAIL: '실패',
+  UP: 'U',
+  DOWN: 'D',
+  RETRY: 'R',
+  QUICK: 'Q',
   IS_GAME_SUCCESS: '게임 성공 여부: ',
   GAME_TRY_COUNT: '총 시도한 횟수: ',
 });
@@ -27,4 +31,9 @@ const SYMBOL = Object.freeze({
   BLANK: ' ',
 });
 
-module.exports = { GAME, ERROR, INPUT, SYMBOL };
+const NUMBER = Object.freeze({
+  MAX: 30,
+  MIN: 3,
+});
+
+module.exports = { GAME, ERROR, INPUT, SYMBOL, NUMBER };

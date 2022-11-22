@@ -51,8 +51,8 @@ class GameController {
   setGameCommand(gameCommand) {
     try {
       this.game.setGameCommand(gameCommand);
-      if (gameCommand === 'R') this.retry();
-      if (gameCommand === 'Q') this.end(false);
+      if (gameCommand === GAME.RETRY) this.retry();
+      if (gameCommand === GAME.QUICK) this.end(false);
     } catch (err) {
       OutputView.printMessage(err);
       this.askGameCommand();

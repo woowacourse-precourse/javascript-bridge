@@ -1,4 +1,4 @@
-const { ERROR } = require('./utils/constant');
+const { GAME, NUMBER, ERROR } = require('./utils/constant');
 
 const validateBridgeSize = {
   validate(number) {
@@ -6,24 +6,27 @@ const validateBridgeSize = {
     this.isRange(number);
   },
   isNumber(number) {
-    if (isNaN(+number)) {
+    if (isNaN(Number(number))) {
       throw ERROR.BRIDGE_SIZE_TYPE;
     }
   },
   isRange(number) {
-    if (+number < 3 || +number > 30) throw ERROR.BRIDGE_SIZE_RANGE;
+    if (Number(number) < NUMBER.MIN || Number(number) > NUMBER.MAX)
+      throw ERROR.BRIDGE_SIZE_RANGE;
   },
 };
 
 const validateNext = {
   validate(next) {
-    if (next !== 'U' && next !== 'D') throw ERROR.MOVING_DIRECTION_TYPE;
+    if (next !== GAME.UP && next !== GAME.DOWN)
+      throw ERROR.MOVING_DIRECTION_TYPE;
   },
 };
 
 const validateGameCommand = {
   validate(next) {
-    if (next !== 'R' && next !== 'Q') throw ERROR.GAME_COMMAND_TYPE;
+    if (next !== GAME.RETRY && next !== GAME.QUICK)
+      throw ERROR.GAME_COMMAND_TYPE;
   },
 };
 
