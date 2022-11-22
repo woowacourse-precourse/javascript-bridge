@@ -1,13 +1,20 @@
-const { initGame } = require('./BridgeGameController');
+const BridgeGameController = require('./BridgeGameController');
 const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const { printStartMessage } = require('./OutputView');
 
 class App {
-  static play() {
-    OutputView.printStartMessage();
-    InputView.readBridgeSize(initGame);
+  #view;
+
+  constructor() {
+    this.#view = InputView;
+  }
+
+  play() {
+    printStartMessage();
+    this.#view.readBridgeSize(BridgeGameController.initGame);
   }
 }
 
-App.play();
+const app = new App();
+app.play();
 module.exports = App;
