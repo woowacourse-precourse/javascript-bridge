@@ -15,17 +15,7 @@ class App {
   }
   play() {
     OutputView.printStartMessage();
-    // const bridgeSize = InputView.readBridgeSize();
-    // const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-    // console.log('bridgeSize:' + bridgeSize);
-    // console.log('bridge' + bridge);
-    // const bridgeGame = new BridgeGame(bridge);
-    // while (this.gameStatus) {
-    //   let restartCheck = this.gameRotate(bridge, bridgeGame);
-    //   if (restartCheck === 'P' || restartCheck === 'Q') {
-    //     this.checkRestart(restartCheck, bridgeGame);
-    //   }
-    // }
+    const bridgeGame = this.makeBridgeGame();
   }
 
   makeBridge() {
@@ -42,6 +32,18 @@ class App {
     } catch (error) {
       Console.print('[ERROR] ' + error);
       return this.makeBridgeGame();
+    }
+  }
+
+  executeGame(bridgeGame) {
+    //틀릴때까지 게임을 실행, 재시작까지 확인
+    let continueGameCheck = true;
+    let gamePlayCount = 0;
+    let isSuccess;
+    while (continueGameCheck) {
+      gamePlayCount += 1;
+      isSuccess = this.executeTry(bridgeGame); // 끝날때까지 수행
+      continueGameCheck = this.checkRetry(bridgeGame, isSuccess);
     }
   }
 
