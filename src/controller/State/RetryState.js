@@ -1,19 +1,19 @@
 const InputView = require("../../view/InputView");
-const OutputView = require("../../view/OutputView");
-const StateTemplate = require("./StateTemplate");
+const State = require("./State");
 
-class RetryState extends StateTemplate {
-	constructor(game) {
-		super(game);
+class RetryState extends State {
+	#curHandler;
+	#nextHandler;
+	constructor(curHandler, nextHandler) {
+		super();
+		this.#curHandler = curHandler;
+		this.#nextHandler = nextHandler;
 	}
-	inputHandler = InputView.readGameCommand;
-	run(command) {
-		const isEnd = this.game.retry(command);
-		if (isEnd) {
-			OutputView.printResult(this.game.getCurResult().stringify(), false, this.game.getTryCount());
-			return false;
-		}
-		return true;
+	run() {
+		InputView.readGameCommand((command) => {
+			this.#curHandler(command);
+			this.#nextHandler();
+		});
 	}
 }
 

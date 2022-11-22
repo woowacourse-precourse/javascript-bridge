@@ -1,20 +1,21 @@
 const InputView = require("../../view/InputView");
 const OutputView = require("../../view/OutputView");
-const StateTemplate = require("./StateTemplate");
+const State = require("./State");
 
-class IngState extends StateTemplate {
-	constructor(game) {
-		super(game);
+class IngState extends State {
+	#curHandler;
+	#nextHandler;
+	constructor(curHandler, nextHandler) {
+		super();
+		this.#curHandler = curHandler;
+		this.#nextHandler = nextHandler;
 	}
-	inputHandler = InputView.readMoving;
-	run(command) {
-		const isCompelete = this.game.move(command.toUpperCase());
-		OutputView.printMap(this.game.getCurResult().stringify());
-		if (isCompelete) {
-			OutputView.printResult(this.game.getCurResult().stringify(), true, this.game.getTryCount());
-			return false;
-		}
-		return true;
+	run() {
+		InputView.readMoving((command) => {
+			const result = this.#curHandler(command);
+			OutputView.printMap(result);
+			this.#nextHandler();
+		});
 	}
 }
 
