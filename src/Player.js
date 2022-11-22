@@ -40,17 +40,13 @@ class Player {
         const movingInput = InputView.readMoving();
         const currentBridge = bridgeGame.move(movingInput);
         OutputView.printMap(currentBridge);
-        
+
         return currentBridge;
     }
 
     playGame(bridgeAnswer, bridgeGame) {
-        const tryCount = bridgeGame.getTryCount();
         const moveResult = this.repeatMove(bridgeAnswer, bridgeGame);
-        const isSuccessed = moveResult[0];
-        const currentBridge = moveResult[1];
-
-        if (isSuccessed === false) {
+        if (moveResult[0] === false) {
             const gameCommandInput = InputView.readGameCommand();
             const isRetried = bridgeGame.retry(gameCommandInput);
             if (isRetried) {
@@ -59,6 +55,14 @@ class Player {
                 return;
             }
         }
+        this.getTotalGameResult(bridgeGame, moveResult);
+    }
+
+    getTotalGameResult(bridgeGame, moveResult) {
+        const isSuccessed = moveResult[0];
+        const currentBridge = moveResult[1];
+        const tryCount = bridgeGame.getTryCount();
+
         if(currentBridge) {
             OutputView.printTotalGameResult(currentBridge, isSuccessed, tryCount);
         }
