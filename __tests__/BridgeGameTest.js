@@ -14,12 +14,41 @@ describe("다리 게임 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  test("이동한 경로에 X가 포함되어있는지 테스트", () => {
+  test("이동한 경로에 X가 포함되어있는지 실패 테스트", () => {
     const bridgeGame = new BridgeGame(["U", "D", "U"]);
     const item = ["U", "D", "D"];
     item.forEach((v) => {
       bridgeGame.move(v);
     });
     expect(bridgeGame.checkX()).toEqual(false);
+  });
+
+  test("이동한 경로에 X가 포함되어있는지 성공 테스트", () => {
+    const bridgeGame = new BridgeGame(["U", "D", "U"]);
+    const item = ["U", "D", "U"];
+    item.forEach((v) => {
+      bridgeGame.move(v);
+    });
+    expect(bridgeGame.checkX()).toEqual(true);
+  });
+
+  test("이동한 경로의 길이와 최종 경로의 길이 비교 성공 테스트", () => {
+    const bridgeGame = new BridgeGame(["U", "D", "U"]);
+    const item = ["U", "D", "D"];
+
+    item.forEach((v) => {
+      bridgeGame.move(v);
+    });
+    expect(bridgeGame.lengthCompare()).toEqual(true);
+  });
+
+  test("이동한 경로의 길이와 최종 경로의 길이 비교 성공 테스트", () => {
+    const bridgeGame = new BridgeGame(["U", "D", "U"]);
+    const item = ["U", "D"];
+
+    item.forEach((v) => {
+      bridgeGame.move(v);
+    });
+    expect(bridgeGame.lengthCompare()).toEqual(false);
   });
 });
