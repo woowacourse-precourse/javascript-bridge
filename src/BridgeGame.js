@@ -21,12 +21,14 @@ class BridgeGame {
       func: type => {
         const IS_UP = type === 'U';
         const IS_DOWN = type === 'D';
+        const IS_CORRECT =
+            (IS_UP && this.bridge[0][this.position] === 'O') ||
+            (IS_DOWN && this.bridge[1][this.position] === 'O');
 
         this.trace[this.position] = type;
-
         if (IS_UP || IS_DOWN) {
           OutputView.printMap({ bridge: this.bridge, trace: this.trace, positon: this.position });
-          if (!isCorrect(type)) retry();
+          if (!IS_CORRECT) retry();
           else {
             this.position += 1;
             this.move();
@@ -60,10 +62,6 @@ class BridgeGame {
     console.log(this.bridge);
     this.trace = new Array(size).fill(' ');
     this.move();
-  }
-  isCorrect(type) {
-    if (type === 'U' && bridge[0][this.position] === 'X') return false;
-    return true;
   }
 }
 
