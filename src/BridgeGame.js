@@ -22,12 +22,23 @@ class BridgeGame {
   getResult() {
     let result = [[], []];
 
-    this.#upsideDown.forEach(([upsideDown, number], i) => {
-      const isUpsideDown = upsideDown === this.#bridge[i];
+    this.#upsideDown.forEach(([upsideDown, number], index) => {
+      const isUpsideDown = upsideDown === this.#bridge[index];
 
       result[number].push(isUpsideDown ? "O" : "X");
       result[Math.abs(number - 1)].push(" ");
     });
+
+    return result;
+  }
+
+  isFail() {
+    const index = this.#upsideDown.length - 1;
+    return this.#bridge[index] !== this.#upsideDown[index][0];
+  }
+
+  isSuccess() {
+    return this.#bridge.length === this.#upsideDown.length;
   }
 
   /**
