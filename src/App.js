@@ -1,6 +1,6 @@
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
-const BridgeGame = require('./BridgeGame');
+const BridgeGame = require('./model/BridgeGame');
 const { COMMAND } = require('./constants/bridge');
 
 class App {

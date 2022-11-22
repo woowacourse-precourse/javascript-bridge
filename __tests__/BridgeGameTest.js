@@ -1,4 +1,4 @@
-const BridgeGame = require('../src/BridgeGame');
+const BridgeGame = require('../src/model/BridgeGame');
 
 describe('다리 모델 테스트', () => {
   test('다리 사이즈에 따른 생성길이 테스트', () => {
