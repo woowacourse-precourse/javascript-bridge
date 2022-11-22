@@ -1,7 +1,9 @@
+const BridgeGame = require("./BridgeGame");
 const MissionUtils = require("@woowacourse/mission-utils");
 const Validate = require("./Validate");
 const { INPUT_MESSAGE } = require("./Utils");
 
+const bridgeGame = new BridgeGame;
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -11,8 +13,14 @@ const InputView = {
    */
   readBridgeSize() {
     MissionUtils.Console.readLine(INPUT_MESSAGE.INPUT_BRIDGE_LENGTH, (size) => {
-      return Validate.validateBridgeLength(size);
-    })
+      try {
+        Validate.validateBridgeLength(size);
+        bridgeGame.getBridge(size);
+      } catch (error) {
+        MissionUtils.Console.print(error);
+        this.readBridgeSize();
+      };
+    });
   },
 
   /**
@@ -20,8 +28,14 @@ const InputView = {
    */
   readMoving() {
     MissionUtils.Console.readLine(INPUT_MESSAGE.CHOICE_SPACE_TO_MOVE, (move) => {
-      return Validate.validateMoving(move);
-    })
+      try {
+        Validate.validateMoving(move);
+        bridgeGame.getMoving(move);
+      } catch (error) {
+        MissionUtils.Console.print(error);
+        this.readMoving();
+      };
+    });
   },
 
   /**
@@ -29,8 +43,14 @@ const InputView = {
    */
   readGameCommand() {
     MissionUtils.Console.readLine(INPUT_MESSAGE.INPUT_CHOICE_RETRY_OR_END, (command) => {
-      return Validate.ValidateCommand(command);
-    })
+      try {
+        Validate.ValidateCommand(command);
+        bridgeGame.getGameCommand(command);
+      } catch (error) {
+        MissionUtils.Console.print(error);
+        this.readGameCommand();
+      };
+    });
   },
 };
 
