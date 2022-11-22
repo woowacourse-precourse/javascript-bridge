@@ -1,4 +1,5 @@
 const { GAME_PATTERN, GAME_COMMAND } = require('../constants/bridgeGame');
+
 const REPEAT_COUNT = 3;
 
 class BridgeMapPainter {
