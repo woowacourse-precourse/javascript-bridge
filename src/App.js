@@ -4,6 +4,10 @@ const BridgeGame = require("./BridgeGame");
 const Validator = require("./Validator");
 
 class App {
+  constructor() {
+    this.bridgeGame = new BridgeGame();
+  }
+
   play() {}
 }
 
