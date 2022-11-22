@@ -4,7 +4,7 @@ const getSize = require('./gameStart/gameStart');
 const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
 const gameProcess = require('./gameProcess/gameProcess');
-const { ifRetryorEnd } = require('./gameRetry/gameRetry');
+const ifRetryorEnd = require('./gameRetry/gameRetry');
 const { printWinResult, printLoseResult } = require('../view/OutputView');
 
 class App {
