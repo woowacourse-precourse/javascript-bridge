@@ -6,18 +6,21 @@ const Values = require("./constants/Values.js");
 
 class App {
   #game;
+
   constructor() {
     OutputView.printGameStart();
   }
+
   play() {
-    InputView.readBridgeSize.bind(this)(this.createBridge);
+    InputView.readBridgeSize.bind(this)(this.handleCreatingBridge);
   }
-  createBridge(size) {
+  handleCreatingBridge(size) {
     const isNormalInput = this.checkError(Validator.checkSizeInput, size);
     if (!isNormalInput) return this.play();
     this.#game = new BridgeGame(size);
     this.askMoving();
   }
+
   askMoving() {
     InputView.readMoving.bind(this)(this.handleMoving);
   }
@@ -33,6 +36,7 @@ class App {
     if (this.#game.isSuccess) return this.askMoving();
     return this.askGameCommand();
   }
+
   askGameCommand() {
     InputView.readGameCommand.bind(this)(this.handleGameCommand);
   }
@@ -46,9 +50,11 @@ class App {
     this.#game.retry();
     this.askMoving();
   }
+
   showGameResult() {
     OutputView.printResult(this.#game.stepObj, this.#game.isSuccess, this.#game.numOfTrials);
   }
+
   checkError(validator, input) {
     try {
       validator(input);

@@ -2,9 +2,9 @@ const { Console } = require("@woowacourse/mission-utils");
 const InfoMessages = require("../constants/InfoMessages.js");
 
 const InputView = {
-  readBridgeSize(createBridge) {
+  readBridgeSize(handleCreatingBridge) {
     Console.readLine(InfoMessages.ENTER_BRIDGE_SIZE, (size) => {
-      createBridge.call(this, size);
+      handleCreatingBridge.call(this, size);
     });
   },
 
