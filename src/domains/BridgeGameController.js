@@ -30,15 +30,19 @@ const BridgeGameController = {
   /** 게임 상태를 초기화한다. */
   initializeBridgeGame() {
     InputView.read(READ_TYPE.BRIDGE_SIZE, (bridgeSize) => {
-      BridgeState.setBridgeSize(Utils.convertToNumber(bridgeSize));
-
-      const answerBridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-      BridgeState.setAnswerBridge(answerBridge);
+      bridgeSize = Utils.convertToNumber(bridgeSize);
+      BridgeState.setBridgeSize(bridgeSize);
+      this.initializeAnswerBridge(bridgeSize);
 
       bridgeGame = new BridgeGame();
       OutputView.addNewLine();
       this.loopGame();
     });
+  },
+
+  initializeAnswerBridge(bridgeSize) {
+    const answerBridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+    BridgeState.setAnswerBridge(answerBridge);
   },
 
   /** 게임을 진행하는 Loop */
