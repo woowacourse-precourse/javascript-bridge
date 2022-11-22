@@ -12,7 +12,12 @@ class App {
   };
 
   play() {
-    InputView.readBridgeSize(this.#data);
+    console.log("다리 건너기 게임을 시작합니다.\n");
+    this.startGame(this.#data);
+  }
+
+  startGame(data) {
+    return InputView.readBridgeSize(data);
   }
 }
 
