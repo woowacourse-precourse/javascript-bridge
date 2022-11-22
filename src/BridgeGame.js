@@ -11,7 +11,16 @@ class BridgeGame {
 
   constructor() {
     this.#controller = new Controller();
-    this.#controller.init();
+  }
+
+  init(){
+    try{
+      const length = this.#controller.initBridgeLength();
+      this.#controller.makeBridge(length);
+    }
+    catch(e){
+      this.init();
+    }
     this.#bridge = this.#controller.getGame(Const.KEY.BRIDGE);
     this.#current = this.#controller.getGame(Const.KEY.CURRENT);
   }

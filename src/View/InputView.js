@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const validation = require('../Utils/Validation');
 const Const = require('../constant/message');
+const output = require('./OutputView');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -10,7 +11,10 @@ const InputView = {
    */
   readBridgeSize() {
     const result = this.read(Const.MESSAGE.GAME_START);
-    if (!validation.validateBridgeLength(result)) throw new Error(Const.ERROR_MESSAGE.ERROR_SIZE);
+    if (result !== undefined && !validation.validateBridgeLength(result)) {
+      output.printMessage(Const.ERROR_MESSAGE.ERROR_SIZE);
+      throw new Error(Const.ERROR_MESSAGE.ERROR_SIZE);
+    }
     return result;
   },
   /**
