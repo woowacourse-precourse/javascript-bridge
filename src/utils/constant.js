@@ -8,10 +8,10 @@ const TOTAL_NUMBER_OF_ATTEMPTS ="총 시도한 횟수: "
 const SUCCESS = "성공";
 const FAIL = "실패"
 
-const RANGE_BRIDGE_NUMBER_ERROR ="[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다."
-const PLAYER_INPUT_ERROR ="[ERROR] 플레이어 입력 값이 U나 D가 아닙니다."
-const PLAYER_RETRY_INPUT_ERROR ="[ERROR] 게임을 다시 시도할지에 대한 입력이 R이나 Q가 아닙니다."
-const PLAYER_FLOAT_INPUT_ERROR ="[ERROR] 다리 길이 입력에 실수가 들어오면 안됩니다.."
+const RANGE_BRIDGE_NUMBER_ERROR ="[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n"
+const PLAYER_INPUT_ERROR ="[ERROR] 플레이어 입력 값이 U나 D가 아닙니다.\n"
+const PLAYER_RETRY_INPUT_ERROR ="[ERROR] 게임을 다시 시도할지에 대한 입력이 R이나 Q가 아닙니다.\n"
+const PLAYER_FLOAT_INPUT_ERROR ="[ERROR] 다리 길이 입력에 실수가 들어오면 안됩니다.\n"
 
 module.exports = {
   GAME_START_STRING,

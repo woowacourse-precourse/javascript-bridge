@@ -1,5 +1,3 @@
-const { IndividualResultOutput } = require("./controller/controller")
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -16,7 +14,7 @@ class BridgeGame {
     this.#playerDown = [];
     this.#playerUp = [];
     this.#totalTryNumber=1;
-  }
+    }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -29,7 +27,6 @@ class BridgeGame {
       this.#indexValue++;
     })
     this.#playerMoveResult=this.makeMoveResult()
-    IndividualResultOutput(this.#playerMoveResult)
     return this.#playerMoveResult
   }
 
