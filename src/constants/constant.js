@@ -24,5 +24,7 @@ const GAME_RESOURCE = {
   CENTER_VERTICAL: " | ",
   CAN_GO: "O",
   CANT_GO: "X",
+  UPSIDE: 1,
+  DOWNSIDE: 0,
 };
 module.exports = { MESSAGE, ERR_MESSAGE, GAME_RESOURCE };

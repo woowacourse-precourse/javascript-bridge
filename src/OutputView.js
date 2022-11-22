@@ -1,6 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { MESSAGE } = require("./constants/Constant");
-const BridgeGame = require("./BridgeGame");
+const { MESSAGE, GAME_RESOURCE } = require("./constants/Constant");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -14,45 +13,47 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  // todo : 중간에 틀리면 o | o | x 로 출력되어야하는데
+  //                 -> x | x | x 로 바뀜(중간에 맞춘 값들도 )
+  // 값을 하나씩 비교해야되나 ? ?
   printMap(keepGaming, getMap) {
-    let upSide = "";
-    let downSide = "";
+    const resultArr = new Array(2);
+    resultArr[GAME_RESOURCE.UPSIDE] = "";
+    resultArr[GAME_RESOURCE.DOWNSIDE] = "";
+
     for (let i = 0; i < getMap.length; i++) {
       if (i == 0) {
-        upSide += "[ ";
-        downSide += "[ ";
+        resultArr[GAME_RESOURCE.UPSIDE] += "[ ";
+        resultArr[GAME_RESOURCE.DOWNSIDE] += "[ ";
       } else {
-        upSide += " | ";
-        downSide += " | ";
+        resultArr[GAME_RESOURCE.UPSIDE] += " | ";
+        resultArr[GAME_RESOURCE.DOWNSIDE] += " | ";
       }
-      if (getMap[i] === 1) {
+      if (getMap[i] === GAME_RESOURCE.UPSIDE) {
         if (keepGaming === "right" || keepGaming === "allRight") {
-          upSide += "O";
-          downSide += " ";
+          resultArr[GAME_RESOURCE.UPSIDE] += "O";
+          resultArr[GAME_RESOURCE.DOWNSIDE] += " ";
         } else {
-          upSide += "X";
-          downSide += " ";
+          resultArr[GAME_RESOURCE.UPSIDE] += "X";
+          resultArr[GAME_RESOURCE.DOWNSIDE] += " ";
         }
-      } else if (getMap[i] === 0) {
+      } else if (getMap[i] === GAME_RESOURCE.DOWNSIDE) {
         if (keepGaming === "right" || keepGaming === "allRight") {
-          upSide += " ";
-          downSide += "O";
+          resultArr[GAME_RESOURCE.UPSIDE] += " ";
+          resultArr[GAME_RESOURCE.DOWNSIDE] += "O";
         } else {
-          upSide += " ";
-          downSide += "X";
+          resultArr[GAME_RESOURCE.UPSIDE] += " ";
+          resultArr[GAME_RESOURCE.DOWNSIDE] += "X";
         }
       }
       if (i == getMap.length - 1) {
-        upSide += " ] ";
-        downSide += " ] ";
+        resultArr[GAME_RESOURCE.UPSIDE] += " ] ";
+        resultArr[GAME_RESOURCE.DOWNSIDE] += " ] ";
       }
     }
-    Console.print(upSide);
-    Console.print(downSide);
+    Console.print(resultArr[GAME_RESOURCE.UPSIDE]);
+    Console.print(resultArr[GAME_RESOURCE.DOWNSIDE]);
 
-    const resultArr = new Array(2);
-    resultArr[0] = upSide;
-    resultArr[1] = downSide;
     return resultArr;
   },
 
@@ -66,16 +67,16 @@ const OutputView = {
 
     if (command === 0) {
       Console.print(MESSAGE.PRINT_RESULT);
-      Console.print(result[0]);
-      Console.print(result[1]);
+      Console.print(result[GAME_RESOURCE.UPSIDE]);
+      Console.print(result[GAME_RESOURCE.DOWNSIDE]);
       Console.print(MESSAGE.PRINT_GAME_RESULT + " " + MESSAGE.FAIL);
       Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + " " + count);
       Console.close();
       return;
     }
     Console.print(MESSAGE.PRINT_RESULT);
-    Console.print(result[0]);
-    Console.print(result[1]);
+    Console.print(result[GAME_RESOURCE.UPSIDE]);
+    Console.print(result[GAME_RESOURCE.DOWNSIDE]);
     Console.print(MESSAGE.PRINT_GAME_RESULT + " " + MESSAGE.SUCCESS);
     Console.print(MESSAGE.PRINT_TRY_COUNT_MESSAGE + " " + count);
     Console.close();

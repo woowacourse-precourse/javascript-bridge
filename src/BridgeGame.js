@@ -46,8 +46,8 @@ class BridgeGame {
    */
   compareMove(bridge, userMoveArray) {
     this.userMoveArray = userMoveArray;
-    console.log(this.userMoveArray);
-    console.log(bridge);
+    // console.log(this.userMoveArray);
+    // console.log(bridge);
 
     for (let i = this.userMoveArray.length - 1; i < bridge.length; i++) {
       if (bridge[i] === this.userMoveArray[i]) {
@@ -65,7 +65,7 @@ class BridgeGame {
    */
   getMap(userMoveArray) {
     this.userMoveArray = userMoveArray;
-    console.log(this.userMoveArray);
+    // console.log(this.userMoveArray);
     return this.userMoveArray;
   }
 

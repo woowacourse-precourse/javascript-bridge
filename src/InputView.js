@@ -22,7 +22,7 @@ const InputView = {
         inputBridgeSize,
         BridgeRandomNumberGenerator.generate
       );
-      console.log(bridge);
+      // console.log(bridge);
       let userMoveArray = [];
       this.readMoving(bridgeGame, bridge, userMoveArray);
     });
