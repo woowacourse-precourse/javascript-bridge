@@ -16,8 +16,7 @@ const InputView = {
       ValidCheck.sizeInput(size);
       this.bridgeGameControl.makeBridgeGame(size);
       this.readMoving();
-    } 
-    catch (error) {
+    } catch (error) {
       OutputView.printErrorMessage(ERROR.SIZE_ERROR);
       this.readBridgeSize();
     }
