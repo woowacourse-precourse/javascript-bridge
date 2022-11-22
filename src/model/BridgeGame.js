@@ -20,8 +20,10 @@ class BridgeGame {
   }
 
   createBridgeModel(size) {
-    const randomNumGenerator = BridgeRandomNumberGenerator.generate;
-    const bridgeArr = BridgeMaker.makeBridge(size, randomNumGenerator);
+    const bridgeArr = BridgeMaker.makeBridge(
+      size,
+      BridgeRandomNumberGenerator.generate
+    );
     this.setBridgeModel(bridgeArr);
   }
   setBridgeModel(bridgeArr) {

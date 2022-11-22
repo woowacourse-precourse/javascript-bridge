@@ -1,4 +1,3 @@
-const Bridge = require("./model/Bridge");
 const { BRIDGE } = require("./view/stringsUI");
 
 /**
