@@ -7,12 +7,11 @@ const { generate } = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 
 class Controller {
+  #bridgeGame;
 
-    #bridgeGame;
-
-    constructor () {
-        this.#bridgeGame = new BridgeGame();
-    }
+  constructor () {
+    this.#bridgeGame = new BridgeGame();
+  }
 
   maker () {
     inputView.readBridgeSize(this.handleBridgeLength.bind(this));
@@ -34,22 +33,36 @@ class Controller {
     }
   }
 
-  moveBrige(controller) {
-    if (this.#bridgeGame.getMoveIndex() !== this.#bridgeGame.getBridge().length) {
+  moveBrige (controller) {
+    if (
+      this.#bridgeGame.getMoveIndex() !== this.#bridgeGame.getBridge().length
+    ) {
       inputView.readMoving(this.handleMoveBridge.bind(this));
     } else {
-      outputView.printResult(true, `${this.getPrintList(this.#bridgeGame.getUpList())}\n${this.getPrintList(this.#bridgeGame.getDownList())}`, this.#bridgeGame.getTryCount());
+      outputView.printResult(
+        true,
+        `${this.getPrintList(
+          this.#bridgeGame.getUpList(),
+        )}\n${this.getPrintList(this.#bridgeGame.getDownList())}`,
+        this.#bridgeGame.getTryCount(),
+      );
     }
   }
 
   drawBridgeMap (string) {
     this.#bridgeGame.move(string);
     this.setMapArray(this.sameBridge(this.#bridgeGame.getMoveIndex()), string);
-    outputView.printMap(`${this.getPrintList(this.#bridgeGame.getUpList())}\n${this.getPrintList(this.#bridgeGame.getDownList())}`);
+    outputView.printMap(
+      `${this.getPrintList(this.#bridgeGame.getUpList())}\n${this.getPrintList(
+        this.#bridgeGame.getDownList(),
+      )}`,
+    );
   }
 
   handleMoveInput (string) {
-    if (this.#bridgeGame.getBridge()[this.#bridgeGame.getMoveIndex()] === string) {
+    if (
+      this.#bridgeGame.getBridge()[this.#bridgeGame.getMoveIndex()] === string
+    ) {
       this.#bridgeGame.incrementMoveIndex();
       return this.moveBrige(this);
     }
@@ -68,7 +81,8 @@ class Controller {
   }
 
   sameBridge (idx) {
-    return this.#bridgeGame.getBridge()[idx] === this.#bridgeGame.getInputUpDown()
+    return this.#bridgeGame.getBridge()[idx]
+    === this.#bridgeGame.getInputUpDown()
       ? BRIDGE.ABLE
       : BRIDGE.UNABLE;
   }
@@ -79,8 +93,8 @@ class Controller {
       this.#bridgeGame.getDownList().push(' ');
     }
     if (string === BRIDGE.DOWN && sameResult) {
-        this.#bridgeGame.getUpList().push(' ');
-        this.#bridgeGame.getDownList().push(sameResult);
+      this.#bridgeGame.getUpList().push(' ');
+      this.#bridgeGame.getDownList().push(sameResult);
     }
   }
 
@@ -88,7 +102,7 @@ class Controller {
     return `${BRIDGE.START} ${list.join(BRIDGE.DIVISION)} ${BRIDGE.END}`;
   }
 
-  askRetryGame() {
+  askRetryGame () {
     inputView.readGameCommand(this.handleAskRetry.bind(this));
   }
 
@@ -101,7 +115,12 @@ class Controller {
   }
 
   inputQuit (string) {
-    if (string === 'Q') outputView.printResult(false, `${this.getPrintList(this.#bridgeGame.getUpList())}\n${this.getPrintList(this.#bridgeGame.getDownList())}`, this.#bridgeGame.getTryCount());
+    if (string === 'Q') outputView.printResult(
+      false,
+      `${this.getPrintList(this.#bridgeGame.getUpList())}
+      \n${this.getPrintList(this.#bridgeGame.getDownList())}`,
+      this.#bridgeGame.getTryCount(),
+    );
   }
 
   handleAskRetry (string) {
@@ -114,7 +133,6 @@ class Controller {
       this.askRetryGame();
     }
   }
-
 }
 
 module.exports = Controller;
