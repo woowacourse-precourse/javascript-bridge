@@ -21,19 +21,20 @@ class BridgeGame {
   }
 
   currentUserMoveMap() {
-    const notConvertMap = this.makeUserMoveMap(this.moveLogs, this.#bridge);
-    const convert = this.mapToString(notConvertMap);
-    return convert;
+    const notConvertMap = this.checkUserMoveLogs(this.moveLogs, this.#bridge);
+    const oxCheckedMap = this.makeUserMoveMap(notConvertMap);
+    const convertedMap = this.mapToString(oxCheckedMap);
+    return convertedMap;
   }
 
-  makeUserMoveMap(movelogs, bridge) {
+  checkUserMoveLogs(movelogs, bridge) {
     const checkedUserMap = movelogs.map((log, index) =>
       log === bridge[index] ? [log, 'O'] : [log, 'X']
     );
-    return this.checkingUserMoveLogs(checkedUserMap);
+    return checkedUserMap;
   }
 
-  checkingUserMoveLogs(moveMap) {
+  makeUserMoveMap(moveMap) {
     const upperBridge = moveMap.map((move) => (move[0] === 'U' ? move[1] : ' '));
     const lowerBridge = moveMap.map((move) => (move[0] === 'D' ? move[1] : ' '));
     return [upperBridge, lowerBridge];
