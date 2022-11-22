@@ -18,6 +18,7 @@ const InputView = {
       this.checkSizeError(answer);
       size = answer;
     });
+    Console.print(size);
     return size;
   },
 
@@ -40,6 +41,7 @@ const InputView = {
       this.checkDirectionError(answer);
       direction = answer;
     });
+    Console.print(direction);
     return direction;
   },
 
@@ -62,6 +64,7 @@ const InputView = {
       this.checkRetryError(answer);
       retry = answer;
     });
+    Console.print(retry);
     return retry;
   },
 
