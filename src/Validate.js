@@ -7,7 +7,7 @@ const isNum = input => {
 };
 
 const isInRange = size => {
-  if (size >= BRIDGE_RANGE.MAX && size <= BRIDGE_RANGE.MIN) return true;
+  if (size >= BRIDGE_RANGE.MIN && size <= BRIDGE_RANGE.MAX) return true;
   return false;
 };
 
