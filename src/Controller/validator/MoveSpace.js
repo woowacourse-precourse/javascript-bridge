@@ -13,7 +13,7 @@ class MoveSpace {
   checkInput() {
     try {
       if (!this.isAllowOrder())
-        throw OutputView.printErrorMessage(ERROR.MOVE_ORDER);
+        throw new Error(OutputView.printErrorMessage(ERROR.MOVE_ORDER));
       return ISALLOW.TRUE;
     } catch {
       return ISALLOW.FALSE;

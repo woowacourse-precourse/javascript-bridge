@@ -13,7 +13,7 @@ class GameCommand {
   checkInput() {
     try {
       if (!this.isAllowOrder())
-        throw OutputView.printErrorMessage(ERROR.GAMECOMMAND);
+        throw new Error(OutputView.printErrorMessage(ERROR.GAMECOMMAND));
       return ISALLOW.TRUE;
     } catch {
       return ISALLOW.FALSE;
