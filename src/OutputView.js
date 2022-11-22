@@ -35,8 +35,7 @@ const OutputView = {
     resultDown = resultDown.slice(0, resultDown.length-2);
     resultUp += ']';
     resultDown += ']';
-    MissionUtils.Console.print(resultUp);
-    MissionUtils.Console.print(resultDown);
+    MissionUtils.Console.print(`${resultUp}\n${resultDown}`);
   },
 
   /**
