@@ -1,6 +1,8 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const ViewManager = require('./ViewManager');
+const Validator = require('./Validator');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -29,9 +31,23 @@ class BridgeGame {
 	}
 
 	handleBridgeSize(bridgeSize) {
+		const isValid = this.validateBridgeSize(bridgeSize);
+		if (!isValid) return;
 		const bridge = BridgeMaker.makeBridge(Number(bridgeSize), BridgeRandomNumberGenerator.generate);
 		this.bridge = bridge;
 		this.move();
+	}
+
+	validateBridgeSize(bridgeSize) {
+		try {
+			Validator.isNumber(bridgeSize);
+			Validator.isInValidRange(Number(bridgeSize));
+			return true;
+		} catch (e) {
+			ViewManager.error(e);
+			this.setBridge();
+			return false;
+		}
 	}
 
 	/**

@@ -37,6 +37,10 @@ const OutputView = {
 		this.print(`총 시도한 횟수: ${tryCnt}`);
 		Console.close();
 	},
+
+	printError(error) {
+		this.print(error.message);
+	},
 };
 
 module.exports = OutputView;

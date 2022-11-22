@@ -26,6 +26,9 @@ class ViewManager {
 		OutputView.printResult(recentMove, isCorrect, tryCnt);
 	}
 
+	static error(e) {
+		OutputView.printError(e);
+	}
 }
 
 module.exports = ViewManager;
