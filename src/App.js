@@ -39,14 +39,20 @@ class App {
   }
 
   selectRetry(){
-    InputView.readGameCommand((retry)=>{
-      if(retry === 'R'){
-        this.#bridgeGame.retry();
-        this.selectMove();
-      }
-      else if(retry === 'Q')
-       this.finish();
+    InputView.readGameCommand((command)=>{
+      this.retryResult(command);
     });
+  }
+
+  retryResult(command){
+    this.#bridgeGame.commandValidate(command);
+
+    if(command === 'R'){
+      this.#bridgeGame.retry();
+      this.selectMove();
+    }
+    else if(command === 'Q')
+     this.finish(command);
   }
 
   finish(){
