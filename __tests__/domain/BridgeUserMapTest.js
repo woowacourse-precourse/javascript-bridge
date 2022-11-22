@@ -49,8 +49,9 @@ describe('(domain) BridgeUserMapTest 클래스', () => {
           [' ', ' ', ' '],
           ['O', 'O', 'O']
         ]
-      }),
-
+      })
+    ],
+    [
       makeInput({
         makeDataFn: (repo) => {
           const addData = (newData) => {
@@ -66,8 +67,9 @@ describe('(domain) BridgeUserMapTest 클래스', () => {
           [' ', 'X'],
           ['O', ' ']
         ]
-      }),
-
+      })
+    ],
+    [
       makeInput({
         makeDataFn: (repo) => {
           return repo;

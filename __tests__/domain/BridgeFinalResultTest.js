@@ -49,8 +49,9 @@ describe('(domain) BridgeUserMapTest 클래스', () => {
           result: GAME_RESULT_STATE.success,
           tryCount: 1
         }
-      }),
-
+      })
+    ],
+    [
       makeInput({
         makeDataFn: (repo) => {
           const addData = (newData) => {
@@ -66,16 +67,17 @@ describe('(domain) BridgeUserMapTest 클래스', () => {
           result: GAME_RESULT_STATE.fail,
           tryCount: 1
         }
-      }),
-
+      })
+    ],
+    [
       makeInput({
         makeDataFn: (repo) => {
           const addData = (newData) => {
             return [...repo.read(MODEL_KEY.userBridge), newData];
           };
 
-          repo.update(MODEL_KEY.userBridge, addData('U'));
-          repo.update(MODEL_KEY.userBridge, addData('U'));
+          repo.update(MODEL_KEY.userBridge, addData('D'));
+          repo.update(MODEL_KEY.userBridge, addData('D'));
 
           return repo;
         },
