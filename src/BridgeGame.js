@@ -8,7 +8,9 @@ class BridgeGame {
   constructor(bridge) {
     this.bridge = bridge;
     this.userMove = [];
-    this.stepCount = -1;
+    this.nowstep = -1;
+    this.tryCount = 1;
+    this.isWin = false;
   }
 
   gamePlay() {
@@ -23,12 +25,13 @@ class BridgeGame {
    */
   move() {
     InputView.readMoving((nextStep) => {
-      this.stepCount += 1;
+      this.nowstep += 1;
       this.userMove.push(nextStep);
+      OutputView.printMap(this.bridge, this.nowstep, this.isFail());
       if (!this.isEnd()) {
-        OutputView.printMap(this.bridge, this.stepCount, false);
         this.move();
       }
+      return;
     });
   }
 
@@ -36,15 +39,20 @@ class BridgeGame {
    * 게임 종료 여부 확인 메서드
    */
   isEnd() {
-    if (this.bridge === this.userMove) {
-      console.log("승리");
-      return true;
-    }
-    if (this.bridge[this.stepCount] != this.userMove[this.stepCount]) {
+    if (this.isFail()) {
       console.log("패배");
       return true;
     }
+    if (this.bridge.length === this.userMove.length) {
+      this.isWin = true;
+      this.gameEnd();
+      return true;
+    }
     return false;
+  }
+
+  isFail() {
+    return this.bridge[this.nowstep] != this.userMove[this.nowstep];
   }
 
   /**
@@ -52,7 +60,21 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.tryCount += 1;
+    this.nowstep = -1;
+    this.userMove = [];
+    this.move();
+  }
+
+  gameEnd() {
+    OutputView.printResult(
+      this.bridge,
+      this.nowstep,
+      this.isWin,
+      this.tryCount
+    );
+  }
 }
 
 module.exports = BridgeGame;
