@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { BRIDGE_GAME_PROCEED } = require('./constants/settings');
 
 const OutputView = require('./view/OutputView');
 const InputView = require('./view/InputView');
@@ -26,7 +27,7 @@ class BridgeGameProceed {
 
     makeMap(bridgeLength) {
         try {
-            Console.print('');
+            Console.print(BRIDGE_GAME_PROCEED.new_line);
             Validation.bridgeLength(bridgeLength);
             this.#winBridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
             this.game();
@@ -54,7 +55,7 @@ class BridgeGameProceed {
     }
 
     dividePath(result) {
-        if (result.includes('X')) {
+        if (result.includes(BRIDGE_GAME_PROCEED.fail)) {
             this.#playersBridge = [];
             return this.fail(result);
         }
@@ -65,9 +66,9 @@ class BridgeGameProceed {
     }
 
     bridge() {
-        const result = this.playersMap.show(this.#playersBridge, this.#winBridge)
+        const result = this.playersMap.show(this.#playersBridge, this.#winBridge);
         Console.print(result);
-        Console.print('')
+        Console.print(BRIDGE_GAME_PROCEED.new_line);
         return result;
     }
     
@@ -78,8 +79,8 @@ class BridgeGameProceed {
     gameOverChoice(retryOrNot) {
         try {
             Validation.retry(retryOrNot);
-            if (retryOrNot === "R") this.callRetry();
-            if (retryOrNot === "Q") this.callFail.call(this); 
+            if (retryOrNot === BRIDGE_GAME_PROCEED.retry) this.callRetry();
+            if (retryOrNot === BRIDGE_GAME_PROCEED.fail) this.callFail.call(this); 
         } catch (error) {
             Console.print(error.message);
             this.fail.call(this);
