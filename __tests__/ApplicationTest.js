@@ -69,8 +69,6 @@ describe('다리 건너기 테스트', () => {
 
     const app = new App();
 
-    app.play();
-
     app.play().then(() => {
       const log = getOutput(logSpy);
       expectLogContains(log, [
