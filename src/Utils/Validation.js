@@ -1,4 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
 const { KEY, ERR } = require("../constants/constants");
 
 class Validation {
@@ -9,7 +8,11 @@ class Validation {
     if (!(input >= 3 && input <= 20)) {
       throw ERR.WRONG_BRIDGE_SIZE;
     }
-    return parseInt(input);
+    if (!Number.isInteger(parseFloat(input))) {
+      throw ERR.NOT_INT;
+    }
+
+    return input;
   }
 
   static validMoveKey(input) {

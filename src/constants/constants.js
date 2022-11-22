@@ -14,6 +14,7 @@ const PRINT = Object.freeze({
 
 const ERR = Object.freeze({
   NOT_NUMBER: "[ERROR] 숫자만 입력해주세요",
+  NOT_INT: "[ERROR] 정수 형태의 숫자만 입력하세요",
   WRONG_BRIDGE_SIZE: "[ERROR] 다리의 길이는 3~20 사이여야 합니다.",
   WRONG_MOVE_KEY: "[ERROR] 이동할 칸은 U 혹은 D 중에 입력해야합니다.",
   WRONG_COMMAND_KEY: "[ERROR] 게임 진행은 R 혹은 Q 중에 입력해야합니다.",
