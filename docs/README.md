@@ -80,3 +80,36 @@ U
   - 게임 결과의 총 시도한 횟수는 첫 시도를 포함해 게임을 종료할 때까지 시도한 횟수를 나타낸다.
 
 - 사용자가 잘못된 값을 입력한 경우 `throw`문을 사용해 예외를 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
+
+# 디렉터리 구조
+
+```bash
+.
+├── __tests__
+│   ├── ApplicationTest.js    // 다리 건너기 게임 정상 작동 및 예외 처리 테스트
+│   ├── BridgeGameTest.js     // BridgeGame 클래스 테스트
+│   ├── BridgeMakerTest.js    // BridgeMaker 객체 테스트
+│   ├── BridgeMapMakerTest.js // BridgeMapMaker 객체 테스트
+│   ├── BridgeSizeValidatorTest.js        // BridgeSizeValidator 객체 테스트
+│   ├── BridgeMovingValidatorTest.js      // BridgeMovingValidator 객체 테스트
+│   └── BridgeGameCommandValidatorTest.js // BridgeGameCommandValidator 객체 테스트
+├── docs
+│   ├── README.md             // 구현할 기능 목록, 디렉터리 구조에 대한 도큐먼트
+└── src
+    └── domain                   // 도메인 로직과 관련된 클래스(객체)를 관리
+    │    ├── BridgeGame.js       // 다리 건너기 게임을 관리하는 클래스
+    │    └── BridgeMapMaker.js   // 이동 내역을 기반으로 다리의 상태를 생성하는 객체
+    │
+    └── validators                          // 유효성을 검사하는 객체 관리
+    │    ├── BridgeSizeValidator.js         // 사용자가 입력한 다리 길이의 유효성을 검사
+    │    ├── BridgeMovingValidator.js       // 사용자가 입력한 이동할 칸의 유효성을 검사
+    │    └── BridgeGameCommandValidator.js  // 사용자가 입력한 게임 명령의 유효성을 검사
+    │
+    └── views                    // UI 로직과 관련된 객체 관리
+    │    ├── InputView.js        // 사용자로부터 입력을 받는 역할을 담당
+    │    └── OutputView.js       // 사용자에게 게임 진행 상황과 결과를 출력
+    │
+    ├── App.js                           // 도메인, 유효성 검사, UI 로직을 중간에서 조율하는 컨트롤러
+    ├── BridgeMaker.js                   // 다리 길이를 입력받아 다리를 생성
+    └── BridgeRandomNumberGenerator.js   // 다리를 생성하기 위해 특정 범위 이내 무작위 값을 생성
+```
