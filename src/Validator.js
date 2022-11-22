@@ -18,7 +18,7 @@ const Validator = {
   },
 
   isMoveInputValidate(input) {
-    if (input !== "U" || input !== "D") {
+    if (input !== "U" && input !== "D") {
       throw new Error(ERROR.IS_NOT_VALID_MOVE);
       return false;
     }
