@@ -87,4 +87,8 @@ class BridgeGame {
   }
 }
 
+class controlBridge {
+  
+}
+
 module.exports = BridgeGame;
