@@ -49,9 +49,7 @@ class App {
 
     if (gameEnd) return this.finishGame(history);
     if (winThisTurn) return InputView.readMoving();
-
-    this.game.removeLastHistory();
-    InputView.readGameCommand();
+    this.askRetry();
   }
 
   finishGame(history) {
@@ -61,6 +59,11 @@ class App {
       totalTry: this.game.totalTry,
     });
     this.exit();
+  }
+
+  askRetry() {
+    this.game.removeLastHistory();
+    InputView.readGameCommand();
   }
 
   retryOrExit(answer) {
