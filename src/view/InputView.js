@@ -45,7 +45,10 @@ const InputView = {
         if (answer === RESTART.RE) {
           bridge.retry();
           this.readMoving();
-        } else OutputView.printResult(bridge);
+        } else {
+          OutputView.printResult(bridge);
+          Console.close();
+        }
       } catch (e) {
         OutputView.printError(e);
         this.readGameCommand();
