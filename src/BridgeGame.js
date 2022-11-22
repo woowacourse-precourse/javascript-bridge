@@ -13,6 +13,17 @@ class BridgeGame {
     this.#numberOfAttempts = 1;
   }
 
+  getNumberOfAttempts() {
+    return this.#numberOfAttempts;
+  }
+
+  getCurrentPosition() {
+    return this.#currentPosition;
+  }
+  
+  getBridgeMap() {
+    return this.#bridgeMap;
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    */
