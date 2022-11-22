@@ -65,8 +65,9 @@ class BridgeGame {
 
       return checks;
     });
+    const [UP, DOWN] = [0, 1];
 
-    return [bridegeMap.map((checks) => checks[0]), bridegeMap.map((checks) => checks[1])];
+    return [bridegeMap.map((checks) => checks[UP]), bridegeMap.map((checks) => checks[DOWN])];
   }
 
   getChallengeCount() {
