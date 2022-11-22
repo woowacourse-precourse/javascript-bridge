@@ -32,8 +32,16 @@ class BridgeGame {
     return this.#success;
   }
 
+  getIdx(){
+    return this.#curIdx;
+  }
+
   getCount() {
     return this.#gameCount;
+  }
+
+  getbridgeResult(){
+    return this.#bridgeResult;
   }
 
   makeResult(dir, success){
@@ -56,7 +64,7 @@ class BridgeGame {
 
   retry() {
     this.initGame();
-    this.#bridgeResult.initResult();
+    this.getbridgeResult().initResult();
     this.#gameCount += 1;
   }
 }

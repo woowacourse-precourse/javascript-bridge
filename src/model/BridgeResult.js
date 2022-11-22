@@ -14,9 +14,17 @@ class BridgeResult {
         this.#downerResult.length = 0;
     }
 
+    getUpper(){
+        return this.#upperResult;
+    }
+
+    getDowner(){
+        return this.#downerResult;
+    }
+
     addValue(upperValue, downerValue) {
-        this.#upperResult.push(upperValue);
-        this.#downerResult.push(downerValue);
+        this.getUpper().push(upperValue);
+        this.getDowner().push(downerValue);
     }
 
     pushResult(dir, success) {
