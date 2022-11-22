@@ -189,4 +189,28 @@ describe('플레이어 입력값의 유효성 검사', () => {
       });
     });
   });
+
+  test('사용자가 게임을 다시 시작?', () => {
+    mockRandoms([1, 0, 1]);
+    mockQuestions(['3', 'R', 'Q']);
+    const app = new App();
+
+    app.play().then(() => {
+      app.isRetryCommand().then((res) => {
+        expect(res).toEqual(true);
+      });
+    });
+  });
+
+  test('사용자가 게임 종료', () => {
+    mockRandoms([1, 0, 1]);
+    mockQuestions(['3', 'Q']);
+    const app = new App();
+
+    app.play().then(() => {
+      app.isRetryCommand().then((res) => {
+        expect(res).toEqual(false);
+      });
+    });
+  });
 });
