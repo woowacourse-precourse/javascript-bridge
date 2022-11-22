@@ -22,7 +22,9 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
     catch(e) {
       MissionUtils.Console.print(e);
       callback.call(this);
+    }finally{
     };
+    return
    }
  
    validateMoveInput(move, callback) {
@@ -32,6 +34,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
      try {throw '\n\n[ERROR] "U" 혹은 "D"를 입력해주세요.\n\n';}
      catch(e) {
       MissionUtils.Console.print(e);
+    }finally{
       callback.call(this);
      };
    }
@@ -43,8 +46,9 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
      try {throw '\n\n[ERROR] "R" 혹은 "Q"를 입력해주세요.\n\n';}
      catch(e) {
       MissionUtils.Console.print(e);
+    }finally{
       callback.call(this);
-     }
+     };
    }
  
    bridge() {
