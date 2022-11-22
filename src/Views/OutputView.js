@@ -20,7 +20,7 @@ const OutputView = {
   printMap(bridge, moveList) {
     const topLine = [];
     const bottomLine = [];
-    MissionUtils.Console.print(moveList);
+
     for (let i = 0; i < moveList.length; i++) {
       if (moveList[i] === 'U' && moveList[i] === bridge[i]) {
         topLine.push('O');
@@ -47,7 +47,16 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridge, moveList, totalNumber) {
+    const resultMessage = bridge === moveList ? '성공' : '실패';
+    // this.printTest(bridge);
+    // this.printTest(moveList);
+
+    MissionUtils.Console.print(MESSAGE.io.end);
+    this.printMap(bridge, moveList);
+    MissionUtils.Console.print(`${MESSAGE.io.result} ${resultMessage}`);
+    MissionUtils.Console.print(`${MESSAGE.io.totalNumber} ${totalNumber}`);
+  },
 };
 
 module.exports = OutputView;
