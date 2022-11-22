@@ -14,6 +14,14 @@ class Validator {
     }
     return true;
   }
+
+  static isMoveInputValidate(input) {
+    if (input !== "U" || input !== "D") {
+      throw new Error("이동할 칸은 U 또는 D로 입력하셔야 합니다.");
+      return false;
+    }
+    return true;
+  }
 }
 
 module.exports = Validator;
