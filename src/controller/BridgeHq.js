@@ -30,7 +30,6 @@ class BridgeHq {
 
   makeBridge() {
     const bridge = BridgeMaker.makeBridge(this.#bridgeSize, generate);
-    console.log(bridge);
     this.game = new BridgeGame(bridge);
     this.inputMove();
   }
