@@ -1,28 +1,21 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const INPUT_MESSAGE = Object.freeze({
+  requestBridgeSize: '다리의 길이를 입력해 주세요.\n',
+  requestMovingDirection: '이동할 칸을 선택해 주세요. (위: U, 아래: D)\n',
+  requestRetryOption:
+    '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+});
+
 const InputView = {
   readBridgeSize(onInput) {
-    Console.readLine('다리의 길이를 입력해 주세요.\n', onInput);
+    Console.readLine(INPUT_MESSAGE.requestBridgeSize, onInput);
   },
-
   readMoving(onInput) {
-    Console.readLine(
-      '\n이동할 칸을 선택해 주세요. (위: U, 아래: D)\n',
-      onInput,
-    );
+    Console.readLine(INPUT_MESSAGE.requestMovingDirection, onInput);
   },
-
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand(onInput) {
-    Console.readLine(
-      '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
-      onInput,
-    );
+    Console.readLine(INPUT_MESSAGE.requestRetryOption, onInput);
   },
 };
 
