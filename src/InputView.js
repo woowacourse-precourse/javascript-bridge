@@ -5,7 +5,8 @@ const {
   checkBridgeSize,
   checkSpace,
   checkRestart
- } = require("./Exception");
+ } = require("./Exception")
+const { FINAL } = require("./Constant");
 const OutputView = require("./OutputView");
 
 
@@ -17,11 +18,11 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(bridge, bridgeGame) {
-    Console.readLine(`${COMMAND.INPUT}\n`, (bridgeSize) => {
+    Console.readLine(`\n${COMMAND.INPUT}\n`, (bridgeSize) => {
       if(checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge,bridgeGame);
 
       bridge.setBridge(Number(bridgeSize));
-      // Console.print(bridge.getBridge());
+      Console.print(bridge.getBridge());
       this.readMoving(bridge, bridgeGame);
     });
   },
@@ -30,14 +31,14 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridge, bridgeGame) {
-    Console.readLine(`${COMMAND.MOVE}\n`, (space) => {
+    Console.readLine(`\n${COMMAND.MOVE}\n`, (space) => {
       if(checkSpace(space)) return this.readMoving(bridge,bridgeGame);
 
       bridgeGame.move(space, bridge);
       OutputView.printMap(bridgeGame);
 
       if (bridgeGame.isWrong(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList())) return this.readGameCommand(bridge, bridgeGame);
-      if (bridgeGame.getCount() === bridge.getBridge().length) return OutputView.printResult("성공", bridgeGame);
+      if (bridgeGame.getCount() === bridge.getBridge().length) return OutputView.printResult(FINAL.SUCCESS, bridgeGame);
 
       return this.readMoving(bridge, bridgeGame);
     });
@@ -53,7 +54,7 @@ const InputView = {
         bridgeGame.retry(bridge);
         return this.readMoving(bridge, bridgeGame);
       }
-      if (restart === "Q") OutputView.printResult("실패", bridgeGame);
+      if (restart === "Q") OutputView.printResult(FINAL.FAIL, bridgeGame);
     });
   },
 };

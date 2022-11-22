@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { BRIDGE } = require("./Constant");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -28,7 +29,7 @@ class BridgeGame {
 
 
   isWrong(upBridge,downBridge){
-    if(upBridge.includes("X") || downBridge.includes("X")) return true;
+    if(upBridge.includes(BRIDGE.NOT_PASS) || downBridge.includes(BRIDGE.NOT_PASS)) return true;
 
     return false;
   }
@@ -43,34 +44,33 @@ class BridgeGame {
     const standardBridge = bridge.getBridge();;
     let count = this.getCount();
 
-    if(space === "U") this.upMove(standardBridge,count);
-    if(space === "D") this.downMove(standardBridge,count);
+    if(space === BRIDGE.UP) this.upMove(standardBridge,count);
+    if(space === BRIDGE.DOWN) this.downMove(standardBridge,count);
     
 
     this.setCount();
-    Console.print(this.getCount());
   }
 
   upMove(standardBridge,count){
-    if(standardBridge[count] === "U"){
+    if(standardBridge[count] === BRIDGE.UP){
       return (
-        this.upBridgeList.push('O'),
+        this.upBridgeList.push(BRIDGE.PASS),
         this.downBridgeList.push(' ')
       )
     }
-    this.upBridgeList.push('X');
+    this.upBridgeList.push(BRIDGE.NOT_PASS);
     this.downBridgeList.push(' ');
   }
 
   downMove(standardBridge,count){
-    if(standardBridge[count] === "D"){
+    if(standardBridge[count] === BRIDGE.DOWN){
       return (
         this.upBridgeList.push(' '),
-        this.downBridgeList.push('O')
+        this.downBridgeList.push(BRIDGE.PASS)
       )
     }
     this.upBridgeList.push(' ');
-    this.downBridgeList.push('X');
+    this.downBridgeList.push(BRIDGE.NOT_PASS);
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
