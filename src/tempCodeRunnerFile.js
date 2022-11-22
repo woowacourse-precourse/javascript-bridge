@@ -1,3 +1,0 @@
-
-  selectMove(){
-    InputView.readMoving((playerMoving)=>{
