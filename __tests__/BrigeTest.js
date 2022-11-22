@@ -78,4 +78,16 @@ describe('다리 건너기 테스트', () => {
 
     expect(bridgeGame.move(input)).toEqual(output);
   });
+
+  test.each(['r', 2, ' '])('retry 여부 응답 예외처리', (input) => {
+    mockInput([input]);
+    const logSpy = getLogSpy();
+
+    const crossBrigeGame = new CrossBrigeGame();
+    crossBrigeGame.askRetry();
+    const log = getOutput(logSpy);
+
+    expect(log).toContain('[ERROR]');
+  });
+
 });
