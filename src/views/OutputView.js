@@ -46,6 +46,13 @@ const OutputView = {
     Console.print(isSuccess ? OUTPUT_MESSAGE.SUCCESS : OUTPUT_MESSAGE.FAILURE);
     Console.print(`${OUTPUT_MESSAGE.NUMBER_OF_TRY}: ${count}`);
   },
+
+  /**
+   * @param {string} errorMsg
+   */
+  printErrorMessage(errorMsg) {
+    Console.print(errorMsg);
+  },
 };
 
 module.exports = OutputView;

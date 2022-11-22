@@ -22,7 +22,7 @@ class App {
         this.#bridgeGame = new BridgeGame(bridgeSize);
         this.continueGame();
       } catch (error) {
-        MissionUtils.Console.print(error.message);
+        OutputView.printErrorMessage(error.message);
         this.startGame();
       }
     });
@@ -35,7 +35,7 @@ class App {
         OutputView.printMap(pathMap);
         this.#commands[status].call(this);
       } catch (error) {
-        MissionUtils.Console.print(error.message);
+        OutputView.printErrorMessage(error.message);
         this.continueGame();
       }
     });
@@ -47,7 +47,7 @@ class App {
         const command = this.#bridgeGame.convertStringToCommand(gameCommand);
         this.#commands[command].call(this);
       } catch (error) {
-        MissionUtils.Console.print(error.message);
+        OutputView.printErrorMessage(error.message);
         this.restartGame();
       }
     });
