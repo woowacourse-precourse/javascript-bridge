@@ -4,11 +4,13 @@ const MissionUtils = require("@woowacourse/mission-utils");
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+  
   //게임 시작문구 출력하기
   printGameStart(){ 
     MissionUtils.Console.print('다리 건너기 게임을 시작합니다.');
   },
 
+  //사용자 입력과 정답이 같은지 확인하기
   cmpUD(input, ans){
     return input == ans ? 'O':'X';
   },
@@ -18,21 +20,21 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(Input, answer) {
+  printMap(input, answer) {
     let upperBridge = '[ ';
     let lowerBridge = '[ ';
 
-    for(let i = 0; i < Input.length; i++){
+    for(let i = 0; i < input.length; i++){
       if(i != 0){
         upperBridge += '| ';
         lowerBridge += '| ';
       }
-      if(Input[i] == 'U'){
-        upperBridge += this.cmpUD(Input[i], answer[i]) + ' ';
+      if(input[i] == 'U'){
+        upperBridge += this.cmpUD(input[i], answer[i]) + ' ';
         lowerBridge += '  ';
       }
-      if(Input[i] == 'D'){
-        lowerBridge += this.cmpUD(Input[i], answer[i]) + ' ';
+      if(input[i] == 'D'){
+        lowerBridge += this.cmpUD(input[i], answer[i]) + ' ';
         upperBridge += '  ';
       }
     }
@@ -48,11 +50,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(userInput, ans) {
+  printResult(input, ans) {
     MissionUtils.Console.print('최종 게임 결과');
-    this.printMap(userInput, ans);
+    this.printMap(input, ans);
     this.printSuccess();
-
+    this.printTryCount();
   },
 
   //성공여부 반환하기
@@ -64,11 +66,17 @@ const OutputView = {
   //성공여부 출력하기
   printSuccess(){
     MissionUtils.Console.print('게임 성공 여부: ');
-    if(this.isSuccess(userInput, ans)){
+    if(this.isSuccess(input, ans)){
       MissionUtils.Console.print('성공');
     }else{
       MissionUtils.Console.print('실패');
     }
+  },
+
+  //시도횟수 출력하기
+  printTryCount(){
+    MissionUtils.Console.print('총 시도한 횟수: ');
+    MissionUtils.Console.print(tryCount);
   }
 };
 
