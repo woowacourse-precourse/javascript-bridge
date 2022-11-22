@@ -18,7 +18,6 @@ describe("Input View", () => {
   describe("game state에 따라 올바른 메소드가 호출되어야 한다.", () => {
     let generate = jest.fn();
     let bridgeGame;
-    let spy;
 
     const makeMap = jest.fn(() => [
       ["[ O ", "|   ", "|   ]"],
@@ -46,15 +45,10 @@ describe("Input View", () => {
 
       bridgeGame = new BridgeGame(StubBridgeMaker, new BridgeMapMaker());
       bridgeGame.buildBridge(SIZE_OF_BRIDGE, generate);
-
-      spy = jest.spyOn(InputView, "afterInputEnded");
-    });
-
-    afterEach(() => {
-      spy.mockClear();
     });
 
     it("game state 가 success면 afterInputEnded가 호출되어야 한다", () => {
+      let spy = jest.spyOn(InputView, "afterInputEnded");
       bridgeGame.move("U");
       bridgeGame.move("D");
       bridgeGame.move("D");
@@ -63,12 +57,13 @@ describe("Input View", () => {
       expect(spy).toBeCalledTimes(1);
     });
 
-    it("game state 가 fail이면 afterInputEnded가 바로 호출되면 안된다", () => {
+    it("game state 가 fail이면 readGameCommand가 호출되어야 한다", () => {
+      let spy = jest.spyOn(InputView, "readGameCommand");
       bridgeGame.move("U");
       bridgeGame.move("U");
 
       InputView.onInputEnded(bridgeGame);
-      expect(spy).toBeCalledTimes(0);
+      expect(spy).toBeCalledTimes(1);
     });
   });
 });
