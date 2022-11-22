@@ -29,7 +29,6 @@ const OutputView = {
   },
 
   moveMatch(moveAbleInfo, keyword) {
-    console.log(moveAbleInfo, keyword);
     return moveAbleInfo.map(({ move, moveable }) => {
       const moveChar = moveable ? BRIDGE_INFO.IS_MOVEABLE : BRIDGE_INFO.NOT_MOVEABLE;
       return move === keyword ? moveChar : ' ';

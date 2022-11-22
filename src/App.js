@@ -1,15 +1,11 @@
-const InputView = require('./view/InputView');
-const OutputView = require('./view/OutputView');
+const BridgeProcess = require('./controller/BridgeProcess');
 
 class App {
-  #outputView = OutputView;
-  #inputView = InputView;
+  #bridgeProcess = new BridgeProcess();
 
   play() {
-    this.#outputView.printStart();
-    this.#inputView.readBridgeSize();
+    this.#bridgeProcess.start();
   }
 }
 
-new App().play();
 module.exports = App;
