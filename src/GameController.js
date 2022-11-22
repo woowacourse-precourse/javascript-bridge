@@ -3,7 +3,7 @@ const { DIRECTION_KEY } = require("./constants/rule.js");
 const { Console } = require("@woowacourse/mission-utils");
 const InputView = require("./View/InputView.js");
 const OutputView = require("./View/OutputView.js");
-const BridgeGame = require("./BridgeGame.js");
+const BridgeGame = require("./Model/BridgeGame.js");
 const Validation = require("./Validation.js");
 
 class GameController {
