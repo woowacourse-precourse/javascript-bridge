@@ -6,6 +6,7 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
  */
 class BridgeGame {
   #count = 0;
+  #input = [];
   #bridge;
 
   /**
@@ -48,6 +49,14 @@ class BridgeGame {
 
   getCount() {
     return this.#count;
+  }
+
+  pushInput(userReply) {
+    this.#input.push(userReply);
+  }
+
+  popInuput() {
+    return this.#input.pop();
   }
 }
 
