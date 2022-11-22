@@ -4,7 +4,6 @@ const Validator = require('./Validator');
 const { Tile } = require('../constants');
 
 /**
- *
  * @param {any} value
  */
 function validate(value) {

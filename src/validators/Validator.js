@@ -9,7 +9,6 @@ class Validator {
   }
 
   /**
-   *
    * @param {any|function(any)} assertion
    * @param expression
    * @param {string|function(any)} errorExpression
@@ -42,7 +41,7 @@ class Validator {
    *
    * @param {typeof Object} GivenClass
    * @param {function()} errorExpression
-   * @returns
+   * @returns {this}
    */
   shouldInstanceOf(GivenClass, errorExpression = undefined) {
     return this.should(
@@ -51,6 +50,11 @@ class Validator {
     );
   }
 
+  /**
+   * 주어진 Validator로 전환합니다.
+   *
+   * @param {typeof Validator} ValidatorClass
+   */
   as(ValidatorClass) {
     return new ValidatorClass(this.#value);
   }
