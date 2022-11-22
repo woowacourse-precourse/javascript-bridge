@@ -16,7 +16,13 @@ const OutputView = {
     const upLineToPrint = up.join(" | ");
     const downLineToPrint = down.join(" | ");
     Console.print(`[ ${upLineToPrint} ]`);
-    Console.print(`[ ${downLineToPrint} ]`);
+    Console.print(`[ ${downLineToPrint} ]
+    `);
+  },
+
+  // 형식을 위해 빈 줄을 출력한다.
+  printEmptyLine() {
+    Console.print("");
   },
 
   /**

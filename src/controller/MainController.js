@@ -17,6 +17,7 @@ class MainController {
    * @param mainController {object} [메인 컨트롤러]
    */
   onBridgeSizeInput(bridgeLengthInput, mainController) {
+    OutputView.printEmptyLine();
     mainController.bridgeController.onBridgeSizeInput(bridgeLengthInput);
   }
 
