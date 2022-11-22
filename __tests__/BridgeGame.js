@@ -53,4 +53,18 @@ describe('BridgeGame 클래스 테스트', () => {
 
     expect(bridgeGame.isSuccess()).toBe(false);
   });
+
+  test('다리를 반환한다.', () => {
+    const bridgeGame = initBridgeGame(['U', 'D', 'D']);
+
+    expect(bridgeGame.getBridge()).toEqual(['U', 'D', 'D']);
+  });
+
+  test('사용자의 이동들을 반환한다.', () => {
+    const bridgeGame = initBridgeGame(['U', 'D', 'D']);
+    bridgeGame.move('U');
+    bridgeGame.move('U');
+
+    expect(bridgeGame.getUserMoves()).toEqual(['U', 'U']);
+  });
 });
