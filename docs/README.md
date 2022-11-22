@@ -2,15 +2,15 @@
 
 ### checklist
 
-- [ ] feat1. (`App`) `App.play()`하면 새로운 게임 시작
-- [ ] feat2. (`InputView`) 다리의 길이를 입력받는다.
+- [x] feat1. (`App`) `App.play()`하면 새로운 게임 시작
+- [x] feat2. (`InputView`) 다리의 길이를 입력받는다.
   1. 3 이상 20 이하 숫자.
   2. 예외처리 - numberrange, type
-- [ ] feat3. (`BridgeMaker`) 입력 받은 다리 길이를 토대로 다리를 만든다.
+- [x] feat3. (`BridgeMaker`) 입력 받은 다리 길이를 토대로 다리를 만든다.
 - 1 attempt
   - [ ] feat4. (`BridgeGame`) 시도횟수 카운트
   - 1 round
-    - [ ] feat5. (`InputView`) 플레이어가 이동할 칸을 입력 받는다.
+    - [x] feat5. (`InputView`) 플레이어가 이동할 칸을 입력 받는다.
       1. `U` or `D`
       2. 예외처리 - U, D가 아니면 에러
     - [ ] feat6. (`BridgeGame`) 에서 `move()`로 이동시킴

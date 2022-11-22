@@ -10,8 +10,8 @@ class App {
   async play() {
     OutputView.printStartMessage();
     let size = await this.#startGame();
-    await this.#temp(size);
-    return this.#end();
+    let result = await this.#temp(size);
+    return this.#end(result);
   }
 
   async #startGame() {
@@ -21,8 +21,8 @@ class App {
     return size;
   }
 
-  #end() {
-    console.log('~~끗~~');
+  #end(result) {
+    OutputView.printResult(result, this.#attempts);
   }
 
   async #getAndSetBridgeSize() {
@@ -37,8 +37,11 @@ class App {
     if (!attemptResult) {
       let reply = await InputView.readGameCommand();
       let retry = await this.#game.retry(reply);
+
       if (retry) return this.#temp(size);
     }
+
+    return attemptResult;
   }
 
   async #makeAttempt(size) {

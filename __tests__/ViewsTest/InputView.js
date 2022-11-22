@@ -13,9 +13,9 @@ const mockQuestions = (answers) => {
 
 describe('입력 테스트', () => {
   test('기본 입력 받는 테스트', async () => {
-    const query = '테스트';
     mockQuestions(['1']);
-    const result = await InputView.readLine(query);
+    const result = await InputView.readLine('기본 입력 테스트');
+
     expect(result).toBe('1');
   });
 });

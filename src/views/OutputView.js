@@ -1,7 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_COMMAND, MOVE_TYPE, COMMAND_MATCH_INDEX } = require('../constants/Settings');
-const MESSAGES = require('../constants/Messages');
+const { MOVE_TYPE, COMMAND_MATCH_INDEX } = require('../constants/Settings');
 
+const MESSAGES = require('../constants/Messages');
+const RESULT = require('../constants/Result');
+const { attempts } = require('../constants/Result');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -40,7 +42,14 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(isSuccess, attempts) {
+    let result = isSuccess ? '성공' : '실패';
+
+    Console.print(
+      `${RESULT.title}\n${RESULT.successOrFailure(result)}\n${RESULT.attempts(attempts)}`
+    );
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
