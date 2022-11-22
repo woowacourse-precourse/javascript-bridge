@@ -67,19 +67,25 @@ describe('BridgeGame테스트', () => {
         ).toThrow('[ERROR]');
       });
     });
-  });
 
-  describe('isMoved 메서드', () => {
-    beforeEach(() => {
-      bridgeGame.bridgeStore = new BridgeStore(['U', 'D', 'U'], 1);
+    describe('isMoved 메서드', () => {
+      test('올바른 이동 확인', () => {
+        expect(bridgeGame.isMoved('U')).toBeTruthy();
+      });
+
+      test('올바르지 않은 이동 확인', () => {
+        expect(bridgeGame.isMoved('D')).toBeFalsy();
+      });
     });
 
-    test('올바른 이동 확인', () => {
-      expect(bridgeGame.isMoved('U')).toBeTruthy();
-    });
+    describe('moveCount 확인', () => {
+      beforeEach(() => {
+        bridgeGame.move('U');
+      });
 
-    test('올바르지 않은 이동 확인', () => {
-      expect(bridgeGame.isMoved('D')).toBeFalsy();
+      test.each([[2, true], [1, false]])('이동 횟수와 비교 동작 확인', (input, expected) => {
+        expect(bridgeGame.isBiggerThanMoveCount(input)).toBe(expected);
+      });
     });
   });
 });
