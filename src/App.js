@@ -53,7 +53,7 @@ class App {
 
   askGameCommand() {
     InputView.readGameCommand((command) => {
-      if (!InputView.commandValidate(command)) return this.askGameCommand();
+      if (!this.validator.commandValidate(command)) return this.askGameCommand();
 
       if (command === BRIDGE.RESTART) {
         this.bridgeGame.retry();

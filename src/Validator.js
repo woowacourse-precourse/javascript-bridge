@@ -24,6 +24,17 @@ class Validator {
     return true;
   }
 
+  commandValidate(command) {
+    try {
+      this.checkTryValue(command);
+    } catch (error) {
+      Console.print(error);
+      return false;
+    }
+
+    return true;
+  }
+
   checkNumber(size) {
     if (!REGEXP.CHECK_NUMBER.test(size)) {
       throw new Error(ERROR_MESSAGE.INVALID_SIZE_NUMBER);
@@ -45,6 +56,12 @@ class Validator {
   checkMoveValue(moving) {
     if (moving !== BRIDGE.STRING_UP && moving !== BRIDGE.STRING_DOWN) {
       throw new Error(ERROR_MESSAGE.INVALID_MOVE_VALUE);
+    }
+  }
+
+  checkTryValue(command) {
+    if (command !== BRIDGE.RESTART && command !== BRIDGE.QUIT) {
+      throw new Error(ERROR_MESSAGE.INVALID_TRY_VALUE);
     }
   }
 }
