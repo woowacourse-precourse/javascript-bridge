@@ -6,17 +6,18 @@ class App {
     try {
       InputView.readBridgeSize();
     } catch (error) {
-      Console.print(error.message);
-      switch (error.kind) {
-        case "3-20":
-          return InputView.readBridgeSize();
-        case "U/D":
-          return InputView.readMoving();
-        case "R/Q":
-          return InputView.readGameCommand();
-      }
+      return this.executeError(error);
     }
   }
-}
 
+  executeError(error) {
+    Console.print(error.message);
+    const after = {
+      "3-20": () => InputView.readBridgeSize(),
+      "U-D": () => InputView.readMoving(),
+      "R-Q": () => InputView.readGameCommand(),
+    };
+    after[error.kind]() || "";
+  }
+}
 module.exports = App;
