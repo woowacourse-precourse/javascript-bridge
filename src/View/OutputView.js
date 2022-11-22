@@ -1,13 +1,14 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { SAYS } = require("./constants/Message");
-const GameLogic = require("./utils/GameLogic");
+const { SAYS } = require("../Constants/Message");
+
 
 /**
  * 객체
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- * 변경 가능 : 파일경로, 메서드 인자, 메서드
+ * 변경 가능 : 파일경로, 메서드 인자, 메서드 (추가, 변경)
  * 변경 불가 : 메서드 이름
  */
+
 const OutputView = {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.

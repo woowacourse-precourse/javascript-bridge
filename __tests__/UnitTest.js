@@ -1,4 +1,4 @@
-const Check = require("../src/utils/Check");
+const Check = require("../src/Utils/Check");
 
 describe("Input 테스트", () => {
   test.each([["a"], ["1"], ["21"], [""]])(

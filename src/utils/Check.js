@@ -1,4 +1,4 @@
-const { ABOUT } = require("../constants/Message");
+const { ABOUT } = require("../Constants/Message");
 const { Console } = require("@woowacourse/mission-utils");
 /**
  * 객체 - 유효성 체크 기능

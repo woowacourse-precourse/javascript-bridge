@@ -1,16 +1,14 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { ASKS } = require("./constants/Message");
-const Check = require("./utils/Check");
-const BridgeMaker = require("./BridgeMaker");
-const RandomGenerator = require("./BridgeRandomNumberGenerator");
-const GameLogic = require("./utils/GameLogic");
-
-// 로직 분리 //로직 꼬인 것
+const { ASKS } = require("../Constants/Message");
+const Check = require("../Utils/Check");
+const BridgeMaker = require("../BridgeMaker");
+const RandomGenerator = require("../Utils/BridgeRandomNumberGenerator");
+const GameLogic = require("../Utils/GameLogic");
 
 /**
  * 객체
  * 사용자로부터 입력을 받는 역할을 한다. : Console.readLine() -> 이 클래스에서만 사용 가능
- * 변경 가능 : 파일경로, 메서드 인자, 메서드
+ * 변경 가능 : 파일경로, 메서드 인자, 메서드 (추가, 변경)
  * 목적 : "입력만 받는" 것 -> UI 로직
  */
 

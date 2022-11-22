@@ -1,7 +1,7 @@
-const InputView = require("../InputView");
-const OutputView = require("../OutputView");
-const BridgeMaker = require("../BridgeMaker");
-const RandomGenerator = require("../BridgeRandomNumberGenerator");
+// const InputView = require("../InputView");
+// const OutputView = require("../OutputView");
+// const BridgeMaker = require("../BridgeMaker");
+// const RandomGenerator = require("../BridgeRandomNumberGenerator");
 
 /**
  * 객체

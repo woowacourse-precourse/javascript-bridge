@@ -8,6 +8,3 @@
 
 * Console.readLine, Console.print 사용
 
-
-
-
