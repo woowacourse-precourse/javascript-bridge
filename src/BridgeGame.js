@@ -1,13 +1,53 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+const BridgeRandomNumberGenerator = require("./utils/BridgeRandomNumberGenerator");
+const { Console } = require("@woowacourse/mission-utils");
+const OutputView = require("./views/OutputView");
+const InputView = require("./views/InputView");
+const { makeBridge } = require("./BridgeMaker");
 class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+  #bridge;
+  #numberOfAttempts;
+  #userBridge;
+  constructor() {
+    this.#bridge = [];
+    this.#userBridge = [];
+    this.#numberOfAttempts = 1;
+  }
+  play() {
+    OutputView.printMessage("다리 건너기 게임을 시작합니다.\n");
+    this.requestSize();
+  }
+  requestSize() {
+    InputView.readBridgeSize(this.createBridge.bind(this));
+  }
+  createBridge(size) {
+    this.#bridge = makeBridge(
+      Number(size),
+      BridgeRandomNumberGenerator.generate
+    );
+    Console.print("\n");
+    const [highBridge, lowBridge] = this.makeTwoBridge();
+    console.log(highBridge);
+    console.log(lowBridge);
+    // this.move();
+  }
+  makeTwoBridge() {
+    const highBridge = this.#bridge.map((direction) =>
+      direction === "U" ? "O" : " "
+    );
+    const lowBridge = this.#bridge.map((direction) =>
+      direction === "D" ? "O" : " "
+    );
+    return [highBridge, lowBridge];
+  }
+  changeBridgeOutfit(highBridge, lowBridge) {
+    const highBridgeOutfit = `[ ${highBridge.join(" | ")} ]`;
+    const lowBridgeOutfit = `[ ${lowBridge.join(" | ")} ]`;
+    return [highBridgeOutfit, lowBridgeOutfit];
+  }
+  requestMove() {
+    InputView.readMoving(this.move.bind(this));
+  }
+  move(direction) {}
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
