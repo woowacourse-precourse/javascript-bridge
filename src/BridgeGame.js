@@ -55,6 +55,11 @@ class BridgeGame {
     this.#attemptCount += 1;
     this.#crossingOrder = [];
   }
+  getResult() {
+    const isSuccess = !this.isFail() && this.isLast();
+
+    return { isSuccess, attemptCount: this.#attemptCount };
+  }
 }
 
 module.exports = BridgeGame;
