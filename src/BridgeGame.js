@@ -31,6 +31,14 @@ class BridgeGame {
     return this.#tryCount;
   }
 
+  get movingLog() {
+    return this.#movingLog;
+  }
+
+  get bridge() {
+    return this.#bridge;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>

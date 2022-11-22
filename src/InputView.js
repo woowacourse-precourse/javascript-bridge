@@ -24,7 +24,7 @@ const InputView = {
   readMoving() {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', (moving) => {
       bridgeGame.move(moving);
-      // TODO: 라운드의 결과 프린트 출력
+      OutputView.printMap(bridgeGame);
       if (bridgeGame.isWin()) {
         OutputView.printResult(bridgeGame.isWin(), bridgeGame.tryCount);
       } else if (bridgeGame.isPlaying) {

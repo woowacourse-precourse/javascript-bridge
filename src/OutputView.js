@@ -11,7 +11,33 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(bridgeGame) {
+    let bridgeUpper = '[ ';
+    let bridgeLower = '[ ';
+    bridgeGame.movingLog.forEach((log, index) => {
+      if (index !== 0) {
+        bridgeUpper += ' | ';
+        bridgeLower += ' | ';
+      }
+      if (log === 'U' && bridgeGame.bridge[index] === log) {
+        bridgeUpper += 'O';
+        bridgeLower += ' ';
+      } else if (log === 'U' && bridgeGame.bridge[index] !== log) {
+        bridgeUpper += 'X';
+        bridgeLower += ' ';
+      } else if (log === 'D' && bridgeGame.bridge[index] === log) {
+        bridgeUpper += ' ';
+        bridgeLower += 'O';
+      } else if (log === 'D' && bridgeGame.bridge[index] !== log) {
+        bridgeUpper += ' ';
+        bridgeLower += 'X';
+      }
+    });
+    bridgeUpper += ' ]';
+    bridgeLower += ' ]';
+    Console.print(bridgeUpper);
+    Console.print(bridgeLower);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
