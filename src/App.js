@@ -26,7 +26,7 @@ class App {
   playingBridge() {
     this.bridgeGame.move(this.makeMoving());
     OutputView.printMap(this.bridgeGame.bridge, this.bridgeGame.location);
-    if (this.checkFail(this.bridgeGame.bridge, this.bridgeGame.location)) {
+    if (this.bridgeGame.checkFail()) {
       if (InputView.readGameCommand() == "Q") return false;
       else {
         this.gameCnt++;
@@ -36,13 +36,6 @@ class App {
     }
     if (this.movingCount == this.size) return false;
     return true;
-  }
-
-  checkFail(bridge, location) {
-    if (bridge[location] == 2 || bridge[location] == 3) {
-      return true;
-    }
-    return false;
   }
 
   makeMoving() {

@@ -49,6 +49,13 @@ class BridgeGame {
     this.location = -1;
     this.gameCnt++;
   }
+
+  checkFail() {
+    if (this.bridge[this.location] == 2 || this.bridge[this.location] == 3) {
+      return true;
+    }
+    return false;
+  }
 }
 
 module.exports = BridgeGame;
