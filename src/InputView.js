@@ -8,26 +8,32 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  bridgeSize:0,
-
-  readBridgeSize() {
+  readBridgeSize(callback) {
     Console.readLine('다리의 길이를 입력해주세요.', (size) => {
-      checkBridgeSize(size);
-      bridgeSize = size;
+      try {
+        checkBridgeSize(size);
+        callback(size);
+      } catch (e) {
+        Console.print(e);
+        this.readBridgeSize(callback);       
+      }
     });
-    return this.bridgeSize;
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  sideInput:0,
-  readMoving() {
+  readMoving(callback) {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (side) => {
-      sideInput = side;
-      console.log(side);
+      try {
+        checkMoving(side);
+        callback(side);
+      } catch (e) {
+        Console.print(e);
+        this.readMoving(callback);
+      }
+      
     });
-    return this.sideInput;
   },
 
   /**
