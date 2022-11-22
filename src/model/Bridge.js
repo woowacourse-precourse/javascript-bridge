@@ -27,7 +27,8 @@ class Bridge {
   }
 
   setAllBridgeEmpty() {
-    (this.#upsideBridge = []), (this.#downsideBridge = []);
+    this.#upsideBridge = [];
+    this.#downsideBridge = [];
   }
 
   moveUpside(direction, index) {
