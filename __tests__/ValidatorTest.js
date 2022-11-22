@@ -1,4 +1,4 @@
-const Validator = require('../src/Validator');
+const Validator = require('../src/utils/Validator');
 
 const getExceptionTest = (inputList, validatorFunction) => {
   return () => {
@@ -13,7 +13,7 @@ const getExceptionTest = (inputList, validatorFunction) => {
 describe('Validator 테스트', () => {
   test(
     '문자열 중 숫자가 아니면 예외가 발생한다.',
-    getExceptionTest(['3.0', '+3'], Validator.checkBridgeSize)
+    getExceptionTest(['3.0', '+3'], Validator.checkNumber)
   );
 
   test(
