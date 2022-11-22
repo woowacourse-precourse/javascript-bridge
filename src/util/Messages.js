@@ -8,4 +8,8 @@ const OPTION_MESSAGE = Object.freeze({
   REGAME: "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
 });
 
-module.exports(OUTPUT_MESSAGE, OPTION_MESSAGE);
+const ERROR_MESSAGE = Object.freeze({
+  LENGTH_ERROR: "[ERROR]: 다리 길이는 3~20사이의 숫자를 입력해야합니다.",
+});
+
+module.exports(OUTPUT_MESSAGE, OPTION_MESSAGE, ERROR_MESSAGE);
