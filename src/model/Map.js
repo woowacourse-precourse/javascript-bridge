@@ -43,6 +43,10 @@ class Map {
   getDownMap() {
     return Object.entries(this.#map).map(([index, stage]) => stage.getDownStage());
   }
+
+  resetMovingCommands() {
+    Object.entries(this.#map).forEach(([index, stage]) => stage.resetMovingCommand());
+  }
 }
 
 module.exports = Map;

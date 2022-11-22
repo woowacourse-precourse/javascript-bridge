@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable class-methods-use-this */
 const { MOVE_COMMAND_UP, MOVE_COMMAND_DOWN, SAFE_BRIDGE, DANGER_BRIDGE } = require('../Constant');
 
@@ -57,6 +58,10 @@ class Stage {
 
   setMovingCommand(movingCommand) {
     this.#movingCommand = movingCommand;
+  }
+
+  resetMovingCommand() {
+    this.#movingCommand = '';
   }
 
   getMovingCommand() {

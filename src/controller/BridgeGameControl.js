@@ -135,6 +135,7 @@ class BridgeGameControl {
     this.#tryCount += TRY_COUNT_OFFSET;
     this.#movingCount = MOVE_COUNT_INITIAL;
     this.#bridgeGame.retry();
+    this.#map.resetMovingCommands();
     this.move();
   }
 
