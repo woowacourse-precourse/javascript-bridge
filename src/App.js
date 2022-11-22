@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = require("./InputView");
+const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
@@ -8,10 +9,13 @@ const BridgeGame = require("./BridgeGame");
 class App {
   constructor(){
     this.inputView = InputView;
+    this.outputView = OutputView;
     this.bridgeMaker = BridgeMaker;
     this.bridgeRandomNumberGenerator = BridgeRandomNumberGenerator;
     this.bridgeGame = new BridgeGame();
     this.bridge_len;
+    this.bridge_arr;
+    this.moving_arr;
   }
 
   checkBridgeSize(size){
@@ -28,6 +32,7 @@ class App {
         this.bridge_len = bridge_len_arr[0];
         this.makeBridge();
         this.inputMoving();
+        this.outputView.printMap(this.bridge_arr, this.moving_arr);
       }
     }catch(e){
       // console.log(e);
@@ -35,17 +40,16 @@ class App {
   }
 
   makeBridge(){
-    const bridge_arr = this.bridgeMaker.makeBridge(this.bridge_len, this.bridgeRandomNumberGenerator.generate);
-    console.log("bridge", bridge_arr);
+    this.bridge_arr = this.bridgeMaker.makeBridge(this.bridge_len, this.bridgeRandomNumberGenerator.generate);
+    console.log("bridge", this.bridge_arr);
   }
   
   inputMoving(){
-    const moving_arr = [];
-
+    this.moving_arr = [];
     for(let i=0; i<this.bridge_len; i++){
-      this.inputView.readMoving(moving_arr);
+      this.inputView.readMoving(this.moving_arr);
     }
-    console.log("moving ", moving_arr);
+    console.log("moving", this.moving_arr);
   }
 
   startGame(){
