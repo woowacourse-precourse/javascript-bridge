@@ -17,14 +17,14 @@ class BridgeGameModel {
     this.#playCount = 0;
     this.#isSuccess = false;
     this.#step = '';
-    this.command = '';
+    this.#command = '';
   }
 
   initialize() {
     this.#userMove = [];
     this.#isSuccess = false;
     this.#step = '';
-    this.command = '';
+    this.#command = '';
   }
 
   setUserMove(move) {
