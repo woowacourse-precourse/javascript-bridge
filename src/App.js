@@ -19,6 +19,7 @@ class App {
         this.moveUserBridge();
       } catch (e) {
         OutputView.printError(e);
+        Console.close();
         this.createBridge();
       }
     });
@@ -53,6 +54,7 @@ class App {
       }
     } catch (e) {
       OutputView.printError(e);
+      Console.close();
       this.gameover();
     }
   }

@@ -80,12 +80,4 @@ describe("다리 건너기 테스트", () => {
   test("예외 테스트", () => {
     runException(["a"]);
   });
-
-  test("짧은 길이 테스트", () => {
-    runException(["1"]);
-  });
-
-  test("긴 길이 테스트", () => {
-    runException(["100"]);
-  });
 });
