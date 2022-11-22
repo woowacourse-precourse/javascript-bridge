@@ -12,7 +12,27 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(bridge, nowstep, isFail) {
+    [upper, lower] = this.makeOXstring(bridge, nowstep);
+    if (isFail) {
+      bridge[nowstep] == "U"
+        ? (upper[nowstep] = " X ")
+        : (lower[nowstep] = " X ");
+    }
+    Console.print(`[${upper.join("|")}]`);
+    Console.print(`[${lower.join("|")}]`);
+  },
+
+  makeOXstring(bridge, nowstep) {
+    sliceBridge = bridge.slice(0, nowstep + 1);
+    let upper = sliceBridge.map((x) => {
+      return x == "U" ? " O " : "   ";
+    });
+    let lower = sliceBridge.map((x) => {
+      return x == "D" ? " O " : "   ";
+    });
+    return [upper, lower];
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.

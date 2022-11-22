@@ -26,6 +26,7 @@ class BridgeGame {
       this.stepCount += 1;
       this.userMove.push(nextStep);
       if (!this.isEnd()) {
+        OutputView.printMap(this.bridge, this.stepCount, false);
         this.move();
       }
     });
