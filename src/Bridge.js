@@ -33,6 +33,9 @@ class Bridge {
     return bridgeArray.length > index;
   }
 
+  /**
+   * 입력받은 이동할 칸을 이동하는 메서드
+   */
   setBridge(bridgeArray, bridgeIndex, moving) {
     if (moving === BRIDGE_MAP.up_moving)
       this.setUpsideBridge(bridgeArray, bridgeIndex, moving);
@@ -62,6 +65,9 @@ class Bridge {
     this.#upsideBridge.push(BRIDGE_MAP.empty);
   }
 
+  /**
+   * 현재까지 이동한 다리의 상태와 최종 결과를 보여주는 메서드
+   */
   showResult() {
     OutputView.printMap(this.#upsideBridge, this.#downsideBridge);
   }
