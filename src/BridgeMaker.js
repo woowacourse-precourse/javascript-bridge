@@ -4,7 +4,7 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     let bridgeArr = [];
     for (let number = 0; number < size; number++) {
-      const randomNumber = Number(generateRandomNumber());
+      const randomNumber = generateRandomNumber();
       bridgeArr.push(randomNumber ? BRIDGE_INFO.UP_STR : BRIDGE_INFO.DOWN_STR);
     }
     return bridgeArr;
