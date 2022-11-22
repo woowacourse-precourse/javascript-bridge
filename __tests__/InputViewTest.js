@@ -18,7 +18,7 @@ describe("InputView 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  test("범위 이외의 숫가 들어가면 예외가 발생한다", () => {
+  test("범위 이외의 수가 들어가면 예외가 발생한다", () => {
     expect(() => {
       InputView.validateSize(21);
     }).toThrow("[ERROR]");

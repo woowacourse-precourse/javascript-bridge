@@ -9,7 +9,7 @@ class App {
 
   constructor() {
     OutputView.printStart();
-    this.size = this.makeSize();
+    this.size = InputView.readBridgeSize();
     this.bridgeGame = new BridgeGame(this.size);
   }
 
@@ -43,27 +43,6 @@ class App {
       return true;
     }
     return false;
-  }
-
-  makeSize() {
-    let size = InputView.readBridgeSize();
-    size = this.validateSize(size);
-    return size;
-  }
-
-  validateSize(size) {
-    try {
-      if (isNaN(Number(size))) {
-        throw new Error("[ERROR] 숫자를 입력해야 합니다.");
-      }
-      if (size < 3 && 20 < size) {
-        throw new Error("[ERROR] 3이상 20이하의 size를 입력해야 합니다.");
-      }
-      return size;
-    } catch (e) {
-      MissionUtils.Console.print(e.message);
-      return "err";
-    }
   }
 
   makeMoving() {
