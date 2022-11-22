@@ -6,9 +6,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 
 class App {
-  constructor() {
-    this.bridgeString;
-  }
+  constructor() {}
 
   play() {
     MissionUtils.Console.print("다리 건너기 게임을 시작합니다.");
@@ -21,7 +19,7 @@ class App {
       Number(size),
       BridgeRandomNumberGenerator.generate
     );
-    this.BridgeGame = new BridgeGame(this.Bridge);
+    this.BridgeGame = new BridgeGame(this.bridgeString);
     this.playGame();
   }
 
@@ -42,13 +40,13 @@ class App {
   end() {
     OutputView.printResult(this.BridgeGame.bridge, this.BridgeGame.inputBridge);
     MissionUtils.Console.print(
-      `총 시도한 횟수: ${this.bridgeGame.getTrialCount()}`
+      `총 시도한 횟수: ${this.BridgeGame.getTrialCount()}`
     );
     MissionUtils.Console.close();
   }
 
   restart() {
-    if (this.bridgeGame.retry(InputView.readGameCommand())) {
+    if (this.BridgeGame.retry(InputView.readGameCommand())) {
       this.playGame();
     } else {
       this.end();
@@ -56,7 +54,7 @@ class App {
   }
 
   validateSize(size) {
-    if (!/^\d+$/.test(size)) {
+    if (Number.isNaN(size)) {
       MissionUtils.Console.close();
       throw new Error("[ERROR] 숫자를 입력하세요.");
     }

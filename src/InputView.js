@@ -1,4 +1,4 @@
-const { MissionUtils } = require("@woowacourse/mission-utils");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -20,6 +20,10 @@ const InputView = {
       "이동할 칸을 선택해주세요. (위: U, 아래: D)",
       (userInput) => {
         this.validateMoving(userInput);
+        if (userInput != "U" && userInput != "D") {
+          MissionUtils.Console.close();
+          throw new Error("[ERROR] U와 D 중 하나의 문자를 입력하세요.");
+        }
         moving = userInput;
       }
     );
@@ -42,7 +46,7 @@ const InputView = {
   },
 
   validateMoving(userInput) {
-    if (userInput !== "U" && userInput !== "D") {
+    if (userInput != "U" && userInput != "D") {
       MissionUtils.Console.close();
       throw new Error("[ERROR] U와 D 중 하나의 문자를 입력하세요.");
     }
