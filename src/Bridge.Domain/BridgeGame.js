@@ -1,5 +1,6 @@
 const BridgeCreator = require("./BridgeCreator");
 const { GAME } = require("../lib/Const");
+const Bridge = require("./Bridge");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -13,6 +14,10 @@ class BridgeGame {
 
   init(size) {
     this.#bridge = BridgeCreator.create(size);
+  }
+
+  setting(arr) {
+    this.#bridge = new Bridge(arr);
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드

@@ -97,9 +97,10 @@
     - [x] 다리 아래쪽 실패 결과 모양 문자열을 만드는 기능#downBridgeShapeWhenFail
     - [x] 다리 현재 모양을 반환하는 기능#getCurrentShape
 
-  - [ ] 다리 건너기 게임 #BridgeGame
+  - [x] 다리 건너기 게임 #BridgeGame
 
     - [x] 다리와 플레이어를 만드는 기능 #constructor
+    - [x] 다리 사이즈를 초기화 하는 기능 #init
     - [x] 다리 건너기 게임을 시작하는 기능 #start
     - [x] 다리를 건너는 기능 #move
     - [?] 게임을 다시 시작하는 기능 #retry
