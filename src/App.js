@@ -60,12 +60,12 @@ class App {
     InputView.readGameCommand((answer) => {
       switch (answer) {
         case INPUT_VALUE.QUIT:
-          OutputView.printResult(STATES.FAIL, bridge);
+          OutputView.printResult(STATES.FAIL, bridgeGame);
           Console.close();
           return;
         case INPUT_VALUE.RETRY:
-          bridge.retry();
-          this.progressGame(bridge);
+          bridgeGame.retry();
+          this.progressGame(bridgeGame);
       }
     });
   }
