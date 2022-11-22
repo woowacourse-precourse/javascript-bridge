@@ -6,6 +6,7 @@ const InputView = require('./InputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
+
 class App {
   constructor() {
     this.bridgeArray = [' ', ' '];
@@ -41,6 +42,17 @@ class App {
     } catch (error) {
       throw new Error(error);
       return this.makeBridgeGame();
+    }
+  }
+
+  executeMove(bridgeGame) {
+    try {
+      const moveDirection = InputView.readMoving();
+      const turnPass = bridgeGame.move(moveDirection);
+      return turnPass;
+    } catch (error) {
+      throw new Error(error);
+      return this.executeMove(bridgeGame);
     }
   }
 }
