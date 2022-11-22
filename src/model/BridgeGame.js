@@ -63,10 +63,9 @@ class BridgeGame {
   }
 
   getResult() {
-    const [upside, downside] = this.#gameState.toStringMap();
     const isDestination = this.#gameState.checkLocation();
 
-    return [this.getRound(), upside, downside, isDestination];
+    return [this.getRound(), isDestination];
   }
 }
 

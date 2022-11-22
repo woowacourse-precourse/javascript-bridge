@@ -27,16 +27,20 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(bridgeGame) {
-    const [round, upside, downside, isSuccess] = bridgeGame.getResult();
+    const result = bridgeGame.getResult();
+
+    Console.print(GAME_MESSAGE.RESULT_BRIDGE);
+
+    this.printMap(bridgeGame);
+    this.getResultMessage(result);
+  },
+
+  getResultMessage(result) {
+    const [round, isSuccess] = result;
     const success = isSuccess ? GAME_MESSAGE.SUCCESS : GAME_MESSAGE.FAIL;
 
-    Console.print(`
-${GAME_MESSAGE.RESULT_BRIDGE}\n
-${upside}\n
-${downside}\n
-${GAME_MESSAGE.RESULT_STATUS}${success}\n
-${GAME_MESSAGE.ROUND}${round}
-    `);
+    Console.print(`${GAME_MESSAGE.RESULT_STATUS}${success}`);
+    Console.print(`${GAME_MESSAGE.ROUND}${round}${round}`);
   },
 };
 
