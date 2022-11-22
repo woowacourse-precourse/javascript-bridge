@@ -36,11 +36,8 @@ class App {
   }
 
   readMovingCallback(command) {
-    this.#bridgeGame.move(
-      command,
-      () => this.showMoveSuccess(),
-      () => this.showMoveFail(),
-    );
+    const canNextMove = this.#bridgeGame.move(command);
+    canNextMove ? this.showMoveSuccess() : this.showMoveFail();
   }
 
   showMoveSuccess() {

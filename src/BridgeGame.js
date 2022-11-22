@@ -20,15 +20,20 @@ class BridgeGame extends BridgeGameCore {
     return this.#position >= this.#bridge.length;
   }
 
+  isMatchedCommand(command) {
+    return command === this.#bridge[this.#position];
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(command, successCallback, failCallback) {
-    if (!this.isFinished()) {
-      this.#judgeMove(command, successCallback, failCallback);
+  move(command) {
+    if (this.isFinished()) {
+      return false;
     }
+    return this.#judgeNextMove(command);
   }
 
   /**
@@ -40,25 +45,26 @@ class BridgeGame extends BridgeGameCore {
     this.#reInit();
   }
 
-  #judgeMove(command, successCallback, failCallback) {
-    this.#isMatchCommand(command)
-      ? this.#moveSuccess(command, successCallback)
-      : this.#moveFail(command, failCallback);
+  #judgeNextMove(command) {
+    if (this.#isMatchCommand(command)) {
+      this.#moveSuccess(command);
+      return true;
+    }
+    this.#moveFail(command, failCallback);
+    return false;
   }
 
   #isMatchCommand(command) {
     return command === this.#bridge[this.#position];
   }
 
-  #moveSuccess(command, cb) {
+  #moveSuccess(command) {
     this.#position += 1;
     this.progress.success(command);
-    cb();
   }
 
-  #moveFail(command, cb) {
+  #moveFail(command) {
     this.progress.fail(command);
-    cb();
   }
 
   #init(bridgeSize) {
