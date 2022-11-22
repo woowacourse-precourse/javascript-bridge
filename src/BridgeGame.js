@@ -10,13 +10,22 @@ const { printMessage } = require("./OutputView");
 class BridgeGame {
   gameStart() {
     printMessage(INFO_MESSAGE.start);
-    InputView.readBridgeSize(INPUT_MESSAGE.bridgeLength);
+    InputView.readBridgeSize(INPUT_MESSAGE.bridgeLength, (input) => {
+      this.getInput(input);
+    });
   }
 
-  getInput(userInput) {
-    const bridge = BridgeMaker.makeBridge(
-      userInput,
-      BridgeRandomNumberGenerator
+  getInput(input) {
+    const bridge = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator);
+    this.userMoving();
+  }
+
+  userMoving() {
+    InputView.readMoving(
+      `${INPUT_MESSAGE.selectNextPosition} ${INPUT_MESSAGE.UpDown}`,
+      (input) => {
+        console.log(input);
+      }
     );
   }
 

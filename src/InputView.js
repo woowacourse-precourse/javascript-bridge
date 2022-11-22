@@ -9,16 +9,20 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(message) {
+  readBridgeSize(message, callback) {
     Console.readLine(message, (size) => {
-      const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator);
+      callback(size);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(message, callback) {
+    Console.readLine(message, (nextStep) => {
+      callback(nextStep);
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
