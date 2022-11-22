@@ -37,7 +37,6 @@ class BridgeGame {
   getBridge(bridges) {
     this.#bridges = bridges;
     this.#originBridges = bridges;
-    console.log(bridges);
     this.openBridgeRow();
     this.inputSpace();
   }
@@ -65,7 +64,7 @@ class BridgeGame {
 
   checkBridge(bridge) {
     if (this.#upRow.includes(BRIDGE_CHECK.wrong) === true || this.#downRow.includes(BRIDGE_CHECK.wrong) === true) {
-      this.gameManager.printSpace(this.#upRow, this.#downRow);
+      this.gameManager.printRow(this.#upRow, this.#downRow);
       return this.inputRetry();
     }
 
@@ -73,7 +72,7 @@ class BridgeGame {
       return this.finish();  
     }
 
-    this.gameManager.printSpace(this.#upRow, this.#downRow);
+    this.gameManager.printRow(this.#upRow, this.#downRow);
     this.addPartition(bridge);
   }
 

@@ -3,7 +3,6 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
-
 const { INPUT_QUESTION } = require("./utils/Constants");
 
 
@@ -32,7 +31,7 @@ class GameManager {
     })
   }
 
-  printSpace(upRow, downRow) {
+  printRow(upRow, downRow) {
     OutputView.printMap(upRow, downRow);
   }
 
