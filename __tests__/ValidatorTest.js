@@ -1,7 +1,6 @@
 const Validator = require("../src/Library/Validator");
-// const BridgeMaker = require("../src/BridgeMaker");
-// const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
 const Constant = require("../src/constant");
+
 const TEST_ELEMENT = Constant.VALID_TEST_ELEMENT;
 
 const temporaryCallback = () => {
