@@ -1,3 +1,6 @@
+const BridgeGame = require("./BridgeGame");
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const Validator = require("./Validation/Validator");
 
 const { Console } = require("@woowacourse/mission-utils");
@@ -10,23 +13,33 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (bridgeSize) => {
-      if (Validator.checkBetweenThreeToTwenty(Number(bridgeSize)))
+      if (Validator.checkBetweenThreeToTwenty(bridgeSize))
         return this.readBridgeSize();
 
-      return;
+      const bridge = BridgeMaker.makeBridge(
+        bridgeSize,
+        BridgeRandomNumberGenerator.generate
+      );
+
+      const bridgeGame = new BridgeGame(bridge);
+
+      return this.readMoving(bridgeGame);
     });
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(bridgeGame) {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (selectedBlock) => {
-        if (Validator.checkUpOrDown(selectedBlock)) return this.readMoving();
+        if (Validator.checkUpOrDown(selectedBlock))
+          return this.readMoving(bridgeGame);
 
-        return;
+        const moveRoute = bridgeGame.move(selectedBlock);
+
+        return this.readMoving(bridgeGame);
       }
     );
   },
@@ -37,8 +50,8 @@ const InputView = {
   readGameCommand() {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
-      (request) => {
-        if (Validator.checkRetryOrQuit(request)) return this.readGameCommand();
+      (answer) => {
+        if (Validator.checkRetryOrQuit(answer)) return this.readGameCommand();
 
         return;
       }
