@@ -1,8 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
 const OutputView = require("./OutputView");
-const Validation = require("./Validation");
-const {GAME_COMMAND} = require("./Constants");
-const {INPUT_MESSAGE} = require("./Message");
+const Validation = require("./Utils/Validation");
+const { GAME_COMMAND } = require("./Utils/Constants");
+const { INPUT_MESSAGE } = require("./Utils/Message");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -12,10 +12,9 @@ const InputView = {
    */
   readBridgeSize(bridgeGame) {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (bridgeSize) => {
-      if(!Validation.checkBridgeSize(bridgeSize)) {
+      if (!Validation.checkBridgeSize(bridgeSize)) {
         this.readBridgeSize(bridgeGame);
-      }
-      else{
+      } else {
         bridgeGame.prepareGame(bridgeSize);
         this.readMoving(bridgeGame);
       }
@@ -27,10 +26,9 @@ const InputView = {
    */
   readMoving(bridgeGame) {
     Console.readLine(INPUT_MESSAGE.BRIDGE_USERCHOICE, (userChoice) => {
-      if(!Validation.checkUserChoice(userChoice)) {
+      if (!Validation.checkUserChoice(userChoice)) {
         this.readMoving(bridgeGame);
-      }
-      else {
+      } else {
         bridgeGame.move(userChoice);
         this.printMoveResult(bridgeGame);
         this.getTurnResult(bridgeGame);
@@ -46,13 +44,13 @@ const InputView = {
   getTurnResult(bridgeGame) {
     const failFlag = bridgeGame.getFailFlag();
     const gameWinFlag = bridgeGame.getGameWinFlag();
-    if(failFlag) {
+    if (failFlag) {
       this.readGameCommand(bridgeGame);
     }
-    if(!failFlag && gameWinFlag) {
+    if (!failFlag && gameWinFlag) {
       this.printGameResult(bridgeGame, true);
     }
-    if(!failFlag && !gameWinFlag) {
+    if (!failFlag && !gameWinFlag) {
       this.readMoving(bridgeGame);
     }
   },
@@ -69,10 +67,9 @@ const InputView = {
    */
   readGameCommand(bridgeGame) {
     Console.readLine(INPUT_MESSAGE.BRIDGE_RESTART, (gameRestart) => {
-      if(!Validation.checkGameRestart(gameRestart)) {
+      if (!Validation.checkGameRestart(gameRestart)) {
         this.readGameCommand(bridgeGame);
-      }
-      else {
+      } else {
         this.restartGame(gameRestart, bridgeGame);
         this.QuitGame(gameRestart, bridgeGame);
       }
@@ -80,17 +77,17 @@ const InputView = {
   },
 
   restartGame(gameRestart, bridgeGame) {
-    if(gameRestart === GAME_COMMAND.RESTART) {
+    if (gameRestart === GAME_COMMAND.RESTART) {
       bridgeGame.retry();
       this.readMoving(bridgeGame);
     }
   },
-  
+
   QuitGame(gameRestart, bridgeGame) {
-    if(gameRestart === GAME_COMMAND.QUIT) {
+    if (gameRestart === GAME_COMMAND.QUIT) {
       this.printGameResult(bridgeGame, false);
     }
-  }
+  },
 };
 
 module.exports = InputView;

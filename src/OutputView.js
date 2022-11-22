@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const {PRINT_MESSAGE} = require("./Message");
-const {BRIDGE_INDEX} = require("./Constants");
+const { PRINT_MESSAGE } = require("./Utils/Message");
+const { BRIDGE_INDEX } = require("./Utils/Constants");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -30,10 +30,10 @@ const OutputView = {
     Console.print(PRINT_MESSAGE.GAME_RESULT_TITLE);
     this.printMap(currBridge);
     let result;
-    if(gameResult) {
+    if (gameResult) {
       result = PRINT_MESSAGE.GAME_WIN;
     }
-    if(!gameResult) {
+    if (!gameResult) {
       result = PRINT_MESSAGE.GAME_LOSE;
     }
     Console.print(`${PRINT_MESSAGE.GAME_RESULT} ${result}`);
