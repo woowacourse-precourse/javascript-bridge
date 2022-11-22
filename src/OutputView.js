@@ -12,16 +12,16 @@ const OutputView = {
    */
   printMap(boolean, letter) {
     if (boolean && letter === 'U') return this.answerisTrueWithU(letter);
-    if (boolean && letter === 'D') return this.answerisTrueWithP(letter);
+    if (boolean && letter === 'D') return this.answerisTrueWithD(letter);
     if (!boolean && letter === 'U') return this.answerisFalseWithU(letter);
-    if (!boolean && letter === 'D') return this.answerisFalseWithP(letter);
+    if (!boolean && letter === 'D') return this.answerisFalseWithD(letter);
   },
 
-  answerisTrueWithU(letter) {
-    if (letter === 'U' && this.upBridge === '[') {
+  answerisTrueWithU() {
+    if (this.upBridge === '[') {
       return this.firstTrueUpBridge();
     }
-    if (letter === 'U' && this.upBridge !== '[') {
+    if (this.upBridge !== '[') {
       return this.afterTrueUpBridge();
     }
   },
@@ -38,11 +38,11 @@ const OutputView = {
     Console.print(this.upBridge + '\n' + this.downBridge);
   },
 
-  answerisTrueWithP(letter) {
-    if (letter === 'D' && this.upBridge === '[') {
+  answerisTrueWithD() {
+    if (this.upBridge === '[') {
       return this.firstTrueDownBridge();
     }
-    if (letter === 'D' && this.upBridge !== '[') {
+    if (this.upBridge !== '[') {
       return this.afterTrueDownBridge();
     }
   },
@@ -59,11 +59,11 @@ const OutputView = {
     Console.print(this.upBridge + '\n' + this.downBridge);
   },
 
-  answerisFalseWithU(letter) {
-    if (letter === 'U' && this.upBridge === '[') {
+  answerisFalseWithU() {
+    if (this.upBridge === '[') {
       return this.firstFalseUpBridge();
     }
-    if (letter === 'U' && this.upBridge !== '[') {
+    if (this.upBridge !== '[') {
       return this.afterFalseUpBridge();
     }
   },
@@ -80,11 +80,11 @@ const OutputView = {
     Console.print(this.upBridge + '\n' + this.downBridge);
   },
 
-  answerisFalseWithP(letter) {
-    if (letter === 'D' && this.upBridge === '[') {
+  answerisFalseWithD() {
+    if (this.upBridge === '[') {
       return this.firstFalseDownBridge();
     }
-    if (letter === 'D' && this.upBridge !== '[') {
+    if (this.upBridge !== '[') {
       return this.afterFalseDownBridge();
     }
   },
@@ -116,7 +116,7 @@ const OutputView = {
     Console.print(this.upBridge + '\n' + this.downBridge);
   },
 
-  printTotalResult(answerisRight, roundCount, answerArr) {
+  printTotalResult(answerisRight, roundCount) {
     if (answerisRight) {
       Console.print('게임 성공 여부: 성공');
     }
