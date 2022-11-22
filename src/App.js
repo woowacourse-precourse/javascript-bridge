@@ -11,10 +11,15 @@ class App {
       this.game = new BridgeGame(+size);
       this.moveOnce();
     })
-
   }
 
-  
+  playOnce() {
+    InputView.readMoving((side) => {
+      this.game.move(side);
+    })
+  }
+
+
 }
 
 module.exports = App;
