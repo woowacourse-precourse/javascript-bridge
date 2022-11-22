@@ -4,9 +4,10 @@ const {ERROR_MESSAGES, BRIDGE, RESTART} = require('./Constants');
 const Validator = {
 
     validateBridgeSize(bridgeSize) {
-        if(3 > bridgeSize || 20 < bridgeSize) {
+        try {
+            if(3 > bridgeSize || 20 < bridgeSize || isNaN(bridgeSize)) throw ERROR_MESSAGES.BRIDGE_SIZE
+        } catch {
             Console.print(ERROR_MESSAGES.BRIDGE_SIZE);
-            throw ERROR_MESSAGES.BRIDGE_SIZE
         }
     },
 
