@@ -20,7 +20,7 @@ const InputView = {
   },
 
   readMoving(move) {
-    Console.readLine(`${selectMoving}${newLine}`, (inputMoving) => {
+    Console.readLine(`${newLine}${selectMoving}${newLine}`, (inputMoving) => {
       this.readMovingHandler(inputMoving, move);
     });
   },
