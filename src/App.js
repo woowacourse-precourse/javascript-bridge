@@ -1,14 +1,20 @@
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const { MESSAGE } = require('./constants');
+const BridgeGame = require('./BridgeGame');
 
 class App {
+  constructor() {
+    this.game = new BridgeGame();
+  }
+
   play = async () => {
     OutputView.printMessage(MESSAGE.ENTRY);
     const size = await this.getBridgeSize();
     await this.game.makeBridge(size);
   };
 
+  // UI 분리
   getBridgeSize = async () => {
     try {
       return await InputView.readBridgeSize();
