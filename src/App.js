@@ -23,12 +23,11 @@ class App {
             const crossSuccess = bridgeGame.move(choosen);
             if (!crossSuccess) {
                 const retryOrQuit = await InputView.readGameCommand();
-                if (retryOrQuit === 'R') {
-                    bridgeGame.retry();
-                    break;
-                } else {
+                if (retryOrQuit === 'Q') {
                     break;
                 }
+                bridgeGame.retry();
+                i = -1;
             }
         }
 
