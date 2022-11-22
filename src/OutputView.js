@@ -47,7 +47,7 @@ const OutputView = {
     let lowwerMap = BRIDGE.LEFT_SIDE;
     lowwerMap += this.getBridgeLowwerBody(bridge, location, isSuccess);
     lowwerMap += BRIDGE.RIGHT_SIDE;
-    Console.print(lowwerMap);
+    Console.print(lowwerMap+'\n');
   },
 
   getBridgeLowwerBody(bridge, location, isSuccess) {
