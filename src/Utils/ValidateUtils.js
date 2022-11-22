@@ -4,6 +4,12 @@ const throwErrorMessage = (message) => {
   throw new Error(`${ERROR.PREFIX} ${message}`);
 };
 
+const checkIncludeBlank = (input) => {
+  if (input.includes(' ')) {
+    throwErrorMessage(ERROR.INCLUDED_BLANK);
+  }
+};
+
 const checkIsInteger = (input) => {
   const inputToNumberFormat = Number(input);
   if (!Number.isInteger(inputToNumberFormat)) {
@@ -31,4 +37,4 @@ const checkPossibleCommand = (command) => {
   }
 };
 
-module.exports = { checkIsInteger, checkSizeInRange, checkPossibleDirection, checkPossibleCommand };
+module.exports = { checkIncludeBlank, checkIsInteger, checkSizeInRange, checkPossibleDirection, checkPossibleCommand };

@@ -1,4 +1,4 @@
-const { checkIsInteger, checkSizeInRange } = require('../Utils/ValidateUtils.js');
+const { checkIncludeBlank, checkIsInteger, checkSizeInRange } = require('../Utils/ValidateUtils.js');
 
 class BridgeSize {
   #size;
@@ -8,6 +8,7 @@ class BridgeSize {
   }
 
   validate() {
+    checkIncludeBlank(this.#size);
     checkIsInteger(this.#size);
     checkSizeInRange(this.#size);
   }

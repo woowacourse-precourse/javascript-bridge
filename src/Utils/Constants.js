@@ -38,6 +38,7 @@ const GAME_RESULT = {
 const ERROR = {
   PREFIX: '[ERROR]',
   NOT_INTEGER: '정수를 입력해주세요.',
+  INCLUDED_BLANK: '입력값에 공백이 포함되어있습니다. 공백을 제거해 주세요',
   NOT_IN_RANGE: `${RULE.MIN_SIZE} ~ ${RULE.MAX_SIZE}사이의 자연수를 입력해주세요.`,
   NOT_POSSIBLE_DIRECTION: `대문자 ${DIRECTION.UP}와 ${DIRECTION.DOWN} 중 하나를 입력해주세요.`,
   NOT_POSSIBLE_COMMAND: `대문자 ${COMMAND.RETRY}와 ${COMMAND.QUIT}중 하나를 입력해주세요`,
