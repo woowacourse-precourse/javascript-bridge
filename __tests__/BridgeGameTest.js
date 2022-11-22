@@ -23,6 +23,16 @@ describe("다리 게임 클래스 테스트", () => {
     expect(bridgeGame.checkX()).toEqual(false);
   });
 
+  test("경로 이동 후 출력하기 위해서 문자열로 다리의 위아래 배열을 미션이 요구하는 문자열 형식으로 변환 후 반환하는 메서드 테스트", () => {
+    const bridgeGame = new BridgeGame(["U", "U", "D"]);
+    const item = ["U", "U"];
+
+    item.forEach((v) => {
+      bridgeGame.move(v);
+    });
+    expect(bridgeGame.returnUpDownArray()).toEqual(["[ O | O ]", "[   |   ]"]);
+  });
+
   test("이동한 경로에 X가 포함되어있는지 성공 테스트", () => {
     const bridgeGame = new BridgeGame(["U", "D", "U"]);
     const item = ["U", "D", "U"];
