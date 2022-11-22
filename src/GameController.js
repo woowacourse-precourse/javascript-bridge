@@ -1,6 +1,7 @@
 const { DIRECTION_KEY } = require("./constants/rule.js");
-
+const { ERROR_MSG } = require("./constants/message.js");
 const { Console } = require("@woowacourse/mission-utils");
+
 const InputView = require("./View/InputView.js");
 const OutputView = require("./View/OutputView.js");
 const BridgeGame = require("./Model/BridgeGame.js");
@@ -24,8 +25,8 @@ class GameController {
     try {
       this.bridgeGame.build(size);
       this.getDirection();
-    } catch (message) {
-      this.errorReinput(this.getBridgeInputSize, message);
+    } catch {
+      this.errorReinput(this.getBridgeInputSize, ERROR_MSG.RANGE);
     }
   }
 
@@ -47,8 +48,8 @@ class GameController {
         return;
       }
       this.getDirection();
-    } catch (message) {
-      this.errorReinput(this.getDirection, message);
+    } catch {
+      this.errorReinput(this.getDirection, ERROR_MSG.DIRECTION);
     }
   }
 
@@ -68,8 +69,8 @@ class GameController {
         this.printFinalResult();
         Console.close();
       }
-    } catch (message) {
-      this.errorReinput(this.getRetryOrQuit, message);
+    } catch {
+      this.errorReinput(this.getRetryOrQuit, ERROR_MSG.RESTART);
     }
   }
 
