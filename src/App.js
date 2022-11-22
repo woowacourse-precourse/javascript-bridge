@@ -83,8 +83,21 @@ class App {
   handleMovingInput(input) {
     this.#game.move(input);
     printMap(this.#game.getMovingState());
-    if (!this.#game.getIsGameOver()) return this.askMove();
-    if (this.#game.getIsGameSuccess()) return this.end();
+    if (this.#game.getIsGameOver()) {
+      this.handleGameOver.call(this);
+      return;
+    }
+    this.askMove();
+  }
+
+  /**
+   * 한 사이클 끝난 뒤를 다룬다.
+   */
+  handleGameOver() {
+    if (this.#game.getIsGameSuccess()) {
+      this.end();
+      return;
+    }
     this.askRestart();
   }
 
@@ -112,7 +125,10 @@ class App {
    * 재시작 입력 후 과정을 다룬다.
    */
   handleGameCommandInput(input) {
-    if (input === GAME_RESULT.quit) return this.end();
+    if (input === GAME_RESULT.quit) {
+      this.end();
+      return;
+    }
     this.#game.retry();
     this.askMove();
   }
