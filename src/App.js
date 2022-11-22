@@ -1,7 +1,6 @@
 const InputView = require('./input_output/InputView');
 const OutputView = require('./input_output/OutputView');
 const BridgeGame = require('./BridgeGame');
-const { SELECT } = require('./utils/Constants');
 class App {
 	constructor() {
 		this.bridgeGame = new BridgeGame();
@@ -49,7 +48,7 @@ class App {
 	}
 
 	selectRetryOrQuit(select) {
-		select === SELECT.retry ? this.retryGame() : this.fail();
+		this.bridgeGame.checkRetry(select) ? this.retryGame() : this.fail();
 	}
 
 	retryGame() {
