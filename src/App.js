@@ -1,4 +1,8 @@
-const InputView = require("./View/InputView.js");
+const {
+  readBridgeSize,
+  readMoving,
+  readGameCommand,
+} = require("./View/InputView.js");
 const OutputView = require("./View/OutputView.js");
 
 const {
@@ -15,48 +19,42 @@ class App {
   play() {
     const bridgeGame = new BridgeGame();
     OutputView.printInitialComment();
-    InputView.readBridgeSize((input) =>
-      this.bridgeSizeCallback(bridgeGame, input),
-    );
+    readBridgeSize((size) => this.bridgeSizeCallback(bridgeGame, size));
   }
 
-  bridgeSizeCallback(bridgeGame, input) {
-    const length = Number(input);
+  bridgeSizeCallback(bridgeGame, bridgeSize) {
+    const length = Number(bridgeSize);
     const isBridgeValidate = bridgeLength(length, () =>
-      InputView.readBridgeSize((input) =>
-        this.bridgeSizeCallback(bridgeGame, input),
-      ),
+      readBridgeSize((size) => this.bridgeSizeCallback(bridgeGame, size)),
     );
     if (!isBridgeValidate) return;
 
     const bridge = getBridgeMake(length);
     bridgeGame.setState({ length, bridge });
-    InputView.readMoving((input) => this.moveCallback(bridgeGame, input));
+    readMoving((direction) => this.moveCallback(bridgeGame, direction));
   }
 
-  moveCallback(bridgeGame, input) {
-    const isDirectionValidate = bridgeDirection(input, () =>
-      InputView.readMoving((input) => this.moveCallback(bridgeGame, input)),
+  moveCallback(bridgeGame, direction) {
+    const isDirectionValidate = bridgeDirection(direction, () =>
+      readMoving((direction) => this.moveCallback(bridgeGame, direction)),
     );
     if (!isDirectionValidate) return;
-    const { inputHistory, bridge } = bridgeGame.move(input);
+    const { inputHistory, bridge } = bridgeGame.move(direction);
     OutputView.printUserInput(inputHistory, bridge);
 
-    const nextMove = bridgeGame.getNextMove(input);
+    const nextMove = bridgeGame.getNextMove(direction);
     this.doNextMove(bridgeGame, nextMove);
   }
 
-  retryCallback(bridgeGame, input) {
-    const isGameContinueValidate = gameContinue(input, () =>
-      InputView.readGameCommand((input) =>
-        this.retryCallback(bridgeGame, input),
-      ),
+  retryCallback(bridgeGame, command) {
+    const isGameContinueValidate = gameContinue(command, () =>
+      readGameCommand((command) => this.retryCallback(bridgeGame, command)),
     );
     if (!isGameContinueValidate) return;
 
-    const result = bridgeGame.retry(input);
+    const result = bridgeGame.retry(command);
     return result
-      ? InputView.readMoving((input) => this.moveCallback(bridgeGame, input))
+      ? readMoving((direction) => this.moveCallback(bridgeGame, direction))
       : this.endCallback(bridgeGame.end());
   }
 
@@ -69,14 +67,14 @@ class App {
   doNextMove(bridgeGame, nextMove) {
     switch (nextMove) {
       case DEFAULT.RETRY:
-        return InputView.readGameCommand((input) =>
-          this.retryCallback(bridgeGame, input),
+        return readGameCommand((command) =>
+          this.retryCallback(bridgeGame, command),
         );
       case DEFAULT.END:
         return this.endCallback(bridgeGame.end());
       case DEFAULT.MOVE:
-        return InputView.readMoving((input) =>
-          this.moveCallback(bridgeGame, input),
+        return readMoving((direction) =>
+          this.moveCallback(bridgeGame, direction),
         );
     }
   }
