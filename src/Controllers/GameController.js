@@ -71,8 +71,8 @@ class GameController {
   }
 
   checkResult() {
-    const progressData = this.#bridgeGame.getGameProgress();
-    const currentProgressMap = this.makeMap(progressData);
+    const { gameProgress } = this.#bridgeGame.getResultData();
+    const currentProgressMap = this.makeMap(gameProgress);
 
     this.#outputView.printMap(currentProgressMap);
     this.checkGameBranch();
@@ -93,14 +93,6 @@ class GameController {
     if (end) return this.win();
 
     return this.selectMoving();
-  }
-
-  win() {
-    const progressData = this.#bridgeGame.getGameProgress();
-    const playCount = this.#bridgeGame.getPlayCount();
-    const gameResult = this.#bridgeGame.getGameResult();
-    const currentProgressMap = this.#progressMap.createMap(progressData);
-    this.#outputView.printResult(currentProgressMap, playCount, gameResult);
   }
 
   askRetry() {
@@ -130,13 +122,20 @@ class GameController {
     this.selectMoving();
   }
 
+  win() {
+    this.#bridgeGame.win();
+    this.getResult();
+  }
+
   defeat() {
     this.#bridgeGame.defeat();
-    const progressData = this.#bridgeGame.getGameProgress();
-    const playCount = this.#bridgeGame.getPlayCount();
-    const gameResult = this.#bridgeGame.getGameResult();
-    const currentProgressMap = this.#progressMap.createMap(progressData);
-    this.#outputView.printResult(currentProgressMap, playCount, gameResult);
+    this.getResult();
+  }
+
+  getResult() {
+    const gameResultData = this.#bridgeGame.getResultData();
+    const currentProgressMap = this.#progressMap.createMap(gameResultData.gameProgress);
+    this.#outputView.printResult(currentProgressMap, gameResultData);
   }
 }
 

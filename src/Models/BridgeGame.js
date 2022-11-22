@@ -4,32 +4,41 @@ const { BRIDGE_VALUE } = require('../utils/constants');
 
 class BridgeGame {
   #myBridge;
-  #gameProgress = [...BRIDGE_VALUE.DEFAULT_GAME_PROGRESS];
   #round = BRIDGE_VALUE.DEFAULT_ROUND;
   #alive = BRIDGE_VALUE.DEFAULT_ALIVE_VALUE;
-  #playCount = BRIDGE_VALUE.DEFAULT_COUNT;
-  #gameResult = BRIDGE_VALUE.RESULT_WIN;
+  #resultData;
 
+  constructor() {
+    this.#resultData = {
+      gameProgress: [...BRIDGE_VALUE.DEFAULT_GAME_PROGRESS],
+      playCount: BRIDGE_VALUE.DEFAULT_COUNT,
+      gameResult: BRIDGE_VALUE.RESULT_WIN,
+    };
+  }
   createBridge(size) {
-    this.#playCount += BRIDGE_VALUE.COUNT_UNIT;
+    this.#resultData.playCount += BRIDGE_VALUE.COUNT_UNIT;
     this.#myBridge = BridgeMaker.makeBridge(size, generateRandomNumber);
   }
 
   move(select) {
     this.#alive = this.checkAlive(select);
-    this.#gameProgress.push({ select, alive: this.#alive });
+    this.#resultData.gameProgress.push({ select, alive: this.#alive });
     this.#round += BRIDGE_VALUE.ROUND_UNIT;
   }
 
   retry() {
-    this.#gameProgress = [...BRIDGE_VALUE.DEFAULT_GAME_PROGRESS];
+    this.#resultData.gameProgress = [...BRIDGE_VALUE.DEFAULT_GAME_PROGRESS];
     this.#round = BRIDGE_VALUE.DEFAULT_ROUND;
     this.#alive = BRIDGE_VALUE.DEFAULT_ALIVE_VALUE;
-    this.#playCount += BRIDGE_VALUE.COUNT_UNIT;
+    this.#resultData.playCount += BRIDGE_VALUE.COUNT_UNIT;
   }
 
   defeat() {
-    this.#gameResult = BRIDGE_VALUE.RESULT_DEFEAT;
+    this.#resultData.gameResult = BRIDGE_VALUE.RESULT_DEFEAT;
+  }
+
+  win() {
+    this.#resultData.gameResult = BRIDGE_VALUE.RESULT_WIN;
   }
 
   checkGameEnd() {
@@ -44,16 +53,8 @@ class BridgeGame {
     return this.#alive;
   }
 
-  getGameProgress() {
-    return this.#gameProgress;
-  }
-
-  getPlayCount() {
-    return this.#playCount;
-  }
-
-  getGameResult() {
-    return this.#gameResult;
+  getResultData() {
+    return this.#resultData;
   }
 }
 

@@ -4,7 +4,6 @@ const { MESSAGE } = require('../utils/constants');
 const InputView = {
   readBridgeSize(callback) {
     Console.readLine(MESSAGE.SELECT_BRIDGE_SIZE, (userInput) => {
-      Console.print(MESSAGE.BLANK);
       callback(userInput);
     });
   },
@@ -25,7 +24,6 @@ const InputView = {
 
   readGameCommand(callback) {
     Console.readLine(MESSAGE.ASK_CONTINUE, (userInput) => {
-      Console.print(MESSAGE.BLANK);
       callback(userInput);
     });
   },
