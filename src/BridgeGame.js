@@ -2,6 +2,7 @@ const { makeBridge } = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
 const { Console } = require("@woowacourse/mission-utils");
+const Constant = require("./Constant");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -60,7 +61,7 @@ class BridgeGame {
    */ 
   fail() {
     this.setBridgeMap();
-    this.setFailBridgeMap();
+    this.insertFailBridge();
     OutputView.printMap(this.getBridgeMap());
   }
 
@@ -79,12 +80,12 @@ class BridgeGame {
   insertFailBridge() {
     const [topBridge, bottomBridge] = this.#bridgeMap;
     if (this.#bridge[this.getCurrentPosition()] === Constant.COMMAND_UP_DIRECTION_STRING) {
-      topBridge.push(Constant.EMPTY_STRING);
+      topBridge.push(Constant.BLANK_STRING);
       bottomBridge.push(Constant.FAIL_STRING);
     }
     if (this.#bridge[this.getCurrentPosition()] === Constant.COMMAND_DOWN_DIRECTION_STRING) {
       topBridge.push(Constant.FAIL_STRING);
-      bottomBridge.push(Constant.EMPTY_STRING);
+      bottomBridge.push(Constant.BLANK_STRING);
     }
   }
 
