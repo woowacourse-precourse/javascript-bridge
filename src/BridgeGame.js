@@ -1,29 +1,34 @@
-const app = require("./App");
-const bridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const outputView = require("./OutputView");
-const inputView = require("./InputView");
-
-
-
+const BridgeResult = require("./BridgeRsult");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridgeArr;
-  #size;
-  #currentBridgeIndex;
-  #tryCount;
   #upBridgeReultArr;
   #downBridgeReultArr;
+  #gameResult;
+  #tryCount;
 
-  constructor(bridgeArr, size) {
-    this.#bridgeArr = bridgeArr;
-    this.#size = size;
-    this.#currentBridgeIndex = 0;
+  constructor() {
     this.#tryCount = 1;
     this.#upBridgeReultArr = [];
     this.#downBridgeReultArr = [];
+  }
+
+  get upBridgeReultArr() {
+    return this.#upBridgeReultArr;
+  }
+
+  get downBridgeReultArr() {
+    return this.#downBridgeReultArr;
+  }
+
+  set gameResult(gameResult) {
+    this.#gameResult = gameResult;
+  }
+
+  makeBridgeResult() {
+    return new BridgeResult(this.#upBridgeReultArr, this.#downBridgeReultArr,this.#gameResult, this.#tryCount);
   }
 
   /**
@@ -31,16 +36,11 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
- 
   /** 5. 사용자 입력값 대비 건널 수 있는지 여부 비교해서 배열에 결과 값 넣어주기 */
-  async move() {
-    const movingInput = await inputView.inputMoving(this.#bridgeArr);
-    console.log('###movingInput:', movingInput);
-
+  move(currentBridge, movingInput) {
     let result = "X";
-    if(this.#bridgeArr[this.#currentBridgeIndex] === movingInput) {
+    if(currentBridge === movingInput) {
       result = "O";
-      this.#currentBridgeIndex++;
     }
 
     switch(movingInput) {
@@ -53,14 +53,7 @@ class BridgeGame {
         this.#upBridgeReultArr.push(' ');
         break;
     }
-    console.log(this.#upBridgeReultArr);
-    console.log(this.#downBridgeReultArr);
-
-
-    if(result === 'X') {
-      this.retry();
-    }
-
+    return result;
   }
 
   /**
@@ -68,20 +61,19 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  async retry() {
-    const retryInput = await inputView.inputRetry();
-    console.log('###retry:', retryInput);
-
-    if(retryInput === 'R') {
+  retry(input) {
+    if(input === 'R') {
       this.#upBridgeReultArr.pop();
       this.#downBridgeReultArr.pop();
-      this.#tryCount++
-      this.move();
-    } else if(retryInput === 'Q') {
-      outputView.printResult();
+      this.#tryCount++;
+      return true;
+    } else if(input === 'Q') {
+      this.#gameResult = '실패';
     }
-
+    return false;
   }
+
+  
 }
 
 module.exports = BridgeGame;
