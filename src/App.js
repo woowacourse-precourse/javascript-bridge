@@ -1,7 +1,6 @@
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const { Console } = require("@woowacourse/mission-utils");
-const { COMMAND } = require("./Constant");
 const Bridge = require("./Bridge");
 const BridgeGame = require("./BridgeGame");
 
@@ -18,3 +17,4 @@ class App {
 module.exports = App;
 // const app = new App();
 // app.play();
+
