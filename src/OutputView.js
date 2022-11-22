@@ -4,6 +4,7 @@ const { Console } = require('@woowacourse/mission-utils');
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -11,9 +12,7 @@ const OutputView = {
    */
   printMap(bridgeGame) {
     Console.print(
-      `${bridgeGame.getPrintList(
-        bridgeGame.getUpList(),
-      )}\n${bridgeGame.getPrintList(bridgeGame.getDownList())}`,
+      `${bridgeGame.getPrintList(bridgeGame.getUpList())}\n${bridgeGame.getPrintList(bridgeGame.getDownList())}`,
     );
   },
 
@@ -28,13 +27,17 @@ const OutputView = {
         bridgeGame.getUpList(),
       )}\n${bridgeGame.getPrintList(bridgeGame.getDownList())}`,
     );
+    this.printSuccessAndTryCount(isSuccess, bridgeGame);
+    Console.close();
+  },
+
+  printSuccessAndTryCount (isSuccess, bridgeGame) {
     Console.print(
       GAME_MESSAGE.SUCCESS_OR_NOT
         + (isSuccess ? GAME_MESSAGE.SUCCESS : GAME_MESSAGE.FAIL)
         + GAME_MESSAGE.TRY_NUMBER
         + bridgeGame.getTryCount(),
     );
-    Console.close();
   },
 
   printError (error) {
