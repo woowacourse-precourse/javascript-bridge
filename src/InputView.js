@@ -46,9 +46,18 @@ const InputView = {
   udValidation(answer) {
     if (answer != "U" && answer != "D") {
       Console.print(
-        "[ERROR] 다리 길이는 3이상 20 이하의 숫자만 입력 가능합니다. 다시 입력해 주세요!"
+        "[ERROR] 이동입력은 U 또는 D만 입력 할 수 있습니다. 다시 입력해 주세요!"
       );
       this.readMoving();
+    }
+  },
+  retryValidation(answer) {
+    if (answer != "R" && answer != "Q") {
+      Console.print(
+        "[ERROR] 재시작 입력은 R 또는 Q만 입력 할 수 있습니다. 다시 입력해 주세요!"
+      );
+      this.readGameCommand();
+      return true;
     }
   },
 
@@ -115,8 +124,10 @@ const InputView = {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (answer) => {
-        const retrycheck = game.retry(answer);
-        this.retryCommand(retrycheck);
+        if (!this.retryValidation(answer)) {
+          const retrycheck = game.retry(answer);
+          this.retryCommand(retrycheck);
+        }
       }
     );
   },
