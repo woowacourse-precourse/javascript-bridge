@@ -13,16 +13,11 @@ const OutputView = {
    */
   printMap(state, success) {
     for (let r = 0; r < POSITIONS.length; r += 1) {
-      const map = [];
-      for (let c = 0; c < state.length; c += 1) {
-        map.push(
-          getMapState(
-            state[c] === POSITIONS[1 - r],
-            success,
-            c === state.length - 1
-          )
-        );
-      }
+      const map = state.map((element, ind) => {
+        if (ind === state.length - 1)
+          return getMapState(element === POSITIONS[1 - r], success, true);
+        return getMapState(element === POSITIONS[1 - r], success);
+      });
       Console.print(`${MAP_STATE.prefix}${map.join('|')}${MAP_STATE.postfix}`);
     }
   },
