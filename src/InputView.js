@@ -1,7 +1,4 @@
 const { Console } = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { eventEmitter } = require("./EventEmitter");
 
 /**
