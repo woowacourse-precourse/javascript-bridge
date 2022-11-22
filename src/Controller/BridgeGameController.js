@@ -12,7 +12,7 @@ class BridgeGameController {
 
   start() {
     OutputView.printStartMessage(); // 시작 문구 출력
-    this.generateBridge(InputView.readBridgeSize()); // 랜덤 다리 생성
+    InputView.readBridgeSize(this.generateBridge.bind(this));
   }
 
   generateBridge(size) {
@@ -26,8 +26,14 @@ class BridgeGameController {
   }
 
   inputMoveDirection() {
-    const cmd = InputView.readMoving();
-    // this.move(cmd);
+    InputView.readMoving(this.move.bind(this));
+  }
+
+  inputGameCommand(map) {
+    // TODO: change
+    const cmd = InputView.readGameCommand();
+    if (cmd === "R") this.#BridgeGame.retry();
+    if (cmd === "Q") OutputView.printResult(map, "실패", 2);
   }
 
   /**
@@ -40,14 +46,15 @@ class BridgeGameController {
     OutputView.printMap(map[0], map[1]);
     if (!isSuccess) {
       //실패하면 게임 재시작 or 끝내기.
-      const cmd = InputView.readGameCommand();
-      if (cmd === "R") {
-      }
-      if (cmd === "Q") {
-      }
+      this.inputGameCommand(map);
+      return;
     }
-    if (isSuccess) {
-      //성공이면 게임이 끝났는지 안끝났는지 확인해야한다.
+    if (isSuccess && this.#BridgeGame.isEnd()) {
+      //성공하면
+      OutputView.printResult(map, "성공", 1);
+      return;
+    } else {
+      this.#BridgeGame.increaseStep();
       this.inputMoveDirection();
     }
   }
