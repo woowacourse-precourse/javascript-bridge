@@ -3,6 +3,7 @@ const InputView = require("./InputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const OutputView = require("./OutputView");
 
 const START_GAME = "다리 건너기 게임을 시작합니다.";
 
@@ -21,7 +22,7 @@ class App {
 
   //다리 생성
   createBridge() {
-    const size = InputView.readBridgeSize();
+    let size = InputView.readBridgeSize();
 
     this.bridge = BridgeMaker.makeBridge(
       size,
@@ -39,6 +40,7 @@ class App {
     while (flag && completeOneMoving.length != this.bridge.length) {
       let moving = InputView.readMoving();
       completeOneMoving = this.game.move(moving);
+      OutputView.printMap(this.game.bridge, this.game.userBridge);
 
       flag = completeOneMoving[completeOneMoving.length - 1];
       if (!flag) this.restartOrNot();
@@ -60,7 +62,11 @@ class App {
 
   //게임 종료
   endGame() {
-    console.log("게임을 종료합니다.");
+    OutputView.printResult(
+      this.game.bridge,
+      this.game.userBridge,
+      this.game.attemptCnt
+    );
   }
 }
 
