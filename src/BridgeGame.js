@@ -15,6 +15,16 @@ class BridgeGame {
   }
 
   /**
+   * 유저의 재시작 여부에 따라 동작을 수행한다.
+   * @param userRestartInput {string} [유저 재시작 여부]
+   * @param userMoving {string[]} [유저 이동기록]
+   */
+  processUserRestartInput(userRestartInput, userMoving) {
+    if (userRestartInput === "R") this.retry();
+    if (userRestartInput === "Q") this.finishGame(userMoving, false);
+  }
+
+  /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
