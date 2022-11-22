@@ -87,7 +87,6 @@ class BridgeGame {
   }
 
   retry(bridge) {
-    Console.print("재시작")
     this.setCountRetry();
     this.upBridgeList = [];
     this.downBridgeList = [];
