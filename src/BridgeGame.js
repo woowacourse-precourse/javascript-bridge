@@ -1,4 +1,5 @@
-const { printMap } = require("./OutputView");
+const { printMap, printResult } = require("./OutputView");
+const { readGameCommand } = require("./InputView");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -39,7 +40,7 @@ class BridgeGame {
       return readGameCommand(this.bridge);
     }
     if (curIdx + 1 === this.bridge.length) {
-      return "win";
+      return printResult();
     }
     return readMoving(this.bridge);
   }
@@ -49,7 +50,19 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.addCount();
+    this.initBridgeMap();
+    readMoving(this.bridge);
+  }
+
+  addCount() {
+    this.count = this.count + 1;
+  }
+
+  initBridgeMap() {
+    this.bridgeMap = { U: [], D: [] };
+  }
 }
 
 module.exports = BridgeGame;
