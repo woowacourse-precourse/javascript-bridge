@@ -16,7 +16,7 @@ const isValidateMoveInput = (input) => {
 const isValidateRetryInput = (input) => {
   const retryInputRegex = /^[R|Q]$/g;
   if (!input.match(retryInputRegex)) {
-    throw new Error(ERROR_MESSAGE.INVALID_RETRY_INPIT);
+    throw new Error(ERROR_MESSAGE.INVALID_RETRY_INPUT);
   }
 };
 
