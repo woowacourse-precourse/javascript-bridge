@@ -4,6 +4,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 const Validaton = {
     validatePositiveInteger(userInput) {
+        console.log(isNaN(Number(userInput)));
         if(isNaN(Number(userInput))) {  
             throw new Error(`[ERROR] 다리의 길이는 양의 정수여야 합니다.`); 
         }
@@ -19,8 +20,8 @@ const Validaton = {
         }
     },
     validateUserRetryChoice(userInput){
-        if(!(userInput === 'U' || userInput === 'D')){
-            throw new Error(`[ERROR] 재선택은 U 또는 D만 선택 가능합니다.`);
+        if(!(userInput === 'R' || userInput === 'Q')){
+            throw new Error(`[ERROR] 재선택은 R 또는 Q만 선택 가능합니다.`);
         }
     }
 };

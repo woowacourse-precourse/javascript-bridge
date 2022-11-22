@@ -11,5 +11,10 @@ describe("입력 테스트", () => {
             Validaton.validateUserChoice("R");
         }).toThrow("[ERROR]");
     });
+    test("재선택은 R 또는 Q가 아니면 예외가 발생한다.", () => {
+        expect(() => {
+            Validaton.validateUserRetryChoice("U");
+        }).toThrow("[ERROR]");
+    });
     // 아래에 추가 테스트 작성 가능
 });
