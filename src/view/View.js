@@ -19,38 +19,40 @@ class View {
   }
 
   #inputBridgeSize() {
-    try {
-      InputView.readBridgeSize(this.#getBridgeSize());
-    } catch (error) {
-      OutputView.printError(error.message);
-      this.#inputBridgeSize();
-    }
+    InputView.readBridgeSize(this.#getBridgeSize());
   }
 
   #getBridgeSize() {
     return (size) => {
       const bridgeSizeValidator = new BridgeSizeValidator();
-      bridgeSizeValidator.validate(size);
-      this.#gameController.inputBridgeSize(size);
-      this.#inputPositionToMove();
+      try {
+        bridgeSizeValidator.validate(size);
+        this.#gameController.inputBridgeSize(size);
+        this.#inputPositionToMove();
+      } catch (error) {
+        OutputView.printError(error.message);
+        this.#inputBridgeSize();
+      }
     };
   }
 
   #inputPositionToMove() {
-    InputView.readMoving(this.#getPositionToMove()).catch((error) => {
-      OutputView.printError(error.message);
-      this.#inputPositionToMove();
-    });
+    InputView.readMoving(this.#getPositionToMove());
   }
 
   #getPositionToMove() {
     return (position) => {
       const bridgePositionValidator = new BridgePositionValidator();
-      bridgePositionValidator.validate(position);
-      const isMove = this.#gameController.inputMove(position);
-      const bridgeMap = this.#gameController.getMap();
-      this.#printBridge(bridgeMap);
-      this.#nextStep(isMove);
+      try {
+        bridgePositionValidator.validate(position);
+        const isMove = this.#gameController.inputMove(position);
+        const bridgeMap = this.#gameController.getMap();
+        this.#printBridge(bridgeMap);
+        this.#nextStep(isMove);
+      } catch (error) {
+        OutputView.printError(error.message);
+        this.#inputPositionToMove();
+      }
     };
   }
 
@@ -67,20 +69,20 @@ class View {
   }
 
   #inputRetryOrQuit() {
-    try {
-      InputView.readGameCommand(this.#retryOrQuit());
-    } catch (error) {
-      OutputView.printError(error.message);
-      this.#inputRetryOrQuit();
-    }
+    InputView.readGameCommand(this.#retryOrQuit());
   }
 
   #retryOrQuit() {
     return (input) => {
       const bridgeCommandValidator = new BridgeCommandValidator();
-      bridgeCommandValidator.validate(input);
-      if (input === "R") this.#retryGame();
-      if (input === "Q") this.#quitGame();
+      try {
+        bridgeCommandValidator.validate(input);
+        if (input === "R") this.#retryGame();
+        if (input === "Q") this.#quitGame();
+      } catch (error) {
+        OutputView.printError(error.message);
+        this.#inputRetryOrQuit();
+      }
     };
   }
 
