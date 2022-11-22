@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('../constants/messages');
-const { VALUE } = require('../constants/values');
+const { SIGN } = require('../constants/values');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -18,8 +18,8 @@ const OutputView = {
     const bridgeUpper = upper.join('|');
     const bridgeLower = lower.join('|');
     const bridge = [
-      VALUE.OPENER.concat(bridgeUpper, VALUE.CLOSER),
-      VALUE.OPENER.concat(bridgeLower, VALUE.CLOSER)
+      SIGN.OPENER.concat(bridgeUpper, SIGN.CLOSER),
+      SIGN.OPENER.concat(bridgeLower, SIGN.CLOSER)
     ];
     MissionUtils.Console.print(`${bridge[0]}\n${bridge[1]}\n`);
   },

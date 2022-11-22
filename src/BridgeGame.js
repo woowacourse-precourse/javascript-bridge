@@ -1,4 +1,4 @@
-const { VALUE, STATUS } = require('./constants/values');
+const { SIGN, STATUS } = require('./constants/values');
 const { KEYS } = require('./constants/keys');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
@@ -53,33 +53,33 @@ class BridgeGame {
 
   #checkMovement(input, bridge, idx) {
     if (input === bridge[idx]) {
-      this.#moveResult = VALUE.SUCCESS;
+      this.#moveResult = SIGN.SUCCESS;
       this.#playerAt = this.#playerAt + 1;
       return;
     }
-    this.#moveResult = VALUE.FAILURE;
+    this.#moveResult = SIGN.FAILURE;
   }
 
   #setBridgeForm(input) {
     if (input === KEYS.UP) {
       this.#bridgeUpper.push(this.#moveResult);
-      this.#bridgeLower.push(VALUE.EMPTY);
+      this.#bridgeLower.push(SIGN.EMPTY);
       return;
     }
-    this.#bridgeUpper.push(VALUE.EMPTY);
+    this.#bridgeUpper.push(SIGN.EMPTY);
     this.#bridgeLower.push(this.#moveResult);
     return;
   }
 
   #setGameStatus() {
     if (
-      this.#moveResult === VALUE.SUCCESS &&
+      this.#moveResult === SIGN.SUCCESS &&
       this.#playerAt === this.#bridge.length
     ) {
       this.#setGameSuccess();
       return;
     }
-    if (this.#moveResult === VALUE.SUCCESS) {
+    if (this.#moveResult === SIGN.SUCCESS) {
       this.#gameStatus = STATUS.NEXT;
       return;
     }

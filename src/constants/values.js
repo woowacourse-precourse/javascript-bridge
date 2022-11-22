@@ -1,4 +1,4 @@
-const VALUE = {
+const SIGN = {
   SUCCESS: ' O ',
   FAILURE: ' X ',
   EMPTY: '   ',
@@ -13,4 +13,4 @@ const STATUS = {
   NEXT: 'next'
 };
 
-module.exports = { VALUE, STATUS, };
+module.exports = { SIGN, STATUS };
