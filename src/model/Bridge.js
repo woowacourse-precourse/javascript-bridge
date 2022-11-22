@@ -36,5 +36,4 @@ class Bridge {
             throw new Error(ERROR.BRIDGE_SIZE_OUT_BOUNDARY);
     }
 }
-
 module.exports = Bridge;
