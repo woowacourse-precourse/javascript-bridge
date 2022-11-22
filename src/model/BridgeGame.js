@@ -43,7 +43,7 @@ class BridgeGame {
     }
   }
 
-  isLast(winningBridge) {
+  isLastStage(winningBridge) {
     return winningBridge.isSameLength(this.#upperBridge);
   }
 

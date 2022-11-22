@@ -21,10 +21,10 @@ class Controller {
   gameStart() {
     OutputView.printMessage(MESSAGE.startGame);
 
-    this.inputBrideSize();
+    this.inputBridgeSize();
   }
 
-  inputBrideSize() {
+  inputBridgeSize() {
     InputView.readBridgeSize(this.validateSize.bind(this));
   }
 
@@ -33,7 +33,7 @@ class Controller {
       this.winningBridge.validate(Number(size));
     } catch (error) {
       OutputView.printError(error);
-      return this.inputBrideSize();
+      return this.inputBridgeSize();
     }
 
     this.makeWinningBridge(size);
@@ -66,11 +66,15 @@ class Controller {
     this.bridgeGame.move(direction, CAN_MOVE);
     OutputView.printMap(this.bridgeGame);
 
-    this.checkSuccess(CAN_MOVE);
+    this.checkSuccess(CAN_MOVE, this.isLastStage());
   }
 
-  checkSuccess(CAN_MOVE) {
-    if (CAN_MOVE && this.bridgeGame.isLast(this.winningBridge)) {
+  isLastStage() {
+    return this.bridgeGame.isLastStage(this.winningBridge);
+  }
+
+  checkSuccess(CAN_MOVE, isLastStage) {
+    if (CAN_MOVE && isLastStage) {
       const IS_SUCCEEDED = true;
       return this.printResult(IS_SUCCEEDED);
     }
