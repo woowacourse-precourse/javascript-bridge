@@ -8,13 +8,28 @@ class BridgeGame {
   #bridgeLength;
   #trial;
   #bridge;
+  #bridgeState;
+  #currentLocation;
+  #isFail;
+  #isSuccess;
 
   constructor() {
     this.#bridgeLength = 0;
     this.#trial = 0;
     this.#bridge = [];
+    this.#bridgeState = [[], []];
+    this.#currentLocation = 0;
+    this.#isFail = false;
+    this.#isSuccess = false;
   }
 
+  initBridgeState() {
+    this.#bridgeState = [[], []];
+  }
+
+  initGame(userInput) {
+    this.#bridgeLength = userInput;
+  }
   setBridge() {
     const bridge = BridgeMaker.makeBridge(
       this.#bridgeLength,
@@ -24,9 +39,21 @@ class BridgeGame {
     this.try();
   }
 
-  initGame(userInput) {
-    this.#bridgeLength = userInput;
+  getBridgeState() {
+    return this.#bridgeState;
   }
+
+  changeBridgeState(userInput, result) {
+    if (userInput === BRIDGE.UP) {
+      this.#bridgeState[BRIDGE.UP].push(result);
+      this.#bridgeState[BRIDGE.DOWN].push(BRIDGE.SPACE);
+    }
+    if (userInput === BRIDGE.DOWN) {
+      this.#bridgeState[BRIDGE.DOWN].push(result);
+      this.#bridgeState[BRIDGE.UP].push(BRIDGE.SPACE);
+    }
+  }
+
   try() {
     this.#trial += 1;
   }
