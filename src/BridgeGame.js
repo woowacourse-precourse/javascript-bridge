@@ -1,20 +1,53 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
-class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./Utils/BridgeRandomNumberGenerator');
+const { USER_INPUT_CODE, MOVEMENT_LOG_CODE } = require('./constants');
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+class BridgeGame {
+  #bridge;
+  #movementLog;
+  #tryCount;  
+
+  constructor(size) {
+    this.setBridge(size);
+  }
+
+  getTryCount(){
+    return this.#tryCount;
+  }
+
+  getMovementLog(){
+    return this.#movementLog;
+  }
+
+  move(direction) {
+    const distance = this.#movementLog.length;
+    const nextSpace = this.#bridge[distance];
+    if(direction === nextSpace) return this.#movementLog.push(direction);
+    if(direction === USER_INPUT_CODE.MOVE.UPPER) return this.#movementLog.push(MOVEMENT_LOG_CODE.FAILED.UPPER);
+    if(direction === USER_INPUT_CODE.MOVE.LOWER) return this.#movementLog.push(MOVEMENT_LOG_CODE.FAILED.LOWER);
+  }
+
+  retry() {
+    this.#tryCount += 1;
+    this.#movementLog = [];
+  }
+  
+  setBridge(size) {
+    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    this.#tryCount = 1;
+    this.#movementLog = [];
+  }
+
+  isFailed() {
+    const lastLog = this.#movementLog.slice(-1).join('');
+    const failedCodes = Object.values(MOVEMENT_LOG_CODE.FAILED);
+    if(failedCodes.includes(lastLog)) return true;
+  }
+
+  isClear() {
+    const passedSpaces = this.#movementLog.length;
+    if(passedSpaces === this.#bridge.length) return true;
+  }
 }
 
 module.exports = BridgeGame;
