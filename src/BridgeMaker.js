@@ -1,4 +1,4 @@
-const { EITHER } = require('./constants/bridge');
+const { MOVE } = require('./constants/bridge');
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -13,7 +13,7 @@ const BridgeMaker = {
     const bridge = [];
 
     for (let num = 0; num < size; num++) {
-      bridge.push(generateRandomNumber() + '' === '0' ? EITHER.DOWN : EITHER.UP);
+      bridge.push(generateRandomNumber() + '' === '0' ? MOVE.DOWN : MOVE.UP);
     }
 
     return bridge;

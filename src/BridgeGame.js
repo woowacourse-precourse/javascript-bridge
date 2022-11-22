@@ -1,6 +1,6 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { EITHER, MOVE_RESULT } = require('./constants/bridge');
+const { MOVE, MOVE_RESULT } = require('./constants/bridge');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -39,22 +39,22 @@ class BridgeGame {
   }
 
   setCorrectCounter(input) {
-    if (input === EITHER.UP) {
+    if (input === MOVE.UP) {
       this.upCounter.push(MOVE_RESULT.CORRECT);
       this.downCounter.push(MOVE_RESULT.BLANK);
     }
-    if (input === EITHER.DOWN) {
+    if (input === MOVE.DOWN) {
       this.upCounter.push(MOVE_RESULT.BLANK);
       this.downCounter.push(MOVE_RESULT.CORRECT);
     }
   }
 
   setInCorrectCounter(input) {
-    if (input === EITHER.UP) {
+    if (input === MOVE.UP) {
       this.upCounter.push(MOVE_RESULT.INCORRECT);
       this.downCounter.push(MOVE_RESULT.BLANK);
     }
-    if (input === EITHER.DOWN) {
+    if (input === MOVE.DOWN) {
       this.upCounter.push(MOVE_RESULT.BLANK);
       this.downCounter.push(MOVE_RESULT.INCORRECT);
     }

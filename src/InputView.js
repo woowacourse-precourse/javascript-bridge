@@ -21,7 +21,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(callback) {
-    return Io.input(INPUT.EITHER_UP_OR_DOWN, (char) => {
+    return Io.input(INPUT.MOVE_UP_OR_DOWN, (char) => {
       Validator.isVaildMovingChar(char);
       callback(char);
     });

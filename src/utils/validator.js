@@ -1,5 +1,5 @@
 const { throwError } = require('./error');
-const { ERROR, LENGTH, EITHER, COMMAND } = require('../constants/bridge');
+const { ERROR, LENGTH, MOVE, COMMAND } = require('../constants/bridge');
 
 const Validator = {
   isVaildSize(number) {
@@ -8,7 +8,7 @@ const Validator = {
   },
 
   isVaildMovingChar(char) {
-    if (char === EITHER.UP || char === EITHER.DOWN) return;
+    if (char === MOVE.UP || char === MOVE.DOWN) return;
     throwError(ERROR.NOT_VALID_MOVING_CHAR);
   },
 

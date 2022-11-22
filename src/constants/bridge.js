@@ -9,7 +9,7 @@ const LENGTH = {
   MAX: 20,
 };
 
-const EITHER = {
+const MOVE = {
   UP: 'U',
   DOWN: 'D',
 };
@@ -34,7 +34,7 @@ const COMMAND = {
 module.exports = {
   ERROR,
   LENGTH,
-  EITHER,
+  MOVE,
   MOVE_RESULT,
   CONTAINER,
   COMMAND,
