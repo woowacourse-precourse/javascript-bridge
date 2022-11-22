@@ -11,8 +11,8 @@ const GAME_COMMAND = {
 };
 
 const BRIDGE_INDEX = {
-    UP_INDEX: 1,
-    DOWN_INDEX: 0,
+    UP: 1,
+    DOWN: 0,
 };
 
 const BRIDGE_SIZE = {

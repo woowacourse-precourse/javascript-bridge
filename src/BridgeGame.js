@@ -75,12 +75,12 @@ class BridgeGame {
   
   updateCurrBridge(bridgeChoice, result) {
     if(bridgeChoice === BRIDGE.UP) {
-      this.#currBridge[BRIDGE_INDEX.DOWN_INDEX].push(EMPTY);
-      this.#currBridge[BRIDGE_INDEX.UP_INDEX].push(result);
+      this.#currBridge[BRIDGE_INDEX.DOWN].push(EMPTY);
+      this.#currBridge[BRIDGE_INDEX.UP].push(result);
     }
     if(bridgeChoice === BRIDGE.DOWN) {
-      this.#currBridge[BRIDGE_INDEX.DOWN_INDEX].push(result);
-      this.#currBridge[BRIDGE_INDEX.UP_INDEX].push(EMPTY);
+      this.#currBridge[BRIDGE_INDEX.DOWN].push(result);
+      this.#currBridge[BRIDGE_INDEX.UP].push(EMPTY);
     }
   }
 
