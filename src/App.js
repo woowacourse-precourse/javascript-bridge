@@ -1,5 +1,12 @@
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+
 class App {
-  play() {}
+  makeBridge(size) {
+    const generateRandomNumber = BridgeRandomNumberGenerator.generate;
+    const bridge = BridgeMaker.makeBridge(size, generateRandomNumber);
+  }
+
 }
 
 module.exports = App;
