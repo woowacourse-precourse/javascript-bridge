@@ -119,19 +119,11 @@ class BridgeGame {
   }
 
   setMapArray (sameResult, string) {
-    if (string === BRIDGE.UP && sameResult === BRIDGE.ABLE) {
+    if (string === BRIDGE.UP && sameResult) {
       this.#upList.push(sameResult);
       this.#downList.push(' ');
     }
-    if (string === BRIDGE.UP && sameResult === BRIDGE.UNABLE) {
-      this.#upList.push(sameResult);
-      this.#downList.push(' ');
-    }
-    if (string === BRIDGE.DOWN && sameResult === BRIDGE.ABLE) {
-      this.#upList.push(' ');
-      this.#downList.push(sameResult);
-    }
-    if (string === BRIDGE.DOWN && sameResult === BRIDGE.UNABLE) {
+    if (string === BRIDGE.DOWN && sameResult) {
       this.#upList.push(' ');
       this.#downList.push(sameResult);
     }
