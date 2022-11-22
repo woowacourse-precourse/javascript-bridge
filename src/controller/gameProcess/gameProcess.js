@@ -4,9 +4,13 @@ const { catchResultError } = require('../../model/CatchError');
 
 const gameProcess = (gameobj, userindex, bridge) => {
   const currentmove = MoveValidControl();
-  const eachProcess = gameobj.moveCaseAction(currentmove, bridge[userindex]);
+  const resultCompare = catchResultError(
+    gameobj,
+    currentmove,
+    bridge[userindex]
+  );
   printMap(gameobj, userindex);
-  return eachProcess;
+  return resultCompare;
 };
 
 Object.freeze(gameProcess);

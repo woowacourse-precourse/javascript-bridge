@@ -24,7 +24,9 @@ class App {
 
   play() {
     while (this.bridgeindex < this.bridgesize) {
-      if (gameProcess(this.bridgegame, this.bridgeindex, this.bridge)) {
+      if (
+        gameProcess(this.bridgegame, this.bridgeindex, this.bridge) === true
+      ) {
         this.bridgeindex += 1;
       } else if (ifRetryorEnd(this.bridgegame, this.bridgeindex) === false) {
         printLoseResult(this.bridgegame, this.gameCount.getgameCount());
