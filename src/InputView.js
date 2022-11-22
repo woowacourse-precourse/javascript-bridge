@@ -15,7 +15,7 @@ const InputView = {
 
   bridgeSizeException(bridgeSize) {
     const regex = /^[0-9]+$/;
-    if (regex.test(bridgeSize) && bridgeSize >= 3 || bridgeSize <= 20) {
+    if (regex.test(bridgeSize) && bridgeSize >= 3 && bridgeSize <= 20) {
       return true;
     }
     else if (bridgeSize === undefined) {

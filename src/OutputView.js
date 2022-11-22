@@ -19,18 +19,14 @@ const OutputView = {
 
     for (let i=0; i<currentStatus.length; i++) {
       if (bridge[i] === 'U') {
-        upBridge += 'O';
-        downBridge += ' ';
+        upBridge += 'O | ';
+        downBridge += '  | ';
       }
       else if (bridge[i] === 'D') {
-        upBridge += ' ';
-        downBridge += 'O';
+        upBridge += '  | ';
+        downBridge += 'O | ';
       }
-
-      upBridge += ' | ';
-      downBridge += ' | ';
     }
-
     upBridge = upBridge.slice(0, upBridge.length-3);
     downBridge = downBridge.slice(0, downBridge.length-3);
     upBridge += ' ]';

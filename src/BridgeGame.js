@@ -19,20 +19,24 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(userSelect) {
-    if (this.bridge[this.currentStatus.length] == userSelect) {
+    if (this.bridge[this.currentStatus.length] === userSelect) {
       this.currentStatus.push(true);
-      const progressStatus = this.progressTest(this.currentStatus);
-      return {currentStatus: this.currentStatus, progressStatus: progressStatus, retryCount: this.retryCount};
     }
-    return {currentStatus: this.currentStatus, progressStatus: 'error', retryCount: this.retryCount};
+    else if (this.bridge[this.currentStatus.length] !== userSelect){
+      this.currentStatus.push(false);
+    }
+    const progressStatus = this.progressTest(this.currentStatus);
+    return {currentStatus: this.currentStatus, progressStatus: progressStatus, retryCount: this.retryCount};
   }
 
   progressTest(currentStatus) {
-    if (currentStatus.length === this.size)
+    const regex = /true+$/;
+    if (currentStatus.length === this.size && currentStatus.indexOf(false) === -1)
       return 'end';
+    else if (currentStatus.indexOf(false) !== -1 && !regex.test(currentStatus))
+      return 'not correct';
     else if (currentStatus.indexOf(false) === -1)
       return 'correct';
-    else if (currentStatus.indexOf(false) !== -1)
     return 'error';
   }
 
