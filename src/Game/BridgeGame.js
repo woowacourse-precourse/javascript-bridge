@@ -1,3 +1,6 @@
+const BridgeMaker = require('../BridgeMaker');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+
 class BridgeGame {
   #bridge = [];
   #user = [];
@@ -31,8 +34,11 @@ class BridgeGame {
     return this.#score;
   }
 
-  set bridge(bridge) {
-    this.#bridge = bridge;
+  set bridge(length) {
+    this.#bridge = BridgeMaker.makeBridge(
+      +length,
+      BridgeRandomNumberGenerator.generate
+    );
   }
 
   get bridge() {

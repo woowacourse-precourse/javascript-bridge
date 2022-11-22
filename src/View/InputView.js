@@ -1,6 +1,4 @@
 const { Console } = require('@woowacourse/mission-utils');
-const BridgeMaker = require('../BridgeMaker');
-const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const { MSG } = require('../utils/messages');
 const { validator } = require('../utils/helper');
 const OutputView = require('./OutputView');
@@ -14,10 +12,7 @@ const InputView = {
   },
 
   setBridge(length) {
-    this.game.bridge = BridgeMaker.makeBridge(
-      +length,
-      BridgeRandomNumberGenerator.generate
-    );
+    this.game.bridge = length;
   },
 
   readBridgeSize() {
