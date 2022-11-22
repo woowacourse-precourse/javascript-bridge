@@ -1,5 +1,4 @@
 const BridgeGame = require('../src/BridgeGame');
-const Result = require('../src/Result');
 
 describe('BridgeGame 테스트', () => {
   const bridgeGame = new BridgeGame(3);
