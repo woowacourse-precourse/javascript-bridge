@@ -15,7 +15,7 @@ class App {
 
   play() {
     if (this.size == "err") return;
-    while (this.ask());
+    while (this.playingBridge());
     OutputView.printResult(
       this.bridgeGame.bridge,
       this.bridgeGame.location,
@@ -23,7 +23,7 @@ class App {
     );
   }
 
-  ask() {
+  playingBridge() {
     this.bridgeGame.move(this.makeMoving());
     OutputView.printMap(this.bridgeGame.bridge, this.bridgeGame.location);
     if (this.checkFail(this.bridgeGame.bridge, this.bridgeGame.location)) {
