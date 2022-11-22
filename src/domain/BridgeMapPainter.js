@@ -45,7 +45,6 @@ class BridgeMapPainter {
 
     const oxPattern = this.selectOXpattern(moveCommand, userLocation, gameMap);
     const selectBridge = this.selectUpOrDownBridge(moveCommand, userLocation);
-
     selectBridge.push(` ${oxPattern} `);
     this.#appendEmptySpace(selectBridge);
 
