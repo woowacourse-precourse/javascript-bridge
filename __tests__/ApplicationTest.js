@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
+const InputView = require("../src/InputView");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -35,6 +36,28 @@ const runException = (inputs) => {
 
   app.play();
 
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
+
+const runMoveException = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  const app = new App();
+
+  app.play();
+
+  InputView.readMoving();
+  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+};
+
+const runCommandException = (inputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  const app = new App();
+
+  app.play();
+
+  InputView.readGameCommand();
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
 
@@ -83,5 +106,32 @@ describe("다리 건너기 테스트", () => {
 
   test("예외 테스트", () => {
     runException(["a"]);
+  });
+
+  test("이동 입력 예외 테스트", () => {
+    runMoveException(["a"]);
+  });
+
+  test("재시작 입력 예외 테스트", () => {
+    runCommandException([1]);
+  });
+
+  test("게임 종료 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 1, 0, 1, 1]);
+    mockQuestions(["7", "D", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[   ]",
+      "[ X ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
+    expectBridgeOrder(log, "[ O ]", "[   ]");
   });
 });
