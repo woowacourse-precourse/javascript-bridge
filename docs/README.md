@@ -24,6 +24,7 @@ this.controlMoving()
 - [x] 플레이어가 칸을 이동한다.| BridgeGame#move()
 
 this.controlResult()
+MapMaker.makeMap()
 
 - [ ] [출력] 다리 건너기 결과를 출력한다.| OutputView#printMap()
 - 다리를 끝까지 건너면 게임이 종료된다.
@@ -74,7 +75,13 @@ App
 
 ## 비지니스 로직(Model)
 
-BridgeGame // 사용자가 칸을 이동할 때 사용하는 메서드
++MapMaker // 다리 건너기 결과 출력 형식을 만드는 클래스
+
+- +makeMap()
+- +makeSuccessMap()
+- +makeFailureMap()
+
+BridgeGame // 사용자가 칸을 이동할 때 사용하는 클래스
 
 - constructor(bridges){
   this.bridges = bridges;
