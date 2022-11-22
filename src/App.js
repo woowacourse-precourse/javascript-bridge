@@ -1,11 +1,11 @@
-const BridgeGame = require('./BridgeGame');
+const InputView = require('./InputView');
 
 class App {
   constructor() {
-    this.bridgeGame = new BridgeGame();
+    this.inputView = InputView;
   }
   play() {
-    this.bridgeGame.play();
+    this.inputView.readBridgeSize();
   }
 }
 
