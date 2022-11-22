@@ -67,7 +67,7 @@ class App {
   }
 
   calculateNextStep(canCross, playerBridgeState) {
-    this.bridgeGame.isQuit()
+    this.bridgeGame.isQuit(canCross)
       ? this.quit()
       : canCross
       ? this.requestMoving()
