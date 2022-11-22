@@ -17,8 +17,10 @@ class App {
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
       const { errorMsg } = Validation.validateBridgeSize(size);
-      if (errorMsg) {
-        OutputView.printErrorMessage(errorMsg);
+      try {
+        Validation.validateBridgeSize(size);
+      } catch (error) {
+        OutputView.printErrorMessage(error);
         return this.requestBridgeSize();
       }
       const bridge = BridgeMaker.makeBridge(Number(size), generate);
@@ -29,9 +31,11 @@ class App {
   }
   requestDirection() {
     InputView.readMoving((direction) => {
-      const { errorMsg } = Validation.validateDirection(direction);
-      if (errorMsg) {
-        OutputView.printErrorMessage(errorMsg);
+      try {
+        Validation.validateDirection(direction);
+      } catch {
+        OutputView.printErrorMessage(error);
+
         return this.requestDirection();
       }
       this.bridgeGame.move(direction);
@@ -47,8 +51,11 @@ class App {
   requestRestartOrQuit() {
     InputView.readGameCommand((commandOption) => {
       const { errorMsg } = Validation.validateCommandOption(commandOption);
-      if (errorMsg) {
-        OutputView.printErrorMessage(errorMsg);
+      try {
+        Validation.validateCommandOption(commandOption);
+      } catch {
+        OutputView.printErrorMessage(error);
+
         return this.requestRestartOrQuit();
       }
       if (commandOption === "R") return this.restart();
