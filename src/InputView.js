@@ -2,7 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const InputCheck = require("./inputCheck");
+const InputCheck = require("./InputCheck");
 const OutputView = require("./OutputView");
 
 const InputView = {
@@ -54,7 +54,8 @@ const InputView = {
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (choice) => {
         const choiceError = InputCheck.checkRestart(choice);
-        if (choiceError) return this.readGameCommand(bridgeList, bridge, attempts);
+        if (choiceError)
+          return this.readGameCommand(bridgeList, bridge, attempts);
 
         const restart = "R";
         const quit = "Q";
