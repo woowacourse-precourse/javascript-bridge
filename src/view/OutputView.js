@@ -30,26 +30,8 @@ const OutputView = {
   },
 
   printMap(map, currentPosition) {
-    // const upMap = map.getUpMap().slice(0, currentPosition);
-    // const downMap = map.getDownMap().slice(0, currentPosition);
-
-    // this.getMapUntilcurrentPosition(map, currentPosition).forEach((stage) => {
-    //   Console.print(stage.getMovingCommand());
-    //   if (stage.getMovingCommand() === 'U') {
-    //     upMap;
-    //   }
-    // });
-
     Console.print(`[ ${this.getUpMap(map, currentPosition).join(' | ')} ]`);
     Console.print(`[ ${this.getDownMap(map, currentPosition).join(' | ')} ]\n`);
-    // Console.print('최종 게임 결과');
-    // Console.print('[ O |   | O ]');
-    // Console.print('[   | O |   ]');
-    // Console.print('게임 성공 여부: 성공');
-    // Console.print('총 시도한 횟수: 1');
-
-    // Console.print(this.map.getMap()[currentPosition].getStage()[movingCommand]);
-    // Console.print(this.map.getMap()[currentPosition].getStage());
   },
 
   printEnd() {

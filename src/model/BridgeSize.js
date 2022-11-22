@@ -16,7 +16,6 @@ class BridgeSize {
   }
 
   validate(bridgeSize) {
-    // eslint-disable-next-line no-restricted-globals
     const isNumber = bridgeSize.match(/^[0-9]+$/g);
     if (!isNumber) {
       this.#close = true;

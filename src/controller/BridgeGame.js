@@ -1,4 +1,3 @@
-// const { Console } = require('@woowacourse/mission-utils');
 /* eslint-disable class-methods-use-this */
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -37,7 +36,6 @@ class BridgeGame {
    */
   move() {
     this.#currentPosition += 1;
-    // Console.print(this.#map.getMap()[0].getStage()['U']);
   }
 
   /**

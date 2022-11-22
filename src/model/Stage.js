@@ -37,15 +37,6 @@ class Stage {
     return this.#stage;
   }
 
-  // updateByMoving(movingCommand) {
-  //   if (movingCommand === 'U') {
-  //     this.setDownStage(' ');
-  //   }
-  //   if (movingCommand === 'D') {
-  //     this.setUpStage(' ');
-  //   }
-  // }
-
   setUpStage(canMoving) {
     this.#stage.U = canMoving;
   }
@@ -64,10 +55,6 @@ class Stage {
 
   setMovingCommand(movingCommand) {
     this.#movingCommand = movingCommand;
-  }
-
-  resetMovingCommand() {
-    this.#movingCommand = '';
   }
 
   getMovingCommand() {

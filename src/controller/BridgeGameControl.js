@@ -141,8 +141,6 @@ class BridgeGameControl {
   gameCommandProcess(gameCommand) {
     if (gameCommand.getGameCommand() === 'R') this.gameCommandRestart();
     if (gameCommand.getGameCommand() === 'Q') this.gameCommandQuit();
-    // Console.print(gameCommand.getGameCommand());
-    // Console.close();
   }
 
   gameCommandCallback(input) {

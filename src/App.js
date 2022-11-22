@@ -1,5 +1,4 @@
 /* eslint-disable class-methods-use-this */
-// const { Console } = require('@woowacourse/mission-utils');
 const { BridgeGameControl } = require('./controller');
 
 class App {
