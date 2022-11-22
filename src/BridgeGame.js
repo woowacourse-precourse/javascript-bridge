@@ -9,7 +9,7 @@ class BridgeGame {
 	 */
 	move(info, direction) {
 		info.inputList.push(direction === 'U' ? 1 : 0);
-		if (info.inputList[currentPosition] == info.bridgeInfo[currentPosition]) return 1;
+		if (info.inputList[info.currentPosition] == info.bridgeInfo[info.currentPosition]) return 1;
 		return 0;
 	}
 
