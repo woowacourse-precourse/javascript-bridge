@@ -23,5 +23,3 @@ const validation = {
 }
 
 module.exports = validation;
-
-console.log(validation.validateRange([1,20],1))
