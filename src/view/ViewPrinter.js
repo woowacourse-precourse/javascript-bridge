@@ -19,9 +19,8 @@ class ViewPrinter {
   }
 
   printEndResult() {
-    const bridges = this.#bridgeGame.getBridge().getBridges();
+    const [upside, downside] = this.#bridgeGame.getBridge().getBridges();
     const gameState = this.#bridgeGame.getState();
-    const [upside, downside] = bridges;
 
     OutputView.printResult(gameState, upside, downside);
     MissionUtils.Console.close();
