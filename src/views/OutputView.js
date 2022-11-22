@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const { BRIDGE_MESSAGE, GAME_MESSAGE, GAME_RULE } = require('../constants');
+const { GAME_MESSAGE } = require('../constants');
 const OutputUtils = require('../utils/OutputUtils');
 
 const BridgeGame = require('../models/BridgeGame');
@@ -17,11 +17,11 @@ const OutputView = {
   printMap(bridgeMap) {
     const [upside, downside] = bridgeMap.getMap();
 
-    const upsideString = OutputUtils.stringifyMap(upside);
-    const downsideString = OutputUtils.stringifyMap(downside);
+    const upsideString = OutputUtils.stringifyBridgeMap(upside);
+    const downsideString = OutputUtils.stringifyBridgeMap(downside);
 
-    Console.print(BRIDGE_MESSAGE.START + upsideString + BRIDGE_MESSAGE.END);
-    Console.print(BRIDGE_MESSAGE.START + downsideString + BRIDGE_MESSAGE.END);
+    Console.print(upsideString);
+    Console.print(downsideString);
   },
 
   /**
@@ -32,7 +32,7 @@ const OutputView = {
     Console.print(GAME_MESSAGE.RESULT_TITLE);
     OutputView.printMap(bridgeMap);
     Console.print('');
-    Console.print(GAME_MESSAGE.SUCCESS_OPTION + OutputUtils.convertWinMessage(isWin));
+    Console.print(GAME_MESSAGE.WIN_OPTION + OutputUtils.convertToWinMessage(isWin));
     Console.print(GAME_MESSAGE.TRY_COUNT + tryCount);
   },
 
