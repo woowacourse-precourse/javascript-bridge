@@ -5,7 +5,7 @@ const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const Validator = require('./Validator');
-const { SUCCESS, FAIL, QUIT, CROSS_OR_NOT } = require('./constants');
+const { SUCCESS, FAIL, QUIT, CROSS_OR_NOT, RETRY } = require('./constants');
 
 class Controller {
   constructor() {
@@ -53,11 +53,15 @@ class Controller {
   inputGameCommand() {
     const readGameCommandCallback = (input) => {
       Validator.validateGameCommand(input);
-      if (input === QUIT) return this.outputView.printResult(FAIL, this.model);
-      BridgeGame.retry(this.model);
-      return this.inputMoving();
+      if (input === QUIT) this.outputView.printResult(FAIL, this.model);
+      if (input === RETRY) this.resetAndRetryGame();
     };
     return this.inputView.readGameCommand(readGameCommandCallback);
+  }
+
+  resetAndRetryGame() {
+    BridgeGame.retry(this.model);
+    return this.inputMoving();
   }
 }
 
