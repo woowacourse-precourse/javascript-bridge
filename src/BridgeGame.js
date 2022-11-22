@@ -23,12 +23,12 @@ class BridgeGame {
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * @param {string} moving 이동할 위치 U혹은 D
-   * @return {number, stringp[][]}
+   * @return {number} 0: 실패, 1: 성공, 2: 도착지에 도착
    */
   move(moving) {
     const isSuccess = this.checkBridge(moving);
     this.updateBirdge(isSuccess);
-    return [isSuccess, this.#crossBridge];
+    return isSuccess;
   }
 
   /**

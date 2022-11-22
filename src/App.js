@@ -65,8 +65,8 @@ class App {
    * @param {number} moving 이동할 위치 U혹은 D
    */
   checkBridge(moving) {
-    const [isSuccess, crossBridge] = this.#bridgeGame.move(moving);
-    OutputView.printMap(crossBridge);
+    const isSuccess = this.#bridgeGame.move(moving);
+    OutputView.printMap(this.#bridgeGame.getBridge());
     if (isSuccess === 0) InputView.readGameCommand(this.retry.bind(this));
     if (isSuccess === 1) this.playBridgeGame();
     if (isSuccess === 2) this.gameEnd(true);
