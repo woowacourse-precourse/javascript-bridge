@@ -2,9 +2,12 @@
 class Stage {
   #stage;
 
+  #movingCommand;
+
   constructor() {
     this.validate();
-    this.#stage = [0, 0];
+    this.#stage = { U: 'U', D: 'D' };
+    this.#movingCommand = '';
   }
 
   validate() {}
@@ -34,20 +37,41 @@ class Stage {
     return this.#stage;
   }
 
+  // updateByMoving(movingCommand) {
+  //   if (movingCommand === 'U') {
+  //     this.setDownStage(' ');
+  //   }
+  //   if (movingCommand === 'D') {
+  //     this.setUpStage(' ');
+  //   }
+  // }
+
   setUpStage(canMoving) {
-    this.#stage[0] = canMoving;
+    this.#stage.U = canMoving;
   }
 
   getUpStage() {
-    return this.#stage[0];
+    return this.#stage.U;
   }
 
   setDownStage(canMoving) {
-    this.#stage[1] = canMoving;
+    this.#stage.D = canMoving;
   }
 
   getDownStage() {
-    return this.#stage[1];
+    return this.#stage.D;
+  }
+
+  setMovingCommand(movingCommand) {
+    this.#movingCommand = movingCommand;
+  }
+
+  resetMovingCommand() {
+    this.#movingCommand = '';
+  }
+
+  getMovingCommand() {
+    return this.#movingCommand;
   }
 }
 

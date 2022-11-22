@@ -11,11 +11,18 @@ class Map {
     this.#map = Object.fromEntries(
       Array(stageCount)
         .fill()
-        .map((_, index) => [index, new Stage()]),
+        .map((_, index) => [index + 1, new Stage()]),
     );
   }
 
   validate() {}
+
+  setRecoverMap(UpMap) {
+    Object.entries(this.#map).forEach(([index, stage]) => {
+      const number = UpMap[index - 1] === 'O' ? 1 : 0;
+      stage.setStage(number);
+    });
+  }
 
   setMap(generateRandomNumberCallback) {
     const generateRandomNumber = Object.create(generateRandomNumberCallback);
@@ -27,6 +34,14 @@ class Map {
 
   getMap() {
     return this.#map;
+  }
+
+  getUpMap() {
+    return Object.entries(this.#map).map(([index, stage]) => stage.getUpStage());
+  }
+
+  getDownMap() {
+    return Object.entries(this.#map).map(([index, stage]) => stage.getDownStage());
   }
 }
 

@@ -1,8 +1,10 @@
+/* eslint-disable import/no-useless-path-segments */
 /* eslint-disable max-len */
 /* eslint-disable class-methods-use-this */
 const { Console } = require('@woowacourse/mission-utils');
-const { InputView } = require('../view');
-const { BridgeSize, Moving, GameCommand } = require('../model');
+const { BridgeSize, Moving, GameCommand, Map } = require('../model');
+const { InputView, OutputView } = require('../view');
+const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 /**
@@ -11,19 +13,44 @@ const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 class BridgeGameControl {
   #inputView;
 
+  #outputView;
+
+  #bridgeGame;
+
+  #entireMap;
+
+  #map;
+
   constructor() {
     const inputView = Object.create(InputView);
     this.#inputView = inputView;
+    const outputView = Object.create(OutputView);
+    this.#outputView = outputView;
+    const bridgeGame = new BridgeGame();
+    this.#bridgeGame = bridgeGame;
+  }
+
+  recoverMap() {
+    const upMap = this.#entireMap
+      .split('\n')[0]
+      .replace(/\[|\]|\s/g, '')
+      .split('|');
+    this.#map.setRecoverMap(upMap);
+  }
+
+  bridgeSizeCallback(input) {
+    const bridgeSize = new BridgeSize(input);
+    const bridgeMaker = Object.create(BridgeMaker);
+    this.#entireMap = bridgeMaker.makeBridge(bridgeSize.getBridgeSize(), BridgeRandomNumberGenerator);
+
+    const map = new Map(bridgeSize.getBridgeSize());
+    this.#map = map;
+    this.recoverMap();
+    this.move();
   }
 
   make() {
-    const bridgeSizeCallback = (input) => {
-      const bridgeSize = new BridgeSize(input);
-      const bridgeMaker = Object.create(BridgeMaker);
-      const bridge = bridgeMaker.makeBridge(bridgeSize.getBridgeSize(), BridgeRandomNumberGenerator);
-      this.move();
-    };
-    this.#inputView.readBridgeSize(bridgeSizeCallback);
+    this.#inputView.readBridgeSize(this.bridgeSizeCallback.bind(this));
   }
 
   /**
@@ -31,13 +58,20 @@ class BridgeGameControl {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+  movingCallback(input) {
+    const moving = new Moving(input);
+    this.#bridgeGame.importMap(this.#map);
+
+    this.#bridgeGame.move();
+    this.#bridgeGame.matchResult(moving.getMoving());
+
+    this.#outputView.printMap(this.#map, this.#bridgeGame.getCurrentPosition());
+    // this.#outputView.printMap(moving.getMoving(), this.#bridgeGame.getCurrentPosition());
+    this.retry();
+  }
+
   move() {
-    const movingCallback = (input) => {
-      const moving = new Moving(input);
-      Console.print(moving.getMoving());
-      this.retry();
-    };
-    this.#inputView.readMoving(movingCallback);
+    this.#inputView.readMoving(this.movingCallback.bind(this));
   }
 
   /**
