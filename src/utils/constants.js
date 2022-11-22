@@ -8,6 +8,7 @@ const MESSAGE = Object.freeze({
 });
 
 const SHOW_GAME_RESULT = (GAME_RESULT) => `게임 성공 여부: ${GAME_RESULT}`;
+
 const SHOW_RETRY_COUNT = (RETRY_COUNT) => `총 시도한 횟수: ${RETRY_COUNT}`;
 
 const ERROR = Object.freeze({
