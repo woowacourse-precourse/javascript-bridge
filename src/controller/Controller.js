@@ -37,6 +37,7 @@ class Controller {
   #startGame(input) {
     this.#bridgeGame = new BridgeGame(input);
     this.#args[PHASE.RESULT] = this.#bridgeGame;
+    OutputView.nextLine();
     this.goTo(PHASE.MOVE);
   }
 
