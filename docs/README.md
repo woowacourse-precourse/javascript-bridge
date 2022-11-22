@@ -76,7 +76,9 @@
 - [x] MVC 패턴으로 클래스 관리
 - [x] 추상 클래스나 인터페이스를 사용 용도에 맞게 구현하여 객체지향 프로그래밍 시도하기
 - [x] 의존성 주입을 통해 클래스들간의 의존성 느슨하게 하기
-
+![슬라이드2](https://user-images.githubusercontent.com/82035356/203337480-9c24b538-a758-4637-9b9d-0c4b90466931.JPG)
+![슬라이드3](https://user-images.githubusercontent.com/82035356/203337508-543183e9-db38-4ac1-8bfb-23c56655a61f.JPG)
+- [x] 인터페이스와 추상 클래스를 사용 용도에 맞게 생성하고 사용하기
 ### 도메인 분리
 
 ![domain_bridge](https://user-images.githubusercontent.com/82035356/202850717-e3e52815-0d5a-4120-a8c8-d6ac6674d9c5.jpg)
