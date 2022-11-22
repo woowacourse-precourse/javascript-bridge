@@ -14,7 +14,7 @@ const InputView = {
         throw new Error("[ERROR] 다리의 길이는 3 이상 20 이하입니다.");
       }
       game.setBridge(reply);
-      this.readMoving(game, []);
+      this.readMoving(game);
     });
   },
 
