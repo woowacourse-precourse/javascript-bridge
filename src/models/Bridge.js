@@ -1,9 +1,4 @@
-const { DIRECTION, ERROR_MESSAGE } = require('../constants');
-
-const BRIDGE_SIZE = Object.freeze({
-  min: 3,
-  max: 20,
-});
+const { BRIDGE_SIZE, DIRECTION, ERROR_MESSAGE } = require('../constants');
 
 class Bridge {
   #directions;
