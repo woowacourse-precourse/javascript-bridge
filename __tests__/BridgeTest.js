@@ -17,6 +17,6 @@ describe("Bridge 클래스 테스트", () => {
   });
 
   test("다리 길이는 3~20 사이여야 한다.", () => {
-    expect(new Bridge(['U','D'])).toThrow(ERROR_MESSAGE.BRIDGE_LENGTH);
+    expect(() => { new Bridge(['U','D']) }).toThrow(ERROR_MESSAGE.BRIDGE_LENGTH);
   })
 });
