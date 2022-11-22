@@ -4,9 +4,12 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const {
   BRIDGE_LENGTH_QUERY,
   MOVE_COMMAND_QUERY,
+  RETRY_QUERY,
   MOVE_SUCCESS,
   MOVE_FAIL,
   MOVE_END,
+  RETRY_GAME,
+  QUIT_GAME,
 } = require("./Constant");
 const OutputView = require("./OutputView");
 const Validation = require("./Validation");
@@ -85,7 +88,36 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+   readGameCommand(gameManager) {
+    MissionUtils.Console.readLine(
+      `\n${RETRY_QUERY}\n`,
+      this.readGameCommandCallBack(gameManager)
+    );
+  },
+
+  readGameCommandCallBack(gameManager) {
+    return (answer) => {
+      try {
+        this.readGameCommandNormalWork(gameManager, answer);
+      } catch (error) {
+        this.readGameCommandErrorWork(gameManager, error);
+      }
+    };
+  },
+
+  readGameCommandNormalWork(gameManager, answer) {
+    Validation.retryCommandValidation(answer);
+    if (answer === RETRY_GAME) {
+      gameManager.retry();
+      this.readMoving(gameManager);
+    }
+    if (answer === QUIT_GAME) OutputView.printResult(gameManager, false);
+  },
+
+  readGameCommandErrorWork(gameManager, error) {
+    MissionUtils.Console.print(error);
+    this.readGameCommand(gameManager);
+  },
 };
 
 module.exports = InputView;

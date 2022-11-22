@@ -2,6 +2,7 @@ const {
   BRIDGE_LENGTH_NOT_NUMBE_ERROR,
   BRIDGE_LENGTH_RANGE_OUT_ERROR,
   MOVE_COMMAND_ELSE_CHAR_ERROR,
+  RETRY_COMMAND_ELSE_CHAR_ERROR,
 } = require("./Constant");
 
 const Validation = {
@@ -17,6 +18,12 @@ const Validation = {
   moveCommandValidation(input) {
     if (input !== "U" && input !== "D") {
       throw new Error(MOVE_COMMAND_ELSE_CHAR_ERROR);
+    }
+  },
+
+  retryCommandValidation(input) {
+    if (input !== "R" && input !== "Q") {
+      throw new Error(RETRY_COMMAND_ELSE_CHAR_ERROR);
     }
   },
 };
