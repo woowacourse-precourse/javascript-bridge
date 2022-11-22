@@ -75,12 +75,12 @@ const InputView = {
     Console.readLine(Constant.INPUT.GAME_RETRY, (userInputRetry) => {
       try {
         if (Validate.validateUserInputRetry(userInputRetry)) {
-          if (userInputRetry === "R") {
+          if (userInputRetry === Constant.RETRY) {
             this.bridgeGame.retry();
             InputView.readMoving();
             return;
           }
-          if (userInputRetry === "Q") {
+          if (userInputRetry === Constant.QUIT) {
             OutputView.printResult("", BridgeGame._gameCount);
             Console.close();
           }

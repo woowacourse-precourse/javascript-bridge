@@ -2,6 +2,7 @@
  * 다리 건너기 게임을 관리하는 클래스
  */
 const OutputView = require("./OutputView");
+const Constant = require("./utils/Constant");
 class BridgeGame {
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -21,8 +22,8 @@ class BridgeGame {
    */
   retry() {
     BridgeGame._gameCount += 1;
-    OutputView.upBridge = "[]";
-    OutputView.downBridge = "[]";
+    OutputView.upBridge = `${Constant.OPEN}${Constant.CLOSE}`;
+    OutputView.downBridge = `${Constant.OPEN}${Constant.CLOSE}`;
     OutputView.upCount = 0;
     OutputView.downCount = 0;
     BridgeGame._userInputCount = 0;
