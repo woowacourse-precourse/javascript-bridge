@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 const BridgeGame = require("./model/BridgeGame");
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
@@ -17,7 +19,7 @@ class App {
       tryCount++;
       termination = this.proceedGame(bridgeGame, bridgeSize);
     }
-    OutputView.printResult(bridgeGame, tryCount);
+    this.endGame(bridgeGame, tryCount);
   }
 
   proceedGame(bridgeGame, bridgeSize) {
@@ -38,6 +40,11 @@ class App {
     const isRetry = bridgeGame.retry(retryCommand);
 
     return isRetry;
+  }
+
+  endGame(bridgeGame, tryCount) {
+    MissionUtils.Console.close();
+    OutputView.printResult(bridgeGame, tryCount);
   }
 }
 
