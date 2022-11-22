@@ -8,7 +8,7 @@ const { printMap, printResult } = require("../view/OutputView");
 const InputView = {
   startCount: 1,
   count: 0,
-  computerNum: null,
+  computer: null,
   result: null,
   lengthInput: null,
   restart: null,
@@ -19,7 +19,7 @@ const InputView = {
     Console.readLine(INPUT_MESSAGE.BRIDGE_MESSAGE, (input) => {
       this.lengthInput = input;
       this.errorLength();
-      this.computerNum = BridgeMaker.makeBridge(this.lengthInput, generate);
+      this.computer = BridgeMaker.makeBridge(this.lengthInput, generate);
       this.readMoving();
     });
   },
@@ -67,19 +67,13 @@ const InputView = {
   },
 
   moving() {
-    if (
-      this.count < this.computerNum.length &&
-      /X/g.test(this.result) === false
-    ) {
+    if (this.count < this.computer.length && /X/g.test(this.result) === false) {
       this.readMoving();
     }
   },
 
   failMoving() {
-    if (
-      this.count <= this.computerNum.length &&
-      /X/g.test(this.result) === true
-    ) {
+    if (this.count <= this.computer.length && /X/g.test(this.result) === true) {
       this.readGameCommand();
     }
   },
@@ -87,7 +81,7 @@ const InputView = {
   finishMoving() {
     if (
       /X/g.test(this.result) === false &&
-      this.count === this.computerNum.length
+      this.count === this.computer.length
     ) {
       this.result[2] = "성공";
       this.result[3] = this.startCount;
@@ -135,19 +129,11 @@ const InputView = {
   choiceRetry() {
     const birdgeGame = new BridgeGame();
     if (this.restart !== "R") {
-      this.result = birdgeGame.move(
-        this.cellInput,
-        this.computerNum,
-        this.count
-      );
+      this.result = birdgeGame.move(this.cellInput, this.computer, this.count);
     }
     if (this.restart === "R") {
       this.count = 0;
-      this.result = birdgeGame.retry(
-        this.cellInput,
-        this.computerNum,
-        this.count
-      );
+      this.result = birdgeGame.retry(this.cellInput, this.computer, this.count);
       this.restart = null;
     }
   },
