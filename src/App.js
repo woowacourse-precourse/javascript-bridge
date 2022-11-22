@@ -23,9 +23,9 @@ class App {
     InputView.readMoving(this.getMoveInput.bind(this));
   }
 
-  getMoveInput(move) {
-    validateMove(move);
-    this.moveUser(move);
+  getMoveInput(moveInput) {
+    validateMove(moveInput);
+    this.moveUser(moveInput);
   }
 
   getRetry(answer) {
@@ -43,8 +43,8 @@ class App {
     printResult(this.bridgeGame.getCurrentBridge(), round, gameResult);
   }
 
-  moveUser(move) {
-    this.bridgeGame.move(move);
+  moveUser(moveInput) {
+    this.bridgeGame.move(moveInput);
     printMap(this.bridgeGame.getCurrentBridge());
     this.playGame();
   }
