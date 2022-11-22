@@ -26,5 +26,21 @@ class GameControl {
     if (result === true) this.checkEnd();
     if (result === false) this.askRetry();
   }
+
+  checkEnd() {
+    if (this.isEnd()) {
+      const success = true;
+      this.runFinalOutput(success);
+    }
+    if (!this.isEnd()) {
+      this.orderMoving();
+    }
+  }
+
+  isEnd() {
+    const position = this.bridgeGame.getPosition();
+    const size = this.bridgeGame.getSize();
+    return size === position;
+  }
 }
 module.exports = GameControl;
