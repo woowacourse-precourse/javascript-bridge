@@ -1,7 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App.js');
 const BridgeMaker = require('../src/BridgeMaker.js');
-const { validateMove, validateRestart } = require('../src/validate.js');
+const { validateMove, validateRestart } = require('../src/utils/validate.js');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
