@@ -14,6 +14,14 @@ const mockInput = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
+const mockRandom = (answers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  answers.reduce(
+    (acc, number) => acc.mockReturnValueOnce(number),
+    MissionUtils.Random.pickNumberInRange
+  );
+};
+
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
@@ -103,4 +111,33 @@ describe('다리 건너기 테스트', () => {
     expect(downSide).toEqual(['O', 'O', 'X']);
   });
 
+  test('재시작 후 다시 도전 가능', () => {
+    const randoms = [1, 0, 1];
+    const input = ['3', 'U', 'U', 'R', 'U', 'D', 'U'];
+    const logSpy = getLogSpy();
+
+    mockRandom(randoms);
+    mockInput(input);
+
+    const crossBrigeGame = new CrossBrigeGame();
+    crossBrigeGame.gameStart();
+    const log = getOutput(logSpy);
+
+    expect(log).toContain(GAME.END_RESULT);
+  });
+
+  test('재시작 없이 종료', () => {
+    const randoms = [1, 0, 1];
+    const input = ['3', 'D', 'Q'];
+    const logSpy = getLogSpy();
+
+    mockRandom(randoms);
+    mockInput(input);
+
+    const crossBrigeGame = new CrossBrigeGame();
+    crossBrigeGame.gameStart();
+    const log = getOutput(logSpy);
+
+    expect(log).toContain(GAME.END_RESULT);
+  });
 });
