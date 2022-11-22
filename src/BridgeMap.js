@@ -25,6 +25,7 @@ class BridgeMap {
       this.#fillBlankUnselectedPath(REPRESENTATION.UPPER.numericalForm);
     }
   }
+
   #fillBlankUnselectedPath(direction) {
     direction === REPRESENTATION.UPPER.numericalForm
       ? this.#currentMap.upperPart.push(STATE.NOT_VISITED.symbol)
