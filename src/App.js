@@ -4,7 +4,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const { Console } = require('@woowacourse/mission-utils');
 const { validateBridge, validateMove, validateRetry } = require('./utils/validate');
-const { COMMAND } = require('../src/utils/constants');
+const { COMMAND } = require('./utils/constants');
 class App {
   constructor() {
     this.bridgeGame = null;

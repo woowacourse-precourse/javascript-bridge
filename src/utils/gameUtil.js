@@ -1,4 +1,4 @@
-const { COMMAND } = require('../src/utils/constants');
+const { COMMAND } = require('./constants');
 
 const convertBridge = (bridge, user, upOrDown) => {
   const convertedBridge = user.map((status, i) => {
