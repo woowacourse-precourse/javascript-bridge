@@ -1,7 +1,7 @@
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
-const { Console, Random } = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
 const ENTER_BRIDGELENGTH = "다리의 길이를 입력해주세요.";
 const ENTER_MOVING = "이동할 칸을 선택해주세요. (위: U, 아래: D)";
 const ENTER_PROCEED =
@@ -11,15 +11,8 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    let size;
-
-    Console.readLine(ENTER_BRIDGELENGTH, (answer) => {
-      console.log("입력한 다리의 길이: " + answer);
-      size = answer;
-    });
-
-    return size;
+  readBridgeSize(callback) {
+    Console.readLine(ENTER_BRIDGELENGTH, callback);
   },
 
   /**
