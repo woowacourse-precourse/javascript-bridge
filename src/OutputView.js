@@ -24,6 +24,7 @@ const OutputView = {
    */
   printResult(count) {
     Console.print('최종 게임 결과');
+    Console.print(`총 시도한 횟수: ${count}`);
   },
 };
 
