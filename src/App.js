@@ -19,7 +19,6 @@ class App {
         this.moveUserBridge();
       } catch (e) {
         OutputView.printError(e);
-        Console.close();
         this.createBridge();
       }
     });
@@ -49,12 +48,10 @@ class App {
         this.moveUserBridge();
       } else if (input === "Q") {
         OutputView.printResult(this.#userGame);
-        Console.close();
         return;
       }
     } catch (e) {
       OutputView.printError(e);
-      Console.close();
       this.gameover();
     }
   }
