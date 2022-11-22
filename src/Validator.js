@@ -24,9 +24,9 @@ class Validator {
   });
 
   #methods = {
-    [PHASE.START]: this.bridgeSize.bind(this),
-    [PHASE.MOVE]: this.moving.bind(this),
-    [PHASE.COMMAND]: this.gameCommand.bind(this),
+    [PHASE.START]: this.#bridgeSize.bind(this),
+    [PHASE.MOVE]: this.#moving.bind(this),
+    [PHASE.COMMAND]: this.#gameCommand.bind(this),
   };
 
   goTo(phase, input) {
@@ -41,7 +41,7 @@ class Validator {
     }
   }
 
-  bridgeSize(input) {
+  #bridgeSize(input) {
     const regExp = this.#REG_EXP.NUMBER_ONLY;
 
     this.#format(regExp, input);
@@ -50,7 +50,7 @@ class Validator {
     }
   }
 
-  moving(input) {
+  #moving(input) {
     const regExp = this.#REG_EXP.ONE_UPPERCASE;
     const directions = new Set(this.#directions);
 
@@ -60,7 +60,7 @@ class Validator {
     }
   }
 
-  gameCommand(input) {
+  #gameCommand(input) {
     const regExp = this.#REG_EXP.ONE_UPPERCASE;
     const commands = new Set(this.#commands);
 
