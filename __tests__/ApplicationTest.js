@@ -414,4 +414,36 @@ describe('다리 건너기 결과 출력 테스트 (재시작O)', () => {
     expectBridgeOrder(log, '[   |   ]', '[ O | O ]');
     expectBridgeOrder(log, '[   |   | O ]', '[ O | O |   ]');
   });
+
+  test('재시작 2번 후 마지막 다리에서 실패한 경우', () => {
+    const logSpy = getLogSpy();
+    mockRandoms([0, 0, 1]);
+    mockQuestions(['3', 'U', 'R', 'D', 'U', 'R', 'D', 'D', 'D', 'Q']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '[ X ]',
+      '[   ]',
+      '[   ]',
+      '[ O ]',
+      '[   | X ]',
+      '[ O |   ]',
+      '[   |   ',
+      '[ O | O ]',
+      '[   |   |   ]',
+      '[ O | O | X ]',
+      '최종 게임 결과',
+      '[   |   |   ]',
+      '[ O | O | X ]',
+      '게임 성공 여부: 실패',
+      '총 시도한 횟수: 3',
+    ]);
+    expectBridgeOrder(log, '[ X ]', '[   ]');
+    expectBridgeOrder(log, '[   | X ]', '[ O |   ]');
+    expectBridgeOrder(log, '[   |   ]', '[ O | O ]');
+    expectBridgeOrder(log, '[   |   |   ]', '[ O | O | X ]');
+  });
 });
