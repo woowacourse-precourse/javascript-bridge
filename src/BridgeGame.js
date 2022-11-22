@@ -1,19 +1,45 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+  choices = [];
+  resultUp = ["[ ", " ]"];
+  resultDown = ["[ ", " ]"];
+  retry = 0;
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+  move(choice) {
+    this.choices.push(choice);
+  }
+
+  checkResult(choices, bridge) {
+    if (choices[0] === "U" && bridge[0] === choices[0]) {
+      this.resultUp.splice(1, 0, "O");
+      this.resultDown.splice(1, 0, " ");
+    } else if (choices[0] === "D" && bridge[0] === choices[0]) {
+      this.resultUp.splice(1, 0, " ");
+      this.resultDown.splice(1, 0, "O");
+    } else if (choices[0] === "U" && bridge[0] !== choices[0]) {
+      this.resultUp.splice(1, 0, "X");
+      this.resultDown.splice(1, 0, " ");
+    } else if (choices[0] === "D" && bridge[0] !== choices[0]) {
+      this.resultUp.splice(1, 0, " ");
+      this.resultDown.splice(1, 0, "X");
+    }
+
+    for (let i = 1; i < choices.length; i++) {
+      if (choices[i] === "U" && bridge[i] === choices[i]) {
+        this.resultUp.splice(1 + i, 0, " | O");
+        this.resultDown.splice(1 + i, 0, " |  ");
+      } else if (choices[i] === "D" && bridge[i] === choices[i]) {
+        this.resultUp.splice(1 + i, 0, " |  ");
+        this.resultDown.splice(1 + i, 0, " | O");
+      } else if (choices[i] === "U" && bridge[i] !== choices[i]) {
+        this.resultUp.splice(1 + i, 0, " | X");
+        this.resultDown.splice(1 + i, 0, " |  ");
+      } else if (choices[i] === "D" && bridge[i] !== choices[i]) {
+        this.resultUp.splice(1 + i, 0, " |  ");
+        this.resultDown.splice(1 + i, 0, " | X");
+      }
+    }
+  }
+
   retry() {}
 }
 
