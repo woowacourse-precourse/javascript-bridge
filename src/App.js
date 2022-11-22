@@ -16,6 +16,10 @@ class App {
   }
 
   play() {
+    this.runBridgeGame();
+  }
+
+  runBridgeGame() {
     OutputView.printStartMent();
     this.inputBridgeSize();
   }
