@@ -32,4 +32,9 @@ const SIDE = {
   DOWN_STR: 'D',
   UP_STR: 'U',
 };
-module.exports = { GAME, ERROR, BRIDGE, SIDE };
+module.exports = {
+  GAME,
+  ERROR,
+  BRIDGE,
+  SIDE,
+};
