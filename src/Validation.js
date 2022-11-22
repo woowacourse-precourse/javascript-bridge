@@ -1,8 +1,10 @@
+const { DIRECTION_KEY, BRIDGE_SIZE } = require("./constants/rule.js");
 const { ERROR_MSG } = require("./constants/message.js");
 
 class Validation {
   static checkBridgeSize(size) {
-    if (size < 3 || size > 20) throw new Error(ERROR_MSG.invalidRange);
+    if (size < BRIDGE_SIZE.MIN_NUM || size > BRIDGE_SIZE.MAX_NUM)
+      throw new Error(ERROR_MSG.invalidRange);
     if (isNaN(size)) throw new Error(ERROR_MSG.invalidRange);
   }
 
@@ -13,7 +15,7 @@ class Validation {
   }
 
   static #isValidDirection(direction) {
-    return direction === "D" || direction === "U";
+    return direction === DIRECTION_KEY.DOWN || direction === DIRECTION_KEY.UP;
   }
 
   static checkRestartInput(userRestart) {
@@ -23,7 +25,10 @@ class Validation {
   }
 
   static #isRestartInput(userRestart) {
-    return userRestart === "Q" || userRestart === "R";
+    return (
+      userRestart === DIRECTION_KEY.QUIT ||
+      userRestart === DIRECTION_KEY.RESTART
+    );
   }
 }
 
