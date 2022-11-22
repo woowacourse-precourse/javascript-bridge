@@ -1,9 +1,12 @@
 const { REGEX, ERROR } = require('./constants');
+const { Console } = require('@woowacourse/mission-utils');
 
 const Validation = {
   validateBridgeSize(inputStr) {
     if (!REGEX.BRIDGE_SIZE.test(inputStr)) {
-      throw new Error(ERROR.ENTER_VALID_BRIDGE_SIZE);
+      Console.print(ERROR.ENTER_VALID_BRIDGE_SIZE);
+      Console.close();
+      //throw new Error(ERROR.ENTER_VALID_BRIDGE_SIZE);
     }
 
     return parseInt(inputStr);

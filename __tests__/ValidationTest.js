@@ -1,5 +1,21 @@
+const MissionUtils = require('@woowacourse/mission-utils');
 const { validateBridgeSize } = require('../src/Validation');
-const { ERROR } = require('../src/constants');
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+};
+
+const getOutput = (logSpy) => {
+  return [...logSpy.mock.calls].join('');
+};
+
+const expectLogContains = (received, logs) => {
+  logs.forEach((log) => {
+    expect(received).toEqual(expect.stringContaining(log));
+  });
+};
 
 describe('Validation 테스트', () => {
   test('잘못된 다리 길이 입력한 경우 에러처리', () => {
@@ -16,11 +32,19 @@ describe('Validation 테스트', () => {
       '2',
       '21',
     ];
+    const logSpy = getLogSpy();
 
     values.forEach((value) => {
-      expect(() => {
-        validateBridgeSize(value);
-      }).toThrow(ERROR.ENTER_VALID_BRIDGE_SIZE);
+      validateBridgeSize(value);
+      expectLogContains(getOutput(logSpy), ['[ERROR]']);
     });
+
+    /**
+     * values.forEach((value) => {
+     *  expect(() => {
+     *    validateBridgeSize(value);
+     *  }).toThrow(ERROR.ENTER_VALID_BRIDGE_SIZE);
+     * });
+     */
   });
 });
