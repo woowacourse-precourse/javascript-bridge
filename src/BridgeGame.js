@@ -7,11 +7,11 @@ class BridgeGame {
     numberOfAttempt: 1,
   };
 
-  get myCurrentPosition() {
+  getMyCurrentPosition() {
     return this.#bridgeGameStatus.myPosition;
   }
 
-  get numberOfAttempt() {
+  getNumberOfAttempt() {
     return this.#bridgeGameStatus.numberOfAttempt;
   }
 

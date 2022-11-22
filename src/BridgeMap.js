@@ -2,6 +2,7 @@ const { REPRESENTATION } = require("./constants/values");
 const { STATE } = require("./constants/message");
 class BridgeMap {
   #currentMap = { upperPart: [], lowerPart: [] };
+
   updateMyPositionForward(direction, symbol) {
     this.#fillPathAccordingInput(direction, symbol);
     return this;
