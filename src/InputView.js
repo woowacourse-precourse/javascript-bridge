@@ -1,21 +1,65 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { Console } = require('@woowacourse/mission-utils');
+const { GAME_MESSAGE } = require('./Constants');
+const { generate } = require('./BridgeRandomNumberGenerator');
+const { makeBridge } = require('./BridgeMaker');
+const BridgeGame = require('./BridgeGame');
+const Validation = require('./Validation');
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  readBridgeSize() {
+    Console.readLine(GAME_MESSAGE.LENGTH, (answer) => {
+      try {
+        Validation.bridgeSize(answer);
+        const bridge = makeBridge(Number(answer), generate);
+        const game = new BridgeGame(bridge);
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+        Console.print('');
+        InputView.readMoving(game);
+      } catch (e) {
+        Console.print(e.message);
+        InputView.readBridgeSize();
+      }
+    });
+  },
+  readMoving(game) {
+    Console.readLine(GAME_MESSAGE.MOVING, (answer) => {
+      try {
+        Validation.moving(answer);
+        const move = game.move(answer);
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+        if (move === false) {
+          InputView.readGameCommand(game);
+          return;
+        }
+        if (game.isEnd === false) {
+          InputView.readMoving(game);
+          return;
+        }
+
+        game.end(game);
+      } catch (e) {
+        Console.print(e.message);
+        InputView.readMoving(game);
+      }
+    });
+  },
+  readGameCommand(game) {
+    Console.readLine(GAME_MESSAGE.RESTART, (answer) => {
+      try {
+        Validation.gameCommand(answer);
+        if (answer === 'R') {
+          game.retry(game);
+          InputView.readMoving(game);
+          return;
+        }
+
+        game.end(game);
+      } catch (e) {
+        Console.print(e.message);
+        InputView.readGameCommand(game);
+      }
+    });
+  },
 };
 
 module.exports = InputView;
