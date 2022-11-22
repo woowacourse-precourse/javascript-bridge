@@ -19,37 +19,37 @@ describe('bridgeController Test', () => {
   });
 
   describe('movemoment Test', () => {
-    let moveBridge;
+    let traceOfCrossingBridge;
     beforeEach(() => {
       bridgeGame.updateBridge(['U', 'D', 'U']);
-      moveBridge = bridgeGame.move();
+      traceOfCrossingBridge = bridgeGame.move();
     });
 
     describe('사용자가 이동한 위치의 성공, 실패 여부 Test', () => {
       test('U로 성공 Test', () => {
         bridgeGame.updateBridge(['U', 'D', 'D', 'U']);
-        bridgeGame.selectMovemomentPosition('U');
+        bridgeGame.selectMovemomentDirection('U');
         const result = bridgeGame.move();
         expect(result).toEqual([['O', ' ']]);
       });
 
       test('D로 성공 Test', () => {
         bridgeGame.updateBridge(['D', 'D', 'U']);
-        bridgeGame.selectMovemomentPosition('D');
+        bridgeGame.selectMovemomentDirection('D');
         const result = bridgeGame.move();
         expect(result).toEqual([[' ', 'O']]);
       });
 
       test('U로 실패 Test', () => {
         bridgeGame.updateBridge(['D', 'D', 'U']);
-        bridgeGame.selectMovemomentPosition('U');
+        bridgeGame.selectMovemomentDirection('U');
         const result = bridgeGame.move();
         expect(result).toEqual([['X', ' ']]);
       });
 
       test('D로 실패 Test', () => {
         bridgeGame.updateBridge(['U', 'D', 'U']);
-        bridgeGame.selectMovemomentPosition('D');
+        bridgeGame.selectMovemomentDirection('D');
         const result = bridgeGame.move();
         expect(result).toEqual([[' ', 'X']]);
       });
@@ -64,27 +64,27 @@ describe('bridgeController Test', () => {
 
     test('이동시 draw가 잘 되는지 Test', () => {
       bridgeGame.updateBridge(['D', 'D', 'U']);
-      bridgeGame.selectMovemomentPosition('D');
-      moveBridge = bridgeGame.move();
-      const drawBridge = bridgeController.drawBridge(moveBridge);
+      bridgeGame.selectMovemomentDirection('D');
+      traceOfCrossingBridge = bridgeGame.move();
+      const drawBridge = bridgeController.drawBridge(traceOfCrossingBridge);
       expect(drawBridge).toEqual({ upBridge: '[   ]', downBridge: '[ O ]' });
     });
 
     test('재시작 또는 종료 요청시 사용자가 선택한 값이 건널수 없는 다리인경우 재요청 기능이 작동하는지 Test', () => {
-      bridgeGame.selectMovemomentPosition('r');
+      bridgeGame.selectMovemomentDirection('r');
       bridgeGame.updateBridge(['U', 'D', 'U']);
-      moveBridge = bridgeGame.move();
-      const drawBridge = bridgeController.drawBridge(moveBridge);
+      traceOfCrossingBridge = bridgeGame.move();
+      const drawBridge = bridgeController.drawBridge(traceOfCrossingBridge);
       const spyFn = jest.spyOn(bridgeController, 'requestGameCommand');
       bridgeController.controlNextStep(drawBridge);
       expect(spyFn).toHaveBeenCalledTimes(1);
     });
 
     test('사용자가 지정한 size만큼 이동했다면 종료 기능이 작동하는지 Test', () => {
-      bridgeGame.selectMovemomentPosition('U');
-      bridgeGame.selectMovemomentPosition('D');
-      bridgeGame.selectMovemomentPosition('U');
-      const drawBridge = bridgeController.drawBridge(moveBridge);
+      bridgeGame.selectMovemomentDirection('U');
+      bridgeGame.selectMovemomentDirection('D');
+      bridgeGame.selectMovemomentDirection('U');
+      const drawBridge = bridgeController.drawBridge(traceOfCrossingBridge);
       const spyFn = jest.spyOn(OutputView, 'printResult');
       bridgeController.controlNextStep(drawBridge);
       expect(spyFn).toHaveBeenCalledTimes(1);

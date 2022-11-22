@@ -23,7 +23,7 @@ class BridgeController {
   }
 
   createBridge(size) {
-    if (!this.controlValidate(Validate.validateSizeRange, Number(size))) {
+    if (!this.checkValidate(Validate.validateSizeRange, Number(size))) {
       return this.requestBridgeSize();
     }
     const bridge = BridgeMaker.makeBridge(Number(size), BridgeRandomNumberGenerator.generate);
@@ -33,7 +33,7 @@ class BridgeController {
     this.requestBridgeMovemoment();
   }
 
-  controlValidate(validate, input) {
+  checkValidate(validate, input) {
     try {
       validate(input);
       return true;
@@ -48,24 +48,24 @@ class BridgeController {
   }
 
   controlMovemoment(movePosition) {
-    if (!this.controlValidate(Validate.validateMovePosition, movePosition)) {
+    if (!this.checkValidate(Validate.validateMovePosition, movePosition)) {
       return this.requestBridgeMovemoment();
     }
 
-    this.#bridgeGame.selectMovemomentPosition(movePosition);
+    this.#bridgeGame.selectMovemomentDirection(movePosition);
     const drawBridge = this.getDrawBridge();
     OutputView.printMap(drawBridge);
     this.controlNextStep(drawBridge);
   }
 
   getDrawBridge() {
-    const moveBridge = this.#bridgeGame.move();
-    return this.drawBridge(moveBridge);
+    const traceOfCrossingBridge = this.#bridgeGame.move();
+    return this.drawBridge(traceOfCrossingBridge);
   }
 
-  drawBridge(moveBridge) {
+  drawBridge(traceOfCrossingBridge) {
     const bridge = { upBridge: '', downBridge: '' };
-    moveBridge.forEach((position) => {
+    traceOfCrossingBridge.forEach((position) => {
       bridge.upBridge += ` | ${position[0]}`;
       bridge.downBridge += ` | ${position[1]}`;
     });
@@ -89,7 +89,7 @@ class BridgeController {
   }
 
   controlGameCommand(input) {
-    if (!this.controlValidate(Validate.validateRetryOfQuit, input)) {
+    if (!this.checkValidate(Validate.validateRetryOfQuit, input)) {
       return this.requestGameCommand();
     }
 
