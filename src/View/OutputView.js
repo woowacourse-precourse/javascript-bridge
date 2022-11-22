@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
-const MapMaker = require('./MapMaker');
+const MapMaker = require('../MapMaker');
+const { MESSAGES: { OUTPUT } } = require('../constants');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -7,6 +8,10 @@ const MapMaker = require('./MapMaker');
 const OutputView = {
   print(message) {
     Console.print(message);
+  },
+
+  printWelcomeMessage() {
+    this.print(OUTPUT.WELCOME);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
@@ -36,8 +41,7 @@ const OutputView = {
   },
 
   printError({ message }) {
-    // REMOVE: printError 부분 임시 추가
-    this.print(`printError : ${message}`);
+    this.print(message);
   },
 };
 

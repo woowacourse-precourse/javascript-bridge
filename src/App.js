@@ -1,16 +1,17 @@
-const BridgeGame = require('./BridgeGame');
+// const BridgeGame = require('./BridgeGame');
+const Controller = require('./Controller');
 
 class App {
   constructor() {
-    this.bridgeGame = new BridgeGame();
+    this.controller = new Controller();
   }
 
   play() {
-    this.bridgeGame.init();
+    this.controller.init();
   }
 }
 
-/* 아래는 삭제해야 할 부분 */
+// REMOVE:
 const app = new App();
 app.play();
 

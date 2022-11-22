@@ -1,4 +1,4 @@
-const OutputView = require('./OutputView');
+const OutputView = require('./View/OutputView');
 
 const ErrorHandler = {
   handleError: (func) => (caller) => (params) => {

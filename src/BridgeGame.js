@@ -1,10 +1,7 @@
-const OutputView = require('./OutputView');
-const InputView = require('./InputView');
 const BridgeStore = require('./BridgeStore');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeValidator = require('./BridgeValidator');
-const { handleError } = require('./ErrorHandler');
 
 const INITIAL_GAME_COUNT = 1;
 const INITIAL_BRIDGE_SIZE = {
@@ -22,18 +19,8 @@ class BridgeGame {
   tryCount = 1;
 
   // TODO: 메세지들 많아짐, 정리
-  constructor(
-    bridgeSize = INITIAL_BRIDGE_SIZE,
-    welcomeMessage = '다리 건너기 게임을 시작합니다.',
-    bridgeSizeMessage = '\n다리의 길이를 입력해주세요.\n',
-    movingMessage = '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
-    retryMessage = '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
-  ) {
+  constructor(bridgeSize = INITIAL_BRIDGE_SIZE) {
     this.bridgeValidator = new BridgeValidator({ bridgeSize });
-    this.welcomeMessage = welcomeMessage;
-    this.bridgeSizeMessage = bridgeSizeMessage;
-    this.movingMessage = movingMessage;
-    this.retryMessage = retryMessage;
     this.moveCount = 0;
   }
 
@@ -47,7 +34,7 @@ class BridgeGame {
 
   detectIsMovable = (command) => {
     if (!this.bridgeStore.isMovable(this.moveCount, command)) {
-      this.fail();
+      this.resetMoveCount();
       return false;
     }
 
@@ -60,58 +47,39 @@ class BridgeGame {
       return false;
     }
 
-    this.end();
     return true;
   };
+
+  isMoved(command) {
+    if (!this.detectIsMovable(command) || this.detectIsGameClear()) {
+      return false;
+    }
+
+    return true;
+  }
+
+  isBiggerThanMoveCount = (number) => number > this.moveCount;
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move = handleError(
-    (command) => {
-      this.bridgeValidator.isValidCommand('move', command);
-      this.setMovedData(command);
+  move = (command) => {
+    this.bridgeValidator.isValidCommand('move', command);
+    this.setMovedData(command);
 
-      if (!this.detectIsMovable(command) || this.detectIsGameClear()) {
-        return;
-      }
+    if (!this.isMoved(command)) {
+      return false;
+    }
 
-      InputView.readMoving(this.movingMessage, this.move);
-    },
-  )(() => {
-    InputView.readMoving(this.movingMessage, this.move);
-  });
+    return true;
+  };
 
   setMovedData = (command) => {
     this.bridgeStore.addUserInputResult(
       { command, result: this.bridgeStore.isMovable(this.moveCount, command) },
     );
-    OutputView.printMap(
-      this.bridgeStore.getUserInputResultLength(),
-      this.bridgeStore.getUserInputResult,
-    );
-  };
-
-  confirmRetry = handleError(
-    (command) => {
-      this.bridgeValidator.isValidCommand('retry', command);
-
-      const run = {
-        R: this.retry,
-        Q: this.end,
-      };
-
-      run[command]();
-    },
-  )(() => {
-    InputView.readGameCommand(this.retryMessage, this.confirmRetry);
-  });
-
-  fail = () => {
-    this.resetMoveCount();
-    InputView.readGameCommand(this.retryMessage, this.confirmRetry);
   };
 
   /**
@@ -121,36 +89,12 @@ class BridgeGame {
    */
   retry = () => {
     this.bridgeStore.retry();
-    InputView.readMoving(this.movingMessage, this.move);
   };
 
   createBridge(bridgeSize) {
     this.bridgeValidator.isValidBridgeSize(bridgeSize);
     const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     this.bridgeStore = new BridgeStore(bridge, INITIAL_GAME_COUNT);
-  }
-
-  end = () => {
-    OutputView.printResult(
-      this.bridgeStore.getUserInputResultLength(),
-      this.bridgeStore.getUserInputResult,
-      this.bridgeStore.getGameResult(),
-    );
-    InputView.close();
-  };
-
-  runGame = handleError(
-    (bridgeSize) => {
-      this.createBridge(bridgeSize);
-      InputView.readMoving(this.movingMessage, this.move);
-    },
-  )(() => {
-    InputView.readBridgeSize(this.bridgeSizeMessage, this.runGame);
-  });
-
-  init() {
-    OutputView.print(this.welcomeMessage);
-    InputView.readBridgeSize(this.bridgeSizeMessage, this.runGame);
   }
 }
 
