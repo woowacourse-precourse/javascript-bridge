@@ -43,4 +43,17 @@ describe("BridgeGame 클래스 테스트", () => {
 
     expect(isQuit).toBe(true);
   });
+
+  test("게임이 종료되지 않는 경우", () => {
+    const directions = ["U", "U", "D"];
+    const bridgeGame = new BridgeGame(directions);
+    const canCross = true;
+
+    bridgeGame.move("U");
+    bridgeGame.move("U");
+
+    const isQuit = bridgeGame.isQuit(canCross);
+
+    expect(isQuit).toBe(false);
+  });
 });
