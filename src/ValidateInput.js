@@ -1,7 +1,11 @@
 /**
  * 입력값 유효성 검사
  */
-const { BRIDGE_ERROR, MOVE_ERROR } = require("./constant/ErrorMessage");
+const {
+  BRIDGE_ERROR,
+  MOVE_ERROR,
+  RETRY_ERROR,
+} = require("./constant/ErrorMessage");
 const ValidateInput = {
   /**
    * 다리의 길이가 3~20의 숫자인지 검사
@@ -22,7 +26,10 @@ const ValidateInput = {
   /**
    * 재시도 여부가 R/Q인지 검사
    */
-  gameCommand() {},
+  gameCommand(response) {
+    if (response !== "Q" && response !== "R")
+      throw new Error(RETRY_ERROR.wrongChar);
+  },
 };
 
 module.exports = ValidateInput;

@@ -7,4 +7,8 @@ const MOVE_ERROR = {
   wrongChar: "[ERROR] 이동할 수 있는 칸은 U 또는 D 뿐입니다.",
 };
 
-module.exports = { BRIDGE_ERROR, MOVE_ERROR };
+const RETRY_ERROR = {
+  wrongChar: "[ERROR] 재시도하려면 R, 종료하려면 Q를 입력해주세요.",
+};
+
+module.exports = { BRIDGE_ERROR, MOVE_ERROR, RETRY_ERROR };
