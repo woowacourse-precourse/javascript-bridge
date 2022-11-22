@@ -57,19 +57,15 @@ describe("다리 건너기 테스트", () => {
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
-
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
     expect(bridge).toEqual(["U", "D", "D"]);
   });
-
   test("기능 테스트", () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
     mockQuestions(["3", "U", "D", "U"]);
-
     const app = new App();
     app.play();
-
     const log = getOutput(logSpy);
     expectLogContains(log, [
       "최종 게임 결과",
@@ -83,5 +79,13 @@ describe("다리 건너기 테스트", () => {
 
   test("예외 테스트", () => {
     runException(["a"]);
+  });
+
+  test("짧은 길이 테스트", () => {
+    runException(["1"]);
+  });
+
+  test("긴 길이 테스트", () => {
+    runException(["100"]);
   });
 });
