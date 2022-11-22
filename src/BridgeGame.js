@@ -24,7 +24,6 @@ class BridgeGame {
       BridgeRandomNumberGenerator.generate
     );
     this.bridge = bridge;
-    console.log(bridge);
   }
 
   /**
