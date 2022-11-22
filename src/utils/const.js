@@ -3,7 +3,15 @@ const BRIDGE = {
   MAX: 20,
 };
 
-const BRIDGE_PATH_TYPE = ['D', 'U'];
+const UPSIDE = 'U';
+const DOWNSIDE = 'D';
+
+const PATH_TYPE = [DOWNSIDE, UPSIDE];
+
+const PATH = {
+  UPSIDE: 0,
+  DOWNSIDE: 1,
+};
 
 const RETRY = 'R';
 const QUIT = 'Q';
@@ -11,12 +19,12 @@ const QUIT = 'Q';
 const COMMAND_TYPE = [RETRY, QUIT];
 const COMMAND = { RETRY, QUIT };
 
-const MOVING = {
-  U: 0,
-  D: 1,
+const COMMAND_NUMBER = {
+  RETRY: 0,
+  QUIT: 1,
 };
 
-const STATUS = {
+const MOVE_STATUS = {
   CONTINUE: 0,
   SUCCESS: 1,
   FAILURE: 2,
@@ -29,19 +37,25 @@ const MARKING = {
 };
 
 Object.freeze(BRIDGE);
-Object.freeze(BRIDGE_PATH_TYPE);
-Object.freeze(MOVING);
+Object.freeze(PATH_TYPE);
+Object.freeze(PATH);
 Object.freeze(COMMAND_TYPE);
 Object.freeze(COMMAND);
-Object.freeze(STATUS);
+Object.freeze(COMMAND_NUMBER);
+Object.freeze(MOVE_STATUS);
 Object.freeze(MARKING);
 
 module.exports = {
+  UPSIDE,
+  DOWNSIDE,
+  RETRY,
+  QUIT,
   BRIDGE,
-  BRIDGE_PATH_TYPE,
-  MOVING,
+  PATH_TYPE,
+  PATH,
   COMMAND_TYPE,
   COMMAND,
-  STATUS,
+  COMMAND_NUMBER,
+  MOVE_STATUS,
   MARKING,
 };
