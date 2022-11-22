@@ -5,9 +5,9 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridge = [];
   #history = [];
   #tryCount = 1;
-  #bridge;
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -32,6 +32,8 @@ class BridgeGame {
   }
 
   isSuccess() {
+    if (this.#history.length === 0 || this.#bridge.length === 0) return;
+
     const currentMoving = this.#history[this.#history.length - 1];
     const currentFloor = this.#bridge[this.#history.length - 1];
 
