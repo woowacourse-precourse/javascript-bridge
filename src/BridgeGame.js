@@ -7,7 +7,7 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-   move(currentBridge, bridge, input) {
+  move(currentBridge, bridge, input) {
     /**
      * @param {string[][]} currentBridge - 현재까지 진행된 다리 상태
      * @param {string[]} bridge - 입력하는 길이에 해당하는 다리 모양. U와 D로 구성 ex)['U', 'D', 'U']
@@ -24,7 +24,7 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-   retry(currentBridge) {
+  retry(currentBridge) {
     currentBridge=[[],[]];
     return currentBridge;
   }
