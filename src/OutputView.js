@@ -15,6 +15,12 @@ const OutputView = {
     Console.print(bridgeBottom);
   },
 
+  makeMap({ bridgeTop, bridgeBottom }) {
+    const top = "[ " + bridgeTop.join(" | ") + " ]";
+    const bottom = "[ " + bridgeBottom.join(" | ") + " ]";
+    this.printMap({ bridgeTop: top, bridgeBottom: bottom });
+  },
+
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>

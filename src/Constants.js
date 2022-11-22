@@ -35,8 +35,8 @@ const RESULT_MESSAGE = Object.freeze({
 const ERROR_MESSAGE = Object.freeze({
   error: "[ERROR]",
 
-  onlyNumber: `${error} 숫자만 입력할 수 있습니다.`,
-  betweenRange: `${error} 3부터 20 사이의 숫자만 입력할 수 있습니다.`,
+  onlyNumber: `${this.error} 숫자만 입력할 수 있습니다.`,
+  betweenRange: `${this.error} 3부터 20 사이의 숫자만 입력할 수 있습니다.`,
 });
 
 module.exports = {
