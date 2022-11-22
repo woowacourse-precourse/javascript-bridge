@@ -13,24 +13,22 @@ class BridgeGame {
       upStair: [],
       downStair: [],
     };
-    this.bridge = [];
+    this.#bridge = [];
   }
 
   makeBridge(size) {
-    return (this.#bridge = BridgeMaker.makeBridge(
-      size,
-      BridgeRandomGenerator.generate
-    ));
+    this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomGenerator.generate);
+    return this.#bridge;
   }
 
-  pushResult(bridge, direction) {
+  pushResult(direction) {
     let result = { U: " ", D: " " };
-    bridge === direction
+    this.#bridge[0] === direction
       ? (result[direction] = " O ")
       : (result[direction] = " X ");
 
-    this.#map[upStair].push(result[U]);
-    this.#map[downStair].push(result[D]);
+    this.#map.upStair.push(result.U);
+    this.#map.downStair.push(result.D);
 
     return this.#map;
   }

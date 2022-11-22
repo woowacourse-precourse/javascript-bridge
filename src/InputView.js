@@ -26,7 +26,7 @@ const InputView = {
     this.wrappingInput(CONSOLE_MESSAGE.INPUT_BRIDGE_LENGTH, (size) => {
       Validator.validateBridgeSize(size);
       bridgeGame.makeBridge(size);
-      this.readMoving();
+      this.readMoving(bridgeGame);
     });
   },
 
@@ -34,8 +34,9 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridgeGame) {
-    Console.readLine(CONSOLE_MESSAGE.INPUT_MOVE, (direction) => {
+    this.wrappingInput(CONSOLE_MESSAGE.INPUT_MOVE, (direction) => {
       Validator.validateMove(direction);
+      bridgeGame.pushResult(direction);
     });
   },
 
