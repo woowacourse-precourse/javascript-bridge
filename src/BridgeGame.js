@@ -45,7 +45,6 @@ class BridgeGame {
     if (this.#bridge[lastIndex] === this.#userState[lastIndex]) {
       if (this.#bridge.length === this.#userState.length) {
         this.#condition = 0;
-        this.#countTry += 1;
       } else {
         this.#condition = 1;
       }
