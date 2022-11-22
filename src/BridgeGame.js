@@ -6,11 +6,6 @@ const { RETRY, STATUS_SUCCESS, STATUS_FAIL, STATUS_FINISH } = require('./constan
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   #bridgeString;
   #userInputString;
   #try; //총 시도 횟수
@@ -24,6 +19,7 @@ class BridgeGame {
     this.#round = 0;
     this.#isAnswerList = [];
   }
+
   get bridgeString() {
     return this.#bridgeString;
   }
@@ -36,29 +32,45 @@ class BridgeGame {
   get try() {
     return this.#try;
   }
+
   plusRound = () => {
     this.#round += 1;
   };
+
   bridgeSetting = (bridgeSize) => {
     this.#bridgeString = makeBridge(bridgeSize, generate).join('');
   };
-
+  
+  /**
+   *
+   * @param {char} userChar
+   * @returns
+   */
   check = (userChar) => {
     this.#userInputString += userChar;
     this.move(this.#bridgeString[this.#round], this.#userInputString[this.#round]);
     return this.checkStatus(this.#bridgeString[this.#round], this.#userInputString[this.#round]);
-    // OutputView.printMap(this.#isAnswerList, this.#userInputString);
   };
-
+  /**
+   * 사용자가 칸을 이동할 때 사용하는 메서드
+   * @param {char} answerChar
+   * @param {char} userChar
+   * answerList에 해당 칸을 맞췄는지 여부를 추가한다
+   */
   move(answerChar, userChar) {
-    //n번째 round에서 bridgeString과 userInputString을 보고 다리 현황 만들기
     if (answerChar === userChar) {
       this.#isAnswerList.push(true);
     } else {
       this.#isAnswerList.push(false);
     }
   }
-
+  /**
+   * 
+   * @param {char} answerChar
+   * @param {char} userChar
+   * @returns {string} STATUS
+   * 해당 라운드의 결과가 O인지, X인지, 아니면 게임이 종료되었는지의 상태를 리턴한다
+   */
   checkStatus(answerChar, userChar) {
     const total_round = this.#bridgeString.length;
     if (answerChar !== userChar) {
