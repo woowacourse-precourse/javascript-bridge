@@ -27,13 +27,12 @@ class App {
   }
 
   executeGame(bridgeGame) {
-    //틀릴때까지 게임을 실행, 재시작까지 확인
     let continueGameCheck = true;
     let gamePlayCount = 0;
     let isSuccess;
     while (continueGameCheck) {
       gamePlayCount += 1;
-      isSuccess = this.executeTry(bridgeGame); // 끝날때까지 수행
+      isSuccess = this.executeTry(bridgeGame);
       continueGameCheck = this.checkRetry(bridgeGame, isSuccess);
     }
 
@@ -62,14 +61,9 @@ class App {
   }
 
   executeMove(bridgeGame) {
-    try {
-      const moveDirection = InputView.readMoving();
-      const turnPass = bridgeGame.move(moveDirection);
-      return turnPass;
-    } catch (error) {
-      Console.print(error.message);
-      return this.executeMove(bridgeGame);
-    }
+    const moveDirection = InputView.readMoving();
+    const turnPass = bridgeGame.move(moveDirection);
+    return turnPass;
   }
 
   checkRetry(bridgeGame, isSuccess) {
@@ -77,14 +71,9 @@ class App {
       return false;
     }
 
-    try {
-      const command = InputView.readGameCommand();
-      const isContinue = bridgeGame.retry(command);
-      return isContinue;
-    } catch (error) {
-      Console.print(error.message);
-      return this.checkRetry(bridgeGame, isSuccess);
-    }
+    const command = InputView.readGameCommand();
+    const isContinue = bridgeGame.retry(command);
+    return isContinue;
   }
 }
 
