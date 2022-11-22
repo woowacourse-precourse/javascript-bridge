@@ -90,8 +90,8 @@ class BridgeView {
   inputValidation(input, inputType) {
     try {
       return Validation[inputType](input);
-    } catch (errorType) {
-      this.printError(errorType);
+    } catch (error) {
+      this.printError(error.message);
       return false;
     }
   }

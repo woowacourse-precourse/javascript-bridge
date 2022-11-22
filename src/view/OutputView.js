@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGES, ERROR } = require('../constants');
+const { MESSAGES } = require('../constants');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -39,8 +39,8 @@ const OutputView = {
    * 입력값의 에러 타입에 맞는 메세지를 출력한다.
    * @param {string} type 예외처리 타입 문자열
    */
-  printError(type) {
-    Console.print(`\n${ERROR.PREFIX} ${ERROR[type]}\n`);
+  printError(message) {
+    Console.print(message);
   },
 
 };
