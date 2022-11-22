@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { GAME_SIGNATURE, MAP_SIGNATURE } = require('../utils/constant');
 const GAME_MESSAGE = require('../utils/message');
 
 const OutputView = {
@@ -12,24 +13,22 @@ const OutputView = {
   },
 
   getBridgeMap(trials) {
-    let [upperSide, lowerSide] = trials.reduce(this.handleMakingBridgeMap, ['[', '[']);
-
-    return [upperSide.slice(0, -1) + ']', lowerSide.slice(0, -1) + ']', ''].join('\n');
+    const [upperSide, lowerSide] = trials.reduce(this.handleMakingBridgeMap, [[], []]);
+    const upperMap =
+      MAP_SIGNATURE.opening + upperSide.join(MAP_SIGNATURE.partition) + MAP_SIGNATURE.closed;
+    const lowerMap =
+      MAP_SIGNATURE.opening + lowerSide.join(MAP_SIGNATURE.partition) + MAP_SIGNATURE.closed;
+    return `${upperMap}\n${lowerMap}\n`;
   },
 
-  //TODO: 깔끔하게 작성할 수 있는 방법
-  handleMakingBridgeMap(bridgeMap, trial) {
-    let [upperSide, lowerSide] = bridgeMap;
-
-    if (trial.direction === 'U') {
-      upperSide += ` ${trial.result} |`;
-      lowerSide += '   |';
-    } else if (trial.direction === 'D') {
-      upperSide += `   |`;
-      lowerSide += ` ${trial.result} |`;
+  handleMakingBridgeMap([upper, lower], { direction: moving, result: movingResult }) {
+    if (moving === GAME_SIGNATURE.up) {
+      return new Array([...upper, movingResult], [...lower, MAP_SIGNATURE.notSelected]);
     }
 
-    return [upperSide, lowerSide];
+    if (moving === GAME_SIGNATURE.down) {
+      return new Array([...upper, MAP_SIGNATURE.notSelected], [...lower, movingResult]);
+    }
   },
 
   newLine() {

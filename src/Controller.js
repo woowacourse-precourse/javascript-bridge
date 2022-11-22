@@ -1,4 +1,4 @@
-const GAME_SIGNATURE = require('./utils/constant');
+const { GAME_SIGNATURE } = require('./utils/constant');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -29,6 +29,7 @@ class Controller {
 
   handleMakingBridge(size) {
     this.validateBy(this.validator.checkBridgeSize, size);
+
     const bridge = this.bridgeMaker.makeBridge(size, this.bridgeRandomNumberGenerator.generate);
     this.bridgeGame.setBridge(bridge);
     this.outputView.newLine();
@@ -41,6 +42,7 @@ class Controller {
 
   handleMoving(direction) {
     this.validateBy(this.validator.checkMoving, direction);
+
     this.bridgeGame.move(direction);
     this.outputView.printMap(this.bridgeGame.trials);
 

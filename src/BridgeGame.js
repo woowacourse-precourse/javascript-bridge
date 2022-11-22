@@ -1,8 +1,9 @@
-const GAME_SIGNATURE = require('./utils/constant');
+const { GAME_SIGNATURE } = require('./utils/constant');
 
 class BridgeGame {
   bridge;
   trials = [];
+
   constructor() {
     this.trialCount = 1;
     this.status = GAME_SIGNATURE.gameOn;

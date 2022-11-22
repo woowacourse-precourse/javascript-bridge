@@ -8,4 +8,11 @@ const GAME_SIGNATURE = Object.freeze({
   gameFail: '실패',
 });
 
-module.exports = GAME_SIGNATURE;
+const MAP_SIGNATURE = {
+  opening: '[ ',
+  closed: ' ]',
+  notSelected: ' ',
+  partition: ' | ',
+};
+
+module.exports = { GAME_SIGNATURE, MAP_SIGNATURE };
