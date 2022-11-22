@@ -1,35 +1,32 @@
-const {
-  isValidateBridgeSize,
-  isValidateDirection,
-  isValidateCommand,
-} = require('../src/utils/validation');
+const { MSG } = require('../src/utils/messages');
+const { validator } = require('../src/utils/helper');
 
 describe('유틸 함수 테스트', () => {
   test('다리 길이 유효성 검사 테스트', () => {
-    const input = '1';
+    const input = 1;
     expect(() => {
-      isValidateBridgeSize(input);
-    }).toThrow('[ERROR] 다리 길이는 3이상 20이하의 숫자입니다.');
+      validator.bridgeSize(input);
+    }).toThrow(MSG.ERROR.BRIDGE_RANGE);
   });
 
   test('다리 길이 유효성 검사 테스트', () => {
     const input = 's';
     expect(() => {
-      isValidateBridgeSize(input);
-    }).toThrow('[ERROR] 다리 길이는 숫자만 입력할 수 있습니다.');
+      validator.bridgeSize(input);
+    }).toThrow(MSG.ERROR.BRIDGE_TYPE);
   });
 
   test('사용자 이동 유효성 검사 테스트', () => {
     const input = 'X';
     expect(() => {
-      isValidateDirection(input);
-    }).toThrow('[ERROR] U 또는 D만 입력할 수 있습니다.');
+      validator.direction(input);
+    }).toThrow(MSG.ERROR.DIRECTION_TYPE);
   });
 
   test('사용자 게임 진행 여부 유효성 검사 테스트', () => {
     const input = 'X';
     expect(() => {
-      isValidateCommand(input);
-    }).toThrow('[ERROR] R 또는 Q만 입력할 수 있습니다.');
+      validator.command(input);
+    }).toThrow(MSG.ERROR.COMMAND_TYPE);
   });
 });

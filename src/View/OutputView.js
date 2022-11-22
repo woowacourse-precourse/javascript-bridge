@@ -1,19 +1,28 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { MSG } = require('../utils/messages');
 
 const OutputView = {
   showStart() {
-    Console.print('다리 건너기 게임을 시작합니다.');
+    Console.print(MSG.GAME.START);
+  },
+
+  makeMap(game) {
+    return game.bridge.reduce(
+      (direction, current, i) => {
+        const result =
+          i === game.bridge.length - 1 && !game.isSuccess ? 'X' : 'O';
+        const [nU, nD] = current === 'U' ? [result, ' '] : [' ', result];
+        return {
+          upside: [...direction['upside'], nU],
+          downside: [...direction['downside'], nD],
+        };
+      },
+      { upside: [], downside: [] }
+    );
   },
 
   showMap(game) {
-    let upside = [];
-    let downside = [];
-    game.bridge.forEach((direction, i) => {
-      const result =
-        i === game.bridge.length - 1 && !game.isSuccess ? 'X' : 'O';
-      upside = [...upside, direction === 'U' ? result : ' '];
-      downside = [...downside, direction === 'D' ? result : ' '];
-    });
+    const { upside, downside } = this.makeMap(game);
     Console.print(`[ ${upside.join(' | ')} ]\n[ ${downside.join(' | ')} ]`);
   },
 

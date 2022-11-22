@@ -1,12 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const {
-  isValidateBridgeSize,
-  isValidateDirection,
-  isValidateCommand,
-} = require('../utils/validation');
+const { MSG } = require('../utils/messages');
+const { validator } = require('../utils/helper');
 const OutputView = require('./OutputView');
+
 const InputView = {
   game: null,
 
@@ -23,15 +21,15 @@ const InputView = {
   },
 
   readBridgeSize() {
-    Console.readLine('다리의 길이를 입력해주세요.\n', (length) => {
+    Console.readLine(MSG.GAME.READ_BRIDGE, (length) => {
       try {
-        isValidateBridgeSize(length);
+        validator.bridgeSize(length);
+        this.setBridge(length);
+        this.readMoving();
       } catch (error) {
         Console.print(error);
         this.readBridgeSize();
       }
-      this.setBridge(length);
-      this.readMoving();
     });
   },
 
@@ -40,22 +38,19 @@ const InputView = {
     OutputView.showMap(this.game);
     if (this.game.isEnd) OutputView.showResult(this.game);
     else if (this.game.isSuccess) this.readMoving();
-    else this.readGameCommand();
+    else this.readCommand();
   },
 
   readMoving() {
-    Console.readLine(
-      '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
-      (direction) => {
-        try {
-          isValidateDirection(direction);
-        } catch (error) {
-          Console.print(error);
-          this.readMoving();
-        }
+    Console.readLine(MSG.GAME.READ_DIRECTION, (direction) => {
+      try {
+        validator.direction(direction);
         this.move(direction);
+      } catch (error) {
+        Console.print(error);
+        this.readMoving();
       }
-    );
+    });
   },
 
   excuteCommand(command) {
@@ -68,19 +63,16 @@ const InputView = {
     }
   },
 
-  readGameCommand() {
-    Console.readLine(
-      '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
-      (answer) => {
-        try {
-          isValidateCommand(answer);
-        } catch (error) {
-          Console.print(error);
-          this.readGameCommand();
-        }
-        this.excuteCommand(answer);
+  readCommand() {
+    Console.readLine(MSG.GAME.READ_COMMAND, (command) => {
+      try {
+        validator.command(command);
+        this.excuteCommand(command);
+      } catch (error) {
+        Console.print(error);
+        this.readCommand();
       }
-    );
+    });
   },
 };
 

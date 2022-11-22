@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
+const { MSG } = require('../src/utils/messages');
 const {
   getLogSpy,
   mockRandoms,
@@ -28,7 +29,7 @@ describe('다리 건너기 기능 테스트', () => {
       const app = new App();
       app.play();
     } catch (error) {
-      expect(error).toMatch('[ERROR] 다리 길이는 숫자만 입력할 수 있습니다.');
+      expect(error).toMatch(MSG.ERROR.BRIDGE_TYPE);
     }
   });
 
@@ -39,13 +40,13 @@ describe('다리 건너기 기능 테스트', () => {
       const app = new App();
       app.play();
     } catch (error) {
-      expect(error).toMatch('[ERROR] 다리 길이는 3이상 20이하의 숫자입니다.');
+      expect(error).toMatch(MSG.ERROR.BRIDGE_RANGE);
     }
   });
 
   test('게임 다리 출력 테스트', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1']);
+    mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'D']);
 
     const app = new App();
@@ -58,7 +59,7 @@ describe('다리 건너기 기능 테스트', () => {
 
   test('게임 다리 출력 테스트', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1']);
+    mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'D', 'D']);
 
     const app = new App();
@@ -71,7 +72,7 @@ describe('다리 건너기 기능 테스트', () => {
 
   test('결과 출력 테스트', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1']);
+    mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'U', 'R', 'U', 'D', 'U']);
 
     const app = new App();
@@ -90,7 +91,7 @@ describe('다리 건너기 기능 테스트', () => {
 
   test('결과 출력 테스트', () => {
     const logSpy = getLogSpy();
-    mockRandoms(['1', '0', '1']);
+    mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'U', 'R', 'U', 'D', 'D', 'Q']);
 
     const app = new App();
