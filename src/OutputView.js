@@ -52,4 +52,5 @@ const OutputView = {
     Console.close();
   },
 };
+
 module.exports = OutputView;

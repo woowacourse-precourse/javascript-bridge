@@ -17,4 +17,5 @@ class Validate {
     if(command !== RETRY.REPLAY && command !== RETRY.END) throw new Error(ERROR.INPUT_RETRY);
   }
 }
+
 module.exports = Validate;

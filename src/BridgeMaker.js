@@ -21,4 +21,5 @@ const BridgeMaker = {
     return bridgeStrings;
   }
 };
+
 module.exports = BridgeMaker;

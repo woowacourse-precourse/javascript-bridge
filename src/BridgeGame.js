@@ -106,7 +106,7 @@ class BridgeGame {
   initialize() {
     this.#player = { step: [], upsides: [], downsides: [] };
     this.addBridgeCondition();
-  }
+  };
 }
 
 module.exports = BridgeGame;
