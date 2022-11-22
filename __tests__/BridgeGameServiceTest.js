@@ -147,3 +147,5 @@ describe("BridgeGameService 클래스 테스트", () => {
     expect(outputView.printResult).toHaveBeenCalledTimes(1);
   });
 });
+
+exports.generateSpyFn = generateSpyFn;
