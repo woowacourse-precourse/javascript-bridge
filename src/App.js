@@ -1,19 +1,35 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 // const Tempo = require("./Tempo");
 const BridgeMaker = require("./BridgeMaker");
-const InputView = require("./InputView");
+const InputView = require("./View/InputView");
 const Message = require("./Message");
-const OutputView = require("./OutputView");
-// const BridgeGame = require("./BridgeGame");
+const OutputView = require("./View/OutputView");
+const BridgeGame = require("./BridgeGame");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 class App {
+  bridgeArray;
   play() {
     OutputView.printGameStart(Message.GAME_START);
-    InputView.readBridgeSize();
-    // let bridgeArray = BridgeMaker.makeBridge(this.bridgeSize, BridgeRandomNumberGenerator.generate);
-    // MissionUtils.Console.print(bridgeArray);
+    this.inputBridgeLength();
+  }
 
-    // let bridgeArray = InputView.readBridgeSize();
+  inputBridgeLength() {
+    InputView.readBridgeSize(this);
+  }
+
+  makingBridge(size) {
+    this.bridgeArray = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
+    InputView.readMoving(this);
+  }
+
+  inputUserMove(userChoice) {
+    const bridgeGame = new BridgeGame(this.bridgeArray);
+    bridgeGame.move(this, userChoice);
+  }
+
+  printBridge(upBridge, downBridge) {
+    OutputView.printMap(upBridge, downBridge);
   }
 }
 

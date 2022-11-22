@@ -1,5 +1,8 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
+const InputView = require("../src/View/InputView");
+const BridgeMaker = require("../src/bridgeMaker");
+const { checkChoiceUpDown } = require("../src/checkError");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -33,4 +36,11 @@ describe("[기능4] 다리 길이 입력 예외처리 테스트", () => {
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
+
+  // test("보너스 번호가 문자면 예외가 발생한다.", () => {
+  //   expect(() => {
+  //     const input = "J";
+  //     checkChoiceUpDown(input);
+  //   }).toBeFalsy();
+  // });
 });
