@@ -74,6 +74,17 @@ class App {
     this.mainRound();
   }
 
+  tryValidateRetry(command) {
+    try {
+      Validator.validateRetryCommand(command);
+    } catch (error) {
+      OutputView.printErrorMessage(error.message);
+      this.askRetry();
+      return;
+    }
+    this.manageRetry(command);
+  }
+
   managePassCase() {
     this.bridgeGame.move();
     OutputView.printMap(this.bridgeGame.getBridgeMap());
