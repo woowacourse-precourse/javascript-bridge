@@ -1,7 +1,14 @@
+const { makeBridge } = require("./BridgeMaker");
+const { generate } = require("./BridgeRandomNumberGenerator");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  createBridge(bridgeLength) {
+    this.bridgeLength = bridgeLength;
+    this.bridge = makeBridge(bridgeLength, generate); //ex. ["U","D","D"]
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
