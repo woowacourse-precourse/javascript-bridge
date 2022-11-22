@@ -6,7 +6,10 @@ const STRINGS={
   INPUT_RETRY_GM:"게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
   GAME_SUCESS:'게임 성공 여부: 성공',
   GAME_FAILED:'게임 성공 여부: 실패',
-  TRY_COUNT:`총 시도한 횟수:`
+  TRY_COUNT:`총 시도한 횟수:`,
+  BRIDGE_LEN_ERROR:"[ERROR] range error occured",
+  BRIDGE_STRING_ERROR:"[ERROR] The string can not be accepted",
+  BRIDGE_NEGATIVE_ERROR:"[ERROR] The Negative number can't be accepted"
 }
 
 module.exports=STRINGS

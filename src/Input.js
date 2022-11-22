@@ -1,6 +1,8 @@
 const OutputView=require('./OutputView')
 const BridgeGame=require('./BridgeGame')
 const bridegame=new BridgeGame()
+const InputView=require('./InputView')
+const STRINGS=require('./Const')
 
 
 class Input{
@@ -8,10 +10,10 @@ class Input{
   static originalBridge=''
 
   static checkBridge(bridgeLength){
-    if(bridgeLength<3 || bridgeLength>20) throw "[ERROR] range error occured"
-    if(bridgeLength.match(/[a-zA-z]/g) || bridgeLength.match(/[ㄱ-ㅎ가-힣]/g)) throw "[ERROR] The string can not be accepted"
-    if(bridgeLength.match([/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g])) throw "[ERROR] The string can not be accepted"
-    if(bridgeLength<0) throw "[ERROR] The Negative number can't be accepted"
+    if(bridgeLength<3 || bridgeLength>20) throw STRINGS.BRIDGE_LEN_ERROR
+    if(bridgeLength.match(/[a-zA-z]/g) || bridgeLength.match(/[ㄱ-ㅎ가-힣]/g)) throw STRINGS.BRIDGE_STRING_ERROR
+    if(bridgeLength.match([/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g])) throw STRINGS.BRIDGE_STRING_ERROR
+    if(bridgeLength<0) throw STRINGS.BRIDGE_NEGATIVE_ERROR
   }
 
   static randomBridge(bridgeArray){
