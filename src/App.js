@@ -28,8 +28,16 @@ class App {
   }
 
   inputStep() {
-    InputView.readMoving(() => {});
+    InputView.readMoving((input) => {
+      Validation.moveInput(input);
+      this.compareStep(input);
+    });
   }
+  
+  compareStep(input) {
+    const nowStepResult = this.bridgeGame.comparBridge(input);
+  }
+  
 }
 const app = new App();
 app.play();

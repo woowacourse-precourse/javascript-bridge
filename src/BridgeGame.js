@@ -3,8 +3,14 @@
  */
 class BridgeGame {
   #bridge = [];
+  #nowIndex = 0;
+
   setBridge(birdge) {
     this.#bridge = birdge;
+  }
+
+  comparBridge(input) {
+    return this.#bridge[this.#nowIndex] === input;
   }
   
   /**
