@@ -118,13 +118,13 @@ class BridgeGame {
     let array = [];
     array.push(this.returnStringArray(this.#up));
     array.push(this.returnStringArray(this.#down));
-    array.push(this.returnSuccessFail(this.#bridge));
+    array.push(this.returnSuccessFail());
     array.push(this.#tryCount);
     return array;
   }
 
-  returnSuccessFail(answer) {
-    if (this.lengthCompare(answer)) {
+  returnSuccessFail() {
+    if (this.lengthCompare()) {
       if (this.checkX()) {
         return SUCCESS;
       }
