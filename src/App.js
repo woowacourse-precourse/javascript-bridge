@@ -6,7 +6,7 @@ class App {
   /**
    * 게임을 시작하는 메서드
    */
-  async play() {
+  play() {
     OutputView.printHi();
 
     InputView.readBridgeSize((bridgeLength) => {
@@ -18,7 +18,7 @@ class App {
   /**
    * 한 번 움직이는 메서드
    */
-  async playOneStep() {
+  playOneStep() {
     InputView.readMoving((move) => {
       this.game.move(move);
       OutputView.printMap(this.game);
@@ -32,7 +32,7 @@ class App {
   /**
    * 게임을 다시 시작할지 묻는 메서드
    */
-  async askRetryGame() {
+  askRetryGame() {
     InputView.readGameCommand((willRetry) => {
       if (this.game.retry(willRetry)) this.playOneStep();
       else OutputView.printResult(this.game);
