@@ -6,13 +6,11 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const Validation = require("./Validation");
 
-// 게임을 진행시키는 컨트롤러
 class GameController {
   constructor() {
     this.bridgeGame = new BridgeGame();
   }
   play() {
-    // 게임 최초 시작
     this.startMessage();
   }
   startMessage() {
@@ -33,7 +31,6 @@ class GameController {
       input,
       BridgeRandomNumberGenerator.generate
     );
-    console.log(bridge);
     this.bridgeGame.setBridge(bridge);
     this.inputStep();
   }
@@ -66,7 +63,6 @@ class GameController {
   }
   checkContinueGame() {
     if (this.bridgeGame.checkLast()) {
-      //   console.log("END!!", this.bridgeGame.getTryCount());
       this.showGameResult("성공");
     } else {
       this.inputStep();
@@ -86,7 +82,6 @@ class GameController {
       this.bridgeGame.retry();
       this.inputStep();
     } else if (input === "Q") {
-      //   console.log("END!!", this.bridgeGame.getTryCount());
       this.showGameResult("실패");
     }
   }
