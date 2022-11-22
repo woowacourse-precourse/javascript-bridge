@@ -105,4 +105,36 @@ describe("다리 건너기 테스트", () => {
   test("예외 테스트", () => {
     runException(["a"]);
   });
+
+  test("다리 출력 테스트1", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["3", "U", "D", "U"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ O |   | O ]",
+      "[   | O |   ]",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+  });
+
+  test("다리 출력 테스트2", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 0, 1, 0, 1]);
+    mockQuestions(["7", "U", "D", "U", "D", "U", "D", "U"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ O |   | O |   | O |   | O ]",
+      "[   | O |   | O |   | O |   ]",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O |   | O |   | O ]", "[   | O |   | O |   | O |   ]");
+  });
 });
