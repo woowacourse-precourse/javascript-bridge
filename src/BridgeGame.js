@@ -11,8 +11,8 @@ class BridgeGame {
     this.bridgeSize = size; //다리 길이
     this.readCnt = 0; //입력 횟수
     this.gameCount = 0; //총 시도 횟수
-    this.upList = [];
-    this.downList = [];
+    this.upList = []; //위 칸 리스트(O, X 저장)
+    this.downList = [];  //아래 칸 리스트(O, X 저장)
     this.answerCnt = 0; //정답 맞춘 횟수
   }
   generateUpDownList(upDown, answerOrNot) {
