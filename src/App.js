@@ -48,7 +48,7 @@ class App {
       bridgeGame_.retry(this);
       OutputView.clearBridge();
     }
-    if (userChoice == "Q") bridgeGame_.printResult();
+    if (userChoice == "Q") OutputView.printResult(this.gameTry);
   }
 }
 
