@@ -43,6 +43,15 @@ const InputView = {
     }
   },
 
+  udValidation(answer) {
+    if (answer != "U" && answer != "D") {
+      Console.print(
+        "[ERROR] 다리 길이는 3이상 20 이하의 숫자만 입력 가능합니다. 다시 입력해 주세요!"
+      );
+      this.readMoving();
+    }
+  },
+
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
