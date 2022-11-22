@@ -13,36 +13,15 @@ class ViewInteractor {
   }
 
   getBridgeSize(callback) {
-    this.#view.readBridgeSize((input) => {
-      try {
-        callback(Number(input));
-      } catch (error) {
-        this.#view.printError(error);
-        this.getBridgeSize(callback);
-      }
-    });
+    this.#view.readBridgeSize(callback);
   }
 
   getMove(callback) {
-    this.#view.readMoving((input) => {
-      try {
-        callback(input);
-      } catch (error) {
-        this.#view.printError(error);
-        this.getMove(callback);
-      }
-    });
+    this.#view.readMoving(callback);
   }
 
   getGameCommand(callback) {
-    this.#view.readGameCommand((input) => {
-      try {
-        callback(input);
-      } catch (error) {
-        this.#view.printError(error);
-        this.getGameCommand(callback);
-      }
-    });
+    this.#view.readGameCommand(callback);
   }
 
   printMap() {

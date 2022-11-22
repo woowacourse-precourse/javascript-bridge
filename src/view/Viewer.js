@@ -7,16 +7,42 @@ class Viewer {
     this.outputView = OutputView;
   }
 
-  readMoving(callback) {
-    this.inputView.readMoving(callback);
+  inputSandBoxing(callerFunction, callback) {
+    return (input) => {
+      try {
+        callback(input);
+      } catch (error) {
+        this.printError(error);
+        callerFunction(callback);
+      }
+    };
   }
 
   readBridgeSize(callback) {
-    this.inputView.readBridgeSize(callback);
+    this.inputView.readBridgeSize(
+      this.inputSandBoxing(
+        this.readBridgeSize.bind(this),
+        callback,
+      ),
+    );
+  }
+
+  readMoving(callback) {
+    this.inputView.readMoving(
+      this.inputSandBoxing(
+        this.readMoving.bind(this),
+        callback,
+      ),
+    );
   }
 
   readGameCommand(callback) {
-    this.inputView.readGameCommand(callback);
+    this.inputView.readGameCommand(
+      this.inputSandBoxing(
+        this.readGameCommand.bind(this),
+        callback,
+      ),
+    );
   }
 
   printMap(bridge) {
