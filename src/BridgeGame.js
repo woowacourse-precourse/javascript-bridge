@@ -4,6 +4,7 @@ const BridgeStore = require('./BridgeStore');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeValidator = require('./BridgeValidator');
+const { handleError } = require('./ErrorHandler');
 
 const INITIAL_GAME_COUNT = 1;
 const INITIAL_BRIDGE_SIZE = {
@@ -35,15 +36,6 @@ class BridgeGame {
     this.retryMessage = retryMessage;
     this.moveCount = 0;
   }
-
-  handleError = (func) => (caller) => (params) => {
-    try {
-      func(...params);
-    } catch (error) {
-      OutputView.printError(error);
-      caller();
-    }
-  };
 
   increaseMoveCount = () => {
     this.moveCount += 1;
@@ -77,7 +69,7 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move = this.handleError(
+  move = handleError(
     (command) => {
       this.bridgeValidator.isValidCommand('move', command);
       this.setMovedData(command);
@@ -102,7 +94,7 @@ class BridgeGame {
     );
   };
 
-  confirmRetry = this.handleError(
+  confirmRetry = handleError(
     (command) => {
       this.bridgeValidator.isValidCommand('retry', command);
 
@@ -147,7 +139,7 @@ class BridgeGame {
     InputView.close();
   };
 
-  runGame = this.handleError(
+  runGame = handleError(
     (bridgeSize) => {
       this.createBridge(bridgeSize);
       InputView.readMoving(this.movingMessage, this.move);
