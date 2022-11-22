@@ -250,6 +250,7 @@ const number = generateRandomNumber();
 - [x] refactor: 매직 넘버 상수화하기
   - libs/Constant.js 에서 매직 넘버를 상수화한다.
   - 해당 파일에서 생성된 객체는 MESSAGE, ERROR_MESSAGE, BRIDGE_SIZE, DIRECTION, COMMAND_OPTION, CROSSING_RESULT이고 UP_NUMBER는 상수이다.
+  - MESSAGE, ERROR_MESSAGE의 매직 넘버를 상수로 바꾼다.
 - [ ] refactor: 함수(또는 메서드)가 한 가지의 일만 하도록 하기
   - 에러가 발생하였을 때 실행되는 함수를 분리한다.
   - BridgeGame를 생성하는 함수를 만들어 분리한다.
