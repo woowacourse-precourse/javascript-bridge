@@ -1,39 +1,41 @@
 const InputView = require("../GameIO/InputView.js");
-const Game = require("../Component/Game");
 
 const GameLibrary = {
-  playAlgorithms(getGameResult, bridgeLength, bridgeGame) {
+  playAlgorithms(increasePlayCount, bridgeLength, bridgeGame) {
     for (let moveCount = 0; moveCount < bridgeLength; moveCount++) {
-      const DIRECTION = InputView.readMoving();
-
-      const MOVE_RESULT = this.moveTurn(bridgeGame, DIRECTION, moveCount);
+      const MOVE_RESULT = this.moveTurn(
+        bridgeGame,
+        increasePlayCount,
+        moveCount
+      );
       if (MOVE[MOVE_RESULT] === "R") {
         moveCount = 0;
       }
       if (MOVE[MOVE_RESULT] === "Q") {
-        getGameResult();
         return false;
       }
     }
     return true;
   },
 
-  moveTurn(bridgeGame, direction, moveCount) {
-    const MOVE_RESULT = bridgeGame.move(direction, moveCount);
+  moveTurn(bridgeGame, increasePlayCount, moveCount) {
+    const DIRECTION = InputView.readMoving();
+    const MOVE_RESULT = bridgeGame.move(DIRECTION, moveCount);
     if (!MOVE_RESULT) {
-      const IS_QUIT = this.askQuit(bridgeGame.retry);
+      const IS_QUIT = this.askQuit(bridgeGame.retry, increasePlayCount);
       return IS_QUIT;
     }
     return "M";
   },
 
-  askQuit(retry) {
+  askQuit(retry, increasePlayCount) {
     const IS_QUIT = InputView.readGameCommand();
     if (IS_QUIT === "R") {
-      Game.increasePlayCount();
       bridgeGame.retry();
+      increasePlayCount();
     }
+
     return IS_QUIT;
   },
 };
-modult.exports = GameLibrary;
+module.exports = GameLibrary;
