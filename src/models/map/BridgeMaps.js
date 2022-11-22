@@ -1,31 +1,21 @@
-const { MovingCommand } = require('./command');
+const { MovingCommand } = require('../command');
+const BridgeMap = require('./BridgeMap');
 
 /**
- * 다리 배열 타입 정의
- * @typedef {Array.<boolean | null>} BridgeProcess
- */
-
-/**
- * 다리 클래스
+ * 다리 지도 관리 클래스
  * @class
  */
-class BridgeMap {
-  /**
-   * 다리 지도 상태 타입
-   * @type {BridgeProcess}
-   */
-  static #initialState = [];
+class BridgeMaps {
+  #upside = new BridgeMap();
 
-  #upside = BridgeMap.#initialState;
-
-  #downside = BridgeMap.#initialState;
+  #downside = new BridgeMap();
 
   /**
    * 다리 지도 가져올 때 사용하는 메서드
-   * @returns {Array.<BridgeProcess>}
+   * @returns {Array.<BridgeMap.BridgeProcess>}
    */
   getMap() {
-    return [this.#upside, this.#downside];
+    return [this.#upside.getState(), this.#downside.getState()];
   }
 
   /**
@@ -47,10 +37,10 @@ class BridgeMap {
    */
   #addUpside(movingCommand, isCrossed) {
     if (movingCommand.isUpside()) {
-      this.#upside = [...this.#upside, isCrossed];
+      this.#upside.addIsCrossed(isCrossed);
       return;
     }
-    this.#upside = [...this.#upside, null];
+    this.#upside.addNotSelected();
   }
 
   /**
@@ -60,19 +50,19 @@ class BridgeMap {
    */
   #addDownside(movingCommand, isCrossed) {
     if (movingCommand.isDownside()) {
-      this.#downside = [...this.#downside, isCrossed];
+      this.#downside.addIsCrossed(isCrossed);
       return;
     }
-    this.#downside = [...this.#downside, null];
+    this.#downside.addNotSelected();
   }
 
   /**
    * 지도 초기화할 때 사용하는 메서드
    */
   reset() {
-    this.#upside = BridgeMap.#initialState;
-    this.#downside = BridgeMap.#initialState;
+    this.#upside.reset();
+    this.#downside.reset();
   }
 }
 
-module.exports = BridgeMap;
+module.exports = BridgeMaps;

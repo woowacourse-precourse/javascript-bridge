@@ -1,15 +1,15 @@
 const Bridge = require('./Bridge');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
-const BridgeGameStatus = require('./BridgeGameStatus');
+const BridgeGameStatus = require('./status/BridgeGameStatus');
 
-const BridgeMap = require('./BridgeMap');
+const BridgeMaps = require('./map/BridgeMaps');
 const { SizeCommand, MovingCommand } = require('./command');
 
 /**
  * 게임 종료 시점 상태 객체 타입 정의
  * @typedef {Object} FinalStatus
- * @property {BridgeMap} bridgeMap
+ * @property {BridgeMaps} bridgeMap
  * @property {boolean} isWin
  * @property {number} tryCount
  */
@@ -63,7 +63,7 @@ class BridgeGame {
 
   /**
    * 다리 지도 가져올 때 사용하는 메서드
-   * @return {BridgeMap} 다리 지도 인스턴스
+   * @return {BridgeMaps} 다리 지도 인스턴스
    */
   getMap() {
     return this.#bridge.getMap();
@@ -94,7 +94,7 @@ class BridgeGame {
    */
   quit(isCrossed) {
     const bridgeMap = this.getMap();
-    const isWin = this.#status.isWin(this.#bridge.getSize(), isCrossed);
+    const isWin = this.isWin(isCrossed);
     const tryCount = this.#status.getTryCount();
 
     return { bridgeMap, isWin, tryCount };

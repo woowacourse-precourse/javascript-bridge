@@ -1,5 +1,5 @@
-const BridgeMap = require('./BridgeMap');
 const { MovingCommand } = require('./command');
+const BridgeMaps = require('./map/BridgeMaps');
 
 /**
  * 다리 클래스
@@ -16,7 +16,7 @@ class Bridge {
    */
   constructor(bridge) {
     this.#state = bridge;
-    this.#map = new BridgeMap();
+    this.#map = new BridgeMaps();
   }
 
   /**
@@ -38,7 +38,7 @@ class Bridge {
 
   /**
    * 다리 지도 가져올 때 사용하는 메서드
-   * @returns {BridgeMap}
+   * @returns {BridgeMaps}
    */
   getMap() {
     return this.#map;

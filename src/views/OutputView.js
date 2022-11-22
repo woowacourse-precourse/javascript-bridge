@@ -4,7 +4,7 @@ const { GAME_MESSAGE } = require('../constants');
 const OutputUtils = require('../utils/OutputUtils');
 
 const BridgeGame = require('../models/BridgeGame');
-const BridgeMap = require('../models/BridgeMap');
+const BridgeMaps = require('../models/map/BridgeMaps');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -12,7 +12,7 @@ const BridgeMap = require('../models/BridgeMap');
 const OutputView = {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * @param {BridgeMap} bridgeMap
+   * @param {BridgeMaps} bridgeMap
    */
   printMap(bridgeMap) {
     const [upside, downside] = bridgeMap.getMap();
