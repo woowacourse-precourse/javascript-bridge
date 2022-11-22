@@ -7,7 +7,13 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요", (bridgesize) => {
+      this.checkBridgeSize(bridgesize);
     });
+  },
+
+  checkBridgeSize(bridgesize){
+    if(isNaN(bridgesize)) throw new Error('[ERROR] 다리 길이는 숫자여야 합니다.');
+    if(bridgesize<3 || bridgesize>20) throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
   },
 
   /**
