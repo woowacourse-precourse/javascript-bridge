@@ -1,6 +1,6 @@
 ## 구현 기능 목록
 
-- [ ] 프로그램 시작
+- [x] 프로그램 시작
     App.play()
 
 - [x] 다리 생성
@@ -33,10 +33,10 @@
         - [x] 게임 성공 여부
         - [x] 총 시도한 횟수
 
-- [ ] 입력
+- [x] 입력
     - [x] 다리 길이
         - InputView.readBridgeSize()
     - [x] 이동할 칸
         - InputView.readMoving()
-    - [ ] 게임 재시작 여부
+    - [x] 게임 재시작 여부
         - InputView.readGameCommand()
