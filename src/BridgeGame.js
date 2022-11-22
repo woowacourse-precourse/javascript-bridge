@@ -17,7 +17,7 @@ class BridgeGame {
       BridgeRandomNumberGenerator.generate
     );
     this.#userState = [];
-    this.#countTry = 0;
+    this.#countTry = 1;
   }
 
   validateSizeRange(size) {
@@ -50,7 +50,6 @@ class BridgeGame {
       }
     } else {
       this.#condition = 2;
-      this.#countTry += 1;
     }
     return [this.#condition, this.#bridge, this.#userState, this.#countTry];
   }
@@ -60,7 +59,8 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#userState.pop();
+    this.#countTry += 1;
+    this.#userState = [];
   }
 }
 
