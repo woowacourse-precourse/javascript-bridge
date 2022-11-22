@@ -11,37 +11,15 @@ class BridgeGame {
    */
   move(moveInput, madeBridge, moveArray) {
     const count = moveArray[0].length;
-    if (moveInput === 'U') {
-      moveArray = this.checkUp(moveInput, madeBridge[count], moveArray);
+    if (moveInput === madeBridge[count]) {
+      moveInput === 'U' ? moveArray[0].push('O') : moveArray[1].push('O');
+      moveInput === 'U' ? moveArray[1].push(' ') : moveArray[0].push(' ');
     }
-    if (moveInput === 'D') {
-      moveArray = this.checkDown(moveInput, madeBridge[count], moveArray)
+    if (moveInput !== madeBridge[count]) {
+      moveInput === 'U' ? moveArray[0].push('X') : moveArray[1].push('X');
+      moveInput === 'U' ? moveArray[1].push(' ') : moveArray[0].push(' ');
     }
     
-    return moveArray;
-  }
-
-  checkUp(moveInput, madeBridge, moveArray) {
-    if (moveInput === madeBridge) {
-      moveArray[0].push('O');
-      moveArray[1].push(' ');
-    } else {
-      moveArray[0].push('X');
-      moveArray[1].push(' ');
-    }
-
-    return moveArray;
-  }
-
-  checkDown(moveInput, madeBridge, moveArray) {
-    if (moveInput === madeBridge) {
-      moveArray[0].push(' ');
-      moveArray[1].push('O');
-    } else {
-      moveArray[0].push(' ');
-      moveArray[1].push('X');
-    }
-
     return moveArray;
   }
 
@@ -50,10 +28,10 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(bridgeArray) {
-    bridgeArray = [[], []];
+  retry(userDecision) {
+    if (userDecision === 'R') return true;
 
-    return bridgeArray;
+    return false;
   }
 }
 

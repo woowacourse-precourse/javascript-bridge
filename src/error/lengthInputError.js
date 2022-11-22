@@ -12,7 +12,7 @@ const notNumber = (input) => {
         }
     } catch (e) {
         MissionUtils.Console.print(e.message);
-        return false;
+        return true;
     }
 }
 
@@ -23,7 +23,7 @@ const lengthCheck = (input) => {
         }
     } catch (e) {
         MissionUtils.Console.print(e.message);
-        return false;
+        return true;
     }
 }
 

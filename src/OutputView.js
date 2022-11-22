@@ -27,6 +27,13 @@ const OutputView = {
     MissionUtils.Console.print(TOTAL_ATTEMPT(count));
     MissionUtils.Console.close();
   },
+
+  /**
+   * 게임 시작을 위한 메세지를 출력한다.
+   */
+  printStartMessage() {
+    MissionUtils.Console.print(BRIDGE_START);
+  }
 };
 
 module.exports = OutputView;

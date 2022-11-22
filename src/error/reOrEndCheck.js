@@ -10,8 +10,8 @@ const includedCheckRorQ = (input) => {
             throw new Error('[ERROR] R(재시작) 또는 Q(종료) 중 하나의 문자를 입력해주세요.');
         }
     } catch (e) {
-        MissionUtils.Console.print(e);
-        return false;
+        MissionUtils.Console.print(e.message);
+        return true;
     }
 }
 
