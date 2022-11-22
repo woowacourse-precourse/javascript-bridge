@@ -15,72 +15,77 @@ const { printResult, printMap } = require('./OutputView');
 class BridgeGameController {
   static initGame(size) {
     try {
-      const game = BridgeGameController.createGame(size);
-      readMoving(game, BridgeGameController.moveNext);
+      const game = BridgeGameController.#createGame(size);
+      readMoving(game, BridgeGameController.#moveNext);
     } catch (err) {
-      Console.print(err);
+      Console.print(err.message);
       readBridgeSize(BridgeGameController.initGame);
     }
   }
 
-  static createGame(size) {
+  static #createGame(size) {
     const bridge = BridgeMaker.makeBridge(size, generate);
-    console.log(bridge);
     return new BridgeGame(bridge);
   }
 
-  static moveNext(game, direction) {
+  static #moveNext(game, direction) {
     try {
       game.move(direction);
-      BridgeGameController.checkGameProcess(game, direction);
+      BridgeGameController.#checkGameProcess(game, direction);
     } catch (err) {
-      Console.print(err);
-      repeatReadMoving(game, BridgeGameController.moveNext);
+      Console.print(err.message);
+      repeatReadMoving(game, BridgeGameController.#moveNext);
     }
   }
 
-  static checkGameProcess(game, direction) {
+  static #checkGameProcess(game, direction) {
     if (isWrongDirection(game, direction)) {
-      BridgeGameController.showBridge(game);
-      readGameCommand(game, BridgeGameController.queryRetry);
-    } else if (game.isEndOfBridge()) BridgeGameController.showResult(game);
+      BridgeGameController.#showBridge(game);
+      readGameCommand(game, BridgeGameController.#queryRetry);
+    } else if (game.isEndOfBridge()) BridgeGameController.#showResult(game);
     else {
-      BridgeGameController.showBridge(game);
-      repeatReadMoving(game, BridgeGameController.moveNext);
+      BridgeGameController.#showBridge(game);
+      repeatReadMoving(game, BridgeGameController.#moveNext);
     }
   }
 
-  static queryRetry(game, command) {
+  static #queryRetry(game, command) {
     try {
-      BridgeGameController.checkRetry(game, command);
+      BridgeGameController.#checkRetry(game, command);
     } catch (err) {
-      Console.print(err);
-      readGameCommand(game, BridgeGameController.queryRetry);
+      Console.print(err.message);
+      readGameCommand(game, BridgeGameController.#queryRetry);
     }
   }
 
-  static checkRetry(game, command) {
+  static #checkRetry(game, command) {
     if (isCommandRetry(command)) {
       game.retry();
-      readMoving(game, BridgeGameController.moveNext);
-    } else BridgeGameController.quit(game);
+      readMoving(game, BridgeGameController.#moveNext);
+    } else BridgeGameController.#quit(game);
   }
 
-  static showBridge(game) {
+  static #showBridge(game) {
     const map = new BridgeMap();
     map.create(game);
-    const { upperBridge, downerBridge } = map.getBridge();
-    printMap(upperBridge, downerBridge);
+    const bridge = map.getBridge();
+    printMap(bridge);
   }
 
-  static showResult(game) {
-    printResult(game);
-    BridgeGameController.showBridge(game);
+  static #showResult(game) {
+    const map = new BridgeMap();
+    map.create(game);
+    const bridge = map.getBridge();
+    printMap(bridge);
+    printResult(game, bridge);
     Console.close();
   }
 
-  static quit(game) {
-    printResult(game);
+  static #quit(game) {
+    const map = new BridgeMap();
+    map.create(game);
+    const bridge = map.getBridge();
+    printResult(game, bridge);
     Console.close();
   }
 }
