@@ -1,33 +1,39 @@
 const { printMap } = require('./OutputView');
+const {WAY} = require('./constant')
 class BridgeGame {
-  bridge;
-  crossingOrder;
-  attemptCount;
+  #bridge;
+  #myWay;
+  #attempts;
 
   constructor(bridge) {
-    this.bridge = bridge;
-    this.crossingOrder = [];
-    this.attemptCount = 1;
+    this.#bridge = bridge;
+    this.#myWay = [[], []];
+    this.#attempts = 0;
   }
-  move(direction) {
-    this.crossingOrder.push([direction, direction === "U" ? 0 : 1]);
+  move(key) {
+    if(key === 'U') {
+      this.#myWay[WAY.UP_WAY].push(key);
+      this.#myWay[WAY.DOWN_WAY].push(' ');
+    }
+    if(key === 'D') {
+      this.#myWay[WAY.UP_WAY].push(' ');
+      this.#myWay[WAY.DOWN_WAY].push(key);
+    }
+    this.#attempts++;
+  }
+  getMyWay(){
+    return this.#myWay;
+  }
+  test(){
+    console.log(this.#myWay);
   }
 
-  getBridgeCrossingResult() {
-    let bridgeCrossingResult = [[], []];
-    this.crossingOrder.forEach(([direction, directionNumber], idx) => {
-      const isCross = direction === this.bridge[idx];
-
-      bridgeCrossingResult[directionNumber].push(isCross ? "O" : "X");
-      bridgeCrossingResult[Math.abs(directionNumber - 1)].push(" ");
-    });
-    return bridgeCrossingResult;
-  }
+  
 }
 
-// let bg = new BridgeGame(['U', 'D', 'D']);
-// bg.move('U');
-// bg.move('D');
-// console.log(bg.getBridgeCrossingResult());
 
-// printMap(bg.getBridgeCrossingResult());
+let bg = new BridgeGame(['U', 'D', 'D']);
+bg.move('U');
+bg.move('D');
+bg.test();
+printMap(bg.getMyWay());

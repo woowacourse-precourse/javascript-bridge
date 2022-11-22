@@ -9,8 +9,13 @@ const KEY_VALUE = Object.freeze({
     RESTART_KEY: 'R',
     QUIT_KEY: 'Q',
 });
+const WAY = Object.freeze({
+    UP_WAY: 0,
+    DOWN_WAY: 1,
+});
 
 module.exports = {
     ERROR_MESSAGE,
     KEY_VALUE,
+    WAY,
 }
