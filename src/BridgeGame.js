@@ -26,11 +26,11 @@ class BridgeGame {
   }
 
   makeBridge(Bridge, upDown) {
-    let UD = { U: " ", D: " " };
-    Bridge === upDown ? (UD[upDown] = "O") : (UD[upDown] = "X");
+    let UD = { U: ' ', D: ' ' };
+    Bridge === upDown ? (UD[upDown] = 'O') : (UD[upDown] = 'X');
 
-    this.up.push(UD["U"]);
-    this.down.push(UD["D"]);
+    this.up.push(UD['U']);
+    this.down.push(UD['D']);
 
     return [this.up, this.down, Bridge === upDown];
   }
