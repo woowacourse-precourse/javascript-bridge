@@ -6,6 +6,7 @@ const OutputView = require('./OutputView');
 class BridgeGame {
     #bridge;
     #position; // 현재 index.
+    #tryCount;
 
     /**
      * 필드를 새로 생성한 다리 정보로 업데이트한다.
@@ -14,8 +15,17 @@ class BridgeGame {
     constructor(newBridge) {
         this.#bridge = newBridge;
         this.#position = 0;
+        this.#tryCount = 1;
     }
 
+    /** getter */
+    getPosition() {
+        return this.#position;
+    }
+
+    getTryCount() {
+        return this.#tryCount;
+    }
     /**
      * 현재 입력한 방향의 다리를 건널 수 있는지에 대한 정보를 리턴한다.
      * @param {string} choice
@@ -48,6 +58,7 @@ class BridgeGame {
      */
     retry() {
         this.#position = 0;
+        this.#tryCount += 1;
     }
 }
 

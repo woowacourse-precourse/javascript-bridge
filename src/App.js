@@ -15,10 +15,11 @@ class App {
             BridgeRandomNumberGenerator.generate
         );
 
+        let choosen;
         const bridgeGame = new BridgeGame(bridge);
         for (let i = 0; i < bridgeLength; i++) {
             MissionUtils.Console.print(bridge);
-            const choosen = await InputView.readMoving();
+            choosen = await InputView.readMoving();
 
             const crossSuccess = bridgeGame.move(choosen);
             if (!crossSuccess) {
@@ -30,7 +31,12 @@ class App {
                 i = -1;
             }
         }
-
+        OutputView.printResult(
+            bridge,
+            bridgeGame.getPosition(),
+            choosen,
+            bridgeGame.getTryCount()
+        );
         MissionUtils.Console.close();
     }
 }
