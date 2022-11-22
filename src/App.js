@@ -38,7 +38,6 @@ class App {
     try {
       this.validator.checkMoveCommand(moveCommand);
       OutputView.printMap(this.bridgeGame.drawBridgeMap(moveCommand));
-      this.bridgeGame.move();
       this.checkGameState();
     } catch (errorType) {
       OutputView.printError(errorType);
@@ -47,8 +46,9 @@ class App {
   }
 
   checkGameState() {
+    this.bridgeGame.move();
     if (this.#isGameSuccess()) {
-      return this.#exitGame();
+      return this.#showResult();
     }
     if (this.#isGameOver()) {
       return this.requestGameOverCommand();
@@ -79,24 +79,38 @@ class App {
   }
 
   checkRetryState(retryCommand) {
-    const { quit, retry } = GAME_COMMAND;
+    this.getQuitCommand(retryCommand);
+    this.getRetryCommand(retryCommand);
+  }
+
+  getQuitCommand(retryCommand) {
+    const { quit } = GAME_COMMAND;
+
     if (retryCommand === quit) {
-      return this.#exitGame();
+      this.#showResult();
     }
+  }
+
+  getRetryCommand(retryCommand) {
+    const { retry } = GAME_COMMAND;
+
     if (retryCommand === retry) {
       this.bridgeGame.retry();
       this.getBridgeMovementDirection();
     }
-    this.requestGameOverCommand();
   }
 
-  #exitGame() {
+  #showResult() {
     OutputView.printResult({
       userGameMap: this.bridgeGame.getUserBridgeMap(),
       isSuccess: this.bridgeGame.checkGameStatus(),
       userTryCount: this.bridgeGame.getUserTryCount(),
     });
-    return OutputView.exit();
+    return this.#exitGame();
+  }
+
+  #exitGame() {
+    OutputView.exit();
   }
 }
 
