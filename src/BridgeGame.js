@@ -8,24 +8,32 @@ class BridgeGame {
   #bridgeList;
   #firstRow;
   #secondRow;
+  #count;
   constructor() {
-    this.bridgeList = [];
-    this.firstRow = [];
+    this.#bridgeList = [];
+    this.#firstRow = [];
     this.#secondRow = [];
+    this.#count = 0;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move() {
+    this.#count += 1;
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#firstRow = [];
+    this.#secondRow = [];
+    count++;
+  }
 
   setBridge() {
     const bridgeMaker = new BridgeMaker();
@@ -34,7 +42,7 @@ class BridgeGame {
 
   setMoveInput(input) {
     const bridge = this.selectUpDown(input);
-    bridge.push(this.selectPattern(input, this.getRowLength()));
+    bridge.push(this.selectPattern(input, this.#count));
     this.insertSpace(bridge);
   }
 
@@ -53,7 +61,7 @@ class BridgeGame {
   selectPattern(data, index) {
     const { POSSIBLE, IMPOSSIBLE } = GAME_STATUS;
 
-    if (data === bridgeList[index]) return POSSIBLE;
+    if (data === this.#bridgeList[index]) return POSSIBLE;
     return IMPOSSIBLE;
   }
 
@@ -67,8 +75,14 @@ class BridgeGame {
     this.#firstRow.push(SPACE);
   }
 
-  getRowLength() {
-    return this.#firstRow.length;
+  isWin() {
+    const { IMPOSSIBLE } = GAME_STATUS;
+    if (
+      ![...this.#firstRow, ...this.#secondRow].join('').includes(IMPOSSIBLE)
+    ) {
+      return true;
+    }
+    return false;
   }
 }
 

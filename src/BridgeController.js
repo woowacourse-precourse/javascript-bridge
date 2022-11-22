@@ -1,6 +1,7 @@
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView');
+const { printResult } = require('./OutputView');
 const OutputView = require('./OutputView');
 const Validate = require('./Validate');
 
@@ -39,11 +40,28 @@ class bridgeController {
       Validate.isMoveInput(input);
       this.#bridge.setMoveInput(input);
       OutputView.printMap(this.#bridge.getBridgeMap());
+      this.checkGame();
     } catch (error) {
       OutputView.printError(error);
       this.getMoveInput();
     }
   }
+
+  checkGame() {
+    this.#bridge.move();
+
+    if (this.#bridge.isWin()) {
+      return printResult();
+    }
+    if (this.#bridge.isFail()) {
+      return isRetry();
+    }
+    this.getMoveInput();
+  }
+
+  printResult() {}
+
+  isRetry() {}
 }
 
 module.exports = bridgeController;
