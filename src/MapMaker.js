@@ -1,7 +1,8 @@
 const MapMaker = {
 	up: [],
 	down: [],
-	makeMap(move, isCorrect) {
+	makeMap(move, isCorrect, isFinish = false) {
+		if (isCorrect && isFinish) return this.styleMap();
 		if (move === 'U') this.fillUp(isCorrect);
 		if (move === 'D') this.fillDown(isCorrect);
 		const map = this.styleMap();

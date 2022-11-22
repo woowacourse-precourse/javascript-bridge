@@ -88,6 +88,7 @@ class BridgeGame {
 	}
 
 	finish() {
+		ViewManager.finish(this.recentMove, this.isCorrect, this.tryCnt);
 	}
 }
 

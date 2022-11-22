@@ -22,6 +22,10 @@ class ViewManager {
 		InputView.readGameCommand(callback);
 	}
 
+	static finish(recentMove, isCorrect, tryCnt) {
+		OutputView.printResult(recentMove, isCorrect, tryCnt);
+	}
+
 }
 
 module.exports = ViewManager;
