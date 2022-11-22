@@ -26,7 +26,7 @@ const MapMaker = {
         return `${this.getMapHead(idx === 0)}${this.getMapCharacter(MAP_CHARACTERS.COMMAND[command] === pos, result)}${this.getMapTail(idx === currentResultLength - 1)}`;
       }));
 
-    return bridgeMap.map((el) => el.join(MAP_CHARACTERS.MIDDLE));
+    return bridgeMap.map((el) => el.join(MAP_CHARACTERS.MIDDLE)).join('\n');
   },
 
 };
