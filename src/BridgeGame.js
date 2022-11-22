@@ -23,11 +23,17 @@ class BridgeGame {
 
     this.gameStart();
 
-    OutputView.printResult(
-      [this.#bridUpside, this.#bridDownside],
-      this.#attemptCount,
-      this.#gameWin
-    );
+    this.gameResult();
+  }
+
+  gameResult() {
+    const result = {
+      bridgeUpside: this.#bridUpside,
+      bridgeDownside: this.#bridDownside,
+      attemptCount: this.#attemptCount,
+      gameWin: this.#gameWin,
+    };
+    OutputView.printResult(result);
   }
 
   gameStart() {
