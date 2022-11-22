@@ -34,6 +34,15 @@ const InputView = {
     InputView.question('이동할 칸을 선택해주세요. (위: U, 아래: D)\n', callback, InputView.correctMove);
   },
 
+  correctMove(input) {
+    if (input === 'U' || input === 'D') {
+      return true;
+    } 
+
+    Io.close();
+    throw new Error(`[ERROR] 유효하지 않은 움직임입니다.`);
+  },
+
 
 };
 
