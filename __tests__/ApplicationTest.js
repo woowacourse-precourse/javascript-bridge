@@ -83,7 +83,13 @@ describe("다리 건너기 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
-  test("기능 테스트2", () => {
+  test("예외 테스트", () => {
+    runException(["a"]);
+  });
+});
+
+describe("추가 기능 테스트", () => {
+  test("기능 테스트2: 다리 건너기에 실패하면 처음부터 다시 시작합니다.", () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
     mockQuestions(["3", "U", "D", "D", "R", "U", "D", "U"]);
@@ -93,6 +99,10 @@ describe("다리 건너기 테스트", () => {
 
     const log = getOutput(logSpy);
     expectLogContains(log, [
+      "[ O ]",
+      "[   ]",
+      "[ O |   ]",
+      "[   | O ]",
       "[ O |   |   ]",
       "[   | O | X ]",
       "최종 게임 결과",
@@ -102,9 +112,5 @@ describe("다리 건너기 테스트", () => {
       "총 시도한 횟수: 2",
     ]);
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
-  });
-
-  test("예외 테스트", () => {
-    runException(["a"]);
   });
 });
