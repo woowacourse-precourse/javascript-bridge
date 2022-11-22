@@ -32,10 +32,11 @@ const InputView = {
     }
   },
 
-  readMoving() {
+  readMoving(movePlayer) {
     Console.readLine(MESSAGE.INPUT_MOVING, (moving) => {
       try {
         this.validateMoving(moving);
+        movePlayer(moving);
       } catch (error) {
         Console.print(error);
       }

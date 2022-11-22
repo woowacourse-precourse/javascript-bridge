@@ -22,6 +22,11 @@ class App {
   }
 
   play() {
+    InputView.readMoving(this.movePlayer.bind(this));
+  }
+
+  movePlayer(moving) {
+    this.bridgeGame.move(moving);
   }
 
 }

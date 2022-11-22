@@ -1,12 +1,49 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+const { BRIDGE, MAP } = require('./constants');
+
 class BridgeGame {
   #bridge = [];
+
+  #map = [[], []];
+
+
+  getMap() {
+    return this.#map;
+  }
 
   saveBridge(bridge) {
     this.#bridge = bridge;
   }
+
+  move(moving) {
+    const crossResult = this.judgeCross(moving);
+    const [crossSide, unCrossSide] = this.defineCrossSide(moving);
+
+    crossSide.push(crossResult);
+    unCrossSide.push(BRIDGE.ROOM);
+
+    return crossResult;
+  }
+
+  defineCrossSide(moving) {
+    const [upSide, downSide] = this.#map;
+
+    if (moving === MAP.UP_SIDE_STR) {
+      return [upSide, downSide];
+    }
+
+    return [downSide, upSide];
+  }
+
+  judgeCross(moving) {
+    const movingNum = this.getMovingNum();
+
+    if (this.#bridge[movingNum] === moving) {
+      return BRIDGE.CROSS;
+    }
+
+    return BRIDGE.UN_CROSS;
+  }
+
 }
 
 module.exports = BridgeGame;
