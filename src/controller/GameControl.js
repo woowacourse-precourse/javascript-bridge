@@ -54,5 +54,11 @@ class GameControl {
       this.runFinalOutput(success);
     }
   }
+
+  runFinalOutput(success) {
+    const state = this.bridgeGame.getState();
+    const count = this.bridgeGame.getCount();
+    OutputView.printResult(state, count, success);
+  }
 }
 module.exports = GameControl;
