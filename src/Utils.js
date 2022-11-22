@@ -20,7 +20,7 @@ const GAME_RESULT = {
 
 const ERROR_MESSAGE = {
   BRIDGE_LENGTH_NOT_PIXED_NUMBER: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
-  BRIDGE_LENGTH_NOT_NUMBER: "[ERROR] 다리 길이는 숫자여야 합니다.",
+  BRIDGE_LENGTH_NOT_NUMBER: "[ERROR] 숫자를 입력해 주세요.",
   CHOICE_SPACE_NOT_PIXED_VALUE: "[ERROR] 이동할 칸은 U와 D 중에 선택해야 합니다.",
   CHOICE_GAME_NOT_PIXED_VALUE: "[ERROR] 게임 재시작 여부는 R과 Q 중에 선택해야 합니다.",
 }
