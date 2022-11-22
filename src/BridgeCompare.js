@@ -3,8 +3,6 @@ const InputView = require('./InputView');
 const UserChoiceIndex = {
     U : 0,
     D : 1,
-    true: 0,
-    false: 1,
 }
 
 const BridgeCompare = {
