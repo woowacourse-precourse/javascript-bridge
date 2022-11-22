@@ -11,7 +11,6 @@ class Validation {
     if (!Number.isInteger(parseFloat(input))) {
       throw ERR.NOT_INT;
     }
-
     return input;
   }
 
