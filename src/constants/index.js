@@ -19,10 +19,15 @@ const constants = Object.freeze({
     START_BRIDGE: "다리 건너기 게임을 시작합니다.",
     MAP_BLANK: " ",
     MAP_MIDDLE_DIVIDE: " | ",
-    MAP_DIVIDE: (message) => `[ ${message} ]`,
     END_MESSAGE: "최종 게임 결과",
+    MAP_DIVIDE: (message) => `[ ${message} ]`,
     END_SUCCESS: (SUCCESS) => `\n게임 성공 여부: ${SUCCESS}`,
     END_ATTEMPT: (ATTEMPT) => `총 시도한 횟수: ${ATTEMPT}`,
+  },
+  ERROR: {
+    SIZE_ERROR: `[ERROR] 3 ~ 20 사이의 숫자를 입력해주세요.`,
+    MOVE_ERROR: "[ERROR] 'U' 또는 'D'를 입력해주세요.",
+    RETRY_ERROR: "[ERROR] 'R' 또는 'Q'를 입력해주세요.",
   },
   SIZE: {
     MAP_SIZE: 2,
