@@ -11,23 +11,31 @@ class App {
     readMoving(this.readMoveCallback);
   }
 
+  moveFail(tryCount, printTry) {
+    readGameCommand((restart) => {
+      if (this.bridgeGame.retry(restart) == "R") {
+        this.moveBridge();
+      } else {
+        printResult("실패", tryCount, printTry);
+      }
+    });
+  }
+
+  moveSuccess(moveCount, tryCount, printTry) {
+    if (moveCount <= 2) {
+      this.moveBridge();
+    } else {
+      printResult("성공", tryCount, printTry);
+    }
+  }
+
   readMoveCallback = (moveValue) => {
     let [moveCount, restartCheck, tryCount, printTry] =
       this.bridgeGame.move(moveValue);
     if (restartCheck) {
-      readGameCommand((restart) => {
-        if (this.bridgeGame.retry(restart) == "R") {
-          this.moveBridge();
-        } else {
-          printResult("실패", tryCount, printTry);
-        }
-      });
+      this.moveFail(tryCount, printTry);
     } else {
-      if (moveCount <= 2) {
-        this.moveBridge();
-      } else {
-        printResult("성공", tryCount, printTry);
-      }
+      this.moveSuccess(moveCount, tryCount, printTry);
     }
   };
 
