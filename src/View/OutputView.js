@@ -19,7 +19,7 @@ const OutputView = {
     map.forEach((row) => {
       Console.print(getMapRowMessage(row));
     });
-    Console.print('');             
+    this.lineBreak();       
   },
 
   /**
