@@ -4,13 +4,13 @@ const { ERROR_MSG } = require("./constants/message.js");
 class Validation {
   static checkBridgeSize(size) {
     if (size < BRIDGE_SIZE.MIN_NUM || size > BRIDGE_SIZE.MAX_NUM)
-      throw new Error(ERROR_MSG.invalidRange);
-    if (isNaN(size)) throw new Error(ERROR_MSG.invalidRange);
+      throw new Error(ERROR_MSG.RANGE);
+    if (isNaN(size)) throw new Error(ERROR_MSG.RANGE);
   }
 
   static checkDirection(direction) {
     if (!this.#isValidDirection(direction)) {
-      throw new Error(ERROR_MSG.invalidDirection);
+      throw new Error(ERROR_MSG.DIRECTION);
     }
   }
 
@@ -20,7 +20,7 @@ class Validation {
 
   static checkRestartInput(userRestart) {
     if (!this.#isRestartInput(userRestart)) {
-      throw new Error(ERROR_MSG.inValidRestart);
+      throw new Error(ERROR_MSG.RESTART);
     }
   }
 

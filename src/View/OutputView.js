@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { GAME_MSG } = require("../constants/message.js");
+const { GAME_MSG, RESULT_MSG } = require("../constants/message");
 const MapMaker = require("../Model/MapMaker");
 
 const OutputView = {
@@ -17,14 +17,14 @@ const OutputView = {
 
   printResult(record, isSucceeded, tryCount) {
     const maps = MapMaker.getMapResult(record);
-    const successOrfail = isSucceeded ? "성공" : "실패";
+    const successOrfail = isSucceeded ? RESULT_MSG.SUCCESS : RESULT_MSG.FAIL;
 
-    Console.print("최종 게임 결과\n");
+    Console.print(RESULT_MSG.FINAL);
     maps.forEach((map) => {
       Console.print(map);
     });
-    Console.print(`\n게임 성공 여부: ${successOrfail}`);
-    Console.print(`총 시도한 횟수: ${tryCount}`);
+    Console.print(RESULT_MSG.SUCCESS_OR_FAIL + `${successOrfail}`);
+    Console.print(RESULT_MSG.TRY_COUNT + `${tryCount}`);
   },
 
   printError(message) {
