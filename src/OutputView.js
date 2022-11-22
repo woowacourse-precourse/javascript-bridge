@@ -6,7 +6,6 @@ const { getMapState } = require('./Util');
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
-  //
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -24,8 +23,7 @@ const OutputView = {
           )
         );
       }
-      const result = `${MAP_STATE.prefix}${map.join('|')}${MAP_STATE.postfix}`;
-      Console.print(result);
+      Console.print(`${MAP_STATE.prefix}${map.join('|')}${MAP_STATE.postfix}`);
     }
   },
 
@@ -38,11 +36,8 @@ const OutputView = {
     Console.print(OUTPUT_MSG.finish);
     this.printMap(state, success);
     Console.print('');
-    Console.print(
-      `${OUTPUT_MSG.finialState}${
-        success ? GAME_STATE.success : GAME_STATE.fail
-      }`
-    );
+    const finalState = success ? GAME_STATE.success : GAME_STATE.fail;
+    Console.print(`${OUTPUT_MSG.finialState}${finalState}`);
     Console.print(`${OUTPUT_MSG.totalTryCount}${tryCount}`);
     Console.close();
   }
