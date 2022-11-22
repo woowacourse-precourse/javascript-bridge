@@ -1,4 +1,5 @@
 const ERROR = require("./util/Error");
+const GameConfig = require("./util/GameConfig");
 
 const Validator = {
   isNotANumber(input) {

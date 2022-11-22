@@ -3,7 +3,8 @@ const OutputView = require("./view/OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const MissionUtils = require("@woowacourse/mission-utils");
+const Validator = require("./Validator");
+const GameConfig = require("./util/GameConfig");
 
 class App {
   #bridge;
