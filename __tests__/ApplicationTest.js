@@ -158,13 +158,23 @@ describe('플레이어 입력값의 유효성 검사', () => {
     });
   });
 
-  test('사용자가 이동할 칸이 이동할 수 있는 있는 칸인지 여부를 확인 ', () => {
+  test('사용자가 이동할 칸이 이동할 수 있는 있는 칸인지 여부를 확인', () => {
     mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'D', 'U']);
     const app = new App();
 
     app.play().then(() => {
       expect(app.game.move(0, 'U')).toEqual(true);
+    });
+  });
+
+  test('사용자가 게임을 진행할 수 있는지 위치값 확인', () => {
+    mockRandoms([1, 0, 1]);
+    mockQuestions(['3', 'U', 'D', 'U']);
+    const app = new App();
+
+    app.play().then(() => {
+      expect(app.isContinue()).toEqual(true);
     });
   });
 });
