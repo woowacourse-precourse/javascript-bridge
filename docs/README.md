@@ -50,6 +50,32 @@ Map{
 이동할때마다 currentPosition이 1씩 늘어나며 Stage가 바뀝니다.
 ```
 
+# 클래스 설명
+
+## 1. App.js : 시작 트리거를 날립니다.
+
+## 2. controller : 조작 기능을 담당합니다.
+
+- BridgeGameControl.js : 전체적인 조작을 담당합니다.
+
+- BridgeGame.js : 이동(move) 및 재시작(retry) 세부 기능을 담당합니다.
+
+## 3. model : 데이터 및 자료구조를 정의하거나 유효성 검증을 합니다.
+
+- BrigeSize.js : 입력받은 다리 길이에 대하여 validate를 수행합니다.
+
+- Moving.js : 입력받은 이동 명령어에 대하여 validate를 수행합니다.
+
+- GameCommand.js : 입력받은 재시작 및 종료 명령어에 대하여 validate를 수행합니다.
+- Map.js : 다리를 Object 로 나타냅니다. Object.1 은 첫번째 스테이지 인스턴스를 나타냅니다.
+- Stage.js : 각 단계를 인스턴스로 나타내며 Map Object의 value로 할당합니다.
+
+## 4. view : model 데이터에 입력하거나 데이터로 출력합니다.
+
+- InputView.js : 사용자 입력에 대한 기능입니다.
+
+- outputView.js : 출력에 대한 기능입니다.
+
 # 궁금한 것
 
 model 클래스는 사용자가 입력한 데이터를 그대로 가져와 내부에서 처리해야하는가? -> validate를 위해서. 그런데 3주차 lotto 클래스에서는 숫자로 받은 걸까?
