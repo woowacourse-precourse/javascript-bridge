@@ -81,7 +81,7 @@ describe('다리 건너기 테스트', () => {
     expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
   });
 
-  test('중간에 예외처리 하고 게임 끝까지', () => {
+  test('중간에 예외처리 하고 게임 끝까지 테스트', () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'A', 'U', 'D', 'U']);
@@ -97,6 +97,25 @@ describe('다리 건너기 테스트', () => {
       '[   | O |   ]',
       '게임 성공 여부: 성공',
       '총 시도한 횟수: 1',
+    ]);
+    expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
+  });
+
+  test('한번 실패 이후 재시작하고 끝까지 테스트', () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions(['3', 'D', 'R', 'U', 'D', 'U']);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      '최종 게임 결과',
+      '[ O |   | O ]',
+      '[   | O |   ]',
+      '게임 성공 여부: 성공',
+      '총 시도한 횟수: 2',
     ]);
     expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
   });
