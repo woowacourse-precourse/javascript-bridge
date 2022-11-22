@@ -30,4 +30,16 @@ describe("Validation 테스트", () => {
       Validator.checkValidMove(1);
     }).toThrow("[ERROR]");
   });
+
+  test("게임 재시작 여부 커멘드가 'R', 'Q'가 아니라면 예외 처리. - 다른 string", () => {
+    expect(() => {
+      Validator.checkValidRestart("A");
+    }).toThrow("[ERROR]");
+  });
+
+  test("게임 재시작 여부 커멘드가 'R', 'Q'가 아니라면 예외 처리. - 숫자", () => {
+    expect(() => {
+      Validator.checkValidRestart(1);
+    }).toThrow("[ERROR]");
+  });
 });
