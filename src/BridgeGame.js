@@ -2,14 +2,12 @@ const GameManager = require('./GameManager');
 const gameManager = new GameManager();
 const Bridge = require('./Bridge');
 const bridge = new Bridge();
-const { MOVE, RESULT } = require('./constants/constants');
+const { GAME, RESULT } = require('./constants/constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor() {}
-
   start() {
     gameManager.askBridgeSize(this.makeBridge);
   }
@@ -37,19 +35,19 @@ class BridgeGame {
 
   static keepGoing(userPosition) {
     if (BridgeGame.isUserCanGo(userPosition)) {
-      bridge.drawNowMap(MOVE.GO);
+      bridge.drawNowMap(GAME.GO);
       return gameManager.askWhereToGo(BridgeGame.move);
     }
-    bridge.drawNowMap(MOVE.FALL);
+    bridge.drawNowMap(GAME.FALL);
     return gameManager.askRetry(BridgeGame.retry);
   }
 
   static stopGoing(userPosition) {
     if (BridgeGame.isUserCanGo(userPosition)) {
-      bridge.drawNowMap(MOVE.GO);
-      return bridge.drawResultMap(MOVE.GO, RESULT.SUCCESS);
+      bridge.drawNowMap(GAME.GO);
+      return bridge.drawResultMap(GAME.GO, RESULT.SUCCESS);
     }
-    bridge.drawNowMap(MOVE.FALL);
+    bridge.drawNowMap(GAME.FALL);
     return gameManager.askRetry(BridgeGame.retry);
   }
 
@@ -63,10 +61,10 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   static retry(answer) {
-    if (answer === 'Q') {
-      bridge.drawResultMap(MOVE.FALL, RESULT.FAIL);
+    if (answer === GAME.QUIT) {
+      bridge.drawResultMap(GAME.FALL, RESULT.FAIL);
     }
-    if (answer === 'R') {
+    if (answer === GAME.RETRY) {
       bridge.resetStep();
       bridge.addRetrys();
       gameManager.askWhereToGo(BridgeGame.move);

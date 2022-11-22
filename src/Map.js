@@ -1,4 +1,5 @@
 const OutputView = require('./Views/OutputView');
+const { GAME } = require('./constants/constants');
 
 class Map {
   #originMap;
@@ -17,8 +18,8 @@ class Map {
   makeUpperBridge(bridge) {
     let upperBridge = [];
     for (let i = 0; i < bridge.length; i += 1) {
-      if (bridge[i] === 'U') upperBridge[i] = 'X';
-      if (bridge[i] === 'D') upperBridge[i] = 'O';
+      if (bridge[i] === GAME.UP) upperBridge[i] = GAME.FALL;
+      if (bridge[i] === GAME.DOWN) upperBridge[i] = GAME.GO;
     }
     return upperBridge;
   }
@@ -26,8 +27,8 @@ class Map {
   makeLowerBridge(bridge) {
     let lowerBridge = [];
     for (let i = 0; i < bridge.length; i += 1) {
-      if (bridge[i] === 'U') lowerBridge[i] = 'O';
-      if (bridge[i] === 'D') lowerBridge[i] = 'X';
+      if (bridge[i] === GAME.UP) lowerBridge[i] = GAME.GO;
+      if (bridge[i] === GAME.DOWN) lowerBridge[i] = GAME.FALL;
     }
     return lowerBridge;
   }
@@ -35,8 +36,8 @@ class Map {
   makeNowMap(go, step) {
     let nowMap = this.sliceMapFromZeroToNowStep(step);
     for (let k = 0; k < nowMap[0].length - 1; k += 1) {
-      if (nowMap[0][k] === 'X') nowMap[0][k] = ' ';
-      if (nowMap[1][k] === 'X') nowMap[1][k] = ' ';
+      if (nowMap[0][k] === GAME.FALL) nowMap[0][k] = ' ';
+      if (nowMap[1][k] === GAME.FALL) nowMap[1][k] = ' ';
     }
     nowMap = this.markUnpassedStep(nowMap, go, step);
     return nowMap;

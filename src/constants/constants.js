@@ -1,6 +1,10 @@
-const MOVE = {
+const GAME = {
   GO: 'O',
   FALL: 'X',
+  UP: 'U',
+  DOWN: 'D',
+  RETRY: 'R',
+  QUIT: 'Q',
 };
 
 const RESULT = {
@@ -8,4 +12,4 @@ const RESULT = {
   FAIL: '실패',
 };
 
-module.exports = { MOVE, RESULT };
+module.exports = { GAME, RESULT };
