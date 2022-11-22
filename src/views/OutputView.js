@@ -37,7 +37,6 @@ const OutputView = {
 
   printError(error) {
     Console.print(error.message);
-    Console.close();
   },
 
   printResult(bridgeGame) {

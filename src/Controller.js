@@ -25,7 +25,10 @@ class Controller {
   }
 
   handleMakingBridge(size) {
-    if (!this.validateBy(this.validator.checkBridgeSize, size)) return;
+    if (!this.validateBy(this.validator.checkBridgeSize, size)) {
+      this.askBridgeSize();
+      return;
+    }
 
     const bridge = this.bridgeMaker.makeBridge(size, this.bridgeRandomNumberGenerator.generate);
     this.bridgeGame.setBridge(bridge);
@@ -38,16 +41,22 @@ class Controller {
   }
 
   handleMoving(direction) {
-    if (!this.validateBy(this.validator.checkMoving, direction)) return;
+    if (!this.validateBy(this.validator.checkMoving, direction)) {
+      this.askMoveDirection();
+      return;
+    }
 
     this.bridgeGame.move(direction);
     this.outputView.printMap(this.bridgeGame.trials);
 
+    this.proceedByMovingResult();
+    return;
+  }
+
+  proceedByMovingResult() {
     if (this.bridgeGame.status === GAME_SIGNATURE.gameOn) this.askMoveDirection();
     else if (this.bridgeGame.status === GAME_SIGNATURE.gameFail) this.askGameCommand();
     else if (this.bridgeGame.status === GAME_SIGNATURE.gameSuccess) this.end();
-
-    return;
   }
 
   end() {
@@ -59,7 +68,10 @@ class Controller {
   }
 
   handleGameCommand(command) {
-    if (!this.validateBy(this.validator.checkGameCommand, command)) return;
+    if (!this.validateBy(this.validator.checkGameCommand, command)) {
+      this.askGameCommand();
+      return;
+    }
 
     if (command === 'Q') this.end();
     if (command === 'R') this.retry();
