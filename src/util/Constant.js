@@ -50,7 +50,7 @@ const ERROR = "[ERROR]";
 const ERROR_MESSAGE = Object.freeze({
   BRIDGE_SIZE: `${ERROR} 다리 길이는 ${BRIDGE_SIZE.MIN}부터 ${BRIDGE_SIZE.MAX} 사이의 숫자여야 합니다.`,
   MOVING_SPACE: `${ERROR} ${MOVING_SPACE.UP} 또는 ${MOVING_SPACE.DOWN} 만 입력할 수 있습니다.`,
-  RETRY_OR_QUIT: `${RETRY_OR_QUIT.RETRY} 또는 ${RETRY_OR_QUIT.QUIT} 만 입력할 수 있습니다.`,
+  RETRY_OR_QUIT: `${ERROR} ${RETRY_OR_QUIT.RETRY} 또는 ${RETRY_OR_QUIT.QUIT} 만 입력할 수 있습니다.`,
 });
 
 module.exports = {
