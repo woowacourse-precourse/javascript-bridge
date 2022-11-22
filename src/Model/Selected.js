@@ -1,20 +1,10 @@
 // @ts-checkts-check
-const { isRightLevelString } = require('../Utils/Validator/SelectedValidator');
-
 class Selected {
   /** @type {string[]}  */
   #selected;
 
   constructor() {
     this.#selected = [];
-  }
-
-  /**
-   *
-   * @param {string} input - "U" 또는 "D" 값을 input으로 받는다
-   */
-  static validate(input) {
-    isRightLevelString(input);
   }
 
   /**
@@ -29,7 +19,6 @@ class Selected {
    * @param {string} input - "U"또는 "D"를 input으로 받는다
    */
   addElement(input) {
-    this.constructor.validate(input);
     this.#selected.push(input);
   }
 

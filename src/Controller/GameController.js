@@ -26,10 +26,6 @@ class GameController {
     return input === RETRY_MESSAGE.RETRY;
   }
 
-  static validate(input) {
-    isRightRetryString(input);
-  }
-
   start() {
     InputView.readBridgeSize(this);
   }
@@ -72,7 +68,6 @@ class GameController {
       this.#game.retry();
       return InputView.readMoving(this);
     }
-    Console.print('');
     OutputView.printResult(this.#game.result, this.#game.isWin(), this.#game.tryNumber);
     return Console.close();
   }

@@ -25,16 +25,6 @@ class Bridge {
 
   /**
    *
-   * @param {number} number
-   */
-  static validate(number) {
-    isNumber(number);
-    isNaturalNumber(number);
-    isRightNumberRange(3, 20, number);
-  }
-
-  /**
-   *
    * @returns {number}
    */
   get length() {
@@ -56,7 +46,6 @@ class Bridge {
    * @returns {string[]}
    */
   #setBridge(number) {
-    this.constructor.validate(number);
     return makeBridge(number, this.#generator);
   }
 }

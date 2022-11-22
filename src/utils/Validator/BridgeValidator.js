@@ -1,10 +1,10 @@
-const { ERROR_MESSAGE } = require('../Constant');
+const { ERROR_MESSAGE, BRIDGE_ELEMENT } = require('../Constant');
 
 const BridgeValidator = {
   validator(number) {
     this.isNumber(number);
     this.isNaturalNumber(number);
-    this.isRightNumberRange(number);
+    this.isRightNumberRange(BRIDGE_ELEMENT.LENGTH_MINIMUM, BRIDGE_ELEMENT.LENGTH_MAXIMUM, number);
   },
 
   /**
