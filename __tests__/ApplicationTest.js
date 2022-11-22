@@ -137,4 +137,71 @@ describe("다리 건너기 테스트", () => {
     ]);
     expectBridgeOrder(log, "[ O |   | O |   | O |   | O ]", "[   | O |   | O |   | O |   ]");
   });
+
+  test("에러 메시지 출력 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1]);
+    mockQuestions(["21", "3", "U", "U", "A", "R", "U", "D", "B", "U"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "다리 건너기 게임을 시작합니다.",
+      "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
+      "[ O ]",
+      "[   ]",
+      "[ O | X ]",
+      "[   |   ]",
+      "[ERROR] R(재시작) 또는 Q(종료)를 입력해 주세요.",
+      "[ O ]",
+      "[   ]",
+      "[ O |   ]",
+      "[   | O ]",
+      "[ERROR] 이동할 칸은 U 또는 D로 입력해 주세요.",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "최종 게임 결과",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+  });
+
+  test("기능 테스트2", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 1, 0]);
+    mockQuestions(["5", "U", "D", "U", "D", "R", "U", "D", "D", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "다리 건너기 게임을 시작합니다.",
+      "[ O ]",
+      "[   ]",
+      "[ O |   ]",
+      "[   | O ]",
+      "[ O |   | O ]",
+      "[   | O |   ]",
+      "[ O |   | O |   ]",
+      "[   | O |   | X ]",
+      "[ O ]",
+      "[   ]",
+      "[ O |   ]",
+      "[   | O ]",
+      "[ O |   |   ]",
+      "[   | O | X ]",
+      "최종 게임 결과",
+      "[ O |   |   ]",
+      "[   | O | X ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   |   ]", "[   | O | X ]");
+  });
 });
