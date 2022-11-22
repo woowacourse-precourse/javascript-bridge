@@ -38,7 +38,8 @@ const InputView = {
       catchError(Validate.upOrDown, movement);
 
       const moveResult = game.move(movement);
-      OutputView.printMap(game.getMap());
+      const { map } = game.getResult();
+      OutputView.printMap(map);
       InputView.readMoveResult(moveResult);
     });
   },
@@ -46,13 +47,14 @@ const InputView = {
    * 사용자가 이동한 결과 값을 받는다.
    */
   readMoveResult(moveResult) {
+    const { map, tryNumber } = game.getResult();
     switch (moveResult) {
       case Constants.Result.SUCCESS:
         return InputView.readMoving();
       case Constants.Result.FAIL:
         return InputView.readGameCommand();
       case Constants.Result.DONE:
-        return OutputView.printResult(game.getMap(), game.getTry(), '성공');
+        return OutputView.printResult(map, tryNumber, '성공');
     }
   },
 
@@ -71,12 +73,13 @@ const InputView = {
   },
 
   readCommand(command) {
+    const { map, tryNumber } = game.getResult();
     switch (command) {
       case 'R':
         game.retry();
         return InputView.readMoving();
       case 'Q':
-        return OutputView.printResult(game.getMap(), game.getTry(), '실패');
+        return OutputView.printResult(map, tryNumber, '실패');
     }
   },
 };

@@ -12,10 +12,12 @@ const Constants = require('./Constants');
 class BridgeGame {
   #bridge = [];
   #process = 0;
-  #try = 1;
-  #map = {
-    U: [],
-    D: [],
+  #result = {
+    tryNumber: 1,
+    map: {
+      U: [],
+      D: [],
+    },
   };
 
   constructor(bridge) {
@@ -23,44 +25,40 @@ class BridgeGame {
   }
 
   move(movement) {
-    const result =
+    const moveResult =
       this.#bridge[this.#process] === movement ? Constants.Result.SUCCESS : Constants.Result.FAIL;
-    this.addMap(movement, result);
+    this.addMap(movement, moveResult);
     this.#process++;
 
     if (this.#process === this.#bridge.length) {
-      return result === Constants.Result.FAIL ? result : Constants.Result.DONE;
+      return moveResult === Constants.Result.FAIL ? moveResult : Constants.Result.DONE;
     }
-    return result;
+    return moveResult;
   }
 
   retry() {
     this.#process = 0;
-    this.#map = {
+    this.#result.map = {
       U: [],
       D: [],
     };
-    this.#try++;
+    this.#result.tryNumber++;
   }
 
-  addMap(movement, result) {
-    const sign = result === Constants.Result.SUCCESS ? 'O' : 'X';
+  addMap(movement, moveResult) {
+    const sign = moveResult === Constants.Result.SUCCESS ? 'O' : 'X';
+    this.#result.map[movement].push(sign);
+
     if (movement === 'U') {
-      this.#map['U'].push(sign);
-      this.#map['D'].push(' ');
+      this.#result.map['D'].push(' ');
     }
     if (movement === 'D') {
-      this.#map['U'].push(' ');
-      this.#map['D'].push(sign);
+      this.#result.map['U'].push(' ');
     }
   }
 
-  getTry() {
-    return this.#try;
-  }
-
-  getMap() {
-    return this.#map;
+  getResult() {
+    return this.#result;
   }
 }
 
