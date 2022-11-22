@@ -6,21 +6,21 @@ class BridgeResult {
   #bridgeSize;
   #bridgeMap;
 
-  constructor(bridgeSize) {
+  constructor(bridgeSize){
     this.#isSuccess = false;
     this.#tryCount = 1;
     this.#bridgeSize = bridgeSize;
   }
 
-  save(bridgeMap) {
+  save(bridgeMap){
     this.#bridgeMap = bridgeMap;
   }
 
-  addTryCount() {
+  addTryCount(){
     this.#tryCount += 1;
   }
 
-  checkSuccess() {
+  checkSuccess(){
     this.#isSuccess =
       this.#bridgeMap[BRIDGE.up].length === this.#bridgeSize &&
       !this.#bridgeMap[BRIDGE.up].some((element) => element === BRIDGE.wrong) &&
@@ -29,11 +29,11 @@ class BridgeResult {
     return false;
   }
 
-  getResult() {
+  getResult(){
     const bridgeMap = Object.freeze(this.#bridgeMap);
     const isSuccess = this.#isSuccess;
     const tryCount = this.#tryCount;
-    return { bridgeMap, isSuccess, tryCount };
+    return {bridgeMap, isSuccess, tryCount};
   }
 }
 

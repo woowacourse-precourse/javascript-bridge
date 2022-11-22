@@ -2,13 +2,12 @@ const {BRIDGE} = require('./Constant');
 
 class Bridge {
   #pattern;
-
-  constructor(pattern) {
+  constructor(pattern){
     this.validate(pattern.length, pattern);
     this.#pattern = pattern;
   }
 
-  validate(size, pattern) {
+  validate(size, pattern){
     const isValideSize = BRIDGE.minSize <= size && size <= BRIDGE.maxSize;
     const isValidePattern = pattern.every(
       (element) => element === BRIDGE.up || element === BRIDGE.down,
@@ -18,8 +17,8 @@ class Bridge {
     throw new Error(BRIDGE.createError);
   }
 
-  match(playerMovings) {
-    const bridgeMap = { U: [], D: [] };
+  match(playerMovings){
+    const bridgeMap = {U: [], D: []};
     let checking;
     for (let idx = 0; idx < playerMovings.length; idx++) {
       const moving = playerMovings[idx];
@@ -28,7 +27,7 @@ class Bridge {
       bridgeMap[moving].push(checking);
       bridgeMap[notMoving].push(' ');
     }
-    return { bridgeMap, checking };
+    return {bridgeMap, checking};
   }
 }
 

@@ -4,20 +4,20 @@ const OutputView = require('./OutputView');
 const InputValidator = require('./InputValidator');
 const {BRIDGE, GAME} = require('./Constant');
 
-class BridgeGameController {
+class BridgeGameController{
   #bridgeGame = new BridgeGame();
 
-  start() {
+  start(){
     OutputView.printStart();
     this.readBridgeSize();
   }
 
-  readBridgeSize() {
+  readBridgeSize(){
     const onReadBridgeSize = (bridgeSize) => {
-      try {
+      try{
         InputValidator.isValidBridgeSize(bridgeSize);
         this.createBridge(parseInt(bridgeSize));
-      } catch (err) {
+      } catch (err){
         OutputView.printError(err.message);
         this.readBridgeSize();
       }
@@ -25,12 +25,12 @@ class BridgeGameController {
     InputView.readBridgeSize(onReadBridgeSize);
   }
 
-  createBridge(bridgeSize) {
+  createBridge(bridgeSize){
     this.#bridgeGame.createBridge(bridgeSize);
     this.readMoving();
   }
 
-  readMoving() {
+  readMoving(){
     const onReadMoving = (moving) => {
       try {
         InputValidator.isValidMoving(moving);
@@ -43,29 +43,29 @@ class BridgeGameController {
     InputView.readMoving(onReadMoving);
   }
 
-  move(moving) {
+  move(moving){
     const { bridgeMap, isSuccess, checking } = this.#bridgeGame.move(moving);
     this.printMap({ bridgeMap, isSuccess, checking });
   }
 
-  printMap({ bridgeMap, isSuccess, checking }) {
+  printMap({bridgeMap, isSuccess, checking}) {
     OutputView.printMap(bridgeMap);
-    this.checkNextStep({ isSuccess, checking });
+    this.checkNextStep({isSuccess, checking});
   }
 
-  checkNextStep({ isSuccess, checking }) {
+  checkNextStep({isSuccess, checking}) {
     if (isSuccess) return this.quit();
     const isRight = checking === BRIDGE.right;
     if (isRight) return this.readMoving();
     this.readGameCommand();
   }
 
-  readGameCommand() {
+  readGameCommand(){
     const onReadGameCommand = (gameCommand) => {
       try {
         InputValidator.isValidGameCommand(gameCommand);
         this.excuteGameCommand(gameCommand);
-      } catch (err) {
+      } catch(err){
         OutputView.printError(err.message);
         this.readGameCommand();
       }
@@ -73,18 +73,18 @@ class BridgeGameController {
     InputView.readGameCommand(onReadGameCommand);
   }
 
-  excuteGameCommand(gameCommand) {
+  excuteGameCommand(gameCommand){
     const isRetry = gameCommand === GAME.retry;
-    if (isRetry) {
+    if(isRetry){
       this.#bridgeGame.retry();
       return this.readMoving();
     }
     return this.quit();
   }
 
-  quit() {
-    const { bridgeMap, isSuccess, tryCount } = this.#bridgeGame.quit();
-    OutputView.printResult({ bridgeMap, isSuccess, tryCount });
+  quit(){
+    const {bridgeMap, isSuccess, tryCount} = this.#bridgeGame.quit();
+    OutputView.printResult({bridgeMap, isSuccess, tryCount});
   }
 }
 
