@@ -17,8 +17,12 @@
 
 - App : 아래 4개 클래스를 사용하여 게임 진행
 - BridgeGame : Bridge Game 관리
-  - 사용자 이동
-  - 재 실행
+  - move : 사용자 입력까지 확인
+  - retry : 게임 재실행
+  - setBridge : bridge 생성하여 관리
+  - getCount : count 반환
+  - pushInput : 사용자 입력 관리
+  - makeMap : 사용자 입력 결과 반환
 - BridgeMaker : Bridge 생성
   - BridgeRandomNumberGenerator 객체 사용해서 다리 위치 선택
 - InputView : 사용자 입력 받기
