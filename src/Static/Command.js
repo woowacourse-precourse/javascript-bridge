@@ -3,4 +3,8 @@ const PLAY_COMMAND = Object.freeze({
   down: 'D',
 });
 
-module.exports = PLAY_COMMAND;
+const GAME_COMMAND = Object.freeze({
+  restart: 'R',
+  quit: 'Q',
+});
+module.exports = { PLAY_COMMAND, GAME_COMMAND };

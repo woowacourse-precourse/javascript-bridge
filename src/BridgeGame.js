@@ -1,5 +1,5 @@
 const BridgeBoard = require('./BridgeBoard');
-const PLAY_COMMAND = require('./Static/Command');
+const { PLAY_COMMAND, GAME_COMMAND } = require('./Static/Command');
 const Validation = require('./Validations');
 const ERROR = require('./Static/Error');
 
@@ -25,6 +25,7 @@ class BridgeGame {
    */
   move(direction) {
     try {
+      console.log(PLAY_COMMAND, GAME_COMMAND);
       Validation.validateCommand(
         [PLAY_COMMAND.up, PLAY_COMMAND.down],
         ERROR.notPlayCommand,
@@ -32,11 +33,7 @@ class BridgeGame {
       );
       this.decideSuccess(direction);
     } catch (error) {
-      this.#bridgeController.printError(
-        error,
-        this.#bridgeController.moveBlock,
-        this,
-      );
+      this.#bridgeController.printError(error, this.#bridgeController.moveBlock, this);
     }
   }
   decideSuccess(direction) {
@@ -61,10 +58,7 @@ class BridgeGame {
   }
 
   printFinalRound() {
-    this.#bridgeController.moveFinalRound(
-      this.#attempt,
-      this.#bridgeBoard.getClearedBridge(),
-    );
+    this.#bridgeController.moveFinalRound(this.#attempt, this.#bridgeBoard.getClearedBridge());
   }
 
   faildRound(direction) {
@@ -78,18 +72,18 @@ class BridgeGame {
 
   setGameCommand(command) {
     try {
-      Validation.validateCommand(['R', 'Q'], ERROR.notGameCommand, command);
-      if (command === 'Q') {
+      Validation.validateCommand(
+        [GAME_COMMAND.restart, GAME_COMMAND.quit],
+        ERROR.notGameCommand,
+        command,
+      );
+      if (command === GAME_COMMAND.quit) {
         this.#bridgeController.close();
       } else {
         this.retry();
       }
     } catch (error) {
-      this.#bridgeController.printError(
-        error,
-        this.#bridgeController.readGameCommand,
-        this,
-      );
+      this.#bridgeController.printError(error, this.#bridgeController.readGameCommand, this);
     }
   }
   /**
@@ -110,11 +104,7 @@ class BridgeGame {
       this.#bridgeBoard.makeBoard(size);
       this.#bridgeController.moveBlock(this);
     } catch (error) {
-      this.#bridgeController.printError(
-        error,
-        this.#bridgeController.readSize,
-        this,
-      );
+      this.#bridgeController.printError(error, this.#bridgeController.readSize, this);
     }
   }
 
