@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Console = MissionUtils.Console;
+const Validator = require('../utils/Validator');
 const { GAME_MESSAGE } = require('../utils/constants');
 
 /**
@@ -19,7 +20,14 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(GAME_MESSAGE.CHOOSE),
+      answer => {
+        if (Validator.isValidDirection(answer)) {
+          return answer;
+        }
+      };
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
