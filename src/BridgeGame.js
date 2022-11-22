@@ -14,26 +14,23 @@ const INITIAL_BRIDGE_SIZE = {
 class BridgeGame {
   bridgeStore;
 
-  moveCount;
+  #moveCount;
 
-  tryCount = 1;
-
-  // TODO: 메세지들 많아짐, 정리
   constructor(bridgeSize = INITIAL_BRIDGE_SIZE) {
     this.bridgeValidator = new BridgeValidator({ bridgeSize });
-    this.moveCount = 0;
+    this.#moveCount = 0;
   }
 
   #increaseMoveCount = () => {
-    this.moveCount += 1;
+    this.#moveCount += 1;
   };
 
   #resetMoveCount = () => {
-    this.moveCount = 0;
+    this.#moveCount = 0;
   };
 
   #detectIsMovable = (command) => {
-    if (!this.bridgeStore.isMovable(this.moveCount, command)) {
+    if (!this.bridgeStore.isMovable(this.#moveCount, command)) {
       this.#resetMoveCount();
       return false;
     }
@@ -58,7 +55,7 @@ class BridgeGame {
     return true;
   }
 
-  isBiggerThanMoveCount = (number) => number > this.moveCount;
+  isBiggerThanMoveCount = (number) => number > this.#moveCount;
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -78,7 +75,7 @@ class BridgeGame {
 
   #setMovedData = (command) => {
     this.bridgeStore.addUserInputResult(
-      { command, result: this.bridgeStore.isMovable(this.moveCount, command) },
+      { command, result: this.bridgeStore.isMovable(this.#moveCount, command) },
     );
   };
 
