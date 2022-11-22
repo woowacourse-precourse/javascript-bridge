@@ -115,4 +115,17 @@ describe("다리 건너기 테스트2", () => {
     ]);
     expectBridgeOrder(log, "[ O ]", "[   ]");
   });
+
+  test("재 게임 잘못된 입력 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 1, 0]);
+    mockQuestions(["5", "D", "A"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, ["[ERROR]"]);
+    expectBridgeOrder(log, "[ O ]", "[   ]");
+  });
 });
