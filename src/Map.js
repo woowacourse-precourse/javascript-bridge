@@ -13,13 +13,14 @@ class Map {
     bridgeMap[0] = this.makeUpperBridge(bridge);
     bridgeMap[1] = this.makeLowerBridge(bridge);
     this.#originMap = bridgeMap;
+    return bridgeMap;
   }
 
   makeUpperBridge(bridge) {
     let upperBridge = [];
     for (let i = 0; i < bridge.length; i += 1) {
-      if (bridge[i] === GAME.UP) upperBridge[i] = GAME.FALL;
-      if (bridge[i] === GAME.DOWN) upperBridge[i] = GAME.GO;
+      if (bridge[i] === GAME.UP) upperBridge[i] = GAME.GO;
+      if (bridge[i] === GAME.DOWN) upperBridge[i] = GAME.FALL;
     }
     return upperBridge;
   }
@@ -27,8 +28,8 @@ class Map {
   makeLowerBridge(bridge) {
     let lowerBridge = [];
     for (let i = 0; i < bridge.length; i += 1) {
-      if (bridge[i] === GAME.UP) lowerBridge[i] = GAME.GO;
-      if (bridge[i] === GAME.DOWN) lowerBridge[i] = GAME.FALL;
+      if (bridge[i] === GAME.UP) lowerBridge[i] = GAME.FALL;
+      if (bridge[i] === GAME.DOWN) lowerBridge[i] = GAME.GO;
     }
     return lowerBridge;
   }
