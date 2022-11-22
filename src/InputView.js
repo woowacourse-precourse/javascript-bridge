@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { INPUT } = require("./constants/messages");
-const { Errors } = require("./Errors");
+const { Validations } = require("./Validations");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -13,8 +13,8 @@ const InputView = {
   readBridgeSize(continueGame) {
     Console.readLine(INPUT.BRIDGE_SIZE, (size) => {
       try {
-        Errors.validateSizeIsNumber(size);
-        Errors.validateSizeINRange(size);
+        Validations.validateSizeIsNumber(size);
+        Validations.validateSizeINRange(size);
         continueGame(size);
       } catch (e) {
         Console.print(e);
@@ -28,7 +28,7 @@ const InputView = {
   readMoving(continueGame) {
     Console.readLine(INPUT.MOVE_DIRECTION, (answer) => {
       try {
-        Errors.validateUserDirection(answer);
+        Validations.validateUserDirection(answer);
         continueGame(answer);
       } catch (e) {
         Console.print(e);
@@ -43,7 +43,7 @@ const InputView = {
   readGameCommand(continueGame) {
     Console.readLine(INPUT.RETRY, (answer) => {
       try {
-        Errors.validateRetryCorrect(answer);
+        Validations.validateRetryCorrect(answer);
         continueGame(answer);
       } catch (e) {
         Console.print(e);

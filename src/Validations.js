@@ -1,6 +1,6 @@
 const { INPUT_VALUE } = require("./constants/values");
 
-const Errors = {
+const Validations = {
   validateSizeIsNumber(size) {
     if (isNaN(size)) {
       throw Error("[ERROR] 숫자를 입력해주세요");
@@ -23,4 +23,4 @@ const Errors = {
   },
 };
 
-module.exports = { Errors };
+module.exports = { Validations };
