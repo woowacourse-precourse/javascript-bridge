@@ -11,11 +11,11 @@ const OutputView = {
   printMap({ bridge, positon, trace }) {
       ['U', 'D'].forEach(order =>
           print(
-              `[${bridge
-                  .map((answer, index) => {
+              `[${trace
+                  .map((curTrace, index) => {
                       if (index <= positon) {
-                          if (trace[index] === order) {
-                              if (answer === trace[index]) return ' O ';
+                          if (curTrace === order) {
+                              if (bridge[index] === curTrace) return ' O ';
                               else return ' X ';
                           }
                       }
