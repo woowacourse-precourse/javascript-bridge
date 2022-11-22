@@ -1,18 +1,16 @@
-const { Console } = require("@woowacourse/mission-utils");
-const { STRUCTURE, MESSAGE, KEY } = require("./constant/message.js");
-const { printMap, printResult } = require("./OutputView");
+const { STRUCTURE, KEY } = require("./constant/message.js");
 
 class BridgeGame {
     #bridgeArray;
     #moveCount;
     #gameCount;
-    #bridgeHistory;
+    #trace;
 
     constructor(bridgeArray) {
         this.#bridgeArray = bridgeArray;
         this.#moveCount = 0;
         this.#gameCount = 1;
-        this.#bridgeHistory = [];
+        this.#trace = [];
     }
 
     move(move) {
@@ -20,12 +18,11 @@ class BridgeGame {
         return move === KEY.UP;
     }
 
-    pushBridgeHistory(isKeyUp, structureStatus) {
+    pushBridgeTrace(isKeyUp, structureState) {
         if (isKeyUp) {
-            return this.#bridgeHistory.push([structureStatus, STRUCTURE.BLANK]);
-        }
-        if (!isKeyUp) {
-            return this.#bridgeHistory.push([STRUCTURE.BLANK, structureStatus]);
+            return this.#trace.push([structureState, STRUCTURE.BLANK]);
+        } else {
+            return this.#trace.push([STRUCTURE.BLANK, structureState]);
         }
     }
 
@@ -44,12 +41,11 @@ class BridgeGame {
             this.resetBridgeSetting();
             return true;
         }
-        return false;
     }
 
     resetBridgeSetting() {
         this.#moveCount = 0;
-        this.#bridgeHistory = [];
+        this.#trace = [];
         this.#gameCount++;
     }
 
@@ -57,18 +53,18 @@ class BridgeGame {
         return this.#bridgeArray;
     }
 
-    getBridgeHistory() {
-        return this.#bridgeHistory;
+    getBridgeTrace() {
+        return this.#trace;
     }
 
     getGameCount() {
         return this.#gameCount;
     }
 
-    makeBridgeHistoryForPrint() {
-        const upBridgeHistory = this.#bridgeHistory.map((bridge) => bridge[0]).join(STRUCTURE.LINK);
-        const downBridgeHistory = this.#bridgeHistory.map((bridge) => bridge[1]).join(STRUCTURE.LINK);
-        return [upBridgeHistory, downBridgeHistory];
+    makeBridgeTraceForPrint() {
+        const upBridgeTrace = this.#trace.map((bridge) => bridge[0]).join(STRUCTURE.LINK);
+        const downBridgeTrace = this.#trace.map((bridge) => bridge[1]).join(STRUCTURE.LINK);
+        return [upBridgeTrace, downBridgeTrace];
     }
 }
 module.exports = BridgeGame;

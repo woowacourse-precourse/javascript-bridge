@@ -45,18 +45,18 @@ const InputView = {
     },
 
     fail(bridgeGame, isKeyUp) {
-        bridgeGame.pushBridgeHistory(isKeyUp, STRUCTURE.BAD);
+        bridgeGame.pushBridgeTrace(isKeyUp, STRUCTURE.BAD);
         printMap(bridgeGame);
         this.readGameCommand(bridgeGame);
     },
 
     clear(bridgeGame, isKeyUp) {
-        bridgeGame.pushBridgeHistory(isKeyUp, STRUCTURE.GOOD);
+        bridgeGame.pushBridgeTrace(isKeyUp, STRUCTURE.GOOD);
         printResult(bridgeGame, MESSAGE.SUCCESS);
     },
 
     goodMove(bridgeGame, isKeyUp) {
-        bridgeGame.pushBridgeHistory(isKeyUp, STRUCTURE.GOOD);
+        bridgeGame.pushBridgeTrace(isKeyUp, STRUCTURE.GOOD);
         printMap(bridgeGame);
         this.readMoving(bridgeGame);
     },
@@ -65,7 +65,7 @@ const InputView = {
         if (bridgeGame.questionRetry(answer)) {
             return this.readMoving(bridgeGame);
         }
-        printResult(bridgeGame, MESSAGE.SUCCESS);
+        printResult(bridgeGame, MESSAGE.FAIL);
     },
 };
 
