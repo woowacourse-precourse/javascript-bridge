@@ -16,12 +16,12 @@ const InputView = {
     Console.readLine(INPUT_MESSAGE.retry, (command) => callback(game, command));
   },
 
-  repeatReadCommand(game, callback) {
-    InputView.readGameCommand(game, callback);
-  },
-
   repeatReadMoving(game, callback) {
     InputView.readMoving(game, callback);
+  },
+
+  repeatReadCommand(game, callback) {
+    InputView.readGameCommand(game, callback);
   },
 };
 
