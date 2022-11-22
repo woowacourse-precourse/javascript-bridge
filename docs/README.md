@@ -22,6 +22,7 @@
       * 선택 결과 true, false를 리턴
     - 리턴 값이 true이면 계속 진행, false이면 break;
       * state에 true/false 값 계속 저장
+      * printMap() / OutputView.js을 통해 현재 이동 상태 출력
  4. output()
     - state == false -> 5.reset()으로 이동
       * up,down이 들어있는 다리 배열 넘김

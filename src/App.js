@@ -37,9 +37,19 @@ class App {
     this.output(bridgeGame.setBridge);
   }
   output(setBridge){
-    if(this.state == false) //재시도 여부 시작
+    if(this.state == false) this.reset(setBridge); //재시도 여부 시작
     //OutputView - > printResult();
     printResult(setBridge, this.count, this.state);
+  }
+  reset(setBridge){
+    let choice = readGameCommand();
+    switch(true){
+      case choice == "R":
+        break;
+      case choice == "Q":
+        printResult(setBridge, this.count, this.state);
+        break;
+    }
   }
 
 }

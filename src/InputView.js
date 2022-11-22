@@ -36,6 +36,22 @@ const InputView = {
     });
     return move;
   },
+  /**
+   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   */
+   readGameCommand() {
+    let game;
+    Consolee.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q) \n", (games) => {
+      try{
+        gameCommandValidate(games);
+      }catch(err){
+        return InputView.readGameCommand();
+      }
+      game = games;
+    });
+    return game;
+  },
+
 
 };
 
