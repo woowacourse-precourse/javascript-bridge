@@ -26,19 +26,36 @@
 	[x] readMoving 구현
 	[x] readGameCommand 구현
 
-[ ] OutputView.js 구현
-	[ ] printMap 구현
-	[ ] printResult 구현
+[x] OutputView.js 구현
+	[x] printMap 구현
+	[x] printResult 구현
+	[x] startGame 구현
+	[x] printError 구현
 
-[ ] Constants.js 구현
+[x] Constants.js 구현
 	[x] MESSAGE 구현
 	[x] PAD 구현
 	[x] COMMAND 구현
+	[x] ERROR 구현
+	[x] BRIDGE 구현
 
-[ ] Validation.js 구현
-	[ ] isValidBridgeSize 구현
-	[ ] isValidMoving 구현
-	[ ] isValidGameCommand 구현
+[x] Validation.js 구현
+	[x] isValidBridgeSize 구현
+	[x] isValidMoving 구현
+	[x] isValidGameCommand 구현
+
+[x] App.js 구현
+	[x] readBridgeSize 구현
+    [x] bridgeGame 객체를 생성하는 부분
+	[x] readMoving 구현 : 이동하는 칸을 사용자에게 받아 오는 부분
+	[x] toMove 구현 : 실제로 칸을 이동하는 부분
+		[x] isCorrectPad 구현
+	[x] readGameCommand 구현 : 게임을 이어서 할지 말지 사용자에게 받아 오는 부분
+	[x] printResult 구현 : 결과를 출력하는 부분
+	[x] retry 구현
+		[x] 다시 시작하면 readMoving 호출
+		[x] 아니면 printResult 호출
+
 
 ## 기능 구현 방향
 
@@ -50,11 +67,11 @@
 
 우선 가장 쉬운 InputView를 구현한 뒤에 이미 구현된 BridgeRandomNumberGenerator를 사용하게될 BridgeMaker를 구현해야겠다.
 
-메시지들을 상수화 하기로 결정하고 Constants.js 파일을 만들었음
+메시지들을 상수화 하기로 결정하고 Constants.js 파일을 만들었다.
 
-InputView와 OutputView간에 의존성을 없애기 위해 유효성 검사는 App에서 진행하기로 하였음
+InputView와 OutputView간에 의존성을 없애기 위해 유효성 검사는 App에서 진행하기로 하였다.
 
-문제는 BridgeGame을 어떻게 구현하는 것인가 인데 생각하기 어려우니 잘게 쪼개서 생각해보도록 함
+문제는 BridgeGame을 어떻게 구현하는 것인가 인데 생각하기 어려우니 잘게 쪼개서 생각해보도록 했다.
 
 * 우선 위인지 아래인지 입력을 받는다 -> 이건 inputView에서 진행
 * 입력을 받으면 해당 부분을 저장한다 -> move함수에 인자로 'U', 'D'를 받도록 하자
@@ -69,4 +86,26 @@ InputView와 OutputView간에 의존성을 없애기 위해 유효성 검사는 
 * BridgeGame이 다리 건너기 게임을 관리하는 클래스 이므로, 정답 다리 정보도 갖고 있는 것이 좋겠다
 * 그럼 constructor를 추가해서 아예 여기서 다리를 생성하도록 하자 -> 그럼 contructor에 인자로 다리의 길이를 받자
 * 가는 길이 틀려서 retry하게 되면 현재 기록을 지우고 시도한 회수를 1 추가하는 것으로 하자
+
+이번에는 지난주와는 다르게 주어진 구조가 있어서 이대로 사용하는 것이 좋겠다 판단하였다.(현재 작업을 마친 결과 그렇지 않았고 더 잘게 쪼갤 수 있었는데 틀에 갇혀 그러지 못했음) 그리하여 주어진 BridgeGame, BridgeMaker 등에서 요구하는 만큼만 구현한 뒤에 App에서 합치면서 View를 완성해 나갔다.
+
+그리고 이번에는 지난주와 조금 달랐다고 느꼈던 것이 UI부분을 완전히 분리한 것이었는데 이렇게 되니 메소드나 변수명을 겹쳐 사용하는 경우가 많이 발생해서 곤혹스러웠다. 평가가 끝나고 나서 리팩토링을 해봐야 겠다.
+
+중간에 아래와 같은 이슈가 있어서 답답했지만 TV에서 보던 것을 이렇게 구현해 보니 재미있었다.
+
+
+
+## 가장 시간을 많이 쏟은 부분
+
+가장 시간을 많이 쏟은 부분은 입력이 잘못 되었을 경우 `try ... catch` 로 잡아서 다시 실행하는 것이었다 
+
+중간중간 잘 되나 확인하기 위해서 테스트를 돌렸지만 내 코드는 무한 루프에 빠져 버려 테스트가 끝나는데만 5분씩 걸려버렸다. 게다가 출력 값이 콘솔창을 도배해버려 어디가 원인인지도 찾기 어려웠다.
+
+디버깅을 하는 과정은 의외로 간단했는데 재귀로 호출하는 부분을 잠시 주석처리하면 되었었다. 그래서 과제는 완료할 수 있었지만...
+
+테스트 코드에서 끝까지 값이 주어지지 않고 중간까지만 주어진 경우에도 해당 문제가 똑같이 발생하였다. `readline`함수가 입력값이 들어올 때까지 기다리는 것이 아니라 무한 반복하기 때문에 발생한 일이라고 생각하고 유효성 검사시에 공백값이 들어오면 `throw`하지 않게 처리해버렸다.
+
+좀 더 일찍 시작했더라면 이것을 수정할 시간이 있었을텐데 아쉽다.
+
+완전히 원인을 해결하진 못하겠지만 변수를 하나 추가하여 같은 에러가 반복되었을 때(내가 생각하기에는 3회 정도) "3회 연속 아무것도 입력되지 않았습니다"라는 메시지를 출력하는 것이 내가 생각해본 해결 방안이다.
 
