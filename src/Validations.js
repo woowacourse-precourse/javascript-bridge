@@ -1,9 +1,9 @@
 const {
-  ERROR_BRIDGE_MESSAGE,
   BRIDGE_RANGE,
-  SHORT_CUT,
+  ERROR_BRIDGE_MESSAGE,
   ERROR_PLAYING_MESSAGE,
   ERROR_RETRY_MESSAGE,
+  SHORT_CUT,
 } = require('./constants');
 
 const Validations = {

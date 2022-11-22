@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const { SHORT_CUT, GAME_STRING, NUMBER, GAME_RESULT } = require('./constants');
+const { GAME_RESULT, GAME_STRING, SHORT_CUT, NUMBER } = require('./constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
