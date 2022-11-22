@@ -6,15 +6,21 @@ const { PRINT_MESSAGE, BRIDGE_INFO } = require('../constant/Message');
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+  printNewLine() {
+    Console.print(' ');
+  },
+
   /**
    * 개임 시작 문구
    */
   printStart() {
     Console.print(PRINT_MESSAGE.STARTGAME);
+    this.printNewLine();
   },
 
   printError(errorMessage) {
     Console.print(errorMessage);
+    this.printNewLine();
   },
 
   /**
@@ -43,6 +49,7 @@ const OutputView = {
   printResult(sucess, tryCount, match) {
     Console.print(PRINT_MESSAGE.TOTALRESULT);
     this.printMap(match);
+    this.printNewLine();
     Console.print(PRINT_MESSAGE.JUDGESUCESS(sucess));
     Console.print(PRINT_MESSAGE.TOTALTRY(tryCount));
     Console.close();

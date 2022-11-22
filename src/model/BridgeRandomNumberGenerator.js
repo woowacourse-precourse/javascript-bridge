@@ -1,5 +1,4 @@
-const { UTILS_URL } = require('../constant/Key');
-const MissionUtils = require(UTILS_URL);
+const MissionUtils = require("@woowacourse/mission-utils");
 
 const BridgeRandomNumberGenerator = {
   RANDOM_LOWER_INCLUSIVE: 0,
