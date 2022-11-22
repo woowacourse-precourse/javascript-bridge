@@ -12,12 +12,18 @@ class BridgeGame {
     this.#bridge = BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate);
   }
 
-  move(upOrDown) {
-    this.moveLogs.push(upOrDown);
+  move(direction) {
+    this.moveLogs.push(direction);
   }
 
   walkable() {
     return this.moveLogs[this.moveLogs.length - 1] === this.#bridge[this.moveLogs.length - 1];
+  }
+
+  currentUserMoveMap() {
+    const notConvertMap = this.makeUserMoveMap(this.moveLogs, this.#bridge);
+    const convert = this.bridgeToString(notConvertMap);
+    return convert;
   }
 
   makeUserMoveMap(movelogs, bridge) {
@@ -34,10 +40,10 @@ class BridgeGame {
   }
 
   bridgeToString(bridge) {
-    const convertedBridge = bridge.map((upOrDown) => {
-      return '[' + upOrDown.join('|') + ']';
+    const notConvertBridge = bridge.map((bridgeSide) => {
+      return '[ ' + bridgeSide.join(' | ') + ' ]';
     });
-    return convertedBridge;
+    return notConvertBridge;
   }
 
   isWin() {
