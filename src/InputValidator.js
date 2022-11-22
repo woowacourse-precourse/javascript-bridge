@@ -14,6 +14,10 @@ const InputValidator = {
   isValidStep(input) {
     return input === command.UP || input === command.DOWN;
   },
+
+  isValidCommand(input) {
+    return input === command.GAME_RESTART || input === command.GAME_QUIT;
+  },
 };
 
 module.exports = InputValidator;
