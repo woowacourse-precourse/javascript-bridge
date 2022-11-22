@@ -8,15 +8,15 @@ const isInteger = Number.isInteger;
  * @return {boolean} 입력값이 유효하면 true 반환
  */
 const validateBridgeSizeInput = (input) => {
-  const convertedInput = Number(input);
   try {
-    if (isNaN(convertedInput) || !isInteger(convertedInput))
+    if (isNaN(+input) || !isInteger(+input))
       throw new Error(MESSAGES.EXCEPTIONS.BRIDGE.TYPE_EXCEPTION);
-    if (convertedInput < 3 || convertedInput > 20)
+    if (+input < 3 || +input > 20)
       throw new Error(MESSAGES.EXCEPTIONS.BRIDGE.RANGE_EXCEPTION);
     return true;
   } catch (error) {
-    return Console.print(error.message);
+    Console.print(error.message);
+    return Console.close();
   }
 };
 
@@ -24,15 +24,21 @@ const validateBridgeSizeInput = (input) => {
  * 이동 시 입력값의 유효성을 검사하는 함수
  * @param {string} input 이동 시 입력값
  */
-const validateMoveInput = (input) => {
+const validateMoveInput = (input, game) => {
   try {
-    if (input.length !== 1)
+    if (input.length !== 1) {
+      game.isError = true;
       throw new Error(MESSAGES.EXCEPTIONS.MOVE.LENGTH_EXCEPTION);
-    if (!ALLOWED_CHAR.MOVE.includes(input))
+    }
+    if (!ALLOWED_CHAR.MOVE.includes(input)) {
+      game.isError = true;
       throw new Error(MESSAGES.EXCEPTIONS.MOVE.VALUE_EXCEPTION);
+    }
   } catch (error) {
     Console.print(error.message);
+    return Console.close();
   }
+  return true;
 };
 
 /**
@@ -47,6 +53,7 @@ const validateGameCommandInput = (input) => {
       throw new Error(MESSAGES.EXCEPTIONS.RETRY.VALUE_EXCEPTION);
   } catch (error) {
     Console.print(error.message);
+    return Console.close();
   }
 };
 
