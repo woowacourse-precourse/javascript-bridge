@@ -11,6 +11,10 @@ class App {
 
   showGreeting() {
     OutputView.printGreeting();
+    this.showReadBridgeSize();
+  }
+
+  showReadBridgeSize() {
     InputView.readBridgeSize((bridgeSize) =>
       this.readBridgeSizeCallback(bridgeSize),
     );
