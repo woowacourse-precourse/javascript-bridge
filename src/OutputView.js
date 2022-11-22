@@ -12,7 +12,7 @@ const OutputView = {
     let upperMap = '[ ' + map[0].join(' ') + ' ]';
     let downMap = '[ ' + map[1].join(' ') + ' ]';
     Console.print(upperMap);
-    Console.print(downMap);
+    Console.print(`${downMap}\n`);
   },
 
   /**
