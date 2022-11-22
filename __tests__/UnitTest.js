@@ -26,6 +26,12 @@ describe("Validator 테스트", () => {
     expect(InputValidator.isValidStep("a")).toEqual(false);
     expect(InputValidator.isValidStep("A")).toEqual(false);
   });
+
+  test("명령어 입력 유효성 검사", () => {
+    expect(InputValidator.isValidCommand("R")).toEqual(true);
+    expect(InputValidator.isValidCommand("Q")).toEqual(true);
+    expect(InputValidator.isValidCommand("A")).toEqual(false);
+  });
 });
 
 describe("BridgeMaker 테스트", () => {
