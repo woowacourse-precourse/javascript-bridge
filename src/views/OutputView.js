@@ -18,7 +18,7 @@ const OutputView = {
     );
   },
 
-  makeSide(lastPoint, moveResult) {
+  makeSide(isSuccess, moveResult) {
     const lastPoint = isSuccess ? MOVEMENT.SUCCESS : MOVEMENT.FAIL;
     return moveResult.reduce((arr, value, idx) => {
       if (idx === moveResult.length - 1) {
