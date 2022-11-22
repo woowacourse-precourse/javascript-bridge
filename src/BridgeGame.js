@@ -72,28 +72,33 @@ class BridgeGame {
   }
 
   #setGameStatus() {
-    if (
-      this.#moveResult === SIGN.SUCCESS &&
-      this.#playerAt === this.#bridge.length
-    ) {
-      this.#setGameSuccess();
-      return;
-    }
+    this.#setGameNext();
+    this.#setGameSuccess();
+    this.#setGameFail();
+  }
+
+  #setGameNext() {
     if (this.#moveResult === SIGN.SUCCESS) {
       this.#gameStatus = STATUS.NEXT;
       return;
     }
-    this.#setGameFail();
   }
 
   #setGameSuccess() {
-    this.#gameStatus = STATUS.SUCCESS;
-    this.#gameWin = true;
+    if (
+      this.#moveResult === SIGN.SUCCESS &&
+      this.#playerAt === this.#bridge.length
+    ) {
+      this.#gameStatus = STATUS.SUCCESS;
+      this.#gameWin = true;
+    }
   }
 
   #setGameFail() {
-    this.#gameStatus = STATUS.FAIL;
-    this.#gameWin = false;
+    if (this.#moveResult === SIGN.FAILURE) {
+      this.#gameStatus = STATUS.FAIL;
+      this.#gameWin = false;
+    }
   }
 
   /**
