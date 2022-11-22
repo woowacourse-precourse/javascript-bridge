@@ -30,16 +30,14 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    readMoving() {
-      MissionUtils.Console.readLine(
-        ServiceMessages.SELECT_SPACE,
-        (upOrDown) => {
-          try {
-            validator.checkUserMoving(upOrDown);
-          } catch (error) {
-            OutputView.printErrorMessages(error);
-            this.readBridgeSize();
-          }
+    MissionUtils.Console.readLine(ServiceMessages.SELECT_SPACE, (upOrDown) => {
+      try {
+        validator.checkUserMoving(upOrDown);
+      } catch (error) {
+        OutputView.printErrorMessages(error);
+        this.readBridgeSize();
+      }
+    });
   },
 
   /**
