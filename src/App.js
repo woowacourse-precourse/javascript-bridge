@@ -97,7 +97,5 @@ class App {
     outputView.printResult(this.#isOngoing, tryCount, this.resultMap);
   }
 }
-const app = new App();
-app.play();
 
 module.exports = App;

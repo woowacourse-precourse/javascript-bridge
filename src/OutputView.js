@@ -53,6 +53,7 @@ const OutputView = {
     MissionUtils.Console.print(final);
     MissionUtils.Console.print(MSG.ISFINISHED + successOrFail);
     MissionUtils.Console.print(MSG.TRY + tryCount);
+    MissionUtils.Console.close();
   },
 };
 
