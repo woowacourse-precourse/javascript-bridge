@@ -25,7 +25,10 @@ class GameController {
 
   crossBridge() {
     InputView.readMoving((direction) => {
-      console.log(direction);
+      const moved = this.game.move(direction);
+      const arrived = this.game.bridge.length === this.game.step;
+
+      OutputView.printMap(this.game.map);
     });
   }
 }

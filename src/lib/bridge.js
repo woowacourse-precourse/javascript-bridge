@@ -4,6 +4,25 @@ const {
 } = require("../BridgeRandomNumberGenerator");
 const { FLAG } = require("./constants");
 
+const UPPER = 0;
+const LOWER = 1;
+
+const buildMap = {
+  upper(bridgeMap, mark) {
+    bridgeMap[UPPER] += `[ ${mark} ]`;
+    bridgeMap[LOWER] += "[   ]";
+
+    return bridgeMap.map((section) => section.replaceAll("][", "|"));
+  },
+
+  lower(bridgeMap, mark) {
+    bridgeMap[UPPER] += "[   ]";
+    bridgeMap[LOWER] += `[ ${mark} ]`;
+
+    return bridgeMap.map((section) => section.replaceAll("][", "|"));
+  },
+};
+
 function getDirectionByNumber(number) {
   if (number === RANDOM_UPPER_INCLUSIVE) {
     return FLAG.UPPER;
@@ -14,4 +33,4 @@ function getDirectionByNumber(number) {
   }
 }
 
-module.exports = { getDirectionByNumber };
+module.exports = { getDirectionByNumber, buildMap };
