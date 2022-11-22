@@ -42,9 +42,11 @@ const OutputView = {
    * @param {BridgeGame} bridgeGame
    */
   printResult(bridgeGame) {
+    Console.print('');
     Console.print(Messages.RESULT_TITLE);
     this.printMap(bridgeGame);
 
+    Console.print('');
     const result = bridgeGame.isArrived() ? Messages.RESULT_SUCCESS : Messages.RESULT_FAIL;
     Console.print(Messages.format(Messages.RESULT_GAME_RESULT, result));
     Console.print(Messages.format(Messages.RESULT_GAME_TRIAL_COUNT, bridgeGame.getTrialCount()));
