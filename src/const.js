@@ -34,7 +34,7 @@ const ERROR = {
     HEADER : "[ERROR] ",
     BRIDGE_LENGTH : "다리의 길이는 3이상 20이하의 정수입니다.",
     MOVE_DIRECTION : "이동은 (위: "+BRIDGE.INPUT_RANGE[0]+", 아래: "+BRIDGE.INPUT_RANGE[1]+") 로만 가능합니다.",
-
+    GAME_COMMAND : "재시작 입력은 (재시도: "+USER_ANSWER.RETRY+", 종료: "+USER_ANSWER.QUIT+")로만 가능합니다."
 }
 
 module.exports = { BRIDGE, MESSAGE, USER_ANSWER, QUERY, ERROR };

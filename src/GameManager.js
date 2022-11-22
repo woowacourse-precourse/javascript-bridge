@@ -4,7 +4,7 @@ const Validator = require('./Validator');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { MESSAGE } = require('./const.js');
+const { MESSAGE, USER_ANSWER } = require('./const.js');
 
 
 class GameManager {
@@ -50,7 +50,27 @@ class GameManager {
         let currLocation = this.#isSuccessArray.length - 1;
         OutputView.printMap(bridge, this.#isSuccessArray)
         if(this.#isSuccessArray[currLocation]) return this.getMoveDirection(bridge);
-        // to retry;
+        this.getRetryCommand(bridge);
+    }
+
+    getRetryCommand(bridge) {
+        InputView.readGameCommand((isRetry) => {
+            try {
+                Validator.validateGameCommand(isRetry);
+                this.afterGetRetryCommand(bridge, isRetry);
+            } catch(error) {
+                OutputView.displayMessage(error.message);
+                this.getRetryCommand(bridge);
+            }            
+        })
+    }
+
+    afterGetRetryCommand(bridge, isRetry) {
+        if(isRetry === USER_ANSWER.RETRY) {
+            this.#isSuccessArray = this.Game.retry();
+            this.getMoveDirection(bridge);
+        }
+        // to Quit Game
     }
 
 
