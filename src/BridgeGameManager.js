@@ -4,7 +4,7 @@ const InputView = require('./View/InputView');
 const OutputView = require('./View/OutputView');
 const Validation = require('./libs/Validation');
 const { Console } = require('@woowacourse/mission-utils');
-const { COMMAND_OPTION } = require('./libs/Constant');
+const { COMMAND_OPTION, MESSAGE } = require('./libs/Constant');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const { throwException } = require('./libs/ErrorHandler');
 
@@ -16,7 +16,7 @@ class BridgeGameManager {
   }
 
   start() {
-    OutputView.printStartMessage();
+    OutputView.printMessage(MESSAGE.start);
 
     this.requestBridgeSize();
   }
