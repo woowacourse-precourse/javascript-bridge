@@ -3,7 +3,8 @@ const {GAME_MESSAGES, BRIDGE} = require('./utils/Constants');
 const InputView = require('./InputView');
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const BridgeGame = require("./BridgeGame");
+const BridgeGame = require('./BridgeGame');
+const OutputView = require('./OutputView');
 
 class App {
   async play() {
@@ -14,13 +15,24 @@ class App {
   }
 
   async startCrossing(bridgeSize, bridge) {
-    const gameResult = [[], []];
+    let gameResult = [[], []];
     for(let i = 0; i < bridgeSize; i++){
       const moving = await InputView.readMoving();
-      const moveResult = BridgeGame.move(moving, bridge[i]);
-      if(moving == BRIDGE.UP) gameResult[0].push(moveResult);
-      if(moving == BRIDGE.DOWN) gameResult[1].push(moveResult);
+      const bridgeGame = new BridgeGame;
+      const moveResult = bridgeGame.move(moving, bridge[i]);
+      await this.recordCross(moving, moveResult, gameResult);
+      OutputView.printMap(gameResult, moving)
     }
+  }
+
+  recordCross(moving, moveResult, gameResult) {
+    if(moving == BRIDGE.UP) {
+      gameResult[0].push(moveResult);
+      gameResult[1].push(' ');
+      return gameResult
+    }
+    gameResult[1].push(moveResult);
+    gameResult[0].push(' ');
     return gameResult
   }
 }

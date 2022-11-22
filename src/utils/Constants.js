@@ -21,7 +21,13 @@ const BRIDGE = {
     UP : 'U',
     DOWN : 'D',
     MATCH : 'O',
-    UNMATCH : 'X'
+    UNMATCH : 'X',
+}
+
+const BRIDGE_PRINT = {
+    START : '[ ',
+    MIDDLE :' | ',
+    END : ' ]'
 }
 
 module.exports = {
@@ -29,5 +35,6 @@ module.exports = {
     INPUT_MESSAGES,
     ERROR_MESSAGES,
     RANDOM_NUMBERS,
-    BRIDGE 
+    BRIDGE,
+    BRIDGE_PRINT 
 };
