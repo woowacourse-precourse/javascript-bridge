@@ -90,4 +90,17 @@ describe('다리 건너기 테스트', () => {
     expect(log).toContain('[ERROR]');
   });
 
+  test('다리 건너기 진행상황 출력', () => {
+    const inputFailStatus = false;
+    const inputSuccessStatus = true;
+    const inputUpMove = [1, 1, 0];
+    const inputDownMove = [1, 1, 1];
+
+    const upSide = OutputView.makeSide(inputSuccessStatus, inputUpMove);
+    const downSide = OutputView.makeSide(inputFailStatus, inputDownMove)
+
+    expect(upSide).toEqual(['O', 'O', ' ']);
+    expect(downSide).toEqual(['O', 'O', 'X']);
+  });
+
 });
