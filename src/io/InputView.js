@@ -16,14 +16,23 @@ const InputView = {
    */
   readBridgeSize(cb) {
     Console.readLine(GAME_MSG.enterLength + COMMON.newLine, (input) => {
-      try {
-        validateBridgeSize(input);
-        cb(input);
-      } catch (e) {
-        OutputView.printError(e);
-        InputView.readBridgeSize(cb);
-      }
+      InputView.handleReadBridgeSize(input, cb);
     });
+  },
+
+  /**
+   * 입력 받은 다리 사이즈 에러 처리
+   * @param {string} input 입력값
+   * @param {function()} cb 콜백함수
+   */
+  handleReadBridgeSize(input, cb) {
+    try {
+      validateBridgeSize(input);
+      cb(input);
+    } catch (e) {
+      OutputView.printError(e);
+      InputView.readBridgeSize(cb);
+    }
   },
 
   /**
@@ -31,14 +40,23 @@ const InputView = {
    */
   readMoving(cb) {
     Console.readLine(GAME_MSG.enterToMove + COMMON.newLine, (input) => {
-      try {
-        validateMove(input);
-        cb(input);
-      } catch (e) {
-        OutputView.printError(e);
-        InputView.readMoving(cb);
-      }
+      InputView.handleReadMoving(input, cb);
     });
+  },
+
+  /**
+   * 입력 받은 이동 에러 처리
+   * @param {string} input 입력값
+   * @param {function()} cb 콜백함수
+   */
+  handleReadMoving(input, cb) {
+    try {
+      validateMove(input);
+      cb(input);
+    } catch (e) {
+      OutputView.printError(e);
+      InputView.readMoving(cb);
+    }
   },
 
   /**
@@ -46,14 +64,23 @@ const InputView = {
    */
   readGameCommand(cb) {
     Console.readLine(GAME_MSG.enterRetry + COMMON.newLine, (input) => {
-      try {
-        validateRetry(input);
-        cb(input);
-      } catch (e) {
-        OutputView.printError(e);
-        InputView.readGameCommand(cb);
-      }
+      InputView.handleReadGameCommand(input, cb);
     });
+  },
+
+  /**
+   * 입력 받은 재시작 에러 처리
+   * @param {string} input 입력값
+   * @param {function()} cb 콜백함수
+   */
+  handleReadGameCommand(input, cb) {
+    try {
+      validateRetry(input);
+      cb(input);
+    } catch (e) {
+      OutputView.printError(e);
+      InputView.readGameCommand(cb);
+    }
   },
 };
 
