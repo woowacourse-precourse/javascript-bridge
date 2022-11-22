@@ -1,4 +1,5 @@
 const BridgeGame = require("../BridgeGame");
+const InputView = require("../InputView");
 
 class GameStart {
   #brigeArr = [];
@@ -28,8 +29,10 @@ class GameStart {
       toWalkCount += 1;
       // "X" 값 유무로 게임 중지
       const includeX = this.#BRIDGEGAME.retry(arrUp, arrDown);
-      this.#answer = this.#BRIDGEGAME.answer;
-      if (includeX) return true;
+      if (includeX) {
+        this.#answer = InputView.readGameCommand();
+        return true;
+      }
     });
   }
 }
