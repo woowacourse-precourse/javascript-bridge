@@ -1,0 +1,29 @@
+const { GAME_VALUES, ERROR_MESSAGES } = require("../constants/constant");
+
+class ValidateMoving {
+  constructor(moving) {
+    this.moving = moving;
+  }
+
+  get moving() {
+    return this._moving;
+  }
+
+  set moving(moving) {
+    if (this.validate(moving) === false) throw new Error(ERROR_MESSAGES.moving);
+    else this._moving = moving;
+  }
+
+  validate(moving) {
+    return (
+      !this.isBlank(moving) &&
+      this.isCorrectCharacter(moving)
+    )
+  }
+
+  isBlank = (input) => !input;
+
+  isCorrectCharacter = (input) => GAME_VALUES.movingValues.includes(input);
+}
+
+module.exports = ValidateMoving;
