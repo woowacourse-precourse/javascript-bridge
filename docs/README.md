@@ -25,7 +25,7 @@
 
 #### MVC 패턴 로직 이미지화
 
-<img src="./MVC 설계.jpg">
+<img src="./MVC.jpg">
 
 ### Controller
 
