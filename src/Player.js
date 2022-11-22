@@ -46,9 +46,9 @@ class Player {
 
     playGame(bridgeAnswer, bridgeGame) {
         const moveResult = this.repeatMove(bridgeAnswer, bridgeGame);
+
         if (moveResult[0] === false) {
-            const gameCommandInput = InputView.readGameCommand();
-            const isRetried = bridgeGame.retry(gameCommandInput);
+            const isRetried = this.getGameCommandInput(bridgeGame);
             if (isRetried) {
                 this.setNewGame(bridgeGame);
                 this.playGame(bridgeAnswer, bridgeGame);
@@ -56,6 +56,14 @@ class Player {
             }
         }
         this.getTotalGameResult(bridgeGame, moveResult);
+    }
+
+    getGameCommandInput(bridgeGame) {
+        OutputView.printInputRetry();
+        const gameCommandInput = InputView.readGameCommand();
+        const isRetried = bridgeGame.retry(gameCommandInput);
+
+        return isRetried;
     }
 
     getTotalGameResult(bridgeGame, moveResult) {
