@@ -1,6 +1,7 @@
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./views/OutputView');
 const InputView = require('./views/InputView');
+const { command } = require('./constants/Messages');
 
 class App {
   #game;
@@ -13,30 +14,47 @@ class App {
 
   async #startGame() {
     this.#game = new BridgeGame();
-    await this.#tryCatch(this.#getAndSetBridgeSize.bind(this));
+    let size = await this.#tryCatch(this.#getAndSetBridgeSize.bind(this));
     this.#game.makeBridge();
-    this.#makeAttempt();
+    const result = await this.#makeAttempt(size);
+    console.log(result);
+    // 져서 끝난 것이라면 retry 묻기!
   }
 
   async #getAndSetBridgeSize() {
     const input = await InputView.readBridgeSize();
     this.#game.setSize(input);
+    return Number(input);
   }
 
-  #makeAttempt() {
+  async #makeAttempt(size) {
     this.#attempts++;
+    let round = 0;
+    let moves = [];
+
+    while (round < size) {
+      let roundResult = await this.#playRound(round, moves);
+      moves[round++] = [roundResult, command];
+
+      if (!roundResult) return false;
+    }
+
+    return true;
   }
 
-  async playRound() {
+  // round 에서 프린트까지!
+  async #playRound(currentRound, moves) {
     let command = await InputView.readMoving();
-    console.log(command);
+    let moveResult = await this.#game.move(command, currentRound);
+
+    OutputView.printMap(moves.concat([[moveResult, command]]));
   }
 
   async #tryCatch(tryfunc) {
     while (true) {
       try {
-        await tryfunc();
-        break;
+        const result = await tryfunc();
+        return result;
       } catch (error) {
         OutputView.printError(error);
       }
@@ -46,4 +64,4 @@ class App {
 
 module.exports = App;
 const app = new App();
-app.playRound();
+app.play();
