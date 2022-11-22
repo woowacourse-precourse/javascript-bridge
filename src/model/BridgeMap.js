@@ -9,7 +9,6 @@ class BridgeMap {
     const result = isMatch? 'O' : 'X';
     this.buildUpMap(moving, result);
     this.buildDownMap(moving, result);
-    return this.#bridgeMap;
   }
 
   buildUpMap(moving, result){
