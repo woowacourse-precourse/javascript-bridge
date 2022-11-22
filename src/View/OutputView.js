@@ -43,7 +43,6 @@ const OutputView = {
     if (bridgeStatus[index] !== jumpHistory[index]) {
       return "X ";
     }
-    return "  ";
   },
 
   calculateResult(bridgeStatus, jumpHistory) {
