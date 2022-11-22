@@ -29,7 +29,7 @@ class Result {
 	}
 
 	/** @returns {boolean} */
-	isCompelete() {
+	isComplete() {
 		if (this.#isFinal() && !this.isFailed())
 			return true;
 		return false;

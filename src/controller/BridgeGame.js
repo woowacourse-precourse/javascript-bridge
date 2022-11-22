@@ -43,7 +43,7 @@ class BridgeGame {
     const curResult = this.#bridge.currentResult();
 		if (curResult.isFailed())
       this.#setState(new RetryState(this.retry.bind(this), this.next.bind(this)));
-    if (curResult.isCompelete()) {
+    if (curResult.isComplete()) {
       this.#result.isWin = true;
       this.#setState(new EndState(this.#result));
     }
