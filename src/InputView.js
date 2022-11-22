@@ -10,7 +10,7 @@ const InputView = {
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요.', (answer) => {
       MissionUtils.Console.print(`${answer}`);
       if(3 <= answer && answer <= 20) return answer;
-      throw('[ERROR]', '다리 길이는 3부터 20 사이의 숫자여야 합니다.')
+      throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.')
     });
   },
 
@@ -21,7 +21,7 @@ const InputView = {
     MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (answer) => {
       MissionUtils.Console.print(`${answer}`);
       if(answer === "U" || answer === "D") return answer;
-      throw('[ERROR]', '올바른 방향을 입력해 주세요.')
+      throw new Error('[ERROR] 올바른 방향을 입력해 주세요.')
     });
   },
 
