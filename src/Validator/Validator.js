@@ -9,21 +9,19 @@ class BridgeLengthInput {
 
   check() {
     try {
-      if (this.isValidNumber() || this.isValidRange() || this.isNotInteger())
-        throw new Error(
-          Print.ErrorMessage('[ERROR] 3~20 사이의 숫자만 입력 가능합니다.')
-        );
+      if (this.isNotValidNumber() || this.isNotValidRange() || this.isNotInteger())
+        {throw new Error('[ERROR] 3~20 사이의 숫자만 입력 가능합니다.');}
       return true;
     } catch {
       return false;
     }
   }
 
-  isValidRange() {
+  isNotValidRange() {
     return this.#userInput < 3 || this.#userInput > 20;
   }
 
-  isValidNumber() {
+  isNotValidNumber() {
     return isNaN(this.#userInput);
   }
   isNotInteger() {
@@ -41,9 +39,7 @@ class DirectionChoiceInput {
   check() {
     try {
       if (!this.isValidInput())
-        throw new Error(
-          Print.ErrorMessage('[ERROR] U 또는 D만 입력 가능합니다.')
-        );
+        throw new Error('[ERROR] U 또는 D만 입력 가능합니다.');
       return true;
     } catch {
       return false;
@@ -64,9 +60,7 @@ class RetryInput {
   check() {
     try {
       if (!this.isValidInput())
-        throw new Error(
-          Print.ErrorMessage('[ERROR] Q 또는 R만 입력 가능합니다.')
-        );
+        throw new Error('[ERROR] Q 또는 R만 입력 가능합니다.');
       return true;
     } catch {
       return false;

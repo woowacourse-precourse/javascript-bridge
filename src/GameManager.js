@@ -14,30 +14,28 @@ class GameManager {
     }
 
     startGame() {
-        Print.StartMessage();
-        this.getBridgeLength();
+        Console.Print('다리 건너기 게임을 시작합니다.');
+        this.setBridgeLength();
     }
 
-    getBridgeLength() {
+    setBridgeLength() {
         InputView.readBridgeSize(this.isValidLength.bind(this));
     }
 
     isValidLength(userInput) {
-        this.bridgeLengthInput = new BridgeLengthInput();
-        try {
-            this.bridgeLengthInput.check();
-            this.generateBridge(userInput);
-        } catch{
-            this.getBridgeLength();
+        this.bridgeLengthInput = new BridgeLengthInput(userInput);
+        if (!this.bridgeLengthInput.check()) {
+            return this.setBridgeLength();
         }
+        return this.generateBridge(userInput);
     }
 
     generateBridge(userInput) {
         this.#bridgeGame.createBridge(userInput);
-        this.playRound();
     }
     
     playRound() {
+        // InputView.readMoving(this) 
     }
     
 }

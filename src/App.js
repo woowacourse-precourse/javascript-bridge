@@ -1,9 +1,16 @@
 const GameManager = require('./GameManager');
 
 class App {
+  #GameManager;
+
+  constructor(){
+    this.#GameManager = new GameManager();
+  }
+  Start() {
+    this.#GameManager.startGame();
+  }
   play() {
-    const gameManager = new GameManager();
-    gameManager.startGame();
+    this.Start();
   }
 }
 

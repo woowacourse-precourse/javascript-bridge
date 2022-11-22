@@ -18,7 +18,7 @@ class BridgeGame {
     this.#roundInfo = [];
   }
 
-  createBridge(){
+  createBridge(size){
     this.#bridge = this.#makeBridge.make(size);
   }
   /**
