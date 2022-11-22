@@ -1,16 +1,10 @@
-const { makeBridge } = require('../BridgeMaker');
-const { generate } = require('../BridgeRandomNumberGenerator');
-
 class Bridge {
   #targetBridge;
   #currentIndex;
 
-  constructor() {
+  constructor(targetBridge) {
+    this.#targetBridge = targetBridge;
     this.#currentIndex = 0;
-  }
-
-  setTargetBridge(size) {
-    this.#targetBridge = makeBridge(size, generate);
   }
 
   judgeIsMovable(movingCommand) {
