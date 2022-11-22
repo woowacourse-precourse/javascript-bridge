@@ -23,33 +23,20 @@ const OutputView = {
 	},
 
 	createMap(movingLogs) {
-		const upside = this.drawUpside(movingLogs);
-		const downside = this.drawDownside(movingLogs);
+		const upside = this.drawingMap(movingLogs, MOVING.up);
+		const downside = this.drawingMap(movingLogs, MOVING.down);
 		const up = `${BRIDGE_VIEW.start}${upside.join(BRIDGE_VIEW.section)}${BRIDGE_VIEW.end}`;
 		const down = `${BRIDGE_VIEW.start}${downside.join(BRIDGE_VIEW.section)}${BRIDGE_VIEW.end}`;
 
 		return { up, down };
 	},
 
-	drawUpside(movingLogs) {
+	drawingMap(movingLogs, DIRECTION) {
 		const paper = new Array(movingLogs.length).fill(0);
 		const image = paper.map((element, index) => {
 			const log = movingLogs[index];
 
-			if (log.moving !== MOVING.up) return BRIDGE_VIEW.blank;
-
-			return log.state ? BRIDGE_VIEW.matched : BRIDGE_VIEW.notMatched;
-		});
-
-		return image;
-	},
-
-	drawDownside(movingLogs) {
-		const paper = new Array(movingLogs.length).fill(0);
-		const image = paper.map((element, index) => {
-			const log = movingLogs[index];
-
-			if (log.moving !== MOVING.down) return BRIDGE_VIEW.blank;
+			if (log.moving !== DIRECTION) return BRIDGE_VIEW.blank;
 
 			return log.state ? BRIDGE_VIEW.matched : BRIDGE_VIEW.notMatched;
 		});
