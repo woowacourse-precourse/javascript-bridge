@@ -76,10 +76,14 @@ class BridgeGameController {
     return this;
   }
 
-  #quit() {
+  #notifyGameResult() {
     OutputView.printResult(this.model.bridgeMap.getMyBridgeMap());
     OutputView.printIsGameClear(this.#isGameCleared());
     OutputView.printAttemptsCount(this.model.bridgeGame.getNumberOfAttempt());
+  }
+
+  #quit() {
+    this.#notifyGameResult();
     this.#close();
   }
 
