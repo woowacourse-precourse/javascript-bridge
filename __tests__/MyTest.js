@@ -1,6 +1,8 @@
+const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeMaker = require('../src/BridgeMaker');
 const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
 const InputView = require('../src/InputView');
+const OutputView = require('../src/OutputView');
 const BridgeGame = require('../src/BridgeGame');
 
 describe('입력값 예외 테스트', () => {
@@ -63,4 +65,24 @@ describe('입력 받은 이동할 칸과 정답이 일치하는지 판별한다.
       expect(result).toEqual(false);
     }
   );
+});
+
+describe('움직인 다리의 결과를 생성한다.', () => {
+  test('처음으로 위 칸으로 정답을 맞춘 후 생성된 다리를 생성한다.', () => {
+    OutputView.printMap(true, 'U');
+    expect(OutputView.upBridge).toEqual('[ O ]');
+    expect(OutputView.downBridge).toEqual('[   ]');
+  });
+
+  test('두번째로 아래 칸으로 정답을 맞춘 후 생성된 다리를 생성한다.', () => {
+    OutputView.printMap(true, 'D');
+    expect(OutputView.upBridge).toEqual('[ O |   ]');
+    expect(OutputView.downBridge).toEqual('[   | O ]');
+  });
+
+  test('세번째로 아래 칸으로 정답을 틀린 후 생성된 다리를 생성한다.', () => {
+    OutputView.printMap(false, 'D');
+    expect(OutputView.upBridge).toEqual('[ O |   |   ]');
+    expect(OutputView.downBridge).toEqual('[   | O | X ]');
+  });
 });
