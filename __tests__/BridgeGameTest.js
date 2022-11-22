@@ -12,7 +12,7 @@ const runMove = (bridgeGame, route) => {
   });
 };
 
-describe("브릿지 게임 클래스 테스트", () => {
+describe("BridgeGame 클래스 테스트", () => {
   test("isFallen(): 플레이어 이동(잘못 된 길)", () => {
     const bridgeGame = new BridgeGame(["U", "D", "U"]);
     const playerRoute = ["U", "U"];
