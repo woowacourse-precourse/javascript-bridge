@@ -54,6 +54,13 @@ class BridgeGame {
       Console.print("[ERROR] 입력에 공백이 없어야합니다."); 
     }
   }
+
+  vaildateBridge(input) {
+    this.checkBridgeSize(input);
+    this.checkBridgeNumber(input);
+    this.checkInputSpace(input);
+  }
+
 }
 
 module.exports = BridgeGame;
