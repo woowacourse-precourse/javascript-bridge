@@ -14,7 +14,7 @@ describe('다리 생성 테스트', () => {
   });
 
   test('랜덤 값이 1인데 다리가 "D"인 경우', () => {
-    const randomNumbers = ['1', '1', '1'];
+    const randomNumbers = [1, 1, 1];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
