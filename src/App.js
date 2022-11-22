@@ -11,6 +11,11 @@ class App {
     this.currentBridge = [];
   }
 
+  play() {
+    this.startGame();
+    Console.close();
+  }
+
   startGame() {
     Console.print("다리 건너기 게임을 시작합니다.");
     this.bridge = InputView.readBridgeSize();
@@ -23,8 +28,7 @@ class App {
     if (this.#bridgeGame.move(this.currentBridge)) {
       OutputView.printMap(this.currentBridge, "correct");
       this.checkFinish();
-    }
-    if (!this.#bridgeGame.move(this.currentBridge)) {
+    } else if (!this.#bridgeGame.move(this.currentBridge)) {
       OutputView.printMap(this.currentBridge, "wrong");
       this.checkRetry();
     }
@@ -36,20 +40,17 @@ class App {
       this.#bridgeGame.retry();
       this.currentBridge = [];
       this.moveBridge();
+    } else if (isRetry === "Q") {
+      OutputView.printResult(this.currentBridge, "wrong", this.#bridgeGame.getAttemps());
     }
-    if (isRetry === "Q") OutputView.printResult(this.currentBridge, "wrong", this.#bridgeGame.getAttemps());
   }
 
   checkFinish() {
-    if (this.bridge.length !== this.currentBridge.length) this.moveBridge();
-    if (this.bridge.length === this.currentBridge.length) {
+    if (this.bridge.length !== this.currentBridge.length) {
+      this.moveBridge();
+    } else if (this.bridge.length === this.currentBridge.length) {
       OutputView.printResult(this.currentBridge, "correct", this.#bridgeGame.getAttemps());
     }
-  }
-
-  play() {
-    this.startGame();
-    Console.close();
   }
 }
 
