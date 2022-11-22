@@ -28,11 +28,9 @@ class BridgeGame {
     let str = '';
     
     input.forEach((cur, idx) => {
-      str += ` ${this.checkBlock(bridge[idx], cur, letter)} `;
-      if (idx !== input.length - 1) {
-        str += REQUIREMENT.BRIDGEDELIMETER;
-      }
+      str += ` ${this.checkBlock(bridge[idx], cur, letter)} ${REQUIREMENT.BRIDGEDELIMETER}`;
     });
+    str = str.slice(0, -1);
 
     return str;
   }
