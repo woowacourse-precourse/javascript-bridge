@@ -18,22 +18,16 @@ const Utils = require('../utils/Utils');
  */
 let bridgeGame = null;
 
-/**
- * 게임 진행을 책임하는 개체
- */
+/** 게임 진행을 책임하는 개체 */
 const BridgeGameController = {
-  /**
-   * 게임을 시작한다.
-   */
+  /** 게임을 시작한다. */
   start() {
     OutputView.printStartMessage();
 
     this.initializeBridgeGame();
   },
 
-  /**
-   * 게임 상태를 초기화한다.
-   */
+  /** 게임 상태를 초기화한다. */
   initializeBridgeGame() {
     InputView.read(READ_TYPE.BRIDGE_SIZE, (bridgeSize) => {
       BridgeState.setBridgeSize(Utils.convertToNumber(bridgeSize));
@@ -47,9 +41,7 @@ const BridgeGameController = {
     });
   },
 
-  /**
-   * 게임을 진행하는 Loop
-   */
+  /** 게임을 진행하는 Loop */
   loopGame() {
     InputView.read(READ_TYPE.MOVING, (moving) => {
       bridgeGame.move(moving);
@@ -110,9 +102,7 @@ const BridgeGameController = {
     return false;
   },
 
-  /**
-   * 게임 커맨드를 입력받은 뒤, 그에 따라 진행한다.
-   */
+  /** 게임 커맨드를 입력받은 뒤, 그에 따라 진행한다. */
   DoQuitOrNew() {
     InputView.read(READ_TYPE.GAME_COMMAND, (gameCommand) => {
       const isRetry = this.checkCommandRetry(gameCommand);
