@@ -16,4 +16,12 @@ describe("입력값 테스트", () => {
             '[ERROR] U 또는 D만 입력할 수 있습니다.'
         );
     });
+
+    test("재시작 응답 입력시 R나 Q가 아닌 값을 입력하면 예외 처리한다.", () => {
+        expect(() => {
+            Validator.validateRestart(3)
+        }).toThrow(
+            '[ERROR] R 또는 Q만 입력할 수 있습니다.'
+        );
+    });
 });
