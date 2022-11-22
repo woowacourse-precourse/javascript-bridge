@@ -19,13 +19,17 @@ const InputView = {
   readMoving(callback, message = "") {
     MissionUtils.Console.readLine(message, (answer) => {
       callback(answer);
-    })
+    });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(callback, message = "") {
+    MissionUtils.Console.readLine(message, (answer) => {
+      callback(answer);
+    });
+  },
 };
 
 module.exports = InputView;
