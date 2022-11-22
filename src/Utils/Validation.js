@@ -4,8 +4,8 @@ const { INPUT_VAL } = require("./stringsUtils");
 class Validation {
   static validate({ condition, message }) {
     if (!condition) {
-      // throw new Error(message);
-      throw message;
+      throw new Error(message);
+      // throw message;
     }
   }
 
