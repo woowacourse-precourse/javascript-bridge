@@ -34,7 +34,7 @@ const OutputView = {
    * @param {number} totalTryCount 게임의 총 시도 횟수
    */
   printResult({ bridgeMap, isClear, totalTryCount }) {
-    Console.print('최종 게임 결과');
+    Console.print('\n최종 게임 결과');
     this.printMap(bridgeMap);
     Console.print(`\n게임 성공 여부: ${isClear === true ? '성공' : '실패'}`);
     Console.print(`총 시도한 횟수: ${totalTryCount}`);
