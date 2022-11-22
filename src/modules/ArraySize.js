@@ -8,6 +8,12 @@ class ArraySize {
   getArr() {
     return this.#arr;
   }
+  //다리 배열 생성
+  changeRandomArray(randomArr) {
+    const arrUp = randomArr.map((element) => (element === "U" ? "U" : " "));
+    const arrDown = randomArr.map((element) => (element === "D" ? "D" : " "));
+    return [arrUp, arrDown];
+  }
 }
 
 module.exports = ArraySize;

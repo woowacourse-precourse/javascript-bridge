@@ -3,6 +3,7 @@ const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const GameStart = require("./modules/GameStart");
 const OutputView = require("./OutputView");
+const ArraySize = require("./modules/ArraySize");
 class App {
   static size;
   tryGame = 1; // 시도 횟수
@@ -20,7 +21,8 @@ class App {
     // 이동할 칸(U,D)을 입력한다.
     const upOrDown = InputView.readMoving(this.size);
     // 다리 배열 생성
-    const [arrUp, arrDown] = BridgeMaker.changeRandomArray(this.#randomArr);
+    const ARRAY = new ArraySize();
+    const [arrUp, arrDown] = ARRAY.changeRandomArray(this.#randomArr);
     // 게임 시작
     const GAMESTART = new GameStart(upOrDown, arrUp, arrDown);
     const answer = GAMESTART.getAnswer();

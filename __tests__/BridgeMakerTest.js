@@ -1,9 +1,8 @@
-const BridgeMaker = require("../src/BridgeMaker");
-const MissionUtils = require("@woowacourse/mission-utils");
-
+const ArraySize = require("../src/modules/ArraySize");
 describe("다리 생성 테스트", () => {
   test("다리 배열 만들기 테스트1", () => {
-    const [arrUp, arrDown] = BridgeMaker.changeRandomArray(["U", "U", "D"]);
+    const ARRAY = new ArraySize();
+    const [arrUp, arrDown] = ARRAY.changeRandomArray(["U", "U", "D"]);
     let BRIDGE = [];
     BRIDGE.push(arrUp);
     BRIDGE.push(arrDown);
@@ -13,7 +12,8 @@ describe("다리 생성 테스트", () => {
     ]);
   });
   test("다리 배열 만들기 테스트2", () => {
-    const [arrUp, arrDown] = BridgeMaker.changeRandomArray(["D", "U", "D"]);
+    const ARRAY = new ArraySize();
+    const [arrUp, arrDown] = ARRAY.changeRandomArray(["D", "U", "D"]);
     let BRIDGE = [];
     BRIDGE.push(arrUp);
     BRIDGE.push(arrDown);
