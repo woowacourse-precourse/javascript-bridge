@@ -1,20 +1,30 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const BridgeGame = require("./BridgeGame");
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
+function generateRandomNumber() {
+  return BridgeRandomNumberGenerator.generate();
+}
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    MissionUtils.Console.readLine(
+    const size = MissionUtils.Console.readLine(
       "다리의 길이를 입력해주세요. \n",
       (length) => {
-        const size = parseInt(length);
+        let size = parseInt(length);
         this.checkSize(size);
-        this.readMoving();
+        const FIELD = BridgeMaker.makeBridge(size, generateRandomNumber);
+        console.log(FIELD);
+        this.readMoving(FIELD, [], 1);
       }
     );
+    return size;
   },
 
   checkSize(size) {
@@ -28,13 +38,21 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(FIELD, select, trial) {
     MissionUtils.Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D) \n",
-      (location) => {
-        //console.log(location);
-        this.checkSign(location);
-        //MissionUtils.Console.close();
+      (answer) => {
+        this.checkSign(answer);
+        select.push(answer);
+        console.log(select);
+        const bridgeGame = new BridgeGame();
+        console.log(FIELD, answer);
+        if (bridgeGame.move(FIELD, select)) {
+          OutputView.printMap(FIELD, select);
+          console.log("도전 횟수" + trial);
+          trial += 1;
+          this.readMoving();
+        }
       }
     );
   },

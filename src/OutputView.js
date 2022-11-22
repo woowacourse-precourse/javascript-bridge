@@ -12,7 +12,27 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  //printMap() {},
+  printMap(FIELD, answer) {
+    const upBridge = [];
+    const downBridge = [];
+    for (var i = 0; i < answer.length; i++) {
+      if (FIELD[i] === answer[i] && answer[i] === "U") {
+        upBridge.push("O");
+        downBridge.push("");
+      } else if (FIELD[i] !== answer[i] && answer[i] === "U") {
+        upBridge.push("X");
+        downBridge.push("O");
+      } else if (FIELD[i] === answer[i] && answer[i] === "D") {
+        upBridge.push("");
+        downBridge.push("O");
+      } else if (FIELD[i] !== answer[i] && answer[i] === "D") {
+        upBridge.push("O");
+        downBridge.push("X");
+      }
+    }
+    console.log(upBridge);
+    console.log(downBridge);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
