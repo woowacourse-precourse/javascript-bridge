@@ -11,13 +11,18 @@ class BridgeGame {
 
     return this.round;
   }
-  
+
   retry() {
     this.round = 0;
     this.up = [];
     this.down = [];
 
     return this.round;
+  }
+  countGame() {
+    this.totalGame++;
+
+    return this.totalGame;
   }
 }
 
