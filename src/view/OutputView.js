@@ -11,7 +11,6 @@ const OutputView = {
    */
   welcomeMessage() {
     Console.print(PRINT_MESSAGE.WELLCOME);
-    newLine();
   },
 
   /**
