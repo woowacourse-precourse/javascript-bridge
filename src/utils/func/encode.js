@@ -1,13 +1,15 @@
-const OutputPrintMessage = require("./utils/const/outputViewMessage");
+const OutputPrintMessage = require("../const/outputViewMessage");
 
 const encodeMethods = {
-  encodeBridgeSide(moveLength, bridgeSideStatus) {
+  encodeBridgeSide(currentRound, bridgeSideStatus) {
     let printBody = "[";
-    for (let { round, result } of bridgeSideStatus) {
+    for (let round = 0; round < bridgeSideStatus.length; round++) {
+      const result = bridgeSideStatus[round];
       printBody += result === null ? "   " : result ? " O " : " X ";
-      if (round !== moveLength) printBody += "|";
-      if (round === moveLength) printBody += "]";
+      if (round !== currentRound) printBody += "|";
+      if (round === currentRound) printBody += "]";
     }
+    return printBody;
   },
   encodeGameResult(gameStatus) {
     const { success, trial } = gameStatus;

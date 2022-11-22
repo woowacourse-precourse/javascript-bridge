@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const { encodeBridgeSide, encodeGameResult } = require("./utils/func/encode");
 const GameStatus = require("./model/GameStatus");
 const MovementStatus = require("./model/movementStatus");
+const OutputViewMessage = require("./utils/const/outputViewMessage");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -13,9 +14,9 @@ const OutputView = {
    * @param {MovementStatus} movementState
    */
   printMap(movementState) {
-    const { moveLength, upperSideStatus, lowerSideStatus } = movementState;
-    const upperSidePrintBody = encodeBridgeSide(moveLength, upperSideStatus);
-    const lowerSidePrintBody = encodeBridgeSide(moveLength, lowerSideStatus);
+    const { round, upperSideStatus, lowerSideStatus } = movementState;
+    const upperSidePrintBody = encodeBridgeSide(round, upperSideStatus);
+    const lowerSidePrintBody = encodeBridgeSide(round, lowerSideStatus);
     this.blockPrintHelper([upperSidePrintBody, lowerSidePrintBody]);
   },
 
@@ -31,11 +32,20 @@ const OutputView = {
     this.blockPrintHelper(resultPrintBody);
   },
 
+  printStart() {
+    this.blockPrintHelper([OutputViewMessage.gameStart]);
+  },
+  printEnd() {
+    this.blockPrintHelper(["\n", OutputViewMessage.gameEnd]);
+  },
+
+  print(message) {
+    MissionUtils.Console.print(message);
+  },
   blockPrintHelper(printTargetArray) {
     printTargetArray.forEach((printTarget) => {
       MissionUtils.Console.print(printTarget);
     });
-    MissionUtils.Console.print("\n");
   },
 };
 
