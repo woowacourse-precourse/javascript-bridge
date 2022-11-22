@@ -10,10 +10,19 @@ class App {
     OutputView.printStart();
     let size = this.makeSize();
     const bridgeGame = new BridgeGame(size);
-    let moving = this.makeMoving();
-    bridgeGame.move(moving);
-    OutputView.printMap(bridgeGame.bridge, bridgeGame.location);
-    MissionUtils.Console.print(bridgeGame.location);
+    do {
+      let moving = this.makeMoving();
+      bridgeGame.move(moving);
+      OutputView.printMap(bridgeGame.bridge, bridgeGame.location);
+      MissionUtils.Console.print(bridgeGame.location);
+    } while (this.checkGame(bridgeGame.bridge, bridgeGame.location, size));
+  }
+
+  checkGame(bridge, location) {
+    if (bridge[location] == 2 || bridge[location] == 3) {
+      let command = InputView.readGameCommand();
+    }
+    return true;
   }
 
   makeSize() {
