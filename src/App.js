@@ -10,6 +10,7 @@ class App {
   constructor() {
     this.#bridgeLength = InputView.readBridgeSize();
     this.#game = new Game(this.#bridgeLength);
+    this.play();
   }
 
   play() {

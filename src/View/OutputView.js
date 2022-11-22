@@ -11,6 +11,7 @@ const MAP_TABLE = {
 
 const OutputView = {
   printMap(bridgeStatus, jumpHistory) {
+    MissionUtils.Console.print("\n");
     this.printMapLine("U", bridgeStatus, jumpHistory);
     this.printMapLine("D", bridgeStatus, jumpHistory);
     MissionUtils.Console.print("\n");
