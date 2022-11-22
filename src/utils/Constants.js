@@ -3,6 +3,7 @@ const MESSAGES = Object.freeze({
 	bridgeSize: '다리의 길이를 입력해주세요.\n',
 	chooseMoving: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
 	retryOrQuit: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+	blank: '',
 });
 
 const ERROR_MESSAGES = Object.freeze({
@@ -31,6 +32,15 @@ const REGEXP = Object.freeze({
 	number: /^-?\d+$/g,
 });
 
+const BRIDGE_VIEW = Object.freeze({
+	start: '[ ',
+	end: ' ]',
+	section: ' | ',
+	matched: 'O',
+	notMatched: 'X',
+	blank: ' ',
+});
+
 module.exports = {
 	MESSAGES,
 	ERROR_MESSAGES,
@@ -38,4 +48,5 @@ module.exports = {
 	CHOICE,
 	BRIDGE_SIZE,
 	REGEXP,
+	BRIDGE_VIEW,
 };
