@@ -21,12 +21,17 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
+  readMoving(game, input) {
     Console.readLine(OutputView.printRequestUserMove, (reply) => {
       if (reply !== "U" && reply !== "D") {
         throw new Error("[ERROR] 'U'와 'D'를 입력하여 이동할 수 있습니다.");
       }
-      console.log(reply);
+      const newInput = reply === "U" ? 0 : 1;
+      input.push(newInput);
+      const flag = game.move(input);
+      const answer = game.getBridge();
+      OutputView.printMap(answer, input);
+      flag ? this.readMoving(game, input) : this.readGameCommand(game);
     });
   },
 
