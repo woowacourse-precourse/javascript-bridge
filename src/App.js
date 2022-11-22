@@ -28,20 +28,25 @@ class App {
       tryCount:1
     }
     this.playerMove() 
-  }//맨 처음 시작할때만 이렇게 하고 재시도 할때는 횟수때문에 
-  //이거쓰지 말고 따로 초기화 해야 함
-  
+  }
+
+  printBridge(){
+    OutputView.printMap(this.#gameStatus)
+  }
+
 
   playerMove(){
     while(this.#gameStatus.playerLocation!==this.#generatedBridge.length){
       InputView.readMoving(this.#generatedBridge,this.#gameStatus)
-      OutputView.printMap(this.#gameStatus)
+      this.printBridge()
       if(this.#gameStatus.wrongFlag){
        this.chooseWrong()
       }
     }
     this.endGame()
   }
+
+
 
   
   chooseWrong(){
@@ -70,7 +75,7 @@ class App {
 
   endGame(){
     Console.print(RESULT.GAME_RESULT_PRINT)
-    OutputView.printMap(this.#gameStatus)
+    this.printBridge()
     Console.print(RESULT.GAME_RESULT_SUCCESS)
     if(this.#gameStatus.wrongFlag) Console.print(RESULT.GAME_FAIL)
     if(!this.#gameStatus.wrongFlag) Console.print(RESULT.GAME_SUCCESS)
