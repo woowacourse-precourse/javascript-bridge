@@ -48,6 +48,7 @@ const InputView = {
         if (LOCATION[LOCATION.length - 1] === BRIDGE[LOCATION.length - 1]) { // 가장 최근에 입력받은게 일치할 때
           if (LOCATION.length === BRIDGE.length) { // 현재 위치가 마지막
             OutputView.printMap(LOCATION, BRIDGE[LOCATION.length - 1]);
+            OutputView.printResult(LOCATION, BRIDGE[LOCATION.length - 1], [bridgeGame.getResult(), bridgeGame.getTrial()]);
           }
           if (LOCATION.length !== BRIDGE.length) { // 현재 위치가 마지막이 아님
             OutputView.printMap(LOCATION, BRIDGE[LOCATION.length - 1]);
@@ -84,7 +85,7 @@ const InputView = {
           bridgeGame.retry();
           this.readMoving(bridgeGame);
         }
-        if (this.checkReplay(replay) === "Q") MissionUtils.Console.close();
+        if (this.checkReplay(replay) === "Q") OutputView.printResult(location, bridge[location.length - 1], [bridgeGame.getResult(), bridgeGame.getTrial()]);
       } catch (error) {
         MissionUtils.Console.print(error);
         this.readGameCommand(bridgeGame, location, bridge);

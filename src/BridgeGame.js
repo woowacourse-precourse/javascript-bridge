@@ -51,6 +51,20 @@ class BridgeGame {
     this.#trial += 1;
     return;
   }
+
+  /**
+   * 시도 횟수를 리턴하는 메서드
+   */
+  getTrial() {
+    return this.#trial;
+  }
+
+  /**
+   * 게임 성공 여부를 리턴하는 메서드
+   */
+  getResult() {
+    return this.#result;
+  }
 }
 
 module.exports = BridgeGame;
