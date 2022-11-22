@@ -1,13 +1,41 @@
-/**
- * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
- */
+const EXCEPTION_MESSAGE = require('./consts/Exception');
+const GAME = require('./consts/Game');
+const Exception = require('./Exception');
+
 const BridgeMaker = {
-  /**
-   * @param {number} size 다리의 길이
-   * @param {function(): number} generateRandomNumber 무작위 값을 생성해주는 함수
-   * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
-   */
-  makeBridge(size, generateRandomNumber) {},
+  makeBridge(size, generateRandomNumber) {
+    this.handleBridgeSizeException(size);
+
+    let bridge = [];
+    for (let i = 0; i < size; i++) {
+      const number = generateRandomNumber();
+      const character = this.changeNumberToCharacter(number);
+      bridge.push(character);
+    }
+
+    return bridge;
+  },
+  handleBridgeSizeException(size) {
+    switch (false) {
+      case this.isInteger(size):
+        Exception.throwError(EXCEPTION_MESSAGE.BRIDGE_SIZE.INTEGER);
+      case this.isInRange(size):
+        Exception.throwError(EXCEPTION_MESSAGE.BRIDGE_SIZE.RANGE);
+    }
+  },
+  isInteger(size) {
+    return Number.isInteger(size);
+  },
+  isInRange(size) {
+    if (GAME.BRIDGE_SIZE_START <= size && size <= GAME.BRIDGE_SIZE_END) {
+      return true;
+    }
+
+    return false;
+  },
+  changeNumberToCharacter(number) {
+    return GAME.NUMBER_TO_CHARACTER[number];
+  },
 };
 
 module.exports = BridgeMaker;
