@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { SENTENCE, BRIDGE, RESULT, GAME } = require('../constants/Constants');
+const { openBracket, closeBracket, divider } = RESULT;
 
 const OutputView = {
   printStart() {
@@ -8,20 +9,13 @@ const OutputView = {
 
   printMap(partialBridgeMap, lastMoving) {
     const partialBridgeLength = partialBridgeMap.length;
-    const printMap = this.initPrintBridgeMap(partialBridgeLength); // ' '로 초기화된 다리 배열
+    const resultPrintMap = this.initPrintBridgeMap(partialBridgeLength); // ' '로 초기화된 다리 배열
     const lastDirection = partialBridgeMap[partialBridgeLength - 1];
-
-    partialBridgeMap.reduce(this.checkDirection, printMap);
-
+    partialBridgeMap.reduce(this.checkDirection, resultPrintMap); //
     if (!lastMoving)
-      this.amendLastBridge(printMap, lastDirection, partialBridgeLength);
-
-    const { openBracket, closeBracket } = RESULT;
-
-    printMap.forEach((direction) =>
-      Console.print(
-        `${openBracket} ${direction.join(RESULT.divider)} ${closeBracket}`
-      )
+      this.amendLastBridge(resultPrintMap, lastDirection, partialBridgeLength); // 다리의 끝을 건넌 결과에 따라 O, X로 변경
+    resultPrintMap.forEach((direction) =>
+      Console.print(`${openBracket} ${direction.join(divider)} ${closeBracket}`)
     );
   },
 

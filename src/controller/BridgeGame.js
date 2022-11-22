@@ -28,7 +28,6 @@ class BridgeGame {
   #printCurrentBridge(moving) {
     const step = this.#domain.isMovable(moving);
     this.#domain.setIsAlive(step);
-
     const isAlive = this.#domain.isAlive();
     const partialBridgeMap = this.#domain.getPartialBridgeMap();
     this.#view.printMap(partialBridgeMap, isAlive);
@@ -59,7 +58,6 @@ class BridgeGame {
   }
 
   #end() {
-    // this.#view.endRead();
     Console.close();
   }
 }
