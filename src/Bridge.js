@@ -2,7 +2,7 @@ const { BRIDGE } = require('./utils/const');
 const Validator = require('./utils/Validator');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const StatusGenerator = require('./StatusGenerator');
+const MoveStatusGenerator = require('./MoveStatusGenerator');
 
 class Bridge {
   #bridge;
@@ -29,8 +29,10 @@ class Bridge {
    * @returns
    */
   isCorrect(path) {
+    const bridge = this.getBridge();
     const current = path.length - 1;
-    return path[current] === this.#bridge[current];
+
+    return path[current] === bridge[current];
   }
 
   /**
@@ -38,7 +40,8 @@ class Bridge {
    * @returns
    */
   isLast(path) {
-    return path.length === this.#bridge.length;
+    const bridge = this.getBridge();
+    return path.length === bridge.length;
   }
 
   /**
@@ -49,7 +52,11 @@ class Bridge {
     const isLast = this.isLast(path);
     const isCorrect = this.isCorrect(path);
 
-    return StatusGenerator.generate(isCorrect, isLast);
+    return MoveStatusGenerator.generate(isCorrect, isLast);
+  }
+
+  getBridge() {
+    return this.#bridge;
   }
 }
 
