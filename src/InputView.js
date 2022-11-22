@@ -17,7 +17,9 @@ const InputView = {
       console.log(`다리 길이 : ${bridgeLen}`);
 
       const bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
-      this.readMoving([[],[]], bridge);
+      currentBridge = this.readMoving([[],[]], bridge);
+      // 이동 후, 게임 진행 가능한지 확인
+      this.stillMoving(currentBridge, bridge);
     })
   },
 
@@ -25,10 +27,37 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(currentBridge, bridge) {
+    console.log('입력받는다!');
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
       console.log(`이동할 칸 : ${input}`);
       currentBridge=game.move(currentBridge, bridge, input); // class
     })
+    return currentBridge;
+  },
+
+  /**
+   * 게임 진행이 가능한지, 게임이 종료되었는지, 게임을 진행할 수 없는지 확인
+   */
+  stillMoving(currentBridge, bridge) {
+    // 게임 종료되었는지 확인
+    if(currentBridge[0].length === bridge.length) {
+      // 게임 종료 -> 출력
+      console.log('게임 종료');
+      console.log(currentBridge);
+    }
+
+    // 틀렸는지 확인
+    if(currentBridge[0].includes('X') || currentBridge[1].includes('X')){
+      // 게임 틀림 -> 게임 종료할지, 재시작 할 지 결정
+      console.log('틀림. 재시작? 종료?');
+    }
+
+    // 게임 진행가능한지 확인
+    else {
+      // 게임 다시 진행
+      console.log('겜 진행');
+      this.readMoving(currentBridge, bridge);
+    }
   },
 
   /**
