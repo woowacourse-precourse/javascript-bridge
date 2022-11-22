@@ -32,6 +32,7 @@ const OutputView = {
     const finalGameResult = IS_SUCCESS ? GAME_MESSAGES.success : GAME_MESSAGES.failure;
     Console.print(finalGameResult);
     Console.print(GAME_MESSAGES.totalAttempts + numberOfAttempts);
+    Console.close();
   },
 };
 

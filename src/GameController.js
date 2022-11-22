@@ -1,4 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const BridgeMaker = require('./BridgeMaker');
@@ -84,11 +83,6 @@ class GameController {
     const maps = this.game.getMaps();
     const totalAttempts = this.game.getNumberOfAttempts();
     this.outputView.printResult(maps, IS_SUCCESS, totalAttempts);
-    this.end();
-  }
-
-  end() {
-    Console.close();
   }
 }
 
