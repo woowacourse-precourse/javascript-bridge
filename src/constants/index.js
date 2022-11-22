@@ -8,6 +8,8 @@ const MAP = {
 const MESSAGE = {
   INPUT_SIZE: '다리의 길이를 입력해주세요.',
 };
+const ERROR_PREFIX = '[ERROR]';
+
 const ERROR_MESSAGE = {
   INPUT_NUM: '입력값은 숫자여야 합니다.',
   INPUT_STR: '입력값은 문자여야 합니다.',
@@ -19,5 +21,6 @@ const ERROR_MESSAGE = {
 module.exports = {
   MAP,
   MESSAGE,
+  ERROR_PREFIX,
   ERROR_MESSAGE,
 };

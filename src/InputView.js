@@ -21,16 +21,12 @@ const InputView = {
 
   validateSize(size) {
     if (inValidString(size)) {
-      throw ERROR_MESSAGE.INPUT_NUM;
+      throwError(ERROR_MESSAGE.INPUT_NUM);
     }
 
     if (inValidSize(size)) {
-      throw ERROR_MESSAGE.BRIDGE_SIZE;
+      throwError(ERROR_MESSAGE.BRIDGE_SIZE);
     }
-  },
-    }
-  },
-
   },
 
   /**
