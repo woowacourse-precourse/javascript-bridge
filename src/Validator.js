@@ -1,6 +1,6 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const { ERROR, BRIDGE } = require('./const.js')
+const { ERROR, BRIDGE, USER_ANSWER } = require('./const.js')
 
 const Validator = {
     validateBridgeSize(bridgeSize) {
@@ -12,6 +12,11 @@ const Validator = {
     validateMoveDirection(moveDirection) {
         if(moveDirection != BRIDGE.INPUT_RANGE[0] &&
             moveDirection != BRIDGE.INPUT_RANGE[1]) throw new Error(ERROR.HEADER+ERROR.MOVE_DIRECTION);
+    },
+
+    validateGameCommand(isRetry) {
+        if(isRetry != USER_ANSWER.RETRY &&
+            isRetry != USER_ANSWER.QUIT) throw new Error(ERROR.HEADER+ERROR.MOVE_DIRECTION);
     }
 
 }

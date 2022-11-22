@@ -13,3 +13,10 @@ const moveDirectionArray = [1, "A", "UD", undefined];
 test.each(bridgeLengthArray)("다리 이동 방향 Validator 테스트", (moveDirection) => {
     expect(() => Validator.validateMoveDirection(moveDirection)).toThrow()
 })
+
+const retryCommandArray = [1, "A", "UD", undefined];
+test.each(retryCommandArray)("게임 재시작 여부 Validator 테스트", (isRetry) => {
+    expect(() => Validator.validateMoveDirection(isRetry)).toThrow()
+})
+
+
