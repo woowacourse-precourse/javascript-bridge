@@ -9,46 +9,52 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  measureLength() {
+  measureLength(makeBridge) {
+    let input;
     Console.readLine(OPTION_MESSAGE.LENGTH, (length) => {
       try {
         Validation.checkLength(Number(length));
-        return Number(length);
+        makeBridge(Number(length));
       } catch (error) {
         OutputView.printError(error);
         this.measureLength();
       }
     });
+    return input;
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
+    let input;
     Console.readLine(OPTION_MESSAGE.MOVE, (move) => {
       try {
         Validation.checkMove(move);
-        return move;
+        input = move;
       } catch (error) {
         OutputView.printError(error);
         this.readMoving();
       }
     });
+    return input;
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    Console.readLine(REQUEST_MESSAGE.RESTART, (input) => {
+    let input;
+    Console.readLine(REQUEST_MESSAGE.RESTART, (option) => {
       try {
-        Validation.checkRestart(input);
-        return input;
+        Validation.checkRestart(option);
+        input = option;
       } catch (error) {
         OutputView.printError(error);
         this.readGameCommand();
       }
     });
+    return input;
   },
 };
 
