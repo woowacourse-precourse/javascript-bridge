@@ -1,22 +1,24 @@
+const { BRIDGE_LENGTH, NEXT_STEP, RETRY, IS_NUMBER_EMPTY, ONE_VALUE } = require('./constants/Message');
+
 class Validation {
   static bridgeLength(number) {
-    if (Validation.isEmpty(number)) throw new Error('[ERROR] 값을 입력해주세요.'); 
-    if (!Validation.isNumber(number)) throw new Error('[ERROR] 숫자를 입력해주세요.')
-    if (!Validation.numberNet(number)) throw new Error('[ERROR] 3과 20사이의 값을 입력해주세요.');
+    if (Validation.isEmpty(number)) throw new Error(BRIDGE_LENGTH.IS_EMPTY); 
+    if (!Validation.isNumber(number)) throw new Error(BRIDGE_LENGTH.IS_NUMBER)
+    if (!Validation.numberNet(number)) throw new Error(BRIDGE_LENGTH.NUMBER_NET);
   }
 
   static nextStep(value) {
-    if (Validation.isNumberEmpty(value)) throw new Error('\n[ERROR] 값을 입력해주세요.');
-    if (!Validation.oneValue(value)) throw new Error('\n[ERROR] 1개의 값을 입력해주세요.');
-    if (Validation.nextStepLowerCase(value)) throw new Error('\n[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.')
-    if (!Validation.nextStepValue(value)) throw new Error('\n[ERROR] U 또는 D를 입력해주세요.');
+    if (Validation.isNumberEmpty(value)) throw new Error(IS_NUMBER_EMPTY);
+    if (!Validation.oneValue(value)) throw new Error(ONE_VALUE);
+    if (Validation.nextStepLowerCase(value)) throw new Error(NEXT_STEP.NEXT_STEP_LOWER_CASE)
+    if (!Validation.nextStepValue(value)) throw new Error(NEXT_STEP.NEXT_STEP_VALUE);
   }
 
   static retry(value) {
-    if (Validation.isNumberEmpty(value)) throw new Error('\n[ERROR] 값을 입력해주세요.');
-    if (!Validation.oneValue(value)) throw new Error('\n[ERROR] 1개의 값을 입력해주세요.');
-    if (Validation.retryLowerCase(value)) throw new Error('\n[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.')
-    if (!Validation.retryOrNotValue(value)) throw new Error('\n[ERROR] R 또는 Q를 입력해주세요.');
+    if (Validation.isNumberEmpty(value)) throw new Error(IS_NUMBER_EMPTY);
+    if (!Validation.oneValue(value)) throw new Error(ONE_VALUE);
+    if (Validation.retryLowerCase(value)) throw new Error(RETRY.RETRY_LOWER_CASE)
+    if (!Validation.retryOrNotValue(value)) throw new Error(RETRY.RETRY_OR_NOT_VALUE);
   }
 
   static nextStepLowerCase(value) {
