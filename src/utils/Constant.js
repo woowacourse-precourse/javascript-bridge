@@ -6,10 +6,10 @@ const MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  RETRY_INPUT: '[ERROR] R 또는 Q를 입력해야합니다.\n',
-  LEVEL_INPUT: '[ERROR] 이동 값은 U 또는 D를 입력하세요\n',
-  ISNAN: '[ERROR] 자연수를 입력하세요\n',
-  RANGE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.\n',
+  RETRY_INPUT: '[ERROR] R 또는 Q를 입력해야합니다.',
+  LEVEL_INPUT: '[ERROR] 이동 값은 U 또는 D를 입력하세요.',
+  ISNAN: '[ERROR] 자연수를 입력하세요.',
+  RANGE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
 });
 
 const INPUT_MESSAGE = Object.freeze({
