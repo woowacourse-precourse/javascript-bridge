@@ -15,8 +15,6 @@ class BridgeGame {
 
   #answer;
 
-  #isAnswer;
-
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -24,10 +22,13 @@ class BridgeGame {
    */
   move(answer) {
     this.#answer = answer;
-    this.#isAnswer = this.#bridge[this.#steps] === answer;
     if (this.#bridge[this.#steps] === answer) {
       this.#steps += NUMBER.one;
     }
+  }
+
+  checkAnswer() {
+    return this.#bridge[this.#steps] === this.#answer;
   }
 
   setBridge(size) {
@@ -51,10 +52,6 @@ class BridgeGame {
     return isDone;
   }
 
-  isAnswer() {
-    return this.#isAnswer;
-  }
-
   static getBridgeString(bridge) {
     return `[ ${bridge.join(' | ')} ]`;
   }
@@ -75,7 +72,7 @@ class BridgeGame {
   createBridgeStringArray() {
     const upBridge = this.createSucceseArray(SHORT_CUT.up);
     const downBridge = this.createSucceseArray(SHORT_CUT.down);
-    if (!this.#isAnswer) {
+    if (this.checkAnswer()) {
       const fail = this.createFailArray(upBridge, downBridge);
       return { upBridge: fail.upBridge, downBridge: fail.downBridge };
     }
