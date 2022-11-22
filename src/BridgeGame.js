@@ -43,8 +43,7 @@ class BridgeGame {
       this.#movingRoute[0].push(MOVING.WRONG_ANSWER);
       this.#movingRoute[1].push(MOVING.SPACE);
     }
-    OutputView.printMap(this.#movingRoute);
-    return this.#movingRoute;
+    return this.print();
   }
 
   moveToLower(movingCommand, movingRouteIndex) {
@@ -55,8 +54,7 @@ class BridgeGame {
       this.#movingRoute[1].push(MOVING.WRONG_ANSWER);
       this.#movingRoute[0].push(MOVING.SPACE);
     }
-    OutputView.printMap(this.#movingRoute);
-    return this.#movingRoute;
+    return this.print();
   }
 
   retry() {
@@ -66,6 +64,11 @@ class BridgeGame {
 
   finish(gameReult) {
     OutputView.printResult(gameReult, this.#movingRoute, this.#UserTryCount);
+  }
+
+  print() {
+    OutputView.printMap(this.#movingRoute);
+    return this.#movingRoute;
   }
 }
 
