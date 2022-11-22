@@ -6,6 +6,7 @@ const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
 const InputValidator = require("./utils/InputValidator");
 const { COMMAND } = require("./utils/constants");
+const ErrorHadler = require("./utils/ErrorHandler");
 
 class App {
   #bridgeGame;
@@ -17,7 +18,7 @@ class App {
 
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
-      if (!this.#tryValidate(InputValidator.checkBridgeSize, size)) {
+      if (!ErrorHadler.tryValidate(InputValidator.checkBridgeSize, size)) {
         this.requestBridgeSize();
         return;
       }
@@ -34,7 +35,7 @@ class App {
 
   requestMovingDirection() {
     InputView.readMoving((direction) => {
-      if (!this.#tryValidate(InputValidator.checkMovingDirection, direction)) {
+      if (!ErrorHadler.tryValidate(InputValidator.checkMovingDirection, direction)) {
         this.requestMovingDirection();
         return;
       }
@@ -54,7 +55,7 @@ class App {
 
   requsetRetryCommand() {
     InputView.readGameCommand((command) => {
-      if (!this.#tryValidate(InputValidator.checkRetryOrQuitCommand, command)) {
+      if (!ErrorHadler.tryValidate(InputValidator.checkRetryOrQuitCommand, command)) {
         this.requsetRetryCommand();
         return;
       }
@@ -76,16 +77,6 @@ class App {
     const { map, isClear, tryCount } = this.#bridgeGame.getResult();
     OutputView.printResult(map, isClear, tryCount);
     MissionUtils.Console.close();
-  }
-
-  #tryValidate(validate, input) {
-    try {
-      validate(input);
-      return true;
-    } catch (error) {
-      OutputView.printErrorMessage(error.message);
-      return false;
-    }
   }
 }
 
