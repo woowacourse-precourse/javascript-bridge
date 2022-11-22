@@ -2,7 +2,8 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeMaker = require('../src/BridgeMaker');
 const BridgeGame = require('../src/BridgeGame');
 const CrossBrigeGame = require('../src/CrossBridgeGame');
-const { INPUT } = require('../src/utils/constants');
+const { GAME } = require('../src/utils/Constants');
+const OutputView = require('../src/views/OutputView');
 
 const mockInput = (answers) => {
   MissionUtils.Console.readLine = jest.fn();

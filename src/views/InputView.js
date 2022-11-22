@@ -6,8 +6,8 @@
 //  InputView의 메서드의 인자는 변경할 수 있다.
 //  사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
 
-const { Console } = require("@woowacourse/mission-utils");
-const { INPUT } = require("../utils/constants");
+const { Console } = require('@woowacourse/mission-utils');
+const { INPUT } = require('../utils/Constants');
 
 const InputView = {
   /**
