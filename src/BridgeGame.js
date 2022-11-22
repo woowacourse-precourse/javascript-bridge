@@ -45,17 +45,9 @@ class BridgeGame {
 
   printMyBridge(printMap) {
     if (this.#isClearedBoolean) {
-      return printMap(
-        this.#myBridgeMaterialize,
-        this.#nowState - 1,
-        this.#isClearedBoolean
-      );
+      return printMap(this.#myBridgeMaterialize, this.#nowState - 1, this.#isClearedBoolean);
     }
-    return printMap(
-      this.#myBridgeMaterialize,
-      this.#nowState,
-      this.#isClearedBoolean
-    );
+    return printMap(this.#myBridgeMaterialize, this.#nowState, this.#isClearedBoolean);
   }
 
   printResultGame(resultFunction) {

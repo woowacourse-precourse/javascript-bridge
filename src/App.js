@@ -46,10 +46,9 @@ class App {
   moveLocation() {
     InputView.readMoving((input) => {
       try {
-        if (!validCheck.moveInput(input.toUpperCase()))
-          throw new Error(ERROR_MESSAGE.INVALID_MOVE);
-        const move = this.#myBridge.move(input.toUpperCase());
-        if (!move) return this.moveNotCorrect();
+        if (!validCheck.moveInput(input.toUpperCase())) throw new Error(ERROR_MESSAGE.INVALID_MOVE);
+        if (!this.#myBridge.move(input.toUpperCase()))
+          return this.moveNotCorrect();
         return this.moveCorrect();
       } catch (err) {
         OutputView.moveInputError();
@@ -77,10 +76,8 @@ class App {
   getRetryInput() {
     InputView.readGameCommand((input) => {
       try {
-        if (!validCheck.quitInput(input))
-          throw new Error(ERROR_MESSAGE.INVALID_QUIT);
-        const retry = this.#myBridge.retry(input);
-        if (retry) {
+        if (!validCheck.quitInput(input)) throw new Error(ERROR_MESSAGE.INVALID_QUIT);
+        if (this.#myBridge.retry(input)) {
           this.#myBridge.gameStateChangeSuccess();
           return this.moveLocation();
         }
