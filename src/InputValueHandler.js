@@ -37,8 +37,8 @@ const InputValueHandler = {
   },
 
   gameCommand(key, bridgeGame) {
-    if (Validate.checkCommandKey(key) && this.checkRetry(key, bridgeGame)) {
-      return true;
+    if (Validate.checkCommandKey(key)) {
+      return this.checkRetry(key, bridgeGame);
     }
     return false;
   },
@@ -47,6 +47,7 @@ const InputValueHandler = {
     if (bridgeGame.isRetry(key)) {
       return true;
     }
+    OutputView.printResult(bridgeGame, '실패');
     return false;
   },
 };

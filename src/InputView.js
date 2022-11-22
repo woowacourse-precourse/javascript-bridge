@@ -1,5 +1,4 @@
 const InputValueHandler = require('./InputValueHandler');
-const OutputView = require('./OutputView');
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./Constants');
 
@@ -13,10 +12,9 @@ const InputView = {
   readBridgeSize(bridgeGame) {
     Console.readLine(MESSAGE.BRIDGE_SIZE, (size) => {
       if (InputValueHandler.bridgeSize(size, bridgeGame)) {
-        this.readMoving(bridgeGame);
-      } else {
-        this.readBridgeSize(bridgeGame);
+        return this.readMoving(bridgeGame);
       }
+      return this.readBridgeSize(bridgeGame);
     });
   },
 
@@ -43,9 +41,6 @@ const InputView = {
     Console.readLine(MESSAGE.GAME_COMMAND, (key) => {
       if (InputValueHandler.gameCommand(key, bridgeGame)) {
         return this.readMoving(bridgeGame);
-      }
-      if (!InputValueHandler.checkRetry(key, bridgeGame)) {
-        return OutputView.printResult(bridgeGame, '실패');
       }
       return this.readGameCommand(bridgeGame);
     });
