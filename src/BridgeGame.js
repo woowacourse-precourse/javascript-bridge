@@ -65,7 +65,11 @@ class BridgeGame {
     this.checkInputSpace(input);
   }
 
+  vaildateGameCommand(input){
+    this.checkGameCommand(input);
+    this.checkInputSpace(input);
 
+  }
 }
 
 module.exports = BridgeGame;
