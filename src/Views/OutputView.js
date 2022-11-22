@@ -55,6 +55,10 @@ const OutputView = {
     Console.print(RESULT.PLAY_COUNT(playCount));
     Console.close();
   },
+
+  printError(error) {
+    Console.print(error);
+  },
 };
 
 module.exports = OutputView;

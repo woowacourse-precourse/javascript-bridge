@@ -17,7 +17,6 @@ class BridgeGame {
   createBridge(size) {
     this.#playCount += BRIDGE_VALUE.COUNT_UNIT;
     this.#myBridge = BridgeMaker.makeBridge(size, generateRandomNumber);
-    console.log(this.#myBridge);
   }
 
   /**

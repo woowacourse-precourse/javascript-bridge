@@ -2,6 +2,11 @@ const BridgeGame = require('../Models/BridgeGame');
 const InputView = require('../Views/InputView');
 const OutputView = require('../Views/OutputView');
 const { OPTION } = require('../utils/constants');
+const {
+  validateBridgeSize,
+  validateMovingInput,
+  validateContinue,
+} = require('../utils/validations');
 
 class GameController {
   constructor() {
@@ -17,27 +22,63 @@ class GameController {
 
   inputBridgeSize() {
     this.inputView.readBridgeSize((userInput) => {
-      const size = this.inputView.getBridgeSize(userInput);
-      this.bridgeGame.createBridge(size);
-      this.selectMoving();
+      this.checkValidSize(userInput);
     });
+  }
+
+  checkValidSize(userInput) {
+    try {
+      validateBridgeSize(userInput);
+      this.makeBridge(userInput);
+    } catch (error) {
+      this.outputView.printError(error);
+      this.inputBridgeSize();
+    }
+  }
+
+  makeBridge(userInput) {
+    const size = this.inputView.getBridgeSize(userInput);
+    this.bridgeGame.createBridge(size);
+    this.selectMoving();
   }
 
   selectMoving() {
     this.inputView.readMoving((userInput) => {
-      const select = this.inputView.getUserMoving(userInput);
-      this.bridgeGame.move(select);
-      this.checkResult();
+      this.checkValidMoving(userInput);
     });
+  }
+
+  checkValidMoving(userInput) {
+    try {
+      validateMovingInput(userInput);
+      this.moving(userInput);
+    } catch (error) {
+      this.outputView.printError(error);
+      this.selectMoving();
+    }
+  }
+
+  moving(userInput) {
+    const select = this.inputView.getUserMoving(userInput);
+    this.bridgeGame.move(select);
+    this.checkResult();
   }
 
   checkResult() {
     const progressData = this.bridgeGame.getGameProgress();
     this.outputView.printMap(progressData);
+    this.checkAlive();
+    this.checkWin();
+  }
 
+  checkAlive() {
     const alive = this.bridgeGame.getAlive();
     if (!alive) return this.askRetry();
 
+    return this.selectMoving();
+  }
+
+  checkWin() {
     const end = this.bridgeGame.checkGameEnd();
     if (end) return this.win();
 
@@ -46,10 +87,24 @@ class GameController {
 
   askRetry() {
     this.inputView.readGameCommand((userInput) => {
-      if (userInput === OPTION.RETRY) return this.replay();
-
-      return this.defeat();
+      this.checkRetryValidation(userInput);
     });
+  }
+
+  checkRetryValidation(userInput) {
+    try {
+      validateContinue(userInput);
+      this.retryBranch(userInput);
+    } catch (error) {
+      this.outputView.printError(error);
+      this.askRetry();
+    }
+  }
+
+  retryBranch(userInput) {
+    if (userInput === OPTION.RETRY) return this.replay();
+
+    return this.defeat();
   }
 
   replay() {
