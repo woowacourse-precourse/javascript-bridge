@@ -4,7 +4,7 @@ const BridgeMaker = require("../BridgeMaker");
 const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const BridgeGame = require("../Model/BridgeGame");
 const Bridge = require("../Model/Bridge");
-const { STATE } = require("../constants/GameCondition.js");
+const { STATE, GAME_END } = require("../constants/GameCondition.js");
 class BridgeGameController {
   #attempt = 1;
   #BridgeGame = new BridgeGame();
@@ -31,12 +31,13 @@ class BridgeGameController {
   inputGameCommand(map) {
     // TODO: change
     const cmd = InputView.readGameCommand();
-    if (cmd === "R") {
+    if (cmd === GAME_END.RESTART) {
       this.#BridgeGame.retry();
       this.#attempt += 1;
       this.inputMoveDirection();
     }
-    if (cmd === "Q") OutputView.printResult(map, STATE.FAIL, this.#attempt);
+    if (cmd === GAME_END.QUIT)
+      OutputView.printResult(map, STATE.FAIL, this.#attempt);
   }
 
   /**
