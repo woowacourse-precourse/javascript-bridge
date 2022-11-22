@@ -7,6 +7,16 @@ const Exception = {
   printError(message) {
     Console.print(`${this.ERROR_PREFIX} ${message}`);
   },
+  handleError(execute, stack = 1) {
+    try {
+      return execute();
+    } catch (e) {
+      this.printError(e.message);
+      if (stack < 10) {
+        return this.handleError(execute, stack + 1);
+      }
+    }
+  },
 };
 
 module.exports = Exception;

@@ -9,7 +9,7 @@ class App {
   play() {
     try {
       OutputView.printStart();
-      const bridgeGame = this.makeBridgeGame();
+      const bridgeGame = Exception.handleError(this.makeBridgeGame);
       const [turnSuccess, gameCount] = this.executeGame(bridgeGame);
       OutputView.printResult(bridgeGame, turnSuccess, gameCount);
     } catch (e) {
@@ -18,23 +18,13 @@ class App {
   }
 
   makeBridgeGame() {
-    try {
-      const bridge = this.getBridge();
-      return new BridgeGame(bridge);
-    } catch (e) {
-      Exception.printError(e.message);
-      return this.makeBridgeGame();
-    }
-  }
-
-  getBridge() {
     const bridgeSize = InputView.readBridgeSize();
     const bridge = BridgeMaker.makeBridge(
       bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
 
-    return bridge;
+    return new BridgeGame(bridge);
   }
 
   executeGame(bridgeGame) {
@@ -44,7 +34,9 @@ class App {
     while (isContinue) {
       gameCount += 1;
       turnSuccess = this.executeTurn(bridgeGame);
-      isContinue = this.getRetry(turnSuccess, bridgeGame);
+      isContinue = Exception.handleError(() =>
+        this.getRetry(turnSuccess, bridgeGame)
+      );
     }
 
     return [turnSuccess, gameCount];
@@ -55,7 +47,7 @@ class App {
     let turnValidation = bridgeGame.getTurn() < bridgeGame.getBridge().length;
 
     while (turnValidation && turnSuccess) {
-      turnSuccess = this.executeMoving(bridgeGame);
+      turnSuccess = Exception.handleError(() => this.executeMoving(bridgeGame));
       OutputView.printMap(bridgeGame, turnSuccess);
       turnValidation = bridgeGame.getTurn() < bridgeGame.getBridge().length;
     }
@@ -67,26 +59,15 @@ class App {
     if (turnSuccess) {
       return false;
     }
-
-    try {
-      const command = InputView.readGameCommand();
-      const isContinue = bridgeGame.retry(command);
-      return isContinue;
-    } catch (e) {
-      Exception.printError(e.message);
-      return this.getRetry(turnSuccess, bridgeGame);
-    }
+    const command = InputView.readGameCommand();
+    const isContinue = bridgeGame.retry(command);
+    return isContinue;
   }
 
   executeMoving(bridgeGame) {
-    try {
-      const moving = InputView.readMoving();
-      const turnSuccess = bridgeGame.move(moving);
-      return turnSuccess;
-    } catch (e) {
-      Exception.printError(e.message);
-      return this.executeMoving(bridgeGame);
-    }
+    const moving = InputView.readMoving();
+    const turnSuccess = bridgeGame.move(moving);
+    return turnSuccess;
   }
 }
 
