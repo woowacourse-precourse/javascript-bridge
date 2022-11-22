@@ -54,6 +54,7 @@ class BridgeGame {
    * 사용자가 칸을 이동할 때 사용하는 메서드
    *
    * @param {string} tile
+   * @returns {boolean} 성공적으로 움직였는지
    */
   move(tile) {
     return this.#player.move(tile);
