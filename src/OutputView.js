@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const Constant = require('./Constant');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -34,7 +35,7 @@ const OutputView = {
     resultDown = resultDown.slice(0, resultDown.length-2);
     resultUp += ']';
     resultDown += ']';
-    MissionUtils.Console.print(`${resultUp}`);
+    MissionUtils.Console.print(resultUp);
     MissionUtils.Console.print(resultDown);
   },
 
@@ -45,11 +46,11 @@ const OutputView = {
    */
    printResult(success, count) {
     if(success) {
-      MissionUtils.Console.print('게임 성공 여부: 성공');
+      MissionUtils.Console.print(Constant.END_MESSAGE.SUCCESS);
     }else {
-      MissionUtils.Console.print('게임 성공 여부: 실패');
+      MissionUtils.Console.print(Constant.END_MESSAGE.FAIL);
     }
-    MissionUtils.Console.print(`총 시도한 횟수: ${count}`);
+    MissionUtils.Console.print(`${Constant.END_MESSAGE.COUNT_TRY}${count}`);
   },
 };
 

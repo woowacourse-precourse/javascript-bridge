@@ -1,9 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeMaker = require('./BridgeMaker')
-const BridgeGame = require('./BridgeGame')
+const BridgeMaker = require('./BridgeMaker');
+const BridgeGame = require('./BridgeGame');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const Validation = require('./Validation');
-const OutputView = require('./OutputView')
+const OutputView = require('./OutputView');
+const Constant = require('./Constant');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -13,8 +14,8 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    MissionUtils.Console.readLine('다리의 길이를 입력해주세요.', (bridgeLength) => {
-      console.log(`다리의 길이를 입력해주세요.\n${bridgeLength}`);
+    MissionUtils.Console.readLine(Constant.USER_INPUT_MESSAGE.BRIDGE_SIZE, (bridgeLength) => {
+      console.log(`${Constant.USER_INPUT_MESSAGE.BRIDGE_SIZE}${bridgeLength}`);
       const ckeckNum = new Validation();
       ckeckNum.checkNum(bridgeLength);
       const bridge = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
@@ -27,8 +28,8 @@ const InputView = {
    */
   readMoving(bridge, arr, count) {
     let moves = arr;
-    MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (moveInputValue) => {
-      console.log(`이동할 칸을 선택해주세요. (위: U, 아래: D)\n${moveInputValue}`);
+    MissionUtils.Console.readLine(Constant.USER_INPUT_MESSAGE.BRIDGE_MOVE, (moveInputValue) => {
+      console.log(`${Constant.USER_INPUT_MESSAGE.BRIDGE_MOVE}${moveInputValue}`);
       const ckeckMove = new Validation();
       ckeckMove.checkMove(moveInputValue);
       moves += moveInputValue;
@@ -46,7 +47,7 @@ const InputView = {
       if(bridge.length !== moves.length) {
         this.readMoving(bridge, moves, count);
       } else {
-        MissionUtils.Console.print("최종 게임 결과");
+        MissionUtils.Console.print(Constant.END_MESSAGE.RESULT);
         OutputView.printMap(bridge, moves);
         OutputView.printResult(true, count);
         MissionUtils.Console.close();
@@ -61,8 +62,8 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(count) {
-    MissionUtils.Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (gameRetry) => {
-      console.log(`게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n${gameRetry}`);
+    MissionUtils.Console.readLine(Constant.USER_INPUT_MESSAGE.BRIDGE_GAME_RETRY, (gameRetry) => {
+      console.log(`${Constant.USER_INPUT_MESSAGE.BRIDGE_GAME_RETRY}${gameRetry}`);
       const checkRetry = new Validation();
       checkRetry.checkRetry(gameRetry);
       this.readGameCommand(gameRetry, count)

@@ -1,22 +1,23 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const Constant = require('./Constant')
 
 class CheckUserInput {
   
   checkNum(userInput) {
     if(isNaN(userInput) || userInput > 20 || userInput < 3) {
-      MissionUtils.Console.print('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+      MissionUtils.Console.print(Constant.ERROR_MESSAGE.CHECK_NUM_ERROR);
     }
   }
 
   checkMove(userInput){
     if(userInput !== 'D' && userInput !== 'U') {
-      MissionUtils.Console.print('[ERROR] 이동할 칸은 U 또는 D여야 합니다.(위: U, 아래: D)')
+      MissionUtils.Console.print(Constant.ERROR_MESSAGE.CHECK_MOVE_ERROR)
     }
   }
 
   checkRetry(userInput){
     if(userInput !== 'R' && userInput !== 'Q'){
-      MissionUtils.Console.print("[ERROR] 종료하려면 R 또는 Q를 입력하세요.");
+      MissionUtils.Console.print(Constant.ERROR_MESSAGE.CHECK_RERTY_ERROR);
     }
   }
 }
