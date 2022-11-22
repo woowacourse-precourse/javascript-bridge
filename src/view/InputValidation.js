@@ -1,4 +1,5 @@
-const {Message} = require("./ViewMakers")
+const { Message } = require("./ViewMakers")
+const { Console } = require("@woowacourse/mission-utils");
 
 const Validation = {
 
@@ -21,6 +22,36 @@ const Validation = {
   checkOption(optionInput){
     if (!(optionInput==='Q' || optionInput==='R')){
       throw new Error(Message.OPTION_NOT_VALID);
+    }
+  },
+
+  validateBridgeSize(sizeInput){
+    try{
+      this.checkBridgeSize(sizeInput);
+      return true;
+    }catch(err){
+      Console.print(err.message);
+      return false;
+    }
+  },
+
+  validateMoving(movingInput){
+    try{
+      this.checkMoving(movingInput);
+      return true;
+    }catch(err){
+      Console.print(err.message);
+      return false;
+    }
+  },
+
+  validateOption(optionInput){
+    try{
+      this.checkOption(optionInput);
+      return true;
+    }catch(err){
+      Console.print(err.message);
+      return false;
     }
   }
   

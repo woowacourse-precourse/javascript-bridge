@@ -7,37 +7,31 @@ const InputView = {
   readBridgeSize(app) {
     Console.readLine(Message.BRIDGE_SIZE, (size)=>{ 
       Console.print("");
-      try{
-        Validation.checkBridgeSize(size);
+      if(Validation.validateBridgeSize(size)){
         app.init(size);
-      }catch(err){
-        Console.print(err.message);
-        this.readBridgeSize(app);
+        return;
       }
+      this.readBridgeSize(app);
     });
   },
 
   readMoving(bridgePlay) {
     Console.readLine(Message.MOVE_TO_WHERE, (moving)=>{
-      try{
-        Validation.checkMoving(moving);
+      if(Validation.validateMoving(moving)){
         bridgePlay.playRound(moving);
-      }catch(err){
-        Console.print(err.message);
-        this.readMoving(bridgePlay);
+        return;
       }
+      this.readMoving(bridgePlay);
     });
   },
 
   readGameCommand(bridgePlay) {
     Console.readLine(Message.GAME_QUIT_OR_RETRY, (option)=>{
-      try{
-        Validation.checkOption(option);
+      if(Validation.validateOption(option)){
         bridgePlay.endOrRetry(option);
-      }catch(err){
-        Console.print(err.message);
-        this.readGameCommand(bridgePlay);
+        return;
       }
+      this.readGameCommand(bridgePlay);
     });
   }
 
