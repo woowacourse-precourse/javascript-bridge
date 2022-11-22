@@ -13,7 +13,7 @@ const BridgeMaker = {
 
     for (let i = 0; i < size; i++) {
       const randomBridgeNumber = generateRandomNumber();
-      const bridgeType = BridgeMaker.checkUpOrDown(randomBridgeNumber);
+      const bridgeType = BridgeMaker.changeToUpOrDown(randomBridgeNumber);
 
       brigde.push(bridgeType);
     }
@@ -21,7 +21,7 @@ const BridgeMaker = {
     return brigde;
   },
 
-  checkUpOrDown(bridgeRandomNumber) {
+  changeToUpOrDown(bridgeRandomNumber) {
     return GAME_CONDITION.RANDOM_BRIDGE_NUMBER[bridgeRandomNumber];
   },
 };
