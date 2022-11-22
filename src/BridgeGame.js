@@ -23,8 +23,9 @@ class BridgeGame {
    */
   setBridge = () => {
     this.view.readBridgeSize((size) => {
+      this.validateSize(parseInt(size));
       const bridge = BridgeMaker.makeBridge(
-        size,
+        parseInt(size),
         BridgeRandomNumberGenerator.generate
       );
       this.model.setBridge(bridge);
@@ -40,14 +41,13 @@ class BridgeGame {
     this.view.readMoving((space) => {
       this.model.pushSpace(space);
       console.log(this.model.userSpaces);
-      const { firstLine, secondLine } = this.calculateMoveResult(
-        this.model.bridge,
-        this.model.userSpaces
-      );
       this.moveResult();
     });
   };
 
+  /**
+   * 사용자가 이동한 칸의 결과를 보여주고, 결과에 따른 진행.
+   */
   moveResult = () => {
     const { firstLine, secondLine } = this.calculateMoveResult(
       this.model.bridge,
@@ -57,6 +57,20 @@ class BridgeGame {
     const result = this.checkContinue(this.model.bridge, this.model.userSpaces);
     if (result === GAME_RESULT.FALSE) return this.retry();
     if (result === GAME_RESULT.CONTINUE) return this.move();
+  };
+
+  /**
+   * @param {number | NaN} 다리 사이즈
+   */
+  validateSize = (size) => {
+    if (isNaN(size)) {
+      this.view.printError("[ERROR] 숫자여야 합니다.");
+    }
+    if (size > 20 || size < 3) {
+      this.view.printError(
+        "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다."
+      );
+    }
   };
 
   /**
@@ -112,9 +126,10 @@ class BridgeGame {
    * @return {string} 계속 진행할지 여부. 계속 진행하면 continue, 게임 실패라면 false, 게임 성공이라면 success로 표현해야 한다.
    */
   checkContinue = (bridge, userSpaces) => {
-    const bridgeLength = userSpaces.length;
+    const bridgeLength = bridge.length;
     const userSpacesLength = userSpaces.length;
-    if (userSpaces[length - 1] === bridge[length - 1]) return GAME_RESULT.FALSE;
+    if (userSpaces[userSpacesLength - 1] !== bridge[userSpacesLength - 1])
+      return GAME_RESULT.FALSE;
     if (bridgeLength === userSpacesLength) return GAME_RESULT.SUCCESS;
     return GAME_RESULT.CONTINUE;
   };
