@@ -9,10 +9,10 @@ const OutputView = {
   },
 
   printResult(bridgeMap, result, count) {
-    printMessage('최종 게임 결과');
+    printMessage(MESSAGE.GAME_RESULT_NOTICE);
     this.printMap(bridgeMap);
-    printMessage(`\n게임 성공 여부: ${result} `);
-    printMessage(`총 시도한 횟수: ${count} `);
+    printMessage(MESSAGE.GAME_RESULT(result));
+    printMessage(MESSAGE.ATTEMPT_NUMBER(count));
     close();
   },
 
