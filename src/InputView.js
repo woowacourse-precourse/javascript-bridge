@@ -18,7 +18,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(bridge, bridgeGame) {
-    Console.readLine(`\n${COMMAND.INPUT}\n`, (bridgeSize) => {
+    Console.readLine(`${COMMAND.INPUT}\n`, (bridgeSize) => {
       if(checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge,bridgeGame);
 
       bridge.setBridge(Number(bridgeSize));
@@ -31,7 +31,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(bridge, bridgeGame) {
-    Console.readLine(`\n${COMMAND.MOVE}\n`, (space) => {
+    Console.readLine(`${COMMAND.MOVE}\n`, (space) => {
       if(checkSpace(space)) return this.readMoving(bridge,bridgeGame);
 
       bridgeGame.move(space, bridge);
