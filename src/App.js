@@ -1,13 +1,13 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./BridgeGame');
-const { GAME_MESSAGE, GAME_BOOLEAN, SHORT_CUT } = require('./Constants');
+const { GAME_BOOLEAN, SHORT_CUT } = require('./Constants');
 const { readBridgeSize, readGameCommand, readMoving } = require('./InputView');
-const { printResult, printMap } = require('./OutputView');
+const { printMap, printResult, printStart } = require('./OutputView');
 const { showErrorMessage } = require('./Utils');
 const {
-  sizeValdation,
   moveValidation,
   retryValidation,
+  sizeValdation,
 } = require('./Validations');
 
 class App {
@@ -20,7 +20,7 @@ class App {
   #checkCommand = this.checkCommand.bind(this);
 
   play() {
-    App.start();
+    printStart();
     readBridgeSize(this.#checkSize);
   }
 
@@ -119,10 +119,6 @@ class App {
     this.getGameResult(GAME_BOOLEAN.fail);
     Console.close();
     return null;
-  }
-
-  static start() {
-    Console.print(GAME_MESSAGE.start);
   }
 }
 
