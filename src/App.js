@@ -15,7 +15,15 @@ class App {
       bridgeGame.move(moving);
       OutputView.printMap(bridgeGame.bridge, bridgeGame.location);
       MissionUtils.Console.print(bridgeGame.location);
-    } while (this.checkGame(bridgeGame.bridge, bridgeGame.location, size));
+      let command = true;
+      if (this.checkFail(bridgeGame.bridge, bridgeGame.location)) {
+        if (InputView.readGameCommand() == "Q") command = false;
+        else {
+          this.gameCnt++;
+          bridgeGame.retry();
+        }
+      }
+    } while (command);
     OutputView.printResult(
       bridgeGame.bridge,
       bridgeGame.location,
