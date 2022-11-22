@@ -1,35 +1,35 @@
-const { Console } = require("@woowacourse/mission-utils");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 const { RESULT } = require("../utils/constants");
 const { MANAGER, TEXT } = require("../utils/gameMessage");
 
 const OutputView = {
   printStart() {
-    Console.print(`${MANAGER.NOTICE_START}`);
+    MissionUtils.Console.print(`${MANAGER.NOTICE_START}`);
   },
 
   printBlank() {
-    Console.print("");
+    MissionUtils.Console.print("");
   },
 
   printMap(nowMap) {
     nowMap.forEach((bridge) => {
-      Console.print(`[ ${bridge.join(" | ")} ]`);
+      MissionUtils.Console.print(`[ ${bridge.join(" | ")} ]`);
     });
     this.printBlank();
   },
 
   printResult(nowMap, attemptCnt, isSuccess) {
-    Console.print(`${TEXT.FINAL_RESULT}`);
+    MissionUtils.Console.print(`${TEXT.FINAL_RESULT}`);
     this.printMap(nowMap);
-    Console.print(`${TEXT.IS_SUCCESS}: ${RESULT[isSuccess]}`);
-    Console.print(`${TEXT.TOTAL_ATTEMPT_CNT}: ${attemptCnt}`);
+    MissionUtils.Console.print(`${TEXT.IS_SUCCESS}: ${RESULT[isSuccess]}`);
+    MissionUtils.Console.print(`${TEXT.TOTAL_ATTEMPT_CNT}: ${attemptCnt}`);
 
-    Console.close();
+    MissionUtils.Console.close();
   },
 
   printErrorMessage(errorText) {
-    Console.print(errorText);
+    MissionUtils.Console.print(errorText);
   },
 };
 

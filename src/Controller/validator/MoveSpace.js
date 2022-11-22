@@ -4,8 +4,10 @@ const { ORDER, ISALLOW } = require("../../utils/constants");
 const { ERROR } = require("../../utils/gameMessage");
 
 class MoveSpace {
+  #input;
+
   constructor(input) {
-    this.input = input;
+    this.#input = input;
   }
 
   checkInput() {
@@ -19,7 +21,7 @@ class MoveSpace {
   }
 
   isAllowOrder() {
-    return this.input === ORDER.UP || this.input === ORDER.DOWN;
+    return this.#input === ORDER.UP || this.#input === ORDER.DOWN;
   }
 }
 
