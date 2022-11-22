@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
 const BridgeGame = require("./model/BridgeGame");
 const InputView = require("./view/InputView");
@@ -43,8 +43,8 @@ class App {
   }
 
   endGame(bridgeGame, tryCount) {
-    MissionUtils.Console.close();
     OutputView.printResult(bridgeGame, tryCount);
+    MissionUtils.Console.close();
   }
 }
 
