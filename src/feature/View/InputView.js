@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const InputMessage = require("./utils/const/inputViewMessage");
+const InputMessage = require("../../lib/const/inputViewMessage");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */

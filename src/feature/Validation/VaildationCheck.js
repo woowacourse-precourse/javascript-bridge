@@ -1,7 +1,7 @@
-const ErrorWithPrifix = require("./CustomError");
-const varTypeConst = require("./utils/const/varType");
-const ErrorMessage = require("./utils/const/errorMessage");
-const getVarType = require("./utils/func/getVarType");
+const ErrorWithPrifix = require("../../lib/model/ErrorWithPrifix");
+const varTypeConst = require("../../lib/const/varType");
+const ErrorMessage = require("../../lib/const/errorMessage");
+const getVarType = require("../../lib/utils/getVarType");
 
 class ValidationCheck {
   static isNumber(target) {

@@ -1,4 +1,4 @@
-const OutputPrintMessage = require("../const/outputViewMessage");
+const OutputPrintMessage = require("../../lib/const/outputViewMessage");
 
 const encodeMethods = {
   encodeBridgeSide(currentRound, bridgeSideStatus) {

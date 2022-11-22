@@ -1,8 +1,8 @@
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const MovementStatus = require("./model/MovementStatus");
-const GameStatus = require("./model/GameStatus");
-const ValidationCheck = require("./VaildationCheck");
+const BridgeMaker = require("../../BridgeMaker");
+const BridgeRandomNumberGenerator = require("../../lib/utils/BridgeRandomNumberGenerator");
+const MovementStatus = require("../../lib/model/MovementStatus");
+const GameStatus = require("../../lib/model/GameStatus");
+const ValidationCheck = require("../Validation/VaildationCheck");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스

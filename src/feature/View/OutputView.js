@@ -1,8 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { encodeBridgeSide, encodeGameResult } = require("./utils/func/encode");
-const GameStatus = require("./model/GameStatus");
-const MovementStatus = require("./model/movementStatus");
-const OutputViewMessage = require("./utils/const/outputViewMessage");
+const {
+  encodeBridgeSide,
+  encodeGameResult,
+} = require("../../lib/utils/encode");
+const GameStatus = require("../../lib/model/GameStatus");
+const MovementStatus = require("../../lib/model/MovementStatus");
+const OutputViewMessage = require("../../lib/const/outputViewMessage");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */

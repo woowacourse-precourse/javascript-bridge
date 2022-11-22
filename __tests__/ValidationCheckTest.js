@@ -1,5 +1,5 @@
-const ValidationCheck = require("../src/VaildationCheck");
-const varType = require("../src/utils/const/varType");
+const ValidationCheck = require("../src/feature/Validation/VaildationCheck");
+const varType = require("../src/lib/const/varType");
 
 describe("1. 숫자 타입을 정확히 확인해 주는가?", () => {
   const testCase_fail = [

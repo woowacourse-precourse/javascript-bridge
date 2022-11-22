@@ -1,7 +1,7 @@
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
-const BridgeGame = require("./BridgeGame");
-const VaildationCheck = require("./VaildationCheck");
+const InputView = require("./feature/View/InputView");
+const OutputView = require("./feature/View/OutputView");
+const BridgeGame = require("./feature/BridgeGame/BridgeGame");
+const VaildationCheck = require("./feature/Validation/VaildationCheck");
 
 class App {
   bridgeGame;

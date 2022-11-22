@@ -1,6 +1,6 @@
 const BridgeMaker = require("../src/BridgeMaker");
-const BridgeGame = require("../src/BridgeGame");
-const ErrorWithPrifix = require("../src/CustomError");
+const BridgeGame = require("../src/feature/BridgeGame/BridgeGame");
+const ErrorWithPrifix = require("../src/lib/model/ErrorWithPrifix");
 
 const testList = () => {
   describe("다리건너기 게임 기능 테스트", () => {

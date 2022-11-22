@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const InputView = require("../src/InputView");
+const InputView = require("../src/View/InputView");
 
 MissionUtils.Console.readLine = jest.fn();
 
