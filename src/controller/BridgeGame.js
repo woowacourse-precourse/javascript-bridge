@@ -30,6 +30,9 @@ class BridgeGame {
     this.inputBridgeLength();
   }
 
+  /**
+   * 다리 사이즈 입력에 대한 콜백 함수
+   */
   inputBridgeLength() {
     const bridgeLength = (size) => {
       OutputView.newLine();
@@ -42,6 +45,11 @@ class BridgeGame {
     InputView.readBridgeSize(INPUT.BRIDGE_SIZE, bridgeLength);
   }
 
+  /**
+   * 다리 사이즈에 대한 사용자 입력 값 예외 검증 메서드
+   * @param {string} input 사용자가 입력한 다리 사이즈
+   * @returns 예외 발생 시 false, 예외 미발생 시 true
+   */
   bridgeLengthValidation(input) {
     try {
       Validation.validateSize(input);
@@ -52,6 +60,9 @@ class BridgeGame {
     }
   }
 
+  /**
+   * 이동할 칸 입력에 대한 콜백 함수
+   */
   inputMoving() {
     const moving = (input) => {
       const validation = this.movingValidation(input);
@@ -64,6 +75,11 @@ class BridgeGame {
     InputView.readMoving(INPUT.CHOOSE_BLOCK, moving);
   }
 
+  /**
+   * 이동할 칸에 대한 사용자 입력 값 예외 검증 메서드
+   * @param {string} input 사용자가 입력한 이동할 칸
+   * @returns 예외 발생 시 false, 예외 미발생 시 true
+   */
   movingValidation(input) {
     try {
       Validation.validateMove(input);
@@ -74,6 +90,9 @@ class BridgeGame {
     }
   }
 
+  /**
+   * 게임 재시도 및 종료 입력에 대한 콜백 함수
+   */
   inputReGame() {
     const reGame = (input) => {
       const validation = this.reGameValidation(input);
@@ -84,6 +103,11 @@ class BridgeGame {
     InputView.readMoving(INPUT.RESTART, reGame);
   }
 
+  /**
+   * 게임 재시도 및 종료에 대한 사용자 입력 값 예외 검증 메서드
+   * @param {string} input 사용자가 입력한 재시도 및 종료 값
+   * @returns 예외 발생 시 false, 예외 미발생 시 true
+   */
   reGameValidation(input) {
     try {
       Validation.validateReGame(input);
@@ -96,8 +120,7 @@ class BridgeGame {
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {string} input 사용자가 입력한 이동할 칸
    */
   move(input) {
     const crossable = this.#answers[this.#turn];
@@ -105,6 +128,11 @@ class BridgeGame {
     this.isCorrect(input, crossable);
   }
 
+  /**
+   * 사용자가 입력한 칸이 건널 수 있는 칸인지 판별하는 메서드
+   * @param {string} input 사용자가 입력한 이동할 칸
+   * @param {string} crossable 건널 수 있는 칸
+   */
   isCorrect(input, crossable) {
     if (input === crossable) this.isFirst(UTIL.GO, input);
     if (input !== crossable) {
@@ -116,11 +144,21 @@ class BridgeGame {
     }
   }
 
+  /**
+   * 사용자가 입력한 칸이 첫 칸인지 그 이후의 칸인지 판별하는 메서드
+   * @param {string} state 사용자가 이동한 칸과 정답을 비교한 결과
+   * @param {string} input 사용자가 이동한 칸
+   */
   isFirst(state, input) {
     if (this.#turn === UTIL.FIRST) this.firstBlock(state, input);
     if (this.#turn !== UTIL.FIRST) this.afterFirstBlock(state, input);
   }
 
+  /**
+   * 사용자가 입력한 칸이 첫 칸인 경우 실행되는 메서드
+   * @param {string} state 사용자가 이동한 칸과 정답을 비교한 결과
+   * @param {string} input 사용자가 이동한 칸
+   */
   firstBlock(state, input) {
     if (input === UTIL.UP) {
       const bridgeRecords = this.#bridgeRecords.addFirstUpBlock(state);
@@ -132,6 +170,11 @@ class BridgeGame {
     }
   }
 
+  /**
+   * 사용자가 입력한 칸이 첫 칸 이후인 경우 실행되는 메서드
+   * @param {string} state 사용자가 이동한 칸과 정답을 비교한 결과
+   * @param {string} input 사용자가 이동한 칸
+   */
   afterFirstBlock(state, input) {
     if (input === UTIL.UP) {
       const bridgeRecords = this.#bridgeRecords.addUpBlock(state);
@@ -145,8 +188,6 @@ class BridgeGame {
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
     this.#turn = UTIL.INIT;
@@ -156,6 +197,9 @@ class BridgeGame {
     this.inputMoving();
   }
 
+  /**
+   * 사용자가 게임을 종료할 때 성공여부와, 총 시도횟수, 다리기록을 알려주는 메서드
+   */
   isSuccessGame(isSuccess) {
     InputView.closeRead();
     const records = this.#bridgeRecords.getResult();
