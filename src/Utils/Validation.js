@@ -12,4 +12,8 @@ function validationMove(move) {
   return Constant.MOVE.includes(move);
 }
 
-module.exports = { validateBridgeLength, validationMove };
+function validationRetry(retry) {
+  return Constant.RETRY.includes(retry);
+}
+
+module.exports = { validateBridgeLength, validationMove, validationRetry };
