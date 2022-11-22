@@ -1,6 +1,6 @@
 const BRIDGE_LENGTH_LIMIT = {
   BRIDGE_LENGTH_MAXIMUM: 20,
-  BRIDGE_LENGTH_MINIMUM: 1,
+  BRIDGE_LENGTH_MINIMUM: 3,
 }
 
 const SPACE_TO_MOVE = {
@@ -20,6 +20,7 @@ const GAME_RESULT = {
 
 const ERROR_MESSAGE = {
   BRIDGE_LENGTH_NOT_PIXED_NUMBER: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
+  BRIDGE_LENGTH_NOT_NUMBER: "[ERROR] 다리 길이는 숫자여야 합니다.",
   CHOICE_SPACE_NOT_PIXED_VALUE: "[ERROR] 이동할 칸은 U와 D 중에 선택해야 합니다.",
   CHOICE_GAME_NOT_PIXED_VALUE: "[ERROR] 게임 재시작 여부는 R과 Q 중에 선택해야 합니다.",
 }
