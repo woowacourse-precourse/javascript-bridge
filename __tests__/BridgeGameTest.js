@@ -1,4 +1,4 @@
-const BridgeGame = require("../src/Component/BridgeGame");
+const BridgeGame = require("../src/BridgeGame");
 
 describe("BridgeGame component 테스트", () => {
   const bridgeGame = new BridgeGame(["U", "D", "D"]);
