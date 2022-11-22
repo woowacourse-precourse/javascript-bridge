@@ -52,19 +52,28 @@ const expectBridgeOrder = (received, upside, downside) => {
 };
 
 describe("다리 건너기 테스트", () => {
-  test("다리 생성 테스트", () => {
-    const randomNumbers = [1, 0, 0];
-    const mockGenerator = randomNumbers.reduce((acc, number) => {
-      return acc.mockReturnValueOnce(number);
-    }, jest.fn());
+  test("다리 건너기 테스트 1", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 1, 0]);
+    mockQuestions(["5", "U", "D", "U", "U", "D"]);
 
-    const bridge = BridgeMaker.makeBridge(3, mockGenerator);
-    expect(bridge).toEqual(["U", "D", "D"]);
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[ O |   | O | O |   ]",
+      "[   | O |   |   | O ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 1",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
-  test("기능 테스트", () => {
+  test("기능 테스트2", () => {
     const logSpy = getLogSpy();
-    mockRandoms([1, 0, 1]);
+    mockRandoms(["1", "0", "1"]);
     mockQuestions(["3", "U", "D", "U"]);
 
     const app = new App();
@@ -81,15 +90,44 @@ describe("다리 건너기 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
-  test("예외 테스트", () => {
-    runException(["a"]);
+  test("기능 테스트 2", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 0]);
+    mockQuestions(["3", "U", "U", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+        "최종 게임 결과", 
+        "[ O | X ]", 
+        "[   |   ]", 
+        "게임 성공 여부: 실패", 
+        "총 시도한 횟수: 1"
+    ]);
+    expectBridgeOrder(log, "[ O | X ]", "[   |   ]");
   });
 
-  test("3보다 작은 길이의 다리 테스트", () => {
-    runException(["1"]);
-  });
+  test("재 게임 실행 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 1, 0]);
+    mockQuestions(["5", "D", "R", "U", "D", "U", "U", "D"]);
 
-  test("20보다 큰 길이의 다리 테스트", () => {
-    runException(["50"]);
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+        "최종 게임 결과",
+        "[   ]",
+        "[ X ]",
+        "최종 게임 결과",
+        "[ O |   | O | O |   ]",
+        "[   | O |   |   | O ]",
+        "게임 성공 여부: 성공",
+        "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 });
