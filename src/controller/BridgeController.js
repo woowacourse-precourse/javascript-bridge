@@ -18,8 +18,8 @@ const BridgeController = class extends GameController {
   inputBridgeSize() {
     const callbackInputBridgeSize = (size) => {
       this.checkBridgeSize(size);
-      super.saveSize(size);
-      super.prebuildBridge(size);
+      this.saveSize(size);
+      this.prebuildBridge(size);
       this.inputMoving();
     };
 
@@ -37,11 +37,17 @@ const BridgeController = class extends GameController {
     }
   }
 
+  saveSize(input) {
+    this.bridgeGame.saveSize(input);
+  }
+
+  prebuildBridge(input) {
+    this.bridgeGame.precompose(input);
+  }
+
   inputMoving() {
     const callbackInputMoving = (moving) => {
       this.checkMoving(moving);
-      super.saveMoving(moving);
-      this.printMap(moving);
     };
 
     this.inputView.readMoving(INPUT_VIEW.moving_message, callbackInputMoving);
@@ -49,13 +55,18 @@ const BridgeController = class extends GameController {
 
   checkMoving(input, confirmedInput = null) {
     try {
-      const moving = new Moving(input);
-      confirmedInput = moving.checkInput();
+      confirmedInput = this.checkMovingInput(input);
     } catch (error) {
       this.outputView.printError(error);
     } finally {
       if (confirmedInput !== input) return this.inputMoving();
+      return this.saveMoving(input);
     }
+  }
+
+  saveMoving(input) {
+    this.bridgeGame.saveUpOrDown(input);
+    return this.printMap(input);
   }
 
   printMap(input) {
@@ -79,7 +90,6 @@ const BridgeController = class extends GameController {
   inputGameCommand() {
     const callbackGameCommand = (retryOrQuit) => {
       this.checkGameCommand(retryOrQuit);
-      this.retryOrQuit(retryOrQuit);
     };
 
     this.inputView.readGameCommand(INPUT_VIEW.game_command_message, callbackGameCommand);
@@ -87,12 +97,12 @@ const BridgeController = class extends GameController {
 
   checkGameCommand(input, confirmedInput = null) {
     try {
-      const gameCommand = new GameCommand(input);
-      confirmedInput = gameCommand.checkInput();
+      confirmedInput = this.checkGameCommandInput(input);
     } catch (error) {
       this.outputView.printError(error);
     } finally {
-      if (confirmedInput !== input) return this.inputMoving();
+      if (confirmedInput !== input) return this.inputGameCommand();
+      return this.retryOrQuit(input);
     }
   }
 
@@ -108,6 +118,16 @@ const BridgeController = class extends GameController {
   static isRetry(input) {
     const RETRY = 'R';
     return input === RETRY;
+  }
+
+  checkMovingInput(input) {
+    const moving = new Moving(input);
+    return moving.checkInput();
+  }
+
+  checkGameCommandInput(input) {
+    const gameCommand = new GameCommand(input);
+    return gameCommand.checkInput();
   }
 };
 
