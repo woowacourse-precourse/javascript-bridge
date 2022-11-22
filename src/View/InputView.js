@@ -7,11 +7,11 @@ const InputView = {
   },
 
   readMoving(input) {
-    Console.readLine(`\n${MANAGER.ASK_MOVE}\n`, input);
+    Console.readLine(`${MANAGER.ASK_MOVE}\n`, input);
   },
 
   readGameCommand(input) {
-    Console.readLine(`\n${MANAGER.ASK_RETRY}\n`, input);
+    Console.readLine(`${MANAGER.ASK_RETRY}\n`, input);
   },
 };
 

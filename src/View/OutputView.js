@@ -8,16 +8,21 @@ const OutputView = {
     Console.print(`${MANAGER.NOTICE_START}`);
   },
 
+  printBlank() {
+    Console.print("");
+  },
+
   printMap(nowMap) {
     nowMap.forEach((bridge) => {
       Console.print(`[ ${bridge.join(" | ")} ]`);
     });
+    Console.print("");
   },
 
   printResult(nowMap, attemptCnt, isSuccess) {
-    Console.print(`\n${TEXT.FINAL_RESULT}`);
+    Console.print(`${TEXT.FINAL_RESULT}`);
     this.printMap(nowMap);
-    Console.print(`\n${TEXT.IS_SUCCESS}: ${RESULT[isSuccess]}`);
+    Console.print(`${TEXT.IS_SUCCESS}: ${RESULT[isSuccess]}`);
     Console.print(`${TEXT.TOTAL_ATTEMPT_CNT}: ${attemptCnt}`);
 
     Console.close();
