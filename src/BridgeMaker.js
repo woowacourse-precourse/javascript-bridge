@@ -1,9 +1,12 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 const { GUIDE_MESSAGE } = require("./Constant");
+const app = require("./App");
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
+
+const size = app.inputSize;
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
