@@ -65,9 +65,9 @@
 - [X] 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분했는가
 - [X] else를 지양했는가
 - [x] 함수(또는 메서드)의 길이가 10라인을 넘어가지 않도록 구현했는가
-- [ ] 메서드의 파라미터 개수는 최대 3개까지만 사용했는가
-- [ ] 주어진 클래스(객체)의 요구사항을 참고하여 구현했는가
-- [ ] InputView 에서만 MissionUtils의 Console.readLine() 을 이용해 사용자의 입력을 받았는가
+- [X] 메서드의 파라미터 개수는 최대 3개까지만 사용했는가
+- [X] 주어진 클래스(객체)의 요구사항을 참고하여 구현했는가
+- [X] InputView 에서만 MissionUtils의 Console.readLine() 을 이용해 사용자의 입력을 받았는가
 - [ ] BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않았는가
 - [x] Random 및 Console API를 사용하여 구현했는가
 - [x] 불필요한 console print가 코드에 남아있지 않은가
