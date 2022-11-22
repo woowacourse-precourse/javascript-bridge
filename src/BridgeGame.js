@@ -1,6 +1,6 @@
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
-const{ MOVING, RETRY, RESULT, CONTROL } = require("./constants/Values");
+const{ MOVING, RETRY, RESULT, CONTROL, POSITION_SYMBOLL } = require("./constants/Values");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -65,8 +65,8 @@ class BridgeGame {
   getSucessValue() {
     let lastStep = this.getRecordSteps();
     if(this.#player.upsides.length !== this.#stairs.bridge.length) return RESULT.FAIL;
-    if(lastStep[0].indexOf(MOVING.UNPASSED) > -1 ||
-      lastStep[1].indexOf(MOVING.UNPASSED) > -1) {
+    if(lastStep[POSITION_SYMBOLL.UP_STREET].indexOf(MOVING.UNPASSED) > -1 ||
+      lastStep[POSITION_SYMBOLL.DOWN_STREET].indexOf(MOVING.UNPASSED) > -1) {
       return RESULT.FAIL;
      }
     if(this.#player.upsides.length === this.#stairs.bridge.length) return RESULT.SUCCESS;
