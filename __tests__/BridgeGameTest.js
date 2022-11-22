@@ -10,6 +10,6 @@ describe("BridgeGame 클래스 테스트", () => {
 
   test("이동할 칸은 U 혹은 D 여야 한다.", () => {
     const bridgeGame = new BridgeGame(3);
-    expect(()=>{bridgeGame.moving('a')}).toThrow(ERROR_MESSAGE.BRIDGE_LENGTH);}
+    expect(()=>{bridgeGame.move('a')}).toThrow(ERROR_MESSAGE.INPUT_MOVING);}
   );
 });

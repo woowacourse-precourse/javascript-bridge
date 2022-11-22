@@ -2,6 +2,7 @@ const Bridge = require("./Bridge");
 const { makeBridge } = require("../BridgeMaker");
 const BridgeMap = require("./BridgeMap");
 const { generate } = require("../BridgeRandomNumberGenerator");
+const BridgeGameValidator = require("../validator/BridgeGameValidator");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -11,12 +12,14 @@ class BridgeGame {
   #step;
 
   constructor(bridgeSize){
+    new BridgeGameValidator().bridgeSizeValidate(bridgeSize);
     this.#bridge = new Bridge(makeBridge(bridgeSize, generate));
     this.#bridgeMap = new BridgeMap();
     this.#step = -1;
   }
 
   move(moving) {
+    new BridgeGameValidator().movingValidate(moving);
     this.#step += 1;
     const isMatch =  this.#bridge.matchMoveBridge(moving, this.#step);
     this.#bridgeMap.buildMap(moving, isMatch);
