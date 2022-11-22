@@ -9,7 +9,6 @@ class BridgeGame {
 
   constructor(bridge) {
     this.#bridge = bridge;
-    console.log(this.#bridge);
     this.#currentBridge = [];
     this.#up = [];
     this.#down = [];
