@@ -9,6 +9,8 @@ class BridgeGame {
   #CUR_IDX = -1;
   #MOVING = [];
   #COUNT = 1;
+  #UP = [];
+  #DOWN = [];
 
   constructor(bridge) {
     this.#BRIDGE = bridge;
@@ -30,8 +32,10 @@ class BridgeGame {
 
     this.changeToMap();
 
-    if (this.#BRIDGE.length === this.#MOVING.length)
-      OutputView.printResult(this.#COUNT);
+    if (this.#BRIDGE.length === this.#MOVING.length) {
+      OutputView.printResult(this.#UP, this.#DOWN);
+      OutputView.printResultInfo(this.#COUNT, true);
+    } 
 
     return moving === this.#BRIDGE[this.#CUR_IDX] ? true : false;
   }
@@ -46,6 +50,8 @@ class BridgeGame {
     });
 
     OutputView.printMap(UP, DOWN);
+    this.#UP = UP;
+    this.#DOWN = DOWN;
   }
 
   /**
@@ -59,7 +65,8 @@ class BridgeGame {
   }
 
   quit() {
-    OutputView.printResult(this.#COUNT);
+    OutputView.printResult(this.#UP, this.#DOWN);
+    OutputView.printResultInfo(this.#COUNT, this.#BRIDGE.length === this.#MOVING.length);
   }
 }
 
