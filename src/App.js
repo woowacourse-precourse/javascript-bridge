@@ -3,7 +3,7 @@ const BridgeController = require('./Controller/BridgeController');
 class App {
   play() {
     const bridgeController = new BridgeController();
-    bridgeController.getBridgeSizeRequest();
+    bridgeController.requestBridgeSizeToView();
   }
 }
 

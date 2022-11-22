@@ -17,7 +17,7 @@ class BridgeController {
   /**
    * 뷰에 생성될 다리의 길이 입력을 요청하는 메서드
    */
-  getBridgeSizeRequest = () => {
+  requestBridgeSizeToView = () => {
     readBridgeSize(this.verifyBridgeSize);
   };
 
@@ -25,22 +25,22 @@ class BridgeController {
    * 입력받은 다리의 유효성 검사여부에 따라 다시 입력을 요청하거나 다음단계로 진행시키는 메서드
    */
   verifyBridgeSize = (size, isError) => {
-    if (isError) this.getBridgeSizeRequest();
-    if (!isError) this.sendBridgeRequestToModel(size);
+    if (isError) this.requestBridgeSizeToView();
+    if (!isError) this.sendBridgeSizeRequestToModel(size);
   };
 
   /**
    * 모델에 입력받은 다리의 길이를 전달하는 메서드
    */
-  sendBridgeRequestToModel = (size) => {
+  sendBridgeSizeRequestToModel = (size) => {
     this.#Game.initializeBridge(size);
-    this.getMoveRequest();
+    this.requestMoveToView();
   };
 
   /**
    * 뷰에 이동 입력을 요청하는 메서드
    */
-  getMoveRequest = () => {
+  requestMoveToView = () => {
     readMoving(this.verifyMove);
   };
 
@@ -48,15 +48,15 @@ class BridgeController {
    * 입력받은 이동의 유효성 검사여부에 따라 다시 입력을 요청하거나 다음단계로 진행시키는 메서드
    */
   verifyMove = (move, isError) => {
-    if (isError) this.getMove();
+    if (isError) this.requestMoveToView();
     if (!isError) this.sendMoveRequestToModel(move);
   };
 
   /**
    * 모델에 입력받은 이동 입력을 전달하는 메서드
    */
-  sendMoveRequestToModel = (moveInput) => {
-    this.#Game.move(moveInput);
+  sendMoveRequestToModel = (move) => {
+    this.#Game.move(move);
     this.sendOutputRequestToModel();
   };
 
@@ -86,15 +86,15 @@ class BridgeController {
    */
   checkMoveOption = () => {
     const { isPassed, isCleared } = this.#Game.getStatus();
-    if (isPassed) this.getMoveRequest();
-    if (!isPassed) this.getCommandRequest();
+    if (isPassed) this.requestMoveToView();
+    if (!isPassed) this.requestCommandToView();
     if (isCleared) this.finishControl();
   };
 
   /**
    * 뷰에 종료, 재시작 여부를 묻는 입력을 요청하는 메서드
    */
-  getCommandRequest = () => {
+  requestCommandToView = () => {
     readGameCommand(this.checkGameOption);
   };
 
@@ -102,7 +102,7 @@ class BridgeController {
    * 입력받은 종료,재시작여부의 유효성 검사여부에 따라 다시 입력을 요청하거나 다음단계로 진행시키는 메서드
    */
   verifyCommand = (command, isError) => {
-    if (isError) this.getCommandRequest();
+    if (isError) this.requestCommandToView();
     if (!isError) this.checkGameOption(command);
   };
 
@@ -112,7 +112,7 @@ class BridgeController {
   checkGameOption = (command) => {
     if (command === INPUT_RETRY.restart) {
       this.#Game.retry();
-      this.getMoveRequest();
+      this.requestMoveToView();
     }
     if (command === INPUT_RETRY.quit) this.finishControl();
   };
@@ -127,6 +127,6 @@ class BridgeController {
   };
 }
 
-const game = new BridgeController();
-game.getBridgeSizeRequest();
+// const game = new BridgeController();
+// game.requestBridgeSizeToView();
 module.exports = BridgeController;
