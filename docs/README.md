@@ -59,4 +59,5 @@
 
 - [x] InputView, OutputView에서 Input, Output의 책임만 갖도록 변경한다.
   - [x] readLineAsync 함수 추가하여 readLine의 callback loop를 최소화한다.
-- [ ] `[ERROR]` prefix로 지정하기
+- [x] `[ERROR]` prefix로 지정하기
+  - CustomError class를 사용하여 prefix 지정

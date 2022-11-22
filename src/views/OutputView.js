@@ -27,9 +27,12 @@ const OutputView = {
   printResult(count, result, formattedBridges) {
     Console.print(MESSAGES.RESULT.TITLE);
     this.printMap(formattedBridges);
-    Console.print('');
     Console.print(MESSAGES.RESULT.SCORE(result));
     Console.print(MESSAGES.RESULT.TRY_COUNT(count));
+  },
+
+  printError(message) {
+    Console.print(message);
   },
 };
 
