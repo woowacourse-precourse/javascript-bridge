@@ -5,7 +5,7 @@ const { close } = require("../utils/utils");
 const BridgegLengthValidator = require("../utils/BridgeLengthValidator");
 const DirectionValidator = require("../utils/DirectionValidator");
 const RegameCommandValidator = require("../utils/RegameCommandValidator");
-const ValidPathBridge = require("../BridgeAnswer");
+const ValidPathBridge = require("../BridgeAnswerPath");
 const { STATUS, STATE } = require("../constants/message");
 const BridgeMap = require("../BridgeMap");
 

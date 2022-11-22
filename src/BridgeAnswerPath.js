@@ -1,7 +1,7 @@
 const generateRandomNumber = require("./BridgeRandomNumberGenerator").generate;
 const BridgeMaker = require("./BridgeMaker");
 
-class BridgeAnswer {
+class BridgeAnswerPath {
   #answerBridge = { path: [], size: 0 };
 
   getbridge() {
@@ -17,4 +17,4 @@ class BridgeAnswer {
     this.#answerBridge.path = BridgeMaker.makeBridge(this.#answerBridge.size, generateRandomNumber);
   }
 }
-module.exports = BridgeAnswer;
+module.exports = BridgeAnswerPath;
