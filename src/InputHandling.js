@@ -43,7 +43,12 @@ class InputHandling {
   }
 
   handleGameCommand(command) {
-    Validation.checkRestartOrDone(command);
+    try {
+      Validation.checkRestartOrDone(command);
+    } catch (err) {
+      Console.print(err);
+      InputView.readGameCommand(this.handleGameCommand.bind(this));
+    }
   }
 }
 
