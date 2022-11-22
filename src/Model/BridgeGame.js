@@ -17,6 +17,15 @@ class BridgeGame {
     return {upMap, downMap};
   }
 
+  canMove() {
+    if (this.moving.length === 0 || this.bridge.length === 0) return;
+
+    const currentMove = this.moving[this.moving.length - 1];
+    const cuurrentFloor = this.bridge[this.moving.length - 1];
+
+    return currentMove === cuurrentFloor;
+  }
+
 }
 
 module.exports = BridgeGame;
