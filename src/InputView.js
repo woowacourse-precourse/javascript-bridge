@@ -10,11 +10,13 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    Consolee.readline("다리의 길이를 입력해주세요. \n", (bridges) => {
+    let sizes;
+    Consolee.readline("다리의 길이를 입력해주세요. \n", (size) => {
       //예외 처리 1
-      bridgeSizeValidate(bridges);
+      bridgeSizeValidate(Number(size));
+      sizes = Number(size);
     });
-    return bridges;
+    return sizes;
   },
 
   /**
