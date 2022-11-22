@@ -20,4 +20,13 @@ const ERROR_MESSAGE = {
     RESTART_ERROR : "[ERROR] R 또는 Q를 입력해주세요."
 };
 
-module.exports = { GAME_START_MESSAGE, INPUT_MESSAGE, GAME_RESULT_MESSAGE, ERROR_MESSAGE };
+const BRIDGE_MAKER = {
+    START : "[",
+    END : "]",
+    CORRECT : " O ",
+    WRONG : " X ",
+    BAR : "|",
+    NOTHING : "   ",
+};
+
+module.exports = { GAME_START_MESSAGE, INPUT_MESSAGE, GAME_RESULT_MESSAGE, ERROR_MESSAGE, BRIDGE_MAKER };
