@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Validation = require("./Validation.js");
 const withError = require("./utils/withError.js");
+const { gameMessage } = require("./constant/message.js");
 
 const { Console } = MissionUtils;
 /**
@@ -13,7 +14,7 @@ const InputView = {
    * @param {function} next
    */
   readBridgeSize(current, next) {
-    const message = "다리의 길이를 입력해주세요.\n";
+    const message = gameMessage.bridgeSize;
     const validateLength = Validation.validateBridgeLength.bind(Validation);
     Console.readLine(message, withError(validateLength, current, next));
   },
@@ -22,7 +23,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(current, next) {
-    const message = "이동할 칸을 선택해주세요. (위: U, 아래: D)\n";
+    const message = gameMessage.move;
     const validateMoveCommand = (inputs) =>
       Validation.validateCommand(inputs, ["U", "D"]);
 
@@ -33,8 +34,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(current, next) {
-    const message =
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n";
+    const message = gameMessage.retry;
     const validateEndCommand = (inputs) =>
       Validation.validateCommand(inputs, ["R", "Q"]);
 
