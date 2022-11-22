@@ -1,21 +1,53 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { Console } = require("@woowacourse/mission-utils");
+const { VALID_CHAR, FLAG } = require("./constants");
+const ErrorChecker = require("./ErrorChecker");
+const OutputView = require("./OutputView");
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  interpretFlag(obj) {
+    if (obj.flag === FLAG.PRINT_RESULT) return OutputView.printResult([obj.upLineOfBridge, obj.downLineOfBridge], obj.successOrfailure, obj.tryCount);
+    if (obj.flag === FLAG.READ_GAME_COMMAND) return this.readGameCommand(obj.bridgeGame);
+    if (obj.flag === FLAG.READ_MOVING) return this.readMoving(obj.bridgeGame);
+  },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+  readBridgeSize(bridgeGame) {
+    Console.readLine("다리의 길이를 입력해주세요.\n", (bridgeSize) => {
+      Console.print("");
+      try {
+        ErrorChecker.checkBridgeSizeValidation(bridgeSize);
+      } catch (error) {
+        OutputView.printError(error.message);
+        this.readBridgeSize(bridgeGame);
+      }
+      bridgeGame.init(bridgeSize);
+      this.readMoving(bridgeGame);
+    });
+  },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+  readMoving(bridgeGame) {
+    Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (movingStep) => {
+      try {
+        ErrorChecker.checkValidChar(VALID_CHAR.UP, VALID_CHAR.DOWN, movingStep);
+        this.interpretFlag(bridgeGame.move(movingStep));
+      } catch (error) {
+        OutputView.printError(error.message);
+        this.readMoving(bridgeGame);
+      }
+    });
+  },
+
+  readGameCommand(bridgeGame) {
+    Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n", (gameCommand) => {
+      try {
+        ErrorChecker.checkValidChar(VALID_CHAR.REPLAY, VALID_CHAR.QUIT, gameCommand);
+        if (gameCommand === VALID_CHAR.REPLAY) this.interpretFlag(bridgeGame.retry());
+        else this.interpretFlag(bridgeGame.quit());
+      } catch (error) {
+        OutputView.printError(error.message);
+        this.readGameCommand(bridgeGame);
+      }
+    });
+  },
 };
 
 module.exports = InputView;
