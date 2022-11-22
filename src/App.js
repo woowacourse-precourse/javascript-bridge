@@ -26,7 +26,6 @@ class App {
   makeBridge(length) {
     const makeBridge = BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate());
     let resultBridge = [[], []];
-    MissionUtils.Console.print(makeBridge);
     this.userMove(length, makeBridge, resultBridge);
   }
 
