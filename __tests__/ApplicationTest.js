@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
-
+const { bridgeValidation, moveValidation, restartValidation } = require('../src/validate.js');
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
@@ -51,9 +51,50 @@ const expectBridgeOrder = (received, upside, downside) => {
   expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
+describe("Input 테스트", () => {
+  test('bridgeSize Test', () => {
+    expect(() => {
+      bridgeValidation('A');
+    }).toThrow('[ERROR] 다리의 길이는 정수만 입력 가능합니다.');
+  });
+
+  test('bridgeSize Test2', () => {
+    expect(() => {
+      bridgeValidation(-1);
+    }).toThrow('[ERROR] 다리의 길이는 3이상 20이하 입니다.');
+  });
+
+  test('moveValidation Test', () => {
+    expect(() => {
+      moveValidation('A');
+    }).toThrow('[ERROR] 위(U) 아래(D)를 입력해주세요.');
+  });
+
+  test('moveValidation Test2', () => {
+    expect(() => {
+      moveValidation(3);
+    }).toThrow('[ERROR] 위(U) 아래(D)를 입력해주세요.');
+  });
+
+  test('restartValidation Test', () => {
+    expect(() => {
+      restartValidation('A');
+    }).toThrow('[ERROR] 재시작(R) 나가기(Q)를 입력해주세요.');
+  });
+
+  test('restartValidation Test2', () => {
+    expect(() => {
+      restartValidation(3);
+    }).toThrow('[ERROR] 재시작(R) 나가기(Q)를 입력해주세요.');
+  });
+
+
+});
+
+
 describe("다리 건너기 테스트", () => {
   test("다리 생성 테스트", () => {
-    const randomNumbers = [1, 0, 0];
+    const randomNumbers = ["1", "0", "0"];
     const mockGenerator = randomNumbers.reduce((acc, number) => {
       return acc.mockReturnValueOnce(number);
     }, jest.fn());
@@ -62,9 +103,20 @@ describe("다리 건너기 테스트", () => {
     expect(bridge).toEqual(["U", "D", "D"]);
   });
 
+  test("다리 생성 테스트2", () => {
+    const randomNumbers = ["1","1","1", "0", "0"];
+    const mockGenerator = randomNumbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, jest.fn());
+
+    const bridge = BridgeMaker.makeBridge(5, mockGenerator);
+    expect(bridge).toEqual(["U","U","U", "D", "D"]);
+  });
+
+
   test("기능 테스트", () => {
     const logSpy = getLogSpy();
-    mockRandoms([1, 0, 1]);
+    mockRandoms(["1", "0", "1"]);
     mockQuestions(["3", "U", "D", "U"]);
 
     const app = new App();
