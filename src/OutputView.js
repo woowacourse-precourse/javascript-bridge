@@ -30,6 +30,38 @@ const OutputView = {
     this.initArray();
   },
 
+  printByString() {
+    let upperCase = String(UP.join(' | '));
+    let downCase = String(DOWN.join(' | '));
+    MissionUtils.Console.print(`[ ${upperCase} ]\n[ ${downCase} ]\n`);
+  },
+
+  mergeArray(input, flag) {
+    let ITEM = this.judgeCase(flag);
+
+    if (input == "U") {
+      UP = [...UP, ITEM];
+      DOWN = [...DOWN, " "];
+    }
+    else if (input == "D") {
+      UP = [...UP, " "];
+      DOWN = [...DOWN, ITEM];
+    }
+  },
+
+  judgeCase(flag) {
+    let ITEM = "";
+    switch (flag) {
+      case true:
+        ITEM = "O";
+        break;
+      case false:
+        ITEM = "X";
+        break;
+    }
+    return ITEM;
+  },
+
   initArray() {
     UP = [];
     DOWN = [];
