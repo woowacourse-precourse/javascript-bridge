@@ -39,6 +39,7 @@ const InputView = {
       bridgeGame.pushResult(direction);
       OutputView.printMap(bridgeGame);
       if (!bridgeGame.isRight()) this.readGameCommand(bridgeGame);
+      if (bridgeGame.isEnd()) return OutputView.printResult(bridgeGame);
       bridgeGame.move();
       this.readMoving(bridgeGame);
     });
