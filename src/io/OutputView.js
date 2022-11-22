@@ -46,6 +46,13 @@ const OutputView = {
   printError(error) {
     Console.print(error);
   },
+
+  /**
+   * 출력시 한 줄 개행 해준다.
+   */
+  printNewLine() {
+    Console.print('');
+  },
 };
 
 module.exports = OutputView;

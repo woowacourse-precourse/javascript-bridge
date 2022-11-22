@@ -11,6 +11,7 @@ const {
   printGameEnd,
   printMap,
   printResult,
+  printNewLine,
 } = require('./io/OutputView');
 const {
   validateBridgeSize,
@@ -41,6 +42,7 @@ class App {
    */
   handleSizeInputException(input) {
     try {
+      printNewLine();
       validateBridgeSize(input);
       this.handleSizeInput.call(this, input);
     } catch (e) {
