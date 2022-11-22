@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
-
+const {MoveInput, RetryInput} = require("../src/Validate.js")
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
@@ -81,7 +81,61 @@ describe("다리 건너기 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
-  test("예외 테스트", () => {
+  test("다리 길이 예외 테스트", () => {
     runException(["a"]);
+  });
+
+  test("다리 길이 예외 테스트", () => {
+    runException([2]);
+  });
+
+  test("다리 길이 예외 테스트", () => {
+    runException([101]);
+  });
+
+  test("다리 길이 예외 테스트", () => {
+    runException([101]);
+  });
+
+  test("다리 이동 예외 테스트", () => {
+    expect(() => {
+      MoveInput('R');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      MoveInput('Q');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      MoveInput('u');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      MoveInput('d');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      MoveInput('ZZZ');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      MoveInput(15);
+    }).toThrow('[ERROR]');
+  });
+
+  test("재시작 예외 테스트", () => {
+    expect(() => {
+      RetryInput('U');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      RetryInput('D');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      RetryInput('r');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      RetryInput('q');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      RetryInput('rrr');
+    }).toThrow('[ERROR]');
+    expect(() => {
+      RetryInput(15);
+    }).toThrow('[ERROR]');
   });
 });
