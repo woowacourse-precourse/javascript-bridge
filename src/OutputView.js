@@ -18,8 +18,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridgeRecords) {
-    const upperBridge = bridgeRecords[0].join('');
-    const lowerBridge = bridgeRecords[1].join('');
+    const upperBridge = bridgeRecords[0];
+    const lowerBridge = bridgeRecords[1];
     Console.print(OUTPUT.UPPER(upperBridge));
     Console.print(OUTPUT.LOWER(lowerBridge));
   },
@@ -30,8 +30,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(result, tries, bridgeRecords) {
-    const upperBridge = bridgeRecords[0].join('');
-    const lowerBridge = bridgeRecords[1].join('');
+    const upperBridge = bridgeRecords[0];
+    const lowerBridge = bridgeRecords[1];
     Console.print(OUTPUT.RESULT_MENT);
     Console.print(OUTPUT.UPPER(upperBridge));
     Console.print(OUTPUT.LOWER(lowerBridge));

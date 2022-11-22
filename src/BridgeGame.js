@@ -41,7 +41,7 @@ class BridgeGame {
   inputMoving() {
     const moving = (input) => {
       this.move(input);
-      if (this.#isSuccess) this.clearGame();
+      if (this.#isSuccess) this.isSuccessGame(this.#isSuccess);
       if (!this.#isSuccess && this.#isPlay) this.inputMoving();
       if (!this.#isSuccess && !this.#isPlay) this.inputReGame();
     };
@@ -51,7 +51,7 @@ class BridgeGame {
   inputReGame() {
     const reGame = (input) => {
       if (input === UTIL.RETRY) this.retry();
-      if (input === UTIL.QUIT) this.giveupGame();
+      if (input === UTIL.QUIT) this.isSuccessGame(this.#isSuccess);
     };
     InputView.readMoving(INPUT.RESTART, reGame);
   }
@@ -111,27 +111,18 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
+    this.#turn = UTIL.INIT;
     this.#tries += 1;
     this.#isPlay = true;
-    this.init();
+    this.#bridgeRecords.init();
     this.inputMoving();
   }
 
-  init() {
-    this.#turn = UTIL.INIT;
-    this.#bridgeRecords.init();
-  }
-
-  clearGame() {
+  isSuccessGame(isSuccess) {
     InputView.closeRead();
     const records = this.#bridgeRecords.getResult();
-    OutputView.printResult(UTIL.SUCCESS, this.#tries, records);
-  }
-
-  giveupGame() {
-    InputView.closeRead();
-    const records = this.#bridgeRecords.getResult();
-    OutputView.printResult(UTIL.FAIL, this.#tries, records);
+    if (isSuccess) OutputView.printResult(UTIL.SUCCESS, this.#tries, records);
+    if (!isSuccess) OutputView.printResult(UTIL.FAIL, this.#tries, records);
   }
 }
 
