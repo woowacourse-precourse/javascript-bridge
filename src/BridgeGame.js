@@ -1,4 +1,4 @@
-const { BRIDGE_DRAWER } = require("./constants/Messages");
+const { BRIDGE_DRAWER } = require("./constants/messages");
 
 class BridgeGame {
   #bridge = [];
