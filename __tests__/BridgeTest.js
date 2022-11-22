@@ -74,4 +74,26 @@ describe("다리 건너기 테스트2", () => {
   test("예외 테스트", () => {
     runException(["a"]);
   });
+
+  test("재 게임", () => {
+    const logSpy = getLogSpy();
+    mockRandoms([1, 0, 1, 1, 0]);
+    mockQuestions(["5", "D", "R", "U", "D", "U", "U", "D"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "최종 게임 결과",
+      "[   ]",
+      "[ X ]",
+      "최종 게임 결과",
+      "[ O |   | O | O |   ]",
+      "[   | O |   |   | O ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+    expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
+  });
 });
