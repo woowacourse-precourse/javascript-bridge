@@ -1,4 +1,4 @@
-const { USER_INPUT, RETRY, END_GAME } = require("./Messages");
+const { USER_INPUT, RETRY, END_GAME, ERROR } = require("./Messages");
 const { Console } = require("@woowacourse/mission-utils");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker");
@@ -18,11 +18,29 @@ const InputView = {
 
   readBridgeSize() {
     Console.readLine(USER_INPUT.ENTER_LENGTH, (size) => {
-      const bridgeList = makeBridge(size, generate);
-      InputView.readMoving(bridgeList);
-    });
+      try {
+        this.validateBridgeSize(size);
+        const bridgeList = makeBridge(size, generate);
+        InputView.readMoving(bridgeList);
+      } catch (error) {
+        this.printError(error);
+      }
+      });
   },
   
+  validateBridgeSize(size) {
+    if(size < 3 || size > 20) {
+      throw new Error(ERROR.BRIDGE_SIZE_LENGTH_ERROR);
+    };
+    if(isNaN(size)) {
+      throw new Error(ERROR.BRIDGE_TYPE_ERROR);
+    };
+  },
+
+  printError(error) {
+    Console.print(error);
+    Console.close();
+  },
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
@@ -41,11 +59,11 @@ const InputView = {
       this.readMoving(bridgeList);
     } 
     else {
-      this.stopMoving(upAndDownList, isInputRight);
+      this.stopMoving(upAndDownList, isInputRight, bridgeList);
     }
   },
 
-  stopMoving(upAndDownList, isInputRight) {
+  stopMoving(upAndDownList, isInputRight, bridgeList) {
     if(isInputRight) {
       printResult(upAndDownList, this.retryNum, this.isSuccess);
     }

@@ -11,4 +11,8 @@ const END_GAME = {
   SUCCESSED: '성공',
   FAILED: '실패',
 }
-module.exports = {START_GAME, USER_INPUT, RETRY, END_GAME};
+const ERROR = {
+  BRIDGE_SIZE_LENGTH_ERROR: '\n[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+  BRIDGE_TYPE_ERROR: '\n[ERROR] 다리 길이는 숫자 한 개만 입력 가능합니다.',
+}
+module.exports = {START_GAME, USER_INPUT, RETRY, END_GAME, ERROR};
