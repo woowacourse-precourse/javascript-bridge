@@ -16,9 +16,10 @@ const InputView = {
    */
   readBridgeSize(game, readMoving) {
     const readBridgeSizeCallback = (res) => {
-      validateBridgeSizeInput(res);
-      let bridge = makeBridge(res, generate);
-      return readMoving(game, bridge);
+      if (validateBridgeSizeInput(res)) {
+        let bridge = makeBridge(res, generate);
+        return readMoving(game, bridge);
+      }
     };
     Console.readLine(MESSAGES.READ_BRIDGE_SIZE, readBridgeSizeCallback);
   },
