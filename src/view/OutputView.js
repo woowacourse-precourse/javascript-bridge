@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const Messages = require('./Messages');
+const Messages = require('../Messages');
 
 const OutputView = {
   startGame() {
