@@ -1,6 +1,6 @@
 # 미션 - 다리 건너기
 
-<details open>
+<details>
     <summary> 
     <h2> 📌 기능 구현 목록 </h2> </br>
     다리 건너기 미션 해결을 위해 구현한 기능 목록입니다.
@@ -114,7 +114,8 @@
      - 1-1-4 [D]
      - 1-1-5 [D, U, U, U, U, U, D, U, D, U]
 
-  </details>
+  </details
+>
 
 <details>
 <summary>
@@ -159,7 +160,10 @@
      - 3-2-1 시도 횟수 확인
      - 3-2-2 시도 횟수 확인
 
-<details>
+</details>
+</details>
+
+---
 
 <details>
     <summary>
@@ -167,6 +171,104 @@
         </br>
       프로젝트의 전반적인 이해를 돕기 위한 내용들입니다.
     </summary>
-</details>
+
+</br>
+
+## 1. 폴더구조 설명
+
+```
+
+-─ src
+    │
+    ├─ feature
+    │  ├─ BridgeGame
+    │  ├─ Validation
+    │  └─ View ㅑO 기능 구현
+    │
+    ├─ lib
+    │   ├─ utils // 유틸함수들을 모아둔 폴더
+    │   ├─ const // 문자열, 상수 값들을 모아둔 폴더
+    │   └─ model // 특정 데이터에 대해 객체를 구조화시킴,
+    │
+    ├─ App.js  //프로젝트 진입점 및 다리건너기 게임 진행 기능
+    │
+    └─ BridgeMaker.js
+
+```
+
+### feature
+
+- BridgeGame : 다리 건너기 게임 기능 구현
+- Validation : 유효성 체크 기능 구현
+- View: Input, Ouput 기능 구현
+
+### lib
+
+- utils : 랜덤 넘버 제너레이터, 인코딩 등 유틸함수들을 모아둔 폴더
+- const : 상수 값들을 모아둔 폴더 (문자열, 입력, 출력 메세지 등)
+- model : 목적에 맞게 구조화된 데이터 모델들을 모아둔 폴더
+  - MovementStatus : 현재 다리 이동 상태를 나타냄
+    - round : 다리 칸 이동 횟수
+    - upperSideStatus : 윗쪽칸 이동 결과,
+    - lowerSideStatus : 아랫쪽칸 이동 결과
+  - GameStatus : 게임의 진행 상태를 나타냄
+    - success : 다리건너기 성공여부
+    - playing : 게임 진행중 여부
+    - tiral 시도 횟수
+
+## 2. 핵심 로직, 코드 설명
+
+### (BridgeGame) move 메서드에서는 이동 후 그 결과를 상태로 저장
+
+```javascript
+  move(moveInput) {
+    const [movementStatus, gameStatus] = [this.movementStatus, this.gameStatus];
+    const { upperResult, lowerResult, roundCheckResult } = this.roundCheck(
+      moveInput,
+      movementStatus.round
+    );
+    const { success, playing } = this.gameStatusCheck(roundCheckResult);
+    this.#movementStatusUpdate({ upperResult, lowerResult });
+    this.#gameStatusUpdate({ playing, success });
+    return { movementStatus, gameStatus };
+  }
+
+```
+
+- 매 회 이동 체크 / this.roundCheck(
+  - 다리 이동 한번한번을 round라고 이름 지음
+  - 매 이동 결과를 체크하는 메서드
+    매 회 게임 상태 체크 / this.gameStatusCheck()
+  - 이동 결과를 토대로, 게임 상태에 대해 체크하는 메서드
+- 상태 업데이트
+  - #movementStatusUpdate, #gameStatusUpdate 메서드 활용
+  - 사이드 이펙트 방지를 위해 private 메서드로 구현
+
+### (App)playing 메서드에서는 게임 상태 확인 후 다음 로직 실행
+
+```javascript
+  //src/App.js
+
+  playing() {
+    if (this.gameSuccessCheck()) return this.end();
+
+    if (!this.gamePlayingCheck())
+      return InputView.readGameCommand(this.commmand.bind(this));
+
+    return InputView.readMoving(this.move.bind(this));
+  }
+
+```
+
+- playing 메서드는 게임의 상태를 확인하여 다음 동작 진행.
+  - 매번 이동 이후에는 playing 메서드를 실행하여 다음 동작을 결정하게 된다
+  - 다리 통과 성공 조회 / this.gamePlayingCheck();
+    - 다리를 전부 통과했다면 애플리케이션 종료
+  - 게임의 진행중인 상태를 조회 / this.gamePlayingCheck()
+    - 통과하기 전에 게임이 중단되면 재시작 / 종료 여부를 확인
+    - 게임이 종료되었다면 재시작 / 종료 여부를 묻는 this.command 메서드 실행
+  - 게임이 종료되지 않았다면 계속해서 이동 실행
+  </details>
+  </br>
 
 ---
