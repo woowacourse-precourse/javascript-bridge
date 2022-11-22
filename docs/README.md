@@ -56,8 +56,6 @@
 
 ## 설계 및 구현
 
-  <img src='https://user-images.githubusercontent.com/55423198/203212470-fbd1bc0c-b229-4ff9-a6fe-38fcad008c3c.jpg' width=800 height=400 />
-
 - [x] Model : BridgeGame파일로서 사용자가 입력한 size를 통해 만든 다리, 사용자가 지나온 다리, 시도횟수를 관리합니다.
 - [x] View : InputVeiw, OutputView 2가지로서, 입력받는 부분, 출력하는 부분을 관리합니다.
 - [x] Controller : InputView로부터 입력받은 값들의 대한 유효성검사 및 Model로 부터 받은 Data들을 조립하여 다시 outputView로 보내주는 등 Model과 View의 중재자로서 로직들을 관리합니다.
