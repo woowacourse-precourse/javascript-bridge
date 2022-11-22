@@ -1,14 +1,17 @@
-const GameError = require('../../Error/GameError');
 const { ERROR_MESSAGE, RETRY_MESSAGE } = require('../Constant');
 
 const GameValidator = {
+  validator(input) {
+    this.isRightRetryString(input);
+  },
+
   /**
    *
    * @param {string} input
    */
   isRightRetryString(input) {
     if (input !== RETRY_MESSAGE.RETRY && input !== RETRY_MESSAGE.QUIT)
-      throw new GameError(ERROR_MESSAGE.RETRY_INPUT);
+      throw ERROR_MESSAGE.RETRY_INPUT;
   },
 };
 

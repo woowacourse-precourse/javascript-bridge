@@ -1,7 +1,12 @@
-const BridgeError = require('../../Error/BridgeError');
 const { ERROR_MESSAGE } = require('../Constant');
 
 const BridgeValidator = {
+  validator(number) {
+    this.isNumber(number);
+    this.isNaturalNumber(number);
+    this.isRightNumberRange(number);
+  },
+
   /**
    *
    * @param {number} number
@@ -10,7 +15,7 @@ const BridgeValidator = {
     const regex = /^[0-9-]{1,2}$/g;
 
     if (!regex.test(number)) {
-      throw new BridgeError(ERROR_MESSAGE.ISNAN);
+      throw ERROR_MESSAGE.ISNAN;
     }
   },
 
@@ -22,7 +27,7 @@ const BridgeValidator = {
     const regex = /^(\+)?([0-9]+)$/g;
 
     if (!regex.test(number)) {
-      throw new BridgeError(ERROR_MESSAGE.ISNAN);
+      throw ERROR_MESSAGE.ISNAN;
     }
   },
 
@@ -33,7 +38,7 @@ const BridgeValidator = {
    * @param {number} number
    */
   isRightNumberRange(start, end, number) {
-    if (number < start || number > end) throw new BridgeError(ERROR_MESSAGE.RANGE);
+    if (number < start || number > end) throw ERROR_MESSAGE.RANGE;
   },
 };
 

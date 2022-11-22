@@ -13,7 +13,12 @@ const InputView = {
    */
   readBridgeSize(controller) {
     Console.readLine(MESSAGE.READ_BRIDGE_SIZE, (input) => {
-      controller.createBridge(input);
+      try {
+        controller.createBridge(input);
+      } catch (error) {
+        Console.print(`${error}`);
+        this.readBridgeSize(controller);
+      }
     });
   },
 
@@ -24,7 +29,12 @@ const InputView = {
    */
   readMoving(controller) {
     Console.readLine(MESSAGE.READ_MOVE_LEVEL, (input) => {
-      controller.setNextTurn(input);
+      try {
+        controller.setNextTurn(input);
+      } catch (error) {
+        Console.print(`${error}`);
+        this.readMoving(controller);
+      }
     });
   },
 
@@ -35,7 +45,12 @@ const InputView = {
    */
   readGameCommand(controller) {
     Console.readLine(MESSAGE.GAME_RETRY, (input) => {
-      controller.setRetryOrQuit(input);
+      try {
+        controller.setRetryOrQuit(input);
+      } catch (error) {
+        Console.print(`${error}`);
+        this.readGameCommand(controller);
+      }
     });
   },
 };
