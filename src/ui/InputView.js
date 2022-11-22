@@ -14,20 +14,13 @@ const UseGameInfo = require("../domain/UseGameInfo");
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  validateMoving: null,
-
-  validateGameCommand: null,
-
-  inputErrorProcess: new InputErrorProcess(),
-
-  bridgeGame: new BridgeGame(),
-
   /**
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
     Console.readLine(GAME_MESSAGES.messageOfInputSize, (bridgeSize) => {
-      if (!this.inputErrorProcess.inputErrorProcess(ValidateBridgeSize, bridgeSize, "bridgeSize"))
+      const inputErrorProcess = new InputErrorProcess();
+      if (!inputErrorProcess.inputErrorProcess(ValidateBridgeSize, bridgeSize, "bridgeSize"))
         return this.readBridgeSize();
       UseGameInfo.createBridge();
       UseGameInfo.initializeGameInfo();
@@ -41,7 +34,8 @@ const InputView = {
    */
   readMoving() {
     Console.readLine(GAME_MESSAGES.messageOfInputMoving, (moving) => {
-      if (!this.inputErrorProcess.inputErrorProcess(ValidateMoving, moving, "moving"))
+      const inputErrorProcess = new InputErrorProcess();
+      if (!inputErrorProcess.inputErrorProcess(ValidateMoving, moving, "moving"))
         return this.readMoving();
 
       return this.moveBridge();
@@ -49,7 +43,7 @@ const InputView = {
   },
 
   moveBridge() {
-    this.bridgeGame.move();
+    BridgeGame.move();
     OutputView.printMap();
     if (UseGameInfo.isFailure()) return this.readGameCommand();
 
@@ -62,7 +56,8 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine(GAME_MESSAGES.messageOfInputGameCommand, (gameCommand) => {
-      if (!this.inputErrorProcess
+      const inputErrorProcess = new InputErrorProcess();
+      if (!inputErrorProcess
         .inputErrorProcess(ValidateGameCommand, gameCommand, "gameCommand"))
         return this.readGameCommand();
 
