@@ -14,7 +14,7 @@ const Validation = class {
 
   validateBridgeSize(bridgeSize, { errorHandler, successHandler }) {
     this.#validateUserInput({
-      validateValueCallback: () => new SizeValidation().validate(bridgeSize),
+      validateValueCallback: () => SizeValidation.validate(bridgeSize),
       errorHandler,
       successHandler,
     });
@@ -22,7 +22,7 @@ const Validation = class {
 
   validateBridgeCommand(command, { errorHandler, successHandler }) {
     this.#validateUserInput({
-      validateValueCallback: () => new CommandValidation().validate(command),
+      validateValueCallback: () => CommandValidation.validate(command),
       errorHandler,
       successHandler,
     });
@@ -30,7 +30,7 @@ const Validation = class {
 
   validateBridgeReplayCommand(replayCommand, { errorHandler, successHandler }) {
     this.#validateUserInput({
-      validateValueCallback: () => new ReplayValidation().validate(replayCommand),
+      validateValueCallback: () => ReplayValidation.validate(replayCommand),
       errorHandler,
       successHandler,
     });

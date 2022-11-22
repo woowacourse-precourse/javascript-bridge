@@ -1,6 +1,6 @@
 const { ERROR_MESSAGE } = require('../constants');
 
-const ReplayValidation = class {
+const ReplayValidation = {
   validate(command) {
     const isValid = ['R', 'Q'].includes(command);
 

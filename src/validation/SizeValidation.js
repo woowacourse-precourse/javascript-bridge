@@ -1,7 +1,7 @@
 const { RANGE, ERROR_MESSAGE } = require('../constants');
 const { isNumber } = require('../utils/isNumber');
 
-const SizeValidation = class {
+const SizeValidation = {
   validate(bridgeSize) {
     const validations = {
       type: this.isTypeValid,
@@ -13,16 +13,16 @@ const SizeValidation = class {
       if (!isValid) return { status: false, message: ERROR_MESSAGE.size[key] };
     }
     return { status: true };
-  }
+  },
 
   isTypeValid(bridgeSize) {
     return isNumber(bridgeSize);
-  }
+  },
 
   isRangeValid(bridgeSize) {
     const { min, max } = RANGE;
     return min <= bridgeSize && bridgeSize <= max;
-  }
+  },
 };
 
 module.exports = SizeValidation;
