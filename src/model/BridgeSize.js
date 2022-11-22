@@ -6,29 +6,32 @@ class BridgeSize {
 
   constructor(size) {
     this.#size = size;
-    BridgeSize.validate(size);
+    this.validate();
   }
 
-  static validate(size) {
-    BridgeSize.checkRange(size);
-    BridgeSize.isNumber(size);
-    BridgeSize.isInteger(size);
+  validate() {
+    this.checkRange();
+    this.isNumber();
+    this.isInteger();
   }
 
-  static checkRange(size) {
-    if (size < VALID_VALUE.SIZE.LOWER || size > VALID_VALUE.SIZE.UPPER) {
+  checkRange() {
+    if (
+      this.#size < VALID_VALUE.SIZE.LOWER ||
+      this.#size > VALID_VALUE.SIZE.UPPER
+    ) {
       throw new Error(ERROR_MESSAGE.RANGE);
     }
   }
 
-  static isInteger(size) {
-    if (size % 1 !== 0) {
+  isInteger() {
+    if (this.#size % 1 !== 0) {
       throw new Error(ERROR_MESSAGE.INTEGER);
     }
   }
 
-  static isNumber(size) {
-    if (size) {
+  isNumber() {
+    if (this.#size) {
       return;
     }
     throw new Error(ERROR_MESSAGE.NUMBER);
