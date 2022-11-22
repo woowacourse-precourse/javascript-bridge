@@ -15,14 +15,23 @@ const InputView = {
   readBridgeSize(nextStep) {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (userInput) => {
       try {
-        const bridgeSize = Number(userInput);
-        this.validateBridgeSize(bridgeSize);
-        nextStep(bridgeSize);
+        this.readBridgeSizeTry(userInput, nextStep);
       } catch (error) {
         OutputView.printError(error);
         this.readBridgeSize(nextStep);
       }
     });
+  },
+
+  /**
+   * 플레이어가 입력한 다리의 길이에 대해 유효성 검사 후 콜백함수를 실행하는 메서드
+   * @param {string} userInput 플레이어가 입력한 다리의 길이
+   * @param {callback} nextStep 해당 메서드가 종료되고 실행할 콜백함수
+   */
+  readBridgeSizeTry(userInput, nextStep) {
+    const bridgeSize = Number(userInput);
+    this.validateBridgeSize(bridgeSize);
+    nextStep(bridgeSize);
   },
 
   /**
@@ -32,14 +41,23 @@ const InputView = {
   readMoving(nextStep) {
     Console.readLine(INPUT_MESSAGE.MOVEMENT, (userInput) => {
       try {
-        const movement = userInput;
-        this.validateMovement(movement);
-        nextStep(movement);
+        this.readMovingTry(userInput, nextStep);
       } catch (error) {
         OutputView.printError(error);
         this.readMoving(nextStep);
       }
     });
+  },
+
+  /**
+   * 플레이어가 입력한 이동할 칸에 대해 유효성 검사 후 콜백함수를 실행하는 메서드
+   * @param {string} userInput 플레이어가 입력한 이동할 칸
+   * @param {callback} nextStep 해당 메서드가 종료되고 실행할 콜백함수
+   */
+  readMovingTry(userInput, nextStep) {
+    const movement = userInput;
+    this.validateMovement(movement);
+    nextStep(movement);
   },
 
   /**
@@ -49,14 +67,23 @@ const InputView = {
   readGameCommand(nextStep) {
     Console.readLine(INPUT_MESSAGE.RESTART_OR_QUIT, (userInput) => {
       try {
-        const restartOrQuit = userInput;
-        this.validateGameCommand(restartOrQuit);
-        nextStep(restartOrQuit);
+        this.readGameCommandTry(userInput, nextStep);
       } catch (error) {
         OutputView.printError(error);
         this.readGameCommand(nextStep);
       }
     });
+  },
+
+  /**
+   * 플레이어가 입력한 게임 재시작 및 종료 명령에 대해 유효성 검사 후 콜백함수를 실행하는 메서드
+   * @param {string} userInput 플레이어가 입력한 게임 재시작 및 종료 명령
+   * @param {callback} nextStep 해당 메서드가 종료되고 실행할 콜백함수
+   */
+  readGameCommandTry(userInput, nextStep) {
+    const restartOrQuit = userInput;
+    this.validateGameCommand(restartOrQuit);
+    nextStep(restartOrQuit);
   },
 
   /**
