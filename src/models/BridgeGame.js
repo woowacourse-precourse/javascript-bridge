@@ -9,10 +9,6 @@ class BridgeGame {
     this.#tryCount = 1;
   }
 
-  getBridge() {
-    return this.#bridge;
-  }
-
   getMoveList() {
     return this.#moveList;
   }
