@@ -3,9 +3,9 @@ const OutputView = {
   gameStart() {
     MissionUtils.Console.print('게임 시작');
   },
-  printMap(bridgeList) {
-    MissionUtils.Console.print(`[ ${bridgeList[0].join(' | ')} ]`)
-    MissionUtils.Console.print(`[ ${bridgeList[1].join(' | ')} ]`)
+  printMap(bridge) {
+    MissionUtils.Console.print(`[ ${bridge[0].join(' | ')} ]`)
+    MissionUtils.Console.print(`[ ${bridge[1].join(' | ')} ]`)
     MissionUtils.Console.print('')
   },
 
