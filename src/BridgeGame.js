@@ -1,3 +1,4 @@
+const { GAME_COMMAND } = require('../src/constant');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -17,34 +18,23 @@ class BridgeGame {
 
   move(gameMove, bridge) {
     if (gameMove === bridge[this.bridgeIndex]) {
-      this.moveAvailable = 'O';
-      this.movingIsOk(gameMove);
+      this.moveAvailable = GAME_COMMAND.MOVE_AVAILABLE;
+      this.markBridge(gameMove, this.moveAvailable);
     } else {
-      this.moveAvailable = 'X';
-      this.movingIsNotOk(gameMove);
+      this.moveAvailable = GAME_COMMAND.MOVE_UNAVAILABLE;
+      this.markBridge(gameMove, this.moveAvailable);
     }
     this.bridgeIndex++;
   }
 
-  movingIsOk(gameMove) {
-    if (gameMove === 'U') {
-      this.upBridge.push(' O ');
+  markBridge(gameMove, gameCommand) {
+    if (gameMove === GAME_COMMAND.UP) {
+      this.upBridge.push(` ${gameCommand} `);
       this.downBridge.push('   ');
     }
-    if (gameMove === 'D') {
+    if (gameMove === GAME_COMMAND.DOWN) {
       this.upBridge.push('   ');
-      this.downBridge.push(' O ');
-    }
-  }
-
-  movingIsNotOk(gameMove) {
-    if (gameMove === 'U') {
-      this.upBridge.push(' X ');
-      this.downBridge.push('   ');
-    }
-    if (gameMove === 'D') {
-      this.upBridge.push('   ');
-      this.downBridge.push(' X ');
+      this.downBridge.push(` ${gameCommand} `);
     }
   }
   /**

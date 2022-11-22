@@ -1,6 +1,11 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Console } = MissionUtils;
-const { GAME_MESSAGES, ERROR_MESSAGES } = require('../src/constant');
+const {
+  GAME_MESSAGES,
+  ERROR_MESSAGES,
+  INPUT_VALID,
+  GAME_COMMAND,
+} = require('../src/constant');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -12,7 +17,7 @@ const InputView = {
     let bridgeSize;
 
     Console.readLine(`${GAME_MESSAGES.INPUT_BRIDGE_SIZE}`, inputBridgeSize => {
-      this.validateBridgeSize(inputBridgeSize);
+      this.validateBridgeSize(Number(inputBridgeSize));
       bridgeSize = inputBridgeSize;
     });
 
@@ -20,11 +25,13 @@ const InputView = {
   },
 
   validateBridgeSize(bridgeSize) {
-    if (isNaN(Number(bridgeSize))) {
+    if (isNaN(bridgeSize)) {
       throw new Error(`${ERROR_MESSAGES.VALID_NUMBER}`);
     }
-
-    if (Number(bridgeSize) < 3 || Number(bridgeSize) > 20) {
+    if (
+      bridgeSize < INPUT_VALID.VALID_BRIDGESIZE_MIN ||
+      bridgeSize > INPUT_VALID.VALID_BRIDGESIZE_MAX
+    ) {
       throw new Error(`${ERROR_MESSAGES.VALID_BRIDGESIZE}`);
     }
   },
@@ -54,7 +61,7 @@ const InputView = {
   },
 
   validateMoving(gameMove) {
-    if (gameMove !== 'U' && gameMove !== 'D') {
+    if (gameMove !== GAME_COMMAND.UP && gameMove !== GAME_COMMAND.DOWN) {
       throw new Error(`${ERROR_MESSAGES.VALID_MOVE}`);
     }
   },
@@ -83,7 +90,10 @@ const InputView = {
   },
 
   validateCommand(inputCommand) {
-    if (inputCommand !== 'R' && gameMove !== 'Q') {
+    if (
+      inputCommand !== GAME_COMMAND.RETRY &&
+      inputCommand !== GAME_COMMAND.QUIT
+    ) {
       throw new Error(`${ERROR_MESSAGES.VALID_MOVE}`);
     }
   },

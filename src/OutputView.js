@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Console } = MissionUtils;
-const { GAME_MESSAGES } = require('../src/constant');
+const { GAME_MESSAGES, GAME_COMMAND } = require('../src/constant');
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -20,9 +20,14 @@ const OutputView = {
       if (i !== bridge.length - 1) bridgePrint += '|';
     }
     bridgePrint += ']';
+
     Console.print(bridgePrint);
   },
 
+  printUpbridgeAndDownBridge(upBridge, downBridge) {
+    this.printMap(upBridge);
+    this.printMap(downBridge);
+  },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -30,11 +35,13 @@ const OutputView = {
    */
   printResult(bridgeGame) {
     Console.print(`${GAME_MESSAGES.GAME_RESULT}`);
-    this.printMap(bridgeGame.upBridge);
-    this.printMap(bridgeGame.downBridge);
-    if (bridgeGame.moveAvailable === 'O')
+    OutputView.printUpbridgeAndDownBridge(
+      bridgeGame.upBridge,
+      bridgeGame.downBridge
+    );
+    if (bridgeGame.moveAvailable === GAME_COMMAND.MOVE_AVAILABLE)
       Console.print(`${GAME_MESSAGES.GAME_WIN}`);
-    if (bridgeGame.moveAvailable === 'X')
+    if (bridgeGame.moveAvailable === GAME_COMMAND.MOVE_UNAVAILABLE)
       Console.print(`${GAME_MESSAGES.GAME_LOSE}`);
     Console.print(`${GAME_MESSAGES.GAME_TRY}${bridgeGame.gameTry}`);
   },

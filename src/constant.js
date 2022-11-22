@@ -10,6 +10,11 @@ const GAME_MESSAGES = {
   GAME_TRY: '총 시도한 횟수: ',
 };
 
+const INPUT_VALID = {
+  VALID_BRIDGESIZE_MIN: 3,
+  VALID_BRIDGESIZE_MAX: 20,
+};
+
 const ERROR_MESSAGES = {
   VALID_NUMBER: '[ERROR] 다리 길이는 숫자를 입력해야합니다.',
   VALID_BRIDGESIZE: '[ERROR] 다리 길이는 3이상 20이하의 수여야 합니다.',
@@ -17,7 +22,18 @@ const ERROR_MESSAGES = {
   VALID_COMMAND: `[ERROR] 게임 시도 여부는 'R' 또는 'Q'로 입력해야합니다.`,
 };
 
+const GAME_COMMAND = {
+  MOVE_AVAILABLE: 'O',
+  MOVE_UNAVAILABLE: 'X',
+  RETRY: 'R',
+  QUIT: 'Q',
+  UP: 'U',
+  DOWN: 'D',
+};
+
 module.exports = {
   GAME_MESSAGES,
+  INPUT_VALID,
   ERROR_MESSAGES,
+  GAME_COMMAND,
 };

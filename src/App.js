@@ -1,7 +1,10 @@
+const MissionUtils = require('@woowacourse/mission-utils');
+const { Console } = MissionUtils;
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
+const { GAME_COMMAND } = require('./constant');
 const BridgeGame = require('./BridgeGame');
 
 class App {
@@ -22,52 +25,58 @@ class App {
     this.moveBridge();
   }
 
-  printMap() {
-    OutputView.printMap(this.bridgeGame.upBridge);
-    OutputView.printMap(this.bridgeGame.downBridge);
-  }
+  moveBridge() {
+    do {
+      this.moveBridgeOnetime();
+    } while (
+      this.bridgeGame.moveAvailable !== GAME_COMMAND.MOVE_UNAVAILABLE &&
+      this.bridgeGame.bridgeIndex < this.bridgeSize
+    );
 
-  printResult() {
-    OutputView.printResult(this.bridgeGame);
+    this.loseOrWinGame();
   }
 
   moveBridgeOnetime() {
     let gameMove;
     gameMove = InputView.getMoving();
     this.bridgeGame.move(gameMove, this.bridge);
-    this.printMap();
+    OutputView.printUpbridgeAndDownBridge(
+      this.bridgeGame.upBridge,
+      this.bridgeGame.downBridge
+    );
   }
 
-  retryOrQuitGame() {
-    let gameCommand = '';
-    gameCommand = InputView.getCommand();
-    if (gameCommand === 'R') {
-      this.bridgeGame.retry();
-      this.moveBridge();
-    }
-    if (gameCommand === 'Q') {
-      this.printResult();
-    }
+  printResult() {
+    OutputView.printResult(this.bridgeGame);
+    this.endGame();
   }
 
   loseOrWinGame() {
-    if (this.bridgeGame.moveAvailable === 'X') {
-      this.printMap();
+    if (this.bridgeGame.moveAvailable === GAME_COMMAND.MOVE_UNAVAILABLE) {
+      OutputView.printUpbridgeAndDownBridge(
+        this.bridgeGame.upBridge,
+        this.bridgeGame.downBridge
+      );
       this.retryOrQuitGame();
     } else {
       this.printResult();
     }
   }
 
-  moveBridge() {
-    do {
-      this.moveBridgeOnetime();
-    } while (
-      this.bridgeGame.moveAvailable !== 'X' &&
-      this.bridgeGame.bridgeIndex < this.bridgeSize
-    );
+  retryOrQuitGame() {
+    let gameCommand = '';
+    gameCommand = InputView.getCommand();
+    if (gameCommand === GAME_COMMAND.RETRY) {
+      this.bridgeGame.retry();
+      this.moveBridge();
+    }
+    if (gameCommand === GAME_COMMAND.QUIT) {
+      this.printResult();
+    }
+  }
 
-    this.loseOrWinGame();
+  endGame() {
+    Console.close();
   }
 }
 
