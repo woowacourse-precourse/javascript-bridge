@@ -5,9 +5,6 @@ const { INPUT } = require("../constants/index.js");
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
   readBridgeSize(callback) {
     const { READ_BRIDGE } = INPUT;
     read(READ_BRIDGE, (size) =>
@@ -15,9 +12,6 @@ const InputView = {
     );
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
   readMoving(callback) {
     const { MOVING_BRIDGE } = INPUT;
     read(MOVING_BRIDGE, (move) =>
@@ -25,9 +19,6 @@ const InputView = {
     );
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
   readGameCommand(callback) {
     const { RETRY_BRIDGE } = INPUT;
     read(RETRY_BRIDGE, (move) =>
