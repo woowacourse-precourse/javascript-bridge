@@ -7,7 +7,7 @@
 ## 🎥 시연 영상
 
 <p align="center">
-  <img width = "800px" src="https://user-images.githubusercontent.com/78203399/203217416-b60f2735-9e1f-4079-bd71-6f1c576e7267.gif" />
+  <img width = "800px" src = "https://user-images.githubusercontent.com/78203399/203222075-bf899bfe-5c1e-41f4-acc8-edf86936f0d2.gif" />
 </p>
 
 ## 📌 실행 방법
