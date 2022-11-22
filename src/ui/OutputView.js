@@ -13,33 +13,31 @@ const { UP, DOWN, BRIDGE_O, BRIDGE_X, BRIDGE_NONE } = require('../constant/const
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
+  /**
+   * 게임 시작 멘트를 출력한다.
+   */
   start() {
     Console.print(CMM_START);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {string[]} isAnswerList
+   * @param {string} userInputString
    */
   printMap(isAnswerList, userInputString) {
     let upperBridge = [];
     let lowerBridge = [];
     for (let i = 0; i < userInputString.length; i++) {
-      if (userInputString[i] === UP) {
-        upperBridge.push(isAnswerList[i] ? BRIDGE_O : BRIDGE_X);
-        lowerBridge.push(BRIDGE_NONE);
-      } else if (userInputString[i] === DOWN) {
-        lowerBridge.push(isAnswerList[i] ? BRIDGE_O : BRIDGE_X);
-        upperBridge.push(BRIDGE_NONE);
-      }
+      upperBridge.push(this.makeOneBridge(userInputString[i], isAnswerList[i]).upper);
+      lowerBridge.push(this.makeOneBridge(userInputString[i], isAnswerList[i]).lower);
     }
     this.printBridge(upperBridge, lowerBridge);
   },
-
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {*} isAnswerList
+   * @param {*} userInputString
+   * @param {*} tryNum
    */
   printResult(isAnswerList, userInputString, tryNum) {
     Console.print(CMM_RESULT);
@@ -49,18 +47,11 @@ const OutputView = {
     Console.close();
   },
 
-  /**
-   * 게임 시작 멘트를 출력한다.
-   */
-
-  modifyCurStr(char) {
-    switch (char) {
-      case 'o':
-        return ' O |';
-      case 'n':
-        return '   |';
-      case 'x':
-        return ' X |';
+  makeOneBridge(userInputChar, isAnswerChar) {
+    if (userInputChar === UP) {
+      return { upper: isAnswerChar ? BRIDGE_O : BRIDGE_X, lower: BRIDGE_NONE };
+    } else if (userInputChar === DOWN) {
+      return { upper: BRIDGE_NONE, lower: isAnswerChar ? BRIDGE_O : BRIDGE_X };
     }
   },
 
@@ -71,6 +62,12 @@ const OutputView = {
     }
     return CMM_FAILURE;
   },
+  /**
+   *
+   * @param {string[]} upperBridge
+   * @param {string[]} lowerBridge
+   * 다리 배열을 형식에 맞게 출력한다.
+   */
   printBridge(upperBridge, lowerBridge) {
     let upperString = `[${upperBridge.join('|')}]`;
     let lowerString = `[${lowerBridge.join('|')}]`;
