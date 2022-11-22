@@ -12,7 +12,7 @@ let game;
 const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine(Constants.Input.BRIDGE_SIZE, (size) => {
-      catchError(Validate.bridge, size);
+      catchError(Validate.bridge, size, InputView.readBridgeSize);
 
       const bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
       game = new BridgeGame(bridge);
@@ -21,7 +21,7 @@ const InputView = {
   },
   readMoving() {
     MissionUtils.Console.readLine(Constants.Input.MOVE, (movement) => {
-      catchError(Validate.upOrDown, movement);
+      catchError(Validate.upOrDown, movement, InputView.readMoving);
 
       const moveResult = game.move(movement);
       const { map } = game.getResult();
@@ -42,12 +42,9 @@ const InputView = {
   },
   readGameCommand() {
     MissionUtils.Console.readLine(Constants.Input.GAME_COMMAND, (command) => {
-      try {
-        Validate.gameCommand(command);
-      } catch (error) {
-        MissionUtils.Console.print(error);
-      }
-      readCommand(command);
+      catchError(Validate.gameCommand, command, InputView.readGameCommand);
+
+      InputView.readCommand(command);
     });
   },
   readCommand(command) {
