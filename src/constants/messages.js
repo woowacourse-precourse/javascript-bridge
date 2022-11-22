@@ -14,6 +14,8 @@ const QUESTION = Object.freeze({
   
   const RESULT = Object.freeze({
     GAME_RESULT: '최종 게임 결과',
+    GAME_SUCCESS:'게임 성공 여부',
+    GAME_COUNT:'총 시도한 횟수'
   });
   
   module.exports = { QUESTION, ERROR, RESULT };
