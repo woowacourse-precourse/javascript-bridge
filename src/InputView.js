@@ -37,7 +37,7 @@ const InputView = {
       return Index < this.bridgeSize - 1 && this.readMoving(cb, Index + 1);
     } catch (error) {
       Console.print(error.message);
-      return this.readMoving(cb, Index);
+      return this.readMoving(cb, Index, upOrDown);
     }
   },
 
@@ -55,7 +55,7 @@ const InputView = {
       return cb(command);
     } catch (error) {
       Console.print(error.message);
-      return this.readGameCommand(command);
+      return this.readGameCommand(cb, command);
     }
   },
 };
