@@ -29,7 +29,6 @@ class App {
     InputView.readBridgeSize(this.createBridge.bind(this));
   }
 
-  //다리생성
   createBridge(size) {
     try {
       isBridgeSizeValid(size);
@@ -45,7 +44,6 @@ class App {
     }
   }
 
-  //게임 진행
   moveBridge() {
     let flag = true;
     let completeOneMoving = [];
@@ -61,7 +59,6 @@ class App {
     if (flag) this.endGame();
   }
 
-  //재시작 여부
   restartOrNot() {
     let selectedCmd = InputView.readGameCommand();
 
@@ -73,7 +70,6 @@ class App {
     }
   }
 
-  //게임 종료
   endGame() {
     OutputView.printResult(
       this.game.bridge,

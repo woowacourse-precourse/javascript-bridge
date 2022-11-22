@@ -1,6 +1,3 @@
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
 const { Console } = require("@woowacourse/mission-utils");
 const RESULT_FINAL = "최종 게임 결과";
 const RESULT_SUCCESSORNOT = "게임 성공 여부: ";
@@ -12,7 +9,6 @@ const MAP_END = "]";
 const MAP_LINE = "| ";
 
 const OutputView = {
-  //현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력
   printMap(bridge, user) {
     Console.print(this.printOneBridge(bridge, user, ["U", "D"]));
     Console.print(this.printOneBridge(bridge, user, ["D", "U"]));
@@ -48,7 +44,6 @@ const OutputView = {
     return "";
   },
 
-  //게임의 최종 결과를 정해진 형식에 맞춰 출력
   printResult(bridge, userBridge, attemptCnt) {
     Console.print(RESULT_FINAL);
     this.printMap(bridge, userBridge);
