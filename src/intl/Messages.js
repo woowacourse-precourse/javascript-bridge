@@ -1,4 +1,6 @@
 const Messages = Object.freeze({
+  WELCOME: '다리 건너기 게임을 시작합니다.',
+
   BRIDGE_ALREADY_ARRIVED: '다리를 이미 다 건넜습니다.',
 
   ARRAY_VALIDATOR_SHOULD_ARRAY: '배열 값이어야 합니다.',

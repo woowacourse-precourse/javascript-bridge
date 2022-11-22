@@ -70,6 +70,8 @@ class App {
    * @param {Routine} routine
    */
   * #routine(routine) {
+    OutputView.printWelcome();
+
     yield* this.#routineMakeBridge(routine);
     yield* this.#routinePlay(routine);
 
