@@ -43,22 +43,22 @@ class BridgeGame {
 
   setLine() {
     this.gameManager.printBlankLine();
-    this.inputSpace();
+    this.inputDirection();
   }
   
-  inputSpace() {
+  inputDirection() {
     this.gameManager.inputMovingSpace(this.move.bind(this));
   }
 
-  move(userSelectSpace) {
+  move(userDirection) {
     const bridge = [...this.#bridges];
     const bridgeSpace = bridge[0];
-    this.checkSpace(bridgeSpace, userSelectSpace);
+    this.checkUserDirection(bridgeSpace, userDirection);
     bridge.shift();
     this.checkBridge(bridge);
   }
 
-  checkSpace(bridge, user) {
+  checkUserDirection(bridge, user) {
     if (bridge === user && GAME_COMMAND.up === user) this.addResultInRow(BRIDGE_CHECK.correct, BRIDGE_CHECK.blank);
     if (bridge === user && GAME_COMMAND.down === user) this.addResultInRow(BRIDGE_CHECK.blank, BRIDGE_CHECK.correct);
     if (bridge !== user && bridge === GAME_COMMAND.up) this.addResultInRow(BRIDGE_CHECK.blank, BRIDGE_CHECK.wrong);
@@ -86,7 +86,7 @@ class BridgeGame {
     this.#downRow.splice(-1,1, BRIDGE_ROW.partition);
     this.#bridges = bridge;
 
-    this.inputSpace();
+    this.inputDirection();
   }
 
   addResultInRow(a, b) {
@@ -100,7 +100,7 @@ class BridgeGame {
 
   checkRetry(command) {
     if (command === GAME_COMMAND.retry) {
-      this.#count += 1;
+      this.#count++;
       this.retry();
       return;
     }
@@ -112,7 +112,7 @@ class BridgeGame {
   retry() {
     this.#bridges = this.#originBridges;
     this.openBridgeRow();
-    this.inputSpace();
+    this.inputDirection();
   }
 
   finish() {
