@@ -1,9 +1,9 @@
 const Bridge = require("./Bridge");
-const { makeBridge } = require("./BridgeMaker");
+const { makeBridge } = require("../BridgeMaker");
 const BridgeMap = require("./BridgeMap");
-const BridgeRandom = require("./BridgeRandomNumberGenerator");
-const BridgeGameValidator = require("./validator/BridgeGameValidator");
-const { INPUT_RETRY, INITIAL_VALUE } = require("./constants");
+const BridgeRandom = require("../BridgeRandomNumberGenerator");
+const BridgeGameValidator = require("../validator/BridgeGameValidator");
+const { INPUT_RETRY, INITIAL_VALUE } = require("../constants");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
