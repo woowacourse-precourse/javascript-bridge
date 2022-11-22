@@ -26,7 +26,6 @@ describe('Path 클래스 단위 테스트', () => {
     path.markU('O');
 
     const pathMap = path.getPathMap();
-
     expect(pathMap).toEqual([['O'], [' ']]);
   });
 
@@ -34,10 +33,9 @@ describe('Path 클래스 단위 테스트', () => {
     const path = new Path();
 
     path.push('D');
-    path.markD('O');
+    path.markD('X');
 
     const pathMap = path.getPathMap();
-
-    expect(pathMap).toEqual([[' '], ['O']]);
+    expect(pathMap).toEqual([[' '], ['X']]);
   });
 });

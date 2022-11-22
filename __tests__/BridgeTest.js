@@ -2,7 +2,6 @@ const Bridge = require('../src/Bridge');
 const { STATUS } = require('../src/utils/const');
 
 describe('Bridge 클래스 단위 테스트', () => {
-  // TODO: 테스트 코드 리팩토링 필요 (코드 중복)
   test('path와 bridge의 현재 값이 동일한 값인지 비교하여 일치하는지를 반환한다.', () => {
     const input = ['U', 'D', 'U'];
     const path = ['U', 'D', 'U'];
@@ -30,7 +29,6 @@ describe('Bridge 클래스 단위 테스트', () => {
     ];
 
     const answer = [STATUS.CONTINUE, STATUS.SUCCESS, STATUS.FAILURE];
-
     const bridge = new Bridge(input);
 
     paths.forEach((path, index) => {
