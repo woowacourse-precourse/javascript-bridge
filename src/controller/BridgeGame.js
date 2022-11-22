@@ -54,6 +54,7 @@ class BridgeGame {
 
   inputReGame() {
     const reGame = (input) => {
+      Validation.validateReGame(input);
       if (input === UTIL.RETRY) this.retry();
       if (input === UTIL.QUIT) this.isSuccessGame(this.#isSuccess);
     };

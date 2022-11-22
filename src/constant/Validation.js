@@ -10,6 +10,10 @@ const Validation = {
   validateMove(input) {
     if (input !== UTIL.UP && input !== UTIL.DOWN) throw new Error('[ERROR]');
   },
+
+  validateReGame(input) {
+    if (input !== UTIL.RETRY && input !== UTIL.QUIT) throw new Error('[ERROR]');
+  },
 };
 
 module.exports = Validation;
