@@ -4,6 +4,7 @@ const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const Validation = require('./Validation');
 
 class App {
   constructor() {
@@ -16,6 +17,11 @@ class App {
   }
   requestBridgeSize() {
     InputView.readBridgeSize((size) => {
+      const { errorMsg } = Validation.checkBridgeSize(size);
+      if(errorMsg) {
+        Console.print(errorMsg);
+        return this.requestBridgeSize();
+      }
       const bridge = BridgeMaker.makeBridge(Number(size), generate);
       this.bridgeGame = new BridgeGame(bridge);
       this.requestDirection();
@@ -23,6 +29,11 @@ class App {
   }
   requestDirection() {
     InputView.readMoving((direction) => {
+      const { errorMsg } = Validation.checkDirection(direction);
+      if(errorMsg) {
+        Console.print(errorMsg);
+        return this.requestDirection();
+      }
       this.bridgeGame.move(direction);
       OutputView.printMap(this.bridgeGame.getBridgeCrossingResult());
       if(this.bridgeGame.isFail()) return this.requestRestartOrQuit();
@@ -32,6 +43,11 @@ class App {
   }
   requestRestartOrQuit() {
     InputView.readGameCommand((commandOption) => {
+      const { errorMsg } = Validation.checkCommandOption(commandOption);
+      if(errorMsg) {
+        Console.print(errorMsg);
+        return this.requestRestartOrQuit();
+      }
       if(commandOption === 'R') return this.restart();
       return this.quit();
         });
