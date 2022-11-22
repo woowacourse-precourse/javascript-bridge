@@ -1,5 +1,10 @@
+const GameManager = require('./GameManager');
+
 class App {
-  play() {}
+  play() {
+    let GM = new GameManager();
+    GM.startGame();
+  }
 }
 
 module.exports = App;

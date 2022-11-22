@@ -1,20 +1,23 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 class BridgeGame {
   /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {string[]} bridge 다리 모양
+   * @param {boolean[]} isSuccessArray 사용자의 입력과 다리 모양 일치 여부 배열
+   * @param {string} moveDirection 현재 사용자가 입력한 이동 방향
+   * @return {boolean[]} 사용자가 입력한 이동방향과 다리 모양을 기반으로 현재 선택 성공/실패 여부를 반영해 반환
    */
-  move() {}
+  move(bridge, isSuccessArray, moveDirection) {
+    let currLocation = isSuccessArray.length;
+    if(bridge[currLocation] === moveDirection) isSuccessArray.push(true);
+    if(bridge[currLocation] !== moveDirection) isSuccessArray.push(false);
+    return isSuccessArray;    
+  }
 
   /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @return {boolean[]} 게임을 재시작하며 선택 기록을 초기화한다
    */
-  retry() {}
+  retry() {
+    return [];
+  }
 }
 
 module.exports = BridgeGame;
