@@ -34,7 +34,7 @@ const runException = (inputs) => {
   const app = new App();
 
   app.play();
-
+  console.log(logSpy);
   expectLogContains(getOutput(logSpy), ["[ERROR]"]);
 };
 
