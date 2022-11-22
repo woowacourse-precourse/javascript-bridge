@@ -63,6 +63,7 @@ class BridgeGame {
     if (message !== this.#bridge[this.#moveList.length - 1]) {
       OutputView.printMap(this.#bridge, this.#moveList);
       InputView.readGameCommand(input => {
+        ValidateCheck.restartMessageCheck(input);
         if (input === 'R') {
           this.retry();
         }

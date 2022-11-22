@@ -11,6 +11,11 @@ const ValidateCheck = {
       throw new Error(`[ERROR] ${MESSAGE.error.move}`);
     }
   },
+  restartMessageCheck(message) {
+    if (!(message === 'R' || message === 'Q')) {
+      throw new Error(`[ERROR] ${MESSAGE.error.restart}`);
+    }
+  },
 };
 
 module.exports = ValidateCheck;
