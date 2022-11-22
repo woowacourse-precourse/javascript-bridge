@@ -25,9 +25,7 @@ const InputView = {
         return this.readBridgeSize();
       }
 
-      this.bridgeLength = Number(input);
       this.getBridge(input);
-      // console.log(this.bridge);
       this.readMoving();
     });
   },
