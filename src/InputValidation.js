@@ -5,9 +5,9 @@ const { BRIDGE_SIZE, BRIDGE_MOVING, GAME_COMMAND } = require("./constants");
 const BASE_MESSAGE = "[ERROR] ";
 const ERROR_MESSAGE = Object.freeze({
     BRIDGE_RANGE_ERROR: BASE_MESSAGE + "다리 길이는 3부터 20 사이의 숫자여야 합니다.",
-    NOT_NUMBER: BASE_MESSAGE + "다리 길이는 숫자만 입력해 주세요.",
-    MOVING_WRONG_INPUT: BASE_MESSAGE + "U 또는 D만 입력해주세요",
-    COMMAND_WRONG_INPUT: BASE_MESSAGE + "R 또는 Q만 입력해주세요",
+    NOT_NUMBER: BASE_MESSAGE + "다리 길이는 숫자만 입력해 주세요.\n",
+    MOVING_WRONG_INPUT: BASE_MESSAGE + "U 또는 D만 입력해주세요.\n",
+    COMMAND_WRONG_INPUT: BASE_MESSAGE + "R 또는 Q만 입력해주세요.\n",
 });
 
 const InputValidation = {

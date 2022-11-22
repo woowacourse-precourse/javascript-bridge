@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { BRIDGE_INPUT_MESSAGE, MOVE_INPUT_MESSAGE, COMMAND_INPUT_MESSAGE } = require("./constants");
+const { BRIDGE_INPUT_MESSAGE, MOVE_INPUT_MESSAGE, COMMAND_INPUT_MESSAGE, GAME_RESULT } = require("./constants");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
@@ -21,13 +21,11 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(BRIDGE_INPUT_MESSAGE, (length) => {
-        if(InputValidation.validateBridgeSize(length)) this.readBridgeSize();
-        else {
-          const bridgeList = BridgeMaker.makeBridge(length, RandomNumGenerator.generate);
-          console.log(bridgeList);
-          const bridgeGame = new BridgeGame(bridgeList, length);
-          this.readMoving(length, bridgeGame);      
-        }    
+        if(InputValidation.validateBridgeSize(length)) return this.readBridgeSize();
+        const bridgeList = BridgeMaker.makeBridge(length, RandomNumGenerator.generate);
+        console.log(bridgeList);
+        const bridgeGame = new BridgeGame(bridgeList, length);
+        this.readMoving(length, bridgeGame);      
     })
   },
   /**
@@ -35,20 +33,12 @@ const InputView = {
    */
   readMoving(length, bridgeGame) {
     Console.readLine(MOVE_INPUT_MESSAGE, (upDown) => {
-      if(InputValidation.validateMove(upDown)) {
-        this.readMoving(length,bridgeGame);
-      } else {
-        const isAnswer = bridgeGame.move(upDown);
-        const [upList, downList] = bridgeGame.getUpDownList();
-        OutputView.printMap(upList, downList);
-
-        if(this.guessAllAnswers(bridgeGame, length)) return Console.close();
-
-        if(isAnswer) return this.readMoving(length, bridgeGame); //정답을 맞히면 다음 칸 선택하기
-  
-        return this.readGameCommand(bridgeGame); 
-      }
-
+      if (InputValidation.validateMove(upDown)) return this.readMoving(length,bridgeGame); 
+      const isAnswer = bridgeGame.move(upDown);
+      OutputView.printMap(bridgeGame.getUpDownList()[0], bridgeGame.getUpDownList()[1]);
+      if(this.guessAllAnswers(bridgeGame, length)) return Console.close();
+      if(isAnswer) return this.readMoving(length, bridgeGame); //정답을 맞히면 다음 칸 선택하기    
+      return this.readGameCommand(bridgeGame);      
     })
   },
 
@@ -57,17 +47,14 @@ const InputView = {
    */
   readGameCommand(bridgeGame) {
     Console.readLine(COMMAND_INPUT_MESSAGE, (command)=> {
-      if(InputValidation.validateCommand(command)) this.readGameCommand(bridgeGame);
-      else {
-        const gameCount = bridgeGame.increaseGameCount();
-        if(command == GAME_CONTROL.RESTART) { //다시 시도하는 경우
-          bridgeGame.retry();
-          return this.readMoving(bridgeGame.getBridgeSize(), bridgeGame);
-        }
-        this.quitGame(bridgeGame, 'F', gameCount);
-        return Console.close();
+      if(InputValidation.validateCommand(command)) return this.readGameCommand(bridgeGame);
+      const gameCount = bridgeGame.increaseGameCount();
+      if(command == GAME_CONTROL.RESTART) { //다시 시도하는 경우
+        bridgeGame.retry();
+        return this.readMoving(bridgeGame.getBridgeSize(), bridgeGame);
       }
-     
+      this.quitGame(bridgeGame, GAME_RESULT.FAIL, gameCount);
+      return Console.close(); 
     })
   },
    /**
@@ -76,7 +63,7 @@ const InputView = {
   guessAllAnswers(bridgeGame, length) {
     if(bridgeGame.getAnswerCnt() == length) { //다리를 끝까지 건넌 경우
       const gameCount = bridgeGame.increaseGameCount();
-      this.quitGame(bridgeGame, 'P', gameCount); //게임 종료
+      this.quitGame(bridgeGame, GAME_RESULT.PASS, gameCount); //게임 종료
       return true; 
     }
     return false;
