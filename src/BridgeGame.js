@@ -15,22 +15,30 @@ class BridgeGame {
     this.downList = [];  //아래 칸 리스트(O, X 저장)
     this.answerCnt = 0; //정답 맞춘 횟수
   }
+  updateUpList(isAnswer) {
+    if(isAnswer) {
+      this.upList.push(MOVE_RESULT.CORRECT);
+      this.answerCnt += 1;
+    }
+    else this.upList.push(MOVE_RESULT.WRONG);
+    this.downList.push(' ');
+  }
+
+  updateDownList(isAnswer){
+    if(isAnswer) {
+      this.downList.push(MOVE_RESULT.CORRECT);
+      this.answerCnt += 1;
+    }
+    else this.downList.push(MOVE_RESULT.WRONG);
+    this.upList.push(' ');
+  }
+
   generateUpDownList(upDown, isAnswer) {
     if(upDown == BRIDGE_MOVING.UP) {
-      if(isAnswer) {
-        this.upList.push(MOVE_RESULT.CORRECT);
-        this.answerCnt += 1;
-      }
-      else this.upList.push(MOVE_RESULT.WRONG);
-      this.downList.push(' ');
-
-    } else{ 
-      if(isAnswer) {
-        this.downList.push(MOVE_RESULT.CORRECT);
-        this.answerCnt += 1;
-      }
-      else this.downList.push(MOVE_RESULT.WRONG);
-      this.upList.push(' ');
+      this.updateUpList(isAnswer);
+    } 
+    if(upDown == BRIDGE_MOVING.DOWN) {
+      this.updateDownList(isAnswer);
     }
   }
   getBridgeSize(){

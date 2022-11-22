@@ -2,12 +2,22 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
 const BridgeRandomNumberGenerator = require("../src/BridgeRandomNumberGenerator");
+const BridgeGame = require("../src/BridgeGame");
 
 describe("다리 건너기 기능 단위별 테스트", () => {
 
     test("다리 생성하기", () => {
         expect(BridgeMaker.makeBridge(4, BridgeRandomNumberGenerator.generate)).toHaveLength(4);    
     });
+
+    test("다리의 위아래 칸 선택한 후 정답인지 확인하기", () => {
+        const answerList = ['U', 'D', 'U', 'U', 'D', 'D', 'U']; 
+        const bridgeGame = new BridgeGame(answerList, answerList.length);
+        const isAnswer = bridgeGame.move('D'); //정답(answerList)의 첫번째 값(U)와 플레이어의 추측값(D)이 일치하지 않으므로 false 저장 
+
+        expect(isAnswer).toEqual(false); 
+    })
+
 /*
     test("로또 구입 금액이 숫자가 아니면 예외가 발생한다.", () => {
         expect(() => {
