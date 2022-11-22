@@ -25,6 +25,7 @@ class BridgeGame {
     const moved = direction === correct;
 
     this.updateMap(moved, direction);
+    this.takeAStep();
 
     return moved;
   }
@@ -39,6 +40,10 @@ class BridgeGame {
     if (direction === FLAG.LOWER) {
       this.map = buildMap.lower(this.map, mark);
     }
+  }
+
+  takeAStep() {
+    this.step += 1;
   }
 
   /**

@@ -1,3 +1,4 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
@@ -17,7 +18,7 @@ class GameController {
   setUpBridge() {
     InputView.readBridgeSize((size) => {
       const bridge = makeBridge(size, generate);
-
+      console.log(bridge);
       this.game.setBridge(bridge);
       this.crossBridge();
     });
@@ -29,7 +30,20 @@ class GameController {
       const arrived = this.game.bridge.length === this.game.step;
 
       OutputView.printMap(this.game.map);
+
+      if (moved) arrived ? this.quit() : this.crossBridge();
+      if (!moved) this.checkRetry();
     });
+  }
+
+  checkRetry() {
+    InputView.readGameCommand((command) => {
+      console.log(command);
+    });
+  }
+
+  quit() {
+    MissionUtils.Console.close();
   }
 }
 
