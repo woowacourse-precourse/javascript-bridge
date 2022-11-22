@@ -5,12 +5,13 @@ class GameManager {
 
   askBridgeSize(callback) {
     InputView.readBridgeSize(callback);
-    return;
   }
 
   askWhereToGo(callback) {
-    return InputView.readMoving(callback);
+    InputView.readMoving(callback);
   }
+
+  validatePosition() {}
 
   askRetry(callback) {
     InputView.readGameCommand(callback);
