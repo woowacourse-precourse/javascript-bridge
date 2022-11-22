@@ -69,8 +69,8 @@ class BridgeGame {
 
   drawBridgeMap (string) {
     this.setInputUpDown(string);
-      this.setMapArray(this.sameBridge(this.#moveIndex), string);
-      outputView.printMap(this);
+    this.setMapArray(this.sameBridge(this.#moveIndex), string);
+    outputView.printMap(this);
   }
 
   handleMoveInput (string) {
