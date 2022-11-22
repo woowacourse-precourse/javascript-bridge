@@ -35,9 +35,8 @@ class BridgeGame {
   }
 
   isAnswerMovingChoice() {
-    return (
-      this.#movingCommand === this.#bridgeShape[this.#currentBridgeCount - 1]
-    );
+    const currentBridgeIndex = this.#currentBridgeCount - 1;
+    return this.#movingCommand === this.#bridgeShape[currentBridgeIndex];
   }
 
   setBridgeShape(bridgeSahpe) {
