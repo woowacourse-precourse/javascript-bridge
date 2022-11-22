@@ -1,22 +1,22 @@
-const BRIDGE_GAME = Object.freeze({
+const BRIDGE_GAME = {
     start_value: 1,
     new_line: '',
-});
+};
 
-const BRIDGE_GAME_PROCEED = Object.freeze({
+const BRIDGE_GAME_PROCEED = {
     new_line: '',
     fail: 'X',
     retry: "R",
     quit: "Q",
-})
+};
 
-const BRIDGE_MAKER = Object.freeze({
+const BRIDGE_MAKER = {
     one: 1,
     up: 'U',
     down: 'D',
-})
+};
 
-const PLAYERS_MAP = Object.freeze({
+const PLAYERS_MAP = {
     left_block: '[',
     right_block: ']',
     one_value: 1,
@@ -26,11 +26,11 @@ const PLAYERS_MAP = Object.freeze({
     win: 'O',
     fail: 'X',
     middle_row: ' | ',
-})
+};
 
 const START = 0;
 
-const VALIDATION = Object.freeze({
+const VALIDATION = {
     lower_u: 'u',
     lower_d: 'd',
     lower_r: 'r',
@@ -44,7 +44,7 @@ const VALIDATION = Object.freeze({
     min_value: 2,
     max_value: 21, 
     number_role: /^[0-9]+$/,
-})
+};
 
 module.exports = {
     BRIDGE_GAME,
