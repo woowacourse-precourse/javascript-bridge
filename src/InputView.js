@@ -2,6 +2,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -34,7 +36,18 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(currentBridge, bridge, count) {
+    try{
+      Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
+        this.readMovingError(input);
+        currentBridge=game.move(currentBridge, bridge, input);
+        this.stillMoving(currentBridge, bridge, count);
+      })
+    } catch(e){
+      Console.print(e);
+      this.readMoving(currentBridge, bridge, count);
+    }
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
