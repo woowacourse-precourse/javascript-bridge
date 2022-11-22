@@ -36,13 +36,17 @@ class GameController {
       BridgeGame.setMoving(next);
       const isSuccess = this.game.move(next);
       OutputView.printMap(this.game.getMap(), isSuccess);
-      if (isSuccess && this.game.isEnd()) this.end(true);
-      if (isSuccess && !this.game.isEnd()) this.askMoving();
-      if (!isSuccess) this.askGameCommand();
+      this.judgeMoving(isSuccess);
     } catch (err) {
       OutputView.printMessage(err);
       this.askMoving();
     }
+  }
+
+  judgeMoving(isSuccess) {
+    if (isSuccess && this.game.isEnd()) this.end(true);
+    if (isSuccess && !this.game.isEnd()) this.askMoving();
+    if (!isSuccess) this.askGameCommand();
   }
 
   askGameCommand() {
@@ -52,12 +56,16 @@ class GameController {
   setGameCommand(gameCommand) {
     try {
       BridgeGame.setGameCommand(gameCommand);
-      if (gameCommand === GAME.RETRY) this.retry();
-      if (gameCommand === GAME.QUICK) this.end(false);
+      this.judgeGameCommand(gameCommand);
     } catch (err) {
       OutputView.printMessage(err);
       this.askGameCommand();
     }
+  }
+
+  judgeGameCommand(gameCommand) {
+    if (gameCommand === GAME.RETRY) this.retry();
+    if (gameCommand === GAME.QUICK) this.end(false);
   }
 
   retry() {
