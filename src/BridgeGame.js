@@ -17,14 +17,13 @@ class BridgeGame {
     this.#bridge = bridge;
     this.#currentState = [];
     this.#Map = { upper: "[ ]", lower: "[ ]" };
-    this.#tryNum = 0;
+    this.#tryNum = 1;
   }
   /**
    * 주어진 다리 길이에 따라 랜덤 다리를 만든다.
    */
   make(size) {
     this.#bridge = BridgeMaker.makeBridge(size, generate);
-    console.log(this.#bridge);
   }
 
   /**
@@ -34,7 +33,6 @@ class BridgeGame {
     const result =
       this.#bridge[this.#currentState.length] === move ? "성공" : "실패";
     this.#currentState.push(move);
-    this.#tryNum += 1;
     this.makeMap([this.#currentState, result]);
     printMap(this.#Map);
     if (result === "성공") {
@@ -94,6 +92,7 @@ class BridgeGame {
   retry(retry) {
     if (retry === "R") {
       this.revert();
+      this.#tryNum += 1;
       InputView.readMoving(this);
     } else {
       this.makeMap([this.#currentState, "실패"]);
