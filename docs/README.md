@@ -13,7 +13,28 @@
 ## 📌 Structure of Directory
 
 ```
-
+javascript-bridge
+   ├─ docs
+   │  └─ README.md
+   ├─ src
+   │  ├─ App.js
+   │  ├─ BridgeMaker.js
+   │  ├─ BridgeRandomNumberGenerator.js
+   │  ├─ model
+   │  │  ├─ BridgeGame.js
+   │  │  └─ BridgeMap.js
+   │  ├─ utils
+   │  │  ├─ constants.js
+   │  │  ├─ errorHandler.js
+   │  │  ├─ messages.js
+   │  │  └─ validator.js
+   │  └─ view
+   │     ├─ InputView.js
+   │     └─ OutputView.js
+   └─ __tests__
+      ├─ ApplicationTest.js
+      ├─ BridgeGameTest.js
+      └─ BridgeMapTest.js
 ```
 
 ## 📌 Cases
