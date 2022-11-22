@@ -93,16 +93,16 @@ classDiagram
     InputView <|-- BridgeController
     BridgeController <|-- OutputView
     OutputView <|-- BridgeController
-    BridgeController : getBridgeSize()
+    BridgeController : requestBridgeSizeToView()
     BridgeController : verifyBridgeSize()
-    BridgeController : sendBridgeToModel()
-  	BridgeController : getMove()
+    BridgeController : sendBridgeSizeRequestToModel()
+  	BridgeController : requestMoveToView()
     BridgeController : verifyMove()
-    BridgeController : sendMoveToModel()
+    BridgeController : sendMoveRequestToModel()
     BridgeController : sendOutputRequestToModel()
     BridgeController : sendOutputRequestToView()
     BridgeController : checkMoveOption()
-    BridgeController : getCommand()
+    BridgeController : requestCommandToView()
     BridgeController : verifyCommand()
     BridgeController : checkGameOption()
     BridgeController : finishControl()
