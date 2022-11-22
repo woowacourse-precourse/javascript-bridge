@@ -1,20 +1,67 @@
+const OutputView = require("./OutputView");
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  constructor(bridge) {
+    this.answerSteps = bridge;
+    this.bridgeSteps = [];
+    this.gameCount = 1;
+    this.gameStatus = "";
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move() {
+    const lastIdx = this.bridgeSteps.length - 1;
+    if (
+      this.isStepSame(this.answerSteps[lastIdx], this.bridgeSteps[lastIdx]) &&
+      lastIdx === this.answerSteps.length - 1
+    ) {
+      return "WIN";
+    }
+    if (this.isStepSame(this.answerSteps[lastIdx], this.bridgeSteps[lastIdx])) {
+      return "MOVE";
+    }
+    return "FAIL";
+  }
+
+  isStepSame(answerStep, compareStep) {
+    return answerStep === compareStep;
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.bridgeSteps = [];
+    this.gameCount += 1;
+  }
+
+  win() {
+    this.gameStatus = "성공";
+    OutputView.printResult(
+      this.answerSteps,
+      this.bridgeSteps,
+      this.gameStatus,
+      this.gameCount
+    );
+  }
+
+  lose() {
+    this.gameStatus = "실패";
+    OutputView.printResult(
+      this.answerSteps,
+      this.bridgeSteps,
+      this.gameStatus,
+      this.gameCount
+    );
+  }
 }
 
 module.exports = BridgeGame;
