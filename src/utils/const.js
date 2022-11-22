@@ -13,11 +13,8 @@ const PATH = {
   DOWNSIDE: 1,
 };
 
-const RETRY = 'R';
-const QUIT = 'Q';
-
-const COMMAND_TYPE = [RETRY, QUIT];
-const COMMAND = { RETRY, QUIT };
+const COMMAND_TYPE = ['R', 'Q'];
+const COMMAND = { RETRY: 'R', QUIT: 'Q' };
 
 const COMMAND_NUMBER = {
   RETRY: 0,
@@ -48,8 +45,6 @@ Object.freeze(MARKING);
 module.exports = {
   UPSIDE,
   DOWNSIDE,
-  RETRY,
-  QUIT,
   BRIDGE,
   PATH_TYPE,
   PATH,
