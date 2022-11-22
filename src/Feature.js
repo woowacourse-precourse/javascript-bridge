@@ -24,4 +24,10 @@ class Feature {
 
         return result;
     }
+
+    inputUserMoveError(INPUT) {
+        if (INPUT != "U" | INPUT != "D") {
+            throw new Error("[Error] U 혹은 D를 입력해주세요.")
+        }
+    }
 }
