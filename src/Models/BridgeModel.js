@@ -1,4 +1,3 @@
-const Validation = require('../Utilities/Validation');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const { INPUT, BRIDGE } = require('../Constants');
@@ -12,19 +11,15 @@ class Model {
 
   genBridge(bridgeSize) {
     this.#bridge = BridgeMaker.makeBridge(+bridgeSize, generate);
-    console.log('bridge: ', this.#bridge);
   }
 
   aliveOrDeath(userMove, turn) {
-    let life = true;
     if (userMove === this.#bridge[turn]) {
-      this.alive(userMove);
+      return this.alive(userMove);
     }
     if (userMove !== this.#bridge[turn]) {
-      this.death(userMove);
-      life = false;
+      return this.death(userMove);
     }
-    return life;
   }
 
   alive(userMove) {
@@ -36,6 +31,7 @@ class Model {
       this.#upsideBridge += BRIDGE.NOTHING;
       this.#downSideBridge += BRIDGE.SUCESS;
     }
+    return true;
   }
 
   death(userMove) {
@@ -47,6 +43,7 @@ class Model {
       this.#upsideBridge += BRIDGE.NOTHING;
       this.#downSideBridge += BRIDGE.FAIL;
     }
+    return false;
   }
 
   reset() {
