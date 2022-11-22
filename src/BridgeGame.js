@@ -11,6 +11,16 @@ class BridgeGame {
     this.#numberOfTry = 1;
     this.#currentPosition = -1;
   }
+  getCurrentMap(result) {
+    const currentBridge = this.#bridge.slice(0, this.#currentPosition + 1);
+    let mapForUp = currentBridge.map((space) => space === "U" ? " O " : "   ");
+    let mapForDown = currentBridge.map((space) => space === "D" ? " O " : "   ");
+    if (result === -1) {
+      mapForUp[mapForUp.length - 1] = mapForUp[mapForUp.length - 1] === " O " ? "   " : " X ";
+      mapForDown[mapForDown.length - 1] = mapForDown[mapForDown.length - 1] === " O " ? "   " : " X ";
+    }
+    return ["[" + mapForUp.join("|") + "]", "[" + mapForDown.join("|") + "]"];
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
