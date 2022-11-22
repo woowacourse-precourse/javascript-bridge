@@ -27,16 +27,6 @@ const getOutput = (logSpy) => {
   return [...logSpy.mock.calls].join('');
 };
 
-const runException = (inputs) => {
-  mockQuestions(inputs);
-  const logSpy = getLogSpy();
-  const app = new App();
-
-  app.play();
-
-  expectLogContains(getOutput(logSpy), ['[ERROR]']);
-};
-
 const expectLogContains = (received, logs) => {
   logs.forEach((log) => {
     expect(received).toEqual(expect.stringContaining(log));
@@ -50,19 +40,8 @@ const expectBridgeOrder = (received, upside, downside) => {
   expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
-const makeInput = ({ question, result, bridgeOrder, isError }) => {
-  mockRandoms([1, 0, 1]);
-
-  return {
-    question,
-    result,
-    bridgeOrder,
-    isError
-  };
-};
-
 describe('기능 테스트 - 재시작, 에러 발생 상황', () => {
-  test('잘못된 입력 후 재시작 테스트', () => {
+  test('(잘못된 입력 다시 입력) 테스트', () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
     mockQuestions(['1', '2', '3', 'a', 'U', 'd', 'D', 'U']);
@@ -83,7 +62,7 @@ describe('기능 테스트 - 재시작, 에러 발생 상황', () => {
     expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
   });
 
-  test('재시도 + 잘못된 입력 테스트', () => {
+  test('(틀린 정담 - 재시도 - 정답) 기능 테스트', () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'U', 'R', 'U', 'D', 'U']);
@@ -103,7 +82,7 @@ describe('기능 테스트 - 재시작, 에러 발생 상황', () => {
     expectBridgeOrder(log, '[ O |   | O ]', '[   | O |   ]');
   });
 
-  test('재시도 + 잘못된 입력 테스트', () => {
+  test('(틀린 정답 - 종료) 기능 테스트', () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 1]);
     mockQuestions(['3', 'U', 'U', 'Q', 'U', 'D', 'U']);
