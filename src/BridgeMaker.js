@@ -1,6 +1,5 @@
-/**
- * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
- */
+const { DIRECTION } = require("./libs/const");
+
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -11,8 +10,8 @@ const BridgeMaker = {
     return new Array(size).fill(null).map(() => {
       const number = generateRandomNumber();
 
-      let direction = "D";
-      if (Number(number) === 1) direction = "U";
+      let direction = DIRECTION.down;
+      if (Number(number) === 1) direction = DIRECTION.up;
 
       return direction;
     });
