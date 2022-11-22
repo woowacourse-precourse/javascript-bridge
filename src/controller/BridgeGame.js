@@ -9,6 +9,8 @@ class BridgeGame {
 
   #moving;
 
+  #size;
+
   constructor() {
     this.#bridge = [];
     this.#moving = {
@@ -20,9 +22,11 @@ class BridgeGame {
       position: 0,
       count: 1,
     };
+    this.#size;
   }
 
   make(size) {
+    this.#size = Number(size);
     this.#bridge = makeBridge(size, generate);
   }
 
@@ -84,6 +88,26 @@ class BridgeGame {
     this.#moving.state.Down.push(' O ');
     this.#moving.state.Up.push('   ');
     this.#moving.position += 1;
+  }
+
+  getResult() {
+    return this.#moving.result;
+  }
+
+  getState() {
+    return this.#moving.state;
+  }
+
+  getPosition() {
+    return this.#moving.position;
+  }
+
+  getSize() {
+    return this.#size;
+  }
+
+  getCount() {
+    return this.#moving.count;
   }
 
   /**
