@@ -14,6 +14,7 @@ class BridgeInteractPlayer {
   constructor() {
     this.#player = new Player();
     this.#bridgeGameShape = new BridgeGameShape();
+    this.#bridgeGame = new BridgeGame();
   }
 
   playerInputBridgeSize(size) {
@@ -22,7 +23,7 @@ class BridgeInteractPlayer {
     } catch (error) {
       OutputView.printError(error);
     }
-    this.#bridgeGame = new BridgeGame(size);
+    this.#bridgeGame.init(size);
     OutputView.printGameStart();
     InputView.readMoving(this.playerInputBridgeDirection.bind(this));
   }
