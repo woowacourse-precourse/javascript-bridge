@@ -1,25 +1,27 @@
 /* eslint-disable max-lines-per-function */
 const BridgeGame = require('../src/model/BridgeGame');
 
-const makeBridgeGame = (bridge, moveCount) => new BridgeGame(bridge, moveCount);
+const makeBridgeGame = (bridge, moveCount = 0, retryCount = 1) =>
+  new BridgeGame(bridge, moveCount, retryCount);
 
 describe('BridgeGame 클래스 테스트', () => {
-  test('BridgeGame 객체를 만들고, 다리와 이동 횟수를 초기화 한다.', () => {
-    const bridgeGame = makeBridgeGame(['U', 'D', 'D', 'U'], 0);
+  test('BridgeGame 객체를 만들고, 다리, 이동 횟수, 재시도 횟수를 초기화 한다.', () => {
+    const bridgeGame = makeBridgeGame(['U', 'D', 'D', 'U']);
 
     expect(bridgeGame.getBridge()).toEqual(['U', 'D', 'D', 'U']);
     expect(bridgeGame.getMoveCount()).toEqual(0);
+    expect(bridgeGame.getRetryCount()).toEqual(1);
   });
 
   test('처음에 이동할 수 있는 다리인지 확인한다.', () => {
-    const bridgeGame = makeBridgeGame(['U'], 0);
+    const bridgeGame = makeBridgeGame(['U']);
     const direction = 'U';
 
     expect(bridgeGame.isMove(direction)).toBeTruthy();
   });
 
   test('다리를 건널 때 이동 횟수가 1씩 증가한다.', () => {
-    const bridgeGame = makeBridgeGame(['U', 'D', 'U', 'D'], 0);
+    const bridgeGame = makeBridgeGame(['U', 'D', 'U', 'D']);
     const moveCount = [1, 2, 3, 4];
 
     moveCount.forEach((count) => {
@@ -29,7 +31,7 @@ describe('BridgeGame 클래스 테스트', () => {
   });
 
   test('매번 이동할 수 있는 다리인지 확인한다.', () => {
-    const bridgeGame = makeBridgeGame(['D', 'D', 'U'], 0);
+    const bridgeGame = makeBridgeGame(['D', 'D', 'U']);
 
     expect(bridgeGame.isMove('D')).toBeTruthy();
     bridgeGame.move();
@@ -71,7 +73,7 @@ describe('BridgeGame 클래스 테스트', () => {
   });
 
   test('다리를 모두 건넜는지 확인한다.', () => {
-    const bridgeGame = makeBridgeGame(['U', 'U'], 0);
+    const bridgeGame = makeBridgeGame(['U', 'U']);
 
     bridgeGame.move();
     expect(bridgeGame.isCompletion()).toBeFalsy();
@@ -79,10 +81,20 @@ describe('BridgeGame 클래스 테스트', () => {
     expect(bridgeGame.isCompletion()).toBeTruthy();
   });
 
-  test('이동 횟수를 초기화한다.', () => {
+  test('게임 재시작 시 이동 횟수를 초기화한다.', () => {
     const bridgeGame = makeBridgeGame(['D', 'D', 'U'], 3);
     bridgeGame.retry();
 
     expect(bridgeGame.getMoveCount()).toEqual(0);
+  });
+
+  test('게임 재시작 시 시도 횟수가 1씩 증가한다.', () => {
+    const bridgeGame = makeBridgeGame(['U', 'D', 'U']);
+    const retryCount = [2, 3, 4, 5];
+
+    retryCount.forEach((count) => {
+      bridgeGame.retry();
+      expect(bridgeGame.getRetryCount()).toEqual(count);
+    });
   });
 });
