@@ -29,8 +29,8 @@ class App {
   }
 
   userMove(length, Bridges, resultBridge) {
-    const userMoveInput = InputView.readMoving();
     for (let i = 0; i < length; i++) {
+      const userMoveInput = InputView.readMoving();
       resultBridge = this.bridgeGame.move(userMoveInput, Bridges, this.bridgeArray);
       OutputView.printMap(resultBridge);
       if (this.failCheck(resultBridge)) return this.restartCheck(length, Bridges, resultBridge);
