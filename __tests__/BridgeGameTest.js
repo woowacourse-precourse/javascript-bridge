@@ -2,43 +2,21 @@ const BridgeGame = require('../src/BridgeGame');
 const Model = require('../src/Model');
 
 describe('BridgeGame 클래스 테스트 1', () => {
-  test('move 메소드 - U 입력하고 맞췄을 경우', () => {
+  test.each([
+    ['U', ' O ', `[ O ]\n[   ]`],
+    ['U', ' X ', `[ X ]\n[   ]`],
+    ['D', ' O ', `[   ]\n[ O ]`],
+    ['D', ' X ', `[   ]\n[ X ]`],
+  ])('move 메서드에서 각 상황별 현재 라운드의 게임 결과 테스트', (upOrDown, crossOrNot, answer) => {
     const testModel = new Model();
-    BridgeGame.move('U', ' O ', testModel);
+    BridgeGame.move(upOrDown, crossOrNot, testModel);
     const testResult = testModel.getCurrentMap();
-    expect(testResult).toBe(`[ O ]\n[   ]`);
+    expect(testResult).toBe(answer);
   });
 });
 
 describe('BridgeGame 클래스 테스트 2', () => {
-  test('move 메소드 - U 입력하고 틀렸을 경우', () => {
-    const testModel = new Model();
-    BridgeGame.move('U', ' X ', testModel);
-    const testResult = testModel.getCurrentMap();
-    expect(testResult).toBe(`[ X ]\n[   ]`);
-  });
-});
-
-describe('BridgeGame 클래스 테스트 3', () => {
-  test('move 메소드 - D 입력하고 맞췄을 경우', () => {
-    const testModel = new Model();
-    BridgeGame.move('D', ' O ', testModel);
-    const testResult = testModel.getCurrentMap();
-    expect(testResult).toBe(`[   ]\n[ O ]`);
-  });
-});
-
-describe('BridgeGame 클래스 테스트 4', () => {
-  test('move 메소드 - D 입력하고 틀렸을 경우', () => {
-    const testModel = new Model();
-    BridgeGame.move('D', ' X ', testModel);
-    const testResult = testModel.getCurrentMap();
-    expect(testResult).toBe(`[   ]\n[ X ]`);
-  });
-});
-
-describe('BridgeGame 클래스 테스트 5', () => {
-  test('retry 메소드', () => {
+  test('retry 메소드 테스트', () => {
     const testModel = new Model();
     BridgeGame.move('D', ' X ', testModel);
     BridgeGame.retry(testModel);
