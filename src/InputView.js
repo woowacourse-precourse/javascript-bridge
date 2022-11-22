@@ -18,10 +18,15 @@ const InputView = {
    */
   readBridgeSize( callback ) {
     MissionUtils.Console.readLine('다리의 길이를 입력해주세요.', (answer) => {
-      const size = Number(answer);
-      vaildation_bridgeSize(size);
-      
-      callback(size);
+      answer = Number(answer);
+      try {
+        vaildation_bridgeSize(answer);
+      } catch (e) {
+        MissionUtils.Console.print(e);
+        InputView.readBridgeSize( callback );
+        return;
+      }
+      callback(answer);
     });
   },
 
@@ -30,8 +35,13 @@ const InputView = {
    */
   readMoving( callback ) {
     MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (answer) => {
-      Vaildation.one_of_candidates(answer, [this.INPUT_UP_MOVING, this.INPUT_DOWN_MOVING]);
-
+      try {
+        Vaildation.one_of_candidates(answer, [this.INPUT_UP_MOVING, this.INPUT_DOWN_MOVING]);
+      } catch (e) {
+        MissionUtils.Console.print(e);
+        InputView.readMoving( callback );
+        return;
+      }
       callback(answer);
     });
   },
@@ -41,8 +51,13 @@ const InputView = {
    */
   readGameCommand( callback ) {
     MissionUtils.Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (answer) => {
-      Vaildation.one_of_candidates(answer, [this.INPUT_RESTART, this.INPUT_QUIT]);
-
+      try {
+        Vaildation.one_of_candidates(answer, [this.INPUT_RESTART, this.INPUT_QUIT]);
+      } catch (e) {
+        MissionUtils.Console.print(e);
+        InputView.readGameCommand( callback );
+        return;
+      }
       callback(answer);
     });
   },
@@ -50,7 +65,7 @@ const InputView = {
 
 function vaildation_bridgeSize(size) {
   Vaildation.isNumber(size);
-  Vaildation.inRange(size, InputView.MINIMUM_BRIDGE_SIZE, InputView.MAXIMUM_BRIDGE_SIZE);
+  Vaildation.inRange(Number(size), InputView.MINIMUM_BRIDGE_SIZE, InputView.MAXIMUM_BRIDGE_SIZE);
 }
 
 module.exports = InputView;
