@@ -10,7 +10,7 @@ class BridgeGame {
 
   constructor(bridge) {
     this.#bridge = bridge;
-    this.#movingLog = [];
+    this.#movingLog = new Array(2).fill(0).map(() => new Array(0));
     this.#tryCount = 1;
   }
 
@@ -20,14 +20,16 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    this.#movingLog.push(direction);
+    const result = this.#bridge[this.#movingLog[0].length] === direction ? 'O' : 'X';
+    this.#movingLog[direction === 'U' ? 0 : 1].push(result);
+    this.#movingLog[direction === 'U' ? 1 : 0].push(' ');
   }
 
   getGameState() {
-    if (this.#movingLog[this.#movingLog.length - 1] !== this.#bridge[this.#movingLog.length - 1]) {
+    if (this.#movingLog[0].concat(this.#movingLog[1]).includes('X')) {
       return GameState.GAME_OVER;
     }
-    if (this.#movingLog.length < this.#bridge.length) {
+    if (this.#movingLog[0].length < this.#bridge.length) {
       return GameState.PLAYING;
     }
 
@@ -49,7 +51,7 @@ class BridgeGame {
    */
   retry() {
     this.#tryCount += 1;
-    this.#movingLog = [];
+    this.#movingLog = new Array(2).fill(0).map(() => new Array(0));
   }
 }
 

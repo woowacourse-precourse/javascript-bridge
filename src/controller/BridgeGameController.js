@@ -7,7 +7,6 @@ const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
 class BridgeGameController {
-  #bridge;
   #bridgeGame;
 
   start() {
@@ -16,28 +15,18 @@ class BridgeGameController {
   }
 
   initBridgeGame() {
-    // this.#bridge = BridgeMaker.makeBridge(
-    //   +InputView.readBridgeSize(),
-    //   BridgeRandomNumberGenerator.generate,
-    // );
-    // this.#bridgeGame = new BridgeGame(this.#bridge);
-    // this.playBridgeGame();
-
     InputView.readBridgeSize(size => {
-      this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-      this.#bridgeGame = new BridgeGame(this.#bridge);
+      this.#bridgeGame = new BridgeGame(
+        BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate),
+      );
       this.playBridgeGame();
     });
   }
 
   playBridgeGame() {
-    // this.#bridgeGame.move(InputView.readMoving());
-    // OutputView.printMap(this.#bridge, this.#bridgeGame.getMovingLog());
-    // this.checkBridgeGame();
-
     InputView.readMoving(direction => {
       this.#bridgeGame.move(direction);
-      OutputView.printMap(this.#bridge, this.#bridgeGame.getMovingLog());
+      OutputView.printMap(this.#bridgeGame.getMovingLog());
       this.checkBridgeGame();
     });
   }
@@ -50,10 +39,6 @@ class BridgeGameController {
   }
 
   requestRetryBridgeGame() {
-    // const command = InputView.readGameCommand();
-    // if (command === 'R') this.retryBridgeGame();
-    // if (command === 'Q') this.endBridgeGame();
-
     InputView.readGameCommand(command => {
       if (command === 'R') this.retryBridgeGame();
       if (command === 'Q') this.endBridgeGame();
@@ -66,11 +51,7 @@ class BridgeGameController {
   }
 
   endBridgeGame() {
-    OutputView.printResult(
-      this.#bridge,
-      this.#bridgeGame.getMovingLog(),
-      this.#bridgeGame.getTryCount(),
-    );
+    OutputView.printResult(this.#bridgeGame.getMovingLog(), this.#bridgeGame.getTryCount());
     Console.close();
   }
 }

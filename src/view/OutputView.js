@@ -8,24 +8,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridge, movingLog) {
+  printMap(movingLog) {
     let map = '';
-    ['U', 'D'].forEach(direction => {
-      map += this.getLine(direction, bridge, movingLog);
-      map += '\n';
+    movingLog.forEach(line => {
+      map += `[ ${line.join(' | ')} ]\n`;
     });
-
     Console.print(map);
-  },
-
-  getLine(direction, bridge, movingLog) {
-    const line = Array(movingLog.length).fill(' ');
-    movingLog.forEach((value, idx) => {
-      if (value === direction && value === bridge[idx]) line[idx] = 'O';
-      if (value === direction && value !== bridge[idx]) line[idx] = 'X';
-    });
-
-    return `[ ${line.join(' | ')} ]`;
   },
 
   printIntro() {
@@ -37,14 +25,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(bridge, movingLog, tryCount) {
-    const isSuccess = !!(
-      movingLog.length === bridge.length &&
-      movingLog[movingLog.length - 1] === bridge[bridge.length - 1]
-    );
-
+  printResult(movingLog, tryCount) {
+    const isSuccess = !movingLog[0].concat(movingLog[1]).includes('X');
     Console.print('최종 게임 결과');
-    this.printMap(bridge, movingLog);
+    this.printMap(movingLog);
     Console.print(`게임 성공 여부: ${isSuccess ? '성공' : '실패'}\n총 시도한 횟수: ${tryCount}`);
   },
 };

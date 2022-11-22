@@ -9,18 +9,6 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  // readBridgeSize(callback) {
-  //   let size;
-  //   try {
-  //     size = this.getUserInput(Query.BRIDGE_SIZE, Validator.bridgeSize);
-  //   } catch (err) {
-  //     Console.print(err.message);
-  //     size = this.getUserInput(Query.BRIDGE_SIZE, Validator.bridgeSize);
-  //   }
-
-  //   return size;
-  // },
-
   readBridgeSize(callback) {
     try {
       this.getUserInput(callback, Query.BRIDGE_SIZE, Validator.bridgeSize);
@@ -33,18 +21,6 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  // readMoving() {
-  //   let direction;
-  //   try {
-  //     direction = this.getUserInput(Query.MOVING, Validator.moving);
-  //   } catch (err) {
-  //     Console.print(err.message);
-  //     direction = this.getUserInput(Query.MOVING, Validator.moving);
-  //   }
-
-  //   return direction;
-  // },
-
   readMoving(callback) {
     try {
       this.getUserInput(callback, Query.MOVING, Validator.moving);
@@ -57,18 +33,6 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  // readGameCommand() {
-  //   let command;
-  //   try {
-  //     command = this.getUserInput(Query.GAME_COMMAND, Validator.gameCommand);
-  //   } catch (err) {
-  //     Console.print(err.message);
-  //     command = this.getUserInput(Query.GAME_COMMAND, Validator.gameCommand);
-  //   }
-
-  //   return command;
-  // },
-
   readGameCommand(callback) {
     try {
       this.getUserInput(callback, Query.gameCommand, Validator.gameCommand);
@@ -77,16 +41,6 @@ const InputView = {
       this.readGameCommand(callback);
     }
   },
-
-  // getUserInput(query, validator) {
-  //   let result;
-  //   Console.readLine(query, input => {
-  //     validator(input);
-  //     result = input;
-  //   });
-
-  //   return result;
-  // },
 
   getUserInput(callback, query, validator) {
     Console.readLine(query, input => {
