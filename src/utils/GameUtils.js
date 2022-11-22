@@ -1,4 +1,4 @@
-const { MOVE_RESULT, GAME_RESULT } = require("./Constant");
+const { MOVE_RESULT, GAME_RESULT } = require("../Constant");
 
 const gameUtils = {
   /**
