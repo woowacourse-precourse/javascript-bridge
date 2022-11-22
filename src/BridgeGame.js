@@ -13,9 +13,9 @@ class BridgeGame {
      * @param {string[]} bridge - 입력하는 길이에 해당하는 다리 모양. U와 D로 구성 ex)['U', 'D', 'U']
      * @param {string} input - U/D로 입력되는 다리의 위 아래 결정 ex) 'U'
      */
-    let bridgeLen = currentBridge[0].length;
-    if(input===bridge[bridgeLen]) input === 'U' ? ( currentBridge[0][bridgeLen]='O', currentBridge[1][bridgeLen]=' ' ) : ( currentBridge[1][bridgeLen]='O', currentBridge[0][bridgeLen]=' ');
-    else input === 'U' ? ( currentBridge[0][bridgeLen]='X', currentBridge[1][bridgeLen]=' ' ) : ( currentBridge[1][bridgeLen]='X', currentBridge[0][bridgeLen]=' ');
+    let bridge_len = currentBridge[0].length;
+    if (input===bridge[bridge_len]) input === 'U' ? (currentBridge[0][bridge_len]='O', currentBridge[1][bridge_len]=' ') : (currentBridge[1][bridge_len]='O', currentBridge[0][bridge_len]=' ');
+    else input === 'U' ? (currentBridge[0][bridge_len]='X', currentBridge[1][bridge_len]=' ') : (currentBridge[1][bridge_len]='X', currentBridge[0][bridge_len]=' ');
     return currentBridge;
   }
 

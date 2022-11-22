@@ -43,6 +43,21 @@
 - [x] BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
 
 ---
+
+### 코드 컨벤션
+- [x] 상수명은 SNAKE_CASE & 대문자
+- [x] 문자열은 single quotes('') 사용
+- [x] 문자열 생성 시 template strings 사용
+- [x] 모듈 require 보다 import/export 사용 -> 주어진 부분 수정 x
+- [x] == 보다 === 사용
+- [x] 중괄호{} 앞에는 스페이스 1개 사용
+- [x] if, for, while 등의 제어구문의 소괄호 () 앞에 스페이스 1개 사용. 함수 선언 및 호출시에는 x
+- [x] 소괄호 () 안쪽에 스페이스 추가x
+- [x] 대괄호 [] 안쪽에 스페이스 추가x
+- [x] 중괄호 {} 안쪽에 스페이스 추가o
+- [x] 세미콜론 쓰기
+
+---
 ### InputView 객체
 - 사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
 ```
