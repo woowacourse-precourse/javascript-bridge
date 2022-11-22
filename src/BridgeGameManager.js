@@ -69,8 +69,8 @@ class BridgeGameManager {
   requestRestartOrQuit() {
     InputView.readGameCommand((commandOption) => {
       const { errorMsg } = Validation.checkCommandOption(commandOption);
-      const callback = this.requestRestartOrQuit.bind(this);
-      if (errorMsg) return throwException(errorMsg, callback);
+      if (errorMsg)
+        return throwException(errorMsg, this.requestRestartOrQuit.bind(this));
 
       this.actionAboutGameCommand(commandOption);
     });
