@@ -4,8 +4,8 @@ const RESULT = {
   success: "성공",
 };
 const MAP_TABLE = {
-  open: "[ ",
-  space: "  ",
+  open: "[",
+  space: "   ",
   close: "]\n",
 };
 
@@ -17,7 +17,7 @@ const OutputView = {
 
   printMapLine(direction, bridgeStatus, jumpHistory) {
     const SCORE = this.formatScore(direction, bridgeStatus, jumpHistory);
-    const PARTITIONED_SCORE = SCORE.join("| ");
+    const PARTITIONED_SCORE = SCORE.join("|");
     MissionUtils.Console.print(
       MAP_TABLE["open"] + PARTITIONED_SCORE + MAP_TABLE["close"]
     );
@@ -38,10 +38,10 @@ const OutputView = {
 
   scoreMapPart(index, bridgeStatus, jumpHistory) {
     if (bridgeStatus[index] === jumpHistory[index]) {
-      return "O ";
+      return " O ";
     }
     if (bridgeStatus[index] !== jumpHistory[index]) {
-      return "X ";
+      return " X ";
     }
   },
 
