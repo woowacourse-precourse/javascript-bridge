@@ -3,6 +3,7 @@ const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
+const ErrorCheck = require("./ErrorCheck");
 let game = new BridgeGame();
 let current = 0;
 let bridgeSize = 0;
@@ -15,6 +16,7 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine(`다리의 길이를 입력해주세요.\n`,(getSize)=>{
+      while(ErrorCheck.checkSize(getSize)) return this.readBridgeSize();
       bridgeSize = parseInt(getSize);
       game.answer = BridgeMaker.makeBridge(getSize, BridgeRandomNumberGenerator.generate);
       console.log(game.answer);
@@ -28,6 +30,7 @@ const InputView = {
   readMoving() {
     if (current >= bridgeSize) return OutputView.printResult(game.map, game.result, game.count);
     Console.readLine(`이동할 칸을 선택해주세요. (위: U, 아래: D)\n`,(getUser)=>{
+      while(ErrorCheck.checkUpDown(getUser)) return this.readMoving();
       game.user = getUser;
       if (game.move(current++)) {
         OutputView.printMap(game.map);
@@ -43,6 +46,7 @@ const InputView = {
    */
   readGameCommand() {
     Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)", (getRetry)=>{
+      while(ErrorCheck.checkRetryQuit(getRetry)) return this.readGameCommand();
       if(game.retry(getRetry)){
         current = 0;
         return this.readMoving();
