@@ -1,4 +1,4 @@
-const { BRIDGE_LENGTH_LIMIT, SPACE_TO_MOVE, GAME_CHOICE, ERROR_MESSAGE } = require("./Utils");
+const { BRIDGE_LENGTH_LIMIT, SPACE_TO_MOVE, GAME_COMMAND, ERROR_MESSAGE } = require("./Utils");
 
 const Validate = {
 
