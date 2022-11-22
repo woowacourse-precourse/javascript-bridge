@@ -57,6 +57,9 @@ class App {
       return;
     }
 
+    if (command === COMMAND.QUIT) {
+      this.quit(RESULT.FAIL);
+    }
   }
 
   printMap() {
