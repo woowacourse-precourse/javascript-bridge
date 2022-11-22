@@ -60,8 +60,8 @@ class BridgeGame {
     return { up: this.#up, down: this.#down };
   }
 
-  getIndex() {
-    return this.#index + 1;
+  isEnd(size) {
+    return size === this.#index + 1;
   }
 }
 

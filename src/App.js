@@ -44,7 +44,7 @@ class App {
 
       if (this.bridgeGame.isFail(this.#bridge, moving)) return this.askGameCommand();
 
-      if (this.bridgeGame.getIndex() !== this.#bridge.length) return this.movingBridge();
+      if (!this.bridgeGame.isEnd(this.#bridge.length)) return this.movingBridge();
 
       this.#gameResult = GAME_RESULT.SUCCESS;
       return this.quitGame();
