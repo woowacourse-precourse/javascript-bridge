@@ -1,9 +1,9 @@
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const BridgeGame = require('./BridgeGame');
-const { BRIDGE_CONSTANTS } = require('./GameConstants');
+const InputView = require('../view/InputView');
+const OutputView = require('../view/OutputView');
+const BridgeMaker = require('../BridgeMaker');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const BridgeGame = require('../model/BridgeGame');
+const { BRIDGE_CONSTANTS } = require('../constant/GameConstants');
 
 class GameController {
   #inputView = InputView;

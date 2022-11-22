@@ -1,4 +1,4 @@
-const { BRIDGE_CONSTANTS } = require('./GameConstants');
+const { BRIDGE_CONSTANTS } = require('../constant/GameConstants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스

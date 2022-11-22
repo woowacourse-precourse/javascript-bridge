@@ -2,8 +2,8 @@ const { Console } = require('@woowacourse/mission-utils');
 const {
   INPUT_MESSAGES,
   ERROR_MESSAGES_BRIDGE,
-} = require('./Messages');
-const { BRIDGE_CONSTANTS } = require('./GameConstants');
+} = require('../constant/Messages');
+const { BRIDGE_CONSTANTS } = require('../constant/GameConstants');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
