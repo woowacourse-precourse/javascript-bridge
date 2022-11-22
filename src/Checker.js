@@ -24,6 +24,12 @@ const Checker = {
     if (directionSet.has(input)) return;
     Error.throw(ERR_MSG_DIRECTION);
   },
+
+  finalGame(input) {
+    const commandSet = new Set(["R", "Q"]);
+    if (commandSet.has(input)) return;
+    Error.throw(ERR_MSG_FINAL_GAME);
+  },
 };
 
 module.exports = Checker;
