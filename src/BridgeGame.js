@@ -1,8 +1,6 @@
 const GameManager = require("./GameManager");
 const { BRIDGE_ROW, BRIDGE_CHECK, GAME_COMMAND, GAME_RESULT } = require("./utils/Constants");
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+
 class BridgeGame {
   #originBridges
   #bridges
@@ -39,7 +37,6 @@ class BridgeGame {
   getBridge(bridge) {
     this.#bridges = bridge;
     this.#originBridges = bridge;
-    console.log(this.#bridges);
     this.openBridgeRow();
     this.inputSpace();
   }
