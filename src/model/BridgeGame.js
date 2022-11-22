@@ -7,27 +7,31 @@ const RESULT = Object.freeze({
   FAIL: '실패',
 });
 
-const OBJECT = Object.freeze({
-  [RESULT.SUCCESS]: 'O',
-  [RESULT.FAIL]: 'X',
-  BLANK: ' ',
-});
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #OBJECT = Object.freeze({
+    [RESULT.SUCCESS]: 'O',
+    [RESULT.FAIL]: 'X',
+    BLANK: ' ',
+  });
+
+  #bridge;
+
+  #playerPosition;
+
   try = 0;
 
   constructor(size) {
-    this.bridge = makeBridge(size, generate);
-    this.reset();
+    this.#bridge = makeBridge(size, generate);
+    this.#reset();
   }
 
-  reset() {
+  #reset() {
+    this.#playerPosition = -1;
     this.try += 1;
     this.result = RESULT.SUCCESS;
-    this.playerPosition = -1;
     this.moveMap = {
       U: [],
       D: [],
@@ -40,14 +44,14 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moving) {
-    const { bridge } = this;
+    const bridge = this.#bridge;
 
-    this.playerPosition += 1;
-    if (moving !== bridge[this.playerPosition]) {
+    this.#playerPosition += 1;
+    if (moving !== bridge[this.#playerPosition]) {
       this.result = RESULT.FAIL;
       return PHASE.COMMAND;
     }
-    if (this.playerPosition + 1 === bridge.length) {
+    if (this.#playerPosition + 1 === bridge.length) {
       return PHASE.RESULT;
     }
     return PHASE.MOVE;
@@ -57,8 +61,8 @@ class BridgeGame {
     const { moveMap, result } = this;
     const unchosen = 'UD'.replace(moving, '');
 
-    moveMap[moving].push(OBJECT[result]);
-    moveMap[unchosen].push(OBJECT.BLANK);
+    moveMap[moving].push(this.#OBJECT[result]);
+    moveMap[unchosen].push(this.#OBJECT.BLANK);
   }
 
   /**
@@ -67,7 +71,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(goTo) {
-    this.reset();
+    this.#reset();
     goTo(PHASE.MOVE);
   }
 }
