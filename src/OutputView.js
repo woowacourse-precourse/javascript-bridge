@@ -9,7 +9,10 @@ const OutputView = {
     Console.print(QUERY.END);
   },
 
-  printMap(game) {},
+  printMap(game) {
+    Console.print(`[${game.generateMap(BRIDGE.UP_CHAR)}]`);
+    Console.print(`[${game.generateMap(BRIDGE.DOWN_CHAR)}]`);
+  },
   printResult(game) {},
 };
 
