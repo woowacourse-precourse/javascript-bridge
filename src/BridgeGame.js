@@ -49,7 +49,7 @@ class BridgeGame {
   }
 
   faildRound(){
-    OutputView.printFailResult(this.#round,this.#bridgeBoard.getClearedBridge());
+    OutputView.printFailResult(this.#try,this.#bridgeBoard.getClearedBridge());
     InputView.readGameCommand(this);
   }
   setGameCommand(command){
