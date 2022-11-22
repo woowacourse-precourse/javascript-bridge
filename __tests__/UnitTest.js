@@ -26,7 +26,8 @@ describe('BridgeGame테스트', () => {
   beforeEach(() => {
     bridgeGame = new BridgeGame();
   });
-  test('숫자 입력에 알맞은 다리 생성 테스트', () => {
+
+  test('다리 생성: 숫자 입력에 알맞은 다리 생성 테스트', () => {
     const userInputs = ['3', '5', '10'];
     const result = [];
 
@@ -35,5 +36,11 @@ describe('BridgeGame테스트', () => {
       result.push(bridgeGame.bridgeStore.isSameWithBridgeLength(Number(input)));
     });
     expect(result.every((el) => el)).toBeTruthy();
+  });
+
+  test.each(['', ' ', '300', 'ㅁ', 'a', '*'])('다리 생성: 올바르지 않은 입력 발생시 에러 throw', (input) => {
+    expect(
+      () => bridgeGame.createBridge(input),
+    ).toThrow('[ERROR]');
   });
 });
