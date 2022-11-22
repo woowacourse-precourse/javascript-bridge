@@ -10,7 +10,7 @@ graph TD
     D-->F{move status}
     F-->|move complete|K
     F-->|can not move|I[input command]
-		F-->|can move|D
+	F-->|can move|D
     I-->J{quit or restart}
     J-->|quit|K[print result]
     J-->|restart|D
