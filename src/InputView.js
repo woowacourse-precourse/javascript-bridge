@@ -9,7 +9,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
-    Console.readLine(GAME_MEESAGE.input_bridge_size, (input) => {
+    Console.readLine(GAME_MESSAGE.input_bridge_size, (input) => {
       try {
         Validation.validateBridgeSize(input);
       } catch (error) {
