@@ -8,6 +8,7 @@ const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
+ const game = new BridgeGame();
 const InputView = {
   // ERROR control
   bridgeLenError(bridgeLen){
@@ -50,9 +51,31 @@ const InputView = {
   },
 
   /**
+   * 게임 진행이 가능한지, 게임이 종료되었는지, 게임을 진행할 수 없는지 확인
+   */
+  stillMoving(currentBridge, bridge, count) {
+    OutputView.printMap(currentBridge);
+    if(currentBridge[0].length === bridge.length) OutputView.printResult(currentBridge, count, 1)
+    else if(currentBridge[0].includes('X') || currentBridge[1].includes('X')) this.readGameCommand(currentBridge, bridge, count);
+    else this.readMoving(currentBridge, bridge, count);
+  },
+
+
+  /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(currentBridge, bridge, count) {
+    try{
+      Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (input) => {
+        if(input==='R') this.readMoving(game.retry(currentBridge), bridge, ++count);
+        else if(input==='Q') OutputView.printResult(currentBridge, count, 0);
+        else throw "[ERROR] R와 Q중 하나만 입력 가능합니다.";
+      })
+    } catch(e) {
+      Console.print(e);
+      this.readGameCommand(currentBridge, bridge, count);
+    }
+  },
 };
 
 module.exports = InputView;
