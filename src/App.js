@@ -47,8 +47,9 @@ class App {
     } else if (rnq === 'Q') {
       OutputView.printResult(this.bridge, this.userState, this.countTry, false);
       InputView.close();
+    } else {
+      throw Error('[ERROR] 대문자 R , Q 둘 중 하나만 입력해주세요.');
     }
-    throw Error('[ERROR] 대문자 R , Q 둘 중 하나만 입력해주세요.');
   }
 }
 
