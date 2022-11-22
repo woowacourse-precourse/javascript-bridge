@@ -1,4 +1,3 @@
-
 const { Console } = require("@woowacourse/mission-utils");
 
 /**
@@ -7,7 +6,6 @@ const { Console } = require("@woowacourse/mission-utils");
 const OutputView = {
   /**
    * 게임의 시작을 출력한다.
-   * <p>
    */
   printStart() {
     Console.print("다리 건너기 게임을 시작합니다.");
