@@ -18,7 +18,7 @@ class UseGameInfo {
     return (
       GameInfo.moveBridge[0]
         .concat(GameInfo.moveBridge[1])
-        .includes(GAME_VALUES.upperCharX)
+        .includes(GAME_VALUES.mapValues[1])
     );
   }
 

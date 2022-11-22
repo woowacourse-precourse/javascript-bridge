@@ -23,10 +23,7 @@ class ValidateGameCommand {
 
   isBlank = (input) => !input;
 
-  isCorrectCharacter = (input) => (
-    input === GAME_VALUES.upperCharR ||
-    input === GAME_VALUES.upperCharQ
-  );
+  isCorrectCharacter = (input) => GAME_VALUES.retryValues.includes(input);
 }
 
 module.exports = ValidateGameCommand;

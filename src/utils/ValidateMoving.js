@@ -23,10 +23,7 @@ class ValidateMoving {
 
   isBlank = (input) => !input;
 
-  isCorrectCharacter = (input) => (
-    input === GAME_VALUES.upperCharU ||
-    input === GAME_VALUES.upperCharD
-  );
+  isCorrectCharacter = (input) => GAME_VALUES.movingValues.includes(input);
 }
 
 module.exports = ValidateMoving;

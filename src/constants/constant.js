@@ -25,17 +25,11 @@ const RESULT_MESSAGES = {
 }
 
 const GAME_VALUES = {
-  upperCharO: 'O',
+  movingValues: ['U', 'D'],
 
-  upperCharX: 'X',
+  retryValues: ['R', 'Q'],
 
-  upperCharR: 'R',
-
-  upperCharQ: 'Q',
-
-  upperCharU: 'U',
-
-  upperCharD: 'D',
+  mapValues: ['O', 'X'],
 
   blank: ' ',
 
