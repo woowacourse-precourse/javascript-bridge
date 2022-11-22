@@ -1,21 +1,23 @@
+const { WORD, SINGLE_MAP } = require("../Constants/Token");
 const Check = require("../Utils/Check");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스 -> InputView, OutputView 사용 불가
+ * Visualize 로직
  * 변경 가능 : 파일경로, 필드 추가, 메서드 인자, 메서드
  * 변경 불가 : 메서드 이름
- * 이쪽은 외부 인자 가져와서 깔끔하게 처리하는 로직
- * 책임 소재를 가장 확실히 정해야 하는 로직 : App, BridgeGame, GameLogic
  */
-class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
 
+class BridgeGame {
   #state = {
     bridge: null,
+    trial: 1,
+    isAlive: true,
+    currentIndex: 0,
+    currentMap: {
+      up: [],
+      down: [],
+    },
   };
 
   get state() {
@@ -26,34 +28,48 @@ class BridgeGame {
     this.#state = { ...this.#state, ...nextState };
   }
 
-  move(bridge, values, step, result) {
-    Check.moveFormat(step);
-    values.stepArray.push(step);
+  // move(bridge, values, step, result) {
+  //   Check.moveFormat(step);
+  //   values.stepArray.push(step);
 
-    this.compare(bridge, values, result);
+  //   this.compare(bridge, values, result);
+  // }
+  move(step) {
+    const { bridge, currentIndex } = this.state;
+    const passed = step === bridge[currentIndex];
+    this.proceed(passed);
+    this.makeBridgeMap(passed, step);
   }
 
-  // compare(bridge, values, result) {
-  //   values.index++;
-  //   console.log(bridge, values.stepArray, result.count);
+  proceed(passed) {
+    const nextIndex = this.state.currentIndex++;
+    const nextStatus = passed ? true : false;
 
-  //   if (bridge[values.index] === values.stepArray[values.index]) {
-  //     this.readMoving(bridge, values, result);
-  //   }
+    this.setState({
+      currentIndex: nextIndex,
+      isAlive: nextStatus,
+    });
+  }
 
-  //   if (bridge[values.index] !== values.stepArray[values.index]) {
-  //     this.readGameCommand(bridge, values, result);
-  //   }
-  // }
+  makeBridgeMap(passed, step) {
+    const answer = passed ? "O_PRINT" : "X_PRINT";
+    const [newUp, newDown] = SINGLE_MAP[answer][step];
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+    this.setState({
+      currentMap: {
+        up: [...this.state.currentMap.up, newUp],
+        down: [...this.state.currentMap.down, newDown],
+      },
+    });
+  }
+
   retry() {
-    // 동일 다리 array 가져오기 + 시도횟수 리셋
-    // ~~의 시작메서드 실행
+    this.setState({
+      trial: this.state.trial++,
+      isAlive: true,
+      currentIndex: 0,
+      currentMap: { up: [], down: [] },
+    });
   }
 }
 

@@ -12,8 +12,8 @@ const ENTITY = Object.freeze({
 const KEY = Object.freeze({
   BRIDGE_UP: "U",
   BRIDGE_DOWN: "D",
-  SELECT_RESTART: "R",
-  SELECT_QUIT: "Q",
+  COMMAND_RESTART: "R",
+  COMMAND_QUIT: "Q",
 });
 
 const GAME_CHAR = Object.freeze({
@@ -25,12 +25,12 @@ const GAME_CHAR = Object.freeze({
   MAP_DIVIDER: " | ",
 });
 
-const GAME_ANSWER = Object.freeze({
-  RIGHT: {
+const SINGLE_MAP = Object.freeze({
+  O_PRINT: {
     U: [GAME_CHAR.PASS, GAME_CHAR.EMPTY],
     D: [GAME_CHAR.EMPTY, GAME_CHAR.PASS],
   },
-  WRONG: {
+  X_PRINT: {
     U: [GAME_CHAR.FAIL, GAME_CHAR.EMPTY],
     D: [GAME_CHAR.EMPTY, GAME_CHAR.FAIL],
   },
@@ -48,4 +48,4 @@ const RESULT = Object.freeze({
   TRIAL: "총 시도한 횟수:",
 });
 
-module.exports = { CONFIG, ENTITY, KEY, GAME_CHAR, GAME_ANSWER, WORD, RESULT };
+module.exports = { CONFIG, ENTITY, KEY, GAME_CHAR, SINGLE_MAP, WORD, RESULT };

@@ -42,9 +42,8 @@ class GameController {
 
   playRound() {
     this.view.input.readMoving((moveInput) => {
-      Check(moveInput, checkMoveFormat, this.playRound.bind(this));
-
-      //비교로직 : 현재 걸음이랑, bridge랑 비교
+      const step = Check(moveInput, checkMoveFormat, this.playRound.bind(this));
+      this.model.move(step);
     });
   }
 
