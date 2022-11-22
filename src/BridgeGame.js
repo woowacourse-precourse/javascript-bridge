@@ -41,10 +41,6 @@ class BridgeGame {
     );
   }
 
-  getBridge() {
-    return this.#bridge;
-  }
-
   increaseCount() {
     this.#count += 1;
   }
