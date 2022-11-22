@@ -14,7 +14,7 @@ const ERROR_MSG = {
 const RESULT_MSG = {
   SUCCESS: "성공",
   FAIL: "실패",
-  FINAL: "최종 게임 결과\n",
+  FINAL: "\n최종 게임 결과",
   SUCCESS_OR_FAIL: "\n게임 성공 여부: ",
   TRY_COUNT: "총 시도한 횟수: ",
 };
