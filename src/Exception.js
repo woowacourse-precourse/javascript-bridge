@@ -1,5 +1,3 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-
 const Exception = {
   bridgeSize(answer) {
     if (Number(answer) < 3 || Number(answer) > 20 || !/[0-9]/.test(answer)) {
