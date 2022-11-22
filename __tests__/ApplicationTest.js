@@ -84,4 +84,10 @@ describe("다리 건너기 테스트", () => {
   test("예외 테스트", () => {
     runException(["a"]);
   });
+  test("알파벳 + 숫자일 때", () => {
+    runException(["sdfs234345463"]);
+  });
+  test("공백문자열 일 때", () => {
+    runException(["  "]);
+  });
 });
