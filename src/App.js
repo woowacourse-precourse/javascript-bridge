@@ -3,7 +3,7 @@ const GameManager = require('./GameManager');
 class App {
   play() {
     const gameManager = new GameManager();
-    gameManager.start();
+    gameManager.startGame();
   }
 }
 

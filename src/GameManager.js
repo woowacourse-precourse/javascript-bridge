@@ -13,8 +13,28 @@ class GameManager {
         this.#bridgeGame = new BridgeGame();
     }
 
-    start() {
+    startGame() {
+        Print.StartMessage();
+        this.getBridgeLength();
+    }
 
+    getBridgeLength() {
+        InputView.readBridgeSize(this.isValidLength.bind(this));
+    }
+
+    isValidLength(userInput) {
+        this.bridgeLengthInput = new BridgeLengthInput();
+        try {
+            this.bridgeLengthInput.check();
+            this.generateBridge(userInput);
+        } catch{
+            this.getBridgeLength();
+        }
+    }
+
+    generateBridge(userInput) {
+        this.#bridgeGame.createBridge(userInput);
+        this.playRound();
     }
     
     playRound() {
