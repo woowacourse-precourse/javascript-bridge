@@ -71,13 +71,11 @@ class Controller {
   replay() {
     this.#tryingNum += 1;
     this.play();
-    return;
   }
 
   end(isMatch){
     const map = this.#bridgeGame.result();
     printResult(isMatch, this.#tryingNum, () => printMap(map));
-    return;
   }
 }
 
