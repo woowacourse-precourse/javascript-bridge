@@ -6,47 +6,39 @@ class App {
   #bridgeGame = new BridgeGame();
   #resultMap;
 
-  async play() {
+  play() {
     OutputView.printStart();
 
-    const BRIDGE_SIZE = await InputView.readBridgeSize();
+    const BRIDGE_SIZE = InputView.readBridgeSize();
+    if (BRIDGE_SIZE === 0) return;
 
     const bridge = this.#bridgeGame.make(BRIDGE_SIZE);
 
-    let isRetry = true;
-    let isLive;
-
-    while (isRetry === true) {
-      isLive = await this.moveFunction(bridge);
-      if (isLive == "finish") isRetry = false;
-      else {
-        const command = await InputView.readGameCommand();
-        isRetry = this.#bridgeGame.retry(command);
-      }
-    }
-
-    OutputView.printResult(
-      this.#bridgeGame.getRetryCount(),
-      isLive,
-      this.#resultMap
-    );
-    InputView.close();
+    this.loop(bridge);
   }
 
-  async moveFunction(bridge) {
+  moveFunction(bridge) {
     let isLive = true;
 
     while (isLive === true) {
-      const direction = await InputView.readMoving();
+      const direction = InputView.readMoving();
       isLive = this.#bridgeGame.move(bridge, direction);
-      this.#resultMap = OutputView.printMap(
-        bridge,
-        direction,
-        this.#bridgeGame.getStep()
-      );
+      this.#resultMap = OutputView.printMap(bridge, direction, this.#bridgeGame.getStep());
     }
-
     return isLive;
+  }
+
+  loop(bridge) {
+    let isLive = this.moveFunction(bridge);
+
+    while (isLive !== "finish") {
+      const command = InputView.readGameCommand();
+      if (!this.#bridgeGame.retry(command)) break;
+      
+      isLive = this.moveFunction(bridge);
+    }
+    OutputView.printResult(this.#bridgeGame.getRetryCount(), isLive, this.#resultMap);
+    InputView.close();
   }
 }
 

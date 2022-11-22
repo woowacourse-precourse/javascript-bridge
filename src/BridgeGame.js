@@ -9,11 +9,7 @@ class BridgeGame {
   #retryCount = 1;
 
   make(bridgeSize) {
-    const bridge = BridgeMaker.makeBridge(
-      bridgeSize,
-      BridgeRandomNumberGenerator.generate
-    );
-
+    const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     return bridge;
   }
 
@@ -26,14 +22,13 @@ class BridgeGame {
     this.#step = this.#step + 1;
     const moveResult = this.judge(bridge[this.#step], direction);
 
-    if (moveResult === true && this.#step === bridge.length - 1) {
-      return "finish";
-    }
+    if (moveResult === true && this.#step === bridge.length - 1) return "finish";
+      
     return moveResult;
   }
 
   judge(step, direction) {
-    return step === direction ? true : false;
+    return step === direction;
   }
 
   /**
