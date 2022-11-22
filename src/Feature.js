@@ -30,4 +30,16 @@ class Feature {
             throw new Error("[Error] U 혹은 D를 입력해주세요.")
         }
     }
+
+    gameOver() {
+        let result = false;
+        MissionUtils.Console.readline("재도전할거?", (INPUT) => {
+            if (INPUT != "R" | INPUT != "Q") {
+                throw new Error("[Error] R 아니면 Q만 입력");
+            }
+            if (INPUT == "R")   result = true;
+        })
+
+        return result;
+    }
 }
