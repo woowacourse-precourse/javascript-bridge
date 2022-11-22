@@ -15,7 +15,6 @@ const InputView = {
 
   initInput() {
     this.CUR_IDX = -1;
-    this.BRIDGE = [];
     this.MOVING = [];
   },
 
@@ -56,6 +55,8 @@ const InputView = {
     const UP = [];
     const DOWN = [];
 
+    console.log(this.MOVING, this.BRIDGE);
+
     this.MOVING.map((moving, idx) => {
       moving === 'U' ? UP.push(moving === this.BRIDGE[idx] ? ' O ' : ' X ') : DOWN.push(moving === this.BRIDGE[idx] ? ' O ' : ' X ');
       moving === 'U' ? DOWN.push('   ') : UP.push('   ');
@@ -73,10 +74,18 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
+    this.initInput();
+
     Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n', (answer) => {
+      this.validateAnswer(answer);
       answer === 'R' ? this.readMoving() : OutputView.printResult();
     })
   },
+
+  validateAnswer(answer) {
+    if (answer !== 'R' && answer !== 'Q')
+      throw Error('[ERROR] 게임 종료 후 R 또는 Q만 입력 가능 합니다.');
+  }
 };
 
 module.exports = InputView;
