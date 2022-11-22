@@ -2,6 +2,7 @@ const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeNumber = require('./BridgeRandomNumberGenerator');
+const BridgeRecorder = require('./BridgeRecorder');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -12,8 +13,11 @@ class BridgeGame {
   #isPlay = true;
   #isEnd = false;
   #bridge;
-  #upperBridge = [];
-  #lowerBridge = [];
+  #bridgeRecord;
+
+  constructor() {
+    this.#bridgeRecord = new BridgeRecorder([], []);
+  }
 
   startGame() {
     OutputView.start();
@@ -78,26 +82,20 @@ class BridgeGame {
 
   firstBlock(state, input) {
     if (input === 'U') {
-      this.#upperBridge.push(` ${state} `);
-      this.#lowerBridge.push('   ');
+      OutputView.printMap(this.#bridgeRecord.addFirstUpBlock(state));
     }
     if (input === 'D') {
-      this.#upperBridge.push('   ');
-      this.#lowerBridge.push(` ${state} `);
+      OutputView.printMap(this.#bridgeRecord.addFirstDownBlock(state));
     }
-    OutputView.printMap([this.#upperBridge, this.#lowerBridge]);
   }
 
   afterFirstBlock(state, input) {
     if (input === 'U') {
-      this.#upperBridge.push(`| ${state} `);
-      this.#lowerBridge.push('|   ');
+      OutputView.printMap(this.#bridgeRecord.addUpBlock(state));
     }
     if (input === 'D') {
-      this.#upperBridge.push('|   ');
-      this.#lowerBridge.push(`| ${state} `);
+      OutputView.printMap(this.#bridgeRecord.addDownBlock(state));
     }
-    OutputView.printMap([this.#upperBridge, this.#lowerBridge]);
   }
 
   /**
@@ -114,21 +112,20 @@ class BridgeGame {
 
   init() {
     this.#turn = 0;
-    this.#upperBridge = [];
-    this.#lowerBridge = [];
+    this.#bridgeRecord.init();
   }
 
   clearGame() {
     const SUCCESS = '성공';
     InputView.closeRead();
-    const records = [this.#upperBridge, this.#lowerBridge];
+    const records = this.#bridgeRecord.getResult();
     OutputView.printResult(SUCCESS, this.#try, records);
   }
 
   giveupGame() {
     const FAIL = '실패';
     InputView.closeRead();
-    const records = [this.#upperBridge, this.#lowerBridge];
+    const records = this.#bridgeRecord.getResult();
     OutputView.printResult(FAIL, this.#try, records);
   }
 }
