@@ -50,7 +50,7 @@ class BridgeGame {
   }
 
   /**
-   * 사용자가 입력한 이동 커멘드와 현재 step에 해당하는 브릿지 정보를 비교하는 메서드.
+   * 사용자가 입력한 이동 커멘드와 현재 step에 해당하는 브릿지 정보를 비교하여 이동이 성공하는지에 대한 정보를 반환하는 메서드
    * @param {string} moveCmd 사용자가 입력한 이동 커멘드 -> 'U', 'D' 중 하나.
    * @param {string} currentBridge 현재 step에 해당하는 브릿지 정보 -> 'U', 'D' 중 하나.
    * @returns 사용자 커멘드와 현재 step에 해당하는 브릿지 정보가 같다면 true, 아니면 false를 리턴.
