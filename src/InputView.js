@@ -34,6 +34,14 @@ const InputView = {
           bridge,
           bridgeList
         );
+        OutputView.printMap(movingResult);
+        if (movingResult[0].includes('X') || movingResult[1].includes('X')) {
+          return this.readGameCommand(bridgeList, bridge, attempt);
+        }
+        if (movingResult[0].length == bridge.length) {
+          const successMessage = '성공';
+          return OutputView.printResult(bridgeList, successMessage, attempt);
+        }
         return this.readMoving(bridge, movingResult, attempt);
       }
     );
@@ -57,6 +65,7 @@ const InputView = {
         }
         if (choice === quit) {
           const faileMessage = '실패';
+          OutputView.printResult(bridgeList, faileMessage, attempt);
         }
       }
     );
