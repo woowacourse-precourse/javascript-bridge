@@ -23,6 +23,11 @@ const MESSAGE = Object.freeze({
   INPUT_BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',
   MOVE_DIRECTION: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
   RETRY: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+  EXIT: '최종 게임 결과',
+  IS_SUCCESS: '게임 성공 여부:',
+  COUNT_TRY: '총 시도한 횟수:',
+  SUCCESS: '성공',
+  FAIL: '실패',
 });
 
 const ERROR = Object.freeze({

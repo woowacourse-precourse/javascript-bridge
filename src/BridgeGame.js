@@ -1,7 +1,7 @@
 const Bridge = require('./Bridge');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { MOVABLE, GAME_COMMAND } = require('./data/constants');
+const { MOVABLE, GAME_COMMAND, DIRECTION } = require('./data/constants');
 const InputView = require('./InputView');
 const IO = require('./IO');
 const OutputView = require('./OutputView');
@@ -19,30 +19,48 @@ class BridgeGame {
 
   #tryCount;
 
+  #success;
+
   constructor() {
-    this.checkLengthValidate();
+    this.#bridgesProgress = [[], []];
+    this.#success = false;
+    this.#tryCount = 1;
   }
 
-  checkLengthValidate() {
+  initBridge(length) {
+    this.#bridge = new Bridge(
+      length,
+      BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate),
+    );
+  }
+
+  init() {
     InputView.readBridgeSize((length) => {
       try {
         Validator.validateBridgeLength(length);
-
-        this.#bridge = new Bridge(
-          length,
-          BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate),
-        );
-        this.#bridgesProgress = [[], []];
+        this.initBridge(length);
         this.play();
       } catch (error) {
         IO.output(error);
-        this.checkLengthValidate();
+        this.init();
       }
     });
   }
 
   play() {
     this.move(0, this.#bridge.getBridgeLength());
+  }
+
+  static getIndexFromDirection(direction) {
+    if (direction === DIRECTION.UP) return 0;
+    return 1;
+  }
+
+  static moveProcess(process, direction, movable) {
+    const movablePosition = BridgeGame.getIndexFromDirection(direction);
+
+    process.map((arr, index) => (index === movablePosition ? arr.push(movable) : arr.push(' ')));
+    return process;
   }
 
   /**
@@ -56,11 +74,16 @@ class BridgeGame {
         Validator.validateBridgeDirection(direction);
         const checkCorect = this.#bridge.checkCorrectDirection(direction, index);
 
-        OutputView.printMap(this.#bridgesProgress, checkCorect, direction);
+        OutputView.printMap(BridgeGame.moveProcess(this.#bridgesProgress, direction, checkCorect));
 
         if (checkCorect === MOVABLE.IMMOVABLE) {
           this.checkRetry();
-        } else if (index === length - 1) { IO.close(); return; }
+        } else if (index === length - 1) {
+          this.#success = true;
+          OutputView.printResult(this.#tryCount, this.#success, this.#bridgesProgress);
+          IO.close();
+          return;
+        }
 
         this.move(index + 1, length);
       } catch (error) {
@@ -74,16 +97,21 @@ class BridgeGame {
     InputView.readGameCommand((command) => {
       try {
         Validator.validateGameCommand(command);
-        if (command === GAME_COMMAND.RETRY) {
-          this.retry();
-          return;
-        }
-        IO.close();
+        this.retryOrQuit(command);
       } catch (error) {
         IO.output(error);
         this.checkRetry();
       }
     });
+  }
+
+  retryOrQuit(command) {
+    if (command === GAME_COMMAND.RETRY) {
+      this.retry();
+      return;
+    }
+    OutputView.printResult(this.#tryCount, this.#success, this.#bridgesProgress);
+    IO.close();
   }
 
   /**

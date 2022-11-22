@@ -8,20 +8,18 @@ class Bridge {
 
   #bridges;
 
-  #bridgesArray;
-
   constructor(length, bridges) {
     this.#length = length;
     this.#bridges = bridges;
   }
 
+  getBridgeLength() {
+    return this.#length;
+  }
+
   checkCorrectDirection(direction, index) {
     if (this.#bridges[index] === direction) return MOVABLE.MOVABLE;
     return MOVABLE.IMMOVABLE;
-  }
-
-  getBridgeLength() {
-    return this.#length;
   }
 }
 
