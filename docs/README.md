@@ -16,23 +16,33 @@
 # 구현 기능
 
 InputView)<br>
-&nbsp; readBridgeSize: 다리 길이 숫자로 입력받아서 유효성 검사, 올바른 값이면 `BridgeMaker.makeBridge` 호출, 올바르지 않은 값이면 에러메세지 출력 후 다시 입력받기 <br>
-&nbsp; readMoving: 이동할 칸 U/D로 입력받아서 유효성 검사, 올바른 값이면 `BridgeGame.move` 호출, 올바르지 않은 값이면 에러메세지 출력 후 다시 입력받기 <br>
-&nbsp; readGameCommand: 게임 재시도 여부 R/Q로 입력받아서 유효성 검사, 올바른 값이면 `BridgeGame.retry` 호출, 올바르지 않은 값이면 에러메세지 출력 후 다시 입력받기 <br>
+&nbsp; readBridgeSize: 다리 길이 입력 받아서 유효성 검사, 올바른 값이면 다리 생성하고 올바르지 않은 값이면 에러메세지 출력 후 다시 입력받기 <br>
+&nbsp; readMoving: 이동할 칸 입력 받아서 유효성 검사, 올바른 값이면 입력받은 값에 따라 이동하고 올바르지 않은 값이면 에러메세지 출력 후 다시 입력받기 <br>
+&nbsp; readGameCommand: 게임 재시도 여부 입력 받아서 유효성 검사, 올바른 값이면 재시도하고 올바르지 않은 값이면 에러메세지 출력 후 다시 입력받기 <br>
 
 OutputView)<br>
-&nbsp; printMap: 이동 상태 배열로 전달받아서 출력<br>
-&nbsp; printResult: 이동 상태 배열/성공 여부/시도 횟수 전달받아서 출력<br>
-&nbsp; printStart: 시작 문구 출력
+&nbsp; printMap: 이동 상태를 지도 형식으로 전달받아서 출력<br>
+&nbsp; printResult: 이동 지도/성공 여부/시도 횟수 전달받아서 출력<br>
+&nbsp; printStart: 시작 문구 출력<br>
+&nbsp; printError: 에러메세지 출력
 
 BridgeGame)<br>
-&nbsp; move: 현재 이동 상태, 만들어진 다리, 이동할 칸 입력받아서 다리 배열의 이동 상태.length번째 값과 이동할 칸의 값이 같으면 해당 자리에 O, 다르면 넣어서 출력<br>
-&nbsp; retry: 전달값이 R이면 `InputView.readMoving` 호출, Q이면 `OutputView.printResult` 호출<br>
+&nbsp; make: 전달받은 다리 길이만큼 다리 생성해서 저장<br>
+&nbsp; move: 이동할 칸 전달 받아서 현재 상태에 추가하고 지도 생성, 이동 성공이면 다음 이동 입력받거나 최종 결과 출력, 실패하면 재시도 여부 입력받기<br>
+&nbsp; makeMap: 성공 여부에 따라 현재 상태로 지도 만들기<br>
+&nbsp; addSuccessMove: 이동 성공 시 전달받은 이동할 칸에 따라 지도에 이동 경로를 추가한다<br>
+&nbsp; addFailMove: 이동 실패 시 전달받은 이동할 칸에 따라 지도에 이동 경로를 추가한다<br>
+&nbsp; retry: 전달값이 R이면 직전 시행 되돌리고 재시도 횟수 추가해서 재입력, Q이면 실패 지도 만들어서 최종 결과 출력<br>
+&nbsp; revert: 마지막 현재 상태 제거하고 지도에 마지막 경로 삭제해서 직전 시행을 되돌리기<br>
 
 BridgeMaker)<br>
-&nbsp; makeBridge: 다리 길이 전달받아서 해당 크기만큼 `BridgeRandomNumberGenerator.generate()` 호출, 호출한 결과를 배열에 담아서 리턴
+&nbsp; makeBridge: 다리 길이 전달받아서 해당 크기만큼 랜덤 숫자 생성, 랜덤 숫자에 따른 결과를 배열에 담아서 리턴
 
 ValidateInput)<br>
 &nbsp; bridgeSize: 입력값이 숫자가 아니거나 3~20의 범위가 아니면 `throw Error`<br>
 &nbsp; moving: 입력값이 U/D가 아니면 `throw Error`<br>
 &nbsp; gameCommand: 입력값이 R/Q가 아니면 `throw Error`<br>
+
+Util)<br>
+&nbsp; insertResult: 기존의 지도에서 마지막 칸에 새로운 이동 추가하기<br>
+&nbsp; removeResult: 기존의 지도에서 마지막 칸의 이동 제거하기<br>
