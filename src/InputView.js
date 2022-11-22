@@ -3,6 +3,7 @@ const Console = MissionUtils.Console;
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -46,6 +47,7 @@ const InputView = {
       // 게임 종료 -> 출력
       console.log('게임 종료');
       console.log(currentBridge);
+      OutputView.printResult(currentBridge);
     }
 
     // 틀렸는지 확인
@@ -59,6 +61,7 @@ const InputView = {
       // 게임 다시 진행
       console.log('겜 진행');
       this.readMoving(currentBridge, bridge);
+      OutputView.printMap(currentBridge);
     }
   },
 
