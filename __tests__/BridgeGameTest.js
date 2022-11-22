@@ -93,7 +93,7 @@ describe('플레이어 입력값의 유효성 검사', () => {
 
     const app = new App();
 
-    app.getMovingDirection().then(() => {
+    app.getDirection().then(() => {
       expectLogContains(getOutput(logSpy), [ERROR.INPUT_MOVING_DIRECTION]);
     });
   });
