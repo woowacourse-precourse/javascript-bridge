@@ -3,7 +3,7 @@ const { ASKS } = require("../Constants/Message");
 const Check = require("../Utils/Check");
 const BridgeMaker = require("../BridgeMaker");
 const RandomGenerator = require("../Utils/BridgeRandomNumberGenerator");
-const GameLogic = require("../Utils/GameLogic");
+// const GameLogic = require("../Utils/GameLogic");
 
 /**
  * 객체
