@@ -6,9 +6,7 @@ const OutputView = require("./OutputView");
 const START = 1;
 
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
+  
   readBridgeSize() {
     return new Promise(resolve => {
       MissionUtils.Console.readLine(`${Script.BRIDGELENGTHINPUT}\n`, (answer) => {
@@ -17,9 +15,7 @@ const InputView = {
       })
     })
   },
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
+  
   readMoving() {
     return new Promise(resolve => {
       MissionUtils.Console.readLine(`\n${Script.CHOICEBRIDGE}\n`, (movingDirection) => {
@@ -32,7 +28,13 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    return new Promise(resolve => {
+      MissionUtils.Console.readLine(`${Script.RETRY}\n`, (answer) => {
+        resolve(answer);
+      })
+    })
+  },
 };
 
 module.exports = InputView;
