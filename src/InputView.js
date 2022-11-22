@@ -19,6 +19,12 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
+    let moving;
+    Console.readLine('이동할 칸을 선택해주세요..', string => {
+      bg.vaildateMoveCommand(string);
+      return moving=string
+    })
+    return moving;
   },
 
   /**
