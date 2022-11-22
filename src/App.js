@@ -10,6 +10,7 @@ class App {
   bridgeArray;
   userTry = 0;
   gameTry = 1;
+  bridgeSize;
   play() {
     OutputView.printGameStart(Message.GAME_START);
     this.inputBridgeLength();
@@ -20,6 +21,7 @@ class App {
   }
 
   makingBridge(size) {
+    this.bridgeSize = size;
     this.bridgeArray = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.inputUserMove();
   }
@@ -36,6 +38,7 @@ class App {
   printBridge(ox, upBridge, downBridge) {
     OutputView.updateBridge(upBridge, downBridge);
     this.userTry += 1;
+    if (this.bridgeSize == this.userTry) return OutputView.printResult(this.gameTry, "성공");
     if (ox == "O") InputView.readMoving(this);
     InputView.readGameCommand(this);
   }
@@ -48,7 +51,7 @@ class App {
       bridgeGame_.retry(this);
       OutputView.clearBridge();
     }
-    if (userChoice == "Q") OutputView.printResult(this.gameTry);
+    if (userChoice == "Q") OutputView.printResult(this.gameTry, "실패");
   }
 }
 
