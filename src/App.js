@@ -26,7 +26,7 @@ class App {
     try{
       if(this.checkBridgeSize(bridge_len_arr[0])){
         this.bridge_len = bridge_len_arr[0];
-        this.makeBridge(this.bridge_len);
+        this.makeBridge();
         this.inputMoving();
       }
     }catch(e){
@@ -34,14 +34,18 @@ class App {
     }
   }
 
-  makeBridge(bridge_len){
-    const bridge_arr = this.bridgeMaker.makeBridge(bridge_len, this.bridgeRandomNumberGenerator.generate);
-    console.log(bridge_arr);
+  makeBridge(){
+    const bridge_arr = this.bridgeMaker.makeBridge(this.bridge_len, this.bridgeRandomNumberGenerator.generate);
+    console.log("bridge", bridge_arr);
   }
   
   inputMoving(){
     const moving_arr = [];
-    this.inputView.readMoving(moving_arr);
+
+    for(let i=0; i<this.bridge_len; i++){
+      this.inputView.readMoving(moving_arr);
+    }
+    console.log("moving ", moving_arr);
   }
 
   startGame(){
