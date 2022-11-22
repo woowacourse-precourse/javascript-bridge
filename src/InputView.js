@@ -7,7 +7,6 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-
   readBridgeSize(afterGetSize) {
     Console.readLine(INPUT.GET_INPUT_BRIDGE_SIZE, afterGetSize);
   },
@@ -15,8 +14,8 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(afterGetMoveing) {
-    Console.readLine(INPUT.GET_INPUT_MOVING, afterGetMoveing);
+  readMoving(afterGetMoving) {
+    Console.readLine(INPUT.GET_INPUT_MOVING, afterGetMoving);
   },
 
   /**

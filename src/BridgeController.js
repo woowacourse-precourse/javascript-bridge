@@ -21,7 +21,6 @@ class BridgeController {
 
       if (this.checkBridgeLength(bridgeSize) !== JUDGEMENT.ERROR) {
         const bridge = this.creatBridge(bridgeSize);
-
         this.getUserMove(bridge);
       }
     });
@@ -44,7 +43,6 @@ class BridgeController {
       BridgeRandomNumberGenerator.generate
     );
     Console.print(bridge);
-
     return bridge;
   }
 

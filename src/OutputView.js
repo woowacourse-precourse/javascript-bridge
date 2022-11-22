@@ -35,12 +35,11 @@ const OutputView = {
    */
   printResult(bridgeGameResult, successOrFail, tryCount) {
     Console.print(OUTPUT.SEND_GAME_RESULT);
-
     this.printMap(bridgeGameResult);
-
     Console.print(`${OUTPUT.SEND_GAME_SUCCESS_FAIL}${successOrFail}`);
     Console.print(`${OUTPUT.SEND_GAME_TRY_COUNT}${tryCount}\n`);
     Console.close();
+
     return;
   },
 };
