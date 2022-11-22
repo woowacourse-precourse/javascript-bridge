@@ -1,11 +1,11 @@
-const { Console } = require('@woowacourse/mission-utils')
+const { Console } = require('@woowacourse/mission-utils');
 const { Random } = require('@woowacourse/mission-utils');
-const BridgeMaker = require('./BridgeMaker')
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator')
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { QUESTION } = require('./constants/messages');
-const Validation = require('./Validation')
-const BridgeGame = require('./BridgeGame')
-const OutputView = require('./OutputView')
+const Validation = require('./Validation');
+const BridgeGame = require('./BridgeGame');
+const OutputView = require('./OutputView');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -16,31 +16,34 @@ const InputView = {
    */
   readBridgeSize() {
     let generatedBridge;
-    Console.readLine(QUESTION.BRIDGE_LENGTH,(input)=>{
+    Console.readLine(QUESTION.BRIDGE_LENGTH, (input) => {
       Validation.validationForBridgeLength(input);
-      generatedBridge=BridgeMaker.makeBridge(input,BridgeRandomNumberGenerator.generate);
-    })
+      generatedBridge = BridgeMaker.makeBridge(
+        input,
+        BridgeRandomNumberGenerator.generate,
+      );
+    });
     return generatedBridge;
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(generatedBridge,gameStatus) {
-    Console.readLine(QUESTION.NEXT_MOVE,(input)=>{
+  readMoving(generatedBridge, gameStatus) {
+    Console.readLine(QUESTION.NEXT_MOVE, (input) => {
       Validation.validationForNextMove(input);
-      new BridgeGame().move(input,generatedBridge,gameStatus);
-    }) 
+      new BridgeGame().move(input, generatedBridge, gameStatus);
+    });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(gameStatus) {
-    Console.readLine(QUESTION.RETRY,(input)=>{
+    Console.readLine(QUESTION.RETRY, (input) => {
       Validation.validationForRetry(input);
-      new BridgeGame().retry(input,gameStatus);
-    })
+      new BridgeGame().retry(input, gameStatus);
+    });
   },
 };
 

@@ -49,7 +49,7 @@ class App {
     this.endGame();
   }
 
-  // 오답시
+  // 건널 수 없는 곳을 선택한 경우
   chooseWrong() {
     InputView.readGameCommand(this.#gameStatus);
     if (this.#gameStatus.wrongFlag) {

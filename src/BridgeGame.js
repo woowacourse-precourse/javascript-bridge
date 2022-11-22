@@ -27,6 +27,5 @@ class BridgeGame {
   }
 }
 
-//BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
 
 module.exports = BridgeGame;
