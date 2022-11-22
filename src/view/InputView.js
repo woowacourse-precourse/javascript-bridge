@@ -1,21 +1,21 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { INPUT_MESSAGE } = require("../model/component");
 const LengthError = require("../error/LengthError");
+const CellError = require("../error/CellError");
+const RestartError = require("../error/RestartError");
 const BridgeMaker = require("../BridgeMaker");
+const BridgeGame = require("../controller/BridgeGame");
 const { generate } = require("../BridgeRandomNumberGenerator");
 const { printMap, printResult } = require("../view/OutputView");
-
 const InputView = {
-  lengthInput: null,
-  computerNum: null,
   startCount: 1,
   count: 0,
+  computerNum: null,
   result: null,
+  lengthInput: null,
   restart: null,
   cellInput: null,
-  /**
-   * 다리의 길이를 입력받는다.
-   */
+
   readBridgeSize() {
     console.log(INPUT_MESSAGE.START_MESSAGE);
     Console.readLine(INPUT_MESSAGE.BRIDGE_MESSAGE, (input) => {
@@ -25,7 +25,6 @@ const InputView = {
       this.readMoving();
     });
   },
-
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
@@ -33,9 +32,30 @@ const InputView = {
     Console.readLine(INPUT_MESSAGE.CELL_MESSAGE, (input) => {
       new CellError(input);
       this.cellInput = input;
+      this.choiceRetry();
       printMap(this.result);
       this.tryLength();
     });
+  },
+
+  choiceRetry() {
+    const birdgeGame = new BridgeGame();
+    if (this.restart !== "R") {
+      this.result = birdgeGame.move(
+        this.cellInput,
+        this.computerNum,
+        this.count
+      );
+    }
+    if (this.restart === "R") {
+      this.count = 0;
+      this.result = birdgeGame.retry(
+        this.cellInput,
+        this.computerNum,
+        this.count
+      );
+      this.restart = null;
+    }
   },
 
   tryLength() {
@@ -73,7 +93,6 @@ const InputView = {
       printResult(this.result);
     }
   },
-
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
