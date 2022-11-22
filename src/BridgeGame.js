@@ -30,6 +30,7 @@ class BridgeGame {
     if(space === "D") this.downMove(bridgeList,count);
 
     this.setCount();
+    return this.bridgeList;
   }
 
   upMove(bridgeList,count){
