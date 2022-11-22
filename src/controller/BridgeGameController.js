@@ -24,25 +24,25 @@ class BridgeGameController {
 
   updateBridgeAccordingInput(bridgeSize) {
     this.model.validPath.size = Number(bridgeSize);
-    if (this.isBridgeLengthNotValid()) return this.getBridgeLengthFromUser();
+    if (this.#isBridgeLengthNotValid()) return this.getBridgeLengthFromUser();
     this.model.validPath.setAnswerBridge();
     this.getMoveDirectionFromUser();
   }
 
-  isBridgeLengthNotValid() {
+  #isBridgeLengthNotValid() {
     return !BridgegLengthValidator.validate(this.model.validPath.size);
   }
 
   getMoveDirectionFromUser() {
-    this.isGameCleared() ? this.quit() : InputView.readMoving(this.updateUserMovement.bind(this));
+    this.#isGameCleared() ? this.quit() : InputView.readMoving(this.updateUserMovement.bind(this));
   }
 
-  isGameCleared() {
+  #isGameCleared() {
     return this.model.validPath.size === this.model.bridgeGame.myCurrentPosition;
   }
 
   updateUserMovement(direction) {
-    if (this.isDirectionNotValid(direction)) return this.getMoveDirectionFromUser();
+    if (this.#isDirectionNotValid(direction)) return this.getMoveDirectionFromUser();
     if (this.model.bridgeGame.move(direction, this.model.validPath.getbridge())) {
       this.model.bridgeMap.updateMyPositionForward(direction, STATE.VALID.symbol);
       return this.showMovedPath().getMoveDirectionFromUser();
@@ -51,7 +51,7 @@ class BridgeGameController {
     return this.showMovedPath().askUserRestart();
   }
 
-  isDirectionNotValid(direction) {
+  #isDirectionNotValid(direction) {
     return !DirectionValidator.validate(direction);
   }
 
@@ -60,12 +60,12 @@ class BridgeGameController {
   }
 
   updateRestartOrNot(restartStatus) {
-    if (this.isRegameCommandNotValid(restartStatus)) this.askUserRestart();
+    if (this.#isRegameCommandNotValid(restartStatus)) this.askUserRestart();
     if (restartStatus === STATUS.HOPE_RESTART) this.regame();
     if (restartStatus === STATUS.HOPE_QUIT) this.quit();
   }
 
-  isRegameCommandNotValid(restartStatus) {
+  #isRegameCommandNotValid(restartStatus) {
     return !RegameCommandValidator.validate(restartStatus);
   }
 
