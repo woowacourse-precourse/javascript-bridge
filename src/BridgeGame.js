@@ -5,6 +5,15 @@ class BridgeGame {
 
   #map = [[], []];
 
+  #attemptsNum = 1;
+
+  init() {
+    this.#map = [[], []];
+  }
+
+  getAttemptsNum() {
+    return this.#attemptsNum;
+  }
 
   getMap() {
     return this.#map;
@@ -54,6 +63,15 @@ class BridgeGame {
     return this.#bridge.length === movingNum;
   }
 
+  retry(play) {
+    this.init();
+    this.updateAttemptsNum();
+    play();
+  }
+
+  updateAttemptsNum() {
+    this.#attemptsNum += 1;
+  }
 }
 
 module.exports = BridgeGame;

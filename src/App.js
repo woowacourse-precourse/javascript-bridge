@@ -3,7 +3,7 @@ const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { BRIDGE, RESULT } = require('./constants');
+const { COMMAND, BRIDGE, RESULT } = require('./constants');
 
 class App {
   constructor() {
@@ -34,6 +34,8 @@ class App {
       this.crossBridge();
       return;
     }
+
+    this.uncrossBridge();
   }
 
   crossBridge() {
@@ -43,6 +45,17 @@ class App {
     }
 
     this.play();
+  }
+
+  uncrossBridge() {
+    InputView.readGameCommand(this.retryOrQuit.bind(this));
+  }
+
+  retryOrQuit(command) {
+    if (command === COMMAND.RETRY) {
+      this.bridgeGame.retry(this.play.bind(this));
+      return;
+    }
 
   }
 
