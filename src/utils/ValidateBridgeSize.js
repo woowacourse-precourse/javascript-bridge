@@ -1,36 +1,28 @@
-const { GAME_VALUES, ERROR_MESSAGES } = require("../constants/constant");
+const { ERROR_MESSAGES } = require("../constants/constant");
 
 class ValidateBridgeSize {
-  constructor(bridgeSize) {
-    this.bridgeSize = bridgeSize;
+  #answer;
+
+  constructor(answer) {
+    this.validate(answer);
+    this.#answer = Number(answer);
   }
 
-  get bridgeSize() {
-    return this._bridgeSize;
+  validate(answer) {
+    if (Number.isNaN(answer) === true) {
+      throw new Error(ERROR_MESSAGES.bridgeSize);
+    }
+    if (answer % 1 !== 0) {
+      throw new Error(ERROR_MESSAGES.bridgeSize);
+    }
+    if (answer < 3 || answer > 20) {
+      throw new Error(EERROR_MESSAGES.bridgeSize);
+    }
   }
 
-  set bridgeSize(bridgeSize) {
-    if (this.validate(bridgeSize) === false) throw new Error(ERROR_MESSAGES.bridgeSize);
-    this._bridgeSize = Number(bridgeSize);
+  getSize() {
+    return this.#answer;
   }
-
-  validate(bridgeSize) {
-    return (
-      !this.isBlank(bridgeSize) &&
-      this.isNumber(bridgeSize) &&
-      this.isRange(bridgeSize) &&
-      Number.isInteger(Number(bridgeSize))
-    )
-  }
-
-  isBlank = (input) => !input;
-
-  isNumber = (input) => !isNaN(input);
-
-  isRange = (input) => (
-    input >= GAME_VALUES.minBridgeSize &&
-    input <= GAME_VALUES.maxBridgeSize
-  );
 }
 
 module.exports = ValidateBridgeSize;

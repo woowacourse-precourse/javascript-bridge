@@ -1,32 +1,22 @@
-const { GAME_VALUES, ERROR_MESSAGES } = require("../constants/constant");
+const { ERROR_MESSAGES, RETRY_VALID } = require("../constants/constant");
 
 class ValidateGameCommand {
-  constructor(gameCommand) {
-    this.gameCommand = gameCommand;
+  #answer;
+
+  constructor(answer) {
+    this.validate(answer);
+    this.#answer = answer;
   }
 
-  get gameCommand() {
-    return this._gameCommand;
+  validate(answer) {
+    if (!RETRY_VALID.includes(answer)) {
+      throw new Error(ERROR_MESSAGES.gameCommand);
+    }
   }
 
-  set gameCommand(gameCommand) {
-    if (this.validate(gameCommand) === false) throw new Error(ERROR_MESSAGES.gameCommand);
-    this._gameCommand = gameCommand;
+  getRetry() {
+    return this.#answer;
   }
-
-  validate(gameCommand) {
-    return (
-      !this.isBlank(gameCommand) &&
-      this.isCorrectCharacter(gameCommand)
-    )
-  }
-
-  isBlank = (input) => !input;
-
-  isCorrectCharacter = (input) => (
-    input === GAME_VALUES.upperCharR ||
-    input === GAME_VALUES.upperCharQ
-  );
 }
 
 module.exports = ValidateGameCommand;
