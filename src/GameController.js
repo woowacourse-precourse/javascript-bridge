@@ -40,12 +40,12 @@ class GameController {
   }
 
   resultOfCrossing(CAN_MOVE_NEXT, index) {
-    if (index === this.game.getBridgeLength() - 1) {
-      this.finalGameResult(true);
-      return;
-    }
-
     if (CAN_MOVE_NEXT) {
+      if (index === this.game.getBridgeLength() - 1) {
+        this.finalGameResult(true);
+        return;
+      }
+
       this.crossBridge(index + 1);
       return;
     }
