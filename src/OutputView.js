@@ -20,11 +20,11 @@ const OutputView = {
   },
 
   printResult(bridgeGame) {
-    const result = bridgeGame.getIsSuccess() ? VALUE.SUCCESS : VALUE.FAIL;
+    const gameResult = bridgeGame.getIsSuccess() ? VALUE.SUCCESS : VALUE.FAIL;
 
     MissionUtils.Console.print("\n최종 게임 결과");
     this.printMap(bridgeGame.getBridgeResult());
-    MissionUtils.Console.print("\n게임 성공 여부: " + result);
+    MissionUtils.Console.print("\n게임 성공 여부: " + gameResult);
     MissionUtils.Console.print(
       "총 시도한 횟수: " + bridgeGame.getTrialNumber()
     );
