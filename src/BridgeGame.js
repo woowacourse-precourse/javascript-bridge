@@ -27,7 +27,6 @@ class BridgeGame {
   }
 
   validateUnd(und) {
-    console.log(und);
     if (!(und === 'D' || und === 'U')) {
       throw Error('[ERROR] 대문자 U , D 둘 중 하나만 입력해주세요.');
     }
