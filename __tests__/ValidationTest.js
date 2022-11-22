@@ -1,8 +1,6 @@
-const {
-	BridgeSizeValidation,
-	MoveInputValidation,
-	CommandInputValidation,
-} = require('../src/Validation');
+const BridgeSizeValidation = require('../src/validation/BridgeSizeValidation');
+const MoveInputValidation = require('../src/validation/MoveInputValidation');
+const CommandInputValidation = require('../src/validation/CommandInputValidation');
 
 describe('제한 조건 검증 테스트', () => {
 	test.each(['3 ', '1', '04'])(
