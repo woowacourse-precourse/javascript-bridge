@@ -1,32 +1,33 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { VALIDATOR_CONSTANT, INPUT_KEYS } = require("../utils/constants");
 
 const validateReadBridgeSize = (bridgeSize) => {
   try {
-    if (isNaN(bridgeSize)) throw { ment: "는 숫자로 입력해야 합니다." };
-    if (bridgeSize < 3 || bridgeSize > 20) throw { ment: "의 범위는 3부터 20까지여야 합니다." };
+    if (isNaN(bridgeSize)) throw { ment: VALIDATOR_CONSTANT.BRIDGE_SIZE_NOT_NUMBER };
+    if (bridgeSize < VALIDATOR_CONSTANT.MIN_BRIDGE_SIZE || bridgeSize > VALIDATOR_CONSTANT.MAX_BRIDGE_SIZE) throw { ment: VALIDATOR_CONSTANT.BRIDGE_SIZE_RANGE_ERROR };
     return true;
   } catch (e) {
-    Console.print("[ERROR] 다리 길이" + e.ment);
+    Console.print(VALIDATOR_CONSTANT.ERROR_MENT + e.ment);
     return false;
   }
 };
 
 const validateReadMoving = (moveKey) => {
   try {
-    if (moveKey !== "U" && moveKey !== "D") throw { ment: "이동할 칸에는 대문자 U 혹은 D만 입력할 수 있습니다." };
+    if (moveKey !== INPUT_KEYS.UP && moveKey !== INPUT_KEYS.DOWN) throw { ment: VALIDATOR_CONSTANT.MOVEKEY_FORM_ERROR };
     return true;
   } catch (e) {
-    Console.print("[ERROR] " + e.ment);
+    Console.print(VALIDATOR_CONSTANT.ERROR_MENT + e.ment);
     return false;
   }
 };
 
 const validateReadGameCommand = (retryKey) => {
   try {
-    if (retryKey !== "R" && retryKey !== "Q") throw { ment: "재시도 여부에는 대문자 R 혹은 Q만 입력할 수 있습니다." };
+    if (retryKey !== INPUT_KEYS.RETRY && retryKey !== INPUT_KEYS.QUIT) throw { ment: VALIDATOR_CONSTANT.RETRYKEY_FORM_ERROR };
     return true;
   } catch (e) {
-    Console.print("[ERROR] " + e.ment);
+    Console.print(VALIDATOR_CONSTANT.ERROR_MENT + e.ment);
     return false;
   }
 };

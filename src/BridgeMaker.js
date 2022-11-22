@@ -1,3 +1,5 @@
+const { INPUT_KEYS } = require("../utils/constants");
+
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -11,7 +13,7 @@ const BridgeMaker = {
     for (i = 0; i < size; i++) {
       randomArr.push(generateRandomNumber());
     }
-    const solutionArr = randomArr.join(",").replace(regexForZero, "D").replace(regexForOne, "U").split(",");
+    const solutionArr = randomArr.join(",").replace(regexForZero, INPUT_KEYS.DOWN).replace(regexForOne, INPUT_KEYS.UP).split(",");
     return solutionArr;
   },
 };

@@ -1,20 +1,21 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { OUTPUT_VIEW_CONSTANT } = require("../utils/constants");
 
 const OutputView = {
   printStartMent() {
-    Console.print("다리 건너기 게임을 시작합니다.\n");
+    Console.print(OUTPUT_VIEW_CONSTANT.START_MENT);
   },
 
   printMap({ topBridge, bottomBridge }) {
-    Console.print(`[ ${topBridge.join(" | ")} ]`);
-    Console.print(`[ ${bottomBridge.join(" | ")} ]`);
+    Console.print(OUTPUT_VIEW_CONSTANT.PRINT_TOPBRIDGE(topBridge));
+    Console.print(OUTPUT_VIEW_CONSTANT.PRINT_BOTTOMBRIDGE(bottomBridge));
   },
 
   printResult({ topBridge, bottomBridge }, retryCount, successOrFailure) {
-    Console.print("\n최종 게임 결과");
+    Console.print(OUTPUT_VIEW_CONSTANT.GAME_RESULT_MENT);
     this.printMap({ topBridge, bottomBridge });
-    Console.print(`\n게임 성공 여부: ${successOrFailure}`);
-    Console.print(`총 시도한 횟수: ${retryCount}`);
+    Console.print(OUTPUT_VIEW_CONSTANT.SUCCESS_OR_FAIL_MENT(successOrFailure));
+    Console.print(OUTPUT_VIEW_CONSTANT.TOTAL_TRY_COUNT_MENT(retryCount));
   },
 };
 

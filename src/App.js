@@ -5,6 +5,7 @@ const BridgeGame = require("./BridgeGame");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
+const { INPUT_KEYS, FIANL_RESULT } = require("../utils/constants");
 
 class App {
   #retryCount;
@@ -57,7 +58,7 @@ class App {
 
   displaySuccessState(isSuccess) {
     if (this.bridgeGame.gameFinish()) {
-      this.#successOrFailure = "성공";
+      this.#successOrFailure = FIANL_RESULT.SUCCESS_MENT;
       OutputView.printMap(isSuccess);
       OutputView.printResult(isSuccess, this.#retryCount, this.#successOrFailure);
       return Console.close();
@@ -76,7 +77,7 @@ class App {
   }
 
   insertRKey(retryKey) {
-    if (retryKey === "R") {
+    if (retryKey === INPUT_KEYS.RETRY) {
       this.#retryCount += 1;
       this.bridgeGame.retry();
       this.inputMoving();
@@ -84,8 +85,8 @@ class App {
   }
 
   insertQKey(retryKey, isFail) {
-    if (retryKey === "Q") {
-      this.#successOrFailure = "실패";
+    if (retryKey === INPUT_KEYS.QUIT) {
+      this.#successOrFailure = FIANL_RESULT.FAIL_MENT;
       OutputView.printMap(isFail);
       OutputView.printResult(isFail, this.#retryCount, this.#successOrFailure);
       return Console.close();

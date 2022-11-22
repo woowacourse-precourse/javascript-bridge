@@ -1,3 +1,5 @@
+const { INPUT_KEYS, OUTPUT_KEYS } = require("../utils/constants");
+
 class BridgeGame {
   #solutionArr;
   #moveCount;
@@ -22,13 +24,13 @@ class BridgeGame {
   }
 
   insertFailValue({ topBridge, bottomBridge }) {
-    if ("D" === this.#solutionArr[this.#moveCount]) {
-      topBridge.push(" ");
-      bottomBridge.push("X");
+    if (INPUT_KEYS.DOWN === this.#solutionArr[this.#moveCount]) {
+      topBridge.push(OUTPUT_KEYS.BLANK);
+      bottomBridge.push(OUTPUT_KEYS.FAIL);
       return { topBridge, bottomBridge };
     }
-    bottomBridge.push("X");
-    topBridge.push(" ");
+    bottomBridge.push(OUTPUT_KEYS.FAIL);
+    topBridge.push(OUTPUT_KEYS.BLANK);
   }
 
   bridgeResult() {
@@ -42,13 +44,13 @@ class BridgeGame {
   }
 
   insertSuccessValue(solutionStr, topBridge, bottomBridge) {
-    if ("D" === solutionStr) {
-      topBridge.push(" ");
-      bottomBridge.push("O");
+    if (INPUT_KEYS.DOWN === solutionStr) {
+      topBridge.push(OUTPUT_KEYS.BLANK);
+      bottomBridge.push(OUTPUT_KEYS.SUCCESS);
       return;
     }
-    topBridge.push("O");
-    bottomBridge.push(" ");
+    topBridge.push(OUTPUT_KEYS.SUCCESS);
+    bottomBridge.push(OUTPUT_KEYS.BLANK);
   }
 
   gameFinish() {
