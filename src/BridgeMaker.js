@@ -1,4 +1,4 @@
-const { BRIDGE_MAKER } = require('./constants/settings');
+const { BRIDGE_MAKER } = require('./constants/Settings');
 
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {

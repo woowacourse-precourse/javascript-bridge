@@ -1,5 +1,4 @@
-const { PLAYERS_MAP } = require('./constants/settings')
-const { START } = require('./constants/settings')
+const { PLAYERS_MAP, START } = require('./constants/Settings')
 
 class PlayersMap {
     #upSpace;

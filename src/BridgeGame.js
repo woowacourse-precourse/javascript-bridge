@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { BRIDGE_GAME } = require('./constants/settings')
+const { BRIDGE_GAME } = require('./constants/Settings')
 
 const OutputView = require('./view/OutputView');
 

@@ -1,5 +1,5 @@
 const { BRIDGE_LENGTH, NEXT_STEP, RETRY, IS_NUMBER_EMPTY, ONE_VALUE } = require('./constants/Message');
-const { VALIDATION } = require('./constants/settings');
+const { VALIDATION } = require('./constants/Settings');
 
 class Validation {
   static bridgeLength(number) {
@@ -53,8 +53,6 @@ class Validation {
   static numberNet(number) {
     return number > VALIDATION.min_value && number < VALIDATION.max_value;
   }
-
-
   
   static isNumber(number) {
     const RegExp = VALIDATION.number_role;
