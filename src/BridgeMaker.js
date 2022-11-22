@@ -1,16 +1,19 @@
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
-    const bridge = [];
+    let bridge = [];
     for (let i = 0; i < size; i++) {
-      bridge.push(generateRandomNumber());
-    }
-    bridge.map((el, index) => {
-      if (el === 0) {
-        bridge.splice(index, 1, "D");
-      } else {
-        bridge.splice(index, 1, "U");
+      const number = String(generateRandomNumber());
+
+      if (number === "1") {
+        bridge.push("U");
+      } else if (number === "0") {
+        bridge.push("D");
       }
-    });
+    }
+
+    console.log(bridge);
     return bridge;
   },
 };
