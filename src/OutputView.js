@@ -18,6 +18,9 @@ const OutputView = {
       upperBridge.push(this.pushUpperFailResult(bridgeGame));
       underBridge.push(this.pushUnderFailResult(bridgeGame));
     }
+
+    Console.print(this.makePrintFormat(upperBridge));
+    Console.print(this.makePrintFormat(underBridge));
   },
 
   /**
