@@ -67,7 +67,10 @@ class App {
     OutputView.printMap(map);
   }
 
-  quit(gameResult) {}
+  quit(gameResult) {
+    const attemptsNum = this.bridgeGame.getAttemptsNum();
+    OutputView.printResult(gameResult, attemptsNum);
+  }
 }
 
 module.exports = App;
