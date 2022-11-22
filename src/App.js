@@ -20,7 +20,10 @@ class App {
       result = this.#bridgeGame.move(InputView.readMoving());
       OutputView.printMap(this.#bridgeGame.getCurrentMap(result));
     }
+    result === 2 ? this.gameSuccess() : this.gameOver();
   }
+  gameSuccess() {}
+  gameOver() {}
 }
 
 module.exports = App;
