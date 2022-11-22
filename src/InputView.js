@@ -1,20 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
-const Validation = require('./Validation');
 
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {
-    Console.readLine('\n다리의 길이를 입력해주세요.\n', answer => {
-      try {
-        Validation.bridgeSize(answer);
-      } catch (error) {
-        Console.print(error);
-        this.readBridgeSize();
-      }
-      this.readMoving();
-    });
+  readBridgeSize(userCallBack) {
+    Console.readLine('\n다리의 길이를 입력해주세요.\n', userCallBack);
   },
 
   /**
