@@ -16,42 +16,23 @@ const OutputView = {
     let bridgeUpper = RESULT.BRIDGE_START;
     let bridgeLower = RESULT.BRIDGE_START;
     bridgeGame.movingLog.forEach((log, index) => {
-      if (index !== 0) {
-        bridgeUpper += RESULT.LINE;
-        bridgeLower += RESULT.LINE;
-      }
-      if (log === MOVING.UP) {
-        bridgeLower += RESULT.SPACE;
-        if (bridgeGame.bridge[index] === log) {
-          bridgeUpper += RESULT.CORRECT;
-        } else {
-          bridgeUpper += RESULT.INCORRECT;
-        }
-      } else if (log === MOVING.DOWN) {
-        bridgeUpper += RESULT.SPACE;
-        if (bridgeGame.bridge[index] === log) {
-          bridgeLower += RESULT.CORRECT;
-        } else {
-          bridgeLower += RESULT.INCORRECT;
-        }
-      }
+      bridgeUpper += this.makeBridgeInner(index, bridgeGame, MOVING.UP);
+      bridgeLower += this.makeBridgeInner(index, bridgeGame, MOVING.DOWN);
     });
     bridgeUpper += RESULT.BRIDGE_END;
     bridgeLower += RESULT.BRIDGE_END;
-    Console.print(bridgeUpper);
-    Console.print(bridgeLower);
+    Console.print(`${bridgeUpper}\n${bridgeLower}`);
   },
 
-  makeBridge(log, index, bridgeGame) {
+  makeBridgeInner(index, bridgeGame, direction) {
     let temp = '';
-    if (index !== 0) {
-      temp += RESULT.LINE;
-    }
-    if (bridgeGame.bridge[index] === log) {
-      temp += RESULT.CORRECT;
-    } else {
-      temp += RESULT.INCORRECT;
-    }
+    const log = bridgeGame.movingLog[index];
+
+    if (index !== 0) temp += RESULT.LINE;
+
+    if (log === direction) temp += bridgeGame.bridge[index] === log ? RESULT.CORRECT : RESULT.INCORRECT;
+    else temp += RESULT.SPACE;
+
     return temp;
   },
 
