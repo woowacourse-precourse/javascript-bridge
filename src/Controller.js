@@ -60,13 +60,7 @@ class Controller {
   askReplay(){
     readGameCommand((retry) => {
       try{
-        const isRetry = this.#bridgeGame.retry(retry);
-        if(isRetry){
-          this.#tryingNum += 1;
-          this.play();
-          return;
-        }
-        this.end();
+        this.#bridgeGame.retry(retry)? this.replay() : this.end();
       }catch(error){
         printMessage(error.message);
         this.askReplay();
@@ -74,9 +68,16 @@ class Controller {
     });
   }
 
+  replay() {
+    this.#tryingNum += 1;
+    this.play();
+    return;
+  }
+
   end(isMatch){
     const map = this.#bridgeGame.result();
     printResult(isMatch, this.#tryingNum, () => printMap(map));
+    return;
   }
 }
 
