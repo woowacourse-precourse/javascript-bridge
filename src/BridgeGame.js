@@ -14,6 +14,8 @@ const { printMessage } = require("./OutputView");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
+  #bridgeSize;
+
   #userBridge = [];
 
   #computedBridge = [];
@@ -24,13 +26,14 @@ class BridgeGame {
   gameStart() {
     printMessage(INFO_MESSAGE.start);
     InputView.readBridgeSize(INPUT_MESSAGE.bridgeLength, (input) => {
+      this.#bridgeSize = input;
       this.getInput(input);
     });
   }
 
   getInput(input) {
     const bridge = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator);
-    this.#computedBridge = bridge;
+    this.#computedBridge = parseInt(bridge);
     this.userMoving();
   }
 
@@ -58,6 +61,9 @@ class BridgeGame {
 
   makeUserBridge(newState) {
     this.#userBridge.push(newState);
+    if (this.isCrossAllBridge()) {
+      return;
+    }
     let userCanGo = false;
     if (
       this.#userBridge[this.#userBridge.length - 1] ===
@@ -85,6 +91,11 @@ class BridgeGame {
 
   nextTurn(userCanGo) {
     userCanGo ? this.userMoving() : this.retryOrEnd();
+  }
+
+  isCrossAllBridge() {
+    console.log(this.#bridgeSize, this.#userBridge.length);
+    return this.#bridgeSize === this.#userBridge.length ? true : false;
   }
 
   retryOrEnd() {
