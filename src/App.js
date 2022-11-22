@@ -1,5 +1,6 @@
 const BridgeGame = require('./BridgeGame');
 const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
@@ -10,6 +11,7 @@ class App {
   }
 
   init() {
+    OutputView.printStart();
     InputView.readBridgeSize(this.#makeBridge.bind(this));
   }
 
