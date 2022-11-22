@@ -106,4 +106,12 @@ describe('다리 건너기 테스트', () => {
     expect(beforeBridge).toEqual(afterBridge);
     expect(beforeTryCount + 1).toEqual(afterTryCount);
   });
+
+  test('다리의 길이를 입력할 때 숫자가 아닌 값을 입력', () => {
+    runException(['string']);
+  });
+
+  test('다리의 길이를 입력할 때 3 ~ 20 범위를 벗어난 값을 입력', () => {
+    runException(['2']);
+  });
 });
