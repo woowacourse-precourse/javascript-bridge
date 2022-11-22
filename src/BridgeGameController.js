@@ -25,7 +25,7 @@ class BridgeGameController {
     InputView.readMoving((direction) => {
       try {
         InputValidator.checkMoving(direction);
-        this.checkAbleToMove(direction);
+        this.#BridgeGame.canMove(direction) ? this.moveNext(direction) : this.stopMove(direction);
       } catch (error) {
         Console.print(error.message);
         this.getMovingDirection();
@@ -37,7 +37,7 @@ class BridgeGameController {
     InputView.readGameCommand((command) => {
       try {
         InputValidator.checkGameCommand(command);
-        this.checkRestartOrQuit() ? this.restartGame() : this.quitGame();
+        this.isRestart(command) ? this.restartGame() : this.quitGame();
       } catch (error) {
         Console.print(error.message);
         this.getGameCommand();
@@ -54,33 +54,25 @@ class BridgeGameController {
   moveNext(direction) {
     this.#BridgeGame.move(direction);
     OutputView.printMap(this.#BridgeGame.getBridgeMap());
+    this.isGameCompleted() ? this.endGame() : this.getMovingDirection();
   }
 
-  checkGameCompleted() {
+  isGameCompleted() {
     return this.#BridgeGame.checkBridgeCrossed();
   }
 
   endGame() {
-    OutputView.printResult(isBridgeCrossed, this.#BridgeGame.getAttemptCount(), this.#BridgeGame.getBridgeMap());
+    OutputView.printResult(this.#BridgeGame.checkBridgeCrossed(), this.#BridgeGame.getAttemptCount(), this.#BridgeGame.getBridgeMap());
     Console.close();
   }
 
-  stopGame(direction) {
+  stopMove(direction) {
     this.#BridgeGame.stopMoving(direction);
     OutputView.printMap(this.#BridgeGame.getBridgeMap());
     this.getGameCommand();
   }
 
-  decideToMove(direction) {
-    if (this.#BridgeGame.canMove(direction)) {
-      this.moveNext(direction);
-      this.checkGameCompleted() ? this.endGame() : this.getMovingDirection();
-    } else {
-      this.stopGame(direction);
-    }
-  }
-
-  checkRestartOrQuit() {
+  isRestart(command) {
     return command === "R";
   }
 
