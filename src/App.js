@@ -21,15 +21,22 @@ class App {
 
   requestBridgeSize() {
     InputView.readBridgeSize((bridgeSize) => {
-      const errorMsg = this.validate.checkBridgeSize(bridgeSize);
-      if (errorMsg !== null) {
-        OutputView.printMsg(errorMsg);
+      if (!this.checkBridgeSize(bridgeSize)) return this.requestBridgeSize();
 
-        return this.requestBridgeSize();
-      }
       this.createBridgeGame(bridgeSize);
       this.requestMoving();
     });
+  }
+
+  checkBridgeSize(bridgeSize) {
+    const errorMsg = this.validate.checkBridgeSize(bridgeSize);
+
+    if (errorMsg !== null) {
+      OutputView.printMsg(errorMsg);
+
+      return false;
+    }
+    return true;
   }
 
   createBridgeGame(bridgeSize) {
@@ -39,15 +46,20 @@ class App {
 
   requestMoving() {
     InputView.readMoving((direction) => {
-      const errorMsg = this.validate.checkMovingDirection(direction);
-      if (errorMsg !== null) {
-        OutputView.printMsg(errorMsg);
-
-        return this.requestMoving();
-      }
+      if (!this.checkMovingDirection(direction)) return this.requestMoving();
 
       this.moving(direction);
     });
+  }
+
+  checkMovingDirection(direction) {
+    const errorMsg = this.validate.checkMovingDirection(direction);
+    if (errorMsg !== null) {
+      OutputView.printMsg(errorMsg);
+
+      return false;
+    }
+    return true;
   }
 
   moving(direction) {
@@ -72,13 +84,20 @@ class App {
 
   requestGameCommand() {
     InputView.readGameCommand((command) => {
-      const errorMsg = this.validate.checkGameCommand(command);
-      if (errorMsg !== null) {
-        OutputView.printMsg(errorMsg);
-        return this.requestGameCommand();
-      }
+      if (!this.checkGameCommand(command)) return this.requestGameCommand();
+
       command === GAME_OPTION.REPLAY ? this.retry() : this.quit();
     });
+  }
+
+  checkGameCommand(command) {
+    const errorMsg = this.validate.checkGameCommand(command);
+    if (errorMsg !== null) {
+      OutputView.printMsg(errorMsg);
+
+      return false;
+    }
+    return true;
   }
 
   retry() {
