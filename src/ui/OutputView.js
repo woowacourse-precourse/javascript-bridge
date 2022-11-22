@@ -1,7 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { MAKE_MAP, MOVE_VALID, RESULT_MESSAGES, SUCCESS } = require("../constants/constant");
 const { GameInfo } = require("../domain/GameInfo");
-const UseGameInfo = require("../domain/UseGameInfo");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -15,10 +14,37 @@ const OutputView = {
   printMap(nextMove) {
     const output = [];
     GameInfo.moving = nextMove;
-    output.push(UseGameInfo.makeOutput(0, nextMove));
-    output.push(UseGameInfo.makeOutput(1, nextMove));
+    output.push(this.makeOutput(0, nextMove));
+    output.push(this.makeOutput(1, nextMove));
     Console.print(output[0].join(''));
     Console.print(output[1].join(''));
+  },
+
+  makeOutput(upOrDown, nextMove) {
+    const output = [MAKE_MAP.open];
+    for (let i = 0; i < GameInfo.position; i++) {
+      output.push(this.alreadyPass(upOrDown, i));
+    };
+    output.push(this.makeNextMoveOutput(upOrDown, nextMove));
+    return output;
+  },
+
+  alreadyPass(upOrDown, i) {
+    if (GameInfo.bridge[i] === MOVE_VALID[upOrDown]) {
+      return MAKE_MAP.pass;
+    };
+    return MAKE_MAP.empty;
+  },
+
+  makeNextMoveOutput(upOrDown, nextMove) {
+    if (MOVE_VALID[upOrDown] !== nextMove) {
+      return MAKE_MAP.close;
+    }
+    if (GameInfo.bridge[GameInfo.position] !== nextMove) {
+      GameInfo.gameResult = false;
+      return MAKE_MAP.failure;
+    }
+    return MAKE_MAP.success;
   },
 
   /**
