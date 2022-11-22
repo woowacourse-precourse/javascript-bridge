@@ -1,6 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const { CONSOLE_MESSAGE } = require("./constants/Message");
+const OutputView = require("./OutputView");
 const Validator = require("./utils/Validation");
 
 const InputView = {
@@ -37,6 +38,8 @@ const InputView = {
     this.wrappingInput(CONSOLE_MESSAGE.INPUT_MOVE, (direction) => {
       Validator.validateMove(direction);
       bridgeGame.pushResult(direction);
+      OutputView.printMap(bridgeGame);
+      this.readMoving(bridgeGame);
     });
   },
 

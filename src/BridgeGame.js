@@ -22,7 +22,7 @@ class BridgeGame {
   }
 
   pushResult(direction) {
-    let result = { U: " ", D: " " };
+    let result = { U: "   ", D: "   " };
     this.#bridge[0] === direction
       ? (result[direction] = " O ")
       : (result[direction] = " X ");
@@ -30,6 +30,10 @@ class BridgeGame {
     this.#map.upStair.push(result.U);
     this.#map.downStair.push(result.D);
 
+    return this.#map;
+  }
+
+  getMap() {
     return this.#map;
   }
 
