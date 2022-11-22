@@ -8,6 +8,7 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
+
   readBridgeSize(callback) {
     Console.readLine(PHRASE.BRIDGE_LEN, (bridgeLength) => {
       try {
@@ -15,7 +16,7 @@ const InputView = {
         callback(bridgeLength);
       } catch (e) {
         Console.print(e.message);
-        InputView.readBridgeSize(callback);
+        this.readBridgeSize(callback);
       }
     });
   },
@@ -30,7 +31,7 @@ const InputView = {
         callback(move);
       } catch (e) {
         Console.print(e.message);
-        InputView.readMoving(callback);
+        this.readMoving(callback);
       }
     });
   },
@@ -45,7 +46,7 @@ const InputView = {
         callback(gameCommand === RETRY.YES);
       } catch (e) {
         Console.print(e.message);
-        InputView.readGameCommand(callback);
+        this.readGameCommand(callback);
       }
     });
   },
