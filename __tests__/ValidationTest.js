@@ -17,4 +17,12 @@ describe("ValidationTest", () => {
       }).toThrow("[ERROR]");
     }
   );
+  test.each([["r"], ["q"], ["1"]])(
+    "재시작/종료입력에 R또는 Q가 아닌 입력이 발생할 경우 예외처리",
+    (input) => {
+      expect((input) => {
+        Validator.validateRestartOrQuit(input);
+      }).toThrow("[ERROR]");
+    }
+  );
 });

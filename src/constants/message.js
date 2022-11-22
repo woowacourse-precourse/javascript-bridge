@@ -10,9 +10,11 @@ CONSOLE_MESSAGE = {
 NOT_RIGHT_BRIDGE_LENGTH =
   "[ERROR] 다리의 길이는 3부터 20까지 입력하실 수 있습니다.";
 NOT_RIGHT_MOVE = "[ERROR] U 또는 D를 입력해주세요";
+NOT_RIGHT_INPUT = "[ERROR] R또는 Q를 입력해 주세요.";
 ERROR_MESSAGE = {
   NOT_RIGHT_BRIDGE_LENGTH,
   NOT_RIGHT_MOVE,
+  NOT_RIGHT_INPUT,
 };
 
 module.exports = { CONSOLE_MESSAGE, ERROR_MESSAGE };
