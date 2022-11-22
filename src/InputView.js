@@ -1,21 +1,37 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { Console } = require("@woowacourse/mission-utils");
+const { INPUT_VIEW_CONSTANT } = require("../utils/constants");
+const { validateReadBridgeSize, validateReadMoving, validateReadGameCommand } = require("./Validator");
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  readBridgeSize(callback) {
+    Console.readLine(INPUT_VIEW_CONSTANT.BRIDGE_SIZE_MENT, (bridgeSize) => {
+      if (!validateReadBridgeSize(bridgeSize)) {
+        this.readBridgeSize(callback);
+        return;
+      }
+      callback(bridgeSize);
+    });
+  },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+  readMoving(callback) {
+    Console.readLine(INPUT_VIEW_CONSTANT.MOVING_MENT, (moveKey) => {
+      if (!validateReadMoving(moveKey)) {
+        this.readMoving(callback);
+        return;
+      }
+      callback(moveKey);
+    });
+  },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    Console.readLine(INPUT_VIEW_CONSTANT.RETRY_MENT, (retryKey) => {
+      if (!validateReadGameCommand(retryKey)) {
+        this.readGameCommand(callback);
+        return;
+      }
+      callback(retryKey);
+    });
+  },
 };
 
 module.exports = InputView;
