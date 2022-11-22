@@ -1,8 +1,8 @@
-const Gameflow = require('./Controller/Gameflow');
+const GameFlow = require('./Controller/GameFlow');
 
 class App {
   constructor() {
-    this.Gameflow = new Gameflow();
+    this.Gameflow = new GameFlow();
   }
 
   play() {

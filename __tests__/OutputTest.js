@@ -34,8 +34,8 @@ const expectBridgeOrder = (received, upside, downside) => {
   expect(upsideIndex).toBeLessThan(downsideIndex);
 };
 
-describe('다리 건너기 출력 테스트', () => {
-  test('다리 이동 결과 출력 테스트', () => {
+describe('[OUTPUT TEST] 다리 건너기 출력 테스트', () => {
+  test('[CASE1] 다리 이동 결과 출력 테스트', () => {
     const logSpy = getLogSpy();
     mockRandoms([1, 0, 0, 0]);
     mockQuestions(['4', 'U', 'D', 'D', 'D']);

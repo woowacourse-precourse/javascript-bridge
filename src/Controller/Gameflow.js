@@ -8,7 +8,7 @@ const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const BridgeGame = require('../Model/BridgeGame');
 const { RESULT, OX } = require('../util/Constant');
 
-class Gameflow {
+class GameFlow {
   size;
   userUpDown = [];
   count = 1;
@@ -111,4 +111,4 @@ class Gameflow {
   }
 }
 
-module.exports = Gameflow;
+module.exports = GameFlow;
