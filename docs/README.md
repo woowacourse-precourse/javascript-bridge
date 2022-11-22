@@ -25,14 +25,6 @@ MVC 패턴으로 구현한다.
   - `retry` : 사용자가 게임을 다시 시도할 때 사용하는 메서드
   - `exit` : 게임을 종료하기 위한 메서드
  
-### Bridge
-- 속성
-  - `#bridge` : 입력값에 따라 생성된 다리
-- 메서드
-  - `constructor`
-  - `getter/setter`
-  - `vaildateBridgeSize` : 다리 길이가 유효 값인지 확인하는 메서드
-
 ---
 ## View
 ### InputView
