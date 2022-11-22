@@ -11,7 +11,3 @@ class App {
 }
 
 module.exports = App;
-
-//TODO: 구현 후 삭제
-const app = new App();
-app.play();

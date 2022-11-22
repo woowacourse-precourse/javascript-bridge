@@ -50,9 +50,7 @@ class GameController {
       }
 
       this.model.move(step);
-
       const { isAlive, currentIndex, bridge, currentMap } = this.model.state;
-
       const isEnd = currentIndex === bridge.length;
 
       this.view.output.printMap(currentMap);
