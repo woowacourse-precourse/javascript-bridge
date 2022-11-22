@@ -12,7 +12,6 @@ class BridgeGame {
   #attemptNumber
 
   constructor(size){
-    this.bridgeSizeValidate(size);
     this.#bridgeShape = makeBridge(size, generate);
     this.#playerMovingRecord = "";
     this.#attemptNumber = 1;
@@ -23,8 +22,6 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(playerMoving) {
-    this.movingValidate(playerMoving);
-
     if(this.#bridgeShape.length > this.playerLoction()){
       this.#playerMovingRecord = this.#playerMovingRecord + playerMoving;
     }
@@ -68,26 +65,6 @@ class BridgeGame {
 
   getBridgeShape(){
     return this.#bridgeShape;
-  }
-
-  
-  bridgeSizeValidate(size){
-    if(isNaN(size))
-      throw new Error(`[ERROR] 숫자를 입력해주세요.`);
-    if(!(size % 1 === 0))
-      throw new Error(`[ERROR] 정수를 입력해주세요.`);    
-    if(size < 3 || size > 20)
-      throw new Error(`[ERROR] 3~20범위 숫자를 입력해주세요.`);   
-  }
-
-  movingValidate(move){
-    if(move !== `U` && move !== `D`)
-      throw new Error(`[ERROR] U또는 D값을 입력해주세요.`); 
-  }
-  
-  commandValidate(command){
-    if(command !== `R` && command !== `Q`)
-      throw new Error(`[ERROR] R또는 Q값을 입력해주세요.`); 
   }
 }
 
