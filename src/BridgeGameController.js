@@ -49,6 +49,24 @@ class BridgeGameController {
       }
     });
   }
+
+  getCommand() {
+    InputView.readGameCommand((command) => {
+      try {
+        InputValidator.checkGameCommand(command);
+        if (command === "R") {
+          this.#BridgeGame.retry();
+          this.getMovingDirection();
+        } else {
+          OutputView.printResult(this.#BridgeGame.checkBridgeCrossed(), this.#BridgeGame.getAttemptCount(), this.#BridgeGame.getBridgeMap());
+          Console.close();
+        }
+      } catch (error) {
+        Console.print(error.message);
+        this.getCommand();
+      }
+    });
+  }
 }
 
 module.exports = BridgeGameController;
