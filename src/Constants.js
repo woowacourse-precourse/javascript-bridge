@@ -16,14 +16,13 @@ const GAME_OUTCOME = {
   FINAL_SUCCESS: '최종 성공',
   SUCCESS: '성공',
   FAIL: '실패',
-  RESTART: '재시작',
-  QUIT: '종료',
 };
 
 const LETTER_SIGN = {
   RIGHT: 'O',
   WRONG: 'X',
-  BLANK: ' '
+  BLANK: ' ',
+  CONNECTING_LETTER: ' | ',
 };
 
 const DIRECTION = {

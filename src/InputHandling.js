@@ -51,8 +51,8 @@ class InputHandling {
     try {
       checkRestartOrDone(command);
       this.decideRetryOrDone(command);
-    } catch (err) {
-      Console.print(err);
+    } catch (error) {
+      Console.print(error);
       readGameCommand(this.handleGameCommand.bind(this));
     }
   }
