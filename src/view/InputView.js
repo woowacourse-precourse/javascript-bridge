@@ -1,9 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
+const BridgeGame = require("../BridgeGame");
+const ExceptionCheck = require("../ExceptionCheck");
 const OutputView = require("./OutputView");
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
-const ExceptionCheck = require("./ExceptionCheck");
+const BridgeMaker = require("../BridgeMaker");
+const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
+const ggg = require("../ggg");
+
 const InputView = {
   BRIDGE_GAME: new BridgeGame(),
   IDX: 0,
@@ -13,21 +15,23 @@ const InputView = {
     MissionUtils.Console.readLine(
       "다리의 길이를 입력해주세요.",
       (bridgeSize) => {
-        try {
-          ExceptionCheck.checkBridgeSize(Number(bridgeSize));
-          OutputView.printBridgeSize(bridgeSize);
-          const bridge = BridgeMaker.makeBridge(
-            Number(bridgeSize),
-            BridgeRandomNumberGenerator.generate
-          );
-          this.readMoving(bridge);
-        } catch (err) {
-          MissionUtils.Console.print(err);
-          this.readBridgeSize();
-        }
+        // ggg.ff(bridgeSize, this.readBridgeSize, this.readMoving);
+        // try {
+        //   ExceptionCheck.checkBridgeSize(Number(bridgeSize));
+        //   OutputView.printBridgeSize(bridgeSize);
+        //   const bridge = BridgeMaker.makeBridge(
+        //     Number(bridgeSize),
+        //     BridgeRandomNumberGenerator.generate
+        //   );
+        //   this.readMoving(bridge);
+        // } catch (err) {
+        //   MissionUtils.Console.print(err);
+        //   this.readBridgeSize();
+        // }
       }
     );
   },
+
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
@@ -39,19 +43,19 @@ const InputView = {
         try {
           ExceptionCheck.checkMove(moveSpace);
           OutputView.printSpace(moveSpace);
+
           const { up, down, compareResult, idx } = this.BRIDGE_GAME.move(
             bridge,
             moveSpace
           );
           this.IDX = idx;
           OutputView.printMap(up, down);
-          this.compareResult = compareResult;
           if (compareResult === "O") {
             this.readMoving(bridge);
             if (idx === bridge.length)
               OutputView.printResult({ up, down }, this.TRY, compareResult);
           } else {
-            this.readGameCommand(bridge, up, down);
+            this.readGameCommand(bridge, [up], [down]);
           }
         } catch (err) {
           console.log(err);
@@ -70,10 +74,9 @@ const InputView = {
       (string) => {
         if (string === "R") {
           this.TRY = this.TRY + 1;
-
-          this.readMoving(bridge);
+          this.BRIDGE_GAME.retry(bridge);
         } else {
-          OutputView.printResult({ up, down }, this.TRY, this.compareResult);
+          printResult({ up, down }, this.TRY, compareResult);
         }
       }
     );
