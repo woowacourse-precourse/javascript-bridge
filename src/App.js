@@ -73,6 +73,15 @@ class App {
     return await this.handleMovement();
   };
 
+  handleCommand = async () => {
+    return await this.game.command(this.handleRetry, await this.isRetryCommand(), this.handleFailedFinish);
+  };
+
+  handleRetry = async (cb) => {
+    cb();
+    return await this.handleMovement();
+  };
+
   isRetryCommand = async () => {
     const command = await this.getGameCommand();
     return command === INPUT_FORMAT.RETRY;

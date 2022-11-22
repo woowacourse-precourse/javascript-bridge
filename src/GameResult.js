@@ -30,7 +30,7 @@ class GameResult {
   }
 
   getCurrentPosition() {
-    return this.getResultAsArray().findIndex(([, value]) => !value.player);
+    return this.getAsArray().findIndex(([, value]) => !value.player);
   }
 }
 
