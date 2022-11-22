@@ -17,7 +17,13 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (answer) => {
+      MissionUtils.Console.print(`${answer}`);
+      if(answer === "U" || answer === "D") return answer;
+      throw('[ERROR]', '올바른 방향을 입력해 주세요.')
+    });
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
