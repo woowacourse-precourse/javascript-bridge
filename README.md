@@ -310,3 +310,34 @@ const number = generateRandomNumber();
 - **Git의 커밋 단위는 앞 단계에서 `docs/README.md`에 정리한 기능 목록 단위**로 추가한다.
   - [커밋 메시지 컨벤션](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 가이드를 참고해 커밋 메시지를 작성한다.
 - 과제 진행 및 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서를 참고한다.
+
+## 구현 기능 목록 (Function Requirements)
+
+### App.js
+
+- 게임을 실행하는 기능
+
+### BridgeGame.js
+
+- 사용자의 현재 다리 칸 위치를 이동하는 기능
+- 게임을 재시작하는 기능
+
+### BridgeMaker.js
+
+- 다리의 길이를 예외처리하는 기능
+- 다리를 생성하는 기능
+
+### BridgeRandomNumberGenerator.js
+
+- 다리의 칸을 랜덤으로 생성하는 기능
+
+### InputView.js
+
+- 다리의 길이를 입력받는 기능
+- 사용자의 칸 선택을 입력받는 기능
+- 사용자의 재시작 여부를 입력받는 기능
+
+### OutputView.js
+
+- 다리를 출력하는 기능
+- 게임 결과를 출력하는 기능
