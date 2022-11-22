@@ -3,6 +3,7 @@ const { Console, Random } = MissionUtils;
 
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
+const Validation = require("./Validation");
 
 class App {
   constructor() {
@@ -15,7 +16,9 @@ class App {
   }
 
   createBridge() {
-    InputView.readBridgeSize();
+    InputView.readBridgeSize((input) => {
+      Validation.bridgeInput(input);
+    });
   }
 }
 const app = new App();
