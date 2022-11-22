@@ -1,5 +1,3 @@
-const OutputView = require("./OutputView");
-
 class BridgeGame {
   move(inputBridgeChoice, bridge, bridgeList) {
     const index = bridgeList[0].length;
@@ -20,7 +18,6 @@ class BridgeGame {
         bridgeList[0].push(" ");
       }
     }
-    OutputView.printMap(bridgeList);
     return bridgeList;
   }
 

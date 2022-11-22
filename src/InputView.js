@@ -30,6 +30,7 @@ const InputView = {
           bridge,
           bridgeList
         );
+        OutputView.printMap(movingResult);
         if (movingResult[0].includes("X") || movingResult[1].includes("X")) {
           return this.readGameCommand(bridgeList, bridge, attempts);
         }
