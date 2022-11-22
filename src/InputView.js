@@ -33,59 +33,52 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
   */
+  readBridgeSize(callback) {
+    MissionUtils.Console.readLine('다리의 길이를 입력해주세요. : ',
+      input => {
+        const numberInput = Number(input)
+        console.log(input);
+        if (isNaN(numberInput)) {
+          callback("[ERROR] 숫자만 입력해주세요");
+          return;
+        }
 
-  readBridgeSize() {
-    return new Promise((res,rej) => {
-      MissionUtils.Console.readLine('다리의 길이를 입력해주세요. : ',
-        input => {
-          const numberInput = Number(input)
-          console.log(input);
-          if (isNaN(numberInput)) {
-            rej("[ERROR] 숫자만 입력해주세요");
-            return
-          }
-
-          if (numberInput < 1 || numberInput > 20) {
-            rej("[ERROR] 한정된 숫자를 넣어주세요");
-            return
-          }
-          res(numberInput);
-        })
-    });
+        if (numberInput < 1 || numberInput > 20) {
+          callback( "[ERROR] 한정된 숫자를 넣어주세요");
+          return;
+        }
+        callback(null, numberInput);
+      })
   },
   // 임시로 난수를 생성하여 0, 1를 받는다.
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    return new Promise((res, rej) => {
+  readMoving(callback) {
       MissionUtils.Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)',
         input => {
-         // console.log("input is : ", input);
+          // 여기에서 err 가 아니라는 건데 넣어 준거 아님?
           if (input != 'U' && input != 'D') {
-            rej("[ERROR] 정확한 오더를 내려주세요");
+            callback("[ERROR] 정확한 오더를 내려주세요");
             return
           }
-          res(input);
+          callback(null,input);
         })
-    });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() { 
-    return new Promise((res, rej) => {
+  readGameCommand(callback) { 
       MissionUtils.Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)',
         input => {
           if (input != 'R' && input != 'Q') {
-            rej("[ERROR] 정확한 오더를 내려주세요 제발");
+            callback("[ERROR] 정확한 오더를 내려주세요 제발");
             return
           }
           /* retry : R , finish : Q */
-          res(input)
+          callback(null,input)
         })
-    });
   },
 };
 
