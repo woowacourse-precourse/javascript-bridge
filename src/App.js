@@ -8,5 +8,6 @@ class App {
     this.#controller.goTo(PHASE.START);
   }
 }
+new App().play();
 
 module.exports = App;

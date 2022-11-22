@@ -39,6 +39,7 @@ const OutputView = {
     OutputView.printMap(bridgeGame.moveMap);
     Console.print(`${MESSAGE.PREFIX_SUCCESS}${bridgeGame.result}`);
     Console.print(`${MESSAGE.PREFIX_TRY}${bridgeGame.try}`);
+    Console.close();
   },
 };
 
