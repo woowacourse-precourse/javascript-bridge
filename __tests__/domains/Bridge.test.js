@@ -1,5 +1,6 @@
 const { Tile } = require('../../src/constants');
 const Bridge = require('../../src/domains/Bridge');
+const ValidationError = require('../../src/errors/ValidationError');
 
 describe('Bridge 클래스 테스트', () => {
   test('다리의 길이를 잘 반환하는지', () => {
@@ -21,5 +22,13 @@ describe('Bridge 클래스 테스트', () => {
     const bridge = new Bridge(tiles);
 
     expect(bridge.getTiles()).toEqual(tiles);
+  });
+
+  test('지정된 타일 이외에 잘못된 값을 넣었을 때 예외가 잘 발생하는지', () => {
+    const tiles = [Tile.UP, Tile.UP, Tile.DOWN, '#', Tile.UP];
+
+    expect(() => {
+      new Bridge(tiles);
+    }).toThrow(ValidationError);
   });
 });
