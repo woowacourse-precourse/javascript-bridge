@@ -1,7 +1,7 @@
 const { MissionUtils } = require('@woowacourse/mission-utils');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const ValidateCheck = require('./utils/ValidatateCheck');
+const Validation = require('./utils/Validatation');
 const InputView = require('./Views/InputView');
 const OutputView = require('./Views/OutputView');
 
@@ -26,8 +26,16 @@ class BridgeGame {
   start() {
     this.#totalNumber += 1;
     OutputView.printStartMessage();
+    this.bridgeMake();
+  }
+
+  bridgeMake() {
     InputView.readBridgeSize(input => {
-      ValidateCheck.lengthCheck(input);
+      this.validateCheck(
+        () => Validation.lengthCheck(input),
+        () => this.bridgeMake(),
+      );
+
       this.#length = input;
       this.#bridge = BridgeMaker.makeBridge(
         this.#length,
@@ -35,10 +43,19 @@ class BridgeGame {
       );
 
       InputView.readMoving(input => {
-        ValidateCheck.moveMessageCheck(input);
+        Validation.moveMessageCheck(input);
         this.move(input);
       });
     });
+  }
+
+  validateCheck(validation, prev) {
+    try {
+      validation();
+    } catch (e) {
+      OutputView.printError(e);
+      prev();
+    }
   }
 
   /**
@@ -54,7 +71,7 @@ class BridgeGame {
         OutputView.printResult(this.#bridge, this.#moveList, this.#totalNumber);
       } else {
         InputView.readMoving(input => {
-          ValidateCheck.moveMessageCheck(input);
+          Validation.moveMessageCheck(input);
           this.move(input);
         });
       }
@@ -63,7 +80,7 @@ class BridgeGame {
     if (message !== this.#bridge[this.#moveList.length - 1]) {
       OutputView.printMap(this.#bridge, this.#moveList);
       InputView.readGameCommand(input => {
-        ValidateCheck.restartMessageCheck(input);
+        Validation.restartMessageCheck(input);
         if (input === 'R') {
           this.retry();
         }
@@ -87,7 +104,7 @@ class BridgeGame {
     this.#moveList = [];
     this.#totalNumber += 1;
     InputView.readMoving(input => {
-      ValidateCheck.moveMessageCheck(input);
+      Validation.moveMessageCheck(input);
       this.move(input);
     });
   }

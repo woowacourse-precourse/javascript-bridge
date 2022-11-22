@@ -14,7 +14,6 @@ const BridgeMaker = {
       const number = generateRandomNumber();
       bridge.push(number ? 'U' : 'D');
     }
-
     return bridge;
   },
 };

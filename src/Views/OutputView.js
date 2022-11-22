@@ -5,7 +5,7 @@ const MESSAGE = require('../utils/Message');
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
-  printTest(msg) {
+  printError(msg) {
     MissionUtils.Console.print(msg);
   },
 
@@ -18,29 +18,14 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridge, moveList) {
-    const topLine = [];
-    const bottomLine = [];
+    let map = [[], []];
 
-    for (let i = 0; i < moveList.length; i++) {
-      if (moveList[i] === 'U' && moveList[i] === bridge[i]) {
-        topLine.push('O');
-        bottomLine.push(' ');
-      }
-      if (moveList[i] === 'D' && moveList[i] === bridge[i]) {
-        topLine.push(' ');
-        bottomLine.push('O');
-      }
-      if (moveList[i] === 'U' && moveList[i] !== bridge[i]) {
-        topLine.push('X');
-        bottomLine.push(' ');
-      }
-      if (moveList[i] === 'D' && moveList[i] !== bridge[i]) {
-        topLine.push(' ');
-        bottomLine.push('X');
-      }
-    }
-    MissionUtils.Console.print(`[ ${topLine.join(' | ')} ]`);
-    MissionUtils.Console.print(`[ ${bottomLine.join(' | ')} ]`);
+    moveList.forEach((element, idx) => {
+      map = this.pushLine(element, bridge[idx], map);
+    });
+
+    MissionUtils.Console.print(`[ ${map[0].join(' | ')} ]`);
+    MissionUtils.Console.print(`[ ${map[1].join(' | ')} ]`);
   },
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
@@ -55,6 +40,26 @@ const OutputView = {
     this.printMap(bridge, moveList);
     MissionUtils.Console.print(`${MESSAGE.io.result} ${resultMessage}`);
     MissionUtils.Console.print(`${MESSAGE.io.totalNumber} ${totalNumber}`);
+  },
+
+  pushLine(move, bridge, map) {
+    if (move === 'U' && move === bridge) {
+      map[0].push('O');
+      map[1].push(' ');
+    }
+    if (move === 'D' && move === bridge) {
+      map[0].push(' ');
+      map[1].push('O');
+    }
+    if (move === 'U' && move !== bridge) {
+      map[0].push('X');
+      map[1].push(' ');
+    }
+    if (move === 'D' && move !== bridge) {
+      map[0].push(' ');
+      map[1].push('X');
+    }
+    return map;
   },
 };
 
