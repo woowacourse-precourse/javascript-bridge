@@ -7,12 +7,12 @@ class BridgeSize {
   #input;
 
   constructor(input) {
-    this.#input = +input;
+    this.#input = input;
   }
 
   checkInput() {
     try {
-      if (this.isAllowNumber() || this.isAllowRange())
+      if (!this.isAllowNumber() || this.isAllowRange())
         throw new Error(OutputView.printErrorMessage(ERROR.BRIDGE_SIZE));
       return ISALLOW.TRUE;
     } catch {
@@ -21,7 +21,7 @@ class BridgeSize {
   }
 
   isAllowNumber() {
-    return isNaN(this.#input);
+    return /^[0-9]*$/g.test(this.#input);
   }
 
   isAllowRange() {

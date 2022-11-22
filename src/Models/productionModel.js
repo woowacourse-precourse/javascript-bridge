@@ -4,11 +4,11 @@ const BridgeRandomNumberGenerator = require("../BridgeRandomNumberGenerator");
 const { SPACE, PASS } = require("../utils/constants");
 
 class ProductionModel {
-  makeBridge(size) {
+  static makeBridge(size) {
     return BridgeMaker.makeBridge(+size, BridgeRandomNumberGenerator.generate);
   }
 
-  makeMap(nowMap, movingProcess) {
+  static makeMap(nowMap, movingProcess) {
     const direction = Object.keys(SPACE);
     movingProcess.forEach((moving) => {
       const trapZone = direction.filter((space) => space !== moving)[0];
