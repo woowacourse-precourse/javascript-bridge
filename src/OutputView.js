@@ -22,6 +22,10 @@ const OutputView = {
     const [isSuccess, trial] = game.result();
     Console.print(`${QUERY.RESULT}: ${isSuccess}`);
     Console.print(`${QUERY.TRIAL}: ${trial}`);
+    this.quit();
+  },
+  quit() {
+    Console.close();
   },
 };
 
