@@ -13,12 +13,16 @@ const InputView = {
     Console.readLine(MESSAGE.ANNOUNCE.INPUT_SIZE, (answer) => {
       try {
         Validate.validateBridgeSize(answer);
-        bridgegame.setBridge(Number(answer));
-        return this.readMoving(bridgegame);
+        this.readBridgeSizeCallback(answer, bridgegame);
       } catch (error) {
         OutputView.printError(error, this.readBridgeSize.bind(InputView), bridgegame);
       }
     });
+  },
+
+  readBridgeSizeCallback(answer, bridgegame) {
+    bridgegame.setBridge(Number(answer));
+    return this.readMoving(bridgegame);
   },
 
   /**
@@ -28,15 +32,18 @@ const InputView = {
     Console.readLine(MESSAGE.ANNOUNCE.INPUT_MOVE, (answer) => {
       try {
         Validate.validateReadMoving(answer);
-        const moveresult = bridgegame.move(answer);
-        OutputView.printMap(bridgegame);
-        if (!moveresult) return this.readGameCommand(bridgegame);
-        if (moveresult == 'END') return OutputView.printResult(bridgegame);
-        return this.readMoving(bridgegame);
+        this.readMovingCallback(answer, bridgegame);
       } catch (error) {
         OutputView.printError(error, this.readMoving.bind(InputView), bridgegame);
       }
     });
+  },
+
+  readMovingCallback(answer, bridgegame) {
+    const moveresult = bridgegame.move(answer);
+    OutputView.printMap(bridgegame);
+    if (moveresult == 'END') return OutputView.printResult(bridgegame);
+    return moveresult ? this.readMoving(bridgegame) : this.readGameCommand(bridgegame);
   },
 
   /**
@@ -46,13 +53,17 @@ const InputView = {
     Console.readLine(MESSAGE.ANNOUNCE.INPUT_RETRY, (answer) => {
       try {
         Validate.validateReadGameCommand(answer);
-        if (answer == 'Q') return OutputView.printResult(bridgegame);
-        bridgegame.retry();
-        return this.readMoving(bridgegame);
+        this.readGameCommandCallback(answer, bridgegame);
       } catch (error) {
         OutputView.printError(error, this.readGameCommand.bind(InputView), bridgegame);
       }
     });
+  },
+
+  readGameCommandCallback(answer, bridgegame) {
+    if (answer == 'Q') return OutputView.printResult(bridgegame);
+    bridgegame.retry();
+    return this.readMoving(bridgegame);
   },
 };
 
