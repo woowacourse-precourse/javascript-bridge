@@ -1,13 +1,15 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { command } = require('./utils/message');
+const { init } = require('./utils/constant');
+const { UP, DOWN } = init;
 
 const OutputView = {
   /**
    * @param {string[]} curBridge 현재까지 건넌 다리 배열
    */
   printMap(curBridge) {
-    Console.print(`[ ${curBridge[0].join(' | ')} ]`);
-    Console.print(`[ ${curBridge[1].join(' | ')} ]`);
+    Console.print(`[ ${curBridge[UP].join(' | ')} ]`);
+    Console.print(`[ ${curBridge[DOWN].join(' | ')} ]`);
   },
 
   printResult(successMessage, curBridge, tryNum) {

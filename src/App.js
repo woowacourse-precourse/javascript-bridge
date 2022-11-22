@@ -6,6 +6,7 @@ const BridgeGame = require('./BridgeGame');
 const Validate = require('./utils/Validate');
 
 const { Console } = require('@woowacourse/mission-utils');
+const { init, retry, result } = require('./utils/constant');
 
 class App {
   #bridgeGame;
@@ -16,8 +17,8 @@ class App {
   #bridgeIndex;
 
   constructor() {
-    this.#tryNum = 1;
-    this.#bridgeIndex = 0;
+    this.#tryNum = init.TRY;
+    this.#bridgeIndex = init.INDEX;
   }
 
   play() {
@@ -51,7 +52,7 @@ class App {
     OutputView.printMap(this.#curBridge);
     this.isAbleToMove(moveInput);
     this.isEndOfBridge();
-    OutputView.printResult('성공', this.#curBridge, this.#tryNum);
+    OutputView.printResult(result.SUCCESS, this.#curBridge, this.#tryNum);
     this.end();
   }
 
@@ -62,8 +63,8 @@ class App {
   }
 
   isEndOfBridge() {
-    if (this.#bridgeIndex !== this.#bridgeSize - 1) {
-      this.#bridgeIndex += 1;
+    if (this.#bridgeIndex !== init.END_OF_INDEX(this.#bridgeSize)) {
+      this.#bridgeIndex += init.INCREASE;
       return this.getMove();
     }
   }
@@ -78,14 +79,14 @@ class App {
   }
 
   judgeRetryResponse(retryInput) {
-    if (retryInput === 'R') {
-      this.#bridgeIndex = 0;
-      this.#tryNum += 1;
+    if (retryInput === retry.RETRY) {
+      this.#bridgeIndex = init.INDEX;
+      this.#tryNum += init.TRY;
       this.#bridgeGame.retry();
       this.getMove();
     }
-    if (retryInput === 'Q') {
-      OutputView.printResult('실패', this.#curBridge, this.#tryNum);
+    if (retryInput === retry.QUIT) {
+      OutputView.printResult(result.FAIL, this.#curBridge, this.#tryNum);
       this.end();
     }
   }

@@ -1,24 +1,28 @@
+const { init, game } = require('./utils/constant');
+const { UP, DOWN } = init;
+const { UP_CHAR, CANMOVE, CANNOTMOVE, EMPTY } = game;
+
 class BridgeGame {
   #bridge;
   #curBridge;
 
   constructor(bridge) {
     this.#bridge = bridge;
-    this.#curBridge = Array.from({ length: 2 }, () => []);
+    this.#curBridge = Array.from({ length: init.CURBRIDGE_LENGTH }, () => []);
   }
 
   move(moveInput, brigeIndex) {
     if (this.canMove(moveInput, brigeIndex)) {
-      moveInput === 'U' ? this.moveUpSuccess() : this.moveDownSuccess();
+      moveInput === UP_CHAR ? this.moveUpSuccess() : this.moveDownSuccess();
       return this.#curBridge;
     }
-    moveInput === 'U' ? this.moveUpFail() : this.moveDownFail();
+    moveInput === UP_CHAR ? this.moveUpFail() : this.moveDownFail();
     return this.#curBridge;
   }
 
   retry() {
-    this.#curBridge[0] = [];
-    this.#curBridge[1] = [];
+    this.#curBridge[UP] = [];
+    this.#curBridge[DOWN] = [];
     return this.#curBridge;
   }
 
@@ -27,23 +31,23 @@ class BridgeGame {
   }
 
   moveUpSuccess() {
-    this.#curBridge[0].push('O');
-    this.#curBridge[1].push(' ');
+    this.#curBridge[UP].push(CANMOVE);
+    this.#curBridge[DOWN].push(EMPTY);
   }
 
   moveDownSuccess() {
-    this.#curBridge[0].push(' ');
-    this.#curBridge[1].push('O');
+    this.#curBridge[UP].push(EMPTY);
+    this.#curBridge[DOWN].push(CANMOVE);
   }
 
   moveUpFail() {
-    this.#curBridge[0].push('X');
-    this.#curBridge[1].push(' ');
+    this.#curBridge[UP].push(CANNOTMOVE);
+    this.#curBridge[DOWN].push(EMPTY);
   }
 
   moveDownFail() {
-    this.#curBridge[0].push(' ');
-    this.#curBridge[1].push('X');
+    this.#curBridge[UP].push(EMPTY);
+    this.#curBridge[DOWN].push(CANNOTMOVE);
   }
 }
 

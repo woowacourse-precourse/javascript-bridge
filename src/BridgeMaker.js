@@ -1,3 +1,5 @@
+const { game } = require('./utils/constant');
+
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -6,7 +8,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = Array.from({ length: size }).map(() =>
-      generateRandomNumber() === 0 ? 'D' : 'U'
+      generateRandomNumber() === 0 ? game.DOWN_CHAR : game.UP_CHAR
     );
     return bridge;
   },

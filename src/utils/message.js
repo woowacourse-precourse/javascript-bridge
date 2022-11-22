@@ -6,6 +6,9 @@ const command = Object.freeze({
   RESULT: '\n최종 게임 결과',
   IS_SUCCESS: (success) => `\n게임 성공 여부: ${success}`,
   TRY_NUM: (tryNum) => `총 시도한 횟수: ${tryNum}`,
+
+  SUCCESS: '성공',
+  FAIL: '실패',
 });
 
 const error = Object.freeze({
