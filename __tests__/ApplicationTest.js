@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
+const InputView = require("../src/InputView");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -60,6 +61,93 @@ describe("다리 건너기 테스트", () => {
 
     const bridge = BridgeMaker.makeBridge(3, mockGenerator);
     expect(bridge).toEqual(["U", "D", "D"]);
+  });
+
+  ['-10', '2', '21', '100'].map((testSize) => {
+    test("다리 길이 예외 테스트", () => {
+      mockQuestions([testSize]);
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow("[ERROR]");
+    });
+  })
+
+  test("사용자 입력 테스트", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "0"]);
+    mockQuestions(["3", "U", "U"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ O ]",
+      "[   ]",
+      "[ O | X ]",
+      "[   |   ]",
+    ]);
+  });
+
+  [["5", "S", "T", "1"], ["3", "0", "1"], ["10", "dfa"]].map((testList) => {
+    test("사용자 입력 예외 테스트", () => {
+      mockQuestions(testList);
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow("[ERROR]");
+    });
+  })
+
+  test("게임 재시작", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "0"]);
+    mockQuestions(["3", "U", "U", "R", "U", "D", "D"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ O ]",
+      "[   ]",
+      "[ O | X ]",
+      "[   |   ]",
+      "[ O ]",
+      "[   ]",
+      "[ O |   ]",
+      "[   | O ]",
+      "[ O |   |   ]",
+      "[   | O | O ]",
+      "최종 게임 결과",
+      "[ O |   |   ]",
+      "[   | O | O ]",
+      "게임 성공 여부: 성공",
+      "총 시도한 횟수: 2",
+    ]);
+  });
+
+  test("게임 종료", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "0"]);
+    mockQuestions(["3", "U", "U", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ O ]",
+      "[   ]",
+      "[ O | X ]",
+      "[   |   ]",
+      "최종 게임 결과",
+      "[ O | X ]",
+      "[   |   ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
   });
 
   test("기능 테스트", () => {

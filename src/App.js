@@ -1,5 +1,12 @@
+const InputView = require('./InputView');
+const OutputView = require('./OutputView');
+
 class App {
-  play() {}
+  play() {
+    OutputView.startGame();
+    InputView.readBridgeSize();
+    InputView.readMoving();
+  }
 }
 
 module.exports = App;
