@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { printMap, printResult } = require("../src/OutputView");
-const BridgeMaker = require("../src/BridgeMaker");
+const { canMakeBridge } = require("../src/BridgeMaker");
 const BridgeGame = require("../src/BridgeGame");
 
 /**
@@ -12,11 +12,24 @@ const InputView = {
    */
   Game: undefined,
 
+  executeError(error) {
+    Console.print(error.message);
+    const name = {
+      "3-20": () => InputView.readBridgeSize(),
+      "U/D": () => InputView.readMoving(),
+      "R/Q": () => InputView.readGameCommand(),
+    };
+    name[error.name]() || "";
+  },
+
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요.\n", (input) => {
-      const bridge = BridgeMaker.canMakeBridge(Number(input));
-      this.Game = new BridgeGame(bridge);
-      this.readMoving();
+      try {
+        this.Game = new BridgeGame(canMakeBridge(Number(input)));
+        this.readMoving();
+      } catch (error) {
+        InputView.executeError(error);
+      }
     });
   },
 
@@ -27,9 +40,13 @@ const InputView = {
     Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
       (input) => {
-        this.Game.fillMap(input);
-        printMap(this.Game);
-        return this.nextRound(this.Game.move(input));
+        try {
+          this.Game.fillMap(input);
+          printMap(this.Game);
+          return this.nextRound(this.Game.move(input));
+        } catch (error) {
+          InputView.executeError(error);
+        }
       }
     );
   },
@@ -52,8 +69,13 @@ const InputView = {
     Console.readLine(
       "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
       (input) => {
-        if (this.Game.isRetry(input)) return this.readMoving();
-        return printResult(this.Game, "실패");
+        try {
+          if (this.Game.isRetry(input)) return InputView.readMoving();
+          printResult(this.Game, "실패");
+          return InputView.gameOver();
+        } catch (error) {
+          InputView.executeError(error);
+        }
       }
     );
   },
