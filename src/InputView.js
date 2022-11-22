@@ -13,7 +13,6 @@ const InputView = {
     let moving;
 
     Console.readLine(ENTER_MOVING, (answer) => {
-      console.log("선택한 이동할 칸: " + answer);
       moving = answer;
     });
 
@@ -24,7 +23,6 @@ const InputView = {
     let proceed;
 
     Console.readLine(ENTER_PROCEED, (answer) => {
-      console.log("선택한 게임 진행 여부: " + answer);
       proceed = answer;
     });
 

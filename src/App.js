@@ -32,10 +32,7 @@ class App {
   createBridge(size) {
     try {
       isBridgeSizeValid(size);
-      this.bridge = BridgeMaker.makeBridge(
-        size,
-        BridgeRandomNumberGenerator.generate
-      );
+      this.makeBridge(size);
       this.game = new BridgeGame(this.bridge, []);
       this.moveBridge();
     } catch (e) {
@@ -43,20 +40,31 @@ class App {
       this.getBridgeSize();
     }
   }
+  makeBridge(size) {
+    this.bridge = BridgeMaker.makeBridge(
+      size,
+      BridgeRandomNumberGenerator.generate
+    );
+  }
 
   moveBridge() {
     let flag = true;
     let completeOneMoving = [];
 
+    this.moveBridgeStep(flag, completeOneMoving);
+
+    if (flag) this.endGame();
+  }
+
+  moveBridgeStep(flag, completeOneMoving) {
     while (flag && completeOneMoving.length != this.bridge.length) {
       let moving = InputView.readMoving();
       completeOneMoving = this.game.move(moving);
-      OutputView.printMap(this.game.bridge, this.game.userBridge);
-
       flag = completeOneMoving[completeOneMoving.length - 1];
+
+      OutputView.printMap(this.game.bridge, this.game.userBridge);
       if (!flag) this.restartOrNot();
     }
-    if (flag) this.endGame();
   }
 
   restartOrNot() {
