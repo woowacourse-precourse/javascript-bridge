@@ -27,13 +27,17 @@ describe('이동 커맨드 클래스 테스트', () => {
     expect(result).toEqual(expected);
   });
 
-  test.each([
-    ['U', 'U', true],
-    ['U', 'D', false],
-  ])('다리를 건넜는지 확인', (command, currentBridge, expected) => {
-    const movingCommand = new MovingCommand(command);
-    const result = movingCommand.isCrossed(currentBridge);
+  test('현재 다리와 커맨드가 일치하면 true', () => {
+    const movingCommand = new MovingCommand('U');
+    const result = movingCommand.isCrossed('U');
 
-    expect(result).toEqual(expected);
+    expect(result).toEqual(true);
+  });
+
+  test('현재 다리와 커맨드가 일치하지 않으면 false', () => {
+    const movingCommand = new MovingCommand('U');
+    const result = movingCommand.isCrossed('D');
+
+    expect(result).toEqual(false);
   });
 });
