@@ -1,7 +1,5 @@
 const BridgeGame = require("../src/bridge/BridgeGame");
-const BridgeMaker = require("../src/BridgeMaker");
 const BridgeMapMaker = require("../src/bridge/BridgeMapMaker");
-const { makeBridge } = require("../src/BridgeMaker");
 const ErrorMessage = require("../src/messages/ErrorMessage");
 const StubBridgeMaker = require("../src/test/StubBridgeMaker");
 const GameStates = require("../src/utils/GameStates");
