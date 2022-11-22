@@ -38,6 +38,9 @@ class BridgeGame {
   getResult() {
     return [this.mapBridge(), this.#playCount];
   }
+  getLoseResult() {
+    return [this.mapErrorBridge(), this.#playCount];
+  }
   retry() {
     this.#userBridge = new User();
     this.#playCount++;
