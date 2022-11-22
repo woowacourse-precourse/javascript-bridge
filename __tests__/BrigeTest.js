@@ -2,6 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeMaker = require('../src/BridgeMaker');
 const BridgeGame = require('../src/BridgeGame');
 const CrossBrigeGame = require('../src/CrossBridgeGame');
+const { INPUT } = require('../src/utils/constants');
 
 const mockInput = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -46,9 +47,20 @@ describe('다리 건너기 테스트', () => {
     expect(bridge).toEqual(['U', 'D', 'D']);
   });
 
-  test("이동 결과를 제대로 출력하는지", () => {
-    const bridge = ["U", "U", "D"];
-    const input = "U";
+  test.each(['g', 2, 'u'])('이동할 칸 입력 예외처리', (input) => {
+    mockInput([input]);
+    const logSpy = getLogSpy();
+
+    const crossBrigeGame = new CrossBrigeGame();
+    crossBrigeGame.gameStart();
+    const log = getOutput(logSpy);
+
+    expect(log).toContain('[ERROR]');
+  });
+
+  test('BridgeGame이 이동 여부를 제대로 출력하는지', () => {
+    const bridge = ['U', 'U', 'D'];
+    const input = 'U';
     const output = [true, [1], [0]];
 
     const bridgeGame = new BridgeGame();
