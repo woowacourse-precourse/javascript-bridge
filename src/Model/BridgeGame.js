@@ -34,6 +34,16 @@ class BridgeGame {
     this.bridge = BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator.generate);
   }
 
+  getFloorMap(type) {
+    const floormap = this.moving.map((item, index) => {
+      if (item !== type) return ' ';
+      if (item !== this.bridge[index]) return 'X';
+      if (item === this.bridge[index]) return 'O';
+    }); 
+
+    return `[ ${floormap.join(' | ')} ]`;
+  }
+
 }
 
 module.exports = BridgeGame;
