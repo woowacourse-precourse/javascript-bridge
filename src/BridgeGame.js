@@ -25,6 +25,20 @@ class BridgeGame {
       this.checkDown(movement, this.cnt, this.bridge);
     };
   };
+  checkUp(move, cnt, bridge) {
+    if ((bridge[cnt] === move)) {
+      this.upTruePush()
+      return;
+    };
+    this.upFalsePush();
+  };
+  checkDown(move, cnt, bridge) {
+    if ((bridge[cnt] === move)) {
+      this.downTruePush();
+      return;
+    };
+    this.downFalsePush();
+  };
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
