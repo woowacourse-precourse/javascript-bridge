@@ -1,12 +1,14 @@
 const OutputView = require("./OutputView");
 const InputView = require("./InputView");
 const BridgeGame = require("./BridgeGame");
+const Validate = require("./Validate");
 const{ CONTROL } = require("./constants/Values");
 
 class App {
 
   constructor() {
     this.brideGame = new BridgeGame();
+    this.validate =  new Validate();
   }
 
   play() {
@@ -37,6 +39,7 @@ class App {
 
   tryBuildMoving(moving) {
     try {
+      this.validate.validateMove(moving);
       this.brideGame.move(moving);
       let upStep = this.brideGame.getup();
       let downStep = this.brideGame.getdown();

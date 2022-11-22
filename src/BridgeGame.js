@@ -2,7 +2,7 @@ const Validate = require("./Validate");
 const { makeBridge } = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const{ MOVING, RETRY, RESULT, CONTROL } = require("./constants/Values");
-
+const{ Console } = require("@woowacourse/mission-utils");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -13,6 +13,7 @@ class BridgeGame {
   #count;
 
   constructor() {
+  
     this.#stairs = { bridge: [] };
     this.#player = { step: [], upsides: [], downsides: [] };
     this.#count = 1;
@@ -24,7 +25,7 @@ class BridgeGame {
     const bridgeInformation = makeBridge(Number(size), generate);
     this.#stairs.bridge = bridgeInformation;
     this.addBridgeCondition();
-    Console.print(this.#player.step);
+    Console.print(this.#stairs.bridge)
   }
 
   addBridgeCondition() {

@@ -10,7 +10,7 @@ class Validate {
   }
 
   validateMove(moving) {
-    if(moving !== MOVING.UPSIDE_STRING && moving !== MOVING.DOWNSIDE_STRING) throw new Error(ERROR.INPUT_MOVING);
+    if(moving != MOVING.UPSIDE_STRING && moving != MOVING.DOWNSIDE_STRING) throw new Error(ERROR.INPUT_MOVING);
   }
 
   validateCommand(command) {
