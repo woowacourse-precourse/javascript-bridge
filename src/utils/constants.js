@@ -10,7 +10,7 @@ const GAME = Object.freeze({
   END_RESULT: '최종 게임 결과',
   RETRY: 'R',
   QUIT: 'Q',
-  RESULT: '게임 성공 여부: ',
+  RESULT: '\n게임 성공 여부: ',
   TRY_COUNT: '총 시도한 횟수: ',
   SUCCESS: '성공',
   FAIL: '실패',
@@ -32,6 +32,8 @@ const MOVEMENT = Object.freeze({
   DOWN: 'D',
   SUCCESS: 'O',
   FAIL: 'X',
+  BLANK: ' ',
+  BORDER: ' | ',
 });
 
 module.exports = {

@@ -11,8 +11,10 @@ const OutputView = {
 
   printMap(isSuccess, [upSide, downSide]) {
     Console.print(
+      `[ ${this.makeSide(isSuccess, upSide).join(MOVEMENT.BORDER)} ]`
     );
     Console.print(
+      `[ ${this.makeSide(isSuccess, downSide).join(MOVEMENT.BORDER)} ]`
     );
   },
 
@@ -20,17 +22,14 @@ const OutputView = {
     const lastPoint = isSuccess ? MOVEMENT.SUCCESS : MOVEMENT.FAIL;
     return moveResult.reduce((arr, value, idx) => {
       if (idx === moveResult.length - 1) {
+        value ? arr.push(lastPoint) : arr.push(MOVEMENT.BLANK);
         return arr;
       }
-      value ? arr.push(MOVEMENT.SUCCESS) : arr.push(' ');
+      value ? arr.push(MOVEMENT.SUCCESS) : arr.push(MOVEMENT.BLANK);
       return arr;
     }, []);
   },
 
-  printMap([isSuccess, upMove, downMove]) {
-    const lastPoint = isSuccess ? MOVEMENT.SUCCESS : MOVEMENT.FAIL;
-    Console.print(`[ ${this.makeUpside(lastPoint, upMove).join(' | ')} ]`);
-    Console.print(`[ ${this.makeDownside(lastPoint, downMove).join(' | ')} ]`);
   printExceptionMessage(e) {
     Console.print(e.message);
   },
