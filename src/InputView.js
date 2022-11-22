@@ -10,7 +10,7 @@ const InputView = {
    */
   readBridgeSize(game) {
     Console.readLine(OutputView.printRequestBridgeLength, (reply) => {
-      if (reply < 3 || reply > 20) {
+      if (isNaN(reply) || reply < 3 || reply > 20) {
         throw new Error("[ERROR] 다리의 길이는 3 이상 20 이하입니다.");
       }
       game.setBridge(reply);
@@ -30,24 +30,26 @@ const InputView = {
       const map = game.makeMap();
       OutputView.printMap(map);
       const flag = game.move();
-      // if (flag === 0) {
-      //   this.readGameCommand(game, input);
-      //   return;
-      // }
-      // if (flag === 1) {
-      //   OutputView.printGameResult(true);
-      //   OutputView.printTryGame(3);
-      //   Console.close();
-      //   return;
-      // }
-      // this.readMoving(game, input);
+      if (flag === 0) {
+        this.readGameCommand(game);
+        return;
+      }
+      if (flag === 1) {
+        const map = game.makeMap();
+        OutputView.printResult(map);
+        OutputView.printGameResult(true);
+        OutputView.printTryGame(game.getCount());
+        Console.close();
+        return;
+      }
+      this.readMoving(game);
     });
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(game, input) {
+  readGameCommand(game) {
     Console.readLine(OutputView.printRequestReplay, (reply) => {
       if (reply !== "R" && reply !== "Q") {
         throw new Error(
@@ -55,14 +57,15 @@ const InputView = {
         );
       }
       if (reply === "R") {
-        this.readMoving(game, []);
+        game.retry();
+        this.readMoving(game);
         return;
       }
-      const answer = game.getBridge;
+      const map = game.makeMap();
+      OutputView.printResult(map);
       OutputView.printGameResult(false);
-      input.pop();
-      OutputView.printResult(answer, input);
-      OutputView.printTryGame(0);
+      OutputView.printTryGame(game.getCount());
+      Console.close();
     });
   },
 };
