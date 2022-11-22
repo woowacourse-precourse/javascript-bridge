@@ -1,4 +1,4 @@
-const { CROSSING_RESULT } = require("./libs/const");
+const { CROSSING_RESULT, DIRECTION } = require("./libs/const");
 
 class BridgeGame {
   #bridge;
@@ -10,18 +10,18 @@ class BridgeGame {
     this.#crossingOrder = [];
     this.#attemptCount = 1;
   }
-  getResult() {
-    const isSuccess = !this.isFail() && this.isLast();
-
-    return { isSuccess, attemptCount: this.#attemptCount };
-  }
   move(direction) {
-    this.#crossingOrder.push([direction, direction === "U" ? 0 : 1]);
+    this.#crossingOrder.push([direction, direction === DIRECTION.up ? 0 : 1]);
   }
 
   getBridgeCrossingResult() {
     let bridgeCrossingResult = [[], []];
 
+    this.setBridgeCrossingResult(bridgeCrossingResult);
+
+    return bridgeCrossingResult;
+  }
+  setBridgeCrossingResult(bridgeCrossingResult) {
     this.#crossingOrder.forEach(([direction, directionNumber], idx) => {
       const isCross = direction === this.#bridge[idx];
 
@@ -32,9 +32,7 @@ class BridgeGame {
         CROSSING_RESULT.nothing
       );
     });
-    return bridgeCrossingResult;
   }
-
   isFail() {
     const idx = this.#crossingOrder.length - 1;
 
