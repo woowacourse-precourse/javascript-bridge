@@ -5,6 +5,7 @@ class App {
   constructor() {
     this.handleBridgeSize = this.handleBridgeSize.bind(this);
     this.handleBridgeMoveing = this.handleBridgeMoveing.bind(this);
+    this.handleGameCommand = this.handleGameCommand.bind(this);
     this.bridge;
     this.userState;
     this.countTry;
@@ -37,6 +38,17 @@ class App {
     this.bridge = bridge;
     this.userState = userState;
     this.countTry = countTry;
+  }
+
+  handleGameCommand(rnq) {
+    console.log(this.bridge, this.userState, this.countTry);
+    if (rnq === 'R') {
+      this.bridgeGame.retry();
+      InputView.readMoving(this.handleBridgeMoveing);
+    } else if (rnq === 'Q') {
+      OutputView.printResult(this.bridge, this.userState, this.countTry, false);
+      InputView.close();
+    }
   }
 }
 
