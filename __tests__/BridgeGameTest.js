@@ -1,15 +1,35 @@
 /* eslint-disable max-lines-per-function */
+const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeGame = require('../src/models/BridgeGame');
 
-describe('BridgeGame 테스트', () => {
-  test.each(['u', 'd', '0', 'true', 'undefined', 'null'])(
-    'move 메서드는 입력값이 U와 D중 하나의 문자가 아니면 에러 발생',
-    (moving) => {
-      const bridgeGame = new BridgeGame();
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce(
+    (acc, number) => acc.mockReturnValueOnce(number),
+    MissionUtils.Random.pickNumberInRange,
+  );
+};
 
-      expect(() => {
-        bridgeGame.move(moving);
-      }).toThrow('[ERROR]');
+describe('BridgeGame 테스트', () => {
+  test.each([
+    [['U', 'D'], 'PLAYING'],
+    [['U', 'D', 'D'], 'FAIL'],
+    [['U', 'D', 'U'], 'CLEAR'],
+  ])(
+    'getStateManager 메서드는 현재 게임의 상태를 반환',
+    (moving, expectedStatus) => {
+      mockRandoms([1, 0, 1]);
+
+      const bridgeGame = new BridgeGame(3);
+
+      moving.forEach((move) => {
+        bridgeGame.move(move);
+      });
+
+      const stateManager = bridgeGame.getStateManager();
+      const { gameStatus } = stateManager.getGameState();
+
+      expect(gameStatus).toEqual(expectedStatus);
     },
   );
 });
