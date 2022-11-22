@@ -7,7 +7,7 @@ const INPUT_QUESTION = Object.freeze({
 const PRINT_MESSAGE = Object.freeze({
   blank: ' ',
   start: `다리 건너기 게임을 시작합니다.\n`,
-  finish: `\n최종 게임 결과`,
+  finish: `최종 게임 결과`,
   result: (result) => `게임 성공 여부: ${result}`,
   count: (count) => `총 시도한 횟수: ${count}`,
 });

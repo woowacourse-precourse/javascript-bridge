@@ -23,7 +23,6 @@ const OutputView = {
   },
 
   printInfo(count, result) {
-    this.printBlankLine();
     Console.print(PRINT_MESSAGE.result(result));
     Console.print(PRINT_MESSAGE.count(count));
     Console.close();
