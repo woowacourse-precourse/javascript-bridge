@@ -1,6 +1,7 @@
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 const { checkValidDirection, checkValidCommand } = require('./utils/validator');
 const { Console } = require('@woowacourse/mission-utils');
 const MESSAGE = require('./constants/message');
@@ -19,6 +20,7 @@ class BridgeGame {
     this.#bridgeStack = [];
     this.#retryCount = 0;
     this.#isSuccess = false;
+    Console.print(MESSAGE.GAME.START);
   }
 
   start() {
@@ -53,9 +55,12 @@ class BridgeGame {
 
   checkBridge(direction) {
     const isRightDirection = this.checkRightDirection(direction);
-    if (!isRightDirection) InputView.readGameCommand(this);
+    this.#bridgeStack.push(direction);
+    OutputView.printMap(this.#bridge, this.#bridgeStack);
+    if (!isRightDirection) {
+      InputView.readGameCommand(this);
+    }
     if (isRightDirection) {
-      this.#bridgeStack.push(direction);
       this.checkTerminate();
     }
   }
@@ -72,7 +77,9 @@ class BridgeGame {
     if (isTerminate) {
       this.close();
     }
-    if (!isTerminate) InputView.readMoving(this);
+    if (!isTerminate) {
+      InputView.readMoving(this);
+    }
   }
 
   readCommand(command) {
