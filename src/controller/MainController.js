@@ -92,6 +92,14 @@ class MainController {
     );
   }
 
+  /**
+   * 유저 재시작 의사 입력 연결 메서드
+   * @param userMoving {string[]} [유저 이동기록]
+   */
+  readUserRestartInput(userMoving) {
+    InputView.readGameCommand(this.onUserRestartInput, this, userMoving);
+  }
+
   // 게임 초기 실행 메서드
   init() {
     this.userController.increaseTryCount();
