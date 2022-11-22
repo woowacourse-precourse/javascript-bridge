@@ -2,6 +2,8 @@
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const MissionUtils = require("@woowacourse/mission-utils");
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 const InputView = {
   /**
@@ -18,6 +20,10 @@ const InputView = {
           } else if (bridgeSize < 3 || bridgeSize > 20) {
             throw "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.";
           }
+          BridgeMaker.makeBridge(
+            bridgeSize,
+            BridgeRandomNumberGenerator.generate
+          );
         } catch (e) {
           MissionUtils.Console.print(e);
           this.readBridgeSize();
