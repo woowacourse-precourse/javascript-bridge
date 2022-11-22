@@ -1,4 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('../src/BridgeGame');
 
 describe('브릿지 게임 테스트', () => {
@@ -13,8 +12,4 @@ describe('브릿지 게임 테스트', () => {
 
     expect(bridgeGame.makeMap('U', 'U')).toEqual([['O'], [' '], true]);
   });
-});
-
-afterAll(() => {
-  Console.close();
 });

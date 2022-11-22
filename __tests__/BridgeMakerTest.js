@@ -1,4 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
 const BridgeMaker = require('../src/BridgeMaker');
 
 describe('다리 생성 테스트', () => {
@@ -23,8 +22,4 @@ describe('다리 생성 테스트', () => {
 
     expect(bridge === ['D', 'U', 'U']).toEqual(false);
   });
-});
-
-afterAll(() => {
-  Console.close();
 });

@@ -1,4 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
 const BridgeRandomNumberGenerator = require('../src/BridgeRandomNumberGenerator');
 
 describe('랜덤 값 테스트', () => {
@@ -13,8 +12,4 @@ describe('랜덤 값 테스트', () => {
 
     expect(result === 3).toEqual(false);
   });
-});
-
-afterAll(() => {
-  Console.close();
 });

@@ -1,4 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
 const InputView = require('../src/InputView');
 
 describe('사용자 입력 값 테스트', () => {
@@ -37,8 +36,4 @@ describe('사용자 입력 값 테스트', () => {
       InputView.validateGameCommand(input);
     }).toThrow('[ERROR]');
   });
-});
-
-afterAll(() => {
-  Console.close();
 });
