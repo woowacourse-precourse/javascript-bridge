@@ -25,7 +25,7 @@ class BridgeHq {
       return this.makeBridge();
     }
     OutputView.printError(ERROR.LENGTH);
-    this.getBridgeSize();
+    return this.getBridgeSize();
   }
 
   makeBridge() {
@@ -44,7 +44,7 @@ class BridgeHq {
       return this.getMoveResult();
     }
     OutputView.printError(ERROR.MOVE);
-    this.inputMove();
+    return this.inputMove();
   }
 
   getMoveResult() {
@@ -102,11 +102,13 @@ class BridgeHq {
       this.failEndGame();
     }
   }
+
   successEndGame(endMap) {
     const [upsideMap, downsideMap] = [...this.makeSideMap(endMap)];
     const count = this.game.getTryCount();
     OutputView.printResult(upsideMap, downsideMap, count);
   }
+
   failEndGame() {
     const [upsideMap, downsideMap] = [...this.makeSideMap(this.lastMap)];
     const count = this.game.getTryCount();
