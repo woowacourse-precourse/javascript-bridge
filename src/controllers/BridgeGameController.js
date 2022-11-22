@@ -4,6 +4,7 @@ const BridgeGame = require('../models/BridgeGame');
 const { SizeCommand, MovingCommand, GameCommand } = require('../models/command');
 
 const { readBridgeSize, readMoving, readGameCommand } = require('../views/InputView');
+const OutputView = require('../views/OutputView');
 const { printMap, printResult, printError } = require('../views/OutputView');
 
 /**
@@ -42,6 +43,7 @@ class BridgeGameController {
   #tryBridgeSizeSubmit(command) {
     const sizeCommand = new SizeCommand(command);
     this.#game.setBridge(sizeCommand);
+    OutputView.printEmptyLine();
     readMoving(this.#onMovingSubmit.bind(this));
   }
 

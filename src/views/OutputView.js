@@ -11,6 +11,12 @@ const BridgeMaps = require('../models/map/BridgeMaps');
  */
 const OutputView = {
   /**
+   * 빈 라인을 출력한다.
+   */
+  printEmptyLine() {
+    Console.print('');
+  },
+  /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * @param {BridgeMaps} bridgeMap
    */
@@ -22,6 +28,7 @@ const OutputView = {
 
     Console.print(upsideString);
     Console.print(downsideString);
+    OutputView.printEmptyLine();
   },
 
   /**
@@ -31,7 +38,6 @@ const OutputView = {
   printResult({ bridgeMaps, isWin, tryCount }) {
     Console.print(GAME_MESSAGE.RESULT_TITLE);
     OutputView.printMap(bridgeMaps);
-    Console.print('');
     Console.print(GAME_MESSAGE.WIN_OPTION + OutputUtils.convertToWinMessage(isWin));
     Console.print(GAME_MESSAGE.TRY_COUNT + tryCount);
   },
@@ -41,9 +47,9 @@ const OutputView = {
    * @param {string} message
    */
   printError(message) {
-    Console.print('');
+    OutputView.printEmptyLine();
     Console.print(message);
-    Console.print('');
+    OutputView.printEmptyLine();
   },
 };
 
