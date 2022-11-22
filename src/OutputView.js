@@ -30,8 +30,6 @@ const OutputView = {
         downBridge.push("X");
       }
     }
-    console.log(upBridge);
-    console.log(downBridge);
   },
 
   /**

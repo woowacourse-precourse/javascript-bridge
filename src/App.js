@@ -15,7 +15,4 @@ class App {
     this.size = InputView.readBridgeSize();
   }
 }
-
-const app = new App();
-console.log(app.play());
 module.exports = App;

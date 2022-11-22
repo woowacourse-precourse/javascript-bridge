@@ -20,7 +20,6 @@ const InputView = {
         let size = parseInt(length);
         this.checkSize(size);
         const FIELD = BridgeMaker.makeBridge(size, generateRandomNumber);
-        console.log(FIELD);
         this.readMoving(FIELD, [], 1);
       }
     );
@@ -44,12 +43,9 @@ const InputView = {
       (answer) => {
         this.checkSign(answer);
         select.push(answer);
-        console.log(select);
-        const bridgeGame = new BridgeGame();
-        console.log(FIELD, answer);
+        bridgeGame = new BridgeGame();
         if (bridgeGame.move(FIELD, select)) {
           OutputView.printMap(FIELD, select);
-          console.log("도전 횟수" + trial);
           trial += 1;
           this.readMoving();
         }
