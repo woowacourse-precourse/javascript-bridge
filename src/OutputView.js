@@ -20,10 +20,8 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap (bridgeGame) {
-    Console.print(
-      `${bridgeGame.getPrintList(bridgeGame.getUpList())}\n${bridgeGame.getPrintList(bridgeGame.getDownList())}`,
-    );
+  printMap (printList) {
+    Console.print(printList);
   },
 
   /**
@@ -31,19 +29,19 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult (isSuccess, bridgeGame) {
+  printResult (isSuccess, printList, count) {
     Console.print(GAME_MESSAGE.RESULT);
-    this.printMap(bridgeGame);
-    this.printSuccessAndTryCount(isSuccess, bridgeGame);
+    this.printMap(printList);
+    this.printSuccessAndTryCount(isSuccess, count);
     Console.close();
   },
 
-  printSuccessAndTryCount (isSuccess, bridgeGame) {
+  printSuccessAndTryCount (isSuccess, count) {
     Console.print(
       GAME_MESSAGE.SUCCESS_OR_NOT
         + (isSuccess ? GAME_MESSAGE.SUCCESS : GAME_MESSAGE.FAIL)
         + GAME_MESSAGE.TRY_NUMBER
-        + bridgeGame.getTryCount(),
+        + count,
     );
   },
 
