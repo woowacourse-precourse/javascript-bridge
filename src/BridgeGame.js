@@ -15,7 +15,6 @@ class BridgeGame {
     this.#result = {count: 1, success: false}
 
     this.buildBridge(size)
-    console.log(this.#bridge)
   }
 
   buildBridge(size){

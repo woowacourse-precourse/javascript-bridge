@@ -28,12 +28,9 @@ class App {
 
       if(bridgeGame.isEnd())break
     }
-    
+
     OutputView.printResult(bridgeGame.getResult(), bridgeGame.getMap())
   }
 }
-
-const app = new App()
-app.play()
 
 module.exports = App;
