@@ -48,7 +48,7 @@ class BridgeGame {
   retry() {
       this.#bridgeIndex = 1;
       this.#attemptNumber += 1;
-      this.mapMaker.initGame();
+      this.mapMaker = new MapMaker();
   }
 
   quit() {
