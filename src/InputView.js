@@ -2,7 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const { printMap, printResult } = require("../src/OutputView");
 const { canMakeBridge } = require("../src/BridgeMaker");
 const BridgeGame = require("../src/BridgeGame");
-const { question } = require("./Constant/Constant");
+const { QUESTION } = require("./Constant/Constant");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -24,7 +24,7 @@ const InputView = {
   },
 
   readBridgeSize() {
-    Console.readLine(question.bridgeSize, (input) => {
+    Console.readLine(QUESTION.BRIDGE_SIZE, (input) => {
       try {
         InputView.Game = new BridgeGame(canMakeBridge(Number(input)));
         InputView.readMoving();
@@ -38,7 +38,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving() {
-    Console.readLine(question.moving, (input) => {
+    Console.readLine(QUESTION.MOVING, (input) => {
       try {
         InputView.Game.fillMap(input);
         printMap(InputView.Game);
@@ -65,7 +65,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand() {
-    Console.readLine(question.retry, (input) => {
+    Console.readLine(QUESTION.RETRY, (input) => {
       try {
         if (InputView.Game.isRetry(input)) return InputView.readMoving();
         printResult(InputView.Game, "실패");
