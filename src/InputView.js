@@ -14,14 +14,9 @@ const InputView = {
         validator.is3To20(num);
         this.readMoving(setBridgeGame(num));
       } catch (error) {
-        this.errorHandlerInReadBridgeSize(error);
+        ErrorHandlers.errorHandlerInReadBridgeSize(error);
       }
     });
-  },
-
-  errorHandlerInReadBridgeSize(error) {
-    Console.print(error);
-    InputView.readBridgeSize();
   },
 
   readMoving(bridgeGame) {
@@ -30,14 +25,9 @@ const InputView = {
         validator.isUorD(input);
         moveAndCheck(input, bridgeGame);
       } catch (error) {
-        this.errorHandlerInReadMoving(error, bridgeGame);
+        ErrorHandlers.errorHandlerInReadMoving(error, bridgeGame);
       }
     });
-  },
-
-  errorHandlerInReadMoving(error, bridgeGame) {
-    Console.print(error);
-    InputView.readMoving(bridgeGame);
   },
 
   readGameCommand(bridgeGame, blocks) {
@@ -46,11 +36,21 @@ const InputView = {
         validator.isRorQ(input);
         retryOrQuit(input, bridgeGame, blocks);
       } catch (error) {
-        this.errorHandlerInReadGameCommand(error, bridgeGame, blocks);
+        ErrorHandlers.errorHandlerInReadGameCommand(error, bridgeGame, blocks);
       }
     });
   },
+};
 
+const ErrorHandlers = {
+  errorHandlerInReadBridgeSize(error) {
+    Console.print(error);
+    InputView.readBridgeSize();
+  },
+  errorHandlerInReadMoving(error, bridgeGame) {
+    Console.print(error);
+    InputView.readMoving(bridgeGame);
+  },
   errorHandlerInReadGameCommand(error, bridgeGame, blocks) {
     Console.print(error);
     InputView.readGameCommand(bridgeGame, blocks);
