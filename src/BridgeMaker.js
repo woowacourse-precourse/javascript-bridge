@@ -15,6 +15,7 @@ const BridgeMaker = {
       if (generateRandomNumber() == 0) bridges.push("D");
       else bridges.push("U");
     };
+    MissionUtils.Console.print(bridges);
     return bridges; 
   },
 };

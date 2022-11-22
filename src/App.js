@@ -3,14 +3,15 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
-
+const { MissionUtils } = require("@woowacourse/mission-utils");
 
 class App {
   play() {
     const MissionUtils = require("@woowacourse/mission-utils");
     MissionUtils.Console.print("다리 건너기 게임을 시작합니다.");
     const bridges = this.make_bridges();
-    this.cross_the_bridge(bridges);
+    var try_count = 1;
+    this.cross_the_bridge(try_count, bridges);
   }
  
   make_bridges(){
@@ -19,7 +20,7 @@ class App {
     return bridges;
   }
 
-  cross_the_bridge(bridges){
+  cross_the_bridge(try_count, bridges){
     var guesses = []; 
     const game = new BridgeGame();
     for (var i =0;i!=bridges.length;i++){
@@ -28,16 +29,16 @@ class App {
       OutputView.printMap(bridges, guesses);
       if (guesses[i] == false)  break;//game stop
     }
-    this.determine(game, guesses, bridges);
+    this.determine(game, guesses, bridges, try_count);
   }
 
-  determine(game, guesses, bridges){
+  determine(game, guesses, bridges, try_count){
     if (guesses.length == bridges.length){
-      //게임 성공
-      OutputView.printResult();
+      OutputView.printResult(true, try_count, guesses, bridges);
+      return;
     }
     const gameCommand = InputView.readGameCommand();
-    game.retry(gameCommand);
+    game.retry(gameCommand,guesses, bridges, try_count);
   }
 }
 
