@@ -24,7 +24,8 @@ const InputView = {
     Console.readLine(GAME_MESSAGES.messageOfInputSize, (bridgeSize) => {
       try {
         GameInfo.bridgeSize = new ValidateBridgeSize(bridgeSize).bridgeSize;
-        UseGameInfo.createBridge();
+        GameInfo.bridge = BridgeMaker
+          .makeBridge(GameInfo.bridgeSize, BridgeRandomNumberGenerator.generate);
         UseGameInfo.initializeGameInfo();
         return this.readMoving();
       } catch (error) {
