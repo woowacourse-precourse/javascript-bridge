@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const ERROR = require('../Constants/ErrorMessage');
-const OutputView = require('../OutputView');
+const OutputView = require('../View/OutputView');
 
 class BridgeLengthInput {
   #userInput;

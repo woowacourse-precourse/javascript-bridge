@@ -1,4 +1,4 @@
-const Bridge = require('../src/Bridge');
+const Bridge = require('../src/Model/Bridge');
 
 describe('Bridge', () => {
     it('입력된 길이만큼 다리 생성', () => {

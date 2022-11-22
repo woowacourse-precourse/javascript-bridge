@@ -1,6 +1,6 @@
-const OutputView = require('./OutputView');
-const InputView = require('./InputView');
-const BridgeGame = require('./BridgeGame');
+const OutputView = require('./View/OutputView');
+const InputView = require('./View/InputView');
+const BridgeGame = require('./Model/BridgeGame');
 const {
   BridgeLengthInput,
   DirectionChoiceInput,

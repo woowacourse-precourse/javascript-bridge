@@ -1,4 +1,4 @@
-const RoundProcess = require('../src/RoundProcess');
+const RoundProcess = require('../src/Model/RoundProcess');
 
 const roundProcess = new RoundProcess();
 
