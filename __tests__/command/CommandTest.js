@@ -1,4 +1,4 @@
-const Command = require('../src/models/command/Command');
+const Command = require('../../src/models/command/Command');
 
 describe('커맨드 클래스 테스트', () => {
   test('빈 값 유효성 검증', () => {

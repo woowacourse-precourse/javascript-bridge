@@ -1,4 +1,4 @@
-const { MovingCommand } = require('../src/models/command');
+const { MovingCommand } = require('../../src/models/command');
 
 describe('이동 커맨드 클래스 테스트', () => {
   test('빈 값 유효성 검증', () => {

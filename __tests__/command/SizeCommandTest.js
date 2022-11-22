@@ -1,4 +1,4 @@
-const { SizeCommand } = require('../src/models/command');
+const { SizeCommand } = require('../../src/models/command');
 
 describe('사이즈 커맨드 클래스 테스트', () => {
   test('빈 값 유효성 검증', () => {
