@@ -32,4 +32,9 @@ const SIZE = {
     GAME_OVER: 3,
   };
 
-module.exports = { SIZE, MOVING, RETRY, RESULT, CONTROL };
+  const POSITION_SYMBOLL = {
+    UP_STREET: 0,
+    DOWN_STREET: 1,
+  }
+
+module.exports = { SIZE, MOVING, RETRY, RESULT, CONTROL, POSITION_SYMBOLL };

@@ -16,14 +16,14 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(callback) {
-    Console.readLine(`${INPUT.MOVING}\n`, callback);
+    Console.readLine(`\n${INPUT.MOVING}\n`, callback);
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(callback) {
-    Console.readLine(`${INPUT.RETRY}\n`, callback);
+    Console.readLine(`\n${INPUT.RETRY}\n`, callback);
   },
 };
 
