@@ -18,21 +18,20 @@ const InputView = {
       console.log(`다리 길이 : ${bridgeLen}`);
 
       const bridge = BridgeMaker.makeBridge(bridgeLen, BridgeRandomNumberGenerator.generate);
-      currentBridge = this.readMoving([[],[]], bridge);
+      currentBridge = this.readMoving([[],[]], bridge, 1);
       // 이동 후, 게임 진행 가능한지 확인
-      this.stillMoving(currentBridge, bridge);
     })
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving(currentBridge, bridge) {
+  readMoving(currentBridge, bridge, count) {
     console.log('입력받는다!');
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (input) => {
       console.log(`이동할 칸 : ${input}`);
       currentBridge=game.move(currentBridge, bridge, input); // class
-      this.stillMoving(currentBridge, bridge);
+      this.stillMoving(currentBridge, bridge, count);
     })
     return currentBridge;
   },
@@ -40,29 +39,30 @@ const InputView = {
   /**
    * 게임 진행이 가능한지, 게임이 종료되었는지, 게임을 진행할 수 없는지 확인
    */
-  stillMoving(currentBridge, bridge) {
+  stillMoving(currentBridge, bridge, count) {
     // 게임 종료되었는지 확인
     console.log(currentBridge[0].length, bridge.length);
+    console.log(`count: ${count}`);
     if(currentBridge[0].length === bridge.length) {
       // 게임 종료 -> 출력
-      OutputView.printResult(currentBridge);
+      OutputView.printResult(currentBridge, count, 1);
       console.log('게임 종료');
-      console.log(currentBridge);
     }
 
     // 틀렸는지 확인
     else if(currentBridge[0].includes('X') || currentBridge[1].includes('X')){
+      count += 1;
       // 게임 틀림 -> 게임 종료할지, 재시작 할 지 결정
-      OutputView.printMap(currentBridge);
       console.log('틀림. 재시작? 종료?');
-      this.readGameCommand(currentBridge, bridge);
+      OutputView.printMap(currentBridge);
+      this.readGameCommand(currentBridge, bridge, count);
     }
 
     // 게임 진행가능한지 확인
     else {
       // 게임 다시 진행
       console.log('겜 진행');
-      this.readMoving(currentBridge, bridge);
+      this.readMoving(currentBridge, bridge, count);
       OutputView.printMap(currentBridge);
     }
   },
@@ -70,16 +70,16 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(currentBridge, bridge) {
+  readGameCommand(currentBridge, bridge, count) {
     Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (input) => {
-      console.log(`재시작 여부 : ${input}`);
+      console.log(`재시작 여부 : ${input}, count: ${count}`);
       if(input==='R') {
         console.log('재시작 O');
-        this.readMoving(game.retry(currentBridge), bridge);
+        this.readMoving(game.retry(currentBridge), bridge, count);
       }
       else if(input==='Q') {
         console.log('재시작 X');
-        OutputView.printResult(currentBridge);
+        OutputView.printResult(currentBridge, count, 0);
       }
     })
   },
