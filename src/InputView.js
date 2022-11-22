@@ -1,5 +1,5 @@
 const {Console} = require("@woowacourse/mission-utils");
-const {checkBridgeSize} = require("./Validation");
+const {checkBridgeSize, checkSideInput} = require("./Validation");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -26,7 +26,7 @@ const InputView = {
   readMoving(callback) {
     Console.readLine('이동할 칸을 선택해주세요. (위: U, 아래: D)', (side) => {
       try {
-        checkMoving(side);
+        checkSideInput(side);
         callback(side);
       } catch (e) {
         Console.print(e);
