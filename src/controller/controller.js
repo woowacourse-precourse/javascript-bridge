@@ -17,6 +17,7 @@ class Controller{
   }
 
   gameStart(){
+    OutputView.printGameStart()
     this.createBridge();
   }
 

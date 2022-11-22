@@ -6,7 +6,6 @@ class App {
 
     play() {
         const controller = new Controller();
-        OutputView.printGameStart()
         controller.gameStart();
     }
 }
