@@ -62,7 +62,14 @@ class BridgeGame {
   }
 
   checkGameEnd() {
-    return this.#bridgeMap[GAME_CONDITION.UP_INDEX].length === this.#bridge.size();
+    return this.#bridgeMap[GAME_CONDITION.UP_INDEX].length === this.#bridge.size() && this.#checkLastMove();
+  }
+
+  #checkLastMove() {
+    const isUpTrue = this.#bridgeMap[GAME_CONDITION.UP_INDEX][this.#bridge.size() - 1] === GAME_CONDITION.CAN_MOVE;
+    const isDownTrue = this.#bridgeMap[GAME_CONDITION.DOWN_INDEX][this.#bridge.size() - 1] === GAME_CONDITION.CAN_MOVE;
+
+    return isUpTrue || isDownTrue;
   }
 
   /**
