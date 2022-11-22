@@ -24,6 +24,30 @@ class App {
       game.cnt +=1;
     }
   };
+  exceptionHandlingSize(){
+    try{
+      this.exceptionSize();
+    }catch(err){
+      MissionUtils.Console.print(err);
+      InputView.readBridgeSize();
+    }
+  };
+  exceptionHandlingMove(game){
+    try{
+      this.exceptionMove();
+    }catch(err){
+      MissionUtils.Console.print(err);
+      InputView.readMoving(game);
+    }
+  };
+  exceptionHandlingCommand(game){
+    try{
+      this.exceptionCommand();
+    }catch(err){
+      MissionUtils.Console.print(err);
+      InputView.readGameCommand(game);
+    }
+  };
   exceptionSize(){
     InputView.bridgeTextCheck();
     InputView.bridgeSizeCheck();
