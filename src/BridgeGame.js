@@ -18,10 +18,7 @@ class BridgeGame {
     this.#userPos = 0;
     this.#userAttempt = 1;
     this.#isGameOver = false;
-    this.#bridgeMap = {
-      U : [],
-      D : [],
-    }
+    this.#bridgeMap = { U : [], D : [] }
   }
 
   getGameOver() {
@@ -85,10 +82,7 @@ class BridgeGame {
     this.#userPos = 0;
     this.#isGameOver = false;
     this.#userAttempt++;
-    this.#bridgeMap = {
-      U: [],
-      D: [],
-    }
+    this.#bridgeMap = { U: [], D: [] }
   }
 
   init(bridgeSize) {

@@ -22,11 +22,11 @@ class App {
       const isGameOver = this.bridgeGame.getGameOver();
       const bridgeMap = this.bridgeGame.getBridgeMap();
       this.toDoNext(isPass, isGameOver, bridgeMap);
+      OutputView.printMap(bridgeMap);
     });
   }
 
   toDoNext(isPass, isGameOver, bridgeMap) {
-    OutputView.printMap(bridgeMap);
     if (!isPass) {
       this.userInputEnd();
       return;
@@ -40,8 +40,7 @@ class App {
   userInputEnd() {
     InputView.readGameCommand(inputEnd => {
       if (inputEnd === 'Q') {
-        const bridgeMap = this.bridgeGame.getBridgeMap();
-        OutputView.printResult(this.bridgeGame.endMessage(), bridgeMap);
+        OutputView.printResult(this.bridgeGame.endMessage(), this.bridgeGame.getBridgeMap());
         return;
       }
       this.bridgeGame.retry();

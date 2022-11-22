@@ -6,11 +6,15 @@ const { validateBridgeSize, validateUserMove, validateUserEnd } = require("./Val
 const OutputView = require("./OutputView");
 
 const InputView = {
+  validateAndCallback(input, validator, callback) {
+    validator(input);
+    callback(input);
+  },
+
   getUserInputRecursive(prompt, callback, validator) {
     Console.readLine(prompt, input => {
       try {
-        validator(input);
-        callback(input);
+        this.validateAndCallback(input, validator, callback);
       } catch (error) {
         OutputView.printError(error);
         this.getUserInputRecursive(prompt, callback, validator);
