@@ -56,7 +56,7 @@ Map{
 
 ## 2. controller : 조작 기능을 담당합니다.
 
-- BridgeGameControl.js : 전체적인 조작을 담당합니다.
+- BridgeGameControl.js : 전체적인 조작을 담당합니다. 위에서 설명한 Map 자료구조을 만들고 이동 및 게임 종료 재시작을 조작합니다.
 
 - BridgeGame.js : 이동(move) 및 재시작(retry) 세부 기능을 담당합니다.
 
