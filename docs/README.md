@@ -1,0 +1,34 @@
+1. [V] MESSAGE 상수
+2. BridgeRandomNumberGenerator: 생성한 다리값 [0, 1] => 이 객체는 수정하지 않는다.
+3. [V]BridgeMaker: 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
+   3-1. makeBridge(): 0이면 'D' 1이면 'U' 배열을 생성
+4. [V]InputView: 플레이어에게서 이동할 칸을 입력받는다.
+   4-1. [V]readBridgeSize(): 다리의 길이를 입력받는다.
+   4-1-1 배열로 변환
+   4-1-2 모두 숫자인지 확인 -> 숫자로 변환
+   4-1-3 3 이상 20 이하의 숫자 확인 -> 숫자 반환
+   4-2. [V]readMoving(): 사용자가 이동할 칸을 입력받는다.
+   4-2-1 배열로 변환
+   4-2-2 한자리인지 확인
+   4-2-3 D,U 확인 -> D또는 U 반환
+   4-2-4 [예외] D,U가 아니면 (종료가 아니라) 그 부분부터 재입력
+   4-3. [V]readGameCommand(): 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+5. OutputView: 입력받은 값이 현재 배열의 인덱스에 해당하는 값과 같다면 O, 아니면 X
+   5-1. printMap(): 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
+   5-1-1. 입력 값과 현재 다리 값이 일치하는지 여부 검사
+   5-2. printResult(): 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
+6. readGameCommand(): 종료조건
+   6-1. 다리를 끝까지 건너면 종료
+   6-2. 다리 건너기를 실패하면
+   6-2-1. 재시작 입력: R - 처음 다리로 재시작
+   6-2-2. 종료 입력 : Q
+
+readBridgeSize[다리 크기 숫자 입력] -> exceptionInputNumberCheck[숫자 예외 확인] (splitInput, numberCheck, numberRangeCheck, numberRangeCheck범위) -> 3~20숫자
+
+move는 어디에?
+readMoving[이동할 칸 입력] -> exceptionMovingCheck[U,D체크] (characterCorrectLengthCheck:한자리 확인, characterUpDownCheck:[U,D 아니면]-> readGameCommand로 바로 연결 x return false?
+
+readMoving[이동할 칸 입력] -> exceptionMovingCheck[U,D체크] (characterCorrectLengthCheck:한자리 확인, characterUpDownCheck:[U,D]-> => return true? this.inputChar
+
+retry는 어디에?
+readGameCommand[계속 또는 종료] -> exceptionCommandCheck (splitInput, characterCorrectLengthCheck:한자리 확인, characterRetryQuitCheck[R,Q확인]) => this.command
