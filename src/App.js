@@ -7,6 +7,9 @@ const OutputView = require('./views/OutputView');
 
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('./BridgeMaker');
+
+const validator = require('./utils/validator');
+const errorHandler = require('./utils/errorHandler');
 const BridgeRandomNumberGenerator = require('./utils/BridgeRandomNumberGenerator');
 
 class App {
@@ -18,19 +21,31 @@ class App {
 
   #formatBridge = [[], []];
 
-  async play() {
-    this.bridgeGame = new BridgeGame();
-    this.#size = await InputView.readBridgeSize();
-    this.bridgeGame.setRandomBridge(this.#createRandomBridge());
-    this.#gameProcess();
+  setSize(size) {
+    validator.validateSize(size);
+    this.#size = size;
   }
 
-  async #gameProcess() {
-    this.bridgeGame.setUserBlock(await InputView.readMoving());
-    this.#formatBridge = this.bridgeGame.move();
-    OutputView.printMap(this.#formatBridge);
+  play() {
+    this.bridgeGame = new BridgeGame();
+    errorHandler(() => {
+      InputView.readBridgeSize((size) => {
+        this.setSize(size);
+        this.bridgeGame.setRandomBridge(this.#createRandomBridge());
+        this.#gameProcess();
+      });
+    });
+  }
 
-    return this.#handleGame();
+  #gameProcess() {
+    errorHandler(() => {
+      InputView.readMoving((block) => {
+        this.bridgeGame.setUserBlock(block);
+        this.#formatBridge = this.bridgeGame.move();
+        OutputView.printMap(this.#formatBridge);
+        return this.#handleGame();
+      });
+    });
   }
 
   #handleGame() {
@@ -44,19 +59,21 @@ class App {
     return BridgeMaker.makeBridge(this.#size, BridgeRandomNumberGenerator.generate);
   }
 
-  async #chooseGameAgain() {
-    const command = await InputView.readGameCommand();
-    if (BRIDGE_GAME.COMMAND.Q === command) {
-      this.#exitGame();
-    } else {
-      this.#retryGame();
-      this.#gameProcess();
-    }
+  #chooseGameAgain() {
+    errorHandler(() => {
+      InputView.readGameCommand((command) => {
+        if (BRIDGE_GAME.COMMAND.R === command) {
+          return this.#retryGame();
+        }
+        return this.#exitGame();
+      });
+    });
   }
 
   #retryGame() {
     this.#tryCount += 1;
     this.bridgeGame.retry();
+    this.#gameProcess();
   }
 
   #exitGame(isSuccess) {
