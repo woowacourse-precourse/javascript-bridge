@@ -39,7 +39,7 @@ const Validator = {
     if (command !== Validator.RETRY_STRING && command !== Validator.EXIT_STRING) {
       throw new Error(Validator.ERROR_MESSEAGE_MUST_R_OR_Q);
     }
-  }
+  },
 };
 
 module.exports = Validator;
