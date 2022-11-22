@@ -1,20 +1,62 @@
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
-const OutputView = {
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printMap() {},
+const { Console } = require('@woowacourse/mission-utils');
+const { MESSAGE, DIRECTION, RESULT } = require('./constants/constant.js');
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult() {},
+const OutputView = {
+  printStart() {
+    Console.print(MESSAGE.START);
+  },
+
+  printMap(bridge) {
+    let [upperResult, lowerResult] = this.getResultStr(bridge);
+
+    upperResult += ']';
+    lowerResult += ']';
+
+    Console.print(`${upperResult}\n${lowerResult}\n`);
+  },
+
+  getResultStr(bridge) {
+    let upperResult = '[';
+    let lowerResult = '[';
+
+    bridge.currentPos.forEach((pos, index) => {
+      upperResult += this.addUpperResultStr(bridge, pos, index);
+      lowerResult += this.addLowerResultStr(bridge, pos, index);
+    });
+
+    return [upperResult, lowerResult];
+  },
+
+  addUpperResultStr(bridge, pos, index) {
+    let result = '';
+
+    result += index === 0 ? '' : '|';
+    if (pos === DIRECTION.UP) result += bridge.cellValidator(index) ? RESULT.CORRECT : RESULT.INCORRECT;
+    else result += RESULT.EMPTY;
+
+    return result;
+  },
+
+  addLowerResultStr(bridge, pos, index) {
+    let result = '';
+
+    result += index === 0 ? '' : '|';
+    if (pos === DIRECTION.DOWN) result += bridge.cellValidator(index) ? RESULT.CORRECT : RESULT.INCORRECT;
+    else result += RESULT.EMPTY;
+
+    return result;
+  },
+
+  printResult(bridge) {
+    Console.print(MESSAGE.RESULT);
+    this.printMap(bridge);
+    Console.print(`${MESSAGE.SUCCESS_RESULT} ${bridge.isSuccess() ? RESULT.SUCCESS : RESULT.FAIL}`);
+    Console.print(`${MESSAGE.TOTAL_ATTEMPTS} ${bridge.attempt}`);
+  },
+
+  printError(e) {
+    Console.print(e);
+  },
 };
 
 module.exports = OutputView;

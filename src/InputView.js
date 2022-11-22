@@ -1,21 +1,57 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { Console } = require('@woowacourse/mission-utils');
+const BridgeGame = require('./bridge/BridgeGame.js');
+const OutputView = require('./OutputView.js');
+const { MESSAGE, RESTART } = require('./constants/constant.js');
+const Validator = require('./bridge/Validator.js');
+
+const bridge = new BridgeGame();
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  readBridgeSize() {
+    Console.readLine(`\n${MESSAGE.BRIDGE_LEN}\n`, answer => {
+      try {
+        Validator.validateBridge(+answer);
+        bridge.setBridge(answer);
+        Console.print('');
+        this.readMoving();
+      } catch (e) {
+        OutputView.printError(e);
+        this.readBridgeSize();
+      }
+    });
+  },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(`${MESSAGE.CHOOSE_CELL}\n`, answer => {
+      try {
+        Validator.validateDirect(answer);
+        bridge.move(answer);
+        OutputView.printMap(bridge);
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+        if (bridge.detectWinner()) OutputView.printResult(bridge);
+        else if (bridge.isPlaying) this.readMoving();
+        else this.readGameCommand();
+      } catch (e) {
+        OutputView.printError(e);
+        this.readMoving();
+      }
+    });
+  },
+
+  readGameCommand() {
+    Console.readLine(`${MESSAGE.CHOOSE_RESTART}\n`, answer => {
+      try {
+        Validator.validateReInput(answer);
+        if (answer === RESTART.RESTART) {
+          bridge.retry();
+          this.readMoving();
+        } else OutputView.printResult(bridge);
+      } catch (e) {
+        OutputView.printError(e);
+        this.readGameCommand();
+      }
+    });
+  },
 };
 
 module.exports = InputView;
