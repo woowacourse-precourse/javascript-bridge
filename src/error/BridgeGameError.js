@@ -3,6 +3,7 @@ class BridgeGameError extends Error {
 
   name = 'BridgeGameError';
 
+  /** @param {string} message */
   constructor(message) {
     super(`${BridgeGameError.PREFIX} ${message}`);
   }

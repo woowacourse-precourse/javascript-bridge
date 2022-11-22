@@ -1,9 +1,9 @@
 const BridgeGame = require('./BridgeGame');
-const Validation = require('./Validation');
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
+const Validation = require('./Validations');
+const BridgeGameError = require('./error/BridgeGameError');
+const InputView = require('./views/InputView');
+const OutputView = require('./views/OutputView');
 const GameMessage = require('./constants/GameMessage');
-const BridgeGameError = require('./BridgeGameError');
 
 class App {
   /** @type {BridgeGame} */

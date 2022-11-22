@@ -1,6 +1,6 @@
-const BridgeGameError = require('../src/BridgeGameError');
+const BridgeGameError = require('../src/error/BridgeGameError');
 const ErrorMessages = require('../src/constants/ErrorMessages');
-const Validation = require('../src/Validation');
+const Validation = require('../src/Validations');
 
 describe('다리 길이 입력 테스트', () => {
   test('다리 길이가 숫자가 아닌 경우 예외처리한다.', () => {

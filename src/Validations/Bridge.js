@@ -1,4 +1,4 @@
-const BridgeGameError = require('../BridgeGameError');
+const BridgeGameError = require('../error/BridgeGameError');
 const ErrorMessages = require('../constants/ErrorMessages');
 
 /**

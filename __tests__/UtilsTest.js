@@ -1,4 +1,4 @@
-const createMaps = require('../src/util/createMaps');
+const createMaps = require('../src/utils/createMaps');
 
 describe('지도 생성 테스트', () => {
   test('원하는 결과의 지도를 생성한다.', () => {

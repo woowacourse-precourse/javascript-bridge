@@ -1,4 +1,4 @@
-const BridgeGameError = require('../src/BridgeGameError');
+const BridgeGameError = require('../src/error/BridgeGameError');
 
 describe('BridgeGameError test', () => {
   test('원하는 메시지를 포함한 custom error객체가 생성된다.', () => {

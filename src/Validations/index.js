@@ -1,9 +1,9 @@
 const Bridge = require('./Bridge');
 const Game = require('./Game');
 
-const Validation = {
+const Validations = {
   Bridge,
   Game,
 };
 
-module.exports = Validation;
+module.exports = Validations;
