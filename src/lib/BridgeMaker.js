@@ -15,7 +15,7 @@ const BridgeMaker = {
   },
 
   getUpOrDown(number) {
-    return number === 0 ? 'D' : 'U';
+    return Number(number) === 0 ? 'D' : 'U';
   },
 };
 
