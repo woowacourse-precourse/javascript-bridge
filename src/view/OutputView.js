@@ -44,9 +44,9 @@ const OutputView = {
     const PASS = '1';
     const SUCESS = '성공';
     const FAIL = '실패';
-    const findLastPassFromUp = up[up.length - 2] === PASS;
-    const FindLastPassFromDown = down[down.length - 2] === PASS;
-    return findLastPassFromUp || FindLastPassFromDown ? SUCESS : FAIL;
+    const isLastPassFromUp = up[up.length - 2] === PASS;
+    const isLastPassFromDown = down[down.length - 2] === PASS;
+    return isLastPassFromUp || isLastPassFromDown ? SUCESS : FAIL;
   },
 };
 
