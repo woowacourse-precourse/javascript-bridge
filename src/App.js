@@ -14,6 +14,14 @@ class App {
   #getBridgeSize() {
     InputView.readBridgeSize((bridgeSize) => {
       this.#bridgeGame = new BridgeGame(bridgeSize);
+
+      this.#getPlayerMove();
+    });
+  }
+
+  #getPlayerMove() {
+    InputView.readMoving((move) => {
+      this.#bridgeGame.move(move);
     });
   }
 }
