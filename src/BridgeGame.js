@@ -24,16 +24,31 @@ class BridgeGame {
       Number(size),
       BridgeRandomNumberGenerator.generate
     );
-    Console.print("\n");
+    console.log(this.#bridge);
     this.requestMove();
   }
-  makeTwoBridge() {
-    const highBridge = this.#bridge.map((direction) =>
+  makeTwoBridge(bridge) {
+    const highBridge = bridge.map((direction) =>
       direction === "U" ? "O" : " "
     );
-    const lowBridge = this.#bridge.map((direction) =>
+    const lowBridge = bridge.map((direction) =>
       direction === "D" ? "O" : " "
     );
+    return [highBridge, lowBridge];
+  }
+  makeTwoErrorBridge(bridge) {
+    const highBridge = bridge.map((direction, index) => {
+      if (index === this.#userBridge.length - 1) {
+        return direction === "U" ? "X" : " ";
+      }
+      return direction === "U" ? "O" : " ";
+    });
+    const lowBridge = bridge.map((direction, index) => {
+      if (index === this.#userBridge.length - 1) {
+        return direction === "D" ? "X" : " ";
+      }
+      return direction === "D" ? "O" : " ";
+    });
     return [highBridge, lowBridge];
   }
   changeBridgeOutfit(highBridge, lowBridge) {
@@ -41,11 +56,53 @@ class BridgeGame {
     const lowBridgeOutfit = `[ ${lowBridge.join(" | ")} ]`;
     return [highBridgeOutfit, lowBridgeOutfit];
   }
+  mapBridge(bridge) {
+    const [highBridge, lowBridge] = this.makeTwoBridge(bridge);
+    return this.changeBridgeOutfit(highBridge, lowBridge);
+  }
+  mapErrorBridge(bridge) {
+    const [highBridge, lowBridge] = this.makeTwoErrorBridge(bridge);
+    return this.changeBridgeOutfit(highBridge, lowBridge);
+  }
   requestMove() {
     InputView.readMoving(this.move.bind(this));
   }
-  move(direction) {}
+  move(direction) {
+    if (this.isCorrectDirection(direction)) {
+      this.#userBridge.push(direction);
+      OutputView.printMap(this.mapBridge(this.#userBridge));
+      if (this.#userBridge.length === this.#bridge.length) {
+        OutputView.printMap(this.mapBridge(this.#userBridge));
+        return;
+      }
+      this.requestMove();
+      return;
+    }
+    this.#userBridge.push(direction);
+    this.#numberOfAttempts += 1;
+    console.log(this.#userBridge);
+    OutputView.printMap(this.mapErrorBridge(this.#userBridge));
+    this.requestRetry();
+  }
 
+  isCorrectDirection(direction) {
+    if (direction === this.#bridge[this.#userBridge.length]) {
+      return true;
+    }
+    return false;
+  }
+  requestRetry() {
+    InputView.readGameCommand(this.retryOrQuit.bind(this));
+  }
+  retryOrQuit(command) {
+    if (command === "R") {
+      this.#userBridge = [];
+      this.requestMove();
+    }
+    if (command === "Q") {
+      OutputView.printMap(this.mapErrorBridge(this.#userBridge));
+    }
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
