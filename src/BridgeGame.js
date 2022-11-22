@@ -2,6 +2,7 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const ViewManager = require('./ViewManager');
 const Validator = require('./Validator');
+const RetryCommand = require('./constants/RetryCommand');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -109,7 +110,7 @@ class BridgeGame {
 	handleRetryCommand(command) {
 		const isValid = this.validateRetryCommand(command);
 		if (!isValid) return;
-		if (command === 'R') {
+		if (command === RetryCommand.RETRY) {
 			this.trace = this.trace.slice(0, -1);
 			this.tryCnt += 1;
 			this.move();

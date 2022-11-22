@@ -1,5 +1,6 @@
 const ErrorMessage = require('./constants/ErrorMessage');
 const MoveCommand = require('./constants/MoveCommand');
+const RetryCommand = require('./constants/RetryCommand');
 
 class Validator {
 	static isNumber(value) {
@@ -13,7 +14,8 @@ class Validator {
 			throw new Error(ErrorMessage.NOT_VALID_MOVE);
 	}
 	static isValidCommand(command) {
-		if (!(command === 'R' || command === 'Q')) throw new Error(ErrorMessage.NOT_VALID_COMMAND);
+		if (!(command === RetryCommand.RETRY || command === RetryCommand.QUIT))
+			throw new Error(ErrorMessage.NOT_VALID_COMMAND);
 	}
 }
 
