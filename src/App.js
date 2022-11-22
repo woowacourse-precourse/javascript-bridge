@@ -23,6 +23,8 @@ class App {
   }
 
   #init(parentResolve) {
+    OutputView.printStart();
+
     new SimplePromise()
       .then((resolve) => InputView.readBridgeSize(resolve))
       .then((resolve, bridgeSize) => resolve(() => this.#initBridgeGame(bridgeSize)))
