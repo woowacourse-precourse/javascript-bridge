@@ -33,18 +33,20 @@ class Controller {
     }
   }
 
+  getUpDownTotalPrintList () {
+    return `${this.getPrintList(
+        this.#bridgeGame.getUpList(),
+      )}\n${this.getPrintList(this.#bridgeGame.getDownList())}`;
+  }
+
   moveBrige (controller) {
-    if (
-      this.#bridgeGame.getMoveIndex() !== this.#bridgeGame.getBridge().length
-    ) {
+    if (this.getMoveIndex() !== this.getBridge().length) {
       inputView.readMoving(this.handleMoveBridge.bind(this));
     } else {
       outputView.printResult(
         true,
-        `${this.getPrintList(
-          this.#bridgeGame.getUpList(),
-        )}\n${this.getPrintList(this.#bridgeGame.getDownList())}`,
-        this.#bridgeGame.getTryCount(),
+        this.getUpDownTotalPrintList(),
+        this.getTryCount(),
       );
     }
   }
@@ -53,9 +55,7 @@ class Controller {
     this.#bridgeGame.move(string);
     this.setMapArray(this.sameBridge(this.#bridgeGame.getMoveIndex()), string);
     outputView.printMap(
-      `${this.getPrintList(this.#bridgeGame.getUpList())}\n${this.getPrintList(
-        this.#bridgeGame.getDownList(),
-      )}`,
+      this.getUpDownTotalPrintList(),
     );
   }
 
