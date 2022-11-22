@@ -43,7 +43,7 @@ const expectLogContains = (received, logs) => {
   });
 };
 
-describe("방향 단위 입력 테스트", () => {
+describe("입력에 따른 방향 예외 테스트", () => {
   test.each([[["1"]], [[""]], [["P"]], [["AU"]]])("입력문자가 비정상일 때 체크", (input) =>
     runException(input)
   );
