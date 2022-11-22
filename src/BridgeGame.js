@@ -1,6 +1,5 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+const { MARK } = require('./Constants');
+
 class BridgeGame {
   #bridge;
   #movings = [];
@@ -21,13 +20,13 @@ class BridgeGame {
   };
 
   getMoveResult() {
-    const moveUp = Array.from({length: this.#movings.length}, () => ' ');
-    const moveDown = Array.from({length: this.#movings.length}, () => ' ');
+    const moveUp = Array.from({length: this.#movings.length}, () => MARK.BLANK);
+    const moveDown = Array.from({length: this.#movings.length}, () => MARK.BLANK);
     this.#movings.forEach((moving, idx) => {
-      if (moving === 'U' && moving === this.#bridge[idx]) moveUp[idx] = 'O';
-      if (moving === 'U' && moving !== this.#bridge[idx]) moveUp[idx] = 'X';
-      if (moving === 'D' && moving === this.#bridge[idx]) moveDown[idx] = 'O';
-      if (moving === 'D' && moving !== this.#bridge[idx]) moveDown[idx] = 'X';
+      if (moving === 'U' && moving === this.#bridge[idx]) moveUp[idx] = MARK.SUCCESS;
+      if (moving === 'U' && moving !== this.#bridge[idx]) moveUp[idx] = MARK.FAIL;
+      if (moving === 'D' && moving === this.#bridge[idx]) moveDown[idx] = MARK.SUCCESS;
+      if (moving === 'D' && moving !== this.#bridge[idx]) moveDown[idx] = MARK.FAIL;
     })
     return { moveUp, moveDown };
   }

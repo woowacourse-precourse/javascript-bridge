@@ -14,16 +14,16 @@ const OutputView = {
     const moveUp = movings.moveUp;
     const moveDown = movings.moveDown;
     
-    Console.print(`[ ${moveUp.join(' | ')} ]`);
-    Console.print(`[ ${moveDown.join(' | ')} ]`);
+    Console.print(MESSAGE_PROCESS.BRIDGE_STATE(moveUp));
+    Console.print(MESSAGE_PROCESS.BRIDGE_STATE(moveDown));
   },
 
   printResult(gameResult) {
     Console.print(MESSAGE_PROCESS.GAME_QUIT);
-    Console.print(`[ ${gameResult.moveUp.join(' | ')} ]`);
-    Console.print(`[ ${gameResult.moveDown.join(' | ')} ]`);
-    Console.print(`\n게임 성공 여부: ${gameResult.isSuccess? '성공': '실패'}`);
-    Console.print(`총 시도한 횟수: ${gameResult.tryCount}`);
+    Console.print(MESSAGE_PROCESS.BRIDGE_STATE(gameResult.moveUp));
+    Console.print(MESSAGE_PROCESS.BRIDGE_STATE(gameResult.moveDown));
+    Console.print(MESSAGE_PROCESS.GAME_RESULT(gameResult.isSuccess));
+    Console.print(MESSAGE_PROCESS.TRY_COUNT(gameResult.tryCount));
     Console.close();
   },
 };
