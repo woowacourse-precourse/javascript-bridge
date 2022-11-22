@@ -10,12 +10,7 @@ class App {
   play() {
     OutputView.printStart();
     const bridgeGame = new BridgeGame();
-    try {
-      InputView.readBridgeSize(bridgeGame);
-    } catch (error) {
-      OutputView.printError(error);
-      InputView.readBridgeSize(bridgeGame);
-    }
+    InputView.readBridgeSize(bridgeGame);
   }
 }
 
