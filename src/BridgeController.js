@@ -1,5 +1,6 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const Validate = require('./Validate');
 
 class bridgeController {
   constructor() {}
@@ -7,10 +8,11 @@ class bridgeController {
   run() {
     OutputView.printInit();
     this.inputSize();
+    InputView.readBridgeSize(this.inputSize.bind(this));
   }
 
-  inputSize() {
-    InputView.readBridgeSize();
+  inputSize(input) {
+    Validate.isNumber(input);
   }
 }
 
