@@ -28,6 +28,10 @@ class App {
   }
   gameOver() {
     let gameCommand = InputView.readGameCommand();
+    if (gameCommand === "Q") {
+      OutputView.printResult(this.#bridgeGame.getCurrentMap(-1), "실패", this.#bridgeGame.getNumberOfTry());
+      return;
+    }
   }
 }
 
