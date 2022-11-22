@@ -69,7 +69,7 @@ describe("다리 건너기 테스트", () => {
 
     const app = new App();
     app.play();
-
+    
     const log = getOutput(logSpy);
     expectLogContains(log, [
       "최종 게임 결과",
