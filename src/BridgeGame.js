@@ -10,38 +10,39 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moveInput, madeBridge, moveArray) {
-    let count = moveArray[0].length;
+    const count = moveArray[0].length;
     if (moveInput === 'U') {
-      this.upPush(moveInput, madeBridge[count], moveArray);
+      moveArray = this.checkUp(moveInput, madeBridge[count], moveArray);
     }
     if (moveInput === 'D') {
-      this.downPush(moveInput, madeBridge[count], moveArray);
+      moveArray = this.checkDown(moveInput, madeBridge[count], moveArray)
     }
-
-    OutputView.printMap(moveArray);
+    
     return moveArray;
   }
 
-  upPush(moveInput, madeBridge, moveArray) {
+  checkUp(moveInput, madeBridge, moveArray) {
     if (moveInput === madeBridge) {
       moveArray[0].push('O');
       moveArray[1].push(' ');
-      return;
+    } else {
+      moveArray[0].push('X');
+      moveArray[1].push(' ');
     }
 
-    moveArray[0].push('X');
-    moveArray[1].push(' ');
+    return moveArray;
   }
 
-  downPush(moveInput, madeBridge, moveArray) {
+  checkDown(moveInput, madeBridge, moveArray) {
     if (moveInput === madeBridge) {
       moveArray[0].push(' ');
       moveArray[1].push('O');
-      return;
+    } else {
+      moveArray[0].push(' ');
+      moveArray[1].push('X');
     }
 
-    moveArray[0].push(' ');
-    moveArray[1].push('X');
+    return moveArray;
   }
 
   /**
@@ -49,10 +50,10 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(userDecision) {
-    if (userDecision === 'Q') return false;
+  retry(bridgeArray) {
+    bridgeArray = [[], []];
 
-    return true;
+    return bridgeArray;
   }
 }
 

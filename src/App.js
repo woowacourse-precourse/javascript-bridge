@@ -1,9 +1,10 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const { BRIDGE_START } = require('./constant/outputMessage');
 const InputView = require('./InputView');
-const OutputView = require('./OutputView');
 
 class App {
   play() {
-    OutputView.printStart();
+    MissionUtils.Console.print(BRIDGE_START);
     InputView.readBridgeSize();
   }
 }

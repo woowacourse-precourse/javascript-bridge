@@ -22,15 +22,10 @@ const OutputView = {
    */
   printResult(message, count, bridgeArray) {
     MissionUtils.Console.print(RESULT_MESSAGE);
-    MissionUtils.Console.print(`[${bridgeArray[0].join(' | ')}]`);
-    MissionUtils.Console.print(`[${bridgeArray[1].join(' | ')}]`);
+    this.printMap(bridgeArray);
     MissionUtils.Console.print(GAME_RESULT(message));
     MissionUtils.Console.print(TOTAL_ATTEMPT(count));
     MissionUtils.Console.close();
-  },
-
-  printStart() {
-    MissionUtils.Console.print(BRIDGE_START);
   },
 };
 
