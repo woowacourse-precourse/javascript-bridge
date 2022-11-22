@@ -8,7 +8,11 @@ const OutputView = require("../View/OutputView");
 const { RESULT } = require("../utils/constants");
 
 class Controller {
-  constructor() {}
+  #BridgeGame;
+
+  constructor() {
+    this.#BridgeGame = new BridgeGame();
+  }
 
   gameStart() {
     OutputView.printStart();
@@ -26,7 +30,7 @@ class Controller {
   }
 
   orderMake(size) {
-    BridgeGame.create(size);
+    this.#BridgeGame.create(size);
     this.orderInputMoving();
   }
 
@@ -41,7 +45,7 @@ class Controller {
   }
 
   orderMoving(moving) {
-    const [currentMap, isSafe, isEnd] = BridgeGame.move(moving);
+    const [currentMap, isSafe, isEnd] = this.#BridgeGame.move(moving);
     this.orderPrint(currentMap);
     if (!isSafe) return this.orderInputCommand();
     if (isEnd) return this.orderGameEnd(RESULT.SUCCESS);
@@ -63,12 +67,12 @@ class Controller {
   }
 
   orderProcessCommand(command) {
-    if (BridgeGame.retry(command)) return this.orderInputMoving();
+    if (this.#BridgeGame.retry(command)) return this.orderInputMoving();
     return this.orderGameEnd(RESULT.FAIL);
   }
 
   orderGameEnd(isSuccess) {
-    const [nowMap, attemptCnt] = BridgeGame.getGameInfo();
+    const [nowMap, attemptCnt] = this.#BridgeGame.getGameInfo();
     OutputView.printResult(nowMap, attemptCnt, isSuccess);
   }
 }

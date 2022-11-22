@@ -4,43 +4,59 @@ const CheckModel = require("./CheckModel");
 const { SPACE, COMMAND, ORDER, MARK } = require("../utils/constants");
 
 class BridgeGame {
+  #production;
+
+  #checkModel;
+
+  #bridge;
+
+  #attemptCnt;
+
+  #movingProcess;
+
+  #currentMap;
+
   constructor() {
-    this.bridge = [];
-    this.movingProcess = [];
-    this.currentMap = [];
+    this.#production = new ProductionModel();
+    this.#checkModel = new CheckModel();
+    this.#attemptCnt = 1;
+    this.#bridge = [];
+    this.#movingProcess = [];
+    this.#currentMap = [];
   }
 
-  static create(size) {
-    this.bridge = ProductionModel.makeBridge(size);
-    this.attemptCnt = 1;
+  create(size) {
+    this.#bridge = this.#production.makeBridge(+size);
   }
 
-  static move(moving) {
-    if (this.movingProcess === undefined) this.movingProcess = [];
-    this.movingProcess.push(moving);
-    this.currentMap = ProductionModel.makeMap([[], []], this.movingProcess);
-    const [isSafe, isEnd] = CheckModel.check(this.bridge, this.movingProcess);
+  move(moving) {
+    this.#movingProcess.push(moving);
+    this.#currentMap = this.#production.makeMap([[], []], this.#movingProcess);
+    const [isSafe, isEnd] = this.#checkModel.check(
+      this.#bridge,
+      this.#movingProcess
+    );
     if (!isSafe) this.markTrap();
-    return [this.currentMap, isSafe, isEnd];
+    return [this.#currentMap, isSafe, isEnd];
   }
 
-  static markTrap() {
-    const nowStep = CheckModel.checkNowStep();
-    const currentSpace = this.movingProcess.pop();
-    this.currentMap[SPACE[currentSpace]][nowStep] = MARK.TRAP;
+  markTrap() {
+    const nowStep = this.#checkModel.checkNowStep();
+    const currentSpace = this.#movingProcess.pop();
+    this.#currentMap[SPACE[currentSpace]][nowStep] = MARK.TRAP;
   }
 
-  static retry(command) {
+  retry(command) {
     if (command === COMMAND.RETRY) {
-      this.movingProcess = [];
-      this.attemptCnt += 1;
+      this.#movingProcess = [];
+      this.#attemptCnt += 1;
       return ORDER.RETRY;
     }
     return ORDER.QUIT;
   }
 
-  static getGameInfo() {
-    return [this.currentMap, this.attemptCnt];
+  getGameInfo() {
+    return [this.#currentMap, this.#attemptCnt];
   }
 }
 
