@@ -14,6 +14,7 @@ const Game = new BridgeGame();
  */
 const InputView = {
   gameRound: 0,
+  bridge: [],
   /**
    * 다리의 길이를 입력받는다.
    */
@@ -41,14 +42,11 @@ const InputView = {
   },
 
   successMoving(result) {
-    this.gameRound++;
     if (result === 'movingUp'){
       OutputView.printMap('O', ' ');
-      this.readMoving();
     }
     if (result === 'movingDown'){
-      OutputView.printMap(' ', 'O')
-      this.readMoving();
+      OutputView.printMap(' ', 'O');
     }
   },
 
@@ -70,9 +68,11 @@ const InputView = {
     Console.readLine(userInputMessage.ENTER_MOVE_DIRECTION, (movingDirection) => {
       try {
         this.validateMovingDirection(movingDirection);
-        let result = Game.move(this.bridge, movingDirection, this.gameRound);
+        const result = Game.move(this.bridge, movingDirection, this.gameRound);
         this.checkMovingResult(result);
-        this.gameRound === this.bridge.length ? console.log('END') : console.log('PLAY');
+        if (result != "movingDownFailed" && result != "movingUpFailed") this.gameRound ++;
+        this.processEnd();
+        if (!this.end) this.readMoving();
       } catch (e) {
         Console.print(e);
         this.readMoving();
@@ -80,9 +80,25 @@ const InputView = {
     });
   },
 
+  processEnd() {
+    if (this.gameRound >= this.bridge.length) {
+      Console.close();
+      OutputView.printResult();
+      this.end = true;
+    }
+  },
+
   validateMovingDirection(movingDirection) {
     if (movingDirection !== 'U' && movingDirection !== 'D')
       throw new Error(errorMessage.MOVE_DIRECTION);
+  },
+
+  checkRetry(restartOrEnd) {
+    if (restartOrEnd === true) {
+      this.readMoving();
+      OutputView.retryMap();
+    }
+    if (restartOrEnd === false) Console.close();
   },
 
   /**
@@ -92,7 +108,7 @@ const InputView = {
     Console.readLine(userInputMessage.ENTER_RESTART, (restartOrEnd) => {
       try {
         this.validateGameCommand(restartOrEnd);
-        Console.print(restartOrEnd);
+        this.checkRetry(Game.retry(restartOrEnd));
       } catch (e) {
         Console.print(e);
         this.readGameCommand();
