@@ -1,5 +1,4 @@
 const { Console } = require("@woowacourse/mission-utils");
-const InputView = require("./InputView");
 
 const InputCheck = {
   checkBridgeSize(inputBridgeSize) {
