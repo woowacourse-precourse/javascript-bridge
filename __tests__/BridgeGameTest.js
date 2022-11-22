@@ -1,4 +1,4 @@
-const BridgeGame = require("../src/BridgeGame");
+const BridgeGame = require("../src/Model/BridgeGame");
 
 describe(`유저 이동 결과 판단 및 결과를 배열에 저장 테스트`, () => {
   test(`"U"을 입력했을 때 유저가 다리 건너기에 <실패>하면 이중 배열에 그 결과값을 저장한다.`, () => {

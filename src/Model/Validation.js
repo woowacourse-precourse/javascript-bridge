@@ -1,4 +1,4 @@
-const { ERROR } = require("./data/Constants");
+const { ERROR } = require("../data/Constants");
 
 const Validation = {
   checkBridgeLength(userInput) {

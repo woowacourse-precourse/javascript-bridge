@@ -1,4 +1,4 @@
-const BridgeController = require("./BridgeController");
+const BridgeController = require("../src/Controller/BridgeController");
 
 const bridgeController = new BridgeController();
 
