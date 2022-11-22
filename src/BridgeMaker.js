@@ -11,7 +11,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size }, () =>
-      Number(generateRandomNumber()) ? MOVEMENT_KEY.UP : MOVEMENT_KEY.DOUN
+      generateRandomNumber() ? MOVEMENT_KEY.UP : MOVEMENT_KEY.DOUN
     );
   },
 };
