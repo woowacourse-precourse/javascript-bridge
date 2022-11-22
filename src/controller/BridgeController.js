@@ -5,6 +5,8 @@ const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 const Validate = require('../utils/Validate');
 const { Console } = require('@woowacourse/mission-utils');
+const { CROSSING_RESULT, COMMAND } = require('../utils/constants');
+const { CROSSING_RESULT_MESSAGE } = require('../utils/message');
 
 class BridgeController {
   #bridgeGame;
@@ -75,11 +77,14 @@ class BridgeController {
   }
 
   controlNextStep(drawBridge) {
-    if (drawBridge.upBridge.includes('X') || drawBridge.downBridge.includes('X')) {
+    if (
+      drawBridge.upBridge.includes(CROSSING_RESULT.fail) ||
+      drawBridge.downBridge.includes(CROSSING_RESULT.fail)
+    ) {
       return this.requestGameCommand();
     }
 
-    if (this.#bridgeGame.isSuccess()) return this.controlFinish('성공');
+    if (this.#bridgeGame.isSuccess()) return this.controlFinish(CROSSING_RESULT_MESSAGE.success);
 
     return this.requestBridgeMovemoment();
   }
@@ -93,8 +98,8 @@ class BridgeController {
       return this.requestGameCommand();
     }
 
-    if (input === 'R') return this.#bridgeGame.retry() || this.requestBridgeMovemoment();
-    return this.controlFinish('실패');
+    if (input === COMMAND.retry) return this.#bridgeGame.retry() || this.requestBridgeMovemoment();
+    return this.controlFinish(CROSSING_RESULT_MESSAGE.fail);
   }
 
   controlFinish(result) {

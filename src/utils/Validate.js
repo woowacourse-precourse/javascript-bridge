@@ -1,19 +1,26 @@
+const { DIRECTION, COMMAND, SIZE_RANGE } = require('./constants');
+const { ERROR_MESSAGE } = require('./message');
+
 const Validate = {
   validateSizeRange(size) {
-    if (size < 3 || size > 20 || !new RegExp('^[0-9]+$').test(size)) {
-      throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+    if (
+      size < SIZE_RANGE.minimum ||
+      size > SIZE_RANGE.maximum ||
+      !new RegExp('^[0-9]+$').test(size)
+    ) {
+      throw new Error(ERROR_MESSAGE.sizeRange);
     }
   },
 
-  validateMovePosition(movePosition) {
-    if (movePosition !== 'U' && movePosition !== 'D') {
-      throw new Error('[ERROR] 이동할 칸은 위 : U 또는 아래 : D인 문자로 입력해주세요.');
+  validateMovePosition(moveDirection) {
+    if (moveDirection !== DIRECTION.up && moveDirection !== DIRECTION.down) {
+      throw new Error(ERROR_MESSAGE.moveDirection);
     }
   },
 
   validateRetryOfQuit(input) {
-    if (input !== 'R' && input !== 'Q') {
-      throw new Error('[ERROR] 재시도는 R, 종료는 Q인 문자로 입력해주세요.');
+    if (input !== COMMAND.retry && input !== COMMAND.quit) {
+      throw new Error(ERROR_MESSAGE.retryOrQuitCommand);
     }
   },
 };
