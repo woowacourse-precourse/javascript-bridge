@@ -34,8 +34,7 @@ const InputView = {
     MissionUtils.Console.readLine(MESSAGE.ENTER_COMMAND, (command) => {
       bridgeGameController.restartOrEnd(bridgeGame, command);
 
-      if (command === RESTART.YES)
-        InputView.readMoving(bridgeGame);
+      if (command === RESTART.YES) InputView.readMoving(bridgeGame);
     });
   },
 };
