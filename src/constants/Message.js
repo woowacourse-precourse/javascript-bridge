@@ -22,7 +22,42 @@ const INPUT_MESSAGE = {
     PUT_RETRY_OR_NOT,
 }
 
+const IS_EMPTY = '[ERROR] 값을 입력해주세요.';
+const IS_NUMBER = '[ERROR] 숫자를 입력해주세요.';
+const NUMBER_NET = '[ERROR] 3과 20사이의 값을 입력해주세요.';
+
+const BRIDGE_LENGTH = {
+    IS_EMPTY,
+    IS_NUMBER,
+    NUMBER_NET,
+}
+
+
+const NEXT_STEP_LOWER_CASE = '\n[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.';
+const NEXT_STEP_VALUE = '\n[ERROR] U 또는 D를 입력해주세요.';
+
+const NEXT_STEP = {
+    NEXT_STEP_LOWER_CASE,
+    NEXT_STEP_VALUE,
+}
+
+const RETRY_LOWER_CASE = '\n[ERROR] 소문자로 입력하셨습니다. 대문자로 입력해주세요.';
+const RETRY_OR_NOT_VALUE = '\n[ERROR] R 또는 Q를 입력해주세요.';
+
+const RETRY = {
+    RETRY_LOWER_CASE,
+    RETRY_OR_NOT_VALUE,
+}
+
+const IS_NUMBER_EMPTY = '\n[ERROR] 값을 입력해주세요.';
+const ONE_VALUE = '\n[ERROR] 1개의 값을 입력해주세요.';
+
 module.exports = {
     OUTPUT_MESSAGE,
     INPUT_MESSAGE,
+    BRIDGE_LENGTH,
+    NEXT_STEP,
+    RETRY,
+    IS_NUMBER_EMPTY,
+    ONE_VALUE,
 }
