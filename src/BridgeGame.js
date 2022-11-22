@@ -12,6 +12,7 @@ class BridgeGame {
 
   makeBridge(size) {
     this.#bridge = BridgeMaker.makeBridge(size, randomNumber);
+    console.log(this.#bridge)
   }
 
   moveCompare(move) {
@@ -70,7 +71,16 @@ class BridgeGame {
     };
   }
 
-  retry() {
+  retry(callback) {
+    if (callback === MESSAGE.RETRY_KEY) {
+      this.resetBridge()
+      return true
+    }
+    
+    if (callback === MESSAGE.QUIT_KEY) return false
+  }
+
+  resetBridge() {
     this.#collectInputResult.bridgeMap[0].pop()
     this.#collectInputResult.bridgeMap[1].pop()
     this.#collectInputResult.moveIndex -= 1
