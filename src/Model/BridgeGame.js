@@ -11,6 +11,12 @@ class BridgeGame {
     this.moving.push(input);
   }
 
+  getMap() {
+    const upMap = this.getFloorMap('U');
+    const downMap = this.getFloorMap('D');
+    return {upMap, downMap};
+  }
+
 }
 
 module.exports = BridgeGame;
