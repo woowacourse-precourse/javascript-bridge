@@ -48,13 +48,25 @@ class BridgeGame {
 
   changeBridgeState(userInput, result) {
     if (userInput === BRIDGE.UP) {
-      this.#bridgeState[BRIDGE.UP].push(result);
-      this.#bridgeState[BRIDGE.DOWN].push(BRIDGE.SPACE);
+      this.#bridgeState[BRIDGE.UP_INDEX].push(result);
+      this.#bridgeState[BRIDGE.DOWN_INDEX].push(BRIDGE.SPACE);
     }
     if (userInput === BRIDGE.DOWN) {
-      this.#bridgeState[BRIDGE.DOWN].push(result);
-      this.#bridgeState[BRIDGE.UP].push(BRIDGE.SPACE);
+      this.#bridgeState[BRIDGE.DOWN_INDEX].push(result);
+      this.#bridgeState[BRIDGE.UP_INDEX].push(BRIDGE.SPACE);
     }
+  }
+
+  getBridgeState() {
+    return this.#bridgeState;
+  }
+
+  getGameState() {
+    return {
+      isFail: this.#isFail,
+      isSuccess: this.#isSuccess,
+      trial: this.#trial,
+    };
   }
 
   try() {
@@ -69,9 +81,6 @@ class BridgeGame {
     this.#isSuccess = true;
   }
 
-  getGameState() {
-    return { isFail: this.#isFail, isSuccess: this.#isSuccess };
-  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -87,7 +96,7 @@ class BridgeGame {
       this.fail();
     }
     this.#currentLocation += 1;
-    if (this.#currentLocation === this.#bridgeLength - 1 && !this.#isFail) {
+    if (this.#currentLocation === this.#bridgeLength && !this.#isFail) {
       this.success();
     }
   }
