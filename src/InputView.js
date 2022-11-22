@@ -1,12 +1,18 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { VALID_CHAR } = require("./constants");
 const ErrorChecker = require("./ErrorChecker");
+const OutputView = require("./OutputView");
 
 const InputView = {
   readBridgeSize(bridgeGame) {
     Console.readLine("다리의 길이를 입력해주세요.\n", (bridgeSize) => {
       Console.print("");
-      ErrorChecker.checkBridgeSizeValidation(bridgeSize);
+      try {
+        ErrorChecker.checkBridgeSizeValidation(bridgeSize);
+      } catch (error) {
+        OutputView.printError(error.message);
+        this.readBridgeSize(bridgeGame);
+      }
       bridgeGame.init(bridgeSize);
       this.readMoving(bridgeGame);
     });
