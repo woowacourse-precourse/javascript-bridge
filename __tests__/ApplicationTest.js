@@ -35,7 +35,7 @@ const runException = (inputs) => {
 
   app.play();
 
-  expectLogContains(getOutput(logSpy), ["[ERROR]"]);
+  expectLogContains(getOutput(logSpy), ["[ERROR] The string can not be accepted"]);
 };
 
 const expectLogContains = (received, logs) => {
