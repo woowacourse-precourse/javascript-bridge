@@ -22,6 +22,26 @@ class App {
     this.compareInputScore(bridgeSize,bridgeBase);
   }
 
+  compareInputScore(bridgeSize,bridgeBase) {
+    let count=0;
+    for(let index=0; index<bridgeSize; index++){
+      count++;
+      if(this.checkRightPlace(bridgeBase[index])) {
+        this.successPlace(bridgeBase[index],count)}
+      else {
+        return this.failPlace(bridgeBase[index]);
+      }
+    }
+    this.checkRestart();
+  }
+
+  checkRightPlace(bridge){
+    const bg=new BridgeGame();
+    if(bg.move(bridge,readMoving())){
+      return true;
+    }
+  }
+
 }
 
 module.exports = App;
