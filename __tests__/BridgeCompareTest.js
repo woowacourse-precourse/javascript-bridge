@@ -1,4 +1,4 @@
-const BridgeGame = require('../src/BridgeGame');
+const BridgeGame = require('../src/model/domainmodel/BridgeGame');
 const BridgeMessage = require('../src/MESSAGES/BridgeMessage');
 
 const bridgegame = new BridgeGame();
@@ -20,5 +20,5 @@ test('사용자가 입력한 칸과 이용가능한 다리에 따른 출력 형�
   );
   expect(() => {
     bridgegame.moveCaseAction('D', 'U');
-  }).toThrow();
+  }).toThrow(BridgeMessage.DOWNUP_MESSAGE);
 });
