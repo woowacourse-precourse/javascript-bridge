@@ -21,7 +21,7 @@ class BridgeGameController {
   }
 
   utilizeBridgeLength(length) {
-    this.tryCatch(Validate.bridgeSizeValidate, length);
+    this.handleException(Validate.validateBridgeSize, length);
     this.bridgeGame.setBridgeLength(length);
     const bridge = BridgeMaker.makeBridge(length, this.random);
     this.bridgeGame.setBridge(bridge);
@@ -32,7 +32,7 @@ class BridgeGameController {
     return this.inputBridgeSize();
   }
 
-  tryCatch(validate, value) {
+  handleException(validate, value) {
     try {
       validate(value);
     } catch (e) {
@@ -42,7 +42,7 @@ class BridgeGameController {
 
   inputMoving = () => {
     InputView.readMoving((word) => {
-      this.tryCatch(Validate.movingValidate, word);
+      this.handleException(Validate.validateMoving, word);
 
       if (word === Constant.UPPER_ALPHABET || word === Constant.LOWER_ALPHABET) {
         return this.move(word);
@@ -71,7 +71,7 @@ class BridgeGameController {
 
   selectEndInput() {
     InputView.readGameCommand((word) => {
-      this.tryCatch(Validate.selectEndInputValidate, word);
+      this.handleException(Validate.validateSelectEndInput, word);
 
       if (word === Constant.RESTART_ALPHABET || word === Constant.END_ALPHABET) {
         return this.selectEnd(word);
