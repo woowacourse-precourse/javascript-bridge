@@ -13,8 +13,13 @@ const BridgeMaker = {
    */
 
   makeBridge(size, generateRandomNumber) {
-    size = Number(size);
-    return Array.from({ length: size }, () => generateRandomNumber()).map(
+    const resolved = Number(size);
+
+    if (resolved < CONFIG.BRIDGE_START || resolved > CONFIG.BRIDGE_END) {
+      return false;
+    }
+
+    return Array.from({ length: resolved }, () => generateRandomNumber()).map(
       (value) => (value === CONFIG.SET_UP ? KEY.BRIDGE_UP : KEY.BRIDGE_DOWN)
     );
   },

@@ -1,13 +1,6 @@
-const InputView = require("./View/InputView");
-const OutputView = require("./View/OutputView");
 const GameController = require("./Controller/GameController");
 
 class App {
-  // play() {
-  //   OutputView.printMessage("start");
-  //   const bridgeSize = InputView.start();
-  // }
-
   constructor() {
     this.controller = new GameController();
   }

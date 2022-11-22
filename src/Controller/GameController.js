@@ -1,5 +1,6 @@
 const InputView = require("../View/InputView");
 const OutputView = require("../View/OutputView");
+const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("../Model/BridgeGame");
 const BridgeMaker = require("../BridgeMaker");
 const {
@@ -10,6 +11,7 @@ const {
 } = require("../Utils/Check");
 const BridgeRandomNumberGenerator = require("../Utils/BridgeRandomNumberGenerator");
 const { KEY } = require("../Constants/Token");
+const { SAYS } = require("../Constants/Message");
 
 class GameController {
   constructor() {
@@ -21,7 +23,7 @@ class GameController {
   }
 
   startGame() {
-    this.view.output.printMessage("start");
+    this.view.output.printMessage(SAYS.START);
     this.createBridge();
   }
 
@@ -33,8 +35,6 @@ class GameController {
         sizeInput,
         BridgeRandomNumberGenerator.generate
       );
-
-      console.log(bridge); //TODO: 구현 후 삭제 //TODO: application test: type console error
 
       this.model.setState({ bridge });
       this.playRound();
@@ -82,7 +82,8 @@ class GameController {
   }
 
   finishGame() {
-    this.view.output.printMessage("finish");
+    this.view.output.printResult(this.model.state);
+    Console.close();
   }
 }
 

@@ -1,4 +1,4 @@
-const { CONFIG, ENTITY, KEY, WORD, RESULT } = require("./Token");
+const { CONFIG, ENTITY, KEY, WORD } = require("./Token");
 
 const SAYS = Object.freeze({
   START: "다리 건너기 게임을 시작합니다." + ENTITY.NEW_LINE,
@@ -17,17 +17,11 @@ const ASKS = Object.freeze({
 });
 
 const ABOUT = Object.freeze({
-  TYPE_NUMBER: `${WORD.ERROR} 입력 타입은 숫자여야 합니다.`,
-  RANGE: `${WORD.ERROR} 입력 숫자 범위는 ${CONFIG.BRIDGE_START} ~ ${CONFIG.BRIDGE_END}이어야 합니다.`,
-  BRIDGE_SIZE: `${WORD.ERROR}  입력한 다리 size와 생성된 다리 길이가 일치하지 않습니다.`,
-  BRIDGE_ELEMENT: `${WORD.ERROR} 다리 요소는 ${KEY.BRIDGE_UP} 혹은 ${KEY.BRIDGE_DOWN} 여야 합니다.`,
-  COMMAND_ELEMENT: `${WORD.ERROR} 선택 요소는 ${KEY.COMMAND_RESTART} 혹은 ${KEY.COMMAND_QUIT} 여야 합니다.`,
+  TYPE_NUMBER: `${ENTITY.NEW_LINE}${WORD.ERROR} 입력 타입은 숫자여야 합니다.${ENTITY.NEW_LINE}`,
+  RANGE: `${ENTITY.NEW_LINE}${WORD.ERROR} 입력 숫자 범위는 ${CONFIG.BRIDGE_START} ~ ${CONFIG.BRIDGE_END}이어야 합니다.${ENTITY.NEW_LINE}`,
+  BRIDGE_SIZE: `${ENTITY.NEW_LINE}${WORD.ERROR}  입력한 다리 size와 생성된 다리 길이가 일치하지 않습니다.${ENTITY.NEW_LINE}`,
+  BRIDGE_ELEMENT: `${ENTITY.NEW_LINE}${WORD.ERROR} 다리 요소는 ${KEY.BRIDGE_UP} 혹은 ${KEY.BRIDGE_DOWN} 여야 합니다.${ENTITY.NEW_LINE}`,
+  COMMAND_ELEMENT: `${ENTITY.NEW_LINE}${WORD.ERROR} 선택 요소는 ${KEY.COMMAND_RESTART} 혹은 ${KEY.COMMAND_QUIT} 여야 합니다.${ENTITY.NEW_LINE}`,
 });
 
-const FINAL = Object.freeze({
-  RESULT: `${RESULT.MAP} ${ENTITY.NEW_LINE}`,
-  TEXT: (result) => `${RESULT.TEXT}: ${result.text} ${ENTITY.NEW_LINE}`,
-  TRIAL: (result) => `${RESULT.TRIAL}: ${result.trial}`,
-});
-
-module.exports = { SAYS, ASKS, ABOUT, FINAL };
+module.exports = { SAYS, ASKS, ABOUT };

@@ -1,6 +1,5 @@
 const { ABOUT } = require("../Constants/Message");
-const { KEY } = require("../Constants/Token");
-// const { Console } = require("@woowacourse/mission-utils");
+const { KEY, CONFIG } = require("../Constants/Token");
 const OutputView = require("../View/OutputView");
 
 const Check = (inputData, validationFunction, retryFunction) => {
@@ -23,23 +22,22 @@ const checkBridgeLength = (string) => {
     throw new Error(ABOUT.TYPE_NUMBER);
   }
 
-  if (resolved < 3 || resolved > 20) {
+  if (resolved < CONFIG.BRIDGE_START || resolved > CONFIG.BRIDGE_END) {
     throw new Error(ABOUT.RANGE);
   }
 };
 
 const checkMoveFormat = (string) => {
-  //separate check & return
-  //TODO: ????????
-  // if (step !== KEY.BRIDGE_UP || step !== KEY.BRIDGE_DOWN) {
-  //   throw new Error(ABOUT.BRIDGE_ELEMENT);
-  // }
-
-  // return step;
-
   const step = string.replace(/\s/g, "").toUpperCase();
 
   if (step !== KEY.BRIDGE_UP && step !== KEY.BRIDGE_DOWN) {
+    throw new Error(ABOUT.BRIDGE_ELEMENT);
+  }
+
+  if (
+    string === KEY.BRIDGE_UP.toLowerCase() ||
+    string === KEY.BRIDGE_DOWN.toLowerCase()
+  ) {
     throw new Error(ABOUT.BRIDGE_ELEMENT);
   }
 
@@ -49,8 +47,15 @@ const checkMoveFormat = (string) => {
 const checkCommandFormat = (string) => {
   const command = string.replace(/\s/g, "").toUpperCase();
 
-  if (command !== KEY.COMMAND_RESTART && command !== KEY.COMMAND_RESTART) {
-    throw new Error(ABOUT.COMMAND_RESTART);
+  if (command !== KEY.COMMAND_RESTART && command !== KEY.COMMAND_QUIT) {
+    throw new Error(ABOUT.COMMAND_ELEMENT);
+  }
+
+  if (
+    string === KEY.COMMAND_RESTART.toLowerCase() ||
+    string === KEY.COMMAND_QUIT.toLowerCase()
+  ) {
+    throw new Error(ABOUT.COMMAND_ELEMENT);
   }
 
   return command;

@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { SAYS, FINAL } = require("../Constants/Message");
+const { RESULT, WORD, GAME_CHAR, ENTITY } = require("../Constants/Token");
 
 /**
  * 객체 : 사용자에게 게임 진행 상황과 결과를 출력하는 역할
@@ -8,29 +8,32 @@ const { SAYS, FINAL } = require("../Constants/Message");
  */
 
 const OutputView = {
-  printMessage(context) {
-    if (context === "start") {
-      Console.print(SAYS.START);
-    }
-    if (context === "finish") {
-      Console.print(SAYS.FINISH);
-      Console.close();
-    }
-    Console.print(context);
+  printMessage(message) {
+    Console.print(message);
   },
 
-  printMap(map) {
-    Console.print(map);
+  printMap(currentMap) {
+    const { up, down } = currentMap;
+    Console.print(
+      `${GAME_CHAR.MAP_START} ${up.join(GAME_CHAR.MAP_DIVIDER)} ${
+        GAME_CHAR.MAP_END
+      }`
+    );
+    Console.print(
+      `${GAME_CHAR.MAP_START} ${down.join(GAME_CHAR.MAP_DIVIDER)} ${
+        GAME_CHAR.MAP_END
+      }`
+    );
   },
 
-  printResult(result) {
-    Console.print(FINAL.RESULT);
-    Console.print(result.upper);
-    Console.print(result.lower);
-    Console.print(FINAL.TEXT(result.text));
-    Console.print(FINAL.TRIAL(result.count));
-    Console.print(SAYS.FINISH);
-    Console.close();
+  printResult(state) {
+    const { trial, isAlive, currentMap } = state;
+
+    Console.print(RESULT.TITLE);
+    this.printMap(currentMap);
+    Console.print(ENTITY.NEW_LINE);
+    Console.print(`${RESULT.TEXT}${isAlive ? WORD.SUCCESS : WORD.FAILURE}`);
+    Console.print(`${RESULT.TRIAL}${trial}`);
   },
 };
 

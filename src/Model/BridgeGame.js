@@ -1,5 +1,4 @@
-const { WORD, SINGLE_MAP } = require("../Constants/Token");
-const Check = require("../Utils/Check");
+const { SINGLE_MAP, WORD } = require("../Constants/Token");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스 -> InputView, OutputView 사용 불가
@@ -28,12 +27,6 @@ class BridgeGame {
     this.#state = { ...this.#state, ...nextState };
   }
 
-  // move(bridge, values, step, result) {
-  //   Check.moveFormat(step);
-  //   values.stepArray.push(step);
-
-  //   this.compare(bridge, values, result);
-  // }
   move(step) {
     const { bridge, currentIndex } = this.state;
     const passed = step === bridge[currentIndex];
@@ -42,7 +35,7 @@ class BridgeGame {
   }
 
   proceed(passed) {
-    const nextIndex = this.state.currentIndex++;
+    const nextIndex = (this.state.currentIndex += 1);
     const nextStatus = passed ? true : false;
 
     this.setState({
@@ -52,7 +45,7 @@ class BridgeGame {
   }
 
   makeBridgeMap(passed, step) {
-    const answer = passed ? "O_PRINT" : "X_PRINT";
+    const answer = passed ? WORD.O_PRINT : WORD.X_PRINT;
     const [newUp, newDown] = SINGLE_MAP[answer][step];
 
     this.setState({
@@ -65,7 +58,7 @@ class BridgeGame {
 
   retry() {
     this.setState({
-      trial: this.state.trial++,
+      trial: (this.state.trial += 1),
       isAlive: true,
       currentIndex: 0,
       currentMap: { up: [], down: [] },

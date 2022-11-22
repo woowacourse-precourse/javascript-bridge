@@ -40,12 +40,14 @@ const WORD = Object.freeze({
   ERROR: "[ERROR]",
   SUCCESS: "성공",
   FAILURE: "실패",
+  O_PRINT: "O_PRINT",
+  X_PRINT: "X_PRINT",
 });
 
 const RESULT = Object.freeze({
-  MAP: "최종 게임 결과",
-  TEXT: "게임 성공 여부:",
-  TRIAL: "총 시도한 횟수:",
+  TITLE: `${ENTITY.NEW_LINE}최종 게임 결과`,
+  TEXT: "게임 성공 여부: ",
+  TRIAL: "총 시도한 횟수: ",
 });
 
 module.exports = { CONFIG, ENTITY, KEY, GAME_CHAR, SINGLE_MAP, WORD, RESULT };
