@@ -31,7 +31,32 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.#step = 0;
+  }
+
+  makeSuccessBridgeLine(select) {
+    return this.#bridge
+      .slice(0, this.#step)
+      .map((bridgeStep) => (bridgeStep === select ? "O" : " "));
+  }
+
+  getSuccessBridge() {
+    const bridge_U = this.makeSuccessBridgeLine("U");
+    const bridge_D = this.makeSuccessBridgeLine("D");
+    return { bridge_U, bridge_D };
+  }
+
+  getFailureBridge({ bridge_U, bridge_D }) {
+    if (this.#bridge[this.#step] === "U") {
+      bridge_U.push(" ");
+      bridge_D.push("X");
+    } else if (this.#bridge[this.#step] === "D") {
+      bridge_U.push("X");
+      bridge_D.push(" ");
+    }
+    return { bridge_U, bridge_D };
+  }
 }
 
 module.exports = BridgeGame;
