@@ -1,9 +1,9 @@
-const { STATUS } = require('./utils/const');
+const { MOVE_STATUS } = require('./utils/const');
 
 const MoveStatusGenerator = {
-  FAILURE: STATUS.FAILURE,
-  SUCCESS: STATUS.SUCCESS,
-  CONTINUE: STATUS.CONTINUE,
+  FAILURE: MOVE_STATUS.FAILURE,
+  SUCCESS: MOVE_STATUS.SUCCESS,
+  CONTINUE: MOVE_STATUS.CONTINUE,
 
   /**
    * @param {boolean} isCorrect

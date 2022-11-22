@@ -1,4 +1,4 @@
-const { BRIDGE_PATH_TYPE, MARKING, MOVING } = require('./utils/const');
+const { PATH_TYPE, MARKING, PATH, UPSIDE } = require('./utils/const');
 const Validator = require('./utils/Validator');
 
 class Path {
@@ -28,7 +28,7 @@ class Path {
    * @param {string} moving
    */
   validate(moving) {
-    Validator.validateEqual(moving, BRIDGE_PATH_TYPE);
+    Validator.validateEqual(moving, PATH_TYPE);
   }
 
   /**
@@ -38,19 +38,19 @@ class Path {
   markOX(isCorrect) {
     const currentPath = this.getCurrentPath();
     const mark = isCorrect ? MARKING.CORRECT : MARKING.WRONG;
-    currentPath === 'U' ? this.markU(mark) : this.markD(mark);
+    currentPath === UPSIDE ? this.markU(mark) : this.markD(mark);
 
     return this.#pathMap;
   }
 
   markU(mark) {
-    this.#pathMap[MOVING.U][this.#path.length - 1] = mark;
-    this.#pathMap[MOVING.D][this.#path.length - 1] = MARKING.BLANK;
+    this.#pathMap[PATH.UPSIDE][this.#path.length - 1] = mark;
+    this.#pathMap[PATH.DOWNSIDE][this.#path.length - 1] = MARKING.BLANK;
   }
 
   markD(mark) {
-    this.#pathMap[MOVING.U][this.#path.length - 1] = MARKING.BLANK;
-    this.#pathMap[MOVING.D][this.#path.length - 1] = mark;
+    this.#pathMap[PATH.UPSIDE][this.#path.length - 1] = MARKING.BLANK;
+    this.#pathMap[PATH.DOWNSIDE][this.#path.length - 1] = mark;
   }
 
   getPathMap() {
