@@ -87,11 +87,11 @@ const InputView = {
   },
 
   setGameCommand(command) {
-    if (command === 'R') {
+    if (command === GAME_COMMAND.RETRY) {
       bridgeGame.retry();
       this.readMoving();
     }
-    if (command === 'Q') OutputView.printResult(bridgeGame.getGameResult());
+    if (command === GAME_COMMAND.QUIT) OutputView.printResult(bridgeGame.getGameResult());
   }
 };
 
