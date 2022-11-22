@@ -9,7 +9,6 @@ const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator.js')
 class BridgeGameController {
   constructor() {
     this.bridgeGame = new BridgeGame();
-    this.bridge = new Bridge();
     this.stepResult = new StepResult();
   }
 
@@ -19,8 +18,8 @@ class BridgeGameController {
   }
 
   createBridgeByUser(bridgeLength) {
-    const bridgeAnswerArray = BridgeMaker.makeBridge(bridgeLength, BridgeRandomNumberGenerator.generate);
-    this.bridge.setAnswerArray(bridgeAnswerArray);
+    const bridgeAnswerArray = BridgeMaker.makeBridge(Number(bridgeLength), BridgeRandomNumberGenerator.generate);
+    this.bridge = new Bridge(bridgeAnswerArray);
     InputView.readMoving(this.moveByUser.bind(this));
   }
 
@@ -36,7 +35,7 @@ class BridgeGameController {
   }
 
   playTurn(move) {
-    const thisTurnAnswer = this.bridge.answerArray[this.bridgeGame.turn];
+    const thisTurnAnswer = this.bridge.isThisTurnAnswer(this.bridgeGame.turn);
     this.bridgeGame.move(thisTurnAnswer, move, this.stepResult);
     const isWrongAnswer = !this.bridgeGame.isThisTurnCorrect(thisTurnAnswer, move);
     OutputView.printMap(this.stepResult);
