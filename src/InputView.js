@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const Messages = require('./Messages');
+const Constants = require('./Constants');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
@@ -38,7 +39,10 @@ const InputView = {
   },
 
   validateBridgeSize(bridgeSize) {
-    if (!(bridgeSize >= 3 && bridgeSize <= 20)) throw new Error(Messages.BRIDGE_SIZE_ERROR);
+    const START = 3;
+    const END = 20;
+
+    if (!(bridgeSize >= START && bridgeSize <= END)) throw new Error(Messages.BRIDGE_SIZE_ERROR);
   },
 
   bridgeMaker(bridgeSize) {
@@ -55,7 +59,9 @@ const InputView = {
   },
 
   validateMoving(upOrDown) {
-    if (upOrDown !== 'U' && upOrDown !== 'D') throw new Error(Messages.MOVING_ERROR);
+    if (upOrDown !== Constants.UP && upOrDown !== Constants.DOWN) {
+      throw new Error(Messages.MOVING_ERROR);
+    }
   },
 
   proceedRound(bridge, round, upOrDown) {
@@ -78,7 +84,7 @@ const InputView = {
   },
 
   validateGameCommand(retryOrQuit) {
-    if (retryOrQuit !== 'R' && retryOrQuit !== 'Q') {
+    if (retryOrQuit !== Constants.RETRY && retryOrQuit !== Constants.QUIT) {
       throw new Error(Messages.GAME_COMMAND_ERROR);
     }
   },
@@ -86,7 +92,7 @@ const InputView = {
   retryOrQuit(bridge, retryOrQuit) {
     const totalTry = this.bridgeGame.countTry();
 
-    if (retryOrQuit === 'R') {
+    if (retryOrQuit === Constants.RETRY) {
       this.bridgeGame.retry();
       this.readMoving(bridge);
     } else OutputView.printResult(totalTry, false, this.bridgeGame.getMap());

@@ -1,3 +1,5 @@
+const Constants = require('./Constants');
+
 class BridgeGame {
   #round;
   #totalTry;
@@ -19,7 +21,9 @@ class BridgeGame {
 
   makeMap(oneBridge, upOrDown) {
     const map = { U: ' ', D: ' ' };
-    oneBridge === upOrDown ? (map[upOrDown] = 'O') : (map[upOrDown] = 'X');
+    if (oneBridge === upOrDown) map[upOrDown] = Constants.CORRECT;
+    else map[upOrDown] = Constants.UN_CORRECT;
+
     this.#up.push(map['U']);
     this.#down.push(map['D']);
 
