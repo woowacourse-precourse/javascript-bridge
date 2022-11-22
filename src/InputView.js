@@ -4,7 +4,6 @@ const BridgeMaker = require('./BridgeMaker')
 const BridgeGame = require('./BridgeGame')
 const Validate = require('./Validate');
 const OutputView = require("./OutputView");
-const { move } = require("./BridgeGame");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -15,6 +14,7 @@ const InputView = {
    */
   readBridgeSize() {
     Console.readLine('다리 길이를 입력해 주세요', (size)=>{
+      // if (isNaN(size)){Console.print('[ERROR]')}
       Validate.validateSize(size)
       const generateRandomNumber = BridgeRandomNumberGenerator.generate
       const BRIDGE = BridgeMaker.makeBridge(size, generateRandomNumber)
@@ -27,9 +27,10 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(BRIDGE, CURRENTBRIDGE, CURRENTLOCATION, TRIALS) {
-    if(BRIDGE.length == CURRENTLOCATION){return OutputView.printResult(CURRENTBRIDGE, TRIALS)}
+    if(BRIDGE.length == CURRENTLOCATION){return OutputView.printResult(CURRENTBRIDGE, CURRENTLOCATION, TRIALS)}
     const SUCCESS = ' O '
     Console.readLine('이동할 칸을 입력해주세요. (위: U, 아래: D)', (moveinput)=>{
+      Validate.validateMoveInput(moveinput)
       const CHECK = BridgeGame.move(BRIDGE, CURRENTLOCATION, moveinput)
       const NEXTBRIDGE = OutputView.printMap(CURRENTBRIDGE, CHECK, moveinput)
       OutputView.printCurrentBridge(NEXTBRIDGE)
@@ -43,6 +44,12 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(BRIDGE, NEXTBRIDGE, CURRENTLOCATION,TRIALS) {
+    Console.readLine('게임을 다시 시도할지 여부를 입력해주세요.', (retryInput)=>{
+      if(retryInput !== 'R' && retryInput !== 'Q') {throw '[ERROR]'}
+      const RETRYCHECK = BridgeGame.retry(retryInput)
+      if (RETRYCHECK == 0) {return this.readMoving(BRIDGE, [[],[]], 0, TRIALS+1)}
+      OutputView.printResult(NEXTBRIDGE, CURRENTLOCATION, TRIALS)
+    })
 
   },
 };

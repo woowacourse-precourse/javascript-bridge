@@ -38,11 +38,16 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(CURRENTBRIDGE, TRIALS) {
-    Console.print('최종 게임 결과')
-    this.printCurrentBridge(CURRENTBRIDGE)
-    Console.print('게임 성공 여부: 성공')
-    Console.print(`총 시도한 횟수: ${TRIALS}`)
+  printResult(CURRENTBRIDGE, CURRENTLOCATION, TRIALS) {
+    let RESULT = '성공'
+    if (CURRENTBRIDGE[0].length !== CURRENTLOCATION){
+      RESULT = '실패'
+    }
+      Console.print('최종 게임 결과')
+      this.printCurrentBridge(CURRENTBRIDGE)
+      Console.print(`게임 성공 여부: ${RESULT}`)
+      Console.print(`총 시도한 횟수: ${TRIALS}`)
+      // Console.close()
   },
 };
 
