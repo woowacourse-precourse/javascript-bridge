@@ -33,3 +33,14 @@ describe('checkValidCommand 테스트', () => {
     });
   });
 });
+
+describe('buildBridge 테스트', () => {
+  test('입력받은 길이만큼 bridge Array가 만들어지는지 확인', () => {
+    const testInput = ['3', '4', '5', '6'];
+    testInput.forEach((element) => {
+      const bridgeGame = new BridgeGame();
+      bridgeGame.buildBridge(element);
+      expect(bridgeGame.getBridgeLength()).toEqual(parseInt(element, 10));
+    });
+  });
+});
