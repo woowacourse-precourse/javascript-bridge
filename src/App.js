@@ -4,9 +4,13 @@ const BridgeGame = require("./BridgeGame");
 
 class App {
   play() {
-    const game = new BridgeGame();
-    OutputView.printStart();
-    InputView.readBridgeSize(game);
+    try {
+      const game = new BridgeGame();
+      OutputView.printStart();
+      InputView.readBridgeSize(game);
+    } catch (e) {
+      OutputView.printError(e);
+    }
   }
 }
 
