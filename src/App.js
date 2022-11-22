@@ -73,15 +73,23 @@ class App {
   nextActionByCommand(action) {
     switch (action) {
       case command.GAME_QUIT:
-        this.game.lose();
-        View.close();
+        this.quit();
         break;
       case command.GAME_RESTART:
-        this.game.retry();
-        InputView.readMoving(this.handleInputStep.bind(this));
+        this.restartGame();
         break;
       default:
     }
+  }
+
+  quit() {
+    this.game.lose();
+    View.close();
+  }
+
+  restartGame() {
+    this.game.retry();
+    InputView.readMoving(this.handleInputStep.bind(this));
   }
 
   initBridges(size) {
