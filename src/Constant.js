@@ -17,4 +17,22 @@ const RESULT_MESSAGE = Object.freeze({
   TOTAL_TRY: `총 시도한 횟수: `,
 });
 
-module.exports = { OUTPUT_MESSAGE, ERROR_MESSAGE, RESULT_MESSAGE };
+const KEY = Object.freeze({
+  UP: 'U',
+  DOWN: 'D',
+  RESTART: 'R',
+  QUIT: 'Q',
+});
+
+const RESULT_SYMBOL = Object.freeze({
+  CORRECT: 'O',
+  WRONG: 'X',
+  SPACE: ' ',
+  SEPERATOR: ' | ',
+});
+
+const BRIDGE_RANGE = Object.freeze({
+  MAX: 20,
+  MIN: 3,
+});
+module.exports = { OUTPUT_MESSAGE, ERROR_MESSAGE, RESULT_MESSAGE, KEY, RESULT_SYMBOL, BRIDGE_RANGE };

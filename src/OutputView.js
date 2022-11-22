@@ -1,14 +1,14 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { OUTPUT_MESSAGE, RESULT_MESSAGE } = require('./Message');
+const { OUTPUT_MESSAGE, RESULT_MESSAGE, RESULT_SYMBOL } = require('./Constant');
 
 const sketchMap = (moveHistory, dir, isCorrect) => {
   const line = moveHistory
     .map((movement, idx) => {
-      if (!isCorrect && idx >= moveHistory.length - 1 && movement === dir) return 'X';
-      if (movement === dir) return 'O';
-      return ' ';
+      if (!isCorrect && idx >= moveHistory.length - 1 && movement === dir) return RESULT_SYMBOL.WRONG;
+      if (movement === dir) return RESULT_SYMBOL.CORRECT;
+      return RESULT_SYMBOL.SPACE;
     })
-    .join(' | ');
+    .join(RESULT_SYMBOL.SEPERATOR);
   return `[ ${line} ]`;
 };
 const OutputView = {

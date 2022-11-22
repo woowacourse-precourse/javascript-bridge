@@ -6,6 +6,7 @@ const { validateReadBridgeSize, validateReadMoving, validateReadGameCommand } = 
 const { generate } = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const { printMap, printResult } = require('./OutputView');
+const { KEY } = require('./Constant');
 
 class App {
   #bridgeGame;
@@ -31,17 +32,15 @@ class App {
     const isCorrect = this.#bridgeGame.move(moving);
     printMap(this.#bridgeGame.getMoveHistory(), isCorrect);
     if (!isCorrect) InputView.readGameCommand(this.onReadGameCommand.bind(this));
-    if (this.#bridgeGame.isFinished()) {
-      if (isCorrect) printResult(this.#bridgeGame.getTryNum(), this.#bridgeGame.getMoveHistory(), isCorrect);
-      return;
-    }
+    if (this.#bridgeGame.isFinished()) if (isCorrect) return printResult(this.#bridgeGame.getTryNum(), this.#bridgeGame.getMoveHistory(), isCorrect);
     if (isCorrect) return InputView.readMoving(this.onReadMoving.bind(this));
   }
+
   onReadGameCommand(command) {
     validateReadGameCommand(command);
-    if (command === 'R') {
+    if (command === KEY.RESTART) {
       this.#bridgeGame.retry(this);
-    } else if (command === 'Q') {
+    } else if (command === KEY.QUIT) {
       printResult(this.#bridgeGame.getTryNum(), this.#bridgeGame.getMoveHistory(), false);
     }
   }

@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE } = require('./Message');
+const { ERROR_MESSAGE, KEY, BRIDGE_RANGE } = require('./Constant');
 
 const isNum = input => {
   const pattern = /[^0-9]/;
@@ -7,17 +7,17 @@ const isNum = input => {
 };
 
 const isInRange = size => {
-  if (size >= 3 && size <= 20) return true;
+  if (size >= BRIDGE_RANGE.MAX && size <= BRIDGE_RANGE.MIN) return true;
   return false;
 };
 
 const isUOrD = input => {
-  if (input === 'U' || input === 'D') return true;
+  if (input === KEY.UP || input === KEY.DOWN) return true;
   return false;
 };
 
 const isROrQ = input => {
-  if (input === 'R' || input === 'Q') return true;
+  if (input === KEY.RESTART || input === KEY.QUIT) return true;
   return false;
 };
 const Validate = {
