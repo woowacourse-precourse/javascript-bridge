@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = require("./InputView");
 const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
 
 
@@ -8,6 +9,7 @@ class App {
   constructor(){
     this.inputView = InputView;
     this.bridgeMaker = BridgeMaker;
+    this.bridgeRandomNumberGenerator = BridgeRandomNumberGenerator;
     this.bridgeGame = new BridgeGame();
     this.bridge_len;
   }
@@ -24,17 +26,22 @@ class App {
     try{
       if(this.checkBridgeSize(bridge_len_arr[0])){
         this.bridge_len = bridge_len_arr[0];
+        this.makeBridge(this.bridge_len);
         this.inputMoving();
       }
     }catch(e){
       // console.log(e);
     }
   }
+
+  makeBridge(bridge_len){
+    const bridge_arr = this.bridgeMaker.makeBridge(bridge_len, this.bridgeRandomNumberGenerator.generate);
+    console.log(bridge_arr);
+  }
   
   inputMoving(){
     const moving_arr = [];
     this.inputView.readMoving(moving_arr);
-    console.log(moving_arr);
   }
 
   startGame(){
