@@ -10,10 +10,9 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     for (let i = 0; i < size; i++) {
-      if (generateRandomNumber()) bridge.push('U');
-      else bridge.push('D');
+      const RANDOM = generateRandomNumber();
+      bridge.push(RANDOM == 1 ? 'U' : 'D');
     }
-
     return bridge;
   },
 };
