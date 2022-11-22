@@ -9,6 +9,11 @@ class App {
   /** @type {BridgeGame} */
   #BridgeGame = new BridgeGame();
 
+  /**
+   * 게임 재시도 또는 종료를 처리하는 메소드
+   *
+   * @param {string} input
+   */
   #retryOrQuit(input) {
     switch (input) {
       case 'R':
@@ -21,6 +26,11 @@ class App {
     }
   }
 
+  /**
+   * 이동 결과를 토대로 다음으로 진행하는 메소드
+   *
+   * @param {import('./BridgeGame').Result} movedResult
+   */
   #midTermInspection(movedResult) {
     switch (movedResult.flag) {
       case Flag.OVER:
