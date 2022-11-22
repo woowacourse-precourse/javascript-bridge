@@ -44,7 +44,7 @@ class BridgeGame {
     return this.round;
   }
 
-  resetResult(reset) {
+  resetResult() {
     this.upResult = [];
     this.downResult = [];
   }
