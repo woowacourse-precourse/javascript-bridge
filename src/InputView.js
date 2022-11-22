@@ -23,18 +23,37 @@ const InputView = {
   readMoving(bridgeGame) {
     Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n",(value) =>{
       const moveBridge = bridgeGame.move(value);
-      if (moveBridge.upBridge.length != bridgeGame.bridgeBoard.length){
-        this.readMoving(bridgeGame);
-      } // 아직 다 안했거나 
-      console.log(moveBridge)
-
+      this.repeatMoving(moveBridge,bridgeGame);
     });
+  },
+  
+  repeatMoving(moveBridge,bridgeGame){
+    console.log(moveBridge.upBridge,"\n" ,moveBridge.downBridge) // 출력 및 재시작 포함  
+    if (moveBridge.upBridge.length != bridgeGame.bridgeBoard.length){
+      if(bridgeGame.checkBridgeInX(moveBridge) == false){
+        this.readGameCommand(bridgeGame);
+      }
+      else {
+        this.readMoving(bridgeGame);
+      }
+    }
   },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridgeGame) {
+    Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",(value) =>{
+      if (value == "R"){
+        bridgeGame.retry();
+        this.readMoving(bridgeGame);
+      }
+      else if (value == "Q"){
+        console.log("성공여부 및 시도 횟수");
+        console.log(bridgeGame.tryCount, "trycount");
+      }
+    });
+  },
 };
 
 

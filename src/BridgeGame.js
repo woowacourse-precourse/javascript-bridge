@@ -8,11 +8,12 @@ const { readMoving,readBridgeSize } = require("./InputView");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  countBridge;
+  tryCount;
   bridgeBoard;
   moveBridge;
 
   constructor() {
+    this.tryCount = 1;
     this.bridgeBoard = []
     this.moveBridge = { upBridge : [], downBridge : []}
   }
@@ -46,7 +47,7 @@ class BridgeGame {
       this.moveBridge.upBridge.push("X");
       this.moveBridge.downBridge.push(" ");
     }
-    return this.checkBridgeInX();
+    return this.moveBridge;
   }
 
 
@@ -59,17 +60,15 @@ class BridgeGame {
       this.moveBridge.upBridge.push("X");
       this.moveBridge.downBridge.push(" ");
     }
-    return this.checkBridgeInX();
+    return this.moveBridge;
   }
 
-  checkBridgeInX(){
-    if (this.moveBridge.upBridge.includes("X") != true && this.moveBridge.downBridge.includes("X") != true ){
-      return this.moveBridge;
+  checkBridgeInX(checkArr){
+    if (checkArr.upBridge.includes("X") != true && checkArr.downBridge.includes("X") != true ){
+      return true;
     }
     else{
-      console.log(this.moveBridge);
-      this.retry();
-      return this.moveBridge;
+      return false;
     }
   }
   /**
@@ -78,7 +77,10 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    console.log("restart")
+    this.moveBridge = {upBridge : [], downBridge : []};
+    this.tryCount += 1;
+    
+
   }
 }
 
