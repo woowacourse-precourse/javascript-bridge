@@ -46,12 +46,7 @@ const OutputView = {
    */
 
   printResult(bridge, userState, countTry, result) {
-    let stringResult;
-    if (result === false) {
-      stringResult = '실패';
-    } else {
-      stringResult = '성공';
-    }
+    const stringResult = result ? '성공' : '실패';
 
     Console.print('최종 게임 결과');
 
