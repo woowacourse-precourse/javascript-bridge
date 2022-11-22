@@ -1,4 +1,3 @@
-// BridgeGame 클래스에서 InputView, OutputView 를 사용하지 않는다.
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const validator = require('./validator/validator');
@@ -34,6 +33,24 @@ class BridgeGame {
       BridgeRandomNumberGenerator.generate
     );
     return this.#bridge;
+  }
+
+  generateMap(char) {
+    return this.#history
+      .map((step, idx) => {
+        return this.calcOX(step, char, this.#bridge[idx]);
+      })
+      .join('|');
+  }
+
+  calcOX(step, char, target) {
+    if (step === char) {
+      if (target !== step) {
+        return ' X ';
+      }
+      return ' O ';
+    }
+    return '   ';
   }
 }
 
