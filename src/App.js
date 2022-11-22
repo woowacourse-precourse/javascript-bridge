@@ -8,33 +8,22 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 
 class App {
-  constructor() {
-    this.bridgeArray = [' ', ' '];
-    this.gameStatus = true;
-    this.moveCount = 0;
-  }
   play() {
-    OutputView.printStartMessage();
-    const bridgeGame = this.makeBridgeGame();
-    const [isSuccess, gamePlayCount] = this.executeGame(bridgeGame);
-    OutputView.printResult(isSuccess, gamePlayCount, bridgeGame);
-  }
-
-  makeBridge() {
-    const bridgeSize = InputView.readBridgeSize();
-    const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
-
-    return bridge;
+    try {
+      OutputView.printStartMessage();
+      const bridgeGame = this.makeBridgeGame();
+      const [isSuccess, gamePlayCount] = this.executeGame(bridgeGame);
+      OutputView.printResult(isSuccess, gamePlayCount, bridgeGame);
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 
   makeBridgeGame() {
-    try {
-      const bridge = this.makeBridge();
-      return new BridgeGame(bridge);
-    } catch (error) {
-      Console.print('[ERROR] ' + error);
-      return this.makeBridgeGame();
-    }
+    const bridgeSize = InputView.readBridgeSize();
+    const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+
+    return new BridgeGame(bridge);
   }
 
   executeGame(bridgeGame) {
@@ -78,7 +67,7 @@ class App {
       const turnPass = bridgeGame.move(moveDirection);
       return turnPass;
     } catch (error) {
-      Console.print('[ERROR] ' + error);
+      Console.print(error.message);
       return this.executeMove(bridgeGame);
     }
   }
@@ -93,7 +82,7 @@ class App {
       const isContinue = bridgeGame.retry(command);
       return isContinue;
     } catch (error) {
-      Console.print('[ERROR] ' + error);
+      Console.print(error.message);
       return this.checkRetry(bridgeGame, isSuccess);
     }
   }

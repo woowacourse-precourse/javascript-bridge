@@ -1,3 +1,4 @@
+const ConstValue = require('./ConstValue');
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -8,14 +9,14 @@ const BridgeMaker = {
    * @return {string[]} 입력받은 길이에 해당하는 다리 모양. 위 칸이면 U, 아래 칸이면 D로 표현해야 한다.
    */
   makeBridge(size, generateRandomNumber) {
-    this.handleBridgeLengthInput(size);
+    this.handleBridgeLengthInputException(size);
     let bridge = [];
     let bridgeShape = [];
     for (let i = 0; i < size; i++) {
-      bridge.push(generateRandomNumber);
+      const number = generateRandomNumber();
+      bridge.push(number);
     }
 
-    console.log('Generate bridge:' + bridge);
     bridgeShape = this.changeToUD(size, bridge);
 
     return bridgeShape;
@@ -33,7 +34,7 @@ const BridgeMaker = {
 
     return UDBridge;
   },
-  handleBridgeLengthInput(length) {
+  handleBridgeLengthInputException(length) {
     if (this.checkIsNaN(length)) {
       throw new Error(ConstValue.BRIDGE_LENGTH_INPUT_ERROR_MESSAGE.NOT_A_NUMBER_EXCEPTION);
     }
