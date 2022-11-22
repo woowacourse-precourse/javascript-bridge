@@ -13,14 +13,17 @@ const BridgeMaker = {
     let bridge = [];
 
     for (let cnt = 0; cnt < size; cnt++) {
-      const randomValue = generateRandomNumber();
-      const crossDirection =
-        Number(randomValue) === BRIDGE.UPPER_NUM ? BRIDGE.UPPER : BRIDGE.LOWER;
-
+      const direction = this.calculateDirection(generateRandomNumber);
       bridge.push(crossDirection);
     }
 
     return bridge;
+  },
+
+  calculateDirection(generateRandomNumber) {
+    const randomValue = generateRandomNumber();
+
+    return randomValue === BRIDGE.UPPER_NUM ? BRIDGE.UPPER : BRIDGE.LOWER;
   },
 };
 
