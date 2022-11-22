@@ -61,7 +61,7 @@ class BridgeGame {
   }
   checkLast() {
     return this.#nowIndex === this.#bridge.length;
-  }	  }
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
