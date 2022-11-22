@@ -66,6 +66,10 @@ class App {
     InputView.readGameCommand();
   }
 
+  exit() {
+    Console.close();
+  }
+
   retryOrExit(answer) {
     if (answer === "R") {
       return this.retry();
@@ -76,10 +80,6 @@ class App {
   retry() {
     this.game.retry();
     this.getMovingDirection();
-  }
-
-  exit() {
-    Console.close();
   }
 }
 
