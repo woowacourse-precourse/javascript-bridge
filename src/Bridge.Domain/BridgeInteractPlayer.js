@@ -34,13 +34,17 @@ class BridgeInteractPlayer {
       this.#player,
       direction
     );
+    this.playerGoResultOutput(bridgeArr, result, status);
+    return;
+  }
+
+  playerGoResultOutput(resultBridgeArr, result, status) {
     OutputView.printResult(
       this.#bridgeGameShape
-        .getCurrentBridgeGameShape(bridgeArr, result)
+        .getCurrentBridgeGameShape(resultBridgeArr, result)
         .getCurrentShape()
     );
     this.playerGoBridgeNext(result, status);
-    return;
   }
 
   playerGoBridgeNext(result, status) {
