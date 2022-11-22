@@ -33,7 +33,7 @@ const OutputView = {
   },
 
   printStartMessage() {
-    Console.print(OUTPUT_VIEW.start);
+    Console.print(OUTPUT_VIEW.start + NEW_LINE);
   },
 
   decode(upOrDown) {
