@@ -1,11 +1,11 @@
-const Model = require('./Model');
-const InputView = require('./InputView');
-const OutputView = require('./OutputView');
-const BridgeMaker = require('./BridgeMaker');
-const { generate } = require('./BridgeRandomNumberGenerator');
-const BridgeGame = require('./BridgeGame');
-const Validator = require('./Validator');
-const { SUCCESS, FAIL, QUIT, CROSS_OR_NOT, RETRY } = require('./constants');
+const Model = require('../model/Model');
+const InputView = require('../view/InputView');
+const OutputView = require('../view/OutputView');
+const BridgeMaker = require('../BridgeMaker');
+const { generate } = require('../BridgeRandomNumberGenerator');
+const BridgeGame = require('../BridgeGame');
+const Validator = require('../utils/Validator');
+const { SUCCESS, FAIL, QUIT, CROSS_OR_NOT, RETRY } = require('../utils/constants');
 
 class Controller {
   constructor() {

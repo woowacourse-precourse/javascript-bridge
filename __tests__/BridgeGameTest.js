@@ -1,5 +1,5 @@
 const BridgeGame = require('../src/BridgeGame');
-const Model = require('../src/Model');
+const Model = require('../src/model/Model');
 
 describe('BridgeGame 클래스 테스트 1', () => {
   test.each([

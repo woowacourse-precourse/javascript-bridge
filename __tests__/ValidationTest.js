@@ -1,5 +1,5 @@
-const Validator = require('../src/Validator');
-const { ERROR_MESSAGE } = require('../src/constants');
+const Validator = require('../src/utils/Validator');
+const { ERROR_MESSAGE } = require('../src/utils/constants');
 
 describe('유효성 검사 테스트 1', () => {
   test('다리 길이 입력 값이 숫자가 아니면 예외가 발생', () => {
