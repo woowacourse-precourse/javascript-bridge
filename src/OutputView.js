@@ -1,20 +1,52 @@
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
-const OutputView = {
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printMap() {},
+const MissionUtils = require('@woowacourse/mission-utils');
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult() {},
+const command = require('./util/command');
+const step = require('./util/step');
+
+const OutputView = {
+  printMessage(message) {
+    MissionUtils.Console.print(message);
+    return this;
+  },
+
+  printMap(answerSteps, inputSteps) {
+    const upBridgeString = `${step.START}${this.makeBridgeString(
+      answerSteps,
+      inputSteps,
+      command.UP
+    )}${step.END}`;
+    const downBridgeString = `${step.START}${this.makeBridgeString(
+      answerSteps,
+      inputSteps,
+      command.DOWN
+    )}${step.END}`;
+
+    this.printMessage(upBridgeString);
+    this.printMessage(downBridgeString);
+  },
+
+  makeBridgeString(answerSteps, inputSteps, direction) {
+    const steps = [];
+    for (let i = 0; i < inputSteps.length; i++) {
+      if (direction !== inputSteps[i]) {
+        steps.push(step.EMPTY);
+        continue;
+      }
+      if (inputSteps[i] === answerSteps[i]) {
+        steps.push(step.CORRECT);
+        continue;
+      }
+      steps.push(step.WRONG);
+    }
+    return steps.join(step.LINE);
+  },
+
+  printResult(answerSteps, inputSteps, status, count) {
+    this.printMessage('최종 게임 결과');
+    this.printMap(answerSteps, inputSteps);
+    this.printMessage(`게임 성공 여부: ${status}`);
+    this.printMessage(`총 시도한 횟수: ${count}`);
+  },
 };
 
 module.exports = OutputView;
