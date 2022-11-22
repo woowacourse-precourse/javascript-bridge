@@ -1,3 +1,4 @@
+const { TRY_COUNT_INITIAL_NUMBER } = require("../utils/constants");
 const Bridge = require("./Bridge");
 const Player = require("./Player");
 
@@ -12,7 +13,7 @@ class BridgeGame {
   constructor(bridge) {
     this.#bridge = new Bridge(bridge);
     this.#player = new Player();
-    this.#tryCount = 1;
+    this.#tryCount = TRY_COUNT_INITIAL_NUMBER;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드

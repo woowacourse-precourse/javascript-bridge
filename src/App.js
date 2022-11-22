@@ -5,6 +5,7 @@ const BridgeRandomNumberGenerator = require("./utils/BridgeRandomNumberGenerator
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
 const InputValidate = require("./utils/InputValidate");
+const { COMMAND } = require("./utils/constants");
 
 class App {
   #bridgeGame;
@@ -62,11 +63,11 @@ class App {
   }
 
   runRetryOrQuit(command) {
-    if (command === "R") {
+    if (command === COMMAND.RETRY) {
       this.#bridgeGame.retry();
       this.requestMovingDirection();
     }
-    if (command === "Q") {
+    if (command === COMMAND.QUIT) {
       this.showResult();
     }
   }

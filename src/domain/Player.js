@@ -1,3 +1,5 @@
+const { DIRECTION } = require("../utils/constants");
+
 class Player {
   #bridgePath;
 
@@ -7,14 +9,14 @@ class Player {
 
   move(direction) {
     if (this.isFallen()) return;
-    this.#bridgePath.upperBridge.push(direction === "U" ? "O" : " ");
-    this.#bridgePath.lowerBridge.push(direction === "D" ? "O" : " ");
+    this.#bridgePath.upperBridge.push(direction === DIRECTION.TO_UPPER ? "O" : " ");
+    this.#bridgePath.lowerBridge.push(direction === DIRECTION.TO_LOWER ? "O" : " ");
   }
 
   fall(direction) {
     if (this.isFallen()) return;
-    this.#bridgePath.upperBridge.push(direction === "U" ? "X" : " ");
-    this.#bridgePath.lowerBridge.push(direction === "D" ? "X" : " ");
+    this.#bridgePath.upperBridge.push(direction === DIRECTION.TO_UPPER ? "X" : " ");
+    this.#bridgePath.lowerBridge.push(direction === DIRECTION.TO_LOWER ? "X" : " ");
   }
 
   isFallen() {
