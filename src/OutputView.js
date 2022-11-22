@@ -112,31 +112,6 @@ const OutputView = {
   addDivisionTo(bridge){
     bridge.push(' | ');
   },
-  StartMessage(){
-    Console.print('다리 건너기 게임을 시작합니다.');
-  },
-  UserInput(input) {
-    Console.print(`${input}`);
-  },
-  GameResultIsWin() {
-    Console.print(`게임 성공 여부: 성공`);
-  },
-  GameResultIsDefeat() {
-    Console.print(`게임 성공 여부: 실패`);
-  },
-  GameTryCount(count) {
-    Console.print(`총 시도한 횟수: ${count}`);
-  },
-  ResultTitle() {
-    Console.print('최종 게임 결과');
-  },
-  Blank() {
-    Console.print('');
-  },
-  BothBridge(upside, downSide) {
-    Console.print(upside.join(''));
-    Console.print(downSide.join(''));
-  },
   ErrorMessage(error) {
     Console.print(error);
   },
