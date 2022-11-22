@@ -1,5 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const SETTING = require("./constant/setting");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -12,7 +13,6 @@ class BridgeGame {
    */
   ABLE_TO_MOVE_MARKER = "O";
   UNABLE_TO_MOVE_MARKER = "X";
-  UP_DIRECTION = "U";
   NO_MOVE_MARKER = " ";
 
   #attemptCount = 1;
@@ -41,12 +41,12 @@ class BridgeGame {
   }
 
   mark(nextDirection, marker) {
-    if (nextDirection === this.UP_DIRECTION) {
+    if (nextDirection === SETTING.UP_DIRECTION) {
       this.#upBridge.push(marker);
-      this.#downBridge.push(this.NO_MOVE_MARKER);
+      this.#downBridge.push(" ");
     } else {
       this.#downBridge.push(marker);
-      this.#upBridge.push(this.NO_MOVE_MARKER);
+      this.#upBridge.push(" ");
     }
   }
 

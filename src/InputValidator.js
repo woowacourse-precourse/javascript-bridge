@@ -1,12 +1,8 @@
+const SETTING = require("./constant/setting");
+
 const InputValidator = {
   MIN_SIZE_NUMBER: 3,
   MAX_SIZE_NUMBER: 20,
-
-  RESTART: "R",
-  QUIT: "Q",
-
-  UP_DIRECTION: "U",
-  DOWN_DIRECTION: "D",
 
   ERROR_MESSAGE: {
     BRIDGE_SIZE: "[ERROR] 다리 길이는 3~20사이 숫자만 입력하셔야 합니다.",
@@ -25,14 +21,14 @@ const InputValidator = {
   },
 
   checkMoving(direction) {
-    if (direction === this.UP_DIRECTION || direction === this.DOWN_DIRECTION) {
+    if (direction === SETTING.UP_DIRECTION || direction === SETTING.DOWN_DIRECTION) {
       return;
     }
     throw new Error(this.ERROR_MESSAGE.MOVING);
   },
 
   checkGameCommand(command) {
-    if (command === this.RESTART || command === this.QUIT) {
+    if (command === SETTING.RESTART_COMMAND || command === SETTING.QUIT_COMMAND) {
       return;
     }
     throw new Error(this.ERROR_MESSAGE.COMMAND);

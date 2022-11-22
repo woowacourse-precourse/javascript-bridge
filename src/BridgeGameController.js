@@ -3,9 +3,9 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const OutputView = require("./OutputView");
 const InputValidator = require("./InputValidator");
+const SETTING = require("./constant/setting");
 
 class BridgeGameController {
-  RESTART_COMMAND = "R";
   #BridgeGame;
 
   getBridgeSize() {
@@ -67,7 +67,7 @@ class BridgeGameController {
   }
 
   isRestart(command) {
-    return command === this.RESTART_COMMAND;
+    return command === SETTING.RESTART_COMMAND;
   }
 
   restartGame() {
