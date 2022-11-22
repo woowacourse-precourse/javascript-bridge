@@ -2,6 +2,7 @@ const BridgeGame = require('../domain/BridgeGame');
 const OutputView = require('../view/OutputView');
 const InputView = require('../view/input/InputView');
 const BridgeCtrlValidator = require('./BridgeCtrlValidator');
+const ErrorView = require('../view/ErrorView');
 const { RETRY, QUIT } = require('../contants/Options');
 
 class BridgeCtrl {
@@ -12,21 +13,33 @@ class BridgeCtrl {
     this.initalize();
   }
 
-  initalize() {
-    const onReadBridgeSize = (input) => {
+  onReadBridgeSize(input) {
+    try {
       this.#game.initalize(Number(input));
       this.play();
-    };
-    InputView.readBridgeSize(onReadBridgeSize);
+    } catch (error) {
+      ErrorView.print(error);
+      this.initalize();
+    }
   }
 
-  play() {
-    const onReadMoving = (input) => {
+  initalize() {
+    InputView.readBridgeSize(this.onReadBridgeSize.bind(this));
+  }
+
+  onReadMoving(input) {
+    try {
       this.#game.move(input);
       OutputView.printMap(this.#game.getMoves(), this.#game.isMovesPossible());
       this.manageProgress();
-    };
-    InputView.readMoving(onReadMoving);
+    } catch (error) {
+      ErrorView.print(error);
+      this.play();
+    }
+  }
+
+  play() {
+    InputView.readMoving(this.onReadMoving.bind(this));
   }
 
   manageProgress() {
@@ -37,13 +50,19 @@ class BridgeCtrl {
     if (!gameWin && !gameLose) this.play();
   }
 
-  askCommand() {
-    const onReadGameCommand = (gameCommand) => {
+  onReadGameCommand(gameCommand) {
+    try {
       BridgeCtrlValidator.validateGameCommand(gameCommand);
       if (gameCommand === RETRY) this.retry();
       if (gameCommand === QUIT) this.close();
-    };
-    InputView.readGameCommand(onReadGameCommand);
+    } catch (error) {
+      ErrorView.print(error);
+      this.askCommand();
+    }
+  }
+
+  askCommand() {
+    InputView.readGameCommand(this.onReadGameCommand.bind(this));
   }
 
   retry() {

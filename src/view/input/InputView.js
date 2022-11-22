@@ -1,6 +1,9 @@
+/* eslint-disable max-lines-per-function */
 const MissionUtils = require('@woowacourse/mission-utils');
 const InputTypeValidator = require('./InputTypeValidator');
 const { ASK_BRIDGE_SIZE, ASK_MOVE, ASK_RETRY } = require('./InputMessages');
+const ErrorView = require('../ErrorView');
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -8,10 +11,16 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
+
   readBridgeSize(next) {
     MissionUtils.Console.readLine(ASK_BRIDGE_SIZE, (input) => {
-      InputTypeValidator.isInteger(input);
-      next(input);
+      try {
+        InputTypeValidator.isInteger(input);
+        next(input);
+      } catch (error) {
+        ErrorView.print(error);
+        this.readBridgeSize(next);
+      }
     });
   },
 
@@ -20,8 +29,13 @@ const InputView = {
    */
   readMoving(next) {
     MissionUtils.Console.readLine(ASK_MOVE, (input) => {
-      InputTypeValidator.isChar(input);
-      next(input);
+      try {
+        InputTypeValidator.isChar(input);
+        next(input);
+      } catch (error) {
+        ErrorView.print(error);
+        this.readMoving(next);
+      }
     });
   },
 
@@ -30,8 +44,13 @@ const InputView = {
    */
   readGameCommand(next) {
     MissionUtils.Console.readLine(ASK_RETRY, (input) => {
-      InputTypeValidator.isChar(input);
-      next(input);
+      try {
+        InputTypeValidator.isChar(input);
+        next(input);
+      } catch (error) {
+        ErrorView.print(error);
+        this.readGameCommand(next);
+      }
     });
   },
 };
