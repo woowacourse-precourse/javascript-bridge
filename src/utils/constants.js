@@ -6,6 +6,9 @@ const DEFAULT = {
   RESTART: 'R',
   QUIT: 'Q',
   EMPTY: ' ',
+  BAR: ' | ',
+  BRACKET_LEFT: '[',
+  BRACKET_RIGHT: ']',
 };
 
 const GAME_MESSAGE = {
