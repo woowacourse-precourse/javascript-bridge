@@ -87,6 +87,8 @@ const InputView = {
       this.validateCommand(inputCommand);
       gameCommand = inputCommand;
     });
+
+    return gameCommand;
   },
 
   validateCommand(inputCommand) {
