@@ -9,16 +9,19 @@ const OutputView = require('./OutputView');
 const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.BRIDGE_SIZE, (bridgeSize) => {
-      Validation.validateBridgeSize(bridgeSize);
-
-      const bridge = BridgeMaker.makeBridge(
-        parseInt(bridgeSize, 10),
-        BridgeRandomNumberGenerator.generate
-      );
-      Console.print('');
-      let movingRoute = [[], []];
-      let UserTryCount = 1;
-      this.readMoving(bridge, movingRoute, UserTryCount);
+      const inputValueError = Validation.validateBridgeSize(bridgeSize);
+      if (inputValueError) {
+        this.readBridgeSize();
+      } else {
+        const bridge = BridgeMaker.makeBridge(
+          parseInt(bridgeSize, 10),
+          BridgeRandomNumberGenerator.generate
+        );
+        Console.print('');
+        let movingRoute = [[], []];
+        let UserTryCount = 1;
+        this.readMoving(bridge, movingRoute, UserTryCount);
+      }
     });
   },
 
