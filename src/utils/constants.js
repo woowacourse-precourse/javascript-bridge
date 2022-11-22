@@ -44,6 +44,7 @@ const PROGRESS_MAP = Object.freeze({
   BLANK: '   ',
   ALIVE: ' O ',
   DIE: ' X ',
+  PARSE_STRING: (row) => `[${row.join(PROGRESS_MAP.SEPARATOR)}]`,
 });
 
 const REGEX = Object({

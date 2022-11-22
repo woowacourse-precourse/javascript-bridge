@@ -11,8 +11,8 @@ class ProgressMap {
   createMap(progressData) {
     const upRow = this.drawMap(progressData, OPTION.UP);
     const downRow = this.drawMap(progressData, OPTION.DOWN);
-    const upString = `[${upRow.join(PROGRESS_MAP.SEPARATOR)}]`;
-    const downString = `[${downRow.join(PROGRESS_MAP.SEPARATOR)}]`;
+    const upString = PROGRESS_MAP.PARSE_STRING(upRow);
+    const downString = PROGRESS_MAP.PARSE_STRING(downRow);
 
     return { up: upString, down: downString };
   }
@@ -21,14 +21,18 @@ class ProgressMap {
     const blueprint = createBlueprint(progressData.length);
     const progressMap = [...blueprint].map((_, index) => {
       const data = progressData[index];
-      if (data.select !== position) return PROGRESS_MAP.BLANK;
-
-      if (data.alive) return PROGRESS_MAP.ALIVE;
-
-      return PROGRESS_MAP.DIE;
+      return this.classifyResult(data, position);
     });
 
     return progressMap;
+  }
+
+  classifyResult(data, position) {
+    if (data.select !== position) return PROGRESS_MAP.BLANK;
+
+    if (data.alive) return PROGRESS_MAP.ALIVE;
+
+    return PROGRESS_MAP.DIE;
   }
 }
 
