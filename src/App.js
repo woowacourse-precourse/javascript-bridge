@@ -1,5 +1,4 @@
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { command } = require('./utils/message');
 const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeMaker = require('./BridgeMaker');
@@ -25,12 +24,12 @@ class App {
     this.getBridgeSize();
   }
 
-  async getBridgeSize() {
-    this.#bridgeSize = await InputView.readBridgeSize();
-    this.setBridge();
+  getBridgeSize() {
+    InputView.readBridgeSize(this.setBridge.bind(this));
   }
 
-  setBridge() {
+  setBridge(size) {
+    this.#bridgeSize = size;
     if (!this.validateBridgeSize()) return this.getBridgeSize();
     this.#bridge = BridgeMaker.makeBridge(
       this.#bridgeSize,
@@ -40,9 +39,8 @@ class App {
     this.getMove();
   }
 
-  async getMove() {
-    const moveInput = await InputView.readMoving();
-    this.doGame(moveInput);
+  getMove() {
+    InputView.readMoving(this.doGame.bind(this));
   }
 
   doGame(moveInput) {
@@ -67,9 +65,8 @@ class App {
     this.end();
   }
 
-  async getRetry() {
-    const retryInput = await InputView.readGameCommand();
-    this.doRetry(retryInput);
+  getRetry() {
+    InputView.readGameCommand(this.doRetry.bind(this));
   }
 
   doRetry(retryInput) {
