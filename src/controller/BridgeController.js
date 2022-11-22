@@ -43,7 +43,7 @@ class BridgeController {
    * 유저에게 다리 길이를 입력 받은 후 다리 생성 및 저장한다.
    * @param bridgeLengthInput {string} [다리 길이 input]
    */
-  onBridgeSizeInput(bridgeLengthInput) {
+  processBridgeSizeInput(bridgeLengthInput) {
     try {
       validate(bridgeLengthInput);
       this.bridgeModel.setBridge(this.getCreatedBridge(bridgeLengthInput));

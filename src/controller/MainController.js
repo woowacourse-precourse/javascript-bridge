@@ -14,7 +14,7 @@ class MainController {
 
   // 다리 길이 입력 연결 메서드
   readBridgeSizeInput() {
-    InputView.readBridgeSize(this.onBridgeSizeInput, this);
+    InputView.readBridgeSize(this.processBridgeSizeInput, this);
   }
 
   /**
@@ -22,9 +22,9 @@ class MainController {
    * @param bridgeLengthInput {string} [다리 길이 input]
    * @param mainController {object} [메인 컨트롤러]
    */
-  onBridgeSizeInput(bridgeLengthInput, mainController) {
+  processBridgeSizeInput(bridgeLengthInput, mainController) {
     OutputView.printEmptyLine();
-    mainController.bridgeController.onBridgeSizeInput(bridgeLengthInput);
+    mainController.bridgeController.processBridgeSizeInput(bridgeLengthInput);
   }
 
   /**
