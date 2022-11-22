@@ -67,7 +67,7 @@
 
 - [ ] progressData, playCount, gameResult를 하나의 gameData에서 관리하기.
 - [x] 하드코딩 되어있는 값들 constant로 이동
-
+- [ ] 메서드 길이 중괄호 포함으로 생각해서 더욱 줄여보기.
 
 ### fix
 - [x] 게임을 여러번 시도했을 때, 총 시도한 횟수가 정확한지 확인.
