@@ -22,11 +22,11 @@ const Validation = {
   },
 
   validateUserMove(upOrDown) {
-    if(![CONSTANTS.UP, CONSTANTS.DOWN].includes(upOrDown)) {
-      throw new Error(ERROR.BRIDGE_MOVE_INPUT_ERROR);
-    }
     if(upOrDown.length !== CONSTANTS.INPUT_LENGTH) {
       throw new Error(ERROR.BRIDGE_MOVE_INPUT_LENGTH_ERROR);
+    }
+    if(![CONSTANTS.UP, CONSTANTS.DOWN].includes(upOrDown)) {
+      throw new Error(ERROR.BRIDGE_MOVE_INPUT_ERROR);
     }
   },
   
