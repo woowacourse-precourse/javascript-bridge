@@ -3,9 +3,8 @@ const Moving = require('../src/model/Moving');
 
 describe('Moving Test', () => {
   test.each(['a', 'A', '1'])('다음 이동 입력 유효성 테스트', (input) => {
-    const game = new BridgeGame();
     expect(() => {
-      game.setMoving(input);
+      BridgeGame.setMoving(input);
     }).toThrow('[ERROR]');
   });
 

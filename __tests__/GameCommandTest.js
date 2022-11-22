@@ -3,9 +3,8 @@ const GameCommand = require('../src/model/GameCommand');
 
 describe('GameCommand Test', () => {
   test.each(['a', 'A', '1'])('재시작/종료 여부 입력 유효성 테스트', (input) => {
-    const game = new BridgeGame();
     expect(() => {
-      game.setGameCommand(input);
+      BridgeGame.setGameCommand(input);
     }).toThrow('[ERROR]');
   });
 

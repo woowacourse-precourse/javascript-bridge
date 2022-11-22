@@ -6,7 +6,7 @@ class Bridge {
   #bridge;
 
   constructor(size) {
-    this.validate(size);
+    Bridge.validate(size);
     this.#bridge = BridgeMaker.makeBridge(size, () =>
       BridgeRandomNumberGenerator.generate()
     );
@@ -16,7 +16,7 @@ class Bridge {
     return this.#bridge;
   }
 
-  validate(size) {
+  static validate(size) {
     validateBridgeSize.validate(size);
   }
 }

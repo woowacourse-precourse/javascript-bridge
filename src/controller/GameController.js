@@ -33,7 +33,7 @@ class GameController {
 
   setMoving(next) {
     try {
-      this.game.setMoving(next);
+      BridgeGame.setMoving(next);
       const isSuccess = this.game.move(next);
       OutputView.printMap(this.game.getMap(), isSuccess);
       if (isSuccess && this.game.isEnd()) this.end(true);
@@ -51,7 +51,7 @@ class GameController {
 
   setGameCommand(gameCommand) {
     try {
-      this.game.setGameCommand(gameCommand);
+      BridgeGame.setGameCommand(gameCommand);
       if (gameCommand === GAME.RETRY) this.retry();
       if (gameCommand === GAME.QUICK) this.end(false);
     } catch (err) {

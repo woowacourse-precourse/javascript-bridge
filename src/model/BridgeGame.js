@@ -13,11 +13,15 @@ class BridgeGame {
 
   #tryCount;
 
+  #topSide;
+
+  #downSide;
+
   constructor() {
     this.#currentIndex = 0;
     this.#tryCount = 1;
-    this.topSide = [];
-    this.downSide = [];
+    this.#topSide = [];
+    this.#downSide = [];
   }
 
   setBridge(size) {
@@ -25,40 +29,40 @@ class BridgeGame {
     this.#bridge = bridge.getBridge();
   }
 
-  setMoving(next) {
+  static setMoving(next) {
     Moving.setMoving(next);
   }
 
-  setGameCommand(gameCommand) {
+  static setGameCommand(gameCommand) {
     GameCommand.setGameCommand(gameCommand);
   }
 
   setTopSide(isSuccess) {
     if (isSuccess) {
-      this.topSide.push(SYMBOL.SUCCESS);
-      this.downSide.push(SYMBOL.BLANK);
+      this.#topSide.push(SYMBOL.SUCCESS);
+      this.#downSide.push(SYMBOL.BLANK);
     }
 
     if (!isSuccess) {
-      this.topSide.push(SYMBOL.FAIL);
-      this.downSide.push(SYMBOL.BLANK);
+      this.#topSide.push(SYMBOL.FAIL);
+      this.#downSide.push(SYMBOL.BLANK);
     }
   }
 
   setDownSide(isSuccess) {
     if (isSuccess) {
-      this.topSide.push(SYMBOL.BLANK);
-      this.downSide.push(SYMBOL.SUCCESS);
+      this.#topSide.push(SYMBOL.BLANK);
+      this.#downSide.push(SYMBOL.SUCCESS);
     }
 
     if (!isSuccess) {
-      this.topSide.push(SYMBOL.BLANK);
-      this.downSide.push(SYMBOL.FAIL);
+      this.#topSide.push(SYMBOL.BLANK);
+      this.#downSide.push(SYMBOL.FAIL);
     }
   }
 
   getMap() {
-    return { topSide: this.topSide, downSide: this.downSide };
+    return { topSide: this.#topSide, downSide: this.#downSide };
   }
 
   getTryCount() {
@@ -97,8 +101,8 @@ class BridgeGame {
 
   initialization() {
     this.#currentIndex = 0;
-    this.topSide = [];
-    this.downSide = [];
+    this.#topSide = [];
+    this.#downSide = [];
   }
 }
 
