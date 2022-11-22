@@ -1,5 +1,7 @@
 const { ERROR } = require('./constants/messages');
+const {SETTING} =require('./constants/setting')
 const { Console } = require('@woowacourse/mission-utils')
+
 
 class Validation{
 
@@ -7,7 +9,7 @@ class Validation{
         if(!Number.isInteger(Number(input))){
             Console.print(ERROR.NUMBER)
             Console.close()
-        }if(Number(input)>20 || Number(input)<3){
+        }if(!(Number(input)<=SETTING.MAX_NUMBER && Number(input)>=SETTING.MIN_NUMBER)){
             Console.print(ERROR.BRIDGE_LENGTH_BOUNDARY)
             Console.close()
         }if(input.length===0){
@@ -22,7 +24,7 @@ class Validation{
             Console.print(ERROR.EMPTY)
             Console.close()
         }
-        if(!(input==='U' || input==='D')){
+        if(!(input===SETTING.GO_UP || input===SETTING.GO_DOWN)){
             Console.print(ERROR.NEXT_MOVE)
             Console.close()
         }
@@ -34,7 +36,7 @@ class Validation{
             Console.print(ERROR.EMPTY)
             Console.close()
         }
-        if(!(input==='R' || input==='Q')){
+        if(!(input===SETTING.RETRY_COMMAND || SETTING.QUIT_COMMAND)){
             Console.print(ERROR.RETRY)
             Console.close()
         }

@@ -13,8 +13,10 @@ const QUESTION = Object.freeze({
   });
   
   const RESULT = Object.freeze({
-    GAME_RESULT: '최종 게임 결과',
-    GAME_SUCCESS:'게임 성공 여부',
+    GAME_RESULT_PRINT: '최종 게임 결과',
+    GAME_RESULT_SUCCESS:'게임 성공 여부',
+    GAME_SUCCESS:'성공',
+    GAME_FAIL:'실패',
     GAME_COUNT:'총 시도한 횟수'
   });
   

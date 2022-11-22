@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const BridgeMaker = require('./BridgeMaker');
+const { RESULT } = require('./constants/messages');
 const InputView = require('./InputView')
 const OutputView= require('./OutputView')
 
@@ -69,7 +69,8 @@ class App {
   }
 
   endGame(){
-
+    Console.print(RESULT.GAME_RESULT_PRINT)
+    OutputView.printMap(this.#gameStatus)
   }  
 
 
