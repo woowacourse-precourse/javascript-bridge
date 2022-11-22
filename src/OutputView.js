@@ -74,7 +74,8 @@ const OutputView = {
     this.printMap(bridge, isSuccessArray);
     Console.print("");
     this.printIsWin(isSuccessArray[location-1]);
-    this.printTotalAttempt(totalAttempt);    
+    this.printTotalAttempt(totalAttempt);
+    Console.close();
   },
 
   printIsWin(isWin) {

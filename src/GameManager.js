@@ -9,10 +9,12 @@ const { MESSAGE, USER_ANSWER } = require('./const.js');
 
 class GameManager {
     #isSuccessArray
+    #totalAttempt
 
     constructor() {
         this.Game = new BridgeGame();
         this.#isSuccessArray = [];
+        this.#totalAttempt = 1;
     }
 
     startGame() {
@@ -67,14 +69,16 @@ class GameManager {
 
     afterGetRetryCommand(bridge, isRetry) {
         if(isRetry === USER_ANSWER.RETRY) {
+            this.#totalAttempt++;
             this.#isSuccessArray = this.Game.retry();
             this.getMoveDirection(bridge);
         }
-        // to Quit Game
+        if(isRetry === USER_ANSWER.QUIT) this.quitGame(bridge)
     }
 
-
-
+    quitGame(bridge) {
+        OutputView.printResult(bridge, this.#isSuccessArray, this.#totalAttempt);
+    }
 }
 
 module.exports = GameManager;
