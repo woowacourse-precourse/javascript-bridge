@@ -47,10 +47,7 @@ class App {
 
   doGame(moveInput) {
     if (!this.validate(Validate.move, moveInput)) return this.getMove();
-    this.#curBridge = this.#bridgeGame.makeCurBridge(
-      moveInput,
-      this.#bridgeIndex
-    );
+    this.#curBridge = this.#bridgeGame.move(moveInput, this.#bridgeIndex);
     OutputView.printMap(this.#curBridge);
     this.isAbleToMove(moveInput);
     this.isEndOfBridge();
@@ -59,7 +56,7 @@ class App {
   }
 
   isAbleToMove(moveInput) {
-    if (!this.#bridgeGame.move(moveInput, this.#bridgeIndex)) {
+    if (!this.#bridgeGame.canMove(moveInput, this.#bridgeIndex)) {
       return this.getRetry();
     }
   }
