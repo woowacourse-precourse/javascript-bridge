@@ -1,10 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeGame = require('./Model/BridgeGame');
 const InputView = require('./View/InputView');
-const { MESSAGE } = require('./Constant/message');
 const OutputView = require('./View/OutputView');
 const Validator = require('./Validation/Validator');
-const { COMMAND } = require('./Constant/value');
+const { COMMAND, MESSAGE } = require('./Constants');
 
 class App {
   #bridgeGame;
@@ -51,8 +50,8 @@ class App {
   }
 
   showNextStep() {
-    if (this.#bridgeGame.checkWrongPath()) return this.requestRetry();
-    if (this.#bridgeGame.checkSuccess()) return this.getResult();
+    if (this.#bridgeGame.isWrongPath()) return this.requestRetry();
+    if (this.#bridgeGame.isSuccess()) return this.getResult();
     this.requestDirection();
   }
 

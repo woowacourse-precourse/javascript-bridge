@@ -1,5 +1,4 @@
-const { ERROR } = require('../Constant/message');
-const { BLOCK, COMMAND } = require('../Constant/value');
+const { BLOCK, COMMAND, ERROR } = require('../Constants');
 
 const Validator = {
   direction(userInput) {

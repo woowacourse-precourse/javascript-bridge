@@ -1,4 +1,4 @@
-const { BLOCK } = require('../src/Constant/value');
+const { BLOCK } = require('./Constants');
 
 const BridgeMaker = {
   UPPPER_RANDOM_NUMBER: 1,
@@ -6,13 +6,11 @@ const BridgeMaker = {
 
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
-
     for (let block = 0; block < size; block++) {
       const randomNumber = generateRandomNumber();
       if (randomNumber === BridgeMaker.LOWER_RANDOM_NUMBER) bridge[block] = BLOCK.LOWER;
       if (randomNumber === BridgeMaker.UPPPER_RANDOM_NUMBER) bridge[block] = BLOCK.UPPER;
     }
-
     return bridge;
   },
 };

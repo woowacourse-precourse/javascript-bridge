@@ -1,6 +1,6 @@
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { PATH, BLOCK } = require('../Constant/value');
+const { PATH, BLOCK } = require('../Constants');
 
 class BridgeGame {
   #bridge;
@@ -50,13 +50,13 @@ class BridgeGame {
     return this.#lowerTrack;
   }
 
-  checkWrongPath() {
+  isWrongPath() {
     const currentLocation = this.#upperTrack.length - 1;
     const lastPath = [this.#upperTrack[currentLocation], this.#lowerTrack[currentLocation]];
     return lastPath.includes(PATH.WRONG) ? true : false;
   }
 
-  checkSuccess() {
+  isSuccess() {
     if (this.#upperTrack.length === this.#bridge.length) {
       this.#success = true;
     }

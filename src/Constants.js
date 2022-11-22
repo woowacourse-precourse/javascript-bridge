@@ -1,4 +1,18 @@
-const { BLOCK, COMMAND } = require('./value');
+const PATH = {
+  RIGHT: 'O',
+  WRONG: 'X',
+  NOT_CHOSEN: ' ',
+};
+
+const BLOCK = {
+  UPPER: 'U',
+  LOWER: 'D',
+};
+
+const COMMAND = {
+  RETRY: 'R',
+  QUIT: 'Q',
+};
 
 const MESSAGE = {
   START: '다리 건너기 게임을 시작합니다.',
@@ -17,5 +31,5 @@ const ERROR = {
   COMMAND: '[ERROR] 대문자 R 또는 대문자 Q만 입력해주세요.',
 };
 
-module.exports = { MESSAGE, ERROR };
+module.exports = { BLOCK, COMMAND, ERROR, MESSAGE, PATH };
 
