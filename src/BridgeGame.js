@@ -6,6 +6,8 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
  */
 class BridgeGame {
   #bridge;
+  #userPath = [];
+  #currentBridge = { upPath: [], downPath: [] };
   #totalCount = 0;
 
   constructor(size) {
