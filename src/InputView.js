@@ -5,8 +5,8 @@ const OutputView = require('./OutputView');
  */
 const InputView = {
   BRIDGE_SIZE: '다리의 길이를 입력해주세요.\n',
-  MOVING: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
-  GAME_COMMAND: '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+  MOVING: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
+  GAME_COMMAND: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
   MIN_BRIDGE_SIZE: 3,
   MAX_BRIDGE_SIZE: 20,
   UP_FLOOR: 'U',
@@ -17,6 +17,7 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
+    Console.print('');
     InputView.question(InputView.BRIDGE_SIZE, callback, InputView.validateSize);
   },
 
@@ -34,6 +35,7 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(callback) {
+    Console.print('');
     InputView.question(InputView.MOVING, callback, InputView.validateMoving);
   },
 
@@ -47,6 +49,7 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(callback) {
+    Console.print('');
     InputView.question(InputView.GAME_COMMAND, callback, InputView.validateCommand);
   },
 
