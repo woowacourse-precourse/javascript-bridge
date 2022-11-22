@@ -1,3 +1,11 @@
+const { Console } = require("@woowacourse/mission-utils");
+const Validation = require("./Validation");
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
+const { MESSAGE } = require("./constants");
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -5,17 +13,59 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+  readBridgeSize() {
+    Console.readLine(MESSAGE.SIZE, (size) => {
+      const error = Validation.isVaildBridgeSize(size);
+      if (error) return this.readBridgeSize();
+      const bridge = BridgeMaker.makeBridge(
+        size,
+        BridgeRandomNumberGenerator.generate
+      );
+      let attemptCount = 1;
+      let moveList = [[], []];
+      this.readMoving(bridge, moveList, attemptCount);
+    });
+  },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving(bridge, moveList, attempt) {
+    Console.readLine(MESSAGE.MOVING, (moving) => {
+      const error = Validation.isVaildMoving(moving);
+      if (error) return this.readMoving(bridge, moveList, attempt);
+
+      const bridgeGame = new BridgeGame();
+      const checkContinue = bridgeGame.move(moving, bridge, moveList);
+      this.helpMoving(bridge, attempt, checkContinue);
+    });
+  },
+
+  helpMoving(bridge, attempt, checkContinue) {
+    if (checkContinue[0].includes("X") || checkContinue[1].includes("X"))
+      return this.readGameCommand(bridge, attempt, checkContinue);
+    if (bridge.length === checkContinue[0].length)
+      return OutputView.printResult("성공", attempt, checkContinue);
+
+    return this.readMoving(bridge, checkContinue, attempt);
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(bridge, attempt, moveList) {
+    Console.readLine(MESSAGE.COMMAND, (command) => {
+      const error = Validation.isVaildCommand(command);
+      if (error) return this.readGameCommand(bridge, attempt, moveList);
+
+      if (command === "Q") OutputView.printResult("실패", attempt, moveList);
+      if (command === "R") {
+        const bridgeGame = new BridgeGame();
+        const againMoveList = bridgeGame.retry();
+        return this.readMoving(bridge, againMoveList, attempt + 1);
+      }
+    });
+  },
 };
 
 module.exports = InputView;
