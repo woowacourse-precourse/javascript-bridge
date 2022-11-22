@@ -123,10 +123,33 @@ describe("다리 건너기 테스트", () => {
       "최종 게임 결과",
       "[ O |   |   ]",
       "[   | O | O ]",
+      "게임 성공 여부: 성공",
       "총 시도한 횟수: 2",
     ]);
   });
-  
+
+  test("게임 종료", () => {
+    const logSpy = getLogSpy();
+    mockRandoms(["1", "0", "0"]);
+    mockQuestions(["3", "U", "U", "Q"]);
+
+    const app = new App();
+    app.play();
+
+    const log = getOutput(logSpy);
+    expectLogContains(log, [
+      "[ O ]",
+      "[   ]",
+      "[ O | X ]",
+      "[   |   ]",
+      "최종 게임 결과",
+      "[ O | X ]",
+      "[   |   ]",
+      "게임 성공 여부: 실패",
+      "총 시도한 횟수: 1",
+    ]);
+  });
+
   test("기능 테스트", () => {
     const logSpy = getLogSpy();
     mockRandoms(["1", "0", "1"]);
