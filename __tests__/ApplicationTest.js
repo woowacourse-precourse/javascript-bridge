@@ -81,7 +81,7 @@ describe("다리 건너기 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
-  test("기능 테스트2", () => {
+  test("실패 기능 테스트", () => {
     const logSpy = getLogSpy();
     mockRandoms(["1", "0", "1", "0", "1"]);
     mockQuestions(["5", "U", "D", "U", "U", "Q"]);
@@ -102,5 +102,11 @@ describe("다리 건너기 테스트", () => {
 
   test("예외 테스트", () => {
     runException(["a"]);
+  });
+  test("공백 예외 테스트", () => {
+    runException([" "]);
+  });
+  test("입력뒤 공백 예외 테스트", () => {
+    runException(["5 "]);
   });
 });
