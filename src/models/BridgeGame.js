@@ -1,5 +1,3 @@
-const { validateMoveInput } = require("../utils/validators/validators");
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -7,6 +5,7 @@ class BridgeGame {
   constructor() {
     this.bridgeSize;
     this.done = false;
+    this.isError = false;
     this.succeed = false;
     this.playerLocation = 0;
     this.try = 1;
@@ -36,9 +35,13 @@ class BridgeGame {
    * @returns 업데이트 된 현재 진행 상황 (progress)
    */
   updateProgress(roundResult, progress, input) {
-    if (roundResult) return (progress = this.success(progress, input));
+    if (roundResult) {
+      progress = this.success(progress, input);
+      return progress;
+    }
     this.done = true;
-    return (progress = this.fail(progress, input));
+    this.fail(progress, input);
+    return progress;
   }
 
   /**
@@ -69,9 +72,10 @@ class BridgeGame {
       progress[0].push("X");
       progress[1].push(" ");
       return progress;
+    } else if (input == "D") {
+      progress[0].push(" ");
+      progress[1].push("X");
     }
-    progress[0].push(" ");
-    progress[1].push("X");
     return progress;
   }
 
@@ -82,7 +86,6 @@ class BridgeGame {
    * @param {string[]} bridge
    */
   playerMoving(game, input, bridge) {
-    validateMoveInput(input);
     game.move(input, bridge);
   }
 
@@ -92,6 +95,7 @@ class BridgeGame {
   retry() {
     this.try += 1;
     this.done = false;
+    this.isError = false;
     this.progress[0].length = 0;
     this.progress[1].length = 0;
     this.playerLocation = 0;

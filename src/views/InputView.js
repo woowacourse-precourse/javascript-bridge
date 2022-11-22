@@ -6,6 +6,7 @@ const { printResult, printMap } = require("./OutputView");
 const {
   validateBridgeSizeInput,
   validateGameCommandInput,
+  validateMoveInput,
 } = require("../utils/validators/validators");
 
 const InputView = {
@@ -31,16 +32,23 @@ const InputView = {
    * @returns
    */
   readMoving(game, bridge) {
+    if (game.isError) return Console.close();
     if (game.done) return this.readGameCommand(game, bridge);
     if (bridge.length === game.playerLocation) {
       game.succeed = true;
       return printResult(game);
     }
-    Console.readLine(MESSAGES.MOVE, (input) => {
+    return Console.readLine(MESSAGES.MOVE, (input) => {
+      InputView.readMovingCallback(input, game, bridge);
+    });
+  },
+
+  readMovingCallback(input, game, bridge) {
+    if (validateMoveInput(input, game)) {
       game.playerMoving(game, input, bridge);
       printMap(game, bridge);
       InputView.readMoving(game, bridge);
-    });
+    }
   },
 
   /**
@@ -49,14 +57,17 @@ const InputView = {
    * @param {string[]} bridge
    */
   readGameCommand(game, bridge) {
-    const readGameCommandCallback = (input) => {
-      validateGameCommandInput(input);
-      if (input === "R") {
-        game.retry();
-        return InputView.readMoving(game, bridge);
-      } else if (input === "Q") return printResult(game);
-    };
-    Console.readLine(MESSAGES.RETRY, readGameCommandCallback);
+    Console.readLine(MESSAGES.RETRY, (input) =>
+      InputView.readGameCommandCallback(input, game, bridge)
+    );
+  },
+
+  readGameCommandCallback(input, game, bridge) {
+    validateGameCommandInput(input, game);
+    if (input === "R") {
+      game.retry();
+      return InputView.readMoving(game, bridge);
+    } else if (input === "Q") return printResult(game);
   },
 };
 
