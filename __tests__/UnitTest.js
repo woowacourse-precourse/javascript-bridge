@@ -27,20 +27,22 @@ describe('BridgeGame테스트', () => {
     bridgeGame = new BridgeGame();
   });
 
-  test('다리 생성: 숫자 입력에 알맞은 다리 생성 테스트', () => {
-    const userInputs = ['3', '5', '10'];
-    const result = [];
+  describe('다리 생성', () => {
+    test('숫자 입력에 알맞은 다리 생성 테스트', () => {
+      const userInputs = ['3', '5', '10'];
+      const result = [];
 
-    userInputs.forEach((input) => {
-      bridgeGame.createBridge(input);
-      result.push(bridgeGame.bridgeStore.isSameWithBridgeLength(Number(input)));
+      userInputs.forEach((input) => {
+        bridgeGame.createBridge(input);
+        result.push(bridgeGame.bridgeStore.isSameWithBridgeLength(Number(input)));
+      });
+      expect(result.every((el) => el)).toBeTruthy();
     });
-    expect(result.every((el) => el)).toBeTruthy();
-  });
 
-  test.each(['', ' ', '300', 'ㅁ', 'a', '*'])('다리 생성: 올바르지 않은 입력 발생시 에러 throw', (input) => {
-    expect(
-      () => bridgeGame.createBridge(input),
-    ).toThrow('[ERROR]');
+    test.each(['', ' ', '300', 'ㅁ', 'a', '*'])('올바르지 않은 입력 발생시 에러 throw', (input) => {
+      expect(
+        () => bridgeGame.createBridge(input),
+      ).toThrow('[ERROR]');
+    });
   });
 });
