@@ -1,7 +1,16 @@
+const BRIDGE_LENGTH_NOT_NUMBE_ERROR = "[ERROR] 숫자만 입력해 주세요";
+const BRIDGE_LENGTH_RANGE_OUT_ERROR =
+  "[ERROR] 3 에서 20 사이의 수만 입력가능합니다";
+
 const DOWN_BRIDGE_SYMBOL = "D";
 const UP_BRIDGE_SYMBOL = "U";
 
+const BRIDGE_LENGTH_QUERY = "다리의 길이를 입력해주세요.";
+
 module.exports={
+  BRIDGE_LENGTH_NOT_NUMBE_ERROR,
+  BRIDGE_LENGTH_RANGE_OUT_ERROR,
   DOWN_BRIDGE_SYMBOL,
   UP_BRIDGE_SYMBOL,
+  BRIDGE_LENGTH_QUERY
 }
