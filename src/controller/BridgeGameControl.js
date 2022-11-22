@@ -3,7 +3,6 @@
 /* eslint-disable import/no-useless-path-segments */
 /* eslint-disable max-len */
 /* eslint-disable class-methods-use-this */
-const { Console } = require('@woowacourse/mission-utils');
 const { BridgeSize, Moving, GameCommand, Map } = require('../model');
 const { InputView, OutputView } = require('../view');
 const BridgeGame = require('./BridgeGame');

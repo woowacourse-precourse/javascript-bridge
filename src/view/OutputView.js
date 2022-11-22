@@ -41,7 +41,7 @@ const OutputView = {
     // });
 
     Console.print(`[ ${this.getUpMap(map, currentPosition).join(' | ')} ]`);
-    Console.print(`[ ${this.getDownMap(map, currentPosition).join(' | ')} ]`);
+    Console.print(`[ ${this.getDownMap(map, currentPosition).join(' | ')} ]\n`);
     // Console.print('최종 게임 결과');
     // Console.print('[ O |   | O ]');
     // Console.print('[   | O |   ]');
@@ -53,11 +53,11 @@ const OutputView = {
   },
 
   printEnd() {
-    Console.print('\n최종 게임 결과');
+    Console.print('최종 게임 결과');
   },
 
   printWin(isWin) {
-    Console.print(`\n게임 성공 여부: ${isWin ? '성공' : '실패'}`);
+    Console.print(`게임 성공 여부: ${isWin ? '성공' : '실패'}`);
   },
 
   printTryCount(tryCount) {
