@@ -17,4 +17,10 @@ describe("InputView 테스트", () => {
       InputView.validateSize("A");
     }).toThrow("[ERROR]");
   });
+
+  test("범위 이외의 숫가 들어가면 예외가 발생한다", () => {
+    expect(() => {
+      InputView.validateSize(21);
+    }).toThrow("[ERROR]");
+  });
 });

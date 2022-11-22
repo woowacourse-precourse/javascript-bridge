@@ -22,7 +22,7 @@ const InputView = {
 
   validateSize(size) {
     if (isNaN(Number(size))) throw new Error("[ERROR] 숫자를 입력해야 합니다.");
-    if (size < 3 && 20 < size)
+    if (size < 3 || 20 < size)
       throw new Error("[ERROR] 3이상 20이하의 size를 입력해야 합니다.");
   },
   /**
