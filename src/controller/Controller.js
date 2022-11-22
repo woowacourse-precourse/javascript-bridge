@@ -30,7 +30,7 @@ class Controller {
 
   validateSize(size) {
     try {
-      WinningBridge.validate(Number(size));
+      WinningBridge.validate(size);
     } catch (error) {
       OutputView.printError(error);
       return this.inputBridgeSize();

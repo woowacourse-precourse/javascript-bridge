@@ -15,7 +15,7 @@ const {
 
 const Validation = {
   checkNumberType(input) {
-    if (Number.isNaN(input)) throw ERROR.mustBeNumber;
+    if (Number.isNaN(Number(input))) throw ERROR.mustBeNumber;
   },
 
   checkStringType(input) {
@@ -27,7 +27,8 @@ const Validation = {
   },
 
   checkRange(input) {
-    if (input < MIN_SIZE || input > MAX_SIZE) throw ERROR.mustBeInRange;
+    if (Number(input) < MIN_SIZE || Number(input) > MAX_SIZE)
+      throw ERROR.mustBeInRange;
   },
 
   checkValidDirection(input) {
