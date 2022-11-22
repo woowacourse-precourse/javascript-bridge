@@ -17,8 +17,7 @@ const InputView = {
   readBridgeSize(callback) {
     Console.readLine(QUESTIONS.bridgeSize, len => {
       try {
-        if (!validateBridgeSize(len))
-          throw new Error(ERROR_MSG.invalidBridgeSize);
+        validateBridgeSize(len);
         callback(len);
       } catch (error) {
         Console.print(error.message);
@@ -33,8 +32,7 @@ const InputView = {
   readMoving(callback) {
     Console.readLine(QUESTIONS.movePosition, position => {
       try {
-        if (!validatePosition(position))
-          throw new Error(ERROR_MSG.invalidPosition);
+        validatePosition(position);
         callback(position);
       } catch (error) {
         Console.print(error.message);

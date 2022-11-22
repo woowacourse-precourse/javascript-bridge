@@ -6,19 +6,18 @@ const {
 } = require('./constants');
 
 const validateBridgeSize = len => {
-  if (isNaN(+len)) return false;
-  if (len < MIN_BRIDGE_SIZE || len > MAX_BRIDGE_SIZE) return false;
-  return true;
+  if (Number.isNaN(+len)) throw new Error(ERROR_MSG.invalidBridgeSize);
+  if (len < MIN_BRIDGE_SIZE || len > MAX_BRIDGE_SIZE)
+    throw new Error(ERROR_MSG.invalidBridgeSize);
 };
 
 const validatePosition = position => {
-  if (!POSITIONS.includes(position)) return false;
-  return true;
+  if (!POSITIONS.includes(position)) throw new Error(ERROR_MSG.invalidPosition);
 };
 
 const validateRetryCommand = command => {
-  if (!RETRY_COMMAND_TYPE.includes(command)) return false;
-  return true;
+  if (!RETRY_COMMAND_TYPE.includes(command))
+    throw new Error(ERROR_MSG.invalidRetryCommand);
 };
 
 module.exports = { validateBridgeSize, validatePosition, validateRetryCommand };
