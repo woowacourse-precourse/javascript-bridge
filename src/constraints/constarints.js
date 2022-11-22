@@ -11,7 +11,7 @@ const MESSAGES = {
     TRY: "총 시도한 횟수: ",
     IS_SUCCEED: {
       true: "게임 성공 여부: 성공",
-      false: "게임 성공 여부 : 실패",
+      false: "게임 성공 여부: 실패",
     },
   },
   EXCEPTIONS: {
