@@ -36,6 +36,13 @@ class Model {
   getTryCount() {
     return this.#totalTryCount;
   }
+
+  getCurrentMap() {
+    const upArr = this.getUpBridgeArr();
+    const downArr = this.getDownBridgeArr();
+    const drawResult = `[${upArr.join('|')}]\n[${downArr.join('|')}]`;
+    return drawResult;
+  }
 }
 
 module.exports = Model;
