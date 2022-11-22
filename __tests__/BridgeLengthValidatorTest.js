@@ -42,7 +42,7 @@ const expectLogContains = (received, logs) => {
   });
 };
 
-describe("다리 생성 테스트", () => {
+describe("입력에 따른 다리 생성 테스트", () => {
   test.each([[["a"]], [["12.5"]], [[" "]], [[""]]])(
     "입력숫자가 정수인 숫자가 아닌지 체크",
     (input) => runException(input)
