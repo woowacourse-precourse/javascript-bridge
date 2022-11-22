@@ -1,6 +1,7 @@
 const OutputView = require("./OutputView");
 const { SPACE_TO_MOVE, OUTPUT_MESSAGE, GAME_RESULT } = require("./Utils");
 
+
 const BridgeSet = {
 
   bridgePass(moving, overBridge, underBridge) {
@@ -65,25 +66,31 @@ const BridgeSet = {
     }
   },
 
-  
-
-  beforeBridge() {
-    this.overBridge.pop();
-    this.underBridge.pop();
-    return OutputView.printMap(this.overBridge, this.underBridge);
+  repeat(overBridge, underBridge) {
+    OutputView.printMap(overBridge, underBridge);
   },
 
-  successEnd(tryCount) {
-    OutputView.printResult(GAME_RESULT.SUCCESS, tryCount);
-    this.overBridge = [];
-    this.underBridge = [];
+  gameResult(overBridge, underBridge) {
+    return OutputView.printResult(overBridge, underBridge);
   },
 
-  failureEnd(tryCount) {
-    OutputView.printResult(GAME_RESULT.FAILURE, tryCount);
-    this.overBridge = [];
-    this.underBridge = [];
-  }
+  successGameResult(tryCount) {
+    OutputView.printResultInfo(GAME_RESULT.SUCCESS, tryCount);
+  },
+
+  failureGameResult(tryCount) {
+    OutputView.printResultInfo(GAME_RESULT.FAILURE, tryCount);
+  },
+
+  beforeBridge(overBridge, underBridge) {
+    overBridge.pop();
+    underBridge.pop();
+  },
+
+  resetGame(overBridge, underBridge) {
+    overBridge = [];
+    underBridge = [];
+  },
 }
 
 
