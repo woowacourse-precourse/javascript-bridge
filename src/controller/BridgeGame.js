@@ -13,8 +13,6 @@ class BridgeGame {
   #bridge;
   /** @type {string[]} */
   #inputs;
-  /** @type {number} */
-  #gameStatus;
 
   /**
    * @param {Bridge} bridgeInstance Bridge 클래스의 인스턴스
@@ -22,60 +20,57 @@ class BridgeGame {
   constructor(bridgeInstance) {
     this.#bridge = bridgeInstance;
     this.#inputs = [];
-    this.#gameStatus = GAME_STATUS.PROCEEDING;
   }
 
   retry() {
     this.#inputs = [];
-    this.#gameStatus = GAME_STATUS.PROCEEDING;
   }
 
   /**
-   * @typedef {Object} resultMap
-   * @property {string} moveResult
-   * @property {number} gameStatus
+   * @param {string} input 플레이어의 입력
    */
-
-  /**
-   * @param {string | null} input 플레이어의 입력
-   * @return {resultMap} 출력할 map을 반환
-   */
-  move(input = null) {
-    if (input && this.#bridge.canMoveMore(this.#inputs.length)) {
+  move(input) {
+    if (this.#bridge.canMoveMore(this.#inputs.length)) {
       this.#inputs.push(input);
     }
-
-    this.#refreshGameStatus();
-    return this.#getResultMap();
-  }
-
-  #refreshGameStatus() {
-    this.#checkGameEnd();
-    this.#checkGameOver();
   }
 
   /**
-   * @return {resultMap} 출력할 map을 반환
+   * @return {number} gameStatus
    */
-  #getResultMap() {
-    return {
-      moveResult: this.#bridge.getMoveResult(this.#inputs),
-      gameStatus: this.#gameStatus,
-    };
+  getGameStatus() {
+    if (this.#isGameOver()) return GAME_STATUS.OVER;
+    if (this.#isGameEnd()) return GAME_STATUS.END;
+    return GAME_STATUS.PROCEEDING;
   }
 
-  #checkGameEnd() {
+  /**
+   * @return {string} 현재 다리결과를 반환
+   */
+  getMoveResult() {
+    return this.#bridge.getMoveResult(this.#inputs);
+  }
+
+  /**
+   * @return {boolean}
+   */
+  #isGameEnd() {
     if (!this.#bridge.canMoveMore(this.#inputs.length)) {
-      this.#gameStatus = GAME_STATUS.END;
+      return true;
     }
+    return false;
   }
 
-  #checkGameOver() {
+  /**
+   * @return {boolean}
+   */
+  #isGameOver() {
     const lastInputIdx = this.#inputs.length - 1;
 
     if (!this.#bridge.compare(this.#inputs[lastInputIdx], lastInputIdx)) {
-      this.#gameStatus = GAME_STATUS.OVER;
+      return true;
     }
+    return false;
   }
 }
 
