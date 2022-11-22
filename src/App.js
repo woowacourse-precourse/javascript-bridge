@@ -1,14 +1,19 @@
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 const Bridge = require('./model/Bridge');
+const UserBridge = require('./model/UserBridge');
 const BridgeGame = require('./controller/BridgeGame');
 
 class App {
   bridge;
+  userBridge;
   bridgeGame;
+  moveCount;
   constructor() {
     this.bridge = new Bridge();
-    this.bridgeGame = new BridgeGame(this.bridge);
+    this.userBridge = new UserBridge();
+    this.bridgeGame = new BridgeGame(this.bridge, this.userBridge);
+    this.moveCount = 0;
   }
   play() {
     OutputView.printStart();
@@ -26,10 +31,14 @@ class App {
   }
   moveOnBridge() {
     InputView.readMoving((movement) => {
-      this.bridgeGame.move(movement);
+      this.bridgeGame.move(movement, this.moveCount);
+      this.moveCount += 1;
+      this.showMap();
     });
   }
-  // showPlayer;
+  showMap() {
+    OutputView.printMap(this.userBridge.condition);
+  }
 }
 
 const app = new App();
