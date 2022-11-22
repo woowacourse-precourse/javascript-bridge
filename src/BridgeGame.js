@@ -1,6 +1,6 @@
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require('./BridgeMaker')
-const { BRIDGE_MOVING } = require('./constant/InputMsg')
+const { BRIDGE_MOVING } = require('./constant/constant')
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
