@@ -43,6 +43,7 @@ const Controller = {
 
   addPlayerBlock(block) {
     this.playerArr.push(block);
+    return this.playerArr   // 테스트때문에 추가
   },
 
   successMove(block) {
