@@ -22,6 +22,17 @@ class App {
     }
   }
 
+  successPlace(inputMove, count){
+    if(inputMove == 'U'){
+      let upMessage=[MESSAGE.bridge.bridgeOkay,MESSAGE.bridge.bridgeNone]
+      printBridgeMap(upMessage, count, bridgeSize);
+    }
+    else if(inputMove=='D') {
+      let downMessage=[MESSAGE.bridge.bridgeNone, MESSAGE.bridge.bridgeOkay]
+      printBridgeMap(downMessage, count, bridgeSize);
+    }
+  }
+
 
   makeBridgeBase() {
     bridgeSize=readBridgeSize()
