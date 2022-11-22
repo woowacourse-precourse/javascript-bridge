@@ -1,0 +1,22 @@
+const GAME_MESSAGE = {
+  PLAY_GAME: '다리 건너기 게임을 시작합니다.',
+  INPUT_BRIDGE_LENGTH: '다리의 길이를 입력해주세요.\n',
+  INPUT_UP_OR_DOWN: '이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
+  ASK_REPLAY: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+  RESULT_COMMENT: '최종 게임 결과',
+  RESULT: '게임 성공 여부: ',
+  NUMBERS_OF_PLAY: '총 시도한 횟수: ',
+};
+const BRIDGE = {
+  START: '[ ',
+  END: ' ]',
+  BETWEEN: ' | ',
+};
+const ERROR_MESSAGE = {
+  IS_NOT_NUMBER: '[ERROR] 다리 길이로 숫자를 입력하세요.\n',
+  IS_NOT_IN_RANGE: '[ERROR] 다리 길이를 3~20 사이의 숫자로 입력하세요.\n',
+  IS_WRONG_DIRECTION: '[ERROR] 올바른 방향을 입력하세요. (위: U, 아래: D)\n',
+  IS_WRONG_RETRY_COMMENT: '[ERROR] 올바른 알파벳을 입력하세요. (재시도: R, 종료: Q)\n',
+};
+
+module.exports = { GAME_MESSAGE, BRIDGE, ERROR_MESSAGE };
