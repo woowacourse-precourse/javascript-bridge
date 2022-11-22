@@ -1,8 +1,8 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
-function catchError(fn, ...arg) {
+function catchError(fn, arg) {
   try {
-    fn(...arg);
+    fn(arg);
   } catch (error) {
     MissionUtils.Console.print(error);
   }
