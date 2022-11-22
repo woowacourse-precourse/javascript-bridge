@@ -1,11 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { GAME_UTILS, START_MESSAGE } = require('./util/Constant');
 const InputView = require('./InputView');
-const BridgeSizeValidator = require('./validator/BridgeSizeValidator');
+const OutputView = require('./OutputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
+const BridgeSizeValidator = require('./validator/BridgeSizeValidator');
 const MovingValidator = require('./validator/MovingValidator');
-const OutputView = require('./OutputView');
 const GameCommandValidator = require('./validator/GameCommandValidator');
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -13,18 +13,18 @@ const GameCommandValidator = require('./validator/GameCommandValidator');
 
 class BridgeGame {
   #bridgeSize;
-  #bridgeSet;
+  #correctBridgeSet;
   #gameStage;
   #gameAttempt;
-  #checkSet;
+  #checkBridgeSet;
 
   constructor() {
     this.#gameAttempt = 1;
     this.#gameStage = 0;
-    this.#checkSet = [];
+    this.#checkBridgeSet = [];
   }
 
-  start() {
+  startBridgeGame() {
     Console.print(START_MESSAGE.START_TITLE);
     this.inputBridgeSize();
   }
@@ -46,7 +46,7 @@ class BridgeGame {
 
   setBridgeRandomNumber() {
     const bridgeRandomNumber = () => BridgeRandomNumberGenerator.generate();
-    this.#bridgeSet = BridgeMaker.makeBridge(this.#bridgeSize, bridgeRandomNumber);
+    this.#correctBridgeSet = BridgeMaker.makeBridge(this.#bridgeSize, bridgeRandomNumber);
     this.inputMoving();
   }
 
@@ -65,20 +65,22 @@ class BridgeGame {
   }
 
   isRightBridge(moving) {
-    moving === this.#bridgeSet[this.#gameStage] ? this.#checkSet.push(GAME_UTILS.MOVE_CORRECT) : this.#checkSet.push(GAME_UTILS.MOVE_WRONG);
+    moving === this.#correctBridgeSet[this.#gameStage]
+      ? this.#checkBridgeSet.push(GAME_UTILS.MOVE_CORRECT)
+      : this.#checkBridgeSet.push(GAME_UTILS.MOVE_WRONG);
     this.move();
-    this.#checkSet.includes(GAME_UTILS.MOVE_WRONG) ? this.wrongBridge() : this.correctBridge();
+    this.#checkBridgeSet.includes(GAME_UTILS.MOVE_WRONG) ? this.wrongBridge() : this.correctBridge();
   }
 
   correctBridge() {
-    if (this.#gameStage === this.#bridgeSet.length - 1) {
-      return this.printEndGameMessage(GAME_UTILS.GAME_RESULT_SUCCESS);
+    if (this.#gameStage === this.#correctBridgeSet.length - 1) {
+      return this.endBridgeGame(GAME_UTILS.GAME_RESULT_SUCCESS);
     }
     this.#gameStage += 1;
     this.inputMoving();
   }
 
-  printEndGameMessage(result) {
+  endBridgeGame(result) {
     OutputView.printEndMessage();
     this.move();
     return OutputView.printResult(this.#gameAttempt, result);
@@ -100,7 +102,7 @@ class BridgeGame {
 
   checkGameCommand(command) {
     if (command === GAME_UTILS.COMMAND_RESTART) return this.retry();
-    this.printEndGameMessage(GAME_UTILS.GAME_RESULT_FAILURE);
+    this.endBridgeGame(GAME_UTILS.GAME_RESULT_FAILURE);
   }
 
   /**
@@ -111,9 +113,9 @@ class BridgeGame {
   move() {
     const uBridgeMap = [];
     const dBridgeMap = [];
-    this.#checkSet.forEach((stage, index) => {
-      this.#bridgeSet[index] === GAME_UTILS.COMMAND_UPBRIDGE ? uBridgeMap.push(stage) : uBridgeMap.push(GAME_UTILS.MOVE_UNCHECK);
-      this.#bridgeSet[index] === GAME_UTILS.COMMAND_DOWNBRIDGE ? dBridgeMap.push(stage) : dBridgeMap.push(GAME_UTILS.MOVE_UNCHECK);
+    this.#checkBridgeSet.forEach((stage, index) => {
+      this.#correctBridgeSet[index] === GAME_UTILS.COMMAND_UPBRIDGE ? uBridgeMap.push(stage) : uBridgeMap.push(GAME_UTILS.MOVE_UNCHECK);
+      this.#correctBridgeSet[index] === GAME_UTILS.COMMAND_DOWNBRIDGE ? dBridgeMap.push(stage) : dBridgeMap.push(GAME_UTILS.MOVE_UNCHECK);
     });
     OutputView.printMap(uBridgeMap, dBridgeMap);
   }
@@ -126,12 +128,12 @@ class BridgeGame {
   retry() {
     this.#gameStage = 0;
     this.#gameAttempt += 1;
-    this.#checkSet = [];
+    this.#checkBridgeSet = [];
     this.inputMoving();
   }
 
   play() {
-    this.start();
+    this.startBridgeGame();
   }
 }
 
