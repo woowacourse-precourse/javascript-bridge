@@ -64,15 +64,25 @@ const InputView = {
   readGameCommand(upAndDownList, bridgeList) {
     Console.readLine(RETRY, (retryOrQuit) => {
       if(retryOrQuit === 'R') {
-        this.bridgeGame.retry();
-        this.retryNum += 1;
-        InputView.readMoving(bridgeList);
-      } else if(retryOrQuit === 'Q') {
-          this.isSuccess = END_GAME.FAILED;
-          printResult(upAndDownList, this.retryNum, this.isSuccess);
+        this.retryGame(bridgeList);
+      } 
+      if(retryOrQuit === 'Q') {
+        this.quitGame(upAndDownList);
       }
     })
   },
+
+  retryGame(bridgeList) {
+    this.bridgeGame.retry();
+    this.retryNum += 1;
+    InputView.readMoving(bridgeList);
+  },
+
+  quitGame(upAndDownList) {
+    this.isSuccess = END_GAME.FAILED;
+    printResult(upAndDownList, this.retryNum, this.isSuccess);
+  }
+
 };
 
 module.exports = InputView;
