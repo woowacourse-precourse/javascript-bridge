@@ -16,7 +16,7 @@ const ERROR = {
   BRIDGE_TYPE_ERROR: '\n[ERROR] 다리 길이는 숫자 한 개만 입력 가능합니다.',
   BRIDGE_MOVE_INPUT_ERROR: '\n[ERROR] 이동 칸 선택은 (U), (D) 중에서만 가능합니다.',
   BRIDGE_MOVE_INPUT_LENGTH_ERROR: '\n[ERROR] 이동 칸은 (U), (D) 중 한 개만 입력해야 합니다.',
-  GAME_COMMAND_INPUT_ERROR: '\n[ERROR] 이동 칸 선택은 (R), (Q) 중에서만 가능합니다.',
-  GAME_COMMAND_INPUT_LENGTH_ERROR: '\n[ERROR] 이동 칸 선택은 (R), (Q) 중 한 개만 입력해야 합니다.',
+  GAME_COMMAND_INPUT_ERROR: '\n[ERROR] 재시작/종료 명령어는 (R), (Q) 중에서만 가능합니다.',
+  GAME_COMMAND_INPUT_LENGTH_ERROR: '\n[ERROR] 재시작/종료 명령어는 (R), (Q) 중 한 개만 입력해야 합니다.',
 }
 module.exports = {START_GAME, USER_INPUT, RETRY, END_GAME, ERROR};

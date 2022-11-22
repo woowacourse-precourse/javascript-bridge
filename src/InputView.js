@@ -57,10 +57,10 @@ const InputView = {
 
   validateUserMove(upOrDown) {
     if(!['U', 'D'].includes(upOrDown)) {
-      throw new Error(ERROR.USER_MOVE_INPUT_ERROR);
+      throw new Error(ERROR.BRIDGE_MOVE_INPUT_ERROR);
     }
     if(upOrDown.length !== 1) {
-      throw new Error(ERROR.USER_MOVE_INPUT_LENGTH_ERROR);
+      throw new Error(ERROR.BRIDGE_MOVE_INPUT_LENGTH_ERROR);
     }
   },
 
@@ -93,12 +93,24 @@ const InputView = {
    */
   readGameCommand(upAndDownList, bridgeList) {
     Console.readLine(RETRY, (retryOrQuit) => {
-      if(retryOrQuit === 'R') {
-        this.retryGame(bridgeList);
-      } if(retryOrQuit === 'Q') {
-        this.quitGame(upAndDownList);
-      }
+      try {
+        this.validateGameCommand(retryOrQuit);
+        if(retryOrQuit === 'R') {
+          this.retryGame(bridgeList);
+        } if(retryOrQuit === 'Q') {
+          this.quitGame(upAndDownList);
+        }
+      } catch(error) { this.printError(error); }
     })
+  },
+
+  validateGameCommand(retryOrQuit) {
+    if(retryOrQuit.length !== 1) {
+      throw new Error(ERROR.GAME_COMMAND_INPUT_LENGTH_ERROR);
+    }
+    if(!['R', 'Q'].includes(retryOrQuit)) {
+      throw new Error(ERROR.GAME_COMMAND_INPUT_ERROR);
+    }
   },
 
   retryGame(bridgeList) {
