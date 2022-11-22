@@ -1,7 +1,7 @@
 const BridgeMaker = require('./BridgeMaker');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const { RESULT, PLAY } = require('./constant/constant');
+const { RESULT } = require('./constant/constant');
 const { makeRandomNumber } = require('./utils/util');
 const BridgeGame = require('./BridgeGame');
 
@@ -22,7 +22,6 @@ class BridgeGamePlay {
    */
   start() {
     OutputView.printStart();
-    // this.bridgeSize = InputView.readBridgeSize();
     this.bridgeSize = InputView.getBridgeSize();
     this.makeBridge();
     this.playGame();
@@ -74,23 +73,35 @@ class BridgeGamePlay {
     this.myMoves.push(currentMove);
     const currentBridge = this.bridgeGame.move(this.myMoves, this.bridge);
     const currentMyMoves = this.bridgeGame.move(this.myMoves, this.myMoves);
-    let result = this.bridgeGame.compareBridge(currentMyMoves, currentBridge);
+    const result = this.bridgeGame.compareBridge(currentMyMoves, currentBridge);
     OutputView.printMap(result);
+    this.checkIfWin(result);
+    this.checkIfFinish(result);
+  }
+
+  checkIfWin(result) {
     if (this.validateWin()) {
       OutputView.printResult(result, RESULT.WIN, this.tryCount);
-      return;
     }
+  }
+
+  checkRetry(result, gameCommand) {
+    if (!this.bridgeGame.retry(gameCommand)) {
+      OutputView.printResult(result, RESULT.FAIL, this.tryCount);
+    }
+    if (this.bridgeGame.retry(gameCommand)) {
+      this.playGame();
+    }
+  }
+
+  checkIfFinish(result) {
     if (!this.validateMove()) {
       const gameCommand = InputView.getGameCommand();
-      if (gameCommand === PLAY.QUIT) {
-        OutputView.printResult(result, RESULT.FAIL, this.tryCount);
-      }
-      if (gameCommand === PLAY.RESTART) {
-        this.playGame();
-      }
-      return;
+      this.checkRetry(result, gameCommand);
     }
-    this.move();
+    if (this.validateMove() && !this.validateWin()) {
+      this.move();
+    }
   }
 }
 
