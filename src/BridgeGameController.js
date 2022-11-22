@@ -6,14 +6,13 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { RESULT } = require('./utils/constants');
 
 class BridgeGameController {
-  #bridgeInfo;
+  #bridgeInfo = {
+    bridge: [],
+    userMove: [],
+    tryCount: 1,
+  };
 
   constructor() {
-    this.#bridgeInfo = {
-      bridge: [],
-      userMove: [],
-      tryCount: 1,
-    };
     this.bridgeGame = new BridgeGame();
   }
 
