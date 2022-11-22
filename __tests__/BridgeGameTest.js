@@ -40,7 +40,7 @@ describe("BridgeGame 클래스 테스트", () => {
     expect(gameRec.correctOrNot).toEqual("X");
   });
 
-  test("setBridgeOutput 메서드-1: O/X 표시 추가", () => {
+  test("setBridgeOutput 메서드-1: 다리에 O/X 표시 추가", () => {
     const gameRec = {
       bridgeAnswer: ["U", "D", "D"],
       bridgeOutput: { firstBridge: "[ O |", secondBridge: "[   |" },
@@ -53,7 +53,7 @@ describe("BridgeGame 클래스 테스트", () => {
     expect(gameRec.bridgeOutput.secondBridge).toEqual("[   |   ]");
   });
 
-  test("setBridgeOutput 메서드-2: O/X 표시 추가", () => {
+  test("setBridgeOutput 메서드-2: 다리에 O/X 표시 추가", () => {
     const gameRec = {
       bridgeAnswer: ["U", "D", "D"],
       bridgeOutput: { firstBridge: "[ O |", secondBridge: "[   |" },
