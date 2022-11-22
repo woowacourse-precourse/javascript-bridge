@@ -47,10 +47,10 @@ class BridgeGame {
     }
 
     makeBridgeTraceForPrint() {
-        const upBridgeTrace = this.#trace.map((bridge) => bridge[0]).join(STRUCTURE.LINK);
-        const downBridgeTrace = this.#trace.map((bridge) => bridge[1]).join(STRUCTURE.LINK);
+        const upBridgeTraceArray = this.#trace.map((bridge) => bridge[0]).join(STRUCTURE.LINK);
+        const downBridgeTraceArray = this.#trace.map((bridge) => bridge[1]).join(STRUCTURE.LINK);
 
-        return [upBridgeTrace, downBridgeTrace];
+        return [upBridgeTraceArray, downBridgeTraceArray];
     }
 
     resetBridgeSetting() {

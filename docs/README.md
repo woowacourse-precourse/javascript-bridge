@@ -37,3 +37,33 @@
     -   [x] 재시작해도 처음에 만든 다리로 재사용한다.
 
 -   [x] 다리를 끝까지 건너면 게임이 `종료`된다.
+
+#### BridgeGame 함수 역할
+
+-   move() `return type: boolean`
+
+이동을 할 때마다 이동 횟수를 1씩 늘린다.
+return move === "U"
+
+-   isBadMove() `return type: boolean`
+
+입력:U - 다리:D
+입력:D - 다리:U
+
+위와 같이 입력과 다리의 일치여부를 확인한다.
+
+-   isClear() `return type: boolean`
+
+(이동횟수 === 다리의 길이) 라면 다리 건너기에 성공한다.
+
+-   questionRetry() `return type: boolean`
+
+R키를 입력받으면 다리 건너기 상태를 초기화한다.
+
+-   pushBridgeTrace()
+
+다리의 진행상황을 갱신한다.
+
+-   makeBridgeTraceForPrint() `return type: array`
+
+출력 형식에 따라 출력할 수 있도록 다리의 배열을 반환한다.
