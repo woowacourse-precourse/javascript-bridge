@@ -1,6 +1,10 @@
 const InputView = require("./InputView.js");
 const ValidCheck = require("./ValidCheck.js");
 const RecallUntilCorrect = {
+
+  /**"
+   * @return {number} 다리 길이를 리턴(올바른 값 3~20 숫자)
+   */  
   recallReadBridgeSize(){
     let bridgeSize;
     bridgeSize = InputView.readBridgeSize();
@@ -10,6 +14,10 @@ const RecallUntilCorrect = {
     }
     return bridgeSize;
   },
+
+  /**"
+   * @return {String} 플레이어 이동을 리턴 (올바른 값 "U", "D")
+   */  
   recallReadMoving(){
     let moving;
     moving = InputView.readMoving();
@@ -19,6 +27,10 @@ const RecallUntilCorrect = {
     }
     return moving;
   },
+
+  /**"
+   * @return {String} 입력 커맨드를 리턴 (올바른 값 "R","Q")
+   */    
   recallreadGameCommand(){
     let gameCommand;
     gameCommand = InputView.readGameCommand();
