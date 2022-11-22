@@ -1,13 +1,14 @@
 const { checkPossibleDirection } = require('../Utils/ValidateUtils.js');
 
 class BridgeDirection {
-  #command;
-  constructor(command) {
-    this.#command = command;
+  #direction;
+
+  constructor(direction) {
+    this.#direction = direction;
   }
 
   validate() {
-    checkPossibleDirection(this.#command);
+    checkPossibleDirection(this.#direction);
   }
 }
 
