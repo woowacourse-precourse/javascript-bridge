@@ -47,6 +47,24 @@ const OutputView = {
     }
     return "";
   },
+
+  //게임의 최종 결과를 정해진 형식에 맞춰 출력
+  printResult(bridge, userBridge, attemptCnt) {
+    Console.print(RESULT_FINAL);
+    this.printMap(bridge, userBridge);
+    this.successOrNot(bridge, userBridge);
+    this.totalAttempts(attemptCnt);
+  },
+
+  successOrNot(bridge, userBridge) {
+    if (bridge.length == userBridge.length && !userBridge.includes(false))
+      Console.print(RESULT_SUCCESSORNOT + RESULT_SUCCESS);
+    else Console.print(RESULT_SUCCESSORNOT + RESULT_FAIL);
+  },
+
+  totalAttempts(attemptCnt) {
+    Console.print(RESULT_ATTEMPTS + attemptCnt);
+  },
 };
 
 module.exports = OutputView;
