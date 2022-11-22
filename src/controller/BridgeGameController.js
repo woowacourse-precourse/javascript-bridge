@@ -1,6 +1,7 @@
 const Bridge = require("../model/Bridge");
 const OutputView = require('../view/OutputView');
 const { ERROR_HANDLING } = require('./Error');
+const { GAME_STATE } = require("../assets/constants");
 
 /**
  * View로 부터 받은 요청을 처리하는 Controller
@@ -13,7 +14,9 @@ class BridgeGameController {
      */
     makeBridge(bridgeGame, size) {
         try {
+            const InputView = require("../view/InputView");
             bridgeGame.setBridge(new Bridge(size));
+            InputView.readMoving(bridgeGame);
         } catch (error) {
             ERROR_HANDLING[error.message](bridgeGame, error.message);
         }
@@ -27,11 +30,12 @@ class BridgeGameController {
      */
     move(bridgeGame, moveType) {
         try {
+            const InputView = require("../view/InputView");
             bridgeGame.move(moveType);
             OutputView.printMap(bridgeGame);
 
-            if (bridgeGame.isEndPosition())
-                OutputView.printResult(bridgeGame);
+            if (bridgeGame.isEndPosition()) return OutputView.printResult(bridgeGame);
+            if (bridgeGame.getState() === GAME_STATE.FAIL) return InputView.readMoving(bridgeGame);
         } catch (error) {
             ERROR_HANDLING[error.message](bridgeGame, error.message);
         }

@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const bridgeGameController = require('../controller/BridgeGameController');
 const MESSAGE = require("../assets/Messages");
-const { GAME_STATE, RESTART } = require("../assets/constants");
+const { RESTART } = require("../assets/constants");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -13,7 +13,6 @@ const InputView = {
   readBridgeSize(bridgeGame) {
     MissionUtils.Console.readLine(MESSAGE.ENTER_BRIDGE_SIZE, (size) => {
       bridgeGameController.makeBridge(bridgeGame, size);
-      this.readMoving(bridgeGame);
     })
   },
 
@@ -24,9 +23,6 @@ const InputView = {
   readMoving(bridgeGame) {
     MissionUtils.Console.readLine(MESSAGE.ENTER_MOVE_TYPE, (moveType) => {
       bridgeGameController.move(bridgeGame, moveType);
-
-      if (bridgeGame.getState() === GAME_STATE.FAIL)
-        this.readMoving(bridgeGame);
     });
   },
 
