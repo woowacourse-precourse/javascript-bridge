@@ -36,6 +36,7 @@ class App {
     InputView.readGameCommand((willRetry) => {
       if (this.game.retry(willRetry)) this.playOneStep();
       else OutputView.printResult(this.game);
+      Console.close();
     });
   }
 }
