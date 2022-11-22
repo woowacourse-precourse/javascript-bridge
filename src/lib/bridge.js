@@ -9,17 +9,17 @@ const LOWER = 1;
 
 const buildMap = {
   upper(bridgeMap, mark) {
-    bridgeMap[UPPER] += `[ ${mark} ]`;
-    bridgeMap[LOWER] += "[   ]";
+    bridgeMap[UPPER].push(`[ ${mark} ]`);
+    bridgeMap[LOWER].push("[   ]");
 
-    return bridgeMap.map((section) => section.replaceAll("][", "|"));
+    return bridgeMap;
   },
 
   lower(bridgeMap, mark) {
-    bridgeMap[UPPER] += "[   ]";
-    bridgeMap[LOWER] += `[ ${mark} ]`;
+    bridgeMap[UPPER].push("[   ]");
+    bridgeMap[LOWER].push(`[ ${mark} ]`);
 
-    return bridgeMap.map((section) => section.replaceAll("][", "|"));
+    return bridgeMap;
   },
 };
 
@@ -33,4 +33,8 @@ function getDirectionByNumber(number) {
   }
 }
 
-module.exports = { getDirectionByNumber, buildMap };
+function formatMap(bridgeMap) {
+  return bridgeMap.map((section) => section.join("").replaceAll("][", "|"));
+}
+
+module.exports = { getDirectionByNumber, buildMap, formatMap };

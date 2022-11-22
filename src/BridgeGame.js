@@ -7,7 +7,7 @@ const { FLAG } = require("./lib/constants");
 class BridgeGame {
   constructor() {
     this.bridge = [];
-    this.map = ["", ""];
+    this.map = [[], []];
     this.step = 0;
     this.tried = 1;
   }
@@ -25,7 +25,7 @@ class BridgeGame {
     const moved = direction === correct;
 
     this.updateMap(moved, direction);
-    this.takeAStep();
+    this.stepForward();
 
     return moved;
   }
@@ -42,14 +42,21 @@ class BridgeGame {
     }
   }
 
-  takeAStep() {
+  undoMap() {
+    this.map = this.map.map((section) => section.slice(0, section.length - 1));
+  }
+
+  stepForward() {
     this.step += 1;
   }
 
-  undo() {
+  stepBackward() {
     this.step -= 1;
-    this.map = this.map.map((section) => section.slice(0, section.length - 5));
-    this.map = this.map.map((section) => (section += "]"));
+  }
+
+  undo() {
+    this.stepBackward();
+    this.undoMap();
   }
 
   /**
