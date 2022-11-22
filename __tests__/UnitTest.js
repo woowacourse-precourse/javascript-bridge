@@ -1,6 +1,6 @@
-const BridgeGame = require('../src/BridgeGame');
-const BridgeStore = require('../src/BridgeStore');
-const BridgeValidator = require('../src/BridgeValidator');
+const BridgeGame = require('../src/Model/BridgeGame');
+const BridgeStore = require('../src/Model/BridgeStore');
+const BridgeValidator = require('../src/Validator/BridgeValidator');
 const { VALID_INPUT } = require('../src/constants');
 const MapMaker = require('../src/MapMaker');
 const ErrorHandler = require('../src/ErrorHandler');

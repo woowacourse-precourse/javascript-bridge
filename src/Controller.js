@@ -1,4 +1,4 @@
-const BridgeGame = require('./BridgeGame');
+const BridgeGame = require('./Model/BridgeGame');
 const { handleError } = require('./ErrorHandler');
 const MapMaker = require('./MapMaker');
 const InputView = require('./View/InputView');

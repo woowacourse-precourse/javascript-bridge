@@ -1,7 +1,7 @@
 const BridgeStore = require('./BridgeStore');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const BridgeValidator = require('./BridgeValidator');
+const BridgeMaker = require('../BridgeMaker');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const BridgeValidator = require('../Validator/BridgeValidator');
 
 const INITIAL_GAME_COUNT = 1;
 const INITIAL_BRIDGE_SIZE = {
