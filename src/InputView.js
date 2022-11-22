@@ -12,7 +12,6 @@ const InputView = {
   readBridgeSize(bridgegame) {
     Console.readLine(MESSAGE.ANNOUNCE.INPUT_SIZE, (answer) => {
       try {
-        Validate.validateBridgeSize(answer);
         this.readBridgeSizeCallback(answer, bridgegame);
       } catch (error) {
         OutputView.printError(error, this.readBridgeSize.bind(InputView), bridgegame);
@@ -31,7 +30,6 @@ const InputView = {
   readMoving(bridgegame) {
     Console.readLine(MESSAGE.ANNOUNCE.INPUT_MOVE, (answer) => {
       try {
-        Validate.validateReadMoving(answer);
         this.readMovingCallback(answer, bridgegame);
       } catch (error) {
         OutputView.printError(error, this.readMoving.bind(InputView), bridgegame);
