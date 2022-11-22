@@ -1,25 +1,79 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+const BridgeMaker = require('./BridgeMaker');
+const { generate } = require('./BridgeRandomNumberGenerator');
+const { KEY, OUTPUT_MESSAGES } = require('./constant');
+
 class BridgeGame {
-  #bridge
-  #turn
-  constructor(makeBridge){
-    this.#bridge=makeBridge;
-    this.#turn=0;
+  #status;
+  setBridge(bridgeSize) {
+    this.#status = {
+      bridge: BridgeMaker.makeBridge(bridgeSize, generate),
+      turn: 0,
+      alive: 1,
+      matchNumber: 1,
+    };
   }
   move(move) {
-    let turnResult;
-    turnResult=this.#bridge[this.#turn]===move ? 'O' : 'X';
-    OutputView.printMap(turnResult,move);
+    const returnStatus = { ...this.#status };
+    const { bridge, turn } = this.#status;
+    this.#status.alive = move === bridge[turn];
+    if (this.#status.alive) {
+      return this.nextCheck(bridge, turn, returnStatus);
+    }
+    if (!this.#status.alive) return this.restartPrint();
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+  nextCheck(bridge, turn, returnStatus) {
+    if (bridge.length - 1 === turn) {
+      return this.resultPrint();
+    }
+    if (bridge.length - 1 !== turn) {
+      this.#status.turn += 1;
+      return this.mapPrint(returnStatus);
+    }
+  }
+
+  resultPrint() {
+    return {
+      input: null,
+      output: OUTPUT_MESSAGES.PRINT_RESULT,
+      status: this.#status,
+    };
+  }
+  mapPrint(returnStatus) {
+    return {
+      input: OUTPUT_MESSAGES.READ_MOVING,
+      output: OUTPUT_MESSAGES.PRINT_MAP,
+      status: returnStatus,
+    };
+  }
+  restartPrint() {
+    return {
+      input: OUTPUT_MESSAGES.READ_GAME_COMMAND,
+      output: null,
+    };
+  }
+  retry(alive) {
+    if (alive === KEY.RESTART) {
+      this.#status.alive = true;
+      this.#status.turn = 0;
+      this.#status.matchNumber += 1;
+      return this.retryPrint();
+    }
+    if (alive === KEY.END) return this.end();
+  }
+  retryPrint() {
+    return {
+      input: OUTPUT_MESSAGES.READ_MOVING,
+      output: null,
+    };
+  }
+  endPrint() {
+    return {
+      input: null,
+      output: OUTPUT_MESSAGES.PRINT_RESULT,
+      status: this.#status,
+    };
+  }
 }
 
 module.exports = BridgeGame;
