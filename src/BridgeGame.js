@@ -25,24 +25,15 @@ class BridgeGame {
     return this.#position >= this.#bridge.length;
   }
 
-  isMatchCommand(command) {
-    return command === this.#bridge[this.#position];
-  }
-
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(command, successCallback, failCallback) {
-    if (this.isFinished()) {
-      return;
+    if (!this.isFinished()) {
+      this.#judgeMove(command, successCallback, failCallback);
     }
-    if (this.isMatchCommand(command)) {
-      this.#moveSuccess(command, successCallback);
-      return;
-    }
-    this.#moveFail(command, failCallback);
   }
 
   /**
@@ -51,11 +42,17 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(command, retryCallback, quitCallback) {
-    if (command === RETRY) {
-      retryCallback();
-      return;
-    }
-    quitCallback();
+    command === RETRY ? retryCallback() : quitCallback();
+  }
+
+  #judgeMove(command, successCallback, failCallback) {
+    this.#isMatchCommand(command)
+      ? this.#moveSuccess(command, successCallback)
+      : this.#moveFail(command, failCallback);
+  }
+
+  #isMatchCommand(command) {
+    return command === this.#bridge[this.#position];
   }
 
   #moveSuccess(command, cb) {
