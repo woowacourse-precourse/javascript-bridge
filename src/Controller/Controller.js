@@ -18,6 +18,12 @@ const Controller = {
         Controller.move(bridgeGame);
     },
 
+    move(bridgeGame) {
+        InputView.readMoving(input => {
+            Controller.controllerMoveCallback(input, bridgeGame);
+        })
+    },
+
 }
 
 module.exports = Controller;
