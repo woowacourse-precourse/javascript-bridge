@@ -67,4 +67,14 @@ describe('다리 건너기 테스트', () => {
 
     expect(result).toEqual([true, true, true, true, true]);
   });
+
+  test('플레이어가 현재까지 이동한 경로를 얻는 기능', () => {
+    const randomNumbers = ['1', '1', '0', '0', '1'];
+    const mockGenerator = randomNumbers.reduce((acc, number) => acc.mockReturnValueOnce(number), jest.fn());
+    const bridge = BridgeMaker.makeBridge(5, mockGenerator);
+    const { upBridgeRoute, downBridgeRoute } = PlayerMove.getCurrentRoute(3, bridge, false);
+
+    expect(upBridgeRoute).toEqual(['O', 'O', ' ', 'X']);
+    expect(downBridgeRoute).toEqual([' ', ' ', 'O', ' ']);
+  });
 });
