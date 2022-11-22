@@ -26,4 +26,16 @@ describe('유효성 검증 테스트', () => {
   ])('movement: %s => success', (input) => {
     expect(() => Validator.movingValidate(input)).not.toThrow();
   });
+  test.each([
+    ['r'], ['q'], ['1'], ['2'],
+    ['RQ'], ['QR'], ['Z'], [''],
+  ])('command: %s => success', (input) => {
+    expect(() => Validator.commandValidate(input)).toThrow();
+  });
+
+  test.each([
+    ['R'], ['Q'],
+  ])('command: %s => success', (input) => {
+    expect(() => Validator.commandValidate(input)).not.toThrow();
+  });
 });
