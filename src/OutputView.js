@@ -17,12 +17,12 @@ const OutputView = {
   //                 -> x | x | x 로 바뀜(중간에 맞춘 값들도 )
   // 값을 하나씩 비교해야되나 ? ?
   // 틀린부분만 x넣으면 됨
+
   printMap(keepGaming, getMap) {
     const resultArr = new Array(2);
     resultArr[GAME_RESOURCE.UPSIDE] = "";
     resultArr[GAME_RESOURCE.DOWNSIDE] = "";
     console.log(getMap);
-
     for (let i = 0; i < getMap.length; i++) {
       if (i == 0) {
         resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.LEFT_BRACKET;
@@ -31,43 +31,23 @@ const OutputView = {
         resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.VERTICAL;
         resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.VERTICAL;
       }
-
-      // if (getMap[i] === GAME_RESOURCE.UPSIDE) {
-      //   if (keepGaming === "right" || keepGaming === "allRight") {
-      //     resultArr[GAME_RESOURCE.UPSIDE] += "O";
-      //     resultArr[GAME_RESOURCE.DOWNSIDE] += " ";
-      //   } else {
-      //     resultArr[GAME_RESOURCE.UPSIDE] += "X";
-      //     resultArr[GAME_RESOURCE.DOWNSIDE] += " ";
-      //   }
-      // } else if (getMap[i] === GAME_RESOURCE.DOWNSIDE) {
-      //   if (keepGaming === "right" || keepGaming === "allRight") {
-      //     resultArr[GAME_RESOURCE.UPSIDE] += " ";
-      //     resultArr[GAME_RESOURCE.DOWNSIDE] += "O";
-      //   } else {
-      //     resultArr[GAME_RESOURCE.UPSIDE] += " ";
-      //     resultArr[GAME_RESOURCE.DOWNSIDE] += "X";
-      //   }
-      // }
-
       if (getMap[i] === GAME_RESOURCE.UPSIDE) {
-        if (keepGaming === "wrong") {
-          resultArr[GAME_RESOURCE.UPSIDE] += "X";
-          resultArr[GAME_RESOURCE.DOWNSIDE] += " ";
+        if (keepGaming === GAME_RESOURCE.WRONG) {
+          resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.CANT_GO;
+          resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.BLANK;
         } else {
-          resultArr[GAME_RESOURCE.UPSIDE] += "O";
-          resultArr[GAME_RESOURCE.DOWNSIDE] += " ";
+          resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.CAN_GO;
+          resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.BLANK;
         }
       } else if (getMap[i] === GAME_RESOURCE.DOWNSIDE) {
-        if (keepGaming === "wrong") {
-          resultArr[GAME_RESOURCE.UPSIDE] += " ";
-          resultArr[GAME_RESOURCE.DOWNSIDE] += "X";
+        if (keepGaming === GAME_RESOURCE.WRONG) {
+          resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.BLANK;
+          resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.CANT_GO;
         } else {
-          resultArr[GAME_RESOURCE.UPSIDE] += " ";
-          resultArr[GAME_RESOURCE.DOWNSIDE] += "O";
+          resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.BLANK;
+          resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.CAN_GO;
         }
       }
-
       if (i == getMap.length - 1) {
         resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.RIGHT_BRACKET;
         resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.RIGHT_BRACKET;
@@ -75,7 +55,6 @@ const OutputView = {
     }
     Console.print(resultArr[GAME_RESOURCE.UPSIDE]);
     Console.print(resultArr[GAME_RESOURCE.DOWNSIDE]);
-
     return resultArr;
   },
 

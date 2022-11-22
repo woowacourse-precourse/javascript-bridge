@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { MESSAGE } = require("./constants/Constant");
+const { MESSAGE, GAME_RESOURCE } = require("./constants/Constant");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const Validate = require("./Validate");
 const BridgeMaker = require("./BridgeMaker");
@@ -22,7 +22,6 @@ const InputView = {
         inputBridgeSize,
         BridgeRandomNumberGenerator.generate
       );
-      // console.log(bridge);
       let userMoveArray = [];
       this.readMoving(bridgeGame, bridge, userMoveArray);
     });
@@ -38,15 +37,14 @@ const InputView = {
       const keepGaming = bridgeGame.compareMove(bridge, userArray);
       const getMap = bridgeGame.getMap(userArray);
       const result = OutputView.printMap(keepGaming, getMap);
-
-      if (keepGaming === "right") {
+      if (keepGaming === GAME_RESOURCE.RIGHT) {
         this.readMoving(bridgeGame, bridge, userMoveArray);
       }
-      if (keepGaming === "allRight") {
+      if (keepGaming === GAME_RESOURCE.ALLRIGHT) {
         let count = bridgeGame.plusCount();
         OutputView.printResult(keepGaming, count, result);
       }
-      if (keepGaming === "wrong") {
+      if (keepGaming === GAME_RESOURCE.WRONG) {
         this.readGameCommand(bridgeGame, bridge, userMoveArray, result);
       }
     });

@@ -1,4 +1,4 @@
-const { ERR_MESSAGE } = require("./constants/constant");
+const { ERR_MESSAGE, COMMAND_VALUE } = require("./constants/constant");
 
 const Validate = {
   isNumber(value) {
@@ -18,7 +18,7 @@ const Validate = {
 
   checkMovingKey(value) {
     const check = value.toUpperCase();
-    if (check === "U" || check === "D") {
+    if (check === COMMAND_VALUE.UP || check === COMMAND_VALUE.DOWN) {
       return check;
     }
     throw new Error(ERR_MESSAGE.ERR_COMMAND_KEY);
@@ -26,7 +26,7 @@ const Validate = {
 
   checkRetryOrCloseKey(value) {
     const check = value.toUpperCase();
-    if (check === "R" || check === "Q") {
+    if (check === COMMAND_VALUE.RETRY || check === COMMAND_VALUE.QUIT) {
       return check;
     }
     throw new Error(ERR_MESSAGE.ERR_COMMAND_KEY);

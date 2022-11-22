@@ -1,6 +1,4 @@
-const { Console } = require("@woowacourse/mission-utils");
-const { MESSAGE } = require("./constants/Constant");
-const Validate = require("./Validate");
+const { COMMAND_VALUE } = require("./constants/Constant");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -32,9 +30,9 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moveKey, userMoveArray) {
-    if (moveKey === "U") {
+    if (moveKey === COMMAND_VALUE.UP) {
       userMoveArray.push(1);
-    } else if (moveKey === "D") {
+    } else if (moveKey === COMMAND_VALUE.DOWN) {
       userMoveArray.push(0);
     }
     this.userMoveArray = userMoveArray;
@@ -48,7 +46,6 @@ class BridgeGame {
     this.userMoveArray = userMoveArray;
     // console.log(this.userMoveArray);
     // console.log(bridge);
-
     for (let i = this.userMoveArray.length - 1; i < bridge.length; i++) {
       if (bridge[i] === this.userMoveArray[i]) {
         if (bridge.length === this.userMoveArray.length) {
@@ -60,12 +57,8 @@ class BridgeGame {
     }
   }
 
-  /**
-   * O, X 받아오는 로직
-   */
   getMap(userMoveArray) {
     this.userMoveArray = userMoveArray;
-    // console.log(this.userMoveArray);
     return this.userMoveArray;
   }
 
@@ -75,9 +68,9 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(retryOrCloseKey) {
-    if (retryOrCloseKey === "R") {
+    if (retryOrCloseKey === COMMAND_VALUE.RETRY) {
       return 1;
-    } else if (retryOrCloseKey === "Q") {
+    } else if (retryOrCloseKey === COMMAND_VALUE.QUIT) {
       return 0;
     }
   }

@@ -17,14 +17,23 @@ const ERR_MESSAGE = {
   ERR_COMMAND_KEY: "[ERROR] 잘못된 명령어를 입력하셨습니다.",
 };
 
-const COMMAND_VALUE = {};
+const COMMAND_VALUE = {
+  RETRY: "R",
+  QUIT: "Q",
+  UP: "U",
+  DOWN: "D",
+};
 const GAME_RESOURCE = {
   LEFT_BRACKET: "[ ",
   RIGHT_BRACKET: " ]",
-  CENTER_VERTICAL: " | ",
+  VERTICAL: " | ",
   CAN_GO: "O",
   CANT_GO: "X",
+  BLANK: " ",
   UPSIDE: 1,
   DOWNSIDE: 0,
+  WRONG: "wrong",
+  RIGHT: "right",
+  ALLRIGHT: "allRight",
 };
-module.exports = { MESSAGE, ERR_MESSAGE, GAME_RESOURCE };
+module.exports = { MESSAGE, ERR_MESSAGE, COMMAND_VALUE, GAME_RESOURCE };
