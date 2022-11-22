@@ -4,6 +4,7 @@ const BridgeMaker = require('../Model/BridgeMaker');
 const {generate} = require('../util/BridgeRandomNumberGenerator');
 const BridgeGame = require('../Model/BridgeGame')
 const  MissionUtils  = require('@woowacourse/mission-utils');
+const Validator = require('../util/Validator');
 
 class Controller {
   #answerBirdgeList;
@@ -28,36 +29,52 @@ class Controller {
   }
 
   getBirdgeAnswer(sizeNumber){
-    this.#answerBirdgeList = BridgeMaker.makeBridge(sizeNumber,generate);
-    //삭제해야함
-    MissionUtils.Console.print(this.#answerBirdgeList)
-    this.getMove()
+    try{
+      Validator.isVaildBridgeSize(sizeNumber);
+      Validator.isVaildBridgeSizeNum(sizeNumber);
+      this.#answerBirdgeList = BridgeMaker.makeBridge(sizeNumber,generate);
+      this.getMove()
+    } catch (error){
+      MissionUtils.Console.print(error)
+      this.getBridegeSize();
+    }
   }
 
   compare(moveInput){
-    const compareMove = this.bridgeGame.move(moveInput,this.#answerBirdgeList);
-
-    this.showResult = OutputView.printMap(this.bridgeGame.upList,this.bridgeGame.downList);
-    if(compareMove === 'END') this.finalResult(this.SUCCESS)
-    else if(compareMove) this.getMove();
-    else if(!compareMove) this.getRetryOrStop();
+    try{
+      Validator.isVaildUorD(moveInput);
+      const compareMove = this.bridgeGame.move(moveInput,this.#answerBirdgeList);
+  
+      this.showResult = OutputView.printMap(this.bridgeGame.upList,this.bridgeGame.downList);
+      if(compareMove === 'END') this.finalResult(this.SUCCESS)
+      else if(compareMove) this.getMove();
+      else if(!compareMove) this.getRetryOrStop();
+      
+    } catch(error){
+      MissionUtils.Console.print(error);
+      this.getMove();
+    }
   }
   
-
   getRetryOrStop(){
     InputView.readGameCommand(this.judgment.bind(this));
   }
 
   judgment(reTryOrStop){
-    if(reTryOrStop === "R"){
-      this.bridgeGame.retry()
-      this.getMove()
-    }
-    if(reTryOrStop === "Q") {
-      this.finalResult(this.FAILURE)
-      this.GameStop();
-    }
-    
+    try{
+      Validator.isVaildRorQ(reTryOrStop);
+      if(reTryOrStop === "R"){
+        this.bridgeGame.retry()
+        this.getMove()
+      }
+      if(reTryOrStop === "Q") {
+        this.finalResult(this.FAILURE)
+        this.GameStop();
+      }
+    } catch(error){
+      MissionUtils.Console.print(error);
+      this.getRetryOrStop();
+    } 
   }
 
   finalResult(successOrFailure){
