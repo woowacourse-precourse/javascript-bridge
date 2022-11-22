@@ -5,6 +5,7 @@ const {
   INPUT_MESSAGE,
   STATE_CONSTANT,
   RESULT_MESSAGE,
+  ERROR_MESSAGE,
 } = require("./Constants");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
@@ -30,7 +31,14 @@ class BridgeGame {
   gameStart() {
     printMessage(INFO_MESSAGE.start);
     InputView.readBridgeSize(INPUT_MESSAGE.bridgeLength, (input) => {
-      InputValidator.bridgeSizeValidator(input);
+      // InputValidator.bridgeSizeValidator(input);
+
+      try {
+        InputValidator.bridgeSizeValidator(input);
+      } catch (err) {
+        this.gameStart();
+      }
+
       this.#bridgeSize = parseInt(input);
       this.getInput(input);
     });
@@ -38,6 +46,7 @@ class BridgeGame {
 
   getInput(input) {
     const bridge = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator);
+
     this.#computedBridge = bridge;
     this.userMoving();
   }
@@ -46,6 +55,12 @@ class BridgeGame {
     InputView.readMoving(
       `${INPUT_MESSAGE.selectNextPosition} ${INPUT_MESSAGE.UpDown}`,
       (input) => {
+        try {
+          InputValidator.userMoveValidator(input);
+        } catch (err) {
+          this.userMoving();
+        }
+
         this.move(input);
       }
     );
@@ -95,9 +110,14 @@ class BridgeGame {
     this.#gameResult = !userCanGo
       ? RESULT_MESSAGE.isFail
       : RESULT_MESSAGE.isSuccess;
-    userCanGo && !this.isCrossAllBridge()
-      ? this.userMoving()
-      : this.retryOrEnd();
+
+    if (userCanGo && !this.isCrossAllBridge()) {
+      this.userMoving();
+    } else if (this.isCrossAllBridge()) {
+      this.end();
+    } else if (!userCanGo) {
+      this.retryOrEnd();
+    }
   }
 
   isCrossAllBridge() {
@@ -109,17 +129,30 @@ class BridgeGame {
     InputView.readGameCommand(
       `${INPUT_MESSAGE.retryOrEnd} ${INPUT_MESSAGE.retryEnd}`,
       (input) => {
-        input === STATE_CONSTANT.retry ? this.retryGame() : this.endGame();
+        try {
+          InputValidator.retryOrEndValidator(input);
+        } catch (err) {
+          throw new Error(ERROR_MESSAGE.betweenRange);
+
+          this.retryOrEnd();
+        }
+
+        input === STATE_CONSTANT.retry ? this.retry() : this.end();
       }
     );
   }
 
-  retryGame() {
+  retry() {
     this.#gametry += 1;
     this.resetUserBridges();
     this.userMoving();
   }
-  endGame() {
+  end() {
+    OutputView.printMessage(RESULT_MESSAGE.resultMessage);
+    OutputView.makeMap({
+      bridgeTop: this.#bridgeViewTop,
+      bridgeBottom: this.#bridgeViewBottom,
+    });
     OutputView.printResult({
       gameResult: this.#gameResult,
       gametry: this.#gametry,
@@ -137,7 +170,6 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
 }
 
 module.exports = BridgeGame;

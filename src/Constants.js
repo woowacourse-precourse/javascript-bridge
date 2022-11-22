@@ -25,20 +25,21 @@ const STATE_CONSTANT = Object.freeze({
 });
 
 const RESULT_MESSAGE = Object.freeze({
-  resultMessage: `\n최종 게임 결과\n`,
-  successInfo: `\n게임 성공 여부: `,
-  tryCount: `\n총 시도한 횟수 : `,
+  resultMessage: `\n최종 게임 결과`,
+  successInfo: `게임 성공 여부: `,
+  tryCount: `총 시도한 횟수: `,
 
   isSuccess: `성공`,
   isFail: `실패`,
 });
 
-const ERROR_MESSAGE = Object.freeze({
-  error: "[ERROR]",
+const error = "[ERROR]";
 
-  onlyNumber: `${this.error} 숫자만 입력할 수 있습니다.`,
-  betweenRange: `${this.error} 다리 길이는 3부터 20 사이의 숫자여야 합니다.`,
-  onlyRetryOrEnd: `${this.error} R 혹은 Q만 입력할 수 있습니다.`,
+const ERROR_MESSAGE = Object.freeze({
+  onlyNumber: `${error} 숫자만 입력할 수 있습니다.`,
+  betweenRange: `${error} 다리 길이는 3부터 20 사이의 숫자여야 합니다.`,
+  onlyRetryOrEnd: `${error} R 혹은 Q만 입력할 수 있습니다.`,
+  onlyUpOrDown: `${error} U 혹은 D만 입력할 수 있습니다.`,
 });
 
 module.exports = {
