@@ -28,14 +28,7 @@ const OutputView = {
       if(i != 0){
         this.printSpaceDivision();
       }
-      if(input[i] == 'U'){
-        upperBridge += this.cmpUD(input[i], answer[i]) + ' ';
-        lowerBridge += '  ';
-      }
-      if(input[i] == 'D'){
-        lowerBridge += this.cmpUD(input[i], answer[i]) + ' ';
-        upperBridge += '  ';
-      }
+      this.verifyInputAndAnswer();   
     }
 
     upperBridge += ']';
@@ -48,6 +41,18 @@ const OutputView = {
   printSpaceDivision(){
     upperBridge += '| ';
     lowerBridge += '| ';
+  },
+
+  //사용자 입력과 정답이 맞는지 검증하기
+  verifyInputAndAnswer(input, answer){
+    if(input[i] == 'U'){
+      upperBridge += this.cmpUD(input[i], answer[i]) + ' ';
+      lowerBridge += '  ';
+    }
+    if(input[i] == 'D'){
+      lowerBridge += this.cmpUD(input[i], answer[i]) + ' ';
+      upperBridge += '  ';
+    }
   },
 
   /**
