@@ -2,16 +2,23 @@ const BridgeGame = require('./BridgeGame');
 const OutputView = require('./views/OutputView');
 const InputView = require('./views/InputView');
 
-// app 싱글톤으로 만들기
+let instance = null;
+
 class App {
   #game;
   #attempts = 0;
 
+  constructor() {
+    if (instance) return instance;
+
+    instance = this;
+  }
+
   async play() {
     OutputView.printStartMessage();
     let size = await this.#startGame();
-    let result = await this.#temp(size);
-    return this.#end(result);
+    let [result, moves] = await this.#temp(size);
+    return this.#end(result, moves);
   }
 
   async #startGame() {
@@ -21,8 +28,8 @@ class App {
     return size;
   }
 
-  #end(result) {
-    OutputView.printResult(result, this.#attempts);
+  #end(result, moves) {
+    OutputView.printResult(result, this.#attempts, moves);
   }
 
   async #getAndSetBridgeSize() {
@@ -32,16 +39,22 @@ class App {
   }
 
   async #temp(size) {
-    let attemptResult = await this.#makeAttempt(size);
+    let [attemptResult, moves] = await this.#makeAttempt(size);
 
     if (!attemptResult) {
-      let reply = await InputView.readGameCommand();
-      let retry = await this.#game.retry(reply);
-
-      if (retry) return this.#temp(size);
+      while (true) {
+        try {
+          let reply = await InputView.readGameCommand();
+          let retry = await this.#game.retry(reply);
+          if (retry) return this.#temp(size);
+          break;
+        } catch (error) {
+          OutputView.printError(error);
+        }
+      }
     }
 
-    return attemptResult;
+    return [attemptResult, moves];
   }
 
   async #makeAttempt(size) {
@@ -53,10 +66,10 @@ class App {
       let [moveResult, command] = await this.#playRound(round, moves);
       moves[round++] = [moveResult, command];
 
-      if (!moveResult) return false;
+      if (!moveResult) return [false, [...moves]];
     }
 
-    return true;
+    return [true, [...moves]];
   }
 
   // round 에서 프린트까지!
@@ -87,5 +100,3 @@ class App {
 }
 
 module.exports = App;
-const app = new App();
-app.play();
