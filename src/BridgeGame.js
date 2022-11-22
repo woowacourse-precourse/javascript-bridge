@@ -1,5 +1,6 @@
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const Random = require("./BridgeRandomNumberGenerator");
 const { BRIDGE } = require("./constants/constants");
+const BridgeMaker = require("./BridgeMaker");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -27,20 +28,22 @@ class BridgeGame {
     this.#bridgeState = [[], []];
   }
 
-  initGame(userInput) {
-    this.#bridgeLength = userInput;
+  initRetry() {
+    this.#isFail = false;
+    this.#isSuccess = false;
+    this.#currentLocation = 0;
+    this.initBridgeState();
   }
-  setBridge() {
-    const bridge = BridgeMaker.makeBridge(
-      this.#bridgeLength,
-      BridgeRandomNumberGenerator.generate
-    );
-    this.#bridge = bridge;
+
+  initGame(userInput) {
+    this.#bridgeLength = Number(userInput);
+    this.setBridge();
     this.try();
   }
 
-  getBridgeState() {
-    return this.#bridgeState;
+  setBridge() {
+    const bridge = BridgeMaker.makeBridge(this.#bridgeLength, Random.generate);
+    this.#bridge = bridge;
   }
 
   changeBridgeState(userInput, result) {
@@ -94,7 +97,10 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    this.try();
+    this.initRetry();
+  }
 }
 
 module.exports = BridgeGame;
