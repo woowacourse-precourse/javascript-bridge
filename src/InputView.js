@@ -1,21 +1,44 @@
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+const { Console } = require('@woowacourse/mission-utils');
+const { REQUEST_MESSAGE } = require('./Constants');
+const InputVaildation = require('./InputValidation');
+const OutputView = require('./OutputView');
+
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   */
-  readBridgeSize() {},
+  readBridgeSize(callback) {
+    Console.readLine(REQUEST_MESSAGE.bridgeLength, (length) => {
+      try {
+        InputVaildation.ofBridgeLength(length);
+        callback.call(this, length);
+      } catch {
+        OutputView.printWrongInputOfBridgeLength();
+        this.requestBridgeLength();
+      }
+    });
+  },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   */
-  readMoving() {},
+  readMoving(callback) {
+    Console.readLine(REQUEST_MESSAGE.move, (drection) => {
+      try {
+        InputVaildation.ofMove(drection);
+        callback.call(this, drection);
+      } catch {
+        OutputView.printWrongInputOfMoving();
+        this.requestMove();
+      }
+    });
+  },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   */
-  readGameCommand() {},
+  readRetryOrQuit(callback) {
+    Console.readLine(REQUEST_MESSAGE.command, (command) => {
+      try {
+        InputVaildation.ofRetryOrQuit(command);
+        callback.call(this, command);
+      } catch {
+        OutputView.printWrongInputOfRetryOrQuit();
+        this.fail();
+      }
+    });
+  },
 };
 
 module.exports = InputView;
