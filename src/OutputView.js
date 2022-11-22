@@ -14,7 +14,7 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(keepGaming, getMap) {
+  printMap(getMap, bridge) {
     const resultArr = new Array(2);
     resultArr[GAME_RESOURCE.UPSIDE] = "";
     resultArr[GAME_RESOURCE.DOWNSIDE] = "";
@@ -27,7 +27,7 @@ const OutputView = {
         resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.VERTICAL;
       }
       if (getMap[i] === GAME_RESOURCE.UPSIDE) {
-        if (keepGaming === GAME_RESOURCE.WRONG) {
+        if (getMap[i] !== bridge[i]) {
           resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.CANT_GO;
           resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.BLANK;
         } else {
@@ -35,7 +35,7 @@ const OutputView = {
           resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.BLANK;
         }
       } else if (getMap[i] === GAME_RESOURCE.DOWNSIDE) {
-        if (keepGaming === GAME_RESOURCE.WRONG) {
+        if (getMap[i] !== bridge[i]) {
           resultArr[GAME_RESOURCE.UPSIDE] += GAME_RESOURCE.BLANK;
           resultArr[GAME_RESOURCE.DOWNSIDE] += GAME_RESOURCE.CANT_GO;
         } else {

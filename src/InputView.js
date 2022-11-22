@@ -36,7 +36,7 @@ const InputView = {
       const userArray = bridgeGame.move(moveKey, userMoveArray);
       const keepGaming = bridgeGame.compareMove(bridge, userArray);
       const getMap = bridgeGame.getMap(userArray);
-      const result = OutputView.printMap(keepGaming, getMap);
+      const result = OutputView.printMap(getMap, bridge);
       if (keepGaming === GAME_RESOURCE.RIGHT) {
         this.readMoving(bridgeGame, bridge, userMoveArray);
       }
