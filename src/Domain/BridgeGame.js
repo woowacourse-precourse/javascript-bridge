@@ -1,11 +1,10 @@
-const Validator = require('../Validator');
-const ERROR = require('../constants/error');
+const DomainValidator = require('../utils/DomainValidator');
 
 class BridgeGame {
   #gameStats = new Map();
 
-  constructor(bridgeSize) {
-    this.#gameStats.set('attempt', 0).set('moveCount', 0).set('bridgeSize', bridgeSize);
+  constructor() {
+    this.#gameStats.set('attempt', 0).set('moveCount', 0);
   }
 
   try() {
@@ -13,7 +12,7 @@ class BridgeGame {
   }
 
   move(moving) {
-    this.validateMoving(moving);
+    DomainValidator.validateMoving(moving);
     this.#gameStats.set('moveCount', this.#gameStats.get('moveCount') + 1);
   }
 
@@ -30,12 +29,8 @@ class BridgeGame {
     return this.#gameStats.get('moveCount');
   }
 
-  isGameSuccess() {
-    return this.#gameStats.get('bridgeSize') === this.#gameStats.get('moveCount');
-  }
-
-  validateMoving(moving) {
-    if (!Validator.isMoving(moving)) throw new Error(ERROR.MOVING);
+  isGameSuccess(bridgeSize) {
+    return bridgeSize === this.#gameStats.get('moveCount');
   }
 }
 

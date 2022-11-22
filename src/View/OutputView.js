@@ -17,6 +17,10 @@ const OutputView = {
   printGameStart() {
     Console.print(MESSAGE.OUTPUT.GAME_START);
   },
+
+  printError(error) {
+    Console.print(error);
+  },
 };
 
 module.exports = OutputView;

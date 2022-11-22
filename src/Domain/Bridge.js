@@ -1,24 +1,24 @@
-const ERROR = require('../constants/error');
-const Validator = require('../Validator');
+const DomainValidator = require('../utils/DomainValidator');
 
 class Bridge {
   #bridge;
 
   constructor(bridge) {
-    this.validateBridge(bridge);
+    DomainValidator.validateBridgeSize(bridge.length);
+    DomainValidator.validateBridge(bridge);
     this.#bridge = bridge;
   }
 
   canICross(moveCount, moving) {
+    DomainValidator.validateMoveCount(moveCount);
+    DomainValidator.validateMoving(moving);
+    DomainValidator.validateMoveCountOverBridgeSize(moveCount, this.#bridge.length);
+
     return this.#bridge[moveCount] === moving;
   }
 
-  validateBridge(bridge) {
-    if (!Validator.isBridgeSize(bridge.length)) throw new Error(ERROR.BRIDGE_SIZE);
-
-    bridge.forEach((moving) => {
-      if (!Validator.isMoving(moving)) throw new Error(ERROR.BRIDGE);
-    });
+  getBridgeSize() {
+    return this.#bridge.length;
   }
 }
 

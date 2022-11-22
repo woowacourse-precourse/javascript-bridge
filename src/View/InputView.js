@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const MESSAGE = require('../constants/message');
-const Validator = require('../Validator');
+const InputValidator = require('../utils/InputValidator');
+const OutputView = require('./OutputView');
 
 const InputView = {
   /**
@@ -9,10 +10,10 @@ const InputView = {
   readBridgeSize(callback) {
     Console.readLine(MESSAGE.INPUT.BRIDGE_SIZE, (bridgeSize) => {
       try {
-        Validator.validateBridgeSize(Number(bridgeSize));
+        InputValidator.validateInputBridgeSize(Number(bridgeSize));
         callback(Number(bridgeSize));
       } catch (error) {
-        Console.print(error);
+        OutputView.printError(error);
         this.readBridgeSize(callback);
       }
     });
@@ -24,10 +25,10 @@ const InputView = {
   readMoving(callback) {
     Console.readLine(MESSAGE.INPUT.MOVING, (moving) => {
       try {
-        Validator.validateMoving(moving);
+        InputValidator.validateInputMoving(moving);
         callback(moving);
       } catch (error) {
-        Console.print(error);
+        OutputView.printError(error);
         this.readMoving(callback);
       }
     });
@@ -39,10 +40,10 @@ const InputView = {
   readGameCommand(callback) {
     Console.readLine(MESSAGE.INPUT.GAME_COMMAND, (gameCommand) => {
       try {
-        Validator.validateGameCommand(gameCommand);
+        InputValidator.validateInputGameCommand(gameCommand);
         callback(gameCommand);
       } catch (error) {
-        Console.print(error);
+        OutputView.printError(error);
         this.readGameCommand(callback);
       }
     });

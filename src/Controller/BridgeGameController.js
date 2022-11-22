@@ -8,13 +8,21 @@ const SETTING = require('../constants/gameSetting');
 const Bridge = require('../Domain/Bridge');
 
 class BridgeGameController {
-  #bridgeGame;
-  #bridgeMap;
+  #bridgeMap = new BridgeMap();
+  #bridgeGame = new BridgeGame();
   #bridge;
 
   gameStart() {
+    this.#bridgeGame.try();
     OutputView.printGameStart();
-    InputView.readBridgeSize(this.setBridgeGame.bind(this));
+    this.inputBridgeSize();
+  }
+
+  gameRetry() {
+    this.#bridgeGame.retry();
+    this.#bridgeMap.reset();
+
+    return this.inputMove();
   }
 
   gameResult(isGameSuccess) {
@@ -25,20 +33,8 @@ class BridgeGameController {
     );
   }
 
-  inputMove() {
-    InputView.readMoving(this.move.bind(this));
-  }
-
-  inputGameCommand() {
-    InputView.readGameCommand(this.gameCommand.bind(this));
-  }
-
   gameCommand(gameCommand) {
-    if (gameCommand === SETTING.GAME_RESTART) {
-      this.#bridgeGame.retry();
-      this.#bridgeMap.reset();
-      return this.inputMove();
-    }
+    if (gameCommand === SETTING.GAME_RESTART) return this.gameRetry();
 
     return this.gameResult(false);
   }
@@ -49,21 +45,35 @@ class BridgeGameController {
     this.#bridgeGame.move(moving);
     this.#bridgeMap.addMoveMark(moving, canICross);
     OutputView.printMap(this.#bridgeMap.getBridgeMap());
-    if (canICross)
-      return this.#bridgeGame.isGameSuccess() ? this.gameResult(true) : this.inputMove();
 
-    return this.inputGameCommand();
+    this.nextStep(canICross);
   }
 
-  setBridgeGame(bridgeSize) {
-    const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
+  nextStep(canICross) {
+    if (!canICross) return this.inputGameCommand();
 
-    this.#bridgeMap = new BridgeMap();
+    return this.#bridgeGame.isGameSuccess(this.#bridge.getBridgeSize())
+      ? this.gameResult(true)
+      : this.inputMove();
+  }
+
+  setBridgeSize(bridgeSize) {
+    const bridge = BridgeMaker.makeBridge(bridgeSize, BridgeRandomNumberGenerator.generate);
     this.#bridge = new Bridge(bridge);
-    this.#bridgeGame = new BridgeGame(bridgeSize);
-    this.#bridgeGame.try();
 
     this.inputMove();
+  }
+
+  inputBridgeSize() {
+    InputView.readBridgeSize(this.setBridgeSize.bind(this));
+  }
+
+  inputMove() {
+    InputView.readMoving(this.move.bind(this));
+  }
+
+  inputGameCommand() {
+    InputView.readGameCommand(this.gameCommand.bind(this));
   }
 }
 

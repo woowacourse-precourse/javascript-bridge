@@ -1,13 +1,11 @@
-const ERROR = require('../constants/error');
 const SETTING = require('../constants/gameSetting');
-const Validator = require('../Validator');
-
+const DomainValidator = require('../utils/DomainValidator');
 class BridgeMap {
   #upsideMap = [];
   #downsideMap = [];
 
   addMoveMark(moving, canICross) {
-    this.validateMoving(moving);
+    DomainValidator.validateMoving(moving);
     const moveMark = canICross ? SETTING.SUCCESS_MOVE : SETTING.FAIL_MOVE;
     if (moving === SETTING.MOVING_UP) {
       this.#upsideMap.push(moveMark);
@@ -26,10 +24,6 @@ class BridgeMap {
   reset() {
     this.#upsideMap = [];
     this.#downsideMap = [];
-  }
-
-  validateMoving(moving) {
-    if (!Validator.isMoving(moving)) throw new Error(ERROR.MOVING);
   }
 }
 
