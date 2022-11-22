@@ -7,6 +7,7 @@ const gameOutputMessage = require("../constants/gameOutputMessage");
 const OutputView = {
   topBridge: [],
   bottomBridge: [],
+  gameResult: '',
 
   printStart() {
     Console.print(gameOutputMessage.START_GAME);
@@ -30,6 +31,11 @@ const OutputView = {
     Console.print(`[ ${this.bottomBridge.join(' | ')} ]`);
   },
 
+  sucessOrFailed(result) {
+    if (result === true) this.gameResult = '성공';
+    if (result === false) this.gameResult = '실패';
+  },
+
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -39,6 +45,7 @@ const OutputView = {
     Console.print('최종 게임 결과');
     Console.print(`[ ${this.topBridge.join(' | ')} ]`);
     Console.print(`[ ${this.bottomBridge.join(' | ')} ]`);
+    Console.print(`게임 성공 여부: ${this.gameResult}`);
     Console.print(`총 시도한 횟수: ${gameTrial}`);
   },
 };

@@ -43,6 +43,7 @@ const InputView = {
   },
 
   successMoving(result) {
+    OutputView.sucessOrFailed(true);
     if (result === 'movingUp'){
       OutputView.printMap('O', ' ');
     }
@@ -52,6 +53,7 @@ const InputView = {
   },
 
   failMoving(result) {
+    OutputView.sucessOrFailed(false);
     if (result === 'movingUpFailed') {
       OutputView.printMap('X', ' ')
       this.readGameCommand();
@@ -72,7 +74,7 @@ const InputView = {
         const result = Game.move(this.bridge, movingDirection, this.gameRound);
         this.checkMovingResult(result);
         if (result != "movingDownFailed" && result != "movingUpFailed") this.gameRound ++;
-        this.processEnd();
+        this.endGame();
         if (!this.end) this.readMoving();
       } catch (e) {
         Console.print(e);
@@ -81,11 +83,11 @@ const InputView = {
     });
   },
 
-  processEnd() {
+  endGame() {
     if (this.gameRound >= this.bridge.length) {
-      Console.close();
       OutputView.printResult(this.gameTrial);
       this.end = true;
+      Console.close();
     }
   },
 
@@ -100,7 +102,10 @@ const InputView = {
       this.readMoving();
       OutputView.retryMap();
     }
-    if (restartOrEnd === false) Console.close();
+    if (restartOrEnd === false) {
+      OutputView.printResult(this.gameTrial);
+      Console.close();
+    }
   },
 
   /**
