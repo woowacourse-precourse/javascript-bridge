@@ -20,17 +20,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(input, answer) {
+  printMap(input) {
     let upperBridge = '[ ';
     let lowerBridge = '[ ';
-
-    for(let i = 0; i < input.length; i++){
-      if(i != 0){
-        this.printSpaceDivision();
-      }
-      this.verifyInputAndAnswer();   
-    }
-
+    repeatVerifyInputAndAnswer(input);
     upperBridge += ']';
     lowerBridge += ']';
 
@@ -52,6 +45,16 @@ const OutputView = {
     if(input[i] == 'D'){
       lowerBridge += this.cmpUD(input[i], answer[i]) + ' ';
       upperBridge += '  ';
+    }
+  },
+
+  //사용자 입력 개수만큼 검증과정 반복하기
+  repeatVerifyInputAndAnswer(input){
+    for(let i = 0; i < input.length; i++){
+      if(i != 0){
+        this.printSpaceDivision();
+      }
+      this.verifyInputAndAnswer();   
     }
   },
 
