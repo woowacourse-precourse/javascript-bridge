@@ -8,9 +8,11 @@ const { MESSAGE } = require('./const.js');
 
 
 class GameManager {
+    #isSuccessArray
 
     constructor() {
         this.Game = new BridgeGame();
+        this.#isSuccessArray = [];
     }
 
     startGame() {
@@ -31,11 +33,12 @@ class GameManager {
         })
     }
 
-    getMoveDirection(bridge, location) {
+    getMoveDirection(bridge) {
         InputView.readMoving((moveDirection) => {
             try {
                 Validator.validateMoveDirection(moveDirection);
-                this.afterMove(bridge,location,this.Game.move(bridge,location,moveDirection));
+                this.#isSuccessArray = this.Game.move(bridge, this.#isSuccessArray, moveDirection);
+                this.afterMove(bridge);
             } catch(error) {
                 OutputView.displayMessage(error.message);
                 this.getMoveDirection(bridge);
@@ -43,9 +46,10 @@ class GameManager {
         })
     }
 
-    afterMove(bridge, location, isSuccess) {
-        OutputView.printMap(bridge, location+1, isSuccess);
-        if(isSuccess) return this.getMoveDirection(bridge, location+1);
+    afterMove(bridge) {
+        let currLocation = this.#isSuccessArray.length - 1;
+        OutputView.printMap(bridge, currLocation+1, this.#isSuccessArray[currLocation]);
+        if(this.#isSuccessArray[currLocation]) return this.getMoveDirection(bridge);
         // to retry;
     }
 

@@ -12,9 +12,11 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(bridge, location, input) {
-    if(bridge[location] == input) return true;
-    return false;
+  move(bridge, isSuccessArray, moveDirection) {
+    let currLocation = isSuccessArray.length;
+    if(bridge[currLocation] === moveDirection) isSuccessArray.push(true);
+    if(bridge[currLocation] !== moveDirection) isSuccessArray.push(false);
+    return isSuccessArray;    
   }
 
   /**
