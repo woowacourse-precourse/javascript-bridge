@@ -6,7 +6,7 @@ module.exports = {
     LOWER: 0,
   },
 
-  BRIDGE_LENGTH: {
+  BRIDGE_SIZE: {
     MIN: 3,
     MAX: 20,
   },

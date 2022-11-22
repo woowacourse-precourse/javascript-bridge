@@ -1,12 +1,12 @@
-const { BRIDGE_LENGTH, DIRECTION, COMMAND } = require("./constants");
+const { BRIDGE_SIZE, DIRECTION, COMMAND } = require("./constants");
 
 const InputValidate = {
   checkBridgeSize(size) {
     if (!Number(size)) {
       throw new Error("[ERROR] 다리 길이는 숫자 형식이어야 합니다.");
     }
-    if (Number(size) < BRIDGE_LENGTH.MIN || Number(size) > BRIDGE_LENGTH.MAX) {
-      throw new Error(`[ERROR] 다리 길이는 ${BRIDGE_LENGTH.MIN}부터 ${BRIDGE_LENGTH.MAX} 사이의 숫자여야 합니다.`);
+    if (Number(size) < BRIDGE_SIZE.MIN || Number(size) > BRIDGE_SIZE.MAX) {
+      throw new Error(`[ERROR] 다리 길이는 ${BRIDGE_SIZE.MIN}부터 ${BRIDGE_SIZE.MAX} 사이의 숫자여야 합니다.`);
     }
   },
 
