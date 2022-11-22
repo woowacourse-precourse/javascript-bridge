@@ -8,7 +8,7 @@ class BridgeGame {
 
   constructor(bridge) {
     this.#bridge = bridge;
-    this.#moveDirection = [];
+    this.#upsideDown = [];
     this.#count = 1;
   }
 
