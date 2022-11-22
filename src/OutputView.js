@@ -1,9 +1,10 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { GAME_MSG } = require("./constants/message.js");
 const MapMaker = require("./MapMaker");
 
 const OutputView = {
   printStart() {
-    Console.print("다리 건너기 게임을 시작합니다.");
+    Console.print(GAME_MSG.START);
   },
 
   printMap(record) {
