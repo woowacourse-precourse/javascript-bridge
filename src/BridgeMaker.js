@@ -1,3 +1,5 @@
+const { INPUT_VALUE } = require('./util/Constant');
+
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이
@@ -11,8 +13,8 @@ const BridgeMaker = {
     );
     const Bridge = [];
     Array.from(generatedNumbers).forEach(value => {
-      if (value === '0') Bridge.push('D');
-      if (value === '1') Bridge.push('U');
+      if (value === '0') Bridge.push(INPUT_VALUE.DOWN);
+      if (value === '1') Bridge.push(INPUT_VALUE.UP);
     });
     return Bridge;
   },

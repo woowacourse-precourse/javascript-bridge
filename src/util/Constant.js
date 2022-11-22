@@ -6,11 +6,25 @@ const CONSTANT = {
     END_GAME: '\n최종 게임 결과',
     COUNT: '총 시도한 횟수: ',
     CHECK_ANSWER: '게임 성공 여부: ',
-    RETRY_QUIT:
-      '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+    RETRY_QUIT: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
+    FINAL: '\n최종 게임 결과',
+  },
+
+  RESULT: {
     FAIL: '실패',
     SUCCESS: '성공',
-    FINAL: '\n최종 게임 결과',
+  },
+
+  OX: {
+    CORRECT: 'O',
+    WRONG: 'X',
+  },
+
+  INPUT_VALUE: {
+    UP: 'U',
+    DOWN: 'D',
+    REPLAY: 'R',
+    QUIT: 'Q',
   },
 
   ERROR: {

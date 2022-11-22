@@ -1,3 +1,5 @@
+const { INPUT_VALUE } = require('./util/Constant');
+
 class BridgeGame {
   #randomBridge
 
@@ -21,9 +23,9 @@ class BridgeGame {
   }
 
   retry(inputRq) {
-    if (inputRq === 'R')
+    if (inputRq === INPUT_VALUE.REPLAY)
       return 1;
-    if (inputRq === 'Q')
+    if (inputRq === INPUT_VALUE.QUIT)
       return 0;
   }
 }

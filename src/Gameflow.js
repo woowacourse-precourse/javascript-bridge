@@ -6,7 +6,7 @@ const CheckInputRq = require('./validate/CheckInputRq');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
-const { MESSAGE } = require('./util/Constant');
+const { RESULT, OX } = require('./util/Constant');
 
 class Gameflow {
     size
@@ -67,20 +67,20 @@ class Gameflow {
     }
     
     wrongInputMove() {
-      this.middleResult = MESSAGE.FAIL
-      OutputView.printMap(this.userUd, 'X');
+      this.middleResult = RESULT.FAIL
+      OutputView.printMap(this.userUd, OX.WRONG);
       this.askReplay();
     }
 
     continueMove() {
-      OutputView.printMap(this.userUd, 'O');
+      OutputView.printMap(this.userUd, OX.CORRECT);
       this.userMoving();
     }
 
     endGame() {
-      this.middleResult = MESSAGE.SUCCESS
-      OutputView.printMap(this.userUd, 'O');
-      OutputView.printResult(this.userUd, 'O');
+      this.middleResult = RESULT.SUCCESS
+      OutputView.printMap(this.userUd, OX.CORRECT);
+      OutputView.printResult(this.userUd, OX.CORRECT);
       OutputView.printFinalResult(this.count, this.middleResult);
     }
 

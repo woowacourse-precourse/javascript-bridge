@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE } = require('../util/Constant');
+const { MESSAGE, OX, INPUT_VALUE } = require('../util/Constant');
 
 const OutputView = {
   upfloor: [],
@@ -8,22 +8,20 @@ const OutputView = {
   printMap(userUd, inputOx) {
     OutputView.fillPrintMap(userUd, userUd.length - 1);
     OutputView.fillMapLastUd(userUd[userUd.length - 1], inputOx);
-
     Console.print(OutputView.fillEndMap());
-
     OutputView.printPlayingMap();
   },
 
   fillPrintMap(userUd, userInputLength) {
     for (let i = 0; i < userInputLength; i++) {
-      OutputView.upfloor.push(userUd[i] === 'U' ? 'O' : ' ');
-      OutputView.downfloor.push(userUd[i] === 'D' ? 'O' : ' ');
+      OutputView.upfloor.push(userUd[i] === INPUT_VALUE.UP ? OX.CORRECT : ' ');
+      OutputView.downfloor.push(userUd[i] === INPUT_VALUE.DOWN ? OX.CORRECT : ' ');
     }
   },
 
   fillMapLastUd(recentUd, inputOx) {
-    OutputView.upfloor.push(recentUd === 'U' ? inputOx : ' ');
-    OutputView.downfloor.push(recentUd === 'D' ? inputOx : ' ');
+    OutputView.upfloor.push(recentUd === INPUT_VALUE.UP ? inputOx : ' ');
+    OutputView.downfloor.push(recentUd === INPUT_VALUE.DOWN ? inputOx : ' ');
   },
 
   fillEndMap() {
@@ -40,9 +38,9 @@ const OutputView = {
   printResult(userUd, middleResult) {
     Console.print(MESSAGE.FINAL);
     if (middleResult === MESSAGE.SUCCESS) {
-      return OutputView.printMap(userUd, 'O');
+      return OutputView.printMap(userUd, OX.CORRECT);
     }
-    return OutputView.printMap(userUd, 'X');
+    return OutputView.printMap(userUd, OX.WRONG);
   },
 
   printFinalResult(count, middleResult) {
