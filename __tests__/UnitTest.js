@@ -1,4 +1,5 @@
 const BridgeGame = require('../src/BridgeGame');
+const BridgeStore = require('../src/BridgeStore');
 const MapMaker = require('../src/MapMaker');
 
 describe('MapMaker 테스트', () => {
@@ -43,6 +44,19 @@ describe('BridgeGame테스트', () => {
       expect(
         () => bridgeGame.createBridge(input),
       ).toThrow('[ERROR]');
+    });
+  });
+
+  describe('이동', () => {
+    beforeEach(() => {
+      bridgeGame.bridgeStore = new BridgeStore(['U', 'D', 'U'], 1);
+    });
+    test('올바른 입력으로 이동 성공', () => {
+      expect(bridgeGame.move('U')).toBeTruthy();
+    });
+
+    test('올바르지 않은 입력으로 이동 실패', () => {
+      expect(bridgeGame.move('D')).toBeFalsy();
     });
   });
 });
