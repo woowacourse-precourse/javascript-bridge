@@ -15,6 +15,10 @@ const OutputView = {
   printAskRetry () {
     Console.print(GAME_MESSAGE.RETRY_INPUT);
   },
+
+  printBlankLine () {
+    Console.print('');
+  },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    * <p>
@@ -22,7 +26,9 @@ const OutputView = {
    */
   printMap (printList) {
     Console.print(printList);
+    this.printBlankLine();
   },
+
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.

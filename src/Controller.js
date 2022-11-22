@@ -25,6 +25,7 @@ class Controller {
   handleBridgeLength (length) {
     try {
       InputValidator.isRightBridgeLength(length);
+      outputView.printBlankLine();
       this.makeAndSaveBridge(length);
       this.moveBrige();
     } catch (error) {
