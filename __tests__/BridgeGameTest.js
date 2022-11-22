@@ -1,6 +1,6 @@
 const App = require('../src/App');
-const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeGame = require('../src/Model/BridgeGame');
+const MissionUtils = require('@woowacourse/mission-utils');
 const SYSTEM_MESSAGE = require('../src/constants/system message');
 
 const mockQuestions = (answers) => {

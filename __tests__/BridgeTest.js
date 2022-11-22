@@ -1,8 +1,6 @@
 const App = require('../src/App');
 const BridgeGame = require('../src/Model/BridgeGame');
 const MissionUtils = require('@woowacourse/mission-utils');
-const SYSTEM_MESSAGE = require('../src/constants/system message');
-const Path = require('../src/Model/Path');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
