@@ -19,9 +19,9 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.PRINT_RESULT_MAP);
   },
   
-  printError(error){
-    Console.print(error);
-  }
+  printMessage(message){
+    Console.print(message);
+  },
 };
 
 module.exports = OutputView;

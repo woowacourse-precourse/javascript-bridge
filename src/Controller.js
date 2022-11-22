@@ -1,7 +1,8 @@
 const { INITIAL_VALUE } = require("./constants");
+const { OUTPUT_MESSAGE } = require("./constants/OutputMessage");
 const BridgeGame = require("./model/BridgeGame");
 const { readBridgeSize, readMoving, readGameCommand } = require("./view/InputView");
-const { printMap, printResult, printResultMap, printError } = require("./view/OutputView");
+const { printMap, printResult, printResultMap, printMessage } = require("./view/OutputView");
 
 class Controller {
   #bridgeGame;
@@ -13,13 +14,14 @@ class Controller {
   }
 
   init() {
+    printMessage(OUTPUT_MESSAGE.START_GAME);
     readBridgeSize((bridgeSize)=>{
       try{
         this.#bridgeGame = new BridgeGame(Number(bridgeSize));
         this.play();
       }
       catch(error){
-        printError(error);
+        printMessage(error);
         this.init();
       }
     });
@@ -32,7 +34,7 @@ class Controller {
         this.showMap();
         this.handleBridgeGame(isMatch);
       }catch(error){
-        printError(error);
+        printMessage(error);
         this.play();
       }
     });
@@ -66,7 +68,7 @@ class Controller {
         }
         this.end();
       }catch(error){
-        printError(error);
+        printMessage(error);
         this.askReplay();
       }
     });
