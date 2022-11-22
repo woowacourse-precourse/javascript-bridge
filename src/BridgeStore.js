@@ -6,8 +6,6 @@ class BridgeStore {
   #userInputResults = [];
 
   constructor(bridge, tryCount) {
-    // REMOVE: 임시 다리 확인
-    console.log(bridge);
     this.#bridge = bridge;
     this.#tryCount = tryCount;
   }
