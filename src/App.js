@@ -29,18 +29,26 @@ class App {
 
     OutputView.printMap(bridge, userState);
 
+    this.#bridge = bridge;
+    this.#userState = userState;
+    this.#countTry = countTry;
+    this.next(condition);
+  }
+
+  next(condition) {
     if (condition === 0) {
-      OutputView.printResult(bridge, userState, countTry, true);
+      OutputView.printResult(
+        this.#bridge,
+        this.#userState,
+        this.#countTry,
+        true
+      );
       InputView.close();
     } else if (condition === 1) {
       InputView.readMoving(this.handleBridgeMoveing);
     } else if (condition === 2) {
       InputView.readGameCommand(this.handleGameCommand);
     }
-
-    this.#bridge = bridge;
-    this.#userState = userState;
-    this.#countTry = countTry;
   }
 
   handleGameCommand(rnq) {
