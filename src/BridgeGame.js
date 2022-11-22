@@ -68,7 +68,7 @@ class BridgeGame {
   }
 
   /**
-   * 게임 이동 가능한지 확인
+   * 이동 가능한지 확인
    */
   validateMove(myMoves, bridge) {
     const currentIndex = myMoves.length - 1;
@@ -76,6 +76,15 @@ class BridgeGame {
       return false;
     }
     return true;
+  }
+
+  /**
+   * 게임 진행이 가능한지 확인
+   */
+  checkIfCanMove(myMoves, bridge) {
+    if (this.validateMove(myMoves, bridge) && !this.validateWin(myMoves, bridge)) {
+      return true;
+    }
   }
 
   /**

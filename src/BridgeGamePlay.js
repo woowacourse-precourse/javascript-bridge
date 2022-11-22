@@ -38,13 +38,19 @@ class BridgeGamePlay {
     this.myMoves.push(currentMove);
     const result = this.bridgeGame.getMoveResult(this.myMoves, this.bridge);
     OutputView.printMap(result);
+    if (this.bridgeGame.validateWin(this.myMoves, this.bridge)) {
+      OutputView.printResult(result, RESULT.WIN, this.tryCount);
+    }
     this.check(result);
   }
 
   check(result) {
-    this.checkIfWin(result);
-    this.checkIfFinish(result);
-    this.checkIfCanMove();
+    if (!this.bridgeGame.validateMove(this.myMoves, this.bridge)) {
+      this.checkRetry(result, InputView.getGameCommand());
+    }
+    if (this.bridgeGame.checkIfCanMove(this.myMoves, this.bridge)) {
+      this.move();
+    }
   }
 
   checkRetry(result, gameCommand) {
@@ -53,28 +59,6 @@ class BridgeGamePlay {
     }
     if (this.bridgeGame.retry(gameCommand)) {
       this.playGame();
-    }
-  }
-
-  checkIfWin(result) {
-    if (this.bridgeGame.validateWin(this.myMoves, this.bridge)) {
-      OutputView.printResult(result, RESULT.WIN, this.tryCount);
-    }
-  }
-
-  checkIfFinish(result) {
-    if (!this.bridgeGame.validateMove(this.myMoves, this.bridge)) {
-      const gameCommand = InputView.getGameCommand();
-      this.checkRetry(result, gameCommand);
-    }
-  }
-
-  checkIfCanMove() {
-    if (
-      this.bridgeGame.validateMove(this.myMoves, this.bridge) &&
-      !this.bridgeGame.validateWin(this.myMoves, this.bridge)
-    ) {
-      this.move();
     }
   }
 }
