@@ -6,6 +6,13 @@ class App {
 
   play() {
     OutputView.printInit();
+    this.createBridge();
+  }
+
+  createBridge() {
+    InputView.readBridgeSize((size) => {
+      this.#userGame = new BridgeGame(size);
+    });
   }
 }
 
