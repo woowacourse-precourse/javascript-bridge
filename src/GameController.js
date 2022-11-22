@@ -1,3 +1,4 @@
+const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 
 class GameController {
@@ -7,6 +8,14 @@ class GameController {
 
   play() {
     OutputView.printIntro();
+
+    this.setUpBridge();
+  }
+
+  setUpBridge() {
+    InputView.readBridgeSize((size) => {
+      console.log(size);
+    });
   }
 }
 
