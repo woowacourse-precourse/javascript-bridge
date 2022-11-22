@@ -33,7 +33,6 @@ class BridgeGameController {
       new MovingValidator(moving).validate();
 
       const result = this.#bridgeGame.move(moving);
-      console.log(result);
       OutputView.printMap(this.#bridgeGame);
 
       this.checkNextProcess(result);
