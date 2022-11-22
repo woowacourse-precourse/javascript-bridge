@@ -24,6 +24,10 @@ class BridgeGame {
       BridgeRandomNumberGenerator.generate()
     );
   }
+
+  getBridge() {
+    return this.#bridge;
+  }
 }
 
 module.exports = BridgeGame;
