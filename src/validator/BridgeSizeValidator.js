@@ -7,11 +7,9 @@ class BridgeSizeValidator extends Validator {
   }
 
   validate(input) {
-    if (!BridgeSizeValidator.isNumber(input))
-      super.error(ERROR_MESSAGE.INPUT_SIZE_NOT_NUMBER);
+    if (!BridgeSizeValidator.isNumber(input)) super.error(ERROR_MESSAGE.INPUT_SIZE_NOT_NUMBER);
 
-    if (!BridgeSizeValidator.isNumberInRange(input))
-      super.error(ERROR_MESSAGE.INPUT_SIZE_NOT_IN_RANGE);
+    if (!BridgeSizeValidator.isNumberInRange(input)) super.error(ERROR_MESSAGE.INPUT_SIZE_NOT_IN_RANGE);
   }
 
   static isNumber(input) {

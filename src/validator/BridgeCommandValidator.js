@@ -7,11 +7,9 @@ class BridgeCommandValidator extends Validator {
   }
 
   validate(input) {
-    if (BridgeCommandValidator.isUpOrDownLowerCase(input))
-      super.error(ERROR_MESSAGE.INPUT_COMMAND_LOWERCASE);
-
-    if (!BridgeCommandValidator.isUpOrDown(input))
-      super.error(ERROR_MESSAGE.INPUT_COMMAND);
+    if (BridgeCommandValidator.isUpOrDownLowerCase(input)) super.error(ERROR_MESSAGE.INPUT_COMMAND_LOWERCASE);
+    
+    if (!BridgeCommandValidator.isUpOrDown(input)) super.error(ERROR_MESSAGE.INPUT_COMMAND);
   }
 
   static isUpOrDownLowerCase(input) {
@@ -22,10 +20,7 @@ class BridgeCommandValidator extends Validator {
   }
 
   static isUpOrDown(input) {
-    return (
-      input === GAME_CONDITION.RESTART_GAME ||
-      input === GAME_CONDITION.QUIT_GAME
-    );
+    return input === GAME_CONDITION.RESTART_GAME || input === GAME_CONDITION.QUIT_GAME;
   }
 }
 module.exports = BridgeCommandValidator;

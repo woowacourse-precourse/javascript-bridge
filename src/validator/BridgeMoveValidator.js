@@ -7,11 +7,9 @@ class BridgeSpaceValidator extends Validator {
   }
 
   validate(input) {
-    if (BridgeSpaceValidator.isUpOrDownLowerCase(input))
-      super.error(ERROR_MESSAGE.INPUT_SPACE_LOWERCASE);
+    if (BridgeSpaceValidator.isUpOrDownLowerCase(input)) super.error(ERROR_MESSAGE.INPUT_SPACE_LOWERCASE);
 
-    if (!BridgeSpaceValidator.isUpOrDown(input))
-      super.error(ERROR_MESSAGE.INPUT_SPACE);
+    if (!BridgeSpaceValidator.isUpOrDown(input)) super.error(ERROR_MESSAGE.INPUT_SPACE);
   }
 
   static isUpOrDownLowerCase(input) {
@@ -22,9 +20,7 @@ class BridgeSpaceValidator extends Validator {
   }
 
   static isUpOrDown(input) {
-    return (
-      input === GAME_CONDITION.MOVE_UP || input === GAME_CONDITION.MOVE_DOWN
-    );
+    return input === GAME_CONDITION.MOVE_UP || input === GAME_CONDITION.MOVE_DOWN;
   }
 }
 module.exports = BridgeSpaceValidator;
