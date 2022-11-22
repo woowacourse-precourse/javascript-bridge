@@ -1,6 +1,6 @@
-const { DIRECTION, PHASE } = require('../constant/Constant');
 const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
+const { DIRECTION, PHASE } = require('../constant/Constant');
 
 const RESULT = Object.freeze({
   SUCCESS: '성공',

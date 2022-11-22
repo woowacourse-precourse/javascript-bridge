@@ -1,5 +1,6 @@
 const { COMMAND, PHASE } = require('../constant/Constant');
 const BridgeGame = require('../model/BridgeGame');
+const Validator = require('../Validator');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
@@ -17,6 +18,8 @@ class Controller {
     [PHASE.COMMAND]: this.#triggerEvent.bind(this),
   };
 
+  #validator = new Validator();
+
   #phase;
 
   #bridgeGame;
@@ -29,7 +32,22 @@ class Controller {
     method(arg);
   }
 
+  #isValid(input) {
+    try {
+      this.#validator.goTo(this.#phase, input);
+    } catch (error) {
+      OutputView.print(`${error.message}\n`);
+      this.goTo(this.#phase);
+      return false;
+    }
+    return true;
+  }
+
   #startGame(input) {
+    if (!this.#isValid(input)) {
+      return;
+    }
+
     this.#bridgeGame = new BridgeGame(input);
     this.#args[PHASE.RESULT] = this.#bridgeGame;
     OutputView.nextLine();
@@ -37,6 +55,10 @@ class Controller {
   }
 
   #moveResult(input) {
+    if (!this.#isValid(input)) {
+      return;
+    }
+
     const bridgeGame = this.#bridgeGame;
     const phase = bridgeGame.move(input);
 
@@ -45,8 +67,12 @@ class Controller {
     this.goTo(phase);
   }
 
-  #triggerEvent(command) {
-    if (command === COMMAND.RETRY) {
+  #triggerEvent(input) {
+    if (!this.#isValid(input)) {
+      return;
+    }
+
+    if (input === COMMAND.RETRY) {
       this.#bridgeGame.retry(this.goTo.bind(this));
       return;
     }
