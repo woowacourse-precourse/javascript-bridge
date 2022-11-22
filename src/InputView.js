@@ -16,8 +16,7 @@ const InputView = {
    */
   readBridgeSize() {  
     Io.input('다리의 길이를 입력해주세요.', (userInput) => {
-        Validation.validatePositiveInteger(userInput);
-        Validation.validateNumberRange(userInput);
+        if(Validation.validatePositiveInteger(userInput) || Validation.validateNumberRange(userInput))  { this.readBridgeSize() }
         const SIZE = Number(userInput);
         const BridgeStatus = BridgeMaker.makeBridge(SIZE, BridgeRandomNumberGenerator.generate);
         bridgeGame = new BridgeGame(SIZE, BridgeStatus);
@@ -30,17 +29,15 @@ const InputView = {
    */
   readMoving(){
     Io.input('이동할 칸을 선택해주세요. (위: U, 아래: D)', (userInput) => {
-      Validation.validateUserChoice(userInput);
+      if(Validation.validateUserChoice(userInput)) { this.readMoving(); }
       console.log(bridgeGame.BridgeStatus, userInput);
       const data = bridgeGame.move(userInput);
       OutputView.printMap(bridgeGame.BridgeResultArray);
-      console.log(data);
       if(data === "종료") {
         OutputView.printResult(bridgeGame.BridgeResultArray, bridgeGame.gameResult, bridgeGame.count);
         return Io.close();
       } 
-      if(data === "재시작") return this.readGameCommand();
-      this.readMoving();
+      if(data === "재시작") return this.readGameCommand(); this.readMoving();
     });
   },
 
@@ -49,13 +46,12 @@ const InputView = {
    */
   readGameCommand() {
     Io.input('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (userInput) => {
-      Validation.validateUserRetryChoice(userInput);
+      if(Validation.validateUserRetryChoice(userInput)) { this.readGameCommand(); }
       if(userInput === 'R'){
         bridgeGame.retry();
         this.readMoving();
       }
       if(userInput == 'Q'){
-        console.log('Q');
         OutputView.printResult(bridgeGame.BridgeResultArray, bridgeGame.gameResult, bridgeGame.count);
       }
     })
