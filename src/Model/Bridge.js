@@ -1,16 +1,16 @@
-const { BRIDGE_DIRECTION } = require("../constants/GameCondition.js");
+const { BRIDGE_DIRECTION, MARKING } = require("../constants/GameCondition.js");
 class Bridge {
   #upBridge = [];
   #downBridge = [];
 
   currentBridgeMap(moveCmd, currentBridge) {
     if (moveCmd === BRIDGE_DIRECTION.UP) {
-      this.#upBridge.push(moveCmd === currentBridge ? "O" : "X");
-      this.#downBridge.push(" ");
+      this.#upBridge.push(moveCmd === currentBridge ? MARKING.O : MARKING.X);
+      this.#downBridge.push(MARKING.BLANK);
     }
     if (moveCmd === BRIDGE_DIRECTION.DOWN) {
-      this.#downBridge.push(moveCmd === currentBridge ? "O" : "X");
-      this.#upBridge.push(" ");
+      this.#downBridge.push(moveCmd === currentBridge ? MARKING.O : MARKING.X);
+      this.#upBridge.push(MARKING.BLANK);
     }
   }
 
