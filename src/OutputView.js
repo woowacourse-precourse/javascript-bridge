@@ -1,20 +1,69 @@
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
-const OutputView = {
-  /**
-   * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printMap() {},
+const { Console } = require("@woowacourse/mission-utils");
+const {
+  BRIDGE_UP,
+  BRIDGE_DOWN,
+  MARKING_EMPTY,
+  MESSAGE_GAME_START,
+  MESSAGE_GAME_END,
+  MESSAGE_PLAY_COUNT,
+  MESSAGE_FINAL_RESULT,
+} = require("./Utils");
 
-  /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  printResult() {},
+const OutputView = {
+  currentMap: {
+    U: "",
+    D: "",
+  },
+
+  markMap(moving, marking) {
+    if (this.currentMap[moving] === "") this.currentMap[moving] = `[ ${marking} ]`;
+    else {
+      const closer = this.currentMap[moving].slice(-2);
+      this.currentMap[moving] =
+        this.currentMap[moving].slice(0, -2) + ` | ${marking}` + closer;
+    }
+  },
+
+  setCurrentMap(moving, marking) {
+    this.markMap(moving, marking);
+    switch (moving) {
+      case BRIDGE_UP:
+        this.markMap(BRIDGE_DOWN, MARKING_EMPTY);
+        break;
+      case BRIDGE_DOWN:
+        this.markMap(BRIDGE_UP, MARKING_EMPTY);
+        break;
+    }
+  },
+
+  printMap(moving, marking) {
+    this.setCurrentMap(moving, marking);
+    Console.print(this.currentMap[BRIDGE_UP]);
+    Console.print(this.currentMap[BRIDGE_DOWN]);
+    Console.print("");
+  },
+
+  printResult(gameResult, playCount) {
+    Console.print(MESSAGE_FINAL_RESULT);
+    Console.print(this.currentMap[BRIDGE_UP]);
+    Console.print(this.currentMap[BRIDGE_DOWN]);
+    Console.print("");
+    Console.print(`${MESSAGE_GAME_END}: ${gameResult}`);
+    Console.print(`${MESSAGE_PLAY_COUNT}: ${playCount}`);
+  },
+
+  printStart() {
+    Console.print(MESSAGE_GAME_START);
+  },
+
+  print(message) {
+    Console.print(message);
+  },
+
+  retry() {
+    this.currentMap[BRIDGE_UP] = "";
+    this.currentMap[BRIDGE_DOWN] = "";
+  },
 };
 
 module.exports = OutputView;
