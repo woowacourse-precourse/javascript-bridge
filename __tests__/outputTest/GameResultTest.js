@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const OutputView = require("../../src/OutputView");
+const OutputView = require("../../src/view/OutputView");
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
