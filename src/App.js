@@ -48,7 +48,7 @@ class App {
 
   manageRetry(command) {
     if (BridgeGame.shallWeQuit(command)) {
-      this.bridgeGame.endWithFailure();
+      this.endWithFailure();
       return;
     }
     this.bridgeGame.retry();
@@ -108,8 +108,5 @@ class App {
     this.manageRetry(command);
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
