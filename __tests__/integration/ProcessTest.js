@@ -59,7 +59,7 @@ describe('잘못된 값 입력 테스트', () => {
 
       const log = getOutput(logSpy);
       expectLogContains(log, [
-        `[ERROR] ${ERROR_MESSAGE.size.type}`,
+        `[ERROR] ${ERROR_MESSAGE.size}`,
         `${GAME_MESSAGE.result}`,
         '[ O |   | O ]',
         '[   | O |   ]',
@@ -78,7 +78,7 @@ describe('잘못된 값 입력 테스트', () => {
 
       const log = getOutput(logSpy);
       expectLogContains(log, [
-        `[ERROR] ${ERROR_MESSAGE.size.range}`,
+        `[ERROR] ${ERROR_MESSAGE.size}`,
         `${GAME_MESSAGE.result}`,
         '[ O |   | O ]',
         '[   | O |   ]',
@@ -97,7 +97,7 @@ describe('잘못된 값 입력 테스트', () => {
 
       const log = getOutput(logSpy);
       expectLogContains(log, [
-        `[ERROR] ${ERROR_MESSAGE.size.range}`,
+        `[ERROR] ${ERROR_MESSAGE.size}`,
         `${GAME_MESSAGE.result}`,
         '[ O |   | O ]',
         '[   | O |   ]',
