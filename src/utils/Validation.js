@@ -31,7 +31,7 @@ const Validation = {
   },
 
   checkValidDirection(input) {
-    if (!(input === UP || input === DOWN)) throw ERROR.mustBeValidDirection;
+    if (input !== UP && input !== DOWN) throw ERROR.mustBeValidDirection;
   },
 
   checkUpperCaseOfDirection(input) {
@@ -41,7 +41,7 @@ const Validation = {
   },
 
   checkValidCommand(input) {
-    if (!(input === RETRY || input === QUIT)) throw ERROR.mustBeValidCommand;
+    if (input !== RETRY && input !== QUIT) throw ERROR.mustBeValidCommand;
   },
 
   checkUpperCaseOfCommand(input) {
