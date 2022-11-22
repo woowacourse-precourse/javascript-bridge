@@ -46,8 +46,7 @@ class App {
 
       if (!this.bridgeGame.isEnd(this.#bridge.length)) return this.movingBridge();
 
-      this.#gameResult = GAME_RESULT.SUCCESS;
-      return this.quitGame();
+      return this.victoryGame();
     });
   }
 
@@ -63,6 +62,11 @@ class App {
 
       return this.quitGame();
     });
+  }
+
+  victoryGame() {
+    this.#gameResult = GAME_RESULT.SUCCESS;
+    this.quitGame();
   }
 
   quitGame() {
