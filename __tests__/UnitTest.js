@@ -3,6 +3,12 @@ const BridgeStore = require('../src/BridgeStore');
 const BridgeValidator = require('../src/BridgeValidator');
 const { VALID_INPUT } = require('../src/constants');
 const MapMaker = require('../src/MapMaker');
+const ErrorHandler = require('../src/ErrorHandler');
+const {
+  getLogSpy,
+  getOutput,
+  expectLogContains,
+} = require('../__mocks__/mockUtils');
 
 describe('MapMaker 테스트', () => {
   const commands = ['U', 'D', 'D', 'U', 'D'];
@@ -220,4 +226,15 @@ describe('입력 검증 테스트', () => {
   test.each([' ', ' 3 ', '\n가나다'])('공백을 포함하여 입력하는 경우 에러 발생', () => {
     expect((input) => validator.isValidInput(input).toThrow('[ERROR]'));
   });
+});
+
+test('ErrorHandler 테스트', () => {
+  const message = '[ERROR]';
+  const logSpy = getLogSpy();
+  const func = () => {
+    throw new Error(message);
+  };
+
+  ErrorHandler.handleError(func)(() => {})([]);
+  expectLogContains(getOutput(logSpy), ['[ERROR]']);
 });
