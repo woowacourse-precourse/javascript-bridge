@@ -51,8 +51,35 @@ class BridgeGame {
     return 0;
   }
 
+  seekCurrentBridge(userInputs) {
+    const movingArray = [[], []];
+    userInputs.forEach((userInput) => {
+      this.pushBridgeArray(userInput, movingArray);
+    });
+    return movingArray;
+  }
+
+  pushBridgeArray(userInputObj, movingArray) {
+    const userInput = Object.keys(userInputObj)[Constant.FIRST_INDEX];
+
+    if (userInput === Constant.UPPER_ALPHABET) {
+      this.pushMoving([0, 1], movingArray, userInputObj[userInput]);
+    }
+
+    if (userInput === Constant.LOWER_ALPHABET) {
+      this.pushMoving([1, 0], movingArray, userInputObj[userInput]);
+    }
+  }
+
+  pushMoving(numbers, movingArray, symbol) {
+    const [number1, number2] = numbers;
+    movingArray[number1].push(` ${symbol} `);
+    movingArray[number2].push("   ");
+  }
+
   judgeState() {
-    if(this.#currentMovingBridge.length === this.#bridgeLength) {
+    const moveCount = this.#currentMovingBridge.filter((move) => move[Object.keys(move)[0]] === 'O').length;
+    if(moveCount === this.#bridgeLength) {
       return Constant.SUCCESS_TEXT;
     }
     return Constant.FAIL_TEXT;

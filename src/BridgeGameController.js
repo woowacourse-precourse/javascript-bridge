@@ -55,7 +55,8 @@ class BridgeGameController {
 
   move(word) {
     const [isMove, bridgeArray] = this.bridgeGame.move(word);
-    OutputView.printMap(bridgeArray);
+    const crurrentBridge = this.bridgeGame.seekCurrentBridge(bridgeArray);
+    OutputView.printMap(crurrentBridge);
     this.judgePlay(isMove);
   }
 
@@ -63,7 +64,8 @@ class BridgeGameController {
     const isComplete = this.bridgeGame.judgePlay(isMove);
     if(isComplete === true) {
       const state = this.bridgeGame.judgeState();
-      return OutputView.printResult(state, this.bridgeGame);
+      const crurrentBridge = this.bridgeGame.seekCurrentBridge(this.bridgeGame.getCurrentMovingBridge());
+      return OutputView.printResult(state, this.bridgeGame, crurrentBridge);
     }
 
     if(isComplete === false) return this.selectEndInput();
@@ -85,7 +87,8 @@ class BridgeGameController {
   selectEnd(word) {
     if (word === Constant.END_ALPHABET) {
       const state = this.bridgeGame.judgeState();
-      OutputView.printResult(state, this.bridgeGame);
+      const crurrentBridge = this.bridgeGame.seekCurrentBridge(this.bridgeGame.getCurrentMovingBridge());
+      OutputView.printResult(state, this.bridgeGame, crurrentBridge);
     }
 
     if (word === Constant.RESTART_ALPHABET) {

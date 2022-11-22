@@ -19,32 +19,9 @@ const OutputView = {
   printError(error) {
     Console.print(error);
   },
-  
-  printMap(userInputs) {
-    const movingArray = [[], []];
-    userInputs.forEach((userInput) => {
-      this.pushBridgeArray(userInput, movingArray);
-    });
 
+  printMap(movingArray) {
     Console.print(`[${movingArray[Constant.UP_ARRAY].join("|")}]\n[${movingArray[Constant.DOWN_ARRAY].join("|")}]\n`);
-  },
-
-  pushBridgeArray(userInputObj, movingArray) {
-    const userInput = Object.keys(userInputObj)[Constant.FIRST_INDEX];
-
-    if (userInput === Constant.UPPER_ALPHABET) {
-      this.pushMoving([0, 1], movingArray, userInputObj[userInput]);
-    }
-
-    if (userInput === Constant.LOWER_ALPHABET) {
-      this.pushMoving([1, 0], movingArray, userInputObj[userInput]);
-    }
-  },
-
-  pushMoving(numbers, movingArray, symbol) {
-    const [number1, number2] = numbers;
-    movingArray[number1].push(` ${symbol} `);
-    movingArray[number2].push("   ");
   },
 
   /**
@@ -52,10 +29,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-   printResult(state, thisValue) {
+   printResult(state, thisValue, crurrentBridge) {
     const bridgeGame = new BridgeGame();
     Console.print(Message.INFORMATION.gameFinishResult);
-    this.printMap(bridgeGame.getCurrentMovingBridge.call(thisValue));
+    this.printMap(crurrentBridge);
     Console.print(`${Message.INFORMATION.gameResult} ${state}\n${Message.INFORMATION.totalCount} ${bridgeGame.getTry.call(thisValue)}`);
     Console.close();
   },
