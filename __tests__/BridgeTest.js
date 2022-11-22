@@ -1,5 +1,5 @@
 const Bridge = require('../src/Bridge');
-const { MOVE_STATUS } = require('../src/utils/const');
+const { STATUS } = require('../src/utils/const');
 
 describe('Bridge 클래스 단위 테스트', () => {
   // TODO: 테스트 코드 리팩토링 필요 (코드 중복)
@@ -29,11 +29,7 @@ describe('Bridge 클래스 단위 테스트', () => {
       ['U', 'D', 'D'],
     ];
 
-    const answer = [
-      MOVE_STATUS.CONTINUE,
-      MOVE_STATUS.SUCCESS,
-      MOVE_STATUS.FAILURE,
-    ];
+    const answer = [STATUS.CONTINUE, STATUS.SUCCESS, STATUS.FAILURE];
 
     const bridge = new Bridge(input);
 

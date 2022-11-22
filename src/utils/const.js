@@ -24,7 +24,7 @@ const COMMAND_NUMBER = {
   QUIT: 1,
 };
 
-const MOVE_STATUS = {
+const STATUS = {
   CONTINUE: 0,
   SUCCESS: 1,
   FAILURE: 2,
@@ -42,7 +42,7 @@ Object.freeze(PATH);
 Object.freeze(COMMAND_TYPE);
 Object.freeze(COMMAND);
 Object.freeze(COMMAND_NUMBER);
-Object.freeze(MOVE_STATUS);
+Object.freeze(STATUS);
 Object.freeze(MARKING);
 
 module.exports = {
@@ -56,6 +56,6 @@ module.exports = {
   COMMAND_TYPE,
   COMMAND,
   COMMAND_NUMBER,
-  MOVE_STATUS,
+  STATUS,
   MARKING,
 };

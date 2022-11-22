@@ -1,4 +1,4 @@
-const { MOVE_STATUS } = require('./utils/const');
+const { STATUS } = require('./utils/const');
 
 class Bridge {
   #bridge;
@@ -38,9 +38,9 @@ class Bridge {
     const isLast = this.isLast(path);
     const isCorrect = this.isCorrect(path);
 
-    if (!isCorrect) return MOVE_STATUS.FAILURE;
-    if (isLast) return MOVE_STATUS.SUCCESS;
-    return MOVE_STATUS.CONTINUE;
+    if (!isCorrect) return STATUS.FAILURE;
+    if (isLast) return STATUS.SUCCESS;
+    return STATUS.CONTINUE;
   }
 
   getBridge() {

@@ -5,13 +5,7 @@ const Path = require('./Path');
 const Validator = require('./utils/Validator');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const {
-  COMMAND_TYPE,
-  MOVE_STATUS,
-  BRIDGE,
-  RETRY,
-  COMMAND_NUMBER,
-} = require('./utils/const');
+const { STATUS, BRIDGE, COMMAND, COMMAND_NUMBER } = require('./utils/const');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -70,8 +64,8 @@ class BridgeGame {
    * @param {string} gameCommand
    */
   convertStringToCommand(gameCommand) {
-    Validator.validateEqual(gameCommand, COMMAND_TYPE);
-    return gameCommand === RETRY ? this.retry() : COMMAND_NUMBER.QUIT;
+    Validator.validateEqual(gameCommand, [COMMAND.RETRY, COMMAND.QUIT]);
+    return gameCommand === COMMAND.RETRY ? this.retry() : COMMAND_NUMBER.QUIT;
   }
 
   /**
@@ -83,7 +77,7 @@ class BridgeGame {
 
     const count = this.#count;
     const pathMap = this.#path.getPathMap();
-    const isSuccess = this.#bridge.compare(currentPath) === MOVE_STATUS.SUCCESS;
+    const isSuccess = this.#bridge.compare(currentPath) === STATUS.SUCCESS;
 
     return { count, pathMap, isSuccess };
   }
