@@ -1,4 +1,4 @@
-const GameSetting = Object.freeze({
+const SETTING = Object.freeze({
 
   BRIDGE_MIN : 3,
   BRIDGE_MAX : 20,
@@ -12,23 +12,23 @@ const GameSetting = Object.freeze({
 
 })
 
-const Message = Object.freeze({
+const MESSAGE = Object.freeze({
   
   // In game
   GAME_START: "다리 건너기 게임을 시작합니다.\n",
   BRIDGE_SIZE: "다리의 길이를 입력해주세요.\n",
-  MOVE_TO_WHERE: `이동할 칸을 선택해주세요. (위: ${GameSetting.UP}, 아래: ${GameSetting.DOWN})\n`,
+  MOVE_TO_WHERE: `이동할 칸을 선택해주세요. (위: ${SETTING.UP}, 아래: ${SETTING.DOWN})\n`,
   GAME_QUIT_OR_RETRY: `게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n`,
   
   // Error
   BRIDGE_SIZE_NOT_NUMBER : "[ERROR] 다리 길이는 숫자로 입력해야 합니다.",
-  BRIDGE_SIZE_OUT_OF_RANGE : `[ERROR] 다리 길이는 ${GameSetting.BRIDGE_MIN}부터 ${GameSetting.BRIDGE_MAX} 사이의 숫자여야 합니다.`,
-  MOVING_NOT_VALID: `[ERROR] 이동할 칸은 ${GameSetting.UP} 또는 ${GameSetting.DOWN} 로 입력해야 합니다.`,
-  OPTION_NOT_VALID: `[ERROR] 종료 옵션은 ${GameSetting.RETRY} 또는 ${GameSetting.QUIT} 로 입력해야 합니다.`
+  BRIDGE_SIZE_OUT_OF_RANGE : `[ERROR] 다리 길이는 ${SETTING.BRIDGE_MIN}부터 ${SETTING.BRIDGE_MAX} 사이의 숫자여야 합니다.`,
+  MOVING_NOT_VALID: `[ERROR] 이동할 칸은 ${SETTING.UP} 또는 ${SETTING.DOWN} 로 입력해야 합니다.`,
+  OPTION_NOT_VALID: `[ERROR] 종료 옵션은 ${SETTING.RETRY} 또는 ${SETTING.QUIT} 로 입력해야 합니다.`
 
 })
 
-const MapElement = Object.freeze({
+const MAP_ELEMENT = Object.freeze({
 
   NOTHING : ' ',
   RIGHT : 'O',
@@ -39,7 +39,7 @@ const MapElement = Object.freeze({
 
 })
 
-const ResultElement = Object.freeze({
+const RESULT_ELEMENT = Object.freeze({
 
   SUCCESS : "성공",
   FAIL: "실패",
@@ -49,4 +49,4 @@ const ResultElement = Object.freeze({
 
 })
 
-module.exports = { GameSetting, Message, MapElement, ResultElement };
+module.exports = { SETTING, MESSAGE, MAP_ELEMENT, RESULT_ELEMENT };

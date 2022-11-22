@@ -1,4 +1,4 @@
-const { GameSetting, Message } = require("../constants/Constants");
+const { SETTING, MESSAGE } = require("../constants/Constants");
 const { Console } = require("@woowacourse/mission-utils");
 
 const Validation = {
@@ -6,22 +6,22 @@ const Validation = {
   checkBridgeSize(sizeInput){
     let check = /^[0-9]+$/; 
     if (!check.test(sizeInput)) {
-      throw new Error(Message.BRIDGE_SIZE_NOT_NUMBER);
+      throw new Error(MESSAGE.BRIDGE_SIZE_NOT_NUMBER);
     }
-    if(sizeInput<GameSetting.BRIDGE_MIN || sizeInput>GameSetting.BRIDGE_MAX){
-      throw new Error(Message.BRIDGE_SIZE_OUT_OF_RANGE);
+    if(sizeInput<SETTING.BRIDGE_MIN || sizeInput>SETTING.BRIDGE_MAX){
+      throw new Error(MESSAGE.BRIDGE_SIZE_OUT_OF_RANGE);
     }
   },
 
   checkMoving(movingInput){
-    if (!(movingInput===GameSetting.UP || movingInput===GameSetting.DOWN)){
-      throw new Error(Message.MOVING_NOT_VALID);
+    if (!(movingInput===SETTING.UP || movingInput===SETTING.DOWN)){
+      throw new Error(MESSAGE.MOVING_NOT_VALID);
     }
   },
 
   checkOption(optionInput){
-    if (!(optionInput===GameSetting.QUIT || optionInput===GameSetting.RETRY)){
-      throw new Error(Message.OPTION_NOT_VALID);
+    if (!(optionInput===SETTING.QUIT || optionInput===SETTING.RETRY)){
+      throw new Error(MESSAGE.OPTION_NOT_VALID);
     }
   },
 

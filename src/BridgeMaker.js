@@ -1,4 +1,4 @@
-const { GameSetting } = require("./constants/Constants");
+const { SETTING } = require("./constants/Constants");
 
 const BridgeMaker = {
   /**
@@ -9,7 +9,7 @@ const BridgeMaker = {
   
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
-    const upDown = [GameSetting.DOWN, GameSetting.UP];
+    const upDown = [SETTING.DOWN, SETTING.UP];
     for (let i=0; i<size; i++){
       bridge.push(upDown[ generateRandomNumber() ]);
     }

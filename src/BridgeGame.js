@@ -1,4 +1,4 @@
-const { GameSetting } = require("./constants/Constants");
+const { SETTING } = require("./constants/Constants");
 
 class BridgeGame {
   #bridge;
@@ -17,12 +17,12 @@ class BridgeGame {
   status(){
     const moveBy = this.#userBridge.moved.length-1;
     if(this.#userBridge.moved[moveBy]!==this.#bridge[moveBy]){
-      return GameSetting.CAN_NOT_MOVE;
+      return SETTING.CAN_NOT_MOVE;
     }
     if(moveBy === this.#bridge.length-1){
-      return GameSetting.MOVE_COMPLETE;
+      return SETTING.MOVE_COMPLETE;
     }
-    return GameSetting.CAN_MOVE;
+    return SETTING.CAN_MOVE;
   }
 
   retry() {

@@ -1,12 +1,12 @@
-const { MapElement, ResultElement } = require("../constants/Constants");
+const { MAP_ELEMENT, RESULT_ELEMENT } = require("../constants/Constants");
 
 const Map = {
 
   makeMapEl(bridgeOne, movedOne){
     if(bridgeOne === movedOne){
-      return MapElement.RIGHT;
+      return MAP_ELEMENT.RIGHT;
     }
-    return MapElement.WRONG;
+    return MAP_ELEMENT.WRONG;
   },
 
   makeLine(bridge, moved, upOrDown){
@@ -14,14 +14,14 @@ const Map = {
       if(movedOne===upOrDown){
         return this.makeMapEl(bridge[index], movedOne);
       }
-      return MapElement.NOTHING;
+      return MAP_ELEMENT.NOTHING;
     });
     return line;
   },
 
   makeMap(upLine, downLine){
-    const map = MapElement.START + upLine.join(MapElement.SEPERATOR) + MapElement.END
-              + MapElement.START + downLine.join(MapElement.SEPERATOR) + MapElement.END;
+    const map = MAP_ELEMENT.START + upLine.join(MAP_ELEMENT.SEPERATOR) + MAP_ELEMENT.END
+              + MAP_ELEMENT.START + downLine.join(MAP_ELEMENT.SEPERATOR) + MAP_ELEMENT.END;
     return map;
   },
 
@@ -31,9 +31,9 @@ const Result = {
 
   makeStringResult(bridge, moved){
     if(JSON.stringify(bridge)===JSON.stringify(moved)){
-      return ResultElement.SUCCESS;
+      return RESULT_ELEMENT.SUCCESS;
     }
-    return ResultElement.FAIL;
+    return RESULT_ELEMENT.FAIL;
   }
 
 }
