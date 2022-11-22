@@ -87,12 +87,14 @@ describe('다리 건너기 컨트롤러 테스트', () => {
 });
 
 describe('유효성 검사 후 모델에 데이터 저장 확인 테스트', () => {
+  let storeSuccess = false;
+
   beforeEach(() => {
     model.initialize();
+    storeSuccess = false;
   });
 
   test('유저가 다리 사이즈를 정확하게 입력했을 경우', () => {
-    let storeSuccess = false;
     const MOCK_SIZE = 20;
 
     controller.setUserBridgeSize(MOCK_SIZE, () => {
@@ -104,8 +106,6 @@ describe('유효성 검사 후 모델에 데이터 저장 확인 테스트', () 
   });
 
   test('유저가 움직이는 방향(U, D)를 정확하게 입력했을 경우', () => {
-    let storeSuccess = false;
-
     controller.setUserMoving(MOVE.up, () => {
       storeSuccess = true;
     });
@@ -115,8 +115,6 @@ describe('유효성 검사 후 모델에 데이터 저장 확인 테스트', () 
   });
 
   test('유저가 명령어(R, Q)를 정확하게 입력했을 경우', () => {
-    let storeSuccess = false;
-
     controller.setUserCommand(COMMAND.quit, () => {
       storeSuccess = true;
     });
