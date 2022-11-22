@@ -29,12 +29,12 @@ class BridgeGame {
   startGame() {
     IOHandler.readBridgeSize((size) => {
       this.size = +size;
-      this.makeBridge();
+      this.bridge = this.makeBridge();
       this.readMoving();
     });
   }
   makeBridge() {
-    this.bridge = BridgeMaker.makeBridge(this.size, BridgeRandomNumberGenerator.generate);
+    return BridgeMaker.makeBridge(this.size, BridgeRandomNumberGenerator.generate);
   }
   readMoving() {
     IOHandler.readMoving((moving) => {
