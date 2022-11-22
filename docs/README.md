@@ -93,8 +93,10 @@ U
 │   ├── BridgeSizeValidatorTest.js        // BridgeSizeValidator 객체 테스트
 │   ├── BridgeMovingValidatorTest.js      // BridgeMovingValidator 객체 테스트
 │   └── BridgeGameCommandValidatorTest.js // BridgeGameCommandValidator 객체 테스트
+│
 ├── docs
-│   ├── README.md             // 구현할 기능 목록, 디렉터리 구조에 대한 도큐먼트
+│   └── README.md                // 구현할 기능 목록, 디렉터리 구조에 대한 도큐먼트
+│
 └── src
     └── domain                   // 도메인 로직과 관련된 클래스(객체)를 관리
     │    ├── BridgeGame.js       // 다리 건너기 게임을 관리하는 클래스
