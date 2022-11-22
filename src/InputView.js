@@ -27,13 +27,13 @@ const InputView = {
    */
   readBridgeSize(callback) {
     Console.readLine(PHRASE.BRIDGE_LEN, (bridgeLength) => {
-      try {
-        validateBridgeSize(bridgeLength);
-        callback(bridgeLength);
-      } catch (e) {
-        Console.print(e.message);
-        this.readBridgeSize(callback);
-      }
+      // try {
+      //   validateBridgeSize(bridgeLength);
+      callback(bridgeLength);
+      // } catch (e) {
+      //   Console.print(e.message);
+      //   this.readBridgeSize(callback);
+      // }
     });
   },
 
@@ -42,13 +42,13 @@ const InputView = {
    */
   readMoving(callback) {
     Console.readLine(PHRASE.SELECT, (move) => {
-      try {
-        validateMove(move);
-        callback(move);
-      } catch (e) {
-        Console.print(e.message);
-        this.readMoving(callback);
-      }
+      // try {
+      //   validateMove(move);
+      callback(move);
+      // } catch (e) {
+      //   Console.print(e.message);
+      //   this.readMoving(callback);
+      // }
     });
   },
 
@@ -57,13 +57,13 @@ const InputView = {
    */
   readGameCommand(callback) {
     Console.readLine(PHRASE.RESTART, (gameCommand) => {
-      try {
-        validateRestart(gameCommand);
-        callback(gameCommand === RETRY.YES);
-      } catch (e) {
-        Console.print(e.message);
-        this.readGameCommand(callback);
-      }
+      // try {
+      //   validateRestart(gameCommand);
+      callback(gameCommand === RETRY.YES);
+      // } catch (e) {
+      //   Console.print(e.message);
+      //   this.readGameCommand(callback);
+      // }
     });
   },
 };
