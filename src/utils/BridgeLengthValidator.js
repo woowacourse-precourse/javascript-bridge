@@ -1,9 +1,14 @@
 const { ERROR_MESSAGE } = require("../constants/message");
-
+const { handleError } = require("./HandleError");
 class BridgeLengthValidator {
   static validate(number) {
-    if (this.#isNotNumber(number)) throw new Error(ERROR_MESSAGE.NOT_INTEGER);
-    if (this.#isValidRange(number)) throw new Error(ERROR_MESSAGE.BRIDGE_LENGTH);
+    if (this.#isNotNumber(number)) {
+      return handleError(ERROR_MESSAGE.NOT_INTEGER);
+    }
+    if (this.#isValidRange(number)) {
+      return handleError(ERROR_MESSAGE.BRIDGE_LENGTH);
+    }
+    return true;
   }
 
   static #isNotNumber(number) {
