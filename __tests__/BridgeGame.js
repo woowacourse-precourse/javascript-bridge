@@ -8,15 +8,13 @@ describe("BridgeGame class 테스트", () => {
     const bridgeShape = ["U", "D", "D", "D", "U"];
 
     const bridgeGame = new BridgeGame();
-    bridgeGame.setBridgeAnswerDirections(bridgeShape);
+    bridgeGame.setAnswerDirections(bridgeShape);
     playerChoiceMovingCommands.forEach((playerChoiceMovingCommand) => {
       bridgeGame.move(playerChoiceMovingCommand);
     });
 
-    expect(bridgeGame.getCurrentBridgeMap().upsideBridgeMap).toEqual(
-      upsideBridgeMap
-    );
-    expect(bridgeGame.getCurrentBridgeMap().downsideBridgeMap).toEqual(
+    expect(bridgeGame.getCorssedBridgeMap().upside).toEqual(upsideBridgeMap);
+    expect(bridgeGame.getCorssedBridgeMap().downside).toEqual(
       downSideBridgeMap
     );
   });
@@ -28,15 +26,13 @@ describe("BridgeGame class 테스트", () => {
     const bridgeShape = ["U", "D", "D", "D", "U"];
 
     const bridgeGame = new BridgeGame();
-    bridgeGame.setBridgeAnswerDirections(bridgeShape);
+    bridgeGame.setAnswerDirections(bridgeShape);
     playerChoiceMovingCommands.forEach((playerChoiceMovingCommand) => {
       bridgeGame.move(playerChoiceMovingCommand);
     });
 
-    expect(bridgeGame.getCurrentBridgeMap().upsideBridgeMap).toEqual(
-      upsideBridgeMap
-    );
-    expect(bridgeGame.getCurrentBridgeMap().downsideBridgeMap).toEqual(
+    expect(bridgeGame.getCorssedBridgeMap().upside).toEqual(upsideBridgeMap);
+    expect(bridgeGame.getCorssedBridgeMap().downside).toEqual(
       downSideBridgeMap
     );
   });
@@ -45,7 +41,7 @@ describe("BridgeGame class 테스트", () => {
     const bridgeShape = ["U", "D", "D", "D", "U"];
 
     const bridgeGame = new BridgeGame();
-    bridgeGame.setBridgeAnswerDirections(bridgeShape);
+    bridgeGame.setAnswerDirections(bridgeShape);
     bridgeShape.forEach((playerChoiceMovingCommand) => {
       bridgeGame.move(playerChoiceMovingCommand);
     });
@@ -58,7 +54,7 @@ describe("BridgeGame class 테스트", () => {
     const bridgeShape = ["U", "D", "D", "D", "U"];
 
     const bridgeGame = new BridgeGame();
-    bridgeGame.setBridgeAnswerDirections(bridgeShape);
+    bridgeGame.setAnswerDirections(bridgeShape);
 
     playerChoiceMovingCommands.forEach((playerChoiceMovingCommand) => {
       bridgeGame.move(playerChoiceMovingCommand);

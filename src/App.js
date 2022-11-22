@@ -20,11 +20,11 @@ class App {
   }
 
   makeBridge(bridgeSize) {
-    const bridgeAnswerDirections = BridgeMaker.makeBridge(
+    const answerDirectionsBridge = BridgeMaker.makeBridge(
       bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
-    this.bridgeGame.setBridgeAnswerDirections(bridgeAnswerDirections);
+    this.bridgeGame.setAnswerDirections(answerDirectionsBridge);
 
     this.inputMovingCommand();
   }
@@ -35,7 +35,7 @@ class App {
 
   moveBirdge(movingCommand) {
     this.bridgeGame.move(movingCommand);
-    OutputView.printMap(this.bridgeGame.getCurrentBridgeMap());
+    OutputView.printMap(this.bridgeGame.getCorssedBridgeMap());
 
     this.controlBridgeMoveResult();
   }
@@ -66,7 +66,7 @@ class App {
   }
 
   sendPrintResult() {
-    const currentBridgeMap = this.bridgeGame.getCurrentBridgeMap();
+    const currentBridgeMap = this.bridgeGame.getCorssedBridgeMap();
     const totalTryCount = this.bridgeGame.getTotalTryCount();
     const isGameSuccess = this.bridgeGame.isGameSuccess();
     return {

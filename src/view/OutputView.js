@@ -10,9 +10,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap({ upsideBridgeMap, downsideBridgeMap }) {
-    Console.print(OUTPUT_MESSAGE.BRIDGE_MAP(upsideBridgeMap));
-    Console.print(OUTPUT_MESSAGE.BRIDGE_MAP(downsideBridgeMap));
+  printMap({ upside, downside }) {
+    Console.print(OUTPUT_MESSAGE.BRIDGE_MAP(upside));
+    Console.print(OUTPUT_MESSAGE.BRIDGE_MAP(downside));
   },
 
   /**

@@ -5,9 +5,9 @@ const { getArrayLastIndex } = require("./utils");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #bridgeAnswerDirections = [];
+  #answerDirections = [];
   #movingCommand = "";
-  #currentBridgeCount = 0;
+  #corssedBridgeCount = 0;
   #totalTryCount = 1;
 
   /**
@@ -17,7 +17,7 @@ class BridgeGame {
    */
   move(movingCommand) {
     this.#movingCommand = movingCommand;
-    this.#currentBridgeCount += 1;
+    this.#corssedBridgeCount += 1;
   }
 
   /**
@@ -26,7 +26,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.#currentBridgeCount = 0;
+    this.#corssedBridgeCount = 0;
     this.#totalTryCount += 1;
   }
 
@@ -35,44 +35,48 @@ class BridgeGame {
   }
 
   isAnswerMovingCommand() {
-    const currentBridgeIndex = this.#currentBridgeCount - 1;
-    return (
-      this.#movingCommand === this.#bridgeAnswerDirections[currentBridgeIndex]
-    );
+    const currentBridgeIndex = this.#corssedBridgeCount - 1;
+    return this.#movingCommand === this.#answerDirections[currentBridgeIndex];
   }
 
-  setBridgeAnswerDirections(bridgeAnswerDirections) {
-    return (this.#bridgeAnswerDirections = bridgeAnswerDirections);
+  setAnswerDirections(answerDirections) {
+    return (this.#answerDirections = answerDirections);
   }
 
-  getCurrentBridgeMap() {
-    const upsideBridgeMap = this.#makeAnswerBridgeMap(COMMAND.MOVING.UP);
-    const downsideBridgeMap = this.#makeAnswerBridgeMap(COMMAND.MOVING.DOWN);
+  getCorssedBridgeMap() {
+    const upside = this.#makeAnswerCorssedBridgeMap(COMMAND.MOVING.UP);
+    const downside = this.#makeAnswerCorssedBridgeMap(COMMAND.MOVING.DOWN);
     if (!this.isAnswerMovingCommand()) {
-      upsideBridgeMap[getArrayLastIndex(upsideBridgeMap)] =
-        this.#movingCommand === COMMAND.MOVING.UP ? "X" : " ";
-      downsideBridgeMap[getArrayLastIndex(downsideBridgeMap)] =
-        this.#movingCommand === COMMAND.MOVING.DOWN ? "X" : " ";
+      upside[getArrayLastIndex(upside)] = this.#markNotAnswerBridgeMap(
+        COMMAND.MOVING.UP
+      );
+      downside[getArrayLastIndex(downside)] = this.#markNotAnswerBridgeMap(
+        COMMAND.MOVING.DOWN
+      );
     }
-    return { upsideBridgeMap, downsideBridgeMap };
+    return { upside, downside };
   }
 
   getTotalTryCount() {
     return this.#totalTryCount;
   }
 
-  #makeAnswerBridgeMap(upDown) {
-    return this.#getCurrentBridgeShape().map((alpabet) =>
-      alpabet === upDown ? "O" : " "
-    );
+  #makeAnswerCorssedBridgeMap(direction) {
+    return this.#getCorssedAnswerDirections().map((answerDirection) => {
+      return answerDirection === direction ? "O" : " ";
+    });
+  }
+
+  #markNotAnswerBridgeMap(direction) {
+    return this.#movingCommand === direction ? "X" : " ";
   }
 
   #isLastMove() {
-    return this.#currentBridgeCount === this.#bridgeAnswerDirections.length;
+    return this.#corssedBridgeCount === this.#answerDirections.length;
   }
 
-  #getCurrentBridgeShape() {
-    return this.#bridgeAnswerDirections.slice(0, this.#currentBridgeCount);
+  #getCorssedAnswerDirections() {
+    return this.#answerDirections.slice(0, this.#corssedBridgeCount);
   }
 }
 
