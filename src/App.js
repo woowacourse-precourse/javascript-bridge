@@ -5,8 +5,7 @@ const inputView = require("./InputView");
 const bridgeMaker = require("./BridgeMaker");
 const bridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const { vaildSizeInput } = require("./InputView");
-const BridgeGame = require("./BridgeGame");
-// const bridgeGame = require("./BridgeGame");
+
 
 class App {
     async play() {
@@ -21,16 +20,13 @@ class App {
     }
 
     const bridgeArr = bridgeMaker.makeBridge(size, bridgeRandomNumberGenerator.generate);
-    console.log('###bridgeArr:', bridgeArr);
+    
 
 
     const movingInput = await this.inputMoving(bridgeArr);
-    console.log('###movingInput:', movingInput);
 
 
     const bridgeGame = new BridgeGame(bridgeArr, size);
-    const comparisonResult = bridgeGame.move(movingInput);
-    // console.log('###'comparisonResult);
 
   }
 
@@ -47,22 +43,15 @@ class App {
   }
 
   
-  // /** 4-1. 이동할 칸 입력 및 입력값 */
-  // async move(bridgeArr) {
-  //   const movingInput = [];
-  //   for(let i = 0; i < bridgeArr.length; i++) {
-  //     await inputView.readMoving()
-  //       .then(value => {
-  //         //중간결과 출력
-  //         movingInput.push(value);
-  //       }).catch(error => {
-  //         Console.print(error.message);
-  //         --i;
-  //       });
-  //   }
-  //   console.log('###movingInputArr:', movingInput);
-  //   return movingInput;
-  // }
+  /**4-1. 이동할 칸 movingInput에 받기*/
+  async inputMoving(bridgeArr) {
+    let movingInput;
+    await inputView.readMoving()
+    .then(value => {
+      movingInput = value;
+    }).catch(error => Console.print(error.message));
+    return movingInput;
+  }
 }
 
 const app = new App();
