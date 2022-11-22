@@ -13,7 +13,7 @@ const InputView = {
    */
   readBridgeSize(gamePresenter) {
     Console.readLine(INPUT.GET_SIZE, (size) => {
-      gamePresenter.handleInput(size, INPUT_TYPE.SIZE);
+      gamePresenter.handleInput(parseInt(size, 10), INPUT_TYPE.SIZE);
     });
   },
   /**
