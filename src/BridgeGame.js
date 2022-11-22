@@ -7,7 +7,7 @@ class BridgeGame {
   #originBridges
   #bridges
   #upRow
-  #secondRow
+  #downRow
   #count
   #result
 
@@ -18,17 +18,17 @@ class BridgeGame {
 
   openBridgeRow() {
     this.#upRow = [BRIDGE_ROW.open];
-    this.#secondRow = [BRIDGE_ROW.open];
+    this.#downRow = [BRIDGE_ROW.open];
   }
 
   closeBridgeRow() {
     this.#upRow.push(BRIDGE_ROW.close);
-    this.#secondRow.push(BRIDGE_ROW.close);
+    this.#downRow.push(BRIDGE_ROW.close);
   }
 
   addResultInRow(a, b) {
     this.#upRow.push(a);
-    this.#secondRow.push(b);
+    this.#downRow.push(b);
   }
 
   start() {
@@ -66,8 +66,8 @@ class BridgeGame {
   }
 
   checkBridge(bridge) {
-    if (this.#upRow.includes(BRIDGE_CHECK.wrong) === true || this.#secondRow.includes(BRIDGE_CHECK.wrong) === true) {
-      this.gameManager.printSpace(this.#upRow, this.#secondRow);
+    if (this.#upRow.includes(BRIDGE_CHECK.wrong) === true || this.#downRow.includes(BRIDGE_CHECK.wrong) === true) {
+      this.gameManager.printSpace(this.#upRow, this.#downRow);
       return this.inputRetry();
     }
 
@@ -75,13 +75,13 @@ class BridgeGame {
       return this.finish();  
     }
 
-    this.gameManager.printSpace(this.#upRow, this.#secondRow);
+    this.gameManager.printSpace(this.#upRow, this.#downRow);
     this.addPartition(bridge);
   }
 
   addPartition(bridge) {
     this.#upRow.splice(-1,1, BRIDGE_ROW.partition);
-    this.#secondRow.splice(-1,1, BRIDGE_ROW.partition);
+    this.#downRow.splice(-1,1, BRIDGE_ROW.partition);
     this.#bridges = bridge;
 
     this.inputSpace();
@@ -89,7 +89,7 @@ class BridgeGame {
 
   addResultInRow(a, b) {
     this.#upRow.push(a);
-    this.#secondRow.push(b);
+    this.#downRow.push(b);
   }
 
   inputRetry() {
@@ -117,7 +117,7 @@ class BridgeGame {
   }
 
   printFinalResult() {
-    this.gameManager.printResult(this.#upRow, this.#secondRow);
+    this.gameManager.printResult(this.#upRow, this.#downRow);
     this.gameManager.printInfo(this.#count, this.#result);
   }
 }
