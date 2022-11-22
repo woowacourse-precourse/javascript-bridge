@@ -55,30 +55,16 @@ class BridgeGame {
    * @returns {string[]} 해당 길의 기록을 반환 (ex: ["O", " ", "X"])
    */
   #parseMovedSpaceToRoadLog(road) {
-    return this.#movedSpace.map((space, index, arr) => {
+    return this.#movedSpace.map((space, index) => {
       if (space !== road) return MAP.EMPTY;
-      if (index === arr.length - 1 && !this.isSuccessMoved()) return MAP.FAIL;
+      if (this.#isLastMoveFailed(index)) return MAP.FAIL;
       return MAP.SUCCESS;
     });
   }
 
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * @param {string} movingSpace 이동할 칸 ("U" or "D")
-   * @returns {boolean} 이동한 칸이 성공인지 실패인지 여부
-   */
-  move(movingSpace) {
-    this.#movedSpace.push(movingSpace);
-  }
-
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * @param {function} callback 재시작 시 호출할 함수 (이동할 칸 선택 받기)
-   */
-  retry(callback) {
-    this.#tryCount += 1;
-    this.#movedSpace = [];
-    callback();
+  #isLastMoveFailed(index) {
+    if (index !== this.#movedSpace.length - 1) return false;
+    return !this.isSuccessMoved();
   }
 
   /**
@@ -105,6 +91,25 @@ class BridgeGame {
     if (this.#bridge[bridgeLastIndex] !== this.#movedSpace[movedSpaceLastIndex])
       return false;
     return true;
+  }
+
+  /**
+   * 사용자가 칸을 이동할 때 사용하는 메서드
+   * @param {string} movingSpace 이동할 칸 ("U" or "D")
+   * @returns {boolean} 이동한 칸이 성공인지 실패인지 여부
+   */
+  move(movingSpace) {
+    this.#movedSpace.push(movingSpace);
+  }
+
+  /**
+   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
+   * @param {function} callback 재시작 시 호출할 함수 (이동할 칸 선택 받기)
+   */
+  retry(callback) {
+    this.#tryCount += 1;
+    this.#movedSpace = [];
+    callback();
   }
 }
 
