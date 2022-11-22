@@ -1,5 +1,7 @@
 const OUTPUT_MESSAGE = Object.freeze({
   START: "다리 건너기 게임을 시작합니다.",
+  MAP: (upBridge, downBridge) =>
+    `[${upBridge.join(" | ")}]\n[${downBridge.join(" | ")}]\n`,
 });
 
 const OPTION_MESSAGE = Object.freeze({
