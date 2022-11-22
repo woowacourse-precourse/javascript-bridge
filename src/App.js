@@ -42,9 +42,14 @@ class App {
   retry(command) {
     if (command === Command.QUIT) this.gameEnd(false);
     if (command === Command.RETRY) {
-      this.#bridgeGame.retry(this.#retryCount);
+      this.#bridgeGame.retry();
+      this.IncreaseRetryCount();
       this.playBridgeGame();
     }
+  }
+
+  IncreaseRetryCount() {
+    this.#retryCount += 1;
   }
 
   /**

@@ -68,12 +68,9 @@ class BridgeGame {
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * @param {number} tryCount 현재까지 시도한 횟수
-   * @return {number} 현재까지 시도한 횟수 + 1
    */
-  retry(tryCount) {
+  retry() {
     this.#bridge.setCrossBridge([[], []]);
-    return tryCount + 1;
   }
 }
 
