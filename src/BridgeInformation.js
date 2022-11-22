@@ -103,9 +103,16 @@ class BridgeInformation {
     return false;
   }
 
+  makeOutputType() {
+    const upSideString = this.#route[0].join("");
+    const downSideString = this.#route[1].join("");
+    return [upSideString, downSideString];
+  }
+
   printRouteMap() {
-    OutputView.printMap(this.#route[0].join(""));
-    OutputView.printMap(this.#route[1].join(""));
+    const toPrintSample = this.makeOutputType();
+    OutputView.printMap(toPrintSample[0]);
+    OutputView.printMap(toPrintSample[1]);
   }
 
   resetRoute() {
