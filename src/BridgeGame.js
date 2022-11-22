@@ -1,5 +1,6 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { validateBridgeMove } = require("./Validation");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -20,19 +21,21 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move() {
-    this.inputView.readMoving(this.handleBridgeMove);
+    this.inputView.readMoving(this.handleBridgeMove.bind(this));
   }
 
   handleBridgeMove(move) {
     validateBridgeMove(move);
-    if (this.bridge[count] !== move) {
+    if (this.bridge[this.count] !== move) {
       // 게임 실패
+      this.outputView.printMap(this.count, false, this.bridge);
       return;
     }
 
     this.count += 1;
+    this.outputView.printMap(this.count, true, this.bridge);
 
-    if (this.bridge.length === count) {
+    if (this.bridge.length === this.count) {
       // 게임 종료
       return;
     }
