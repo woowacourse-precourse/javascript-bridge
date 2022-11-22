@@ -19,8 +19,18 @@ class BridgeGame {
 
       bridgeCrossingResult[directionNumber].push(isCross ? "O" : "X");
       bridgeCrossingResult[Math.abs(directionNumber - 1)].push(" ");
-    })
+    });
+    return bridgeCrossingResult;
   }
+  isFail() {
+    const idx = this.#crossingOrder.length - 1;
+    return this.#bridge[idx] !== this.#crossingOrder[idx][0];
+  }
+
+  isLast() {
+    return this.#bridge.length === this.#crossingOrder.length;
+  }
+
   retry() {}
 }
 
