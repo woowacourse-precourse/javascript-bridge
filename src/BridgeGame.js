@@ -76,5 +76,20 @@ class BridgeGame {
 
     return false;
   }
+
+  handleCommandInputException(command) {
+    let count = 0;
+    if (command === 'R') {
+      count += 1;
+    }
+
+    if (command === 'Q') {
+      count += 1;
+    }
+
+    if (count === 0) {
+      throw new Error(ConstValue.RETRY_INPUT_EXCEPTION_ERROR_MESSAGE);
+    }
+  }
 }
 module.exports = BridgeGame;
