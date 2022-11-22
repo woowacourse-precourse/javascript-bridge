@@ -1,5 +1,5 @@
 const { UP_AND_DOWN, TRACE_MARKS } = require("../constants");
-const OutputView = require("../OutputView");
+const OutputView = require("../views/OutputView");
 
 /**
  * 사용자가 이동한 길을 관리한다.
