@@ -8,6 +8,11 @@ const VALID_VALUE = {
     UP: 'U',
     DOWN: 'D',
   },
+
+  RETRY: {
+    RETRY: 'R',
+    QUIT: 'Q',
+  },
 };
 
 module.exports = VALID_VALUE;
