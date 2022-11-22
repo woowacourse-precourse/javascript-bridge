@@ -11,7 +11,7 @@ class BridgeGame {
   constructor(bridges) {
     this.#bridges = bridges;
     this.#movements = [];
-    this.#numberOfTry = 0;
+    this.#numberOfTry = 1;
   }
 
   getBridges() {
@@ -20,6 +20,10 @@ class BridgeGame {
 
   getMovements() {
     return this.#movements;
+  }
+
+  getNumberOfTry() {
+    return this.#numberOfTry;
   }
 
   isEnd() {
@@ -43,6 +47,7 @@ class BridgeGame {
   move(moving) {
     if (this.#bridges[this.#movements.length] === moving) {
       this.#movements.push(WORD.SUCCESS);
+      console.log("movements", this.#movements);
       return true;
     }
     this.#movements.push(WORD.FAILURE);
@@ -55,7 +60,8 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    return (this.#numberOfTry += 1);
+    this.#movements = [];
+    this.#numberOfTry += 1;
   }
 }
 

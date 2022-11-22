@@ -2,17 +2,22 @@ const { WORD } = require("./Constants");
 
 class MapMaker {
   #bridges;
-  #movemetns;
+  #movements;
   constructor() {
     this.#bridges;
-    this.#movemetns;
+    this.#movements;
+    this.upMaps = [];
+    this.downMaps = [];
+  }
+
+  resetMap() {
     this.upMaps = [];
     this.downMaps = [];
   }
 
   makeMap(bridges, movements, isMoving) {
     this.#bridges = bridges;
-    this.#movemetns = movements;
+    this.#movements = movements;
     if (isMoving) this.makeSuccesMap();
     else this.makeFailureMap();
 
@@ -23,7 +28,7 @@ class MapMaker {
   }
 
   makeSuccesMap() {
-    if (this.#bridges[this.#movemetns.length - 1] === WORD.UP) {
+    if (this.#bridges[this.#movements.length - 1] === WORD.UP) {
       this.upMaps.push(WORD.SUCCESS);
       this.downMaps.push(WORD.BLANK);
     } else {
@@ -33,7 +38,7 @@ class MapMaker {
   }
 
   makeFailureMap() {
-    if (this.#bridges[this.#movemetns.length - 1] === WORD.UP) {
+    if (this.#bridges[this.#movements.length - 1] === WORD.UP) {
       this.upMaps.push(WORD.FAILURE);
       this.downMaps.push(WORD.BLANK);
     } else {

@@ -50,23 +50,26 @@ class App {
     OutputView.printMap(map);
     let isEnd = this.bridgeGame.isEnd();
     console.log("(확인용) isEnd: ", isEnd);
-    if (!isMoving) this.controlRetry();
-    else if (isEnd) this.controlEnd();
+    if (isEnd) this.controlEnd();
+    else if (!isMoving) this.controlRetry();
     else this.controlMoving();
   }
 
   controlRetry() {
     console.log("controlRetry");
     InputView.readGameCommand((gameCommand) => {
-      if (gameCommand === WORD.RETRY) this.bridgeGame.retry();
-      else this.controlEnd();
+      if (gameCommand === WORD.RETRY) {
+        this.mapMaker.resetMap();
+        this.bridgeGame.retry();
+        this.controlMoving();
+      } else this.controlEnd();
     });
   }
 
   controlEnd() {
     const map = this.mapMaker.getResultMap();
     const isSuccess = this.bridgeGame.isSuccess();
-    const numberOfTry = this.bridgeGame.retry();
+    const numberOfTry = this.bridgeGame.getNumberOfTry();
     OutputView.printResult(map, isSuccess, numberOfTry);
   }
 }
