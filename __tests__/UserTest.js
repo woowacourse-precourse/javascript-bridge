@@ -1,27 +1,51 @@
-const { validate } = require("../src/validation/MovingInputValidation");
 const UserController = require("../src/controller/UserController");
+const MovingInputValidation = require("../src/validation/MovingInputValidation");
+const RestartInputValidation = require("../src/validation/RestartInputValidation");
+
 describe("유저 관련 테스트", () => {
   const userController = new UserController();
 
   test("유저 움직임 input 테스트", () => {
     expect(() => {
-      validate("");
+      MovingInputValidation.validate("");
     }).toThrow("[ERROR]");
 
     expect(() => {
-      validate("u");
+      MovingInputValidation.validate("u");
     }).toThrow("[ERROR]");
 
     expect(() => {
-      validate("d");
+      MovingInputValidation.validate("d");
     }).toThrow("[ERROR]");
 
     expect(() => {
-      validate(".");
+      MovingInputValidation.validate(".");
     }).toThrow("[ERROR]");
 
     expect(() => {
-      validate("우테코");
+      MovingInputValidation.validate("우테코");
+    }).toThrow("[ERROR]");
+  });
+
+  describe("유저 재시작 의사 input 테스트", () => {
+    expect(() => {
+      RestartInputValidation.validate("R");
+    }).not.toThrow("[ERROR]");
+
+    expect(() => {
+      RestartInputValidation.validate("Q");
+    }).not.toThrow("[ERROR]");
+
+    expect(() => {
+      RestartInputValidation.validate("");
+    }).toThrow("[ERROR]");
+
+    expect(() => {
+      RestartInputValidation.validate(".");
+    }).toThrow("[ERROR]");
+
+    expect(() => {
+      RestartInputValidation.validate("우테코");
     }).toThrow("[ERROR]");
   });
 
