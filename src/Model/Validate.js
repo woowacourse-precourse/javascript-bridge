@@ -4,7 +4,6 @@ const {
   BRIDGE,
   GAME_OPTION,
 } = require("../Utils/Constants");
-const OutputView = require("../View/OutputView");
 
 class Validate {
   checkBridgeSize(size) {

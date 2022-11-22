@@ -4,22 +4,16 @@ const { RESULT } = require("../src/Utils/Constants");
 describe("BridgeGame 클래스 테스트", () => {
   test("플레이어가 다리를 건널 수 있는 경우", () => {
     const bridgeGame = new BridgeGame(["U", "U", "D"]);
-    let [canCross, upperBridge, lowerBridge] = bridgeGame.move("U");
+    const [canCross, upperBridge, lowerBridge] = bridgeGame.move("U");
 
     expect(canCross).toBe(true);
     expect(upperBridge).toEqual(["O"]);
     expect(lowerBridge).toEqual([" "]);
-
-    [canCross, upperBridge, lowerBridge] = bridgeGame.move("D");
-
-    expect(canCross).toBe(false);
-    expect(upperBridge).toEqual(["O", " "]);
-    expect(lowerBridge).toEqual([" ", "X"]);
   });
 
   test("플레이어가 다리를 건널 수 없는 경우", () => {
     const bridgeGame = new BridgeGame(["U", "U", "D"]);
-    let [canCross, upperBridge, lowerBridge] = bridgeGame.move("D");
+    const [canCross, upperBridge, lowerBridge] = bridgeGame.move("D");
 
     expect(canCross).toBe(false);
     expect(upperBridge).toEqual([" "]);
