@@ -52,6 +52,16 @@ describe("다리 게임 클래스 테스트", () => {
     expect(bridgeGame.lengthCompare()).toEqual(false);
   });
 
+  test("성공인지 실패인지 반환하는 메서드 테스트", () => {
+    const bridgeGame = new BridgeGame(["U", "U", "D", "D"]);
+    const item = ["U", "U", "D", "U"];
+
+    item.forEach((v) => {
+      bridgeGame.move(v);
+    });
+    expect(bridgeGame.returnSuccessFail()).toEqual("실패");
+  });
+
   test("최종 출력에서 필요로 하는 인자들을 변환하여 반환하는 메서드의 테스트", () => {
     const bridgeGame = new BridgeGame(["U", "U", "D"]);
     const item = ["U", "U", "D"];
