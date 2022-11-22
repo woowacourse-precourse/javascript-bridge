@@ -23,8 +23,8 @@ describe("BridgeGame 테스트", () => {
     });
 
     test.each([
-        [["1", "0", "1"], ["U", "D"], ["O", " "], [" ", "O"]],
-        [["1", "0", "1"], ["U", "D", "U"], ["O", " ", "O"], [" ", "O", " "]],
+        [[1, 0, 1], ["U", "D"], ["O", " "], [" ", "O"]],
+        [[1, 0, 1], ["U", "D", "U"], ["O", " ", "O"], [" ", "O", " "]],
     ])("이동 로그 출력 반환 테스트", (bridge, moveTypes, upHistory, downHistory) => {
         mockRandoms(bridge);
         const bridgeGame = new BridgeGame();
@@ -35,9 +35,9 @@ describe("BridgeGame 테스트", () => {
     });
 
     test.each([
-        [["1", "0", "1"], ["U", "D", "D"]],
-        [["1", "0", "1"], ["U", "U"]],
-        [["1", "0", "1"], ["D"]],
+        [[1, 0, 1], ["U", "D", "D"]],
+        [[1, 0, 1], ["U", "U"]],
+        [[1, 0, 1], ["D"]],
     ])("이동 실패 테스트", (bridge, moveTypes) => {
         mockRandoms(bridge);
         const bridgeGame = new BridgeGame();
@@ -59,7 +59,7 @@ describe("BridgeGame 테스트", () => {
     });
 
     test("게임 리셋 테스트", () => {
-        const bridge = ["1", "0", "1"];
+        const bridge = [1, 0, 1];
         mockRandoms(bridge);
 
         const bridgeGame = new BridgeGame();
