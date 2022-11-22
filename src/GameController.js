@@ -1,3 +1,5 @@
+const { makeBridge } = require("./BridgeMaker");
+const { generate } = require("./BridgeRandomNumberGenerator");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 
@@ -14,7 +16,9 @@ class GameController {
 
   setUpBridge() {
     InputView.readBridgeSize((size) => {
-      console.log(size);
+      const bridge = makeBridge(size, generate);
+
+      this.game.setBridge(bridge);
     });
   }
 }

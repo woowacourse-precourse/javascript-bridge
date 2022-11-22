@@ -8,4 +8,13 @@ const MESSAGE = Object.freeze({
   TRY_COUNT: "총 시도한 횟수:",
 });
 
-module.exports = { MESSAGE };
+const FLAG = Object.freeze({
+  UPPER: "U",
+  LOWER: "D",
+  RETRY: "R",
+  QUIT: "Q",
+  CORRECT: "O",
+  WRONG: "X",
+});
+
+module.exports = { MESSAGE, FLAG };
