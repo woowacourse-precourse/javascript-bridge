@@ -27,20 +27,20 @@ class BridgeGame {
 
   startGame() {
     OutputView.startMent();
-    this.inputBridgeLength();
+    this.#inputBridgeLength();
   }
 
   /**
    * 다리 사이즈 입력에 대한 콜백 함수
    */
-  inputBridgeLength() {
+  #inputBridgeLength() {
     const bridgeLength = (size) => {
       OutputView.newLine();
       const input = Number(size);
       this.#answers = BridgeMaker.makeBridge(input, BridgeNumber.generate);
-      const validation = this.bridgeLengthValidation(input);
-      if (validation) this.inputMoving();
-      if (!validation) this.inputBridgeLength();
+      const validation = this.#bridgeLengthValidation(input);
+      if (validation) this.#inputMoving();
+      if (!validation) this.#inputBridgeLength();
     };
     InputView.readBridgeSize(INPUT.BRIDGE_SIZE, bridgeLength);
   }
@@ -50,7 +50,7 @@ class BridgeGame {
    * @param {string} input 사용자가 입력한 다리 사이즈
    * @returns 예외 발생 시 false, 예외 미발생 시 true
    */
-  bridgeLengthValidation(input) {
+  #bridgeLengthValidation(input) {
     try {
       Validation.validateSize(input);
       return true;
@@ -63,14 +63,14 @@ class BridgeGame {
   /**
    * 이동할 칸 입력에 대한 콜백 함수
    */
-  inputMoving() {
+  #inputMoving() {
     const moving = (input) => {
-      const validation = this.movingValidation(input);
-      if (!validation) this.inputMoving();
-      if (validation) this.move(input);
-      if (this.#isSuccess) this.isSuccessGame(this.#isSuccess);
-      if (!this.#isSuccess && this.#isPlay) this.inputMoving();
-      if (!this.#isSuccess && !this.#isPlay) this.inputReGame();
+      const validation = this.#movingValidation(input);
+      if (!validation) this.#inputMoving();
+      if (validation) this.#move(input);
+      if (this.#isSuccess) this.#isSuccessGame(this.#isSuccess);
+      if (!this.#isSuccess && this.#isPlay) this.#inputMoving();
+      if (!this.#isSuccess && !this.#isPlay) this.#inputReGame();
     };
     InputView.readMoving(INPUT.CHOOSE_BLOCK, moving);
   }
@@ -80,7 +80,7 @@ class BridgeGame {
    * @param {string} input 사용자가 입력한 이동할 칸
    * @returns 예외 발생 시 false, 예외 미발생 시 true
    */
-  movingValidation(input) {
+  #movingValidation(input) {
     try {
       Validation.validateMove(input);
       return true;
@@ -93,12 +93,12 @@ class BridgeGame {
   /**
    * 게임 재시도 및 종료 입력에 대한 콜백 함수
    */
-  inputReGame() {
+  #inputReGame() {
     const reGame = (input) => {
-      const validation = this.reGameValidation(input);
-      if (!validation) this.inputReGame();
-      if (input === UTIL.RETRY) this.retry();
-      if (input === UTIL.QUIT) this.isSuccessGame(this.#isSuccess);
+      const validation = this.#reGameValidation(input);
+      if (!validation) this.#inputReGame();
+      if (input === UTIL.RETRY) this.#retry();
+      if (input === UTIL.QUIT) this.#isSuccessGame(this.#isSuccess);
     };
     InputView.readMoving(INPUT.RESTART, reGame);
   }
@@ -108,7 +108,7 @@ class BridgeGame {
    * @param {string} input 사용자가 입력한 재시도 및 종료 값
    * @returns 예외 발생 시 false, 예외 미발생 시 true
    */
-  reGameValidation(input) {
+  #reGameValidation(input) {
     try {
       Validation.validateReGame(input);
       return true;
@@ -122,10 +122,10 @@ class BridgeGame {
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * @param {string} input 사용자가 입력한 이동할 칸
    */
-  move(input) {
+  #move(input) {
     const crossable = this.#answers[this.#turn];
     this.#turn += 1;
-    this.isCorrect(input, crossable);
+    this.#isCorrect(input, crossable);
   }
 
   /**
@@ -133,11 +133,11 @@ class BridgeGame {
    * @param {string} input 사용자가 입력한 이동할 칸
    * @param {string} crossable 건널 수 있는 칸
    */
-  isCorrect(input, crossable) {
-    if (input === crossable) this.isFirst(UTIL.GO, input);
+  #isCorrect(input, crossable) {
+    if (input === crossable) this.#isFirst(UTIL.GO, input);
     if (input !== crossable) {
       this.#isPlay = false;
-      this.isFirst(UTIL.STOP, input);
+      this.#isFirst(UTIL.STOP, input);
     }
     if (input === crossable && this.#turn === this.#answers.length) {
       this.#isSuccess = true;
@@ -149,9 +149,9 @@ class BridgeGame {
    * @param {string} state 사용자가 이동한 칸과 정답을 비교한 결과
    * @param {string} input 사용자가 이동한 칸
    */
-  isFirst(state, input) {
-    if (this.#turn === UTIL.FIRST) this.firstBlock(state, input);
-    if (this.#turn !== UTIL.FIRST) this.afterFirstBlock(state, input);
+  #isFirst(state, input) {
+    if (this.#turn === UTIL.FIRST) this.#firstBlock(state, input);
+    if (this.#turn !== UTIL.FIRST) this.#afterFirstBlock(state, input);
   }
 
   /**
@@ -159,7 +159,7 @@ class BridgeGame {
    * @param {string} state 사용자가 이동한 칸과 정답을 비교한 결과
    * @param {string} input 사용자가 이동한 칸
    */
-  firstBlock(state, input) {
+  #firstBlock(state, input) {
     if (input === UTIL.UP) {
       const bridgeRecords = this.#bridgeRecords.addFirstUpBlock(state);
       OutputView.printMap(bridgeRecords);
@@ -175,7 +175,7 @@ class BridgeGame {
    * @param {string} state 사용자가 이동한 칸과 정답을 비교한 결과
    * @param {string} input 사용자가 이동한 칸
    */
-  afterFirstBlock(state, input) {
+  #afterFirstBlock(state, input) {
     if (input === UTIL.UP) {
       const bridgeRecords = this.#bridgeRecords.addUpBlock(state);
       OutputView.printMap(bridgeRecords);
@@ -189,18 +189,18 @@ class BridgeGame {
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    */
-  retry() {
+  #retry() {
     this.#turn = UTIL.INIT;
     this.#tries += 1;
     this.#isPlay = true;
     this.#bridgeRecords.init();
-    this.inputMoving();
+    this.#inputMoving();
   }
 
   /**
    * 사용자가 게임을 종료할 때 성공여부와, 총 시도횟수, 다리기록을 알려주는 메서드
    */
-  isSuccessGame(isSuccess) {
+  #isSuccessGame(isSuccess) {
     InputView.closeRead();
     const records = this.#bridgeRecords.getResult();
     if (isSuccess) OutputView.printResult(UTIL.SUCCESS, this.#tries, records);
