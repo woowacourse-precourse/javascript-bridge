@@ -5,12 +5,12 @@ const InputView = require("./views/InputView");
 const { makeBridge } = require("./BridgeMaker");
 class BridgeGame {
   #bridge;
-  #numberOfAttempts;
+  #playCount;
   #userBridge;
   constructor() {
     this.#bridge = [];
     this.#userBridge = [];
-    this.#numberOfAttempts = 1;
+    this.#playCount = 1;
   }
   play() {
     OutputView.printMessage("다리 건너기 게임을 시작합니다.\n");
@@ -24,7 +24,7 @@ class BridgeGame {
       Number(size),
       BridgeRandomNumberGenerator.generate
     );
-    console.log(this.#bridge);
+    OutputView.lineBreak();
     this.requestMove();
   }
   makeTwoBridge(bridge) {
@@ -72,15 +72,13 @@ class BridgeGame {
       this.#userBridge.push(direction);
       OutputView.printMap(this.mapBridge(this.#userBridge));
       if (this.#userBridge.length === this.#bridge.length) {
-        OutputView.printMap(this.mapBridge(this.#userBridge));
+        this.winGame(true);
         return;
       }
       this.requestMove();
       return;
     }
     this.#userBridge.push(direction);
-    this.#numberOfAttempts += 1;
-    console.log(this.#userBridge);
     OutputView.printMap(this.mapErrorBridge(this.#userBridge));
     this.requestRetry();
   }
@@ -97,17 +95,34 @@ class BridgeGame {
   retryOrQuit(command) {
     if (command === "R") {
       this.#userBridge = [];
+      this.#playCount += 1;
       this.requestMove();
     }
     if (command === "Q") {
-      OutputView.printMap(this.mapErrorBridge(this.#userBridge));
+      this.loseGame(false);
     }
   }
+  winGame(result) {
+    OutputView.printResult(
+      this.mapBridge(this.#userBridge),
+      this.#playCount,
+      result
+    );
+  }
+  loseGame(result) {
+    OutputView.printResult(
+      this.mapErrorBridge(this.#userBridge),
+      this.#playCount,
+      result
+    );
+  }
+
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
+
   retry() {}
 }
 
