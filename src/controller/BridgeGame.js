@@ -32,19 +32,31 @@ class BridgeGame {
 
   inputBridgeLength() {
     const bridgeLength = (size) => {
-      const input = Number(size);
-      Validation.validateSize(input);
       OutputView.newLine();
+      const input = Number(size);
+      const validation = this.bridgeLengthValidation(input);
+      if (validation) this.inputMoving();
+      if (!validation) this.inputBridgeLength();
       this.#answers = BridgeMaker.makeBridge(input, BridgeNumber.generate);
-      this.inputMoving();
     };
     InputView.readBridgeSize(INPUT.BRIDGE_SIZE, bridgeLength);
   }
 
+  bridgeLengthValidation(input) {
+    try {
+      Validation.validateSize(input);
+      return true;
+    } catch (error) {
+      OutputView.printError(error);
+      return false;
+    }
+  }
+
   inputMoving() {
     const moving = (input) => {
-      Validation.validateMove(input);
-      this.move(input);
+      const validation = this.movingValidation(input);
+      if (!validation) this.inputMoving();
+      if (validation) this.move(input);
       if (this.#isSuccess) this.isSuccessGame(this.#isSuccess);
       if (!this.#isSuccess && this.#isPlay) this.inputMoving();
       if (!this.#isSuccess && !this.#isPlay) this.inputReGame();
@@ -52,13 +64,34 @@ class BridgeGame {
     InputView.readMoving(INPUT.CHOOSE_BLOCK, moving);
   }
 
+  movingValidation(input) {
+    try {
+      Validation.validateMove(input);
+      return true;
+    } catch (error) {
+      OutputView.printError(error);
+      return false;
+    }
+  }
+
   inputReGame() {
     const reGame = (input) => {
-      Validation.validateReGame(input);
+      const validation = this.reGameValidation(input);
+      if (!validation) this.inputReGame();
       if (input === UTIL.RETRY) this.retry();
       if (input === UTIL.QUIT) this.isSuccessGame(this.#isSuccess);
     };
     InputView.readMoving(INPUT.RESTART, reGame);
+  }
+
+  reGameValidation(input) {
+    try {
+      Validation.validateReGame(input);
+      return true;
+    } catch (error) {
+      OutputView.printError(error);
+      return false;
+    }
   }
 
   /**
