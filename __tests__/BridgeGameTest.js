@@ -6,44 +6,6 @@ const { generate } = require('../src/BridgeRandomNumberGenerator');
 const { ERROR_MESSAGE } = require('../src/Constants/message');
 
 describe('BridgeGame 클래스 테스트', () => {
-  test('createTokens - 반환하는 배열 길이가 입력값과 같은지 검사', () => {
-    // Given
-    const size = 3;
-
-    // When
-    const tokenLength = createTokens(size, generate).length;
-
-    // Then
-    expect(tokenLength).toEqual(size);
-  });
-
-  test('createTokens - 반환하는 배열이 0 또는 1로만 이루어져 있는지 검사', () => {
-    // Given
-    const size = 5;
-
-    // When
-    const token = createTokens(size, generate);
-    const binaryRegExp = /^[01]+$/;
-
-    // Then
-    token.forEach((token) => expect(binaryRegExp.test(token)).toBe(true));
-  });
-
-  test('createTokens - 올바른 토큰을 생성하는지 검사', () => {
-    // Given
-    const size = 4;
-    const randomNumbers = [0, 1, 1, 0];
-
-    // When
-    const mockGenerator = [0, 1, 1, 0].reduce((acc, cur) => {
-      return acc.mockReturnValueOnce(cur);
-    }, jest.fn());
-    const tokens = createTokens(size, mockGenerator);
-
-    // Then
-    expect(tokens).toEqual(randomNumbers);
-  });
-
   test('move - 이동할 방향을 입력받고 올바르게 기록하는지 검사', () => {
     // Given
     const direction = 'U';
@@ -60,7 +22,7 @@ describe('BridgeGame 클래스 테스트', () => {
 
   test('move - 잘못된 방향을 입력받을 경우 예외처리', () => {
     // Given
-    const directionList = ['Z', '!', 3, 'UU', 'DU', 'UD', 'DD'];
+    const directionList = ['Z', '!', 3, 'UU', 'DU', 'UD', 'DD']; // test.each 써 보는것도 좋을듯?
 
     // When
     const game = new BridgeGame();
