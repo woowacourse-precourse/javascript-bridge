@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const NUMBER = Object.freeze({
   MIN_BRIDGE_SIZE: 3,
   MAX_BRIDGE_SIZE: 20,
@@ -31,9 +32,7 @@ const MESSAGE = Object.freeze({
 });
 
 const ERROR = Object.freeze({
-  BRIDGE_SIZE: `[ERROR] 다리 길이는 
-  ${NUMBER.MIN_BRIDGE_SIZE}부터 
-  ${NUMBER.MAX_BRIDGE_SIZE} 사이의 숫자여야 합니다.\n`,
+  BRIDGE_SIZE: `[ERROR] 다리 길이는 ${NUMBER.MIN_BRIDGE_SIZE}부터 ${NUMBER.MAX_BRIDGE_SIZE} 사이의 숫자여야 합니다.\n`,
   BRIDGE_DIRECTION: '[ERROR] 위는 U, 아래는 D를 입력해주세요.\n',
   RETRY_COMMAND: '[ERROR] 재시도는 Q, 종료는 R을 입력해주세요.\n',
 });
