@@ -18,11 +18,11 @@ class App {
   onReadBridgeSize(size) {
     validateReadBridgeSize(size);
     const bridge = BridgeMaker.makeBridge(size, generate);
+    this.#bridgeGame = new BridgeGame(bridge);
     this.startGame(bridge);
   }
 
-  startGame(bridge) {
-    this.#bridgeGame = new BridgeGame(bridge);
+  startGame() {
     InputView.readMoving(this.onReadMoving.bind(this));
   }
 
@@ -32,15 +32,18 @@ class App {
     printMap(this.#bridgeGame.getMoveHistory(), isCorrect);
     if (!isCorrect) InputView.readGameCommand(this.onReadGameCommand.bind(this));
     if (this.#bridgeGame.isFinished()) {
-      //다리 모두 건넘
       if (isCorrect) printResult(this.#bridgeGame.getTryNum(), this.#bridgeGame.getMoveHistory(), isCorrect);
       return;
     }
-    if (isCorrect) InputView.readMoving(this.onReadMoving.bind(this));
+    if (isCorrect) return InputView.readMoving(this.onReadMoving.bind(this));
   }
   onReadGameCommand(command) {
     validateReadGameCommand(command);
-    this.#bridgeGame.retry();
+    if (command === 'R') {
+      this.#bridgeGame.retry(this);
+    } else if (command === 'Q') {
+      printResult(this.#bridgeGame.getTryNum(), this.#bridgeGame.getMoveHistory(), false);
+    }
   }
 }
 
