@@ -26,11 +26,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry(gameCommand, guesses, bridges, try_count) {
-    if (gameCommand == 'Q')
       App.cross_the_bridge(try_count+1, bridges);
-    else
-    OutputView.printResult(false, try_count, guesses, bridges);
-  }
 }
-
+}
 module.exports = BridgeGame;

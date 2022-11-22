@@ -71,7 +71,9 @@ const OutputView = {
     }else{   
     MissionUtils.Console.print("게임 성공 여부: 실패");
     MissionUtils.Console.print("총 시도한 횟수: " + trycount.toString());
-  }},
+  }
+  return;  
+},
 };
 
 module.exports = OutputView;

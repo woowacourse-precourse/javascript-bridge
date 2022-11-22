@@ -33,12 +33,14 @@ class App {
   }
 
   determine(game, guesses, bridges, try_count){
-    if (guesses.length == bridges.length){
+    if ((guesses.length == bridges.length)&&(guesses[guesses.length-1]==true)){
       OutputView.printResult(true, try_count, guesses, bridges);
       return;
     }
     const gameCommand = InputView.readGameCommand();
-    game.retry(gameCommand,guesses, bridges, try_count);
+    if (gameCommand == "R") game.retry(gameCommand,guesses, bridges, try_count);
+    else OutputView.printResult(false, try_count, guesses, bridges);
+  
   }
 }
 

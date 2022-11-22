@@ -19,7 +19,7 @@ const InputView = {
     });
     return bridgeSize;} catch(e){
       MissionUtils.Console.print("[ERROR] wrong size");
-      this.readBridgeSize();
+      //this.readBridgeSize();
     }
   },
 
@@ -39,7 +39,7 @@ const InputView = {
     return moving.toString().toUpperCase();
   } catch(e){
     MissionUtils.Console.print("[ERROR] wrong moving");
-    this.readMoving();
+    //this.readMoving();
   }
   },
 
@@ -49,7 +49,7 @@ const InputView = {
   readGameCommand() {
     const MissionUtils = require("@woowacourse/mission-utils");
     MissionUtils.Console.print('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)');
-    var command;
+    var command = 0;
     MissionUtils.Console.readLine('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', (answer) => {
       MissionUtils.Console.print(command);
       command = answer;
