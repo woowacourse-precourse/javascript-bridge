@@ -10,5 +10,10 @@ const GAME_END = {
   RESTART: "R",
   QUIT: "Q",
 };
+const MARKING = {
+  O: "O",
+  X: "X",
+  BLANK: " ",
+};
 
-module.exports = { BRIDGE_DIRECTION, STATE, GAME_END };
+module.exports = { BRIDGE_DIRECTION, STATE, GAME_END, MARKING };
