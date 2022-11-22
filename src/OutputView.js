@@ -24,7 +24,7 @@ const OutputView = {
     this.printMap(game.getFormattedMap());
     this.printMessage(
       `${MESSAGE.GAME_RESULT} ${
-        game.isArrived ? MESSAGE.SUCCESS : MESSAGE.FAIL
+        game.isArrived() ? MESSAGE.SUCCESS : MESSAGE.FAIL
       }`
     );
     this.printMessage(`${MESSAGE.TRY_COUNT} ${game.getTryCount()}`);
