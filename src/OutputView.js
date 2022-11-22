@@ -18,37 +18,32 @@ const OutputView = {
 	 * <p>
 	 * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
 	 */
-	printResult(curLocation, result, tryCnt) {
+	printResult(curLocation, result, count) {
 		Console.print("최종 게임 결과");
 
 		this.printMap(curLocation);
 
-		Console.print(`\n게임 성공 여부: ${result === 1 ? "성공" : "실패"}`);
-		Console.print(`총 시도한 횟수: ${tryCnt}`);
+		Console.print(`\n게임 성공 여부: ${result == 1 ? "성공" : "실패"}`);
+		Console.print(`총 시도한 횟수: ${count}`);
 
 		return Console.close();
 	},
 
-	printBridgeSizeErr(bridgeSize) {
-		if (bridgeSize > 3 && bridgeSize < 20) {
+	printBridgeSizeError(bridgeSize) {
+		if (bridgeSize > 3 && bridgeSize < 20)
 			throw "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.";
-		}
 
-		if (isNaN(bridgeSize)) {
+		if (isNaN(bridgeSize))
 			throw "[ERROR] 다리의 길이는 숫자만 입력 가능합니다.";
-		}
 	},
 
-	printReStartErr(input) {
-		if (input !== "R" && input !== "Q") {
+	printReStartError(restart) {
+		if (restart !== "R" && restart !== "Q")
 			throw "[ERROR] R, Q만 입력 가능합니다.";
-		}
 	},
 
-	printInputErr(input) {
-		if (input !== "U" && input !== "D") {
-			throw "[ERROR] U, D만 입력 가능합니다.";
-		}
+	printMoveError(input) {
+		if (input !== "U" && input !== "D") throw "[ERROR] U, D만 입력 가능합니다.";
 	},
 };
 
