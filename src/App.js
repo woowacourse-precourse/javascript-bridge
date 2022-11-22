@@ -55,6 +55,21 @@ class App {
       return this.executeMove(bridgeGame);
     }
   }
+
+  checkRetry(bridgeGame, isSuccess) {
+    if (isSuccess) {
+      return false;
+    }
+
+    try {
+      const command = InputView.readGameCommand();
+      const isContinue = bridgeGame.retry(command);
+      return isContinue;
+    } catch (error) {
+      Console.print('[ERROR] ' + error);
+      return this.checkRetry(bridgeGame, isSuccess);
+    }
+  }
 }
 
 module.exports = App;
