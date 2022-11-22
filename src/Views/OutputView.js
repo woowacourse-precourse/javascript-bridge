@@ -48,9 +48,8 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(bridge, moveList, totalNumber) {
-    const resultMessage = bridge === moveList ? '성공' : '실패';
-    // this.printTest(bridge);
-    // this.printTest(moveList);
+    let resultMessage = '';
+    resultMessage = bridge.toString() === moveList.toString() ? '성공' : '실패';
 
     MissionUtils.Console.print(MESSAGE.io.end);
     this.printMap(bridge, moveList);

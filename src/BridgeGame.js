@@ -34,8 +34,6 @@ class BridgeGame {
         BridgeRandomNumberGenerator.generate,
       );
 
-      OutputView.printTest(this.#bridge); // 테스트용 코드
-
       InputView.readMoving(input => {
         ValidateCheck.moveMessageCheck(input);
         this.move(input);
@@ -52,10 +50,14 @@ class BridgeGame {
     this.#moveList.push(message);
     if (message === this.#bridge[this.#moveList.length - 1]) {
       OutputView.printMap(this.#bridge, this.#moveList);
-      InputView.readMoving(input => {
-        ValidateCheck.moveMessageCheck(input);
-        this.move(input);
-      });
+      if (this.#bridge.toString() == this.#moveList.toString()) {
+        OutputView.printResult(this.#bridge, this.#moveList, this.#totalNumber);
+      } else {
+        InputView.readMoving(input => {
+          ValidateCheck.moveMessageCheck(input);
+          this.move(input);
+        });
+      }
     }
 
     if (message !== this.#bridge[this.#moveList.length - 1]) {
