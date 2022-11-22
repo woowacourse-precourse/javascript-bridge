@@ -60,6 +60,15 @@ class BridgeGame {
   }
 
   /**
+   * 다리를 성공적으로 건넜는지 확인하는 메서드
+   *
+   * @returns {boolean}
+   */
+  isArrived() {
+    return this.#player.isArrived();
+  }
+
+  /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    */
   retry() {
