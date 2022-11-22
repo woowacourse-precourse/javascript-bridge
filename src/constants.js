@@ -33,4 +33,6 @@ const OUTPUT_FORMAT = {
   SEPERATOR: '|',
 };
 
-module.exports = { MESSAGE, ERROR, INPUT_FORMAT, OUTPUT_FORMAT };
+const REGEX_NUMBER_RANGE = /^[3-9]{1}$|^1{1}[0-9]{1}$|^2{1}0{1}$/;
+
+module.exports = { MESSAGE, ERROR, INPUT_FORMAT, OUTPUT_FORMAT, REGEX_NUMBER_RANGE };

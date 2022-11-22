@@ -1,6 +1,5 @@
 const { ERROR, INPUT_FORMAT } = require('./constants');
-
-const REGEX_NUMBER_RANGE = /^[3-9]{1}$|^1{1}[0-9]{1}$|^2{1}0{1}$/;
+const { REGEX_NUMBER_RANGE } = require('../src/constants');
 
 const Validator = {
   checkBridgeSize(size) {

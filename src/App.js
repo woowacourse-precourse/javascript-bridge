@@ -53,13 +53,13 @@ class App {
     return this.handleFinish('success');
   };
 
-  getCurrentPosition() {
+  getCurrentPosition = () => {
     return this.game.getCurrentPosition();
-  }
+  };
 
-  isContinue() {
+  isContinue = () => {
     return this.getCurrentPosition() > -1;
-  }
+  };
 
   isSuccessFulMovement = async () => {
     const current = this.getCurrentPosition();
