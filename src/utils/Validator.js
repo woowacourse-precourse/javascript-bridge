@@ -1,4 +1,4 @@
-const { BRIDGE, ERROR, GAME, MOVEMENT } = require('./Constants');
+const { BRIDGE, ERROR, GAME, MOVEMENT } = require('./Constant');
 
 const Validator = {
   isValidBridgeSize(input) {

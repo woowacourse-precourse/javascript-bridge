@@ -2,7 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const BridgeMaker = require('../src/BridgeMaker');
 const BridgeGame = require('../src/BridgeGame');
 const CrossBrigeGame = require('../src/CrossBridgeGame');
-const { GAME } = require('../src/utils/Constants');
+const { GAME } = require('../src/utils/Constant');
 const OutputView = require('../src/views/OutputView');
 
 const mockInput = (answers) => {

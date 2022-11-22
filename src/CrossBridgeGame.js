@@ -4,7 +4,7 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
-const { GAME } = require('./utils/Constants');
+const { GAME } = require('./utils/Constant');
 const Validator = require('./utils/Validator');
 
 class CrossBrigeGame {
