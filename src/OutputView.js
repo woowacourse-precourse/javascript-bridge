@@ -10,7 +10,13 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridgeGame, lastTrySuccess) {},
+  printMap(bridgeGame, lastTrySuccess) {
+    let upperBridge = this.makeUpperBridge(bridgeGame);
+    let underBridge = this.makeUnderBridge(bridgeGame);
+
+    if (!lastTrySuccess) {
+    }
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
@@ -57,6 +63,24 @@ const OutputView = {
     }
 
     return underBridge;
+  },
+
+  pushUpperFailResult(bridgeGame) {
+    const bridge = bridgeGame.bridgeGetter();
+    const tryCount = bridgeGame.tryCountGetter();
+
+    let failResult = bridge[tryCount + 1] === 'D' ? ConstValue.APPEND_BRIDGE.WRONG : ConstValue.APPEND_BRIDGE.NONE;
+
+    return failResult;
+  },
+
+  pushUnderFailResult(bridgeGame) {
+    const bridge = bridgeGame.bridgeGetter();
+    const tryCount = bridgeGame.tryCountGetter();
+
+    let failResult = bridge[tryCount + 1] === 'U' ? ConstValue.APPEND_BRIDGE.WRONG : ConstValue.APPEND_BRIDGE.NONE;
+
+    return failResult;
   },
 };
 
