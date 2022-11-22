@@ -8,6 +8,9 @@ const GAME = Object.freeze({
   SUCCESS: '성공',
   FAIL: '실패',
   ATTEMPT: '총 시도한 횟수: ',
+  MATCH: 'O',
+  MISMATCH: 'X',
+  BLANK: ' ',
 });
 
 const ERROR = Object.freeze({
@@ -22,7 +25,9 @@ const BRIDGE = Object.freeze({
 });
 
 const SIDE = {
-  DOWN: 0,
-  UP: 1,
+  DOWN_NUM: 0,
+  UP_NUM: 1,
+  DOWN_STR: 'D',
+  UP_STR: 'U',
 };
 module.exports = { GAME, ERROR, BRIDGE, SIDE };

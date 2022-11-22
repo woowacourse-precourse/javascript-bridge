@@ -1,4 +1,4 @@
-const { BRIDGE } = require('./Message');
+const { BRIDGE, SIDE } = require('./Message');
 
 function checkInteger(value) {
   if (value % 1 === 0) {
@@ -14,4 +14,11 @@ function checkRange(value) {
   return false;
 }
 
-module.exports = { checkInteger, checkRange };
+function checkSide(value) {
+  if (value === SIDE.DOWN_STR || value === SIDE.UP_STR) {
+    return true;
+  }
+  return false;
+}
+
+module.exports = { checkInteger, checkRange, checkSide };
