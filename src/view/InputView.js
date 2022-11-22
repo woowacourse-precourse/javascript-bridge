@@ -6,12 +6,6 @@ const { isCollectBridgeLength, isValidateMoveInput, isValidateRetryInput } = req
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  /**
-   * 다리의 길이를 입력받는다.
-   * 입력받는 다리길의의 유효성을 검사한다.
-   * 유효성이 검증된다면 callback 함수를 호출한다.
-   * @param {function} callback this가 바인딩된 BridgeGameController.createBridgeByUser 메소드
-   */
   readBridgeSize(callback) {
     Console.readLine(INFORMATION_MESSAGE.READ_BRIDGE_SIZE, (userInput) => {
       try {
@@ -23,22 +17,11 @@ const InputView = {
     });
   },
 
-  /**
-   * 유효하지 않은 다리의 길이일 경우 에러메세지를 출력 후 재시도하게 하는 함수
-   * @param {Error} error throw 된 에러 객체
-   * @param {function} callback this가 바인딩된 BridgeGameController.createBridgeByUser 메소드
-   */
   readErrorBridgeSize(error, callback) {
     Console.print(error.message);
     this.readBridgeSize(callback);
   },
 
-  /**
-   * 사용자가 이동할 칸을 입력받는다.
-   * 사용자가 입력한 이동 칸 문자에 대한 유효성을 검사한다.
-   * 유효성이 검증된다면 callback 함수를 호출한다.
-   * @param {function} callback this가 바인딩된 BridgeGameController.moveByUser 메소드
-   */
   readMoving(callback) {
     Console.readLine(INFORMATION_MESSAGE.READ_MOVE, (userInput) => {
       try {
@@ -50,22 +33,11 @@ const InputView = {
     });
   },
 
-  /**
-   * U 또는 D가 아닐 경우 에러메세지를 출력 후 재시도하게 하는 함수
-   * @param {Error} error throw 된 에러 객체
-   * @param {function} callback this가 바인딩된 BridgeGameController.moveByUser 메소드
-   */
   readErrorMoving(error, callback) {
     Console.print(error.message);
     this.readMoving(callback);
   },
 
-  /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-   * 사용자가 입력한 이동 칸 문자에 대한 유효성을 검사한다.
-   * 유효성이 검증된다면 callback 함수를 호출한다.
-   * @param {function} callback this가 바인딩된 BridgeGameController.askWantRetry 메소드
-   */
   readGameCommand(callback) {
     Console.readLine(INFORMATION_MESSAGE.READ_GAME_COMMAND, (userInput) => {
       try {
@@ -77,11 +49,6 @@ const InputView = {
     });
   },
 
-  /**
-   * R 또는 Q가 아닐 경우 에러메세지를 출력 후 재시도하게 하는 함수
-   * @param {Error} error throw 된 에러 객체
-   * @param {function} callback this가 바인딩된 BridgeGameController.askWantRetry 메소드
-   */
   readErrorGameCommand(error, callback) {
     Console.print(error.message);
     this.readGameCommand(callback);
