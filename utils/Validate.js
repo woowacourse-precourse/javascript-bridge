@@ -3,7 +3,7 @@ const MESSAGE = require('../constants/Message');
 const Validate = {
   validateBridgeSize(size) {
     const validateBridgeRange = Array.from(Array(18).keys(), (index) => index + 3);
-    if (size.length == 0) throw MESSAGE.ERROR.BRIDGE_SIZE_EMPTY;
+    if (size === 0) throw MESSAGE.ERROR.BRIDGE_SIZE_EMPTY;
     if (!validateBridgeRange.includes(Number(size))) throw MESSAGE.ERROR.BRIDGE_SIZE_RANGE;
   },
 
