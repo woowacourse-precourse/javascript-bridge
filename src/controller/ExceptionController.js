@@ -1,4 +1,5 @@
 const OutputView = require("../view/OutputView");
+const ErrorMessage = require("../static/ErrorMessage");
 
 const ExceptionController = {
     sizeException(size) {
@@ -14,17 +15,17 @@ const ExceptionController = {
 
     numberCheck(size) {
         const integerSize = Number(size);
-        if(!Number.isInteger(integerSize)) throw '[ERROR] 다리 길이는 숫자를 입력해야 합니다.';
+        if(!Number.isInteger(integerSize)) throw ErrorMessage.numberError;
     },
 
     rangeCheck(size) {
         const integerSize = Number(size);
-        if(integerSize < 3 || integerSize > 20) throw '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.';
+        if(integerSize < 3 || integerSize > 20) throw ErrorMessage.rangeError;
     },
 
     movingException(moving) {
         try {
-            this.movingCheck(moving);
+            this.movingAnswerCheck(moving);
         } catch (e) {
             OutputView.printError(e);
             return false;
@@ -32,11 +33,11 @@ const ExceptionController = {
         return true;
     },
 
-    movingCheck(moving) {
-        if(moving !== 'U' && moving !== 'D') throw '[ERROR] "U" 혹은 "D"를 입력하여 주세요.'
+    movingAnswerCheck(moving) {
+        if(moving !== 'U' && moving !== 'D') throw ErrorMessage.movingAnswerError;
     },
 
-    retryingException(answer) {
+    retryException(answer) {
         try {
             this.retryAnswerCheck(answer);
         } catch (e) {
@@ -47,7 +48,7 @@ const ExceptionController = {
     },
 
     retryAnswerCheck(answer) {
-        if(answer !== 'R' && answer !== 'Q') throw '[ERROR] "R" 혹은 "Q"를 입력하여 주세요.'
+        if(answer !== 'R' && answer !== 'Q') throw ErrorMessage.retryAnswerError;
     }
 };
 
