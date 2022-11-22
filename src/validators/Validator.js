@@ -25,6 +25,19 @@ class Validator {
   }
 
   /**
+   * 값이 boolean인지 검증합니다.
+   *
+   * @param {function()} errorExpression
+   * @returns {this}
+   */
+  shouldBoolean(errorExpression = undefined) {
+    return this.should(
+      typeof this.#value === 'boolean',
+      errorExpression ?? 'true 또는 false 값이어야 합니다.',
+    );
+  }
+
+  /**
    * 주어진 클래스를 상속하는 값인지 검증합니다.
    *
    * @param {typeof Object} GivenClass
