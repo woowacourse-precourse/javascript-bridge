@@ -65,8 +65,7 @@ class Routine {
     try {
       this.#runState.next();
     } catch (error) {
-      const isGeneratorError =
-        error instanceof TypeError && error.message === 'Generator is already running';
+      const isGeneratorError = error instanceof TypeError && error.message === 'Generator is already running';
       if (!isGeneratorError) throw error;
     }
   }
@@ -90,7 +89,7 @@ class Routine {
   /**
    * 제너레이터 함수 본체를 끝날 때 까지 실행한다.
    */
-  *#run() {
+  * #run() {
     const funcState = this.#func(this);
     while (!funcState.done) {
       const asyncFunc = funcState.next().value;

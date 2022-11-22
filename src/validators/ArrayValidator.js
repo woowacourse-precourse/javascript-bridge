@@ -30,8 +30,8 @@ class ArrayValidator extends Validator {
    * @returns {this}
    */
   each(eachFunction) {
-    this.#value = this.#value.map((item, index, value) =>
-      eachFunction(new Validator(item), index, value).get(),
+    this.#value = this.#value.map(
+      (item, index, value) => eachFunction(new Validator(item), index, value).get(),
     );
     return this;
   }

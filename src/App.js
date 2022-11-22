@@ -17,7 +17,7 @@ class App {
    *
    * @param {Routine} routine
    */
-  *#routineMakeBridge(routine) {
+  * #routineMakeBridge(routine) {
     yield (resolve) => InputView.readBridgeSize(resolve);
     const bridgeSize = routine.withdrawReturn();
     const bridge = new Bridge(
@@ -32,7 +32,7 @@ class App {
    *
    * @param {Routine} routine
    */
-  *#routinePlay(routine) {
+  * #routinePlay(routine) {
     while (!this.#bridgeGame.isArrived()) {
       yield (resolve) => InputView.readMoving(resolve);
       if (this.#move(routine.withdrawReturn())) continue;
@@ -69,7 +69,7 @@ class App {
    *
    * @param {Routine} routine
    */
-  *#routine(routine) {
+  * #routine(routine) {
     yield* this.#routineMakeBridge(routine);
     yield* this.#routinePlay(routine);
 
