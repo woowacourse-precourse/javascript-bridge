@@ -61,6 +61,19 @@ class App {
     this.askRetry();
   }
 
+  askRetry() {
+    InputView.readGameCommand(this.tryValidateRetry.bind(this));
+  }
+
+  manageRetry(command) {
+    if (this.bridgeGame.shallWeQuit(command)) {
+      this.bridgeGame.endWithFailure();
+      return;
+    }
+    this.bridgeGame.retry();
+    this.mainRound();
+  }
+  
 }
 
 module.exports = App;
