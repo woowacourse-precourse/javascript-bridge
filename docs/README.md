@@ -25,3 +25,4 @@
 
 - [x] Validator 클래스 예외처리 테스트
 - [x] BridgeGame 클래스 메소드 테스트
+- [x] BridgeMaker 메소드 makeBridge 테스트
