@@ -57,7 +57,7 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(up, down, bridge, hasCorrect) {
     Console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)", (command) => {
       this.checkCommand(command);
       if (command == 'R') {Console.print(command); this.bridgeGame.retry(); this.readMoving(bridge);}
@@ -67,7 +67,11 @@ const InputView = {
         OutputView.printResult(up, down, trial, hasCorrect);
       }
     });
-  }
+  },
+
+  checkCommand(command){
+    if (command !== 'R' && command !== 'Q') throw new Error('[ERROR] 게임여부는 "R"와 "Q" 두 값중 하나여야합니다.');
+  },
 
 };
 

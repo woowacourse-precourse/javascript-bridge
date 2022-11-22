@@ -30,7 +30,6 @@ const OutputView = {
     Console.print(`총 시도한 횟수: ${trial}`);
     Console.close();
   }
-  
 };
 
 module.exports = OutputView;
