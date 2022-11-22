@@ -4,7 +4,7 @@
 /* eslint max-lines-per-function: "off" */
 
 const { ERROR_MESSAGE } = require('../../../src/Utils/Constant');
-const { isRightRetryString } = require('../../../src/Utils/Validator/ControllerValidator');
+const { isRightRetryString } = require('../../../src/Utils/Validator/GameValidator');
 
 describe('ControllerValidator unit test', () => {
   test('isRightRetryString object method test', () => {
