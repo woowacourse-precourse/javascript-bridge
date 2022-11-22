@@ -1,14 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const ValidCheck = require("./ValidCheck");
-/*
-  * 사용자로부터 입력을 받는 역할을 한다.
-    제공된 InputView 객체를 활용해 구현해야 한다.
-    InputView의 파일 경로는 변경할 수 있다.
-    InputView의 메서드의 인자는 변경할 수 있다.
-    사용자 값 입력을 위해 필요한 메서드를 추가할 수 있다.
- */
-const { VALID_CHECK_DO } = require("./Constant");
+const { VALID_CHECK_DO } = require("./GameCommands");
 
 const InputView = {
   /**
@@ -16,25 +9,22 @@ const InputView = {
    */
   readBridgeSize() {
     let bridgeSize = undefined;
-    let flagValid = VALID_CHECK_DO;
+    let flagValid = VALID_CHECK_DO; // 입력을 받는 플래그
 
     while (flagValid === VALID_CHECK_DO) {
-      bridgeSize = InputView.receiveSize();
-      flagValid = ValidCheck.validBridgeSize(bridgeSize);
+      bridgeSize = InputView.inputSize();
+      flagValid = ValidCheck.validateBridgeSize(bridgeSize);
       ValidCheck.raiseError(flagValid);
     }
 
-    return bridgeSize;
+    return Number(bridgeSize);
   },
 
-  receiveSize() {
+  inputSize() {
     let bridgeSize = undefined;
 
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요. \n >",
-      (answer) => {
-        bridgeSize = answer;
-        console.log(`answer: ${answer}`);
-      }
+      answer => bridgeSize = answer
     );
 
     return bridgeSize;
@@ -45,18 +35,18 @@ const InputView = {
    */
   readMoving() {
     let moving = undefined;
-    let flagValid = VALID_CHECK_DO;
+    let flagValid = VALID_CHECK_DO; // 입력을 받는 플래그
 
     while (flagValid === VALID_CHECK_DO) {
-      moving = InputView.receiveMoving();
-      flagValid = ValidCheck.validMoving(moving);
+      moving = InputView.inputMoving();
+      flagValid = ValidCheck.validateMoving(moving);
       ValidCheck.raiseError(flagValid);
     }
 
     return moving;
   },
 
-  receiveMoving() {
+  inputMoving() {
     let moving = undefined;
 
     MissionUtils.Console.readLine(
@@ -72,18 +62,18 @@ const InputView = {
    */
   readGameCommand() {
     let readGameCommand = undefined;
-    let flagValid = VALID_CHECK_DO;
+    let flagValid = VALID_CHECK_DO; // 입력을 받는 플래그
 
     while (flagValid === VALID_CHECK_DO) {
-      readGameCommand = InputView.receiveReadGameCommand();
-      flagValid = ValidCheck.validReadGameCommand(readGameCommand);
+      readGameCommand = InputView.inputGameCommand();
+      flagValid = ValidCheck.validateGameCommand(readGameCommand);
       ValidCheck.raiseError(flagValid);
     }
 
-    return moving;
+    return readGameCommand;
   },
 
-  receiveReadGameCommand() {
+  inputGameCommand() {
     let readGameCommand = undefined;
     
     MissionUtils.Console.readLine(

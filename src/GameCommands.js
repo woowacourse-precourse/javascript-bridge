@@ -1,6 +1,4 @@
-// TODO : 상수도 커맨드 별로 분류시켜 놓는 게 나을지... 고민
-
-const Constant = {
+const GameCommands = {
   UP_MOVING: "U",
   DOWN_MOVING: "D",
   VALID_CHECK_ERROR: -1,
@@ -18,4 +16,4 @@ const Constant = {
   RESTART_COMMAND: "R"
 }
 
-module.exports = Constant;
+module.exports = GameCommands;
