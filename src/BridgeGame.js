@@ -11,8 +11,6 @@ const Validator = require('./Validator');
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  static #instance;
-
   #bridge;
 
   #bridgesProgress;
@@ -36,19 +34,16 @@ class BridgeGame {
 
   init() {
     InputView.readBridgeSize((length) => {
-      try {
-        Validator.validateBridgeLength(length);
-        this.initBridge(length);
-        this.play();
-      } catch (error) {
-        IO.output(error);
-        this.init();
-      }
+      Validator.handleException(
+        () => Validator.validateBridgeLength(length),
+        () => { this.initBridge(length); this.play(); },
+        () => this.init(),
+      );
     });
   }
 
   play() {
-    this.move(0, this.#bridge.getBridgeLength());
+    this.move(0);
   }
 
   static getIndexFromDirection(direction) {
@@ -68,40 +63,44 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(index, length) {
+  move(index) {
     InputView.readMoving((direction) => {
-      try {
-        Validator.validateBridgeDirection(direction);
-        const checkCorect = this.#bridge.checkCorrectDirection(direction, index);
-
-        OutputView.printMap(BridgeGame.moveProcess(this.#bridgesProgress, direction, checkCorect));
-
-        if (checkCorect === MOVABLE.IMMOVABLE) {
-          this.checkRetry();
-        } else if (index === length - 1) {
-          this.#success = true;
-          OutputView.printResult(this.#tryCount, this.#success, this.#bridgesProgress);
-          IO.close();
-          return;
-        }
-
-        this.move(index + 1, length);
-      } catch (error) {
-        IO.output(error);
-        this.move(index, length);
-      }
+      Validator.handleException(
+        () => Validator.validateBridgeDirection(direction),
+        () => this.changeProcess(direction, index),
+        () => this.move(index),
+      );
     });
+  }
+
+  changeProcess(direction, index) {
+    const movable = this.#bridge.checkCorrectDirection(direction, index);
+    OutputView.printMap(BridgeGame.moveProcess(this.#bridgesProgress, direction, movable));
+
+    this.failOrSuccess(movable, index);
+
+    if (this.#success === false) {
+      this.move(index + 1);
+    }
+  }
+
+  failOrSuccess(movable, index) {
+    if (movable === MOVABLE.IMMOVABLE) {
+      this.checkRetry();
+    } else if (index === this.#bridge.getBridgeLength() - 1) {
+      this.#success = true;
+      OutputView.printResult(this.#tryCount, this.#success, this.#bridgesProgress);
+      IO.close();
+    }
   }
 
   checkRetry() {
     InputView.readGameCommand((command) => {
-      try {
-        Validator.validateGameCommand(command);
-        this.retryOrQuit(command);
-      } catch (error) {
-        IO.output(error);
-        this.checkRetry();
-      }
+      Validator.handleException(
+        () => Validator.validateGameCommand(command),
+        () => this.retryOrQuit(command),
+        () => this.checkRetry(),
+      );
     });
   }
 
