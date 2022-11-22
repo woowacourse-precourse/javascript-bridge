@@ -55,15 +55,9 @@ const InputView = {
    */
   stillMoving(currentBridge, bridge, count) {
     OutputView.printMap(currentBridge);
-    if(currentBridge[0].length === bridge.length) OutputView.printResult(currentBridge, count, 1);
-    else if(currentBridge[0].includes('X') || currentBridge[1].includes('X')){
-      OutputView.printMap(currentBridge);
-      this.readGameCommand(currentBridge, bridge, count);
-    }
-    else {
-      this.readMoving(currentBridge, bridge, count);
-      OutputView.printMap(currentBridge);
-    }
+    if(currentBridge[0].length === bridge.length) OutputView.printResult(currentBridge, count, 1)
+    else if(currentBridge[0].includes('X') || currentBridge[1].includes('X')) this.readGameCommand(currentBridge, bridge, count);
+    else this.readMoving(currentBridge, bridge, count);
   },
 
   /**
