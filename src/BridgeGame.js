@@ -43,6 +43,10 @@ class BridgeGame {
       MissionUtils.Console.close();
     }
   }
+
+  getCount() {
+    return this.#COUNT;
+  }
 }
 
 module.exports = BridgeGame;
