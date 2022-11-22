@@ -8,11 +8,7 @@ const {
 class Validate {
   checkBridgeSize(size) {
     try {
-      if (this.isValidNumber(size))
-        throw new Error(ERROR_MESSAGE.BRIDGE_SIZE_IS_NAN);
-
-      if (this.isValidRange(size))
-        throw new Error(ERROR_MESSAGE.BRIDGE_SIZE_RANGE);
+      this.isValidBridgeSize(size);
 
       return null;
     } catch (errorMsg) {
@@ -22,8 +18,7 @@ class Validate {
 
   checkMovingDirection(direction) {
     try {
-      if (this.isValidDirection(direction))
-        throw new Error(ERROR_MESSAGE.MOVING_DIRECTION);
+      this.isValidMovingDirection(direction);
 
       return null;
     } catch (errorMsg) {
@@ -33,8 +28,7 @@ class Validate {
 
   checkGameCommand(command) {
     try {
-      if (this.isValidGameCommand(command))
-        throw new Error(ERROR_MESSAGE.GAME_COMMAND);
+      this.isValidGameCommand(command);
 
       return null;
     } catch (errorMsg) {
@@ -42,20 +36,28 @@ class Validate {
     }
   }
 
+  isValidBridgeSize(size) {
+    this.isValidNumber(size);
+    this.isValidRange(size);
+  }
+
   isValidNumber(size) {
-    return isNaN(Number(size));
+    if (isNaN(Number(size))) throw new Error(ERROR_MESSAGE.BRIDGE_SIZE_IS_NAN);
   }
 
   isValidRange(size) {
-    return Number(size) < BRIDGE_SIZE.MIN || Number(size) > BRIDGE_SIZE.MAX;
+    if (Number(size) < BRIDGE_SIZE.MIN || Number(size) > BRIDGE_SIZE.MAX)
+      throw new Error(ERROR_MESSAGE.BRIDGE_SIZE_RANGE);
   }
 
-  isValidDirection(direction) {
-    return !(direction === BRIDGE.UPPER || direction === BRIDGE.LOWER);
+  isValidMovingDirection(direction) {
+    if (!(direction === BRIDGE.UPPER || direction === BRIDGE.LOWER))
+      throw new Error(ERROR_MESSAGE.MOVING_DIRECTION);
   }
 
   isValidGameCommand(command) {
-    return !(command === GAME_OPTION.REPLAY || command === GAME_OPTION.QUIT);
+    if (!(command === GAME_OPTION.REPLAY || command === GAME_OPTION.QUIT))
+      throw new Error(ERROR_MESSAGE.GAME_COMMAND);
   }
 }
 
