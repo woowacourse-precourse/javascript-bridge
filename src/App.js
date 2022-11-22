@@ -1,4 +1,4 @@
-const { STATE } = require('./constant/Constant');
+const { PHASE } = require('./constant/Constant');
 const Controller = require('./controller/Controller');
 
 class App {
@@ -7,7 +7,7 @@ class App {
   }
 
   play() {
-    this.controller.flow(STATE.START);
+    this.controller.goTo(PHASE.START);
   }
 }
 

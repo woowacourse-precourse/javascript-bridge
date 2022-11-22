@@ -1,4 +1,4 @@
-const { STATE } = require('../constant/Constant');
+const { PHASE } = require('../constant/Constant');
 const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
 
@@ -27,7 +27,6 @@ class BridgeGame {
   reset() {
     this.try += 1;
     this.result = RESULT.SUCCESS;
-    this.state = STATE.MOVE;
     this.playerPosition = -1;
     this.moveMap = {
       U: [],
@@ -46,10 +45,12 @@ class BridgeGame {
     this.playerPosition += 1;
     if (moving !== bridge[this.playerPosition]) {
       this.result = RESULT.FAIL;
-      this.state = STATE.FAIL;
-    } else if (this.playerPosition + 1 === bridge.length) {
-      this.state = STATE.QUIT;
+      return PHASE.COMMAND;
     }
+    if (this.playerPosition + 1 === bridge.length) {
+      return PHASE.RESULT;
+    }
+    return PHASE.MOVE;
   }
 
   drawMap(moving) {
@@ -65,9 +66,9 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry(flowController) {
+  retry(goTo) {
     this.reset();
-    flowController(this.state);
+    goTo(PHASE.MOVE);
   }
 }
 

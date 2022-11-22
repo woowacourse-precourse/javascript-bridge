@@ -21,11 +21,11 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(bridgeMap) {
+  printMap(moveMap) {
     const { FIRST, LAST, MIDDLE } = STRUCTURE;
 
-    for (const direction in bridgeMap) {
-      Console.print(`${FIRST}${bridgeMap[direction].join(MIDDLE)}${LAST}`);
+    for (const direction in moveMap) {
+      Console.print(`${FIRST}${moveMap[direction].join(MIDDLE)}${LAST}`);
     }
   },
 
@@ -36,7 +36,7 @@ const OutputView = {
    */
   printResult(bridgeGame) {
     Console.print(MESSAGE.TITLE_RESULT);
-    this.printMap();
+    OutputView.printMap(bridgeGame.moveMap);
     Console.print(`${MESSAGE.PREFIX_SUCCESS}${bridgeGame.result}`);
     Console.print(`${MESSAGE.PREFIX_TRY}${bridgeGame.try}`);
   },

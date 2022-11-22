@@ -1,11 +1,10 @@
-const STATE = Object.freeze({
+const PHASE = Object.freeze({
   START: 0,
   MOVE: 1,
-  FAIL: 2,
-  RETRY: 'R',
-  QUIT: 'Q',
+  COMMAND: 2,
+  RESULT: 3,
 });
 
 module.exports = {
-  STATE,
+  PHASE,
 };
