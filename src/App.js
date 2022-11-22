@@ -1,5 +1,15 @@
+const InputView = require('./InputView');
+const OutputView = require('./OutputView');
+
 class App {
-  play() {}
+  constructor() {
+    this.bridgeSize;
+  }
+
+  play() {
+    OutputView.printGameStart();
+    this.bridgeSize = InputView.getBridgeSize();
+  }
 }
 
 module.exports = App;
