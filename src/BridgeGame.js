@@ -10,10 +10,12 @@ const { RETRY, QUIT } = require('./Command');
 class BridgeGame {
   #bridge;
   #map;
+  #tryCount;
 
   constructor() {
     this.#bridge = new Bridge();
     this.#map = new Map();
+    this.#tryCount = 1;
   }
 
   startGame() {
@@ -73,6 +75,7 @@ class BridgeGame {
   retry() {
     this.#map = new Map();
     this.#bridge.reset();
+    this.#tryCount += 1;
   }
 
   quit(isSuccess) {}
