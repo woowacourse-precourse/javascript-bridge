@@ -28,12 +28,9 @@ const InputView = {
     if (bridgeGame.getRound() === bridgeGame.getEndRound()) return OutputView.printResult(bridgeGame);
     Console.readLine(MESSAGE.INPUT.MOVE, (moveInput) => {
       if (InputValidator.bridgeMove(moveInput)) {
-        if (bridgeGame.move(moveInput)) {
-          OutputView.printMap(bridgeGame);
-          return this.readMoving(bridgeGame);
-        }
+        const moveResult = bridgeGame.move(moveInput);
         OutputView.printMap(bridgeGame);
-        return this.readGameCommand(bridgeGame);
+        return moveResult ? this.readMoving(bridgeGame) : this.readGameCommand(bridgeGame);
       }
       return this.readMoving(bridgeGame);
     });
@@ -45,9 +42,7 @@ const InputView = {
   readGameCommand(bridgeGame) {
     Console.readLine(MESSAGE.INPUT.COMMAND, (command) => {
       if (InputValidator.bridgeCommand(command)) {
-        if (command === "Q") {
-          return OutputView.printResult(bridgeGame);
-        }
+        if (command === "Q") return OutputView.printResult(bridgeGame);
         bridgeGame.retry();
         this.readMoving(bridgeGame);
       }
