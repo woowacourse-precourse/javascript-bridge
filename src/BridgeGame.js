@@ -13,9 +13,12 @@ class BridgeGame {
     this.#bridgeMap = [[], []]; // 0 ≒ D , 1 ≒ U
     this.#retryCount = 1;
   }
+
   canMove(input) {
     if (!["U", "D"].includes(input)) throw new InputError("U/D", ERROR.NOT_UD);
+
     if (input === this.#bridge[this.#currentIdx]) return true;
+
     return false;
   }
 
@@ -45,9 +48,12 @@ class BridgeGame {
 
   isRetry(input) {
     if (!["R", "Q"].includes(input)) throw new InputError("R/Q", ERROR.NOT_RQ);
+
     if (input == "R") return this.retry();
+
     return false;
   }
+
   retry() {
     this.#retryCount += 1;
     this.#currentIdx = 0;
