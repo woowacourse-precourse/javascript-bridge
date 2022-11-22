@@ -1,4 +1,3 @@
-const { INPUT_FORMAT } = require('./constants');
 const { generate: generateRandomNumber } = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = require('./BridgeMaker');
 const GameResult = require('./GameResult');
@@ -12,28 +11,26 @@ class BridgeGame {
     this.resultMap = new GameResult();
   }
 
-  async makeBridge(size) {
+  makeBridge = async (size) => {
     const bridge = BridgeMaker.makeBridge(size, generateRandomNumber);
     this.resultMap.generate(bridge);
-  }
+  };
 
-  move(current, direction) {
-    const isMoved = this.resultMap.calculateMatch(current, direction);
-    // this.resultMap.printHistory();
-    return isMoved;
-  }
+  move = (current, direction) => {
+    return this.resultMap.calculateMatch(current, direction);
+  };
 
-  async command(retryHandler, isRetry, finishHandler) {
-    isRetry ? await retryHandler(this.retry) : finishHandler();
-  }
+  command = async (retryHandler, isRetry, finishHandler) => {
+    return isRetry ? await retryHandler(this.retry) : finishHandler();
+  };
 
-  async retry() {
+  retry = () => {
     this.resultMap.clear();
-  }
+  };
 
-  getCurrentPosition() {
+  getCurrentPosition = () => {
     return this.resultMap.getCurrentPosition();
-  }
+  };
 }
 
 module.exports = BridgeGame;

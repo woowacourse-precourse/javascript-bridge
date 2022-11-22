@@ -33,11 +33,6 @@ class GameResult {
     return this.getResultAsArray().findIndex(([, value]) => !value.player);
   }
 
-  printHistory() {
-    const result = this.makeHistory();
-    OutputView.printMap(result);
-  }
-
   makeHistory() {
     const history = this.getResultAsArray().filter(([, value]) => value.player);
     const sides = Array.from({ length: 2 }, () => []);
