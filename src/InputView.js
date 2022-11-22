@@ -26,13 +26,13 @@ const InputView = {
       }
 
       this.getBridge(input);
-      this.readMoving();
     });
   },
 
   getBridge(input) {
     const BRIDGE = BridgeMaker.makeBridge(input, BridgeRandomNumberGenerator.generate);
     this.bridge = BRIDGE;
+    this.readMoving();
   },
   /**
    * 사용자가 이동할 칸을 입력받는다.
