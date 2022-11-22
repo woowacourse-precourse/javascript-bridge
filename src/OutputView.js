@@ -56,7 +56,9 @@ const OutputView = {
    */
   printMap(moving, marking) {
     this.setCurrentMap(moving, marking);
-    Console.print(`${this.currentMap[BRIDGE_UP]}\n${this.currentMap[BRIDGE_DOWN]}\n`);
+    Console.print(this.currentMap[BRIDGE_UP]);
+    Console.print(this.currentMap[BRIDGE_DOWN]);
+    Console.print("");
   },
 
   /**
@@ -65,9 +67,12 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(gameResult, playCount) {
-    Console.print(
-      `${MESSAGE_FINAL_RESULT}${this.currentMap[BRIDGE_UP]}\n${this.currentMap[BRIDGE_DOWN]}\n\n${MESSAGE_GAME_END}: ${gameResult}\n${MESSAGE_PLAY_COUNT}: ${playCount}`
-    );
+    Console.print(MESSAGE_FINAL_RESULT);
+    Console.print(this.currentMap[BRIDGE_UP]);
+    Console.print(this.currentMap[BRIDGE_DOWN]);
+    Console.print("");
+    Console.print(`${MESSAGE_GAME_END}: ${gameResult}`);
+    Console.print(`${MESSAGE_PLAY_COUNT}: ${playCount}`);
   },
 
   /**
@@ -75,6 +80,10 @@ const OutputView = {
    */
   printStart() {
     Console.print(MESSAGE_GAME_START);
+  },
+
+  print(message) {
+    Console.print(message);
   },
 
   retry() {

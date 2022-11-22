@@ -7,6 +7,7 @@ const {
   MESSAGE_GET_MOVING,
   MESSAGE_GET_GAME_COMMAND,
 } = require("./Utils");
+const OutputView = require("./OutputView");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -19,7 +20,7 @@ const InputView = {
       try {
         const parsedUserInput = Number(userInput);
         BridgeSizeValidation.validateBridgeSize(parsedUserInput);
-        Console.print("");
+        OutputView.print("");
         return callback(parsedUserInput);
       } catch (error) {
         Console.print(error.message);
@@ -37,7 +38,7 @@ const InputView = {
         MovingValidation.validateMoving(userInput);
         return callback(userInput);
       } catch (error) {
-        Console.print(error.message);
+        OutputView.print(error.message);
         this.readMoving(callback);
       }
     });
@@ -52,7 +53,7 @@ const InputView = {
         GameCommandValidation.validateGameCommand(userInput);
         return callback(userInput);
       } catch (error) {
-        Console.print(error.message);
+        OutputView.print(error.message);
         this.readGameCommand(callback);
       }
     });

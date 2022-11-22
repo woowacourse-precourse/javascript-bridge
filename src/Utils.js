@@ -10,7 +10,7 @@ const GAME_COMMAND_QUIT = "Q";
 
 const MESSAGE_GAME_START = "다리 건너기 게임을 시작합니다.\n";
 const MESSAGE_GAME_END = "게임 성공 여부";
-const MESSAGE_FINAL_RESULT = "최종 게임 결과\n";
+const MESSAGE_FINAL_RESULT = "최종 게임 결과";
 const MESSAGE_PLAY_COUNT = "총 시도한 횟수";
 const MESSAGE_GAME_SUCCESS = "성공";
 const MESSAGE_GAME_FAILURE = "실패";
