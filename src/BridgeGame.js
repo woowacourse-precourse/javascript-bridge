@@ -19,7 +19,7 @@ class BridgeGame {
       if (idx >= bridge.length) {
         Console.print(`${Message.RESULT_MESSAGE.RESULT_TEXT}`);
         currentBridge = OutputView.printMap(bridge, currentBridge, idx-1, move);
-        OutputView.printResult('성공', count);
+        OutputView.printResult(`${Message.RESULT_MESSAGE.PASS}`, count);
         return [idx];
       }
       else{
@@ -45,12 +45,10 @@ class BridgeGame {
     }
     Console.print(`${Message.RESULT_MESSAGE.RESULT_TEXT}`);
     OutputView.printMap(bridge, currentBridge, idx, move);
-    OutputView.printResult('실패', count);
+    OutputView.printResult(`${Message.RESULT_MESSAGE.FAIL}`, count);
     return false;
   }
 }
 
-const a = new BridgeGame();
-a.move();
 
 module.exports = BridgeGame;
