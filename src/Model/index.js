@@ -11,7 +11,7 @@ class Model {
 
   #isGameWin = false;
 
-  #isGameOver = false;
+  #isLose = false;
 
   #gameCommand;
 
@@ -86,16 +86,16 @@ class Model {
     return this.#moveList;
   }
 
-  resetGameOver(){
-    this.#isGameOver = false;
+  resetLose(){
+    this.#isLose = false;
   }
 
-  setGameOver(gameOver) {
-    this.#isGameOver = gameOver;
+  setLose(isLose) {
+    this.#isLose = isLose;
   }
 
-  getGameOver() {
-    return this.#isGameOver;
+  getLose() {
+    return this.#isLose;
   }
 
   allReset(){
@@ -104,7 +104,7 @@ class Model {
   }
 
   roundReset() {
-    this.resetGameOver();
+    this.resetLose();
     this.resetGameWin();
     this.resetMoveList();
   }
@@ -129,7 +129,7 @@ class Model {
   }
 
   isWrongLocation(type, index) {
-    return this.#moveList[index] === type && this.#isGameOver
+    return this.#moveList[index] === type && this.#isLose
   }
   
 }

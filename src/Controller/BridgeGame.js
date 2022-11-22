@@ -44,7 +44,7 @@ class BridgeGame {
 
   checkMoving() {
     if (this.#model.isCorrectLocation()) return this.keepGoing();
-    return this.gameOver();
+    return this.lose();
   }
 
   keepGoing() {
@@ -60,8 +60,8 @@ class BridgeGame {
     return this.move();
   }
 
-  gameOver() {
-    this.#model.setGameOver(true);
+  lose() {
+    this.#model.setLose(true);
     this.#map.printMap();
 
     return this.#userInput.readGameCommand();
