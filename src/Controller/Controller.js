@@ -13,6 +13,11 @@ const Controller = {
         })
     },
 
+    makeBridgeCallBack (bridgeGame, input) {
+        bridgeGame.makeBridge(input);
+        Controller.move(bridgeGame);
+    },
+
 }
 
 module.exports = Controller;
