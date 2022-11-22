@@ -10,7 +10,8 @@ describe("OutputView Util Func Test", () => {
     const answer = 0;
     const input = 1;
     //when
-    const result = validationMakeMapObjProps(answer, input);
+    const result =
+      validationMakeMapObjProps(answer) || validationMakeMapObjProps(input);
     const expectResult = false;
     //then
     expect(result).toBe(expectResult);
@@ -20,7 +21,8 @@ describe("OutputView Util Func Test", () => {
     const answer = 0;
     const input = 2;
     //when
-    const result = validationMakeMapObjProps(answer, input);
+    const result =
+      validationMakeMapObjProps(answer) || validationMakeMapObjProps(input);
     const expectResult = true;
     //then
     expect(result).toBe(expectResult);
