@@ -30,12 +30,10 @@ class App {
     InputView.readBridgeSize(this.setBridge.bind(this));
   }
 
-  setBridge(size) {
-    this.#bridgeSize = size;
-    if (!this.validate(Validate.size, this.#bridgeSize))
-      return this.getBridgeSize();
+  setBridge(bridgeSize) {
+    if (!this.validate(Validate.size, bridgeSize)) return this.getBridgeSize();
     this.#bridge = BridgeMaker.makeBridge(
-      this.#bridgeSize,
+      bridgeSize,
       BridgeRandomNumberGenerator.generate
     );
     this.#bridgeGame = new BridgeGame(this.#bridge);
@@ -63,7 +61,7 @@ class App {
   }
 
   isEndOfBridge() {
-    if (this.#bridgeIndex !== init.END_OF_INDEX(this.#bridgeSize)) {
+    if (this.#bridgeIndex !== init.END_OF_INDEX(this.#bridge.length)) {
       this.#bridgeIndex += init.INCREASE;
       return this.getMove();
     }
