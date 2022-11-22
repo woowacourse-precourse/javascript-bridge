@@ -12,7 +12,7 @@ class BridgeGame {
   constructor(size){
     this.#steps=[]
     this.#map = {up: [], down: []}
-    this.result = {count: 1, success: false}
+    this.#result = {count: 1, success: false}
 
     this.buildBridge(size)
     console.log(this.#bridge)
@@ -34,7 +34,7 @@ class BridgeGame {
     this.fillMap(direction, isDirectionRight)
     
     if(this.#steps.length === this.#bridge.length && isDirectionRight)this.#result.success = true
-    
+
     return isDirectionRight
   }
 
@@ -63,7 +63,8 @@ class BridgeGame {
    */
   retry() {
     this.#steps = []
-    this.#result.count ++
+    this.#map = {up:[], down:[]}
+    this.#result.count++
   }
 }
 
