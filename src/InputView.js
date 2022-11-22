@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { RETRY, PHRASE } = require('./config.js');
-const { validateBridgeSize, validateMove, validateRestart } = require('./validate.js');
+const { RETRY, PHRASE } = require('./utils/config.js');
+const { validateBridgeSize, validateMove, validateRestart } = require('./utils/validate.js');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
