@@ -32,6 +32,14 @@ class GameResult {
   getCurrentPosition() {
     return this.getAsArray().findIndex(([, value]) => !value.player);
   }
+
+  clear() {
+    this.getAsArray().forEach(([key, value]) => {
+      this.#result.set(key, { ...value, player: null });
+    });
+
+    this.#tryCount += 1;
+  }
 }
 
 module.exports = GameResult;
