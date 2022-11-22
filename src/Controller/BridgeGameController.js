@@ -1,11 +1,11 @@
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeGame = require('../Domain/BridgeGame');
 const BridgeMap = require('../Domain/BridgeMap');
+const Bridge = require('../Domain/Bridge');
 const OutputView = require('../View/OutputView');
 const InputView = require('../View/InputView');
-const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
 const SETTING = require('../constants/gameSetting');
-const Bridge = require('../Domain/Bridge');
 
 class BridgeGameController {
   #bridgeMap = new BridgeMap();

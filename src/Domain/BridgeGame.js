@@ -1,4 +1,4 @@
-const DomainValidator = require('../utils/DomainValidator');
+const DomainValidator = require('../validator/DomainValidator');
 
 class BridgeGame {
   #gameStats = new Map();

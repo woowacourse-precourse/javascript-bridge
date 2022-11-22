@@ -1,4 +1,4 @@
-const Validator = require('../src/utils/Validator');
+const Validator = require('../src/validator/Validator');
 
 describe('Validator 테스트', () => {
   test('다리 길이 입력 시 3~20의 숫자를 입력한 경우 true', () => {

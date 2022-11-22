@@ -1,5 +1,5 @@
 const SETTING = require('../constants/gameSetting');
-const DomainValidator = require('../utils/DomainValidator');
+const DomainValidator = require('../validator/DomainValidator');
 class BridgeMap {
   #upsideMap = [];
   #downsideMap = [];
