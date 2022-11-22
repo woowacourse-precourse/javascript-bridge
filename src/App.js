@@ -12,8 +12,10 @@ const { printMap, printResult } = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
 
 class App {
+  #bridgeGame;
+
   constructor() {
-    this.bridgeGame = new BridgeGame();
+    this.#bridgeGame = new BridgeGame();
   }
 
   play() {
@@ -57,19 +59,19 @@ class App {
   }
 
   moveBridge(userMove) {
-    const move = this.bridgeGame.move(this.bridge, userMove);
-    const bridges = this.bridgeGame.getBridges();
+    const move = this.#bridgeGame.move(this.bridge, userMove);
+    const bridges = this.#bridgeGame.getBridges();
 
     printMap(bridges);
     this.checkComplete(move, bridges);
   }
 
   checkComplete(move, bridges) {
-    const step = this.bridgeGame.getStep();
+    const step = this.#bridgeGame.getStep();
 
-    move === true && this.bridge.length === step
-      ? this.quitGame(bridges, SUCCESS)
-      : this.checkContinue(move, bridges);
+    if (move === true && this.bridge.length === step) {
+      this.quitGame(bridges, SUCCESS);
+    } else this.checkContinue(move, bridges);
   }
 
   checkContinue(move, bridges) {
@@ -94,19 +96,19 @@ class App {
   }
 
   checkRetry(userRetry, bridges) {
-    const retry = this.bridgeGame.retry(userRetry);
+    const retry = this.#bridgeGame.retry(userRetry);
 
     if (retry === true) this.retryGame();
     if (retry === false) this.quitGame(bridges, FAIL);
   }
 
   retryGame() {
-    this.bridgeGame.init();
+    this.#bridgeGame.init();
     this.getUserMoving();
   }
 
   quitGame(bridges, successOrFail) {
-    const tryCount = this.bridgeGame.getTryCount();
+    const tryCount = this.#bridgeGame.getTryCount();
     printResult(bridges, successOrFail, tryCount);
   }
 }
