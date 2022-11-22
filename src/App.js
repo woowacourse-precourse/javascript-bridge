@@ -75,7 +75,13 @@ class App {
     }
   }
   showGameResult() {
-    //게임 결과보여주고 종료
+    const [upString, downString] = this.bridgeGame.getBridgeString();
+    const tryCount = this.bridgeGame.getTryCount();
+    const gameResult = {
+      upString,
+      downString,
+    };
+    OutputView.printResult(gameResult, result, tryCount);
   }
 }
 const app = new App();
