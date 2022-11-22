@@ -41,34 +41,33 @@ class BridgeGame {
     this.#tryCount += 1;
   }
 
-  getTryCount() {
-    return this.#tryCount;
-  }
-
-  getBridgeMap() {
-    return this.#bridgeMap;
-  }
-
   start() {
     let location = 0;
     while (location <= this.#bridgeMap.length - 1) {
       this.#correct = this.move(location++, InputView.readMoving());
       printMap(this.getBridgeMap(), location, this.#correct);
-      // if (this.#correct && location === this.#bridgeMap.length - 1) break;
       if (!this.#correct) {
-        location = this.getCommand(game, location);
+        location = this.setCommand(game, location);
       }
     }
     printResult(this, location, this.#correct);
   }
 
-  getCommand(location) {
+  setCommand() {
     this.#command = InputView.readGameCommand();
     if (this.#command === KEY.RETRY) {
       this.retry();
       return 0;
     }
     return this.#bridgeMap.length;
+  }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
+
+  getBridgeMap() {
+    return this.#bridgeMap;
   }
 }
 
