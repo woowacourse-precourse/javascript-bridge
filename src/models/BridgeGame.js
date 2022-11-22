@@ -1,3 +1,6 @@
+const { makeBridge } = require('../BridgeMaker');
+const { generate } = require('../BridgeRandomNumberGenerator');
+
 const Bridge = require('./Bridge');
 
 /**
@@ -8,8 +11,23 @@ class BridgeGame {
   #map = [];
   #attempts = 1;
 
-  makeBridge(bridgeSize) {
-    this.#bridge = new Bridge(bridgeSize);
+  makeBridge(size) {
+    this.#validateSize(size);
+
+    const compartments = makeBridge(size, generate);
+    this.#bridge = new Bridge(compartments);
+  }
+
+  #validateSize(size) {
+    if (this.#isNumber(size)) {
+      return;
+    }
+
+    throw new Error('[ERROR] 다리의 길이는 3이상 20이하의 숫자여야 합니다.');
+  }
+
+  #isNumber(value) {
+    return typeof value === 'number';
   }
 
   /**

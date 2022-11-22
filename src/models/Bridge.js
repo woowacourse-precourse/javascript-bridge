@@ -1,5 +1,4 @@
-const { makeBridge } = require('../BridgeMaker');
-const { generate } = require('../BridgeRandomNumberGenerator');
+const { DIRECTION, ERROR_MESSAGE } = require('../constants');
 
 const BRIDGE_SIZE = Object.freeze({
   min: 3,
@@ -7,35 +6,52 @@ const BRIDGE_SIZE = Object.freeze({
 });
 
 class Bridge {
-  #bridge;
+  #directions;
 
-  constructor(size) {
-    this.#validate(size);
-    this.#bridge = makeBridge(size, generate);
+  constructor(directions) {
+    this.#validate(directions);
+    this.#directions = directions;
   }
 
-  #validate(size) {
-    if (this.#isNumber(size) && this.#isInRange(size)) {
-      return;
-    }
+  #validate(directions) {
+    const validations = {
+      invalidDirection: this.#hasValidDirection.bind(this),
+      invalidRange: this.#hasValidRange.bind(this),
+    };
 
-    throw new Error('[ERROR] 다리의 길이는 3이상 20이하의 숫자여야 합니다.');
+    Object.entries(validations).forEach(([key, validateFunc]) => {
+      this.#validateDirections(directions, validateFunc, ERROR_MESSAGE[key]);
+    });
+  }
+
+  #validateDirections(directions, validateFunc, errorMessage) {
+    if (!validateFunc(directions)) {
+      throw new Error(errorMessage);
+    }
+  }
+
+  #hasValidDirection(directions) {
+    return directions.every((direction) => this.#isValidDirection(direction));
+  }
+
+  #isValidDirection(direction) {
+    return direction === DIRECTION.up || direction === DIRECTION.down;
+  }
+
+  #hasValidRange(directions) {
+    return this.#isInRange(directions.length);
   }
 
   #isInRange(number) {
     return number >= BRIDGE_SIZE.min && number <= BRIDGE_SIZE.max;
   }
 
-  #isNumber(value) {
-    return typeof value === 'number';
+  size() {
+    return this.#directions.length;
   }
 
   isMovable(index, direction) {
-    return this.#bridge[index] === direction;
-  }
-
-  size() {
-    return this.#bridge.length;
+    return this.#directions[index] === direction;
   }
 }
 
