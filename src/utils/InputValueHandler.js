@@ -1,5 +1,5 @@
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const OutputView = require('./OutputView');
+const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const OutputView = require('../view/OutputView');
 const Validate = require('./Validate');
 
 const InputValueHandler = {

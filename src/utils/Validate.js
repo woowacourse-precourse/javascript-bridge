@@ -1,5 +1,5 @@
-const { KEY, BRIDGE, ERROR } = require('./Constants');
-const OutputView = require('./OutputView');
+const { KEY, BRIDGE, ERROR } = require('../constants/Constants');
+const OutputView = require('../view/OutputView');
 
 const Validate = {
   checkBridgeSize(size) {
