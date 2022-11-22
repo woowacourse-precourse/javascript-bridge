@@ -10,8 +10,8 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const answer = Array.from({ length: size }, () =>
       generateRandomNumber()
-    ).map((space) => (+space === SPACE.DOWN ? ORDER.DOWN : ORDER.UP));
-    console.log(answer);
+    ).map((space) => (space === SPACE.DOWN ? ORDER.DOWN : ORDER.UP));
+
     return answer;
   },
 };
