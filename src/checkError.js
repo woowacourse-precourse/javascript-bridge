@@ -36,4 +36,3 @@ const CheckError = {
 };
 
 module.exports = CheckError;
-// module.exports = { checkChoiceUpDown };

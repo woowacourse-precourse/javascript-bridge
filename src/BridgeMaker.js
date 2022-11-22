@@ -1,3 +1,4 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
 const InputView = require("./View/InputView");
 
@@ -18,6 +19,7 @@ const BridgeMaker = {
       if (randomNum == 0) bridgeString.push("D");
       else bridgeString.push("U");
     }
+    MissionUtils.Console.print(bridgeString);
     return bridgeString;
   },
 };
