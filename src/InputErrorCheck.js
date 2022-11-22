@@ -12,6 +12,10 @@ const inputErrorCheck = {
       Console.print('[ERROR] 다리 길이는 숫자만 공백없이 입력 가능합니다.');
       throw '[ERROR] 다리 길이는 숫자만 공백없이 입력 가능합니다.';
     }
+    if (Number(input) < 3 || Number(input) > 20) {
+      Console.print('[ERROR] 다리 길이는 숫자만 공백없이 입력 가능합니다.');
+      throw '[ERROR] 다리 길이는 숫자만 공백없이 입력 가능합니다.';
+    }
   },
   gameCommand: (input) => {
     if (!(input === 'R' || input === 'Q')) {
