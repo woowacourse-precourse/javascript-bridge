@@ -13,9 +13,9 @@ const InputView = {
    */
 
   start() {
-    this.count = 0;
+    this.bridgeCount = 0;
     this.roundCount = 1;
-    this.bridgeGame = new BridgeGame(this.count);
+    this.bridgeGame = new BridgeGame(this.bridgeCount);
     this.readBridgeSize();
   },
 
@@ -80,7 +80,7 @@ const InputView = {
 
   printMapBasedOnInput(Boolean) {
     OutputView.printMap(Boolean, this.letter);
-    this.count++;
+    this.bridgeCount++;
     if (Boolean) {
       return this.isGameDone();
     }
@@ -95,11 +95,11 @@ const InputView = {
   },
 
   isGameDone() {
-    if (this.count === this.answerArr.length) {
+    if (this.bridgeCount === this.answerArr.length) {
       OutputView.printResult();
       OutputView.printTotalResult(true, this.roundCount);
     }
-    if (this.count !== this.answerArr.length) {
+    if (this.bridgeCount !== this.answerArr.length) {
       this.readMoving(this.answerArr);
     }
   },
@@ -130,7 +130,7 @@ const InputView = {
 
   finishorRestartGame(finishLetter) {
     if (finishLetter === 'Q') {
-      return this.finishGame();
+      return this.finishGameWithLose();
     }
     if (finishLetter === 'R') {
       this.roundCount++;
@@ -139,13 +139,13 @@ const InputView = {
     }
   },
 
-  finishGame() {
+  finishGameWithLose() {
     OutputView.printResult();
     OutputView.printTotalResult(false, this.roundCount);
   },
 
   resetOutputBridge() {
-    this.count = 0;
+    this.bridgeCount = 0;
     this.bridgeGame.retry();
     OutputView.resetOutputBridge();
   },

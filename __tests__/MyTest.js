@@ -91,7 +91,7 @@ describe('정답이 틀린 후 재시작한다.', () => {
   test('재시작 하면 움직였던 기록을 초기화한다.', () => {
     InputView.bridgeGame = new BridgeGame();
     InputView.resetOutputBridge();
-    expect(InputView.count).toEqual(0);
+    expect(InputView.bridgeCount).toEqual(0);
     expect(OutputView.upBridge).toEqual('[');
     expect(OutputView.downBridge).toEqual('[');
   });
