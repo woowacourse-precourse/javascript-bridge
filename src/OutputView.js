@@ -13,9 +13,9 @@ const OutputView = {
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    */
-  printMap({ isSafe, bridge, location }) {
-    const upMap = generateUpMap(isSafe, bridge, location);
-    const downMap = generateDownMap(isSafe, bridge, location);
+  printMap({ bridge, location, isSafe }) {
+    const upMap = generateUpMap(bridge, location, isSafe);
+    const downMap = generateDownMap(bridge, location, isSafe);
 
     Console.print(upMap);
     Console.print(downMap);
@@ -24,7 +24,7 @@ const OutputView = {
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    */
-  printResult({ isSuccess, current, tryCount }, printMap) {
+  printResult({ current, isSuccess, tryCount }, printMap) {
     Console.print(MESSAGE.GAME_RESULT);
     printMap(current);
 

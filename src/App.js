@@ -11,13 +11,7 @@ const { makeBridge } = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 
 class App {
-  #location;
-  #tryCount;
-
   constructor() {
-    this.#location = 0;
-    this.#tryCount = 1;
-
     this.bridgeGame;
   }
 
@@ -51,39 +45,34 @@ class App {
   }
 
   move(moving) {
-    const bridge = this.bridgeGame.get();
-    const isSafe = this.bridgeGame.move(moving, this.#location);
-    const current = { isSafe, bridge, location: this.#location };
+    const bridge = this.bridgeGame.getBridge();
+    const location = this.bridgeGame.getLocation();
+    const isSafe = this.bridgeGame.move(moving);
+    const current = { bridge, location, isSafe };
 
     printMap(current);
-    this.#location += 1;
-    if (!isSafe) return this.select(current);
-    if (this.#location === bridge.length) return this.result(true, current);
+    if (!isSafe) return this.command(current);
+    if (location === bridge.length - 1) return this.result(true, current);
 
     this.moving();
   }
 
-  select(current) {
+  command(current) {
     try {
       // prettier-ignore
-      readGameCommand(this.bridgeGame.retry.bind(this), this.result.bind(this), current);
+      readGameCommand({retry: this.bridgeGame.retry.bind(this.bridgeGame), moving: this.moving.bind(this), result: this.result.bind(this)}, current);
     } catch (message) {
       printError(message);
 
       // prettier-ignore
-      readGameCommand(this.bridgeGame.retry.bind(this), this.result.bind(this), current);
+      readGameCommand({retry: this.bridgeGame.retry.bind(this.bridgeGame), moving: this.moving.bind(this), result: this.result.bind(this)}, current);
     }
   }
 
-  retry() {
-    this.#tryCount += 1;
-    this.#location = 0;
-
-    this.moving();
-  }
-
   result(isSuccess, current) {
-    printResult({ isSuccess, current, tryCount: this.#tryCount }, printMap);
+    const tryCount = this.bridgeGame.getTryCount();
+
+    printResult({ current, isSuccess, tryCount }, printMap);
 
     this.exit();
   }

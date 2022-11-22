@@ -43,13 +43,13 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand(retry, result, current) {
+  readGameCommand({ retry, moving, result }, current) {
     try {
       Console.readLine(MESSAGE.INPUT_COMMAND, (command) => {
         checkCommandValid(command);
 
         if (command === COMMAND.QUIT) result(false, current);
-        if (command === COMMAND.RETRY) retry();
+        if (command === COMMAND.RETRY) retry(moving);
       });
     } catch (message) {
       throw message;

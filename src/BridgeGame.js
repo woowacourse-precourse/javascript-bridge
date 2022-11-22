@@ -3,15 +3,21 @@
  */
 class BridgeGame {
   #bridge;
+  #location;
+  #tryCount;
 
   constructor(bridge) {
     this.#bridge = bridge;
+    this.#location = 0;
+    this.#tryCount = 1;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    */
-  move(moving, location) {
-    const isSuccess = this.#bridge[location] === moving;
+  move(moving) {
+    const isSuccess = this.#bridge[this.#location] === moving;
+
+    this.#location += 1;
 
     return isSuccess;
   }
@@ -19,12 +25,23 @@ class BridgeGame {
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    */
-  retry() {
-    this.retry();
+  retry(moving) {
+    this.#location = 0;
+    this.#tryCount += 1;
+
+    moving();
   }
 
-  get() {
+  getBridge() {
     return this.#bridge;
+  }
+
+  getLocation() {
+    return this.#location;
+  }
+
+  getTryCount() {
+    return this.#tryCount;
   }
 }
 

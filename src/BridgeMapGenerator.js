@@ -1,7 +1,7 @@
 const { WAY, BRIDGE } = require("./constants/index");
 
 const BridgeMapGenerator = {
-  generateUpMap(isSafe, bridge, location) {
+  generateUpMap(bridge, location, isSafe) {
     const up = bridge
       .slice(0, location)
       .map((way) => (way === WAY.UP ? BRIDGE.SAFE : " "));
@@ -13,7 +13,7 @@ const BridgeMapGenerator = {
     return BRIDGE.START + up.join(BRIDGE.DIVIDE) + BRIDGE.END;
   },
 
-  generateDownMap(isSafe, bridge, location) {
+  generateDownMap(bridge, location, isSafe) {
     const down = bridge
       .slice(0, location)
       .map((way) => (way === WAY.DOWN ? BRIDGE.SAFE : " "));
