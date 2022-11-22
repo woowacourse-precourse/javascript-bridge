@@ -11,6 +11,11 @@ const ValidMove = (move) => {
 const ValidSize = (input) => {
   CheckNotANumber(input);
   CheckInputRange(input);
+  CheckIsInteger(input);
+};
+
+const CheckIsInteger = (input) => {
+  if (!Number.isInteger(+input)) throw new Error();
 };
 
 const CheckNotANumber = (input) => {
@@ -26,5 +31,3 @@ module.exports = {
   ValidMove,
   ValidCmd,
 };
-
-// throw Error 여기서 하는 방향으로
