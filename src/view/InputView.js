@@ -14,15 +14,19 @@ const InputView = {
   readBridgeSize() {
     let size = 0;
     Console.readLine(Message.INPUT_LENGTH, answer => {
-      try {
-        const bridgeSize = new BridgeSize(Number(answer));
-      } catch (error) {
-        Console.print(error.message);
-        this.readBridgeSize();
-      }
+      this.checkSizeError(answer);
       size = answer;
     });
     return size;
+  },
+
+  checkSizeError(answer) {
+    try {
+      const bridgeSize = new BridgeSize(Number(answer));
+    } catch (error) {
+      Console.print(error.message);
+      this.readBridgeSize();
+    }
   },
 
   /**
@@ -31,15 +35,19 @@ const InputView = {
   readMoving() {
     let direction = '';
     Console.readLine(Message.MOVE, answer => {
-      try {
-        const orderDirection = new Direction(answer);
-      } catch (error) {
-        Console.print(error.message);
-        this.readMoving();
-      }
+      this.checkDirectionError(answer);
       direction = answer;
     });
     return direction;
+  },
+
+  checkDirectionError(answer) {
+    try {
+      const orderDirection = new Direction(answer);
+    } catch (error) {
+      Console.print(error.message);
+      this.readMoving();
+    }
   },
 
   /**
@@ -48,14 +56,18 @@ const InputView = {
   readGameCommand() {
     let retry = '';
     Console.readLine(Message.RETRY, answer => {
-      try {
-        const retryAnswer = new Retry(answer);
-      } catch (error) {
-        this.readGameCommand();
-      }
+      this.checkRetryError(answer);
       retry = answer;
     });
     return retry;
+  },
+
+  checkRetryError(answer) {
+    try {
+      const retryAnswer = new Retry(answer);
+    } catch (error) {
+      this.readGameCommand();
+    }
   },
 };
 
