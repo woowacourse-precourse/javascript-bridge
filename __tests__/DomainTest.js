@@ -9,7 +9,6 @@ const App = require('../src/App');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
-  // eslint-disable-next-line arrow-body-style
   answers.reduce((acc, input) => {
     return acc.mockImplementationOnce((_, callback) => {
       callback(input);
@@ -19,7 +18,6 @@ const mockQuestions = (answers) => {
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
-  // eslint-disable-next-line arrow-body-style
   numbers.reduce((acc, number) => {
     return acc.mockReturnValueOnce(number);
   }, MissionUtils.Random.pickNumberInRange);

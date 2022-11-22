@@ -34,7 +34,6 @@ class GameView {
   printResult(userLife, attemptNumber) {
     this.outputView.print(RESULT.CHART.SUCESS_OR_FAIL(userLife));
     this.outputView.print(RESULT.CHART.ATTEMPT(attemptNumber));
-    this.close();
   }
 
   printError(message) {
