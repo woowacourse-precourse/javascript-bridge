@@ -49,11 +49,7 @@ class App {
     InputView.readGameCommand((command) => {
       if (!this.validator.commandValidate(command)) return this.askGameCommand();
 
-      if (command === BRIDGE.RESTART) {
-        this.bridgeGame.retry();
-        this.#tryCount += 1;
-        return this.movingBridge();
-      }
+      if (command === BRIDGE.RESTART) this.restartGame();
 
       return this.quitGame();
     });
@@ -65,6 +61,12 @@ class App {
     if (!this.bridgeGame.isEnd(this.#bridge.length)) return this.movingBridge();
 
     return this.victoryGame();
+  }
+
+  restartGame() {
+    this.bridgeGame.retry();
+    this.#tryCount += 1;
+    return this.movingBridge();
   }
 
   victoryGame() {

@@ -29,7 +29,6 @@ class BridgeGame {
       this.#down.push(BLANK);
       return;
     }
-
     this.#down.push(bridge[this.#index] === STRING_DOWN ? SUCCESS : FAIL);
     this.#up.push(BLANK);
   }
