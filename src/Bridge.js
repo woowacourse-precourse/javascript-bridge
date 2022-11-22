@@ -1,6 +1,4 @@
-const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
-const { Console } = require("@woowacourse/mission-utils");
 const { generate } = require("./BridgeRandomNumberGenerator");
 
 class Bridge {

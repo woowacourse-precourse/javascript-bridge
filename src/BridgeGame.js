@@ -33,8 +33,7 @@ class BridgeGame {
   move(space,bridge) {
     const standardBridge = bridge.getBridge();;
     let count = this.getCount();
-
-    Console.print(standardBridge[count]);
+    
     if(space === "U") this.upMove(standardBridge,count);
     if(space === "D") this.downMove(standardBridge,count);
     
