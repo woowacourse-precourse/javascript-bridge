@@ -40,20 +40,12 @@ class BridgeGame {
   }
 
   drawBridge() {
-    const upLine = this.#bridge[0].join(" | ");
-    const downLine = this.#bridge[1].join(" | ");
-    const result = {
-      up: upLine,
-      down: downLine,
-    };
-    return result;
+    return this.#bridge.map((bridgeSide) => bridgeSide.join(" | "));
   }
 
   drawGameResult() {
-    const result = [];
-    result.push(this.#attempt);
-    result.push(this.#round === this.#answer.length ? "성공" : "실패");
-    return result;
+    const success = this.#round === this.#answer.length ? "성공" : "실패";
+    return [this.#attempt, success];
   }
 
   /**
@@ -62,10 +54,9 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(moveInput) {
-    const round = this.#round + 1;
     const roundAnswer = this.#answer[this.#round];
     if (moveInput === roundAnswer) {
-      this.#round = round;
+      this.#round++;
       this.setBridge(moveInput, true);
       return true;
     }
