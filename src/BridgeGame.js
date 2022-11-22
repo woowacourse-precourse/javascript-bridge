@@ -1,20 +1,74 @@
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
+const BridgeMaker = require("./BridgeMaker");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { Symbol } = require("./constant/Constants");
+ 
 class BridgeGame {
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+  #bridge
+  #upBridge
+  #downBridge
+  #currentIndex;
+  #tryNumber;
+  #isCorrect;
+  #isSuccess;
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+  constructor(){
+    this.#upBridge = [];
+    this.#downBridge = [];
+    this.#tryNumber = 1;
+    this.#currentIndex = 0;
+  }
+
+  getCurrentBridge(){
+    return [this.#upBridge, this.#downBridge];
+  }
+  
+  getIsCorrect(){
+    return this.#isCorrect;
+  }
+
+  getIsSuccess(){
+    return this.#isSuccess;
+  }
+
+  getTryNumber(){
+    return this.#tryNumber;
+  }
+
+  makeBridge(size){
+    this.#bridge = BridgeMaker.makeBridge(parseInt(size), BridgeRandomNumberGenerator.generate);
+  }
+
+  compareBridgeWithDirection(direction){
+    this.#isCorrect = this.#bridge[this.#currentIndex] === direction ? true : false;
+  }
+
+  addSymbolToEachBridge(choicedBrdige, notChoicedBridge, isCorrect){
+    choicedBrdige.push(isCorrect ? Symbol.RIGHT : Symbol.WRONG);
+    notChoicedBridge.push(Symbol.NOTHING);
+  }
+
+  move(direction) {
+    this.compareBridgeWithDirection(direction);
+    this.isSuccess();
+    direction === Symbol.UP ? this.addSymbolToEachBridge(this.#upBridge, this.#downBridge, this.#isCorrect) 
+    : this.addSymbolToEachBridge(this.#downBridge, this.#upBridge, this.#isCorrect);
+    this.#currentIndex += 1;
+  }
+
+  isSuccess(){
+    this.#isSuccess = (this.#bridge.length-1 === this.#currentIndex && this.#isCorrect) ? true : false;
+  }
+
+  countTryNumber() {
+    this.#tryNumber += 1;
+  }
+
+  retry() {
+    this.#isSuccess ? this.#tryNumber = 1 : this.countTryNumber();
+    this.#upBridge = [];
+    this.#downBridge = [];
+    this.#currentIndex = 0;
+  }
 }
 
 module.exports = BridgeGame;
