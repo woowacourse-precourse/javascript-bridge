@@ -1,10 +1,10 @@
 const { Console } = require("@woowacourse/mission-utils");
 const InputView = require("./InputView");
-const Validation = require("./validation/Validation");
+const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
 const { generate } = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
-const OutputView = require("./OutputView");
+const Validation = require("./validation/Validation");
 
 class App {
   constructor() {
@@ -18,8 +18,9 @@ class App {
 
   inputBridgeSize() {
     InputView.readBridgeSize((size) => {
-      const { error } = Validation.validateBridgeSize(size);
-      if (error) {
+      try {
+        Validation.validateBridgeSize(size);
+      } catch (error) {
         OutputView.printError(error);
         return this.inputBridgeSize();
       }
@@ -31,8 +32,9 @@ class App {
 
   inputUpsideDown() {
     InputView.readMoving((upsideDown) => {
-      const { error } = Validation.validateUpsideDown(upsideDown);
-      if (error) {
+      try {
+        Validation.validateUpsideDown(upsideDown);
+      } catch (error) {
         OutputView.printError(error);
         return this.inputUpsideDown();
       }
@@ -47,8 +49,9 @@ class App {
 
   inputRetryQuit() {
     InputView.readGameCommand((retryQuit) => {
-      const { error } = Validation.validateRetryQuit(retryQuit);
-      if (error) {
+      try {
+        Validation.validateRetryQuit(retryQuit);
+      } catch (error) {
         OutputView.printError(error);
         return this.inputRetryQuit();
       }
