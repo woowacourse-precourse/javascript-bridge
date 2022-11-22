@@ -66,9 +66,18 @@ const InputView = {
     Console.readLine(
       '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
       (inputValue) => {
-        this.checkRetry(inputValue);
+        this.gameCommandTryCatch(inputValue);
       }
     );
+  },
+  gameCommandTryCatch(inputValue) {
+    try {
+      BridgeGameController.getCommand(inputValue);
+      this.checkRetry(inputValue);
+    } catch (error) {
+      BridgeGameController.errorMessage(error.message);
+      this.readGameCommand();
+    }
   },
 
   checkRetry(retryOrQuit) {

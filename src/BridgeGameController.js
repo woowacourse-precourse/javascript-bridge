@@ -37,6 +37,9 @@ const BridgeGameController = {
     this.upper = [];
     this.lower = [];
   },
+  getCommand(inputValue) {
+    Validator.retryOrQuit(inputValue);
+  },
   errorMessage(message) {
     OutputView.printError(message);
   },
