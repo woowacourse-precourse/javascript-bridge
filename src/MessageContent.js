@@ -7,6 +7,8 @@ const MESSAGE = {
   SUCCESSS: '게임 성공 여부: 성공',
   FAILURE: '게임 성공 여부: 실패',
   TRY: '총 시도한 횟수: ',
+  RETRY_KEY: 'R',
+  QUIT_KEY: 'Q',
 }
 
 module.exports = MESSAGE
