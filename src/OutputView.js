@@ -11,7 +11,7 @@ const OutputView = {
   printMap(bridgeGame) {
     const map = bridgeGame.getMap();
     Console.print(`[ ${map.upStair.join(" | ")} ]`);
-    Console.print(`[ ${map.downStair.join(" | ")} ]`);
+    Console.print(`[ ${map.downStair.join(" | ")} ]\n`);
   },
 
   /**
@@ -19,7 +19,15 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(bridgeGame) {
+    const result = bridgeGame.getResult();
+    const tryNum = bridgeGame.getTry();
+    Console.print("최종 게임 결과");
+    this.printMap(bridgeGame);
+    Console.print(`게임 성공 여부: ${result}\n`);
+    Console.print(`총 시도한 횟수: ${tryNum}`);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
