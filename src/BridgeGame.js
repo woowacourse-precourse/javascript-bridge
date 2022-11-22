@@ -1,23 +1,21 @@
-const { buildMap } = require("./lib/bridge");
+const { buildMap, formatMap } = require("./lib/bridge");
 const { FLAG } = require("./lib/constants");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor() {
-    this.bridge = [];
-    this.map = [[], []];
-    this.step = 0;
-    this.tried = 1;
-  }
+  #bridge = [];
+  #map = [[], []];
+  #step = 0;
+  #tried = 1;
 
   setBridge(bridge) {
-    this.bridge = bridge;
+    this.#bridge = bridge;
   }
 
   isArrived() {
-    return this.bridge.length === this.step;
+    return this.#bridge.length === this.#step;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -25,7 +23,7 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(direction) {
-    const correct = this.bridge[this.step];
+    const correct = this.#bridge[this.#step];
     const moved = direction === correct;
 
     this.updateMap(moved, direction);
@@ -38,24 +36,26 @@ class BridgeGame {
     const mark = moved ? FLAG.CORRECT : FLAG.WRONG;
 
     if (direction === FLAG.UPPER) {
-      this.map = buildMap.upper(this.map, mark);
+      this.#map = buildMap.upper(this.#map, mark);
     }
 
     if (direction === FLAG.LOWER) {
-      this.map = buildMap.lower(this.map, mark);
+      this.#map = buildMap.lower(this.#map, mark);
     }
   }
 
   undoMap() {
-    this.map = this.map.map((section) => section.slice(0, section.length - 1));
+    this.#map = this.#map.map((section) =>
+      section.slice(0, section.length - 1)
+    );
   }
 
   stepForward() {
-    this.step += 1;
+    this.#step += 1;
   }
 
   stepBackward() {
-    this.step -= 1;
+    this.#step -= 1;
   }
 
   undo() {
@@ -79,7 +79,15 @@ class BridgeGame {
   }
 
   countTry() {
-    this.tried += 1;
+    this.#tried += 1;
+  }
+
+  getFormattedMap() {
+    return formatMap(this.#map);
+  }
+
+  getTryCount() {
+    return this.#tried;
   }
 }
 

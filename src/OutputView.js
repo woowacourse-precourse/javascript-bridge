@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { formatMap } = require("./lib/bridge");
 const { MESSAGE } = require("./lib/constants");
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -20,13 +21,13 @@ const OutputView = {
    */
   printResult(game) {
     this.printMessage(MESSAGE.FINAL_RESULT);
-    this.printMap(game.map);
+    this.printMap(game.getFormattedMap());
     this.printMessage(
       `${MESSAGE.GAME_RESULT} ${
         game.isArrived ? MESSAGE.SUCCESS : MESSAGE.FAIL
       }`
     );
-    this.printMessage(`${MESSAGE.TRY_COUNT} ${game.tried}`);
+    this.printMessage(`${MESSAGE.TRY_COUNT} ${game.getTryCount()}`);
   },
 
   printIntro() {

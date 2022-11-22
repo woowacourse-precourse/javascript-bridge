@@ -19,20 +19,7 @@ describe("BridgeGame 클래스 테스트", () => {
   test("지도 업데이트 테스트", () => {
     bridgeGame.updateMap(true, "U");
 
-    expect(bridgeGame.map).toEqual([["[ O ]"], ["[   ]"]]);
-  });
-
-  test("단계 진행 테스트", () => {
-    bridgeGame.stepForward();
-
-    expect(bridgeGame.step).toEqual(1);
-  });
-
-  test("단계 되돌리기 테스트", () => {
-    bridgeGame.stepForward();
-    bridgeGame.stepBackward();
-
-    expect(bridgeGame.step).toEqual(0);
+    expect(bridgeGame.getFormattedMap()).toEqual(["[ O ]", "[   ]"]);
   });
 
   test("진행 상황 되돌리기 테스트", () => {
@@ -40,8 +27,7 @@ describe("BridgeGame 클래스 테스트", () => {
     bridgeGame.move("U");
     bridgeGame.undo();
 
-    expect(bridgeGame.step).toEqual(0);
-    expect(bridgeGame.map).toEqual([[], []]);
+    expect(bridgeGame.getFormattedMap()).toEqual(["", ""]);
   });
 
   test("재시도 테스트", () => {
@@ -52,8 +38,8 @@ describe("BridgeGame 클래스 테스트", () => {
     bridgeGame.move("U");
     bridgeGame.retry(mock);
 
-    expect(bridgeGame.tried).toEqual(2);
-    expect(bridgeGame.map).toEqual([[], []]);
+    expect(bridgeGame.getTryCount()).toEqual(2);
+    expect(bridgeGame.getFormattedMap()).toEqual(["", ""]);
     expect(logSpy).toHaveBeenCalled();
   });
 });
