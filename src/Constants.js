@@ -27,7 +27,15 @@ const BRIDGE_SIZE_RANGE = Object.freeze({
 
 const MOVING = Object.freeze({
     UP: 'U',
-    DOWN: 'D'
+    DOWN: 'D',
+    RANDOM_UP: 1,
+    RANDOM_DOWN: 0
+});
+
+const MARK = Object.freeze({
+    SUCCESS: 'O',
+    FAIL: 'X',
+    BLANK: ' '
 });
 
 const GAME_COMMAND = Object.freeze({
@@ -40,5 +48,6 @@ module.exports = {
     MESSAGE_ERROR,
     BRIDGE_SIZE_RANGE,
     MOVING,
+    MARK,
     GAME_COMMAND
 };
