@@ -15,40 +15,40 @@ const mockInput = (answers) => {
 };
 
 const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
   return logSpy;
 };
 
-const getOutput = (logSpy) => {
-  return [...logSpy.mock.calls].join("");
-};
+const getOutput = (logSpy) => [...logSpy.mock.calls].join('');
 
 describe('다리 건너기 테스트', () => {
-  test.each(['g', 1])('다리 길이에 문자나 범위 외 숫자는 입력할 수 없다', (input) => {
-    mockInput([input]);
-    const logSpy = getLogSpy();
+  test.each(['g', 2, 21])(
+    '다리 길이에 문자나 범위 외 숫자는 입력할 수 없다',
+    (input) => {
+      mockInput([input]);
+      const logSpy = getLogSpy();
 
-    const crossBrigeGame = new CrossBrigeGame();
-    crossBrigeGame.gameStart();
-    const log = getOutput(logSpy);
+      const crossBrigeGame = new CrossBrigeGame();
+      crossBrigeGame.gameStart();
+      const log = getOutput(logSpy);
 
-    expect(log).toContain("[ERROR]");
-  });
+      expect(log).toContain('[ERROR]');
+    }
+  );
 
   test('다리 생성 테스트', () => {
-    const randoms = ['1', '0', '0'];
-    MissionUtils.Random.pickNumberInRange = jest.fn();
-    const mockRandom = randoms.reduce(
+    const randoms = [1, 0, 0];
+    const mockGenerator = randoms.reduce(
       (acc, number) => acc.mockReturnValueOnce(number),
-      MissionUtils.Random.pickNumberInRange,
+      jest.fn()
     );
 
-    const bridge = BridgeMaker.makeBridge(3, mockRandom);
+    const bridge = BridgeMaker.makeBridge(3, mockGenerator);
     expect(bridge).toEqual(['U', 'D', 'D']);
   });
 
-  test.each(['g', 2, 'u'])('이동할 칸 입력 예외처리', (input) => {
+  test.each(['g', 2, 'u', ' '])('이동할 칸 입력 예외처리', (input) => {
     mockInput([input]);
     const logSpy = getLogSpy();
 
