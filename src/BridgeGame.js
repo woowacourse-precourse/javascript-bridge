@@ -1,32 +1,50 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
-const { printMap } = require("./OutputView");
 const InputView = require("./InputView");
+const { printMap, printResult } = require("./OutputView");
+const BridgeMaker = require("./BridgeMaker");
+const { generate } = require("./BridgeRandomNumberGenerator");
+const { insertResult, removeResult } = require("./Util");
+
 class BridgeGame {
   #bridge;
   #currentState;
   #Map;
+  #tryNum;
 
   constructor(bridge) {
     this.#bridge = bridge;
     this.#currentState = [];
-    this.#Map = { upper: "[", lower: "[" };
+    this.#Map = { upper: "[ ]", lower: "[ ]" };
+    this.#tryNum = 0;
+  }
+  /**
+   * 주어진 다리 길이에 따라 랜덤 다리를 만든다.
+   */
+  make(size) {
+    this.#bridge = BridgeMaker.makeBridge(size, generate);
+    console.log(this.#bridge);
   }
 
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    */
-  move(bridge, move) {
+  move(move) {
     const result =
-      bridge[this.#currentState.length] === move ? "success" : "fail";
+      this.#bridge[this.#currentState.length] === move ? "성공" : "실패";
     this.#currentState.push(move);
+    this.#tryNum += 1;
     this.makeMap([this.#currentState, result]);
     printMap(this.#Map);
-    if (result === "success") {
-      InputView.readMoving();
+    if (result === "성공") {
+      if (this.#currentState.toString() === this.#bridge.toString()) {
+        printResult(this.#Map, this.#tryNum, "성공");
+      } else {
+        InputView.readMoving(this);
+      }
     } else {
-      InputView.readGameCommand();
+      InputView.readGameCommand(this);
     }
   }
 
@@ -34,14 +52,14 @@ class BridgeGame {
    * 이동한 다리의 상태에 따라 출력할 메세지를 작성한다.
    */
   makeMap([currentState, result]) {
-    for (let i = 0; i < currentState.length - 1; i++) {
-      this.addSuccessMove(currentState[i]);
-      this.addMark("and");
+    if (currentState.length > 1) {
+      this.#Map.upper = insertResult(this.#Map.upper, "| ");
+      this.#Map.lower = insertResult(this.#Map.lower, "| ");
     }
-    result === "success"
-      ? this.addSuccessMove(currentState[currentState.length])
-      : this.addFailMove(currentState[currentState.length]);
-    this.addMark("end");
+
+    result === "성공"
+      ? this.addSuccessMove(currentState[currentState.length - 1])
+      : this.addFailMove(currentState[currentState.length - 1]);
   }
 
   /**
@@ -49,11 +67,11 @@ class BridgeGame {
    */
   addSuccessMove(movement) {
     if (movement === "U") {
-      this.#Map.upper += " O ";
-      this.#Map.lower += "   ";
+      this.#Map.upper = insertResult(this.#Map.upper, "O ");
+      this.#Map.lower = insertResult(this.#Map.lower, "  ");
     } else {
-      this.#Map.lower += " O ";
-      this.#Map.upper += "   ";
+      this.#Map.upper = insertResult(this.#Map.upper, "  ");
+      this.#Map.lower = insertResult(this.#Map.lower, "O ");
     }
   }
 
@@ -62,33 +80,34 @@ class BridgeGame {
    */
   addFailMove(movement) {
     if (movement === "U") {
-      this.#Map.upper += " X ";
-      this.#Map.lower += "   ";
+      this.#Map.upper = insertResult(this.#Map.upper, "X ");
+      this.#Map.lower = insertResult(this.#Map.lower, "  ");
     } else {
-      this.#Map.lower += " X ";
-      this.#Map.upper += "   ";
-    }
-  }
-
-  /**
-   * 마지막으로 들어갈 기호를 추가한다.
-   */
-  addMark(state) {
-    if (state === "and") {
-      this.#Map.upper += "|";
-      this.#Map.lower += "|";
-    } else {
-      this.#Map.lower += "]";
-      this.#Map.upper += "]";
+      this.#Map.upper = insertResult(this.#Map.upper, "  ");
+      this.#Map.lower = insertResult(this.#Map.lower, "X ");
     }
   }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry(retry) {
+    if (retry === "R") {
+      this.revert();
+      InputView.readMoving(this);
+    } else {
+      this.makeMap([this.#currentState, "실패"]);
+      printResult(this.#Map, this.#tryNum, "실패");
+    }
+  }
+  /**
+   * 직전 시행 결과를 되돌린다.
+   */
+  revert() {
+    this.#currentState.pop();
+    this.#Map.upper = removeResult(this.#Map.upper);
+    this.#Map.lower = removeResult(this.#Map.lower);
+  }
 }
 
 module.exports = BridgeGame;
