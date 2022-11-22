@@ -2,7 +2,9 @@ const BridgeMap = require('./BridgeMap');
 
 class GameState {
   #currentLocation;
+
   #map;
+
   #bridge;
 
   constructor(bridge) {

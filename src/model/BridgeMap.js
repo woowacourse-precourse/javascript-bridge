@@ -13,7 +13,7 @@ class BridgeMap {
   update(isSuccess, moving) {
     const sign = this.isPassable(isSuccess);
 
-    moving === INPUT_SIGN.UP
+    return moving === INPUT_SIGN.UP
       ? this.updateUpside(sign)
       : this.updateDownside(sign);
   }

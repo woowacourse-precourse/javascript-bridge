@@ -8,7 +8,9 @@ const GameState = require('./GameState');
  */
 class BridgeGame {
   #round;
+
   #bridge;
+
   #gameState;
 
   constructor() {
