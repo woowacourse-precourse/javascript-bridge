@@ -1,5 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const App = require('../src/controller/App');
+const App = require('../src/App');
 const BridgeMaker = require('../src/BridgeMaker');
 
 const mockQuestions = (answers) => {
