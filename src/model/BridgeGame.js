@@ -34,14 +34,14 @@ class BridgeGame {
   }
 
   moveWrongUp() {
-    this.#array[0].push(BRIDGE.UNSELECTED);
-    this.#array[1].push(BRIDGE.IMMOVABLE);
+    this.#array[0].push(BRIDGE.IMMOVABLE);
+    this.#array[1].push(BRIDGE.UNSELECTED);
     this.#rightAnswer = false;
   }
 
   moveWrongDown() {
-    this.#array[0].push(BRIDGE.IMMOVABLE);
-    this.#array[1].push(BRIDGE.UNSELECTED);
+    this.#array[0].push(BRIDGE.UNSELECTED);
+    this.#array[1].push(BRIDGE.IMMOVABLE);
     this.#rightAnswer = false;
   }
 

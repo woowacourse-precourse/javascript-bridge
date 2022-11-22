@@ -112,6 +112,7 @@ class Controller {
   }
 
   quitGame() {
+    OutputView.resultMessage();
     OutputView.printMap(this.#currentBridge);
     OutputView.printResult(this.#try, false);
     Console.close();
