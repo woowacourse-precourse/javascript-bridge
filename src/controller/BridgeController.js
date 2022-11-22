@@ -44,9 +44,14 @@ class BridgeController {
    * @param bridgeLengthInput {string} [다리 길이 input]
    */
   onBridgeSizeInput(bridgeLengthInput) {
-    validate(bridgeLengthInput);
-    this.bridgeModel.setBridge(this.getCreatedBridge(bridgeLengthInput));
-    this.mainController.readUserMovingInput();
+    try {
+      validate(bridgeLengthInput);
+      this.bridgeModel.setBridge(this.getCreatedBridge(bridgeLengthInput));
+      this.mainController.readUserMovingInput();
+    } catch (errorLog) {
+      this.mainController.printError(errorLog);
+      this.mainController.readBridgeSizeInput();
+    }
   }
 
   /**
