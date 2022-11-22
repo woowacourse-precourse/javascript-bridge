@@ -1,5 +1,5 @@
 /* eslint max-lines-per-function: 0 */
-const Validator = require('../src/Validator');
+const Validator = require('../src/utils/Validator');
 
 const ERROR_PREFIX = '[ERROR]';
 

@@ -1,5 +1,5 @@
 /* eslint max-lines-per-function: 0 */
-const BridgeGameController = require('../src/BridgeGameController');
+const BridgeGameController = require('../src/Game/BridgeGameController');
 
 describe('checkRetry 함수 호출 검사', () => {
   test('입력이 R이면 재시도할 때 호출되는 함수 askMove()를 호출한다.', () => {

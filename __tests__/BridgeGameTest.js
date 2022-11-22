@@ -1,5 +1,5 @@
 /* eslint max-lines-per-function: 0 */
-const BridgeGame = require('../src/BridgeGame');
+const BridgeGame = require('../src/Game/BridgeGame');
 const BridgeMaker = require('../src/BridgeMaker');
 
 describe('setBridge 함수 호출 검사', () => {
