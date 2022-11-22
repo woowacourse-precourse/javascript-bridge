@@ -42,6 +42,7 @@ const InputView = {
       Console.readLine(INPUT_MESSAGES.RESTART, answer);
     })
     Console.close();
+    Validator.validateRestart(decide);
     return decide
   },
 };
