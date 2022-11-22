@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { GAME_MESSAGE, RESTART_OR_END, RESULT_ENGLISH } = require('./Constant.js');
+const { GAME_MESSAGE, RESTART_OR_END, RESULT_ENGLISH, JUDGE_NEXT_STEP } = require('./Constant.js');
 
 const { printMap, printResult } = require('./OutputView.js');
 const { checkBridgeSize, checkMovingInfo, checkRestartOrFail } = require('./ValidityCheck.js');
@@ -39,9 +39,10 @@ const InputView = {
         const tf = bridgeGame.move(movingInfo);
         printMap(bridgeGame);
         
-        if (bridgeGame.judgeEnd(bridgeGame, tf)) printResult(bridgeGame, RESULT_ENGLISH.SUCCESS);
-        else if (tf) this.readMoving();
-        else this.readGameCommand();
+        const nextStep = bridgeGame.judgeNextStep(tf);
+        if (nextStep === JUDGE_NEXT_STEP.END) printResult(bridgeGame, RESULT_ENGLISH.SUCCESS);
+        else if (nextStep === JUDGE_NEXT_STEP.ONGOING) this.readMoving();
+        else if (nextStep === JUDGE_NEXT_STEP.RESTART_OR_FAIL) this.readGameCommand();
       } catch(e) {
         Console.print(e);
         this.readMoving();
@@ -57,8 +58,9 @@ const InputView = {
       try {
         checkRestartOrFail(answer);
       
-        if (answer === RESTART_OR_END.END) printResult(bridgeGame, RESULT_ENGLISH.FAIL);
-        else {
+        if (answer === RESTART_OR_END.END) {
+          printResult(bridgeGame, RESULT_ENGLISH.FAIL);
+        } else {
           bridgeGame.retry();
           this.readMoving();
         }

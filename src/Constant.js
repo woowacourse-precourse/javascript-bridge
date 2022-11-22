@@ -36,6 +36,12 @@ const RESULT_ENGLISH = {
   FAIL: 'fail'
 }
 
+const JUDGE_NEXT_STEP = {
+  END: 'END',
+  ONGOING: 'ONGOING',
+  RESTART_OR_FAIL: 'RESTART_OR_FAIL'
+}
+
 const ERROR_MESSAGE = {
   BRIDGE_SIZE_NUMBER: '[ERROR] 다리 길이는 숫자여야 합니다.\n',
   BRIDGE_SIZE_RANGE: '[ERROR] 다리 길이는 3에서 20 사이입니다.\n',
@@ -50,5 +56,6 @@ module.exports = {
   PRINT_MAP,
   RESULT_KOREAN,
   RESULT_ENGLISH,
+  JUDGE_NEXT_STEP,
   ERROR_MESSAGE
 }
