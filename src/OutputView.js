@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const BridgeGame = require('./BridgeGame');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -71,16 +72,10 @@ const OutputView = {
     this.printTryCount();
   },
 
-  //성공여부 반환하기
-  isSuccess(input, ans){
-    let idx = input.length - 1;
-    return input[idx] == ans[idx];
-  },
-
   //성공여부 출력하기
   printSuccess(){
     MissionUtils.Console.print('게임 성공 여부: ');
-    if(this.isSuccess(input, ans)){
+    if(BridgeGame.isSuccess(input, answer)){
       MissionUtils.Console.print('성공');
     }else{
       MissionUtils.Console.print('실패');
