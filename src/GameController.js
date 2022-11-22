@@ -39,15 +39,17 @@ class GameController {
 
       const movementLogs = this.bridgeGame.getMoveRecord();
       OutputView.printMap(movementLogs);
+
+      if (!this.bridgeGame.isSucceed()) return this.getRetryOrQuit();
+      if (this.bridgeGame.isLastGame()) {
+        this.printFinalResult();
+        Console.close();
+        return;
+      }
       this.getDirection();
     } catch (message) {
       this.errorReinput(this.getDirection, message);
     }
-  }
-
-  errorReinput(reAsk, errMessage) {
-    OutputView.printError(errMessage);
-    reAsk.call(this);
   }
 
   getRetryOrQuit() {
@@ -62,12 +64,13 @@ class GameController {
         this.bridgeGame.retry();
         return this.getDirection();
       }
-      if (gameCommand === DIRECTION_KEY.QUIT) {
-        Console.close();
-      }
     } catch (message) {
       this.errorReinput(this.getRetryOrQuit, message);
     }
+  }
+  errorReinput(reAsk, errMessage) {
+    OutputView.printError(errMessage);
+    reAsk.call(this);
   }
 }
 

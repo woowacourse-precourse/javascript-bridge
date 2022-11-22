@@ -41,6 +41,28 @@ class BridgeGame {
     this.#movingRecord = [];
     this.#tryCount += 1;
   }
+
+  isSucceed() {
+    const lastRecord = this.#movingRecord[this.#movingRecord.length - 1];
+
+    return lastRecord.checkPass;
+  }
+
+  isLastGame() {
+    const clearCount = this.#movingRecord.length;
+    const checkAllPass = this.#bridge.checkAllPass(clearCount);
+    const isSucceed = this.isSucceed();
+
+    return checkAllPass && isSucceed;
+  }
+
+  getMoveRecord() {
+    return this.#movingRecord;
+  }
+
+  getTryCount() {
+    return this.#tryCount;
+  }
 }
 
 module.exports = BridgeGame;
