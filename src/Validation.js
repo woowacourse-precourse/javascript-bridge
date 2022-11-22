@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { BRIDGE_SIZE, MOVING, GAME_COMMANDS } = require('./constants/index');
 
 const Validation = {
   validateBridgeSize(bridgeSize) {
@@ -23,10 +24,8 @@ const Validation = {
   },
 
   validateBridgeSizeIsRange(bridgeSize) {
-    const MIN_SIZE = 3;
-    const MAX_SIZE = 20;
     try {
-      if (bridgeSize < MIN_SIZE || bridgeSize > MAX_SIZE) {
+      if (bridgeSize < BRIDGE_SIZE.MIN || bridgeSize > BRIDGE_SIZE.MAX) {
         throw new Error('[ERROR] 다리의 길이는 3 이상 20 이하여야 합니다.');
       }
     } catch (error) {
@@ -36,10 +35,8 @@ const Validation = {
   },
 
   validateMovingCommand(movingCommand) {
-    const UPPER_MOVING = 'U';
-    const LOWER_MOVING = 'D';
     try {
-      if (movingCommand !== UPPER_MOVING && movingCommand !== LOWER_MOVING) {
+      if (movingCommand !== MOVING.UPPER && movingCommand !== MOVING.LOWER) {
         throw new Error('[ERROR] 이동할 다리 칸은 U 또는 D만 입력 가능합니다.');
       }
     } catch (error) {
@@ -50,10 +47,8 @@ const Validation = {
   },
 
   validateGameCommand(gameCommand) {
-    const RESTART_COMMAND = 'R';
-    const END_COMMAND = 'Q';
     try {
-      if (gameCommand !== RESTART_COMMAND && gameCommand !== END_COMMAND) {
+      if (gameCommand !== GAME_COMMANDS.RETRY && gameCommand !== GAME_COMMANDS.QUIT) {
         throw new Error('[ERROR] 게임 진행 옵션은 R과 Q만 입력 가능합니다.');
       }
     } catch (error) {

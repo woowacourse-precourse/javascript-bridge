@@ -1,10 +1,11 @@
-const { INPUT_MESSAGE } = require('./utils/constants');
+const { INPUT_MESSAGE } = require('./constants');
 const { Console } = require('@woowacourse/mission-utils');
 const Validation = require('./Validation');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const BridgeGame = require('./BridgeGame');
 const OutputView = require('./OutputView');
+const { MOVING, GAME_COMMANDS, GAME_RESULT } = require('./constants/index');
 
 const InputView = {
   readBridgeSize() {
@@ -39,12 +40,14 @@ const InputView = {
       const bridgeGame = new BridgeGame();
       const gameReult = bridgeGame.move(movingCommand, bridge, movingRoute);
 
-      if (gameReult[0].includes('X') || gameReult[1].includes('X')) {
+      if (
+        gameReult[0].includes(MOVING.WRONG_ANSWER) ||
+        gameReult[1].includes(MOVING.WRONG_ANSWER)
+      ) {
         return this.readGameCommand(bridge, UserTryCount, movingRoute);
       }
       if (gameReult[0].length === bridge.length) {
-        const GAME_SUCCESS = '성공';
-        return OutputView.printResult(GAME_SUCCESS, UserTryCount, movingRoute);
+        return OutputView.printResult(GAME_RESULT.SUCCESS, UserTryCount, movingRoute);
       }
       return this.readMoving(bridge, gameReult, UserTryCount);
     });
@@ -55,23 +58,19 @@ const InputView = {
    */
   readGameCommand(bridge, UserTryCount, movingRoute) {
     Console.readLine(INPUT_MESSAGE.GAME_COMMAND, (gameCommand) => {
-      const RESTART_COMMAND = 'R';
-      const END_COMMAND = 'Q';
-
       const checkedGameCommand = Validation.validateGameCommand(gameCommand);
       if (checkedGameCommand) {
         return this.readGameCommand(bridge, UserTryCount, movingRoute);
       }
 
-      if (gameCommand === RESTART_COMMAND) {
+      if (gameCommand === GAME_COMMANDS.RETRY) {
         UserTryCount += 1;
         const bridgeGame = new BridgeGame();
         const resetMovingRoute = bridgeGame.retry(bridge);
         return this.readMoving(bridge, resetMovingRoute, UserTryCount);
       }
-      if (gameCommand === END_COMMAND) {
-        const GAME_FAIL = '실패';
-        OutputView.printResult(GAME_FAIL, UserTryCount, movingRoute);
+      if (gameCommand === GAME_COMMANDS.QUIT) {
+        OutputView.printResult(GAME_COMMANDS.QUIT, UserTryCount, movingRoute);
       }
     });
   },
