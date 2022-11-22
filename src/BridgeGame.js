@@ -1,9 +1,12 @@
+const { printMap } = require("./OutputView");
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   constructor() {
     this.bridge = null;
+    this.bridgeMap = { U: [], D: [] };
+    this.count = 0;
   }
 
   setBridge(bridge) {
