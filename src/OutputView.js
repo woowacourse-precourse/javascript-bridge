@@ -9,16 +9,20 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printMap(bridge) {
-    const upBridge = this.makeBridgeLine(bridge, 'U','O');
-    const downBridge = this.makeBridgeLine(bridge, 'D','O');
+    const{upBridge, downBridge} = this.makeBridge(bridge)
     Console.print(this.makeMap(upBridge))
     Console.print(this.makeMap(downBridge) + '\n')
+  },
+  makeBridge(bridge){
+    const upBridge = this.makeLine(bridge, 'U','O');
+    const downBridge = this.makeLine(bridge, 'D','O');
+    return {upBridge, downBridge}
   },
   makeMap(bridge){
     const printingBridge = `[ ${bridge.join().replace(/,/g," | ")} ]`
     return printingBridge;
   },
-  makeBridgeLine(bridge, direction, sign) {
+  makeLine(bridge, direction, sign) {
     const bridgeLine = bridge.map((block) => {
       if (block === direction) {
         return `${sign}`;
@@ -27,11 +31,10 @@ const OutputView = {
     });
     return bridgeLine;
   },
-  makeFailMap(bridge, round){
-    const slicedBridge = bridge.slice(0,round)
-    const upBridge = this.makeBridgeLine(slicedBridge, 'U','O');
-    const downBridge = this.makeBridgeLine(slicedBridge, 'D','O');
-    if(bridge[round-1]==='U'){
+
+  makeFailMap(bridge, direction){
+    const{upBridge, downBridge} = this.makeBridge(bridge)
+    if(direction==='U'){
       downBridge.push('X')
       upBridge.push(' ')
     }else{
@@ -40,8 +43,8 @@ const OutputView = {
     }
     return {upBridge, downBridge}
   },
-  printFailMap(round, bridge){
-    const {upBridge,downBridge} = this.makeFailMap(bridge, round)
+  printFailMap(bridge, direction){
+    const {upBridge,downBridge} = this.makeFailMap(bridge, direction)
     Console.print(this.makeMap(upBridge))
     Console.print(this.makeMap(downBridge) + '\n')
   },
@@ -51,15 +54,15 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(round,bridge) {
+  printResult(round, bridge) {
     Console.print('최종 게임 결과\n');
     this.printMap(bridge);
     Console.print('게임 성공 여부: 성공\n');
     Console.print(`총 시도한 횟수: ${round}`);
   },
-  printFailResult(round, bridge){
+  printFailResult(round, bridge, direction){
     Console.print('최종 게임 결과\n');
-    this.printFailMap(round, bridge);
+    this.printFailMap(bridge, direction);
     Console.print('게임 성공 여부: 실패\n');
     Console.print(`총 시도한 횟수: ${round}`);
   },

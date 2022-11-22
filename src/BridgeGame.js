@@ -28,7 +28,7 @@ class BridgeGame {
     if (this.#bridgeBoard.moveTo(direction)) {
       this.clearRound();
     }else{
-      this.faildRound();
+      this.faildRound(direction);
     }
   }
 
@@ -50,8 +50,9 @@ class BridgeGame {
     this.#bridgeController.moveFinalRound(this.#try,this.#bridgeBoard.getClearedBridge())
   }
 
-  faildRound(){
-    this.#bridgeController.moveFinalRound(this,this.#try,this.#bridgeBoard.getClearedBridge())
+  faildRound(direction){
+    this.#bridgeController.moveFailedRound(this.#try,this.#bridgeBoard.getClearedBridge(),direction)
+    this.#bridgeController.readGameCommand(this)
   }
 
   setGameCommand(command){

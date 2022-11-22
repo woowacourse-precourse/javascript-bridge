@@ -24,8 +24,11 @@ class BridgeController{
         OutputView.printResult(attempt, clearedbridge);
     }
 
-    moveFailedRound(bridgeGame,attempt, clearedbridge){
-        OutputView.printFailResult(attempt, clearedbridge);
+    moveFailedRound(attempt,clearedbridge,direction){
+        OutputView.printFailResult(attempt,clearedbridge,direction);
+        
+    }
+    readGameCommand(bridgeGame){
         InputView.readGameCommand(bridgeGame);
     }
 
