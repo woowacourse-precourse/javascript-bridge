@@ -1,5 +1,9 @@
-const BridgeGame = require("./BridgeGame");
-const { readBridgeSize, readGameCommand, readMoving } = require("./InputView");
+const BridgeGame = require("./controller/BridgeGame");
+const {
+  readBridgeSize,
+  readGameCommand,
+  readMoving,
+} = require("./view/InputView");
 const {
   printErrorMessage,
   printGameStart,
@@ -11,7 +15,7 @@ const {
   validateMoveInput,
   validateCommandInput,
 } = require("./Validation");
-const { LETTER, MESSAGE } = require("./constant");
+const { LETTER, MESSAGE } = require("./utils/Constant");
 const { Console } = require("@woowacourse/mission-utils");
 
 class App {

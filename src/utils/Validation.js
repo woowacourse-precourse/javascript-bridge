@@ -1,4 +1,4 @@
-const { LETTER, ERROR_MESSAGE, NUMBER_RANGE } = require("./constant");
+const { LETTER, ERROR_MESSAGE, NUMBER_RANGE } = require("../utils/Constant");
 
 const Validation = {
   validateBridgeNumber(number) {

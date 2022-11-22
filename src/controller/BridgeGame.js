@@ -1,6 +1,6 @@
-const BridgeMaker = require("./BridgeMaker");
-const { generate } = require("./BridgeRandomNumberGenerator");
-const { LETTER, NEW_LINE, BAR, BLANK } = require("./constant");
+const BridgeMaker = require("../utils/BridgeMaker");
+const { generate } = require("../utils/BridgeRandomNumberGenerator");
+const { LETTER, NEW_LINE, BAR, BLANK } = require("../utils/Constant");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -34,15 +34,22 @@ class BridgeGame {
   };
 
   getResult() {
-    const map = this.#drawMap();
+    const resultArray = this.#makeResultArray();
+    const map = this.#drawMap(resultArray);
     const isCorrect = this.#isCorrect();
     const isGameOver = this.#isGameOver();
 
     return { map, isCorrect, isGameOver, trialTime: this.#trialTime };
   }
 
-  #drawMap() {
-    const resultArray = this.#makeResultArray();
+  #makeResultArray() {
+    return this.#moves.map((move, ind) => [
+      move,
+      this.#bridge[ind] === move ? LETTER.correct : LETTER.wrong,
+    ]);
+  }
+
+  #drawMap(resultArray) {
     return [LETTER.up, LETTER.down]
       .map(
         (upOrDown) =>
@@ -62,13 +69,6 @@ class BridgeGame {
 
   #isGameOver() {
     return this.#bridge.length === this.#moves.length;
-  }
-
-  #makeResultArray() {
-    return this.#moves.map((move, ind) => [
-      move,
-      this.#bridge[ind] === move ? LETTER.correct : LETTER.wrong,
-    ]);
   }
 }
 
