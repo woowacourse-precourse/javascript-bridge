@@ -3,7 +3,6 @@ class Bridge {
 
   constructor(bridge) {
     this.#bridge = bridge;
-    console.log(this.#bridge);
   }
 
   matchMoveBridge(moving,step){
