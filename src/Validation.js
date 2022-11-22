@@ -36,7 +36,7 @@ class Validation{
             Console.print(ERROR.EMPTY)
             Console.close()
         }
-        if(!(input===SETTING.RETRY_COMMAND || SETTING.QUIT_COMMAND)){
+        if(!(input===SETTING.RETRY_COMMAND || input===SETTING.QUIT_COMMAND)){
             Console.print(ERROR.RETRY)
             Console.close()
         }
