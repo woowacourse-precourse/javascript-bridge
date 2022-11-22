@@ -12,7 +12,8 @@ const OutputView = {
   printMap(userInput, bridgeInfo) {
     const upside = this.generateUpside(userInput, bridgeInfo);
     const downside = this.generateDownside(userInput, bridgeInfo);
-    Print.BothBridge(upside, downside);
+    Console.print(`${upside.join('').trim()}\n`);
+    Console.print(`${downside.join('').trim()}\n`);
   },
 
   /**
@@ -21,15 +22,15 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(userInput, bridgeInfo, count) {
-    Print.ResultTitle();
+    Console.print('최종 게임 결과\n');
     this.printMap(userInput, bridgeInfo);
     if(userInput.length === bridgeInfo.length){
-      Print.GameResultIsWin();
+      Console.print(`게임 성공 여부: 성공\n`);
     }
     if(userInput.length !== bridgeInfo.length){
-      Print.GameResultIsDefeat();
+      Console.print(`게임 성공 여부: 실패\n`);
     }
-    Print.GameTryCount(count);
+    Console.print('총 시도한 횟수: ' + count);
     Console.close();
   },
   generateUpside(userInput, bridgeInfo) {

@@ -1,85 +1,87 @@
 const Print = require('./Print');
-const OutputView  = require('./OutputView');
+const OutputView = require('./OutputView');
 const InputView = require('./InputView');
 const BridgeGame = require('./BridgeGame');
-const { BridgeLengthInput, DirectionChoiceInput, RetryInput } = require('./Validator/Validator');
+const {
+  BridgeLengthInput,
+  DirectionChoiceInput,
+  RetryInput,
+} = require('./Validator/Validator');
 const { Console } = require('@woowacourse/mission-utils');
+
 class GameManager {
-    #bridgeGame
+  #bridgeGame;
 
+  constructor() {
+    this.#bridgeGame = new BridgeGame();
+  }
 
-    constructor() {
-        this.#bridgeGame = new BridgeGame();
+  startGame() {
+    this.setBridgeLength();
+    Console.print('다리 건너기 게임을 시작합니다.\n');
+  }
+
+  setBridgeLength() {
+    InputView.readBridgeSize(this.isValidLength.bind(this));
+  }
+
+  isValidLength(userInput) {
+    this.bridgeLengthInput = new BridgeLengthInput(userInput);
+    if (!this.bridgeLengthInput.check()) {
+      return this.setBridgeLength();
     }
+    return this.generateBridge(userInput);
+  }
 
-    startGame() {
-        this.setBridgeLength();
+  generateBridge(userInput) {
+    this.#bridgeGame.createBridge(userInput);
+    this.playRound();
+  }
+
+  playRound() {
+    InputView.readMoving(this.isValidDirection.bind(this));
+  }
+
+  isValidDirection(userInput) {
+    this.directionChoiceInput = new DirectionChoiceInput(userInput);
+    if (!this.directionChoiceInput.check()) {
+      return this.playRound();
     }
+    return this.moveBridge(userInput);
+  }
 
-    setBridgeLength() {
-        InputView.readBridgeSize(this.isValidLength.bind(this));
+  moveBridge(userInput) {
+    const [correctChoice, UserIsWinnner] = this.#bridgeGame.move(userInput);
+    const [thisRound, bridge] = this.#bridgeGame.getGameInfo();
+    OutputView.printMap(thisRound, bridge);
+    if (!correctChoice) return this.askRetry();
+    if (UserIsWinnner) return this.quitGame();
+    return this.playRound();
+  }
+
+  askRetry() {
+    InputView.readGameCommand(this.isValidCommand.bind(this));
+  }
+
+  isValidCommand(userInput) {
+    this.retryInput = new RetryInput(userInput);
+    if (!this.retryInput.check()) {
+      return this.askRetry();
     }
+    return this.Continue(userInput);
+  }
 
-    isValidLength(userInput) {
-        this.bridgeLengthInput = new BridgeLengthInput(userInput);
-        if (!this.bridgeLengthInput.check()) {
-            return this.setBridgeLength();
-        }
-        return this.generateBridge(userInput);
+  Continue(userCommand) {
+    if (this.#bridgeGame.retry(userCommand)) {
+      return this.playRound();
     }
+    return this.quitGame();
+  }
 
-    generateBridge(userInput) {
-        this.#bridgeGame.createBridge(userInput);
-        this.playRound();
-    }
-    
-    playRound() {
-        InputView.readMoving(this.isValidDirection.bind(this));
-    }
-
-    isValidDirection(userInput) {
-        this.directionChoiceInput = new DirectionChoiceInput(userInput);
-        if(!this.directionChoiceInput.check()){
-            return this.playRound();
-        }
-        return this.moveBridge(userInput);
-    }
-
-    moveBridge(userInput) {
-        const [correctChoice, UserIsWinnner] = this.#bridgeGame.move(userInput);
-        // const [thisRound, bridge] = this.#bridgeGame.getGameInfo();
-        // OutputView.printMap(thisRound, bridge);
-        if(!correctChoice) return this.askRetry();
-        if(UserIsWinnner) return this.quitGame();
-        return this.playRound();
-    };
-
-    askRetry() {
-        InputView.readGameCommand(this.isValidCommand.bind(this));
-    }
-
-    isValidCommand(userInput) {
-        this.retryInput = new RetryInput(userInput);
-        if(!this.retryInput.check()){
-            return this.askRetry();
-        }
-        return this.Continue(userInput);
-    }
-
-    Continue(userCommand) {
-        if(this.#bridgeGame.retry(userCommand)){
-            return this.playRound();
-        }
-        return this.quitGame();
-    }
-
-    quitGame() {
-        const [userchoice, bridge, tryCount] = this.#bridgeGame.getGameInfo();
-        OutputView.printResult(userchoice, bridge, tryCount);
-    }
-
-    
-
+  quitGame() {
+    const [userchoice, bridge, tryCount] = this.#bridgeGame.getGameInfo();
+    OutputView.printResult(userchoice, bridge, tryCount);
+  }
 }
 
 module.exports = GameManager;
