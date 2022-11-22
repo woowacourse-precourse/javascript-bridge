@@ -9,7 +9,6 @@ const OutputView = {
 
   printErrorMessage(error) {
     Console.print(error.message);
-    Console.close();
   },
 
   printMap(stepObj) {

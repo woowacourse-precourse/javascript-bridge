@@ -13,22 +13,20 @@ class App {
     InputView.readBridgeSize.bind(this)(this.createBridge);
   }
   createBridge(size) {
-    const isCleared = this.checkError(Validator.checkSizeInput, size);
-    if (isCleared) {
-      this.#game = new BridgeGame(size);
-      this.askMoving();
-    }
+    const isNormalInput = this.checkError(Validator.checkSizeInput, size);
+    if (!isNormalInput) return this.play();
+    this.#game = new BridgeGame(size);
+    this.askMoving();
   }
   askMoving() {
     InputView.readMoving.bind(this)(this.handleMoving);
   }
   handleMoving(direction) {
-    const isCleared = this.checkError(Validator.checkDirectionInput, direction);
-    if (isCleared) {
-      this.#game.move(direction);
-      OutputView.printMap(this.#game.stepObj);
-      this.checkStatus();
-    }
+    const isNormalInput = this.checkError(Validator.checkDirectionInput, direction);
+    if (!isNormalInput) return this.askMoving();
+    this.#game.move(direction);
+    OutputView.printMap(this.#game.stepObj);
+    this.checkStatus();
   }
   checkStatus() {
     if (this.#game.isCleared) return this.showGameResult();
@@ -39,11 +37,10 @@ class App {
     InputView.readGameCommand.bind(this)(this.handleGameCommand);
   }
   handleGameCommand(command) {
-    const isCleared = this.checkError(Validator.checkCommandInput, command);
-    if (isCleared) {
-      if (command === Values.RESTART) return this.restartGame();
-      return this.showGameResult();
-    }
+    const isNormalInput = this.checkError(Validator.checkCommandInput, command);
+    if (!isNormalInput) return this.askGameCommand();
+    if (command === Values.RESTART) return this.restartGame();
+    return this.showGameResult();
   }
   restartGame() {
     this.#game.retry();
