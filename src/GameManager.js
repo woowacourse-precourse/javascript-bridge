@@ -6,7 +6,6 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { MESSAGE, USER_ANSWER } = require('./const.js');
 
-
 class GameManager {
     #isSuccessArray
     #totalAttempt

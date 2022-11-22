@@ -1,11 +1,5 @@
 const { BRIDGE } = require('./const.js')
 
-/**
- * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
- * 프로퍼티 추가 금지
- * 파일 경로 변경 금지
- * 메소드의 시그니처(인자, 이름)와 return type 변경 금지
- */
 const BridgeMaker = {
   /**
    * @param {number} size 다리의 길이

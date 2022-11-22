@@ -1,12 +1,6 @@
 const {BRIDGE, MESSAGE} = require('./const');
 const {Console} = require("@woowacourse/mission-utils");
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- * 파일 경로 변경 가능
- * 메소드 이릅 변경 불가
- * 인자 추가/변경 가능
- * 값 출력을 위한 메서드 추가 가능
- */
+
 const OutputView = {
   displayMessage(message) {
     Console.print(message);
@@ -14,8 +8,8 @@ const OutputView = {
 
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {string[]} bridge 다리 모양
+   * @param {boolean[]} isSuccessArray 사용자의 입력과 다리 모양 일치 여부 배열
    */
   printMap(bridge, isSuccessArray) {
     const location = isSuccessArray.length;
@@ -23,6 +17,12 @@ const OutputView = {
     this.printBridgeLowwer(bridge, location, isSuccessArray[location-1]);
   },
 
+  /**
+   * 현재까지 이동한 다리의 윗부분을 정해진 형식에 맞춰 출력한다.
+   * @param {string[]} bridge 다리 모양
+   * @param {number} location 현재 사용자가 위치한 칸
+   * @param {boolean[]} isSuccessArray 사용자의 입력과 다리 모양 일치 여부 배열
+   */
   printBridgeUpper(bridge, location, isSuccess) {
     let upperMap = BRIDGE.LEFT_SIDE;
     upperMap += this.getBridgeUpperBody(bridge, location, isSuccess);
@@ -30,6 +30,12 @@ const OutputView = {
     Console.print(upperMap);
   },
 
+  /**
+   * @param {string[]} bridge 다리 모양
+   * @param {number} location 현재 사용자가 위치한 칸
+   * @param {boolean[]} isSuccessArray 사용자의 입력과 다리 모양 일치 여부 배열
+   * @return {string} 현재까지 이동한 다리의 윗부분의 본체 부분 문자열
+   */
   getBridgeUpperBody(bridge, location, isSuccess) {
     let upperBody = ""
     for (let index = 0; index < location-1; index++) {
@@ -43,13 +49,24 @@ const OutputView = {
     return upperBody;
   },
 
+  /**
+   * 현재까지 이동한 다리의 아래부분을 정해진 형식에 맞춰 출력한다.
+   * @param {string[]} bridge 다리 모양
+   * @param {number} location 현재 사용자가 위치한 칸
+   * @param {boolean[]} isSuccessArray 사용자의 입력과 다리 모양 일치 여부 배열
+   */
   printBridgeLowwer(bridge, location, isSuccess) {
     let lowwerMap = BRIDGE.LEFT_SIDE;
     lowwerMap += this.getBridgeLowwerBody(bridge, location, isSuccess);
     lowwerMap += BRIDGE.RIGHT_SIDE;
     Console.print(lowwerMap+'\n');
   },
-
+  /**
+   * @param {string[]} bridge 다리 모양
+   * @param {number} location 현재 사용자가 위치한 칸
+   * @param {boolean[]} isSuccessArray 사용자의 입력과 다리 모양 일치 여부 배열
+   * @return {string} 현재까지 이동한 다리의 아래부분의 본체 부분 문자열
+   */
   getBridgeLowwerBody(bridge, location, isSuccess) {
     let lowwerBody = "";
     for (let index = 0; index < location-1; index++) {
@@ -64,9 +81,9 @@ const OutputView = {
   },
 
   /**
-   * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-   * <p>
-   * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
+   * @param {string[]} bridge 다리 모양
+   * @param {boolean[]} isSuccessArray 사용자의 입력과 다리 모양 일치 여부 배열
+   * @param {number} totalAttempt 사용자가 총 시도한 횟수
    */
   printResult(bridge, isSuccessArray, totalAttempt) {
     const location = isSuccessArray.length;
@@ -77,14 +94,18 @@ const OutputView = {
     this.printTotalAttempt(totalAttempt);
     Console.close();
   },
-
+  /**
+   * @param {boolean} isWin 사용자의 게임 성공/실패 여부
+   */
   printIsWin(isWin) {
     let isWinString = MESSAGE.IS_WIN;
     if( isWin) isWinString += MESSAGE.WIN;
     if(!isWin) isWinString += MESSAGE.LOSS;
     Console.print(isWinString);
   },
-
+  /**
+   * @param {number} totalAttempt 사용자가 총 시도한 횟수
+   */
   printTotalAttempt(totalAttempt) {
     let totalAttemptString = MESSAGE.ATTEMPT_TIMES + totalAttempt;
     Console.print(totalAttemptString);
