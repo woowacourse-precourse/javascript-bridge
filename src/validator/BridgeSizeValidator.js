@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE } = require('../util/Constant');
+const { ERROR_MESSAGE, BRIDGE_SIZE_VALUES } = require('../util/Constant');
 class BridgeSizeValidator {
   constructor(bridgeSize) {
     this.validate(bridgeSize);
@@ -8,11 +8,11 @@ class BridgeSizeValidator {
     if (this.isNull(bridgeSize)) throw new Error(ERROR_MESSAGE.IS_EMPTY);
     if (!this.isNumber(bridgeSize)) throw new Error(ERROR_MESSAGE.BRIDGE_SIZE_NOT_NUMBER);
     if (this.isNotRightRange(bridgeSize)) throw new Error(ERROR_MESSAGE.BRIDGE_SIZE_NOT_RIGHT_RANGE);
-    return this.toInteger(bridgeSize);
+    return bridgeSize;
   }
 
   toInteger(bridgeSize) {
-    return parseInt(bridgeSize, 10);
+    return parseInt(bridgeSize);
   }
 
   isNull(bridgeSize) {
@@ -25,7 +25,7 @@ class BridgeSizeValidator {
   }
 
   isNotRightRange(bridgeSize) {
-    return this.toInteger(bridgeSize) < 3 || this.toInteger(bridgeSize) > 20;
+    return this.toInteger(bridgeSize) < BRIDGE_SIZE_VALUES.BRIDGE_SIZE_MIN || this.toInteger(bridgeSize) > BRIDGE_SIZE_VALUES.BRIDGE_SIZE_MAX;
   }
 }
 module.exports = BridgeSizeValidator;
