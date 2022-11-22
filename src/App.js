@@ -71,6 +71,11 @@ class App {
   endGame(){
     Console.print(RESULT.GAME_RESULT_PRINT)
     OutputView.printMap(this.#gameStatus)
+    Console.print(RESULT.GAME_RESULT_SUCCESS)
+    if(this.#gameStatus.wrongFlag) Console.print(RESULT.GAME_FAIL)
+    if(!this.#gameStatus.wrongFlag) Console.print(RESULT.GAME_SUCCESS)
+    Console.print(RESULT.GAME_COUNT)
+    Console.print(this.#gameStatus.tryCount)
   }  
 
 
