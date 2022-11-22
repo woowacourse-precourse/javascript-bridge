@@ -8,13 +8,13 @@ const GAME_CONDITION = Object.freeze({
     1: "U",
   },
   BRIDGE_SEPERATOR: " | ",
-  BRIDGE_OPEN_BRACKET: "[",
-  BRIDGE_CLOSE_BRACKET: "]",
+  OPEN_BRACKET: "[",
+  CLOSE_BRACKET: "]",
   CAN_MOVE: "O",
   CAN_NOT_MOVE: "X",
-  NONE_MOVE: " ",
-  BRIDGE_UP_INDEX: 0,
-  BRIDGE_DOWN_INDEX: 1,
+  BLANK_MOVE: " ",
+  UP_INDEX: 0,
+  DOWN_INDEX: 1,
   STATUS_SUCCESS: true,
   STATUS_FAIL: false,
   RESTART_GAME: "R",
@@ -23,18 +23,18 @@ const GAME_CONDITION = Object.freeze({
 
 const GAME_MESSAGE = Object.freeze({
   START_GAME: "다리 건너기 게임을 시작합니다.",
-  INPUT_BRIDGE_LENGTH: "다리의 길이를 입력해주세요.",
-  INPUT_BRIDGE_SPACE_TO_MOVE: "이동할 칸을 선택해주세요. (위: U, 아래: D)",
+  INPUT_BRIDGE_LENGTH: "다리의 길이를 입력해주세요.\n",
+  INPUT_BRIDGE_SPACE_TO_MOVE: "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
   RESTART_OR_QUIT:
-    "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)",
+    "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
 });
 
 const GAME_RESULT = Object.freeze({
-  RESULT_BRIDGE: "최종 게임 결과",
-  RESULT_GAME_STATUS: (status) => `게임 성공 여부: ${status}`,
-  RESULT_GAME_STATUS_SUCCESS: "성공",
-  RESULT_GAME_STATUS_FAIL: "실패",
-  RESULT_TOTAL_ATTEMPTS: (attempts) => `총 시도한 횟수: ${attempts}`,
+  RESULT_MESSAGE: "최종 게임 결과",
+  GAME_STATUS: (status) => `게임 성공 여부: ${status}`,
+  STATUS_SUCCESS: "성공",
+  STATUS_FAIL: "실패",
+  TOTAL_ATTEMPTS: (attempts) => `\n총 시도한 횟수: ${attempts}`,
 });
 
 const ERROR_MESSAGE = Object.freeze({
