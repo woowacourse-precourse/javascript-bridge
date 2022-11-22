@@ -7,21 +7,13 @@ const { ANNOUNCEMENT_MESSAGE, BRIDGE_DETAIL } = require("./constant/Constant");
 
 function makePrint(up, down, printArr) {
   printArr.forEach((objectValue, index) => {
-    if (index !== 0) {
-      up += "| ";
-      down += "| ";
-    }
+    if (index !== 0) (up += "| "), (down += "| ");
     if (objectValue.userCommand === BRIDGE_DETAIL.UP.COMMAND) {
-      up += `${objectValue.compareResultToPrint} `;
-      down += "  ";
+      (up += `${objectValue.compareResultToPrint} `), (down += "  ");
     } else if (objectValue.userCommand === BRIDGE_DETAIL.DOWN.COMMAND) {
-      down += `${objectValue.compareResultToPrint} `;
-      up += "  ";
+      (down += `${objectValue.compareResultToPrint} `), (up += "  ");
     }
-    if (index === printArr.length - 1) {
-      up += "]";
-      down += "]";
-    }
+    if (index === printArr.length - 1) (up += "]"), (down += "]");
   });
   return { up, down };
 }
