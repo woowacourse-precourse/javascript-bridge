@@ -39,7 +39,6 @@ const InputView = {
         checkMovingInfo(movingInfo);
 
         const tf = bridgeGame.move(movingInfo);
-      
         printMap(bridgeGame);
         
         if (bridgeGame.judgeEnd(bridgeGame, tf)) printResult(bridgeGame, RESULT_ENGLISH.SUCCESS);
