@@ -26,13 +26,6 @@ class App {
     );
     return new BridgeGame(bridge);
   }
-
-  stopProgram() {
-    Console.close();
-  }
 }
 
 module.exports = App;
-
-app = new App();
-app.play();

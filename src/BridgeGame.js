@@ -15,7 +15,6 @@ class BridgeGame {
   }
 
   gamePlay() {
-    console.log(this.bridge);
     this.move();
   }
 
@@ -26,6 +25,10 @@ class BridgeGame {
    */
   move() {
     InputView.readMoving((nextStep) => {
+      if (!nextStep) {
+        this.move();
+        return;
+      }
       this.nowstep += 1;
       this.userMove.push(nextStep);
       OutputView.printMap(this.bridge, this.nowstep, this.isFail());
