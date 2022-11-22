@@ -1,8 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { Console, Random } = MissionUtils;
-
+const { Console } = MissionUtils;
 const Message = require("./constants/messages");
-
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */

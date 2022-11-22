@@ -1,6 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const { Console, Random } = MissionUtils;
-
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const Validation = require("./Validation");
@@ -35,7 +32,7 @@ class App {
   }
 
   compareStep(input) {
-    const nowStepResult = this.bridgeGame.comparBridge(input);
+    const result = this.bridgeGame.comparBridge(input);
     if (result) {
       this.bridgeGame.addCorrect();
       this.bridgeGame.addSeperate();
