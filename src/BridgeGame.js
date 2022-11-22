@@ -1,4 +1,7 @@
-const OutputView = require('./OutputView');
+const MissionUtils = require('@woowacourse/mission-utils');
+const BridgeMaker = require('./BridgeMaker');
+const exceptionHandler = require('./ExceptionHandle');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -7,6 +10,8 @@ class BridgeGame {
     #bridge;
     #position; // 현재 index.
     #tryCount;
+    #length;
+    #OutputView;
 
     /**
      * 필드를 새로 생성한 다리 정보로 업데이트한다.
@@ -16,6 +21,7 @@ class BridgeGame {
         this.#bridge = newBridge;
         this.#position = 0;
         this.#tryCount = 1;
+        this.#length = newBridge.length;
     }
 
     /** getter */
@@ -26,6 +32,15 @@ class BridgeGame {
     getTryCount() {
         return this.#tryCount;
     }
+
+    getLength() {
+        return this.#length;
+    }
+
+    getBridge() {
+        return this.#bridge;
+    }
+
     /**
      * 현재 입력한 방향의 다리를 건널 수 있는지에 대한 정보를 리턴한다.
      * @param {string} choice
@@ -42,12 +57,10 @@ class BridgeGame {
      * <p>
      * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      * @param {string} choice
-     * @return {boolean} 건널 수 있는지(true), 건널 수 없는지(false) 리턴한다.
      */
     move(choice) {
         const cross = this.isCrossable(choice);
         this.#position += 1;
-        OutputView.printMap(this.#bridge, this.#position, choice);
         return cross;
     }
 

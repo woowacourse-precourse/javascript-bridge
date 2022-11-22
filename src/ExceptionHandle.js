@@ -1,5 +1,5 @@
 // 예외처리 메소드 모음
-const ExceptionHandle = {
+const exceptionHandler = {
     /**
      * @param {number}
      * @return {boolean} valid 여부를 리턴함.
@@ -36,4 +36,4 @@ const ExceptionHandle = {
     },
 };
 
-module.exports = ExceptionHandle;
+module.exports = exceptionHandler;
