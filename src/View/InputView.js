@@ -7,7 +7,7 @@ const OutputView = require("./OutputView.js");
  */
 const InputView = {
   /**
-   * @return {number} 다리 길이를 number형식으로 리턴.
+   * 사용자가 다리의 길이를 입력받는다.
    */
   readBridgeSize(generateBridge) {
     Console.readLine(REQUEST_MESSAGE.BRIDGE_SIZE, (length) => {
@@ -24,13 +24,13 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(move) {
-    Console.readLine(REQUEST_MESSAGE.SELECT_MOVE, (cmd) => {
+    Console.readLine(REQUEST_MESSAGE.SELECT_MOVE, (moveCmd) => {
       try {
-        Validator.checkValidMove(cmd);
-        move(cmd);
+        Validator.checkValidMove(moveCmd);
+        move(moveCmd);
       } catch (error) {
         OutputView.printErrorMessage(error);
-        this.readMoving(move);
+        this.readMoving(moveCmd);
       }
     });
   },
@@ -39,10 +39,10 @@ const InputView = {
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(restartOrEnd) {
-    Console.readLine(REQUEST_MESSAGE.RESTART, (cmd) => {
+    Console.readLine(REQUEST_MESSAGE.RESTART, (gameCmd) => {
       try {
-        Validator.checkValidRestart(cmd);
-        restartOrEnd(cmd);
+        Validator.checkValidRestart(gameCmd);
+        restartOrEnd(gameCmd);
       } catch (error) {
         OutputView.printErrorMessage(error);
         this.readGameCommand(restartOrEnd);
