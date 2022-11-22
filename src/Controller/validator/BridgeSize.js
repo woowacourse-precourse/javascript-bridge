@@ -7,7 +7,7 @@ class BridgeSize {
   #input;
 
   constructor(input) {
-    this.#input = +input;
+    this.#input = input;
   }
 
   checkInput() {
