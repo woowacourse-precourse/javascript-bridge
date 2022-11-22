@@ -94,10 +94,8 @@ class BridgeGameContoller {
     }
 
     getSuccess(){
-        if(this.getGame(Const.KEY.BRIDGE)[this.getGame(Const.KEY.BRIDGE).length-1] === this.getGame(Const.KEY.LAST)) {
-            return true;
-        }
-        return false;
+        return this.getGame(Const.KEY.BRIDGE)[this.getGame(Const.KEY.BRIDGE).length - 1] === this.getGame(Const.KEY.LAST);
+
     }
 
     getMap(){
