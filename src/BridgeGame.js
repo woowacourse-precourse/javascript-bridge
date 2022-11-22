@@ -50,6 +50,10 @@ class BridgeGame {
     this.curr = 0;
     this.tryCnt += 1;
   }
+  
+  ifFinish(){
+    return (this.realBridge.length <= this.curr);
+  }
 }
 
 module.exports = BridgeGame;
