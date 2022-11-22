@@ -41,17 +41,17 @@ class Controller {
 
   outputResultPrint () {
     outputView.printResult(
-        true,
-        this.getUpDownTotalPrintList(),
-        this.#bridgeGame.getTryCount(),
-      );
+      true,
+      this.getUpDownTotalPrintList(),
+      this.#bridgeGame.getTryCount(),
+    );
   }
 
   moveBrige (controller) {
     if (this.#bridgeGame.getMoveIndex() !== this.#bridgeGame.getBridge().length) {
       inputView.readMoving(this.handleMoveBridge.bind(this));
     } else {
-        this.outputResultPrint();
+      this.outputResultPrint();
     }
   }
 
@@ -108,12 +108,13 @@ class Controller {
     inputView.readGameCommand(this.handleAskRetry.bind(this));
   }
 
-  inputRetry (string) {
+  inputRetryOrQuit (string) {
     if (string === 'R') {
       this.#bridgeGame.setList();
       this.moveBrige(this);
       this.#bridgeGame.retry();
     }
+    this.inputQuit(string);
   }
 
   inputQuit (string) {
@@ -127,8 +128,7 @@ class Controller {
   handleAskRetry (string) {
     try {
       InputValidator.isRestartQuit(string);
-      this.inputRetry(string);
-      this.inputQuit(string);
+      this.inputRetryOrQuit(string);
     } catch (error) {
       outputView.printError(error);
       this.askRetryGame();
