@@ -1,4 +1,4 @@
-const {UP_MOVING, DOWN_MOVING} = require("./GameCommands");
+const { GAME_COMMAND } = require("../utils/Constant");
 
 const BridgeMaker = {
   /**
@@ -12,8 +12,8 @@ const BridgeMaker = {
     for (let step = 0; step < bridgeSize; step++) {
       const randomNumber = Number(generateRandomNumber());
       randomNumber === 0
-        ? bridgeStyle.push(DOWN_MOVING)
-        : bridgeStyle.push(UP_MOVING);
+        ? bridgeStyle.push(GAME_COMMAND.DOWN)
+        : bridgeStyle.push(GAME_COMMAND.UP);
     }
 
     return bridgeStyle;

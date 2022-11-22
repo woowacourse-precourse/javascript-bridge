@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const ValidCheck = require("./ValidCheck");
-const { VALID_CHECK_DO } = require("./GameCommands");
+const ValidCheck = require("../utils/ValidCheck");
+const { INPUT_MESSAGE, VALID_FLAG } = require("../utils/Constant");
 
 const InputView = {
   /**
@@ -9,21 +9,22 @@ const InputView = {
    */
   readBridgeSize() {
     let bridgeSize = undefined;
-    let flagValid = VALID_CHECK_DO; // 입력을 받는 플래그
+    let flagValid = VALID_FLAG.DO; // 입력을 받는 플래그
 
-    while (flagValid === VALID_CHECK_DO) {
+    while (flagValid === VALID_FLAG.DO) {
       bridgeSize = InputView.inputSize();
       flagValid = ValidCheck.validateBridgeSize(bridgeSize);
       ValidCheck.raiseError(flagValid);
     }
 
-    return Number(bridgeSize);
+    return bridgeSize;
   },
 
   inputSize() {
     let bridgeSize = undefined;
 
-    MissionUtils.Console.readLine("다리의 길이를 입력해주세요. \n >",
+    MissionUtils.Console.readLine(
+      INPUT_MESSAGE.BRIDGE_SIZE,
       answer => bridgeSize = answer
     );
 
@@ -35,9 +36,9 @@ const InputView = {
    */
   readMoving() {
     let moving = undefined;
-    let flagValid = VALID_CHECK_DO; // 입력을 받는 플래그
+    let flagValid = VALID_FLAG.DO; // 입력을 받는 플래그
 
-    while (flagValid === VALID_CHECK_DO) {
+    while (flagValid === VALID_FLAG.DO) {
       moving = InputView.inputMoving();
       flagValid = ValidCheck.validateMoving(moving);
       ValidCheck.raiseError(flagValid);
@@ -50,7 +51,7 @@ const InputView = {
     let moving = undefined;
 
     MissionUtils.Console.readLine(
-      "이동할 칸을 선택해주세요 (위: U, 아래: D)\n >",
+      INPUT_MESSAGE.MOVING,
       answer => moving = answer
     )
 
@@ -62,9 +63,9 @@ const InputView = {
    */
   readGameCommand() {
     let readGameCommand = undefined;
-    let flagValid = VALID_CHECK_DO; // 입력을 받는 플래그
+    let flagValid = VALID_FLAG.DO; // 입력을 받는 플래그
 
-    while (flagValid === VALID_CHECK_DO) {
+    while (flagValid === VALID_FLAG.DO) {
       readGameCommand = InputView.inputGameCommand();
       flagValid = ValidCheck.validateGameCommand(readGameCommand);
       ValidCheck.raiseError(flagValid);
@@ -77,7 +78,7 @@ const InputView = {
     let readGameCommand = undefined;
     
     MissionUtils.Console.readLine(
-      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n >",
+      INPUT_MESSAGE.RESTART,
       answer => readGameCommand = answer
     );
 

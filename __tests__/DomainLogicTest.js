@@ -1,14 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const App = require("../src/App");
-const ValidCheck = require("../src/ValidCheck");
-const BridgeMaker = require("../src/BridgeMaker");
-const BridgeGame = require("../src/BridgeGame");
-const {
-  VALID_CHECK_ERROR,
-  VALID_CHECK_PASS,
-  VALID_CHECK_DO,
-} = require("../src/GameCommands");
+const BridgeMaker = require("../src/model/BridgeMaker");
+const BridgeGame = require("../src/model/BridgeGame");
+const ValidCheck = require("../src/utils/ValidCheck");
+const { VALID_FLAG } = require("../src/utils/Constant");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -45,7 +41,7 @@ const expectLogContains = (received, logs) => {
 describe("도메인 로직 단위 테스트", () => {
   test("사용자가 입력한 다리 길이가 올바른 값인지 검사한다.", () => {
     const bridgeSizes = [10, 1000, undefined];
-    const answerFlags = [VALID_CHECK_PASS, VALID_CHECK_DO, VALID_CHECK_ERROR];
+    const answerFlags = [VALID_FLAG.PASS, VALID_FLAG.DO, VALID_FLAG.ERROR];
 
     answerFlags.forEach((flag, index) => {
       expect(ValidCheck.validateBridgeSize(bridgeSizes[index])).toEqual(flag);
@@ -64,7 +60,7 @@ describe("도메인 로직 단위 테스트", () => {
 
   test("사용자가 입력한 이동 커맨드가 올바른 값인지 검사한다.", () => {
     const commands = ["U", "a", undefined];
-    const answerFlags = [VALID_CHECK_PASS, VALID_CHECK_DO, VALID_CHECK_ERROR];
+    const answerFlags = [VALID_FLAG.PASS, VALID_FLAG.DO, VALID_FLAG.ERROR];
 
     answerFlags.forEach((flag, index) => {
       expect(ValidCheck.validateMoving(commands[index])).toEqual(flag);
@@ -86,7 +82,7 @@ describe("도메인 로직 단위 테스트", () => {
 
   test("오답을 선택하여 재시작 시, 사용자의 재시작 커맨드가 올바른 값인지 검사한다.", () => {
     const commands = ["R", "Q", "U", undefined];
-    const answerFlags = [VALID_CHECK_PASS, VALID_CHECK_PASS, VALID_CHECK_DO, VALID_CHECK_ERROR];
+    const answerFlags = [VALID_FLAG.PASS, VALID_FLAG.PASS, VALID_FLAG.DO, VALID_FLAG.ERROR];
 
     answerFlags.forEach((answer, index) => {
       const flag = ValidCheck.validateGameCommand(commands[index]);

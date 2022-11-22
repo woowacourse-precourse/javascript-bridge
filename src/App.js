@@ -1,6 +1,6 @@
-const BridgeGame = require("./BridgeGame");
-const InputView = require("./InputView");
-const OutputView = require("./OutputView");
+const BridgeGame = require("./model/BridgeGame");
+const InputView = require("./view/InputView");
+const OutputView = require("./view/OutputView");
 
 class App {
   play() {

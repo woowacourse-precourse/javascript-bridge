@@ -1,16 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const { UP_MOVING,
-  DOWN_MOVING, 
-  OPEN_PARENTHESIS,
-  CLOSE_PARENTHESIS,
-  MIDDLE_PARENTHESIS,
-  COLLECT_SELECT_CASE,
-  WRONG_SELECT_CASE,
-  NOT_SELECT_CASE,
-  SUCCESS_TERMINATION,
-  FAIL_TERMINAITION
-} = require("./GameCommands");
+const { BRIDGE_ELEMENT, OUTPUT_MESSAGE, GAME_COMMAND } = require("../utils/Constant");
 
 const OutputView = {
   /**
@@ -26,8 +16,8 @@ const OutputView = {
   },
 
   drawBridge(bridge, userMovings) {
-    let upperBridge = OPEN_PARENTHESIS;
-    let lowerBridge = OPEN_PARENTHESIS;
+    let upperBridge = BRIDGE_ELEMENT.OPEN;
+    let lowerBridge = BRIDGE_ELEMENT.OPEN;
 
     for (let step = 0; step < userMovings.length; step++) {
       const [upperBlock, lowerBlock] = this.drawBridgeBlock(step, bridge, userMovings);
@@ -35,7 +25,7 @@ const OutputView = {
       lowerBridge += lowerBlock;
     }
 
-    return [upperBridge + CLOSE_PARENTHESIS, lowerBridge + CLOSE_PARENTHESIS];
+    return [upperBridge + BRIDGE_ELEMENT.CLOSE, lowerBridge + BRIDGE_ELEMENT.CLOSE];
   },
 
   drawBridgeBlock(step, bridge, userMovings) {
@@ -43,31 +33,31 @@ const OutputView = {
     let lowerBlock = this.decideLowerBlock(bridge[step], userMovings[step]);
 
     if (step !== userMovings.length - 1) {
-      upperBlock += MIDDLE_PARENTHESIS;
-      lowerBlock += MIDDLE_PARENTHESIS;
+      upperBlock += BRIDGE_ELEMENT.MIDDLE;
+      lowerBlock += BRIDGE_ELEMENT.MIDDLE;
     }
 
     return [upperBlock, lowerBlock];
   },
 
   decideUpperBlock(bridgeBlock, userBlock) {
-    if (userBlock !== UP_MOVING) {
-      return NOT_SELECT_CASE;
+    if (userBlock !== GAME_COMMAND.UP) {
+      return BRIDGE_ELEMENT.EMPTY;
     }
     if (userBlock !== bridgeBlock) {
-      return WRONG_SELECT_CASE;
+      return BRIDGE_ELEMENT.WRONG;
     }
-    return COLLECT_SELECT_CASE;
+    return BRIDGE_ELEMENT.COLLECT;
   },
 
   decideLowerBlock(bridgeBlock, userBlock) {
-    if (userBlock !== DOWN_MOVING) {
-      return NOT_SELECT_CASE;
+    if (userBlock !== GAME_COMMAND.DOWN) {
+      return BRIDGE_ELEMENT.EMPTY;
     }
     if (userBlock !== bridgeBlock) {
-      return WRONG_SELECT_CASE;
+      return BRIDGE_ELEMENT.WRONG;
     }
-    return COLLECT_SELECT_CASE;
+    return BRIDGE_ELEMENT.COLLECT;
   },
 
   /**
@@ -79,10 +69,10 @@ const OutputView = {
     if (tryCount <= 0) { // bridgeSize = undefined, 게임 실행이 되지 않은 경우 
       return;
     } 
-    MissionUtils.Console.print(`최종 게임 결과`);
+    MissionUtils.Console.print(OUTPUT_MESSAGE.END);
     this.printMap(bridgeGame);
-    MissionUtils.Console.print(`게임 성공 여부: ${this.checkSuccess(bridgeGame)}\n`);
-    MissionUtils.Console.print(`총 시도한 횟수: ${tryCount}`);
+    MissionUtils.Console.print(OUTPUT_MESSAGE.RESULT + this.checkSuccess(bridgeGame));
+    MissionUtils.Console.print(OUTPUT_MESSAGE.TRY + tryCount);
   },
 
   checkSuccess(bridgeGame) {
@@ -90,8 +80,8 @@ const OutputView = {
     const userString = bridgeGame.getUserMovings().join("");
 
     return bridgeString === userString
-      ? SUCCESS_TERMINATION
-      : FAIL_TERMINAITION;
+      ? OUTPUT_MESSAGE.SUCCESS
+      : OUTPUT_MESSAGE.FAIL;
   },
 };
 

@@ -1,14 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const {
-  VALID_CHECK_DO,
-  VALID_CHECK_ERROR,
-  VALID_CHECK_PASS,
-  UP_MOVING,
-  DOWN_MOVING,
-  QUIT_COMMAND,
-  RESTART_COMMAND
-} = require("./GameCommands");
+const { VALID_FLAG, GAME_COMMAND, ERROR_MESSAGE } = require("./Constant");
 
 const ValidCheck = {
   /**
@@ -16,14 +8,14 @@ const ValidCheck = {
    */
   validateBridgeSize(bridgeSize) {
     if (bridgeSize === undefined) {
-      return VALID_CHECK_ERROR;
+      return VALID_FLAG.ERROR;
     }
 
     if (3 <= Number(bridgeSize) && 20 >= Number(bridgeSize)) {
-      return VALID_CHECK_PASS;
+      return VALID_FLAG.PASS;
     }
 
-    return VALID_CHECK_DO; // 실패 케이스, 재입력 수행
+    return VALID_FLAG.DO; // 실패 케이스, 재입력 수행
   },
 
   /**
@@ -31,14 +23,14 @@ const ValidCheck = {
    */
   validateMoving(moving) {
     if (moving === undefined) {
-      return VALID_CHECK_ERROR;
+      return VALID_FLAG.ERROR;
     }
 
-    if (moving === UP_MOVING || moving === DOWN_MOVING) {
-      return VALID_CHECK_PASS;
+    if (moving === GAME_COMMAND.UP || moving === GAME_COMMAND.DOWN) {
+      return VALID_FLAG.PASS;
     }
 
-    return VALID_CHECK_DO; // 실패 케이스, 재입력 수행
+    return VALID_FLAG.DO; // 실패 케이스, 재입력 수행
   },
 
   /**
@@ -46,14 +38,14 @@ const ValidCheck = {
    */
   validateGameCommand(command) {
     if (command === undefined) {
-      return VALID_CHECK_ERROR;
+      return VALID_FLAG.ERROR;
     }
     
-    if (command === QUIT_COMMAND || command === RESTART_COMMAND) {
-      return VALID_CHECK_PASS;
+    if (command === GAME_COMMAND.QUIT || command === GAME_COMMAND.RESTART) {
+      return VALID_FLAG.PASS;
     }
 
-    return VALID_CHECK_DO; // 실패 케이스, 재입력 수행
+    return VALID_FLAG.DO; // 실패 케이스, 재입력 수행
   },
 
   /**
@@ -61,9 +53,9 @@ const ValidCheck = {
    */
   raiseError(flagValid) {
     try {
-      if (flagValid === VALID_CHECK_DO) {
-        throw `[ERROR] 유효한 값이 아닙니다. 재입력해주세요.`;
-      } else if (flagValid === VALID_CHECK_ERROR){
+      if (flagValid === VALID_FLAG.DO) {
+        throw ERROR_MESSAGE.NOT_VALID;
+      } else if (flagValid === VALID_FLAG.ERROR){
         throw `[ERROR] 입력 값이 유효하지 않아 게임이 실행되지 않았습니다.`;
       }
     } catch (error) {
