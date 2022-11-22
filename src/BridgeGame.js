@@ -1,11 +1,12 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
+const { makeMapObj, makeMap } = require("./Util/BridgeGame.util");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  #count = 0;
+  #count = 1;
   #input = [];
   #bridge;
 
@@ -30,9 +31,7 @@ class BridgeGame {
    */
   retry() {
     this.increaseCount();
-    while (this.#input.length) {
-      this.popInput();
-    }
+    this.#input = [];
   }
 
   setBridge(num) {
