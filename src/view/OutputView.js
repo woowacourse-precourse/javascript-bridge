@@ -24,11 +24,11 @@ const OutputView = {
   },
 
   getUpperMap(moveTrace) {
-    return moveTrace.map(trace => this.convertToMap(MOVING.UP, trace));
+    return moveTrace.map((trace) => this.convertToMap(MOVING.UP, trace));
   },
 
   getLowerMap(moveTrace) {
-    return moveTrace.map(trace => this.convertToMap(MOVING.DOWN, trace));
+    return moveTrace.map((trace) => this.convertToMap(MOVING.DOWN, trace));
   },
 
   convertToMap(targetMoving, { moving, moveSuccess }) {
@@ -38,9 +38,8 @@ const OutputView = {
 
     if (moveSuccess) {
       return MOVING_RESULT.SUCCESS_MARK;
-    } else {
-      return MOVING_RESULT.FAIL_MARK;
     }
+    return MOVING_RESULT.FAIL_MARK;
   },
 
   /**

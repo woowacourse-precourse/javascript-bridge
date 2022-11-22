@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const OutputView = require('../view/OutputView');
+const OutputView = require('./OutputView');
 const { MESSAGE } = require('../utils/constants');
 const { Size, Moving, GameCommand } = require('../Commands');
 /**
@@ -12,7 +12,7 @@ const InputView = {
    * @param {(input: string) => void} handler
    */
   read(message, handler) {
-    Console.readLine(message, input => {
+    Console.readLine(message, (input) => {
       try {
         handler(input);
       } catch (error) {
@@ -27,7 +27,7 @@ const InputView = {
    * @param {(size: Size) => void} handleSize
    */
   readBridgeSize(handleSize) {
-    InputView.read(MESSAGE.READ_BRIDGE_SIZE, size => {
+    InputView.read(MESSAGE.READ_BRIDGE_SIZE, (size) => {
       handleSize(new Size(size));
     });
   },
@@ -37,7 +37,7 @@ const InputView = {
    * @param {(moving: Moving) => void} handleMoving
    */
   readMoving(handleMoving) {
-    InputView.read(MESSAGE.READ_MOVING, moving => {
+    InputView.read(MESSAGE.READ_MOVING, (moving) => {
       handleMoving(new Moving(moving));
     });
   },
@@ -47,7 +47,7 @@ const InputView = {
    * @param {(gameCommand: GameCommand) => void} handleGameCommand
    */
   readGameCommand(handleGameCommand) {
-    InputView.read(MESSAGE.READ_GAME_COMMAND, gameCommand => {
+    InputView.read(MESSAGE.READ_GAME_COMMAND, (gameCommand) => {
       handleGameCommand(new GameCommand(gameCommand));
     });
   },

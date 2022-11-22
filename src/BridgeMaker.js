@@ -13,7 +13,7 @@ const BridgeMaker = {
     return new Array(size)
       .fill(0)
       .map(() => generateRandomNumber())
-      .map(number => (+number === 1 ? MOVING.UP : MOVING.DOWN));
+      .map((number) => (+number === 1 ? MOVING.UP : MOVING.DOWN));
   },
 };
 
