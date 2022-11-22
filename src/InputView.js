@@ -33,7 +33,7 @@ const InputView = {
       bridgeGame.move(space,bridge);
       OutputView.printMap(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList());
 
-      if(bridgeGame.isWrong(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList())) return this.readGameCommand();
+      if(bridgeGame.isWrong(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList())) return this.readGameCommand(bridge,bridgeGame);
       if(bridgeGame.getCount() === bridge.getBridge().length) return OutputView.printResult("성공", bridgeGame);
 
       return this.readMoving(bridge,bridgeGame);
@@ -43,9 +43,15 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {
+  readGameCommand(bridge,bridgeGame) {
     Console.readLine(COMMAND.RESTART, (restart) => {
-      Console.print(restart);
+      if(restart === "R"){
+        bridgeGame.retry(bridge);
+        return this.readMoving(bridge,bridgeGame);
+      }
+      if(restart === "Q"){
+        OutputView.printResult("실패", bridgeGame);
+      }
     });
   },
 };
