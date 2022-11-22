@@ -9,7 +9,7 @@ const BridgeMaker = {
 
   makeBridge(size, generateRandomNumber) {
     return Array.from({ length: size }, () => generateRandomNumber()).map(
-      (space) => (+space === SPACE.DOWN ? ORDER.DOWN : ORDER.UP)
+      (space) => (space === SPACE.DOWN ? ORDER.DOWN : ORDER.UP)
     );
   },
 };
