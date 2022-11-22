@@ -18,6 +18,7 @@ const OutputView = {
 
     Console.print(upMap);
     Console.print(downMap);
+    Console.print("");  
   },
 
   makeRecord(playerMovingRecord, isSuccess, upOrDown){
