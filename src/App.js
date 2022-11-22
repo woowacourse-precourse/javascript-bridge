@@ -24,10 +24,13 @@ class App {
         up:[],
         down:[]
       },
-      wrongFlag:false
+      wrongFlag:false,
+      tryCount:1
     }
     this.playerMove() 
-  }
+  }//맨 처음 시작할때만 이렇게 하고 재시도 할때는 횟수때문에 
+  //이거쓰지 말고 따로 초기화 해야 함
+  
 
   playerMove(){
     while(this.#gameStatus.playerLocation!==this.#generatedBridge.length){
@@ -47,8 +50,22 @@ class App {
       this.endGame()
     }
     if(!this.#gameStatus.wrongFlag){
-      this.startGame()
+      this.startAagin()
     }
+  }
+
+  startAgain(){
+    let getNextCount=(this.#gameStatus.tryCount+1)
+    this.#gameStatus={
+      playerLocation:0,
+      bridgeStatus:{
+        up:[],
+        down:[]
+      },
+      wrongFlag:false,
+      tryCount:getNextCount
+    }
+    this.playerMove() 
   }
 
   endGame(){
