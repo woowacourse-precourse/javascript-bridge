@@ -61,6 +61,7 @@ const InputView = {
           return this.readGameCommand(bridge, bridgeGame, moveRoute);
 
         if (answer === "R") {
+          bridgeGame.retry();
           return this.readMoving(bridge, bridgeGame);
         }
         if (answer === "Q") {
