@@ -1,5 +1,3 @@
-const { generate } = require('../BridgeRandomNumberGenerator');
-const { makeBridge } = require('../BridgeMaker');
 const { BRIDGE } = require('../constants/Bridge');
 const { COMMAND, SUCCESS, FAILURE } = require('../constants/Messages');
 const { ZERO, ONE } = require('../constants/Number');
@@ -11,8 +9,9 @@ class BridgeGame {
 
   #tryCount = ONE;
 
-  constructor(size) {
-    this.#bridge = makeBridge(size, generate);
+  constructor(bridge) {
+    this.#bridge = bridge;
+    console.log(this.#bridge);
   }
 
   move(space) {
@@ -48,7 +47,7 @@ class BridgeGame {
   }
 
   static #bridgeMaker(bridge, command, space) {
-    if (command === 'U') {
+    if (command === COMMAND.up) {
       return BridgeGame.#makeUpBridge(bridge, space);
     }
     return BridgeGame.#makeDownBridge(bridge, space);

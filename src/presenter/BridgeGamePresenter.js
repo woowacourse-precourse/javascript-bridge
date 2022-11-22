@@ -1,4 +1,6 @@
 const BridgeGame = require('../model/BridgeGame');
+const { generate } = require('../BridgeRandomNumberGenerator');
+const { makeBridge } = require('../BridgeMaker');
 const { checkValidBridgeSize, checkValidRetry, checkValidSpace } = require('../InputValidation');
 const { readBridgeSize, readGameCommand, readMoving } = require('../view/InputView');
 const {
@@ -30,7 +32,8 @@ class BridgeGamePresenter {
 
   #createBridge(size) {
     checkValidBridgeSize(size);
-    this.#bridgeGame = new BridgeGame(size);
+    const bridge = makeBridge(size, generate);
+    this.#bridgeGame = new BridgeGame(bridge);
     printNewLine();
     this.#checkMoving();
   }
