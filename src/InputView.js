@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const OutputView = require("./OutputView");
 const BridgeMaker = require("./BridgeMaker");
-const generateRandomNumber = require("./BridgeRandomNumberGenerator");
+const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeGame = require("./BridgeGame");
 let game = new BridgeGame();
 let current = 0;
@@ -16,7 +16,8 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(`다리의 길이를 입력해주세요.\n`,(getSize)=>{
       bridgeSize = parseInt(getSize);
-      game.answer = BridgeMaker.makeBridge(getSize, generateRandomNumber);
+      game.answer = BridgeMaker.makeBridge(getSize, BridgeRandomNumberGenerator.generate);
+      console.log(game.answer);
       this.readMoving();
     });
   },
