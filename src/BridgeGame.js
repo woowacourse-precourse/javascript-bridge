@@ -13,10 +13,6 @@ class BridgeGame {
     this.#bridge = bridge;
   }
 
-  getBridgeAnswer() {
-    return this.#bridge;
-  }
-
   getBridgeLength() {
     return this.#bridge.length;
   }
