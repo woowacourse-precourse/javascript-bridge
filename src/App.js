@@ -25,6 +25,7 @@ class App {
       InputView.readGameCommand((input) => this.regame(input));
       return;
     }
+    this.checkGameIsFinished();
   }
 
   regame(input) {
@@ -36,6 +37,14 @@ class App {
       OutputView.printResult(this.#userGame);
       return;
     }
+  }
+
+  checkGameIsFinished() {
+    if (this.#userGame.getFinish()) {
+      OutputView.printResult(this.#userGame);
+      return;
+    }
+    this.moveUserBridge();
   }
 }
 
