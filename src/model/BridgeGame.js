@@ -33,11 +33,8 @@ class BridgeGame {
 
   move() {
     return this.#userBridge.reduce((trace, direction, index) => {
-      if (direction === this.#bridge[index]) {
-        this.#firstTrace(trace, direction);
-      } else if (direction !== this.#bridge[index]) {
-        this.#traceFromSecond(trace, direction);
-      }
+      if (direction === this.#bridge[index]) this.#firstTrace(trace, direction);
+      if (direction !== this.#bridge[index]) this.#traceFromSecond(trace, direction);
       return trace;
     }, []);
   }
