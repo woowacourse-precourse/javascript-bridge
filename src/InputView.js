@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
+const OutputView = require("./OutputView");
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -39,11 +40,22 @@ const InputView = {
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-   readMoving(bridgeGame) {
-    MissionUtils.Console.readLine("\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (nextMove) => {
+  readMoving(bridgeGame) {
+    MissionUtils.Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)\n", (nextMove) => {
       try {
-        bridgeGame.move(this.checkMoving(nextMove));
-        this.readMoving(bridgeGame);
+        const BRIDGE = bridgeGame.getBridge(); LOCATION = bridgeGame.move(this.checkMoving(nextMove));
+        LOCATION.push(nextMove);
+        if (LOCATION[LOCATION.length - 1] === BRIDGE[LOCATION.length - 1]) { // 가장 최근에 입력받은게 일치할 때
+          if (LOCATION.length === BRIDGE.length) { // 현재 위치가 마지막
+            OutputView.printMap(LOCATION, BRIDGE[LOCATION.length - 1]);
+          }
+          if (LOCATION.length !== BRIDGE.length) { // 현재 위치가 마지막이 아님
+            OutputView.printMap(LOCATION, BRIDGE[LOCATION.length - 1]);
+            this.readMoving(bridgeGame);
+          }
+        } else if (LOCATION[LOCATION.length - 1] !== BRIDGE[LOCATION.length - 1]) { // 가장 최근에 입력받은게 다를 때
+          OutputView.printMap(LOCATION, BRIDGE[LOCATION.length - 1]);
+        }
       } catch (error) {
         MissionUtils.Console.print(error);
         this.readMoving(bridgeGame);
@@ -64,7 +76,7 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-   readGameCommand() { },
+  readGameCommand() { },
 };
 
 module.exports = InputView;
