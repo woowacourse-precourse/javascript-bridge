@@ -4,7 +4,6 @@ const {
   validateUserPosition,
   validateRetryAnswer,
 } = require('../utils/validations');
-const OutputView = require('./OutputView');
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -19,7 +18,7 @@ const InputView = {
         validateBridgeSize(size);
         callback(size);
       } catch (error) {
-        OutputView.printError(error);
+        Console.print(error);
         this.readBridgeSize(callback);
       }
     });
@@ -36,7 +35,7 @@ const InputView = {
           validateUserPosition(position);
           callback(position);
         } catch (error) {
-          OutputView.printError(error);
+          Console.print(error);
           this.readMoving(callback);
         }
       }
@@ -54,7 +53,7 @@ const InputView = {
           validateRetryAnswer(answer);
           callback(answer);
         } catch (error) {
-          OutputView.printError(error);
+          Console.print(error);
           this.readGameCommand(callback);
         }
       }
