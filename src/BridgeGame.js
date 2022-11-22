@@ -14,12 +14,12 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move(input) {
-    for (let i = 0; i < input.length; i++) {
-      if (input[i] === this.#bridge[i]) continue;
+  move() {
+    for (let i = 0; i < this.#input.length; i++) {
+      if (this.#input[i] === this.#bridge[i]) continue;
       return 0; // false
     }
-    if (this.#bridge.length === input.length) return 1; // success
+    if (this.#bridge.length === this.#input.length) return 1; // success
     return 2; // next
   }
 
@@ -60,6 +60,12 @@ class BridgeGame {
 
   popInput() {
     return this.#input.pop();
+  }
+
+  makeMap() {
+    const obj = makeMapObj(this.#bridge, this.#input);
+    const map = makeMap(this.#input, obj);
+    return map;
   }
 }
 
