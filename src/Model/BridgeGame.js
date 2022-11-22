@@ -49,6 +49,10 @@ class BridgeGame {
    */
   retry() {
     this.retryCount += 1;
+    this.init();
+  }
+  
+  init(){
     this.gameCount = 0;
     this.upList = [];
     this.downList = [];
