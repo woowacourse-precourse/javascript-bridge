@@ -1,11 +1,11 @@
-const { Errors } = require("../src/Errors");
+const { Validations } = require("../src/Validations");
 
 describe("입력값 오류 테스트", () => {
   test("숫자가 아닌 입력값일 경우에 예외가 발생한다.", () => {
     const size = "e";
 
     expect(() => {
-      Errors.validateSizeIsNumber(size);
+      Validations.validateSizeIsNumber(size);
     }).toThrow("[ERROR] 숫자를 입력해주세요");
   });
 
@@ -13,7 +13,7 @@ describe("입력값 오류 테스트", () => {
     const size = "1";
 
     expect(() => {
-      Errors.validateSizeINRange(size);
+      Validations.validateSizeINRange(size);
     }).toThrow("[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.");
   });
 
@@ -21,7 +21,7 @@ describe("입력값 오류 테스트", () => {
     const answer = "O";
 
     expect(() => {
-      Errors.validateUserDirection(answer);
+      Validations.validateUserDirection(answer);
     }).toThrow("[ERROR] U 혹은 D 를 입력해주세요.");
   });
 
@@ -29,7 +29,7 @@ describe("입력값 오류 테스트", () => {
     const answer = "3";
 
     expect(() => {
-      Errors.validateUserDirection(answer);
+      Validations.validateUserDirection(answer);
     }).toThrow("[ERROR] U 혹은 D 를 입력해주세요.");
   });
 
@@ -37,7 +37,7 @@ describe("입력값 오류 테스트", () => {
     const answer = "U";
 
     expect(() => {
-      Errors.validateRetryCorrect(answer);
+      Validations.validateRetryCorrect(answer);
     }).toThrow("[ERROR] Q 혹은 R 를 입력해주세요.");
   });
 });
