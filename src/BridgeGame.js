@@ -37,7 +37,15 @@ class BridgeGame {
     return answer;
   }
 
-  characterUpDownCheck(input) {}
+  characterUpDownCheck(input) {
+    const resultUpDown = term.AVAILABLE_INPUT_ARRAY.filter(
+      (item) => item === input
+    );
+    if (resultUpDown.length == 0) {
+      return { isUpDown: false };
+    }
+    return { isUpDown: true, charUpDown: resultUpDown.join("") };
+  }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
