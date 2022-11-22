@@ -1,5 +1,4 @@
 const {WAY} = require('./constant')
-const { Console } = require('@woowacourse/mission-utils');
 class BridgeGame {
   #bridge;
   #myWay;

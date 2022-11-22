@@ -37,15 +37,10 @@ class App {
         Console.print(errorMsg);
         return this.getKey();
       }
-
       this.bridgeGame.move(key);
       OutputView.printMap(this.bridgeGame.myWayToOX(key));
-      if(this.bridgeGame.isWrongWay(key)){
-        return this.getGameCommand(key);
-      }
-      if(this.bridgeGame.isLast()){
-        return this.quit(key);
-      }
+      if(this.bridgeGame.isWrongWay(key)) return this.getGameCommand(key);
+      if(this.bridgeGame.isLast()) return this.quit(key);
       return this.getKey();
     });
   }
