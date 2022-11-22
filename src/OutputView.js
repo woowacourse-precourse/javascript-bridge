@@ -26,8 +26,7 @@ const OutputView = {
 
     for(let i = 0; i < input.length; i++){
       if(i != 0){
-        upperBridge += '| ';
-        lowerBridge += '| ';
+        this.printSpaceDivision();
       }
       if(input[i] == 'U'){
         upperBridge += this.cmpUD(input[i], answer[i]) + ' ';
@@ -43,6 +42,12 @@ const OutputView = {
     lowerBridge += ']';
 
     MissionUtils.Console.print(upperBridge, lowerBridge)
+  },
+
+  //다리 칸 구분 출력하기
+  printSpaceDivision(){
+    upperBridge += '| ';
+    lowerBridge += '| ';
   },
 
   /**
