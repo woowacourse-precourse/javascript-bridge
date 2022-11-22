@@ -1,6 +1,7 @@
 const OutputView = require('./OutputView.js');
 const InputView = require('./InputView.js');
 const BridgeGame = require('./BridgeGame.js');
+const { Console } = require('@woowacourse/mission-utils');
 
 class App {
   /**
