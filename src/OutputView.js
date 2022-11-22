@@ -19,7 +19,12 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(currentBridge, count, isWin) { // result : 1: 성공 0: 실패
+  printResult(currentBridge, count, isWin) {
+    /**
+     * @param {string[][]} currentBridge - 현재까지 진행된 다리 상태
+     * @param {number} count - 총 시도한 횟수
+     * @param {number} isWin - 게임의 결과. 성공: 1, 실패: 0
+     */
     Console.print(`최종 게임 결과`);
     this.printMap(currentBridge);
     const result = isWin===1?'성공':'실패';
