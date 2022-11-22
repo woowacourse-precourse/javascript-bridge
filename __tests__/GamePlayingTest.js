@@ -15,5 +15,12 @@ describe("게임 진행 테스트", () => {
       expect(bridgeGame.move("D")).toEqual(false);
       expect(bridgeGame.move("D")).toEqual(false);
       expect(bridgeGame.move("U")).toEqual(true);
+    }),
+    test("게임 성공 테스트", () => {
+      const bridgeGame = new BridgeGame(["U", "D", "U"]);
+      bridgeGame.move("U");
+      bridgeGame.move("D");
+      bridgeGame.move("U");
+      expect(bridgeGame.isFinished()).toEqual(true);
     });
 });
