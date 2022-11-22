@@ -1,5 +1,5 @@
 const { BRIDGE_MAP } = require("./utils/Constants");
-const OutputView = require("./OutputView");
+const OutputView = require("./view/OutputView");
 
 class Bridge {
   #upsideBridge = [];

@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const Validation = require("./Validation");
-const { GAME_MESSAGE } = require("./utils/Constants");
+const Validation = require("../validation/Validation");
+const { GAME_MESSAGE } = require("../utils/Constants");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */

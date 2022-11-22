@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE } = require("./utils/Constants");
+const { ERROR_MESSAGE } = require("../utils/Constants");
 
 const Validation = {
   /**
