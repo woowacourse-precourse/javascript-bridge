@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const generate = require("./BridgeRandomNumberGenerator");
-const makeBridge = require('./BridgeMaker');
+const { generate } = require("./BridgeRandomNumberGenerator");
+const { makeBridge } = require('./BridgeMaker');
+
 
 
 /**
@@ -40,7 +41,7 @@ const InputView = {
   /**
    * 다리길이 입력받기 예외처리 
    */
-  exceptionOfReadBridgeSize(){
+  exceptionOfReadBridgeSize(size){
     if(size < 3 || size > 20)
       throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
   },
