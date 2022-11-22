@@ -31,6 +31,16 @@ const Controller = {
         Controller.process(bridgeGame);
     },
     
+    process(bridgeGame) {
+        if (!bridgeGame.canMove()) {
+            return Controller.retryBool(bridgeGame);
+        }
+        if (bridgeGame.checkDone()) {
+            return Controller.exit(bridgeGame);
+        }
+        Controller.move(bridgeGame);
+    },
+
 }
 
 module.exports = Controller;
