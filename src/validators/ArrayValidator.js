@@ -1,3 +1,4 @@
+const Messages = require('../intl/Messages');
 const Validator = require('./Validator');
 
 /**
@@ -18,7 +19,10 @@ class ArrayValidator extends Validator {
    * @returns {this}
    */
   #shouldArray(errorExpression = undefined) {
-    return this.should(Array.isArray(this.#value), errorExpression ?? '배열 값이어야 합니다.');
+    return this.should(
+      Array.isArray(this.#value),
+      errorExpression ?? Messages.ARRAY_VALIDATOR_SHOULD_ARRAY,
+    );
   }
 
   /**

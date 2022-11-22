@@ -2,6 +2,7 @@ const { validate } = require('../validators');
 const Bridge = require('./Bridge');
 const Moving = require('./Moving');
 const BridgeError = require('../errors/BridgeError');
+const Messages = require('../intl/Messages');
 
 /**
  * 다리를 건너는 플레이어 클래스 입니다.
@@ -43,7 +44,10 @@ class Player {
    * @returns {boolean} 이동 성공 여부
    */
   move(tile) {
-    validate(this.isArrived()).shouldBe(false, () => new BridgeError('다리를 이미 다 건넜습니다.'));
+    validate(this.isArrived()).shouldBe(
+      false,
+      () => new BridgeError(Messages.BRIDGE_ALREADY_ARRIVED),
+    );
 
     const survived = this.#bridge.getTileAt(this.getNextPosition()) === tile;
     this.#movingHistory.push(new Moving(tile, survived));

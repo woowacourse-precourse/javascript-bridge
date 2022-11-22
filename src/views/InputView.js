@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const ValidationError = require('../errors/ValidationError');
+const Messages = require('../intl/Messages');
 const { validateBridgeSize, validateTile, validateGameCommand } = require('../validators');
 
 /**
@@ -46,7 +47,7 @@ const InputView = {
    * @param {function(number)} callback
    */
   readBridgeSize(callback) {
-    this.read('다리의 길이를 입력해주세요.', (value) => {
+    this.read(Messages.READ_BRIDGE_SIZE, (value) => {
       callback(validateBridgeSize(value).get());
     });
   },
@@ -57,7 +58,7 @@ const InputView = {
    * @param {function(string)} callback
    */
   readMoving(callback) {
-    this.read('이동할 칸을 선택해주세요.', (value) => {
+    this.read(Messages.READ_MOVING, (value) => {
       callback(validateTile(value).get());
     });
   },
@@ -68,7 +69,7 @@ const InputView = {
    * @param {function(string)} callback
    */
   readGameCommand(callback) {
-    this.read('게임을 다시 시도할지 여부를 입력해주세요.', (value) => {
+    this.read(Messages.READ_GAME_COMMAND, (value) => {
       callback(validateGameCommand(value).get());
     });
   },

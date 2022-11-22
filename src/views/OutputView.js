@@ -2,6 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const { Tile } = require('../constants');
 const BridgeGame = require('../domains/BridgeGame');
 const Moving = require('../domains/Moving');
+const Messages = require('../intl/Messages');
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -41,12 +42,12 @@ const OutputView = {
    * @param {BridgeGame} bridgeGame
    */
   printResult(bridgeGame) {
-    Console.print('최종 게임 결과');
+    Console.print(Messages.RESULT_TITLE);
     this.printMap(bridgeGame);
 
-    const result = bridgeGame.isArrived() ? '성공' : '실패';
-    Console.print(`게임 성공 여부: ${result}`);
-    Console.print(`총 시도한 횟수: ${bridgeGame.getTrialCount()}`);
+    const result = bridgeGame.isArrived() ? Messages.RESULT_SUCCESS : Messages.RESULT_FAIL;
+    Console.print(Messages.format(Messages.RESULT_GAME_RESULT, result));
+    Console.print(Messages.format(Messages.RESULT_GAME_TRIAL_COUNT, bridgeGame.getTrialCount()));
   },
 };
 

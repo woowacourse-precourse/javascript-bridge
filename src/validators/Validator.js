@@ -1,4 +1,5 @@
 const ValidationError = require('../errors/ValidationError');
+const Messages = require('../intl/Messages');
 
 /**
  * 값을 검증하는 클래스입니다.
@@ -39,7 +40,10 @@ class Validator {
    * @returns {this}
    */
   shouldBe(value, errorExpression = undefined) {
-    return this.should(this.#value === value, errorExpression ?? `${value} 값이어야 합니다.`);
+    return this.should(
+      this.#value === value,
+      errorExpression ?? Messages.format(Messages.VALIDATOR_SHOULD_BE, value),
+    );
   }
 
   /**
@@ -51,7 +55,7 @@ class Validator {
   shouldBoolean(errorExpression = undefined) {
     return this.should(
       typeof this.#value === 'boolean',
-      errorExpression ?? 'true 또는 false 값이어야 합니다.',
+      errorExpression ?? Messages.VALIDATOR_SHOULD_BOOLEAN,
     );
   }
 
@@ -65,7 +69,10 @@ class Validator {
   shouldInstanceOf(GivenClass, errorExpression = undefined) {
     return this.should(
       this.#value instanceof GivenClass,
-      errorExpression ?? `${GivenClass.constructor.name} 을 상속한 값이어야 합니다.`,
+      errorExpression ?? Messages.format(
+        Messages.VALIDATOR_SHOULD_INSTANCE_OF,
+        GivenClass.constructor.name,
+      ),
     );
   }
 

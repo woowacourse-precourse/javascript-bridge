@@ -1,3 +1,4 @@
+const Messages = require('../intl/Messages');
 const Validator = require('./Validator');
 
 /**
@@ -20,7 +21,7 @@ class NumberValidator extends Validator {
   #shouldNumber(errorExpression = undefined) {
     return this.should(
       typeof this.#value === 'number' && !Number.isNaN(this.#value) && Number.isFinite(this.#value),
-      errorExpression ?? '숫자 값이어야 합니다.',
+      errorExpression ?? Messages.NUMBER_VALIDATOR_SHOULD_NUMBER,
     );
   }
 
@@ -31,7 +32,10 @@ class NumberValidator extends Validator {
    * @returns {this}
    */
   shouldInteger(errorExpression = undefined) {
-    return this.should(Number.isInteger(this.#value), errorExpression ?? '정수 값이어야 합니다.');
+    return this.should(
+      Number.isInteger(this.#value),
+      errorExpression ?? Messages.NUMBER_VALIDATOR_SHOULD_INTEGER,
+    );
   }
 
   /**
@@ -41,7 +45,10 @@ class NumberValidator extends Validator {
    * @returns {this}
    */
   shouldPositive(errorExpression = undefined) {
-    return this.should(this.#value > 0, errorExpression ?? '양수 값이어야 합니다.');
+    return this.should(
+      this.#value > 0,
+      errorExpression ?? Messages.NUMBER_VALIDATOR_SHOULD_POSITIVE,
+    );
   }
 
   /**
@@ -55,7 +62,11 @@ class NumberValidator extends Validator {
   shouldRangeInclusive(lowerInclusive, upperInclusive, errorExpression = undefined) {
     return this.should(
       lowerInclusive <= this.#value && this.#value <= upperInclusive,
-      errorExpression ?? `${lowerInclusive} ~ ${upperInclusive} 사이의 값이어야 합니다.`,
+      errorExpression ?? Messages.format(
+        Messages.NUMBER_VALIDATOR_SHOULD_RANGE_INCLUSIVE,
+        lowerInclusive,
+        upperInclusive,
+      ),
     );
   }
 }

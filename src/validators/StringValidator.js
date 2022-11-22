@@ -1,3 +1,4 @@
+const Messages = require('../intl/Messages');
 const Validator = require('./Validator');
 
 class StringValidator extends Validator {
@@ -16,7 +17,10 @@ class StringValidator extends Validator {
    * @returns {this}
    */
   shouldNumeric(errorExpression = undefined) {
-    return this.should(/^-?\d+$/.test(this.#value), errorExpression ?? '숫자만 허용됩니다.');
+    return this.should(
+      /^-?\d+$/.test(this.#value),
+      errorExpression ?? Messages.STRING_VALIDATOR_SHOULD_NUMERIC,
+    );
   }
 
   /**
@@ -29,7 +33,10 @@ class StringValidator extends Validator {
   shouldOneOf(values, errorExpression = undefined) {
     return this.should(
       values.includes(this.#value),
-      errorExpression ?? `${values.join(', ')} 중에 하나여야 합니다.`,
+      errorExpression ?? Messages.format(
+        Messages.STRING_VALIDATOR_SHOULD_ONE_OF,
+        values.join(', '),
+      ),
     );
   }
 }
