@@ -1,6 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-
-const { MANAGER } = require("../utils/constants");
+const { MANAGER } = require("../utils/gameMessage");
 
 const InputView = {
   readBridgeSize(input) {

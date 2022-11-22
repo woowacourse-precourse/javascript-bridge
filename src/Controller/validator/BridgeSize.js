@@ -1,6 +1,7 @@
 const OutputView = require("../../View/OutputView");
 
-const { SIZE, ERROR, ISALLOW } = require("../../utils/constants");
+const { SIZE, ISALLOW } = require("../../utils/constants");
+const { ERROR } = require("../../utils/gameMessage");
 
 class BridgeSize {
   #input;

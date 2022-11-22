@@ -1,6 +1,7 @@
 const OutputView = require("../../View/OutputView");
 
-const { ORDER, ERROR, ISALLOW } = require("../../utils/constants");
+const { ORDER, ISALLOW } = require("../../utils/constants");
+const { ERROR } = require("../../utils/gameMessage");
 
 class MoveSpace {
   #input;

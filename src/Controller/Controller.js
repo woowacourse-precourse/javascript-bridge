@@ -63,10 +63,10 @@ class Controller {
   isAllowCommand(input) {
     this.gameCommand = new GameCommand(input);
     if (!this.gameCommand.checkInput()) return this.orderInputCommand();
-    return this.processCommand(input);
+    return this.orderProcessCommand(input);
   }
 
-  processCommand(command) {
+  orderProcessCommand(command) {
     if (this.#BridgeGame.retry(command)) return this.orderInputMoving();
     return this.orderGameEnd(RESULT.FAIL);
   }

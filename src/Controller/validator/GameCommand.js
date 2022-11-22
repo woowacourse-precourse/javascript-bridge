@@ -1,6 +1,7 @@
 const OutputView = require("../../View/OutputView");
 
-const { ERROR, COMMAND, ISALLOW } = require("../../utils/constants");
+const { COMMAND, ISALLOW } = require("../../utils/constants");
+const { ERROR } = require("../../utils/gameMessage");
 
 class GameCommand {
   #input;
