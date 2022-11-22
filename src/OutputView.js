@@ -30,15 +30,15 @@ const OutputView = {
   },
 
   getBridgeUpperBody(bridge, location, isSuccess) {
-    let upperBody = "";
+    let upperBody = ""
     for (let index = 0; index < location-1; index++) {
-      if(bridge[index] == BRIDGE.INPUT_RANGE[0]) upperBody += BRIDGE.MOVE_SUCCESS;
-      if(bridge[index] == BRIDGE.INPUT_RANGE[1]) upperBody += BRIDGE.EMPTY;
+      bridge[index] == BRIDGE.INPUT_RANGE[0] ? upperBody += BRIDGE.MOVE_SUCCESS : upperBody += BRIDGE.EMPTY;
       upperBody += BRIDGE.DELIMITER;
     }
     if( isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[0]) upperBody += BRIDGE.MOVE_SUCCESS;
-    if(!isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[0]) upperBody += BRIDGE.MOVE_FAIL;
-    if(bridge[location-1] == BRIDGE.INPUT_RANGE[1]) upperBody += BRIDGE.EMPTY;
+    if(!isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[0]) upperBody += BRIDGE.EMPTY;
+    if( isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[1]) upperBody += BRIDGE.EMPTY;
+    if(!isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[1]) upperBody += BRIDGE.MOVE_FAIL;
     return upperBody;
   },
 
@@ -52,13 +52,13 @@ const OutputView = {
   getBridgeLowwerBody(bridge, location, isSuccess) {
     let lowwerBody = "";
     for (let index = 0; index < location-1; index++) {
-      if(bridge[index] == BRIDGE.INPUT_RANGE[1]) lowwerBody += BRIDGE.MOVE_SUCCESS;
-      if(bridge[index] == BRIDGE.INPUT_RANGE[0]) lowwerBody += BRIDGE.EMPTY;
+      bridge[index] == BRIDGE.INPUT_RANGE[1] ? lowwerBody += BRIDGE.MOVE_SUCCESS : lowwerBody += BRIDGE.EMPTY;
       lowwerBody += BRIDGE.DELIMITER;
     }
     if( isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[1]) lowwerBody += BRIDGE.MOVE_SUCCESS;
-    if(!isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[1]) lowwerBody += BRIDGE.MOVE_FAIL;
-    if(bridge[location-1] == BRIDGE.INPUT_RANGE[0]) lowwerBody += BRIDGE.EMPTY;
+    if(!isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[1]) lowwerBody += BRIDGE.EMPTY;
+    if( isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[0]) lowwerBody += BRIDGE.EMPTY;
+    if(!isSuccess && bridge[location-1] == BRIDGE.INPUT_RANGE[0]) lowwerBody += BRIDGE.MOVE_FAIL;
     return lowwerBody;
   },
 
