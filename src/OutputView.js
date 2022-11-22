@@ -14,9 +14,8 @@ const OutputView = {
   },
 
   mapListToString(mapList) {
-    let mapString = mapList.reduce((map, mark) => `${map} ${mark} |`, '[');
-    mapString = `${mapString.slice(0, -1)}]`;
-    return mapString;
+    const separator = ' | ';
+    return `[ ${mapList.join(separator)} ]`;
   },
 
   printResult(bridgeMap, successful, numberOfAttempts) {
