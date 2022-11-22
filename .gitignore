@@ -1,1 +1,5 @@
 node_modules
+yarn.lock
+package-lock.json
+App copy.js
+BridgeGame copy.js
