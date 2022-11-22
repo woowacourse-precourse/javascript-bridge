@@ -12,6 +12,7 @@ const BridgeController = class extends GameController {
   }
 
   runProcess() {
+    this.outputView.printstartMessage();
     this.inputBridgeSize();
   }
 

@@ -19,6 +19,7 @@ const INPUT_VIEW = Object.freeze({
 });
 
 const OUTPUT_VIEW = Object.freeze({
+  start: '다리 건너기 게임을 시작합니다.',
   end_game_result_message: `최종 게임 결과`,
   up_bridge: (up) => `[${up}]`,
   down_bridge: (down) => `[${down}]`,

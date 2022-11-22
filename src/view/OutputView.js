@@ -32,6 +32,10 @@ const OutputView = {
     Console.print(error);
   },
 
+  printStartMessage() {
+    Console.print(OUTPUT_VIEW.start);
+  },
+
   decode(upOrDown) {
     const PASS = 'O';
     const FAIL = 'X';
