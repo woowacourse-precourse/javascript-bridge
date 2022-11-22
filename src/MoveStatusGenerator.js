@@ -1,6 +1,6 @@
 const { STATUS } = require('./utils/const');
 
-const StatusGenerator = {
+const MoveStatusGenerator = {
   FAILURE: STATUS.FAILURE,
   SUCCESS: STATUS.SUCCESS,
   CONTINUE: STATUS.CONTINUE,
@@ -11,10 +11,10 @@ const StatusGenerator = {
    * @return {0 | 1 | 2}
    */
   generate(isCorrect, isLast) {
-    if (!isCorrect) return StatusGenerator.FAILURE;
-    if (isLast) return StatusGenerator.SUCCESS;
-    return StatusGenerator.CONTINUE;
+    if (!isCorrect) return MoveStatusGenerator.FAILURE;
+    if (isLast) return MoveStatusGenerator.SUCCESS;
+    return MoveStatusGenerator.CONTINUE;
   },
 };
 
-module.exports = StatusGenerator;
+module.exports = MoveStatusGenerator;
