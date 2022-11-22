@@ -40,7 +40,7 @@ class App {
       const bridge = this.makeBridge();
       return new BridgeGame(bridge);
     } catch (error) {
-      throw new Error(error);
+      Console.print('[ERROR] ' + error);
       return this.makeBridgeGame();
     }
   }
@@ -51,7 +51,7 @@ class App {
       const turnPass = bridgeGame.move(moveDirection);
       return turnPass;
     } catch (error) {
-      throw new Error(error);
+      Console.print('[ERROR] ' + error);
       return this.executeMove(bridgeGame);
     }
   }
