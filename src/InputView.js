@@ -49,9 +49,9 @@ const InputView = {
   },
 
   repeatMovingOrNot(bridgeList, result, isInputRight) {
-    const [upAndDownList, tryNum] = result;
+    const [upAndDownList, moveNum] = result;
     this.reapeatDrawing(upAndDownList);
-    if(isInputRight === true && tryNum < bridgeList.length) {
+    if(isInputRight === true && moveNum < bridgeList.length) {
       this.readMoving(bridgeList);
     } 
     else {
