@@ -12,17 +12,40 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
+
+  // wrappingInput(message, callback) {
+  //   Console.readLine(
+  //     message,
+  //     this.wrappingLogic(callback, () => this.wrappingInput(message, callback))
+  //   );
+  // },
+
+  // wrappingLogic(logicFunction, errorFunction) {
+  //   return (input) => {
+  //     try {
+  //       logicFunction(input);
+  //     } catch (e) {
+  //       Console.print(e.message);
+  //       errorFunction(e);
+  //     }
+  //   };
+  // },
+
   readBridgeSize() {
     Console.readLine("다리의 길이를 입력해주세요", (bridgesize) => {
-      this.checkBridgeSize(bridgesize);
-      Console.print(bridgesize);
-      this.readMoving(this.makeBridge(bridgesize));
+      try {
+        this.checkBridgeSize(bridgesize);
+        this.readMoving(this.makeBridge(bridgesize));
+      } catch (e) {
+        Console.print(e);
+        this.readBridgeSize();
+      }
     });
   },
 
   checkBridgeSize(bridgesize){
-    if(isNaN(bridgesize)) throw new Error('[ERROR] 다리 길이는 숫자여야 합니다.');
-    if(bridgesize<3 || bridgesize>20) throw new Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+    const size = Number(bridgesize);
+    if(size < 3 || size > 20 || isNaN(size)) throw Error('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
   },
 
   makeBridge(bridgeSize) {
@@ -52,7 +75,7 @@ const InputView = {
   },
 
   checkMove(moving){
-    if (moving !== 'U' && moving !== 'D') throw new Error('[ERROR] 이동할 칸은 "U"와 "D" 두 값중 하나여야합니다.');
+    if (moving !== 'U' && moving !== 'D') throw new Error('[ERROR] 이동할 칸은 U와 D 두 값중 하나여야합니다.');
   },
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.

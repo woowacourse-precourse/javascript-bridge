@@ -5,7 +5,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const OutputView = {
 
   startGame() {
-    Console.print("다리 건너기 게임을 시작합니다.\n");
+    Console.print("다리 건너기 게임을 시작합니다.");
   },
 
   /**
@@ -29,7 +29,7 @@ const OutputView = {
     Console.print(`게임 성공 여부: ${hasCorrect? '성공' : '실패'}`);
     Console.print(`총 시도한 횟수: ${trial}`);
     Console.close();
-  }
+  },
 };
 
 module.exports = OutputView;
