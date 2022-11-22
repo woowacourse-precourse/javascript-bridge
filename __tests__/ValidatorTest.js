@@ -2,7 +2,7 @@ const Validator = require('../src/Validator');
 
 describe('유효성 검증 테스트', () => {
   test.each([
-    ['-50'], ['1'], [' '], ['c'],
+    ['-50'], ['1'], [' '], ['c'], ['10.1'],
     ['21'], [''], ['500'], ['hello'],
   ])('bridgeSize:%s => error', (input) => {
     expect(() => Validator.bridgeSizeValidate(input)).toThrow();
