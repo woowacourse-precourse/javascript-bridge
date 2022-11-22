@@ -1,4 +1,5 @@
-const OutputView = require("./view/OutputView");
+const InputView = require("../View/InputView");
+const OutputView = require("../view/OutputView");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -6,6 +7,7 @@ const OutputView = require("./view/OutputView");
 class BridgeGame {
   start() {
     OutputView.printStart();
+    InputView.measureLength();
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
