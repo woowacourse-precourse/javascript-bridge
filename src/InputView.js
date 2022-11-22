@@ -21,7 +21,7 @@ const InputView = {
   readBridgeSize() {
     MissionUtils.Console.readLine("다리의 길이를 입력해주세요.", (input) => {
       let checkError = exception.checkBridgeLength(input);
-      if (checkError === "Error") this.readBridgeSize();
+      if (!checkError) this.readBridgeSize();
       this.bridgeLength = Number(input);
       this.bridge = bridgeMaker.makeBridge(
         this.bridgeLength,
@@ -37,7 +37,7 @@ const InputView = {
   readMoving() {
     MissionUtils.Console.readLine("이동할 칸을 선택해주세요.", (input) => {
       let checkError = exception.checkUpDown(input);
-      if (checkError === "Error") return this.readMoving();
+      if (!checkError) return this.readMoving();
       let bridgeMap = bridgeGame.move(input, this.bridge);
       outputView.printMap(bridgeMap);
       if (bridgeGame.moveResult === "X") this.readGameCommand();
@@ -53,7 +53,7 @@ const InputView = {
   readGameCommand() {
     MissionUtils.Console.readLine("게임을 다시 시도할지 여부를 입력해주세요.(재시도 : R, 종료: Q)", (input) => {
       let checkError = exception.checkRestartEnd(input);
-      if (checkError === "Error") this.readGameCommand();
+      if (!checkError) this.readGameCommand();
       if (input === "R") {
         this.moveCount = 0;
         bridgeGame.retry();
@@ -63,5 +63,7 @@ const InputView = {
     });
   },
 };
+
+console.log(InputView.readBridgeSize())
 
 module.exports = InputView;

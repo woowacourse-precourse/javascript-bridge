@@ -8,8 +8,9 @@ class Exception{
             if(bridgeLength > 20 || bridgeLength < 3) throw new Error("[ERROR] 다리의 길이는 3-20입니다.")
         }catch(e){
             MissionUtils.Console.print(`${e.message}`)
-            return e.name
+            return false
         }
+        return true
     }
 
     checkUpDown(input){
@@ -17,8 +18,9 @@ class Exception{
             if(input !== 'U' && input !== 'D') throw new Error("[ERROR] U나 D를 입력해주세요.")
         }catch(e){
             MissionUtils.Console.print(`${e.message}`)
-            return e.name
+            return false
         }
+        return true
     }
 
     checkRestartEnd(input){
@@ -26,8 +28,9 @@ class Exception{
             if(input !== 'Q' && input !== 'R') throw new Error("[ERROR] 재시도: R, 종료: Q")
         }catch(e){
             MissionUtils.Console.print(`${e.message}`)
-            return e.name
+            return false
         }
+        return true
     }
 
 }
