@@ -45,6 +45,19 @@ const OutputView = {
 
     return uppereBridge;
   },
+
+  makeUnderBridge(bridgeGame) {
+    const bridge = bridgeGame.bridgeGetter();
+    const tryCount = bridgeGame.tryCountGetter();
+
+    let underBridge = [];
+    for (let i = 0; i < tryCount; i++) {
+      let result = bridge[i] === 'D' ? ConstValue.APPEND_BRIDGE.CORRECT : ConstValue.APPEND_BRIDGE.NONE;
+      underBridge.push(result);
+    }
+
+    return underBridge;
+  },
 };
 
 module.exports = OutputView;
