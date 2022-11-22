@@ -5,11 +5,12 @@ const INPUT = Object.freeze({
 });
 
 const OUTPUT = Object.freeze({
+    PRINT_ERROR: (Error) => `${Error.message} \n`,
     SPACE: ' ',
     START: '다리 건너기 게임을 시작합니다.\n',
     SUCCESS: '성공',
     FAIL: '실패',
-    RESULT_TEXT: '최종 게임 결과',
+    RESULT_TEXT: '최종 게임 결과'
 });
 
 const MAP = Object.freeze({

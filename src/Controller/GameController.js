@@ -4,6 +4,7 @@ const OutputView = require("../View/OutputView");
 const BridgeGame = require("../BridgeGame");
 const Validation = require("../Utils/Validation");
 const { MOVE, MAP, STATUS, COMMAND } = require("../Utils/constants/Constants");
+const { OUTPUT } = require("../Utils/constants/MessageConstants");
 
 class GameController {
 
@@ -24,7 +25,7 @@ class GameController {
     try {
       Validation.checkBridgeSize(inputBridgeSize);
     } catch (Error) {
-      MissionUtils.Console.print(`${Error.message} \n`);
+      MissionUtils.Console.print(OUTPUT.PRINT_ERROR(Error));
       return this.getBridgeSize();
     }
 
@@ -45,7 +46,7 @@ class GameController {
     try {
       Validation.checkMoving(inputMoving);
     } catch (Error) {
-      MissionUtils.Console.print(`${Error.message} \n`);
+      MissionUtils.Console.print(OUTPUT.PRINT_ERROR(Error));
       return this.getMoving();
     }
 
@@ -118,7 +119,7 @@ class GameController {
     try {
       Validation.checkInputRetryOrEnd(inputRetryOrEnd);
     } catch (Error) {
-      MissionUtils.Console.print(`${Error.message} \n`);
+      MissionUtils.Console.print(OUTPUT.PRINT_ERROR(Error));
       return this.getRetryOrEnd();
     }
 
