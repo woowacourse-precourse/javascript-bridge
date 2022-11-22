@@ -1,9 +1,9 @@
-const MapGenerator = require('./MapGenerator');
+const MovingHistory = require('./MovingHistory');
 const StateManager = require('./StateManager');
 
-const { generate } = require('../utils/BridgeRandomNumberGenerator');
-const { GAME_STATUS } = require('../utils/constants');
+const BridgeRandomNumberGenerator = require('../utils/BridgeRandomNumberGenerator');
 const BridgeMaker = require('../BridgeMaker');
+const { GAME_STATUS } = require('../utils/constants');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -14,7 +14,10 @@ class BridgeGame {
   #stateManager;
 
   constructor(size) {
-    this.#bridge = BridgeMaker.makeBridge(size, generate);
+    this.#bridge = BridgeMaker.makeBridge(
+      size,
+      BridgeRandomNumberGenerator.generate,
+    );
     this.#stateManager = new StateManager(0, GAME_STATUS.PLAYING, 1);
   }
 
@@ -25,7 +28,7 @@ class BridgeGame {
    */
   move(moving) {
     const { stage } = this.#stateManager.getGameState();
-    MapGenerator.generate(this.#bridge, stage, moving);
+    MovingHistory.log(this.#bridge, stage, moving);
 
     this.checkFailOrClear(stage, moving);
 
@@ -66,7 +69,7 @@ class BridgeGame {
    */
   retry() {
     this.#stateManager.retry();
-    MapGenerator.reset();
+    MovingHistory.reset();
   }
 
   getStateManager() {

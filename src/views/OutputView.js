@@ -20,8 +20,8 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap(map) {
-    map.forEach((row) => Console.print(row));
+  printMap(movingHistory) {
+    movingHistory.forEach((row) => Console.print(row));
   },
 
   printError(error) {
@@ -33,9 +33,9 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(map, status, count) {
+  printResult(movingHistory, status, count) {
     Console.print(`\n${MESSAGE.RESULT}`);
-    this.printMap(map);
+    this.printMap(movingHistory);
     Console.print(`\n${MESSAGE.IS_CLEAR(status)}`);
     Console.print(MESSAGE.TRY_COUNT(count));
     Console.close();

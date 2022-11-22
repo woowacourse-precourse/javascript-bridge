@@ -1,5 +1,5 @@
 const BridgeGame = require('../models/BridgeGame');
-const MapGenerator = require('../models/MapGenerator');
+const MovingHistory = require('../models/MovingHistory');
 
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
@@ -15,10 +15,10 @@ const {
 class GameContoller {
   #bridgeGame;
 
-  #gameStatusMap = {
+  #gameStatusHandlers = {
     [GAME_STATUS.PLAYING]: this.inputMoving.bind(this),
     [GAME_STATUS.FAIL]: this.inputGameCommand.bind(this),
-    [GAME_STATUS.CLEAR]: this.onGameOver.bind(this, STATUS_MESSAGE.CLEAR),
+    [GAME_STATUS.CLEAR]: this.onFinishGame.bind(this, STATUS_MESSAGE.CLEAR),
   };
 
   start() {
@@ -61,8 +61,8 @@ class GameContoller {
 
     this.#bridgeGame.move(moving);
 
-    const map = MapGenerator.toString();
-    OutputView.printMap(map);
+    const movingHistory = MovingHistory.toString();
+    OutputView.printMap(movingHistory);
 
     this.checkGameStatus();
   }
@@ -71,7 +71,7 @@ class GameContoller {
     const stateManager = this.#bridgeGame.getStateManager();
 
     const { gameStatus } = stateManager.getGameState();
-    this.#gameStatusMap[gameStatus]();
+    this.#gameStatusHandlers[gameStatus]();
   }
 
   inputGameCommand() {
@@ -89,26 +89,26 @@ class GameContoller {
     validate(command, isCommandInput);
 
     if (command === COMMAND.RETRY) {
-      this.onRetryCommand();
+      this.onInputRetryCommand();
       return;
     }
 
-    this.onGameOver(STATUS_MESSAGE.FAIL);
+    this.onFinishGame(STATUS_MESSAGE.FAIL);
   }
 
-  onRetryCommand() {
+  onInputRetryCommand() {
     this.#bridgeGame.retry();
 
     this.checkGameStatus();
   }
 
-  onGameOver(status) {
-    const map = MapGenerator.toString();
+  onFinishGame(statusMessage) {
+    const movingHistory = MovingHistory.toString();
 
     const stateManager = this.#bridgeGame.getStateManager();
     const { tryCount } = stateManager.getGameState();
 
-    OutputView.printResult(map, status, tryCount);
+    OutputView.printResult(movingHistory, statusMessage, tryCount);
   }
 }
 

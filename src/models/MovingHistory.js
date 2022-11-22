@@ -1,43 +1,43 @@
 const { MOVING } = require('../utils/constants');
 
-const MAP = Object.create({
+const MARK = Object.create({
   PASS: 'O',
   FAIL: 'X',
   BLANK: ' ',
 });
 
-const MapGenerator = {
+const MovingHistory = {
   topRow: [],
 
   bottomRow: [],
 
-  generate(bridge, stage, moving) {
+  log(bridge, stage, moving) {
     if (moving === MOVING.UPPER) {
       this.generateTopRow(bridge, stage, moving);
-      this.bottomRow.push(MAP.BLANK);
+      this.bottomRow.push(MARK.BLANK);
       return;
     }
 
     this.generateBottomRow(bridge, stage, moving);
-    this.topRow.push(MAP.BLANK);
+    this.topRow.push(MARK.BLANK);
   },
 
   generateTopRow(bridge, stage, moving) {
     if (bridge[stage] === moving) {
-      this.topRow.push(MAP.PASS);
+      this.topRow.push(MARK.PASS);
       return;
     }
 
-    this.topRow.push(MAP.FAIL);
+    this.topRow.push(MARK.FAIL);
   },
 
   generateBottomRow(bridge, stage, moving) {
     if (bridge[stage] === moving) {
-      this.bottomRow.push(MAP.PASS);
+      this.bottomRow.push(MARK.PASS);
       return;
     }
 
-    this.bottomRow.push(MAP.FAIL);
+    this.bottomRow.push(MARK.FAIL);
   },
 
   reset() {
@@ -46,9 +46,9 @@ const MapGenerator = {
   },
 
   toString() {
-    const map = [this.topRow, this.bottomRow];
-    return map.map((row) => `[ ${row.join(' | ')} ]`);
+    const movingHistory = [this.topRow, this.bottomRow];
+    return movingHistory.map((row) => `[ ${row.join(' | ')} ]`);
   },
 };
 
-module.exports = MapGenerator;
+module.exports = MovingHistory;
