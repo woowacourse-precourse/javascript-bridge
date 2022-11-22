@@ -1,7 +1,8 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const Validation = require('./Validation');
-const { makeBrdige } = require('./BridgeMaker');
+const BridgeMaker = require('./BridgeMaker');
+const BridgeGame = require('./BridgeGame');
 const { generate } = require('./BridgeRandomNumberGenerator');
 
 class App {
@@ -12,13 +13,15 @@ class App {
   }
 
   play() {
+    OutputView.printStart();
     InputView.readBridgeSize(this.readBridgeSizeCallBack.bind(this));
   };
 
   readBridgeSizeCallBack(userInput) {
     try {
       Validation.bridgeSize(userInput);
-      this.bridge = makeBrdige(userInput, generate);
+      this.bridge = BridgeMaker.makeBridge(userInput, generate)
+      this.bridgeGame = new BridgeGame(this.bridge);
       InputView.readMoving(this.readMovingCallBack.bind(this));
     } catch (error) {
       OutputView.printError(error);
@@ -29,11 +32,24 @@ class App {
   readMovingCallBack(userInput) {
     try {
       Validation.moving(userInput);
-      InputView.readGameCommand();
+      this.afterMoving(userInput)
     } catch (error) {
       OutputView.printError(error);
       InputView.readMoving(this.readMovingCallBack.bind(this));  
     };
+  };
+
+  afterMoving(userInput) {
+    const isMove = this.bridgeGame.move(userInput);
+
+    if (isMove) {
+      this.bridgeGame.moveSuccess();
+      this.bridgeGame.makeBridgeResult(this.count);
+      InputView.readMoving(this.readMovingCallBack.bind(this));
+    } else {
+      this.bridgeGame.moveFail();
+      this.bridgeGame.makeBridgeResult(this.count);
+    }
   }
 }
 
