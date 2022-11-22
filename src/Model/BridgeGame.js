@@ -44,6 +44,11 @@ class BridgeGame {
     return `[ ${floormap.join(' | ')} ]`;
   }
 
+  retry() {
+    this.moving = [];
+    this.count++;
+  }
+
 }
 
 module.exports = BridgeGame;
