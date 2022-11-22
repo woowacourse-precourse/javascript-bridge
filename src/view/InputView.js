@@ -37,6 +37,7 @@ const InputView = {
     this.count += 1;
     this.moving();
     this.failMoving();
+    this.finishMoving();
   },
 
   moving() {
@@ -54,6 +55,17 @@ const InputView = {
       /X/g.test(this.result) === true
     ) {
       this.readGameCommand();
+    }
+  },
+
+  finishMoving() {
+    if (
+      /X/g.test(this.result) === false &&
+      this.count === this.computerNum.length
+    ) {
+      this.result[2] = "성공";
+      this.result[3] = this.startCount;
+      printResult(this.result);
     }
   },
 
