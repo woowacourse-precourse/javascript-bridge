@@ -8,7 +8,7 @@ const gameMessage = {
 };
 
 const errorMessage = {
-  End_Exceed_Start: "[ERROR] end는 start보다 항상 크거나 같아야 합니다.",
+  END_EXCEED_START: "[ERROR] end는 start보다 항상 크거나 같아야 합니다.",
   BETWEEN_NUMBER: `[ERROR] ${START_NUMBER}~${END_NUMBER} 사이의 숫자를 입력해 주세요.`,
   OUT_OF_RANGE: "[ERROR] 입력할 수 있는 숫자의 범위를 초과하였습니다.",
   NOT_ALLOWED: "[ERROR] 허용되지 않은 문자열입니다.",
