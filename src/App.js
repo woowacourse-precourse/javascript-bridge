@@ -56,6 +56,11 @@ class App {
     this.managePassCase();
   }
 
+  manageFailCase() {
+    this.bridgeGame.fail();
+    this.askRetry();
+  }
+
 }
 
 module.exports = App;
