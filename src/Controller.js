@@ -21,8 +21,23 @@ class Controller {
     try {
       this.validator.isValidLength(length);
       this.#bridge = BridgeMaker.makeBridge(length, BridgeMachine.generate);
+      this.getDirection();
     } catch (error) {
       Console.print(error);
+      this.getBridgeSize();
+    }
+  }
+
+  getDirection() {
+    InputView.readMoving(this.movingDirectionInput.bind(this));
+  }
+
+  movingDirectionInput(square) {
+    try {
+      Console.print(square);
+    } catch (error) {
+      Console.print(error);
+      this.getDirection();
     }
   }
 }
