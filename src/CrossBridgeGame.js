@@ -8,10 +8,6 @@ const { GAME } = require('./utils/Constants');
 const Validator = require('./utils/Validator');
 
 class CrossBrigeGame {
-  constructor() {
-    this.bridgeGame = new BridgeGame();
-  }
-
   gameStart() {
     OutputView.printGameStart();
     this.askBridgeSize();
@@ -34,7 +30,7 @@ class CrossBrigeGame {
   setBridge(size) {
     const generateRandomNumber = () => BridgeRandomNumberGenerator.generate();
     const bridge = BridgeMaker.makeBridge(size, generateRandomNumber);
-    this.bridgeGame.setBridge(bridge);
+    this.bridgeGame = new BridgeGame(bridge);
     this.askMoving();
   }
 
@@ -53,13 +49,14 @@ class CrossBrigeGame {
   }
 
   makeMoving(moving) {
-    const crossMove = this.bridgeGame.move(moving);
-    OutputView.printMap(crossMove);
-    return this.checkStatus(crossMove);
+    const gameStatus = this.bridgeGame.isMoveSuccess(moving);
+    const gameResult = this.bridgeGame.move(moving);
+    OutputView.printMap(gameStatus, gameResult);
+    return this.checkStatus(gameStatus);
   }
 
-  checkStatus([isSuccess]) {
-    if (isSuccess === false) {
+  checkStatus(gameStatus) {
+    if (gameStatus === false) {
       return this.askRetry();
     }
     if (this.bridgeGame.isEnd()) {
@@ -97,7 +94,7 @@ class CrossBrigeGame {
   makeEndGame() {
     const [moveResult, gameSuccess, gameCount] = this.bridgeGame.quit();
     OutputView.printResult();
-    OutputView.printMap(moveResult);
+    OutputView.printMap(gameSuccess, moveResult);
     OutputView.printSucessOrFail(gameSuccess);
     OutputView.printTryCount(gameCount);
     Console.close();
