@@ -45,4 +45,19 @@ describe('게임 기능 테스트', () => {
     expect(userState).toEqual(['U', 'D', 'D']);
     expect(countTry).toEqual(1);
   });
+
+  test('retry', () => {
+    BridgeRandomNumberGenerator.generate = jest.fn();
+
+    BridgeRandomNumberGenerator.generate.mockReturnValue(0);
+    const bridgeGame = new BridgeGame(3);
+    bridgeGame.move('U');
+    bridgeGame.move('U');
+    bridgeGame.retry();
+
+    let [_, __, userState, countTry] = bridgeGame.move('U');
+
+    expect(userState).toEqual(['U']);
+    expect(countTry).toEqual(2);
+  });
 });
