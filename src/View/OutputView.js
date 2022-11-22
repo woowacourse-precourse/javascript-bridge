@@ -6,7 +6,7 @@ const RESULT = {
 const MAP_TABLE = {
   open: "[",
   space: "   ",
-  close: "]\n",
+  close: "]",
 };
 
 const OutputView = {
