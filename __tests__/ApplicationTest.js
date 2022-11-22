@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
+const InputView = require("../src/InputView");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -93,5 +94,11 @@ describe("다리 건너기 테스트", () => {
   test("예외 테스트 3 - 사이즈 범위 3~20이 아닐 경우 에러", () => {
     runException([25]);
     runException([1]);
+  });
+
+  test("예외 테스트 4 - 개임 재시작 종료 여부가 R 또는 Q가 아닐 경우 에러", () => {
+    const logSpy = getLogSpy();
+    InputView.retryValidation("Z");
+    expectLogContains(getOutput(logSpy), ["[ERROR]"]);
   });
 });
