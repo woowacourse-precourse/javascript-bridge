@@ -25,6 +25,7 @@ const getLogSpy = () => {
 };
 
 const getOutput = (logSpy) => {
+  console.log([...logSpy.mock.calls].join(""));
   return [...logSpy.mock.calls].join("");
 };
 
