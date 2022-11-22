@@ -27,6 +27,7 @@ const OutputView = {
     let downBridge = currentBridge[1].join(' | ');
     MissionUtils.Console.print(`[ ${upBridge} ]`);
     MissionUtils.Console.print(`[ ${downBridge} ]\n`);
+    MissionUtils.Console.close();
   },
 
   printGameStart() {
