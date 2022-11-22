@@ -8,6 +8,14 @@ const { InputView, OutputView } = require('../view');
 const BridgeGame = require('./BridgeGame');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const {
+  MOVE_COUNT_INITIAL,
+  TRY_COUNT_INITIAL,
+  MOVE_COUNT_OFFSET,
+  TRY_COUNT_OFFSET,
+  GAME_COMMAND_RESTART,
+  GAME_COMMAND_QUIT,
+} = require('../Constant');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -37,8 +45,8 @@ class BridgeGameControl {
     this.#outputView = outputView;
     const bridgeGame = new BridgeGame();
     this.#bridgeGame = bridgeGame;
-    this.#movingCount = 0;
-    this.#tryCount = 1;
+    this.#movingCount = MOVE_COUNT_INITIAL;
+    this.#tryCount = TRY_COUNT_INITIAL;
     this.#isWin = false;
   }
 
@@ -91,7 +99,7 @@ class BridgeGameControl {
   }
 
   movingSurvive() {
-    this.#movingCount += 1;
+    this.#movingCount += MOVE_COUNT_OFFSET;
     this.move();
   }
 
@@ -128,8 +136,8 @@ class BridgeGameControl {
    */
 
   gameCommandRestart() {
-    this.#tryCount += 1;
-    this.#movingCount = 0;
+    this.#tryCount += TRY_COUNT_OFFSET;
+    this.#movingCount = MOVE_COUNT_INITIAL;
     this.#bridgeGame.retry();
     this.move();
   }
@@ -139,8 +147,8 @@ class BridgeGameControl {
   }
 
   gameCommandProcess(gameCommand) {
-    if (gameCommand.getGameCommand() === 'R') this.gameCommandRestart();
-    if (gameCommand.getGameCommand() === 'Q') this.gameCommandQuit();
+    if (gameCommand.getGameCommand() === GAME_COMMAND_RESTART) this.gameCommandRestart();
+    if (gameCommand.getGameCommand() === GAME_COMMAND_QUIT) this.gameCommandQuit();
   }
 
   gameCommandCallback(input) {

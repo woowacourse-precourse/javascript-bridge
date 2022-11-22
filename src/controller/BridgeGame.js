@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+const { CURRENT_POSITION_INITIAL_INDEX, SAFE_BRIDGE } = require('../Constant');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -8,7 +9,7 @@ class BridgeGame {
   #map;
 
   constructor() {
-    this.#currentPosition = 0;
+    this.#currentPosition = CURRENT_POSITION_INITIAL_INDEX;
   }
 
   importMap(map) {
@@ -26,7 +27,7 @@ class BridgeGame {
   matchResult(movingCommand) {
     const currentStage = this.#map.getMap()[this.#currentPosition];
     currentStage.setMovingCommand(movingCommand);
-    return currentStage.getStage()[movingCommand] === 'O';
+    return currentStage.getStage()[movingCommand] === SAFE_BRIDGE;
   }
 
   /**
@@ -44,7 +45,7 @@ class BridgeGame {
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   retry() {
-    this.setCurrentPosition(0);
+    this.setCurrentPosition(CURRENT_POSITION_INITIAL_INDEX);
   }
 }
 
