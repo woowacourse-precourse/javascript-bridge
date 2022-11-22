@@ -1,6 +1,6 @@
 const BridgeController = require("./BridgeController");
 const UserController = require("./UserController");
-const BridgeGame = require("../BridgeGame");
+const BridgeGame = require("./BridgeGame");
 const InputView = require("../view/InputView");
 const OutputView = require("../view/OutputView");
 const { validate } = require("../validation/RestartInputValidation");
