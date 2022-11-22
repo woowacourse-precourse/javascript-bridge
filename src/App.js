@@ -89,7 +89,6 @@ class App {
       this.#bridgeGame.retry();
       return this.makeReadMoving.call(this);
     };
-    MissionUtils.Console.close();
     return this.readyToPrintResult()
   }
 
@@ -98,5 +97,7 @@ class App {
     outputView.printResult(this.#isOngoing, tryCount, this.resultMap);
   }
 }
+const app = new App();
+app.play();
 
 module.exports = App;
