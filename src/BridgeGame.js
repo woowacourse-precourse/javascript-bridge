@@ -1,6 +1,9 @@
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
+const SUCCESS_MOVE = 1;
+const SUCCESS_GAME = 2;
+const FAIL_MOVE = -1;
 class BridgeGame {
   #bridge;
   #numberOfTry;
@@ -31,12 +34,12 @@ class BridgeGame {
    */
   move(spaceToMove) {
     this.#currentPosition++;
-    if (this.#currentPosition > this.#bridge.length - 1) return -1;
+    if (this.#currentPosition > this.#bridge.length - 1) return FAIL_MOVE;
     if (this.#bridge[this.#currentPosition] === spaceToMove) {
-      if (this.#currentPosition === this.#bridge.length - 1) return 2;
-      return 1;
+      if (this.#currentPosition === this.#bridge.length - 1) return SUCCESS_GAME;
+      return SUCCESS_MOVE;
     }
-    return -1;
+    return FAIL_MOVE;
   }
 
   /**

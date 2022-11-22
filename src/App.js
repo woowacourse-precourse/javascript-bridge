@@ -5,6 +5,9 @@ const BridgeMaker = require("../src/BridgeMaker");
 const BridgeGame = require("../src/BridgeGame");
 const BridgeTest = require("../src/BridgeTest");
 
+const SUCCESS_MOVE = 1;
+const SUCCESS_GAME = 2;
+const FAIL_MOVE = -1;
 class App {
   #bridgeGame;
   play() {
@@ -16,21 +19,21 @@ class App {
     this.playing();
   }
   playing() {
-    let result = 1;
-    while (result === 1) {
-      result = this.#bridgeGame.move(InputView.readMoving());
-      OutputView.printMap(this.#bridgeGame.getCurrentMap(result));
+    let gameResult = SUCCESS_MOVE;
+    while (gameResult === SUCCESS_MOVE) {
+      gameResult = this.#bridgeGame.move(InputView.readMoving());
+      OutputView.printMap(this.#bridgeGame.getCurrentMap(gameResult));
     }
-    result === 2 ? this.gameSuccess() : this.gameOver();
+    gameResult === SUCCESS_GAME ? this.gameSuccess() : this.gameOver();
   }
   gameSuccess() {
-    OutputView.printResult(this.#bridgeGame.getCurrentMap(2), "성공", this.#bridgeGame.getNumberOfTry());
+    OutputView.printResult(this.#bridgeGame.getCurrentMap(SUCCESS_GAME), "성공", this.#bridgeGame.getNumberOfTry());
     return;
   }
   gameOver() {
     let gameCommand = InputView.readGameCommand();
     if (gameCommand === "Q") {
-      OutputView.printResult(this.#bridgeGame.getCurrentMap(-1), "실패", this.#bridgeGame.getNumberOfTry());
+      OutputView.printResult(this.#bridgeGame.getCurrentMap(FAIL_MOVE), "실패", this.#bridgeGame.getNumberOfTry());
       return;
     }
     if (gameCommand === "R") {
