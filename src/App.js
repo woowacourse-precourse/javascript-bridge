@@ -1,4 +1,4 @@
-const { readBridgeSize, readMoving } = require("./InputView");
+const { readBridgeSize, readMoving, readGameCommand } = require("./InputView");
 const { gameStart, printResult } = require("./OutputView");
 const BridgeGame = require("./BridgeGame");
 
@@ -14,8 +14,20 @@ class App {
   readMoveCallback = (moveValue) => {
     let [moveCount, restartCheck, tryCount, printTry] =
       this.bridgeGame.move(moveValue);
-    if (moveCount <= 2) {
-      this.moveBridge();
+    if (restartCheck) {
+      readGameCommand((restart) => {
+        if (this.bridgeGame.retry(restart) == "R") {
+          this.moveBridge();
+        } else {
+          printResult("실패", tryCount, printTry);
+        }
+      });
+    } else {
+      if (moveCount <= 2) {
+        this.moveBridge();
+      } else {
+        printResult("성공", tryCount, printTry);
+      }
     }
   };
 

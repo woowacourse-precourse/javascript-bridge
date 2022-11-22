@@ -29,11 +29,11 @@ const InputView = {
   readMoving(callback) {
     MissionUtils.Console.readLine(
       "이동할 칸을 선택해주세요. (위: U, 아래: D)\n",
-      (answer) => {
+      (moveValue) => {
         try {
-          if (answer != "U" && answer != "D")
-            throw new Error("[ERROR] U 또는 D으로 입력해 주세요.");
-          callback(answer);
+          if (moveValue != "U" && moveValue != "D")
+            throw "[ERROR] U 또는 D으로 입력해 주세요.";
+          callback(moveValue);
         } catch (e) {
           MissionUtils.Console.print(e);
           InputView.readMoving(callback);
@@ -45,7 +45,21 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand(callback) {
+    MissionUtils.Console.readLine(
+      "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n",
+      (restart) => {
+        try {
+          if (restart != "R" && restart != "Q")
+            throw "[ERROR] R 또는 Q으로 입력해 주세요.";
+          callback(restart);
+        } catch (e) {
+          MissionUtils.Console.print(e);
+          InputView.readGameCommand(callback);
+        }
+      }
+    );
+  },
 };
 
 module.exports = InputView;
