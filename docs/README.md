@@ -77,3 +77,46 @@ BridgeGame 하나로 도메인을 구성할 수 있었다. 움직일 방향이�
 OutputView에는 Console.print만 사용한다.
 
 컨트롤러는 뷰와 BridgeGame(도메인 집합) 존재를 알고 둘을 연결해준다. 게임 전체의 과정이 담겨있다.
+
+## 메서드 기능 정리
+
+### GameController
+
+    1. start : 게임 시작.
+    2. askBridge : 다리 사이즈를 입력받는다.
+    3. setBridge : 입력받은 다리 사이즈를 검증하고, 다리를 생성한다.
+    4. askMoving : 다음 진행방향을 입력받는다.
+    5. setMoving : 입력받은 진행방향을 검증하고, 해당 방향으로 움직인다.
+    6. askGameCommand : 재시작/종료를 여부를 입력받는다.
+    7. setGameCommand : 입력받은 재시작/종료를 검증하고, 재시작 또는 종료한다.
+    8. retry : 게임 재시작.
+    9. end : 게임 종료.
+
+### BridgeGame
+
+    1. setBridge : 다리를 생성하고 저장한다.
+    2. setMoving : 다음 이동 방향을 저장한다.
+    3. setGameCommand : 재시작/종료 입력을 저장한다.
+    4. setTopSide : 이동 방향에 따라 지도의 윗부분을 세팅한다.
+    5. setDownSide : 이동 방향에 따라 지도의 아랫부분을 세팅한다.
+    6. getMap : 합쳐진 지도를 반환한다.
+    7. move : 입력 받은 진행 방향에 따라 지도를 세팅하고, 성공(알맞은 방향으로 갔는지) 여부를 반환한다.
+    8. isEnd : 다리의 끝까지 건너갔는지 판단한다.
+    9. retry : 지도와 현재 인덱스를 초기화 하고 시도횟수를 증가시킨다.
+    10. initialzation : 초기화.
+
+
+### InputView
+
+    1. readBridgeSize : 다리 사이즈를 입력받는다.
+    2. readMoving : 진행 방향을 입력받는다.
+    3. readGameCommand : 재시작/종료 여부를 입력받는다.
+
+### Outputview
+
+    게임 진행 상황과 결과를 출력한다.
+
+    1. printStart : 시작 메시지를 출력한다.
+    2. printMap : 현재 이동 상태를 출력한다.
+    3. printResult : 게임 최종 결과를 출력한다.
+    4. printMessage : 입력받은 메시지를 출력한다.
