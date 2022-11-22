@@ -1,3 +1,4 @@
+const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 
 /**
@@ -5,6 +6,11 @@ const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
  */
 class BridgeGame {
   #bridge;
+  #count;
+
+  constructor() {
+    this.initCount();
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -27,13 +33,22 @@ class BridgeGame {
   retry() {}
 
   setBridge(num) {
-    this.#bridge = Array.from({ length: num }, (x) =>
-      BridgeRandomNumberGenerator.generate()
+    this.#bridge = BridgeMaker.makeBridge(
+      num,
+      BridgeRandomNumberGenerator.generate
     );
   }
 
   getBridge() {
     return this.#bridge;
+  }
+
+  increaseCount() {
+    this.#count += 1;
+  }
+
+  initCount() {
+    this.#count = 0;
   }
 }
 
