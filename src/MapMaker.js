@@ -42,7 +42,12 @@ class MapMaker {
     }
   }
 
-  makeResultMap() {}
+  getResultMap() {
+    return {
+      upMaps: this.upMaps.join(" | "),
+      downMaps: this.downMaps.join(" | "),
+    };
+  }
 }
 
 module.exports = MapMaker;

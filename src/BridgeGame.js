@@ -6,10 +6,12 @@ const { WORD } = require("./Constants");
 class BridgeGame {
   #bridges;
   #movements;
+  #numberOfTry;
 
   constructor(bridges) {
     this.#bridges = bridges;
     this.#movements = [];
+    this.#numberOfTry = 0;
   }
 
   getBridges() {
@@ -24,6 +26,12 @@ class BridgeGame {
     if (this.#bridges.length === this.#movements.length) {
       return true;
     }
+    return false;
+  }
+
+  isSuccess() {
+    if (this.#movements[this.#movements.length - 1] === WORD.SUCCESS)
+      return true;
     return false;
   }
 
@@ -46,7 +54,9 @@ class BridgeGame {
    * <p>
    * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  retry() {}
+  retry() {
+    return (this.#numberOfTry += 1);
+  }
 }
 
 module.exports = BridgeGame;

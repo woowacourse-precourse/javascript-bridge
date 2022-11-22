@@ -15,7 +15,7 @@ const InputView = {
         this.validateBridgeSize(answer);
         callback(answer);
       } catch (error) {
-        console.error(error);
+        MissionUtils.Console.print(error);
         this.readBridgeSize(callback);
       }
     });
@@ -37,7 +37,7 @@ const InputView = {
         this.validateMoving(answer.toUpperCase());
         callback(answer.toUpperCase());
       } catch (error) {
-        console.error(error);
+        MissionUtils.Console.print(error);
         this.readMoving(callback);
       }
     });
@@ -57,7 +57,7 @@ const InputView = {
         this.validateGameCommand(answer.toUpperCase());
         callback(answer.toUpperCase());
       } catch (error) {
-        console.error(error);
+        MissionUtils.Console.print(error);
         this.readGameCommand(callback);
       }
     });

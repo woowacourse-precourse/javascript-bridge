@@ -63,7 +63,12 @@ class App {
     });
   }
 
-  controlEnd() {}
+  controlEnd() {
+    const map = this.mapMaker.getResultMap();
+    const isSuccess = this.bridgeGame.isSuccess();
+    const numberOfTry = this.bridgeGame.retry();
+    OutputView.printResult(map, isSuccess, numberOfTry);
+  }
 }
 
 const app = new App();

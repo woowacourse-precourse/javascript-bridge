@@ -11,6 +11,8 @@ const WORD = {
   BLANK: " ",
   RETRY: "R",
   QUIT: "Q",
+  SUCCESS_KR: "성공",
+  FAILURE_KR: "실패",
 };
 
 const MESSAGE = {
@@ -21,6 +23,9 @@ const MESSAGE = {
   },
   OUTPUT: {
     START: "다리 건너기 게임을 시작합니다.",
+    RESULT: "최종 게임 결과",
+    IS_SUCCESS: "게임 성공 여부",
+    NUMBER_OF_TRY: "총 시도한 횟수",
   },
   ERROR: {
     BRIDGE_SIZE: `${WORD.ERROR} 다리 길이는 ${WORD.START_SIZE}부터 ${WORD.END_SIZE} 사이의 숫자여야 합니다.`,
