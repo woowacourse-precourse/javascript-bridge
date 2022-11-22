@@ -20,7 +20,7 @@ const Validator = {
    * @param {number} number
    */
   validateNumber(number) {
-    if (/\D+/g.test(number)) throw new Error(prefix + isNotANumber);
+    if (/\D+/g.test(number)) throw prefix + isNotANumber;
   },
 
   /**
@@ -28,7 +28,7 @@ const Validator = {
    * @param {number} number
    */
   validateNumberRange(number) {
-    if (number < 3 || 20 < number) throw new Error(prefix + isOutOfRange);
+    if (number < 3 || 20 < number) throw prefix + isOutOfRange;
   },
 
   /**
@@ -36,8 +36,7 @@ const Validator = {
    * @param {string} dir
    */
   validateMove(dir) {
-    if (dir.length !== 1 || /[^UD]/.test(dir))
-      throw new Error(prefix + isNotUpOrDown);
+    if (dir.length !== 1 || /[^UD]/.test(dir)) throw prefix + isNotUpOrDown;
   },
 
   /**
@@ -45,8 +44,7 @@ const Validator = {
    * @param {string} msg
    */
   validateRetry(msg) {
-    if (msg.length !== 1 || /[^RQ]/.test(msg))
-      throw new Error(prefix + isNotRetryOrQuit);
+    if (msg.length !== 1 || /[^RQ]/.test(msg)) throw prefix + isNotRetryOrQuit;
   },
 };
 
