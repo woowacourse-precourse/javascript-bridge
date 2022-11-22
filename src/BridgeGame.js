@@ -1,13 +1,10 @@
 const validator = require('./utils/validator');
+const { BRIDGE_GAME } = require('./constants/Game');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  static BRIDGE_SHAPE = {
-    D: 0,
-    U: 1,
-  };
-
   #randomBridge = [];
 
   #userBridge = [];
@@ -30,7 +27,7 @@ class BridgeGame {
 
   #findBlockIndex(index, block) {
     const randomBlock = this.#randomBridge[index];
-    const correctIndex = BridgeGame.BRIDGE_SHAPE[block];
+    const correctIndex = BRIDGE_GAME.BLOCK[block];
     const incorrectIndex = correctIndex === 1 ? 0 : 1;
 
     return [randomBlock, correctIndex, incorrectIndex];

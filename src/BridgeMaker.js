@@ -1,4 +1,5 @@
 const BridgeGame = require('./BridgeGame');
+const { BRIDGE_GAME } = require('./constants/Game');
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
@@ -11,7 +12,7 @@ const BridgeMaker = {
    */
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
-    const shapes = Object.keys(BridgeGame.BRIDGE_SHAPE);
+    const shapes = Object.keys(BRIDGE_GAME.BLOCK);
 
     while (bridge.length < size) {
       const number = generateRandomNumber();
