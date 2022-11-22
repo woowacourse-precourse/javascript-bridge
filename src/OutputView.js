@@ -14,7 +14,9 @@ const OutputView = {
     printMap(bridge, position, choice) {
         const upperMap = this.getMapString(bridge, position, choice, 'U');
         const lowerMap = this.getMapString(bridge, position, choice, 'D');
-        MissionUtils.Console.print(upperMap + '\n' + lowerMap + '\n');
+        MissionUtils.Console.print(upperMap);
+        MissionUtils.Console.print(lowerMap);
+        MissionUtils.Console.print('');
     },
 
     /**
@@ -54,9 +56,9 @@ const OutputView = {
         MissionUtils.Console.print('최종 게임 결과');
         this.printMap(bridge, position, lastChoice);
         if (bridge.length === position) {
-            MissionUtils.Console.print('\n게임 성공 여부: 성공');
+            MissionUtils.Console.print('게임 성공 여부: 성공');
         } else {
-            MissionUtils.Console.print('\n게임 성공 여부: 실패');
+            MissionUtils.Console.print('게임 성공 여부: 실패');
         }
         MissionUtils.Console.print(`총 시도한 횟수: ${tryCount}`);
     },
