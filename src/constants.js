@@ -1,3 +1,5 @@
+const deepFreeze = require('./utils/deepFreeze');
+
 const Tile = {
   UP: 'U',
   DOWN: 'D',
@@ -20,10 +22,10 @@ const Survived = {
   NO: 'X',
 };
 
-module.exports = {
+module.exports = deepFreeze({
   Tile,
   SPAWNABLE_TILES,
   BridgeSize,
   GameCommand,
   Survived,
-};
+});
