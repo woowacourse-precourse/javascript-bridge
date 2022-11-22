@@ -1,6 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGE } = require("../constants/CONSTANT");
-const InputView = require("./InputView");
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -13,8 +12,7 @@ const OutputView = {
    */
   printMap(bridgeGame) {
     const bridge = bridgeGame.drawBridge();
-    Console.print(`[ ${bridge.up} ]`);
-    Console.print(`[ ${bridge.down} ]`);
+    bridge.forEach(brideSide => Console.print(`[ ${brideSide} ]`));
   },
 
   /**
@@ -24,12 +22,9 @@ const OutputView = {
    */
   printResult(bridgeGame) {
     const result = bridgeGame.drawGameResult();
-    Console.print(``);
-    Console.print(`최종 게임 결과`);
+    Console.print(`\n최종 게임 결과`);
     this.printMap(bridgeGame);
-    Console.print(``);
-    Console.print(`게임 성공 여부: ${result[1]}`);
-    Console.print(`총 시도한 횟수: ${result[0]}`);
+    Console.print(`\n게임 성공 여부: ${result[1]}\n총 시도한 횟수: ${result[0]}`);
     Console.close();
   },
 
