@@ -55,6 +55,17 @@ class MainController {
     OutputView.printMap(movingStatus);
   }
 
+  /**
+   * 최종 결과를 출력한다.
+   * @param userMoving {string[]} [유저 이동기록]
+   * @param isSuccess {boolean} [최종 성공여부]
+   */
+  displayFinalResult(userMoving, isSuccess) {
+    const movingStatus = this.bridgeController.getMovingStatus(userMoving);
+    const userTryCount = this.userController.getTryCount();
+    OutputView.printResult(movingStatus, isSuccess, userTryCount);
+  }
+
   // 게임 초기 실행 메서드
   init() {
     this.userController.increaseTryCount();
