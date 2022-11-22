@@ -4,6 +4,21 @@ const MESSAGE = Object.freeze({
   READ_GAME_COMMAND: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
 });
 
+const PAD = Object.freeze({
+  CORRECT_PAD: 'O',
+  WRONG_PAD: 'X',
+  NON_EXISTANT_PAD: ' ',
+  UP: 'U',
+  DOWN: 'D',
+});
+
+const COMMAND = Object.freeze({
+  RETRY: 'R',
+  QUIT: 'Q',
+});
+
 module.exports = Object.freeze({
   MESSAGE,
-})
+  PAD,
+  COMMAND,
+});
