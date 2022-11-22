@@ -36,3 +36,14 @@ describe('BridgeGame 클래스 테스트 4', () => {
     expect(testResult).toBe(`[   ]\n[ X ]`);
   });
 });
+
+describe('BridgeGame 클래스 테스트 4', () => {
+  test('retry 메소드', () => {
+    const testModel = new Model();
+    BridgeGame.move('D', ' X ', testModel);
+    BridgeGame.retry(testModel);
+    expect(testModel.getUpBridgeArr()).toEqual([]);
+    expect(testModel.getDownBridgeArr()).toEqual([]);
+    expect(testModel.getTryCount()).toBe(2);
+  });
+});
