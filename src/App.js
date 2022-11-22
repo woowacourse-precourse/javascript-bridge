@@ -1,7 +1,17 @@
 const BridgeGame = require('./BridgeGame');
 const { GAME_RESULT } = require('./common/Constant');
-const InputView = require('./io/InputView');
-const OutputView = require('./io/OutputView');
+const {
+  readBridgeSize,
+  readGameCommand,
+  readMoving,
+} = require('./io/InputView');
+const {
+  printGameStart,
+  printError,
+  printGameEnd,
+  printMap,
+  printResult,
+} = require('./io/OutputView');
 const {
   validateBridgeSize,
   validateMove,
@@ -15,7 +25,7 @@ class App {
    * 다리 건너기 게임을 실행한다.
    */
   play() {
-    OutputView.printGameStart();
+    printGameStart();
     this.askSize();
   }
 
@@ -23,7 +33,7 @@ class App {
    * 생성할 다리 길이를 입력 받는다.
    */
   askSize() {
-    InputView.readBridgeSize(this.handleSizeInputException.bind(this));
+    readBridgeSize(this.handleSizeInputException.bind(this));
   }
 
   /**
@@ -34,7 +44,7 @@ class App {
       validateBridgeSize(input);
       this.handleSizeInput.call(this, input);
     } catch (e) {
-      OutputView.printError(e);
+      printError(e);
       this.askSize();
     }
   }
@@ -51,7 +61,7 @@ class App {
    * 이동 정보를 입력 받는다.
    */
   askMove() {
-    InputView.readMoving(this.handleMovingInputException.bind(this));
+    readMoving(this.handleMovingInputException.bind(this));
   }
 
   /**
@@ -62,7 +72,7 @@ class App {
       validateMove(input);
       this.handleMovingInput.call(this, input);
     } catch (e) {
-      OutputView.printError(e);
+      printError(e);
       this.askMove();
     }
   }
@@ -72,7 +82,7 @@ class App {
    */
   handleMovingInput(input) {
     this.#game.move(input);
-    OutputView.printMap(this.#game.getMovingState());
+    printMap(this.#game.getMovingState());
     if (!this.#game.getIsGameOver()) return this.askMove();
     if (this.#game.getIsGameSuccess()) return this.end();
     this.askRestart();
@@ -82,7 +92,7 @@ class App {
    * 재시작 여부를 입력 받는다.
    */
   askRestart() {
-    InputView.readGameCommand(this.handleGameCommandInputException.bind(this));
+    readGameCommand(this.handleGameCommandInputException.bind(this));
   }
 
   /**
@@ -93,7 +103,7 @@ class App {
       validateRetry(input);
       this.handleGameCommandInput.call(this, input);
     } catch (e) {
-      OutputView.printError(e);
+      printError(e);
       this.askRestart();
     }
   }
@@ -111,12 +121,9 @@ class App {
    * 게임을 종료한다.
    */
   end() {
-    OutputView.printGameEnd();
-    OutputView.printMap(this.#game.getMovingState());
-    OutputView.printResult(
-      this.#game.getIsGameSuccess(),
-      this.#game.getTryCnt()
-    );
+    printGameEnd();
+    printMap(this.#game.getMovingState());
+    printResult(this.#game.getIsGameSuccess(), this.#game.getTryCnt());
   }
 }
 

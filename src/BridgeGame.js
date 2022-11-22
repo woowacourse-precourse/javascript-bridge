@@ -1,8 +1,8 @@
 const { makeBridge } = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
-const Checker = require('./utils/Checker');
+const { checkGameOver, checkSpaceCanMove } = require('./utils/Checker');
 const { convertToBridgeMap } = require('./utils/Converter');
-const Judge = require('./utils/Judge');
+const { judgeGameSuccess } = require('./utils/Judge');
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -24,7 +24,7 @@ class BridgeGame {
   move(dir) {
     this.#movingState.push([
       dir,
-      Checker.checkSpaceCanMove(dir, this.#bridge[this.#movingState.length]),
+      checkSpaceCanMove(dir, this.#bridge[this.#movingState.length]),
     ]);
   }
 
@@ -41,7 +41,7 @@ class BridgeGame {
    * @returns {boolean}
    */
   getIsGameOver() {
-    return Checker.checkGameOver(this.#movingState, this.#bridge);
+    return checkGameOver(this.#movingState, this.#bridge);
   }
 
   /**
@@ -49,7 +49,7 @@ class BridgeGame {
    * @returns {boolean}
    */
   getIsGameSuccess() {
-    return Judge.judgeGameSuccess(this.#movingState, this.#bridge);
+    return judgeGameSuccess(this.#movingState, this.#bridge);
   }
 
   /**
