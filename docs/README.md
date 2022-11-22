@@ -26,10 +26,18 @@
 
 ## 개발 시 필요한 목록 ⛏
 
-- [ ] prepare-commit-msg 규칙 등록
+- [x] prepare-commit-msg 규칙 등록
 
   - 커밋 컨벤션에 맞추기 위해 `.git/hooks` 기능을 사용한다.
-  - `prepare-commit-msg.sample` 파일에 아래 코드를 작성한 뒤 `prepare-commit-msg`로 파일명을 변경하여 사용한다.
+    - `cd .git/hooks` 를 사용해 git 에서 제공하는 hooks 에 접근한다.
+  - 파일에 있는 기존 코드를 지운다.
+    - `cat /dev/null > vim prepare-commit-msg.sample`
+  - `prepare-commit-msg.sample` 파일에 아래 코드를 작성한다.
+    - `vim prepare-commit-msg.sample` 로 파일 열기 -> `i` 눌러 수정모드 -> 코드 복사 붙여넣기 -> `:wq` 저장후 나오기
+  - `prepare-commit-msg`로 파일명을 변경하여 사용한다.
+
+    - `mv prepare-commit-msg.sample prepare-commit-msg`
+
   - ```bash
       #!/bin/bash
 
@@ -47,12 +55,14 @@
       fi
     ```
 
-- [ ] eslint airbnb 규칙 등록
+  [출처](https://gist.github.com/armand1m/103ca2b8c9820e216727336f303ea712#file-prepare-commit-msg)
+
+- [x] eslint airbnb 규칙 등록
   - `npm init @eslint/config` 로 초기 설정한다.
   - `npx install-peerdeps --dev eslint-config-airbnb`로 airbnb 규칙을 초기 세팅한다.
   - 요구사항의 `max-depth`, `max-lines-per-function` 규칙 추가한다.
   - test 파일엔 다양한 예외처리를 위해 `max-lines-per-function` 규칙을 꺼둔다.
-- [ ] prettier 설정
+- [x] prettier 설정
   - `npm install --save-dev --save-exact prettier`로 prettier를 설치한다.
   - `echo {}> .prettierrc.json`로 prettier 규칙을 작성할 파일을 생성한다.
   - eslint와 충돌할 것을 대비하여 `npm install --save-dev eslint-config-prettier` 를 설치한 뒤 eslint 규칙 설정 파일의 extends에 `"prettier"`를 추가한다. ([출처](https://prettier.io/docs/en/integrating-with-linters.html))
