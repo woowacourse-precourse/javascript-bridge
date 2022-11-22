@@ -1,11 +1,11 @@
 const {Console} = require("@woowacourse/mission-utils");
-const Messages = require("./Messages");
+const { Message } = require("./ViewMakers");
 const Validation = require("./InputValidation");
 
 const InputView = {
 
   readBridgeSize(app) {
-    Console.readLine(Messages.BRIDGE_SIZE(), (size)=>{ 
+    Console.readLine(Message.BRIDGE_SIZE, (size)=>{ 
       Console.print("");
       try{
         Validation.checkBridgeSize(size);
@@ -18,7 +18,7 @@ const InputView = {
   },
 
   readMoving(bridgePlay) {
-    Console.readLine(Messages.MOVE_TO_WHERE(), (moving)=>{
+    Console.readLine(Message.MOVE_TO_WHERE, (moving)=>{
       try{
         Validation.checkMoving(moving);
         bridgePlay.playRound(moving);
@@ -30,7 +30,7 @@ const InputView = {
   },
 
   readGameCommand(bridgePlay) {
-    Console.readLine(Messages.GAME_QUIT_OR_RETRY(), (option)=>{
+    Console.readLine(Message.GAME_QUIT_OR_RETRY, (option)=>{
       try{
         Validation.checkOption(option);
         bridgePlay.endOrRetry(option);

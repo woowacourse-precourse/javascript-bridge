@@ -1,29 +1,23 @@
-const {Console} = require("@woowacourse/mission-utils");
-const Messages = require("./Messages");
+const { Console } = require("@woowacourse/mission-utils");
+const { Message, Map, Result } = require("./ViewMakers");
 
 const OutputView = {
 
   printStart() {
-    Console.print(Messages.GAMESTART());
+    Console.print(Message.GAME_START);
   },
 
   printMap(bridge, moved){
-    const up = moved.map((el, index)=>{
-      return el==='U'? (el===bridge[index]?'O':'X') :' ';
-    })
-    const down = moved.map((el, index)=>{
-      return el==='D'? (el===bridge[index]?'O':'X') :' ';
-    })
-    Console.print(`[ ${up.join(' | ')} ]\n[ ${down.join(' | ')} ]\n`);
+    const upLine = Map.makeLine(bridge, moved, 'U');
+    const downLine = Map.makeLine(bridge, moved, 'D');
+    Console.print(Map.makeMap(upLine, downLine));
   },
 
   printResult(bridge, moved, attempts) {
-    const isSuccess = JSON.stringify(bridge)===JSON.stringify(moved);
-
-    Console.print(Messages.GAMERESULT());
+    Console.print(Result.GAMERESULT);
     this.printMap(bridge, moved);
-    Console.print(Messages.IS_SUCCESS(isSuccess));
-    Console.print(Messages.GAME_ATTEMPTS(attempts));
+    Console.print(Result.IS_SUCCESS + `${Result.makeStringResult(bridge, moved)}`);
+    Console.print(Result.GAME_ATTEMPTS + `${attempts}`);
     
     Console.close();
   },
