@@ -8,7 +8,7 @@ class BridgeGame {
   #playerUp;
   #playerDown;
   #playerMoveResult;
-  #i;
+  #indexValue;
   #totalTryNumber;
 
   constructor(bridge){
@@ -26,7 +26,7 @@ class BridgeGame {
     this.initialization();
     playerMoveList.map((move)=>{
       this.moveCompareUpDown(move)
-      this.#i++;
+      this.#indexValue++;
     })
     this.#playerMoveResult=this.makeMoveResult()
     IndividualResultOutput(this.#playerMoveResult)
@@ -36,7 +36,7 @@ class BridgeGame {
   initialization(){
     this.#playerDown = [];
     this.#playerUp = [];
-    this.#i=0;
+    this.#indexValue=0;
   }
 
   makeMoveResult(){
@@ -53,13 +53,13 @@ class BridgeGame {
   }
 
   moveUp(move){
-    if(this.#bridge[this.#i] === move) this.#playerUp.push('O')
+    if(this.#bridge[this.#indexValue] === move) this.#playerUp.push('O')
     else this.#playerUp.push('X');
     this.#playerDown.push(" ");
   }
 
   moveDown(move){
-    if(this.#bridge[this.#i] === move) this.#playerDown.push('O')
+    if(this.#bridge[this.#indexValue] === move) this.#playerDown.push('O')
     else this.#playerDown.push('X');
     this.#playerUp.push(" ");
   }

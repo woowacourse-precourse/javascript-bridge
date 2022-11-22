@@ -36,8 +36,8 @@ const InputView = {
       if(userMoveValidate(playerMove)) return this.readMoving(playerMoveList, bridgeGame, bridgeSize)
       playerMoveList=moveListPush(playerMoveList, playerMove)
       const gameResult=bridgeGame.move(playerMoveList, bridgeSize);
-      if(playerMoveList.length===Number(bridgeSize)) return OutputView.printResult(gameResult, SUCCESS, bridgeGame.getTotalTry())
       if(gameResult.includes('X')) this.readGameCommand(gameResult, bridgeGame, bridgeSize);
+      if(playerMoveList.length===Number(bridgeSize)) return OutputView.printResult(gameResult, SUCCESS, bridgeGame.getTotalTry())
       return this.readMoving(playerMoveList, bridgeGame, bridgeSize);
     })
   },
@@ -55,6 +55,7 @@ const InputView = {
       }
     })
   },
+
 };
 
 module.exports = InputView;
