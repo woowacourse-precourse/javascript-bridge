@@ -15,12 +15,12 @@ const InputView = {
    * 다리의 길이를 입력받는다.
    */
   readBridgeSize() {
-    let generatedBridge
+    let generatedBridge;
     Console.readLine(QUESTION.BRIDGE_LENGTH,(input)=>{
-      Validation.validationForBridgeLength(input)
-      generatedBridge=BridgeMaker.makeBridge(input,BridgeRandomNumberGenerator.generate)
+      Validation.validationForBridgeLength(input);
+      generatedBridge=BridgeMaker.makeBridge(input,BridgeRandomNumberGenerator.generate);
     })
-    return generatedBridge
+    return generatedBridge;
   },
 
   /**
@@ -28,12 +28,8 @@ const InputView = {
    */
   readMoving(generatedBridge,gameStatus) {
     Console.readLine(QUESTION.NEXT_MOVE,(input)=>{
-      Validation.validationForNextMove(input)
-      new BridgeGame().move(input,generatedBridge,gameStatus)
-        // if(this.generatedBridge.length===this.gameStatus.playerLocation) {
-        //     this.gameStatus.wrongFlag=true
-        //     return
-        // }
+      Validation.validationForNextMove(input);
+      new BridgeGame().move(input,generatedBridge,gameStatus);
     }) 
   },
 
@@ -42,8 +38,8 @@ const InputView = {
    */
   readGameCommand(gameStatus) {
     Console.readLine(QUESTION.RETRY,(input)=>{
-      Validation.validationForRetry(input)
-      new BridgeGame().retry(input,gameStatus)
+      Validation.validationForRetry(input);
+      new BridgeGame().retry(input,gameStatus);
     })
   },
 };
