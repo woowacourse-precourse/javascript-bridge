@@ -62,6 +62,10 @@ class BridgeGame {
   getAttemptNumber(){
     return this.#attemptNumber;
   }
+
+  getBridgeShape(){
+    return this.#bridgeShape;
+  }
 }
 
 module.exports = BridgeGame;

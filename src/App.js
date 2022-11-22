@@ -15,17 +15,19 @@ class App {
   start(){
     InputView.readBridgeSize((size)=>{
       this.#bridgeGame = new BridgeGame(size);
+      Console.print(this.#bridgeGame.getBridgeShape());
       this.selectMove();
     });
   }
 
   selectMove(){
     InputView.readMoving((playerMoving)=>{
-      this.#bridgeGame.move(playerMoving);
-      this.#bridgeGame.isSuccess();
-      // Console.print(this.#bridgeGame.isSuccess());
-      // Console.print(this.#bridgeGame.isSuccess());
-      OutputView.printMap(this.#bridgeGame.getPlayerMovingRecord(), this.#bridgeGame.isSuccess());
+        this.#bridgeGame.move(playerMoving);
+        OutputView.printMap(this.#bridgeGame.getPlayerMovingRecord(), this.#bridgeGame.isSuccess());
+        if (this.#bridgeGame.isSuccess() && !(this.#bridgeGame.isFinish()))
+          this.selectMove();
+
+        this.selectRetry();
     });
   }
 }

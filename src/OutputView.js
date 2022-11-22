@@ -15,6 +15,8 @@ const OutputView = {
     const downRecord = this.makeRecord(playerMovingRecord, isSuccess, 'D');
     const upMap = this.makeMapOneline(upRecord);
     const downMap = this.makeMapOneline(downRecord);
+    Console.print(upRecord);
+    Console.print(downRecord);
 
     Console.print(upMap);
     Console.print(downMap);
@@ -23,10 +25,10 @@ const OutputView = {
   makeRecord(playerMovingRecord, isSuccess, upOrDown){
     let gameRecord = "";
     for(let index = 0; index < playerMovingRecord.length - 1; index++){
-      gameRecord = gameRecord + (upOrDown === playerMovingRecord[index]) ? 'O' : ' ';
+      gameRecord = gameRecord + (upOrDown === playerMovingRecord[index] ? 'O' : ' ');
     }
 
-    gameRecord = this.makeLastRecord(playerMovingRecord, isSuccess, upOrDown);
+    gameRecord = gameRecord + this.makeLastRecord(playerMovingRecord, isSuccess, upOrDown);
 
     return gameRecord;
   },
@@ -44,7 +46,7 @@ const OutputView = {
   makeMapOneline(gameRecord){
     let map = '[ ' + gameRecord[0];
     for(let index =1; index < gameRecord.length; index++){
-      map = [map, gameRecord[index], ' | '].join(); 
+      map = map + ' | ' + gameRecord[index] ; 
     }
 
     map = map + ' ]';
