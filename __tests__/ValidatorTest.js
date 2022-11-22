@@ -24,7 +24,7 @@ describe("bridgeSizeCheck 테스트", () => {
 describe("directionCheck 테스트", () => {
   test("입력값 유효성 테스트", () => {
     const valid = [USER_INPUT_CODE.MOVE.UPPER, USER_INPUT_CODE.MOVE.LOWER];
-    const invalid = [1, 2, 10, 0, '유', 'q', 'sda'];
+    const invalid = [USER_INPUT_CODE.MOVE.UPPER.toLowerCase(), USER_INPUT_CODE.MOVE.LOWER.toLowerCase(), 1, 2, 10, 0, '유', 'q', 'sda'];
     valid.forEach(value => {
       const result = Validator.directionCheck(value);
       expect(result).toBeUndefined();
@@ -38,7 +38,7 @@ describe("directionCheck 테스트", () => {
 describe("retryCheck 테스트", () => {
   test("입력값 유효성 테스트", () => {
     const valid = [USER_INPUT_CODE.RETRY.AGREE, USER_INPUT_CODE.RETRY.QUIT];
-    const invalid = [1, 2, 10, 0, '유', 'd', 'u'];
+    const invalid = [USER_INPUT_CODE.RETRY.AGREE.toLowerCase(), USER_INPUT_CODE.RETRY.QUIT.toLowerCase(), 1, 2, 10, 0, '유', 'd', 'u'];
     valid.forEach(value => {
       const result = Validator.retryCheck(value);
       expect(result).toBeUndefined();
