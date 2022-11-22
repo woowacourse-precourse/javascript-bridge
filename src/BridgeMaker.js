@@ -13,11 +13,11 @@ const BridgeMaker = {
 		let canWalkBridge = [];
 
 		while (canWalkBridge.length < size) {
-			generateRandomNumber() === MAKER.LOWER_BRIDGE_NUMBER
+			const number = generateRandomNumber();
+			number === MAKER.LOWER_BRIDGE_NUMBER
 				? canWalkBridge.push(COMMAND.LOWER_BRIDGE_STRING)
 				: canWalkBridge.push(COMMAND.UPPER_BRIDGE_STRING);
 		}
-
 		return canWalkBridge;
 	},
 };
