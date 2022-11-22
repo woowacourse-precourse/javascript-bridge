@@ -49,7 +49,22 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    return new Promise((resolve)=>{
+      MissionUtils.Console.readLine('',(input)=>{
+        this.gameCommandInputCheck(input)
+
+        resolve(input)
+      })
+    })
+  },
+  gameCommandInputCheck(){
+    try{
+      if(!(input === 'R' || input === 'Q'))throw new Error('[ERROR]: R(재시작) 또는 Q(끝내기)를 입력해주세요')
+    }catch(error){
+      MissionUtils.Console.print(error)
+    }
+  }
 };
 
 module.exports = InputView;

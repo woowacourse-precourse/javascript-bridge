@@ -15,8 +15,17 @@ class App {
 
       const map = bridgeGame.getMap()
 
+      if(!moveResult){
+        const retryInput = await InputView.readGameCommand()
+        if(retryInput === 'R'){
+          bridgeGame.retry()
+        }else{
+          break;
+        }
+      }
       OutputView.printMap(map)
     }
+
   }
 }
 
