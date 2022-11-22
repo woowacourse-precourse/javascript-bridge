@@ -187,8 +187,10 @@ describe('배열 길이 반환 함수 테스트', () => {
   });
 
   test('인수가 배열이 아니라면 예외를 발생시킨다.', () => {
+    const EXPECTED = '3';
+
     expect(() => {
-      Application.getArrayLength('3');
+      Application.getArrayLength(EXPECTED);
     }).toThrow(VALIDATION_ARRAY_TEXT);
   });
 
