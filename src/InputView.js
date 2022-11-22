@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { INPUT_MSG } = require("./constants/Message");
+const { INPUT_MSG } = require("./Constants/Message");
 const Vaild = require("./Vaild");
 
 /**

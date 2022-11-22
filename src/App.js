@@ -1,15 +1,16 @@
 const BridgeGame = require("./BridgeGame");
 const { Console } = require("@woowacourse/mission-utils");
-const { GAME_MSG } = require("./constants/Message");
+const { GAME_MSG } = require("./Constants/Message");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
-const Command = require("./constants/Command");
+const Command = require("./Constants/Command");
 
 class App {
   #bridgeGame;
   #retryCount;
 
   constructor() {
+    this.#bridgeGame = new BridgeGame();
     this.#retryCount = 1;
   }
 
@@ -23,7 +24,6 @@ class App {
    * @param {number} size 다리길이 3이상 20이하
    */
   createBridgeGame(size) {
-    this.#bridgeGame = new BridgeGame();
     this.#bridgeGame.setBridge(size);
     this.playBridgeGame();
   }

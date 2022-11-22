@@ -1,8 +1,8 @@
 const { isNumber, error } = require("./Utils");
 const { Console } = require("@woowacourse/mission-utils");
-const { ERROR_MSG } = require("./constants/Message");
-const Command = require("./constants/Command");
-const BRIDGE = require("./constants/Range");
+const { ERROR_MSG } = require("./Constants/Message");
+const Command = require("./Constants/Command");
+const BRIDGE = require("./Constants/Range");
 
 /**
  * 유효성 검사
