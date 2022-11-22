@@ -26,43 +26,43 @@ class App {
     );
     this.bridgeGame.setBridgeShape(bridgeShape);
 
-    this.inputMoving();
+    this.inputMovingCommand();
   }
 
-  inputMoving() {
-    InputView.readMoving(this.playerMove.bind(this));
+  inputMovingCommand() {
+    InputView.readMoving(this.moveBirdge.bind(this));
   }
 
-  playerMove(movingCommand) {
+  moveBirdge(movingCommand) {
     this.bridgeGame.move(movingCommand);
     OutputView.printMap(this.bridgeGame.getCurrentBridgeMap());
 
-    this.afterMove();
+    this.controlBridgeMoveResult();
   }
 
-  afterMove() {
+  controlBridgeMoveResult() {
     if (!this.bridgeGame.isAnswerMovingChoice()) {
-      this.inputRetryCommand();
+      this.inputGameCommand();
       return;
     }
     if (this.bridgeGame.isGameSuccess()) {
       OutputView.printResult(this.sendPrintResult());
       return;
     }
-    this.inputMoving();
+    this.inputMovingCommand();
   }
 
-  inputRetryCommand() {
-    InputView.readGameCommand(this.playerChoiceRetry.bind(this));
+  inputGameCommand() {
+    InputView.readGameCommand(this.retryQuit.bind(this));
   }
 
-  playerChoiceRetry(gameCommand) {
+  retryQuit(gameCommand) {
     if (gameCommand === COMMAND.GAME.QUIT) {
       OutputView.printResult(this.sendPrintResult());
       return;
     }
     this.bridgeGame.retry();
-    this.inputMoving();
+    this.inputMovingCommand();
   }
 
   sendPrintResult() {
