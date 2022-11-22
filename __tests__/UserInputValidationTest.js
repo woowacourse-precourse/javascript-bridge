@@ -1,6 +1,6 @@
 const { runException, mockRandoms } = require('./ApplicationTest');
 
-describe('계단 사이즈 유효성 테스트', () => {
+describe('다리 사이즈 유효성 테스트', () => {
   test('3 이하의 숫자를 입력했을 때 오류가 발생한다.', () => {
     runException(['1'], ['[ERROR] 3부터 20 사이의 숫자를 입력해주세요.']);
   });
