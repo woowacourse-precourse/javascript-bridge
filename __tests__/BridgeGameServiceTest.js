@@ -44,7 +44,7 @@ const mockBridgeGameModel = () => {
     "read",
     "result",
     "checkBridge",
-    "checkUser",
+    "checkDirection",
     "checkRetry",
     "isPass",
     "isSuccess",

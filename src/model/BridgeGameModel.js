@@ -6,12 +6,12 @@ const {
 } = require("../error/BridgeGameError.js");
 
 const BridgeGameModel = class {
-  #user = [];
+  #directions = [];
   #bridge = [];
   #retry = [];
 
   initialize() {
-    this.#user = [];
+    this.#directions = [];
   }
 
   start(bridge) {
@@ -25,12 +25,12 @@ const BridgeGameModel = class {
   }
 
   update(move) {
-    this.#user.push(HASH[move]);
+    this.#directions.push(HASH[move]);
     return { ...this.read(), pass: !this.isPass() };
   }
 
   read() {
-    return { user: this.#user, bridge: this.#bridge };
+    return { directions: this.#directions, bridge: this.#bridge };
   }
 
   result() {
@@ -46,12 +46,12 @@ const BridgeGameModel = class {
   }
 
   isSuccess() {
-    return JSON.stringify(this.#user) === JSON.stringify(this.#bridge);
+    return JSON.stringify(this.#directions) === JSON.stringify(this.#bridge);
   }
 
   isPass() {
-    const currentIndex = this.#user.length - 1;
-    return this.#user[currentIndex] !== this.#bridge[currentIndex];
+    const currentIndex = this.#directions.length - 1;
+    return this.#directions[currentIndex] !== this.#bridge[currentIndex];
   }
 
   checkBridge(bridge) {
@@ -62,7 +62,7 @@ const BridgeGameModel = class {
     return bridge;
   }
 
-  checkUser(move) {
+  checkDirection(move) {
     const { UP, DOWN } = KEYWORD;
     const isMove = move === UP || move === DOWN;
     if (!isMove) throw new BridgeGameMoveError();

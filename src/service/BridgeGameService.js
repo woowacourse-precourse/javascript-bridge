@@ -48,7 +48,7 @@ const BridgeGameService = class {
 
   moveGame(processMoveTask) {
     const callback = (move) => {
-      this.#bridgeGameModel.checkUser(move);
+      this.#bridgeGameModel.checkDirection(move);
       pipe(move)(
         this.#bridgeGameModel.update.bind(this.#bridgeGameModel),
         this.#outputView.printMap,

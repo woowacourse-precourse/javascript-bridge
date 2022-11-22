@@ -5,7 +5,7 @@ describe("BridgeGameModel 클래스 테스트", () => {
     const bridgeGameModel = new BridgeGameModel();
 
     expect(bridgeGameModel.update("U")).toEqual({
-      user: ["U"],
+      directions: ["U"],
       bridge: [],
       pass: false,
     });
@@ -15,7 +15,7 @@ describe("BridgeGameModel 클래스 테스트", () => {
     const bridgeGameModel = new BridgeGameModel();
 
     expect(bridgeGameModel.update("D")).toEqual({
-      user: ["D"],
+      directions: ["D"],
       bridge: [],
       pass: false,
     });
@@ -36,7 +36,7 @@ describe("BridgeGameModel 클래스 테스트", () => {
     (input) => {
       expect(() => {
         const bridgeGameModel = new BridgeGameModel();
-        bridgeGameModel.checkUser(input);
+        bridgeGameModel.checkDirection(input);
       }).toThrow("[ERROR]");
     }
   );

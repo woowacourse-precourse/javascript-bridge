@@ -9,9 +9,9 @@ const { getMapMessage } = require("../utils/Message.js");
  */
 const OutputView = {
   printMap(data) {
-    const { user, bridge } = data;
+    const { directions, bridge } = data;
 
-    getMapMessage(user, bridge).map((message) => print(message));
+    getMapMessage(directions, bridge).map((message) => print(message));
     OutputView.printBlank();
   },
 

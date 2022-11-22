@@ -30,7 +30,7 @@ const constants = Object.freeze({
     RETRY_ERROR: "[ERROR] 'R' 또는 'Q'를 입력해주세요.",
   },
   SIZE: {
-    MAP_SIZE: 2,
+    DIRECTION_SIZE: 2,
     MIN_SIZE: 3,
     MAX_SIZE: 20,
   },

@@ -1,7 +1,7 @@
 const {
   OUTPUT: { MAP_BLANK, MAP_MIDDLE_DIVIDE, MAP_DIVIDE },
   KEYWORD: { SUCCESS_JUMP, FALI_JUMP },
-  SIZE: { MAP_SIZE },
+  SIZE: { DIRECTION_SIZE },
   HASH,
 } = require("../constants/index.js");
 
@@ -11,11 +11,11 @@ const Message = class {
     return isPass ? SUCCESS_JUMP : FALI_JUMP;
   }
 
-  static getMapMessage(user, bridge) {
-    return Array.from({ length: MAP_SIZE }, (_, line) =>
-      user.reduce((map, move, location) => {
+  static getMapMessage(directions, bridge) {
+    return Array.from({ length: DIRECTION_SIZE }, (_, direction) =>
+      directions.reduce((map, move, location) => {
         const isPass = move === bridge[location];
-        const isLocation = move === HASH[line];
+        const isLocation = move === HASH[direction];
         return (map += Message.getLineMessage(isPass, isLocation));
       }, "")
     )
