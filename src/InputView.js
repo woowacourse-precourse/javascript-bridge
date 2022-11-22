@@ -6,7 +6,7 @@ const { GAME_MESSAGE } = require("./utils/Constants");
  */
 const InputView = {
   /**
-   * 다리의 길이를 입력받는다.
+   * 사용자에게 다리의 길이를 입력받는다.
    */
   readBridgeSize(callback) {
     Console.readLine(GAME_MESSAGE.input_bridge_size, (input) => {
@@ -25,7 +25,7 @@ const InputView = {
   },
 
   /**
-   * 사용자가 이동할 칸을 입력받는다.
+   * 사용자에게 이동할 칸을 입력받는다.
    */
   readMoving(callback) {
     Console.readLine(GAME_MESSAGE.input_moving, (input) => {
@@ -44,7 +44,7 @@ const InputView = {
   },
 
   /**
-   * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
+   * 사용자에게 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
   readGameCommand(callback) {
     Console.readLine(GAME_MESSAGE.input_command, (input) => {

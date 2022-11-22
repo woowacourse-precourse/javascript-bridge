@@ -4,7 +4,7 @@ const { GAME_MESSAGE } = require("./utils/Constants");
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
-  //게임 시작
+  //게임 시작 메세지
   printGameStartPhrase() {
     Console.print(GAME_MESSAGE.start);
   },

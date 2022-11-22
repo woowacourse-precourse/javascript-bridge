@@ -7,15 +7,12 @@ const Validation = {
    */
   validateBridgeSize(input) {
     const inputSize = Number(input);
-    if (!Validation.isValidSizeType(input)) {
+    if (!Validation.isValidSizeType(input))
       throw new Error(ERROR_MESSAGE.bridge_size_type);
-    }
-    if (!Validation.isValidSizeRange(inputSize)) {
+    if (!Validation.isValidSizeRange(inputSize))
       throw new Error(ERROR_MESSAGE.bridge_range);
-    }
-    if (!Validation.isValidSizeNumber(inputSize)) {
+    if (!Validation.isValidSizeNumber(inputSize))
       throw new Error(ERROR_MESSAGE.bridge_size_number);
-    }
   },
 
   isValidSizeRange(size) {
@@ -29,26 +26,19 @@ const Validation = {
   isValidSizeType(input) {
     return !isNaN(input);
   },
+
   /**
    * 플레이어가 게임 중 입력한 이동할 칸 값이 형식에 어긋날 경우 예외를 발생시킵니다.
    * @param {string} playerInput - 플레이어의 입력
    */
   validateMoving(input) {
-    if (!this.isValidMovingType(input)) {
+    if (!this.isValidMovingType(input))
       throw new Error(ERROR_MESSAGE.moving_type);
-    }
-
-    if (!this.isValidMovingLength(input)) {
+    if (!this.isValidMovingLength(input))
       throw new Error(ERROR_MESSAGE.moving_length);
-    }
-
-    if (!this.isValidMovingCase(input)) {
+    if (!this.isValidMovingCase(input))
       throw new Error(ERROR_MESSAGE.moving_string_case);
-    }
-
-    if (!this.isValidMoving(input)) {
-      throw new Error(ERROR_MESSAGE.moving_valid);
-    }
+    if (!this.isValidMoving(input)) throw new Error(ERROR_MESSAGE.moving_valid);
   },
 
   isValidMovingType(input) {
@@ -73,21 +63,14 @@ const Validation = {
    * @param {string} playerInput - 플레이어의 입력
    */
   validateGameCommand(input) {
-    if (!this.isValidCommandType(input)) {
+    if (!this.isValidCommandType(input))
       throw new Error(ERROR_MESSAGE.command_type);
-    }
-
-    if (!this.isValidCommandLength(input)) {
+    if (!this.isValidCommandLength(input))
       throw new Error(ERROR_MESSAGE.command_length);
-    }
-
-    if (!this.isValidCommandCase(input)) {
+    if (!this.isValidCommandCase(input))
       throw new Error(ERROR_MESSAGE.command_string_case);
-    }
-
-    if (!this.isValidCommand(input)) {
+    if (!this.isValidCommand(input))
       throw new Error(ERROR_MESSAGE.command_valid);
-    }
   },
 
   isValidCommandType(input) {

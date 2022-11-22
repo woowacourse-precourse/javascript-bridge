@@ -1,9 +1,9 @@
-const OutputView = require("./OutputView");
-const InputView = require("./InputView");
+const { Console } = require("@woowacourse/mission-utils");
 const { GAME_MESSAGE, PLAYER_CHOICE } = require("./utils/Constants");
+const InputView = require("./InputView");
+const OutputView = require("./OutputView");
 const Bridge = require("./Bridge");
 const BridgeGame = require("./BridgeGame");
-const { Console } = require("@woowacourse/mission-utils");
 
 class App {
   #bridge;
@@ -27,7 +27,6 @@ class App {
   }
 
   makeBridge(bridgeSize) {
-    console.log("bridgeSize:", bridgeSize);
     this.#bridgeGame.makeBridge(bridgeSize);
     this.inputMoving();
   }
@@ -56,9 +55,7 @@ class App {
         if (command === PLAYER_CHOICE.retry) this.retryGame();
         if (command === PLAYER_CHOICE.exit) this.quitGame(gameState);
       });
-    } else {
-      this.winGame(gameState);
-    }
+    } else this.winGame(gameState);
   }
 
   winGame(gameState) {
