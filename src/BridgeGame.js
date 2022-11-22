@@ -4,7 +4,8 @@ const { Console } = require("@woowacourse/mission-utils");
  */
 class BridgeGame {
   constructor(){
-    this.bridgeList;
+    this.upBridgeList = [];
+    this.downBridgeList = [];
     this.count = 0;
   }
 
@@ -15,6 +16,15 @@ class BridgeGame {
   getCount(){
     return this.count;
   }
+
+  getUpBridgeList(){
+    return this.upBridgeList;
+  }
+
+  getDownBridgeList(){
+    return this.downBridgeList;
+  }
+
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -24,34 +34,35 @@ class BridgeGame {
     const standardBridge = bridge.getBridge();;
     let count = this.getCount();
 
-    Console.print(standardBridge);
+    Console.print(standardBridge[count]);
     if(space === "U") this.upMove(standardBridge,count);
     if(space === "D") this.downMove(standardBridge,count);
+    
 
     this.setCount();
-    return this.bridgeList;
+    
   }
 
   upMove(standardBridge,count){
     if(standardBridge[count] === "U"){
       return (
-        this.bridgeList[1].push('O'),
-        this.bridgeList[0].push(' ')
+        this.upBridgeList.push('O'),
+        this.downBridgeList.push(' ')
       )
     }
-    this.bridgeList[1].push('X');
-    this.bridgeList[0].push(' ');
+    this.upBridgeList.push('X');
+    this.downBridgeList.push(' ');
   }
 
   downMove(standardBridge,count){
     if(standardBridge[count] === "D"){
       return (
-        this.bridgeList[1].push(' '),
-        this.bridgeList[0].push('O')
+        this.upBridgeList.push(' '),
+        this.downBridgeList.push('O')
       )
     }
-    this.bridgeList[1].push(' ');
-    this.bridgeList[0].push('X');
+    this.upBridgeList.push(' ');
+    this.downBridgeList.push('X');
   }
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

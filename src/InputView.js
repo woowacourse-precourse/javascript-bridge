@@ -17,6 +17,7 @@ const InputView = {
       // if(exception.checkBridgeSize(bridgeSize)) return this.readBridgeSize(bridge);
 
       bridge.setBridge(Number(bridgeSize));
+      Console.print(bridge.getBridge());
       this.readMoving(bridge,bridgeGame);
     });
   },
@@ -28,8 +29,8 @@ const InputView = {
     Console.readLine(COMMAND.MOVE, (space) => {
       // exception.checkSpace(space);
       
-      const bridgeList = bridgeGame.move(space,bridge);
-      // OutputView.printMap(bridgeList);
+      bridgeGame.move(space,bridge);
+      OutputView.printMap(bridgeGame.getUpBridgeList(),bridgeGame.getDownBridgeList());
     });
   },
 
