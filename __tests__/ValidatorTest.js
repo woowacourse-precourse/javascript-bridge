@@ -76,4 +76,20 @@ describe('Validator 테스트', () => {
       BridgeValidator.checkInputNext('D');
     }).not.toThrow();
   });
+
+  test('게임을 재시작 하거나 종료하는 값은 R, Q이다.', () => {
+    expect(() => {
+      BridgeValidator.checkInputNext('T');
+    }).toThrow();
+  });
+  test('게임을 재시작 하거나 종료하는 값은 R, Q이다.', () => {
+    expect(() => {
+      BridgeValidator.checkInputNext('R');
+    }).not.toThrow();
+  });
+  test('게임을 재시작 하거나 종료하는 값은 R, Q이다.', () => {
+    expect(() => {
+      BridgeValidator.checkInputNext('Q');
+    }).not.toThrow();
+  });
 });
