@@ -1,4 +1,5 @@
 const { COMMAND } = require("./constants/game");
+const { getArrayLastIndex } = require("./utils");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -47,9 +48,9 @@ class BridgeGame {
     const upsideBridgeMap = this.#makeAnswerBridgeMap(COMMAND.MOVING.UP);
     const downsideBridgeMap = this.#makeAnswerBridgeMap(COMMAND.MOVING.DOWN);
     if (!this.isAnswerMovingChoice()) {
-      upsideBridgeMap[upsideBridgeMap.length - 1] =
+      upsideBridgeMap[getArrayLastIndex(upsideBridgeMap)] =
         this.#movingCommand === COMMAND.MOVING.UP ? "X" : " ";
-      downsideBridgeMap[downsideBridgeMap.length - 1] =
+      downsideBridgeMap[getArrayLastIndex(downsideBridgeMap)] =
         this.#movingCommand === COMMAND.MOVING.DOWN ? "X" : " ";
     }
     return { upsideBridgeMap, downsideBridgeMap };
