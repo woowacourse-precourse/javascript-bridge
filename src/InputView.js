@@ -46,9 +46,13 @@ const InputView = {
       }
 
       const BRIDGE_GAME_LOG = OutputView.printMap(this.bridge[this.moveCount], input);
-      this.moveCount += 1;
-      this.trackProgress(BRIDGE_GAME_LOG);
+      this.updateMove(BRIDGE_GAME_LOG);
     });
+  },
+
+  updateMove(bridgeGameLog) {
+    this.moveCount += 1;
+    this.trackProgress(bridgeGameLog);
   },
 
   trackProgress(bridgeGameLog) {
