@@ -10,8 +10,8 @@ const Bridge = require("../Model/Bridge");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor(direction) {
-    this.bridge = new Bridge(direction);
+  constructor(directions) {
+    this.bridge = new Bridge(directions);
     this.playerUpperBridgeState = [];
     this.playerLowerBridgeState = [];
     this.result = new Map([
@@ -42,7 +42,7 @@ class BridgeGame {
 
   isQuit(canCross) {
     return (
-      this.bridge.isLastPosition(playerUpperBridgeState.length) && canCross
+      this.bridge.isLastPosition(this.playerUpperBridgeState.length) && canCross
     );
   }
 
