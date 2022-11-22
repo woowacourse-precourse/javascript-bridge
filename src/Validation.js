@@ -1,30 +1,28 @@
-const prefix = '[ERROR]';
+const {
+  ERROR_BRIDGE_MESSAGE,
+  ERROR_MOVE_MESSAGE,
+  ERROR_RETRY_MESSAGE
+} = require('./constants/Message');
 
 const validateBridgeLength = userInput => {
-  if (isNaN(userInput)) throw new Error(`${prefix} 다리 길이는 문자가 아닌 숫자여야 합니다.`);
-  if (userInput < 3 || userInput > 20)
-    throw new Error(`${prefix} 다리 길이는 3이상 20이하 숫자여야 합니다.`);
+  if (isNaN(userInput)) throw new Error(ERROR_BRIDGE_MESSAGE.ONLY_STRING);
+  if (userInput < 3 || userInput > 20) throw new Error(ERROR_BRIDGE_MESSAGE.RANGE);
 };
 
 const validateMovingValue = userInput => {
-  if (typeof userInput !== 'string')
-    throw new Error(`${prefix} 'U'(위), 'D'(아래) 중 하나의 문자만 입력해주세요!`);
+  if (typeof userInput !== 'string') throw new Error(ERROR_MOVE_MESSAGE.ONLY_STRING);
 
-  if (userInput == 'u' || userInput == 'd') throw new Error(`${prefix} 대문자로 입력해주세요!`);
+  if (userInput == 'u' || userInput == 'd') throw new Error(ERROR_MOVE_MESSAGE.CAPITAL);
 
-  if (userInput != 'U' && userInput != 'D')
-    throw new Error(`${prefix} 이동할 칸은 문자 'U'(위), 'D'(아래) 중 하나여야 합니다.`);
+  if (userInput != 'U' && userInput != 'D') throw new Error(ERROR_MOVE_MESSAGE.WRONG);
 };
 
 const validateEndValue = userInput => {
-  if (typeof userInput !== 'string')
-    throw new Error(`${prefix} 'R'(재시도), 'Q'(종료) 중 하나의 문자만 입력해주세요!`);
+  if (typeof userInput !== 'string') throw new Error(ERROR_RETRY_MESSAGE.ONLY_STRING);
 
-  if (userInput == 'r' || userInput == 'q')
-    throw new Error(`${prefix} 입력값은 대문자여야 합니다.`);
+  if (userInput == 'r' || userInput == 'q') throw new Error(ERROR_RETRY_MESSAGE.CAPITAL);
 
-  if (userInput != 'R' && userInput != 'Q')
-    throw new Error(`${prefix} 이동할 칸은 문자 'R'(재시도), 'Q'(종료) 중 하나여야 합니다.`);
+  if (userInput != 'R' && userInput != 'Q') throw new Error(ERROR_RETRY_MESSAGE.WRONG);
 };
 
 module.exports = {
