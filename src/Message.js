@@ -10,3 +10,12 @@ const MESSAGE = {
   RETRY: '게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
 };
 
+const RESULT = {
+  CORRECT: 'O',
+  INCORRECT: 'X',
+  SPACE: ' ',
+  LINE: ' | ',
+  BRIDGE_START: '[ ',
+  BRIDGE_END: ' ]',
+};
+
