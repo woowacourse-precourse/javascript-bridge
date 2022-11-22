@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const BridgeMaker = require('../BridgeMaker');
 const BridgeRandomNumberGenerator = require('../BridgeRandomNumberGenerator');
+const { BRIDGE_GAME } = require('../Constants');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -56,7 +57,7 @@ class BridgeGame {
   }
 
   pass(state, upOrDown) {
-    if (upOrDown === 'U') {
+    if (upOrDown === BRIDGE_GAME.up) {
       this.moveToUp(state);
       return this.getUpAndDown();
     }
@@ -65,7 +66,7 @@ class BridgeGame {
   }
 
   fail(state, upOrDown) {
-    if (upOrDown === 'U') {
+    if (upOrDown === BRIDGE_GAME.up) {
       this.moveToUp(state);
       return this.getUpAndDown();
     }
@@ -73,21 +74,21 @@ class BridgeGame {
     return this.getUpAndDown();
   }
 
-  getUpAndDown() {
-    const { up, down } = this.#BridgeData;
-    return { up, down };
-  }
-
   moveToUp(state) {
-    const passOrFail = state ? '1' : '0';
-    this.#BridgeData.up += `3${passOrFail}3`;
-    this.#BridgeData.down += '333';
+    const passOrFail = state ? BRIDGE_GAME.pass : BRIDGE_GAME.fail;
+    this.#BridgeData.up += `${BRIDGE_GAME.space}${passOrFail}${BRIDGE_GAME.space}`;
+    this.#BridgeData.down += `${BRIDGE_GAME.space}${BRIDGE_GAME.space}${BRIDGE_GAME.space}`;
   }
 
   moveToDown(state) {
-    const passOrFail = state ? '1' : '0';
-    this.#BridgeData.up += '333';
-    this.#BridgeData.down += `3${passOrFail}3`;
+    const passOrFail = state ? BRIDGE_GAME.pass : BRIDGE_GAME.fail;
+    this.#BridgeData.up += `${BRIDGE_GAME.space}${BRIDGE_GAME.space}${BRIDGE_GAME.space}`;
+    this.#BridgeData.down += `${BRIDGE_GAME.space}${passOrFail}${BRIDGE_GAME.space}`;
+  }
+
+  getUpAndDown() {
+    const { up, down } = this.#BridgeData;
+    return { up, down };
   }
 
   saveSize(input) {
@@ -117,14 +118,15 @@ class BridgeGame {
   precompose(size) {
     this.#BridgeData.prebuilt = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
   }
+
   getDate() {
     return this.#BridgeData;
   }
 
   divideSpace() {
     if (this.#BridgeData.up.length) {
-      this.#BridgeData.up += '2';
-      this.#BridgeData.down += '2';
+      this.#BridgeData.up += BRIDGE_GAME.divide;
+      this.#BridgeData.down += BRIDGE_GAME.divide;
     }
   }
 }

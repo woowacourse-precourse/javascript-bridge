@@ -29,4 +29,12 @@ const OUTPUT_VIEW = Object.freeze({
   total_tryCount: (tryCount) => `총 시도한 횟수: ${tryCount}`,
 });
 
-module.exports = { INPUT_VIEW, NEW_LINE, OUTPUT_VIEW };
+const BRIDGE_GAME = Object.freeze({
+  up: 'U',
+  pass: '1',
+  fail: '0',
+  divide: '2',
+  space: '3',
+});
+
+module.exports = { BRIDGE_GAME, INPUT_VIEW, NEW_LINE, OUTPUT_VIEW };
