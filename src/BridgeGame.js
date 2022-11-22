@@ -1,3 +1,6 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const Console = MissionUtils.Console;
+const Random = MissionUtils.Random;
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
