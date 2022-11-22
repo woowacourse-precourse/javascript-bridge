@@ -43,6 +43,12 @@ class BridgeGame {
     }
   }
 
+  checkMoveCommand(input){
+    if(!(input =='U' || input == 'D')){
+      Console.print("[ERROR] 이동할 칸은 U이나 D 여야 합니다."); 
+    }
+  }
+
 }
 
 module.exports = BridgeGame;
