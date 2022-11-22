@@ -7,6 +7,7 @@ const BridgeRandomGenerator = require("./BridgeRandomNumberGenerator");
 class BridgeGame {
   #map;
   #bridge;
+  #phase;
 
   constructor() {
     this.#map = {
@@ -14,6 +15,7 @@ class BridgeGame {
       downStair: [],
     };
     this.#bridge = [];
+    this.#phase = 1;
   }
 
   makeBridge(size) {
@@ -23,13 +25,11 @@ class BridgeGame {
 
   pushResult(direction) {
     let result = { U: "   ", D: "   " };
-    this.#bridge[0] === direction
+    this.#bridge[this.#phase - 1] === direction
       ? (result[direction] = " O ")
       : (result[direction] = " X ");
-
     this.#map.upStair.push(result.U);
     this.#map.downStair.push(result.D);
-
     return this.#map;
   }
 
@@ -37,12 +37,21 @@ class BridgeGame {
     return this.#map;
   }
 
+  isRight() {
+    const upValues = Object.values(this.#map.upStair);
+    const downValues = Object.values(this.#map.downStair);
+    return upValues.includes(" X ") || downValues.includes(" X ")
+      ? false
+      : true;
+  }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {}
+  move() {
+    return (this.#phase += 1);
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

@@ -39,6 +39,8 @@ const InputView = {
       Validator.validateMove(direction);
       bridgeGame.pushResult(direction);
       OutputView.printMap(bridgeGame);
+      if (!bridgeGame.isRight()) this.readGameCommand();
+      bridgeGame.move();
       this.readMoving(bridgeGame);
     });
   },
@@ -46,7 +48,9 @@ const InputView = {
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    this.wrappingInput(CONSOLE_MESSAGE.RESTART, (input) => input);
+  },
 };
 
 const bridgeGame = new BridgeGame();
