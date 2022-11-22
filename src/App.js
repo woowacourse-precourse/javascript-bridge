@@ -1,4 +1,3 @@
-// const BridgeGame = require('./BridgeGame');
 const Controller = require('./Controller');
 
 class App {
@@ -10,9 +9,5 @@ class App {
     this.controller.init();
   }
 }
-
-// REMOVE:
-const app = new App();
-app.play();
 
 module.exports = App;
