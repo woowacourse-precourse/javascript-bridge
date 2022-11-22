@@ -1,4 +1,4 @@
-const { BRIDGE_STRING } = require('./constants');
+const { BRIDGE_STRING } = require('./utils/constants');
 
 const BridgeMaker = {
   BRIDGE_LOCATION_MAP: {
