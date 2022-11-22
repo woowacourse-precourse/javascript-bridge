@@ -90,9 +90,15 @@ const OutputView = {
   },
 
   makePrintFormat(bridge) {
-    const bridgeOutput = ['[', bridge.join('|'), ']'].join(' ');
+    const bridgeOutput = ['['];
+    let middleBridge = bridge.join('|').split('');
+    for (let i = 0; i < middleBridge.length; i++) {
+      bridgeOutput.push(middleBridge[i]);
+    }
+    bridgeOutput.push(']');
+    const bridgeStrOutput = bridgeOutput.join(' ');
 
-    return bridgeOutput;
+    return bridgeStrOutput;
   },
 };
 
