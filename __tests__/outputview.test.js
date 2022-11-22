@@ -19,19 +19,11 @@ describe('다리 화면 출력 확인하기', () => {
   ];
 
   test('bridgeMap 생성 테스트 (케이스1)', () => {
-    expect(OutputView.getBridgeMap(trials1)).toEqual([
-      '[ O |   |   | X ]',
-      '[   | O | O |   ]',
-      '\n',
-    ]);
+    expect(OutputView.getBridgeMap(trials1)).toBe('[ O |   |   | X ]\n[   | O | O |   ]\n');
   });
 
   test('bridgeMap 생성 테스트 (케이스2)', () => {
-    expect(OutputView.getBridgeMap(trials2)).toEqual([
-      '[   | O | O | X ]',
-      '[ O |   |   |   ]',
-      '\n',
-    ]);
+    expect(OutputView.getBridgeMap(trials2)).toBe('[   | O | O | X ]\n[ O |   |   |   ]\n');
   });
 
   test('printMap 출력 테스트 (케이스1)', () => {
