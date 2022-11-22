@@ -61,6 +61,10 @@ const OutputView = {
       `${MESSAGE.TOTAL_TRIAL_NUMBERS}` + `${getTrialCount}`
     );
     MissionUtils.Console.close();
+  },
+
+  printError(error) {
+    MissionUtils.Console.print(error);
   }
 };
 
