@@ -39,11 +39,11 @@ class MapMaker {
 
   makeFailureMap() {
     if (this.#bridges[this.#movements.length - 1] === WORD.UP) {
-      this.upMaps.push(WORD.FAILURE);
-      this.downMaps.push(WORD.BLANK);
-    } else {
       this.upMaps.push(WORD.BLANK);
       this.downMaps.push(WORD.FAILURE);
+    } else {
+      this.upMaps.push(WORD.FAILURE);
+      this.downMaps.push(WORD.BLANK);
     }
   }
 
