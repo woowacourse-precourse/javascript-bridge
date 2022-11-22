@@ -1,15 +1,14 @@
 const Validator = {
-  ERROR_MESSEAGE_MUST_IN_RANGE:
-    "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
-  ERROR_MESSEAGE_MUST_BE_NUMBER: "[ERROR] 다리 길이는 숫자여야 합니다.",
-  ERROR_MESSEAGE_MUST_U_OR_D: "[ERROR] U 또는 D만 입력 가능합니다.",
-  ERROR_MESSEAGE_MUST_R_OR_Q: "[ERROR] R 또는 Q만 입력 가능합니다.",
+  ERROR_MESSEAGE_MUST_IN_RANGE: '[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.',
+  ERROR_MESSEAGE_MUST_BE_NUMBER: '[ERROR] 다리 길이는 숫자여야 합니다.',
+  ERROR_MESSEAGE_MUST_U_OR_D: '[ERROR] U 또는 D만 입력 가능합니다.',
+  ERROR_MESSEAGE_MUST_R_OR_Q: '[ERROR] R 또는 Q만 입력 가능합니다.',
   BRIDGE_LOWER_INCLUSIVE: 3,
   BRIDGE_UPPER_INCLUSIVE: 20,
-  MOVE_UPSIDE_STRING: "U",
-  MOVE_DOWNSIDE_STRING: "D",
-  RETRY_STRING: "R",
-  EXIT_STRING: "Q",
+  MOVE_UPSIDE_STRING: 'U',
+  MOVE_DOWNSIDE_STRING: 'D',
+  RETRY_STRING: 'R',
+  EXIT_STRING: 'Q',
 
   validateBridgeSize(bridgeSizeString) {
     Validator.validateInputisNumber(bridgeSizeString);

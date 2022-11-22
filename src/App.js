@@ -1,7 +1,7 @@
-const OutputView = require("./OutputView");
-const InputView = require("./InputView");
-const BridgeGame = require("./BridgeGame");
-const Validator = require("./Validator");
+const OutputView = require('./OutputView');
+const InputView = require('./InputView');
+const BridgeGame = require('./BridgeGame');
+const Validator = require('./Validator');
 
 class App {
   constructor() {
@@ -44,7 +44,7 @@ class App {
   }
 
   manageRetry(command) {
-    if (this.bridgeGame.shallWeQuit(command)) {
+    if (BridgeGame.shallWeQuit(command)) {
       this.bridgeGame.endWithFailure();
       return;
     }
@@ -95,5 +95,8 @@ class App {
     this.manageRetry(command);
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
