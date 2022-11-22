@@ -9,11 +9,12 @@ const RULES = Object.freeze({
   SEPERATION: '|',
 });
 
+const ERROR_HEADER = '[ERROR]';
 const ERROR_MESSAGE = Object.freeze({
-  NON_NUMERIC_VALUE: '[ERROR] 숫자가 아닌 값은 입력할 수 없습니다.',
-  INVALID_MOVE_INPUT: '[ERROR] U 또는 D 문자만 입력이 가능합니다.',
-  INVALID_RETRY_INPUT: '[ERROR] R 또는 Q 문자만 입력이 가능합니다.',
-  INVALID_RANGE: (min, max) => `[ERROR] ${min}부터 ${max}사이의 숫자만 입력할 수 있습니다.`,
+  NON_NUMERIC_VALUE: `${ERROR_HEADER} 숫자가 아닌 값은 입력할 수 없습니다.`,
+  INVALID_MOVE_INPUT: `${ERROR_HEADER} U 또는 D 문자만 입력이 가능합니다.`,
+  INVALID_RETRY_INPUT: `${ERROR_HEADER} R 또는 Q 문자만 입력이 가능합니다.`,
+  INVALID_RANGE: (min, max) => `${ERROR_HEADER} ${min}부터 ${max}사이의 숫자만 입력할 수 있습니다.`,
 });
 
 const PRINT_MESSAGE = Object.freeze({
