@@ -1,5 +1,5 @@
 const Validation = require("./Validation");
-const BridgeStep = require("./BridgeStep");
+const BridgeStep = require("./Model/BridgeStep");
 const { makeBridge } = require("./BridgeMaker.js");
 const { generate } = require("./BridgeRandomNumberGenerator.js");
 
