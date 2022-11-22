@@ -26,6 +26,7 @@ class BridgeMap {
 
   /**
    * 다리 건너기 여부 추가할 때 사용하는 메서드
+   * @param {boolean} isCrossed
    */
   addIsCrossed(isCrossed) {
     this.#state = [...this.#state, isCrossed];
