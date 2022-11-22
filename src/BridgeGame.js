@@ -1,12 +1,13 @@
 const BridgeUnit = require('./BridgeUnit');
 
 class BridgeGame {
-  #round = 1;
+  #round
 
   #currentResult
 
   constructor() {
     this.bridgeUnit = new BridgeUnit();
+    this.#round = 1;
   }
 
   storage(result) {
