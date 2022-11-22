@@ -16,7 +16,22 @@ class Validator {
         callback(size);
       } catch (error) {
         OutputView.printMessage(error.message);
-        errorCallback();
+        errorCallback(callback);
+      }
+    };
+  }
+
+  static direction(callback, { onError: errorCallback }) {
+    return (direction) => {
+      try {
+        if (direction !== "U" && direction !== "D") {
+          throw new CustomError(ERROR_CODE.WRONG_DIRECTION);
+        }
+
+        callback(direction);
+      } catch (error) {
+        OutputView.printMessage(error.message);
+        errorCallback(callback);
       }
     };
   }

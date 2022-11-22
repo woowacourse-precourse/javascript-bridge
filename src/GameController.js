@@ -19,6 +19,13 @@ class GameController {
       const bridge = makeBridge(size, generate);
 
       this.game.setBridge(bridge);
+      this.crossBridge();
+    });
+  }
+
+  crossBridge() {
+    InputView.readMoving((direction) => {
+      console.log(direction);
     });
   }
 }
