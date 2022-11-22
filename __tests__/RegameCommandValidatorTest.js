@@ -42,7 +42,7 @@ const expectLogContains = (received, logs) => {
   });
 };
 
-describe("다리 생성 테스트", () => {
+describe("입력에 따른 재시작 여부 예외 처리 테스트", () => {
   test.each([[["3"]], [["5"]], [["11"]], [["20"]]])("비정상적 입력일 때", (input) =>
     runException(input)
   );
