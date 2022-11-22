@@ -1,4 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const BridgeGame = require('./BridgeGame');
