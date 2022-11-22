@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const { Console } = MissionUtils;
 const BridgeGame = require("./BridgeGame.js");
 const InputView = require("./InputView.js");
+const OutputView = require("./OutputView.js");
 
 class App {
   #bridgeGame;
@@ -21,6 +22,10 @@ class App {
   selectMove(){
     InputView.readMoving((playerMoving)=>{
       this.#bridgeGame.move(playerMoving);
+      this.#bridgeGame.isSuccess();
+      // Console.print(this.#bridgeGame.isSuccess());
+      // Console.print(this.#bridgeGame.isSuccess());
+      OutputView.printMap(this.#bridgeGame.getPlayerMovingRecord(), this.#bridgeGame.isSuccess());
     });
   }
 }

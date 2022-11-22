@@ -1,3 +1,6 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const { Console } = MissionUtils;
+
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
@@ -7,7 +10,48 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(playerMovingRecord, isSuccess) {
+    const upRecord = this.makeRecord(playerMovingRecord, isSuccess, 'U');
+    const downRecord = this.makeRecord(playerMovingRecord, isSuccess, 'D');
+    const upMap = this.makeMapOneline(upRecord);
+    const downMap = this.makeMapOneline(downRecord);
+
+    Console.print(upMap);
+    Console.print(downMap);
+  },
+
+  makeRecord(playerMovingRecord, isSuccess, upOrDown){
+    let gameRecord = "";
+    for(let index = 0; index < playerMovingRecord.length - 1; index++){
+      gameRecord = gameRecord + (upOrDown === playerMovingRecord[index]) ? 'O' : ' ';
+    }
+
+    gameRecord = this.makeLastRecord(playerMovingRecord, isSuccess, upOrDown);
+
+    return gameRecord;
+  },
+  
+  makeLastRecord(playerMovingRecord, isSuccess, upOrDown){
+    let lastRecord;
+    if(isSuccess)
+      lastRecord = (upOrDown === playerMovingRecord[playerMovingRecord.length - 1] ? 'O' : ' ');
+    else
+      lastRecord = (upOrDown === playerMovingRecord[playerMovingRecord.length - 1] ? 'X' : ' ');
+      
+    return lastRecord;
+  },
+
+  makeMapOneline(gameRecord){
+    let map = '[ ' + gameRecord[0];
+    for(let index =1; index < gameRecord.length; index++){
+      map = [map, gameRecord[index], ' | '].join(); 
+    }
+
+    map = map + ' ]';
+
+    return map;
+  },
+
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.

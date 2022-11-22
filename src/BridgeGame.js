@@ -1,5 +1,7 @@
 const { generate } = require("./BridgeRandomNumberGenerator");
 const { makeBridge } = require("./BridgeMaker.js");
+const MissionUtils = require("@woowacourse/mission-utils");
+const { Console } = MissionUtils;
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -22,11 +24,6 @@ class BridgeGame {
       this.#playerMovingRecord = this.#playerMovingRecord + playerMoving;
     }
   }
-
-  playerLoction(){
-    return playerMovingRecord.length;
-  }
-
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    * <p>
@@ -44,11 +41,20 @@ class BridgeGame {
   }
 
   isSuccess() {
-    const bridgeFootboard = this.#bridgeShape[this.playerLoction()-1];
-    const playerMoving = this.#playerMovingRecord[this.#playerMovingRecord-1];
-    const isSuccess = (bridgeFootboard == playerMoving);
-    
+    const bridgeFootboard = this.#bridgeShape[this.playerLoction() - 1];
+    const playerMoving = this.#playerMovingRecord[this.#playerMovingRecord.length - 1];
+    const isSuccess = (bridgeFootboard === playerMoving);
+    Console.print(bridgeFootboard);
+    Console.print(playerMoving);
     return isSuccess;
+  }
+
+  playerLoction(){
+    return this.#playerMovingRecord.length;
+  }
+
+  getPlayerMovingRecord(){
+    return this.#playerMovingRecord;
   }
 }
 
