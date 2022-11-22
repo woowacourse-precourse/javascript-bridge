@@ -1,9 +1,10 @@
-const BridgeMaker = require("./BridgeMaker");
-const BridgeRandom = require("./BridgeRandomNumberGenerator");
-const OutputView = require("./view/OutputView");
+const BridgeGameController = require("./Controller/BridgeGameController");
 
 class App {
-  play() {}
+  play() {
+    const gameController = new BridgeGameController();
+    gameController.start();
+  }
 }
 
 const app = new App();

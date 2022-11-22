@@ -1,6 +1,6 @@
 class Bridge {
-  #upBridge = [];
-  #downBridge = [];
+  upBridge = [];
+  downBridge = [];
 
   constructor() {
     this.upBridge = [];
@@ -8,6 +8,8 @@ class Bridge {
   }
 
   getAllBridge() {
-    return [this.#upBridge, this.#downBridge];
+    return [this.upBridge, this.downBridge];
   }
 }
+
+module.exports = Bridge;
