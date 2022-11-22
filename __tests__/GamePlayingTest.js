@@ -9,5 +9,11 @@ describe("게임 진행 테스트", () => {
     expect(bridgeGame.getMoveHistory()).toEqual(["D", "U"]);
     bridgeGame.move("U");
     expect(bridgeGame.getMoveHistory()).toEqual(["D", "U", "U"]);
-  });
+  }),
+    test("이동 칸 판단 테스트", () => {
+      const bridgeGame = new BridgeGame(["U", "U", "U"]);
+      expect(bridgeGame.move("D")).toEqual(false);
+      expect(bridgeGame.move("D")).toEqual(false);
+      expect(bridgeGame.move("U")).toEqual(true);
+    });
 });
