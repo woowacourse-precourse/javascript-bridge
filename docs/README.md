@@ -279,82 +279,83 @@ Lotto(테스트하기 쉬움)
   - 사용자가 이동할 때마다 다리 건너기 결과를 출력해야 한다.
   - 모든 예외는 "[ERROR]" 로 시작해야 한다.
 
-
 ## ✒디렉토리 및 파일 설계
 
 ```
-src/
-  constants.js
-    const Tile
-      SPAWNABLE_TILES = [Tile.UP, Tile.DOWN]
-      UP = 'U'
-      DOWN = 'D'
-    const GameCommand
-      AVAILABLE_GAME_COMMANDS = [GameCommand.RESET, GameCommand.QUIT]
-      RESET = 'R'
-      QUIT = 'Q'
-    const BridgeSize
-      LOWER_INCLUSIVE = 3
-      UPPER_INCLUSIVE = 20
-  domains/
-    Moving.js
-      class Moving
-        #tile
-        #survived
-        getTile()
-        isSurvived()
-    Player.js
-      class Player
-        #bridge
-        #movingHistory = []
-        getPosition()
-        move(tile)
-        canSurvive()
-        isArrived()
-        getMovingHistory()
-    Bridge.js
-      class Bridge
-        #tiles
-        constructor(tiles)
-        getSize()
-        getTileAt(position)
-        getTiles()
-    BridgeGame.js
-      class BridgeGame
-        #bridge
-        #player
-        #trialCount
-        constructor(bridge)
-        start()
-        move(moving)
-        retry()
-  errors/
-    AppError.js
-    BridgeError.js
-    ValidationError.js
-  intl/
-    Messages.js
-  validators/
-    index.js
-      validate(value)
-    NumberValidator.js
-    StringValidator.js
-    Validator.js
-  views/
-    InputView.js
-      const InputView
-        readBridgeSize()
-        readMoving()
-        readGameCommand()
-    OutputView.js
-      const OutputView
-        printMap(bridgeGame)
-        printResult()
-  App.js
-  BridgeMaker.js
-    class BridgeMaker
-      makeBridge(size, generateRandomNumber): Bridge
-  BridgeRandomNumberGenerator.js
+📦src
+ ┣ 📂domains
+ ┃ ┣ 📜Bridge.js  --- 다리를 정의한 클래스
+ ┃ ┣ 📜BridgeGame.js  --- 다리 건너기 게임을 정의한 클래스
+ ┃ ┣ 📜Moving.js  --- 플레이어의 이동 흔적을 정의한 클래스
+ ┃ ┗ 📜Player.js  --- 플레이어를 정의한 클래스
+ ┣ 📂errors
+ ┃ ┣ 📜AppError.js  --- 프로그램 내에서 발생할 수 있는 모든 에러
+ ┃ ┣ 📜BridgeError.js  --- 다리와 관련된 로직에서 발생한 에러
+ ┃ ┗ 📜ValidationError.js  --- 값 검증 중 발생한 에러
+ ┣ 📂intl
+ ┃ ┗ 📜Messages.js  --- 프로그램에서 사용되는 모든 메세지
+ ┣ 📂utils
+ ┃ ┣ 📜deepFreeze.js  --- Object.freeze의 nested 버전
+ ┃ ┗ 📜Routine.js  --- 콜백 기반의 비동기 함수를 제너레이터 문법을 이용하여 async/await처럼 사용하게 해주는 유틸
+ ┣ 📂validators
+ ┃ ┣ 📜index.js  --- 각종 입력(다리 길이, 게임 재시작 또는 종료 등)에 대한 검증 함수들 정의
+ ┃ ┣ 📜ArrayValidator.js  --- 배열 값의 검증을 수행
+ ┃ ┣ 📜NumberValidator.js  --- 숫자 값의 검증을 수행
+ ┃ ┣ 📜StringValidator.js  --- 문자열 값의 검증을 수행
+ ┃ ┗ 📜Validator.js  --- 타입이 특별히 지정되지 않은 값의 검증을 수행
+ ┣ 📂views
+ ┃ ┣ 📜InputView.js  --- 입력에 대한 뷰
+ ┃ ┗ 📜OutputView.js  --- 출력에 대한 뷰
+ ┣ 📜App.js  --- 도메인, 뷰들을 사용하여 프로그램 기능 수행
+ ┣ 📜BridgeMaker.js  --- 다리에 사용되는 타일들을 생성
+ ┣ 📜BridgeRandomNumberGenerator.js  --- 0, 1 숫자를 랜덤으로 생성
+ ┗ 📜constants.js  --- 프로그램에서 사용되는 상수들 정의
+```
+
+## 📋클래스 다이어그램
+
+```mermaid
+classDiagram
+    direction LR
+    Bridge o-- BridgeGame
+    Bridge o-- Player
+    BridgeGame *-- Player
+    Player *-- Moving
+    class Bridge {
+        -tiles
+        +constructor(tiles)
+        +getSize()
+        +getTileAt(position)
+        +getTiles()
+    }
+    class Player {
+        -bridge
+        -movingHistory
+        +constructor(bridge)
+        +getNextPosition()
+        +getMovingHistory()
+        +move(tile)
+        +isArrived()
+    }
+    class BridgeGame {
+        -bridge
+        -player
+        -trialCount
+        +constructor(bridge)
+        -start()
+        +getMovingHistory()
+        +getTrialCount()
+        +move(tile)
+        +isArrived()
+        +retry()
+    }
+    class Moving {
+        -tile
+        -survived
+        +constructor(tile, survived)
+        +getTile()
+        +isSurvived()
+    }
 ```
 
 ## 🎨코드 스타일
