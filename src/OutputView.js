@@ -13,7 +13,7 @@ const OutputView = {
     let upBridge = currentBridge[0].join(' | ');
     let downBridge = currentBridge[1].join(' | ');
     MissionUtils.Console.print(`[ ${upBridge} ]`);
-    MissionUtils.Console.print(`[ ${downBridge} ]\n`);
+    MissionUtils.Console.print(`[ ${downBridge} ]`);
   },
 
   /**
@@ -22,7 +22,7 @@ const OutputView = {
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   printResult(currentBridge) {
-    MissionUtils.Console.print('최종 게임 결과');
+    MissionUtils.Console.print('\n최종 게임 결과');
     let upBridge = currentBridge[0].join(' | ');
     let downBridge = currentBridge[1].join(' | ');
     MissionUtils.Console.print(`[ ${upBridge} ]`);
@@ -30,7 +30,7 @@ const OutputView = {
   },
 
   printGameStart() {
-    MissionUtils.Console.print('다리 건너기 게임을 시작합니다.');
+    MissionUtils.Console.print('다리 건너기 게임을 시작합니다.\n');
   },
 
   printInputSize() {
