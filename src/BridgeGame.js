@@ -12,7 +12,7 @@ class BridgeGame {
   constructor(length) {
     this.#bridge = BridgeMaker.makeBridge(length, BridgeRandomNumberGenerator);
     this.#path = [];
-    this.#tryNum = 0;
+    this.#tryNum = 1;
   }
 
   /**
