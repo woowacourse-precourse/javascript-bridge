@@ -48,9 +48,17 @@ const MAP = {
   NONE: " ",
 };
 
+const trimString = (string) => {
+  let trimedString;
+  string.trim();
+  let regex = / /gi;
+  trimedString = string.replace(regex, "");
+};
+
 module.exports = {
   INPUT,
   INPUT_TYPE,
+  trimString,
   OUTPUT,
   BRIDGE,
   MAP,

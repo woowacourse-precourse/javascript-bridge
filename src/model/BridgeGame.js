@@ -22,6 +22,9 @@ class BridgeGame {
   createBridgeModel(size) {
     const randomNumGenerator = BridgeRandomNumberGenerator.generate;
     const bridgeArr = BridgeMaker.makeBridge(size, randomNumGenerator);
+    this.setBridgeModel(bridgeArr);
+  }
+  setBridgeModel(bridgeArr) {
     this.#bridgeModel = new Bridge(bridgeArr);
     this.#gamePresenter.getPlayerMove();
   }
@@ -31,14 +34,18 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(selectedMove) {
-    const isCrossBridge = this.getCurrMove(selectedMove);
-    this.#playerModel.addInputArrayItem({ selectedMove, isCrossBridge });
+    const currMoveResult = this.getCurrMoveResult(selectedMove);
+    this.#playerModel.addInputArrayItem(currMoveResult);
     this.createPlayerBridgeMap();
   }
 
-  getCurrMove(selectedMove) {
+  getCurrMoveResult(selectedMove) {
     const currIndex = this.#playerModel.getInputArrayLength();
-    return this.#bridgeModel.crossBridge(currIndex, selectedMove);
+    const isCrossBridge = this.#bridgeModel.crossBridge(
+      currIndex,
+      selectedMove
+    );
+    return { selectedMove, isCrossBridge };
   }
 
   createPlayerBridgeMap() {

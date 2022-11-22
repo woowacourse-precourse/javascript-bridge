@@ -32,7 +32,7 @@ const INPUT_TRY_FN = {
     gamePresenter.createBridge(size);
   },
   moving(gamePresenter, selectedMove) {
-    gamePresenter.checkmove(selectedMove);
+    gamePresenter.checkMove(selectedMove);
   },
   gameCommand(gamePresenter, retry) {
     gamePresenter.checkRetryInput(retry);

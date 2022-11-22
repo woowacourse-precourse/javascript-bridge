@@ -11,10 +11,10 @@ const {
 const BridgeGame = require("../model/BridgeGame");
 
 class Presenter {
-  #bridgeGameModel;
+  bridgeGameModel;
 
   constructor() {
-    this.#bridgeGameModel = new BridgeGame(this);
+    this.bridgeGameModel = new BridgeGame(this);
   }
 
   init() {
@@ -38,11 +38,11 @@ class Presenter {
   //INPUT_TRY_FN
   createBridge(size) {
     OutputView.printLineBreak();
-    this.#bridgeGameModel.createBridgeModel(size);
+    this.bridgeGameModel.createBridgeModel(size);
   }
 
-  checkmove(selectedMove) {
-    this.#bridgeGameModel.move(selectedMove);
+  checkMove(selectedMove) {
+    this.bridgeGameModel.move(selectedMove);
   }
 
   checkRetryInput(retry) {
@@ -62,25 +62,25 @@ class Presenter {
 
   // Control Model
   createPlayerMap() {
-    const playerMap = this.#bridgeGameModel.getPlayerBridgeMap();
+    const playerMap = this.bridgeGameModel.getPlayerBridgeMap();
     OutputView.printMap(playerMap);
     this.checkContinueMove();
   }
 
   checkContinueMove() {
-    const playerState = this.#bridgeGameModel.getPlayerState();
+    const playerState = this.bridgeGameModel.getPlayerState();
     PLAYER_STATE_FN[playerState](this);
   }
 
   retryGame() {
-    this.#bridgeGameModel.retry();
+    this.bridgeGameModel.retry();
   }
 
   quitGame() {
-    const resultMap = this.#bridgeGameModel.getPlayerBridgeMap();
+    const resultMap = this.bridgeGameModel.getPlayerBridgeMap();
     const isSuccess =
-      this.#bridgeGameModel.getPlayerState() === PLAYER_STATE.SUCCESS;
-    const totalTrial = this.#bridgeGameModel.getPlayerTotalTrial();
+      this.bridgeGameModel.getPlayerState() === PLAYER_STATE.SUCCESS;
+    const totalTrial = this.bridgeGameModel.getPlayerTotalTrial();
     OutputView.printResult(resultMap, isSuccess, totalTrial);
   }
 }

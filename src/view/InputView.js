@@ -1,5 +1,5 @@
 const Console = require("../utils/Console");
-const { INPUT } = require("./stringsUI");
+const { INPUT, trimString } = require("./stringsUI");
 const Validation = require("../utils/Validation");
 const { INPUT_TYPE } = require("./stringsUI");
 
@@ -13,6 +13,7 @@ const InputView = {
    */
   readBridgeSize(gamePresenter) {
     Console.readLine(INPUT.GET_SIZE, (size) => {
+      trimString(size);
       gamePresenter.handleInput(parseInt(size, 10), INPUT_TYPE.SIZE);
     });
   },
@@ -21,6 +22,7 @@ const InputView = {
    */
   readMoving(gamePresenter) {
     Console.readLine(INPUT.GET_MOVING, (selectedMove) => {
+      trimString(selectedMove);
       gamePresenter.handleInput(selectedMove, INPUT_TYPE.MOVING);
     });
   },
@@ -30,6 +32,7 @@ const InputView = {
    */
   readGameCommand(gamePresenter) {
     Console.readLine(INPUT.GET_RETRY, (retry) => {
+      trimString(retry);
       gamePresenter.handleInput(retry, INPUT_TYPE.GAME_COMMAND);
     });
   },
