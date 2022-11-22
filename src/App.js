@@ -4,6 +4,7 @@ const BridgeMaker = require('./BridgeMaker');
 const { generate } = require('./BridgeRandomNumberGenerator');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const Validation = require('./Validation');
 
 class App {
 
@@ -13,43 +14,54 @@ class App {
   play() {
       OutputView.printStart();
       this.getBridgeSize();
-      this.getKey();
   }
   getBridgeSize(){
     InputView.readBridgeSize((size) => {
+
+      const { errorMsg } = Validation.checkBridgeSize(size);
+      if(errorMsg) {
+        Console.print(errorMsg);
+        return this.getBridgeSize();
+      }
       const bridge = BridgeMaker.makeBridge(Number(size), generate);
       this.bridgeGame = new BridgeGame(bridge);
+      this.getKey();
     });
   }
   getKey(){
     InputView.readMoving((key) =>{
-      this.bridgeGame.move(key)
-      OutputView.printMap(this.bridgeGame.getMyWay());
-      if(!this.bridgeGame.isRightWay()) 
-        return this.getGameCommand();      
-      if(this.bridgeGame.isLast())
-        return this.quit();
+      const { errorMsg } = Validation.checkDirection(key);
+      if(errorMsg) {
+        Console.print(errorMsg);
+        return this.getKey();
+      }
+
+      this.bridgeGame.move(key);
+      OutputView.printMap(this.bridgeGame.myWayToOX(key));
+      if(this.bridgeGame.isWrongWay(key)){
+        return this.getGameCommand(key);
+      }
+      if(this.bridgeGame.isLast()){
+        return this.quit(key);
+      }
       return this.getKey();
     });
   }
-  getGameCommand(){
+  getGameCommand(key){
     InputView.readGameCommand((command) => {
       if(command === 'R') return this.restart();
-      if(command === 'Q') return this.quit();
+      if(command === 'Q') return this.quit(key);
     });
   }
   restart(){
     this.bridgeGame.retry();
     this.getKey();
   }
-  quit() {
-    const isSuccess = (this.bridgeGame.isRightWay() && this.bridgeGame.isLast());
-    OutputView.printResult(this.bridgeGame.getMyWay(),isSuccess,this.bridgeGame.getAttepts());
+  quit(key) {
+    const isSuccess = (!this.bridgeGame.isWrongWay(key) && this.bridgeGame.isLast());
+    OutputView.printResult(this.bridgeGame.myWayToOX(key),isSuccess,this.bridgeGame.getAttempts());
     Console.close();
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;

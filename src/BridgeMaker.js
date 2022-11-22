@@ -1,11 +1,10 @@
-const {generate } = require('./BridgeRandomNumberGenerator');
 const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     return new Array(size).fill(null).map(() => {
       let correctWay = "U";
 
       const number = generateRandomNumber();
-      if(number === 0) correctWay = 'D';
+      if(Number(number) === 0) correctWay = 'D';
       return correctWay;
     });
   },

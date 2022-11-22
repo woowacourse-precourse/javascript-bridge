@@ -1,16 +1,14 @@
-// const { printMap } = require('./OutputView');
 const {WAY} = require('./constant')
+const { Console } = require('@woowacourse/mission-utils');
 class BridgeGame {
   #bridge;
   #myWay;
   #attempts;
-  #step;
 
   constructor(bridge) {
     this.#bridge = bridge;
     this.#myWay = [[], []];
     this.#attempts = 1;
-    this.#step = 0;
   }
   move(key) {
     if(key === 'U') {
@@ -21,16 +19,25 @@ class BridgeGame {
       this.#myWay[WAY.UP_WAY].push(' ');
       this.#myWay[WAY.DOWN_WAY].push(key);
     }
-    this.#step++;
   }
-  isRightWay(key){
-    if(key === this.#bridge[this.#step]) return true;
-    return false; 
+  myWayToOX(key){
+    let OXWay = [[],[]];
+    OXWay = this.#myWay.map((way) =>{
+      return way.map((item) => {
+        if(item == ' ') return ' ';
+        if(this.isWrongWay(key)) return 'X';
+        if(item == 'U' || item === 'D') return 'O';
+      });
+    });
+    return OXWay;
+  }
+  isWrongWay(key){
+    const step = this.#myWay[0].length -1;
+    return key !== this.#bridge[step]; 
   }
   retry() {
     this.#attempts += 1;
     this.#myWay = [[],[]];
-    this.#step = 0;
   }
 
   isLast(){
@@ -48,10 +55,3 @@ class BridgeGame {
   
 }
 module.exports = BridgeGame;
-
-
-// let bg = new BridgeGame(['U', 'D', 'D']);
-// bg.move('U');
-// bg.move('U');
-// bg.test();
-// printMap(bg.getMyWay());

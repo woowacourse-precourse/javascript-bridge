@@ -1,16 +1,17 @@
 const { Console } = require('@woowacourse/mission-utils');
+
 const InputView = {
 
-  readBridgeSize(callback) {
-    Console.readLine("다리의 길이를 입력해주세요.", callback);
+  readBridgeSize(callBack) {
+    Console.readLine('다리의 길이를 입력해주세요.\n', (callBack));
   },
 
-  readMoving(callback) {
-    Console.readLine("이동할 칸을 선택해주세요. (위: U, 아래: D)", callback);
+  readMoving(callBack) {
+    Console.readLine('\n이동할 칸을 선택해주세요. (위: U, 아래: D)', callBack);
   },
 
-  readGameCommand(callback) {
-    console.readLine("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)", callback);
+  readGameCommand(callBack) {
+    Console.readLine('\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)', callBack);
   },
 };
 module.exports = InputView;
