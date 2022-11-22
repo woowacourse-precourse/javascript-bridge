@@ -33,4 +33,12 @@ describe("다리 관련 테스트", () => {
       expect(singleStep === "U" || singleStep === "D").toEqual(true);
     }
   });
+
+  test("단일 움직임 성공 유무 테스트", () => {
+    bridgeController.setBridge(["U", "D", "D"]);
+
+    expect(bridgeController.getIsSuccessMoving(["U"])).toEqual(true);
+    expect(bridgeController.getIsSuccessMoving(["U", "D"])).toEqual(true);
+    expect(bridgeController.getIsSuccessMoving(["U", "D", "U"])).toEqual(false);
+  });
 });
