@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const BridgeGame = require("./BridgeGame");
+const { BRIDGE_INFO } = require("./constants/constants");
 const { CONSOLE_MESSAGE } = require("./constants/Message");
 const OutputView = require("./OutputView");
 const Validator = require("./utils/Validation");
@@ -47,11 +48,11 @@ const InputView = {
   readGameCommand(bridgeGame) {
     this.wrappingInput(CONSOLE_MESSAGE.RESTART, (input) => {
       Validator.validateRestartOrQuit(input);
-      if (input === "R") {
+      if (input === BRIDGE_INFO.RETRY) {
         bridgeGame.retry();
         return this.readMoving(bridgeGame);
       }
-      if (input === "Q") {
+      if (input === BRIDGE_INFO.QUIT) {
         return OutputView.printResult(bridgeGame);
       }
     });

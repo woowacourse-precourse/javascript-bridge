@@ -19,7 +19,7 @@ class Validator {
     }
   }
   static isRightMove(move) {
-    return move === "U" || move === "D";
+    return move === BRIDGE_INFO.UP_STR || move === BRIDGE_INFO.DOWN_STR;
   }
 
   static validateRestartOrQuit(input) {
@@ -29,7 +29,7 @@ class Validator {
   }
 
   static isRightInput(input) {
-    return input === "R" || input === "Q";
+    return input === BRIDGE_INFO.RETRY || input === BRIDGE_INFO.QUIT;
   }
 }
 

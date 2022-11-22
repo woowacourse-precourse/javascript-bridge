@@ -15,7 +15,7 @@ const OutputView = {
   printResult(bridgeGame) {
     const result = bridgeGame.getResult();
     const tryNum = bridgeGame.getTry();
-    Console.print("최종 게임 결과");
+    Console.print(CONSOLE_MESSAGE.RESULT);
     this.printMap(bridgeGame);
     Console.print(`게임 성공 여부: ${result}\n`);
     Console.print(`총 시도한 횟수: ${tryNum}`);

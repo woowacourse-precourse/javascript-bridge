@@ -1,6 +1,7 @@
 const BridgeMaker = require("./BridgeMaker");
 const BridgeRandomGenerator = require("./BridgeRandomNumberGenerator");
-
+const { BRIDGE_INFO } = require("./constants/constants");
+const { CONSOLE_MESSAGE } = require("./constants/Message");
 class BridgeGame {
   #map;
   #bridge;
@@ -14,16 +15,16 @@ class BridgeGame {
       downStair: [],
     };
     this.#bridge = BridgeMaker.makeBridge(size, BridgeRandomGenerator.generate);
-    this.#phase = 1;
-    this.#try = 1;
-    this.#result = "실패";
+    this.#phase = BRIDGE_INFO.FIRST_PHASE;
+    this.#try = BRIDGE_INFO.FIRST_TRY;
+    this.#result = CONSOLE_MESSAGE.FAIL;
   }
 
   pushResult(direction) {
     let result = { U: " ", D: " " };
     this.#bridge[this.#phase - 1] === direction
-      ? (result[direction] = "O")
-      : (result[direction] = "X");
+      ? (result[direction] = BRIDGE_INFO.CORRECT)
+      : (result[direction] = BRIDGE_INFO.WRONG);
     this.#map.upStair.push(result.U);
     this.#map.downStair.push(result.D);
     return this.#map;
@@ -44,8 +45,11 @@ class BridgeGame {
   isRight() {
     const upValues = Object.values(this.#map.upStair);
     const downValues = Object.values(this.#map.downStair);
-    if (upValues.includes("X") || downValues.includes("X")) {
-      this.#phase = 1;
+    if (
+      upValues.includes(BRIDGE_INFO.WRONG) ||
+      downValues.includes(BRIDGE_INFO.WRONG)
+    ) {
+      this.#phase = BRIDGE_INFO.FIRST_PHASE;
       return false;
     }
     return true;
@@ -53,7 +57,7 @@ class BridgeGame {
 
   isEnd() {
     if (this.#phase === this.#bridge.length) {
-      this.#result = "성공";
+      this.#result = CONSOLE_MESSAGE.WIN;
       return true;
     }
   }
@@ -63,7 +67,7 @@ class BridgeGame {
   }
 
   retry() {
-    this.#phase = 1;
+    this.#phase = BRIDGE_INFO.FIRST_PHASE;
     this.#map = {
       upStair: [],
       downStair: [],
