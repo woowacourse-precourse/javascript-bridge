@@ -41,7 +41,6 @@ class App {
   }
 
   handleGameCommand(rnq) {
-    console.log(this.bridge, this.userState, this.countTry);
     if (rnq === 'R') {
       this.bridgeGame.retry();
       InputView.readMoving(this.handleBridgeMoveing);
