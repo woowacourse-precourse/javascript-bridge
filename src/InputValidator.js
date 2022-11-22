@@ -1,3 +1,5 @@
+const command = require("./utils/command");
+
 const InputValidator = {
   isValidLength(input) {
     if (!Number.isInteger(+input)) {
@@ -7,6 +9,10 @@ const InputValidator = {
       return false;
     }
     return 3 <= +input && +input <= 20;
+  },
+
+  isValidStep(input) {
+    return input === command.UP || input === command.DOWN;
   },
 };
 
