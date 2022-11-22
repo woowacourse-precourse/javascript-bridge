@@ -9,7 +9,7 @@ class Model {
 
   #moveList = [];
 
-  #isGameWin = false;
+  #isWin = false;
 
   #isLose = false;
 
@@ -24,16 +24,16 @@ class Model {
     return this.#gameCommand;
   }
 
-  resetGameWin() {
-    this.#isGameWin = false;
+  resetWin() {
+    this.#isWin = false;
   }
 
-  setGameWin(isGameWin) {
-    this.#isGameWin = isGameWin;
+  setWin(isWin) {
+    this.#isWin = isWin;
   }
 
-  getGameWin() {
-    return this.#isGameWin;
+  getWin() {
+    return this.#isWin;
   }
 
   resetBridge() {
@@ -105,7 +105,7 @@ class Model {
 
   roundReset() {
     this.resetLose();
-    this.resetGameWin();
+    this.resetWin();
     this.resetMoveList();
   }
 

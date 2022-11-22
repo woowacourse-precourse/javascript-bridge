@@ -54,7 +54,7 @@ class BridgeGame {
 
   checkWin() {
     const isWin = this.#model.isWin();
-    this.#model.setGameWin(isWin);
+    this.#model.setWin(isWin);
 
     if (isWin) return this.end();
     return this.move();
@@ -81,9 +81,9 @@ class BridgeGame {
 
   end() {
     const map = this.#map.makeMapList();
-    const isGameWin = this.#model.getGameWin();
+    const isWin = this.#model.getWin();
     const retryCount = this.#model.getRetryCount();
-    this.#view.printResult(map, isGameWin, retryCount);
+    this.#view.printResult(map, isWin, retryCount);
     this.#view.close();
   }
 }

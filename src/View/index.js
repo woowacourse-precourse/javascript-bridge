@@ -36,8 +36,8 @@ class View {
     this.#output.printMap(map);
   }
 
-  printResult(map, isGameWin, retryCount) {
-    this.#output.printResult(map, isGameWin, retryCount);
+  printResult(map, isWin, retryCount) {
+    this.#output.printResult(map, isWin, retryCount);
   }
 
   close() {

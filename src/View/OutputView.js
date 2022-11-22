@@ -27,10 +27,10 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(map, isGameWin, retryCount) {
+  printResult(map, isWin, retryCount) {
     Console.print(GAME_MESSAGE.game_result);
     this.printMap(map);
-    Console.print(GAME_MESSAGE.success(isGameWin));
+    Console.print(GAME_MESSAGE.success(isWin));
     Console.print(GAME_MESSAGE.attempts(retryCount));
   },
 
