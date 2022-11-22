@@ -7,14 +7,14 @@ const OutputView = {
   },
 
   printMap(trials) {
-    const [upperSide, lowerSide] = this.getBridgeMap(trials);
-    Console.print(`${upperSide}\n${lowerSide}\n`);
+    const bridgeMap = this.getBridgeMap(trials);
+    Console.print(bridgeMap);
   },
 
   getBridgeMap(trials) {
     let [upperSide, lowerSide] = trials.reduce(this.handleMakingBridgeMap, ['[', '[']);
 
-    return [upperSide.slice(0, -1) + ']', lowerSide.slice(0, -1) + ']', '\n'];
+    return [upperSide.slice(0, -1) + ']', lowerSide.slice(0, -1) + ']', ''].join('\n');
   },
 
   //TODO: 깔끔하게 작성할 수 있는 방법
@@ -41,20 +41,19 @@ const OutputView = {
     Console.close();
   },
 
-  //TODO: 템플릿을 뺄 것
   printResult(bridgeGame) {
-    const [bridgeUpperSide, bridgeLowerSide] = this.getBridgeMap(bridgeGame.trials);
+    const bridgeMap = this.getBridgeMap(bridgeGame.trials);
     const trialCount = bridgeGame.trialCount;
     const status = bridgeGame.status;
-    Console.print(
-      `최종 게임 결과
-${bridgeUpperSide}
-${bridgeLowerSide}
-
-게임 성공 여부: ${status}
-총 시도한 횟수: ${trialCount}`
-    );
+    Console.print(this.getTemplate({ bridgeMap, trialCount, status }));
     Console.close();
+  },
+
+  getTemplate({ bridgeMap, status, trialCount }) {
+    return `최종 게임 결과
+${bridgeMap}
+게임 성공 여부: ${status}
+총 시도한 횟수: ${trialCount}`;
   },
 };
 
