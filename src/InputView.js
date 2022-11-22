@@ -27,10 +27,7 @@ const InputView = {
   startReadBridge(bridgeSize) {
     let numberBridgeSize = Number(bridgeSize) ?? NaN;
     Validate.validateBridgeSize(numberBridgeSize);
-    this.bridge = BridgeMaker.makeBridge(
-      numberBridgeSize,
-      randomNumberGenerator.generate
-    );
+    this.bridge = BridgeMaker.makeBridge(numberBridgeSize, randomNumberGenerator.generate);
     InputView.readMoving();
   },
 

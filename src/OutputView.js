@@ -43,20 +43,12 @@ const OutputView = {
 
   printBridge(value, upOrDown) {
     if (upOrDown === Constant.UP) {
-      this.upBridge = this.insertUpOorX(this.upBridge, value, this.upCount);
-      this.downBridge = this.insertDownOorX(
-        this.downBridge,
-        " ",
-        this.downCount
-      );
+      this.upBridge = this.insertUpOorX(this.upBridge, value);
+      this.downBridge = this.insertDownOorX(this.downBridge, Constant.BLANK);
       return [this.upBridge, this.downBridge];
     }
-    this.upBridge = this.insertUpOorX(this.upBridge, " ", this.upCount);
-    this.downBridge = this.insertDownOorX(
-      this.downBridge,
-      value,
-      this.downCount
-    );
+    this.upBridge = this.insertUpOorX(this.upBridge, Constant.BLANK);
+    this.downBridge = this.insertDownOorX(this.downBridge, value);
     return [this.upBridge, this.downBridge];
   },
 
@@ -64,27 +56,22 @@ const OutputView = {
     this.upCount += 1;
     let closeIndex = bridge.indexOf(Constant.CLOSE);
     if (this.upCount === 1) {
-      return `${bridge.slice(0, closeIndex)} ${passOrFail} ${bridge.slice(
-        closeIndex
-      )}`;
+      return `${bridge.slice(0, closeIndex)} ${passOrFail} ${bridge.slice(closeIndex)}`;
     }
-
-    return `${bridge.slice(0, closeIndex)}${
-      Constant.SEPARATE
-    } ${passOrFail} ${bridge.slice(closeIndex)}`;
+    return `${bridge.slice(0, closeIndex)}${Constant.SEPARATE} ${passOrFail} ${bridge.slice(
+      closeIndex
+    )}`;
   },
 
   insertDownOorX(bridge, passOrFail) {
     this.downCount += 1;
     let closeIndex = bridge.indexOf(Constant.CLOSE);
     if (this.downCount === 1) {
-      return `${bridge.slice(0, closeIndex)} ${passOrFail} ${bridge.slice(
-        closeIndex
-      )}`;
+      return `${bridge.slice(0, closeIndex)} ${passOrFail} ${bridge.slice(closeIndex)}`;
     }
-    return `${bridge.slice(0, closeIndex)}${
-      Constant.SEPARATE
-    } ${passOrFail} ${bridge.slice(closeIndex)}`;
+    return `${bridge.slice(0, closeIndex)}${Constant.SEPARATE} ${passOrFail} ${bridge.slice(
+      closeIndex
+    )}`;
   },
 };
 
