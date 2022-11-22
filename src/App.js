@@ -48,7 +48,6 @@ class App {
     OutputView.printMap(history);
 
     if (gameEnd) return this.finishGame(history);
-
     if (winThisTurn) return InputView.readMoving();
 
     this.game.removeLastHistory();
@@ -68,8 +67,7 @@ class App {
     if (answer === "R") {
       return this.retry();
     }
-    OutputView.printMap(this.game.history, true);
-    this.exit();
+    this.finishGame(this.game.history);
   }
 
   retry() {
@@ -81,5 +79,8 @@ class App {
     Console.close();
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
