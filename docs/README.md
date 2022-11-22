@@ -7,8 +7,8 @@
   - [x] 3 이상 20 이하
 - [x] 라운드마다 이동할 칸 입력받기
   - [x] U or D
-- [ ] 게임 재시작/종료 여부 입력받기
-  - [ ] R or Q
+- [x] 게임 재시작/종료 여부 입력받기
+  - [x] R or Q
 
 ### 출력하기
 
@@ -27,10 +27,10 @@
   - [x] 현재까지 건넌 다리 모두 출력
   - [x] 예외시 throw `[ERROR]`
 
-- [ ] 게임 종료 문구
+- [x] 게임 종료 문구
 
-  - [ ] 최종까지 건넌 다리 결과 출력
-  - [ ] 총 시도한 횟수 출력
+  - [x] 최종까지 건넌 다리 결과 출력
+  - [x] 총 시도한 횟수 출력
 
   ```
   	최종 게임 결과
@@ -51,10 +51,10 @@
 
 ## MVC 패턴 사용
 
-Model : utils/contants, utils/validation, utils/util,
-BridgeGame, BridgeMaker, BridgeRandomMaker, Map
+Model : utils/ {contants, util}
+src/ {BridgeGame, BridgeMaker, BridgeRandomMaker, Map}
 
-View : Views/Inputview, Views/OuputView
+View : Views/ {Inputview, OuputView}
 
 Controller :
-BridgeGameController
+src/BridgeGameController
