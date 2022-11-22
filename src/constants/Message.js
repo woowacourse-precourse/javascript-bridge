@@ -2,12 +2,6 @@ const { CONFIG, ENTITY, KEY, WORD, RESULT } = require("./Token");
 
 const SAYS = Object.freeze({
   START: "다리 건너기 게임을 시작합니다." + ENTITY.NEW_LINE,
-
-  RESULT_1: (result) =>
-    `${RESULT.MAP} ${ENTITY.NEW_LINE} ${result.map} ${ENTITY.NEW_LINE}${ENTITY.NEW_LINE}`,
-  RESULT_2: (result) => `${RESULT.TEXT}: ${result.text} ${ENTITY.NEW_LINE}`,
-  RESULT_3: (result) => `${RESULT.TRIAL}: ${result.trial}`,
-
   END: "다리 건너기 게임을 종료합니다.",
 });
 
@@ -30,4 +24,10 @@ const ABOUT = Object.freeze({
   SELECT_ELEMENT: `${WORD.ERROR} 선택 요소는 ${KEY.SELECT_RESTART} 혹은 ${KEY.SELECT_QUIT} 여야 합니다.`,
 });
 
-module.exports = { SAYS, ASKS, ABOUT };
+const FINAL = Object.freeze({
+  RESULT: `${RESULT.MAP} ${ENTITY.NEW_LINE}`,
+  TEXT: (result) => `${RESULT.TEXT}: ${result.text} ${ENTITY.NEW_LINE}`,
+  TRIAL: (result) => `${RESULT.TRIAL}: ${result.trial}`,
+});
+
+module.exports = { SAYS, ASKS, ABOUT, FINAL };

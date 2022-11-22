@@ -38,9 +38,6 @@ const WORD = Object.freeze({
   ERROR: "[ERROR]",
   SUCCESS: "성공",
   FAILURE: "실패",
-  RESULT_MAP: "최종 게임 결과",
-  RESULT_TEXT: "게임 성공 여부:",
-  RESULT_TRIAL: "총 시도한 횟수:",
 });
 
 const RESULT = Object.freeze({

@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { SAYS } = require("../Constants/Message");
+const { SAYS, FINAL } = require("../Constants/Message");
 
 /**
  * 객체 : 사용자에게 게임 진행 상황과 결과를 출력하는 역할
@@ -17,9 +17,19 @@ const OutputView = {
     }
   },
 
-  printMap() {},
+  printMap(map) {
+    Console.print(map);
+  },
 
-  printResult() {},
+  printResult(result) {
+    Console.print(FINAL.RESULT);
+    Console.print(result.upper);
+    Console.print(result.lower);
+    Console.print(FINAL.TEXT(result.text));
+    Console.print(FINAL.TRIAL(result.count));
+    Console.print(SAYS.END);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;

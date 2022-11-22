@@ -45,10 +45,6 @@ const InputView = {
     }
 
     if (values.index === bridge.length - 1) {
-      //성공 로직
-      // console.log(
-      //   `\n최종 게임 결과\n${result.upper}\n${result.lower}\n\n게임성공여부: 성공\n총 시도한 횟수: ${result.count}`
-      // );
       Console.print(`\n최종 게임 결과`);
       Console.print(result.upper);
       Console.print(result.lower);
