@@ -22,6 +22,14 @@ class Validator {
     }
     return true;
   }
+
+  static isRestartInputValidate(input) {
+    if (input !== "R" || input !== "Q") {
+      throw new Error("재시작 여부는 R 또는 Q로 입력하셔야 합니다.");
+      return false;
+    }
+    return true;
+  }
 }
 
 module.exports = Validator;
