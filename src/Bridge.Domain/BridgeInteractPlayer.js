@@ -4,6 +4,7 @@ const BridgeGame = require("./BridgeGame");
 const BridgeGameShape = require("./BridgeGameShape");
 const Player = require("./Player");
 const { BRIDGE, GAME } = require("../lib/Const");
+const InputException = require("./InputException");
 
 class BridgeInteractPlayer {
   #player;
@@ -16,12 +17,18 @@ class BridgeInteractPlayer {
   }
 
   playerInputBridgeSize(size) {
+    try {
+      InputException.BridgeSizeValidate(size);
+    } catch (error) {
+      OutputView.printError(error);
+    }
     this.#bridgeGame = new BridgeGame(size);
     OutputView.printGameStart();
     InputView.readMoving(this.playerInputBridgeDirection.bind(this));
   }
 
   playerInputBridgeDirection(direction) {
+    InputException.playerDirectionValidate(direction);
     const [bridgeArr, result, status] = this.#bridgeGame.move(
       this.#player,
       direction
@@ -56,6 +63,7 @@ class BridgeInteractPlayer {
 
   //BridgeGame 에 분리
   playerInputCommandBridgeRetry(command) {
+    InputException.playerCommandValidate(command);
     if (command === BRIDGE.GAME.RETRY) {
       this.#player.bridgeGameRetry();
       InputView.readMoving(this.playerInputBridgeDirection.bind(this));

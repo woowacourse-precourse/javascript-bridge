@@ -29,6 +29,11 @@ const OutputView = {
     return;
   },
 
+  printError(error) {
+    Console.print(error.message);
+    return;
+  },
+
   printGameEnd(resultMap, isGameWin, reTryCount) {
     Console.print(GAME.END);
     Console.print(resultMap);
