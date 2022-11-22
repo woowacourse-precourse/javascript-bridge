@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const BridgeMaker = require("../src/BridgeMaker");
+const InputView = require("../src/InputView");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -81,7 +82,80 @@ describe("다리 건너기 테스트", () => {
     expectBridgeOrder(log, "[ O |   | O ]", "[   | O |   ]");
   });
 
+  // test("기능 테스트2", () => { // 실패 테스트
+  //   const logSpy = getLogSpy();
+  //   mockRandoms(["1", "0", "1", "1"]); 
+  //   mockQuestions(["4", "U", "D", "U", "D", "Q"]); 
+
+  //   const app = new App();
+  //   app.play();
+
+  //   const log = getOutput(logSpy);
+  //   expectLogContains(log, 
+  //     [
+  //       "[ O |   | O |   ]", 
+  //       "[   | O |   | X ]",
+  //       "게임 성공 여부: 실패",
+  //       "총 시도한 횟수: 1",
+  //   ]);
+  //   expectBridgeOrder(log, "[ O |   | O | X ]", "[   | O |   | X ]");
+  // });
+
+  // test("기능 테스트3", () => { // 재시도 후 성공 테스트
+  //   const logSpy = getLogSpy();
+  //   mockRandoms(["1", "0", "1", "1"]); 
+  //   mockQuestions(["4", "U", "D", "U", "D", "R","U", "D", "U", "U"]); 
+
+  //   const app = new App();
+  //   app.play();
+
+  //   const log = getOutput(logSpy);
+  //   expectLogContains(log, 
+  //     [
+  //       "[ O |   | O |   ]", 
+  //       "[   | O |   | X ]",
+  //       "[ O |   | O | O ]",
+  //       "[   | O |   |   ]",
+  //       "게임 성공 여부: 성공",
+  //       "총 시도한 횟수: 2",
+  //   ]);
+  //   expectBridgeOrder(log, "[ O |   | O | X ]", "[   | O |   | X ]","[ O |   | O | O ]","[   | O |   |   ]");
+  // });
+
+  // test("기능 테스트4", () => { // 재시도 후 실패 테스트
+  //   const logSpy = getLogSpy();
+  //   mockRandoms(["1", "0", "1", "1"]); 
+  //   mockQuestions(["4", "U", "D", "U", "D", "R","U", "U", "Q"]); 
+
+  //   const app = new App();
+  //   app.play();
+
+  //   const log = getOutput(logSpy);
+  //   expectLogContains(log, 
+  //     [
+  //       "[ O |   | O |   ]", 
+  //       "[   | O |   | X ]",
+  //       "[ O | X ]",
+  //       "[   |   ]",
+  //       "게임 성공 여부: 실패",
+  //       "총 시도한 횟수: 2",
+  //   ]);
+  //   expectBridgeOrder(log, "[ O |   | O | X ]", "[   | O |   | X ]","[ O | X ]","[   |   ]");
+  // });
+
   test("예외 테스트", () => {
     runException(["a"]);
+  });
+
+  test("다리의 길이가 범위내의숫자가아니면 예외발생", () => {
+    expect(() => {
+      InputView.checkBridgeSize(1);
+    }).toThrow('[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.');
+  });
+
+  test("게임여부 예외발생", () => {
+    expect(() => {
+      InputView.checkCommand(1);
+    }).toThrow('[ERROR] 게임여부는 "R"와 "Q" 두 값중 하나여야합니다.');
   });
 });
