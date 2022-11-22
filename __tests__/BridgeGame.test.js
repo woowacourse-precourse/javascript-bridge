@@ -809,6 +809,65 @@ describe('로그 기록 초기화 메서드 테스트', () => {
   });
 });
 
+describe('다리 로그 분류 메서드 테스트', () => {
+  const BRIDGE_LOG = [[['O'], [' ']], [[' '], ['O']], [[' '], ['O']]];
+
+  test('메소드 이름은 "logClassification"로 정의된다.', () => {
+    const METHOD_NAME = 'logClassification';
+
+    expect(BridgeGame.logClassification.name).toEqual(METHOD_NAME);
+  });
+
+  test('첫 번째 반환값은 [["O"], [" "], [" "]]을 반환한다.', () => {
+    const RECEIVED = [['O'], [' '], [' ']];
+
+    expect(BridgeGame.logClassification(BRIDGE_LOG)[0]).toEqual(RECEIVED);
+  });
+
+  test('두 번째 반환값은 [[" "], ["O"], ["O"]]을 반환한다.', () => {
+    const RECEIVED = [[' '], ['O'], ['O']];
+
+    expect(BridgeGame.logClassification(BRIDGE_LOG)[1]).toEqual(RECEIVED);
+  });
+});
+
+describe('분류된 다리 로그 가져오는 메서드 테스트', () => {
+  const bridgeGame = new BridgeGame();
+  const POSITION_LOG_1 = [[0, 0], 'O'];
+  const POSITION_LOG_2 = [[1, 1], 'O'];
+  const POSITION_LOG_3 = [[0, 2], 'O'];
+
+  bridgeGame.move();
+  bridgeGame.setBridgeLog(POSITION_LOG_1);
+  bridgeGame.setBridgeLog(POSITION_LOG_2);
+  bridgeGame.setBridgeLog(POSITION_LOG_3);
+
+  test('메소드 이름은 "getCurrentClassifiedBridgeLog"로 정의된다.', () => {
+    const METHOD_NAME = 'getCurrentClassifiedBridgeLog';
+
+    expect(bridgeGame.getCurrentClassifiedBridgeLog.name).toEqual(METHOD_NAME);
+  });
+
+  test('[[["O"], [" "], ["O"]], [[" "], ["O"], [" "]]]을 반환한다.', () => {
+    const RECEIVED1 = [[['O'], [' '], ['O']], [[' '], ['O'], [' ']]];
+    const RECEIVED2 = [['O'], [' '], ['O']];
+    const RECEIVED3 = [[' '], ['O'], [' ']];
+    const [uBridge, dBridge] = bridgeGame.getCurrentClassifiedBridgeLog();
+
+    expect(bridgeGame.getCurrentClassifiedBridgeLog()).toEqual(RECEIVED1);
+    expect(uBridge).toEqual(RECEIVED2);
+    expect(dBridge).toEqual(RECEIVED3);
+  });
+
+  test('사용자 위치가 출발하기 전이라면 예외를 발생한다.', () => {
+    bridgeGame.retry();
+
+    expect(() => {
+      bridgeGame.getCurrentClassifiedBridgeLog();
+    }).toThrow(POSITION_ERROR_TEXT);
+  });
+});
+
 describe('다리 건너기 게임 종합 테스트', () => {
   const bridgeGame = new BridgeGame();
   const generateBridge = ['U', 'D', 'D'];
@@ -897,64 +956,5 @@ describe('다리 건너기 게임 종합 테스트', () => {
     const RECEIVED = 2;
 
     expect(bridgeGame.getTryCount()).toEqual(RECEIVED);
-  });
-});
-
-describe('다리 로그 분류 메서드 테스트', () => {
-  const BRIDGE_LOG = [[['O'], [' ']], [[' '], ['O']], [[' '], ['O']]];
-
-  test('메소드 이름은 "logClassification"로 정의된다.', () => {
-    const METHOD_NAME = 'logClassification';
-
-    expect(BridgeGame.logClassification.name).toEqual(METHOD_NAME);
-  });
-
-  test('첫 번째 반환값은 [["O"], [" "], [" "]]을 반환한다.', () => {
-    const RECEIVED = [['O'], [' '], [' ']];
-
-    expect(BridgeGame.logClassification(BRIDGE_LOG)[0]).toEqual(RECEIVED);
-  });
-
-  test('두 번째 반환값은 [[" "], ["O"], ["O"]]을 반환한다.', () => {
-    const RECEIVED = [[' '], ['O'], ['O']];
-
-    expect(BridgeGame.logClassification(BRIDGE_LOG)[1]).toEqual(RECEIVED);
-  });
-});
-
-describe('분류된 다리 로그 가져오는 메서드 테스트', () => {
-  const bridgeGame = new BridgeGame();
-  const POSITION_LOG_1 = [[0, 0], 'O'];
-  const POSITION_LOG_2 = [[1, 1], 'O'];
-  const POSITION_LOG_3 = [[0, 2], 'O'];
-
-  bridgeGame.move();
-  bridgeGame.setBridgeLog(POSITION_LOG_1);
-  bridgeGame.setBridgeLog(POSITION_LOG_2);
-  bridgeGame.setBridgeLog(POSITION_LOG_3);
-
-  test('메소드 이름은 "getCurrentClassifiedBridgeLog"로 정의된다.', () => {
-    const METHOD_NAME = 'getCurrentClassifiedBridgeLog';
-
-    expect(bridgeGame.getCurrentClassifiedBridgeLog.name).toEqual(METHOD_NAME);
-  });
-
-  test('[[["O"], [" "], ["O"]], [[" "], ["O"], [" "]]]을 반환한다.', () => {
-    const RECEIVED1 = [[['O'], [' '], ['O']], [[' '], ['O'], [' ']]];
-    const RECEIVED2 = [['O'], [' '], ['O']];
-    const RECEIVED3 = [[' '], ['O'], [' ']];
-    const [uBridge, dBridge] = bridgeGame.getCurrentClassifiedBridgeLog();
-
-    expect(bridgeGame.getCurrentClassifiedBridgeLog()).toEqual(RECEIVED1);
-    expect(uBridge).toEqual(RECEIVED2);
-    expect(dBridge).toEqual(RECEIVED3);
-  });
-
-  test('사용자 위치가 출발하기 전이라면 예외를 발생한다.', () => {
-    bridgeGame.retry();
-
-    expect(() => {
-      bridgeGame.getCurrentClassifiedBridgeLog();
-    }).toThrow(POSITION_ERROR_TEXT);
   });
 });
