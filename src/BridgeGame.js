@@ -1,5 +1,5 @@
-const { generateRandomNumber, makeBridge } = require("./BridgeMaker");
-const { readBridgeSize } = require("./InputView");
+const { makeBridge } = require("./BridgeMaker");
+const { generate } = require("./BridgeRandomNumberGenerator");
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -10,8 +10,8 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  constructor() {
-    this.bridge = makeBridge();
+  constructor(size) {
+    this.bridge = makeBridge(size, generate);
     this.state = [];
     this.currentPos = 0;
     this.isLastStep = false;
@@ -22,10 +22,8 @@ class BridgeGame {
   move(userInput) {
     const currentSide = this.bridge[this.currentPos];
 
-    if(currentSide === userInput) this.state.push('O'); 
-    else this.state.push('X');
-
-    this.currentPos+=1;
+    this.state.push(currentSide === userInput);
+    this.currentPos += 1;
 
     if(this.currentPos === this.bridge.length){
       this.isLastStep = true;
@@ -48,7 +46,7 @@ class BridgeGame {
     if(toRetry === true){
       this.state = [];
       this.currentPos = 0;
-      this.isLastStep = false;
+      //this.isLastStep = false;
       this.isGameOver = false;
       this.tryCount += 1;
 
