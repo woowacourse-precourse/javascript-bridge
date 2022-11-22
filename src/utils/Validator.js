@@ -26,7 +26,7 @@ const Validator = {
   },
 
   /**
-   *
+   * list에 input과 같은 문자열이 있는지 검증
    * @param {string} input
    * @param {string[]} list
    */
