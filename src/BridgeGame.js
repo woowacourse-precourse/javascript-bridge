@@ -11,45 +11,25 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   constructor() {
-    this.upSide = [];
-    this.downSide = [];
+    this.bridge = makeBridge();
+    this.state = [];
+    this.currentPos = 0;
+    // this.isLastStep = false;
+    // this.isGameOver = false;
   }
 
   move(userInput) {
-    const size = readBridgeSize();
-    const bridge = makeBridge(size, generateRandomNumber) //[U, D, U]
-    
-    for(let i = 0 ; i<size ; i++){
-      const compareResult = this.compareEachSide(i, bridge, userInput);
-      if(compareResult === false) break;
-    }
-    return [this.upSide, this.downSide];
+    const currentSide = this.bridge[this.currentPos];
+
+    if(currentSide === userInput) this.state.push('O'); 
+    else this.state.push('X');
+
+    this.currentPos+=1;
+
+    return this.state[this.state.length - 1];
   }
 
-  compareEachSide(i, bridge, userInput) {
-    if(bridge[i] === userInput){
-      if(userInput === 'U'){
-        this.upSide.push('O');
-        this.downSide.push(' ');
-      }
-      else{
-        this.upSide.push(' ');
-        this.downSide.push('O');
-      }
-    }
-    else{
-      if(userInput === 'U'){
-        this.upSide.push('X');
-        this.downSide.push(' ');
-        
-      }
-      else if(userInput === 'D'){
-        this.upSide.push(' ');
-        this.downSide.push('X'); 
-      }
-      return false;
-    }
-  }
+
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
