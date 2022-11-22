@@ -1,6 +1,4 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeGame = require("./BridgeGame");
-const InputView = require("./View/InputView");
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.

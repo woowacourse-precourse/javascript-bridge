@@ -1,8 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BridgeMaker = require("../bridgeMaker");
 const Message = require("../Message");
 const CheckError = require("../checkError");
-const BridgeGame = require("../bridgeGame");
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */

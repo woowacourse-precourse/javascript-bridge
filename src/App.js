@@ -1,4 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
 const BridgeMaker = require("./BridgeMaker");
 const InputView = require("./View/InputView");
 const Message = require("./Message");
@@ -11,6 +10,7 @@ class App {
   userTry = 0;
   gameTry = 1;
   bridgeSize;
+
   play() {
     OutputView.printGameStart(Message.GAME_START);
     this.inputBridgeLength();
@@ -25,21 +25,23 @@ class App {
     this.bridgeArray = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
     this.inputUserMove();
   }
+
   inputUserMove() {
     InputView.readMoving(this);
   }
 
   userMove(userChoice) {
     const bridgeGame = new BridgeGame(this.bridgeArray);
-
     bridgeGame.move(this, userChoice, this.userTry);
   }
 
   printBridge(ox, upBridge, downBridge) {
     OutputView.updateBridge(upBridge, downBridge);
     this.userTry += 1;
-    if (this.bridgeSize == this.userTry) return OutputView.printResult(this.gameTry, "성공");
-    if (ox == "O") InputView.readMoving(this);
+    if (ox == "O") {
+      if (this.bridgeSize == this.userTry) return OutputView.printResult(this.gameTry, "성공");
+      InputView.readMoving(this);
+    }
     InputView.readGameCommand(this);
   }
 

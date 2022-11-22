@@ -1,8 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const ContinueGame = require("./ContinueGame");
-const InputView = require("./View/InputView");
-const OutputView = require("./View/OutputView");
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -14,7 +9,6 @@ class BridgeGame {
 
   constructor(bridgeArray) {
     this.bridgeArray = bridgeArray;
-    MissionUtils.Console.print(`: ${this.bridgeArray}`);
   }
 
   compare(input, userTry) {
@@ -39,7 +33,6 @@ class BridgeGame {
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드
    */
   retry(app) {
-    MissionUtils.Console.print("retry");
     this.upBridge = "";
     this.downBridge = "";
     app.inputUserMove();
