@@ -1,4 +1,4 @@
-const { BRIDGE } = require('./constant/constant');
+const { BRIDGE } = require('../constant/constant');
 
 class BridgeRecorder {
   #upBridge;
