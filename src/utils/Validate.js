@@ -16,4 +16,13 @@ const resumeGameValidate = (answer) => {
     throw new Error(Message.ERROR.INVALIDATE_GAME);
 };
 
-module.exports = { readBridgeSizeValidate, resumeGameValidate };
+const moveInputValidate = (answer) => {
+  if (answer !== "U" && answer !== "D")
+    throw new Error(Message.ERROR.INVALIDATE_MOVE);
+};
+
+module.exports = {
+  readBridgeSizeValidate,
+  resumeGameValidate,
+  moveInputValidate,
+};

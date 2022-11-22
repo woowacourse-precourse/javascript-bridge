@@ -14,24 +14,31 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printMap() {},
+  printMap(bridgeStatics) {
+    for (let i = 0; i < 2; i++) {
+      MissionUtils.Console.print(`[ ${bridgeStatics[i]?.join(" | ")} ]`);
+    }
+    MissionUtils.Console.print(`\n`);
+  },
 
   /**
    * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(bridge, isSuccess, tryCnt) {
-    MissionUtils.Console.print(`최종 게임 결과\n${bridge}\n`);
+  printResult(bridgeStatics, isSuccess, tryCnt) {
+    MissionUtils.Console.print(`최종 게임 결과`);
+    this.printMap(bridgeStatics);
     this.printResultStatics(isSuccess, tryCnt);
+    MissionUtils.Console.close();
   },
 
   printResultStatics(isSuccess, tryCnt) {
     MissionUtils.Console.print(
-      `게임 성공 여부: ${
-        isSuccess ? "성공" : "실패"
-      }\n총 시도한 횟수: ${tryCnt}`
+      `게임 성공 여부: ${isSuccess ? "성공" : "실패"}`
     );
+    MissionUtils.Console.print(`총 시도한 횟수: ${tryCnt}`);
+    MissionUtils.Console.close();
   },
 };
 

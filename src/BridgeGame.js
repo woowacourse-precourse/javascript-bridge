@@ -1,4 +1,4 @@
-const { MissionUtils } = require("@woowacourse/mission-utils");
+const Validate = require("./utils/Validate");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 /**
@@ -10,68 +10,107 @@ class BridgeGame {
   isPlaying;
 
   constructor(bridge) {
-    this.tryCnt = 0;
+    this.tryCnt = 1;
     this.bridge = bridge;
     this.isPlaying = true;
-    this.currentIdx = 0;
+    this.isClear = false;
+    this.currentIdx = -1;
+    this.bridgeStatics = [];
   }
 
   gameController() {
     if (this.isPlaying) {
-      console.log("move");
-
       this.move();
     }
     if (!this.isPlaying) {
-      console.log("retry");
-
-      this.retry();
+      this.gameOver();
     }
+    this.currentIdx++;
   }
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
 
   move() {
     return new Promise((resolve, reject) => {
-      console.log("move in");
-
       const direction = InputView.readMoving().then((result) => {
+        Validate.moveInputValidate(result);
         this.gameCheck(result);
       });
     });
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
   async retry() {
-    console.log("retry in");
+    this.tryCnt++;
+    this.currentIdx -= 2;
+    this.isPlaying = true;
+    this.bridgeStatics[0].pop();
+    this.bridgeStatics[1].pop();
 
+    this.gameController();
+  }
+
+  async gameOver() {
+    if (this.isClear && !this.isPlaying) return this.gameClear();
     const goGame = await InputView.readGameCommand();
-    console.log(`go gmae: ${goGame}`);
     if (goGame === "R") {
-      this.tryCnt++;
-      this.isPlaying = true;
-      this.gameController();
-
-      return;
+      this.retry();
     }
     if (goGame === "Q") {
-      OutputView.printResult("[]", false, this.tryCnt);
+      OutputView.printResult(this.bridgeStatics, false, this.tryCnt);
     }
   }
 
   async gameCheck(direction) {
-    console.log("gamecheck");
-    this.isPlaying = false;
+    if (direction === this.bridge[this.currentIdx]) {
+      this.correctAnswer(direction);
+    } else {
+      this.wrongAnswer(direction);
+    }
 
-    // direction === this.bridge[this.currentIdx];
     this.gameController();
+  }
+
+  correctAnswer(direction) {
+    this.makeGameStatus(direction, true);
+    if (this.currentIdx === this.bridge.length - 1) {
+      this.isClear = true;
+      this.isPlaying = false;
+    }
+  }
+  wrongAnswer(direction) {
+    this.makeGameStatus(direction, false);
+    this.isPlaying = false;
+  }
+  gameClear() {
+    OutputView.printResult(this.bridgeStatics, true, this.tryCnt);
+  }
+  makeGameStatus(direction, isCorrect) {
+    if (direction === "U") this.makeUpBridge(isCorrect);
+    if (direction === "D") this.makeDownBridge(isCorrect);
+    OutputView.printMap(this.bridgeStatics);
+  }
+
+  makeUpBridge(isCorrect) {
+    if (isCorrect) {
+      this.bridgeStatics[0] = (this.bridgeStatics[0] || []).concat(["O"]);
+      this.bridgeStatics[1] = (this.bridgeStatics[1] || []).concat([" "]);
+      return;
+    }
+    if (!isCorrect) {
+      this.bridgeStatics[0] = (this.bridgeStatics[0] || []).concat(["X"]);
+      this.bridgeStatics[1] = (this.bridgeStatics[1] || []).concat([" "]);
+      return;
+    }
+  }
+  makeDownBridge(isCorrect) {
+    if (isCorrect) {
+      this.bridgeStatics[0] = (this.bridgeStatics[0] || []).concat([" "]);
+      this.bridgeStatics[1] = (this.bridgeStatics[1] || []).concat(["O"]);
+      return;
+    }
+    if (!isCorrect) {
+      this.bridgeStatics[0] = (this.bridgeStatics[0] || []).concat([" "]);
+      this.bridgeStatics[1] = (this.bridgeStatics[1] || []).concat(["X"]);
+      return;
+    }
   }
 }
 
