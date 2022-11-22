@@ -41,6 +41,12 @@ const Controller = {
         Controller.move(bridgeGame);
     },
 
+    retryBool(bridgeGame) {
+       InputView.readGameCommand(input => {
+            Controller.retryBoolCallBack(bridgeGame, input);
+       })
+    },
+    
 }
 
 module.exports = Controller;
