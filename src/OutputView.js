@@ -28,6 +28,10 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.ATTEMP(attemptNumber));
     Console.close();
   },
+
+  printGameStart() {
+    Console.print(OUTPUT_MESSAGE.START);
+  },
 };
 
 module.exports = OutputView;
