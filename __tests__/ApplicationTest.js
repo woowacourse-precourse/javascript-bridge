@@ -91,4 +91,15 @@ describe("다리 건너기 테스트", () => {
       runException([input]);
     }
   );
+
+  test.each([
+    [3, "r"],
+    [3, "."],
+    [3, 12],
+    [3, "가나다"],
+    [3, "\n"],
+    [3, " "],
+  ])("이동할 칸이 U 또는 D가 아닌 경우에 대한 예외 처리", (size, command) => {
+    runException([size, command]);
+  });
 });
